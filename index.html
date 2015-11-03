@@ -13,6 +13,15 @@
 	</style>
 	<script>
 		//UTILS
+		function escriuPropietats(obj)
+		{	
+			for(var name in obj) 
+			{
+				var str = name+": "+obj[name]
+				console.log(str)
+			}
+		}
+
 		function openAll()
 		{
 			var elements=document.getElementsByTagName('ul')
