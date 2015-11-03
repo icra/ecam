@@ -11,6 +11,8 @@
 		button{padding:0.3em;border-radius:0.2em;border:1px solid #ccc}
 		a:visited{color:blue}
 	</style>
+	<script src=substage.js></script>
+	<script src=global.js></script>
 	<script>
 		//UTILS
 		function propietats(obj) /*totes les propietats d'un objecte*/
@@ -69,11 +71,9 @@
 			if(button)toggleSymbol(button)
 		}
 	</script>
-	<script src=substage.js></script>
-</head><body><center>
-<h1 onclick=window.location.reload()>ECAM Web Tool</h1>
+</head><body><center><h1 onclick=window.location.reload()>ECAM Web Tool</h1>
 
-<!--navbar-->
+<!--NAVBAR-->
 <table><tr>
 	<th>&#9776; Menu
 	<td>Global Indicators
@@ -101,11 +101,13 @@
 
 <!--Substages-->
 <table>
-	<tr><th colspan=3>Substages
+	<tr><th colspan=3>Substages Table (in construction)
 </table>
 
 <div style="text-align:left;width:50%;border:1px solid #ccc">
-	<b>SUMMARY</b> | <a href=# onclick=openAll()>Open all</a> | <a href=# onclick=collapseAll()>Collapse all</a>
+
+<b>SUMMARY</b> | <a href=# onclick=openAll()>Open all</a> | <a href=# onclick=collapseAll()>Collapse all</a>
+
 <ul id=summary>
 	<li><button onclick=toggleDisplay('globalIndicators',this)>+</button>GLOBAL INDICATORS 	
 		<ul id=globalIndicators style=display:none>
@@ -222,4 +224,5 @@
 				</ul>
 		</ul>
 </ul>
+
 </div>
