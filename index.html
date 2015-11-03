@@ -7,21 +7,22 @@
 		h1,h2{cursor:pointer}
 		div{padding:0.5em;margin:0.5em}
 		input{width:60px}
-		table{border-collapse:collapse}
+		table{border-collapse:collapse;margin:1em}
 		button{padding:0.3em;border-radius:0.2em;border:1px solid #ccc}
 		a:visited{color:blue}
 	</style>
 	<script>
 		//UTILS
-		function escriuPropietats(obj)
+		function propietats(obj) /*totes les propietats d'un objecte*/
 		{	
-			for(var name in obj) 
+			var str=""
+			for(var field in obj) 
 			{
-				var str = name+": "+obj[name]
-				console.log(str)
+				if(typeof(obj.field!="function"))
+					str+="<th>"+field
 			}
+			return str
 		}
-
 		function openAll()
 		{
 			var elements=document.getElementsByTagName('ul')
@@ -68,232 +69,39 @@
 			if(button)toggleSymbol(button)
 		}
 	</script>
-	<script>
-		/*DATA MODEL*/
-		var Global =
-		{
-				substages:new Array(),
-			//GENERAL DATA
-				name:"",				//name of the system
-				location:"",			//Location
-				assessmentPeriod:"",	//month and year
-				comments:"",			//comments
-			//GLOBAL
-				gV1:31,				//Assessment period											(days)
-				gV2:108239,			//Energy costs												(Euro)
-				gV3:635242,			//Running costs												(Euro)
-				gV4:1501779,		//Total energy consumed										(kWh)
-				gV5:368475,			//Resident population within the utility area of service	(Inhab)
-				gV6:0.225,			//Energy mix consumed										(CO2/kWh)
-				gE1:function()		//Energy Cost Ratio
-				{
-					return this.gV2/this.gV3
-				},
-				gE2:function()		//Per capita energy consumption 							(kWh/Inhab/year)
-				{
-					return this.gV4*365/this.gV1/this.gV5
-				},
-				GHG:function()		//Per capita GHG emissions									(CO2e kg/ inInhab/year)	
-				{
-					return (this.gV4*this.gV6) //TODO
-				}
-		}
-
-		function Substage()	//Substage class
-		{
-			this.name = "name"
-			/*WATTER SUPPLY*/
-				this.sV1  = 0	//Volume of Conveyed Water (m3)
-				this.sV2  = 0	//Volume of Treated Water (m3)
-				this.sV3  = 0	//Treated Water quality tests carried out (num)
-				this.sV4  = 0	//Compliance of aesthetic tests (num)
-				this.sV5  = 0	//Compliance of microbiological tests (num)
-				this.sV6  = 0	//Compliance of physical-chemical tests (num)
-				this.sV7  = 0	//Compliance of radioactivity tests (num)
-				this.sV8  = 0	//Volume of authorized consumption (m3)
-				this.sV9  = 0	//Delivery points with adequate pressure (num)
-				this.sV10 = 0	//Number of service connections (num)
-				this.sV11 = 0	//Time system is pressurised (hour)
-				this.sV12 = 0	//Resident population connected to supply systems (Inhab)
-				this.sV13 = 0	//Water supply resident population (Inhab)
-			/**/
-				this.aV1  = 0	//Energy consumed for pumping abstracted water (kWh)
-				this.aV2  = 0	//abstracted water volume pumped x pump head in meters (m3 x 100m)
-				this.aV3  = 0	//Energy recovered in abstracted water (kWh)
-				this.aV4  = 0	//turbine water volume pumped x turbine head in meters (m3 x 100m)
-				this.aV5  = 0	//Water losses (m3)
-				this.aV6  = 0	//Mains lenght (km)
-				this.aV7  = 0	//Friction pipe losses (m)
-			/**/
-				this.dV1  = 0	//Volume injected (m3)
-				this.dV2  = 0	//Minimum pressure to be supplied at the distribution nodes (m)
-				this.dV3  = 0	//Highest node elevation (m)
-				this.dV4  = 0	//Lowest node elevation of the stage (m)
-				this.dV5  = 0	//Average nodes elevation (m)
-				this.dV6  = 0	//Water table elevation node (m)
-				this.dV7  = 0	//Energy consumed for pumping distributed water (kWh)
-				this.dV8  = 0	//[Sum](distributed water volume pumped x pump head in meters) (m3 x 100 m)
-				this.dV9  = 0	//Natural energy provided (kWh)
-				this.dV10 = 0	//Energy recovered at water distribution (kWh)
-				this.dV11 = 0	//Minimum required energy by users (kWh)
-				this.dV12 = 0	//Total supplied energy to the network (natural plus shaft), real system (kWh)
-				this.dV13 = 0	//Topographic energy supplied to the system (kWh)
-				this.dV14 = 0	//Total supplied energy to the network, assuming the system has no losses (kWh)
-				this.dV15 = 0	//Mains lenght (km)
-				this.dV16 = 0	//Friction pipe losses (m)
-			/**/
-				this.tV1  = 0	//Volume of treated water in WTPs with Pre-ox/C/F/S/Filt/Des	(m3)
-				this.tV2  = 0	//Volume of treated water in WTPs with  Pre-ox/C/F/Filt/Des		(m3)
-				this.tV3  = 0	//Volume of treated water in WTPs with C/F/S/Filt/Des 			(m3)
-				this.tV4  = 0	//Volume of treated water in WTPs with C/F/Filt/Des				(m3)
-				this.tV5  = 0	//Volume of treated water in WTPs with Des						(m3)
-				this.tV6  = 0	//Volume of treated water in WTPs with other sequence 			(m3)
-				this.tV7  = 0	//Energy consumed in WTPs										(kWh)
-				this.tV8  = 0	//Sludge produced in WTPs 										(kg)
-				this.tV9  = 0	//Treatment capacity											(m3)
-			/*WASTEWATER COLLECTION*/ 
-				this.wcV1 = 0	//Energy consumed for pumping collected wastewater				(kWh)
-				this.wcV2 = 0	//collected wastewater volume pumped x pump head in meters		(m3 x 100m)
-			/*WASTEWATER SYSTEM*/
-				this.wsV1 = 0	//Volume of collected wastewater								(m3)
-				this.wsV2 = 0	//Resident population connected to SE		(Inhab)
-				this.wsV3 = 0	//Wastewater resident population 			(Inhab)
-				this.wsV4 = 0	//Volume of treated wastewater				(m3)
-				this.wsV5 = 0	//Wastewater treated by on-site systems		(m3)
-				this.wsV6 = 0	//Tests complying with discharge consents	(num)
-				this.wsV7 = 0	//Tests carried out in WWTPs				(num)
-				this.wsV8 = 0	//Volume of discharged wastewater			(m3)
-			/*WASTEWATER TREATMENT*/
-				this.wtV1  = 0	//Volume of treated wastewater in WWTPs with trickling filters (TF)					(m3
-				this.wtV2  = 0	//Volume of treated wastewater in WWTPs with activated sludge (AS)					(m3
-				this.wtV3  = 0	//Volume of treated wastewater in WWTPs with AS and Coagulation/Filtration (C/F) 	(m3
-				this.wtV4  = 0	//Volume of treated wastewater in WWTPs with AS nitrification and C/F				(m3
-				this.wtV5  = 0	//Volume of treated wastewater in WWTPs with Laggons 								(m3
-				this.wtV6  = 0	//Volume of treated wastewater in WWTPs with other type of treatment 				(m3
-				this.wtV7  = 0	//Energy consumed in WWTPs															(kWh
-				this.wtV8  = 0	//BOD mass removed 																	(kg BOD
-				this.wtV9  = 0	//Energy produced in WWTPs 															(kWh
-				this.wtV10 = 0	//Sludge produced in WWTPs 															(kg
-				this.wtV11 = 0	//Dry weight in sludge produced														(% (w/w)
-				this.wtV12 = 0	//Treatment capacity																(m3
-				this.wtV13 = 0	//BOD influent																		(mg / l
-		}
-
-		/*WATER SUPPLY*/
-			Substage.prototype.s1=function()
-			//Quality of supplied water (%)
-			{return 100*(this.sV4+this.sV5+this.sV6+this.sV7)/this.sV3}
-			Substage.prototype.s2=function()
-			//Pressure of supply adequacy (%)
-			{return 100*this.sV9/this.sV10}
-			Substage.prototype.s3=function()
-			//Continuity of supply (%)
-			{return 100*this.sV11/24/Global.gV1}
-			Substage.prototype.s4=function()	
-			//Resident population connected to supply system (%)
-			{return 100*this.sV12/this.sV13}
-		/*WASTEWATER*/
-			Substage.prototype.ws1=function()
-			//Resident population connected to sewer system (%)
-			{return 100*this.wsV2/this.wsV3}
-
-			Substage.prototype.ws2=function()
-			//Treated Wastewater in WWTP (%)
-			{
-				return -1 //TODO (es complex)
-			}
-
-			Substage.prototype.ws3=function()
-			//WWTP compliance with discharge consents (%)
-			{return 100*this.wsV7/this.wsV6}
-		/*WATER ABSTRACTION*/
-			Substage.prototype.aE1=function()
-			//Energy consumption per conveyed water (kWh/m3)
-			{return this.aV1/this.sV1}
-			Substage.prototype.aE2=function()
-			//Energy consumption of abstracted water per total energy consumption (%)
-			{return 100*this.aV1/Global.gV4}
-			Substage.prototype.aE3=function()
-			//Standardised Energy Consumption (kWh/m3/100m)
-			{return this.aV1/this.aV2}
-			Substage.prototype.aE4=function()
-			//Energy recovery per conveyed water (kWh/m3)
-			{return this.aV3/this.sV1}
-			Substage.prototype.aE5=function()
-			//Standardized energy recovery (kWh/m3/100m)
-			{return this.aV3/this.aV4}
-			Substage.prototype.aE6=function()
-			//Water losses per mains length (m3/km/d)
-			{return this.aV5/Global.gV1/this.aV6}
-			Substage.prototype.aE7=function()
-			//Unit head loss (m/km)
-			{return this.aV7/this.aV6}
-		/*WATER TREATMENT*/
-			Substage.prototype.tE0 =function(){} 	//Treatment type (volume per type) 
-			Substage.prototype.tE01=function(){}	//WTPs with Pre-ox/C/F/S/Filt/Des
-			Substage.prototype.tE02=function(){}	//WTPs with Pre-ox/C/F/Filt/Des
-			Substage.prototype.tE03=function(){}	//WTPs with C/F/S/Filt/Des
-			Substage.prototype.tE04=function(){}	//WTPs with C/F/Filt/Des
-			Substage.prototype.tE05=function(){}	//WTPs with Des
-			Substage.prototype.tE06=function(){}	//WTPs with other sequence
-			Substage.prototype.tE1 =function(){}	//Energy consumption per treated water 
-			Substage.prototype.tE2 =function(){}	//Energy consumption of WTPs per total energy consumption 
-			Substage.prototype.tE3 =function(){}	//Sludge production
-			Substage.prototype.tE4 =function(){}	//Capacity utilisation 
-		/*WATER DISTRIBUTION*/
-			Substage.prototype.dE1=function(){}		//Energy consumption per authorized consumption 
-			Substage.prototype.dE2=function(){}		//Energy consumption of authorized consumption per total energy consumption
-			Substage.prototype.dE3=function(){}		//Standardised Energy Consumption
-			Substage.prototype.dE4=function(){}		//Global water distribution energy efficiency
-			Substage.prototype.dE5=function(){}		//Percentage of topographic energy
-			Substage.prototype.dE6=function(){}		//Water losses per mains length 
-			Substage.prototype.dE7=function(){}		//Unit head loss 
-		/*WASTEWATER COLLECTION*/
-			Substage.prototype.wcE1=function(){}	//Energy consumption per collected wastewater 
-			Substage.prototype.wcE2=function(){}	//Energy consumption of collected wastewater per total energy consumption
-			Substage.prototype.wcE3=function(){}	//Standardised Energy Consumption
-		/*WASTEWATER TREATMENT*/
-			Substage.prototype.wtE0	=function(){}	//Treatment type (volume per type) 
-			Substage.prototype.wtE01=function(){}	//WWTPs with trickling filters (TF)
-			Substage.prototype.wtE02=function(){}	//WWTPs with activated sludge (AS)
-			Substage.prototype.wtE03=function(){}	//WWTPs with AS and Coagulation/Filtration (C/F)
-			Substage.prototype.wtE04=function(){}	//WWTPs with AS nitrification and C/F 
-			Substage.prototype.wtE05=function(){}	//WWTPs with Lagoons
-			Substage.prototype.wtE06=function(){}	//WWTPs with other type of treatment
-			Substage.prototype.wtE1	=function(){}	//Energy consumption per treated wastewater 
-			Substage.prototype.wtE2	=function(){}	//Energy consumption of WWTPs per total energy consumption 
-			Substage.prototype.wtE3	=function(){}	//Energy consumption per mass removed  
-			Substage.prototype.wtE4	=function(){}	//Energy production 
-			Substage.prototype.wtE5	=function(){}	//Sludge production
-			Substage.prototype.wtE6	=function(){}	//Dry weight in sludge production
-			Substage.prototype.wtE7	=function(){}	//Capacity utilisation 
-		/*WASTEWATER DISCHARGE*/
-			Substage.prototype.wdE1=function(){}	//Energy consumption per discharged wastewater 
-			Substage.prototype.wdE2=function(){}	//Energy consumption of discharged wastewater per total energy consumption
-			Substage.prototype.wdE3=function(){}	//Standardised Energy Consumption
-			Substage.prototype.wdE4=function(){}	//Energy recovery per discharged water
-			Substage.prototype.wdE5=function(){}	//Standardized energy recovery
-		/*DIRECT EMISSIONS*/
-			Substage.prototype.g_dGHG  =function(){}	//Total direct GHG Emissions per capita 
-			Substage.prototype.s_dGHG  =function(){}	//Direct GHG Emissions in water supply stages per volume authorized consumption of drinking water 
-			Substage.prototype.ws_dGHG =function(){}	//Direct GHG emissions in wastewater stages per volume of treated wastewater 
-			Substage.prototype.wt_dGHG =function(){}	//Direct GHG emissions in wastewater treatment per BOD eliminated 
-			Substage.prototype.wt_iGHG1=function(){}	//Sludge transport indirect GHG Emissions per dry weight of sludge
-			Substage.prototype.wt_iGHG1=function(){}	//Wastewater effluent N2O indirect GHG emissions per volume of wastewater treatet
-			/*INDIRECT EMISSIONS*/
-	</script>
+	<script src=substage.js></script>
 </head><body><center>
 <h1 onclick=window.location.reload()>ECAM Web Tool</h1>
+
+<!--navbar-->
+<table><tr>
+	<th>&#9776; Menu
+	<td>Global Indicators
+		<select>
+			<option>Global
+			<option>Water Supply
+			<option>Wastewater
+		</select>
+	<td>Stage Indicators
+		<select>
+			<option>Water Abstraction
+			<option>Water Treatment
+			<option>Water Distribution
+			<option>Wastewater Collection
+			<option>Wastewater Treatment
+			<option>Wastewater Discharge
+		</select>
+	<td>Emissions
+		<select>
+			<option>Direct Emissions
+			<option>Indirect Emissions
+		</select>
+	<td>Summary
+</table>
 
 <!--Substages-->
 <table>
 	<tr><th colspan=3>Substages
-	<tr><th>Properties
-		<td>Name
-		<td>sv1 etc
-	<tr><td>+New
-		<td><input id=name placeholder="Name">
-		<td><input id=name placeholder="m3">
 </table>
 
 <div style="text-align:left;width:50%;border:1px solid #ccc">
@@ -303,114 +111,114 @@
 		<ul id=globalIndicators style=display:none>
 			<li><button onclick=toggleDisplay('waterSupply',this)>+</button>WATER SUPPLY
 				<ul id=waterSupply style=display:none>
-					<li>S1		Quality of suplied water
-					<li>S2		Pressure of supply adequacy
-					<li>S3		Continuity of supply
-					<li>S4		Resident population connected to supply system
-					<li>gE2w	Per capita energy consumption for the Urban Drinking Water System 
-					<li>wGHG	Drinking water GHG emissions per authorized consumption
+					<li>S1:		Quality of suplied water
+					<li>S2:		Pressure of supply adequacy
+					<li>S3:		Continuity of supply
+					<li>S4:		Resident population connected to supply system
+					<li>gE2w:	Per capita energy consumption for the Urban Drinking Water System 
+					<li>wGHG:	Drinking water GHG emissions per authorized consumption
 				</ul>
 			<li><button onclick=toggleDisplay('wastewater',this)>+</button>WASTEWATER
 				<ul id=wastewater style=display:none>
-					<li>wS1		Resident population connected to sewer system
-					<li>wS2		Treated Wastewater in WWTP
-					<li>wS3		WWTP compliance with discharge consents 
-					<li>gE2ww	Per capita energy consumption for the Urban Wastewater System
-					<li>wwGHG1	Wastewater GHG emissions per discharged wastewater volume 
-					<li>wwGHG2	Wastewater GHG emissions per BOD eliminated 
+					<li>wS1:	Resident population connected to sewer system
+					<li>wS2:	Treated Wastewater in WWTP
+					<li>wS3:	WWTP compliance with discharge consents 
+					<li>gE2ww:	Per capita energy consumption for the Urban Wastewater System
+					<li>wwGHG1:	Wastewater GHG emissions per discharged wastewater volume 
+					<li>wwGHG2:	Wastewater GHG emissions per BOD eliminated 
 				</ul>
 			<li><button onclick=toggleDisplay('global',this)>+</button>GLOBAL
 				<ul id=global style=display:none>
-					<li>gE1	Energy costs ratio
-					<li>gE2	Per capita energy consumption 
-					<li>GHG	Per capita GHG emissions
+					<li>gE1:	Energy costs ratio
+					<li>gE2:	Per capita energy consumption 
+					<li>GHG:	Per capita GHG emissions
 				</ul>
 		</ul>
 	<li><button onclick=toggleDisplay('stageIndicators',this)>+</button>STAGE INDICATORS 	
 		<ul id=stageIndicators style=display:none>
 			<li> <button onclick=toggleDisplay('waterAbstraction',this)>+</button> WATER ABSTRACTION
 				<ul id=waterAbstraction style=display:none>
-					<li>aE1	Energy consumption per conveyed water 
-					<li>aE2	Energy consumption of abstracted water per total energy consumption
-					<li>aE3	Standardised Energy Consumption
-					<li>aE4	Energy recovery per conveyed water
-					<li>aE5	Standardized energy recovery
-					<li>aE6	Water losses per mains length 
-					<li>aE7	Unit head loss 
+					<li>aE1:	Energy consumption per conveyed water 
+					<li>aE2:	Energy consumption of abstracted water per total energy consumption
+					<li>aE3:	Standardised Energy Consumption
+					<li>aE4:	Energy recovery per conveyed water
+					<li>aE5:	Standardized energy recovery
+					<li>aE6:	Water losses per mains length 
+					<li>aE7:	Unit head loss 
 				</ul>
 			<li> <button onclick=toggleDisplay('waterTreatment',this)>+</button> WATER TREATMENT
 				<ul id=waterTreatment style=display:none>
-					<li>tE0		Treatment type (volume per type) 
+					<li>tE0:	Treatment type (volume per type) 
 						<ul>
-							<li>tE0.1	WTPs with Pre-ox/C/F/S/Filt/Des
-							<li>tE0.2	WTPs with Pre-ox/C/F/Filt/Des
-							<li>tE0.3	WTPs with C/F/S/Filt/Des
-							<li>tE0.4	WTPs with C/F/Filt/Des
-							<li>tE0.5	WTPs with Des
-							<li>tE0.6	WTPs with other sequence
+							<li>tE0.1:	WTPs with Pre-ox/C/F/S/Filt/Des
+							<li>tE0.2:	WTPs with Pre-ox/C/F/Filt/Des
+							<li>tE0.3:	WTPs with C/F/S/Filt/Des
+							<li>tE0.4:	WTPs with C/F/Filt/Des
+							<li>tE0.5:	WTPs with Des
+							<li>tE0.6:	WTPs with other sequence
 						</ul>
-					<li>tE1		Energy consumption per treated water 
-					<li>tE2		Energy consumption of WTPs per total energy consumption 
-					<li>tE3		Sludge production
-					<li>tE4		Capacity utilisation 
+					<li>tE1:	Energy consumption per treated water 
+					<li>tE2:	Energy consumption of WTPs per total energy consumption 
+					<li>tE3:	Sludge production
+					<li>tE4:	Capacity utilisation 
 				</ul>
 			<li> <button onclick=toggleDisplay('waterDistribution',this)>+</button> WATER DISTRIBUTION	
 				<ul id=waterDistribution style=display:none>
-					<li>dE1	Energy consumption per authorized consumption 
-					<li>dE2	Energy consumption of authorized consumption per total energy consumption
-					<li>dE3	Standardised Energy Consumption
-					<li>dE4	Global water distribution energy efficiency
-					<li>dE5	Percentage of topographic energy
-					<li>dE6	Water losses per mains length 
-					<li>dE7	Unit head loss 
+					<li>dE1:	Energy consumption per authorized consumption 
+					<li>dE2:	Energy consumption of authorized consumption per total energy consumption
+					<li>dE3:	Standardised Energy Consumption
+					<li>dE4:	Global water distribution energy efficiency
+					<li>dE5:	Percentage of topographic energy
+					<li>dE6:	Water losses per mains length 
+					<li>dE7:	Unit head loss 
 				</ul>
 			<li> <button onclick=toggleDisplay('wastewaterCollection',this)>+</button> WASTEWATER COLLECTION	
 				<ul id=wastewaterCollection style=display:none>
-					<li>wcE		Energy consumption per collected wastewater 
-					<li>wcE2	Energy consumption of collected wastewater per total energy consumption
-					<li>wcE3	Standardised Energy Consumption
+					<li>wcE1:	Energy consumption per collected wastewater 
+					<li>wcE2:	Energy consumption of collected wastewater per total energy consumption
+					<li>wcE3:	Standardised Energy Consumption
 				</ul>
 			<li> <button onclick=toggleDisplay('wastewaterTreatment',this)>+</button> WASTEWATER TREATMENT
 				<ul id=wastewaterTreatment style=display:none>
-					<li>wtE0	Treatment type (volume per type) 
+					<li>wtE0:	Treatment type (volume per type) 
 						<ul>
-							<li>wtE0.1	WWTPs with trickling filters (TF)
-							<li>wtE0.2	WWTPs with activated sludge (AS)
-							<li>wtE0.3	WWTPs with AS and Coagulation/Filtration (C/F)
-							<li>wtE0.4	WWTPs with AS nitrification and C/F 
-							<li>wtE0.5	WWTPs with Lagoons
-							<li>wtE0.6	WWTPs with other type of treatment
+							<li>wtE0.1:	WWTPs with trickling filters (TF)
+							<li>wtE0.2:	WWTPs with activated sludge (AS)
+							<li>wtE0.3:	WWTPs with AS and Coagulation/Filtration (C/F)
+							<li>wtE0.4:	WWTPs with AS nitrification and C/F 
+							<li>wtE0.5:	WWTPs with Lagoons
+							<li>wtE0.6:	WWTPs with other type of treatment
 						</ul>
-					<li>wtE1	Energy consumption per treated wastewater 
-					<li>wtE2	Energy consumption of WWTPs per total energy consumption 
-					<li>wtE3	Energy consumption per mass removed  
-					<li>wtE4	Energy production 
-					<li>wtE5	Sludge production
-					<li>wtE6	Dry weight in sludge production
-					<li>wtE7	Capacity utilisation 
+					<li>wtE1:	Energy consumption per treated wastewater 
+					<li>wtE2:	Energy consumption of WWTPs per total energy consumption 
+					<li>wtE3:	Energy consumption per mass removed  
+					<li>wtE4:	Energy production 
+					<li>wtE5:	Sludge production
+					<li>wtE6:	Dry weight in sludge production
+					<li>wtE7:	Capacity utilisation 
 				</ul>
 			<li> <button onclick=toggleDisplay('wastewaterDischarge',this)>+</button> WASTEWATER DISCHARGE
 				<ul id=wastewaterDischarge style=display:none>
-					<li>wdE1	Energy consumption per discharged wastewater 
-					<li>wdE2	Energy consumption of discharged wastewater per total energy consumption
-					<li>wdE3	Standardised Energy Consumption
-					<li>wdE4	Energy recovery per discharged water
-					<li>wdE5	Standardized energy recovery
+					<li>wdE1:	Energy consumption per discharged wastewater 
+					<li>wdE2:	Energy consumption of discharged wastewater per total energy consumption
+					<li>wdE3:	Standardised Energy Consumption
+					<li>wdE4:	Energy recovery per discharged water
+					<li>wdE5:	Standardized energy recovery
 				</ul>
 		</ul>
 	<li><button onclick=toggleDisplay('emissions',this)>+</button>EMISSIONS 			
 		<ul id=emissions style=display:none>
 			<li><button onclick=toggleDisplay('direct',this)>+</button>DIRECT
 				<ul id=direct style=display:none>
-					<li>g-dGHG	Total direct GHG Emissions per capita 
-					<li>s-dGHG	Direct GHG Emissions in water supply stages per volume authorized consumption of drinking water 
-					<li>ws-dGHG	Direct GHG emissions in wastewater stages per volume of treated wastewater 
-					<li>wt-dGHG	Direct GHG emissions in wastewater treatment per BOD eliminated 
+					<li>g-dGHG:		Total direct GHG Emissions per capita 
+					<li>s-dGHG:		Direct GHG Emissions in water supply stages per volume authorized consumption of drinking water 
+					<li>ws-dGHG:	Direct GHG emissions in wastewater stages per volume of treated wastewater 
+					<li>wt-dGHG:	Direct GHG emissions in wastewater treatment per BOD eliminated 
 				</ul>
 			<li><button onclick=toggleDisplay('indirect',this)>+</button>INDIRECT
 				<ul id=indirect style=display:none>
-					<li>wt-iGHG1 Sludge transport indirect GHG Emissions per dry weight of sludge
-					<li>wt-iGHG1 Wastewater effluent N2O indirect GHG emissions per volume of wastewater treatet
+					<li>wt-iGHG1: Sludge transport indirect GHG Emissions per dry weight of sludge
+					<li>wt-iGHG1: Wastewater effluent N2O indirect GHG emissions per volume of wastewater treatet
 				</ul>
 		</ul>
 </ul>
