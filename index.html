@@ -2,7 +2,7 @@
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
 	<style>
-		th,td{border:1px solid #000;padding:0.5em;text-align:center}
+		th,td{border:1px solid #000;padding:0.5em}
 		th{background:lightblue;vertical-align:top}
 		h1,h2{cursor:pointer}
 		div{padding:0.5em;margin:0.5em}
@@ -17,15 +17,15 @@
 </head><body><center><h1 onclick=window.location.reload()>ECAM Web Tool</h1>
 
 <!--NAVBAR-->
-<table><tr>
+<table style=text-align:left><tr>
 	<th>&#9776; Menu
-	<td>Global Indicators
+	<tr><td>Global Indicators
 		<select>
 			<option>Global
 			<option>Water Supply
 			<option>Wastewater
 		</select>
-	<td>Stage Indicators
+	<tr><td>Stage Indicators
 		<select>
 			<option>Water Abstraction
 			<option>Water Treatment
@@ -34,12 +34,12 @@
 			<option>Wastewater Treatment
 			<option>Wastewater Discharge
 		</select>
-	<td>Emissions
+	<tr><td>Emissions
 		<select>
 			<option>Direct Emissions
 			<option>Indirect Emissions
 		</select>
-	<td>Summary
+	<tr><td>Summary
 </table>
 
 <!--SUBSTAGES TABLE-->
