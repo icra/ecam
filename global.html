@@ -1,0 +1,83 @@
+<!doctype html><html><head>
+	<meta charset=utf-8>
+	<title>Level 1 - Global</title>
+	<link rel=stylesheet href="css.css">
+	<style>
+		body{font-size:14px}
+		table{display:inline-block;vertical-align:top;}
+	</style>
+	<script src=global.js></script>
+	<script>
+		/* GUI functions */
+
+		/*update inputs table*/
+		function updateInputs()
+		{
+			var t=document.getElementById('inputs')
+			while(t.rows.length>2)t.deleteRow(-1)
+			for(field in Global)
+			{
+				if(typeof(Global[field]) != "number" )continue //just numbers
+				var newRow=t.insertRow(-1)
+				newRow.insertCell(-1).innerHTML=field
+				newRow.insertCell(-1).innerHTML=Global.descriptions[field]
+				newRow.insertCell(-1).innerHTML=typeof(Global[field])
+				newRow.insertCell(-1).innerHTML=Global[field]
+				//form for updating the field:
+				newRow.insertCell(-1).innerHTML="<input id='"+field+"' size=3> "+
+					"<button onclick=updateField('"+field+"')>Save</button>"
+			}
+		}
+
+		/*redisplay outputs table*/
+		function updateOutputs()
+		{
+			var t=document.getElementById('outputs')
+			while(t.rows.length>2) t.deleteRow(-1)
+			//go over all fields in Global object
+			for(field in Global)
+			{
+				if(typeof(Global[field])!="function")continue //just functions
+				var newRow=t.insertRow(-1)
+				newRow.insertCell(-1).innerHTML=field
+				newRow.insertCell(-1).innerHTML=Global.descriptions[field]
+				newRow.insertCell(-1).innerHTML=typeof(Global[field])
+				newRow.insertCell(-1).innerHTML=Global[field]() //call the function
+			}
+		}
+
+		/* update a Global object field */
+		function updateField(field)
+		{
+			//get new value from <input id='field'>
+			var newValue = document.getElementById(field).value
+			//if Global[field] is a number, parse float
+			if(typeof(Global[field])=="number") newValue=parseFloat(newValue)
+			//update Global object
+			Global[field]=newValue
+			//update all tables
+			init()
+		}
+
+		/*update all tables*/
+		function init()
+		{
+			updateInputs()
+			updateOutputs()
+		}
+	</script>
+</head><body onload=init()><center>
+<!--title--><h1 onclick=window.location.reload()>Level 1 - Global</h1>
+
+<!--INPUTS TABLE-->
+<table id=inputs>
+	<tr><th colspan=5>Inputs
+	<tr><th>Name<th>Description<th>Type<th>Current Value<th>New value
+</table>
+
+<!--OUTPUTS TABLE-->
+<table id=outputs>
+	<tr><th colspan=5>Outputs
+	<tr><th>Name<th>Description<th>Type<th>Current Value
+</table>
+
