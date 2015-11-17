@@ -1,12 +1,12 @@
-/* Global namespace for global variables */
+/* Global namespace for storing all global variables */
 
 var Global =
 {
 	//GENERAL DATA
-	"name"				: "Name of the system",
-	"location"			: "City",
-	"assessmentPeriod"	: "January 2016",
-	"comments"			: "comments",
+	"Name"				: "Name of the system",
+	"Location"			: "City",
+	"Assessment Period"	: "January 2016",
+	"Comments"			: "comments",
 
 	//INPUTS
 	"gV1" : 31, 	 //Assessment period (days)
@@ -41,7 +41,7 @@ var Global =
 		"gV4" : "Total energy consumed (kWh)",
 		"gV5" : "Resident population within the utility area of service (inhab)",
 		"gV6" : "Energy mix consumded (CO2/kWh)",
-		"gE1" : "Energy Cost Ratio",
+		"gE1" : "Energy Cost Ratio (eur energy/eur running)",
 		"gE2" : "Per capita energy consumption (kWh/inhab/year)",
 		"GHG" : "Per capita GHG emissions (CO2e kg/inhab/year)"
 	},

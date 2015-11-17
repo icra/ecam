@@ -1,14 +1,60 @@
 <!doctype html><html><head>
 	<meta charset=utf-8>
-	<title>Level 1 - Global</title>
+	<title>ECAM Web App</title>
 	<link rel=stylesheet href="css.css">
 	<style>
 		body{font-size:14px}
 		table{display:inline-block;vertical-align:top;}
+		input{padding:0.5em;width:90%;font-size:20px}
+		td.input{text-align:right;color:#666;background-color:#eee}
 	</style>
-	<script src=global.js></script>
+	<!--global object with all the global variables--><script src=global.js></script>
 	<script>
 		/* GUI utilities */
+
+		/*generate a text file to download the Global object*/
+		function saveToFile()
+		{
+			var str=JSON.stringify(Global)
+			var link=document.createElement('a')
+			link.href="data:text/json;charset=utf-8,"+str
+			link.download="data.json"
+			link.click()
+		}
+
+		/*transform cell into a input and modify the field*/
+		function transformField(element)
+		{
+			element.removeAttribute('onclick')
+			var field=element.parentNode.getAttribute('field')
+			element.innerHTML=""
+			var input=document.createElement('input')
+			input.id=field
+			input.autocomplete='off'
+			input.setAttribute('onkeypress',"if(event.which==13){updateField('"+field+"')}")
+			input.setAttribute('onblur',"updateField('"+field+"')")
+			input.value=Global[field]
+			element.appendChild(input)
+			input.select()
+		}
+
+		/*redisplay general data table*/
+		function updateGeneral()
+		{
+			var t=document.getElementById('general')
+			while(t.rows.length>2)t.deleteRow(-1)
+			for(field in Global)
+			{
+				if(typeof(Global[field])!="string")continue
+				var newRow=t.insertRow(-1)
+				newRow.setAttribute('field',field)
+				newRow.insertCell(-1).innerHTML=field
+				var newCell=newRow.insertCell(-1)
+				newCell.className="input"
+				newCell.setAttribute('onclick','transformField(this)')
+				newCell.innerHTML=Global[field]
+			}
+		}
 
 		/*update inputs table*/
 		function updateInputs()
@@ -17,15 +63,15 @@
 			while(t.rows.length>2)t.deleteRow(-1)
 			for(field in Global)
 			{
-				if(typeof(Global[field]) != "number" )continue //just numbers
+				if(typeof(Global[field])!="number" )continue
 				var newRow=t.insertRow(-1)
+				newRow.setAttribute('field',field)
 				newRow.insertCell(-1).innerHTML=field
 				newRow.insertCell(-1).innerHTML=Global.descriptions[field]
-				newRow.insertCell(-1).innerHTML=typeof(Global[field])
-				newRow.insertCell(-1).innerHTML=Global[field]
-				//form for updating the field:
-				newRow.insertCell(-1).innerHTML="<input id='"+field+"' size=3 autocomplete=off> "+
-					"<button onclick=updateField('"+field+"')>Save</button>"
+				var newCell=newRow.insertCell(-1)
+				newCell.className="input"
+				newCell.setAttribute('onclick','transformField(this)')
+				newCell.innerHTML=Global[field]
 			}
 		}
 
@@ -33,49 +79,31 @@
 		function updateOutputs()
 		{
 			var t=document.getElementById('outputs')
-			while(t.rows.length>2) t.deleteRow(-1)
-			//go over all fields in Global object
+			while(t.rows.length>2)t.deleteRow(-1)
 			for(field in Global)
 			{
-				if(typeof(Global[field])!="function")continue //just functions
+				if(typeof(Global[field])!="function")continue
 				var newRow=t.insertRow(-1)
 				newRow.insertCell(-1).innerHTML=field
 				newRow.insertCell(-1).innerHTML=Global.descriptions[field]
-				newRow.insertCell(-1).innerHTML=typeof(Global[field])
-				newRow.insertCell(-1).innerHTML=Global[field]() //call the function
+				var newCell=newRow.insertCell(-1)
+				newCell.innerHTML=Global[field]()
 			}
 		}
 
-		/*redisplay outputs table*/
-		function updateGeneral()
-		{
-			var t=document.getElementById('general')
-			while(t.rows.length>2) t.deleteRow(-1)
-			//go over all fields in Global object
-			for(field in Global)
-			{
-				if(typeof(Global[field])!="string")continue //just strings 
-				var newRow=t.insertRow(-1)
-				newRow.insertCell(-1).innerHTML=field
-				newRow.insertCell(-1).innerHTML=typeof(Global[field])
-				newRow.insertCell(-1).innerHTML=Global[field]
-				//form for updating the field:
-				newRow.insertCell(-1).innerHTML="<input id='"+field+"' size=3 autocomplete=off> "+
-					"<button onclick=updateField('"+field+"')>Save</button>"
-			}
-		}
-
-		/* update a Global object field */
+		/*update a field from Global*/
 		function updateField(field)
 		{
-			//get new value from <input id='field'>
-			var newValue = document.getElementById(field).value
-			//if Global[field] is a number, parse float
-			if(typeof(Global[field])=="number") newValue=parseFloat(newValue)
-			//update Global object
-			Global[field]=newValue
-			//update all tables
-			init()
+			var newValue=document.getElementById(field).value //get new value from <input id='field'>
+			if(typeof(Global[field])=="number")newValue=parseFloat(newValue) //if Global[field] is a number, parse float
+			Global[field]=newValue //update Global object
+			init() //update all tables
+		}
+
+		/*stringify Global object and display it*/
+		function updateResult()
+		{
+			document.getElementById('global').innerHTML=JSON.stringify(Global)
 		}
 
 		/*update all tables*/
@@ -84,28 +112,42 @@
 			updateGeneral()
 			updateInputs()
 			updateOutputs()
+			updateResult()
 		}
 	</script>
 </head><body onload=init()><center>
-<!--title--><h1 onclick=window.location.reload()>Level 1 - Global</h1>
+<!--TITLE-->
+<h1 onclick=window.location.reload()>Level 1 - Global (Simple Demo)</h1>
+<h4>Click the fields to change their value</h4>
 
 <!--GENERAL DATA-->
 <table id=general>
-	<tr><th colspan=4>General Data
-	<tr><th>Variable<th>Type<th>Current Value<th>New Value
+	<tr><th colspan=4>GENERAL DATA
+	<tr><th>Variable<th>Current Value
 </table>
 
 <!--IO-->
 <div>
 	<!--INPUTS-->
 	<table id=inputs>
-		<tr><th colspan=5>Inputs
-		<tr><th>Variable<th>Description<th>Type<th>Current Value<th>New Value
+		<tr><th colspan=5>INPUTS
+		<tr><th>Variable<th>Description<th>Current Value
 	</table>
 
 	<!--OUTPUTS-->
-	<table id=outputs>
-		<tr><th colspan=4>Outputs
-		<tr><th>Variable<th>Description<th>Type<th>Current Value
+	<table id=outputs style=background:yellow>
+		<tr><th colspan=4>OUTPUTS
+		<tr><th>Variable<th>Description<th>Current Value
 	</table>
 </div>
+
+<!--results-->
+<div style=text-align:left>
+Global:
+<span id=global></span>
+</div>
+
+<button onclick=saveToFile()>Save to File</button>
+
+<script>
+</script>
