@@ -24,7 +24,7 @@
 				newRow.insertCell(-1).innerHTML=typeof(Global[field])
 				newRow.insertCell(-1).innerHTML=Global[field]
 				//form for updating the field:
-				newRow.insertCell(-1).innerHTML="<input id='"+field+"' size=3> "+
+				newRow.insertCell(-1).innerHTML="<input id='"+field+"' size=3 autocomplete=off> "+
 					"<button onclick=updateField('"+field+"')>Save</button>"
 			}
 		}
@@ -46,6 +46,25 @@
 			}
 		}
 
+		/*redisplay outputs table*/
+		function updateGeneral()
+		{
+			var t=document.getElementById('general')
+			while(t.rows.length>2) t.deleteRow(-1)
+			//go over all fields in Global object
+			for(field in Global)
+			{
+				if(typeof(Global[field])!="string")continue //just strings 
+				var newRow=t.insertRow(-1)
+				newRow.insertCell(-1).innerHTML=field
+				newRow.insertCell(-1).innerHTML=typeof(Global[field])
+				newRow.insertCell(-1).innerHTML=Global[field]
+				//form for updating the field:
+				newRow.insertCell(-1).innerHTML="<input id='"+field+"' size=3 autocomplete=off> "+
+					"<button onclick=updateField('"+field+"')>Save</button>"
+			}
+		}
+
 		/* update a Global object field */
 		function updateField(field)
 		{
@@ -62,6 +81,7 @@
 		/*update all tables*/
 		function init()
 		{
+			updateGeneral()
 			updateInputs()
 			updateOutputs()
 		}
@@ -69,15 +89,22 @@
 </head><body onload=init()><center>
 <!--title--><h1 onclick=window.location.reload()>Level 1 - Global</h1>
 
-<!--INPUTS TABLE-->
-<table id=inputs>
-	<tr><th colspan=5>Inputs
-	<tr><th>Name<th>Description<th>Type<th>Current Value<th>New value
+<!--GENERAL DATA-->
+<table id=general>
+	<tr><th colspan=4>General Data
+	<tr><th>Variable<th>Type<th>Current Value<th>New Value
 </table>
 
-<!--OUTPUTS TABLE-->
-<table id=outputs>
-	<tr><th colspan=5>Outputs
-	<tr><th>Name<th>Description<th>Type<th>Current Value
-</table>
+<div>
+	<!--INPUTS TABLE-->
+	<table id=inputs>
+		<tr><th colspan=5>Inputs
+		<tr><th>Variable<th>Description<th>Type<th>Current Value<th>New Value
+	</table>
 
+	<!--OUTPUTS TABLE-->
+	<table id=outputs>
+		<tr><th colspan=4>Outputs
+		<tr><th>Variable<th>Description<th>Type<th>Current Value
+	</table>
+</div>
