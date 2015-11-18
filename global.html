@@ -1,28 +1,32 @@
 <!doctype html><html><head>
 	<meta charset=utf-8>
 	<title>ECAM Web App</title>
-	<link rel=stylesheet href="css.css">
-	<style>
+	<link rel=stylesheet href="css.css"><style>
 		body{font-size:14px}
 		table{display:inline-block;vertical-align:top;}
-		input{padding:0.5em;width:90%;font-size:20px}
-		td.input{text-align:right;color:#666;background-color:#eee}
+		input.input{width:95%;font-size:18px}
+		td.input{max-height:3em;width:200px;overflow:auto;text-align:right;color:#666;background-color:#eee;cursor:cell}
 	</style>
-	<!--global object with all the global variables--><script src=global.js></script>
+	<script src="global.js"></script><!--Default Global object here-->
 	<script>
-		/* GUI utilities */
+		/** 
+		 * GUI utilities
+		 * Note: Comments follow JSdoc structure (http://usejsdoc.org/about-getting-started.html) 
+		 */
 
-		/*generate a text file to download the Global object*/
+		/** Generate a json/text file of the Global object */
 		function saveToFile()
 		{
-			var str=JSON.stringify(Global)
 			var link=document.createElement('a')
-			link.href="data:text/json;charset=utf-8,"+str
+			link.href="data:text/json;charset=utf-8,"+JSON.stringify(Global)
 			link.download="data.json"
 			link.click()
 		}
 
-		/*transform cell into a input and modify the field*/
+		/** 
+		 * Transform a <td> cell to make modifications to fields from the Global object
+		 * @param {element} element - the <td> cell
+		 */
 		function transformField(element)
 		{
 			element.removeAttribute('onclick')
@@ -30,6 +34,7 @@
 			element.innerHTML=""
 			var input=document.createElement('input')
 			input.id=field
+			input.className='input'
 			input.autocomplete='off'
 			input.setAttribute('onkeypress',"if(event.which==13){updateField('"+field+"')}")
 			input.setAttribute('onblur',"updateField('"+field+"')")
@@ -38,7 +43,7 @@
 			input.select()
 		}
 
-		/*redisplay general data table*/
+		/** Redisplay table id=general */
 		function updateGeneral()
 		{
 			var t=document.getElementById('general')
@@ -56,7 +61,7 @@
 			}
 		}
 
-		/*update inputs table*/
+		/** Redisplay table id=inputs */
 		function updateInputs()
 		{
 			var t=document.getElementById('inputs')
@@ -75,7 +80,7 @@
 			}
 		}
 
-		/*redisplay outputs table*/
+		/** Redisplay table id=outputs */
 		function updateOutputs()
 		{
 			var t=document.getElementById('outputs')
@@ -91,22 +96,25 @@
 			}
 		}
 
-		/*update a field from Global*/
+		/**
+		 * Update a field from the Global object
+		 * @param {string} field - The field of the Global object
+		 */
 		function updateField(field)
 		{
 			var newValue=document.getElementById(field).value //get new value from <input id='field'>
 			if(typeof(Global[field])=="number")newValue=parseFloat(newValue) //if Global[field] is a number, parse float
-			Global[field]=newValue //update Global object
+			Global[field]=newValue //update the field
 			init() //update all tables
 		}
 
-		/*stringify Global object and display it*/
+		/** Stringify Global object and display it */
 		function updateResult()
 		{
 			document.getElementById('global').innerHTML=JSON.stringify(Global)
 		}
 
-		/*update all tables*/
+		/** Update all tables */
 		function init()
 		{
 			updateGeneral()
@@ -117,8 +125,8 @@
 	</script>
 </head><body onload=init()><center>
 <!--TITLE-->
-<h1 onclick=window.location.reload()>Level 1 - Global (Simple Demo)</h1>
-<h4>Click the fields to change their value</h4>
+<h1 onclick=window.location.reload() style=cursor:pointer>Level 1 - Global (Simple Demo)</h1>
+<h4>Click fields to change values</h4>
 
 <!--GENERAL DATA-->
 <table id=general>
@@ -141,11 +149,15 @@
 	</table>
 </div>
 
-<!--results-->
-<div style=text-align:left>
-Global:
-<span id=global></span>
+<!--CURRENT GLOBAL OBJECT IN JSON-->
+<div style="text-align:left;border:1px solid #ccc">
+	<b>Generated Data Structure:</b><br><span id=global></span>
 </div>
 
-<button onclick=saveToFile()>&#128190; Save to File</button>
-
+<!--MENU-->
+<div>
+	<!--LOAD-->
+	<button><label for=loadfile>&#128194; Load</label></button> |
+	<input type=file id=loadfile style=display:none accept=".json" onchange="alert('under construction')">
+	<!--SAVE--><button onclick=saveToFile()>&#128190; Save</button>
+</div>

@@ -3,10 +3,10 @@
 var Global =
 {
 	//GENERAL DATA
-	"Name"				: "Name of the system",
-	"Location"			: "City",
+	"Name"				: "Sedacusco",
+	"Location"			: "Cusco",
 	"Assessment Period"	: "January 2016",
-	"Comments"			: "comments",
+	"Comments"			: "Comments",
 
 	//INPUTS
 	"gV1" : 31, 	 //Assessment period (days)
@@ -29,7 +29,7 @@ var Global =
 
 	"GHG":function()
 	{
-		return this.gV4*this.gV6
+		return "not implemented"
 	},
 
 	//DESCRIPTIONS
