@@ -1,7 +1,9 @@
 <!doctype html><html><head>
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
-	<link rel=stylesheet href=css.css>
+	<link rel=stylesheet href="css.css"><style>
+		.blue{color:#00AFF2;font-size:1.5em}
+	</style>
 	<script>
 		function openAll()
 		{
@@ -49,37 +51,31 @@
 			if(button)toggleSymbol(button)
 		}
 	</script>
-</head><body><center><h1 onclick=window.location.reload()>Summary</h1>
+</head><body><center>
 
-<!--NAVBAR-->
-<table style=text-align:left><tr>
-	<th>&#9776; Menu
-	<tr><td>Global Indicators
-		<select>
-			<option>Global
-			<option>Water Supply
-			<option>Wastewater
-		</select>
-	<tr><td>Stage Indicators
-		<select>
-			<option>Water Abstraction
-			<option>Water Treatment
-			<option>Water Distribution
-			<option>Wastewater Collection
-			<option>Wastewater Treatment
-			<option>Wastewater Discharge
-		</select>
-	<tr><td>Emissions
-		<select>
-			<option>Direct Emissions
-			<option>Indirect Emissions
-		</select>
-	<tr><td>Summary
+<!--NAVBAR--><?php include"navbar.php"?>
+
+<!--TITLE AND SUBTITLE-->
+<h1 class=blue onclick=window.location.reload() style=font-size:2em>ECAM <span style=font-size:16px>(under construction)</span></h1>
+<h3>
+	<span class=blue>E</span>nergy performance and
+	<span class=blue>C</span>arbon emissions
+	<span class=blue>A</span>ssessment and 
+	<span class=blue>M</span>onitoring Tool
+</h3>
+
+<div style="text-align:left;width:30%;display:inline-block;vertical-align:top">
+
+<!--LEVELS-->
+<table>
+	<tr><td><b>LEVEL 1</b> - <a href=global.php>Global</a>
+	<tr><td><b>LEVEL 2</b> - Stage Indicators
+	<tr><td><b>LEVEL 3</b> - Substages
 </table>
 
 <!--SUMMARY-->
-<div style="text-align:left;width:50%;border:1px solid #ccc">
-	<b>SUMMARY</b> | <a href=# onclick=openAll()>Open all</a> | <a href=# onclick=collapseAll()>Collapse all</a>
+<div style="text-align:left;">
+	<b>Summary</b> | <a href=# onclick=openAll()>Open all</a> | <a href=# onclick=collapseAll()>Collapse all</a>
 	<ul id=summary>
 		<li><button onclick=toggleDisplay('globalIndicators',this)>+</button>GLOBAL INDICATORS 	
 			<ul id=globalIndicators style=display:none>
@@ -197,3 +193,7 @@
 			</ul>
 	</ul>
 </div>
+
+</div>
+
+<!--IMG--><img src=img/diagram.png style="border:1px solid #ccc;box-shadow:0 9px 5px -5px rgba(0,0,0,0.5);">

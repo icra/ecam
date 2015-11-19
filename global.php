@@ -7,7 +7,8 @@
 		input.input{width:95%;font-size:18px}
 		td.input{max-height:3em;width:200px;overflow:auto;text-align:right;color:#666;background-color:#eee;cursor:cell}
 	</style>
-	<script src="global.js"></script><!--Default Global object here-->
+	<script src="dataModel/info.js"></script><!--All variable descriptions and units object here-->
+	<script src="dataModel/global.js"></script><!--Default Global object here-->
 	<script>
 		/** 
 		 * GUI utilities
@@ -43,24 +44,6 @@
 			input.select()
 		}
 
-		/** Redisplay table id=general */
-		function updateGeneral()
-		{
-			var t=document.getElementById('general')
-			while(t.rows.length>2)t.deleteRow(-1)
-			for(field in Global)
-			{
-				if(typeof(Global[field])!="string")continue
-				var newRow=t.insertRow(-1)
-				newRow.setAttribute('field',field)
-				newRow.insertCell(-1).innerHTML=field
-				var newCell=newRow.insertCell(-1)
-				newCell.className="input"
-				newCell.setAttribute('onclick','transformField(this)')
-				newCell.innerHTML=Global[field]
-			}
-		}
-
 		/** Redisplay table id=inputs */
 		function updateInputs()
 		{
@@ -72,11 +55,12 @@
 				var newRow=t.insertRow(-1)
 				newRow.setAttribute('field',field)
 				newRow.insertCell(-1).innerHTML=field
-				newRow.insertCell(-1).innerHTML=Global.descriptions[field]
+				newRow.insertCell(-1).innerHTML=Info[field].description
 				var newCell=newRow.insertCell(-1)
 				newCell.className="input"
 				newCell.setAttribute('onclick','transformField(this)')
 				newCell.innerHTML=Global[field]
+				newRow.insertCell(-1).innerHTML=Info[field].unit
 			}
 		}
 
@@ -90,9 +74,9 @@
 				if(typeof(Global[field])!="function")continue
 				var newRow=t.insertRow(-1)
 				newRow.insertCell(-1).innerHTML=field
-				newRow.insertCell(-1).innerHTML=Global.descriptions[field]
-				var newCell=newRow.insertCell(-1)
-				newCell.innerHTML=Global[field]()
+				newRow.insertCell(-1).innerHTML=Info[field].description
+				newRow.insertCell(-1).innerHTML=Global[field]()
+				newRow.insertCell(-1).innerHTML=Info[field].unit
 			}
 		}
 
@@ -117,42 +101,13 @@
 		/** Update all tables */
 		function init()
 		{
-			updateGeneral()
 			updateInputs()
 			updateOutputs()
 			updateResult()
 		}
 	</script>
 </head><body onload=init()><center>
-<!--TITLE-->
-<h1 onclick=window.location.reload() style=cursor:pointer>Level 1 - Global (Simple Demo)</h1>
-<h4>Click fields to change values</h4>
-
-<!--GENERAL DATA-->
-<table id=general>
-	<tr><th colspan=4>GENERAL DATA
-	<tr><th>Variable<th>Current Value
-</table>
-
-<!--IO-->
-<div>
-	<!--INPUTS-->
-	<table id=inputs>
-		<tr><th colspan=5>INPUTS
-		<tr><th>Variable<th>Description<th>Current Value
-	</table>
-
-	<!--OUTPUTS-->
-	<table id=outputs style=background:yellow>
-		<tr><th colspan=4>OUTPUTS
-		<tr><th>Variable<th>Description<th>Current Value
-	</table>
-</div>
-
-<!--CURRENT GLOBAL OBJECT IN JSON-->
-<div style="text-align:left;border:1px solid #ccc">
-	<b>Generated Data Structure:</b><br><span id=global></span>
-</div>
+<!--navbar--><?php include"navbar.php"?>
 
 <!--MENU-->
 <div>
@@ -160,4 +115,28 @@
 	<button><label for=loadfile>&#128194; Load</label></button> |
 	<input type=file id=loadfile style=display:none accept=".json" onchange="alert('under construction')">
 	<!--SAVE--><button onclick=saveToFile()>&#128190; Save</button>
+</div>
+
+<!--TITLE-->
+<h1 onclick=window.location.reload() style=cursor:pointer>Level 1 - Global</h1>
+<h4>Click fields to change values</h4>
+
+<!--IO-->
+<div>
+	<!--INPUTS-->
+	<table id=inputs>
+		<tr><th colspan=4>INPUTS
+		<tr><th>Variable<th>Description<th>Current Value<th>Unit
+	</table>
+
+	<!--OUTPUTS-->
+	<table id=outputs style=background:yellow>
+		<tr><th colspan=4>OUTPUTS
+		<tr><th>Variable<th>Description<th>Current Value<th>Unit
+	</table>
+</div>
+
+<!--CURRENT GLOBAL OBJECT IN JSON-->
+<div style="text-align:left;border:1px solid #ccc;margin:1em">
+	<b>Raw Data</b><br><span id=global></span>
 </div>

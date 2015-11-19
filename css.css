@@ -1,8 +1,11 @@
-*{margin:0}
+*{margin:0px}
+a{font-weight:bold;text-decoration:none}
 a:visited{color:blue}
-body{font-family:Helvetica}
+a:hover{text-decoration:underline}
+body{font-family:Arial,sans-serif;overflow-y:scroll}
 button{padding:0.3em;border-radius:0.2em;border:1px solid #ccc}
-div{padding:0.5em;margin:0.5em}
+div{padding:0.5em;}
+h1,h2,h3,h4{padding:0.5em}
 table{border-collapse:collapse;margin:1em}
 th,td{border:1px solid #000;padding:0.5em}
 th{background:lightblue;vertical-align:top}
