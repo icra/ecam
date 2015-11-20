@@ -52,7 +52,6 @@
 		}
 	</script>
 </head><body><center>
-
 <!--NAVBAR--><?php include"navbar.php"?>
 
 <!--TITLE AND SUBTITLE-->
@@ -64,136 +63,52 @@
 	<span class=blue>M</span>onitoring Tool
 </h3>
 
-<div style="text-align:left;width:30%;display:inline-block;vertical-align:top">
+<!--FLOW-->
+<img src=img/flow.png>
 
-<!--LEVELS-->
-<table>
-	<tr><td><b>LEVEL 1</b> - <a href=global.php>Global</a>
-	<tr><td><b>LEVEL 2</b> - Stage Indicators
-	<tr><td><b>LEVEL 3</b> - Substages
+<!--STAGES (SCRIPT AND STYLE INSIDE)-->
+fer en horitzontal
+<table border=1>
+	<script>
+		/** Enable or disable <input type=checkbox class=class */
+		function toggleDisabled(className,checkbox)
+		{
+			var elements=document.getElementsByClassName(className)
+			for(var i=0;i<elements.length;i++)
+			{
+				if(checkbox.checked)
+				{
+					elements[i].removeAttribute('disabled')
+					elements[i].parentNode.style.color=""
+				}
+				else
+				{
+					elements[i].checked=false
+					elements[i].setAttribute('disabled',true)
+					elements[i].parentNode.style.color="#ccc"
+				}
+			}
+		}
+	</script>
+	<style>
+		/* bigger checkboxes*/
+		input[type=checkbox]{
+			transform: scale(1.7);
+		}
+		td{text-align:left}
+	</style>
+	<tr><th>LEVEL 1<th>LEVEL 2<th>LEVEL 3
+		<td rowspan=8><!--IMG--><img src=img/diagram.png>
+	<tr>
+		<td style="text-align:center"><a href=global.php>Global</a>
+		<td style="text-align:center"><a>Stages</a>
+		<td style="text-align:center"><a>Sub-Stages</a> 
+	<tr><td rowspan=3><label><input type=checkbox onclick=toggleDisabled('water',this)> 		<b>Water Supply</b>		</label>
+			<td><label style=color:#ccc><input type=checkbox disabled class=water> 				Abstraction		</label> <td style="text-align:center"><input type=checkbox class=water disabled>
+		<tr><td><label style=color:#ccc><input type=checkbox disabled class=water> 				Treatment			</label> <td style="text-align:center"><input type=checkbox class=water disabled>
+		<tr><td><label style=color:#ccc><input type=checkbox disabled class=water> 				Distribution		</label> <td style="text-align:center"><input type=checkbox class=water disabled>
+	<tr><td rowspan=3><label><input type=checkbox onclick=toggleDisabled('wastewater',this)> 	<b>Wastewater</b>		</label>
+			<td><label style=color:#ccc><input type=checkbox disabled class=wastewater> 		Collection	</label> <td style="text-align:center"><input type=checkbox class=water disabled>
+		<tr><td><label style=color:#ccc><input type=checkbox disabled class=wastewater> 		Treatment	</label> <td style="text-align:center"><input type=checkbox class=water disabled>
+		<tr><td><label style=color:#ccc><input type=checkbox disabled class=wastewater> 		Discharge	</label> <td style="text-align:center"><input type=checkbox class=water disabled>
 </table>
-
-<!--SUMMARY-->
-<div style="text-align:left;">
-	<b>Summary</b> | <a href=# onclick=openAll()>Open all</a> | <a href=# onclick=collapseAll()>Collapse all</a>
-	<ul id=summary>
-		<li><button onclick=toggleDisplay('globalIndicators',this)>+</button>GLOBAL INDICATORS 	
-			<ul id=globalIndicators style=display:none>
-				<li><button onclick=toggleDisplay('waterSupply',this)>+</button>WATER SUPPLY
-					<ul id=waterSupply style=display:none>
-						<li>S1:		Quality of suplied water
-						<li>S2:		Pressure of supply adequacy
-						<li>S3:		Continuity of supply
-						<li>S4:		Resident population connected to supply system
-						<li>gE2w:	Per capita energy consumption for the Urban Drinking Water System 
-						<li>wGHG:	Drinking water GHG emissions per authorized consumption
-					</ul>
-				<li><button onclick=toggleDisplay('wastewater',this)>+</button>WASTEWATER
-					<ul id=wastewater style=display:none>
-						<li>wS1:	Resident population connected to sewer system
-						<li>wS2:	Treated Wastewater in WWTP
-						<li>wS3:	WWTP compliance with discharge consents 
-						<li>gE2ww:	Per capita energy consumption for the Urban Wastewater System
-						<li>wwGHG1:	Wastewater GHG emissions per discharged wastewater volume 
-						<li>wwGHG2:	Wastewater GHG emissions per BOD eliminated 
-					</ul>
-				<li><button onclick=toggleDisplay('global',this)>+</button>GLOBAL
-					<ul id=global style=display:none>
-						<li>gE1:	Energy costs ratio
-						<li>gE2:	Per capita energy consumption 
-						<li>GHG:	Per capita GHG emissions
-					</ul>
-			</ul>
-		<li><button onclick=toggleDisplay('stageIndicators',this)>+</button>STAGE INDICATORS 	
-			<ul id=stageIndicators style=display:none>
-				<li> <button onclick=toggleDisplay('waterAbstraction',this)>+</button> WATER ABSTRACTION
-					<ul id=waterAbstraction style=display:none>
-						<li>aE1:	Energy consumption per conveyed water 
-						<li>aE2:	Energy consumption of abstracted water per total energy consumption
-						<li>aE3:	Standardised Energy Consumption
-						<li>aE4:	Energy recovery per conveyed water
-						<li>aE5:	Standardized energy recovery
-						<li>aE6:	Water losses per mains length 
-						<li>aE7:	Unit head loss 
-					</ul>
-				<li> <button onclick=toggleDisplay('waterTreatment',this)>+</button> WATER TREATMENT
-					<ul id=waterTreatment style=display:none>
-						<li>tE0:	Treatment type (volume per type) 
-							<ul>
-								<li>tE0.1:	WTPs with Pre-ox/C/F/S/Filt/Des
-								<li>tE0.2:	WTPs with Pre-ox/C/F/Filt/Des
-								<li>tE0.3:	WTPs with C/F/S/Filt/Des
-								<li>tE0.4:	WTPs with C/F/Filt/Des
-								<li>tE0.5:	WTPs with Des
-								<li>tE0.6:	WTPs with other sequence
-							</ul>
-						<li>tE1:	Energy consumption per treated water 
-						<li>tE2:	Energy consumption of WTPs per total energy consumption 
-						<li>tE3:	Sludge production
-						<li>tE4:	Capacity utilisation 
-					</ul>
-				<li> <button onclick=toggleDisplay('waterDistribution',this)>+</button> WATER DISTRIBUTION	
-					<ul id=waterDistribution style=display:none>
-						<li>dE1:	Energy consumption per authorized consumption 
-						<li>dE2:	Energy consumption of authorized consumption per total energy consumption
-						<li>dE3:	Standardised Energy Consumption
-						<li>dE4:	Global water distribution energy efficiency
-						<li>dE5:	Percentage of topographic energy
-						<li>dE6:	Water losses per mains length 
-						<li>dE7:	Unit head loss 
-					</ul>
-				<li> <button onclick=toggleDisplay('wastewaterCollection',this)>+</button> WASTEWATER COLLECTION	
-					<ul id=wastewaterCollection style=display:none>
-						<li>wcE1:	Energy consumption per collected wastewater 
-						<li>wcE2:	Energy consumption of collected wastewater per total energy consumption
-						<li>wcE3:	Standardised Energy Consumption
-					</ul>
-				<li> <button onclick=toggleDisplay('wastewaterTreatment',this)>+</button> WASTEWATER TREATMENT
-					<ul id=wastewaterTreatment style=display:none>
-						<li>wtE0:	Treatment type (volume per type) 
-							<ul>
-								<li>wtE0.1:	WWTPs with trickling filters (TF)
-								<li>wtE0.2:	WWTPs with activated sludge (AS)
-								<li>wtE0.3:	WWTPs with AS and Coagulation/Filtration (C/F)
-								<li>wtE0.4:	WWTPs with AS nitrification and C/F 
-								<li>wtE0.5:	WWTPs with Lagoons
-								<li>wtE0.6:	WWTPs with other type of treatment
-							</ul>
-						<li>wtE1:	Energy consumption per treated wastewater 
-						<li>wtE2:	Energy consumption of WWTPs per total energy consumption 
-						<li>wtE3:	Energy consumption per mass removed  
-						<li>wtE4:	Energy production 
-						<li>wtE5:	Sludge production
-						<li>wtE6:	Dry weight in sludge production
-						<li>wtE7:	Capacity utilisation 
-					</ul>
-				<li> <button onclick=toggleDisplay('wastewaterDischarge',this)>+</button> WASTEWATER DISCHARGE
-					<ul id=wastewaterDischarge style=display:none>
-						<li>wdE1:	Energy consumption per discharged wastewater 
-						<li>wdE2:	Energy consumption of discharged wastewater per total energy consumption
-						<li>wdE3:	Standardised Energy Consumption
-						<li>wdE4:	Energy recovery per discharged water
-						<li>wdE5:	Standardized energy recovery
-					</ul>
-			</ul>
-		<li><button onclick=toggleDisplay('emissions',this)>+</button>EMISSIONS 			
-			<ul id=emissions style=display:none>
-				<li><button onclick=toggleDisplay('direct',this)>+</button>DIRECT
-					<ul id=direct style=display:none>
-						<li>g-dGHG:		Total direct GHG Emissions per capita 
-						<li>s-dGHG:		Direct GHG Emissions in water supply stages per volume authorized consumption of drinking water 
-						<li>ws-dGHG:	Direct GHG emissions in wastewater stages per volume of treated wastewater 
-						<li>wt-dGHG:	Direct GHG emissions in wastewater treatment per BOD eliminated 
-					</ul>
-				<li><button onclick=toggleDisplay('indirect',this)>+</button>INDIRECT
-					<ul id=indirect style=display:none>
-						<li>wt-iGHG1: Sludge transport indirect GHG Emissions per dry weight of sludge
-						<li>wt-iGHG1: Wastewater effluent N2O indirect GHG emissions per volume of wastewater treatet
-					</ul>
-			</ul>
-	</ul>
-</div>
-
-</div>
-
-<!--IMG--><img src=img/diagram.png style="border:1px solid #ccc;box-shadow:0 9px 5px -5px rgba(0,0,0,0.5);">
