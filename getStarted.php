@@ -12,10 +12,10 @@
 
 <!--TITLE AND SUBTITLE-->
 <h2 onclick=window.location.reload()>Get Started</h2>
+<h4>General Data</h4>
 
 <!--FORM-->
 <table style="text-align:left;box-shadow:0 9px 5px -5px rgba(0,0,0,0.3);">
-	<b>GENERAL DATA</b>
 	<tr><th>Name				<td><input value="Sedacusco">
 	<tr><th>Location			<td><input value="Cusco">
 	<tr><th>Assessment Period	<td><input value="January 2016">

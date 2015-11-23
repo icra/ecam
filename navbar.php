@@ -17,10 +17,9 @@
 		nlink("index.php","&#127968; HOME");
 		nlink("getStarted.php","Get Started");
 		nlink("allVariables.php","All variables");
+
 		nlink("#","Read the manual");
 		nlink("#","Video tutorial");
 		nlink("#","Load your system");
 	?>
 </div>
-
-<hr>
