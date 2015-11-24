@@ -6,6 +6,8 @@
 		td{text-align:left}
 	</style>
 	<script src="js/cookies.js"></script>
+	<script src="dataModel/global.js"></script>
+	<script src="dataModel/info.js"></script>
 	<script>
 		/** Enable or disable <input type=checkbox id=id> */
 		function activate(id)
@@ -38,8 +40,12 @@
 					elements[i].parentNode.style.color="#ccc"
 					elements[i].parentNode.parentNode.style.backgroundColor=""
 					removeCookie(elements[i].id)
+					inputVisibility(elements[i].id,checkbox.checked)
 				}
 			}
+
+			//show or hide inputs
+			inputVisibility(id,checkbox.checked)
 		}
 
 		/** Activate levels depending on cookies */
@@ -84,12 +90,61 @@
 			}
 		}
 
+		//** Create rows for a table with specified object
+		function tableRows(object,name,family)
+		{
+			//return string
+			var ret="<tr><td colspan=5 style='background:#ccc;text-align:center;font-weight:bold'>"+name
+			for(variable in object)
+			{
+				//only numbers
+				if(typeof(object[variable])!="number")continue
+
+				ret+="<tr style=display:none family='"+family+"'><td class=blue style='font-weight:bold'>"+
+					variable+
+					"<td>"+
+					Info[variable].description+
+					"<td><input value='"+object[variable]+"' style='width:3em'>"+
+					"<td>"+Info[variable].unit+
+					"<td>"+
+						"<label><input type=radio name='"+variable+"' checked> Calculated 	</label>"+
+						"<label><input type=radio name='"+variable+"'> Assumed 				</label>"
+			}
+			return ret
+		}
+
+		//** Display or hide inputs of the specified family (string) and display (true or false) */
+		function inputVisibility(family,display)
+		{
+			//style.display string
+			display=display?"":"none"
+			//select elements: <tr family=family>
+			var elements=document.querySelectorAll("tr[family='"+family+"']")
+			//loop elements
+			for(var i=0;i<elements.length;i++)
+			{
+				fadeIn(elements[i],0)
+				elements[i].style.display=display
+			}
+		}
+
 		function init()
 		{
 			activateLevels()
 		}
+
+		function fadeIn(element,val)
+		{
+			element.style.opacity=val
+			if(val<1)
+			{
+				val+=0.1
+				setTimeout(function(){fadeIn(element,val)},30)
+			}
+		}
 	</script>
 </head><body onload=init()><center>
+
 <!--NAVBAR--><?php include"navbar.php"?>
 
 <!--TITLE AND SUBTITLE-->
@@ -103,8 +158,8 @@
 <hr>
 
 <!--SELECT LEVEL-->
-<div>Select stage of stages which system compromises</div>
-<table>
+<div style=padding:0>Select stage of stages which system compromises</div>
+<table style=font-size:12px>
 	<tr>
 		<!--LEVEL 1-->
 		<th>LEVEL 1 - <a href=global.php>Global</a>
@@ -127,3 +182,29 @@
 <!--DIAGRAM 
 <img src="img/diagram.png" style="border:1px solid #ccc;width:35%;cursor:zoom-in" onclick=window.location=this.src>
 -->
+<hr>
+
+<!--INPUTS-->
+<div>
+	<h4>Available Inputs</h4>
+	<table style="font-size:10px;display:inline-block;vertical-align:top;">
+		<tr><th colspan=5>LEVEL 1 INPUTS
+		<tr><th>Variable<th>Description<th>Value<th>Unit<th>Quality
+		<script>
+			document.write(tableRows(Water,"Water Supply","water"))
+			document.write(tableRows(Waste,"Wastewater","waste"))
+		</script>
+	</table>
+	<table style="font-size:10px;display:inline-block;vertical-align:top;">
+		<tr><th colspan=5>LEVEL 2 INPUTS
+		<tr><th>Variable<th>Description<th>Value<th>Unit<th>Quality
+		<script>
+			document.write(tableRows(Water.Stages.Abstraction,	"Water Abstraction",	"waterAbs"))
+			document.write(tableRows(Water.Stages.Treatment,	"Water Treatment",		"waterTre"))
+			document.write(tableRows(Water.Stages.Distribution,	"Water Distribution",	"waterDis"))
+			document.write(tableRows(Waste.Stages.Collection,	"Wastewater Collection","wasteCol"))
+			document.write(tableRows(Waste.Stages.Treatment,	"Wastewater Treatment",	"wasteTre"))
+			document.write(tableRows(Waste.Stages.Discharge,	"Wastewater Discharge",	"wasteDis"))
+		</script>
+	</table>
+</div>

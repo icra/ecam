@@ -25,7 +25,7 @@ var Global =
 	},
 }
 /** 2. WATER SUPPLY*/
-var WaterSupply =
+var Water=
 {
 	/** Inputs */
 		"sV1"  : 0, //Volume of Conveyed Water (m3)
@@ -118,22 +118,22 @@ var WaterSupply =
 		"Distribution" :
 		{
 			/** Inputs */
-			"dV1 "  : 0,	//Volume injected (m3)
-			"dV2 "  : 0,	//Minimum pressure to be supplied at the distribution nodes (m)
-			"dV3 "  : 0,	//Highest node elevation (m)
-			"dV4 "  : 0,	//Lowest node elevation of the stage (m)
-			"dV5 "  : 0,	//Average nodes elevation (m)
-			"dV6 "  : 0,	//Water table elevation node (m)
-			"dV7 "  : 0,	//Energy consumed for pumping distributed water (kWh)
-			"dV8 "  : 0,	//[Sum](distributed water volume pumped x pump head in meters) (m3 x 100 m)
-			"dV9 "  : 0,	//Natural energy provided (kWh)
-			"dV10"  : 0,	//Energy recovered at water distribution (kWh)
-			"dV11"  : 0,	//Minimum required energy by users (kWh)
-			"dV12"  : 0,	//Total supplied energy to the network (natural plus shaft), real system (kWh)
-			"dV13"  : 0,	//Topographic energy supplied to the system (kWh)
-			"dV14"  : 0,	//Total supplied energy to the network, assuming the system has no losses (kWh)
-			"dV15"  : 0,	//Mains lenght (km)
-			"dV16"  : 0,	//Friction pipe losses (m)
+			"dV1"  : 0,	//Volume injected (m3)
+			"dV2"  : 0,	//Minimum pressure to be supplied at the distribution nodes (m)
+			"dV3"  : 0,	//Highest node elevation (m)
+			"dV4"  : 0,	//Lowest node elevation of the stage (m)
+			"dV5"  : 0,	//Average nodes elevation (m)
+			"dV6"  : 0,	//Water table elevation node (m)
+			"dV7"  : 0,	//Energy consumed for pumping distributed water (kWh)
+			"dV8"  : 0,	//[Sum](distributed water volume pumped x pump head in meters) (m3 x 100 m)
+			"dV9"  : 0,	//Natural energy provided (kWh)
+			"dV10" : 0,	//Energy recovered at water distribution (kWh)
+			"dV11" : 0,	//Minimum required energy by users (kWh)
+			"dV12" : 0,	//Total supplied energy to the network (natural plus shaft), real system (kWh)
+			"dV13" : 0,	//Topographic energy supplied to the system (kWh)
+			"dV14" : 0,	//Total supplied energy to the network, assuming the system has no losses (kWh)
+			"dV15" : 0,	//Mains lenght (km)
+			"dV16" : 0,	//Friction pipe losses (m)
 			/** Outputs */
 			"dE1"   :function(){},		//Energy consumption per authorized consumption 
 			"dE2"	:function(){},		//Energy consumption of authorized consumption per total energy consumption
@@ -146,7 +146,7 @@ var WaterSupply =
 	},
 }
 /** 03. WASTEWATER*/
-var WasteWater =
+var Waste=
 {
 	/** Inputs */
 		"wsV1" : 0, //Volume of collected wastewater (m3)
@@ -186,15 +186,15 @@ var WasteWater =
 		/** 3.2. WASTEWATER TREATMENT*/
 		"Treatment":
 		{
-			"wtV1 " : 0,			//Volume of treated wastewater in WWTPs with trickling filters (TF)					(m3)
-			"wtV2 " : 0,			//Volume of treated wastewater in WWTPs with activated sludge (AS)					(m3)
-			"wtV3 " : 0,			//Volume of treated wastewater in WWTPs with AS and Coagulation/Filtration (C/F) 	(m3)
-			"wtV4 " : 0,			//Volume of treated wastewater in WWTPs with AS nitrification and C/F				(m3)
-			"wtV5 " : 0,			//Volume of treated wastewater in WWTPs with Laggons 								(m3)
-			"wtV6 " : 0,			//Volume of treated wastewater in WWTPs with other type of treatment 				(m3)
-			"wtV7 " : 0,			//Energy consumed in WWTPs															(kWh)
-			"wtV8 " : 0,			//BOD mass removed 																	(kg BOD)
-			"wtV9 " : 0,			//Energy produced in WWTPs 															(kWh)
+			"wtV1"  : 0,			//Volume of treated wastewater in WWTPs with trickling filters (TF)					(m3)
+			"wtV2"  : 0,			//Volume of treated wastewater in WWTPs with activated sludge (AS)					(m3)
+			"wtV3"  : 0,			//Volume of treated wastewater in WWTPs with AS and Coagulation/Filtration (C/F) 	(m3)
+			"wtV4"  : 0,			//Volume of treated wastewater in WWTPs with AS nitrification and C/F				(m3)
+			"wtV5"  : 0,			//Volume of treated wastewater in WWTPs with Laggons 								(m3)
+			"wtV6"  : 0,			//Volume of treated wastewater in WWTPs with other type of treatment 				(m3)
+			"wtV7"  : 0,			//Energy consumed in WWTPs															(kWh)
+			"wtV8"  : 0,			//BOD mass removed 																	(kg BOD)
+			"wtV9"  : 0,			//Energy produced in WWTPs 															(kWh)
 			"wtV10" : 0,			//Sludge produced in WWTPs 															(kg)
 			"wtV11" : 0,			//Dry weight in sludge produced														(% (w/w))
 			"wtV12" : 0,			//Treatment capacity																(m3)
