@@ -18,7 +18,10 @@
 <table style="text-align:left;box-shadow:0 9px 5px -5px rgba(0,0,0,0.3);">
 	<tr><th>Name				<td><input value="Sedacusco">
 	<tr><th>Location			<td><input value="Cusco">
-	<tr><th>Assessment Period	<td><input value="January 2016">
+	<tr><th>Assessment Period	<td>
+		Start <input type=date value="">
+		<br>
+		End <input type=date value="">
 	<tr><th>Comments			<td><textarea rows=5 cols=50>Comments</textarea>
 </table>
 

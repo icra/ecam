@@ -12,14 +12,12 @@
 		/** Enable or disable <input type=checkbox id=id> */
 		function activate(id)
 		{
-			//element that we are modifying
+			//input element that we are clicking
 			var checkbox  = document.getElementById(id)
 
 			//set or remove cookie
-			if(checkbox.checked) 	
-				setCookie(id,"true",10)
-			else 					
-				removeCookie(id)
+			if(checkbox.checked) 	setCookie(id,"true",10)
+			else 					removeCookie(id)
 
 			//background color = green or white depending on checkbox
 			checkbox.parentNode.parentNode.style.backgroundColor=checkbox.checked?"#af0":""
@@ -40,11 +38,12 @@
 					elements[i].parentNode.style.color="#ccc"
 					elements[i].parentNode.parentNode.style.backgroundColor=""
 					removeCookie(elements[i].id)
+					//hide inputs corresponding to sublevels
 					inputVisibility(elements[i].id,checkbox.checked)
 				}
 			}
 
-			//show or hide inputs
+			//show or hide inputs corresponding to this level
 			inputVisibility(id,checkbox.checked)
 		}
 
@@ -149,22 +148,31 @@
 
 <!--TITLE AND SUBTITLE-->
 <h1 class=blue onclick=window.location.reload() style="font-size:2em;cursor:pointer">ECAM</h1>
-	<h3>
+	<h4>
 		<span class=blue>E</span>nergy performance and
 		<span class=blue>C</span>arbon emissions
 		<span class=blue>A</span>ssessment and 
 		<span class=blue>M</span>onitoring Tool
-	</h3>
+	</h4>
+
+<!--DIAGRAM 
+<img src="img/diagram.png" style="border:1px solid #ccc;width:35%;cursor:zoom-in" onclick=window.location=this.src>
+-->
+
 <hr>
 
 <!--SELECT LEVEL-->
-<div style=padding:0>Select stage of stages which system compromises</div>
+<div style=padding:0>
+	Select stages of your system (<a href=sankey.php>Sankey Example</a>)
+</div>
 <table style=font-size:12px>
 	<tr>
 		<!--LEVEL 1-->
 		<th>LEVEL 1 - <a href=global.php>Global</a>
 		<td colspan=3 style="text-align:center;"><label><input type=checkbox id=water onchange=activate(this.id)> <b>Water Supply</b>	</label>
 		<td colspan=3 style="text-align:center;"><label><input type=checkbox id=waste onchange=activate(this.id)> <b>Wastewater</b>		</label>
+		<td>
+			<label><input type=checkbox><b>Emissions</b></label>
 	<tr>
 		<!--LEVEL 2-->
 		<th rowspan=2 style="vertical-align:middle">LEVEL 2 - Stages
@@ -179,9 +187,6 @@
 		<td colspan=6><img src=img/flow.png>
 </table>
 
-<!--DIAGRAM 
-<img src="img/diagram.png" style="border:1px solid #ccc;width:35%;cursor:zoom-in" onclick=window.location=this.src>
--->
 <hr>
 
 <!--INPUTS-->
@@ -208,3 +213,7 @@
 		</script>
 	</table>
 </div>
+
+<hr>
+
+<!--logos--><?php include'logos.php'?>
