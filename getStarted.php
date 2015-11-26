@@ -19,9 +19,8 @@
 	<tr><th>Name				<td><input value="Sedacusco">
 	<tr><th>Location			<td><input value="Cusco">
 	<tr><th>Assessment Period	<td>
-		Start <input type=date value="">
-		<br>
-		End <input type=date value="">
+		From 	<input type=date value=""> &nbsp; 
+		To 		<input type=date value="">
 	<tr><th>Comments			<td><textarea rows=5 cols=50>Comments</textarea>
 </table>
 

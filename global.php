@@ -54,7 +54,7 @@
 				if(typeof(Global[field])!="number" )continue
 				var newRow=t.insertRow(-1)
 				newRow.setAttribute('field',field)
-				newRow.insertCell(-1).innerHTML=field
+				newRow.insertCell(-1).innerHTML="<b class=blue>"+field+"</b>"
 				newRow.insertCell(-1).innerHTML=Info[field].description
 				var newCell=newRow.insertCell(-1)
 				newCell.className="input"
@@ -118,7 +118,7 @@
 </div>
 
 <!--TITLE-->
-<h1 onclick=window.location.reload() style=cursor:pointer>Level 1 - Global</h1>
+<h1 onclick=window.location.reload() style=cursor:pointer><a href=inputs.php>Inputs</a> > Level 1 - Global</h1>
 <h4>Click fields to change values</h4>
 
 <!--IO-->
@@ -126,13 +126,13 @@
 	<!--INPUTS-->
 	<table id=inputs>
 		<tr><th colspan=4>INPUTS
-		<tr><th>Variable<th>Description<th>Current Value<th>Unit
+		<tr><th>Code<th>Description<th>Current Value<th>Unit
 	</table>
 
 	<!--OUTPUTS-->
 	<table id=outputs style=background:yellow>
-		<tr><th colspan=4>OUTPUTS
-		<tr><th>Variable<th>Description<th>Current Value<th>Unit
+		<tr><th colspan=4>OUTPUTS - Key Performance Indicators
+		<tr><th>Code<th>Description<th>Current Value<th>Unit
 	</table>
 </div>
 

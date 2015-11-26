@@ -16,7 +16,7 @@
 			{
 				var newRow=t.insertRow(-1)
 				newRow.insertCell(-1).innerHTML=i
-				newRow.insertCell(-1).innerHTML=field
+				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
 				newRow.insertCell(-1).innerHTML=Info[field].description
 				newRow.insertCell(-1).innerHTML=Info[field].unit
 				i++
