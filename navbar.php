@@ -15,12 +15,12 @@
 		//menu symbol (3 bars)
 		echo "&#9776; "; 
 		//links
-		nlink("/ecam/index.php","&#127968; HOME");
+		nlink("/ecam/index.php","&#8962; HOME");
 		nlink("/ecam/getStarted.php","Get Started");
 		nlink("/ecam/configuration.php","Configuration");
 		nlink("/ecam/inputs.php","Inputs");
 		//nlink("/ecam/outputs.php","Outputs");
 		nlink("/ecam/allVariables.php","All variables");
-		nlink("/ecam/summary.html","Summary Example");
+		nlink("/ecam/summary.php","Summary Example");
 	?>
 </div>

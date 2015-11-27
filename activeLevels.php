@@ -1,5 +1,5 @@
 <table style="font-size:12px">
-	<tr><th colspan=6>Current Active Levels
+	<tr><th colspan=6>Current Active Levels | <a href=configuration.php>Configuration</a>
 	<tr>
 		<!--LEVEL 1-->
 		<td colspan=3 style="text-align:center;color:#ccc" cookie=water>Water Supply

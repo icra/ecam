@@ -1,33 +1,47 @@
-/** 1. GLOBAL */
+/** 
+	NAMESPACE GLOBAL
+	EXAMPLES OF VARIABLE ACCESSING
+
+	Global.gV1
+
+	Global.Water.sV1
+	Global.Water.Abstraction.aV1
+	Global.Water.Treatment.tV1
+	Global.Water.Distribution.dV1
+
+	Global.Waste.wsV1
+	Global.Waste.Collection.wcV1
+	Global.Waste.Treatment.wtV1
+	Global.Waste.Collection.wdV1
+
+	Global.Emissions.dD1
+	Global.Emissions.Direct.g_dGHG
+	Global.Emissions.Indirect.iS1
+*/
+
 var Global =
 {
-	//INPUTS
-	"gV1" : 31, 	 //Assessment period (days)
-	"gV2" : 108239,	 //Energy costs (Euro)
-	"gV2w": 0,
-	"gV2ww":0,
-	"gV3" : 635242,	 //Running costs (Euro)
-	"gV4" : 1501779, //Total energy consumed (kWh)
-	"gV5" : 368475,	 //Resident population within the utility area of service (Inhab)
-	"gV6" : 0.225,	 //Energy mix consumed (CO2/kWh)
-	//OUTPUTS
-	"gE1":function()
+	"Global":	/** 01. GLOBAL */
 	{
-		return this.gV2/this.gV3
+		/** Inputs */
+		"gV1" : 31, 	 //Assessment period (days)
+		"gV2" : 108239,	 //Energy costs (Euro)
+		"gV2w": 0,
+		"gV2ww":0,
+		"gV3" : 635242,	 //Running costs (Euro)
+		"gV4" : 1501779, //Total energy consumed (kWh)
+		"gV5" : 368475,	 //Resident population within the utility area of service (Inhab)
+		"gV6" : 0.225,	 //Energy mix consumed (CO2/kWh)
+		/** Outputs */
+		"gE1":function() { return this.gV2/this.gV3 },
+		"gE2":function() { return this.gV4*365/this.gV1/this.gV5 },
+		"GHG":function() { return "not implemented" },
 	},
-	"gE2":function()		
+
+	/** SUB LEVELS */
+	"Water":	/** 02. Water Supply*/
 	{
-		return this.gV4*365/this.gV1/this.gV5
-	},
-	"GHG":function()
-	{
-		return "not implemented"
-	},
-}
-/** 2. WATER SUPPLY*/
-var Water=
-{
-	/** Inputs */
+		/** Inputs */
 		"sV1"  : 0, //Volume of Conveyed Water (m3)
 		"sV2"  : 0, //Volume of Treated Water (m3)
 		"sV3"  : 0, //Treated Water quality tests carried out (num)
@@ -41,27 +55,13 @@ var Water=
 		"sV11" : 0, //Time system is pressurised (hour)
 		"sV12" : 0, //Resident population connected to supply systems (Inhab)
 		"sV13" : 0, //Water supply resident population (Inhab)
-	/** Outputs */
-		"S1":function() //Quality of supplied water (%)
-		{
-			return 100*(this.sV4+this.sV5+this.sV6+this.sV7)/this.sV3
-		},
-		"S2":function() //Pressure of supply adequacy (%)
-		{
-			return 100*this.sV9/this.sV10
-		},
-		"S3":function() //Continuity of supply (%)
-		{
-			return 100*this.sV11/24/Global.gV1
-		},
-		"S4":function()	//Resident population connected to supply system (%)
-		{
-			return 100*this.sV12/this.sV13
-		},
-	/** Stages */
-	"Stages":
-	{
-		/* 2.1. ABSTRACTION*/
+		/** Outputs */
+		"S1":function() { return 100*(this.sV4+this.sV5+this.sV6+this.sV7)/this.sV3 },	//Quality of supplied water (%)
+		"S2":function() { return 100*this.sV9/this.sV10 }, 								//Pressure of supply adequacy (%)
+		"S3":function() { return 100*this.sV11/24/this.gV1 }, 							//Continuity of supply (%)
+		"S4":function()	{ return 100*this.sV12/this.sV13 }, 							//Resident population connected to supply system (%)
+		/** Stages */
+		/* 2.1. Water Abstraction*/
 		"Abstraction":
 		{
 			/** Inputs */
@@ -73,23 +73,16 @@ var Water=
 			"aV6" : 0, //Mains lenght (km)
 			"aV7" : 0, //Friction pipe losses (m)
 			/** Outputs */
-			"aE1":function() //Energy consumption per conveyed water (kWh/m3) 
-			{ return this.aV1/this.sV1 },
-			"aE2":function() //Energy consumption of abstracted water per total energy consumption (%) 
-			{ return 100*this.aV1/Global.gV4 },
-			"aE3":function() //Standardised Energy Consumption (kWh/m3/100m) 
-			{ return this.aV1/this.aV2 },
-			"aE4":function() //Energy recovery per conveyed water (kWh/m3) 
-			{ return this.aV3/this.sV1 },
-			"aE5":function() //Standardized energy recovery (kWh/m3/100m) 
-			{ return this.aV3/this.aV4 },
-			"aE6":function() //Water losses per mains length (m3/km/d) 
-			{ return this.aV5/Global.gV1/this.aV6 },
-			"aE7":function() //Unit head loss (m/km) 
-			{ return this.aV7/this.aV6 },
+			"aE1":function() { return this.aV1/this.sV1 }, 				//Energy consumption per conveyed water (kWh/m3) 
+			"aE2":function() { return 100*this.aV1/Global.gV4 }, 		//Energy consumption of abstracted water per total energy consumption (%) 
+			"aE3":function() { return this.aV1/this.aV2 }, 				//Standardised Energy Consumption (kWh/m3/100m) 
+			"aE4":function() { return this.aV3/this.sV1 }, 				//Energy recovery per conveyed water (kWh/m3) 
+			"aE5":function() { return this.aV3/this.aV4 }, 				//Standardized energy recovery (kWh/m3/100m) 
+			"aE6":function() { return this.aV5/Global.gV1/this.aV6 }, 	//Water losses per mains length (m3/km/d) 
+			"aE7":function() { return this.aV7/this.aV6 }, 				//Unit head loss (m/km) 
 		},
-		/* 2.2. TREATMENT*/
-		"Treatment" :
+		/* 2.2. Water Treatment*/
+		"Treatment":
 		{
 			/** Inputs */
 			"tV1"  : 0, //Volume of treated water in WTPs with Pre-ox/C/F/S/Filt/Des	(m3)
@@ -114,8 +107,8 @@ var Water=
 			"tE3"  :function(){},	//Sludge production
 			"tE4"  :function(){},	//Capacity utilisation 
 		},
-		/* 2.3. WATER DISTRIBUTION*/
-		"Distribution" :
+		/* 2.3. Water Distribution*/
+		"Distribution":
 		{
 			/** Inputs */
 			"dV1"  : 0,	//Volume injected (m3)
@@ -144,11 +137,10 @@ var Water=
 			"dE7"	:function(){},		//Unit head loss 
 		}
 	},
-}
-/** 03. WASTEWATER*/
-var Waste=
-{
-	/** Inputs */
+
+	"Waste": 	/** 03. Wastewater*/
+	{
+		/** Inputs */
 		"wsV1" : 0, //Volume of collected wastewater (m3)
 		"wsV2" : 0, //Resident population connected to SE (Inhab)
 		"wsV3" : 0, //Wastewater resident population (Inhab)
@@ -157,22 +149,12 @@ var Waste=
 		"wsV6" : 0, //Tests complying with discharge consents (num)
 		"wsV7" : 0, //Tests carried out in WWTPs (num)
 		"wsV8" : 0, //Volume of discharged wastewater (m3)
-	/** Outputs */
-		"wS1":function() 	//Resident population connected to sewer system (%)
-		{ 
-			return 100*this.wsV2/this.wsV3 
-		},
-		"wS2":function() 	//Treated Wastewater in WWTP (%)
-		{ 
-			return "not implemented" //TODO (es complex)
-		},
-		"wS3":function() 	//WWTP compliance with discharge consents (%)
-		{ 
-			return 100*this.wsV7/this.wsV6 
-		},
-	"Stages":
-	{
-		/** 3.1. WASTEWATER COLLECTION*/ 
+		/** Outputs */
+		"wS1":function() { return 100*this.wsV2/this.wsV3 }, 	//Resident population connected to sewer system (%)
+		"wS2":function() { return "not implemented" }, 			//Treated Wastewater in WWTP (%)
+		"wS3":function() { return 100*this.wsV7/this.wsV6 }, 	//WWTP compliance with discharge consents (%)
+		/** Stages */
+		/* 3.1. WASTEWATER COLLECTION*/ 
 		"Collection":
 		{
 			/** Inputs */
@@ -183,7 +165,7 @@ var Waste=
 			"wcE2" : function(){},  //Energy consumption of collected wastewater per total energy consumption
 			"wcE3" : function(){},  //Standardised Energy Consumption
 		},
-		/** 3.2. WASTEWATER TREATMENT*/
+		/* 3.2. WASTEWATER TREATMENT*/
 		"Treatment":
 		{
 			"wtV1"  : 0,			//Volume of treated wastewater in WWTPs with trickling filters (TF)					(m3)
@@ -214,7 +196,7 @@ var Waste=
 			"wtE6" :function(){},	//Dry weight in sludge production
 			"wtE7" :function(){},	//Capacity utilisation 
 		},
-		/** 3.3. WASTEWATER DISCHARGE */
+		/* 3.3. WASTEWATER DISCHARGE */
 		"Discharge":
 		{
 			"wdV1": 0,				//Energy consumed for pumping discharged wastewater	 			(kWh)
@@ -228,31 +210,29 @@ var Waste=
 			"wdE5":function(){},	//Standardized energy recovery
 		},
 	},
-}
-/** 04. EMISSIONS */
-var Emissions = 
-{
-	"dD1" : 0, //Direct CO2 emitted in urban drinking water system from on-site engines 	(kg CO2)	 	 	 	 
-	"dW1" : 0, //Direct CO2 emitted in wastewater stages from on-site engines	 			(kg CO2)	 	 	 	 
-	"dM1" : 0, //Methane (CH4) emitted	 													(kg CO2)	 	 	 	 
-	"dN1" : 0, //Nitrous oxide (N2O) emitted 												(kg CO2)	 	 	 	 
-	"Stages":
+
+	"Emissions": /** 04. Emissions */
 	{
+		"dD1" : 0, //Direct CO2 emitted in urban drinking water system from on-site engines 	(kg CO2)	 	 	 	 
+		"dW1" : 0, //Direct CO2 emitted in wastewater stages from on-site engines	 			(kg CO2)	 	 	 	 
+		"dM1" : 0, //Methane (CH4) emitted	 													(kg CO2)	 	 	 	 
+		"dN1" : 0, //Nitrous oxide (N2O) emitted 												(kg CO2)	 	 	 	 
 		/*4.1. DIRECT EMISSIONS*/
 		"Direct":
 		{
-			"g_dGHG":function(){}, //Total direct GHG Emissions per capita 
-			"s_dGHG":function(){}, //Direct GHG Emissions in water supply stages per volume authorized consumption of drinking water 
-			"ws_dGHG":function(){}, //Direct GHG emissions in wastewater stages per volume of treated wastewater 
-			"wt_dGHG":function(){}, //Direct GHG emissions in wastewater treatment per BOD eliminated 
+			"g_dGHG":	function(){}, //Total direct GHG Emissions per capita 
+			"s_dGHG":	function(){}, //Direct GHG Emissions in water supply stages per volume authorized consumption of drinking water 
+			"ws_dGHG":	function(){}, //Direct GHG emissions in wastewater stages per volume of treated wastewater 
+			"wt_dGHG":	function(){}, //Direct GHG emissions in wastewater treatment per BOD eliminated 
 		},
 		/*4.2. INDIRECT EMISSIONS*/
 		"Indirect":
 		{
 			"iS1"		: 0,			//Indirect CO2e emitted in sludge transport	 		(kg CO2e)
 			"iN1"		: 0,			//Indirect CO2e emitted from wastewater effluent	(kg CO2e)
-			"ws_iGHG1"	:function(){},	//Wastewater effluent N2O indirect GHG emissions per volume of wastewater treatet
-			"wt_iGHG1"	:function(){},	//Sludge transport indirect GHG Emissions per dry weight of sludge
+			"ws_iGHG1"	: function(){},	//Wastewater effluent N2O indirect GHG emissions per volume of wastewater treatet
+			"wt_iGHG1"	: function(){},	//Sludge transport indirect GHG Emissions per dry weight of sludge
 		}
-	}
+	},
 }
+

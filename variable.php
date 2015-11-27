@@ -2,6 +2,7 @@
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
 	<link rel=stylesheet href="css.css"><style>
+		th,td{padding:1.5em}
 	</style>
 	<script src="js/cookies.js"></script>
 	<script src="dataModel/global.js"></script>
@@ -15,21 +16,22 @@
 	$id=$_GET['id'];
 ?>
 
-<!--TITLE--><h2><a href=allVariables.php>All variables</a> > <?php echo $id?></h2>
+<!--TITLE--><h2><a href=allVariables.php>All variables</a> &rsaquo;  <?php echo $id?></h2>
 
-<table style=text-align:left>
-	<tr><th>Active
-		<td style=background:#af0>True
+<!--VARIABLE INFO-->
+<table style="text-align:left">
+	<tr><th>Active 
+		<td style=background:#af0>True (not implemented)
 	<tr><th>Level
-		<td>1 (Water Supply)
+		<td>1 (Water Supply) (not implemented)
 	<tr><th>Description
 		<td>
 		<script>
 			document.write(Info["<?php echo $id?>"].description)
 		</script>
 	<tr><th>Magnitude
-		<td>Flow
-	<tr><th>Unit
+		<td>Flow (not implemented)
+	<tr><th>Unit 
 		<td>
 			<script>
 				document.write(Info["<?php echo $id?>"].unit)
@@ -42,9 +44,7 @@
 				<option>L/h
 				<option>L/s
 			</select>
+			(not implemented)
 	<tr><th>Value
-		<td>
-		<script>
-			document.write("<input value='"+0+"'> <button>Save</button>")
-		</script>
+		<td>not implemented
 </table>

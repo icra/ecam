@@ -9,33 +9,26 @@
 </head><body><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h2 onclick=window.location.reload() style="cursor:pointer">Inputs</h2>
-<!--active levels--><?php include'activeLevels.php'?>
+<!--ACTIVE LEVELS--><?php include'activeLevels.php'?>
+
+<!--LINKS TO LEVELS INPUTS-->
+<table style="text-align:center">
+	<tr><th colspan=6>EDIT 
+	<tr>
+		<td colspan=6><a href="edit.php?level=Global">Global</a>
+			<br><button>Volumes</button> <button>Energy</button> <button>Emissions</button>
+	<tr>
+		<td colspan=3><a href="edit.php?level=Water">Water Supply</a>
+			<br><button>Volumes</button> <button>Energy</button> <button>Emissions</button>
+		<td colspan=3><a href="edit.php?level=Waste">Wastewater</a>
+			<br><button>Volumes</button> <button>Energy</button> <button>Emissions</button>
+	<tr>
+		<td><a href="edit.php?level=Water&sublevel=Abstraction"		>Abstraction</a> 	<br><button>Volumes</button><br><button>Energy</button><br><button>Emissions</button>
+		<td><a href="edit.php?level=Water&sublevel=Treatment"		>Treatment</a>		<br><button>Volumes</button><br><button>Energy</button><br><button>Emissions</button>
+		<td><a href="edit.php?level=Water&sublevel=Distribution"	>Distribution</a>	<br><button>Volumes</button><br><button>Energy</button><br><button>Emissions</button>
+		<td><a href="edit.php?level=Waste&sublevel=Collection"		>Collection</a>		<br><button>Volumes</button><br><button>Energy</button><br><button>Emissions</button>
+		<td><a href="edit.php?level=Waste&sublevel=Treatment"		>Treatment</a>		<br><button>Volumes</button><br><button>Energy</button><br><button>Emissions</button>
+		<td><a href="edit.php?level=Waste&sublevel=Discharge"		>Discharge</a>		<br><button>Volumes</button><br><button>Energy</button><br><button>Emissions</button>
+</table>
 
 <a href=sankey.php>Sankey Example</a>
-
-<br>
-
-<div>
-these buttons take you to pages that display all inputs for selected level (like global.php)
-</div>
-
-<table>
-	<tr><th colspan=7>Edit level inputs
-	<tr>
-		<td rowspan=2><a href=global.php>Global</a>
-		<td colspan=3><a href=#>Water Supply</a>
-			<button>Volumes</button>
-			<button>Energy</button>
-			<button>Emissions</button>
-		<td colspan=3><a href=#>Wastewater</a>
-			<button>Volumes</button>
-			<button>Energy</button>
-			<button>Emissions</button>
-	<tr>
-		<td><a href=#>Abstraction</a> 	<br><button>Volumes</button><br><button>Energy</button><br><button>Emissions</button>
-		<td><a href=#>Treatment</a>		<br><button>Volumes</button><br><button>Energy</button><br><button>Emissions</button>
-		<td><a href=#>Distribution</a>	<br><button>Volumes</button><br><button>Energy</button><br><button>Emissions</button>
-		<td><a href=#>Collection</a>	<br><button>Volumes</button><br><button>Energy</button><br><button>Emissions</button>
-		<td><a href=#>Treatment</a>		<br><button>Volumes</button><br><button>Energy</button><br><button>Emissions</button>
-		<td><a href=#>Discharge</a>		<br><button>Volumes</button><br><button>Energy</button><br><button>Emissions</button>
-</table>

@@ -145,10 +145,10 @@
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h2 onclick=window.location.reload() style="cursor:pointer">Configuration</h2>
-<!--SUBTITLE--><h4>Activate stages corresponding to your system</h4> 
+<!--SUBTITLE--><h4>Activate stages which correspond to your system</h4> 
 
 <!--SELECT LEVELS-->
-<table cellpadding=10>
+<table>
 	<tr>
 		<!--LEVEL 1-->
 		<th>Level 1
@@ -166,23 +166,21 @@
 </table>
 
 <!--AVAILABLE INPUTS-->
-<div>
-	<table style="font-size:11px;display:inline-block;vertical-align:top;">
-		<tr><th colspan=2>LEVEL 1 INPUTS SUMMARY
-		<script>
-			document.write(tableRows(Water,"Water Supply","water"))
-			document.write(tableRows(Waste,"Wastewater","waste"))
-		</script>
-	</table>
-	<table style="font-size:11px;display:inline-block;vertical-align:top;">
-		<tr><th colspan=2>LEVEL 2 INPUTS SUMMARY
-		<script>
-			document.write(tableRows(Water.Stages.Abstraction,	"Water Abstraction",	"waterAbs"))
-			document.write(tableRows(Water.Stages.Treatment,	"Water Treatment",		"waterTre"))
-			document.write(tableRows(Water.Stages.Distribution,	"Water Distribution",	"waterDis"))
-			document.write(tableRows(Waste.Stages.Collection,	"Wastewater Collection","wasteCol"))
-			document.write(tableRows(Waste.Stages.Treatment,	"Wastewater Treatment",	"wasteTre"))
-			document.write(tableRows(Waste.Stages.Discharge,	"Wastewater Discharge",	"wasteDis"))
-		</script>
-	</table>
-</div>
+<table style="font-size:11px;display:inline-block;vertical-align:top;">
+	<tr><th colspan=2>LEVEL 1 INPUTS SUMMARY
+	<script>
+		document.write(tableRows(Global.Water,"Water Supply","water"))
+		document.write(tableRows(Global.Waste,"Wastewater","waste"))
+	</script>
+</table>
+<table style="font-size:11px;display:inline-block;vertical-align:top;">
+	<tr><th colspan=2>LEVEL 2 INPUTS SUMMARY
+	<script>
+		document.write(tableRows(Global.Water.Abstraction,	"Water Abstraction",	"waterAbs"))
+		document.write(tableRows(Global.Water.Treatment,	"Water Treatment",		"waterTre"))
+		document.write(tableRows(Global.Water.Distribution,	"Water Distribution",	"waterDis"))
+		document.write(tableRows(Global.Waste.Collection,	"Wastewater Collection","wasteCol"))
+		document.write(tableRows(Global.Waste.Treatment,	"Wastewater Treatment",	"wasteTre"))
+		document.write(tableRows(Global.Waste.Discharge,	"Wastewater Discharge",	"wasteDis"))
+	</script>
+</table>

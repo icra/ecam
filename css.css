@@ -3,7 +3,10 @@ a{font-weight:bold;text-decoration:none}
 a,a:visited,a:hover,a:active {color:#00AFF2;}
 a:hover{text-decoration:underline}
 body{font-family:Arial,sans-serif;overflow-y:scroll}
-button{padding:0.3em;border-radius:0.2em;border:1px solid #ccc}
+/*
+button{padding:0.3em;border-radius:0.2em;border:1px solid #ccc;background:#eee}
+*/
+button{padding:1em}
 div{padding:0.5em;}
 h1,h2,h3,h4{padding:0.6em}
 table{border-collapse:collapse;margin:1em}

@@ -15,5 +15,5 @@
 	<span class=blue style=font-size:1.4em>A</span>ssessment and 
 	<span class=blue style=font-size:1.4em>M</span>onitoring Tool
 </h3>
-<!--DIAGRAM TODO--><img src="img/diagram.png" style="border:1px solid #ccc;width:50%;">
+<!--DIAGRAM TODO--><img src="img/diagram.png" style="border:1px solid #ccc;width:45%;">
 <!--LOGOS--><?php include'logos.php'?>
