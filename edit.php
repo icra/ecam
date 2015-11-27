@@ -1,17 +1,17 @@
 <?php
-	//input
-	if(!isset($_GET['level']))die("no level specified");
-	$level=$_GET['level'];
+	/** THIS PAGE LETS THE USER MODIFY INPUTS AND SEE AUTOMATICALLY THE OUTPUTS */
 
-	//parse sublevel if specified
-	if(isset($_GET['sublevel']))
-		$sublevel=$_GET['sublevel'];
+	//check specified input
+	if(!isset($_GET['level']))die("no level specified");
+	//level: 	mandatory
+	//sublevel: optional
+	$level=$_GET['level'];
+	if(isset($_GET['sublevel']))$sublevel=$_GET['sublevel'];
 ?>
 <!doctype html><html><head>
 	<meta charset=utf-8>
 	<title>ECAM Web App</title>
 	<link rel=stylesheet href="css.css"><style>
-		body{font-size:14px}
 		table{display:inline-block;vertical-align:top;}
 		input.input{width:95%;font-size:18px}
 		td.input{max-height:3em;width:200px;overflow:auto;text-align:right;color:#666;background-color:#eee;cursor:cell}
@@ -125,7 +125,22 @@
 		}
 	</script>
 </head><body onload=init()><center>
-<!--navbar--><?php include"navbar.php"?>
+<!--NAVBAR--><?php include"navbar.php"?>
+
+<!--TITLE-->
+<?php 
+	//Set title for page
+	$title=$level;
+	switch($level)
+	{
+		case "Water":  $title="Water Supply"; break;
+		case "Waste":  $title="Wastewater"; 	break;
+		case "Global": $title="Global"; 		break;
+	}
+	$title=isset($sublevel)? "<a href=edit.php?level=$level>$title</a> &rsaquo; $sublevel" : "$title";
+?>
+<h2><a href=stages.php>Stages</a> &rsaquo; <?php echo $title?></h2>
+<h4>Click fields to change values</h4>
 
 <!--MENU-->
 <div>
@@ -135,19 +150,18 @@
 	<!--SAVE--><button onclick=saveToFile()>&#128190; Save</button>
 </div>
 
-<!--TITLE-->
-<?php 
-	//Set title for page
-	$title=$level;
-	switch($level)
-	{
-		case "Water": $title="Water Supply"; break;
-		case "Waste": $title="Wastewater"; break;
-	}
-	$title=isset($sublevel)? "$title &rsaquo; $sublevel" : $title
-?>
-<h1 onclick=window.location.reload() style=cursor:pointer><a href=inputs.php>Inputs</a> &rsaquo; <?php echo $title?></h1>
-<h4>Click fields to change values</h4>
+
+<!--VOLUMES > ENERGY > EMISSIONS-->
+<div style="background:#eee;">
+	<a href=#>Volumes</a>
+	|
+	<a href=#>Energy</a> 
+	|
+	<a href=#>Emissions</a>
+	(not implemented)
+</div>
+
+<!--SANKEY--> <div><a href=sankey.php>Sankey Example</a> (not implemented)</div>
 
 <!--IO-->
 <div>

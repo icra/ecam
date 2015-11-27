@@ -1,20 +1,24 @@
 *{margin:0px}
+
+/*
+	TESTING ZONE
+	div{border:1px solid #ccc}
+*/
+.inline{display:inline-block;vertical-align:top}
 a{font-weight:bold;text-decoration:none}
 a,a:visited,a:hover,a:active {color:#00AFF2;}
 a:hover{text-decoration:underline}
-body{font-family:Arial,sans-serif;overflow-y:scroll}
+body{font-family:Arial,sans-serif;overflow-y:scroll;font-size:12px}
 /*
 button{padding:0.3em;border-radius:0.2em;border:1px solid #ccc;background:#eee}
 */
-button{padding:1em}
-div{padding:0.5em;}
+button{padding:0.3em}
+div{padding:0.5em}
 h1,h2,h3,h4{padding:0.6em}
-table{border-collapse:collapse;margin:1em}
+table{border-collapse:collapse;}
 th,td{border:1px solid #ccc;padding:0.5em}
 th{background:#dfffff;vertical-align:top}
 hr{ display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
-/*
-*/
-
 /*ECAM blue*/
 .blue{color:#00AFF2;}
+

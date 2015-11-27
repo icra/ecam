@@ -1,56 +1,60 @@
-<?php include'navbar.php'?>
-
-<script>
-	function openAll()
-	{
-		var elements=document.getElementsByTagName('ul')
-		for(var i=0;i<elements.length;elements[i++].style.display='');
-		var botons=document.getElementsByTagName('button')
-		for(var i=0;i<botons.length;i++)
+<!doctype html>
+<html><head>
+	<meta charset=utf-8>
+	<title>ECAM</title>
+	<link rel=stylesheet href="css.css">
+	<script>
+		function openAll()
 		{
-			botons[i].innerHTML=botons[i].innerHTML=='+'?'-':botons[i].innerHTML
+			var elements=document.getElementsByTagName('ul')
+			for(var i=0;i<elements.length;elements[i++].style.display='');
+			var botons=document.getElementsByTagName('button')
+			for(var i=0;i<botons.length;i++)
+			{
+				botons[i].innerHTML=botons[i].innerHTML=='+'?'-':botons[i].innerHTML
+			}
 		}
-	}
-	function collapseAll()
-	{
-		var elements=document.getElementsByTagName('ul')
-		for(var i=0;i<elements.length;elements[i++].style.display='none');
-		document.getElementById('summary').style.display=''
-		var botons=document.getElementsByTagName('button')
-		for(var i=0;i<botons.length;i++)
+		function collapseAll()
 		{
-			botons[i].innerHTML=botons[i].innerHTML=='-'?'+':botons[i].innerHTML
+			var elements=document.getElementsByTagName('ul')
+			for(var i=0;i<elements.length;elements[i++].style.display='none');
+			document.getElementById('summary').style.display=''
+			var botons=document.getElementsByTagName('button')
+			for(var i=0;i<botons.length;i++)
+			{
+				botons[i].innerHTML=botons[i].innerHTML=='-'?'+':botons[i].innerHTML
+			}
 		}
-	}
-	function fadeIn(element,val)
-	{
-		element.style.opacity=val
-		if(val<1)
+		function fadeIn(element,val)
 		{
-			val+=0.1
-			setTimeout(function(){fadeIn(element,val)},20)
+			element.style.opacity=val
+			if(val<1)
+			{
+				val+=0.1
+				setTimeout(function(){fadeIn(element,val)},20)
+			}
 		}
-	}
-	function toggleSymbol(button)
-	{
-		button.innerHTML=button.innerHTML=='+'?'-':'+'
-	}
-	function toggleDisplay(id,button)
-	{
-		var element=document.getElementById(id)
-		if(element.style.display=='none')
+		function toggleSymbol(button)
 		{
-			element.style.display=''
-			fadeIn(element,0)
+			button.innerHTML=button.innerHTML=='+'?'-':'+'
 		}
-		else element.style.display='none'
-		if(button)toggleSymbol(button)
-	}
-</script>
+		function toggleDisplay(id,button)
+		{
+			var element=document.getElementById(id)
+			if(element.style.display=='none')
+			{
+				element.style.display=''
+				fadeIn(element,0)
+			}
+			else element.style.display='none'
+			if(button)toggleSymbol(button)
+		}
+	</script>
+</head><body><center>
+<!--navbar--><?php include'navbar.php'?>
 
 <!--SUMMARY-->
-<!-- task: make this dynamic-->
-<div style="text-align:left;">
+<div style="text-align:left;width:50%;padding:3em">
 	<b>Summary</b> | <a href=# onclick=openAll()>Open all</a> | <a href=# onclick=collapseAll()>Collapse all</a>
 	<ul id=summary>
 		<li><button onclick=toggleDisplay('globalIndicators',this)>+</button>GLOBAL INDICATORS 	

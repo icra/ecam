@@ -52,7 +52,7 @@
 			document.querySelector("[count='"+id+"']").innerHTML=count
 		}
 
-		/** Activate levels depending on cookies */
+		/** Activate stages depending on cookies */
 		function activateLevels()
 		{
 			var Levels =
@@ -98,7 +98,7 @@
 		function tableRows(object,name,family)
 		{
 			//return string
-			var ret="<tr><td colspan=5 style='background:#ddd;text-align:center;font-weight:bold'>"+name
+			var ret="<tr><td colspan=5 style='background:#eee;font-weight:bold'>"+name
 			ret+=": <span count="+family+">0</span>"
 			for(variable in object)
 			{
@@ -144,43 +144,71 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h2 onclick=window.location.reload() style="cursor:pointer">Configuration</h2>
-<!--SUBTITLE--><h4>Activate stages which correspond to your system</h4> 
+<!--TITLE--><h2>Configuration of your system</h2>
+<!--SUBTITLE--><h4>Activate stages which correspond to your system</h4><hr>
 
 <!--SELECT LEVELS-->
-<table>
-	<tr>
-		<!--LEVEL 1-->
-		<th>Level 1
-		<td colspan=3 style="text-align:center;"><label><input type=checkbox id=water onchange=activate(this.id)> Water Supply	</label>
-		<td colspan=3 style="text-align:center;"><label><input type=checkbox id=waste onchange=activate(this.id)> Wastewater	</label>
-	<tr>
-		<!--LEVEL 2-->
-		<th>Level 2
-		<td><label style=color:#ccc><input type=checkbox disabled id=waterAbs class=water onchange=activate(this.id)> Abstraction	</label> 
-		<td><label style=color:#ccc><input type=checkbox disabled id=waterTre class=water onchange=activate(this.id)> Treatment		</label> 
-		<td><label style=color:#ccc><input type=checkbox disabled id=waterDis class=water onchange=activate(this.id)> Distribution	</label> 
-		<td><label style=color:#ccc><input type=checkbox disabled id=wasteCol class=waste onchange=activate(this.id)> Collection	</label> 
-		<td><label style=color:#ccc><input type=checkbox disabled id=wasteTre class=waste onchange=activate(this.id)> Treatment		</label> 
-		<td><label style=color:#ccc><input type=checkbox disabled id=wasteDis class=waste onchange=activate(this.id)> Discharge		</label> 
-</table>
+<div class=inline style="width:20%">
+	<h4>Activate Stages</h4>
+	<table style=font-size:11px>
+		<tr style=color:#444><th>Level 1<th>Level 2
+		<tr><td rowspan=3 style="text-align:center"> <label><input type=checkbox id=water onchange=activate(this.id)> Water Supply	</label>
+			<td>
+				<label style=color:#ccc><input type=checkbox disabled id=waterAbs class=water onchange=activate(this.id)> Abstraction	</label> 
+			<tr><td>
+				<label style=color:#ccc><input type=checkbox disabled id=waterTre class=water onchange=activate(this.id)> Treatment		</label> 
+			<tr><td>
+				<label style=color:#ccc><input type=checkbox disabled id=waterDis class=water onchange=activate(this.id)> Distribution	</label> 
+		<tr><td rowspan=3 style="text-align:center"> <label><input type=checkbox id=waste onchange=activate(this.id)> Wastewater	</label>
+			<td>
+				<label style=color:#ccc><input type=checkbox disabled id=wasteCol class=waste onchange=activate(this.id)> Collection	</label> 
+			<tr><td>
+				<label style=color:#ccc><input type=checkbox disabled id=wasteTre class=waste onchange=activate(this.id)> Treatment		</label> 
+			<tr><td>
+				<label style=color:#ccc><input type=checkbox disabled id=wasteDis class=waste onchange=activate(this.id)> Discharge		</label> 
+	</table>
+</div>
 
 <!--AVAILABLE INPUTS-->
-<table style="font-size:11px;display:inline-block;vertical-align:top;">
-	<tr><th colspan=2>LEVEL 1 INPUTS SUMMARY
-	<script>
-		document.write(tableRows(Global.Water,"Water Supply","water"))
-		document.write(tableRows(Global.Waste,"Wastewater","waste"))
-	</script>
-</table>
-<table style="font-size:11px;display:inline-block;vertical-align:top;">
-	<tr><th colspan=2>LEVEL 2 INPUTS SUMMARY
-	<script>
-		document.write(tableRows(Global.Water.Abstraction,	"Water Abstraction",	"waterAbs"))
-		document.write(tableRows(Global.Water.Treatment,	"Water Treatment",		"waterTre"))
-		document.write(tableRows(Global.Water.Distribution,	"Water Distribution",	"waterDis"))
-		document.write(tableRows(Global.Waste.Collection,	"Wastewater Collection","wasteCol"))
-		document.write(tableRows(Global.Waste.Treatment,	"Wastewater Treatment",	"wasteTre"))
-		document.write(tableRows(Global.Waste.Discharge,	"Wastewater Discharge",	"wasteDis"))
-	</script>
+<div class=inline style="width:75%;text-align:left">
+	<h4>All Active Inputs</h4>
+	<table style="font-size:11px;display:inline-block;vertical-align:top;">
+		<tr><th colspan=2>Level 1
+		<script>
+			document.write(tableRows(Global.Water,"Water Supply","water"))
+			document.write(tableRows(Global.Waste,"Wastewater","waste"))
+		</script>
+	</table>
+	<table style="font-size:11px;display:inline-block;vertical-align:top;">
+		<tr><th colspan=2>Level 2
+		<script>
+			document.write(tableRows(Global.Water.Abstraction,	"Water Abstraction",	"waterAbs"))
+			document.write(tableRows(Global.Water.Treatment,	"Water Treatment",		"waterTre"))
+			document.write(tableRows(Global.Water.Distribution,	"Water Distribution",	"waterDis"))
+			document.write(tableRows(Global.Waste.Collection,	"Wastewater Collection","wasteCol"))
+			document.write(tableRows(Global.Waste.Treatment,	"Wastewater Treatment",	"wasteTre"))
+			document.write(tableRows(Global.Waste.Discharge,	"Wastewater Discharge",	"wasteDis"))
+		</script>
+	</table>
+</div><hr>
+
+<!--SYSTEM DESCRIPTION QUESTIONNAIRE-->
+<h3>System description (not implemented)</h3>
+<table>
+	<tr><td rowspan=3 style=background:#af0>Water supply
+			<ul>
+				<li>Is your system producing energy? 	<select><option>yes<option>no</select>
+				<li>Question 2							<select><option>yes<option>no</select>
+			</ul>
+		<td style=background:#af0>Abstraction
+			<ul>
+				<li>Question 1 	<select><option>yes<option>no</select>
+				<li>Question 2	<select><option>yes<option>no</select>
+			</ul>
+		<tr><td>Treatment
+		<tr><td>Distribution
+	<tr><td rowspan=3>Wastewater
+		<td>Collection
+		<tr><td>Treatment
+		<tr><td>Discharge
 </table>
