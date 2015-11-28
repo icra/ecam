@@ -1,14 +1,17 @@
 /** COOKIES */
 
-/** cookies for level selected:
-	"water"
-	"waterAbs"
-	"waterTre"
-	"waterDis"
-	"waste"
-	"wasteCol"
-	"wasteTre"
-	"wasteDis"
+/** 
+	global cookie for all values
+		"GLOBAL"
+	cookies for level selected:
+		"water"
+		"waterAbs"
+		"waterTre"
+		"waterDis"
+		"waste"
+		"wasteCol"
+		"wasteTre"
+		"wasteDis"
 */
 
 /** New cookie */

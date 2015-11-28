@@ -3,23 +3,52 @@
 	<title>ECAM Web Tool</title>
 	<link rel=stylesheet href="css.css">
 	<style>
+		th{vertical-align:middle}
 		th,td{padding:1em}
 		input,textarea{padding:0.5em}
 	</style>
-</head><body><center>
+	<script src=dataModel/global.js></script>
+	<script src=js/cookies.js></script>
+	<script src=js/updateGlobalFromCookies.js></script>
+	<script>
+		/** Create a row for a field in Global.General */
+		function tableRow(field,input,type)
+		{
+			input = input || "input"
+			type = type || "text"
+			var onchange="onchange=\"updateField('"+field+"',this.value)\""
+			var ret="<tr><th>"+field+"<td>"
+			if(input=="textarea")
+				ret+="<textarea rows=5 cols=50 "+onchange+">"+Global.General[field]+"</textarea>"
+			else
+				ret+="<input type='"+type+"' value='"+Global.General[field]+"' "+onchange+">"
+			return ret
+		}
+		function updateField(field,newValue)
+		{
+			Global.General[field]=newValue
+			init()
+		}
+		function updateForm()
+		{
+			var t = document.getElementById('form')
+			while(t.rows.length>0)t.deleteRow(-1)
+			t.innerHTML+=tableRow("Name")
+			t.innerHTML+=tableRow("Location")
+			t.innerHTML+=tableRow("Assessment Period Start",'input','date')
+			t.innerHTML+=tableRow("Assessment Period End",'input','date')
+			t.innerHTML+=tableRow("Comments",'textarea','date')
+		}
+		function init()
+		{
+			updateForm()
+			updateResult()
+		}
+	</script>
+</head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
+<!--LOAD SAVE CLEAR--><?php include"loadSaveClear.php"?>
 <!--TITLE--><h2>Get Started</h2>
-<!--SUBTITLE--><h4>General Data</h4>
-
-<!--FORM-->
-<table style="text-align:left;box-shadow:0 9px 5px -5px rgba(0,0,0,0.3);">
-	<tr><th>Name				<td><input value="Sedacusco" >
-	<tr><th>Location			<td><input value="Cusco">
-	<tr><th>Assessment Period	<td>
-		Start 	<input type=date value=""> 
-		End		<input type=date value="">
-	<tr><th>Comments			<td><textarea rows=5 cols=50>Comments</textarea>
-	<tr><th><td>
-	<!--SAVE--><button>Save</button>
-</table>
-
+<!--SUBTITLE--><h4>Edit General Data of your system. Then go to <a href=configuration.php>Configuration</a>.</h4>
+<!--FORM--><table id=form style="text-align:left;box-shadow:0 9px 5px -5px rgba(0,0,0,0.3);"></table>
+<!--CURRENT JSON--><?php include'currentJSON.php'?>

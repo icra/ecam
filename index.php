@@ -4,7 +4,6 @@
 	<link rel=stylesheet href="css.css"><style>
 		img{margin:1em}
 	</style>
-	<script src="js/cookies.js"></script>
 </head><body><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1 class=blue style=padding-bottom:0>Home - ECAM</h1>

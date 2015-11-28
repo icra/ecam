@@ -12,32 +12,28 @@
 	<meta charset=utf-8>
 	<title>ECAM Web App</title>
 	<link rel=stylesheet href="css.css"><style>
-		table{display:inline-block;vertical-align:top;}
-		input.input{width:95%;font-size:18px}
-		td.input{max-height:3em;width:200px;overflow:auto;text-align:right;color:#666;background-color:#eee;cursor:cell}
+		td.input input{width:95%;font-size:18px}
+		td.input{width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
 	</style>
 	<script src="dataModel/info.js"></script><!--All variable descriptions and units object here-->
 	<script src="dataModel/global.js"></script><!--Default Global object here-->
+	<script src="js/cookies.js"></script><!--Default Global object here-->
+	<script src="js/updateGlobalFromCookies.js"></script><!--Default Global object here-->
 	<script>
 		/** 
 		 * GUI utilities
 		 * Note: Comments follow JSdoc structure (http://usejsdoc.org/about-getting-started.html) 
 		 */
+
+		//OVERWRITE GLOBAL OBJECT IF GLOBAL COOKIE IS SET
+		//if(getCookie("GLOBAL")) Global=JSON.parse(getCookie("GLOBAL"))
+
 		<?php
 			if(isset($sublevel))
 				echo "var CurrentLevel = Global['$level']['$sublevel']";
 			else
 				echo "var CurrentLevel = Global['$level'];"
 		?>
-
-		/** Generate a json/text file of the Global object */
-		function saveToFile()
-		{
-			var link=document.createElement('a')
-			link.href="data:text/json;charset=utf-8,"+JSON.stringify(Global)
-			link.download="data.json"
-			link.click()
-		}
 
 		/** 
 		 * Transform a <td> cell to make modifications to fields from the Global object
@@ -110,12 +106,6 @@
 			init() //update tables
 		}
 
-		/** Stringify Global object and display it */
-		function updateResult()
-		{
-			document.getElementById('global').innerHTML=JSON.stringify(Global,null,"    ")
-		}
-
 		/** Update all tables */
 		function init()
 		{
@@ -126,59 +116,49 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
+<!--LOAD SAVE CLEAR--><?php include"loadSaveClear.php"?>
 
-<!--TITLE-->
-<?php 
-	//Set title for page
-	$title=$level;
-	switch($level)
-	{
-		case "Water":  $title="Water Supply"; break;
-		case "Waste":  $title="Wastewater"; 	break;
-		case "Global": $title="Global"; 		break;
-	}
-	$title=isset($sublevel)? "<a href=edit.php?level=$level>$title</a> &rsaquo; $sublevel" : "$title";
-?>
-<h2><a href=stages.php>Stages</a> &rsaquo; <?php echo $title?></h2>
-<h4>Click fields to change values</h4>
-
-<!--MENU-->
-<div>
-	<!--LOAD-->
-	<button><label for=loadfile>&#128194; Load</label></button> |
-	<input type=file id=loadfile style=display:none accept=".json" onchange="alert('under construction')">
-	<!--SAVE--><button onclick=saveToFile()>&#128190; Save</button>
-</div>
-
-
-<!--VOLUMES > ENERGY > EMISSIONS-->
-<div style="background:#eee;">
+<!-- TODO VOLUMES > ENERGY > EMISSIONS-->
+<div style="border:1px solid #ccc;">
 	<a href=#>Volumes</a>
 	|
 	<a href=#>Energy</a> 
 	|
 	<a href=#>Emissions</a>
+	|
+	<a href=sankey.php>Sankey Example</a> 
 	(not implemented)
 </div>
 
-<!--SANKEY--> <div><a href=sankey.php>Sankey Example</a> (not implemented)</div>
+<!--TITLE-->
+<?php 
+	//Set title for page
+	switch($level)
+	{
+		case "Global": $title="Global"; 		break;
+		case "Water":  $title="Water Supply"; break;
+		case "Waste":  $title="Wastewater"; 	break;
+	}
+	if($title!="Global")
+		$title=isset($sublevel)?"<a href=edit.php?level=Global>Global</a> &rsaquo; <a href=edit.php?level=$level>$title</a> &rsaquo; $sublevel" : "<a href=edit.php?level=Global>Global</a> &rsaquo; $title";
+?>
+<h2><a href=stages.php>Stages</a> &rsaquo; <?php echo $title?></h2>
+
+<!--HELP--><h4>Click the grey boxes to edit Inputs. Key Performance Indicators appear in yellow.</h4>
 
 <!--IO-->
 <div>
 	<!--INPUTS-->
-	<table id=inputs>
+	<table id=inputs class=inline>
 		<tr><th colspan=5>INPUTS
 		<tr><th>Code<th>Description<th>Current Value<th>Unit<th>Quality
 	</table>
 
 	<!--OUTPUTS-->
-	<table id=outputs style=background:yellow>
+	<table id=outputs class=inline style=background:yellow>
 		<tr><th colspan=4>OUTPUTS - Key Performance Indicators
 		<tr><th>Code<th>Description<th>Current Value<th>Unit
 	</table>
-</div>
+</div><hr>
 
-<!--CURRENT GLOBAL OBJECT IN JSON-->
-<div style="text-align:left;border:1px solid #ccc;margin:1em">
-	<pre><b>Raw Data</b><br><span id=global></span></pre>
-</div>
+<!--CURRENT JSON--><?php include'currentJSON.php'?>

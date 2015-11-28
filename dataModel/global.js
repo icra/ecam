@@ -21,6 +21,27 @@
 
 var Global =
 {
+	"General":
+	{
+		"Name":"Sedacusco",
+		"Location":"Cusco",
+		"Assessment Period Start":"",
+		"Assessment Period End":"",
+		"Assessment Period Duration":function(){},
+		"Comments":"Comments",
+		/** These fields have the same name as the cookies they enable (boolean) */
+		"Active Stages":
+		{
+			"water":0,
+			"waterAbs":0,
+			"waterTre":0,
+			"waterDis":0,
+			"waste":0,
+			"wasteCol":0,
+			"wasteTre":0,
+			"wasteDis":0,
+		}
+	},
 	"Global":	/** 01. GLOBAL */
 	{
 		/** Inputs */

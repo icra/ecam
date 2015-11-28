@@ -4,19 +4,16 @@
 	<link rel=stylesheet href="css.css"><style>
 		td{text-align:left}
 	</style>
-	<script src="js/cookies.js"></script>
 	<script src="dataModel/global.js"></script>
 	<script src="dataModel/info.js"></script>
+	<script src="js/cookies.js"></script>
+	<script src="js/updateGlobalFromCookies.js"></script>
 	<script>
 		/** Enable or disable <input type=checkbox id=id> */
 		function activate(id)
 		{
 			//input element that we are clicking
 			var checkbox  = document.getElementById(id)
-
-			//set or remove cookie
-			if(checkbox.checked) 	setCookie(id,"true",10)
-			else 					removeCookie(id)
 
 			//background color = green or white depending on checkbox
 			checkbox.parentNode.parentNode.style.backgroundColor=checkbox.checked?"#af0":""
@@ -36,7 +33,8 @@
 					elements[i].setAttribute('disabled',true)
 					elements[i].parentNode.style.color="#ccc"
 					elements[i].parentNode.parentNode.style.backgroundColor=""
-					removeCookie(elements[i].id)
+					//modifiy Global Active Stages
+					Global.General["Active Stages"][elements[i].id]=0
 					//hide inputs corresponding to sublevels
 					inputVisibility(elements[i].id,checkbox.checked)
 					//set input count to 0
@@ -50,51 +48,29 @@
 			//change the "<span count=id>number</span>" for this level
 			var count = checkbox.checked ? document.querySelectorAll("[family='"+id+"']").length:0
 			document.querySelector("[count='"+id+"']").innerHTML=count
+
+			//update Global.General["Active Stages"][id]
+			var newState = checkbox.checked ? 1:0
+			Global.General["Active Stages"][id]=newState
+			updateResult()
 		}
 
 		/** Activate stages depending on cookies */
 		function activateLevels()
 		{
-			var Levels =
-			{
-				"water":
-				[
-					"waterAbs",
-					"waterTre",
-					"waterDis",
-				],
-				"waste":
-				[
-					"wasteCol",
-					"wasteTre",
-					"wasteDis",
-				]
-			}
 			//go over Levels
-			for(level in Levels)
+			for(stage in Global.General["Active Stages"])
 			{
-				console.log("Level '"+level+"': "+getCookie(level))
-				if(getCookie(level))
+				if(Global["General"]["Active Stages"][stage])
 				{
 					//check level checkbox
-					document.getElementById(level).checked=true
-					activate(level)
-					//go over sublevels
-					Levels[level].forEach(function(sublevel)
-					{
-						console.log("	Sublevel '"+sublevel+"': "+getCookie(sublevel))
-						if(getCookie(sublevel))
-						{
-							//check sublevel checkbox
-							document.getElementById(sublevel).checked=true
-							activate(sublevel)
-						}
-					})
+					document.getElementById(stage).checked=true
+					activate(stage)
 				}
 			}
 		}
 
-		//** Create rows for a table with specified object
+		//** Create rows and columns for a table with specified object
 		function tableRows(object,name,family)
 		{
 			//return string
@@ -130,6 +106,7 @@
 		function init()
 		{
 			activateLevels()
+			updateResult()
 		}
 
 		function fadeIn(element,val)
@@ -144,13 +121,14 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
+<!--LOAD SAVE CLEAR--><?php include"loadSaveClear.php"?>
 <!--TITLE--><h2>Configuration of your system</h2>
-<!--SUBTITLE--><h4>Activate stages which correspond to your system</h4><hr>
+<!--SUBTITLE--><h4>Activate the stages which correspond to your system. Then go to <a href=stages.php>Stages</a>.</h4><hr>
 
 <!--SELECT LEVELS-->
 <div class=inline style="width:20%">
 	<h4>Activate Stages</h4>
-	<table style=font-size:11px>
+	<table style=font-size:15px>
 		<tr style=color:#444><th>Level 1<th>Level 2
 		<tr><td rowspan=3 style="text-align:center"> <label><input type=checkbox id=water onchange=activate(this.id)> Water Supply	</label>
 			<td>
@@ -171,44 +149,51 @@
 
 <!--AVAILABLE INPUTS-->
 <div class=inline style="width:75%;text-align:left">
-	<h4>All Active Inputs</h4>
-	<table style="font-size:11px;display:inline-block;vertical-align:top;">
-		<tr><th colspan=2>Level 1
+	<h4>Active Inputs For All Stages (Summary)</h4>
+	<div class=inline style="font-size:11px;width:35%;padding:0">
+	<table style=width:100%>
+		<tr><th colspan=2>Level 1 Inputs
 		<script>
 			document.write(tableRows(Global.Water,"Water Supply","water"))
 			document.write(tableRows(Global.Waste,"Wastewater","waste"))
 		</script>
 	</table>
-	<table style="font-size:11px;display:inline-block;vertical-align:top;">
-		<tr><th colspan=2>Level 2
-		<script>
-			document.write(tableRows(Global.Water.Abstraction,	"Water Abstraction",	"waterAbs"))
-			document.write(tableRows(Global.Water.Treatment,	"Water Treatment",		"waterTre"))
-			document.write(tableRows(Global.Water.Distribution,	"Water Distribution",	"waterDis"))
-			document.write(tableRows(Global.Waste.Collection,	"Wastewater Collection","wasteCol"))
-			document.write(tableRows(Global.Waste.Treatment,	"Wastewater Treatment",	"wasteTre"))
-			document.write(tableRows(Global.Waste.Discharge,	"Wastewater Discharge",	"wasteDis"))
-		</script>
-	</table>
+	</div>
+	<div class=inline style="font-size:11px;width:55%;padding:0">
+		<table style=";width:100%">
+			<tr><th colspan=2>Level 2 Inputs
+			<script>
+				document.write(tableRows(Global.Water.Abstraction,	"Water Abstraction",	"waterAbs"))
+				document.write(tableRows(Global.Water.Treatment,	"Water Treatment",		"waterTre"))
+				document.write(tableRows(Global.Water.Distribution,	"Water Distribution",	"waterDis"))
+				document.write(tableRows(Global.Waste.Collection,	"Wastewater Collection","wasteCol"))
+				document.write(tableRows(Global.Waste.Treatment,	"Wastewater Treatment",	"wasteTre"))
+				document.write(tableRows(Global.Waste.Discharge,	"Wastewater Discharge",	"wasteDis"))
+			</script>
+		</table>
+	</div>
 </div><hr>
 
 <!--SYSTEM DESCRIPTION QUESTIONNAIRE-->
 <h3>System description (not implemented)</h3>
-<table>
-	<tr><td rowspan=3 style=background:#af0>Water supply
-			<ul>
-				<li>Is your system producing energy? 	<select><option>yes<option>no</select>
-				<li>Question 2							<select><option>yes<option>no</select>
-			</ul>
-		<td style=background:#af0>Abstraction
-			<ul>
-				<li>Question 1 	<select><option>yes<option>no</select>
-				<li>Question 2	<select><option>yes<option>no</select>
-			</ul>
-		<tr><td>Treatment
-		<tr><td>Distribution
-	<tr><td rowspan=3>Wastewater
-		<td>Collection
-		<tr><td>Treatment
-		<tr><td>Discharge
+<table class=inline>
+	<tr> <td>Is your system producing energy?  <td> <select> <option>No <option>Yes </select>
+	<tr> <td>Is your system doing X?  <td> <select> <option>No <option>Yes </select>
+	<tr> <td>Is your system doing Y?  <td> <select> <option>No <option>Yes </select>
+	<tr> <td>Is your system doing Z?  <td> <select> <option>No <option>Yes </select>
 </table>
+<!--TBD
+	<table class=inline>
+		<tr><td rowspan=3>Water supply
+			<td>Abstraction
+			<tr><td>Treatment
+			<tr><td>Distribution
+		<tr><td rowspan=3>Wastewater
+			<td>Collection
+			<tr><td>Treatment
+			<tr><td>Discharge
+	</table>
+-->
+<hr>
+
+<!--CURRENT JSON--><?php include'currentJSON.php'?>

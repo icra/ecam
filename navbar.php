@@ -19,7 +19,7 @@
 	}
 </style>
 
-<div style="background:#dfffff;padding:0.1em 0em 0em 0em;font-size:19px">
+<div style="background:#dfffff;padding:0.1em 0em 0em 0em;font-size:18px">
 	<?php
 		//menu symbol (3 bars)
 		echo "&#9776; "; 
