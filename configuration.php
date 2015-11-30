@@ -12,6 +12,7 @@
 		/** Enable or disable <input type=checkbox id=id> */
 		function activate(id)
 		{
+			if(id=="global")return
 			//input element that we are clicking
 			var checkbox  = document.getElementById(id)
 
