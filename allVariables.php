@@ -19,6 +19,7 @@
 				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
 				newRow.insertCell(-1).innerHTML=Info[field].description
 				newRow.insertCell(-1).innerHTML=Info[field].unit
+				newRow.insertCell(-1).innerHTML=555
 				i++
 			}
 		}
@@ -30,10 +31,11 @@
 </head><body onload=init()><center>
 <!--navbar--><?php include"navbar.php"?>
 
-<!--title--><h2>All Variables</h2>
+<!--title--><h2>All Variables ~ Summary</h2>
 
 <!--all variables-->
 <table id=all style=font-size:14px>
-	<tr><th>Nº<th>Variable<th>Description<th>Unit
+	<tr><th>Nº<th>Variable<th>Description<th>Unit<th>Current Value
+	<tr><th colspan=5 style=background:#ccc>Stage XXX
 </table>
 

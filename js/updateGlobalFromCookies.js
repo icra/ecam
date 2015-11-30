@@ -1,14 +1,14 @@
 //OVERWRITE GLOBAL OBJECT IF GLOBAL COOKIE IS SET
 if(getCookie("GLOBAL")) 
 {
-	//copy updated fields from cookie "GLOBAL" to Global object
+	//copy updated fields from cookie "GLOBAL" (stringified) to Global object
 	copyFieldsFrom(JSON.parse(getCookie("GLOBAL")),"Global")
 }
 
-/** Way to update Global object since JSON.stringify does not save fields that are functions */
+/** Way to update Global object, since JSON.stringify does not stringify fields that are functions */
 function copyFieldsFrom(object,name)
 {
-	//go over fields
+	//go over all fields, which will be always strings or numbers
 	for(field in object)
 	{
 		//if field is also object, recursive call

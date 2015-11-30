@@ -2,7 +2,7 @@
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
 	<link rel=stylesheet href="css.css"><style>
-		td{vertical-align:top;padding:0.5em;font-size:18px}
+		td{vertical-align:middle;padding:1.5em;font-size:15px}
 	</style>
 	<script src="dataModel/global.js"></script>
 	<script src="dataModel/info.js"></script>
@@ -29,6 +29,7 @@
 				}
 			}
 		}
+
 		function init()
 		{
 			turnOffLinks()
@@ -37,9 +38,9 @@
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h2>Stages of your system</h2>
-<!--HELP--><h4>Click the stage you want to work on. To activate stages go to <a href=configuration.php>Configuration</a>.</h4><hr>
+<!--HELP--><h3>Click the stage you want to work on. To activate stages go to <a href=configuration.php>Configuration</a>.</h3>
 
-<!--GO TO EDIT.PHP TABLE-->
+<!--NAVIGATION TABLE-->
 <table style="text-align:center">
 	<tr>
 		<th style="font-size:13px">Level 0
@@ -58,4 +59,6 @@
 			<tr><td stage=wasteDis>	<a title="Active Stage" href="edit.php?level=Waste&sublevel=Discharge"		>Discharge</a>
 </table><hr>
 
-<!--TODO--><div> TBD: diagram in SVG here </div>
+<!--TODO--><div> <b>TBD</b>: more navigational diagram in SVG here</div>
+<img src=img/icon-stage.png width=5%>
+

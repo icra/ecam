@@ -25,10 +25,15 @@ var Global =
 	{
 		"Name":"Sedacusco",
 		"Location":"Cusco",
-		"Assessment Period Start":"",
-		"Assessment Period End":"",
-		"Assessment Period Duration":function(){},
-		"Comments":"Comments",
+		"Assessment Period Start":"2016-01-01",
+		"Assessment Period End":"2016-01-15",
+		"Days":function()
+		{
+			var startDate = new Date(Global.General["Assessment Period Start"])
+			var finalDate = new Date(Global.General["Assessment Period End"])
+			return (finalDate-startDate)/1000/60/60/24;
+		},
+		"Comments":"Write comments here",
 		/** These fields have the same name as the cookies they enable (boolean) */
 		"Active Stages":
 		{
@@ -42,6 +47,7 @@ var Global =
 			"wasteDis":0,
 		}
 	},
+
 	"Global":	/** 01. GLOBAL */
 	{
 		/** Inputs */

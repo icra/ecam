@@ -14,7 +14,6 @@
 	<span class=blue style=font-size:1.4em>A</span>ssessment and 
 	<span class=blue style=font-size:1.4em>M</span>onitoring Tool
 </h3>
-
-<!--DIAGRAM TODO--><?php include'diagram.php'?>
-
+<!--QUICKSTART--><div>First time using the ECAM Web Tool? <a>Quickstart</a></div>
+<!--DIAGRAM--><?php include'diagram.php'?>
 <!--LOGOS--><?php include'logos.php'?>

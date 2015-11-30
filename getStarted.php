@@ -37,6 +37,7 @@
 			t.innerHTML+=tableRow("Location")
 			t.innerHTML+=tableRow("Assessment Period Start",'input','date')
 			t.innerHTML+=tableRow("Assessment Period End",'input','date')
+			t.innerHTML+="<tr><th>Assessment Period<td>"+Global.General.Days()+" days"
 			t.innerHTML+=tableRow("Comments",'textarea','date')
 		}
 		function init()
@@ -49,6 +50,7 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--LOAD SAVE CLEAR--><?php include"loadSaveClear.php"?>
 <!--TITLE--><h2>Get Started</h2>
-<!--SUBTITLE--><h4>Edit General Data of your system. Then go to <a href=configuration.php>Configuration</a>.</h4>
+<!--SUBTITLE--><h4>Edit General Data of your system</h4>
 <!--FORM--><table id=form style="text-align:left;box-shadow:0 9px 5px -5px rgba(0,0,0,0.3);"></table>
+<!--NEXT--> <div style=margin:1em> <button>Next</button> </div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

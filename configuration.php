@@ -18,6 +18,17 @@
 			//background color = green or white depending on checkbox
 			checkbox.parentNode.parentNode.style.backgroundColor=checkbox.checked?"#af0":""
 
+			//enable link if checbox.checked //TODO
+			if(checkbox.checked)
+			{
+				//add link
+			}
+			else
+			{
+				//remove link
+			}
+
+
 			//sub elements: they have className=checkbox.id
 			var elements=document.getElementsByClassName(id)
 			for(var i=0;i<elements.length;i++)
@@ -123,11 +134,10 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--LOAD SAVE CLEAR--><?php include"loadSaveClear.php"?>
 <!--TITLE--><h2>Configuration of your system</h2>
-<!--SUBTITLE--><h4>Activate the stages which correspond to your system. Then go to <a href=stages.php>Stages</a>.</h4><hr>
+<!--SUBTITLE--><h4>Activate the stages which correspond to your system.</h4>
 
 <!--SELECT LEVELS-->
 <div class=inline style="width:20%">
-	<h4>Activate Stages</h4>
 	<table style=font-size:15px>
 		<tr style=color:#444><th>Level 1<th>Level 2
 		<tr><td rowspan=3 style="text-align:center"> <label><input type=checkbox id=water onchange=activate(this.id)> Water Supply	</label>
@@ -147,9 +157,9 @@
 	</table>
 </div>
 
-<!--AVAILABLE INPUTS-->
+<!--AVAILABLE INPUTS
 <div class=inline style="width:75%;text-align:left">
-	<h4>Active Inputs For All Stages (Summary)</h4>
+	<h4>Enabled Inputs Sorted By Stage (Summary)</h4>
 	<div class=inline style="font-size:11px;width:35%;padding:0">
 	<table style=width:100%>
 		<tr><th colspan=2>Level 1 Inputs
@@ -172,15 +182,44 @@
 			</script>
 		</table>
 	</div>
-</div><hr>
+</div>
+--><hr>
 
 <!--SYSTEM DESCRIPTION QUESTIONNAIRE-->
 <h3>System description (not implemented)</h3>
 <table class=inline>
-	<tr> <td>Is your system producing energy?  <td> <select> <option>No <option>Yes </select>
-	<tr> <td>Is your system doing X?  <td> <select> <option>No <option>Yes </select>
-	<tr> <td>Is your system doing Y?  <td> <select> <option>No <option>Yes </select>
-	<tr> <td>Is your system doing Z?  <td> <select> <option>No <option>Yes </select>
+	<tr><th>Select stage						<th> 
+		<select>
+			<script>
+				//this should be automatically updated, now it's fixed
+				function updateSystemDescriptionSelectStage()
+				{
+					for(field in Global.General["Active Stages"])
+					{
+						if(Global.General["Active Stages"][field])
+						{
+							switch(field)
+							{
+								case "water":field="Water Supply (Level 1)";break;
+								case "waterAbs":field="Water Abstraction (Level 2)";break;
+								case "waterTre":field="Water Treatment (Level 2)";break;
+								case "waterDis":field="Water Distribution (Level 2)";break;
+								case "wasteCol":field="Wastewater Collection (Level 2)";break;
+								case "wasteTre":field="Wastewater Treatment (Level 2)";break;
+								case "wasteDis":field="Wastewater Discharge (Level 2)";break;
+							}
+							document.write("<option>"+field+"</option>")
+						}
+					}
+				}
+				updateSystemDescriptionSelectStage()
+			</script>
+		</select>
+	<tr> <td>Is your system producing energy?  	<td> <select> <option>No <option>Yes </select>
+	<tr> <td>Is your topography flat?  			<td> <select> <option>No <option>Yes </select>
+	<tr> <td>Do you want other emissions?		<td> <select> <option>No <option>Yes </select>
+	<tr> <td>Is your system doing X?  			<td> <select> <option>No <option>Yes </select>
+	<tr> <td>Is your system doing Y?  			<td> <select> <option>No <option>Yes </select>
 </table>
 <!--TBD
 	<table class=inline>
@@ -194,6 +233,5 @@
 			<tr><td>Discharge
 	</table>
 -->
-<hr>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

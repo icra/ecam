@@ -1,17 +1,5 @@
-/** COOKIES */
-
-/** 
-	global cookie for all values
-		"GLOBAL"
-	cookies for level selected:
-		"water"
-		"waterAbs"
-		"waterTre"
-		"waterDis"
-		"waste"
-		"wasteCol"
-		"wasteTre"
-		"wasteDis"
+/** RAW COOKIES FUNCTIONS 
+	All values that the user inputs are in cookie "GLOBAL"
 */
 
 /** New cookie */

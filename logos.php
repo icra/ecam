@@ -1,5 +1,5 @@
 
-<div>
+<div style=background:#afffff>
 	<style>
 		img.logo{
 			width:150px;

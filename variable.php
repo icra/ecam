@@ -18,6 +18,8 @@
 
 <!--TITLE--><h2><a href=allVariables.php>All variables</a> &rsaquo;  <?php echo $id?></h2>
 
+<h4>Detailed info</h4>
+
 <!--VARIABLE INFO-->
 <table style="text-align:left">
 	<tr><th>Active 
