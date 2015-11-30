@@ -5,27 +5,53 @@
 	</style>
 	<script src="dataModel/info.js"></script><!--All variable descriptions and units object here-->
 	<script src="dataModel/global.js"></script><!--Default Global object here-->
+	<script src=js/cookies.js></script>
+	<script src=js/updateGlobalFromCookies.js></script>
 	<script>
-		/** Redisplay table id=all */
-		function update()
-		{
-			var t=document.getElementById('all')
-			while(t.rows.length>2)t.deleteRow(-1)
-			var i=1
-			for(field in Info)
-			{
-				var newRow=t.insertRow(-1)
-				newRow.insertCell(-1).innerHTML=i
-				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
-				newRow.insertCell(-1).innerHTML=Info[field].description
-				newRow.insertCell(-1).innerHTML=Info[field].unit
-				newRow.insertCell(-1).innerHTML=555
-				i++
-			}
-		}
 		function init()
 		{
-			update()
+			//
+		}
+
+		//** Create rows and columns for a table with specified object
+		function tableRows(object,name,family)
+		{
+			//return string
+			var ret="<tr><td colspan=5 style='background:#eee;font-weight:bold'>"+name
+			ret+=": <span count="+family+">0</span>"
+			for(variable in object)
+			{
+				//only numbers
+				if(typeof(object[variable])!="number")continue
+
+				ret+="<tr style=display:none family='"+family+"'>"+
+					"<td style='font-weight:bold'><a class=blue href=variable.php?id="+variable+">"+variable+"</a>"+
+					"<td>"+Info[variable].description
+			}
+			document.write(ret)
+
+			//show or hide inputs corresponding to this level
+			var active = Global.General["Active Stages"][family]
+			inputVisibility(family,active)
+			//change the "<span count=id>number</span>" for this level
+			var count = active ? document.querySelectorAll("[family='"+family+"']").length:0
+			document.querySelector("[count='"+family+"']").innerHTML=count
+
+		}
+
+		//** Display or hide inputs of the specified family (string) and display (true or false) */
+		function inputVisibility(family,display)
+		{
+			//style.display string
+			display=display?"":"none"
+			//select elements: <tr family=family>
+			var elements=document.querySelectorAll("tr[family='"+family+"']")
+			//loop elements
+			for(var i=0;i<elements.length;i++)
+			{
+				//fadeIn(elements[i],0)
+				elements[i].style.display=display
+			}
 		}
 	</script>
 </head><body onload=init()><center>
@@ -33,9 +59,30 @@
 
 <!--title--><h2>All Variables ~ Summary</h2>
 
-<!--all variables-->
-<table id=all style=font-size:14px>
-	<tr><th>Nº<th>Variable<th>Description<th>Unit<th>Current Value
-	<tr><th colspan=5 style=background:#ccc>Stage XXX
-</table>
-
+<!--AVAILABLE INPUTS-->
+<div class=inline style="width:75%;text-align:left">
+	<h4>Enabled Inputs Sorted By Stage (Summary)</h4>
+	<div class=inline style="font-size:11px;width:35%;padding:0">
+	<table style=width:100%>
+		<tr><th colspan=2>Level 1 Inputs
+		<script>
+			tableRows(Global.Global,"Global","global")
+			tableRows(Global.Water,"Water Supply","water")
+			tableRows(Global.Waste,"Wastewater","waste")
+		</script>
+	</table>
+	</div>
+	<div class=inline style="font-size:11px;width:55%;padding:0">
+		<table style=";width:100%">
+			<tr><th colspan=2>Level 2 Inputs
+			<script>
+				tableRows(Global.Water.Abstraction,	"Water Abstraction",	"waterAbs")
+				tableRows(Global.Water.Treatment,	"Water Treatment",		"waterTre")
+				tableRows(Global.Water.Distribution,	"Water Distribution",	"waterDis")
+				tableRows(Global.Waste.Collection,	"Wastewater Collection","wasteCol")
+				tableRows(Global.Waste.Treatment,	"Wastewater Treatment",	"wasteTre")
+				tableRows(Global.Waste.Discharge,	"Wastewater Discharge",	"wasteDis")
+			</script>
+		</table>
+	</div>
+</div>

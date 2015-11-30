@@ -46,19 +46,9 @@
 					elements[i].parentNode.parentNode.style.backgroundColor=""
 					//modifiy Global Active Stages
 					Global.General["Active Stages"][elements[i].id]=0
-					//hide inputs corresponding to sublevels
-					inputVisibility(elements[i].id,checkbox.checked)
-					//set input count to 0
-					document.querySelector("[count='"+elements[i].id+"']").innerHTML=0
 				}
 			}
 
-			//show or hide inputs corresponding to this level
-			inputVisibility(id,checkbox.checked)
-
-			//change the "<span count=id>number</span>" for this level
-			var count = checkbox.checked ? document.querySelectorAll("[family='"+id+"']").length:0
-			document.querySelector("[count='"+id+"']").innerHTML=count
 
 			//update Global.General["Active Stages"][id]
 			var newState = checkbox.checked ? 1:0
@@ -66,7 +56,7 @@
 			updateResult()
 		}
 
-		/** Activate stages depending on cookies */
+		/** Activate stages depending on Global.General["Active Stages"] */
 		function activateLevels()
 		{
 			//go over Levels
@@ -78,39 +68,6 @@
 					document.getElementById(stage).checked=true
 					activate(stage)
 				}
-			}
-		}
-
-		//** Create rows and columns for a table with specified object
-		function tableRows(object,name,family)
-		{
-			//return string
-			var ret="<tr><td colspan=5 style='background:#eee;font-weight:bold'>"+name
-			ret+=": <span count="+family+">0</span>"
-			for(variable in object)
-			{
-				//only numbers
-				if(typeof(object[variable])!="number")continue
-
-				ret+="<tr style=display:none family='"+family+"'>"+
-					"<td style='font-weight:bold'><a class=blue href=variable.php?id="+variable+">"+variable+"</a>"+
-					"<td>"+Info[variable].description
-			}
-			return ret
-		}
-
-		//** Display or hide inputs of the specified family (string) and display (true or false) */
-		function inputVisibility(family,display)
-		{
-			//style.display string
-			display=display?"":"none"
-			//select elements: <tr family=family>
-			var elements=document.querySelectorAll("tr[family='"+family+"']")
-			//loop elements
-			for(var i=0;i<elements.length;i++)
-			{
-				fadeIn(elements[i],0)
-				elements[i].style.display=display
 			}
 		}
 
@@ -156,34 +113,6 @@
 				<label style=color:#ccc><input type=checkbox disabled id=wasteDis class=waste onchange=activate(this.id)> Discharge		</label> 
 	</table>
 </div>
-
-<!--AVAILABLE INPUTS
-<div class=inline style="width:75%;text-align:left">
-	<h4>Enabled Inputs Sorted By Stage (Summary)</h4>
-	<div class=inline style="font-size:11px;width:35%;padding:0">
-	<table style=width:100%>
-		<tr><th colspan=2>Level 1 Inputs
-		<script>
-			document.write(tableRows(Global.Water,"Water Supply","water"))
-			document.write(tableRows(Global.Waste,"Wastewater","waste"))
-		</script>
-	</table>
-	</div>
-	<div class=inline style="font-size:11px;width:55%;padding:0">
-		<table style=";width:100%">
-			<tr><th colspan=2>Level 2 Inputs
-			<script>
-				document.write(tableRows(Global.Water.Abstraction,	"Water Abstraction",	"waterAbs"))
-				document.write(tableRows(Global.Water.Treatment,	"Water Treatment",		"waterTre"))
-				document.write(tableRows(Global.Water.Distribution,	"Water Distribution",	"waterDis"))
-				document.write(tableRows(Global.Waste.Collection,	"Wastewater Collection","wasteCol"))
-				document.write(tableRows(Global.Waste.Treatment,	"Wastewater Treatment",	"wasteTre"))
-				document.write(tableRows(Global.Waste.Discharge,	"Wastewater Discharge",	"wasteDis"))
-			</script>
-		</table>
-	</div>
-</div>
---><hr>
 
 <!--SYSTEM DESCRIPTION QUESTIONNAIRE-->
 <h3>System description (not implemented)</h3>

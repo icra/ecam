@@ -37,6 +37,7 @@ var Global =
 		/** These fields have the same name as the cookies they enable (boolean) */
 		"Active Stages":
 		{
+			"global":1,
 			"water":0,
 			"waterAbs":0,
 			"waterTre":0,
@@ -51,7 +52,7 @@ var Global =
 	"Global":	/** 01. GLOBAL */
 	{
 		/** Inputs */
-		"gV1" : 31, 	 //Assessment period (days)
+		"gV1" : function(){return Global.General.Days()}, 	 //Assessment period (days)
 		"gV2" : 108239,	 //Energy costs (Euro)
 		"gV2w": 0,
 		"gV2ww":0,
@@ -61,7 +62,7 @@ var Global =
 		"gV6" : 0.225,	 //Energy mix consumed (CO2/kWh)
 		/** Outputs */
 		"gE1":function() { return this.gV2/this.gV3 },
-		"gE2":function() { return this.gV4*365/this.gV1/this.gV5 },
+		"gE2":function() { return this.gV4*365/this.gV1()/this.gV5 },
 		"GHG":function() { return "not implemented" },
 	},
 

@@ -143,7 +143,7 @@
 
 <!-- TODO VOLUMES > ENERGY > EMISSIONS-->
 <div style="border:1px solid #ccc;font-size:14px">
-	<b>Water Flows</a> 
+	<b>Water Flows</b> 
 	<button>+</button>
 	|
 	<b>Energy use and production</b> 
