@@ -6,14 +6,20 @@
 	</style>
 </head><body><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1 class=blue style=padding-bottom:0>Home - ECAM</h1>
+<!--TITLE--><h1 class=blue style=padding-bottom:0>ECAM</h1>
 <!--SUBTITLE-->
 <h3>
-	<span class=blue style=font-size:1.4em>E</span>nergy performance and
-	<span class=blue style=font-size:1.4em>C</span>arbon emissions
-	<span class=blue style=font-size:1.4em>A</span>ssessment and 
-	<span class=blue style=font-size:1.4em>M</span>onitoring Tool
+	<span style=font-size:1.4em>E</span>nergy performance and
+	<span style=font-size:1.4em>C</span>arbon emissions
+	<span style=font-size:1.4em>A</span>ssessment and 
+	<span style=font-size:1.4em>M</span>onitoring Tool
 </h3>
-<!--QUICKSTART--><div>First time using the ECAM Web Tool? <a>Quickstart</a></div>
+<!--QUICKSTART--><h4>First time using the ECAM Web Tool? <a>Quickstart</a></h4>
 <!--DIAGRAM--><?php include'diagram.php'?>
-<!--LOGOS--><?php include'logos.php'?>
+
+<!--LOGOS-->
+<div style="text-align:left;background:#00aff1;padding:0">
+	<!--iwa--><img src=img/IWA-logo.png width=100px>
+</div>
+<!--giz--><img src=img/giz.png>
+<!--bmb--><img src=img/BMUB.png width=13%>

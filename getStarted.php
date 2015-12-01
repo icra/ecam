@@ -48,9 +48,9 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--LOAD SAVE CLEAR--><?php include"loadSaveClear.php"?>
-<!--TITLE--><h2>Get Started</h2>
+<!--MENU--><?php include"menu.php"?>
+<!--TITLE--><h2>GET STARTED</h2>
 <!--SUBTITLE--><h4>Edit General Data of your system</h4>
-<!--FORM--><table id=form style="text-align:left;box-shadow:0 9px 5px -5px rgba(0,0,0,0.3);"></table>
-<!--NEXT--> <div style=margin:1em> <button>Next</button> </div>
+<!--FORM--><table id=form style="text-align:left;"></table>
+<!--NEXT--> <div style=margin:1em> <button class="button next">Next</button> </div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

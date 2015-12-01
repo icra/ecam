@@ -3,9 +3,6 @@
 	<meta charset=utf-8>
 	<title>ECAM</title>
 	<link rel=stylesheet href="css.css">
-	<style>
-		button{height:auto}
-	</style>
 	<script src="dataModel/global.js"></script>
 	<script src="dataModel/info.js"></script>
 	<script src="js/cookies.js"></script>
@@ -63,7 +60,8 @@
 
 		function init()
 		{
-			openAll()
+			//openAll()
+			updateResult()
 		}
 
 		/** Write the kpis (i.e., outputs/functions) of specified object, e.g. showKPI(Global.Water,'water') */
@@ -92,10 +90,9 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h2>Key Performance Indicators - SUMMARY</h2>
-
+<!--LOAD SAVE CLEAR--><?php include"menu.php"?>
+<!--TITLE--><h2>KEY PERFORMANCE INDICATORS SUMMARY</h2>
 <!--SUMMARY-->
-<b>(implementation not finished)</b>
 <div style="text-align:left;width:70%;padding:3em">
 	<a href=# onclick=openAll()>Open all</a> | <a href=# onclick=collapseAll()>Collapse all</a>
 	<hr>
@@ -155,3 +152,4 @@
 			</ul>
 	</ul>
 </div>
+<!--CURRENT JSON--><?php include'currentJSON.php'?>

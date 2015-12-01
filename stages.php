@@ -33,18 +33,19 @@
 		function init()
 		{
 			turnOffLinks()
+			updateResult()
 		}
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h2>Stages of your system</h2>
-<!--HELP--><h3>Click the stage you want to work on. To activate stages go to <a href=configuration.php>Configuration</a>.</h3>
+<!--LOAD SAVE CLEAR--><?php include"menu.php"?>
+<!--TITLE--><h2>STAGES OF YOUR SYSTEM</h2>
+<!--HELP--><h4>Click the stage you want to work on. To activate stages go to <a href=configuration.php>Configuration</a>.</h4>
 
 <!--NAVIGATION TABLE-->
 <table style="text-align:center">
 	<tr>
-		<th style="font-size:13px">Level 0
-		<th style="font-size:13px">Level 1
+		<th style="font-size:13px" colspan=2>Level 1
 		<th style="font-size:13px">Level 2
 	<tr>
 		<td rowspan=6>					<a title="Active Stage"	href="edit.php?level=Global">Global</a>
@@ -57,8 +58,8 @@
 			    <td stage=wasteCol>	<a title="Active Stage" href="edit.php?level=Waste&sublevel=Collection"		>Collection</a>
 			<tr><td stage=wasteTre>	<a title="Active Stage" href="edit.php?level=Waste&sublevel=Treatment"		>Treatment</a>
 			<tr><td stage=wasteDis>	<a title="Active Stage" href="edit.php?level=Waste&sublevel=Discharge"		>Discharge</a>
-</table><hr>
+</table>
 
 <!--TODO--><div> <b>TBD</b>: more navigational diagram in SVG here</div>
-<img src=img/icon-stage.png width=5%>
 
+<!--CURRENT JSON--><?php include'currentJSON.php'?>

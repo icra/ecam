@@ -120,7 +120,7 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--LOAD SAVE CLEAR--><?php include"loadSaveClear.php"?>
+<!--LOAD SAVE CLEAR--><?php include"menu.php"?>
 
 <!--TITLE-->
 <?php 

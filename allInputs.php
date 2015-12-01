@@ -5,12 +5,12 @@
 	</style>
 	<script src="dataModel/info.js"></script><!--All variable descriptions and units object here-->
 	<script src="dataModel/global.js"></script><!--Default Global object here-->
-	<script src=js/cookies.js></script>
-	<script src=js/updateGlobalFromCookies.js></script>
+	<script src="js/cookies.js"></script>
+	<script src="js/updateGlobalFromCookies.js"></script>
 	<script>
 		function init()
 		{
-			//
+			updateResult()
 		}
 
 		//** Create rows and columns for a table with specified object
@@ -46,18 +46,15 @@
 			display=display?"":"none"
 			//select elements: <tr family=family>
 			var elements=document.querySelectorAll("tr[family='"+family+"']")
-			//loop elements
+			//go over "elements"
 			for(var i=0;i<elements.length;i++)
-			{
-				//fadeIn(elements[i],0)
 				elements[i].style.display=display
-			}
 		}
 	</script>
 </head><body onload=init()><center>
-<!--navbar--><?php include"navbar.php"?>
-
-<!--title--><h2>All Variables ~ Summary</h2>
+<!--NAVBAR--><?php include"navbar.php"?>
+<!--MENU--><?php include"menu.php"?>
+<!--TITLE--><h2>ALL ACTIVE INPUTS (SUMMARY)</h2>
 
 <!--AVAILABLE INPUTS-->
 <div class=inline style="width:75%;text-align:left">
@@ -86,3 +83,5 @@
 		</table>
 	</div>
 </div>
+
+<!--CURRENT JSON--><?php include'currentJSON.php'?>

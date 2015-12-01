@@ -17,9 +17,14 @@
 	.active-tab{
 		background:white;
 	}
+
+	#navbar a {
+		color:white;	
+	}
+
 </style>
 
-<div style="background:#dfffff;padding:0.1em 0em 0em 0em;font-size:18px">
+<div id=navbar style="background:#00aff1;color:white;padding:0.7em 0em 0em 0em;font-size:18px">
 	<?php
 		//menu symbol (3 bars)
 		echo "&#9776; "; 
@@ -29,7 +34,7 @@
 		nlink("/ecam/configuration.php","Configuration");
 		nlink("/ecam/stages.php","Stages");
 		nlink("/ecam/summary.php","Summary");
-		nlink("/ecam/allVariables.php","All Variables");
+		nlink("/ecam/allInputs.php","All Inputs");
 		nlink("/ecam/help.php","Help");
 	?>
 </div>

@@ -2,7 +2,8 @@
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
 	<link rel=stylesheet href="css.css"><style>
-		td{text-align:left}
+		td{
+			text-align:left}
 	</style>
 	<script src="dataModel/global.js"></script>
 	<script src="dataModel/info.js"></script>
@@ -12,25 +13,16 @@
 		/** Enable or disable <input type=checkbox id=id> */
 		function activate(id)
 		{
+			//you can't activate global, it is always active
 			if(id=="global")return
+
 			//input element that we are clicking
-			var checkbox  = document.getElementById(id)
+			var checkbox = document.getElementById(id)
 
 			//background color = green or white depending on checkbox
-			checkbox.parentNode.parentNode.style.backgroundColor=checkbox.checked?"#af0":""
+			checkbox.parentNode.parentNode.style.backgroundColor=checkbox.checked?"#73AD21":""
 
-			//enable link if checbox.checked //TODO
-			if(checkbox.checked)
-			{
-				//add link
-			}
-			else
-			{
-				//remove link
-			}
-
-
-			//sub elements: they have className=checkbox.id
+			//SUBELEMENTS: THEY HAVE CLASSNAME=CHECKBOX.ID
 			var elements=document.getElementsByClassName(id)
 			for(var i=0;i<elements.length;i++)
 			{
@@ -50,9 +42,8 @@
 				}
 			}
 
-
 			//update Global.General["Active Stages"][id]
-			var newState = checkbox.checked ? 1:0
+			var newState=checkbox.checked?1:0
 			Global.General["Active Stages"][id]=newState
 			updateResult()
 		}
@@ -63,9 +54,10 @@
 			//go over Levels
 			for(stage in Global.General["Active Stages"])
 			{
+				if(stage=="global")continue
 				if(Global["General"]["Active Stages"][stage])
 				{
-					//check level checkbox
+					//set checkbox as checked
 					document.getElementById(stage).checked=true
 					activate(stage)
 				}
@@ -77,47 +69,47 @@
 			activateLevels()
 			updateResult()
 		}
-
-		function fadeIn(element,val)
-		{
-			element.style.opacity=val
-			if(val<1)
-			{
-				val+=0.1
-				setTimeout(function(){fadeIn(element,val)},30)
-			}
-		}
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--LOAD SAVE CLEAR--><?php include"loadSaveClear.php"?>
-<!--TITLE--><h2>Configuration of your system</h2>
+<!--LOAD SAVE CLEAR--><?php include"menu.php"?>
+<!--TITLE--><h2>CONFIGURATION OF YOUR SYSTEM</h2>
 <!--SUBTITLE--><h4>Activate the stages which correspond to your system.</h4>
 
-<!--SELECT LEVELS-->
-<div class=inline style="width:20%">
-	<table style=font-size:15px>
-		<tr style=color:#444><th>Level 1<th>Level 2
-		<tr><td rowspan=3 style="text-align:center"> <label><input type=checkbox id=water onchange=activate(this.id)> Water Supply	</label>
-			<td>
-				<label style=color:#ccc><input type=checkbox disabled id=waterAbs class=water onchange=activate(this.id)> Abstraction	</label> 
-			<tr><td>
-				<label style=color:#ccc><input type=checkbox disabled id=waterTre class=water onchange=activate(this.id)> Treatment		</label> 
-			<tr><td>
-				<label style=color:#ccc><input type=checkbox disabled id=waterDis class=water onchange=activate(this.id)> Distribution	</label> 
-		<tr><td rowspan=3 style="text-align:center"> <label><input type=checkbox id=waste onchange=activate(this.id)> Wastewater	</label>
-			<td>
-				<label style=color:#ccc><input type=checkbox disabled id=wasteCol class=waste onchange=activate(this.id)> Collection	</label> 
-			<tr><td>
-				<label style=color:#ccc><input type=checkbox disabled id=wasteTre class=waste onchange=activate(this.id)> Treatment		</label> 
-			<tr><td>
-				<label style=color:#ccc><input type=checkbox disabled id=wasteDis class=waste onchange=activate(this.id)> Discharge		</label> 
-	</table>
-</div>
+<!--SELECT STAGES-->
+<style>
+	#selectStage img
+	{
+		width:50px;
+	}
+</style>
+<table style="font-size:19px" id=selectStage>
+	<tr style=color:#444><th>Level 1<th>Level 2
+	<tr><td rowspan=3 style="text-align:center"> <label><input type=checkbox id=water onchange=activate(this.id)> Water Supply	</label>
+		<td>
+			<img src=img/waterAbs.png>
+			<label style=color:#ccc><input type=checkbox disabled id=waterAbs class=water onchange=activate(this.id)> Abstraction	</label> 
+		<tr><td>
+			<img src=img/waterTre.png>
+			<label style=color:#ccc><input type=checkbox disabled id=waterTre class=water onchange=activate(this.id)> Treatment		</label> 
+		<tr><td>
+			<img src=img/waterDis.png>
+			<label style=color:#ccc><input type=checkbox disabled id=waterDis class=water onchange=activate(this.id)> Distribution	</label> 
+	<tr><td rowspan=3 style="text-align:center"> <label><input type=checkbox id=waste onchange=activate(this.id)> Wastewater	</label>
+		<td>
+			<img src=img/wasteCol.png>
+			<label style=color:#ccc><input type=checkbox disabled id=wasteCol class=waste onchange=activate(this.id)> Collection	</label> 
+		<tr><td>
+			<img src=img/wasteTre.png>
+			<label style=color:#ccc><input type=checkbox disabled id=wasteTre class=waste onchange=activate(this.id)> Treatment		</label> 
+		<tr><td>
+			<img src=img/wasteDis.png>
+			<label style=color:#ccc><input type=checkbox disabled id=wasteDis class=waste onchange=activate(this.id)> Discharge		</label> 
+</table><hr>
 
 <!--SYSTEM DESCRIPTION QUESTIONNAIRE-->
-<h3>System description (not implemented)</h3>
 <table class=inline>
+	<tr><th colspan=2>SYSTEM DESCRIPTION (not implemented)
 	<tr><th>Select stage						<th> 
 		<select>
 			<script>
