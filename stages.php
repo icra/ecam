@@ -26,6 +26,13 @@
 					elements[i].style.fontSize="12px"
 					//add title attribute
 					elements[i].setAttribute('title','Inactive Stage')
+					elements[i].style.cursor='not-allowed'
+					//substages
+					var nextSibling = elements[i].nextSibling
+					nextSibling.innerHTML="Substages"
+					nextSibling.style.fontSize="12px"
+					nextSibling.style.color="#aaa"
+					nextSibling.style.backgroundColor="#efefef"
 				}
 			}
 		}
@@ -43,21 +50,49 @@
 <!--HELP--><h4>Click the stage you want to work on. To activate stages go to <a href=configuration.php>Configuration</a>.</h4>
 
 <!--NAVIGATION TABLE-->
-<table style="text-align:center">
+<table style="text-align:center" id=navigationTable>
+	<!--this table styles--><style>
+		#navigationTable img{width:40px;vertical-align:middle}
+	</style>
 	<tr>
 		<th style="font-size:13px" colspan=2>Level 1
 		<th style="font-size:13px">Level 2
+		<th style="font-size:13px">Level 3
 	<tr>
-		<td rowspan=6>					<a title="Active Stage"	href="edit.php?level=Global">Global</a>
-		<td rowspan=3 stage=water>		<a title="Active Stage" href="edit.php?level=Water"							>Water Supply</a>
-			    <td stage=waterAbs>	<a title="Active Stage" href="edit.php?level=Water&sublevel=Abstraction"	>Abstraction</a> 
-			<tr><td stage=waterTre>	<a title="Active Stage" href="edit.php?level=Water&sublevel=Treatment"		>Treatment</a>	
-			<tr><td stage=waterDis>	<a title="Active Stage" href="edit.php?level=Water&sublevel=Distribution"	>Distribution</a>
+		<td rowspan=6>					
+				<img src=img/waterAbs.png>
+				<a title="Active Stage"	href="edit.php?level=Global">Global</a>
+		<td rowspan=3 stage=water>		
+				<img src=img/waterAbs.png>
+				<a title="Active Stage" href="edit.php?level=Water"							>Water Supply</a>
+			<td stage=waterAbs>	
+				<img src=img/waterAbs.png>
+			   	<a title="Active Stage" href="edit.php?level=Water&sublevel=Abstraction"	>Abstraction</a> 
+			   	<td><a href=level3.php?level=Water&sublevel=Abstraction>Substages</a>
+			<tr><td stage=waterTre>	
+				<img src=img/waterTre.png>
+				<a title="Active Stage" href="edit.php?level=Water&sublevel=Treatment"		>Treatment</a>	
+				<td><a href=level3.php?level=Water&sublevel=Treatment>Substages</a>
+			<tr><td stage=waterDis>	
+				<img src=img/waterDis.png>
+				<a title="Active Stage" href="edit.php?level=Water&sublevel=Distribution"	>Distribution</a>
+				<td><a href=level3.php?level=Water&sublevel=Distribution>Substages</a>
 	<tr>
-		<td rowspan=3 stage=waste>		<a title="Active Stage" href="edit.php?level=Waste"							>Wastewater</a>
-			    <td stage=wasteCol>	<a title="Active Stage" href="edit.php?level=Waste&sublevel=Collection"		>Collection</a>
-			<tr><td stage=wasteTre>	<a title="Active Stage" href="edit.php?level=Waste&sublevel=Treatment"		>Treatment</a>
-			<tr><td stage=wasteDis>	<a title="Active Stage" href="edit.php?level=Waste&sublevel=Discharge"		>Discharge</a>
+		<td rowspan=3 stage=waste>		
+				<img src=img/wasteCol.png>
+				<a title="Active Stage" href="edit.php?level=Waste"							>Wastewater</a>
+			<td stage=wasteCol>	
+				<img src=img/wasteCol.png>
+				<a title="Active Stage" href="edit.php?level=Waste&sublevel=Collection"		>Collection</a>
+				<td><a href=level3.php?level=Waste&sublevel=Collection>Substages</a>
+			<tr><td stage=wasteTre>	
+				<img src=img/wasteTre.png>
+				<a title="Active Stage" href="edit.php?level=Waste&sublevel=Treatment"		>Treatment</a>
+				<td><a href=level3.php?level=Waste&sublevel=Treatment>Substages</a>
+			<tr><td stage=wasteDis>	
+				<img src=img/wasteDis.png>
+				<a title="Active Stage" href="edit.php?level=Waste&sublevel=Discharge"		>Discharge</a>
+				<td><a href=level3.php?level=Waste&sublevel=Discharge>Substages</a>
 </table>
 
 <div style=margin:1em> 

@@ -1,10 +1,11 @@
 
 <hr>
 
-FOR TESTING PURPOSES:
 <!--CURRENT GLOBAL OBJECT IN JSON-->
 <div style="text-align:left;border:1px solid #ccc;margin:1em;width:30%;background:#fafafa">
-	<pre><b>Raw Data</b><br><span id=currentGlobal></span></pre>
+
+	<pre><b>Current System</b><br><span id=currentGlobal></span></pre>
+
 </div>
 
 <script>

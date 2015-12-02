@@ -81,32 +81,60 @@
 <!--SELECT STAGES-->
 <table style="font-size:16px" id=selectStage>
 	<!--this table styles--><style>
-		#selectStage img{width:40px;}
+		#selectStage img{width:40px;vertical-align:middle}
 		#selectStage th{width:220px;}
 		#selectStage td{text-align:left;}
-		#selectStage td:hover {background:#f0f0f0}
+		#selectStage label {cursor:pointer}
 	</style>
 	<tr style=color:#444><th>Level 1<th>Level 2
-	<tr><td rowspan=3 style="text-align:center"> <label><input type=checkbox id=water onchange=activate(this.id)> Water Supply	</label>
+	<tr><td rowspan=3 style="text-align:center"> 
+			<label>
+				<img src=img/waterAbs.png> 
+				<input type=checkbox id=water onchange=activate(this.id)> 
+				Water Supply
+			</label>
 		<td>
-			<img src=img/waterAbs.png>
-			<label style=color:#ccc><input type=checkbox disabled id=waterAbs class=water onchange=activate(this.id)> Abstraction	</label> 
+			<label style=color:#ccc>
+				<img src=img/waterAbs.png>
+				<input type=checkbox disabled id=waterAbs class=water onchange=activate(this.id)> 
+				Abstraction
+			</label> 
 		<tr><td>
-			<img src=img/waterTre.png>
-			<label style=color:#ccc><input type=checkbox disabled id=waterTre class=water onchange=activate(this.id)> Treatment		</label> 
+			<label style=color:#ccc>
+				<img src=img/waterTre.png>
+				<input type=checkbox disabled id=waterTre class=water onchange=activate(this.id)> 
+				Treatment
+			</label> 
 		<tr><td>
-			<img src=img/waterDis.png>
-			<label style=color:#ccc><input type=checkbox disabled id=waterDis class=water onchange=activate(this.id)> Distribution	</label> 
-	<tr><td rowspan=3 style="text-align:center"> <label><input type=checkbox id=waste onchange=activate(this.id)> Wastewater	</label>
+			<label style=color:#ccc>
+				<img src=img/waterDis.png>
+				<input type=checkbox disabled id=waterDis class=water onchange=activate(this.id)> 
+				Distribution	
+			</label> 
+	<tr><td rowspan=3 style="text-align:center"> 
+			<label>
+				<img src=img/wasteCol.png>
+				<input type=checkbox id=waste onchange=activate(this.id)> 
+				Wastewater	
+			</label>
 		<td>
-			<img src=img/wasteCol.png>
-			<label style=color:#ccc><input type=checkbox disabled id=wasteCol class=waste onchange=activate(this.id)> Collection	</label> 
+			<label style=color:#ccc>
+				<img src=img/wasteCol.png>
+				<input type=checkbox disabled id=wasteCol class=waste onchange=activate(this.id)> 
+				Collection
+			</label> 
 		<tr><td>
-			<img src=img/wasteTre.png>
-			<label style=color:#ccc><input type=checkbox disabled id=wasteTre class=waste onchange=activate(this.id)> Treatment		</label> 
+			<label style=color:#ccc>
+				<img src=img/wasteTre.png>
+				<input type=checkbox disabled id=wasteTre class=waste onchange=activate(this.id)> 
+				Treatment		
+			</label> 
 		<tr><td>
-			<img src=img/wasteDis.png>
-			<label style=color:#ccc><input type=checkbox disabled id=wasteDis class=waste onchange=activate(this.id)> Discharge		</label> 
+			<label style=color:#ccc>
+				<img src=img/wasteDis.png>
+				<input type=checkbox disabled id=wasteDis class=waste onchange=activate(this.id)>
+				Discharge
+			</label> 
 </table>
 
 <div style=margin:1em> 

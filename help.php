@@ -8,11 +8,13 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Help</h1>
 
-<!--for example-->
-for example
-<div>
-	<button>Quick introduction</button>
-	<button>Video tutorial</button>
-	<button>Read the manual</button>
-</div>
 (not implemented)
+
+<!--options-->
+<div style=font-size:18px>
+	<a href=#>Quick introduction</a>
+	|
+	<a href=#>Video tutorial</a>
+	|
+	<a href=#>Read the manual</a>
+</div>

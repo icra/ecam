@@ -70,7 +70,7 @@
 				var newRow=t.insertRow(-1)
 				newRow.setAttribute('field',field)
 				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
-				newRow.insertCell(-1).innerHTML=Info[field].description
+				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+Info[field].description+"</a>"
 				var newCell=newRow.insertCell(-1)
 				newCell.className="input"
 				newCell.setAttribute('onclick','transformField(this)')
@@ -127,21 +127,16 @@
 	//Set a navigable title for page
 	switch($level)
 	{
-		case "Global": $title="Global"; 		break;
-		case "Water":  $title="Water Supply"; break;
-		case "Waste":  $title="Wastewater"; 	break;
+		case "Global": $titleLevel="Global";break;
+		case "Water":  $titleLevel="Water Supply";break;
+		case "Waste":  $titleLevel="Wastewater";break;
 	}
-	if($title!="Global")
-	{
-		$title=isset($sublevel)?
-			"<a href=edit.php?level=Global>Global</a> &rsaquo; <a href=edit.php?level=$level>$title</a> &rsaquo; $sublevel (Level 2)" 
-			: 
-			"<a href=edit.php?level=Global>Global</a> &rsaquo; $title (Level 1)";
-	}
+	$sep="<span style=color:black>&rsaquo;</span>";
+	$title=isset($sublevel) ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$sublevel (Level 2)</span>" : "<span style=color:black>$titleLevel (Level 1)</span>";
 ?>
-<h1><a href=stages.php>Stages</a> &rsaquo; <?php echo $title?></h1>
+<h1><a href=stages.php>Stages</a> <?php echo "$sep $title"?></h1>
 
-<!--HELP--><h4>Click the grey boxes to edit Inputs. Key Performance Indicators appear in yellow.</h4>
+<!--HELP--><h4>Here you can edit the inputs for this stage (grey fields). The Key Performance Indicators (yellow) will be updated automatically.</h4>
 
 <!--DIFFERENT INPUTS (TO DO)-->
 <table><tr>
@@ -149,6 +144,16 @@
 	<td style=border:none> <button class=button>Energy use and production +</button>
 	<td style=border:none> <button class=button>GHG Emissions +</button>
 </table>
+
+<!--ENABLE LEVEL 3-->
+<?php
+	if($isLevel3enabled)
+	{
+		echo "<div class=inline style='border:1px solid #000;width:45%;margin:1em'>";
+		echo "<a href='level3.php?level=$level&sublevel=$sublevel'>GO TO Level 3</a>";
+		echo "</div>";
+	}
+?>
 
 <!--IO-->
 <div>
@@ -163,20 +168,7 @@
 		<tr><th colspan=4>OUTPUTS - Key Performance Indicators
 		<tr><th>Code<th>Description<th>Current Value<th>Unit
 	</table>
-</div>
-
-<!--ENABLE LEVEL 3-->
-<?php
-	if($isLevel3enabled)
-	{
-		echo "<div class=inline style='border:1px solid #000;width:45%;margin:1em'>";
-		echo "DEFINE SUBSTAGES MENU HERE";
-		echo "<div>
-				<button>+New Substage</button>
-			</div>";
-		echo "</div>";
-	}
-?>
+</div><hr>
 
 <!--PLOTS-->
 <div class=inline style="border:1px solid #000;width:45%;margin:1em">
@@ -186,6 +178,6 @@
 	<a href=sankey.php>Sankey Example</a> 
 	(not implemented)
 	<button>Export</button>
-</div><hr>
+</div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

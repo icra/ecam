@@ -34,12 +34,15 @@
 	}
 </script>
 
-<!--LOAD AND SAVE-->
+<!--MENU-->
 <div>
-	<button class="button add" onclick=newSystem()>New</button>
+	<!--new-->
+	<button class="button add" onclick=newSystem()>New System</button>
+	<!--load-->
 	<input type=file id=loadfile accept=".json" onchange="loadFile(event)" style=display:none>
-	<button class="button edit" onclick=document.getElementById('loadfile').click()>Load</button> 
-	<button class="button save" onclick=saveToFile()>Save</button>
+	<button class="button edit" onclick=document.getElementById('loadfile').click()>Load System</button> 
+	<!--save-->
+	<button class="button save" onclick=saveToFile()>Save System</button>
 </div>
 
 <!--STYLES FOR THE BUTTONS-->

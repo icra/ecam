@@ -26,7 +26,7 @@ var Global =
 		"Name":"Sedacusco",
 		"Location":"Cusco",
 		"Assessment Period Start":"2016-01-01",
-		"Assessment Period End":"2016-01-15",
+		"Assessment Period End":"2016-01-31",
 		"Days":function()
 		{
 			var startDate = new Date(Global.General["Assessment Period Start"])
