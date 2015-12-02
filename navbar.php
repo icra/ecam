@@ -24,7 +24,7 @@
 
 </style>
 
-<div id=navbar style="background:#00aff1;color:white;padding:0.7em 0em 0em 0em;font-size:18px">
+<div id=navbar style="background:#00aff1;color:white;padding:0.6em 0em 0em 0em;font-size:18px">
 	<?php
 		//menu symbol (3 bars)
 		echo "&#9776; "; 

@@ -2,8 +2,6 @@
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
 	<link rel=stylesheet href="css.css"><style>
-		td{
-			text-align:left}
 	</style>
 	<script src="dataModel/global.js"></script>
 	<script src="dataModel/info.js"></script>
@@ -46,6 +44,9 @@
 			var newState=checkbox.checked?1:0
 			Global.General["Active Stages"][id]=newState
 			updateResult()
+
+			//update select in system description
+			updateSelect('systemDescription')
 		}
 
 		/** Activate stages depending on Global.General["Active Stages"] */
@@ -67,6 +68,7 @@
 		function init()
 		{
 			activateLevels()
+			updateSelect('systemDescription')
 			updateResult()
 		}
 	</script>
@@ -77,13 +79,13 @@
 <!--SUBTITLE--><h4>Activate the stages which correspond to your system.</h4>
 
 <!--SELECT STAGES-->
-<style>
-	#selectStage img
-	{
-		width:50px;
-	}
-</style>
-<table style="font-size:19px" id=selectStage>
+<table style="font-size:16px" id=selectStage>
+	<!--this table styles--><style>
+		#selectStage img{width:40px;}
+		#selectStage th{width:220px;}
+		#selectStage td{text-align:left;}
+		#selectStage td:hover {background:#f0f0f0}
+	</style>
 	<tr style=color:#444><th>Level 1<th>Level 2
 	<tr><td rowspan=3 style="text-align:center"> <label><input type=checkbox id=water onchange=activate(this.id)> Water Supply	</label>
 		<td>
@@ -105,19 +107,29 @@
 		<tr><td>
 			<img src=img/wasteDis.png>
 			<label style=color:#ccc><input type=checkbox disabled id=wasteDis class=waste onchange=activate(this.id)> Discharge		</label> 
-</table><hr>
+</table>
+
+<div style=margin:1em> 
+	<!--PREV--><button class="button prev" onclick=window.location='getStarted.php'>Previous</button> 
+	<!--NEXT--><button class="button next" onclick=window.location='stages.php'>Next</button>
+</div>
+
+<hr>
 
 <!--SYSTEM DESCRIPTION QUESTIONNAIRE-->
 <table class=inline>
-	<tr><th colspan=2>SYSTEM DESCRIPTION (not implemented)
+	<tr><th colspan=2>ADDITIONAL SYSTEM INFO (not implemented)
 	<tr><th>Select stage						<th> 
-		<select>
+		<select id=systemDescription>
 			<script>
 				//this should be automatically updated, now it's fixed
-				function updateSystemDescriptionSelectStage()
+				function updateSelect(id)
 				{
+					var select = document.getElementById(id)
+					var options = ""
 					for(field in Global.General["Active Stages"])
 					{
+						if(field=="global")continue
 						if(Global.General["Active Stages"][field])
 						{
 							switch(field)
@@ -126,15 +138,16 @@
 								case "waterAbs":field="Water Abstraction (Level 2)";break;
 								case "waterTre":field="Water Treatment (Level 2)";break;
 								case "waterDis":field="Water Distribution (Level 2)";break;
+								case "waste":field="Wastewater (Level 1)";break;
 								case "wasteCol":field="Wastewater Collection (Level 2)";break;
 								case "wasteTre":field="Wastewater Treatment (Level 2)";break;
 								case "wasteDis":field="Wastewater Discharge (Level 2)";break;
 							}
-							document.write("<option>"+field+"</option>")
+							options+="<option>"+field+"</option>"
 						}
 					}
+					select.innerHTML=options
 				}
-				updateSystemDescriptionSelectStage()
 			</script>
 		</select>
 	<tr> <td>Is your system producing energy?  	<td> <select> <option>No <option>Yes </select>

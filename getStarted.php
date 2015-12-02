@@ -52,5 +52,5 @@
 <!--TITLE--><h2>GET STARTED</h2>
 <!--SUBTITLE--><h4>Edit General Data of your system</h4>
 <!--FORM--><table id=form style="text-align:left;"></table>
-<!--NEXT--> <div style=margin:1em> <button class="button next">Next</button> </div>
+<!--NEXT--> <div style=margin:1em> <button class="button next" onclick=window.location='configuration.php'>Next</button> </div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

@@ -60,6 +60,10 @@
 			<tr><td stage=wasteDis>	<a title="Active Stage" href="edit.php?level=Waste&sublevel=Discharge"		>Discharge</a>
 </table>
 
-<!--TODO--><div> <b>TBD</b>: more navigational diagram in SVG here</div>
+<div style=margin:1em> 
+	<!--PREV--><button class="button prev" onclick=window.location='configuration.php'>Previous</button> 
+	<!--NEXT--><button class="button next" onclick=window.location='summary.php'>Next</button>
+</div>
+
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

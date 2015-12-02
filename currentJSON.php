@@ -1,8 +1,9 @@
 
 <hr>
 
+FOR TESTING PURPOSES:
 <!--CURRENT GLOBAL OBJECT IN JSON-->
-<div style="height:250px;overflow-y:scroll;text-align:left;border:1px solid #ccc;margin:1em;width:30%;background:#fafafa">
+<div style="text-align:left;border:1px solid #ccc;margin:1em;width:30%;background:#fafafa">
 	<pre><b>Raw Data</b><br><span id=currentGlobal></span></pre>
 </div>
 

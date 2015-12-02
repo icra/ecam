@@ -2,7 +2,7 @@
 	/** Clear all user inputted data */
 	function newSystem()
 	{
-		if(confirm("WARNING. All input data will be set to default. Are you sure?"))
+		if(confirm("Changes will be lost. Continue?"))
 		{
 			//simply remove cookie and default values will load
 			removeCookie("GLOBAL")
@@ -36,7 +36,7 @@
 
 <!--LOAD AND SAVE-->
 <div>
-	<button class="button add" onclick=newSystem()>New System</button>
+	<button class="button add" onclick=newSystem()>New</button>
 	<input type=file id=loadfile accept=".json" onchange="loadFile(event)" style=display:none>
 	<button class="button edit" onclick=document.getElementById('loadfile').click()>Load</button> 
 	<button class="button save" onclick=saveToFile()>Save</button>
@@ -174,5 +174,13 @@
 	.next:before
 	{
 		content: "\279C";
+	}
+
+	.prev:before
+	{
+		content: "\279C";
+		transform: rotate(180deg);
+		border-radius:0;
+		box-shadow: -1px 0 0 0 rgba(0,0,0,.5);
 	}
 </style>

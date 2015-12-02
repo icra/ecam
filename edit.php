@@ -141,22 +141,14 @@
 ?>
 <h1><a href=stages.php>Stages</a> &rsaquo; <?php echo $title?></h1>
 
-<!-- TODO VOLUMES > ENERGY > EMISSIONS-->
-<div style="border:1px solid #ccc;font-size:14px">
-	<b>Water Flows</b> 
-	<button>+</button>
-	|
-	<b>Energy use and production</b> 
-	<button>+</button>
-	|
-	<b>GHG Emissions</b>
-	<button>+</button>
-	(not implemented)
-
-</div>
-
-
 <!--HELP--><h4>Click the grey boxes to edit Inputs. Key Performance Indicators appear in yellow.</h4>
+
+<!--DIFFERENT INPUTS (TO DO)-->
+<table><tr>
+	<td style=border:none> <button class=button>Water Flows +</button>
+	<td style=border:none> <button class=button>Energy use and production +</button>
+	<td style=border:none> <button class=button>GHG Emissions +</button>
+</table>
 
 <!--IO-->
 <div>
@@ -185,11 +177,6 @@
 		echo "</div>";
 	}
 ?>
-
-<!--to do-->
-<div>
-	<button>NEXT LEVEL</button>
-</div>
 
 <!--PLOTS-->
 <div class=inline style="border:1px solid #000;width:45%;margin:1em">
