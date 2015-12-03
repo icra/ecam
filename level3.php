@@ -28,10 +28,10 @@
 			echo "var CurrentStage = Global['$level']['$sublevel']";
 		?>
 
-		/** Returns an array of strings which are input identifiers for current stage, e.g ["aV1","av2"] */
+		/** Returns array of strings which are input identifiers for current stage, e.g ["aV1","av2"] */
 		function getInputs()
 		{
-			var inputs = [] //empty array
+			/*empty array*/ var inputs = []
 			for(field in CurrentStage)
 			{
 				if(typeof(CurrentStage[field])!="number" )continue
@@ -46,10 +46,8 @@
 		/** Substage class for storing all variables that correspond to current stage */
 		function Substage()
 		{
-			//get a list of inputs for this level
-			var inputs = getInputs()
-			//default name
-			this.name = "Substage "+(substages.length+1)
+			/*get a list of variables for this level*/ var inputs = getInputs()
+			/*substage name*/ this.name = "Substage "+(substages.length+1)
 			//now make the object look like, e.g. Substage {tV1: 0, tV2: 0, tV3: 0, tV4: 0, tV5: 0, ...}
 			for(i in inputs)this[inputs[i]]=0
 		}
