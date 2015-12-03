@@ -17,6 +17,13 @@
 	Global.Emissions.dD1
 	Global.Emissions.Direct.g_dGHG
 	Global.Emissions.Indirect.iS1
+
+	Global.Level3.Water.Abstraction[0].aV1
+	Global.Level3.Water.Treatment[0].tV1
+	Global.Level3.Water.Distribution[0].dV1
+	Global.Level3.Water.Collection[0].wcV1
+	Global.Level3.Water.Treatment[0].wtV1
+	Global.Level3.Water.Discharge[0].wdV1
 */
 
 var Global =
@@ -261,6 +268,21 @@ var Global =
 			"ws_iGHG1"	: function(){},	//Wastewater effluent N2O indirect GHG emissions per volume of wastewater treatet
 			"wt_iGHG1"	: function(){},	//Sludge transport indirect GHG Emissions per dry weight of sludge
 		}
+	},
+	
+	/**Substages for level 3*/
+	"Level3":
+	{
+		"Water":{
+			"Abstraction":[],
+			"Treatment":[],
+			"Distribution":[],
+		},
+		"Waste":{
+			"Collection":[],
+			"Treatment":[],
+			"Discharge":[],
+		},
 	},
 }
 

@@ -52,8 +52,8 @@
 			input.id=field
 			input.className='input'
 			input.autocomplete='off'
-			input.setAttribute('onkeypress',"if(event.which==13){updateField('"+field+"')}")
-			//input.setAttribute('onblur',"updateField('"+field+"')") //causes problems! TODO
+			input.setAttribute('onkeypress',"if(event.which==13){updateField('"+field+"',this.value)}")
+			input.setAttribute('onblur',"updateField('"+field+"',this.value)") //now works ok!
 			input.value=CurrentLevel[field]
 			element.appendChild(input)
 			input.select()
@@ -102,12 +102,11 @@
 		 * Update a field from the Global object
 		 * @param {string} field - The field of the CurrentLevel object
 		 */
-		function updateField(field)
+		function updateField(field,newValue)
 		{
-			var newValue=document.getElementById(field).value //get new value from <input id='field'>
 			if(typeof(CurrentLevel[field])=="number")newValue=parseFloat(newValue) //if CurrentLevel[field] is a number, parse float
 			CurrentLevel[field]=newValue //update the field
-			init() //update tables
+			init() //update tables and write cookies
 		}
 
 		/** Update all tables */
@@ -138,22 +137,21 @@
 
 <!--HELP--><h4>Here you can edit the inputs for this stage (grey fields). The Key Performance Indicators (yellow) will be updated automatically.</h4>
 
-<!--DIFFERENT INPUTS (TO DO)-->
-<table><tr>
-	<td style=border:none> <button class=button>Water Flows +</button>
-	<td style=border:none> <button class=button>Energy use and production +</button>
-	<td style=border:none> <button class=button>GHG Emissions +</button>
-</table>
-
-<!--ENABLE LEVEL 3-->
-<?php
-	if($isLevel3enabled)
-	{
-		echo "<div class=inline style='border:1px solid #000;width:45%;margin:1em'>";
-		echo "<a href='level3.php?level=$level&sublevel=$sublevel'>GO TO Level 3</a>";
-		echo "</div>";
-	}
-?>
+<!--OPTIONS FOR THIS LEVEL-->
+<div>
+	<button class=button>Water Flows +</button>
+	<button class=button>Energy use and production +</button>
+	<button class=button>GHG Emissions +</button>
+	<!--GO TO LEVEL 3-->
+	<?php
+		if($isLevel3enabled)
+		echo "<button class='button next'
+			style='background:yellow'
+			onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
+			GO TO Level 3
+			</button>";
+	?>
+</div>
 
 <!--IO-->
 <div>

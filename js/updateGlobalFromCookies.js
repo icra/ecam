@@ -11,10 +11,16 @@ function copyFieldsFrom(object,name)
 	//go over all fields, which will be always strings or numbers
 	for(field in object)
 	{
+		if(object[field].constructor===Array)
+		{
+			eval(name+"['"+field+"']="+JSON.stringify(object[field]));
+		}
 		//if field is also object, recursive call
-		if(typeof(object[field])=="object") 
+		else if(typeof(object[field])=="object") 
+		{
 			copyFieldsFrom(object[field],name+"['"+field+"']")
-		else
+		}
+		else //means is a normal field
 		{
 			//update the field
 			//if the field is a number, don't use single quotes

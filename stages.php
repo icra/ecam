@@ -69,6 +69,9 @@
 				<img src=img/waterAbs.png>
 			   	<a title="Active Stage" href="edit.php?level=Water&sublevel=Abstraction"	>Abstraction</a> 
 			   	<td><a href=level3.php?level=Water&sublevel=Abstraction>Substages</a>
+			   	(<script>
+			   		document.write(Global.Level3.Water.Abstraction.length)	
+			   	</script>)
 			<tr><td stage=waterTre>	
 				<img src=img/waterTre.png>
 				<a title="Active Stage" href="edit.php?level=Water&sublevel=Treatment"		>Treatment</a>	
