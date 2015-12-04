@@ -1,3 +1,16 @@
+<?php 
+	/** THIS PAGES LETS THE USER NAVIGATE THROUGH ACTIVE STAGES */
+
+	/** Prints a Level 2 stage for the navigation table. All parameters are strings */
+	function printL2stage($alias,$level,$sublevel)
+	{
+		echo "<td stage=$alias>
+			<img src=img/$alias.png>
+			<a title='Active Stage' href='edit.php?level=$level&sublevel=$sublevel'>$sublevel</a>
+			<td> <a href=level3.php?level=$level&sublevel=$sublevel>Substages</a> 
+			(<script>document.write(Global.Level3.$level.$sublevel.length)</script>)";
+	}
+?>
 <!doctype html><html><head>
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
@@ -28,6 +41,7 @@
 					elements[i].setAttribute('title','Inactive Stage')
 					elements[i].style.cursor='not-allowed'
 					//substages
+					console.log(elements[i].getAttribute('stage'))
 					var nextSibling = elements[i].nextSibling
 					nextSibling.innerHTML="Substages"
 					nextSibling.style.fontSize="12px"
@@ -49,59 +63,34 @@
 <!--TITLE--><h2>STAGES OF YOUR SYSTEM</h2>
 <!--HELP--><h4>Click the stage you want to work on. To activate stages go to <a href=configuration.php>Configuration</a>.</h4>
 
-<!--NAVIGATION TABLE-->
+<!--Navigation Table (for active stages)-->
 <table style="text-align:center" id=navigationTable>
-	<!--this table styles--><style>
+	<!--this table style--><style>
 		#navigationTable img{width:40px;vertical-align:middle}
 	</style>
 	<tr>
 		<th style="font-size:13px" colspan=2>Level 1
 		<th style="font-size:13px">Level 2
 		<th style="font-size:13px">Level 3
-	<tr>
-		<td rowspan=6>					
-				<img src=img/waterAbs.png>
-				<a title="Active Stage"	href="edit.php?level=Global">Global</a>
-		<td rowspan=3 stage=water>		
-				<img src=img/waterAbs.png>
-				<a title="Active Stage" href="edit.php?level=Water"							>Water Supply</a>
-			<td stage=waterAbs>	
-				<img src=img/waterAbs.png>
-			   	<a title="Active Stage" href="edit.php?level=Water&sublevel=Abstraction"	>Abstraction</a> 
-			   	<td><a href=level3.php?level=Water&sublevel=Abstraction>Substages</a>
-			   	(<script>
-			   		document.write(Global.Level3.Water.Abstraction.length)	
-			   	</script>)
-			<tr><td stage=waterTre>	
-				<img src=img/waterTre.png>
-				<a title="Active Stage" href="edit.php?level=Water&sublevel=Treatment"		>Treatment</a>	
-				<td><a href=level3.php?level=Water&sublevel=Treatment>Substages</a>
-			<tr><td stage=waterDis>	
-				<img src=img/waterDis.png>
-				<a title="Active Stage" href="edit.php?level=Water&sublevel=Distribution"	>Distribution</a>
-				<td><a href=level3.php?level=Water&sublevel=Distribution>Substages</a>
-	<tr>
-		<td rowspan=3 stage=waste>		
-				<img src=img/wasteCol.png>
-				<a title="Active Stage" href="edit.php?level=Waste"							>Wastewater</a>
-			<td stage=wasteCol>	
-				<img src=img/wasteCol.png>
-				<a title="Active Stage" href="edit.php?level=Waste&sublevel=Collection"		>Collection</a>
-				<td><a href=level3.php?level=Waste&sublevel=Collection>Substages</a>
-			<tr><td stage=wasteTre>	
-				<img src=img/wasteTre.png>
-				<a title="Active Stage" href="edit.php?level=Waste&sublevel=Treatment"		>Treatment</a>
-				<td><a href=level3.php?level=Waste&sublevel=Treatment>Substages</a>
-			<tr><td stage=wasteDis>	
-				<img src=img/wasteDis.png>
-				<a title="Active Stage" href="edit.php?level=Waste&sublevel=Discharge"		>Discharge</a>
-				<td><a href=level3.php?level=Waste&sublevel=Discharge>Substages</a>
+	<tr><td rowspan=6><img src=img/waterAbs.png><a title="Active Stage"	href="edit.php?level=Global">Global</a></td>
+		<td rowspan=3 stage=water><img src=img/waterAbs.png><a title="Active Stage" href="edit.php?level=Water">Water Supply</a>
+			<?php printL2stage('waterAbs','Water','Abstraction')?>
+		<tr>
+			<?php printL2stage('waterTre','Water','Treatment')?>
+		<tr>
+			<?php printL2stage('waterDis','Water','Distribution')?>
+	<tr><td rowspan=3 stage=waste><img src=img/wasteCol.png><a title="Active Stage" href="edit.php?level=Waste">Wastewater</a>
+			<?php printL2stage('wasteCol','Waste','Collection')?>
+		<tr>
+			<?php printL2stage('wasteTre','Waste','Treatment')?>
+		<tr>
+			<?php printL2stage('wasteDis','Waste','Discharge')?>
 </table>
 
+<!--prev & next buttons-->
 <div style=margin:1em> 
-	<!--PREV--><button class="button prev" onclick=window.location='configuration.php'>Previous</button> 
-	<!--NEXT--><button class="button next" onclick=window.location='summary.php'>Next</button>
+	<button class="button prev" onclick=window.location='configuration.php'>Previous</button> 
+	<button class="button next" onclick=window.location='allInputs.php'>Next</button>
 </div>
-
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

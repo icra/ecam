@@ -135,6 +135,53 @@
 ?>
 <h1><a href=stages.php>Stages</a> <?php echo "$sep $title"?></h1>
 
+<!--GO TO LEVEL 3 OR 2 depending on current-->
+<div>
+	<?php
+		if($isLevel3enabled) //means that we are in level 2
+		{
+			echo "<button class='button next'
+				style='background:yellow'
+				onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
+				Go to Level 3 Substages
+				</button>";
+		}
+		else //means that we are in level 1
+		{
+			//create buttons to navigate to level 2
+			switch($level)
+			{
+				case "Water": 
+					echo '	<button stage=waterAbs class="button next" onclick=window.location="edit.php?level=Water&sublevel=Abstraction" 	style=background:yellow>Go to Water Abstraction</button> 
+							<button stage=waterTre class="button next" onclick=window.location="edit.php?level=Water&sublevel=Treatment" 		style=background:yellow>Go to Water Treatment</button>
+							<button stage=waterDis class="button next" onclick=window.location="edit.php?level=Water&sublevel=Distribution" 	style=background:yellow>Go to Water Distribution</button>';break;
+				case "Waste": 
+					echo '	<button stage=wasteCol class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Collection" 	style=background:yellow>Go to Wastewater Collection</button> 
+							<button stage=wasteTre class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Treatment" 	style=background:yellow>Go to Wastewater Treatment</button>
+							<button stage=wasteDis class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Discharge" 	style=background:yellow>Go to Wastewater Discharge</button>';break;
+			}
+		}
+	?>
+	<script>
+		/** Disable nav buttons according to current configuration */
+		function turnOffButtons()
+		{
+			//go over buttons that have the stage attribute
+			var elements=document.querySelectorAll("[stage]")
+			for(var i=0;i<elements.length;i++)
+			{
+				//Select non active stages
+				if(!Global.General["Active Stages"][elements[i].getAttribute('stage')]) 
+				{
+					elements[i].setAttribute('disabled',true)
+					elements[i].setAttribute('title','Inactive stage. Go to Configuration to enable it')
+				}
+			}
+		}
+		turnOffButtons()
+	</script>
+</div>
+
 <!--HELP--><h4>Here you can edit the inputs for this stage (grey fields). The Key Performance Indicators (yellow) will be updated automatically.</h4>
 
 <!--OPTIONS FOR THIS LEVEL-->
@@ -142,15 +189,6 @@
 	<button class=button>Water Flows +</button>
 	<button class=button>Energy use and production +</button>
 	<button class=button>GHG Emissions +</button>
-	<!--GO TO LEVEL 3-->
-	<?php
-		if($isLevel3enabled)
-		echo "<button class='button next'
-			style='background:yellow'
-			onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-			GO TO Level 3
-			</button>";
-	?>
 </div>
 
 <!--IO-->

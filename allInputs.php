@@ -84,4 +84,10 @@
 	</div>
 </div>
 
+<!--prev & next buttons-->
+<div style=margin:1em> 
+	<button class="button prev" onclick=window.location='stages.php'>Previous</button> 
+	<button class="button next" onclick=window.location='summary.php'>Next</button>
+</div>
+
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

@@ -152,4 +152,10 @@
 			</ul>
 	</ul>
 </div>
+
+<!--prev button-->
+<div style=margin:1em> 
+	<button class="button prev" onclick=window.location='allInputs.php'>Previous</button> 
+</div>
+
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

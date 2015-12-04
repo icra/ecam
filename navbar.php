@@ -33,8 +33,8 @@
 		nlink("/ecam/getStarted.php","Get Started");
 		nlink("/ecam/configuration.php","Configuration");
 		nlink("/ecam/stages.php","Stages");
-		nlink("/ecam/summary.php","Summary");
 		nlink("/ecam/allInputs.php","All Inputs");
+		nlink("/ecam/summary.php","All Indicators");
 		nlink("/ecam/help.php","Help");
 	?>
 </div>
