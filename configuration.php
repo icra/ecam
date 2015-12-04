@@ -74,8 +74,7 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--LOAD SAVE CLEAR--><?php include"menu.php"?>
-<!--TITLE--><h2>CONFIGURATION OF YOUR SYSTEM</h2>
+<!--TITLE--><h2>CONFIGURATION</h2>
 <!--SUBTITLE--><h4>Activate the stages which correspond to your system.</h4>
 
 <!--SELECT STAGES-->

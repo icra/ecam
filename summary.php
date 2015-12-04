@@ -90,7 +90,7 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--LOAD SAVE CLEAR--><?php include"menu.php"?>
+<!--YOU ARE HERE--><?php include"youAreHere.php"?>
 <!--TITLE--><h2>KEY PERFORMANCE INDICATORS SUMMARY</h2>
 <!--SUMMARY-->
 <div style="text-align:left;width:70%;padding:3em">

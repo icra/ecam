@@ -16,7 +16,7 @@
 	$id=$_GET['id'];
 ?>
 
-<!--TITLE--><h2><a href=allVariables.php>All variables</a> &rsaquo;  <?php echo $id?></h2>
+<!--TITLE--><h2><?php echo $id?></h2>
 
 <h4>Detailed info</h4>
 

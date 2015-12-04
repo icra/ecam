@@ -53,7 +53,7 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--MENU--><?php include"menu.php"?>
+<!--YOU ARE HERE--><?php include"youAreHere.php"?>
 <!--TITLE--><h2>ALL ACTIVE INPUTS (SUMMARY)</h2>
 
 <!--AVAILABLE INPUTS-->

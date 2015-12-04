@@ -119,7 +119,7 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--LOAD SAVE CLEAR--><?php include"menu.php"?>
+<!--YOU ARE HERE--><?php include"youAreHere.php"?>
 
 <!--TITLE-->
 <?php 
@@ -131,11 +131,11 @@
 		case "Waste":  $titleLevel="Wastewater";break;
 	}
 	$sep="<span style=color:black>&rsaquo;</span>";
-	$title=isset($sublevel) ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$sublevel (Level 2)</span>" : "<span style=color:black>$titleLevel (Level 1)</span>";
+	$title=isset($sublevel) ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$sublevel</span>" : "<span style=color:black>$titleLevel</span>";
 ?>
 <h1><a href=stages.php>Stages</a> <?php echo "$sep $title"?></h1>
 
-<!--GO TO LEVEL 3 OR 2 depending on current-->
+<!--GO TO LEVEL 2 OR 3-->
 <div>
 	<?php
 		if($isLevel3enabled) //means that we are in level 2
@@ -152,13 +152,17 @@
 			switch($level)
 			{
 				case "Water": 
-					echo '	<button stage=waterAbs class="button next" onclick=window.location="edit.php?level=Water&sublevel=Abstraction" 	style=background:yellow>Go to Water Abstraction</button> 
-							<button stage=waterTre class="button next" onclick=window.location="edit.php?level=Water&sublevel=Treatment" 		style=background:yellow>Go to Water Treatment</button>
-							<button stage=waterDis class="button next" onclick=window.location="edit.php?level=Water&sublevel=Distribution" 	style=background:yellow>Go to Water Distribution</button>';break;
+					echo '
+						<button stage=waterAbs class="button next" onclick=window.location="edit.php?level=Water&sublevel=Abstraction" 	style=background:yellow> Water Abstraction	</button> 
+						<button stage=waterTre class="button next" onclick=window.location="edit.php?level=Water&sublevel=Treatment" 	style=background:yellow> Water Treatment	</button>
+						<button stage=waterDis class="button next" onclick=window.location="edit.php?level=Water&sublevel=Distribution" style=background:yellow> Water Distribution	</button>';
+						break;
 				case "Waste": 
-					echo '	<button stage=wasteCol class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Collection" 	style=background:yellow>Go to Wastewater Collection</button> 
-							<button stage=wasteTre class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Treatment" 	style=background:yellow>Go to Wastewater Treatment</button>
-							<button stage=wasteDis class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Discharge" 	style=background:yellow>Go to Wastewater Discharge</button>';break;
+					echo '
+						<button stage=wasteCol class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Collection" 	style=background:yellow> Wastewater Collection	</button> 
+						<button stage=wasteTre class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Treatment" 	style=background:yellow> Wastewater Treatment	</button>
+						<button stage=wasteDis class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Discharge" 	style=background:yellow> Wastewater Discharge	</button>';
+						break;
 			}
 		}
 	?>

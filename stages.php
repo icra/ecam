@@ -29,8 +29,9 @@
 			var elements=document.querySelectorAll("[stage]")
 			for(var i=0;i<elements.length;i++)
 			{
+				var stage=elements[i].getAttribute('stage')
 				//Select non active stages
-				if(!Global.General["Active Stages"][elements[i].getAttribute('stage')]) 
+				if(!Global.General["Active Stages"][stage]) 
 				{
 					//remove link inside
 					elements[i].innerHTML=elements[i].textContent
@@ -41,12 +42,14 @@
 					elements[i].setAttribute('title','Inactive Stage')
 					elements[i].style.cursor='not-allowed'
 					//substages
-					console.log(elements[i].getAttribute('stage'))
-					var nextSibling = elements[i].nextSibling
-					nextSibling.innerHTML="Substages"
-					nextSibling.style.fontSize="12px"
-					nextSibling.style.color="#aaa"
-					nextSibling.style.backgroundColor="#efefef"
+					if(stage!="water" && stage!="waste")
+					{
+						var nextSibling = elements[i].nextSibling
+						nextSibling.innerHTML="Substages"
+						nextSibling.style.fontSize="12px"
+						nextSibling.style.color="#aaa"
+						nextSibling.style.backgroundColor="#efefef"
+					}
 				}
 			}
 		}
@@ -59,9 +62,9 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--LOAD SAVE CLEAR--><?php include"menu.php"?>
-<!--TITLE--><h2>STAGES OF YOUR SYSTEM</h2>
-<!--HELP--><h4>Click the stage you want to work on. To activate stages go to <a href=configuration.php>Configuration</a>.</h4>
+<!--YOU ARE HERE--><?php include"youAreHere.php"?>
+<!--TITLE--><h1>Stages Overview</h1>
+<!--HELP--><h4>Click the stage where you want to input data. To activate stages go to <a href=configuration.php>Configuration</a>.</h4>
 
 <!--Navigation Table (for active stages)-->
 <table style="text-align:center" id=navigationTable>
