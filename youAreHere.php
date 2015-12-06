@@ -1,7 +1,7 @@
 <style>
 	nav { background:#999; color: #fff; margin: 0; overflow: hidden; text-align:left}
 	nav ul{ margin: 0; padding: 0; list-style: none; }
-	nav ul li { margin: 0; display: inline-block; list-style-type: none; transition: all 0.1s; }
+	nav ul li { margin: 0; display: inline-block; list-style-type: none;}
 	nav > ul > li > a { color: #aaa; display: block; line-height: 2em; padding: 0.5em 2em; text-decoration:none; }
 	nav a,nav a:visited{color:#000}
 	nav a:hover { text-decoration:none; color:white}
@@ -17,14 +17,14 @@
 		#navStages img{width:40px;vertical-align:middle;margin:0.5em}
 	</style>
 	<ul>
-		<li id=water><a href=edit.php?level=Water>Water Supply</a>
+		<li id=water><a href=edit.php?level=Water>Water Supply <span style="font-size:16px;color:white">&#8964;</span></a>
 			<ul>
 				<li id=waterAbs><img src=img/waterAbs.png><a href=edit.php?level=Water&sublevel=Abstraction>Water Abstraction</a></li>
 				<li id=waterTre><img src=img/waterTre.png><a href=edit.php?level=Water&sublevel=Treatment>Water Treatment</a></li>
 				<li id=waterDis><img src=img/waterDis.png><a href=edit.php?level=Water&sublevel=Distribution>Water Distribution</a></li>
 			</ul>
 		</li>
-		<li id=waste><a href=edit.php?level=Waste>Wastewater</a>
+		<li id=waste><a href=edit.php?level=Waste>Wastewater <span style="font-size:16px;color:white">&#8964;</span></a>
 			<ul>
 				<li id=wasteCol><img src=img/wasteCol.png><a href=edit.php?level=Waste&sublevel=Collection>Wastewater Collection</a></li>
 				<li id=wasteTre><img src=img/wasteTre.png><a href=edit.php?level=Waste&sublevel=Treatment>Wastewater Treatment</a></li>

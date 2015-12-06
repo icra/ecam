@@ -75,14 +75,14 @@
 		<th style="font-size:13px" colspan=2>Level 1
 		<th style="font-size:13px">Level 2
 		<th style="font-size:13px">Level 3
-	<tr><td rowspan=6><img src=img/waterAbs.png><a title="Active Stage"	href="edit.php?level=Global">Global</a></td>
-		<td rowspan=3 stage=water><img src=img/waterAbs.png><a title="Active Stage" href="edit.php?level=Water">Water Supply</a>
+	<tr><td rowspan=6><img src=img/waterAbs.png> <a title="Active Stage"	href="edit.php?level=Global">Global</a></td>
+		<td rowspan=3 stage=water><img src=img/waterAbs.png> <a title="Active Stage" href="edit.php?level=Water">Water Supply</a>
 			<?php printL2stage('waterAbs','Water','Abstraction')?>
 		<tr>
 			<?php printL2stage('waterTre','Water','Treatment')?>
 		<tr>
 			<?php printL2stage('waterDis','Water','Distribution')?>
-	<tr><td rowspan=3 stage=waste><img src=img/wasteCol.png><a title="Active Stage" href="edit.php?level=Waste">Wastewater</a>
+	<tr><td rowspan=3 stage=waste><img src=img/wasteCol.png> <a title="Active Stage" href="edit.php?level=Waste">Wastewater</a>
 			<?php printL2stage('wasteCol','Waste','Collection')?>
 		<tr>
 			<?php printL2stage('wasteTre','Waste','Treatment')?>

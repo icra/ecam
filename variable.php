@@ -9,6 +9,7 @@
 	<script src="dataModel/info.js"></script>
 </head><body><center>
 <!--NAVBAR--><?php include"navbar.php"?>
+<!--YOU ARE HERE--><?php include"youAreHere.php"?>
 
 <?php
 	//specified input
