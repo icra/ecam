@@ -44,7 +44,6 @@ var Global =
 		/** These fields have the same name as the cookies they enable (boolean) */
 		"Active Stages":
 		{
-			"global":1,
 			"water":0,
 			"waterAbs":0,
 			"waterTre":0,
@@ -59,7 +58,6 @@ var Global =
 	"Global":	/** 01. GLOBAL */
 	{
 		/** Inputs */
-		"gV1" : function(){return Global.General.Days()}, 	 //Assessment period (days)
 		"gV2" : 108239,	 //Energy costs (Euro)
 		"gV2w": 0,
 		"gV2ww":0,
@@ -68,9 +66,10 @@ var Global =
 		"gV5" : 368475,	 //Resident population within the utility area of service (Inhab)
 		"gV6" : 0.225,	 //Energy mix consumed (CO2/kWh)
 		/** Outputs */
-		"gE1":function() { return this.gV2/this.gV3 },
-		"gE2":function() { return this.gV4*365/this.gV1()/this.gV5 },
-		"GHG":function() { return "not implemented" },
+		"gV1":function(){return Global.General.Days()}, 	 //Assessment period (days)
+		"gE1":function(){return this.gV2/this.gV3 },
+		"gE2":function(){return this.gV4*365/this.gV1()/this.gV5 },
+		"GHG":function(){return "not implemented" },
 	},
 
 	/** SUB LEVELS */
@@ -108,7 +107,7 @@ var Global =
 			"aV6" : 0, //Mains lenght (km)
 			"aV7" : 0, //Friction pipe losses (m)
 			/** Outputs */
-			"aE1":function() { return this.aV1/this.sV1 }, 				//Energy consumption per conveyed water (kWh/m3) 
+			"aE1":function() { return this.aV1/Global.Water.sV1}, 				//Energy consumption per conveyed water (kWh/m3) 
 			"aE2":function() { return 100*this.aV1/Global.gV4 }, 		//Energy consumption of abstracted water per total energy consumption (%) 
 			"aE3":function() { return this.aV1/this.aV2 }, 				//Standardised Energy Consumption (kWh/m3/100m) 
 			"aE4":function() { return this.aV3/this.sV1 }, 				//Energy recovery per conveyed water (kWh/m3) 

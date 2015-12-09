@@ -4,50 +4,65 @@
 	<link rel=stylesheet href="css.css"><style>
 		th,td{padding:1.5em}
 	</style>
-	<script src="js/cookies.js"></script>
-	<script src="dataModel/global.js"></script>
 	<script src="dataModel/info.js"></script>
+	<script src="dataModel/global.js"></script>
+	<script src="js/cookies.js"></script>
+	<script src="js/updateGlobalFromCookies.js"></script>
 </head><body><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--YOU ARE HERE--><?php include"youAreHere.php"?>
-
 <?php
 	//specified input
 	if(!isset($_GET['id']))die('no input specified');
 	$id=$_GET['id'];
+	//make the id variable live in javascript scope
+	echo "<script>var id='$id';</script>";
 ?>
 
-<!--TITLE--><h2><?php echo $id?></h2>
+<script>
+	//Define some global variables
+	var level 		 = Info[id].level
+	var sublevel 	 = Info[id].sublevel
+	var currentStage = sublevel ? Global[level][sublevel] : Global[level]
+	//make the user see "Water Supply" instead of "Water"
+	var levelAlias
+	switch(level)
+	{
+		case "Water":levelAlias="Water Supply";break
+		case "Waste":levelAlias="Wastewater";break
+		default:levelAlias=level;break;
+	}
+</script>
+
+<!--TITLE--><h1><?php echo $id?></h1>
 
 <h4>Detailed info</h4>
 
 <!--VARIABLE INFO-->
 <table style="text-align:left">
-	<tr><th>Active 
-		<td style=background:#af0>True (not implemented)
-	<tr><th>Level
-		<td>1 (Water Supply) (not implemented)
+	<tr><th>Stage
+	<td><script>
+		document.write("<a href=edit.php?level="+level+">"+levelAlias+"</a>")
+		if(sublevel!=undefined)
+			document.write(" &rsaquo; <a href=edit.php?level="+level+"&sublevel="+sublevel+">"+sublevel+"</a>")
+	</script>
 	<tr><th>Description
-		<td>
-		<script>
-			document.write(Info["<?php echo $id?>"].description)
-		</script>
+	<td><script>document.write(Info[id].description)</script>
 	<tr><th>Magnitude
-		<td>Flow (not implemented)
-	<tr><th>Unit 
-		<td>
-			<script>
-				document.write(Info["<?php echo $id?>"].unit)
-			</script>
-			<select>
-				<option>m3/day
-				<option>m3/h
-				<option>m3/s
-				<option>L/day
-				<option>L/h
-				<option>L/s
-			</select>
-			(not implemented)
+	<td><script>document.write(Info[id].magnitude)</script>
 	<tr><th>Value
-		<td>not implemented
+	<td><script>
+		if(typeof(currentStage[id])=="function")
+		{
+			document.write("<b>Formula</b>: ")
+			document.write(currentStage[id])
+			document.write("<br><br>")
+			document.write("<b>Current Value</b>: ")
+			document.write(currentStage[id]())
+		}
+		else
+			document.write(currentStage[id])
+	</script>
+	<tr><th>Unit 
+	<td><script>document.write(Info[id].unit)</script>
 </table>

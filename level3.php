@@ -206,7 +206,7 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--LOAD SAVE CLEAR--><?php include"menu.php"?>
+<!--nav menu--><?php include"youAreHere.php"?>
 <!--TITLE-->
 <?php 
 	//Navigable <h1>title</h1>

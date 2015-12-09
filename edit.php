@@ -141,7 +141,7 @@
 		if($isLevel3enabled) //means that we are in level 2
 		{
 			echo "<button class='button next'
-				style='background:yellow'
+				style='background:lightblue;'
 				onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
 				Go to Level 3 Substages
 				</button>";
@@ -153,15 +153,15 @@
 			{
 				case "Water": 
 					echo '
-						<button stage=waterAbs class="button next" onclick=window.location="edit.php?level=Water&sublevel=Abstraction" 	style=background:yellow> Water Abstraction	</button> 
-						<button stage=waterTre class="button next" onclick=window.location="edit.php?level=Water&sublevel=Treatment" 	style=background:yellow> Water Treatment	</button>
-						<button stage=waterDis class="button next" onclick=window.location="edit.php?level=Water&sublevel=Distribution" style=background:yellow> Water Distribution	</button>';
+						<button stage=waterAbs class="button next" onclick=window.location="edit.php?level=Water&sublevel=Abstraction" 	style=background:lightblue> Water Abstraction	</button> 
+						<button stage=waterTre class="button next" onclick=window.location="edit.php?level=Water&sublevel=Treatment" 	style=background:lightblue> Water Treatment	</button>
+						<button stage=waterDis class="button next" onclick=window.location="edit.php?level=Water&sublevel=Distribution" style=background:lightblue> Water Distribution	</button>';
 						break;
 				case "Waste": 
 					echo '
-						<button stage=wasteCol class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Collection" 	style=background:yellow> Wastewater Collection	</button> 
-						<button stage=wasteTre class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Treatment" 	style=background:yellow> Wastewater Treatment	</button>
-						<button stage=wasteDis class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Discharge" 	style=background:yellow> Wastewater Discharge	</button>';
+						<button stage=wasteCol class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Collection" 	style=background:lightblue> Wastewater Collection	</button> 
+						<button stage=wasteTre class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Treatment" 	style=background:lightblue> Wastewater Treatment	</button>
+						<button stage=wasteDis class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Discharge" 	style=background:lightblue> Wastewater Discharge	</button>';
 						break;
 			}
 		}
@@ -193,6 +193,7 @@
 	<button class=button>Water Flows +</button>
 	<button class=button>Energy use and production +</button>
 	<button class=button>GHG Emissions +</button>
+	<img src=img/co2.png style="width:40px;vertical-align:middle">
 </div>
 
 <!--IO-->

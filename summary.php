@@ -60,7 +60,7 @@
 
 		function init()
 		{
-			//openAll()
+			openAll()
 			updateResult()
 		}
 
@@ -139,6 +139,7 @@
 						<script>showKPI(Global.Waste.Discharge,"wasteDis")</script>
 					</ul>
 			</ul>
+
 		<li><button onclick=toggleDisplay('emissions',this)>+</button> Emissions (not implemented)
 			<ul id=emissions style=display:none>
 				<li><button onclick=toggleDisplay('direct',this)>+</button> Direct

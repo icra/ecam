@@ -54,7 +54,7 @@
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--YOU ARE HERE--><?php include"youAreHere.php"?>
-<!--TITLE--><h2>ALL ACTIVE INPUTS (SUMMARY)</h2>
+<!--TITLE--><h2>ALL INPUTS SUMMARY</h2>
 
 <!--AVAILABLE INPUTS-->
 <div class=inline style="width:75%;text-align:left">
