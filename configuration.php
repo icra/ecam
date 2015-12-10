@@ -69,7 +69,6 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--nav stages--><?php include'youAreHere.php'?>
 <!--TITLE--><h2>Configuration</h2>
 <!--SUBTITLE--><h4>Click to activate the stages of your system.</h4>
 

@@ -24,6 +24,7 @@
 	<script src="dataModel/global.js"></script><!--Default Global object here-->
 	<script src="js/cookies.js"></script><!--basic cookie functions here-->
 	<script src="js/updateGlobalFromCookies.js"></script><!--update Global object from cookie "GLOBAL" here-->
+	<script src="js/formulas.js"></script><!--functions for dealing with formulas-->
 	<script>
 		/** 
 		 * GUI utilities
@@ -42,7 +43,6 @@
 		 * Transform a <td> cell to a <input> to make modifications in the Global object
 		 * @param {element} element - the <td> cell
 		 */
-
 		function transformField(element)
 		{
 			element.removeAttribute('onclick')
@@ -70,7 +70,9 @@
 				var newRow=t.insertRow(-1)
 				newRow.setAttribute('field',field)
 				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
-				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+Info[field].description+"</a>"
+				//link in description? discuss
+				//newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+Info[field].description+"</a>"
+				newRow.insertCell(-1).innerHTML=Info[field].description
 				var newCell=newRow.insertCell(-1)
 				newCell.className="input"
 				newCell.setAttribute('onclick','transformField(this)')
@@ -91,10 +93,30 @@
 			{
 				if(typeof(CurrentLevel[field])!="function")continue
 				var newRow=t.insertRow(-1)
+				var formula=CurrentLevel[field].toString()
+				newRow.setAttribute('title',field+"="+prettify(formula))
+				newRow.setAttribute('onmouseover',"hlFields('"+formula+"',1)")
+				newRow.setAttribute('onmouseout',"hlFields('"+formula+"',0)")
 				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
 				newRow.insertCell(-1).innerHTML=Info[field].description
 				newRow.insertCell(-1).innerHTML=CurrentLevel[field]()
 				newRow.insertCell(-1).innerHTML=Info[field].unit
+			}
+		}
+
+		/**
+		 * Hihghlight a field
+		 * @param {array of strings} fields - the variable codes we want to highlight e.g. ['sV1','sV2']
+		 * @param {boolean} hl - turn on/off highlighting
+		 */
+		function hlFields(formula,hl)
+		{
+			var fields=idsPerFormula(formula)
+			for(field in fields)
+			{
+				var element=document.querySelector('[field='+fields[field]+']')
+				if(element)
+					element.style.backgroundColor=hl?"yellow":""
 			}
 		}
 

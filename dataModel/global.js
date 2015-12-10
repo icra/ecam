@@ -69,7 +69,7 @@ var Global =
 		"gV1":function(){return Global.General.Days()}, 	 //Assessment period (days)
 		"gE1":function(){return this.gV2/this.gV3 },
 		"gE2":function(){return this.gV4*365/this.gV1()/this.gV5 },
-		"GHG":function(){return "not implemented" },
+		"GHG":function(){return "not_implemented" },
 	},
 
 	/** SUB LEVELS */
@@ -90,10 +90,10 @@ var Global =
 		"sV12" : 0, //Resident population connected to supply systems (Inhab)
 		"sV13" : 0, //Water supply resident population (Inhab)
 		/** Outputs */
-		"S1":function() { return 100*(this.sV4+this.sV5+this.sV6+this.sV7)/this.sV3 },	//Quality of supplied water (%)
-		"S2":function() { return 100*this.sV9/this.sV10 }, 								//Pressure of supply adequacy (%)
-		"S3":function() { return 100*this.sV11/24/this.gV1 }, 							//Continuity of supply (%)
-		"S4":function()	{ return 100*this.sV12/this.sV13 }, 							//Resident population connected to supply system (%)
+		"S1":function(){return 100*(this.sV4+this.sV5+this.sV6+this.sV7)/this.sV3},	//Quality of supplied water (%)
+		"S2":function(){return 100*this.sV9/this.sV10}, 							//Pressure of supply adequacy (%)
+		"S3":function(){return 100*this.sV11/24/this.gV1}, 							//Continuity of supply (%)
+		"S4":function(){return 100*this.sV12/this.sV13}, 							//Resident population connected to supply system (%)
 		/** Stages */
 		/* 2.1. Water Abstraction*/
 		"Abstraction":
@@ -107,13 +107,13 @@ var Global =
 			"aV6" : 0, //Mains lenght (km)
 			"aV7" : 0, //Friction pipe losses (m)
 			/** Outputs */
-			"aE1":function() { return this.aV1/Global.Water.sV1}, 				//Energy consumption per conveyed water (kWh/m3) 
-			"aE2":function() { return 100*this.aV1/Global.gV4 }, 		//Energy consumption of abstracted water per total energy consumption (%) 
-			"aE3":function() { return this.aV1/this.aV2 }, 				//Standardised Energy Consumption (kWh/m3/100m) 
-			"aE4":function() { return this.aV3/this.sV1 }, 				//Energy recovery per conveyed water (kWh/m3) 
-			"aE5":function() { return this.aV3/this.aV4 }, 				//Standardized energy recovery (kWh/m3/100m) 
-			"aE6":function() { return this.aV5/Global.gV1/this.aV6 }, 	//Water losses per mains length (m3/km/d) 
-			"aE7":function() { return this.aV7/this.aV6 }, 				//Unit head loss (m/km) 
+			"aE1":function(){return this.aV1/Global.Water.sV1}, 	//Energy consumption per conveyed water (kWh/m3) 
+			"aE2":function(){return 100*this.aV1/Global.Global.gV4}, 		//Energy consumption of abstracted water per total energy consumption (%) 
+			"aE3":function(){return this.aV1/this.aV2}, 			//Standardised Energy Consumption (kWh/m3/100m) 
+			"aE4":function(){return this.aV3/this.sV1}, 			//Energy recovery per conveyed water (kWh/m3) 
+			"aE5":function(){return this.aV3/this.aV4}, 			//Standardized energy recovery (kWh/m3/100m) 
+			"aE6":function(){return this.aV5/Global.gV1/this.aV6 }, //Water losses per mains length (m3/km/d) 
+			"aE7":function(){return this.aV7/this.aV6}, 			//Unit head loss (m/km) 
 		},
 		/* 2.2. Water Treatment*/
 		"Treatment":
@@ -129,17 +129,17 @@ var Global =
 			"tV8"  : 0, //Sludge produced in WTPs 										(kg)
 			"tV9"  : 0, //Treatment capacity											(m3)
 			/** Outputs */
-			"tE0"  :function(){},	//Treatment type (volume per type) 
-			"tE01" :function(){},	//WTPs with Pre-ox/C/F/S/Filt/Des
-			"tE02" :function(){},	//WTPs with Pre-ox/C/F/Filt/Des
-			"tE03" :function(){},	//WTPs with C/F/S/Filt/Des
-			"tE04" :function(){},	//WTPs with C/F/Filt/Des
-			"tE05" :function(){},	//WTPs with Des
-			"tE06" :function(){},	//WTPs with other sequence
-			"tE1"  :function(){},	//Energy consumption per treated water 
-			"tE2"  :function(){},	//Energy consumption of WTPs per total energy consumption 
-			"tE3"  :function(){},	//Sludge production
-			"tE4"  :function(){},	//Capacity utilisation 
+			"tE0"  :function(){return "not_implemented"},	//Treatment type (volume per type) 
+			"tE01" :function(){return "not_implemented"},	//WTPs with Pre-ox/C/F/S/Filt/Des
+			"tE02" :function(){return "not_implemented"},	//WTPs with Pre-ox/C/F/Filt/Des
+			"tE03" :function(){return "not_implemented"},	//WTPs with C/F/S/Filt/Des
+			"tE04" :function(){return "not_implemented"},	//WTPs with C/F/Filt/Des
+			"tE05" :function(){return "not_implemented"},	//WTPs with Des
+			"tE06" :function(){return "not_implemented"},	//WTPs with other sequence
+			"tE1"  :function(){return "not_implemented"},	//Energy consumption per treated water 
+			"tE2"  :function(){return "not_implemented"},	//Energy consumption of WTPs per total energy consumption 
+			"tE3"  :function(){return "not_implemented"},	//Sludge production
+			"tE4"  :function(){return "not_implemented"},	//Capacity utilisation 
 		},
 		/* 2.3. Water Distribution*/
 		"Distribution":

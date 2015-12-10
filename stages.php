@@ -66,7 +66,6 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--nav menu--><?php include"youAreHere.php"?>
 <!--TITLE--><h1>Stages Overview</h1>
 <!--HELP--><h4>Click the stage where do you want to input data. To activate stages go to <a href=configuration.php>Configuration</a>.</h4>
 

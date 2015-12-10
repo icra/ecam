@@ -65,28 +65,28 @@ var Info =
 		"gV6":
 		{
 			"description":"Energy mix consumded",
-			"magnitude":"?",
+			"magnitude":"undefined",
 			"unit":"CO2/kWh",
 			"level":"Global",
 		},
 		"gE1":
 		{
 			"description":"Energy Cost Ratio",
-			"magnitude":"?",
+			"magnitude":"undefined",
 			"unit":"N/A",
 			"level":"Global",
 		},
 		"gE2":
 		{
 			"description":"Per capita energy consumption",
-			"magnitude":"?",
+			"magnitude":"undefined",
 			"unit":"kWh/inhab/year",
 			"level":"Global",
 		},
 		"GHG":
 		{
 			"description":"Per capita GHG emissions",
-			"magnitude":"?",
+			"magnitude":"undefined",
 			"unit":"CO2e kg/inhab/year",
 			"level":"Global",
 		},
@@ -185,28 +185,28 @@ var Info =
 		"S1":
 		{
 			"description":"Quality of supplied water",
-			"magnitude":"?",
+			"magnitude":"undefined",
 			"unit":"%",
 			"level":"Water",
 		},
 		"S2":
 		{
 			"description":"Pressure of supply adequacy",
-			"magnitude":"?",
+			"magnitude":"undefined",
 			"unit":"%",
 			"level":"Water",
 		},
 		"S3":
 		{
 			"description":"Continuity of supply",
-			"magnitude":"?",
+			"magnitude":"undefined",
 			"unit":"%",
 			"level":"Water",
 		},
 		"S4":
 		{
 			"description":"Resident population connected to supply system",
-			"magnitude":"?",
+			"magnitude":"undefined",
 			"unit":"%",
 			"level":"Water",
 		},
@@ -222,7 +222,7 @@ var Info =
 			"aV2" :
 			{
 				"description":"abstracted water volume pumped x pump head in meters",
-				"magnitude":"?",
+				"magnitude":"undefined",
 				"unit":"m3 x 100m",
 				"level":"Water",
 				"sublevel":"Abstraction",
@@ -238,7 +238,7 @@ var Info =
 			"aV4" :
 			{
 				"description":"turbine water volume pumped x turbine head in meters",
-				"magnitude":"?",
+				"magnitude":"undefined",
 				"unit":"m3 x 100m",
 				"level":"Water",
 				"sublevel":"Abstraction",
@@ -278,7 +278,7 @@ var Info =
 			"aE2" :
 			{
 				"description":"Energy consumption of abstracted water per total energy consumption ",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Abstraction",
@@ -286,7 +286,7 @@ var Info =
 			"aE3" :
 			{
 				"description":"Standardised Energy Consumption ",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"kWh/m3/100m",
 				"level":"Water",
 				"sublevel":"Abstraction",
@@ -294,7 +294,7 @@ var Info =
 			"aE4" :
 			{
 				"description":"Energy recovery per conveyed water ",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"kWh/m3",
 				"level":"Water",
 				"sublevel":"Abstraction",
@@ -302,7 +302,7 @@ var Info =
 			"aE5" :
 			{
 				"description":"Standardized energy recovery ",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"kWh/m3/100m",
 				"level":"Water",
 				"sublevel":"Abstraction",
@@ -310,7 +310,7 @@ var Info =
 			"aE6" :
 			{
 				"description":"Water losses per mains length ",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"m3/km/d",
 				"level":"Water",
 				"sublevel":"Abstraction",
@@ -318,7 +318,7 @@ var Info =
 			"aE7" :
 			{
 				"description":"Unit head loss ",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"m/km",
 				"level":"Water",
 				"sublevel":"Abstraction",
@@ -327,7 +327,7 @@ var Info =
 			"tV1":
 			{
 				"description":"Volume of treated water in WTPs with Pre-ox/C/F/S/Filt/Des",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"m3",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -335,7 +335,7 @@ var Info =
 			"tV2"  :
 			{
 				"description":"Volume of treated water in WTPs with  Pre-ox/C/F/Filt/Des",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"m3",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -343,7 +343,7 @@ var Info =
 			"tV3"  :
 			{
 				"description":"Volume of treated water in WTPs with C/F/S/Filt/Des",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"m3",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -351,7 +351,7 @@ var Info =
 			"tV4"  :
 			{
 				"description":"Volume of treated water in WTPs with C/F/Filt/Des",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"m3",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -359,7 +359,7 @@ var Info =
 			"tV5"  :
 			{
 				"description":"Volume of treated water in WTPs with Des",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"m3",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -367,7 +367,7 @@ var Info =
 			"tV6"  :
 			{
 				"description":"Volume of treated water in WTPs with other sequence",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"m3",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -375,7 +375,7 @@ var Info =
 			"tV7":
 			{
 				"description":"Energy consumed in WTPs",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"kWh",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -383,7 +383,7 @@ var Info =
 			"tV8":
 			{
 				"description":"Sludge produced in WTPs",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"kg",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -391,7 +391,7 @@ var Info =
 			"tV9":
 			{
 				"description":"Treatment capacity",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"m3",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -399,7 +399,7 @@ var Info =
 			"tE0":
 			{
 				"description":"Treatment type (volume per type)",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -407,7 +407,7 @@ var Info =
 			"tE01":
 			{
 				"description":"WTPs with Pre-ox/C/F/S/Filt/Des",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -415,7 +415,7 @@ var Info =
 			"tE02":
 			{
 				"description":"WTPs with Pre-ox/C/F/Filt/Des",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -423,7 +423,7 @@ var Info =
 			"tE03":
 			{
 				"description":"WTPs with C/F/S/Filt/Des",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -431,7 +431,7 @@ var Info =
 			"tE04":
 			{
 				"description":"WTPs with C/F/Filt/Des",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -439,7 +439,7 @@ var Info =
 			"tE05":
 			{
 				"description":"WTPs with Des",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -447,7 +447,7 @@ var Info =
 			"tE06":
 			{
 				"description":"WTPs with other sequence",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -455,7 +455,7 @@ var Info =
 			"tE1":
 			{
 				"description":"Energy consumption per treated water ",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -463,7 +463,7 @@ var Info =
 			"tE2":
 			{
 				"description":"Energy consumption of WTPs per total energy consumption ",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -471,7 +471,7 @@ var Info =
 			"tE3":
 			{
 				"description":"Sludge production",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -479,7 +479,7 @@ var Info =
 			"tE4":
 			{
 				"description":"Capacity utilisation ",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Treatment",
@@ -488,7 +488,7 @@ var Info =
 			"dV1":
 			{
 				"description":"Volume injected",
-				"magnitude":"",
+				"magnitude":"Volume",
 				"unit":"m3",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -496,7 +496,7 @@ var Info =
 			"dV2":
 			{
 				"description":"Minimum pressure to be supplied at the distribution nodes",
-				"magnitude":"",
+				"magnitude":"Pressure",
 				"unit":"m",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -504,7 +504,7 @@ var Info =
 			"dV3":
 			{
 				"description":"Highest node elevation",
-				"magnitude":"",
+				"magnitude":"Distance",
 				"unit":"m",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -512,7 +512,7 @@ var Info =
 			"dV4":
 			{
 				"description":"Lowest node elevation of the stage",
-				"magnitude":"",
+				"magnitude":"Distance",
 				"unit":"m",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -520,7 +520,7 @@ var Info =
 			"dV5":
 			{
 				"description":"Average nodes elevation",
-				"magnitude":"",
+				"magnitude":"Distance",
 				"unit":"m",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -528,7 +528,7 @@ var Info =
 			"dV6":
 			{
 				"description":"Water table elevation node",
-				"magnitude":"",
+				"magnitude":"Distance",
 				"unit":"m",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -536,7 +536,7 @@ var Info =
 			"dV7":
 			{
 				"description":"Energy consumed for pumping distributed water",
-				"magnitude":"",
+				"magnitude":"Energy",
 				"unit":"kWh",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -544,7 +544,7 @@ var Info =
 			"dV8":
 			{
 				"description":"[Sum](distributed water volume pumped x pump head in meters)",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"m3 x 100 m",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -552,7 +552,7 @@ var Info =
 			"dV9":
 			{
 				"description":"Natural energy provided",
-				"magnitude":"",
+				"magnitude":"Energy",
 				"unit":"kWh",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -560,7 +560,7 @@ var Info =
 			"dV10":
 			{
 				"description":"Energy recovered at water distribution",
-				"magnitude":"",
+				"magnitude":"Energy",
 				"unit":"kWh",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -568,7 +568,7 @@ var Info =
 			"dV11":
 			{
 				"description":"Minimum required energy by users",
-				"magnitude":"",
+				"magnitude":"Energy",
 				"unit":"kWh",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -576,7 +576,7 @@ var Info =
 			"dV12":
 			{
 				"description":"Total supplied energy to the network (natural plus shaft), real system",
-				"magnitude":"",
+				"magnitude":"Energy",
 				"unit":"kWh",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -584,7 +584,7 @@ var Info =
 			"dV13":
 			{
 				"description":"Topographic energy supplied to the system",
-				"magnitude":"",
+				"magnitude":"Energy",
 				"unit":"kWh",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -592,7 +592,7 @@ var Info =
 			"dV14":
 			{
 				"description":"Total supplied energy to the network, assuming the system has no losses",
-				"magnitude":"",
+				"magnitude":"Energy",
 				"unit":"kWh",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -600,7 +600,7 @@ var Info =
 			"dV15":
 			{
 				"description":"Mains lenght",
-				"magnitude":"",
+				"magnitude":"Distance",
 				"unit":"km",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -608,7 +608,7 @@ var Info =
 			"dV16":
 			{
 				"description":"Friction pipe losses",
-				"magnitude":"",
+				"magnitude":"Headloss",
 				"unit":"m",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -616,7 +616,7 @@ var Info =
 			"dE1":
 			{
 				"description":"Energy consumption per authorized consumption",
-				"magnitude":"",
+				"magnitude":"undefined",
 				"unit":"kWh/m3",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -624,7 +624,7 @@ var Info =
 			"dE2":
 			{
 				"description":"Energy consumption of authorized consumption per total energy consumption",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -632,7 +632,7 @@ var Info =
 			"dE3":
 			{
 				"description":"Standardised Energy Consumption",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"kWh/m3/100m",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -640,7 +640,7 @@ var Info =
 			"dE4":
 			{
 				"description":"Global water distribution energy efficiency",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -648,7 +648,7 @@ var Info =
 			"dE5":
 			{
 				"description":"Percentage of topographic energy",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"%",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -656,7 +656,7 @@ var Info =
 			"dE6":
 			{
 				"description":"Water losses per mains length",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"m3/km/d",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -664,7 +664,7 @@ var Info =
 			"dE7":
 			{
 				"description":"Unit head loss",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"m/km",
 				"level":"Water",
 				"sublevel":"Distribution",
@@ -673,77 +673,77 @@ var Info =
 		"wsV1":
 		{
 			"description":"Volume of collected wastewater",
-			"magnitude":"",
+			"magnitude":"Volume",
 			"unit":"m3",
 			"level":"Waste",
 		},
 		"wsV2":
 		{
 			"description":"Resident population connected to SE",
-			"magnitude":"",
+			"magnitude":"Inhab",
 			"unit":"Inhab",
 			"level":"Waste",
 		},
 		"wsV3":
 		{
 			"description":"Wastewater resident population",
-			"magnitude":"",
+			"magnitude":"Inhab",
 			"unit":"Inhab",
 			"level":"Waste",
 		},
 		"wsV4":
 		{
 			"description":"Volume of treatedwastewater",
-			"magnitude":"",
+			"magnitude":"Volume",
 			"unit":"m3",
 			"level":"Waste",
 		},
 		"wsV5":
 		{
 			"description":"Wastewater treated by on-site systems",
-			"magnitude":"",
+			"magnitude":"Volume",
 			"unit":"m3",
 			"level":"Waste",
 		},
 		"wsV6":
 		{
 			"description":"Tests complying with dischargeconsents",
-			"magnitude":"",
+			"magnitude":"Number",
 			"unit":"num",
 			"level":"Waste",
 		},
 		"wsV7":
 		{
 			"description":"Tests carried out in WWTPs",
-			"magnitude":"",
+			"magnitude":"Number",
 			"unit":"num",
 			"level":"Waste",
 		},
 		"wsV8":
 		{
 			"description":"Volume of discharged wastewater",
-			"magnitude":"",
+			"magnitude":"Volume",
 			"unit":"m3",
 			"level":"Waste",
 		},
 		"wS1":
 		{
 			"description":"Resident population connected to sewer system",
-			"magnitude":"",
+			"magnitude":"Ratio",
 			"unit":"%",
 			"level":"Waste",
 		},
 		"wS2":
 		{
 			"description":"Treated Wastewater in WWTP",
-			"magnitude":"",
+			"magnitude":"Ratio",
 			"unit":"%",
 			"level":"Waste",
 		},
 		"wS3":
 		{
 			"description":"WWTP compliance with discharge consents",
-			"magnitude":"",
+			"magnitude":"Ratio",
 			"unit":"%",
 			"level":"Waste",
 		},
@@ -751,7 +751,7 @@ var Info =
 			"wcV1":
 			{
 				"description":"Energy consumed for pumping collected wastewater",
-				"magnitude":"",
+				"magnitude":"Energy",
 				"unit":"kWh",
 				"level":"Waste",
 				"sublevel":"Collection",
@@ -759,7 +759,7 @@ var Info =
 			"wcV2":
 			{
 				"description":"collected wastewater volume pumped x pump head in meters",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"m3 x 100m",
 				"level":"Waste",
 				"sublevel":"Collection",
@@ -767,7 +767,7 @@ var Info =
 			"wcE1":
 			{
 				"description":"Energy consumption per collected wastewater",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"kWh/m3",
 				"level":"Waste",
 				"sublevel":"Collection",
@@ -775,7 +775,7 @@ var Info =
 			"wcE2":
 			{
 				"description":"Energy consumption of collected wastewater per total energy consumption",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"%",
 				"level":"Waste",
 				"sublevel":"Collection",
@@ -783,7 +783,7 @@ var Info =
 			"wcE3":
 			{
 				"description":"Standardised Energy Consumption",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"kWh/m3/100m",
 				"level":"Waste",
 				"sublevel":"Collection",
@@ -792,7 +792,7 @@ var Info =
 			"wtV1":
 			{
 				"description":"Volume of treated wastewater in WWTPs with trickling filters (TF)",
-				"magnitude":"",
+				"magnitude":"Volume",
 				"unit":"m3",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -800,7 +800,7 @@ var Info =
 			"wtV2":
 			{
 				"description":"Volume of treated wastewater in WWTPs with activated sludge (AS)",
-				"magnitude":"",
+				"magnitude":"Volume",
 				"unit":"m3",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -808,7 +808,7 @@ var Info =
 			"wtV3":
 			{
 				"description":"Volume of treated wastewater in WWTPs with AS and Coagulation/Filtration (C/F)",
-				"magnitude":"",
+				"magnitude":"Volume",
 				"unit":"m3",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -816,7 +816,7 @@ var Info =
 			"wtV4":
 			{
 				"description":"Volume of treated wastewater in WWTPs with AS nitrification and C/F",
-				"magnitude":"",
+				"magnitude":"Volume",
 				"unit":"m3",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -824,7 +824,7 @@ var Info =
 			"wtV5":
 			{
 				"description":"Volume of treated wastewater in WWTPs with Laggons",
-				"magnitude":"",
+				"magnitude":"Volume",
 				"unit":"m3",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -832,7 +832,7 @@ var Info =
 			"wtV6":
 			{
 				"description":"Volume of treated wastewater in WWTPs with other type of treatment",
-				"magnitude":"",
+				"magnitude":"Volume",
 				"unit":"m3",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -840,7 +840,7 @@ var Info =
 			"wtV7":
 			{
 				"description":"Energy consumed in WWTPs",
-				"magnitude":"",
+				"magnitude":"Energy",
 				"unit":"kWh",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -848,7 +848,7 @@ var Info =
 			"wtV8":
 			{
 				"description":"BOD mass removed",
-				"magnitude":"",
+				"magnitude":"Mass",
 				"unit":"kg BOD",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -856,7 +856,7 @@ var Info =
 			"wtV9":
 			{
 				"description":"Energy produced in WWTPs",
-				"magnitude":"",
+				"magnitude":"Energy",
 				"unit":"kWh",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -864,7 +864,7 @@ var Info =
 			"wtV10":
 			{
 				"description":"Sludge produced in WWTPs",
-				"magnitude":"",
+				"magnitude":"Mass",
 				"unit":"kg",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -872,7 +872,7 @@ var Info =
 			"wtV11":
 			{
 				"description":"Dry weight in sludge produced",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"% (w/w)",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -880,7 +880,7 @@ var Info =
 			"wtV12":
 			{
 				"description":"Treatment capacity",
-				"magnitude":"",
+				"magnitude":"Volume",
 				"unit":"m3",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -888,7 +888,7 @@ var Info =
 			"wtV13":
 			{
 				"description":"BOD influent",
-				"magnitude":"",
+				"magnitude":"Concentration",
 				"unit":"mg/l",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -896,7 +896,7 @@ var Info =
 			"wtE0":
 			{
 				"description":"Treatment type (volume per type)",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"% of each treatment",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -904,7 +904,7 @@ var Info =
 			"wtE01":
 			{
 				"description":"WWTPs with trickling filters (TF)",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"%",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -912,7 +912,7 @@ var Info =
 			"wtE02":
 			{
 				"description":"WWTPs with activated sludge (AF)",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"%",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -920,7 +920,7 @@ var Info =
 			"wtE03":
 			{
 				"description":"WWTPs with AS and Coagulation/Filtration (C/F)",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"%",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -928,7 +928,7 @@ var Info =
 			"wtE04":
 			{
 				"description":"WWTPs with AS nitrification and C/F ",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"%",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -936,7 +936,7 @@ var Info =
 			"wtE05":
 			{
 				"description":"WWTPs with Lagoons",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"%",
 				"level":"Waste",
 				"sublevel":"Treatment",
@@ -944,7 +944,7 @@ var Info =
 			"wtE06":
 			{
 				"description":"WWTPs with other type of treatment",
-				"magnitude":"",
+				"magnitude":"Ratio",
 				"unit":"%",
 				"level":"Waste",
 				"sublevel":"Treatment",
