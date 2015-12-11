@@ -2,7 +2,7 @@
 	function nlink($href,$name)
 	//void: echo a link if the current web page is not the one in the link's href 
 	{
-		if($href==$_SERVER['PHP_SELF']) 
+		if($href==$_SERVER['REQUEST_URI']) 
 			echo "<div class=active-tab><a href='$href' style=color:black>$name</a></div>";
 		else 
 			echo "<div class=inactive-tab><a href='$href'>$name</a></div>";

@@ -12,204 +12,112 @@
  */
 var Info =
 {
-	//1. GLOBAL
-		"gV1":
-		{
-			"description"	:"Assessment period",
-			"magnitude"		:"Time",
-			"unit"			:"Days",
-			"level"			:"Global",
-		},
-		"gV2":
-		{
-			"description"	:"Energy costs",
-			"magnitude"		:"Currency",
-			"unit"			:"USD",
-			"level"			:"Global",
-		},
-		"gV2w":
-		{
-			"description":"Energy costs of the water utility",
-			"magnitude":"Currency",
-			"unit":"USD",
-			"level":"Global",
-		},
-		"gV2ww":
-		{
-			"description":"Energy costs of the wastewater utility",
-			"magnitude":"Currency",
-			"unit":"USD",
-			"level":"Global",
-		},
-		"gV3":
-		{
-			"description":"Running costs",
-			"magnitude":"Currency",
-			"unit":"eur",
-			"level":"Global",
-		},
-		"gV4":
-		{
-			"description":"Total energy consumed",
-			"magnitude":"Energy",
-			"unit":"kWh",
-			"level":"Global",
-		},
-		"gV5":
-		{
-			"description":"Resident population within the utility area of service",
-			"magnitude":"inhab",
-			"unit":"inhab",
-			"level":"Global",
-		},
-		"gV6":
-		{
-			"description":"Energy mix consumded",
-			"magnitude":"undefined",
-			"unit":"CO2/kWh",
-			"level":"Global",
-		},
-		"gE1":
-		{
-			"description":"Energy Cost Ratio",
-			"magnitude":"undefined",
-			"unit":"N/A",
-			"level":"Global",
-		},
-		"gE2":
-		{
-			"description":"Per capita energy consumption",
-			"magnitude":"undefined",
-			"unit":"kWh/inhab/year",
-			"level":"Global",
-		},
-		"GHG":
-		{
-			"description":"Per capita GHG emissions",
-			"magnitude":"undefined",
-			"unit":"CO2e kg/inhab/year",
-			"level":"Global",
-		},
+	//1. UWS
+	"gV1":{
+		"description"	:"Assessment period",
+		"magnitude"		:"Time",
+		"unit"			:"Days",
+		"level"			:"UWS",
+	},
+	"gV2":{
+		"description"	:"Energy costs",
+		"magnitude"		:"Currency",
+		"unit"			:"USD",
+		"level"			:"UWS",
+	},
+	"gV3":{
+		"description":"Running costs",
+		"magnitude":"Currency",
+		"unit":"eur",
+		"level":"UWS",
+	},
+	"gV9":{
+		"description":"Energy mix emissions",
+		"magnitude":"Ratio",
+		"unit":"kg CO2/kWh",
+		"level":"UWS",
+	},
+
 	//2. WATER SUPPLY
-		"sV1":
-		{
-			"description":"Volume of Conveyed Water",
-			"magnitude":"Volume",
-			"unit":"m3",
-			"level":"Water",
-		},
-		"sV2":
-		{
-			"description":"Volume of Treated Water",
-			"magnitude":"Volume",
-			"unit":"m3",
-			"level":"Water",
-		},
-		"sV3":
-		{
-			"description":"Treated Water quality tests carried out",
-			"magnitude":"Number",
-			"unit":"num",
-			"level":"Water",
-		},
-		"sV4":
-		{
-			"description":"Compliance of aesthetic tests",
-			"magnitude":"Number",
-			"unit":"num",
-			"level":"Water",
-		},
-		"sV5":
-		{
-			"description":"Compliance of microbiological tests",
-			"magnitude":"Number",
-			"unit":"num",
-			"level":"Water",
-		},
-		"sV6":
-		{
-			"description":"Compliance of physical-chemical tests",
-			"magnitude":"Number",
-			"unit":"num",
-			"level":"Water",
-		},
-		"sV7":
-		{
-			"description":"Compliance of radioactivity tests",
-			"magnitude":"Number",
-			"unit":"num",
-			"level":"Water",
-		},
-		"sV8":
-		{
-			"description":"Volume of authorized consumption",
-			"magnitude":"Volume",
-			"unit":"m3",
-			"level":"Water",
-		},
-		"sV9":
-		{
-			"description":"Delivery points with adequate pressure",
-			"magnitude":"Number",
-			"unit":"num",
-			"level":"Water",
-		},
-		"sV10":
-		{
-			"description":"Number of service connections",
-			"magnitude":"Number",
-			"unit":"num",
-			"level":"Water",
-		},
-		"sV11":
-		{
-			"description":"Time system is pressurised",
-			"magnitude":"Time",
-			"unit":"hours",
-			"level":"Water",
-		},
-		"sV12":
-		{
-			"description":"Resident population connected to supply systems",
-			"magnitude":"Inhab",
-			"unit":"Inhab",
-			"level":"Water",
-		},
-		"sV13":
-		{
-			"description":"Water supply resident population",
-			"magnitude":"inhab",
-			"unit":"Inhab",
-			"level":"Water",
-		},
-		"S1":
-		{
-			"description":"Quality of supplied water",
-			"magnitude":"undefined",
-			"unit":"%",
-			"level":"Water",
-		},
-		"S2":
-		{
-			"description":"Pressure of supply adequacy",
-			"magnitude":"undefined",
-			"unit":"%",
-			"level":"Water",
-		},
-		"S3":
-		{
-			"description":"Continuity of supply",
-			"magnitude":"undefined",
-			"unit":"%",
-			"level":"Water",
-		},
-		"S4":
-		{
-			"description":"Resident population connected to supply system",
-			"magnitude":"undefined",
-			"unit":"%",
-			"level":"Water",
-		},
+	"sV13":{
+		"description":"Serviced population in supply systems",
+		"magnitude":"Inhab",
+		"unit":"Inhab",
+		"level":"Water",
+	},
+	"gV8w":{
+		"description":"Resident population within the water utility area of service",
+		"magnitude":"Inhab",
+		"unit":"Inhab",
+		"level":"Water",
+	},
+	"gV2w":{
+		"description":"Energy costs of the water utility",
+		"magnitude":"Currency",
+		"unit":"USD",
+		"level":"Water",
+	},
+	"gV3w":{
+		"description":"Running costs of the utility related to the urban drinking water system",
+		"magnitude":"Currency",
+		"unit":"USD",
+		"level":"Water",
+	},
+	"gV10w":{
+		"description":"Total energy consumed from the grid (from power bills) during the assessment period",
+		"magnitude":"Energy",
+		"unit":"kWh",
+		"level":"Water",
+	},
+	"dV1":{
+		"description":"Total volume produced for urban drinking water system",
+		"magnitude":"Volume",
+		"unit":"m3",
+		"level":"Water",
+	},
+	"sV8":{
+		"description":"Volume of authorized consumption",
+		"magnitude":"Volume",
+		"unit":"m3",
+		"level":"Water",
+	},
+	"dD1":{
+		"description":"Direct CO2 emitted in urban drinking water system from on-site engines",
+		"magnitude":"kg CO2",
+		"unit":"Mass",
+		"level":"Water",
+	},
+	"gV4w":{
+		"description":"Total eletrical energy consumed from the grid and from self-production related to the urban drinking water system (kWh)",
+		"magnitude":"",
+		"unit":"",
+		"level":"Water",
+	},
+	"gV11w":{
+		"description":"Net total process related grid energy consumed by the utility 	(kWh)",
+		"magnitude":"",
+		"unit":"",
+		"level":"Water",
+	},
+	"gV5w":{
+		"description":"Electrical energy produced by the utility  in urban drinking water system		(kWh)",
+		"magnitude":"",
+		"unit":"",
+		"level":"Water",
+	},
+	"gV6w":{
+		"description":"Non water related Renewable electricity production by the utility in urban drinking water system	(kWh)",
+		"magnitude":"",
+		"unit":"",
+		"level":"Water",
+	},
+	"gV7w":{
+		"description":"CO2e of heat used for District heating or cooling from urban  drinking water system	(kg CO2)",
+		"magnitude":"",
+		"unit":"",
+		"level":"Water",
+	},
+
 		//2.1 Abstraction
 			"aV1" :
 			{

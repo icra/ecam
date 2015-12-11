@@ -18,6 +18,7 @@
 		#navStages img{width:40px;vertical-align:middle;margin:0.5em}
 	</style>
 	<ul>
+		<li stage=uws><a href=edit.php?level=UWS>UWS</a>
 		<li stage=water><a href=edit.php?level=Water>Water Supply <span style="font-size:16px;color:white;vertical-align:top">&#8964;</span></a>
 			<ul>
 				<li stage=waterAbs><img src=img/waterAbs.png><a href=edit.php?level=Water&sublevel=Abstraction>Water Abstraction</a></li>

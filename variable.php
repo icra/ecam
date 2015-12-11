@@ -3,7 +3,7 @@
 	<title>ECAM Web Tool</title>
 	<link rel=stylesheet href="css.css"><style>
 		th,td{padding:1.5em}
-		td.th{background:#00aff1;color:white;vertical-align:top}
+		td.th{background:#00aff1;color:white;vertical-align:middle}
 		td.input{color:#666;background-color:#eee;cursor:cell}
 		td.input input{font-size:18px}
 	</style>

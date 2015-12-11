@@ -72,12 +72,12 @@
 				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
 				//link in description? discuss
 				//newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+Info[field].description+"</a>"
-				newRow.insertCell(-1).innerHTML=Info[field].description
+				newRow.insertCell(-1).innerHTML= Info[field] ? Info[field].description : "<span style=color:#ccc>not defined</span>"
 				var newCell=newRow.insertCell(-1)
 				newCell.className="input"
 				newCell.setAttribute('onclick','transformField(this)')
 				newCell.innerHTML=CurrentLevel[field]
-				newRow.insertCell(-1).innerHTML=Info[field].unit
+				newRow.insertCell(-1).innerHTML= Info[field] ? Info[field].unit : "<span style=color:#ccc>not defined</span>"
 				newRow.insertCell(-1).innerHTML=""+
 					"<label><input type=radio name="+field+" checked	> Calculated</label> "+
 					"<label><input type=radio name="+field+"			> Assumed	</label> "
@@ -98,9 +98,9 @@
 				newRow.setAttribute('onmouseover',"hlFields('"+formula+"',1)")
 				newRow.setAttribute('onmouseout',"hlFields('"+formula+"',0)")
 				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
-				newRow.insertCell(-1).innerHTML=Info[field].description
+				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>"
 				newRow.insertCell(-1).innerHTML=CurrentLevel[field]()
-				newRow.insertCell(-1).innerHTML=Info[field].unit
+				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>"
 			}
 		}
 
@@ -148,9 +148,9 @@
 	//Set a navigable title for page
 	switch($level)
 	{
-		case "Global": $titleLevel="Global";break;
 		case "Water":  $titleLevel="Water Supply";break;
 		case "Waste":  $titleLevel="Wastewater";break;
+		default:	   $titleLevel=$level;break;
 	}
 	$sep="<span style=color:black>&rsaquo;</span>";
 	$title=isset($sublevel) ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$sublevel</span>" : "<span style=color:black>$titleLevel</span>";
