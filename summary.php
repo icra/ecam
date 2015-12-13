@@ -63,7 +63,7 @@
 		{
 			//return string
 			var ret="<tr><td colspan=4 style='background:#eee;font-weight:bold'>"+name
-			ret+=": <span count="+family+">Inactive</span>"
+			ret+=": <span count="+family+">0 (Inactive)</span>"
 			//check if active
 			if(Global.General["Active Stages"][family]==0)return ret
 			//fill rows
@@ -78,11 +78,13 @@
 					}
 				?>
 				if(typeof(object[variable])!="<?php echo $typeof?>")continue
+				var description=Info[variable]?Info[variable].description:"<span style=color:#ccc>no description</span>"
+				var unit=Info[variable]?Info[variable].unit:"<span style=color:#ccc>no unit</span>"
 				ret+="<tr family='"+family+"'>"+
 					"<td style='font-weight:bold'><a class=blue href=variable.php?id="+variable+">"+variable+"</a>"+
-					"<td>"+Info[variable].description+
+					"<td>"+description+
 					"<td>"+object[variable]<?php if($type=="output")echo "()"?>+
-					"<td>"+Info[variable].unit
+					"<td>"+unit
 			}
 			return ret
 		}
@@ -103,12 +105,6 @@
 	<div class=inline style="font-size:11px;width:55%;padding:0">
 		<table style="width:100%" level=2><tr><th colspan=4>Level 2</table>
 	</div>
-</div>
-
-<!--prev & next buttons-->
-<div style=margin:1em> 
-	<button class="button prev" onclick=window.location='stages.php'>Previous</button> 
-	<button class="button next" onclick=window.location='summary.php'>Next</button>
 </div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

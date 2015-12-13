@@ -13,32 +13,30 @@
 			//input element that we are clicking
 			var checkbox=document.getElementById(id)
 
-			//background color = green or white depending on checkbox
-			checkbox.parentNode.parentNode.style.backgroundColor=checkbox.checked?"#73AD21":""
-
-			//SUBELEMENTS: they have classname==id
+			//SUBLEVELS: they have classname==id
 			var elements=document.getElementsByClassName(id)
 			for(var i=0;i<elements.length;i++)
 			{
 				if(checkbox.checked)
 				{
-					elements[i].removeAttribute('disabled')
-					elements[i].parentNode.style.color=""
+					/**remove disabled*/ elements[i].removeAttribute('disabled')
+					/**normal color*/ elements[i].parentNode.style.color=""
 				}
 				else
 				{
-					elements[i].checked=false
-					elements[i].setAttribute('disabled',true)
-					elements[i].parentNode.style.color="#ccc"
-					elements[i].parentNode.parentNode.style.backgroundColor=""
-					//modifiy Global Active Stages
-					Global.General["Active Stages"][elements[i].id]=0
+					/**uncheck*/elements[i].checked=false
+					/**set disabled*/elements[i].setAttribute('disabled',true)
+					/**set grey color*/elements[i].parentNode.style.color="#ccc"
+					/**set grey bg*/elements[i].parentNode.parentNode.style.backgroundColor=""
+					/**modifiy Active Stages*/Global.General["Active Stages"][elements[i].id]=0
 				}
 			}
 
-			//update Global.General["Active Stages"][id]
-			var newState=checkbox.checked?1:0
-			Global.General["Active Stages"][id]=newState
+			//background color: green or white
+			checkbox.parentNode.parentNode.style.backgroundColor=checkbox.checked?"#73AD21":""
+
+			//update Active Stages
+			Global.General["Active Stages"][id] = checkbox.checked ? 1 : 0
 			updateResult()
 
 			//update select in system description
@@ -50,14 +48,37 @@
 		{
 			//go over Levels
 			for(stage in Global.General["Active Stages"])
-			{
 				if(Global["General"]["Active Stages"][stage])
 				{
-					//set checkbox as checked
-					document.getElementById(stage).checked=true
+					/**set checked*/document.getElementById(stage).checked=true
 					activate(stage)
 				}
+		}
+
+		/** For questions associated to stages*/
+		function updateSelect(id)
+		{
+			var select = document.getElementById(id)
+			var options = ""
+			for(field in Global.General["Active Stages"])
+			{
+				if(Global.General["Active Stages"][field])
+				{
+					switch(field)
+					{
+						case "water":field="Water Supply (Level 1)";break;
+						case "waterAbs":field="Water Abstraction (Level 2)";break;
+						case "waterTre":field="Water Treatment (Level 2)";break;
+						case "waterDis":field="Water Distribution (Level 2)";break;
+						case "waste":field="Wastewater (Level 1)";break;
+						case "wasteCol":field="Wastewater Collection (Level 2)";break;
+						case "wasteTre":field="Wastewater Treatment (Level 2)";break;
+						case "wasteDis":field="Wastewater Discharge (Level 2)";break;
+					}
+					options+="<option>"+field+"</option>"
+				}
 			}
+			select.innerHTML=options
 		}
 
 		function init()
@@ -77,8 +98,8 @@
 	<!--this table styles--><style>
 		#selectStage img{width:40px;vertical-align:middle}
 		#selectStage th{width:220px;}
-		#selectStage td{text-align:left;}
-		#selectStage label{cursor:pointer}
+		#selectStage td{text-align:left;padding:0}
+		#selectStage label{cursor:pointer;display:block;min-height:100%;padding:0.5em}
 	</style>
 	<tr><th>Level 1<th>Level 2
 	<tr><td rowspan=3 style="text-align:center"> 
@@ -143,35 +164,7 @@
 <table class=inline>
 	<tr><th colspan=2>ADDITIONAL SYSTEM INFO (not implemented)
 	<tr><th>Select stage						<th> 
-		<select id=systemDescription>
-			<script>
-				//this should be automatically updated, now it's fixed
-				function updateSelect(id)
-				{
-					var select = document.getElementById(id)
-					var options = ""
-					for(field in Global.General["Active Stages"])
-					{
-						if(Global.General["Active Stages"][field])
-						{
-							switch(field)
-							{
-								case "water":field="Water Supply (Level 1)";break;
-								case "waterAbs":field="Water Abstraction (Level 2)";break;
-								case "waterTre":field="Water Treatment (Level 2)";break;
-								case "waterDis":field="Water Distribution (Level 2)";break;
-								case "waste":field="Wastewater (Level 1)";break;
-								case "wasteCol":field="Wastewater Collection (Level 2)";break;
-								case "wasteTre":field="Wastewater Treatment (Level 2)";break;
-								case "wasteDis":field="Wastewater Discharge (Level 2)";break;
-							}
-							options+="<option>"+field+"</option>"
-						}
-					}
-					select.innerHTML=options
-				}
-			</script>
-		</select>
+		<select id=systemDescription></select>
 	<tr> <td>Is your system producing energy?  	<td> <select> <option>No <option>Yes </select>
 	<tr> <td>Is your topography flat?  			<td> <select> <option>No <option>Yes </select>
 	<tr> <td>Do you want other emissions?		<td> <select> <option>No <option>Yes </select>

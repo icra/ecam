@@ -92,10 +92,4 @@
 
 <!--DIAGRAM--><?php include'diagram.php'?>
 
-<!--PREV & NEXT BUTTONS-->
-<div style=margin:1em> 
-	<button class="button prev" onclick=window.location='configuration.php'>Previous</button> 
-	<button class="button next" onclick=window.location='allInputs.php'>Next</button>
-</div>
-
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

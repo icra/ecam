@@ -62,7 +62,7 @@
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
 			newCell.innerHTML="Description"
-			newRow.insertCell(-1).innerHTML=Info[id].description
+			newRow.insertCell(-1).innerHTML=Info[id]?Info[id].description:"<span style=color:#ccc>no description</span>"
 
 			//Magnitude
 			newRow=t.insertRow(-1)
@@ -143,6 +143,11 @@
 
 <script>
 	//Define some global variables
+	if(!Info[id])
+	{
+		document.write("<div>ERROR. Variable not defined in dataModel/Info.js</div>")
+		window.stop()
+	}
 	var level 		 = Info[id].level
 	var sublevel 	 = Info[id].sublevel
 	var currentStage = sublevel ? Global[level][sublevel] : Global[level]

@@ -197,7 +197,7 @@
 			for(var i=0;i<elements.length;i++)
 			{
 				//Select non active stages
-				if(!Global.General["Active Stages"][elements[i].getAttribute('stage')]) 
+				if(0==Global.General["Active Stages"][elements[i].getAttribute('stage')]) 
 				{
 					elements[i].setAttribute('disabled',true)
 					elements[i].setAttribute('title','Inactive stage. Go to Configuration to enable it')

@@ -130,7 +130,7 @@
 					var newCell=newRow.insertCell(-1)
 					newCell.style.textAlign="left"
 					newCell.style.fontSize="10px"
-					newCell.innerHTML="<a href=variable.php?id="+code+">"+Info[code].description+"</a>"
+					newCell.innerHTML=Info[code]?Info[code].description:"<span style=color:#ccc>not defined</span>"
 					//go over substages
 					for(s in substages)
 					{
@@ -155,7 +155,7 @@
 					//Unit for current input
 					var newCell=newRow.insertCell(-1)
 					newCell.style.textAlign='left'
-					newCell.innerHTML=Info[code].unit
+					newCell.innerHTML=Info[code]?Info[code].unit:"<span style=color:#ccc>not defined</span>"
 				}
 				//Options
 				var newRow = t.insertRow(-1)
@@ -220,7 +220,7 @@
 	$title="<a href=stages.php>Stages</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages (Level 3)</a>";
 ?>
 <!--TITLE--><h1><?php echo $title?></h1>
-<!--HELP--><h4>Here you can subdivide your Level 2 Stage into new Level 3 Substages</h4>
+<!--HELP--><h4>Here you can subdivide your Level 2 Stage into Substages</h4>
 <!--new substage button--><button onclick=newSubstage() class=button>+ New Substage</button>
 <!--substages counter--><div class=inline style="border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
 
