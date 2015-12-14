@@ -24,29 +24,30 @@
 	<script>
 		function init()
 		{
-			updateResult()
 			updateLevel1()
 			updateLevel2()
 			updateCounts()
+			updateResult()
 		}
 
 		function updateLevel1()
 		{
 			var t=document.querySelector("[level='1']")
 			while(t.rows.length>1)t.deleteRow(-1)
-			t.innerHTML+=tableRows(Global.Water,"Water Supply","water")
-			t.innerHTML+=tableRows(Global.Waste,"Wastewater","waste")
+			t.innerHTML+=tableRows(Global.UWS,  "UWS", 	        "uws",   "edit.php?level=UWS")
+			t.innerHTML+=tableRows(Global.Water,"Water Supply", "water", "edit.php?level=Water")
+			t.innerHTML+=tableRows(Global.Waste,"Wastewater",   "waste", "edit.php?level=Waste")
 		}
 		function updateLevel2()
 		{
 			var t=document.querySelector("[level='2']")
 			while(t.rows.length>1)t.deleteRow(-1)
-			t.innerHTML+=tableRows(Global.Water.Abstraction,	"Water Abstraction",		"waterAbs")
-			t.innerHTML+=tableRows(Global.Water.Treatment,		"Water Treatment",			"waterTre")
-			t.innerHTML+=tableRows(Global.Water.Distribution,	"Water Distribution",		"waterDis")
-			t.innerHTML+=tableRows(Global.Waste.Collection,		"Wastewater Collection",	"wasteCol")
-			t.innerHTML+=tableRows(Global.Waste.Treatment,		"Wastewater Treatment",		"wasteTre")
-			t.innerHTML+=tableRows(Global.Waste.Discharge,		"Wastewater Discharge",		"wasteDis")
+			t.innerHTML+=tableRows(Global.Water.Abstraction,  "Water Abstraction",	  "waterAbs", "edit.php?level=Water&sublevel=Abstraction")
+			t.innerHTML+=tableRows(Global.Water.Treatment,	  "Water Treatment",	  "waterTre", "edit.php?level=Water&sublevel=Treatment")
+			t.innerHTML+=tableRows(Global.Water.Distribution, "Water Distribution",	  "waterDis", "edit.php?level=Water&sublevel=Distribution")
+			t.innerHTML+=tableRows(Global.Waste.Collection,	  "Wastewater Collection","wasteCol", "edit.php?level=Waste&sublevel=Collection")
+			t.innerHTML+=tableRows(Global.Waste.Treatment,	  "Wastewater Treatment", "wasteTre", "edit.php?level=Waste&sublevel=Treatment")
+			t.innerHTML+=tableRows(Global.Waste.Discharge,	  "Wastewater Discharge", "wasteDis", "edit.php?level=Waste&sublevel=Discharge")
 		}
 		function updateCounts()
 		{
@@ -59,10 +60,10 @@
 		}
 
 		//** Create rows and columns for a table with specified object
-		function tableRows(object,name,family)
+		function tableRows(object,name,family,href)
 		{
 			//return string
-			var ret="<tr><td colspan=4 style='background:#eee;font-weight:bold'>"+name
+			var ret="<tr><td colspan=4 style='background:#eee;font-weight:bold'><a href="+href+">"+name+"</a>"
 			ret+=": <span count="+family+">0 (Inactive)</span>"
 			//check if active
 			if(Global.General["Active Stages"][family]==0)return ret
