@@ -1,7 +1,9 @@
 <!doctype html><html><head>
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
-	<?php include'imports.php'?>
+	<link rel="stylesheet" href="css.css">
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
 	<style>
 		img{margin:1em}
 	</style>

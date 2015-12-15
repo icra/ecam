@@ -1,3 +1,5 @@
+<?php include'currentSystem.php'?>
+
 <?php
 	function nlink($href,$name)
 	//void: echo a link if the current web page is not the one in the link's href 
@@ -40,3 +42,4 @@
 		nlink("/ecam/contact.php","Contact");
 	?>
 </div>
+

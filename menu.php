@@ -26,10 +26,12 @@
 		reader.onload=function()
 		{
 			copyFieldsFrom(JSON.parse(reader.result),"Global")
-			init() //this function is different in edit.php and getStarted.php
+			init()
+			window.location.reload()
 		}
 		reader.readAsText(file);
 	}
+
 </script>
 
 <!--MENU-->

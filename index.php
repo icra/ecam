@@ -5,7 +5,13 @@
 	<style>
 		img{margin:1em}
 	</style>
-</head><body><center>
+	<script>
+		function init()
+		{
+			updateResult()
+		}
+	</script>
+</head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1 class=blue style=padding-bottom:0>ECAM</h1>
 <!--SUBTITLE--> <h3> Energy performance and Carbon emissions Assessment and Monitoring Tool </h3>
@@ -28,3 +34,4 @@ First time using ECAM Web Tool? Click "New System" or learn more in <a href=reso
 </div>
 <!--giz--><img src=img/giz.png>
 <!--bmb--><img src=img/BMUB.png width=13%>
+<!--CURRENT JSON--><?php include'currentJSON.php'?>
