@@ -1,8 +1,7 @@
 
-<hr>
-
 <!--CURRENT GLOBAL OBJECT IN JSON-->
-<div style="text-align:left;border:1px solid #ccc;margin:1em;width:30%;background:#fafafa">
+<div style="display:
+;text-align:left;border:1px solid #ccc;margin:1em;width:30%;background:#fafafa">
 
 	<pre><b>Current System</b><br><span id=currentGlobal></span></pre>
 

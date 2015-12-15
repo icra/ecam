@@ -15,12 +15,7 @@
 <!doctype html><html><head>
 	<meta charset=utf-8>
 	<title>ECAM Web App</title>
-	<link rel=stylesheet href="css.css"><style>
-	</style>
-	<script src="dataModel/info.js"></script><!--All variable descriptions and units object here-->
-	<script src="dataModel/global.js"></script><!--Default Global object here-->
-	<script src="js/cookies.js"></script>
-	<script src="js/updateGlobalFromCookies.js"></script>
+	<?php include'imports.php'?>
 	<script>
 		function init()
 		{
@@ -63,10 +58,21 @@
 		function tableRows(object,name,family,href)
 		{
 			//return string
-			var ret="<tr><td colspan=4 style='background:#eee;font-weight:bold'><a href="+href+">"+name+"</a>"
-			ret+=": <span count="+family+">0 (Inactive)</span>"
-			//check if active
-			if(Global.General["Active Stages"][family]==0)return ret
+			var ret="<tr><td colspan=4 style='background:#eee;font-weight:bold'>"
+			
+			//make link or not depending on active 
+			if(Global.General["Active Stages"][family]==0)
+			{
+				ret+=name+" (inactive)"
+				return ret //if inactive, stop here
+			}
+			else 
+			{
+				ret+="<a href="+href+">"+name+"</a>"
+				//create a input/output count for the stage
+				ret+=": <span count="+family+">0</span> <?php echo $type?>s"
+			}
+
 			//fill rows
 			for(variable in object)
 			{

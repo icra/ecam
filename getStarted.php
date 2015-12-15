@@ -1,15 +1,12 @@
 <!doctype html><html><head>
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
-	<link rel=stylesheet href="css.css">
+	<?php include'imports.php'?>
 	<style>
 		th{vertical-align:middle}
 		th,td{padding:1em}
 		input,textarea{padding:0.5em}
 	</style>
-	<script src=dataModel/global.js></script>
-	<script src=js/cookies.js></script>
-	<script src=js/updateGlobalFromCookies.js></script>
 	<script>
 		/** Create a row for a field in Global.General */
 		function tableRow(field,input,type)
@@ -48,9 +45,8 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--MENU--><?php include"menu.php"?>
-<!--TITLE--><h2>GET STARTED</h2>
-<!--SUBTITLE--><h4>Edit General Data of your system</h4>
+<!--TITLE--><h1>Get started</h1>
+<!--SUBTITLE--><h4>Edit general data of your system</h4>
 <!--FORM--><table id=form style="text-align:left;"></table>
 <!--NEXT--><div style=margin:1em><button class="button next" onclick=window.location='configuration.php'>Next</button></div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

@@ -1,17 +1,13 @@
 <!doctype html><html><head>
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
-	<link rel=stylesheet href="css.css"><style>
+	<?php include'imports.php'?>
+	<style>
 		th,td{padding:1.5em}
 		td.th{background:#00aff1;color:white;vertical-align:middle}
 		td.input{color:#666;background-color:#eee;cursor:cell}
 		td.input input{font-size:18px}
 	</style>
-	<script src="dataModel/info.js"></script>
-	<script src="dataModel/global.js"></script>
-	<script src="js/cookies.js"></script>
-	<script src="js/updateGlobalFromCookies.js"></script>
-	<script src="js/formulas.js"></script>
 	<script>
 		function init()
 		{

@@ -15,16 +15,13 @@
 <!doctype html><html><head>
 	<meta charset=utf-8>
 	<title>ECAM Web App</title>
-	<link rel=stylesheet href="css.css"><style>
+	<?php include'imports.php'?>
+	<style>
 		td{text-align:center}
 		th{vertical-align:middle}
 		td.input input{width:40px;font-size:18px}
 		td.input{width:80px;text-align:right;background-color:#eee;cursor:cell}
 	</style>
-	<script src="dataModel/info.js"></script><!--All variable descriptions and units object here-->
-	<script src="dataModel/global.js"></script><!--Default Global object here-->
-	<script src="js/cookies.js"></script><!--basic cookie functions here-->
-	<script src="js/updateGlobalFromCookies.js"></script><!--update Global object from cookie "GLOBAL" here-->
 	<script>
 		<?php
 			/** establish the level 2 stage we are going to be focused, since substages of level 3 have the same variables*/

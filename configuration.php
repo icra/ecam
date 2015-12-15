@@ -1,11 +1,7 @@
 <!doctype html><html><head>
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
-	<link rel=stylesheet href="css.css">
-	<script src="dataModel/global.js"></script>
-	<script src="dataModel/info.js"></script>
-	<script src="js/cookies.js"></script>
-	<script src="js/updateGlobalFromCookies.js"></script>
+	<?php include'imports.php'?>
 	<script>
 		/** Enable or disable <input type=checkbox id=id> */
 		function activate(id)
@@ -50,6 +46,7 @@
 			for(stage in Global.General["Active Stages"])
 				if(Global["General"]["Active Stages"][stage])
 				{
+					/**uws is always active*/if(stage=="uws"){continue}
 					/**set checked*/document.getElementById(stage).checked=true
 					activate(stage)
 				}
@@ -90,7 +87,7 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h2>Configuration</h2>
+<!--TITLE--><h1>Configuration</h1>
 <!--SUBTITLE--><h4>Click to activate the stages of your system.</h4>
 
 <!--SELECT STAGES-->

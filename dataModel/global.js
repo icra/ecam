@@ -46,6 +46,7 @@ var Global =
 		/** These fields have the same name as the cookies they enable (boolean) */
 		"Active Stages":
 		{
+			"uws":1,
 			"water":0,
 			"waterAbs":0,
 			"waterTre":0,

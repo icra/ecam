@@ -45,9 +45,10 @@
 <nav id=navStages>
 	<style>
 		#navStages img{width:40px;vertical-align:middle;margin:0.5em}
+		#navStages span.navDivisor{margin:2em;color:#ccc}
 	</style>
 	<ul>
-		<span style=margin:2em;color:#ccc>YOUR SYSTEM</span>
+		<span class=navDivisor>YOUR SYSTEM</span>
 		<li stage=uws><a href=edit.php?level=UWS>UWS <?php echo $darr?></span></a>
 		<li stage=water><a href=edit.php?level=Water>Water Supply <?php echo $darr?></a>
 			<ul>
@@ -65,6 +66,14 @@
 					navL2stage("wasteTre","Waste","Treatment");
 					navL2stage("wasteDis","Waste","Discharge");
 				?>
+			</ul>
+		</li>
+		<span class=navDivisor>SUMMARY</span>
+		<li>
+			<a href=#>All variables</a>
+			<ul>
+				<li><a href="summary.php?type=input">All inputs</a>
+				<li><a href="summary.php?type=output">All outputs</a>
 			</ul>
 		</li>
 	</ul>

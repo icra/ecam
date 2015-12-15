@@ -45,7 +45,8 @@
 <!doctype html><html><head>
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
-	<link rel=stylesheet href="css.css"><style>
+	<?php include'imports.php'?>
+	<style>
 		td{vertical-align:middle;padding:1.5em;font-size:15px}
 		td.inactive
 		{
@@ -54,10 +55,6 @@
 			font-size:12px;
 		}
 	</style>
-	<script src="dataModel/global.js"></script>
-	<script src="dataModel/info.js"></script>
-	<script src="js/cookies.js"></script>
-	<script src="js/updateGlobalFromCookies.js"></script>
 	<script>
 		function init()
 		{
@@ -66,7 +63,7 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>Stages Overview</h1>
+<!--TITLE--><h1>Input data</h1>
 <!--HELP--><h4>Click the stage where do you want to input data. To activate stages go to <a href=configuration.php>Configuration</a>.</h4>
 
 <!--Navigation Table (for active stages)-->
@@ -75,10 +72,11 @@
 		#navigationTable img{width:40px;vertical-align:middle}
 	</style>
 	<tr>
-		<th style="font-size:13px">Level 1
+		<th style="font-size:13px" colspan=2>Level 1
 		<th style="font-size:13px">Level 2
 		<th style="font-size:13px">Level 3
 	<tr>
+		<td rowspan=6><a href=edit.php?level=UWS>UWS</a></td>
 		<?php printL1stage('water','Water')?>
 			<?php printL2stage('waterAbs','Water','Abstraction')?>
 			<tr><?php printL2stage('waterTre','Water','Treatment')?>

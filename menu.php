@@ -2,12 +2,10 @@
 	/** Clear all user inputted data */
 	function newSystem()
 	{
-		if(confirm("Changes will be lost. Continue?"))
-		{
-			//simply remove cookie and default values will load
-			removeCookie("GLOBAL")
-			window.location.reload()
-		}
+		//simply remove cookie and default values will load
+		removeCookie("GLOBAL")
+		window.location="getStarted.php"
+		//window.location.reload()
 	}
 
 	/** Generate a json/text file of the Global object */

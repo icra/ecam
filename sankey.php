@@ -1,8 +1,7 @@
 <!doctype html><html><head>
 	<meta charset=utf-8>
 	<title>ECAM Web App</title>
-	<link rel=stylesheet href="css.css"><style>
-	</style>
+	<?php include'imports.php'?>
 	<script 
 		src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['sankey']}]}">
 	</script>
