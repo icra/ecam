@@ -3,8 +3,8 @@
 	EXAMPLES OF VARIABLE ACCESSING
 
 	Global.General.Name
+	Global.General.Days() this means Days is a output (function)
 	Global.UWS.gV2
-	Global.UWS.gV1()		this means that gV1 is a output (it is a function)
 
 	Global.Water.sV1
 	Global.Water.Abstraction.aV1
@@ -43,7 +43,6 @@ var Global =
 			return (finalDate-startDate)/1000/60/60/24;
 		},
 		"Comments":"Write comments here",
-		/** These fields have the same name as the cookies they enable (boolean) */
 		"Active Stages":
 		{
 			"uws":1,
@@ -55,17 +54,24 @@ var Global =
 			"wasteCol":0,
 			"wasteTre":0,
 			"wasteDis":0,
-		}
+		},
+		"Questions":
+		{
+			"Do you have fuel engines to run pumps" :0,
+			"Are you producing biogas"              :0,
+			"Are you producing electrical energy"   :0,
+			"Is your topography flat"               :0,
+		},
 	},
 
 	"UWS":	/** 01. previously called Global */
 	{
+		"gV1":function(){return Global.General.Days()}, 	 //Assessment period (days)
 		"gV2":0, //Energy costs (Euro)
 		"gV3":0, //Running costs (Euro)
 		"gV9":0, //Energy mix emissions (kg CO2/kWh)
-		"gV1":function(){return Global.General.Days()}, 	 //Assessment period (days)
-		"gE1":function(){return this.gV2/this.gV3 },
-		"GHG":function(){return "not_implemented" },
+		"gE1":function(){return this.gV2/this.gV3}, //not updated
+		"GHG":function(){return "not_implemented" }, //not updated
 	},
 
 	/** SUB LEVELS */
@@ -168,7 +174,7 @@ var Global =
 		}
 	},
 
-	"Waste": 	/** 03. Wastewater*/
+	"Waste": /** 03. Wastewater*/
 	{
 		"gV2ww"	:0,	//Energy costs of the wastewater utility (currency)
 		"gV3ww"	:0,	//Running costs of the utility related to the urban wastewater system (currency)
@@ -202,13 +208,7 @@ var Global =
 		},
 		"Treatment":
 		{
-			"dM1" 	: 0,	//Methane (CH4) emitted	kg CO2e
 			"dN1" 	: 0,	//Nitrous oxide (N2O) emitted 	kg CO2e
-			"iS1" 	: 0,	//Indirect CO2e emitted in sludge transport	kg CO2e
-			"iN1" 	: 0,	//N2O emitted from wastewater effluent discharged	kg CO2e
-			"iD1" 	: 0,	//N2O emissions from untreated wastewater direct discharge 	kg CO2e
-			"iD2" 	: 0,	//CH4 emissions from untreated wastewater direct discharge	kg CO2e
-			"wsV4"	: 0,	//Volume of treated wastewater	m3
 			"wtV7"  : 0,	//Energy consumed in WWTPs							(kWh)
 			"wtV8"  : 0,	//BOD mass removed 									(kg BOD)
 			"wtV9"	: 0,	//Electrical energy produced in WWTPs from biogas valorization	kWh
@@ -272,4 +272,3 @@ var Global =
 		},
 	},
 }
-

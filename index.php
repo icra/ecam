@@ -16,8 +16,11 @@
 <!--TITLE--><h1 class=blue style=padding-bottom:0>ECAM</h1>
 <!--SUBTITLE--> <h3> Energy performance and Carbon emissions Assessment and Monitoring Tool </h3>
 
-<!--DESCRIPTION--><div style="font-size:18px;color:#333">
-	The ECAM Web Tool is a platform that calculates GHG emissionf from utilities related to the water cycle
+<!--DESCRIPTION--><div style="font-size:18px;color:#333;max-width:75%">
+	The web-based ECAM tool is part of the knowledge platform provided by the <a href="http://www.iwa-network.org/WaCCliM/">WaCCliM project</a>. 
+	The ECAM tool serves to utilities to evaluate their operations in terms of GHG emissions and energy use based on their own data. 
+	The specific utility results are compared with known benchmarks so that inefficiencies can be highlighted, 
+	and decision makers may initiate improvements in the most promising stages within the utility.
 </div>
 
 <!--MENU--><div style=padding:1em><?php include'menu.php'?></div>

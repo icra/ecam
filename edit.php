@@ -112,7 +112,7 @@
 			{
 				var element=document.querySelector('[field='+fields[field]+']')
 				if(element)
-					element.style.backgroundColor=hl?"yellow":""
+					element.style.backgroundColor=hl?"#af0":""
 			}
 		}
 
@@ -204,7 +204,7 @@
 	</script>
 </div>
 
-<!--HELP--><h4>Here you can edit the inputs for this stage (grey fields). The Key Performance Indicators (yellow) will be updated automatically.</h4>
+<!--HELP--><h4>Here you can edit the inputs for this stage. The Indicators (in yellow) will be updated automatically.</h4>
 
 <!--OPTIONS FOR THIS LEVEL-->
 <div>
@@ -224,7 +224,7 @@
 
 	<!--OUTPUTS-->
 	<table id=outputs class=inline style=background:yellow>
-		<tr><th colspan=4>OUTPUTS - Key Performance Indicators
+		<tr><th colspan=4>OUTPUTS
 		<tr><th>Code<th>Description<th>Current Value<th>Unit
 	</table>
 </div><hr>

@@ -7,7 +7,7 @@
 				$global=json_decode($_COOKIE['GLOBAL'],true);
 				$name=$global["General"]["Name"];
 				$location=$global["General"]["Location"];
-				echo "Current system: $name ($location)";
+				echo "Editing: $name ($location)";
 			?>
 			</div>
 		<?php

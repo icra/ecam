@@ -9,6 +9,5 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>About</h1>
 
-<div>
-	TBD
-</div>
+<div> TBD </div>
+<div>Contact Form?</div>

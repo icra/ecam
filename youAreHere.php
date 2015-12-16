@@ -1,5 +1,5 @@
 <style>
-	nav {font-size:14px;opacity:0.95;background:#999;color:#fff;margin:0;text-align:left;}
+	nav {font-size:14px;background:#999;color:#fff;margin:0;text-align:center;}
 	nav ul{margin:0;padding:0;list-style:none;}
 	nav ul li {margin:0;display:inline-block;list-style-type:none;}
 	nav ul > li > a {display:inline-block;padding:0.6em 1.5em 0.4em 0.5em;text-decoration:none;}

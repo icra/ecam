@@ -68,9 +68,9 @@
 			}
 			else 
 			{
-				ret+="<a href="+href+">"+name+"</a>"
+				ret+="<a href="+href+">"+name+":</a> "
 				//create a input/output count for the stage
-				ret+=": <span count="+family+">0</span> <?php echo $type?>s"
+				ret+="<span count="+family+">0</span> <?php echo $type?>s"
 			}
 
 			//fill rows

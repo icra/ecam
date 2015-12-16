@@ -39,7 +39,6 @@
 		}
 		nlink("/ecam/resources.php","Resources");
 		nlink("/ecam/about.php","About");
-		nlink("/ecam/contact.php","Contact");
 	?>
 </div>
 

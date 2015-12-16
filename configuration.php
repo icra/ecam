@@ -34,9 +34,6 @@
 			//update Active Stages
 			Global.General["Active Stages"][id] = checkbox.checked ? 1 : 0
 			updateResult()
-
-			//update select in system description
-			updateSelect('systemDescription')
 		}
 
 		/** Activate stages depending on Global.General["Active Stages"] */
@@ -52,46 +49,19 @@
 				}
 		}
 
-		/** For questions associated to stages*/
-		function updateSelect(id)
-		{
-			var select = document.getElementById(id)
-			var options = ""
-			for(field in Global.General["Active Stages"])
-			{
-				if(Global.General["Active Stages"][field])
-				{
-					switch(field)
-					{
-						case "water":field="Water Supply (Level 1)";break;
-						case "waterAbs":field="Water Abstraction (Level 2)";break;
-						case "waterTre":field="Water Treatment (Level 2)";break;
-						case "waterDis":field="Water Distribution (Level 2)";break;
-						case "waste":field="Wastewater (Level 1)";break;
-						case "wasteCol":field="Wastewater Collection (Level 2)";break;
-						case "wasteTre":field="Wastewater Treatment (Level 2)";break;
-						case "wasteDis":field="Wastewater Discharge (Level 2)";break;
-					}
-					options+="<option>"+field+"</option>"
-				}
-			}
-			select.innerHTML=options
-		}
-
 		function init()
 		{
 			activateLevels()
-			updateSelect('systemDescription')
 			updateResult()
 		}
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Configuration</h1>
-<!--SUBTITLE--><h4>Click to activate the stages of your system.</h4>
+<!--SUBTITLE--><h4>Which stages form your system?</h4>
 
 <!--SELECT STAGES-->
-<table style="font-size:16px" id=selectStage>
+<table id=selectStage class=inline style="font-size:16px;margin-right:3em" >
 	<!--this table styles--><style>
 		#selectStage img{width:40px;vertical-align:middle}
 		#selectStage th{width:220px;}
@@ -149,24 +119,38 @@
 				</label> 
 </table>
 
+<!--QUESTIONS-->
+<table class=inline style="font-size:15px">
+	<tr><th colspan=2 style="text-align:left;font-size:16px">Additional info
+	<script>
+		function updateQuestion(question,newValue)
+		{
+			Global.General.Questions[question]=parseInt(newValue)
+			init()
+		}
+		for(question in Global.General.Questions)
+		{
+			document.write("<tr><td>"+question+"?")
+			document.write("<td><select onchange=\"updateQuestion('"+question+"',this.value)\">")
+			if(Global.General.Questions[question])
+			{
+				document.write("<option value=1>Yes")
+				document.write("<option value=0>No")
+			}
+			else
+			{
+				document.write("<option value=0>No")
+				document.write("<option value=1>Yes")
+			}
+			document.write("</select>")
+		}
+	</script>
+</table>
+
 <!--PREV & NEXT BUTTONS-->
 <div style=margin:1em> 
 	<button class="button prev" onclick=window.location='getStarted.php'>Previous</button> 
 	<button class="button next" onclick=window.location='stages.php'>Next</button>
 </div>
-
-<hr>
-
-<!--SYSTEM DESCRIPTION QUESTIONNAIRE-->
-<table class=inline>
-	<tr><th colspan=2>ADDITIONAL SYSTEM INFO (not implemented)
-	<tr><th>Select stage						<th> 
-		<select id=systemDescription></select>
-	<tr> <td>Is your system producing energy?  	<td> <select> <option>No <option>Yes </select>
-	<tr> <td>Is your topography flat?  			<td> <select> <option>No <option>Yes </select>
-	<tr> <td>Do you want other emissions?		<td> <select> <option>No <option>Yes </select>
-	<tr> <td>Is your system doing X?  			<td> <select> <option>No <option>Yes </select>
-	<tr> <td>Is your system doing Y?  			<td> <select> <option>No <option>Yes </select>
-</table>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

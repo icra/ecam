@@ -8,7 +8,7 @@ function idsPerFormula(formula)
 	var match
 	for(field in Info)
 	{
-		var reg=new RegExp(field+'\\D')
+		var reg=new RegExp('\\W'+field+'\\D')
 		match=formula.search(reg) //will return -1 if not found
 		if(match==-1)continue
 		else matches.push(field)
@@ -20,6 +20,7 @@ function prettify(formula)
 {
 	var result = formula.replace(/function/,"")
 	result = result.replace(/this./g,"")
+	result = result.replace(/\|\|0/g,"")
 	result = result.replace(/return/g,"")
 	result = result.replace(/\(\)/g,"")
 	result = result.replace(/[{}]/g,"")

@@ -43,7 +43,7 @@
 			newCell.innerHTML="Stage"
 			newCell=newRow.insertCell(-1)
 			newCell.innerHTML="<a href=edit.php?level="+level+">"+levelAlias+"</a>"
-			if(sublevel!=undefined)
+			if(sublevel!=0)
 				newCell.innerHTML+=" &rsaquo; <a href=edit.php?level="+level+"&sublevel="+sublevel+">"+sublevel+"</a>"
 
 			//Type (input or output)
@@ -75,9 +75,9 @@
 			newCell=newRow.insertCell(-1)
 			if(typeof(currentStage[id])=="function")
 			{
-				var aux="<b>Formula</b>: "+prettify(currentStage[id].toString())+
+				var aux="<b>Formula</b>: "+id+" = "+prettify(currentStage[id].toString())+
 					"<br><br>"+
-					"<b>Current Value</b>: "+currentStage[id]()
+					"<b>Current Value</b>: "+currentStage[id]()+" "+Info[id].unit
 				newCell.innerHTML=aux
 				//add a row with matched variables in formula
 				newRow=t.insertRow(-1)
@@ -89,7 +89,14 @@
 				var aux=""
 				matches.forEach(function(match)
 				{
-					aux+="<div><a href=variable.php?id="+match+">"+match+"</a> </div>"
+					var match_localization = locateVariable(match)
+					match_level = match_localization.level
+					match_sublevel = match_localization.sublevel
+					var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level]
+
+					aux+="<div><a href=variable.php?id="+match+" title='"+Info[match].description+"'>"+match+"</a> "+
+					" = "+match_stage[match]+" "+Info[match].unit+
+					"</div>"
 				})
 				newCell.innerHTML=aux
 			}
@@ -99,13 +106,6 @@
 				newCell.className='input'
 				newCell.setAttribute('onclick',"transformField(this)")
 			}
-
-			//Unit
-			newRow=t.insertRow(-1)
-			newCell=newRow.insertCell(-1)
-			newCell.className='th'
-			newCell.innerHTML="Unit"
-			newRow.insertCell(-1).innerHTML=Info[id].unit
 		}
 
 		/** 
@@ -144,8 +144,9 @@
 		document.write("<div>ERROR. Variable not defined in dataModel/Info.js</div>")
 		window.stop()
 	}
-	var level 		 = Info[id].level
-	var sublevel 	 = Info[id].sublevel
+	var localization = locateVariable(id)
+	var level 		 = localization.level
+	var sublevel 	 = localization.sublevel
 	var currentStage = sublevel ? Global[level][sublevel] : Global[level]
 	//make the user see "Water Supply" instead of "Water"
 	var levelAlias
