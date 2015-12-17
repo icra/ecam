@@ -85,7 +85,7 @@
 			/*table element*/ var t = document.getElementById('substages')
 
 			/*update table header */
-				while(t.rows[0].cells.length>2)t.rows[0].deleteCell(-1)
+				while(t.rows[0].cells.length>1)t.rows[0].deleteCell(-1)
 				//go over substages: create a column for each
 				for(s in substages)
 				{
@@ -214,7 +214,7 @@
 	}
 	/*Separator*/$sep="<span style=color:black>&rsaquo;</span>";
 	$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>$sublevel</a>";
-	$title="<a href=stages.php>Stages</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages (Level 3)</a>";
+	$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages (Level 3)</a>";
 ?>
 <!--TITLE--><h1><?php echo $title?></h1>
 <!--HELP--><h4>Here you can subdivide "<?php echo $sublevel?>" in different substages</h4>

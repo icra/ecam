@@ -151,7 +151,7 @@
 	$sep="<span style=color:black>&rsaquo;</span>";
 	$title=isset($sublevel) ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$sublevel</span>" : "<span style=color:black>$titleLevel</span>";
 ?>
-<h1><a href=stages.php>Stages</a> <?php echo "$sep $title"?></h1>
+<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
 
 <!--GO TO LEVEL 2 OR 3-->
 <div>
