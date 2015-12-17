@@ -1,6 +1,6 @@
 <style>
 	nav {font-size:14px;background:#999;color:#fff;margin:0;text-align:center;}
-	nav li {transition:all 0.1s;text-align:left}
+	nav li {text-align:left}
 	nav ul{margin:0;padding:0;list-style:none;}
 	nav ul li {margin:0;display:inline-block;list-style-type:none;}
 	nav ul > li > a {display:inline-block;padding:0.7em 1.5em 0.5em 0.5em;text-decoration:none;}
@@ -12,11 +12,11 @@
 	/**level3*/
 	nav ul > li > ul > li > ul {
 		left:100%;
-		transform:translateY(-3.7em) translateX(1px); /**move level3 menu*/
+		transform:translateY(-3.6em) translateX(1px); /**move level3 menu*/
 	}
 	nav ul > li > ul > li > ul > li > a {
 		width:125px;
-		padding:1.5em;
+		padding:1.3em;
 	}
 </style>
 
@@ -67,9 +67,8 @@
 				?>
 			</ul>
 		</li>
-		<span class=navDivisor>SUMMARY</span>
 		<li>
-			<a href=#>All variables</a>
+			<a href=#>Summary</a>
 			<ul>
 				<li><a href="summary.php?type=input">All inputs</a>
 				<li><a href="summary.php?type=output">All outputs</a>

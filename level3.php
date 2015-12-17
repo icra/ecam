@@ -17,10 +17,23 @@
 	<title>ECAM Web App</title>
 	<?php include'imports.php'?>
 	<style>
-		td{text-align:center}
+		td{text-align:left}
 		th{vertical-align:middle}
-		td.input input{width:40px;font-size:18px}
+		table#substages td{text-align:right}
+		td.input input{outline:none;width:40px;font-size:18px}
 		td.input{width:80px;text-align:right;background-color:#eee;cursor:cell}
+		div.substageMenu{
+			padding:0.1em;
+			border:2px solid #ccc;
+			background:#00aff1;
+			position:absolute;
+			box-shadow: 5px 5px 5px #888;
+		}
+		input.substageMenu{
+			padding:0.5em;
+			outline:none;
+			font-size:20px;
+		}
 	</style>
 	<script>
 		<?php
@@ -52,7 +65,7 @@
 		function Substage()
 		{
 			/*get a list of variables for this level*/ var inputs = getInputs()
-			/*substage name*/ this.name = "Substage "+(substages.length+1)
+			/*substage name*/ this.name = "S"+(substages.length+1)
 			//now make the object look like, e.g. Substage {tV1: 0, tV2: 0, tV3: 0, tV4: 0, tV5: 0, ...}
 			for(i in inputs)this[inputs[i]]=0
 		}
@@ -71,12 +84,46 @@
 			init()
 		}
 
+		/** update substage name */
+		function changeName(index,newValue)
+		{
+			substages[index].name=newValue
+			init()
+		}
+
+		/** make appear a menu for changing substage[index] name */
+		function showSubstageMenu(index,ev)
+		{
+			//new div element
+			var div = document.createElement('div')
+			document.body.appendChild(div)
+			div.className="substageMenu"
+			//get mouse coordinates
+			div.style.top=ev.pageY+"px"
+			div.style.left=ev.pageX+"px"
+			//add to screen
+			div.innerHTML="<div style=color:white>New name for substage "+(index+1)+":</div>"
+			//new input element
+			var input = document.createElement('input')
+			div.appendChild(input)
+			input.className="substageMenu"
+			input.placeholder='New name'
+			input.value=substages[index].name
+			//onblur: remove it
+			input.onblur=function(){document.body.removeChild(div)}
+			//on enter pressed (13) hide it
+			input.onkeypress=function(ev){if(ev.which==13)div.style.display='none'}
+			//onchange: update name
+			input.onchange=function(){changeName(index,input.value)}
+			input.select()
+		}
+
 		/** compute the sum of all substages for a particular variable code*/
 		function sumAll(code)
 		{
-			var sum=0
-			for(s in substages)sum+=parseFloat(substages[s][code])
-			return sum
+			var sum=0;
+			for(s in substages){sum+=parseFloat(substages[s][code])}
+			return sum;
 		}
 
 		/** update substages table */
@@ -90,12 +137,17 @@
 				for(s in substages)
 				{
 					var newTH = document.createElement('th')
-					newTH.innerHTML="Substage "+(parseInt(s)+1)
+					newTH.style.cursor="pointer"
+					newTH.style.width="120px"
+					newTH.innerHTML=""+
+						"Substage "+(parseInt(s)+1)+" "+
+						"<div style=font-weight:bold>"+substages[s].name+"</div>"
+					newTH.setAttribute('onclick','showSubstageMenu('+s+',event)')
 					t.rows[0].appendChild(newTH)
 				}
 				//TOTAL header
 				var newTH = document.createElement('th')
-				newTH.innerHTML="&sum; SUBSTAGES"
+				newTH.innerHTML="&sum; TOTAL"
 				t.rows[0].appendChild(newTH)
 				//LEVEL2 header
 				var newTH = document.createElement('th')
@@ -147,7 +199,7 @@
 					//DIFFERENCE BETWEEN LEVEL 2 and sum of substages
 					var diff=Math.abs(parseFloat(CurrentStage[code])-sumAll(code))
 					var newCell=newRow.insertCell(-1)
-					newCell.style.backgroundColor=diff==0?"#af0":"red"
+					newCell.style.backgroundColor=diff==0?"#af0":""
 					newCell.innerHTML=diff
 					//Unit for current input
 					var newCell=newRow.insertCell(-1)
@@ -170,7 +222,46 @@
 			/*update counter*/ document.getElementById('counter').innerHTML=substages.length
 		}
 
-		//TESTING
+		/** Redisplay table id=outputs */
+		function updateOutputs()
+		{
+			var t=document.getElementById('outputs')
+			while(t.rows.length>1){t.deleteRow(-1)}
+			var newRow=t.insertRow(-1);
+
+			['Code','Description','LEVEL 2','Unit'].forEach(function(element)
+			{
+				var newTH=document.createElement('th'); newRow.appendChild(newTH);
+				newTH.innerHTML=element;
+			});
+
+			//loop substages
+			for(s in substages)
+			{
+				var newTH=document.createElement('th'); 
+				newRow.appendChild(newTH);
+				newTH.innerHTML="Substage "+(parseInt(s)+1)+" "+
+				"<div style=font-weight:bold>"+substages[s].name+"</div>"
+			}
+
+			for(field in CurrentStage)
+			{
+				if(typeof(CurrentStage[field])!="function")continue
+				var newRow=t.insertRow(-1)
+				var formula=CurrentStage[field].toString()
+				newRow.setAttribute('title',field+"="+prettify(formula))
+				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
+				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>"
+				newRow.insertCell(-1).innerHTML=CurrentStage[field]()||0
+				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>"
+				for(s in substages)
+				{
+					newRow.insertCell(-1).innerHTML='value' //if nan, outputs 0
+				}
+			}
+		}
+
+		//transform a cell to make it editable
 		function transformField(element)
 		{
 			element.removeAttribute('onclick')
@@ -187,10 +278,11 @@
 			return
 		}
 
-		function updateSubstage(substageIndex,field,newValue)
+		//update a field of the substage[index]
+		function updateSubstage(index,field,newValue)
 		{
 			if(typeof(CurrentStage[field])=="number")newValue=parseFloat(newValue) //if CurrentStage[field] is a number, parse float
-			substages[substageIndex][field]=newValue
+			substages[index][field]=newValue
 			init() //update tables and write cookies
 		}
 
@@ -198,6 +290,7 @@
 		function init()
 		{
 			updateSubstagesTable()
+			updateOutputs()
 			updateResult()
 		}
 	</script>
@@ -217,12 +310,13 @@
 	$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages (Level 3)</a>";
 ?>
 <!--TITLE--><h1><?php echo $title?></h1>
-<!--HELP--><h4>Here you can subdivide "<?php echo $sublevel?>" in different substages</h4>
+<!--HELP--><h4>You can subdivide "<?php echo $sublevel?>" in different substages</h4>
 <!--new substage button--><button onclick=newSubstage() class=button>+ New Substage</button>
 <!--substages counter--><div class=inline style="border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
-<!--SUBSTAGES TABLE--><table id=substages style=margin:1em><tr><td style="border:none" colspan=2></table>
+<!--SUBSTAGES TABLE--><table id=substages style=margin:1em><tr><td style=border:none colspan=2></table>
+<!--OUTPUTS TABLE--><table id=outputs class=inline style=background:yellow> <tr><th colspan=42>OUTPUTS </table>
 <!--PLOTS-->
-<div class=inline style="border:1px solid #000;width:45%;margin:1em">
+<div style="border:1px solid #000;width:45%;margin:1em">
 	SOME PLOTS HERE (to be implemented at the end)
 </div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

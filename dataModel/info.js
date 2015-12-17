@@ -631,7 +631,7 @@ var Info =
 //3.2 Treatment
 	"dN1": {
 		"description":"Nitrous oxide (N2O) emitted",
-		"magnitude":"",
+		"magnitude":"Mass",
 		"unit":"kg CO2",
 	},
 	"wtV7": {
@@ -764,37 +764,37 @@ var Info =
 	"wtE1":
 	{
 		"description":"Energy consumption per treated wastewater",
-		"magnitude":"",
+		"magnitude":"Energy/Volume",
 		"unit":"kWh/m3",
 	},
 	"wtE2":
 	{
 		"description":"Energy consumption of WWTPs per total energy consumption",
-		"magnitude":"",
+		"magnitude":"Energy/Energy",
 		"unit":"%",
 	},
 	"wtE3":
 	{
 		"description":"Energy consumption per mass removed",
-		"magnitude":"",
+		"magnitude":"Energy/Mass",
 		"unit":"kWh/Kg BOD",
 	},
 	"wtE4":
 	{
 		"description":"Energy production",
-		"magnitude":"",
+		"magnitude":"Energy/Volume",
 		"unit":"kWh/m3",
 	},
 	"wtE5":
 	{
 		"description":"Sludge production",
-		"magnitude":"",
+		"magnitude":"Concentration",
 		"unit":"kg/m3",
 	},
 	"wtE6":
 	{
 		"description":"Dry weight in sludge production",
-		"magnitude":"",
+		"magnitude":"% w/w",
 		"unit":"%",
 	},
 	"wtE7":
@@ -845,7 +845,7 @@ var Info =
 	"wdE1":
 	{
 		"description":"Energy consumption per discharged wastewater",
-		"magnitude":"",
+		"magnitude":"Energy/Volume",
 		"unit":"kWh/m3",
 	},
 	"wdE2":

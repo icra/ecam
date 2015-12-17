@@ -7,10 +7,9 @@
 </head><body><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Resources</h1>
+<!--div-->
 <div style=font-size:18px>
-	<a href=#>Quick introduction</a>
-	<br>
-	<a href=#>Video tutorial</a>
-	<br>
-	<a href=#>Read the manual</a>
+	<button class=button>Quick introduction  </button>
+	<button class=button>Video tutorial      </button>
+	<button class=button>Read the manual     </button>
 </div>
