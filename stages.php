@@ -63,7 +63,7 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--YOU ARE HERE--><?php include"youAreHere.php"?>
+<!--STAGES--><?php include"navStages.php"?>
 <!--TITLE--><h1>Input data</h1>
 <!--HELP--><h4>Click the stage where do you want to input data. To activate stages go to <a href=configuration.php>Configuration</a>.</h4>
 
@@ -78,7 +78,7 @@
 		<th style="font-size:13px">Level 3
 	<tr>
 		<td rowspan=6>
-			<img src=img/uws.png> <a href=edit.php?level=UWS>UWS</a></td>
+			<img src=img/uws.png> <a href=edit.php?level=UWS title="Urban Water System">UWS</a></td>
 		<?php printL1stage('water','Water')?>
 			<?php printL2stage('waterAbs','Water','Abstraction')?>
 			<tr><?php printL2stage('waterTre','Water','Treatment')?>

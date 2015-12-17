@@ -38,7 +38,6 @@
 		removeCookie("GLOBAL")
 		window.location.reload()
 	}
-
 </script>
 
 <!--MENU-->

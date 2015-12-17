@@ -4,9 +4,6 @@
 	<link rel="stylesheet" href="css.css">
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="img/favicon.ico" type="image/x-icon">
-	<style>
-		img{margin:1em}
-	</style>
 </head><body><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Resources</h1>

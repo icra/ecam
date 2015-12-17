@@ -1,9 +1,10 @@
 <style>
 	nav {font-size:14px;background:#999;color:#fff;margin:0;text-align:center;}
+	nav li {transition:all 0.1s;text-align:left}
 	nav ul{margin:0;padding:0;list-style:none;}
 	nav ul li {margin:0;display:inline-block;list-style-type:none;}
-	nav ul > li > a {display:inline-block;padding:0.6em 1.5em 0.4em 0.5em;text-decoration:none;}
-	nav a, nav a:visited, nav a:hover {color:#000;text-decoration:none;margin:0}
+	nav ul > li > a {display:inline-block;padding:0.7em 1.5em 0.5em 0.5em;text-decoration:none;}
+	nav a, nav a:visited, nav a:hover {color:#000;text-decoration:none;margin:0;}
 	nav li > ul {position:absolute;display:none;margin-top:1px;margin-right:1px;background-color:#999;}
 	nav li > ul li {display:block;}
 	nav li:hover {background-color: #666;}
@@ -37,8 +38,6 @@
 							</script>)</a>
 				</ul>";
 	}
-	//down arrow
-	$darr="<span style=color:#999>&#8964;</span>";
 ?>
 
 <!--this nav get its items hidden depending on the cookie "GLOBAL" inside "General"/"Active Stages"-->
@@ -48,9 +47,9 @@
 		#navStages span.navDivisor{margin:2em;color:#ccc}
 	</style>
 	<ul>
-		<span class=navDivisor>YOUR SYSTEM</span>
-		<li stage=uws><a href=edit.php?level=UWS>UWS <?php echo $darr?></span></a>
-		<li stage=water><a href=edit.php?level=Water>Water Supply <?php echo $darr?></a>
+		<span class=navDivisor>SYSTEM</span>
+		<li stage=uws><a href=edit.php?level=UWS>UWS</a>
+		<li stage=water><a href=edit.php?level=Water>Water Supply</a>
 			<ul>
 				<?php 
 					navL2stage("waterAbs","Water","Abstraction");
@@ -59,7 +58,7 @@
 				?>
 			</ul>
 		</li>
-		<li stage=waste><a href=edit.php?level=Waste>Wastewater <?php echo $darr?></a>
+		<li stage=waste><a href=edit.php?level=Waste>Wastewater</a>
 			<ul>
 				<?php 
 					navL2stage("wasteCol","Waste","Collection");

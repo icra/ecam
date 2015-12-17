@@ -13,10 +13,10 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1 class=blue style=padding-bottom:0>ECAM</h1>
-<!--SUBTITLE--> <h3> Energy performance and Carbon emissions Assessment and Monitoring Tool </h3>
+<!--TITLE--><h1 class=blue style="font-size:33px;padding-bottom:0">ECAM</h1>
+<!--SUBTITLE--> <h3>Energy performance and carbon emissions assessment and monitoring tool </h3>
 
-<!--DESCRIPTION--><div style="font-size:18px;color:#333;max-width:75%">
+<!--DESCRIPTION--><div style="font-size:17px;color:#333;max-width:75%;text-align:justify">
 	The web-based ECAM tool is part of the knowledge platform provided by the <a href="http://www.iwa-network.org/WaCCliM/">WaCCliM project</a>. 
 	The ECAM tool serves to utilities to evaluate their operations in terms of GHG emissions and energy use based on their own data. 
 	The specific utility results are compared with known benchmarks so that inefficiencies can be highlighted, 
@@ -29,7 +29,7 @@
 <h4 style=font-size:19px>
 First time using ECAM Web Tool? Click "New System" or learn more in <a href=resources.php>Resources</a>
 </h4>
-<!--DIAGRAM--><img width=500 src=svg/diagram.svg>
+<!--DIAGRAM--><?php include'diagram_home.php'?>
 
 <!--LOGOS-->
 <div style="text-align:left;background:#00aff1;padding:0;margin-top:1em">

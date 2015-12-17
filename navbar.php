@@ -25,7 +25,7 @@
 	}
 </style>
 
-<div id=navbar style="text-align:center;background:#00aff1;color:white;padding:0.6em 0em 0em 0em;font-size:18px">
+<div id=navbar style="text-align:center;background:#00aff1;color:white;padding:0.2em 0em 0em 0em;font-size:18px">
 	<?php
 		//menu symbol (3 bars)
 		echo "&#9776; "; 
@@ -36,9 +36,9 @@
 			nlink("/ecam/getStarted.php","Get started");
 			nlink("/ecam/configuration.php","Configuration");
 			nlink("/ecam/stages.php","Input data");
+			nlink("/ecam/resources.php","Resources");
+			nlink("/ecam/about.php","About");
 		}
-		nlink("/ecam/resources.php","Resources");
-		nlink("/ecam/about.php","About");
 	?>
 </div>
 

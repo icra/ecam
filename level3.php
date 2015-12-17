@@ -162,7 +162,7 @@
 				for(s in substages)
 				{
 					var str=""+
-						"<button style='vertical-align:middle' class=delete onclick=deleteSubstage("+s+")></button>"
+						"<button style='vertical-align:middle' class=delete onclick=deleteSubstage("+s+") title='Delete substage'></button>"
 					newRow.insertCell(-1).innerHTML=str
 				}
 			/*end update body*/
@@ -203,7 +203,7 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--nav menu--><?php include"youAreHere.php"?>
+<!--STAGES--><?php include"navStages.php"?>
 <!--TITLE-->
 <?php 
 	//Navigable <h1>title</h1>
@@ -217,21 +217,12 @@
 	$title="<a href=stages.php>Stages</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages (Level 3)</a>";
 ?>
 <!--TITLE--><h1><?php echo $title?></h1>
-<!--HELP--><h4>Here you can subdivide your Level 2 Stage into Substages</h4>
+<!--HELP--><h4>Here you can subdivide "<?php echo $sublevel?>" in different substages</h4>
 <!--new substage button--><button onclick=newSubstage() class=button>+ New Substage</button>
 <!--substages counter--><div class=inline style="border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
-
-<!--SUBSTAGES TABLE-->
-<table id=substages style=margin:1em><tr>
-	<td style="border:none">
-	<td style="border:none">
-</table>
-
-<?php //die()?>
-
+<!--SUBSTAGES TABLE--><table id=substages style=margin:1em><tr><td style="border:none" colspan=2></table>
 <!--PLOTS-->
 <div class=inline style="border:1px solid #000;width:45%;margin:1em">
 	SOME PLOTS HERE (to be implemented at the end)
 </div>
-
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

@@ -130,7 +130,7 @@
 		}
 		for(question in Global.General.Questions)
 		{
-			document.write("<tr><td>"+question+"?")
+			document.write("<tr title="+varsHidByQuestions[question]+"><td>"+question+"?")
 			document.write("<td><select onchange=\"updateQuestion('"+question+"',this.value)\">")
 			if(Global.General.Questions[question])
 			{
@@ -143,6 +143,7 @@
 				document.write("<option value=1>Yes")
 			}
 			document.write("</select>")
+			//document.write("<td>"+varsHidByQuestions[question])
 		}
 	</script>
 </table>

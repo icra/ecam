@@ -23,6 +23,31 @@
 			updateLevel2()
 			updateCounts()
 			updateResult()
+			hideVariablesAccordingToQuestions()
+		}
+
+		//HIDE VARIABLES ACCORDING TO QUESTIONS IN CONFIGURATION 
+		function hideVariablesAccordingToQuestions()
+		{
+			//create array of variable codes to hide
+			var variables=[]
+			for(question in Global.General.Questions)
+			{
+				console.log(question+"? "+Global.General.Questions[question])
+				if(Global.General.Questions[question]==0)
+					variables=variables.concat(varsHidByQuestions[question])
+			}
+
+			//go over variables and hide them
+			variables.forEach(function(variable)
+			{
+				var elements=document.querySelectorAll("tr[variable="+variable+"]")
+				for(var i=0;i<elements.length;i++)
+				{
+					elements[i].style.display='none'
+					console.log('Variable '+variable+' hidden')
+				}
+			})
 		}
 
 		function updateLevel1()
@@ -87,7 +112,7 @@
 				if(typeof(object[variable])!="<?php echo $typeof?>")continue
 				var description=Info[variable]?Info[variable].description:"<span style=color:#ccc>no description</span>"
 				var unit=Info[variable]?Info[variable].unit:"<span style=color:#ccc>no unit</span>"
-				ret+="<tr family='"+family+"'>"+
+				ret+="<tr variable='"+variable+"' family='"+family+"'>"+
 					"<td style='font-weight:bold'><a class=blue href=variable.php?id="+variable+">"+variable+"</a>"+
 					"<td>"+description+
 					"<td>"+object[variable]<?php if($type=="output")echo "()"?>+
@@ -98,12 +123,12 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--YOU ARE HERE--><?php include"youAreHere.php"?>
-<!--TITLE--><h2>ALL <?php echo strtoupper($type)?>S SUMMARY</h2>
+<!--STAGES--><?php include"navStages.php"?>
+<!--TITLE--><h1>All <?php echo $type?>s summary</h1>
 
 <!--AVAILABLE INPUTS-->
 <div class=inline style="width:75%;text-align:left">
-	<h4>Enabled <?php echo $type?>s Sorted By Stage (Summary)</h4>
+	<h4>Enabled <?php echo $type?>s sorted by stage (summary)</h4>
 	<!--level 1-->
 	<div class=inline style="font-size:11px;width:35%;padding:0">
 		<table style="width:100%" level=1><tr><th colspan=4>Level 1</table>

@@ -28,12 +28,11 @@
 	Global.Level3.Water.Discharge[0].wdV1
 */
 
-var Global =
-{
-	"General":
-	{
-		"Name":"Sedacusco",
-		"Location":"Cusco",
+var Global = {
+	/** 00. General data of the system */
+	"General":{
+		"Name":"Default system name",
+		"Location":"Default system location",
 		"Assessment Period Start":"2016-01-01",
 		"Assessment Period End":"2016-01-31",
 		"Days":function()
@@ -43,8 +42,7 @@ var Global =
 			return (finalDate-startDate)/1000/60/60/24;
 		},
 		"Comments":"Write comments here",
-		"Active Stages":
-		{
+		"Active Stages":{
 			"uws":1,
 			"water":0,
 			"waterAbs":0,
@@ -55,8 +53,7 @@ var Global =
 			"wasteTre":0,
 			"wasteDis":0,
 		},
-		"Questions":
-		{
+		"Questions":{
 			"Do you have fuel engines to run pumps" :0,
 			"Are you producing biogas"              :0,
 			"Are you producing electrical energy"   :0,
@@ -64,19 +61,17 @@ var Global =
 		},
 	},
 
-	"UWS":	/** 01. previously called Global */
-	{
-		"gV1":function(){return Global.General.Days()}, 	 //Assessment period (days)
+	/** 01. Urban water system (former Global) */
+	"UWS":{
 		"gV2":0, //Energy costs (Euro)
 		"gV3":0, //Running costs (Euro)
 		"gV9":0, //Energy mix emissions (kg CO2/kWh)
+		"gV1":function(){return Global.General.Days()}, 	 //Assessment period (days)
 		"gE1":function(){return this.gV2/this.gV3}, //not updated
-		"GHG":function(){return "not_implemented" }, //not updated
 	},
 
-	/** SUB LEVELS */
-	"Water":	/** 02. Water Supply*/
-	{
+	/** 02. Water Supply*/
+	"Water":{
 		"sV13"	:0, //Serviced population in supply systems (Inhab)
 		"gV8w"	:0, //Resident population within the water utility area of service (Inhab)
 		"gV2w"	:0, //Energy costs of the water utility (currency)
@@ -92,8 +87,7 @@ var Global =
 		"gV7w"	:0,	//CO2e of heat used for District heating or cooling from urban  drinking water system	(kg CO2)
 		"S1":function(){return 100*(this.sV13+this.gV8w)},	//Quality of supplied water (%)
 		"S2":function(){return 100*(this.gV3w+this.gV10w)},	//Quality of supplied water (%)
-		"Abstraction":
-		{
+		"Abstraction":{
 			"aV1" : 0, //Energy consumed for pumping abstracted water (kWh)
 			"sV1" : 0, //Volume of conveyed water (m3)
 			"aV3" : 0, //Energy recovered in abstracted water (kWh)
@@ -110,8 +104,7 @@ var Global =
 			"aE6":function(){return this.aV5/Global.gV1/this.aV6 }, //Water losses per mains length (m3/km/d) 
 			"aE7":function(){return this.aV7/this.aV6}, 			//Unit head loss (m/km) 
 		},
-		"Treatment":
-		{
+		"Treatment":{
 			"sV2" : 0, //Volume of Treated Water (m3)
 			"tV7" : 0, //Electric energy consumed in WTPs (from the grid and self-produced)	kWh
 			"sV3" :	0, //Treated water quality tests carried out	no.
@@ -139,8 +132,7 @@ var Global =
 			"tE3"  :function(){return "not_implemented"},	//Sludge production
 			"tE4"  :function(){return "not_implemented"},	//Capacity utilisation 
 		},
-		"Distribution":
-		{
+		"Distribution":{
 			"dV7"  : 0,	//Energy consumed for pumping distributed water (kWh)
 			"sV9"  : 0,	//Delivery points with adequate pressure	no.
 			"sV10" : 0,	//Number of service connections	no.
@@ -164,18 +156,18 @@ var Global =
 			"dV13" : 0,	//Topographic energy supplied to the system	kWh
 			"dV14" : 0,	//Mains length	km
 			"dV15" : 0,	//Friction pipe losses	m
-			"dE1"   :function(){},		//Energy consumption per authorized consumption 
-			"dE2"	:function(){},		//Energy consumption of authorized consumption per total energy consumption
-			"dE3"	:function(){},		//Standardised Energy Consumption
-			"dE4"	:function(){},		//Global water distribution energy efficiency
-			"dE5"	:function(){},		//Percentage of topographic energy
-			"dE6"	:function(){},		//Water losses per mains length 
-			"dE7"	:function(){},		//Unit head loss 
+			"dE1"  :function(){return "not_implemented"},		//Energy consumption per authorized consumption 
+			"dE2"  :function(){return "not_implemented"},		//Energy consumption of authorized consumption per total energy consumption
+			"dE3"  :function(){return "not_implemented"},		//Standardised Energy Consumption
+			"dE4"  :function(){return "not_implemented"},		//Global water distribution energy efficiency
+			"dE5"  :function(){return "not_implemented"},		//Percentage of topographic energy
+			"dE6"  :function(){return "not_implemented"},		//Water losses per mains length 
+			"dE7"  :function(){return "not_implemented"},		//Unit head loss 
 		}
 	},
 
-	"Waste": /** 03. Wastewater*/
-	{
+	/** 03. Wastewater*/
+	"Waste":{
 		"gV2ww"	:0,	//Energy costs of the wastewater utility (currency)
 		"gV3ww"	:0,	//Running costs of the utility related to the urban wastewater system (currency)
 		"gv10ww":0,	//Total energy consumed from the grid (from power bills) during the assessment period (kWh)
@@ -197,8 +189,7 @@ var Global =
 		"wS1":function(){return 100*this.wsV2/this.wsV3}, 	//Resident population connected to sewer system (%)
 		"wS2":function(){return "not implemented"}, 		//Treated Wastewater in WWTP (%)
 		"wS3":function(){return 100*this.wsV7/this.wsV6}, 	//WWTP compliance with discharge consents (%)
-		"Collection":
-		{
+		"Collection":{
 			"wsV1":0,										//Volume of wastewater conveyed to treatment or to an outfall for untreated discharge	(m3)
 			"wcV1":0,										//Electric energy consumed for conveying wastewater to treatment (from the grid and self-produced)	(kWh)
 			"wcV2":0,										//[Sum](collected wastewater volume pumped x pump head in meters)	m3 x 100 m
@@ -206,8 +197,7 @@ var Global =
 			"wcE2":function(){return "not_implemented"},  	//Energy consumption of collected wastewater per total energy consumption
 			"wcE3":function(){return "not_implemented"},  	//Standardised Energy Consumption
 		},
-		"Treatment":
-		{
+		"Treatment":{
 			"dN1" 	: 0,	//Nitrous oxide (N2O) emitted 	kg CO2e
 			"wtV7"  : 0,	//Energy consumed in WWTPs							(kWh)
 			"wtV8"  : 0,	//BOD mass removed 									(kg BOD)
@@ -241,8 +231,7 @@ var Global =
 			"wtE6"  :function(){return "not_implemented"},	//Dry weight in sludge production
 			"wtE7"  :function(){return "not_implemented"},	//Capacity utilisation 
 		},
-		"Discharge":
-		{
+		"Discharge":{
 			"wsV7":	0,	//Volume of discharged wastewater	m3
 			"wsV8":	0,	//Volume of discharged wastewater without treatment	m3
 			"wdV1":	0,	//Electric energy consumed for pumping discharged wastewater (from the grid and self-produced)	kWh
@@ -257,9 +246,8 @@ var Global =
 		},
 	},
 
-	/** SUBSTAGES FOR LEVEL 3 */
-	"Level3":
-	{
+	/** Substages For Level 3 */
+	"Level3":{
 		"Water":{
 			"Abstraction":[],
 			"Treatment":[],

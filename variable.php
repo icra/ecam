@@ -128,7 +128,7 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--YOU ARE HERE--><?php include"youAreHere.php"?>
+<!--STAGES--><?php include"navStages.php"?>
 <?php
 	//specified input
 	if(!isset($_GET['id']))die('no input specified');

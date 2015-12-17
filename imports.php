@@ -7,4 +7,5 @@
 <script src="js/cookies.js"></script><!--basic cookie functions here-->
 <script src="js/updateGlobalFromCookies.js"></script><!--update Global object from cookie "GLOBAL" here-->
 <script src="js/formulas.js"></script><!--functions for dealing with formulas-->
+<script src="js/questions.js"></script><!--functions for dealing with questions-->
 

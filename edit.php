@@ -95,7 +95,7 @@
 				newRow.setAttribute('onmouseout',"hlFields('"+formula+"',0)")
 				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
 				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>"
-				newRow.insertCell(-1).innerHTML=CurrentLevel[field]()
+				newRow.insertCell(-1).innerHTML=(CurrentLevel[field]() || 0) //if nan, outputs 0
 				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>"
 			}
 		}
@@ -137,7 +137,7 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--YOU ARE HERE--><?php include"youAreHere.php"?>
+<!--STAGES--><?php include"navStages.php"?>
 
 <!--TITLE-->
 <?php 
@@ -219,7 +219,7 @@
 	<!--INPUTS-->
 	<table id=inputs class=inline>
 		<tr><th colspan=5>INPUTS
-		<tr><th>Code<th>Description<th>Current Value<th>Unit<th>Data Quality (not implemented)
+		<tr><th>Code<th>Description<th>Current Value<th>Unit<th>Data Quality
 	</table>
 
 	<!--OUTPUTS-->
