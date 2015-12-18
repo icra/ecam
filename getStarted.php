@@ -46,7 +46,7 @@
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Get started</h1>
-<!--SUBTITLE--><h4>Edit general data of your system and click Next. You can edit this information later</h4>
+<!--SUBTITLE--><h4>Edit general data of your system. You can edit this information later.</h4>
 <!--FORM--><table id=form style="text-align:left;"></table>
 <!--NEXT--><div style=margin:1em><button class="button next" onclick=window.location='configuration.php'>Next</button></div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

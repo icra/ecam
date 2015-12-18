@@ -12,5 +12,6 @@
 	You will need a localhost PHP to make it work, such as <a href=https://www.apachefriends.org/index.html>XAMPP</a>.<br>
 	This software was written entirely using the <a href=http://www.vim.org>Vim</a> editor, inside a <a href=https://www.cygwin.com/>Cygwin</a> terminal. <br>
 	Tool coded in Javascript, PHP &amp; HTML languages. <br>
-	Developed by Lluis Bosch (<a href=http://icra.cat>ICRA</a>) in collaboration with <a href=http://www.iwa-network.org/>IWA</a>.
+	Developed by Lluis Bosch (<a href=http://icra.cat>ICRA</a>) in collaboration with <a href=http://www.iwa-network.org/>IWA</a>.<br>
+	<a href=license.php>License</a>. <br>
 </div>

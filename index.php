@@ -14,13 +14,15 @@
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1 class=blue style="font-size:33px;padding-bottom:0">ECAM</h1>
-<!--SUBTITLE--> <h3>Energy performance and carbon emissions assessment and monitoring tool </h3>
+<!--SUBTITLE--><h3>Energy performance and carbon emissions assessment and monitoring tool </h3>
+<!--LATEST UPD--><div style="max-width:20%;background:#d7bfaf"><?php echo "Latest update: ".date("F d Y, H:i:s.",filemtime("index.php"))?></div>
 
 <!--DESCRIPTION--><div style="font-size:17px;color:#333;max-width:75%;text-align:justify">
 	The web-based ECAM tool is part of the knowledge platform provided by the <a href="http://www.iwa-network.org/WaCCliM/">WaCCliM project</a>. 
-	The ECAM tool serves to utilities to evaluate their operations in terms of GHG emissions and energy use based on their own data. 
-	The specific utility results are compared with known benchmarks so that inefficiencies can be highlighted, 
-	and decision makers may initiate improvements in the most promising stages within the utility.
+	The ECAM tool helps utilities to evaluate their operations in terms of GHG emissions and energy use based on their own data. 
+	The results are compared with known benchmarks so that inefficiencies can be highlighted, 
+	and decision makers may initiate improvements in the most compromising stages within the utility.
+	This tool is free and open source.
 </div>
 
 <!--MENU--><div style=padding:1em><?php include'menu.php'?></div>

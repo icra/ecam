@@ -65,9 +65,9 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--STAGES--><?php include"navStages.php"?>
 <!--TITLE--><h1>Input data</h1>
-<!--HELP--><h4>Click the stage where do you want to input data. To activate stages go to <a href=configuration.php>Configuration</a>.</h4>
+<!--SUBTITLE--><h4>This is an overview of your system. You should start with UWS (Urban Water System). To activate more stages, go to <a href=configuration.php>Configuration</a>.</h4>
 
-<!--Navigation Table (for active stages)-->
+<!--NAVIGATION TABLE-->
 <table id=navigationTable class=inline style="text-align:center;margin:1em">
 	<!--this table style--><style>
 		#navigationTable img{width:40px;vertical-align:middle}

@@ -1,31 +1,6 @@
 /** 
 	NAMESPACE GLOBAL
 	EXAMPLES OF VARIABLE ACCESSING
-
-	Global.General.Name
-	Global.General.Days() this means Days is a output (function)
-	Global.UWS.gV2
-
-	Global.Water.sV1
-	Global.Water.Abstraction.aV1
-	Global.Water.Treatment.tV1
-	Global.Water.Distribution.dV1
-
-	Global.Waste.wsV1
-	Global.Waste.Collection.wcV1
-	Global.Waste.Treatment.wtV1
-	Global.Waste.Collection.wdV1
-
-	Global.Emissions.dD1
-	Global.Emissions.Direct.g_dGHG
-	Global.Emissions.Indirect.iS1
-
-	Global.Level3.Water.Abstraction[0].aV1
-	Global.Level3.Water.Treatment[0].tV1
-	Global.Level3.Water.Distribution[0].dV1
-	Global.Level3.Water.Collection[0].wcV1
-	Global.Level3.Water.Treatment[0].wtV1
-	Global.Level3.Water.Discharge[0].wdV1
 */
 
 var Global = {
@@ -42,23 +17,6 @@ var Global = {
 			return (finalDate-startDate)/1000/60/60/24;
 		},
 		"Comments":"Write comments here",
-		"Active Stages":{
-			"uws":1,
-			"water":0,
-			"waterAbs":0,
-			"waterTre":0,
-			"waterDis":0,
-			"waste":0,
-			"wasteCol":0,
-			"wasteTre":0,
-			"wasteDis":0,
-		},
-		"Questions":{
-			"Do you have fuel engines to run pumps" :0,
-			"Are you producing biogas"              :0,
-			"Are you producing electrical energy"   :0,
-			"Is your topography flat"               :0,
-		},
 	},
 
 	/** 01. Urban water system (former Global) */
@@ -259,4 +217,69 @@ var Global = {
 			"Discharge":[],
 		},
 	},
+
+	"Configuration":{
+		"Active Stages":{
+			"uws":1,
+			"water":0,
+			"waterAbs":0,
+			"waterTre":0,
+			"waterDis":0,
+			"waste":0,
+			"wasteCol":0,
+			"wasteTre":0,
+			"wasteDis":0,
+		},
+		/** YES/NO questions for all stages*/
+		"Questions":{
+			"water":{
+				//
+			},
+			"waterAbs":{
+				"Do you have fuel engines to run pumps" : 0,
+				"Is your topography flat"               : 0,
+			},
+			"waterTre":{
+				//
+			},
+			"waterDis":{
+				//
+			},
+			"waste":{
+				"Are you producing biogas"              : 0,
+				"Are you producing electrical energy"   : 0,
+			},
+			"wasteCol":{
+				//
+			},
+			"wasteTre":{
+				//
+			},
+			"wasteDis":{
+				//
+			},
+		},
+		/** Technologies for Water/Waste Treatment */
+		"Technologies":{
+			"Water":{
+				"None":1,
+				"Pre-ox/C/F/S/Filt/Des":0,
+				"Pre-ox/C/F/Filt/Des":0,
+				"C/F/S/Filt/Des":0,
+				"C/F/Filt/Des":0,
+				"Des":0,
+				"Other":0,
+			},
+			"Waste":{
+				"None":1,
+				"Trickling filters (TF)":0,
+				"Activated sludge (AS)":0,
+				"AS and Coagulation/Filtration (C/F)":0,
+				"AS nitrification and C/F":0,
+				"Laggons":0,
+				"Other":0,
+			},
+		},
+	},
+
 }
