@@ -261,7 +261,7 @@ var Global = {
 		},
 		/** Technologies for Water/Waste Treatment */
 		"Technologies":{
-			"Water":{
+			"waterTre":{
 				"None":1,
 				"Pre-ox/C/F/S/Filt/Des":0,
 				"Pre-ox/C/F/Filt/Des":0,
@@ -270,7 +270,7 @@ var Global = {
 				"Des":0,
 				"Other":0,
 			},
-			"Waste":{
+			"wasteTre":{
 				"None":1,
 				"Trickling filters (TF)":0,
 				"Activated sludge (AS)":0,
@@ -281,5 +281,4 @@ var Global = {
 			},
 		},
 	},
-
 }

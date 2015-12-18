@@ -82,11 +82,11 @@
 	//go through cookies with php instead of javascript. 
 	//REASON: if javascript, the inactive links blink when page loads
 	$global=json_decode($_COOKIE['GLOBAL'],true);
-	$stages=$global['General']["Active Stages"];
+	$stages=$global['Configuration']["Active Stages"];
 	//idea: set the css property "display:none" to <li> elements of the menu that are not active inside Global/Active Stages
 	echo "<style>";
 		foreach($stages as $name=>$active) 
 			if($active==0)
-				echo "li[stage=$name]{display:none}";
+				echo "li[stage=$name]{display:none};";
 	echo "</style>";
 ?>

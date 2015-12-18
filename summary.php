@@ -29,25 +29,25 @@
 		//HIDE VARIABLES ACCORDING TO QUESTIONS IN CONFIGURATION 
 		function hideVariablesAccordingToQuestions()
 		{
-			//create array of variable codes to hide
-			var variables=[]
-			for(question in Global.General.Questions)
+			for(stage in Global.Configuration.Questions)
 			{
-				console.log(question+"? "+Global.General.Questions[question])
-				if(Global.General.Questions[question]==0)
-					variables=variables.concat(varsHidByQuestions[question])
-			}
-
-			//go over variables and hide them
-			variables.forEach(function(variable)
-			{
-				var elements=document.querySelectorAll("tr[variable="+variable+"]")
-				for(var i=0;i<elements.length;i++)
+				for(question in Global.Configuration.Questions[stage])
 				{
-					elements[i].style.display='none'
-					console.log('Variable '+variable+' hidden')
+					console.log(question+"? "+Global.Configuration.Questions[stage][question]);
+					if(Global.Configuration.Questions[stage][question]==0)
+					{
+						varsHidByQuestions[question].forEach(function(variable)
+						{
+							var elements=document.querySelectorAll("tr[variable="+variable+"]");
+							for(var i=0;i<elements.length;i++)
+							{
+								elements[i].style.display='none';
+								console.log('	Variable '+variable+' hidden');
+							}
+						})
+					}
 				}
-			})
+			}
 		}
 
 		function updateLevel1()
@@ -58,6 +58,7 @@
 			t.innerHTML+=tableRows(Global.Water,"Water Supply", "water", "edit.php?level=Water")
 			t.innerHTML+=tableRows(Global.Waste,"Wastewater",   "waste", "edit.php?level=Waste")
 		}
+
 		function updateLevel2()
 		{
 			var t=document.querySelector("[level='2']")
@@ -69,13 +70,13 @@
 			t.innerHTML+=tableRows(Global.Waste.Treatment,	  "Wastewater Treatment", "wasteTre", "edit.php?level=Waste&sublevel=Treatment")
 			t.innerHTML+=tableRows(Global.Waste.Discharge,	  "Wastewater Discharge", "wasteDis", "edit.php?level=Waste&sublevel=Discharge")
 		}
+
 		function updateCounts()
 		{
-			for(family in Global.General["Active Stages"])
+			for(family in Global.Configuration["Active Stages"])
 			{
-				var count=document.querySelectorAll("[family='"+family+"']").length
-				if(count!=0)
-					document.querySelector("[count='"+family+"']").innerHTML=count
+				var count=document.querySelectorAll("[family='"+family+"']").length;
+				if(count!=0)document.querySelector("[count='"+family+"']").innerHTML = count;
 			}
 		}
 
@@ -86,7 +87,7 @@
 			var ret="<tr><td colspan=4 style='background:#eee;font-weight:bold'>"
 			
 			//make link or not depending on active 
-			if(Global.General["Active Stages"][family]==0)
+			if(Global.Configuration["Active Stages"][family]==0)
 			{
 				ret+=name+" (inactive)"
 				return ret //if inactive, stop here

@@ -3,7 +3,7 @@
 	<title>ECAM Web Tool</title>
 	<?php include'imports.php'?>
 	<script>
-		/** Enable or disable <input type=checkbox id=id> */
+		/** Enable or disable stage <input type=checkbox id=id> */
 		function activate(id)
 		{
 			//input element that we are clicking
@@ -25,7 +25,7 @@
 					/**set disabled*/elements[i].setAttribute('disabled',true)
 					/**set grey color*/elements[i].parentNode.style.color="#ccc"
 					/**set grey bg*/elements[i].parentNode.parentNode.style.backgroundColor=""
-					/**modifiy Active Stages*/Global.General["Active Stages"][elements[i].id]=0
+					/**modifiy Active Stages*/Global.Configuration["Active Stages"][elements[i].id]=0
 				}
 				updateOptions(elements[i].id)
 			}
@@ -34,22 +34,22 @@
 			checkbox.parentNode.parentNode.style.backgroundColor=checkbox.checked?"#73AD21":""
 
 			//update Active Stages
-			Global.General["Active Stages"][id] = checkbox.checked ? 1 : 0
+			Global.Configuration["Active Stages"][id] = checkbox.checked ? 1 : 0
 			
-			//update options (called additional info)
+			//update options (questions in the right)
 			updateOptions(id);
 
-			//redisplay
+			//redisplay current json
 			updateResult()
 		}
 
-		/** Activate stages depending on Global.General["Active Stages"] */
+		/** Activate stages depending on Global.Configuration["Active Stages"] */
 		function activateLevels()
 		{
 			//go over Levels
-			for(stage in Global.General["Active Stages"])
+			for(stage in Global.Configuration["Active Stages"])
 			{
-				if(Global["General"]["Active Stages"][stage])
+				if(Global.Configuration["Active Stages"][stage])
 				{
 					/**uws is always active*/if(stage=="uws"){continue}
 					/**set checked*/document.getElementById(stage).checked=true
@@ -58,21 +58,49 @@
 			}
 		}
 
+		/** Update the current Global object
+			parameter: menu (string) ["Waste" or "Water"]
+		*/
+		function updateQuestion(stage,question,newValue)
+		{
+			Global.Configuration.Questions[stage][question]=parseInt(newValue)
+			init()
+		}
+		function setTechnology(stage,selectedTec)
+		{
+			for(tec in Global.Configuration.Technologies[stage])
+			{
+				Global.Configuration.Technologies[stage][tec] = selectedTec==tec ? 1:0;
+			}
+			init();
+		}
+		/** Hide or show a <tr> of additional info depending on active stages **/
+		function updateOptions(family)
+		{
+			var newDisplay=Global.Configuration["Active Stages"][family] ? "" : "none"; 
+			var trs = document.querySelectorAll("[class=option][family="+family+"]");
+			for(var i=0;i<trs.length;i++)
+			{
+				trs[i].style.display = newDisplay;
+				if(newDisplay=='none')continue;
+				trs[i].style.backgroundColor ='orange';
+				/*cool visual efect*/setTimeout(function(el){el.style.backgroundColor='';},1,trs[i]);
+			}
+		}
+
 		function init()
 		{
 			activateLevels();
-			["Water","Waste"].forEach(function(el){updateTechnologiesMenu(el)});
 			updateResult();
 		}
 	</script>
-	<style>
-		tr.option{transition:all 1.5s}
-	</style>
+	<style> tr.option{transition:all 1.5s} </style>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Configuration</h1>
 <!--SUBTITLE--><h4>Which stages form your system?</h4>
 
+<!--MAIN-->
 <div style=content-align:center;width:80%>
 	<!--SELECT STAGES-->
 	<table id=selectStage class=inline style="font-size:16px;width:35%;margin-right:2em" >
@@ -135,15 +163,19 @@
 
 	<!--QUESTIONS-->
 	<table class=inline style="font-size:15px;width:45%" id=questions>
-		<tr><th colspan=2 style="text-align:left;font-size:16px">Additional info
+		<tr><th colspan=3 style="text-align:left;font-size:16px">Additional info
 		<script>
-			for(stage in Global.General.Questions)
+			for(stage in Global.Configuration.Questions)
 			{
-				for(question in Global.General.Questions[stage])
+				document.write(""+
+					"<tr><td colspan=3 style=font-size:11px;background:#eee>"+stage+
+					" ("+Object.keys(Global.Configuration.Questions[stage]).length+")"
+				)
+				for(question in Global.Configuration.Questions[stage])
 				{
 					document.write("<tr class=option family="+stage+" style=display:none title="+varsHidByQuestions[question]+"><td>"+question+"?")
 					document.write("<td><select onchange=\"updateQuestion('"+stage+"','"+question+"',this.value)\">")
-					if(Global.General.Questions[question])
+					if(Global.Configuration.Questions[stage][question])
 					{
 						document.write("<option value=1>Yes");
 						document.write("<option value=0>No");
@@ -157,12 +189,19 @@
 				}
 			}
 		</script>
-
-		<!--treatment technologies-->
-		<tr class=option family=waterTre style=display:none><td>Technology used in water treatment
-		<td><select id=WaterTreatmentTechs></select>
-		<tr class=option family=wasteTre style=display:none><td>Technology used in wastewater treatment
-		<td><select id=WasteTreatmentTechs></select>
+			<tr><th colspan=3 style="text-align:left;font-size:16px">Treatment technologies
+		<script>
+			for(stage in Global.Configuration.Technologies)
+			{
+				document.write("<tr class=option family="+stage+" style=display:none><td>Technology used in "+stage+" Treatment");
+				document.write("<td><select onchange=setTechnology('"+stage+"',this.value)>");
+				for(tec in Global.Configuration.Technologies[stage])
+				{
+					document.write("<option value='"+tec+"'>"+tec);
+				}
+				document.write("</select>");
+			}
+		</script>
 	</table>
 </div>
 
@@ -173,49 +212,3 @@
 </div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
-
-<script>
-	/** Update the current Global object
-		parameter: menu (string) ["Waste" or "Water"]
-	*/
-	function setTechnology(menu,selectedTec)
-	{
-		for(tec in Global.Technologies[menu])
-			Global.Technologies[menu][tec]=selectedTec==tec?1:0;
-		init();
-	}
-	function updateQuestion(stage,question,newValue)
-	{
-		Global.General.Questions[stage][question]=parseInt(newValue)
-		init()
-	}
-
-	/** Redisplay dropdown menu for technology selection.
-		parameter: menu (string) ["Waste" or "Water"]
-	*/
-	function updateTechnologiesMenu(menu)
-	{
-		var select=document.querySelector("#"+menu+"TreatmentTechs");
-		select.onchange=function(){setTechnology(menu,select.value)}
-		/*empty select*/select.innerHTML="";
-		for(tec in Global.Technologies[menu])
-		{
-			var option=document.createElement('option');
-			select.appendChild(option);
-			option.innerHTML=tec;
-			option.value=tec;
-			option.selected=Global.Technologies[menu][tec]?true:false;
-		}
-	}
-	/** Hide or show a <tr> of additional info depending on active stages **/
-	function updateOptions(family)
-	{
-		var trs = document.querySelectorAll("[class=option][family="+family+"]");
-		for(var i=0;i<trs.length;i++)
-		{
-			trs[i].style.display = Global.General["Active Stages"][family] ? "" : "none";
-			trs[i].style.backgroundColor ='orange';
-			setTimeout(function(el){el.style.backgroundColor='';},1,trs[i]);
-		}
-	}
-</script>

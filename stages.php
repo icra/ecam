@@ -2,7 +2,7 @@
 	/** THIS PAGES LETS THE USER NAVIGATE THROUGH ACTIVE STAGES */
 
 	//parse cookie "GLOBAL" to see if stage $stages[name] is 0 or 1
-	$stages=json_decode($_COOKIE['GLOBAL'],true)["General"]["Active Stages"];
+	$stages=json_decode($_COOKIE['GLOBAL'],true)["Configuration"]["Active Stages"];
 
 	/** Prints a Level 1 stage for the navigation table. All parameters are strings */
 	function printL1stage($alias,$level)
