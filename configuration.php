@@ -197,7 +197,12 @@
 				document.write("<td><select onchange=setTechnology('"+stage+"',this.value)>");
 				for(tec in Global.Configuration.Technologies[stage])
 				{
-					document.write("<option value='"+tec+"'>"+tec);
+					var selected = Global.Configuration.Technologies[stage][tec];
+					console.log(selected)
+					if(selected)
+						document.write("<option value='"+tec+"' selected=true>"+tec);
+					else
+						document.write("<option value='"+tec+"'>"+tec);
 				}
 				document.write("</select>");
 			}
