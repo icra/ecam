@@ -187,32 +187,7 @@ var Info =
 
 //2.2 Treatment
 	"tV1":{
-		"description":"Volume of treated water in WTPs with Pre-ox/C/F/S/Filt/Des",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"tV2"  :{
-		"description":"Volume of treated water in WTPs with  Pre-ox/C/F/Filt/Des",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"tV3"  :{
-		"description":"Volume of treated water in WTPs with C/F/S/Filt/Des",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"tV4"  :{
-		"description":"Volume of treated water in WTPs with C/F/Filt/Des",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"tV5":{
-		"description":"Volume of treated water in WTPs with Des",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"tV6":{
-		"description":"Volume of treated water in WTPs with other sequence",
+		"description":"Volume of treated water in WTPs with selected technology",
 		"magnitude":"Volume",
 		"unit":"m3",
 	},
@@ -263,43 +238,7 @@ var Info =
 	},
 	"tE0":
 	{
-		"description":"Treatment type (volume per type)",
-		"magnitude":"undefined",
-		"unit":"%",
-	},
-	"tE01":
-	{
-		"description":"WTPs with Pre-ox/C/F/S/Filt/Des",
-		"magnitude":"undefined",
-		"unit":"%",
-	},
-	"tE02":
-	{
-		"description":"WTPs with Pre-ox/C/F/Filt/Des",
-		"magnitude":"undefined",
-		"unit":"%",
-	},
-	"tE03":
-	{
-		"description":"WTPs with C/F/S/Filt/Des",
-		"magnitude":"undefined",
-		"unit":"%",
-	},
-	"tE04":
-	{
-		"description":"WTPs with C/F/Filt/Des",
-		"magnitude":"undefined",
-		"unit":"%",
-	},
-	"tE05":
-	{
-		"description":"WTPs with Des",
-		"magnitude":"undefined",
-		"unit":"%",
-	},
-	"tE06":
-	{
-		"description":"WTPs with other sequence",
+		"description":"WTPs with selected technology",
 		"magnitude":"undefined",
 		"unit":"%",
 	},
@@ -675,32 +614,7 @@ var Info =
 		"unit":"Score",
 	},
 	"wtV1":{
-		"description":"Volume of treated wastewater in WWTPs with trickling filters (TF)",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"wtV2":{
-		"description":"Volume of treated wastewater in WWTPs with activated sludge (AS)",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"wtV3":{
-		"description":"Volume of treated wastewater in WWTPs with AS and Coagulation/Filtration (C/F)",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"wtV4":{
-		"description":"Volume of treated wastewater in WWTPs with AS nitrification and C/F",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"wtV5":{
-		"description":"Volume of treated wastewater in WWTPs with Laggons",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"wtV6":{
-		"description":"Volume of treated wastewater in WWTPs with other type of treatment",
+		"description":"Volume of treated wastewater in WWTPs with selected technology",
 		"magnitude":"Volume",
 		"unit":"m3",
 	},
@@ -721,43 +635,7 @@ var Info =
 	},
 	"wtE0":
 	{
-		"description":"Treatment type (volume per type)",
-		"magnitude":"Ratio",
-		"unit":"% of each treatment",
-	},
-	"wtE01":
-	{
-		"description":"WWTPs with trickling filters (TF)",
-		"magnitude":"Ratio",
-		"unit":"%",
-	},
-	"wtE02":
-	{
-		"description":"WWTPs with activated sludge (AF)",
-		"magnitude":"Ratio",
-		"unit":"%",
-	},
-	"wtE03":
-	{
-		"description":"WWTPs with AS and Coagulation/Filtration (C/F)",
-		"magnitude":"Ratio",
-		"unit":"%",
-	},
-	"wtE04":
-	{
-		"description":"WWTPs with AS nitrification and C/F ",
-		"magnitude":"Ratio",
-		"unit":"%",
-	},
-	"wtE05":
-	{
-		"description":"WWTPs with Lagoons",
-		"magnitude":"Ratio",
-		"unit":"%",
-	},
-	"wtE06":
-	{
-		"description":"WWTPs with other type of treatment",
+		"description":"WWTPs with selected technology",
 		"magnitude":"Ratio",
 		"unit":"%",
 	},

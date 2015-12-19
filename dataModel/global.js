@@ -70,12 +70,7 @@ var Global = {
 			"sV5" :	0, //Compliance of microbiological tests	no.
 			"sV6" :	0, //Compliance of physical-chemical tests	no.
 			"sV7" :	0, //Compliance of radioactivity tests	no.
-			"tV1" :	0, //Volume of treated water in WTPs with Pre-ox/C/F/S/Filt/Des	m3
-			"tV2" :	0, //Volume of treated water in WTPs with  Pre-ox/C/F/Filt/Des	m3
-			"tV3" :	0, //Volume of treated water in WTPs with C/F/S/Filt/Des 	m3
-			"tV4" :	0, //Volume of treated water in WTPs with C/F/Filt/Des	m3
-			"tV5" :	0, //Volume of treated water in WTPs with Des	m3
-			"tV6" :	0, //Volume of treated water in WTPs with other sequence 	m3
+			"tV1" :	0, //Volume of treated water in WTPs with selected technology
 			"tV8" :	0, //Sludge produced in WTPs 	kg
 			"tV9" :	0, //Treatment capacity	m3
 			"tE0"  :function(){return "not_implemented"},	//Treatment type (volume per type) 
@@ -165,12 +160,7 @@ var Global = {
 			"wtV15"	: 0,	//BOD influent (average)	mg/L
 			"wsV5"  : 0,	//Tests complying with discharge consents	no.
 			"wsV6"  : 0,	//Tests carried out in WWTPs	no.
-			"wtV1"  : 0,	//Volume of treated wastewater in WWTPs with trickling filters (TF)	m3
-			"wtV2"  : 0,	//Volume of treated wastewater in WWTPs with activated sludge (AS)	m3
-			"wtV3"  : 0,	//Volume of treated wastewater in WWTPs with AS and Coagulation/Filtration (C/F) 	m3
-			"wtV4"  : 0,	//Volume of treated wastewater in WWTPs with AS nitrification and C/F	m3
-			"wtV5"  : 0,	//Volume of treated wastewater in WWTPs with Laggons 	m3
-			"wtV6"  : 0,	//Volume of treated wastewater in WWTPs with other type of treatment 	m3
+			"wtV1"  : 0,	//Volume of treated wastewater in WWTPs with selected technology m3
 			"wtV12" : 0,	//Sludge produced in WWTPs (total weight)	kg
 			"wtV13" : 0,	//Dry weight in sludge produced	% (w/w)
 			"wtV14" : 0,	//Treatment capacity	m3
