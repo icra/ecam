@@ -1,5 +1,5 @@
 <style>
-	nav {font-size:14px;background:#999;color:#fff;margin:0;text-align:center;}
+	nav {display:none;font-size:14px;background:#999;color:#fff;margin:0;text-align:center;}
 	nav li {text-align:left}
 	nav ul{margin:0;padding:0;list-style:none;}
 	nav ul li {margin:0;display:inline-block;list-style-type:none;}

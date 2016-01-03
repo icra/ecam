@@ -162,7 +162,7 @@
 	</table>
 
 	<!--QUESTIONS-->
-	<table class=inline style="font-size:15px;width:45%" id=questions>
+	<table class=inline style="font-size:12px;width:45%" id=questions>
 		<tr><th colspan=3 style="text-align:left;font-size:16px">Additional info
 		<script>
 			for(stage in Global.Configuration.Questions)
@@ -173,7 +173,7 @@
 				)
 				for(question in Global.Configuration.Questions[stage])
 				{
-					document.write("<tr class=option family="+stage+" style=display:none title="+varsHidByQuestions[question]+"><td>"+question+"?")
+					document.write("<tr class=option family="+stage+" style=display:none title="+Questions.varsPerQuestion[question]+"><td>"+question+"?")
 					document.write("<td><select onchange=\"updateQuestion('"+stage+"','"+question+"',this.value)\">")
 					if(Global.Configuration.Questions[stage][question])
 					{
@@ -198,7 +198,6 @@
 				for(tec in Global.Configuration.Technologies[stage])
 				{
 					var selected = Global.Configuration.Technologies[stage][tec];
-					console.log(selected)
 					if(selected)
 						document.write("<option value='"+tec+"' selected=true>"+tec);
 					else

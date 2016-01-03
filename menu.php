@@ -26,7 +26,7 @@
 		reader.onload=function()
 		{
 			copyFieldsFrom(JSON.parse(reader.result),"Global")
-			init()
+			updateResult()
 			window.location.reload()
 		}
 		reader.readAsText(file);
@@ -47,8 +47,14 @@
 	<!--load-->
 	<input type=file id=loadfile accept=".json" onchange="loadFile(event)" style=display:none>
 	<button class="button edit" onclick=document.getElementById('loadfile').click()>Load system</button> 
-	<!--save-->
-	<button class="button save" onclick=saveToFile()>Save system</button>
-	<!--save-->
-	<button class="button delete" onclick=clearSystem()>Clear system</button>
+	<?php
+		if(isset($_COOKIE['GLOBAL']))
+		{ ?>
+			<!--save-->
+			<button class="button save" onclick=saveToFile()>Save system</button>
+			<!--save-->
+			<button class="button delete" onclick=clearSystem()>Clear system</button>
+		<?php 
+		}
+	?>
 </div>

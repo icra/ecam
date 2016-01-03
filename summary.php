@@ -10,7 +10,6 @@
 	//check correct $type value
 	if($type!="input" && $type!="output" )
 		die('Error. type must be "inputs" or "outputs"');
-
 ?>
 <!doctype html><html><head>
 	<meta charset=utf-8>
@@ -23,31 +22,6 @@
 			updateLevel2()
 			updateCounts()
 			updateResult()
-			hideVariablesAccordingToQuestions()
-		}
-
-		//HIDE VARIABLES ACCORDING TO QUESTIONS IN CONFIGURATION 
-		function hideVariablesAccordingToQuestions()
-		{
-			for(stage in Global.Configuration.Questions)
-			{
-				for(question in Global.Configuration.Questions[stage])
-				{
-					console.log(question+"? "+Global.Configuration.Questions[stage][question]);
-					if(Global.Configuration.Questions[stage][question]==0)
-					{
-						varsHidByQuestions[question].forEach(function(variable)
-						{
-							var elements=document.querySelectorAll("tr[variable="+variable+"]");
-							for(var i=0;i<elements.length;i++)
-							{
-								elements[i].style.display='none';
-								console.log('	Variable '+variable+' hidden');
-							}
-						})
-					}
-				}
-			}
 		}
 
 		function updateLevel1()

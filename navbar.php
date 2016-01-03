@@ -21,7 +21,40 @@
 	#navbar a {
 		color:white;	
 	}
+	div.summaryMenu{
+		background:#00aff1;
+		border:1px solid #ccc;
+		position:absolute;
+		box-shadow: 5px 5px 5px #888;
+		padding:0;
+		margin:0;
+	}
+	div.summaryMenu div{padding:0.3em;text-align:left;}
+	div.summaryMenu div.close{
+		color:black;
+		padding:0;
+		margin:0;
+		text-align:right;
+	}
 </style>
+
+<script>
+	function summaryMenu(ev)
+	{
+		var div=document.createElement('div')
+		document.querySelector("#navbar").appendChild(div)
+		div.className="summaryMenu"
+		//onblur things
+		div.onclick=function(){div.style.display='none'}
+		//get mouse coordinates
+		div.style.top=event.pageY+"px"
+		div.style.left=event.pageX+"px"
+		div.innerHTML="<div class=close><span style=cursor:pointer><button>x</button></span></div>"+
+			"<div><a href=summary.php?type=input>Inputs</a></div>"+
+			"<div><a href=summary.php?type=output>Outputs</a></div>";
+	}
+	
+</script>
 
 <div id=navbar style="text-align:center;background:#00aff1;color:white;padding:0.2em 0em 0em 0em;font-size:18px">
 	<?php
@@ -32,6 +65,7 @@
 			nlink("/ecam/getStarted.php","Get started");
 			nlink("/ecam/configuration.php","Configuration");
 			nlink("/ecam/stages.php","Input data");
+			echo "<div class=inactive-tab><a href=# onclick=summaryMenu(event,this.parentNode)>Summary</a></div>";
 			nlink("/ecam/resources.php","Resources");
 			nlink("/ecam/about.php","About");
 		}

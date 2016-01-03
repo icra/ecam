@@ -214,7 +214,7 @@
 				for(s in substages)
 				{
 					var str=""+
-						"<button style='vertical-align:middle' class=delete onclick=deleteSubstage("+s+") title='Delete substage'></button>"
+						"<button class=delete onclick=deleteSubstage("+s+") title='Delete substage'></button>"
 					newRow.insertCell(-1).innerHTML=str
 				}
 			/*end update body*/
