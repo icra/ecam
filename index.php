@@ -15,7 +15,6 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1 class=blue style="font-size:33px;padding-bottom:0">ECAM</h1>
 <!--SUBTITLE--><h3>Energy performance and carbon emissions assessment and monitoring tool </h3>
-<!--LATEST UPD--><div style="max-width:20%;background:#d7bfaf"><?php echo "Latest update: ".date("F d Y, H:i:s.",filemtime("index.php"))?></div>
 
 <!--DESCRIPTION--><div style="font-size:17px;color:#333;max-width:75%;text-align:justify">
 	The web-based ECAM tool is part of the knowledge platform provided by the <a href="http://www.iwa-network.org/WaCCliM/">WaCCliM project</a>. 
@@ -31,6 +30,9 @@
 <h4 style=font-size:19px>
 First time using ECAM Web Tool? Click "New System" or learn more in <a href=resources.php>Resources</a>
 </h4>
+
+<!--LATEST UPD--><div style="max-width:20%;background:#d7bfaf"><?php echo "Latest update: ".date("F d Y, H:i:s.",filemtime("index.php"))?></div>
+
 <!--DIAGRAM--><?php include'diagram_home.php'?>
 
 <!--LOGOS-->

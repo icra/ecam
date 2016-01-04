@@ -9,7 +9,6 @@
 			//input element that we are clicking
 			var checkbox=document.getElementById(id);
 
-
 			//SUBLEVELS: they have classname==id
 			var elements=document.getElementsByClassName(id)
 			for(var i=0;i<elements.length;i++)
@@ -93,6 +92,24 @@
 			activateLevels();
 			updateResult();
 		}
+
+		function stageName(stage)
+		{
+			var r; //returned string
+			switch(stage)
+			{
+				case "water":	 r="Water Supply";break;
+				case "waterAbs": r="Water Abstraction";break;
+				case "waterTre": r="Water Treatment";break;
+				case "waterDis": r="Water Distribution";break;
+				case "waste":	 r="Wastewater";break;
+				case "wasteCol": r="Wastewater Collection";break;
+				case "wasteTre": r="Wastewater Treatment";break;
+				case "wasteDis": r="Wastewater Discharge";break;
+				default: r=stage;break;
+			}
+			return r;
+		}
 	</script>
 	<style> tr.option{transition:all 1.5s} </style>
 </head><body onload=init()><center>
@@ -162,18 +179,18 @@
 	</table>
 
 	<!--QUESTIONS-->
-	<table class=inline style="font-size:12px;width:45%" id=questions>
+	<table class=inline style="font-size:11px;width:45%" id=questions>
 		<tr><th colspan=3 style="text-align:left;font-size:16px">Additional info
 		<script>
 			for(stage in Global.Configuration.Questions)
 			{
 				document.write(""+
-					"<tr><td colspan=3 style=font-size:11px;background:#eee>"+stage+
-					" ("+Object.keys(Global.Configuration.Questions[stage]).length+")"
+					"<tr><td colspan=3 style=background:#c6c6c6>"+stageName(stage)+
+					" ("+Object.keys(Global.Configuration.Questions[stage]).length+" questions)"
 				)
 				for(question in Global.Configuration.Questions[stage])
 				{
-					document.write("<tr class=option family="+stage+" style=display:none title="+Questions.varsPerQuestion[question]+"><td>"+question+"?")
+					document.write("<tr class=option family="+stage+" style=display:none title="+Questions.varsPerQuestion[question]+"><td>&emsp;&emsp; "+question+"?")
 					document.write("<td><select onchange=\"updateQuestion('"+stage+"','"+question+"',this.value)\">")
 					if(Global.Configuration.Questions[stage][question])
 					{
@@ -193,7 +210,7 @@
 		<script>
 			for(stage in Global.Configuration.Technologies)
 			{
-				document.write("<tr class=option family="+stage+" style=display:none><td>Technology used in "+stage+" Treatment");
+				document.write("<tr class=option family="+stage+" style=display:none><td>Technology used in "+stageName(stage));
 				document.write("<td><select onchange=setTechnology('"+stage+"',this.value)>");
 				for(tec in Global.Configuration.Technologies[stage])
 				{

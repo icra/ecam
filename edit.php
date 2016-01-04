@@ -1,9 +1,10 @@
 <?php
 	/** THIS PAGE LETS THE USER MODIFY INPUTS AND SEE AUTOMATICALLY THE OUTPUTS */
 
-	//check specified input
+	//check specified input: level and sublevel
 	if(!isset($_GET['level']))die("ERROR: stage not specified");
-	//level: 	mandatory {"Water","Wastewater","Global"}
+
+	//level: 	mandatory {"Water","Waste","UWS"}
 	//sublevel: optional. If set, enables level 3 {"Abstraction","Treatment","Distribution",[...]}
 	$level=$_GET['level'];
 	if(isset($_GET['sublevel']))
@@ -18,8 +19,9 @@
 	<title>ECAM Web App</title>
 	<?php include'imports.php'?>
 	<style>
-		td.input input{width:95%;font-size:18px}
-		td.input{width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
+		td.input input { width:95%;font-size:18px}
+		td.input       { width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
+		table#outputs tr:hover { background:#f7fe2e; }
 	</style>
 	<script>
 		/** 
@@ -204,19 +206,11 @@
 
 <!--HELP--><h4>Here you can edit the inputs for this stage. The Indicators (in yellow) will be updated automatically.</h4>
 
-<!--OPTIONS FOR THIS LEVEL-->
-<div>
-	<button class=button>Water Flows +</button>
-	<button class=button>Energy use and production +</button>
-	<button class=button>GHG Emissions +</button>
-	<img src=img/co2.png style="width:40px;vertical-align:middle">
-</div>
-
 <!--IO-->
 <div>
 	<!--INPUTS-->
 	<table id=inputs class=inline>
-		<tr><th colspan=5>INPUTS
+		<tr><th colspan=5>INPUTS <?php include'inputType.php'?>
 		<tr><th>Code<th>Description<th>Current Value<th>Unit<th>Data Quality
 	</table>
 
