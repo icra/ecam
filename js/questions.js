@@ -30,6 +30,5 @@ var Questions = {
 		}
 		return vars
 	},
-
 }
 

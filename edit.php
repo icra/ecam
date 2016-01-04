@@ -66,8 +66,6 @@
 				var newRow=t.insertRow(-1)
 				newRow.setAttribute('field',field)
 				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
-				//link in description? discuss
-				//newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+Info[field].description+"</a>"
 				newRow.insertCell(-1).innerHTML= Info[field] ? Info[field].description : "<span style=color:#ccc>not defined</span>"
 				var newCell=newRow.insertCell(-1)
 				newCell.className="input"

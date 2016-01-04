@@ -15,15 +15,15 @@ function copyFieldsFrom(object,name)
 		{
 			eval(name+"['"+field+"']="+JSON.stringify(object[field]));
 		}
-		//if field is also object, recursive call
+		//if field is object, recursive call
 		else if(typeof(object[field])=="object") 
 		{
 			copyFieldsFrom(object[field],name+"['"+field+"']")
 		}
-		else //means is a normal field
+		else //means is a normal field (string or number)
 		{
 			//update the field
-			//if the field is a number, don't use single quotes
+			//if the field is a number, don't use quotes
 			if(typeof(object[field])=="number")
 				eval(name+"['"+field+"']="+object[field])
 			else

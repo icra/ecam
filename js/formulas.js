@@ -8,10 +8,9 @@ function idsPerFormula(formula)
 	var match
 	for(field in Info)
 	{
-		var reg=new RegExp('\\W'+field+'\\D')
-		match=formula.search(reg) //will return -1 if not found
-		if(match==-1)continue
-		else matches.push(field)
+		var reg=new RegExp('\\W'+field+'\\D');
+		match=formula.search(reg); //will return -1 if not found
+		if(match!=-1){matches.push(field);}
 	}
 	return matches
 }

@@ -41,17 +41,19 @@
 <script>
 	function summaryMenu(ev)
 	{
-		var div=document.createElement('div')
-		document.querySelector("#navbar").appendChild(div)
-		div.className="summaryMenu"
-		//onblur things
+		//first hide all other summaryMenus
+		var other=document.querySelectorAll("div.summaryMenu");
+		for(var i=0;i<other.length;i++){other[i].style.display='none';}
+		var div=document.createElement('div');
+		document.querySelector("#navbar").appendChild(div);
+		div.className="summaryMenu";
 		div.onclick=function(){div.style.display='none'}
 		//get mouse coordinates
-		div.style.top=event.pageY+"px"
-		div.style.left=event.pageX+"px"
+		div.style.top=event.pageY+"px";
+		div.style.left=event.pageX+"px";
 		div.innerHTML="<div class=close><span style=cursor:pointer><button>x</button></span></div>"+
-			"<div><a href=summary.php?type=input>Inputs</a></div>"+
-			"<div><a href=summary.php?type=output>Outputs</a></div>";
+			"<div><a href=summary.php?type=input>All inputs</a></div>"+
+			"<div><a href=summary.php?type=output>All outputs</a></div>";
 	}
 	
 </script>
