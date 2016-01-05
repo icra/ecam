@@ -1,5 +1,5 @@
-/** RAW COOKIES FUNCTIONS 
-	All values that the user inputs are in cookie "GLOBAL"
+/** 
+	RAW COOKIES FUNCTIONS 
 */
 
 /** New cookie */
@@ -29,7 +29,6 @@ function getCookie(name)
 /** Remove cookie */
 function removeCookie(name)
 {
-	document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 	document.cookie = name+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 	console.log("Cookie '"+name+"' removed")
 }
