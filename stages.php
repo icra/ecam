@@ -51,7 +51,7 @@
 		td.inactive
 		{
 			color:#aaa;
-			background-color:#efefef;
+			background-color:#c8c8c8;
 			font-size:12px;
 		}
 	</style>

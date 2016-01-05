@@ -21,7 +21,7 @@
 	<style>
 		td.input input { width:95%;font-size:18px}
 		td.input       { width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
-		table#outputs tr:hover { background:#f7fe2e; }
+		table#outputs tr:hover { background:orange; }
 	</style>
 	<script>
 		/** 

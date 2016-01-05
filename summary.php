@@ -58,7 +58,7 @@
 		function tableRows(object,name,family,href)
 		{
 			//return string
-			var ret="<tr><td colspan=4 style='background:#eee;font-weight:bold'>"
+			var ret="<tr><td colspan=4 style='background:#ccc;font-weight:bold'>"
 			
 			//make link or not depending on active 
 			if(Global.Configuration["Active Stages"][family]==0)
@@ -103,7 +103,7 @@
 
 <!--AVAILABLE INPUTS-->
 <div class=inline style="width:75%;text-align:left">
-	<h4>Enabled <?php echo $type?>s sorted by stage (summary)</h4>
+	<h4>All active <?php echo $type?>s (from activated stages in configuration)</h4>
 	<!--level 1-->
 	<div class=inline style="font-size:11px;width:35%;padding:0">
 		<table style="width:100%" level=1><tr><th colspan=4>Level 1</table>

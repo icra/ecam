@@ -783,4 +783,3 @@ function locateVariable(code)
 	}
 	return false
 }
-

@@ -6,6 +6,7 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 Global.General	dataModel/global.js	/^var Global = {$/;"	p
 Info.gE1	dataModel/info.js	/^{$/;"	p
+Questions.varsPerQuestion	js/questions.js	/^var Questions = {$/;"	p
 Substage	level3.php	/^		function Substage()$/;"	f
 activate	configuration.php	/^		function activate(id)$/;"	f
 activateLevels	configuration.php	/^		function activateLevels()$/;"	f
@@ -14,14 +15,16 @@ changeName	level3.php	/^		function changeName(index,newValue)$/;"	f
 clearSystem	menu.php	/^	function clearSystem()$/;"	f
 copyFieldsFrom	js/updateGlobalFromCookies.js	/^function copyFieldsFrom(object,name)$/;"	f
 deleteSubstage	level3.php	/^		function deleteSubstage(index)$/;"	f
+div.onclick	navbar.php	/^		div.onclick=function(){div.style.display='none'}$/;"	j
 drawChart	sankey.php	/^	function drawChart(){$/;"	f
+for	level3.php	/^		\/** Substage class for storing all variables that correspond to current stage *\/$/;"	c
 getCookie	js/cookies.js	/^function getCookie(name)$/;"	f
 getInputs	level3.php	/^		function getInputs()$/;"	f
 global	currentSystem.php	/^				$global=json_decode($_COOKIE['GLOBAL'],true);$/;"	v
 global	navStages.php	/^	$global=json_decode($_COOKIE['GLOBAL'],true);$/;"	v
-hideVariablesAccordingToQuestions	summary.php	/^		function hideVariablesAccordingToQuestions()$/;"	f
 hlFields	edit.php	/^		function hlFields(formula,hl)$/;"	f
 id	variable.php	/^	$id=$_GET['id'];$/;"	v
+idsPerFormula	js/formulas.js	/^function idsPerFormula(formula)$/;"	f
 init	configuration.php	/^		function init()$/;"	f
 init	edit.php	/^		function init()$/;"	f
 init	getStarted.php	/^		function init()$/;"	f
@@ -33,7 +36,9 @@ init	variable.php	/^		function init()$/;"	f
 input.onblur	level3.php	/^			input.onblur=function(){document.body.removeChild(div)}$/;"	j
 input.onchange	level3.php	/^			input.onchange=function(){changeName(index,input.value)}$/;"	j
 input.onkeypress	level3.php	/^			input.onkeypress=function(ev){if(ev.which==13)div.style.display='none'}$/;"	j
+inputType	inputType.php	/^	function inputType(button)$/;"	f
 isLevel3enabled	edit.php	/^		$isLevel3enabled=true;$/;"	v
+isLevel3enabled	edit.php	/^	else $isLevel3enabled=false;$/;"	v
 level	edit.php	/^	$level=$_GET['level'];$/;"	v
 level	level3.php	/^	$level=$_GET['level'];$/;"	v
 loadFile	menu.php	/^	function loadFile(evt)$/;"	f
@@ -44,13 +49,14 @@ locateVariable.localization.level	dataModel/info.js	/^						localization = {"lev
 locateVariable.localization.sublevel	dataModel/info.js	/^						localization = {"level":level,"sublevel":field}$/;"	p
 location	currentSystem.php	/^				$location=$global["General"]["Location"];$/;"	v
 name	currentSystem.php	/^				$name=$global["General"]["Name"];$/;"	v
+name	navStages.php	/^		foreach($stages as $name=>$active) $/;"	v
 navL2stage	navStages.php	/^	function navL2stage($alias,$level,$sublevel)$/;"	f
 newSubstage	level3.php	/^		function newSubstage()$/;"	f
 newSystem	menu.php	/^	function newSystem()$/;"	f
 nlink	navbar.php	/^	function nlink($href,$name)$/;"	f
 onblur	level3.php	/^			input.onblur=function(){document.body.removeChild(div)}$/;"	j
-onchange	configuration.php	/^		select.onchange=function(){setTechnology(menu,select.value)}$/;"	j
 onchange	level3.php	/^			input.onchange=function(){changeName(index,input.value)}$/;"	j
+onclick	navbar.php	/^		div.onclick=function(){div.style.display='none'}$/;"	j
 onkeypress	level3.php	/^			input.onkeypress=function(ev){if(ev.which==13)div.style.display='none'}$/;"	j
 onload	menu.php	/^		reader.onload=function()$/;"	j
 printL1stage	stages.php	/^	function printL1stage($alias,$level)$/;"	f
@@ -58,20 +64,26 @@ printL2stage	stages.php	/^	function printL2stage($alias,$level,$sublevel)$/;"	f
 reader.onload	menu.php	/^		reader.onload=function()$/;"	j
 removeCookie	js/cookies.js	/^function removeCookie(name)$/;"	f
 saveToFile	menu.php	/^	function saveToFile()$/;"	f
-select.onchange	configuration.php	/^		select.onchange=function(){setTechnology(menu,select.value)}$/;"	j
 sep	edit.php	/^	$sep="<span style=color:black>&rsaquo;<\/span>";$/;"	v
 setCookie	js/cookies.js	/^function setCookie(name,value,days) $/;"	f
-setTechnology	configuration.php	/^	function setTechnology(menu,selectedTec)$/;"	f
+setTechnology	configuration.php	/^		function setTechnology(stage,selectedTec)$/;"	f
 showSubstageMenu	level3.php	/^		function showSubstageMenu(index,ev)$/;"	f
+stageName	configuration.php	/^		function stageName(stage)$/;"	f
 stages	navStages.php	/^	$stages=$global['Configuration']["Active Stages"];$/;"	v
 stages	stages.php	/^	$stages=json_decode($_COOKIE['GLOBAL'],true)["Configuration"]["Active Stages"];$/;"	v
 sublevel	edit.php	/^		$sublevel=$_GET['sublevel'];$/;"	v
 sublevel	level3.php	/^	$sublevel=$_GET['sublevel'];$/;"	v
 sumAll	level3.php	/^		function sumAll(code)$/;"	f
+summaryMenu	navbar.php	/^	function summaryMenu(ev)$/;"	f
 tableRow	getStarted.php	/^		function tableRow(field,input,type)$/;"	f
 tableRows	summary.php	/^		function tableRows(object,name,family,href)$/;"	f
 title	edit.php	/^	$title=isset($sublevel) ? "<a href=edit.php?level=$level>$titleLevel<\/a> $sep <span style=color:black>$sublevel<\/span>" : "<span style=color:black>$titleLevel<\/span>";$/;"	v
 title	level3.php	/^	$title="<a href=stages.php>Input data<\/a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages (Level 3)<\/a>";$/;"	v
+titleLevel	edit.php	/^		case "Waste":  $titleLevel="Wastewater";break;$/;"	v
+titleLevel	edit.php	/^		case "Water":  $titleLevel="Water Supply";break;$/;"	v
+titleLevel	edit.php	/^		default:	   $titleLevel=$level;break;$/;"	v
+titleLevel	level3.php	/^		case "Waste": $titleLevel="<a href=edit.php?level=$level>Wastewater<\/a>";break;$/;"	v
+titleLevel	level3.php	/^		case "Water": $titleLevel="<a href=edit.php?level=$level>Water Supply<\/a>";break;$/;"	v
 titleSublevel	level3.php	/^	$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>$sublevel<\/a>";$/;"	v
 transformField	edit.php	/^		function transformField(element)$/;"	f
 transformField	level3.php	/^		function transformField(element)$/;"	f
@@ -87,12 +99,10 @@ updateInfoTable	variable.php	/^		function updateInfoTable()$/;"	f
 updateInputs	edit.php	/^		function updateInputs()$/;"	f
 updateLevel1	summary.php	/^		function updateLevel1()$/;"	f
 updateLevel2	summary.php	/^		function updateLevel2()$/;"	f
-updateOptions	configuration.php	/^	function updateOptions(family)$/;"	f
+updateOptions	configuration.php	/^		function updateOptions(family)$/;"	f
 updateOutputs	edit.php	/^		function updateOutputs()$/;"	f
 updateOutputs	level3.php	/^		function updateOutputs()$/;"	f
-updateQuestion	configuration.php	/^	function updateQuestion(stage,question,newValue)$/;"	f
+updateQuestion	configuration.php	/^		function updateQuestion(stage,question,newValue)$/;"	f
 updateResult	currentJSON.php	/^	function updateResult()$/;"	f
 updateSubstage	level3.php	/^		function updateSubstage(index,field,newValue)$/;"	f
 updateSubstagesTable	level3.php	/^		function updateSubstagesTable()$/;"	f
-updateTechnologiesMenu	configuration.php	/^	function updateTechnologiesMenu(menu)$/;"	f
-varsHidByQuestions.Do you have fuel engines to run pumps	js/questions.js	/^{$/;"	p

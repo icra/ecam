@@ -1,6 +1,10 @@
 <?php
+
+	/** Menu on the very top of the screen */
+
 	if(isset($_COOKIE['GLOBAL']))
-	{ ?>
+	{ 
+		?>
 		<div style="color:white;background:black;padding:0.4em;text-align:right">
 			<?php
 				$global=json_decode($_COOKIE['GLOBAL'],true);
@@ -9,5 +13,6 @@
 				echo "Editing: $name ($location)";
 			?>
 		</div>
-	<?php }
+		<?php 
+	}
 ?>

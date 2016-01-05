@@ -98,14 +98,14 @@
 			var r; //returned string
 			switch(stage)
 			{
-				case "water":	 r="Water Supply";break;
-				case "waterAbs": r="Water Abstraction";break;
-				case "waterTre": r="Water Treatment";break;
-				case "waterDis": r="Water Distribution";break;
-				case "waste":	 r="Wastewater";break;
-				case "wasteCol": r="Wastewater Collection";break;
-				case "wasteTre": r="Wastewater Treatment";break;
-				case "wasteDis": r="Wastewater Discharge";break;
+				case "water":	 r="<b>L1</b> Water Supply";break;
+				case "waterAbs": r="<b>L2</b> Water Supply / Abstraction";break;
+				case "waterTre": r="<b>L2</b> Water Supply / Treatment";break;
+				case "waterDis": r="<b>L2</b> Water Supply / Distribution";break;
+				case "waste":	 r="<b>L1</b> Wastewater";break;
+				case "wasteCol": r="<b>L2</b> Wastewater / Collection";break;
+				case "wasteTre": r="<b>L2</b> Wastewater / Treatment";break;
+				case "wasteDis": r="<b>L2</b> Wastewater / Discharge";break;
 				default: r=stage;break;
 			}
 			return r;
@@ -190,7 +190,7 @@
 				)
 				for(question in Global.Configuration.Questions[stage])
 				{
-					document.write("<tr class=option family="+stage+" style=display:none title="+Questions.varsPerQuestion[question]+"><td>&emsp;&emsp; "+question+"?")
+					document.write("<tr class=option family="+stage+" style=display:none><td>&emsp;&emsp; "+question+"?")
 					document.write("<td><select onchange=\"updateQuestion('"+stage+"','"+question+"',this.value)\">")
 					if(Global.Configuration.Questions[stage][question])
 					{
@@ -206,11 +206,11 @@
 				}
 			}
 		</script>
-			<tr><th colspan=3 style="text-align:left;font-size:16px">Treatment technologies
+			<tr><th colspan=3 style="text-align:left;font-size:16px">Water/Wastewater treatment technology
 		<script>
 			for(stage in Global.Configuration.Technologies)
 			{
-				document.write("<tr class=option family="+stage+" style=display:none><td>Technology used in "+stageName(stage));
+				document.write("<tr class=option family="+stage+" style=display:none><td>&emsp; &emsp; Technology used in "+stageName(stage));
 				document.write("<td><select onchange=setTechnology('"+stage+"',this.value)>");
 				for(tec in Global.Configuration.Technologies[stage])
 				{

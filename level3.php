@@ -42,7 +42,7 @@
 		?>
 
 		/** Array to store all Substage objects */
-		var substages = []
+		var substages = [];
 
 		<?php
 			//Read "substages" current object
@@ -246,6 +246,7 @@
 
 			for(field in CurrentStage)
 			{
+				//only functions
 				if(typeof(CurrentStage[field])!="function")continue
 				var newRow=t.insertRow(-1)
 				var formula=CurrentStage[field].toString()
@@ -254,9 +255,16 @@
 				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>"
 				newRow.insertCell(-1).innerHTML=CurrentStage[field]()||0
 				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>"
+
+				//TODO
+				/*
+				prettify()
+				*/
+				var inputs = idsPerFormula(CurrentStage[field].toString())
+				console.log(inputs)
 				for(s in substages)
 				{
-					newRow.insertCell(-1).innerHTML='value' //if nan, outputs 0
+					newRow.insertCell(-1).innerHTML=CurrentStage[field]
 				}
 			}
 		}
