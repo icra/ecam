@@ -89,7 +89,7 @@
 			<tr><?php printL2stage('wasteTre','Waste','Treatment')?>
 			<tr><?php printL2stage('wasteDis','Waste','Discharge')?>
 </table>
-<!--DIAGRAM--><?php include'diagram.php'?>
+<!--DIAGRAM--><?php //include'diagram.php'?>
 
 <!--PREV BUTTON--><div><button class="button prev" onclick=window.location='configuration.php'>Previous</button><div> 
 

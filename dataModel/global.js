@@ -21,6 +21,15 @@ var Global = {
 
 	/** 01. Urban water system (former Global) */
 	"UWS":{
+		//trial
+		/*
+		"uw1":0, //Energy costs (Euro)
+		"uw2":0, //Running costs (Euro)
+		"uw3":0, //Energy mix emissions (kg CO2/kWh)
+		"uw4":function(){return Global.General.Days()}, 	 //Assessment period (days)
+		"uw5":function(){return this.gV2/this.gV3}, //not updated
+		*/
+		//end trial
 		"gV2":0, //Energy costs (Euro)
 		"gV3":0, //Running costs (Euro)
 		"gV9":0, //Energy mix emissions (kg CO2/kWh)
@@ -73,13 +82,7 @@ var Global = {
 			"tV1" :	0, //Volume of treated water in WTPs with selected technology
 			"tV8" :	0, //Sludge produced in WTPs 	kg
 			"tV9" :	0, //Treatment capacity	m3
-			"tE0"  :function(){return "not_implemented"},	//Treatment type (volume per type) 
-			"tE01" :function(){return "not_implemented"},	//WTPs with Pre-ox/C/F/S/Filt/Des
-			"tE02" :function(){return "not_implemented"},	//WTPs with Pre-ox/C/F/Filt/Des
-			"tE03" :function(){return "not_implemented"},	//WTPs with C/F/S/Filt/Des
-			"tE04" :function(){return "not_implemented"},	//WTPs with C/F/Filt/Des
-			"tE05" :function(){return "not_implemented"},	//WTPs with Des
-			"tE06" :function(){return "not_implemented"},	//WTPs with other sequence
+			"tE0"  :function(){return "not_implemented"}, 	//WTPs with selected technology
 			"tE1"  :function(){return "not_implemented"},	//Energy consumption per treated water 
 			"tE2"  :function(){return "not_implemented"},	//Energy consumption of WTPs per total energy consumption 
 			"tE3"  :function(){return "not_implemented"},	//Sludge production
@@ -223,11 +226,11 @@ var Global = {
 		/** YES/NO questions for all stages*/
 		"Questions":{
 			"water":{
-				//
-			},
-			"waterAbs":{
 				"Do you have fuel engines to run pumps" : 0,
 				"Is your topography flat"               : 0,
+			},
+			"waterAbs":{
+				//
 			},
 			"waterTre":{
 				//

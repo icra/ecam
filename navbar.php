@@ -19,9 +19,8 @@
 			nlink("/ecam/getStarted.php",   "Get started");
 			nlink("/ecam/configuration.php","Configuration");
 			nlink("/ecam/stages.php",       "Input data");
-			nlink("/ecam/resources.php",    "Resources");
-			nlink("/ecam/about.php",        "About");
 			echo "<div class=inactive-tab><a href=# onclick=summaryMenu(event)>Summary</a></div>";
+			nlink("/ecam/about.php",        "About");
 		}
 	?>
 </div>

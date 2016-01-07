@@ -15,16 +15,16 @@
 		var isActive = button.classList.contains('active')
 
 		var others=document.querySelectorAll("span#inputType button")
+
 		for(var i=0;i<others.length;others[i++].classList.remove('active')){}
 
-		if(!isActive)
-			button.classList.add('active')
+		if(!isActive) { button.classList.add('active') }
 	}
 </script>
 
 <span id=inputType><!--
 	--><button class="left active" onclick="inputType(this)">All</button><!--
-	--><button class="middle"      onclick="inputType(this)">Water Flows </button><!--
-	--><button class="middle"      onclick="inputType(this)">Energy use and production</button><!--
-	--><button class="right"       onclick="inputType(this)">GHG Emissions</button>
+	--><button class="middle"      onclick="inputType(this)">Water flows </button><!--
+	--><button class="middle"      onclick="inputType(this)">Energy related</button><!--
+	--><button class="right"       onclick="inputType(this)">GHG emissions</button>
 </span>

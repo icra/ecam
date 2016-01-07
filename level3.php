@@ -250,7 +250,9 @@
 				if(typeof(CurrentStage[field])!="function")continue
 				var newRow=t.insertRow(-1)
 				var formula=CurrentStage[field].toString()
-				newRow.setAttribute('title',field+"="+prettify(formula))
+				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+formula+"',1)")
+				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+formula+"',0)")
+				newRow.setAttribute('title',field+"="+Formulas.prettify(formula))
 				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
 				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>"
 				newRow.insertCell(-1).innerHTML=CurrentStage[field]()||0
@@ -260,8 +262,10 @@
 				/*
 				prettify()
 				*/
-				var inputs = idsPerFormula(CurrentStage[field].toString())
+				var inputs = Formulas.idsPerFormula(CurrentStage[field].toString())
 				console.log(inputs)
+				//TODO
+
 				for(s in substages)
 				{
 					newRow.insertCell(-1).innerHTML=CurrentStage[field]
@@ -299,6 +303,7 @@
 		{
 			updateSubstagesTable()
 			updateOutputs()
+			Questions.hideFields()
 			updateResult()
 		}
 	</script>

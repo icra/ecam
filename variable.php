@@ -57,8 +57,8 @@
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
-			newCell.innerHTML="Description"
-			newRow.insertCell(-1).innerHTML=Info[id]?Info[id].description:"<span style=color:#ccc>no description</span>"
+			newCell.innerHTML="Variable code"
+			newRow.insertCell(-1).innerHTML=id
 
 			//Magnitude
 			newRow=t.insertRow(-1)
@@ -75,7 +75,7 @@
 			newCell=newRow.insertCell(-1)
 			if(typeof(currentStage[id])=="function")
 			{
-				var aux="<b>Formula</b>: "+id+" = "+prettify(currentStage[id].toString())+
+				var aux="<b>Formula</b>: "+id+" = "+Formulas.prettify(currentStage[id].toString())+
 					"<br><br>"+
 					"<b>Current Value</b>: "+currentStage[id]()+" "+Info[id].unit
 				newCell.innerHTML=aux
@@ -85,7 +85,7 @@
 				newCell.className='th'
 				newCell.innerHTML="Inputs involved"
 				newCell=newRow.insertCell(-1)
-				var matches=idsPerFormula(currentStage[id].toString())
+				var matches=Formulas.idsPerFormula(currentStage[id].toString())
 				var aux=""
 				matches.forEach(function(match)
 				{
@@ -102,7 +102,7 @@
 			}
 			else
 			{
-				newCell.innerHTML=currentStage[id]
+				newCell.innerHTML=currentStage[id]+" "+Info[id].unit
 				newCell.className='input'
 				newCell.setAttribute('onclick',"transformField(this)")
 			}
@@ -158,7 +158,7 @@
 	}
 </script>
 
-<!--TITLE--><h1><?php echo $id?></h1>
+<!--TITLE--><h1><script>document.write(Info[id].description)</script></h1>
 <!--subtitle--><h4>Detailed info</h4>
 <!--VARIABLE INFO--><table style="text-align:left" id=info></table>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

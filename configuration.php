@@ -99,13 +99,13 @@
 			switch(stage)
 			{
 				case "water":	 r="<b>L1</b> Water Supply";break;
-				case "waterAbs": r="<b>L2</b> Water Supply / Abstraction";break;
-				case "waterTre": r="<b>L2</b> Water Supply / Treatment";break;
-				case "waterDis": r="<b>L2</b> Water Supply / Distribution";break;
+				case "waterAbs": r="<b>L2</b> Water Abstraction";break;
+				case "waterTre": r="<b>L2</b> Water Treatment";break;
+				case "waterDis": r="<b>L2</b> Water Distribution";break;
 				case "waste":	 r="<b>L1</b> Wastewater";break;
-				case "wasteCol": r="<b>L2</b> Wastewater / Collection";break;
-				case "wasteTre": r="<b>L2</b> Wastewater / Treatment";break;
-				case "wasteDis": r="<b>L2</b> Wastewater / Discharge";break;
+				case "wasteCol": r="<b>L2</b> Wastewater Collection";break;
+				case "wasteTre": r="<b>L2</b> Wastewater Treatment";break;
+				case "wasteDis": r="<b>L2</b> Wastewater Discharge";break;
 				default: r=stage;break;
 			}
 			return r;
@@ -203,6 +203,7 @@
 						document.write("<option value=1>Yes");
 					}
 					document.write("</select>")
+					document.write("<td>"+Questions.varsPerQuestion[question])
 				}
 			}
 		</script>

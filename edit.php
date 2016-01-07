@@ -50,8 +50,8 @@
 			input.id=field
 			input.className='input'
 			input.autocomplete='off'
-			input.setAttribute('onkeypress',"if(event.which==13){updateField('"+field+"',this.value)}")
-			input.setAttribute('onblur',"updateField('"+field+"',this.value)") //now works ok!
+			input.onblur=function(){updateField(field,input.value)}
+			input.onkeypress=function(event){if(event.which==13){input.onblur()}}
 			input.value=CurrentLevel[field]
 			element.appendChild(input)
 			input.select()
@@ -61,7 +61,7 @@
 		function updateInputs()
 		{
 			var t=document.getElementById('inputs')
-			while(t.rows.length>2)t.deleteRow(-1)
+			while(t.rows.length>2){t.deleteRow(-1)}
 			for(field in CurrentLevel)
 			{
 				if(typeof(CurrentLevel[field])!="number" )continue
@@ -90,29 +90,13 @@
 				if(typeof(CurrentLevel[field])!="function")continue
 				var newRow=t.insertRow(-1)
 				var formula=CurrentLevel[field].toString()
-				newRow.setAttribute('title',field+"="+prettify(formula))
-				newRow.setAttribute('onmouseover',"hlFields('"+formula+"',1)")
-				newRow.setAttribute('onmouseout',"hlFields('"+formula+"',0)")
+				newRow.setAttribute('title',field+"="+Formulas.prettify(formula))
+				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+formula+"',1)")
+				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+formula+"',0)")
 				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
 				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>"
-				newRow.insertCell(-1).innerHTML=(CurrentLevel[field]() || 0) //if nan, outputs 0
+				newRow.insertCell(-1).innerHTML=CurrentLevel[field]()||0 //if nan, outputs 0
 				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>"
-			}
-		}
-
-		/**
-		 * Hihghlight a field
-		 * @param {array of strings} fields - the variable codes we want to highlight e.g. ['sV1','sV2']
-		 * @param {boolean} hl - turn on/off highlighting
-		 */
-		function hlFields(formula,hl)
-		{
-			var fields=idsPerFormula(formula)
-			for(field in fields)
-			{
-				var element=document.querySelector('[field='+fields[field]+']')
-				if(element)
-					element.style.backgroundColor=hl?"#af0":""
 			}
 		}
 
@@ -132,6 +116,7 @@
 		{
 			updateInputs()
 			updateOutputs()
+			Questions.hideFields()
 			updateResult()
 		}
 	</script>
@@ -219,9 +204,9 @@
 		<tr><th colspan=4>OUTPUTS
 		<tr><th>Code<th>Description<th>Current Value<th>Unit
 	</table>
-</div><hr>
+</div>
 
-<!--PLOTS-->
+<!--PLOTS
 <div class=inline style="border:1px solid #000;width:45%;margin:1em">
 	SOME PLOTS HERE (to be implemented at the end)<br>
 	<img border=1 src="img/plot-example.png" width=50%>
@@ -230,5 +215,6 @@
 	(not implemented)
 	<button>Export</button>
 </div>
+-->
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

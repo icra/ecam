@@ -28,7 +28,7 @@
 
 <!--FIRST TIME?-->
 <h4 style=font-size:19px>
-First time using ECAM Web Tool? Click "New system" or learn more in <a href=resources.php>Resources</a>
+First time using ECAM Web Tool? Click "New system" or learn more in <a href=about.php>About</a>
 </h4>
 
 <!--LATEST UPD--><div style="max-width:20%;background:#d7bfaf"><?php echo "Latest update: ".date("F d Y, H:i:s.",filemtime("index.php"))?></div>

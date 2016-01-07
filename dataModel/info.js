@@ -11,10 +11,17 @@
 
  	then, the function "locateVariable" helps to locate the level and sublevel
  */
-var Info =
-{
-
-//1. UWS
+var Info = {
+	//1. UWS
+	/*
+	//new format prova
+		"uw1":{ "description":"Energy costs", "magnitude"		:"Currency", "unit"			:"USD", },
+		"uw2":{ "description":"Running costs", "magnitude":"Currency", "unit":"eur", },
+		"uw3":{ "description":"Energy mix emissions", "magnitude":"Ratio", "unit":"kg CO2/kWh", },
+		"uw4":{ "description":"Assessment period", "magnitude"		:"Time", "unit"			:"Days", },
+		"uw5":{ "description":"descr", "magnitude":"no", "unit":"no", },
+	*/
+	//end trial
 	"gE1":{
 		"description":"descr",
 		"magnitude":"no",
@@ -41,7 +48,7 @@ var Info =
 		"unit":"kg CO2/kWh",
 	},
 
-//2. WATER SUPPLY
+	//2. WATER SUPPLY
 	"sV13":{
 		"description":"Serviced population in supply systems",
 		"magnitude":"Inhab",
@@ -125,12 +132,12 @@ var Info =
 		"unit":"kWh",
 	},
 	"aV2":{
-		"description":"abstracted water volume pumped x pump head in meters",
+		"description":"Abstracted water volume pumped x pump head in meters",
 		"magnitude":"undefined",
 		"unit":"m3 x 100m",
 	},
 	"aV4":{
-		"description":"turbine water volume pumped x turbine head in meters",
+		"description":"Turbine water volume pumped x turbine head in meters",
 		"magnitude":"undefined",
 		"unit":"m3 x 100m",
 	},
@@ -185,7 +192,7 @@ var Info =
 		"unit":"m/km",
 	},
 
-//2.2 Treatment
+	//2.2 Treatment
 	"tV1":{
 		"description":"Volume of treated water in WTPs with selected technology",
 		"magnitude":"Volume",
@@ -239,7 +246,7 @@ var Info =
 	"tE0":
 	{
 		"description":"WTPs with selected technology",
-		"magnitude":"undefined",
+		"magnitude":"not specified",
 		"unit":"%",
 	},
 	"tE1":

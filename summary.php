@@ -21,6 +21,7 @@
 			updateLevel1()
 			updateLevel2()
 			updateCounts()
+			Questions.hideFields()
 			updateResult()
 		}
 
@@ -87,7 +88,7 @@
 				if(typeof(object[variable])!="<?php echo $typeof?>")continue
 				var description=Info[variable]?Info[variable].description:"<span style=color:#ccc>no description</span>"
 				var unit=Info[variable]?Info[variable].unit:"<span style=color:#ccc>no unit</span>"
-				ret+="<tr variable='"+variable+"' family='"+family+"'>"+
+				ret+="<tr field='"+variable+"' family='"+family+"'>"+
 					"<td style='font-weight:bold'><a class=blue href=variable.php?id="+variable+">"+variable+"</a>"+
 					"<td>"+description+
 					"<td>"+object[variable]<?php if($type=="output")echo "()"?>+
