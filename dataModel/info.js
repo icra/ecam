@@ -1,5 +1,37 @@
 /** FUNCTIONS TO DEAL WITH VARIABLE DESCRIPTIONS AND UNITS */
 
+/** Find a variable code, e.g 'gV2' inside 'Global' and tell where it is */
+function locateVariable(code)
+{
+	var localization = {} //e.g {"level":"Water","sublevel":"Abstraction"}
+	for(level in Global)
+	{
+		for(field in Global[level])
+		{
+			if(typeof(Global[level][field])=='object')
+			{
+				for(subfield in Global[level][field])
+				{
+					if(code==subfield)
+					{
+						localization = {"level":level,"sublevel":field}
+						return localization
+					}
+				}
+			}
+			else
+			{
+				if(code==field)
+				{
+					localization = {"level":level,"sublevel":0}
+					return localization
+				}
+			}
+		}
+	}
+	return false
+}
+
 /** 
 	Info: object to store all variable descriptions and units
 	Format:
@@ -13,106 +45,53 @@
  */
 var Info = {
 	//1. UWS
-	/*
-	//new format prova
-		"uw1":{ "description":"Energy costs", "magnitude"		:"Currency", "unit"			:"USD", },
-		"uw2":{ "description":"Running costs", "magnitude":"Currency", "unit":"eur", },
-		"uw3":{ "description":"Energy mix emissions", "magnitude":"Ratio", "unit":"kg CO2/kWh", },
-		"uw4":{ "description":"Assessment period", "magnitude"		:"Time", "unit"			:"Days", },
-		"uw5":{ "description":"descr", "magnitude":"no", "unit":"no", },
-	*/
-	//end trial
-	"gE1":{
-		"description":"descr",
-		"magnitude":"no",
-		"unit":"no",
-	},
-	"gV1":{
-		"description"	:"Assessment period",
-		"magnitude"		:"Time",
-		"unit"			:"Days",
-	},
-	"gV2":{
-		"description"	:"Energy costs",
-		"magnitude"		:"Currency",
-		"unit"			:"USD",
-	},
-	"gV3":{
-		"description":"Running costs",
-		"magnitude":"Currency",
-		"unit":"eur",
-	},
-	"gV9":{
-		"description":"Energy mix emissions",
-		"magnitude":"Ratio",
-		"unit":"kg CO2/kWh",
-	},
+	"uw1":{"description":"Energy costs", 		 "magnitude":"Currency", "unit":"USD"},
 
 	//2. WATER SUPPLY
-	"sV13":{
-		"description":"Serviced population in supply systems",
+	"ws1":{
+		"description":"Serviced population within the water utility area of service",
 		"magnitude":"Inhab",
 		"unit":"Inhab",
 	},
-	"gV8w":{
+	"ws2":{
 		"description":"Resident population within the water utility area of service",
 		"magnitude":"Inhab",
 		"unit":"Inhab",
 	},
-	"gV2w":{
-		"description":"Energy costs of the water utility",
+	"ws3":{
+		"description":"Energy costs during the entire assessment period",
 		"magnitude":"Currency",
 		"unit":"USD",
 	},
-	"gV3w":{
-		"description":"Running costs of the utility related to the urban drinking water system",
+	"ws4":{
+		"description":"Running costs during the entire assessment period",
 		"magnitude":"Currency",
 		"unit":"USD",
 	},
-	"gV10w":{
+	"ws5":{
 		"description":"Total energy consumed from the grid (from power bills) during the assessment period",
 		"magnitude":"Energy",
 		"unit":"kWh",
 	},
-	"dV1":{
+	"ws6":{
 		"description":"Total volume produced for urban drinking water system",
 		"magnitude":"Volume",
 		"unit":"m3",
 	},
-	"sV8":{
+	"ws7":{
 		"description":"Volume of authorized consumption",
 		"magnitude":"Volume",
 		"unit":"m3",
 	},
-	"dD1":{
-		"description":"Direct CO2 emitted in urban drinking water system from on-site engines",
-		"magnitude":"kg CO2",
-		"unit":"Mass",
+	"ws8":{
+		"description": "Water loss from leaks in the distribution system, as known or estimated by the Utility",
+		"magnitude":"Percent",
+		"unit":"%",
 	},
-	"gV4w":{
-		"description":"Total eletrical energy consumed from the grid and from self-production related to the urban drinking water system",
-		"magnitude":"Energy",
-		"unit":"kWh",
-	},
-	"gV11w":{
-		"description":"Net total process related grid energy consumed by the utility",
-		"magnitude":"Energy",
-		"unit":"kWh",
-	},
-	"gV5w":{
-		"description":"Electrical energy produced by the utility  in urban drinking water system",
-		"magnitude":"Energy",
-		"unit":"kWh",
-	},
-	"gV6w":{
-		"description":"Non water related Renewable electricity production by the utility in urban drinking water system",
-		"magnitude":"Energy",
-		"unit":"kWh",
-	},
-	"gV7w":{
-		"description":"CO2e of heat used for District heating or cooling from urban  drinking water system",
-		"magnitude":"Mass",
-		"unit":"kg CO2",
+	"ws9":{
+		"description":"Volume of Fuel consumed",
+		"magnitude":"Volume",
+		"unit":"L",
 	},
 
 	//2.1 Abstraction
@@ -430,111 +409,55 @@ var Info = {
 	},
 
 //3. WASTEWATER
-	"gV2ww":{
+	"ww1":{
 		"description":"Energy costs of the wastewater utility",
 		"magnitude":"currency",
 		"unit":"USD",
 	},
-	"gV3ww":{
+	"ww2":{
 		"description":"Running costs of the utility related to the urban wastewater system",
 		"magnitude":"currency",
 		"unit":"USD",
 	},
-	"gv10ww":{
+	"ww3":{
 		"description":"Total energy consumed from the grid (from power bills) during the assessment period",
 		"magnitude":"Energy",
 		"unit":"kWh",
 	},
-	"wsV4":{
-		"description":"Total volume treated in urban wastewater system",
+	"ww4":{
+		"description":"Total volume processed in urban wastewater system",
 		"magnitude":"Volume",
 		"unit":"m3",
 	},
-	"gV8ww":{
+	"ww5":{
 		"description":"Resident population within the wastewater utility area of service",
 		"magnitude":"Inhab",
 		"unit":"Inhab",
 	},
-	"wsV2":{
+	"ww6":{
 		"description":"Resident population connected to Sewer System (SE)",
 		"magnitude":"Inhab",
 		"unit":"Inhab",
 	},
-	"wsV3":{
+	"ww7":{
 		"description":"Serviced population in sewer and WWTP system",
 		"magnitude":"Inhab",
 		"unit":"Inhab",
 	},
-	"dW1":{
-		"description":"Direct CO2 emitted in wastewater stages from on-site engines",
-		"magnitude":"Mass",
-		"unit":"kg CO2",
+	"ww8" :{
+		"description":"Volume of Fuel consumed",
+		"magnitude":"Volume",
+		"unit":"L",
 	},
-	"dM1":{
-		"description":"Methane (CH4) emitted",
-		"magnitude":"Mass",
-		"unit":"kg CO2",
+	"ww9" :{
+		"description":"Km to disposal site",
+		"magnitude":"Distance",
+		"unit":"km",
 	},
-	"iS1":{
-		"description":"Indirect CO2e emitted in sludge transport",
-		"magnitude":"Mass",
-		"unit":"kg CO2",
-	},
-	"iN1":{
-		"description":"N2O emitted from wastewater effluent discharged",
-		"magnitude":"Mass",
-		"unit":"kg CO2",
-	},
-	"iD1":{
-		"description":"N2O emissions from untreated wastewater direct discharge",
-		"magnitude":"Mass",
-		"unit":"kg CO2",
-	},
-	"iD2":{
-		"description":"CH4 emissions from untreated wastewater direct discharge",
-		"magnitude":"Mass",
-		"unit":"kg CO2",
-	},
-	"gV4ww":{
-		"description":"Total electrical energy consumed from the grid and from self-production related to the urban wastewater system",
-		"magnitude":"Energy",
-		"unit":"kWh",
-	},
-	"gV11ww":{
-		"description":"et total grid energy consumed by the utility",
-		"magnitude":"Energy",
-		"unit":"kWh",
-	},
-	"gV5ww":{
-		"description":"Electrical energy produced by the utility in urban wastewater system",
-		"magnitude":"Energy",
-		"unit":"kWh",
-	},
-	"gV6ww":{
-		"description":"Non water related Renewable electricity production by the utility in urban wastewater system",
-		"magnitude":"Energy",
-		"unit":"kWh",
-	},
-	"gV7ww":{
-		"description":"CO2e of heat used for District heating or cooling from urban wastewater system",
-		"magnitude":"Mass",
-		"unit":"kg CO2e",
-	},
-
-	"wS1":{
-		"description":"Resident population connected to sewer system",
-		"magnitude":"Ratio",
-		"unit":"%",
-	},
-	"wS2":{
-		"description":"Treated Wastewater in WWTP",
-		"magnitude":"Ratio",
-		"unit":"%",
-	},
-	"wS3":{
-		"description":"WWTP compliance with discharge consents",
-		"magnitude":"Ratio",
-		"unit":"%",
+	"ww10":{
+		"description":"Enter nitrogen effluent limit",
+		"magnitude":"Concentration",
+		"unit":"mg/L",
 	},
 
 //3.1 Collection
@@ -757,36 +680,4 @@ var Info = {
 		"magnitude":"",
 		"unit":"kWh/m3/100m",
 	},
-}
-
-/** Find a variable code, e.g 'gV2' inside 'Global' and tell where it is */
-function locateVariable(code)
-{
-	var localization = {} //e.g {"level":"Water","sublevel":"Abstraction"}
-	for(level in Global)
-	{
-		for(field in Global[level])
-		{
-			if(typeof(Global[level][field])=='object')
-			{
-				for(subfield in Global[level][field])
-				{
-					if(code==subfield)
-					{
-						localization = {"level":level,"sublevel":field}
-						return localization
-					}
-				}
-			}
-			else
-			{
-				if(code==field)
-				{
-					localization = {"level":level,"sublevel":0}
-					return localization
-				}
-			}
-		}
-	}
-	return false
 }

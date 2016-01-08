@@ -21,39 +21,23 @@ var Global = {
 
 	/** 01. Urban water system (former Global) */
 	"UWS":{
-		//trial
-		/*
-		"uw1":0, //Energy costs (Euro)
-		"uw2":0, //Running costs (Euro)
-		"uw3":0, //Energy mix emissions (kg CO2/kWh)
-		"uw4":function(){return Global.General.Days()}, 	 //Assessment period (days)
-		"uw5":function(){return this.gV2/this.gV3}, //not updated
-		*/
-		//end trial
-		"gV2":0, //Energy costs (Euro)
-		"gV3":0, //Running costs (Euro)
-		"gV9":0, //Energy mix emissions (kg CO2/kWh)
-		"gV1":function(){return Global.General.Days()}, 	 //Assessment period (days)
-		"gE1":function(){return this.gV2/this.gV3}, //not updated
+		"uw1":0, //Conversion factor for grid electricity	kg CO2e/kWh
+		"test":function(){return this.uw1+100},
 	},
 
 	/** 02. Water Supply*/
 	"Water":{
-		"sV13"	:0, //Serviced population in supply systems (Inhab)
-		"gV8w"	:0, //Resident population within the water utility area of service (Inhab)
-		"gV2w"	:0, //Energy costs of the water utility (currency)
-		"gV3w"	:0, //Running costs of the utility related to the urban drinking water system (currency)
-		"gV10w"	:0, //Total energy consumed from the grid (from power bills) during the assessment period (kWh)
-		"dV1"	:0, //Total volume produced for urban drinking water system (m3)
-		"sV8"	:0, //Volume of authorized consumption (m3)
-		"dD1"	:0, //Direct CO2 emitted in urban drinking water system from on-site engines (kg CO2)
-		"gV4w"	:0,	//Total eletrical energy consumed from the grid and from self-production related to the urban drinking water system (kWh)
-		"gV11w"	:0,	//Net total process related grid energy consumed by the utility 	(kWh)
-		"gV5w"	:0,	//Electrical energy produced by the utility  in urban drinking water system		(kWh)
-		"gV6w"	:0,	//Non water related Renewable electricity production by the utility in urban drinking water system	(kWh)
-		"gV7w"	:0,	//CO2e of heat used for District heating or cooling from urban  drinking water system	(kg CO2)
-		"S1":function(){return 100*(this.sV13+this.gV8w)},	//Quality of supplied water (%)
-		"S2":function(){return 100*(this.gV3w+this.gV10w)},	//Quality of supplied water (%)
+		"ws1":0, //Serviced population within the water utility area of service	serv. Pop.
+		"ws2":0, //Resident population within the water utility area of service	Inhab.
+		"ws3":0, //Energy costs during the entire assessment period	Currency
+		"ws4":0, //Running costs during the entire assessment period	Currency
+		"ws5":0, //Total energy consumed from the grid (from power bills) during the assessment period	kWh
+		"ws6":0, //Total volume produced for urban drinking water system	m3
+		"ws7":0, //Volume of authorized consumption	m3
+		"ws8":0, //Water loss from leaks in the distribution system, as known or estimated by the Utility	%
+		"ws9":0, //Volume of Fuel consumed 	L
+		"test":function(){return this.ws1+this.ws2},
+
 		"Abstraction":{
 			"aV1" : 0, //Energy consumed for pumping abstracted water (kWh)
 			"sV1" : 0, //Volume of conveyed water (m3)
@@ -124,34 +108,23 @@ var Global = {
 
 	/** 03. Wastewater*/
 	"Waste":{
-		"gV2ww"	:0,	//Energy costs of the wastewater utility (currency)
-		"gV3ww"	:0,	//Running costs of the utility related to the urban wastewater system (currency)
-		"gv10ww":0,	//Total energy consumed from the grid (from power bills) during the assessment period (kWh)
-		"wsV4"	:0,	//Total volume treated in urban wastewater system (m3)
-		"gV8ww"	:0,	//Resident population within the wastewater utility area of service (Inhab)
-		"wsV2"	:0,	//Resident population connected to sewer system (SE) (Inhab)
-		"wsV3"	:0,	//Serviced population in sewer and WWTP system (Inhab)
-		"dW1"	:0,	//Direct CO2 emitted in wastewater stages from on-site engines (kg CO2)
-		"dM1"	:0,	//Methane (CH4) emitted (kg CO2)
-		"iS1"	:0,	//Indirect CO2e emitted in sludge transport (kg CO2)
-		"iN1"	:0,	//N2O emitted from wastewater effluent discharged (kg CO2)
-		"iD1"	:0,	//N2O emissions from untreated wastewater direct discharge (kg CO2)
-		"iD2"	:0,	//CH4 emissions from untreated wastewater direct discharge (kg CO2)
-		"gV4ww"	:0, //Total electrical energy consumed from the grid and from self-production related to the urban wastewater system	kWh
-		"gV11ww":0, //Net total grid energy consumed by the utility 	kWh
-		"gV5ww" :0, //Electrical energy produced by the utility  in urban wastewater system	kWh
-		"gV6ww"	:0, //Non water related Renewable electricity production by the utility in urban wastewater system	kWh
-		"gV7ww"	:0, //CO2e of heat used for District heating or cooling from urban wastewater system	kg CO2e
-		"wS1":function(){return 100*this.wsV2/this.wsV3}, 	//Resident population connected to sewer system (%)
-		"wS2":function(){return "not implemented"}, 		//Treated Wastewater in WWTP (%)
-		"wS3":function(){return 100*this.wsV7/this.wsV6}, 	//WWTP compliance with discharge consents (%)
+		"ww1" :0,  //Energy costs of the wastewater utility	Currency
+		"ww2" :0,  //Running costs of the utility related to the urban wastewater system	Currency
+		"ww3" :0,  //Total energy consumed from the grid (from power bills) during the assessment period	kWh
+		"ww4" :0,  //Total volume processed through urban wastewater water system	m3
+		"ww5" :0,  //Resident population within the wastewater utility area of service	Inhab.
+		"ww6" :0,  //Resident population connected to sewer system (SE)	Inhab.
+		"ww7" :0,  //Serviced population in sewer and WWTP system	serv. Pop.
+		"ww8" :0,  //Volume of Fuel consumed 	L
+		"ww9" :0,  //km to disposal site 	km
+		"ww10":0,  //Enter nitrogen effluent limit 	mg/L
+		"test":function(){return this.ww1+this.ww2},
+
 		"Collection":{
-			"wsV1":0,										//Volume of wastewater conveyed to treatment or to an outfall for untreated discharge	(m3)
-			"wcV1":0,										//Electric energy consumed for conveying wastewater to treatment (from the grid and self-produced)	(kWh)
-			"wcV2":0,										//[Sum](collected wastewater volume pumped x pump head in meters)	m3 x 100 m
-			"wcE1":function(){return "not_implemented"},  	//Energy consumption per collected wastewater 
-			"wcE2":function(){return "not_implemented"},  	//Energy consumption of collected wastewater per total energy consumption
-			"wcE3":function(){return "not_implemented"},  	//Standardised Energy Consumption
+			"wsV1":0,										 //Volume of wastewater conveyed to treatment or to an outfall for untreated discharge	(m3)
+			"wcV1":0,										 //Electric energy consumed for conveying wastewater to treatment (from the grid and self-produced)	(kWh)
+			"wcV2":0,										 //[Sum](collected wastewater volume pumped x pump head in meters)	m3 x 100 m
+			"test wwc":function(){return this.wsV1+1}, //Energy consumption per collected wastewater 
 		},
 		"Treatment":{
 			"dN1" 	: 0,	//Nitrous oxide (N2O) emitted 	kg CO2e

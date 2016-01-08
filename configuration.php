@@ -211,7 +211,7 @@
 		<script>
 			for(stage in Global.Configuration.Technologies)
 			{
-				document.write("<tr class=option family="+stage+" style=display:none><td>&emsp; &emsp; Technology used in "+stageName(stage));
+				document.write("<tr class=option family="+stage+" style=display:none><td colspan=2>&emsp; &emsp; Technology used in "+stageName(stage));
 				document.write("<td><select onchange=setTechnology('"+stage+"',this.value)>");
 				for(tec in Global.Configuration.Technologies[stage])
 				{

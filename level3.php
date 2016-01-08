@@ -328,8 +328,4 @@
 <!--substages counter--><div class=inline style="border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
 <!--SUBSTAGES TABLE--><table id=substages style=margin:1em><tr><td style=border:none colspan=2></table>
 <!--OUTPUTS TABLE--><table id=outputs class=inline style=background:yellow> <tr><th colspan=42>OUTPUTS </table>
-<!--PLOTS-->
-<div style="border:1px solid #000;width:45%;margin:1em">
-	SOME PLOTS HERE (to be implemented at the end)
-</div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

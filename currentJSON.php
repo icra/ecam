@@ -1,7 +1,7 @@
 
 <!--CURRENT GLOBAL OBJECT IN JSON-->
 <div style="display:
-;
+none;
 margin-top:9em;
 text-align:left;border:1px solid #ccc;width:30%;background:#fafafa">
 

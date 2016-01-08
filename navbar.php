@@ -25,6 +25,20 @@
 	?>
 </div>
 
+<?php
+	//if we are in edit.php, make "input data" active
+	if($_SERVER['PHP_SELF']=="/ecam/edit.php")
+	{
+		echo "
+			<script>
+				var link = document.querySelector('a[href=\'/ecam/stages.php\']')
+				link.style.color='black'
+				link.parentNode.className='active-tab'
+			</script>
+		";
+	}
+?>
+
 <script>
 	/** make appear a menu for navigate to summary: inputs/outputs */
 	function summaryMenu(ev)
@@ -39,9 +53,11 @@
 		//get mouse coordinates
 		div.style.top=event.pageY+"px";
 		div.style.left=event.pageX+"px";
-		div.innerHTML="<div class=close><span style=cursor:pointer><button>x</button></span></div>"+
+		div.innerHTML=""+
 			"<div><a href=summary.php?type=input>All inputs</a></div>"+
-			"<div><a href=summary.php?type=output>All outputs</a></div>";
+			"<div><a href=summary.php?type=output>All outputs</a></div>"+
+			"<div class=close><span style=cursor:pointer><button>Close</button></span></div>"+
+			"";
 	}
 </script>
 
