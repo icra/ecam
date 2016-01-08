@@ -75,8 +75,8 @@
 				newCell.innerHTML=CurrentLevel[field]
 				newRow.insertCell(-1).innerHTML= Info[field] ? Info[field].unit : "<span style=color:#ccc>not defined</span>"
 				newRow.insertCell(-1).innerHTML=""+
-					"<label><input type=radio name="+field+" checked	> Calculated</label> "+
-					"<label><input type=radio name="+field+"			> Assumed	</label> "
+					"<select><option>Calculated<option>Estimated</select>"+
+					""
 			}
 		}
 
@@ -87,7 +87,7 @@
 			while(t.rows.length>2)t.deleteRow(-1)
 			for(field in CurrentLevel)
 			{
-				if(typeof(CurrentLevel[field])!="function")continue
+				if(typeof(CurrentLevel[field])!="function"){continue;}
 				var newRow=t.insertRow(-1)
 				var formula=CurrentLevel[field].toString()
 				newRow.setAttribute('title',field+"="+Formulas.prettify(formula))

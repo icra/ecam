@@ -101,6 +101,7 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--STAGES--><?php include"navStages.php"?>
 <!--TITLE--><h1>All <?php echo $type?>s summary</h1>
+<!--STAGES--><?php include"activeStages.php"?>
 
 <!--AVAILABLE INPUTS-->
 <div class=inline style="width:75%;text-align:left">

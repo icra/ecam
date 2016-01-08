@@ -17,7 +17,7 @@
 		}
 		if($active)
 			echo "
-				<td rowspan=3>
+				<td rowspan=3 onclick=window.location='edit.php?level=$level'>
 					<img src=img/$alias.png>
 					<a href='edit.php?level=$level'>$levelAlias</a>
 			";
@@ -31,10 +31,11 @@
 		$active=$stages[$alias];
 		if($active)
 			echo "
-				<td>
+				<td onclick=window.location='edit.php?level=$level&sublevel=$sublevel'>
 					<img src=img/$alias.png>
 					<a title='Active Stage' href='edit.php?level=$level&sublevel=$sublevel'>$sublevel</a>
-					<td> <a href=level3.php?level=$level&sublevel=$sublevel>Substages</a> 
+					<td onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
+					<a href=level3.php?level=$level&sublevel=$sublevel>Substages</a> 
 					(<script>document.write(Global.Level3.$level.$sublevel.length)</script>)";
 		else
 			echo "
@@ -71,13 +72,15 @@
 <table id=navigationTable class=inline style="text-align:center;margin:1em">
 	<!--this table style--><style>
 		#navigationTable img{width:40px;vertical-align:middle}
+		#navigationTable td{cursor:pointer}
+		#navigationTable td:hover {background:#f6f6e6}
 	</style>
 	<tr>
 		<th style="font-size:13px" colspan=2>Level 1
 		<th style="font-size:13px">Level 2
 		<th style="font-size:13px">Level 3
 	<tr>
-		<td rowspan=6>
+		<td rowspan=6 onclick=window.location='edit.php?level=UWS'>
 			<img src=img/uws.png> <a href=edit.php?level=UWS title="Urban Water System">UWS</a></td>
 		<?php printL1stage('water','Water')?>
 			<?php printL2stage('waterAbs','Water','Abstraction')?>
