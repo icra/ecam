@@ -7,20 +7,10 @@ var Questions = {
 
 	varsPerQuestion:
 	{
-		"Do you have fuel engines to run pumps" :["dD1","dW1"],
-		/*
-			dD1: Water
-			dW1: Waste
-		*/
-		"Are you producing biogas"              :["dM1","wtV9","wtV10","wtV11"],
-		/*
-			dM1:   Waste
-			wtV9:  Waste.Treatment
-			wtV10: Waste.Treatment
-			wtV11: Waste.Treatment
-		*/
-		"Are you producing electrical energy"   :["gV5w","gV6w","aV3","gV5ww","gV6ww","wdV3","aV3","dV13","wdV3"],
-		"Is your topography flat"               :["dV2","dV3","dV4","dV5","dV6","dV13",]
+		"Do you have fuel engines to run pumps" :[],
+		"Are you producing biogas"              :[],
+		"Are you producing electrical energy"   :[],
+		"Is your topography flat"               :[],
 	},
 
 	//HIDE VARIABLES ACCORDING TO QUESTIONS IN CONFIGURATION 

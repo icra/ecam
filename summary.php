@@ -100,7 +100,7 @@
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--STAGES--><?php include"navStages.php"?>
-<!--TITLE--><h1>All <?php echo $type?>s summary</h1>
+<!--TITLE--><h1>All <?php echo $type?>s</h1>
 <!--STAGES--><?php include"activeStages.php"?>
 
 <!--AVAILABLE INPUTS-->
