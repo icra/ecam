@@ -27,7 +27,7 @@
 
 <?php
 	//if we are in edit.php, make "input data" active
-	if(strpos($_SERVER['PHP_SELF'],"edit.php"))
+	if(strpos($_SERVER['PHP_SELF'],"edit.php") || strpos($_SERVER['PHP_SELF'],"level3.php"))
 	{
 		echo "
 			<script>
