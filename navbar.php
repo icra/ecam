@@ -3,7 +3,7 @@
 	/** void: echo a link if the current web page is not the one in the link's href */
 	function nlink($href,$name)
 	{
-		if(strtoupper($href)==strtoupper($_SERVER['PHP_SELF'])) 
+		if(strpos($_SERVER['PHP_SELF'],$href)) 
 			echo "<div class=active-tab><a href='$href' style=color:black>$name</a></div>";
 		else 
 			echo "<div class=inactive-tab><a href='$href'>$name</a></div>";
@@ -13,25 +13,25 @@
 <div id=navbar style="text-align:center;background:#00aff1;color:white;padding:0.2em 0em 0em 0em;font-size:18px">
 	<?php
 		echo "&#9776; "; //menu symbol (3 horizontal bars)
-		nlink("/ecam/index.php","&#8962; HOME");
+		nlink("index.php","&#8962; HOME");
 		if(isset($_COOKIE['GLOBAL']))
 		{
-			nlink("/ecam/getStarted.php",   "Get started");
-			nlink("/ecam/configuration.php","Configuration");
-			nlink("/ecam/stages.php",       "Input data");
+			nlink("getStarted.php",   "Get started");
+			nlink("configuration.php","Configuration");
+			nlink("stages.php",       "Input data");
 			echo "<div class=inactive-tab><a href=# onclick=summaryMenu(event)>Summary</a></div>";
-			nlink("/ecam/about.php",        "About");
+			nlink("about.php",        "About");
 		}
 	?>
 </div>
 
 <?php
 	//if we are in edit.php, make "input data" active
-	if($_SERVER['PHP_SELF']=="/ecam/edit.php")
+	if(strpos($_SERVER['PHP_SELF'],"edit.php"))
 	{
 		echo "
 			<script>
-				var link = document.querySelector('a[href=\'/ecam/stages.php\']')
+				var link = document.querySelector('a[href=\'stages.php\']')
 				link.style.color='black'
 				link.parentNode.className='active-tab'
 			</script>
