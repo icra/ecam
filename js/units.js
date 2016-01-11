@@ -10,10 +10,14 @@ var Units =
 	/* return a multiplier for a field */
 	multiplier:function(field)
 	{
+		//if magnitude is not inside Units, multiplier is 1
 		if(Units[Info[field].magnitude]===undefined){return 1}
-		if(Global.Configuration.Units[field]===undefined){return 1}
-		var m=Units[Info[field].magnitude][Global.Configuration.Units[field]];
-		return m;
+
+		//look for current unit: first inside configuration, if not, in Info[field]
+		var currentUnit = Global.Configuration.Units[field] || Info[field].unit
+
+		//multiplier is in Units[magnitude][unit]
+		return Units[Info[field].magnitude][currentUnit];
 	},
 
 	/** CONVERSION BETWEEN MAGNITUDES */

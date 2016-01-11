@@ -91,7 +91,7 @@ var Info = {
 	"ws9":{
 		"description":"Volume of Fuel consumed",
 		"magnitude":"Volume",
-		"unit":"L",
+		"unit":"m3",
 	},
 
 	//2.1 Abstraction
