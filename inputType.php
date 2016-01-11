@@ -1,7 +1,7 @@
 <!--inside edit.php-->
 <style>
 	span#inputType               { margin-left:1em;font-size:19px}
-	span#inputType button        { border:1px solid #ccc;background:#f5f5f5;outline:none;}
+	span#inputType button        { padding:0 10px 0 10px;border:1px solid #ccc;background:#f5f5f5;outline:none;}
 	span#inputType button:hover  { background:#e6e6e6}
 	span#inputType button.left   { border-radius:0.5em 0.0em 0.0em 0.5em; border-right-style:none}
 	span#inputType button.right  { border-radius:0.0em 0.5em 0.5em 0.0em; }

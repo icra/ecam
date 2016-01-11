@@ -74,6 +74,7 @@
 		#navigationTable img{width:40px;vertical-align:middle}
 		#navigationTable td{cursor:pointer}
 		#navigationTable td:hover {background:#f6f6e6}
+		#navigationTable 
 	</style>
 	<tr>
 		<th style="font-size:13px" colspan=2>Level 1
