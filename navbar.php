@@ -12,14 +12,14 @@
 
 <div id=navbar style="text-align:center;background:#00aff1;color:white;padding:0.2em 0em 0em 0em;font-size:18px">
 	<?php
-		echo "&#9776; "; //menu symbol (3 horizontal bars)
+		echo "&#9776; "; //"burger" symbol
 		nlink("index.php","&#8962; HOME");
 		if(isset($_COOKIE['GLOBAL']))
 		{
 			nlink("getStarted.php",   "Get started");
 			nlink("configuration.php","Configuration");
 			nlink("stages.php",       "Input data");
-			echo "<div class=inactive-tab><a href=# onclick=summaryMenu(event)>Summary</a></div>";
+			echo "<div class=inactive-tab><a onclick=summaryMenu(event) style=cursor:pointer>Summary</a></div>";
 			nlink("about.php",        "About");
 		}
 	?>
@@ -62,17 +62,11 @@
 </script>
 
 <style>
-	#navbar .active-tab, #navbar .inactive-tab
-	{
-		margin:0 0 0;
-		display:inline-block;
-	}
-	#navbar .active-tab{
-		background:white;
-	}
-	#navbar a {
-		color:white;	
-	}
+	#navbar div.active-tab, #navbar div.inactive-tab { margin:0 0 0; display:inline-block; }
+	#navbar div.inactive-tab:hover { background:#0aafff }
+	#navbar div.active-tab{ background:white; }
+	#navbar a {color:white;}
+	#navbar a:hover {text-decoration:none;}
 	div.summaryMenu{
 		background:#00aff1;
 		border:1px solid #ccc;

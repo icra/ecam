@@ -58,21 +58,15 @@
 		//** Create rows and columns for a table with specified object
 		function tableRows(object,name,family,href)
 		{
-			//return string
-			var ret="<tr><td colspan=4 style='background:#ccc;font-weight:bold'>"
-			
 			//make link or not depending on active 
-			if(Global.Configuration["Active Stages"][family]==0)
-			{
-				ret+=name+" (inactive)"
-				return ret //if inactive, stop here
-			}
-			else 
-			{
-				ret+="<a href="+href+">"+name+":</a> "
-				//create a input/output count for the stage
-				ret+="<span count="+family+">0</span> <?php echo $type?>s"
-			}
+			if(Global.Configuration["Active Stages"][family]==0) { return ""; }
+
+			//return string
+			var ret="<tr><td colspan=4 style='background:#ccc;font-weight:bold'>";
+			ret+="<a href="+href+">"+name+":</a> "
+
+			//create a input/output count for the stage
+			ret+="<span count="+family+">0</span> <?php echo $type?>s"
 
 			//fill rows
 			for(variable in object)
@@ -86,21 +80,21 @@
 					}
 				?>
 				if(typeof(object[variable])!="<?php echo $typeof?>")continue
-				var description=Info[variable]?Info[variable].description:"<span style=color:#ccc>no description</span>"
-				var unit=Info[variable]?Info[variable].unit:"<span style=color:#ccc>no unit</span>"
+				var description=Info[variable]?Info[variable].description:"<span style=color:#ccc>no description</span>";
+				var unit=Info[variable]?Info[variable].unit:"<span style=color:#ccc>no unit</span>";
 				ret+="<tr field='"+variable+"' family='"+family+"'>"+
 					"<td style='font-weight:bold'><a class=blue href=variable.php?id="+variable+">"+variable+"</a>"+
 					"<td>"+description+
 					"<td>"+object[variable]<?php if($type=="output")echo "()"?>+
 					"<td>"+unit
 			}
-			return ret
+			return ret;
 		}
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--STAGES--><?php include"navStages.php"?>
-<!--TITLE--><h1>All <?php echo $type?>s</h1>
+<!--TITLE--><h1>Summary — All <?php echo $type?>s</h1>
 <!--STAGES--><?php include"activeStages.php"?>
 
 <!--AVAILABLE INPUTS-->
