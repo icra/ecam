@@ -8,7 +8,7 @@
 <script src="js/updateGlobalFromCookies.js"></script><!--update Global object from cookie "GLOBAL" here-->
 <script src="js/formulas.js"></script><!--functions for dealing with formulas-->
 <script src="js/questions.js"></script><!--functions for dealing with questions-->
+<script src="js/units.js"></script><!--functions for dealing with units in variables-->
 
 <!--TESTING ZONE-->
-<script>
-</script>
+<script></script>

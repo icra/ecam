@@ -246,5 +246,8 @@ var Global = {
 				"Other":0,
 			},
 		},
+		"Units":{
+			//custom unit selections for variables will be stored here
+		},
 	},
 }

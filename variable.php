@@ -23,9 +23,10 @@
 		function updateField(field,newValue)
 		{
 			//if CurrentLevel[field] is a number, parse float
-			if(typeof(currentStage[field])=="number")
-				newValue=parseFloat(newValue) 
-			/*update the object*/currentStage[field]=newValue
+			if(typeof(currentStage[field])=="number"){ newValue=parseFloat(newValue);}
+			//if a unit change is set, get it:
+			var multiplier = Units.multiplier(field);
+			/*update the object*/currentStage[field]=multiplier*newValue
 			/*update views*/init()
 		}
 
@@ -67,6 +68,34 @@
 			newCell.innerHTML="Magnitude"
 			newRow.insertCell(-1).innerHTML=Info[id].magnitude
 
+			//Select units -- only inputs!
+
+			if(typeof(currentStage[id])=='number')
+			{
+				newRow=t.insertRow(-1)
+				newCell=newRow.insertCell(-1)
+				newCell.className='th'
+				newCell.innerHTML="Unit"
+				newRow.insertCell(-1).innerHTML=(function()
+				{
+					var str="<select onchange=Units.selectUnit('"+id+"',this.value)>";
+					if(Units[Info[id].magnitude]===undefined)
+					{
+						return Info[id].unit
+					}
+					var currentUnit = Global.Configuration.Units[id] || Info[id].unit
+					for(unit in Units[Info[id].magnitude])
+					{
+						if(unit==currentUnit)
+							str+="<option selected>"+unit+"</option>";
+						else
+							str+="<option>"+unit+"</option>";
+					}
+					str+="</select>"
+					return str
+				})();
+			}
+
 			//Value
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
@@ -102,7 +131,10 @@
 			}
 			else
 			{
-				newCell.innerHTML=currentStage[id]+" "+Info[id].unit
+				var currentUnit = Global.Configuration.Units[id] || Info[id].unit
+				var multiplier = Units.multiplier(id);
+				var currentValue = currentStage[id]/multiplier;
+				newCell.innerHTML=currentValue+" "+currentUnit
 				newCell.className='input'
 				newCell.setAttribute('onclick',"transformField(this)")
 			}
@@ -121,7 +153,9 @@
 			input.autocomplete='off'
 			input.setAttribute('onkeypress',"if(event.which==13){updateField('"+id+"',this.value)}")
 			input.setAttribute('onblur',"updateField('"+id+"',this.value)") //now works ok!
-			input.value=currentStage[id]
+			var multiplier = Units.multiplier(id);
+			var currentValue = currentStage[id]/multiplier;
+			input.value=currentValue
 			element.appendChild(input)
 			input.select()
 		}

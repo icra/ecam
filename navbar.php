@@ -54,9 +54,9 @@
 		div.style.top=event.pageY+"px";
 		div.style.left=event.pageX+"px";
 		div.innerHTML=""+
-			"<div><a href=summary.php?type=input>All inputs</a></div>"+
+			"<div><a href=summary.php?type=input>All inputs</a></div></div>"+
 			"<div><a href=summary.php?type=output>All outputs</a></div>"+
-			"<div class=close><span style=cursor:pointer><button>Close</button></span></div>"+
+			"<div class=close><button style=width:100%>Close</button></div>"+
 			"";
 	}
 </script>
@@ -75,6 +75,7 @@
 		padding:0;
 		margin:0;
 	}
-	div.summaryMenu div{padding:0.3em;text-align:left;}
-	div.summaryMenu div.close{ color:black; padding:0; margin:0; text-align:right; }
+	div.summaryMenu div{padding:0.3em;text-align:left;cursor:pointer}
+	div.summaryMenu div:hover {background:#0aafff}
+	div.summaryMenu div.close{color:black; padding:0; margin:0;}
 </style>

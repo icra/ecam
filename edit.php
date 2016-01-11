@@ -52,7 +52,10 @@
 			input.autocomplete='off'
 			input.onblur=function(){updateField(field,input.value)}
 			input.onkeypress=function(event){if(event.which==13){input.onblur()}}
-			input.value=CurrentLevel[field]
+			//value converted
+			var multiplier = Units.multiplier(field);
+			var currentValue = CurrentLevel[field]/multiplier;
+			input.value=currentValue
 			element.appendChild(input)
 			input.select()
 		}
@@ -64,19 +67,38 @@
 			while(t.rows.length>2){t.deleteRow(-1)}
 			for(field in CurrentLevel)
 			{
-				if(typeof(CurrentLevel[field])!="number" )continue
-				var newRow=t.insertRow(-1)
-				newRow.setAttribute('field',field)
-				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
-				newRow.insertCell(-1).innerHTML= Info[field] ? Info[field].description : "<span style=color:#ccc>not defined</span>"
-				var newCell=newRow.insertCell(-1)
-				newCell.className="input"
-				newCell.setAttribute('onclick','transformField(this)')
-				newCell.innerHTML=CurrentLevel[field]
-				newRow.insertCell(-1).innerHTML= Info[field] ? Info[field].unit : "<span style=color:#ccc>not defined</span>"
+				if(typeof(CurrentLevel[field])!="number" ){continue;}
+				var newRow=t.insertRow(-1);
+				newRow.setAttribute('field',field);
+				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
+				newRow.insertCell(-1).innerHTML= Info[field] ? Info[field].description : "<span style=color:#ccc>not defined</span>";
+				var newCell=newRow.insertCell(-1);
+				newCell.className="input";
+				newCell.setAttribute('onclick','transformField(this)');
+				//value
+				var multiplier = Units.multiplier(field)
+				newCell.innerHTML=CurrentLevel[field]/multiplier;
+				newRow.insertCell(-1).innerHTML=(function()
+				{
+					var str="<select onchange=Units.selectUnit('"+field+"',this.value)>";
+					if(Units[Info[field].magnitude]===undefined)
+					{
+						return Info[field].unit
+					}
+					var currentUnit = Global.Configuration.Units[field] || Info[field].unit
+					for(unit in Units[Info[field].magnitude])
+					{
+						if(unit==currentUnit)
+							str+="<option selected>"+unit+"</option>";
+						else
+							str+="<option>"+unit+"</option>";
+					}
+					str+="</select>"
+					return str
+				})();
 				newRow.insertCell(-1).innerHTML=""+
 					"<select><option>Calculated<option>Estimated</select>"+
-					""
+					"";
 			}
 		}
 
@@ -107,7 +129,9 @@
 		function updateField(field,newValue)
 		{
 			if(typeof(CurrentLevel[field])=="number")newValue=parseFloat(newValue) //if CurrentLevel[field] is a number, parse float
-			CurrentLevel[field]=newValue //update the field
+			//if a unit change is set, get it:
+			var multiplier = Units.multiplier(field);
+			CurrentLevel[field]=multiplier*newValue //update the field
 			init() //update tables and write cookies
 		}
 

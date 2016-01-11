@@ -24,7 +24,7 @@
 
 <span id=inputType><!--
 	--><button class="left active" onclick="inputType(this)">All</button><!--
-	--><button class="middle"      onclick="inputType(this)">Water flows </button><!--
-	--><button class="middle"      onclick="inputType(this)">Energy related</button><!--
+	--><button class="middle"      onclick="inputType(this)">Water efficiency </button><!--
+	--><button class="middle"      onclick="inputType(this)">Energy efficiency</button><!--
 	--><button class="right"       onclick="inputType(this)">GHG emissions</button>
 </span>

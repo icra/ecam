@@ -187,24 +187,41 @@
 						newCell.className="input"
 						newCell.setAttribute('onclick','transformField(this)')
 						newCell.setAttribute('substage',s)
-						newCell.innerHTML=substages[s][code]
+						var multiplier = Units.multiplier(code)
+						newCell.innerHTML=substages[s][code]/multiplier;
 					}
 					//SUM OF SUBSTAGES
 					var sum=sumAll(code)
 					var newCell=newRow.insertCell(-1)
-					newCell.innerHTML=sum
+					var multiplier = Units.multiplier(code)
+					newCell.innerHTML= sum/multiplier
 					//LEVEL 2 current value
 					var newCell=newRow.insertCell(-1)
-					newCell.innerHTML=CurrentStage[code]
+					newCell.innerHTML=CurrentStage[code]/multiplier;
 					//DIFFERENCE BETWEEN LEVEL 2 and sum of substages
-					var diff=Math.abs(parseFloat(CurrentStage[code])-sumAll(code))
+					var diff=Math.abs(parseFloat(CurrentStage[code])-sumAll(code))/multiplier
 					var newCell=newRow.insertCell(-1)
 					newCell.style.backgroundColor=diff==0?"#af0":""
 					newCell.innerHTML=diff
 					//Unit for current input
-					var newCell=newRow.insertCell(-1)
-					newCell.style.textAlign='left'
-					newCell.innerHTML=Info[code]?Info[code].unit:"<span style=color:#ccc>not defined</span>"
+					newRow.insertCell(-1).innerHTML=(function()
+					{
+						var str="<select onchange=Units.selectUnit('"+code+"',this.value)>";
+						if(Units[Info[code].magnitude]===undefined)
+						{
+							return Info[code].unit
+						}
+						var currentUnit = Global.Configuration.Units[code] || Info[code].unit
+						for(unit in Units[Info[code].magnitude])
+						{
+							if(unit==currentUnit)
+								str+="<option selected>"+unit+"</option>";
+							else
+								str+="<option>"+unit+"</option>";
+						}
+						str+="</select>"
+						return str
+					})();
 				}
 				//Options
 				var newRow = t.insertRow(-1)
@@ -284,7 +301,9 @@
 			input.autocomplete='off'
 			input.setAttribute('onkeypress',"if(event.which==13){updateSubstage("+substage+",'"+field+"',this.value)}")
 			input.setAttribute('onblur',"updateSubstage("+substage+",'"+field+"',this.value)") //now works
-			input.value=substages[substage][field]
+			//value converted
+			var multiplier = Units.multiplier(field);
+			input.value=substages[substage][field]/multiplier;
 			element.appendChild(input)
 			input.select()
 			return
@@ -294,7 +313,9 @@
 		function updateSubstage(index,field,newValue)
 		{
 			if(typeof(CurrentStage[field])=="number")newValue=parseFloat(newValue) //if CurrentStage[field] is a number, parse float
-			substages[index][field]=newValue
+
+			var multiplier = Units.multiplier(field);
+			substages[index][field]=multiplier*newValue;
 			init() //update tables and write cookies
 		}
 

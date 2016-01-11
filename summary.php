@@ -80,12 +80,17 @@
 					}
 				?>
 				if(typeof(object[variable])!="<?php echo $typeof?>")continue
+
 				var description=Info[variable]?Info[variable].description:"<span style=color:#ccc>no description</span>";
-				var unit=Info[variable]?Info[variable].unit:"<span style=color:#ccc>no unit</span>";
+
+				var unit = Global.Configuration.Units[variable] || Info[variable].unit
+
+				var multiplier = Units.multiplier(variable);
+
 				ret+="<tr field='"+variable+"' family='"+family+"'>"+
 					"<td style='font-weight:bold'><a class=blue href=variable.php?id="+variable+">"+variable+"</a>"+
 					"<td>"+description+
-					"<td>"+object[variable]<?php if($type=="output")echo "()"?>+
+					"<td style=text-align:right>"+object[variable]<?php if($type=="output")echo "()"?>/multiplier+
 					"<td>"+unit
 			}
 			return ret;
