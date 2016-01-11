@@ -2,12 +2,8 @@
 .inline{display:inline-block;vertical-align:top}
 a{font-weight:bold;text-decoration:none}
 a,a:visited,a:hover,a:active {color:#00AFF1;font-weight:normal}
-a:hover{text-decoration:underline}
-body{
-	font-family:'Open Sans','Helvetica',sans-serif;
-	overflow-y:scroll;
-	font-size:13px;
-	}
+a:hover {text-decoration:underline}
+body{font-family:'Open Sans','Helvetica',sans-serif;overflow-y:scroll;font-size:13px;}
 button{padding:0.3em;height:2.3em}
 div{padding:0.5em}
 h1,h2,h3,h4{padding:0.8em;color:#00aff1;font-weight:normal}
@@ -15,9 +11,9 @@ h4{font-size:18px;color:#d7bfaf}
 table{border-collapse:collapse;}
 th,td{border:1px solid #ccc;padding:0.5em;font-weight:normal}
 th{background:#00aff1;color:white;vertical-align:top}
-hr{ display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
-/*ECAM blue*/
-.blue{color:#00AFF1;}
+hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0;}
+/*ECAM blue*/.blue{color:#00AFF1;}
+
 /*BUTTONS*/
 	.button
 	{        
