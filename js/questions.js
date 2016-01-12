@@ -7,7 +7,7 @@ var Questions = {
 
 	varsPerQuestion:
 	{
-		"Do you have fuel engines to run pumps" :[],
+		"Do you have fuel engines to run pumps" :['ws1','ws2'],
 		"Are you producing biogas"              :[],
 		"Are you producing electrical energy"   :[],
 		"Is your topography flat"               :[],

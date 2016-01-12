@@ -17,11 +17,32 @@
 		}
 		if($active)
 			echo "
-				<td rowspan=3 onclick=window.location='edit.php?level=$level'>
+				<td rowspan=4 onclick=window.location='edit.php?level=$level'>
 					<img src=img/$alias.png>
 					<a href='edit.php?level=$level'>$levelAlias</a>
 			";
-		else echo "<td rowspan=3 class=inactive title='Inactive'>$levelAlias";
+		else echo "<td rowspan=4 class=inactive title='Inactive'>$levelAlias";
+	}
+
+	/** Prints a Level 2 GENERAL stage for the navigation table. All parameters are strings */
+	function printL2GENERALstage($alias,$level,$sublevel)
+	{
+		global $stages;
+		switch($alias)
+		{
+			case "waterGen":$alias="water";$active=$stages['water']?1:0;break;
+			case "wasteGen":$alias="waste";$active=$stages['waste']?1:0;break;
+		}
+		if($active)
+			echo "
+				<td 
+					colspan=2
+					onclick=window.location='edit.php?level=$level&sublevel=$sublevel'>
+					<img src=img/$alias.png style='width:20px'>
+					<a title='Active Stage' href='edit.php?level=$level&sublevel=$sublevel'>$sublevel</a>
+					";
+		else
+			echo "<td colspan=2 class=inactive title='Inactive'>$sublevel";
 	}
 
 	/** Prints a Level 2 stage for the navigation table. All parameters are strings */
@@ -72,24 +93,24 @@
 <table id=navigationTable class=inline style="text-align:center;margin:1em">
 	<!--this table style--><style>
 		#navigationTable img{width:40px;vertical-align:middle}
-		#navigationTable td{cursor:pointer}
-		#navigationTable td:hover {background:#f6f6e6}
-		#navigationTable 
+		#navigationTable td:not(.inactive){cursor:pointer}
 	</style>
 	<tr>
 		<th style="font-size:13px" colspan=2>Level 1
 		<th style="font-size:13px">Level 2
 		<th style="font-size:13px">Level 3
 	<tr>
-		<td rowspan=6 onclick=window.location='edit.php?level=UWS'>
+		<td rowspan=8 onclick=window.location='edit.php?level=UWS'>
 			<img src=img/uws.png> <a href=edit.php?level=UWS title="Urban Water System">UWS</a></td>
 		<?php printL1stage('water','Water')?>
-			<?php printL2stage('waterAbs','Water','Abstraction')?>
+			<?php printL2GENERALstage('waterGen','Water','General')?>
+			<tr><?php printL2stage('waterAbs','Water','Abstraction')?>
 			<tr><?php printL2stage('waterTre','Water','Treatment')?>
 			<tr><?php printL2stage('waterDis','Water','Distribution')?>
 	<tr>
 		<?php printL1stage('waste','Waste')?>
-			<?php printL2stage('wasteCol','Waste','Collection')?>
+			<?php printL2GENERALstage('wasteGen','Waste','General')?>
+			<tr><?php printL2stage('wasteCol','Waste','Collection')?>
 			<tr><?php printL2stage('wasteTre','Waste','Treatment')?>
 			<tr><?php printL2stage('wasteDis','Waste','Discharge')?>
 </table>

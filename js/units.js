@@ -17,7 +17,9 @@ var Units =
 		var currentUnit = Global.Configuration.Units[field] || Info[field].unit
 
 		//multiplier is in Units[magnitude][unit]
-		return Units[Info[field].magnitude][currentUnit];
+		//is possible that currentUnit is not inside Units[magnitude]
+		//TODO
+		return Units[Info[field].magnitude][currentUnit] || 1;
 	},
 
 	/** CONVERSION BETWEEN MAGNITUDES */

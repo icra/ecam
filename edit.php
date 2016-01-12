@@ -76,7 +76,7 @@
 				newCell.className="input";
 				newCell.setAttribute('onclick','transformField(this)');
 				//value
-				var multiplier = Units.multiplier(field)
+				var multiplier=Units.multiplier(field)
 				newCell.innerHTML=CurrentLevel[field]/multiplier;
 				newRow.insertCell(-1).innerHTML=(function()
 				{
@@ -167,11 +167,12 @@
 	<?php
 		if($isLevel3enabled) //means that we are in level 2
 		{
-			echo "<button class='button next'
-				style='background:lightblue;'
-				onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-				Go to Level 3 Substages
-				</button>";
+			if($sublevel!="General")
+				echo "<button class='button next'
+					style='background:lightblue;'
+					onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
+					Go to Level 3 Substages
+					</button>";
 		}
 		else //means that we are in level 1
 		{
@@ -180,12 +181,14 @@
 			{
 				case "Water": 
 					echo '
+						<button stage=waterGen class="button next" onclick=window.location="edit.php?level=Water&sublevel=General" 		style=background:lightblue> General </button> 
 						<button stage=waterAbs class="button next" onclick=window.location="edit.php?level=Water&sublevel=Abstraction" 	style=background:lightblue> Water Abstraction	</button> 
 						<button stage=waterTre class="button next" onclick=window.location="edit.php?level=Water&sublevel=Treatment" 	style=background:lightblue> Water Treatment	</button>
 						<button stage=waterDis class="button next" onclick=window.location="edit.php?level=Water&sublevel=Distribution" style=background:lightblue> Water Distribution	</button>';
 						break;
 				case "Waste": 
 					echo '
+						<button stage=wasteGen class="button next" onclick=window.location="edit.php?level=Water&sublevel=General" 		style=background:lightblue> General </button> 
 						<button stage=wasteCol class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Collection" 	style=background:lightblue> Wastewater Collection	</button> 
 						<button stage=wasteTre class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Treatment" 	style=background:lightblue> Wastewater Treatment	</button>
 						<button stage=wasteDis class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Discharge" 	style=background:lightblue> Wastewater Discharge	</button>';

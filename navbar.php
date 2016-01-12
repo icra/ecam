@@ -14,13 +14,13 @@
 	<?php
 		echo "&#9776; "; //"burger" symbol
 		nlink("index.php","&#8962; HOME");
+		nlink("about.php",        "About");
 		if(isset($_COOKIE['GLOBAL']))
 		{
 			nlink("getStarted.php",   "Get started");
 			nlink("configuration.php","Configuration");
 			nlink("stages.php",       "Input data");
 			echo "<div class=inactive-tab><a onclick=summaryMenu(event) style=cursor:pointer>Summary</a></div>";
-			nlink("about.php",        "About");
 		}
 	?>
 </div>

@@ -3,7 +3,7 @@
 /** Find a variable code, e.g 'gV2' inside 'Global' and tell where it is */
 function locateVariable(code)
 {
-	var localization = {} //e.g {"level":"Water","sublevel":"Abstraction"}
+	var localization={}; //e.g {"level":"Water","sublevel":"Abstraction"}
 	for(level in Global)
 	{
 		for(field in Global[level])
@@ -14,8 +14,8 @@ function locateVariable(code)
 				{
 					if(code==subfield)
 					{
-						localization = {"level":level,"sublevel":field}
-						return localization
+						localization={"level":level,"sublevel":field};
+						return localization;
 					}
 				}
 			}
@@ -29,7 +29,7 @@ function locateVariable(code)
 			}
 		}
 	}
-	return false
+	return false;
 }
 
 /** 
@@ -45,18 +45,32 @@ function locateVariable(code)
  */
 var Info = {
 	//1. UWS
-	"uw1":{"description":"Energy costs", 		 "magnitude":"Currency", "unit":"USD"},
+	"uw1":{
+		"description":"Conversion factor for grid electricity",
+		"magnitude":"Conversion",
+		"unit":"kgCO2e/kWh",
+	},
+	"Energy Costs":{
+		"description":"Energy Costs",
+		"magnitude":"Currency",
+		"unit":"USD",
+	},
+	"Running Costs":{
+		"description":"Running Costs",
+		"magnitude":"Currency",
+		"unit":"USD",
+	},
 
 	//2. WATER SUPPLY
 	"ws1":{
 		"description":"Serviced population within the water utility area of service",
-		"magnitude":"Inhab",
-		"unit":"Inhab",
+		"magnitude":"People",
+		"unit":"People",
 	},
 	"ws2":{
 		"description":"Resident population within the water utility area of service",
-		"magnitude":"Inhab",
-		"unit":"Inhab",
+		"magnitude":"People",
+		"unit":"People",
 	},
 	"ws3":{
 		"description":"Energy costs during the entire assessment period",
@@ -94,329 +108,89 @@ var Info = {
 		"unit":"m3",
 	},
 
+	//2.0 Water Supply General
+	//    wsg1 Water-related electrical energy produced by the utility (renewable energy) during the assessment period	kWh
+	//    wsg2 Water-related renewable electrical energy sold by the utility (renewable energy) during the assessment period	kWh
+	//    wsg3 Non-water related renewable electricity production by the utility 	kWh
+	//    wsg4 Non-water related renewable electricity sold by the utility	kWh
+	//    wsg5 Heat energy, calculated from steam production and gas flow rates, provided to neighboring  districts for heating or cooling	J
+	"wsg1":{
+		"description":"Water-related electrical energy produced by the utility (renewable energy) during the assessment period",
+		"magnitude":"Energy",
+		"unit":"kWh",
+	},
+	"wsg2":{
+		"description":"Water-related renewable electrical energy sold by the utility (renewable energy) during the assessment period",
+		"magnitude":"Energy",
+		"unit":"kWh",
+	},
+	"wsg3":{
+		"description":"Non-water related renewable electricity production by the utility",
+		"magnitude":"Energy",
+		"unit":"kWh",
+	},
+	"wsg4":{
+		"description":"Non-water related renewable electricity sold by the utility",
+		"magnitude":"Energy",
+		"unit":"kWh",
+	},
+	"wsg5":{
+		"description":"Heat energy, calculated from steam production and gas flow rates, provided to neighboring  districts for heating or cooling",
+		"magnitude":"Energy",
+		"unit":"Joule",
+	},
+
 	//2.1 Abstraction
-	"aV1":{
+	//		wsa1	Electric energy consumed for pumping abstracted water (from the grid and self-produced)	kWh
+	//		wsa2	Volume of conveyed water	m3
+	//		wsa3	Energy recovered in abstracted water	kWh
+	"wsa1":{
 		"description":"Energy consumed for pumping abstracted water",
 		"magnitude":"Energy",
 		"unit":"kWh",
 	},
-	"sV1":{
+	"wsa2":{
 		"description":"Volume of conveyed water",
 		"magnitude":"Volume",
 		"unit":"m3",
 	},
-	"aV3":{
+	"wsa3":{
 		"description":"Energy recovered in abstracted water",
 		"magnitude":"Energy",
 		"unit":"kWh",
 	},
-	"aV2":{
-		"description":"Abstracted water volume pumped x pump head in meters",
-		"magnitude":"undefined",
-		"unit":"m3 x 100m",
-	},
-	"aV4":{
-		"description":"Turbine water volume pumped x turbine head in meters",
-		"magnitude":"undefined",
-		"unit":"m3 x 100m",
-	},
-	"aV5":{
-		"description":"Water losses",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"aV6":{
-		"description":"Mains lenght",
-		"magnitude":"Distance",
-		"unit":"km",
-	},
-	"aV7":{
-		"description":"Friction pipe losses",
-		"magnitude":"Headloss",
-		"unit":"m",
-	},
-	"aE1":{
-		"description":"Energy consumption per conveyed water ",
-		"magnitude":"Energy/Volume",
-		"unit":"kWh/m3",
-	},
-	"aE2":{
-		"description":"Energy consumption of abstracted water per total energy consumption ",
-		"magnitude":"undefined",
-		"unit":"%",
-	},
-	"aE3":{
-		"description":"Standardised Energy Consumption ",
-		"magnitude":"undefined",
-		"unit":"kWh/m3/100m",
-	},
-	"aE4":{
-		"description":"Energy recovery per conveyed water ",
-		"magnitude":"undefined",
-		"unit":"kWh/m3",
-	},
-	"aE5":{
-		"description":"Standardized energy recovery ",
-		"magnitude":"undefined",
-		"unit":"kWh/m3/100m",
-	},
-	"aE6":{
-		"description":"Water losses per mains length ",
-		"magnitude":"undefined",
-		"unit":"m3/km/d",
-	},
-	"aE7":{
-		"description":"Unit head loss ",
-		"magnitude":"undefined",
-		"unit":"m/km",
-	},
 
 	//2.2 Treatment
-	"tV1":{
-		"description":"Volume of treated water in WTPs with selected technology",
+	//	wst1	Volume of treated water	m3
+	//	wst2	Electric energy consumed in WTPs (from the grid and self-produced)	kWh
+	"wst1":{
+		"description":"Volume of treated water",
 		"magnitude":"Volume",
 		"unit":"m3",
 	},
-	"tV7":{
+	"wst2":{
 		"description":"Electric energy consumed in WTPs (from the grid and self-produced)",
 		"magnitude":"Energy",
 		"unit":"kWh",
 	},
-	"tV8":{
-		"description":"Sludge produced in WTPs",
-		"magnitude":"Mass",
-		"unit":"kg",
-	},
-	"tV9":{
-		"description":"Treatment capacity",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"sV2":{
-		"description":"Volume of Treated Water",
-		"magnitude":"Volume",
-		"unit":"m3",
-	}, 
-	"sV3":{
-		"description":"Treated water quality tests carried out",
-		"magnitude":"number",
-		"unit":"number",
-	},
-	"sV4":{ 
-		"description":"Compliance of aesthetic tests",
-		"magnitude":"number",
-		"unit":"number",
-	},
-	"sV5":{ 
-		"description":"Compliance of microbiological tests",
-		"magnitude":"number",
-		"unit":"number",
-	},
-	"sV6":{ 
-		"description":"Compliance of physical-chemical tests",
-		"magnitude":"number",
-		"unit":"number",
-	},
-	"sV7":{ 
-		"description":"Compliance of radioactivity tests",
-		"magnitude":"number",
-		"unit":"number",
-	},
-	"tE0":
-	{
-		"description":"WTPs with selected technology",
-		"magnitude":"not specified",
-		"unit":"%",
-	},
-	"tE1":
-	{
-		"description":"Energy consumption per treated water ",
-		"magnitude":"undefined",
-		"unit":"%",
-	},
-	"tE2":
-	{
-		"description":"Energy consumption of WTPs per total energy consumption ",
-		"magnitude":"undefined",
-		"unit":"%",
-	},
-	"tE3":
-	{
-		"description":"Sludge production",
-		"magnitude":"undefined",
-		"unit":"%",
-	},
-	"tE4":
-	{
-		"description":"Capacity utilisation ",
-		"magnitude":"undefined",
-		"unit":"%",
-	},
 
-//2.3 Distribution
-	"dV7":{
-		"description":"Electric energy consumed for pumping distributed water",
+	//2.3 Distribution
+	//	wsd1	Electric energy consumed for pumping distributed water (from the grid and self-produced)	kWh
+	"wsd1":{
+		"description":"Electric energy consumed for pumping distributed water (from the grid and self produced)",
 		"magnitude":"Energy",
 		"unit":"kWh",
-	},
-	"sV9":{
-		"description":"Delivery points with adequate pressure",
-		"magnitude":"Amount",	
-		"unit":"#",
-	},
-	"sV10":{
-		"description":"Number of service connections",
-		"magnitude":"Amount",
-		"unit":"#",
-	},
-	"sV11":{
-		"description":"Time system is pressurised",
-		"magnitude":"Time",
-		"unit":"hours",
-	},
-	"sV12":{
-		"description":"Resident population connected to supply systems",
-		"magnitude":"Inhab",
-		"unit":"Inhab",
-	},
-	"sV13":{
-		"description":"Serviced population in supply systems",
-		"magnitude":"Population",
-		"unit":"People",
-	},
-	"sV14":{
-		"description":"System input volume",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"sV15":{
-		"description":"Non-revenue water",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"dV1":{
-		"description":"Volume injected",
-		"magnitude":"Volume",
-		"unit":"m3",
-	},
-	"dV2":{
-		"description":"Minimum pressure to be supplied at the distribution nodes",
-		"magnitude":"Pressure",
-		"unit":"m",
-	},
-	"dV3":{
-		"description":"Highest node elevation",
-		"magnitude":"Distance",
-		"unit":"m",
-	},
-	"dV4":{
-		"description":"Lowest node elevation of the stage",
-		"magnitude":"Distance",
-		"unit":"m",
-	},
-	"dV5":{
-		"description":"Average nodes elevation",
-		"magnitude":"Distance",
-		"unit":"m",
-	},
-	"dV6":{
-		"description":"Water table elevation node",
-		"magnitude":"Distance",
-		"unit":"m",
-	},
-	"dV8":{
-		"description":"[Sum](distributed water volume pumped x pump head in meters)",
-		"magnitude":"undefined",
-		"unit":"m3 x 100 m",
-	},
-	"dV9":{
-		"description":"Natural energy provided",
-		"magnitude":"Energy",
-		"unit":"kWh",
-	},
-	"dV10":{
-		"description":"Energy recovered at water distribution",
-		"magnitude":"Energy",
-		"unit":"kWh",
-	},
-	"dV11":{
-		"description":"Minimum required energy by users",
-		"magnitude":"Energy",
-		"unit":"kWh",
-	},
-	"dV12":{
-		"description":"Total supplied energy to the network (natural plus shaft), real system",
-		"magnitude":"Energy",
-		"unit":"kWh",
-	},
-	"dV13":{
-		"description":"Topographic energy supplied to the system",
-		"magnitude":"Energy",
-		"unit":"kWh",
-	},
-	"dV14":{
-		"description":"Mains length",
-		"magnitude":"Distance",
-		"unit":"km",
-	},
-	"dV15":{
-		"description":"Friction pipe losses",
-		"magnitude":"Headloss",
-		"unit":"m",
-	},
-
-	"dE1":
-	{
-		"description":"Energy consumption per authorized consumption",
-		"magnitude":"undefined",
-		"unit":"kWh/m3",
-	},
-	"dE2":
-	{
-		"description":"Energy consumption of authorized consumption per total energy consumption",
-		"magnitude":"Ratio",
-		"unit":"%",
-	},
-	"dE3":
-	{
-		"description":"Standardised Energy Consumption",
-		"magnitude":"Ratio",
-		"unit":"kWh/m3/100m",
-	},
-	"dE4":
-	{
-		"description":"Global water distribution energy efficiency",
-		"magnitude":"Ratio",
-		"unit":"%",
-	},
-	"dE5":
-	{
-		"description":"Percentage of topographic energy",
-		"magnitude":"Ratio",
-		"unit":"%",
-	},
-	"dE6":
-	{
-		"description":"Water losses per mains length",
-		"magnitude":"Ratio",
-		"unit":"m3/km/d",
-	},
-	"dE7":
-	{
-		"description":"Unit head loss",
-		"magnitude":"Ratio",
-		"unit":"m/km",
 	},
 
 //3. WASTEWATER
 	"ww1":{
 		"description":"Energy costs of the wastewater utility",
-		"magnitude":"currency",
+		"magnitude":"Currency",
 		"unit":"USD",
 	},
 	"ww2":{
 		"description":"Running costs of the utility related to the urban wastewater system",
-		"magnitude":"currency",
+		"magnitude":"Currency",
 		"unit":"USD",
 	},
 	"ww3":{
@@ -425,32 +199,32 @@ var Info = {
 		"unit":"kWh",
 	},
 	"ww4":{
-		"description":"Total volume processed in urban wastewater system",
+		"description":"Total volume processed through urban wastewater system",
 		"magnitude":"Volume",
 		"unit":"m3",
 	},
 	"ww5":{
 		"description":"Resident population within the wastewater utility area of service",
-		"magnitude":"Inhab",
-		"unit":"Inhab",
+		"magnitude":"People",
+		"unit":"People",
 	},
 	"ww6":{
 		"description":"Resident population connected to Sewer System (SE)",
-		"magnitude":"Inhab",
-		"unit":"Inhab",
+		"magnitude":"People",
+		"unit":"People",
 	},
 	"ww7":{
 		"description":"Serviced population in sewer and WWTP system",
-		"magnitude":"Inhab",
-		"unit":"Inhab",
+		"magnitude":"People",
+		"unit":"People",
 	},
-	"ww8" :{
-		"description":"Volume of Fuel consumed",
-		"magnitude":"Volume",
-		"unit":"L",
+	"ww8":{
+		"description":"Number of trips to disposal site",
+		"magnitude":"Number",
+		"unit":"Number",
 	},
 	"ww9" :{
-		"description":"Km to disposal site",
+		"description":"Distance to disposal site",
 		"magnitude":"Distance",
 		"unit":"km",
 	},
@@ -459,42 +233,56 @@ var Info = {
 		"magnitude":"Concentration",
 		"unit":"mg/L",
 	},
-
-//3.1 Collection
-	"wsV1":{
-		"description":"Volume of collected wastewater",
+	"ww11" :{
+		"description":"Volume of Fuel consumed",
 		"magnitude":"Volume",
-		"unit":"m3",
+		"unit":"L",
 	},
-	"wcV1":
-	{
-		"description":"Energy consumed for pumping collected wastewater",
+
+	//3.0 Wastewater General
+	//	wwg1	Water-related electrical energy produced by the utility (renewable energy) during the assessment period	kWh
+	//	wwg2	Water-related renewable electrical energy sold by the utility (renewable energy) during the assessment period	kWh
+	//	wwg3	Non-water related renewable electricity production by the utility 	kWh
+	//	wwg4	Non-water related renewable electricity sold by the utility	kWh
+	//	wwg5	Heat energy, provided to neighboring  districts for heating or cooling	J
+	"wwg1":{
+		"description":"Water-related electrical energy produced by the utility (renewable energy) during the assessment period",
 		"magnitude":"Energy",
 		"unit":"kWh",
 	},
-	"wcV2":
-	{
-		"description":"collected wastewater volume pumped x pump head in meters",
-		"magnitude":"Ratio",
-		"unit":"m3 x 100m",
+	"wwg2":{
+		"description":"Water-related renewable electrical energy sold by the utility (renewable energy) during the assessment period",
+		"magnitude":"Energy",
+		"unit":"kWh",
 	},
-	"wcE1":
-	{
-		"description":"Energy consumption per collected wastewater",
-		"magnitude":"Ratio",
-		"unit":"kWh/m3",
+	"wwg3":{
+		"description":"Non-water related renewable electricity production by the utility",
+		"magnitude":"Energy",
+		"unit":"kWh",
 	},
-	"wcE2":
-	{
-		"description":"Energy consumption of collected wastewater per total energy consumption",
-		"magnitude":"Ratio",
-		"unit":"%",
+	"wwg4":{
+		"description":"Non-water related renewable electricity sold by the utility",
+		"magnitude":"Energy",
+		"unit":"kWh",
 	},
-	"wcE3":
-	{
-		"description":"Standardised Energy Consumption",
-		"magnitude":"Ratio",
-		"unit":"kWh/m3/100m",
+	"wwg5":{
+		"description":"Heat energy, provided to neighboring  districts for heating or cooling",
+		"magnitude":"Energy",
+		"unit":"Joule",
+	},
+
+	//3.1 Collection
+	//	wwc1	Volume of wastewater conveyed to treatment or to an outfall for untreated discharge	m3	
+	//	wwc2	Electric energy consumed for conveying wastewater to treatment (from the grid and self-produced)	kWh	
+	"wwc1":{
+		"description":"Volume of wastewater conveyed to treatment or to an outfall for untreated discharge",
+		"magnitude":"Volume",
+		"unit":"m3",
+	},
+	"wwc2":{
+		"description":"Electric energy consumed for conveying wastewater to treatment (from the grid and self-produced)",
+		"magnitude":"Energy",
+		"unit":"kWh",
 	},
 
 //3.2 Treatment
