@@ -93,12 +93,12 @@ var Global = {
 			//CONTINUA AQUI
 		},
 		"Discharge":{
-			"wsV7":	0,	//Volume of discharged wastewater	m3
-			"wsV8":	0,	//Volume of discharged wastewater without treatment	m3
-			"wdV1":	0,	//Electric energy consumed for pumping discharged wastewater (from the grid and self-produced)	kWh
-			"wdV3":	0,	//Energy recovered in wastewater discharged	kWh
-			"wdV2": 0,	//[Sum](discharged wastewater volume pumped x pump head in meters)	m3 x 100 m
-			"wdV4": 0,	//[Sum](turbine water volume pumped x  turbine head in meters)	m3 x 100 m
+			"wsV7":0,	//Volume of discharged wastewater	m3
+			"wsV8":0,	//Volume of discharged wastewater without treatment	m3
+			"wdV1":0,	//Electric energy consumed for pumping discharged wastewater (from the grid and self-produced)	kWh
+			"wdV3":0,	//Energy recovered in wastewater discharged	kWh
+			"wdV2":0,	//[Sum](discharged wastewater volume pumped x pump head in meters)	m3 x 100 m
+			"wdV4":0,	//[Sum](turbine water volume pumped x  turbine head in meters)	m3 x 100 m
 			"wdE1":function(){return "not_implemented"},	//Energy consumption per discharged wastewater 
 			"wdE2":function(){return "not_implemented"},	//Energy consumption of discharged wastewater per total energy consumption
 			"wdE3":function(){return "not_implemented"},	//Standardised Energy Consumption
