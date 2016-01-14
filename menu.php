@@ -43,16 +43,16 @@
 <!--MENU-->
 <div>
 	<!--new-->
-	<button class="button add" onclick=newSystem()>New system</button>
+	<button class="button add" onclick=newSystem()>Create new system</button>
 	<!--load-->
 	<input type=file id=loadfile accept=".json" onchange="loadFile(event)" style=display:none>
-	<button class="button edit" onclick=document.getElementById('loadfile').click()>Load system</button> 
+	<button class="button edit" onclick=document.getElementById('loadfile').click()>Import existing system file</button> 
 	<?php
 		if(isset($_COOKIE['GLOBAL']))
 		{ ?>
 			<!--save-->
 			<button class="button save" onclick=saveToFile()>Save system</button>
-			<!--save-->
+			<!--clear-->
 			<button class="button delete" onclick=clearSystem()>Clear system</button>
 		<?php 
 		}

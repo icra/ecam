@@ -22,6 +22,7 @@ var Global = {
 	/** 01. Urban water system (former Global) */
 	"UWS":{
 		"uw1":0,
+		"uw":0,
 		"Energy Costs":function(){return Global.Water.ws4+Global.Waste.ww1},
 		"Running Costs":function(){return Global.Water.ws5+Global.Waste.ww2},
 	},
@@ -38,7 +39,7 @@ var Global = {
 		"ws8":0,
 		"ws9":0,
 		"test":function(){return this.ws1+this.ws2},
-
+		"":function(){retu:w}
 		"General":{
 			"wsg1":0,
 			"wsg2":0,
