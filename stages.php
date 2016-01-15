@@ -69,7 +69,7 @@
 	<title>ECAM Web Tool</title>
 	<?php include'imports.php'?>
 	<style>
-		td{vertical-align:middle;padding:1.5em;font-size:15px}
+		td{vertical-align:middle;padding:1em;font-size:15px}
 		td.inactive
 		{
 			color:#aaa;
