@@ -32,13 +32,12 @@ First time using ECAM Web Tool? Click "Create new system" or learn more in <a hr
 </h4>
 
 <!--LATEST UPD--><div style="max-width:20%;background:#d7bfaf"><?php echo "Latest update: ".date("F d Y, H:i:s.",filemtime("index.php"))?></div>
-
 <!--DIAGRAM--><?php include'diagram_home.php'?>
-
+<!--FOOTER--><?php include'footer.php'?>
 <!--LOGOS-->
-<div style="text-align:left;background:#00aff1;padding:0;margin-top:1em">
-	<!--iwa--><img src=img/IWA-logo.png width=100px>
+<div style="background:#fff;padding:0;margin-top:1em">
+	<!--giz--><img src=img/giz.png>
+	<!--bmb--><img src=img/BMUB.png width=13%>
 </div>
-<!--giz--><img src=img/giz.png>
-<!--bmb--><img src=img/BMUB.png width=13%>
+
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

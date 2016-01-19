@@ -61,9 +61,12 @@
 			//make link or not depending on active 
 			if(Global.Configuration["Active Stages"][family]==0) { return ""; }
 
+			//color blue or red
+			var color = family.search('waste')==-1 ? "#00aff1" : "#bf5050";
+
 			//return string
 			var ret="<tr><td colspan=4 style='background:#ccc;font-weight:bold'>";
-			ret+="<a href="+href+">"+name+":</a> "
+			ret+="<a href="+href+" style='color:"+color+"'>"+name+":</a> "
 
 			//create a input/output count for the stage
 			ret+="<span count="+family+">0</span> <?php echo $type?>s"
@@ -88,7 +91,7 @@
 				var multiplier = Units.multiplier(variable);
 
 				ret+="<tr field='"+variable+"' family='"+family+"'>"+
-					"<td style='font-weight:bold'><a class=blue href=variable.php?id="+variable+">"+variable+"</a>"+
+					"<td style='font-weight:bold'><a style='color:"+color+"' href=variable.php?id="+variable+">"+variable+"</a>"+
 					"<td>"+description+
 					"<td style=text-align:right>"+object[variable]<?php if($type=="output")echo "()"?>/multiplier+
 					"<td>"+unit
@@ -115,4 +118,5 @@
 	</div>
 </div>
 
+<!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

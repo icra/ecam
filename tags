@@ -4,15 +4,24 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+Formulas.idsPerFormula	dataModel/formulas.js	/^var Formulas = {$/;"	m
+Formulas.outputsPerInput	dataModel/formulas.js	/^	},$/;"	m
+Formulas.prettify	dataModel/formulas.js	/^	},$/;"	m
 Global.General	dataModel/global.js	/^var Global = {$/;"	p
-Info.gE1	dataModel/info.js	/^{$/;"	p
-Questions.varsPerQuestion	js/questions.js	/^var Questions = {$/;"	p
+Info.uw1	dataModel/info.js	/^var Info = {$/;"	p
+LookUpTables.Fuel type	dataModel/lookuptables.js	/^{$/;"	p
+Questions.varsPerQuestion	dataModel/questions.js	/^var Questions = {$/;"	p
 Substage	level3.php	/^		function Substage()$/;"	f
+Units.Distance	dataModel/units.js	/^	},$/;"	p
+Units.multiplier	dataModel/units.js	/^	},$/;"	m
+Units.selectUnit	dataModel/units.js	/^{$/;"	m
 activate	configuration.php	/^		function activate(id)$/;"	f
 activateLevels	configuration.php	/^		function activateLevels()$/;"	f
 active	stages.php	/^		$active=$stages[$alias];$/;"	v
 changeName	level3.php	/^		function changeName(index,newValue)$/;"	f
 clearSystem	menu.php	/^	function clearSystem()$/;"	f
+color	edit.php	/^				$color=$level=="Waste"?"lightcoral":"lightblue";$/;"	v
+color	stages.php	/^		$color=$level=="Waste"?"#bf5050":"default";$/;"	v
 copyFieldsFrom	js/updateGlobalFromCookies.js	/^function copyFieldsFrom(object,name)$/;"	f
 deleteSubstage	level3.php	/^		function deleteSubstage(index)$/;"	f
 div.onclick	navbar.php	/^		div.onclick=function(){div.style.display='none'}$/;"	j
@@ -20,75 +29,78 @@ drawChart	sankey.php	/^	function drawChart(){$/;"	f
 for	level3.php	/^		\/** Substage class for storing all variables that correspond to current stage *\/$/;"	c
 getCookie	js/cookies.js	/^function getCookie(name)$/;"	f
 getInputs	level3.php	/^		function getInputs()$/;"	f
-global	currentSystem.php	/^				$global=json_decode($_COOKIE['GLOBAL'],true);$/;"	v
 global	navStages.php	/^	$global=json_decode($_COOKIE['GLOBAL'],true);$/;"	v
-hlFields	edit.php	/^		function hlFields(formula,hl)$/;"	f
+hlStage	activeStages.php	/^	function hlStage(stage,hl)$/;"	f
 id	variable.php	/^	$id=$_GET['id'];$/;"	v
-idsPerFormula	js/formulas.js	/^function idsPerFormula(formula)$/;"	f
 init	configuration.php	/^		function init()$/;"	f
 init	edit.php	/^		function init()$/;"	f
 init	getStarted.php	/^		function init()$/;"	f
 init	index.php	/^		function init()$/;"	f
 init	level3.php	/^		function init()$/;"	f
-init	stages.php	/^		function init()$/;"	f
+init	stages.php	/^		function init() { updateResult() }$/;"	f
 init	summary.php	/^		function init()$/;"	f
 init	variable.php	/^		function init()$/;"	f
+input.onblur	edit.php	/^			input.onblur=function(){updateField(field,input.value)}$/;"	j
 input.onblur	level3.php	/^			input.onblur=function(){document.body.removeChild(div)}$/;"	j
 input.onchange	level3.php	/^			input.onchange=function(){changeName(index,input.value)}$/;"	j
+input.onkeypress	edit.php	/^			input.onkeypress=function(event){if(event.which==13){input.onblur()}}$/;"	j
 input.onkeypress	level3.php	/^			input.onkeypress=function(ev){if(ev.which==13)div.style.display='none'}$/;"	j
 inputType	inputType.php	/^	function inputType(button)$/;"	f
-isLevel3enabled	edit.php	/^		$isLevel3enabled=true;$/;"	v
-isLevel3enabled	edit.php	/^	else $isLevel3enabled=false;$/;"	v
 level	edit.php	/^	$level=$_GET['level'];$/;"	v
 level	level3.php	/^	$level=$_GET['level'];$/;"	v
 loadFile	menu.php	/^	function loadFile(evt)$/;"	f
+localization.level	dataModel/info.js	/^						localization={"level":level,"sublevel":field};$/;"	p
 localization.level	dataModel/info.js	/^					localization = {"level":level,"sublevel":0}$/;"	p
+localization.sublevel	dataModel/info.js	/^						localization={"level":level,"sublevel":field};$/;"	p
 localization.sublevel	dataModel/info.js	/^					localization = {"level":level,"sublevel":0}$/;"	p
 locateVariable	dataModel/info.js	/^function locateVariable(code)$/;"	f
-locateVariable.localization.level	dataModel/info.js	/^						localization = {"level":level,"sublevel":field}$/;"	p
-locateVariable.localization.sublevel	dataModel/info.js	/^						localization = {"level":level,"sublevel":field}$/;"	p
-location	currentSystem.php	/^				$location=$global["General"]["Location"];$/;"	v
-name	currentSystem.php	/^				$name=$global["General"]["Name"];$/;"	v
 name	navStages.php	/^		foreach($stages as $name=>$active) $/;"	v
 navL2stage	navStages.php	/^	function navL2stage($alias,$level,$sublevel)$/;"	f
 newSubstage	level3.php	/^		function newSubstage()$/;"	f
 newSystem	menu.php	/^	function newSystem()$/;"	f
 nlink	navbar.php	/^	function nlink($href,$name)$/;"	f
+onblur	edit.php	/^			input.onblur=function(){updateField(field,input.value)}$/;"	j
 onblur	level3.php	/^			input.onblur=function(){document.body.removeChild(div)}$/;"	j
 onchange	level3.php	/^			input.onchange=function(){changeName(index,input.value)}$/;"	j
 onclick	navbar.php	/^		div.onclick=function(){div.style.display='none'}$/;"	j
+onkeypress	edit.php	/^			input.onkeypress=function(event){if(event.which==13){input.onblur()}}$/;"	j
 onkeypress	level3.php	/^			input.onkeypress=function(ev){if(ev.which==13)div.style.display='none'}$/;"	j
 onload	menu.php	/^		reader.onload=function()$/;"	j
+printCell	activeStages.php	/^	function printCell(stage,colspan)$/;"	f
+printL1stage	configuration.php	/^				function printL1stage($alias,$name)$/;"	f
 printL1stage	stages.php	/^	function printL1stage($alias,$level)$/;"	f
+printL2GENERALstage	stages.php	/^	function printL2GENERALstage($alias,$level,$sublevel)$/;"	f
+printL2stage	configuration.php	/^				function printL2stage($alias,$name,$newRow)$/;"	f
 printL2stage	stages.php	/^	function printL2stage($alias,$level,$sublevel)$/;"	f
 reader.onload	menu.php	/^		reader.onload=function()$/;"	j
 removeCookie	js/cookies.js	/^function removeCookie(name)$/;"	f
 saveToFile	menu.php	/^	function saveToFile()$/;"	f
-sep	edit.php	/^	$sep="<span style=color:black>&rsaquo;<\/span>";$/;"	v
+sep	edit.php	/^	\/*separator*\/ $sep="<span style=color:black>&rsaquo;<\/span>";$/;"	v
 setCookie	js/cookies.js	/^function setCookie(name,value,days) $/;"	f
 setTechnology	configuration.php	/^		function setTechnology(stage,selectedTec)$/;"	f
 showSubstageMenu	level3.php	/^		function showSubstageMenu(index,ev)$/;"	f
+stageName	activeStages.php	/^	function stageName(stage)$/;"	f
 stageName	configuration.php	/^		function stageName(stage)$/;"	f
 stages	navStages.php	/^	$stages=$global['Configuration']["Active Stages"];$/;"	v
 stages	stages.php	/^	$stages=json_decode($_COOKIE['GLOBAL'],true)["Configuration"]["Active Stages"];$/;"	v
-sublevel	edit.php	/^		$sublevel=$_GET['sublevel'];$/;"	v
+sublevel	edit.php	/^	$sublevel=isset($_GET['sublevel']) ? $_GET['sublevel'] : false;$/;"	v
 sublevel	level3.php	/^	$sublevel=$_GET['sublevel'];$/;"	v
 sumAll	level3.php	/^		function sumAll(code)$/;"	f
 summaryMenu	navbar.php	/^	function summaryMenu(ev)$/;"	f
 tableRow	getStarted.php	/^		function tableRow(field,input,type)$/;"	f
 tableRows	summary.php	/^		function tableRows(object,name,family,href)$/;"	f
-title	edit.php	/^	$title=isset($sublevel) ? "<a href=edit.php?level=$level>$titleLevel<\/a> $sep <span style=color:black>$sublevel<\/span>" : "<span style=color:black>$titleLevel<\/span>";$/;"	v
+title	edit.php	/^	$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel<\/a> $sep <span style=color:black>$titleSublevel (Level 2)<\/span>" : "<span style=color:black>$titleLevel (Level 1)<\/span>";$/;"	v
 title	level3.php	/^	$title="<a href=stages.php>Input data<\/a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages (Level 3)<\/a>";$/;"	v
 titleLevel	edit.php	/^		case "Waste":  $titleLevel="Wastewater";break;$/;"	v
 titleLevel	edit.php	/^		case "Water":  $titleLevel="Water Supply";break;$/;"	v
 titleLevel	edit.php	/^		default:	   $titleLevel=$level;break;$/;"	v
 titleLevel	level3.php	/^		case "Waste": $titleLevel="<a href=edit.php?level=$level>Wastewater<\/a>";break;$/;"	v
 titleLevel	level3.php	/^		case "Water": $titleLevel="<a href=edit.php?level=$level>Water Supply<\/a>";break;$/;"	v
+titleSublevel	edit.php	/^			default:	   $titleSublevel=$sublevel;break;$/;"	v
 titleSublevel	level3.php	/^	$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>$sublevel<\/a>";$/;"	v
 transformField	edit.php	/^		function transformField(element)$/;"	f
 transformField	level3.php	/^		function transformField(element)$/;"	f
 transformField	variable.php	/^		function transformField(element)$/;"	f
-turnOffButtons	edit.php	/^		function turnOffButtons()$/;"	f
 type	summary.php	/^	$type=$_GET['type'];$/;"	v
 updateCounts	summary.php	/^		function updateCounts()$/;"	f
 updateField	edit.php	/^		function updateField(field,newValue)$/;"	f

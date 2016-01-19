@@ -1,4 +1,3 @@
-<?php include'currentSystem.php'?>
 <?php
 	/** void: echo a link if the current web page is not the one in the link's href */
 	function nlink($href,$name)
@@ -10,11 +9,35 @@
 	}
 ?>
 
-<div id=navbar style="text-align:center;background:#00aff1;color:white;padding:0.2em 0em 0em 0em;font-size:18px">
+<style>
+	#navbar {
+		text-align:center;
+		background:#00aff1;
+		color:white;
+		padding:0.2em 0em 0em 0em;
+		font-size:17px;
+	}
+	#navbar div.active-tab, #navbar div.inactive-tab { margin:0 0 0; display:inline-block; }
+	#navbar div.active-tab{ background:white; }
+	#navbar a {color:white;}
+	#navbar a:hover {text-decoration:none;}
+	div.summaryMenu{
+		background:#00aff1;
+		border:1px solid #ccc;
+		position:absolute;
+		box-shadow: 5px 5px 5px #888;
+		padding:0;
+		margin:0;
+	}
+	div.summaryMenu div{padding:0.3em;text-align:left;cursor:pointer}
+	div.summaryMenu div:hover {background:#0aafff}
+	div.summaryMenu div.close{color:black; padding:0; margin:0;}
+</style>
+
+
+<div id=navbar>
 	<?php
-		echo "&#9776; "; //"burger" symbol
 		nlink("index.php","&#8962; HOME");
-		nlink("about.php",        "About");
 		if(isset($_COOKIE['GLOBAL']))
 		{
 			nlink("getStarted.php",   "Get started");
@@ -44,7 +67,6 @@
 			link.parentNode.className='active-tab'
 		</script>
 	<?php }
-
 ?>
 
 <script>
@@ -68,22 +90,3 @@
 			"";
 	}
 </script>
-
-<style>
-	#navbar div.active-tab, #navbar div.inactive-tab { margin:0 0 0; display:inline-block; }
-	#navbar div.inactive-tab:hover { background:#0aafff }
-	#navbar div.active-tab{ background:white; }
-	#navbar a {color:white;}
-	#navbar a:hover {text-decoration:none;}
-	div.summaryMenu{
-		background:#00aff1;
-		border:1px solid #ccc;
-		position:absolute;
-		box-shadow: 5px 5px 5px #888;
-		padding:0;
-		margin:0;
-	}
-	div.summaryMenu div{padding:0.3em;text-align:left;cursor:pointer}
-	div.summaryMenu div:hover {background:#0aafff}
-	div.summaryMenu div.close{color:black; padding:0; margin:0;}
-</style>

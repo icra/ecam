@@ -2,17 +2,12 @@
 	/** THIS PAGE LETS THE USER MODIFY INPUTS AND SEE AUTOMATICALLY THE OUTPUTS */
 
 	//check specified input: level and sublevel
-	if(!isset($_GET['level']))die("ERROR: stage not specified");
+	if(!isset($_GET['level'])){die("ERROR: stage not specified");}
 
-	//level: 	mandatory {"Water","Waste","UWS"}
-	//sublevel: optional. If set, enables level 3 {"Abstraction","Treatment","Distribution",[...]}
+	//level: 	 mandatory {"Water","Waste","UWS"}
+	//sublevel:  optional. If set, enables level 3 {"Abstraction","Treatment","Distribution",[...]}
 	$level=$_GET['level'];
-	if(isset($_GET['sublevel']))
-	{
-		$sublevel=$_GET['sublevel'];
-		$isLevel3enabled=true;
-	}
-	else $isLevel3enabled=false;
+	$sublevel=isset($_GET['sublevel']) ? $_GET['sublevel'] : false;
 ?>
 <!doctype html><html><head>
 	<meta charset=utf-8>
@@ -38,7 +33,7 @@
 
 		<?php
 			//establish the stage we are going to be focused
-			if(isset($sublevel))
+			if($sublevel)
 				echo "var CurrentLevel = Global['$level']['$sublevel']";
 			else
 				echo "var CurrentLevel = Global['$level'];";
@@ -75,16 +70,20 @@
 			for(field in CurrentLevel)
 			{
 				if(typeof(CurrentLevel[field])!="number" ){continue;}
+				//new row
 				var newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
-				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
+				//description
 				newRow.insertCell(-1).innerHTML= Info[field] ? Info[field].description : "<span style=color:#ccc>not defined</span>";
+				//code
+				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
+				//editable cell
 				var newCell=newRow.insertCell(-1);
 				newCell.className="input";
 				newCell.setAttribute('onclick','transformField(this)');
 				//value
-				var multiplier=Units.multiplier(field)
-				newCell.innerHTML=CurrentLevel[field]/multiplier;
+				newCell.innerHTML=CurrentLevel[field]/Units.multiplier(field);
+				//unit
 				newRow.insertCell(-1).innerHTML=(function()
 				{
 					var str="<select onchange=Units.selectUnit('"+field+"',this.value)>";
@@ -107,9 +106,17 @@
 					str+="</select>"
 					return str
 				})();
-				newRow.insertCell(-1).innerHTML=""+
-					"<select><option>Calculated<option>Estimated</select>"+
-					"";
+				//data quality
+				newRow.insertCell(-1).innerHTML=(function(){
+					var select = document.createElement('select');
+					['Calculated','Estimated'].forEach(function(opt)
+					{
+						var option=document.createElement('option');
+						option.innerHTML=opt;
+						select.appendChild(option);
+					});
+					return select.outerHTML;
+				})();
 			}
 		}
 
@@ -126,10 +133,10 @@
 				newRow.setAttribute('title',field+"="+Formulas.prettify(formula))
 				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+formula+"',1)")
 				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+formula+"',0)")
-				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
-				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>"
-				newRow.insertCell(-1).innerHTML=CurrentLevel[field]()||0 //if nan, outputs 0
-				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>"
+				/*description*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>"
+				/*code*/ newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
+				/*value*/ newRow.insertCell(-1).innerHTML=CurrentLevel[field]()||0 //if nan, outputs 0
+				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>"
 			}
 		}
 
@@ -168,7 +175,7 @@
 		case "Waste":  $titleLevel="Wastewater";break;
 		default:	   $titleLevel=$level;break;
 	}
-	if(isset($sublevel))
+	if($sublevel)
 	{
 		switch($sublevel)
 		{
@@ -177,14 +184,14 @@
 		}
 	}
 	/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
-	$title=isset($sublevel) ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Level 2)</span>" : "<span style=color:black>$titleLevel (Level 1)</span>";
+	$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Level 2)</span>" : "<span style=color:black>$titleLevel (Level 1)</span>";
 ?>
 <h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
 
 <!--GO TO LEVEL 2 OR 3-->
-<div>
+<div style=margin:0;padding:0>
 	<?php
-		if($isLevel3enabled) //means that we are in level 2
+		if($sublevel)
 		{
 			if($sublevel!="General")
 			{
@@ -202,14 +209,14 @@
 			switch($level)
 			{
 				case "Water": 
-					echo 'Level 2 stages
+					echo 'Level 2
 						<button stage=waterGen class="button next" onclick=window.location="edit.php?level=Water&sublevel=General" 		style=background:lightblue> Energy use and production </button> 
 						<button stage=waterAbs class="button next" onclick=window.location="edit.php?level=Water&sublevel=Abstraction" 	style=background:lightblue> Water Abstraction	</button> 
 						<button stage=waterTre class="button next" onclick=window.location="edit.php?level=Water&sublevel=Treatment" 	style=background:lightblue> Water Treatment	</button>
 						<button stage=waterDis class="button next" onclick=window.location="edit.php?level=Water&sublevel=Distribution" style=background:lightblue> Water Distribution	</button>';
 						break;
 				case "Waste": 
-					echo 'Level 2 stages
+					echo 'Level 2
 						<button stage=wasteGen class="button next" onclick=window.location="edit.php?level=Waste&sublevel=General" 		style=background:lightcoral> Energy use and production </button> 
 						<button stage=wasteCol class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Collection" 	style=background:lightcoral> Wastewater Collection	</button> 
 						<button stage=wasteTre class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Treatment" 	style=background:lightcoral> Wastewater Treatment	</button>
@@ -220,7 +227,7 @@
 	?>
 	<script>
 		/** Disable nav buttons according to current configuration */
-		function turnOffButtons()
+		(function()
 		{
 			//go over buttons that have the stage attribute
 			var elements=document.querySelectorAll("[stage]")
@@ -233,8 +240,7 @@
 					elements[i].setAttribute('title','Inactive stage. Go to Configuration to enable it')
 				}
 			}
-		}
-		turnOffButtons()
+		})();
 	</script>
 </div>
 
@@ -245,13 +251,13 @@
 	<!--INPUTS-->
 	<table id=inputs class=inline>
 		<tr><th colspan=5>INPUTS <?php include'inputType.php'?>
-		<tr><th>Code<th>Description<th>Current Value<th>Unit<th>Data Quality
+		<tr><th>Description<th>Code<th>Current Value<th>Unit<th>Data Quality
 	</table>
 
 	<!--OUTPUTS-->
 	<table id=outputs class=inline style=background:yellow>
 		<tr><th colspan=4>OUTPUTS
-		<tr><th>Code<th>Description<th>Current Value<th>Unit
+		<tr><th>Description<th>Code<th>Current Value<th>Unit
 	</table>
 </div>
 
@@ -266,4 +272,5 @@
 </div>
 -->
 
+<!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

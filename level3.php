@@ -356,4 +356,5 @@
 <!--substages counter--><div class=inline style="border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
 <!--SUBSTAGES TABLE--><table id=substages style=margin:1em><tr><td style=border:none colspan=2></table>
 <!--OUTPUTS TABLE--><table id=outputs class=inline style=background:yellow> <tr><th colspan=42>OUTPUTS </table>
+<!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

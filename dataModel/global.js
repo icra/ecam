@@ -17,7 +17,7 @@ var Global = {
 	/** Level 1 - Urban water system */
 	"UWS":{
 		"uw1":0,
-		"c_uw1":function(){return Global.Water.ws4+Global.Waste.ww1},
+		"c_uw1":function(){return Global.Water.ws3+Global.Waste.ww1},
 		"c_uw2":function(){return Global.Water.ws4+Global.Waste.ww2},
 		"c_uw3":function(){return Global.Water.General.c_wsg1()+Global.Waste.General.c_wwg1()},
 	},

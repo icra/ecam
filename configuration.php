@@ -2,6 +2,7 @@
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
 	<?php include'imports.php'?>
+	<style> tr.option{transition:all 1.5s} </style>
 	<script>
 		/** Enable or disable stage <input type=checkbox id=id> */
 		function activate(id)
@@ -74,6 +75,7 @@
 			}
 			init();
 		}
+
 		/** Hide or show a <tr> of additional info depending on active stages **/
 		function updateOptions(family)
 		{
@@ -112,75 +114,55 @@
 			return r;
 		}
 	</script>
-	<style> tr.option{transition:all 1.5s} </style>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Configuration</h1>
 <!--SUBTITLE--><h4>Which stages form your system? Click to activate stages.</h4>
 
-<!--MAIN-->
-<div style=content-align:center;width:80%>
+<!--MAIN CONTAINER-->
+<div>
 	<!--SELECT STAGES-->
-	<table id=selectStage class=inline style="font-size:16px;width:35%;margin-right:2em" >
-		<!--this table styles--><style>
-			#selectStage img{width:40px;vertical-align:middle}
-			#selectStage th{width:220px;}
-			#selectStage td{text-align:left;padding:0}
-			#selectStage label{cursor:pointer;display:block;min-height:100%;padding:0.5em}
-		</style>
+	<table id=selectStage class=inline style="" >
 		<tr><th>Level 1<th>Level 2
-		<tr><td rowspan=3 style="text-align:center"> 
-			<label>
-				<input type=checkbox id=water onchange=activate(this.id)> 
-				<img src=img/water.png> 
-				Water Supply
-			</label>
-				<td>
-					<label style=color:#ccc>
-						<input type=checkbox disabled id=waterAbs class=water onchange=activate(this.id)> 
-						<img src=img/waterAbs.png>
-						Abstraction
-					</label> 
-				<tr><td>
-					<label style=color:#ccc>
-						<input type=checkbox disabled id=waterTre class=water onchange=activate(this.id)> 
-						<img src=img/waterTre.png>
-						Treatment
-					</label> 
-				<tr><td>
-					<label style=color:#ccc>
-						<input type=checkbox disabled id=waterDis class=water onchange=activate(this.id)> 
-						<img src=img/waterDis.png>
-						Distribution	
-					</label> 
-		<tr><td rowspan=3 style="text-align:center"> 
-			<label>
-				<input type=checkbox id=waste onchange=activate(this.id)> 
-				<img src=img/waste.png>
-				Wastewater	
-			</label>
-				<td>
-					<label style=color:#ccc>
-						<input type=checkbox disabled id=wasteCol class=waste onchange=activate(this.id)> 
-						<img src=img/wasteCol.png>
-						Collection
-					</label> 
-				<tr><td>
-					<label style=color:#ccc>
-						<input type=checkbox disabled id=wasteTre class=waste onchange=activate(this.id)> 
-						<img src=img/wasteTre.png>
-						Treatment		
-					</label> 
-				<tr><td>
-					<label style=color:#ccc>
-						<input type=checkbox disabled id=wasteDis class=waste onchange=activate(this.id)>
-						<img src=img/wasteDis.png>
-						Discharge
-					</label> 
+			<!--this table styles--><style>
+				#selectStage img{width:40px;vertical-align:middle}
+				#selectStage th{width:220px;}
+				#selectStage td{text-align:left;padding:0}
+				#selectStage td[rowspan='3']{text-align:center;}
+				#selectStage label{cursor:pointer;display:block;min-height:100%;padding:0.5em}
+			</style>
+			<?php 
+				function printL2stage($alias,$name,$newRow)
+				{
+					if($newRow){echo "<tr>";}
+					echo "<td>
+						<label style=color:#ccc>
+							<input type=checkbox disabled id=$alias class=water onchange=activate(this.id)> 
+							<img src=img/$alias.png>
+							$name
+						</label>";
+				}
+				function printL1stage($alias,$name)
+				{
+					echo "<tr><td rowspan=3> 
+						<label>
+							<input type=checkbox id=$alias onchange=activate(this.id)> 
+							<img src=img/$alias.png>$name
+						</label>";
+				}
+				printL1stage("water","Water supply");
+				printL2stage("waterAbs","Abstraction",false);
+				printL2stage("waterTre","Treatment",true);
+				printL2stage("waterDis","Distribution",true);
+				printL1stage('waste',"Wastewater");
+				printL2stage("wasteCol","Collection",false);
+				printL2stage("wasteTre","Treatment",true);
+				printL2stage("wasteDis","Discharge",true);
+			?>
 	</table>
 
 	<!--QUESTIONS-->
-	<table class=inline style="font-size:11px;width:45%" id=questions>
+	<table class=inline id=questions style="width:45%">
 		<tr><th colspan=3 style="text-align:left;font-size:16px">Additional info
 		<script>
 			for(stage in Global.Configuration.Questions)
@@ -234,4 +216,5 @@
 	<button class="button next" onclick=window.location='stages.php'>Next</button>
 </div>
 
+<!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

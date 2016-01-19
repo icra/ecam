@@ -2,27 +2,26 @@
 	//specified input
 	if(!isset($_GET['id']))die('no input specified');
 	$id=$_GET['id'];
-	//make the id variable live in javascript scope
-	echo "<script>var id='$id';</script>";
 ?>
 <!doctype html><html><head>
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
 	<?php include'imports.php'?>
 	<style>
-		th,td{padding:1.5em}
+		th,td{padding:1em}
 		td.th{background:#00aff1;color:white;vertical-align:middle}
 		td.input{color:#666;background-color:#eee;cursor:cell}
-		td.input input{font-size:18px}
+		td.input input{font-size:16px}
 		<?php
 			if(preg_match("/ww/",$id))
 			{?>
-				th{background:#bf5050}
-				a,a:visited{color:#bf5050}
+				td.th{background:#bf5050}
+				a,a:visited,h1{color:#bf5050}
 			<?php }
 		?>
 	</style>
 	<script>
+		var id='<?php echo $id?>' //make the id variable live in javascript scope
 		function init()
 		{
 			updateInfoTable()
@@ -68,13 +67,6 @@
 			newCell.innerHTML="Type"
 			newRow.insertCell(-1).innerHTML=typeof(currentStage[id])=="function"?"Output":"Input"
 
-			//Description
-			newRow=t.insertRow(-1)
-			newCell=newRow.insertCell(-1)
-			newCell.className='th'
-			newCell.innerHTML="Variable code"
-			newRow.insertCell(-1).innerHTML=id
-
 			//Magnitude
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
@@ -103,9 +95,35 @@
 						var currentUnit = Global.Configuration.Units[match] || Info[match].unit
 						var currValue = typeof(match_stage[match])=="function" ? match_stage[match]() : match_stage[match];
 						currValue/=Units.multiplier(match);
-						ret+="<div><a href=variable.php?id="+match+" title='"+Info[match].description+"'>"+match+"</a> "+
+						var color = match.search('ww')==-1 ? "#0aaff1":"#bf5050";
+						ret+="<div><a style='color:"+color+"' href=variable.php?id="+match+" title='"+Info[match].description+"'>"+match+"</a> "+
 						" = "+currValue+" "+currentUnit+
 						"</div>"
+					});
+					return ret;
+				})();
+			}
+			else //means is a input, so we will look for involved outputs
+			{
+				newRow=t.insertRow(-1)
+				newCell=newRow.insertCell(-1)
+				newCell.className='th'
+				newCell.innerHTML="Outputs involved"
+				newCell=newRow.insertCell(-1)
+				newCell.style.backgroundColor="yellow"
+				newCell.innerHTML=(function(){
+					//look for the code "id" inside each output
+					var ret="";
+					Formulas.outputsPerInput(id).forEach(function(output){
+						var match_localization = locateVariable(output)
+						var match_level = match_localization.level
+						var match_sublevel = match_localization.sublevel
+						var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level]
+						var currentUnit = Global.Configuration.Units[output] || Info[output].unit
+						var formula = Formulas.prettify(match_stage[output].toString());
+						var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
+						ret+="<div><a style='color:"+color+"' title='"+Info[output].description+"' href=variable.php?id="+output+">"+output+
+						"</a> = "+formula+" = "+match_stage[output]()/Units.multiplier(output)+" "+currentUnit+"</div>";
 					});
 					return ret;
 				})();
@@ -208,6 +226,7 @@
 </script>
 
 <!--TITLE--><h1><script>document.write(Info[id].description)</script></h1>
-<!--subtitle--><h4>Detailed info</h4>
+<!--subtitle--><h4>Detailed info (<script>document.write(id)</script>)</h4>
 <!--VARIABLE INFO--><table style="text-align:left" id=info></table>
+<!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

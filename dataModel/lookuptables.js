@@ -23,6 +23,6 @@ var LookUpTables =
 	//Methane conversion factor
 	"MCF":
 	{
-		
-	}.
+		"":0,	
+	},
 }

@@ -23,3 +23,4 @@
 	2015-2016 <a href=license.php>License</a>. <br>
 </div>
 
+<!--FOOTER--><?php include'footer.php'?>

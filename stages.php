@@ -83,6 +83,7 @@
 		function init() { updateResult() }
 	</script>
 </head><body onload=init()><center>
+
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--STAGES--><?php include"navStages.php"?>
 <!--TITLE--><h1>Input data</h1>
@@ -93,6 +94,7 @@
 	<!--this table style--><style>
 		#navigationTable img{width:35px;vertical-align:middle}
 		#navigationTable td:not(.inactive){cursor:pointer}
+		#navigationTable td:not(.inactive):hover{background:linen;transition:all 1s}
 		#navigationTable td.empty{background:#e8e8e8;cursor:default}
 	</style>
 	<!--stages menu-->
@@ -103,7 +105,7 @@
 		<?php 
 			printL1stage('water','Water');
 			printL1stage('waste','Waste');
-				?><tr><?php 
+			?><tr><?php 
 			printL2GENERALstage('waterGen','Water','General');
 			printL2stage('waterAbs','Water','Abstraction');
 			printL2stage('waterTre','Water','Treatment');
@@ -114,6 +116,8 @@
 			printL2stage('wasteDis','Waste','Discharge');
 		?>
 </table>
+
 <!--DIAGRAM--><?php //include'diagram.php'?>
-<!--PREV BUTTON--><div><button class="button prev" onclick=window.location='configuration.php'>Previous</button><div> 
+<!--PREV BUTTON--><div><button class="button prev" onclick=window.location='configuration.php'>Previous</button></div>
+<!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
