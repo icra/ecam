@@ -22,6 +22,13 @@
 		td.input input { width:95%;font-size:18px}
 		td.input       { width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
 		table#outputs tr:hover { background:orange; }
+		<?php
+			if($level=="Waste")
+			{?>
+				th{background:#bf5050}
+				a,a:visited{color:#bf5050}
+			<?php }
+		?>
 	</style>
 	<script>
 		/** 
@@ -81,6 +88,10 @@
 				newRow.insertCell(-1).innerHTML=(function()
 				{
 					var str="<select onchange=Units.selectUnit('"+field+"',this.value)>";
+					if(Info[field]===undefined)
+					{
+						return "<span style=color:#ccc>no unit</span>";
+					}
 					if(Units[Info[field].magnitude]===undefined)
 					{
 						return Info[field].unit
@@ -157,8 +168,16 @@
 		case "Waste":  $titleLevel="Wastewater";break;
 		default:	   $titleLevel=$level;break;
 	}
-	$sep="<span style=color:black>&rsaquo;</span>";
-	$title=isset($sublevel) ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$sublevel</span>" : "<span style=color:black>$titleLevel</span>";
+	if(isset($sublevel))
+	{
+		switch($sublevel)
+		{
+			case "General":$titleSublevel="Energy use and production";break;
+			default:	   $titleSublevel=$sublevel;break;
+		}
+	}
+	/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
+	$title=isset($sublevel) ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Level 2)</span>" : "<span style=color:black>$titleLevel (Level 1)</span>";
 ?>
 <h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
 
@@ -168,11 +187,14 @@
 		if($isLevel3enabled) //means that we are in level 2
 		{
 			if($sublevel!="General")
+			{
+				$color=$level=="Waste"?"lightcoral":"lightblue";
 				echo "<button class='button next'
-					style='background:lightblue;'
+					style='background:$color;'
 					onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-					Go to Level 3 Substages
+					Level 3 Substages
 					</button>";
+			}
 		}
 		else //means that we are in level 1
 		{
@@ -180,18 +202,18 @@
 			switch($level)
 			{
 				case "Water": 
-					echo '
-						<button stage=waterGen class="button next" onclick=window.location="edit.php?level=Water&sublevel=General" 		style=background:lightblue> General </button> 
+					echo 'Level 2 stages
+						<button stage=waterGen class="button next" onclick=window.location="edit.php?level=Water&sublevel=General" 		style=background:lightblue> Energy use and production </button> 
 						<button stage=waterAbs class="button next" onclick=window.location="edit.php?level=Water&sublevel=Abstraction" 	style=background:lightblue> Water Abstraction	</button> 
 						<button stage=waterTre class="button next" onclick=window.location="edit.php?level=Water&sublevel=Treatment" 	style=background:lightblue> Water Treatment	</button>
 						<button stage=waterDis class="button next" onclick=window.location="edit.php?level=Water&sublevel=Distribution" style=background:lightblue> Water Distribution	</button>';
 						break;
 				case "Waste": 
-					echo '
-						<button stage=wasteGen class="button next" onclick=window.location="edit.php?level=Water&sublevel=General" 		style=background:lightblue> General </button> 
-						<button stage=wasteCol class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Collection" 	style=background:lightblue> Wastewater Collection	</button> 
-						<button stage=wasteTre class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Treatment" 	style=background:lightblue> Wastewater Treatment	</button>
-						<button stage=wasteDis class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Discharge" 	style=background:lightblue> Wastewater Discharge	</button>';
+					echo 'Level 2 stages
+						<button stage=wasteGen class="button next" onclick=window.location="edit.php?level=Waste&sublevel=General" 		style=background:lightcoral> Energy use and production </button> 
+						<button stage=wasteCol class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Collection" 	style=background:lightcoral> Wastewater Collection	</button> 
+						<button stage=wasteTre class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Treatment" 	style=background:lightcoral> Wastewater Treatment	</button>
+						<button stage=wasteDis class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Discharge" 	style=background:lightcoral> Wastewater Discharge	</button>';
 						break;
 			}
 		}

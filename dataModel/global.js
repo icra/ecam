@@ -17,8 +17,9 @@ var Global = {
 	/** Level 1 - Urban water system */
 	"UWS":{
 		"uw1":0,
-		"Energy Costs":function(){return Global.Water.ws4+Global.Waste.ww1},
-		"Running Costs":function(){return Global.Water.ws5+Global.Waste.ww2},
+		"c_uw1":function(){return Global.Water.ws4+Global.Waste.ww1},
+		"c_uw2":function(){return Global.Water.ws4+Global.Waste.ww2},
+		"c_uw3":function(){return Global.Water.General.c_wsg1()+Global.Waste.General.c_wwg1()},
 	},
 
 	/** Level 1 - Water Supply*/
@@ -38,6 +39,8 @@ var Global = {
 			"wsg3":0,
 			"wsg4":0,
 			"wsg5":0,
+			c_wsg1:function(){return Global.Water.Abstraction.wsa1+Global.Water.Treatment.wst2+Global.Water.Distribution.wsd1},
+			c_wsg2:function(){return Global.Water.ws5-Global.Water.General.wsg4-Global.Water.General.wsg6},
 		},
 		"Abstraction":{
 			"wsa1":0,
@@ -72,13 +75,21 @@ var Global = {
 			"wwg3":0,
 			"wwg4":0,
 			"wwg5":0,
+			c_wwg1:function(){return Global.Waste.Collection.wwc2+Global.Waste.Treatment.wwt22+Global.Waste.Discharge.wwd3},
+			c_wwg2:function(){return Global.Waste.ww3-Global.Waste.General.wwg4-Global.Waste.General.wwg6},
 		},
 		"Collection":{
 			"wwc1":0,
 			"wwc2":0,
 		},
 		"Treatment":{
+			"wwt1":0,
 			"wwt2":0,
+			"wwt3":0,
+			"wwt4":0,
+			"wwt5":0,
+			"wwt6":0,
+			"wwt7":0,
 			"wwt8":0,
 			"wwt9":0,
 			"wwt10":0,
@@ -86,6 +97,11 @@ var Global = {
 			"wwt12":0,
 			"wwt13":0,
 			"wwt14":0,
+			c_wwt1:function(){return this.wwt2-this.wwt3},
+			c_wwt2:function(){return "implementation&nbsp;not&nbsp;clear"},
+			c_wwt3:function(){return "implementation&nbsp;not&nbsp;clear"},
+			c_wwt4:function(){return "implementation&nbsp;not&nbsp;clear"},
+			c_wwt5:function(){return this.wwt5*0.005*44/28},
 		},
 		"Discharge":{
 			"wwd1":0,

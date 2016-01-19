@@ -23,6 +23,16 @@ var Formulas = {
 		result = result.replace(/this./g,"")
 		result = result.replace(/\|\|0/g,"")
 		result = result.replace(/return/g,"")
+		result = result.replace(/\r/g,"")
+		result = result.replace(/Global./g,"")
+		result = result.replace(/Water./g,"")
+		result = result.replace(/Waste./g,"")
+		result = result.replace(/General./g,"")
+		result = result.replace(/Abstraction./g,"")
+		result = result.replace(/Treatment./g,"")
+		result = result.replace(/Distribution./g,"")
+		result = result.replace(/Collection./g,"")
+		result = result.replace(/Discharge./g,"")
 		result = result.replace(/\(\)/g,"")
 		result = result.replace(/[{}]/g,"")
 		result = result.replace(/ /g,"")
@@ -44,5 +54,4 @@ var Formulas = {
 				element.style.backgroundColor=hl?"#af0":""
 		}
 	}
-
 }

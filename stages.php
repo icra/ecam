@@ -11,17 +11,17 @@
 		$active=$stages[$alias];
 		switch($level)
 		{
-			case "Water":$levelAlias="Water Supply";break;
-			case "Waste":$levelAlias="Wastewater";break;
+			case "Water":$levelAlias="Water Supply";$color="default";break;
+			case "Waste":$levelAlias="Wastewater";$color="#bf5050";break;
 			default:$levelAlias=$level;break;
 		}
 		if($active)
 			echo "
-				<td rowspan=4 onclick=window.location='edit.php?level=$level'>
+				<td colspan=4 onclick=window.location='edit.php?level=$level'>
 					<img src=img/$alias.png>
-					<a href='edit.php?level=$level'>$levelAlias</a>
+					<a href='edit.php?level=$level' style=color:$color>$levelAlias</a>
 			";
-		else echo "<td rowspan=4 class=inactive title='Inactive'>$levelAlias";
+		else echo "<td colspan=4 class=inactive title='Inactive'> <img src=img/$alias.png> $levelAlias";
 	}
 
 	/** Prints a Level 2 GENERAL stage for the navigation table. All parameters are strings */
@@ -30,19 +30,23 @@
 		global $stages;
 		switch($alias)
 		{
-			case "waterGen":$alias="water";$active=$stages['water']?1:0;break;
-			case "wasteGen":$alias="waste";$active=$stages['waste']?1:0;break;
+			case "waterGen":$alias="water";$active=$stages['water']?1:0;$color="default";break;
+			case "wasteGen":$alias="waste";$active=$stages['waste']?1:0;$color="#bf5050";break;
 		}
 		if($active)
+		{
 			echo "
 				<td 
-					colspan=2
 					onclick=window.location='edit.php?level=$level&sublevel=$sublevel'>
 					<img src=img/$alias.png style='width:20px'>
-					<a title='Active Stage' href='edit.php?level=$level&sublevel=$sublevel'>$sublevel</a>
+					<a title='Active Stage' href='edit.php?level=$level&sublevel=$sublevel' style=color:$color>Energy use and production</a>
 					";
+		}
 		else
-			echo "<td colspan=2 class=inactive title='Inactive'>$sublevel";
+		{
+			echo "<td class=inactive title='Inactive'> 
+					<img src=img/$alias.png style='width:20px'>Energy use and production";
+		}
 	}
 
 	/** Prints a Level 2 stage for the navigation table. All parameters are strings */
@@ -50,18 +54,16 @@
 	{
 		global $stages;
 		$active=$stages[$alias];
+		$color=$level=="Waste"?"#bf5050":"default";
 		if($active)
 			echo "
 				<td onclick=window.location='edit.php?level=$level&sublevel=$sublevel'>
 					<img src=img/$alias.png>
-					<a title='Active Stage' href='edit.php?level=$level&sublevel=$sublevel'>$sublevel</a>
-					<td onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-					<a href=level3.php?level=$level&sublevel=$sublevel>Substages</a> 
-					(<script>document.write(Global.Level3.$level.$sublevel.length)</script>)";
+					<a title='Active Stage' href='edit.php?level=$level&sublevel=$sublevel' style=color:$color>$sublevel</a>";
 		else
 			echo "
-				<td class=inactive title='Inactive'>$sublevel
-				<td class=inactive title='Inactive'>Substages";
+				<td class=inactive title='Inactive'>
+				<img src=img/$alias.png>$sublevel";
 	}
 ?>
 <!doctype html><html><head>
@@ -69,53 +71,49 @@
 	<title>ECAM Web Tool</title>
 	<?php include'imports.php'?>
 	<style>
-		td{vertical-align:middle;padding:1em;font-size:15px}
+		td{vertical-align:middle;padding:0.7em;font-size:15px}
 		td.inactive
 		{
 			color:#aaa;
-			background-color:#c8c8c8;
+			background-color:#e8e8e8;
 			font-size:12px;
 		}
 	</style>
 	<script>
-		function init()
-		{
-			updateResult()
-		}
+		function init() { updateResult() }
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--STAGES--><?php include"navStages.php"?>
 <!--TITLE--><h1>Input data</h1>
-<!--SUBTITLE--><h4>This is an overview of your system. You should start with UWS (Urban Water System). To activate more stages, go to <a href=configuration.php>Configuration</a>.</h4>
+<!--SUBTITLE--><h4>This is an overview of your system. To activate/deactivate stages, go to <a href=configuration.php>Configuration</a>.</h4>
 
 <!--NAVIGATION TABLE-->
 <table id=navigationTable class=inline style="text-align:center;margin:1em">
 	<!--this table style--><style>
-		#navigationTable img{width:40px;vertical-align:middle}
+		#navigationTable img{width:35px;vertical-align:middle}
 		#navigationTable td:not(.inactive){cursor:pointer}
+		#navigationTable td.empty{background:#e8e8e8;cursor:default}
 	</style>
+	<!--stages menu-->
 	<tr>
-		<th style="font-size:13px" colspan=2>Level 1
-		<th style="font-size:13px">Level 2
-		<th style="font-size:13px">Level 3
+		<td onclick=window.location='edit.php?level=UWS' colspan=8>
+		<img src=img/uws.png> <a href=edit.php?level=UWS title="Urban Water System">Urban Water Cycle</a></td>
 	<tr>
-		<td rowspan=8 onclick=window.location='edit.php?level=UWS'>
-			<img src=img/uws.png> <a href=edit.php?level=UWS title="Urban Water System">UWS</a></td>
-		<?php printL1stage('water','Water')?>
-			<?php printL2GENERALstage('waterGen','Water','General')?>
-			<tr><?php printL2stage('waterAbs','Water','Abstraction')?>
-			<tr><?php printL2stage('waterTre','Water','Treatment')?>
-			<tr><?php printL2stage('waterDis','Water','Distribution')?>
-	<tr>
-		<?php printL1stage('waste','Waste')?>
-			<?php printL2GENERALstage('wasteGen','Waste','General')?>
-			<tr><?php printL2stage('wasteCol','Waste','Collection')?>
-			<tr><?php printL2stage('wasteTre','Waste','Treatment')?>
-			<tr><?php printL2stage('wasteDis','Waste','Discharge')?>
+		<?php 
+			printL1stage('water','Water');
+			printL1stage('waste','Waste');
+				?><tr><?php 
+			printL2GENERALstage('waterGen','Water','General');
+			printL2stage('waterAbs','Water','Abstraction');
+			printL2stage('waterTre','Water','Treatment');
+			printL2stage('waterDis','Water','Distribution');
+			printL2GENERALstage('wasteGen','Waste','General');
+			printL2stage('wasteCol','Waste','Collection');
+			printL2stage('wasteTre','Waste','Treatment');
+			printL2stage('wasteDis','Waste','Discharge');
+		?>
 </table>
 <!--DIAGRAM--><?php //include'diagram.php'?>
-
 <!--PREV BUTTON--><div><button class="button prev" onclick=window.location='configuration.php'>Previous</button><div> 
-
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

@@ -20,7 +20,7 @@
 			nlink("getStarted.php",   "Get started");
 			nlink("configuration.php","Configuration");
 			nlink("stages.php",       "Input data");
-			echo "<div class=inactive-tab><a onclick=summaryMenu(event) style=cursor:pointer>Summary</a></div>";
+			echo "<div class=inactive-tab><a id=linkSummary onclick=summaryMenu(event) style=cursor:pointer>Summary</a></div>";
 		}
 	?>
 </div>
@@ -28,15 +28,23 @@
 <?php
 	//if we are in edit.php, make "input data" active
 	if(strpos($_SERVER['PHP_SELF'],"edit.php") || strpos($_SERVER['PHP_SELF'],"level3.php"))
-	{
-		echo "
+	{?>
 			<script>
-				var link = document.querySelector('a[href=\'stages.php\']')
+				var link = document.querySelector('a[href="stages.php"]')
 				link.style.color='black'
 				link.parentNode.className='active-tab'
 			</script>
-		";
-	}
+	<?php }
+
+	if(strpos($_SERVER['PHP_SELF'],"summary.php"))
+	{?>
+		<script>
+			var link = document.querySelector('a#linkSummary')
+			link.style.color='black'
+			link.parentNode.className='active-tab'
+		</script>
+	<?php }
+
 ?>
 
 <script>

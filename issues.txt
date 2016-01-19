@@ -1,0 +1,11 @@
+
+calculated variables
+====================
+	c_uw2  		sums dollars and kWh
+	c_wsg1 		sums kWh and m3
+	c_wsg2 		uses a variable that does not exist (wsg6)
+	c_wwg2 		uses a variable that does not exist (wwg6)
+	c_wwt2		No description in excel	implementation not clear	
+	c_wwt3		No description in excel	implementation not clear	
+	c_wwt4		implementation not clear
+	c_wwt5		description missing in excel

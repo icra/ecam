@@ -1,3 +1,10 @@
+<?php
+	//specified input
+	if(!isset($_GET['id']))die('no input specified');
+	$id=$_GET['id'];
+	//make the id variable live in javascript scope
+	echo "<script>var id='$id';</script>";
+?>
 <!doctype html><html><head>
 	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
@@ -7,6 +14,13 @@
 		td.th{background:#00aff1;color:white;vertical-align:middle}
 		td.input{color:#666;background-color:#eee;cursor:cell}
 		td.input input{font-size:18px}
+		<?php
+			if(preg_match("/ww/",$id))
+			{?>
+				th{background:#bf5050}
+				a,a:visited{color:#bf5050}
+			<?php }
+		?>
 	</style>
 	<script>
 		function init()
@@ -68,8 +82,59 @@
 			newCell.innerHTML="Magnitude"
 			newRow.insertCell(-1).innerHTML=Info[id].magnitude
 
-			//Select units -- only inputs!
+			//if output, show inputs involved
+			if(typeof(currentStage[id])=="function")
+			{
+				//add a row with matched variables in formula
+				newRow=t.insertRow(-1)
+				newCell=newRow.insertCell(-1)
+				newCell.className='th'
+				newCell.innerHTML="Inputs involved"
+				newCell=newRow.insertCell(-1)
+				newCell.innerHTML=(function(){
+					var matches=Formulas.idsPerFormula(currentStage[id].toString())
+					var ret=""
+					matches.forEach(function(match)
+					{
+						var match_localization = locateVariable(match)
+						var match_level = match_localization.level
+						var match_sublevel = match_localization.sublevel
+						var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level]
+						var currentUnit = Global.Configuration.Units[match] || Info[match].unit
+						var currValue = typeof(match_stage[match])=="function" ? match_stage[match]() : match_stage[match];
+						currValue/=Units.multiplier(match);
+						ret+="<div><a href=variable.php?id="+match+" title='"+Info[match].description+"'>"+match+"</a> "+
+						" = "+currValue+" "+currentUnit+
+						"</div>"
+					});
+					return ret;
+				})();
+			}
 
+			//Value
+			newRow=t.insertRow(-1)
+			newCell=newRow.insertCell(-1)
+			newCell.className='th'
+			newCell.innerHTML="Value"
+			newCell=newRow.insertCell(-1)
+			if(typeof(currentStage[id])=="function")
+			{
+				newCell.innerHTML=(function()
+				{
+					var formula="<b>Formula</b>: "+id+"="+Formulas.prettify(currentStage[id].toString());
+					var currValue=currentStage[id]()/Units.multiplier(id);
+					return formula+"<br><br><b>Current Value</b>: "+currValue+" "+Info[id].unit;
+					
+				})();
+			}
+			else
+			{
+				newCell.innerHTML=currentStage[id]/Units.multiplier(id);
+				newCell.className='input'
+				newCell.setAttribute('onclick',"transformField(this)")
+			}
+
+			//Select units -- only inputs!
 			if(typeof(currentStage[id])=='number')
 			{
 				newRow=t.insertRow(-1)
@@ -94,49 +159,6 @@
 					str+="</select>"
 					return str
 				})();
-			}
-
-			//Value
-			newRow=t.insertRow(-1)
-			newCell=newRow.insertCell(-1)
-			newCell.className='th'
-			newCell.innerHTML="Value"
-			newCell=newRow.insertCell(-1)
-			if(typeof(currentStage[id])=="function")
-			{
-				var aux="<b>Formula</b>: "+id+" = "+Formulas.prettify(currentStage[id].toString())+
-					"<br><br>"+
-					"<b>Current Value</b>: "+currentStage[id]()+" "+Info[id].unit
-				newCell.innerHTML=aux
-				//add a row with matched variables in formula
-				newRow=t.insertRow(-1)
-				newCell=newRow.insertCell(-1)
-				newCell.className='th'
-				newCell.innerHTML="Inputs involved"
-				newCell=newRow.insertCell(-1)
-				var matches=Formulas.idsPerFormula(currentStage[id].toString())
-				var aux=""
-				matches.forEach(function(match)
-				{
-					var match_localization = locateVariable(match)
-					match_level = match_localization.level
-					match_sublevel = match_localization.sublevel
-					var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level]
-
-					aux+="<div><a href=variable.php?id="+match+" title='"+Info[match].description+"'>"+match+"</a> "+
-					" = "+match_stage[match]+" "+Info[match].unit+
-					"</div>"
-				})
-				newCell.innerHTML=aux
-			}
-			else
-			{
-				var currentUnit = Global.Configuration.Units[id] || Info[id].unit
-				var multiplier = Units.multiplier(id);
-				var currentValue = currentStage[id]/multiplier;
-				newCell.innerHTML=currentValue+" "+currentUnit
-				newCell.className='input'
-				newCell.setAttribute('onclick',"transformField(this)")
 			}
 		}
 
@@ -163,13 +185,6 @@
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--STAGES--><?php include"navStages.php"?>
-<?php
-	//specified input
-	if(!isset($_GET['id']))die('no input specified');
-	$id=$_GET['id'];
-	//make the id variable live in javascript scope
-	echo "<script>var id='$id';</script>";
-?>
 
 <script>
 	//Define some global variables

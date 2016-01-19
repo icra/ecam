@@ -47,6 +47,9 @@ function locateVariable(code)
 var Info = {
 	//L1 UWS
 	"uw1":{description:"Conversion factor for grid electricity",magnitude:"Conversion",unit:"kgCO2e/kWh",},
+	"c_uw1":{formula:"ws4+ww1",description:"Energy Costs",magnitude:"Currency",unit:"USD"},
+	"c_uw2":{formula:"ws5+ww2",description:"Running Costs",magnitude:"Currency",unit:"USD"},
+	"c_uw3":{formula:"c_wsg1+c_wwg1",description:"Total electric energy consumed from the grid and from self-production",magnitude:"Energy",unit:"kWh"},
 
 	//L1 WATER SUPPLY
 	"ws1":{description:"Serviced population within the water utility area of service",                           magnitude:"People",  unit:"People",},
@@ -70,6 +73,10 @@ var Info = {
 	"wsg3":{description:"Non-water related renewable electricity production by the utility",magnitude:"Energy",unit:"kWh",},
 	"wsg4":{description:"Non-water related renewable electricity sold by the utility",magnitude:"Energy",unit:"kWh",},
 	"wsg5":{description:"Heat energy, calculated from steam production and gas flow rates, provided to neighboring  districts for heating or cooling",magnitude:"Energy",unit:"Joule",},
+	//c_wsg1	Total eletrical energy consumed from the grid and from self-production related to the urban drinking water system 	kWh	= wsa1 + wst1+ wsd1	Total energy consumed by drinking water utility 
+	//c_wsg2	=ws5 - wsg4 - wsg6	Ultimately this number is multiplied by EF gV9
+	"c_wsg1":{formula:"wsa1+wst1+wsd1",description:"Total eletrical energy consumed from the grid and from self-production related to the urban drinking water system",magnitude:"Energy",unit:"kWh"},
+	"c_wsg2":{formula:"ws5-wsg4-wsg6",description:"ask why there is no wsg6",magnitude:"Energy",unit:"kWh"},
 
 	//L2 Water Abstraction
 	// wsa1 Electric energy consumed for pumping abstracted water (from the grid and self-produced)	kWh
@@ -173,6 +180,10 @@ var Info = {
 	"ww9" :{description:"Distance to disposal site",                                                          magnitude:"Distance",      unit:"km",},
 	"ww10":{description:"Enter nitrogen effluent limit",                                                      magnitude:"Concentration", unit:"mg/L",},
 	"ww11":{description:"Volume of Fuel consumed",                                                            magnitude:"Volume",        unit:"L",},
+	//c_wwg1 Total electrical energy consumed from the grid and from self-production related to the urban wastewater system	kWh	= wwc2 + wwt22 + wwd3	Total energy consumed in wastewater cycle 
+	//c_wwg2 = ww3 - wwg4 - wwg6	Ultimately this number is multiplied by EF gV9
+	c_wwg1:{formula:"wwc2+wwt22+wwd3",description:"Total electrical energy consumed from the grid and from self-production related to the urban wastewater system",magnitude:"Energy",unit:"kWh",},
+	c_wwg2:{formula:"ww3-wwg4-wwg6",description:"ask why there is no wwg6",magnitude:"Energy",unit:"kWh",},
 
 	//L2 Wastewater General
 	// wwg1	Water-related electrical energy produced by the utility (renewable energy) during the assessment period	kWh
@@ -207,7 +218,13 @@ var Info = {
 	// wwt12 % methane in biogas	%
 	// wwt13 BOD influent (average)	mg/L
 	// wwt14 BOD mass removed 	kg BOD
+	"wwt1" :{description:"<span style=color:red>No description in excel</span>",                                            magnitude:"",       unit:"",},
 	"wwt2" :{description:"Biogas produced",                                                    magnitude:"Volume",       unit:"m3",},
+	"wwt3" :{description:"<span style=color:red>No description in excel</span>",                                            magnitude:"Volume",       unit:"m3",},
+	"wwt4" :{description:"<span style=color:red>No description in excel</span>",                                            magnitude:"",       unit:"",},
+	"wwt5" :{description:"<span style=color:red>No description in excel</span>",                                            magnitude:"",       unit:"",},
+	"wwt6" :{description:"<span style=color:red>No description in excel</span>",                                            magnitude:"",       unit:"",},
+	"wwt7" :{description:"<span style=color:red>No description in excel</span>",                                            magnitude:"",       unit:"",},
 	"wwt8" :{description:"Volume of treated wastewater",                                       magnitude:"Volume",       unit:"m3",},
 	"wwt9" :{description:"Electric energy consumed in WWTPs (from the grid and self-produced)",magnitude:"Energy",       unit:"kWh",},
 	"wwt10":{description:"BOD effluent (average)",                                             magnitude:"Mass",         unit:"kg",},
@@ -215,6 +232,15 @@ var Info = {
 	"wwt12":{description:"Fraction of methane in biogas",                                      magnitude:"Fraction",     unit:"%",},
 	"wwt13":{description:"BOD influent (average)",                                             magnitude:"Concentration",unit:"mg/L",},
 	"wwt14":{description:"BOD mass removed",                                                   magnitude:"Mass",         unit:"kg",},
+	//c_wwt2 use ws1 for population	Nitrous oxide (CO2e) emitted in wastewater treatment plants, expressed as CO2e using the conversion factor of  298 kg of CO2 per kg of N2O. 	This variable is not added to the total GHG emissions in this tool, since real data on N2O actually emitted is not available and the IPCC guidelines are in the process of being improved to move away from the currently proposed method, which is based on the emissions of 3.2 g per capita/ year, independently from the treatment type or the operational care. It is however shown here to highlight its importance.This variable could be calculated as a sum of corresponding variables speciation (dN1.a, dN1.b, ...).  
+	//c_wwt3 use = ww5 - ws1 and defaults to calc kgCO2e, or wwd2 if known	Indirect CO2e emitted in receiving waters due to nitrogen in wastewater effluent without treatment.  Based upon BOD in the WWTP influent multiplied by default emission factor	"
+	//c_wwt4 Total Energy content of biogas valorized in the Co-generator	kWh		Sum of energy content of biogas used in cogeneration during the assessment period by all wastewater treatment plants managed by the undertaking	 This variable should be calculated by the expression "biogas volume used in cogeneration x % of methane in biogas x energy value of methane"
+	//c_wwt5 kg CO2e	= wwt5 x 0.005 x (44/28)	Indirect CO2e emitted in receiving waters due to nitrogen in wastewater effluent.  Based upon nitrogen in the WWTP effluent multiplied by default emission factor	
+	c_wwt1:{formula:"wwt2-wwt3",              description:"Biogas flared",magnitude:"Volume",unit:"Nm3"},
+	c_wwt2:{formula:"",                       description:"No description in excel",magnitude:"",unit:""},
+	c_wwt3:{formula:"",                       description:"No description in excel",magnitude:"",unit:""},
+	c_wwt4:{formula:"no formula",             description:"Total Energy content of biogas valorized in the Co-generator",magnitude:"Energy",unit:"kWh"},
+	c_wwt5:{formula:"wwt5 x 0.005 x (44/28)", description:"description missing in excel",magnitude:"",unit:""},
 
 		//L3 Wastewater Treatment
 		// wwt15[n] Tests complying with discharge consents	no.

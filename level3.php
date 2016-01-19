@@ -34,6 +34,13 @@
 			outline:none;
 			font-size:20px;
 		}
+		<?php
+			if($level=="Waste")
+			{?>
+				th{background:#bf5050}
+				a,a:visited{color:#bf5050}
+			<?php }
+		?>
 	</style>
 	<script>
 		<?php
@@ -344,7 +351,7 @@
 	$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages (Level 3)</a>";
 ?>
 <!--TITLE--><h1><?php echo $title?></h1>
-<!--HELP--><h4>You can subdivide "<?php echo $sublevel?>" in different substages</h4>
+<!--HELP--><h4>You can subdivide "<?php echo "$level $sublevel"?>" in different substages</h4>
 <!--new substage button--><button onclick=newSubstage() class=button>+ New Substage</button>
 <!--substages counter--><div class=inline style="border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
 <!--SUBSTAGES TABLE--><table id=substages style=margin:1em><tr><td style=border:none colspan=2></table>

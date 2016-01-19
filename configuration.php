@@ -48,9 +48,10 @@
 			//go over Levels
 			for(stage in Global.Configuration["Active Stages"])
 			{
+				/**skip is always active*/
+				switch(stage){case 'uws':case 'waterGen':case 'wasteGen':continue;break;}
 				if(Global.Configuration["Active Stages"][stage])
 				{
-					/**uws is always active*/if(stage=="uws"){continue}
 					/**set checked*/document.getElementById(stage).checked=true
 					activate(stage)
 				}
@@ -115,7 +116,7 @@
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Configuration</h1>
-<!--SUBTITLE--><h4>Which stages form your system?</h4>
+<!--SUBTITLE--><h4>Which stages form your system? Click to activate stages.</h4>
 
 <!--MAIN-->
 <div style=content-align:center;width:80%>

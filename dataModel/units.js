@@ -11,6 +11,7 @@ var Units =
 	multiplier:function(field)
 	{
 		//if magnitude is not inside Units, multiplier is 1
+		if(Info[field]===undefined){return 1}
 		if(Units[Info[field].magnitude]===undefined){return 1}
 
 		//look for current unit: first inside configuration, if not, in Info[field]

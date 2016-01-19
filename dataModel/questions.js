@@ -5,15 +5,16 @@
 
 var Questions = {
 
+	//All questions, unsorted. sorting is in Global.Configuration.Questions
 	varsPerQuestion:
 	{
-		"Do you have fuel engines to run pumps" :['ws1','ws2'],
+		"Do you have fuel engines to run pumps" :[],
 		"Are you producing biogas"              :[],
 		"Are you producing electrical energy"   :[],
 		"Is your topography flat"               :[],
 	},
 
-	//HIDE VARIABLES ACCORDING TO QUESTIONS IN CONFIGURATION 
+	//get a list of variables that have to be hidden according to configuration
 	varsToHide:function()
 	{
 		var vars=[];
