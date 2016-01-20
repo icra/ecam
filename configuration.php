@@ -121,7 +121,7 @@
 
 <!--MAIN CONTAINER-->
 <div>
-	<!--SELECT STAGES-->
+	<!--SELECT STAGE-->
 	<table id=selectStage class=inline style="" >
 		<tr><th>Level 1<th>Level 2
 			<!--this table styles--><style>
@@ -132,12 +132,12 @@
 				#selectStage label{cursor:pointer;display:block;min-height:100%;padding:0.5em}
 			</style>
 			<?php 
-				function printL2stage($alias,$name,$newRow)
+				function printL2stage($class,$alias,$name,$newRow)
 				{
 					if($newRow){echo "<tr>";}
 					echo "<td>
 						<label style=color:#ccc>
-							<input type=checkbox disabled id=$alias class=water onchange=activate(this.id)> 
+							<input type=checkbox disabled id=$alias class=$class onchange=activate(this.id)> 
 							<img src=img/$alias.png>
 							$name
 						</label>";
@@ -150,14 +150,14 @@
 							<img src=img/$alias.png>$name
 						</label>";
 				}
-				printL1stage("water","Water supply");
-				printL2stage("waterAbs","Abstraction",false);
-				printL2stage("waterTre","Treatment",true);
-				printL2stage("waterDis","Distribution",true);
-				printL1stage('waste',"Wastewater");
-				printL2stage("wasteCol","Collection",false);
-				printL2stage("wasteTre","Treatment",true);
-				printL2stage("wasteDis","Discharge",true);
+				printL1stage("water","water",   "Water supply");
+				printL2stage("water","waterAbs","Abstraction", false);
+				printL2stage("water","waterTre","Treatment",   true);
+				printL2stage("water","waterDis","Distribution",true);
+				printL1stage("waste",'waste',  "Wastewater");
+				printL2stage("waste","wasteCol","Collection",false);
+				printL2stage("waste","wasteTre","Treatment", true);
+				printL2stage("waste","wasteDis","Discharge", true);
 			?>
 	</table>
 
