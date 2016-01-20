@@ -271,29 +271,34 @@
 			for(field in CurrentStage)
 			{
 				//only functions
-				if(typeof(CurrentStage[field])!="function")continue
-				var newRow=t.insertRow(-1)
-				var formula=CurrentStage[field].toString()
-				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+formula+"',1)")
-				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+formula+"',0)")
-				newRow.setAttribute('title',field+"="+Formulas.prettify(formula))
-				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
-				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>"
-				newRow.insertCell(-1).innerHTML=CurrentStage[field]()||0
-				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>"
+				if(typeof(CurrentStage[field])!="function"){continue;}
+				var newRow=t.insertRow(-1);
+				var formula=CurrentStage[field].toString();
+				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+formula+"',1)");
+				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+formula+"',0)");
+				newRow.setAttribute('title',field+"="+Formulas.prettify(formula));
+				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
+				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
+				//level 2
+				newRow.insertCell(-1).innerHTML=CurrentStage[field]()/Units.multiplier(field)||0;
+				//unit
+				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
 
-				//TODO
-				/*
-				prettify()
-				*/
-				var inputs = Formulas.idsPerFormula(CurrentStage[field].toString())
-				console.log(inputs)
-				//TODO
-
-				for(s in substages)
-				{
-					newRow.insertCell(-1).innerHTML=CurrentStage[field]
-				}
+				//compute current function "field" for each substage
+				(function(){
+					//TODO
+					var formula=CurrentStage[field].toString();
+					var inputs=Formulas.idsPerFormula(formula);
+					inputs.forEach(function(input)
+					{
+						formula=formula.replace(input,input+"[0]")
+					});
+					for(s in substages)
+					{
+						//we need to substiute in formula for example wwt2 per wwt2[s]
+						newRow.insertCell(-1).innerHTML=formula.replace(/[0]/g,'['+s+']')
+					}
+				})();
 			}
 		}
 
@@ -337,7 +342,6 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--STAGES--><?php include"navStages.php"?>
 <!--TITLE-->
 <?php 
 	//Navigable <h1>title</h1>

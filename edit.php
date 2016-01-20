@@ -24,6 +24,8 @@
 				a,a:visited{color:#bf5050}
 			<?php }
 		?>
+		/* GO TO L2 BUTTONS*/
+		button img {margin:0;vertical-align:middle;width:20px;padding:0} /*icons inside buttons to navigate to Level2*/
 	</style>
 	<script>
 		/** 
@@ -135,7 +137,7 @@
 				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+formula+"',0)")
 				/*description*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>"
 				/*code*/ newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
-				/*value*/ newRow.insertCell(-1).innerHTML=CurrentLevel[field]()||0 //if nan, outputs 0
+				/*value*/ newRow.insertCell(-1).innerHTML=CurrentLevel[field]()/Units.multiplier(field)||0 //if nan, outputs 0
 				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>"
 			}
 		}
@@ -164,7 +166,6 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--STAGES--><?php include"navStages.php"?>
 
 <!--TITLE-->
 <?php 
@@ -196,10 +197,10 @@
 			if($sublevel!="General")
 			{
 				$color=$level=="Waste"?"lightcoral":"lightblue";
-				echo "<button class='button next'
-					style='background:$color;'
-					onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-					Level 3 Substages
+				echo "<button class=button
+						style='background:$color;'
+						onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
+						Level 3 Substages
 					</button>";
 			}
 		}
@@ -210,17 +211,17 @@
 			{
 				case "Water": 
 					echo 'Level 2
-						<button stage=waterGen class="button next" onclick=window.location="edit.php?level=Water&sublevel=General" 		style=background:lightblue> Energy use and production </button> 
-						<button stage=waterAbs class="button next" onclick=window.location="edit.php?level=Water&sublevel=Abstraction" 	style=background:lightblue> Water Abstraction	</button> 
-						<button stage=waterTre class="button next" onclick=window.location="edit.php?level=Water&sublevel=Treatment" 	style=background:lightblue> Water Treatment	</button>
-						<button stage=waterDis class="button next" onclick=window.location="edit.php?level=Water&sublevel=Distribution" style=background:lightblue> Water Distribution	</button>';
+						<button stage=waterGen class=button onclick=window.location="edit.php?level=Water&sublevel=General" 		style=background:lightblue> <img src=img/waterGen.png> Energy use and production </button> 
+						<button stage=waterAbs class=button onclick=window.location="edit.php?level=Water&sublevel=Abstraction" 	style=background:lightblue> <img src=img/waterAbs.png> Abstraction	</button> 
+						<button stage=waterTre class=button onclick=window.location="edit.php?level=Water&sublevel=Treatment" 	style=background:lightblue> <img src=img/waterTre.png> Treatment	</button>
+						<button stage=waterDis class=button onclick=window.location="edit.php?level=Water&sublevel=Distribution" style=background:lightblue> <img src=img/waterDis.png> Distribution	</button>';
 						break;
 				case "Waste": 
 					echo 'Level 2
-						<button stage=wasteGen class="button next" onclick=window.location="edit.php?level=Waste&sublevel=General" 		style=background:lightcoral> Energy use and production </button> 
-						<button stage=wasteCol class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Collection" 	style=background:lightcoral> Wastewater Collection	</button> 
-						<button stage=wasteTre class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Treatment" 	style=background:lightcoral> Wastewater Treatment	</button>
-						<button stage=wasteDis class="button next" onclick=window.location="edit.php?level=Waste&sublevel=Discharge" 	style=background:lightcoral> Wastewater Discharge	</button>';
+						<button stage=wasteGen class=button onclick=window.location="edit.php?level=Waste&sublevel=General" 		style=background:lightcoral> <img src=img/wasteGen.png> Energy use and production </button> 
+						<button stage=wasteCol class=button onclick=window.location="edit.php?level=Waste&sublevel=Collection" 	style=background:lightcoral> <img src=img/wasteCol.png> Collection	</button> 
+						<button stage=wasteTre class=button onclick=window.location="edit.php?level=Waste&sublevel=Treatment" 	style=background:lightcoral> <img src=img/wasteTre.png> Treatment	</button>
+						<button stage=wasteDis class=button onclick=window.location="edit.php?level=Waste&sublevel=Discharge" 	style=background:lightcoral> <img src=img/wasteDis.png> Discharge	</button>';
 						break;
 			}
 		}

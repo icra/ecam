@@ -86,7 +86,7 @@
 
 				var description=Info[variable]?Info[variable].description:"<span style=color:#ccc>no description</span>";
 
-				var unit = Global.Configuration.Units[variable] || Info[variable].unit
+				var unit = Global.Configuration.Units[variable] || Info[variable].unit || "no unit"
 
 				var multiplier = Units.multiplier(variable);
 
@@ -101,7 +101,6 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--STAGES--><?php include"navStages.php"?>
 <!--TITLE--><h1>Summary — All <?php echo $type?>s</h1>
 <!--STAGES--><?php include"activeStages.php"?>
 

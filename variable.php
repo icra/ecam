@@ -58,7 +58,10 @@
 			newCell=newRow.insertCell(-1)
 			newCell.innerHTML="<a href=edit.php?level="+level+">"+levelAlias+"</a>"
 			if(sublevel!=0)
-				newCell.innerHTML+=" &rsaquo; <a href=edit.php?level="+level+"&sublevel="+sublevel+">"+sublevel+"</a>"
+			{
+				var sublevelName=sublevel=="General" ? "Energy use and production" : sublevel;
+				newCell.innerHTML+=" &rsaquo; <a href=edit.php?level="+level+"&sublevel="+sublevel+">"+sublevelName+"</a>"
+			}
 
 			//Type (input or output)
 			newRow=t.insertRow(-1)
@@ -202,7 +205,6 @@
 	</script>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--STAGES--><?php include"navStages.php"?>
 
 <script>
 	//Define some global variables

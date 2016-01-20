@@ -1,9 +1,20 @@
++--------+
+| Issues |
++--------+
 
-calculated variables
-====================
-	c_wsg2 		uses a variable that does not exist (wsg6)
-	c_wwg2 		uses a variable that does not exist (wwg6)
-	c_wwt2		No description in excel	implementation not clear	
-	c_wwt3		No description in excel	implementation not clear	
-	c_wwt4		implementation not clear
-	c_wwt5		description missing in excel
+Inputs
+------
+ | - Descriptions that start with "Enter X value" should be renamed to "X value"?
+ | - ww12    Biogas flared Y/N		                                                             
+ | - ww13    Biogas recovered  Y/N	                                                             
+ | - wwt4    Fuel Type if wwt4= diesel then iS1=iS1-1                                            
+ | - wwt7    Enter geographic location used to apply protein consumption rate for variable calc. 
+ | - wwt10_n BOD influent (average)	mg/L	-> should be effluent ?
+
+Outputs
+-------
+c_ww51 units?
+c_ww52 units?
+c_ww54 units?
+c_ww54 units?
+

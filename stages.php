@@ -45,7 +45,7 @@
 		else
 			echo "
 				<td class=inactive title='Inactive'>
-				<img src=img/$alias.png>$sublevelName";
+				<img src=img/$alias.png> $sublevelName";
 	}
 ?>
 <!doctype html><html><head>
@@ -67,7 +67,6 @@
 </head><body onload=init()><center>
 
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--STAGES--><?php include"navStages.php"?>
 <!--TITLE--><h1>Input data</h1>
 <!--SUBTITLE--><h4>This is an overview of your system. To activate/deactivate stages, go to <a href=configuration.php>Configuration</a>.</h4>
 
@@ -76,7 +75,7 @@
 	<!--this table style--><style>
 		#navigationTable img{width:35px;vertical-align:middle}
 		#navigationTable td:not(.inactive){cursor:pointer}
-		#navigationTable td:not(.inactive):hover{background:linen;transition:all 1s}
+		#navigationTable td:not(.inactive):hover{background:lightgreen;transition:all 0.5s}
 		#navigationTable td.empty{background:#e8e8e8;cursor:default}
 	</style>
 	<!--stages menu-->
