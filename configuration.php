@@ -132,6 +132,14 @@
 				#selectStage label{cursor:pointer;display:block;min-height:100%;padding:0.5em}
 			</style>
 			<?php 
+				function printL1stage($alias,$name)
+				{
+					echo "<tr><td rowspan=4 style=text-align:center> 
+						<label>
+							<input type=checkbox id=$alias onchange=activate(this.id)> 
+							<img src=img/$alias.png>$name
+						</label>";
+				}
 				function printL2stage($class,$alias,$name,$newRow)
 				{
 					if($newRow){echo "<tr>";}
@@ -142,20 +150,14 @@
 							$name
 						</label>";
 				}
-				function printL1stage($alias,$name)
-				{
-					echo "<tr><td rowspan=3> 
-						<label>
-							<input type=checkbox id=$alias onchange=activate(this.id)> 
-							<img src=img/$alias.png>$name
-						</label>";
-				}
-				printL1stage("water","water",   "Water supply");
-				printL2stage("water","waterAbs","Abstraction", false);
+				printL1stage("water",   "Water supply");
+				printL2stage("water","waterGen","Energy use and production", false);
+				printL2stage("water","waterAbs","Abstraction", true);
 				printL2stage("water","waterTre","Treatment",   true);
 				printL2stage("water","waterDis","Distribution",true);
-				printL1stage("waste",'waste',  "Wastewater");
-				printL2stage("waste","wasteCol","Collection",false);
+				printL1stage('waste',  "Wastewater");
+				printL2stage("waste","wasteGen","Energy use and production",false);
+				printL2stage("waste","wasteCol","Collection",true);
 				printL2stage("waste","wasteTre","Treatment", true);
 				printL2stage("waste","wasteDis","Discharge", true);
 			?>
