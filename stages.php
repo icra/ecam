@@ -24,46 +24,28 @@
 		else echo "<td colspan=4 class=inactive title='Inactive'> <img src=img/$alias.png> $levelAlias";
 	}
 
-	/** Prints a Level 2 GENERAL stage for the navigation table. All parameters are strings */
-	function printL2GENERALstage($alias,$level,$sublevel)
-	{
-		global $stages;
-		switch($alias)
-		{
-			case "waterGen":$alias="water";$active=$stages['water']?1:0;$color="default";break;
-			case "wasteGen":$alias="waste";$active=$stages['waste']?1:0;$color="#bf5050";break;
-		}
-		if($active)
-		{
-			echo "
-				<td 
-					onclick=window.location='edit.php?level=$level&sublevel=$sublevel'>
-					<img src=img/$alias.png style='width:20px'>
-					<a title='Active Stage' href='edit.php?level=$level&sublevel=$sublevel' style=color:$color>Energy use and production</a>
-					";
-		}
-		else
-		{
-			echo "<td class=inactive title='Inactive'> 
-					<img src=img/$alias.png style='width:20px'>Energy use and production";
-		}
-	}
-
 	/** Prints a Level 2 stage for the navigation table. All parameters are strings */
 	function printL2stage($alias,$level,$sublevel)
 	{
 		global $stages;
+		switch($sublevel)
+		{
+			case "General":
+				$sublevelName="Energy use and production";break;
+			default:
+				$sublevelName=$sublevel;break;
+		}
 		$active=$stages[$alias];
 		$color=$level=="Waste"?"#bf5050":"default";
 		if($active)
 			echo "
 				<td onclick=window.location='edit.php?level=$level&sublevel=$sublevel'>
 					<img src=img/$alias.png>
-					<a title='Active Stage' href='edit.php?level=$level&sublevel=$sublevel' style=color:$color>$sublevel</a>";
+					<a title='Active Stage' href='edit.php?level=$level&sublevel=$sublevel' style=color:$color>$sublevelName</a>";
 		else
 			echo "
 				<td class=inactive title='Inactive'>
-				<img src=img/$alias.png>$sublevel";
+				<img src=img/$alias.png>$sublevelName";
 	}
 ?>
 <!doctype html><html><head>
@@ -106,11 +88,11 @@
 			printL1stage('water','Water');
 			printL1stage('waste','Waste');
 			?><tr><?php 
-			printL2GENERALstage('waterGen','Water','General');
+			printL2stage('waterGen','Water','General');
 			printL2stage('waterAbs','Water','Abstraction');
 			printL2stage('waterTre','Water','Treatment');
 			printL2stage('waterDis','Water','Distribution');
-			printL2GENERALstage('wasteGen','Waste','General');
+			printL2stage('wasteGen','Waste','General');
 			printL2stage('wasteCol','Waste','Collection');
 			printL2stage('wasteTre','Waste','Treatment');
 			printL2stage('wasteDis','Waste','Discharge');

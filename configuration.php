@@ -50,7 +50,7 @@
 			for(stage in Global.Configuration["Active Stages"])
 			{
 				/**skip is always active*/
-				switch(stage){case 'uws':case 'waterGen':case 'wasteGen':continue;break;}
+				switch(stage){case 'uws':continue;break;}
 				if(Global.Configuration["Active Stages"][stage])
 				{
 					/**set checked*/document.getElementById(stage).checked=true
