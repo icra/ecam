@@ -11,7 +11,7 @@
 		$active=$stages[$alias];
 		switch($level)
 		{
-			case "Water":$levelAlias="Water Supply";$color="default";break;
+			case "Water":$levelAlias="Water supply";$color="default";break;
 			case "Waste":$levelAlias="Wastewater";$color="#bf5050";break;
 			default:$levelAlias=$level;break;
 		}
@@ -81,7 +81,7 @@
 	<!--stages menu-->
 	<tr>
 		<td onclick=window.location='edit.php?level=UWS' colspan=8>
-		<img src=img/uws.png> <a href=edit.php?level=UWS title="Urban Water System">Urban Water Cycle</a></td>
+		<img src=img/uws.png> <a href=edit.php?level=UWS title="Urban Water System">Urban water cycle</a></td>
 	<tr>
 		<?php 
 			printL1stage('water','Water');

@@ -68,7 +68,7 @@
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
 			newCell.innerHTML="Type"
-			newRow.insertCell(-1).innerHTML=typeof(currentStage[id])=="function"?"Output":"Input"
+			newRow.insertCell(-1).innerHTML=typeof(currentStage[id])=="function"? ("Output <br><b>Formula:</b> "+Formulas.prettify(currentStage[id].toString())) : "Input"
 
 			//Magnitude
 			newRow=t.insertRow(-1)
@@ -77,14 +77,14 @@
 			newCell.innerHTML="Magnitude"
 			newRow.insertCell(-1).innerHTML=Info[id].magnitude
 
-			//if output, show inputs involved
+			//if output, show inputs involved, else show outputs involved
 			if(typeof(currentStage[id])=="function")
 			{
 				//add a row with matched variables in formula
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
-				newCell.innerHTML="Inputs involved"
+				newCell.innerHTML="Inputs needed"
 				newCell=newRow.insertCell(-1)
 				newCell.innerHTML=(function(){
 					var matches=Formulas.idsPerFormula(currentStage[id].toString())
@@ -92,16 +92,20 @@
 					matches.forEach(function(match)
 					{
 						var match_localization = locateVariable(match)
+						console.log(match_localization.toString())
 						var match_level = match_localization.level
 						var match_sublevel = match_localization.sublevel
 						var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level]
 						var currentUnit = Global.Configuration.Units[match] || Info[match].unit
+						//matches can be either numbers or other functions
 						var currValue = typeof(match_stage[match])=="function" ? match_stage[match]() : match_stage[match];
 						currValue/=Units.multiplier(match);
 						var color = match.search('ww')==-1 ? "#0aaff1":"#bf5050";
-						ret+="<div><a style='color:"+color+"' href=variable.php?id="+match+" title='"+Info[match].description+"'>"+match+"</a> "+
-						" = "+currValue+" "+currentUnit+
-						"</div>"
+						ret+="<div>"+
+							match_localization.toString()+
+							"<a style='color:"+color+"' href=variable.php?id="+match+" title='"+Info[match].description+"'>"+match+"</a> "+
+							" = "+currValue+" "+currentUnit+
+							"</div>"
 					});
 					return ret;
 				})();
@@ -111,22 +115,27 @@
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
-				newCell.innerHTML="Outputs involved"
+				newCell.innerHTML="Used to calculate"
 				newCell=newRow.insertCell(-1)
 				newCell.style.backgroundColor="yellow"
 				newCell.innerHTML=(function(){
 					//look for the code "id" inside each output
 					var ret="";
-					Formulas.outputsPerInput(id).forEach(function(output){
+					Formulas.outputsPerInput(id).forEach(function(output)
+					{
 						var match_localization = locateVariable(output)
 						var match_level = match_localization.level
 						var match_sublevel = match_localization.sublevel
 						var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level]
 						var currentUnit = Global.Configuration.Units[output] || Info[output].unit
 						var formula = Formulas.prettify(match_stage[output].toString());
+						var currValue = match_stage[output]()/Units.multiplier(output);
 						var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
-						ret+="<div><a style='color:"+color+"' title='"+Info[output].description+"' href=variable.php?id="+output+">"+output+
-						"</a> = "+formula+" = "+match_stage[output]()/Units.multiplier(output)+" "+currentUnit+"</div>";
+						ret+="<div>"+
+							match_localization.toString()+
+							" <a style='color:"+color+"' title='"+Info[output].description+"' href=variable.php?id="+output+">"+output+"</a> = "+
+							formula+" = "+currValue+" "+currentUnit+
+							"</div>";
 					});
 					return ret;
 				})();
@@ -140,12 +149,11 @@
 			newCell=newRow.insertCell(-1)
 			if(typeof(currentStage[id])=="function")
 			{
+				newCell.style.backgroundColor='yellow'
 				newCell.innerHTML=(function()
 				{
-					var formula="<b>Formula</b>: "+id+"="+Formulas.prettify(currentStage[id].toString());
 					var currValue=currentStage[id]()/Units.multiplier(id);
-					return formula+"<br><br><b>Current Value</b>: "+currValue+" "+Info[id].unit;
-					
+					return currValue+" "+Info[id].unit;
 				})();
 			}
 			else
@@ -227,8 +235,8 @@
 	}
 </script>
 
-<!--TITLE--><h1><script>document.write(Info[id].description)</script></h1>
-<!--subtitle--><h4>Detailed info (<script>document.write(id)</script>)</h4>
+<!--subtitle--><h4>Detailed info</h4>
+<!--TITLE--><h1><script>document.write("["+id+"]: "+Info[id].description)</script></h1>
 <!--VARIABLE INFO--><table style="text-align:left" id=info></table>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

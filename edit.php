@@ -72,19 +72,15 @@
 			for(field in CurrentLevel)
 			{
 				if(typeof(CurrentLevel[field])!="number" ){continue;}
-				//new row
-				var newRow=t.insertRow(-1);
-				newRow.setAttribute('field',field);
-				//description
-				newRow.insertCell(-1).innerHTML= Info[field] ? Info[field].description : "<span style=color:#ccc>not defined</span>";
-				//code
-				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
+				/*new row*/var newRow=t.insertRow(-1);
+				/*attribute field==field>*/newRow.setAttribute('field',field);
+				/*code*/ newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
+				/*description*/ newRow.insertCell(-1).innerHTML= Info[field] ? Info[field].description : "<span style=color:#ccc>not defined</span>";
 				//editable cell
 				var newCell=newRow.insertCell(-1);
 				newCell.className="input";
 				newCell.setAttribute('onclick','transformField(this)');
-				//value
-				newCell.innerHTML=CurrentLevel[field]/Units.multiplier(field);
+				/*value*/newCell.innerHTML=CurrentLevel[field]/Units.multiplier(field);
 				//unit
 				newRow.insertCell(-1).innerHTML=(function()
 				{
@@ -111,7 +107,7 @@
 				//data quality
 				newRow.insertCell(-1).innerHTML=(function(){
 					var select = document.createElement('select');
-					['Calculated','Estimated'].forEach(function(opt)
+					['Actual','Estimated'].forEach(function(opt)
 					{
 						var option=document.createElement('option');
 						option.innerHTML=opt;
@@ -130,15 +126,23 @@
 			for(field in CurrentLevel)
 			{
 				if(typeof(CurrentLevel[field])!="function"){continue;}
-				var newRow=t.insertRow(-1)
+				var newCell,newRow=t.insertRow(-1)
 				var formula=CurrentLevel[field].toString()
-				newRow.setAttribute('title',field+"="+Formulas.prettify(formula))
+				newRow.setAttribute('title',Formulas.prettify(formula))
 				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+formula+"',1)")
 				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+formula+"',0)")
-				/*description*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>"
 				/*code*/ newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
+				/*description*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>"
 				/*value*/ newRow.insertCell(-1).innerHTML=CurrentLevel[field]()/Units.multiplier(field)||0 //if nan, outputs 0
 				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>"
+				/*circle indicator*/ 
+				newCell=newRow.insertCell(-1);
+				newCell.style.textAlign='center';
+				newCell.innerHTML=(function(){
+					var colors=['red','orange','green'];
+					/*random one for now*/var color = colors[Math.floor(Math.random()*colors.length)];
+					return "<span style=font-size:20px;color:"+color+">&#9899;</span>"
+				})();
 			}
 		}
 
@@ -252,13 +256,13 @@
 	<!--INPUTS-->
 	<table id=inputs class=inline>
 		<tr><th colspan=5>INPUTS <?php include'inputType.php'?>
-		<tr><th>Description<th>Code<th>Current Value<th>Unit<th>Data Quality
+		<tr><th>Code<th>Description<th>Current Value<th>Unit<th>Data Quality
 	</table>
 
 	<!--OUTPUTS-->
 	<table id=outputs class=inline style=background:yellow>
-		<tr><th colspan=4>OUTPUTS
-		<tr><th>Description<th>Code<th>Current Value<th>Unit
+		<tr><th colspan=5>OUTPUTS
+		<tr><th>Code<th>Description<th>Current Value<th>Unit<th>Indicator
 	</table>
 </div>
 

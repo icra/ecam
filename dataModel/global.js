@@ -41,6 +41,7 @@ var Global = {
 			"wsg5":0,
 			c_wsg50:function(){return Global.Water.Abstraction.wsa1+Global.Water.Treatment.wst2+Global.Water.Distribution.wsd1},
 			c_wsg51:function(){return this.c_wsg50()-(this.wsg1+this.wsg3-this.wsg2-this.wsg4)},
+			c_wsg52:function(){return this.ws5-this.c_wsg51()},
 		},
 		"Abstraction":{
 			"wsa1":0,
@@ -72,7 +73,7 @@ var Global = {
 		c_ww50:function(){return this.ww7},
 		c_ww51:function(){return "ww7 x protein consumption x 0.16 x 1.1 x 1.25"},
 		c_ww52:function(){return 34*this.ww7*(40/1000*365)*0.06},
-		c_ww53:function(){return this.ww10*0.005*(44/28)},
+		c_ww53:function(){return 298*this.ww10*0.005*(44/28)},
 		c_ww54:function(){return 74100*this.c_ww58() + 34*3.9*this.c_ww58() + 298*3.9*this.c_ww58()},
 		c_ww55:function(){return 34*this.ww7*(40/1000*365)*0.48},
 		c_ww56:function(){return "((ww11 x FD)/1000) x NCV/1000"},
@@ -111,8 +112,8 @@ var Global = {
 			c_wwt52:function(){return "(ww7 x (40,by default BOD,/1000 x 365) x 0.06) x 34"},
 			c_wwt53:function(){return "wwt2 x wwt12 x EVM"},
 			c_wwt54:function(){return 74100*this.c_wwt57()+34*3.9*this.c_wwt57()+298*3.9*this.c_wwt57()},
-			c_wwt55:function(){return this.wwt5*0.005*44/28},
-			c_wwt56:function(){return this.c_wwt58*0.005*44/28},
+			c_wwt55:function(){return 298*this.wwt5*0.005*44/28},
+			c_wwt56:function(){return 298*this.c_wwt58*0.005*44/28},
 			c_wwt57:function(){return "((ww11 xFD)/1000) x NCV/1000"},	
 			c_wwt58:function(){return Global.Waste.ww7*this.wwt7*0.16*1.1*1.25},
 		},
@@ -167,28 +168,16 @@ var Global = {
 				"Do you have fuel engines to run pumps" :0,
 				"Is your topography flat"               :0,
 			},
-			"waterAbs":{
-				//
-			},
-			"waterTre":{
-				//
-			},
-			"waterDis":{
-				//
-			},
+			"waterAbs":{ },
+			"waterTre":{ },
+			"waterDis":{ },
 			"waste":{
 				"Are you producing biogas"              : 0,
 				"Are you producing electrical energy"   : 0,
 			},
-			"wasteCol":{
-				//
-			},
-			"wasteTre":{
-				//
-			},
-			"wasteDis":{
-				//
-			},
+			"wasteCol":{ },
+			"wasteTre":{ },
+			"wasteDis":{ },
 		},
 		/** Technologies for Water/Waste Treatment */
 		"Technologies":{
@@ -211,6 +200,6 @@ var Global = {
 				"Other":0,
 			},
 		},
-		"Units":{},//custom unit selections for variables will be stored here
+		"Units":{},//custom unit selections for variables are stored here
 	},
 }

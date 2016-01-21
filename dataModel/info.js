@@ -1,37 +1,5 @@
 /** CODE TO DEAL WITH VARIABLE DESCRIPTIONS */
 
-/** Find a variable code, e.g 'gV2' inside 'Global' and tell where it is */
-function locateVariable(code)
-{
-	var localization={}; //e.g {"level":"Water","sublevel":"Abstraction"}
-	for(level in Global)
-	{
-		for(field in Global[level])
-		{
-			if(typeof(Global[level][field])=='object')
-			{
-				for(subfield in Global[level][field])
-				{
-					if(code==subfield)
-					{
-						localization={"level":level,"sublevel":field};
-						return localization;
-					}
-				}
-			}
-			else
-			{
-				if(code==field)
-				{
-					localization = {"level":level,"sublevel":0}
-					return localization
-				}
-			}
-		}
-	}
-	return false;
-}
-
 /** 
 	Info: object to store all variable descriptions and units
 	Format:
@@ -70,6 +38,7 @@ var Info = {
 	"wsg5":{description:"Heat energy, provided to neighboring districts for heating or cooling",magnitude:"Energy",unit:"Joule",},
 	c_wsg50:{description:"Net total process related grid energy consumed by the utility related to the urban drinking water system",magnitude:"Energy",unit:"kWh"},
 	c_wsg51:{description:"Net total process related grid energy consumed by the utility",magnitude:"Energy",unit:"kWh"},
+	c_wsg52:{description:"Non process related grid energy consumed by the utility",magnitude:"Energy",unit:"kWh"},
 
 	//L2 Water Abstraction
 	"wsa1":{description:"Electric energy consumed for pumping abstracted water (from the grid and self-produced)",magnitude:"Energy",unit:"kWh",},
@@ -140,13 +109,13 @@ var Info = {
 	"ww10":{description:"Enter nitrogen effluent limit",                                                      magnitude:"Concentration", unit:"mg/L",},
 	"ww11":{description:"Volume of Fuel consumed",                                                            magnitude:"Volume",        unit:"L",},
 	c_ww50:{description:"Population",magnitude:"People",unit:"people"},
-	c_ww51:{description:"N2O emissions from untreated wastewater direct discharge",magnitude:"",unit:""},
-	c_ww52:{description:"CH4 emissions from untreated wastewater direct discharge",magnitude:"",unit:""},
-	c_ww53:{description:"N2O emitted from wastewater effluent discharged",magnitude:"",unit:""},
-	c_ww54:{description:"Indirect CO2e emitted from sludge transport off-site. Based upon sum of CO2, CH4 and N2O emission from mobile combustion",magnitude:"",unit:""},
-	c_ww55:{description:"Methane (CO2e) emitted in wastewater treatment plants",magnitude:"?",unit:"?"},
+	c_ww51:{description:"N2O emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kg"},
+	c_ww52:{description:"CH4 emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kg"},
+	c_ww53:{description:"N2O emitted from wastewater effluent discharged",magnitude:"Mass",unit:"kg"},
+	c_ww54:{description:"Indirect CO2e emitted from sludge transport off-site. Based upon sum of CO2, CH4 and N2O emission from mobile combustion",magnitude:"Mass",unit:"kg"},
+	c_ww55:{description:"Methane (CO2e) emitted in wastewater treatment plants",magnitude:"Mass",unit:"kg"},
 	c_ww56:{description:"Energy fuel cons",magnitude:"Energy",unit:"kWh"},
-	c_ww57:{description:"Direct CO2 emitted in wastewater stages from on-site engines (KPI)",magnitude:"?",unit:"?"},
+	c_ww57:{description:"Direct CO2 emitted in wastewater stages from on-site engines (KPI)",magnitude:"Mass",unit:"kg"},
 	c_ww58:{description:"Energy fuel cons (sludge)",magnitude:"Energy",unit:"kWh",},
 
 	//L2 Wastewater General
@@ -182,14 +151,14 @@ var Info = {
 	"wwt13":{description:"BOD influent (average)",                                                          magnitude:"Concentration",unit:"mg/L",},
 	"wwt14":{description:"BOD mass removed",                                                                magnitude:"Mass",         unit:"kg",},
 	c_wwt50:{description:"Biogas flared",                                                                   magnitude:"Volume",       unit:"Nm3"},
-	c_wwt51:{description:"Nitrous oxide (CO2e) emitted in wastewater treatment plants, expressed as CO2e",  magnitude:"",             unit:""},
-	c_wwt52:{description:"CH4 emissions from untreated wastewater direct discharge",                        magnitude:"",             unit:""},
+	c_wwt51:{description:"Nitrous oxide (CO2e) emitted in wastewater treatment plants, expressed as CO2e",  magnitude:"Mass",         unit:"kg"},
+	c_wwt52:{description:"CH4 emissions from untreated wastewater direct discharge",                        magnitude:"Mass",         unit:"kg"},
 	c_wwt53:{description:"Total Energy content of biogas valorized in the Co-generator",                    magnitude:"Energy",       unit:"kWh"},
-	c_wwt54:{description:"Indirect CO2e emitted in sludge transport",                                       magnitude:"",             unit:""},
-	c_wwt55:{description:"Indirect CO2e emitted in receiving waters due to nitrogen in wastewater effluent",magnitude:"",             unit:""},
-	c_wwt56:{description:"N2O emissions from untreated wastewater direct discharge",                        magnitude:"",             unit:"",},
-	c_wwt57:{description:"Energ Fuel Cons(iS1)",                                                            magnitude:"",             unit:""},
-	c_wwt58:{description:"Total annual amount of nitrogen discharged directly to aquatic environment",      magnitude:"",             unit:"kg N/yr",},
+	c_wwt54:{description:"Indirect CO2e emitted in sludge transport",                                       magnitude:"Mass",         unit:"kg"},
+	c_wwt55:{description:"Indirect CO2e emitted in receiving waters due to nitrogen in wastewater effluent",magnitude:"Mass",         unit:"kg"},
+	c_wwt56:{description:"N2O emissions from untreated wastewater direct discharge",                        magnitude:"Mass",         unit:"kg",},
+	c_wwt57:{description:"Energ Fuel Cons(iS1)",                                                            magnitude:"Mass",         unit:"kg"},
+	c_wwt58:{description:"Total annual amount of nitrogen discharged directly to aquatic environment",      magnitude:"?",            unit:"kg N/yr",},
 
 		//L3 Wastewater Treatment
 		"wwt15":{description:"Tests complying with discharge consents",                                        magnitude:"Number",  unit:"number",},

@@ -59,25 +59,25 @@
 		/** Returns array of strings which are input identifiers for current stage, e.g ["aV1","av2"] */
 		function getInputs()
 		{
-			/*empty array*/ var inputs = []
+			var inputs=[];
 			for(field in CurrentStage)
 			{
-				if(typeof(CurrentStage[field])!="number" )continue
-				inputs.push(field)
+				if(typeof(CurrentStage[field])!="number" ){continue;}
+				inputs.push(field);
 			}
-			return inputs
+			return inputs;
 		}
 
 		/** Substage class for storing all variables that correspond to current stage */
 		function Substage()
 		{
-			/*get a list of variables for this level*/ var inputs = getInputs()
-			/*substage name*/ this.name = "S"+(substages.length+1)
-			//now make the object look like, e.g. Substage {tV1: 0, tV2: 0, tV3: 0, tV4: 0, tV5: 0, ...}
-			for(i in inputs)this[inputs[i]]=0
+			/*get a list of variables for this level*/ var inputs=getInputs();
+			/*substage default name*/ this.name="S"+(substages.length+1);
+			//make the object look like, e.g. Substage {tV1: 0, tV2: 0, tV3: 0, tV4: 0, tV5: 0, ...}
+			for(i in inputs){this[inputs[i]]=0;}
 		}
 
-		/** button new substage pushed */
+		/** New substage button pushed */
 		function newSubstage()
 		{
 			substages.push(new Substage()) //add a new substage to the array "substages"
@@ -136,71 +136,70 @@
 		/** update substages table */
 		function updateSubstagesTable()
 		{
-			/*table element*/ var t = document.getElementById('substages')
+			/*table element*/ var t=document.getElementById('substages');
 
 			/*update table header */
 				while(t.rows[0].cells.length>1)t.rows[0].deleteCell(-1)
 				//go over substages: create a column for each
 				for(s in substages)
 				{
-					var newTH = document.createElement('th')
-					newTH.style.cursor="pointer"
-					newTH.style.width="120px"
+					var newTH = document.createElement('th');
+					newTH.style.cursor="pointer";
+					newTH.style.width="120px";
 					newTH.innerHTML=""+
 						"Substage "+(parseInt(s)+1)+" "+
-						"<div style=font-weight:bold>"+substages[s].name+"</div>"
-					newTH.setAttribute('onclick','showSubstageMenu('+s+',event)')
-					t.rows[0].appendChild(newTH)
+						"<div style=font-weight:bold>"+substages[s].name+"</div>";
+					newTH.setAttribute('onclick','showSubstageMenu('+s+',event)');
+					t.rows[0].appendChild(newTH);
 				}
 				//TOTAL header
-				var newTH = document.createElement('th')
-				newTH.innerHTML="&sum; TOTAL"
-				t.rows[0].appendChild(newTH)
+				var newTH = document.createElement('th');
+				newTH.innerHTML="&sum; TOTAL";
+				t.rows[0].appendChild(newTH);
 				//LEVEL2 header
-				var newTH = document.createElement('th')
-				newTH.innerHTML="LEVEL 2"
-				t.rows[0].appendChild(newTH)
+				var newTH = document.createElement('th');
+				newTH.innerHTML="LEVEL 2";
+				t.rows[0].appendChild(newTH);
 				//DIFFERENCE BETWEEN LEVEL 2 and sum of substages
-				var newTH=document.createElement('th')
-				newTH.innerHTML="Difference"
-				newTH.style.backgroundColor='orange'
-				t.rows[0].appendChild(newTH)
+				var newTH=document.createElement('th');
+				newTH.innerHTML="Difference";
+				newTH.style.backgroundColor='orange';
+				t.rows[0].appendChild(newTH);
 				//UNIT header
-				var newTH = document.createElement('th')
-				newTH.innerHTML="Unit"
-				t.rows[0].appendChild(newTH)
+				var newTH = document.createElement('th');
+				newTH.innerHTML="Unit";
+				t.rows[0].appendChild(newTH);
 			/*end update header*/
 
 			/*update table body*/
 				while(t.rows.length>1)t.deleteRow(-1)
 				//each row corresponds to a variable of the current stage
-				var inputs = getInputs()
+				var inputs=getInputs();
 				for(input in inputs)
 				{
-					/*variable code*/var code=inputs[input]
-					var newRow=t.insertRow(-1)
-					newRow.setAttribute('field',code)
-					var newCell=newRow.insertCell(-1)
-					/*link and name*/newCell.innerHTML="<a href=variable.php?id="+code+">"+code+"</a>"
+					/*variable code*/var code=inputs[input];
+					var newRow=t.insertRow(-1);
+					newRow.setAttribute('field',code);
+					var newCell=newRow.insertCell(-1);
+					/*link and name*/newCell.innerHTML="<a href=variable.php?id="+code+">"+code+"</a>";
 					/*variable description*/
-					var newCell=newRow.insertCell(-1)
-					newCell.style.textAlign="left"
-					newCell.style.fontSize="10px"
-					newCell.innerHTML=Info[code]?Info[code].description:"<span style=color:#ccc>not defined</span>"
+					var newCell=newRow.insertCell(-1);
+					newCell.style.textAlign="left";
+					newCell.style.fontSize="10px";
+					newCell.innerHTML=Info[code]?Info[code].description:"<span style=color:#ccc>not defined</span>";
 					//go over substages
+					var multiplier = Units.multiplier(code)
 					for(s in substages)
 					{
-						var newCell=newRow.insertCell(-1)
-						newCell.className="input"
-						newCell.setAttribute('onclick','transformField(this)')
-						newCell.setAttribute('substage',s)
-						var multiplier = Units.multiplier(code)
+						var newCell=newRow.insertCell(-1);
+						newCell.className="input";
+						newCell.setAttribute('onclick','transformField(this)');
+						newCell.setAttribute('substage',s);
 						newCell.innerHTML=substages[s][code]/multiplier;
 					}
 					//SUM OF SUBSTAGES
-					var sum=sumAll(code)
-					var newCell=newRow.insertCell(-1)
-					var multiplier = Units.multiplier(code)
+					var sum=sumAll(code);
+					var newCell=newRow.insertCell(-1);
 					newCell.innerHTML= sum/multiplier
 					//LEVEL 2 current value
 					var newCell=newRow.insertCell(-1)
@@ -253,20 +252,25 @@
 			while(t.rows.length>1){t.deleteRow(-1)}
 			var newRow=t.insertRow(-1);
 
-			['Code','Description','LEVEL 2','Unit'].forEach(function(element)
+			['Code','Description'].forEach(function(element)
 			{
 				var newTH=document.createElement('th'); newRow.appendChild(newTH);
 				newTH.innerHTML=element;
 			});
 
-			//loop substages
 			for(s in substages)
 			{
 				var newTH=document.createElement('th'); 
 				newRow.appendChild(newTH);
 				newTH.innerHTML="Substage "+(parseInt(s)+1)+" "+
 				"<div style=font-weight:bold>"+substages[s].name+"</div>"
-			}
+			};
+
+			['LEVEL 2','Unit'].forEach(function(element)
+			{
+				var newTH=document.createElement('th'); newRow.appendChild(newTH);
+				newTH.innerHTML=element;
+			});
 
 			for(field in CurrentStage)
 			{
@@ -279,26 +283,31 @@
 				newRow.setAttribute('title',field+"="+Formulas.prettify(formula));
 				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
 				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
+				//compute CurrentStage[field]() for each substage
+				//formula is common for all substages
+				var formula = CurrentStage[field].toString();
+				console.log(formula);
+				for(s in substages)
+				{
+					newRow.insertCell(-1).innerHTML=(function()
+					{
+						//<TO DO>
+							/*
+								define substages[s][field] as a new function
+								we need eval
+								problem: other functions inside
+							*/
+							eval("substages[s][field]="+formula);
+							//substages[s][field]=function(){return 4;}
+						//</TO DO>
+						var currValue=substages[s][field]()/Units.multiplier(field) || 0;
+						return currValue;
+					})();
+				}
 				//level 2
 				newRow.insertCell(-1).innerHTML=CurrentStage[field]()/Units.multiplier(field)||0;
 				//unit
 				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
-
-				//compute current function "field" for each substage
-				(function(){
-					//TODO
-					var formula=CurrentStage[field].toString();
-					var inputs=Formulas.idsPerFormula(formula);
-					inputs.forEach(function(input)
-					{
-						formula=formula.replace(input,input+"[0]")
-					});
-					for(s in substages)
-					{
-						//we need to substiute in formula for example wwt2 per wwt2[s]
-						newRow.insertCell(-1).innerHTML=formula.replace(/[0]/g,'['+s+']')
-					}
-				})();
 			}
 		}
 
@@ -324,11 +333,11 @@
 		//update a field of the substage[index]
 		function updateSubstage(index,field,newValue)
 		{
-			if(typeof(CurrentStage[field])=="number")newValue=parseFloat(newValue) //if CurrentStage[field] is a number, parse float
-
-			var multiplier = Units.multiplier(field);
+			//if CurrentStage[field] is a number, parse float
+			if(typeof(CurrentStage[field])=="number"){newValue=parseFloat(newValue);}
+			var multiplier=Units.multiplier(field);
 			substages[index][field]=multiplier*newValue;
-			init() //update tables and write cookies
+			init()//update tables and write cookies
 		}
 
 		/** Update all tables */
