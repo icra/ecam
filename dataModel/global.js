@@ -77,7 +77,7 @@ var Global = {
 		c_ww54:function(){return 74100*this.c_ww58() + 34*3.9*this.c_ww58() + 298*3.9*this.c_ww58()},
 		c_ww55:function(){return 34*this.ww7*(40/1000*365)*0.48},
 		c_ww56:function(){return "((ww11 x FD)/1000) x NCV/1000"},
-		c_ww57:function(){return "(c_ww56 x EF-CO2)+ (c_ww56 x EF-N2O) x 298 + (c_ww56 x EFCH4) x 34"},
+		c_ww57:function(){return this.c_ww56()*(Tables['Fuel types'][Global.Configuration.Selected.Fuel].EFCO2 + 298*Tables['Fuel types'][Global.Configuration.Selected.Fuel].EFN2O + 34*Tables['Fuel types'][Global.Configuration.Selected.Fuel].EFCH4)},
 		c_ww58:function(){return this.ww8*2*this.ww9*0.25*43/1000000},
 		"General":{
 			"wwg1":0,
@@ -200,6 +200,12 @@ var Global = {
 				"Other":0,
 			},
 		},
-		"Units":{},//custom unit selections for variables are stored here
+		"Units":{ }, //custom unit selections for variables are stored here
+		"Selected": //things that need to be selected from a list (Tables)
+		{
+			//these are default values
+			"Fuel"   : "Gas / Diesel Oil",  //options are in Tables["Fuel type"]
+			"Country": "Africa",  //options are in Tables["BOD"]
+		},
 	},
 }

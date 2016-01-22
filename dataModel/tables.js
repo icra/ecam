@@ -6,28 +6,21 @@
 		N2O emission factor (jose porro external excel)
 */
 
-//things that need to be selected from a list (Tables)
-var Selected=
-{
-	"Fuel":"none",     //Tables["Fuel type"]
-	"Country":"none",  //Tables["BOD"]
-}
-
 var Tables =
 {
 	"Fuel types": //units: all (kg/TJ) but NCV (TJ/Gg)
 	{
-		"Gasoline / Petrol":{
-			EFCO2:69300,
-			EFCH4:3,
-			EFN2O:0.6,
-			NCV:44.3,
-		},
 		"Gas / Diesel Oil":{
 			EFCO2:74100,
 			EFCH4:3,
 			EFN2O:0.6,
 			NCV:43,
+		},
+		"Gasoline / Petrol":{
+			EFCO2:69300,
+			EFCH4:3,
+			EFN2O:0.6,
+			NCV:44.3,
 		},
 		"Natural Gas":{
 			EFCO2:56100,
@@ -56,4 +49,3 @@ var Tables =
 		"United States":85,
 	},
 }
-

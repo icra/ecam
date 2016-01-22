@@ -8,10 +8,10 @@ var Questions = {
 	//All questions, unsorted. sorting is in Global.Configuration.Questions
 	varsPerQuestion:
 	{
-		"Do you have fuel engines to run pumps" :[],
-		"Are you producing biogas"              :[],
-		"Are you producing electrical energy"   :[],
-		"Is your topography flat"               :[],
+		"Do you have fuel engines to run pumps" :[ ],
+		"Are you producing biogas"              :[ ],
+		"Are you producing electrical energy"   :[ ],
+		"Is your topography flat"               :[ ],
 	},
 
 	//get a list of variables that have to be hidden according to configuration
@@ -42,6 +42,5 @@ var Questions = {
 			var elements = document.querySelectorAll('tr[field='+field+']')
 			for(var i=0;i<elements.length;elements[i++].style.backgroundColor='pink'){}
 		})
-	}
+	},
 }
-

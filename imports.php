@@ -9,5 +9,6 @@
 <script src="dataModel/formulas.js"></script>        <!--functions dealing with formulas-->
 <script src="dataModel/questions.js"></script>       <!--functions dealing with Yes/No questions-->
 <script src="dataModel/units.js"></script>           <!--functions dealing with unit conversion in-->
+<script src="dataModel/tables.js"></script>          <!--data regarding constants-->
 <script src="js/cookies.js"></script>                <!--basic cookie functions here-->
 <script src="js/updateGlobalFromCookies.js"></script><!--update Global object from cookie "GLOBAL" here-->

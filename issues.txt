@@ -21,8 +21,7 @@ Calculated variables that still output a NaN
  | - c_wwt57
 
 Variables missing
- | - EFCO2, EFCH4, EFN2O
- | - NCV
+ | - EFCO2, EFCH4, EFN2O, NCV --> working on them
  | - FD
  | - proteinconsumption
  | - defaultproteinconsumption
