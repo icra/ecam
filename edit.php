@@ -52,7 +52,7 @@
 			element.innerHTML=""
 			var input=document.createElement('input')
 			input.id=field
-			input.className='input'
+			input.classList.add('input')
 			input.autocomplete='off'
 			input.onblur=function(){updateField(field,input.value)}
 			input.onkeypress=function(event){if(event.which==13){input.onblur()}}
@@ -121,27 +121,28 @@
 		/** Redisplay table id=outputs */
 		function updateOutputs()
 		{
-			var t=document.getElementById('outputs')
-			while(t.rows.length>2)t.deleteRow(-1)
-			for(field in CurrentLevel)
+			var t=document.getElementById('outputs');
+			while(t.rows.length>2){t.deleteRow(-1);}
+			for(var field in CurrentLevel)
 			{
 				if(typeof(CurrentLevel[field])!="function"){continue;}
-				var newCell,newRow=t.insertRow(-1)
-				var formula=CurrentLevel[field].toString()
-				newRow.setAttribute('title',Formulas.prettify(formula))
-				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+formula+"',1)")
-				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+formula+"',0)")
-				/*code*/ newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>"
-				/*description*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>"
-				/*value*/ newRow.insertCell(-1).innerHTML=CurrentLevel[field]()/Units.multiplier(field)||0 //if nan, outputs 0
-				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>"
+				var newCell,newRow=t.insertRow(-1);
+				newRow.setAttribute('field',field);
+				var formula=CurrentLevel[field].toString();
+				newRow.setAttribute('title',Formulas.prettify(formula));
+				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+formula+"',1)");
+				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+formula+"',0)");
+				/*code*/ newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
+				/*description*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
+				/*value*/ newRow.insertCell(-1).innerHTML=CurrentLevel[field]()/Units.multiplier(field); /*if nan, outputs 0*/
+				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
 				/*circle indicator*/ 
 				newCell=newRow.insertCell(-1);
 				newCell.style.textAlign='center';
 				newCell.innerHTML=(function(){
 					var colors=['red','orange','green'];
 					/*random one for now*/var color = colors[Math.floor(Math.random()*colors.length)];
-					return "<span style=font-size:20px;color:"+color+">&#9899;</span>"
+					return "<span style=font-size:20px;color:"+color+">&#9899;</span>";
 				})();
 			}
 		}
@@ -155,17 +156,17 @@
 			if(typeof(CurrentLevel[field])=="number")newValue=parseFloat(newValue) //if CurrentLevel[field] is a number, parse float
 			//if a unit change is set, get it:
 			var multiplier = Units.multiplier(field);
-			CurrentLevel[field]=multiplier*newValue //update the field
-			init() //update tables and write cookies
+			CurrentLevel[field]=multiplier*newValue; //update the field
+			init(); //update tables and write cookies
 		}
 
 		/** Update all tables */
 		function init()
 		{
-			updateInputs()
-			updateOutputs()
-			Questions.hideFields()
-			updateResult()
+			updateInputs();
+			updateOutputs();
+			Questions.hideFields();
+			updateResult();
 		}
 	</script>
 </head><body onload=init()><center>
@@ -201,11 +202,13 @@
 			if($sublevel!="General")
 			{
 				$color=$level=="Waste"?"lightcoral":"lightblue";
-				echo "<button class=button
+				echo "<button 
+						class=button
 						style='background:$color;'
 						onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-						Level 3 Substages
-					</button>";
+							Level 3 Substages
+						</button> 
+					";
 			}
 		}
 		else //means that we are in level 1

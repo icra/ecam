@@ -19,9 +19,10 @@
 	<style>
 		td{text-align:left}
 		th{vertical-align:middle}
-		table#substages td{text-align:right}
+		table#substages td:not(.level2){text-align:right}
 		td.input input{outline:none;width:40px;font-size:18px}
 		td.input{width:80px;text-align:right;background-color:#eee;cursor:cell}
+		table#outputs tr:hover { background:orange; }
 		div.substageMenu{
 			padding:0.1em;
 			border:2px solid #ccc;
@@ -34,11 +35,17 @@
 			outline:none;
 			font-size:20px;
 		}
+		td.level2{color:white;text-align:center}
 		<?php
 			if($level=="Waste")
 			{?>
 				th{background:#bf5050}
 				a,a:visited{color:#bf5050}
+				td.level2{background:#bf5050}
+			<?php }
+			else
+			{?>
+				td.level2{background:#00aff1}
 			<?php }
 		?>
 	</style>
@@ -49,18 +56,18 @@
 		?>
 
 		/** Array to store all Substage objects */
-		var substages = [];
+		var substages=[];
 
 		<?php
 			//Read "substages" current object
-			echo "substages = Global.Level3['$level']['$sublevel'];";
+			echo "substages=Global.Level3['$level']['$sublevel'];";
 		?>
 
 		/** Returns array of strings which are input identifiers for current stage, e.g ["aV1","av2"] */
 		function getInputs()
 		{
 			var inputs=[];
-			for(field in CurrentStage)
+			for(var field in CurrentStage)
 			{
 				if(typeof(CurrentStage[field])!="number" ){continue;}
 				inputs.push(field);
@@ -188,8 +195,8 @@
 					newCell.style.fontSize="10px";
 					newCell.innerHTML=Info[code]?Info[code].description:"<span style=color:#ccc>not defined</span>";
 					//go over substages
-					var multiplier = Units.multiplier(code)
-					for(s in substages)
+					var multiplier=Units.multiplier(code);
+					for(var s in substages)
 					{
 						var newCell=newRow.insertCell(-1);
 						newCell.className="input";
@@ -200,9 +207,10 @@
 					//SUM OF SUBSTAGES
 					var sum=sumAll(code);
 					var newCell=newRow.insertCell(-1);
-					newCell.innerHTML= sum/multiplier
+					newCell.innerHTML=sum/multiplier;
 					//LEVEL 2 current value
-					var newCell=newRow.insertCell(-1)
+					var newCell=newRow.insertCell(-1);
+					newCell.classList.add('level2');
 					newCell.innerHTML=CurrentStage[code]/multiplier;
 					//DIFFERENCE BETWEEN LEVEL 2 and sum of substages
 					var diff=Math.abs(parseFloat(CurrentStage[code])-sumAll(code))/multiplier
@@ -272,40 +280,53 @@
 				newTH.innerHTML=element;
 			});
 
-			for(field in CurrentStage)
+			var inputs=getInputs();
+			for(var field in CurrentStage)
 			{
 				//only functions
 				if(typeof(CurrentStage[field])!="function"){continue;}
+				//skip the field called "modification" created to help calculate functions for each substage
+				if(field=="modification"){continue;}
+
 				var newRow=t.insertRow(-1);
+				newRow.setAttribute('field',field);
 				var formula=CurrentStage[field].toString();
 				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+formula+"',1)");
 				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+formula+"',0)");
-				newRow.setAttribute('title',field+"="+Formulas.prettify(formula));
+				newRow.setAttribute('title',Formulas.prettify(formula));
 				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
 				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
-				//compute CurrentStage[field]() for each substage
-				//formula is common for all substages
-				var formula = CurrentStage[field].toString();
-				console.log(formula);
-				for(s in substages)
-				{
-					newRow.insertCell(-1).innerHTML=(function()
-					{
-						/*<TO DO>
-							define substages[s][field] as a new function
-							problem with eval: other functions that are inputs???? verify
-							try something like: eval("substages[s][field]="+formula);
-						</TO DO>*/
-						substages[s][field]=function(){return 10;}
 
-						var currValue=substages[s][field]()/Units.multiplier(field) || 0;
-						return currValue;
-					})();
-				}
-				//level 2
-				newRow.insertCell(-1).innerHTML=CurrentStage[field]()/Units.multiplier(field)||0;
-				//unit
-				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
+				/** Compute CurrentStage[field]() for each substage*/
+				(function(){
+					//the formula will be modified starting by the current field formula
+					var modification=formula;
+
+					//go over this stage's inputs to gradually modify the formula
+					inputs.forEach(function(input)
+					{
+						var regexp=new RegExp('(.)this.('+input+')(\\D)','g');
+						modification=modification.replace(regexp,'$1substages[0].$2$3');
+					});
+
+					//show original formula, if it has been changed
+					if(modification!=formula){console.log("Original: "+formula);}
+
+					for(s in substages)
+					{
+						var modificationSubstage=modification.replace(/\[0\]/g,'['+s+']');
+						//show changes, if any
+						if(modificationSubstage!=formula)
+						{
+							console.log(' +Modification for substage['+s+']: '+modificationSubstage)
+						}
+						eval("CurrentStage['modification']="+modificationSubstage+";");
+						newRow.insertCell(-1).innerHTML=CurrentStage['modification']()/Units.multiplier(field);
+					}
+				})();
+
+				/*value from level 2*/ newRow.insertCell(-1).innerHTML=CurrentStage[field]()/Units.multiplier(field)||0;
+				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
 			}
 		}
 

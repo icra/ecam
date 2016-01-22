@@ -41,7 +41,7 @@ var Global = {
 			"wsg5":0,
 			c_wsg50:function(){return Global.Water.Abstraction.wsa1+Global.Water.Treatment.wst2+Global.Water.Distribution.wsd1},
 			c_wsg51:function(){return this.c_wsg50()-(this.wsg1+this.wsg3-this.wsg2-this.wsg4)},
-			c_wsg52:function(){return this.ws5-this.c_wsg51()},
+			c_wsg52:function(){return Global.Water.ws5-this.c_wsg51()},
 		},
 		"Abstraction":{
 			"wsa1":0,

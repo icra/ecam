@@ -3,23 +3,28 @@
 +--------+
 
 Inputs
-------
  | - Descriptions that start with "Enter X value" should be renamed to "X value"?
  | - ww12    Biogas flared Y/N		                                                             
  | - ww13    Biogas recovered  Y/N	                                                             
  | - wwt4    Fuel Type if wwt4= diesel then iS1=iS1-1                                            
  | - wwt7    Enter geographic location used to apply protein consumption rate for variable calc. 
- | - wwt10_n BOD influent (average)	mg/L	-> should be effluent ?
 
-Outputs
--------
- | - c_ww51 units?
- | - c_ww52 units?
- | - c_ww54 units?
- | - c_ww54 units?
- | - c_wwt51 units?
- | - c_wwt52 units?
- | - c_wwt54 units?
- | - c_wwt55 units?
- | - c_wwt56 units?
- | - c_wwt57 units?
+Calculated variables that still output a NaN
+ | - c_ww51
+ | - c_ww56
+ | - c_ww57
+ | - c_wwt51
+ | - c_wwt52
+ | - c_wwt53
+ | - c_wwt54
+ | - c_wwt56
+ | - c_wwt57
+
+Variables missing
+ | - EFCO2, EFCH4, EFN2O
+ | - NCV
+ | - FD
+ | - proteinconsumption
+ | - defaultproteinconsumption
+ | - defaultBOD
+ | - EVM

@@ -1,10 +1,18 @@
 /**
-	wait for mario to gather all this information
-		fuel types
-		protein per country
+	Wait for Mario to gather all this information
+		Fuel types
+		Protein per country
 		MCF
-		n2o emission factor (jose porro external excel)
+		N2O emission factor (jose porro external excel)
 */
+
+//things that need to be selected from a list (Tables)
+var Selected=
+{
+	"Fuel":"none",     //Tables["Fuel type"]
+	"Country":"none",  //Tables["BOD"]
+}
+
 var Tables =
 {
 	"Fuel types": //units: all (kg/TJ) but NCV (TJ/Gg)
@@ -47,10 +55,5 @@ var Tables =
 		"Turkey":38,
 		"United States":85,
 	},
-
-	//Methane conversion factor
-	"MCF":
-	{
-		"":0,	
-	},
 }
+

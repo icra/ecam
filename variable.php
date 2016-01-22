@@ -92,7 +92,6 @@
 					matches.forEach(function(match)
 					{
 						var match_localization = locateVariable(match)
-						console.log(match_localization.toString())
 						var match_level = match_localization.level
 						var match_sublevel = match_localization.sublevel
 						var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level]

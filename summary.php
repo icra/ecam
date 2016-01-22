@@ -62,7 +62,7 @@
 		function tableRows(object,name,family,href)
 		{
 			//make link or not depending on active 
-			if(Global.Configuration["Active Stages"][family]==0) { return ""; }
+			if(Global.Configuration["Active Stages"][family]==0){return "";}
 
 			//color blue or red
 			var color = family.search('waste')==-1 ? "#00aff1" : "#bf5050";
@@ -75,7 +75,7 @@
 			ret+="<span count="+family+">0</span> <?php echo $type?>s"
 
 			//fill rows
-			for(variable in object)
+			for(var variable in object)
 			{
 				//only type specified
 				<?php
@@ -88,11 +88,8 @@
 				if(typeof(object[variable])!="<?php echo $typeof?>")continue
 
 				var description=Info[variable]?Info[variable].description:"<span style=color:#ccc>no description</span>";
-
 				var unit = Global.Configuration.Units[variable] || Info[variable].unit || "no unit"
-
 				var multiplier = Units.multiplier(variable);
-
 				ret+="<tr field='"+variable+"' family='"+family+"'>"+
 					"<td style='font-weight:bold'><a style='color:"+color+"' href=variable.php?id="+variable+">"+variable+"</a>"+
 					"<td>"+description+

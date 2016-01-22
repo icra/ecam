@@ -26,8 +26,8 @@ var Formulas = {
 		object=object||Global;
 		var matches=[];
 		var match;
-		var reg=new RegExp(id);
-		for(field in object)
+		var reg=new RegExp('\\W'+id+"\\D");
+		for(var field in object)
 		{
 			if(typeof object[field]=="object")
 			{
