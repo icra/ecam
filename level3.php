@@ -291,15 +291,13 @@
 				{
 					newRow.insertCell(-1).innerHTML=(function()
 					{
-						//<TO DO>
-							/*
-								define substages[s][field] as a new function
-								we need eval
-								problem: other functions inside
-							*/
-							eval("substages[s][field]="+formula);
-							//substages[s][field]=function(){return 4;}
-						//</TO DO>
+						/*<TO DO>
+							define substages[s][field] as a new function
+							problem with eval: other functions that are inputs???? verify
+							try something like: eval("substages[s][field]="+formula);
+						</TO DO>*/
+						substages[s][field]=function(){return 10;}
+
 						var currValue=substages[s][field]()/Units.multiplier(field) || 0;
 						return currValue;
 					})();

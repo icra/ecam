@@ -68,7 +68,7 @@
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
 			newCell.innerHTML="Type"
-			newRow.insertCell(-1).innerHTML=typeof(currentStage[id])=="function"? ("Output <br><b>Formula:</b> "+Formulas.prettify(currentStage[id].toString())) : "Input"
+			newRow.insertCell(-1).innerHTML=typeof(currentStage[id])=="function"? ("Output <br><br><b>Formula:</b> "+Formulas.prettify(currentStage[id].toString())) : "Input"
 
 			//Magnitude
 			newRow=t.insertRow(-1)
