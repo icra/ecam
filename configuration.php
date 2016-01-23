@@ -7,10 +7,10 @@
 		/** Enable or disable stage <input type=checkbox id=id> */
 		function activate(id)
 		{
-			//input element that we are clicking
+			//checkbox that has been clicked
 			var checkbox=document.getElementById(id);
 
-			//SUBLEVELS: they have classname==id
+			//SUBLEVELS corresponding to the checkbox have classname==id
 			var elements=document.getElementsByClassName(id)
 			for(var i=0;i<elements.length;i++)
 			{
@@ -27,7 +27,6 @@
 					/**set grey bg*/elements[i].parentNode.parentNode.style.backgroundColor=""
 					/**modifiy Active Stages*/Global.Configuration["Active Stages"][elements[i].id]=0
 				}
-				updateOptions(elements[i].id)
 			}
 
 			//background color: green or white
@@ -36,9 +35,6 @@
 			//update Active Stages
 			Global.Configuration["Active Stages"][id] = checkbox.checked ? 1 : 0
 			
-			//update options (questions in the right)
-			updateOptions(id);
-
 			//redisplay current json
 			updateResult()
 		}
@@ -46,47 +42,15 @@
 		/** Activate stages depending on Global.Configuration["Active Stages"] */
 		function activateLevels()
 		{
-			//go over Levels
-			for(stage in Global.Configuration["Active Stages"])
+			for(var stage in Global.Configuration["Active Stages"])
 			{
 				/**skip is always active*/
 				switch(stage){case 'uws':continue;break;}
 				if(Global.Configuration["Active Stages"][stage])
 				{
-					/**set checked*/document.getElementById(stage).checked=true
-					activate(stage)
+					/**set checked*/document.getElementById(stage).checked=true;
+					activate(stage);
 				}
-			}
-		}
-
-		/** Update the current Global object
-			parameter: menu (string) ["Waste" or "Water"]
-		*/
-		function updateQuestion(stage,question,newValue)
-		{
-			Global.Configuration.Questions[stage][question]=parseInt(newValue)
-			init()
-		}
-		function setTechnology(stage,selectedTec)
-		{
-			for(tec in Global.Configuration.Technologies[stage])
-			{
-				Global.Configuration.Technologies[stage][tec] = selectedTec==tec ? 1:0;
-			}
-			init();
-		}
-
-		/** Hide or show a <tr> of additional info depending on active stages **/
-		function updateOptions(family)
-		{
-			var newDisplay=Global.Configuration["Active Stages"][family] ? "" : "none"; 
-			var trs = document.querySelectorAll("[class=option][family="+family+"]");
-			for(var i=0;i<trs.length;i++)
-			{
-				trs[i].style.display = newDisplay;
-				if(newDisplay=='none')continue;
-				trs[i].style.backgroundColor ='orange';
-				/*cool visual efect*/setTimeout(function(el){el.style.backgroundColor='';},1,trs[i]);
 			}
 		}
 
@@ -161,54 +125,6 @@
 				printL2stage("waste","wasteTre","Treatment", true);
 				printL2stage("waste","wasteDis","Discharge", true);
 			?>
-	</table>
-
-	<!--QUESTIONS-->
-	<table class=inline id=questions style="width:45%">
-		<tr><th colspan=3 style="text-align:left;font-size:16px">Additional info
-		<script>
-			for(stage in Global.Configuration.Questions)
-			{
-				document.write(""+
-					"<tr><td colspan=3 style=background:#c6c6c6>"+stageName(stage)+
-					" ("+Object.keys(Global.Configuration.Questions[stage]).length+" questions)"
-				)
-				for(question in Global.Configuration.Questions[stage])
-				{
-					document.write("<tr class=option family="+stage+" style=display:none><td>&emsp;&emsp; "+question+"?")
-					document.write("<td><select onchange=\"updateQuestion('"+stage+"','"+question+"',this.value)\">")
-					if(Global.Configuration.Questions[stage][question])
-					{
-						document.write("<option value=1>Yes");
-						document.write("<option value=0>No");
-					}
-					else
-					{
-						document.write("<option value=0>No");
-						document.write("<option value=1>Yes");
-					}
-					document.write("</select>")
-					document.write("<td>"+Questions.varsPerQuestion[question])
-				}
-			}
-		</script>
-			<tr><th colspan=3 style="text-align:left;font-size:16px">Water/Wastewater treatment technology
-		<script>
-			for(stage in Global.Configuration.Technologies)
-			{
-				document.write("<tr class=option family="+stage+" style=display:none><td colspan=2>&emsp; &emsp; Technology used in "+stageName(stage));
-				document.write("<td><select onchange=setTechnology('"+stage+"',this.value)>");
-				for(tec in Global.Configuration.Technologies[stage])
-				{
-					var selected = Global.Configuration.Technologies[stage][tec];
-					if(selected)
-						document.write("<option value='"+tec+"' selected=true>"+tec);
-					else
-						document.write("<option value='"+tec+"'>"+tec);
-				}
-				document.write("</select>");
-			}
-		</script>
 	</table>
 </div>
 

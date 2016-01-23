@@ -165,7 +165,6 @@
 		{
 			updateInputs();
 			updateOutputs();
-			Questions.hideFields();
 			updateResult();
 		}
 	</script>

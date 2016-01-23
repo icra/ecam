@@ -139,7 +139,7 @@ var Global = {
 		},
 	},
 
-	/** Configuration: Active Stages, Questions, Technologies and Units */
+	/** Configuration: Active Stages, questions, Technologies and Units */
 	"Configuration":{
 		"Active Stages":{
 			"uws":1,
@@ -154,58 +154,23 @@ var Global = {
 			"wasteTre":0,
 			"wasteDis":0,
 		},
-		/** YES/NO questions for all stages*/
-		"Questions":{
-			"water":{
-				/*
-				//TODO
-				"Do you have fuel engines to run pumps" :
-				{
-					"answer":0,
-					"list":['ws9','ww11'],
-				},
-				*/
-				"Do you have fuel engines to run pumps" :0,
-				"Is your topography flat"               :0,
-			},
-			"waterAbs":{ },
-			"waterTre":{ },
-			"waterDis":{ },
-			"waste":{
-				"Are you producing biogas"              : 0,
-				"Are you producing electrical energy"   : 0,
-			},
-			"wasteCol":{ },
-			"wasteTre":{ },
-			"wasteDis":{ },
-		},
-		/** Technologies for Water/Waste Treatment */
-		"Technologies":{
-			"waterTre":{
-				"None":1,
-				"Pre-ox/C/F/S/Filt/Des":0,
-				"Pre-ox/C/F/Filt/Des":0,
-				"C/F/S/Filt/Des":0,
-				"C/F/Filt/Des":0,
-				"Des":0,
-				"Other":0,
-			},
-			"wasteTre":{
-				"None":1,
-				"Trickling filters (TF)":0,
-				"Activated sludge (AS)":0,
-				"AS and Coagulation/Filtration (C/F)":0,
-				"AS nitrification and C/F":0,
-				"Laggons":0,
-				"Other":0,
-			},
-		},
+
 		"Units":{ }, //custom unit selections for variables are stored here
-		"Selected": //things that need to be selected from a list (Tables)
-		{
+
+		"Selected":{ //this object stores current user selections from Tables (see tables.js)
 			//these are default values
-			"Fuel"   : "Gas / Diesel Oil",  //options are in Tables["Fuel type"]
-			"Country": "Africa",  //options are in Tables["BOD"]
+			"Fuel type"    : "Gas / Diesel Oil",
+			"Country"      : "Africa",
+			"Technologies" : {"Water":"None","Wastewater":"None"},
+		},
+
+		//Yes/No answers are stored here
+		"Yes/No":{
+			//these are default values
+			"Are you producing biogas"              : 0,
+			"Are you producing electrical energy"   : 0,
+			"Do you have fuel engines to run pumps" : 0,
+			"Is your topography flat"               : 0,
 		},
 	},
 }

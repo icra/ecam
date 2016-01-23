@@ -21,7 +21,6 @@
 			updateLevel1()
 			updateLevel2()
 			updateCounts()
-			Questions.hideFields()
 			updateResult()
 		}
 

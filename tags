@@ -9,9 +9,8 @@ Formulas.outputsPerInput	dataModel/formulas.js	/^	},$/;"	m
 Formulas.prettify	dataModel/formulas.js	/^	},$/;"	m
 Global.General	dataModel/global.js	/^var Global = {$/;"	p
 Info.uw1	dataModel/info.js	/^var Info = {$/;"	p
-LookUpTables.Fuel type	dataModel/lookuptables.js	/^{$/;"	p
-Questions.varsPerQuestion	dataModel/questions.js	/^var Questions = {$/;"	p
 Substage	level3.php	/^		function Substage()$/;"	f
+Tables.Fuel types	dataModel/tables.js	/^var Tables = {$/;"	p
 Units.Distance	dataModel/units.js	/^	},$/;"	p
 Units.multiplier	dataModel/units.js	/^	},$/;"	m
 Units.selectUnit	dataModel/units.js	/^{$/;"	m
@@ -26,10 +25,8 @@ copyFieldsFrom	js/updateGlobalFromCookies.js	/^function copyFieldsFrom(object,na
 deleteSubstage	level3.php	/^		function deleteSubstage(index)$/;"	f
 div.onclick	navbar.php	/^		div.onclick=function(){div.style.display='none'}$/;"	j
 drawChart	sankey.php	/^	function drawChart(){$/;"	f
-for	level3.php	/^		\/** Substage class for storing all variables that correspond to current stage *\/$/;"	c
 getCookie	js/cookies.js	/^function getCookie(name)$/;"	f
 getInputs	level3.php	/^		function getInputs()$/;"	f
-global	navStages.php	/^	$global=json_decode($_COOKIE['GLOBAL'],true);$/;"	v
 hlStage	activeStages.php	/^	function hlStage(stage,hl)$/;"	f
 id	variable.php	/^	$id=$_GET['id'];$/;"	v
 init	configuration.php	/^		function init()$/;"	f
@@ -37,6 +34,7 @@ init	edit.php	/^		function init()$/;"	f
 init	getStarted.php	/^		function init()$/;"	f
 init	index.php	/^		function init()$/;"	f
 init	level3.php	/^		function init()$/;"	f
+init	selection.php	/^		function init()$/;"	f
 init	stages.php	/^		function init() { updateResult() }$/;"	f
 init	summary.php	/^		function init()$/;"	f
 init	variable.php	/^		function init()$/;"	f
@@ -49,13 +47,8 @@ inputType	inputType.php	/^	function inputType(button)$/;"	f
 level	edit.php	/^	$level=$_GET['level'];$/;"	v
 level	level3.php	/^	$level=$_GET['level'];$/;"	v
 loadFile	menu.php	/^	function loadFile(evt)$/;"	f
-localization.level	dataModel/info.js	/^						localization={"level":level,"sublevel":field};$/;"	p
-localization.level	dataModel/info.js	/^					localization = {"level":level,"sublevel":0}$/;"	p
-localization.sublevel	dataModel/info.js	/^						localization={"level":level,"sublevel":field};$/;"	p
-localization.sublevel	dataModel/info.js	/^					localization = {"level":level,"sublevel":0}$/;"	p
-locateVariable	dataModel/info.js	/^function locateVariable(code)$/;"	f
-name	navStages.php	/^		foreach($stages as $name=>$active) $/;"	v
-navL2stage	navStages.php	/^	function navL2stage($alias,$level,$sublevel)$/;"	f
+localization	dataModel/locateVariable.js	/^	var localization={}; \/\/e.g {"level":"Water","sublevel":"Abstraction"}$/;"	f
+locateVariable	dataModel/locateVariable.js	/^function locateVariable(code)$/;"	f
 newSubstage	level3.php	/^		function newSubstage()$/;"	f
 newSystem	menu.php	/^	function newSystem()$/;"	f
 nlink	navbar.php	/^	function nlink($href,$name)$/;"	f
@@ -69,52 +62,45 @@ onload	menu.php	/^		reader.onload=function()$/;"	j
 printCell	activeStages.php	/^	function printCell(stage,colspan)$/;"	f
 printL1stage	configuration.php	/^				function printL1stage($alias,$name)$/;"	f
 printL1stage	stages.php	/^	function printL1stage($alias,$level)$/;"	f
-printL2GENERALstage	stages.php	/^	function printL2GENERALstage($alias,$level,$sublevel)$/;"	f
-printL2stage	configuration.php	/^				function printL2stage($alias,$name,$newRow)$/;"	f
+printL2stage	configuration.php	/^				function printL2stage($class,$alias,$name,$newRow)$/;"	f
 printL2stage	stages.php	/^	function printL2stage($alias,$level,$sublevel)$/;"	f
 reader.onload	menu.php	/^		reader.onload=function()$/;"	j
 removeCookie	js/cookies.js	/^function removeCookie(name)$/;"	f
 saveToFile	menu.php	/^	function saveToFile()$/;"	f
-sep	edit.php	/^	\/*separator*\/ $sep="<span style=color:black>&rsaquo;<\/span>";$/;"	v
 setCookie	js/cookies.js	/^function setCookie(name,value,days) $/;"	f
-setTechnology	configuration.php	/^		function setTechnology(stage,selectedTec)$/;"	f
 showSubstageMenu	level3.php	/^		function showSubstageMenu(index,ev)$/;"	f
 stageName	activeStages.php	/^	function stageName(stage)$/;"	f
 stageName	configuration.php	/^		function stageName(stage)$/;"	f
-stages	navStages.php	/^	$stages=$global['Configuration']["Active Stages"];$/;"	v
 stages	stages.php	/^	$stages=json_decode($_COOKIE['GLOBAL'],true)["Configuration"]["Active Stages"];$/;"	v
 sublevel	edit.php	/^	$sublevel=isset($_GET['sublevel']) ? $_GET['sublevel'] : false;$/;"	v
 sublevel	level3.php	/^	$sublevel=$_GET['sublevel'];$/;"	v
+sublevelName	stages.php	/^				$sublevelName="Energy use and production";break;$/;"	v
+sublevelName	stages.php	/^				$sublevelName=$sublevel;break;$/;"	v
 sumAll	level3.php	/^		function sumAll(code)$/;"	f
 summaryMenu	navbar.php	/^	function summaryMenu(ev)$/;"	f
 tableRow	getStarted.php	/^		function tableRow(field,input,type)$/;"	f
 tableRows	summary.php	/^		function tableRows(object,name,family,href)$/;"	f
 title	edit.php	/^	$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel<\/a> $sep <span style=color:black>$titleSublevel (Level 2)<\/span>" : "<span style=color:black>$titleLevel (Level 1)<\/span>";$/;"	v
 title	level3.php	/^	$title="<a href=stages.php>Input data<\/a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages (Level 3)<\/a>";$/;"	v
-titleLevel	edit.php	/^		case "Waste":  $titleLevel="Wastewater";break;$/;"	v
-titleLevel	edit.php	/^		case "Water":  $titleLevel="Water Supply";break;$/;"	v
-titleLevel	edit.php	/^		default:	   $titleLevel=$level;break;$/;"	v
-titleLevel	level3.php	/^		case "Waste": $titleLevel="<a href=edit.php?level=$level>Wastewater<\/a>";break;$/;"	v
-titleLevel	level3.php	/^		case "Water": $titleLevel="<a href=edit.php?level=$level>Water Supply<\/a>";break;$/;"	v
-titleSublevel	edit.php	/^			default:	   $titleSublevel=$sublevel;break;$/;"	v
 titleSublevel	level3.php	/^	$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>$sublevel<\/a>";$/;"	v
 transformField	edit.php	/^		function transformField(element)$/;"	f
 transformField	level3.php	/^		function transformField(element)$/;"	f
 transformField	variable.php	/^		function transformField(element)$/;"	f
 type	summary.php	/^	$type=$_GET['type'];$/;"	v
+updateCountryInfo	selection.php	/^		function updateCountryInfo()$/;"	f
 updateCounts	summary.php	/^		function updateCounts()$/;"	f
 updateField	edit.php	/^		function updateField(field,newValue)$/;"	f
 updateField	getStarted.php	/^		function updateField(field,newValue)$/;"	f
+updateField	selection.php	/^		function updateField(object,field,newValue)$/;"	f
 updateField	variable.php	/^		function updateField(field,newValue)$/;"	f
 updateForm	getStarted.php	/^		function updateForm()$/;"	f
+updateFuelInfo	selection.php	/^		function updateFuelInfo()$/;"	f
 updateInfoTable	variable.php	/^		function updateInfoTable()$/;"	f
 updateInputs	edit.php	/^		function updateInputs()$/;"	f
 updateLevel1	summary.php	/^		function updateLevel1()$/;"	f
 updateLevel2	summary.php	/^		function updateLevel2()$/;"	f
-updateOptions	configuration.php	/^		function updateOptions(family)$/;"	f
 updateOutputs	edit.php	/^		function updateOutputs()$/;"	f
 updateOutputs	level3.php	/^		function updateOutputs()$/;"	f
-updateQuestion	configuration.php	/^		function updateQuestion(stage,question,newValue)$/;"	f
 updateResult	currentJSON.php	/^	function updateResult()$/;"	f
 updateSubstage	level3.php	/^		function updateSubstage(index,field,newValue)$/;"	f
 updateSubstagesTable	level3.php	/^		function updateSubstagesTable()$/;"	f

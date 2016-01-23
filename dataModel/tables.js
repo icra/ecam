@@ -6,31 +6,15 @@
 		N2O emission factor (jose porro external excel)
 */
 
-var Tables =
-{
-	"Fuel types": //units: all (kg/TJ) but NCV (TJ/Gg)
+var Tables = {
+	"Fuel types": //(kg/TJ) but NCV (TJ/Gg)
 	{
-		"Gas / Diesel Oil":{
-			EFCO2:74100,
-			EFCH4:3,
-			EFN2O:0.6,
-			NCV:43,
-		},
-		"Gasoline / Petrol":{
-			EFCO2:69300,
-			EFCH4:3,
-			EFN2O:0.6,
-			NCV:44.3,
-		},
-		"Natural Gas":{
-			EFCO2:56100,
-			EFCH4:1,
-			EFN2O:0.1,
-			NCV:48,
-		},
+		"Gas / Diesel Oil"  :{ "EFCO2":74100, "EFCH4":3, "EFN2O":0.6, "NCV":43,   },
+		"Gasoline / Petrol" :{ "EFCO2":69300, "EFCH4":3, "EFN2O":0.6, "NCV":44.3, },
+		"Natural Gas"       :{ "EFCO2":56100, "EFCH4":1, "EFN2O":0.1, "NCV":48,   },
 	},
 
-	"BOD":  /* [g/person/day]. Table 6.4 */
+	"Countries":  /* BOD [g/person/day]. Table 6.4 */
 	{
 		"Africa":37,
 		"Egypt":34,
@@ -47,5 +31,27 @@ var Tables =
 		"Sweden":75,
 		"Turkey":38,
 		"United States":85,
+	},
+
+	/** Technologies for Water/Waste Treatment */
+	"Technologies":{
+		"Water":{
+			"None":{},
+			"Pre-ox/C/F/S/Filt/Des":{},
+			"Pre-ox/C/F/Filt/Des":{},
+			"C/F/S/Filt/Des":{},
+			"C/F/Filt/Des":{},
+			"Des":{},
+			"Other":{},
+		},
+		"Waste":{
+			"None":{},
+			"Trickling filters (TF)":{},
+			"Activated sludge (AS)":{},
+			"AS and Coagulation/Filtration (C/F)":{},
+			"AS nitrification and C/F":{},
+			"Laggons":{},
+			"Other":{},
+		},
 	},
 }

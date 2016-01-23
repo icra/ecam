@@ -364,7 +364,6 @@
 		{
 			updateSubstagesTable()
 			updateOutputs()
-			Questions.hideFields()
 			updateResult()
 		}
 	</script>

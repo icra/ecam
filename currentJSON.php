@@ -9,7 +9,7 @@ text-align:left;border:1px solid #ccc;width:30%;background:#fafafa">
 	/** Stringify Global object and display it */
 	function updateResult()
 	{
-		document.getElementById('currentGlobal').innerHTML=JSON.stringify(Global,null,"    ")
+		document.getElementById('currentGlobal').innerHTML=JSON.stringify(Global,null,"  ")
 		setCookie("GLOBAL",JSON.stringify(Global))
 	}
 </script>
