@@ -111,7 +111,7 @@
 			document.write("<tr><td>"+question+"?<td>")
 			document.write("<label>No  <input name='"+question+"' type=radio value=0 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" checked></label> ")
 			document.write("<label>Yes <input name='"+question+"' type=radio value=1 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" "+checked+"></label> ")
-			document.write("<td style=background:lightcoral>List for hidden variables needed");
+			document.write("<td style=background:lightcoral>List of variables to hide needed");
 		}
 	</script>
 </table>
