@@ -60,7 +60,7 @@
 		</script>
 	</select>
 	<!--fuel info-->
-	<table id=fuelInfo><tr><th>EFCO2 (kg/TJ)<th>EFCH4 (kg/TJ)<th>EFN2O (kg/TJ)<th>NCV (TJ/Gg)</table>
+	<table id=fuelInfo><tr><th>EFCO2 (kg/TJ)<th>EFCH4 (kg/TJ)<th>EFN2O (kg/TJ)<th>NCV (TJ/Gg)<th>FD (kg/L)</table>
 </div>
 
 <!--COUNTRY - BOD-->

@@ -33,6 +33,14 @@ var Global = {
 		"ws7":0,
 		"ws8":0,
 		"ws9":0,
+		c_ws50:function(){
+			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type']];
+			return (this.ws9*fuel.FD*fuel.NCV)/1000/1000
+		},
+		c_ws51:function(){
+			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type']];
+			return this.c_ws50()*(fuel.EFCO2+298*fuel.EFN2O+34*fuel.EFCH4);
+		},
 		"General":{
 			"wsg1":0,
 			"wsg2":0,
@@ -70,14 +78,23 @@ var Global = {
 		"ww9" :0,
 		"ww10":0,
 		"ww11":0,
-		c_ww50:function(){return this.ww7},
-		c_ww51:function(){return "ww7 x protein consumption x 0.16 x 1.1 x 1.25"},
+		"ww12":0,
+
+		//<TESTING>
+		"ww13":0, //protein added by lluis bosch
+		//</TESTING>
+
+		c_ww50:function(){return this.ww7/1000*22*Global.General.Days()-this.ww12},
+		c_ww51:function(){return this.ww7*this.ww13*0.16*1.1*1.25},
 		c_ww52:function(){return 34*this.ww7*(40/1000*365)*0.06},
 		c_ww53:function(){return 298*this.ww10*0.005*(44/28)},
 		c_ww54:function(){return 74100*this.c_ww58() + 34*3.9*this.c_ww58() + 298*3.9*this.c_ww58()},
-		c_ww55:function(){return 34*this.ww7*(40/1000*365)*0.48},
-		c_ww56:function(){return "((ww11 x FD)/1000) x NCV/1000"},
-		c_ww57:function(){return this.c_ww56()*(Tables['Fuel types'][Global.Configuration.Selected.Fuel].EFCO2 + 298*Tables['Fuel types'][Global.Configuration.Selected.Fuel].EFN2O + 34*Tables['Fuel types'][Global.Configuration.Selected.Fuel].EFCH4)},
+		c_ww55:function(){return 0.2*this.c_ww50()*0.59*0.66*34},
+		c_ww56:function(){
+			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type']];
+			return this.ww11*fuel.FD/1000*fuel.NCV/1000;
+		},
+		c_ww57:function(){return this.c_ww56()*(Tables['Fuel types'][Global.Configuration.Selected['Fuel type']].EFCO2 + 298*Tables['Fuel types'][Global.Configuration.Selected['Fuel type']].EFN2O + 34*Tables['Fuel types'][Global.Configuration.Selected['Fuel type']].EFCH4)},
 		c_ww58:function(){return this.ww8*2*this.ww9*0.25*43/1000000},
 		"General":{
 			"wwg1":0,
@@ -96,10 +113,8 @@ var Global = {
 			"wwt1":0,
 			"wwt2":0,
 			"wwt3":0,
-			"wwt4":0,
 			"wwt5":0,
 			"wwt6":0,
-			"wwt7":0,
 			"wwt8":0,
 			"wwt9":0,
 			"wwt10":0,
@@ -108,14 +123,18 @@ var Global = {
 			"wwt13":0,
 			"wwt14":0,
 			c_wwt50:function(){return this.wwt2-this.wwt3},
-			c_wwt51:function(){return "(((ww7  x (3.2,by default protein consumption)/1000) x (Ap/365))) x 298"},
-			c_wwt52:function(){return "(ww7 x (40,by default BOD,/1000 x 365) x 0.06) x 34"},
-			c_wwt53:function(){return "wwt2 x wwt12 x EVM"},
+			c_wwt51:function(){return 298*Global.Waste.ww7*3.2/1000*Global.General.Days()/365},
+			c_wwt52:function(){return Global.Waste.ww7*40*365*0.06*34/1000},
+			c_wwt53:function(){return this.wwt2*this.wwt12*10*3600000/100;},
 			c_wwt54:function(){return 74100*this.c_wwt57()+34*3.9*this.c_wwt57()+298*3.9*this.c_wwt57()},
 			c_wwt55:function(){return 298*this.wwt5*0.005*44/28},
-			c_wwt56:function(){return 298*this.c_wwt58*0.005*44/28},
-			c_wwt57:function(){return "((ww11 xFD)/1000) x NCV/1000"},	
-			c_wwt58:function(){return Global.Waste.ww7*this.wwt7*0.16*1.1*1.25},
+			c_wwt56:function(){return 298*this.c_wwt58()*0.005*44/28},
+			c_wwt57:function(){
+				var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type']];
+				return (Global.Waste.ww11*fuel.FD/1000)*(fuel.NCV/1000);
+			},	
+			c_wwt58:function(){return Global.Waste.ww7*Global.Waste.ww13*0.16*1.1*1.25},
+			c_wwt59:function(){return 0.2*this.c_wwt50()*0.59*0.66*34},
 		},
 		"Discharge":{
 			"wwd1":0,
@@ -171,6 +190,7 @@ var Global = {
 			"Are you producing electrical energy"   : 0,
 			"Do you have fuel engines to run pumps" : 0,
 			"Is your topography flat"               : 0,
+			"(WW) Industrial or commercial connecting without onsite treatment" : 0,
 		},
 	},
 }

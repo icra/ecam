@@ -41,6 +41,7 @@ var Units =
 	//derived magnitudes from mass,distance and time
 	"Volume":{ 
 		m3:1,
+		Nm3:1, //normal cubic meters
 		L:0.001,
 	},
 	"Flow":{ 

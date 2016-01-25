@@ -114,7 +114,7 @@
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
-				newCell.innerHTML="Used to calculate"
+				newCell.innerHTML="Is used to calculate"
 				newCell=newRow.insertCell(-1)
 				newCell.style.backgroundColor="yellow"
 				newCell.innerHTML=(function(){

@@ -1,17 +1,16 @@
 /**
 	Wait for Mario to gather all this information
-		Fuel types
 		Protein per country
 		MCF
 		N2O emission factor (jose porro external excel)
 */
 
 var Tables = {
-	"Fuel types": //(kg/TJ) but NCV (TJ/Gg)
+	"Fuel types": //(kg/TJ) but NCV (TJ/Gg). FD (kg/L)
 	{
-		"Gas / Diesel Oil"  :{ "EFCO2":74100, "EFCH4":3, "EFN2O":0.6, "NCV":43,   },
-		"Gasoline / Petrol" :{ "EFCO2":69300, "EFCH4":3, "EFN2O":0.6, "NCV":44.3, },
-		"Natural Gas"       :{ "EFCO2":56100, "EFCH4":1, "EFN2O":0.1, "NCV":48,   },
+		"Gas / Diesel Oil"  :{ "EFCO2":74100, "EFCH4":3, "EFN2O":0.6, "NCV":43,   "FD":0.84},
+		"Gasoline / Petrol" :{ "EFCO2":69300, "EFCH4":3, "EFN2O":0.6, "NCV":44.3, "FD":0.74},
+		"Natural Gas"       :{ "EFCO2":56100, "EFCH4":1, "EFN2O":0.1, "NCV":48,   "FD":0.75},
 	},
 
 	"Countries":  /* BOD [g/person/day]. Table 6.4 */

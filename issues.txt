@@ -21,9 +21,11 @@ Calculated variables that still output a NaN
  | - c_wwt57
 
 Variables missing
- | - EFCO2, EFCH4, EFN2O, NCV --> working on them
  | - FD
  | - proteinconsumption
  | - defaultproteinconsumption
  | - defaultBOD
  | - EVM
+ | - Protein per country
+ | - MCF
+ | - N2O emission factor (jose porro external excel)

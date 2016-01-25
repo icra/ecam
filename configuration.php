@@ -16,17 +16,22 @@
 			{
 				if(checkbox.checked)
 				{
-					/**remove disabled*/ elements[i].removeAttribute('disabled')
 					/**normal color*/ elements[i].parentNode.style.color=""
 				}
 				else
 				{
 					/**uncheck*/elements[i].checked=false
-					/**set disabled*/elements[i].setAttribute('disabled',true)
-					/**set grey color*/elements[i].parentNode.style.color="#ccc"
-					/**set grey bg*/elements[i].parentNode.parentNode.style.backgroundColor=""
+					/**remove green color*/elements[i].parentNode.parentNode.style.backgroundColor=""
 					/**modifiy Active Stages*/Global.Configuration["Active Stages"][elements[i].id]=0
 				}
+			}
+
+			//if level 2 is activated, activate L1 if not active
+			if(checkbox.getAttribute('class') && checkbox.checked)
+			{
+				var l1=checkbox.getAttribute('class');
+				/**set checked*/document.getElementById(l1).checked=true;
+				activate(l1);
 			}
 
 			//background color: green or white
@@ -108,18 +113,18 @@
 				{
 					if($newRow){echo "<tr>";}
 					echo "<td>
-						<label style=color:#ccc>
-							<input type=checkbox disabled id=$alias class=$class onchange=activate(this.id)> 
+						<label>
+							<input type=checkbox id=$alias class=$class onchange=activate(this.id)> 
 							<img src=img/$alias.png>
 							$name
 						</label>";
 				}
-				printL1stage("water",   "Water supply");
+				printL1stage("water","Water supply");
 				printL2stage("water","waterGen","Energy use and production", false);
 				printL2stage("water","waterAbs","Abstraction", true);
 				printL2stage("water","waterTre","Treatment",   true);
 				printL2stage("water","waterDis","Distribution",true);
-				printL1stage('waste',  "Wastewater");
+				printL1stage('waste',"Wastewater");
 				printL2stage("waste","wasteGen","Energy use and production",false);
 				printL2stage("waste","wasteCol","Collection",true);
 				printL2stage("waste","wasteTre","Treatment", true);

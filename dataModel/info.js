@@ -27,8 +27,10 @@ var Info = {
 	"ws5":{description:"Total energy consumed from the grid (from power bills) during the assessment period",    magnitude:"Energy",  unit:"kWh",},
 	"ws6":{description:"Total volume produced for urban drinking water system",                                  magnitude:"Volume",  unit:"m3",},
 	"ws7":{description:"Volume of authorized consumption",                                                       magnitude:"Volume",  unit:"m3",},
-	"ws8":{description: "Water loss from leaks in the distribution system, as known or estimated by the Utility",magnitude:"Percent", unit:"%",},
+	"ws8":{description:"Water loss from leaks in the distribution system, as known or estimated by the Utility", magnitude:"Percent", unit:"%",},
 	"ws9":{description:"Volume of Fuel consumed",                                                                magnitude:"Volume",  unit:"m3",},
+	c_ws50:{description:"Energ Fuel Cons (engines)",                                                             magnitude:"Energy",  unit:"TJ",},
+	c_ws51:{description:"Direct CO2 emitted in wastewater stages from on-site engines",                          magnitude:"Mass",    unit:"kg",},
 
 	//L2 Water Supply General
 	"wsg1":{description:"Water-related electrical energy produced by the utility (renewable energy) during the assessment period",magnitude:"Energy",unit:"kWh",},
@@ -108,7 +110,9 @@ var Info = {
 	"ww9" :{description:"Distance to disposal site",                                                          magnitude:"Distance",      unit:"km",},
 	"ww10":{description:"Enter nitrogen effluent limit",                                                      magnitude:"Concentration", unit:"mg/L",},
 	"ww11":{description:"Volume of Fuel consumed",                                                            magnitude:"Volume",        unit:"L",},
-	c_ww50:{description:"Population",magnitude:"People",unit:"people"},
+	"ww12":{description:"Amount of recovered biogas",                                                         magnitude:"Volume",        unit:"m3",},
+	"ww13":{description:"Annual per capita protein consumption <select onchange=Global.Waste.ww13=parseFloat(this.value);init()><option value=0>--select country--<option value=20.8>Thailand (20.8)<option value=24.5>Peru (24.5)<option value=33.6>Mexico (33.6)</select>", magnitude:"Annual per capita consumption",   unit:"kg/person/year",},
+	c_ww50:{description:"Biogas production based in the population",magnitude:"Volume",unit:"Nm3"},
 	c_ww51:{description:"N2O emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kg"},
 	c_ww52:{description:"CH4 emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kg"},
 	c_ww53:{description:"N2O emitted from wastewater effluent discharged",magnitude:"Mass",unit:"kg"},
@@ -139,10 +143,8 @@ var Info = {
 	"wwt1" :{description:"Wastewater load (BOD)",magnitude:"Mass",unit:"kg",},
 	"wwt2" :{description:"Biogas produced",magnitude:"Volume",unit:"m3",},
 	"wwt3" :{description:"Biogas valorised",magnitude:"Volume",unit:"m3",},
-	"wwt4" :{description:"<span style=color:red>Fuel type</span>",magnitude:"",             unit:"",},
 	"wwt5" :{description:"TN effluent concentration",magnitude:"Concentration",unit:"mg/L",},
 	"wwt6" :{description:"Influent nitrogen load",magnitude:"Mass",unit:"kg",},
-	"wwt7" :{description:"<span style=color:red>Geographical location</span>",magnitude:"",unit:"",},
 	"wwt8" :{description:"Volume of treated wastewater",                                                    magnitude:"Volume",       unit:"m3",},
 	"wwt9" :{description:"Electric energy consumed in WWTPs (from the grid and self-produced)",             magnitude:"Energy",       unit:"kWh",},
 	"wwt10":{description:"BOD effluent (average)",                                                          magnitude:"Mass",         unit:"kg",},
@@ -158,7 +160,8 @@ var Info = {
 	c_wwt55:{description:"Indirect CO2e emitted in receiving waters due to nitrogen in wastewater effluent",magnitude:"Mass",         unit:"kg"},
 	c_wwt56:{description:"N2O emissions from untreated wastewater direct discharge",                        magnitude:"Mass",         unit:"kg",},
 	c_wwt57:{description:"Energ Fuel Cons(iS1)",                                                            magnitude:"Mass",         unit:"kg"},
-	c_wwt58:{description:"Total annual amount of nitrogen discharged directly to aquatic environment",      magnitude:"?",            unit:"kg N/yr",},
+	c_wwt58:{description:"Total annual amount of nitrogen discharged directly to aquatic environment",      magnitude:"Mass",         unit:"kg",},
+	c_wwt59:{description:"NO DESCRIPTION",      magnitude:"Mass",            unit:"kg",},
 
 		//L3 Wastewater Treatment
 		"wwt15":{description:"Tests complying with discharge consents",                                        magnitude:"Number",  unit:"number",},
