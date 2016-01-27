@@ -22,11 +22,17 @@
 		function updateFuelInfo()
 		{
 			var table=document.querySelector('#fuelInfo');
-			while(table.rows.length>1){table.deleteRow(-1)}
+			while(table.rows.length>2){table.deleteRow(-1)}
 			var newRow=table.insertRow(-1);
 			for(var field in Tables['Fuel types'][Global.Configuration.Selected['Fuel type']])
 			{
-				newRow.insertCell(-1).innerHTML='<td>'+Tables['Fuel types'][Global.Configuration.Selected['Fuel type']][field];
+				if(field=="EFCH4" || field=="EFN2O")
+				{
+					newRow.insertCell(-1).innerHTML='<td>'+Tables['Fuel types'][Global.Configuration.Selected['Fuel type']][field].engines;
+					newRow.insertCell(-1).innerHTML='<td>'+Tables['Fuel types'][Global.Configuration.Selected['Fuel type']][field].vehicles;
+				}
+				else
+					newRow.insertCell(-1).innerHTML='<td>'+Tables['Fuel types'][Global.Configuration.Selected['Fuel type']][field];
 			}
 		}
 
@@ -39,6 +45,9 @@
 			newRow.insertCell(-1).innerHTML='<td>'+Tables['Countries'][Global.Configuration.Selected['Country']];
 		}
 	</script>
+	<style>
+		th{vertical-align:middle}
+	</style>
 </head><body onload=init()><center>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--title--><h1>Options that define variables</h2>
@@ -60,7 +69,19 @@
 		</script>
 	</select>
 	<!--fuel info-->
-	<table id=fuelInfo><tr><th>EFCO2 (kg/TJ)<th>EFCH4 (kg/TJ)<th>EFN2O (kg/TJ)<th>NCV (TJ/Gg)<th>FD (kg/L)</table>
+	<table id=fuelInfo> 
+		<tr>
+			<th colspan=2>EFCH4 (kg/TJ)
+			<th colspan=2>EFN2O (kg/TJ)
+			<th rowspan=2>EFCO2          (kg/TJ)
+			<th rowspan=2>FD             (kg/L)
+			<th rowspan=2>NCV            (TJ/Gg)
+		<tr>
+			<th>engines
+			<th>vehicles
+			<th>engines
+			<th>vehicles
+	</table>
 </div>
 
 <!--COUNTRY - BOD-->

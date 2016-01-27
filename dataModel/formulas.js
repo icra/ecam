@@ -6,15 +6,19 @@ var Formulas = {
 	*/
 	idsPerFormula:function(formula)
 	{
-		var matches=[]
-		var match
+		var matches=[];
+		var match;
 		for(field in Info)
 		{
-			var reg=new RegExp('\\W'+field+'\\D');
+			/* 
+				\W matches any non-word characters (short for [^a-zA-Z0-9_]). 
+				\D matches any non-digit (short for [^0-9]).
+			*/
+			var reg=new RegExp("\\W"+field+"(\\D|$)");
 			match=formula.search(reg); //will return -1 if not found
 			if(match!=-1){matches.push(field);}
 		}
-		return matches
+		return matches;
 	},
 
 	/*
@@ -33,22 +37,25 @@ var Formulas = {
 			{
 				matches=matches.concat(this.outputsPerInput(id,object[field]));
 			}
-			if(typeof object[field]=="function")
+			if(typeof object[field]=="function" || typeof object[field]=="number")
 			{
 				match=object[field].toString().search(reg); //will return -1 if not found
 				if(match!=-1){matches.push(field);}
 			}
 		}
-		return matches
+		return matches;
 	},
 
 	prettify:function(formula)
 	{
 		var result = formula.replace(/function/,"")
 		result = result.replace(/this./g,"")
+		result = result.replace(/'/g,"")
+		result = result.replace(/"/g,"")
+		result = result.replace(/var/g,"")
 		result = result.replace(/\|\|0/g,"")
 		result = result.replace(/return/g,"")
-		result = result.replace(/\r/g,"")
+		result = result.replace(/[\r\n\t]/g,"")
 		result = result.replace(/Global./g,"")
 		result = result.replace(/Water./g,"")
 		result = result.replace(/Waste./g,"")
@@ -60,8 +67,7 @@ var Formulas = {
 		result = result.replace(/Discharge./g,"")
 		result = result.replace(/\(\)/g,"")
 		result = result.replace(/[{}]/g,"")
-		result = result.replace(/ /g,"")
-		return result
+		return result;
 	},
 
 	/**
@@ -71,12 +77,12 @@ var Formulas = {
 	 */
 	hlFields:function(formula,hl)
 	{
-		var fields=Formulas.idsPerFormula(formula)
-		for(field in fields)
+		var fields=this.idsPerFormula(formula);
+		var newColor=hl?"#af0":"";
+		for(var field in fields)
 		{
-			var element=document.querySelector('[field='+fields[field]+']')
-			if(element)
-				element.style.backgroundColor=hl?"#af0":""
+			var element=document.querySelector('[field='+fields[field]+']');
+			if(element){element.style.backgroundColor=newColor;}
 		}
 	}
 }

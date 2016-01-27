@@ -87,7 +87,7 @@
 				if(typeof(object[variable])!="<?php echo $typeof?>")continue
 
 				var description=Info[variable]?Info[variable].description:"<span style=color:#ccc>no description</span>";
-				var unit = Global.Configuration.Units[variable] || Info[variable].unit || "no unit"
+				var unit = Global.Configuration.Units[variable] || Info[variable].unit
 				var multiplier = Units.multiplier(variable);
 				ret+="<tr field='"+variable+"' family='"+family+"'>"+
 					"<td style='font-weight:bold'><a style='color:"+color+"' href=variable.php?id="+variable+">"+variable+"</a>"+

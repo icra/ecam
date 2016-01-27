@@ -72,6 +72,8 @@
 			for(field in CurrentLevel)
 			{
 				if(typeof(CurrentLevel[field])!="number" ){continue;}
+				/*check if field is level3 specific*/
+				if(Level3.isInList(field)){continue;}
 				/*new row*/var newRow=t.insertRow(-1);
 				/*attribute field==field>*/newRow.setAttribute('field',field);
 				/*code*/ newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
@@ -126,12 +128,15 @@
 			for(var field in CurrentLevel)
 			{
 				if(typeof(CurrentLevel[field])!="function"){continue;}
+				/*check if field is level3 specific*/
+				if(Level3.isInList(field)){continue;}
 				var newCell,newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
 				var formula=CurrentLevel[field].toString();
-				newRow.setAttribute('title',Formulas.prettify(formula));
-				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+formula+"',1)");
-				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+formula+"',0)");
+				var prettyFormula=Formulas.prettify(formula);
+				newRow.setAttribute('title',prettyFormula);
+				newRow.setAttribute('onmouseover','Formulas.hlFields("'+prettyFormula+'",1)');
+				newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+prettyFormula+'",0)');
 				/*code*/ newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
 				/*description*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
 				/*value*/ newRow.insertCell(-1).innerHTML=CurrentLevel[field]()/Units.multiplier(field); /*if nan, outputs 0*/
@@ -264,7 +269,7 @@
 	<!--OUTPUTS-->
 	<table id=outputs class=inline style=background:yellow>
 		<tr><th colspan=5>OUTPUTS
-		<tr><th>Code<th>Description<th>Current Value<th>Unit<th>Indicator
+		<tr><th>Code<th>Description<th>Current Value<th>Unit<th>Indicator (now is a random color)
 	</table>
 </div>
 

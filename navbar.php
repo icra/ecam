@@ -42,8 +42,8 @@
 		{
 			nlink("getStarted.php",   "Get started");
 			nlink("configuration.php","Configuration");
+			nlink("selection.php",    "Questions and options");
 			nlink("stages.php",       "Input data");
-			nlink("selection.php",    "Selection (temporary)");
 			echo "<div class=inactive-tab><a id=linkSummary onclick=summaryMenu(event) style=cursor:pointer>Summary</a></div>";
 			include'navStages.php';
 		}

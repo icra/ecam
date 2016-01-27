@@ -9,7 +9,7 @@
 			"unit"		  : string,
 		},
 
- 	then, the function "locateVariable" helps to locate the level and sublevel
+ 	then, the function "Info.locateVariable" helps to locate the level and sublevel
 */
 
 var Info = {
@@ -35,12 +35,12 @@ var Info = {
 	//L2 Water Supply General
 	"wsg1":{description:"Water-related electrical energy produced by the utility (renewable energy) during the assessment period",magnitude:"Energy",unit:"kWh",},
 	"wsg2":{description:"Water-related renewable electrical energy sold by the utility (renewable energy) during the assessment period",magnitude:"Energy",unit:"kWh",},
-	"wsg3":{description:"Non-water related renewable electricity production by the utility",magnitude:"Energy",unit:"kWh",},
-	"wsg4":{description:"Non-water related renewable electricity sold by the utility",magnitude:"Energy",unit:"kWh",},
+	"wsg3":{description:"Non-water related renewable electricity production by the utility",    magnitude:"Energy",unit:"kWh",},
+	"wsg4":{description:"Non-water related renewable electricity sold by the utility",          magnitude:"Energy",unit:"kWh",},
 	"wsg5":{description:"Heat energy, provided to neighboring districts for heating or cooling",magnitude:"Energy",unit:"Joule",},
 	c_wsg50:{description:"Net total process related grid energy consumed by the utility related to the urban drinking water system",magnitude:"Energy",unit:"kWh"},
-	c_wsg51:{description:"Net total process related grid energy consumed by the utility",magnitude:"Energy",unit:"kWh"},
-	c_wsg52:{description:"Non process related grid energy consumed by the utility",magnitude:"Energy",unit:"kWh"},
+	c_wsg51:{description:"Net total process related grid energy consumed by the utility",       magnitude:"Energy",unit:"kWh"},
+	c_wsg52:{description:"Non process related grid energy consumed by the utility",             magnitude:"Energy",unit:"kWh"},
 
 	//L2 Water Abstraction
 	"wsa1":{description:"Electric energy consumed for pumping abstracted water (from the grid and self-produced)",magnitude:"Energy",unit:"kWh",},
@@ -55,48 +55,56 @@ var Info = {
 		"wsa8" :{description:"Water losses",                        magnitude:"Volume",   unit:"m3",},
 		"wsa9" :{description:"Mains lenght",                        magnitude:"Distance", unit:"km",},
 		"wsa10":{description:"Friction pipe losses",                magnitude:"Head",     unit:"m",},
+		c_wsa50:{description:"[Sum](abstracted water volume pumped x pump head in meters)",magnitude:"Volume x Head",unit:"m3 x 100m"},
 
 	//L2 Water Treatment
 	"wst1":{description:"Volume of treated water",                                           magnitude:"Volume", unit:"m3",},
 	"wst2":{description:"Electric energy consumed in WTPs (from the grid and self-produced)",magnitude:"Energy", unit:"kWh",},
 		
 		//L3 Water Treatment
-		"wst3" :{description:"Treated water quality tests carried out",                   magnitude:"Number", unit:"number",},
-		"wst4" :{description:"Compliance of aesthetic tests",                             magnitude:"Number", unit:"number",},
-		"wst5" :{description:"Compliance of microbiological tests",                       magnitude:"Number", unit:"number",},
-		"wst6" :{description:"Compliance of physical-chemical tests",                     magnitude:"Number", unit:"number",},
-		"wst7" :{description:"Compliance of radioactivity tests",                         magnitude:"Number", unit:"number",},
-		"wst8" :{description:"Volume of treated water in WTPs with Pre-ox/C/F/S/Filt/Des",magnitude:"Volume", unit:"m3",},	
-		"wst9" :{description:"Volume of treated water in WTPs with Pre-ox/C/F/Filt/Des",  magnitude:"Volume", unit:"m3",},	
-		"wst10":{description:"Volume of treated water in WTPs with C/F/S/Filt/Des",       magnitude:"Volume", unit:"m3",},
-		"wst11":{description:"Volume of treated water in WTPs with C/F/Filt/Des",         magnitude:"Volume", unit:"m3",},
-		"wst12":{description:"Volume of treated water in WTPs with Des",                  magnitude:"Volume", unit:"m3",},
-		"wst13":{description:"Volume of treated water in WTPs with other",                magnitude:"Volume", unit:"m3",},
-		"wst14":{description:"Sludge produced in WTPs",                                   magnitude:"Mass",   unit:"kg",},
-		"wst15":{description:"Treatment capacity",                                        magnitude:"Volume", unit:"m3",},
+		"wst3" :{description:"Treated water quality tests carried out",                   magnitude:"Number",    unit:"number",},
+		"wst4" :{description:"Compliance of aesthetic tests",                             magnitude:"Number",    unit:"number",},
+		"wst5" :{description:"Compliance of microbiological tests",                       magnitude:"Number",    unit:"number",},
+		"wst6" :{description:"Compliance of physical-chemical tests",                     magnitude:"Number",    unit:"number",},
+		"wst7" :{description:"Compliance of radioactivity tests",                         magnitude:"Number",    unit:"number",},
+		"wst8" :{description:"Volume of treated water in WTPs with Pre-ox/C/F/S/Filt/Des",magnitude:"Volume",    unit:"m3",},	
+		"wst9" :{description:"Volume of treated water in WTPs with Pre-ox/C/F/Filt/Des",  magnitude:"Volume",    unit:"m3",},	
+		"wst10":{description:"Volume of treated water in WTPs with C/F/S/Filt/Des",       magnitude:"Volume",    unit:"m3",},
+		"wst11":{description:"Volume of treated water in WTPs with C/F/Filt/Des",         magnitude:"Volume",    unit:"m3",},
+		"wst12":{description:"Volume of treated water in WTPs with Des",                  magnitude:"Volume",    unit:"m3",},
+		"wst13":{description:"Volume of treated water in WTPs with other",                magnitude:"Volume",    unit:"m3",},
+		"wst14":{description:"Sludge produced in WTPs",                                   magnitude:"Mass",      unit:"kg",},
+		"wst15":{description:"Treatment capacity",                                        magnitude:"Volume",    unit:"m3",},
+		"wst16":{description:"Tests complying with discharge consents",                   magnitude:"Number",    unit:"number",},
+		c_wst50:{description:"Percentage of tests complying with regulations",            magnitude:"Percentage",unit:"%"},
 
 	//L2 Water Distribution
 	"wsd1":{description:"Electric energy consumed for pumping distributed water (from the grid and self produced)", magnitude:"Energy", unit:"kWh", },
 		
 		//L3 Water Distribution
-		"wsd2" :{description:"Delivery points with adequate pressure",                    magnitude:"Number",    unit:"number",},
-		"wsd3" :{description:"Number of service connections",                             magnitude:"Number",    unit:"number",},
-		"wsd4" :{description:"Time system is pressurised",                                magnitude:"Time",      unit:"hour",},
-		"wsd5" :{description:"Resident population connected to supply systems",           magnitude:"Population",unit:"Inhab.",},
-		"wsd6" :{description:"Serviced population in supply systems",                     magnitude:"Population",unit:"serv. Pop.",},
-		"wsd7" :{description:"System input volume",                                       magnitude:"Volume",    unit:"m3",},
-		"wsd8" :{description:"Non-revenue water",                                         magnitude:"Volume",    unit:"m3",},
-		"wsd9" :{description:"Volume injected",                                           magnitude:"Volume",    unit:"m3",},
-		"wsd10":{description:"Minimum pressure to be supplied at the distribution nodes	",magnitude:"Pressure",  unit:"m",},
-		"wsd11":{description:"Highest node elevation",                                    magnitude:"Volume",    unit:"m asl",},
-		"wsd12":{description:"Lowest node elevation of the stage",                        magnitude:"Volume",    unit:"m asl",},
-		"wsd13":{description:"Average nodes elevation",                                   magnitude:"Volume",    unit:"m asl",},
-		"wsd14":{description:"Water table elevation node",                                magnitude:"Volume",    unit:"m",},
-		"wsd15":{description:"Distributed water pumped",                                  magnitude:"Volume",    unit:"m3",},
-		"wsd16":{description:"Pump head",                                                 magnitude:"Volume",    unit:"m",},
-		"wsd17":{description:"Energy recovered at water distribution",                    magnitude:"Volume",    unit:"kWh",},
-		"wsd18":{description:"Mains length",                                              magnitude:"Volume",    unit:"km",},
-		"wsd19":{description:"Friction pipe losses",                                      magnitude:"Volume",    unit:"m",},
+		"wsd2" :{description:"Delivery points with adequate pressure",                                  magnitude:"Number",    unit:"number",},
+		"wsd3" :{description:"Number of service connections",                                           magnitude:"Number",    unit:"number",},
+		"wsd4" :{description:"Time system is pressurised",                                              magnitude:"Time",          unit:"hour",},
+		"wsd5" :{description:"Resident population connected to supply systems",                         magnitude:"Population",    unit:"Inhab.",},
+		"wsd6" :{description:"Serviced population in supply systems",                                   magnitude:"Population",    unit:"serv. Pop.",},
+		"wsd7" :{description:"System input volume",                                                     magnitude:"Volume",        unit:"m3",},
+		"wsd8" :{description:"Non-revenue water",                                                       magnitude:"Volume",        unit:"m3",},
+		"wsd9" :{description:"Volume injected",                                                         magnitude:"Volume",        unit:"m3",},
+		"wsd10":{description:"Minimum pressure to be supplied at the distribution nodes	",              magnitude:"Pressure",      unit:"m",},
+		"wsd11":{description:"Highest node elevation",                                                  magnitude:"Volume",        unit:"m asl",},
+		"wsd12":{description:"Lowest node elevation of the stage",                                      magnitude:"Volume",        unit:"m asl",},
+		"wsd13":{description:"Average nodes elevation",                                                 magnitude:"Volume",        unit:"m asl",},
+		"wsd14":{description:"Water table elevation node",                                              magnitude:"Volume",        unit:"m",},
+		"wsd15":{description:"Distributed water pumped",                                                magnitude:"Volume",        unit:"m3",},
+		"wsd16":{description:"Pump head",                                                               magnitude:"Volume",        unit:"m",},
+		"wsd17":{description:"Energy recovered at water distribution",                                  magnitude:"Volume",        unit:"kWh",},
+		"wsd18":{description:"Mains length",                                                            magnitude:"Volume",        unit:"km",},
+		"wsd19":{description:"Friction pipe losses",                                                    magnitude:"Volume",        unit:"m",},
+		c_wsd50:{description:"Natural energy provided (gravity energy from supply to distribution)",    magnitude:"Energy",        unit:"kWh"},
+		c_wsd51:{description:"Minimum required energy for the system to operate by users (theoretical)",magnitude:"Energy",        unit:"kWh"},
+		c_wsd52:{description:"Total supplied energy to the network (natural plus shaft), real system",  magnitude:"Energy",        unit:"kWh"},
+		c_wsd53:{description:"Topographic energy supplied to the system",                               magnitude:"Energy",        unit:"kWh"},
+		c_wsd54:{description:"[Sum](distributed water volume pumped x pump head in meters)",            magnitude:"Volume x head", unit:"m3x100m"},
 
 	//L1 WASTEWATER
 	"ww1" :{description:"Energy costs of the wastewater utility",                                             magnitude:"Currency",      unit:"USD",},
@@ -112,6 +120,7 @@ var Info = {
 	"ww11":{description:"Volume of Fuel consumed",                                                            magnitude:"Volume",        unit:"L",},
 	"ww12":{description:"Amount of recovered biogas",                                                         magnitude:"Volume",        unit:"m3",},
 	"ww13":{description:"Annual per capita protein consumption <select onchange=Global.Waste.ww13=parseFloat(this.value);init()><option value=0>--select country--<option value=20.8>Thailand (20.8)<option value=24.5>Peru (24.5)<option value=33.6>Mexico (33.6)</select>", magnitude:"Annual per capita consumption",   unit:"kg/person/year",},
+	"ww14":{description:"<span style=color:red>input not specified</span>", magnitude:"Annual per capita consumption",   unit:"kg/person/year",},
 	c_ww50:{description:"Biogas production based in the population",magnitude:"Volume",unit:"Nm3"},
 	c_ww51:{description:"N2O emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kg"},
 	c_ww52:{description:"CH4 emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kg"},
@@ -136,8 +145,9 @@ var Info = {
 	"wwc2":{description:"Electric energy consumed for conveying wastewater to treatment (from the grid and self-produced)",magnitude:"Energy",unit:"kWh",},
 
 		//L3 Wastewater Collection
-		"wwc3":{description:"Volume pumped",magnitude:"Volume",unit:"m3",},
-		"wwc4":{description:"Pump head",    magnitude:"Head",  unit:"m",},
+		"wwc3" :{description:"Volume pumped",magnitude:"Volume",unit:"m3",},
+		"wwc4" :{description:"Pump head",    magnitude:"Head",  unit:"m",},
+		c_wwc50:{description:"[Sum] (water volume pumped x pump head in meters)",magnitude:"Volume x head",unit:"m3 x 100m",},
 
 	//L2 Wastewater Treatment
 	"wwt1" :{description:"Wastewater load (BOD)",magnitude:"Mass",unit:"kg",},
@@ -161,7 +171,7 @@ var Info = {
 	c_wwt56:{description:"N2O emissions from untreated wastewater direct discharge",                        magnitude:"Mass",         unit:"kg",},
 	c_wwt57:{description:"Energ Fuel Cons(iS1)",                                                            magnitude:"Mass",         unit:"kg"},
 	c_wwt58:{description:"Total annual amount of nitrogen discharged directly to aquatic environment",      magnitude:"Mass",         unit:"kg",},
-	c_wwt59:{description:"NO DESCRIPTION",      magnitude:"Mass",            unit:"kg",},
+	c_wwt59:{description:"Methane (CO2e) emitted in wastewater treatment plants",                           magnitude:"Mass",            unit:"kg",},
 
 		//L3 Wastewater Treatment
 		"wwt15":{description:"Tests complying with discharge consents",                                        magnitude:"Number",  unit:"number",},
@@ -175,6 +185,7 @@ var Info = {
 		"wwt23":{description:"Sludge produced in WWTPs (total weight)",                                        magnitude:"Mass",    unit:"kg",},
 		"wwt24":{description:"Dry weight in sludge produced",                                                  magnitude:"Fraction",unit:"% w/w",},
 		"wwt25":{description:"Treatment capacity",                                                             magnitude:"Volume",  unit:"m3",},
+		c_wwt60:{description:"Percentage of test complying with regulations",                                  magnitude:"Percentage",unit:"%",},
 
 	//L2 Wastewater Discharge
 	"wwd1":{description:"Volume of discharged wastewater",                                                             magnitude:"Volume",unit:"m3",},
@@ -183,8 +194,10 @@ var Info = {
 	"wwd4":{description:"Energy recovered in wastewater discharged",                                                   magnitude:"Energy",unit:"kWh",},
 		
 		//L3 Wastewater Discharge
-		"wwd5":{description:"Enter volume pumped",              magnitude:"Volume",unit:"m3",},
-		"wwd6":{description:"Enter head pumped against",        magnitude:"Head",  unit:"m",},
-		"wwd7":{description:"Enter turbine water volume pumped",magnitude:"Volume",unit:"m3",},
-		"wwd8":{description:"Enter turbine head",               magnitude:"Head",  unit:"m3",},
+		"wwd5" :{description:"Enter volume pumped",                              magnitude:"Volume",       unit:"m3",},
+		"wwd6" :{description:"Enter head pumped against",                        magnitude:"Head",         unit:"m",},
+		"wwd7" :{description:"Enter turbine water volume pumped",                magnitude:"Volume",       unit:"m3",},
+		"wwd8" :{description:"Enter turbine head",                               magnitude:"Head",         unit:"m3",},
+		c_wwd50:{description:"[Sum] (water volume pumped x pump head in meters)",magnitude:"Volume x head",unit:"m3 x 100m"},
+		c_wwd51:{description:"[Sum] (water volume pumped x pump head in meters)",magnitude:"Volume x head",unit:"m3 x 100m"},
 }

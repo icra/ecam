@@ -148,7 +148,7 @@
 			/*update table header */
 				while(t.rows[0].cells.length>1)t.rows[0].deleteCell(-1)
 				//go over substages: create a column for each
-				for(s in substages)
+				for(var s in substages)
 				{
 					var newTH = document.createElement('th');
 					newTH.style.cursor="pointer";
@@ -182,13 +182,16 @@
 				while(t.rows.length>1)t.deleteRow(-1)
 				//each row corresponds to a variable of the current stage
 				var inputs=getInputs();
-				for(input in inputs)
+				for(var input in inputs)
 				{
 					/*variable code*/var code=inputs[input];
 					var newRow=t.insertRow(-1);
 					newRow.setAttribute('field',code);
 					var newCell=newRow.insertCell(-1);
-					/*link and name*/newCell.innerHTML="<a href=variable.php?id="+code+">"+code+"</a>";
+					/*link and name*/newCell.innerHTML=(function(){
+						var extra = Level3.isInList(code) ? "L3 - " : "" ;
+						return extra+" <a href=variable.php?id="+code+">"+code+"</a>";
+					})();
 					/*variable description*/
 					var newCell=newRow.insertCell(-1);
 					newCell.style.textAlign="left";
@@ -291,10 +294,14 @@
 				var newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
 				var formula=CurrentStage[field].toString();
-				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+formula+"',1)");
-				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+formula+"',0)");
-				newRow.setAttribute('title',Formulas.prettify(formula));
-				newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
+				var prettyFormula=Formulas.prettify(formula);
+				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+prettyFormula+"',1)");
+				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+prettyFormula+"',0)");
+				newRow.setAttribute('title',prettyFormula);
+				newRow.insertCell(-1).innerHTML=(function(){
+					var extra = Level3.isInList(field) ? "L3 - " : "" ;
+					return extra+" <a href=variable.php?id="+field+">"+field+"</a>";
+				})();
 				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
 
 				/** Compute CurrentStage[field]() for each substage*/

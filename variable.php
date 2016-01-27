@@ -70,6 +70,13 @@
 			newCell.innerHTML="Type"
 			newRow.insertCell(-1).innerHTML=typeof(currentStage[id])=="function"? ("Output <br><br><b>Formula:</b> "+Formulas.prettify(currentStage[id].toString())) : "Input"
 
+			//Is "id" level 3 specific?
+			newRow=t.insertRow(-1)
+			newCell=newRow.insertCell(-1)
+			newCell.className='th'
+			newCell.innerHTML="Is in Level 3 only?"
+			newRow.insertCell(-1).innerHTML=Level3.isInList(id)
+
 			//Magnitude
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
