@@ -78,11 +78,13 @@ var Formulas = {
 	hlFields:function(formula,hl)
 	{
 		var fields=this.idsPerFormula(formula);
-		var newColor=hl?"#af0":"";
+		var yesno = hl ? "yes":"no";
 		for(var field in fields)
 		{
 			var element=document.querySelector('[field='+fields[field]+']');
-			if(element){element.style.backgroundColor=newColor;}
+			if(element){
+				element.setAttribute('hl',yesno);
+			}
 		}
 	}
 }

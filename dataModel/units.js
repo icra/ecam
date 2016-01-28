@@ -49,8 +49,8 @@ var Units =
 		"L/s":0.001,
 	},
 	"Energy":{
-		Joule:1,
-		kWh:3600000,
+		kWh:1,
+		Joule:(1/3600000),
 	},
 	"Currency":{
 		USD:1,

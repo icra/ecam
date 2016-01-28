@@ -1,13 +1,30 @@
-<?php
-	/** void: echo a link if the current web page is not the one in the link's href */
-	function nlink($href,$name)
-	{
-		if(strpos($_SERVER['PHP_SELF'],$href)) 
-			echo "<div class=active-tab><a href='$href' style=color:black>$name</a></div>";
-		else 
-			echo "<div class=inactive-tab><a href='$href'>$name</a></div>";
-	}
-?>
+<div id=navbar>
+	<?php
+		/** void: echo a link if the current web page is not the one in the link's href */
+		function nlink($href,$name)
+		{
+			if(strpos($_SERVER['PHP_SELF'],$href)) 
+				echo "<div class=active-tab><a href='$href' style=color:black>$name</a></div>";
+			else 
+				echo "<div class=inactive-tab><a href='$href'>$name</a></div>";
+		}
+
+		nlink("index.php","&#8962; HOME");
+		if(isset($_COOKIE['GLOBAL']))
+		{
+			nlink("getStarted.php",   "Get started");
+			nlink("configuration.php","Configuration");
+			nlink("selection.php",    "Questions and options");
+
+			echo "<div class=inactive-tab>";
+				include'navStages.php';
+			echo "</div>";
+
+			echo "<div class=inactive-tab><a id=linkSummary onclick=summaryMenu(event) style=cursor:pointer>Summary</a></div>";
+			nlink("todo.php", "To do");
+		}
+	?>
+</div>
 
 <style>
 	#navbar {
@@ -34,31 +51,16 @@
 	div.summaryMenu div.close{color:black; padding:0; margin:0;}
 </style>
 
-
-<div id=navbar>
-	<?php
-		nlink("index.php","&#8962; HOME");
-		if(isset($_COOKIE['GLOBAL']))
-		{
-			nlink("getStarted.php",   "Get started");
-			nlink("configuration.php","Configuration");
-			nlink("selection.php",    "Questions and options");
-			nlink("stages.php",       "Input data");
-			echo "<div class=inactive-tab><a id=linkSummary onclick=summaryMenu(event) style=cursor:pointer>Summary</a></div>";
-			include'navStages.php';
-			nlink("todo.php", "TO DO LIST");
-		}
-	?>
-</div>
-
 <?php
 	//if we are in edit.php, make "input data" active
-	if(strpos($_SERVER['PHP_SELF'],"edit.php") || strpos($_SERVER['PHP_SELF'],"level3.php"))
+	if(	strpos($_SERVER['PHP_SELF'],"edit.php") ||
+		strpos($_SERVER['PHP_SELF'],"level3.php") ||
+		strpos($_SERVER['PHP_SELF'],"stages.php") )
 	{?>
 			<script>
 				var link = document.querySelector('a[href="stages.php"]')
 				link.style.color='black'
-				link.parentNode.className='active-tab'
+				document.querySelector('#navStages').parentNode.className='active-tab'
 			</script>
 	<?php }
 

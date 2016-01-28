@@ -160,12 +160,12 @@ var Global = {
 			c_wwg51:function(){return this.c_wwg50()-(this.wwg1+this.wwg3-this.wwg2-this.wwg4)},
 		},
 		"Collection":{
-			"wwc1":0,
 			"wwc2":0,
 			/*<Level3>*/
 			"wwc3":0,
 			"wwc4":0,
 			c_wwc50:function(){return this.wwc3*this.wwc4/100},
+			c_wwc51:function(){return (Global.Waste.ww14*Global.Waste.ww7*Global.General.Days()/Global.Waste.ww13/1000000-Global.Waste.ww4*Global.Waste.ww7/Global.Waste.ww6)||0}
 			/*</Level3>*/
 		},
 		"Treatment":{
@@ -285,3 +285,45 @@ var Global = {
 		},
 	},
 }
+
+
+/*PERFORMANCE INDICATORS -- LEVEL 1*/
+//L1 Water
+Global.Water.wS4    = function(){return 100*this.ws1/this.ws2||0}
+Global.Water.wS5    = function(){return 100*this.ws7/this.ws6||0}
+Global.Water.gE1w   = function(){return this.ws3/this.ws4||0}		
+Global.Water.gE2w   = function(){return this.ws5*365/Global.General.Days()/this.ws2||0}
+Global.Water.gE3w   = function(){return this.ws5*365/Global.General.Days()/this.ws1||0}
+Global.Water.gE4w   = function(){return this.ws5/this.ws7||0}
+/*If there are different fuel mixes for any stage or part of a stage, the proper emission factor (V1) 
+	shall be applied for each stage or sub-stage individually*/
+Global.Water.wGHG1  = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())*365/Global.General.Days()/this.ws2||0} 
+/*If there are different fuel mixes for any stage or part of a stage, the proper emission factor (V1) 
+	shall be applied for each stage or sub-stage individually*/
+Global.Water.wGHG2  = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())*365/Global.General.Days()/this.ws1||0}	
+/*If there are different fuel mixes for any stage or part of a stage, the proper emission factor (V1) 
+	shall be applied for each stage or sub-stage individually*/
+Global.Water.wGHG3  = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())/this.ws7||0}
+Global.Water.wGHG4  = function(){return this.c_ws51()/this.ws1||0}
+Global.Water.wGHG5  = function(){return this.c_ws51()/this.ws7||0}
+Global.Water.wGHG6  = function(){return (this.ws5*Global.UWS.uw1)/this.ws1||0}
+Global.Water.wGHG7  = function(){return (this.ws5*Global.UWS.uw1)/this.ws7||0}
+
+//L2 Wastewater
+//Sewer system: any system where compliance can be assessed. This indicator is calculated for a stage as a whole and per sub-stage (wS1.a, wS1.b, ...)	
+Global.Waste.wwS1   = function(){return 100*this.ww6/this.ww5||0}
+/*This indicator may be assessed for periods shorter than one year, but special consideration is required when 
+	used for comparisons, either internal or external to the undertaking. This indicator is calculated for a 
+	stage as a whole and per sub-stage (wS2.a, wS2.b, ...) */
+Global.Waste.wwS2   = function(){return 100*this.ww7/this.ww6||0}
+Global.Waste.gE1ww  = function(){return 100*this.ww1/this.ww2||0}
+Global.Waste.gE2ww  = function(){return this.ww3*365/Global.General.Days()/this.ww5||0}
+Global.Waste.gE3ww  = function(){return this.ww3*365/Global.General.Days()/this.ww7||0}
+Global.Waste.gE4ww  = function(){return this.ww3/this.ww4||0}
+//If there are different fuel mixes for any stage or part of a stage, the proper emission factor (V1) shall be applied for each stage or sub-stage individually	
+Global.Waste.wwGHG1 = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*365/Global.General.Days()/this.ww5||0}
+//If there are different fuel mixes for any stage or part of a stage, the proper emission factor (V1) shall be applied for each stage or sub-stage individually	
+Global.Waste.wwGHG2 = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*365/Global.General.Days()/this.ww7||0}
+//If there are different fuel mixes for any stage or part of a stage, the proper emission factor (V1) shall be applied for each stage or sub-stage individually	
+Global.Waste.wwGHG3 = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())/this.ww4||0}	
+Global.Waste.wwGHG7 = function(){return this.ww3*Global.UWS.uw1/this.ww4||0}

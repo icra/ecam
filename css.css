@@ -13,6 +13,11 @@ th,td{border:1px solid #ccc;padding:0.4em;font-weight:normal}
 th{background:#00aff1;color:white;vertical-align:top}
 hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0;}
 
+/*highlight inputs when mouse goes over a row that has a formula*/
+tr.isCV{background:#f7f2e0}
+tr[hl=yes]{background:#af0}
+tr[hl=no]{background:default}
+
 /*ECAM blue*/.blue{color:#00AFF1;}
 /*ECAM red*/.red{color:#bf5050;}
 

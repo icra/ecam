@@ -110,7 +110,7 @@ var Info = {
 	"ww1" :{description:"Energy costs of the wastewater utility",                                             magnitude:"Currency",      unit:"USD",},
 	"ww2" :{description:"Running costs of the utility related to the urban wastewater system",                magnitude:"Currency",      unit:"USD",},
 	"ww3" :{description:"Total energy consumed from the grid (from power bills) during the assessment period",magnitude:"Energy",        unit:"kWh",},
-	"ww4" :{description:"Total volume processed through urban wastewater system",                             magnitude:"Volume",        unit:"m3",},
+	"ww4" :{description:"Total volume of wastewater collected prior to dilution",                             magnitude:"Volume",        unit:"m3",},
 	"ww5" :{description:"Resident population within the wastewater utility area of service",                  magnitude:"People",        unit:"People",},
 	"ww6" :{description:"Resident population connected to Sewer System (SE)",                                 magnitude:"People",        unit:"People",},
 	"ww7" :{description:"Serviced population in sewer and WWTP system",                                       magnitude:"People",        unit:"People",},
@@ -120,7 +120,7 @@ var Info = {
 	"ww11":{description:"Volume of Fuel consumed",                                                            magnitude:"Volume",        unit:"L",},
 	"ww12":{description:"Amount of recovered biogas",                                                         magnitude:"Volume",        unit:"m3",},
 	"ww13":{description:"Annual per capita protein consumption <select onchange=Global.Waste.ww13=parseFloat(this.value);init()><option value=0>--select country--<option value=20.8>Thailand (20.8)<option value=24.5>Peru (24.5)<option value=33.6>Mexico (33.6)</select>", magnitude:"Annual per capita consumption",   unit:"kg/person/year",},
-	"ww14":{description:"<span style=color:red>input not specified</span>", magnitude:"Annual per capita consumption",   unit:"kg/person/year",},
+	"ww14":{description:"BOD per person per day", magnitude:"Mass/inhab/time",   unit:"g/person/day",},
 	c_ww50:{description:"Biogas production based in the population",magnitude:"Volume",unit:"Nm3"},
 	c_ww51:{description:"N2O emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kg"},
 	c_ww52:{description:"CH4 emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kg"},
@@ -141,13 +141,13 @@ var Info = {
 	c_wwg51:{description:"Net total process related grid energy consumed by the utility",magnitude:"Energy",unit:"kWh",},
 
 	//L2 Wastewater Collection
-	"wwc1":{description:"Volume of wastewater conveyed to treatment or to an outfall for untreated discharge",             magnitude:"Volume",unit:"m3",},
 	"wwc2":{description:"Electric energy consumed for conveying wastewater to treatment (from the grid and self-produced)",magnitude:"Energy",unit:"kWh",},
 
 		//L3 Wastewater Collection
-		"wwc3" :{description:"Volume pumped",magnitude:"Volume",unit:"m3",},
-		"wwc4" :{description:"Pump head",    magnitude:"Head",  unit:"m",},
+		"wwc3" :{description:"Volume pumped",                                    magnitude:"Volume",unit:"m3",},
+		"wwc4" :{description:"Pump head",                                        magnitude:"Head",  unit:"m",},
 		c_wwc50:{description:"[Sum] (water volume pumped x pump head in meters)",magnitude:"Volume x head",unit:"m3 x 100m",},
+		c_wwc51:{description:"Volume of dilution from Infiltration and Inflow",  magnitude:"Volume",unit:"m3",},
 
 	//L2 Wastewater Treatment
 	"wwt1" :{description:"Wastewater load (BOD)",magnitude:"Mass",unit:"kg",},
@@ -194,10 +194,35 @@ var Info = {
 	"wwd4":{description:"Energy recovered in wastewater discharged",                                                   magnitude:"Energy",unit:"kWh",},
 		
 		//L3 Wastewater Discharge
-		"wwd5" :{description:"Enter volume pumped",                              magnitude:"Volume",       unit:"m3",},
-		"wwd6" :{description:"Enter head pumped against",                        magnitude:"Head",         unit:"m",},
-		"wwd7" :{description:"Enter turbine water volume pumped",                magnitude:"Volume",       unit:"m3",},
-		"wwd8" :{description:"Enter turbine head",                               magnitude:"Head",         unit:"m3",},
+		"wwd5" :{description:"Enter volume pumped",                              magnitude:"Volume",       unit:"m3"},
+		"wwd6" :{description:"Enter head pumped against",                        magnitude:"Head",         unit:"m"},
+		"wwd7" :{description:"Enter turbine water volume pumped",                magnitude:"Volume",       unit:"m3"},
+		"wwd8" :{description:"Enter turbine head",                               magnitude:"Head",         unit:"m3"},
 		c_wwd50:{description:"[Sum] (water volume pumped x pump head in meters)",magnitude:"Volume x head",unit:"m3 x 100m"},
 		c_wwd51:{description:"[Sum] (water volume pumped x pump head in meters)",magnitude:"Volume x head",unit:"m3 x 100m"},
+	
+	//PERFORMANCE INDICATORS LEVEL 1
+	wS4	   :{description:"Resident population connected to supply system",		                                                           magnitude:"Percent",           unit:"%"},
+	wS5	   :{description:"Non-revenue water by volume",                                                                                    magnitude:"Percent",           unit:"%"},	
+	gE1w   :{description:"Energy costs ratio",                                                                                             magnitude:"Ratio",             unit:"-"},
+	gE2w   :{description:"Energy consumption for the urban drinking water system per capita",	                                           magnitude:"Energy/inhab/time", unit:"kWh/inhab/year"},
+	gE3w   :{description:"Energy consumption for the urban drinking water system per serviced population",	                               magnitude:"Energy/inhab/time", unit:"kWh/serv.Pop/year"},
+	gE4w   :{description:"Energy consumption for the urban drinking water system per authorized consumption",	                           magnitude:"Energy/Volume",     unit:"kWh/m3"},
+	wGHG1  :{description:"Drinking water GHG emissions per capita",                                                                        magnitude:"Mass/inhab/time",   unit:"kgCO2e/inhab/year"},
+	wGHG2  :{description:"Drinking water GHG emissions per serviced population",                                                           magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year"},
+	wGHG3  :{description:"Drinking water GHG emissions per authorized consumption",                                                        magnitude:"Mass/Volume",       unit:"kgCO2e/m3"},
+	wGHG4  :{description:"GHG emissions from utility activities other than those from electricity consumption per serviced population",    magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year"},
+	wGHG5  :{description:"GHG emissions from utility activities other than those from electricity consumption per authorized consumption", magnitude:"Mass/Volume",       unit:"kgCO2e/m3"},
+	wGHG6  :{description:"GHG emissions from electricity consumption per serviced population",  	                                       magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year"},
+	wGHG7  :{description:"GHG emissions from electricity consumption per authorized consumption",  	                                       magnitude:"Mass/Volume",       unit:"kgCO2e/m3"},
+	wwS1   :{description:"Resident population connected to sewer system",                                                                  magnitude:"Percent",           unit:"%"},
+	wwS2   :{description:"Treated Wastewater in WWTP",                                                                                     magnitude:"Percent",           unit:"%"},
+	gE1ww  :{description:"Energy costs ratio",                                                                                             magnitude:"Percent",           unit:"%"},
+	gE2ww  :{description:"Energy consumption for the urban wastewater system per capita",	                                               magnitude:"Energy/inhab/time", unit:"kWh/inhab./year"},
+	gE3ww  :{description:"Energy consumption for the urban wastewater system per serviced population",	                                   magnitude:"Energy/inhab/time", unit:"kWh/serv.Pop./year"},
+	gE4ww  :{description:"Energy consumption for the urban wastewater system per collected wastewater volume", 	                           magnitude:"Energy/Volume",     unit:"kWh/m3"},
+	wwGHG1 :{description:"GHG emissionsfrom Wastewater system per capita",                                                                 magnitude:"Mass/inhab/time",   unit:"kgCO2e/inhab/year"},
+	wwGHG2 :{description:"GHG emissionsfrom Wastewater system per serviced population",                                                    magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year"},
+	wwGHG3 :{description:"GHG emissionsfrom Wastewater system per collected wastewater volume",	                                           magnitude:"Mass/inhab/time",   unit:"kgCO2e/m3"},
+	wwGHG7 :{description:"GHG emissions from electricity consumption per collected wastewater",	                                           magnitude:"Mass/inhab/time",   unit:"kgCO2e/m3"},
 }

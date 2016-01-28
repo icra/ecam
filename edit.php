@@ -71,51 +71,97 @@
 			while(t.rows.length>2){t.deleteRow(-1)}
 			for(field in CurrentLevel)
 			{
-				if(typeof(CurrentLevel[field])!="number" ){continue;}
-				/*check if field is level3 specific*/
-				if(Level3.isInList(field)){continue;}
+				/*first check if function*/
+				if(typeof(CurrentLevel[field])!="number")
+				{
+					/*then, check if is calculated variable "c_xxxxxx" */
+					if(field.search('c_')==-1){continue};
+				}
+
+				/*check if field is level3 specific*/if(Level3.isInList(field)){continue;}
+
+				//bool for if current field is a calculated variable (CV)
+				var isCV = field.search('c_')!=-1
+
 				/*new row*/var newRow=t.insertRow(-1);
+
+				/*background*/if(isCV){newRow.classList.add('isCV');}
+
+				/*hlFields for formula and show formula, only if CV*/
+				if(isCV)
+				{
+					var formula = CurrentLevel[field].toString();
+					var prettyFormula = Formulas.prettify(formula);
+					newRow.setAttribute('onmouseover','Formulas.hlFields("'+prettyFormula+'",1)');
+					newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+prettyFormula+'",0)');
+					newRow.setAttribute('title',prettyFormula);
+				}
+				
 				/*attribute field==field>*/newRow.setAttribute('field',field);
 				/*code*/ newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
 				/*description*/ newRow.insertCell(-1).innerHTML= Info[field] ? Info[field].description : "<span style=color:#ccc>not defined</span>";
-				//editable cell
+				//editable cell if not CV
 				var newCell=newRow.insertCell(-1);
-				newCell.className="input";
-				newCell.setAttribute('onclick','transformField(this)');
-				/*value*/newCell.innerHTML=CurrentLevel[field]/Units.multiplier(field);
+				if(!isCV)
+				{
+					newCell.className="input";
+					newCell.setAttribute('onclick','transformField(this)');
+				}
+				else newCell.style.textAlign='center'
+
+				/*value*/newCell.innerHTML=(function(){
+					if(isCV)
+						return CurrentLevel[field]()/Units.multiplier(field);
+					else
+						return CurrentLevel[field]/Units.multiplier(field);
+				})();
 				//unit
 				newRow.insertCell(-1).innerHTML=(function()
 				{
-					var str="<select onchange=Units.selectUnit('"+field+"',this.value)>";
-					if(Info[field]===undefined)
+					if(isCV) 
 					{
-						return "<span style=color:#ccc>no unit</span>";
+						return Info[field].unit;
 					}
-					if(Units[Info[field].magnitude]===undefined)
+					else
 					{
-						return Info[field].unit
+						var str="<select onchange=Units.selectUnit('"+field+"',this.value)>";
+						if(Info[field]===undefined)
+						{
+							return "<span style=color:#ccc>no unit</span>";
+						}
+						if(Units[Info[field].magnitude]===undefined)
+						{
+							return Info[field].unit
+						}
+						var currentUnit = Global.Configuration.Units[field] || Info[field].unit
+						for(unit in Units[Info[field].magnitude])
+						{
+							if(unit==currentUnit)
+								str+="<option selected>"+unit+"</option>";
+							else
+								str+="<option>"+unit+"</option>";
+						}
+						str+="</select>"
+						return str
 					}
-					var currentUnit = Global.Configuration.Units[field] || Info[field].unit
-					for(unit in Units[Info[field].magnitude])
-					{
-						if(unit==currentUnit)
-							str+="<option selected>"+unit+"</option>";
-						else
-							str+="<option>"+unit+"</option>";
-					}
-					str+="</select>"
-					return str
 				})();
 				//data quality
 				newRow.insertCell(-1).innerHTML=(function(){
-					var select = document.createElement('select');
-					['Actual','Estimated'].forEach(function(opt)
+					if(isCV)
 					{
-						var option=document.createElement('option');
-						option.innerHTML=opt;
-						select.appendChild(option);
-					});
-					return select.outerHTML;
+						return "Calculated";
+					}
+					else
+					{
+						var select = document.createElement('select');
+						['Actual','Estimated'].forEach(function(opt)
+						{
+							var option=document.createElement('option');
+							option.innerHTML=opt;
+							select.appendChild(option);
+						});
+						return select.outerHTML;
+					}
 				})();
 			}
 		}
@@ -128,6 +174,8 @@
 			for(var field in CurrentLevel)
 			{
 				if(typeof(CurrentLevel[field])!="function"){continue;}
+				if(field.search('c_')!=-1){continue;}
+
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
 				var newCell,newRow=t.insertRow(-1);
@@ -137,9 +185,11 @@
 				newRow.setAttribute('title',prettyFormula);
 				newRow.setAttribute('onmouseover','Formulas.hlFields("'+prettyFormula+'",1)');
 				newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+prettyFormula+'",0)');
-				/*code*/ newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
+				/*code*/ newRow.insertCell(-1).innerHTML=(function(){
+					return "<a href=variable.php?id="+field+">"+field+"</a>";
+				})();
 				/*description*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
-				/*value*/ newRow.insertCell(-1).innerHTML=CurrentLevel[field]()/Units.multiplier(field); /*if nan, outputs 0*/
+				/*value*/ newRow.insertCell(-1).innerHTML=CurrentLevel[field]()/Units.multiplier(field);
 				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
 				/*circle indicator*/ 
 				newCell=newRow.insertCell(-1);
@@ -266,9 +316,9 @@
 		<tr><th>Code<th>Description<th>Current Value<th>Unit<th>Data Quality
 	</table>
 
-	<!--OUTPUTS-->
-	<table id=outputs class=inline style=background:yellow>
-		<tr><th colspan=5>OUTPUTS
+	<!--PI-->
+	<table id=outputs class=inline style=background:yellow;margin:1em>
+		<tr><th colspan=5>Performance Indicators
 		<tr><th>Code<th>Description<th>Current Value<th>Unit<th>Indicator (now is a random color)
 	</table>
 </div>

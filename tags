@@ -8,7 +8,31 @@ Formulas.idsPerFormula	dataModel/formulas.js	/^var Formulas = {$/;"	m
 Formulas.outputsPerInput	dataModel/formulas.js	/^	},$/;"	m
 Formulas.prettify	dataModel/formulas.js	/^	},$/;"	m
 Global.General	dataModel/global.js	/^var Global = {$/;"	p
+Global.Waste.gE1ww	dataModel/global.js	/^Global.Waste.wwS2   = function(){return this.ww7\/this.ww6||0}$/;"	f
+Global.Waste.gE2ww	dataModel/global.js	/^Global.Waste.gE1ww  = function(){return this.ww1\/this.ww2||0}$/;"	f
+Global.Waste.gE3ww	dataModel/global.js	/^Global.Waste.gE2ww  = function(){return this.ww3*365\/Global.General.Days()\/this.ww5||0}$/;"	f
+Global.Waste.gE4ww	dataModel/global.js	/^Global.Waste.gE3ww  = function(){return this.ww3*365\/Global.General.Days()\/this.ww7||0}$/;"	f
+Global.Waste.wwGHG1	dataModel/global.js	/^Global.Waste.gE4ww  = function(){return this.ww3\/this.ww4||0}$/;"	f
+Global.Waste.wwGHG2	dataModel/global.js	/^Global.Waste.wwGHG1 = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*365\/Global.General.Days()\/this.ww5||0}$/;"	f
+Global.Waste.wwGHG3	dataModel/global.js	/^Global.Waste.wwGHG2 = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*365\/Global.General.Days()\/this.ww7||0}$/;"	f
+Global.Waste.wwGHG7	dataModel/global.js	/^Global.Waste.wwGHG3 = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())\/this.ww4||0}	$/;"	f
+Global.Waste.wwS1	dataModel/global.js	/^Global.Water.wGHG7  = function(){return (this.ws5*Global.UWS.uw1)\/this.ws7||0}$/;"	f
+Global.Waste.wwS2	dataModel/global.js	/^Global.Waste.wwS1   = function(){return this.ww6\/this.ww5||0}$/;"	f
+Global.Water.gE1w	dataModel/global.js	/^Global.Water.wS5    = function(){return 100*this.ws7\/this.ws6||0}$/;"	f
+Global.Water.gE2w	dataModel/global.js	/^Global.Water.gE1w   = function(){return this.ws3\/this.ws4||0}		$/;"	f
+Global.Water.gE3w	dataModel/global.js	/^Global.Water.gE2w   = function(){return this.ws5*365\/Global.General.Days()\/this.ws2||0}$/;"	f
+Global.Water.gE4w	dataModel/global.js	/^Global.Water.gE3w   = function(){return this.ws5*365\/Global.General.Days()\/this.ws1||0}$/;"	f
+Global.Water.wGHG1	dataModel/global.js	/^Global.Water.gE4w   = function(){return this.ws5\/this.ws7||0}$/;"	f
+Global.Water.wGHG2	dataModel/global.js	/^Global.Water.wGHG1  = function(){return this.ws5*Global.UWS.uw1+this.c_ws51()*365\/Global.General.Days()\/this.ws2||0} $/;"	f
+Global.Water.wGHG3	dataModel/global.js	/^Global.Water.wGHG2  = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())*365\/Global.General.Days()\/this.ws1||0}	$/;"	f
+Global.Water.wGHG4	dataModel/global.js	/^Global.Water.wGHG3  = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())\/this.ws7||0}$/;"	f
+Global.Water.wGHG5	dataModel/global.js	/^Global.Water.wGHG4  = function(){return this.c_ws51()\/this.ws1||0}$/;"	f
+Global.Water.wGHG6	dataModel/global.js	/^Global.Water.wGHG5  = function(){return this.c_ws51()\/this.ws7||0}$/;"	f
+Global.Water.wGHG7	dataModel/global.js	/^Global.Water.wGHG6  = function(){return (this.ws5*Global.UWS.uw1)\/this.ws1||0}$/;"	f
+Global.Water.wS4	dataModel/global.js	/^}$/;"	f
+Global.Water.wS5	dataModel/global.js	/^Global.Water.wS4    = function(){return 100*this.ws1\/this.ws2||0}$/;"	f
 Info.uw1	dataModel/info.js	/^var Info = {$/;"	p
+Level3.isInList	dataModel/level3variables.js	/^];$/;"	f
 Substage	level3.php	/^		function Substage()$/;"	f
 Tables.Fuel types	dataModel/tables.js	/^var Tables = {$/;"	p
 Units.Distance	dataModel/units.js	/^	},$/;"	p
@@ -25,6 +49,7 @@ copyFieldsFrom	js/updateGlobalFromCookies.js	/^function copyFieldsFrom(object,na
 deleteSubstage	level3.php	/^		function deleteSubstage(index)$/;"	f
 div.onclick	navbar.php	/^		div.onclick=function(){div.style.display='none'}$/;"	j
 drawChart	sankey.php	/^	function drawChart(){$/;"	f
+for	level3.php	/^		\/** Substage class for storing all variables that correspond to current stage *\/$/;"	c
 getCookie	js/cookies.js	/^function getCookie(name)$/;"	f
 getInputs	level3.php	/^		function getInputs()$/;"	f
 hlStage	activeStages.php	/^	function hlStage(stage,hl)$/;"	f
@@ -67,6 +92,7 @@ printL2stage	stages.php	/^	function printL2stage($alias,$level,$sublevel)$/;"	f
 reader.onload	menu.php	/^		reader.onload=function()$/;"	j
 removeCookie	js/cookies.js	/^function removeCookie(name)$/;"	f
 saveToFile	menu.php	/^	function saveToFile()$/;"	f
+sep	edit.php	/^	\/*separator*\/ $sep="<span style=color:black>&rsaquo;<\/span>";$/;"	v
 setCookie	js/cookies.js	/^function setCookie(name,value,days) $/;"	f
 showSubstageMenu	level3.php	/^		function showSubstageMenu(index,ev)$/;"	f
 stageName	activeStages.php	/^	function stageName(stage)$/;"	f
@@ -82,6 +108,12 @@ tableRow	getStarted.php	/^		function tableRow(field,input,type)$/;"	f
 tableRows	summary.php	/^		function tableRows(object,name,family,href)$/;"	f
 title	edit.php	/^	$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel<\/a> $sep <span style=color:black>$titleSublevel (Level 2)<\/span>" : "<span style=color:black>$titleLevel (Level 1)<\/span>";$/;"	v
 title	level3.php	/^	$title="<a href=stages.php>Input data<\/a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages (Level 3)<\/a>";$/;"	v
+titleLevel	edit.php	/^		case "Waste":  $titleLevel="Wastewater";break;$/;"	v
+titleLevel	edit.php	/^		case "Water":  $titleLevel="Water Supply";break;$/;"	v
+titleLevel	edit.php	/^		default:	   $titleLevel=$level;break;$/;"	v
+titleLevel	level3.php	/^		case "Waste": $titleLevel="<a href=edit.php?level=$level>Wastewater<\/a>";break;$/;"	v
+titleLevel	level3.php	/^		case "Water": $titleLevel="<a href=edit.php?level=$level>Water Supply<\/a>";break;$/;"	v
+titleSublevel	edit.php	/^			default:	   $titleSublevel=$sublevel;break;$/;"	v
 titleSublevel	level3.php	/^	$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>$sublevel<\/a>";$/;"	v
 transformField	edit.php	/^		function transformField(element)$/;"	f
 transformField	level3.php	/^		function transformField(element)$/;"	f
