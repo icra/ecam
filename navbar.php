@@ -46,6 +46,7 @@
 			nlink("stages.php",       "Input data");
 			echo "<div class=inactive-tab><a id=linkSummary onclick=summaryMenu(event) style=cursor:pointer>Summary</a></div>";
 			include'navStages.php';
+			nlink("todo.php", "TO DO LIST");
 		}
 	?>
 </div>
