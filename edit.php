@@ -313,13 +313,23 @@
 	<!--INPUTS-->
 	<table id=inputs class=inline>
 		<tr><th colspan=5>INPUTS <?php include'inputType.php'?>
-		<tr><th>Code<th>Description<th>Current Value<th>Unit<th>Data Quality
+		<tr>
+			<th>Code
+			<th>Description
+			<th>Current Value
+			<th>Unit
+			<th>Data Quality
 	</table>
 
 	<!--PI-->
 	<table id=outputs class=inline style=background:yellow;margin:1em>
 		<tr><th colspan=5>Performance Indicators
-		<tr><th>Code<th>Description<th>Current Value<th>Unit<th>Indicator (now is a random color)
+		<tr>
+			<th>Code
+			<th>Description
+			<th>Current Value
+			<th>Unit
+			<th>Indicator
 	</table>
 </div>
 

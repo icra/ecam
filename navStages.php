@@ -19,14 +19,14 @@
 	<ul>
 		<li><a href=stages.php>Input data</a><ul>
 			<li><a href=edit.php?level=UWS>UWS</a></li>
-			<li><a href=edit.php?level=Water>Water Supply</a><ul>
+			<li><a href=edit.php?level=Water>Water Supply &rsaquo;</a><ul>
 				<li><a href=edit.php?level=Water&sublevel=General>Energy</a>
 				<li><a href=edit.php?level=Water&sublevel=Abstraction>Abstraction</a>
 				<li><a href=edit.php?level=Water&sublevel=Treatment>Treatment</a>
 				<li><a href=edit.php?level=Water&sublevel=Distribution>Distribution</a>
 			</ul>
 			</li>
-			<li><a href=edit.php?level=Waste>Wastewater</a><ul>
+			<li><a href=edit.php?level=Waste>Wastewater &rsaquo;</a><ul>
 				<li><a href=edit.php?level=Waste&sublevel=General>Energy</a>
 				<li><a href=edit.php?level=Waste&sublevel=Collection>Collection</a>
 				<li><a href=edit.php?level=Waste&sublevel=Treatment>Treatment</a>
