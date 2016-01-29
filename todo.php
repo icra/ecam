@@ -20,7 +20,7 @@
 <table>
 	<tr><th>Task																	   <th>Status
 	<tr><td colspan=2 class=taskgroup>BACK-END
-	<tr><td>Get KPI Level 2 (Level 1 is done)                                          <td class=priority>PRIORITY
+	<tr><td>Go through not revised PIs (Level 1 and Level 2 revised are done)          <td class=priority>PRIORITY
 	<tr><td>Add a longer description to each input/CV/PI (file called "<a href=dataModel/Info.js>Info.js</a>") <td>Pending	
 	<tr><td>Option to switch m3 to m3/day (assessment period) (ie ws6)				   <td>Pending
 	<tr><td>Option to have BOD in kg or mg/L (dividing by another variable)			   <td>Pending

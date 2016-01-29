@@ -224,29 +224,47 @@
 		}
 	</script>
 </head><body onload=init()><center>
-<!--NAVBAR--><?php include"navbar.php"?>
 
-<!--TITLE-->
-<?php 
-	//Set a navigable title for page
-	switch($level)
-	{
-		case "Water":  $titleLevel="Water Supply";break;
-		case "Waste":  $titleLevel="Wastewater";break;
-		default:	   $titleLevel=$level;break;
-	}
-	if($sublevel)
-	{
-		switch($sublevel)
-		{
-			case "General":$titleSublevel="Energy use and production";break;
-			default:	   $titleSublevel=$sublevel;break;
+<div id=fixedTopBar>
+	<style>
+		div#fixedTopBar {
+			position:fixed;
+			top:0;
+			width:100%;
+			margin:0;padding:0;
+			border-bottom:1px solid #ccc;
+			background:white;
 		}
-	}
-	/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
-	$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Level 2)</span>" : "<span style=color:black>$titleLevel (Level 1)</span>";
-?>
-<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
+	</style>
+
+	<!--NAVBAR--><?php include"navbar.php"?>
+
+	<!--TITLE-->
+	<?php 
+		//Set a navigable title for page
+		switch($level)
+		{
+			case "Water":  $titleLevel="Water Supply";break;
+			case "Waste":  $titleLevel="Wastewater";break;
+			default:	   $titleLevel=$level;break;
+		}
+		if($sublevel)
+		{
+			switch($sublevel)
+			{
+				case "General":$titleSublevel="Energy use and production";break;
+				default:	   $titleSublevel=$sublevel;break;
+			}
+		}
+		/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
+		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Level 2)</span>" : "<span style=color:black>$titleLevel (Level 1)</span>";
+	?>
+	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
+</div>
+
+<!--separator--><div style=margin-top:100px></div>
+
+<!--HELP--><h4>Here you can edit the inputs for this stage. The Indicators (in yellow) will be updated automatically.</h4>
 
 <!--GO TO LEVEL 2 OR 3-->
 <div style=margin:0;padding:0>
@@ -305,8 +323,6 @@
 		})();
 	</script>
 </div>
-
-<!--HELP--><h4>Here you can edit the inputs for this stage. The Indicators (in yellow) will be updated automatically.</h4>
 
 <!--IO-->
 <div>

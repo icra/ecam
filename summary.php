@@ -76,7 +76,7 @@
 			//fill rows
 			for(var variable in object)
 			{
-				//only type specified
+				//only go over type specified
 				<?php
 					switch($type)
 					{

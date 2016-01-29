@@ -1,5 +1,4 @@
 var Global = {
-	/** General data of the system */
 	"General":{
 		"Name":"Default system name",
 		"Location":"Default system location",
@@ -47,9 +46,9 @@ var Global = {
 			"wsg3":0,
 			"wsg4":0,
 			"wsg5":0,
-			c_wsg50:function(){return Global.Water.Abstraction.wsa1+Global.Water.Treatment.wst2+Global.Water.Distribution.wsd1},
-			c_wsg51:function(){return this.c_wsg50()-(this.wsg1+this.wsg3-this.wsg2-this.wsg4)},
-			c_wsg52:function(){return Global.Water.ws5-this.c_wsg51()},
+			c_wsg50:function(){return Global.Water.ws5+this.wsg1+this.wsg3-this.wsg2-this.wsg4},
+			c_wsg51:function(){return Global.Water.Abstraction.wsa1+Global.Water.Treatment.wst2+Global.Water.Distribution.wsd1},
+			c_wsg52:function(){return "TBD LCorominas to advise"},
 		},
 		"Abstraction":{
 			"wsa1":0,
@@ -131,10 +130,12 @@ var Global = {
 		"ww10":0,
 		"ww11":0,
 		"ww12":0,
-		//<TESTING>
-		"ww13":3.2, //protein
-		"ww14":40,  //default BOD
-		//</TESTING>
+
+		//<lbosch added>
+			"ww13":3.2, //protein
+			"ww14":40,  //default BOD
+		//</lbosch added>
+
 		c_ww50:function(){return this.ww7/1000*22*Global.General.Days()-this.ww12},
 		c_ww51:function(){return (this.ww5-this.ww7)*this.ww13*0.16*1.1*1.25*0.005*44/28*298},
 		c_ww52:function(){return (this.ww5-this.ww7)*(40/1000*365)*0.06*34},
@@ -156,8 +157,9 @@ var Global = {
 			"wwg3":0,
 			"wwg4":0,
 			"wwg5":0,
-			c_wwg50:function(){return Global.Waste.Collection.wwc2+Global.Waste.Treatment.wwt9+Global.Waste.Discharge.wwd3},
-			c_wwg51:function(){return this.c_wwg50()-(this.wwg1+this.wwg3-this.wwg2-this.wwg4)},
+			c_wwg50:function(){return Global.Water.ws3 + (this.wwg1+this.wwg3)-(this.wwg2+this.wwg4)},
+			c_wwg51:function(){return Global.Waste.Collection.wwc2+Global.Waste.Treatment.wwt9+Global.Waste.Discharge.wwd3},
+			c_wwg52:function(){return "TBD LCorominas to advise"},
 		},
 		"Collection":{
 			"wwc2":0,
@@ -286,7 +288,6 @@ var Global = {
 	},
 }
 
-
 /*PERFORMANCE INDICATORS -- LEVEL 1*/
 //L1 Water
 Global.Water.wS4    = function(){return 100*this.ws1/this.ws2||0}
@@ -295,35 +296,159 @@ Global.Water.gE1w   = function(){return this.ws3/this.ws4||0}
 Global.Water.gE2w   = function(){return this.ws5*365/Global.General.Days()/this.ws2||0}
 Global.Water.gE3w   = function(){return this.ws5*365/Global.General.Days()/this.ws1||0}
 Global.Water.gE4w   = function(){return this.ws5/this.ws7||0}
-/*If there are different fuel mixes for any stage or part of a stage, the proper emission factor (V1) 
-	shall be applied for each stage or sub-stage individually*/
 Global.Water.wGHG1  = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())*365/Global.General.Days()/this.ws2||0} 
-/*If there are different fuel mixes for any stage or part of a stage, the proper emission factor (V1) 
-	shall be applied for each stage or sub-stage individually*/
 Global.Water.wGHG2  = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())*365/Global.General.Days()/this.ws1||0}	
-/*If there are different fuel mixes for any stage or part of a stage, the proper emission factor (V1) 
-	shall be applied for each stage or sub-stage individually*/
 Global.Water.wGHG3  = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())/this.ws7||0}
 Global.Water.wGHG4  = function(){return this.c_ws51()/this.ws1||0}
 Global.Water.wGHG5  = function(){return this.c_ws51()/this.ws7||0}
 Global.Water.wGHG6  = function(){return (this.ws5*Global.UWS.uw1)/this.ws1||0}
 Global.Water.wGHG7  = function(){return (this.ws5*Global.UWS.uw1)/this.ws7||0}
 
-//L2 Wastewater
-//Sewer system: any system where compliance can be assessed. This indicator is calculated for a stage as a whole and per sub-stage (wS1.a, wS1.b, ...)	
+//L1 Wastewater
 Global.Waste.wwS1   = function(){return 100*this.ww6/this.ww5||0}
-/*This indicator may be assessed for periods shorter than one year, but special consideration is required when 
-	used for comparisons, either internal or external to the undertaking. This indicator is calculated for a 
-	stage as a whole and per sub-stage (wS2.a, wS2.b, ...) */
 Global.Waste.wwS2   = function(){return 100*this.ww7/this.ww6||0}
 Global.Waste.gE1ww  = function(){return 100*this.ww1/this.ww2||0}
 Global.Waste.gE2ww  = function(){return this.ww3*365/Global.General.Days()/this.ww5||0}
 Global.Waste.gE3ww  = function(){return this.ww3*365/Global.General.Days()/this.ww7||0}
 Global.Waste.gE4ww  = function(){return this.ww3/this.ww4||0}
-//If there are different fuel mixes for any stage or part of a stage, the proper emission factor (V1) shall be applied for each stage or sub-stage individually	
 Global.Waste.wwGHG1 = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*365/Global.General.Days()/this.ww5||0}
-//If there are different fuel mixes for any stage or part of a stage, the proper emission factor (V1) shall be applied for each stage or sub-stage individually	
 Global.Waste.wwGHG2 = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*365/Global.General.Days()/this.ww7||0}
-//If there are different fuel mixes for any stage or part of a stage, the proper emission factor (V1) shall be applied for each stage or sub-stage individually	
 Global.Waste.wwGHG3 = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())/this.ww4||0}	
-Global.Waste.wwGHG7 = function(){return this.ww3*Global.UWS.uw1/this.ww4||0}
+Global.Waste.wwGHG4	= function(){return this.ww3*Global.UWS.uw1/Global.Waste.ww7||0}
+Global.Waste.wwGHG5	= function(){return this.ww3*Global.UWS.uw1/Global.Waste.ww4||0}
+Global.Waste.wwGHG6 = function(){return (this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())/this.ww7||0}
+Global.Waste.wwGHG7 = function(){return (this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())/this.ww4||0}
+
+/*PERFORMANCE INDICATORS -- LEVEL 2*/
+
+/*
+	$Corinne says: The below service indicators can only be calculated when Level 3 is documented. 
+	Display at level one with a warning explaining that these service levels indicators 
+	are necessary to document (by going to level 3) 
+	when comparing utilities to one another.			
+
+	$lbosch says: now I make the function return -1 to indicate this idea
+	codes that are in L1 and L2 with same code:
+		wS1 wS2 wS3 wwS3 gE2w gE3w gE4w wGHG1 wGHG2 wGHG3 wGHG4 wGHG5 wGHG6 wGHG7
+		gE3ww gE4ww wwGHG1 wwGHG2 wwGHG3 wwGHG4 wwGHG5 wwGHG6 wwGHG7
+
+	$Corinne says: When Level 2 data is documented, overwrite the Level 1 Pis with the result of the  formula shown below.
+		If level 2 is not documented or not all necessary variables are documented 
+		then display Level 1 PI result in the level 2 outputs			
+	
+	$lbosch says: I need a exact definition of what "level 2 data is documented" means
+*/
+Global.Water.wS1              = function(){return -1}
+Global.Water.Treatment.wS1    = function(){return 100*(this.wst4+this.wst5+this.wst6+this.wst7)/this.wst3||0}
+Global.Water.wS2              = function(){return -1}
+Global.Water.Distribution.wS2 = function(){return 100*this.wsd2/this.wsd3||0}
+Global.Water.wS3              = function(){return -1}
+Global.Water.Distribution.wS3 = function(){return 100*this.wsd4/24/Global.General.Days()}
+Global.Waste.wwS3             = function(){return -1}
+Global.Waste.Treatment.wwS3	  = function(){return 100*this.wwt15/this.wwt16||0}
+
+//Water
+Global.Water.General.gE2w  = function(){return this.c_wsg50()*365/Global.General.Days()/Global.Water.ws2||0}
+Global.Water.General.gE3w  = function(){return this.c_wsg50()*365/Global.General.Days()/Global.Water.ws1||0}
+Global.Water.General.gE4w  = function(){return this.c_wsg50()/Global.Water.ws7||0}
+Global.Water.General.wGHG1 = function(){return ((Global.Water.ws5-this.wsg2-this.wsg4)*Global.UWS.uw1+Global.Water.c_ws51()-this.c_wsg52())*365/Global.General.Days()/Global.Water.ws2||0}
+Global.Water.General.wGHG2 = function(){return ((Global.Water.ws5-this.wsg2-this.wsg4)*Global.UWS.uw1+Global.Water.c_ws51()-this.c_wsg52())*365/Global.General.Days()/Global.Water.ws1||0}
+Global.Water.General.wGHG3 = function(){return ((Global.Water.ws5-this.wsg2-this.wsg4)*Global.UWS.uw1+Global.Water.c_ws51()-this.c_wsg52())*365/Global.General.Days()/Global.Water.ws7||0}
+Global.Water.General.wGHG4 = function(){return Global.Water.wGHG4()}
+Global.Water.General.wGHG5 = function(){return Global.Water.wGHG5()}
+Global.Water.General.wGHG6 = function(){return (this.c_wsg50()*Global.UWS.uw1-this.c_wsg52())/Global.Water.ws1||0}
+Global.Water.General.wGHG6 = function(){return (this.c_wsg50()*Global.UWS.uw1-this.c_wsg52())/Global.Water.ws7||0}
+
+//Waste
+Global.Waste.General.gE2ww   = function(){return this.c_wwg50()*365/Global.General.Days()/Global.Waste.ww5||0}
+Global.Waste.General.gE3ww   = function(){return this.c_wwg50()*365/Global.General.Days()/Global.Waste.ww7||0}
+Global.Waste.General.gE4ww   = function(){return this.c_wwg50()/Global.Waste.ww4||0}
+Global.Waste.General.wwGHG1  = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1+Global.Waste.c_ww57()+Global.Waste.c_ww55()+Global.Waste.c_ww53()+Global.Waste.c_ww51()+Global.Waste.c_ww52()+Global.Waste.c_ww54()-this.c_wwg52())*365/Global.General.Days()/Global.Waste.ww5||0}
+Global.Waste.General.wwGHG2  = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1+Global.Waste.c_ww57()+Global.Waste.c_ww55()+Global.Waste.c_ww53()+Global.Waste.c_ww51()+Global.Waste.c_ww52()+Global.Waste.c_ww54()-this.c_wwg52())*365/Global.General.Days()/Global.Waste.ww7||0} 
+Global.Waste.General.wwGHG3  = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1+Global.Waste.c_ww57()+Global.Waste.c_ww55()+Global.Waste.c_ww53()+Global.Waste.c_ww51()+Global.Waste.c_ww52()+Global.Waste.c_ww54()-this.c_wwg52())/Global.Waste.ww4||0}
+Global.Waste.General.wwGHG4	 = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1-this.c_wwg52())*365/Global.General.Days()/Global.Waste.ww7||0}
+Global.Waste.General.wwGHG5	 = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1-this.c_wwg52())*365/Global.General.Days()/Global.Waste.ww4||0}
+Global.Waste.General.wwGHG8	 = function(){return Global.Waste.c_ww57()*365/Global.General.Days()/Global.Waste.ww7||0}
+Global.Waste.General.wwGHG9	 = function(){return Global.Waste.c_ww57()/Global.Waste.ww4||0}
+Global.Waste.General.wwGHG10 = function(){return Global.Waste.c_ww55()*365/Global.General.Days()/Global.Waste.ww7||0}
+Global.Waste.General.wwGHG11 = function(){return Global.Waste.c_ww55()/Global.Waste.ww4||0}
+Global.Waste.General.wwGHG12 = function(){return Global.Waste.c_ww53()*365/Global.General.Days()/Global.Waste.ww7||0}
+Global.Waste.General.wwGHG13 = function(){return Global.Waste.c_ww53()/Global.Waste.ww4||0}
+Global.Waste.General.wwGHG14 = function(){return (Global.Waste.c_ww51()+Global.Waste.c_ww52())*365/Global.General.Days()/Global.Waste.ww7||0}
+Global.Waste.General.wwGHG15 = function(){return (Global.Waste.c_ww51()+Global.Waste.c_ww52())/Global.Waste.ww4||0}
+Global.Waste.General.wwGHG16 = function(){return Global.Waste.c_ww54()*365/Global.General.Days()/Global.Waste.ww7||0}
+Global.Waste.General.wwGHG17 = function(){return Global.Waste.c_ww54()/Global.Waste.ww4||0}
+Global.Waste.General.wwS4	 = function(){return Global.Waste.Collection.c_wwc50()/Global.Waste.ww4||0}
+ 
+/*
+	Corinne says: I stopped my thorough review and edits at this line. 
+	Below indicators are not checked yet but appear ok at first glance. Corrections needed should be minor.					
+	Note: all level 2 Pis should be repeated under level three, 
+	showing the stage PI in one column , and the sub-stage PI in the other columns					
+*/
+ 
+//Water Abstraction
+Global.Water.Abstraction.aE1 = function(){return this.wsa1/this.wsa2||0}
+Global.Water.Abstraction.aE2 = function(){return 100*this.wsa1/Global.UWS.c_uw52()||0}
+//level 3 only
+Global.Water.Abstraction.aE3 = function(){return this.wsa1/this.c_wsa50()||0}
+Global.Water.Abstraction.aE4 = function(){return this.wsa3/this.wsa2}
+//level 3 only
+Global.Water.Abstraction.aE5 = function(){return this.wsa3/this.wsa6} 
+
+/*
+
+level 3 only	Global.Water.Abstraction.aE6 = function(){return this.wsa8/Global.General.Days()/wsa9}
+level 3 only	Global.Water.Abstraction.aE7 = function(){return this.wsa10/this.wsa9}
+
+//Water Treatment
+Water treatment	level 3 only	tE0	Treatment type (volume per type) 	% of each treatment	
+Water treatment	level 3 only	tE0.1	WTPs with Pre-ox/C/F/S/Filt/Des	%	wst8_n / wst1_n x 100
+Water treatment	level 3 only	tE0.2	WTPs with Pre-ox/C/F/Filt/Des	%	wst9_n/ wst1_n x 100
+Water treatment	level 3 only	tE0.3	WTPs with C/F/S/Filt/Des	%	wst10_n / wst1_n x 100
+Water treatment	level 3 only	tE0.4	WTPs with C/F/Filt/Des	%	wst11_n / wst1_n x 100
+Water treatment	level 3 only	tE0.5	WTPs with Des	%	wst12_n /wst1_n x 100
+Water treatment	level 3 only	tE0.6	WTPs with other sequence	%	wst13_n / wst1_n x 100
+
+level 3 with benchmarking"	tE1	Energy consumption per treated water 	kWh/m3	wst2/ wst1
+Water treatment	level 2	tE2	Energy consumption of WTPs per total energy consumption 	%	wst2_n/ c_uw52 x 100
+Water treatment	level 2	tE3	Sludge production	kg/m3	wst14/ wst1_n
+Water treatment	level 3 only	tE4	Capacity utilisation 	%	wst1_n/ wst15_n x 100
+Water distribution	level 2	dE1	Energy consumption per authorized consumption 	kWh/m3	wsd1/ ws7
+Water distribution	level 2	dE2	Energy consumption of authorized consumption per total energy consumption	%	wsd1/ c_uw52 x 100
+Water distribution	level 3 only	dE3	Standardised Energy Consumption	kWh/m3/100m	wsd1_n / c_wsd54_n
+Water distribution	level 3 only	dE4	Global water distribution energy efficiency	%	c_wsd51_n / (c_wsd52_n - wsd17_n) x 100
+Water distribution	level 3 only	dE5	Percentage of topographic energy	%	dV13 / (dV12-dV10) x 100
+Water distribution	level 2	dE6	Water losses per mains length 	m3/km/d	((dV1 - sV11)/ gV1) / dV14
+Water distribution	level 2	dE7	Unit head loss 	m/km	wsd19_n/wsd18_n
+Wastewater collection	level 2	wcE1	Energy consumption per conveying wastewater to treatment	kWh/m3	wwc2 / wwc1
+Wastewater collection	level 2	wcE2	Energy consumption of collected wastewater per total energy consumption	%	wwc2_n/ c_uw52 x 100
+Wastewater collection	level 3 only	wcE3	Standardised Energy Consumption	kWh/m3/100m	wwc2/ c_wwc50_n
+Wastewater treatment (WWTPs)		wtE0	Treatment type (volume per type) 	% of each treatment	
+Wastewater treatment (WWTPs)	level 3 only	wtE0.1	WWTPs with trickling filters (TF)	%	wwt17_n / ww4 x 100
+Wastewater treatment (WWTPs)	level 3 only	wtE0.2	WWTPs with activated sludge (AS)	%	wwt18_n / ww4 x 100
+Wastewater treatment (WWTPs)	level 3 only	wtE0.3	WWTPs with AS and Coagulation/Filtration (C/F)	%	wwt19_n /ww4 x 100
+Wastewater treatment (WWTPs)	level 3 only	wtE0.4	WWTPs with AS nitrification and C/F 	%	wwt20_n / ww4 x 100
+Wastewater treatment (WWTPs)	level 3 only	wtE0.5	WWTPs with Lagoons	%	wwt21_n /ww4 x 100
+Wastewater treatment (WWTPs)	level 3 only	wtE0.6	WWTPs with other type of treatment	%	wwt26_n / ww4 x 100
+Wastewater treatment (WWTPs)	"level 2 w/o benchmarking 
+
+level 3 with benchmarking"	wtE1	Energy consumption per treated wastewater 	kWh/m3	wwt9/ ww4
+Wastewater treatment (WWTPs)	level 2	wtE2	Energy consumption of WWTPs per total energy consumption 	%	wwt9/ c_uw52 x 100
+Wastewater treatment (WWTPs)	level 2	wtE3	Energy consumption per mass removed  	kWh/Kg BOD removed	wwt9/wwt14
+Wastewater treatment (WWTPs)	level 2	wtE4	Energy production from biogas	kWh/m3	wwt11/ ww4
+Wastewater treatment (WWTPs)	level 2	wtE5	Biogas produced per mass removed	Nm3/kg BOD removed	wwt2 / wwt14
+Wastewater treatment (WWTPs)	level 2	wtE6	Electrical energy produced per total available energy in biogas	%	wwt11/ c_wwt53
+Wastewater treatment (WWTPs)	level 3 only	wtE7	Sludge production (total weight)	kg/m3	wwt23_n/ ww4
+Wastewater treatment (WWTPs)	level 3 only	wtE8	Dry weight in sludge production	% DW	ww24_n
+Wastewater treatment (WWTPs)	level 2	wtE9	Capacity utilisation 	%	ww4/ wwt25_n x 100
+Wastewater interception and discharge	level 2	wdE1	Energy consumption per discharged wastewater 	kWh/m3	wwd3 / wwd1
+Wastewater interception and discharge	level 2	wdE2	Energy consumption of discharged wastewater per total energy consumption	%	wwd3/ c_uw52 x 100
+Wastewater interception and discharge	level 3 only	wdE3	Standardised Energy Consumption	kWh/m3/100m	wwd3_n / wwd5_n
+Wastewater interception and discharge	level 2	wdE4	Energy recovery per discharged water	kWh/m3	wwd4 / wwd1
+Wastewater interception and discharge	level 3 only	wdE5	Standardized energy recovery	kWh/m3/100m	wwd4_n / wwd7_n
+Water supply	level 3	wS1	Quality of supplied water	%	(wst4_n + wst5_n + wst6_n + wst7_n) / wst3_n x 100
+Water supply	level 3	wS2	Pressure of supply adequacy	%	wsd2_n / wsd3_n x 100
+Water supply	level 3	wS3	Continuity of supply	%	wsd4_n / 24 / Ap x 100
+Wastewater	level 3	wwS3	WWTP compliance with discharge consents 	%	wwt15_n / wwt16_n 
+*/
