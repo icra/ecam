@@ -392,63 +392,64 @@ Global.Water.Abstraction.aE1 = function(){return this.wsa1/this.wsa2||0}
 Global.Water.Abstraction.aE2 = function(){return 100*this.wsa1/Global.UWS.c_uw52()||0}
 //level 3 only
 Global.Water.Abstraction.aE3 = function(){return this.wsa1/this.c_wsa50()||0}
-Global.Water.Abstraction.aE4 = function(){return this.wsa3/this.wsa2}
+Global.Water.Abstraction.aE4 = function(){return this.wsa3/this.wsa2||0}
 //level 3 only
-Global.Water.Abstraction.aE5 = function(){return this.wsa3/this.wsa6} 
+Global.Water.Abstraction.aE5 = function(){return this.wsa3/this.wsa6||0} 
+//level 3 only
+Global.Water.Abstraction.aE6 = function(){return this.wsa8/Global.General.Days()/this.wsa9||0}
+Global.Water.Abstraction.aE7 = function(){return this.wsa10/this.wsa9||0}
 
+
+//Water Treatment (all level 3 only)
+Global.Water.Treatment.tE01	= function(){return 100*this.wst8 /this.wst1||0}
+Global.Water.Treatment.tE02	= function(){return 100*this.wst9 /this.wst1||0}
+Global.Water.Treatment.tE03	= function(){return 100*this.wst10/this.wst1||0}
+Global.Water.Treatment.tE04	= function(){return 100*this.wst11/this.wst1||0}
+Global.Water.Treatment.tE05	= function(){return 100*this.wst12/this.wst1||0}
+Global.Water.Treatment.tE06	= function(){return 100*this.wst13/this.wst1||0}
+
+//level 3 with benchmarking
+Global.Water.Treatment.tE1 = function(){return this.wst2/this.wst1||0}
+Global.Water.Treatment.tE2 = function(){return 100*this.wst2/Global.UWS.c_uw52()||0}
+Global.Water.Treatment.tE3 = function(){return this.wst14/this.wst1||0}
+
+/*=============================Ok.Above.Line===========================*/
 /*
-
-level 3 only	Global.Water.Abstraction.aE6 = function(){return this.wsa8/Global.General.Days()/wsa9}
-level 3 only	Global.Water.Abstraction.aE7 = function(){return this.wsa10/this.wsa9}
-
-//Water Treatment
-Water treatment	level 3 only	tE0	Treatment type (volume per type) 	% of each treatment	
-Water treatment	level 3 only	tE0.1	WTPs with Pre-ox/C/F/S/Filt/Des	%	wst8_n / wst1_n x 100
-Water treatment	level 3 only	tE0.2	WTPs with Pre-ox/C/F/Filt/Des	%	wst9_n/ wst1_n x 100
-Water treatment	level 3 only	tE0.3	WTPs with C/F/S/Filt/Des	%	wst10_n / wst1_n x 100
-Water treatment	level 3 only	tE0.4	WTPs with C/F/Filt/Des	%	wst11_n / wst1_n x 100
-Water treatment	level 3 only	tE0.5	WTPs with Des	%	wst12_n /wst1_n x 100
-Water treatment	level 3 only	tE0.6	WTPs with other sequence	%	wst13_n / wst1_n x 100
-
-level 3 with benchmarking"	tE1	Energy consumption per treated water 	kWh/m3	wst2/ wst1
-Water treatment	level 2	tE2	Energy consumption of WTPs per total energy consumption 	%	wst2_n/ c_uw52 x 100
-Water treatment	level 2	tE3	Sludge production	kg/m3	wst14/ wst1_n
-Water treatment	level 3 only	tE4	Capacity utilisation 	%	wst1_n/ wst15_n x 100
-Water distribution	level 2	dE1	Energy consumption per authorized consumption 	kWh/m3	wsd1/ ws7
-Water distribution	level 2	dE2	Energy consumption of authorized consumption per total energy consumption	%	wsd1/ c_uw52 x 100
-Water distribution	level 3 only	dE3	Standardised Energy Consumption	kWh/m3/100m	wsd1_n / c_wsd54_n
-Water distribution	level 3 only	dE4	Global water distribution energy efficiency	%	c_wsd51_n / (c_wsd52_n - wsd17_n) x 100
-Water distribution	level 3 only	dE5	Percentage of topographic energy	%	dV13 / (dV12-dV10) x 100
-Water distribution	level 2	dE6	Water losses per mains length 	m3/km/d	((dV1 - sV11)/ gV1) / dV14
-Water distribution	level 2	dE7	Unit head loss 	m/km	wsd19_n/wsd18_n
-Wastewater collection	level 2	wcE1	Energy consumption per conveying wastewater to treatment	kWh/m3	wwc2 / wwc1
-Wastewater collection	level 2	wcE2	Energy consumption of collected wastewater per total energy consumption	%	wwc2_n/ c_uw52 x 100
-Wastewater collection	level 3 only	wcE3	Standardised Energy Consumption	kWh/m3/100m	wwc2/ c_wwc50_n
-Wastewater treatment (WWTPs)		wtE0	Treatment type (volume per type) 	% of each treatment	
-Wastewater treatment (WWTPs)	level 3 only	wtE0.1	WWTPs with trickling filters (TF)	%	wwt17_n / ww4 x 100
-Wastewater treatment (WWTPs)	level 3 only	wtE0.2	WWTPs with activated sludge (AS)	%	wwt18_n / ww4 x 100
-Wastewater treatment (WWTPs)	level 3 only	wtE0.3	WWTPs with AS and Coagulation/Filtration (C/F)	%	wwt19_n /ww4 x 100
-Wastewater treatment (WWTPs)	level 3 only	wtE0.4	WWTPs with AS nitrification and C/F 	%	wwt20_n / ww4 x 100
-Wastewater treatment (WWTPs)	level 3 only	wtE0.5	WWTPs with Lagoons	%	wwt21_n /ww4 x 100
-Wastewater treatment (WWTPs)	level 3 only	wtE0.6	WWTPs with other type of treatment	%	wwt26_n / ww4 x 100
-Wastewater treatment (WWTPs)	"level 2 w/o benchmarking 
-
-level 3 with benchmarking"	wtE1	Energy consumption per treated wastewater 	kWh/m3	wwt9/ ww4
-Wastewater treatment (WWTPs)	level 2	wtE2	Energy consumption of WWTPs per total energy consumption 	%	wwt9/ c_uw52 x 100
-Wastewater treatment (WWTPs)	level 2	wtE3	Energy consumption per mass removed  	kWh/Kg BOD removed	wwt9/wwt14
-Wastewater treatment (WWTPs)	level 2	wtE4	Energy production from biogas	kWh/m3	wwt11/ ww4
-Wastewater treatment (WWTPs)	level 2	wtE5	Biogas produced per mass removed	Nm3/kg BOD removed	wwt2 / wwt14
-Wastewater treatment (WWTPs)	level 2	wtE6	Electrical energy produced per total available energy in biogas	%	wwt11/ c_wwt53
-Wastewater treatment (WWTPs)	level 3 only	wtE7	Sludge production (total weight)	kg/m3	wwt23_n/ ww4
-Wastewater treatment (WWTPs)	level 3 only	wtE8	Dry weight in sludge production	% DW	ww24_n
-Wastewater treatment (WWTPs)	level 2	wtE9	Capacity utilisation 	%	ww4/ wwt25_n x 100
-Wastewater interception and discharge	level 2	wdE1	Energy consumption per discharged wastewater 	kWh/m3	wwd3 / wwd1
-Wastewater interception and discharge	level 2	wdE2	Energy consumption of discharged wastewater per total energy consumption	%	wwd3/ c_uw52 x 100
-Wastewater interception and discharge	level 3 only	wdE3	Standardised Energy Consumption	kWh/m3/100m	wwd3_n / wwd5_n
-Wastewater interception and discharge	level 2	wdE4	Energy recovery per discharged water	kWh/m3	wwd4 / wwd1
-Wastewater interception and discharge	level 3 only	wdE5	Standardized energy recovery	kWh/m3/100m	wwd4_n / wwd7_n
-Water supply	level 3	wS1	Quality of supplied water	%	(wst4_n + wst5_n + wst6_n + wst7_n) / wst3_n x 100
-Water supply	level 3	wS2	Pressure of supply adequacy	%	wsd2_n / wsd3_n x 100
-Water supply	level 3	wS3	Continuity of supply	%	wsd4_n / 24 / Ap x 100
-Wastewater	level 3	wwS3	WWTP compliance with discharge consents 	%	wwt15_n / wwt16_n 
+Global.Water.Treatment	level 3 only	tE4	Capacity utilisation 	%	wst1_n/ wst15_n x 100
+Global.Water.Distribution	level 2	dE1	Energy consumption per authorized consumption 	kWh/m3	wsd1/ ws7
+Global.Water.Distribution	level 2	dE2	Energy consumption of authorized consumption per total energy consumption	%	wsd1/ c_uw52 x 100
+Global.Water.Distribution	level 3 only	dE3	Standardised Energy Consumption	kWh/m3/100m	wsd1_n / c_wsd54_n
+Global.Water.Distribution	level 3 only	dE4	Global water distribution energy efficiency	%	c_wsd51_n / (c_wsd52_n - wsd17_n) x 100
+Global.Water.Distribution	level 3 only	dE5	Percentage of topographic energy	%	dV13 / (dV12-dV10) x 100
+Global.Water.Distribution	level 2	dE6	Water losses per mains length 	m3/km/d	((dV1 - sV11)/ gV1) / dV14
+Global.Water.Distribution	level 2	dE7	Unit head loss 	m/km	wsd19_n/wsd18_n
+Global.Waste.Collection	level 2	wcE1	Energy consumption per conveying wastewater to treatment	kWh/m3	wwc2 / wwc1
+Global.Waste.Collection	level 2	wcE2	Energy consumption of collected wastewater per total energy consumption	%	wwc2_n/ c_uw52 x 100
+Global.Waste.Collection	level 3 only	wcE3	Standardised Energy Consumption	kWh/m3/100m	wwc2/ c_wwc50_n
+Global.Waste.Treatment (WWTPs)		wtE0	Treatment type (volume per type) 	% of each treatment	
+Global.Waste.Treatment (WWTPs)	level 3 only	wtE0.1	WWTPs with trickling filters (TF)	%	wwt17_n / ww4 x 100
+Global.Waste.Treatment (WWTPs)	level 3 only	wtE0.2	WWTPs with activated sludge (AS)	%	wwt18_n / ww4 x 100
+Global.Waste.Treatment (WWTPs)	level 3 only	wtE0.3	WWTPs with AS and Coagulation/Filtration (C/F)	%	wwt19_n /ww4 x 100
+Global.Waste.Treatment (WWTPs)	level 3 only	wtE0.4	WWTPs with AS nitrification and C/F 	%	wwt20_n / ww4 x 100
+Global.Waste.Treatment (WWTPs)	level 3 only	wtE0.5	WWTPs with Lagoons	%	wwt21_n /ww4 x 100
+Global.Waste.Treatment (WWTPs)	level 3 only	wtE0.6	WWTPs with other type of treatment	%	wwt26_n / ww4 x 100
+Global.Waste.Treatment (WWTPs)	"level 2 w/o benchmarking 
+Global.level 3 with benchmarking"	wtE1	Energy consumption per treated wastewater 	kWh/m3	wwt9/ ww4
+Global.Waste.Treatment (WWTPs)	level 2	wtE2	Energy consumption of WWTPs per total energy consumption 	%	wwt9/ c_uw52 x 100
+Global.Waste.Treatment (WWTPs)	level 2	wtE3	Energy consumption per mass removed  	kWh/Kg BOD removed	wwt9/wwt14
+Global.Waste.Treatment (WWTPs)	level 2	wtE4	Energy production from biogas	kWh/m3	wwt11/ ww4
+Global.Waste.Treatment (WWTPs)	level 2	wtE5	Biogas produced per mass removed	Nm3/kg BOD removed	wwt2 / wwt14
+Global.Waste.Treatment (WWTPs)	level 2	wtE6	Electrical energy produced per total available energy in biogas	%	wwt11/ c_wwt53
+Global.Waste.Treatment (WWTPs)	level 3 only	wtE7	Sludge production (total weight)	kg/m3	wwt23_n/ ww4
+Global.Waste.Treatment (WWTPs)	level 3 only	wtE8	Dry weight in sludge production	% DW	ww24_n
+Global.Waste.Treatment (WWTPs)	level 2	wtE9	Capacity utilisation 	%	ww4/ wwt25_n x 100
+Global.Waste.Discharge	level 2	wdE1	Energy consumption per discharged wastewater 	kWh/m3	wwd3 / wwd1
+Global.Waste.Discharge	level 2	wdE2	Energy consumption of discharged wastewater per total energy consumption	%	wwd3/ c_uw52 x 100
+Global.Waste.Discharge	level 3 only	wdE3	Standardised Energy Consumption	kWh/m3/100m	wwd3_n / wwd5_n
+Global.Waste.Discharge	level 2	wdE4	Energy recovery per discharged water	kWh/m3	wwd4 / wwd1
+Global.Waste.Discharge	level 3 only	wdE5	Standardized energy recovery	kWh/m3/100m	wwd4_n / wwd7_n
+Global.Water.Treatment	level 3	wS1	Quality of supplied water	%	(wst4_n + wst5_n + wst6_n + wst7_n) / wst3_n x 100
+Global.Water.Distribution	level 3	wS2	Pressure of supply adequacy	%	wsd2_n / wsd3_n x 100
+Global.Water.Distribution	level 3	wS3	Continuity of supply	%	wsd4_n / 24 / Ap x 100
+Global.Waste.Treatment level 3	wwS3	WWTP compliance with discharge consents 	%	wwt15_n / wwt16_n 
 */
