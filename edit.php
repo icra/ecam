@@ -327,7 +327,7 @@
 <!--IO-->
 <div>
 	<!--INPUTS-->
-	<table id=inputs class=inline>
+	<table id=inputs class=inline style="max-width:49%">
 		<tr><th colspan=5>INPUTS <?php include'inputType.php'?>
 		<tr>
 			<th>Code
@@ -338,8 +338,8 @@
 	</table>
 
 	<!--PI-->
-	<table id=outputs class=inline style=background:yellow;margin:1em>
-		<tr><th colspan=5>Performance Indicators
+	<table id=outputs class=inline style=max-width:49%;background:yellow;>
+		<tr><th colspan=5>OUTPUTS (Performance indicators)
 		<tr>
 			<th>Code
 			<th>Description

@@ -71,11 +71,14 @@
 			newRow.insertCell(-1).innerHTML=typeof(currentStage[id])=="function"? ("Output <br><br><b>Formula:</b> "+Formulas.prettify(currentStage[id].toString())) : "Input"
 
 			//Is "id" level 3 specific?
-			newRow=t.insertRow(-1)
-			newCell=newRow.insertCell(-1)
-			newCell.className='th'
-			newCell.innerHTML="Is in Level 3 only?"
-			newRow.insertCell(-1).innerHTML=Level3.isInList(id)
+			if(Level3.isInList(id))
+			{
+				newRow=t.insertRow(-1)
+				newCell=newRow.insertCell(-1)
+				newCell.className='th'
+				newCell.innerHTML="Level 3 only?"
+				newRow.insertCell(-1).innerHTML="YES"
+			}
 
 			//Magnitude
 			newRow=t.insertRow(-1)
@@ -83,6 +86,13 @@
 			newCell.className='th'
 			newCell.innerHTML="Magnitude"
 			newRow.insertCell(-1).innerHTML=Info[id].magnitude
+
+			//Explanation
+			newRow=t.insertRow(-1)
+			newCell=newRow.insertCell(-1)
+			newCell.className='th'
+			newCell.innerHTML="Explanation"
+			newRow.insertCell(-1).innerHTML=Info[id].explanation
 
 			//if output, show inputs involved, else show outputs involved
 			if(typeof(currentStage[id])=="function")
@@ -139,8 +149,7 @@
 						var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
 						ret+="<div>"+
 							match_localization.toString()+
-							" <a style='color:"+color+"' title='"+Info[output].description+"' href=variable.php?id="+output+">"+output+"</a> = "+
-							formula+" = "+currValue+" "+currentUnit+
+							" <a style='color:"+color+"' title='"+Info[output].description+"' href=variable.php?id="+output+">"+output+"</a> = "+currValue+" "+currentUnit+
 							"</div>";
 					});
 					return ret;
@@ -243,6 +252,6 @@
 
 <!--subtitle--><h4>Detailed info</h4>
 <!--TITLE--><h1><script>document.write("["+id+"]: "+Info[id].description)</script></h1>
-<!--VARIABLE INFO--><table style="text-align:left" id=info></table>
+<!--VARIABLE INFO--><table style="text-align:left;width:50%" id=info></table>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

@@ -67,7 +67,7 @@
 			var color = family.search('waste')==-1 ? "#00aff1" : "#bf5050";
 
 			//return string
-			var ret="<tr><td colspan=4 style='background:#ccc;font-weight:bold'>";
+			var ret="<tr><td colspan=5 style='background:#ccc;font-weight:bold'>";
 			ret+="<a href="+href+" style='color:"+color+"'>"+name+":</a> "
 
 			//create a input/output count for the stage
@@ -86,12 +86,14 @@
 				?>
 				if(typeof(object[variable])!="<?php echo $typeof?>")continue
 
-				var description=Info[variable]?Info[variable].description:"<span style=color:#ccc>no description</span>";
-				var unit = Global.Configuration.Units[variable] || Info[variable].unit
+				var description=Info[variable] ? Info[variable].description : "<span style=color:#ccc>no description</span>";
+				var explanation=Info[variable] ? Info[variable].explanation : "<span style=color:red>no explanation</span>";
+				var unit = Info[variable] ? (Global.Configuration.Units[variable] || Info[variable].unit) : "<span style=color:#ccc>no unit</a>"
 				var multiplier = Units.multiplier(variable);
 				ret+="<tr field='"+variable+"' family='"+family+"'>"+
 					"<td style='font-weight:bold'><a style='color:"+color+"' href=variable.php?id="+variable+">"+variable+"</a>"+
 					"<td>"+description+
+					"<td>"+explanation+
 					"<td style=text-align:right>"+object[variable]<?php if($type=="output")echo "()"?>/multiplier+
 					"<td>"+unit
 			}
@@ -108,11 +110,11 @@
 	<h4>All active <?php echo $type?>s (from activated stages in configuration)</h4>
 	<!--level 1-->
 	<div class=inline style="font-size:11px;width:35%;padding:0">
-		<table style="width:100%" level=1><tr><th colspan=4>Level 1</table>
+		<table style="width:100%" level=1><tr><th colspan=5>Level 1</table>
 	</div>
 	<!--level 2-->
 	<div class=inline style="font-size:11px;width:55%;padding:0">
-		<table style="width:100%" level=2><tr><th colspan=4>Level 2</table>
+		<table style="width:100%" level=2><tr><th colspan=5>Level 2</table>
 	</div>
 </div>
 

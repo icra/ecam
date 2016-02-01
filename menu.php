@@ -13,7 +13,7 @@
 	{
 		var link=document.createElement('a')
 		link.href="data:text/json;charset=utf-8,"+JSON.stringify(Global)
-		link.download="data.json"
+		link.download=Global.General.Name+".json"
 		link.click()
 	}
 

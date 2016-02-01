@@ -1,32 +1,10 @@
 +========+
 | ISSUES |
 +========+
--> ww12 es Amount of recovered biogas
--> ww13 es Annual per capita protein consumption
--> ww14 es una variable que té protein i Bod amb default value 40
--> wwt4 (fuel type) ara no existeix if wwt4= diesel then iS1=iS1-1                                            
--> wwt7 ara no existeix - geographic location protein consumption rate for variable calc. 
 -> c_ws51 he tret factor comú
 -> c_ww57 he tret factor comú
--> c_ww56 hi ha una k a la formula i sobra el 43
--> c_ww58 cal multiplicar per 0.84 despres del 0.25
 -> he canviat c_wwt50_n per c_wwt60_n per no confondre amb c_wwt50
 -> he canviat c_wwt51_n per c_wwt61_n per no confondre amb c_wwt51
 -> c_wwt51_n es el mateix que c_wwt53, he eliminat la de level 3
-
 -> cal afegir tecnologia L3 a tractaments
-	water treatment
-		wst8	Volume of treated water in WTPs with Pre-ox/C/F/S/Filt/Des	m3
-		wst9	Volume of treated water in WTPs with Pre-ox/C/F/Filt/Des	m3
-		wst10	Volume of treated water in WTPs with C/F/S/Filt/Des	m3
-		wst11	Volume of treated water in WTPs with C/F/Filt/Des	m3
-		wst12	Volume of treated water in WTPs with Des	m3
-		wst13	Volume of treated water in WTPs with other sequence	m3
-
-	wastewater treatment
-		wwt17	Volume of treated wastewater in WWTPs with trickling filters (TF)	m3
-		wwt18	Volume of treated wastewater in WWTPs with activated sludge (AS)	m3
-		wwt19	Volume of treated wastewater in WWTPs with AS and Coagulation/Filtration (C/F)	m3
-		wwt20	Volume of treated wastewater in WWTPs with AS nitrification and C/F	m3
-		wwt21	Volume of treated wastewater in WWTPs with Lagoons	m3
-		wwt22	Volume of treated wastewater in WWTPs with other type of treatment	m3
+-> cal revisar aE5, les unitats no quadren
