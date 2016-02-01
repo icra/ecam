@@ -17,7 +17,7 @@
 			switch(input)
 			{
 				case "textarea":
-					ret+="<textarea rows=5 cols=50 field='"+field+"' "+onchange+">"+Global.General[field]+"</textarea>";
+					ret+="<textarea placeholder='Max 200 characters' rows=5 cols=50 maxlength=200 field='"+field+"' "+onchange+">"+Global.General[field]+"</textarea>";
 					break;
 				case "input":
 					ret+="<input field='"+field+"' type='"+type+"' value='"+Global.General[field]+"' "+onchange+">";

@@ -25,6 +25,7 @@
 	<tr><td>Option to switch m3 to m3/day (assessment period) (ie ws6)				   <td>Pending
 	<tr><td>Option to have BOD in kg or mg/L (dividing by another variable)			   <td>Pending
 	<tr><td>Be able to select the general location from the same dropdown menu as BOD  <td>Pending
+	<tr><td>Check server limit for cookies											   <td>Pending
 	<tr><td>Level 3 technology selection											   <td>Not sure how to proceed
 	<tr><td>Questions and selections put them in correct place						   <td>Not sure how to proceed
 	<tr><td colspan=2 class=taskgroup>FRONT-END
