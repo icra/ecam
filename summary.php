@@ -12,7 +12,6 @@
 		die('Error. type must be "inputs" or "outputs"');
 ?>
 <!doctype html><html><head>
-	<meta charset=utf-8>
 	<title>ECAM Web App</title>
 	<?php include'imports.php'?>
 	<script>

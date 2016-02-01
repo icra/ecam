@@ -13,7 +13,6 @@
 	$sublevel=$_GET['sublevel'];
 ?>
 <!doctype html><html><head>
-	<meta charset=utf-8>
 	<title>ECAM Web App</title>
 	<?php include'imports.php'?>
 	<style>

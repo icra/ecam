@@ -49,7 +49,6 @@
 	}
 ?>
 <!doctype html><html><head>
-	<meta charset=utf-8>
 	<title>ECAM Web Tool</title>
 	<?php include'imports.php'?>
 	<style>

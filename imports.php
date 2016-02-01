@@ -1,6 +1,25 @@
+<meta charset="utf-8">
 <link rel="stylesheet" href="css.css">
-<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-<link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Disable tap highlight on IE -->
+<meta name="msapplication-tap-highlight" content="no">
+
+<!-- Add to homescreen for Chrome on Android -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Comics">
+
+<!-- Add to homescreen for Safari on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Comics">
+
+<!-- Color the status bar on mobile devices -->
+<meta name="theme-color" content="#2F3BA2">
 
 <!--the order of the imports is important. first global, then cookies-->
 <script src="dataModel/global.js"></script>          <!--Default Global object here-->
