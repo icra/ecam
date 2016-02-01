@@ -2,7 +2,6 @@
 function locateVariable(code)
 {
 	var localization={}; //e.g {"level":"Water","sublevel":"Abstraction"}
-
 	localization['toString']=function()
 	{
 		var levelName=(function()
@@ -35,13 +34,13 @@ function locateVariable(code)
 			return levelName+" &rsaquo; ";
 	};
 
-	for(level in Global)
+	for(var level in Global)
 	{
-		for(field in Global[level])
+		for(var field in Global[level])
 		{
 			if(typeof(Global[level][field])=='object')
 			{
-				for(subfield in Global[level][field])
+				for(var subfield in Global[level][field])
 				{
 					if(code==subfield)
 					{
@@ -57,7 +56,7 @@ function locateVariable(code)
 				{
 					localization["level"]=level;
 					localization["sublevel"]=0;
-					return localization
+					return localization;
 				}
 			}
 		}

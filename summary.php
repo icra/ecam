@@ -109,11 +109,11 @@
 <div class=inline style="width:75%;text-align:left">
 	<h4>All active <?php echo $type?>s (from activated stages in configuration)</h4>
 	<!--level 1-->
-	<div class=inline style="font-size:11px;width:35%;padding:0">
+	<div class=inline style="font-size:11px;width:49%;padding:0">
 		<table style="width:100%" level=1><tr><th colspan=5>Level 1</table>
 	</div>
 	<!--level 2-->
-	<div class=inline style="font-size:11px;width:55%;padding:0">
+	<div class=inline style="font-size:11px;width:49%;padding:0">
 		<table style="width:100%" level=2><tr><th colspan=5>Level 2</table>
 	</div>
 </div>

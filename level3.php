@@ -375,20 +375,35 @@
 		}
 	</script>
 </head><body onload=init()><center>
-<!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE-->
-<?php 
-	//Navigable <h1>title</h1>
-	switch($level)
-	{
-		case "Water": $titleLevel="<a href=edit.php?level=$level>Water Supply</a>";break;
-		case "Waste": $titleLevel="<a href=edit.php?level=$level>Wastewater</a>";break;
-	}
-	/*Separator*/$sep="<span style=color:black>&rsaquo;</span>";
-	$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>$sublevel</a>";
-	$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages (Level 3)</a>";
-?>
-<!--TITLE--><h1><?php echo $title?></h1>
+
+<div id=fixedTopBar>
+	<style>
+		div#fixedTopBar {
+			position:fixed;
+			top:0;
+			width:100%;
+			margin:0;padding:0;
+			border-bottom:1px solid #ccc;
+			background:white;
+		}
+	</style>
+	<!--NAVBAR--><?php include"navbar.php"?>
+	<!--TITLE-->
+	<?php 
+		//Navigable <h1>title</h1>
+		switch($level)
+		{
+			case "Water": $titleLevel="<a href=edit.php?level=$level>Water Supply</a>";break;
+			case "Waste": $titleLevel="<a href=edit.php?level=$level>Wastewater</a>";break;
+		}
+		/*Separator*/$sep="<span style=color:black>&rsaquo;</span>";
+		$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>$sublevel</a>";
+		$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages (Level 3)</a>";
+	?>
+	<!--TITLE--><h1><?php echo $title?></h1>
+</div>
+
+<!--separator--><div style=margin-top:100px></div>
 <!--HELP--><h4>You can subdivide "<?php echo "$level $sublevel"?>" in different substages</h4>
 <!--new substage button--><button onclick=newSubstage() class=button>+ New Substage</button>
 <!--substages counter--><div class=inline style="border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>

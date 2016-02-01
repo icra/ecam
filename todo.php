@@ -37,6 +37,6 @@
 	<tr><td>Configuration for hiding codes											   <td>Pending
 	<tr><td>See names of L3 substages in L2											   <td>Pending
 	<tr><td>Input types in L3                                                          <td>Pending
-	<tr><td>Toy graphs (bars and rings) from charts.js library                         <td>Pending
+	<tr><td>Toy graphs (bars and rings) from charts.js library                         <td><b>Started</b>
 </table>
 <!--FOOTER--><?php include'footer.php'?>

@@ -15,12 +15,9 @@
 			nlink("getStarted.php",   "Get started");
 			nlink("configuration.php","Configuration");
 			nlink("selection.php",    "Questions and options");
-
-			echo "<div class=inactive-tab>";
-				include'navStages.php';
-			echo "</div>";
-
+			echo "<div class=inactive-tab>"; include'navStages.php'; echo "</div>";
 			echo "<div class=inactive-tab><a id=linkSummary onclick=summaryMenu(event) style=cursor:pointer>Summary</a></div>";
+			nlink("graphs.php", "Graphs");
 			nlink("todo.php", "To do");
 		}
 	?>
@@ -34,7 +31,7 @@
 		padding:0.2em 0em 0em 0em;
 		font-size:17px;
 	}
-	#navbar div.active-tab, #navbar div.inactive-tab { margin:0 0 0; display:inline-block; }
+	#navbar div.active-tab, #navbar div.inactive-tab {margin:0 0 0;display:inline-block}
 	#navbar div.active-tab{ background:white; }
 	#navbar a {color:white;}
 	#navbar a:hover {text-decoration:none;}
