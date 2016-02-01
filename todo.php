@@ -29,6 +29,7 @@
 	<tr><td>Level 3 technology selection											   <td>Not sure how to proceed
 	<tr><td>Questions and selections put them in correct place						   <td>Not sure how to proceed
 	<tr><td colspan=2 class=taskgroup>FRONT-END
+	<tr><td>Round number decimals (2 or 3?)<td>Pending
 	<tr><td>wS1, wS2, wS3 and wwS3 in L1 should have a warning that only work when L3 is edited <td>Pending
 	<tr><td>Merge calculated variables with inputs in summary						   <td>Pending
 	<tr><td>Merge calculated variables with inputs in L3							   <td>Pending
