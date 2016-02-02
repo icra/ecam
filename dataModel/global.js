@@ -282,7 +282,7 @@ var Global = {
 /* Performance Indicators L1 */
 	Global.Water.wS4    = function(){return 100*this.ws1/this.ws2||0}
 	Global.Water.wS5    = function(){return 100*this.ws7/this.ws6||0}
-	Global.Water.gE1w   = function(){return this.ws3/this.ws4||0}		
+	Global.Water.gE1w   = function(){return 100*this.ws3/this.ws4||0}		
 	Global.Water.gE2w   = function(){return this.ws5*365/Global.General.Days()/this.ws2||0}
 	Global.Water.gE3w   = function(){return this.ws5*365/Global.General.Days()/this.ws1||0}
 	Global.Water.gE4w   = function(){return this.ws5/this.ws7||0}

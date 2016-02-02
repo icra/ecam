@@ -151,6 +151,9 @@
 					}
 					else
 					{
+						/*
+						return "Input";
+						*/
 						var select = document.createElement('select');
 						['Actual','Estimated'].forEach(function(opt)
 						{
@@ -192,11 +195,24 @@
 				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
 				/*circle indicator*/ 
 				newCell=newRow.insertCell(-1);
-				newCell.style.textAlign='center';
-				newCell.innerHTML=(function(){
-					var colors=['red','orange','green'];
-					/*random one for now*/var color = colors[Math.floor(Math.random()*colors.length)];
-					return "<span style=font-size:20px;color:"+color+">&#9899;</span>";
+				newCell.innerHTML=(function()
+				{
+					var hasIndicator=RefValues.isInside(field);
+					if(hasIndicator)
+					{
+						var indicator=RefValues[field](value);
+						//TODO it would be good to see the ranges
+						var color;
+						switch(indicator)
+						{
+							case "Good":           color="#af0";break;
+							case "Acceptable":     color="orange";break;
+							case "Unsatisfactory": color="red";break;
+							default:               color="#ccc";break;
+						}
+						return "<span style=font-size:20px;color:"+color+">&#9899; <span style=color:black;font-size:15px>"+indicator+"</span></span>";
+					}
+					else return "<span style=color:#ccc>-</span>";
 				})();
 			}
 		}

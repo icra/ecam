@@ -151,7 +151,9 @@
 						var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
 						ret+="<div>"+
 							match_localization.toString()+
-							" <a style='color:"+color+"' title='"+Info[output].description+"' href=variable.php?id="+output+">"+output+"</a> = "+currValue+" "+currentUnit+
+							" <a style='color:"+color+"' title='"+Info[output].description+
+							"' href=variable.php?id="+output+">"+output+"</a> = "+
+							"<span style=color:#666>"+formula+"</span> = "+currValue+" ["+currentUnit+"]"+
 							"</div>";
 					});
 					return ret;

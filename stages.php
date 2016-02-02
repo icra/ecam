@@ -58,6 +58,7 @@
 			background-color:#e8e8e8;
 			font-size:12px;
 		}
+		table a:hover{text-decoration:none}
 	</style>
 	<script> function init() { updateResult() } </script>
 </head><body onload=init()><center>

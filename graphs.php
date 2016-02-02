@@ -5,7 +5,7 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Graphs</h1>
 
-<div>
+<div class=inline style=max-width:30%>
 	<h2>GHG1 graph 1</h2>
 	<canvas id="ghg1" width="400" height="200"></canvas>
 	<script>
@@ -14,13 +14,13 @@
 		var wwGHG1 = Global.Waste.wwGHG1()
 		var data = [
 			{
-				value: wGHG1,
+				value: wGHG1||1,
 				color: "#af0",
 				highlight: "#af0",
 				label: "wGHG1 (kgCO2/inhab/year)"
 			},
 			{
-				value: wwGHG1,
+				value: wwGHG1||1,
 				color: "#f00",
 				highlight: "#f00",
 				label: "wwGHG1 (kgCO2/inhab/year)"
@@ -30,7 +30,7 @@
 	</script>
 </div>
 
-<div>
+<div class=inline style=max-width:30%>
 	<h2>GHG1 graph 2</h2>
 	<canvas id="ghg2" width="400" height="200"></canvas>
 	<script>
@@ -69,6 +69,7 @@
 
 <!--sankey diagram-->
 <div>
+	<h2>Sankey diagram</h2>
 	<script src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['sankey']}]}"> </script>
 	<!--diagram--><div id="sankey"></div>
 	<script>

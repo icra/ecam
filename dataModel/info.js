@@ -204,7 +204,7 @@ var Info = {
 		c_wwd51:{description:"[Sum] (water volume pumped x pump head in meters)",magnitude:"Volume x head",unit:"m3 x 100m"},
 	
 	//PERFORMANCE INDICATORS LEVEL 1
-	gE1w    :{description:"Energy costs ratio",                                                                                             magnitude:"Ratio",             unit:"-"},
+	gE1w    :{description:"Energy costs ratio",                                                                                             magnitude:"Percent",           unit:"%"},
 	gE1ww   :{description:"Energy costs ratio",                                                                                             magnitude:"Percent",           unit:"%"},
 	gE2w    :{description:"Energy consumption for the urban drinking water system per capita",	                                            magnitude:"Energy/inhab/time", unit:"kWh/inhab/year"},
 	gE2ww   :{description:"Energy consumption for the urban wastewater system per capita",	                                                magnitude:"Energy/inhab/time", unit:"kWh/inhab./year"},

@@ -1,10 +1,12 @@
 +========+
 | ISSUES |
 +========+
--> c_ws51 he tret factor comú
--> c_ww57 he tret factor comú
 -> he canviat c_wwt50_n per c_wwt60_n per no confondre amb c_wwt50
 -> he canviat c_wwt51_n per c_wwt61_n per no confondre amb c_wwt51
--> c_wwt51_n es el mateix que c_wwt53, he eliminat la de level 3
+-> Water treatment c_wwt51_n() == c_wwt53(): he eliminat la de level 3
 -> cal afegir tecnologia L3 a tractaments
--> cal revisar aE5, les unitats no quadren
+-> a aE5, les unitats no quadren
+
+
+-> data quality: actual/estimated is not used anywhere -> rename to "input"?
+-> edit.php: input type is not used for anything

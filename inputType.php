@@ -1,5 +1,6 @@
 <!--menu of buttons inside edit.php-->
 <style>
+	/*temporal*/ #inputType{display:none}
 	span#inputType               { margin-left:1em;font-size:19px}
 	span#inputType button        { padding:0 10px 0 10px;border:1px solid #ccc;background:#f5f5f5;outline:none;}
 	span#inputType button:hover  { background:#e6e6e6}
@@ -13,11 +14,8 @@
 	function inputType(button)
 	{
 		var isActive = button.classList.contains('active')
-
 		var others=document.querySelectorAll("span#inputType button")
-
 		for(var i=0;i<others.length;others[i++].classList.remove('active')){}
-
 		if(!isActive) { button.classList.add('active') }
 	}
 </script>

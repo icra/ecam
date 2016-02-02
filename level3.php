@@ -418,7 +418,7 @@
 </div>
 
 <!--separator--><div style=margin-top:100px></div>
-<!--HELP--><h4>You can subdivide "<?php echo "$level $sublevel"?>" in different substages</h4>
+<!--HELP--><h4>You can subdivide "<?php echo "$level $sublevel"?>" in Level 3 substages</h4>
 <!--new substage button--><button onclick=newSubstage() class=button>+ New Substage</button>
 <!--substages counter--><div class=inline style="border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
 <!--SUBSTAGES TABLE--><table id=substages style=margin:1em><tr><td style=border:none colspan=2></table>
