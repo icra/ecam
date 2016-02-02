@@ -1,5 +1,5 @@
 <?php 
-	/** THIS PAGES LETS THE USER NAVIGATE THROUGH ACTIVE STAGES */
+	/* stages.php: this pages lets the user navigate through active stages */
 
 	//parse cookie "GLOBAL" to see if stage $stages[name] is 0 or 1
 	$stages=json_decode($_COOKIE['GLOBAL'],true)["Configuration"]["Active Stages"];
@@ -49,7 +49,6 @@
 	}
 ?>
 <!doctype html><html><head>
-	<title>ECAM Web Tool</title>
 	<?php include'imports.php'?>
 	<style>
 		td{vertical-align:middle;padding:0.7em;font-size:15px}
@@ -60,11 +59,8 @@
 			font-size:12px;
 		}
 	</style>
-	<script>
-		function init() { updateResult() }
-	</script>
+	<script> function init() { updateResult() } </script>
 </head><body onload=init()><center>
-
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Input data</h1>
 <!--SUBTITLE--><h4>This is an overview of your system. Click the stage you want to edit. To activate/deactivate stages, go to <a href=configuration.php>Configuration</a>.</h4>

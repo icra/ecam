@@ -1,5 +1,5 @@
+<!--selection.php: menus of options selected-->
 <!doctype html><html><head>
-	<title>ECAM Web Tool</title>
 	<?php include'imports.php'?>
 	<script>
 		function init()

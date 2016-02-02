@@ -1,5 +1,5 @@
+<?php /*graphs.php: different graphs about ghg emissions */?>
 <!doctype html><html><head>
-	<title>ECAM Web Tool</title>
 	<?php include'imports.php'?>
 </head><body><center>
 <!--NAVBAR--><?php include"navbar.php"?>
@@ -17,13 +17,13 @@
 				value: wGHG1,
 				color: "#af0",
 				highlight: "#af0",
-				label: "wGHG1"
+				label: "wGHG1 (kgCO2/inhab/year)"
 			},
 			{
 				value: wwGHG1,
 				color: "#f00",
 				highlight: "#f00",
-				label: "wwGHG1"
+				label: "wwGHG1 (kgCO2/inhab/year)"
 			},
 		];
 		var pie = new Chart(ctx).Pie(data);
@@ -32,7 +32,6 @@
 
 <div>
 	<h2>GHG1 graph 2</h2>
-
 	<canvas id="ghg2" width="400" height="200"></canvas>
 	<script>
 		/*
@@ -68,4 +67,33 @@
 	</script>
 </div>
 
+<!--sankey diagram-->
+<div>
+	<script src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['sankey']}]}"> </script>
+	<!--diagram--><div id="sankey"></div>
+	<script>
+		//diagram creation
+		google.setOnLoadCallback(drawChart);
+		function drawChart(){
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'From');
+			data.addColumn('string', 'To');
+			data.addColumn('number', 'Weight');
+			data.addRows([
+				['wAbstraction', 	'wTreatment', 		Global.Water.Abstraction.wsa2||1],
+				['wTreatment', 		'wDistribution', 	Global.Water.Treatment.wst1||1],
+				['wDistribution', 	'USERS', 			Global.Water.Distribution.wsd9||1],
+				['USERS',			'wwCollection',		Global.Waste.Collection.wwc3||1],
+				['wwCollection',	'wwTreatment',		Global.Waste.Treatment.wwt8||1],
+				['wwTreatment',		'wwDischarge',		Global.Waste.Discharge.wwd1||1],
+			]);
+			// Sets chart options.
+			var options = {"width":"900",};
+			// Instantiates and draws our chart, passing in options.
+			var chart = new google.visualization.Sankey(document.getElementById('sankey'));
+			chart.draw(data,options);
+		}
+	</script>
+	<a href="https://developers.google.com/chart/interactive/docs/gallery/sankey">https://developers.google.com/chart/interactive/docs/gallery/sankey</a>
+</div>
 <!--FOOTER--><?php include'footer.php'?>

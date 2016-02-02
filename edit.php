@@ -1,5 +1,5 @@
 <?php
-	/** THIS PAGE LETS THE USER MODIFY INPUTS AND SEE AUTOMATICALLY THE OUTPUTS */
+	/* edit.php this page lets the user modify inputs and see automatically the outputs */
 
 	//check specified input: level and sublevel
 	if(!isset($_GET['level'])){die("ERROR: stage not specified");}
@@ -10,7 +10,6 @@
 	$sublevel=isset($_GET['sublevel']) ? $_GET['sublevel'] : false;
 ?>
 <!doctype html><html><head>
-	<title>ECAM Web App</title>
 	<?php include'imports.php'?>
 	<style>
 		td.input input { width:95%;font-size:18px}
@@ -188,7 +187,8 @@
 					return "<a href=variable.php?id="+field+">"+field+"</a>";
 				})();
 				/*description*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
-				/*value*/ newRow.insertCell(-1).innerHTML=CurrentLevel[field]()/Units.multiplier(field);
+				var value = Math.floor(1e2*CurrentLevel[field]()/Units.multiplier(field))/1e2;
+				/*value*/ newRow.insertCell(-1).innerHTML=value;
 				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
 				/*circle indicator*/ 
 				newCell=newRow.insertCell(-1);
@@ -287,16 +287,22 @@
 			//create buttons to navigate to level 2
 			switch($level)
 			{
+				case "UWS":
+					echo 'Level 1
+						<button stage=water class=button onclick=window.location="edit.php?level=Water" style=background:lightblue> <img src=img/water.png> Water supply</button> 
+						<button stage=waste class=button onclick=window.location="edit.php?level=Waste" style=background:lightcoral> <img src=img/waste.png> Wastewater</button> 
+					';
+					break;
 				case "Water": 
 					echo 'Level 2
 						<button stage=waterGen class=button onclick=window.location="edit.php?level=Water&sublevel=General" 		style=background:lightblue> <img src=img/waterGen.png> Energy use and production </button> 
 						<button stage=waterAbs class=button onclick=window.location="edit.php?level=Water&sublevel=Abstraction" 	style=background:lightblue> <img src=img/waterAbs.png> Abstraction	</button> 
-						<button stage=waterTre class=button onclick=window.location="edit.php?level=Water&sublevel=Treatment" 	style=background:lightblue> <img src=img/waterTre.png> Treatment	</button>
-						<button stage=waterDis class=button onclick=window.location="edit.php?level=Water&sublevel=Distribution" style=background:lightblue> <img src=img/waterDis.png> Distribution	</button>';
+						<button stage=waterTre class=button onclick=window.location="edit.php?level=Water&sublevel=Treatment" 	    style=background:lightblue> <img src=img/waterTre.png> Treatment	</button>
+						<button stage=waterDis class=button onclick=window.location="edit.php?level=Water&sublevel=Distribution"    style=background:lightblue> <img src=img/waterDis.png> Distribution	</button>';
 						break;
 				case "Waste": 
 					echo 'Level 2
-						<button stage=wasteGen class=button onclick=window.location="edit.php?level=Waste&sublevel=General" 		style=background:lightcoral> <img src=img/wasteGen.png> Energy use and production </button> 
+						<button stage=wasteGen class=button onclick=window.location="edit.php?level=Waste&sublevel=General" 	style=background:lightcoral> <img src=img/wasteGen.png> Energy use and production </button> 
 						<button stage=wasteCol class=button onclick=window.location="edit.php?level=Waste&sublevel=Collection" 	style=background:lightcoral> <img src=img/wasteCol.png> Collection	</button> 
 						<button stage=wasteTre class=button onclick=window.location="edit.php?level=Waste&sublevel=Treatment" 	style=background:lightcoral> <img src=img/wasteTre.png> Treatment	</button>
 						<button stage=wasteDis class=button onclick=window.location="edit.php?level=Waste&sublevel=Discharge" 	style=background:lightcoral> <img src=img/wasteDis.png> Discharge	</button>';

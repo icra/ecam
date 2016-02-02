@@ -1,7 +1,7 @@
+<?php /*configuration.php: active stages of your system*/ ?>
 <!doctype html><html><head>
-	<title>ECAM Web Tool</title>
 	<?php include'imports.php'?>
-	<style> tr.option{transition:all 1.5s} </style>
+	<style>tr.option{transition:all 1.5s}</style>
 	<script>
 		/** Enable or disable stage <input type=checkbox id=id> */
 		function activate(id)
@@ -86,7 +86,6 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Configuration</h1>
 <!--SUBTITLE--><h4>Which stages form your system? Click to activate stages.</h4>
-
 <!--MAIN CONTAINER-->
 <div>
 	<!--SELECT STAGE-->
@@ -131,12 +130,10 @@
 			?>
 	</table>
 </div>
-
 <!--PREV & NEXT BUTTONS-->
 <div style=margin:1em> 
 	<button class="button prev" onclick=window.location='getStarted.php'>Previous</button> 
 	<button class="button next" onclick=window.location='stages.php'>Next</button>
 </div>
-
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

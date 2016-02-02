@@ -1,3 +1,4 @@
+<?php /* footer.php: displayed at the bottom of each page */ ?>
 <div id=footer>
 	<img src=img/IWA-logo.png style="margin:5px;width:45px;cursor:pointer" onclick=window.location='http://www.iwa-network.org/'>
 	<a href=about.php>About</a>

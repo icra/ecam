@@ -1,3 +1,4 @@
+<!--navstages.php: menu of stages inside navbar.php-->
 <style>
 	nav {color:white;margin:0;text-align:center;display:inline-block}
 	nav li {text-align:left;cursor:pointer;transition:all 0.4s}

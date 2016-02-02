@@ -1,3 +1,4 @@
+<?php /*menu.php: new, load, save, clear buttons inside index.php*/?>
 <script>
 	/** Clear all user inputted data */
 	function newSystem()
@@ -40,8 +41,7 @@
 	}
 </script>
 
-<!--MENU-->
-<div>
+<!--MENU--><div>
 	<!--new-->
 	<button class="button add" onclick=newSystem()>Create new system</button>
 	<!--load-->

@@ -1,10 +1,8 @@
 <!--CURRENT GLOBAL OBJECT IN JSON--><div style="display:
 none;
-margin-top:4em;
-text-align:left;border:1px solid #ccc;width:30%;background:#fafafa">
+margin-top:4em;text-align:left;border:1px solid #ccc;width:30%;background:#fafafa">
 <pre><b>Current System</b><br><span id=currentGlobal></span></pre>
 </div>
-
 <script>
 	/** Stringify Global object and display it */
 	function updateResult()

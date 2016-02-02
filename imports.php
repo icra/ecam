@@ -34,3 +34,6 @@
 
 <!--for graphs-->
 <script src="js/Chart.min.js"></script>
+
+<!--title-->
+<title>ECAM Web Tool</title>

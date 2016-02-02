@@ -1,5 +1,5 @@
 <?php
-	/** THIS PAGE LETS THE USER EDIT LEVEL 3*/
+	/* level3.php: this page lets the user edit level 3*/
 
 	//check user GET inputs (level & sublevel)
 	if(!isset($_GET['level']))		die("ERROR: level not specified");
@@ -13,7 +13,6 @@
 	$sublevel=$_GET['sublevel'];
 ?>
 <!doctype html><html><head>
-	<title>ECAM Web App</title>
 	<?php include'imports.php'?>
 	<style>
 		td{text-align:left}
@@ -80,7 +79,7 @@
 			/*get a list of variables for this level*/ var inputs=getInputs();
 			/*substage default name*/ this.name="S"+(substages.length+1);
 			//make the object look like, e.g. Substage {tV1: 0, tV2: 0, tV3: 0, tV4: 0, tV5: 0, ...}
-			for(i in inputs){this[inputs[i]]=0;}
+			for(var i in inputs){this[inputs[i]]=0;}
 		}
 
 		/** New substage button pushed */
@@ -144,7 +143,7 @@
 		{
 			/*table element*/ var t=document.getElementById('substages');
 
-			/*update table header */
+			/*table headers */
 				while(t.rows[0].cells.length>1)t.rows[0].deleteCell(-1)
 				//go over substages: create a column for each
 				for(var s in substages)
@@ -175,7 +174,7 @@
 				var newTH = document.createElement('th');
 				newTH.innerHTML="Unit";
 				t.rows[0].appendChild(newTH);
-			/*end update header*/
+			/*end headers*/
 
 			/*update table body*/
 				while(t.rows.length>1)t.deleteRow(-1)
@@ -283,6 +282,14 @@
 			});
 
 			var inputs=getInputs();
+			var cvs=[];
+			(function(){
+				for(var f in CurrentStage)
+				{
+					//if "c_" is found, add f to cvs
+					if(f.search("c_")!=-1){cvs.push(f);}
+				}
+			})();
 			for(var field in CurrentStage)
 			{
 				//only functions
@@ -308,18 +315,25 @@
 					//the formula will be modified starting by the current field formula
 					var modification=formula;
 
+					//create an array of inputs and calculated variables to replace the formula
 					//go over this stage's inputs to gradually modify the formula
-					inputs.forEach(function(input)
+					inputs.concat(cvs).forEach(function(input)
 					{
 						var regexp=new RegExp('(.)this.('+input+')(\\D)','g');
 						modification=modification.replace(regexp,'$1substages[0].$2$3');
 					});
 
-					//show original formula, if it has been changed
-					if(modification!=formula){console.log("Original: "+formula);}
+					//debugging: show original formula, if it has been changed
+					//if(modification!=formula){console.log("Original: "+formula);}
 
 					for(s in substages)
 					{
+						//loop calculated variables, they need to exist inside each substage
+						cvs.forEach(function(cv)
+						{
+							substages[s][cv]=CurrentStage[cv]; //this copies the function inside current substage
+						})
+
 						var modificationSubstage=modification.replace(/\[0\]/g,'['+s+']');
 						//show changes, if any
 						if(modificationSubstage!=formula)
@@ -327,11 +341,12 @@
 							console.log(' +Modification for substage['+s+']: '+modificationSubstage)
 						}
 						eval("CurrentStage['modification']="+modificationSubstage+";");
-						newRow.insertCell(-1).innerHTML=CurrentStage['modification']()/Units.multiplier(field);
+						//value
+						newRow.insertCell(-1).innerHTML=Math.floor(1e2*CurrentStage['modification']()/Units.multiplier(field))/1e2;
 					}
 				})();
 
-				/*value from level 2*/ newRow.insertCell(-1).innerHTML=CurrentStage[field]()/Units.multiplier(field)||0;
+				/*value from level 2*/ newRow.insertCell(-1).innerHTML=Math.floor(1e2*CurrentStage[field]()/Units.multiplier(field))/1e2;
 				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
 			}
 		}

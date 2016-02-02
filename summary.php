@@ -1,5 +1,5 @@
 <?php
-	/**SUMMARY FOR INPUTS OR OUTPUTS */
+	/**summary.php: summary for inputs or outputs */
 
 	if(!isset($_GET['type']))
 		die('Error. type not specified<br>Try: <a href=summary.php?type=input>Inputs</a> or <a href=summary.php?type=output>Outputs</a>');
@@ -12,7 +12,6 @@
 		die('Error. type must be "inputs" or "outputs"');
 ?>
 <!doctype html><html><head>
-	<title>ECAM Web App</title>
 	<?php include'imports.php'?>
 	<script>
 		function init()
@@ -93,7 +92,7 @@
 					"<td style='font-weight:bold'><a style='color:"+color+"' href=variable.php?id="+variable+">"+variable+"</a>"+
 					"<td>"+description+
 					"<td>"+explanation+
-					"<td style=text-align:right>"+object[variable]<?php if($type=="output")echo "()"?>/multiplier+
+					"<td style=text-align:right>"+Math.floor(1e2*object[variable]<?php if($type=="output"){echo "()";}?>/multiplier)/1e2+
 					"<td>"+unit
 			}
 			return ret;

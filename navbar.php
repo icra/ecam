@@ -1,3 +1,4 @@
+<!--navbar.php: menu of sections at the top of each page-->
 <div id=navbar>
 	<?php
 		/** void: echo a link if the current web page is not the one in the link's href */

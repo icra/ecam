@@ -1,5 +1,5 @@
+<?php /*index.php: main page*/?>
 <!doctype html><html><head>
-	<title>ECAM Web Tool</title>
 	<?php include'imports.php'?>
 	<style>
 		img{margin:1em}
@@ -24,13 +24,13 @@
 </div>
 
 <!--MENU--><div style=padding:1em><?php include'menu.php'?></div>
-<!--WARNING--><h4 style=background:lightcoral;color:black>Note: Please use Google Chrome. The tool has not been tested with other browsers</h4>
 <!--FIRST TIME?-->
 <h4 style=font-size:19px>
 First time using ECAM Web Tool? Click "Create new system" or learn more in <a href=about.php>About</a>
 </h4>
 
-<!--LATEST UPD--><div style="max-width:20%;background:#d7bfaf"><?php echo "Latest update: ".date("F d Y, H:i:s.",filemtime("index.php"))?></div>
+<!--LATEST UPD--><span style="background:yellow"><?php echo "Latest update: ".date("F d Y, H:i:s",filemtime("index.php"))?></span>
+<!--WARNING--><span style=background:orange>Please use Google Chrome. Tool not tested in other browsers.</span><br>
 <!--DIAGRAM--><?php include'diagram_home.php'?>
 <!--FOOTER--><?php include'footer.php'?>
 <!--LOGOS-->

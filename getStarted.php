@@ -1,5 +1,5 @@
+<?php /* getStarted.php: page for inserting general information about the system */ ?>
 <!doctype html><html><head>
-	<title>ECAM Web Tool</title>
 	<?php include'imports.php'?>
 	<style>
 		th{vertical-align:middle}

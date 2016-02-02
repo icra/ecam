@@ -1,10 +1,11 @@
 <?php
+	/*variable.php: page for viewing info of a unique variable */
+
 	//specified input
-	if(!isset($_GET['id']))die('no input specified');
+	if(!isset($_GET['id'])){die('no input specified');}
 	$id=$_GET['id'];
 ?>
 <!doctype html><html><head>
-	<title>ECAM Web Tool</title>
 	<?php include'imports.php'?>
 	<style>
 		th,td{padding:1em}
@@ -20,11 +21,12 @@
 		?>
 	</style>
 	<script>
-		var id='<?php echo $id?>' //make the id variable live in javascript scope
+		var id='<?php echo $id?>'; //make the id variable live in javascript scope
+
 		function init()
 		{
-			updateInfoTable()
-			updateResult()
+			updateInfoTable();
+			updateResult();
 		}
 
 		/**
@@ -145,6 +147,7 @@
 						var currentUnit = Global.Configuration.Units[output] || Info[output].unit
 						var formula = Formulas.prettify(match_stage[output].toString());
 						var currValue = match_stage[output]()/Units.multiplier(output);
+						currValue=Math.floor(1e2*currValue)/1e2;
 						var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
 						ret+="<div>"+
 							match_localization.toString()+
@@ -167,6 +170,7 @@
 				newCell.innerHTML=(function()
 				{
 					var currValue=currentStage[id]()/Units.multiplier(id);
+					currValue=Math.floor(1e2*currValue)/1e2;
 					return currValue+" "+Info[id].unit;
 				})();
 			}
@@ -229,12 +233,12 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 
 <script>
-	//Define some global variables
 	if(!Info[id])
 	{
 		document.write("<div>ERROR. Variable not defined in dataModel/Info.js</div>")
 		window.stop()
 	}
+	//Define some global variables
 	var localization = locateVariable(id)
 	var level 		 = localization.level
 	var sublevel 	 = localization.sublevel
@@ -248,7 +252,6 @@
 		default:levelAlias=level;break;
 	}
 </script>
-
 <!--subtitle--><h4>Detailed info</h4>
 <!--TITLE--><h1><script>document.write("["+id+"]: "+Info[id].description)</script></h1>
 <!--VARIABLE INFO--><table style="text-align:left;width:50%" id=info></table>

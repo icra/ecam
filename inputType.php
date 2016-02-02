@@ -1,4 +1,4 @@
-<!--inside edit.php-->
+<!--menu of buttons inside edit.php-->
 <style>
 	span#inputType               { margin-left:1em;font-size:19px}
 	span#inputType button        { padding:0 10px 0 10px;border:1px solid #ccc;background:#f5f5f5;outline:none;}

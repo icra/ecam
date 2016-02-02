@@ -1,11 +1,11 @@
 <script>
-	//This file is part of "summary.php"
-	//It creates a table indicating active stages
-	//This file shoud get refactorized TODO
+	/*  This file is part of "summary.php"
+		It creates a table indicating active stages
+		This file shoud get refactorized TODO */
 
-	var activeStages = {}; //you should group functions inside this
+	var aass={ }; //functions go inside this object/namespace
 
-	function stageName(stage)
+	aass.stageName=function(stage)
 	{
 		var r; //returned string
 		switch(stage)
@@ -25,41 +25,36 @@
 		}
 		return r;
 	}
-
-	function printCell(stage,colspan)
+	aass.printCell=function(stage,colspan)
 	{
 		var color = Global.Configuration["Active Stages"][stage] ? "black" : "#ccc";
 		var background = Global.Configuration["Active Stages"][stage] ? "" : "#eee";
-		document.write("<td class=stage onmouseover=hlStage('"+stage+"',1) onmouseout=hlStage('"+stage+"',0) colspan="+colspan+" style='text-align:center;background:"+background+";color:"+color+"'>"+stageName(stage));
+		document.write("<td class=stage onmouseover=aass.hlStage('"+stage+"',1) onmouseout=aass.hlStage('"+stage+"',0) colspan="+colspan+" style='text-align:center;background:"+background+";color:"+color+"'>"+this.stageName(stage));
 	}
-
-	function hlStage(stage,hl)
+	aass.hlStage=function(stage,hl)
 	{
 		var newColor = hl ? "#af0":"";
 		var elements = document.querySelectorAll('tr[family='+stage+']')
 		for(var i=0;i<elements.length;elements[i++].style.backgroundColor=newColor){}
 	}
 </script>
-
 <style>.stage:hover {background:#af0}</style>
-
 <table><tr><th colspan=8>Stages<tr>
 	<script>
-		printCell('uws',8);
+		aass.printCell('uws',8);
 		</script><tr><script>
 		['water','waste'].forEach(function(stage)
 		{
-			printCell(stage,4);
+			aass.printCell(stage,4);
 		});
 		</script><tr><script>
 		['waterGen','waterAbs','waterTre','waterDis'].forEach(function(stage)
 		{
-			printCell(stage,1);
+			aass.printCell(stage,1);
 		});
 		['wasteGen','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
 		{
-			printCell(stage,1);
+			aass.printCell(stage,1);
 		});
 	</script>
 </table>
-
