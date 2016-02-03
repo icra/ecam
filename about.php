@@ -2,6 +2,7 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 </head><body><center>
+<!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>About</h1>
 

@@ -8,10 +8,10 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
-		th,td{padding:1em}
-		td.th{background:#00aff1;color:white;vertical-align:middle}
-		td.input{color:#666;background-color:#eee;cursor:cell}
-		td.input input{font-size:16px}
+		#info th,#info td{padding:1em}
+		#info td.th{background:#00aff1;color:white;vertical-align:middle}
+		#info td.input{color:#666;background-color:#eee;cursor:cell}
+		#info td.input input{font-size:16px}
 		<?php
 			if(preg_match("/ww/",$id))
 			{?>
@@ -27,6 +27,7 @@
 		{
 			updateInfoTable();
 			updateResult();
+			Sidebar.check();
 		}
 
 		/**
@@ -232,6 +233,7 @@
 		}
 	</script>
 </head><body onload=init()><center>
+<!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 
 <script>

@@ -7,6 +7,7 @@
 			updateFuelInfo();
 			updateCountryInfo();
 			updateResult();
+			Sidebar.check();
 		}
 
 		//modify Global
@@ -48,6 +49,7 @@
 		th{vertical-align:middle}
 	</style>
 </head><body onload=init()><center>
+<!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--title--><h1>Options that define variables</h2>
 <!--descr--><h3>Building blocks. Where they go?</h3>

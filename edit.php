@@ -235,10 +235,13 @@
 		{
 			updateInputs();
 			updateOutputs();
+			Sidebar.check();
 			updateResult();
 		}
 	</script>
 </head><body onload=init()><center>
+
+<!--sidebar--><?php include'sidebar.php'?>
 
 <div id=fixedTopBar>
 	<style>
@@ -346,9 +349,9 @@
 </div>
 
 <!--IO-->
-<div>
+<div style=text-align:left>
 	<!--INPUTS-->
-	<table id=inputs class=inline style="max-width:49%">
+	<table id=inputs class=inline style="max-width:46%">
 		<tr><th colspan=5>INPUTS <?php include'inputType.php'?>
 		<tr>
 			<th>Code
@@ -359,7 +362,7 @@
 	</table>
 
 	<!--PI-->
-	<table id=outputs class=inline style=max-width:49%;background:yellow;>
+	<table id=outputs class=inline style=max-width:46%;background:yellow;>
 		<tr><th colspan=5>OUTPUTS (Performance indicators)
 		<tr>
 			<th>Code

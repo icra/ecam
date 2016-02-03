@@ -2,6 +2,7 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 </head><body><center>
+<!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Graphs</h1>
 
@@ -96,5 +97,7 @@
 		}
 	</script>
 	<a href="https://developers.google.com/chart/interactive/docs/gallery/sankey">https://developers.google.com/chart/interactive/docs/gallery/sankey</a>
+	<br>
+	<a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts">https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts</a>
 </div>
 <!--FOOTER--><?php include'footer.php'?>

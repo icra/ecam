@@ -62,6 +62,7 @@
 		{
 			activateLevels();
 			updateResult();
+			Sidebar.check();
 		}
 
 		function stageName(stage)
@@ -83,6 +84,7 @@
 		}
 	</script>
 </head><body onload=init()><center>
+<!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Configuration</h1>
 <!--SUBTITLE--><h4>Which stages form your system? Click to activate stages.</h4>

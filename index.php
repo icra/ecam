@@ -8,9 +8,11 @@
 		function init()
 		{
 			updateResult()
+			Sidebar.check();
 		}
 	</script>
 </head><body onload=init()><center>
+<!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1 class=blue style="font-size:33px;padding-bottom:0">ECAM</h1>
 <!--SUBTITLE--><h3>Energy performance and carbon emissions assessment and monitoring tool </h3>

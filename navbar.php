@@ -1,4 +1,5 @@
 <!--navbar.php: menu of sections at the top of each page-->
+
 <div id=navbar>
 	<?php
 		/** void: echo a link if the current web page is not the one in the link's href */
@@ -10,17 +11,7 @@
 				echo "<div class=inactive-tab><a href='$href'>$name</a></div>";
 		}
 
-		nlink("index.php","&#8962; HOME");
-		if(isset($_COOKIE['GLOBAL']))
-		{
-			nlink("getStarted.php",   "Get started");
-			nlink("configuration.php","Configuration");
-			nlink("selection.php",    "Questions and options");
-			echo "<div class=inactive-tab>"; include'navStages.php'; echo "</div>";
-			echo "<div class=inactive-tab><a id=linkSummary onclick=summaryMenu(event) style=cursor:pointer>Summary</a></div>";
-			nlink("graphs.php", "Graphs");
-			nlink("todo.php", "To do");
-		}
+		nlink("index.php","ECAM - Energy performance and Carbon emissions Assessment and Monitoring Tool");
 	?>
 </div>
 
@@ -36,60 +27,4 @@
 	#navbar div.active-tab{ background:white; }
 	#navbar a {color:white;}
 	#navbar a:hover {text-decoration:none;}
-	div.summaryMenu{
-		background:#00aff1;
-		border:1px solid #ccc;
-		position:absolute;
-		box-shadow: 5px 5px 5px #888;
-		padding:0;
-		margin:0;
-	}
-	div.summaryMenu div{padding:0.3em;text-align:left;cursor:pointer}
-	div.summaryMenu div:hover {background:#0aafff}
-	div.summaryMenu div.close{color:black; padding:0; margin:0;}
 </style>
-
-<?php
-	//if we are in edit.php, make "input data" active
-	if(	strpos($_SERVER['PHP_SELF'],"edit.php") ||
-		strpos($_SERVER['PHP_SELF'],"level3.php") ||
-		strpos($_SERVER['PHP_SELF'],"stages.php") )
-	{?>
-			<script>
-				var link = document.querySelector('a[href="stages.php"]')
-				link.style.color='black'
-				document.querySelector('#navStages').parentNode.className='active-tab'
-			</script>
-	<?php }
-
-	if(strpos($_SERVER['PHP_SELF'],"summary.php"))
-	{?>
-		<script>
-			var link = document.querySelector('a#linkSummary')
-			link.style.color='black'
-			link.parentNode.className='active-tab'
-		</script>
-	<?php }
-?>
-
-<script>
-	/** make appear a menu for navigate to summary: inputs/outputs */
-	function summaryMenu(ev)
-	{
-		//first hide all other posible summaryMenus
-		var other=document.querySelectorAll("div.summaryMenu");
-		for(var i=0;i<other.length;i++){other[i].style.display='none';}
-		var div=document.createElement('div');
-		document.querySelector("#navbar").appendChild(div);
-		div.className="summaryMenu";
-		div.onclick=function(){div.style.display='none'}
-		//get mouse coordinates
-		div.style.top=event.pageY+"px";
-		div.style.left=event.pageX+"px";
-		div.innerHTML=""+
-			"<div><a href=summary.php?type=input>All inputs</a></div></div>"+
-			"<div><a href=summary.php?type=output>All outputs</a></div>"+
-			"<div class=close><button style=width:100%>Close</button></div>"+
-			"";
-	}
-</script>

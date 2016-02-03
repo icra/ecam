@@ -20,6 +20,7 @@
 			updateLevel2()
 			updateCounts()
 			updateResult()
+			Sidebar.check();
 		}
 
 		function updateLevel1()
@@ -99,19 +100,20 @@
 		}
 	</script>
 </head><body onload=init()><center>
+<!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Summary — All <?php echo $type?>s</h1>
 <!--STAGES--><?php include"activeStages.php"?>
 
 <!--AVAILABLE INPUTS-->
-<div class=inline style="width:75%;text-align:left">
+<div class=inline style="text-align:left">
 	<h4>All active <?php echo $type?>s (from activated stages in configuration)</h4>
 	<!--level 1-->
-	<div class=inline style="font-size:11px;width:49%;padding:0">
+	<div class=inline style="font-size:11px;width:45%;padding:0">
 		<table style="width:100%" level=1><tr><th colspan=5>Level 1</table>
 	</div>
 	<!--level 2-->
-	<div class=inline style="font-size:11px;width:49%;padding:0">
+	<div class=inline style="font-size:11px;width:45%;padding:0">
 		<table style="width:100%" level=2><tr><th colspan=5>Level 2</table>
 	</div>
 </div>

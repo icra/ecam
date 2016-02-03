@@ -250,6 +250,7 @@ var Global = {
 
 	/** Configuration: Active Stages, questions, Technologies and Units */
 	"Configuration":{
+		"sidebar":0,
 		"Active Stages":{
 			"uws":1,
 			"water":0,

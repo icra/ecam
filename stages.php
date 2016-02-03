@@ -51,7 +51,7 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
-		td{vertical-align:middle;padding:0.7em;font-size:15px}
+		#navigationTable td{vertical-align:middle;padding:0.7em;font-size:15px}
 		td.inactive
 		{
 			color:#aaa;
@@ -60,8 +60,15 @@
 		}
 		table a:hover{text-decoration:none}
 	</style>
-	<script> function init() { updateResult() } </script>
+	<script> 
+		function init() 
+		{ 
+			updateResult()
+			Sidebar.check();
+		} 
+	</script>
 </head><body onload=init()><center>
+<!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Input data</h1>
 <!--SUBTITLE--><h4>This is an overview of your system. Click the stage you want to edit. To activate/deactivate stages, go to <a href=configuration.php>Configuration</a>.</h4>

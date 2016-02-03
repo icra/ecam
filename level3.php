@@ -386,9 +386,11 @@
 			updateSubstagesTable()
 			updateOutputs()
 			updateResult()
+			Sidebar.check();
 		}
 	</script>
 </head><body onload=init()><center>
+<!--sidebar--><?php include'sidebar.php'?>
 
 <div id=fixedTopBar>
 	<style>

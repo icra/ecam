@@ -3,7 +3,7 @@
 	<?php include'imports.php'?>
 	<style>
 		th{vertical-align:middle}
-		th,td{padding:1em}
+		#form th,#form td{padding:1em}
 		input,textarea{padding:0.5em}
 	</style>
 	<script>
@@ -50,9 +50,11 @@
 		{
 			updateForm()
 			updateResult()
+			Sidebar.check();
 		}
 	</script>
 </head><body onload=init()><center>
+<!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Get started</h1>
 <!--SUBTITLE--><h4>General data of your system. You can edit this information later.</h4>
