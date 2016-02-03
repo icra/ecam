@@ -386,7 +386,6 @@
 			updateSubstagesTable()
 			updateOutputs()
 			updateResult()
-			Sidebar.check();
 		}
 	</script>
 </head><body onload=init()><center>

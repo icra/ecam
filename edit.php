@@ -235,7 +235,6 @@
 		{
 			updateInputs();
 			updateOutputs();
-			Sidebar.check();
 			updateResult();
 		}
 	</script>
@@ -280,7 +279,7 @@
 	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
 </div>
 
-<!--separator--><div style=margin-top:100px></div>
+<!--separator--><div style=margin-top:120px></div>
 
 <!--HELP--><h4>Here you can edit the inputs for this stage. The Indicators (in yellow) will be updated automatically.</h4>
 

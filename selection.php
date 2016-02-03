@@ -7,7 +7,6 @@
 			updateFuelInfo();
 			updateCountryInfo();
 			updateResult();
-			Sidebar.check();
 		}
 
 		//modify Global

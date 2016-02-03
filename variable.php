@@ -27,7 +27,6 @@
 		{
 			updateInfoTable();
 			updateResult();
-			Sidebar.check();
 		}
 
 		/**

@@ -7,27 +7,13 @@
 			if(element.className=="on")
 			{
 				element.className="off"
-				Sidebar.set(0)
 				document.querySelector('#sidecontent').style.display='none'
 			}
 			else
 			{
 				element.className="on"
-				Sidebar.set(1)
 				document.querySelector('#sidecontent').style.display=''
 			}
-		},
-
-		set:function(newValue)
-		{
-			Global.Configuration.sidebar=newValue
-			updateResult()
-		},
-
-		check:function()
-		{
-			if(Global.Configuration.sidebar)
-				Sidebar.toggleOnOff()
 		},
 	}
 </script>
@@ -66,12 +52,19 @@
 		<div style="padding:0;margin:0;background:#0aaff1;height:5px"></div>
 
 		<table>
-			<tr><th>General info
-			<tr><td><a href=getStarted.php>Define system</a>
+			<tr><th>General
+			<tr><td><a href=getStarted.php>General info</a>
 			<tr><td><a href=configuration.php>Configuration</a>
 			<tr><td><a href=selection.php>Questions</a>
 			<tr><th>Level 1
-			<tr><td><a style=color:#00adef href=edit.php?level=Water>Water supply</a>
+			<script>
+				if(Global.Configuration['Active Stages'].water)
+					str=" <tr><td><a style=color:#00adef href=edit.php?level=Water>Water supply</a> ";
+				else
+					str=" <tr title=Inactive><td><a style=color:#ccc href=#>Water supply</a> ";
+
+					document.write(str)
+			</script>
 			<tr><td><a style=color:#d71d24 href=edit.php?level=Waste>Wastewater</a>
 			<tr><th>Level 2
 			<tr><td><a style=color:#00adef href=edit.php?level=Water&sublevel=General>Water energy</a>

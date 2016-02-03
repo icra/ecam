@@ -50,14 +50,13 @@
 		{
 			updateForm()
 			updateResult()
-			Sidebar.check();
 		}
 	</script>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>Get started</h1>
-<!--SUBTITLE--><h4>General data of your system. You can edit this information later.</h4>
+<!--TITLE--><h1>General info</h1>
+<!--SUBTITLE--><h4>Edit general data of your system. You can edit this information later.</h4>
 <!--FORM--><table id=form style="text-align:left;"></table>
 <!--NEXT--><div style=margin:1em><button class="button next" onclick=window.location='configuration.php'>Next</button></div>
 <!--FOOTER--><?php include'footer.php'?>

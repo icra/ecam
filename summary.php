@@ -20,7 +20,6 @@
 			updateLevel2()
 			updateCounts()
 			updateResult()
-			Sidebar.check();
 		}
 
 		function updateLevel1()

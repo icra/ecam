@@ -62,7 +62,6 @@
 		{
 			activateLevels();
 			updateResult();
-			Sidebar.check();
 		}
 
 		function stageName(stage)

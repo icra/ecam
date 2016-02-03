@@ -64,7 +64,6 @@
 		function init() 
 		{ 
 			updateResult()
-			Sidebar.check();
 		} 
 	</script>
 </head><body onload=init()><center>

@@ -1,35 +1,29 @@
 <?php /*index.php: main page*/?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
-	<style>
-		img{margin:1em}
-	</style>
 	<script>
 		function init()
 		{
 			updateResult()
-			Sidebar.check();
 		}
 	</script>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1 class=blue style="font-size:33px;padding-bottom:0">ECAM</h1>
-<!--SUBTITLE--><h3>Energy performance and carbon emissions assessment and monitoring tool </h3>
+<!--TITLE--><h1 class=blue style="font-size:33px;padding-bottom:0">ECAM Web Tool</h1>
 
 <!--DESCRIPTION--><div style="font-size:17px;color:#333;max-width:75%;text-align:justify">
-	The web-based ECAM tool is part of the knowledge platform provided by the <a href="http://www.iwa-network.org/WaCCliM/">WaCCliM project</a>. 
-	The ECAM tool helps utilities to evaluate their operations in terms of GHG emissions and energy use based on their own data. 
-	The results are compared with known benchmarks so that inefficiencies can be highlighted, 
-	and decision makers may initiate improvements in the most compromising stages within the utility.
+	Helps utilities to evaluate their operations in terms of GHG emissions and energy use based on their own data. 
+	Is part of the knowledge platform provided by the <a href="http://www.iwa-network.org/WaCCliM/">WaCCliM project</a>. 
 	This tool is free and open source.
 </div>
 
-<!--MENU--><div style=padding:1em><?php include'menu.php'?></div>
 <!--FIRST TIME?-->
 <h4 style=font-size:19px>
 First time using ECAM Web Tool? Click "Create new system" or learn more in <a href=about.php>About</a>
 </h4>
+
+<!--MENU--><div style=padding:1em><?php include'menu.php'?></div>
 
 <!--LATEST UPD--><span style="background:yellow"><?php echo "Latest update: ".date("F d Y, H:i:s",filemtime("index.php"))?></span>
 <!--WARNING--><span style=background:orange>Please use Google Chrome. Tool not tested in other browsers.</span><br>

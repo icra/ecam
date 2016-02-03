@@ -46,7 +46,7 @@
 	<button class="button add" onclick=newSystem()>Create new system</button>
 	<!--load-->
 	<input type=file id=loadfile accept=".json" onchange="loadFile(event)" style=display:none>
-	<button class="button edit" onclick=document.getElementById('loadfile').click()>Import existing system file</button> 
+	<button class="button edit" onclick=document.getElementById('loadfile').click()>Open system</button> 
 	<?php
 		if(isset($_COOKIE['GLOBAL']))
 		{ ?>
