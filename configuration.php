@@ -43,7 +43,7 @@
 			updateResult()
 
 			//update side bar
-			updateSidebar();
+			Sidebar.update();
 		}
 
 		/** Activate stages depending on Global.Configuration["Active Stages"] */

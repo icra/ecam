@@ -31,7 +31,7 @@
 		switch($sublevel)
 		{
 			case "General":
-				$sublevelName="Energy use and production";break;
+				$sublevelName="Energy";break;
 			default:
 				$sublevelName=$sublevel;break;
 		}
@@ -71,14 +71,14 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <style> h1 {text-align:left;padding-left:20em} </style>
 <!--TITLE--><h1>Input data</h1>
-<!--SUBTITLE--><h4>This is an overview of your system. Click the stage you want to edit. To activate/deactivate stages, go to <a href=configuration.php>Configuration</a>.</h4>
+<!--SUBTITLE--><h4>This is an overview of your system stages. Click the stages to input data. To activate/deactivate stages, go to <a href=configuration.php>Configuration</a>.</h4>
 
 <!--NAVIGATION TABLE-->
 <table id=navigationTable class=inline style="text-align:center;margin:1em">
 	<!--this table style--><style>
 		#navigationTable img{width:35px;vertical-align:middle}
-		#navigationTable td:not(.inactive){cursor:pointer}
-		#navigationTable td:not(.inactive):hover{background:lightgreen;transition:all 0.5s}
+		#navigationTable td:not(.inactive) {cursor:pointer}
+		#navigationTable td:not(.inactive):hover {background:lightgreen;transition:all 0.5s}
 		#navigationTable td.empty{background:#e8e8e8;cursor:default}
 	</style>
 	<!--stages menu-->

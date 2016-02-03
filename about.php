@@ -22,9 +22,9 @@
 	Developed by <a href=http://icra.cat>ICRA</a> in cooperation with <a href=http://www.iwa-network.org/>IWA</a>.<br>
 	<ul>
 		<li>Lluís Bosch (ICRA)
+		<li>Lluís Corominas (ICRA)
 		<li>Eva Promes (IWA)
 		<li>Mario González (IWA)
-		<li>Lluís Corominas (ICRA)
 		<li>Corinne Trommssdorff (IWA)
 	</ul>
 	2015-2016 <a href=license.php>License</a>. <br>

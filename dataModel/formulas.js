@@ -1,4 +1,3 @@
-
 var Formulas = {
 	/*
 		return array of strings corresponding to variables matched in formula string
@@ -57,6 +56,7 @@ var Formulas = {
 		result = result.replace(/return/g,"")
 		result = result.replace(/[\r\n\t]/g,"")
 		result = result.replace(/Global./g,"")
+		result = result.replace(/UWS./g,"")
 		result = result.replace(/Water./g,"")
 		result = result.replace(/Waste./g,"")
 		result = result.replace(/General./g,"")

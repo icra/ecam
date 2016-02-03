@@ -15,6 +15,7 @@
 		td.input input { width:95%;font-size:18px}
 		td.input       { width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
 		table#outputs tr:hover { background:orange; }
+		th{text-align:center}
 		<?php
 			if($level=="Waste")
 			{?>
@@ -291,13 +292,13 @@
 					class=button
 					style='background:$color;'
 					onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-						Go to Level 3 &curarr;
+						Go to Level 3 &map;
 					</button> 
 				";
 		}
 	}
 ?>
-<!--HELP--><h4>Here you can edit the inputs for this stage. The Indicators (in yellow) will be updated automatically.</h4>
+<!--HELP--><h4>Input data for this stage. The Indicators (in yellow) will be updated automatically.</h4>
 
 <!--IO-->
 <div style=text-align:left>

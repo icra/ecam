@@ -2,7 +2,7 @@
 
 <div id=navbar>
 	<img src=img/IWA-logo.png style="margin:0.6em;margin-left:7.5em;margin-right:13em;width:75px;cursor:pointer" onclick=window.location='index.php'>
-	ECAM — Energy performance and Carbon emissions Assessment and Monitoring Tool
+	<a href=index.php>ECAM — Energy performance and Carbon emissions Assessment and Monitoring Tool</a>
 </div>
 
 <style>
