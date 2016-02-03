@@ -45,6 +45,45 @@
 			}
 		}
 	}
+
+	/** Clear all user inputted data */
+	function newSystem()
+	{
+		//simply remove cookie and default values will load
+		removeCookie("GLOBAL");
+		window.location="getStarted.php";
+	}
+
+	/** Generate a json/text file of the Global object */
+	function saveToFile()
+	{
+		var link=document.createElement('a');
+		link.href="data:text/json;charset=utf-8,"+JSON.stringify(Global);
+		link.download=Global.General.Name+".json";
+		link.click();
+	}
+
+	/** Update Global object with loaded file parsed to JSON */
+	function loadFile(evt)
+	{
+		var file = evt.target.files[0];
+		var reader = new FileReader();
+		var contents;
+		reader.onload=function()
+		{
+			copyFieldsFrom(JSON.parse(reader.result),"Global");
+			updateResult();
+			window.location.reload();
+		}
+		reader.readAsText(file);
+	}
+
+	function clearSystem()
+	{
+		//simply remove cookie and default values will load
+		removeCookie("GLOBAL");
+		window.location='index.php';
+	}
 </script>
 
 <div id=sidebar 
@@ -81,10 +120,12 @@
 	<div id=sidecontent>
 		<table>
 			<tr><th colspan=4> <script> document.write(Global.General.Name) </script>
-			<tr><td align=center><button>New</button>
-			<td align=center><button>Open</button>
-			<td align=center><button>Save</button>
-			<td align=center><button>Clear</button>
+			<tr>
+			<td align=center><button onclick=newSystem()>New</button>
+			<input type="file" id="loadfile" accept=".json" onchange="loadFile(event)" style="display:none">
+			<td align=center><button onclick=document.getElementById('loadfile').click()>Open</button>
+			<td align=center><button onclick=saveToFile()>Save</button>
+			<td align=center><button onclick=clearSystem()>Clear</button>
 		</table>
 
 		<div style="padding:0;margin:0;background:#d71d24;height:5px"></div>
