@@ -194,6 +194,7 @@
 				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
 				/*circle indicator*/ 
 				newCell=newRow.insertCell(-1);
+				newCell.style.textAlign='center';
 				newCell.innerHTML=(function()
 				{
 					var hasIndicator=RefValues.isInside(field);
@@ -209,7 +210,7 @@
 							case "Unsatisfactory": color="red";break;
 							default:               color="#ccc";break;
 						}
-						return "<span style=font-size:20px;color:"+color+">&#9899; <span style=color:black;font-size:15px>"+indicator+"</span></span>";
+						return "<span title='"+indicator+"' style='cursor:help;font-size:15px;color:"+color+"'>&#11044;</span>";
 					}
 					else return "<span style=color:#ccc>-</span>";
 				})();

@@ -106,7 +106,7 @@
 
 <!--AVAILABLE INPUTS-->
 <div class=inline style="text-align:left">
-	<h4>All active <?php echo $type?>s (from activated stages in configuration)</h4>
+	<h4>All active <?php echo $type?>s (sorted by stage)</h4>
 	<!--level 1-->
 	<div class=inline style="font-size:11px;width:45%;padding:0">
 		<table style="width:100%" level=1><tr><th colspan=5>Level 1</table>

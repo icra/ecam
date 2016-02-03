@@ -1,6 +1,7 @@
 <!--menu bar at the right of the page-->
+
 <script>
-	var Sidebar = 
+	var Sidebar = //Namespace
 	{
 		toggle:function()
 		{
@@ -29,10 +30,10 @@
 			}
 		},
 
-		//go over links <a stage> to deactivate the ones inactive according to user
 		update: function()
 		{
 			var collection = document.querySelectorAll("#sidebar a[stage]")
+			//go over links <a stage> to deactivate the ones inactive according to user
 			for(var i=0;i<collection.length;i++)
 			{
 				var stage = collection[i].getAttribute('stage');
@@ -46,12 +47,13 @@
 	}
 </script>
 
-<div id=sidebar class="<?php if($_COOKIE['sidebar']==1){echo "on";}else{echo "off";}?>" 
-		ondblclick=Sidebar.toggle() 
-		onmouseover=Sidebar.activate()
-		>
+<div id=sidebar 
+	 class="<?php if(isset($_COOKIE['sidebar']) && $_COOKIE['sidebar']==1){echo "on";}else{echo "off";}?>" 
+	 ondblclick=Sidebar.toggle() 
+	 onmouseover=Sidebar.activate()>
 	<style>
-		div#sidebar{
+		div#sidebar
+		{
 			position:fixed;
 			top:0; right:0; bottom:0;
 			z-index:999;
@@ -70,7 +72,6 @@
 		div#sidebar td, div#sidebar th {padding:0.3em}
 		#sidebar.off #burger{color:#888}
 		#sidebar.on  #burger{color:black}
-
 		/*links*/
 		#sidebar a.water{color:#00adef} 
 		#sidebar a.waste{color:#d71d24} 
@@ -108,16 +109,40 @@
 			<tr><td><a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment>Wastewater treatment</a>
 			<tr><td><a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge>Wastewater discharge</a>
 			<tr><th>Summary
-			<tr><td><a href=summary.php?type=input>All Inputs</a>
-			<tr><td><a href=summary.php?type=output>All Outputs</a>
+			<tr><td><a href=summary.php?type=input>All inputs</a>
+			<tr><td><a href=summary.php?type=output>All outputs</a>
 			<tr><td><a href=graphs.php>Graphs</a>
 			<tr><th>Other
 			<tr><td><a href=todo.php>To do list</a>
 		</table>
+
+		<div style=color:#999> Double-click to minimize this menu <br>(or click the menu symbol on the top)</div>
 	</div>
+
 </div>
 
-<script>
-	Sidebar.update();
-</script>
+<script>Sidebar.update()</script>
 
+<script>
+	//make the current page on the navbar be highlighted
+	(function()
+	{
+		<?php
+			$requri=$_SERVER['REQUEST_URI'];
+			echo "var requri='$requri';";
+		?>
+		var links=document.querySelectorAll('#sidebar a');
+		console.log(requri)
+		for(var i=0;i<links.length;i++)
+		{
+			var href=links[i].getAttribute('href');
+			console.log("	"+href)
+			if(encodeURIComponent(requri).search(encodeURIComponent(href)+"$")!=-1)	
+			{
+				links[i].parentNode.style.backgroundColor="white";
+				links[i].style.color="black";
+				break;
+			}
+		}
+	})();
+</script>

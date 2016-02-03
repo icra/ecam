@@ -71,7 +71,7 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <style> h1 {text-align:left;padding-left:20em} </style>
 <!--TITLE--><h1>Input data</h1>
-<!--SUBTITLE--><h4>This is an overview of your system stages. Click the stages to input data. To activate/deactivate stages, go to <a href=configuration.php>Configuration</a>.</h4>
+<!--SUBTITLE--><h4>This is an overview of your system stages. Click on a stage to input data. To activate more stages go to <a href=configuration.php>Configuration</a>.</h4>
 
 <!--NAVIGATION TABLE-->
 <table id=navigationTable class=inline style="text-align:center;margin:1em">
