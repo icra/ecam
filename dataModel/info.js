@@ -15,10 +15,10 @@
 
 var Info = {
 	//L1 UWS
-	"uw1":{description:"Conversion factor for grid electricity",magnitude:"Conversion",unit:"kgCO2e/kWh",},
-	c_uw50:{description:"Energy Costs",magnitude:"Currency",unit:"USD"},
-	c_uw51:{description:"Running Costs",magnitude:"Currency",unit:"USD"},
-	c_uw52:{description:"Total electric energy consumed from the grid and from self-production",magnitude:"Energy",unit:"kWh"},
+	"uw1":{description:"Conversion factor for grid electricity",                                magnitude:"Conversion",unit:"kgCO2e/kWh",},
+	c_uw50:{description:"Energy Costs",                                                         magnitude:"Currency",  unit:"USD"},
+	c_uw51:{description:"Running Costs",                                                        magnitude:"Currency",  unit:"USD"},
+	c_uw52:{description:"Total electric energy consumed from the grid and from self-production",magnitude:"Energy",    unit:"kWh"},
 
 	//L1 WATER SUPPLY
 	"ws1":{description:"Serviced population within the water utility area of service",                           magnitude:"People",  unit:"People",},

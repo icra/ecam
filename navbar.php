@@ -1,13 +1,13 @@
 <!--navbar.php: menu of sections at the top of each page-->
 
 <div id=navbar>
-	<img src=img/IWA-logo.png style="margin:0.6em;margin-right:9em;width:75px;cursor:pointer" onclick=window.location='index.php'>
+	<img src=img/IWA-logo.png style="margin:0.6em;margin-left:7.5em;margin-right:13em;width:75px;cursor:pointer" onclick=window.location='index.php'>
 	ECAM — Energy performance and Carbon emissions Assessment and Monitoring Tool
 </div>
 
 <style>
 	#navbar {
-		text-align:center;
+		text-align:left;
 		background:#00aff1;
 		color:white;
 		padding:0em 0em 0em 0em;

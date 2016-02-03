@@ -34,13 +34,16 @@
 			}
 
 			//background color: green or white
-			checkbox.parentNode.parentNode.style.backgroundColor=checkbox.checked?"#73AD21":""
+			checkbox.parentNode.parentNode.style.backgroundColor=checkbox.checked?"lightgreen":""
 
 			//update Active Stages
 			Global.Configuration["Active Stages"][id] = checkbox.checked ? 1 : 0
-			
+
 			//redisplay current json
 			updateResult()
+
+			//update side bar
+			updateSidebar();
 		}
 
 		/** Activate stages depending on Global.Configuration["Active Stages"] */
@@ -105,7 +108,7 @@
 					echo "<tr><td rowspan=4 style=text-align:center> 
 						<label>
 							<input type=checkbox id=$alias onchange=activate(this.id)> 
-							<img src=img/$alias.png>$name
+							<img src=img/$alias.png> $name
 						</label>";
 				}
 				function printL2stage($class,$alias,$name,$newRow)
@@ -114,8 +117,7 @@
 					echo "<td>
 						<label>
 							<input type=checkbox id=$alias class=$class onchange=activate(this.id)> 
-							<img src=img/$alias.png>
-							$name
+							<img src=img/$alias.png> $name
 						</label>";
 				}
 				printL1stage("water","Water supply");

@@ -22,8 +22,6 @@
 				a,a:visited{color:#bf5050}
 			<?php }
 		?>
-		/* GO TO L2 BUTTONS*/
-		button img {margin:0;vertical-align:middle;width:20px;padding:0} /*icons inside buttons to navigate to Level2*/
 	</style>
 	<script>
 		/** 
@@ -276,76 +274,30 @@
 		/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
 		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Level 2)</span>" : "<span style=color:black>$titleLevel (Level 1)</span>";
 	?>
+	<style> h1 {text-align:left;padding-left:20em} </style>
 	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
 </div>
 
 <!--separator--><div style=margin-top:120px></div>
-
+<!--linear diagram--><?php include'linear.php'?>
+<!--go to level 3 button-->
+<?php
+	if($sublevel)
+	{
+		if($sublevel!="General")
+		{
+			$color = ($level=="Waste")?"lightcoral":"lightblue";
+			echo "<button 
+					class=button
+					style='background:$color;'
+					onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
+						Go to Level 3 &curarr;
+					</button> 
+				";
+		}
+	}
+?>
 <!--HELP--><h4>Here you can edit the inputs for this stage. The Indicators (in yellow) will be updated automatically.</h4>
-
-<!--GO TO LEVEL 2 OR 3-->
-<div style=margin:0;padding:0>
-	<?php
-		if($sublevel)
-		{
-			if($sublevel!="General")
-			{
-				$color=$level=="Waste"?"lightcoral":"lightblue";
-				echo "<button 
-						class=button
-						style='background:$color;'
-						onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-							Level 3 Substages
-						</button> 
-					";
-			}
-		}
-		else //means that we are in level 1
-		{
-			//create buttons to navigate to level 2
-			switch($level)
-			{
-				case "UWS":
-					echo 'Level 1
-						<button stage=water class=button onclick=window.location="edit.php?level=Water" style=background:lightblue> <img src=img/water.png> Water supply</button> 
-						<button stage=waste class=button onclick=window.location="edit.php?level=Waste" style=background:lightcoral> <img src=img/waste.png> Wastewater</button> 
-					';
-					break;
-				case "Water": 
-					echo 'Level 2
-						<button stage=waterGen class=button onclick=window.location="edit.php?level=Water&sublevel=General" 		style=background:lightblue> <img src=img/waterGen.png> Energy use and production </button> 
-						<button stage=waterAbs class=button onclick=window.location="edit.php?level=Water&sublevel=Abstraction" 	style=background:lightblue> <img src=img/waterAbs.png> Abstraction	</button> 
-						<button stage=waterTre class=button onclick=window.location="edit.php?level=Water&sublevel=Treatment" 	    style=background:lightblue> <img src=img/waterTre.png> Treatment	</button>
-						<button stage=waterDis class=button onclick=window.location="edit.php?level=Water&sublevel=Distribution"    style=background:lightblue> <img src=img/waterDis.png> Distribution	</button>';
-						break;
-				case "Waste": 
-					echo 'Level 2
-						<button stage=wasteGen class=button onclick=window.location="edit.php?level=Waste&sublevel=General" 	style=background:lightcoral> <img src=img/wasteGen.png> Energy use and production </button> 
-						<button stage=wasteCol class=button onclick=window.location="edit.php?level=Waste&sublevel=Collection" 	style=background:lightcoral> <img src=img/wasteCol.png> Collection	</button> 
-						<button stage=wasteTre class=button onclick=window.location="edit.php?level=Waste&sublevel=Treatment" 	style=background:lightcoral> <img src=img/wasteTre.png> Treatment	</button>
-						<button stage=wasteDis class=button onclick=window.location="edit.php?level=Waste&sublevel=Discharge" 	style=background:lightcoral> <img src=img/wasteDis.png> Discharge	</button>';
-						break;
-			}
-		}
-	?>
-	<script>
-		/** Disable nav buttons according to current configuration */
-		(function()
-		{
-			//go over buttons that have the stage attribute
-			var elements=document.querySelectorAll("[stage]")
-			for(var i=0;i<elements.length;i++)
-			{
-				//Select non active stages
-				if(0==Global.Configuration["Active Stages"][elements[i].getAttribute('stage')]) 
-				{
-					elements[i].setAttribute('disabled',true)
-					elements[i].setAttribute('title','Inactive stage. Go to Configuration to enable it')
-				}
-			}
-		})();
-	</script>
-</div>
 
 <!--IO-->
 <div style=text-align:left>

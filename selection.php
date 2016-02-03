@@ -46,12 +46,12 @@
 	</script>
 	<style>
 		th{vertical-align:middle}
+		table{margin:1em}
 	</style>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--title--><h1>Options that define variables</h2>
-<!--descr--><h3>Building blocks. Where they go?</h3>
+<!--title--><h1>Advanced questions</h2>
 
 <!--FUEL TYPE-->
 <div class=inline style="padding:2em;border:1px solid #666;margin:1em">
@@ -105,7 +105,8 @@
 
 <!--Technologies-->
 <div class=inline style="padding:2em;border:1px solid #666;margin:1em">
-	Select treatment
+	<div><b>Water treatment & Wastewater treatment</b></div>
+	Select treatment:
 	<script>
 		['Water','Waste'].forEach(function(stage)
 		{
@@ -115,7 +116,7 @@
 				var selected=(Global.Configuration.Selected.Technologies[stage]==tech) ? "selected" : "";
 				document.write('<option '+selected+'>'+tech);
 			}
-			document.write('</select>');
+			document.write('</select> ');
 		});
 	</script>
 	<table> <tr><td style=background:lightcoral>Info about what modifies each technology</table>

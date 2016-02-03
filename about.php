@@ -19,12 +19,12 @@
 	You will need a PHP localhost (such as <a href=https://www.apachefriends.org/index.html>XAMPP</a>).<br>
 	This software was written entirely using the <a href=http://www.vim.org>Vim</a> editor, inside a <a href=https://www.cygwin.com/>Cygwin</a> terminal. <br>
 	Tool coded in Javascript, PHP &amp; HTML languages. <br>
-	Developed by <a href=http://icra.cat>ICRA</a> in collaboratino with <a href=http://www.iwa-network.org/>IWA</a>.<br>
+	Developed by <a href=http://icra.cat>ICRA</a> in cooperation with <a href=http://www.iwa-network.org/>IWA</a>.<br>
 	<ul>
 		<li>Lluís Bosch (ICRA)
 		<li>Eva Promes (IWA)
 		<li>Mario González (IWA)
-		<li>Lluís Corominas (IWA)
+		<li>Lluís Corominas (ICRA)
 		<li>Corinne Trommssdorff (IWA)
 	</ul>
 	2015-2016 <a href=license.php>License</a>. <br>

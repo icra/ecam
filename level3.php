@@ -15,6 +15,7 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
+		button.updateL2{font-size:10px;padding:0;}
 		td{text-align:left}
 		th{vertical-align:middle}
 		table#substages td:not(.level2){text-align:right}
@@ -138,6 +139,13 @@
 			return sum;
 		}
 
+		/** update the level2 input with the sum of the level3*/
+		function updateL2(code,sum)
+		{
+			CurrentStage[code]=sum;
+			init()
+		}
+
 		/** update substages table */
 		function updateSubstagesTable()
 		{
@@ -159,8 +167,14 @@
 				}
 				//TOTAL header
 				var newTH = document.createElement('th');
-				newTH.innerHTML="&sum; TOTAL";
+				newTH.innerHTML="&sum; (Level 3 TOTAL)";
 				t.rows[0].appendChild(newTH);
+
+				//Update LEVEL2 with the Sum of LEVEL3
+				var newTH = document.createElement('th');
+				newTH.innerHTML="Update Level 2";
+				t.rows[0].appendChild(newTH);
+
 				//LEVEL2 header
 				var newTH = document.createElement('th');
 				newTH.innerHTML="LEVEL 2";
@@ -208,7 +222,17 @@
 					//SUM OF SUBSTAGES
 					var sum=sumAll(code);
 					var newCell=newRow.insertCell(-1);
+					newCell.classList.add('level2');
 					newCell.innerHTML=sum/multiplier;
+
+					//update level 2 with sum of level 3
+					var newCell=newRow.insertCell(-1);
+					newCell.style.textAlign='center'
+					newCell.innerHTML=(function()
+					{
+						return "&rarr; <button class=updateL2 onclick=updateL2('"+code+"',"+sum+")>Update L2</button> &rarr;";
+					})();
+
 					//LEVEL 2 current value
 					var newCell=newRow.insertCell(-1);
 					newCell.classList.add('level2');
@@ -415,11 +439,13 @@
 		$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>$sublevel</a>";
 		$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages (Level 3)</a>";
 	?>
+	<style> h1 {text-align:left;padding-left:20em} </style>
 	<!--TITLE--><h1><?php echo $title?></h1>
 </div>
 
-<!--separator--><div style=margin-top:100px></div>
-<!--HELP--><h4>You can subdivide "<?php echo "$level $sublevel"?>" in Level 3 substages</h4>
+<!--separator--><div style=margin-top:120px></div>
+<!--linear diagram--><?php include'linear.php'?>
+<!--HELP--><h4>In Level 3 you can subdivide a Level 2 stage into multiple substages</h4>
 <!--new substage button--><button onclick=newSubstage() class=button>+ New Substage</button>
 <!--substages counter--><div class=inline style="border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
 <!--SUBSTAGES TABLE--><table id=substages style=margin:1em><tr><td style=border:none colspan=2></table>
