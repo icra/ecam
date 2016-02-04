@@ -58,6 +58,10 @@
 <!--TITLE--><h1>General info</h1>
 <!--SUBTITLE--><h4>Edit general data of your system. You can edit this information later.</h4>
 <!--FORM--><table id=form style="text-align:left;"></table>
-<!--NEXT--><div style=margin:1em><button class="button next" onclick=window.location='configuration.php'>Next</button></div>
+<!--PREV&NEXT-->
+<div style=margin:1em>
+	<button class="button prev" onclick=window.location='index.php'>Previous</button> 
+	<button class="button next" onclick=window.location='configuration.php'>Next</button>
+</div>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

@@ -51,7 +51,6 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
-		#navigationTable td{vertical-align:middle;padding:0.7em;font-size:15px}
 		td.inactive
 		{
 			color:#aaa;
@@ -71,7 +70,7 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <style> h1 {text-align:left;padding-left:20em} </style>
 <!--TITLE--><h1>Input data</h1>
-<!--SUBTITLE--><h4>This is an overview of your system stages. Click on a stage to input data. To activate more stages go to <a href=configuration.php>Configuration</a>.</h4>
+<!--SUBTITLE--><h4>This is an overview of the active stages of your system. Click on a stage to input data. To activate more stages go to <a href=configuration.php>Configuration</a>.</h4>
 
 <!--NAVIGATION TABLE-->
 <table id=navigationTable class=inline style="text-align:center;margin:1em">
@@ -80,9 +79,10 @@
 		#navigationTable td:not(.inactive) {cursor:pointer}
 		#navigationTable td:not(.inactive):hover {background:lightgreen;transition:all 0.5s}
 		#navigationTable td.empty{background:#e8e8e8;cursor:default}
+		#navigationTable td{vertical-align:middle;padding:1.5em;font-size:15px}
 	</style>
 	<!--stages menu-->
-	<tr>
+	<tr style=display:none>
 		<td onclick=window.location='edit.php?level=UWS' colspan=8>
 		<img src=img/uws.png> <a href=edit.php?level=UWS title="Urban Water System">Urban water cycle</a></td>
 	<tr>
@@ -101,7 +101,6 @@
 		?>
 </table>
 
-<!--DIAGRAM--><?php //include'diagram.php'?>
-<!--PREV BUTTON--><div><button class="button prev" onclick=window.location='configuration.php'>Previous</button></div>
+<!--PREV & NEXT BUTTONS--><div><button class="button prev" onclick=window.location='selection.php'>Previous</button> </div>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

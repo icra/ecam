@@ -95,8 +95,16 @@
 				}
 				
 				/*attribute field==field>*/newRow.setAttribute('field',field);
-				/*code*/ newRow.insertCell(-1).innerHTML="<a href=variable.php?id="+field+">"+field+"</a>";
-				/*description*/ newRow.insertCell(-1).innerHTML= Info[field] ? Info[field].description : "<span style=color:#ccc>not defined</span>";
+				/*description*/ 
+				var newCell=newRow.insertCell(-1);
+				newCell.setAttribute('title',Info[field].explanation);
+				newCell.style.cursor='help';
+				newCell.innerHTML=(function()
+				{
+					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
+					var code = "<a href=variable.php?id="+field+">"+field+"</a>";
+					return description+" ("+code+")";
+				})();
 				//editable cell if not CV
 				var newCell=newRow.insertCell(-1);
 				if(!isCV)
@@ -185,12 +193,20 @@
 				newRow.setAttribute('title',prettyFormula);
 				newRow.setAttribute('onmouseover','Formulas.hlFields("'+prettyFormula+'",1)');
 				newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+prettyFormula+'",0)');
-				/*code*/ newRow.insertCell(-1).innerHTML=(function(){
-					return "<a href=variable.php?id="+field+">"+field+"</a>";
+				/*description*/ 
+				newCell=newRow.insertCell(-1);
+				newCell.setAttribute('title',Info[field].explanation);
+				newCell.style.cursor='help';
+				newCell.innerHTML=(function()
+				{
+					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
+					var code = "<a href=variable.php?id="+field+">"+field+"</a>";
+					return description+" ("+code+")";
 				})();
-				/*description*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
 				var value = Math.floor(1e2*CurrentLevel[field]()/Units.multiplier(field))/1e2;
-				/*value*/ newRow.insertCell(-1).innerHTML=value;
+				/*value*/ 
+				newCell=newRow.insertCell(-1)
+				newCell.innerHTML=value;
 				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
 				/*circle indicator*/ 
 				newCell=newRow.insertCell(-1);
@@ -305,9 +321,8 @@
 <div style=text-align:left>
 	<!--INPUTS-->
 	<table id=inputs class=inline style="max-width:46%">
-		<tr><th colspan=5>INPUTS <?php include'inputType.php'?>
+		<tr><th colspan=5 style="text-align:left">INPUTS <?php include'inputType.php'?>
 		<tr>
-			<th>Code
 			<th>Description
 			<th>Current Value
 			<th>Unit
@@ -316,9 +331,8 @@
 
 	<!--PI-->
 	<table id=outputs class=inline style=max-width:46%;background:yellow;>
-		<tr><th colspan=5>OUTPUTS (Performance indicators)
+		<tr><th colspan=5>RESULTS - Key Performance indicators
 		<tr>
-			<th>Code
 			<th>Description
 			<th>Current Value
 			<th>Unit

@@ -13,18 +13,59 @@
 	<img class=l2 stage=wasteDis src=img/wasteDis.png onclick=window.location="edit.php?level=Waste&sublevel=Discharge"    title="L2 Wastewater Discharge">
 
 	<!--line behind images-->
-	<style> #linearDiagramLine {position:relative; transform:translateY(-38px);z-index:-1;width:590px;} </style>
+	<style> #linearDiagramLine {position:relative; transform:translateY(-40px);z-index:-1;width:590px;} </style>
 	<hr id=linearDiagramLine>
 </div>
 
 <style>
 	/* linear diagram images */
-	img {cursor:pointer;margin:0 1em 0 1em;vertical-align:middle;padding:0} /*icons inside buttons to navigate to Level2*/
-	img.l1 {width:50px;} 
-	img.l2 {width:30px;}
+	#linearDiagram img {cursor:pointer;margin:0 0.8em 0 0.8em;vertical-align:middle;padding:0} /*icons inside buttons to navigate to Level2*/
+	#linearDiagram img.l1 {width:50px;} 
+	#linearDiagram img.l2 {width:30px;}
+	#linearDiagram img{border-radius:50%;border:2px solid transparent}
+	#linearDiagram img.selected{border:2px dashed}
 </style>
 
 <script>
+	//highlight current stage
+	(function()
+	{
+		//we need to find level and sublevel to create a stage name i.e. "waterAbs"
+		var level    = '<?php echo $level?>';
+		var sublevel = '<?php echo $sublevel?>';
+		var stage;
+		switch(level)
+		{
+			case "Water":
+				switch(sublevel)
+				{
+					case "General":stage="waterGen";break;
+					case "Abstraction":stage="waterAbs";break;
+					case "Treatment":stage="waterTre";break;
+					case "Distribution":stage="waterDis";break;
+					default:stage="water";break;
+				}
+				break;
+			case "Waste":
+				switch(sublevel)
+				{
+					case "General":stage="wasteGen";break;
+					case "Collection":stage="wasteCol";break;
+					case "Treatment":stage="wasteTre";break;
+					case "Discharge":stage="wasteDis";break;
+					default:stage="waste";break;
+				}
+				break;
+			default: 
+				stage=false;
+				break;
+		}
+		if(stage)
+		{ 
+			document.querySelector('img[stage='+stage+']').classList.add('selected')
+		}
+	})();
+
 	//go over <img stage=i> to deactivate the ones inactive
 	(function()
 	{

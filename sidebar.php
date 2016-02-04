@@ -89,7 +89,7 @@
 <div id=sidebar 
 	 class="<?php if(isset($_COOKIE['sidebar']) && $_COOKIE['sidebar']==1){echo "on";}else{echo "off";}?>" 
 	 ondblclick=Sidebar.toggle() 
-	 onmouseover=Sidebar.activate()>
+	 onmouseover=Sidebar.activate() >
 	<style>
 		div#sidebar
 		{
@@ -99,7 +99,7 @@
 			background:#def4ff;
 			overflow:hidden;
 			padding:0;margin:0;
-			box-shadow: 5px 5px 5px 5px #888;
+			box-shadow: 5px 5px 10px 5px #888;
 		}
 		div#sidebar.off{width:35px;}
 		div#sidebar.on{width:320px;}
@@ -135,7 +135,7 @@
 			<tr><th>General
 			<tr><td><a href=getStarted.php>General info</a>
 			<tr><td><a href=configuration.php>Configuration</a>
-			<tr><td><a href=selection.php>Advanced questions</a>
+			<tr><td><a href=selection.php>Additional info</a>
 			<tr><td><a href=stages.php>Overview</a>
 			<tr><th>Level 1
 			<tr><td><a class=water stage=water    href=edit.php?level=Water>Water supply</a>
@@ -173,11 +173,9 @@
 			echo "var requri='$requri';";
 		?>
 		var links=document.querySelectorAll('#sidebar a');
-		console.log(requri)
 		for(var i=0;i<links.length;i++)
 		{
 			var href=links[i].getAttribute('href');
-			console.log("	"+href)
 			if(encodeURIComponent(requri).search(encodeURIComponent(href)+"$")!=-1)	
 			{
 				links[i].parentNode.style.backgroundColor="white";

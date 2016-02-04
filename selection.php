@@ -2,141 +2,189 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<script>
-		function init()
-		{
-			updateFuelInfo();
-			updateCountryInfo();
-			updateResult();
-		}
-
-		//modify Global
+		/** Modify any field of Global and init() */
 		function updateField(object,field,newValue)
 		{
-			if(typeof(object[field])=="number"){newValue=parseFloat(newValue)}
-			/*update the object*/object[field]=newValue;
-			/*update views*/init();
+			if(typeof(object[field])=="number"){newValue=parseFloat(newValue);}
+			object[field]=newValue;
+			init();
 		}
 
-		//redisplay
-		function updateFuelInfo()
+		function updateUW1(newValue)
 		{
-			var table=document.querySelector('#fuelInfo');
-			while(table.rows.length>2){table.deleteRow(-1)}
-			var newRow=table.insertRow(-1);
-			for(var field in Tables['Fuel types'][Global.Configuration.Selected['Fuel type']])
+			document.querySelector('#uw1').value=newValue;
+			updateField(Global.UWS,'uw1',newValue);
+		}
+
+		function updateFuelSelectionVisibility()
+		{
+			var display = Global.Configuration["Yes/No"]["Do you have fuel engines to run pumps"] ? "" : "none";
+			document.querySelector('#fuel').style.display=display;
+		}
+
+		function redisplayUW1menu()
+		{
+			document.querySelector('#uw1').value=Global.UWS.uw1;
+			document.querySelector('#countryUW1').value=Global.UWS.uw1;
+		}
+
+		function updateFuelSelection()
+		{
+			['water','waste','wasteTre'].forEach(function(stage)
 			{
-				if(field=="EFCH4" || field=="EFN2O")
+				var row = document.querySelector('#fuelSelection tr[stage='+stage+']')
+				while(row.cells.length>1){row.deleteCell(-1);}
+				//new select menu
+				var select = document.createElement('select');
+				row.insertCell(-1).appendChild(select);
+				select.setAttribute('onchange',"updateField(Global.Configuration.Selected['Fuel type'],'"+stage+"',this.value)");
+				if(Global.Configuration["Active Stages"][stage]==0)
 				{
-					newRow.insertCell(-1).innerHTML='<td>'+Tables['Fuel types'][Global.Configuration.Selected['Fuel type']][field].engines;
-					newRow.insertCell(-1).innerHTML='<td>'+Tables['Fuel types'][Global.Configuration.Selected['Fuel type']][field].vehicles;
+					select.disabled=true;
+					select.parentNode.parentNode.title="Inactive stage";
 				}
-				else
-					newRow.insertCell(-1).innerHTML='<td>'+Tables['Fuel types'][Global.Configuration.Selected['Fuel type']][field];
-			}
+				//go over fuel types
+				for(var fuel in Tables['Fuel types'])
+				{
+					var option = document.createElement('option');
+					option.innerHTML=fuel;
+					if(fuel==Global.Configuration.Selected["Fuel type"][stage])
+					{
+						option.setAttribute('selected','true')
+					}
+					select.appendChild(option)
+				}
+			});
 		}
 
-		//redisplay
-		function updateCountryInfo()
+		function init()
 		{
-			var table=document.querySelector('#countryInfo');
-			while(table.rows.length>1){table.deleteRow(-1)}
-			var newRow=table.insertRow(-1)
-			newRow.insertCell(-1).innerHTML='<td>'+Tables['Countries'][Global.Configuration.Selected['Country']];
+			redisplayUW1menu();
+			updateFuelSelectionVisibility();
+			updateFuelSelection();
+			updateResult();
 		}
 	</script>
 	<style>
 		th{vertical-align:middle}
-		table{margin:1em}
+		table{margin-bottom:1em;margin-left:1em}
+		#main {padding-left:20em;text-align:left}
 	</style>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--title--><h1>Advanced questions</h2>
+<!--title--><h1>Additional system info</h2>
 
-<!--FUEL TYPE-->
-<div class=inline style="padding:2em;border:1px solid #666;margin:1em">
-	<div><b>FUEL</b></div> Select fuel type:
-	<!--select fuel type-->
-	<select onchange="updateField(Global.Configuration.Selected,'Fuel type',this.value)">
-		<script>
-			(function(){
-				for(var type in Tables['Fuel types'])
-				{
-					var selected = (type==Global.Configuration.Selected['Fuel type']) ? "selected":"";
-					document.write('<option '+selected+'>'+type);
-				}
-			})();
-		</script>
-	</select>
-	<!--fuel info-->
-	<table id=fuelInfo> 
-		<tr>
-			<th colspan=2>EFCH4 (kg/TJ)
-			<th colspan=2>EFN2O (kg/TJ)
-			<th rowspan=2>EFCO2          (kg/TJ)
-			<th rowspan=2>FD             (kg/L)
-			<th rowspan=2>NCV            (TJ/Gg)
-		<tr>
-			<th>engines
-			<th>vehicles
-			<th>engines
-			<th>vehicles
+<div id=main>
+	<!--uw1-->
+	<h4>Conversion factor for grid electricity (<a href=variable.php?id=uw1>info</a>)</h4>
+	<table> <tr> <td>
+		<select id=countryUW1 onchange=updateUW1(this.value)>
+			<option value=0>--select country--
+			<option value=1>Africa (1)
+			<option value=2>Egypt (2)
+			<option value=3>Asia, Middle East, Latin America (3)
+			<option value=4>India (4)
+			<option value=5>West Bank and Gaza Strip (Palestine) (5)
+			<option value=6>Japan (6)
+			<option value=7>Brazil (7)
+			<option value=8>Canada, Europe, Russia, Oceania (8)
+			<option value=9>Denmark (9)
+			<option value=10>Germany (10)
+			<option value=11>Greece (11)
+			<option value=12>Italy (12)
+			<option value=13>Sweden (13)
+			<option value=14>Turkey (14)
+			<option value=15>United States (15)
+		</select>
+		<td>
+		Current value <input style=width:25px id=uw1 value=0 onchange=updateUW1(this.value)> (kg CO2)/kWh
 	</table>
-</div>
 
-<!--COUNTRY - BOD-->
-<div class=inline style="padding:2em;border:1px solid #666;margin:1em">
-	<div><b>BOD</b></div> Select country:
-	<!--select country-->
-	<select onchange="updateField(Global.Configuration.Selected,'Country',this.value)">
+	<!--Y/N questions-->
+	<h4>Yes/no questions</h4>
+	<table>
 		<script>
-			(function(){
-				for(var type in Tables['Countries'])
-				{
-					var selected = type==Global.Configuration.Selected['Country'] ? "selected=true" : ""
-					document.write('<option '+selected+'>'+type);
-				}
-			})();
-		</script>
-	</select>
-	<!--bod info-->
-	<table id=countryInfo><tr><th>BOD (g/person/day)</table>
-</div>
-
-<!--Technologies-->
-<div class=inline style="padding:2em;border:1px solid #666;margin:1em">
-	<div><b>Water treatment & Wastewater treatment</b></div>
-	Select treatment:
-	<script>
-		['Water','Waste'].forEach(function(stage)
-		{
-			document.write("<select onchange=\"updateField(Global.Configuration.Selected.Technologies,'"+stage+"',this.value)\">");
-			for(var tech in Tables.Technologies[stage])
+			for(var question in Global.Configuration["Yes/No"])
 			{
-				var selected=(Global.Configuration.Selected.Technologies[stage]==tech) ? "selected" : "";
-				document.write('<option '+selected+'>'+tech);
+				var currentAnswer = Global.Configuration["Yes/No"][question];
+				var checked = currentAnswer ? "checked":"";
+				document.write("<tr><td>"+question+"?<td>")
+				document.write("<label>No  <input name='"+question+"' type=radio value=0 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" checked></label> ")
+				document.write("<label>Yes <input name='"+question+"' type=radio value=1 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" "+checked+"></label> ")
 			}
-			document.write('</select> ');
-		});
-	</script>
-	<table> <tr><td style=background:lightcoral>Info about what modifies each technology</table>
+		</script>
+	</table>
+
+	<!--fuel-->
+	<div id=fuel style="padding:0">
+		<h4>Fuel options</h4>
+		<table id=fuelSelection class=inline>
+			<tr><th>Stage<th>Select Fuel type
+			<tr stage=water>   <td style=font-weight:bold>Level 1 Water supply (engines)
+			<tr stage=waste>   <td style=font-weight:bold>Level 1 Wastewater (engines)
+			<tr stage=wasteTre><td style=font-weight:bold>Level 2 Wastewater treatment (vehicles)
+		</table>
+
+		<table id=fuelInfo class=inline> 
+			<tr><th colspan=8 style=text-align:center>Emission Factors for different fuel types (table 6.3 IPCC vol 6)
+			<tr>
+				<th rowspan=2>Fuel type
+				<th colspan=2>EFCH4 (kg/TJ)
+				<th colspan=2>EFN2O (kg/TJ)
+				<th rowspan=2>EFCO2          (kg/TJ)
+				<th rowspan=2>FD             (kg/L)
+				<th rowspan=2>NCV            (TJ/Gg)
+			<tr>
+				<th>engines <th>vehicles <th>engines <th>vehicles
+			<script>
+				(function()
+				{
+					var table=document.querySelector('#fuelInfo');
+					for(var fuel in Tables['Fuel types'])
+					{
+						var newRow=table.insertRow(-1);
+						newRow.insertCell(-1).innerHTML="<b>"+fuel+"</b>";
+						newRow.insertCell(-1).innerHTML=Tables['Fuel types'][fuel].EFCH4.engines;
+						newRow.insertCell(-1).innerHTML=Tables['Fuel types'][fuel].EFCH4.vehicles;
+						newRow.insertCell(-1).innerHTML=Tables['Fuel types'][fuel].EFN2O.engines;
+						newRow.insertCell(-1).innerHTML=Tables['Fuel types'][fuel].EFN2O.vehicles;
+						newRow.insertCell(-1).innerHTML=Tables['Fuel types'][fuel].EFCO2;
+						newRow.insertCell(-1).innerHTML=Tables['Fuel types'][fuel].FD;
+						newRow.insertCell(-1).innerHTML=Tables['Fuel types'][fuel].NCV;
+					}
+				})();
+			</script>
+		</table>
+	</div>
 </div>
 
-<!--Y/N questions-->
-<div class=inline style="padding:2em;border:1px solid #666;margin:1em">
-<table><tr><th colspan=2>Yes/No questions
-	<script>
-		for(var question in Global.Configuration["Yes/No"])
-		{
-			var currentAnswer = Global.Configuration["Yes/No"][question];
-			var checked = currentAnswer ? "checked":"";
-			document.write("<tr><td>"+question+"?<td>")
-			document.write("<label>No  <input name='"+question+"' type=radio value=0 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" checked></label> ")
-			document.write("<label>Yes <input name='"+question+"' type=radio value=1 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" "+checked+"></label> ")
-			document.write("<td style=background:lightcoral>List of variables to hide needed");
-		}
-	</script>
-</table>
+<!--HIDDEN THINGS-->
+<div style="display:none">
+	<!--Technologies-->
+	<div>
+		<div><b>Water treatment & Wastewater treatment</b></div>
+		Select treatment:
+		<script>
+			['Water','Waste'].forEach(function(stage)
+			{
+				document.write("<select onchange=\"updateField(Global.Configuration.Selected.Technologies,'"+stage+"',this.value)\">");
+				for(var tech in Tables.Technologies[stage])
+				{
+					var selected=(Global.Configuration.Selected.Technologies[stage]==tech) ? "selected" : "";
+					document.write('<option '+selected+'>'+tech);
+				}
+				document.write('</select> ');
+			});
+		</script>
+		<table> <tr><td style=background:lightcoral>Info about what modifies each technology</table>
+	</div>
+</div>
+
+<!--PREV & NEXT BUTTONS-->
+<div style=margin:1em> 
+	<button class="button prev" onclick=window.location='configuration.php'>Previous</button> 
+	<button class="button next" onclick=window.location='stages.php'>Next</button>
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>

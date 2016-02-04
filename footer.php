@@ -1,6 +1,6 @@
 <?php /* footer.php: displayed at the bottom of each page */ ?>
 <div id=footer>
-	<a href=about.php>About</a>
+	<a href=about.php><b>ABOUT</b></a>
 </div>
 
 <style>

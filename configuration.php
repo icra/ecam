@@ -136,7 +136,7 @@
 <!--PREV & NEXT BUTTONS-->
 <div style=margin:1em> 
 	<button class="button prev" onclick=window.location='getStarted.php'>Previous</button> 
-	<button class="button next" onclick=window.location='stages.php'>Next</button>
+	<button class="button next" onclick=window.location='selection.php'>Next</button>
 </div>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

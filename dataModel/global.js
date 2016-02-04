@@ -33,11 +33,11 @@ var Global = {
 		"ws8":0,
 		"ws9":0,
 		c_ws50:function(){
-			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type']];
+			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].water];
 			return this.ws9*fuel.FD*fuel.NCV/1000/1000
 		},
 		c_ws51:function(){
-			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type']];
+			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].water];
 			return this.c_ws50()*(fuel.EFCO2+298*fuel.EFN2O.engines+34*fuel.EFCH4.engines);
 		},
 		"General":{
@@ -139,11 +139,11 @@ var Global = {
 		c_ww54:function(){return this.c_ww58()*(74100+34*3.9+298*3.9)},
 		c_ww55:function(){return 0.02*this.c_ww50()*0.59*0.66*34},
 		c_ww56:function(){
-			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type']];
+			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].waste];
 			return this.ww11*fuel.FD/1000*fuel.NCV/1000;
 		},
 		c_ww57:function(){
-			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type']];
+			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].waste];
 			return this.c_ww56()*(fuel.EFCO2+34*fuel.EFCH4.engines+298*fuel.EFN2O.engines)
 		},
 		c_ww58:function(){return this.ww8*2*this.ww9*0.25*0.84*43/1000000},
@@ -185,13 +185,13 @@ var Global = {
 			c_wwt53:function(){return this.wwt2*this.wwt12*10*3600000/100;},
 			c_wwt54:function()
 			{
-				var f=Tables['Fuel types'][Global.Configuration.Selected['Fuel type']];
+				var f=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].wasteTre];
 				return this.c_wwt57()*(f.EFCO2+34*f.EFCH4.vehicles+298*f.EFN2O.vehicles);
 			},
 			c_wwt55:function(){return 298*this.wwt5*0.005*44/28},
 			c_wwt56:function(){return 298*this.c_wwt58()*0.005*44/28},
 			c_wwt57:function(){
-				var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type']];
+				var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].wasteTre];
 				return Global.Waste.ww11*fuel.FD*fuel.NCV/1000/1000;
 			},	
 			c_wwt58:function()
@@ -264,12 +264,19 @@ var Global = {
 			"wasteDis":0,
 		},
 		"Units":{ }, //custom unit selections for variables are stored here
-		"Selected":{
-			"Fuel type"    : "Gas/Diesel Oil",
+		"Selected":
+		{
+			"Fuel type":
+			{
+				"water":    "Gas/Diesel Oil",
+				"waste":    "Gas/Diesel Oil",
+				"wasteTre": "Gas/Diesel Oil",
+			},
 			"Country"      : "Africa",
-			"Technologies" : {"Water":"None","Wastewater":"None"},
+			"Technologies" : {"waterTre":"None","wasteTre":"None"},
 		},
-		"Yes/No":{
+		"Yes/No":
+		{
 			"Are you producing biogas"                                  :0,
 			"Are you producing electrical energy"                       :0,
 			"Do you have fuel engines to run pumps"                     :0,
