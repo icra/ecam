@@ -109,8 +109,8 @@
 		div#sidebar div{padding:0;margin:0}
 		div#sidebar table{margin:0.7em}
 		div#sidebar td, div#sidebar th {padding:0.3em}
-		#sidebar.off #burger{color:#888}
-		#sidebar.on  #burger{color:black}
+		#sidebar #burger{color:#888;}
+		#sidebar #burger:hover{color:black;}
 		/*links*/
 		#sidebar a.water{color:#00adef} 
 		#sidebar a.waste{color:#d71d24} 
@@ -128,6 +128,7 @@
 			<td align=center><button onclick=clearSystem()>Clear</button>
 		</table>
 
+		<!--red/blue separator bars-->
 		<div style="padding:0;margin:0;background:#d71d24;height:5px"></div>
 		<div style="padding:0;margin:0;background:#0aaff1;height:5px"></div>
 
@@ -159,7 +160,6 @@
 
 		<div style=color:#999> Double-click to minimize this menu <br>(or click the menu symbol on the top)</div>
 	</div>
-
 </div>
 
 <script>Sidebar.update()</script>

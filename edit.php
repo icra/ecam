@@ -205,7 +205,6 @@
 					{
 						var indicator=RefValues[field](value);
 						newCell.title=indicator;
-						//TODO it would be good to see the ranges
 						var color;
 						switch(indicator)
 						{
@@ -214,7 +213,7 @@
 							case "Unsatisfactory": color="red";break;
 							default:               color="#ccc";break;
 						}
-						return "<span style='font-size:25px;color:"+color+"'>&#128308;</span>";
+						return "<span style='font-size:20px;color:"+color+"'>&#128308;</span>";
 					}
 					else return "<span style=color:#ccc>-</span>";
 				})();
