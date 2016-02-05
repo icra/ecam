@@ -193,6 +193,31 @@
 				newRow.setAttribute('title',prettyFormula);
 				newRow.setAttribute('onmouseover','Formulas.hlFields("'+prettyFormula+'",1)');
 				newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+prettyFormula+'",0)');
+
+				/*circle indicator*/ 
+				newCell=newRow.insertCell(-1);
+				newCell.style.textAlign='center';
+				newCell.style.cursor='help';
+				newCell.innerHTML=(function()
+				{
+					var hasIndicator=RefValues.isInside(field);
+					if(hasIndicator)
+					{
+						var indicator=RefValues[field](value);
+						newCell.title=indicator;
+						//TODO it would be good to see the ranges
+						var color;
+						switch(indicator)
+						{
+							case "Good":           color="#af0";break;
+							case "Acceptable":     color="orange";break;
+							case "Unsatisfactory": color="red";break;
+							default:               color="#ccc";break;
+						}
+						return "<span style='font-size:25px;color:"+color+"'>&#128308;</span>";
+					}
+					else return "<span style=color:#ccc>-</span>";
+				})();
 				/*description*/ 
 				newCell=newRow.insertCell(-1);
 				newCell.setAttribute('title',Info[field].explanation);
@@ -208,28 +233,6 @@
 				newCell=newRow.insertCell(-1)
 				newCell.innerHTML=value;
 				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
-				/*circle indicator*/ 
-				newCell=newRow.insertCell(-1);
-				newCell.style.textAlign='center';
-				newCell.innerHTML=(function()
-				{
-					var hasIndicator=RefValues.isInside(field);
-					if(hasIndicator)
-					{
-						var indicator=RefValues[field](value);
-						//TODO it would be good to see the ranges
-						var color;
-						switch(indicator)
-						{
-							case "Good":           color="#af0";break;
-							case "Acceptable":     color="orange";break;
-							case "Unsatisfactory": color="red";break;
-							default:               color="#ccc";break;
-						}
-						return "<span title='"+indicator+"' style='cursor:help;font-size:15px;color:"+color+"'>&#11044;</span>";
-					}
-					else return "<span style=color:#ccc>-</span>";
-				})();
 			}
 		}
 
@@ -334,10 +337,10 @@
 	<table id=outputs class=inline style=max-width:46%;background:yellow;>
 		<tr><th colspan=5>RESULTS - Key Performance indicators
 		<tr>
+			<th>Indicator
 			<th>Description
 			<th>Current Value
 			<th>Unit
-			<th>Indicator
 	</table>
 </div>
 
