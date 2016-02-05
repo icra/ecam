@@ -27,7 +27,6 @@
 		{
 			var t=document.querySelector("[level='1']")
 			while(t.rows.length>1)t.deleteRow(-1)
-			t.innerHTML+=tableRows(Global.UWS,  "UWS", 	        "uws",   "edit.php?level=UWS")
 			t.innerHTML+=tableRows(Global.Water,"Water supply", "water", "edit.php?level=Water")
 			t.innerHTML+=tableRows(Global.Waste,"Wastewater",   "waste", "edit.php?level=Waste")
 		}
@@ -83,7 +82,12 @@
 						case "output":$typeof="function";break;
 					}
 				?>
-				if(typeof(object[variable])!="<?php echo $typeof?>")continue
+				if(typeof(object[variable])!="<?php echo $typeof?>"){continue;}
+
+				<?php 
+					//Skip calculated variables 
+					if($type=="output"){echo "if(variable.search('^c_')!=-1){continue;}";}
+				?>
 
 				var description=Info[variable] ? Info[variable].description : "<span style=color:#ccc>no description</span>";
 				var explanation=Info[variable] ? Info[variable].explanation : "<span style=color:red>no explanation</span>";
