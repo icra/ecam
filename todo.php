@@ -20,10 +20,10 @@
 	<tr><td>Option to have BOD in kg or mg/L (dividing by another variable)			   <td>Pending
 	<tr><td>Check server limit for cookies											   <td><b>Contracted a payment server</b>
 	<tr><td>Level 3 technology selection											   <td>Not sure how to proceed
-	<tr><td>Questions and selections put them in correct place						   <td class=priority>Doing right now
+	<tr><td>Questions and selections put them in correct place						   <td class=priority>Doing now
 	<tr><td colspan=2 class=taskgroup>FRONT-END
-	<tr><td>Drop down menu for location in getStarted                                  <td>Pending
-	<tr><td>Merge calculated variables with inputs in summary						   <td>Pending
+	<tr><td>Drop down menu for location in getStarted                                  <td><b>Done</b>
+	<tr><td>Merge calculated variables with inputs in summary						   <td><b>Started</b>
 	<tr><td>Merge calculated variables with inputs in L3							   <td>Pending
 	<tr><td>Create Warning in new system											   <td>Pending
 	<tr><td>Configuration for hiding codes											   <td>Pending
