@@ -336,23 +336,12 @@
 	<table id=outputs class=inline style=max-width:46%;background:yellow;>
 		<tr><th colspan=5>RESULTS - Key Performance indicators
 		<tr>
-			<th>Indicator
+			<th title=Performance style=cursor:help>P
 			<th>Description
 			<th>Current Value
 			<th>Unit
 	</table>
 </div>
-
-<!--PLOTS
-<div class=inline style="border:1px solid #000;width:45%;margin:1em">
-	SOME PLOTS HERE (to be implemented at the end)<br>
-	<img border=1 src="img/plot-example.png" width=50%>
-	<br>
-	<a href=sankey.php>Sankey Example</a> 
-	(not implemented)
-	<button>Export</button>
-</div>
--->
 
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

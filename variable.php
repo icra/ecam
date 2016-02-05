@@ -103,7 +103,7 @@
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
-				newCell.innerHTML="Inputs needed"
+				newCell.innerHTML="Inputs involved in the formula"
 				newCell=newRow.insertCell(-1)
 				newCell.innerHTML=(function(){
 					var matches=Formulas.idsPerFormula(currentStage[id].toString())

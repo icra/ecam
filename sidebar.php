@@ -153,6 +153,8 @@
 			<tr><th>Summary
 			<tr><td><a href=summary.php?type=input>All inputs</a>
 			<tr><td><a href=summary.php?type=output>All outputs</a>
+			<tr><td>All Variables
+			<tr><td>All Key Performance Indicators
 			<tr><td><a href=graphs.php>Graphs</a>
 			<tr><th>Other
 			<tr><td><a href=todo.php>To do list</a>

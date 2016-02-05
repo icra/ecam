@@ -19,6 +19,7 @@ var Global = {
 		c_uw50:function(){return Global.Water.ws3+Global.Waste.ww1},
 		c_uw51:function(){return Global.Water.ws4+Global.Waste.ww2},
 		c_uw52:function(){return Global.Water.General.c_wsg50()+Global.Waste.General.c_wwg50()},
+
 	},
 
 	/** Level 1 - Water Supply*/
@@ -40,6 +41,7 @@ var Global = {
 			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].water];
 			return this.c_ws50()*(fuel.EFCO2+298*fuel.EFN2O.engines+34*fuel.EFCH4.engines);
 		},
+
 		"General":{
 			"wsg1":0,
 			"wsg2":0,
@@ -48,7 +50,7 @@ var Global = {
 			"wsg5":0,
 			c_wsg50:function(){return Global.Water.ws5+this.wsg1+this.wsg3-this.wsg2-this.wsg4},
 			c_wsg51:function(){return Global.Water.Abstraction.wsa1+Global.Water.Treatment.wst2+Global.Water.Distribution.wsd1},
-			c_wsg52:function(){return 0},
+			c_wsg52:function(){return this.wsg5/3600000*Global.UWS.uw1},
 		},
 		"Abstraction":{
 			"wsa1":0,
@@ -88,14 +90,15 @@ var Global = {
 		},
 		"Distribution":{
 			"wsd1":0,
-			/*<Level3>*/
-			"wsd2":0,
-			"wsd3":0,
-			"wsd4":0,
 			"wsd5":0,
 			"wsd6":0,
 			"wsd7":0,
 			"wsd8":0,
+			"wsd20":0,
+			/*<Level3>*/
+			"wsd2":0,
+			"wsd3":0,
+			"wsd4":0,
 			"wsd9":0,
 			"wsd10":0,
 			"wsd11":0,
@@ -132,10 +135,11 @@ var Global = {
 		"ww12":0,
 		"ww13":3.2, //protein lbosch added
 		"ww14":40,  //default BOD lbosch added 
-		c_ww50:function(){return this.ww7/1000*22*Global.General.Days()-this.ww12},
-		c_ww51:function(){return (this.ww5-this.ww7)*this.ww13*0.16*1.1*1.25*0.005*44/28*298},
-		c_ww52:function(){return (this.ww5-this.ww7)*(40/1000*365)*0.06*34},
-		c_ww53:function(){return 298*this.ww10*0.005*(44/28)},
+		"ww15":0,
+		c_ww50:function(){return this.ww7*this.ww14*0.9*0.4*Global.General.Days()},
+		c_ww51:function(){return (this.ww6-this.ww7)*this.ww13*0.16*1.1*1.25*0.005*44/28*298},
+		c_ww52:function(){return (this.ww6-this.ww7)*(40/1000*365)*0.06*34},
+		c_ww53:function(){return 298*this.ww10*this.ww15*1000*0.005*(44/28)},
 		c_ww54:function(){return this.c_ww58()*(74100+34*3.9+298*3.9)},
 		c_ww55:function(){return 0.02*this.c_ww50()*0.59*0.66*34},
 		c_ww56:function(){
@@ -147,23 +151,25 @@ var Global = {
 			return this.c_ww56()*(fuel.EFCO2+34*fuel.EFCH4.engines+298*fuel.EFN2O.engines)
 		},
 		c_ww58:function(){return this.ww8*2*this.ww9*0.25*0.84*43/1000000},
+
 		"General":{
 			"wwg1":0,
 			"wwg2":0,
 			"wwg3":0,
 			"wwg4":0,
 			"wwg5":0,
-			c_wwg50:function(){return Global.Water.ws3 + (this.wwg1+this.wwg3)-(this.wwg2+this.wwg4)},
+			c_wwg50:function(){return Global.Water.ws3+this.wwg1+this.wwg3-this.wwg2-this.wwg4},
 			c_wwg51:function(){return Global.Waste.Collection.wwc2+Global.Waste.Treatment.wwt9+Global.Waste.Discharge.wwd3},
-			c_wwg52:function(){return 0},
+			c_wwg52:function(){return this.wwg5/3600000*Global.UWS.uw1},
 		},
 		"Collection":{
+			"wwc1":0,
 			"wwc2":0,
+			c_wwc51:function(){return Global.Waste.ww14*Global.Waste.ww7*Global.General.Days()/Global.Waste.ww13*Global.Waste.Treatment.wwt8-Global.Waste.ww4*Global.Waste.ww7/Global.Waste.ww6||0},
 			/*<Level3>*/
 			"wwc3":0,
 			"wwc4":0,
 			c_wwc50:function(){return this.wwc3*this.wwc4/100},
-			c_wwc51:function(){return (Global.Waste.ww14*Global.Waste.ww7*Global.General.Days()/Global.Waste.ww13/1000000-Global.Waste.ww4*Global.Waste.ww7/Global.Waste.ww6)||0}
 			/*</Level3>*/
 		},
 		"Treatment":{
@@ -181,28 +187,18 @@ var Global = {
 			"wwt14":0,
 			c_wwt50:function(){return this.wwt2-this.wwt3},
 			c_wwt51:function(){return 298*Global.Waste.ww7*3.2/1000*Global.General.Days()/365},
-			c_wwt52:function(){return (Global.Waste.ww5-Global.Waste.ww7)*Global.Waste.ww14*365*0.06*34/1000},
+			c_wwt52:function(){return Global.Waste.c_ww53()},
 			c_wwt53:function(){return this.wwt2*this.wwt12*10*3600000/100;},
-			c_wwt54:function()
-			{
-				var f=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].wasteTre];
-				return this.c_wwt57()*(f.EFCO2+34*f.EFCH4.vehicles+298*f.EFN2O.vehicles);
-			},
+			c_wwt54:function(){return this.wwt13-this.wwt10;},
 			c_wwt55:function(){return 298*this.wwt5*0.005*44/28},
 			c_wwt56:function(){return 298*this.c_wwt58()*0.005*44/28},
 			c_wwt57:function(){
 				var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].wasteTre];
-				return Global.Waste.ww11*fuel.FD*fuel.NCV/1000/1000;
+				return Global.Waste.ww8*2*Global.Waste.ww9*0.25*fuel.FD*fuel.NCV/1000/1000;
 			},	
-			c_wwt58:function()
-			{
-				//if answer is yes, factor=1.25. If no, factor=1
-				var factor=Global.Configuration['Yes/No']['Is any untreated industrial or commercial water connected']? 1.25 : 1; 
-				//if wwt6 is zero, Nload=ww13*0.16, otherwise Nload=wwt6
-				var Nload = this.wwt6==0 ? (Global.Waste.ww13*0.16) : this.wwt6;
-				return (Global.Waste.ww5-Global.Waste.ww7)*Nload*1.1*factor;
-			},
+			c_wwt58:function(){return this.wwt6*1.1*1.25;},
 			c_wwt59:function(){return 0.02*this.c_wwt50()*0.59*0.66*34},
+			c_wwt60:function(){return this.wwt5*this.wwt8*1000*0.005*44/28*298},
 			/*<Level3>*/
 			"wwt15":0,
 			"wwt16":0,
@@ -215,7 +211,7 @@ var Global = {
 			"wwt23":0,
 			"wwt24":0,
 			"wwt25":0,
-			c_wwt60:function(){return 100*this.wwt15/this.wwt16||0},
+			c_wwt61:function(){return 100*this.wwt15/this.wwt16||0},
 			/*</Level3>*/
 		},
 		"Discharge":{
@@ -280,11 +276,136 @@ var Global = {
 			"Are you producing biogas"                                  :0,
 			"Are you producing electrical energy"                       :0,
 			"Do you have fuel engines to run pumps"                     :0,
+			"Are you using truck transport to dispose off your sludge"  :0,
 			"Is your topography flat"                                   :0,
 			"Is any untreated industrial or commercial water connected" :0,
 		},
 	},
 }
+
+/*
+	wS4	ws1/ws2 x 100
+	wS5	"Level 1: = ws8
+	Level 2: ws7/wsa2 x 100
+	Level 2 overwrite the level 1
+	"
+	gE1w	ws3 / ws4 x 100
+	gE2w	ws5 x (365/Ap)/ ws2
+	gE3w	ws5 x (365/Ap)/ ws1
+	gE4w	ws5 / ws7
+	wGHG1	(ws5 x uw1 + c_ws51 ) x (365/Ap)/ ws2
+	wGHG2	(ws5 x uw1 + c_ws51 ) x (365/Ap)/ ws1
+	wGHG3	(ws5 x uw1 + c_ws51 ) / ws7
+	wGHG4	c_ws51 x (365/Ap)/ ws1
+	wGHG5	c_ws51 / ws7
+	wGHG6	(ws5 x uw1 ) / ws1
+	wGHG7	(ws5 x uw1 )/ ws7
+	wwS1	ww7/ ww5 
+	wwS2	ww7 / ww6 x 100
+	gE1ww	ww1 / ww2 x 100
+	gE2ww	ww3 x (365/Ap)/ ww5
+	gE3ww	ww3 x (365/Ap)/ ww7
+	gE4ww	ww3 / ww4
+	wwGHG1	(ww3 x uw1 + c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52 + c_ww54 ) x (365/Ap)/ ww5
+	wwGHG2	(ww3 x uw1 + c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52 + c_ww54 ) x (365/Ap)/ ww7
+	wwGHG3	(ww3 x uw1 + c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52+ c_ww54 ) / ww4
+	wwGHG4	(ww3  x uw1) / ww7
+	wwGHG5	(ww3  x uw1) / ww4
+	wwGHG6	 (c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52 + c_ww54 )/ ww7
+	wwGHG7	 (c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52 + c_ww54 )/ ww4
+		
+	wS1	[Sum(wst4_n + wst5_n + wst6_n + wst7_n) ]/ [sum (wst3_n)] x 100
+	wS2	[Sum(wsd2_n)] / [Sum (wsd3_n)] x 100
+	wS3	[Sum(wsd4_n)] / 24 / Ap x 100
+	wwS3	[Sum(wwt15_n)] / [Sum(wwt16_n)] x 100
+	wwS4	c_wwc51 / ww4 x 100
+		
+	gE2w	c_wsg50 x (365/Ap)/ ws2
+	gE3w	c_wsg50  x (365/Ap)/ ws1
+	gE4w	c_wsg50  / ws7
+	wGHG1	[(ws5- (wsg2+ wsg4))x uw1 + c_ws51-c_wsg52) x (365/Ap)]/ws2
+	wGHG2	[(ws5- (wsg2+ wsg4))x uw1 + c_ws51-c_wsg52) x (365/Ap)]/ws1
+	wGHG3	[(ws5- (wsg2+ wsg4)) x uw1 + c_ws51-c_wsg52) x (365/Ap)]/ws7
+	wGHG4	no change
+	wGHG5	no change
+	wGHG6	((c_wsg50 x uw1)-c_wsg52)/ws1
+	wGHG7	((c_wsg50 x uw1)-c_wsg52)/ws7
+		
+	gE2ww	c_wwg50 x (365/Ap)/ ww5
+	gE3ww	c_wwg50 x (365/Ap)/ ww7
+	gE4ww	c_wwg50 / ww4
+	wwGHG1	(ww3 -(wwg2+wwg4))x uw1 + c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52 + c_ww54  - c_wwg52) x (365/Ap)/ ww5
+	wwGHG2	(ww3 -(wwg2+wwg4))x uw1 + c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52 + c_ww54  - c_wwg52) x (365/Ap)/ ww7
+	wwGHG3	(ww3 -(wwg2+wwg4)) x uw1 + c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52+ c_ww54 - c_wwg52 ) / ww4
+	wwGHG4	((ww3 -(wwg2+wwg4)) x uw1) - c_wwg52)x (365/Ap)/ ww7
+	wwGHG5	((ww3 -(wwg2+wwg4)) x uw1) - c_wwg52)x (365/Ap)/ ww4
+	wwGHG8	c_ww57  x (365/Ap)/ ww7
+	wwGHG9	c_ww57 / ww4
+	wwGHG10	c_ww55x (365/Ap)/ ww7
+	wwGHG11	c_ww55/ww4
+	wwGHG12	c_wwt60  x (365/Ap)/ ww7
+	wwGHG13	c_wwt60   / ww4
+	wwGHG14	(c_ww51+c_ww52)x (365/Ap)/ ww7
+	wwGHG15	(c_ww51 +c_ww52)/ww4
+	wwGHG16	c_ww54x (365/Ap)/ ww7
+	wwGHG17	c_ww54/ww4
+		
+		
+	aE1	wsa1 / wsa2
+	aE2	wsa1/ c_uw52 x 100
+	aE3	
+	aE4	wsa3/wsa2
+	aE5	
+	aE6	
+	aE7	
+	tE0	
+	tE0.1	
+	tE0.2	
+	tE0.3	
+	tE0.4	
+	tE0.5	
+	tE0.6	
+	tE1	wst2/ wst1
+	tE2	wst2/ c_uw52 x 100
+	tE3	
+	tE4	
+	wS1	(SUM(wst4_n + wst5_n + wst6_n + wst7_n)) / (sum(wst3_n) x 100
+	dE1	wsd1/ ws7
+	dE2	wsd1/ c_uw52 x 100
+	dE3	
+	dE4	
+	dE5	
+	dE6	
+	dE7	
+	wS2	Sum(wsd2_n )/  Sum (wsd3_n) x 100
+	wS3	Sum (wsd4_n )/ 24 / Ap x 100
+	wcE1	wwc2 / wwc1
+	wcE2	wwc2/ c_uw52 x 100
+	wcE3	wwc2/ c_wwc50_n
+	wwS4	c_wwc51  / ww4 x 100
+	wtE0	
+	wtE0.1	
+	wtE0.2	
+	wtE0.3	
+	wtE0.4	
+	wtE0.5	
+	wtE0.6	
+	wtE1	wwt9/ ww4
+	wtE2	wwt9/ c_uw52 x 100
+	wtE3	wwt9/wwt14
+	wtE4	wwt11/ ww4
+	wtE5	wwt2 / wwt14
+	wtE6	wwt11/ c_wwt53
+	wtE7	
+	wtE8	
+	wtE9	
+	wwS3	sum(wwt15_n) / sum(wwt16_n )
+	wdE1	wwd3 / wwd1
+	wdE2	wwd3/ c_uw52 x 100
+	wdE3	
+	wdE4	wwd4 / wwd1
+	wdE5	
+*/
 
 /* Performance Indicators L1 */
 	Global.Water.wS4    = function(){return 100*this.ws1/this.ws2||0}
