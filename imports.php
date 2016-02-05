@@ -30,6 +30,7 @@
 <script src="dataModel/units.js"></script>           <!--functions dealing with unit conversion in-->
 <script src="dataModel/tables.js"></script>          <!--data regarding constants-->
 <script src="dataModel/refValues.js"></script>		 <!--reference values for some kpis (good,acceptable,bad)-->
+<script src="dataModel/exceptions.js"></script>		 <!--variables that have some special behaviour-->
 <script src="js/cookies.js"></script>                <!--basic cookie functions here-->
 <script src="js/updateGlobalFromCookies.js"></script><!--update Global object from cookie "GLOBAL" here-->
 

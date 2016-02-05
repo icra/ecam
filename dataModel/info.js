@@ -120,7 +120,7 @@ var Info = {
 	"ww10":{description:"Enter nitrogen effluent limit",                                                      magnitude:"Concentration", unit:"mg/L",},
 	"ww11":{description:"Volume of Fuel consumed",                                                            magnitude:"Volume",        unit:"L",},
 	"ww12":{description:"Amount of recovered biogas",                                                         magnitude:"Volume",        unit:"m3",},
-	"ww13":{description:"Annual per capita protein consumption <select onchange=Global.Waste.ww13=parseFloat(this.value);init()><option value=0>--select country--<option value=20.8>Thailand (20.8)<option value=24.5>Peru (24.5)<option value=33.6>Mexico (33.6)</select>", magnitude:"Annual per capita consumption",   unit:"kg/person/year",},
+	"ww13":{description:"Annual per capita protein consumption <select id=ww13options onchange=Global.Waste.ww13=parseFloat(this.value);init()> <option value=0>--select country--<option value=20.8>Thailand (20.8)<option value=24.5>Peru (24.5)<option value=33.6>Mexico (33.6) </select> ", magnitude:"Annual per capita consumption",   unit:"kg/person/year",},
 	"ww14":{description:"BOD per person per day", magnitude:"Mass/inhab/time",   unit:"g/person/day",},
 	c_ww50:{description:"Biogas production based in the population",magnitude:"Volume",unit:"Nm3"},
 	c_ww51:{description:"N2O emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kg"},

@@ -24,8 +24,21 @@
 
 		function redisplayUW1menu()
 		{
+			//input element
 			document.querySelector('#uw1').value=Global.UWS.uw1;
-			document.querySelector('#countryUW1').value=Global.UWS.uw1;
+			//select element
+			var select = document.querySelector('#countryUW1');
+			//go over options and select the one with same value as uw1
+			for(var i=1;i<select.childNodes.length;i++)
+			{
+				if(parseFloat(select.childNodes.item(i).value)==Global.UWS.uw1)
+				{
+					select.childNodes.item(i).setAttribute('selected','true');
+					return;
+				}
+			}
+			//if we go out of the list make it custom
+			select.value="custom";
 		}
 
 		function updateFuelSelection()
@@ -78,27 +91,28 @@
 <div id=main>
 	<!--uw1-->
 	<h4>Conversion factor for grid electricity (<a href=variable.php?id=uw1>info</a>)</h4>
-	<table> <tr> <td>
+	<table> <tr> <th>
 		<select id=countryUW1 onchange=updateUW1(this.value)>
-			<option value=0>--select country--
-			<option value=1>Africa (1)
-			<option value=2>Egypt (2)
-			<option value=3>Asia, Middle East, Latin America (3)
-			<option value=4>India (4)
-			<option value=5>West Bank and Gaza Strip (Palestine) (5)
-			<option value=6>Japan (6)
-			<option value=7>Brazil (7)
-			<option value=8>Canada, Europe, Russia, Oceania (8)
-			<option value=9>Denmark (9)
-			<option value=10>Germany (10)
-			<option value=11>Greece (11)
-			<option value=12>Italy (12)
-			<option value=13>Sweden (13)
-			<option value=14>Turkey (14)
-			<option value=15>United States (15)
+			<option value=0>--enter value or select country predefined--
+			<option value=1>Africa
+			<option value=2>Egypt
+			<option value=3>Asia, Middle East, Latin America
+			<option value=4>India
+			<option value=5>West Bank and Gaza Strip (Palestine)
+			<option value=6>Japan
+			<option value=7>Brazil
+			<option value=8>Canada, Europe, Russia, Oceania
+			<option value=9>Denmark
+			<option value=10>Germany
+			<option value=11>Greece
+			<option value=12>Italy
+			<option value=13>Sweden
+			<option value=14>Turkey
+			<option value=15>United States
+			<option value=custom>--CUSTOM--
 		</select>
 		<td>
-		Current value <input style=width:25px id=uw1 value=0 onchange=updateUW1(this.value)> (kg CO2)/kWh
+		Current value <input style=width:40px id=uw1 value=0 onchange=updateUW1(this.value)> (kg CO2)/kWh
 	</table>
 
 	<!--Y/N questions-->
@@ -117,10 +131,10 @@
 	</table>
 
 	<!--fuel-->
-	<div id=fuel style="padding:0">
+	<div id=fuel style="display:none;padding:0">
 		<h4>Fuel options</h4>
 		<table id=fuelSelection class=inline>
-			<tr><th>Stage<th>Select Fuel type
+			<tr><th>Stage<th>Selected Fuel type
 			<tr stage=water>   <td style=font-weight:bold>Level 1 Water supply (engines)
 			<tr stage=waste>   <td style=font-weight:bold>Level 1 Wastewater (engines)
 			<tr stage=wasteTre><td style=font-weight:bold>Level 2 Wastewater treatment (vehicles)

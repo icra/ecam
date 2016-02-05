@@ -1,7 +1,7 @@
 var Global = {
 	"General":{
 		"Name":"My system",
-		"Location":"My location",
+		"Location":"Canada, Europe, Russia, Oceania",
 		"Assessment Period Start":"2016-01-01",
 		"Assessment Period End":"2016-01-31",
 		"Days":function()
@@ -34,7 +34,7 @@ var Global = {
 		"ws9":0,
 		c_ws50:function(){
 			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].water];
-			return this.ws9*fuel.FD*fuel.NCV/1000/1000
+			return this.ws9*fuel.FD*fuel.NCV/1000;
 		},
 		c_ws51:function(){
 			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].water];

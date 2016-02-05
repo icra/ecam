@@ -26,6 +26,7 @@
 		function init()
 		{
 			updateInfoTable();
+			Exceptions.apply();
 			updateResult();
 		}
 
@@ -172,7 +173,6 @@
 				newCell.innerHTML=(function()
 				{
 					var currValue=currentStage[id]()/Units.multiplier(id);
-					currValue=Math.floor(1e2*currValue)/1e2;
 					return currValue+" "+Info[id].unit;
 				})();
 			}

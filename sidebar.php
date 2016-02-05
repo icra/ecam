@@ -47,9 +47,9 @@
 	}
 
 	/** Clear all user inputted data */
+	//simply remove cookie and default values will load
 	function newSystem()
 	{
-		//simply remove cookie and default values will load
 		removeCookie("GLOBAL");
 		window.location="getStarted.php";
 	}
@@ -119,7 +119,7 @@
 	<span style=font-size:30px;cursor:pointer id=burger onclick=Sidebar.toggle()>&#9776;</span>
 	<div id=sidecontent>
 		<table>
-			<tr><th colspan=4> <script> document.write(Global.General.Name) </script>
+			<tr><th colspan=4 id=Name> <script> document.write(Global.General.Name) </script>
 			<tr>
 			<td align=center><button onclick=newSystem()>New</button>
 			<input type="file" id="loadfile" accept=".json" onchange="loadFile(event)" style="display:none">

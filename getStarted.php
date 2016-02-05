@@ -7,6 +7,12 @@
 		input,textarea{padding:0.5em}
 	</style>
 	<script>
+		function updateField(field,newValue)
+		{
+			Global.General[field]=newValue;
+			init();
+		}
+
 		/** Create a row for a field in Global.General */
 		function tableRow(field,input,type)
 		{
@@ -19,33 +25,48 @@
 					ret+="<textarea placeholder='Max 200 characters' rows=5 cols=50 maxlength=200 field='"+field+"' "+onchange+">"+Global.General[field]+"</textarea>";
 					break;
 				case "input":
-					ret+="<input field='"+field+"' type='"+type+"' value='"+Global.General[field]+"' "+onchange+">";
+					ret+="<input maxlength=25 field='"+field+"' type='"+type+"' value='"+Global.General[field]+"' "+onchange+">";
 					break;
 				default:
 					break;
 			}
 			return ret
 		}
+
 		function updateForm()
 		{
 			var t = document.getElementById('form')
-			/*clean form*/ while(t.rows.length>0)t.deleteRow(-1)
+			/*clean form*/ while(t.rows.length>0){t.deleteRow(-1);}
+			//update also sidebar name
+			document.querySelector("#sidebar #Name").innerHTML=Global.General.Name;
 			/*fill form*/
 			t.innerHTML=(function(){
 				return tableRow("Name")+
-					tableRow("Location")+
+					createLocationSelection()+
 					tableRow("Assessment Period Start",'input','date')+
 					tableRow("Assessment Period End",'input','date')+
 					"<tr><th>Assessment Period<td>"+Global.General.Days()+" days"+
 					tableRow("Comments",'textarea','date')
 			})();
 		}
-		function updateField(field,newValue)
+
+		function createLocationSelection()
 		{
-			Global.General[field]=newValue;
-			init();
-			document.querySelector('[field="'+field+'"]').select()
+			var select = document.createElement('select');
+			select.setAttribute('onchange','updateField("Location",this.value)');
+			for(var country in Tables.Countries)
+			{
+				var option = document.createElement('option');
+				if(country==Global.General.Location)
+				{
+					option.setAttribute('selected','true');
+				}
+				option.innerHTML=country;
+				select.appendChild(option);
+			}
+			return "<tr><th>Location<td>"+select.outerHTML;
 		}
+
 		function init()
 		{
 			updateForm()

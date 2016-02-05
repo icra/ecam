@@ -116,7 +116,7 @@
 
 				/*value*/newCell.innerHTML=(function(){
 					if(isCV)
-						return CurrentLevel[field]()/Units.multiplier(field);
+						return Math.floor(1e2*CurrentLevel[field]()/Units.multiplier(field))/1e2;
 					else
 						return CurrentLevel[field]/Units.multiplier(field);
 				})();
@@ -251,6 +251,7 @@
 		{
 			updateInputs();
 			updateOutputs();
+			Exceptions.apply();
 			updateResult();
 		}
 	</script>
@@ -309,7 +310,7 @@
 					class=button
 					style='background:$color;'
 					onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-						Go to Level 3 &map;
+						Go to $sublevel Level 3 &map;
 					</button> 
 				";
 		}
@@ -321,7 +322,7 @@
 <div style=text-align:left>
 	<!--INPUTS-->
 	<table id=inputs class=inline style="max-width:46%">
-		<tr><th colspan=5 style="text-align:left">INPUTS <?php include'inputType.php'?>
+		<tr><th colspan=5>INPUTS <?php include'inputType.php'?>
 		<tr>
 			<th>Description
 			<th>Current Value

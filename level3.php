@@ -437,7 +437,7 @@
 		}
 		/*Separator*/$sep="<span style=color:black>&rsaquo;</span>";
 		$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>$sublevel</a>";
-		$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages (Level 3)</a>";
+		$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Level 3</a>";
 	?>
 	<style> h1 {text-align:left;padding-left:20em} </style>
 	<!--TITLE--><h1><?php echo $title?></h1>
