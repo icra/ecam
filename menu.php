@@ -13,6 +13,7 @@
 		{ ?>
 			<!--save-->
 			<button class="button save" onclick=saveToFile()>Save current system</button>
+			<script>document.write("as '"+Global.General.Name+".json'")</script>
 			<br>
 			<!--clear-->
 			<button class="button delete" onclick=clearSystem()>Clear system</button>
