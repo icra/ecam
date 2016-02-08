@@ -9,8 +9,14 @@ if(getCookie("GLOBAL"))
 function copyFieldsFrom(object,name)
 {
 	//go over all fields, which will be always strings or numbers
-	for(field in object)
+	for(var field in object)
 	{
+		if(object[field]===undefined)
+		{
+			console.log(field+" does not exist anymore!");
+			continue;
+		}
+
 		if(object[field].constructor===Array)
 		{
 			eval(name+"['"+field+"']="+JSON.stringify(object[field]));

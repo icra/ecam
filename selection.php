@@ -4,7 +4,7 @@
 
 <!--HIDDEN THINGS-->
 <h1>Remaining things</h1>
-<div style="">
+<div>
 	<!--Technologies-->
 	<div>
 		<div><b>Water treatment & Wastewater treatment</b></div>
