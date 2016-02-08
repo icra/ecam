@@ -28,44 +28,49 @@
 </style>
 
 <script>
-	//highlight current stage
-	(function()
-	{
-		//we need to find level and sublevel to create a stage name i.e. "waterAbs"
-		var level    = '<?php echo $level?>';
-		var sublevel = '<?php echo $sublevel?>';
-		var stage;
-		switch(level)
-		{
-			case "Water":
-				switch(sublevel)
+	<?php
+		if($_SERVER['PHP_SELF']!="/ecam/stages.php")
+		{ ?>
+			//highlight current stage
+			(function()
+			{
+				//we need to find level and sublevel to create a stage name i.e. "waterAbs"
+				var level    = '<?php echo $level?>';
+				var sublevel = '<?php echo $sublevel?>';
+				var stage;
+				switch(level)
 				{
-					case "General":stage="waterGen";break;
-					case "Abstraction":stage="waterAbs";break;
-					case "Treatment":stage="waterTre";break;
-					case "Distribution":stage="waterDis";break;
-					default:stage="water";break;
+					case "Water":
+						switch(sublevel)
+						{
+							case "General":stage="waterGen";break;
+							case "Abstraction":stage="waterAbs";break;
+							case "Treatment":stage="waterTre";break;
+							case "Distribution":stage="waterDis";break;
+							default:stage="water";break;
+						}
+						break;
+					case "Waste":
+						switch(sublevel)
+						{
+							case "General":stage="wasteGen";break;
+							case "Collection":stage="wasteCol";break;
+							case "Treatment":stage="wasteTre";break;
+							case "Discharge":stage="wasteDis";break;
+							default:stage="waste";break;
+						}
+						break;
+					default: 
+						stage=false;
+						break;
 				}
-				break;
-			case "Waste":
-				switch(sublevel)
-				{
-					case "General":stage="wasteGen";break;
-					case "Collection":stage="wasteCol";break;
-					case "Treatment":stage="wasteTre";break;
-					case "Discharge":stage="wasteDis";break;
-					default:stage="waste";break;
+				if(stage)
+				{ 
+					document.querySelector('img[stage='+stage+']').classList.add('selected')
 				}
-				break;
-			default: 
-				stage=false;
-				break;
-		}
-		if(stage)
-		{ 
-			document.querySelector('img[stage='+stage+']').classList.add('selected')
-		}
-	})();
+			})();
+		<?php }
+	?>
 
 	//go over <img stage=i> to deactivate the ones inactive
 	(function()

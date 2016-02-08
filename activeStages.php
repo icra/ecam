@@ -1,13 +1,13 @@
 <script>
 	/*  This file is part of "summary.php"
 		It creates a table indicating active stages
-		This file shoud get refactorized TODO */
+	*/
 
-	var aass={ }; //functions go inside this object/namespace
+	var aass={ }; //namespace
 
 	aass.stageName=function(stage)
 	{
-		var r; //returned string
+		var r;
 		switch(stage)
 		{
 			case "uws":	     r="Urban water cycle";break;
@@ -39,10 +39,9 @@
 	}
 </script>
 <style>.stage:hover {background:#af0}</style>
-<table><tr><th colspan=8>Stages<tr>
-	<script>
-		aass.printCell('uws',8);
-		</script><tr><script>
+<table>
+	<tr><th colspan=8>Stages<tr>
+		<tr><script>
 		['water','waste'].forEach(function(stage)
 		{
 			aass.printCell(stage,4);

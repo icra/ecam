@@ -196,9 +196,11 @@
 				var inputs=getInputs();
 				for(var input in inputs)
 				{
-					/*variable code*/var code=inputs[input];
+					/*variable code*/
+					var code=inputs[input];
 					var newRow=t.insertRow(-1);
 					newRow.setAttribute('field',code);
+					newRow.setAttribute('title',Info[code].explanation);
 					var newCell=newRow.insertCell(-1);
 					/*link and name*/newCell.innerHTML=(function(){
 						var extra = Level3.isInList(code) ? "L3 - " : "" ;
@@ -323,11 +325,12 @@
 
 				var newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
+				newRow.setAttribute('title',Info[field].explanation);
+
 				var formula=CurrentStage[field].toString();
 				var prettyFormula=Formulas.prettify(formula);
 				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+prettyFormula+"',1)");
 				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+prettyFormula+"',0)");
-				newRow.setAttribute('title',prettyFormula);
 				newRow.insertCell(-1).innerHTML=(function(){
 					var extra = Level3.isInList(field) ? "L3 - " : "" ;
 					return extra+" <a href=variable.php?id="+field+">"+field+"</a>";
@@ -366,7 +369,9 @@
 						}
 						eval("CurrentStage['modification']="+modificationSubstage+";");
 						//value
-						newRow.insertCell(-1).innerHTML=Math.floor(1e2*CurrentStage['modification']()/Units.multiplier(field))/1e2;
+						var newCell=newRow.insertCell(-1)
+						newCell.title=prettyFormula;
+						newCell.innerHTML=Math.floor(1e2*CurrentStage['modification']()/Units.multiplier(field))/1e2;
 					}
 				})();
 

@@ -11,8 +11,8 @@
 	<canvas id="ghg1" width="400" height="200"></canvas>
 	<script>
 		var ctx = document.getElementById("ghg1").getContext("2d");
-		var wGHG1 = Global.Water.wGHG1()
-		var wwGHG1 = Global.Waste.wwGHG1()
+		var wGHG1 = Global.Water.wGHG1();
+		var wwGHG1 = Global.Waste.wwGHG1();
 		var data = [
 			{
 				value: wGHG1||1,
@@ -22,7 +22,7 @@
 			},
 			{
 				value: wwGHG1||1,
-				color: "#f00",
+				color: "#d00",
 				highlight: "#f00",
 				label: "wwGHG1 (kgCO2/inhab/year)"
 			},
@@ -48,7 +48,7 @@
 			labels: ["Serviced Population", "Authorized consumption"],
 			datasets:[
 				{
-					fillColor: "rgba(220,220,220,0.5)",
+					fillColor: "repeating-linear-gradient(-55deg,#222,#222 5px,#333 10px,#333 15px)",
 					strokeColor: "rgba(220,220,220,0.8)",
 					highlightFill: "rgba(220,220,220,0.75)",
 					highlightStroke: "rgba(220,220,220,1)",

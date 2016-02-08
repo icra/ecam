@@ -73,7 +73,7 @@
 <!--SUBTITLE--><h4>This is an overview of the active stages of your system. Click on a stage to input data. To activate more stages go to <a href=configuration.php>Configuration</a>.</h4>
 
 <!--NAVIGATION TABLE-->
-<table id=navigationTable class=inline style="text-align:center;margin:1em">
+<table id=navigationTable class=inline style="text-align:center;margin:1em;display:none">
 	<!--this table style--><style>
 		#navigationTable img{width:35px;vertical-align:middle}
 		#navigationTable td:not(.inactive) {cursor:pointer}
@@ -101,6 +101,7 @@
 		?>
 </table>
 
-<!--PREV & NEXT BUTTONS--><div><button class="button prev" onclick=window.location='selection.php'>Previous</button> </div>
+<?php include'linear.php'?>
+
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

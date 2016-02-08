@@ -81,8 +81,8 @@ var Info = {
 
 	//L2 Water Distribution
 	"wsd1"  :{description:"Total energy consumed",                                              magnitude:"Energy",     unit:"kWh", },
-	"wsd5"  :{description:"Resident population connected to the drinking water supply systems", magnitude:"Population", unit:"Inhab",},
-	"wsd6"  :{description:"Serviced population in supply systems",                              magnitude:"Population", unit:"serv. Pop.",},
+	"wsd5"  :{description:"Resident population connected to the drinking water supply systems", magnitude:"Population", unit:"People",},
+	"wsd6"  :{description:"Serviced population in supply systems",                              magnitude:"Population", unit:"People",},
 	"wsd7"  :{description:"Distribution system input volume",                                   magnitude:"Volume",     unit:"m3",},
 	"wsd8"  :{description:"Non-revenue water in distribution system",                           magnitude:"Volume",     unit:"m3",},
 	"wsd20" :{description:"Volume of authorized consumption",                                   magnitude:"Volume",     unit:"m3",},
@@ -145,7 +145,7 @@ var Info = {
 	c_wwg52:{description:"<b style=color:red>TBD</b> GHG emission offset from using the Heat energy from wastewater instead of fuel for neighboring districts for heating or cooling",magnitude:"Energy",unit:"kWh",},
 
 	//L2 Wastewater Collection
-	"wwc1":{description:"Volume of wastewater conveyed to treatment or to an outfall for untreated discharge",magnitude:"Energy",unit:"kWh",},
+	"wwc1":{description:"Volume of wastewater conveyed to treatment or to an outfall for untreated discharge",magnitude:"Volume",unit:"m3",},
 	"wwc2":{description:"Total electric energy consumption",magnitude:"Energy",unit:"kWh",},
 
 		//L3 Wastewater Collection
@@ -155,16 +155,16 @@ var Info = {
 		c_wwc51:{description:"Volume of dilution from Infiltration and Inflow",  magnitude:"Volume",unit:"m3",},
 
 	//L2 Wastewater Treatment
-	"wwt1" :{description:"Wastewater load (BOD)",magnitude:"Mass",unit:"kg",},
-	"wwt2" :{description:"Biogas produced",magnitude:"Volume",unit:"m3",},
-	"wwt3" :{description:"Biogas valorised",magnitude:"Volume",unit:"m3",},
+	"wwt1" :{description:"Wastewater influent load (BOD5)",magnitude:"Mass",unit:"kg",},
+	"wwt2" :{description:"Biogas produced",magnitude:"Volume",unit:"Nm3",},
+	"wwt3" :{description:"Biogas valorised",magnitude:"Volume",unit:"Nm3",},
 	"wwt5" :{description:"Effluent TN load",magnitude:"Concentration",unit:"mg/L",},
 	"wwt6" :{description:"Total nitrogen load in the influent",magnitude:"Mass",unit:"kg",},
 	"wwt8" :{description:"Volume of treated wastewater",                                                    magnitude:"Volume",       unit:"m3",},
-	"wwt9" :{description:"Total electric energy consmption",                                                magnitude:"Energy",       unit:"kWh",},
+	"wwt9" :{description:"Total electric energy consumption",                                                magnitude:"Energy",       unit:"kWh",},
 	"wwt10":{description:"Effluent BOD5",                                                                   magnitude:"Mass",         unit:"kg",},
 	"wwt11":{description:"Electrical energy produced from biogas valorization",                             magnitude:"Energy",       unit:"kWh",},
-	"wwt12":{description:"Fraction of methane in biogas",                                                   magnitude:"Fraction",     unit:"%",},
+	"wwt12":{description:"Percentage of methane in biogas",                                                 magnitude:"Percentage",   unit:"%",},
 	"wwt13":{description:"Influent BOD5 concentration",                                                     magnitude:"Concentration",unit:"mg/L",},
 	"wwt14":{description:"BOD mass removed",                                                                magnitude:"Mass",         unit:"kg",},
 	c_wwt50:{description:"Biogas flared",                                                                   magnitude:"Volume",       unit:"Nm3"},
@@ -237,7 +237,7 @@ var Info = {
 
 	//PERFORMANCE INDICATORS LEVEL 2
 	wS1	    :{description:"Percentage of quality compliance",                                                                               magnitude:"Percent",         unit:"%",},
-	wS2	    :{description:"Percentage os supply pressure adequacy",                                                                             magnitude:"Percent",         unit:"%",},
+	wS2	    :{description:"Percentage of supply pressure adequacy",                                                                             magnitude:"Percent",         unit:"%",},
 	wS3	    :{description:"Continuity of supply",                                                                                    magnitude:"Percent",         unit:"%",},
 	wwGHG8	:{description:"GHG emissions from fuel engines per serviced population",                            magnitude:"Mass/inhab/time", unit:"kgCO2e/serv.Pop/year",},
 	wwGHG9	:{description:"GHG emissions from fuel engines per collected wastewater volume",                    magnitude:"Mass/Volume",     unit:"kgCO2e/m3",},
@@ -415,6 +415,7 @@ Info.ww8.explanation="Number of truck trips to dispose sludge from the WWTP to t
 Info.ww9.explanation="Distance between the WWTP and the disposal site. If there are more than one disposal sites, use an average value. Note that the tool calculates the round trip distance as twice the distance to the disposal site.";
 Info.wwc1.explanation="Collected wastewater, corresponding to the volume of domestic, commercial and industrial outputs to the sewer system during the assessment period (pumped or not)";
 Info.wwc2.explanation="Energy consumed during the assessment period by each pumping station for conveying wastewater to treatment managed by the undertaking";
+Info.wwc3.explanation="";
 Info.wwd1.explanation="Volume of wastewater discharged by each wastewater treatment plant that are the responsibility of the undertaking, during the assessment period. This includes all the wastewater collected, whether it is conveyed to treatment or discharged untreated";
 Info.wwd2.explanation="Sum of the volume of wastewater discharged without treatment that are the responsibility of the wastewater undertaking, during the assessment period, by each wastewater treatment plant";
 Info.wwd3.explanation="Sum of energy consumed (from the grid or self-produced) during the assessment period by all each pumping stations for discharged wastewater managed by the undertaking";

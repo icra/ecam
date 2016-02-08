@@ -14,7 +14,7 @@ var Exceptions =
 	ww13:function()
 	{
 		var options=document.querySelectorAll('#ww13options option');
-		for(var i=0;options.length;i++)
+		for(var i=0;i<options.length;i++)
 		{
 			if(parseFloat(options[i].value)==Global.Waste.ww13)
 			{

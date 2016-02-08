@@ -94,21 +94,9 @@
 	<table> <tr> <th>
 		<select id=countryUW1 onchange=updateUW1(this.value)>
 			<option value=0>--enter value or select country predefined--
-			<option value=1>Africa
-			<option value=2>Egypt
-			<option value=3>Asia, Middle East, Latin America
-			<option value=4>India
-			<option value=5>West Bank and Gaza Strip (Palestine)
-			<option value=6>Japan
-			<option value=7>Brazil
-			<option value=8>Canada, Europe, Russia, Oceania
-			<option value=9>Denmark
-			<option value=10>Germany
-			<option value=11>Greece
-			<option value=12>Italy
-			<option value=13>Sweden
-			<option value=14>Turkey
-			<option value=15>United States
+			<option value=1>Peru
+			<option value=2>Thailand
+			<option value=3>Mexico
 			<option value=custom>--CUSTOM--
 		</select>
 		<td>
@@ -198,8 +186,21 @@
 <!--PREV & NEXT BUTTONS-->
 <div style=margin:1em> 
 	<button class="button prev" onclick=window.location='configuration.php'>Previous</button> 
-	<button class="button next" onclick=window.location='stages.php'>Next</button>
+	<script>
+		//find first available stage to start entering data
+		function nextPage()
+		{
+			//first: level 1
+			if(Global.Configuration['Active Stages'].water==1){window.location="edit.php?level=Water";return;}
+			if(Global.Configuration['Active Stages'].waste==1){window.location="edit.php?level=Waste";return;}
+
+			//then: level 2
+			alert("There are no active stages, go to Configuration and enable them");
+		}
+	</script>
+	<button class="button next" onclick=nextPage()>Next</button>
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>
 <!--JSON--><?php include'currentJSON.php'?>
+

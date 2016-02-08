@@ -8,21 +8,9 @@ var Tables = {
 
 	"Countries": //selection for: location and conversion factor uw1
 	{
-		"Africa":0,
-		"Egypt":0,
-		"Asia, Middle East, Latin America":0,
-		"India":0,
-		"West Bank and Gaza Strip (Palestine)":0,
-		"Japan":0,
-		"Brazil":0,
-		"Canada, Europe, Russia, Oceania":0,
-		"Denmark":0,
-		"Germany":0,
-		"Greece":0,
-		"Italy":0,
-		"Sweden":0,
-		"Turkey":0,
-		"United States":0,
+		"Peru":0,
+		"Thailand":0,
+		"Mexico":0,
 	},
 
 	/** Technologies for Water/Waste Treatment */

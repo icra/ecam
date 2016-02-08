@@ -23,6 +23,7 @@
 	<tr><td>Merge calculated variables with inputs in L3							   <td>Pending
 	<tr><td>Create Warning in new system											   <td>Pending
 	<tr><td>Configuration for hiding codes											   <td>Pending
-	<tr><td>Check for colors&patterns in google charts							       <td>Pending
+	<tr><td>Check for colors&patterns in google charts							       <td><b>Done</b>
+	<tr><td>Button update l2 only for "non l3 only"							       <td>Pending
 </table>
 <!--FOOTER--><?php include'footer.php'?>

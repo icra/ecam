@@ -24,14 +24,14 @@ var Global = {
 
 	/** Level 1 - Water Supply*/
 	"Water":{
-		"ws1":0,
 		"ws2":0,
-		"ws3":0,
-		"ws4":0,
-		"ws5":0,
+		"ws1":0,
 		"ws6":0,
 		"ws7":0,
 		"ws8":0,
+		"ws3":0,
+		"ws4":0,
+		"ws5":0,
 		"ws9":0,
 		c_ws50:function(){
 			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].water];
@@ -53,8 +53,8 @@ var Global = {
 			c_wsg52:function(){return this.wsg5/3600000*Global.UWS.uw1},
 		},
 		"Abstraction":{
-			"wsa1":0,
 			"wsa2":0,
+			"wsa1":0,
 			"wsa3":0,
 			/*<Level3>*/
 			"wsa4":0,
@@ -89,12 +89,12 @@ var Global = {
 			/*</Level3>*/
 		},
 		"Distribution":{
-			"wsd1":0,
 			"wsd5":0,
 			"wsd6":0,
 			"wsd7":0,
 			"wsd8":0,
 			"wsd20":0,
+			"wsd1":0,
 			/*<Level3>*/
 			"wsd2":0,
 			"wsd3":0,
@@ -121,21 +121,21 @@ var Global = {
 
 	/** Level 1 - Wastewater*/
 	"Waste":{
-		"ww1" :0,
-		"ww2" :0,
-		"ww3" :0,
-		"ww4" :0,
 		"ww5" :0,
 		"ww6" :0,
 		"ww7" :0,
-		"ww8" :0,
-		"ww9" :0,
-		"ww10":0,
+		"ww15":0,
+		"ww4" :0,
+		"ww1" :0,
+		"ww2" :0,
+		"ww3" :0,
 		"ww11":0,
 		"ww12":0,
-		"ww13":3.2, //protein lbosch added
 		"ww14":40,  //default BOD lbosch added 
-		"ww15":0,
+		"ww10":0,
+		"ww8" :0,
+		"ww9" :0,
+		"ww13":3.2, //protein lbosch added
 		c_ww50:function(){return this.ww7*this.ww14*0.9*0.4*Global.General.Days()},
 		c_ww51:function(){return (this.ww6-this.ww7)*this.ww13*0.16*1.1*1.25*0.005*44/28*298},
 		c_ww52:function(){return (this.ww6-this.ww7)*(40/1000*365)*0.06*34},
@@ -173,18 +173,18 @@ var Global = {
 			/*</Level3>*/
 		},
 		"Treatment":{
-			"wwt1":0,
-			"wwt2":0,
-			"wwt3":0,
-			"wwt5":0,
-			"wwt6":0,
 			"wwt8":0,
 			"wwt9":0,
+			"wwt1":0,
+			"wwt13":0,
 			"wwt10":0,
+			"wwt14":0,
+			"wwt6":0,
+			"wwt5":0,
+			"wwt2":0,
+			"wwt3":0,
 			"wwt11":0,
 			"wwt12":0,
-			"wwt13":0,
-			"wwt14":0,
 			c_wwt50:function(){return this.wwt2-this.wwt3},
 			c_wwt51:function(){return 298*Global.Waste.ww7*3.2/1000*Global.General.Days()/365},
 			c_wwt52:function(){return Global.Waste.c_ww53()},
@@ -273,12 +273,13 @@ var Global = {
 		},
 		"Yes/No":
 		{
-			"Are you producing biogas"                                  :0,
-			"Are you producing electrical energy"                       :0,
-			"Do you have fuel engines to run pumps"                     :0,
-			"Are you using truck transport to dispose off your sludge"  :0,
-			"Is your topography flat"                                   :0,
-			"Is any untreated industrial or commercial water connected" :0,
+			"Are you producing biogas"                                           :0,
+			"Are you producing electrical energy"                                :0,
+			"Do you have fuel engines to run pumps"                              :0,
+			"Are you using truck transport to convey sludge to the disposal site":0,
+			"Is your topography flat"                                            :0,
+			"Is any untreated industrial or commercial water connected"          :0,
+			"Do you have a gravity feed to your reservoir system"                :0,
 		},
 	},
 }
@@ -288,11 +289,13 @@ var Global = {
 	{
 		if(Global.Water.Abstraction.wsa2==0)
 		{
-			return this.ws8;/*level 1*/
+			/*level 1*/
+			return this.ws8;
 		}
 		else 
 		{
-			return (100*this.ws7/Global.Water.Abstraction.wsa2)||0; /*level 2*/
+			/*level 2*/
+			return (100*this.ws7/Global.Water.Abstraction.wsa2)||0; 
 		}
 	}
 	Global.Water.wS4    = function(){return 100*this.ws1/this.ws2||0}
@@ -394,10 +397,10 @@ var Global = {
 	Global.Waste.General.wwGHG15 = function(){return (Global.Waste.c_ww51()+Global.Waste.c_ww52())/Global.Waste.ww4||0}
 	Global.Waste.General.wwGHG16 = function(){return Global.Waste.c_ww54()*365/Global.General.Days()/Global.Waste.ww7||0}
 	Global.Waste.General.wwGHG17 = function(){return Global.Waste.c_ww54()/Global.Waste.ww4||0}
-	Global.Waste.General.wwS4	 = function(){return Global.Waste.Collection.c_wwc51()/Global.Waste.ww4||0}
 	Global.Waste.Collection.wcE1 = function(){return this.wwc2/this.wwc1||0}
 	Global.Waste.Collection.wcE2 = function(){return 100*this.wwc2/Global.UWS.c_uw52()||0}
 	Global.Waste.Collection.wcE3 = function(){return this.wwc2/this.c_wwc50()||0}
+	Global.Waste.Collection.wwS4 = function(){return this.c_wwc51()/Global.Waste.ww4||0}
 	Global.Waste.Treatment.wtE01 = function(){return 100*this.wwt17/Global.Waste.ww4||0}
 	Global.Waste.Treatment.wtE02 = function(){return 100*this.wwt18/Global.Waste.ww4||0}
 	Global.Waste.Treatment.wtE03 = function(){return 100*this.wwt19/Global.Waste.ww4||0}
