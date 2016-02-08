@@ -1,71 +1,30 @@
 //OVERWRITE GLOBAL OBJECT IF GLOBAL COOKIE IS SET
 if(getCookie("GLOBAL")) 
 {
-	//copy updated fields from cookie "GLOBAL" (stringified) to Global object
-	copyFieldsFrom(JSON.parse(getCookie("GLOBAL")),"Global")
+	//update Global from cookie GLOBAL
+	copyFieldsFrom(JSON.parse(getCookie("GLOBAL")),Global)
 }
 
-/** Way to update Global object, since JSON.stringify does not stringify fields that are functions */
-function copyFieldsFrom(object,name)
+
+/** update Global object without overwriting functions, since JSON.stringify does not stringify fields that are functions */
+function copyFieldsFrom(object_from,object_to)
 {
-	//go over all fields, which will be always strings or numbers
-	for(var field in object)
-	{
-		if(object[field]===undefined)
-		{
-			console.log(field+" does not exist");
-			continue;
-		}
-
-		if(object[field].constructor===Array)
-		{
-			eval(name+"['"+field+"']="+JSON.stringify(object[field]));
-		}
-		//if field is object, recursive call
-		else if(typeof(object[field])=="object") 
-		{
-			copyFieldsFrom(object[field],name+"['"+field+"']")
-		}
-		else //means is a normal field (string or number)
-		{
-			//update the field
-			//if the field is a number, don't use quotes
-			if(typeof(object[field])=="number")
-				eval(name+"['"+field+"']="+object[field])
-			else
-				eval(name+"['"+field+"']='"+object[field]+"'")
-		}
-	}
-}
-
-//TODO
-function refactor_copyFieldsFrom(object_from,object_to)
-{
-	object_to=object_to||Global;
-
-	//go over all fields: strings, numbers or arrays
 	for(var field in object_from)
 	{
-		if(object_from[field]===undefined)
-		{
-			console.log(field+" does not exist");
-			continue;
-		}
+		//check if field is not defined at target object
+		if(object_to[field]===undefined){console.log(field+" does not exist in "+object_to.toString());continue;}
 
+		//check if field is a function
+		if(typeof(object_to[field])=="function"){continue;}
+
+		//in case is an array, copy it directly
 		if(object_from[field].constructor===Array)
-		{
-			eval(name+"['"+field+"']="+JSON.stringify(object[field]));
-		}
-		//if field is object, recursive call
+			object_to[field] = object_from[field];
+		//in case is object (array would fit in this), recursive call
 		else if(typeof(object_from[field])=="object") 
-		{
-			copyFieldsFrom(object_from[field],object_to)
-		}
-		else //means is a normal field (string or number)
-		{
-			//update the field
-			object_to[field]=object_from[field];
-		}
+			copyFieldsFrom(object_from[field],object_to[field]);
+		//otherwise it will be a number or a string
+		else 
+			object_to[field] = object_from[field];
 	}
-
 }
