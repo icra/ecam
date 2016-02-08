@@ -283,94 +283,19 @@ var Global = {
 	},
 }
 
-/*
-	wS5	Level 1: = ws8
-		Level 2: ws7/wsa2 x 100
-		Level 2 overwrite the level 1
-
-	gE2w	ws5 x (365/Ap)/ ws2
-	gE3w	ws5 x (365/Ap)/ ws1
-	gE4w	ws5 / ws7
-	wGHG1	(ws5 x uw1 + c_ws51 ) x (365/Ap)/ ws2
-	wGHG2	(ws5 x uw1 + c_ws51 ) x (365/Ap)/ ws1
-	wGHG3	(ws5 x uw1 + c_ws51 ) / ws7
-	wGHG4	c_ws51 x (365/Ap)/ ws1
-	wGHG5	c_ws51 / ws7
-	wGHG6	(ws5 x uw1 ) / ws1
-	wGHG7	(ws5 x uw1 )/ ws7
-	wwS1	ww7/ ww5 
-	wwS2	ww7 / ww6 x 100
-	gE1ww	ww1 / ww2 x 100
-	gE2ww	ww3 x (365/Ap)/ ww5
-	gE3ww	ww3 x (365/Ap)/ ww7
-	gE4ww	ww3 / ww4
-	wwGHG1	(ww3 x uw1 + c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52 + c_ww54 ) x (365/Ap)/ ww5
-	wwGHG2	(ww3 x uw1 + c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52 + c_ww54 ) x (365/Ap)/ ww7
-	wwGHG3	(ww3 x uw1 + c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52+ c_ww54 ) / ww4
-	wwGHG4	(ww3  x uw1) / ww7
-	wwGHG5	(ww3  x uw1) / ww4
-	wwGHG6	 (c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52 + c_ww54 )/ ww7
-	wwGHG7	 (c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52 + c_ww54 )/ ww4
-	wS1	[Sum(wst4_n + wst5_n + wst6_n + wst7_n) ]/ [sum (wst3_n)] x 100
-	wS2	[Sum(wsd2_n)] / [Sum (wsd3_n)] x 100
-	wS3	[Sum(wsd4_n)] / 24 / Ap x 100
-	wwS3	[Sum(wwt15_n)] / [Sum(wwt16_n)] x 100
-	wwS4	c_wwc51 / ww4 x 100
-	gE2w	c_wsg50 x (365/Ap)/ ws2
-	gE3w	c_wsg50  x (365/Ap)/ ws1
-	gE4w	c_wsg50  / ws7
-	wGHG1	[(ws5- (wsg2+ wsg4))x uw1 + c_ws51-c_wsg52) x (365/Ap)]/ws2
-	wGHG2	[(ws5- (wsg2+ wsg4))x uw1 + c_ws51-c_wsg52) x (365/Ap)]/ws1
-	wGHG3	[(ws5- (wsg2+ wsg4)) x uw1 + c_ws51-c_wsg52) x (365/Ap)]/ws7
-	wGHG6	((c_wsg50 x uw1)-c_wsg52)/ws1
-	wGHG7	((c_wsg50 x uw1)-c_wsg52)/ws7
-	gE2ww	c_wwg50 x (365/Ap)/ ww5
-	gE3ww	c_wwg50 x (365/Ap)/ ww7
-	gE4ww	c_wwg50 / ww4
-	wwGHG1	(ww3 -(wwg2+wwg4))x uw1 + c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52 + c_ww54  - c_wwg52) x (365/Ap)/ ww5
-	wwGHG2	(ww3 -(wwg2+wwg4))x uw1 + c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52 + c_ww54  - c_wwg52) x (365/Ap)/ ww7
-	wwGHG3	(ww3 -(wwg2+wwg4)) x uw1 + c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52+ c_ww54 - c_wwg52 ) / ww4
-	wwGHG4	((ww3 -(wwg2+wwg4)) x uw1) - c_wwg52)x (365/Ap)/ ww7
-	wwGHG5	((ww3 -(wwg2+wwg4)) x uw1) - c_wwg52)x (365/Ap)/ ww4
-	wwGHG8	c_ww57  x (365/Ap)/ ww7
-	wwGHG9	c_ww57 / ww4
-	wwGHG10	c_ww55x (365/Ap)/ ww7
-	wwGHG11	c_ww55/ww4
-	wwGHG12	c_wwt60  x (365/Ap)/ ww7
-	wwGHG13	c_wwt60   / ww4
-	wwGHG14	(c_ww51+c_ww52)x (365/Ap)/ ww7
-	wwGHG15	(c_ww51 +c_ww52)/ww4
-	wwGHG16	c_ww54x (365/Ap)/ ww7
-	wwGHG17	c_ww54/ww4
-	aE1	wsa1 / wsa2
-	aE2	wsa1/ c_uw52 x 100
-	aE4	wsa3/wsa2
-	tE1	wst2/ wst1
-	tE2	wst2/ c_uw52 x 100
-	wS1	(SUM(wst4_n + wst5_n + wst6_n + wst7_n)) / (sum(wst3_n) x 100
-	dE1	wsd1/ ws7
-	dE2	wsd1/ c_uw52 x 100
-	wS2	Sum(wsd2_n )/  Sum (wsd3_n) x 100
-	wS3	Sum (wsd4_n )/ 24 / Ap x 100
-	wcE1	wwc2 / wwc1
-	wcE2	wwc2/ c_uw52 x 100
-	wcE3	wwc2/ c_wwc50_n
-	wwS4	c_wwc51  / ww4 x 100
-	wtE1	wwt9/ ww4
-	wtE2	wwt9/ c_uw52 x 100
-	wtE3	wwt9/wwt14
-	wtE4	wwt11/ ww4
-	wtE5	wwt2 / wwt14
-	wtE6	wwt11/ c_wwt53
-	wwS3	sum(wwt15_n) / sum(wwt16_n )
-	wdE1	wwd3 / wwd1
-	wdE2	wwd3/ c_uw52 x 100
-	wdE4	wwd4 / wwd1
-*/
-
 /* Performance Indicators L1 */
+	Global.Water.wS5    = function()
+	{
+		if(Global.Water.Abstraction.wsa2==0)
+		{
+			return this.ws8;/*level 1*/
+		}
+		else 
+		{
+			return (100*this.ws7/Global.Water.Abstraction.wsa2)||0; /*level 2*/
+		}
+	}
 	Global.Water.wS4    = function(){return 100*this.ws1/this.ws2||0}
-	Global.Water.wS5    = function(){return 100*this.ws7/this.ws6||0}
 	Global.Water.gE1w   = function(){return 100*this.ws3/this.ws4||0}		
 	Global.Water.gE2w   = function(){return this.ws5*365/Global.General.Days()/this.ws2||0}
 	Global.Water.gE3w   = function(){return this.ws5*365/Global.General.Days()/this.ws1||0}
@@ -382,7 +307,7 @@ var Global = {
 	Global.Water.wGHG5  = function(){return this.c_ws51()/this.ws7||0}
 	Global.Water.wGHG6  = function(){return (this.ws5*Global.UWS.uw1)/this.ws1||0}
 	Global.Water.wGHG7  = function(){return (this.ws5*Global.UWS.uw1)/this.ws7||0}
-	Global.Waste.wwS1   = function(){return 100*this.ww6/this.ww5||0}
+	Global.Waste.wwS1   = function(){return 100*this.ww7/this.ww5||0}
 	Global.Waste.wwS2   = function(){return 100*this.ww7/this.ww6||0}
 	Global.Waste.gE1ww  = function(){return 100*this.ww1/this.ww2||0}
 	Global.Waste.gE2ww  = function(){return this.ww3*365/Global.General.Days()/this.ww5||0}
@@ -464,12 +389,12 @@ var Global = {
 	Global.Waste.General.wwGHG10 = function(){return Global.Waste.c_ww55()*365/Global.General.Days()/Global.Waste.ww7||0}
 	Global.Waste.General.wwGHG11 = function(){return Global.Waste.c_ww55()/Global.Waste.ww4||0}
 	Global.Waste.General.wwGHG12 = function(){return Global.Waste.c_ww53()*365/Global.General.Days()/Global.Waste.ww7||0}
-	Global.Waste.General.wwGHG13 = function(){return Global.Waste.c_ww53()/Global.Waste.ww4||0}
+	Global.Waste.General.wwGHG13 = function(){return Global.Waste.Treatment.c_wwt60()/Global.Waste.ww4||0}
 	Global.Waste.General.wwGHG14 = function(){return (Global.Waste.c_ww51()+Global.Waste.c_ww52())*365/Global.General.Days()/Global.Waste.ww7||0}
 	Global.Waste.General.wwGHG15 = function(){return (Global.Waste.c_ww51()+Global.Waste.c_ww52())/Global.Waste.ww4||0}
 	Global.Waste.General.wwGHG16 = function(){return Global.Waste.c_ww54()*365/Global.General.Days()/Global.Waste.ww7||0}
 	Global.Waste.General.wwGHG17 = function(){return Global.Waste.c_ww54()/Global.Waste.ww4||0}
-	Global.Waste.General.wwS4	 = function(){return Global.Waste.Collection.c_wwc50()/Global.Waste.ww4||0}
+	Global.Waste.General.wwS4	 = function(){return Global.Waste.Collection.c_wwc51()/Global.Waste.ww4||0}
 	Global.Waste.Collection.wcE1 = function(){return this.wwc2/this.wwc1||0}
 	Global.Waste.Collection.wcE2 = function(){return 100*this.wwc2/Global.UWS.c_uw52()||0}
 	Global.Waste.Collection.wcE3 = function(){return this.wwc2/this.c_wwc50()||0}
@@ -487,7 +412,6 @@ var Global = {
 	Global.Waste.Treatment.wtE6	 = function(){return this.wwt11/this.c_wwt53()||0}
 	Global.Waste.Treatment.wtE7	 = function(){return this.wwt23/Global.Waste.ww4||0}
 	Global.Waste.Treatment.wtE8	 = function(){return this.ww24}
-	Global.Waste.Treatment.wwS3	 = function(){return this.wwt15/this.wwt16||0}
 	Global.Waste.Treatment.wtE9	 = function(){return 100*Global.Waste.ww4/this.wwt25||0}
 	Global.Waste.Discharge.wdE1	 = function(){return this.wwd3/this.wwd1||0}
 	Global.Waste.Discharge.wdE2	 = function(){return 100*this.wwd3/Global.UWS.c_uw52()||0}
