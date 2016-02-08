@@ -284,12 +284,10 @@ var Global = {
 }
 
 /*
-	wS4	ws1/ws2 x 100
-	wS5	"Level 1: = ws8
-	Level 2: ws7/wsa2 x 100
-	Level 2 overwrite the level 1
-	"
-	gE1w	ws3 / ws4 x 100
+	wS5	Level 1: = ws8
+		Level 2: ws7/wsa2 x 100
+		Level 2 overwrite the level 1
+
 	gE2w	ws5 x (365/Ap)/ ws2
 	gE3w	ws5 x (365/Ap)/ ws1
 	gE4w	ws5 / ws7
@@ -313,24 +311,19 @@ var Global = {
 	wwGHG5	(ww3  x uw1) / ww4
 	wwGHG6	 (c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52 + c_ww54 )/ ww7
 	wwGHG7	 (c_ww57 + c_ww55 + c_ww53 + c_ww51 + c_ww52 + c_ww54 )/ ww4
-		
 	wS1	[Sum(wst4_n + wst5_n + wst6_n + wst7_n) ]/ [sum (wst3_n)] x 100
 	wS2	[Sum(wsd2_n)] / [Sum (wsd3_n)] x 100
 	wS3	[Sum(wsd4_n)] / 24 / Ap x 100
 	wwS3	[Sum(wwt15_n)] / [Sum(wwt16_n)] x 100
 	wwS4	c_wwc51 / ww4 x 100
-		
 	gE2w	c_wsg50 x (365/Ap)/ ws2
 	gE3w	c_wsg50  x (365/Ap)/ ws1
 	gE4w	c_wsg50  / ws7
 	wGHG1	[(ws5- (wsg2+ wsg4))x uw1 + c_ws51-c_wsg52) x (365/Ap)]/ws2
 	wGHG2	[(ws5- (wsg2+ wsg4))x uw1 + c_ws51-c_wsg52) x (365/Ap)]/ws1
 	wGHG3	[(ws5- (wsg2+ wsg4)) x uw1 + c_ws51-c_wsg52) x (365/Ap)]/ws7
-	wGHG4	no change
-	wGHG5	no change
 	wGHG6	((c_wsg50 x uw1)-c_wsg52)/ws1
 	wGHG7	((c_wsg50 x uw1)-c_wsg52)/ws7
-		
 	gE2ww	c_wwg50 x (365/Ap)/ ww5
 	gE3ww	c_wwg50 x (365/Ap)/ ww7
 	gE4ww	c_wwg50 / ww4
@@ -349,62 +342,30 @@ var Global = {
 	wwGHG15	(c_ww51 +c_ww52)/ww4
 	wwGHG16	c_ww54x (365/Ap)/ ww7
 	wwGHG17	c_ww54/ww4
-		
-		
 	aE1	wsa1 / wsa2
 	aE2	wsa1/ c_uw52 x 100
-	aE3	
 	aE4	wsa3/wsa2
-	aE5	
-	aE6	
-	aE7	
-	tE0	
-	tE0.1	
-	tE0.2	
-	tE0.3	
-	tE0.4	
-	tE0.5	
-	tE0.6	
 	tE1	wst2/ wst1
 	tE2	wst2/ c_uw52 x 100
-	tE3	
-	tE4	
 	wS1	(SUM(wst4_n + wst5_n + wst6_n + wst7_n)) / (sum(wst3_n) x 100
 	dE1	wsd1/ ws7
 	dE2	wsd1/ c_uw52 x 100
-	dE3	
-	dE4	
-	dE5	
-	dE6	
-	dE7	
 	wS2	Sum(wsd2_n )/  Sum (wsd3_n) x 100
 	wS3	Sum (wsd4_n )/ 24 / Ap x 100
 	wcE1	wwc2 / wwc1
 	wcE2	wwc2/ c_uw52 x 100
 	wcE3	wwc2/ c_wwc50_n
 	wwS4	c_wwc51  / ww4 x 100
-	wtE0	
-	wtE0.1	
-	wtE0.2	
-	wtE0.3	
-	wtE0.4	
-	wtE0.5	
-	wtE0.6	
 	wtE1	wwt9/ ww4
 	wtE2	wwt9/ c_uw52 x 100
 	wtE3	wwt9/wwt14
 	wtE4	wwt11/ ww4
 	wtE5	wwt2 / wwt14
 	wtE6	wwt11/ c_wwt53
-	wtE7	
-	wtE8	
-	wtE9	
 	wwS3	sum(wwt15_n) / sum(wwt16_n )
 	wdE1	wwd3 / wwd1
 	wdE2	wwd3/ c_uw52 x 100
-	wdE3	
 	wdE4	wwd4 / wwd1
-	wdE5	
 */
 
 /* Performance Indicators L1 */
