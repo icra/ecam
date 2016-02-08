@@ -266,9 +266,9 @@
 				#fuelSelection tr.inactive {background:#ccc;}
 			</style>
 			<tr><th>Stage<th>Selected Fuel type
-			<tr stage=water>   <td>Level 1 Water supply (engines)
-			<tr stage=waste>   <td>Level 1 Wastewater (engines)
-			<tr stage=wasteTre><td>Level 2 Wastewater treatment (vehicles)
+			<tr stage=water>   <td>Level 1 - Water supply (engines)
+			<tr stage=waste>   <td>Level 1 - Wastewater (engines)
+			<tr stage=wasteTre><td>Level 2 - Wastewater treatment (vehicles)
 		</table>
 	</fieldset>
 </div>

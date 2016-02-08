@@ -338,7 +338,8 @@
 				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
 
 				/** Compute CurrentStage[field]() for each substage*/
-				(function(){
+				(function()
+				{
 					//the formula will be modified starting by the current field formula
 					var modification=formula;
 
@@ -353,23 +354,25 @@
 					//debugging: show original formula, if it has been changed
 					//if(modification!=formula){console.log("Original: "+formula);}
 
-					for(s in substages)
+					for(var s in substages)
 					{
 						//loop calculated variables, they need to exist inside each substage
 						cvs.forEach(function(cv)
 						{
 							substages[s][cv]=CurrentStage[cv]; //this copies the function inside current substage
-						})
+						});
 
 						var modificationSubstage=modification.replace(/\[0\]/g,'['+s+']');
+						/*
 						//show changes, if any
 						if(modificationSubstage!=formula)
 						{
 							console.log(' +Modification for substage['+s+']: '+modificationSubstage)
 						}
+						*/
 						eval("CurrentStage['modification']="+modificationSubstage+";");
 						//value
-						var newCell=newRow.insertCell(-1)
+						var newCell=newRow.insertCell(-1);
 						newCell.title=prettyFormula;
 						newCell.innerHTML=Math.floor(1e2*CurrentStage['modification']()/Units.multiplier(field))/1e2;
 					}

@@ -168,7 +168,6 @@
 			<tr><th>Other
 			<tr><td><a href=todo.php>To do list</a>
 		</table>
-
 		<div style=color:#999> Click outside to minimize this menu <br>(or click on the symbol on top)</div>
 	</div>
 </div>

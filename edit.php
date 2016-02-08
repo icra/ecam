@@ -327,18 +327,18 @@
 		<tr><th colspan=5>INPUTS <?php include'inputType.php'?>
 		<tr>
 			<th>Description
-			<th>Current Value
+			<th>Current value
 			<th>Unit
-			<th>Data Quality
+			<th>Data quality
 	</table>
 
 	<!--PI-->
-	<table id=outputs class=inline style=max-width:46%;background:yellow;>
-		<tr><th colspan=5>RESULTS - Key Performance indicators
+	<table id=outputs class=inline style=max-width:46%;background:#f5ecce;>
+		<tr><th colspan=5>RESULTS - Key performance indicators
 		<tr>
 			<th title=Performance style=cursor:help>P
 			<th>Description
-			<th>Current Value
+			<th>Current value
 			<th>Unit
 	</table>
 </div>

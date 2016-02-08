@@ -13,7 +13,7 @@ function copyFieldsFrom(object,name)
 	{
 		if(object[field]===undefined)
 		{
-			console.log(field+" does not exist anymore!");
+			console.log(field+" does not exist");
 			continue;
 		}
 
@@ -36,4 +36,36 @@ function copyFieldsFrom(object,name)
 				eval(name+"['"+field+"']='"+object[field]+"'")
 		}
 	}
+}
+
+//TODO
+function refactor_copyFieldsFrom(object_from,object_to)
+{
+	object_to=object_to||Global;
+
+	//go over all fields: strings, numbers or arrays
+	for(var field in object_from)
+	{
+		if(object_from[field]===undefined)
+		{
+			console.log(field+" does not exist");
+			continue;
+		}
+
+		if(object_from[field].constructor===Array)
+		{
+			eval(name+"['"+field+"']="+JSON.stringify(object[field]));
+		}
+		//if field is object, recursive call
+		else if(typeof(object_from[field])=="object") 
+		{
+			copyFieldsFrom(object_from[field],object_to)
+		}
+		else //means is a normal field (string or number)
+		{
+			//update the field
+			object_to[field]=object_from[field];
+		}
+	}
+
 }
