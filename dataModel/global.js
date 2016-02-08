@@ -171,7 +171,13 @@ var Global = {
 		"Collection":{
 			"wwc1":0,
 			"wwc2":0,
-			c_wwc51:function(){return Global.Waste.ww14*Global.Waste.ww7*Global.General.Days()/Global.Waste.ww13*Global.Waste.Treatment.wwt8-Global.Waste.ww4*Global.Waste.ww7/Global.Waste.ww6||0},
+			c_wwc51:function()
+			{
+				if(Global.Waste.Treatment.wwt8==0)
+					return 0;
+				else
+					return (Global.Waste.ww14*Global.Waste.ww7*Global.General.Days()/Global.Waste.ww13*Global.Waste.Treatment.wwt8)-Global.Waste.ww4*Global.Waste.ww7/Global.Waste.ww6||0
+			},
 			/*<Level3>*/
 			"wwc3":0,
 			"wwc4":0,
@@ -222,7 +228,6 @@ var Global = {
 		},
 		"Discharge":{
 			"wwd1":0,
-			"wwd2":0,
 			"wwd3":0,
 			"wwd4":0,
 			/*<Level3>*/
@@ -414,17 +419,60 @@ var Global = {
 	Global.Waste.Treatment.wtE04 = function(){return 100*this.wwt20/Global.Waste.ww4||0}
 	Global.Waste.Treatment.wtE05 = function(){return 100*this.wwt21/Global.Waste.ww4||0}
 	Global.Waste.Treatment.wtE06 = function(){return 100*this.wwt26/Global.Waste.ww4||0}
-	Global.Waste.Treatment.wtE1	 = function(){return this.wwt9/Global.Waste.ww4||0}
+	Global.Waste.Treatment.wtE1	 = function(){return this.wwt9/Global.Waste.ww8||0}
 	Global.Waste.Treatment.wtE2	 = function(){return 100*this.wwt9/Global.UWS.c_uw52()||0}
 	Global.Waste.Treatment.wtE3	 = function(){return this.wwt9/this.wwt14||0}
-	Global.Waste.Treatment.wtE4	 = function(){return this.wwt11/Global.Waste.ww4||0}
+	Global.Waste.Treatment.wtE4	 = function(){return this.wwt11/Global.Waste.ww8||0}
 	Global.Waste.Treatment.wtE5	 = function(){return this.wwt2/this.wwt14||0}
 	Global.Waste.Treatment.wtE6	 = function(){return this.wwt11/this.c_wwt53()||0}
-	Global.Waste.Treatment.wtE7	 = function(){return this.wwt23/Global.Waste.ww4||0}
-	Global.Waste.Treatment.wtE8	 = function(){return this.ww24}
-	Global.Waste.Treatment.wtE9	 = function(){return 100*Global.Waste.ww4/this.wwt25||0}
+	Global.Waste.Treatment.wtE7	 = function(){return this.wwt23/Global.Waste.ww8||0}
+	Global.Waste.Treatment.wtE8	 = function()
+	{
+		var arr=Global.Level3.Waste.Treatment;
+		if(arr.length==0){return 0;}
+		var sum=0;
+		for(var s in arr)
+		{
+			sum+=arr[s].wwt24;
+		}
+		return sum/arr.length;
+	}
+	Global.Waste.Treatment.wtE9	 = function()
+	{
+		//wtE9 = IF wwt25 not zero, then wtE9 = sum(wwt8_n)/sum(wwt25_n)    Else “missing data”
+		if(this.wwt25!=0)
+		{
+			var arr=Global.Level3.Waste.Treatment;
+			var sum_wwt8=0, sum_wwt25=0;
+			for(var s in arr)
+			{
+				sum_wwt8+=arr[s].wwt8;
+				sum_wwt25+=arr[s].wwt25;
+			}
+			return sum_wwt8/sum_wwt25||0;
+		}
+		else
+			return 0;
+	}
 	Global.Waste.Discharge.wdE1	 = function(){return this.wwd3/this.wwd1||0}
 	Global.Waste.Discharge.wdE2	 = function(){return 100*this.wwd3/Global.UWS.c_uw52()||0}
-	Global.Waste.Discharge.wdE3	 = function(){return this.wwd3/this.wwd5||0}
+	Global.Waste.Discharge.wdE3	 = function()
+	{
+		//if sum of wwd5_n is not 0 , ELSE wdE3=0
+		var sum_wwd5=0;
+		var arr=Global.Level3.Waste.Discharge;
+		for(var s in arr) { sum_wwd5+=arr[s].wwd5; }
+		if(sum_wwd5==0)
+			return 0;
+		else
+			return this.wwd3/this.c_wwd50||0;
+	}
 	Global.Waste.Discharge.wdE4	 = function(){return this.wwd4/this.wwd1||0}
-	Global.Waste.Discharge.wdE5	 = function(){return this.wwd4/this.wwd7||0}
+	Global.Waste.Discharge.wdE5	 = function()
+	{
+		//wde5 = wwd4 / C_wwd51_n only if wwd7 is not 0 , ELSE wdE5=0
+		if(this.wwd7==0)
+			return 0;
+		else
+			return this.wwd4/this.c_wwd51()||0;
+	}

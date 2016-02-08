@@ -193,7 +193,6 @@ var Info = {
 
 	//L2 Wastewater Discharge
 	"wwd1":{description:"Volume of discharged wastewater",                            magnitude:"Volume",unit:"m3",},
-	"wwd2":{description:"Volume of discharged wastewater without treatment",          magnitude:"Volume",unit:"m3",},
 	"wwd3":{description:"Electric energy consumed for pumping discharged wastewater", magnitude:"Energy",unit:"kWh",},
 	"wwd4":{description:"Energy recovered during wastewater discharge",               magnitude:"Energy",unit:"kWh",},
 		
@@ -413,7 +412,6 @@ Info.wwc1.explanation="Collected wastewater, corresponding to the volume of dome
 Info.wwc2.explanation="Energy consumed during the assessment period by each pumping station for conveying wastewater to treatment managed by the undertaking";
 Info.wwc3.explanation="";
 Info.wwd1.explanation="Volume of wastewater discharged by each wastewater treatment plant that are the responsibility of the undertaking, during the assessment period. This includes all the wastewater collected, whether it is conveyed to treatment or discharged untreated";
-Info.wwd2.explanation="Sum of the volume of wastewater discharged without treatment that are the responsibility of the wastewater undertaking, during the assessment period, by each wastewater treatment plant";
 Info.wwd3.explanation="Sum of energy consumed (from the grid or self-produced) during the assessment period by all each pumping stations for discharged wastewater managed by the undertaking";
 Info.wwd4.explanation="Sum of energy recovered during the assessment period by all turbines for wastewater discharged managed by the undertaking";
 Info.wwg1.explanation="Water-related electrical energy produced by the wastewater treatment utility (renewable energy) during the assessment period";
