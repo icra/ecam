@@ -26,7 +26,6 @@ var Info = {
 	"ws3":{description:"Energy costs",                                                     magnitude:"Currency",unit:"USD",},
 	"ws4":{description:"Running costs ",                                                   magnitude:"Currency",unit:"USD",},
 	"ws5":{description:"Energy consumed from the grid",                                    magnitude:"Energy",  unit:"kWh",},
-	"ws6":{description:"Total volume produced for urban drinking water system",            magnitude:"Volume",  unit:"m3",},
 	"ws7":{description:"Volume of authorized consumption",                                 magnitude:"Volume",  unit:"m3",},
 	"ws8":{description:"Percent of Non Revenue Water",                                     magnitude:"Percent", unit:"%",},
 	"ws9":{description:"Volume of Fuel consumed",                                          magnitude:"Volume",  unit:"m3",},
@@ -343,7 +342,6 @@ Info.ws2.explanation="Number of permanent residents within the water utility are
 Info.ws3.explanation="Costs from electric energy consumption for the entire water supply utilty, based on the electricity bill during the entire assessment period";
 Info.ws4.explanation="Total operations and maintenance net costs and internal manpower net costs (i.e. not including the capitalised cost of self constructed assets) related to water supply within the service area managed by the undertaking during the entire assessment period";
 Info.ws5.explanation="Total energy consumed from the grid for the entire water supply utilty, based on the electricity bill during the entire assessment period.";
-Info.ws6.explanation="This is used for PI and volume diagram. If not known volume is calculated based upon serviced population ";
 Info.ws7.explanation="Sum of the volume of metered and/or non-metered water that, during the assessment period, is taken by registered customers, by the water supplier itself, or by others who are implicitly or explicitly authorised to do so by the water supplier, for residential, commercial, industrial or public purposes. It includes water exported";
 Info.ws8.explanation="Percentage of the abstracted water Volume that is lost due to leaks or illegal connection to the distribution system , At level 1, enter the percentage as known or estimated by the utility. At level 2, the non revenue water indicator (wS5) will be calculated based on a mass balance.";
 Info.ws9.explanation="Fuel consumption in water supply, for instance, due to the use of on-site generators or devices that work on fuel.";

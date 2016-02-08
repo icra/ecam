@@ -26,7 +26,6 @@ var Global = {
 	"Water":{
 		"ws2":0,
 		"ws1":0,
-		"ws6":0,
 		"ws7":0,
 		"ws8":0,
 		"ws3":0,
