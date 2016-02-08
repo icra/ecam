@@ -65,6 +65,8 @@ var Formulas = {
 		result = result.replace(/Distribution./g,"")
 		result = result.replace(/Collection./g,"")
 		result = result.replace(/Discharge./g,"")
+		result = result.replace(/Configuration./g,"")
+		result = result.replace(/Yes\/No./g,"")
 		result = result.replace(/\(\)/g,"")
 		result = result.replace(/[{}]/g,"")
 		return result;

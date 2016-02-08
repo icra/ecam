@@ -6,6 +6,7 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Graphs</h1>
 
+<!--ghg1-->
 <div class=inline style=max-width:30%>
 	<h2>GHG1 graph 1</h2>
 	<canvas id="ghg1" width="400" height="200"></canvas>
@@ -31,6 +32,7 @@
 	</script>
 </div>
 
+<!--ghg2-->
 <div class=inline style=max-width:30%>
 	<h2>GHG1 graph 2</h2>
 	<canvas id="ghg2" width="400" height="200"></canvas>
@@ -63,7 +65,6 @@
 				}
 			],
 		};
-
 		new Chart(ctx).Bar(data,{});
 	</script>
 </div>
@@ -100,4 +101,5 @@
 	<br>
 	<a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts">https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts</a>
 </div>
+
 <!--FOOTER--><?php include'footer.php'?>

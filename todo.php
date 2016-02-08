@@ -24,6 +24,7 @@
 	<tr><td>Create Warning in new system											   <td>Pending
 	<tr><td>Configuration for hiding codes											   <td>Pending
 	<tr><td>Check for colors&patterns in google charts							       <td><b>Done</b>
-	<tr><td>Button update l2 only for "non l3 only"							       <td>Pending
+	<tr><td>Button update l2 only for "non l3 only"				    			       <td>Pending
+	<tr><td>export summary table button                                                <td>Pending
 </table>
 <!--FOOTER--><?php include'footer.php'?>

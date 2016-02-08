@@ -6,8 +6,9 @@ a:hover {text-decoration:underline}
 body{font-family:'Open Sans','Helvetica',sans-serif;overflow-y:scroll;font-size:13px;}
 button{padding:0.3em;height:2.3em}
 div{padding:0.5em}
-h1,h2,h3,h4{padding:0.6em;color:#00aff1;font-weight:normal}
-h4{font-size:18px;color:#58595b}
+h1,h2,h3{padding:0.6em;color:#00aff1;font-weight:normal}
+h4{margin:1em;font-size:18px;color:#58595b}
+legend{color:#58595b;font-size:16px}
 table{border-collapse:collapse;}
 th,td{border:1px solid #aaa;padding:0.4em;font-weight:normal}
 th{background:#00aff1;color:white;vertical-align:middle}

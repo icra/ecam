@@ -130,13 +130,20 @@ var Global = {
 		"ww2" :0,
 		"ww3" :0,
 		"ww11":0,
-		"ww12":0,
 		"ww14":40,  //default BOD lbosch added 
 		"ww10":0,
 		"ww8" :0,
 		"ww9" :0,
 		"ww13":3.2, //protein lbosch added
-		c_ww50:function(){return this.ww7*this.ww14*0.9*0.4*Global.General.Days()},
+
+		c_ww50:function()
+		{
+			if(Global.Configuration["Yes/No"]["Are you valorizing biogas"]==1)
+				return this.ww7*this.ww14*0.9*0.4*Global.General.Days();
+			else
+				return 0;
+		},
+
 		c_ww51:function(){return (this.ww6-this.ww7)*this.ww13*0.16*1.1*1.25*0.005*44/28*298},
 		c_ww52:function(){return (this.ww6-this.ww7)*(40/1000*365)*0.06*34},
 		c_ww53:function(){return 298*this.ww10*this.ww15*1000*0.005*(44/28)},
@@ -274,12 +281,12 @@ var Global = {
 		"Yes/No":
 		{
 			"Are you producing biogas"                                           :0,
+			"Are you valorizing biogas"                                          :0,
 			"Are you producing electrical energy"                                :0,
 			"Do you have fuel engines to run pumps"                              :0,
 			"Are you using truck transport to convey sludge to the disposal site":0,
 			"Is your topography flat"                                            :0,
 			"Is any untreated industrial or commercial water connected"          :0,
-			"Do you have a gravity feed to your reservoir system"                :0,
 		},
 	},
 }
@@ -312,6 +319,7 @@ var Global = {
 	Global.Water.wGHG7  = function(){return (this.ws5*Global.UWS.uw1)/this.ws7||0}
 	Global.Waste.wwS1   = function(){return 100*this.ww7/this.ww5||0}
 	Global.Waste.wwS2   = function(){return 100*this.ww7/this.ww6||0}
+	Global.Waste.wwS4   = function(){return Global.Waste.Collection.wwS4()}
 	Global.Waste.gE1ww  = function(){return 100*this.ww1/this.ww2||0}
 	Global.Waste.gE2ww  = function(){return this.ww3*365/Global.General.Days()/this.ww5||0}
 	Global.Waste.gE3ww  = function(){return this.ww3*365/Global.General.Days()/this.ww7||0}
@@ -400,7 +408,7 @@ var Global = {
 	Global.Waste.Collection.wcE1 = function(){return this.wwc2/this.wwc1||0}
 	Global.Waste.Collection.wcE2 = function(){return 100*this.wwc2/Global.UWS.c_uw52()||0}
 	Global.Waste.Collection.wcE3 = function(){return this.wwc2/this.c_wwc50()||0}
-	Global.Waste.Collection.wwS4 = function(){return this.c_wwc51()/Global.Waste.ww4||0}
+	Global.Waste.Collection.wwS4 = function(){return 100*this.c_wwc51()/Global.Waste.ww4||0}
 	Global.Waste.Treatment.wtE01 = function(){return 100*this.wwt17/Global.Waste.ww4||0}
 	Global.Waste.Treatment.wtE02 = function(){return 100*this.wwt18/Global.Waste.ww4||0}
 	Global.Waste.Treatment.wtE03 = function(){return 100*this.wwt19/Global.Waste.ww4||0}

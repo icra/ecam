@@ -1,7 +1,4 @@
-<?php /* footer.php: displayed at the bottom of each page */ ?>
-<div id=footer>
-	<a href=about.php><b>ABOUT</b></a>
-</div>
+<!--footer.php: at the bottom of each page-->
 
 <style>
 	div#footer * {vertical-align:middle;margin:0}
@@ -16,3 +13,8 @@
 		color:white;
 	}
 </style>
+
+<div id=footer>
+	<a href=about.php>About</a>
+</div>
+

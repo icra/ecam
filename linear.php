@@ -24,14 +24,17 @@
 	#linearDiagram img.l2 {width:30px;}
 	#linearDiagram img{border-radius:50%;border:2px solid transparent}
 	#linearDiagram img.selected{border:2px solid}
-	#linearDiagram img:hover {border:2px solid #eee}
+	#linearDiagram img:hover {border:2px solid black}
 </style>
 
 <script>
 	<?php
-		if($_SERVER['PHP_SELF']!="/ecam/stages.php")
-		{ ?>
+		//if we are not in stages.php:
+		if(strpos($_SERVER['PHP_SELF'],"stages.php")===false)
+		{ 
 			//highlight current stage
+			//means we are in edit.php or level3.php
+			?>
 			(function()
 			{
 				//we need to find level and sublevel to create a stage name i.e. "waterAbs"
@@ -69,7 +72,8 @@
 					document.querySelector('img[stage='+stage+']').classList.add('selected')
 				}
 			})();
-		<?php }
+			<?php 
+		}
 	?>
 
 	//go over <img stage=i> to deactivate the ones inactive

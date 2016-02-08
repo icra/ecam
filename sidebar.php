@@ -8,7 +8,6 @@
 			var element=document.querySelector('#sidebar')
 			if(element.className=="on")
 			{
-				element.onmouseover=function(){Sidebar.activate()}
 				setCookie('sidebar',0)
 				element.className="off"
 			}
@@ -25,7 +24,15 @@
 			var element=document.querySelector('#sidebar')
 			if(element.className=='off')
 			{
-				element.onmouseover="";
+				this.toggle();
+			}
+		},
+
+		hide:function()
+		{
+			var element=document.querySelector('#sidebar')
+			if(element.className=='on')
+			{
 				this.toggle();
 			}
 		},
@@ -88,21 +95,25 @@
 
 <div id=sidebar 
 	 class="<?php if(isset($_COOKIE['sidebar']) && $_COOKIE['sidebar']==1){echo "on";}else{echo "off";}?>" 
-	 ondblclick=Sidebar.toggle() 
-	 onmouseover=Sidebar.activate() >
+	 onmouseover=Sidebar.activate() 
+	 onclick="event.stopPropagation()";
+	 >
+	 <script>
+	 	document.body.onclick=function(){Sidebar.hide()};
+	 </script>
 	<style>
 		div#sidebar
 		{
 			position:fixed;
 			top:0; right:0; bottom:0;
 			z-index:999;
-			background:#def4ff;
+			background:white;
 			overflow:hidden;
 			padding:0;margin:0;
 			box-shadow: 5px 5px 10px 5px #888;
 		}
 		div#sidebar.off{width:35px;}
-		div#sidebar.on{width:320px;}
+		div#sidebar.on{width:250px;}
 		div#sidebar.on  div#sidecontent{display:block}
 		div#sidebar.off div#sidecontent{display:none}
 		div#sidebar.on{ transition:all 0.17s; }
@@ -136,7 +147,6 @@
 			<tr><th>General
 			<tr><td><a href=getStarted.php>General info</a>
 			<tr><td><a href=configuration.php>Configuration</a>
-			<tr><td><a href=selection.php>Additional info</a>
 			<tr><th>Level 1
 			<tr><td><a class=water stage=water    href=edit.php?level=Water>Water supply</a>
 			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste>Wastewater</a>
@@ -159,7 +169,7 @@
 			<tr><td><a href=todo.php>To do list</a>
 		</table>
 
-		<div style=color:#999> Double-click to minimize this menu <br>(or click the menu symbol on the top)</div>
+		<div style=color:#999> Click outside to minimize this menu <br>(or click on the symbol on top)</div>
 	</div>
 </div>
 

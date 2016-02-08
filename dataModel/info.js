@@ -120,7 +120,6 @@ var Info = {
 	"ww9" :{description:"Distance to sludge disposal site",             magnitude:"Distance",      unit:"km",},
 	"ww10":{description:"Total Nitrogen concentration effluent limit",  magnitude:"Concentration", unit:"mg/L",},
 	"ww11":{description:"Volume of Fuel consumed",                      magnitude:"Volume",        unit:"L",},
-	"ww12":{description:"Amount of recovered biogas",                   magnitude:"Volume",        unit:"m3",},
 	"ww13":{description:"Annual per capita protein consumption <select id=ww13options onchange=Global.Waste.ww13=parseFloat(this.value);init()> <option value=0>--select country--<option value=20.8>Thailand (20.8)<option value=24.5>Peru (24.5)<option value=33.6>Mexico (33.6) </select> ", magnitude:"Annual per capita consumption",   unit:"kg/person/year",},
 	"ww14":{description:"BOD5 per person per day", magnitude:"Mass/inhab/time",   unit:"g/person/day",},
 	"ww15":{description:"Treated wastewater volume", magnitude:"Volume",   unit:"m3",},
@@ -401,7 +400,6 @@ Info.wst9.explanation="Sum of the volume of water treated by WTPs with Pre-ox/C/
 Info.ww1.explanation="Costs from electric energy consumption for the entire wastewater utilty, based on the electricity bill during the entire assessment period.";
 Info.ww10.explanation="Regulatory limit for total nitrogen concentration at the effluent of the WWTP ";
 Info.ww11.explanation="Fuel consumption in the wastewater system during the assessment period. Fuel consumption may be due to the use of on-site generators, pumps or engines that work on fuel.";
-Info.ww12.explanation="The reply to this question is used to estimate of the GHG emissions related to methane emissions at the WWTP when handling biogas. ";
 Info.ww13.explanation="Protein consumption per capita per year. The default value is provided after selection of country. If you have a specific factor that applies to your region you can provide.";
 Info.ww14.explanation="This represents the average Biochemical oxygen demand (BOD5) that each resident connected to the sewer system eliminates in the wastewater produced every day. The default value is provided after selection of country. This default value shall be adjusted if local studies provide more accurate estimates";
 Info.ww15.explanation="treated wastewater volume (m3) ";

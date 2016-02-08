@@ -25,6 +25,8 @@
 		<li>Lluís Corominas (ICRA)
 		<li>Eva Promes (IWA)
 		<li>Mario González (IWA)
+		<li>Joao Veras (IWA)
+		<li>Carlos Alves (IWA)
 		<li>Corinne Trommssdorff (IWA)
 	</ul>
 	2015-2016 <a href=license.php>License</a>. <br>
