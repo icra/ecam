@@ -78,7 +78,7 @@
 		var contents;
 		reader.onload=function()
 		{
-			copyFieldsFrom(JSON.parse(reader.result),"Global");
+			copyFieldsFrom(JSON.parse(reader.result),Global);
 			updateResult();
 			window.location.reload();
 		}
