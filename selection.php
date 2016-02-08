@@ -94,13 +94,13 @@
 	<table> <tr> <th>
 		<select id=countryUW1 onchange=updateUW1(this.value)>
 			<option value=0>--enter value or select country predefined--
-			<option value=1>Peru
-			<option value=2>Thailand
-			<option value=3>Mexico
+			<option value=0.237721212>Peru
+			<option value=0.626742612>Thailand
+			<option value=0.452483345>Mexico
 			<option value=custom>--CUSTOM--
 		</select>
 		<td>
-		Current value <input style=width:40px id=uw1 value=0 onchange=updateUW1(this.value)> (kg CO2)/kWh
+		Current value <input style=width:80px id=uw1 value=0 onchange=updateUW1(this.value)> (kg CO2)/kWh
 	</table>
 
 	<!--Y/N questions-->
