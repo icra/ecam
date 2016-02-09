@@ -26,5 +26,7 @@
 	<tr><td>Check for colors&patterns in google charts							       <td><b>Done</b>
 	<tr><td>Button update l2 only for "non l3 only"				    			       <td>Pending
 	<tr><td>export summary table button                                                <td>Pending
+	<tr><td>remove c_ww51 from level 3 and show only in level 2
+	<tr><td>default value for wwt8 should be ww15
 </table>
 <!--FOOTER--><?php include'footer.php'?>
