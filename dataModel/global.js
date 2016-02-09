@@ -146,7 +146,7 @@ var Global = {
 
 		c_ww51:function(){return (this.ww6-this.ww7)*this.ww13*0.16*1.1*1.25*0.005*44/28*298},
 		c_ww52:function(){return (this.ww6-this.ww7)*(40/1000*365)*0.06*34},
-		c_ww53:function(){return 298*this.ww10*this.ww15*1000*0.005*(44/28)},
+		c_ww53:function(){return 298*this.ww10*this.ww15/1000*0.005*(44/28)},
 		c_ww54:function(){return this.c_ww58()*(74100+34*3.9+298*3.9)},
 		c_ww55:function(){return 0.02*this.c_ww50()*0.59*0.66*34},
 		c_ww56:function(){
