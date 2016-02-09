@@ -153,17 +153,16 @@ var Info = {
 		c_wwc51:{description:"Volume of dilution from Infiltration and Inflow",  magnitude:"Volume",unit:"m3",},
 
 	//L2 Wastewater Treatment
-	"wwt1" :{description:"Wastewater influent load (BOD5)",magnitude:"Mass",unit:"kg",},
+	"wwt1" :{description:"Influent BOD5 load",magnitude:"Mass",unit:"kg",},
 	"wwt2" :{description:"Biogas produced",magnitude:"Volume",unit:"Nm3",},
 	"wwt3" :{description:"Biogas valorised",magnitude:"Volume",unit:"Nm3",},
-	"wwt5" :{description:"Effluent TN load",magnitude:"Concentration",unit:"mg/L",},
+	"wwt5" :{description:"Effluent TN load",magnitude:"Mass",unit:"kg",},
 	"wwt6" :{description:"Total nitrogen load in the influent",magnitude:"Mass",unit:"kg",},
 	"wwt8" :{description:"Volume of treated wastewater",                                                    magnitude:"Volume",       unit:"m3",},
 	"wwt9" :{description:"Total electric energy consumption",                                                magnitude:"Energy",       unit:"kWh",},
 	"wwt10":{description:"Effluent BOD5",                                                                   magnitude:"Mass",         unit:"kg",},
 	"wwt11":{description:"Electrical energy produced from biogas valorization",                             magnitude:"Energy",       unit:"kWh",},
 	"wwt12":{description:"Percentage of methane in biogas",                                                 magnitude:"Percentage",   unit:"%",},
-	"wwt13":{description:"Influent BOD5 concentration",                                                     magnitude:"Concentration",unit:"mg/L",},
 	"wwt14":{description:"BOD mass removed",                                                                magnitude:"Mass",         unit:"kg",},
 	c_wwt50:{description:"Biogas flared",                                                                   magnitude:"Volume",       unit:"Nm3"},
 	c_wwt51:{description:"Nitrous oxide (CO2e) emitted in wastewater treatment plants, expressed as CO2e",  magnitude:"Mass",         unit:"kg"},
@@ -222,6 +221,7 @@ var Info = {
 	wGHG7   :{description:"GHG emissions from electricity consumption per authorized consumption",  	                                    magnitude:"Mass/Volume",       unit:"kgCO2e/m3"},
 	wS4	    :{description:"Proportion of resident population receiving service",		                                                            magnitude:"Percent",           unit:"%"},
 	wS5	    :{description:"Non-revenue water by volume",                                                                                    magnitude:"Percent",           unit:"%"},	
+	wS6     :{description:"Authorized consumption per pers per day",magnitude:"Volume/inhab/time",unit:"m3/inhab/day"},
 	wwGHG1  :{description:"GHG emissions per capita",                                                                magnitude:"Mass/inhab/time",   unit:"kgCO2e/inhab/year"},
 	wwGHG2  :{description:"GHG emissions per serviced population",                                                   magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year"},
 	wwGHG3  :{description:"GHG emissions per collected wastewater volume",	                                        magnitude:"Mass/inhab/time",   unit:"kgCO2e/m3"},
@@ -231,6 +231,7 @@ var Info = {
 	wwGHG7  :{description:"GHG emissions from other activities than electricity consumption per collected wastewater", magnitude:"Mass/Volume",       unit:"kgCO2e/m3",},
 	wwS1    :{description:"Proportion of resident population receiving service",                                                                  magnitude:"Percent",           unit:"%",},
 	wwS2    :{description:"Collected wastewater treated",                                                                                     magnitude:"Percent",           unit:"%",},
+	wwS5    :{description:"Treated wastewater per pers per day",unit:"Volume/inhab/time",unit:"m3/inhab/day",},
 
 	//PERFORMANCE INDICATORS LEVEL 2
 	wS1	    :{description:"Percentage of quality compliance",                                                                               magnitude:"Percent",         unit:"%",},
@@ -419,30 +420,30 @@ Info.wwg2.explanation="Water-related renewable electrical energy sold by the was
 Info.wwg3.explanation="Non-water related renewable electricity production (e.g. solar or wind) by the wastewater treatment utility during the assessment period";
 Info.wwg4.explanation="Non-water-related renewable electrical energy sold by the wastewater treatment utility (renewable energy) during the assessment period";
 Info.wwg5.explanation="Heat energy produced from a heat pump using wastewater from the urban drinking water system system. The heat energy may be provided to utility building or neighboring districts";
-Info.wwt10.explanation="Average of BOD5 influent concentration during the assessment period by each wastewater treatment plant managed by the undertaking ";
-Info.wwt11.explanation="Energy produced from biogas valorization during the assessment period by each wastewater treatment plant managed by the undertaking";
-Info.wwt11.explanation="Sum of electrical energy produced during the assessment period by all wastewater treatment plants managed by the undertaking";
-Info.wwt12.explanation="Percent of the methane content in the produced biogas";
-Info.wwt13.explanation="BOD5 concentration at the influent of the wastewater treatment plants during the assessment period managed by the undertaking; average over the assessment period";
-Info.wwt14.explanation="BOD mass removed during the assessment period by each wastewater treatment plant managed by the undertaking";
-Info.wwt15.explanation="Number of tests in each wastewater treatment plant that comply with discharge consents during the assessment period";
-Info.wwt16.explanation="Number of tests carried out in each treated wastewater treatment plant during the assessment period";
-Info.wwt17.explanation="Sum of the volume of wastewater treated by WWTPs with trickling filters (TF)";
-Info.wwt18.explanation="Sum of the volume of wastewater treated by WWTPs with activated sludge (AS)";
-Info.wwt19.explanation="Sum of the volume of wastewater treated by WWTPs with AS and Coagulation/Filtration (C/F) ";
+Info.wwt1.explanation="BOD load entering the WWTP during the assessment period. It can be estimated by multiplying the average BOD concentration in the influent by the volume entering the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate";
 Info.wwt2.explanation="Biogas produced during the assessment period by each wastewater treatment plant managed by the undertaking";
-Info.wwt20.explanation="Sum of the volume of wastewater treated by WWTPs with AS nitrification and C/F";
-Info.wwt21.explanation="Sum of the volume of wastewater treated by WWTPs with Laggons";
-Info.wwt22.explanation="Sum of the volume of wastewater treated by WWTPs with other type of treatment ";
-Info.wwt23.explanation="Sludge produced during the assessment period by each wastewater treatment plant managed by the undertaking";
-Info.wwt24.explanation="Average of dry weight in sludge produced during the assessment period by each wastewater treatment plant managed by the undertaking ";
-Info.wwt25.explanation="Treatment capacity of each WWTP that are the responsibility of the wastewater undertaking, during the assessment period";
 Info.wwt3.explanation="Volume of biogas used to generate electricity or for heating (i.e. the anaerobic digester) at the wastewater treatment plant, over the assessment period";
 Info.wwt5.explanation="Total nitrogen load in treated effluent prior to discharge during the assessment period. It can be estimated by multiplying the average TN concentration in the influent by the volume entering the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate.";
 Info.wwt6.explanation="Total nitrogen load entering the WWTP during the assessment period. It can be estimated by multiplying the average TN concentration in the influent by the volume entering the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate.";
 Info.wwt8.explanation="Volume of treated wastewater by each unit, over the assessment period";
 Info.wwt8.explanation="Sum of the volume of wastewater treated by all WWTPs that are the responsibility of the wastewater undertaking, during the assessment period";
 Info.wwt9.explanation="Total energy consumed during the assessment period by all wastewater treatment plants managed by the undertaking";
+Info.wwt10.explanation="Average of BOD5 influent concentration during the assessment period by each wastewater treatment plant managed by the undertaking ";
+Info.wwt11.explanation="Energy produced from biogas valorization during the assessment period by each wastewater treatment plant managed by the undertaking";
+Info.wwt11.explanation="Sum of electrical energy produced during the assessment period by all wastewater treatment plants managed by the undertaking";
+Info.wwt12.explanation="Percent of the methane content in the produced biogas";
+Info.wwt14.explanation="BOD mass removed during the assessment period by each wastewater treatment plant managed by the undertaking";
+Info.wwt15.explanation="Number of tests in each wastewater treatment plant that comply with discharge consents during the assessment period";
+Info.wwt16.explanation="Number of tests carried out in each treated wastewater treatment plant during the assessment period";
+Info.wwt17.explanation="Sum of the volume of wastewater treated by WWTPs with trickling filters (TF)";
+Info.wwt18.explanation="Sum of the volume of wastewater treated by WWTPs with activated sludge (AS)";
+Info.wwt19.explanation="Sum of the volume of wastewater treated by WWTPs with AS and Coagulation/Filtration (C/F) ";
+Info.wwt20.explanation="Sum of the volume of wastewater treated by WWTPs with AS nitrification and C/F";
+Info.wwt21.explanation="Sum of the volume of wastewater treated by WWTPs with Laggons";
+Info.wwt22.explanation="Sum of the volume of wastewater treated by WWTPs with other type of treatment ";
+Info.wwt23.explanation="Sludge produced during the assessment period by each wastewater treatment plant managed by the undertaking";
+Info.wwt24.explanation="Average of dry weight in sludge produced during the assessment period by each wastewater treatment plant managed by the undertaking ";
+Info.wwt25.explanation="Treatment capacity of each WWTP that are the responsibility of the wastewater undertaking, during the assessment period";
 
 //KPI explanations
 Info.aE1.explanation="Unit energy consumption per abstracted water in water abstraction and conveyance (gravity or pumped)";
@@ -533,3 +534,5 @@ Info.wwS1.explanation="Percentage of the resident population that are connected 
 Info.wwS2.explanation="Percentage of the collected sewage prior to dilution or overflows in the sewer system that are treated in wastewater treatment plants";
 Info.wwS3.explanation="Percentage of water quality tests carried out in wastewater treatment plants that comply with discharge consents";
 Info.wwS4.explanation="Percentage of Infiltration and inflow water entering the sewer system compared to the volume of collected wastewater prior to dilution";
+Info.wS6.explanation="Volume of authorized consumption per serviced person in the service area managed by the undertaking divided by the duration of the assessment period";
+Info.wwS5.explanation="Volume of treated wastewater per serviced person in the service area managed by the undertaking divided by the duration of the assessment period"; 
