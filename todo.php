@@ -13,20 +13,24 @@
 <!--mail me--><div> Send mail to Lluis Bosch <a href=mailto:lbosch@icra.cat>lbosch@icra.cat</a> </div>
 <!--TO DO LIST-->
 <table id=todo>
-	<tr><th>Task																	   <th>Status
+	<tr><th>Task																	<th>Status
+
 	<tr><td colspan=2 class=taskgroup>BACK-END
-	<tr><td>Option to switch m3 to m3/day (assessment period) (ie ws6)				   <td>Pending
-	<tr><td>Option to have BOD in kg or mg/L (dividing by another variable)			   <td>Pending
-	<tr><td>wsa11 and wsa12 not clear (pump size and motor type)                       <td>Not sure how to proceed
+	<tr><td>Create option to switch m3 to m3/day (assessment period) (ie ws6)<td>Need further explanation
+	<tr><td>Create option to have BOD in kg or mg/L (dividing by another variable)<td>Need further explanation
+	<tr><td>Variables wsa11 and wsa12 not clear (pump size and motor type)<td>Need further explanation
+	<tr><td>If you add more than 20 substages they disappear. Find out why<td>Pending
+
 	<tr><td colspan=2 class=taskgroup>FRONT-END
-	<tr><td>Merge calculated variables with inputs in summary						   <td><b>Started</b>
-	<tr><td>Merge calculated variables with inputs in L3							   <td>Pending
-	<tr><td>Create Warning in new system											   <td>Pending
-	<tr><td>Configuration for hiding codes											   <td>Pending
-	<tr><td>Check for colors&patterns in google charts							       <td><b>Done</b>
-	<tr><td>Button update l2 only for "non l3 only"				    			       <td>Pending
-	<tr><td>export summary table button                                                <td>Pending
-	<tr><td>remove c_ww51 from level 3 and show only in level 2
-	<tr><td>default value for wwt8 should be ww15
+	<tr><td>Summary for calculated variables<td>Pending
+	<tr><td>Summary for KPIs<td>Pending
+	<tr><td>Merge calculated variables with inputs in L3<td>Pending
+	<tr><td>Create Warning in new system button<td>Pending
+	<tr><td>Configuration for hiding codes<td>Pending
+	<tr><td>Implement graphs<td>Pending
+	<tr><td>Export summary table button<td>Pending
+	<tr><td>Remove c_ww51 from level 3 and show only in level 2<td>Pending
+	<tr><td>Default value for wwt8 should be ww15<td>Pending
+	<tr><td>Show at level 2 for  wdE3 and wdE5 which says “level 3 data is required"<td>Pending
 </table>
 <!--FOOTER--><?php include'footer.php'?>
