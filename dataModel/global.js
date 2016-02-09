@@ -177,7 +177,7 @@ var Global = {
 				if(Global.Waste.Treatment.wwt8==0)
 					return 0;
 				else
-					return (Global.Waste.ww14*Global.Waste.ww7*Global.General.Days()/Global.Waste.Treatment.wwt1*Global.Waste.Treatment.wwt8)-Global.Waste.ww4*Global.Waste.ww7/Global.Waste.ww6||0
+					return (Global.Waste.ww14*Global.Waste.ww7*Global.General.Days()/Global.Waste.Treatment.wwt1*Global.Waste.Treatment.wwt8/1000)-Global.Waste.ww4*Global.Waste.ww7/Global.Waste.ww6||0
 			},
 			/*<Level3>*/
 			"wwc3":0,

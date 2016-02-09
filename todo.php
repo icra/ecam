@@ -19,9 +19,9 @@
 	<tr><td>Create option to switch m3 to m3/day (assessment period) (ie ws6)<td class=priority>Need further explanation</td>
 	<tr><td>Create option to have BOD in kg or mg/L (dividing by another variable)<td class=priority>Need further explanation</td>
 	<tr><td>Variables wsa11 and wsa12 not clear (pump size and motor type)<td class=priority>Need further explanation</td>
-	<tr><td>If you add more than 20 substages they disappear. Find out why<td>Pending</td>
+	<tr><td>If you add more than 20 substages, some disappear. Find out why<td>Pending</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
-	<tr><td>Summary for KPIs<td>Pending</td>
+	<tr><td>Summary for CVs<td>Pending</td>
 	<tr><td>Merge calculated variables with inputs in L3<td>Pending</td>
 	<tr><td>Create Warning in new system button<td>Pending</td>
 	<tr><td>Configuration for hiding codes<td>Pending</td>
