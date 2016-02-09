@@ -26,6 +26,8 @@
 <script src="dataModel/info.js"></script>            <!--All variable descriptions and units object here-->
 <script src="dataModel/locateVariable.js"></script>  <!--function to locate codes inside Global object-->
 <script src="dataModel/level3variables.js"></script> <!--list of variables exclusive to level3-->
+<script src="dataModel/level2warnings.js"></script>  <!--variables shown in level 2 with a warning-->
+<script src="dataModel/level2only.js"></script>      <!--variables shown in level 2 but not in level 3-->
 <script src="dataModel/formulas.js"></script>        <!--functions dealing with formulas-->
 <script src="dataModel/units.js"></script>           <!--functions dealing with unit conversion in-->
 <script src="dataModel/tables.js"></script>          <!--data regarding constants-->

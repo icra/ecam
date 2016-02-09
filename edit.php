@@ -114,7 +114,9 @@
 				}
 				else newCell.style.textAlign='center'
 
-				/*value*/newCell.innerHTML=(function(){
+				/*value*/
+				newCell.innerHTML=(function()
+				{
 					if(isCV)
 						return Math.floor(1e2*CurrentLevel[field]()/Units.multiplier(field))/1e2;
 					else
@@ -123,6 +125,11 @@
 				//unit
 				newRow.insertCell(-1).innerHTML=(function()
 				{
+					if(Info[field].magnitude=="Currency")
+					{
+						return Global.General.Currency;
+					}
+
 					if(isCV) 
 					{
 						return Info[field].unit;
@@ -194,6 +201,9 @@
 				newRow.setAttribute('onmouseover','Formulas.hlFields("'+prettyFormula+'",1)');
 				newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+prettyFormula+'",0)');
 
+				//compute now the value for creating the indicator
+				var value = Math.floor(1e2*CurrentLevel[field]()/Units.multiplier(field))/1e2;
+
 				/*circle indicator*/ 
 				newCell=newRow.insertCell(-1);
 				newCell.style.textAlign='center';
@@ -227,10 +237,16 @@
 					var code = "<a href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";
 				})();
-				var value = Math.floor(1e2*CurrentLevel[field]()/Units.multiplier(field))/1e2;
 				/*value*/ 
 				newCell=newRow.insertCell(-1)
-				newCell.innerHTML=value;
+				newCell.innerHTML=(function()
+				{
+					if(Level2Warnings.isIn(field))
+					{
+						return value+" <span style=color:#999>("+Level2Warnings[field]+")</span>";
+					}
+					return value;
+				})();
 				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
 			}
 		}

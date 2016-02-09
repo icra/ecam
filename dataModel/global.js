@@ -11,6 +11,7 @@ var Global = {
 			return (finalDate-startDate)/1000/60/60/24;
 		},
 		"Comments":"",
+		"Currency":"USD",
 	},
 
 	/** Level 1 - Urban water system */
@@ -463,14 +464,10 @@ var Global = {
 	Global.Waste.Discharge.wdE2	 = function(){return 100*this.wwd3/Global.UWS.c_uw52()||0}
 	Global.Waste.Discharge.wdE3	 = function()
 	{
-		//if sum of wwd5_n is not 0 , ELSE wdE3=0
-		var sum_wwd5=0;
-		var arr=Global.Level3.Waste.Discharge;
-		for(var s in arr) { sum_wwd5+=arr[s].wwd5; }
-		if(sum_wwd5==0)
+		if(this.wwd5==0)
 			return 0;
 		else
-			return this.wwd3/this.c_wwd50||0;
+			return this.wwd3/this.c_wwd50()||0;
 	}
 	Global.Waste.Discharge.wdE4	 = function(){return this.wwd4/this.wwd1||0}
 	Global.Waste.Discharge.wdE5	 = function()

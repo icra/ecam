@@ -99,7 +99,7 @@
 	 onclick="event.stopPropagation()";
 	 >
 	 <script>
-	 	document.body.onclick=function(){Sidebar.hide()};
+	 	document.documentElement.onclick=function(){Sidebar.hide()};
 	 </script>
 	<style>
 		div#sidebar
@@ -161,9 +161,7 @@
 			<tr><td><a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge>Wastewater discharge</a>
 			<tr><th>Summary
 			<tr><td><a href=summary.php?type=input>All inputs</a>
-			<tr><td><a href=summary.php?type=output>All outputs</a>
-			<tr><td>All Variables
-			<tr><td>All Key Performance Indicators
+			<tr><td><a href=summary.php?type=output>All Performance Indicators (PIs)</a>
 			<tr><td><a href=graphs.php>Graphs</a>
 			<tr><th>Other
 			<tr><td><a href=todo.php>To do list</a>
@@ -188,7 +186,7 @@
 			var href=links[i].getAttribute('href');
 			if(encodeURIComponent(requri).search(encodeURIComponent(href)+"$")!=-1)	
 			{
-				links[i].parentNode.style.backgroundColor="white";
+				links[i].parentNode.style.backgroundColor="yellow";
 				links[i].style.color="black";
 				break;
 			}

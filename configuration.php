@@ -143,6 +143,11 @@
 				}
 			});
 		}
+
+		function updateCurrency()
+		{
+			document.getElementById('currency').innerHTML=Global.General.Currency
+		}
 	</script>
 	<script>
 		function stageName(stage)
@@ -165,6 +170,7 @@
 		function init()
 		{
 			redisplayUW1menu();
+			updateCurrency();
 			updateFuelSelectionVisibility();
 			updateFuelSelection();
 			Sidebar.update();
@@ -239,6 +245,13 @@
 			</select>
 			<td>Current value <input style=width:80px id=uw1 value=0 onchange=updateUW1(this.value)> (kg CO2)/kWh
 		</table>
+	</fieldset>
+
+	<!--currency: 3 letters-->
+	<fieldset>
+		<legend>Currency: <span id=currency></span></legend>
+		Write new currency (3 letters max):
+		<input size=3 maxlength=3 placeholder="new" onchange=updateField(Global.General,"Currency",this.value)>
 	</fieldset>
 
 	<!--questions-->

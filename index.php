@@ -38,7 +38,7 @@
 </div>
 
 <div style=text-align:right;padding-right:4em>
-	Mouse over the bar on the right to display the navigation menu &rarr;
+	Display the navigation menu &rarr;
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>

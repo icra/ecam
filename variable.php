@@ -114,7 +114,7 @@
 						var match_level = match_localization.level
 						var match_sublevel = match_localization.sublevel
 						var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level]
-						var currentUnit = Global.Configuration.Units[match] || Info[match].unit
+						var currentUnit= (Info[match].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[match]||Info[match].unit);
 						//matches can be either numbers or other functions
 						var currValue = typeof(match_stage[match])=="function" ? match_stage[match]() : match_stage[match];
 						currValue/=Units.multiplier(match);
@@ -145,7 +145,7 @@
 						var match_level = match_localization.level
 						var match_sublevel = match_localization.sublevel
 						var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level]
-						var currentUnit = Global.Configuration.Units[output] || Info[output].unit
+						var currentUnit= (Info[output].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[output]||Info[output].unit);
 						var formula = Formulas.prettify(match_stage[output].toString());
 						var currValue = match_stage[output]()/Units.multiplier(output);
 						currValue=Math.floor(1e2*currValue)/1e2;
@@ -154,7 +154,7 @@
 							match_localization.toString()+
 							" <a style='color:"+color+"' title='"+Info[output].description+
 							"' href=variable.php?id="+output+">"+output+"</a> = "+
-							"<span style=color:#666>"+formula+"</span> = "+currValue+" ["+currentUnit+"]"+
+							"<span style=color:#666>"+formula+"</span> = "+currValue+" "+currentUnit+
 							"</div>";
 					});
 					return ret;
@@ -172,8 +172,9 @@
 				newCell.style.backgroundColor='yellow'
 				newCell.innerHTML=(function()
 				{
+					var unit=Info[id].magnitude=="Currency"?Global.General.Currency : Info[id].unit;
 					var currValue=currentStage[id]()/Units.multiplier(id);
-					return currValue+" "+Info[id].unit;
+					return currValue+" "+unit;
 				})();
 			}
 			else
@@ -192,6 +193,10 @@
 				newCell.innerHTML="Unit"
 				newRow.insertCell(-1).innerHTML=(function()
 				{
+					if(Info[id].magnitude=="Currency")
+					{
+						return Global.General.Currency;
+					}
 					var str="<select onchange=Units.selectUnit('"+id+"',this.value)>";
 					if(Units[Info[id].magnitude]===undefined)
 					{

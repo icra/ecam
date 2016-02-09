@@ -247,6 +247,11 @@
 					//Unit for current input
 					newRow.insertCell(-1).innerHTML=(function()
 					{
+						if(Info[code].magnitude=="Currency")
+						{
+							return Global.General.Currency;
+						}
+
 						var str="<select onchange=Units.selectUnit('"+code+"',this.value)>";
 						if(Units[Info[code].magnitude]===undefined)
 						{
@@ -320,6 +325,10 @@
 			{
 				//only functions
 				if(typeof(CurrentStage[field])!="function"){continue;}
+				//exclude the "level2only" variables
+				if(Level2only.isInList(field)){
+					console.log(field+" is level 2 only");
+					continue;}
 				//skip the field called "modification" created to help calculate functions for each substage
 				if(field=="modification"){continue;}
 
