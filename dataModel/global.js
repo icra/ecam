@@ -144,7 +144,7 @@ var Global = {
 				return 0;
 		},
 
-		c_ww51:function(){return (this.ww6-this.ww7)*this.ww13*0.16*1.1*1.25*0.005*44/28*298},
+		c_ww51:function(){return (this.ww6-this.ww7)*this.ww13*(Global.General.Days()/365)*0.16*1.1*1.25*0.005*44/28*298},
 		c_ww52:function(){return (this.ww6-this.ww7)*(40/1000*365)*0.06*34},
 		c_ww53:function(){return 298*this.ww10*this.ww15/1000*0.005*(44/28)},
 		c_ww54:function(){return this.c_ww58()*(74100+34*3.9+298*3.9)},
@@ -339,7 +339,7 @@ var Global = {
 	Global.Waste.wwGHG3 = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())/this.ww4||0}	
 	Global.Waste.wwGHG4	= function(){return this.ww3*Global.UWS.uw1/Global.Waste.ww7||0}
 	Global.Waste.wwGHG5	= function(){return this.ww3*Global.UWS.uw1/Global.Waste.ww4||0}
-	Global.Waste.wwGHG6 = function(){return (this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())/this.ww7||0}
+	Global.Waste.wwGHG6 = function(){return (this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*(365/Global.General.Days())/this.ww7||0}
 	Global.Waste.wwGHG7 = function(){return (this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())/this.ww4||0}
 
 /** Performance Indicators L2
