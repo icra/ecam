@@ -27,7 +27,8 @@
 	<tr><td>Configuration for hiding codes<td>Pending</td>
 	<tr><td>Implement graphs<td>Pending</td>
 	<tr><td>Export summary table button<td>Pending</td>
-	<tr><td>(comment 13 corinne) Default value for wwt8 should be ww15<td>Pending</td>
+	<tr><td>(comment 13 corinne) Default value for wwt8 should be ww15<td>Waiting for answer</td>
+	<tr><td>Change name of the 23 repeated PI codes (<a href=dataModel/repeatedPIs.txt>list</a>)<td>Waiting for answer</td>
 </table>
 <!--FOOTER--><?php include'footer.php'?>
 
@@ -36,6 +37,7 @@
 	var coll = document.querySelectorAll("td");
 	for(var i=0;i<coll.length;i++)
 	{
-		if(coll[i].textContent=="Pending") coll[i].style.backgroundColor='orange'
+		if(coll[i].textContent=="Pending"){coll[i].style.backgroundColor='orange';continue}
+		if(coll[i].textContent=="Waiting for answer"){coll[i].style.backgroundColor='#af0';continue}
 	}
 </script>

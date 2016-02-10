@@ -105,18 +105,17 @@
 		div#sidebar
 		{
 			position:fixed;
-			top:0; right:0; bottom:0;
-			z-index:999;
+			top:0;right:0;bottom:0;z-index:999;
 			background:white;
 			overflow:hidden;
 			padding:0;margin:0;
 			box-shadow: 5px 5px 10px 5px #888;
+			transition:all 0.15s;
 		}
-		div#sidebar.off{width:35px;}
-		div#sidebar.on{width:250px;}
+		div#sidebar.off{width:40px;}
+		div#sidebar.on{width:260px;}
 		div#sidebar.on  div#sidecontent{display:block}
 		div#sidebar.off div#sidecontent{display:none}
-		div#sidebar.on{ transition:all 0.17s; }
 		div#sidebar div{padding:0;margin:0}
 		div#sidebar table{margin:0.7em}
 		div#sidebar td, div#sidebar th {padding:0.3em}

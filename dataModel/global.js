@@ -298,79 +298,105 @@ var Global = {
 	},
 }
 
-/* Performance Indicators L1 */
+/** PERFORMANCE INDICATORS */
+
+/**
+	List of repeated PIs that need to be renamed: (implementation just below)
+		gE2w  
+		gE3w  
+		gE4w  
+		gE2ww 
+		gE3ww 
+		gE4ww 
+		wGHG1 
+		wGHG2 
+		wGHG3 
+		wGHG4 
+		wGHG5 
+		wGHG6 
+		wGHG7 
+		wwGHG1
+		wwGHG2
+		wwGHG3
+		wwGHG4
+		wwGHG5
+		wS1   
+		wS2   
+		wS3   
+		wwS3  
+		wwS4  
+*/
+	Global.Water.gE2w             = function(){return this.ws5*365/Global.General.Days()/this.ws2||0}
+	Global.Water.General.gE2w     = function(){return this.c_wsg50()*365/Global.General.Days()/Global.Water.ws2||0}
+	Global.Water.gE3w             = function(){return this.ws5*365/Global.General.Days()/this.ws1||0}
+	Global.Water.General.gE3w     = function(){return this.c_wsg50()*365/Global.General.Days()/Global.Water.ws1||0}
+	Global.Water.gE4w             = function(){return this.ws5/this.ws7||0}
+	Global.Water.General.gE4w     = function(){return this.c_wsg50()/Global.Water.ws7||0}
+	Global.Water.wGHG1            = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())*365/Global.General.Days()/this.ws2||0} 
+	Global.Water.General.wGHG1    = function(){return ((Global.Water.ws5-this.wsg2-this.wsg4)*Global.UWS.uw1+Global.Water.c_ws51()-this.c_wsg52())*365/Global.General.Days()/Global.Water.ws2||0}
+	Global.Water.wGHG2            = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())*365/Global.General.Days()/this.ws1||0}	
+	Global.Water.General.wGHG2    = function(){return ((Global.Water.ws5-this.wsg2-this.wsg4)*Global.UWS.uw1+Global.Water.c_ws51()-this.c_wsg52())*365/Global.General.Days()/Global.Water.ws1||0}
+	Global.Water.wGHG3            = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())/this.ws7||0}
+	Global.Water.General.wGHG3    = function(){return ((Global.Water.ws5-this.wsg2-this.wsg4)*Global.UWS.uw1+Global.Water.c_ws51()-this.c_wsg52())*365/Global.General.Days()/Global.Water.ws7||0}
+	Global.Water.wGHG4            = function(){return this.c_ws51()/this.ws1||0}
+	Global.Water.General.wGHG4    = function(){return Global.Water.wGHG4()}
+	Global.Water.wGHG5            = function(){return this.c_ws51()/this.ws7||0}
+	Global.Water.General.wGHG5    = function(){return Global.Water.wGHG5()}
+	Global.Water.wGHG6            = function(){return (this.ws5*Global.UWS.uw1)/this.ws1||0}
+	Global.Water.General.wGHG6    = function(){return (this.c_wsg50()*Global.UWS.uw1-this.c_wsg52())/Global.Water.ws1||0}
+	Global.Water.wGHG7            = function(){return (this.ws5*Global.UWS.uw1)/this.ws7||0}
+	Global.Water.General.wGHG7    = function(){return (this.c_wsg50()*Global.UWS.uw1-this.c_wsg52())/Global.Water.ws7||0}
+	Global.Water.wS1              = function(){return Global.Water.Treatment.wS1()}
+	Global.Water.Treatment.wS1    = function(){return 100*(this.wst4+this.wst5+this.wst6+this.wst7)/this.wst3||0}
+	Global.Water.wS2              = function(){return Global.Water.Distribution.wS2()}
+	Global.Water.Distribution.wS2 = function(){return 100*this.wsd2/this.wsd3||0}
+	Global.Water.wS3              = function(){return Global.Water.Distribution.wS3()}
+	Global.Water.Distribution.wS3 = function(){return 100*this.wsd4/24/Global.General.Days()}
+	Global.Waste.gE2ww            = function(){return this.ww3*365/Global.General.Days()/this.ww5||0}
+	Global.Waste.General.gE2ww    = function(){return this.c_wwg50()*365/Global.General.Days()/Global.Waste.ww5||0}
+	Global.Waste.gE3ww            = function(){return this.ww3*365/Global.General.Days()/this.ww7||0}
+	Global.Waste.General.gE3ww    = function(){return this.c_wwg50()*365/Global.General.Days()/Global.Waste.ww7||0}
+	Global.Waste.gE4ww            = function(){return this.ww3/this.ww4||0}
+	Global.Waste.General.gE4ww    = function(){return this.c_wwg50()/Global.Waste.ww4||0}
+	Global.Waste.wwGHG1           = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*365/Global.General.Days()/this.ww5||0}
+	Global.Waste.General.wwGHG1   = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1+Global.Waste.c_ww57()+Global.Waste.c_ww55()+Global.Waste.c_ww53()+Global.Waste.c_ww51()+Global.Waste.c_ww52()+Global.Waste.c_ww54()-this.c_wwg52())*365/Global.General.Days()/Global.Waste.ww5||0}
+	Global.Waste.wwGHG2           = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*365/Global.General.Days()/this.ww7||0}
+	Global.Waste.General.wwGHG2   = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1+Global.Waste.c_ww57()+Global.Waste.c_ww55()+Global.Waste.c_ww53()+Global.Waste.c_ww51()+Global.Waste.c_ww52()+Global.Waste.c_ww54()-this.c_wwg52())*365/Global.General.Days()/Global.Waste.ww7||0} 
+	Global.Waste.wwGHG3           = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())/this.ww4||0}	
+	Global.Waste.General.wwGHG3   = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1+Global.Waste.c_ww57()+Global.Waste.c_ww55()+Global.Waste.c_ww53()+Global.Waste.c_ww51()+Global.Waste.c_ww52()+Global.Waste.c_ww54()-this.c_wwg52())/Global.Waste.ww4||0}
+	Global.Waste.wwGHG4	          = function(){return this.ww3*Global.UWS.uw1/Global.Waste.ww7||0}
+	Global.Waste.General.wwGHG4	  = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1-this.c_wwg52())*365/Global.General.Days()/Global.Waste.ww7||0}
+	Global.Waste.wwGHG5	          = function(){return this.ww3*Global.UWS.uw1/Global.Waste.ww4||0}
+	Global.Waste.General.wwGHG5	  = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1-this.c_wwg52())*365/Global.General.Days()/Global.Waste.ww4||0}
+	Global.Waste.wwS3             = function(){return Global.Waste.Treatment.wwS3()}
+	Global.Waste.Treatment.wwS3	  = function(){return 100*this.wwt15/this.wwt16||0}
+	Global.Waste.wwS4             = function(){return Global.Waste.Collection.wwS4()}
+	Global.Waste.Collection.wwS4  = function(){return 100*this.c_wwc51()/Global.Waste.ww4||0}
+/*------end of repeated pis that need to be renamed-----------------------------------------------------*/
+
+//L1 PIs
+	Global.Water.gE1w   = function(){return 100*this.ws3/this.ws4||0}		
+	Global.Water.wS4    = function(){return 100*this.ws1/this.ws2||0}
 	Global.Water.wS5    = function()
 	{
 		if(Global.Water.Abstraction.wsa2==0)
 		{
-			/*level 1*/
 			return this.ws8;
 		}
 		else 
 		{
-			/*level 2*/
 			return (100*this.ws7/Global.Water.Abstraction.wsa2)||0; 
 		}
 	}
-	Global.Water.wS4    = function(){return 100*this.ws1/this.ws2||0}
 	Global.Water.wS6    = function(){return this.ws7/this.ws1/Global.General.Days()||0}
-	Global.Water.gE1w   = function(){return 100*this.ws3/this.ws4||0}		
-	Global.Water.gE2w   = function(){return this.ws5*365/Global.General.Days()/this.ws2||0}
-	Global.Water.gE3w   = function(){return this.ws5*365/Global.General.Days()/this.ws1||0}
-	Global.Water.gE4w   = function(){return this.ws5/this.ws7||0}
-	Global.Water.wGHG1  = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())*365/Global.General.Days()/this.ws2||0} 
-	Global.Water.wGHG2  = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())*365/Global.General.Days()/this.ws1||0}	
-	Global.Water.wGHG3  = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())/this.ws7||0}
-	Global.Water.wGHG4  = function(){return this.c_ws51()/this.ws1||0}
-	Global.Water.wGHG5  = function(){return this.c_ws51()/this.ws7||0}
-	Global.Water.wGHG6  = function(){return (this.ws5*Global.UWS.uw1)/this.ws1||0}
-	Global.Water.wGHG7  = function(){return (this.ws5*Global.UWS.uw1)/this.ws7||0}
-
+	Global.Waste.gE1ww  = function(){return 100*this.ww1/this.ww2||0}
 	Global.Waste.wwS1   = function(){return 100*this.ww7/this.ww5||0}
 	Global.Waste.wwS2   = function(){return 100*this.ww7/this.ww6||0}
-	Global.Waste.wwS4   = function(){return Global.Waste.Collection.wwS4()}
 	Global.Waste.wwS5   = function(){return this.ww15/this.ww7/Global.General.Days()||0}
-	Global.Waste.gE1ww  = function(){return 100*this.ww1/this.ww2||0}
-	Global.Waste.gE2ww  = function(){return this.ww3*365/Global.General.Days()/this.ww5||0}
-	Global.Waste.gE3ww  = function(){return this.ww3*365/Global.General.Days()/this.ww7||0}
-	Global.Waste.gE4ww  = function(){return this.ww3/this.ww4||0}
-	Global.Waste.wwGHG1 = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*365/Global.General.Days()/this.ww5||0}
-	Global.Waste.wwGHG2 = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*365/Global.General.Days()/this.ww7||0}
-	Global.Waste.wwGHG3 = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())/this.ww4||0}	
-	Global.Waste.wwGHG4	= function(){return this.ww3*Global.UWS.uw1/Global.Waste.ww7||0}
-	Global.Waste.wwGHG5	= function(){return this.ww3*Global.UWS.uw1/Global.Waste.ww4||0}
 	Global.Waste.wwGHG6 = function(){return (this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*(365/Global.General.Days())/this.ww7||0}
 	Global.Waste.wwGHG7 = function(){return (this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())/this.ww4||0}
 
-/** Performance Indicators L2
-	- Corinne says: The below service indicators can only be calculated when Level 3 is documented. 
-		Display at level one with a warning explaining that these service levels indicators are necessary to document (by going to level 3) 
-		list: wS1 wS2 wS3 wwS3 
-*/
-	Global.Water.wS1              = function(){return Global.Water.Treatment.wS1()}
-	Global.Water.wS2              = function(){return Global.Water.Distribution.wS2()}
-	Global.Water.wS3              = function(){return Global.Water.Distribution.wS3()}
-	Global.Waste.wwS3             = function(){return Global.Waste.Treatment.wwS3()}
-	Global.Water.Treatment.wS1    = function(){return 100*(this.wst4+this.wst5+this.wst6+this.wst7)/this.wst3||0}
-	Global.Water.Distribution.wS2 = function(){return 100*this.wsd2/this.wsd3||0}
-	Global.Water.Distribution.wS3 = function(){return 100*this.wsd4/24/Global.General.Days()}
-	Global.Waste.Treatment.wwS3	  = function(){return 100*this.wwt15/this.wwt16||0}
-
-/** When Level 2 data is documented, overwrite the Level 1 Pis with the result of the formula shown below (only for w/ww General substages)
-	If level 2 is not documented or not all necessary variables are documented then display Level 1 PI result in the level 2 outputs			
-*/
-
-//L2 Water stages
-	Global.Water.General.gE2w     = function(){return this.c_wsg50()*365/Global.General.Days()/Global.Water.ws2||0}
-	Global.Water.General.gE3w     = function(){return this.c_wsg50()*365/Global.General.Days()/Global.Water.ws1||0}
-	Global.Water.General.gE4w     = function(){return this.c_wsg50()/Global.Water.ws7||0}
-	Global.Water.General.wGHG1    = function(){return ((Global.Water.ws5-this.wsg2-this.wsg4)*Global.UWS.uw1+Global.Water.c_ws51()-this.c_wsg52())*365/Global.General.Days()/Global.Water.ws2||0}
-	Global.Water.General.wGHG2    = function(){return ((Global.Water.ws5-this.wsg2-this.wsg4)*Global.UWS.uw1+Global.Water.c_ws51()-this.c_wsg52())*365/Global.General.Days()/Global.Water.ws1||0}
-	Global.Water.General.wGHG3    = function(){return ((Global.Water.ws5-this.wsg2-this.wsg4)*Global.UWS.uw1+Global.Water.c_ws51()-this.c_wsg52())*365/Global.General.Days()/Global.Water.ws7||0}
-	Global.Water.General.wGHG4    = function(){return Global.Water.wGHG4()}
-	Global.Water.General.wGHG5    = function(){return Global.Water.wGHG5()}
-	Global.Water.General.wGHG6    = function(){return (this.c_wsg50()*Global.UWS.uw1-this.c_wsg52())/Global.Water.ws1||0}
-	Global.Water.General.wGHG7    = function(){return (this.c_wsg50()*Global.UWS.uw1-this.c_wsg52())/Global.Water.ws7||0}
+//L2 PIs
 	Global.Water.Abstraction.aE1  = function(){return this.wsa1/this.wsa2||0}
 	Global.Water.Abstraction.aE2  = function(){return 100*this.wsa1/Global.UWS.c_uw52()||0}
 	Global.Water.Abstraction.aE3  = function(){return this.wsa1/this.c_wsa50()||0}
@@ -395,44 +421,33 @@ var Global = {
 	Global.Water.Distribution.dE5 = function(){return 100*this.c_wsd53()/(this.c_wsd52()-this.wsd17)||0}
 	Global.Water.Distribution.dE6 = function(){return (this.wsd9-this.wsd4)/Global.General.Days()/this.wsd18||0}
 	Global.Water.Distribution.dE7 = function(){return this.wsd19/this.wsd18||0}
-
-//L2 Waste stages
-	Global.Waste.General.gE2ww   = function(){return this.c_wwg50()*365/Global.General.Days()/Global.Waste.ww5||0}
-	Global.Waste.General.gE3ww   = function(){return this.c_wwg50()*365/Global.General.Days()/Global.Waste.ww7||0}
-	Global.Waste.General.gE4ww   = function(){return this.c_wwg50()/Global.Waste.ww4||0}
-	Global.Waste.General.wwGHG1  = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1+Global.Waste.c_ww57()+Global.Waste.c_ww55()+Global.Waste.c_ww53()+Global.Waste.c_ww51()+Global.Waste.c_ww52()+Global.Waste.c_ww54()-this.c_wwg52())*365/Global.General.Days()/Global.Waste.ww5||0}
-	Global.Waste.General.wwGHG2  = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1+Global.Waste.c_ww57()+Global.Waste.c_ww55()+Global.Waste.c_ww53()+Global.Waste.c_ww51()+Global.Waste.c_ww52()+Global.Waste.c_ww54()-this.c_wwg52())*365/Global.General.Days()/Global.Waste.ww7||0} 
-	Global.Waste.General.wwGHG3  = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1+Global.Waste.c_ww57()+Global.Waste.c_ww55()+Global.Waste.c_ww53()+Global.Waste.c_ww51()+Global.Waste.c_ww52()+Global.Waste.c_ww54()-this.c_wwg52())/Global.Waste.ww4||0}
-	Global.Waste.General.wwGHG4	 = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1-this.c_wwg52())*365/Global.General.Days()/Global.Waste.ww7||0}
-	Global.Waste.General.wwGHG5	 = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1-this.c_wwg52())*365/Global.General.Days()/Global.Waste.ww4||0}
-	Global.Waste.General.wwGHG8	 = function(){return Global.Waste.c_ww57()*365/Global.General.Days()/Global.Waste.ww7||0}
-	Global.Waste.General.wwGHG9	 = function(){return Global.Waste.c_ww57()/Global.Waste.ww4||0}
-	Global.Waste.General.wwGHG10 = function(){return Global.Waste.c_ww55()*365/Global.General.Days()/Global.Waste.ww7||0}
-	Global.Waste.General.wwGHG11 = function(){return Global.Waste.c_ww55()/Global.Waste.ww4||0}
-	Global.Waste.General.wwGHG12 = function(){return Global.Waste.c_ww53()*365/Global.General.Days()/Global.Waste.ww7||0}
-	Global.Waste.General.wwGHG13 = function(){return Global.Waste.Treatment.c_wwt60()/Global.Waste.ww4||0}
-	Global.Waste.General.wwGHG14 = function(){return (Global.Waste.c_ww51()+Global.Waste.c_ww52())*365/Global.General.Days()/Global.Waste.ww7||0}
-	Global.Waste.General.wwGHG15 = function(){return (Global.Waste.c_ww51()+Global.Waste.c_ww52())/Global.Waste.ww4||0}
-	Global.Waste.General.wwGHG16 = function(){return Global.Waste.c_ww54()*365/Global.General.Days()/Global.Waste.ww7||0}
-	Global.Waste.General.wwGHG17 = function(){return Global.Waste.c_ww54()/Global.Waste.ww4||0}
-	Global.Waste.Collection.wcE1 = function(){return this.wwc2/this.wwc1||0}
-	Global.Waste.Collection.wcE2 = function(){return 100*this.wwc2/Global.UWS.c_uw52()||0}
-	Global.Waste.Collection.wcE3 = function(){return this.wwc2/this.c_wwc50()||0}
-	Global.Waste.Collection.wwS4 = function(){return 100*this.c_wwc51()/Global.Waste.ww4||0}
-	Global.Waste.Treatment.wtE01 = function(){return 100*this.wwt17/this.wwt8||0}
-	Global.Waste.Treatment.wtE02 = function(){return 100*this.wwt18/this.wwt8||0}
-	Global.Waste.Treatment.wtE03 = function(){return 100*this.wwt19/this.wwt8||0}
-	Global.Waste.Treatment.wtE04 = function(){return 100*this.wwt20/this.wwt8||0}
-	Global.Waste.Treatment.wtE05 = function(){return 100*this.wwt21/this.wwt8||0}
-	Global.Waste.Treatment.wtE06 = function(){return 100*this.wwt26/this.wwt8||0}
-	Global.Waste.Treatment.wtE1	 = function(){return this.wwt9/this.wwt8||0}
-	Global.Waste.Treatment.wtE2	 = function(){return 100*this.wwt9/Global.UWS.c_uw52()||0}
-	Global.Waste.Treatment.wtE3	 = function(){return this.wwt9/this.wwt14||0}
-	Global.Waste.Treatment.wtE4	 = function(){return this.wwt11/Global.Waste.ww8||0}
-	Global.Waste.Treatment.wtE5	 = function(){return this.wwt2/this.wwt14||0}
-	Global.Waste.Treatment.wtE6	 = function(){return this.wwt11/this.c_wwt53()||0}
-	Global.Waste.Treatment.wtE7	 = function(){return this.wwt23/Global.Waste.ww8||0}
-	Global.Waste.Treatment.wtE8	 = function()
+	Global.Waste.General.wwGHG8	  = function(){return Global.Waste.c_ww57()*365/Global.General.Days()/Global.Waste.ww7||0}
+	Global.Waste.General.wwGHG9	  = function(){return Global.Waste.c_ww57()/Global.Waste.ww4||0}
+	Global.Waste.General.wwGHG10  = function(){return Global.Waste.c_ww55()*365/Global.General.Days()/Global.Waste.ww7||0}
+	Global.Waste.General.wwGHG11  = function(){return Global.Waste.c_ww55()/Global.Waste.ww4||0}
+	Global.Waste.General.wwGHG12  = function(){return Global.Waste.c_ww53()*365/Global.General.Days()/Global.Waste.ww7||0}
+	Global.Waste.General.wwGHG13  = function(){return Global.Waste.Treatment.c_wwt60()/Global.Waste.ww4||0}
+	Global.Waste.General.wwGHG14  = function(){return (Global.Waste.c_ww51()+Global.Waste.c_ww52())*365/Global.General.Days()/Global.Waste.ww7||0}
+	Global.Waste.General.wwGHG15  = function(){return (Global.Waste.c_ww51()+Global.Waste.c_ww52())/Global.Waste.ww4||0}
+	Global.Waste.General.wwGHG16  = function(){return Global.Waste.c_ww54()*365/Global.General.Days()/Global.Waste.ww7||0}
+	Global.Waste.General.wwGHG17  = function(){return Global.Waste.c_ww54()/Global.Waste.ww4||0}
+	Global.Waste.Collection.wcE1  = function(){return this.wwc2/this.wwc1||0}
+	Global.Waste.Collection.wcE2  = function(){return 100*this.wwc2/Global.UWS.c_uw52()||0}
+	Global.Waste.Collection.wcE3  = function(){return this.wwc2/this.c_wwc50()||0}
+	Global.Waste.Treatment.wtE01  = function(){return 100*this.wwt17/this.wwt8||0}
+	Global.Waste.Treatment.wtE02  = function(){return 100*this.wwt18/this.wwt8||0}
+	Global.Waste.Treatment.wtE03  = function(){return 100*this.wwt19/this.wwt8||0}
+	Global.Waste.Treatment.wtE04  = function(){return 100*this.wwt20/this.wwt8||0}
+	Global.Waste.Treatment.wtE05  = function(){return 100*this.wwt21/this.wwt8||0}
+	Global.Waste.Treatment.wtE06  = function(){return 100*this.wwt26/this.wwt8||0}
+	Global.Waste.Treatment.wtE1	  = function(){return this.wwt9/this.wwt8||0}
+	Global.Waste.Treatment.wtE2	  = function(){return 100*this.wwt9/Global.UWS.c_uw52()||0}
+	Global.Waste.Treatment.wtE3	  = function(){return this.wwt9/this.wwt14||0}
+	Global.Waste.Treatment.wtE4	  = function(){return this.wwt11/Global.Waste.ww8||0}
+	Global.Waste.Treatment.wtE5	  = function(){return this.wwt2/this.wwt14||0}
+	Global.Waste.Treatment.wtE6	  = function(){return this.wwt11/this.c_wwt53()||0}
+	Global.Waste.Treatment.wtE7	  = function(){return this.wwt23/Global.Waste.ww8||0}
+	Global.Waste.Treatment.wtE8	  = function()
 	{
 		var arr=Global.Level3.Waste.Treatment;
 		if(arr.length==0){return 0;}
@@ -443,10 +458,13 @@ var Global = {
 		}
 		return sum/arr.length;
 	}
-	Global.Waste.Treatment.wtE9	 = function()
+	Global.Waste.Treatment.wtE9	  = function()
 	{
-		//wtE9 = IF wwt25 not zero, then wtE9 = sum(wwt8_n)/sum(wwt25_n)    Else “missing data”
-		if(this.wwt25!=0)
+		if(this.wwt25==0)
+		{
+			return 0;
+		}
+		else
 		{
 			var arr=Global.Level3.Waste.Treatment;
 			var sum_wwt8=0, sum_wwt25=0;
@@ -457,24 +475,25 @@ var Global = {
 			}
 			return sum_wwt8/sum_wwt25||0;
 		}
-		else
-			return 0;
 	}
-	Global.Waste.Discharge.wdE1	 = function(){return this.wwd3/this.wwd1||0}
-	Global.Waste.Discharge.wdE2	 = function(){return 100*this.wwd3/Global.UWS.c_uw52()||0}
-	Global.Waste.Discharge.wdE3	 = function()
+	Global.Waste.Discharge.wdE1	  = function(){return this.wwd3/this.wwd1||0}
+	Global.Waste.Discharge.wdE2	  = function(){return 100*this.wwd3/Global.UWS.c_uw52()||0}
+	Global.Waste.Discharge.wdE3	  = function()
 	{
 		if(this.wwd5==0)
 			return 0;
 		else
 			return this.wwd3/this.c_wwd50()||0;
 	}
-	Global.Waste.Discharge.wdE4	 = function(){return this.wwd4/this.wwd1||0}
-	Global.Waste.Discharge.wdE5	 = function()
+	Global.Waste.Discharge.wdE4	  = function(){return this.wwd4/this.wwd1||0}
+	Global.Waste.Discharge.wdE5	  = function()
 	{
-		//wde5 = wwd4 / C_wwd51_n only if wwd7 is not 0 , ELSE wdE5=0
 		if(this.wwd7==0)
+		{
 			return 0;
+		}
 		else
+		{
 			return this.wwd4/this.c_wwd51()||0;
+		}
 	}
