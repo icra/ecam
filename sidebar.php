@@ -159,7 +159,8 @@
 			<tr><td><a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment>Wastewater treatment</a>
 			<tr><td><a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge>Wastewater discharge</a>
 			<tr><th>Summary
-			<tr><td><a href=summary.php?type=input>All inputs</a>
+			<tr><td><a href=summary.php?type=input>All Inputs</a>
+			<tr><td><a href=summary.php?type=ccvv>All Calculated variables</a>
 			<tr><td><a href=summary.php?type=output>All Performance Indicators (PIs)</a>
 			<tr><td><a href=graphs.php>Graphs</a>
 			<tr><th>Other

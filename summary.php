@@ -2,14 +2,23 @@
 	/**summary.php: summary for inputs or outputs */
 
 	if(!isset($_GET['type']))
-		die('Error. type not specified<br>Try: <a href=summary.php?type=input>Inputs</a> or <a href=summary.php?type=output>Outputs</a>');
+		die('Error. type not specified<br>Try: <a href=summary.php?type=input>Inputs</a> or <a href=summary.php?type=output>Outputs</a> or <a href=summary.php?type=ccvv>calculated variables</a>');
 	
 	//tipus de variable: inputs o outputs
 	$type=$_GET['type'];
 
 	//check correct $type value
-	if($type!="input" && $type!="output" )
-		die('Error. type must be "inputs" or "outputs"');
+	if($type!="input" && $type!="output" && $type!="ccvv")
+		die('Error. type must be "inputs", "outputs" or "ccvv"');
+
+	//if ccvv (calculated variables, create a boolean $ccvv)
+	if($type=="ccvv")
+	{
+		$type="output";
+		$ccvv=true;
+	}
+	else
+		$ccvv=false;
 ?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
@@ -85,8 +94,14 @@
 				if(typeof(object[variable])!="<?php echo $typeof?>"){continue;}
 
 				<?php 
-					//Skip calculated variables 
-					if($type=="output"){echo "if(variable.search('^c_')!=-1){continue;}";}
+					//Skip calculated variables depending on $ccvv
+					if($type=="output")
+					{
+						if($ccvv)
+							echo "if(variable.search('^c_')==-1){continue;}";
+						else
+							echo "if(variable.search('^c_')!=-1){continue;}";
+					}
 				?>
 
 				var description=Info[variable] ? Info[variable].description : "<span style=color:#ccc>no description</span>";
