@@ -13,31 +13,37 @@
 <!--mail me--><div> Send mail to Lluis Bosch <a href=mailto:lbosch@icra.cat>lbosch@icra.cat</a> </div>
 <!--TO DO LIST-->
 <table id=todo>
-	<tr><th>Task																	<th>Status
-
+	<tr><th>Task<th>Status
 	<tr><td colspan=2 class=taskgroup>BACK-END
 	<tr><td>Create option to switch m3 to m3/day (assessment period) (ie ws6)<td class=priority>Need further explanation</td>
 	<tr><td>Create option to have BOD in kg or mg/L (dividing by another variable)<td class=priority>Need further explanation</td>
 	<tr><td>Variables wsa11 and wsa12 not clear (pump size and motor type)<td class=priority>Need further explanation</td>
 	<tr><td>If you add more than 20 substages, some disappear. Find out why<td>Pending</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
-	<tr><td>Summary for CVs<td>Pending</td>
 	<tr><td>Merge calculated variables with inputs in L3<td>Pending</td>
 	<tr><td>Create Warning in new system button<td>Pending</td>
-	<tr><td>Configuration for hiding codes<td>Pending</td>
-	<tr><td>Implement graphs<td>Pending</td>
 	<tr><td>Export summary table button<td>Pending</td>
+	<tr><td>Implement graphs<td>Waiting for answer</td>
 	<tr><td>(comment 13 corinne) Default value for wwt8 should be ww15<td>Waiting for answer</td>
 	<tr><td>Change name of the 23 repeated PI codes (<a href=dataModel/repeatedPIs.txt>list</a>)<td>Waiting for answer</td>
 </table>
 <!--FOOTER--><?php include'footer.php'?>
 
 <script>
-	//go through all cells "Pending" and color them yellow
-	var coll = document.querySelectorAll("td");
-	for(var i=0;i<coll.length;i++)
+	//go through all cells and color them according to status
+	(function()
 	{
-		if(coll[i].textContent=="Pending"){coll[i].style.backgroundColor='orange';continue}
-		if(coll[i].textContent=="Waiting for answer"){coll[i].style.backgroundColor='#af0';continue}
-	}
+		var newColor;
+		var coll=document.querySelectorAll("td");
+		for(var i=0;i<coll.length;i++)
+		{
+			switch(coll[i].textContent)
+			{
+				case "Pending": 		   newColor='orange'; break;
+				case "Waiting for answer": newColor='#af0';   break;
+				default:                   newColor='';       break;
+			}
+			coll[i].style.backgroundColor=newColor;
+		}
+	})();
 </script>
