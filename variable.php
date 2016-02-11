@@ -61,7 +61,7 @@
 			newCell.innerHTML="<a href=edit.php?level="+level+">"+levelAlias+"</a>"
 			if(sublevel!=0)
 			{
-				var sublevelName=sublevel=="General" ? "Energy use and production" : sublevel;
+				var sublevelName=sublevel=="General" ? "Energy" : sublevel;
 				newCell.innerHTML+=" &rsaquo; <a href=edit.php?level="+level+"&sublevel="+sublevel+">"+sublevelName+"</a>"
 			}
 
@@ -135,7 +135,6 @@
 				newCell.className='th'
 				newCell.innerHTML="Is used to calculate"
 				newCell=newRow.insertCell(-1)
-				newCell.style.backgroundColor="yellow"
 				newCell.innerHTML=(function(){
 					//look for the code "id" inside each output
 					var ret="";
@@ -169,7 +168,6 @@
 			newCell=newRow.insertCell(-1)
 			if(typeof(currentStage[id])=="function")
 			{
-				newCell.style.backgroundColor='yellow'
 				newCell.innerHTML=(function()
 				{
 					var unit=Info[id].magnitude=="Currency"?Global.General.Currency : Info[id].unit;

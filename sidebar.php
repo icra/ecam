@@ -53,11 +53,22 @@
 		}
 	}
 
+	function removeAllCookies()
+	{
+		removeCookie("GLOBAL");
+		removeCookie("SUBSTAGES_waterAbs");
+		removeCookie("SUBSTAGES_waterTre");
+		removeCookie("SUBSTAGES_waterDis");
+		removeCookie("SUBSTAGES_wasteCol");
+		removeCookie("SUBSTAGES_wasteTre");
+		removeCookie("SUBSTAGES_wasteDis");
+	}
+
 	/** Clear all user inputted data */
 	//simply remove cookie and default values will load
 	function newSystem()
 	{
-		removeCookie("GLOBAL");
+		removeAllCookies();
 		window.location="getStarted.php";
 	}
 
@@ -88,7 +99,7 @@
 	function clearSystem()
 	{
 		//simply remove cookie and default values will load
-		removeCookie("GLOBAL");
+		removeAllCookies();
 		window.location='index.php';
 	}
 </script>
@@ -165,7 +176,6 @@
 			<tr><th>Graphs
 			<tr><td><a href=graph1.php>GHG per capita</a>
 			<tr><td><a href=graph2.php>GHG per stage</a>
-			<tr><td>Energy consumed per capita
 			<tr><td><a href=graph3.php>Sankey diagram</a>
 			<tr><th>Other
 			<tr><td><a href=todo.php>To do list</a>

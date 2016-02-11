@@ -4,7 +4,7 @@ var Global = {
 		"Location":"Canada, Europe, Russia, Oceania",
 		"Assessment Period Start":"2016-01-01",
 		"Assessment Period End":"2016-01-31",
-		"Days":function()
+		Days:function()
 		{
 			var startDate = new Date(Global.General["Assessment Period Start"])
 			var finalDate = new Date(Global.General["Assessment Period End"])
@@ -15,16 +15,15 @@ var Global = {
 	},
 
 	/** Level 1 - Urban water system */
-	"UWS":{
+	UWS:{
 		"uw1":0,
 		c_uw50:function(){return Global.Water.ws3+Global.Waste.ww1},
 		c_uw51:function(){return Global.Water.ws4+Global.Waste.ww2},
 		c_uw52:function(){return Global.Water.General.c_wsg50()+Global.Waste.General.c_wwg50()},
-
 	},
 
 	/** Level 1 - Water Supply*/
-	"Water":{
+	Water:{
 		"ws2":0,
 		"ws1":0,
 		"ws7":0,
@@ -244,20 +243,6 @@ var Global = {
 		},
 	},
 
-	/** Substages Arrays For Level 3 */
-	"Level3":{
-		"Water":{
-			"Abstraction":[],
-			"Treatment":[],
-			"Distribution":[],
-		},
-		"Waste":{
-			"Collection":[],
-			"Treatment":[],
-			"Discharge":[],
-		},
-	},
-
 	/** Configuration: Active Stages, questions, Technologies and Units */
 	"Configuration":{
 		"Active Stages":{
@@ -298,33 +283,17 @@ var Global = {
 	},
 }
 
-/** PERFORMANCE INDICATORS */
+/*========================*/
+/* PERFORMANCE INDICATORS */
+/*========================*/
 
 /**
 	List of repeated PIs that need to be renamed: (implementation just below)
-		gE2w  
-		gE3w  
-		gE4w  
-		gE2ww 
-		gE3ww 
-		gE4ww 
-		wGHG1 
-		wGHG2 
-		wGHG3 
-		wGHG4 
-		wGHG5 
-		wGHG6 
-		wGHG7 
-		wwGHG1
-		wwGHG2
-		wwGHG3
-		wwGHG4
-		wwGHG5
-		wS1   
-		wS2   
-		wS3   
-		wwS3  
-		wwS4  
+		gE2w   gE3w   gE4w   gE2ww  gE3ww gE4ww 
+		wGHG1  wGHG2  wGHG3  wGHG4  wGHG5 wGHG6 wGHG7 
+		wwGHG1 wwGHG2 wwGHG3 wwGHG4 wwGHG5
+		wS1    wS2    wS3   
+		wwS3   wwS4  
 */
 	Global.Water.gE2w             = function(){return this.ws5*365/Global.General.Days()/this.ws2||0}
 	Global.Water.General.gE2w     = function(){return this.c_wsg50()*365/Global.General.Days()/Global.Water.ws2||0}
@@ -449,7 +418,7 @@ var Global = {
 	Global.Waste.Treatment.wtE7	  = function(){return this.wwt23/Global.Waste.ww8||0}
 	Global.Waste.Treatment.wtE8	  = function()
 	{
-		var arr=Global.Level3.Waste.Treatment;
+		var arr=Substages.Waste.Treatment;
 		if(arr.length==0){return 0;}
 		var sum=0;
 		for(var s in arr)
@@ -466,7 +435,7 @@ var Global = {
 		}
 		else
 		{
-			var arr=Global.Level3.Waste.Treatment;
+			var arr=Substages.Waste.Treatment;
 			var sum_wwt8=0, sum_wwt25=0;
 			for(var s in arr)
 			{

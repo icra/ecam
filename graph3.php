@@ -6,7 +6,7 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Graphs</h1>
 
-<h2>Graph 3: Sankey diagram</h2>
+<h2>Graph 3: Sankey diagram (water flow in the whole cycle)</h2>
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 
 <!--graph--><div id="graph"></div>
@@ -22,15 +22,31 @@
 		data.addColumn('string', 'To');
 		data.addColumn('number', 'Weight');
 		data.addRows([
-			['wAbstraction', 	'wTreatment', 		Global.Water.Abstraction.wsa2||1],
-			['wTreatment', 		'wDistribution', 	Global.Water.Treatment.wst1||1],
-			['wDistribution', 	'USERS', 			Global.Water.Distribution.wsd9||1],
-			['USERS',			'wwCollection',		Global.Waste.Collection.wwc3||1],
-			['wwCollection',	'wwTreatment',		Global.Waste.Treatment.wwt8||1],
-			['wwTreatment',		'wwDischarge',		Global.Waste.Discharge.wwd1||1],
+			['Abstraction', 	     'Water treatment', 	 Global.Water.Abstraction.wsa2||1  ],
+			['Water treatment',	     'Distribution',         Global.Water.Treatment.wst1||1    ],
+			['Distribution', 	     'Users in',             Global.Water.Distribution.wsd7||1 ],
+			['Users in',             'Users out',            Global.Water.Distribution.wsd20||1],
+			['Users out',	         'Collection',           Global.Waste.Collection.wwc1||1   ],
+			['Collection',	         'Wastewater treatment', Global.Waste.Treatment.wwt8||1    ],
+			['Wastewater treatment', 'Discharge',            Global.Waste.Discharge.wwd1||1    ],
 		]);
 		// Sets chart options.
-		var options = {"width":"900",};
+		var colors = ['#00aaf1', 'lightcoral']; 
+
+		var options = 
+		{
+			width:"900", height: 400,
+			sankey: 
+			{
+				node: {
+					colors: colors
+				},
+				link: {
+					colorMode: 'gradient',
+					colors: colors
+				}
+			}
+		};
 		// Instantiates and draws our chart, passing in options.
 		var chart = new google.visualization.Sankey(document.getElementById('graph'));
 		chart.draw(data,options);

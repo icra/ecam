@@ -1,0 +1,157 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Exceptions.apply	exceptions.js	/^{$/;"	m
+Exceptions.ww13	exceptions.js	/^	},$/;"	m
+Formulas.idsPerFormula	formulas.js	/^var Formulas = {$/;"	m
+Formulas.outputsPerInput	formulas.js	/^	},$/;"	m
+Formulas.prettify	formulas.js	/^	},$/;"	m
+Global.General	global.js	/^var Global = {$/;"	p
+Global.Waste.Collection.wcE1	global.js	/^	Global.Waste.General.wwGHG17  = function(){return Global.Waste.c_ww54()\/Global.Waste.ww4||0}$/;"	f
+Global.Waste.Collection.wcE2	global.js	/^	Global.Waste.Collection.wcE1  = function(){return this.wwc2\/this.wwc1||0}$/;"	f
+Global.Waste.Collection.wcE3	global.js	/^	Global.Waste.Collection.wcE2  = function(){return 100*this.wwc2\/Global.UWS.c_uw52()||0}$/;"	f
+Global.Waste.Collection.wwS4	global.js	/^	Global.Waste.wwS4             = function(){return Global.Waste.Collection.wwS4()}$/;"	f
+Global.Waste.Discharge.wdE1	global.js	/^	}$/;"	f
+Global.Waste.Discharge.wdE2	global.js	/^	Global.Waste.Discharge.wdE1	  = function(){return this.wwd3\/this.wwd1||0}$/;"	f
+Global.Waste.Discharge.wdE3	global.js	/^	Global.Waste.Discharge.wdE2	  = function(){return 100*this.wwd3\/Global.UWS.c_uw52()||0}$/;"	f
+Global.Waste.Discharge.wdE4	global.js	/^	}$/;"	f
+Global.Waste.Discharge.wdE5	global.js	/^	Global.Waste.Discharge.wdE4	  = function(){return this.wwd4\/this.wwd1||0}$/;"	f
+Global.Waste.General.gE2ww	global.js	/^	Global.Waste.gE2ww            = function(){return this.ww3*365\/Global.General.Days()\/this.ww5||0}$/;"	f
+Global.Waste.General.gE3ww	global.js	/^	Global.Waste.gE3ww            = function(){return this.ww3*365\/Global.General.Days()\/this.ww7||0}$/;"	f
+Global.Waste.General.gE4ww	global.js	/^	Global.Waste.gE4ww            = function(){return this.ww3\/this.ww4||0}$/;"	f
+Global.Waste.General.wwGHG1	global.js	/^	Global.Waste.wwGHG1           = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*365\/Global.General.Days()\/this.ww5||0}$/;"	f
+Global.Waste.General.wwGHG10	global.js	/^	Global.Waste.General.wwGHG9	  = function(){return Global.Waste.c_ww57()\/Global.Waste.ww4||0}$/;"	f
+Global.Waste.General.wwGHG11	global.js	/^	Global.Waste.General.wwGHG10  = function(){return Global.Waste.c_ww55()*365\/Global.General.Days()\/Global.Waste.ww7||0}$/;"	f
+Global.Waste.General.wwGHG12	global.js	/^	Global.Waste.General.wwGHG11  = function(){return Global.Waste.c_ww55()\/Global.Waste.ww4||0}$/;"	f
+Global.Waste.General.wwGHG13	global.js	/^	Global.Waste.General.wwGHG12  = function(){return Global.Waste.c_ww53()*365\/Global.General.Days()\/Global.Waste.ww7||0}$/;"	f
+Global.Waste.General.wwGHG14	global.js	/^	Global.Waste.General.wwGHG13  = function(){return Global.Waste.Treatment.c_wwt60()\/Global.Waste.ww4||0}$/;"	f
+Global.Waste.General.wwGHG15	global.js	/^	Global.Waste.General.wwGHG14  = function(){return (Global.Waste.c_ww51()+Global.Waste.c_ww52())*365\/Global.General.Days()\/Global.Waste.ww7||0}$/;"	f
+Global.Waste.General.wwGHG16	global.js	/^	Global.Waste.General.wwGHG15  = function(){return (Global.Waste.c_ww51()+Global.Waste.c_ww52())\/Global.Waste.ww4||0}$/;"	f
+Global.Waste.General.wwGHG17	global.js	/^	Global.Waste.General.wwGHG16  = function(){return Global.Waste.c_ww54()*365\/Global.General.Days()\/Global.Waste.ww7||0}$/;"	f
+Global.Waste.General.wwGHG2	global.js	/^	Global.Waste.wwGHG2           = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*365\/Global.General.Days()\/this.ww7||0}$/;"	f
+Global.Waste.General.wwGHG3	global.js	/^	Global.Waste.wwGHG3           = function(){return (this.ww3*Global.UWS.uw1+this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())\/this.ww4||0}	$/;"	f
+Global.Waste.General.wwGHG4	global.js	/^	Global.Waste.wwGHG4	          = function(){return this.ww3*Global.UWS.uw1\/Global.Waste.ww7||0}$/;"	f
+Global.Waste.General.wwGHG5	global.js	/^	Global.Waste.wwGHG5	          = function(){return this.ww3*Global.UWS.uw1\/Global.Waste.ww4||0}$/;"	f
+Global.Waste.General.wwGHG8	global.js	/^	Global.Water.Distribution.dE7 = function(){return this.wsd19\/this.wsd18||0}$/;"	f
+Global.Waste.General.wwGHG9	global.js	/^	Global.Waste.General.wwGHG8	  = function(){return Global.Waste.c_ww57()*365\/Global.General.Days()\/Global.Waste.ww7||0}$/;"	f
+Global.Waste.Treatment.wtE01	global.js	/^	Global.Waste.Collection.wcE3  = function(){return this.wwc2\/this.c_wwc50()||0}$/;"	f
+Global.Waste.Treatment.wtE02	global.js	/^	Global.Waste.Treatment.wtE01  = function(){return 100*this.wwt17\/this.wwt8||0}$/;"	f
+Global.Waste.Treatment.wtE03	global.js	/^	Global.Waste.Treatment.wtE02  = function(){return 100*this.wwt18\/this.wwt8||0}$/;"	f
+Global.Waste.Treatment.wtE04	global.js	/^	Global.Waste.Treatment.wtE03  = function(){return 100*this.wwt19\/this.wwt8||0}$/;"	f
+Global.Waste.Treatment.wtE05	global.js	/^	Global.Waste.Treatment.wtE04  = function(){return 100*this.wwt20\/this.wwt8||0}$/;"	f
+Global.Waste.Treatment.wtE06	global.js	/^	Global.Waste.Treatment.wtE05  = function(){return 100*this.wwt21\/this.wwt8||0}$/;"	f
+Global.Waste.Treatment.wtE1	global.js	/^	Global.Waste.Treatment.wtE06  = function(){return 100*this.wwt26\/this.wwt8||0}$/;"	f
+Global.Waste.Treatment.wtE2	global.js	/^	Global.Waste.Treatment.wtE1	  = function(){return this.wwt9\/this.wwt8||0}$/;"	f
+Global.Waste.Treatment.wtE3	global.js	/^	Global.Waste.Treatment.wtE2	  = function(){return 100*this.wwt9\/Global.UWS.c_uw52()||0}$/;"	f
+Global.Waste.Treatment.wtE4	global.js	/^	Global.Waste.Treatment.wtE3	  = function(){return this.wwt9\/this.wwt14||0}$/;"	f
+Global.Waste.Treatment.wtE5	global.js	/^	Global.Waste.Treatment.wtE4	  = function(){return this.wwt11\/Global.Waste.ww8||0}$/;"	f
+Global.Waste.Treatment.wtE6	global.js	/^	Global.Waste.Treatment.wtE5	  = function(){return this.wwt2\/this.wwt14||0}$/;"	f
+Global.Waste.Treatment.wtE7	global.js	/^	Global.Waste.Treatment.wtE6	  = function(){return this.wwt11\/this.c_wwt53()||0}$/;"	f
+Global.Waste.Treatment.wtE8	global.js	/^	Global.Waste.Treatment.wtE7	  = function(){return this.wwt23\/Global.Waste.ww8||0}$/;"	f
+Global.Waste.Treatment.wtE9	global.js	/^	}$/;"	f
+Global.Waste.Treatment.wwS3	global.js	/^	Global.Waste.wwS3             = function(){return Global.Waste.Treatment.wwS3()}$/;"	f
+Global.Waste.gE1ww	global.js	/^	Global.Water.wS6    = function(){return this.ws7\/this.ws1\/Global.General.Days()||0}$/;"	f
+Global.Waste.gE2ww	global.js	/^	Global.Water.Distribution.wS3 = function(){return 100*this.wsd4\/24\/Global.General.Days()}$/;"	f
+Global.Waste.gE3ww	global.js	/^	Global.Waste.General.gE2ww    = function(){return this.c_wwg50()*365\/Global.General.Days()\/Global.Waste.ww5||0}$/;"	f
+Global.Waste.gE4ww	global.js	/^	Global.Waste.General.gE3ww    = function(){return this.c_wwg50()*365\/Global.General.Days()\/Global.Waste.ww7||0}$/;"	f
+Global.Waste.wwGHG1	global.js	/^	Global.Waste.General.gE4ww    = function(){return this.c_wwg50()\/Global.Waste.ww4||0}$/;"	f
+Global.Waste.wwGHG2	global.js	/^	Global.Waste.General.wwGHG1   = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1+Global.Waste.c_ww57()+Global.Waste.c_ww55()+Global.Waste.c_ww53()+Global.Waste.c_ww51()+Global.Waste.c_ww52()+Global.Waste.c_ww54()-this.c_wwg52())*365\/Global.General.Days()\/Global.Waste.ww5||0}$/;"	f
+Global.Waste.wwGHG3	global.js	/^	Global.Waste.General.wwGHG2   = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1+Global.Waste.c_ww57()+Global.Waste.c_ww55()+Global.Waste.c_ww53()+Global.Waste.c_ww51()+Global.Waste.c_ww52()+Global.Waste.c_ww54()-this.c_wwg52())*365\/Global.General.Days()\/Global.Waste.ww7||0} $/;"	f
+Global.Waste.wwGHG4	global.js	/^	Global.Waste.General.wwGHG3   = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1+Global.Waste.c_ww57()+Global.Waste.c_ww55()+Global.Waste.c_ww53()+Global.Waste.c_ww51()+Global.Waste.c_ww52()+Global.Waste.c_ww54()-this.c_wwg52())\/Global.Waste.ww4||0}$/;"	f
+Global.Waste.wwGHG5	global.js	/^	Global.Waste.General.wwGHG4	  = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1-this.c_wwg52())*365\/Global.General.Days()\/Global.Waste.ww7||0}$/;"	f
+Global.Waste.wwGHG6	global.js	/^	Global.Waste.wwS5   = function(){return this.ww15\/this.ww7\/Global.General.Days()||0}$/;"	f
+Global.Waste.wwGHG7	global.js	/^	Global.Waste.wwGHG6 = function(){return (this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())*(365\/Global.General.Days())\/this.ww7||0}$/;"	f
+Global.Waste.wwS1	global.js	/^	Global.Waste.gE1ww  = function(){return 100*this.ww1\/this.ww2||0}$/;"	f
+Global.Waste.wwS2	global.js	/^	Global.Waste.wwS1   = function(){return 100*this.ww7\/this.ww5||0}$/;"	f
+Global.Waste.wwS3	global.js	/^	Global.Waste.General.wwGHG5	  = function(){return ((Global.Waste.ww3-this.wwg2-this.wwg4)*Global.UWS.uw1-this.c_wwg52())*365\/Global.General.Days()\/Global.Waste.ww4||0}$/;"	f
+Global.Waste.wwS4	global.js	/^	Global.Waste.Treatment.wwS3	  = function(){return 100*this.wwt15\/this.wwt16||0}$/;"	f
+Global.Waste.wwS5	global.js	/^	Global.Waste.wwS2   = function(){return 100*this.ww7\/this.ww6||0}$/;"	f
+Global.Water.Abstraction.aE1	global.js	/^	Global.Waste.wwGHG7 = function(){return (this.c_ww57()+this.c_ww55()+this.c_ww53()+this.c_ww51()+this.c_ww52()+this.c_ww54())\/this.ww4||0}$/;"	f
+Global.Water.Abstraction.aE2	global.js	/^	Global.Water.Abstraction.aE1  = function(){return this.wsa1\/this.wsa2||0}$/;"	f
+Global.Water.Abstraction.aE3	global.js	/^	Global.Water.Abstraction.aE2  = function(){return 100*this.wsa1\/Global.UWS.c_uw52()||0}$/;"	f
+Global.Water.Abstraction.aE4	global.js	/^	Global.Water.Abstraction.aE3  = function(){return this.wsa1\/this.c_wsa50()||0}$/;"	f
+Global.Water.Abstraction.aE5	global.js	/^	Global.Water.Abstraction.aE4  = function(){return this.wsa3\/this.wsa2||0}$/;"	f
+Global.Water.Abstraction.aE6	global.js	/^	Global.Water.Abstraction.aE5  = function(){return this.wsa3\/this.wsa6||0} $/;"	f
+Global.Water.Abstraction.aE7	global.js	/^	Global.Water.Abstraction.aE6  = function(){return this.wsa8\/Global.General.Days()\/this.wsa9||0}$/;"	f
+Global.Water.Distribution.dE1	global.js	/^	Global.Water.Treatment.tE4    = function(){return 100*this.wst1\/this.wst15||0}$/;"	f
+Global.Water.Distribution.dE2	global.js	/^	Global.Water.Distribution.dE1 = function(){return this.wsd1\/Global.Water.ws7||0}$/;"	f
+Global.Water.Distribution.dE3	global.js	/^	Global.Water.Distribution.dE2 = function(){return 100*this.wsd1\/Global.UWS.c_uw52()||0}$/;"	f
+Global.Water.Distribution.dE4	global.js	/^	Global.Water.Distribution.dE3 = function(){return this.wsd1\/this.c_wsd54()||0}$/;"	f
+Global.Water.Distribution.dE5	global.js	/^	Global.Water.Distribution.dE4 = function(){return 100*this.c_wsd51()\/(this.c_wsd52()-this.wsd17)||0}$/;"	f
+Global.Water.Distribution.dE6	global.js	/^	Global.Water.Distribution.dE5 = function(){return 100*this.c_wsd53()\/(this.c_wsd52()-this.wsd17)||0}$/;"	f
+Global.Water.Distribution.dE7	global.js	/^	Global.Water.Distribution.dE6 = function(){return (this.wsd9-this.wsd4)\/Global.General.Days()\/this.wsd18||0}$/;"	f
+Global.Water.Distribution.wS2	global.js	/^	Global.Water.wS2              = function(){return Global.Water.Distribution.wS2()}$/;"	f
+Global.Water.Distribution.wS3	global.js	/^	Global.Water.wS3              = function(){return Global.Water.Distribution.wS3()}$/;"	f
+Global.Water.General.gE2w	global.js	/^	Global.Water.gE2w             = function(){return this.ws5*365\/Global.General.Days()\/this.ws2||0}$/;"	f
+Global.Water.General.gE3w	global.js	/^	Global.Water.gE3w             = function(){return this.ws5*365\/Global.General.Days()\/this.ws1||0}$/;"	f
+Global.Water.General.gE4w	global.js	/^	Global.Water.gE4w             = function(){return this.ws5\/this.ws7||0}$/;"	f
+Global.Water.General.wGHG1	global.js	/^	Global.Water.wGHG1            = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())*365\/Global.General.Days()\/this.ws2||0} $/;"	f
+Global.Water.General.wGHG2	global.js	/^	Global.Water.wGHG2            = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())*365\/Global.General.Days()\/this.ws1||0}	$/;"	f
+Global.Water.General.wGHG3	global.js	/^	Global.Water.wGHG3            = function(){return (this.ws5*Global.UWS.uw1+this.c_ws51())\/this.ws7||0}$/;"	f
+Global.Water.General.wGHG4	global.js	/^	Global.Water.wGHG4            = function(){return this.c_ws51()\/this.ws1||0}$/;"	f
+Global.Water.General.wGHG5	global.js	/^	Global.Water.wGHG5            = function(){return this.c_ws51()\/this.ws7||0}$/;"	f
+Global.Water.General.wGHG6	global.js	/^	Global.Water.wGHG6            = function(){return (this.ws5*Global.UWS.uw1)\/this.ws1||0}$/;"	f
+Global.Water.General.wGHG7	global.js	/^	Global.Water.wGHG7            = function(){return (this.ws5*Global.UWS.uw1)\/this.ws7||0}$/;"	f
+Global.Water.Treatment.tE01	global.js	/^	Global.Water.Abstraction.aE7  = function(){return this.wsa10\/this.wsa9||0}$/;"	f
+Global.Water.Treatment.tE02	global.js	/^	Global.Water.Treatment.tE01	  = function(){return 100*this.wst8 \/this.wst1||0}$/;"	f
+Global.Water.Treatment.tE03	global.js	/^	Global.Water.Treatment.tE02	  = function(){return 100*this.wst9 \/this.wst1||0}$/;"	f
+Global.Water.Treatment.tE04	global.js	/^	Global.Water.Treatment.tE03	  = function(){return 100*this.wst10\/this.wst1||0}$/;"	f
+Global.Water.Treatment.tE05	global.js	/^	Global.Water.Treatment.tE04	  = function(){return 100*this.wst11\/this.wst1||0}$/;"	f
+Global.Water.Treatment.tE06	global.js	/^	Global.Water.Treatment.tE05	  = function(){return 100*this.wst12\/this.wst1||0}$/;"	f
+Global.Water.Treatment.tE1	global.js	/^	Global.Water.Treatment.tE06	  = function(){return 100*this.wst13\/this.wst1||0}$/;"	f
+Global.Water.Treatment.tE2	global.js	/^	Global.Water.Treatment.tE1    = function(){return this.wst2\/this.wst1||0}$/;"	f
+Global.Water.Treatment.tE3	global.js	/^	Global.Water.Treatment.tE2    = function(){return 100*this.wst2\/Global.UWS.c_uw52()||0}$/;"	f
+Global.Water.Treatment.tE4	global.js	/^	Global.Water.Treatment.tE3    = function(){return this.wst14\/this.wst1||0}$/;"	f
+Global.Water.Treatment.wS1	global.js	/^	Global.Water.wS1              = function(){return Global.Water.Treatment.wS1()}$/;"	f
+Global.Water.gE1w	global.js	/^	Global.Waste.Collection.wwS4  = function(){return 100*this.c_wwc51()\/Global.Waste.ww4||0}$/;"	f
+Global.Water.gE2w	global.js	/^}$/;"	f
+Global.Water.gE3w	global.js	/^	Global.Water.General.gE2w     = function(){return this.c_wsg50()*365\/Global.General.Days()\/Global.Water.ws2||0}$/;"	f
+Global.Water.gE4w	global.js	/^	Global.Water.General.gE3w     = function(){return this.c_wsg50()*365\/Global.General.Days()\/Global.Water.ws1||0}$/;"	f
+Global.Water.wGHG1	global.js	/^	Global.Water.General.gE4w     = function(){return this.c_wsg50()\/Global.Water.ws7||0}$/;"	f
+Global.Water.wGHG2	global.js	/^	Global.Water.General.wGHG1    = function(){return ((Global.Water.ws5-this.wsg2-this.wsg4)*Global.UWS.uw1+Global.Water.c_ws51()-this.c_wsg52())*365\/Global.General.Days()\/Global.Water.ws2||0}$/;"	f
+Global.Water.wGHG3	global.js	/^	Global.Water.General.wGHG2    = function(){return ((Global.Water.ws5-this.wsg2-this.wsg4)*Global.UWS.uw1+Global.Water.c_ws51()-this.c_wsg52())*365\/Global.General.Days()\/Global.Water.ws1||0}$/;"	f
+Global.Water.wGHG4	global.js	/^	Global.Water.General.wGHG3    = function(){return ((Global.Water.ws5-this.wsg2-this.wsg4)*Global.UWS.uw1+Global.Water.c_ws51()-this.c_wsg52())*365\/Global.General.Days()\/Global.Water.ws7||0}$/;"	f
+Global.Water.wGHG5	global.js	/^	Global.Water.General.wGHG4    = function(){return Global.Water.wGHG4()}$/;"	f
+Global.Water.wGHG6	global.js	/^	Global.Water.General.wGHG5    = function(){return Global.Water.wGHG5()}$/;"	f
+Global.Water.wGHG7	global.js	/^	Global.Water.General.wGHG6    = function(){return (this.c_wsg50()*Global.UWS.uw1-this.c_wsg52())\/Global.Water.ws1||0}$/;"	f
+Global.Water.wS1	global.js	/^	Global.Water.General.wGHG7    = function(){return (this.c_wsg50()*Global.UWS.uw1-this.c_wsg52())\/Global.Water.ws7||0}$/;"	f
+Global.Water.wS2	global.js	/^	Global.Water.Treatment.wS1    = function(){return 100*(this.wst4+this.wst5+this.wst6+this.wst7)\/this.wst3||0}$/;"	f
+Global.Water.wS3	global.js	/^	Global.Water.Distribution.wS2 = function(){return 100*this.wsd2\/this.wsd3||0}$/;"	f
+Global.Water.wS4	global.js	/^	Global.Water.gE1w   = function(){return 100*this.ws3\/this.ws4||0}		$/;"	f
+Global.Water.wS5	global.js	/^	Global.Water.wS4    = function(){return 100*this.ws1\/this.ws2||0}$/;"	f
+Global.Water.wS6	global.js	/^	}$/;"	f
+Info.uw1	info.js	/^var Info = {$/;"	p
+Level2Warnings.wdE3	level2warnings.js	/^{$/;"	p
+Level2Warnings.wdE5	level2warnings.js	/^	wdE3:"Level 3 data is required",$/;"	p
+Level3.isInList	level3variables.js	/^];$/;"	f
+RefValues.aE3	refValues.js	/^	},$/;"	m
+RefValues.aE5	refValues.js	/^	},$/;"	m
+RefValues.aE6	refValues.js	/^	},$/;"	m
+RefValues.aE7	refValues.js	/^	},$/;"	m
+RefValues.dE3	refValues.js	/^	},$/;"	m
+RefValues.dE4	refValues.js	/^	},$/;"	m
+RefValues.dE5	refValues.js	/^	},$/;"	m
+RefValues.dE6	refValues.js	/^	},$/;"	m
+RefValues.dE7	refValues.js	/^	},$/;"	m
+RefValues.isInside	refValues.js	/^{$/;"	m
+RefValues.tE1	refValues.js	/^	},$/;"	m
+RefValues.tE3	refValues.js	/^	},$/;"	m
+RefValues.tE4	refValues.js	/^	},$/;"	m
+RefValues.wcE3	refValues.js	/^	},$/;"	m
+RefValues.wdE3	refValues.js	/^	},$/;"	m
+RefValues.wdE5	refValues.js	/^	},$/;"	m
+RefValues.wtE1	refValues.js	/^	},$/;"	m
+RefValues.wtE3	refValues.js	/^	},$/;"	m
+RefValues.wtE4	refValues.js	/^	},$/;"	m
+RefValues.wtE7	refValues.js	/^	},$/;"	m
+RefValues.wtE8	refValues.js	/^	},$/;"	m
+RefValues.wtE9	refValues.js	/^	},$/;"	m
+Tables.Fuel types	tables.js	/^var Tables = {$/;"	p
+Units.Distance	units.js	/^	},$/;"	p
+Units.multiplier	units.js	/^	},$/;"	m
+Units.selectUnit	units.js	/^{$/;"	m
+localization	locateVariable.js	/^	var localization={}; \/\/e.g {"level":"Water","sublevel":"Abstraction"}$/;"	f
+locateVariable	locateVariable.js	/^function locateVariable(code)$/;"	f

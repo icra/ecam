@@ -1,13 +1,19 @@
 <?php
 	/* edit.php this page lets the user modify inputs and see automatically the outputs */
 
-	//check specified input: level and sublevel
 	if(!isset($_GET['level'])){die("ERROR: stage not specified");}
 
-	//level: 	 mandatory {"Water","Waste","UWS"}
-	//sublevel:  optional. If set, enables level 3 {"Abstraction","Treatment","Distribution",[...]}
+	/**
+	  * Process input:
+	  *  - $level: 	   mandatory {"Water","Waste","UWS"}
+	  *  - $sublevel:  optional. If set, enables level 3 {"Abstraction","Treatment","Distribution",[...]}
+	  */
+
 	$level=$_GET['level'];
 	$sublevel=isset($_GET['sublevel']) ? $_GET['sublevel'] : false;
+
+	//if someone tries to go "General" (i.e. from variable.php?id=Days)
+	if($level=="General") { header("Location: getStarted.php"); }
 ?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
@@ -25,17 +31,22 @@
 		?>
 	</style>
 	<script>
+
 		/** 
-		 * GUI utilities
-		 * Note: Comments follow JSdoc structure (http://usejsdoc.org/about-getting-started.html) 
-		 */
+		  * Note: Try to follow JSdoc structure (http://usejsdoc.org/about-getting-started.html) 
+		  *
+		  */
 
 		<?php
 			//establish the stage we are going to be focused
 			if($sublevel)
+			{
 				echo "var CurrentLevel = Global['$level']['$sublevel']";
+			}
 			else
+			{
 				echo "var CurrentLevel = Global['$level'];";
+			}
 		?>
 
 		/** 

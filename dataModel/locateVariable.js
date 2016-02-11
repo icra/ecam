@@ -21,17 +21,17 @@ function locateVariable(code)
 				switch(localization.sublevel)
 				{
 					case "General": 
-						return "Energy use and production";
+						return "Energy";
 						break;
 					default: 
 						return localization.sublevel;
 						break;
 				}
 			})(); 
-			return levelName+" &rsaquo; "+sublevelName+" &rsaquo; "
+			return "L2 &rsaquo; "+levelName+" &rsaquo; "+sublevelName+" &rsaquo; "
 		}
 		else
-			return levelName+" &rsaquo; ";
+			return "L1  &rsaquo; "+levelName+" &rsaquo; ";
 	};
 
 	for(var level in Global)

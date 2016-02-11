@@ -14,6 +14,9 @@
 */
 
 var Info = {
+	//L0 GENERAL
+	"Days":{description:"Assessment period",magnitude:"Time",unit:"days"},
+
 	//L1 UWS
 	"uw1" :{description:"Conversion factor for grid electricity",                                 magnitude:"Conversion",unit:"kgCO2e/kWh",},
 	c_uw50:{description:"Energy costs",                                                           magnitude:"Currency",  unit:"USD"},
@@ -304,6 +307,7 @@ var Info = {
 } //end Info
 
 //Explanations. Syntax: Info.code.explanation=explanation
+Info.Days.explanation="Period of time adopted for the assessment of the data and of the PI"
 Info.c_wsa50.explanation="Sum, for all the pumps of the water abstracted system, of the total volume pumped by pump i (m3) times the pump head i (m) / 100";
 Info.c_wsd51.explanation="This energy takes into account the node consumption elevation plus the minimum pressure required by the users";
 Info.c_wsd52.explanation="The energy provided to a system can be natural and shaft (pumping energy). With the provided expression the energy is precisely calculated";

@@ -59,7 +59,7 @@
 
 		<?php
 			//Read "substages" current object
-			echo "substages=Global.Level3['$level']['$sublevel'];";
+			echo "substages=Substages['$level']['$sublevel'];";
 		?>
 
 		/** Returns array of strings which are input identifiers for current stage, e.g ["aV1","av2"] */
@@ -86,22 +86,22 @@
 		/** New substage button pushed */
 		function newSubstage()
 		{
-			substages.push(new Substage()) //add a new substage to the array "substages"
-			init()
+			substages.push(new Substage());
+			init();
 		}
 
 		/** button delete substage pushed */
 		function deleteSubstage(index)
 		{
-			substages.splice(index,1)
-			init()
+			substages.splice(index,1);
+			init();
 		}
 
 		/** update substage name */
 		function changeName(index,newValue)
 		{
-			substages[index].name=newValue
-			init()
+			substages[index].name=newValue;
+			init();
 		}
 
 		/** make appear a menu for changing substage[index] name */
@@ -135,7 +135,7 @@
 		function sumAll(code)
 		{
 			var sum=0;
-			for(s in substages){sum+=parseFloat(substages[s][code])}
+			for(var s in substages){sum+=parseFloat(substages[s][code])}
 			return sum;
 		}
 
@@ -344,11 +344,11 @@
 					var extra = Level3.isInList(field) ? "L3 - " : "" ;
 					return extra+" <a href=variable.php?id="+field+">"+field+"</a>";
 				})();
+
 				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
 
 				/** Compute CurrentStage[field]() for each substage*/
-				(function()
-				{
+				(function(){
 					//the formula will be modified starting by the current field formula
 					var modification=formula;
 
@@ -360,15 +360,12 @@
 						modification=modification.replace(regexp,'$1substages[0].$2$3');
 					});
 
-					//debugging: show original formula, if it has been changed
-					//if(modification!=formula){console.log("Original: "+formula);}
-
 					for(var s in substages)
 					{
 						//loop calculated variables, they need to exist inside each substage
 						cvs.forEach(function(cv)
 						{
-							substages[s][cv]=CurrentStage[cv]; //this copies the function inside current substage
+							substages[s][cv]=CurrentStage[cv]; //copy the function inside current substage
 						});
 
 						var modificationSubstage=modification.replace(/\[0\]/g,'['+s+']');
@@ -387,8 +384,10 @@
 					}
 				})();
 
-				/*value from level 2*/ newRow.insertCell(-1).innerHTML=Math.floor(1e2*CurrentStage[field]()/Units.multiplier(field))/1e2;
-				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
+				/*level 2 value*/ 
+				newRow.insertCell(-1).innerHTML=Math.floor(1e2*CurrentStage[field]()/Units.multiplier(field))/1e2;
+				/*unit*/ 
+				newRow.insertCell(-1).innerHTML=Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
 			}
 		}
 
@@ -414,19 +413,18 @@
 		//update a field of the substage[index]
 		function updateSubstage(index,field,newValue)
 		{
-			//if CurrentStage[field] is a number, parse float
 			if(typeof(CurrentStage[field])=="number"){newValue=parseFloat(newValue);}
 			var multiplier=Units.multiplier(field);
 			substages[index][field]=multiplier*newValue;
-			init()//update tables and write cookies
+			init();
 		}
 
 		/** Update all tables */
 		function init()
 		{
-			updateSubstagesTable()
-			updateOutputs()
-			updateResult()
+			updateSubstagesTable();
+			updateOutputs();
+			updateResult();
 		}
 	</script>
 </head><body onload=init()><center>
@@ -435,10 +433,9 @@
 <div id=fixedTopBar>
 	<style>
 		div#fixedTopBar {
-			position:fixed;
-			top:0;
-			width:100%;
+			position:fixed;top:0;
 			margin:0;padding:0;
+			width:100%;
 			border-bottom:1px solid #ccc;
 			background:white;
 		}
@@ -459,7 +456,6 @@
 	<style> h1 {text-align:left;padding-left:20em} </style>
 	<!--TITLE--><h1><?php echo $title?></h1>
 </div>
-
 <!--separator--><div style=margin-top:120px></div>
 <!--linear diagram--><?php include'linear.php'?>
 <!--HELP--><h4>In Level 3 you can subdivide a Level 2 stage into multiple substages</h4>
