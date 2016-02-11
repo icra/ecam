@@ -36,8 +36,5 @@
 <script src="js/cookies.js"></script>                <!--basic cookie functions here-->
 <script src="js/updateGlobalFromCookies.js"></script><!--update Global object from cookie "GLOBAL" here-->
 
-<!--for graphs-->
-<script src="js/Chart.min.js"></script>
-
 <!--title-->
 <title>ECAM Web Tool</title>

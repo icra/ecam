@@ -166,7 +166,7 @@
 			<tr><td><a href=graph1.php>GHG per capita</a>
 			<tr><td><a href=graph2.php>GHG per stage</a>
 			<tr><td>Energy consumed per capita
-			<tr><td><a href=sankey.php>Sankey diagram</a>
+			<tr><td><a href=graph3.php>Sankey diagram</a>
 			<tr><th>Other
 			<tr><td><a href=todo.php>To do list</a>
 		</table>

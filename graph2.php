@@ -5,46 +5,42 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Graphs</h1>
-<h2>Graph 2: GHG per stage</h2>
 
-<!--graph--><canvas id="graph" width="400" height="200"></canvas>
+<h2>Graph 2: GHG per stage</h2>
+<div>Ask which kpi go inside</div>
+
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<!--graph--><div id="graph"></div>
 
 <script>
-	/*
-		The bar graph for GHG emissions per type: 
-		use only 1 graph and show two vertical axis (not shown here): 
-		one per serviced population and the other one per m3. 
-		(The proportions remain the same whether you present the indicator with one or the other denominator)
-		Serviced population: wGHG4, wGHG6, wwGHG6, wwGHG4						 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 
-		Authorized consumption values: wGHG5, wGHG7, wwGHG7, wwGHG5<br>
-	*/
-	var ctx=document.getElementById("graph").getContext("2d");
-	var data = {
-		labels: ["Serviced Population", "Authorized consumption"],
-		datasets:[
-			{
-				fillColor: "repeating-linear-gradient(-55deg,#222,#222 5px,#333 10px,#333 15px)",
-				strokeColor: "rgba(220,220,220,0.8)",
-				highlightFill: "rgba(220,220,220,0.75)",
-				highlightStroke: "rgba(220,220,220,1)",
-				data: [65, 59]
-			},
-			{
-				fillColor: "rgba(151,187,205,0.5)",
-				strokeColor: "rgba(151,187,205,0.8)",
-				highlightFill: "rgba(151,187,205,0.75)",
-				highlightStroke: "rgba(151,187,205,1)",
-				data: [28, 48]
-			}
-		],
-	};
-	var graph = new Chart(ctx).Bar(data,{});
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+	function drawChart() 
+	{
+		var data = google.visualization.arrayToDataTable([
+			['Stage', 
+				'Water', 
+				'Wastewater', 
+				'Water Abstraction', 
+				'Water Treatment', 
+				'Water Distribution', 
+				'Waste Collection', 
+				'Waste Treatment', 
+				'Waste Discharge', 
+				{ role: 'annotation' } ],
+			['Level 1', 54, 55, 0,  0,  0,  0, 0,0,''],
+			['Level 2', 10, 24, 20, 32, 18, 5, 0,0,''],
+		]);
+		var options = 
+		{
+			width:800,
+			height:400,
+			legend:{position:'top',maxLines:9},
+			isStacked:true
+		};
+		var view=new google.visualization.DataView(data);
+		var chart=new google.visualization.BarChart(document.getElementById("graph"));
+		chart.draw(view, options);
+	}
 </script>
-
-<br>
-
 <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts">https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts</a>
-
-<div>
-Still not implemented, pending more precise explanation
-</div>

@@ -6,15 +6,15 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Graphs</h1>
 
-<h2>Sankey diagram</h2>
+<h2>Graph 3: Sankey diagram</h2>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
 
-<script src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['sankey']}]}"> </script>
-
-<!--sankey goes here-->
-<div id="sankey"></div>
+<!--graph--><div id="graph"></div>
 
 <script>
-	google.setOnLoadCallback(drawChart);
+	google.charts.load('current', {'packages':['sankey']});
+	google.charts.setOnLoadCallback(drawChart);
+
 	function drawChart()
 	{
 		var data = new google.visualization.DataTable();
@@ -32,7 +32,7 @@
 		// Sets chart options.
 		var options = {"width":"900",};
 		// Instantiates and draws our chart, passing in options.
-		var chart = new google.visualization.Sankey(document.getElementById('sankey'));
+		var chart = new google.visualization.Sankey(document.getElementById('graph'));
 		chart.draw(data,options);
 	}
 </script>
