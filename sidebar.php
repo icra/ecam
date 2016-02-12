@@ -50,6 +50,12 @@
 				else
 					collection[i].classList.remove('inactive'); 
 			}
+
+			//update the memory used in the progress bar
+			var progress = document.querySelector('#sidebar #progress')
+			var length = getCookie('GLOBAL') ? getCookie('GLOBAL').length : 0;
+			progress.value = length;
+			progress.title = "Used memory: "+(100*length/4000)+" %";
 		}
 	}
 
@@ -148,6 +154,12 @@
 			<td align=center><button onclick=saveToFile()>Save</button>
 			<td align=center><button onclick=clearSystem()>Clear</button>
 		</table>
+
+		<!--USED MEMORY-->
+		<style>
+			progress {margin:0.5em;cursor:help}
+		</style>
+		<progress id=progress title="Used memory" value=0 max=4000></progress>
 
 		<!--red/blue separator bars-->
 		<div style="padding:0;margin:0;background:#d71d24;height:5px"></div>

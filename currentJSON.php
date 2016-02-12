@@ -14,26 +14,30 @@ margin-top:4em;">
 	{
 		document.getElementById('currentGlobal').innerHTML=JSON.stringify(Global,null,"    ")
 
-		//compress global (LZString library)
+		/**
+		  *
+		  * Compress Global (using LZString library)
+		  *
+		  */
+
+		//JSON as a string
 		var uncompressed = JSON.stringify(Global);
-		var compressed   = LZString.compressToUTF16(uncompressed); 
 
-		//modify cookies
-		setCookie("GLOBAL",compressed);
+		//Compress the string
+		var compressed = LZString.compressToEncodedURIComponent(uncompressed); 
 
-		//check if cookie is full
-		if(getCookie('GLOBAL').length>=4000)
+		//Check if compressed exceeds 4k characters
+		if(compressed.length>=4000)
 		{
 			alert("ERROR: memory is full. Please remove some substages.")
+			return;
 		}
 
-		/*
-			test to check compression
-				console.log(global)
-				console.log(compressed)
-				console.log(decompressed)
-				console.log(global==decompressed)
-		*/
+		//Set cookie GLOBAL as compressed
+		setCookie("GLOBAL",compressed);
+
+		//summary
+		cookieSummary();
 	}
 
 	/** Display an ascii table in Console to summarize all cookie sizes */
@@ -41,16 +45,10 @@ margin-top:4em;">
 	{
 		if(getCookie('GLOBAL'))
 		{
-			console.log(
-						" Cookie GLOBAL      | Length (max is 4000)\n"+
-						"--------------------+--------------------------------   \n"+
-						" Uncompressed       | "+JSON.stringify(Global).length+" \n"+
-						" Compressed         | "+getCookie('GLOBAL').length+"\n"+
-						"--------------------+--------------------------------   \n"+
-						""
-			);
+			console.log( "[+] Global chars length (max is 4000)\n"+
+						 " |--* Uncompressed : "+JSON.stringify(Global).length+" \n"+
+						 " |--* Compressed   : "+getCookie('GLOBAL').length+"\n"+
+						 "");
 		}
 	}
-
-	cookieSummary();
 </script>

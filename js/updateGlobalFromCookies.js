@@ -9,7 +9,6 @@ function copyFieldsFrom(object_from,object_to)
 			object_to[field] = object_from[field];
 			continue;
 		}
-		//if field is not defined at target object, continue
 
 		if(object_to[field]===undefined){continue;}
 		/**
@@ -26,23 +25,30 @@ function copyFieldsFrom(object_from,object_to)
 			object_to[field] = object_from[field];
 		}
 	}
-}
+};
 
 /**
   *
   * OVERWRITE GLOBAL AND SUBSTAGES
   *
   */
-if(getCookie("GLOBAL")) 
+if(getCookie("GLOBAL")!==null) 
 {
-	//decompress cookie global
-	var compressed = getCookie('GLOBAL');
-	var decompressed = LZString.decompressFromUTF16(compressed);
+	/**
+	*
+	* Decompress cookie global
+	*
+	*/
 
-	console.log(decompressed);
-	console.log(JSON.parse(decompressed));
+	//compressed is a string with weird symbols
+	var compressed=getCookie('GLOBAL');
 
-	//update Global
-    copyFieldsFrom(JSON.parse(decompressed),Global)
+	//decompressed now is the JSON structure of Global as a string
+	var decompressed=LZString.decompressFromEncodedURIComponent(compressed);
+
+	//parsed now is an object
+	var parsed=JSON.parse(decompressed);
+
+	//now we can copy the fields from decompressed to Global
+	copyFieldsFrom(parsed,Global);
 }
-

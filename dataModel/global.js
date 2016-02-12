@@ -433,7 +433,7 @@ var Global = {
 	Global.Waste.Treatment.wtE7	  = function(){return this.wwt23/Global.Waste.ww8||0}
 	Global.Waste.Treatment.wtE8	  = function()
 	{
-		var arr=Substages.Waste.Treatment;
+		var arr=Global.Substages.Waste.Treatment;
 		if(arr.length==0){return 0;}
 		var sum=0;
 		for(var s in arr)
@@ -450,7 +450,7 @@ var Global = {
 		}
 		else
 		{
-			var arr=Substages.Waste.Treatment;
+			var arr=Global.Substages.Waste.Treatment;
 			var sum_wwt8=0, sum_wwt25=0;
 			for(var s in arr)
 			{

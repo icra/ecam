@@ -339,8 +339,16 @@
 					class=button
 					style='background:$color;'
 					onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-						Go to $sublevel Level 3 &map;
+						Go to $sublevel Level 3
 					</button> 
+					&rarr;
+					<span>
+						<script>
+							var length = Global.Substages['$level']['$sublevel'].length;
+							document.write(length)
+						</script>
+						substages inside
+					</span>
 				";
 		}
 	}
