@@ -1,16 +1,20 @@
-/** CODE TO DEAL WITH VARIABLE DESCRIPTIONS */
+/** 
+  *
+  * VARIABLE DESCRIPTIONS, MAGNITUDES AND UNITS
+  *
+  */
 
 /** 
-	Info: object to store all variable descriptions and units
+	"Info" is an object that stores all variable descriptions and units
+
 	Format:
-		"code":{
+		"variable code":
+		{
 			"description" : string,
 			"magnitude"	  : string,
 			"unit"		  : string,
 			"explanation" : string, (defined at the end)
 		},
-
- 	then, the function "Info.locateVariable" helps to locate the level and sublevel
 */
 
 var Info = {
@@ -136,14 +140,14 @@ var Info = {
 	c_ww58:{description:"Energy of fuel consumed for sludge transport",magnitude:"Energy",unit:"kWh",},
 
 	//L2 Wastewater General
-	"wwg1":{description:"Water-related energy produced",                  magnitude:"Energy",unit:"kWh",},
-	"wwg2":{description:"Water-related energy produced sold to the grid", magnitude:"Energy",unit:"kWh",},
-	"wwg3":{description:"Non-water related energy produced",                                            magnitude:"Energy",unit:"kWh",},
-	"wwg4":{description:"Non-water related energy produced sold to the grid",                                                  magnitude:"Energy",unit:"kWh",},
+	"wwg1":{description:"Water-related energy produced",                                               magnitude:"Energy",unit:"kWh",},
+	"wwg2":{description:"Water-related energy produced sold to the grid",                              magnitude:"Energy",unit:"kWh",},
+	"wwg3":{description:"Non-water related energy produced",                                           magnitude:"Energy",unit:"kWh",},
+	"wwg4":{description:"Non-water related energy produced sold to the grid",                          magnitude:"Energy",unit:"kWh",},
 	"wwg5":{description:"Heat energy valorized from wastewater",                                       magnitude:"Energy",unit:"Joule",},
 	c_wwg50:{description:"Total electrical energy consumed from the grid and from self-production related to the wastewater system",magnitude:"Energy",unit:"kWh",},
 	c_wwg51:{description:"Net total process related grid energy consumed by the utility related to the wastewater system",magnitude:"Energy",unit:"kWh",},
-	c_wwg52:{description:"<b style=color:red>TBD</b> GHG emission offset from using the Heat energy from wastewater instead of fuel for neighboring districts for heating or cooling",magnitude:"Energy",unit:"kWh",},
+	c_wwg52:{description:"GHG emission offset from using the Heat energy from wastewater instead of fuel for neighboring districts for heating or cooling",magnitude:"Mass",unit:"kg",},
 
 	//L2 Wastewater Collection
 	"wwc1":{description:"Volume of wastewater conveyed to treatment or to an outfall for untreated discharge",magnitude:"Volume",unit:"m3",},
@@ -350,7 +354,6 @@ Info.ws7.explanation="Sum of the volume of metered and/or non-metered water that
 Info.ws8.explanation="Percentage of the abstracted water Volume that is lost due to leaks or illegal connection to the distribution system , At level 1, enter the percentage as known or estimated by the utility. At level 2, the non revenue water indicator (wS5) will be calculated based on a mass balance.";
 Info.ws9.explanation="Fuel consumption in water supply, for instance, due to the use of on-site generators or devices that work on fuel.";
 Info.wsa1.explanation="Electric energy consumption including both from the grid and self-produced, for the water abstraction unit, by the undertaking during the entire assessment period";
-Info.wsa10.explanation="All friction losses (including the local ones in valves and accessories) must be included";
 Info.wsa2.explanation="Sum of the volume of water conveyed (gravity or pumped) in the water abstraction unit that are the responsibility of the undertaking, during the assessment period";
 Info.wsa3.explanation="Sum of energy recovered during the assessment period by all turbines for abstracted water managed by the undertaking";
 Info.wsa4.explanation="Head at which the water is pumped in each water abstraction unit that are the responsibility of the undertaking, during the assessment period";
@@ -359,7 +362,16 @@ Info.wsa6.explanation="Sum of volume passing through a turbine managed by the un
 Info.wsa7.explanation="Head at which the water is falling through turbines in each water abstraction unit that are the responsibility of the undertaking, during the assessment period";
 Info.wsa8.explanation="Difference between system abstracted volume and the volume entering the water treatment plant and/or entering directly the distribution system";
 Info.wsa9.explanation="Total transmission and distribution mains length (there are not service connections at the abstraction and conveyance stage)";
+Info.wsa10.explanation="All friction losses (including the local ones in valves and accessories) must be included";
 Info.wsd1.explanation="Electric energy consumption including both from the grid and self-produced, for water distribution during the entire assessment period";
+Info.wsd2.explanation="Number of delivery points that receive and are likely to receive pressure equal to or above the guaranteed or declared target level at the peak demand hour (but not when demand is abnormal).";
+Info.wsd3.explanation="Total number of service connections, at the reference date";
+Info.wsd4.explanation="Amount of time of the year the system is pressurised ";
+Info.wsd5.explanation="Resident population connected to each water distribution system managed by the undertaking, at the reference date";
+Info.wsd6.explanation="Resident population connected to each water distribution unit managed by the undertaking, at the reference date";
+Info.wsd7.explanation="The water volume entering the distribution system from the water treatment or directly from abstraction during the assessment period ";
+Info.wsd8.explanation="Difference between the distribution system input volume and the authorized consumption (including exported water) during the assessment period for each water distribution unit";
+Info.wsd9.explanation=" Volume injected to the water distribution stage, for each water distribution unit";
 Info.wsd10.explanation="According the standards, a minimum pressure must be provided to the consumers (20 - 30 m) , for each water distribution unit";
 Info.wsd11.explanation="Is the elevation of the highest node of the network, , for each water distribution unit";
 Info.wsd12.explanation="Is the elevation of the lowest node of the stage, for each water distribution unit";
@@ -369,15 +381,7 @@ Info.wsd15.explanation="Volume of water in the drinking water distribution syste
 Info.wsd17.explanation="Total energy recovered during the assessment period by each water distribution unit ";
 Info.wsd18.explanation="Total transmission and distribution mains length (service connections not included), for each water distribution unit at the reference date";
 Info.wsd19.explanation="Friction losses (including the local ones in valves and accessories), for each water distribution unit at the reference date.";
-Info.wsd2.explanation="Number of delivery points that receive and are likely to receive pressure equal to or above the guaranteed or declared target level at the peak demand hour (but not when demand is abnormal).";
 Info.wsd20.explanation="Sum of the volume of metered and/or non-metered water that, during the assessment period, is taken by registered customers, by the water supplier itself, or by others who are implicitly or explicitly authorised to do so by the water supplier, for residential, commercial, industrial or public purposes. It includes water exported";
-Info.wsd3.explanation="Total number of service connections, at the reference date";
-Info.wsd4.explanation="Amount of time of the year the system is pressurised ";
-Info.wsd5.explanation="Resident population connected to each water distribution system managed by the undertaking, at the reference date";
-Info.wsd6.explanation="Resident population connected to each water distribution unit managed by the undertaking, at the reference date";
-Info.wsd7.explanation="The water volume entering the distribution system from the water treatment or directly from abstraction during the assessment period ";
-Info.wsd8.explanation="Difference between the distribution system input volume and the authorized consumption (including exported water) during the assessment period for each water distribution unit";
-Info.wsd9.explanation=" Volume injected to the water distribution stage, for each water distribution unit";
 Info.wsg1.explanation="Water-related energy produced in the urban drinking water system, by the undertaking during the entire assessment period";
 Info.wsg2.explanation="Water-related energy produced in the urban drinking water system sold to the grid, by the undertaking during the entire assessment period";
 Info.wsg3.explanation="Non-water-related energy produced in the urban drinking water system (e.g. solar, wind), by the undertaking during the entire assessment period";
@@ -503,11 +507,11 @@ Info.wdE3.explanation="Percentage of energy consumed in wastewater discharged wi
 Info.wdE4.explanation="Average energy consumption per pumping discharged wastewater per head";
 Info.wdE5.explanation="Unit energy recovered in water discharge";
 Info.wtE01.explanation="Percentage of each treatment type, in terms of volume treated, of all WWTPs assessed";
-Info.wtE02.explanation="2 ";
-Info.wtE03.explanation="3 ";
-Info.wtE04.explanation="4 ";
-Info.wtE05.explanation="5 ";
-Info.wtE06.explanation="6 ";
+Info.wtE02.explanation="";
+Info.wtE03.explanation="";
+Info.wtE04.explanation="";
+Info.wtE05.explanation="";
+Info.wtE06.explanation="";
 Info.wtE1.explanation="";
 Info.wtE2.explanation="Unit energy consumption per treated wastewater in wastewater treatment plants";
 Info.wtE3.explanation="Percentage of energy consumed in wastewater treatment with regards to the Total energy consumed from the grid and self produced in the water and wastewater systems";

@@ -1,4 +1,4 @@
-<!--LINEAR DIAGRAM: file inside edit.php-->
+<!--LINEAR DIAGRAM: file inside edit.php, level3.php and stages.php-->
 
 <div id=linearDiagram style=margin:0;padding:0>
 	<img class=l1 stage=water    src=img/water.png    onclick=window.location="edit.php?level=Water"                       title="WATER SUPPLY (L1)"> 
@@ -29,11 +29,10 @@
 
 <script>
 	<?php
-		//if we are not in stages.php:
+		// highlight current stage
+		// only if currently not in stages.php:
 		if(strpos($_SERVER['PHP_SELF'],"stages.php")===false)
 		{ 
-			//highlight current stage
-			//means we are in edit.php or level3.php
 			?>
 			(function()
 			{
@@ -76,7 +75,7 @@
 		}
 	?>
 
-	//go over <img stage=i> to deactivate the ones inactive
+	//go over images to deactivate inactives
 	(function()
 	{
 		var collection = document.querySelectorAll("#linearDiagram img[stage]")
@@ -94,4 +93,3 @@
 		}
 	})();
 </script>
-

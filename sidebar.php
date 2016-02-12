@@ -64,7 +64,7 @@
 		removeCookie("SUBSTAGES_wasteDis");
 	}
 
-	/** Clear all user inputted data */
+	/** New system */
 	//simply remove cookie and default values will load
 	function newSystem()
 	{

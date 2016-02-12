@@ -59,7 +59,7 @@
 
 		<?php
 			//Read "substages" current object
-			echo "substages=Substages['$level']['$sublevel'];";
+			echo "substages=Global.Substages['$level']['$sublevel'];";
 		?>
 
 		/** Returns array of strings which are input identifiers for current stage, e.g ["aV1","av2"] */

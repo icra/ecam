@@ -3,35 +3,46 @@ function copyFieldsFrom(object_from,object_to)
 {
 	for(var field in object_from)
 	{
-		//check if field is not defined at target object
-		if(object_to[field]===undefined){console.log(field+" does not exist in "+object_to.toString());continue;}
-
-		//check if field is function, object or none of both
-		if(typeof(object_to[field])=="function")
+		//this is for level 3
+		if(object_from[field].constructor===Array)
 		{
+			object_to[field] = object_from[field];
 			continue;
 		}
-		else if(typeof(object_from[field])=="object")
+		//if field is not defined at target object, continue
+
+		if(object_to[field]===undefined){continue;}
+		/**
+		   field is never a function because of JSON.stringify
+		   if field is object, recursive call.
+		   if field is number or string, copy it
+		*/
+		if(typeof(object_from[field])=="object")
 		{
 			copyFieldsFrom(object_from[field],object_to[field]);
 		}
 		else 
+		{
 			object_to[field] = object_from[field];
+		}
 	}
 }
 
-//OVERWRITE GLOBAL AND SUBSTAGES
+/**
+  *
+  * OVERWRITE GLOBAL AND SUBSTAGES
+  *
+  */
 if(getCookie("GLOBAL")) 
 {
-	//update Global from cookie GLOBAL
-	copyFieldsFrom(JSON.parse(getCookie("GLOBAL")),Global)
+	//decompress cookie global
+	var compressed = getCookie('GLOBAL');
+	var decompressed = LZString.decompressFromUTF16(compressed);
 
-	Substages.Water.Abstraction  = JSON.parse(getCookie("SUBSTAGES_waterAbs"));
-	Substages.Water.Treatment    = JSON.parse(getCookie("SUBSTAGES_waterTre"));
-	Substages.Water.Distribution = JSON.parse(getCookie("SUBSTAGES_waterDis"));
-	Substages.Waste.Collection   = JSON.parse(getCookie("SUBSTAGES_wasteCol"));
-	Substages.Waste.Treatment    = JSON.parse(getCookie("SUBSTAGES_wasteTre"));
-	Substages.Waste.Discharge    = JSON.parse(getCookie("SUBSTAGES_wasteDis"));
+	console.log(decompressed);
+	console.log(JSON.parse(decompressed));
+
+	//update Global
+    copyFieldsFrom(JSON.parse(decompressed),Global)
 }
-
 

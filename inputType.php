@@ -1,4 +1,5 @@
-<!--menu of buttons inside edit.php-->
+<!--grouped buttons inside edit.php [All | Water | Energy | GHG ]-->
+
 <style>
 	/*temporal*/ #inputType{display:none}
 	span#inputType               { margin-left:1em;font-size:19px}
@@ -16,7 +17,7 @@
 		var isActive = button.classList.contains('active')
 		var others=document.querySelectorAll("span#inputType button")
 		for(var i=0;i<others.length;others[i++].classList.remove('active')){}
-		if(!isActive) { button.classList.add('active') }
+		if(!isActive){button.classList.add('active')}
 	}
 </script>
 

@@ -1,6 +1,6 @@
 <script>
-	/*  This file is part of "summary.php"
-		It creates a table indicating active stages
+	/*  part of "summary.php"
+		creates a table indicating active stages
 	*/
 
 	var aass={ }; //namespace

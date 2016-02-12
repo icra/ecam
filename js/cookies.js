@@ -1,14 +1,20 @@
 /** 
-	RAW COOKIES FUNCTIONS 
-*/
+  *
+  * RAW COOKIES FUNCTIONS 
+  *
+  */
 
 /** New cookie */
 function setCookie(name,value,days) 
 {
+	//expires
+	days=days||1;
 	var d = new Date();
 	d.setTime(d.getTime()+(days*24*60*60*1000));
 	var expires = "expires="+d.toUTCString();
+	//set cookie
 	document.cookie = name+"="+value+"; "+expires;
+
 }
 
 /** Read cookie */
@@ -20,7 +26,10 @@ function getCookie(name)
 	{
 		var c=ca[i];
 		while(c.charAt(0)==' ')c=c.substring(1,c.length);
-		if(c.indexOf(nameEQ)==0)return c.substring(nameEQ.length,c.length);
+		if(c.indexOf(nameEQ)==0)
+		{	
+			return c.substring(nameEQ.length,c.length);
+		}
 	}
 	return null;
 }
