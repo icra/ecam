@@ -1,9 +1,9 @@
 <!--CURRENT GLOBAL OBJECT IN JSON--><div style="display:
-;
+none;
 margin-top:4em;"> 
 
 	<!--l1 & l2-->
-	<div class=inline style="margin-top:4em;text-align:left;border:1px solid #ccc;width:30%;background:#fafafa">
+	<div class=inline style="margin-top:4em;text-align:left;border:1px solid #ccc;width:50%;background:#fafafa">
 		<pre><b>Current System</b><br><span id=currentGlobal></span></pre>
 	</div>
 </div>
@@ -12,7 +12,7 @@ margin-top:4em;">
 	/** Stringify Global object and display it */
 	function updateResult()
 	{
-		document.getElementById('currentGlobal').innerHTML=JSON.stringify(Global,null,"    ")
+		document.getElementById('currentGlobal').innerHTML=JSON.stringify(Global,null,"    ");
 
 		/**
 		  *
@@ -29,7 +29,8 @@ margin-top:4em;">
 		//Check if compressed exceeds 4k characters
 		if(compressed.length>=4000)
 		{
-			alert("ERROR: memory is full. Please remove some substages.")
+			alert("ERROR: memory is full. Please remove some substages.");
+			window.location.reload();
 			return;
 		}
 

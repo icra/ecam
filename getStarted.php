@@ -81,8 +81,8 @@
 <!--FORM--><table id=form style="text-align:left;"></table>
 <!--PREV&NEXT-->
 <div style=margin:1em>
-	<button class="button prev" onclick=window.location='index.php'>Previous</button> 
-	<button class="button next" onclick=window.location='configuration.php'>Next</button>
+	<button class="button prev" onclick="event.stopPropagation();window.location='index.php'">Previous</button> 
+	<button class="button next" onclick="event.stopPropagation();window.location='configuration.php'">Next</button>
 </div>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

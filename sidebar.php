@@ -130,7 +130,7 @@
 			transition:all 0.15s;
 		}
 		div#sidebar.off{width:40px;}
-		div#sidebar.on{width:260px;}
+		div#sidebar.on{width:220px;}
 		div#sidebar.on  div#sidecontent{display:block}
 		div#sidebar.off div#sidecontent{display:none}
 		div#sidebar div{padding:0;margin:0}
@@ -198,6 +198,10 @@
 
 <script>Sidebar.update()</script>
 
+<style>
+#sidebar td.sidebar_selected {background:linear-gradient(#eee,#fff,#ddd);}
+</style>
+
 <script>
 	//make the current page on the navbar be highlighted
 	(function()
@@ -212,7 +216,7 @@
 			var href=links[i].getAttribute('href');
 			if(encodeURIComponent(requri).search(encodeURIComponent(href)+"$")!=-1)	
 			{
-				links[i].parentNode.style.backgroundColor="yellow";
+				links[i].parentNode.classList.add('sidebar_selected');
 				links[i].style.color="black";
 				break;
 			}

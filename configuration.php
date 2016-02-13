@@ -288,11 +288,13 @@
 
 <!--PREV & NEXT BUTTONS-->
 <div style=margin-top:4em> 
-	<button class="button prev" onclick=window.location='getStarted.php'>Previous</button> 
+	<button class="button prev" onclick="event.stopPropagation();window.location='getStarted.php'">Previous</button> 
+	
 	<script>
 		//find first available stage to start entering data
 		function nextPage()
 		{
+			event.stopPropagation();
 			if(Global.Configuration['Active Stages'].water==1){window.location="edit.php?level=Water";return;}
 			if(Global.Configuration['Active Stages'].waste==1){window.location="edit.php?level=Waste";return;}
 			alert("ERROR! There are no active stages. Click on the left table to activate them.");

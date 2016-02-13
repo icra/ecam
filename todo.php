@@ -19,7 +19,6 @@
 	<tr><td>Create option to have BOD in kg or mg/L (dividing by another variable)<td class=priority>Need further explanation</td>
 	<tr><td>Variables wsa11 and wsa12 not clear (pump size and motor type)<td class=priority>Need further explanation</td>
 	<tr><td>If you add more than 20 substages, some disappear. Find out why<td>Cookie size limit to 4000. And 8000 total</td>
-	<tr><td>Save button for L3<td>NOW</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
 	<tr><td>Merge calculated variables with inputs in L3<td>Pending</td>
 	<tr><td>Create Warning in new system button<td>Pending</td>
@@ -35,7 +34,7 @@
 	(function()
 	{
 		var newColor;
-		var coll=document.querySelectorAll("td");
+		var coll=document.querySelectorAll("#todo td");
 		for(var i=0;i<coll.length;i++)
 		{
 			switch(coll[i].textContent)
