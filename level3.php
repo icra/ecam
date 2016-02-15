@@ -86,6 +86,7 @@
 		/** New substage button pushed */
 		function newSubstage()
 		{
+			event.stopPropagation(); //this is to see the memory progress
 			substages.push(new Substage());
 			init();
 		}
