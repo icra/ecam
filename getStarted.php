@@ -71,6 +71,7 @@
 		{
 			updateForm()
 			updateResult()
+			Sidebar.update()
 		}
 	</script>
 </head><body onload=init()><center>

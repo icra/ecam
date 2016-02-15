@@ -424,6 +424,7 @@
 		{
 			updateSubstagesTable();
 			updateOutputs();
+			Sidebar.update();
 			updateResult();
 		}
 	</script>
