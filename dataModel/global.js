@@ -208,7 +208,7 @@ var Global = {
 				return Global.Waste.ww8*2*Global.Waste.ww9*0.25*fuel.FD*fuel.NCV/1000/1000;
 			},	
 			c_wwt58:function(){
-				var findcom=Global.Configuration['Yes/No']["Is any untreated industrial or commercial water connected"] ? 1.25 : 1;
+				var findcom=Global.Configuration['Yes/No']["Is any untreated industrial or commercial wastewater connected"] ? 1.25 : 1;
 				return this.wwt6*(Global.Waste.Discharge.wwd1-this.wwt8)/this.wwt8*1.1*findcom||0;
 			},
 			c_wwt59:function(){return 0.02*this.c_wwt50()*0.59*0.66*34},
@@ -293,7 +293,7 @@ var Global = {
 			"Do you have fuel engines to run pumps"                              :0,
 			"Are you using truck transport to convey sludge to the disposal site":0,
 			"Is your topography flat"                                            :0,
-			"Is any untreated industrial or commercial water connected"          :0,
+			"Is any untreated industrial or commercial wastewater connected"          :0,
 		},
 	},
 }

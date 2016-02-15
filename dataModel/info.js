@@ -1,11 +1,11 @@
 /** 
   *
-  * VARIABLE DESCRIPTIONS, MAGNITUDES AND UNITS
+  * DESCRIPTIONS, MAGNITUDES AND UNITS (for inputs, calculated variables and PIs)
   *
   */
 
 /** 
-	"Info" is an object that stores all variable descriptions and units
+	"Info" is a one level depth object that stores all variable descriptions and units
 
 	Format:
 		"variable code":
@@ -20,13 +20,11 @@
 var Info = {
 	//L0 GENERAL
 	"Days":{description:"Assessment period",magnitude:"Time",unit:"days"},
-
 	//L1 UWS
 	"uw1" :{description:"Conversion factor for grid electricity",                                 magnitude:"Conversion",unit:"kgCO2e/kWh",},
 	c_uw50:{description:"Energy costs",                                                           magnitude:"Currency",  unit:"USD"},
 	c_uw51:{description:"Running costs",                                                          magnitude:"Currency",  unit:"USD"},
 	c_uw52:{description:"Total electrical energy consumed from the grid and from self-production",magnitude:"Energy",    unit:"kWh"},
-
 	//L1 WATER SUPPLY
 	"ws1":{description:"Serviced population",                                              magnitude:"People",  unit:"People",},
 	"ws2":{description:"Resident population",                                              magnitude:"People",  unit:"People",},
@@ -38,7 +36,6 @@ var Info = {
 	"ws9":{description:"Volume of Fuel consumed",                                          magnitude:"Volume",  unit:"m3",},
 	c_ws50:{description:"Energ Fuel Cons (engines)",                                       magnitude:"Energy",  unit:"TJ",},
 	c_ws51:{description:"Direct CO2 emitted in driking water stages from on-site engines", magnitude:"Mass",    unit:"kg",},
-
 	//L2 Water Supply General
 	"wsg1":{description:"Water-related energy produced",                                   magnitude:"Energy",unit:"kWh",},
 	"wsg2":{description:"Water-related energy produced sold to the grid",                  magnitude:"Energy",unit:"kWh",},
@@ -48,43 +45,38 @@ var Info = {
 	c_wsg50:{description:"Total electrical energy consumed from the grid and from self-production related to the urban drinking water system",magnitude:"Energy",unit:"kWh"},
 	c_wsg51:{description:"Net total process related energy consumed by the utility related to the urban drinking water system",magnitude:"Energy",unit:"kWh"},
 	c_wsg52:{description:"<b style=color:red>TBD</b> GHG emission offset from using the Heat energy from water instead of fuel for neighboring  districts for heating or cooling",magnitude:"Energy",unit:"kWh"},
-
 	//L2 Water Abstraction
-	"wsa1":{description:"Total electric energy consumption",        magnitude:"Energy",unit:"kWh",},
-	"wsa2":{description:"Volume of conveyed water",                 magnitude:"Volume",unit:"m3",},
-	"wsa3":{description:"Electric energy produced from turbines",   magnitude:"Energy",unit:"kWh",},
-
-		//L3 Water Abstraction
-		"wsa4" :{description:"Pumping head in each pumping system",  magnitude:"Head",     unit:"m",},
-		"wsa5" :{description:"Volume pumped in each Pumping System", magnitude:"Head",     unit:"m3",},
-		"wsa6" :{description:"Turbine water volume",                 magnitude:"Volume",   unit:"m3",},
-		"wsa7" :{description:"Turbine head",                         magnitude:"Head",     unit:"m",},
-		"wsa8" :{description:"Water losses",                         magnitude:"Volume",   unit:"m3",},
-		"wsa9" :{description:"Mains lenght",                         magnitude:"Distance", unit:"km",},
-		"wsa10":{description:"Friction pipe losses",                 magnitude:"Head",     unit:"m",},
-		c_wsa50:{description:"[Sum](abstracted water volume pumped x pump head in meters)",magnitude:"Volume x Head",unit:"m3 x 100m"},
-
+	"wsa1":{description:"Total electric energy consumption",      magnitude:"Energy",unit:"kWh",},
+	"wsa2":{description:"Volume of conveyed water",               magnitude:"Volume",unit:"m3",},
+	"wsa3":{description:"Electric energy produced from turbines", magnitude:"Energy",unit:"kWh",},
+	//L3 Water Abstraction
+	"wsa4" :{description:"Pumping head in each pumping system",                        magnitude:"Head",         unit:"m",},
+	"wsa5" :{description:"Volume pumped in each Pumping System",                       magnitude:"Head",         unit:"m3",},
+	"wsa6" :{description:"Turbine water volume",                                       magnitude:"Volume",       unit:"m3",},
+	"wsa7" :{description:"Turbine head",                                               magnitude:"Head",         unit:"m",},
+	"wsa8" :{description:"Water losses",                                               magnitude:"Volume",       unit:"m3",},
+	"wsa9" :{description:"Mains lenght",                                               magnitude:"Distance",     unit:"km",},
+	"wsa10":{description:"Friction pipe losses",                                       magnitude:"Head",         unit:"m",},
+	c_wsa50:{description:"[Sum](abstracted water volume pumped x pump head in meters)",magnitude:"Volume x Head",unit:"m3 x 100m"},
 	//L2 Water Treatment
 	"wst1":{description:"Volume of treated water", magnitude:"Volume", unit:"m3",},
 	"wst2":{description:"Total energy consumed",   magnitude:"Energy", unit:"kWh",},
-		
-		//L3 Water Treatment
-		"wst3" :{description:"Treated water quality tests carried out",                   magnitude:"Number",    unit:"number",},
-		"wst4" :{description:"Compliance of aesthetic tests",                             magnitude:"Number",    unit:"number",},
-		"wst5" :{description:"Compliance of microbiological tests",                       magnitude:"Number",    unit:"number",},
-		"wst6" :{description:"Compliance of physical-chemical tests",                     magnitude:"Number",    unit:"number",},
-		"wst7" :{description:"Compliance of radioactivity tests",                         magnitude:"Number",    unit:"number",},
-		"wst8" :{description:"Volume of treated water in WTPs with Pre-ox/C/F/S/Filt/Des",magnitude:"Volume",    unit:"m3",},	
-		"wst9" :{description:"Volume of treated water in WTPs with Pre-ox/C/F/Filt/Des",  magnitude:"Volume",    unit:"m3",},	
-		"wst10":{description:"Volume of treated water in WTPs with C/F/S/Filt/Des",       magnitude:"Volume",    unit:"m3",},
-		"wst11":{description:"Volume of treated water in WTPs with C/F/Filt/Des",         magnitude:"Volume",    unit:"m3",},
-		"wst12":{description:"Volume of treated water in WTPs with Des",                  magnitude:"Volume",    unit:"m3",},
-		"wst13":{description:"Volume of treated water in WTPs with other",                magnitude:"Volume",    unit:"m3",},
-		"wst14":{description:"Sludge produced in WTPs",                                   magnitude:"Mass",      unit:"kg",},
-		"wst15":{description:"Treatment capacity",                                        magnitude:"Volume",    unit:"m3",},
-		"wst16":{description:"Tests complying with discharge consents",                   magnitude:"Number",    unit:"number",},
-		c_wst50:{description:"Percentage of tests complying with regulations",            magnitude:"Percent",   unit:"%"},
-
+	//L3 Water Treatment
+	"wst3" :{description:"Treated water quality tests carried out",                   magnitude:"Number",  unit:"number",},
+	"wst4" :{description:"Compliance of aesthetic tests",                             magnitude:"Number",  unit:"number",},
+	"wst5" :{description:"Compliance of microbiological tests",                       magnitude:"Number",  unit:"number",},
+	"wst6" :{description:"Compliance of physical-chemical tests",                     magnitude:"Number",  unit:"number",},
+	"wst7" :{description:"Compliance of radioactivity tests",                         magnitude:"Number",  unit:"number",},
+	"wst8" :{description:"Volume of treated water in WTPs with Pre-ox/C/F/S/Filt/Des",magnitude:"Volume",  unit:"m3",},	
+	"wst9" :{description:"Volume of treated water in WTPs with Pre-ox/C/F/Filt/Des",  magnitude:"Volume",  unit:"m3",},	
+	"wst10":{description:"Volume of treated water in WTPs with C/F/S/Filt/Des",       magnitude:"Volume",  unit:"m3",},
+	"wst11":{description:"Volume of treated water in WTPs with C/F/Filt/Des",         magnitude:"Volume",  unit:"m3",},
+	"wst12":{description:"Volume of treated water in WTPs with Des",                  magnitude:"Volume",  unit:"m3",},
+	"wst13":{description:"Volume of treated water in WTPs with other",                magnitude:"Volume",  unit:"m3",},
+	"wst14":{description:"Sludge produced in WTPs",                                   magnitude:"Mass",    unit:"kg",},
+	"wst15":{description:"Treatment capacity",                                        magnitude:"Volume",  unit:"m3",},
+	"wst16":{description:"Tests complying with discharge consents",                   magnitude:"Number",  unit:"number",},
+	c_wst50:{description:"Percentage of tests complying with regulations",            magnitude:"Percent", unit:"%"},
 	//L2 Water Distribution
 	"wsd1"  :{description:"Total energy consumed",                                              magnitude:"Energy",     unit:"kWh", },
 	"wsd5"  :{description:"Resident population connected to the drinking water supply systems", magnitude:"Population", unit:"People",},
@@ -92,27 +84,26 @@ var Info = {
 	"wsd7"  :{description:"Distribution system input volume",                                   magnitude:"Volume",     unit:"m3",},
 	"wsd8"  :{description:"Non-revenue water in distribution system",                           magnitude:"Volume",     unit:"m3",},
 	"wsd20" :{description:"Volume of authorized consumption",                                   magnitude:"Volume",     unit:"m3",},
-		
-		//L3 Water Distribution
-		"wsd2" :{description:"Delivery points with adequate pressure",                                  magnitude:"Number",    unit:"number",},
-		"wsd3" :{description:"Number of service connections",                                           magnitude:"Number",    unit:"number",},
-		"wsd4" :{description:"Time system is pressurised",                                              magnitude:"Time",          unit:"hour",},
-		"wsd9" :{description:"Volume injected",                                                         magnitude:"Volume",        unit:"m3",},
-		"wsd10":{description:"Minimum pressure to be supplied at the distribution nodes	",              magnitude:"Pressure",      unit:"m",},
-		"wsd11":{description:"Highest node elevation",                                                  magnitude:"Distance",        unit:"m asl",},
-		"wsd12":{description:"Lowest node elevation of the stage",                                      magnitude:"Distance",        unit:"m asl",},
-		"wsd13":{description:"Average nodes elevation",                                                 magnitude:"Distance",        unit:"m asl",},
-		"wsd14":{description:"Water table elevation node",                                              magnitude:"Distance",        unit:"m",},
-		"wsd15":{description:"Distributed water pumped",                                                magnitude:"Volume",        unit:"m3",},
-		"wsd16":{description:"Pump head",                                                               magnitude:"Head",        unit:"m",},
-		"wsd17":{description:"Energy recovered at water distribution",                                  magnitude:"Energy",        unit:"kWh",},
-		"wsd18":{description:"Mains length",                                                            magnitude:"Distance",        unit:"km",},
-		"wsd19":{description:"Friction pipe losses",                                                    magnitude:"Head",        unit:"m",},
-		c_wsd50:{description:"Natural energy provided (gravity energy from supply to distribution)",    magnitude:"Energy",        unit:"kWh"},
-		c_wsd51:{description:"Minimum required energy for the system to operate by users (theoretical)",magnitude:"Energy",        unit:"kWh"},
-		c_wsd52:{description:"Total supplied energy to the network (natural plus shaft), real system",  magnitude:"Energy",        unit:"kWh"},
-		c_wsd53:{description:"Topographic energy supplied to the system",                               magnitude:"Energy",        unit:"kWh"},
-		c_wsd54:{description:"[Sum](distributed water volume pumped x pump head in meters)",            magnitude:"Volume x head", unit:"m3x100m"},
+	//L3 Water Distribution
+	"wsd2" :{description:"Delivery points with adequate pressure",                                  magnitude:"Number",        unit:"number",},
+	"wsd3" :{description:"Number of service connections",                                           magnitude:"Number",        unit:"number",},
+	"wsd4" :{description:"Time system is pressurised",                                              magnitude:"Time",          unit:"hour",},
+	"wsd9" :{description:"Volume injected",                                                         magnitude:"Volume",        unit:"m3",},
+	"wsd10":{description:"Minimum pressure to be supplied at the distribution nodes	",              magnitude:"Pressure",      unit:"m",},
+	"wsd11":{description:"Highest node elevation",                                                  magnitude:"Distance",      unit:"m asl",},
+	"wsd12":{description:"Lowest node elevation of the stage",                                      magnitude:"Distance",      unit:"m asl",},
+	"wsd13":{description:"Average nodes elevation",                                                 magnitude:"Distance",      unit:"m asl",},
+	"wsd14":{description:"Water table elevation node",                                              magnitude:"Distance",      unit:"m",},
+	"wsd15":{description:"Distributed water pumped",                                                magnitude:"Volume",        unit:"m3",},
+	"wsd16":{description:"Pump head",                                                               magnitude:"Head",          unit:"m",},
+	"wsd17":{description:"Energy recovered at water distribution",                                  magnitude:"Energy",        unit:"kWh",},
+	"wsd18":{description:"Mains length",                                                            magnitude:"Distance",      unit:"km",},
+	"wsd19":{description:"Friction pipe losses",                                                    magnitude:"Head",          unit:"m",},
+	c_wsd50:{description:"Natural energy provided (gravity energy from supply to distribution)",    magnitude:"Energy",        unit:"kWh"},
+	c_wsd51:{description:"Minimum required energy for the system to operate by users (theoretical)",magnitude:"Energy",        unit:"kWh"},
+	c_wsd52:{description:"Total supplied energy to the network (natural plus shaft), real system",  magnitude:"Energy",        unit:"kWh"},
+	c_wsd53:{description:"Topographic energy supplied to the system",                               magnitude:"Energy",        unit:"kWh"},
+	c_wsd54:{description:"[Sum](distributed water volume pumped x pump head in meters)",            magnitude:"Volume x head", unit:"m3x100m"},
 
 	//L1 WASTEWATER
 	"ww1" :{description:"Energy costs",                                 magnitude:"Currency",      unit:"USD",},
@@ -130,9 +121,9 @@ var Info = {
 	"ww14":{description:"BOD5 per person per day", magnitude:"Mass/inhab/time",   unit:"g/person/day",},
 	"ww15":{description:"Treated wastewater volume", magnitude:"Volume",   unit:"m3",},
 	c_ww50:{description:"Biogas flared",magnitude:"Volume",unit:"Nm3"},
-	c_ww51:{description:"N2O emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kg"},
-	c_ww52:{description:"CH4 emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kg"},
-	c_ww53:{description:"N2O emitted from treated wastewater effluent discharged",magnitude:"Mass",unit:"kg"},
+	c_ww51:{description:"N2O emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kgCO2e"},
+	c_ww52:{description:"CH4 emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kgCO2e"},
+	c_ww53:{description:"N2O emitted from treated wastewater effluent discharged",magnitude:"Mass",unit:"kgCO2e"},
 	c_ww54:{description:"CO2e emitted from sludge transport off-site. Based upon sum of CO2, CH4 and N2O emission from mobile combustion",magnitude:"Mass",unit:"kgCO2e"},
 	c_ww55:{description:"Methane (CO2e) emitted in wastewater treatment plants",magnitude:"Mass",unit:"kgCO2e"},
 	c_ww56:{description:"Energy of fuel consumed for onsite engines",magnitude:"Energy",unit:"kWh"},
@@ -198,7 +189,7 @@ var Info = {
 		c_wwt61:{description:"Percentage of test complying with regulations",                                  magnitude:"Percent",unit:"%",},
 
 	//L2 Wastewater Discharge
-	"wwd1":{description:"Volume of discharged wastewater",                            magnitude:"Volume",unit:"m3",},
+	"wwd1":{description:"Volume of treated or untreated discharged wastewater",       magnitude:"Volume",unit:"m3",},
 	"wwd3":{description:"Electric energy consumed for pumping discharged wastewater", magnitude:"Energy",unit:"kWh",},
 	"wwd4":{description:"Energy recovered during wastewater discharge",               magnitude:"Energy",unit:"kWh",},
 		
@@ -211,51 +202,51 @@ var Info = {
 		c_wwd51:{description:"[Sum] (water volume pumped x pump head in meters)",magnitude:"Volume x head",unit:"m3 x 100m"},
 	
 	//PERFORMANCE INDICATORS LEVEL 1
-	gE1w    :{description:"Energy costs",                                                                                             magnitude:"Percent",           unit:"%"},
-	gE1ww   :{description:"Energy costs",                                                                                             magnitude:"Percent",           unit:"%"},
-	gE2w    :{description:"Energy consumption per capita",	                                            magnitude:"Energy/inhab/time", unit:"kWh/inhab/year"},
-	gE2ww   :{description:"Energy consumption per capita",	                                                magnitude:"Energy/inhab/time", unit:"kWh/inhab./year"},
-	gE3w    :{description:"Energy consumption per serviced population",	                                magnitude:"Energy/inhab/time", unit:"kWh/serv.Pop/year"},
-	gE3ww   :{description:"Energy consumption per serviced population",	                                    magnitude:"Energy/inhab/time", unit:"kWh/serv.Pop./year"},
-	gE4w    :{description:"Energy consumption per authorized consumption",	                            magnitude:"Energy/Volume",     unit:"kWh/m3"},
-	gE4ww   :{description:"Energy consumption per collected wastewater volume", 	                        magnitude:"Energy/Volume",     unit:"kWh/m3"},
-	wGHG1   :{description:"GHG emissions per capita",                                                                        magnitude:"Mass/inhab/time",   unit:"kgCO2e/inhab/year"},
-	wGHG2   :{description:"GHG emissions per serviced population",                                                           magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year"},
-	wGHG3   :{description:"GHG emissions per authorized consumption",                                                        magnitude:"Mass/Volume",       unit:"kgCO2e/m3"},
+	gE1w    :{description:"Energy costs",                                                                                magnitude:"Percent",           unit:"%"},
+	gE1ww   :{description:"Energy costs",                                                                                magnitude:"Percent",           unit:"%"},
+	gE2w    :{description:"Energy consumption per capita",	                                                             magnitude:"Energy/inhab/time", unit:"kWh/inhab/year"},
+	gE2ww   :{description:"Energy consumption per capita",	                                                             magnitude:"Energy/inhab/time", unit:"kWh/inhab./year"},
+	gE3w    :{description:"Energy consumption per serviced population",	                                                 magnitude:"Energy/inhab/time", unit:"kWh/serv.Pop/year"},
+	gE3ww   :{description:"Energy consumption per serviced population",	                                                 magnitude:"Energy/inhab/time", unit:"kWh/serv.Pop./year"},
+	gE4w    :{description:"Energy consumption per authorized consumption",	                                             magnitude:"Energy/Volume",     unit:"kWh/m3"},
+	gE4ww   :{description:"Energy consumption per collected wastewater volume",                                          magnitude:"Energy/Volume",     unit:"kWh/m3"},
+	wGHG1   :{description:"GHG emissions per capita",                                                                    magnitude:"Mass/inhab/time",   unit:"kgCO2e/inhab/year"},
+	wGHG2   :{description:"GHG emissions per serviced population",                                                       magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year"},
+	wGHG3   :{description:"GHG emissions per authorized consumption",                                                    magnitude:"Mass/Volume",       unit:"kgCO2e/m3"},
 	wGHG4   :{description:"GHG emissions from other activities than electricity consumption per serviced population",    magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year"},
 	wGHG5   :{description:"GHG emissions from other activities than electricity consumption per authorized consumption", magnitude:"Mass/Volume",       unit:"kgCO2e/m3"},
-	wGHG6   :{description:"GHG emissions from electricity consumption per serviced population",  	                                        magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year"},
-	wGHG7   :{description:"GHG emissions from electricity consumption per authorized consumption",  	                                    magnitude:"Mass/Volume",       unit:"kgCO2e/m3"},
-	wS4	    :{description:"Proportion of resident population receiving service",		                                                            magnitude:"Percent",           unit:"%"},
-	wS5	    :{description:"Non-revenue water by volume",                                                                                    magnitude:"Percent",           unit:"%"},	
-	wS6     :{description:"Authorized consumption per pers per day",magnitude:"Volume/inhab/time",unit:"m3/inhab/day"},
-	wwGHG1  :{description:"GHG emissions per capita",                                                                magnitude:"Mass/inhab/time",   unit:"kgCO2e/inhab/year"},
-	wwGHG2  :{description:"GHG emissions per serviced population",                                                   magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year"},
-	wwGHG3  :{description:"GHG emissions per collected wastewater volume",	                                        magnitude:"Mass/inhab/time",   unit:"kgCO2e/m3"},
-	wwGHG4  :{description:"GHG emissions from electricity consumption per collected wastewater",                                            magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year",},
-	wwGHG5  :{description:"GHG emissions from electricity consumption per serviced population",                                             magnitude:"Mass/Volume",       unit:"kgCO2e/m3",},
+	wGHG6   :{description:"GHG emissions from electricity consumption per serviced population",  	                     magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year"},
+	wGHG7   :{description:"GHG emissions from electricity consumption per authorized consumption",  	                 magnitude:"Mass/Volume",       unit:"kgCO2e/m3"},
+	wS4	    :{description:"Proportion of resident population receiving service",		                                 magnitude:"Percent",           unit:"%"},
+	wS5	    :{description:"Non-revenue water by volume",                                                                 magnitude:"Percent",           unit:"%"},	
+	wS6     :{description:"Authorized consumption per pers per day",                                                     magnitude:"Volume/inhab/time", unit:"m3/inhab/day"},
+	wwGHG1  :{description:"GHG emissions per capita",                                                                    magnitude:"Mass/inhab/time",   unit:"kgCO2e/inhab/year"},
+	wwGHG2  :{description:"GHG emissions per serviced population",                                                       magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year"},
+	wwGHG3  :{description:"GHG emissions per collected wastewater volume",	                                             magnitude:"Mass/inhab/time",   unit:"kgCO2e/m3"},
+	wwGHG4  :{description:"GHG emissions from electricity consumption per serviced population",                          magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year",},
+	wwGHG5  :{description:"GHG emissions from electricity consumption per collected wastewater",                         magnitude:"Mass/Volume",       unit:"kgCO2e/m3",},
 	wwGHG6  :{description:"GHG emissions from other activities than electricity consumption per serviced population",    magnitude:"Mass/inhab/time",   unit:"kgCO2e/serv.Pop/year",},
-	wwGHG7  :{description:"GHG emissions from other activities than electricity consumption per collected wastewater", magnitude:"Mass/Volume",       unit:"kgCO2e/m3",},
-	wwS1    :{description:"Proportion of resident population receiving service",                                                                  magnitude:"Percent",           unit:"%",},
-	wwS2    :{description:"Collected wastewater treated",                                                                                     magnitude:"Percent",           unit:"%",},
-	wwS5    :{description:"Treated wastewater per pers per day",unit:"Volume/inhab/time",unit:"m3/inhab/day",},
+	wwGHG7  :{description:"GHG emissions from other activities than electricity consumption per collected wastewater",   magnitude:"Mass/Volume",       unit:"kgCO2e/m3",},
+	wwS1    :{description:"Proportion of resident population receiving service",                                         magnitude:"Percent",           unit:"%",},
+	wwS2    :{description:"Collected wastewater treated",                                                                magnitude:"Percent",           unit:"%",},
+	wwS5    :{description:"Treated wastewater per pers per day",                                                         magnitude:"Volume/inhab/time", unit:"m3/inhab/day",},
 
 	//PERFORMANCE INDICATORS LEVEL 2
-	wS1	    :{description:"Percentage of quality compliance",                                                                               magnitude:"Percent",         unit:"%",},
-	wS2	    :{description:"Percentage of supply pressure adequacy",                                                                             magnitude:"Percent",         unit:"%",},
+	wS1	    :{description:"Percentage of quality compliance",                                                                        magnitude:"Percent",         unit:"%",},
+	wS2	    :{description:"Percentage of supply pressure adequacy",                                                                  magnitude:"Percent",         unit:"%",},
 	wS3	    :{description:"Continuity of supply",                                                                                    magnitude:"Percent",         unit:"%",},
-	wwGHG8	:{description:"GHG emissions from fuel engines per serviced population",                            magnitude:"Mass/inhab/time", unit:"kgCO2e/serv.Pop/year",},
-	wwGHG9	:{description:"GHG emissions from fuel engines per collected wastewater volume",                    magnitude:"Mass/Volume",     unit:"kgCO2e/m3",},
-	wwGHG10	:{description:"GHG emissions from biogas flaring at the WWTP per serviced population",                                  magnitude:"Mass/inhab",      unit:"kgCO2e/serv.pop",},
-	wwGHG11	:{description:"GHG emissions from biogas flaring at the WWTP per collected wastewater volume",                          magnitude:"Mass/Volume",     unit:"kgCO2e/m3",},
+	wwGHG8	:{description:"GHG emissions from fuel engines per serviced population",                                                 magnitude:"Mass/inhab/time", unit:"kgCO2e/serv.Pop/year",},
+	wwGHG9	:{description:"GHG emissions from fuel engines per collected wastewater volume",                                         magnitude:"Mass/Volume",     unit:"kgCO2e/m3",},
+	wwGHG10	:{description:"GHG emissions from biogas flaring at the WWTP per serviced population",                                   magnitude:"Mass/inhab",      unit:"kgCO2e/serv.pop",},
+	wwGHG11	:{description:"GHG emissions from biogas flaring at the WWTP per collected wastewater volume",                           magnitude:"Mass/Volume",     unit:"kgCO2e/m3",},
 	wwGHG12	:{description:"GHG emissions from the discharge of treated effluent to waterbodies per serviced population",             magnitude:"Mass/inhab",      unit:"kgCO2e/serv.pop",},
 	wwGHG13	:{description:"GHG emissions from the discharge of treated effluent to waterbodies per collected wastewater volume",     magnitude:"Mass/Volume",     unit:"kgCO2e/m3",},
 	wwGHG14	:{description:"GHG emissions from the discharge of untreated wastewater to waterbodies per serviced population",         magnitude:"Mass/inhab",      unit:"kgCO2e/serv.pop",},
 	wwGHG15	:{description:"GHG emissions from the discharge of untreated wastewater to waterbodies per collected wastewater volume", magnitude:"Mass/Volume",     unit:"kgCO2e/m3",},
 	wwGHG16	:{description:"GHG emissions from sludge transport per serviced population",                                             magnitude:"Mass/inhab",      unit:"kgCO2e/serv.pop",},
 	wwGHG17	:{description:"GHG emissions from sludge transport per collected wastewater volume",                                     magnitude:"Mass/Volume",     unit:"kgCO2e/m3",},
-	wwS3    :{description:"Percentage of quality compliance",                                                                 magnitude:"Percent",         unit:"%",},
-	wwS4	:{description:"Percent dilution in the sewer system",                                                                    magnitude:"Percent",unit:"%",},
+	wwS3    :{description:"Percentage of quality compliance",                                                                        magnitude:"Percent",         unit:"%",},
+	wwS4	:{description:"Percent dilution in the sewer system",                                                                    magnitude:"Percent",         unit:"%",},
 
 
 	//L2 and L3 PIs
