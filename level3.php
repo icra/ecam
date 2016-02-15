@@ -460,7 +460,7 @@
 </div>
 <!--separator--><div style=margin-top:120px></div>
 <!--linear diagram--><?php include'linear.php'?>
-<!--HELP--><h4>In Level 3 you can subdivide a Level 2 stage into multiple substages</h4>
+<!--HELP--><h4>In Level 3 you can subdivide a Level 2 stage into multiple substages. Change the name of them clicking on its header.</h4>
 <!--new substage button--><button onclick=newSubstage() class=button>+ New Substage</button>
 <!--substages counter--><div class=inline style="border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
 <!--SUBSTAGES TABLE--><table id=substages style=margin:1em><tr><td style=border:none colspan=2></table>

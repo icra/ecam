@@ -191,6 +191,7 @@
 			<tr><td><a href=graph3.php>Sankey diagram</a>
 			<tr><th>Other
 			<tr><td><a href=todo.php>To do list</a>
+			<tr><td><a href=export.php>Export variables, descriptions and formulas</a>
 		</table>
 		<div style=color:#999> Click outside to minimize this menu <br>(or click on the symbol on top)</div>
 	</div>
