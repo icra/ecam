@@ -199,7 +199,7 @@
 <script>Sidebar.update()</script>
 
 <style>
-#sidebar td.sidebar_selected {background:linear-gradient(#eee,#fff,#ddd);}
+#sidebar td.sidebar_selected {background:linear-gradient(#eee,#fefefe,#ddd);}
 </style>
 
 <script>
