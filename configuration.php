@@ -184,7 +184,7 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Configuration</h1>
-<!--SUBTITLE--><h4>Click on the left table to activate stages. The table on the right contains further information about your system</h4>
+<!--SUBTITLE--><h4>Click on the left table to activate stages. The table on the right contains additional information about your system</h4>
 
 <!--CONFIGURATION (STAGES)-->
 <div class=inline style=margin-right:2em>

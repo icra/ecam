@@ -1,7 +1,7 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
-		table{width:90%}
+		table#table{width:90%}
 		button.button{margin:1px}
 		button.l2{font-size:10px}
 	</style>

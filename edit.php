@@ -20,18 +20,31 @@
 	<style>
 		td.input input { width:95%;font-size:18px}
 		td.input       { width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
-		table#outputs tr:hover { background:orange; }
-		th{text-align:center}
+
+		/*tables*/
+		table#outputs tr:hover { background:#ccc; }
+		table#outputs th:not(.tableHeader) {background:#d7bfaf}
 		<?php
 			if($level=="Waste")
 			{?>
-				th{background:#bf5050}
-				a,a:visited{color:#bf5050}
+				table#inputs th:not(.tableHeader) {background:#bf5050}
+				#inputs a,#inputs a:visited{color:#bf5050}
+				#outputs a,#outputs a:visited{color:#bf5050}
 			<?php }
 		?>
+		th.tableHeader
+		{
+			background:white;
+			color:#000;
+			font-size:17px;
+			padding-bottom:0.7em;
+			font-weight:normal;
+		}
+
+		#inputs th, #outputs th{text-align:left;border:none}
+		#inputs td, #outputs td{border-top:none;border-left:none;border-right:none}
 	</style>
 	<script>
-
 		/** 
 		  * Note: Try to follow JSdoc structure (http://usejsdoc.org/about-getting-started.html) 
 		  *
@@ -190,6 +203,12 @@
 					}
 				})();
 			}
+			//bottom line with the color of W/WW
+			var newRow=t.insertRow(-1);
+			var newTh=document.createElement('th');
+			newTh.setAttribute('colspan',4)
+			newTh.style.borderBottom='none';
+			newRow.appendChild(newTh);
 		}
 
 		/** Redisplay table id=outputs */
@@ -260,6 +279,13 @@
 				})();
 				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
 			}
+			//bottom line with the color of W/WW
+			var newRow=t.insertRow(-1);
+			var newTh=document.createElement('th');
+			newTh.setAttribute('colspan',4)
+			newTh.style.borderBottom='none';
+			newTh.style.borderTop='none';
+			newRow.appendChild(newTh);
 		}
 
 		/**
@@ -353,13 +379,13 @@
 		}
 	}
 ?>
-<!--HELP--><h4>Input data for this stage. The Indicators (in yellow) will be updated automatically.</h4>
+<!--HELP--><h4>Enter data corresponding to this stage. The results are calculated as you enter data.</h4>
 
 <!--IO-->
-<div style=text-align:left>
+<div style=text-align:left;>
 	<!--INPUTS-->
 	<table id=inputs class=inline style="max-width:46%">
-		<tr><th colspan=5>INPUTS <?php include'inputType.php'?>
+		<tr><th colspan=5 class=tableHeader>INPUTS <?php include'inputType.php'?>
 		<tr>
 			<th>Description
 			<th>Current value
@@ -368,8 +394,8 @@
 	</table>
 
 	<!--PI-->
-	<table id=outputs class=inline style=max-width:46%;background:#f5ecce;>
-		<tr><th colspan=5>RESULTS - Key performance indicators
+	<table id=outputs class=inline style="max-width:50%;background:#f6f6f6;">
+		<tr><th colspan=5 class=tableHeader>RESULTS - Key performance indicators
 		<tr>
 			<th title=Performance style=cursor:help>P
 			<th>Description

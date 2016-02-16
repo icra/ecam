@@ -61,8 +61,10 @@
 			newCell.innerHTML="<a href=edit.php?level="+level+">"+levelAlias+"</a>"
 			if(sublevel!=0)
 			{
+				var url = Level3.isInList(id) ? "level3.php" : "edit.php";
+
 				var sublevelName=sublevel=="General" ? "Energy" : sublevel;
-				newCell.innerHTML+=" &rsaquo; <a href=edit.php?level="+level+"&sublevel="+sublevel+">"+sublevelName+"</a>"
+				newCell.innerHTML+=" &rsaquo; <a href="+url+"?level="+level+"&sublevel="+sublevel+">"+sublevelName+"</a>"
 			}
 
 			//Type (input or output)
@@ -178,8 +180,13 @@
 			else
 			{
 				newCell.innerHTML=currentStage[id]/Units.multiplier(id);
-				newCell.className='input'
-				newCell.setAttribute('onclick',"transformField(this)")
+
+				//if this input is level 3 only, should not be modified here
+				if(!Level3.isInList(id))
+				{
+					newCell.className='input'
+					newCell.setAttribute('onclick',"transformField(this)")
+				}
 			}
 
 			//Select units -- only inputs!

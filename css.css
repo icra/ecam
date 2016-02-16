@@ -10,13 +10,17 @@ h1,h2,h3{padding:0.6em;color:#00aff1;font-weight:normal}
 h4{margin:1em;font-size:18px;color:#58595b}
 legend{color:#58595b;font-size:16px}
 table{border-collapse:collapse;}
-th,td{border:1px solid #aaa;padding:0.4em;font-weight:normal}
-th{background:#00aff1;color:white;vertical-align:middle}
+
+/*default cells*/
+th,td{border:1px solid #aaa;padding:0.4em;}
+th{background:#00adef;color:white;vertical-align:middle}
+
 hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0;}
 
 /*highlight inputs when mouse goes over a row that has a formula*/
-tr.isCV{background:#f7f2e0}
-tr[hl=yes]{background:#af0}
+tr.isCV{background:#f6f6f6}
+tr{transition:all 0.5s}
+tr[hl=yes]{background:#d7bfaf;color:white}
 tr[hl=no]{background:default}
 
 /*ECAM blue*/.blue{color:#00AFF1;}

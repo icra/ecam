@@ -21,7 +21,9 @@
 		table#substages td:not(.level2){text-align:right}
 		td.input input{outline:none;width:40px;font-size:18px}
 		td.input{width:80px;text-align:right;background-color:#eee;cursor:cell}
-		table#outputs tr:hover { background:orange; }
+		#outputs tr:hover { background:orange; }
+		#outputs th{background:#d7bfaf;text-align:left}
+		#outputs td, #outputs th{border-left:none;border-top:none;border-right:none}
 		div.substageMenu{
 			padding:0.1em;
 			border:2px solid #ccc;
@@ -153,7 +155,7 @@
 			/*table element*/ var t=document.getElementById('substages');
 
 			/*table headers */
-				while(t.rows[0].cells.length>1)t.rows[0].deleteCell(-1)
+				while(t.rows[0].cells.length>1)t.rows[0].deleteCell(-1);
 				//go over substages: create a column for each
 				for(var s in substages)
 				{
@@ -180,11 +182,7 @@
 				var newTH = document.createElement('th');
 				newTH.innerHTML="LEVEL 2";
 				t.rows[0].appendChild(newTH);
-				//DIFFERENCE BETWEEN LEVEL 2 and sum of substages
-				var newTH=document.createElement('th');
-				newTH.innerHTML="Difference";
-				newTH.style.backgroundColor='orange';
-				t.rows[0].appendChild(newTH);
+
 				//UNIT header
 				var newTH = document.createElement('th');
 				newTH.innerHTML="Unit";
@@ -195,56 +193,117 @@
 				while(t.rows.length>1)t.deleteRow(-1)
 				//each row corresponds to a variable of the current stage
 				var inputs=getInputs();
+				//Calculated variables
+				var cvs=[];
+				(function()
+				{
+					for(var f in CurrentStage)
+					{
+						//if "c_" is found, add f to cvs
+						if(f.search("c_")!=-1){cvs.push(f);}
+					}
+				})();
+
+				inputs=inputs.concat(cvs);
+
 				for(var input in inputs)
 				{
 					/*variable code*/
 					var code=inputs[input];
+					
+					/*is a calculated variable*/
+					var isCV = code.search('c_')>=0 ? true : false;
+
+					/*new row*/
 					var newRow=t.insertRow(-1);
 					newRow.setAttribute('field',code);
-					newRow.setAttribute('title',Info[code].explanation);
+
+					//highlight fields if is a CV
+					if(isCV)
+					{
+						var formula=CurrentStage[code].toString();
+						var prettyFormula=Formulas.prettify(formula);
+						newRow.setAttribute('onmouseover',"Formulas.hlFields('"+prettyFormula+"',1)");
+						newRow.setAttribute('onmouseout',"Formulas.hlFields('"+prettyFormula+"',0)");
+					}
+
+					/*link and name*/
 					var newCell=newRow.insertCell(-1);
-					/*link and name*/newCell.innerHTML=(function(){
+					newCell.innerHTML=(function()
+					{
 						var extra = Level3.isInList(code) ? "L3 - " : "" ;
 						return extra+" <a href=variable.php?id="+code+">"+code+"</a>";
 					})();
+
 					/*variable description*/
 					var newCell=newRow.insertCell(-1);
 					newCell.style.textAlign="left";
 					newCell.style.fontSize="10px";
+					newCell.style.cursor="help";
+					newCell.setAttribute('title',Info[code].explanation);
 					newCell.innerHTML=Info[code]?Info[code].description:"<span style=color:#ccc>not defined</span>";
+
 					//go over substages
 					var multiplier=Units.multiplier(code);
 					for(var s in substages)
 					{
 						var newCell=newRow.insertCell(-1);
-						newCell.className="input";
-						newCell.setAttribute('onclick','transformField(this)');
-						newCell.setAttribute('substage',s);
-						newCell.innerHTML=substages[s][code]/multiplier;
+
+						if(isCV)
+						{
+							newCell.innerHTML=substages[s][code]()/multiplier;
+						}
+						else
+						{
+							newCell.className="input";
+							newCell.setAttribute('onclick','transformField(this)');
+							newCell.setAttribute('substage',s);
+							newCell.innerHTML=substages[s][code]/multiplier;
+						}
 					}
+
 					//SUM OF SUBSTAGES
 					var sum=sumAll(code);
 					var newCell=newRow.insertCell(-1);
-					newCell.classList.add('level2');
-					newCell.innerHTML=sum/multiplier;
 
-					//update level 2 with sum of level 3
-					var newCell=newRow.insertCell(-1);
-					newCell.style.textAlign='center'
-					newCell.innerHTML=(function()
+					newCell.classList.add('level2');
+
+					newCell.innerHTML=isCV ? CurrentStage[code]()/multiplier : sum/multiplier;
+
+					//join cells if is L3 only or CV
+					var isL3 = Level3.isInList(code)?true:false;
+
+					var joinCells = (isL3 || isCV) ? true:false;
+
+					//if is level 3 only, update level 2
+					if(isL3 && !isCV) CurrentStage[code]=sum;
+
+					if(joinCells)
+					{ 
+						newCell.setAttribute('colspan',3);
+					}
+					else
 					{
-						return "&rarr; <button class=updateL2 onclick=updateL2('"+code+"',"+sum+")>Update L2</button> &rarr;";
-					})();
+						//if input is level 2:
+						var newCell=newRow.insertCell(-1);
+						newCell.style.textAlign='center'
+						newCell.innerHTML=(function()
+						{
+							return "&rarr; <button class=updateL2 onclick=updateL2('"+code+"',"+sum+")>Update L2</button> &rarr;";
+						})();
 
-					//LEVEL 2 current value
-					var newCell=newRow.insertCell(-1);
-					newCell.classList.add('level2');
-					newCell.innerHTML=CurrentStage[code]/multiplier;
-					//DIFFERENCE BETWEEN LEVEL 2 and sum of substages
-					var diff=Math.abs(parseFloat(CurrentStage[code])-sumAll(code))/multiplier
-					var newCell=newRow.insertCell(-1)
-					newCell.style.backgroundColor=diff==0?"#af0":""
-					newCell.innerHTML=diff
+						//LEVEL 2 current value
+						var newCell=newRow.insertCell(-1);
+						newCell.classList.add('level2');
+						newCell.innerHTML=(function()
+						{
+							if(isCV)
+								return CurrentStage[code]()/multiplier;
+							else
+								return CurrentStage[code]/multiplier;
+						})();
+					}
+
 					//Unit for current input
 					newRow.insertCell(-1).innerHTML=(function()
 					{
@@ -270,6 +329,7 @@
 						return str
 					})();
 				}
+
 				//Options
 				var newRow = t.insertRow(-1)
 				var newCell = newRow.insertCell(-1)
@@ -291,6 +351,7 @@
 		{
 			var t=document.getElementById('outputs')
 			while(t.rows.length>1){t.deleteRow(-1)}
+
 			var newRow=t.insertRow(-1);
 
 			['Code','Description'].forEach(function(element)
@@ -326,29 +387,40 @@
 			{
 				//only functions
 				if(typeof(CurrentStage[field])!="function"){continue;}
+
 				//exclude the "level2only" variables
-				if(Level2only.isInList(field)){
-					console.log(field+" is level 2 only");
-					continue;}
-				//skip the field called "modification" created to help calculate functions for each substage
+				if(Level2only.isInList(field)){continue;}
+
+				//skip field "modification" (auxiliar variable)
 				if(field=="modification"){continue;}
 
+				//new row
 				var newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
 				newRow.setAttribute('title',Info[field].explanation);
 
+				//if is calculated variable, hide it
+				if(field.search('c_')>=0) newRow.style.display='none';
+
+				//get formula
 				var formula=CurrentStage[field].toString();
 				var prettyFormula=Formulas.prettify(formula);
+
+				//set highlighting 
 				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+prettyFormula+"',1)");
 				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+prettyFormula+"',0)");
-				newRow.insertCell(-1).innerHTML=(function(){
+
+				//code
+				newRow.insertCell(-1).innerHTML=(function()
+				{
 					var extra = Level3.isInList(field) ? "L3 - " : "" ;
 					return extra+" <a href=variable.php?id="+field+">"+field+"</a>";
 				})();
 
+				//description
 				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
 
-				/** Compute CurrentStage[field]() for each substage*/
+				/** value: Compute CurrentStage[field]() for each substage*/
 				(function(){
 					//the formula will be modified starting by the current field formula
 					var modification=formula;
@@ -370,13 +442,6 @@
 						});
 
 						var modificationSubstage=modification.replace(/\[0\]/g,'['+s+']');
-						/*
-						//show changes, if any
-						if(modificationSubstage!=formula)
-						{
-							console.log(' +Modification for substage['+s+']: '+modificationSubstage)
-						}
-						*/
 						eval("CurrentStage['modification']="+modificationSubstage+";");
 						//value
 						var newCell=newRow.insertCell(-1);
@@ -385,9 +450,10 @@
 					}
 				})();
 
-				/*level 2 value*/ 
+				//level 2 value
 				newRow.insertCell(-1).innerHTML=Math.floor(1e2*CurrentStage[field]()/Units.multiplier(field))/1e2;
-				/*unit*/ 
+
+				//unit
 				newRow.insertCell(-1).innerHTML=Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
 			}
 		}
@@ -423,8 +489,8 @@
 		/** Update all tables */
 		function init()
 		{
-			updateSubstagesTable();
 			updateOutputs();
+			updateSubstagesTable();
 			Sidebar.update();
 			updateResult();
 		}
@@ -464,6 +530,7 @@
 <!--new substage button--><button onclick=newSubstage() class=button>+ New Substage</button>
 <!--substages counter--><div class=inline style="border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
 <!--SUBSTAGES TABLE--><table id=substages style=margin:1em><tr><td style=border:none colspan=2></table>
-<!--OUTPUTS TABLE--><table id=outputs class=inline style=background:yellow> <tr><th colspan=42>OUTPUTS </table>
+<!--OUTPUTS TABLE--><table id=outputs class=inline style=background:#f6f6f6> 
+	<tr><th colspan=42 style="background:white;border:none;color:black;padding-bottom:0.7em;font-size:17px">RESULTS - Key performance indicators</table>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

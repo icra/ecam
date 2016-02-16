@@ -62,12 +62,6 @@
 	function removeAllCookies()
 	{
 		removeCookie("GLOBAL");
-		removeCookie("SUBSTAGES_waterAbs");
-		removeCookie("SUBSTAGES_waterTre");
-		removeCookie("SUBSTAGES_waterDis");
-		removeCookie("SUBSTAGES_wasteCol");
-		removeCookie("SUBSTAGES_wasteTre");
-		removeCookie("SUBSTAGES_wasteDis");
 	}
 
 	/** New system */
@@ -127,15 +121,18 @@
 			overflow:hidden;
 			padding:0;margin:0;
 			box-shadow: 5px 5px 10px 5px #888;
-			transition:all 0.15s;
 		}
 		div#sidebar.off{width:40px;}
-		div#sidebar.on{width:220px;}
+		div#sidebar.on{width:220px;transition:all 0.15s}
 		div#sidebar.on  div#sidecontent{display:block}
 		div#sidebar.off div#sidecontent{display:none}
 		div#sidebar div{padding:0;margin:0}
 		div#sidebar table{margin:0.7em}
 		div#sidebar td, div#sidebar th {padding:0.3em}
+
+		#sidebar th {text-align:left;border:none}
+		#sidebar td {border-top:none;border-left:none;border-right:none}
+
 		#sidebar #burger{color:#888;}
 		#sidebar #burger:hover{color:black;}
 		/*links*/
@@ -145,7 +142,8 @@
 	</style>
 	<span style=font-size:30px;cursor:pointer id=burger onclick=Sidebar.toggle()>&#9776;</span>
 	<div id=sidecontent>
-		<table>
+		<table id=menu>
+			<style>#sidebar #sidecontent #menu td{border-bottom:none}</style>
 			<tr><th colspan=4 id=Name> <script> document.write(Global.General.Name) </script>
 			<tr>
 			<td align=center><button onclick=newSystem()>New</button>
