@@ -16,7 +16,7 @@
 			if(preg_match("/ww/",$id))
 			{?>
 				td.th{background:#bf5050}
-				a,a:visited,h1{color:#bf5050}
+				#info a,#info a:visited,h1{color:#bf5050}
 			<?php }
 		?>
 	</style>
@@ -149,7 +149,7 @@
 						var currentUnit= (Info[output].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[output]||Info[output].unit);
 						var formula = Formulas.prettify(match_stage[output].toString());
 						var currValue = match_stage[output]()/Units.multiplier(output);
-						currValue=Math.floor(1e2*currValue)/1e2;
+						currValue=format(currValue);
 						var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
 						ret+="<div>"+
 							match_localization.toString()+
@@ -174,6 +174,7 @@
 				{
 					var unit=Info[id].magnitude=="Currency"?Global.General.Currency : Info[id].unit;
 					var currValue=currentStage[id]()/Units.multiplier(id);
+					currValue=format(currValue);
 					return currValue+" "+unit;
 				})();
 			}

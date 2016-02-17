@@ -244,7 +244,7 @@
 					newCell.setAttribute('title',Info[code].explanation);
 					newCell.innerHTML=Info[code]?Info[code].description:"<span style=color:#ccc>not defined</span>";
 
-					//go over substages
+					//value: go over substages
 					var multiplier=Units.multiplier(code);
 					for(var s in substages)
 					{
@@ -252,14 +252,14 @@
 
 						if(isCV)
 						{
-							newCell.innerHTML=substages[s][code]()/multiplier;
+							newCell.innerHTML=format(substages[s][code]()/multiplier);
 						}
 						else
 						{
 							newCell.className="input";
 							newCell.setAttribute('onclick','transformField(this)');
 							newCell.setAttribute('substage',s);
-							newCell.innerHTML=substages[s][code]/multiplier;
+							newCell.innerHTML=format(substages[s][code]/multiplier);
 						}
 					}
 
@@ -269,7 +269,9 @@
 
 					newCell.classList.add('level2');
 
-					newCell.innerHTML=isCV ? CurrentStage[code]()/multiplier : sum/multiplier;
+					var value = isCV ? CurrentStage[code]()/multiplier : sum/multiplier;
+
+					newCell.innerHTML=format(value);
 
 					//join cells if is L3 only or CV
 					var isL3 = Level3.isInList(code)?true:false;
@@ -296,13 +298,13 @@
 						//LEVEL 2 current value
 						var newCell=newRow.insertCell(-1);
 						newCell.classList.add('level2');
-						newCell.innerHTML=(function()
+						newCell.innerHTML=format((function()
 						{
 							if(isCV)
 								return CurrentStage[code]()/multiplier;
 							else
 								return CurrentStage[code]/multiplier;
-						})();
+						})());
 					}
 
 					//Unit for current input
@@ -447,12 +449,12 @@
 						//value
 						var newCell=newRow.insertCell(-1);
 						newCell.title=prettyFormula;
-						newCell.innerHTML=Math.floor(1e2*CurrentStage['modification']()/Units.multiplier(field))/1e2;
+						newCell.innerHTML=format(CurrentStage['modification']()/Units.multiplier(field));
 					}
 				})();
 
 				//level 2 value
-				newRow.insertCell(-1).innerHTML=Math.floor(1e2*CurrentStage[field]()/Units.multiplier(field))/1e2;
+				newRow.insertCell(-1).innerHTML=format(CurrentStage[field]()/Units.multiplier(field));
 
 				//unit
 				newRow.insertCell(-1).innerHTML=Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";

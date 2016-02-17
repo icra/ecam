@@ -112,7 +112,7 @@
 					"<td style='font-weight:bold'><a style='color:"+color+"' href=variable.php?id="+variable+">"+variable+"</a>"+
 					"<td>"+description+
 					"<td>"+explanation+
-					"<td style=text-align:right>"+Math.floor(1e2*object[variable]<?php if($type=="output"){echo "()";}?>/multiplier)/1e2+
+					"<td style=text-align:right>"+format(object[variable]<?php if($type=="output"){echo "()";}?>/multiplier)+
 					"<td>"+unit
 			}
 			return ret;

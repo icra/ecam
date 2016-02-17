@@ -6,41 +6,43 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Graphs</h1>
 
-<h2>Graph 2: GHG per stage</h2>
-<div>Ask which kpi go inside</div>
-
-<script src="https://www.gstatic.com/charts/loader.js"></script>
-<!--graph--><div id="graph"></div>
-
-<script>
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
-	function drawChart() 
-	{
-		var data = google.visualization.arrayToDataTable([
-			['Stage', 
-				'Water', 
-				'Wastewater', 
-				'Water Abstraction', 
-				'Water Treatment', 
-				'Water Distribution', 
-				'Waste Collection', 
-				'Waste Treatment', 
-				'Waste Discharge', 
-				{ role: 'annotation' } ],
-			['Level 1', 54, 55, 0,  0,  0,  0, 0,0,''],
-			['Level 2', 10, 24, 20, 32, 18, 5, 0,0,''],
-		]);
-		var options = 
+<!--graph starts here-->
+	<script src="https://www.gstatic.com/charts/loader.js"></script>
+	<script>
+		google.charts.load('current',{'packages':['corechart']});
+		google.charts.setOnLoadCallback(drawChart);
+		function drawChart() 
 		{
-			width:800,
-			height:400,
-			legend:{position:'top',maxLines:9},
-			isStacked:true
-		};
-		var view=new google.visualization.DataView(data);
-		var chart=new google.visualization.BarChart(document.getElementById("graph"));
-		chart.draw(view, options);
-	}
-</script>
+			var data=google.visualization.arrayToDataTable
+			([
+				[ 
+					'Emission type', 
+					'from electricity (Water supply)', 
+					'non-electricity (Water supply)', 
+					'from electricity (Wastewater)', 
+					'non-electricity (Wastewater)', 
+					{role:'annotation'} 
+				],
+				['GHG per serviced population',    Global.Water.wGHG6(), Global.Water.wGHG4(), Global.Waste.wwGHG4(), Global.Waste.wwGHG6(), '' ],
+				['GHG per authorized consumption', Global.Water.wGHG7(), Global.Water.wGHG5(), Global.Waste.wwGHG5(), Global.Waste.wwGHG7() , ''],
+			]);
+			var options=
+			{
+				title:"GHG serviced population & authorized consumption",
+				width:1000,
+				height:500,
+				legend:{position:'right',maxLines:100},
+				isStacked:true,
+				colors: ['#00aeef','#bca613', '#f3a000', '#89375c'],
+			};
+			var view=new google.visualization.DataView(data);
+			var chart=new google.visualization.BarChart(document.getElementById("graph"));
+			chart.draw(view, options);
+		}
+	</script>
+	<div id="graph"></div>
+<!--graph ends here-->
+
+
+<!--link to reference-->
 <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts">https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts</a>

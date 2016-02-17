@@ -39,7 +39,8 @@
 			sankey: 
 			{
 				node: {
-					colors: colors
+					colors: colors,
+					nodePadding:100,
 				},
 				link: {
 					colorMode: 'gradient',
@@ -56,5 +57,5 @@
 <a href="https://developers.google.com/chart/interactive/docs/gallery/sankey">https://developers.google.com/chart/interactive/docs/gallery/sankey</a>
 
 <div>
-Still not implemented, pending more precise explanation
+display water losses in water and dilution in ww
 </div>

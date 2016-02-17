@@ -1,0 +1,61 @@
+
+L1 Wastewater				
+Code	Type	Name	Formula or Default value	Unit
+
+ww19	Input	Treated wastewater daily flow	0	m3/day
+ww21	Input	Monthly running costs	0	USD/month
+ww20	Input	Monthly energy costs	0	USD/month
+ww22	Input	Monthly energy purchased from the grid	0	kWh/month
+ww23	Input	Monthly Volume of Fuel consumed	0	L/month
+ww14	Input	BOD5 per person per day	40	g/person/day
+ww10	Input	Average wwtp effluent nitrogen concentration (or regulatory limit)	0	mg/L
+ww24	Input	Number of trips to sludge disposal site per week	0	Number/week
+ww17	input	Average wwtp influent BOD	0	mgBOD5/L
+ww18	input	Average wwtp effluent BOD5 (or regulatory limit)	0	mgBOD5/L
+ww16	input	average ww flow collected from households (before dilution)	0	L/pers/day
+ww8	    calculated	Number of trips to sludge disposal site	(ww24 / 7) x Ap	Number
+ww1	    calculated	Energy costs	(ww20 /30) xAp	USD
+ww2	    calculated	Running costs	(ww21 / 30) x Ap	USD
+ww3	    calculated	Energy purchased from the grid	(ww22 / 30) x Ap	kWh
+ww11	calculated	Volume of Fuel consumed	(ww23 / 30) x Ap	L
+ww15	calculated	Treated wastewater volume	ww19 x Ap	m3
+ww4	    calculated	average collected wastewater (before dilution)	(ww6 x ww16) / 1000 x AP	m3
+c_ww59	calculated	BOD5 load 	ww4 x (ww17 / 1000)	kgBOD5
+ww7	    calculated	service population	(c_ww59) / (ww14 x Ap /1000)	People
+c_ww60	calculated	BOD5 Removed	(ww17-ww18) x ww4 /1000	kgBOD5
+c_ww56	Calculated variable	Energy of fuel consumed for onsite engines	fuel=Tables[Fuel types][Selected[Fuel type].waste]; ww11*fuel.FD/1000*fuel.NCV/1000;	TJ
+c_ww58	Calculated variable	Energy of fuel consumed for sludge transport	ww8*2*ww9*0.25*0.84*43/1000000	TJ
+
+L1 Water				
+Code	Type	Name	Formula or Default value	Unit
+
+ws10	input	Number of connection	0	connections
+ws11	input	Average people per connection	0	People/connection
+ws12	input	Average drinking water consumptoin per person	0	L/person/day
+ws13	Input	Monthly energy costs	0	USD/month
+ws14	Input	Monthly running costs	0	USD/month
+ws15	Input	Monthly energy purchased from the grid 	0	kWh/month
+ws16	Input	Monthly Volume of Fuel consumed	0	L/month
+ws3	calculated	Energy costs	(ws13 / 30) xAp	USD
+ws4	calculated	Running costs	(ws14 / 30) x Ap	USD
+ws5	calculated	Energy purchased from the grid	(ws15 / 30) x Ap	kWh
+ws9	calculated	Volume of Fuel consumed	(ws16 / 30) x Ap	L
+ws1	Input	Serviced population	ws10 x ws11	People
+ws7	Input	Volume of authorized consumption	(ws1 x ws12) x Ap  / 1000	m3
+
++================+
+| Service Levels |					
++================+
+	L1 Wastewater Service Levels
+		Code	Type	Name	Formula or Default value	Unit	Description
+		wwS3	PI	Percentage of quality compliance	input	%	Percentage of water quality tests carried out in wastewater treatment plants that comply with discharge consents
+		wwS4	PI	Percent dilution in the sewer system	input	%	Percentage of Infiltration and inflow water entering the sewer system compared to the volume of collected wastewater prior to dilution
+		wwS1	PI	Proportion of resident population receiving service	100*ww7/ww5	%	Percentage of the resident population that are connected to the sewer systems and which wastewater is treated by the undertaking
+		wwS2	PI	Collected wastewater treated	100*ww7/ww6	%	Percentage of the collected sewage prior to dilution or overflows in the sewer system that are treated in wastewater treatment plants
+		wwS5	PI	Treated wastewater per pers per day	ww15/ww7/Days	m3/inhab/day	Volume of treated wastewater per serviced person in the service area managed by the undertaking divided by the duration of the assessment period
+	L1 Water Service Levels					
+		wS1	PI	Percentage of quality compliance	input	%	Percentage of the total number of treated water tests performed that comply with
+		wS2	PI	Percentage of supply pressure adequacy	input	%	Percentage of delivery points (one per service connection) that receive and are likely to receive adequate pressure
+		wS3	PI	Continuity of supply	input	%	Percentage of delivery points (one per service connection) that receive and are likely to receive adequate pressure
+		wS4	PI	Proportion of resident population receiving service	100*ws1/ws2	%	Percentage of the resident population that are connected to the urban drinking water system managed by the undertaking, also referred to as 'serviced population'
+		wS5	PI	Non-revenue water by volume	if(wsa2==0) ws8;else (100*ws7/wsa2);	%	Percentage of the system input volume that corresponds to non-revenue water in relation with the total volume entering the urban drinking water system at the abstraction stage

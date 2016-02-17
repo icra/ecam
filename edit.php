@@ -139,13 +139,14 @@
 				else newCell.style.textAlign='center'
 
 				/*value*/
-				newCell.innerHTML=(function()
+				newCell.innerHTML=format((function()
 				{
 					if(isCV)
-						return Math.floor(1e2*CurrentLevel[field]()/Units.multiplier(field))/1e2;
+						return CurrentLevel[field]();
 					else
-						return CurrentLevel[field]/Units.multiplier(field);
-				})();
+						return CurrentLevel[field];
+				})()/Units.multiplier(field));
+
 				//unit
 				newRow.insertCell(-1).innerHTML=(function()
 				{
@@ -232,7 +233,7 @@
 				newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+prettyFormula+'",0)');
 
 				//compute now the value for creating the indicator
-				var value = Math.floor(1e2*CurrentLevel[field]()/Units.multiplier(field))/1e2;
+				var value = CurrentLevel[field]()/Units.multiplier(field)
 
 				/*circle indicator*/ 
 				newCell=newRow.insertCell(-1);
@@ -271,6 +272,7 @@
 				newCell=newRow.insertCell(-1)
 				newCell.innerHTML=(function()
 				{
+					value=format(value);
 					if(Level2Warnings.isIn(field))
 					{
 						return value+" <span style=color:#999>("+Level2Warnings[field]+")</span>";
