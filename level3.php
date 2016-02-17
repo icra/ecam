@@ -229,10 +229,11 @@
 
 					/*link and name*/
 					var newCell=newRow.insertCell(-1);
+					newCell.style.textAlign='left';
 					newCell.innerHTML=(function()
 					{
-						var extra = Level3.isInList(code) ? "L3 - " : "" ;
-						return extra+" <a href=variable.php?id="+code+">"+code+"</a>";
+						var extra = Level3.isInList(code) ? " (L3)" : "" ;
+						return " <a href=variable.php?id="+code+">"+code+"</a>"+extra;
 					})();
 
 					/*variable description*/
@@ -413,8 +414,8 @@
 				//code
 				newRow.insertCell(-1).innerHTML=(function()
 				{
-					var extra = Level3.isInList(field) ? "L3 - " : "" ;
-					return extra+" <a href=variable.php?id="+field+">"+field+"</a>";
+					var extra = Level3.isInList(field) ? " (L3)" : "" ;
+					return "<a href=variable.php?id="+field+">"+field+"</a>"+extra;
 				})();
 
 				//description

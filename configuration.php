@@ -257,7 +257,10 @@
 	<!--questions-->
 	<fieldset>
 		<legend>Additional questions</legend>
-		<table>
+		<table id=questions>
+			<style>
+				#questions td{border-top:none;border-left:none;border-right:none}
+			</style>
 			<script>
 				for(var question in Global.Configuration["Yes/No"])
 				{
@@ -276,7 +279,7 @@
 		<legend>Fuel options (<a href=fuelInfo.php>info</a>)</legend>
 		<table id=fuelSelection class=inline>
 			<style>
-				#fuelSelection tr.inactive {background:#ccc;}
+				#fuelSelection tr.inactive {background:#ccc;color:#999}
 			</style>
 			<tr><th>Stage<th>Selected Fuel type
 			<tr stage=water>   <td>Level 1 - Water supply (engines)
