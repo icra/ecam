@@ -4,16 +4,16 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>Graphs</h1>
+<!--TITLE--><h1>L1 - GHG emissions per capita</h1>
 
 <table>
 	<script>
-		var ws = format(Math.floor(1e2*Global.Water.wGHG1())/1e2);
-		var ww = format(Math.floor(1e2*Global.Waste.wwGHG1())/1e2);
+		var ws = Global.Water.wGHG1()
+		var ww = Global.Waste.wwGHG1()
 	</script>
-	<tr><th>KPI    <th>Value
-	<tr><td><a href=variable.php?id=wGHG1>wGHG1</a>   <td><script>document.write(ws) </script>
-	<tr><td><a href=variable.php?id=wwGHG1>wwGHG1</a> <td><script>document.write(ww)</script>
+	<tr><th>KPI    <th>Value (kgCO2/inhab/year)
+	<tr><td><a href=variable.php?id=wGHG1>wGHG1</a>   <td><script>document.write(format(ws)) </script>
+	<tr><td><a href=variable.php?id=wwGHG1>wwGHG1</a> <td><script>document.write(format(ww))</script>
 </table>
 
 <!--graph starts here-->

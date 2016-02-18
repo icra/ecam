@@ -116,14 +116,14 @@
 		div#sidebar
 		{
 			position:fixed;
-			top:0;right:0;bottom:0;z-index:999;
+			top:0;right:0;z-index:999;
 			background:white;
 			overflow:hidden;
 			padding:0;margin:0;
-			box-shadow: 5px 5px 10px 5px #888;
+			box-shadow: 5px 5px 50px 5px #888;
 		}
-		div#sidebar.off{width:40px;}
-		div#sidebar.on{width:220px;transition:all 0.15s}
+		div#sidebar.off{width:50px;bottom:95%}
+		div#sidebar.on{width:220px;bottom:0;transition:all 0.15s}
 		div#sidebar.on  div#sidecontent{display:block}
 		div#sidebar.off div#sidecontent{display:none}
 		div#sidebar div{padding:0;margin:0}
@@ -184,9 +184,15 @@
 			<tr><td><a href=summary.php?type=ccvv>All Calculated variables</a>
 			<tr><td><a href=summary.php?type=output>All Performance Indicators (PIs)</a>
 			<tr><th>Graphs
-			<tr><td><a href=graph1.php>GHG per capita</a>
-			<tr><td><a href=graph2.php>GHG per stage</a>
-			<tr><td><a href=graph3.php>Sankey diagram</a>
+			<tr><td><a href=graph1.php>1. L1 - GHG per capita</a>
+			<tr><td><a href=graph2.php>2. L1 - GHG per serviced population & authorized consumption</a>
+			<tr><td><a href=graph3.php>3. L1 - Energy consumption per capita</a>
+
+			<tr><td><a href=graph4.php>4. L2 - GHG per capita</a>
+			<tr><td><a href=graph5.php>5. L2 - GHG per serviced population & authorized consumption</a>
+			<tr><td><a href=graph6.php>6. L2 - Energy consumption per capita</a>
+
+			<tr><td><a href=sankey.php>Sankey diagram</a>
 			<tr><th>Other
 			<tr><td><a href=todo.php>To do list</a>
 			<tr><td><a href=export.php>Export variables, descriptions and formulas</a>

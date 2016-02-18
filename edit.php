@@ -354,7 +354,7 @@
 	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
 </div>
 
-<!--separator--><div style=margin-top:120px></div>
+<!--separator--><div style=margin-top:135px></div>
 <!--linear diagram--><?php include'linear.php'?>
 <!--go to level 3 button-->
 <?php
