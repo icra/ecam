@@ -14,6 +14,7 @@
 	<tr><th>Task<th>Status
 	<tr><td colspan=2 class=taskgroup>BACK-END
 		<tr><td>Prepare a list of variables that need to be visible in L2 from L1<td>Wait</td>
+		<tr><td>Solve DQ.hasEstimatedData() for wGHGx_L2 <td>Next task to do</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
 		<tr><td>PI units be changed by user via dropdown menu<td>Difficult</td>
 		<tr><td>Create Warning in new system button<td>Pending</td>
