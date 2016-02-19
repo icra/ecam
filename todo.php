@@ -13,13 +13,13 @@
 <table id=todo>
 	<tr><th>Task<th>Status
 	<tr><td colspan=2 class=taskgroup>BACK-END
-		<tr><td>Change code: 23 repeated PI codes (<a href=dataModel/repeatedPIs.txt>list here</a>)<td>Wait</td>
 		<tr><td>Prepare a list of variables that need to be visible in L2 from L1<td>Wait</td>
-		<tr><td>Link questions to calculations / variables <td>Pending</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
-		<tr><td>PI units be changed by user via dropdown menu<td>Pending</td>
+		<tr><td>PI units be changed by user via dropdown menu<td>Difficult</td>
 		<tr><td>Create Warning in new system button<td>Pending</td>
-		<tr><td>Add a flag if a KPI contains estimated data<td>Pending</td>
+		<tr><td>Implement question behaviour from the word file Mario sent <td>Pending</td>
+		<tr><td>Next/back buttons at each stage<td>Pending</td>
+		<tr><td>Create a template for popup menus (to be used with descriptions of parameters) <td>Pending</td>
 </table>
 <!--FOOTER--><?php include'footer.php'?>
 <script>

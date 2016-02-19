@@ -18,16 +18,6 @@
 			}
 		},
 
-		//make sidebar active
-		activate:function()
-		{
-			var element=document.querySelector('#sidebar')
-			if(element.className=='off')
-			{
-				this.toggle();
-			}
-		},
-
 		hide:function()
 		{
 			var element=document.querySelector('#sidebar')
@@ -104,9 +94,12 @@
 	}
 </script>
 
-<div id=sidebar 
-	 class="<?php if(isset($_COOKIE['sidebar']) && $_COOKIE['sidebar']==1){echo "on";}else{echo "off";}?>" 
-	 onmouseover=Sidebar.activate() 
+<?php
+	//Default class for sidebar depending on cookies
+	$sbd = (isset($_COOKIE['sidebar']) && $_COOKIE['sidebar']==1) ? "on":"off";
+?>
+
+<div id=sidebar class="<?php echo $sbd ?>" 
 	 onclick="event.stopPropagation()";
 	 >
 	 <script>
@@ -118,40 +111,32 @@
 			position:fixed;
 			top:0;right:0;z-index:999;
 			background:white;
-			overflow:hidden;
 			padding:0;margin:0;
 			box-shadow: 5px 5px 50px 5px #888;
-			overflow-y:auto;
+			overflow:auto;
 		}
-		div#sidebar.off{width:50px;bottom:94%}
-		div#sidebar.on{width:260px;bottom:0;transition:all 0.15s}
+		div#sidebar.off{width:0;height:0;top:0;}
+		div#sidebar.on{width:260px;bottom:0;transition:all 0.1s}
 		div#sidebar.on  div#sidecontent{display:block}
 		div#sidebar.off div#sidecontent{display:none}
 		div#sidebar div{padding:0;margin:0}
-		div#sidebar table{margin:0.7em}
+		div#sidebar table{margin:0.1em}
 		div#sidebar td, div#sidebar th {padding:0.3em}
 
-		#sidebar th {text-align:left;border:none}
-		#sidebar td {border-top:none;border-left:none;border-right:none}
-
-		#sidebar #burger{color:#888;}
-		#sidebar #burger:hover{color:black;}
 		/*links*/
 		#sidebar a.water{color:#00adef} 
 		#sidebar a.waste{color:#d71d24} 
 		#sidebar a.inactive{pointer-events:none;color:#ccc;text-decoration:none} 
 	</style>
-	<span style=font-size:30px;cursor:pointer id=burger onclick=Sidebar.toggle()>&#9776;</span>
 	<div id=sidecontent>
-		<table id=menu>
-			<style>#sidebar #sidecontent #menu td{border-bottom:none}</style>
-			<tr><th colspan=4 id=Name> <script> document.write(Global.General.Name) </script>
+		<table id=menu style="margin-top:1em">
+			<tr><th colspan=4 id=Name> <script>document.write(Global.General.Name)</script>
 			<tr>
-			<td align=center><button onclick=newSystem()>New</button>
-			<input type="file" id="loadfile" accept=".json" onchange="loadFile(event)" style="display:none">
-			<td align=center><button onclick=document.getElementById('loadfile').click()>Open</button>
-			<td align=center><button onclick=saveToFile()>Save</button>
-			<td align=center><button onclick=clearSystem()>Clear</button>
+				<td align=center><button onclick=newSystem()>New</button>
+				<input type="file" id="loadfile" accept=".json" onchange="loadFile(event)" style="display:none">
+				<td align=center><button onclick=document.getElementById('loadfile').click()>Open</button>
+				<td align=center><button onclick=saveToFile()>Save</button>
+				<td align=center><button onclick=clearSystem()>Clear</button>
 		</table>
 
 		<!--USED MEMORY-->
@@ -203,10 +188,6 @@
 
 <script>Sidebar.update()</script>
 
-<style>
-#sidebar td.sidebar_selected {background:linear-gradient(#eee,#fefefe,#ddd);}
-</style>
-
 <script>
 	//make the current page on the navbar be highlighted
 	(function()
@@ -228,3 +209,7 @@
 		}
 	})();
 </script>
+
+<style>
+#sidebar td.sidebar_selected {background:linear-gradient(#eee,#fefefe,#ddd);}
+</style>

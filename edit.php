@@ -113,9 +113,13 @@
 				{
 					var formula = CurrentLevel[field].toString();
 					var prettyFormula = Formulas.prettify(formula);
-					newRow.setAttribute('onmouseover','Formulas.hlFields("'+prettyFormula+'",1)');
-					newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+prettyFormula+'",0)');
+					newRow.setAttribute('onmouseover','Formulas.hlFields("'+field+'",CurrentLevel,1)');
+					newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+field+'",CurrentLevel,0)');
 					newRow.setAttribute('title',prettyFormula);
+				}
+				else{
+					newRow.setAttribute('onmouseover','Formulas.hlOutputs("'+field+'",CurrentLevel,1)');
+					newRow.setAttribute('onmouseout', 'Formulas.hlOutputs("'+field+'",CurrentLevel,0)');
 				}
 				
 				/*attribute field==field>*/newRow.setAttribute('field',field);
@@ -147,6 +151,10 @@
 						return CurrentLevel[field];
 				})()/Units.multiplier(field));
 
+				//check if this cv has estimated data
+				var ed=DQ.hasEstimatedData(field) ? " <span title='This equation contains estimated data' class=estimated>&#9888;</span>" : "";
+				newCell.innerHTML+=ed;
+
 				//unit
 				newRow.insertCell(-1).innerHTML=(function()
 				{
@@ -171,7 +179,7 @@
 							return Info[field].unit
 						}
 						var currentUnit = Global.Configuration.Units[field] || Info[field].unit
-						for(unit in Units[Info[field].magnitude])
+						for(var unit in Units[Info[field].magnitude])
 						{
 							if(unit==currentUnit)
 								str+="<option selected>"+unit+"</option>";
@@ -190,15 +198,16 @@
 					}
 					else
 					{
-						/*
-						return "Input";
-						*/
-						var select = document.createElement('select');
+						var select=document.createElement('select');
+						select.setAttribute('onchange','DQ.update("'+field+'",this.value)');
 						['Actual','Estimated'].forEach(function(opt)
 						{
 							var option=document.createElement('option');
-							option.innerHTML=opt;
 							select.appendChild(option);
+							option.innerHTML=opt;
+							if(Global.Configuration.DataQuality[field]==opt)
+								option.setAttribute('selected',true);
+								
 						});
 						return select.outerHTML;
 					}
@@ -229,8 +238,8 @@
 				var formula=CurrentLevel[field].toString();
 				var prettyFormula=Formulas.prettify(formula);
 				newRow.setAttribute('title',prettyFormula);
-				newRow.setAttribute('onmouseover','Formulas.hlFields("'+prettyFormula+'",1)');
-				newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+prettyFormula+'",0)');
+				newRow.setAttribute('onmouseover','Formulas.hlFields("'+field+'",CurrentLevel,1)');
+				newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+field+'",CurrentLevel,0)');
 
 				//compute now the value for creating the indicator
 				var value = CurrentLevel[field]()/Units.multiplier(field)
@@ -268,16 +277,20 @@
 					var code = "<a href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";
 				})();
+
 				/*value*/ 
 				newCell=newRow.insertCell(-1)
 				newCell.innerHTML=(function()
 				{
 					value=format(value);
-					if(Level2Warnings.isIn(field))
-					{
-						return value+" <span style=color:#999>("+Level2Warnings[field]+")</span>";
-					}
-					return value;
+
+					//has estimated data warning
+					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='This equation contains estimated data'>&#9888;</span>" : "";
+
+					// level 2 warnings
+					var l2w = Level2Warnings.isIn(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
+
+					return value+" "+ed+" "+l2w;
 				})();
 				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
 			}

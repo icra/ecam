@@ -3,6 +3,7 @@
 <div id=navbar>
 	<img src=img/IWA-logo.png style="margin:0.6em;margin-left:7.5em;margin-right:13em;width:75px;cursor:pointer" onclick=window.location='index.php'>
 	<a href=index.php>ECAM — Energy performance and Carbon emissions Assessment and Monitoring Tool</a>
+	<span id=burger onmouseover=Sidebar.toggle()>&#9776;</span>
 </div>
 
 <style>
@@ -17,4 +18,14 @@
 	#navbar a {color:white;}
 	#navbar a:hover {text-decoration:none;}
 	#navbar img{vertical-align:middle}
+
+	#navbar #burger 
+	{
+		color:white;
+		position:absolute;
+		right:0;
+		padding:0.2em 0.5em 0 0;
+		font-size:30px;
+		cursor:pointer;
+	}
 </style>

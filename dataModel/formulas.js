@@ -7,7 +7,7 @@ var Formulas = {
 	{
 		var matches=[];
 		var match;
-		for(field in Info)
+		for(var field in Info)
 		{
 			/* 
 				\W matches any non-word characters (short for [^a-zA-Z0-9_]). 
@@ -20,8 +20,8 @@ var Formulas = {
 		return matches;
 	},
 
-	/*
-		return array of codes of outputs matched in input id
+	/**
+		return array of strings: outputs that use input
 		example: "sV1" returns ['c_wwt1','c_aV2']
 	*/
 	outputsPerInput:function(id,object)
@@ -32,6 +32,7 @@ var Formulas = {
 		var reg=new RegExp('\\W'+id+"\\D");
 		for(var field in object)
 		{
+			if(field==id)continue;
 			if(typeof object[field]=="object")
 			{
 				matches=matches.concat(this.outputsPerInput(id,object[field]));
@@ -74,19 +75,41 @@ var Formulas = {
 
 	/**
 	 * Hihghlight a field <tr field=field>
+	 * @param {string} field - the variable codes we want to highlight e.g. 'c_ww50'
+	 * @param {object} object - pointer to the object
+	 * @param {boolean} hl - turn on/off highlighting
+	 */
+	hlFields:function(field,object,hl)
+	{
+		var formula=object[field].toString();
+		formula=Formulas.prettify(formula);
+		var inputs=this.idsPerFormula(formula);
+		var yesno = hl ? "yes":"no";
+		for(var i in inputs)
+		{
+			var element=document.querySelector('[field='+inputs[i]+']');
+			if(element)
+				element.setAttribute('hl',yesno);
+		}
+
+		//field can also have outputs
+		this.hlOutputs(field,object,hl);
+	},
+
+	/**
+	 * Hihghlight a field <tr field=field>
 	 * @param {array of strings} fields - the variable codes we want to highlight e.g. ['sV1','sV2']
 	 * @param {boolean} hl - turn on/off highlighting
 	 */
-	hlFields:function(formula,hl)
+	hlOutputs:function(input,obj,hl)
 	{
-		var fields=this.idsPerFormula(formula);
+		var outputs=this.outputsPerInput(input,obj);
 		var yesno = hl ? "yes":"no";
-		for(var field in fields)
+		for(var i in outputs)
 		{
-			var element=document.querySelector('[field='+fields[field]+']');
-			if(element){
-				element.setAttribute('hl',yesno);
-			}
+			var element=document.querySelector('[field='+outputs[i]+']');
+			if(element)
+				element.setAttribute('hl_output',yesno);
 		}
-	}
+	},
 }

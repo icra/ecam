@@ -14,3 +14,63 @@
 		wS3	PI	Continuity of supply	input	%	Percentage of delivery points (one per service connection) that receive and are likely to receive adequate pressure
 		wS4	PI	Proportion of resident population receiving service	100*ws1/ws2	%	Percentage of the resident population that are connected to the urban drinking water system managed by the undertaking, also referred to as 'serviced population'
 		wS5	PI	Non-revenue water by volume	if(wsa2==0) ws8;else (100*ws7/wsa2);	%	Percentage of the system input volume that corresponds to non-revenue water in relation with the total volume entering the urban drinking water system at the abstraction stage
+
++-----------+
+| Questions |					
++-----------+
+
+Are you producing biogas? [Y/N] (Level1)
+	if N
+	Do not ask the question of biogas valorization neither the followings inputs:
+	•	wwt2 – Biogas production 
+	•	wwt12 - % methane in biogas 
+	•	wwt3 – Biogas valorized
+	•	wwt11- Energy production from biogas valorization
+	Hide the following calculated variables:
+	•	c_wwt50 – biogas flared
+	•	c_ww50 – biogas flared
+	•	c_wwt53 – Energy content in valorized biogas
+
+	if Y
+	Shown the following inputs and calculated variables
+	•	wwt2 – Biogas production
+	•	c_wwt50 – biogas flared
+	•	c_ww50 – biogas flared (work under Level 1 if biogas valorization is N; if biogas valorization is Y then = 0)
+
+	Ask for biogas valorization [Y/N] (Level 1) if N do not ask or hide
+	•	wwt3 – Biogas valorized [if no then = 0]
+	•	c_wwt53 – Energy content in valorized biogas
+	•	wwt11- Energy production from biogas valorization
+	•	wwt12 - % methane in biogas
+
+
+
+
+
+
+Are you producing electrical energy? [Y/N](Level2)
+	•	wsg1 – water related electricity produced
+	•	wsg2 - water related electricity sold to the grid
+	•	wsg3 – Non-water related electricity produced
+	•	wsg4 – Non-water related electricity sold to the grid
+	•	wsa3 – Electric energy produced from turbines
+	•	wwg1 - water related electricity produced 
+	•	wwg2 – water related electricity sold to the grid
+	•	wwg3 – Non-water related electricity production
+	•	wwg4 – Non-water related electricity sold to the grid
+	•	wwd4 – Energy recovered during the wastewater discharge
+Do you have fuel engines? [Y/N](Level 1)
+	•	ww23 – Monthly fuel consumption
+	•	ww11 – Vol fuel consumed
+	•	ws16 – Monthly fuel consumed
+	•	ws9 – Fuel consumed
+Are you using truck to convey sludge to the disposal site? [Y/N] (Level 1)
+	•	ww24 – Number of trips to sludge disposal per week
+	•	ww9 – Distance to sludge disposal site
+Is your topography flat? [Y/N] (Level 2)
+	•	wsd10 – Minimum pressure to be supplied at the distribution points
+	•	wsd11 – highest node elevation
+	•	wsd12 – lowest node elevation
+	•	wsd13 - Average nodes elevation
+	•	wsd14 – water table elevation node
+	All calculated variables which are using any of those inputs should be hidden when the answer of the related question is NO

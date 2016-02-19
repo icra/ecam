@@ -223,8 +223,13 @@
 					{
 						var formula=CurrentStage[code].toString();
 						var prettyFormula=Formulas.prettify(formula);
-						newRow.setAttribute('onmouseover',"Formulas.hlFields('"+prettyFormula+"',1)");
-						newRow.setAttribute('onmouseout',"Formulas.hlFields('"+prettyFormula+"',0)");
+						newRow.setAttribute('onmouseover','Formulas.hlFields("'+code+'",CurrentStage,1)');
+						newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+code+'",CurrentStage,0)');
+					}
+					else
+					{
+						newRow.setAttribute('onmouseover','Formulas.hlOutputs("'+code+'",CurrentStage,1)');
+						newRow.setAttribute('onmouseout', 'Formulas.hlOutputs("'+code+'",CurrentStage,0)');
 					}
 
 					/*link and name*/
@@ -410,8 +415,8 @@
 				var prettyFormula=Formulas.prettify(formula);
 
 				//set highlighting 
-				newRow.setAttribute('onmouseover',"Formulas.hlFields('"+prettyFormula+"',1)");
-				newRow.setAttribute('onmouseout',"Formulas.hlFields('"+prettyFormula+"',0)");
+				newRow.setAttribute('onmouseover','Formulas.hlFields("'+field+'",CurrentStage,1)');
+				newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+field+'",CurrentStage,0)');
 
 				//code
 				newRow.insertCell(-1).innerHTML=(function()

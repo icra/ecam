@@ -38,7 +38,7 @@ margin-top:4em;">
 		setCookie("GLOBAL",compressed);
 
 		//summary
-		cookieSummary();
+		//cookieSummary();
 	}
 
 	/** Display an ascii table in Console to summarize all cookie sizes */

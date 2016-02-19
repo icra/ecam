@@ -10,7 +10,6 @@ function copyFieldsFrom(object_from,object_to)
 			continue;
 		}
 
-		if(object_to[field]===undefined){continue;}
 		/**
 		   field is never a function because of JSON.stringify
 		   if field is object, recursive call.

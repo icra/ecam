@@ -21,6 +21,10 @@ tr.isCV{background:#f6f6f6}
 tr{transition:all 0.5s}
 tr[hl=yes]{background:#d7bfaf;color:white}
 tr[hl=no]{background:default}
+tr[hl_output=yes]{background:#a7bfaf;color:white}
+tr[hl_output=no]{background:default}
+
+span.estimated{color:red;font-size:16px;cursor:help}
 
 /*ECAM blue*/.blue{color:#00AFF1;}
 /*ECAM red*/.red{color:#bf5050;}
