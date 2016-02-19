@@ -121,9 +121,10 @@
 			overflow:hidden;
 			padding:0;margin:0;
 			box-shadow: 5px 5px 50px 5px #888;
+			overflow-y:auto;
 		}
-		div#sidebar.off{width:50px;bottom:95%}
-		div#sidebar.on{width:220px;bottom:0;transition:all 0.15s}
+		div#sidebar.off{width:50px;bottom:94%}
+		div#sidebar.on{width:260px;bottom:0;transition:all 0.15s}
 		div#sidebar.on  div#sidecontent{display:block}
 		div#sidebar.off div#sidecontent{display:none}
 		div#sidebar div{padding:0;margin:0}
@@ -197,7 +198,6 @@
 			<tr><td><a href=todo.php>To do list</a>
 			<tr><td><a href=export.php>Export variables, descriptions and formulas</a>
 		</table>
-		<div style=color:#999> Click outside to minimize this menu <br>(or click on the symbol on top)</div>
 	</div>
 </div>
 
