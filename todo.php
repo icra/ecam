@@ -23,6 +23,9 @@
 		<tr><td>Create a template for popup menus (to be used with descriptions of parameters) <td>Pending</td>
 		<tr><td>Show data quality in detailed info (for inputs) <td>Pending</td>
 </table>
+
+<?php include'selection.php'?>
+
 <!--FOOTER--><?php include'footer.php'?>
 <script>
 	//go through all cells and color them according to status
@@ -43,3 +46,5 @@
 		}
 	})();
 </script>
+
+

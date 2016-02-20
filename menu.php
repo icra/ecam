@@ -1,7 +1,7 @@
 <!--GROUP OF BUTONS: NEW, LOAD, SAVE, CLEAR BUTTONS INSIDE INDEX.PHP-->
+<!--functions are defined inside sidebar.php-->
 
 <!--menu-->
-<!--functions are defined inside sidebar.php-->
 <div style=text-align:left;padding:0em>
 	<!--new-->
 	<button class="button add" onclick=newSystem()>New system</button>

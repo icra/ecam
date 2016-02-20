@@ -1,10 +1,5 @@
-<!--selection.php: menus of options selected-->
-<!doctype html><html><head>
-</head><body><center>
-
-<!--HIDDEN THINGS-->
-<h1>Remaining things</h1>
 <div>
+	<h1>Remaining things</h1>
 	<!--Technologies-->
 	<div>
 		<div><b>Water treatment & Wastewater treatment</b></div>
@@ -21,6 +16,5 @@
 				document.write('</select> ');
 			});
 		</script>
-		<table> <tr><td style=background:lightcoral>Info about what modifies each technology</table>
 	</div>
 </div>
