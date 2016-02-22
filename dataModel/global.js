@@ -137,8 +137,8 @@ var Global = {
 
 		c_ww50:function()
 		{
-			if(Global.Configuration["Yes/No"]["Are you valorizing biogas"]==1)
-				return this.ww7*this.ww14*0.9*0.4*Global.General.Days();
+			if(Global.Configuration["Yes/No"]["Are you valorizing biogas"]==0)
+				return this.ww7*this.ww14*0.9*0.4*Global.General.Days()/1000;
 			else
 				return 0;
 		},

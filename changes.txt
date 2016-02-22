@@ -1,76 +1,35 @@
-+----------------+
-| Service Levels |					
-+----------------+
-	L1 Wastewater Service Levels
-		Code	Type	Name	Formula or Default value	Unit	Description
-		wwS3	PI	Percentage of quality compliance	input	%	Percentage of water quality tests carried out in wastewater treatment plants that comply with discharge consents
-		wwS4	PI	Percent dilution in the sewer system	input	%	Percentage of Infiltration and inflow water entering the sewer system compared to the volume of collected wastewater prior to dilution
-		wwS1	PI	Proportion of resident population receiving service	100*ww7/ww5	%	Percentage of the resident population that are connected to the sewer systems and which wastewater is treated by the undertaking
-		wwS2	PI	Collected wastewater treated	100*ww7/ww6	%	Percentage of the collected sewage prior to dilution or overflows in the sewer system that are treated in wastewater treatment plants
-		wwS5	PI	Treated wastewater per pers per day	ww15/ww7/Days	m3/inhab/day	Volume of treated wastewater per serviced person in the service area managed by the undertaking divided by the duration of the assessment period
-	L1 Water Service Levels					
-		wS1	PI	Percentage of quality compliance	input	%	Percentage of the total number of treated water tests performed that comply with
-		wS2	PI	Percentage of supply pressure adequacy	input	%	Percentage of delivery points (one per service connection) that receive and are likely to receive adequate pressure
-		wS3	PI	Continuity of supply	input	%	Percentage of delivery points (one per service connection) that receive and are likely to receive adequate pressure
-		wS4	PI	Proportion of resident population receiving service	100*ws1/ws2	%	Percentage of the resident population that are connected to the urban drinking water system managed by the undertaking, also referred to as 'serviced population'
-		wS5	PI	Non-revenue water by volume	if(wsa2==0) ws8;else (100*ws7/wsa2);	%	Percentage of the system input volume that corresponds to non-revenue water in relation with the total volume entering the urban drinking water system at the abstraction stage
-
 +-----------+
 | Questions |					
 +-----------+
+	Are you producing biogas?
+		- wwt2, wwt12, wwt3, wwt11, c_wwt50, c_ww50, c_wwt53
+		- question of biogas valorization 
 
-Are you producing biogas? [Y/N] (Level1)
-	if N
-	Do not ask the question of biogas valorization neither the followings inputs:
-	•	wwt2 – Biogas production 
-	•	wwt12 - % methane in biogas 
-	•	wwt3 – Biogas valorized
-	•	wwt11- Energy production from biogas valorization
-	Hide the following calculated variables:
-	•	c_wwt50 – biogas flared
-	•	c_ww50 – biogas flared
-	•	c_wwt53 – Energy content in valorized biogas
+	biogas valorization
 
-	if Y
-	Shown the following inputs and calculated variables
-	•	wwt2 – Biogas production
-	•	c_wwt50 – biogas flared
-	•	c_ww50 – biogas flared (work under Level 1 if biogas valorization is N; if biogas valorization is Y then = 0)
+		wwt3 c_wwt53 wwt11 wwt12
 
-	Ask for biogas valorization [Y/N] (Level 1) if N do not ask or hide
-	•	wwt3 – Biogas valorized [if no then = 0]
-	•	c_wwt53 – Energy content in valorized biogas
-	•	wwt11- Energy production from biogas valorization
-	•	wwt12 - % methane in biogas
+	Are you producing electrical energy
 
+		wsg1 wsg2 wsg3 wsg4 wsa3 wwg1 wwg2 wwg3 wwg4 wwd4
 
+	Do you have fuel engines
 
+		ww23 ww11 ws16 ws9
 
+	Are you using truck to convey sludge to the disposal site
 
+		ww24 ww9
 
-Are you producing electrical energy? [Y/N](Level2)
-	•	wsg1 – water related electricity produced
-	•	wsg2 - water related electricity sold to the grid
-	•	wsg3 – Non-water related electricity produced
-	•	wsg4 – Non-water related electricity sold to the grid
-	•	wsa3 – Electric energy produced from turbines
-	•	wwg1 - water related electricity produced 
-	•	wwg2 – water related electricity sold to the grid
-	•	wwg3 – Non-water related electricity production
-	•	wwg4 – Non-water related electricity sold to the grid
-	•	wwd4 – Energy recovered during the wastewater discharge
-Do you have fuel engines? [Y/N](Level 1)
-	•	ww23 – Monthly fuel consumption
-	•	ww11 – Vol fuel consumed
-	•	ws16 – Monthly fuel consumed
-	•	ws9 – Fuel consumed
-Are you using truck to convey sludge to the disposal site? [Y/N] (Level 1)
-	•	ww24 – Number of trips to sludge disposal per week
-	•	ww9 – Distance to sludge disposal site
-Is your topography flat? [Y/N] (Level 2)
-	•	wsd10 – Minimum pressure to be supplied at the distribution points
-	•	wsd11 – highest node elevation
-	•	wsd12 – lowest node elevation
-	•	wsd13 - Average nodes elevation
-	•	wsd14 – water table elevation node
-	All calculated variables which are using any of those inputs should be hidden when the answer of the related question is NO
+	Is your topography flat? (Level 2)
+
+		wsd10 wsd11 wsd12 wsd13 wsd14
+
+=========================================================================================================================================
++--------------+
+| Mail Corinne |
++--------------+
+	- The level 1 is the easy overview, based on estimated / average data  that utility leaders typically have in their head. We should rename this level “Bird’s eye view”. The target audience is the utility leader, the regional water authority.
+	- If the utility decides to move to the detailed assessment (level 2 and 3 should be renamed “detailed assessment 1” and “detailed assessment 2”), the user needs to get into their data management system to collect the right data. The target audience is the utility technical staff.
+	- Once the detailed assessment data is filled in, the Level 1 “bird’s eye view” indicators  may be updated with the same approach as level 3 to level 2. The best approach I see to that is to have an IF statement in the calculated variables of Level 1: they would either calculate quantities from the average inputs of level 1 or take the quantities from level 2. 
+	- The distinction between service level indicators and performance indicators

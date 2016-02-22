@@ -96,13 +96,16 @@
 				if(typeof(CurrentLevel[field])!="number")
 				{
 					/*then, check if is calculated variable "c_xxxxxx" */
-					if(field.search('c_')==-1){continue};
+					if(field.search('c_')==-1) continue;
 				}
 
-				/*check if field is level3 specific*/if(Level3.isInList(field)){continue;}
+				/*check if should be hidden according to questions*/
+				if(Questions.isHidden(field)) continue;
+
+				/*check if field is level3 specific*/if(Level3.isInList(field)) continue;
 
 				//bool for if current field is a calculated variable (CV)
-				var isCV = field.search('c_')!=-1
+				var isCV = field.search('c_')!=-1;
 
 				/*new row*/var newRow=t.insertRow(-1);
 

@@ -72,6 +72,33 @@
 			init();
 		}
 
+		function updateQuestionsTable()
+		{
+			var t = document.querySelector('#questions');
+			while(t.rows.length>0)t.deleteRow(-1);
+			for(var question in Global.Configuration["Yes/No"])
+			{
+				//check here for biogas valorised
+				if( 
+					Global.Configuration["Yes/No"]["Are you producing biogas"]==0
+						&& 
+					question=="Are you valorizing biogas")continue;
+
+				var currentAnswer = Global.Configuration["Yes/No"][question];
+				var checked = currentAnswer ? "checked":"";
+				var newRow = t.insertRow(-1);
+				newRow.insertCell(-1).innerHTML=question+"?"
+				newRow.insertCell(-1).innerHTML=(function()
+				{
+					var r="<label>No "+
+							"<input name='"+question+"' type=radio value=0 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" checked></label> "+
+							"<label>Yes "+
+							"<input name='"+question+"' type=radio value=1 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" "+checked+"></label> ";
+					return r;
+				})();
+			}
+		}
+
 		function updateUW1(newValue)
 		{
 			document.querySelector('#uw1').value=newValue;
@@ -173,6 +200,7 @@
 			updateCurrency();
 			updateFuelSelectionVisibility();
 			updateFuelSelection();
+			updateQuestionsTable();
 			Sidebar.update();
 			updateResult();
 		}
@@ -256,21 +284,11 @@
 
 	<!--questions-->
 	<fieldset>
-		<legend>Additional questions</legend>
+		<legend>Additional questions (<a href=questions.php>info</a>)</legend>
 		<table id=questions>
 			<style>
 				#questions td{border-top:none;border-left:none;border-right:none}
 			</style>
-			<script>
-				for(var question in Global.Configuration["Yes/No"])
-				{
-					var currentAnswer = Global.Configuration["Yes/No"][question];
-					var checked = currentAnswer ? "checked":"";
-					document.write("<tr><td>"+question+"?<td>")
-					document.write("<label>No  <input name='"+question+"' type=radio value=0 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" checked></label> ")
-					document.write("<label>Yes <input name='"+question+"' type=radio value=1 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" "+checked+"></label> ")
-				}
-			</script>
 		</table>
 	</fieldset>
 

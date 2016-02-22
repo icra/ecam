@@ -25,10 +25,10 @@
 					{role:'annotation'} 
 				],
 
-				['Water per SP',       WS.wGHG6(),  WS.wGHG4(),  ''], //ok
-				['Wastewater per SP',  WW.wwGHG4(), WW.wwGHG6(), ''], //ok
-				['Water per AC',       WS.wGHG7(),  WS.wGHG5(),  ''], //ok
-				['Wastewater per CW',  WW.wwGHG5(), WW.wwGHG7(), ''], //ok
+				['Water per SP',       WS.wGHG6()||1,  WS.wGHG4()||1,  ''], //ok
+				['Wastewater per SP',  WW.wwGHG4()||1, WW.wwGHG6()||1, ''], //ok
+				['Water per AC',       WS.wGHG7()||1,  WS.wGHG5()||1,  ''], //ok
+				['Wastewater per CW',  WW.wwGHG5()||1, WW.wwGHG7()||1, ''], //ok
 
 			]);
 			var options=

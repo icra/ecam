@@ -16,12 +16,12 @@
 		var wdE = Global.Waste.Discharge.wdE1();
 	</script>
 	<tr><th>KPI  <th>Value (kWh/m<sup>3</sup>)
-	<tr><td><a href=variable.php?id=aE1>aE1</a>	 <td><script>document.write(format(aE))</script>
-	<tr><td><a href=variable.php?id=tE1>tE1</a>	 <td><script>document.write(format(tE))</script>
-	<tr><td><a href=variable.php?id=dE1>dE1</a>	 <td><script>document.write(format(dE))</script>
-	<tr><td><a href=variable.php?id=wcE1>wcE1</a> <td><script>document.write(format(wcE))</script>
-	<tr><td><a href=variable.php?id=wtE1>wtE1</a> <td><script>document.write(format(wtE))</script>
-	<tr><td><a href=variable.php?id=wdE1>wdE1</a> <td><script>document.write(format(wdE))</script>
+	<tr><td>aE1  <td><script>document.write(format(aE))</script>
+	<tr><td>tE1  <td><script>document.write(format(tE))</script>
+	<tr><td>dE1  <td><script>document.write(format(dE))</script>
+	<tr><td>wcE1 <td><script>document.write(format(wcE))</script>
+	<tr><td>wtE1 <td><script>document.write(format(wtE))</script>
+	<tr><td>wdE1 <td><script>document.write(format(wdE))</script>
 </table>
 
 <!--graph starts here-->
@@ -34,12 +34,12 @@
 			var data=google.visualization.arrayToDataTable
 			([
 				['Stage', 'Emissions'],
-				[Info.aE1.description, aE],
-				[Info.tE1.description, tE],
-				[Info.dE1.description, dE],
-				[Info.wcE1.description, wcE],
-				[Info.wtE1.description, wtE],
-				[Info.wdE1.description, wdE],
+				[Info.aE1.description, aE||1],
+				[Info.tE1.description, tE||1],
+				[Info.dE1.description, dE||1],
+				[Info.wcE1.description, wcE||1],
+				[Info.wtE1.description, wtE||1],
+				[Info.wdE1.description, wdE||1],
 			]);
 			var options= 
 			{ 

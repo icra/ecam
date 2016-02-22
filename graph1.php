@@ -25,8 +25,8 @@
 		{
 			var data=google.visualization.arrayToDataTable([
 				['Stage', 'Emissions'],
-				[Info.wGHG1.description+" (Water supply)", Global.Water.wGHG1()],
-				[Info.wwGHG1.description+" (Wastewater)",  Global.Waste.wwGHG1()],
+				[Info.wGHG1.description+" (Water supply)", Global.Water.wGHG1()||1],
+				[Info.wwGHG1.description+" (Wastewater)",  Global.Waste.wwGHG1()||1],
 			]);
 			var options= 
 			{ 
