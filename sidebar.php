@@ -170,9 +170,9 @@
 			<tr><td><a href=summary.php?type=ccvv>All Calculated variables</a>
 			<tr><td><a href=summary.php?type=output>All Performance Indicators (PIs)</a>
 			<tr><th>Graphs
-			<tr><td><a href=graph1.php>1. L1 - GHG per capita</a>
-			<tr><td><a href=graph2.php>2. L1 - GHG per serviced population & authorized consumption</a>
-			<tr><td><a href=graph3.php>3. L1 - Energy consumption per capita</a>
+			<tr><td><a href=graph1.php>1. L1 - Total GHG </a>
+			<tr><td><a href=graph2.php>2. L1 - Total Energy consumption</a>
+			<tr><td><a href=graph3.php>3. L1 - GHG relative</a>
 
 			<tr><td><a href=graph4.php>4. L2 - GHG per capita</a>
 			<tr><td><a href=graph5.php>5. L2 - GHG per serviced population & authorized consumption</a>

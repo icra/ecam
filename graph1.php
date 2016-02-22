@@ -4,16 +4,24 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>L1 - GHG emissions per capita</h1>
+<!--TITLE--><h1>Level 1 - GHG emissions</h1>
 
 <table>
 	<script>
-		var ws = Global.Water.wGHG1()
-		var ww = Global.Waste.wwGHG1()
+		var ws = Global.Water;
+		var ww = Global.Waste;
+
+		wsNon=ws.c_ws51();
+		wsYes=ws.ws5*Global.UWS.uw1;
+		wwNon=ww.c_ww57()+ww.c_ww55()+ww.c_ww53()+ww.c_ww51()+ww.c_ww52()+ww.c_ww54();
+		wwYes=ww.ww3*Global.UWS.uw1;
+
 	</script>
-	<tr><th>KPI    <th>Value (kgCO2/inhab/year)
-	<tr><td><a href=variable.php?id=wGHG1>wGHG1</a>   <td><script>document.write(format(ws)) </script>
-	<tr><td><a href=variable.php?id=wwGHG1>wwGHG1</a> <td><script>document.write(format(ww))</script>
+	<tr><th>field             <th>Value (kgCO2/inhab/year)
+	<tr><td>ws NON electrical <td><script>document.write(format(wsNon)) </script>
+	<tr><td>ws     electrical <td><script>document.write(format(wsYes)) </script>
+	<tr><td>ww NON electrical <td><script>document.write(format(wwNon)) </script>
+	<tr><td>ww     electrical <td><script>document.write(format(wwYes)) </script>
 </table>
 
 <!--graph starts here-->
@@ -25,18 +33,22 @@
 		{
 			var data=google.visualization.arrayToDataTable([
 				['Stage', 'Emissions'],
-				[Info.wGHG1.description+" (Water supply)", Global.Water.wGHG1()||1],
-				[Info.wwGHG1.description+" (Wastewater)",  Global.Waste.wwGHG1()||1],
+				["ws non electrical", wsNon||1],
+				["ws electrical",     wsYes||1],
+				["ww non electrical", wwNon||1],
+				["ww electrical",     wwYes||1],
 			]);
 			var options= 
 			{ 
 				width:800,
 				height:400,
-				title:"GHG emissions per capita",
+				title:"GHG emissions",
 				slices:
 				{
 					0:{ color: '#0aaeef' },
-					1:{ color: '#f3a000' },
+					1:{ color: '#0aaeef' },
+					2:{ color: '#f3a000' },
+					3:{ color: '#f3a000' },
 				},
 			};
 			var chart=new google.visualization.PieChart(document.getElementById('graph'));

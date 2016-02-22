@@ -4,16 +4,36 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>L2 - GHG emissions per capita</h1>
+<!--TITLE--><h1>L2 - GHG emissions</h1>
 
 <table>
 	<script>
-		var ws = Global.Water.General.wGHG1_L2();
-		var ww = Global.Waste.General.wwGHG1_L2();
+		//Pointers
+		var ws  = Global.Water
+		var wsg = Global.Water.General
+		var ww  = Global.Waste
+		var wwg = Global.Waste.General
+
+		//Values
+		var slice_1 = ww.c_ww54();
+		var slice_2 = wsg.c_wsg50()*Global.UWS.uw1-wsg.wsg4;
+		var slice_3 = ws.c_ws51();
+		var slice_4 = (ww.ww3-wwg.wwg2-wwg.wwg4)*Global.UWS.uw1;
+		var slice_5 = ww.c_ww57()
+		var slice_6 = ww.c_ww55()
+		var slice_7 = ww.c_ww51()+ww.c_ww52()
+		var slice_8 = ww.Treatment.c_wwt60()
 	</script>
-	<tr><th>KPI    <th>Value (kgCO2/inhab/year)
-	<tr><td><a href=variable.php?id=wGHG1_L2>wGHG1_L2</a>   <td><script>document.write(format(ws)) </script>
-	<tr><td><a href=variable.php?id=wwGHG1_L2>wwGHG1_L2</a> <td><script>document.write(format(ww))</script>
+	<tr><th>KPI                                   <th>Value (kgCO2)
+	<tr><td>GHG from sludge transport             </td> <td><script>document.write(format(slice_1))</script>
+	<tr><td>GHG electricyty (water)               </td> <td><script>document.write(format(slice_2))</script>
+	<tr><td>GHG from fuel engines (water)         </td> <td><script>document.write(format(slice_3))</script>
+	<tr><td>GHG from electricity (wastewater)     </td> <td><script>document.write(format(slice_4))</script>
+	<tr><td>GHG from fuel engines (wastewater)    </td> <td><script>document.write(format(slice_5))</script>
+	<tr><td>GHG from biogas handling (wastewater) </td> <td><script>document.write(format(slice_6))</script>
+	<tr><td>GHG from untreated effluent discharge </td> <td><script>document.write(format(slice_7))</script>
+	<tr><td>GHG from treated effluent discharge   </td> <td><script>document.write(format(slice_8))</script>
+	
 </table>
 
 <!--graph starts here-->
@@ -26,8 +46,14 @@
 			var data=google.visualization.arrayToDataTable
 			([
 				['Stage','Emissions'],
-				[Info.wGHG1.description +" (Water supply)", ws||1],
-				[Info.wwGHG1.description+" (Wastewater)",   ww||1],
+				['GHG from sludge transport             ', slice_1||1],
+				['GHG electricyty (water)               ', slice_2||1],
+				['GHG from fuel engines (water)         ', slice_3||1],
+				['GHG from electricity (wastewater)     ', slice_4||1],
+				['GHG from fuel engines (wastewater)    ', slice_5||1],
+				['GHG from biogas handling (wastewater) ', slice_6||1],
+				['GHG from untreated effluent discharge ', slice_7||1],
+				['GHG from treated effluent discharge   ', slice_8||1],
 			]);
 			var options= 
 			{ 

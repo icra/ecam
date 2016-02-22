@@ -18,7 +18,6 @@
 	<tr><td colspan=2 class=taskgroup>FRONT-END
 		<tr><td>PI units be changed by user via dropdown menu<td>Difficult</td>
 		<tr><td>Create Warning in new system button<td>Pending</td>
-		<tr><td>Implement question behaviour from the word file Mario sent <td>Pending</td>
 		<tr><td>Next/back buttons at each stage<td>Pending</td>
 		<tr><td>Create a template for popup menus (to be used with descriptions of parameters) <td>Pending</td>
 		<tr><td>Show data quality in detailed info (for inputs) <td>Pending</td>
