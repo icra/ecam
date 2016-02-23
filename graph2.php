@@ -11,9 +11,9 @@
 		var ws = Global.Water.ws5;
 		var ww = Global.Waste.ww3;
 	</script>
-	<tr><th>KPI    <th>Value (kWh)
-	<tr><td>ws5<td><script>document.write(format(ws)) </script>
-	<tr><td>ww3<td><script>document.write(format(ww))</script>
+	<tr><th>Formula  <th>Value (kWh)
+	<tr><td><a href=variable.php?id=ws5>ws5</a> <td><script>document.write(format(ws))</script>
+	<tr><td><a href=variable.php?id=ww3>ww3</a> <td><script>document.write(format(ww))</script>
 </table>
 
 <!--graph starts here-->

@@ -185,7 +185,7 @@
 			}
 			else
 			{
-				newCell.innerHTML=currentStage[id]/Units.multiplier(id);
+				newCell.innerHTML=format(currentStage[id]/Units.multiplier(id));
 
 				//if this input is level 3 only, should not be modified here
 				if(!Level3.isInList(id))
@@ -203,6 +203,15 @@
 				newCell.className='th'
 				newCell.innerHTML="Warning"
 				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span> This equation contains estimated data in at least one input";
+			}
+
+			if(typeof(currentStage[id])=='number' && Global.Configuration.DataQuality[id]!=undefined)
+			{
+				newRow=t.insertRow(-1)
+				newCell=newRow.insertCell(-1)
+				newCell.className='th'
+				newCell.innerHTML="Warning"
+				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span> This input is considered estimated data by the user";
 			}
 
 			//Select units -- only inputs!
