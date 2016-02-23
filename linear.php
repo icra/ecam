@@ -40,12 +40,13 @@
 <script>
 	<?php
 		// highlight current stage
-		// only if currently not in stages.php:
-		if(strpos($_SERVER['PHP_SELF'],"stages.php")===false)
+		// only if currently we are in edit.php or level3.php
+		if(strpos($_SERVER['PHP_SELF'],"edit.php") || strpos($_SERVER['PHP_SELF'],"level3.php") )
 		{ 
 			?>
 			(function()
 			{
+				
 				//we need to find level and sublevel to create a stage name i.e. "waterAbs"
 				var level    = '<?php echo $level?>';
 				var sublevel = '<?php echo $sublevel?>';

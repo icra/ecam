@@ -2,7 +2,7 @@
 <!--functions are defined inside sidebar.php-->
 
 <!--menu-->
-<div style=text-align:left;padding:0em>
+<div style=text-align:left;padding:0em class=inline>
 	<!--new-->
 	<button class="button add" onclick=newSystem()>New system</button>
 	<br>
@@ -20,7 +20,7 @@
 			<!--clear-->
 			<button class="button delete" onclick=clearSystem()>Clear system</button>
 			<br>
-		<?php 
+		  <?php 
 		}
 	?>
 </div>
