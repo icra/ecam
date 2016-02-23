@@ -4,52 +4,46 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>L1 - GHG bar graph</h1>
+<!--TITLE--><h1>Level 1 - GHG bar graph</h1>
 
 <table>
 	<script>
-		var WS = Global.Water
-		var WW = Global.Waste
-		//BAR 1 - wGHG1
-		var slice_1 = WS.ws5*Global.UWS.uw1/WS.ws2;
-		var slice_2 = WS.c_ws51()/WS.ws2;
-		//BAR 2 - wwGHG1
-		var slice_3 = WW.ww3*Global.UWS.uw1/WW.ww5;
-		var slice_4 = WW.c_ww57()/WW.ww5;
-		var slice_5 = WW.c_ww55()/WW.ww5;
-		var slice_6 = WW.c_ww53()/WW.ww5;
-		var slice_7 = WW.c_ww51()/WW.ww5;
-		var slice_8 = WW.c_ww52()/WW.ww5;
-		var slice_9 = WW.c_ww54()/WW.ww5;
-		//BAR 3 - wGHG2
-		var slice_10 = WS.ws5*Global.UWS.uw1/WS.ws1;
-		var slice_11 = WS.c_ws51()/WS.ws1;
-		//BAR 4 - wwGHG2
-		var slice_12 = WW.ww3*Global.UWS.uw1/WW.ww7;
-		var slice_13 = WW.c_ww57()/WW.ww7;
-		var slice_14 = WW.c_ww55()/WW.ww7;
-		var slice_15 = WW.c_ww53()/WW.ww7;
-		var slice_16 = WW.c_ww51()/WW.ww7;
-		var slice_17 = WW.c_ww52()/WW.ww7;
-		var slice_18 = WW.c_ww54()/WW.ww7;
-		//BAR 5 - wGHG3
-		var slice_19 = WS.ws5*Global.UWS.uw1/WS.ws7;
-		var slice_20 = WS.c_ws51()/WS.ws7;
-		//BAR 6 - wwGHG3
-		var slice_21 = WW.ww3*Global.UWS.uw1/WW.ww4;
-		var slice_22 = WW.c_ww57()/WW.ww4;
-		var slice_23 = WW.c_ww55()/WW.ww4;
-		var slice_24 = WW.c_ww53()/WW.ww4;
-		var slice_25 = WW.c_ww51()/WW.ww4;
-		var slice_26 = WW.c_ww52()/WW.ww4;
-		var slice_27 = WW.c_ww54()/WW.ww4;
+		//pointers
+		var WS = Global.Water;
+		var WW = Global.Waste;
+		var Days = Global.General.Days();
+		var uw1 = Global.UWS.uw1;
+	
+		//3 graphs: 2 bars each = 6 bars
+
+		//BAR 1
+		var slice_1  = WS.c_ws51()*365/Days/WS.ws2;
+		var slice_2  = WS.ws5*uw1*365/Days/WS.ws2;
+		//BAR 2
+		var slice_3  = (WW.c_ww57()+WW.c_ww55()+WW.c_ww53()+WW.c_ww51()+WW.c_ww52()+WW.c_ww54())*365/Days/WW.ww5||0;
+		var slice_4  = WW.ww3*uw1*365/Days/WW.ww5;
+		//BAR 3
+		var slice_5  = WS.wGHG4();
+		var slice_6  = WS.wGHG6();
+		//BAR 4
+		var slice_7  = WW.wwGHG6();
+		var slice_8  = WW.wwGHG4();
+		//BAR 5
+		var slice_9  = WS.wGHG5();
+		var slice_10 = WS.wGHG7();
+		//BAR 6
+		var slice_11 = WW.wwGHG7();
+		var slice_12 = WW.wwGHG5();
+
+/*----------------------------- above this line is ok ------------------------------------*/
 	</script>
-	<tr><th>WS per capita (wGHG1)  <td> ws5*uw1/ws2 <td>c_ws51/ws2
-	<tr><th>WW per capita (wwGHG1) <td> ww3*uw1/ww5 <td>c_ww57/ww5 <td>c_ww55/ww5 <td>c_ww53/ww5 <td>c_ww51/ww5 <td>c_ww52/ww5 <td>c_ww54/ww5
-	<tr><th>WS per SP (wGHG2)      <td> ws5*uw1/ws1 <td>c_ws51/ws1
-	<tr><th>WW per SP (wwGHG2)     <td> ww3*uw1/ww7 <td>c_ww57/ww7 <td>c_ww55/ww7 <td>c_ww53/ww7 <td>c_ww51/ww7 <td>c_ww52/ww7 <td>c_ww54/ww7
-	<tr><th>WS per AC (wGHG3)      <td> ws5*uw1/ws7 <td>c_ws51/ws7
-	<tr><th>WW per CW (wwGHG3)     <td> ww3*uw1/ww4 <td>c_ww57/ww4 <td>c_ww55/ww4 <td>c_ww53/ww4 <td>c_ww51/ww4 <td>c_ww52/ww4 <td>c_ww54/ww4
+	<tr><th>GHG           <th>Non electrical (formula)                                 <th>Value                                             <th>Electrical (formula) <th>Value
+	<tr><th>WS per capita <td>c_ws51*365/Days/ws2                                      <td><script>document.write(format(slice_1)) </script> <td>ws5*uw1*365/Days/ws2 <td><script>document.write(format(slice_2)) </script>
+	<tr><th>WW per capita <td>(c_ww57+c_ww55+c_ww53+c_ww51+c_ww52+c_ww54)*365/Days/ww5 <td><script>document.write(format(slice_3)) </script> <td>ww3*uw1*365/Days/ww5 <td><script>document.write(format(slice_4)) </script>
+	<tr><th>WS per SP     <td>wGHG4                                                    <td><script>document.write(format(slice_5)) </script> <td>wGHG6                <td><script>document.write(format(slice_6)) </script>
+	<tr><th>WW per SP     <td>wwGHG6                                                   <td><script>document.write(format(slice_7)) </script> <td>wwGHG4               <td><script>document.write(format(slice_8)) </script>
+	<tr><th>WS per AC     <td>wGHG5                                                    <td><script>document.write(format(slice_9)) </script> <td>wGHG7                <td><script>document.write(format(slice_10))</script>
+	<tr><th>WW per CW     <td>wwGHG7                                                   <td><script>document.write(format(slice_11))</script> <td>wwGHG5               <td><script>document.write(format(slice_12))</script>
 </table>
 
 <!--graph starts here-->
@@ -59,88 +53,35 @@
 		google.charts.setOnLoadCallback(drawChart);
 		function drawChart() 
 		{
+			var data=google.visualization.arrayToDataTable
+			([
+				[ 
+					'Emission type', 
+					'Non-electrical related', 
+					'Electrical related', 
+					{role:'annotation'} 
+				],
 
-			var data=google.visualization.arrayToDataTable([
-				[ 'Emission type', 
-						'From electricity', 
-						'Non-electricity', 
-						'Fuel used in engines',
-						'Untreated sewage',
-						'Treated sewage discharged to river',
-						'Biogas production flared or released',
-						'Sludge transport',
-						{role:'annotation'} 
-				],
-				['Water per capita',
-					slice_1||1,
-					slice_2||1,
-					0, 0, 0, 0, 0, ''
-				],
-				['Wastewater per capita',
-					slice_3||1,
-					slice_4||1,
-					slice_5||1,
-					slice_6||1,
-					slice_7||1,
-					slice_8||1,
-					slice_9||1,
-					''
-				],
-				['Water per SP',
-					slice_10||1,
-					slice_11||1,
-					0, 0, 0, 0, 0, ''
-				],
-				['Wastewater per SP', 
-					slice_12||1,
-					slice_13||1,
-					slice_14||1,
-					slice_15||1,
-					slice_16||1,
-					slice_17||1,
-					slice_18||1,
-					''
-				],
-				['Water per AC',     
-					slice_19||1,
-					slice_20||1,
-					0, 0, 0, 0, 0, ''
-				],
-				['Wastewater per SP', 
-					slice_21||1,
-					slice_22||1,
-					slice_23||1,
-					slice_24||1,
-					slice_25||1,
-					slice_26||1,
-					slice_27||1,
-					''
-				],
+				['WS per capita', slice_1 , slice_2 , ''],
+				['WW per capita', slice_3 , slice_4 , ''],
+				['WS per SP',     slice_5 , slice_6 , ''],
+				['WW per SP',     slice_7 , slice_8 , ''],
+				['WS per AC',     slice_9 , slice_10, ''],
+				['WW per CW',     slice_11, slice_12, ''],
 			]);
 			var options=
 			{
-				title:"GHG serviced population & authorized consumption",
+				title:"L1 GHG",
 				width:1000,
 				height:500,
 				legend:{position:'right',maxLines:100},
 				isStacked:true,
-				colors: [
-					'#bca613', 
-					'#aaa',
-					'#451c2e',
-					'#672945',
-					'#a15f7d',
-					'#b8879d',
-					'#d0afbe',
-				],
+				colors: ['#00aeef','#bca613', '#f3a000', '#89375c'],
 			};
 			var view=new google.visualization.DataView(data);
-			var chart=new google.visualization.BarChart(document.getElementById("graph"));
+			var chart=new google.visualization.ColumnChart(document.getElementById("graph"));
 			chart.draw(view, options);
 		}
 	</script>
 	<div id="graph"></div>
 <!--graph ends here-->
-
-<!--link to reference-->
-<a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts">https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts</a>

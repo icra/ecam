@@ -45,7 +45,7 @@
 					createLocationSelection()+
 					tableRow("Assessment Period Start",'input','date')+
 					tableRow("Assessment Period End",'input','date')+
-					"<tr><th>Assessment Period<td>"+Global.General.Days()+" days"+
+					"<tr><th>Assessment Period<td>"+Global.General.Days()+" days (<a href=variable.php?id=Days>info</a>)"+
 					tableRow("Comments",'textarea','date')
 			})();
 		}

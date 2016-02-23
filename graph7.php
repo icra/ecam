@@ -4,7 +4,7 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>L3 - Energy consumption (per substage)</h1>
+<!--TITLE--><h1>Level 3 - Energy consumption (per substage)</h1>
 
 <table>
 	<script>
@@ -63,7 +63,7 @@
 				pieHole:0.4,
 				width:800,
 				height:400,
-				title:"Energy consumption per stage",
+				title:"L3 Energy consumption per substage",
 				/*
 				slices:{
 					0:{ color: '#66cef5' },

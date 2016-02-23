@@ -205,7 +205,7 @@
 				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span> This equation contains estimated data in at least one input";
 			}
 
-			if(typeof(currentStage[id])=='number' && Global.Configuration.DataQuality[id]!=undefined)
+			if(typeof(currentStage[id])=='number' && Global.Configuration.DataQuality[id]=="Estimated")
 			{
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
