@@ -172,7 +172,6 @@ var Info = {
 	c_wwt57:{description:"Energy equivalent of fuel usage in the truck to disposal site",                   magnitude:"Energy",       unit:"TJ"},
 	c_wwt58:{description:"Total annual amount of nitrogen discharged directly to aquatic environment",      magnitude:"Mass",         unit:"kg",},
 	c_wwt59:{description:"Methane (CO2e) emitted in wastewater treatment plants",                           magnitude:"Mass",         unit:"kgCO2e",},
-	c_wwt60:{description:"N2O emitted from treated wastewater effluent discharged",							magnitude:"Mass",         unit:"kgCO2e",},
 
 		//L3 Wastewater Treatment
 		"wwt15":{description:"Number of water quality tests complying",                                        magnitude:"Number",  unit:"number",},
@@ -334,7 +333,6 @@ Info.c_wwt56.explanation="Indirect CO2e emitted in receiving waters due to nitro
 Info.c_wwt57.explanation="Energy equivalent of fuel usage in the truck to disposal site. This assumes a truck fuel consumption of 25 L/100km";
 Info.c_wwt58.explanation="Indirect CO2e emitted in receiving waters due to nitrogen in wastewater discharged without treatment. Based upon nitrogen in the WWTP influent multiplied by default emission factor ";
 Info.c_wwt59.explanation="Methane (CO2e) emitted in wastewater treatment plants ";
-Info.c_wwt60.explanation="Indirect CO2e emitted in receiving waters due to nitrogen in wastewater effluent. Based upon nitrogen in the WWTP effluent multiplied by default emission factor";
 Info.uw1.explanation="Ratio of CO2 emission per energy consumed";
 Info.ws1.explanation="Number of permanent residents within the service area managed by the undertaking which are connected to the water supply system";
 Info.ws2.explanation="Number of permanent residents within the water utility area of service";

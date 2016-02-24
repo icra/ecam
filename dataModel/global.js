@@ -212,7 +212,6 @@ var Global = {
 				return this.wwt6*(Global.Waste.Discharge.wwd1-this.wwt8)/this.wwt8*1.1*findcom||0;
 			},
 			c_wwt59:function(){return 0.02*this.c_wwt50()*0.59*0.66*34},
-			c_wwt60:function(){return this.wwt5*this.wwt8*1000*0.005*44/28*298},
 			/*<Level3>*/
 			"wwt15":0,
 			"wwt16":0,
@@ -413,7 +412,7 @@ var Global = {
 	Global.Waste.General.wwGHG10  = function(){return Global.Waste.c_ww55()*365/Global.General.Days()/Global.Waste.ww7||0}
 	Global.Waste.General.wwGHG11  = function(){return Global.Waste.c_ww55()/Global.Waste.ww4||0}
 	Global.Waste.General.wwGHG12  = function(){return Global.Waste.c_ww53()*365/Global.General.Days()/Global.Waste.ww7||0}
-	Global.Waste.General.wwGHG13  = function(){return Global.Waste.Treatment.c_wwt60()/Global.Waste.ww4||0}
+	Global.Waste.General.wwGHG13  = function(){return Global.Waste.Treatment.c_wwt55()/Global.Waste.ww4||0}
 	Global.Waste.General.wwGHG14  = function(){return (Global.Waste.c_ww51()+Global.Waste.c_ww52())*365/Global.General.Days()/Global.Waste.ww7||0}
 	Global.Waste.General.wwGHG15  = function(){return (Global.Waste.c_ww51()+Global.Waste.c_ww52())/Global.Waste.ww4||0}
 	Global.Waste.General.wwGHG16  = function(){return Global.Waste.c_ww54()*365/Global.General.Days()/Global.Waste.ww7||0}
