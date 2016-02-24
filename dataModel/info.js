@@ -126,7 +126,7 @@ var Info = {
 	c_ww53:{description:"N2O emitted from treated wastewater effluent discharged",magnitude:"Mass",unit:"kgCO2e"},
 	c_ww54:{description:"CO2e emitted from sludge transport off-site. Based upon sum of CO2, CH4 and N2O emission from mobile combustion",magnitude:"Mass",unit:"kgCO2e"},
 	c_ww55:{description:"Methane (CO2e) emitted in wastewater treatment plants",magnitude:"Mass",unit:"kgCO2e"},
-	c_ww56:{description:"Energy of fuel consumed for onsite engines",magnitude:"Energy",unit:"kWh"},
+	c_ww56:{description:"Energy of fuel consumed for onsite engines",magnitude:"Energy",unit:"TJ"},
 	c_ww57:{description:"Direct CO2 emitted in wastewater stages from on-site engines",magnitude:"Mass",unit:"kgCO2e"},
 	c_ww58:{description:"Energy of fuel consumed for sludge transport",magnitude:"Energy",unit:"TJ",},
 
