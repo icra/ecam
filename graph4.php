@@ -22,7 +22,7 @@
 		var slice_5 = ww.c_ww57()*365/Days; 
 		var slice_6 = ww.c_ww55()*365/Days;
 		var slice_7 = (ww.c_ww51()+ww.c_ww52())*365/Days;
-		var slice_8 = ww.Treatment.c_wwt60()*365/Days;
+		var slice_8 = ww.Treatment.c_wwt55()*365/Days;
 	</script>
 	<tr><th>Field                                 <th>Formula                      <th>Value (kgCO2/year)
 	<tr><td>GHG from sludge transport             <td>c_ww54*365/Days              <td><script>document.write(format(slice_1))</script>
@@ -32,7 +32,7 @@
 	<tr><td>GHG from fuel engines (wastewater)    <td>c_ww57*365/Days              <td><script>document.write(format(slice_5))</script>
 	<tr><td>GHG from biogas handling (wastewater) <td>c_ww55*365/Days              <td><script>document.write(format(slice_6))</script>
 	<tr><td>GHG from untreated effluent discharge <td>(c_ww51+c_ww52)*365/Days     <td><script>document.write(format(slice_7))</script>
-	<tr><td>GHG from treated effluent discharge   <td>c_wwt60*365/Days             <td><script>document.write(format(slice_8))</script>
+	<tr><td>GHG from treated effluent discharge   <td>c_wwt55*365/Days             <td><script>document.write(format(slice_8))</script>
 </table>
 
 <!--graph starts here-->
