@@ -48,9 +48,9 @@
 				slices:
 				{
 					0:{ color: '#0aaeef' },
-					1:{ color: '#0aaeef' },
+					1:{ color: '#bca613' },
 					2:{ color: '#f3a000' },
-					3:{ color: '#f3a000' },
+					3:{ color: '#89375c' },
 				},
 			};
 			var chart=new google.visualization.PieChart(document.getElementById('graph'));
