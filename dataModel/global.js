@@ -156,7 +156,7 @@ var Global = {
 			var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].waste];
 			return this.c_ww56()*(fuel.EFCO2+34*fuel.EFCH4.engines+298*fuel.EFN2O.engines)
 		},
-		c_ww58:function(){return this.ww8*2*this.ww9*0.25*0.84*43/1000000},
+		c_ww58:function(){return this.ww8*2*this.ww9*0.25*0.84*43/1000000/1000},
 
 		"General":{
 			"wwg1":0,
