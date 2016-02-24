@@ -128,6 +128,14 @@
 				/*attribute field==field>*/newRow.setAttribute('field',field);
 				/*description*/ 
 				var newCell=newRow.insertCell(-1);
+
+				/*hotfix for non-existing variables (for example: when structure is updated)*/
+				if(Info[field]===undefined)
+				{
+					CurrentLevel[field]=undefined; //remove it
+					continue;
+				}
+
 				newCell.setAttribute('title',Info[field].explanation);
 				newCell.style.cursor='help';
 				newCell.innerHTML=(function()

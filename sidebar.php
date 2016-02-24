@@ -153,6 +153,7 @@
 			<tr><th>General
 			<tr><td><a href=getStarted.php>General info</a>
 			<tr><td><a href=configuration.php>Configuration</a>
+			<tr><td><a href=birds.php>Bird's eye view</a>
 			<tr><th>Level 1
 			<tr><td><a class=water stage=water    href=edit.php?level=Water>Water supply</a>
 			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste>Wastewater</a>

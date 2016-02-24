@@ -189,7 +189,6 @@ var Global = {
 			"wwt9":0,
 			"wwt1":0,
 			"wwt10":0,
-			"wwt14":0,
 			"wwt6":0,
 			"wwt5":0,
 			"wwt2":0,
@@ -428,9 +427,9 @@ var Global = {
 	Global.Waste.Treatment.wtE06  = function(){return 100*this.wwt26/this.wwt8||0}
 	Global.Waste.Treatment.wtE1	  = function(){return this.wwt9/this.wwt8||0}
 	Global.Waste.Treatment.wtE2	  = function(){return 100*this.wwt9/Global.UWS.c_uw52()||0}
-	Global.Waste.Treatment.wtE3	  = function(){return this.wwt9/this.wwt14||0}
+	Global.Waste.Treatment.wtE3	  = function(){return this.wwt9/this.c_wwt54()||0}
 	Global.Waste.Treatment.wtE4	  = function(){return this.wwt11/Global.Waste.ww8||0}
-	Global.Waste.Treatment.wtE5	  = function(){return this.wwt2/this.wwt14||0}
+	Global.Waste.Treatment.wtE5	  = function(){return this.wwt2/this.c_wwt54()||0}
 	Global.Waste.Treatment.wtE6	  = function(){return this.wwt11/this.c_wwt53()||0}
 	Global.Waste.Treatment.wtE7	  = function(){return this.wwt23/Global.Waste.ww8||0}
 	Global.Waste.Treatment.wtE8	  = function()

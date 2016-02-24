@@ -155,13 +155,12 @@ var Info = {
 	"wwt2" :{description:"Biogas produced",magnitude:"Volume",unit:"Nm3",},
 	"wwt3" :{description:"Biogas valorised",magnitude:"Volume",unit:"Nm3",},
 	"wwt5" :{description:"Effluent TN load",magnitude:"Mass",unit:"kg",},
-	"wwt6" :{description:"Total nitrogen load in the influent",magnitude:"Mass",unit:"kg",},
+	"wwt6" :{description:"Influent TN load",magnitude:"Mass",unit:"kg",},
 	"wwt8" :{description:"Volume of treated wastewater",                                                    magnitude:"Volume",       unit:"m3",},
 	"wwt9" :{description:"Total electric energy consumption",                                               magnitude:"Energy",       unit:"kWh",},
-	"wwt10":{description:"Effluent BOD5",                                                                   magnitude:"Mass",         unit:"kg",},
+	"wwt10":{description:"Effluent BOD5 load",                                                                   magnitude:"Mass",         unit:"kg",},
 	"wwt11":{description:"Electrical energy produced from biogas valorization",                             magnitude:"Energy",       unit:"kWh",},
 	"wwt12":{description:"Percentage of methane in biogas",                                                 magnitude:"Percentage",   unit:"%",},
-	"wwt14":{description:"BOD mass removed",                                                                magnitude:"Mass",         unit:"kg",},
 	c_wwt50:{description:"Biogas flared",                                                                   magnitude:"Volume",       unit:"Nm3"},
 	c_wwt51:{description:"Nitrous oxide (CO2e) emitted in wastewater treatment plants, expressed as CO2e",  magnitude:"Mass",         unit:"kgCO2e"},
 	c_wwt52:{description:"CH4 emissions from untreated wastewater direct discharge",                        magnitude:"Mass",         unit:"kgCO2e"},
@@ -417,7 +416,7 @@ Info.wwg2.explanation="Water-related renewable electrical energy sold by the was
 Info.wwg3.explanation="Non-water related renewable electricity production (e.g. solar or wind) by the wastewater treatment utility during the assessment period";
 Info.wwg4.explanation="Non-water-related renewable electrical energy sold by the wastewater treatment utility (renewable energy) during the assessment period";
 Info.wwg5.explanation="Heat energy produced from a heat pump using wastewater from the urban drinking water system system. The heat energy may be provided to utility building or neighboring districts";
-Info.wwt1.explanation="BOD load entering the WWTP during the assessment period. It can be estimated by multiplying the average BOD concentration in the influent by the volume entering the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate";
+Info.wwt1.explanation="BOD5 load entering the WWTP during the assessment period. It can be estimated by multiplying the average BOD concentration in the influent by the volume entering the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate";
 Info.wwt2.explanation="Biogas produced during the assessment period by each wastewater treatment plant managed by the undertaking";
 Info.wwt3.explanation="Volume of biogas used to generate electricity or for heating (i.e. the anaerobic digester) at the wastewater treatment plant, over the assessment period";
 Info.wwt5.explanation="Total nitrogen load in treated effluent prior to discharge during the assessment period. It can be estimated by multiplying the average TN concentration in the influent by the volume entering the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate.";
@@ -425,11 +424,10 @@ Info.wwt6.explanation="Total nitrogen load entering the WWTP during the assessme
 Info.wwt8.explanation="Volume of treated wastewater by each unit, over the assessment period";
 Info.wwt8.explanation="Sum of the volume of wastewater treated by all WWTPs that are the responsibility of the wastewater undertaking, during the assessment period";
 Info.wwt9.explanation="Total energy consumed during the assessment period by all wastewater treatment plants managed by the undertaking";
-Info.wwt10.explanation="Average of BOD5 influent concentration during the assessment period by each wastewater treatment plant managed by the undertaking ";
+Info.wwt10.explanation="BOD5 load at the effluent of the WWTP during the assessment period. It can be estimated by multiplying the average BOD5 concentration in the effluent by the effluent volume the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate";
 Info.wwt11.explanation="Energy produced from biogas valorization during the assessment period by each wastewater treatment plant managed by the undertaking";
 Info.wwt11.explanation="Sum of electrical energy produced during the assessment period by all wastewater treatment plants managed by the undertaking";
 Info.wwt12.explanation="Percent of the methane content in the produced biogas";
-Info.wwt14.explanation="BOD mass removed during the assessment period by each wastewater treatment plant managed by the undertaking";
 Info.wwt15.explanation="Number of tests in each wastewater treatment plant that comply with discharge consents during the assessment period";
 Info.wwt16.explanation="Number of tests carried out in each treated wastewater treatment plant during the assessment period";
 Info.wwt17.explanation="Sum of the volume of wastewater treated by WWTPs with trickling filters (TF)";
