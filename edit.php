@@ -90,7 +90,7 @@
 		{
 			var t=document.getElementById('inputs')
 			while(t.rows.length>2){t.deleteRow(-1)}
-			for(field in CurrentLevel)
+			for(var field in CurrentLevel)
 			{
 				/*first check if function*/
 				if(typeof(CurrentLevel[field])!="number")
@@ -372,7 +372,7 @@
 			}
 		}
 		/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
-		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Level 2 - Detailed assessment)</span>" : "<span style=color:black>$titleLevel (Level 1 - Bird's eye view)</span>";
+		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Level 2 - Detailed assessment)</span>" : "<span style=color:black>$titleLevel (Level 1)</span>";
 	?>
 	<style> h1 {text-align:left;padding-left:20em} </style>
 	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
