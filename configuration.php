@@ -78,11 +78,12 @@
 			while(t.rows.length>0)t.deleteRow(-1);
 			for(var question in Global.Configuration["Yes/No"])
 			{
-				//check here for biogas valorised
-				if( 
-					Global.Configuration["Yes/No"]["Are you producing biogas"]==0
-						&& 
-					question=="Are you valorizing biogas")continue;
+				//check for biogas valorised
+				if(Global.Configuration["Yes/No"]["Are you producing biogas"]==0 && question=="Are you valorizing biogas")
+				{
+					Global.Configuration["Yes/No"]["Are you valorizing biogas"]=0;
+					continue;
+				}
 
 				var currentAnswer = Global.Configuration["Yes/No"][question];
 				var checked = currentAnswer ? "checked":"";

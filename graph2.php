@@ -1,11 +1,12 @@
-<?php /*graphs.php: different graphs about ghg emissions */?>
+<!--graph 2-->
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
+
 <!--TITLE--><h1>Level 1 - Energy consumption</h1>
-<!--graph--><div id=graph2></div>
+<!--graph--><div id=graph></div>
 <!--json--><?php include'currentJSON.php'?>
 
 <script>
@@ -13,6 +14,6 @@
 	google.charts.setOnLoadCallback(drawChart);
 	function drawChart() 
 	{
-		Graphs.graph2(true)
+		Graphs.graph2(true,'graph')
 	}
 </script>

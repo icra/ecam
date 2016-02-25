@@ -410,7 +410,7 @@
 <!--IO-->
 <div style=text-align:left;>
 	<!--INPUTS-->
-	<table id=inputs class=inline style="max-width:46%">
+	<table id=inputs class=inline style="max-width:46%;margin-left:5px">
 		<tr><th colspan=5 class=tableHeader>INPUTS <?php include'inputType.php'?>
 		<tr>
 			<th>Description
@@ -422,6 +422,10 @@
 	<!--PI-->
 	<table id=outputs class=inline style="max-width:50%;background:#f6f6f6;">
 		<tr><th colspan=5 class=tableHeader>RESULTS - Key performance indicators
+		<?php
+			if($sublevel==false)
+				include'outputFilter.php';
+		?>
 		<tr>
 			<th title=Performance style=cursor:help>P
 			<th>Description

@@ -14,15 +14,16 @@
 		function updateInputs()
 		{
 			var t=document.getElementById('inputs');
+			//reset table
 			while(t.rows.length>0){t.deleteRow(-1)}
-			//WATER
+			//WATER inputs
 			var newCell=t.insertRow(-1).insertCell(-1)
 			newCell.setAttribute('colspan',5);
 			newCell.innerHTML="Inputs WS &rarr; <a style=color:white href=edit.php?level=Water>Go</a>";
 			newCell.style.color='white'
 			newCell.style.backgroundColor='#0aaeef'
 			updateTable(Global.Water,'inputs');
-			//WASTEWATER
+			//WASTEWATER inputs
 			var newCell=t.insertRow(-1).insertCell(-1)
 			newCell.setAttribute('colspan',5);
 			newCell.innerHTML="Inputs WW &rarr; <a style=color:white href=edit.php?level=Waste>Go</a>";
@@ -100,6 +101,7 @@
 					str+="</select>"
 					return str
 				})();
+
 				//data quality
 				newRow.insertCell(-1).innerHTML=(function()
 				{
@@ -121,10 +123,9 @@
 
 		function drawCharts()
 		{
-			withTables=false;
-			Graphs.graph1(withTables);
-			Graphs.graph2(withTables);
-			Graphs.graph3(withTables);
+			Graphs.graph1(false,'graph1');
+			Graphs.graph2(false,'graph2');
+			Graphs.graph3(false,'graph3');
 		}
 
 		function transformField(element,obj)
@@ -139,33 +140,34 @@
 			input.onblur=function(){updateField(field,obj,input.value)}
 			input.onkeypress=function(event){if(event.which==13){input.onblur()}}
 			//value converted
-			var multiplier = Units.multiplier(field);
-			var currentValue = obj[field]/multiplier;
-			input.value=currentValue
-			element.appendChild(input)
-			input.select()
+			var multiplier=Units.multiplier(field);
+			var currentValue=obj[field]/multiplier;
+			input.value=currentValue;
+			element.appendChild(input);
+			input.select();
 		}
 
 		function updateField(field,obj,newValue)
 		{
-			if(typeof(obj[field])=="number")newValue=parseFloat(newValue) //if obj[field] is a number, parse float
-			//if a unit change is set, get it:
-			var multiplier = Units.multiplier(field);
-			obj[field]=multiplier*newValue; //update the field
-			init(); //update tables and write cookies
+			if(typeof(obj[field])=="number") newValue=parseFloat(newValue);
+			//if a unit change is set, get it
+			var multiplier=Units.multiplier(field);
+			//update
+			obj[field]=multiplier*newValue;
+			init();
 		}
 	</script>
+	<style>
+		td.input input { margin:0;padding:0;width:95%;}
+		td.input       { width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
+	</style>
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>Bird's eye view (Level 1) of <script>document.write(Global.General.Name)</script> (workinprogress)</h1>
-<!--description--><h4> Water supply system (WS) and Wastewater system (WW) </h4>
-</center>
 
-<style>
-	td.input input { margin:0;padding:0;width:95%;}
-	td.input       { width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
-</style>
+<!--TITLE--><h1>Bird's eye view (Level 1) of <script>document.write(Global.General.Name)</script></h1>
+<!--description--><h4>Water supply system (WS) and Wastewater system (WW)</h4>
+</center>
 
 <!--tables-->
 <div class=inline style="margin-left:5px;width:40%;">
@@ -173,12 +175,12 @@
 </div>
 
 <!--graphs-->
-<div class=inline style="width:55%" id=graphsContainer>
+<div class=inline style="width:55%">
 	<div id=graph1 class=inline style=max-width:45%></div>
 	<div id=graph2 class=inline style=max-width:45%></div>
 	<div id=graph3></div>
 	<script>
-		google.charts.load('current', {'packages':['corechart']});
+		google.charts.load('current',{'packages':['corechart']});
 		google.charts.setOnLoadCallback(init)
 	</script>
 </div>
