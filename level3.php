@@ -19,7 +19,7 @@
 		td{text-align:left}
 		th{vertical-align:middle}
 		table#substages td:not(.level2){text-align:right}
-		td.input input{outline:none;width:40px;font-size:18px}
+		td.input input { margin:0;padding:0;width:95%;}
 		td.input{width:80px;text-align:right;background-color:#eee;cursor:cell}
 		#outputs tr:hover { background:orange; }
 		#outputs th{background:#d7bfaf;text-align:left}

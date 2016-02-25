@@ -16,10 +16,10 @@ Graphs.graph1=function(withTables)
 	//actual graph data
 	var data=google.visualization.arrayToDataTable([
 		['Stage', 'Emissions'],
-		["ws non electrical", wsNon],
 		["ws electrical",     wsYes],
-		["ww non electrical", wwNon],
+		["ws non electrical", wsNon],
 		["ww electrical",     wwYes],
+		["ww non electrical", wwNon],
 	]);
 
 	var options= 
@@ -109,30 +109,30 @@ Graphs.graph3=function(withTables)
 	var uw1 = Global.UWS.uw1;
 	//data: 3 graphs: 2 bars each = 6 bars
 	//BAR 1
-	var slice_1  = WS.c_ws51()*365/Days/WS.ws2;
-	var slice_2  = WS.ws5*uw1*365/Days/WS.ws2;
+	var slice_1  = WS.ws5*uw1*365/Days/WS.ws2;
+	var slice_2  = WS.c_ws51()*365/Days/WS.ws2;
 	//BAR 2
-	var slice_3  = (WW.c_ww57()+WW.c_ww55()+WW.c_ww53()+WW.c_ww51()+WW.c_ww52()+WW.c_ww54())*365/Days/WW.ww5||0;
-	var slice_4  = WW.ww3*uw1*365/Days/WW.ww5;
+	var slice_3  = WW.ww3*uw1*365/Days/WW.ww5;
+	var slice_4  = (WW.c_ww57()+WW.c_ww55()+WW.c_ww53()+WW.c_ww51()+WW.c_ww52()+WW.c_ww54())*365/Days/WW.ww5||0;
 	//BAR 3
-	var slice_5  = WS.wGHG4();
-	var slice_6  = WS.wGHG6();
+	var slice_5  = WS.wGHG6();
+	var slice_6  = WS.wGHG4();
 	//BAR 4
-	var slice_7  = WW.wwGHG6();
-	var slice_8  = WW.wwGHG4();
+	var slice_7  = WW.wwGHG4();
+	var slice_8  = WW.wwGHG6();
 	//BAR 5
-	var slice_9  = WS.wGHG5();
-	var slice_10 = WS.wGHG7();
+	var slice_9 = WS.wGHG7();
+	var slice_10  = WS.wGHG5();
 	//BAR 6
-	var slice_11 = WW.wwGHG7();
-	var slice_12 = WW.wwGHG5();
+	var slice_11 = WW.wwGHG5();
+	var slice_12 = WW.wwGHG7();
 	//actual graph
 	var data=google.visualization.arrayToDataTable
 	([
 		[ 
 			'Emission type', 
-			'Non-electrical related', 
 			'Electrical related', 
+			'Non-electrical related', 
 			{role:'annotation'} 
 		],
 
@@ -150,7 +150,7 @@ Graphs.graph3=function(withTables)
 		height:500,
 		legend:{position:'right',maxLines:100},
 		isStacked:true,
-		colors: ['#00aeef','#bca613', '#f3a000', '#89375c'],
+		colors: ['#bca613','#00aeef', '#f3a000', '#89375c'],
 	};
 	var view=new google.visualization.DataView(data);
 	var chart=new google.visualization.ColumnChart(document.getElementById("graph3"));

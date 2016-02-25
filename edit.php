@@ -18,7 +18,7 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
-		td.input input { width:95%;font-size:18px}
+		td.input input { margin:0;padding:0;width:95%;}
 		td.input       { width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
 
 		/*tables*/

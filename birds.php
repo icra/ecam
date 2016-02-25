@@ -163,7 +163,7 @@
 </center>
 
 <style>
-	td.input input { width:95%;font-size:18px}
+	td.input input { margin:0;padding:0;width:95%;}
 	td.input       { width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
 </style>
 
@@ -174,7 +174,6 @@
 
 <!--graphs-->
 <div class=inline style="width:55%" id=graphsContainer>
-	<style>#graphsContainer table {font-size:8px}</style>
 	<div id=graph1 class=inline style=max-width:45%></div>
 	<div id=graph2 class=inline style=max-width:45%></div>
 	<div id=graph3></div>
