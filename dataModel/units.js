@@ -18,8 +18,6 @@ var Units =
 		var currentUnit = Global.Configuration.Units[field] || Info[field].unit
 
 		//multiplier is in Units[magnitude][unit]
-		//is possible that currentUnit is not inside Units[magnitude]
-		//TODO
 		return Units[Info[field].magnitude][currentUnit] || 1;
 	},
 
@@ -51,9 +49,5 @@ var Units =
 	"Energy":{
 		kWh:1,
 		Joule:(1/3600000),
-	},
-	"Currency":{
-		USD:1,
-		EUR:1,
 	},
 }
