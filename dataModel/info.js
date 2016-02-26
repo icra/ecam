@@ -19,36 +19,138 @@
 
 var Info = {
 	//L0 GENERAL
-	"Days":{description:"Assessment period",magnitude:"Time",unit:"days"},
+	"Days":{
+		description:"Assessment period",
+		magnitude:"Time",
+		unit:"days",
+		explanation:""
+	},
 	//L1 UWS
-	"uw1" :{description:"Conversion factor for grid electricity",                                 magnitude:"Conversion",unit:"kgCO2e/kWh",},
-	c_uw50:{description:"Energy costs",                                                           magnitude:"Currency",  unit:"USD"},
-	c_uw51:{description:"Running costs",                                                          magnitude:"Currency",  unit:"USD"},
-	c_uw52:{description:"Total electrical energy consumed from the grid and from self-production",magnitude:"Energy",    unit:"kWh"},
+	"uw1" :{
+		description:"Conversion factor for grid electricity",                                 
+		magnitude:"Conversion",
+		unit:"kgCO2e/kWh",
+		explanation:"",
+	},
+
 	//L1 WATER SUPPLY
-	"ws1":{description:"Serviced population",                                              magnitude:"People",  unit:"People",},
-	"ws2":{description:"Resident population",                                              magnitude:"People",  unit:"People",},
-	"ws3":{description:"Energy costs",                                                     magnitude:"Currency",unit:"USD",},
-	"ws4":{description:"Running costs ",                                                   magnitude:"Currency",unit:"USD",},
-	"ws5":{description:"Energy consumed from the grid",                                    magnitude:"Energy",  unit:"kWh",},
-	"ws7":{description:"Volume of authorized consumption",                                 magnitude:"Volume",  unit:"m3",},
-	"ws8":{description:"Percent of Non Revenue Water",                                     magnitude:"Percent", unit:"%",},
-	"ws9":{description:"Volume of Fuel consumed",                                          magnitude:"Volume",  unit:"m3",},
-	c_ws50:{description:"Energ Fuel Cons (engines)",                                       magnitude:"Energy",  unit:"TJ",},
-	c_ws51:{description:"Direct CO2 emitted in driking water stages from on-site engines", magnitude:"Mass",    unit:"kgCO2e",},
+	ws_serv_pop:{
+		description:"Serviced population",              
+		magnitude:"People",  
+		unit:"People",
+		explanation:""
+	},
+	ws_resi_pop:{
+		description:"Resident population",              
+		magnitude:"People",  
+		unit:"People",
+		explanation:""
+	},
+	ws_nrg_cost:{
+		description:"Energy costs",                     
+		magnitude:"Currency",
+		unit:"USD",
+		explanation:"",
+	},
+	ws_run_cost:{
+		description:"Running costs ",                   
+		magnitude:"Currency",
+		unit:"USD",
+		explanation:"",
+	},
+	ws_nrg_cons:{
+		description:"Energy consumed from the grid",    
+		magnitude:"Energy",  
+		unit:"kWh",
+		explanation:""
+	},
+	ws_vol_auth:{
+		description:"Volume of authorized consumption", 
+		magnitude:"Volume",  
+		unit:"m3",
+		explanation:""
+	},
+	ws_non_revw:{
+		description:"Percent of Non Revenue Water",     
+		magnitude:"Percent", 
+		unit:"%",
+		explanation:""
+	},
+	ws_vol_fuel:{
+		description:"Volume of Fuel consumed",          
+		magnitude:"Volume",  
+		unit:"m3",
+		explanation:""
+	},
+	c_ws_nrg_fuel:{
+		description:"Energ Fuel Cons (engines)",               
+		magnitude:"Energy",  
+		unit:"TJ",
+		explanation:""
+	},
+
 	//L2 Water Supply General
-	"wsg1":{description:"Water-related energy produced",                                   magnitude:"Energy",unit:"kWh",},
-	"wsg2":{description:"Water-related energy produced sold to the grid",                  magnitude:"Energy",unit:"kWh",},
-	"wsg3":{description:"Non-water related energy produced",                               magnitude:"Energy",unit:"kWh",},
-	"wsg4":{description:"Non-water related energy produced sold to the grid",              magnitude:"Energy",unit:"kWh",},
-	"wsg5":{description:"Heat energy valorized from water",                                magnitude:"Energy",unit:"Joule",},
-	c_wsg50:{description:"Total electrical energy consumed from the grid and from self-production related to the urban drinking water system",magnitude:"Energy",unit:"kWh"},
-	c_wsg51:{description:"Net total process related energy consumed by the utility related to the urban drinking water system",magnitude:"Energy",unit:"kWh"},
-	c_wsg52:{description:"GHG emission offset from using the Heat energy from water instead of fuel for neighboring  districts for heating or cooling",magnitude:"Mass",unit:"kgCO2e"},
+	"wsg_nrg_prod":{
+		description:"Energy produced",
+		magnitude:"Energy",
+		unit:"kWh",
+		explanation:""
+	},
+	"wsg_nrg_sold":{
+		description:"Energy sold",
+		magnitude:"Energy",
+		unit:"kWh",
+		explanation:""
+	},
+	"wsg_heat_nrg":{
+		description:"Heat energy valorized from water",
+		magnitude:"Energy",
+		unit:"kWh",
+		explanation:"Heat energy valorized from water",explanation:""
+	},
 	//L2 Water Abstraction
-	"wsa1":{description:"Total electric energy consumption",      magnitude:"Energy",unit:"kWh",},
-	"wsa2":{description:"Volume of conveyed water",               magnitude:"Volume",unit:"m3",},
-	"wsa3":{description:"Electric energy produced from turbines", magnitude:"Energy",unit:"kWh",},
+	"wsa1":{
+		description:"Total electric energy consumption",      
+		magnitude:"Energy",
+		unit:"kWh",
+		explanation:""
+	},
+	"wsa2":{
+		description:"Volume of conveyed water",               
+		magnitude:"Volume",
+		unit:"m3",
+		explanation:""
+	},
+	"wsa3":{
+		description:"Electric energy produced from turbines", 
+		magnitude:"Energy",
+		unit:"kWh",
+		explanation:""
+	},
+	"wsa_nrg_prod" :{
+		description:"Energy produced",
+		magnitude:"Energy",
+		unit:"kWh",
+		explanation:"Energy produced",
+	},
+	"wsa_nrg_sold" :{
+		description:"Energy sold",
+		magnitude:"Energy",
+		unit:"kWh",
+		explanation:"Energy sold"
+	},
+	"wsa_heat_nrg" :{
+		description:"Heat energy valorized from water",
+		magnitude:"Energy",
+		unit:"kWh",
+		explanation:"Heat energy valorized from water"
+	},
+	"wsa_GHGe":{
+		description:"From electricity",
+		magnitude:"Mass",
+		unit:"kgCO2e",
+		explanation:""
+	},
 	//L3 Water Abstraction
 	"wsa4" :{description:"Pumping head in each pumping system",                        magnitude:"Head",         unit:"m",},
 	"wsa5" :{description:"Volume pumped in each Pumping System",                       magnitude:"Head",         unit:"m3",},
@@ -121,13 +223,8 @@ var Info = {
 	"ww14":{description:"BOD5 per person per day", magnitude:"Mass/inhab/time",   unit:"g/person/day",},
 	"ww15":{description:"Treated wastewater volume", magnitude:"Volume",   unit:"m3",},
 	c_ww50:{description:"Biogas flared",magnitude:"Volume",unit:"Nm3"},
-	c_ww51:{description:"N2O emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kgCO2e"},
-	c_ww52:{description:"CH4 emissions from untreated wastewater direct discharge",magnitude:"Mass",unit:"kgCO2e"},
-	c_ww53:{description:"N2O emitted from treated wastewater effluent discharged",magnitude:"Mass",unit:"kgCO2e"},
-	c_ww54:{description:"CO2e emitted from sludge transport off-site. Based upon sum of CO2, CH4 and N2O emission from mobile combustion",magnitude:"Mass",unit:"kgCO2e"},
-	c_ww55:{description:"Methane (CO2e) emitted in wastewater treatment plants",magnitude:"Mass",unit:"kgCO2e"},
 	c_ww56:{description:"Energy of fuel consumed for onsite engines",magnitude:"Energy",unit:"TJ"},
-	c_ww57:{description:"Direct CO2 emitted in wastewater stages from on-site engines",magnitude:"Mass",unit:"kgCO2e"},
+
 	c_ww58:{description:"Energy of fuel consumed for sludge transport",magnitude:"Energy",unit:"TJ",},
 
 	//L2 Wastewater General
@@ -200,34 +297,27 @@ var Info = {
 		c_wwd51:{description:"[Sum] (water volume pumped x pump head in meters)",magnitude:"Volume x head",unit:"m3 x 100m"},
 	
 	//PERFORMANCE INDICATORS LEVEL 1
-	gE1w    :{description:"Energy costs",                                                                                magnitude:"Percent",           unit:"%"},
-	gE1ww   :{description:"Energy costs",                                                                                magnitude:"Percent",           unit:"%"},
-	gE2w    :{description:"Energy consumption per capita",	                                                             magnitude:"Energy/inhab/time", unit:"kWh/inhab/year"},
-	gE2ww   :{description:"Energy consumption per capita",	                                                             magnitude:"Energy/inhab/time", unit:"kWh/inhab/year"},
-	gE3w    :{description:"Energy consumption per serviced population",	                                                 magnitude:"Energy/serv.Pop/time", unit:"kWh/inhab/year"},
-	gE3ww   :{description:"Energy consumption per serviced population",	                                                 magnitude:"Energy/serv.Pop/time", unit:"kWh/inhab/year"},
-	gE4w    :{description:"Energy consumption per authorized consumption",	                                             magnitude:"Energy/Volume",     unit:"kWh/m3"},
-	gE4ww   :{description:"Energy consumption per collected wastewater volume",                                          magnitude:"Energy/Volume",     unit:"kWh/m3"},
-	wGHG1   :{description:"GHG emissions per capita",                                                                    magnitude:"Mass/inhab/time",   unit:"kgCO2e/inhab/year"},
-	wGHG2   :{description:"GHG emissions per serviced population",                                                       magnitude:"Mass/serv.Pop/time",   unit:"kgCO2e/inhab/year"},
-	wGHG3   :{description:"GHG emissions per authorized consumption",                                                    magnitude:"Mass/Volume",       unit:"kgCO2e/m3"},
-	wGHG4   :{description:"GHG emissions from other activities than electricity consumption per serviced population",    magnitude:"Mass/ser.Pop/time",   unit:"kgCO2e/inhab/year"},
-	wGHG5   :{description:"GHG emissions from other activities than electricity consumption per authorized consumption", magnitude:"Mass/Volume",       unit:"kgCO2e/m3"},
-	wGHG6   :{description:"GHG emissions from electricity consumption per serviced population",  	                     magnitude:"Mass/ser.Pop/time",   unit:"kgCO2e/inhab/year"},
-	wGHG7   :{description:"GHG emissions from electricity consumption per authorized consumption",  	                 magnitude:"Mass/Volume",       unit:"kgCO2e/m3"},
-	wS4	    :{description:"Proportion of resident population receiving service",		                                 magnitude:"Percent",           unit:"%"},
-	wS5	    :{description:"Non-revenue water by volume",                                                                 magnitude:"Percent",           unit:"%"},	
-	wS6     :{description:"Authorized consumption per pers per day",                                                     magnitude:"Volume/inhab/time", unit:"m3/inhab/day"},
-	wwGHG1  :{description:"GHG emissions per capita",                                                                    magnitude:"Mass/inhab/time",   unit:"kgCO2e/inhab/year"},
-	wwGHG2  :{description:"GHG emissions per serviced population",                                                       magnitude:"Mass/ser.Pop/time",   unit:"kgCO2e/inhab/year"},
-	wwGHG3  :{description:"GHG emissions per collected wastewater volume",	                                             magnitude:"Mass/inhab/time",   unit:"kgCO2e/m3"},
-	wwGHG4  :{description:"GHG emissions from electricity consumption per serviced population",                          magnitude:"Mass/ser.Pop/time",   unit:"kgCO2e/inhab/year",},
-	wwGHG5  :{description:"GHG emissions from electricity consumption per collected wastewater",                         magnitude:"Mass/Volume",       unit:"kgCO2e/m3",},
-	wwGHG6  :{description:"GHG emissions from other activities than electricity consumption per serviced population",    magnitude:"Mass/ser.Pop/time",   unit:"kgCO2e/inhab/year",},
-	wwGHG7  :{description:"GHG emissions from other activities than electricity consumption per collected wastewater",   magnitude:"Mass/Volume",       unit:"kgCO2e/m3",},
+	//WATER
+	gE1w    :{description:"Energy costs per total cost",                                                                 magnitude:"Percentage",        unit:"%"},
+	wGHGe   :{description:"From electricity",                                                             magnitude:"Mass",   unit:"kgCO2e"},
+	wGHGne  :{description:"From non-electricity",                                                         magnitude:"Mass",   unit:"kgCO2e"},
+	//WASTEWATER
+	gE1ww          :{description:"Energy costs per total cost",   magnitude:"Percentage",        unit:"%"},
+	wwGHGe         :{description:"From electricity",magnitude:"Mass",   unit:"kgCO2e"},
+	wwGHGne_n2o_unt:{description:"From non electricity (N<sub>2</sub>O untreated wastewater)",magnitude:"Mass",unit:"kgCO2e"},
+	wwGHGne_ch4_unt:{description:"From non electricity (CH<sub>4</sub> untreated wastewater)",magnitude:"Mass",unit:"kgCO2e"},
+	wwGHGne_n2o_tre:{description:"From non electricity (N<sub>2</sub>O treated wastewater)",magnitude:"Mass",unit:"kgCO2e"},
+	wwGHGne_tsludge:{description:"From non electricity (sludge transport)",magnitude:"Mass",unit:"kgCO2e"},
+	wwGHGne_ch4_wwt:{description:"From non electricity (CH<sub>4</sub> from WWTP)",magnitude:"Mass",unit:"kgCO2e"},
+	wwGHGne_engines:{description:"From non electricity (from engines on-site)",magnitude:"Mass",unit:"kgCO2e"},
+	//
+
 	wwS1    :{description:"Proportion of resident population receiving service",                                         magnitude:"Percent",           unit:"%",},
 	wwS2    :{description:"Collected wastewater treated",                                                                magnitude:"Percent",           unit:"%",},
 	wwS5    :{description:"Treated wastewater per pers per day",                                                         magnitude:"Volume/inhab/time", unit:"m3/inhab/day",},
+	wS4	    :{description:"Proportion of resident population receiving service",		                                 magnitude:"Percent",           unit:"%"},
+	wS5	    :{description:"Non-revenue water by volume",                                                                 magnitude:"Percent",           unit:"%"},	
+	wS6     :{description:"Authorized consumption per pers per day",                                                     magnitude:"Volume/inhab/time", unit:"m3/inhab/day"},
 
 	//PERFORMANCE INDICATORS LEVEL 2
 	wS1	    :{description:"Percentage of quality compliance",                                                                        magnitude:"Percent",         unit:"%",},
@@ -248,13 +338,11 @@ var Info = {
 
 
 	//L2 and L3 PIs
-	aE1	 :{description:"Energy consumption per abstracted water",                                   magnitude:"Energy/Volume",unit:"kWh/m3",},
-	aE2	 :{description:"Energy consumption of abstracted water per total energy consumption",       magnitude:"Percent",unit:"%",},
-	aE3	 :{description:"Standardised Energy Consumption",                                           magnitude:"Energy",unit:"kWh/m3/100m",},
-	aE4	 :{description:"Energy recovery per conveyed water",                                        magnitude:"Energy/Volume",unit:"kWh/m3",},
-	aE5	 :{description:"Standardized energy recovery",                                              magnitude:"Energy/Volume",unit:"kWh/m3/100m",},
-	aE6	 :{description:"Water losses per mains length",                                             magnitude:"Volume/",unit:"m3/km/days",},
-	aE7	 :{description:"Unit head loss",                                                            magnitude:"Headloss/Distance",unit:"m/km",},
+	wsa_E3	 :{description:"Standardised Energy Consumption",                                           magnitude:"Energy",unit:"kWh/m3/100m",},
+	wsa_E4	 :{description:"Energy recovery per conveyed water",                                        magnitude:"Energy/Volume",unit:"kWh/m3",},
+	wsa_E5	 :{description:"Standardized energy recovery",                                              magnitude:"Energy/Volume",unit:"kWh/m3/100m",},
+	wsa_E6	 :{description:"Water losses per mains length",                                             magnitude:"Volume/",unit:"m3/km/days",},
+	wsa_E7	 :{description:"Unit head loss",                                                            magnitude:"Headloss/Distance",unit:"m/km",},
 	tE01 :{description:"WTPs with Pre-ox/C/F/S/Filt/Des",                                           magnitude:"Percent",unit:"%",},
 	tE02 :{description:"WTPs with Pre-ox/C/F/Filt/Des",                                             magnitude:"Percent",unit:"%",},
 	tE03 :{description:"WTPs with C/F/S/Filt/Des",                                                  magnitude:"Percent",unit:"%",},
@@ -305,16 +393,15 @@ Info.c_wsa50.explanation="Sum, for all the pumps of the water abstracted system,
 Info.c_wsd51.explanation="This energy takes into account the node consumption elevation plus the minimum pressure required by the users";
 Info.c_wsd52.explanation="The energy provided to a system can be natural and shaft (pumping energy). With the provided expression the energy is precisely calculated";
 Info.c_wsd53.explanation="This is the energy supplied to the system because its irregular topography";
-Info.c_wsg50.explanation="Total energy consumed by drinking water utility";
-Info.c_wsg51.explanation="Ultimately this number is multiplied by EF gV9";
-Info.c_wsg52.explanation="CO2e of heat used for District heating or cooling from urban drinking water system";
 Info.c_ww50.explanation="The Biogas flared is calculated based on the amount of biogas produced under good operating conditions of the plant and the anaerobic digestor if biogas is NOT recovered to produce energy";
-Info.c_ww51.explanation="Indirect CO2e emitted in receiving waters due to nitrogen in wastewater discharged without treatment. Based upon nitrogen in the WWTP influent multiplied by default emission factor";
-Info.c_ww52.explanation="Indirect CO2e emitted in receiving waters due to nitrogen in wastewater effluent without treatment. Based upon BOD in the WWTP influent multiplied by default emission factor";
-Info.c_ww53.explanation="Indirect CO2e emitted in receiving waters due to nitrogen in wastewater effluent. Based upon nitrogen in the WWTP effluent multiplied by default emission factor";
-Info.c_ww54.explanation="Indirect CO2e emitted from sludge transport off-site. Based upon sum of CO2, CH4 and N2O emission from mobile combustion";
-Info.c_ww55.explanation="Methane (CO2e) emitted in wastewater treatment plants";
-Info.c_ww57.explanation="Total direct CO2e emitted from on-site engines in wastewater stages based upon sum of CO2, CH4 and N2O emission from stationary combustion ";
+
+Info.wwGHGne_n2o_unt.explanation="Indirect CO2e emitted in receiving waters due to nitrogen in wastewater discharged without treatment. Based upon nitrogen in the WWTP influent multiplied by default emission factor";
+Info.wwGHGne_n2o_tre.explanation="Indirect CO2e emitted in receiving waters due to nitrogen in wastewater effluent. Based upon nitrogen in the WWTP effluent multiplied by default emission factor";
+Info.wwGHGne_tsludge.explanation="Indirect CO2e emitted from sludge transport off-site. Based upon sum of CO2, CH4 and N2O emission from mobile combustion";
+Info.wwGHGne_ch4_wwt.explanation="Methane (CO2e) emitted in wastewater treatment plants";
+Info.wwGHGne_engines.explanation="Direct CO2e emitted from on-site engines in wastewater stages based upon sum of CO2, CH4 and N2O emission from stationary combustion ";
+Info.wwGHGne_ch4_unt.explanation="Indirect CO2e emitted in receiving waters due to methane in wastewater effluent without treatment. Based upon BOD in the WWTP influent multiplied by default emission factor";
+
 Info.c_ww58.explanation="The fuel consumption is calculated assuming 2 times distance to disposal site (round tryp) time the number of trips times an average diesel consumption of 25 L per 100 km";
 Info.c_wwc50.explanation="Sum, for all the pumps of the wastewater collection system, of the total volume pumped by pump i (m3) times the pump head i (m) / 100 ";
 Info.c_wwc51.explanation="This volume is calculated based on a mass balance on the BOD load. It considers the volume of collected wastewater prior to dilution, the ratio between the population connected to sewers and the serviced population, and the standard country specific BOD input to sewers in g/ pers/ day. The other side of the mass balance considers the volume of treated wastewater and the BOD load in the treatment plant influent. ";
@@ -333,14 +420,6 @@ Info.c_wwt57.explanation="Energy equivalent of fuel usage in the truck to dispos
 Info.c_wwt58.explanation="Indirect CO2e emitted in receiving waters due to nitrogen in wastewater discharged without treatment. Based upon nitrogen in the WWTP influent multiplied by default emission factor ";
 Info.c_wwt59.explanation="Methane (CO2e) emitted in wastewater treatment plants ";
 Info.uw1.explanation="Ratio of CO2 emission per energy consumed";
-Info.ws1.explanation="Number of permanent residents within the service area managed by the undertaking which are connected to the water supply system";
-Info.ws2.explanation="Number of permanent residents within the water utility area of service";
-Info.ws3.explanation="Costs from electric energy consumption for the entire water supply utilty, based on the electricity bill during the entire assessment period";
-Info.ws4.explanation="Total operations and maintenance net costs and internal manpower net costs (i.e. not including the capitalised cost of self constructed assets) related to water supply within the service area managed by the undertaking during the entire assessment period";
-Info.ws5.explanation="Total energy consumed from the grid for the entire water supply utilty, based on the electricity bill during the entire assessment period.";
-Info.ws7.explanation="Sum of the volume of metered and/or non-metered water that during the assessment period, is taken by registered customers, by the water supplier itself, or by others who are implicitly or explicitly authorised to do so by the water supplier, for residential, commercial, industrial or public purposes. It includes water exported";
-Info.ws8.explanation="Percentage of the abstracted water Volume that is lost due to leaks or illegal connection to the distribution system , At level 1, enter the percentage as known or estimated by the utility. At level 2, the non revenue water indicator (wS5) will be calculated based on a mass balance.";
-Info.ws9.explanation="Fuel consumption in water supply, for instance, due to the use of on-site generators or devices that work on fuel.";
 Info.wsa1.explanation="Electric energy consumption including both from the grid and self-produced, for the water abstraction unit, by the undertaking during the entire assessment period";
 Info.wsa2.explanation="Sum of the volume of water conveyed (gravity or pumped) in the water abstraction unit that are the responsibility of the undertaking, during the assessment period";
 Info.wsa3.explanation="Sum of energy recovered during the assessment period by all turbines for abstracted water managed by the undertaking";
@@ -370,11 +449,10 @@ Info.wsd17.explanation="Total energy recovered during the assessment period by e
 Info.wsd18.explanation="Total transmission and distribution mains length (service connections not included), for each water distribution unit at the reference date";
 Info.wsd19.explanation="Friction losses (including the local ones in valves and accessories), for each water distribution unit at the reference date.";
 Info.wsd20.explanation="Sum of the volume of metered and/or non-metered water that, during the assessment period, is taken by registered customers, by the water supplier itself, or by others who are implicitly or explicitly authorised to do so by the water supplier, for residential, commercial, industrial or public purposes. It includes water exported";
-Info.wsg1.explanation="Water-related energy produced in the urban drinking water system, by the undertaking during the entire assessment period";
-Info.wsg2.explanation="Water-related energy produced in the urban drinking water system sold to the grid, by the undertaking during the entire assessment period";
-Info.wsg3.explanation="Non-water-related energy produced in the urban drinking water system (e.g. solar, wind), by the undertaking during the entire assessment period";
-Info.wsg4.explanation="Non-water-related energy produced in the urban drinking water system (e.g. solar, wind) sold to the grid, by the undertaking during the entire assessment period";
-Info.wsg5.explanation="Heat energy produced from a heat pump using water from the urban drinking water system or urban wastewater system. The heat energy may be provided to utility building or neighboring districts";
+
+Info.wsg_nrg_prod.explanation="Energy produced";
+Info.wsg_nrg_sold.explanation="Energy sold";
+
 Info.wst1.explanation="Sum of the volume of water treated by WTPs that are the responsibility of the water undertaking, during the assessment period";
 Info.wst10.explanation="Sum of the volume of water treated by WTPs with C/F/S/Filt/Des ";
 Info.wst11.explanation="Sum of the volume of water treated by WTPs with C/F/Filt/Des";
@@ -441,13 +519,11 @@ Info.wwt24.explanation="Average of dry weight in sludge produced during the asse
 Info.wwt25.explanation="Treatment capacity of each WWTP that are the responsibility of the wastewater undertaking, during the assessment period";
 
 //KPI explanations
-Info.aE1.explanation="Unit energy consumption per abstracted water in water abstraction and conveyance (gravity or pumped)";
-Info.aE2.explanation="Relative weight of the energy consumption in abstracted water with regard to the Total energy consumed from the grid and self produced in the water and wastewater systems";
-Info.aE3.explanation="Average energy consumption per pumping water per head";
-Info.aE4.explanation="Unit energy recovered in water conveyance";
-Info.aE5.explanation="Represents an average energy turbine efficiency";
-Info.aE6.explanation="Total (apparent and real) water losses, expressed in terms of annual volume lost per mains length";
-Info.aE7.explanation="Unit energy friction loss in the conveyance system ";
+Info.wsa_E3.explanation="Average energy consumption per pumping water per head";
+Info.wsa_E4.explanation="Unit energy recovered in water conveyance";
+Info.wsa_E5.explanation="Represents an average energy turbine efficiency";
+Info.wsa_E6.explanation="Total (apparent and real) water losses, expressed in terms of annual volume lost per mains length";
+Info.wsa_E7.explanation="Unit energy friction loss in the conveyance system ";
 Info.dE1.explanation="the applicable standards or legislation";
 Info.dE2.explanation="Unit energy consumption per authorized consumption in water distribution";
 Info.dE3.explanation="Relative weight of the energy consumption in authorized consumption with regard to the Total energy consumed from the grid and self produced in the water and wastewater systems";
@@ -457,12 +533,6 @@ Info.dE6.explanation="Percentage of energy provided to the system due to the ter
 Info.dE7.explanation="Total water losses (apparent and real), expressed in terms of annual volume lost per mains length";
 Info.gE1w.explanation="Proportion of the utility energy costs referred to the total running costs related to urban drinking water system";
 Info.gE1ww.explanation="Proportion of the utility energy costs referred to the total running costs";
-Info.gE2w.explanation="Energy consumption from grid and self produced in urban drinking water system per inhabitant living permanently in the area that is the responsibility of the water utility";
-Info.gE2ww.explanation="Energy consumption from grid and self produced in urban wastewater system per inhabitant living permanently in the area that is the responsibility of the water utility";
-Info.gE3w.explanation="Energy consumption from grid and self produced in urban drinking water system per serviced population in the area that is the responsibility of the water utility";
-Info.gE3ww.explanation="Energy consumption from grid and self produced in urban wastewater per serviced population in the area that is the responsibility of the water utility";
-Info.gE4w.explanation="Energy consumption from grid and self produced in urban drinking water system per authorized consumption";
-Info.gE4ww.explanation="Energy consumption from grid and self produced in urban wastewater per wastewater volume collected by the undertaking prior to dilution in the sewer ";
 Info.tE01.explanation=" ";
 Info.tE02.explanation=" ";
 Info.tE03.explanation=" ";
@@ -473,13 +543,10 @@ Info.tE1.explanation="Unit energy consumption per treated water in water treatme
 Info.tE2.explanation="Percentage of energy consumed in water treatment per Total energy consumed from the grid and self produced in the water and wastewater systems";
 Info.tE3.explanation="Unit sludge production per treated water in water treatment plants";
 Info.tE4.explanation="Percentage of treatment capacity utilized";
-Info.wGHG1.explanation="All GHG Emissions (from electricity consumption and other emissions) in all stages of urban drinking water system per inhabitant living permanently in the area that is the responsibility of the water utility";
-Info.wGHG2.explanation="All GHG Emissions (from electricity consumption and other emissions) in all stages of urban drinking water system per serviced population in the area that is the responsibility of the water utility";
-Info.wGHG3.explanation="All GHG Emissions (from electricity consumption and other emissions) in all stages of urban drinking water system per authorized consumption ";
-Info.wGHG4.explanation="Total of all GHG Emissions not related to grid energy consumption (fuel engines emissions) per serviced population in the area that is the responsibility of the water utility";
-Info.wGHG5.explanation="Total of all GHG Emissions not related to grid energy consumption (fuel engines emissions) per authorized consumption ";
-Info.wGHG6.explanation="Total of all GHG Emissions related to grid energy consumption per serviced population in the area that is the responsibility of the water utility";
-Info.wGHG7.explanation="Total of all GHG Emissions related to grid energy consumption per authorized consumption ";
+
+Info.wGHGe.explanation="GHG Emissions from electricity consumption in all stages of urban drinking water system";
+Info.wGHGne.explanation="GHG Emissions other from electricity consumption in all stages of urban drinking water system";
+
 Info.wS1.explanation="Percentage of the total number of treated water tests performed that comply with";
 Info.wS2.explanation="Percentage of delivery points (one per service connection) that receive and are likely to receive adequate pressure";
 Info.wS3.explanation="Percentage of delivery points (one per service connection) that receive and are likely to receive adequate pressure";
@@ -508,7 +575,6 @@ Info.wtE6.explanation="Unit biogas produced per BOD mass removed in wastewater t
 Info.wtE7.explanation="Percentage of the electrical energy produced related to the available energy in biogas";
 Info.wtE8.explanation="Unit sludge production per treated wastewater in wastewater treatment plants";
 Info.wtE9.explanation="Percentage of dry weight of sludge that comes out from the WWTP to disposal";
-Info.wwGHG1.explanation="All GHG Emissions (from electricity consumption and other emissions) in all stages of wastewater service per inhabitant living permanently in the area that is the responsibility of the undertaking";
 Info.wwGHG10.explanation="GHG emissions from biogas flaring at the wastewater treatment plant per serviced population in the area that is the responsibility of the water utility";
 Info.wwGHG11.explanation="GHG emissions from biogas flaring at the wastewater treatment plant per wastewater volume collected by the undertaking prior to dilution in the sewer ";
 Info.wwGHG12.explanation="GHG emissions from the discharge of treated effluent to waterbodies per serviced population";
@@ -517,12 +583,6 @@ Info.wwGHG14.explanation="GHG emissions from the discharge of untreated wastewat
 Info.wwGHG15.explanation="GHG emissions from the discharge of untreated wastewater to waterbodies per collected wastewater volume";
 Info.wwGHG16.explanation="GHG emissions from sludge transport per serviced population";
 Info.wwGHG17.explanation="GHG emissions from sludge transport per collected wastewater volume";
-Info.wwGHG2.explanation="All GHG Emissions (from electricity consumption and other emissions) in all stages of wastewater service per serviced population in the area that is the responsibility of the undertaking";
-Info.wwGHG3.explanation="All GHG Emissions (from electricity consumption and other emissions) in all stages of wastewater service per wastewater volume collected by the undertaking prior to dilution in the sewer ";
-Info.wwGHG4.explanation="Total of all GHG Emissions related to grid energy consumption minus the renewable energy produced and sold by the undertaking per serviced population in the area that is the responsibility of the water utility";
-Info.wwGHG5.explanation="Total of all GHG Emissions related to grid energy consumption per collected wastewater prior to any infiltration and inflow or overflows in the sewer system";
-Info.wwGHG6.explanation="Total of all GHG Emissions not related to grid energy consumption per serviced population in the area that is the responsibility of the water utility";
-Info.wwGHG7.explanation="Total of all GHG Emissions not related to grid energy consumption per collected wastewater prior to any infiltration and inflow or overflows in the sewer system";
 Info.wwGHG8.explanation="Direct CO2 emitted in wastewater stages from on-site engines per serviced population in the area that is the responsibility of the water utility";
 Info.wwGHG9.explanation="GHG emissions from fuel engines in the wastewater system per wastewater volume collected by the undertaking prior to dilution in the sewer ";
 Info.wwS1.explanation="Percentage of the resident population that are connected to the sewer systems and which wastewater is treated by the undertaking";
@@ -533,24 +593,6 @@ Info.wS6.explanation="Volume of authorized consumption per serviced person in th
 Info.wwS5.explanation="Volume of treated wastewater per serviced person in the service area managed by the undertaking divided by the duration of the assessment period"; 
 
 //repeated PIs
-Info.gE2w_L2=Info.gE2w;
-Info.gE3w_L2=Info.gE3w;
-Info.gE4w_L2=Info.gE4w;
-Info.gE2ww_L2=Info.gE2ww;
-Info.gE3ww_L2=Info.gE3ww;
-Info.gE4ww_L2=Info.gE4ww ;
-Info.wGHG1_L2=Info.wGHG1;
-Info.wGHG2_L2=Info.wGHG2;
-Info.wGHG3_L2=Info.wGHG3;
-Info.wGHG4_L2=Info.wGHG4;
-Info.wGHG5_L2=Info.wGHG5;
-Info.wGHG6_L2=Info.wGHG6;
-Info.wGHG7_L2=Info.wGHG7;
-Info.wwGHG1_L2=Info.wwGHG1;
-Info.wwGHG2_L2=Info.wwGHG2;
-Info.wwGHG3_L2=Info.wwGHG3;
-Info.wwGHG4_L2=Info.wwGHG4;
-Info.wwGHG5_L2=Info.wwGHG5;
 Info.wS1_L2=Info.wS1;
 Info.wS2_L2=Info.wS2;
 Info.wS3_L2=Info.wS3;
