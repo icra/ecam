@@ -28,10 +28,10 @@ function locateVariable(code)
 						break;
 				}
 			})(); 
-			return "L2 &rsaquo; "+levelName+" &rsaquo; "+sublevelName+" &rsaquo; "
+			return levelName+"/"+sublevelName
 		}
 		else
-			return "L1  &rsaquo; "+levelName+" &rsaquo; ";
+			return levelName;
 	};
 
 	for(var level in Global)

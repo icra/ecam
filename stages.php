@@ -20,7 +20,7 @@
 
 <!--level 3 overview-->
 <fieldset class=inline>
-	<legend>Level 3 overview</legend>
+	<legend>System overview</legend>
 	<table id=l3overview>
 		<tr><th>Stage<th>#Substages
 		<tr><td><a stage=waterAbs href=level3.php?level=Water&sublevel=Abstraction >Water Abstraction    </a><td><script>document.write(Global.Substages.Water.Abstraction.length)</script>

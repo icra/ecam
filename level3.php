@@ -80,7 +80,7 @@
 		function Substage()
 		{
 			/*get a list of variables for this level*/ var inputs=getInputs();
-			/*substage default name*/ this.name="S"+(substages.length+1);
+			/*substage default name*/ this.name="default name "+(substages.length+1);
 			//make the object look like, e.g. Substage {tV1: 0, tV2: 0, tV3: 0, tV4: 0, tV5: 0, ...}
 			for(var i in inputs){this[inputs[i]]=0;}
 		}
@@ -200,6 +200,12 @@
 				{
 					/*variable code*/
 					var code=inputs[input];
+
+					/*if assessment type is simple, hide L3 variables*/
+					if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
+					{
+						if(Level3.isInList(code)) continue;
+					}
 					
 					/*is a calculated variable*/
 					var isCV = code.search(/^c_/)>=0 ? true : false;
@@ -227,7 +233,7 @@
 					newCell.style.textAlign='left';
 					newCell.innerHTML=(function()
 					{
-						var extra = Level3.isInList(code) ? " (L3)" : "" ;
+						var extra = Level3.isInList(code) ? " (compl assessment)" : "" ;
 						return " <a href=variable.php?id="+code+">"+code+"</a>"+extra;
 					})();
 
@@ -351,13 +357,20 @@
 				for(var f in CurrentStage)
 				{
 					//if "c_" is found, add f to cvs
-					if(f.search("c_")!=-1){cvs.push(f);}
+					if(f.search(/^c_/)>=0){cvs.push(f);}
 				}
 			})();
 			for(var field in CurrentStage)
 			{
 				//only functions
 				if(typeof(CurrentStage[field])!="function"){continue;}
+
+				/*if assessment type is simple, hide L3 variables*/
+				if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
+				{
+					if(Level3.isInList(field)) continue;
+				}
+				
 
 				//exclude the "level2only" variables
 				if(Level2only.isInList(field)){continue;}
@@ -371,7 +384,7 @@
 				newRow.setAttribute('title',Info[field].explanation);
 
 				//if is calculated variable, hide it
-				if(field.search('c_')>=0) newRow.style.display='none';
+				if(field.search(/^c_/)>=0) newRow.style.display='none';
 
 				//get formula
 				var formula=CurrentStage[field].toString();
@@ -463,6 +476,7 @@
 			updateOutputs();
 			updateSubstagesTable();
 			Sidebar.update();
+			updateAssessmentMenu();
 			updateResult();
 		}
 	</script>
@@ -497,10 +511,13 @@
 </div>
 <!--separator--><div style=margin-top:120px></div>
 <!--linear diagram--><?php include'linear.php'?>
-<!--HELP--><h4>In Level 3 you can subdivide a Level 2 stage into multiple substages. Change the name of them clicking on its header.</h4>
-<!--new substage button--><button onclick=newSubstage() class=button>+ New Substage</button>
-<!--substages counter--><div class=inline style="border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
-<!--SUBSTAGES TABLE--><table id=substages style=margin:1em><tr><td style=border:none colspan=2></table>
+<!--HELP--><h4>You can subdivide this stage in multiple substages and turn on advanced inputs/outputs</h4>
+<!--type of assessment--><?php include'assessmentType.php'?>
+<!--SUBSTAGES TABLE--><table id=substages style=margin:1em>
+	<tr><td colspan=2 style=text-align:center>
+		<!--substages counter--><div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
+		<!--new substage button--><button onclick=newSubstage() class=button>+ Add Substage</button>
+	</table>
 <!--OUTPUTS TABLE--><table id=outputs class=inline style=background:#f6f6f6> 
 	<tr><th colspan=42 style="background:white;border:none;color:black;padding-bottom:0.7em;font-size:17px">RESULTS - Key performance indicators</table>
 <!--FOOTER--><?php include'footer.php'?>

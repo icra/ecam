@@ -66,6 +66,20 @@
 				var sublevelName=sublevel=="General" ? "Energy" : sublevel;
 				newCell.innerHTML+=" &rsaquo; <a href="+url+"?level="+level+"&sublevel="+sublevel+">"+sublevelName+"</a>"
 			}
+			//Explanation
+			newRow=t.insertRow(-1)
+			newCell=newRow.insertCell(-1)
+			newCell.className='th'
+			newCell.innerHTML="Explanation"
+			newRow.insertCell(-1).innerHTML=(function()
+			{
+				var exp = Info[id].explanation
+				if(exp=="")
+					return "<span style=color:#999>No explanation</span>";
+				else
+					return exp;
+			})();
+
 
 			//Type (input or output)
 			newRow=t.insertRow(-1)
@@ -84,28 +98,7 @@
 				newRow.insertCell(-1).innerHTML="YES &emsp; <button onclick=\"alert('Level 3 inputs are the sum of all its values for all substages, this is why it cannot be modified here. You can modify the value at each substage.')\">About Level 3 inputs</button>";
 			}
 
-			//Magnitude
-			newRow=t.insertRow(-1)
-			newCell=newRow.insertCell(-1)
-			newCell.className='th'
-			newCell.innerHTML="Magnitude"
-			newRow.insertCell(-1).innerHTML=Info[id].magnitude
-
-			//Explanation
-			newRow=t.insertRow(-1)
-			newCell=newRow.insertCell(-1)
-			newCell.className='th'
-			newCell.innerHTML="Explanation"
-			newRow.insertCell(-1).innerHTML=(function()
-			{
-				var exp = Info[id].explanation
-				if(exp=="")
-					return "<span style=color:#999>No explanation</span>";
-				else
-					return exp;
-			})();
-
-			//if output, show inputs involved
+			//if output: show inputs involved
 			if(typeof(currentStage[id])=="function")
 			{
 				//add a row with matched variables in formula
@@ -130,61 +123,35 @@
 						else var currentUnit = "no unit";
 						//matches can be either numbers or other functions
 						var currValue = typeof(match_stage[match])=="function" ? match_stage[match]() : match_stage[match];
-						currValue/=Units.multiplier(match);
 						currValue=format(currValue);
 						var color = match.search('ww')==-1 ? "#0aaff1":"#bf5050";
+
+						//here we have to show the internal value of inputs, not the multiplied by the unit multiplier
+						var multiplier=Units.multiplier(match);
+						if(multiplier!=1)
+						{
+							var magnitude=Info[match].magnitude;
+							for(var unit in Units[magnitude])
+							{
+								if(Units[magnitude][unit]==1)
+								{
+									currentUnit=unit;
+									break;
+								}
+							}
+							
+						}
+
 						ret+="<div>"+
-							match_localization.toString()+
-							"<a style='color:"+color+"' href=variable.php?id="+match+" title='"+Info[match].description+"'>"+match+"</a> "+
+							"<a style='color:"+color+"' href=variable.php?id="+match+" "+
+							"title='["+match_localization.toString()+"] "+Info[match].description+"'"+
+							">"+match+"</a> "+
 							" = "+currValue+" "+currentUnit+
 							"</div>"
 					});
 					return ret;
 				})();
 			}
-
-			//look for involved outputs
-			newRow=t.insertRow(-1)
-			newCell=newRow.insertCell(-1)
-			newCell.className='th'
-			newCell.innerHTML="Is used to calculate"
-			newCell=newRow.insertCell(-1)
-			newCell.innerHTML=(function()
-			{
-				//look for the code "id" inside each output
-				var ret="";
-				var outputsPerInput=Formulas.outputsPerInput(id);
-
-				//if is not used to calculate anything, hide row
-				if(outputsPerInput.length==0) 
-				{
-					return "<span style=color:#999>Nothing</span>";
-				}
-
-				outputsPerInput.forEach(function(output)
-				{
-					var match_localization = locateVariable(output);
-					var match_level = match_localization.level;
-					var match_sublevel = match_localization.sublevel;
-					var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level];
-					if(Info[output])
-					{
-						var currentUnit= (Info[output].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[output]||Info[output].unit);
-					}
-					else var currentUnit = "no unit";
-					var formula = Formulas.prettify(match_stage[output].toString());
-					var currValue = match_stage[output]()/Units.multiplier(output);
-					currValue=format(currValue);
-					var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
-					ret+="<div>"+
-						match_localization.toString()+
-						" <a style='color:"+color+"' title='"+Info[output].description+
-						"' href=variable.php?id="+output+">"+output+"</a> = "+
-						"<span style=color:#666>"+formula+"</span> = "+currValue+" "+currentUnit+
-						"</div>";
-				});
-				return ret;
-			})();
 
 			//Value
 			newRow=t.insertRow(-1)
@@ -214,24 +181,12 @@
 				}
 			}
 
-			//Contains estimated data?
-			if(DQ.hasEstimatedData(id))
-			{
-				newRow=t.insertRow(-1)
-				newCell=newRow.insertCell(-1)
-				newCell.className='th'
-				newCell.innerHTML="Warning"
-				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span> This equation contains estimated data in at least one input";
-			}
-
-			if(typeof(currentStage[id])=='number' && Global.Configuration.DataQuality[id]=="Estimated")
-			{
-				newRow=t.insertRow(-1)
-				newCell=newRow.insertCell(-1)
-				newCell.className='th'
-				newCell.innerHTML="Warning"
-				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span> This input is considered estimated data by the user";
-			}
+			//Magnitude
+			newRow=t.insertRow(-1)
+			newCell=newRow.insertCell(-1)
+			newCell.className='th'
+			newCell.innerHTML="Magnitude"
+			newRow.insertCell(-1).innerHTML=Info[id].magnitude
 
 			//Select units -- only inputs!
 			if(typeof(currentStage[id])=='number')
@@ -263,6 +218,67 @@
 					return str
 				})();
 			}
+
+			//Is used to calculate
+			newRow=t.insertRow(-1)
+			newCell=newRow.insertCell(-1)
+			newCell.className='th'
+			newCell.innerHTML="Is used to calculate"
+			newCell=newRow.insertCell(-1)
+			newCell.innerHTML=(function()
+			{
+				//look for the code "id" inside each output
+				var ret="";
+				var outputsPerInput=Formulas.outputsPerInput(id);
+
+				//if is not used to calculate anything, hide row
+				if(outputsPerInput.length==0) 
+				{
+					return "<span style=color:#999>Nothing</span>";
+				}
+
+				outputsPerInput.forEach(function(output)
+				{
+					var match_localization = locateVariable(output);
+					var match_level = match_localization.level;
+					var match_sublevel = match_localization.sublevel;
+					var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level];
+					if(Info[output])
+					{
+						var currentUnit= (Info[output].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[output]||Info[output].unit);
+					}
+					else var currentUnit = "no unit";
+					var currValue = match_stage[output]()/Units.multiplier(output);
+					currValue=format(currValue);
+					var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
+					ret+="<div>"+
+						" <a style='color:"+color+"' title='["+match_localization.toString()+"] "+Info[output].description+"'"+
+						" href=variable.php?id="+output+">"+output+"</a> = "+
+						currValue+" "+currentUnit+
+						"</div>";
+				});
+				return ret;
+			})();
+
+			//Contains estimated data?
+			if(DQ.hasEstimatedData(id))
+			{
+				newRow=t.insertRow(-1)
+				newCell=newRow.insertCell(-1)
+				newCell.className='th'
+				newCell.innerHTML="Warning"
+				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span> This equation contains estimated data in at least one input";
+			}
+
+			if(typeof(currentStage[id])=='number' && Global.Configuration.DataQuality[id]=="Estimated")
+			{
+				newRow=t.insertRow(-1)
+				newCell=newRow.insertCell(-1)
+				newCell.className='th'
+				newCell.innerHTML="Warning"
+				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span> This input is considered estimated data by the user";
+			}
+
 		}
 
 		/** 

@@ -382,7 +382,7 @@
 			}
 		}
 		/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
-		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Level 2)</span>" : "<span style=color:black>$titleLevel (Level 1)</span>";
+		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Overview)</span>" : "<span style=color:black>$titleLevel (Overview)</span>";
 	?>
 	<style> h1 {text-align:left;padding-left:20em} </style>
 	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
@@ -401,7 +401,7 @@
 					class=button
 					style='background:$color;'
 					onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-						Go to $sublevel Level 3
+						Advanced assessment
 					</button> 
 					&rarr;
 					<span>
@@ -417,10 +417,10 @@
 ?>
 
 <!--IO-->
-<div style=text-align:left;>
+<div style=text-align:;>
 	<!--INPUTS-->
-	<table id=inputs class=inline style="max-width:46%;margin-left:5px">
-		<tr><th colspan=5 class=tableHeader>INPUTS - Enter data for this stage
+	<table id=inputs class=inline style="max-width:46%;">
+		<tr><th colspan=5 class=tableHeader>INPUTS
 		<tr>
 			<th>Description
 			<th>Current value
