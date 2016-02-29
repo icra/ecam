@@ -1,21 +1,23 @@
 =========================================================================================================================================
-
 +----------------+
 | Service levels |
 +----------------+
-L1 Water Service Levels					
-Code	Type	Name	Formula or Default value	Unit	Description
-wS1	PI	Percentage of quality compliance	input	%	Percentage of the total number of treated water tests performed that comply with
-wS2	PI	Percentage of supply pressure adequacy	input	%	Percentage of delivery points (one per service connection) that receive and are likely to receive adequate pressure
-wS3	PI	Continuity of supply	input	%	Percentage of delivery points (one per service connection) that receive and are likely to receive adequate pressure
-wS4	PI	Proportion of resident population receiving service	100*ws1/ws2	%	Percentage of the resident population that are connected to the urban drinking water system managed by the undertaking, also referred to as 'serviced population'
-wS5	PI	Non-revenue water by volume	if(wsa2==0) ws8;else (100*ws7/wsa2);	%	Percentage of the system input volume that corresponds to non-revenue water in relation with the total volume entering the urban drinking water system at the abstraction stage
-L1 Wastewater Service Levels					
-Code	Type	Name	Formula or Default value	Unit	Description
-wwS3	PI	Percentage of quality compliance	input	%	Percentage of water quality tests carried out in wastewater treatment plants that comply with discharge consents
-wwS4	PI	Percent dilution in the sewer system	input	%	Percentage of Infiltration and inflow water entering the sewer system compared to the volume of collected wastewater prior to dilution
-wwS1	PI	Proportion of resident population receiving service	100*ww7/ww5	%	Percentage of the resident population that are connected to the sewer systems and which wastewater is treated by the undertaking
-wwS2	PI	Collected wastewater treated	100*ww7/ww6	%	Percentage of the collected sewage prior to dilution or overflows in the sewer system that are treated in wastewater treatment plants
-wwS5	PI	Treated wastewater per pers per day	ww15/ww7/Days	m3/inhab/day	Volume of treated wastewater per serviced person in the service area managed by the undertaking divided by the duration of the assessment period
+	L1 Water Service Levels					
+	Code	Type	Name	Formula or Default value	Unit	Description
+	wS1	PI	Percentage of quality compliance	input	%	Percentage of the total number of treated water tests performed that comply with
+	wS2	PI	Percentage of supply pressure adequacy	input	%	Percentage of delivery points (one per service connection) that receive and are likely to receive adequate pressure
+	wS3	PI	Continuity of supply	input	%	Percentage of delivery points (one per service connection) that receive and are likely to receive adequate pressure
+	wS4	PI	Proportion of resident population receiving service	100*ws1/ws2	%	Percentage of the resident population that are connected to the urban drinking water system managed by the undertaking, also referred to as 'serviced population'
+	wS5	PI	Non-revenue water by volume	if(wsa2==0) ws8;else (100*ws7/wsa2);	%	Percentage of the system input volume that corresponds to non-revenue water in relation with the total volume entering the urban drinking water system at the abstraction stage
+	L1 Wastewater Service Levels					
+	Code	Type	Name	Formula or Default value	Unit	Description
+	wwS3	PI	Percentage of quality compliance	input	%	Percentage of water quality tests carried out in wastewater treatment plants that comply with discharge consents
+	wwS4	PI	Percent dilution in the sewer system	input	%	Percentage of Infiltration and inflow water entering the sewer system compared to the volume of collected wastewater prior to dilution
+	wwS1	PI	Proportion of resident population receiving service	100*ww7/ww5	%	Percentage of the resident population that are connected to the sewer systems and which wastewater is treated by the undertaking
+	wwS2	PI	Collected wastewater treated	100*ww7/ww6	%	Percentage of the collected sewage prior to dilution or overflows in the sewer system that are treated in wastewater treatment plants
+	wwS5	PI	Treated wastewater per pers per day	ww15/ww7/Days	m3/inhab/day	Volume of treated wastewater per serviced person in the service area managed by the undertaking divided by the duration of the assessment period
 
 =========================================================================================================================================
++---------------+
+| CH4 emissions |
++---------------+

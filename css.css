@@ -6,13 +6,14 @@ a:hover {text-decoration:underline}
 body{font-family:'Open Sans','Helvetica',sans-serif;overflow-y:scroll;font-size:13px;}
 button{padding:0.3em;height:2.3em}
 h1,h2,h3{padding:0.6em;color:#00aff1;font-weight:normal}
-h4{margin:1em;font-size:18px;color:#58595b}
+h1{font-size:18px}
+h4{margin:1em;font-size:14px;color:#58595b}
 legend{color:#58595b;font-size:16px}
 table{border-collapse:collapse;}
 
 /*default cells*/
 th,td{border:1px solid #aaa;padding:0.4em;}
-th{background:#00adef;color:white;vertical-align:middle}
+th{font-weight:normal;background:#00adef;color:white;vertical-align:middle}
 
 hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:0;padding:0;}
 

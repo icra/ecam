@@ -170,17 +170,7 @@
 				}
 				//TOTAL header
 				var newTH = document.createElement('th');
-				newTH.innerHTML="&sum; (Level 3 TOTAL)";
-				t.rows[0].appendChild(newTH);
-
-				//Update LEVEL2 with the Sum of LEVEL3
-				var newTH = document.createElement('th');
-				newTH.innerHTML="Update Level 2";
-				t.rows[0].appendChild(newTH);
-
-				//LEVEL2 header
-				var newTH = document.createElement('th');
-				newTH.innerHTML="LEVEL 2";
+				newTH.innerHTML="&sum; TOTAL";
 				t.rows[0].appendChild(newTH);
 
 				//UNIT header
@@ -200,7 +190,7 @@
 					for(var f in CurrentStage)
 					{
 						//if "c_" is found, add f to cvs
-						if(f.search("c_")!=-1){cvs.push(f);}
+						if(f.search(/^c_/)!=-1){cvs.push(f);}
 					}
 				})();
 
@@ -212,7 +202,7 @@
 					var code=inputs[input];
 					
 					/*is a calculated variable*/
-					var isCV = code.search('c_')>=0 ? true : false;
+					var isCV = code.search(/^c_/)>=0 ? true : false;
 
 					/*new row*/
 					var newRow=t.insertRow(-1);
@@ -232,7 +222,7 @@
 						newRow.setAttribute('onmouseout', 'Formulas.hlOutputs("'+code+'",CurrentStage,0)');
 					}
 
-					/*link and name*/
+					/*code*/
 					var newCell=newRow.insertCell(-1);
 					newCell.style.textAlign='left';
 					newCell.innerHTML=(function()
@@ -249,7 +239,7 @@
 					newCell.setAttribute('title',Info[code].explanation);
 					newCell.innerHTML=Info[code]?Info[code].description:"<span style=color:#ccc>not defined</span>";
 
-					//value: go over substages
+					//values: go over substages
 					var multiplier=Units.multiplier(code);
 					for(var s in substages)
 					{
@@ -268,49 +258,22 @@
 						}
 					}
 
-					//SUM OF SUBSTAGES
+					//SUM OF SUBSTAGES = LEVEL 2
 					var sum=sumAll(code);
+
+					//only update real inputs
+					if(!isCV) CurrentStage[code]=sum;
+
+					//LEVEL 2 current value
 					var newCell=newRow.insertCell(-1);
-
-					newCell.classList.add('level2');
-
-					var value = isCV ? CurrentStage[code]()/multiplier : sum/multiplier;
-
-					newCell.innerHTML=format(value);
-
-					//join cells if is L3 only or CV
-					var isL3 = Level3.isInList(code)?true:false;
-
-					var joinCells = (isL3 || isCV) ? true:false;
-
-					//if is level 3 only, update level 2
-					if(isL3 && !isCV) CurrentStage[code]=sum;
-
-					if(joinCells)
-					{ 
-						newCell.setAttribute('colspan',3);
-					}
-					else
+					newCell.style.textAlign="center";
+					newCell.innerHTML=format((function()
 					{
-						//if input is level 2:
-						var newCell=newRow.insertCell(-1);
-						newCell.style.textAlign='center'
-						newCell.innerHTML=(function()
-						{
-							return "&rarr; <button class=updateL2 onclick=updateL2('"+code+"',"+sum+")>Update L2</button> &rarr;";
-						})();
-
-						//LEVEL 2 current value
-						var newCell=newRow.insertCell(-1);
-						newCell.classList.add('level2');
-						newCell.innerHTML=format((function()
-						{
-							if(isCV)
-								return CurrentStage[code]()/multiplier;
-							else
-								return CurrentStage[code]/multiplier;
-						})());
-					}
+						if(isCV)
+							return CurrentStage[code]()/multiplier;
+						else
+							return CurrentStage[code]/multiplier;
+					})());
 
 					//Unit for current input
 					newRow.insertCell(-1).innerHTML=(function()

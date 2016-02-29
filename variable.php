@@ -81,7 +81,7 @@
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
 				newCell.innerHTML="Level 3 only?"
-				newRow.insertCell(-1).innerHTML="YES"
+				newRow.insertCell(-1).innerHTML="YES &emsp; <button onclick=\"alert('Level 3 inputs are the sum of all its values for all substages, this is why it cannot be modified here. You can modify the value at each substage.')\">About Level 3 inputs</button>";
 			}
 
 			//Magnitude
@@ -96,7 +96,14 @@
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
 			newCell.innerHTML="Explanation"
-			newRow.insertCell(-1).innerHTML=Info[id].explanation
+			newRow.insertCell(-1).innerHTML=(function()
+			{
+				var exp = Info[id].explanation
+				if(exp=="")
+					return "<span style=color:#999>No explanation</span>";
+				else
+					return exp;
+			})();
 
 			//if output, show inputs involved
 			if(typeof(currentStage[id])=="function")
@@ -116,10 +123,15 @@
 						var match_level = match_localization.level
 						var match_sublevel = match_localization.sublevel
 						var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level]
-						var currentUnit= (Info[match].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[match]||Info[match].unit);
+						if(Info[match])
+						{
+							var currentUnit= (Info[match].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[match]||Info[match].unit);
+						}
+						else var currentUnit = "no unit";
 						//matches can be either numbers or other functions
 						var currValue = typeof(match_stage[match])=="function" ? match_stage[match]() : match_stage[match];
 						currValue/=Units.multiplier(match);
+						currValue=format(currValue);
 						var color = match.search('ww')==-1 ? "#0aaff1":"#bf5050";
 						ret+="<div>"+
 							match_localization.toString()+
@@ -144,7 +156,10 @@
 				var outputsPerInput=Formulas.outputsPerInput(id);
 
 				//if is not used to calculate anything, hide row
-				//if(outputsPerInput.length==0) newRow.style.display='none';
+				if(outputsPerInput.length==0) 
+				{
+					return "<span style=color:#999>Nothing</span>";
+				}
 
 				outputsPerInput.forEach(function(output)
 				{
@@ -152,7 +167,11 @@
 					var match_level = match_localization.level;
 					var match_sublevel = match_localization.sublevel;
 					var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level];
-					var currentUnit= (Info[output].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[output]||Info[output].unit);
+					if(Info[output])
+					{
+						var currentUnit= (Info[output].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[output]||Info[output].unit);
+					}
+					else var currentUnit = "no unit";
 					var formula = Formulas.prettify(match_stage[output].toString());
 					var currValue = match_stage[output]()/Units.multiplier(output);
 					currValue=format(currValue);
@@ -291,7 +310,7 @@
 	}
 </script>
 <!--subtitle--><h4>Detailed info</h4>
-<!--TITLE--><h1><script>document.write("["+id+"]: "+Info[id].description)</script></h1>
+<!--TITLE--><h1><script>document.write(Info[id].description+" ("+id+")")</script></h1>
 <!--VARIABLE INFO--><table style="text-align:left;width:50%" id=info></table>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

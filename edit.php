@@ -36,7 +36,7 @@
 		{
 			background:white;
 			color:#000;
-			font-size:17px;
+			font-size:15px;
 			padding-bottom:0.7em;
 			font-weight:normal;
 		}
@@ -96,7 +96,7 @@
 				if(typeof(CurrentLevel[field])!="number")
 				{
 					/*then, check if is calculated variable "c_xxxxxx" */
-					if(field.search('c_')==-1) continue;
+					if(field.search(/^c_/)==-1) continue;
 				}
 
 				/*check if should be hidden according to questions*/
@@ -105,7 +105,7 @@
 				/*check if field is level3 specific*/if(Level3.isInList(field)) continue;
 
 				//bool for if current field is a calculated variable (CV)
-				var isCV = field.search('c_')!=-1;
+				var isCV = field.search(/^c_/)!=-1;
 
 				/*new row*/var newRow=t.insertRow(-1);
 
@@ -125,25 +125,22 @@
 					newRow.setAttribute('onmouseout', 'Formulas.hlOutputs("'+field+'",CurrentLevel,0)');
 				}
 				
-				/*attribute field==field>*/newRow.setAttribute('field',field);
+				/*new ro attribute field=field>*/
+				newRow.setAttribute('field',field);
+
 				/*description*/ 
 				var newCell=newRow.insertCell(-1);
 
-				/*hotfix for non-existing variables (for example: when structure is updated)*/
-				if(Info[field]===undefined)
-				{
-					CurrentLevel[field]=undefined; //remove it
-					continue;
-				}
-
-				newCell.setAttribute('title',Info[field].explanation);
+				newCell.setAttribute('title', Info[field] ? Info[field].explanation : "no explanation");
 				newCell.style.cursor='help';
+
 				newCell.innerHTML=(function()
 				{
 					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
-					var code = "<a href=variable.php?id="+field+">"+field+"</a>";
+					var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";
 				})();
+
 				//editable cell if not CV
 				var newCell=newRow.insertCell(-1);
 				if(!isCV)
@@ -240,7 +237,7 @@
 			for(var field in CurrentLevel)
 			{
 				if(typeof(CurrentLevel[field])!="function"){continue;}
-				if(field.search('c_')!=-1){continue;}
+				if(field.search(/^c_/)!=-1){continue;}
 
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
@@ -278,14 +275,22 @@
 					}
 					else return "<span style=color:#ccc>-</span>";
 				})();
+
 				/*description*/ 
 				newCell=newRow.insertCell(-1);
-				newCell.setAttribute('title',Info[field].explanation);
+				newCell.setAttribute('title',(function()
+				{
+					if(!Info[field] || Info[field].explanation == "") 
+						return "no explanation";
+					else
+						return Info[field].explanation;
+				})());
+
 				newCell.style.cursor='help';
 				newCell.innerHTML=(function()
 				{
 					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
-					var code = "<a href=variable.php?id="+field+">"+field+"</a>";
+					var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";
 				})();
 
@@ -305,6 +310,11 @@
 				})();
 				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
 			}
+
+			//if the table is empty, add a warning
+			if(t.rows.length<3)
+				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#999>There are no formulas in this level</span>";
+
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
 			var newTh=document.createElement('th');
@@ -378,7 +388,7 @@
 	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
 </div>
 
-<!--separator--><div style=margin-top:135px></div>
+<!--separator--><div style=margin-top:110px></div>
 <!--linear diagram--><?php include'linear.php'?>
 <!--go to level 3 button-->
 <?php
@@ -405,13 +415,12 @@
 		}
 	}
 ?>
-<!--HELP--><h4>Enter data corresponding to this stage. The results are calculated as you enter data.</h4>
 
 <!--IO-->
 <div style=text-align:left;>
 	<!--INPUTS-->
 	<table id=inputs class=inline style="max-width:46%;margin-left:5px">
-		<tr><th colspan=5 class=tableHeader>INPUTS <?php include'inputType.php'?>
+		<tr><th colspan=5 class=tableHeader>INPUTS - Enter data for this stage
 		<tr>
 			<th>Description
 			<th>Current value

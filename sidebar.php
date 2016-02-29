@@ -116,7 +116,7 @@
 			overflow:auto;
 		}
 		div#sidebar.off{width:0;height:0;top:0;}
-		div#sidebar.on{width:260px;bottom:0;transition:all 0.1s}
+		div#sidebar.on{width:260px;bottom:0;transition:all 0.3s}
 		div#sidebar.on  div#sidecontent{display:block}
 		div#sidebar.off div#sidecontent{display:none}
 		div#sidebar div{padding:0;margin:0}

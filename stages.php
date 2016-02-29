@@ -14,6 +14,7 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <style> h1 {text-align:left;padding-left:20em} </style>
 <!--TITLE--><h1>Input data</h1>
+<hr>
 <!--linear diagram--><?php include'linear.php'?>
 <!--SUBTITLE--><h4>This is an overview of the active stages of your system. Click on a stage to input data. To activate more stages go to <a href=configuration.php>Configuration</a>.</h4>
 

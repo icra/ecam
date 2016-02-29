@@ -56,6 +56,14 @@
 				//description
 				newRow.insertCell(-1).innerHTML=Info[field].explanation;
 			}
+
+			//bottom line with the color of W/WW
+			var newRow=t.insertRow(-1);
+			var newTh=document.createElement('th');
+			newTh.setAttribute('colspan',6)
+			newTh.style.borderBottom='none';
+			newTh.style.borderTop='none';
+			newRow.appendChild(newTh);
 		}
 		function selectText(el) 
 		{

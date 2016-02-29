@@ -78,7 +78,7 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>General info</h1>
-<!--SUBTITLE--><h4>Edit general data of your system. You can edit this information later.</h4>
+<!--SUBTITLE--><h4>General data of your system. You can edit this information later.</h4>
 
 <div style="padding:0;margin-bottom:1em;background:#d7bfaf;height:5px"></div>
 

@@ -103,7 +103,7 @@
 		function updateUW1(newValue)
 		{
 			document.querySelector('#uw1').value=newValue;
-			updateField(Global.UWS,'uw1',newValue);
+			updateField(Global.General,'conv_kwh_co2',newValue);
 		}
 
 		function updateFuelSelectionVisibility()
@@ -119,13 +119,13 @@
 		function redisplayUW1menu()
 		{
 			//input element
-			document.querySelector('#uw1').value=Global.UWS.uw1;
+			document.querySelector('#uw1').value=Global.General.conv_kwh_co2;
 			//select element
 			var select = document.querySelector('#countryUW1');
 			//go over options and select the one with same value as uw1
 			for(var i=1;i<select.childNodes.length;i++)
 			{
-				if(parseFloat(select.childNodes.item(i).value)==Global.UWS.uw1)
+				if(parseFloat(select.childNodes.item(i).value)==Global.General.conv_kwh_co2)
 				{
 					select.childNodes.item(i).setAttribute('selected','true');
 					return;
@@ -213,6 +213,33 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Configuration</h1>
+
+<!--activate all
+-->
+<div style=margin:0.5em>
+	<button class=button onclick="activateAllStages()">activate all</button>
+	<script>
+		function activateAllStages()
+		{
+			event.stopPropagation();
+			['waterGen','waterAbs','waterTre','waterDis','wasteGen','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
+			{
+				/**set checked*/document.getElementById(stage).checked=true;
+				Configuration.activate(stage);
+			});
+			Global.General.conv_kwh_co2=1;
+			Global.Configuration['Yes/No']["Are you producing biogas"]=1;
+			Global.Configuration['Yes/No']["Are you valorizing biogas"]=1;
+			Global.Configuration['Yes/No']["Are you producing electrical energy"]=1;
+			Global.Configuration['Yes/No']["Do you have fuel engines to run pumps"]=1;
+			Global.Configuration['Yes/No']["Are you using truck transport to convey sludge to the disposal site"]=1;
+			Global.Configuration['Yes/No']["Is your topography flat"]=1;
+			Global.Configuration['Yes/No']["Is any untreated industrial or commercial wastewater connected"]=1;
+			init();
+		}
+	</script>
+<div>
+
 <!--SUBTITLE--><h4>Click on the left table to activate stages. The table on the right contains additional information about your system</h4>
 
 <!--CONFIGURATION (STAGES)-->
@@ -261,9 +288,9 @@
 
 <!--QUESTIONS & ADDITIONAL INFO-->
 <div style=text-align:left class=inline>
-	<!--uw1-->
+	<!--conv_kwh_co2-->
 	<fieldset>
-		<legend> Conversion factor for grid electricity (<a href=variable.php?id=uw1>info</a>) </legend>
+		<legend> Conversion factor for grid electricity (<a href=variable.php?id=conv_kwh_co2>info</a>) </legend>
 		<table><tr><th>
 			<select id=countryUW1 onchange=updateUW1(this.value)>
 				<option value=0>--enter custom value or select country--
@@ -318,8 +345,7 @@
 		{
 			event.stopPropagation();
 
-			window.location="birds.php";
-			return;
+			//window.location="birds.php"; return;
 
 			if(Global.Configuration['Active Stages'].water==1){window.location="edit.php?level=Water";return;}
 			if(Global.Configuration['Active Stages'].waste==1){window.location="edit.php?level=Waste";return;}
