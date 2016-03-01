@@ -44,7 +44,7 @@
 				if(Questions.isHidden(field)) continue;
 				/*check if field is level3 specific*/if(Level3.isInList(field)) continue;
 				/*new row*/var newRow=t.insertRow(-1);
-				/*hlFields for outputs*/
+				/*highlight outputs*/
 				var pointer = field.search('^ww')==-1 ? "Global.Water" : "Global.Waste";
 				newRow.setAttribute('onmouseover','Formulas.hlOutputs("'+field+'","'+pointer+'",1)');
 				newRow.setAttribute('onmouseout', 'Formulas.hlOutputs("'+field+'","'+pointer+'",0)');

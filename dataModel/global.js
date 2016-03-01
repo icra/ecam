@@ -1,7 +1,6 @@
 /** Main data structure */
 
 var Global = {
-
 	General:{
 		"Name":                    "My system",
 		"Location":                "Canada, Europe, Russia, Oceania",
@@ -18,22 +17,40 @@ var Global = {
 		},
 	},
 
+	ServiceLevels:{
+		//Water
+
+		//Wastewater
+		ww_SL_serv_pop : function(){return -1},
+		ww_SL_treat_m3 : function(){return -1},
+		ww_SL_qual_com : function(){return -1},
+		ww_SL_dilution : function(){return -1},
+		ww_SL_vol_pday : function(){return -1},
+		ww_SL_nrg_cost : function(){return 100*this.ww_nrg_cost/this.ww_run_cost||0},
+	},
+
 	/** Level 1 - Water Supply*/
 	Water:{
-		"ws_serv_pop"   :0,
 		"ws_resi_pop"   :0,
-		"ws_nrg_cost"   :0,
-		"ws_run_cost"   :0,
+		"ws_serv_pop"   :0,
 		"ws_nrg_cons"   :0,
+		"ws_run_cost"   :0,
+		"ws_nrg_cost"   :0,
 		"ws_vol_auth"   :0,
-		"ws_non_revw"   :0,
 		"ws_vol_fuel"   :0,
-		"c_ws_nrg_fuel" :function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].water]; return this.ws_vol_fuel*fuel.FD*fuel.NCV/1000; },
-		"c_ws_co2_engi" :function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].water]; return this.c_ws_nrg_fuel()*(fuel.EFCO2+298*fuel.EFN2O.engines+34*fuel.EFCH4.engines); },
+		"ws_non_revw"   :0,
 
-		ws_KPI_nrg_cost :function(){return 100*this.ws_nrg_cost/this.ws_run_cost||0},
-		ws_KPI_GHG_elec :function(){return this.ws_nrg_cons*Global.General.conv_kwh_co2},
-		ws_KPI_GHG_ne   :function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].water]; return this.c_ws_nrg_fuel()*(fuel.EFCO2+298*fuel.EFN2O.engines+34*fuel.EFCH4.engines)} ,
+		ws_KPI_GHG_elec:function(){return this.ws_nrg_cons*Global.General.conv_kwh_co2},
+		ws_KPI_GHG_ne  :function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].water]; return this.ws_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+298*fuel.EFN2O.engines+34*fuel.EFCH4.engines) } ,
+		ws_KPI_GHG     :function(){return this.ws_KPI_GHG_elec()+this.ws_KPI_GHG_ne()},
+
+		ws_SL_nrg_cost : function(){return 100*this.ws_nrg_cost/this.ws_run_cost||0},
+		ws_SL_qual_com : function(){return -1},
+		ws_SL_pres_ade : function(){return -1},
+		ws_SL_cont_sup : function(){return -1},
+		ws_SL_serv_pop : function(){return 100*Global.Water.ws_serv_pop/Global.Water.ws_resi_pop||0},
+		ws_SL_non_revw : function(){return -1},
+		ws_SL_auth_con : function(){return -1},
 
 		"General":{
 			"wsg_nrg_prod":0,
@@ -142,34 +159,41 @@ var Global = {
 
 	/** Level 1 - Wastewater*/
 	Waste:{
-		"ww_nrg_cost" :0,
-		"ww_run_cost" :0,
-		"ww_nrg_cons" :0,
-		"ww_vol_coll" :0,
 		"ww_resi_pop" :0,
-		"ww_conn_pop" :0,
 		"ww_serv_pop" :0,
+		"ww_conn_pop" :0,
+		"ww_vol_wwtr" :0,
+		"ww_nrg_cons" :0,
+		"ww_run_cost" :0,
+		"ww_nrg_cost" :0,
+		"ww_vol_coll" :0,
 		"ww_num_trip" :0,
 		"ww_dist_dis" :0,
 		"ww_n2o_effl" :0,
 		"ww_vol_fuel" :0,
 		"ww_prot_con" :3.2,
 		"ww_bod_pday" :40,
-		"ww_vol_wwtr" :0,
 		"ww_ch4_efac" :0.06,
-
 		"c_ww_biogas_flar":function(){if(Global.Configuration["Yes/No"]["Are you valorizing biogas"]==0) return this.ww_serv_pop*this.ww_bod_pday*0.9*0.4*Global.General.Days()/1000; else return 0; },
 		"c_ww_nrg_engines":function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].waste]; return this.ww_vol_fuel*fuel.FD/1000*fuel.NCV/1000; },
 		"c_ww_nrg_tsludge":function(){return this.ww_num_trip*2*this.ww_dist_dis*0.25*0.84*43/1000000/1000},
-
-	ww_KPI_nrg_cost	      : function(){return 100*this.ww_nrg_cost/this.ww_run_cost||0},
-	ww_KPI_GHG_elec	      : function(){return this.ww_nrg_cons*Global.General.conv_kwh_co2},
-	ww_KPI_GHG_ne_ch4_wwt : function(){return ((this.Treatment.wwt_bod_infl-this.Treatment.c_wwt_bod_rmvd())*this.ww_ch4_efac+0.02*this.c_ww_biogas_flar()*0.59*0.66)*34}, //old c_ww55
-	ww_KPI_GHG_ne_n2o_tre : function(){return 298*this.ww_n2o_effl*this.ww_vol_wwtr/1000*0.005*(44/28)}, //old c_ww53
-	ww_KPI_GHG_ne_tsludge : function(){return this.c_ww_nrg_tsludge()*(74100+34*3.9+298*3.9)},       //old c_ww54
-	ww_KPI_GHG_ne_ch4_unt : function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_bod_pday/1000*Global.General.Days()*0.06*34},                      //old c_ww52
-	ww_KPI_GHG_ne_n2o_unt : function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_prot_con*Global.General.Days()/365*0.16*1.1*1.25*0.005*44/28*298}, //old c_ww51
-	ww_KPI_GHG_ne_engines : function(){ var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].waste]; return this.c_ww_nrg_engines()*(fuel.EFCO2+34*fuel.EFCH4.engines+298*fuel.EFN2O.engines) }, //old c_ww57
+		ww_KPI_GHG_elec	      : function(){return this.ww_nrg_cons*Global.General.conv_kwh_co2},
+		ww_KPI_GHG_ne_ch4_wwt : function(){return ((this.Treatment.wwt_bod_infl-this.Treatment.c_wwt_bod_rmvd())*this.ww_ch4_efac+0.02*this.c_ww_biogas_flar()*0.59*0.66)*34||0}, //old c_ww55
+		ww_KPI_GHG_ne_n2o_tre : function(){return 298*this.ww_n2o_effl*this.ww_vol_wwtr/1000*0.005*44/28||0}, //old c_ww53
+		ww_KPI_GHG_ne_tsludge : function(){return this.c_ww_nrg_tsludge()*(74100+34*3.9+298*3.9)||0},       //old c_ww54
+		ww_KPI_GHG_ne_ch4_unt : function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_bod_pday/1000*Global.General.Days()*0.06*34||0},                      //old c_ww52
+		ww_KPI_GHG_ne_n2o_unt : function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_prot_con*Global.General.Days()/365*0.16*1.1*1.25*0.005*44/28*298||0}, //old c_ww51
+		ww_KPI_GHG_ne_engines : function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].waste]; return this.c_ww_nrg_engines()*(fuel.EFCO2+34*fuel.EFCH4.engines+298*fuel.EFN2O.engines)||0 }, //old c_ww57
+		ww_KPI_GHG:function()
+		{
+			return this.ww_KPI_GHG_elec()+
+				this.ww_KPI_GHG_ne_ch4_wwt()+
+				this.ww_KPI_GHG_ne_n2o_tre()+
+				this.ww_KPI_GHG_ne_tsludge()+
+				this.ww_KPI_GHG_ne_ch4_unt()+
+				this.ww_KPI_GHG_ne_n2o_unt()+
+				this.ww_KPI_GHG_ne_engines();
+		},
 
 		"General":{
 			"wwg_nrg_prod":0,
@@ -178,7 +202,6 @@ var Global = {
 		},
 
 		"Collection":{
-
 			"wwc_vol_conv":0,
 			"wwc_nrg_cons":0,
 			"c_wwc_dilution":function() { if(Global.Waste.Treatment.wwt_vol_trea==0) return 0; else return (Global.Waste.ww_bod_pday*Global.Waste.ww_serv_pop*Global.General.Days()/Global.Waste.Treatment.wwt_bod_infl*Global.Waste.Treatment.wwt_vol_trea/1000)-Global.Waste.ww_vol_coll*Global.Waste.ww_serv_pop/Global.Waste.ww_conn_pop||0 },
@@ -214,7 +237,7 @@ var Global = {
 			"c_wwt_ind_neff" : function(){return 298*this.wwt_tn_influ*0.005*44/28},
 			"c_wwt_n2o_untr" : function(){return 298*this.c_wwt_ann_ndis()*0.005*44/28},
 			"c_wwt_nrg_fuel" : function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].wasteTre]; return Global.Waste.ww_num_trip*2*Global.Waste.ww_dist_dis*0.25*fuel.FD*fuel.NCV/1000000000},	
-			"c_wwt_ann_ndis" : function(){var findcom=Global.Configuration['Yes/No']["Is any untreated industrial or commercial wastewater connected"] ? 1.25 : 1; return this.wwt_tn_efflu*(Global.Waste.Discharge.wwd1-this.wwt_vol_trea)/this.wwt_vol_trea*1.1*findcom||0; },
+			"c_wwt_ann_ndis" : function(){var findcom=Global.Configuration['Yes/No']["Is any untreated industrial or commercial wastewater connected"] ? 1.25 : 1; return this.wwt_tn_efflu*(Global.Waste.Discharge.wwd_vol_disc-this.wwt_vol_trea)/this.wwt_vol_trea*1.1*findcom||0; },
 			"c_wwt_ch4_emis" : function(){return 0.02*this.c_wwt_biog_fla()*0.59*0.66*34},
 
 			wwt_KPI_nrg_per_m3 : function(){return this.wwt_nrg_cons/this.wwt_vol_trea||0},
@@ -251,14 +274,14 @@ var Global = {
 		},
 
 		"Discharge":{
-			"wwd1":0,
-			"wwd3":0,
-			"wwd4":0,
-			wdE1  : function(){return this.wwd3/this.wwd1||0},
-			wdE2  : function(){return -1},
-			wdE3  : function(){if(this.wwd5==0) return 0; else return this.wwd3/this.c_wwd50()||0; },
-			wdE4  : function(){return this.wwd4/this.wwd1||0},
-			wdE5  : function(){if(this.wwd7==0) return 0; else return this.wwd4/this.c_wwd51()||0; },
+			"wwd_vol_disc":0,
+			"wwd_nrg_cons":0,
+			"wwd_nrg_recv":0,
+			wwd_KPI_nrg_per_m3:function(){return this.wwd_nrg_pump/this.wwd_vol_disc||0},
+			wwd_KPI_nrg_percen:function(){return -1},
+			wwd_KPI_std_nrg_co:function(){if(this.wwd5==0) return 0; else return this.wwd_nrg_pump/this.c_wwd50()||0; },
+			wwd_KPI_rcv_per_dw:function(){return this.wwd_nrg_recv/this.wwd_vol_disc||0},
+			wwd_KPI_std_nrg_rc:function(){if(this.wwd7==0) return 0; else return this.wwd_nrg_recv/this.c_wwd51()||0; },
 
 			/*<Level3>*/
 				"wwd5":0,
@@ -341,22 +364,4 @@ var Global = {
 			"Is any untreated industrial or commercial wastewater connected"          :0,
 		},
 	},
-
 }
-
-/* +================+ */
-/* | Service levels | */
-/* +================+ */
-
-	Global.Water.ws_SL_qual_com = function(){return -1}
-	Global.Water.ws_SL_pres_ade = function(){return -1}
-	Global.Water.ws_SL_cont_sup = function(){return -1}
-	Global.Water.ws_SL_serv_pop = function(){return 100*this.ws_serv_pop/this.ws_resi_pop||0}
-	Global.Water.ws_SL_non_revw = function(){return -1}
-	Global.Water.ws_SL_auth_con = function(){return this.ws_vol_auth/this.ws_serv_pop/Global.General.Days()||0}
-
-	Global.Waste.ww_SL_serv_pop = function(){return -1}
-	Global.Waste.ww_SL_treat_m3 = function(){return -1}
-	Global.Waste.ww_SL_qual_com = function(){return -1}
-	Global.Waste.ww_SL_dilution = function(){return -1}
-	Global.Waste.ww_SL_vol_pday = function(){return -1}

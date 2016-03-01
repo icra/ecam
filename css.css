@@ -20,9 +20,9 @@ hr{display:block;height:1px;border:0;margin:0;padding:0;}
 /*highlight inputs when mouse goes over a row that has a formula*/
 tr.isCV{background:#f6f6f6}
 tr{transition:all 0.5s}
-tr[hl=yes]{background:#d7bfaf;color:white}
+tr[hl=yes]{background:#a7bfaf;color:white}
 tr[hl=no]{background:default}
-tr[hl_output=yes]{background:#a7bfaf;color:white}
+tr[hl_output=yes]{background:#e1cfc4;color:white}
 tr[hl_output=no]{background:default}
 
 span.estimated{color:red;font-size:16px;cursor:help}

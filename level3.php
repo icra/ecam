@@ -221,8 +221,8 @@
 					{
 						var formula=CurrentStage[code].toString();
 						var prettyFormula=Formulas.prettify(formula);
-						newRow.setAttribute('onmouseover','Formulas.hlFields("'+code+'",CurrentStage,1)');
-						newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+code+'",CurrentStage,0)');
+						newRow.setAttribute('onmouseover','Formulas.hlInputs("'+code+'",CurrentStage,1)');
+						newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+code+'",CurrentStage,0)');
 					}
 					else
 					{
@@ -236,7 +236,7 @@
 					newCell.style.fontSize='10px';
 					newCell.innerHTML=(function()
 					{
-						var extra = Level3.isInList(code) ? " (advanced)" : "" ;
+						var extra = Level3.isInList(code) ? " (<span style=font-size:10px>advanced</span>)" : "" ;
 						return " <a href=variable.php?id="+code+">"+code+"</a>"+extra;
 					})();
 
@@ -393,8 +393,8 @@
 				var prettyFormula=Formulas.prettify(formula);
 
 				//set highlighting 
-				newRow.setAttribute('onmouseover','Formulas.hlFields("'+field+'",CurrentStage,1)');
-				newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+field+'",CurrentStage,0)');
+				newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentStage,1)');
+				newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentStage,0)');
 
 				//code
 				newRow.insertCell(-1).innerHTML=(function()
@@ -520,16 +520,24 @@
 	<style> h1 {text-align:left;padding-left:20em} </style>
 	<!--TITLE--><h1><?php echo $title?></h1>
 </div>
+
 <!--separator--><div style=margin-top:120px></div>
 <!--linear diagram--><?php include'linear.php'?>
 <!--HELP--><h4>You can subdivide this stage in multiple substages and turn on advanced inputs/outputs</h4>
 <!--type of assessment--><?php include'assessmentType.php'?>
-<!--SUBSTAGES TABLE--><table id=substages style=margin:1em>
-	<tr><td colspan=2 style=text-align:center>
-		<!--substages counter--><div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #999;vertical-align:middle">Substages: <span id=counter>0</span></div>
-		<!--new substage button--><button onclick=newSubstage() class=button>+ Add Substage</button>
-	</table>
-<!--OUTPUTS TABLE--><table id=outputs class=inline style=background:#f6f6f6> 
+<!--SUBSTAGES TABLE-->
+<table id=substages style=margin:1em>
+	<tr>
+		<td colspan=2 style="text-align:center;width:300px;table-layout:fixed">
+			<!--substages counter-->
+			<div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
+			<!--new substage button-->
+			<button onclick=newSubstage() class=button>+ Add Substage</button>
+</table>
+
+<!--OUTPUTS TABLE-->
+<table id=outputs class=inline style=background:#f6f6f6> 
 	<tr><th colspan=42 style="background:white;border:none;color:black;padding-bottom:0.7em;font-size:17px">RESULTS - Key performance indicators</table>
+
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

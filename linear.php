@@ -28,7 +28,7 @@
 	#linearDiagram img{border-radius:50%;border:2px solid transparent}
 	#linearDiagram img.selected{border:2px solid}
 	#linearDiagram img:hover {border:2px solid black}
-	#linearDiagram #line {background-color:black;position:relative; transform:translateY(-22px) translateX(-72px);z-index:-1;width:425px;}
+	#linearDiagram #line {background-color:black;position:relative; transform:translateY(-23px) translateX(-72px);z-index:-1;width:425px;}
 </style>
 
 <script>
