@@ -94,8 +94,8 @@
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
-				newCell.innerHTML="Level 3 only?"
-				newRow.insertCell(-1).innerHTML="YES &emsp; <button onclick=\"alert('Level 3 inputs are the sum of all its values for all substages, this is why it cannot be modified here. You can modify the value at each substage.')\">About Level 3 inputs</button>";
+				newCell.innerHTML="Advanced"
+				newRow.insertCell(-1).innerHTML="YES (only visible if 'Type of assessment' is 'Complete')";
 			}
 
 			//if output: show inputs involved

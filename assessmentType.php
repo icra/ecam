@@ -1,8 +1,7 @@
 
 <table><tr>
-	<th>Type of assessment
+	<th>Type of assessment <td>
 
-	<td>
 	<label>
 		<input 
 			name=assessment
@@ -11,7 +10,7 @@
 			onchange="updateAssessment(this.value)">
 		Simple
 	</label>
-
+	&emsp;
 	<label>
 		<input 
 			name=assessment

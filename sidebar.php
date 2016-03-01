@@ -155,18 +155,17 @@
 			<tr><td><a href=getStarted.php>General info</a>
 			<tr><td><a href=configuration.php>Configuration</a>
 			<tr><td><a href=birds.php>Bird's eye view</a>
-			<tr><th>Level 1
+			<tr><th>Stages
 			<tr><td><a class=water stage=water    href=edit.php?level=Water>Water supply</a>
+			<tr><td>&emsp;&emsp; <a class=water stage=waterGen href=edit.php?level=Water&sublevel=General>Water energy</a>
+			<tr><td>&emsp;&emsp; <a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction>Water abstraction</a>
+			<tr><td>&emsp;&emsp; <a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment>Water treatment</a>
+			<tr><td>&emsp;&emsp; <a class=water stage=waterDis href=edit.php?level=Water&sublevel=Distribution>Water distribution</a>
 			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste>Wastewater</a>
-			<tr><th>Level 2
-			<tr><td><a class=water stage=waterGen href=edit.php?level=Water&sublevel=General>Water energy</a>
-			<tr><td><a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction>Water abstraction</a>
-			<tr><td><a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment>Water treatment</a>
-			<tr><td><a class=water stage=waterDis href=edit.php?level=Water&sublevel=Distribution>Water distribution</a>
-			<tr><td><a class=waste stage=wasteGen href=edit.php?level=Waste&sublevel=General>Wastewater energy</a>
-			<tr><td><a class=waste stage=wasteCol href=edit.php?level=Waste&sublevel=Collection>Wastewater collection</a>
-			<tr><td><a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment>Wastewater treatment</a>
-			<tr><td><a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge>Wastewater discharge</a>
+			<tr><td>&emsp;&emsp; <a class=waste stage=wasteGen href=edit.php?level=Waste&sublevel=General>Wastewater energy</a>
+			<tr><td>&emsp;&emsp; <a class=waste stage=wasteCol href=edit.php?level=Waste&sublevel=Collection>Wastewater collection</a>
+			<tr><td>&emsp;&emsp; <a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment>Wastewater treatment</a>
+			<tr><td>&emsp;&emsp; <a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge>Wastewater discharge</a>
 			<tr><th>Summary
 			<tr><td><a href=summary.php?type=input>All Inputs</a>
 			<tr><td><a href=summary.php?type=ccvv>All Calculated variables</a>

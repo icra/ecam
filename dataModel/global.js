@@ -110,7 +110,7 @@ var Global = {
 			wsd_KPI_nrg_per_m3 :function(){return -1},
 			wsd_KPI_nrg_percen :function(){return -1},
 
-			dE3 : function(){return this.wsd1/this.c_wsd54()||0},
+			dE3 : function(){return this.wsd_nrg_cons/this.c_wsd54()||0},
 			dE4 : function(){return 100*this.c_wsd51()/(this.c_wsd52()-this.wsd17)||0},
 			dE5 : function(){return 100*this.c_wsd53()/(this.c_wsd52()-this.wsd17)||0},
 			dE6 : function(){return (this.wsd9-this.wsd4)/Global.General.Days()/this.wsd18||0},
@@ -132,8 +132,8 @@ var Global = {
 				"wsd18":0,
 				"wsd19":0,
 				c_wsd50:function(){return 9810*this.wsd9*(this.wsd14-this.wsd12)},
-				c_wsd51:function(){return 9810*Global.Water.ws7*(this.wsd10+this.wsd13-this.wsd12)},
-				c_wsd52:function(){return this.wsd1+this.c_wsd50()},
+				c_wsd51:function(){return 9810*Global.Water.ws_vol_auth*(this.wsd10+this.wsd13-this.wsd12)},
+				c_wsd52:function(){return this.wsd_nrg_cons+this.c_wsd50()},
 				c_wsd53:function(){return 9810*this.wsd9*(this.wsd11-this.wsd13)},
 				c_wsd54:function(){return this.wsd15*this.wsd16/100},
 			/*</Level3*/
@@ -353,7 +353,7 @@ var Global = {
 	Global.Water.ws_SL_cont_sup = function(){return -1}
 	Global.Water.ws_SL_serv_pop = function(){return 100*this.ws_serv_pop/this.ws_resi_pop||0}
 	Global.Water.ws_SL_non_revw = function(){return -1}
-	Global.Water.ws_SL_auth_con = function(){return -1}
+	Global.Water.ws_SL_auth_con = function(){return this.ws_vol_auth/this.ws_serv_pop/Global.General.Days()||0}
 
 	Global.Waste.ww_SL_serv_pop = function(){return -1}
 	Global.Waste.ww_SL_treat_m3 = function(){return -1}

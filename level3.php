@@ -80,7 +80,7 @@
 		function Substage()
 		{
 			/*get a list of variables for this level*/ var inputs=getInputs();
-			/*substage default name*/ this.name="default name "+(substages.length+1);
+			/*substage default name*/ this.name="name";
 			//make the object look like, e.g. Substage {tV1: 0, tV2: 0, tV3: 0, tV4: 0, tV5: 0, ...}
 			for(var i in inputs){this[inputs[i]]=0;}
 		}
@@ -208,11 +208,13 @@
 					}
 					
 					/*is a calculated variable*/
-					var isCV = code.search(/^c_/)>=0 ? true : false;
+					var isCV=code.search(/^c_/)>=0 ? true : false;
 
 					/*new row*/
 					var newRow=t.insertRow(-1);
 					newRow.setAttribute('field',code);
+
+					/*bg color*/ if(isCV)newRow.classList.add('isCV');
 
 					//highlight fields if is a CV
 					if(isCV)
@@ -231,16 +233,16 @@
 					/*code*/
 					var newCell=newRow.insertCell(-1);
 					newCell.style.textAlign='left';
+					newCell.style.fontSize='10px';
 					newCell.innerHTML=(function()
 					{
-						var extra = Level3.isInList(code) ? " (compl assessment)" : "" ;
+						var extra = Level3.isInList(code) ? " (advanced)" : "" ;
 						return " <a href=variable.php?id="+code+">"+code+"</a>"+extra;
 					})();
 
 					/*variable description*/
 					var newCell=newRow.insertCell(-1);
 					newCell.style.textAlign="left";
-					newCell.style.fontSize="10px";
 					newCell.style.cursor="help";
 					newCell.setAttribute('title',Info[code].explanation);
 					newCell.innerHTML=Info[code]?Info[code].description:"<span style=color:#ccc>not defined</span>";
@@ -337,7 +339,7 @@
 				newTH.innerHTML=element;
 			});
 
-			for(s in substages)
+			for(var s in substages)
 			{
 				var newTH=document.createElement('th'); 
 				newRow.appendChild(newTH);
@@ -439,7 +441,16 @@
 
 				//unit
 				newRow.insertCell(-1).innerHTML=Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
+
 			}
+
+			//bottom line with the color of W/WW
+			var newRow=t.insertRow(-1);
+			var newTh=document.createElement('th');
+			newTh.setAttribute('colspan',4)
+			newTh.style.borderBottom='none';
+			newTh.style.borderTop='none';
+			newRow.appendChild(newTh);
 		}
 
 		//transform a cell to make it editable
@@ -504,7 +515,7 @@
 		}
 		/*Separator*/$sep="<span style=color:black>&rsaquo;</span>";
 		$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>$sublevel</a>";
-		$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Level 3</a>";
+		$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Advanced assessment</a>";
 	?>
 	<style> h1 {text-align:left;padding-left:20em} </style>
 	<!--TITLE--><h1><?php echo $title?></h1>
@@ -515,7 +526,7 @@
 <!--type of assessment--><?php include'assessmentType.php'?>
 <!--SUBSTAGES TABLE--><table id=substages style=margin:1em>
 	<tr><td colspan=2 style=text-align:center>
-		<!--substages counter--><div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
+		<!--substages counter--><div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #999;vertical-align:middle">Substages: <span id=counter>0</span></div>
 		<!--new substage button--><button onclick=newSubstage() class=button>+ Add Substage</button>
 	</table>
 <!--OUTPUTS TABLE--><table id=outputs class=inline style=background:#f6f6f6> 
