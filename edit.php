@@ -17,13 +17,15 @@
 ?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
+
 	<style>
 		td.input input { margin:0;padding:0;width:95%;}
 		td.input       { width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
 
 		/*tables*/
 		table#outputs tr:hover { background:#ccc; }
-		table#outputs th:not(.tableHeader) {background:#d7bfaf}
+		table#outputs th:not(.tableHeader) {background:#c9ab98}
+		table#otherOutputs th:not(.tableHeader) {background:#c9ab98}
 		<?php
 			if($level=="Waste")
 			{?>
@@ -39,11 +41,13 @@
 			font-size:15px;
 			padding-bottom:0.7em;
 			font-weight:normal;
+			border:none;
+			text-align:left;
 		}
-
-		#inputs th, #outputs th{text-align:left;border:none}
-		#inputs td, #outputs td{border-top:none;border-left:none;border-right:none}
+		#inputs th, #outputs th, #otherOutputs th {text-align:left;border:none}
+		#inputs td, #outputs td, #otherOutputs td {border-top:none;border-left:none;border-right:none}
 	</style>
+
 	<script>
 		/** 
 		  * Note: Try to follow JSdoc structure (http://usejsdoc.org/about-getting-started.html) 
@@ -111,13 +115,13 @@
 
 				/*background*/if(isCV){newRow.classList.add('isCV');}
 
-				/*hlFields for formula and show formula, only if CV*/
+				/*hlInputs for formula and show formula, only if CV*/
 				if(isCV)
 				{
 					var formula = CurrentLevel[field].toString();
 					var prettyFormula = Formulas.prettify(formula);
-					newRow.setAttribute('onmouseover','Formulas.hlFields("'+field+'",CurrentLevel,1)');
-					newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+field+'",CurrentLevel,0)');
+					newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
+					newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
 					newRow.setAttribute('title',prettyFormula);
 				}
 				else{
@@ -151,13 +155,13 @@
 				else newCell.style.textAlign='center'
 
 				/*value*/
-				newCell.innerHTML=format((function()
+				newCell.innerHTML=(function()
 				{
-					if(isCV)
-						return CurrentLevel[field]();
-					else
-						return CurrentLevel[field];
-				})()/Units.multiplier(field));
+					var value = isCV ? CurrentLevel[field]() : CurrentLevel[field];
+					value/=Units.multiplier(field);
+					value=format(value);
+					return value
+				})();
 
 				//check if this cv has estimated data
 				var ed=DQ.hasEstimatedData(field) ? " <span title='This equation contains estimated data' class=estimated>&#9888;</span>" : "";
@@ -236,8 +240,9 @@
 			while(t.rows.length>2){t.deleteRow(-1);}
 			for(var field in CurrentLevel)
 			{
-				if(typeof(CurrentLevel[field])!="function"){continue;}
-				if(field.search(/^c_/)!=-1){continue;}
+				if(typeof(CurrentLevel[field])!="function")continue;
+				if(field.search(/^c_/)>=0)continue;
+				if(field.search("_KPI_GHG")==-1)continue;
 
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
@@ -246,8 +251,95 @@
 				var formula=CurrentLevel[field].toString();
 				var prettyFormula=Formulas.prettify(formula);
 				newRow.setAttribute('title',prettyFormula);
-				newRow.setAttribute('onmouseover','Formulas.hlFields("'+field+'",CurrentLevel,1)');
-				newRow.setAttribute('onmouseout', 'Formulas.hlFields("'+field+'",CurrentLevel,0)');
+				newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
+				newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
+
+				//compute the value
+				var value = CurrentLevel[field]()/Units.multiplier(field)
+
+				/*description*/ 
+				newCell=newRow.insertCell(-1);
+				newCell.setAttribute('title',(function()
+				{
+					if(!Info[field] || Info[field].explanation == "") 
+						return "no explanation";
+					else
+						return Info[field].explanation;
+				})());
+
+				newCell.style.cursor='help';
+				newCell.innerHTML=(function()
+				{
+					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
+					var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
+					return description+" ("+code+")";
+				})();
+
+				/*value*/ 
+				newCell=newRow.insertCell(-1)
+				newCell.innerHTML=(function()
+				{
+
+					//has estimated data warning
+					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='This equation contains estimated data'>&#9888;</span>" : "";
+
+					// level 2 warnings
+					var l2w = Level2Warnings.isIn(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
+
+					return format(value)+" "+ed+" "+l2w;
+				})();
+
+				/*Normalization*/
+				(function()
+				{
+					var level    = '<?php echo $level?>';
+					var sublevel = '<?php if($sublevel) echo $sublevel; else echo 'false' ?>';
+					//value per resident population
+					//value per serviced population
+					//value per water volume
+					['reside','servic','volume'].forEach(function(category)
+					{
+						newRow.insertCell(-1).innerHTML=(function()
+						{
+							var norm=Normalization.normalize(category,value,level,sublevel);
+							return format(norm);
+						})();
+					});
+				})();
+			}
+
+			//if the table is empty, add a warning
+			if(t.rows.length<3)
+				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#999>There are no formulas in this level</span>";
+
+			//bottom line with the color of W/WW
+			var newRow=t.insertRow(-1);
+			var newTh=document.createElement('th');
+			newTh.setAttribute('colspan',6)
+			newTh.style.borderBottom='none';
+			newTh.style.borderTop='none';
+			newRow.appendChild(newTh);
+		}
+
+		function updateOtherOutputs()
+		{
+			var t=document.getElementById('otherOutputs');
+			while(t.rows.length>2){t.deleteRow(-1);}
+			for(var field in CurrentLevel)
+			{
+				if(typeof(CurrentLevel[field])!="function"){continue;}
+				if(field.search(/^c_/)!=-1){continue;}
+				if(field.search("_KPI_GHG")>=0)continue;
+
+				/*check if field is level3 specific*/
+				if(Level3.isInList(field)){continue;}
+				var newCell,newRow=t.insertRow(-1);
+				newRow.setAttribute('field',field);
+				var formula=CurrentLevel[field].toString();
+				var prettyFormula=Formulas.prettify(formula);
+				newRow.setAttribute('title',prettyFormula);
+				newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
+				newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
 
 				//compute now the value for creating the indicator
 				var value = CurrentLevel[field]()/Units.multiplier(field)
@@ -298,7 +390,6 @@
 				newCell=newRow.insertCell(-1)
 				newCell.innerHTML=(function()
 				{
-					value=format(value);
 
 					//has estimated data warning
 					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='This equation contains estimated data'>&#9888;</span>" : "";
@@ -306,9 +397,23 @@
 					// level 2 warnings
 					var l2w = Level2Warnings.isIn(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
 
-					return value+" "+ed+" "+l2w;
+					return format(value)+" "+ed+" "+l2w;
 				})();
-				/*unit*/ newRow.insertCell(-1).innerHTML=Info[field]?Info[field].unit:"<span style=color:#ccc>no unit</span>";
+
+				/*unit*/
+				newCell=newRow.insertCell(-1)
+				newCell.innerHTML=(function()
+				{
+					if(!Info[field])
+						return "no unit";
+
+					if(Info[field].magnitude=="Currency")
+					{
+						return Global.General.Currency;
+					}
+					else 
+						return Info[field].unit;
+				})();
 			}
 
 			//if the table is empty, add a warning
@@ -318,7 +423,7 @@
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
 			var newTh=document.createElement('th');
-			newTh.setAttribute('colspan',4)
+			newTh.setAttribute('colspan',6)
 			newTh.style.borderBottom='none';
 			newTh.style.borderTop='none';
 			newRow.appendChild(newTh);
@@ -342,14 +447,14 @@
 		{
 			updateInputs();
 			updateOutputs();
+			updateOtherOutputs();
 			Exceptions.apply();
 			updateResult();
 		}
 	</script>
+
 </head><body onload=init()><center>
-
 <!--sidebar--><?php include'sidebar.php'?>
-
 <div id=fixedTopBar>
 	<style>
 		div#fixedTopBar {
@@ -387,7 +492,6 @@
 	<style> h1 {text-align:left;padding-left:20em} </style>
 	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
 </div>
-
 <!--separator--><div style=margin-top:110px></div>
 <!--linear diagram--><?php include'linear.php'?>
 <!--go to level 3 button-->
@@ -417,9 +521,9 @@
 ?>
 
 <!--IO-->
-<div style=text-align:;>
+<div style="text-align:left;padding:0 1em 0 1em">
 	<!--INPUTS-->
-	<table id=inputs class=inline style="max-width:46%;">
+	<table id=inputs class=inline style="width:49%;">
 		<tr><th colspan=5 class=tableHeader>INPUTS
 		<tr>
 			<th>Description
@@ -428,19 +532,31 @@
 			<th>Data quality
 	</table>
 
-	<!--PI-->
-	<table id=outputs class=inline style="max-width:50%;background:#f6f6f6;">
-		<tr><th colspan=5 class=tableHeader>RESULTS - Key performance indicators
-		<?php
-			if($sublevel==false)
-				include'outputFilter.php';
-		?>
-		<tr>
-			<th title=Performance style=cursor:help>P
-			<th>Description
-			<th>Current value
-			<th>Unit
-	</table>
+	<!--OUTPUTS-->
+	<div class=inline style="width:49%">
+		<!--GHG-->
+		<table id=outputs style="background:#f6f6f6;">
+			<tr><th colspan=7 class=tableHeader>RESULTS - GHG
+			<tr>
+				<th>Origin
+				<th>Value (kgCO2e)
+				<th>GHG per inhabitant (kgCO2e/inhabitant)
+				<th>GHG per serviced inhabitant (kgCO2e/serviced inhabitant)
+				<th>GHG per water volume (kgCO2e/m<sup>3</sup>)
+		</table>
+
+		<br><br><br>
+
+		<!--other-->
+		<table id=otherOutputs style="background:#f6f6f6;">
+			<tr><th colspan=4 class=tableHeader>OTHER INDICATORS
+			<tr>
+				<th title=Performance style=cursor:help>P
+				<th>Description
+				<th>Current value
+				<th>Unit
+		</table>
+	</div>
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>

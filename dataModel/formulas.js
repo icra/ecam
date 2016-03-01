@@ -13,7 +13,7 @@ var Formulas = {
 				\W matches any non-word characters (short for [^a-zA-Z0-9_]). 
 				\D matches any non-digit (short for [^0-9]).
 			*/
-			var reg=new RegExp("\\W"+field+"(\\D|$)");
+			var reg=new RegExp("\\W"+field+"(\\W|$)");
 			match=formula.search(reg); //will return -1 if not found
 			if(match!=-1){matches.push(field);}
 		}
@@ -73,25 +73,29 @@ var Formulas = {
 		return result;
 	},
 
+	/* highlight a single field*/
+	hlField:function(field,hl)
+	{
+		var yesno=hl?"yes":"no";
+		var element=document.querySelector('[field='+field+']');
+		if(element) element.setAttribute('hl',yesno);
+	},
+
 	/**
 	 * Hihghlight a field <tr field=field>
 	 * @param {string} field - the variable codes we want to highlight e.g. 'c_ww50'
 	 * @param {object} object - pointer to the object
 	 * @param {boolean} hl - turn on/off highlighting
 	 */
-	hlFields:function(field,object,hl)
+	hlInputs:function(field,object,hl)
 	{
 		var formula=object[field].toString();
 		formula=Formulas.prettify(formula);
 		var inputs=this.idsPerFormula(formula);
-		var yesno = hl ? "yes":"no";
 		for(var i in inputs)
 		{
-			var element=document.querySelector('[field='+inputs[i]+']');
-			if(element)
-				element.setAttribute('hl',yesno);
+			this.hlField(inputs[i],hl);
 		}
-
 		//field can also have outputs
 		this.hlOutputs(field,object,hl);
 	},
@@ -104,12 +108,12 @@ var Formulas = {
 	hlOutputs:function(input,obj,hl)
 	{
 		var outputs=this.outputsPerInput(input,obj);
-		var yesno = hl ? "yes":"no";
 		for(var i in outputs)
 		{
-			var element=document.querySelector('[field='+outputs[i]+']');
-			if(element)
-				element.setAttribute('hl_output',yesno);
+			var field=outputs[i];
+			var yesno=hl?"yes":"no";
+			var element=document.querySelector('[field='+field+']');
+			if(element) element.setAttribute('hl_output',yesno);
 		}
 	},
 }
