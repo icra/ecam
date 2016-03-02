@@ -175,10 +175,11 @@
 </div>
 
 <!--graphs-->
-<div class=inline style="width:55%">
+<div id=graphs class=inline style="width:55%">
+	<style>#graphs div[id^='graph']{border:1px solid #ccc;border-radius:0.2em}</style>
 	<div id=graph1 class=inline style=max-width:45%></div>
 	<div id=graph2 class=inline style=max-width:45%></div>
-	<div id=graph3></div>
+	<div id=graph3 style=margin-top:2px></div>
 	<script>
 		google.charts.load('current',{'packages':['corechart']});
 		google.charts.setOnLoadCallback(init)

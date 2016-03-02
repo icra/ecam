@@ -2,8 +2,7 @@
 
 var Level2Warnings=
 {
-	wdE3:"Level 3 data is required",
-	wdE5:"Level 3 data is required",
+	wx_code_here:"Data required",
 }
 
 Level2Warnings.isIn=function(code)

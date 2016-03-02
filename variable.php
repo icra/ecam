@@ -58,14 +58,12 @@
 			newCell.className='th'
 			newCell.innerHTML="Stage"
 			newCell=newRow.insertCell(-1)
-			newCell.innerHTML="<a href=edit.php?level="+level+">"+levelAlias+"</a>"
 			if(sublevel!=0)
 			{
 				var url = Level3.isInList(id) ? "level3.php" : "edit.php";
-
-				var sublevelName=sublevel=="General" ? "Energy" : sublevel;
-				newCell.innerHTML+=" &rsaquo; <a href="+url+"?level="+level+"&sublevel="+sublevel+">"+sublevelName+"</a>"
+				newCell.innerHTML+="<a href="+url+"?level="+level+"&sublevel="+sublevel+">"+levelAlias+" / "+sublevel+"</a>"
 			}
+			else newCell.innerHTML="<a href=edit.php?level="+level+">"+levelAlias+"</a>"
 			//Explanation
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)

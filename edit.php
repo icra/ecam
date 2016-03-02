@@ -168,6 +168,9 @@
 				//unit
 				newRow.insertCell(-1).innerHTML=(function()
 				{
+					if(!Info[field])
+						return "<span style=color:#ccc>no unit</span>";
+
 					if(Info[field].magnitude=="Currency")
 					{
 						return Global.General.Currency;
@@ -180,10 +183,6 @@
 					else
 					{
 						var str="<select onchange=Units.selectUnit('"+field+"',this.value)>";
-						if(Info[field]===undefined)
-						{
-							return "<span style=color:#ccc>no unit</span>";
-						}
 						if(Units[Info[field].magnitude]===undefined)
 						{
 							return Info[field].unit
@@ -299,11 +298,15 @@
 					{
 						var newCell=newRow.insertCell(-1);
 
-						//determine where is the field to be highlighted stored
+						//determine the field to be highlighted
 						var hlfield = (sublevel=='false' || category=='reside' || category=='servic') ? Normalization[level][category] : Normalization[level][sublevel][category];
-						console.log(hlfield);
 						newCell.setAttribute('onmouseover',"Formulas.hlField('"+hlfield+"',1)")
 						newCell.setAttribute('onmouseout',"Formulas.hlField('"+hlfield+"',0)")
+
+						//the formula shoud change adding "/hlfield"
+
+						newCell.title=newCell.parentNode.title+"/"+hlfield;
+
 						newCell.innerHTML=(function()
 						{
 							var norm=Normalization.normalize(category,field,level,sublevel);
@@ -487,12 +490,11 @@
 		{
 			switch($sublevel)
 			{
-				case "General":$titleSublevel="Energy use and production";break;
 				default:	   $titleSublevel=$sublevel;break;
 			}
 		}
 		/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
-		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Overview)</span>" : "<span style=color:black>$titleLevel (Overview)</span>";
+		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Insight)</span>" : "<span style=color:black>$titleLevel (Preview)</span>";
 	?>
 	<style> h1 {text-align:left;padding-left:20em} </style>
 	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
@@ -545,18 +547,18 @@
 	<div class=inline style="width:47%">
 		<!--GHG-->
 		<table id=outputs style="background:#f6f6f6;">
-			<tr><th colspan=7 class=tableHeader>INDICATORS - Greenhouse gas emissions (GHG)
+			<tr><th colspan=7 class=tableHeader>OUTPUTS - Greenhouse gas emissions (GHG) | <a href=variable.php?id=conv_kwh_co2>Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
 			<tr>
 				<th>Origin
 				<th>Value (kgCO<sub>2</sub>eq)
-				<th>Per inhabitant (kgCO<sub>2</sub>eq/inhabitant)
-				<th>Per serviced inhabitant (kgCO<sub>2</sub>eq/serviced inhabitant)
+				<th>Per inhab (kgCO<sub>2</sub>eq/inhab)
+				<th>Per serv. inhab (kgCO<sub>2</sub>eq/serv.inhab)
 				<th>Per water volume (kgCO<sub>2</sub>eq/m<sup>3</sup>)
 		</table>
 
 		<!--other-->
 		<table id=otherOutputs style="background:#f6f6f6;margin-top:1em">
-			<tr><th colspan=4 class=tableHeader>OTHER INDICATORS
+			<tr><th colspan=4 class=tableHeader>OUTPUTS - Service level indicators
 			<tr>
 				<th title=Performance style=cursor:help>P
 				<th>Description

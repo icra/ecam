@@ -1,30 +1,34 @@
 <!--LINEAR DIAGRAM: file inside edit.php, level3.php and stages.php-->
 <div id=linearDiagram>
 	<div>
-		<img class=l1 stage=water    src=img/water.png    onclick=window.location="edit.php?level=Water"                       title="WATER SUPPLY (L1)"> 
-		<img class=l2 stage=waterAbs src=img/waterAbs.png onclick=window.location="edit.php?level=Water&sublevel=Abstraction"  title="Abstraction (L2)" >
-		<img class=l2 stage=waterTre src=img/waterTre.png onclick=window.location="edit.php?level=Water&sublevel=Treatment"    title="Treatment (L2)">
-		<img class=l2 stage=waterDis src=img/waterDis.png onclick=window.location="edit.php?level=Water&sublevel=Distribution" title="Distribution (L2)">
-		<img class=l1 stage=waste    src=img/waste.png    onclick=window.location="edit.php?level=Waste"                       title="WASTEWATER (L1)"> 
-		<img class=l2 stage=wasteCol src=img/wasteCol.png onclick=window.location="edit.php?level=Waste&sublevel=Collection"   title="Collection (L2)">
-		<img class=l2 stage=wasteTre src=img/wasteTre.png onclick=window.location="edit.php?level=Waste&sublevel=Treatment"    title="Treatment (L2)">
-		<img class=l2 stage=wasteDis src=img/wasteDis.png onclick=window.location="edit.php?level=Waste&sublevel=Discharge"    title="Discharge (L2)">
-		|||
-		<img class=l2 stage=waterGen src=img/waterGen.png onclick=window.location="edit.php?level=Water&sublevel=General" 	   title="Energy (L2)">
-		<img class=l2 stage=wasteGen src=img/wasteGen.png onclick=window.location="edit.php?level=Waste&sublevel=General"      title="Energy (L2)">
+		<span style="color:#666"> Preview </span>
+			<img class=l1 stage=water    src=img/water.png    onclick=window.location="edit.php?level=Water"                       title="WATER SUPPLY (L1)"> 
+			<img class=l1 stage=waste    src=img/waste.png    onclick=window.location="edit.php?level=Waste"                       title="WASTEWATER (L1)"> 
+
+		<!--vertbar--><span style="line-height:3em;border-left:1px solid #ccc;margin:0 1em 0 1em"></span>
+
+		<span style="color:#666"> Insight </span>
+			<img class=l1 stage=waterGen src=img/waterGen.png onclick=window.location="edit.php?level=Water&sublevel=General"      title="Water supply (L2)"> 
+			<img class=l2 stage=waterAbs src=img/waterAbs.png onclick=window.location="edit.php?level=Water&sublevel=Abstraction"  title="Abstraction (L2)" >
+			<img class=l2 stage=waterTre src=img/waterTre.png onclick=window.location="edit.php?level=Water&sublevel=Treatment"    title="Treatment (L2)">
+			<img class=l2 stage=waterDis src=img/waterDis.png onclick=window.location="edit.php?level=Water&sublevel=Distribution" title="Distribution (L2)">
+			<img class=l1 stage=wasteGen src=img/wasteGen.png onclick=window.location="edit.php?level=Waste&sublevel=General"      title="Wastewater (L2)"> 
+			<img class=l2 stage=wasteCol src=img/wasteCol.png onclick=window.location="edit.php?level=Waste&sublevel=Collection"   title="Collection (L2)">
+			<img class=l2 stage=wasteTre src=img/wasteTre.png onclick=window.location="edit.php?level=Waste&sublevel=Treatment"    title="Treatment (L2)">
+			<img class=l2 stage=wasteDis src=img/wasteDis.png onclick=window.location="edit.php?level=Waste&sublevel=Discharge"    title="Discharge (L2)">
 	</div>
 	<hr id=line>
 </div>
 
 <style>
-	div#linearDiagram {margin:5px 0 5px 0}
+	div#linearDiagram {margin:5px 0 5px 0;border-bottom:1px solid #ccc;padding-bottom:1em}
 	div#linearDiagram img {cursor:pointer;margin:0 0.8em 0 0.8em;vertical-align:middle;padding:0} /*icons inside buttons to navigate to Level2*/
 	div#linearDiagram img.l1 {width:43px;} 
 	div#linearDiagram img.l2 {width:28px;}
-	div#linearDiagram img{border-radius:50%;border:2px solid transparent}
-	div#linearDiagram img.selected{border:2px solid #d7bfaf}
-	div#linearDiagram img:hover {border:2px solid black}
-	div#linearDiagram #line {background-color:black;position:relative; transform:translateY(-23px) translateX(-72px);z-index:-1;width:425px;}
+	div#linearDiagram img{border-radius:90%;border:4px solid transparent}
+	div#linearDiagram img.selected{border:4px solid #a7bfaf}
+	div#linearDiagram img:hover {border:4px solid #d7bfaf}
+	div#linearDiagram #line {background-color:#d7bfaf;position:relative; transform:translateY(-26px) translateX(137px);z-index:-1;width:425px;}
 </style>
 
 <script>

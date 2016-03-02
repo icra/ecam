@@ -3,15 +3,13 @@ var Graphs = {}
 Graphs.graph1=function(withTables,container)
 {
 	//pointers
-	var ws = Global.Water;
-	var ww = Global.Waste;
 	var Days = Global.General.Days();
-	//values
-	var wsNon=ws.ws_KPI_GHG_ne();
-	var wsYes=ws.ws_KPI_GHG_elec();
 
-	var wwNon=ww.ww_KPI_GHG_ne_ch4_wwt()+ww.ww_KPI_GHG_ne_n2o_tre()+ww.ww_KPI_GHG_ne_tsludge()+ww.ww_KPI_GHG_ne_ch4_unt()+ww.ww_KPI_GHG_ne_n2o_unt()+ww.ww_KPI_GHG_ne_engines();
-	var wwYes=ww.ww_KPI_GHG_elec();
+	//values
+	var wsNon = Global.Water.ws_KPI_GHG_ne();
+	var wsYes = Global.Water.ws_KPI_GHG_elec();
+	var wwNon = Global.Waste.ww_KPI_GHG_ne();
+	var wwYes = Global.Waste.ww_KPI_GHG_elec();
 
 	//actual graph data
 	var data=google.visualization.arrayToDataTable([
@@ -21,12 +19,13 @@ Graphs.graph1=function(withTables,container)
 		["ww electrical",     wwYes],
 		["ww non electrical", wwNon],
 	]);
+
 	//options
 	var options= 
 	{ 
 		//width:800,
 		//height:400,
-		title:"L1 GHG",
+		title:"L1 Greenhouse gas emissions (kg CO2 eq)",
 		slices:
 		{
 			0:{ color: '#00aff1' },
@@ -35,25 +34,40 @@ Graphs.graph1=function(withTables,container)
 			3:{ color: 'lightcoral' },
 		},
 	}
-	//empty container
+
+	//do empty the container element
 	document.getElementById(container).innerHTML='';
+
 	//draw
 	var chart=new google.visualization.PieChart(document.getElementById(container));
 	chart.draw(data,options);
-	//create a table (as a string)
+
+	//create a table string
 	if(withTables)
 	{
 		var table=""+
-		"<table>"+
-			"<tr><th>Slice             <th>Formula                                              <th>Value (kgCO2/year)"+
-			"<tr><td>ws non electrical <td>c_ws51*365/Days                                      <td>"+format(wsNon)+
-			"<tr><td>ws     electrical <td>ws5*uw1*365/Days                                     <td>"+format(wsYes)+
-			"<tr><td>ww non electrical <td>(c_ww57+c_ww55+c_ww53+c_ww51+c_ww52+c_ww54)*365/Days <td>"+format(wwNon)+
-			"<tr><td>ww     electrical <td>ww3*uw1*365/Days                                     <td>"+format(wwYes)+
-		"</table>";
+		"<button onclick=Graphs.graph1(false,'"+container+"')>Hide table</button>"+
+		"<table style=width:100%>"+
+			"<tr><th>Slice             <th>Variable         <th>Value (kgCO2)"+
+			"<tr><td>ws     electrical <td><a href=variable.php?id=ws_KPI_GHG_elec>ws_KPI_GHG_elec</a> <td>"+format(wsYes)+
+			"<tr><td>ws non electrical <td><a href=variable.php?id=ws_KPI_GHG_ne>ws_KPI_GHG_ne</a>     <td>"+format(wsNon)+
+			"<tr><td>ww     electrical <td><a href=variable.php?id=ww_KPI_GHG_elec>ww_KPI_GHG_elec</a> <td>"+format(wwYes)+
+			"<tr><td>ww non electrical <td><a href=variable.php?id=ww_KPI_GHG_ne>ww_KPI_GHG_ne</a>     <td>"+format(wwNon)+
+		"</table>"+
+		"";
 		var div=document.createElement('div');
+		div.style.textAlign="center";
+		div.style.fontSize="10px";
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
+	}
+	else
+	{
+		//button "show table"
+		var div=document.createElement('div');
+		div.style.textAlign="center";
+		document.getElementById(container).appendChild(div);
+		div.innerHTML="<button onclick=Graphs.graph1(true,'"+container+"')>Show table</button>"
 	}
 }
 
@@ -61,15 +75,19 @@ Graphs.graph2=function(withTables,container)
 {
 	//pointer
 	var Days=Global.General.Days();
+
 	//values
-	var ws=Global.Water.ws5*365/Days;
-	var ww=Global.Waste.ww3*365/Days;
+	var ws=Global.Water.ws_nrg_cons;
+	var ww=Global.Waste.ww_nrg_cons;
+
 	//actual graph data
 	var data=google.visualization.arrayToDataTable([
 		['Stage', 'Emissions'],
 		["Water supply", ws],
 		["Wastewater",   ww],
 	]);
+
+	//options
 	var options= 
 	{ 
 		pieHole:0.4,
@@ -82,21 +100,38 @@ Graphs.graph2=function(withTables,container)
 			1:{ color: '#bf5050' },
 		},
 	};
+
+	//empty the container element
 	document.getElementById(container).innerHTML='';
+
+	//draw
 	var chart=new google.visualization.PieChart(document.getElementById(container));
 	chart.draw(data,options);
+
+	//table
 	if(withTables)
 	{
-		//create a table (as a string)
+		//create a table string
 		var table=""+
-		"<table>"+
-			"<tr><th>Slice        <th>Formula                                      <th>Value (kWh/year)"+
-			"<tr><td>Water supply <td><a href=variable.php?id=ws5>ws5</a>*365/Days <td>"+format(ws)+
-			"<tr><td>Wastewater   <td><a href=variable.php?id=ww3>ww3</a>*365/Days <td>"+format(ww)+
+		"<button onclick=Graphs.graph2(false,'"+container+"')>Hide table</button>"+
+		"<table style=width:100%>"+
+			"<tr><th>Slice        <th>Formula <th>Value (kWh)"+
+			"<tr><td>Water supply <td><a href=variable.php?id=ws_nrg_cons>ws_nrg_cons</a><td>"+format(ws)+
+			"<tr><td>Wastewater   <td><a href=variable.php?id=ww_nrg_cons>ww_nrg_cons</a><td>"+format(ww)+
 		"</table>";
 		var div = document.createElement('div');
+		div.style.textAlign="center";
+		div.style.fontSize="10px";
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
+	}
+	else
+	{
+		//button "show table"
+		var div=document.createElement('div');
+		div.style.textAlign="center";
+		document.getElementById(container).appendChild(div);
+		div.innerHTML="<button onclick=Graphs.graph2(true,'"+container+"')>Show table</button>"
 	}
 }
 
@@ -106,26 +141,31 @@ Graphs.graph3=function(withTables,container)
 	var WS = Global.Water;
 	var WW = Global.Waste;
 	var Days = Global.General.Days();
-	var uw1 = Global.UWS.uw1;
+	var ws_el = WS.ws_KPI_GHG_elec();
+	var ws_ne = WS.ws_KPI_GHG_ne();
+	var ww_el = WW.ww_KPI_GHG_elec();
+	var ww_ne = WW.ww_KPI_GHG_ne();
+
 	//data: 3 graphs: 2 bars each = 6 bars
 	//BAR 1
-	var slice_1  = WS.ws5*uw1*365/Days/WS.ws2;
-	var slice_2  = WS.c_ws51()*365/Days/WS.ws2;
+	var slice_1  = ws_el/WS.ws_resi_pop;
+	var slice_2  = ws_ne/WS.ws_resi_pop;
 	//BAR 2
-	var slice_3  = WW.ww3*uw1*365/Days/WW.ww5;
-	var slice_4  = (WW.c_ww57()+WW.c_ww55()+WW.c_ww53()+WW.c_ww51()+WW.c_ww52()+WW.c_ww54())*365/Days/WW.ww5||0;
+	var slice_3  = ww_el/WW.ww_resi_pop;
+	var slice_4  = ww_ne/WW.ww_resi_pop;
 	//BAR 3
-	var slice_5  = WS.wGHG6();
-	var slice_6  = WS.wGHG4();
+	var slice_5  = ws_el/WS.ws_serv_pop;
+	var slice_6  = ws_ne/WS.ws_serv_pop;
 	//BAR 4
-	var slice_7  = WW.wwGHG4();
-	var slice_8  = WW.wwGHG6();
+	var slice_7  = ww_el/WW.ww_serv_pop;
+	var slice_8  = ww_ne/WW.ww_serv_pop;
 	//BAR 5
-	var slice_9 = WS.wGHG7();
-	var slice_10  = WS.wGHG5();
+	var slice_9  = ws_el/WS.ws_vol_auth;
+	var slice_10 = ws_ne/WS.ws_vol_auth;
 	//BAR 6
-	var slice_11 = WW.wwGHG5();
-	var slice_12 = WW.wwGHG7();
+	var slice_11 = ww_el/WW.ww_vol_wwtr;
+	var slice_12 = ww_ne/WW.ww_vol_wwtr;
+
 	//actual graph
 	var data=google.visualization.arrayToDataTable
 	([
@@ -143,6 +183,8 @@ Graphs.graph3=function(withTables,container)
 		['WS per AC',     slice_9 , slice_10, ''],
 		['WW per CW',     slice_11, slice_12, ''],
 	]);
+
+	//options
 	var options=
 	{
 		title:"L1 GHG",
@@ -152,27 +194,43 @@ Graphs.graph3=function(withTables,container)
 		isStacked:true,
 		colors: ['#bca613','#00aeef', '#f3a000', '#89375c'],
 	};
-	var view=new google.visualization.DataView(data);
+
+	//empty container element
 	document.getElementById(container).innerHTML='';
+
+	//draw
+	var view=new google.visualization.DataView(data);
 	var chart=new google.visualization.ColumnChart(document.getElementById(container));
 	chart.draw(view, options);
 
+	//tables
 	if(withTables)
 	{
-		//create a table (as a string)
+		//create a table string
 		var table=""+
-		"<table>"+
-			"<tr><th>GHG           <th>Non electrical (formula)                                 <th>Value               <th>Electrical (formula) <th>Value"+
-			"<tr><th>WS per capita <td>c_ws51*365/Days/ws2                                      <td>"+format(slice_1 )+"<td>ws5*uw1*365/Days/ws2 <td>"+format(slice_2 )+
-			"<tr><th>WW per capita <td>(c_ww57+c_ww55+c_ww53+c_ww51+c_ww52+c_ww54)*365/Days/ww5 <td>"+format(slice_3 )+"<td>ww3*uw1*365/Days/ww5 <td>"+format(slice_4 )+
-			"<tr><th>WS per SP     <td>wGHG4                                                    <td>"+format(slice_5 )+"<td>wGHG6                <td>"+format(slice_6 )+
-			"<tr><th>WW per SP     <td>wwGHG6                                                   <td>"+format(slice_7 )+"<td>wwGHG4               <td>"+format(slice_8 )+
-			"<tr><th>WS per AC     <td>wGHG5                                                    <td>"+format(slice_9 )+"<td>wGHG7                <td>"+format(slice_10)+
-			"<tr><th>WW per CW     <td>wwGHG7                                                   <td>"+format(slice_11)+"<td>wwGHG5               <td>"+format(slice_12)+
+		"<button onclick=Graphs.graph3(false,'"+container+"')>Hide table</button>"+
+		"<table style=width:100%>"+
+			"<tr><th>Emission      <th>From non electrical (formula) <th>Value               <th>From electricity (formula)    <th>Value"+
+			"<tr><th>WS per capita <td>ws_KPI_GHG_ne / ws_resi_pop   <td>"+format(slice_1 )+"<td>ws_KPI_GHG_elec / ws_resi_pop <td>"+format(slice_2 )+
+			"<tr><th>WW per capita <td>ww_KPI_GHG_ne / ww_resi_pop   <td>"+format(slice_3 )+"<td>ww_KPI_GHG_elec / ww_resi_pop <td>"+format(slice_4 )+
+			"<tr><th>WS per SP     <td>ws_KPI_GHG_ne / ws_serv_pop   <td>"+format(slice_5 )+"<td>ws_KPI_GHG_elec / ws_serv_pop <td>"+format(slice_6 )+
+			"<tr><th>WW per SP     <td>ww_KPI_GHG_ne / ww_serv_pop   <td>"+format(slice_7 )+"<td>ww_KPI_GHG_elec / ww_serv_pop <td>"+format(slice_8 )+
+			"<tr><th>WS per AC     <td>ws_KPI_GHG_ne / ws_vol_auth   <td>"+format(slice_9 )+"<td>ws_KPI_GHG_elec / ws_vol_auth <td>"+format(slice_10)+
+			"<tr><th>WW per CW     <td>ww_KPI_GHG_ne / ww_vol_wwtr   <td>"+format(slice_11)+"<td>ww_KPI_GHG_elec / ww_vol_wwtr <td>"+format(slice_12)+
 		"</table>";
 		var div = document.createElement('div');
+		div.style.textAlign="center";
+		div.style.fontSize="10px";
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
+	}
+	else
+	{
+		//button "show table"
+		var div=document.createElement('div');
+		div.style.textAlign="center";
+		document.getElementById(container).appendChild(div);
+		div.innerHTML="<button onclick=Graphs.graph3(true,'"+container+"')>Show table</button>"
 	}
 }
 
@@ -180,36 +238,41 @@ Graphs.graph4=function(withTables,container)
 {
 	//Pointers
 	var ws   = Global.Water
-	var wsg  = Global.Water.General
 	var ww   = Global.Waste
+	var wsg  = Global.Water.General
 	var wwg  = Global.Waste.General
-	var Days = Global.General.Days()
+
+	var Days = Global.General.Days();
+
 	//Values
-	var slice_1 = ww.c_ww54()*365/Days;
-	var slice_2 = (wsg.c_wsg50()*Global.UWS.uw1-wsg.wsg4)*365/Days;
-	var slice_3 = ws.c_ws51()*365/Days;
-	var slice_4 = (ww.ww3-wwg.wwg2-wwg.wwg4)*Global.UWS.uw1*365/Days;
-	var slice_5 = ww.c_ww57()*365/Days; 
-	var slice_6 = ww.c_ww55()*365/Days;
-	var slice_7 = (ww.c_ww51()+ww.c_ww52())*365/Days;
-	var slice_8 = ww.Treatment.c_wwt55()*365/Days;
+	var slice_1 = ws.ws_KPI_GHG_elec();
+	var slice_2 = ws.ws_KPI_GHG_ne();
+	var slice_3 = ww.ww_KPI_GHG_elec();
+	var slice_4 = ww.ww_KPI_GHG_ne_engines();
+	var slice_5 = ww.ww_KPI_GHG_ne_tsludge();
+	var slice_6 = ww.ww_KPI_GHG_ne_ch4_wwt();
+	var slice_7 = ww.ww_KPI_GHG_ne_n2o_tre();
+	var slice_8 = ww.ww_KPI_GHG_ne_ch4_unt()+ww.ww_KPI_GHG_ne_n2o_unt();
+
 	//actual graph data
 	var data=google.visualization.arrayToDataTable
 	([
 		['Stage','Emissions'],
-		['GHG from sludge transport             ', slice_1],
-		['GHG electricyty (water)               ', slice_2],
-		['GHG from fuel engines (water)         ', slice_3],
-		['GHG from electricity (wastewater)     ', slice_4],
-		['GHG from fuel engines (wastewater)    ', slice_5],
-		['GHG from biogas handling (wastewater) ', slice_6],
-		['GHG from untreated effluent discharge ', slice_7],
-		['GHG from treated effluent discharge   ', slice_8],
+		['From electricyty (water)                       ', slice_1],
+		['From fuel engines (water)                      ', slice_2],
+		['From electricity (wastewater)                  ', slice_3],
+		['From fuel engines (wastewater)                 ', slice_4],
+		['From sludge transport (wastewater)             ', slice_5],
+		['From CH4 in plants (wastewater)                ', slice_6],
+		['From treated effluent discharge (wastewater)   ', slice_7],
+		['From untreated effluent discharge (wastewater) ', slice_8],
 	]);
+
+	//options
 	var options= 
 	{ 
-		width:800,
-		height:400,
+		//width:800,
+		//height:400,
 		title:"L2 GHG",
 		slices:
 		{
@@ -223,28 +286,44 @@ Graphs.graph4=function(withTables,container)
 			7:{color:'#a15f7d'},
 		},
 	};
+
+	//empty the container
 	document.getElementById(container).innerHTML='';
+
+	//draw
 	var chart=new google.visualization.PieChart(document.getElementById(container));
 	chart.draw(data,options);
 
+	//tables
 	if(withTables)
 	{
 		//create a table (as a string)
 		var table=""+
-		"<table>"+
-			"<tr><th>Field                                 <th>Formula                      <th>Value (kgCO2/year)"+
-			"<tr><td>GHG from sludge transport             <td>c_ww54*365/Days              <td>"+format(slice_1)+
-			"<tr><td>GHG electricyty (water)               <td>(c_wsg50*uw1-wsg4)*365/Days  <td>"+format(slice_2)+
-			"<tr><td>GHG from fuel engines (water)         <td>c_ws51*365/Days              <td>"+format(slice_3)+
-			"<tr><td>GHG from electricity (wastewater)     <td>(ww3-wwg2-wwg4)*uw1*365/Days <td>"+format(slice_4)+
-			"<tr><td>GHG from fuel engines (wastewater)    <td>c_ww57*365/Days              <td>"+format(slice_5)+
-			"<tr><td>GHG from biogas handling (wastewater) <td>c_ww55*365/Days              <td>"+format(slice_6)+
-			"<tr><td>GHG from untreated effluent discharge <td>(c_ww51+c_ww52)*365/Days     <td>"+format(slice_7)+
-			"<tr><td>GHG from treated effluent discharge   <td>c_wwt55*365/Days             <td>"+format(slice_8)+
+		"<button onclick=Graphs.graph4(false,'"+container+"')>Hide table</button>"+
+		"<table style=width:100%>"+
+			"<tr><th>Field                                          <th>Formula                                        <th>Value (kgCO2/year)"+
+			"<tr><td>From electricity (water)                       <td>ws_KPI_GHG_elec                                <td>"+format(slice_1)+
+			"<tr><td>From fuel engines(water)                       <td>ws_KPI_GHG_ne                                  <td>"+format(slice_2)+
+			"<tr><td>From electricity (wastewater)                  <td>ww_KPI_GHG_elec                                <td>"+format(slice_3)+
+			"<tr><td>From fuel engines (wastewater)                 <td>ww_KPI_GHG_ne_engines                          <td>"+format(slice_4)+
+			"<tr><td>From sludge transport (wastewater)             <td>ww_KPI_GHG_ne_tsludge                          <td>"+format(slice_5)+
+			"<tr><td>From CH4 in plants (wastewater)                <td>ww_KPI_GHG_ne_ch4_wwt                          <td>"+format(slice_6)+
+			"<tr><td>From treated effluent discharge (wastewater)   <td>ww_KPI_GHG_ne_n2o_tre                          <td>"+format(slice_7)+
+			"<tr><td>From untreated effluent discharge (wastewater) <td>ww_KPI_GHG_ne_ch4_unt+ww.ww_KPI_GHG_ne_n2o_unt <td>"+format(slice_8)+
 		"</table>";
 		var div = document.createElement('div');
+		div.style.textAlign="center";
+		div.style.fontSize="10px";
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
+	}
+	else
+	{
+		//button "show table"
+		var div=document.createElement('div');
+		div.style.textAlign="center";
+		document.getElementById(container).appendChild(div);
+		div.innerHTML="<button onclick=Graphs.graph4(true,'"+container+"')>Show table</button>"
 	}
 }
 
@@ -273,8 +352,8 @@ Graphs.graph5=function(withTables,container)
 	var options= 
 	{ 
 		pieHole:0.4,
-		width:800,
-		height:400,
+		//width:800,
+		//height:400,
 		title:"L2 Energy consumption",
 		slices:
 		{
@@ -294,7 +373,7 @@ Graphs.graph5=function(withTables,container)
 	{
 		//create a table (as a string)
 		var table=""+
-		"<table>"+
+		"<table style=width:100%>"+
 			"<tr><th>Slice                 <th>Formula                                        <th>Value (kWh/m<sup>3</sup>)"+
 			"<tr><td>Water Abstraction     <td><a href=variable.php?id=wsa1>wsa1</a>*365/Days <td>"+format(slice_1)+
 			"<tr><td>Water Treatment       <td><a href=variable.php?id=wst2>wst2</a>*365/Days <td>"+format(slice_2)+
@@ -429,7 +508,7 @@ Graphs.graph6=function(withTables,container)
 	{
 		//create a table (as a string)
 		var table=""+
-		"<table>"+
+		"<table style=width:100%>"+
 			"<tr><th>Bar		   <th>From electricity (formula)                 <th>From electricity (value) <th>Fuel used in engines (formula) <th>Fuel used in engines (value) <th>Biogas (formula)    <th>Biogas (value)      <th>Treated (formula)   <th>Treated (value)     <th>Untreated (formula)          <th>Untreated (value)   <th>Sludge transport (formula) <th>Sludge transport (value)"+
 			"<tr><th>WS per capita <td>(ws5-wsg2-wsg4)*uw1*365/Days/ws2           <td>"+format(slice_1 )+     "<td>(c_ws51-c_wsg52)*365/Days/ws2  <td>"+format(slice_2 )+
 			"<tr><th>WW per capita <td>((ww3-wwg2-wwg4)*uw1-c_wwg52)*365/Days/ww5 <td>"+format(slice_3 )+     "<td>c_ww57*365/Days/ww5            <td>"+format(slice_4 )+         "<td>c_ww55*365/Days/ww5 <td>"+format(slice_5 )+"<td>c_ww53*365/Days/ww5 <td>"+format(slice_6) +"<td>(c_ww51+c_ww52)*365/Days/ww5 <td>"+format(slice_7) +"<td>c_ww54*365/Days/ww5        <td>"+format(slice_8) +
@@ -511,7 +590,7 @@ Graphs.graph7=function(withTables,container)
 	if(withTables)
 	{
 		//create a table (as a string)
-		var table="<table><tr><th>Formula <th colspan=30>Values for each substage";
+		var table="<table style=width:100%><tr><th>Formula <th colspan=30>Values for each substage";
 			for(var s in stages)
 			{
 				table+="<tr><td><a href=variable.php?id="+names[s]+">"+names[s]+"</a>";

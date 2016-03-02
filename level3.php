@@ -53,6 +53,7 @@
 			}
 		?>
 	</style>
+
 	<script>
 		<?php
 			/** establish the level 2 stage we are going to be focused, since substages of level 3 have the same variables*/
@@ -64,7 +65,7 @@
 
 		<?php
 			//Read "substages" current object
-			echo "substages=Global.Substages['$level']['$sublevel'];";
+			echo "var substages=Global.Substages['$level']['$sublevel'];";
 		?>
 
 		/** Returns array of strings which are input identifiers for current stage, e.g ["aV1","av2"] */
@@ -239,7 +240,7 @@
 					var newCell=newRow.insertCell(-1);
 					newCell.style.textAlign="left";
 					newCell.style.cursor="help";
-					newCell.setAttribute('title',Info[code].explanation);
+					newCell.setAttribute('title',Info[code] ? Info[code].explanation : "no explanation");
 					newCell.innerHTML=Info[code]?Info[code].description:"<span style=color:#ccc>not defined</span>";
 
 					//values: go over substages
@@ -250,6 +251,8 @@
 
 						if(isCV)
 						{
+							//quan es crida encara no existeix
+							substages[s][code]=CurrentStage[code]; //copy the function inside current substage
 							newCell.innerHTML=format(substages[s][code]()/multiplier);
 						}
 						else
@@ -270,6 +273,7 @@
 					//LEVEL 2 current value
 					var newCell=newRow.insertCell(-1);
 					newCell.style.textAlign="center";
+					newCell.style.fontWeight="bold";
 					newCell.innerHTML=format((function()
 					{
 						if(isCV)
@@ -281,6 +285,9 @@
 					//Unit for current input
 					newRow.insertCell(-1).innerHTML=(function()
 					{
+						if(!Info[code])
+							return "undefined";
+
 						if(Info[code].magnitude=="Currency")
 						{
 							return Global.General.Currency;
@@ -322,30 +329,30 @@
 		/** Redisplay table id=outputs */
 		function updateOutputs()
 		{
-			var t=document.getElementById('outputs')
-			while(t.rows.length>1){t.deleteRow(-1)}
+			var t=document.getElementById('outputs');
+			while(t.rows.length>1) t.deleteRow(-1);
 
 			//new row
 			var newRow=t.insertRow(-1);
 
 			//headers
-			['Code','Description'].forEach(function(element)
-			{
-				var newTH=document.createElement('th'); newRow.appendChild(newTH);
-				newTH.innerHTML=element;
-			});
-			for(var s in substages)
-			{
-				var newTH=document.createElement('th'); 
-				newRow.appendChild(newTH);
-				newTH.innerHTML="Substage "+(parseInt(s)+1)+" "+
-				"<div style=font-weight:bold>"+substages[s].name+"</div>"
-			};
-			['LEVEL 2','Unit'].forEach(function(element)
-			{
-				var newTH=document.createElement('th'); newRow.appendChild(newTH);
-				newTH.innerHTML=element;
-			});
+				['Code','Description'].forEach(function(element)
+				{
+					var newTH=document.createElement('th'); newRow.appendChild(newTH);
+					newTH.innerHTML=element;
+				});
+				for(var s in substages)
+				{
+					var newTH=document.createElement('th'); 
+					newRow.appendChild(newTH);
+					newTH.innerHTML="Substage "+(parseInt(s)+1)+" "+
+					"<div style=font-weight:bold>"+substages[s].name+"</div>"
+				};
+				['LEVEL 2','Unit'].forEach(function(element)
+				{
+					var newTH=document.createElement('th'); newRow.appendChild(newTH);
+					newTH.innerHTML=element;
+				});
 			//end headers
 
 			var inputs=getInputs();
@@ -377,33 +384,32 @@
 				//new row
 				var newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
-				newRow.setAttribute('title',Info[field].explanation);
+				newRow.setAttribute('title',Info[field] ? Info[field].explanation : "no explanation");
 
-				//if is calculated variable, hide it
+				//if is calculated variable, hide it (no continue bc we need it)
 				if(field.search(/^c_/)>=0) newRow.style.display='none';
 
-				//get formula
+				//set highlighting 
 				var formula=CurrentStage[field].toString();
 				var prettyFormula=Formulas.prettify(formula);
-
-				//set highlighting 
 				newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentStage,1)');
 				newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentStage,0)');
 
-				//code
+				//show code
 				newRow.insertCell(-1).innerHTML=(function()
 				{
-					var extra = Level3.isInList(field) ? " (L3)" : "" ;
-					return "<a href=variable.php?id="+field+">"+field+"</a>"+extra;
+					var extra = Level3.isInList(field) ? " (advanced)" : "" ;
+					return "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>"+extra;
 				})();
 
 				//description
-				newRow.insertCell(-1).innerHTML=Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
+				newRow.insertCell(-1).innerHTML = Info[field] ? (Info[field].description) : "<span style=color:#ccc>no description</span>";
 
 				/** value: Compute CurrentStage[field]() for each substage*/
-				(function(){
+				(function()
+				{
 					//the formula will be modified starting by the current field formula
-					var modification=formula;
+					var modification=formula; //string
 
 					//create an array of inputs and calculated variables to replace the formula
 					//go over this stage's inputs to gradually modify the formula
@@ -415,14 +421,9 @@
 
 					for(var s in substages)
 					{
-						//loop calculated variables, they need to exist inside each substage
-						cvs.forEach(function(cv)
-						{
-							substages[s][cv]=CurrentStage[cv]; //copy the function inside current substage
-						});
-
 						var modificationSubstage=modification.replace(/\[0\]/g,'['+s+']');
 						eval("CurrentStage['modification']="+modificationSubstage+";");
+
 						//value
 						var newCell=newRow.insertCell(-1);
 						newCell.title=prettyFormula;

@@ -4,18 +4,12 @@
 
 var Questions = 
 {
-	
-	"Are you producing biogas": ["wwt2","c_wwt50","c_ww50"],
-
-	"Are you valorizing biogas":["wwt3","c_wwt53","wwt11","wwt12"],
-
-	"Are you producing electrical energy":["wsg1","wsg2","wsg3","wsg4","wsa3","wwg1","wwg2","wwg3","wwg4","wwd4"],
-
-	"Do you have fuel engines to run pumps":["ww23","ww11","ws16","ws9"],
-
-	"Are you using truck transport to convey sludge to the disposal site":["ww24","ww9"],
-
-	"Is your topography flat":["wsd10","wsd11","wsd12","wsd13","wsd14"],
+	"Are you producing biogas": ["wwt_biog_pro","c_wwt_biog_fla","c_ww_biogas_flar"],
+	"Are you valorizing biogas":["wwt_biog_val","c_wwt_nrg_biog","wwt_nrg_biog","wwt_ch4_biog"],
+	"Are you producing electrical energy":["wsa_nrg_turb","wwd_nrg_recv","wsg_nrg_prod","wsg_nrg_sold","wwg_nrg_prod","wwg_nrg_sold"],
+	"Do you have fuel engines to run pumps":["ws_vol_fuel","ww_vol_fuel","c_ww_nrg_engines"],
+	"Are you using truck transport to convey sludge to the disposal site":["ww_dist_dis","ww_num_trip","c_ww_nrg_tsludge"],
+	"Is your topography flat":[],
 }
 
 Questions.isHidden = function(field)

@@ -253,7 +253,7 @@
 			#selectStage td[rowspan='3']{text-align:center;}
 			#selectStage label{cursor:pointer;display:block;min-height:100%;padding:0.5em}
 		</style>
-		<tr><th>Level 1<th>Level 2
+		<tr><th>Preview <th>Insight
 			<?php 
 				function printL1stage($alias,$name)
 				{
@@ -272,13 +272,15 @@
 							<img src=img/$alias.png> $name
 						</label>";
 				}
+
 				printL1stage("water","Water supply");
-				printL2stage("water","waterGen","Energy use and production", false);
+				printL2stage("water","waterGen","General",     false);
 				printL2stage("water","waterAbs","Abstraction", true);
 				printL2stage("water","waterTre","Treatment",   true);
 				printL2stage("water","waterDis","Distribution",true);
+
 				printL1stage('waste',"Wastewater");
-				printL2stage("waste","wasteGen","Energy use and production",false);
+				printL2stage("waste","wasteGen","General",   false);
 				printL2stage("waste","wasteCol","Collection",true);
 				printL2stage("waste","wasteTre","Treatment", true);
 				printL2stage("waste","wasteDis","Discharge", true);
@@ -299,7 +301,7 @@
 				<option value=0.452483345>Mexico
 				<option value=custom>--CUSTOM--
 			</select>
-			<td>Current value <input style=width:80px id=uw1 value=0 onchange=updateUW1(this.value)> (kg CO2)/kWh
+			<td>Current value <input style=width:80px id=uw1 value=0 onchange=updateUW1(this.value)> (kg CO<sub>2</sub>)/kWh
 		</table>
 	</fieldset>
 

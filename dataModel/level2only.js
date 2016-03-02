@@ -4,7 +4,7 @@ var Level2only= {};
 
 Level2only.list=
 [
-	"c_wwc51",
+	"not implemented",
 ]
 
 Level2only.isInList=function(code)
