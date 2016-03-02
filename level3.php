@@ -6,8 +6,8 @@
 	if(!isset($_GET['sublevel']))	die("ERROR: sublevel not specified");
 
 	/*
-	 * level: 		mandatory. possible values: {"Water","Wastewater"}
-	 * sublevel: 	mandatory. possible values: {"Abstraction","Treatment","Distribution","Collection","Treatment","Discharge"}
+	 * level: 	 mandatory. possible values: {"Water","Wastewater"}
+	 * sublevel: mandatory. possible values: {"Abstraction","Treatment","Distribution","Collection","Treatment","Discharge"}
 	 */
 	$level=$_GET['level'];
 	$sublevel=$_GET['sublevel'];
@@ -15,7 +15,6 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
-		button.updateL2{font-size:10px;padding:0;}
 		td{text-align:left}
 		th{vertical-align:middle}
 		table#substages td:not(.level2){text-align:right}
@@ -39,15 +38,19 @@
 		td.level2{color:white;text-align:center}
 		<?php
 			if($level=="Waste")
-			{?>
-				th{background:#bf5050}
-				a,a:visited{color:#bf5050}
-				td.level2{background:#bf5050}
-			<?php }
+			{
+				?>
+					th{background:#bf5050}
+					a,a:visited{color:#bf5050}
+					td.level2{background:#bf5050}
+				<?php
+			}
 			else
-			{?>
-				td.level2{background:#00aff1}
-			<?php }
+			{
+				?>
+					td.level2{background:#00aff1}
+				<?php 
+			}
 		?>
 	</style>
 	<script>
@@ -142,18 +145,10 @@
 			return sum;
 		}
 
-		/** update the level2 input with the sum of the level3*/
-		function updateL2(code,sum)
-		{
-			CurrentStage[code]=sum;
-			init()
-		}
-
 		/** update substages table */
 		function updateSubstagesTable()
 		{
 			/*table element*/ var t=document.getElementById('substages');
-
 			/*table headers */
 				while(t.rows[0].cells.length>1)t.rows[0].deleteCell(-1);
 				//go over substages: create a column for each
@@ -321,7 +316,6 @@
 					newRow.insertCell(-1).innerHTML=str
 				}
 			/*end update body*/
-
 			/*update counter*/ document.getElementById('counter').innerHTML=substages.length
 		}
 
@@ -331,14 +325,15 @@
 			var t=document.getElementById('outputs')
 			while(t.rows.length>1){t.deleteRow(-1)}
 
+			//new row
 			var newRow=t.insertRow(-1);
 
+			//headers
 			['Code','Description'].forEach(function(element)
 			{
 				var newTH=document.createElement('th'); newRow.appendChild(newTH);
 				newTH.innerHTML=element;
 			});
-
 			for(var s in substages)
 			{
 				var newTH=document.createElement('th'); 
@@ -346,12 +341,12 @@
 				newTH.innerHTML="Substage "+(parseInt(s)+1)+" "+
 				"<div style=font-weight:bold>"+substages[s].name+"</div>"
 			};
-
 			['LEVEL 2','Unit'].forEach(function(element)
 			{
 				var newTH=document.createElement('th'); newRow.appendChild(newTH);
 				newTH.innerHTML=element;
 			});
+			//end headers
 
 			var inputs=getInputs();
 			var cvs=[];
@@ -372,7 +367,6 @@
 				{
 					if(Level3.isInList(field)) continue;
 				}
-				
 
 				//exclude the "level2only" variables
 				if(Level2only.isInList(field)){continue;}
@@ -441,13 +435,12 @@
 
 				//unit
 				newRow.insertCell(-1).innerHTML=Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
-
 			}
 
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
 			var newTh=document.createElement('th');
-			newTh.setAttribute('colspan',4)
+			newTh.setAttribute('colspan',42)
 			newTh.style.borderBottom='none';
 			newTh.style.borderTop='none';
 			newRow.appendChild(newTh);
@@ -469,7 +462,6 @@
 			input.value=substages[substage][field]/multiplier;
 			element.appendChild(input)
 			input.select()
-			return
 		}
 
 		//update a field of the substage[index]
@@ -484,8 +476,8 @@
 		/** Update all tables */
 		function init()
 		{
-			updateOutputs();
 			updateSubstagesTable();
+			updateOutputs();
 			Sidebar.update();
 			updateAssessmentMenu();
 			updateResult();
@@ -521,23 +513,24 @@
 	<!--TITLE--><h1><?php echo $title?></h1>
 </div>
 
-<!--separator--><div style=margin-top:120px></div>
+<!--separator--><div style=margin-top:110px></div>
 <!--linear diagram--><?php include'linear.php'?>
 <!--HELP--><h4>You can subdivide this stage in multiple substages and turn on advanced inputs/outputs</h4>
 <!--type of assessment--><?php include'assessmentType.php'?>
 <!--SUBSTAGES TABLE-->
-<table id=substages style=margin:1em>
-	<tr>
-		<td colspan=2 style="text-align:center;width:300px;table-layout:fixed">
-			<!--substages counter-->
-			<div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
-			<!--new substage button-->
-			<button onclick=newSubstage() class=button>+ Add Substage</button>
+<table id=substages style=margin:1em> <tr>
+	<td colspan=2 style="text-align:center;min-width:400px;table-layout:fixed">
+		<!--substages counter-->
+		<div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
+		<!--new substage button-->
+		<button onclick=newSubstage() class=button>+ Add Substage</button>
 </table>
 
 <!--OUTPUTS TABLE-->
 <table id=outputs class=inline style=background:#f6f6f6> 
-	<tr><th colspan=42 style="background:white;border:none;color:black;padding-bottom:0.7em;font-size:17px">RESULTS - Key performance indicators</table>
+	<tr><th colspan=42 style="background:white;border:none;color:black;padding-bottom:0.7em;font-size:17px">
+		RESULTS - Key performance indicators
+</table>
 
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

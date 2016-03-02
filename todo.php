@@ -16,12 +16,13 @@
 		<tr><td>Level 1 changes<td>Wait</td>
 		<tr><td>Service levels<td>Wait</td>
 		<tr><td>New codes <td>NOW</td>
+		<tr><td>Level 2 only &amp; level 3 only codes<td>Pending</td>
+		<tr><td>Questions codes update<td>Pending</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
+		<tr><td>Update graphs<td>Pending</td>
 		<tr><td>Bird's eye view<td>Pending</td>
-		<tr><td>PI units be changed by user via dropdown menu<td>Difficult</td>
 		<tr><td>Create Warning in new system button<td>Pending</td>
 		<tr><td>Next/back buttons at each stage<td>Pending</td>
-		<tr><td>Superindexs &amp; subindexs<td>Pending</td>
 </table>
 
 <?php include'selection.php'?>

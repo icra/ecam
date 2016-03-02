@@ -21,8 +21,6 @@
 	<style>
 		td.input input { margin:0;padding:0;width:95%;}
 		td.input       { width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
-
-		/*tables*/
 		table#outputs tr:hover { background:#ccc; }
 		table#outputs th:not(.tableHeader) {background:#c9ab98}
 		table#otherOutputs th:not(.tableHeader) {background:#c9ab98}
@@ -37,9 +35,9 @@
 		th.tableHeader
 		{
 			background:white;
-			color:#000;
+			color:#666;
 			font-size:15px;
-			padding-bottom:0.7em;
+			padding:0.7em 0 0.2em 0;
 			font-weight:normal;
 			border:none;
 			text-align:left;
@@ -299,9 +297,16 @@
 					//value per water volume
 					['reside','servic','volume'].forEach(function(category)
 					{
-						newRow.insertCell(-1).innerHTML=(function()
+						var newCell=newRow.insertCell(-1);
+
+						//determine where is the field to be highlighted stored
+						var hlfield = (sublevel=='false' || category=='reside' || category=='servic') ? Normalization[level][category] : Normalization[level][sublevel][category];
+						console.log(hlfield);
+						newCell.setAttribute('onmouseover',"Formulas.hlField('"+hlfield+"',1)")
+						newCell.setAttribute('onmouseout',"Formulas.hlField('"+hlfield+"',0)")
+						newCell.innerHTML=(function()
 						{
-							var norm=Normalization.normalize(category,value,level,sublevel);
+							var norm=Normalization.normalize(category,field,level,sublevel);
 							return format(norm);
 						})();
 					});
@@ -310,7 +315,7 @@
 
 			//if the table is empty, add a warning
 			if(t.rows.length<3)
-				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#999>There are no formulas in this level</span>";
+				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#999>There are no GHG formulas in this level</span>";
 
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
@@ -521,9 +526,13 @@
 ?>
 
 <!--IO-->
-<div style="text-align:left;padding:0 1em 0 1em">
+<div id=io>
+	<style>
+		#io table{width:100%}
+	</style>
+
 	<!--INPUTS-->
-	<table id=inputs class=inline style="width:49%;">
+	<table id=inputs class=inline style="width:47%">
 		<tr><th colspan=5 class=tableHeader>INPUTS
 		<tr>
 			<th>Description
@@ -533,22 +542,20 @@
 	</table>
 
 	<!--OUTPUTS-->
-	<div class=inline style="width:49%">
+	<div class=inline style="width:47%">
 		<!--GHG-->
 		<table id=outputs style="background:#f6f6f6;">
-			<tr><th colspan=7 class=tableHeader>RESULTS - GHG
+			<tr><th colspan=7 class=tableHeader>INDICATORS - Greenhouse gas emissions (GHG)
 			<tr>
 				<th>Origin
-				<th>Value (kgCO2e)
-				<th>GHG per inhabitant (kgCO2e/inhabitant)
-				<th>GHG per serviced inhabitant (kgCO2e/serviced inhabitant)
-				<th>GHG per water volume (kgCO2e/m<sup>3</sup>)
+				<th>Value (kgCO<sub>2</sub>eq)
+				<th>Per inhabitant (kgCO<sub>2</sub>eq/inhabitant)
+				<th>Per serviced inhabitant (kgCO<sub>2</sub>eq/serviced inhabitant)
+				<th>Per water volume (kgCO<sub>2</sub>eq/m<sup>3</sup>)
 		</table>
 
-		<br><br><br>
-
 		<!--other-->
-		<table id=otherOutputs style="background:#f6f6f6;">
+		<table id=otherOutputs style="background:#f6f6f6;margin-top:1em">
 			<tr><th colspan=4 class=tableHeader>OTHER INDICATORS
 			<tr>
 				<th title=Performance style=cursor:help>P

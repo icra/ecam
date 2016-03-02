@@ -5,13 +5,14 @@ Graphs.graph1=function(withTables,container)
 	//pointers
 	var ws = Global.Water;
 	var ww = Global.Waste;
-	var uw1 = Global.UWS.uw1;
 	var Days = Global.General.Days();
 	//values
-	var wsNon=ws.c_ws51()*365/Days;
-	var wsYes=ws.ws5*uw1*365/Days;
-	var wwNon=(ww.c_ww57()+ww.c_ww55()+ww.c_ww53()+ww.c_ww51()+ww.c_ww52()+ww.c_ww54())*365/Days;
-	var wwYes=ww.ww3*uw1*365/Days;
+	var wsNon=ws.ws_KPI_GHG_ne();
+	var wsYes=ws.ws_KPI_GHG_elec();
+
+	var wwNon=ww.ww_KPI_GHG_ne_ch4_wwt()+ww.ww_KPI_GHG_ne_n2o_tre()+ww.ww_KPI_GHG_ne_tsludge()+ww.ww_KPI_GHG_ne_ch4_unt()+ww.ww_KPI_GHG_ne_n2o_unt()+ww.ww_KPI_GHG_ne_engines();
+	var wwYes=ww.ww_KPI_GHG_elec();
+
 	//actual graph data
 	var data=google.visualization.arrayToDataTable([
 		['Stage', 'Emissions'],

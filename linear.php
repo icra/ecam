@@ -1,5 +1,4 @@
 <!--LINEAR DIAGRAM: file inside edit.php, level3.php and stages.php-->
-
 <div id=linearDiagram>
 	<div>
 		<img class=l1 stage=water    src=img/water.png    onclick=window.location="edit.php?level=Water"                       title="WATER SUPPLY (L1)"> 
@@ -14,21 +13,18 @@
 		<img class=l2 stage=waterGen src=img/waterGen.png onclick=window.location="edit.php?level=Water&sublevel=General" 	   title="Energy (L2)">
 		<img class=l2 stage=wasteGen src=img/wasteGen.png onclick=window.location="edit.php?level=Waste&sublevel=General"      title="Energy (L2)">
 	</div>
-
 	<hr id=line>
-
 </div>
 
 <style>
-	#linearDiagram {margin:5px 0 5px 0}
-	/* linear diagram images */
-	#linearDiagram img {cursor:pointer;margin:0 0.8em 0 0.8em;vertical-align:middle;padding:0} /*icons inside buttons to navigate to Level2*/
-	#linearDiagram img.l1 {width:43px;} 
-	#linearDiagram img.l2 {width:28px;}
-	#linearDiagram img{border-radius:50%;border:2px solid transparent}
-	#linearDiagram img.selected{border:2px solid}
-	#linearDiagram img:hover {border:2px solid black}
-	#linearDiagram #line {background-color:black;position:relative; transform:translateY(-23px) translateX(-72px);z-index:-1;width:425px;}
+	div#linearDiagram {margin:5px 0 5px 0}
+	div#linearDiagram img {cursor:pointer;margin:0 0.8em 0 0.8em;vertical-align:middle;padding:0} /*icons inside buttons to navigate to Level2*/
+	div#linearDiagram img.l1 {width:43px;} 
+	div#linearDiagram img.l2 {width:28px;}
+	div#linearDiagram img{border-radius:50%;border:2px solid transparent}
+	div#linearDiagram img.selected{border:2px solid #d7bfaf}
+	div#linearDiagram img:hover {border:2px solid black}
+	div#linearDiagram #line {background-color:black;position:relative; transform:translateY(-23px) translateX(-72px);z-index:-1;width:425px;}
 </style>
 
 <script>

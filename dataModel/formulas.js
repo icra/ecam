@@ -29,7 +29,7 @@ var Formulas = {
 		object=object||Global;
 		var matches=[];
 		var match;
-		var reg=new RegExp('\\W'+id+"\\D");
+		var reg=new RegExp('\\W'+id+"\\W");
 		for(var field in object)
 		{
 			if(field==id)continue;

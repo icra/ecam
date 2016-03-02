@@ -17,7 +17,7 @@
 			type=radio 
 			value=complete   
 			onchange="updateAssessment(this.value)">
-		Complete
+		Advanced
 	</label>
 </table>
 

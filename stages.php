@@ -20,15 +20,26 @@
 
 <!--level 3 overview-->
 <fieldset class=inline>
-	<legend>System overview</legend>
+	<legend>System assessment overview</legend>
 	<table id=l3overview>
-		<tr><th>Stage<th>#Substages
-		<tr><td><a stage=waterAbs href=level3.php?level=Water&sublevel=Abstraction >Water Abstraction    </a><td><script>document.write(Global.Substages.Water.Abstraction.length)</script>
-		<tr><td><a stage=waterTre href=level3.php?level=Water&sublevel=Treatment   >Water Treatment      </a><td><script>document.write(Global.Substages.Water.Treatment.length)</script>
-		<tr><td><a stage=waterDis href=level3.php?level=Water&sublevel=Distribution>Water Distribution   </a><td><script>document.write(Global.Substages.Water.Distribution.length)</script>
-		<tr><td><a stage=wasteCol href=level3.php?level=Waste&sublevel=Collection  >Wastewater Collection</a><td><script>document.write(Global.Substages.Waste.Collection.length)</script>
-		<tr><td><a stage=wasteTre href=level3.php?level=Waste&sublevel=Treatment   >Wastewater Treatment </a><td><script>document.write(Global.Substages.Waste.Treatment.length)</script>
-		<tr><td><a stage=wasteDis href=level3.php?level=Waste&sublevel=Discharge   >Wastewater Discharge </a><td><script>document.write(Global.Substages.Waste.Discharge.length)</script>
+		<tr><th>Stage
+			<th>Nº of substages
+			<th>Type of assessment
+		<script>
+			function tableRow(alias,level,sublevel,name)
+			{
+				document.write("<tr><td><a stage="+alias+" href=level3.php?level="+level+"&sublevel="+sublevel+">"+name+
+					"<td>"+Global.Substages[level][sublevel].length+
+					"<td>"+Global.Configuration.Assessment[level][sublevel]+
+					"")
+			}
+			tableRow('waterAbs','Water','Abstraction' ,'Water Abstraction');
+			tableRow('waterTre','Water','Treatment'   ,'Water Treatment');
+			tableRow('waterDis','Water','Distribution','Water Distribution');
+			tableRow('wasteCol','Waste','Collection'  ,'Wastewater Collection');
+			tableRow('wasteTre','Waste','Treatment'   ,'Wastewater Treatment');
+			tableRow('wasteDis','Waste','Discharge'   ,'Wastewater Discharge');
+		</script>
 	</table>
 	<script>
 		(function()
