@@ -76,22 +76,95 @@
 		{
 			var t = document.querySelector('#questions');
 			while(t.rows.length>0)t.deleteRow(-1);
+
 			for(var question in Global.Configuration["Yes/No"])
 			{
-				//check for biogas valorised
-				if(Global.Configuration["Yes/No"]["Are you producing biogas"]==0 && question=="Are you valorizing biogas")
-				{
-					Global.Configuration["Yes/No"]["Are you valorizing biogas"]=0;
-					continue;
-				}
-
 				var currentAnswer = Global.Configuration["Yes/No"][question];
 				var checked = currentAnswer ? "checked":"";
 				var newRow = t.insertRow(-1);
 				newRow.insertCell(-1).innerHTML=question+"?"
 				newRow.insertCell(-1).innerHTML=(function()
 				{
-					var r="<label>No "+
+					var r;//ret value
+
+					//this code here should be refactored in an appropiate place
+						var as = Global.Configuration['Active Stages'];
+						if(question=="Are you producing biogas")
+						{
+							if(as.waste==0 && as.wasteTre==0)
+							{
+								Global.Configuration["Yes/No"][question]=0;
+								newRow.style.backgroundColor='#f6f6f6';
+								newRow.style.color='#aaa';
+								return "Only if [ww] or [wwt]"; 
+							}
+						}
+						//check for biogas valorised
+						if(question=="Are you valorizing biogas")
+						{
+							if(Global.Configuration["Yes/No"]["Are you producing biogas"]==0)
+							{
+								Global.Configuration["Yes/No"][question]=0;
+								newRow.style.backgroundColor='#f6f6f6';
+								newRow.style.color='#aaa';
+								return "Only if ['Are you producing biogas'] is [Yes]";
+							}
+						}
+
+						if(question=="Are you producing electrical energy")
+						{
+							if(as.waterGen==0 && as.wasteGen==0 && as.waterAbs==0 && as.wasteDis==0)
+							{
+								Global.Configuration["Yes/No"][question]=0;
+								newRow.style.backgroundColor='#f6f6f6';
+								newRow.style.color='#aaa';
+								return "Only if [wsg] or [wsa] or [wwg] or [wwd]"; 
+							}
+						}
+						if(question=="Do you have fuel engines to run pumps")
+						{
+							if(as.water==0 && as.waste==0)
+							{
+								Global.Configuration["Yes/No"][question]=0;
+								newRow.style.backgroundColor='#f6f6f6';
+								newRow.style.color='#aaa';
+								return "Only if [ws] or [ww]"; 
+							}
+						}
+						if(question=="Are you using truck transport to convey sludge to the disposal site")
+						{
+							if(as.waste==0)
+							{
+								Global.Configuration["Yes/No"][question]=0;
+								newRow.style.backgroundColor='#f6f6f6';
+								newRow.style.color='#aaa';
+								return "Only if [ww]"; 
+							}
+						}
+						if(question=="Is your topography flat")
+						{
+							if(as.waterDis==0)
+							{
+								Global.Configuration["Yes/No"][question]=0;
+								newRow.style.backgroundColor='#f6f6f6';
+								newRow.style.color='#aaa';
+								return "Only if [wsd]"; 
+							}
+						}
+						if(question=="Is any untreated industrial or commercial wastewater connected")
+						{
+							if(as.wasteTre==0)
+							{
+								Global.Configuration["Yes/No"][question]=0;
+								newRow.style.backgroundColor='#f6f6f6';
+								newRow.style.color='#aaa';
+								return "Only if [wwt]"; 
+							}
+						}
+					//above code works but it should be moved
+
+
+					r="<label>No "+
 							"<input name='"+question+"' type=radio value=0 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" checked></label> "+
 							"<label>Yes "+
 							"<input name='"+question+"' type=radio value=1 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" "+checked+"></label> ";
@@ -214,10 +287,10 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Configuration</h1>
 
-<!--activate all
+<!--activate all debug button
 -->
-<div style=margin:0.5em>
-	<button class=button onclick="activateAllStages()">activate all</button>
+<div style="margin:0.5em 0 0.5em 0">
+	<button class=button onclick="activateAllStages()">activate all (debug)</button>
 	<script>
 		function activateAllStages()
 		{
@@ -238,14 +311,14 @@
 			init();
 		}
 	</script>
-<div>
+</div>
 
 <!--SUBTITLE--><h4>Click on the left table to activate stages. The table on the right contains additional information about your system</h4>
 
-<!--CONFIGURATION (STAGES)-->
-<div class=inline style=margin-right:2em>
-	<!--SELECT STAGE-->
-	<table id=selectStage class=inline>
+<!--container-->
+<div>
+	<!--left: STAGES-->
+	<table id=selectStage class=inline style="margin-left:auto">
 		<style>
 			#selectStage img{width:40px;vertical-align:middle}
 			#selectStage th{width:220px;}
@@ -286,55 +359,55 @@
 				printL2stage("waste","wasteDis","Discharge", true);
 			?>
 	</table>
-</div>
 
-<!--QUESTIONS & ADDITIONAL INFO-->
-<div style=text-align:left class=inline>
-	<!--conv_kwh_co2-->
-	<fieldset>
-		<legend> Conversion factor for grid electricity (<a href=variable.php?id=conv_kwh_co2>info</a>) </legend>
-		<table><tr><th>
-			<select id=countryUW1 onchange=updateUW1(this.value)>
-				<option value=0>--enter custom value or select country--
-				<option value=0.237721212>Peru
-				<option value=0.626742612>Thailand
-				<option value=0.452483345>Mexico
-				<option value=custom>--CUSTOM--
-			</select>
-			<td>Current value <input style=width:80px id=uw1 value=0 onchange=updateUW1(this.value)> (kg CO<sub>2</sub>)/kWh
-		</table>
-	</fieldset>
+	<!--right: ADDITIONAL INFO-->
+	<div class=inline style="width:45%;text-align:left;margin-left:1em">
+		<!--conv_kwh_co2-->
+		<fieldset>
+			<legend> Conversion factor for grid electricity (<a href=variable.php?id=conv_kwh_co2>info</a>) </legend>
+			<table><tr><th>
+				<select id=countryUW1 onchange=updateUW1(this.value)>
+					<option value=0>--enter custom value or select country--
+					<option value=0.237721212>Peru
+					<option value=0.626742612>Thailand
+					<option value=0.452483345>Mexico
+					<option value=custom>--CUSTOM--
+				</select>
+				<td>Current value <input style=width:80px id=uw1 value=0 onchange=updateUW1(this.value)> (kg CO<sub>2</sub>)/kWh
+			</table>
+		</fieldset>
 
-	<!--currency: 3 letters-->
-	<fieldset>
-		<legend>Currency: <span id=currency></span></legend>
-		Write new currency (3 letters max):
-		<input size=3 maxlength=3 placeholder="new" onchange=updateField(Global.General,"Currency",this.value)>
-	</fieldset>
+		<!--currency: 3 letters-->
+		<fieldset>
+			<legend>Currency: <span id=currency></span></legend>
+			Write new currency (3 letters max):
+			<input size=3 maxlength=3 placeholder="new" onchange=updateField(Global.General,"Currency",this.value)>
+		</fieldset>
 
-	<!--questions-->
-	<fieldset>
-		<legend>Additional questions (<a href=questions.php>info</a>)</legend>
-		<table id=questions>
-			<style>
-				#questions td{border-top:none;border-left:none;border-right:none}
-			</style>
-		</table>
-	</fieldset>
+		<!--questions-->
+		<fieldset>
+			<legend>Additional questions (<a href=questions.php>info</a>)</legend>
+			<table id=questions>
+				<style>
+					#questions td{border-top:none;border-left:none;border-right:none}
+				</style>
+			</table>
+		</fieldset>
 
-	<!--fuel-->
-	<fieldset id=fuel style=display:none>
-		<legend>Fuel options (<a href=fuelInfo.php>info</a>)</legend>
-		<table id=fuelSelection class=inline>
-			<style>
-				#fuelSelection tr.inactive {background:#ccc;color:#999}
-			</style>
-			<tr><th>Stage<th>Selected Fuel type
-			<tr stage=water>   <td>Level 1 - Water supply (engines)
-			<tr stage=waste>   <td>Level 1 - Wastewater (engines)
-			<tr stage=wasteTre><td>Level 2 - Wastewater treatment (vehicles)
-		</table>
-	</fieldset>
+		<!--fuel-->
+		<fieldset id=fuel style=display:none>
+			<legend>Fuel options (<a href=fuelInfo.php>info</a>)</legend>
+			<table id=fuelSelection class=inline>
+				<style>
+					#fuelSelection tr.inactive {background:#ccc;color:#999}
+				</style>
+				<tr><th>Stage<th>Selected Fuel type
+				<tr stage=water>   <td>Level 1 - Water supply (engines)
+				<tr stage=waste>   <td>Level 1 - Wastewater (engines)
+				<tr stage=wasteTre><td>Level 2 - Wastewater treatment (vehicles)
+			</table>
+		</fieldset>
+	</div>
 </div>
 
 <!--PREV & NEXT BUTTONS-->
@@ -346,8 +419,7 @@
 		function nextPage()
 		{
 			event.stopPropagation();
-
-			//window.location="birds.php"; return;
+			window.location="birds.php"; return;
 
 			if(Global.Configuration['Active Stages'].water==1){window.location="edit.php?level=Water";return;}
 			if(Global.Configuration['Active Stages'].waste==1){window.location="edit.php?level=Waste";return;}

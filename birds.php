@@ -16,20 +16,46 @@
 			var t=document.getElementById('inputs');
 			//reset table
 			while(t.rows.length>0){t.deleteRow(-1)}
+
 			//WATER inputs
 			var newCell=t.insertRow(-1).insertCell(-1)
 			newCell.setAttribute('colspan',5);
-			newCell.innerHTML="Inputs WS &rarr; <a style=color:white href=edit.php?level=Water>Go</a>";
 			newCell.style.color='white'
 			newCell.style.backgroundColor='#0aaeef'
-			updateTable(Global.Water,'inputs');
+			if(Global.Configuration['Active Stages'].water==1)
+			{
+				newCell.innerHTML="Inputs <a style=color:white href=edit.php?level=Water>Water supply</a>";
+				updateTable(Global.Water,'inputs');
+			}
+			else
+			{
+				newCell.innerHTML="Water supply is not active";
+				//display "inputs not shown"
+				newCell=t.insertRow(-1).insertCell(-1);
+				newCell.setAttribute('colspan',5);
+				newCell.style.textAlign='center';
+				newCell.innerHTML="<i>Water supply inputs not shown</i>";
+			}
+
 			//WASTEWATER inputs
 			var newCell=t.insertRow(-1).insertCell(-1)
 			newCell.setAttribute('colspan',5);
-			newCell.innerHTML="Inputs WW &rarr; <a style=color:white href=edit.php?level=Waste>Go</a>";
 			newCell.style.color='white'
 			newCell.style.backgroundColor='#bf5050'
-			updateTable(Global.Waste,'inputs');
+			if(Global.Configuration['Active Stages'].waste==1)
+			{
+				newCell.innerHTML="Inputs <a style=color:white href=edit.php?level=Waste>Wastewater</a>";
+				updateTable(Global.Waste,'inputs');
+			}
+			else
+			{
+				newCell.innerHTML="Wastewater is not active";
+				//display "inputs not shown"
+				newCell=t.insertRow(-1).insertCell(-1);
+				newCell.setAttribute('colspan',5);
+				newCell.style.textAlign='center';
+				newCell.innerHTML="<i>Wastewater inputs not shown</i>";
+			}
 		}
 
 		/** Redisplay table */
@@ -61,8 +87,8 @@
 				newCell.innerHTML=(function()
 				{
 					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
-					var code = "<a href=variable.php?id="+field+">"+field+"</a>";
-					return description+" ("+code+")";
+					var link = " (<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>)";
+					return description+link;
 				})();
 
 				//editable cell if not CV
@@ -172,9 +198,8 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-
-<!--TITLE--><h1>Bird's eye view (Level 1) of <script>document.write(Global.General.Name)</script></h1>
-<!--description--><h4>Water supply system (WS) and Wastewater system (WW)</h4>
+<!--linear--><?php include'linear.php'?>
+<!--TITLE--><h1>Bird's eye view of <script>document.write(Global.General.Name)</script></h1>
 </center>
 
 <!--tables-->

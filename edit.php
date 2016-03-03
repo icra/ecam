@@ -525,7 +525,7 @@
 		{
 			$color = ($level=="Waste")?"lightcoral":"lightblue";
 			echo "
-				Going to advanced assessment will overwrite current inputs from this stage
+				&#9888; Going to advanced assessment will overwrite current inputs from this stage
 				<button 
 					class=button
 					style='background:$color;'
@@ -546,11 +546,10 @@
 	}
 ?>
 
-
 <!--IO-->
-<div id=io> <style> #io table{width:100%} </style>
+<div id=io>
 	<!--INPUTS-->
-	<table id=inputs class=inline style="width:47%;padding-right:1em">
+	<table id=inputs class=inline style="margin-left:auto">
 		<tr><th colspan=5 class=tableHeader>INPUTS
 		<tr>
 			<th>Description
@@ -558,10 +557,11 @@
 			<th>Unit
 			<th>Data quality
 	</table>
+
 	<!--OUTPUTS-->
-	<div class=inline style="width:47%">
+	<div class=inline style="width:45%;margin-left:1em">
 		<!--GHG-->
-		<table id=outputs style="background:#f6f6f6;">
+		<table id=outputs style="width:100%;background:#f6f6f6;">
 			<tr><th colspan=7 class=tableHeader>OUTPUTS - Greenhouse gas emissions (GHG) | <a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity">Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
 			<tr>
 				<th>Origin
@@ -572,7 +572,7 @@
 		</table>
 
 		<!--other-->
-		<table id=otherOutputs style="background:#f6f6f6;margin-top:1em">
+		<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:1em">
 			<tr><th colspan=4 class=tableHeader>OUTPUTS - Service level indicators
 			<tr>
 				<th title=Performance style=cursor:help>P

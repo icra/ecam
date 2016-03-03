@@ -24,7 +24,7 @@
 				if(Info[code]==undefined)
 					link = "<span title='not found' style=color:red>"+code+"</span>, "
 				else
-					link = "<a title='"+Info[code].description+"' href=variable.php?id="+code+">"+code+"</a>, "
+					link = "<a title='"+Info[code].description+"' href=variable.php?id="+code+">"+code+"</a><br> "
 					
 				document.write(link)
 			}

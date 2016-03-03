@@ -22,9 +22,9 @@ var Global = {
 		"ws_resi_pop"   :0,
 		"ws_serv_pop"   :0,
 		"ws_nrg_cons"   :0,
-		"ws_run_cost"   :0,
-		"ws_nrg_cost"   :0,
 		"ws_vol_auth"   :0,
+		"ws_nrg_cost"   :0,
+		"ws_run_cost"   :0,
 		"ws_vol_fuel"   :0,
 		"ws_non_revw"   :0,
 		ws_KPI_GHG_elec:function(){return this.ws_nrg_cons*Global.General.conv_kwh_co2},
@@ -88,13 +88,13 @@ var Global = {
 	/** Level 1 - Wastewater*/
 	Waste:{
 		"ww_resi_pop" :0,
-		"ww_serv_pop" :0,
 		"ww_conn_pop" :0,
-		"ww_vol_wwtr" :0,
+		"ww_serv_pop" :0,
 		"ww_nrg_cons" :0,
-		"ww_run_cost" :0,
-		"ww_nrg_cost" :0,
 		"ww_vol_coll" :0,
+		"ww_vol_wwtr" :0,
+		"ww_nrg_cost" :0,
+		"ww_run_cost" :0,
 		"ww_num_trip" :0,
 		"ww_dist_dis" :0,
 		"ww_n2o_effl" :0,
@@ -250,13 +250,13 @@ var Global = {
 
 		"Yes/No":
 		{
-			"Are you producing biogas"                                           :0,
-			"Are you valorizing biogas"                                          :0,
 			"Are you producing electrical energy"                                :0,
 			"Do you have fuel engines to run pumps"                              :0,
-			"Are you using truck transport to convey sludge to the disposal site":0,
 			"Is your topography flat"                                            :0,
-			"Is any untreated industrial or commercial wastewater connected"          :0,
+			"Are you using truck transport to convey sludge to the disposal site":0,
+			"Are you producing biogas"                                           :0,
+			"Are you valorizing biogas"                                          :0,
+			"Is any untreated industrial or commercial wastewater connected"     :0,
 		},
 	},
 }

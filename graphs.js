@@ -91,7 +91,7 @@ Graphs.graph2=function(withTable,container)
 		pieHole:0.4,
 		//width:800,
 		//height:400,
-		title:"L1 Energy consumption",
+		title:"L1 Energy consumption (kWh)",
 		slices:
 		{
 			0:{ color: '#0aaeef' },

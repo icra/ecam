@@ -10,6 +10,7 @@ var Questions =
 	"Do you have fuel engines to run pumps":["ws_vol_fuel","ww_vol_fuel","c_ww_nrg_engines"],
 	"Are you using truck transport to convey sludge to the disposal site":["ww_dist_dis","ww_num_trip","c_ww_nrg_tsludge"],
 	"Is your topography flat":[],
+	"Is any untreated industrial or commercial wastewater connected":[/*it's used to calculate c_wwt_ann_ndis*/],
 }
 
 Questions.isHidden = function(field)

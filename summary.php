@@ -38,6 +38,7 @@
 			while(t.rows.length>1)t.deleteRow(-1)
 			t.innerHTML+=tableRows(Global.Water,"Water supply", "water", "edit.php?level=Water")
 			t.innerHTML+=tableRows(Global.Waste,"Wastewater",   "waste", "edit.php?level=Waste")
+			if(t.rows.length<2) t.insertRow(-1).insertCell(-1).innerHTML="no active stages";
 		}
 
 		function updateLevel2()
@@ -53,6 +54,8 @@
 			t.innerHTML+=tableRows(Global.Waste.Collection,	  "Wastewater Collection",               "wasteCol", "edit.php?level=Waste&sublevel=Collection")
 			t.innerHTML+=tableRows(Global.Waste.Treatment,	  "Wastewater Treatment",                "wasteTre", "edit.php?level=Waste&sublevel=Treatment")
 			t.innerHTML+=tableRows(Global.Waste.Discharge,	  "Wastewater Discharge",                "wasteDis", "edit.php?level=Waste&sublevel=Discharge")
+
+			if(t.rows.length<2) t.insertRow(-1).insertCell(-1).innerHTML="no active stages";
 		}
 
 		function updateCounts()
@@ -121,6 +124,7 @@
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
+<!--linear--><?php include"linear.php"?>
 <!--TITLE--><h1>Summary — All <?php echo $type?>s</h1>
 <!--STAGES--><?php include"activeStages.php"?>
 
@@ -129,11 +133,11 @@
 	<h4>All active <?php echo $type?>s (sorted by stage)</h4>
 	<!--level 1-->
 	<div class=inline style="font-size:11px;width:45%;padding:0">
-		<table style="width:100%" level=1><tr><th colspan=5>Level 1</table>
+		<table style="width:100%" level=1><tr><th colspan=5>Preview</table>
 	</div>
 	<!--level 2-->
 	<div class=inline style="font-size:11px;width:45%;padding:0">
-		<table style="width:100%" level=2><tr><th colspan=5>Level 2</table>
+		<table style="width:100%" level=2><tr><th colspan=5>Insight</table>
 	</div>
 </div>
 

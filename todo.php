@@ -14,13 +14,8 @@
 	<tr><th>Task<th>Status
 	<tr><td colspan=2 class=taskgroup>BACK-END
 		<tr><td>Level 1 changes<td>Wait</td>
-		<tr><td>Service levels<td>Wait</td>
-		<tr><td>New codes <td>NOW</td>
-		<tr><td>Level 2 only &amp; level 3 only codes<td>Pending</td>
-		<tr><td>Questions codes update<td>Pending</td>
+		<tr><td>Level 3 codes<td>Pending</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
-		<tr><td>Update graphs<td>Pending</td>
-		<tr><td>Bird's eye view<td>Pending</td>
 		<tr><td>Create Warning in new system button<td>Pending</td>
 		<tr><td>Next/back buttons at each stage<td>Pending</td>
 </table>
