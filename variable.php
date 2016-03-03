@@ -61,7 +61,7 @@
 			if(sublevel!=0)
 			{
 				var url = Level3.isInList(id) ? "level3.php" : "edit.php";
-				newCell.innerHTML+="<a href="+url+"?level="+level+"&sublevel="+sublevel+">"+levelAlias+" / "+sublevel+"</a>"
+				newCell.innerHTML+="<a href="+url+"?level="+level+"&sublevel="+sublevel+">"+levelAlias+" "+sublevel+"</a>"
 			}
 			else newCell.innerHTML="<a href=edit.php?level="+level+">"+levelAlias+"</a>"
 			//Explanation
@@ -302,6 +302,7 @@
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
+<!--linear diagram--><?php include'linear.php'?>
 
 <script>
 	if(!Info[id])

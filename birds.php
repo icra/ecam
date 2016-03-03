@@ -143,6 +143,14 @@
 			var multiplier=Units.multiplier(field);
 			var currentValue=obj[field]/multiplier;
 			input.value=currentValue;
+			input.onkeydown=function(event)
+			{
+				switch(event.which)
+				{
+					case 38:input.value++;break;
+					case 40:input.value--;break;
+				}
+			}
 			element.appendChild(input);
 			input.select();
 		}
@@ -175,8 +183,11 @@
 </div>
 
 <!--graphs-->
-<div id=graphs class=inline style="width:55%">
-	<style>#graphs div[id^='graph']{border:1px solid #ccc;border-radius:0.2em}</style>
+<div id=graphs class=inline style="width:55%;">
+	<style> 
+		#graphs table{margin:auto}
+		#graphs button{display:block;margin:auto} 
+	</style>
 	<div id=graph1 class=inline style=max-width:45%></div>
 	<div id=graph2 class=inline style=max-width:45%></div>
 	<div id=graph3 style=margin-top:2px></div>
@@ -185,14 +196,5 @@
 		google.charts.setOnLoadCallback(init)
 	</script>
 </div>
-
-<center><hr style="color:black;margin:1em 0 1em 0">
-
-<!--service level pis-->
-<table>
-	<tr><th colspan=5>Service level indicators
-	<tr><td>Indicator 1<td>Name<td>Value<td>Unit
-</table>
-
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

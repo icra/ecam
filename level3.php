@@ -498,6 +498,7 @@
 		}
 	</style>
 	<!--NAVBAR--><?php include"navbar.php"?>
+	<!--linear diagram--><?php include'linear.php'?>
 	<!--TITLE-->
 	<?php 
 		//Navigable <h1>title</h1>
@@ -513,9 +514,8 @@
 	<style> h1 {text-align:left;padding-left:20em} </style>
 	<!--TITLE--><h1><?php echo $title?></h1>
 </div>
+<!--separator--><div style=margin-top:180px></div>
 
-<!--separator--><div style=margin-top:110px></div>
-<!--linear diagram--><?php include'linear.php'?>
 <!--HELP--><h4>You can subdivide this stage in multiple substages and turn on advanced inputs/outputs</h4>
 <!--type of assessment--><?php include'assessmentType.php'?>
 <!--SUBSTAGES TABLE-->

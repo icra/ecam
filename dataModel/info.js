@@ -82,18 +82,16 @@ var Info = {
 	"wsg_nrg_prod":{description:"Energy produced", magnitude:"Energy", unit:"kWh", explanation:"Energy produced", },
 	"wsg_nrg_sold":{description:"Energy sold", magnitude:"Energy", unit:"kWh", explanation:"Energy sold", },
 	"wsg_heat_nrg":{description:"Heat energy valorized from water", magnitude:"Energy", unit:"kWh", explanation:"Heat energy valorized from water", },
-	wsg_KPI_GHG_elec:{description:"Sum from electricity in Abstraction, Treatment and Distribution",         magnitude:"Mass",       unit:"kgCO2e", explanation:"GHG Emissions from electricity consumption in all stages of urban drinking water system", },
+	wsg_KPI_GHG_elec:{description:"From electricity (sum for Abstraction, Treatment and Distribution stages)",         magnitude:"Mass",       unit:"kgCO2e", explanation:"GHG Emissions from electricity consumption in all stages of urban drinking water system", },
+	wsg_KPI_vol     :{description:"Volume of water (sum for Abstraction, Treatment and Distribution stages)", magnitude:"Volume", unit:"m3", explanation:"Sum of all water volumes for all water stages",},
+	wsg_KPI_nrg_cons:{description:"Total electric energy consumption (sum for Abstraction, Treatment and Distribution stages)",      magnitude:"Energy", unit:"kWh", explanation:"Electric energy consumption including both from the grid and self-produced, for the water stages, by the undertaking during the entire assessment period", },
 
 	//L2 WSA
 	"wsa_nrg_cons":{description:"Total electric energy consumption",      magnitude:"Energy", unit:"kWh", explanation:"Electric energy consumption including both from the grid and self-produced, for the water abstraction unit, by the undertaking during the entire assessment period", },
 	"wsa_vol_conv":{description:"Volume of conveyed water",               magnitude:"Volume", unit:"m3", explanation:"Sum of the volume of water conveyed (gravity or pumped) in the water abstraction unit that are the responsibility of the undertaking, during the assessment period", },
 	"wsa_nrg_turb":{description:"Electric energy produced from turbines", magnitude:"Energy", unit:"kWh", explanation:"Sum of energy recovered during the assessment period by all turbines for abstracted water managed by the undertaking", },
 	wsa_KPI_GHG_elec:{description:"From electricity",         magnitude:"Mass",       unit:"kgCO2e", explanation:"GHG Emissions from electricity consumption in the Abstraction stage", },
-	wsa_KPI_std_nrg_cons:{description:"Standardised Energy Consumption",                                           magnitude:"Energy", unit:"kWh/m3/100m", explanation:"", },
 	wsa_KPI_nrg_recovery:{description:"Energy recovery per conveyed water",                                        magnitude:"Energy/Volume", unit:"kWh/m3", explanation:"Unit energy recovered in water conveyance", },
-	wsa_KPI_std_nrg_recv:{description:"Standardized energy recovery",                                              magnitude:"Energy/Volume", unit:"kWh/m3/100m", explanation:"Represents an average energy turbine efficiency", },
-	wsa_KPI_water_losses:{description:"Water losses per mains length",                                             magnitude:"Volume/", unit:"m3/km/days", explanation:"Total (apparent and real) water losses, expressed in terms of annual volume lost per mains length", },
-	wsa_KPI_un_head_loss:{description:"Unit head loss",                                                            magnitude:"Headloss/Distance", unit:"m/km", explanation:"Unit energy friction loss in the conveyance system ", },
 
 	//L2 WST
 	"wst_vol_trea":{description:"Volume of treated water", magnitude:"Volume", unit:"m3", explanation:"Sum of the volume of water treated by WTPs that are the responsibility of the water undertaking, during the assessment period", },
@@ -108,7 +106,7 @@ var Info = {
 	"wsd_nrg_cons" :{description:"Total energy consumed",                                              magnitude:"Energy",     unit:"kWh", explanation:"Electric energy consumption including both from the grid and self-produced, for water distribution during the entire assessment period", },
 	"wsd_resi_pop" :{description:"Resident population connected to the drinking water supply systems", magnitude:"Population", unit:"People", explanation:"Resident population connected to each water distribution system managed by the undertaking, at the reference date", },
 	"wsd_serv_pop" :{description:"Serviced population in supply systems",                              magnitude:"Population", unit:"People", explanation:"Resident population connected to each water distribution unit managed by the undertaking, at the reference date", },
-	"wsd_vol_dist" :{description:"Distribution system input volume",                                   magnitude:"Volume",     unit:"m3", explanation:"The water volume entering the distribution system from the water treatment or directly from abstraction during the assessment period ", },
+	"wsd_vol_dist" :{description:"Input volume",                                   magnitude:"Volume",     unit:"m3", explanation:"The water volume entering the distribution system from the water treatment or directly from abstraction during the assessment period ", },
 	"wsd_non_revw" :{description:"Non-revenue water in distribution system",                           magnitude:"Volume",     unit:"m3", explanation:"Difference between the distribution system input volume and the authorized consumption (including exported water) during the assessment period for each water distribution unit", },
 	"wsd_auth_con" :{description:"Volume of authorized consumption",                                   magnitude:"Volume",     unit:"m3", explanation:"Sum of the volume of metered and/or non-metered water that, during the assessment period, is taken by registered customers, by the water supplier itself, or by others who are implicitly or explicitly authorised to do so by the water supplier, for residential, commercial, industrial or public purposes. It includes water exported", },
 	wsd_KPI_GHG_elec:{description:"From electricity",         magnitude:"Mass",       unit:"kgCO2e", explanation:"GHG Emissions from electricity consumption in the Distribution stage", },
@@ -119,7 +117,9 @@ var Info = {
 	"wwg_nrg_prod":{description:"Energy produced", magnitude:"Energy", unit:"kWh", explanation:"Energy produced", },
 	"wwg_nrg_sold":{description:"Energy sold", magnitude:"Energy", unit:"kWh", explanation:"Energy sold", },
 	"wwg_heat_nrg":{description:"Heat energy valorized from wastewater", magnitude:"Energy", unit:"kWh", explanation:"Heat energy valorized from water", },
-	wwg_KPI_GHG_elec:{description:"Sum from electricity in Collection, Treatment and Discharge",         magnitude:"Mass",       unit:"kgCO2e", explanation:"GHG Emissions from electricity consumption in all stages of wastewater system", },
+	wwg_KPI_GHG_elec:{description:"From electricity (sum for Collection, Treatment and Discharge stages)",         magnitude:"Mass",       unit:"kgCO2e", explanation:"GHG Emissions from electricity consumption in all stages of wastewater system", },
+	wwg_KPI_vol     :{description:"Volume of wastewater (sum for Collection, Treatment and Discharge stages)", magnitude:"Volume", unit:"m3", explanation:"Sum of all water volumes for all water stages",},
+	wwg_KPI_nrg_cons:{description:"Total electric energy consumption (sum for Collection, Treatment and Discharge stages)",      magnitude:"Energy", unit:"kWh", explanation:"Electric energy consumption including both from the grid and self-produced, for the water stages, by the undertaking during the entire assessment period", },
 
 	//L2 WWC
 	"wwc_vol_conv":{description:"Volume of wastewater conveyed to treatment or to an outfall for untreated discharge", magnitude:"Volume", unit:"m3", explanation:"Collected wastewater, corresponding to the volume of domestic, commercial and industrial outputs to the sewer system during the assessment period (pumped or not)", },
@@ -168,12 +168,10 @@ var Info = {
 	"wwd_nrg_recv" :{description:"Energy recovered during wastewater discharge",               magnitude:"Energy", unit:"kWh", explanation:"Sum of energy recovered during the assessment period by all turbines for wastewater discharged managed by the undertaking", },
 	wwd_KPI_GHG_elec:{description:"From electricity",         magnitude:"Mass",       unit:"kgCO2e", explanation:"GHG Emissions from electricity consumption in the Discharge stage", },
 	wwd_KPI_nrg_per_m3:{description:"Energy consumption per discharged wastewater",                             magnitude:"Energy/Volume", unit:"kWh/m3", explanation:"Percentage of the tests carried out in wastewater treatment plants that comply with discharge consents", },
-	wwd_KPI_nrg_percen:{description:"Energy consumption of discharged wastewater per total energy consumption", magnitude:"Percent", unit:"%", explanation:"Unit energy consumption per discharged wastewater in wastewater interception and discharged", },
-	wwd_KPI_std_nrg_co:{description:"Standardised energy consumption",                                          magnitude:"Energy/Volume/Head", unit:"kWh/m3/100m", explanation:"Percentage of energy consumed in wastewater discharged with regards to the Total energy consumed from the grid and self produced in the water and wastewater systems", },
 	wwd_KPI_rcv_per_dw:{description:"Energy recovery per discharged water",                                     magnitude:"Energy/Volume", unit:"kWh/m3", explanation:"Average energy consumption per pumping discharged wastewater per head", }, 
-	wwd_KPI_std_nrg_rc:{description:"Standardized energy recovery",                                             magnitude:"Energy/Volume/Head", unit:"kWh/m3/100m", explanation:"Unit energy recovered in water discharge", },
 
-	//TODO RENAME NEEDED FOR THESE:
+
+	//TODO these variables are not inside global yet
 	//L3 WSA
 		"wsa4" :{description:"Pumping head in each pumping system",                        magnitude:"Head",         unit:"m", explanation:"Head at which the water is pumped in each water abstraction unit that are the responsibility of the undertaking, during the assessment period", },
 		"wsa5" :{description:"Volume pumped in each Pumping System",                       magnitude:"Head",         unit:"m3", explanation:"Volume of water pumped in each water abstraction unit that are the responsibility of the undertaking, during the assessment period", },
@@ -183,6 +181,9 @@ var Info = {
 		"wsa9" :{description:"Mains lenght",                                               magnitude:"Distance",     unit:"km", explanation:"Total transmission and distribution mains length (there are not service connections at the abstraction and conveyance stage)", },
 		"wsa10":{description:"Friction pipe losses",                                       magnitude:"Head",         unit:"m", explanation:"All friction losses (including the local ones in valves and accessories) must be included", },
 		c_wsa50:{description:"[Sum](abstracted water volume pumped x pump head in meters)", magnitude:"Volume x Head", unit:"m3 x 100m", explanation:"Sum, for all the pumps of the water abstracted system, of the total volume pumped by pump i (m3) times the pump head i (m) / 100", },
+		wsa_KPI_water_losses:{description:"Water losses per mains length",                                             magnitude:"Volume/", unit:"m3/km/days", explanation:"Total (apparent and real) water losses, expressed in terms of annual volume lost per mains length", },
+		wsa_KPI_un_head_loss:{description:"Unit head loss",                                                            magnitude:"Headloss/Distance", unit:"m/km", explanation:"Unit energy friction loss in the conveyance system ", },
+		wsa_KPI_std_nrg_cons:{description:"Standardised Energy Consumption",                                           magnitude:"Energy", unit:"kWh/m3/100m", explanation:"", },
 	//
 	//L3 WST
 		"wst3" :{description:"Treated water quality tests carried out",                   magnitude:"Number",  unit:"number", explanation:"Number of treated water tests carried out during the assessment period", },
@@ -266,5 +267,7 @@ var Info = {
 		"wwd8" :{description:"Enter turbine head",                               magnitude:"Head",         unit:"m3", explanation:"", },
 		c_wwd50:{description:"[Sum] (water volume pumped x pump head in meters)", magnitude:"Volume x head", unit:"m3 x 100m", explanation:"Sum, for all the turbines of the wastewater discharged system, of the total volume turbine i (m3) times the turbine head i (m) / 100", },
 		c_wwd51:{description:"[Sum] (water volume pumped x pump head in meters)", magnitude:"Volume x head", unit:"m3 x 100m", explanation:"Sum, for all the turbines of the wastewater discharged system, of the total volume turbine i (m3) times the turbine head i (m) / 100", },
+		wwd_KPI_std_nrg_co:{description:"Standardised energy consumption",                                          magnitude:"Energy/Volume/Head", unit:"kWh/m3/100m", explanation:"Percentage of energy consumed in wastewater discharged with regards to the Total energy consumed from the grid and self produced in the water and wastewater systems", },
+		wwd_KPI_std_nrg_rc:{description:"Standardized energy recovery",                                             magnitude:"Energy/Volume/Head", unit:"kWh/m3/100m", explanation:"Unit energy recovered in water discharge", },
 	//
 }

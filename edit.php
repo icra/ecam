@@ -17,11 +17,11 @@
 ?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
-
 	<style>
 		td.input input { margin:0;padding:0;width:95%;}
 		td.input       { width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
-		table#outputs tr:hover { background:#ccc; }
+		table#inputs tr:hover  {background:#ccc;}
+		table#outputs tr:hover {background:#ccc;}
 		table#outputs th:not(.tableHeader) {background:#c9ab98}
 		table#otherOutputs th:not(.tableHeader) {background:#c9ab98}
 		<?php
@@ -30,6 +30,7 @@
 				table#inputs th:not(.tableHeader) {background:#bf5050}
 				#inputs a,#inputs a:visited{color:#bf5050}
 				#outputs a,#outputs a:visited{color:#bf5050}
+				#otherOutputs a,#otherOutputs a:visited{color:#bf5050}
 			<?php }
 		?>
 		th.tableHeader
@@ -78,11 +79,19 @@
 			input.classList.add('input')
 			input.autocomplete='off'
 			input.onblur=function(){updateField(field,input.value)}
-			input.onkeypress=function(event){if(event.which==13){input.onblur()}}
+			input.onkeypress=function(event) { if(event.which==13) {input.onblur()} }
 			//value converted
 			var multiplier = Units.multiplier(field);
 			var currentValue = CurrentLevel[field]/multiplier;
 			input.value=currentValue
+			input.onkeydown=function(event)
+			{
+				switch(event.which)
+				{
+					case 38: input.value++;break;
+					case 40: input.value--;break;
+				}
+			}
 			element.appendChild(input)
 			input.select()
 		}
@@ -222,6 +231,11 @@
 					}
 				})();
 			}
+
+			//here check if t.rows.length is 2
+			if(t.rows.length<3)
+				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#ccc>No inputs</span>";
+
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
 			var newTh=document.createElement('th');
@@ -476,13 +490,14 @@
 	</style>
 
 	<!--NAVBAR--><?php include"navbar.php"?>
+	<!--linear diagram--><?php include'linear.php'?>
 
 	<!--TITLE-->
 	<?php 
 		//Set a navigable title for page
 		switch($level)
 		{
-			case "Water":  $titleLevel="Water Supply";break;
+			case "Water":  $titleLevel="Water supply";break;
 			case "Waste":  $titleLevel="Wastewater";break;
 			default:	   $titleLevel=$level;break;
 		}
@@ -499,8 +514,9 @@
 	<style> h1 {text-align:left;padding-left:20em} </style>
 	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
 </div>
-<!--separator--><div style=margin-top:110px></div>
-<!--linear diagram--><?php include'linear.php'?>
+
+<!--separator--><div style=margin-top:180px></div>
+
 <!--go to level 3 button-->
 <?php
 	if($sublevel)
@@ -508,7 +524,9 @@
 		if($sublevel!="General")
 		{
 			$color = ($level=="Waste")?"lightcoral":"lightblue";
-			echo "<button 
+			echo "
+				Going to advanced assessment will overwrite current inputs from this stage
+				<button 
 					class=button
 					style='background:$color;'
 					onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
@@ -522,19 +540,17 @@
 						</script>
 						substages inside
 					</span>
+					<hr style=background:#ccc>
 				";
 		}
 	}
 ?>
 
-<!--IO-->
-<div id=io>
-	<style>
-		#io table{width:100%}
-	</style>
 
+<!--IO-->
+<div id=io> <style> #io table{width:100%} </style>
 	<!--INPUTS-->
-	<table id=inputs class=inline style="width:47%">
+	<table id=inputs class=inline style="width:47%;padding-right:1em">
 		<tr><th colspan=5 class=tableHeader>INPUTS
 		<tr>
 			<th>Description
@@ -542,12 +558,11 @@
 			<th>Unit
 			<th>Data quality
 	</table>
-
 	<!--OUTPUTS-->
 	<div class=inline style="width:47%">
 		<!--GHG-->
 		<table id=outputs style="background:#f6f6f6;">
-			<tr><th colspan=7 class=tableHeader>OUTPUTS - Greenhouse gas emissions (GHG) | <a href=variable.php?id=conv_kwh_co2>Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
+			<tr><th colspan=7 class=tableHeader>OUTPUTS - Greenhouse gas emissions (GHG) | <a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity">Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
 			<tr>
 				<th>Origin
 				<th>Value (kgCO<sub>2</sub>eq)
@@ -567,6 +582,5 @@
 		</table>
 	</div>
 </div>
-
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
