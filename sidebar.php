@@ -171,16 +171,8 @@
 			<tr><td><a href=summary.php?type=input>All Inputs</a>
 			<tr><td><a href=summary.php?type=ccvv>All Calculated variables</a>
 			<tr><td><a href=summary.php?type=output>All Performance Indicators (PIs)</a>
-			<tr><th>Graphs
-			<tr><td><a href=graph1.php>1. L1 - GHG </a>
-			<tr><td><a href=graph2.php>2. L1 - Energy consumption</a>
-			<tr><td><a href=graph3.php>3. L1 - GHG bar graph</a>
-			<tr><td><a href=graph4.php>4. L2 - GHG </a>
-			<tr><td><a href=graph5.php>5. L2 - Energy consumption</a>
-			<tr><td><a href=graph6.php>6. L2 - GHG bar graph</a>
-			<tr><td><a href=graph7.php>7. L3 - Energy consumption per substage</a>
-			<tr><td><a href=sankey.php>Sankey diagram</a>
 			<tr><th>Other
+			<tr><td><a href=graph.php?g=graph1>Graphs</a>
 			<tr><td><a href=todo.php>To do list</a>
 			<tr><td><a href=export.php>Export variables, descriptions and formulas</a>
 		</table>

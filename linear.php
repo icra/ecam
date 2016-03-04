@@ -3,21 +3,20 @@
 	<div>
 		<span style="color:#666"> Preview </span>
 			<img class=l1 stage=water src=img/water.png onclick=window.location="edit.php?level=Water" title="Water supply preview"> 
-			<img class=l1 stage=birds src=img/birds.png onclick=window.location="birds.php"            title="Bird's eye view (L1)">
+			<img class=l1 stage=birds src=img/birds.png onclick=window.location="birds.php"            title="Bird's eye view">
 			<img class=l1 stage=waste src=img/waste.png onclick=window.location="edit.php?level=Waste" title="Wastewater preview"> 
 
 		<!--vertbar--><span style="line-height:3em;border-left:1px solid #666;margin:0 1em 0 1em"></span>
 
 		<span style="color:#666"> Insight </span>
 			<img class=l1 stage=waterGen src=img/waterGen.png onclick=window.location="edit.php?level=Water&sublevel=General"      title="Water supply (insight)"> 
-			<img class=l2 stage=waterAbs src=img/waterAbs.png onclick=window.location="edit.php?level=Water&sublevel=Abstraction"  title="Abstraction (L2)" >
-			<img class=l2 stage=waterTre src=img/waterTre.png onclick=window.location="edit.php?level=Water&sublevel=Treatment"    title="Treatment (L2)">
-			<img class=l2 stage=waterDis src=img/waterDis.png onclick=window.location="edit.php?level=Water&sublevel=Distribution" title="Distribution (L2)">
-			<img class=l1 stage=wasteGen src=img/wasteGen.png onclick=window.location="edit.php?level=Waste&sublevel=General"      title="Wastewater (L2)"> 
-			<img class=l2 stage=wasteCol src=img/wasteCol.png onclick=window.location="edit.php?level=Waste&sublevel=Collection"   title="Collection (L2)">
-			<img class=l2 stage=wasteTre src=img/wasteTre.png onclick=window.location="edit.php?level=Waste&sublevel=Treatment"    title="Treatment (L2)">
-			<img class=l2 stage=wasteDis src=img/wasteDis.png onclick=window.location="edit.php?level=Waste&sublevel=Discharge"    title="Discharge (L2)">
-
+			<img class=l2 stage=waterAbs src=img/waterAbs.png onclick=window.location="edit.php?level=Water&sublevel=Abstraction"  title="Abstraction (insight)" >
+			<img class=l2 stage=waterTre src=img/waterTre.png onclick=window.location="edit.php?level=Water&sublevel=Treatment"    title="Treatment (insight)">
+			<img class=l2 stage=waterDis src=img/waterDis.png onclick=window.location="edit.php?level=Water&sublevel=Distribution" title="Distribution (insight)">
+			<img class=l1 stage=wasteGen src=img/wasteGen.png onclick=window.location="edit.php?level=Waste&sublevel=General"      title="Wastewater (insight)"> 
+			<img class=l2 stage=wasteCol src=img/wasteCol.png onclick=window.location="edit.php?level=Waste&sublevel=Collection"   title="Collection (insight)">
+			<img class=l2 stage=wasteTre src=img/wasteTre.png onclick=window.location="edit.php?level=Waste&sublevel=Treatment"    title="Treatment (insight)">
+			<img class=l2 stage=wasteDis src=img/wasteDis.png onclick=window.location="edit.php?level=Waste&sublevel=Discharge"    title="Discharge (insight)">
 		<hr id=line>
 	</div>
 </div>
@@ -104,7 +103,7 @@
 				collection[i].classList.add('inactive');
 				collection[i].onclick="";
 				collection[i].style.cursor="default";
-				collection[i].title+=" (INACTIVE)";
+				collection[i].title+=" (inactive)";
 			}
 		}
 	})();

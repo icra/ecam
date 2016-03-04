@@ -250,13 +250,13 @@ var Global = {
 
 		"Yes/No":
 		{
-			"Are you producing electrical energy"                                :0,
 			"Do you have fuel engines to run pumps"                              :0,
+			"Are you producing electrical energy"                                :0,
 			"Is your topography flat"                                            :0,
 			"Are you using truck transport to convey sludge to the disposal site":0,
+			"Is any untreated industrial or commercial wastewater connected"     :0,
 			"Are you producing biogas"                                           :0,
 			"Are you valorizing biogas"                                          :0,
-			"Is any untreated industrial or commercial wastewater connected"     :0,
 		},
 	},
 }

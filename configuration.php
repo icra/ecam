@@ -361,7 +361,7 @@
 	</table>
 
 	<!--right: ADDITIONAL INFO-->
-	<div class=inline style="width:45%;text-align:left;margin-left:1em">
+	<div class=inline style="width:50%;text-align:left;margin-left:1em">
 		<!--conv_kwh_co2-->
 		<fieldset>
 			<legend> Conversion factor for grid electricity (<a href=variable.php?id=conv_kwh_co2>info</a>) </legend>
@@ -402,9 +402,9 @@
 					#fuelSelection tr.inactive {background:#ccc;color:#999}
 				</style>
 				<tr><th>Stage<th>Selected Fuel type
-				<tr stage=water>   <td>Level 1 - Water supply (engines)
-				<tr stage=waste>   <td>Level 1 - Wastewater (engines)
-				<tr stage=wasteTre><td>Level 2 - Wastewater treatment (vehicles)
+				<tr stage=water>   <td>Preview - Water supply (engines)
+				<tr stage=waste>   <td>Preview - Wastewater (engines)
+				<tr stage=wasteTre><td>Insight - Wastewater treatment (vehicles)
 			</table>
 		</fieldset>
 	</div>
