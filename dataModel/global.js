@@ -21,8 +21,8 @@ var Global = {
 	Water:{
 		"ws_resi_pop"   :0,
 		"ws_serv_pop"   :0,
-		"ws_nrg_cons"   :0,
 		"ws_vol_auth"   :0,
+		"ws_nrg_cons"   :0,
 		"ws_nrg_cost"   :0,
 		"ws_run_cost"   :0,
 		"ws_vol_fuel"   :0,

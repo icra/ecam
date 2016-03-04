@@ -21,3 +21,31 @@
 +---------------+
 | CH4 emissions |
 +---------------+
+=========================================================================================================================================
+
+Variables al birds eye view
+
+WATER
+	Resident pop -> 
+	Serviced pop -> 
+	Monthly energy purchased from the grid (kwh/mes) -> kwh
+	Monthly energy costs
+	Monthly running costs
+	Average drinking water consumption per person
+	Monthly Volume of Fuel consumed
+
+WASTE
+	Resident population
+	Population connected
+	Serviced population
+	Monthly energy purchased from the grid
+	Treated wastewater daily flow
+	Monthly running costs
+	Monthly energy costs
+	Number of trips to sludge disposal site per week
+	distance to disposal site
+	TN effluent limit
+	Monthly Volume of Fuel consumed
+	annual protein consumption per capita
+	Average wwtp influent BOD5 (mg/L)
+	Average wwtp effluent BOD5 (mg/L)

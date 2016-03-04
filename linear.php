@@ -1,13 +1,16 @@
+
 <!--LINEAR DIAGRAM: file inside edit.php, level3.php and stages.php-->
 <div id=linearDiagram>
 	<div>
+		<span style="color:#666"> Bird's eye view </span>
+			<img class=l1 stage=birds src=img/birds.png onclick=window.location="birds.php"            title="Bird's eye view">
+
+		<!--vertbar--><span style="line-height:3em;border-left:1px solid #666;margin:0 1em 0 1em"></span>
 		<span style="color:#666"> Preview </span>
 			<img class=l1 stage=water src=img/water.png onclick=window.location="edit.php?level=Water" title="Water supply preview"> 
-			<img class=l1 stage=birds src=img/birds.png onclick=window.location="birds.php"            title="Bird's eye view">
 			<img class=l1 stage=waste src=img/waste.png onclick=window.location="edit.php?level=Waste" title="Wastewater preview"> 
 
 		<!--vertbar--><span style="line-height:3em;border-left:1px solid #666;margin:0 1em 0 1em"></span>
-
 		<span style="color:#666"> Insight </span>
 			<img class=l1 stage=waterGen src=img/waterGen.png onclick=window.location="edit.php?level=Water&sublevel=General"      title="Water supply (insight)"> 
 			<img class=l2 stage=waterAbs src=img/waterAbs.png onclick=window.location="edit.php?level=Water&sublevel=Abstraction"  title="Abstraction (insight)" >
@@ -29,7 +32,7 @@
 	div#linearDiagram img{border-radius:90%;border:4px solid transparent}
 	div#linearDiagram img.selected{border:4px solid lightgreen}
 	div#linearDiagram img:not(.inactive):hover {border:4px solid #d7bfaf}
-	div#linearDiagram #line {background-color:#666;position:relative; transform:translateY(-26px) translateX(150px);z-index:1;width:350px;}
+	div#linearDiagram #line {background-color:#666;position:relative; transform:translateY(-26px) translateX(199px);z-index:1;width:350px;}
 </style>
 
 <script>

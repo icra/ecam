@@ -36,3 +36,4 @@
 graphs library used
 <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts">https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts</a>
 <!--FOOTER--><?php include'footer.php'?>
+<!--CURRENT JSON--><?php include'currentJSON.php'?>

@@ -1,150 +1,21 @@
 <!--birds eye view-->
 <!doctype html><html><head>
 	<?php include'imports.php'?>
+	<style>
+		table#inputs input {width:60px;transition:all 1s;border:1px solid #ccc}
+		table#inputs input.edited {background:lightgreen;}
+		table#inputs tr.hidden {display:none}
+		table#inputs tr[indic]{text-align:center;color:#999;background:#eee}
+		table#inputs th{text-align:left}
+	</style>
 	<script>
 		function init()
 		{
-			updateInputs();
 			drawCharts();
 			Exceptions.apply();
+			BEV.showActive();
+			BEV.updateDefaults();
 			updateResult();
-		}
-
-		//Wrapper for "updateTable"
-		function updateInputs()
-		{
-			var t=document.getElementById('inputs');
-			//reset table
-			while(t.rows.length>0){t.deleteRow(-1)}
-
-			//WATER inputs
-			var newCell=t.insertRow(-1).insertCell(-1)
-			newCell.setAttribute('colspan',5);
-			newCell.style.color='white'
-			newCell.style.backgroundColor='#0aaeef'
-			if(Global.Configuration['Active Stages'].water==1)
-			{
-				newCell.innerHTML="Inputs <a style=color:white href=edit.php?level=Water>Water supply</a>";
-				updateTable(Global.Water,'inputs');
-			}
-			else
-			{
-				newCell.innerHTML="Water supply is not active";
-				//display "inputs not shown"
-				newCell=t.insertRow(-1).insertCell(-1);
-				newCell.setAttribute('colspan',5);
-				newCell.style.textAlign='center';
-				newCell.innerHTML="<i>Water supply inputs not shown</i>";
-			}
-
-			//WASTEWATER inputs
-			var newCell=t.insertRow(-1).insertCell(-1)
-			newCell.setAttribute('colspan',5);
-			newCell.style.color='white'
-			newCell.style.backgroundColor='#bf5050'
-			if(Global.Configuration['Active Stages'].waste==1)
-			{
-				newCell.innerHTML="Inputs <a style=color:white href=edit.php?level=Waste>Wastewater</a>";
-				updateTable(Global.Waste,'inputs');
-			}
-			else
-			{
-				newCell.innerHTML="Wastewater is not active";
-				//display "inputs not shown"
-				newCell=t.insertRow(-1).insertCell(-1);
-				newCell.setAttribute('colspan',5);
-				newCell.style.textAlign='center';
-				newCell.innerHTML="<i>Wastewater inputs not shown</i>";
-			}
-		}
-
-		/** Redisplay table */
-		function updateTable(obj,id_table)
-		{
-			var t=document.getElementById(id_table);
-			for(var field in obj)
-			{
-				/*first check if function*/
-				if(typeof(obj[field])!="number") continue;
-				/*check if should be hidden according to questions*/
-				if(Questions.isHidden(field)) continue;
-				/*check if field is level3 specific*/if(Level3.isInList(field)) continue;
-				/*new row*/var newRow=t.insertRow(-1);
-				/*highlight outputs*/
-				var pointer = field.search('^ww')==-1 ? "Global.Water" : "Global.Waste";
-				newRow.setAttribute('onmouseover','Formulas.hlOutputs("'+field+'","'+pointer+'",1)');
-				newRow.setAttribute('onmouseout', 'Formulas.hlOutputs("'+field+'","'+pointer+'",0)');
-				/*attribute field==field>*/newRow.setAttribute('field',field);
-				/*description*/ var newCell=newRow.insertCell(-1);
-				/*hotfix for non-existing variables (for example: when structure is updated)*/
-				if(Info[field]===undefined)
-				{
-					obj[field]=undefined; //remove it
-					continue;
-				}
-				newCell.setAttribute('title',Info[field].explanation);
-				newCell.style.cursor='help';
-				newCell.innerHTML=(function()
-				{
-					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
-					var link = " (<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>)";
-					return description+link;
-				})();
-
-				//editable cell if not CV
-				var newCell=newRow.insertCell(-1);
-				newCell.className="input";
-				newCell.setAttribute('onclick','transformField(this,'+pointer+')');
-
-				/*value*/
-				newCell.innerHTML=format(obj[field]/Units.multiplier(field));
-
-				//unit
-				newRow.insertCell(-1).innerHTML=(function()
-				{
-					if(Info[field].magnitude=="Currency")
-					{
-						return Global.General.Currency;
-					}
-
-					var str="<select onchange=Units.selectUnit('"+field+"',this.value)>";
-					if(Info[field]===undefined)
-					{
-						return "<span style=color:#ccc>no unit</span>";
-					}
-					if(Units[Info[field].magnitude]===undefined)
-					{
-						return Info[field].unit
-					}
-					var currentUnit = Global.Configuration.Units[field] || Info[field].unit
-					for(var unit in Units[Info[field].magnitude])
-					{
-						if(unit==currentUnit)
-							str+="<option selected>"+unit+"</option>";
-						else
-							str+="<option>"+unit+"</option>";
-					}
-					str+="</select>"
-					return str
-				})();
-
-				//data quality
-				newRow.insertCell(-1).innerHTML=(function()
-				{
-					var select=document.createElement('select');
-					select.setAttribute('onchange','DQ.update("'+field+'",this.value)');
-					['Actual','Estimated'].forEach(function(opt)
-					{
-						var option=document.createElement('option');
-						select.appendChild(option);
-						option.innerHTML=opt;
-						if(Global.Configuration.DataQuality[field]==opt)
-							option.setAttribute('selected',true);
-							
-					});
-					return select.outerHTML;
-				})();
-			}
 		}
 
 		function drawCharts()
@@ -154,47 +25,128 @@
 			Graphs.graph3(false,'graph3');
 		}
 
-		function transformField(element,obj)
+		var BEV={};
+
+		//Generic f for updating internal values
+		BEV.update=function(obj,field,newValue)
 		{
-			element.removeAttribute('onclick')
-			var field=element.parentNode.getAttribute('field')
-			element.innerHTML=""
-			var input=document.createElement('input')
-			input.id=field
-			input.classList.add('input')
-			input.autocomplete='off'
-			input.onblur=function(){updateField(field,obj,input.value)}
-			input.onkeypress=function(event){if(event.which==13){input.onblur()}}
-			//value converted
-			var multiplier=Units.multiplier(field);
-			var currentValue=obj[field]/multiplier;
-			input.value=currentValue;
-			input.onkeydown=function(event)
+			if(obj[field]===undefined)
 			{
-				switch(event.which)
-				{
-					case 38:input.value++;break;
-					case 40:input.value--;break;
-				}
+				alert('field '+field+' undefined');
+				return;
 			}
-			element.appendChild(input);
-			input.select();
+
+			//newValue may be a string from input.value, it should be a float
+			newValue=parseFloat(newValue);
+
+			//update
+			obj[field]=newValue;
 		}
 
-		function updateField(field,obj,newValue)
+		//Specific behaviours for each formula when user inputs data
+		BEV.updateField=function(input)
 		{
-			if(typeof(obj[field])=="number") newValue=parseFloat(newValue);
-			//if a unit change is set, get it
-			var multiplier=Units.multiplier(field);
+			//get info from the input element
+			var field = input.id;
+			var value = parseFloat(input.value);
+
+			var days=Global.General.Days();
+			switch(field)
+			{
+				/** L/person/day -> m3 */
+				case 'ws_vol_auth':
+					value = value*days*Global.Water.ws_resi_pop/1000; break;
+
+				/** x per month -> x */
+				case 'ws_nrg_cons':
+				case 'ws_nrg_cost':
+				case 'ws_run_cost':
+				case 'ww_nrg_cons':
+				case 'ww_nrg_cost':
+				case 'ww_run_cost':
+					value = value*days/30; break;
+
+				/** L per month -> m3 */
+				case 'ws_vol_fuel':
+					value = value*days/30/1000; break;
+
+				/** m3 per day -> m3 */
+				case 'ww_vol_wwtr':
+					value = value*days; break;
+
+				default:break;
+			}
+			//get L1 name: "Water" or "Waste"
+			var L1 = field.search("ws")==0 ? "Water" : "Waste";
 			//update
-			obj[field]=multiplier*newValue;
+			this.update(Global[L1],field,value);
+			//add a color to the field
+			input.classList.add('edited');
 			init();
 		}
+
+		//Refresh default values from the table
+		BEV.updateDefaults=function()
+		{
+			var inputs = document.querySelectorAll('table#inputs input');
+			for(var i=0; i<inputs.length; i++)
+			{
+				var input = inputs[i];
+				var field = input.id; 
+				var L1 = field.search("ws")==0 ? "Water" : "Waste";
+
+				//the value we are going to put in the input
+				var value = Global[L1][field];
+
+				var days=Global.General.Days();
+				//modify value according to each case
+				switch(field)
+				{
+					/** L/person/day -> m3 */
+					case 'ws_vol_auth':
+						value = value/days/Global.Water.ws_resi_pop*1000||0; break;
+
+					/** x per month -> x */
+					case 'ws_nrg_cons':
+					case 'ws_nrg_cost':
+					case 'ws_run_cost':
+					case 'ww_nrg_cons':
+					case 'ww_nrg_cost':
+					case 'ww_run_cost':
+						value = value/days*30; break;
+
+					/** L per month -> m3 */
+					case 'ws_vol_fuel':
+						value = value/days*30*1000; break;
+
+					/** m3 per day -> m3 */
+					case 'ww_vol_wwtr':
+						value = value/days; break;
+
+					default:break;
+				}
+				//set the value
+				input.value=value;
+			}
+		}
+
+		BEV.showActive=function()
+		{
+			['water','waste'].forEach(function(stage)
+			{
+				if(Global.Configuration['Active Stages'][stage]==1)
+				{
+					//show all rows with stage=stage
+					var rows = document.querySelectorAll('table#inputs tr[stage='+stage+']');
+					for(var i=0; i<rows.length; rows[i++].classList.remove('hidden')){}
+				}
+				else //show "Stage not active"
+				{
+					document.querySelector('table#inputs tr[indic='+stage+']').classList.remove('hidden');
+				}
+			});
+		}
 	</script>
-	<style>
-		td.input input { margin:0;padding:0;width:95%;}
-		td.input       { width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
-	</style>
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
@@ -202,9 +154,36 @@
 <!--TITLE--><h1>Bird's eye view of <script>document.write(Global.General.Name)</script></h1>
 </center>
 
-<!--tables-->
-<div class=inline style="margin-left:5px;width:40%;">
-	<table id=inputs></table>
+<!--inputs table-->
+<div class=inline style="margin-left:10px;width:40%;">
+	<div>Assessment period: <script>document.write(Global.General.Days())</script> days</div> 
+	<div>Conversion factor: <script>document.write(format(Global.General.conv_kwh_co2))</script> kg CO<sub>2</sub>/kWh</div> 
+	<div style="color:#666;font-size:16px;margin:0.5em 0 0.5em 0">INPUTS - Enter values you remember from your daily operation</div>
+	<table id=inputs>
+		<tr><th colspan=3>Water supply inputs
+			<tr stage=water class=hidden><td>Resident population                              <td><input id='ws_resi_pop' onchange="BEV.updateField(this)"> <td>People
+			<tr stage=water class=hidden><td>Serviced population                              <td><input id='ws_serv_pop' onchange="BEV.updateField(this)"> <td>People
+			<tr stage=water class=hidden><td>Drinking water consumed per person per day       <td><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>L/person/day
+			<tr stage=water class=hidden><td>Energy consumed from the grid per month          <td><input id='ws_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/month
+			<tr stage=water class=hidden><td>Monthly energy costs                             <td><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
+			<tr stage=water class=hidden><td>Monthly running costs                            <td><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
+			<tr stage=water class=hidden><td>Monthly Volume of Fuel consumed                  <td><input id='ws_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
+			<tr indic=water class=hidden><td colspan=3> Stage not active
+		<tr><th colspan=3 style=background:#bf5050>Wastewater inputs
+			<tr stage=waste class=hidden><td>Resident population                              <td><input id='ww_resi_pop' onchange="BEV.updateField(this)"> <td>People
+			<tr stage=waste class=hidden><td>Population connected                             <td><input id='ww_conn_pop' onchange="BEV.updateField(this)"> <td>People
+			<tr stage=waste class=hidden><td>Serviced population                              <td><input id='ww_serv_pop' onchange="BEV.updateField(this)"> <td>People
+			<tr stage=waste class=hidden><td>Energy consumed from the grid per month          <td><input id='ww_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/month
+			<tr stage=waste class=hidden><td>Monthly running costs                            <td><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
+			<tr stage=waste class=hidden><td>Monthly energy costs                             <td><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
+			<tr stage=waste class=hidden><td>Treated wastewater daily flow                    <td><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>/day
+			<tr stage=waste class=hidden><td>Number of trips to sludge disposal site per week <td><input id='ww_num_trip' onchange="BEV.updateField(this)"> <td>trips
+			<tr stage=waste class=hidden><td>distance to disposal site                        <td><input id='ww_dist_dis' onchange="BEV.updateField(this)"> <td>km
+			<tr stage=waste class=hidden><td>TN effluent limit                                <td><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
+			<tr stage=waste class=hidden><td>Monthly Volume of Fuel consumed                  <td><input id='ww_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
+			<tr stage=waste class=hidden><td>Annual protein consumption per capita            <td><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/day
+			<tr indic=waste class=hidden><td colspan=3> Stage not active
+	</table>
 </div>
 
 <!--graphs-->
@@ -221,5 +200,6 @@
 		google.charts.setOnLoadCallback(init)
 	</script>
 </div>
+
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
