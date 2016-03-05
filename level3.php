@@ -100,6 +100,11 @@
 		/** button delete substage pushed */
 		function deleteSubstage(index)
 		{
+			if(substages.length==1)
+			{
+				alert("You can not delete the last substage");
+				return;
+			}
 			substages.splice(index,1);
 			init();
 		}
@@ -162,6 +167,7 @@
 						"Substage "+(parseInt(s)+1)+" "+
 						"<div style=font-weight:bold>"+substages[s].name+"</div>";
 					newTH.setAttribute('onclick','showSubstageMenu('+s+',event)');
+					newTH.title="Click to modify the name";
 					t.rows[0].appendChild(newTH);
 				}
 				//TOTAL header
@@ -509,14 +515,14 @@
 		}
 		/*Separator*/$sep="<span style=color:black>&rsaquo;</span>";
 		$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>$sublevel</a>";
-		$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Advanced assessment</a>";
+		$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages</a>";
 	?>
 	<style> h1 {text-align:left;padding-left:20em} </style>
 	<!--TITLE--><h1><?php echo $title?></h1>
 </div>
 <!--separator--><div style=margin-top:180px></div>
 
-<!--HELP--><h4>You can subdivide this stage in multiple substages and turn on advanced inputs/outputs</h4>
+<!--HELP--><h4 class=inline style=line-height:0.1em>Split this stage in multiple substages</h4>
 <!--type of assessment--><?php include'assessmentType.php'?>
 <!--SUBSTAGES TABLE-->
 <table id=substages style=margin:1em> <tr>
@@ -524,7 +530,7 @@
 		<!--substages counter-->
 		<div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
 		<!--new substage button-->
-		<button onclick=newSubstage() class=button>+ Add Substage</button>
+		<button onclick=newSubstage() class=button>+ New substage</button>
 </table>
 
 <!--OUTPUTS TABLE-->
@@ -535,3 +541,26 @@
 
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
+
+<script>
+/** If no substages (first time entering advanced assessment, create one substage with L2 values*/
+function checkIfNoSubstages()
+{
+	if(substages.length==0)
+	{
+		//create a substage
+		substages.push(new Substage());
+	}
+	//if there is already one substage
+	if(substages.length==1)
+	{
+		//make the first substage have L2 values
+		getInputs().forEach(function(field)
+		{
+			substages[0][field] = CurrentStage[field]
+		});
+	}
+}
+checkIfNoSubstages();
+
+</script>

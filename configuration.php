@@ -373,7 +373,7 @@
 					<option value=0.452483345>Mexico
 					<option value=custom>--CUSTOM--
 				</select>
-				<td>Current value <input style=width:80px id=uw1 value=0 onchange=updateUW1(this.value)> (kg CO<sub>2</sub>)/kWh
+				<td>Current value <input style=width:80px id=uw1 value=0 onchange=updateUW1(this.value)> kg CO<sub>2</sub>/kWh
 			</table>
 		</fieldset>
 

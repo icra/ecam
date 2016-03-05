@@ -19,7 +19,8 @@
 	<?php include'imports.php'?>
 	<style>
 		td.input input { margin:0;padding:0;width:95%;}
-		td.input       { width:80px;text-align:right;color:#666;background-color:#eee;cursor:cell}
+		td.input { width:80px;text-align:right;color:#666;cursor:cell;transition:all 0.5s}
+		tr:not([hl=yes]) td.input {background-color:#eee;}
 		table#inputs tr:hover  {background:#ccc;}
 		table#outputs tr:hover {background:#ccc;}
 		table#outputs th:not(.tableHeader) {background:#c9ab98}
@@ -57,7 +58,9 @@
 			//establish the stage we are going to be focused
 			if($sublevel)
 			{
-				echo "var CurrentLevel = Global['$level']['$sublevel']";
+				echo "
+					var CurrentLevel = Global['$level']['$sublevel'];
+					var substages = Global.Substages['$level']['$sublevel'];";
 			}
 			else
 			{
@@ -156,10 +159,23 @@
 				var newCell=newRow.insertCell(-1);
 				if(!isCV)
 				{
-					newCell.className="input";
-					newCell.setAttribute('onclick','transformField(this)');
+					if(typeof(substages)=="object" && substages.length > 1)
+					{
+						//this means you are in level 2 and you should NOT be able to modify inputs here
+						newCell.style.cursor='help';
+						newCell.title="To modify this input, go to 'Advanced assessment'. This is because now this field is the sum of all substages";
+					}
+					else
+					{
+						newCell.className="input";
+						newCell.title="Click to modify this input";
+						newCell.setAttribute('onclick','transformField(this)');
+					}
 				}
-				else newCell.style.textAlign='center'
+				else //add an annotation 
+				{
+					newCell.title="This is a calculated variable";
+				}
 
 				/*value*/
 				newCell.innerHTML=(function()
@@ -511,45 +527,45 @@
 		/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
 		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Insight)</span>" : "<span style=color:black>$titleLevel (Preview)</span>";
 	?>
-	<style> h1 {text-align:left;padding-left:20em} </style>
-	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?></h1>
+	<style> h1 {text-align:left;padding-left:20em;line-height:2.1em} </style>
+	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?>
+
+		<!--go to level 3 button-->
+		<?php
+			if($sublevel)
+			{
+				if($sublevel!="General")
+				{
+					$color = ($level=="Waste")?"lightcoral":"lightblue";
+					echo "
+						<span class=inline style='float:right;margin-right:0.5em'>
+							<button 
+								class=button
+								style='background:$color;font-size:12px;vertical-align:middle'
+								onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
+									Split this stage
+							</button> 
+							<span style=font-size:12px;color:#666>
+								&rarr; Divided in 
+								<script>
+									var length = Global.Substages['$level']['$sublevel'].length;
+									document.write(length)
+								</script>
+								substage/s
+							</span>
+						</span>";
+				}
+			}
+		?>
+	</h1>
 </div>
 
-<!--separator--><div style=margin-top:180px></div>
-
-<!--go to level 3 button-->
-<?php
-	if($sublevel)
-	{
-		if($sublevel!="General")
-		{
-			$color = ($level=="Waste")?"lightcoral":"lightblue";
-			echo "
-				&#9888; Going to advanced assessment will overwrite current inputs from this stage
-				<button 
-					class=button
-					style='background:$color;'
-					onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-						Advanced assessment
-					</button> 
-					&rarr;
-					<span>
-						<script>
-							var length = Global.Substages['$level']['$sublevel'].length;
-							document.write(length)
-						</script>
-						substages inside
-					</span>
-					<hr style=background:#ccc>
-				";
-		}
-	}
-?>
+<!--separator--><div style=margin-top:200px></div>
 
 <!--IO-->
 <div id=io>
 	<!--INPUTS-->
-	<table id=inputs class=inline style="margin-left:auto">
+	<table id=inputs class=inline style="margin-left:auto;max-width:47%">
 		<tr><th colspan=5 class=tableHeader>INPUTS
 		<tr>
 			<th>Description
@@ -559,7 +575,7 @@
 	</table>
 
 	<!--OUTPUTS-->
-	<div class=inline style="width:45%;margin-left:1em">
+	<div class=inline style="max-width:47%;margin-left:1em">
 		<!--GHG-->
 		<table id=outputs style="width:100%;background:#f6f6f6;">
 			<tr><th colspan=7 class=tableHeader>OUTPUTS - Greenhouse gas emissions (GHG) | <a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity">Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh

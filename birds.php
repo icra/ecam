@@ -158,9 +158,9 @@
 <div class=inline style="margin-left:10px;width:40%;">
 	<div>Assessment period: <script>document.write(Global.General.Days())</script> days</div> 
 	<div>Conversion factor: <script>document.write(format(Global.General.conv_kwh_co2))</script> kg CO<sub>2</sub>/kWh</div> 
-	<div style="color:#666;font-size:16px;margin:0.5em 0 0.5em 0">INPUTS - Enter values you remember from your daily operation</div>
+	<div style="color:#666;font-size:16px;margin:0.5em 0 0.5em 0">INPUTS - Enter typical values from your daily operation</div>
 	<table id=inputs>
-		<tr><th colspan=3>Water supply inputs
+		<tr><th colspan=3>Water supply
 			<tr stage=water class=hidden><td>Resident population                              <td><input id='ws_resi_pop' onchange="BEV.updateField(this)"> <td>People
 			<tr stage=water class=hidden><td>Serviced population                              <td><input id='ws_serv_pop' onchange="BEV.updateField(this)"> <td>People
 			<tr stage=water class=hidden><td>Drinking water consumed per person per day       <td><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>L/person/day
@@ -168,8 +168,9 @@
 			<tr stage=water class=hidden><td>Monthly energy costs                             <td><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
 			<tr stage=water class=hidden><td>Monthly running costs                            <td><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
 			<tr stage=water class=hidden><td>Monthly Volume of Fuel consumed                  <td><input id='ws_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
+			<tr stage=water class=hidden><td>Percentage of non revenue water                  <td><input id='ws_non_revw' onchange="BEV.updateField(this)"> <td>%
 			<tr indic=water class=hidden><td colspan=3> Stage not active
-		<tr><th colspan=3 style=background:#bf5050>Wastewater inputs
+		<tr><th colspan=3 style=background:#bf5050>Wastewater
 			<tr stage=waste class=hidden><td>Resident population                              <td><input id='ww_resi_pop' onchange="BEV.updateField(this)"> <td>People
 			<tr stage=waste class=hidden><td>Population connected                             <td><input id='ww_conn_pop' onchange="BEV.updateField(this)"> <td>People
 			<tr stage=waste class=hidden><td>Serviced population                              <td><input id='ww_serv_pop' onchange="BEV.updateField(this)"> <td>People
