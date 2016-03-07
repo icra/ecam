@@ -419,11 +419,12 @@
 		function nextPage()
 		{
 			event.stopPropagation();
+			if(Global.Configuration['Active Stages'].water==0 && Global.Configuration['Active Stages'].waste==0)
+			{
+				alert("There are no active stages. Click on the left table to activate them.");
+				return;
+			}
 			window.location="birds.php"; return;
-
-			if(Global.Configuration['Active Stages'].water==1){window.location="edit.php?level=Water";return;}
-			if(Global.Configuration['Active Stages'].waste==1){window.location="edit.php?level=Waste";return;}
-			alert("ERROR! There are no active stages. Click on the left table to activate them.");
 		}
 	</script>
 	<button class="button next" onclick=nextPage()>Next</button>
