@@ -11,7 +11,7 @@
 		#info th,#info td{padding:1em}
 		#info td.th{background:#00aff1;color:white;vertical-align:middle}
 		#info td.input{color:#666;background-color:#eee;cursor:cell}
-		#info td.input input{font-size:16px}
+		#info td.input input {margin:0;padding:0;width:95%;}
 		<?php
 			if(preg_match("/ww/",$id))
 			{?>

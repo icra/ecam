@@ -46,11 +46,11 @@
 			var t=document.querySelector("[level='2']")
 			while(t.rows.length>1)t.deleteRow(-1)
 
-			t.innerHTML+=tableRows(Global.Water.General,      "Water Energy use and production",     "waterGen", "edit.php?level=Water&sublevel=General")
+			t.innerHTML+=tableRows(Global.Water.General,      "Water General",     "waterGen", "edit.php?level=Water&sublevel=General")
 			t.innerHTML+=tableRows(Global.Water.Abstraction,  "Water Abstraction",	                 "waterAbs", "edit.php?level=Water&sublevel=Abstraction")
 			t.innerHTML+=tableRows(Global.Water.Treatment,	  "Water Treatment",	                 "waterTre", "edit.php?level=Water&sublevel=Treatment")
 			t.innerHTML+=tableRows(Global.Water.Distribution, "Water Distribution",	                 "waterDis", "edit.php?level=Water&sublevel=Distribution")
-			t.innerHTML+=tableRows(Global.Waste.General,      "Wastewater Energy use and production","wasteGen", "edit.php?level=Waste&sublevel=General")
+			t.innerHTML+=tableRows(Global.Waste.General,      "Wastewater General","wasteGen", "edit.php?level=Waste&sublevel=General")
 			t.innerHTML+=tableRows(Global.Waste.Collection,	  "Wastewater Collection",               "wasteCol", "edit.php?level=Waste&sublevel=Collection")
 			t.innerHTML+=tableRows(Global.Waste.Treatment,	  "Wastewater Treatment",                "wasteTre", "edit.php?level=Waste&sublevel=Treatment")
 			t.innerHTML+=tableRows(Global.Waste.Discharge,	  "Wastewater Discharge",                "wasteDis", "edit.php?level=Waste&sublevel=Discharge")

@@ -96,7 +96,7 @@
 <div>
 	<span style=background:#0aaff1>
 		<button onclick="updateTable(Global.Water,              'L1 Water')"              class="button">L1 Water</button>
-		<button onclick="updateTable(Global.Water.General,      'L2 Water Energy')"       class="button l2">L2 Energy</button>
+		<button onclick="updateTable(Global.Water.General,      'L2 Water General')"       class="button l2">L2 General</button>
 		<button onclick="updateTable(Global.Water.Abstraction,  'L2 Water Abstraction')"  class="button l2">L2 Abstraction</button>
 		<button onclick="updateTable(Global.Water.Treatment,    'L2 Water Treatment')"    class="button l2">L2 Treatment</button>
 		<button onclick="updateTable(Global.Water.Distribution, 'L2 Water Distribution')" class="button l2">L2 Distribution</button>
@@ -104,7 +104,7 @@
 	&emsp;
 	<span style=background:#bf5050>
 		<button onclick="updateTable(Global.Waste,            'L1 Wastewater')"            class="button">L1 Wastewater</button>
-		<button onclick="updateTable(Global.Waste.General,    'L2 Wastewater Energy')"     class="button l2">L2 Energy</button>
+		<button onclick="updateTable(Global.Waste.General,    'L2 Wastewater General')"     class="button l2">L2 General</button>
 		<button onclick="updateTable(Global.Waste.Collection, 'L2 Wastewater Collection')" class="button l2">L2 Collection</button>
 		<button onclick="updateTable(Global.Waste.Treatment,  'L2 Wastewater Treatment')"  class="button l2">L2 Treatment</button>
 		<button onclick="updateTable(Global.Waste.Discharge,  'L2 Wastewater Discharge')"  class="button l2">L2 Discharge</button>

@@ -167,7 +167,7 @@
 			<tr stage=water class=hidden><td>Energy consumed from the grid per month          <td><input id='ws_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/month
 			<tr stage=water class=hidden><td>Monthly energy costs                             <td><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
 			<tr stage=water class=hidden><td>Monthly running costs                            <td><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
-			<tr stage=water class=hidden><td>Monthly Volume of Fuel consumed                  <td><input id='ws_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
+			<tr stage=water class=hidden><td>Monthly volume of fuel consumed                  <td><input id='ws_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
 			<tr stage=water class=hidden><td>Percentage of non revenue water                  <td><input id='ws_non_revw' onchange="BEV.updateField(this)"> <td>%
 			<tr indic=water class=hidden><td colspan=3> Stage not active
 		<tr><th colspan=3 style=background:#bf5050>Wastewater
@@ -181,7 +181,7 @@
 			<tr stage=waste class=hidden><td>Number of trips to sludge disposal site per week <td><input id='ww_num_trip' onchange="BEV.updateField(this)"> <td>trips
 			<tr stage=waste class=hidden><td>distance to disposal site                        <td><input id='ww_dist_dis' onchange="BEV.updateField(this)"> <td>km
 			<tr stage=waste class=hidden><td>TN effluent limit                                <td><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
-			<tr stage=waste class=hidden><td>Monthly Volume of Fuel consumed                  <td><input id='ww_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
+			<tr stage=waste class=hidden><td>Monthly volume of fuel consumed                  <td><input id='ww_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
 			<tr stage=waste class=hidden><td>Annual protein consumption per capita            <td><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/day
 			<tr indic=waste class=hidden><td colspan=3> Stage not active
 	</table>

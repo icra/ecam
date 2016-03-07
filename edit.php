@@ -543,7 +543,7 @@
 								class=button
 								style='background:$color;font-size:12px;vertical-align:middle'
 								onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-									Split this stage
+									Substages
 							</button> 
 							<span style=font-size:12px;color:#666>
 								&rarr; Divided in 

@@ -159,9 +159,9 @@ var Global = {
 			"c_wwt_nrg_biog" : function(){return this.wwt_biog_pro*this.wwt_ch4_biog/100*10},
 			"c_wwt_bod_rmvd" : function(){return this.wwt_bod_infl-this.wwt_bod_effl},
 			"c_wwt_ind_neff" : function(){return 298*this.wwt_tn_influ*0.005*44/28},
+			"c_wwt_ann_ndis" : function(){var findcom=Global.Configuration['Yes/No']["Is any untreated industrial or commercial wastewater connected"] ? 1.25 : 1; return this.wwt_tn_efflu*(Global.Waste.Discharge.wwd_vol_disc-this.wwt_vol_trea)/this.wwt_vol_trea*1.1*findcom; },
 			"c_wwt_n2o_untr" : function(){return 298*this.c_wwt_ann_ndis()*0.005*44/28},
 			"c_wwt_nrg_fuel" : function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].wasteTre]; return Global.Waste.ww_num_trip*2*Global.Waste.ww_dist_dis*0.25*fuel.FD*fuel.NCV/1000000000},	
-			"c_wwt_ann_ndis" : function(){var findcom=Global.Configuration['Yes/No']["Is any untreated industrial or commercial wastewater connected"] ? 1.25 : 1; return this.wwt_tn_efflu*(Global.Waste.Discharge.wwd_vol_disc-this.wwt_vol_trea)/this.wwt_vol_trea*1.1*findcom; },
 			"c_wwt_ch4_emis" : function(){return 0.02*this.c_wwt_biog_fla()*0.59*0.66*34},
 			wwt_KPI_GHG_elec   : function(){return this.wwt_nrg_cons*Global.General.conv_kwh_co2},
 			wwt_KPI_nrg_per_m3 : function(){return this.wwt_nrg_cons/this.wwt_vol_trea},
@@ -170,8 +170,8 @@ var Global = {
 			wwt_KPI_nrg_biogas : function(){return this.wwt_nrg_biog/Global.Waste.ww_num_trip},
 			wwt_KPI_biog_x_bod : function(){return this.wwt_biog_pro/this.c_wwt_bod_rmvd()},
 			wwt_KPI_nrg_x_biog : function(){return this.wwt_nrg_biog/this.c_wwt_nrg_biog()},
-			wwt_KPI_sludg_prod : function(){return this.wwt23/Global.Waste.ww_num_trip},
-			wwt_KPI_dry_sludge : function(){var arr=Global.Substages.Waste.Treatment; return this.wwt24/arr.length; },
+			wwt_KPI_sludg_prod : function(){return -1/*Global.Waste.ww_num_trip*/},
+			wwt_KPI_dry_sludge : function(){var arr=Global.Substages.Waste.Treatment; return -1;/*this.wwt24/arr.length;*/ },
 			wwt_KPI_capac_util : function(){return this.wwt_vol_trea/this.wwt25;},
 			/*<Level3>*/
 			/*</Level3>*/
