@@ -238,8 +238,8 @@
 					newCell.style.fontSize='10px';
 					newCell.innerHTML=(function()
 					{
-						var extra = Level3.isInList(code) ? " (<span style=font-size:10px>advanced</span>)" : "" ;
-						return " <a href=variable.php?id="+code+">"+code+"</a>"+extra;
+						var extra = Level3.isInList(code) ? "(<span style=font-size:10px>advanced</span>)" : "" ;
+						return extra+" <a href=variable.php?id="+code+">"+code+"</a>";
 					})();
 
 					/*variable description*/
@@ -257,9 +257,9 @@
 
 						if(isCV)
 						{
-							//quan es crida encara no existeix
 							substages[s][code]=CurrentStage[code]; //copy the function inside current substage
 							newCell.innerHTML=format(substages[s][code]()/multiplier);
+							newCell.title=prettyFormula;
 						}
 						else
 						{
@@ -404,8 +404,8 @@
 				//show code
 				newRow.insertCell(-1).innerHTML=(function()
 				{
-					var extra = Level3.isInList(field) ? " (advanced)" : "" ;
-					return "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>"+extra;
+					var extra = Level3.isInList(field) ? "(advanced)" : "" ;
+					return extra+" <a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
 				})();
 
 				//description

@@ -93,7 +93,7 @@
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
 				newCell.innerHTML="Advanced"
-				newRow.insertCell(-1).innerHTML="YES (only visible if 'Type of assessment' is 'Complete')";
+				newRow.insertCell(-1).innerHTML="YES <span style=background:yellow>(only editable/visible if 'Type of assessment' is 'Advanced')</span>";
 			}
 
 			//if output: show inputs involved

@@ -10,11 +10,11 @@
 		Simple
 	</label>
 	&emsp;
-	<label title="Complete assessment consists of more inputs and indicators" style=cursor:help>
+	<label title="Advanced assessment consists of more inputs and indicators" style=cursor:help>
 		<input name=assessment type=radio 
 			value=complete   
 			onchange="updateAssessment(this.value)">
-		Complete (?)
+		Advanced (?)
 	</label>
 </table>
 

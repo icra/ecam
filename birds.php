@@ -174,10 +174,10 @@
 			<tr stage=waste class=hidden><td>Resident population                              <td><input id='ww_resi_pop' onchange="BEV.updateField(this)"> <td>People
 			<tr stage=waste class=hidden><td>Population connected                             <td><input id='ww_conn_pop' onchange="BEV.updateField(this)"> <td>People
 			<tr stage=waste class=hidden><td>Serviced population                              <td><input id='ww_serv_pop' onchange="BEV.updateField(this)"> <td>People
+			<tr stage=waste class=hidden><td>Treated wastewater daily flow                    <td><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>/day
 			<tr stage=waste class=hidden><td>Energy consumed from the grid per month          <td><input id='ww_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/month
 			<tr stage=waste class=hidden><td>Monthly running costs                            <td><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
 			<tr stage=waste class=hidden><td>Monthly energy costs                             <td><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
-			<tr stage=waste class=hidden><td>Treated wastewater daily flow                    <td><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>/day
 			<tr stage=waste class=hidden><td>Number of trips to sludge disposal site per week <td><input id='ww_num_trip' onchange="BEV.updateField(this)"> <td>trips
 			<tr stage=waste class=hidden><td>distance to disposal site                        <td><input id='ww_dist_dis' onchange="BEV.updateField(this)"> <td>km
 			<tr stage=waste class=hidden><td>TN effluent limit                                <td><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
