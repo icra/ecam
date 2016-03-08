@@ -81,7 +81,7 @@
 		{
 			copyFieldsFrom(JSON.parse(reader.result),Global);
 			updateResult();
-			window.location.reload();
+			window.location='birds.php';
 		}
 		reader.readAsText(file);
 	}

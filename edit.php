@@ -698,3 +698,10 @@
 </div>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
+
+	<?php
+		if($sublevel=="General")
+		{
+			echo "<script>document.querySelector('table#inputs').style.display='none'</script>";
+		}
+	?>

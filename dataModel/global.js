@@ -107,9 +107,6 @@ var Global = {
 		"Distribution":{
 			"wsd_vol_dist":0,
 			"wsd_nrg_cons":0,
-			"wsd_resi_pop":0,
-			"wsd_serv_pop":0,
-			"wsd_non_revw":0,
 			"wsd_auth_con":0,
 			wsd_KPI_GHG_elec:function(){return this.wsd_nrg_cons*Global.General.conv_kwh_co2},
 			wsd_KPI_nrg_per_m3:function(){return this.wsd_nrg_cons/this.wsd_auth_con},
@@ -134,6 +131,13 @@ var Global = {
 			c_wsd_nrg_supp:function(){return this.wsd_nrg_cons+this.c_wsd_nrg_natu()},
 			c_wsd_nrg_topo:function(){return 9810*this.wsd_vol_inje*(this.wsd_hi_no_el-this.wsd_av_no_el)},
 			c_wsd_vol_head:function(){return this.wsd_vol_pump/this.wsd_pmp_head/100},
+			 
+			wsd_KPI_std_nrg_cons:function(){return this.c_wsd_vol_head()/this.wsd_nrg_cons},
+			wsd_KPI_nrg_efficien:function(){return 100*this.c_wsd_nrg_mini()/(this.c_wsd_nrg_supp()-this.wsd_nrg_recv)},
+			wsd_KPI_nrg_topgraph:function(){return 100*this.c_wsd_nrg_topo()/(this.c_wsd_nrg_supp()-this.wsd_nrg_recv)},
+			wsd_KPI_water_losses:function(){return -1},
+			wsd_KPI_un_head_loss:function(){return this.wsd_fri_loss/this.wsd_main_len},
+
 			wsd_SL_pres_ade:function(){return 100*this.wsd_deli_pts/this.wsd_ser_cons},
 			wsd_SL_cont_sup:function(){return 100*this.wsd_time_pre/24/Global.General.Days()},
 			/*</Level3*/
@@ -160,6 +164,7 @@ var Global = {
 		"c_ww_biogas_flar"    :function(){if(Global.Configuration["Yes/No"]["Are you valorizing biogas"]==0) return this.ww_serv_pop*this.ww_bod_pday*0.9*0.4*Global.General.Days()/1000; else return 0; },
 		"c_ww_nrg_engines"    :function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].waste]; return this.ww_vol_fuel*fuel.FD/1000*fuel.NCV/1000; },
 		"c_ww_nrg_tsludge"    :function(){return this.ww_num_trip*2*this.ww_dist_dis*0.25*0.84*43/1000000/1000},
+		"c_ww_in_dilution"    :function(){if(this.Treatment.wwt_vol_trea==0) return 0; else return (this.ww_bod_pday*this.ww_serv_pop*Global.General.Days()/this.Treatment.wwt_bod_infl*this.Treatment.wwt_vol_trea/1000)-this.ww_vol_coll*this.ww_serv_pop/this.ww_conn_pop},
 		ww_KPI_GHG_elec	      : function(){return this.ww_nrg_cons*Global.General.conv_kwh_co2},
 		ww_KPI_GHG_ne_ch4_wwt : function(){return ((this.Treatment.wwt_bod_infl-this.Treatment.c_wwt_bod_rmvd())*this.ww_ch4_efac+0.02*this.c_ww_biogas_flar()*0.59*0.66)*34}, //old c_ww55
 		ww_KPI_GHG_ne_n2o_tre : function(){return 298*this.ww_n2o_effl*this.ww_vol_wwtr/1000*0.005*44/28}, //old c_ww53
@@ -174,7 +179,7 @@ var Global = {
 		ww_SL_vol_pday: function(){return 1000*this.ww_vol_wwtr/this.ww_serv_pop/Global.General.Days()},
 		ww_SL_treat_m3: function(){return 100*this.ww_serv_pop/this.ww_conn_pop},
 		ww_SL_qual_com: function(){return 100*this.Treatment.wwt_tst_cmpl/this.Treatment.wwt_tst_cond},
-		ww_SL_dilution: function(){return 100*this.Collection.c_wwc_dilution()/this.ww_vol_coll},
+		ww_SL_dilution: function(){return 100*this.c_ww_in_dilution()/this.ww_vol_coll},
 
 		"General":{
 			"wwg_nrg_prod":0,
@@ -188,11 +193,10 @@ var Global = {
 		"Collection":{
 			"wwc_vol_conv":0,
 			"wwc_nrg_cons":0,
-			"c_wwc_dilution":function() { if(Global.Waste.Treatment.wwt_vol_trea==0) return 0; else return (Global.Waste.ww_bod_pday*Global.Waste.ww_serv_pop*Global.General.Days()/Global.Waste.Treatment.wwt_bod_infl*Global.Waste.Treatment.wwt_vol_trea/1000)-Global.Waste.ww_vol_coll*Global.Waste.ww_serv_pop/Global.Waste.ww_conn_pop },
 			wwc_KPI_GHG_elec:function(){return this.wwc_nrg_cons*Global.General.conv_kwh_co2},
 			wwc_KPI_nrg_per_m3   : function(){return this.wwc_nrg_cons/this.wwc_vol_conv},
 			wwc_KPI_nrg_percen   : function(){return -1},
-			wwc_KPI_std_nrg_co   : function(){return this.wwc_nrg_cons/1},
+			wwc_KPI_std_nrg_co   : function(){return -1 /*this.wwc_nrg_cons*/},
 			/*<Level3>*/
 			"wwc_vol_pump":0,
 			"wwc_pmp_head":0,
@@ -280,12 +284,12 @@ var Global = {
 	Configuration:{
 		"Active Stages":{
 			"water":0,
-			"waterGen":0,
+			"waterGen":1,
 			"waterAbs":0,
 			"waterTre":0,
 			"waterDis":0,
 			"waste":0,
-			"wasteGen":0,
+			"wasteGen":1,
 			"wasteCol":0,
 			"wasteTre":0,
 			"wasteDis":0,

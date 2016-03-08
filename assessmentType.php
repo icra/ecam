@@ -12,7 +12,7 @@
 	&emsp;
 	<label title="Advanced assessment consists of more inputs and indicators" style=cursor:help>
 		<input name=assessment type=radio 
-			value=complete   
+			value=advanced   
 			onchange="updateAssessment(this.value)">
 		Advanced (?)
 	</label>
@@ -33,7 +33,7 @@
 		if(Global.Configuration.Assessment[level][sublevel]=='simple')
 			document.querySelector('input[name=assessment][value=simple]').setAttribute('checked',true);
 		else
-			document.querySelector('input[name=assessment][value=complete]').setAttribute('checked',true);
+			document.querySelector('input[name=assessment][value=advanced]').setAttribute('checked',true);
 
 	}
 </script>

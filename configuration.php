@@ -48,8 +48,8 @@
 		{
 			for(var stage in Global.Configuration["Active Stages"])
 			{
-				/**skip is always active*/
-				switch(stage){case 'uws':continue;break;}
+				/**skip general: always active*/
+				switch(stage){case 'waterGen':case 'wasteGen':continue;break;}
 				if(Global.Configuration["Active Stages"][stage])
 				{
 					/**set checked*/document.getElementById(stage).checked=true;
@@ -113,12 +113,12 @@
 
 						if(question=="Are you producing electrical energy")
 						{
-							if(as.waterGen==0 && as.wasteGen==0 && as.waterAbs==0 && as.wasteDis==0)
+							if(as.waterAbs==0 && as.wasteDis==0)
 							{
 								Global.Configuration["Yes/No"][question]=0;
 								newRow.style.backgroundColor='#f6f6f6';
 								newRow.style.color='#aaa';
-								return "Only if [wsg] or [wsa] or [wwg] or [wwd]"; 
+								return "Only if or [wsa] or [wwd]"; 
 							}
 						}
 						if(question=="Do you have fuel engines to run pumps")
@@ -330,7 +330,7 @@
 			<?php 
 				function printL1stage($alias,$name)
 				{
-					echo "<tr><td rowspan=4 style=text-align:center> 
+					echo "<tr><td rowspan=3 style=text-align:center> 
 						<label>
 							<input type=checkbox id=$alias onchange=Configuration.activate(this.id)> 
 							<img src=img/$alias.png> $name
@@ -347,14 +347,12 @@
 				}
 
 				printL1stage("water","Water supply");
-				printL2stage("water","waterGen","General",     false);
-				printL2stage("water","waterAbs","Abstraction", true);
+				printL2stage("water","waterAbs","Abstraction", false);
 				printL2stage("water","waterTre","Treatment",   true);
 				printL2stage("water","waterDis","Distribution",true);
 
 				printL1stage('waste',"Wastewater");
-				printL2stage("waste","wasteGen","General",   false);
-				printL2stage("waste","wasteCol","Collection",true);
+				printL2stage("waste","wasteCol","Collection",false);
 				printL2stage("waste","wasteTre","Treatment", true);
 				printL2stage("waste","wasteDis","Discharge", true);
 			?>

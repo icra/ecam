@@ -15,6 +15,7 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
+<!--linear--><?php include'linear.php'?>
 
 <button class=button id=graph1 onclick=window.location='graph.php?g=graph1'>L1 GHG    </button>
 <button class=button id=graph2 onclick=window.location='graph.php?g=graph2'>L1 NRG    </button>

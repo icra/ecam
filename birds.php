@@ -2,7 +2,7 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
-		table#inputs input {width:60px;transition:all 1s;border:1px solid #ccc}
+		table#inputs input {width:70px;transition:all 1s;border:1px solid #ccc}
 		table#inputs input.edited {background:lightgreen;}
 		table#inputs tr.hidden {display:none}
 		table#inputs tr[indic]{text-align:center;color:#999;background:#eee}
@@ -93,6 +93,10 @@
 			{
 				var input = inputs[i];
 				var field = input.id; 
+
+				//set the longer description in the input <td> element
+				input.parentNode.parentNode.childNodes[0].title=Info[field].explanation;
+
 				var L1 = field.search("ws")==0 ? "Water" : "Waste";
 
 				//the value we are going to put in the input
@@ -126,7 +130,7 @@
 					default:break;
 				}
 				//set the value
-				input.value=value;
+				input.value=format(value);
 			}
 		}
 
@@ -176,8 +180,8 @@
 			<tr stage=waste class=hidden><td>Serviced population                              <td><input id='ww_serv_pop' onchange="BEV.updateField(this)"> <td>People
 			<tr stage=waste class=hidden><td>Treated wastewater daily flow                    <td><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>/day
 			<tr stage=waste class=hidden><td>Energy consumed from the grid per month          <td><input id='ww_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/month
-			<tr stage=waste class=hidden><td>Monthly running costs                            <td><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
-			<tr stage=waste class=hidden><td>Monthly energy costs                             <td><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
+			<tr stage=waste class=hidden><td>Monthly energy costs                             <td><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
+			<tr stage=waste class=hidden><td>Monthly running costs                            <td><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
 			<tr stage=waste class=hidden><td>Number of trips to sludge disposal site per week <td><input id='ww_num_trip' onchange="BEV.updateField(this)"> <td>trips
 			<tr stage=waste class=hidden><td>distance to disposal site                        <td><input id='ww_dist_dis' onchange="BEV.updateField(this)"> <td>km
 			<tr stage=waste class=hidden><td>TN effluent limit                                <td><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
