@@ -290,7 +290,7 @@
 <!--activate all debug button
 -->
 <div style="margin:0.5em 0 0.5em 0">
-	<button class=button onclick="activateAllStages()">activate all (debug)</button>
+	<button class=button onclick="activateAllStages()">activate all (debug mode)</button>
 	<script>
 		function activateAllStages()
 		{

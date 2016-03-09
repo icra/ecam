@@ -495,6 +495,13 @@
 			updateOutputs();
 			Sidebar.update();
 			updateResult();
+			try{
+				drawCharts();
+			}
+			catch(e)
+			{
+				console.log(e);
+			}
 		}
 	</script>
 </head><body onload=init()><center>
@@ -546,6 +553,16 @@
 		RESULTS - Key performance indicators
 </table>
 
+<!--display graphs-->
+<div id=graph style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%" >Graphs here</div>
+<script>
+	function drawCharts()
+	{
+		Graphs.graph7(false,'graph')
+	}
+	google.charts.load('current',{'packages':['corechart','sankey']});
+	google.charts.setOnLoadCallback(drawCharts);
+</script>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
 
@@ -569,5 +586,4 @@ function checkIfNoSubstages()
 	}
 }
 checkIfNoSubstages();
-
 </script>

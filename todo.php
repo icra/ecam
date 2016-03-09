@@ -15,7 +15,10 @@
 		<tr><td>Finish questions variable hidings<td>DOING NOW</td>
 		<tr><td>Implement benchmarks again<td>Wait</td>
 		<tr><td>Level2warnings and Level2only variables<td>Wait</td>
-		<tr><td>Remove GHG emissions from insight<td>Pending</td>
+		<tr><td>Remove GHG emissions from insight<td>Wait</td>
+		<tr><td>Split fuel question in WS and WW<td>Pending</td>
+		<tr><td>WWT calculated variables not used<td>Wait</td>
+		<tr><td>Question for andrés on how to calculate drinking water tests<td>Pending</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
 		<tr><td>Service level indicators new table<td>Pending</td>
 		<tr><td>Move graphs<td>Need more info</td>
@@ -34,10 +37,10 @@
 		{
 			switch(coll[i].textContent)
 			{
-				case "Pending": 	   newColor='orange';    break;
-				case "Wait":           newColor='#af0';      break;
-				case "Need more info": newColor='lightcoral';break;
-				default:               newColor='';          break;
+				case "Pending": 	   newColor='orange';     break;
+				case "Wait":           newColor='#af0';       break;
+				case "Need more info": newColor='lightcoral'; break;
+				default:               newColor='';           break;
 			}
 			coll[i].style.backgroundColor=newColor;
 		}

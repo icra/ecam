@@ -66,6 +66,10 @@
 				case 'ww_run_cost':
 					value = value*days/30; break;
 
+				/** trips/week -> trips */
+				case 'ww_num_trip':
+					value = value*days/7; break;
+
 				/** L per month -> m3 */
 				case 'ws_vol_fuel':
 					value = value*days/30/1000; break;
@@ -73,6 +77,8 @@
 				/** m3 per day -> m3 */
 				case 'ww_vol_wwtr':
 					value = value*days; break;
+
+				/** km -> m */
 				case 'ww_dist_dis':
 					value = value*1000;
 
@@ -121,6 +127,10 @@
 					case 'ww_run_cost':
 						value = value/days*30; break;
 
+					/** trips/week -> trips */
+					case 'ww_num_trip':
+						value = value/days*7; break;
+
 					/** L per month -> m3 */
 					case 'ws_vol_fuel':
 						value = value/days*30*1000; break;
@@ -129,8 +139,10 @@
 					case 'ww_vol_wwtr':
 						value = value/days; break;
 
+					/** km -> m */
 					case 'ww_dist_dis':
 						value = value/1000;
+
 					default:break;
 				}
 				//set the value
@@ -169,28 +181,28 @@
 	<div style="color:#666;font-size:16px;margin:0.5em 0 0.5em 0">INPUTS - Enter typical values from your daily operation</div>
 	<table id=inputs>
 		<tr><th colspan=3>Water supply
-			<tr stage=water class=hidden><td>Resident population                              <td><input id='ws_resi_pop' onchange="BEV.updateField(this)"> <td>People
-			<tr stage=water class=hidden><td>Serviced population                              <td><input id='ws_serv_pop' onchange="BEV.updateField(this)"> <td>People
-			<tr stage=water class=hidden><td>Drinking water consumed per person per day       <td><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>L/person/day
-			<tr stage=water class=hidden><td>Energy consumed from the grid per month          <td><input id='ws_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/month
-			<tr stage=water class=hidden><td>Monthly energy costs                             <td><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
-			<tr stage=water class=hidden><td>Monthly running costs                            <td><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
-			<tr stage=water class=hidden><td>Monthly volume of fuel consumed                  <td><input id='ws_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
-			<tr stage=water class=hidden><td>Percentage of non revenue water                  <td><input id='ws_non_revw' onchange="BEV.updateField(this)"> <td>%
+			<tr stage=water class=hidden><td>Resident population                        <td><input id='ws_resi_pop' onchange="BEV.updateField(this)"> <td>People
+			<tr stage=water class=hidden><td>Serviced population                        <td><input id='ws_serv_pop' onchange="BEV.updateField(this)"> <td>People
+			<tr stage=water class=hidden><td>Drinking water consumed per person per day <td><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>L/person/day
+			<tr stage=water class=hidden><td>Energy consumed from the grid per month    <td><input id='ws_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/month
+			<tr stage=water class=hidden><td>Monthly energy costs                       <td><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
+			<tr stage=water class=hidden><td>Monthly running costs                      <td><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
+			<tr stage=water class=hidden><td>Monthly volume of fuel consumed            <td><input id='ws_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
+			<tr stage=water class=hidden><td>Percentage of non revenue water            <td><input id='ws_non_revw' onchange="BEV.updateField(this)"> <td>%
 			<tr indic=water class=hidden><td colspan=3> Stage not active
 		<tr><th colspan=3 style=background:#bf5050>Wastewater
-			<tr stage=waste class=hidden><td>Resident population                              <td><input id='ww_resi_pop' onchange="BEV.updateField(this)"> <td>People
-			<tr stage=waste class=hidden><td>Population connected                             <td><input id='ww_conn_pop' onchange="BEV.updateField(this)"> <td>People
-			<tr stage=waste class=hidden><td>Serviced population                              <td><input id='ww_serv_pop' onchange="BEV.updateField(this)"> <td>People
-			<tr stage=waste class=hidden><td>Treated wastewater daily flow                    <td><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>/day
-			<tr stage=waste class=hidden><td>Energy consumed from the grid per month          <td><input id='ww_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/month
-			<tr stage=waste class=hidden><td>Monthly energy costs                             <td><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
-			<tr stage=waste class=hidden><td>Monthly running costs                            <td><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
-			<tr stage=waste class=hidden><td>Number of trips to sludge disposal site per week <td><input id='ww_num_trip' onchange="BEV.updateField(this)"> <td>trips
-			<tr stage=waste class=hidden><td>distance to disposal site                        <td><input id='ww_dist_dis' onchange="BEV.updateField(this)"> <td>km
-			<tr stage=waste class=hidden><td>TN effluent limit                                <td><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
-			<tr stage=waste class=hidden><td>Monthly volume of fuel consumed                  <td><input id='ww_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
-			<tr stage=waste class=hidden><td>Annual protein consumption per capita            <td><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/day
+			<tr stage=waste class=hidden><td>Resident population                        <td><input id='ww_resi_pop' onchange="BEV.updateField(this)"> <td>People
+			<tr stage=waste class=hidden><td>Population connected                       <td><input id='ww_conn_pop' onchange="BEV.updateField(this)"> <td>People
+			<tr stage=waste class=hidden><td>Serviced population                        <td><input id='ww_serv_pop' onchange="BEV.updateField(this)"> <td>People
+			<tr stage=waste class=hidden><td>Treated wastewater daily flow              <td><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>/day
+			<tr stage=waste class=hidden><td>Energy consumed from the grid per month    <td><input id='ww_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/month
+			<tr stage=waste class=hidden><td>Monthly energy costs                       <td><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
+			<tr stage=waste class=hidden><td>Monthly running costs                      <td><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
+			<tr stage=waste class=hidden><td>Trips to sludge disposal site per week     <td><input id='ww_num_trip' onchange="BEV.updateField(this)"> <td>trips/week
+			<tr stage=waste class=hidden><td>Distance to disposal site                  <td><input id='ww_dist_dis' onchange="BEV.updateField(this)"> <td>km
+			<tr stage=waste class=hidden><td>TN effluent limit                          <td><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
+			<tr stage=waste class=hidden><td>Monthly volume of fuel consumed            <td><input id='ww_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
+			<tr stage=waste class=hidden><td>Annual protein consumption per capita      <td><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/year
 			<tr indic=waste class=hidden><td colspan=3> Stage not active
 	</table>
 </div>

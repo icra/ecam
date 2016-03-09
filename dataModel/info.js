@@ -83,7 +83,7 @@ var Info = {
 	wsg_KPI_nrg_cons:{description:"Total electric energy consumption (sum for Abstraction, Treatment and Distribution stages)",magnitude:"Energy",unit:"kWh",explanation:"Electric energy consumption including both from the grid and self-produced, for the water stages, by the undertaking during the entire assessment period", },
 
 	//L2 WSA
-	"wsa_nrg_cons":{description:"Total electric energy consumption",magnitude:"Energy",unit:"kWh",explanation:"Electric energy consumption including both from the grid and self-produced, for the water abstractionunit, by the undertaking during the entire assessment period", },
+	"wsa_nrg_cons":{description:"Energy consumed from the grid",magnitude:"Energy",unit:"kWh",explanation:"Electric energy consumption including both from the grid and self-produced, for the water abstractionunit, by the undertaking during the entire assessment period", },
 	"wsa_vol_conv":{description:"Volume of conveyed water",magnitude:"Volume",unit:"m3",explanation:"Sum of the volume of water conveyed (gravity or pumped) in the water abstractionunit that are the responsibility of the undertaking, during the assessment period", },
 	"wsa_nrg_turb":{description:"Electric energy produced from turbines",magnitude:"Energy",unit:"kWh",explanation:"Sum of energy recovered during the assessment period by all turbines for abstracted water managed by the undertaking", },
 	"wsa_pmp_head":{description:"Pumping head",magnitude:"Head",unit:"m",explanation:"	Head at which the water is pumped in each water abstractionunit that are the responsibility of the undertaking, during the assessment period"},
@@ -106,7 +106,7 @@ var Info = {
 
 	//L2 WST
 	"wst_vol_trea":{description:"Volume of treated water",magnitude:"Volume",unit:"m3",explanation:"Sum of the volume of water treated by WTPs that are the responsibility of the water undertaking, during the assessment period", },
-	"wst_nrg_cons":{description:"Total energy consumed",magnitude:"Energy",unit:"kWh",explanation:"Energy consumed during the assessment period by each urban water treatment plant managed by the undertaking", },
+	"wst_nrg_cons":{description:"Energy consumed from the grid",magnitude:"Energy",unit:"kWh",explanation:"Energy consumed during the assessment period by each urban water treatment plant managed by the undertaking", },
 	"wst_tst_carr":{description:"Treated water quality tests carried out",magnitude:"Number",unit:"number",explanation:"Number of treated water tests carried out during the assessment period", },
 	"wst_tst_aest":{description:"Compliance of aesthetic tests",magnitude:"Number",unit:"number",explanation:"Number of aesthetic tests of treated water carried out during the assessment period, which comply with the applicable standards or legislation", },
 	"wst_tst_micr":{description:"Compliance of microbiological tests",magnitude:"Number",unit:"number",explanation:"Number of microbiological tests of treated water carried out during the assessment period, which comply with the applicable standards or legislation", },
@@ -137,7 +137,7 @@ var Info = {
 	wst_KPI_t__other:{description:"WTPs with other sequence",magnitude:"Percent",unit:"%",explanation:"",},
 
 	//L2 WSD
-	"wsd_nrg_cons" :{description:"Total energy consumed",magnitude:"Energy",unit:"kWh",explanation:"Electric energy consumption including both from the grid and self-produced, for water distribution during the entire assessment period", },
+	"wsd_nrg_cons" :{description:"Energy consumed from the grid",magnitude:"Energy",unit:"kWh",explanation:"Electric energy consumption including both from the grid and self-produced, for water distribution during the entire assessment period", },
 	"wsd_vol_dist" :{description:"Input volume",magnitude:"Volume",unit:"m3",explanation:"The water volume entering the distribution system from the water treatment or directly from abstraction during the assessment period ", },
 	"wsd_auth_con" :{description:"Volume of authorized consumption",magnitude:"Volume",unit:"m3",explanation:"Sum of the volume of metered and/or non-metered water that, during the assessment period, is taken by registered customers, by the water supplier itself, or by others who are implicitly or explicitly authorised to do so by the water supplier, for residential, commercial, industrial or public purposes. It includes water exported", },
 	"wsd_deli_pts" :{description:"Delivery points with adequate pressure",magnitude:"Number",unit:"number",explanation:"Number of delivery points that receive and are likely to receive pressure equal to or above the guaranteed or declared target level at the peak demand hour (but not when demand is abnormal).", },
@@ -181,7 +181,7 @@ var Info = {
 
 	//L2 WWC
 	"wwc_vol_conv":{description:"Volume of wastewater conveyed to treatment or to an outfall for untreated discharge",magnitude:"Volume",unit:"m3",explanation:"Collected wastewater, corresponding to the volume of domestic, commercial and industrial outputs to the sewer system during the assessment period (pumped or not)", },
-	"wwc_nrg_cons":{description:"Total electric energy consumption",magnitude:"Energy",unit:"kWh",explanation:"Energy consumed during the assessment period by each pumping station for conveying wastewater to treatment managed by the undertaking", },
+	"wwc_nrg_cons":{description:"Energy consumed from the grid",magnitude:"Energy",unit:"kWh",explanation:"Energy consumed during the assessment period by each pumping station for conveying wastewater to treatment managed by the undertaking", },
 	"wwc_vol_pump":{description:"Volume pumped",magnitude:"Volume",unit:"m3",explanation:"", },
 	"wwc_pmp_head":{description:"Pump head",magnitude:"Head",unit:"m",explanation:"", },
 	c_wwc_vol_head:{description:"Volume pumped x pump head",magnitude:"Volume x Head",unit:"m3 x 100m",explanation:"Sum, for all the pumps of the water of the total volume pumped by pump i (m3) times the pump head i (m) / 100", },
@@ -197,7 +197,7 @@ var Info = {
 	"wwt_tn_influ":{description:"Influent TN load",magnitude:"Mass",unit:"kg",explanation:"Total nitrogen load entering the WWTP during the assessment period. It can be estimated by multiplying the average TN concentration in the influent by the volume entering the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate.", },
 	"wwt_tn_efflu":{description:"Effluent TN load",magnitude:"Mass",unit:"kg",explanation:"Total nitrogen load in treated effluent prior to discharge during the assessment period. It can be estimated by multiplying the average TN concentration in the influent by the volume entering the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate.", },
 	"wwt_vol_trea":{description:"Volume of treated wastewater",magnitude:"Volume",unit:"m3",explanation:"Volume of treated wastewater by eachunit, over the assessment period", },
-	"wwt_nrg_cons":{description:"Total electric energy consumption",magnitude:"Energy",unit:"kWh",explanation:"Total energy consumed during the assessment period by all wastewater treatment plants managed by the undertaking", },
+	"wwt_nrg_cons":{description:"Energy consumed from the grid",magnitude:"Energy",unit:"kWh",explanation:"Total energy consumed during the assessment period by all wastewater treatment plants managed by the undertaking", },
 	"wwt_bod_effl":{description:"Effluent BOD5 load",magnitude:"Mass",unit:"kg",explanation:"BOD5 load at the effluent of the WWTP during the assessment period. It can be estimated by multiplying the average BOD5 concentration in the effluent by the effluent volume the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate", },
 	"wwt_nrg_biog":{description:"Electrical energy produced from biogas valorization",magnitude:"Energy",unit:"kWh",explanation:"Energy produced from biogas valorization during the assessment period by each wastewater treatment plant managed by the undertaking", },
 	"wwt_ch4_biog":{description:"Percentage of methane in biogas",magnitude:"Percentage",unit:"%",explanation:"Percent of the methane content in the produced biogas", },
@@ -231,7 +231,7 @@ var Info = {
 	wwt_KPI_nrg_biogas:{description:"Energy production from biogas",magnitude:"Energy/Volume",unit:"kWh/m3",explanation:"Unit energy consumption per BOD mass removed in wastewater treatment plants", },
 	wwt_KPI_nrg_x_biog:{description:"Electrical energy produced per total available energy in biogas",magnitude:"Percent",unit:"%",explanation:"Unit biogas produced per BOD mass removed in wastewater treatment plants", },
 	wwt_KPI_sludg_prod:{description:"Sludge production (total weight)",magnitude:"Mass/Volume",unit:"kg/m3",explanation:"Percentage of the electrical energy produced related to the available energy in biogas", },
-	wwt_KPI_dry_sludge:{description:"<span style=color:red>Formula TBD</span> Dry weight in sludge production",magnitude:"Percent",unit:"% DW",explanation:"Unit sludge production per treated wastewater in wastewater treatment plants", },
+	wwt_KPI_dry_sludge:{description:"Dry weight in sludge production",magnitude:"Percent",unit:"% DW",explanation:"Unit sludge production per treated wastewater in wastewater treatment plants", },
 	wwt_KPI_capac_util:{description:"Capacity utilisation",magnitude:"Percent",unit:"%",explanation:"Percentage of dry weight of sludge that comes out from the WWTP to disposal", },
 	wwt_KPI_t_T_____:{description:"WTPs with trickling filters (TF)",magnitude:"Percent",unit:"%",explanation:"Percentage of each treatment type, in terms of volume treated, of all WWTPs assessed", },
 	wwt_KPI_t__A____:{description:"WTPs with activated sludge (AS)",magnitude:"Percent",unit:"%",explanation:"", },
@@ -243,7 +243,7 @@ var Info = {
 
 	//L2 WWD
 	"wwd_vol_disc" :{description:"Volume of treated or untreated discharged wastewater",magnitude:"Volume",unit:"m3",explanation:"Volume of wastewater discharged by each wastewater treatment plant that are the responsibility of the undertaking, during the assessment period. This includes all the wastewater collected, whether it is conveyed to treatment or discharged untreated", },
-	"wwd_nrg_cons" :{description:"Electric energy consumed for pumping discharged wastewater",magnitude:"Energy",unit:"kWh",explanation:"Sum of energy consumed (from the grid or self-produced) during the assessment period by all each pumping stations for discharged wastewater managed by the undertaking", },
+	"wwd_nrg_cons" :{description:"Energy consumed from the grid",magnitude:"Energy",unit:"kWh",explanation:"Sum of energy consumed (from the grid or self-produced) during the assessment period by all each pumping stations for discharged wastewater managed by the undertaking", },
 	"wwd_nrg_recv" :{description:"Energy recovered during wastewater discharge",magnitude:"Energy",unit:"kWh",explanation:"Sum of energy recovered during the assessment period by all turbines for wastewater discharged managed by the undertaking", },
 	"wwd_vol_pump":{description:"Pumped volume",magnitude:"Volume",unit:"m3",explanation:"", },
 	"wwd_pmp_head":{description:"Head pumped against",magnitude:"Head",unit:"m",explanation:"", },

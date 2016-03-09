@@ -576,7 +576,22 @@
 			init(); //update tables and write cookies
 		}
 
-		/** Update all tables */
+		//depending on stage, draw different charts
+		function drawCharts()
+		{
+			<?php
+				if($sublevel=="General")
+				{
+					echo "Graphs.graph5(false,'graph');";
+				}
+				if($sublevel==false)
+				{
+					echo "Graphs.graph4(false,'graph')";
+				}
+			?>
+		}
+
+		/** Update all */
 		function init()
 		{
 			updateInputs();
@@ -585,6 +600,13 @@
 			updateOtherOutputs();
 			Exceptions.apply();
 			updateResult();
+			try{
+				drawCharts();
+			}
+			catch(e)
+			{
+				console.log(e);
+			}
 		}
 	</script>
 
@@ -640,8 +662,8 @@
 								class=button
 								style='background:$color;font-size:12px;vertical-align:middle'
 								onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
+									<img src=img/substages.png style='width:40px;margin-right:1em'>
 									Substages
-									<img src=img/substages.png style='width:40px;margin-left:1em'>
 							</button> 
 							<span style=font-size:12px;color:#666>
 								&rarr; Divided in 
@@ -663,7 +685,11 @@
 <!--IO-->
 <div id=io>
 	<!--INPUTS-->
-	<table id=inputs class=inline style="margin-left:auto;max-width:47%">
+	<table id=inputs class=inline 
+		style="
+			margin-left:auto;max-width:47%;
+			<?php if($sublevel=="General")echo "display:none;"; ?>
+		">
 		<tr><th colspan=5 class=tableHeader>INPUTS
 		<tr>
 			<th>Description
@@ -671,7 +697,6 @@
 			<th>Unit
 			<th>Data quality
 	</table>
-
 	<!--OUTPUTS-->
 	<div class=inline style="max-width:47%;margin-left:1em">
 		<!--GHG-->
@@ -705,12 +730,12 @@
 		</table>
 	</div>
 </div>
+
+<!--display graphs-->
+<div id=graph style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%" >Graphs here</div>
+<script>
+	google.charts.load('current',{'packages':['corechart','sankey']});
+	google.charts.setOnLoadCallback(drawCharts);
+</script>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
-
-	<?php
-		if($sublevel=="General")
-		{
-			echo "<script>document.querySelector('table#inputs').style.display='none'</script>";
-		}
-	?>

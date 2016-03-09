@@ -149,7 +149,7 @@
 		<div style="padding:0;margin:0;background:#d71d24;height:5px"></div>
 		<div style="padding:0;margin:0;background:#0aaff1;height:5px"></div>
 
-		<table>
+		<table style=width:95%>
 			<tr><th>General
 			<tr><td><a href=index.php>Home</a>
 			<tr><td><a href=getStarted.php>General info</a>
@@ -170,11 +170,11 @@
 			<tr><th>Summary
 			<tr><td><a href=summary.php?type=input>All Inputs</a>
 			<tr><td><a href=summary.php?type=ccvv>All Calculated variables</a>
-			<tr><td><a href=summary.php?type=output>All Performance Indicators (PIs)</a>
+			<tr><td><a href=summary.php?type=output>All Performance indicators</a>
 			<tr><th>Other
 			<tr><td><a href=graph.php?g=graph1>Graphs</a>
-			<tr><td><a href=export.php>Export variables, descriptions and formulas</a>
-			<tr><td><a href=todo.php>To do list</a>
+			<tr><td><a href=export.php>Export</a>
+			<tr><td><a href=todo.php>To do (debug mode)</a>
 			<tr><td><a href=problems.php>Problems (debug mode)</a>
 		</table>
 	</div>

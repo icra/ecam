@@ -14,10 +14,10 @@ Graphs.graph1=function(withTable,container)
 	//actual graph data
 	var data=google.visualization.arrayToDataTable([
 		['Stage',            'Emissions'],
-		["ws electrical",     wsYes],
-		["ws non electrical", wsNon],
-		["ww electrical",     wwYes],
-		["ww non electrical", wwNon],
+		["WS From electricity",     wsYes],
+		["WS From fuel engines", wsNon],
+		["WW From electricity",     wwYes],
+		["WW From non electricity", wwNon],
 	]);
 
 	//options
@@ -171,7 +171,6 @@ Graphs.graph3=function(withTable,container)
 			'Non-electrical related', 
 			{role:'annotation'} 
 		],
-
 		['WS per capita', slice_1 , slice_2 , ''],
 		['WW per capita', slice_3 , slice_4 , ''],
 		['WS per SP',     slice_5 , slice_6 , ''],
@@ -183,12 +182,23 @@ Graphs.graph3=function(withTable,container)
 	//options
 	var options=
 	{
-		title:"Greenhouse gas emissions (per person or m3)",
-		//width:1000,
+		title:"Greenhouse gas emissions (kg CO2eq per person or m3)",
 		height:500,
 		legend:{position:'right',maxLines:100},
 		isStacked:true,
 		colors: ['#bca613','#00aeef', '#f3a000', '#89375c'],
+		/* todo
+		series:{
+			0:{ axis: 'distance' }, // Bind series 0 to an axis named 'distance'.
+			1:{ axis: 'brightness' } // Bind series 1 to an axis named 'brightness'.
+		},
+		axes:{
+			y:{
+				distance: {label: 'parsecs'}, // Left y-axis.
+				brightness: {side: 'right', label: 'apparent magnitude'} // Right y-axis.
+			},
+		},
+		*/
 	};
 
 	//empty container element
@@ -240,25 +250,28 @@ Graphs.graph4=function(withTable,container)
 	//Values
 	var slice_1 = ws.ws_KPI_GHG_elec();
 	var slice_2 = ws.ws_KPI_GHG_ne();
+
 	var slice_3 = ww.ww_KPI_GHG_elec();
-	var slice_4 = ww.ww_KPI_GHG_ne_engines();
-	var slice_5 = ww.ww_KPI_GHG_ne_tsludge();
-	var slice_6 = ww.ww_KPI_GHG_ne_ch4_wwt();
-	var slice_7 = ww.ww_KPI_GHG_ne_n2o_tre();
-	var slice_8 = ww.ww_KPI_GHG_ne_ch4_unt()+ww.ww_KPI_GHG_ne_n2o_unt();
+	var slice_4 = ww.ww_KPI_GHG_ne_ch4_wwt();
+	var slice_5 = ww.ww_KPI_GHG_ne_n2o_tre();
+	var slice_6 = ww.ww_KPI_GHG_ne_tsludge();
+	var slice_7 = ww.ww_KPI_GHG_ne_ch4_unt();
+	var slice_8 = ww.ww_KPI_GHG_ne_n2o_unt();
+	var slice_9 = ww.ww_KPI_GHG_ne_engines();
 
 	//actual graph data
 	var data=google.visualization.arrayToDataTable
 	([
-		['Stage',                                          'Emissions'],
-		['From electricyty (water)                       ', slice_1],
-		['From fuel engines (water)                      ', slice_2],
-		['From electricity (wastewater)                  ', slice_3],
-		['From fuel engines (wastewater)                 ', slice_4],
-		['From sludge transport (wastewater)             ', slice_5],
-		['From CH4 in plants (wastewater)                ', slice_6],
-		['From treated effluent discharge (wastewater)   ', slice_7],
-		['From untreated effluent discharge (wastewater) ', slice_8],
+		['Stage',                             'Emissions'],
+		['WS From electricity',                slice_1],
+		['WS From fuel engines',               slice_2],
+		['WW From electricity',                slice_3],
+		['WW From CH4 in WWTP',              slice_4],
+		['WW From N2O treated wastewater', slice_5],
+		['WW From sludge transport',           slice_6],
+		['WW From CH4 untreated wastewater',     slice_7],
+		['WW From NwO untreated wastewater',     slice_8],
+		['WW From fuel engines',               slice_9],
 	]);
 
 	//options
@@ -266,12 +279,12 @@ Graphs.graph4=function(withTable,container)
 	{ 
 		//width:800,
 		//height:400,
-		title:"Greenhouse gas emissions (insight)",
+		title:"Greenhouse gas emissions (kg CO2 eq)",
 		slices:
 		{
-			0:{color:'#d0afbe'},
-			1:{color:'#bca613'},
-			2:{color:'#453f1c'},
+			0:{color:'#00aff1'},
+			1:{color:'#66cef5'},
+			2:{color:'#bf5050'},
 			3:{color:'#89375c'},
 			4:{color:'#451c2e'},
 			5:{color:'#b8879d'},
@@ -294,15 +307,16 @@ Graphs.graph4=function(withTable,container)
 		var table=""+
 		"<button onclick=Graphs.graph4(false,'"+container+"')>Hide table</button>"+
 		"<table >"+
-			"<tr><th>Field                                          <th>Variable                                        <th>Value (kgCO2/year)"+
-			"<tr><td>From electricity (water)                       <td>ws_KPI_GHG_elec                                <td>"+format(slice_1)+
-			"<tr><td>From fuel engines(water)                       <td>ws_KPI_GHG_ne                                  <td>"+format(slice_2)+
-			"<tr><td>From electricity (wastewater)                  <td>ww_KPI_GHG_elec                                <td>"+format(slice_3)+
-			"<tr><td>From fuel engines (wastewater)                 <td>ww_KPI_GHG_ne_engines                          <td>"+format(slice_4)+
-			"<tr><td>From sludge transport (wastewater)             <td>ww_KPI_GHG_ne_tsludge                          <td>"+format(slice_5)+
-			"<tr><td>From CH4 in plants (wastewater)                <td>ww_KPI_GHG_ne_ch4_wwt                          <td>"+format(slice_6)+
-			"<tr><td>From treated effluent discharge (wastewater)   <td>ww_KPI_GHG_ne_n2o_tre                          <td>"+format(slice_7)+
-			"<tr><td>From untreated effluent discharge (wastewater) <td>ww_KPI_GHG_ne_ch4_unt+ww.ww_KPI_GHG_ne_n2o_unt <td>"+format(slice_8)+
+			"<tr><th>Field                                <th>Variable              <th>Value (kgCO2/year)"+
+			"<tr><td>WS From electricity                  <td>ws_KPI_GHG_elec       <td>"+format(slice_1)+
+			"<tr><td>WS From fuel engines                 <td>ws_KPI_GHG_ne         <td>"+format(slice_2)+
+			"<tr><td>WW From electricity                  <td>ww_KPI_GHG_elec       <td>"+format(slice_3)+
+			"<tr><td>WW From fuel engines                 <td>ww_KPI_GHG_ne_engines <td>"+format(slice_4)+
+			"<tr><td>WW From sludge transport             <td>ww_KPI_GHG_ne_tsludge <td>"+format(slice_5)+
+			"<tr><td>WW From CH4 in plants                <td>ww_KPI_GHG_ne_ch4_wwt <td>"+format(slice_6)+
+			"<tr><td>WW From treated effluent discharge   <td>ww_KPI_GHG_ne_n2o_tre <td>"+format(slice_7)+
+			"<tr><td>WW From untreated effluent discharge <td>ww_KPI_GHG_ne_ch4_unt <td>"+format(slice_8)+
+			"<tr><td>WW From untreated effluent discharge <td>ww_KPI_GHG_ne_n2o_unt <td>"+format(slice_8)+
 		"</table>";
 		var div = document.createElement('div');
 		div.style.fontSize="10px";
@@ -349,7 +363,7 @@ Graphs.graph5=function(withTable,container)
 		pieHole:0.4,
 		width:800,
 		height:400,
-		title:"L2 Energy consumption",
+		title:"Insight Energy consumption",
 		slices:
 		{
 			0:{color:'#66cef5'},
@@ -584,7 +598,7 @@ Graphs.graph7=function(withTable,container)
 		pieHole:0.4,
 		width:800,
 		height:400,
-		title:"L3 Energy consumption per substage",
+		title:"Energy consumption per substage",
 		/*
 		slices:{
 			0:{ color: '#66cef5' },
