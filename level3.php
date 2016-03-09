@@ -207,7 +207,11 @@
 					var isCV=code.search(/^c_/)>=0 ? true : false;
 
 					//copy the function inside current substage
-					if(isCV) substages[s][code]=CurrentStage[code]; 
+					if(isCV) 
+					{
+						for(var s in substages)
+							substages[s][code]=CurrentStage[code]; 
+					}
 
 					/*if assessment type is simple, hide L3 variables*/
 					if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")

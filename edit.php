@@ -71,6 +71,13 @@
 			}
 		?>
 
+		//remove a variable from the data structure which is no longer inside
+		function removeGhost(field)
+		{
+			CurrentLevel[field]=undefined;
+			init();
+		}
+
 		/** 
 		 * Transform a <td> cell to a <input> to make modifications in the Global object
 		 * @param {element} element - the <td> cell
@@ -153,7 +160,7 @@
 
 				newCell.innerHTML=(function()
 				{
-					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
+					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description <button onclick=removeGhost('"+field+"')>Remove it</button></span>";
 					var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";
 				})();
