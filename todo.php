@@ -8,19 +8,16 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>TO DO LIST</h1>
-<!--mail me--><div> Send mail to Lluis Bosch <a href=mailto:lbosch@icra.cat>lbosch@icra.cat</a> </div>
 <!--TO DO LIST-->
 <table id=todo>
 	<tr><th>Task<th>Status
 	<tr><td colspan=2 class=taskgroup>BACK-END
-		<tr><td>Level 1 changes<td>Wait</td>
-		<tr><td>Level 3 codes<td>Pending</td>
+		<tr><td>Finish questions variable hidings<td>DOING NOW</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
+		<tr><td>Move graphs<td>Need more info</td>
 		<tr><td>Create Warning in new system button<td>Pending</td>
 		<tr><td>Next/back buttons at each stage<td>Pending</td>
 </table>
-
-<?php include'selection.php'?>
 
 <!--FOOTER--><?php include'footer.php'?>
 <script>

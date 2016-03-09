@@ -173,8 +173,9 @@
 			<tr><td><a href=summary.php?type=output>All Performance Indicators (PIs)</a>
 			<tr><th>Other
 			<tr><td><a href=graph.php?g=graph1>Graphs</a>
-			<tr><td><a href=todo.php>To do list</a>
 			<tr><td><a href=export.php>Export variables, descriptions and formulas</a>
+			<tr><td><a href=todo.php>To do list</a>
+			<tr><td><a href=problems.php>Problems (debug mode)</a>
 		</table>
 	</div>
 </div>

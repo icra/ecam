@@ -98,6 +98,7 @@ var Info = {
 	wsa_KPI_nrg_percen:{description:"Energy consumption in water stages",magnitude:"Percentage",unit:"%",explanation:"",},
 	wsa_KPI_nrg_recovery:{description:"Energy recovery per conveyed water",magnitude:"Energy/Volume",unit:"kWh/m3",explanation:"Unit energy recovered in water conveyance", },
 	c_wsa_vol_head:{description:"Abstracted water pumped x pump head",magnitude:"Volume x Head",unit:"m3 x 100m",explanation:"Sum, for all the pumps of the water abstracted system, of the total volume pumped by pump i (m3) times the pump head i (m) / 100", },
+	c_wsa_trb_head:{description:"Abstracted water pumped x pump head (turbines)",magnitude:"Volume x Head",unit:"m3 x 100m",explanation:"Sum, for all the pumps of the water abstracted system, of the total volume pumped by pump i (m3) times the pump head i (m) / 100", },
 	wsa_KPI_std_nrg_cons:{description:"Standarized energy consumption",magnitude:"Energy",unit:"kWh/m3/100m",explanation:"", },
 	wsa_KPI_std_nrg_recv:{description:"Standarized energy recovery",magnitude:"Energy/Volume",unit:"kWh/m3",explanation:"Represents an average energy turbine efficiency"},
 	wsa_KPI_water_losses:{description:"Water losses per mains length",magnitude:"Volume/",unit:"m3/km/days",explanation:"Total (apparent and real) water losses, expressed in terms of annual volume lost per mains length", },
@@ -164,11 +165,10 @@ var Info = {
 	c_wsd_nrg_supp:{description:"Total supplied energy to the network (natural plus shaft), real system",magnitude:"Energy",unit:"kWh",explanation:"The energy provided to a system can be natural and shaft (pumping energy). With the provided expression the energy is precisely calculated", },
 	c_wsd_nrg_topo:{description:"Topographic energy supplied to the system",magnitude:"Energy",unit:"kWh",explanation:"This is the energy supplied to the system because its irregular topography", },
 	c_wsd_vol_head:{description:"Distributed water x pump head",magnitude:"Volume x head",unit:"m3x100m",explanation:"", },
-
 	wsd_KPI_std_nrg_cons:{description:"Standarized Energy Consumption",magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m",explanation:"Energy consumption per pumping water per head", },
 	wsd_KPI_nrg_efficien:{description:"Global water distribution energy efficiency",magnitude:"Percent",unit:"%",explanation:"Integrate all system distribution inefficiencies (pumps, friction, leaks and others). Compliments, giving a more complete information dE3",},
 	wsd_KPI_nrg_topgraph:{description:"Percentage of topographic energy",magnitude:"Percent",unit:"%",explanation:"Percentage of energy provided to the system due to the terrain topography", },
-	wsd_KPI_water_losses:{description:"<span style=color:red>wrong formula</span> Water losses per mains length",magnitude:"Volume/Distance/Time",unit:"m3/km/days",explanation:"Total water losses (apparent and real), expressed in terms of annual volume lost per mains length",},
+	wsd_KPI_water_losses:{description:"Water losses per mains length",magnitude:"Volume/Distance/Time",unit:"m3/km/days",explanation:"Total water losses (apparent and real), expressed in terms of annual volume lost per mains length",},
 	wsd_KPI_un_head_loss:{description:"Unit head loss",magnitude:"Headloss/Distance",unit:"m/km",explanation:"Unit energy friction loss in the conveyance system ",},
 
 	//L2 WWG
@@ -184,6 +184,7 @@ var Info = {
 	"wwc_nrg_cons":{description:"Total electric energy consumption",magnitude:"Energy",unit:"kWh",explanation:"Energy consumed during the assessment period by each pumping station for conveying wastewater to treatment managed by the undertaking", },
 	"wwc_vol_pump":{description:"Volume pumped",magnitude:"Volume",unit:"m3",explanation:"", },
 	"wwc_pmp_head":{description:"Pump head",magnitude:"Head",unit:"m",explanation:"", },
+	c_wwc_vol_head:{description:"Volume pumped x pump head",magnitude:"Volume x Head",unit:"m3 x 100m",explanation:"Sum, for all the pumps of the water of the total volume pumped by pump i (m3) times the pump head i (m) / 100", },
 	wwc_KPI_GHG_elec:{description:"From electricity",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from electricity consumption in the Collection stage", },
 	wwc_KPI_nrg_per_m3:{description:"Energy consumption per conveying wastewater to treatment",magnitude:"Energy/Volume",unit:"kWh/m3",explanation:"Percentage of hours when the (intermittent supply) system is pressurised", },
 	wwc_KPI_nrg_percen:{description:"Energy consumption of collected wastewater per total energy consumption",magnitude:"Percent",unit:"%",explanation:"Unit energy consumption per conveyed wastewater to treatment", },
@@ -226,12 +227,19 @@ var Info = {
 	wwt_KPI_nrg_per_m3:{description:"Energy consumption per treated wastewater",magnitude:"Energy/Volume",unit:"kWh/m3",explanation:"", },
 	wwt_KPI_nrg_percen:{description:"Energy consumption of WWTPs per total energy consumption",magnitude:"Percent",unit:"%",explanation:"Unit energy consumption per treated wastewater in wastewater treatment plants", },
 	wwt_KPI_nrg_per_kg:{description:"Energy consumption per BOD5 mass removed",magnitude:"Energy/Mass",unit:"kWh/Kg BOD removed",explanation:"Percentage of energy consumed in wastewater treatment with regards to the Total energy consumed from the grid and self produced in the water and wastewater systems", },
-	wwt_KPI_nrg_biogas:{description:"Energy production from biogas",magnitude:"Energy/Volume",unit:"kWh/m3",explanation:"Unit energy consumption per BOD mass removed in wastewater treatment plants", },
 	wwt_KPI_biog_x_bod:{description:"Biogas produced per mass removed",magnitude:"Volume/Mass",unit:"Nm3/kg BOD removed",explanation:"Unit energy production per treated wastewater in wastewater treatment plants", },
+	wwt_KPI_nrg_biogas:{description:"Energy production from biogas",magnitude:"Energy/Volume",unit:"kWh/m3",explanation:"Unit energy consumption per BOD mass removed in wastewater treatment plants", },
 	wwt_KPI_nrg_x_biog:{description:"Electrical energy produced per total available energy in biogas",magnitude:"Percent",unit:"%",explanation:"Unit biogas produced per BOD mass removed in wastewater treatment plants", },
 	wwt_KPI_sludg_prod:{description:"Sludge production (total weight)",magnitude:"Mass/Volume",unit:"kg/m3",explanation:"Percentage of the electrical energy produced related to the available energy in biogas", },
 	wwt_KPI_dry_sludge:{description:"<span style=color:red>Formula TBD</span> Dry weight in sludge production",magnitude:"Percent",unit:"% DW",explanation:"Unit sludge production per treated wastewater in wastewater treatment plants", },
 	wwt_KPI_capac_util:{description:"Capacity utilisation",magnitude:"Percent",unit:"%",explanation:"Percentage of dry weight of sludge that comes out from the WWTP to disposal", },
+	wwt_KPI_t_T_____:{description:"WTPs with trickling filters (TF)",magnitude:"Percent",unit:"%",explanation:"Percentage of each treatment type, in terms of volume treated, of all WWTPs assessed", },
+	wwt_KPI_t__A____:{description:"WTPs with activated sludge (AS)",magnitude:"Percent",unit:"%",explanation:"", },
+	wwt_KPI_t__A_CF_:{description:"WTPs with AS and Coagulation/Filtration (C/F)",magnitude:"Percent",unit:"%",explanation:"", },
+	wwt_KPI_t__ANCF_:{description:"WTPs with AS nitrification and C/F",magnitude:"Percent",unit:"%",explanation:"", },
+	wwt_KPI_t______L:{description:"WWTPs with Lagoons",magnitude:"Percent",unit:"%",explanation:"", },
+	wwt_KPI_t__other:{description:"WWTPs with other type of treatment",magnitude:"Percent",unit:"%",explanation:"", },
+	wwt_SL_qual_comp:{description:"Percentage of test complying with regulations",magnitude:"Percent",unit:"%",explanation:"", },
 
 	//L2 WWD
 	"wwd_vol_disc" :{description:"Volume of treated or untreated discharged wastewater",magnitude:"Volume",unit:"m3",explanation:"Volume of wastewater discharged by each wastewater treatment plant that are the responsibility of the undertaking, during the assessment period. This includes all the wastewater collected, whether it is conveyed to treatment or discharged untreated", },
@@ -241,29 +249,12 @@ var Info = {
 	"wwd_pmp_head":{description:"Head pumped against",magnitude:"Head",unit:"m",explanation:"", },
 	"wwd_vol_turb":{description:"Turbine water volume pumped",magnitude:"Volume",unit:"m3",explanation:"", },
 	"wwd_trb_head":{description:"Turbine head",magnitude:"Head",unit:"m3",explanation:"", },
-
 	wwd_KPI_GHG_elec:{description:"From electricity",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from electricity consumption in the Discharge stage", },
 	wwd_KPI_nrg_per_m3:{description:"Energy consumption per discharged wastewater",magnitude:"Energy/Volume",unit:"kWh/m3",explanation:"Percentage of the tests carried out in wastewater treatment plants that comply with discharge consents", },
-	wwd_KPI_rcv_per_dw:{description:"Energy recovery per discharged water",magnitude:"Energy/Volume",unit:"kWh/m3",explanation:"Average energy consumption per pumping discharged wastewater per head", }, 
-
-	//these variables are not inside global yet
-
-	//L3 WWC
-		c_wwc50:{description:"Water volume pumped x pump head in meters",magnitude:"Volume x head",unit:"m3 x 100m",explanation:"Sum, for all the pumps of the wastewater collection system, of the total volume pumped by pump i (m3) times the pump head i (m) / 100 ", },
-	//
-	//L3 WWT
-		c_wwt61:{description:"Percentage of test complying with regulations",magnitude:"Percent",unit:"%",explanation:"", },
-		wtE01 :{description:"WTPs with trickling filters (TF)",magnitude:"Percent",unit:"%",explanation:"Percentage of each treatment type, in terms of volume treated, of all WWTPs assessed", },
-		wtE02 :{description:"WTPs with activated sludge (AS)",magnitude:"Percent",unit:"%",explanation:"", },
-		wtE03 :{description:"WTPs with AS and Coagulation/Filtration (C/F)",magnitude:"Percent",unit:"%",explanation:"", },
-		wtE04 :{description:"WTPs with AS nitrification and C/F",magnitude:"Percent",unit:"%",explanation:"", },
-		wtE05 :{description:"WWTPs with Lagoons",magnitude:"Percent",unit:"%",explanation:"", },
-		wtE06 :{description:"WWTPs with other type of treatment",magnitude:"Percent",unit:"%",explanation:"", },
-	//
-	//L3 WWD
-		c_wwd50:{description:"[Sum] (water volume pumped x pump head in meters)",magnitude:"Volume x head",unit:"m3 x 100m",explanation:"Sum, for all the turbines of the wastewater discharged system, of the total volume turbine i (m3) times the turbine head i (m) / 100", },
-		c_wwd51:{description:"[Sum] (water volume pumped x pump head in meters)",magnitude:"Volume x head",unit:"m3 x 100m",explanation:"Sum, for all the turbines of the wastewater discharged system, of the total volume turbine i (m3) times the turbine head i (m) / 100", },
-		wwd_KPI_std_nrg_co:{description:"Standarized energy consumption",magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m",explanation:"Percentage of energy consumed in wastewater discharged with regards to the Total energy consumed from the grid and self produced in the water and wastewater systems", },
-		wwd_KPI_std_nrg_rc:{description:"Standarized energy recovery",magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m",explanation:"Unit energy recovered in water discharge", },
-	//
+	wwd_KPI_nrg_percen:{description:"Energy consumption in wastewater",magnitude:"Percentage",unit:"%",explanation:"",},
+	wwd_KPI_nrg_rcv_di:{description:"Energy recovery per discharged water",magnitude:"Energy/Volume",unit:"kWh/m3",explanation:"Average energy consumption per pumping discharged wastewater per head", }, 
+	c_wwd_vol_head:      {description:"Water volume pumped x pump head in meters",magnitude:"Volume x head",unit:"m3 x 100m",explanation:"Sum, for all the turbines of the wastewater discharged system, of the total volume turbine i (m3) times the turbine head i (m) / 100", },
+	c_wwd_trb_head:      {description:"Water volume pumped x pump head in meters (turbines)",magnitude:"Volume x head",unit:"m3 x 100m",explanation:"Sum, for all the turbines of the wastewater discharged system, of the total volume turbine i (m3) times the turbine head i (m) / 100", },
+	wwd_KPI_std_nrg_cons:{description:"Standarized energy consumption",magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m",explanation:"Percentage of energy consumed in wastewater discharged with regards to the Total energy consumed from the grid and self produced in the water and wastewater systems", },
+	wwd_KPI_std_nrg_recv:{description:"Standarized energy recovery",magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m",explanation:"Unit energy recovered in water discharge", },
 }

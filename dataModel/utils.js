@@ -20,9 +20,6 @@ function locateVariable(code)
 			{
 				switch(localization.sublevel)
 				{
-					case "General": 
-						return "Energy";
-						break;
 					default: 
 						return localization.sublevel;
 						break;

@@ -202,15 +202,19 @@
 				{
 					/*variable code*/
 					var code=inputs[input];
+					
+					/*is a calculated variable*/
+					var isCV=code.search(/^c_/)>=0 ? true : false;
+
+					//copy the function inside current substage
+					if(isCV) substages[s][code]=CurrentStage[code]; 
 
 					/*if assessment type is simple, hide L3 variables*/
 					if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
 					{
 						if(Level3.isInList(code)) continue;
 					}
-					
-					/*is a calculated variable*/
-					var isCV=code.search(/^c_/)>=0 ? true : false;
+					if(Questions.isHidden(code)) continue;
 
 					/*new row*/
 					var newRow=t.insertRow(-1);
@@ -257,7 +261,6 @@
 
 						if(isCV)
 						{
-							substages[s][code]=CurrentStage[code]; //copy the function inside current substage
 							newCell.innerHTML=format(substages[s][code]()/multiplier);
 							newCell.title=prettyFormula;
 						}
@@ -354,7 +357,7 @@
 					newTH.innerHTML="Substage "+(parseInt(s)+1)+" "+
 					"<div style=font-weight:bold>"+substages[s].name+"</div>"
 				};
-				['LEVEL 2','Unit'].forEach(function(element)
+				['&sum; TOTAL','Unit'].forEach(function(element)
 				{
 					var newTH=document.createElement('th'); newRow.appendChild(newTH);
 					newTH.innerHTML=element;
@@ -438,7 +441,7 @@
 				})();
 
 				//level 2 value
-				newRow.insertCell(-1).innerHTML=format(CurrentStage[field]()/Units.multiplier(field));
+				newRow.insertCell(-1).innerHTML="<b>"+format(CurrentStage[field]()/Units.multiplier(field))+"</b>";
 
 				//unit
 				newRow.insertCell(-1).innerHTML=Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
@@ -483,10 +486,10 @@
 		/** Update all tables */
 		function init()
 		{
+			updateAssessmentMenu();
 			updateSubstagesTable();
 			updateOutputs();
 			Sidebar.update();
-			updateAssessmentMenu();
 			updateResult();
 		}
 	</script>

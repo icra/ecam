@@ -73,6 +73,8 @@
 				/** m3 per day -> m3 */
 				case 'ww_vol_wwtr':
 					value = value*days; break;
+				case 'ww_dist_dis':
+					value = value*1000;
 
 				default:break;
 			}
@@ -127,6 +129,8 @@
 					case 'ww_vol_wwtr':
 						value = value/days; break;
 
+					case 'ww_dist_dis':
+						value = value/1000;
 					default:break;
 				}
 				//set the value

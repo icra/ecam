@@ -141,7 +141,7 @@
 								return "Only if [ww]"; 
 							}
 						}
-						if(question=="Is your topography flat")
+						if(question=="Is your topography non-flat")
 						{
 							if(as.waterDis==0)
 							{
@@ -295,19 +295,16 @@
 		function activateAllStages()
 		{
 			event.stopPropagation();
-			['waterGen','waterAbs','waterTre','waterDis','wasteGen','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
+			['waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
 			{
 				/**set checked*/document.getElementById(stage).checked=true;
 				Configuration.activate(stage);
 			});
 			Global.General.conv_kwh_co2=1;
-			Global.Configuration['Yes/No']["Are you producing biogas"]=1;
-			Global.Configuration['Yes/No']["Are you valorizing biogas"]=1;
-			Global.Configuration['Yes/No']["Are you producing electrical energy"]=1;
-			Global.Configuration['Yes/No']["Do you have fuel engines to run pumps"]=1;
-			Global.Configuration['Yes/No']["Are you using truck transport to convey sludge to the disposal site"]=1;
-			Global.Configuration['Yes/No']["Is your topography flat"]=1;
-			Global.Configuration['Yes/No']["Is any untreated industrial or commercial wastewater connected"]=1;
+			for(var question in Global.Configuration['Yes/No'])
+			{
+				Global.Configuration['Yes/No'][question]=1;
+			}
 			init();
 		}
 	</script>

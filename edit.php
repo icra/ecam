@@ -34,6 +34,7 @@
 				#inputs a,#inputs a:visited{color:#bf5050}
 				#outputs a,#outputs a:visited{color:#bf5050}
 				#otherOutputs a,#otherOutputs a:visited{color:#bf5050}
+				#nrgOutputs a,#nrgOutputs a:visited{color:#bf5050}
 			<?php }
 		?>
 		th.tableHeader
