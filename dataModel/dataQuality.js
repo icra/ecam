@@ -35,9 +35,6 @@ DQ.hasEstimatedData = function(field)
 	//go over inputs
 	for(var i=0; i<inputs.length; i++)
 	{
-		//if input contains "_L2" it's an special case (ie wGHG1). For this case they should not be considered inputs
-		if(inputs[i].search('_L2')>=0)continue;
-
 		//check in data quality object
 		if(Global.Configuration.DataQuality[inputs[i]]=="Estimated")
 		{

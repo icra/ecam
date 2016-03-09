@@ -1,4 +1,6 @@
-var Tables = {
+
+var Tables = 
+{
 	"Fuel types": //EFxxx: [kg/TJ], NCV: [TJ/Gg], FD: [kg/L].
 	{
 		"Gas/Diesel Oil"  :{EFCH4:{engines:3,vehicles:3.9},EFN2O:{engines:0.6,vehicles:3.9},EFCO2:74100,FD:0.84,NCV:43.0},
@@ -6,14 +8,14 @@ var Tables = {
 		"Natural Gas"     :{EFCH4:{engines:10,vehicles:92},EFN2O:{engines:0.1,vehicles:0.2},EFCO2:56100,FD:0.75,NCV:48.0},
 	},
 
-	"Countries": //selection for: location and conversion factor uw1
+	"Countries": //selection for conversion factor "conv_kwh_co2"
 	{
 		"Peru":0,
 		"Thailand":0,
 		"Mexico":0,
 	},
 
-	/** Technologies for Water/Waste Treatment */
+	/** Technologies for wst and wwt (table not used right now). I was told that this would be used for benchmarking */
 	"Technologies":{
 		"Water":{
 			"None":{},

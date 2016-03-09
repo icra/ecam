@@ -13,7 +13,11 @@
 	<tr><th>Task<th>Status
 	<tr><td colspan=2 class=taskgroup>BACK-END
 		<tr><td>Finish questions variable hidings<td>DOING NOW</td>
+		<tr><td>Implement benchmarks again<td>Wait</td>
+		<tr><td>Level2warnings and Level2only variables<td>Wait</td>
+		<tr><td>Remove GHG emissions from insight<td>Pending</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
+		<tr><td>Service level indicators new table<td>Pending</td>
 		<tr><td>Move graphs<td>Need more info</td>
 		<tr><td>Create Warning in new system button<td>Pending</td>
 		<tr><td>Next/back buttons at each stage<td>Pending</td>

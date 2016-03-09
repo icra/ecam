@@ -641,6 +641,7 @@
 								style='background:$color;font-size:12px;vertical-align:middle'
 								onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
 									Substages
+									<img src=img/substages.png style='width:40px;margin-left:1em'>
 							</button> 
 							<span style=font-size:12px;color:#666>
 								&rarr; Divided in 

@@ -1,21 +1,25 @@
 /* variables shown in level2 BUT not in level3 */
 
-var Level2only= {};
+var Level2only = {
 
-Level2only.list=
-[
-	"not implemented",
-]
+	list:
+	[
+		"not implemented",
+	],
 
-Level2only.isInList=function(code)
-{
-	for(var i in this.list)
+	isInList:function(code)
 	{
-		if(this.list[i]==code)
+		for(var i in this.list)
 		{
-			return true;
-			break;
+			if(this.list[i]==code)
+			{
+				return true;
+				break;
+			}
 		}
-	}
-	return false;
-}
+		return false;
+	},
+
+};
+
+

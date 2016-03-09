@@ -1,6 +1,6 @@
 var Normalization =
 {
-	//empty data structure to perform normalization
+	//data structure to perform normalization: the code is the denominator
 	Water:
 	{
 		reside:"ws_resi_pop",
@@ -25,16 +25,21 @@ var Normalization =
 	},
 
 	/*normalize
-		category: (string) reside,servic,volume,energy
+		category: (string) reside,servic,volume or energy
 		field: (string) numerator
 		level: (string) Water,Waste
 		sublevel: (string) Abstraction,Collection,Treatment,Distribution,Discharge
 	*/
 	normalize:function(category,field,level,sublevel)
 	{
-		//numerator
+		//location
 		var loc = locateVariable(field);
-		var num = loc.sublevel ?  Global[loc.level][loc.sublevel][field]() : Global[loc.level][field]();
+
+		//stage pointer
+		var sta = loc.sublevel ?  Global[loc.level][loc.sublevel] : Global[loc.level];
+
+		//numerator
+		var num = sta[field]();
 
 		//divisor
 		var divisor = (sublevel=='false' || category=='reside' || category=='servic') ? this[level][category] : this[level][sublevel][category];
