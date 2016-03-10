@@ -15,7 +15,12 @@
 	<style>
 		#main *:not(button){margin:0;padding:0;padding-top:0.7em;padding-bottom:0.7em}
 	</style>
-	<!--TITLE--><h1 class=blue style="text-align:left;font-size:30px;"><b>ECAM</b> Web Tool</h1>
+	<!--TITLE--><h1 class=blue style="text-align:left;font-size:30px;"><b>ECAM</b> Web Tool
+
+	<span style=color:#bf5050>(beta version)</span>
+	
+	</h1>
+
 
 	<!--DESCRIPTION--><div style="color:#58595b;font-size:18px;text-align:left">
 		This tool evaluates utilities's operations in terms of GHG emissions and energy usage based on their own data. <br>

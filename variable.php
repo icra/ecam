@@ -14,10 +14,11 @@
 		#info td.input input {margin:0;padding:0;width:95%;}
 		<?php
 			if(preg_match("/ww/",$id))
-			{?>
+			{ ?>
 				td.th{background:#bf5050}
 				#info a,#info a:visited,h1{color:#bf5050}
-			<?php }
+			  <?php 
+			}
 		?>
 	</style>
 	<script>
@@ -37,12 +38,11 @@
 		 */
 		function updateField(field,newValue)
 		{
-			//if CurrentLevel[field] is a number, parse float
-			if(typeof(currentStage[field])=="number"){ newValue=parseFloat(newValue);}
-			//if a unit change is set, get it:
+			newValue = parseFloat(newValue);
+			newValue = (isNaN(newValue)) ? 0 : newValue;
 			var multiplier = Units.multiplier(field);
-			/*update the object*/currentStage[field]=multiplier*newValue
-			/*update views*/init()
+			currentStage[field] = multiplier*newValue;
+			init();
 		}
 
 		/** Refresh table id=info */

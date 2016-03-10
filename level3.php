@@ -440,15 +440,47 @@
 						//value
 						var newCell=newRow.insertCell(-1);
 						newCell.title=prettyFormula;
-						newCell.innerHTML=format(CurrentStage['modification']()/Units.multiplier(field));
+
+						newCell.innerHTML=(function()
+						{
+							var value=CurrentStage['modification']()/Units.multiplier(field);
+							var indicator=(function()
+							{
+								var hasIndicator=RefValues.isInside(field);
+								if(hasIndicator)
+								{
+									var text=RefValues[field](value);
+									newCell.title=text;
+									var color;
+									switch(text)
+									{
+										case "Good":           color="#af0";break;
+										case "Acceptable":     color="orange";break;
+										case "Unsatisfactory": color="red";break;
+										case "Out of range":   color="brown";break;
+										default:               color="#ccc";break;
+									}
+									return "<span style='font-size:20px;color:"+color+"'>&#128308;</span>";
+								}
+								else{return "";}
+							})();
+							return indicator+" "+format(value);
+						})();
 					}
 				})();
 
 				//level 2 value
-				newRow.insertCell(-1).innerHTML="<b>"+format(CurrentStage[field]()/Units.multiplier(field))+"</b>";
+				newRow.insertCell(-1).innerHTML=(function()
+				{
+					var value=format(CurrentStage[field]()/Units.multiplier(field));
+					return '<b>'+value+'</b>';
+				})();
 
 				//unit
-				newRow.insertCell(-1).innerHTML=Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
+				newRow.insertCell(-1).innerHTML=(function()
+				{
+					return Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
+				})();
 			}
 
 			//bottom line with the color of W/WW
@@ -481,7 +513,8 @@
 		//update a field of the substage[index]
 		function updateSubstage(index,field,newValue)
 		{
-			if(typeof(CurrentStage[field])=="number"){newValue=parseFloat(newValue);}
+			newValue=parseFloat(newValue);
+			if(isNaN(newValue))newValue=0;
 			var multiplier=Units.multiplier(field);
 			substages[index][field]=multiplier*newValue;
 			init();
