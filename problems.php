@@ -9,7 +9,7 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
-<!--TITLE--><h1>Problems (debug mode)</h1>
+<!--TITLE--><h1>Automatic finding of potential sources of Problems (debug mode)</h1>
 <script>
 	//get unused inputs
 	function getUnused(obj)
@@ -62,8 +62,8 @@
 </script>
 
 <table>
-	<tr><td colspan=3 style=font-weight:bold>Problem 1: NOT USED INPUTS
-	<tr><th>Code<th>Name<th>Stage
+	<tr><td colspan=3 style=font-weight:bold>Problem 1: NOT USED INPUTS in any formula
+	<tr><th>Code<th>Stage
 	<script>
 		['Water','Waste'].forEach(function(level)
 		{
@@ -71,11 +71,10 @@
 			unused.forEach(function(field)
 			{
 				var color=field.search('ww')==-1 ? "" : "#bf5050";
-				document.write("<tr><td><a style=color:"+color+" href=variable.php?id="+field+">"+field+"</a><td>"+Info[field].description)
+				document.write("<tr><td><a style=color:"+color+" title='"+Info[field].description+"' href=variable.php?id="+field+">"+field+"</a>")
 				document.write("<td>"+locateVariable(field).toString())
 			});
 		})
-
 	</script>
 </table>
 
@@ -105,6 +104,56 @@
 			{
 				document.write("<tr><td>"+field)
 			})
+	</script>
+</table>
+
+<table>
+	<tr><td style=font-weight:bold>Problem 3: INEXISTING CODES IN QUESTIONS
+	<tr><th>Code
+	<script>
+		(function()
+		{
+			var inex = [];
+			//go over questions
+			for(var question in Questions)
+			{
+				for(var i in Questions[question])
+				{
+					var field = Questions[question][i]
+					if(locateVariable(field)==false)
+						inex.push(field)
+				}
+			}
+			return inex;
+		})().forEach(function(code)
+		{
+			document.write("<tr><td>"+code);
+		})
+	</script>
+</table>
+
+<table>
+	<tr><td style=font-weight:bold>Problem 3: INEXISTING QUESTIONS IN CFG
+	<tr><th>Code
+	<script>
+		(function()
+		{
+			var inex = []
+
+			for(var question in Questions)
+			{
+				if(typeof(Questions[question])=='function')
+					continue
+				if(Global.Configuration["Yes/No"].hasOwnProperty(question))
+					continue
+				else
+					inex.push(question)
+			}
+			return inex;
+		})().forEach(function(question)
+		{
+			document.write("<tr><td>"+question)
+		})
 	</script>
 </table>
 

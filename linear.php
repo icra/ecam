@@ -29,11 +29,11 @@
 	div#linearDiagram {background:#f6f6f6;margin:0 0 5px 0;border-bottom:1px solid #ccc;padding:0.4em 0 0.4em 0}
 	div#linearDiagram img {position:relative;z-index:2;cursor:pointer;margin:0 0.2em 0 0.2em;vertical-align:middle;padding:0} /*icons inside buttons to navigate to Level2*/
 	div#linearDiagram img.l1 {width:43px;} 
-	div#linearDiagram img.l2 {width:28px;}
+	div#linearDiagram img.l2 {width:33px;}
 	div#linearDiagram img{border-radius:90%;border:4px solid transparent}
 	div#linearDiagram img.selected{border:4px solid lightgreen}
 	div#linearDiagram img:not(.inactive):hover {border:4px solid #d7bfaf}
-	div#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(165px);z-index:1;width:225px;}
+	div#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(158px);z-index:1;width:235px;}
 </style>
 
 <script>

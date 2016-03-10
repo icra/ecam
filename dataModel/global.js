@@ -321,6 +321,7 @@ var Global = {
 		},
 
 		Units:{ }, //custom unit selections for variables are stored here
+
 		/** Calculated or "estimated" assumptions are added here. (calculated is default, so only estimated is added here) */
 		DataQuality:{ },
 
