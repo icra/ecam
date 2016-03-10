@@ -599,7 +599,6 @@
 			updateNrgOutputs();
 			updateOtherOutputs();
 			Exceptions.apply();
-			updateResult();
 			try{
 				drawCharts();
 			}
@@ -607,6 +606,7 @@
 			{
 				console.log(e);
 			}
+			updateResult();
 		}
 	</script>
 
