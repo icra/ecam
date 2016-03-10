@@ -16,17 +16,17 @@
 			{
 				if(checkbox.checked)
 				{
-					/**normal color*/ elements[i].parentNode.style.color=""
+					/**normal color*/ elements[i].parentNode.style.color="";
 				}
 				else
 				{
-					/**uncheck*/elements[i].checked=false
-					/**remove green color*/elements[i].parentNode.parentNode.style.backgroundColor=""
+					/**uncheck*/elements[i].checked=false;
+					/**remove green color*/elements[i].parentNode.parentNode.style.backgroundColor="";
 					/**modifiy Active Stages*/Global.Configuration["Active Stages"][elements[i].id]=0
 				}
 			}
 
-			//if level 2 is activated, activate L1 if not active
+			//if a level 2 stage is activated, activate L1 if not active
 			if(checkbox.getAttribute('class') && checkbox.checked)
 			{
 				var l1=checkbox.getAttribute('class');
@@ -35,10 +35,10 @@
 			}
 
 			//background color: green or white
-			checkbox.parentNode.parentNode.style.backgroundColor=checkbox.checked?"lightgreen":""
+			checkbox.parentNode.parentNode.style.backgroundColor=checkbox.checked?"lightgreen":"";
 
 			//update Active Stages
-			Global.Configuration["Active Stages"][id] = checkbox.checked ? 1 : 0
+			Global.Configuration["Active Stages"][id] = checkbox.checked ? 1 : 0;
 
 			init();
 		}
