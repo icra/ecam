@@ -23,8 +23,6 @@ Graphs.graph1=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		//width:800,
-		//height:400,
 		title:"Greenhouse gas emissions (Preview)",
 		slices:
 		{
@@ -89,8 +87,6 @@ Graphs.graph2=function(withTable,container)
 	var options= 
 	{ 
 		pieHole:0.4,
-		//width:800,
-		height:400,
 		title:"Energy consumption (kWh) (Preview)",
 		slices:
 		{
@@ -182,7 +178,7 @@ Graphs.graph3=function(withTable,container)
 	//options
 	var options=
 	{
-		title:"Greenhouse gas emissions (kg CO2eq per person or m3)",
+		title:"Greenhouse gas emissions (Preview) (TBD)",
 		height:500,
 		legend:{position:'right',maxLines:100},
 		isStacked:true,
@@ -278,8 +274,6 @@ Graphs.graph4=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		//width:800,
-		//height:400,
 		title:"Greenhouse gas emissions (Insight)",
 		slices:
 		{
@@ -362,8 +356,6 @@ Graphs.graph5=function(withTable,container)
 	var options= 
 	{ 
 		pieHole:0.4,
-		//width:800,
-		height:400,
 		title:"Energy consumption (kWh) (Insight)",
 		slices:
 		{
@@ -510,7 +502,7 @@ Graphs.graph6=function(withTable,container)
 	]);
 	var options=
 	{
-		title:"L2 GHG",
+		title:"Greenhouse gas emissions (Insight) (TBD)",
 		height:500,
 		legend:{position:'right',maxLines:100},
 		isStacked:true,
@@ -588,7 +580,18 @@ Graphs.graph7=function(withTable,container)
 		{
 			var name = stages[s][i].name;
 			var value = stages[s][i][names[s]];
-			DATA.push([ names[s].replace('_nrg_cons','')+" S"+(parseInt(i)+1) +" ("+name+")", value])
+			var title;
+			switch(names[s])
+			{
+				case 'wsa_nrg_cons': title="Abst - ";break;
+				case 'wst_nrg_cons': title="Trea - ";break;
+				case 'wsd_nrg_cons': title="Dist - ";break;
+				case 'wwc_nrg_cons': title="Coll - ";break;
+				case 'wwt_nrg_cons': title="Trea - ";break;
+				case 'wwd_nrg_cons': title="Disc - ";break;
+				default:break;
+			}
+			DATA.push([ title+" S"+(parseInt(i)+1) +" ("+name+")", value])
 		}
 	}
 
@@ -596,8 +599,6 @@ Graphs.graph7=function(withTable,container)
 	var options= 
 	{ 
 		pieHole:0.4,
-		//width:800,
-		height:400,
 		title:"Energy consumption per substage",
 		/*
 		slices:{

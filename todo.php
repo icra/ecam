@@ -16,7 +16,8 @@
 		<tr><td>Finish questions variable hidings<td>Pending (difficult)</td>
 		<tr><td>Implement benchmarks again<td>Wait</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
-		<tr><td>Move graphs<td>Doing now</td>
+		<tr><td>Bar graphs<td>Wait</td>
+		<tr><td>Rename birds eye view, preview and insight<td>Pending</td>
 </table>
 
 <!--FOOTER--><?php include'footer.php'?>

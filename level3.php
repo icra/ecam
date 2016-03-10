@@ -440,7 +440,32 @@
 						//value
 						var newCell=newRow.insertCell(-1);
 						newCell.title=prettyFormula;
-						newCell.innerHTML=format(CurrentStage['modification']()/Units.multiplier(field));
+
+						newCell.innerHTML=(function()
+						{
+							var value=CurrentStage['modification']()/Units.multiplier(field);
+							var indicator=(function()
+							{
+								var hasIndicator=RefValues.isInside(field);
+								if(hasIndicator)
+								{
+									var text=RefValues[field](value);
+									newCell.title=text;
+									var color;
+									switch(text)
+									{
+										case "Good":           color="#af0";break;
+										case "Acceptable":     color="orange";break;
+										case "Unsatisfactory": color="red";break;
+										case "Out of range":   color="brown";break;
+										default:               color="#ccc";break;
+									}
+									return "<span style='font-size:20px;color:"+color+"'>&#128308;</span>";
+								}
+								else{return "";}
+							})();
+							return indicator+" "+format(value);
+						})();
 					}
 				})();
 

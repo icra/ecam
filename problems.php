@@ -72,8 +72,14 @@
 				unused.forEach(function(field)
 				{
 					var color=field.search('ww')==-1 ? "" : "#bf5050";
-					document.write("<tr><td><a style=color:"+color+" href=variable.php?id="+field+">"+field+"</a><td>"+Info[field].description)
-					document.write("<td>"+locateVariable(field).toString())
+					try{
+						document.write("<tr><td><a style=color:"+color+" href=variable.php?id="+field+">"+field+"</a><td>"+Info[field].description)
+						document.write("<td>"+locateVariable(field).toString())
+					}
+					catch(e)
+					{
+						document.write("<tr><td colspan=3>"+field)
+					}
 				});
 			});
 			document.write("<tr><td colspan=3 style=text-align:center><i>End of table</i>");

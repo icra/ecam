@@ -197,7 +197,7 @@ var Global = {
 			"wwc_vol_pump":0,
 			"wwc_pmp_head":0,
 			c_wwc_vol_head    : function(){return this.wwc_vol_pump*this.wwc_pmp_head/100},
-			wwc_KPI_std_nrg_co: function(){return this.wwc_nrg_cons/this.c_wwc_vol_head()},
+			wwc_KPI_std_nrg_cons: function(){return this.wwc_nrg_cons/this.c_wwc_vol_head()},
 			/*</Level3>*/
 		},
 
@@ -210,7 +210,6 @@ var Global = {
 			"wwt_nrg_biog"     :0,
 			"wwt_ch4_biog"     :0,
 			/*
-			"wwt_tn_influ"     :0,
 			"wwt_tn_efflu"     :0,
 			"wwt_biog_val"     :0,
 			"c_wwt_biog_fla"   :function(){return this.wwt_biog_pro-this.wwt_biog_val},

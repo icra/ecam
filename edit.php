@@ -393,6 +393,33 @@
 				//compute the value
 				var value = CurrentLevel[field]()/Units.multiplier(field)
 
+				/*circle indicator*/ 
+				newCell=newRow.insertCell(-1);
+				newCell.style.textAlign='center';
+				newCell.innerHTML=(function()
+				{
+					var hasIndicator=RefValues.isInside(field);
+					if(hasIndicator)
+					{
+						var indicator=RefValues[field](value);
+						newCell.title=indicator;
+						var color;
+						switch(indicator)
+						{
+							case "Good":           color="#af0";break;
+							case "Acceptable":     color="orange";break;
+							case "Unsatisfactory": color="red";break;
+							case "Out of range":   color="brown";break;
+							default:               color="#ccc";break;
+						}
+						return "<span style='font-size:20px;color:"+color+"'>&#128308;</span>";
+					}
+					else{
+						newCell.title='This formula has no indicator associated';
+						return "<span style=color:#ccc>NA</span>";
+					}
+				})();
+
 				/*description*/ 
 				newCell=newRow.insertCell(-1);
 				newCell.setAttribute('title',(function()
@@ -478,30 +505,6 @@
 				//compute now the value for creating the indicator
 				var value = CurrentLevel[field]()/Units.multiplier(field)
 
-				/*circle indicator*/ 
-				newCell=newRow.insertCell(-1);
-				newCell.style.textAlign='center';
-				newCell.style.cursor='help';
-				newCell.innerHTML=(function()
-				{
-					var hasIndicator=RefValues.isInside(field);
-					if(hasIndicator)
-					{
-						var indicator=RefValues[field](value);
-						newCell.title=indicator;
-						var color;
-						switch(indicator)
-						{
-							case "Good":           color="#af0";break;
-							case "Acceptable":     color="orange";break;
-							case "Unsatisfactory": color="red";break;
-							default:               color="#ccc";break;
-						}
-						return "<span style='font-size:20px;color:"+color+"'>&#128308;</span>";
-					}
-					else return "<span style=color:#ccc>-</span>";
-				})();
-
 				/*description*/ 
 				newCell=newRow.insertCell(-1);
 				newCell.setAttribute('title',(function()
@@ -579,11 +582,11 @@
 		function drawCharts()
 		{
 			<?php
-				if($sublevel=="General")
+				if($sublevel)
 				{
 					echo "Graphs.graph5(false,'graph');";
 				}
-				if($sublevel==false)
+				else
 				{
 					echo "Graphs.graph4(false,'graph')";
 				}
@@ -699,7 +702,11 @@
 	<!--OUTPUTS-->
 	<div class=inline style="max-width:47%;margin-left:1em">
 		<!--GHG-->
-		<table id=outputs style="width:100%;background:#f6f6f6;">
+		<table id=outputs 
+			style="
+				width:100%;background:#f6f6f6;
+				<?php if($sublevel) echo "display:none;"; ?>
+			">
 			<tr><th colspan=7 class=tableHeader>OUTPUTS - Greenhouse gas emissions (GHG) | <a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity">Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
 			<tr>
 				<th>Origin
@@ -713,6 +720,7 @@
 		<table id=nrgOutputs style="width:100%;background:#f6f6f6;margin-top:1em">
 			<tr><th colspan=4 class=tableHeader>OUTPUTS - Energy performance
 			<tr>
+				<th title=Performance style=cursor:help>P
 				<th>Description
 				<th>Current value
 				<th>Unit
@@ -723,7 +731,6 @@
 			<tr><th colspan=4 class=tableHeader>OUTPUTS - 
 				<?php if($sublevel) echo "Context "; else echo "Service level "; ?> indicators
 			<tr>
-				<th title=Performance style=cursor:help>P
 				<th>Description
 				<th>Current value
 				<th>Unit

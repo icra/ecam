@@ -28,7 +28,6 @@
 
 <!--TITLE--><h1>Graphs</h1>
 <!--graph--><div id="graph"></div>
-<!--json--><?php include'currentJSON.php'?>
 
 <script>
 	google.charts.load('current',{'packages':['corechart','sankey']});
@@ -40,3 +39,6 @@
 		document.getElementById('<?php echo $g?>').classList.add('selected');
 	}
 </script>
+
+<!--foot--><?php include'footer.php'?>
+<!--json--><?php include'currentJSON.php'?>

@@ -15,7 +15,7 @@ Level3.list=
 	"c_wsd_nrg_natu", "c_wsd_nrg_mini", "c_wsd_nrg_supp", "c_wsd_nrg_topo", "c_wsd_vol_head", "wsd_SL_pres_ade", "wsd_SL_cont_sup", "wsd_KPI_water_losses", "wsd_KPI_un_head_loss", "wsd_KPI_std_nrg_cons", "wsd_KPI_nrg_efficien", "wsd_KPI_nrg_topgraph",
 	//todo
 	//WWC
-	"wwc_vol_pump", "wwc_pmp_head", "c_wwc_vol_head", "wwc_KPI_std_nrg_co",
+	"wwc_vol_pump", "wwc_pmp_head", "c_wwc_vol_head", "wwc_KPI_std_nrg_cons",
 	//WWT
 	"wwt_tst_cmpl", "wwt_tst_cond", "wwt_t_T_____", "wwt_t__A____", "wwt_t__A_CF_", "wwt_t__ANCF_", "wwt_t______L", "wwt_t__other", "wwt_mass_slu", "wwt_dryw_slu", "wwt_trea_cap",
 	"wwt_KPI_sludg_prod", "wwt_KPI_dry_sludge", "wwt_KPI_capac_util", "wwt_KPI_t_T_____", "wwt_KPI_t__A____", "wwt_KPI_t__A_CF_", "wwt_KPI_t__ANCF_", "wwt_KPI_t______L", "wwt_KPI_t__other", "wwt_SL_qual_com",
