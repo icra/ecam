@@ -18,7 +18,7 @@ Level3.list=
 	"wwc_vol_pump", "wwc_pmp_head", "c_wwc_vol_head", "wwc_KPI_std_nrg_co",
 	//WWT
 	"wwt_tst_cmpl", "wwt_tst_cond", "wwt_t_T_____", "wwt_t__A____", "wwt_t__A_CF_", "wwt_t__ANCF_", "wwt_t______L", "wwt_t__other", "wwt_mass_slu", "wwt_dryw_slu", "wwt_trea_cap",
-	"wwt_KPI_sludg_prod", "wwt_KPI_dry_sludge", "wwt_KPI_capac_util", "wwt_KPI_t_T_____", "wwt_KPI_t__A____", "wwt_KPI_t__A_CF_", "wwt_KPI_t__ANCF_", "wwt_KPI_t______L", "wwt_KPI_t__other", "wwt_SL_qual_comp",
+	"wwt_KPI_sludg_prod", "wwt_KPI_dry_sludge", "wwt_KPI_capac_util", "wwt_KPI_t_T_____", "wwt_KPI_t__A____", "wwt_KPI_t__A_CF_", "wwt_KPI_t__ANCF_", "wwt_KPI_t______L", "wwt_KPI_t__other", "wwt_SL_qual_com",
 	//WWD
 	"wwd_vol_pump", "wwd_pmp_head", "wwd_vol_turb", "wwd_trb_head",
 	"c_wwd_vol_head", "c_wwd_trb_head", "wwd_KPI_std_nrg_cons", "wwd_KPI_std_nrg_recv",

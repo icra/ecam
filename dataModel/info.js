@@ -26,7 +26,6 @@ var Info = {
 	ws_SL_nrg_cost :{description:"Energy costs percentage",magnitude:"Percentage",unit:"%",explanation:"Proportion of the utility energy costs referred to the total running costs related to urban drinking water system", },
 	ww_SL_serv_pop :{description:"Resident population receiving service",magnitude:"Percentage",unit:"%",explanation:"Percentage of the resident population that are connected to the sewer systems and which wastewater is treated by the undertaking", },
 	ww_SL_treat_m3 :{description:"Collected wastewater treated",magnitude:"Percentage",unit:"%",explanation:"Percentage of the collected sewage prior to dilution or overflows in the sewer system that are treated in wastewater treatment plants", },
-	ww_SL_qual_com :{description:"Percentage of quality compliance",magnitude:"Percentage",unit:"%",explanation:"Percentage of water quality tests carried out in wastewater treatment plants that comply with discharge consents", },
 	ww_SL_dilution :{description:"Percent dilution in the sewer system",magnitude:"Percentage",unit:"%",explanation:"Percentage of Infiltration and inflow water entering the sewer system compared to the volume of collected wastewater prior to dilution", },
 	ww_SL_vol_pday :{description:"Treated wastewater per pers per day",magnitude:"Volume/inhab/time",unit:"L/inhab/day",explanation:"Volume of treated wastewater per serviced person in the service area managed by the undertaking divided by the duration of the assessment period", },
 	ww_SL_nrg_cost :{description:"Energy costs percentage",magnitude:"Percentage",unit:"%",explanation:"Proportion of the utility energy costs referred to the total running costs", },
@@ -239,7 +238,7 @@ var Info = {
 	wwt_KPI_t__ANCF_:{description:"WTPs with AS nitrification and C/F",magnitude:"Percent",unit:"%",explanation:"", },
 	wwt_KPI_t______L:{description:"WWTPs with Lagoons",magnitude:"Percent",unit:"%",explanation:"", },
 	wwt_KPI_t__other:{description:"WWTPs with other type of treatment",magnitude:"Percent",unit:"%",explanation:"", },
-	wwt_SL_qual_comp:{description:"Percentage of test complying with regulations",magnitude:"Percent",unit:"%",explanation:"", },
+	wwt_SL_qual_com :{description:"Percentage of quality compliance",magnitude:"Percentage",unit:"%",explanation:"Percentage of water quality tests carried out in wastewater treatment plants that comply with discharge consents", },
 
 	//L2 WWD
 	"wwd_vol_disc" :{description:"Volume of treated or untreated discharged wastewater",magnitude:"Volume",unit:"m3",explanation:"Volume of wastewater discharged by each wastewater treatment plant that are the responsibility of the undertaking, during the assessment period. This includes all the wastewater collected, whether it is conveyed to treatment or discharged untreated", },

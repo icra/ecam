@@ -78,7 +78,6 @@ var Global = {
 			wst_KPI_nrg_percen : function() {return 100*this.wst_nrg_cons/Global.Water.General.wsg_KPI_nrg_cons()},
 			wst_KPI_slu_per_m3 : function(){return this.wst_mass_slu/this.wst_vol_trea},
 			wst_KPI_capac_util : function(){return 100*this.wst_vol_trea/this.wst_trea_cap},
-			wst_SL_qual_com : function(){return 100*(this.wst_tst_aest+this.wst_tst_micr+this.wst_tst_phch+this.wst_tst_radi)/this.wst_tst_carr},
 			/*<Level3>*/
 			"wst_tst_carr":0,
 			"wst_tst_disc":0,
@@ -101,6 +100,7 @@ var Global = {
 			wst_KPI_t__CF_FD:function(){return this.wst_t__CF_FD/this.wst_vol_trea},
 			wst_KPI_t______D:function(){return this.wst_t______D/this.wst_vol_trea},
 			wst_KPI_t__other:function(){return this.wst_t__other/this.wst_vol_trea},
+			wst_SL_qual_com : function(){return 100*(this.wst_tst_aest+this.wst_tst_micr+this.wst_tst_phch+this.wst_tst_radi)/this.wst_tst_carr},
 			/*</Level3>*/
 		},
 
@@ -176,7 +176,6 @@ var Global = {
 		ww_SL_serv_pop: function(){return 100*Global.Waste.ww_serv_pop/Global.Waste.ww_resi_pop},
 		ww_SL_vol_pday: function(){return 1000*this.ww_vol_wwtr/this.ww_serv_pop/Global.General.Days()},
 		ww_SL_treat_m3: function(){return 100*this.ww_serv_pop/this.ww_conn_pop},
-		ww_SL_qual_com: function(){return 100*this.Treatment.wwt_tst_cmpl/this.Treatment.wwt_tst_cond},
 		ww_SL_dilution: function(){return 100*this.c_ww_in_dilution()/this.ww_vol_coll},
 
 		"General":{
@@ -252,7 +251,7 @@ var Global = {
 				wwt_KPI_t__ANCF_:function(){return this.wwt_t__ANCF_/this.wwt_vol_trea},
 				wwt_KPI_t______L:function(){return this.wwt_t______L/this.wwt_vol_trea},
 				wwt_KPI_t__other:function(){return this.wwt_t__other/this.wwt_vol_trea},
-				wwt_SL_qual_comp:function(){return 100*this.wwt_tst_cmpl/this.wwt_tst_cond},
+				wwt_SL_qual_com: function(){return 100*this.wwt_tst_cmpl/this.wwt_tst_cond},
 			/*</Level3>*/
 		},
 

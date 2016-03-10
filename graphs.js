@@ -13,11 +13,11 @@ Graphs.graph1=function(withTable,container)
 
 	//actual graph data
 	var data=google.visualization.arrayToDataTable([
-		['Stage',            'Emissions'],
-		["WS From electricity",     wsYes],
-		["WS From fuel engines", wsNon],
-		["WW From electricity",     wwYes],
-		["WW From non electricity", wwNon],
+		['Stage',                            'Emissions'],
+		["From electricity (Water)",          wsYes],
+		["From fuel engines (Water)",         wsNon],
+		["From electricity (Wastewater)",     wwYes],
+		["From non electricity (Wastewater)", wwNon],
 	]);
 
 	//options
@@ -25,7 +25,7 @@ Graphs.graph1=function(withTable,container)
 	{ 
 		//width:800,
 		//height:400,
-		title:"L1 Greenhouse gas emissions (kg CO2 eq)",
+		title:"Greenhouse gas emissions (Preview)",
 		slices:
 		{
 			0:{color:'#00aff1' },
@@ -48,11 +48,11 @@ Graphs.graph1=function(withTable,container)
 		var table=""+
 		"<table>"+
 		"<button onclick=Graphs.graph1(false,'"+container+"')>Hide table</button>"+
-			"<tr><th>Slice             <th>Variable         <th>Value (kgCO2)"+
-			"<tr><td>ws     electrical <td><a href=variable.php?id=ws_KPI_GHG_elec>ws_KPI_GHG_elec</a> <td>"+format(wsYes)+
-			"<tr><td>ws non electrical <td><a href=variable.php?id=ws_KPI_GHG_ne>ws_KPI_GHG_ne</a>     <td>"+format(wsNon)+
-			"<tr><td>ww     electrical <td><a href=variable.php?id=ww_KPI_GHG_elec>ww_KPI_GHG_elec</a> <td>"+format(wwYes)+
-			"<tr><td>ww non electrical <td><a href=variable.php?id=ww_KPI_GHG_ne>ww_KPI_GHG_ne</a>     <td>"+format(wwNon)+
+			"<tr><th>Slice                             <th>Variable                                                    <th>Value (kgCO<sub>2</sub>)"+
+			"<tr><td>From electricity  (Water)         <td><a href=variable.php?id=ws_KPI_GHG_elec>ws_KPI_GHG_elec</a> <td>"+format(wsYes)+
+			"<tr><td>From fuel engines (Water)         <td><a href=variable.php?id=ws_KPI_GHG_ne>ws_KPI_GHG_ne</a>     <td>"+format(wsNon)+
+			"<tr><td>From electricity (Wastewater)     <td><a href=variable.php?id=ww_KPI_GHG_elec>ww_KPI_GHG_elec</a> <td>"+format(wwYes)+
+			"<tr><td>From non electricity (Wastewater) <td><a href=variable.php?id=ww_KPI_GHG_ne>ww_KPI_GHG_ne</a>     <td>"+format(wwNon)+
 		"</table>"+
 		"";
 		var div=document.createElement('div');
@@ -90,7 +90,7 @@ Graphs.graph2=function(withTable,container)
 	{ 
 		pieHole:0.4,
 		//width:800,
-		//height:400,
+		height:400,
 		title:"L1 Energy consumption (kWh)",
 		slices:
 		{
@@ -263,15 +263,16 @@ Graphs.graph4=function(withTable,container)
 	var data=google.visualization.arrayToDataTable
 	([
 		['Stage',                             'Emissions'],
-		['WS From electricity',                slice_1],
-		['WS From fuel engines',               slice_2],
-		['WW From electricity',                slice_3],
-		['WW From CH4 in WWTP',              slice_4],
-		['WW From N2O treated wastewater', slice_5],
-		['WW From sludge transport',           slice_6],
-		['WW From CH4 untreated wastewater',     slice_7],
-		['WW From NwO untreated wastewater',     slice_8],
-		['WW From fuel engines',               slice_9],
+		['From electricity (Water)',           slice_1],
+		['From fuel engines (Water)',          slice_2],
+
+		['From electricity (Wastewater)',      slice_3],
+		['From CH4 from WWTP (Wastewater)',    slice_4],
+		['From N2O treated (Wastewater)',      slice_5],
+		['From sludge transport (Wastewater)', slice_6],
+		['From CH4 untreated (Wastewater)',    slice_7],
+		['From N2O untreated (Wastewater)',    slice_8],
+		['From fuel engines (Wastewater)',     slice_9],
 	]);
 
 	//options
@@ -307,16 +308,16 @@ Graphs.graph4=function(withTable,container)
 		var table=""+
 		"<button onclick=Graphs.graph4(false,'"+container+"')>Hide table</button>"+
 		"<table >"+
-			"<tr><th>Field                                <th>Variable              <th>Value (kgCO2/year)"+
-			"<tr><td>WS From electricity                  <td>ws_KPI_GHG_elec       <td>"+format(slice_1)+
-			"<tr><td>WS From fuel engines                 <td>ws_KPI_GHG_ne         <td>"+format(slice_2)+
-			"<tr><td>WW From electricity                  <td>ww_KPI_GHG_elec       <td>"+format(slice_3)+
-			"<tr><td>WW From fuel engines                 <td>ww_KPI_GHG_ne_engines <td>"+format(slice_4)+
-			"<tr><td>WW From sludge transport             <td>ww_KPI_GHG_ne_tsludge <td>"+format(slice_5)+
-			"<tr><td>WW From CH4 in plants                <td>ww_KPI_GHG_ne_ch4_wwt <td>"+format(slice_6)+
-			"<tr><td>WW From treated effluent discharge   <td>ww_KPI_GHG_ne_n2o_tre <td>"+format(slice_7)+
-			"<tr><td>WW From untreated effluent discharge <td>ww_KPI_GHG_ne_ch4_unt <td>"+format(slice_8)+
-			"<tr><td>WW From untreated effluent discharge <td>ww_KPI_GHG_ne_n2o_unt <td>"+format(slice_8)+
+			"<tr><th>Field                              <th>Variable              <th>Value (kgCO2/year)"+
+			"<tr><td>From electricity (Water)           <td>ws_KPI_GHG_elec       <td>"+format(slice_1)+
+			"<tr><td>From fuel engines (Water)          <td>ws_KPI_GHG_ne         <td>"+format(slice_2)+
+			"<tr><td>From electricity (Wastewater)      <td>ww_KPI_GHG_elec       <td>"+format(slice_3)+
+			"<tr><td>From CH4 from WWTP (Wastewater)    <td>ww_KPI_GHG_ne_ch4_wwt <td>"+format(slice_4)+
+			"<tr><td>From N2O treated (Wastewater)      <td>ww_KPI_GHG_ne_n2o_tre <td>"+format(slice_5)+
+			"<tr><td>From sludge transport (Wastewater) <td>ww_KPI_GHG_ne_tsludge <td>"+format(slice_6)+
+			"<tr><td>From CH4 untreated (Wastewater)    <td>ww_KPI_GHG_ne_ch4_unt <td>"+format(slice_7)+
+			"<tr><td>From N2O untreated (Wastewater)    <td>ww_KPI_GHG_ne_n2o_unt <td>"+format(slice_8)+
+			"<tr><td>From fuel engines (Wastewater)     <td>ww_KPI_GHG_ne_engines <td>"+format(slice_9)+
 		"</table>";
 		var div = document.createElement('div');
 		div.style.fontSize="10px";
@@ -361,7 +362,7 @@ Graphs.graph5=function(withTable,container)
 	var options= 
 	{ 
 		pieHole:0.4,
-		width:800,
+		//width:800,
 		height:400,
 		title:"Insight Energy consumption",
 		slices:
@@ -510,7 +511,6 @@ Graphs.graph6=function(withTable,container)
 	var options=
 	{
 		title:"L2 GHG",
-		width:1000,
 		height:500,
 		legend:{position:'right',maxLines:100},
 		isStacked:true,
@@ -596,7 +596,7 @@ Graphs.graph7=function(withTable,container)
 	var options= 
 	{ 
 		pieHole:0.4,
-		width:800,
+		//width:800,
 		height:400,
 		title:"Energy consumption per substage",
 		/*

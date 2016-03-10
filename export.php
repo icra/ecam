@@ -4,12 +4,19 @@
 		table#table{width:90%}
 		button.button{margin:1px}
 		button.l2{font-size:10px}
+		table.ww th{background:#bf5050}
 	</style>
 	<script>
 		function updateTable(obj,name)
 		{
 			var t=document.querySelector('#table')
 			t.rows[0].cells[0].innerHTML=name;
+
+			if(name.search('Wastewater')>-1)
+				t.classList.add('ww')
+			else
+				t.classList.remove('ww')
+			
 			while(t.rows.length>2){t.deleteRow(-1);}
 			for(var field in obj)
 			{
@@ -18,7 +25,7 @@
 				//only this object
 				if(type=='object')continue;
 				//new row
-				var newRow = t.insertRow(-1);
+				var newRow=t.insertRow(-1);
 
 				//code
 				newRow.insertCell(-1).innerHTML=field
@@ -56,7 +63,6 @@
 				//description
 				newRow.insertCell(-1).innerHTML=Info[field].explanation;
 			}
-
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
 			var newTh=document.createElement('th');
@@ -89,25 +95,26 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>Tables per stage</h1>
+<!--linear--> <?php include'linear.php'?>
+<!--TITLE--><h1>Export to excel</h1>
 <h4>Click on a stage to view its variables. Then click on "Highlight text inside table" and paste to Excel</h4>
 <!--buttons to select stage-->
 <button class=button onclick=selectText(document.querySelector('#table'))>Highlight text inside table</button>
 <div>
 	<span style=background:#0aaff1>
-		<button onclick="updateTable(Global.Water,              'L1 Water')"              class="button">L1 Water</button>
-		<button onclick="updateTable(Global.Water.General,      'L2 Water General')"       class="button l2">L2 General</button>
-		<button onclick="updateTable(Global.Water.Abstraction,  'L2 Water Abstraction')"  class="button l2">L2 Abstraction</button>
-		<button onclick="updateTable(Global.Water.Treatment,    'L2 Water Treatment')"    class="button l2">L2 Treatment</button>
-		<button onclick="updateTable(Global.Water.Distribution, 'L2 Water Distribution')" class="button l2">L2 Distribution</button>
+		<button onclick="updateTable(Global.Water,              'Preview Water supply')"       class="button">Preview Water supply</button>
+		<button onclick="updateTable(Global.Water.General,      'Insight Water General')"      class="button l2">Insight General</button>
+		<button onclick="updateTable(Global.Water.Abstraction,  'Insight Water Abstraction')"  class="button l2">Insight Abstraction</button>
+		<button onclick="updateTable(Global.Water.Treatment,    'Insight Water Treatment')"    class="button l2">Insight Treatment</button>
+		<button onclick="updateTable(Global.Water.Distribution, 'Insight Water Distribution')" class="button l2">Insight Distribution</button>
 	</span>
 	&emsp;
 	<span style=background:#bf5050>
-		<button onclick="updateTable(Global.Waste,            'L1 Wastewater')"            class="button">L1 Wastewater</button>
-		<button onclick="updateTable(Global.Waste.General,    'L2 Wastewater General')"     class="button l2">L2 General</button>
-		<button onclick="updateTable(Global.Waste.Collection, 'L2 Wastewater Collection')" class="button l2">L2 Collection</button>
-		<button onclick="updateTable(Global.Waste.Treatment,  'L2 Wastewater Treatment')"  class="button l2">L2 Treatment</button>
-		<button onclick="updateTable(Global.Waste.Discharge,  'L2 Wastewater Discharge')"  class="button l2">L2 Discharge</button>
+		<button onclick="updateTable(Global.Waste,            'Preview Wastewater')"            class="button">Preview Wastewater</button>
+		<button onclick="updateTable(Global.Waste.General,    'Insight Wastewater General')"    class="button l2">Insight General</button>
+		<button onclick="updateTable(Global.Waste.Collection, 'Insight Wastewater Collection')" class="button l2">Insight Collection</button>
+		<button onclick="updateTable(Global.Waste.Treatment,  'Insight Wastewater Treatment')"  class="button l2">Insight Treatment</button>
+		<button onclick="updateTable(Global.Waste.Discharge,  'Insight Wastewater Discharge')"  class="button l2">Insight Discharge</button>
 	</span>
 </div>
 <!--info table-->
