@@ -569,11 +569,10 @@
 		 */
 		function updateField(field,newValue)
 		{
-			if(typeof(CurrentLevel[field])=="number")newValue=parseFloat(newValue) //if CurrentLevel[field] is a number, parse float
-			//if a unit change is set, get it:
-			var multiplier = Units.multiplier(field);
-			CurrentLevel[field]=multiplier*newValue; //update the field
-			init(); //update tables and write cookies
+			newValue=parseFloat(newValue)
+			if(isNaN(newValue))newValue=0
+			CurrentLevel[field]=newValue*Units.multiplier(field)
+			init()
 		}
 
 		//depending on stage, draw different charts
@@ -721,7 +720,8 @@
 
 		<!--other-->
 		<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:1em">
-			<tr><th colspan=4 class=tableHeader>OUTPUTS - Service level indicators
+			<tr><th colspan=4 class=tableHeader>OUTPUTS - 
+				<?php if($sublevel) echo "Context "; else echo "Service level "; ?> indicators
 			<tr>
 				<th title=Performance style=cursor:help>P
 				<th>Description

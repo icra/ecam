@@ -67,7 +67,11 @@
 		/** Modify any field of Global and init() */
 		function updateField(object,field,newValue)
 		{
-			if(typeof(object[field])=="number"){newValue=parseFloat(newValue);}
+			if(typeof(object[field])=="number")
+			{
+				newValue=parseFloat(newValue);
+				if(isNaN(newValue))newValue=0;
+			}
 			object[field]=newValue;
 			init();
 		}
@@ -82,7 +86,7 @@
 				var currentAnswer = Global.Configuration["Yes/No"][question];
 				var checked = currentAnswer ? "checked":"";
 				var newRow = t.insertRow(-1);
-				newRow.insertCell(-1).innerHTML=question+"?"
+				newRow.insertCell(-1).innerHTML=question+"?";
 				newRow.insertCell(-1).innerHTML=(function()
 				{
 					var r;//ret value

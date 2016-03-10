@@ -2,8 +2,8 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
-		table{display:inline-block;vertical-align:top;margin:0.5em}
-		tr:hover {background:lightcoral}
+		#problems table{display:inline-block;vertical-align:top;margin:0.5em}
+		#problems tr:hover {background:lightcoral}
 	</style>
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
@@ -61,52 +61,55 @@
 	}
 </script>
 
-<table>
-	<tr><td colspan=3 style=font-weight:bold>Problem 1: NOT USED INPUTS
-	<tr><th>Code<th>Name<th>Stage
-	<script>
-		['Water','Waste'].forEach(function(level)
-		{
-			var unused=getUnused(Global[level])
-			unused.forEach(function(field)
+<div id=problems>
+	<table>
+		<tr><td colspan=3 style=font-weight:bold>Problem 1: NOT USED INPUTS
+		<tr><th>Code<th>Name<th>Stage
+		<script>
+			['Water','Waste'].forEach(function(level)
 			{
-				var color=field.search('ww')==-1 ? "" : "#bf5050";
-				document.write("<tr><td><a style=color:"+color+" href=variable.php?id="+field+">"+field+"</a><td>"+Info[field].description)
-				document.write("<td>"+locateVariable(field).toString())
+				var unused=getUnused(Global[level])
+				unused.forEach(function(field)
+				{
+					var color=field.search('ww')==-1 ? "" : "#bf5050";
+					document.write("<tr><td><a style=color:"+color+" href=variable.php?id="+field+">"+field+"</a><td>"+Info[field].description)
+					document.write("<td>"+locateVariable(field).toString())
+				});
 			});
-		})
+			document.write("<tr><td colspan=3 style=text-align:center><i>End of table</i>");
 
-	</script>
-</table>
+		</script>
+	</table>
 
-<table>
-	<tr><td style=font-weight:bold>Problem 2: NOT USED DESCRIPTIONS
-	<tr><th>Code
-	<script>
-		//find unused definitions in Info
-		function getInfoUnused()
-		{
-			var uu=[];
-			for(var field in Info)
+	<table>
+		<tr><td style=font-weight:bold>Problem 2: NOT USED DESCRIPTIONS
+		<tr><th>Code
+		<script>
+			//find unused definitions in Info
+			function getInfoUnused()
 			{
-				if(locateVariable(field)==false)
-					uu.push(field);
+				var uu=[];
+				for(var field in Info)
+				{
+					if(locateVariable(field)==false)
+						uu.push(field);
+				}
+				return uu;
 			}
-			return uu;
-		}
 
-		var uu=getInfoUnused();
-		if(uu.length==0)
-		{
-			document.write("<tr><td style=background:lightgreen><i>All descriptions used</i>")
-		}
-		else
-			uu.forEach(function(field)
+			var uu=getInfoUnused();
+			if(uu.length==0)
 			{
-				document.write("<tr><td>"+field)
-			})
-	</script>
-</table>
+				document.write("<tr><td style=background:lightgreen><i>All descriptions used</i>")
+			}
+			else
+				uu.forEach(function(field)
+				{
+					document.write("<tr><td>"+field)
+				})
+		</script>
+	</table>
+</div>
 
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

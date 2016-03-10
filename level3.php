@@ -445,10 +445,17 @@
 				})();
 
 				//level 2 value
-				newRow.insertCell(-1).innerHTML="<b>"+format(CurrentStage[field]()/Units.multiplier(field))+"</b>";
+				newRow.insertCell(-1).innerHTML=(function()
+				{
+					var value=format(CurrentStage[field]()/Units.multiplier(field));
+					return '<b>'+value+'</b>';
+				})();
 
 				//unit
-				newRow.insertCell(-1).innerHTML=Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
+				newRow.insertCell(-1).innerHTML=(function()
+				{
+					return Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
+				})();
 			}
 
 			//bottom line with the color of W/WW
@@ -481,7 +488,8 @@
 		//update a field of the substage[index]
 		function updateSubstage(index,field,newValue)
 		{
-			if(typeof(CurrentStage[field])=="number"){newValue=parseFloat(newValue);}
+			newValue=parseFloat(newValue);
+			if(isNaN(newValue))newValue=0;
 			var multiplier=Units.multiplier(field);
 			substages[index][field]=multiplier*newValue;
 			init();
