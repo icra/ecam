@@ -91,7 +91,7 @@ Graphs.graph2=function(withTable,container)
 		pieHole:0.4,
 		//width:800,
 		height:400,
-		title:"L1 Energy consumption (kWh)",
+		title:"Energy consumption (kWh) (Preview)",
 		slices:
 		{
 			0:{ color: '#0aaeef' },
@@ -280,7 +280,7 @@ Graphs.graph4=function(withTable,container)
 	{ 
 		//width:800,
 		//height:400,
-		title:"Greenhouse gas emissions (kg CO2 eq)",
+		title:"Greenhouse gas emissions (Insight)",
 		slices:
 		{
 			0:{color:'#00aff1'},
@@ -364,7 +364,7 @@ Graphs.graph5=function(withTable,container)
 		pieHole:0.4,
 		//width:800,
 		height:400,
-		title:"Insight Energy consumption",
+		title:"Energy consumption (kWh) (Insight)",
 		slices:
 		{
 			0:{color:'#66cef5'},
@@ -710,14 +710,14 @@ Graphs.sankey=function(withTable,container)
 		var table=""+
 		"<button onclick=Graphs.sankey(false,'"+container+"')>Hide table</button>"+
 		"<table>"+
-			"<tr><th>Stage<th>Volume (m3)"+
-			"<tr><td><a href=variable.php?id=wsa_vol_conv>wsa_vol_conv</a> <td>"+slice_1+
-			"<tr><td><a href=variable.php?id=wst_vol_trea>wst_vol_trea</a> <td>"+slice_2+
-			"<tr><td><a href=variable.php?id=wsd_vol_dist>wsd_vol_dist</a> <td>"+slice_3+
-			"<tr><td><a href=variable.php?id=wsd_auth_con>wsd_auth_con</a> <td>"+slice_4+
-			"<tr><td><a href=variable.php?id=wwc_vol_conv>wwc_vol_conv</a> <td>"+slice_5+
-			"<tr><td><a href=variable.php?id=wwt_vol_trea>wwt_vol_trea</a> <td>"+slice_6+
-			"<tr><td><a href=variable.php?id=wwd_vol_disc>wwd_vol_disc</a> <td>"+slice_7+
+			"<tr><th>Stage        <th>Variable                                              <th>Volume (m3)"+
+			"<tr><td>Abstraction  <td><a href=variable.php?id=wsa_vol_conv>wsa_vol_conv</a> <td>"+slice_1+
+			"<tr><td>Treatment    <td><a href=variable.php?id=wst_vol_trea>wst_vol_trea</a> <td>"+slice_2+
+			"<tr><td>Distribution <td><a href=variable.php?id=wsd_vol_dist>wsd_vol_dist</a> <td>"+slice_3+
+			"<tr><td>Consumption  <td><a href=variable.php?id=wsd_auth_con>wsd_auth_con</a> <td>"+slice_4+
+			"<tr><td>Collection   <td><a href=variable.php?id=wwc_vol_conv>wwc_vol_conv</a> <td>"+slice_5+
+			"<tr><td>Treatment    <td><a href=variable.php?id=wwt_vol_trea>wwt_vol_trea</a> <td>"+slice_6+
+			"<tr><td>Discharge    <td><a href=variable.php?id=wwd_vol_disc>wwd_vol_disc</a> <td>"+slice_7+
 		"</table>";
 		var div = document.createElement('div');
 		div.style.fontSize="10px";
