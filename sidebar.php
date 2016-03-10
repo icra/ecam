@@ -173,7 +173,7 @@
 			<tr><td><a href=summary.php?type=output>All Performance indicators</a>
 			<tr><th>Other
 			<tr><td><a href=graph.php?g=graph1>Graphs (debug mode)</a>
-			<tr><td><a href=export.php>Export (debut mode)</a>
+			<tr><td><a href=export.php>Export (debug mode)</a>
 			<tr><td><a href=todo.php>To do (debug mode)</a>
 			<tr><td><a href=problems.php>Problems (debug mode)</a>
 		</table>
