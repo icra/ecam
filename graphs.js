@@ -697,11 +697,18 @@ Graphs.sankey=function(withTable,container)
 		['Wastewater treatment', 'Discharge',            slice_7 || 0.01 ],
 		['Wastewater treatment', 'Losses6', losses_6 || 0.01 ],
 
-		['Losses1', '', 0.01],
-		['Losses2', '', 0.01],
-		['Losses3', '', 0.01],
-		['Losses4', '', 0.01],
-		['Losses5', '', 0.01],
+		['Losses1', 'Losses2', losses_1||0.01],
+		['Losses2', 'Losses3', losses_1+losses_2||0.01],
+		['Losses3', 'Losses4', losses_1+losses_2+losses_3||0.01],
+		['Losses4', 'Losses5', losses_1+losses_2+losses_3+losses_4||0.01],
+		['Losses5', 'Losses6', losses_1+losses_2+losses_3+losses_4+losses_5||0.01],
+		['Losses6', 'Water Losses', losses||0.01],
+
+
+
+
+
+
 	]);
 
 	//options
