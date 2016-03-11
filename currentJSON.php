@@ -2,11 +2,10 @@
 none;
 margin-top:4em;"> 
 
-	<!--l1 & l2-->
-	<div class=inline style="margin-top:4em;text-align:left;border:1px solid #ccc;width:50%;background:#fafafa">
-		<pre><b>Current System</b><br><span id=currentGlobal></span></pre>
-	</div>
-</div>
+<!--l1 & l2-->
+<div class=inline style="margin-top:4em;text-align:left;border:1px solid #ccc;width:50%;background:#fafafa">
+	<pre><b>Current System</b><br><span id=currentGlobal></span></pre>
+</div></div>
 
 <script>
 	/** Stringify Global object and display it */
@@ -38,7 +37,7 @@ margin-top:4em;">
 		setCookie("GLOBAL",compressed);
 
 		//summary
-		//cookieSummary();
+		cookieSummary();
 	}
 
 	/** Display an ascii table in Console to summarize all cookie sizes */
