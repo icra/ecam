@@ -93,7 +93,7 @@
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
 				newCell.innerHTML="Advanced"
-				newRow.insertCell(-1).innerHTML="YES <span style=background:yellow>(only editable/visible if 'Type of assessment' is 'Advanced')</span>";
+				newRow.insertCell(-1).innerHTML="YES";
 			}
 
 			//if output: show inputs involved
@@ -171,9 +171,12 @@
 			{
 				newCell.innerHTML=format(currentStage[id]/Units.multiplier(id));
 
-				//if this input is level 3 only, should not be modified here
-				if(!Level3.isInList(id))
+				//get substages
+				if(typeof(currSubstage)=="object" && currSubstage.length > 1)
 				{
+					newCell.title='Go to substages to edit this value (sum)'
+				}
+				else{
 					newCell.className='input'
 					newCell.setAttribute('onclick',"transformField(this)")
 				}
@@ -315,6 +318,7 @@
 	var level 		 = localization.level
 	var sublevel 	 = localization.sublevel
 	var currentStage = sublevel ? Global[level][sublevel] : Global[level]
+	var currSubstage = sublevel ? Global.Substages[level][sublevel] : Global.Substages[level]
 	//make the user see "Water Supply" instead of "Water"
 	var levelAlias
 	switch(level)

@@ -16,10 +16,8 @@ var Questions =
 		"wwd_nrg_recv",
 		"wsg_nrg_prod",
 		"wsg_nrg_sold",
-		"wsg_heat_nrg",
 		"wwg_nrg_prod",
 		"wwg_nrg_sold",
-		"wsg_heat_nrg"
 	],
 
 	"Is your topography non-flat":[

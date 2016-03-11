@@ -3,27 +3,32 @@
 	<?php include'imports.php'?>
 	<script>
 		var Configuration = {};
-		/** Enable or disable stage <input type=checkbox id=id> */
 
+		/** Enable or disable stage <input type=checkbox id=id> */
 		Configuration.activate=function(id)
 		{
 			//checkbox that has been clicked
 			var checkbox=document.getElementById(id);
 
-			//SUBLEVELS corresponding to the checkbox have classname==id
+			//if a level 1 is deactivated, deactivate the corresponding level 2 ones
 			var elements=document.getElementsByClassName(id)
 			for(var i=0;i<elements.length;i++)
 			{
-				if(checkbox.checked)
-				{
-					/**normal color*/ elements[i].parentNode.style.color="";
-				}
-				else
+				if(!checkbox.checked)
 				{
 					/**uncheck*/elements[i].checked=false;
 					/**remove green color*/elements[i].parentNode.parentNode.style.backgroundColor="";
 					/**modifiy Active Stages*/Global.Configuration["Active Stages"][elements[i].id]=0
 				}
+			}
+
+			//if a level 1 is pressed, activate or deactivate the corresponding General stages
+			if(id=="water" || id=="waste")
+			{
+				if(checkbox.checked)
+					Global.Configuration["Active Stages"][id+"Gen"]=1;
+				else
+					Global.Configuration["Active Stages"][id+"Gen"]=0;
 			}
 
 			//if a level 2 stage is activated, activate L1 if not active
@@ -48,7 +53,7 @@
 		{
 			for(var stage in Global.Configuration["Active Stages"])
 			{
-				/**skip general: always active*/
+				/**skip General: is not controllable by the user*/
 				switch(stage){case 'waterGen':case 'wasteGen':continue;break;}
 				if(Global.Configuration["Active Stages"][stage])
 				{
@@ -412,7 +417,6 @@
 <!--PREV & NEXT BUTTONS-->
 <div style=margin-top:4em> 
 	<button class="button prev" onclick="event.stopPropagation();window.location='getStarted.php'">Previous</button> 
-	
 	<script>
 		//find first available stage to start entering data
 		function nextPage()

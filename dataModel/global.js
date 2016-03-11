@@ -39,7 +39,6 @@ var Global = {
 		"General":{
 			"wsg_nrg_prod":0,
 			"wsg_nrg_sold":0,
-			"wsg_heat_nrg":0,
 			wsg_KPI_GHG_elec:function(){return Global.Water.Abstraction.wsa_KPI_GHG_elec()+Global.Water.Treatment.wst_KPI_GHG_elec()+Global.Water.Distribution.wsd_KPI_GHG_elec()},
 			wsg_KPI_vol:     function(){return Global.Water.Abstraction.wsa_vol_conv+Global.Water.Treatment.wst_vol_trea+Global.Water.Distribution.wsd_vol_dist},
 			wsg_KPI_nrg_cons:function(){return Global.Water.Abstraction.wsa_nrg_cons+Global.Water.Treatment.wst_nrg_cons+Global.Water.Distribution.wsd_nrg_cons},
@@ -181,7 +180,6 @@ var Global = {
 		"General":{
 			"wwg_nrg_prod":0,
 			"wwg_nrg_sold":0,
-			"wwg_heat_nrg":0,
 			wwg_KPI_GHG_elec:function(){return Global.Waste.Collection.wwc_KPI_GHG_elec()+Global.Waste.Treatment.wwt_KPI_GHG_elec()+Global.Waste.Discharge.wwd_KPI_GHG_elec()},
 			wwg_KPI_vol:     function(){return Global.Waste.Collection.wwc_vol_conv+Global.Waste.Treatment.wwt_vol_trea+Global.Waste.Discharge.wwd_vol_disc},
 			wwg_KPI_nrg_cons:function(){return Global.Waste.Collection.wwc_nrg_cons+Global.Waste.Treatment.wwt_nrg_cons+Global.Waste.Discharge.wwd_nrg_cons},
@@ -294,12 +292,12 @@ var Global = {
 	Configuration:{
 		"Active Stages":{
 			"water":0,
-			"waterGen":1,
+			"waterGen":0,
 			"waterAbs":0,
 			"waterTre":0,
 			"waterDis":0,
 			"waste":0,
-			"wasteGen":1,
+			"wasteGen":0,
 			"wasteCol":0,
 			"wasteTre":0,
 			"wasteDis":0,
