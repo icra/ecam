@@ -173,7 +173,7 @@
 					{
 						//this means you are in level 2 and you should NOT be able to modify inputs here
 						newCell.style.cursor='help';
-						newCell.title="To modify this input, go to 'Advanced assessment'. This is because now this field is the sum of all substages";
+						newCell.title="To modify this input, go to 'Substages'. This is because this field now the sum of all fields in substages";
 					}
 					else
 					{
@@ -585,6 +585,9 @@
 				if($sublevel)
 				{
 					echo "Graphs.graph5(false,'graph');";
+
+					if($sublevel=='General')
+						echo "Graphs.graph7(false,'graph2')";
 				}
 				else
 				{
@@ -646,7 +649,7 @@
 			}
 		}
 		/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
-		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Insight)</span>" : "<span style=color:black>$titleLevel (Preview)</span>";
+		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Energy performance)</span>" : "<span style=color:black>$titleLevel (GHG assessment)</span>";
 	?>
 	<style> h1 {text-align:left;padding-left:20em;line-height:2.1em} </style>
 	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?>
@@ -740,6 +743,15 @@
 
 <!--display graphs-->
 <div id=graph style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%" >Graphs here</div>
+
+<?php
+	if($sublevel && $sublevel=='General')
+	{ ?>
+		<div id=graph2 style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%" >Graphs here</div>
+	  <?php
+	}
+?>
+
 <script>
 	google.charts.load('current',{'packages':['corechart','sankey']});
 	google.charts.setOnLoadCallback(drawCharts);

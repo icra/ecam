@@ -17,14 +17,14 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
 
-<button class=button id=graph1 onclick=window.location='graph.php?g=graph1'>GHG (Preview)</button>
-<button class=button id=graph4 onclick=window.location='graph.php?g=graph4'>GHG (Insight)</button>
-<button class=button id=graph3 onclick=window.location='graph.php?g=graph3'>GHG normalized (Preview)</button>
-<button class=button id=graph6 onclick=window.location='graph.php?g=graph6'>GHG normalized (Insight)</button>
-<button class=button id=graph2 onclick=window.location='graph.php?g=graph2'>Energy (Preview)</button>
-<button class=button id=graph5 onclick=window.location='graph.php?g=graph5'>Energy (Insight)</button>
+<button class=button id=graph1 onclick=window.location='graph.php?g=graph1'>GHG (GHG assessment)</button>
+<button class=button id=graph4 onclick=window.location='graph.php?g=graph4'>GHG (Energy performance)</button>
+<button class=button id=graph3 onclick=window.location='graph.php?g=graph3'>GHG normalized (GHG assessment)</button>
+<button class=button id=graph6 onclick=window.location='graph.php?g=graph6'>GHG normalized (Energy performance)</button>
+<button class=button id=graph2 onclick=window.location='graph.php?g=graph2'>Energy (GHG assessment)</button>
+<button class=button id=graph5 onclick=window.location='graph.php?g=graph5'>Energy (Energy performance)</button>
 <button class=button id=graph7 onclick=window.location='graph.php?g=graph7'>Energy (Substages)</button>
-<button class=button id=sankey onclick=window.location='graph.php?g=sankey'>Sankey (Insight)</button>
+<button class=button id=sankey onclick=window.location='graph.php?g=sankey'>Sankey (Energy performance)</button>
 
 <!--TITLE--><h1>Graphs</h1>
 <!--graph--><div id="graph"></div>

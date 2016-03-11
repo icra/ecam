@@ -131,11 +131,11 @@
 	<h4>All active <?php echo $type?>s (sorted by stage)</h4>
 	<!--level 1-->
 	<div class=inline style="font-size:11px;width:45%;padding:0">
-		<table style="width:100%" level=1><tr><th colspan=4>Preview</table>
+		<table style="width:100%" level=1><tr><th colspan=4>GHG assessment</table>
 	</div>
 	<!--level 2-->
 	<div class=inline style="font-size:11px;width:45%;padding:0">
-		<table style="width:100%" level=2><tr><th colspan=4>Insight</table>
+		<table style="width:100%" level=2><tr><th colspan=4>Energy performance</table>
 	</div>
 </div>
 

@@ -37,8 +37,6 @@ var Global = {
 		ws_SL_non_revw : function(){if(this.Abstraction.wsa_vol_conv==0) return this.ws_non_revw; else return 100*this.ws_vol_auth/this.Abstraction.wsa_vol_conv},
 
 		"General":{
-			"wsg_nrg_prod":0,
-			"wsg_nrg_sold":0,
 			wsg_KPI_GHG_elec:function(){return Global.Water.Abstraction.wsa_KPI_GHG_elec()+Global.Water.Treatment.wst_KPI_GHG_elec()+Global.Water.Distribution.wsd_KPI_GHG_elec()},
 			wsg_KPI_vol:     function(){return Global.Water.Abstraction.wsa_vol_conv+Global.Water.Treatment.wst_vol_trea+Global.Water.Distribution.wsd_vol_dist},
 			wsg_KPI_nrg_cons:function(){return Global.Water.Abstraction.wsa_nrg_cons+Global.Water.Treatment.wst_nrg_cons+Global.Water.Distribution.wsd_nrg_cons},
@@ -178,8 +176,6 @@ var Global = {
 		ww_SL_dilution: function(){return 100*this.c_ww_in_dilution()/this.ww_vol_coll},
 
 		"General":{
-			"wwg_nrg_prod":0,
-			"wwg_nrg_sold":0,
 			wwg_KPI_GHG_elec:function(){return Global.Waste.Collection.wwc_KPI_GHG_elec()+Global.Waste.Treatment.wwt_KPI_GHG_elec()+Global.Waste.Discharge.wwd_KPI_GHG_elec()},
 			wwg_KPI_vol:     function(){return Global.Waste.Collection.wwc_vol_conv+Global.Waste.Treatment.wwt_vol_trea+Global.Waste.Discharge.wwd_vol_disc},
 			wwg_KPI_nrg_cons:function(){return Global.Waste.Collection.wwc_nrg_cons+Global.Waste.Treatment.wwt_nrg_cons+Global.Waste.Discharge.wwd_nrg_cons},
@@ -226,7 +222,7 @@ var Global = {
 			wwt_KPI_nrg_per_kg :function(){return this.wwt_nrg_cons/this.c_wwt_bod_rmvd()},
 			wwt_KPI_nrg_biogas :function(){return this.wwt_nrg_biog/this.wwt_vol_trea},
 			wwt_KPI_biog_x_bod :function(){return this.wwt_biog_pro/this.c_wwt_bod_rmvd()},
-			wwt_KPI_nrg_x_biog :function(){return this.wwt_nrg_biog/this.c_wwt_nrg_biog()},
+			wwt_KPI_nrg_x_biog :function(){return 100*this.wwt_nrg_biog/this.c_wwt_nrg_biog()},
 			wwt_KPI_sludg_prod :function(){return this.wwt_mass_slu/this.wwt_vol_trea},
 			wwt_KPI_dry_sludge :function(){return 100*this.wwt_dryw_slu/this.wwt_mass_slu},
 			wwt_KPI_capac_util :function(){return this.wwt_vol_trea/this.wwt_trea_cap},

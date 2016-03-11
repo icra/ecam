@@ -74,8 +74,6 @@ var Info = {
 	ww_KPI_GHG:{description:"<b>Total GHG</b>",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from non-electricity and electricity consumption"},
 
 	//L2 WSG
-	"wsg_nrg_prod":{description:"Energy produced",magnitude:"Energy",unit:"kWh",explanation:"Energy produced", },
-	"wsg_nrg_sold":{description:"Energy sold",magnitude:"Energy",unit:"kWh",explanation:"Energy sold", },
 	wsg_KPI_GHG_elec:{description:"From electricity (sum for Abstraction, Treatment and Distribution stages)",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from electricity consumption in all stages of urban drinking water system", },
 	wsg_KPI_vol :{description:"Volume of water (sum for Abstraction, Treatment and Distribution stages)",magnitude:"Volume",unit:"m3",explanation:"Sum of all water volumes for all water stages",},
 	wsg_KPI_nrg_cons:{description:"Total electric energy consumption (sum for Abstraction, Treatment and Distribution stages)",magnitude:"Energy",unit:"kWh",explanation:"Electric energy consumption including both from the grid and self-produced, for the water stages, by the undertaking during the entire assessment period", },
@@ -170,8 +168,6 @@ var Info = {
 	wsd_KPI_un_head_loss:{description:"Unit head loss",magnitude:"Headloss/Distance",unit:"m/km",explanation:"Unit energy friction loss in the conveyance system ",},
 
 	//L2 WWG
-	"wwg_nrg_prod":{description:"Energy produced",magnitude:"Energy",unit:"kWh",explanation:"Energy produced", },
-	"wwg_nrg_sold":{description:"Energy sold",magnitude:"Energy",unit:"kWh",explanation:"Energy sold", },
 	wwg_KPI_GHG_elec:{description:"From electricity (sum for Collection, Treatment and Discharge stages)",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from electricity consumption in all stages of wastewater system", },
 	wwg_KPI_vol :{description:"Volume of wastewater (sum for Collection, Treatment and Discharge stages)",magnitude:"Volume",unit:"m3",explanation:"Sum of all water volumes for all water stages",},
 	wwg_KPI_nrg_cons:{description:"Total electric energy consumption (sum for Collection, Treatment and Discharge stages)",magnitude:"Energy",unit:"kWh",explanation:"Electric energy consumption including both from the grid and self-produced, for the water stages, by the undertaking during the entire assessment period", },

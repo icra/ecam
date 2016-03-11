@@ -23,7 +23,7 @@ Graphs.graph1=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		title:"Greenhouse gas emissions (Preview)",
+		title:"Greenhouse gas emissions (GHG assessment)",
 		slices:
 		{
 			0:{color:'#00aff1' },
@@ -87,7 +87,7 @@ Graphs.graph2=function(withTable,container)
 	var options= 
 	{ 
 		pieHole:0.4,
-		title:"Energy consumption (kWh) (Preview)",
+		title:"Energy consumption (kWh) (GHG assessment)",
 		slices:
 		{
 			0:{ color: '#0aaeef' },
@@ -178,7 +178,7 @@ Graphs.graph3=function(withTable,container)
 	//options
 	var options=
 	{
-		title:"Greenhouse gas emissions (Preview) (TBD)",
+		title:"Greenhouse gas emissions (GHG assessment) (TBD)",
 		height:500,
 		legend:{position:'right',maxLines:100},
 		isStacked:true,
@@ -274,7 +274,7 @@ Graphs.graph4=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		title:"Greenhouse gas emissions (Insight)",
+		title:"Greenhouse gas emissions (Energy performance)",
 		slices:
 		{
 			0:{color:'#00aff1'},
@@ -356,7 +356,7 @@ Graphs.graph5=function(withTable,container)
 	var options= 
 	{ 
 		pieHole:0.4,
-		title:"Energy consumption (kWh) (Insight)",
+		title:"Energy consumption (kWh) (Energy performance)",
 		slices:
 		{
 			0:{color:'#66cef5'},
@@ -502,7 +502,7 @@ Graphs.graph6=function(withTable,container)
 	]);
 	var options=
 	{
-		title:"Greenhouse gas emissions (Insight) (TBD)",
+		title:"Greenhouse gas emissions (Energy performance) (TBD)",
 		height:500,
 		legend:{position:'right',maxLines:100},
 		isStacked:true,

@@ -102,19 +102,19 @@
 <button class=button onclick=selectText(document.querySelector('#table'))>Highlight text inside table</button>
 <div>
 	<span style=background:#0aaff1>
-		<button onclick="updateTable(Global.Water,              'Preview Water supply')"       class="button">Preview Water supply</button>
-		<button onclick="updateTable(Global.Water.General,      'Insight Water General')"      class="button l2">Insight General</button>
-		<button onclick="updateTable(Global.Water.Abstraction,  'Insight Water Abstraction')"  class="button l2">Insight Abstraction</button>
-		<button onclick="updateTable(Global.Water.Treatment,    'Insight Water Treatment')"    class="button l2">Insight Treatment</button>
-		<button onclick="updateTable(Global.Water.Distribution, 'Insight Water Distribution')" class="button l2">Insight Distribution</button>
+		<button onclick="updateTable(Global.Water,              'GHG assessment - Water supply')"       class="button">GHG assessment - Water supply</button>
+		<button onclick="updateTable(Global.Water.General,      'Energy performance - Water General')"      class="button l2">Energy performance - General</button>
+		<button onclick="updateTable(Global.Water.Abstraction,  'Energy performance - Water Abstraction')"  class="button l2">Energy performance - Abstraction</button>
+		<button onclick="updateTable(Global.Water.Treatment,    'Energy performance - Water Treatment')"    class="button l2">Energy performance - Treatment</button>
+		<button onclick="updateTable(Global.Water.Distribution, 'Energy performance - Water Distribution')" class="button l2">Energy performance - Distribution</button>
 	</span>
-	&emsp;
+	<br>
 	<span style=background:#bf5050>
-		<button onclick="updateTable(Global.Waste,            'Preview Wastewater')"            class="button">Preview Wastewater</button>
-		<button onclick="updateTable(Global.Waste.General,    'Insight Wastewater General')"    class="button l2">Insight General</button>
-		<button onclick="updateTable(Global.Waste.Collection, 'Insight Wastewater Collection')" class="button l2">Insight Collection</button>
-		<button onclick="updateTable(Global.Waste.Treatment,  'Insight Wastewater Treatment')"  class="button l2">Insight Treatment</button>
-		<button onclick="updateTable(Global.Waste.Discharge,  'Insight Wastewater Discharge')"  class="button l2">Insight Discharge</button>
+		<button onclick="updateTable(Global.Waste,            'GHG assessment - Wastewater')"            class="button">GHG assessment - Wastewater</button>
+		<button onclick="updateTable(Global.Waste.General,    'Energy performance - Wastewater General')"    class="button l2">Energy performance - General</button>
+		<button onclick="updateTable(Global.Waste.Collection, 'Energy performance - Wastewater Collection')" class="button l2">Energy performance - Collection</button>
+		<button onclick="updateTable(Global.Waste.Treatment,  'Energy performance - Wastewater Treatment')"  class="button l2">Energy performance - Treatment</button>
+		<button onclick="updateTable(Global.Waste.Discharge,  'Energy performance - Wastewater Discharge')"  class="button l2">Energy performance - Discharge</button>
 	</span>
 </div>
 <!--info table-->

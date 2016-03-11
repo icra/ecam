@@ -1,4 +1,4 @@
-<!--birds eye view-->
+<!--birds eye view: quick assessment-->
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
@@ -168,7 +168,7 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
-<!--TITLE--><h1>Bird's eye view of <script>document.write(Global.General.Name)</script></h1>
+<!--TITLE--><h1>Quick assesment of <script>document.write(Global.General.Name)</script></h1>
 </center>
 
 <!--inputs table-->

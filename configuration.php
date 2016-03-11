@@ -332,7 +332,7 @@
 			#selectStage td[rowspan='3']{text-align:center;}
 			#selectStage label{cursor:pointer;display:block;min-height:100%;padding:0.5em}
 		</style>
-		<tr><th>Preview <th>Insight
+		<tr><th>GHG assessment <th>Energy performance
 			<?php 
 				function printL1stage($alias,$name)
 				{
@@ -406,9 +406,9 @@
 					#fuelSelection tr.inactive {background:#ccc;color:#999}
 				</style>
 				<tr><th>Stage<th>Selected Fuel type
-				<tr stage=water>   <td>Preview - Water supply (engines)
-				<tr stage=waste>   <td>Preview - Wastewater (engines)
-				<tr stage=wasteTre><td>Insight - Wastewater treatment (vehicles)
+				<tr stage=water>   <td>GHG assessment - Water supply (engines)
+				<tr stage=waste>   <td>GHG assessment - Wastewater (engines)
+				<tr stage=wasteTre><td>Energy performance - Wastewater treatment (vehicles)
 			</table>
 		</fieldset>
 	</div>

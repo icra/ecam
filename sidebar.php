@@ -154,11 +154,11 @@
 			<tr><td><a href=index.php>Home</a>
 			<tr><td><a href=getStarted.php>General info</a>
 			<tr><td><a href=configuration.php>Configuration</a>
-			<tr><th>Preview
-			<tr><td><a href=birds.php>Bird's eye view</a>
+			<tr><th>GHG assessment
+			<tr><td><a href=birds.php>Quick assessment</a>
 			<tr><td><a class=water stage=water    href=edit.php?level=Water>Water supply</a>
 			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste>Wastewater</a>
-			<tr><th>Insight
+			<tr><th>Energy performance
 			<tr><td><a class=water stage=waterGen href=edit.php?level=Water&sublevel=General>Water general</a>
 			<tr><td>&emsp;&emsp; <a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction>Water abstraction</a>
 			<tr><td>&emsp;&emsp; <a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment>Water treatment</a>

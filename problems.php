@@ -64,7 +64,7 @@
 <div id=problems>
 	<table>
 		<tr><td colspan=3 style=font-weight:bold>Problem 1: NOT USED INPUTS in any formula
-		<tr><th>Code<th>Name<th>Stage
+		<tr><th>Code<th>Stage
 		<script>
 			['Water','Waste'].forEach(function(level)
 			{
@@ -73,12 +73,13 @@
 				{
 					var color=field.search('ww')==-1 ? "" : "#bf5050";
 					try{
-						document.write("<tr><td><a style=color:"+color+" href=variable.php?id="+field+">"+field+"</a><td>"+Info[field].description)
-						document.write("<td>"+locateVariable(field).toString())
+						document.write("<tr><td>");
+						document.write("<a title='"+Info[field].description+"' style=color:"+color+" href=variable.php?id="+field+">"+field+"</a>");
+						document.write("<td>"+locateVariable(field).toString());
 					}
 					catch(e)
 					{
-						document.write("<tr><td colspan=3>"+field)
+						document.write("<tr><td colspan=3>"+field+" need to be removed. Reset chaché")
 					}
 				});
 			});
@@ -162,6 +163,28 @@
 			{
 				document.write("<tr><td>"+question)
 			})
+		</script>
+	</table>
+
+	<table>
+		<tr><td style=font-weight:bold>Problem 4: INEXISTING QUESTIONS IN BENCHMARKING
+		<tr><th>Code
+		<script>
+			(function()
+			{
+				var inex = []
+				for(var field in RefValues)
+				{
+					if(field=="isInside")continue;
+
+					if(locateVariable(field)==false)
+						inex.push(field);
+				}
+				return inex;
+			})().forEach(function(field)
+			{
+				document.write("<tr><td>"+field);
+			});
 		</script>
 	</table>
 </div>

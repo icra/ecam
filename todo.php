@@ -17,11 +17,9 @@
 		<tr><td>Improve memory<td>Difficult</td>
 		<tr><td>TN effluent<td>Wait</td>
 		<tr><td>Wrong benchmarking<td>Need more info</td>
-		<tr><td>Remove internally the inputs from Insight/General<td>Pending</td>
+		<tr><td>Remove internally the inputs from Energy performance/General<td>Pending</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
-		<tr><td>Activate General stages or not depending on Preview ones<td>Pending</td>
 		<tr><td>Bar graphs<td>Wait</td>
-		<tr><td>Rename birds eye view, preview and insight<td>Pending</td>
 </table>
 
 <!--FOOTER--><?php include'footer.php'?>
