@@ -656,45 +656,70 @@ Graphs.graph7=function(withTable,container)
 Graphs.sankey=function(withTable,container)
 {
 	//data
-	var slice_1 = Global.Water.Abstraction.wsa_vol_conv
-	var slice_2 = Global.Water.Treatment.wst_vol_trea
-	var slice_3 = Global.Water.Distribution.wsd_vol_dist
-	var slice_4 = Global.Water.Distribution.wsd_auth_con
-	var slice_5 = Global.Waste.Collection.wwc_vol_conv
-	var slice_6 = Global.Waste.Treatment.wwt_vol_trea
-	var slice_7 = Global.Waste.Discharge.wwd_vol_disc
+	var slice_1 = Global.Water.Abstraction.wsa_vol_conv;
+	var slice_2 = Global.Water.Treatment.wst_vol_trea;
+	var slice_3 = Global.Water.Distribution.wsd_vol_dist;
+	var slice_4 = Global.Water.Distribution.wsd_auth_con;
+	var slice_5 = Global.Waste.Collection.wwc_vol_conv;
+	var slice_6 = Global.Waste.Treatment.wwt_vol_trea;
+	var slice_7 = Global.Waste.Discharge.wwd_vol_disc;
+
+	var losses_1 = slice_1 - slice_2;
+	var losses_2 = slice_2 - slice_3;
+	var losses_3 = slice_3 - slice_4;
+	var losses_4 = slice_4 - slice_5;
+	var losses_5 = slice_5 - slice_6;
+	var losses_6 = slice_6 - slice_7;
+	var losses = losses_1 + losses_2 + losses_3 + losses_4 + losses_5 + losses_6;
 
 	//data
 	var data = new google.visualization.DataTable();
 	data.addColumn('string', 'From');
 	data.addColumn('string', 'To');
-	data.addColumn('number', 'Weight');
+	data.addColumn('number', 'Volume');
 	data.addRows([
 		['Abstraction', 	     'Water treatment', 	 slice_1 || 0.01 ],
 		['Water treatment',	     'Distribution',         slice_2 || 0.01 ],
+		['Water treatment',      'Losses1', losses_1 || 0.01 ],
+
 		['Distribution', 	     'Users in',             slice_3 || 0.01 ],
+		['Distribution', 	     'Losses2', losses_2 || 0.01 ],
+
 		['Users in',             'Users out',            slice_4 || 0.01 ],
+		['Users in', 	         'Losses3', losses_3 || 0.01 ],
+
 		['Users out',	         'Collection',           slice_5 || 0.01 ],
+		['Users out', 	         'Losses4', losses_4 || 0.01 ],
+
 		['Collection',	         'Wastewater treatment', slice_6 || 0.01 ],
+		['Collection', 	         'Losses5', losses_5 || 0.01 ],
+
 		['Wastewater treatment', 'Discharge',            slice_7 || 0.01 ],
+		['Wastewater treatment', 'Losses6', losses_6 || 0.01 ],
+
+		['Losses1', '', 0.01],
+		['Losses2', '', 0.01],
+		['Losses3', '', 0.01],
+		['Losses4', '', 0.01],
+		['Losses5', '', 0.01],
 	]);
 
 	//options
 	var colors=['#00aff1','#bf5050'];
 	var options = 
 	{
-		width:"900", height: 400,
 		sankey: 
 		{
+			iterations:32,
 			node: {
 				colors: colors,
-				nodePadding:100,
+				nodePadding:20,
 			},
 			link: {
 				colorMode: 'gradient',
 				colors: colors
 			}
-		}
+		},
 	};
 
 	//empty the container
