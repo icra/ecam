@@ -134,7 +134,7 @@ var Global = {
 			wsd_KPI_water_losses:function(){return this.wsd_vol_inje/this.wsd_main_len},
 			wsd_KPI_un_head_loss:function(){return this.wsd_fri_loss/this.wsd_main_len},
 			wsd_SL_pres_ade:function(){return 100*this.wsd_deli_pts/this.wsd_ser_cons},
-			wsd_SL_cont_sup:function(){return 100*this.wsd_time_pre/24/Global.General.Days()},
+			wsd_SL_cont_sup:function(){return 100*this.wsd_time_pre/86400/Global.General.Days()},
 			/*</Level3*/
 		}
 	},

@@ -280,6 +280,9 @@
 					//SUM OF SUBSTAGES = LEVEL 2
 					var sum=sumAll(code);
 
+					//some variables are averaged instead of summed up
+					if(Averaged.isAveraged(code)) sum/=substages.length;
+
 					//only update real inputs
 					if(!isCV) CurrentStage[code]=sum;
 
@@ -287,13 +290,17 @@
 					var newCell=newRow.insertCell(-1);
 					newCell.style.textAlign="center";
 					newCell.style.fontWeight="bold";
-					newCell.innerHTML=format((function()
+					newCell.innerHTML=(function()
 					{
-						if(isCV)
-							return CurrentStage[code]()/multiplier;
+						if(isCV) 
+							return format(CurrentStage[code]()/multiplier);
 						else
-							return CurrentStage[code]/multiplier;
-					})());
+						{
+							var isAvg = Averaged.isAveraged(code) ? " (average)": "";
+
+							return format(CurrentStage[code]/multiplier)+isAvg;
+						}
+					})();
 
 					//Unit for current input
 					newRow.insertCell(-1).innerHTML=(function()

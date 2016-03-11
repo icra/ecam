@@ -14,10 +14,6 @@ var Questions =
 	"Are you producing electrical energy":[
 		"wsa_nrg_turb",
 		"wwd_nrg_recv",
-		"wsg_nrg_prod",
-		"wsg_nrg_sold",
-		"wwg_nrg_prod",
-		"wwg_nrg_sold",
 	],
 
 	"Is your topography non-flat":[
