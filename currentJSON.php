@@ -30,7 +30,7 @@ margin-top:4em;">
 		setCookie("GLOBAL",compressed);
 
 		//summary
-		//cookieSummary();
+		cookieSummary();
 
 		//set 6 cookies for Substages
 		setCookie("waterAbs", LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Water.Abstraction))); 
@@ -49,6 +49,12 @@ margin-top:4em;">
 			console.log( "[+] Global chars length (max is 4000)\n"+
 						 " |--* Uncompressed : "+JSON.stringify(Global).length+" \n"+
 						 " |--* Compressed   : "+getCookie('GLOBAL').length+"\n"+
+						 " |--* waterAbs   : "+getCookie('waterAbs').length+"\n"+
+						 " |--* waterTre   : "+getCookie('waterTre').length+"\n"+
+						 " |--* waterDis   : "+getCookie('waterDis').length+"\n"+
+						 " |--* wasteCol   : "+getCookie('wasteCol').length+"\n"+
+						 " |--* wasteTre   : "+getCookie('wasteTre').length+"\n"+
+						 " |--* wasteDis   : "+getCookie('wasteDis').length+"\n"+
 						 "");
 		}
 	}
