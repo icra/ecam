@@ -14,10 +14,8 @@
 	<tr><th>Task<th>Status
 	<tr><td colspan=2 class=taskgroup>BACK-END
 		<tr><td>Finish questions variable hidings<td>Pending (difficult)</td>
-		<tr><td>Improve memory<td>Difficult</td>
 		<tr><td>TN effluent<td>Wait</td>
 		<tr><td>Wrong benchmarking<td>Need more info</td>
-		<tr><td>Remove internally the inputs from Energy performance/General<td>Pending</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
 		<tr><td>Bar graphs<td>Wait</td>
 </table>
