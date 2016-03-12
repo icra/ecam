@@ -29,7 +29,7 @@
 			function tableRow(alias,level,sublevel,name)
 			{
 				document.write("<tr><td><a stage="+alias+" href=level3.php?level="+level+"&sublevel="+sublevel+">"+name+
-					"<td>"+Global.Substages[level][sublevel].length+
+					"<td>"+Substages[level][sublevel].length+
 					"<td>"+Global.Configuration.Assessment[level][sublevel]+
 					"")
 			}

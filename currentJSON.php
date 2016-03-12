@@ -9,6 +9,7 @@ margin-top:4em;">
 
 <script>
 	/** Stringify Global object and display it */
+	/** COOKIE SIZE LIMIT FOR GOOGLE CHROME IS CLOSE TO 8170 CHARACTERS */
 	function updateResult()
 	{
 		document.getElementById('currentGlobal').innerHTML=JSON.stringify(Global,null,"    ");
@@ -25,19 +26,19 @@ margin-top:4em;">
 		//Compress the string
 		var compressed = LZString.compressToEncodedURIComponent(uncompressed); 
 
-		//Check if compressed exceeds 4k characters
-		if(compressed.length>=4000)
-		{
-			alert("ERROR: memory is full. Please remove some substages.");
-			window.location.reload();
-			return;
-		}
-
 		//Set cookie GLOBAL as compressed
 		setCookie("GLOBAL",compressed);
 
 		//summary
-		cookieSummary();
+		//cookieSummary();
+
+		//set 6 cookies for Substages
+		setCookie("waterAbs", LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Water.Abstraction))); 
+		setCookie("waterTre", LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Water.Treatment))); 
+		setCookie("waterDis", LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Water.Distribution))); 
+		setCookie("wasteCol", LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Waste.Collection))); 
+		setCookie("wasteTre", LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Waste.Treatment))); 
+		setCookie("wasteDis", LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Waste.Discharge))); 
 	}
 
 	/** Display an ascii table in Console to summarize all cookie sizes */

@@ -557,12 +557,12 @@ Graphs.graph6=function(withTable,container)
 Graphs.graph7=function(withTable,container)
 {
 	//pointers to objects
-	var wsa = Global.Substages.Water.Abstraction
-	var wst = Global.Substages.Water.Treatment
-	var wsd = Global.Substages.Water.Distribution
-	var wwc = Global.Substages.Waste.Collection
-	var wwt = Global.Substages.Waste.Treatment
-	var wwd = Global.Substages.Waste.Discharge
+	var wsa = Substages.Water.Abstraction
+	var wst = Substages.Water.Treatment
+	var wsd = Substages.Water.Distribution
+	var wwc = Substages.Waste.Collection
+	var wwt = Substages.Waste.Treatment
+	var wwd = Substages.Waste.Discharge
 	//array of pointers to objects
 	var stages = [ wsa , wst , wsd , wwc , wwt , wwd];
 	var names =  ["wsa_nrg_cons", "wst_nrg_cons", "wsd_nrg_cons", "wwc_nrg_cons", "wwt_nrg_cons", "wwd_nrg_cons" ];

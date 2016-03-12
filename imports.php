@@ -14,6 +14,7 @@
 
 <!--the order of the imports is important. first global, then cookies-->
 <script src="dataModel/global.js"></script>          <!--Default Global object here-->
+<script src="dataModel/substages.js"></script>
 <script src="dataModel/info.js"></script>            <!--All variable descriptions and units object here-->
 <script src="dataModel/utils.js"></script>  <!--function to locate codes inside Global object-->
 <script src="dataModel/dataQuality.js"></script>  <!--data quality-->

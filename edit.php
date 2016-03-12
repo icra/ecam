@@ -63,7 +63,7 @@
 			{
 				echo "
 					var CurrentLevel = Global['$level']['$sublevel'];
-					var substages = Global.Substages['$level']['$sublevel'];";
+					var substages = Substages['$level']['$sublevel'];";
 			}
 			else
 			{
@@ -673,7 +673,7 @@
 							<span style=font-size:12px;color:#666>
 								&rarr; Divided in 
 								<script>
-									var length = Global.Substages['$level']['$sublevel'].length;
+									var length = Substages['$level']['$sublevel'].length;
 									document.write(length)
 								</script>
 								substage/s

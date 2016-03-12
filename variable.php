@@ -318,7 +318,7 @@
 	var level 		 = localization.level
 	var sublevel 	 = localization.sublevel
 	var currentStage = sublevel ? Global[level][sublevel] : Global[level]
-	var currSubstage = sublevel ? Global.Substages[level][sublevel] : Global.Substages[level]
+	var currSubstage = sublevel ? Substages[level][sublevel] : Substages[level]
 	//make the user see "Water Supply" instead of "Water"
 	var levelAlias
 	switch(level)

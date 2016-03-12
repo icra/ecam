@@ -43,9 +43,9 @@
 
 			//update the memory used in the progress bar
 			var progress = document.querySelector('#sidebar #progress')
-			var length = getCookie('GLOBAL') ? getCookie('GLOBAL').length : 0;
+			var length = getCookie('GLOBAL') ? document.cookie.length : 0;
 			progress.value = length;
-			progress.title = "Used memory: "+(100*length/4000)+" %";
+			progress.title = "Used memory: "+(100*length/8100)+" %";
 		}
 	}
 
@@ -143,7 +143,7 @@
 		<style>
 			progress {margin:0.5em;cursor:help}
 		</style>
-		<progress id=progress title="Used memory" value=0 max=4000></progress>
+		<progress id=progress title="Used memory" value=0 max=8100></progress>
 
 		<!--red/blue separator bars-->
 		<div style="padding:0;margin:0;background:#d71d24;height:5px"></div>

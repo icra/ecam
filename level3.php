@@ -65,7 +65,7 @@
 
 		<?php
 			//Read "substages" current object
-			echo "var substages=Global.Substages['$level']['$sublevel'];";
+			echo "var substages=Substages['$level']['$sublevel'];";
 		?>
 
 		/** Returns array of strings which are input identifiers for current stage, e.g ["aV1","av2"] */
@@ -93,6 +93,14 @@
 		function newSubstage()
 		{
 			event.stopPropagation(); //this is to see the memory progress
+
+			//check memory usage
+			if(document.cookie.length>=8100)
+			{
+				alert("Substage not added: memory is full ("+document.cookie.length+" bytes used)");
+				return
+			}
+
 			substages.push(new Substage());
 			init();
 		}

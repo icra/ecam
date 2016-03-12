@@ -269,21 +269,6 @@ var Global = {
 		},
 	},
 
-	/** Substages Arrays For Level 3 */
-	Substages:
-	{
-		"Water":{
-			"Abstraction":[],
-			"Treatment":[],
-			"Distribution":[],
-		},
-		"Waste":{
-			"Collection":[],
-			"Treatment":[],
-			"Discharge":[],
-		},
-	},
-
 	/** Configuration: Active Stages, questions, Technologies and Units */
 	Configuration:{
 		"Active Stages":{
