@@ -45,7 +45,7 @@
 			var progress = document.querySelector('#sidebar #progress')
 			var length = getCookie('GLOBAL') ? document.cookie.length : 0;
 			progress.value = length;
-			progress.title = "Used memory: "+(100*length/8100)+" %";
+			progress.title = "Used memory: "+format(100*length/8100)+" %";
 		}
 	}
 

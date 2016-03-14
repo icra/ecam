@@ -29,9 +29,6 @@ margin-top:4em;">
 		//Set cookie GLOBAL as compressed
 		setCookie("GLOBAL",compressed);
 
-		//summary
-		cookieSummary();
-
 		//set 6 cookies for Substages
 		setCookie("waterAbs", LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Water.Abstraction))); 
 		setCookie("waterTre", LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Water.Treatment))); 
@@ -39,6 +36,9 @@ margin-top:4em;">
 		setCookie("wasteCol", LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Waste.Collection))); 
 		setCookie("wasteTre", LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Waste.Treatment))); 
 		setCookie("wasteDis", LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Waste.Discharge))); 
+
+		//summary
+		cookieSummary();
 	}
 
 	/** Display an ascii table in Console to summarize all cookie sizes */

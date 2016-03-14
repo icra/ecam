@@ -122,8 +122,7 @@
 		<script>
 			(function()
 			{
-				var inex = [];
-				//go over questions
+				var inex=[];
 				for(var question in Questions)
 				{
 					for(var i in Questions[question])
@@ -147,16 +146,12 @@
 		<script>
 			(function()
 			{
-				var inex = []
-
+				var inex = [];
 				for(var question in Questions)
 				{
-					if(typeof(Questions[question])=='function')
-						continue
-					if(Global.Configuration["Yes/No"].hasOwnProperty(question))
-						continue
-					else
-						inex.push(question)
+					if(typeof(Questions[question])=='function') continue
+					if(Global.Configuration["Yes/No"].hasOwnProperty(question)) continue
+					else inex.push(question)
 				}
 				return inex;
 			})().forEach(function(question)
@@ -167,18 +162,16 @@
 	</table>
 
 	<table>
-		<tr><td style=font-weight:bold>Problem 4: INEXISTING QUESTIONS IN BENCHMARKING
+		<tr><td style=font-weight:bold>Problem 4: INEXISTING VARIABLES IN BENCHMARKING
 		<tr><th>Code
 		<script>
 			(function()
 			{
-				var inex = []
+				var inex=[];
 				for(var field in RefValues)
 				{
 					if(field=="isInside")continue;
-
-					if(locateVariable(field)==false)
-						inex.push(field);
+					if(locateVariable(field)==false) inex.push(field);
 				}
 				return inex;
 			})().forEach(function(field)
