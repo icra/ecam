@@ -42,6 +42,7 @@ var Info = {
 	ws_KPI_GHG_elec:{description:"From electricity",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from electricity consumption in all stages of urban drinking water system", },
 	ws_KPI_GHG_ne:{description:"From fuel engines",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions other from electricity consumption in all stages of urban drinking water system", },
 	ws_KPI_GHG :{description:"<b>Total GHG</b>",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from non-electricity and electricity consumption ", },
+	ws_KPI_GHG_year :{description:"<b style=color:red>TBD</b> Total GHG per year",magnitude:"Mass/Time",unit:"kgCO2e/year",explanation:"GHG Emissions from non-electricity and electricity consumption per year", },
 
 	//L1 WW
 	"ww_nrg_cost" :{description:"Energy costs",magnitude:"Currency",unit:"USD",explanation:"Costs from electric energy consumption for the entire wastewater utilty, based on the electricity bill during the entire assessment period.", },

@@ -37,8 +37,8 @@ margin-top:4em;">
 		setCookie("wasteTre", LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Waste.Treatment))); 
 		setCookie("wasteDis", LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Waste.Discharge))); 
 
-		//summary
-		cookieSummary();
+		//summary (debug mode)
+		//cookieSummary();
 	}
 
 	/** Display an ascii table in Console to summarize all cookie sizes */

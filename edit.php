@@ -710,7 +710,9 @@
 				width:100%;background:#f6f6f6;
 				<?php if($sublevel) echo "display:none;"; ?>
 			">
-			<tr><th colspan=7 class=tableHeader>OUTPUTS - Greenhouse gas emissions (GHG) | <a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity">Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
+			<tr><th colspan=7 class=tableHeader>OUTPUTS - Greenhouse gas emissions (GHG) 
+				| <a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity">Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
+				| <a href=variable.php?id=Days >Assessment period</a>: <script>document.write(format(Global.General.Days()))</script> days
 			<tr>
 				<th>Origin
 				<th>Value (kgCO<sub>2</sub>eq)
