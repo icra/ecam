@@ -36,8 +36,8 @@
 	<!--MENU--><div style=padding:1em><?php include'menu.php'?></div>
 
 	<ul>
+	<!--WARNING--><li><b>Optimized for Google Chrome. Not tested in other browsers.</b>
 	<!--LATEST UPD--><li><?php echo "Latest update: ".date("F d Y, H:i:s",filemtime("index.php"))?>.
-	<!--WARNING--><li>Please use Google Chrome. Tool not tested in other browsers.
 	</ul>
 </div>
 
