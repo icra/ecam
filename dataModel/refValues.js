@@ -147,6 +147,15 @@ var RefValues =
 		*/
 	},
 
+	//	Below 15%= red -	15 to 25% = orange -	Above 25%= green
+	wwt_KPI_nrg_x_biog:function(value)
+	{
+			 if(value < 15)                   {return "Unsatisfactory"}
+		else if(15   <=  value && value <= 25){return "Acceptable"}
+		else if(value > 25)                   {return "Good"}
+	},
+
+
 	//wcE3: Good: 0.2725 ≤ wcE3 ≤ 0.45, Acceptable: 0.45 < wcE3 ≤ 0.68, Unsatisfactory: wcE3 > 0.68
 	wwc_KPI_std_nrg_cons:function(value)
 	{

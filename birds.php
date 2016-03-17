@@ -73,9 +73,12 @@
 				case 'ws_vol_fuel':
 					value = value*days/30/1000; break;
 
+				/** m3 per year -> m3 */
+				case 'ws_vol_auth':
+					value = value*days/365; break;
+
 				/** m3 per day -> m3 */
 				case 'ww_vol_wwtr':
-				case 'ws_vol_auth':
 					value = value*days; break;
 
 				/** km -> m */
@@ -131,8 +134,11 @@
 					case 'ws_vol_fuel':
 						value = value/days*30*1000; break;
 
-					/** m3 per day -> m3 */
+					/** m3 per year -> m3 */
 					case 'ws_vol_auth':
+						value = value*365/days; break;
+
+					/** m3 per day -> m3 */
 					case 'ww_vol_wwtr':
 						value = value/days; break;
 
@@ -180,7 +186,7 @@
 		<tr><th colspan=3>Water supply
 			<tr stage=water class=hidden><td>Resident population                      <td><input id='ws_resi_pop' onchange="BEV.updateField(this)"> <td>People
 			<tr stage=water class=hidden><td>Serviced population                      <td><input id='ws_serv_pop' onchange="BEV.updateField(this)"> <td>People
-			<tr stage=water class=hidden><td>Volume of authorized consumption per day <td><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>m3/day
+			<tr stage=water class=hidden><td>Annual average authorized consumption    <td><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>m3/year
 			<tr stage=water class=hidden><td>Energy consumed from the grid per month  <td><input id='ws_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/month
 			<tr stage=water class=hidden><td>Monthly energy costs                     <td><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
 			<tr stage=water class=hidden><td>Monthly running costs                    <td><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month

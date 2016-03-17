@@ -344,7 +344,6 @@
 						newCell.setAttribute('onmouseout',"Formulas.hlField('"+hlfield+"',0)")
 
 						//the formula shoud change adding "/hlfield"
-
 						newCell.title=newCell.parentNode.title+"/"+hlfield;
 
 						newCell.innerHTML=(function()
@@ -353,6 +352,21 @@
 							return format(norm);
 						})();
 					});
+
+					//if wastewater, also bod removed (difficult! because is a function)
+					if(level=="Waste")
+					{
+						newCell=newRow.insertCell(-1);
+						newCell.setAttribute('onmouseover',"Formulas.hlField('c_ww_bod_rmvd',1)")
+						newCell.setAttribute('onmouseout', "Formulas.hlField('c_ww_bod_rmvd',0)")
+						newCell.title=newCell.parentNode.title+"/c_ww_bod_rmvd";
+						newCell.innerHTML=(function()
+						{
+							var value = CurrentLevel[field]()/Units.multiplier(field);
+							value/=Global.Waste.c_ww_bod_rmvd();
+							return format(value);
+						})();
+					}
 				})();
 			}
 
@@ -380,8 +394,12 @@
 				if(field.search("_KPI_GHG")>=0)continue;
 				if(field.search('_nrg_')<0)continue;
 
+				/*check if should be hidden according to questions*/
+				if(Questions.isHidden(field)) continue;
+
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
+
 				var newCell,newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
 				var formula=CurrentLevel[field].toString();
@@ -711,14 +729,22 @@
 				<?php if($sublevel) echo "display:none;"; ?>
 			">
 			<tr><th colspan=7 class=tableHeader>OUTPUTS - Greenhouse gas emissions (GHG) 
-				| <a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity">Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
 				| <a href=variable.php?id=Days >Assessment period</a>: <script>document.write(format(Global.General.Days()))</script> days
+				| <a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity">Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
 			<tr>
 				<th>Origin
 				<th>Value (kgCO<sub>2</sub>eq)
 				<th>Per inhab (kgCO<sub>2</sub>eq/inhab)
 				<th>Per serv. inhab (kgCO<sub>2</sub>eq/serv.inhab)
 				<th>Per water volume (kgCO<sub>2</sub>eq/m<sup>3</sup>)
+				<?php
+					if($level=="Waste" && !$sublevel)
+					{
+						?>
+							<th>Per BOD removed (kgCO<sub>2</sub>eq/kg)
+						<?php
+					}
+				?>
 		</table>
 
 		<!--energy performance-->

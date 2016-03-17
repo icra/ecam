@@ -120,14 +120,24 @@
 							}
 						}
 
-						if(question=="Are you producing electrical energy")
+						if(question=="Are you producing electrical energy in your drinking water system")
 						{
-							if(as.waterAbs==0 && as.wasteDis==0)
+							if(as.waterAbs==0)
 							{
 								Global.Configuration["Yes/No"][question]=0;
 								newRow.style.backgroundColor='#f6f6f6';
 								newRow.style.color='#aaa';
-								return "Only if or [wsa] or [wwd]"; 
+								return "Only if [wsa]"; 
+							}
+						}
+						if(question=="Are you producing electrical energy in your wastewater system")
+						{
+							if(as.wasteDis==0)
+							{
+								Global.Configuration["Yes/No"][question]=0;
+								newRow.style.backgroundColor='#f6f6f6';
+								newRow.style.color='#aaa';
+								return "Only if [wwd]"; 
 							}
 						}
 						if(question=="Do you have fuel engines to run pumps")
@@ -150,7 +160,7 @@
 								return "Only if [ww]"; 
 							}
 						}
-						if(question=="Is your topography non-flat")
+						if(question=="Do you want to investigate topographic energy")
 						{
 							if(as.waterDis==0)
 							{
@@ -160,7 +170,7 @@
 								return "Only if [wsd]"; 
 							}
 						}
-						if(question=="Is any untreated industrial or commercial wastewater connected")
+						if(question=="Are industrial or commercial users connected to the sewer system without pre-treatment")
 						{
 							if(as.wasteTre==0)
 							{

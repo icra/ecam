@@ -397,6 +397,9 @@
 				//only functions
 				if(typeof(CurrentStage[field])!="function"){continue;}
 
+				/*check if should be hidden according to questions*/
+				if(Questions.isHidden(field)) continue;
+
 				/*if assessment type is simple, hide L3 variables*/
 				if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
 				{

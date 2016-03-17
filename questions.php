@@ -31,7 +31,6 @@
 			var q="";
 
 			if(question=="Are you producing biogas")q="Are you valorizing biogas?";
-
 			document.write("<td>"+q);
 		}
 	</script>

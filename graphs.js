@@ -274,7 +274,7 @@ Graphs.graph4=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		title:"Greenhouse gas emissions (Energy performance)",
+		title:"Greenhouse gas emissions",
 		slices:
 		{
 			0:{color:'#00aff1'},

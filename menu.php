@@ -20,6 +20,8 @@
 			<!--clear-->
 			<button class="button delete" onclick=clearSystem()>Clear system</button>
 			<br>
+			<!--next button-->
+			<button class="button next" onclick="event.stopPropagation();window.location='getStarted.php'">Next</button>
 		  <?php 
 		}
 	?>

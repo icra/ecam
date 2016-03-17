@@ -10,6 +10,7 @@ var Averaged=
 		"wsd_min_pres",
 		"wsd_hi_no_el",
 		"wsd_lo_no_el",
+		"wsd_av_no_el",
 		"wsd_wt_el_no",
 	],
 

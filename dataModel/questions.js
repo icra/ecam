@@ -11,12 +11,16 @@ var Questions =
 		"c_ww_nrg_engines"
 	],
 
-	"Are you producing electrical energy":[
+	"Are you producing electrical energy in your drinking water system":[
 		"wsa_nrg_turb",
+		"wsa_KPI_nrg_recovery",
+	],
+
+	"Are you producing electrical energy":[
 		"wwd_nrg_recv",
 	],
 
-	"Is your topography non-flat":[
+	"Do you want to investigate topographic energy":[
 		"wsd_hi_no_el",
 		"wsd_lo_no_el",
 		"wsd_av_no_el",
