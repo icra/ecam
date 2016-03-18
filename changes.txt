@@ -3,5 +3,10 @@
 | Meeting March 17th 2016 |
 +=========================+
 
-1.1	All calculated numbers, including PIs should have only 1 decimal place by default: difficult
-
+1. PIs should have only 1 decimal
+2. Some formulas should not be working with ‘0’ values (See Xls list attached).
+3. Remove the button “activate all”
+4. New variable: Average sewage production per pers per day prior to dilution from infiltration or inflow”, unit = L/pers/day;
+5. Biogas flared estimated:
+6. Change “Total Nitrogen concentration effluent limit (ww_n2o_effl)” to a  total nitrogen load [kg] in the effluent.
+7. The “general” button for water and WW should be replaced by a “Summary of Energy performance” and combine the red and blue icons.
