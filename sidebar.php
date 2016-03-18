@@ -66,7 +66,14 @@
 	function saveToFile()
 	{
 		var link=document.createElement('a');
-		link.href="data:text/json;charset=utf-8,"+JSON.stringify(Global);
+
+		var SavedFile = 
+		{
+			"Global":Global,
+			"Substages":Substages,
+		}
+
+		link.href="data:text/json;charset=utf-8,"+JSON.stringify(SavedFile);
 		link.download=Global.General.Name+".json";
 		link.click();
 	}
@@ -79,7 +86,9 @@
 		var contents;
 		reader.onload=function()
 		{
-			copyFieldsFrom(JSON.parse(reader.result),Global);
+			var SavedFile = JSON.parse(reader.result);
+			copyFieldsFrom(SavedFile.Global,Global);
+			copyFieldsFrom(SavedFile.Substages,Substages);
 			updateResult();
 			window.location='birds.php';
 		}

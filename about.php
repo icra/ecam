@@ -24,12 +24,13 @@
 	The tool was formerly developed in June 2015 as an EXCEL tool by the consortium Global Water Commons (LNEC and University of Valencia) in collaboration with Cobalt Water. 
 	We want to acknowledge how extremely valuable The Excel tool has been to enable the development of this web-tool.
 
-	2015-2016 <a href=license.php>License</a>. <br>
-	<ul>
-	<li>graphs library used: <a target=_blank href="https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts">https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts</a>
+	<ul style=text-align:left>
+		<li>Graphs library: <a target=_blank href="https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts">https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts</a>
+		<li>Json viewer: <a target=_blank href="https://jsonformatter.curiousconcept.com/">json formatter</a>
 	</ul>
+
+	<br>2015-2016 <a href=license.php>License</a>. <br>
 </div>
 
-<!--link to reference-->
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
