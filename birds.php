@@ -83,7 +83,11 @@
 
 				/** km -> m */
 				case 'ww_dist_dis':
-					value = value*1000;
+					value = value*1000; break;
+
+				/** mg/L -> kg */
+				case 'ww_n2o_effl':
+					value = value*Global.Waste.ww_vol_wwtr; break;
 
 				default:break;
 			}
@@ -144,7 +148,11 @@
 
 					/** km -> m */
 					case 'ww_dist_dis':
-						value = value/1000;
+						value = value/1000; break;
+
+					/** mg/L -> kg */
+					case 'ww_n2o_effl':
+						value = value/Global.Waste.ww_vol_wwtr||0; break;
 
 					default:break;
 				}
@@ -203,7 +211,9 @@
 			<tr stage=waste class=hidden><td>Monthly running costs                    <td><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
 			<tr stage=waste class=hidden><td>Trips to sludge disposal site per week   <td><input id='ww_num_trip' onchange="BEV.updateField(this)"> <td>trips/week
 			<tr stage=waste class=hidden><td>Distance to disposal site                <td><input id='ww_dist_dis' onchange="BEV.updateField(this)"> <td>km
-			<tr stage=waste class=hidden><td>Average Total Nitrogen at discharge      <td><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
+			<tr stage=waste class=hidden><td>Average Total Nitrogen at discharge 
+				<span title="ECAM stores the total kg internally, not the concentration. You need to enter the 'Treated wastewater daily flow' first" style=color:orange;cursor:help>(note)</span>
+																					  <td> <input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
 			<tr stage=waste class=hidden><td>Monthly volume of fuel consumed          <td><input id='ww_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
 			<tr stage=waste class=hidden><td>Annual protein consumption per capita    <td><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/year
 			<tr indic=waste class=hidden><td colspan=3> Stage not active

@@ -168,11 +168,9 @@
 			<tr><td><a class=water stage=water    href=edit.php?level=Water>Water supply</a>
 			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste>Wastewater</a>
 			<tr><th>Energy performance
-			<tr><td><a class=water stage=waterGen href=edit.php?level=Water&sublevel=General>Water general</a>
 			<tr><td>&emsp;&emsp; <a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction>Water abstraction</a>
 			<tr><td>&emsp;&emsp; <a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment>Water treatment</a>
 			<tr><td>&emsp;&emsp; <a class=water stage=waterDis href=edit.php?level=Water&sublevel=Distribution>Water distribution</a>
-			<tr><td><a class=waste stage=wasteGen href=edit.php?level=Waste&sublevel=General>Wastewater general</a>
 			<tr><td>&emsp;&emsp; <a class=waste stage=wasteCol href=edit.php?level=Waste&sublevel=Collection>Wastewater collection</a>
 			<tr><td>&emsp;&emsp; <a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment>Wastewater treatment</a>
 			<tr><td>&emsp;&emsp; <a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge>Wastewater discharge</a>

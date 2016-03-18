@@ -10,14 +10,11 @@
 		var r;
 		switch(stage)
 		{
-			case "uws":	     r="Urban water cycle";break;
 			case "water":	 r="Water Supply";break;
 			case "waste":	 r="Wastewater";break;
-			case "waterGen": r="General";break;
 			case "waterAbs": r="Abstraction";break;
 			case "waterTre": r="Treatment";break;
 			case "waterDis": r="Distribution";break;
-			case "wasteGen": r="General";break;
 			case "wasteCol": r="Collection";break;
 			case "wasteTre": r="Treatment";break;
 			case "wasteDis": r="Discharge";break;
@@ -47,11 +44,11 @@
 			aass.printCell(stage,4);
 		});
 		</script><tr><script>
-		['waterGen','waterAbs','waterTre','waterDis'].forEach(function(stage)
+		['waterAbs','waterTre','waterDis'].forEach(function(stage)
 		{
 			aass.printCell(stage,1);
 		});
-		['wasteGen','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
+		['wasteCol','wasteTre','wasteDis'].forEach(function(stage)
 		{
 			aass.printCell(stage,1);
 		});

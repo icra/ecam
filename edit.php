@@ -600,16 +600,20 @@
 		function drawCharts()
 		{
 			<?php
-				if($sublevel)
+				if($sublevel || $level=="Energy")
 				{
+					//old L2
 					echo "Graphs.graph5(false,'graph');";
 
-					if($sublevel=='General')
+					if($level=='Energy')
+					{
 						echo "Graphs.graph7(false,'graph2')";
+					}
 				}
 				else
 				{
-					echo "Graphs.graph4(false,'graph')";
+					//old L1
+					echo "Graphs.graph4(false,'graph');";
 				}
 			?>
 		}
@@ -622,13 +626,9 @@
 			updateNrgOutputs();
 			updateOtherOutputs();
 			Exceptions.apply();
-			try{
-				drawCharts();
-			}
-			catch(e)
-			{
-				console.log(e);
-			}
+			//when user updates any input, trigger this:
+			try{ drawCharts(); }
+			catch(e) { console.log(e); }
 			updateResult();
 		}
 	</script>
@@ -657,6 +657,7 @@
 		{
 			case "Water":  $titleLevel="Water supply";break;
 			case "Waste":  $titleLevel="Wastewater";break;
+			case "Energy": $titleLevel="Energy summary";break;
 			default:	   $titleLevel=$level;break;
 		}
 		if($sublevel)
@@ -667,7 +668,7 @@
 			}
 		}
 		/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
-		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Energy performance)</span>" : "<span style=color:black>$titleLevel (GHG assessment)</span>";
+		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Energy performance)</span>" : "<span style=color:black>$titleLevel</span>";
 	?>
 	<style> h1 {text-align:left;padding-left:20em;line-height:2.1em} </style>
 	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?>
@@ -676,28 +677,25 @@
 		<?php
 			if($sublevel)
 			{
-				if($sublevel!="General")
-				{
-					$color = ($level=="Waste")?"lightcoral":"lightblue";
-					echo "
-						<span class=inline style='float:right;margin-right:0.5em'>
-							<button 
-								class=button
-								style='background:$color;font-size:12px;vertical-align:middle'
-								onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-									<img src=img/substages.png style='width:40px;margin-right:1em'>
-									Substages
-							</button> 
-							<span style=font-size:12px;color:#666>
-								&rarr; Divided in 
-								<script>
-									var length = Substages['$level']['$sublevel'].length;
-									document.write(length)
-								</script>
-								substage/s
-							</span>
-						</span>";
-				}
+				$color = ($level=="Waste")?"lightcoral":"lightblue";
+				echo "
+					<span class=inline style='float:right;margin-right:0.5em'>
+						<button 
+							class=button
+							style='background:$color;font-size:12px;vertical-align:middle'
+							onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
+								<img src=img/substages.png style='width:40px;margin-right:1em'>
+								Substages
+						</button> 
+						<span style=font-size:12px;color:#666>
+							&rarr; Divided in 
+							<script>
+								var length = Substages['$level']['$sublevel'].length;
+								document.write(length)
+							</script>
+							substage/s
+						</span>
+					</span>";
 			}
 		?>
 	</h1>
@@ -711,7 +709,7 @@
 	<table id=inputs class=inline 
 		style="
 			margin-left:auto;max-width:47%;
-			<?php if($sublevel=="General")echo "display:none;"; ?>
+			<?php if($level=="Energy")echo "display:none;"; ?>
 		">
 		<tr><th colspan=5 class=tableHeader>INPUTS
 		<tr>
@@ -726,22 +724,22 @@
 		<table id=outputs 
 			style="
 				width:100%;background:#f6f6f6;
-				<?php if($sublevel) echo "display:none;"; ?>
+				<?php if($sublevel || $level=="Energy") echo "display:none;"; ?>
 			">
 			<tr><th colspan=7 class=tableHeader>OUTPUTS - Greenhouse gas emissions (GHG) 
 				| <a href=variable.php?id=Days >Assessment period</a>: <script>document.write(format(Global.General.Days()))</script> days
 				| <a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity">Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
 			<tr>
 				<th>Origin
-				<th>Value (kgCO<sub>2</sub>eq)
-				<th>Per inhab (kgCO<sub>2</sub>eq/inhab)
-				<th>Per serv. inhab (kgCO<sub>2</sub>eq/serv.inhab)
-				<th>Per water volume (kgCO<sub>2</sub>eq/m<sup>3</sup>)
+				<th style=width:20%>Value (kgCO<sub>2</sub>eq)
+				<th style=width:20%>Per inhab (kgCO<sub>2</sub>eq/inhab)
+				<th style=width:20%>Per serv. pop. (kgCO<sub>2</sub>eq/serv.pop)
+				<th style=width:20%>Per water volume (kgCO<sub>2</sub>eq/m<sup>3</sup>)
 				<?php
 					if($level=="Waste" && !$sublevel)
 					{
 						?>
-							<th>Per BOD removed (kgCO<sub>2</sub>eq/kg)
+							<th style=width:20%>Per BOD removed (kgCO<sub>2</sub>eq/kg)
 						<?php
 					}
 				?>
@@ -769,20 +767,20 @@
 	</div>
 </div>
 
-<!--display graphs-->
+<!--GRAPHS-->
 <div id=graph style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%" >Graphs here</div>
 
 <?php
-	if($sublevel && $sublevel=='General')
+	if($level=='Energy')
 	{ ?>
-		<div id=graph2 style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%" >Graphs here</div>
+		<div id=graph2 style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%" >Substages graph</div>
 	  <?php
 	}
 ?>
-
 <script>
-	google.charts.load('current',{'packages':['corechart','sankey']});
+	google.charts.load('current',{'packages':['corechart']});
 	google.charts.setOnLoadCallback(drawCharts);
 </script>
+
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

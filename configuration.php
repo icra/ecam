@@ -22,15 +22,6 @@
 				}
 			}
 
-			//if a level 1 is pressed, activate or deactivate the corresponding General stages
-			if(id=="water" || id=="waste")
-			{
-				if(checkbox.checked)
-					Global.Configuration["Active Stages"][id+"Gen"]=1;
-				else
-					Global.Configuration["Active Stages"][id+"Gen"]=0;
-			}
-
 			//if a level 2 stage is activated, activate L1 if not active
 			if(checkbox.getAttribute('class') && checkbox.checked)
 			{
@@ -53,10 +44,9 @@
 		{
 			for(var stage in Global.Configuration["Active Stages"])
 			{
-				/**skip General: is not controllable by the user*/
-				switch(stage){case 'waterGen':case 'wasteGen':continue;break;}
 				if(Global.Configuration["Active Stages"][stage])
 				{
+					console.log(stage)
 					/**set checked*/document.getElementById(stage).checked=true;
 					this.activate(stage);
 				}
@@ -309,7 +299,7 @@
 <!--activate all debug button
 -->
 <div style="margin:0.5em 0 0.5em 0">
-	<button class=button onclick="activateAllStages()">activate all (debug mode)</button>
+	<button class=button onclick="activateAllStages()">Activate all</button>
 	<script>
 		function activateAllStages()
 		{

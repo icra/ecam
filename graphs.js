@@ -6,10 +6,10 @@ Graphs.graph1=function(withTable,container)
 	var Days = Global.General.Days();
 
 	//values
-	var wsNon = Global.Water.ws_KPI_GHG_ne();
-	var wsYes = Global.Water.ws_KPI_GHG_elec();
-	var wwNon = Global.Waste.ww_KPI_GHG_ne();
-	var wwYes = Global.Waste.ww_KPI_GHG_elec();
+	var wsYes = Global.Water.ws_KPI_GHG_elec()/Days*365;
+	var wsNon = Global.Water.ws_KPI_GHG_ne()/Days*365;
+	var wwYes = Global.Waste.ww_KPI_GHG_elec()/Days*365;
+	var wwNon = Global.Waste.ww_KPI_GHG_ne()/Days*365;
 
 	//actual graph data
 	var data=google.visualization.arrayToDataTable([
@@ -46,11 +46,11 @@ Graphs.graph1=function(withTable,container)
 		var table=""+
 		"<table>"+
 		"<button onclick=Graphs.graph1(false,'"+container+"')>Hide table</button>"+
-			"<tr><th>Slice                             <th>Variable                                                    <th>Value (kgCO<sub>2</sub>)"+
-			"<tr><td>From electricity  (Water)         <td><a href=variable.php?id=ws_KPI_GHG_elec>ws_KPI_GHG_elec</a> <td>"+format(wsYes)+
-			"<tr><td>From fuel engines (Water)         <td><a href=variable.php?id=ws_KPI_GHG_ne>ws_KPI_GHG_ne</a>     <td>"+format(wsNon)+
-			"<tr><td>From electricity (Wastewater)     <td><a href=variable.php?id=ww_KPI_GHG_elec>ww_KPI_GHG_elec</a> <td>"+format(wwYes)+
-			"<tr><td>From non electricity (Wastewater) <td><a href=variable.php?id=ww_KPI_GHG_ne>ww_KPI_GHG_ne</a>     <td>"+format(wwNon)+
+			"<tr><th>Slice                             <th>Variable                                                    <th>Value (kgCO<sub>2</sub>/year)"+
+			"<tr><td>From electricity  (Water)         <td><a href=variable.php?id=ws_KPI_GHG_elec>ws_KPI_GHG_elec</a>/Days*365 <td>"+format(wsYes)+
+			"<tr><td>From fuel engines (Water)         <td><a href=variable.php?id=ws_KPI_GHG_ne>ws_KPI_GHG_ne</a>/Days*365     <td>"+format(wsNon)+
+			"<tr><td>From electricity (Wastewater)     <td><a href=variable.php?id=ww_KPI_GHG_elec>ww_KPI_GHG_elec</a>/Days*365 <td>"+format(wwYes)+
+			"<tr><td>From non electricity (Wastewater) <td><a href=variable.php?id=ww_KPI_GHG_ne>ww_KPI_GHG_ne</a>/Days*365     <td>"+format(wwNon)+
 		"</table>"+
 		"";
 		var div=document.createElement('div');
@@ -239,8 +239,6 @@ Graphs.graph4=function(withTable,container)
 	//Pointers
 	var ws  = Global.Water;
 	var ww  = Global.Waste;
-	var wsg = Global.Water.General;
-	var wwg = Global.Waste.General;
 	var Days = Global.General.Days();
 
 	//Values
@@ -408,8 +406,6 @@ Graphs.graph6=function(withTable,container)
 	//pointers
 	var ws   = Global.Water;
 	var ww   = Global.Waste;
-	var wsg  = Global.Water.General;
-	var wwg  = Global.Waste.General;
 	var Days = Global.General.Days();
 
 	//3 graphs * 8 slices per graph = 24 slices. 2 bars per graph = 6 bars

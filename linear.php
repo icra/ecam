@@ -19,8 +19,7 @@
 			<img class=l2 stage=wasteTre src=img/wasteTre.png onclick=window.location="edit.php?level=Waste&sublevel=Treatment"    title="Treatment">
 			<img class=l2 stage=wasteDis src=img/wasteDis.png onclick=window.location="edit.php?level=Waste&sublevel=Discharge"    title="Discharge">
 
-			<img class=l2 stage=waterGen src=img/waterGen.png onclick=window.location="edit.php?level=Water&sublevel=General"      title="Water supply"> 
-			<img class=l2 stage=wasteGen src=img/wasteGen.png onclick=window.location="edit.php?level=Waste&sublevel=General"      title="Wastewater"> 
+			<img class=l2 stage=energy src=img/energy.png onclick=window.location="edit.php?level=Energy" title="Energy summary"> 
 		<hr id=line>
 	</div>
 </div>
@@ -33,7 +32,7 @@
 	div#linearDiagram img{border-radius:90%;border:4px solid transparent}
 	div#linearDiagram img.selected{border:4px solid lightgreen}
 	div#linearDiagram img:not(.inactive):hover {border:4px solid #d7bfaf}
-	div#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(238px);z-index:1;width:250px;}
+	div#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(260px);z-index:1;width:250px;}
 </style>
 
 <script>
@@ -55,23 +54,26 @@
 					case "Water":
 						switch(sublevel)
 						{
-							case "General":stage="waterGen";break;
 							case "Abstraction":stage="waterAbs";break;
 							case "Treatment":stage="waterTre";break;
 							case "Distribution":stage="waterDis";break;
 							default:stage="water";break;
 						}
 						break;
+
 					case "Waste":
 						switch(sublevel)
 						{
-							case "General":stage="wasteGen";break;
 							case "Collection":stage="wasteCol";break;
 							case "Treatment":stage="wasteTre";break;
 							case "Discharge":stage="wasteDis";break;
 							default:stage="waste";break;
 						}
 						break;
+
+					case "Energy":
+						stage="energy";break;
+
 					default: 
 						stage=false;
 						break;
@@ -99,7 +101,7 @@
 		for(var i=0;i<collection.length;i++)
 		{
 			var stage = collection[i].getAttribute('stage');
-			if(stage=="birds")continue;
+			if(stage=="birds" || stage=="energy")continue;
 			var isActive = Global.Configuration['Active Stages'][stage];
 			if(!isActive)
 			{

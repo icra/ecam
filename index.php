@@ -30,7 +30,7 @@
 
 	<!--FIRST TIME?-->
 	<h4 style=font-size:18px;color:#58595b>
-		First time using ECAM Web Tool? Click on "New system" or learn more in <a href=about.php>About</a>.
+		First time using ECAM Web Tool? Click on "New" or learn more in <a href=about.php>About</a>.
 	</h4>
 
 	<!--MENU--><div style=padding:1em><?php include'menu.php'?></div>

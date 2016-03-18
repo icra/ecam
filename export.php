@@ -100,23 +100,27 @@
 <h4>Click on a stage to view its variables. Then click on "Highlight text inside table" and paste to Excel</h4>
 <!--buttons to select stage-->
 <button class=button onclick=selectText(document.querySelector('#table'))>Highlight text inside table</button>
+
 <div>
-	<span style=background:#0aaff1>
-		<button onclick="updateTable(Global.Water,              'GHG assessment - Water supply')"       class="button">GHG assessment - Water supply</button>
-		<button onclick="updateTable(Global.Water.General,      'Energy performance - Water General')"      class="button l2">Energy performance - General</button>
-		<button onclick="updateTable(Global.Water.Abstraction,  'Energy performance - Water Abstraction')"  class="button l2">Energy performance - Abstraction</button>
-		<button onclick="updateTable(Global.Water.Treatment,    'Energy performance - Water Treatment')"    class="button l2">Energy performance - Treatment</button>
-		<button onclick="updateTable(Global.Water.Distribution, 'Energy performance - Water Distribution')" class="button l2">Energy performance - Distribution</button>
-	</span>
-	<br>
-	<span style=background:#bf5050>
-		<button onclick="updateTable(Global.Waste,            'GHG assessment - Wastewater')"            class="button">GHG assessment - Wastewater</button>
-		<button onclick="updateTable(Global.Waste.General,    'Energy performance - Wastewater General')"    class="button l2">Energy performance - General</button>
-		<button onclick="updateTable(Global.Waste.Collection, 'Energy performance - Wastewater Collection')" class="button l2">Energy performance - Collection</button>
-		<button onclick="updateTable(Global.Waste.Treatment,  'Energy performance - Wastewater Treatment')"  class="button l2">Energy performance - Treatment</button>
-		<button onclick="updateTable(Global.Waste.Discharge,  'Energy performance - Wastewater Discharge')"  class="button l2">Energy performance - Discharge</button>
-	</span>
+	<table style=margin:1em>
+		<tr><td>GHG assessment<td>Energy performance
+		<tr>
+			<td>
+				<button onclick="updateTable(Global.Water,              'GHG assessment - Water supply')"       class="button">Water supply</button>
+				<button onclick="updateTable(Global.Waste,            'GHG assessment - Wastewater')"            class="button">Wastewater</button>
+			<td>
+				<button onclick="updateTable(Global.Energy,  'Energy summary')"  class="button l2">Energy summary</button>
+				<br>
+				<button onclick="updateTable(Global.Water.Abstraction,  'Energy performance - Water Abstraction')"  class="button l2">Abstraction</button>
+				<button onclick="updateTable(Global.Water.Treatment,    'Energy performance - Water Treatment')"    class="button l2">Treatment</button>
+				<button onclick="updateTable(Global.Water.Distribution, 'Energy performance - Water Distribution')" class="button l2">Distribution</button>
+				<br>
+				<button onclick="updateTable(Global.Waste.Collection, 'Energy performance - Wastewater Collection')" class="button l2">Collection</button>
+				<button onclick="updateTable(Global.Waste.Treatment,  'Energy performance - Wastewater Treatment')"  class="button l2">Treatment</button>
+				<button onclick="updateTable(Global.Waste.Discharge,  'Energy performance - Wastewater Discharge')"  class="button l2">Discharge</button>
+	</table>
 </div>
+
 <!--info table-->
 <table id=table>
 	<tr><th colspan=6 style=font-size:18px>No stage selected
