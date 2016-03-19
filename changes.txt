@@ -5,64 +5,63 @@
 
 1. PIs should have only 1 decimal
 2. Some formulas should not be working with ‘0’ values (See Xls list attached).
-3. Remove the button “activate all”
-4. New variable: Average sewage production per pers per day prior to dilution from infiltration or inflow”, unit = L/pers/day;
-5. Biogas flared estimated:
-6. Change “Total Nitrogen concentration effluent limit (ww_n2o_effl)” to a  total nitrogen load [kg] in the effluent.
-7. The “general” button for water and WW should be replaced by a “Summary of Energy performance” and combine the red and blue icons.
+3. New variable: Average sewage production per pers per day prior to dilution from infiltration or inflow”, unit = L/pers/day;
+4. Biogas flared estimated:
 
-ws_SL_serv_pop	        should not be used "0" as value, advertisement of data mising 
-ws_SL_nrg_cost	        should not be used "0" as value, advertisement of data mising 
-ws_SL_auth_con	        should not be used "0" as value, advertisement of data mising 
-ws_SL_non_revw	        should not be used "0" as value, advertisement of data mising 
-c_wsa_vol_head	        should not be used "0" as value, advertisement of data mising (Could be that not exist, so in this case this formula shoult not shown any value)
-c_wsa_trb_head	        should not be used "0" as value, advertisement of data mising (Could be that not exist, so in this case this formula shoult not shown any value)
-wsa_KPI_std_nrg_cons	should not be used "0" as value, advertisement of data mising (Could be that not exist, so in this case this formula shoult not shown any value)
-wsa_KPI_std_nrg_recv	should not be used "0" as value, advertisement of data mising (Could be that notx exist, so in this case this formula shoult not shown any value)
-wsa_KPI_water_losses	should not be used "0" as value, advertisement of data mising 
-wsa_KPI_un_head_loss	should not be used "0" as value, advertisement of data mising 
-wst_KPI_slu_per_m3	    should not be used "0" as value, advertisement of data mising 
-wst_KPI_capac_util	    should not be used "0" as value, advertisement of data mising 
-c_wst_tests_compl	    should not be used "0" as value, advertisement of data mising 
-c_wsd_nrg_natu	        should not be used "0" as value, advertisement of data mising 
-c_wsd_nrg_mini	        should not be used "0" as value, advertisement of data mising 
-c_wsd_nrg_supp	        should not be used "0" as value, advertisement of data mising 
-c_wsd_nrg_topo	        should not be used "0" as value, advertisement of data mising 
-c_wsd_vol_head	        should not be used "0" as value, advertisement of data mising 
-wsd_KPI_std_nrg_cons	should not be used "0" as value, advertisement of data mising 
-wsd_KPI_nrg_efficien	should not be used "0" as value, advertisement of data mising 
-wsd_KPI_nrg_topgraph	should not be used "0" as value, advertisement of data mising 
-wsd_KPI_water_losses	should not be used "0" as value, advertisement of data mising 
-wsd_KPI_un_head_loss	should not be used "0" as value, advertisement of data mising 
-wsd_SL_pres_ade	        should not be used "0" as value, advertisement of data mising 
-wsd_SL_cont_sup	        should not be used "0" as value, advertisement of data mising 
-c_ww_in_dilution	    should not be used "0" as value, advertisement of data mising 
-ww_KPI_GHG_ne_ch4_wwt	should not be used "0" as value, advertisement of data mising 
-ww_KPI_GHG_ne_n2o_tre	should not be used "0" as value, advertisement of data mising 
-ww_KPI_GHG_ne_tsludge	should not be used "0" as value, advertisement of data mising 
-ww_KPI_GHG_ne_ch4_unt	should not be used "0" as value, advertisement of data mising 
-ww_KPI_GHG_ne_n2o_unt	should not be used "0" as value, advertisement of data mising 
-ww_SL_serv_pop	        should not be used "0" as value, advertisement of data mising 
-ww_SL_vol_pday	        should not be used "0" as value, advertisement of data mising 
-ww_SL_treat_m3	        should not be used "0" as value, advertisement of data mising 
-ww_SL_dilution	        should not be used "0" as value, advertisement of data mising 
-wwc_KPI_nrg_per_m3	    should not be used "0" as value, advertisement of data mising 
-wwc_KPI_nrg_percen	    should not be used "0" as value, advertisement of data mising 
-c_wwc_vol_head	        should not be used "0" as value, advertisement of data mising 
-wwc_KPI_std_nrg_cons	should not be used "0" as value, advertisement of data mising 
-c_wwt_nrg_biog	        should not be used "0" as value, advertisement of data mising 
-c_wwt_bod_rmvd	        should not be used "0" as value, advertisement of data mising 
-wwt_KPI_nrg_per_m3	    should not be used "0" as value, advertisement of data mising 
-wwt_KPI_nrg_percen	    should not be used "0" as value, advertisement of data mising 
-wwt_KPI_nrg_per_kg	    should not be used "0" as value, advertisement of data mising 
-wwt_KPI_biog_x_bod	    should not be used "0" as value, advertisement of data mising 
-wwt_KPI_sludg_prod	    should not be used "0" as value, advertisement of data mising 
-wwt_KPI_dry_sludge	    should not be used "0" as value, advertisement of data mising 
-wwt_KPI_capac_util	    should not be used "0" as value, advertisement of data mising 
-wwt_SL_qual_com	        should not be used "0" as value, advertisement of data mising 
 wwd_KPI_nrg_per_m3	    If energy equals 0 then formula = 0 (gravity feed)
-wwd_KPI_nrg_percen	    should not be used "0" as value, advertisement of data mising 
-c_wwd_vol_head	        should not be used "0" as value, advertisement of data mising 
-c_wwd_trb_head	        should not be used "0" as value, advertisement of data mising 
-wwd_KPI_std_nrg_cons	should not be used "0" as value, advertisement of data mising 
-wwd_KPI_std_nrg_recv	should not be used "0" as value, advertisement of data mising 
+
+c_wsa_vol_head	        should not be used "0" as value, "data mising (Could be that not exist, so in this case this formula shoult not shown any value)
+c_wsa_trb_head	        should not be used "0" as value, "data mising (Could be that not exist, so in this case this formula shoult not shown any value)
+wsa_KPI_std_nrg_cons	should not be used "0" as value, "data mising (Could be that not exist, so in this case this formula shoult not shown any value)
+wsa_KPI_std_nrg_recv	should not be used "0" as value, "data mising (Could be that notx exist, so in this case this formula shoult not shown any value)
+
+ws_SL_serv_pop	        should not be used "0" as value, "data mising 
+ws_SL_nrg_cost	        should not be used "0" as value, "data mising 
+ws_SL_auth_con	        should not be used "0" as value, "data mising 
+ws_SL_non_revw	        should not be used "0" as value, "data mising 
+wsa_KPI_water_losses	should not be used "0" as value, "data mising 
+wsa_KPI_un_head_loss	should not be used "0" as value, "data mising 
+wst_KPI_slu_per_m3	    should not be used "0" as value, "data mising 
+wst_KPI_capac_util	    should not be used "0" as value, "data mising 
+c_wst_tests_compl	    should not be used "0" as value, "data mising 
+c_wsd_nrg_natu	        should not be used "0" as value, "data mising 
+c_wsd_nrg_mini	        should not be used "0" as value, "data mising 
+c_wsd_nrg_supp	        should not be used "0" as value, "data mising 
+c_wsd_nrg_topo	        should not be used "0" as value, "data mising 
+c_wsd_vol_head	        should not be used "0" as value, "data mising 
+wsd_KPI_std_nrg_cons	should not be used "0" as value, "data mising 
+wsd_KPI_nrg_efficien	should not be used "0" as value, "data mising 
+wsd_KPI_nrg_topgraph	should not be used "0" as value, "data mising 
+wsd_KPI_water_losses	should not be used "0" as value, "data mising 
+wsd_KPI_un_head_loss	should not be used "0" as value, "data mising 
+wsd_SL_pres_ade	        should not be used "0" as value, "data mising 
+wsd_SL_cont_sup	        should not be used "0" as value, "data mising 
+c_ww_in_dilution	    should not be used "0" as value, "data mising 
+ww_KPI_GHG_ne_ch4_wwt	should not be used "0" as value, "data mising 
+ww_KPI_GHG_ne_n2o_tre	should not be used "0" as value, "data mising 
+ww_KPI_GHG_ne_tsludge	should not be used "0" as value, "data mising 
+ww_KPI_GHG_ne_ch4_unt	should not be used "0" as value, "data mising 
+ww_KPI_GHG_ne_n2o_unt	should not be used "0" as value, "data mising 
+ww_SL_serv_pop	        should not be used "0" as value, "data mising 
+ww_SL_vol_pday	        should not be used "0" as value, "data mising 
+ww_SL_treat_m3	        should not be used "0" as value, "data mising 
+ww_SL_dilution	        should not be used "0" as value, "data mising 
+wwc_KPI_nrg_per_m3	    should not be used "0" as value, "data mising 
+wwc_KPI_nrg_percen	    should not be used "0" as value, "data mising 
+c_wwc_vol_head	        should not be used "0" as value, "data mising 
+wwc_KPI_std_nrg_cons	should not be used "0" as value, "data mising 
+c_wwt_nrg_biog	        should not be used "0" as value, "data mising 
+c_wwt_bod_rmvd	        should not be used "0" as value, "data mising 
+wwt_KPI_nrg_per_m3	    should not be used "0" as value, "data mising 
+wwt_KPI_nrg_percen	    should not be used "0" as value, "data mising 
+wwt_KPI_nrg_per_kg	    should not be used "0" as value, "data mising 
+wwt_KPI_biog_x_bod	    should not be used "0" as value, "data mising 
+wwt_KPI_sludg_prod	    should not be used "0" as value, "data mising 
+wwt_KPI_dry_sludge	    should not be used "0" as value, "data mising 
+wwt_KPI_capac_util	    should not be used "0" as value, "data mising 
+wwt_SL_qual_com	        should not be used "0" as value, "data mising 
+wwd_KPI_nrg_percen	    should not be used "0" as value, "data mising 
+c_wwd_vol_head	        should not be used "0" as value, "data mising 
+c_wwd_trb_head	        should not be used "0" as value, "data mising 
+wwd_KPI_std_nrg_cons	should not be used "0" as value, "data mising 
+wwd_KPI_std_nrg_recv	should not be used "0" as value, "data mising 
