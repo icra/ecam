@@ -452,7 +452,8 @@
 				newCell.innerHTML=(function()
 				{
 					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
-					var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
+					var color = field.search(/^ww/)==0 ? "#bf5050" : "";
+					var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";
 				})();
 
@@ -537,7 +538,8 @@
 				newCell.innerHTML=(function()
 				{
 					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
-					var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
+					var color = field.search(/^ww/)==0 ? "#bf5050" : "";
+					var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";
 				})();
 

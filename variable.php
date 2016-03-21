@@ -61,7 +61,7 @@
 			if(sublevel!=0)
 			{
 				var url = Level3.isInList(id) ? "level3.php" : "edit.php";
-				newCell.innerHTML+="<a href="+url+"?level="+level+"&sublevel="+sublevel+">"+levelAlias+" "+sublevel+"</a>"
+				newCell.innerHTML+="Go back to <a href="+url+"?level="+level+"&sublevel="+sublevel+">"+levelAlias+" "+sublevel+"</a>"
 			}
 			else newCell.innerHTML="Go back to <a href=edit.php?level="+level+">"+levelAlias+"</a>"
 			//Explanation

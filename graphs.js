@@ -3,13 +3,13 @@ var Graphs = {}
 Graphs.graph1=function(withTable,container)
 {
 	//pointers
-	var Days = Global.General.Days();
+	var years = Global.General.Days()/365;
 
 	//values
-	var wsYes = Global.Water.ws_KPI_GHG_elec()/Days*365;
-	var wsNon = Global.Water.ws_KPI_GHG_ne()/Days*365;
-	var wwYes = Global.Waste.ww_KPI_GHG_elec()/Days*365;
-	var wwNon = Global.Waste.ww_KPI_GHG_ne()/Days*365;
+	var wsYes = Global.Water.ws_KPI_GHG_elec()/years;
+	var wsNon = Global.Water.ws_KPI_GHG_ne()/years;
+	var wwYes = Global.Waste.ww_KPI_GHG_elec()/years;
+	var wwNon = Global.Waste.ww_KPI_GHG_ne()/years;
 
 	//actual graph data
 	var data=google.visualization.arrayToDataTable([
@@ -47,10 +47,10 @@ Graphs.graph1=function(withTable,container)
 		"<table>"+
 		"<button onclick=Graphs.graph1(false,'"+container+"')>Hide table</button>"+
 			"<tr><th>Slice                             <th>Variable                                                    <th>Value (kgCO<sub>2</sub>/year)"+
-			"<tr><td>From electricity  (Water)         <td><a href=variable.php?id=ws_KPI_GHG_elec>ws_KPI_GHG_elec</a>/Days*365 <td>"+format(wsYes)+
-			"<tr><td>From fuel engines (Water)         <td><a href=variable.php?id=ws_KPI_GHG_ne>ws_KPI_GHG_ne</a>/Days*365     <td>"+format(wsNon)+
-			"<tr><td>From electricity (Wastewater)     <td><a href=variable.php?id=ww_KPI_GHG_elec>ww_KPI_GHG_elec</a>/Days*365 <td>"+format(wwYes)+
-			"<tr><td>From non electricity (Wastewater) <td><a href=variable.php?id=ww_KPI_GHG_ne>ww_KPI_GHG_ne</a>/Days*365     <td>"+format(wwNon)+
+			"<tr><td>From electricity  (Water)         <td><a href=variable.php?id=ws_KPI_GHG_elec>ws_KPI_GHG_elec</a>/years <td>"+format(wsYes)+
+			"<tr><td>From fuel engines (Water)         <td><a href=variable.php?id=ws_KPI_GHG_ne>ws_KPI_GHG_ne</a>/years     <td>"+format(wsNon)+
+			"<tr><td>From electricity (Wastewater)     <td><a href=variable.php?id=ww_KPI_GHG_elec>ww_KPI_GHG_elec</a>/years <td>"+format(wwYes)+
+			"<tr><td>From non electricity (Wastewater) <td><a href=variable.php?id=ww_KPI_GHG_ne>ww_KPI_GHG_ne</a>/years     <td>"+format(wwNon)+
 		"</table>"+
 		"";
 		var div=document.createElement('div');
@@ -70,7 +70,7 @@ Graphs.graph1=function(withTable,container)
 Graphs.graph2=function(withTable,container)
 {
 	//pointer
-	var Days=Global.General.Days();
+	var Days=Global.General.Days(); //TBD
 
 	//values
 	var ws=Global.Water.ws_nrg_cons;
@@ -237,21 +237,22 @@ Graphs.graph3=function(withTable,container)
 Graphs.graph4=function(withTable,container)
 {
 	//Pointers
-	var ws  = Global.Water;
-	var ww  = Global.Waste;
-	var Days = Global.General.Days();
+	var ws = Global.Water;
+	var ww = Global.Waste;
+	var years = Global.General.Days()/365;
 
-	//Values
-	var slice_1 = ws.ws_KPI_GHG_elec();
-	var slice_2 = ws.ws_KPI_GHG_ne();
-
-	var slice_3 = ww.ww_KPI_GHG_elec();
-	var slice_4 = ww.ww_KPI_GHG_ne_ch4_wwt();
-	var slice_5 = ww.ww_KPI_GHG_ne_n2o_tre();
-	var slice_6 = ww.ww_KPI_GHG_ne_tsludge();
-	var slice_7 = ww.ww_KPI_GHG_ne_ch4_unt();
-	var slice_8 = ww.ww_KPI_GHG_ne_n2o_unt();
-	var slice_9 = ww.ww_KPI_GHG_ne_engines();
+	//Values: 2 bars
+	//bar 1
+	var slice_1 = ws.ws_KPI_GHG_elec()/years;
+	var slice_2 = ws.ws_KPI_GHG_ne()/years;
+	//bar 2
+	var slice_3 = ww.ww_KPI_GHG_elec()/years;
+	var slice_4 = ww.ww_KPI_GHG_ne_ch4_wwt()/years;
+	var slice_5 = ww.ww_KPI_GHG_ne_n2o_tre()/years;
+	var slice_6 = ww.ww_KPI_GHG_ne_tsludge()/years;
+	var slice_7 = ww.ww_KPI_GHG_ne_ch4_unt()/years;
+	var slice_8 = ww.ww_KPI_GHG_ne_n2o_unt()/years;
+	var slice_9 = ww.ww_KPI_GHG_ne_engines()/years;
 
 	//actual graph data
 	var data=google.visualization.arrayToDataTable
@@ -301,15 +302,15 @@ Graphs.graph4=function(withTable,container)
 		"<button onclick=Graphs.graph4(false,'"+container+"')>Hide table</button>"+
 		"<table >"+
 			"<tr><th>Field                              <th>Variable              <th>Value (kgCO2/year)"+
-			"<tr><td>From electricity (Water)           <td>ws_KPI_GHG_elec       <td>"+format(slice_1)+
-			"<tr><td>From fuel engines (Water)          <td>ws_KPI_GHG_ne         <td>"+format(slice_2)+
-			"<tr><td>From electricity (Wastewater)      <td>ww_KPI_GHG_elec       <td>"+format(slice_3)+
-			"<tr><td>From CH4 from WWTP (Wastewater)    <td>ww_KPI_GHG_ne_ch4_wwt <td>"+format(slice_4)+
-			"<tr><td>From N2O treated (Wastewater)      <td>ww_KPI_GHG_ne_n2o_tre <td>"+format(slice_5)+
-			"<tr><td>From sludge transport (Wastewater) <td>ww_KPI_GHG_ne_tsludge <td>"+format(slice_6)+
-			"<tr><td>From CH4 untreated (Wastewater)    <td>ww_KPI_GHG_ne_ch4_unt <td>"+format(slice_7)+
-			"<tr><td>From N2O untreated (Wastewater)    <td>ww_KPI_GHG_ne_n2o_unt <td>"+format(slice_8)+
-			"<tr><td>From fuel engines (Wastewater)     <td>ww_KPI_GHG_ne_engines <td>"+format(slice_9)+
+			"<tr><td>From electricity (Water)           <td>ws_KPI_GHG_elec/years       <td>"+format(slice_1)+
+			"<tr><td>From fuel engines (Water)          <td>ws_KPI_GHG_ne/years         <td>"+format(slice_2)+
+			"<tr><td>From electricity (Wastewater)      <td>ww_KPI_GHG_elec/years       <td>"+format(slice_3)+
+			"<tr><td>From CH4 from WWTP (Wastewater)    <td>ww_KPI_GHG_ne_ch4_wwt/years <td>"+format(slice_4)+
+			"<tr><td>From N2O treated (Wastewater)      <td>ww_KPI_GHG_ne_n2o_tre/years <td>"+format(slice_5)+
+			"<tr><td>From sludge transport (Wastewater) <td>ww_KPI_GHG_ne_tsludge/years <td>"+format(slice_6)+
+			"<tr><td>From CH4 untreated (Wastewater)    <td>ww_KPI_GHG_ne_ch4_unt/years <td>"+format(slice_7)+
+			"<tr><td>From N2O untreated (Wastewater)    <td>ww_KPI_GHG_ne_n2o_unt/years <td>"+format(slice_8)+
+			"<tr><td>From fuel engines (Wastewater)     <td>ww_KPI_GHG_ne_engines/years <td>"+format(slice_9)+
 		"</table>";
 		var div = document.createElement('div');
 		div.style.fontSize="10px";

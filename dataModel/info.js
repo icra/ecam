@@ -44,7 +44,7 @@ var Info = {
 	ws_KPI_GHG_elec:{description:"From electricity",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from electricity consumption in all stages of urban drinking water system", },
 	ws_KPI_GHG_ne:{description:"From fuel engines",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions other from electricity consumption in all stages of urban drinking water system", },
 	ws_KPI_GHG :{description:"<b>Total GHG</b>",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from non-electricity and electricity consumption ", },
-	ws_KPI_GHG_year :{description:"<b style=color:red>TBD</b> Total GHG per year",magnitude:"Mass/Time",unit:"kgCO2e/year",explanation:"GHG Emissions from non-electricity and electricity consumption per year", },
+	ws_KPI_GHG_year :{description:"Total GHG per year",magnitude:"Mass/Time",unit:"kgCO2e/year",explanation:"GHG Emissions from non-electricity and electricity consumption per year", },
 
 	//L1 WW
 	"ww_bod_infl" :{description:"Influent BOD5 load",magnitude:"Mass",unit:"kg",explanation:"BOD5 load entering the WWTP during the assessment period. It can be estimated by multiplying the average BOD concentration in the influent by the volume entering the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate", },
@@ -65,6 +65,8 @@ var Info = {
 	"ww_prot_con" :{description:"Annual protein consumption per capita <select id=ww13options onchange=Global.Waste.ww_prot_con=parseFloat(this.value);init()> <option value=0>--select country--<option value=20.8>Thailand (20.8)<option value=24.5>Peru (24.5)<option value=33.6>Mexico (33.6) </select> ",magnitude:"Annual per capita consumption",unit:"kg/person/year",explanation:"Protein consumption per capita per year. The default value is provided after selection of country. If you have a specific factor that applies to your region you can provide.", },
 	"ww_bod_pday" :{description:"BOD5 per person per day",magnitude:"Mass/inhab/time",unit:"g/person/day",explanation:"This represents the average Biochemical oxygen demand (BOD5) that each resident connected to the sewer system eliminates in the wastewater produced every day. The default value is provided after selection of country. This default value shall be adjusted if local studies provide more accurate estimates", },
 	"ww_ch4_efac" :{description:"CH<sub>4</sub> emission factor <select id=ww_ch4_efac_options onchange=Global.Waste.ww_ch4_efac=parseFloat(this.value);init()> <option value=0.00> Well managed (0.00) <option value=0.06> Minor poorly aerated zones (0.06) <option value=0.12> Some aerated zones (0.12) <option value=0.18> Not well managed (0.18) </select>",magnitude:"Mass/Mass",unit:"kgCH<sub>4</sub>/kgBOD",explanation:"Methane emission factor of selected biological wastewater aerobic treatment processes", },
+	"ww_biog_pro":{description:"Biogas produced",magnitude:"Volume",unit:"Nm3",explanation:"Biogas produced during the assessment period by each wastewater treatment plant managed by the undertaking", },
+	"ww_biog_val":{description:"Biogas valorised as heat and/or electricity",magnitude:"Volume",unit:"m3",explanation:"Biogas valorized in the treatment plant to heat the digesters or the building and/or to run a Co-generator to generate heat and electricity", },
 	c_ww_bod_rmvd :{description:"BOD5 mass removed",magnitude:"Mass",unit:"kg",explanation:"This is calculated from the difference in BOD mass from the influent with BOD mass from the effluent over the assessment period.", },
 	c_ww_biogas_flar :{description:"Biogas flared",magnitude:"Volume",unit:"Nm3",explanation:"The Biogas flared is calculated based on the amount of biogas produced under good operating conditions of the plant and the anaerobic digestor if biogas is NOT recovered to produce energy", },
 	c_ww_nrg_engines :{description:"Energy of fuel consumed for onsite engines",magnitude:"Energy",unit:"TJ",explanation:"", },
@@ -79,12 +81,22 @@ var Info = {
 	ww_KPI_GHG_ne_engines :{description:"From from fuel engines",magnitude:"Mass",unit:"kgCO2e",explanation:"Direct CO2e emitted from on-site engines in wastewater stages based upon sum of CO2, CH4 and N2O emission from stationary combustion ", },
 	ww_KPI_GHG_ne :{description:"From non electricity",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions other from electricity consumption in all stages of wastewater system", },
 	ww_KPI_GHG:{description:"<b>Total GHG</b>",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from non-electricity and electricity consumption"},
-	ww_KPI_GHG_year :{description:"<b style=color:red>TBD</b> Total GHG per year",magnitude:"Mass/Time",unit:"kgCO2e/year",explanation:"GHG Emissions from non-electricity and electricity consumption per year", },
+	ww_KPI_GHG_year :{description:"Total GHG per year",magnitude:"Mass/Time",unit:"kgCO2e/year",explanation:"GHG Emissions from non-electricity and electricity consumption per year", },
 
-	//L2 WSG
-	wsg_KPI_GHG_elec:{description:"From electricity (sum for Abstraction, Treatment and Distribution stages)",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from electricity consumption in all stages of urban drinking water system", },
-	wsg_KPI_vol :{description:"Volume of water (sum for Abstraction, Treatment and Distribution stages)",magnitude:"Volume",unit:"m3",explanation:"Sum of all water volumes for all water stages",},
-	wsg_KPI_nrg_cons:{description:"Total electric energy consumption (sum for Abstraction, Treatment and Distribution stages)",magnitude:"Energy",unit:"kWh",explanation:"Electric energy consumption including both from the grid and self-produced, for the water stages, by the undertaking during the entire assessment period", },
+	//L1 ENERGY SUMMARY 
+		//WS
+			wsg_KPI_nrg_cons:{description:"Water energy consumption (Abstraction+Treatment+Distribution)",magnitude:"Energy",unit:"kWh",explanation:"Electric energy consumption including both from the grid and self-produced, for the water stages, by the undertaking during the entire assessment period", },
+			wsg_KPI_nrg_x_ye:{description:"Water energy consumption per year",magnitude:"Energy/Time",unit:"kWh/year",explanation:""},
+			wsg_KPI_nrg_x_m3:{description:"Water energy consumption per authorized consumption",magnitude:"Energy/Volume",unit:"kWh/m3",explanation:""},
+			wsg_KPI_std_nrg_:{description:"Water average standarized energy consumption of all pumping substages",magnitude:"Energy/Headloss",unit:"kWh/m3/100",explanation:"Average energy consumption per pumping water per head in the drinking water system"},
+			wsg_KPI_nrg_perc:{description:"Water energy cost percentage of total running cost",magnitude:"Percentage",unit:"%",explanation:""},
+		//WW
+			wwg_KPI_nrg_cons:{description:"Wastewater energy consumption (Collection+Treatment+Discharge)",magnitude:"Energy",unit:"kWh",explanation:"Electric energy consumption including both from the grid and self-produced, for the water stages, by the undertaking during the entire assessment period", },
+			wwg_KPI_nrg_x_ye:{description:"Wastewater energy consumption per year",magnitude:"Energy/Time",unit:"kWh/year",explanation:""},
+			wwg_KPI_nrg_x_br:{description:"Wastewater energy consumption per BOD removed",magnitude:"Energy/Volume",unit:"kWh/m3",explanation:"Total energy consumed in the wastewater system per BOD5 removed"},
+			wwg_KPI_std_nrg_:{description:"Wastewater average standarized energy consumption of all pumping substages",magnitude:"Energy/Headloss",unit:"kWh/m3/100",explanation:"Average energy consumption per pumping water per head in the wastewater system"},
+			wwg_KPI_nrg_perc:{description:"Wastewater energy cost percentage of total running cost",magnitude:"Percentage",unit:"%",explanation:""},
+
 
 	//L2 WSA
 	"wsa_nrg_cons":{description:"Energy consumed from the grid",magnitude:"Energy",unit:"kWh",explanation:"Electric energy consumption including both from the grid and self-produced, for the water abstractionunit, by the undertaking during the entire assessment period", },
@@ -170,11 +182,6 @@ var Info = {
 	wsd_KPI_water_losses:{description:"Water losses per mains length",magnitude:"Volume/Distance/Time",unit:"m3/km/days",explanation:"Total water losses (apparent and real), expressed in terms of annual volume lost per mains length",},
 	wsd_KPI_un_head_loss:{description:"Unit head loss",magnitude:"Headloss/Distance",unit:"m/km",explanation:"Unit energy friction loss in the conveyance system ",},
 	wsd_SL_non_revw:{description:"Non-revenue water FORMULA??",magnitude:"Percentage",unit:"%",explanation:""},
-
-	//L2 WWG
-	wwg_KPI_GHG_elec:{description:"From electricity (sum for Collection, Treatment and Discharge stages)",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from electricity consumption in all stages of wastewater system", },
-	wwg_KPI_vol :{description:"Volume of wastewater (sum for Collection, Treatment and Discharge stages)",magnitude:"Volume",unit:"m3",explanation:"Sum of all water volumes for all water stages",},
-	wwg_KPI_nrg_cons:{description:"Total electric energy consumption (sum for Collection, Treatment and Discharge stages)",magnitude:"Energy",unit:"kWh",explanation:"Electric energy consumption including both from the grid and self-produced, for the water stages, by the undertaking during the entire assessment period", },
 
 	//L2 WWC
 	"wwc_vol_conv":{description:"Volume of wastewater conveyed to treatment or to an outfall for untreated discharge",magnitude:"Volume",unit:"m3",explanation:"Collected wastewater, corresponding to the volume of domestic, commercial and industrial outputs to the sewer system which reaches the treatment plant or an outfall during the assessment period (pumped or not). At sub-stage level, if the volume is pumped, only enter in this line if it is pumping directly to the plant or the discharge. In case of multiple stage pumping do not include the volume in this line.", },

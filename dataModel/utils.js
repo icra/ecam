@@ -64,5 +64,5 @@ function locateVariable(code)
 /** return 3.999,4 instead of 3999.4*/
 function format(number)
 {
-	return new Intl.NumberFormat().format(number);
+	return new Intl.NumberFormat('en-IN',{maximumFractionDigits:1}).format(number);
 }
