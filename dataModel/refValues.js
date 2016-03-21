@@ -17,7 +17,21 @@ var RefValues =
 		return false;
 	},
 
-	//Beware with: dE4 (2 inputs), dE5(returning different conclusions), tE1(complex), tE4(incorrect)
+	wsg_KPI_std_nrg_:function(value)
+	{
+			 if(0.2725 <= value && value <= 0.40){return "Good"}
+		else if(0.40   <  value && value <= 0.54){return "Acceptable"}
+		else if(value  >  0.54)                  {return "Unsatisfactory"}
+		else                                     {return "Out of range"}
+	},
+
+	wwg_KPI_std_nrg_:function(value)
+	{
+			 if(0.2725 <= value && value <= 0.40){return "Good"}
+		else if(0.40   <  value && value <= 0.54){return "Acceptable"}
+		else if(value  > 0.54)                   {return "Unsatisfactory"}
+		else                                     {return "Out of range"}
+	},
 
 	//Capacity util: Good: 90 ≤ tE4 ≤ 70, Acceptable: 100 ≤ tE4 < 90 and 70 < tE4 ≤ 50, Unsatisfactory: tE4 > 100 and tE4 < 50,
 	wst_KPI_capac_util:function(value)
