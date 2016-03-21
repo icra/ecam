@@ -16,7 +16,7 @@ var Questions =
 		"wsa_KPI_nrg_recovery",
 	],
 
-	"Are you producing electrical energy":[
+	"Are you producing electrical energy in your wastewater system":[
 		"wwd_nrg_recv",
 	],
 
@@ -34,22 +34,23 @@ var Questions =
 		"c_ww_nrg_tsludge"
 	],
 
-	"Is any untreated industrial or commercial wastewater connected":[ 
+	"Are industrial or commercial users connected to the sewer system without pre-treatment":[
 		/*it's only used to calculate c_wwt_ann_ndis*/ 
 	],
 
 	"Are you producing biogas": [
+		"ww_biog_pro",
 		"c_ww_biogas_flar",
-		"c_wwt_biog_fla",
 		"wwt_biog_pro",
 		"wwt_KPI_biog_x_bod",
 	],
 
 	"Are you valorizing biogas":[
 		"wwt_biog_val",
-		"c_wwt_nrg_biog",
+		"ww_biog_val",
 		"wwt_nrg_biog",
 		"wwt_ch4_biog",
+		"c_wwt_nrg_biog",
 		"wwt_KPI_nrg_biogas",
 		"wwt_KPI_nrg_x_biog",
 	],

@@ -190,9 +190,9 @@ var Global = {
 			"wwt_vol_trea"     :0,
 			"wwt_bod_infl"     :0,
 			"wwt_bod_effl"     :0,
-			"wwt_biog_pro"     :0,
 			"wwt_nrg_biog"     :0,
 			"wwt_ch4_biog"     :0,
+			"wwt_biog_pro"     :0,
 			"wwt_biog_val"     :0,
 			/*
 			"wwt_tn_efflu"     :0,
