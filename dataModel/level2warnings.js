@@ -2,14 +2,14 @@
 
 var Level2Warnings=
 {
-	"wsg_KPI_std_nrg_":"Data from substages required",
-	"wwg_KPI_std_nrg_":"Data from substages required",
-	"wsa_KPI_std_nrg_cons":"Data from substages required",
-	"wsa_KPI_std_nrg_recv":"Data from substages required",
-	"wsd_KPI_std_nrg_cons":"Data from substages required",
-	"wwc_KPI_std_nrg_cons":"Data from substages required",
-	"wwd_KPI_std_nrg_cons":"Data from substages required",
-	"wwd_KPI_std_nrg_recv":"Data from substages required",
+	"wsg_KPI_std_nrg_":    "Advanced inputs required",
+	"wwg_KPI_std_nrg_":    "Advanced inputs required",
+	"wsa_KPI_std_nrg_cons":"Advanced inputs required",
+	"wsa_KPI_std_nrg_recv":"Advanced inputs required",
+	"wsd_KPI_std_nrg_cons":"Advanced inputs required",
+	"wwc_KPI_std_nrg_cons":"Advanced inputs required",
+	"wwd_KPI_std_nrg_cons":"Advanced inputs required",
+	"wwd_KPI_std_nrg_recv":"Advanced inputs required",
 }
 
 Level2Warnings.isIn=function(code)
