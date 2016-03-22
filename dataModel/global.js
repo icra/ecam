@@ -54,8 +54,8 @@ var Global = {
 			"wsa_fri_loss":0,
 			c_wsa_vol_head:function(){return this.wsa_vol_pump*this.wsa_pmp_head/100},
 			c_wsa_trb_head:function(){return this.wsa_vol_turb*this.wsa_trb_head/100},
-			wsa_KPI_water_losses:function(){return this.wsa_wat_loss/this.wsa_main_len},
-			wsa_KPI_un_head_loss:function(){return this.wsa_fri_loss/this.wsa_main_len},
+			wsa_KPI_water_losses:function(){return 1000*this.wsa_wat_loss/this.wsa_main_len},
+			wsa_KPI_un_head_loss:function(){return 1000*this.wsa_fri_loss/this.wsa_main_len},
 			/*</Level3>*/
 		},
 
@@ -120,8 +120,8 @@ var Global = {
 			c_wsd_vol_head:function(){return this.wsd_vol_pump*this.wsd_pmp_head/100},
 			wsd_KPI_nrg_efficien:function(){return 100*this.c_wsd_nrg_mini()/(this.c_wsd_nrg_supp()-this.wsd_nrg_recv)},
 			wsd_KPI_nrg_topgraph:function(){return 100*this.c_wsd_nrg_topo()/(this.c_wsd_nrg_supp()-this.wsd_nrg_recv)},
-			wsd_KPI_water_losses:function(){return this.wsd_vol_inje/this.wsd_main_len},
-			wsd_KPI_un_head_loss:function(){return this.wsd_fri_loss/this.wsd_main_len},
+			wsd_KPI_water_losses:function(){return 1000*this.wsd_vol_inje/this.wsd_main_len},
+			wsd_KPI_un_head_loss:function(){return 1000*this.wsd_fri_loss/this.wsd_main_len},
 			wsd_SL_pres_ade:function(){return 100*this.wsd_deli_pts/this.wsd_ser_cons},
 			wsd_SL_cont_sup:function(){return 100*this.wsd_time_pre/24},
 			/*</Level3*/
@@ -240,7 +240,7 @@ var Global = {
 			"wwd_nrg_cons":0,
 			"wwd_vol_disc":0,
 			"wwd_nrg_recv":0,
-			wwd_KPI_nrg_per_m3:function(){return this.wwd_nrg_cons/this.wwd_vol_disc},
+			wwd_KPI_nrg_per_m3:function(){return this.wwd_nrg_cons/this.wwd_vol_disc||0},
 			wwd_KPI_nrg_rcv_di:function(){return this.wwd_nrg_recv/this.wwd_vol_disc},
 			wwd_KPI_std_nrg_cons:function(){return this.wwd_nrg_cons/this.c_wwd_vol_head()},
 			wwd_KPI_std_nrg_recv:function(){return this.wwd_nrg_recv/this.c_wwd_trb_head()},

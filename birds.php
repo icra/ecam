@@ -87,7 +87,7 @@
 
 				/** mg/L -> kg */
 				case 'ww_n2o_effl':
-					value = value*Global.Waste.ww_vol_wwtr; break;
+					value = value*Global.Waste.ww_vol_wwtr/1000; break;
 
 				default:break;
 			}
@@ -152,7 +152,7 @@
 
 					/** mg/L -> kg */
 					case 'ww_n2o_effl':
-						value = value/Global.Waste.ww_vol_wwtr||0; break;
+						value = 1000*value/Global.Waste.ww_vol_wwtr||0; break;
 
 					default:break;
 				}

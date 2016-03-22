@@ -468,7 +468,6 @@
 								if(hasIndicator)
 								{
 									var text=RefValues[field](value);
-									newCell.title=text;
 									var color;
 									switch(text)
 									{
@@ -478,7 +477,7 @@
 										case "Out of range":   color="brown";break;
 										default:               color="#ccc";break;
 									}
-									return "<span style='font-size:20px;color:"+color+"'>&#128308;</span>";
+									return "<span title='"+text+"' style='font-size:20px;color:"+color+"'>&#128308;</span>";
 								}
 								else{return "";}
 							})();
