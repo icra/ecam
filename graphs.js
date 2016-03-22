@@ -31,6 +31,7 @@ Graphs.graph1=function(withTable,container)
 			2:{color:'#bf5050' },
 			3:{color:'lightcoral' },
 		},
+		allowHtml:true,
 	}
 
 	//do empty the container element
@@ -93,6 +94,7 @@ Graphs.graph2=function(withTable,container)
 			0:{ color: '#0aaeef' },
 			1:{ color: '#bf5050' },
 		},
+		allowHtml:true,
 	};
 
 	//empty the container element
@@ -183,6 +185,7 @@ Graphs.graph3=function(withTable,container)
 		legend:{position:'right',maxLines:100},
 		isStacked:true,
 		colors: ['#bca613','#00aeef', '#f3a000', '#89375c'],
+		allowHtml:true,
 		/* todo
 		series:{
 			0:{ axis: 'distance' }, // Bind series 0 to an axis named 'distance'.
@@ -285,6 +288,7 @@ Graphs.graph4=function(withTable,container)
 			6:{color:'#672945'},
 			7:{color:'#a15f7d'},
 		},
+		allowHtml:true,
 	};
 
 	//empty the container
@@ -365,6 +369,7 @@ Graphs.graph5=function(withTable,container)
 			4:{color:'#f8c666'},
 			5:{color:'#fad999'},
 		},
+		allowHtml:true,
 	};
 
 	//empty the container
@@ -512,6 +517,7 @@ Graphs.graph6=function(withTable,container)
 			'#b8879d',
 			'#d0afbe',
 		],
+		allowHtml:true,
 	}
 
 	//empty the container
@@ -608,6 +614,7 @@ Graphs.graph7=function(withTable,container)
 		}
 		*/
 		slices: { },
+		allowHtml:true,
 	};
 
 	var colors = [ '#66cef5', '#0083b3', '#cceffc', '#b67800', '#f8c666', '#fad999' ];
@@ -700,12 +707,6 @@ Graphs.sankey=function(withTable,container)
 		['Losses4', 'Losses5', losses_1+losses_2+losses_3+losses_4||0.01],
 		['Losses5', 'Losses6', losses_1+losses_2+losses_3+losses_4+losses_5||0.01],
 		['Losses6', 'Water Losses', losses||0.01],
-
-
-
-
-
-
 	]);
 
 	//options
@@ -724,6 +725,7 @@ Graphs.sankey=function(withTable,container)
 				colors: colors
 			}
 		},
+		allowHtml:true,
 	};
 
 	//empty the container

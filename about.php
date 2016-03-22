@@ -21,7 +21,7 @@
 	Tool coded in HTML/PHP/CSS/Javascript languages. <br>
 
 	<ul style=text-align:left>
-		<li>Graphs library: <a target=_blank href="https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts">https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts</a>
+		<li>Graphs library: <a target=_blank href="https://google-developers.appspot.com/chart/interactive/docs/gallery/columnchart#stacked-column-charts">Google Charts</a>
 		<li>Json viewer: <a target=_blank href="https://jsonformatter.curiousconcept.com/">json formatter</a>
 	</ul>
 
