@@ -22,7 +22,10 @@
 		{
 			Graphs.graph1(false,'graph1');
 			Graphs.graph2(false,'graph2');
-			Graphs.graph3(false,'graph3');
+			Graphs.graph3a(false,'graph3a');
+			Graphs.graph3b(false,'graph3b');
+			Graphs.graph3c(false,'graph3c');
+			Graphs.graph3d(false,'graph3d');
 		}
 
 		var BEV={};
@@ -71,6 +74,7 @@
 
 				/** L per month -> m3 */
 				case 'ws_vol_fuel':
+				case 'ww_vol_fuel':
 					value = value*days/30/1000; break;
 
 				/** m3 per year -> m3 */
@@ -136,6 +140,7 @@
 
 					/** L per month -> m3 */
 					case 'ws_vol_fuel':
+					case 'ww_vol_fuel':
 						value = value/days*30*1000; break;
 
 					/** m3 per year -> m3 */
@@ -234,7 +239,15 @@
 	</style>
 	<div id=graph1 class=inline style=max-width:45%></div>
 	<div id=graph2 class=inline style=max-width:45%></div>
-	<div id=graph3 style=margin-top:2px></div>
+	<!--graph 3 container-->
+	<div style=margin-top:2px>
+		<div id=graph3a class=inline style=max-width:45%></div>
+		<div id=graph3b class=inline style=max-width:45%></div>
+	</div>
+	<div style=margin-top:2px>
+		<div id=graph3c class=inline style=max-width:45%></div>
+		<div id=graph3d class=inline style=max-width:45%></div>
+	</div>
 	<script>
 		google.charts.load('current',{'packages':['corechart']});
 		google.charts.setOnLoadCallback(init)

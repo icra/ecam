@@ -129,114 +129,308 @@ Graphs.graph2=function(withTable,container)
 	}
 }
 
-Graphs.graph3=function(withTable,container)
-{
-	//pointers
-	var WS = Global.Water;
-	var WW = Global.Waste;
-	var Days = Global.General.Days();
-	var ws_el = WS.ws_KPI_GHG_elec();
-	var ws_ne = WS.ws_KPI_GHG_ne();
-	var ww_el = WW.ww_KPI_GHG_elec();
-	var ww_ne = WW.ww_KPI_GHG_ne();
-
-	//data: 3 graphs: 2 bars each = 6 bars
-	//BAR 1
-	var slice_1  = ws_el/WS.ws_resi_pop;
-	var slice_2  = ws_ne/WS.ws_resi_pop;
-	//BAR 2
-	var slice_3  = ww_el/WW.ww_resi_pop;
-	var slice_4  = ww_ne/WW.ww_resi_pop;
-	//BAR 3
-	var slice_5  = ws_el/WS.ws_serv_pop;
-	var slice_6  = ws_ne/WS.ws_serv_pop;
-	//BAR 4
-	var slice_7  = ww_el/WW.ww_serv_pop;
-	var slice_8  = ww_ne/WW.ww_serv_pop;
-	//BAR 5
-	var slice_9  = ws_el/WS.ws_vol_auth;
-	var slice_10 = ws_ne/WS.ws_vol_auth;
-	//BAR 6
-	var slice_11 = ww_el/WW.ww_vol_wwtr;
-	var slice_12 = ww_ne/WW.ww_vol_wwtr;
-
-	//actual graph
-	var data=google.visualization.arrayToDataTable
-	([
-		[ 
-			'Emission type', 
-			'Electrical related', 
-			'Non-electrical related', 
-			{role:'annotation'} 
-		],
-		['WS per capita', slice_1 , slice_2 , ''],
-		['WW per capita', slice_3 , slice_4 , ''],
-		['WS per SP',     slice_5 , slice_6 , ''],
-		['WW per SP',     slice_7 , slice_8 , ''],
-		['WS per AC',     slice_9 , slice_10, ''],
-		['WW per CW',     slice_11, slice_12, ''],
-	]);
-
-	//options
-	var options=
+//BAR GRAPHS splitted
+//graph 3(a,b,c,d) here
+	//per year
+	Graphs.graph3a=function(withTable,container)
 	{
-		title:"Greenhouse gas emissions (GHG assessment) (TBD)",
-		height:500,
-		legend:{position:'right',maxLines:100},
-		isStacked:true,
-		colors: ['#bca613','#00aeef', '#f3a000', '#89375c'],
-		allowHtml:true,
-		/* todo
-		series:{
-			0:{ axis: 'distance' }, // Bind series 0 to an axis named 'distance'.
-			1:{ axis: 'brightness' } // Bind series 1 to an axis named 'brightness'.
-		},
-		axes:{
-			y:{
-				distance: {label: 'parsecs'}, // Left y-axis.
-				brightness: {side: 'right', label: 'apparent magnitude'} // Right y-axis.
-			},
-		},
-		*/
-	};
+		//pointers
+		var WS = Global.Water;
+		var WW = Global.Waste;
+		var years = Global.General.Days()/365;
 
-	//empty container element
-	document.getElementById(container).innerHTML='';
+		//total kg 
+		var ws_el = WS.ws_KPI_GHG_elec();
+		var ws_ne = WS.ws_KPI_GHG_ne();
+		var ww_el = WW.ww_KPI_GHG_elec();
+		var ww_ne = WW.ww_KPI_GHG_ne();
 
-	//draw
-	var view=new google.visualization.DataView(data);
-	var chart=new google.visualization.ColumnChart(document.getElementById(container));
-	chart.draw(view, options);
+		//per year
+		var slice_1  = ws_el/years;
+		var slice_2  = ws_ne/years;
+		var slice_3  = ww_el/years;
+		var slice_4  = ww_ne/years;
 
-	//tables
-	if(withTable)
-	{
-		//create a table string
-		var table=""+
-		"<button onclick=Graphs.graph3(false,'"+container+"')>Hide table</button>"+
-		"<table >"+
-			"<tr><th>Emission      <th>From non electrical         <th>Value (units)       <th>From electricity              <th>Value (units)"+
-			"<tr><th>WS per capita <td>ws_KPI_GHG_ne / ws_resi_pop <td>"+format(slice_1 )+"<td>ws_KPI_GHG_elec / ws_resi_pop <td>"+format(slice_2 )+
-			"<tr><th>WW per capita <td>ww_KPI_GHG_ne / ww_resi_pop <td>"+format(slice_3 )+"<td>ww_KPI_GHG_elec / ww_resi_pop <td>"+format(slice_4 )+
-			"<tr><th>WS per SP     <td>ws_KPI_GHG_ne / ws_serv_pop <td>"+format(slice_5 )+"<td>ws_KPI_GHG_elec / ws_serv_pop <td>"+format(slice_6 )+
-			"<tr><th>WW per SP     <td>ww_KPI_GHG_ne / ww_serv_pop <td>"+format(slice_7 )+"<td>ww_KPI_GHG_elec / ww_serv_pop <td>"+format(slice_8 )+
-			"<tr><th>WS per AC     <td>ws_KPI_GHG_ne / ws_vol_auth <td>"+format(slice_9 )+"<td>ws_KPI_GHG_elec / ws_vol_auth <td>"+format(slice_10)+
-			"<tr><th>WW per CW     <td>ww_KPI_GHG_ne / ww_vol_wwtr <td>"+format(slice_11)+"<td>ww_KPI_GHG_elec / ww_vol_wwtr <td>"+format(slice_12)+
-		"</table>";
-		var div = document.createElement('div');
-		div.style.fontSize="10px";
-		div.innerHTML=table;
-		document.getElementById(container).appendChild(div);
+		//data
+		var data=google.visualization.arrayToDataTable
+		([
+			[ 
+				'Emission type', 'Electrical related', 'Non-electrical related', {role:'annotation'} 
+			],
+			['Water'      , slice_1 , slice_2 , ''],
+			['Wastewater' , slice_3 , slice_4 , ''],
+		]);
+
+		//options
+		var options=
+		{
+			title:"GHG emissions (kg CO2/year)",
+			legend:{position:'right',maxLines:100},
+			isStacked:true,
+			colors: ['#bca613','#00aeef', '#f3a000', '#89375c'],
+			allowHtml:true,
+		};
+
+		//empty container element
+		document.getElementById(container).innerHTML='';
+
+		//draw
+		var view=new google.visualization.DataView(data);
+		var chart=new google.visualization.ColumnChart(document.getElementById(container));
+		chart.draw(view, options);
+
+		//tables
+		if(withTable)
+		{
+			//create a table string
+			var table=""+
+			"<button onclick=Graphs.graph3a(false,'"+container+"')>Hide table</button>"+
+			"<table >"+
+				"<tr><th>Stage                  <th>Water                 <th>kg/year            <th>Wastewater            <th>kg/year"+
+				"<tr><th>Non electrical related <td>ws_KPI_GHG_ne  /years <td>"+format(slice_2)+"<td>ww_KPI_GHG_elec/years <td>"+format(slice_4)+
+				"<tr><th>Electrical related     <td>ws_KPI_GHG_elec/years <td>"+format(slice_1)+"<td>ww_KPI_GHG_ne  /years <td>"+format(slice_3)+
+			"</table>";
+			var div = document.createElement('div');
+			div.style.fontSize="10px";
+			div.innerHTML=table;
+			document.getElementById(container).appendChild(div);
+		}
+		else
+		{
+			//button "show table"
+			var div=document.createElement('div');
+			document.getElementById(container).appendChild(div);
+			div.innerHTML="<button onclick=Graphs.graph3a(true,'"+container+"')>Show table</button>"
+		}
 	}
-	else
-	{
-		//button "show table"
-		var div=document.createElement('div');
-		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.graph3(true,'"+container+"')>Show table</button>"
-	}
-}
 
+	//per serv pop per year
+	Graphs.graph3b=function(withTable,container)
+	{
+		//pointers
+		var WS = Global.Water;
+		var WW = Global.Waste;
+		var years = Global.General.Days()/365;
+
+		//total kg 
+		var ws_el = WS.ws_KPI_GHG_elec();
+		var ws_ne = WS.ws_KPI_GHG_ne();
+		var ww_el = WW.ww_KPI_GHG_elec();
+		var ww_ne = WW.ww_KPI_GHG_ne();
+
+		//per year per serv population
+		var slice_1 = ws_el/years/WS.ws_serv_pop;
+		var slice_2 = ws_ne/years/WS.ws_serv_pop;
+		var slice_3 = ww_el/years/WW.ww_serv_pop;
+		var slice_4 = ww_ne/years/WW.ww_serv_pop;
+
+		//data
+		var data=google.visualization.arrayToDataTable
+		([
+			[ 
+				'Emission type', 
+				'Electrical related', 
+				'Non-electrical related', 
+				{role:'annotation'} 
+			],
+			['Water'      , slice_1 , slice_2 , ''],
+			['Wastewater' , slice_3 , slice_4 , ''],
+		]);
+
+		//options
+		var options={
+			title:"GHG emissions (kg CO2/serv.pop./year)",
+			legend:{position:'right',maxLines:100},
+			isStacked:true,
+			colors: ['#bca613','#00aeef', '#f3a000', '#89375c'],
+			allowHtml:true,
+		};
+
+		//empty container element
+		document.getElementById(container).innerHTML='';
+
+		//draw
+		var view=new google.visualization.DataView(data);
+		var chart=new google.visualization.ColumnChart(document.getElementById(container));
+		chart.draw(view, options);
+
+		//tables
+		if(withTable)
+		{
+			//create a table string
+			var table=""+
+			"<button onclick=Graphs.graph3b(false,'"+container+"')>Hide table</button>"+
+			"<table >"+
+				"<tr><th>Stage                  <th>Water                             <th>kg/serv.pop./year  <th>Wastewater                        <th>kg/serv.pop./year"+
+				"<tr><th>Non electrical related <td>ws_KPI_GHG_ne  /ws_serv_pop/years <td>"+format(slice_2)+"<td>ww_KPI_GHG_elec/ws_serv_pop/years <td>"+format(slice_4)+
+				"<tr><th>Electrical related     <td>ws_KPI_GHG_elec/ww_serv_pop/years <td>"+format(slice_1)+"<td>ww_KPI_GHG_ne  /ww_serv_pop/years <td>"+format(slice_3)+
+			"</table>";
+			var div = document.createElement('div');
+			div.style.fontSize="10px";
+			div.innerHTML=table;
+			document.getElementById(container).appendChild(div);
+		}
+		else
+		{
+			//button "show table"
+			var div=document.createElement('div');
+			document.getElementById(container).appendChild(div);
+			div.innerHTML="<button onclick=Graphs.graph3b(true,'"+container+"')>Show table</button>"
+		}
+	}
+
+	//per resi pop per year
+	Graphs.graph3c=function(withTable,container)
+	{
+		//pointers
+		var WS = Global.Water;
+		var WW = Global.Waste;
+		var years = Global.General.Days()/365;
+
+		//total kg 
+		var ws_el = WS.ws_KPI_GHG_elec();
+		var ws_ne = WS.ws_KPI_GHG_ne();
+		var ww_el = WW.ww_KPI_GHG_elec();
+		var ww_ne = WW.ww_KPI_GHG_ne();
+
+		//per year per serv population
+		var slice_1 = ws_el/years/WS.ws_resi_pop;
+		var slice_2 = ws_ne/years/WS.ws_resi_pop;
+		var slice_3 = ww_el/years/WW.ww_resi_pop;
+		var slice_4 = ww_ne/years/WW.ww_resi_pop;
+
+		//data
+		var data=google.visualization.arrayToDataTable
+		([
+			[ 
+				'Emission type', 
+				'Electrical related', 
+				'Non-electrical related', 
+				{role:'annotation'} 
+			],
+			['Water'      , slice_1 , slice_2 , ''],
+			['Wastewater' , slice_3 , slice_4 , ''],
+		]);
+
+		//options
+		var options={
+			title:"GHG emissions (kg CO2/resi.pop./year)",
+			legend:{position:'right',maxLines:100},
+			isStacked:true,
+			colors: ['#bca613','#00aeef', '#f3a000', '#89375c'],
+			allowHtml:true,
+		};
+
+		//empty container element
+		document.getElementById(container).innerHTML='';
+
+		//draw
+		var view=new google.visualization.DataView(data);
+		var chart=new google.visualization.ColumnChart(document.getElementById(container));
+		chart.draw(view, options);
+
+		//tables
+		if(withTable)
+		{
+			//create a table string
+			var table=""+
+			"<button onclick=Graphs.graph3c(false,'"+container+"')>Hide table</button>"+
+			"<table >"+
+				"<tr><th>Stage                  <th>Water                             <th>kg/resi.pop./year       <th>Wastewater                   <th>kg/resi.pop./year"+
+				"<tr><th>Non electrical related <td>ws_KPI_GHG_ne  /ws_resi_pop/years <td>"+format(slice_2)+"<td>ww_KPI_GHG_elec/ws_resi_pop/years <td>"+format(slice_4)+
+				"<tr><th>Electrical related     <td>ws_KPI_GHG_elec/ww_resi_pop/years <td>"+format(slice_1)+"<td>ww_KPI_GHG_ne  /ww_resi_pop/years <td>"+format(slice_3)+
+			"</table>";
+			var div = document.createElement('div');
+			div.style.fontSize="10px";
+			div.innerHTML=table;
+			document.getElementById(container).appendChild(div);
+		}
+		else
+		{
+			//button "show table"
+			var div=document.createElement('div');
+			document.getElementById(container).appendChild(div);
+			div.innerHTML="<button onclick=Graphs.graph3c(true,'"+container+"')>Show table</button>"
+		}
+	}
+
+	//per AC and CW
+	Graphs.graph3d=function(withTable,container)
+	{
+		//pointers
+		var WS = Global.Water;
+		var WW = Global.Waste;
+
+		//total kg 
+		var ws_el = WS.ws_KPI_GHG_elec();
+		var ws_ne = WS.ws_KPI_GHG_ne();
+		var ww_el = WW.ww_KPI_GHG_elec();
+		var ww_ne = WW.ww_KPI_GHG_ne();
+
+		//per AC and CW
+		var slice_1  = ws_el/WS.ws_vol_auth;
+		var slice_2  = ws_ne/WS.ws_vol_auth;
+		var slice_3  = ww_el/WW.ww_vol_coll;
+		var slice_4  = ww_ne/WW.ww_vol_coll;
+
+		//data
+		var data=google.visualization.arrayToDataTable
+		([
+			[ 
+				'Emission type', 
+				'Electrical related', 
+				'Non-electrical related', 
+				{role:'annotation'} 
+			],
+			['Water'      , slice_1 , slice_2 , ''],
+			['Wastewater' , slice_3 , slice_4 , ''],
+		]);
+
+		//options
+		var options=
+		{
+			title:"GHG emissions (kg CO2/m3)",
+			legend:{position:'right',maxLines:100},
+			isStacked:true,
+			colors: ['#bca613','#00aeef', '#f3a000', '#89375c'],
+			allowHtml:true,
+		};
+
+		//empty container element
+		document.getElementById(container).innerHTML='';
+
+		//draw
+		var view=new google.visualization.DataView(data);
+		var chart=new google.visualization.ColumnChart(document.getElementById(container));
+		chart.draw(view, options);
+
+		//tables
+		if(withTable)
+		{
+			//create a table string
+			var table=""+
+			"<button onclick=Graphs.graph3d(false,'"+container+"')>Hide table</button>"+
+			"<table >"+
+				"<tr><th>Stage                  <th>Water                       <th>kg/m3              <th>Wastewater                  <th>kg/m3"+
+				"<tr><th>Non electrical related <td>ws_KPI_GHG_ne  /ws_vol_auth <td>"+format(slice_2)+"<td>ww_KPI_GHG_elec/ws_vol_auth <td>"+format(slice_4)+
+				"<tr><th>Electrical related     <td>ws_KPI_GHG_elec/ww_vol_coll <td>"+format(slice_1)+"<td>ww_KPI_GHG_ne  /ww_vol_coll <td>"+format(slice_3)+
+			"</table>";
+			var div = document.createElement('div');
+			div.style.fontSize="10px";
+			div.innerHTML=table;
+			document.getElementById(container).appendChild(div);
+		}
+		else
+		{
+			//button "show table"
+			var div=document.createElement('div');
+			document.getElementById(container).appendChild(div);
+			div.innerHTML="<button onclick=Graphs.graph3d(true,'"+container+"')>Show table</button>"
+		}
+	}
+// end bar graphs
+
+//TODO
 Graphs.graph4=function(withTable,container)
 {
 	//Pointers
@@ -505,7 +699,6 @@ Graphs.graph6=function(withTable,container)
 	var options=
 	{
 		title:"Greenhouse gas emissions (Energy performance) (TBD)",
-		height:500,
 		legend:{position:'right',maxLines:100},
 		isStacked:true,
 		colors: [
