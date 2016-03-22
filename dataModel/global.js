@@ -151,10 +151,10 @@ var Global = {
 		"ww_biog_pro":0,
 		"ww_biog_val":0,
 		c_ww_bod_rmvd:function(){return this.ww_bod_infl-this.ww_bod_effl},
-		c_ww_biogas_flar    :function(){if(Global.Configuration["Yes/No"]["Are you valorizing biogas"]==0) return this.ww_biog_pro-this.ww_biog_val; else return 0; },
-		c_ww_nrg_engines    :function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].waste]; return this.ww_vol_fuel*fuel.FD/1000*fuel.NCV/1000; },
-		c_ww_nrg_tsludge    :function(){return this.ww_num_trip*2*this.ww_dist_dis*0.25*0.84*43/1000000/1000},
-		c_ww_in_dilution    :function(){if(this.Treatment.wwt_vol_trea==0) return 0; else return (this.ww_bod_pday*this.ww_serv_pop*Global.General.Days()/this.Treatment.wwt_bod_infl*this.Treatment.wwt_vol_trea/1000)-this.ww_vol_coll*this.ww_serv_pop/this.ww_conn_pop},
+		c_ww_biogas_flar      : function(){if(Global.Configuration["Yes/No"]["Are you valorizing biogas"]==0) return this.ww_biog_pro-this.ww_biog_val; else return 0; },
+		c_ww_nrg_engines      : function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].waste]; return this.ww_vol_fuel*fuel.FD/1000*fuel.NCV/1000; },
+		c_ww_nrg_tsludge      : function(){return this.ww_num_trip*2*this.ww_dist_dis*0.25*0.84*43/1000000/1000},
+		c_ww_in_dilution      : function(){if(this.Treatment.wwt_vol_trea==0) return 0; else return this.Treatment.wwt_vol_trea-this.ww_vol_coll*this.ww_serv_pop/this.ww_conn_pop},
 		ww_KPI_GHG_elec	      : function(){return this.ww_nrg_cons*Global.General.conv_kwh_co2},
 		ww_KPI_GHG_ne_ch4_wwt : function(){return ((this.ww_bod_infl-this.ww_bod_slud-this.ww_bod_effl)*this.ww_ch4_efac+0.02*this.c_ww_biogas_flar()*0.59*0.66)*28}, //old c_ww55
 		ww_KPI_GHG_ne_n2o_tre : function(){return 265*this.ww_n2o_effl*0.005*44/28}, //old c_ww53
