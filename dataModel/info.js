@@ -117,7 +117,6 @@ var Info = {
 	wsa_KPI_std_nrg_recv:{description:"Standarized energy recovery",magnitude:"Energy/Volume",unit:"kWh/m3",explanation:"Represents an average energy turbine efficiency"},
 	wsa_KPI_water_losses:{description:"Water losses per mains length",magnitude:"Volume/",unit:"m3/km/days",explanation:"Total (apparent and real) water losses, expressed in terms of annual volume lost per mains length", },
 	wsa_KPI_un_head_loss:{description:"Unit head loss",magnitude:"Headloss/Distance",unit:"m/km",explanation:"Unit energy friction loss in the conveyance system ", },
-	wsa_SL_non_revw:{description:"Non-revenue water FORMULA??",magnitude:"Percentage",unit:"%",explanation:""},
 
 	//L2 WST
 	"wst_vol_trea":{description:"Volume of treated water",magnitude:"Volume",unit:"m3",explanation:"Sum of the volume of water treated by WTPs that are the responsibility of the water undertaking, during the assessment period", },
@@ -147,7 +146,6 @@ var Info = {
 	wst_KPI_t__CF_FD:{description:"WTPs with C/F/Filt/Des",magnitude:"Percent",unit:"%",explanation:"",},
 	wst_KPI_t______D:{description:"WTPs with Des",magnitude:"Percent",unit:"%",explanation:"",},
 	wst_KPI_t__other:{description:"WTPs with other sequence",magnitude:"Percent",unit:"%",explanation:"",},
-	wst_SL_non_revw:{description:"Non-revenue water FORMULA??",magnitude:"Percentage",unit:"%",explanation:""},
 
 	//L2 WSD
 	"wsd_nrg_cons" :{description:"Energy consumed from the grid",magnitude:"Energy",unit:"kWh",explanation:"Electric energy consumption including both from the grid and self-produced, for water distribution during the entire assessment period", },
@@ -181,7 +179,6 @@ var Info = {
 	wsd_KPI_nrg_topgraph:{description:"Percentage of topographic energy",magnitude:"Percent",unit:"%",explanation:"Percentage of energy provided to the system due to the terrain topography", },
 	wsd_KPI_water_losses:{description:"Water losses per mains length",magnitude:"Volume/Distance/Time",unit:"m3/km/days",explanation:"Total water losses (apparent and real), expressed in terms of annual volume lost per mains length",},
 	wsd_KPI_un_head_loss:{description:"Unit head loss",magnitude:"Headloss/Distance",unit:"m/km",explanation:"Unit energy friction loss in the conveyance system ",},
-	wsd_SL_non_revw:{description:"Non-revenue water FORMULA??",magnitude:"Percentage",unit:"%",explanation:""},
 
 	//L2 WWC
 	"wwc_vol_conv":{description:"Volume of wastewater conveyed to treatment or to an outfall for untreated discharge",magnitude:"Volume",unit:"m3",explanation:"Collected wastewater, corresponding to the volume of domestic, commercial and industrial outputs to the sewer system which reaches the treatment plant or an outfall during the assessment period (pumped or not). At sub-stage level, if the volume is pumped, only enter in this line if it is pumping directly to the plant or the discharge. In case of multiple stage pumping do not include the volume in this line.", },

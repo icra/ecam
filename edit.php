@@ -344,10 +344,14 @@
 						newCell.setAttribute('onmouseout',"Formulas.hlField('"+hlfield+"',0)")
 
 						//the formula shoud change adding "/hlfield"
-						newCell.title=newCell.parentNode.title+"/"+hlfield;
+						newCell.title="("+newCell.parentNode.title+")/"+hlfield;
 
 						newCell.innerHTML=(function()
 						{
+							//special case corinne requested
+							if(field=="ws_KPI_GHG_year" && category=="volume") return "";
+
+							//else
 							var norm=Normalization.normalize(category,field,level,sublevel);
 							return format(norm);
 						})();
@@ -723,14 +727,16 @@
 	<!--OUTPUTS-->
 	<div class=inline style="max-width:47%;margin-left:1em">
 		<!--GHG-->
-		<table id=outputs 
-			style="
-				width:100%;background:#f6f6f6;
+		<table id=outputs style="width:100%;background:#f6f6f6;
 				<?php if($sublevel || $level=="Energy") echo "display:none;"; ?>
 			">
-			<tr><th colspan=7 class=tableHeader>OUTPUTS - Greenhouse gas emissions (GHG) 
-				| <a href=variable.php?id=Days >Assessment period</a>: <script>document.write(format(Global.General.Days()))</script> days
-				| <a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity">Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
+			<tr><th colspan=7 class=tableHeader>OUTPUTS — Greenhouse gas emissions (GHG) |
+			<!--assessment info-->
+			<span style="text-align:left;font-size:11px">
+				<a href=variable.php?id=Days >Assessment period</a>: <script>document.write(format(Global.General.Days()))</script> days
+				|
+				<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity">Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
+			</span>
 			<tr>
 				<th>Origin
 				<th style=width:20%>Value (kgCO<sub>2</sub>eq)
@@ -749,9 +755,9 @@
 
 		<!--energy performance-->
 		<table id=nrgOutputs style="width:100%;background:#f6f6f6;margin-top:1em">
-			<tr><th colspan=4 class=tableHeader>OUTPUTS - Energy performance
+			<tr><th colspan=4 class=tableHeader>OUTPUTS — Energy performance
 			<tr>
-				<th title=Performance style=cursor:help>P
+				<th title=Performance style=cursor:help>Benchmark
 				<th>Description
 				<th>Current value
 				<th>Unit
@@ -759,7 +765,7 @@
 
 		<!--other-->
 		<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:1em">
-			<tr><th colspan=4 class=tableHeader>OUTPUTS - 
+			<tr><th colspan=4 class=tableHeader>OUTPUTS —
 				<?php if($sublevel) echo "Context "; else echo "Service level "; ?> indicators
 			<tr>
 				<th>Description

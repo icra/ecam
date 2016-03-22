@@ -204,16 +204,22 @@
 		<tr><th colspan=3 style=background:#bf5050>Wastewater
 			<tr stage=waste class=hidden><td>Resident population                      <td><input id='ww_resi_pop' onchange="BEV.updateField(this)"> <td>People
 			<tr stage=waste class=hidden><td>Population connected                     <td><input id='ww_conn_pop' onchange="BEV.updateField(this)"> <td>People
-			<tr stage=waste class=hidden><td>Serviced population                      <td><input id='ww_serv_pop' onchange="BEV.updateField(this)"> <td>People
+			<tr stage=waste class=hidden>
+				<td>Serviced population                      
+					<span 
+						title="The serviced population in the wastewater system is the population connected to the sewer and which wastewater reaches the treatment plant to be treated prior to discharge. This input is not a known value for the typical utility ECAM-Tool-user. It needs to be calculated using the input 'BOD load in the influent',in kg BOD mg/L multiplied by the  “Volume of treated wastewater” in m3 divided by the utility specific standard value of  “BOD per person” in g of BOD/pers/day. The tool proposes a default value per country, based on the IPCC recommendations" 
+						style="color:orange;cursor:help">(note)</span>
+				<td><input id='ww_serv_pop' onchange="BEV.updateField(this)"> <td>People
 			<tr stage=waste class=hidden><td>Treated wastewater daily flow            <td><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>/day
 			<tr stage=waste class=hidden><td>Energy consumed from the grid per month  <td><input id='ww_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/month
 			<tr stage=waste class=hidden><td>Monthly energy costs                     <td><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
 			<tr stage=waste class=hidden><td>Monthly running costs                    <td><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
 			<tr stage=waste class=hidden><td>Trips to sludge disposal site per week   <td><input id='ww_num_trip' onchange="BEV.updateField(this)"> <td>trips/week
 			<tr stage=waste class=hidden><td>Distance to disposal site                <td><input id='ww_dist_dis' onchange="BEV.updateField(this)"> <td>km
-			<tr stage=waste class=hidden><td>Average Total Nitrogen at discharge 
-				<span title="ECAM stores the total kg internally, not the concentration. You need to enter the 'Treated wastewater daily flow' first" style=color:orange;cursor:help>(note)</span>
-																					  <td> <input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
+			<tr stage=waste class=hidden>
+				<td>Average Total Nitrogen at discharge 
+					<span title="ECAM stores the total kg internally, not the concentration. You need to enter the 'Treated wastewater daily flow' first" style=color:orange;cursor:help>(note)</span>
+				<td> <input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
 			<tr stage=waste class=hidden><td>Monthly volume of fuel consumed          <td><input id='ww_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
 			<tr stage=waste class=hidden><td>Annual protein consumption per capita    <td><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/year
 			<tr indic=waste class=hidden><td colspan=3> Stage not active

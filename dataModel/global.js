@@ -41,7 +41,7 @@ var Global = {
 			"wsa_nrg_turb":0,
 			wsa_KPI_nrg_per_m3:function(){return this.wsa_nrg_cons/this.wsa_vol_conv},
 			wsa_KPI_nrg_recovery : function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
-			wsa_SL_non_revw: function(){return -1},
+			ws_SL_non_revw: function(){return Global.Water.ws_SL_non_revw()},
 			wsa_KPI_std_nrg_cons:function(){return this.wsa_nrg_cons/this.c_wsa_vol_head()},
 			wsa_KPI_std_nrg_recv:function(){return this.wsa_nrg_turb/this.c_wsa_trb_head()},
 			/*<Level3>*/
@@ -65,7 +65,7 @@ var Global = {
 			wst_KPI_nrg_per_m3 : function(){return this.wst_nrg_cons/this.wst_vol_trea},
 			wst_KPI_slu_per_m3 : function(){return this.wst_mass_slu/this.wst_vol_trea},
 			wst_KPI_capac_util : function(){return 100*this.wst_vol_trea/this.wst_trea_cap},
-			wst_SL_non_revw: function(){return -1},
+			ws_SL_non_revw: function(){return Global.Water.ws_SL_non_revw()},
 			/*<Level3>*/
 			"wst_tst_carr":0,
 			"wst_tst_disc":0,
@@ -97,7 +97,7 @@ var Global = {
 			"wsd_auth_con":0,
 			wsd_KPI_nrg_per_m3:function(){return this.wsd_nrg_cons/this.wsd_auth_con},
 			wsd_KPI_std_nrg_cons:function(){return this.wsd_nrg_cons/this.c_wsd_vol_head()},
-			wsd_SL_non_revw: function(){return -1},
+			ws_SL_non_revw: function(){return Global.Water.ws_SL_non_revw()},
 			/*<Level3>*/
 			"wsd_deli_pts":0,
 			"wsd_ser_cons":0,
@@ -157,7 +157,7 @@ var Global = {
 		c_ww_in_dilution    :function(){if(this.Treatment.wwt_vol_trea==0) return 0; else return (this.ww_bod_pday*this.ww_serv_pop*Global.General.Days()/this.Treatment.wwt_bod_infl*this.Treatment.wwt_vol_trea/1000)-this.ww_vol_coll*this.ww_serv_pop/this.ww_conn_pop},
 		ww_KPI_GHG_elec	      : function(){return this.ww_nrg_cons*Global.General.conv_kwh_co2},
 		ww_KPI_GHG_ne_ch4_wwt : function(){return ((this.ww_bod_infl-this.ww_bod_slud-this.ww_bod_effl)*this.ww_ch4_efac+0.02*this.c_ww_biogas_flar()*0.59*0.66)*28}, //old c_ww55
-		ww_KPI_GHG_ne_n2o_tre : function(){return 265*this.ww_n2o_effl/1000*0.005*44/28}, //old c_ww53
+		ww_KPI_GHG_ne_n2o_tre : function(){return 265*this.ww_n2o_effl*0.005*44/28}, //old c_ww53
 		ww_KPI_GHG_ne_tsludge : function(){return this.c_ww_nrg_tsludge()*(74100+28*3.9+265*3.9)},       //old c_ww54
 		ww_KPI_GHG_ne_ch4_unt : function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_bod_pday/1000*Global.General.Days()*0.06*28},                      //old c_ww52
 		ww_KPI_GHG_ne_n2o_unt : function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_prot_con*Global.General.Days()/365*0.16*1.1*1.25*0.005*44/28*265}, //old c_ww51
