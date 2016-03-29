@@ -349,7 +349,7 @@
 						newCell.innerHTML=(function()
 						{
 							//special case corinne requested
-							if(field=="ws_KPI_GHG_year" && category=="volume") return "";
+							if((field=="ws_KPI_GHG_year"||field=="ww_KPI_GHG_year") && category=="volume") return "";
 
 							//else
 							var norm=Normalization.normalize(category,field,level,sublevel);
@@ -357,7 +357,7 @@
 						})();
 					});
 
-					//if wastewater, also bod removed (difficult! because is a function)
+					//if wastewater, also normalize for bod 
 					if(level=="Waste")
 					{
 						newCell=newRow.insertCell(-1);
@@ -366,6 +366,9 @@
 						newCell.title=newCell.parentNode.title+"/c_ww_bod_rmvd";
 						newCell.innerHTML=(function()
 						{
+							//special case corinne requested
+							if(field=="ww_KPI_GHG_year") return "";
+
 							var value = CurrentLevel[field]()/Units.multiplier(field);
 							value/=Global.Waste.c_ww_bod_rmvd();
 							return format(value);

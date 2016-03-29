@@ -236,6 +236,7 @@
 	<style> 
 		#graphs table{margin:auto}
 		#graphs button{display:block;margin:auto} 
+		#graphs div[id^=graph] {border:1px solid #ccc}
 	</style>
 	<div id=graph1 class=inline style=max-width:45%></div>
 	<div id=graph2 class=inline style=max-width:45%></div>
