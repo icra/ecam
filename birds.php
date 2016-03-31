@@ -191,7 +191,7 @@
 </center>
 
 <!--inputs table-->
-<div class=inline style="margin-left:10px;width:40%;">
+<div class=inline style="margin-left:10px;width:30%;">
 	<div>Assessment period: <script>document.write(Global.General.Days())</script> days</div> 
 	<div>Conversion factor: <script>document.write(format(Global.General.conv_kwh_co2))</script> kg CO<sub>2</sub>/kWh</div> 
 	<div style="color:#666;font-size:16px;margin:0.5em 0 0.5em 0">INPUTS - Enter typical values from your daily operation</div>
@@ -232,22 +232,23 @@
 </div>
 
 <!--graphs-->
-<div id=graphs class=inline style="width:55%;">
+<div id=graphs class=inline style="width:65%;">
 	<style> 
 		#graphs table{margin:auto}
 		#graphs button{display:block;margin:auto} 
 		#graphs div[id^=graph] {border:1px solid #ccc}
 	</style>
-	<div id=graph1 class=inline style=max-width:45%></div>
-	<div id=graph2 class=inline style=max-width:45%></div>
+
+	<div id=graph1 class=inline style=width:49%></div>
+	<div id=graph2 class=inline style=width:49%></div>
 	<!--graph 3 container-->
 	<div style=margin-top:2px>
-		<div id=graph3a class=inline style=max-width:45%></div>
-		<div id=graph3b class=inline style=max-width:45%></div>
+		<div id=graph3a class=inline style=width:49%></div>
+		<div id=graph3b class=inline style=width:49%></div>
 	</div>
 	<div style=margin-top:2px>
-		<div id=graph3c class=inline style=max-width:45%></div>
-		<div id=graph3d class=inline style=max-width:45%></div>
+		<div id=graph3c class=inline style=width:49%></div>
+		<div id=graph3d class=inline style=width:49%></div>
 	</div>
 	<script>
 		google.charts.load('current',{'packages':['corechart']});

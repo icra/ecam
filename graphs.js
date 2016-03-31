@@ -23,13 +23,13 @@ Graphs.graph1=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		title:"Greenhouse gas emissions (GHG assessment)",
+		title:"Greenhouse gas emissions (kg/year)",
 		slices:
 		{
-			0:{color:'#00aff1' },
-			1:{color:'#66cef5' },
-			2:{color:'#bf5050' },
-			3:{color:'lightcoral' },
+			0:{color:'#bca613' },
+			1:{color:'#453f1c' },
+			2:{color:'#89375c' },
+			3:{color:'#f08080' },
 		},
 		allowHtml:true,
 	}
@@ -88,7 +88,7 @@ Graphs.graph2=function(withTable,container)
 	var options= 
 	{ 
 		pieHole:0.4,
-		title:"Energy consumption (kWh) (GHG assessment)",
+		title:"Energy consumption (kWh)",
 		slices:
 		{
 			0:{ color: '#0aaeef' },
@@ -155,19 +155,24 @@ Graphs.graph2=function(withTable,container)
 		var data=google.visualization.arrayToDataTable
 		([
 			[ 
-				'Emission type', 'Electrical related', 'Non-electrical related', {role:'annotation'} 
+				'Emission type', 
+				'Electrical related (Water)', 
+				'Non-electrical related (Water)', 
+				'Electrical related (Wastewater)', 
+				'Non-electrical related (Wastewater)', 
+				{role:'annotation'} 
 			],
-			['Water'      , slice_1 , slice_2 , ''],
-			['Wastewater' , slice_3 , slice_4 , ''],
+			['Water'      , slice_1, slice_2, 0,       0,      ''],
+			['Wastewater' , 0,       0,       slice_3, slice_4,''],
 		]);
 
 		//options
 		var options=
 		{
-			title:"GHG emissions (kg CO2/year)",
+			title:"GHG emissions (kg/year)",
 			legend:{position:'right',maxLines:100},
 			isStacked:true,
-			colors: ['#bca613','#00aeef', '#f3a000', '#89375c'],
+			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
 			allowHtml:true,
 		};
 
@@ -229,20 +234,22 @@ Graphs.graph2=function(withTable,container)
 		([
 			[ 
 				'Emission type', 
-				'Electrical related', 
-				'Non-electrical related', 
+				'Electrical related (Water)', 
+				'Non-electrical related (Water)', 
+				'Electrical related (Wastewater)', 
+				'Non-electrical related (Wastewater)', 
 				{role:'annotation'} 
 			],
-			['Water'      , slice_1 , slice_2 , ''],
-			['Wastewater' , slice_3 , slice_4 , ''],
+			['Water'      , slice_1, slice_2, 0,       0,      ''],
+			['Wastewater' , 0,       0,       slice_3, slice_4,''],
 		]);
 
 		//options
 		var options={
-			title:"GHG emissions (kg CO2/serv.pop./year)",
+			title:"GHG emissions (kg/serv.pop./year)",
 			legend:{position:'right',maxLines:100},
 			isStacked:true,
-			colors: ['#bca613','#00aeef', '#f3a000', '#89375c'],
+			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
 			allowHtml:true,
 		};
 
@@ -304,20 +311,22 @@ Graphs.graph2=function(withTable,container)
 		([
 			[ 
 				'Emission type', 
-				'Electrical related', 
-				'Non-electrical related', 
+				'Electrical related (Water)', 
+				'Non-electrical related (Water)', 
+				'Electrical related (Wastewater)', 
+				'Non-electrical related (Wastewater)', 
 				{role:'annotation'} 
 			],
-			['Water'      , slice_1 , slice_2 , ''],
-			['Wastewater' , slice_3 , slice_4 , ''],
+			['Water'      , slice_1, slice_2, 0,       0,      ''],
+			['Wastewater' , 0,       0,       slice_3, slice_4,''],
 		]);
 
 		//options
 		var options={
-			title:"GHG emissions (kg CO2/resi.pop./year)",
+			title:"GHG emissions (kg/resi.pop./year)",
 			legend:{position:'right',maxLines:100},
 			isStacked:true,
-			colors: ['#bca613','#00aeef', '#f3a000', '#89375c'],
+			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
 			allowHtml:true,
 		};
 
@@ -378,21 +387,24 @@ Graphs.graph2=function(withTable,container)
 		([
 			[ 
 				'Emission type', 
-				'Electrical related', 
-				'Non-electrical related', 
+				'Electrical related (Water)', 
+				'Non-electrical related (Water)', 
+				'Electrical related (Wastewater)', 
+				'Non-electrical related (Wastewater)', 
 				{role:'annotation'} 
 			],
-			['Water'      , slice_1 , slice_2 , ''],
-			['Wastewater' , slice_3 , slice_4 , ''],
+			['Water'      , slice_1, slice_2, 0,       0,      ''],
+			['Wastewater' , 0,       0,       slice_3, slice_4,''],
 		]);
+
 
 		//options
 		var options=
 		{
-			title:"GHG emissions (kg CO2/m3)",
+			title:"GHG emissions (kg/m3)",
 			legend:{position:'right',maxLines:100},
 			isStacked:true,
-			colors: ['#bca613','#00aeef', '#f3a000', '#89375c'],
+			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
 			allowHtml:true,
 		};
 
@@ -457,9 +469,9 @@ Graphs.graph4=function(withTable,container)
 		['Stage',                             'Emissions'],
 		['From electricity (Water)',           slice_1],
 		['From fuel engines (Water)',          slice_2],
-
 		['From electricity (Wastewater)',      slice_3],
 		['From CH4 from WWTP (Wastewater)',    slice_4],
+
 		['From N2O treated (Wastewater)',      slice_5],
 		['From sludge transport (Wastewater)', slice_6],
 		['From CH4 untreated (Wastewater)',    slice_7],
@@ -470,17 +482,17 @@ Graphs.graph4=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		title:"Greenhouse gas emissions",
+		title:"Greenhouse gas emissions (kg/year)",
 		slices:
 		{
-			0:{color:'#00aff1'},
-			1:{color:'#66cef5'},
-			2:{color:'#bf5050'},
-			3:{color:'#89375c'},
-			4:{color:'#451c2e'},
-			5:{color:'#b8879d'},
+			0:{color:'#bca613' },
+			1:{color:'#453f1c'},
+			2:{color:'#89375c'},
+			3:{color:'#b8879d'},
+			4:{color:'#a15f7d'},
+			5:{color:'#d0afbe'},
 			6:{color:'#672945'},
-			7:{color:'#a15f7d'},
+			7:{color:'#451c2e'},
 		},
 		allowHtml:true,
 	};
@@ -553,7 +565,7 @@ Graphs.graph5=function(withTable,container)
 	var options= 
 	{ 
 		pieHole:0.4,
-		title:"Energy consumption (kWh) (Energy performance)",
+		title:"Energy consumption (kWh)",
 		slices:
 		{
 			0:{color:'#66cef5'},
@@ -698,7 +710,7 @@ Graphs.graph6=function(withTable,container)
 	]);
 	var options=
 	{
-		title:"Greenhouse gas emissions (Energy performance) (TBD)",
+		title:"Greenhouse gas emissions(TBD)",
 		legend:{position:'right',maxLines:100},
 		isStacked:true,
 		colors: [
@@ -795,7 +807,7 @@ Graphs.graph7=function(withTable,container)
 	var options= 
 	{ 
 		pieHole:0.4,
-		title:"Energy consumption per substage",
+		title:"Energy consumption per substage (kWh)",
 		/*
 		slices:{
 			0:{ color: '#66cef5' },
