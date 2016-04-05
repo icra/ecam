@@ -170,10 +170,11 @@ Graphs.graph2=function(withTable,container)
 		var options=
 		{
 			title:"GHG emissions (kg/year)",
-			legend:{position:'right',maxLines:100},
+			legend:{position:'top',maxLines:3},
 			isStacked:true,
 			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
 			allowHtml:true,
+			bar: { groupWidth: '75' },
 		};
 
 		//empty container element
@@ -251,6 +252,7 @@ Graphs.graph2=function(withTable,container)
 			isStacked:true,
 			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
 			allowHtml:true,
+			bar: { groupWidth: '75' },
 		};
 
 		//empty container element
@@ -328,6 +330,7 @@ Graphs.graph2=function(withTable,container)
 			isStacked:true,
 			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
 			allowHtml:true,
+			bar: { groupWidth: '75' },
 		};
 
 		//empty container element
@@ -406,6 +409,7 @@ Graphs.graph2=function(withTable,container)
 			isStacked:true,
 			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
 			allowHtml:true,
+			bar: { groupWidth: '75' },
 		};
 
 		//empty container element

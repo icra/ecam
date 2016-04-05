@@ -39,6 +39,16 @@
 	<!--WARNING--><li><b>Optimized for Google Chrome. Not tested in other browsers.</b>
 	<!--LATEST UPD--><li><?php echo "Latest update: ".date("F d Y, H:i:s",filemtime("index.php"))?>.
 	</ul>
+
+	<!--translate-->
+	<div id="google_translate_element"></div>
+	<script type="text/javascript">
+		function googleTranslateElementInit() 
+		{
+			new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'es',layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+		}
+	</script>
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>
