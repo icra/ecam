@@ -21,7 +21,6 @@
 	
 	</h1>
 
-
 	<!--DESCRIPTION--><div style="color:#58595b;font-size:18px;text-align:left">
 		This tool evaluates utilities's operations in terms of GHG emissions and energy usage based on their own data. <br>
 		ECAM is part of the knowledge platform provided by the <a href="http://www.iwa-network.org/WaCCliM/">WaCCliM project</a>. 
@@ -41,6 +40,7 @@
 	</ul>
 
 	<!--translate-->
+	<!--
 	<div id="google_translate_element"></div>
 	<script type="text/javascript">
 		function googleTranslateElementInit() 
@@ -49,6 +49,7 @@
 		}
 	</script>
 	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+	-->
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>
