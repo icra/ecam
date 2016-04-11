@@ -280,6 +280,7 @@
 				if(typeof(CurrentLevel[field])!="function")continue;
 				if(field.search(/^c_/)>=0)continue;
 				if(field.search("_KPI_GHG")==-1)continue;
+				if(field=="ww_KPI_GHG_ne")continue;
 
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
@@ -291,10 +292,10 @@
 				newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
 				newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
 
-				//compute the value
+				//compute the ABSOLUTE value, not normalized
 				var value = CurrentLevel[field]()/Units.multiplier(field)
 
-				/*description*/ 
+				/*description and code*/ 
 				newCell=newRow.insertCell(-1);
 				newCell.setAttribute('title',(function()
 				{
@@ -303,7 +304,6 @@
 					else
 						return Info[field].explanation;
 				})());
-
 				newCell.style.cursor='help';
 				newCell.innerHTML=(function()
 				{
@@ -314,6 +314,8 @@
 
 				/*value*/ 
 				newCell=newRow.insertCell(-1)
+					//the first cell will be the value divided by Years
+				newCell.setAttribute('title',"("+prettyFormula+")/Years");
 				newCell.innerHTML=(function()
 				{
 
@@ -323,7 +325,7 @@
 					// level 2 warnings
 					var l2w = Level2Warnings.isIn(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
 
-					return format(value)+" "+ed+" "+l2w;
+					return format(value/Global.General.Years())+" "+ed+" "+l2w;
 				})();
 
 				/*Normalization*/
@@ -348,11 +350,32 @@
 
 						newCell.innerHTML=(function()
 						{
-							//special case corinne requested
-							if((field=="ws_KPI_GHG_year"||field=="ww_KPI_GHG_year") && category=="volume") return "";
+							//special cases: corinne request
+							if(category!='reside' && field.search('_unt')>=0) return "<span style=color:#ccc>NA</span>";
+							if(field=="ww_KPI_GHG")
+							{
+								//we have to subtract the untreated from the total
+								var minus_untreated = Global.Waste.ww_KPI_GHG() - Global.Waste.ww_KPI_GHG_ne_ch4_unt() - Global.Waste. ww_KPI_GHG_ne_n2o_unt();
+								newCell.title="custom formula";
 
-							//else
+								if(category=='servic')
+								{
+									return format(minus_untreated/Global.General.Years()/Global.Waste.ww_serv_pop);
+								}
+								if(category=="volume")
+								{
+									return format(minus_untreated/Global.Waste.ww_vol_wwtr);
+								}
+							}
+
 							var norm=Normalization.normalize(category,field,level,sublevel);
+
+							//the fields per inhab and per serv.pop are also per year
+							if(category=="reside" || category=="servic")
+							{
+								norm/=Global.General.Years();
+								newCell.title+="/Years"
+							}
 							return format(norm);
 						})();
 					});
@@ -366,9 +389,16 @@
 						newCell.title=newCell.parentNode.title+"/c_ww_bod_rmvd";
 						newCell.innerHTML=(function()
 						{
-							//special case corinne requested
-							if(field=="ww_KPI_GHG_year") return "";
-
+							//special case corinne request
+							if(field.search('_unt')>=0) return "<span style=color:#ccc>NA</span>";
+							if(field=="ww_KPI_GHG")
+							{
+								newCell.title="custom formula";
+								//we have to subtract the untreated from the total
+								var minus_untreated = Global.Waste.ww_KPI_GHG() - Global.Waste.ww_KPI_GHG_ne_ch4_unt() - Global.Waste. ww_KPI_GHG_ne_n2o_unt();
+								minus_untreated/=Global.Waste.c_ww_bod_rmvd();
+								return format(minus_untreated);
+							}
 							var value = CurrentLevel[field]()/Units.multiplier(field);
 							value/=Global.Waste.c_ww_bod_rmvd();
 							return format(value);
@@ -737,14 +767,15 @@
 			<!--assessment info-->
 			<span style="text-align:left;font-size:11px">
 				<a href=variable.php?id=Days >Assessment period</a>: <script>document.write(format(Global.General.Days()))</script> days
+				(<script>document.write(format(Global.General.Years()))</script> years)
 				|
 				<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity">Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
 			</span>
 			<tr>
 				<th>Origin
-				<th style=width:20%>Value (kgCO<sub>2</sub>eq)
-				<th style=width:20%>Per inhab (kgCO<sub>2</sub>eq/inhab)
-				<th style=width:20%>Per serv. pop. (kgCO<sub>2</sub>eq/serv.pop)
+				<th style=width:20%>Value per year (kgCO<sub>2</sub>eq/year)
+				<th style=width:20%>Per inhab (kgCO<sub>2</sub>eq/year/inhab)
+				<th style=width:20%>Per serv. pop. (kgCO<sub>2</sub>eq/year/serv.pop)
 				<th style=width:20%>Per water volume (kgCO<sub>2</sub>eq/m<sup>3</sup>)
 				<?php
 					if($level=="Waste" && !$sublevel)

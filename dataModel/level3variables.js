@@ -17,6 +17,7 @@ Level3.list=
 		"c_wsa_trb_head",
 		"wsa_KPI_water_losses",
 		"wsa_KPI_un_head_loss",
+		"wsa_KPI_std_nrg_cons",
 	//WST
 		"wst_tst_carr",
 		"wst_tst_aest",
@@ -68,10 +69,12 @@ Level3.list=
 		"wsd_KPI_un_head_loss",
 		"wsd_KPI_nrg_efficien",
 		"wsd_KPI_nrg_topgraph",
+		"wsd_KPI_std_nrg_cons",
 	//WWC
 		"wwc_vol_pump",
 		"wwc_pmp_head",
 		"c_wwc_vol_head",
+		"wwc_KPI_std_nrg_cons",
 	//WWT
 		"wwt_tst_cmpl",
 		"wwt_tst_cond",
@@ -101,6 +104,7 @@ Level3.list=
 		"wwd_trb_head",
 		"c_wwd_vol_head",
 		"c_wwd_trb_head",
+		"wwd_KPI_std_nrg_cons",
 ];
 
 Level3.isInList=function(code)

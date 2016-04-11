@@ -14,6 +14,10 @@ var Global = {
 			var finalDate = new Date(Global.General["Assessment Period End"]);
 			return (finalDate-startDate)/1000/60/60/24;
 		},
+		Years:function()
+		{
+			return this.Days()/365;
+		},
 	},
 
 	/** Level 1 - Water Supply*/
@@ -26,10 +30,9 @@ var Global = {
 		"ws_run_cost"   :0,
 		"ws_vol_fuel"   :0,
 		"ws_non_revw"   :0,
-		ws_KPI_GHG_elec:function(){return this.ws_nrg_cons*Global.General.conv_kwh_co2},
-		ws_KPI_GHG_ne  :function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].water]; return this.ws_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+298*fuel.EFN2O.engines+34*fuel.EFCH4.engines) } ,
-		ws_KPI_GHG     :function(){return this.ws_KPI_GHG_elec()+this.ws_KPI_GHG_ne()},
-		ws_KPI_GHG_year:function(){return this.ws_KPI_GHG()/Global.General.Days()*365},
+		ws_KPI_GHG_elec: function(){return this.ws_nrg_cons*Global.General.conv_kwh_co2},
+		ws_KPI_GHG_ne  : function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].water]; return this.ws_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+298*fuel.EFN2O.engines+34*fuel.EFCH4.engines) } ,
+		ws_KPI_GHG     : function(){return this.ws_KPI_GHG_elec()+this.ws_KPI_GHG_ne()},
 		ws_SL_serv_pop : function(){return 100*Global.Water.ws_serv_pop/Global.Water.ws_resi_pop},
 		ws_SL_nrg_cost : function(){return 100*this.ws_nrg_cost/this.ws_run_cost},
 		ws_SL_auth_con : function(){return 1000*this.ws_vol_auth/this.ws_serv_pop/Global.General.Days()},
@@ -151,7 +154,7 @@ var Global = {
 		"ww_biog_pro":0,
 		"ww_biog_val":0,
 		c_ww_bod_rmvd:function(){return this.ww_bod_infl-this.ww_bod_effl},
-		c_ww_biogas_flar      : function(){if(Global.Configuration["Yes/No"]["Are you valorizing biogas"]==0) return this.ww_biog_pro-this.ww_biog_val; else return 0; },
+		c_ww_biogas_flar      : function(){return this.ww_biog_pro-this.ww_biog_val},
 		c_ww_nrg_engines      : function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].waste]; return this.ww_vol_fuel*fuel.FD/1000*fuel.NCV/1000; },
 		c_ww_nrg_tsludge      : function(){return this.ww_num_trip*2*this.ww_dist_dis*0.25*0.84*43/1000000/1000},
 		c_ww_in_dilution      : function(){if(this.Treatment.wwt_vol_trea==0) return 0; else return this.Treatment.wwt_vol_trea-this.ww_vol_coll*this.ww_serv_pop/this.ww_conn_pop},
@@ -159,13 +162,11 @@ var Global = {
 		ww_KPI_GHG_ne_ch4_wwt : function(){return ((this.ww_bod_infl-this.ww_bod_slud-this.ww_bod_effl)*this.ww_ch4_efac+0.02*this.c_ww_biogas_flar()*0.59*0.66)*34}, //old c_ww55
 		ww_KPI_GHG_ne_n2o_tre : function(){return 298*this.ww_n2o_effl*0.005*44/28}, //old c_ww53
 		ww_KPI_GHG_ne_tsludge : function(){return this.c_ww_nrg_tsludge()*(74100+34*3.9+298*3.9)},       //old c_ww54
+		ww_KPI_GHG_ne_engines : function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].waste]; return this.c_ww_nrg_engines()*(fuel.EFCO2+34*fuel.EFCH4.engines+298*fuel.EFN2O.engines) }, //old c_ww57
 		ww_KPI_GHG_ne_ch4_unt : function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_bod_pday/1000*Global.General.Days()*0.06*34},                      //old c_ww52
 		ww_KPI_GHG_ne_n2o_unt : function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_prot_con*Global.General.Days()/365*0.16*1.1*1.25*0.005*44/28*298}, //old c_ww51
-		ww_KPI_GHG_ne_engines : function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].waste]; return this.c_ww_nrg_engines()*(fuel.EFCO2+34*fuel.EFCH4.engines+298*fuel.EFN2O.engines) }, //old c_ww57
 		ww_KPI_GHG_ne:function(){return this.ww_KPI_GHG_ne_ch4_wwt()+this.ww_KPI_GHG_ne_n2o_tre()+this.ww_KPI_GHG_ne_tsludge()+this.ww_KPI_GHG_ne_ch4_unt()+this.ww_KPI_GHG_ne_n2o_unt()+this.ww_KPI_GHG_ne_engines()}, 
 		ww_KPI_GHG:function(){return this.ww_KPI_GHG_elec()+this.ww_KPI_GHG_ne()},
-
-		ww_KPI_GHG_year:function(){return this.ww_KPI_GHG()/Global.General.Days()*365},
 
 		ww_SL_nrg_cost: function(){return 100*this.ww_nrg_cost/this.ww_run_cost},
 		ww_SL_serv_pop: function(){return 100*Global.Waste.ww_serv_pop/Global.Waste.ww_resi_pop},
@@ -326,7 +327,7 @@ var Global = {
 		{
 			"Do you have fuel engines to run pumps"                                                  :0,
 			"Are you producing electrical energy in your drinking water system"                      :0,
-			"Are you producing electrical energy in your wastewater system"                          :0,
+			"Are you producing electrical energy in your wastewater discharge"                       :0,
 			"Do you want to investigate topographic energy"                                          :0,
 			"Are you using truck transport to convey sludge to the disposal site"                    :0,
 			"Are industrial or commercial users connected to the sewer system without pre-treatment" :0,

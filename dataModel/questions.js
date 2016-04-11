@@ -16,7 +16,7 @@ var Questions =
 		"wsa_KPI_nrg_recovery",
 	],
 
-	"Are you producing electrical energy in your wastewater system":[
+	"Are you producing electrical energy in your wastewater discharge":[
 		"wwd_nrg_recv",
 	],
 

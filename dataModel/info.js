@@ -44,7 +44,6 @@ var Info = {
 	ws_KPI_GHG_elec:{description:"From electricity",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from electricity consumption in all stages of urban drinking water system", },
 	ws_KPI_GHG_ne:{description:"From fuel engines",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions other from electricity consumption in all stages of urban drinking water system", },
 	ws_KPI_GHG :{description:"<b>Total GHG</b>",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from non-electricity and electricity consumption ", },
-	ws_KPI_GHG_year :{description:"Total GHG per year",magnitude:"Mass/Time",unit:"kgCO2e/year",explanation:"GHG Emissions from non-electricity and electricity consumption per year", },
 
 	//L1 WW
 	"ww_bod_infl" :{description:"Influent BOD5 load",magnitude:"Mass",unit:"kg",explanation:"BOD5 load entering the WWTP during the assessment period. It can be estimated by multiplying the average BOD concentration in the influent by the volume entering the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate", },
@@ -81,7 +80,6 @@ var Info = {
 	ww_KPI_GHG_ne_engines :{description:"From from fuel engines",magnitude:"Mass",unit:"kgCO2e",explanation:"Direct CO2e emitted from on-site engines in wastewater stages based upon sum of CO2, CH4 and N2O emission from stationary combustion ", },
 	ww_KPI_GHG_ne :{description:"From non electricity",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions other from electricity consumption in all stages of wastewater system", },
 	ww_KPI_GHG:{description:"<b>Total GHG</b>",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from non-electricity and electricity consumption"},
-	ww_KPI_GHG_year :{description:"Total GHG per year",magnitude:"Mass/Time",unit:"kgCO2e/year",explanation:"GHG Emissions from non-electricity and electricity consumption per year", },
 
 	//L1 ENERGY SUMMARY 
 		//WS

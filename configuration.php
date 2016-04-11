@@ -120,7 +120,7 @@
 								return "Only if [wsa]"; 
 							}
 						}
-						if(question=="Are you producing electrical energy in your wastewater system")
+						if(question=="Are you producing electrical energy in your wastewater discharge")
 						{
 							if(as.wasteDis==0)
 							{
