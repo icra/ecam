@@ -351,7 +351,11 @@
 						newCell.innerHTML=(function()
 						{
 							//special cases: corinne request
-							if(category!='reside' && field.search('_unt')>=0) return "<span style=color:#ccc>NA</span>";
+							if(category!='reside' && field.search('_unt')>=0) 
+							{
+								newCell.title="NA";
+								return "<span style=color:#ccc>NA</span>";
+							}
 							if(field=="ww_KPI_GHG")
 							{
 								//we have to subtract the untreated from the total
