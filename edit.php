@@ -764,7 +764,7 @@
 	<!--OUTPUTS-->
 	<div class=inline style="max-width:47%;margin-left:1em">
 		<!--GHG-->
-		<table id=outputs style="width:100%;background:#f6f6f6;
+		<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:1em;
 				<?php if($sublevel || $level=="Energy") echo "display:none;"; ?>
 			">
 			<tr><th colspan=7 class=tableHeader>OUTPUTS — Greenhouse gas emissions (GHG) |
@@ -792,7 +792,7 @@
 		</table>
 
 		<!--energy performance-->
-		<table id=nrgOutputs style="width:100%;background:#f6f6f6;margin-top:1em">
+		<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
 			<tr><th colspan=4 class=tableHeader>OUTPUTS — Energy performance
 			<tr>
 				<th title=Performance style=cursor:help>Benchmark
