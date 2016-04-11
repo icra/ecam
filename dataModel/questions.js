@@ -16,10 +16,6 @@ var Questions =
 		"wsa_KPI_nrg_recovery",
 	],
 
-	"Are you producing electrical energy in your wastewater discharge":[
-		"wwd_nrg_recv",
-	],
-
 	"Do you want to investigate topographic energy":[
 		"wsd_hi_no_el",
 		"wsd_lo_no_el",

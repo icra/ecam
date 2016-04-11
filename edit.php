@@ -281,6 +281,8 @@
 				if(field.search(/^c_/)>=0)continue;
 				if(field.search("_KPI_GHG")==-1)continue;
 				if(field=="ww_KPI_GHG_ne")continue;
+				/*check if should be hidden according to questions*/
+				if(Questions.isHidden(field)) continue;
 
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
@@ -551,9 +553,12 @@
 				if(field.search(/^c_/)!=-1){continue;}
 				if(field.search("_KPI_GHG")>=0)continue;
 				if(field.search('_nrg_')>-1)continue;
+				/*check if should be hidden according to questions*/
+				if(Questions.isHidden(field)) continue;
 
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
+
 				var newCell,newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
 				var formula=CurrentLevel[field].toString();

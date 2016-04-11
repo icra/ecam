@@ -120,16 +120,6 @@
 								return "Only if [wsa]"; 
 							}
 						}
-						if(question=="Are you producing electrical energy in your wastewater discharge")
-						{
-							if(as.wasteDis==0)
-							{
-								Global.Configuration["Yes/No"][question]=0;
-								newRow.style.backgroundColor='#f6f6f6';
-								newRow.style.color='#aaa';
-								return "Only if [wwd]"; 
-							}
-						}
 						if(question=="Do you have fuel engines to run pumps")
 						{
 							if(as.water==0 && as.waste==0)

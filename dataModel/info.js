@@ -77,7 +77,7 @@ var Info = {
 	ww_KPI_GHG_ne_tsludge :{description:"From sludge transport",magnitude:"Mass",unit:"kgCO2e",explanation:"Indirect CO2e emitted from sludge transport off-site. Based upon sum of CO2, CH4 and N2O emission from mobile combustion", },
 	ww_KPI_GHG_ne_ch4_unt :{description:"From CH<sub>4</sub> untreated wastewater",magnitude:"Mass",unit:"kgCO2e",explanation:"Indirect CO2e emitted in receiving waters due to methane in wastewater effluent without treatment. Based upon BOD in the WWTP influent multiplied by default emission factor", },
 	ww_KPI_GHG_ne_n2o_unt :{description:"From N<sub>2</sub>O untreated wastewater",magnitude:"Mass",unit:"kgCO2e",explanation:"Indirect CO2e emitted in receiving waters due to nitrogen in wastewater discharged without treatment. Based upon nitrogen in the WWTP influent multiplied by default emission factor", },
-	ww_KPI_GHG_ne_engines :{description:"From from fuel engines",magnitude:"Mass",unit:"kgCO2e",explanation:"Direct CO2e emitted from on-site engines in wastewater stages based upon sum of CO2, CH4 and N2O emission from stationary combustion ", },
+	ww_KPI_GHG_ne_engines :{description:"From fuel engines",magnitude:"Mass",unit:"kgCO2e",explanation:"Direct CO2e emitted from on-site engines in wastewater stages based upon sum of CO2, CH4 and N2O emission from stationary combustion ", },
 	ww_KPI_GHG_ne :{description:"From non electricity",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions other from electricity consumption in all stages of wastewater system", },
 	ww_KPI_GHG:{description:"<b>Total GHG</b>",magnitude:"Mass",unit:"kgCO2e",explanation:"GHG Emissions from non-electricity and electricity consumption"},
 

@@ -327,7 +327,6 @@ var Global = {
 		{
 			"Do you have fuel engines to run pumps"                                                  :0,
 			"Are you producing electrical energy in your drinking water system"                      :0,
-			"Are you producing electrical energy in your wastewater discharge"                       :0,
 			"Do you want to investigate topographic energy"                                          :0,
 			"Are you using truck transport to convey sludge to the disposal site"                    :0,
 			"Are industrial or commercial users connected to the sewer system without pre-treatment" :0,

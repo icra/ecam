@@ -18,6 +18,7 @@ Level3.list=
 		"wsa_KPI_water_losses",
 		"wsa_KPI_un_head_loss",
 		"wsa_KPI_std_nrg_cons",
+		"wsa_KPI_std_nrg_recv",
 	//WST
 		"wst_tst_carr",
 		"wst_tst_aest",
@@ -105,6 +106,7 @@ Level3.list=
 		"c_wwd_vol_head",
 		"c_wwd_trb_head",
 		"wwd_KPI_std_nrg_cons",
+		"wwd_KPI_std_nrg_recv",
 ];
 
 Level3.isInList=function(code)
