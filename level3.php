@@ -487,7 +487,9 @@
 				})();
 
 				//level 2 value
-				newRow.insertCell(-1).innerHTML=(function()
+				var newCell=newRow.insertCell(-1);
+				newCell.title=prettyFormula;
+				newCell.innerHTML=(function()
 				{
 					var value=format(CurrentStage[field]()/Units.multiplier(field));
 					return '<b>'+value+'</b>';
