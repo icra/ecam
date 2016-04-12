@@ -160,7 +160,7 @@ var Global = {
 			if(this.ww_biog_pro==0)
 			{
 				if(Global.Configuration["Yes/No"]["Are you producing biogas"])
-					return this.ww_serv_pop * this.ww_bod_pday * 0.9 * 0.4 * Global.General.Days();
+					return this.ww_serv_pop * this.ww_bod_pday * 0.9 * 0.4/1000 * Global.General.Days();
 				else
 					return 0;
 			}
