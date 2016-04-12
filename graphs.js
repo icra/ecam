@@ -222,7 +222,7 @@ Graphs.graph2=function(withTable,container)
 		var ws_el = WS.ws_KPI_GHG_elec();
 		var ws_ne = WS.ws_KPI_GHG_ne();
 		var ww_el = WW.ww_KPI_GHG_elec();
-		var ww_ne = WW.ww_KPI_GHG_ne();
+		var ww_ne = WW.ww_KPI_GHG_ne() - WW.ww_KPI_GHG_ne_ch4_unt() - WW.ww_KPI_GHG_ne_n2o_unt();
 
 		//per year per serv population
 		var slice_1 = ws_el/years/WS.ws_serv_pop;
@@ -270,9 +270,9 @@ Graphs.graph2=function(withTable,container)
 			var table=""+
 			"<button onclick=Graphs.graph3b(false,'"+container+"')>Hide table</button>"+
 			"<table >"+
-				"<tr><th>Stage                  <th>Water                             <th>kg/serv.pop./year  <th>Wastewater                        <th>kg/serv.pop./year"+
-				"<tr><th>Non electrical related <td>ws_KPI_GHG_ne  /ws_serv_pop/years <td>"+format(slice_2)+"<td>ww_KPI_GHG_elec/ws_serv_pop/years <td>"+format(slice_4)+
-				"<tr><th>Electrical related     <td>ws_KPI_GHG_elec/ww_serv_pop/years <td>"+format(slice_1)+"<td>ww_KPI_GHG_ne  /ww_serv_pop/years <td>"+format(slice_3)+
+				"<tr><th>Stage                  <th>Water                             <th>kg/serv.pop./year  <th>Wastewater                                                              <th>kg/serv.pop./year"+
+				"<tr><th>Non electrical related <td>ws_KPI_GHG_ne  /ws_serv_pop/years <td>"+format(slice_2)+"<td>(ww_KPI_GHG_ne-ww_KPI_GHG_ch4_unt-ww_KPI_GHG_n2o_unt)/ws_serv_pop/years <td>"+format(slice_4)+
+				"<tr><th>Electrical related     <td>ws_KPI_GHG_elec/ww_serv_pop/years <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/ww_serv_pop/years                                       <td>"+format(slice_3)+
 			"</table>";
 			var div = document.createElement('div');
 			div.style.fontSize="10px";
@@ -377,7 +377,7 @@ Graphs.graph2=function(withTable,container)
 		var ws_el = WS.ws_KPI_GHG_elec();
 		var ws_ne = WS.ws_KPI_GHG_ne();
 		var ww_el = WW.ww_KPI_GHG_elec();
-		var ww_ne = WW.ww_KPI_GHG_ne();
+		var ww_ne = WW.ww_KPI_GHG_ne() - WW.ww_KPI_GHG_ne_ch4_unt() - WW.ww_KPI_GHG_ne_n2o_unt();
 
 		//per AC and CW
 		var slice_1  = ws_el/WS.ws_vol_auth;
@@ -427,9 +427,9 @@ Graphs.graph2=function(withTable,container)
 			var table=""+
 			"<button onclick=Graphs.graph3d(false,'"+container+"')>Hide table</button>"+
 			"<table >"+
-				"<tr><th>Stage                  <th>Water                       <th>kg/m3              <th>Wastewater                  <th>kg/m3"+
-				"<tr><th>Non electrical related <td>ws_KPI_GHG_ne  /ws_vol_auth <td>"+format(slice_2)+"<td>ww_KPI_GHG_elec/ws_vol_auth <td>"+format(slice_4)+
-				"<tr><th>Electrical related     <td>ws_KPI_GHG_elec/ww_vol_coll <td>"+format(slice_1)+"<td>ww_KPI_GHG_ne  /ww_vol_coll <td>"+format(slice_3)+
+				"<tr><th>Stage                  <th>Water                       <th>kg/m3              <th>Wastewater                                                        <th>kg/m3"+
+				"<tr><th>Non electrical related <td>ws_KPI_GHG_ne  /ws_vol_auth <td>"+format(slice_2)+"<td>(ww_KPI_GHG_ne-ww_KPI_GHG_ch4_unt-ww_KPI_GHG_n2o_unt)/ws_vol_auth <td>"+format(slice_4)+
+				"<tr><th>Electrical related     <td>ws_KPI_GHG_elec/ww_vol_coll <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/ww_vol_coll                                       <td>"+format(slice_3)+
 			"</table>";
 			var div = document.createElement('div');
 			div.style.fontSize="10px";
