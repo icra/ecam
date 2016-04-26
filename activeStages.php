@@ -41,7 +41,7 @@
 		<tr><script>
 		['water','waste'].forEach(function(stage)
 		{
-			aass.printCell(stage,4);
+			aass.printCell(stage,3);
 		});
 		</script><tr><script>
 		['waterAbs','waterTre','waterDis'].forEach(function(stage)

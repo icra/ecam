@@ -4,7 +4,7 @@ var Level2only = {
 
 	list:
 	[
-		"not implemented",
+		"ws_SL_non_revw",
 	],
 
 	isInList:function(code)
@@ -19,7 +19,4 @@ var Level2only = {
 		}
 		return false;
 	},
-
 };
-
-

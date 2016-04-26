@@ -45,7 +45,7 @@ var Global = {
 			wsa_KPI_nrg_per_m3:function(){return this.wsa_nrg_cons/this.wsa_vol_conv},
 			wsa_KPI_nrg_recovery : function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
 			ws_SL_non_revw: function(){return Global.Water.ws_SL_non_revw()},
-			wsa_KPI_std_nrg_cons:function(){return this.wsa_nrg_cons/this.c_wsa_vol_head()},
+			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_cons+this.wsa_nrg_turb)/this.c_wsa_vol_head()},
 			wsa_KPI_std_nrg_recv:function(){return this.wsa_nrg_turb/this.c_wsa_trb_head()},
 			/*<Level3>*/
 			"wsa_vol_pump":0,
@@ -99,7 +99,7 @@ var Global = {
 			"wsd_vol_dist":0,
 			"wsd_auth_con":0,
 			wsd_KPI_nrg_per_m3:function(){return this.wsd_nrg_cons/this.wsd_auth_con},
-			wsd_KPI_std_nrg_cons:function(){return this.wsd_nrg_cons/this.c_wsd_vol_head()},
+			wsd_KPI_std_nrg_cons:function(){return (this.wsd_nrg_cons+this.wsd_nrg_recv)/this.c_wsd_vol_head()},
 			ws_SL_non_revw: function(){return Global.Water.ws_SL_non_revw()},
 			/*<Level3>*/
 			"wsd_deli_pts":0,
@@ -255,7 +255,7 @@ var Global = {
 			"wwd_nrg_recv":0,
 			wwd_KPI_nrg_per_m3:function(){return this.wwd_nrg_cons/this.wwd_vol_disc||0},
 			wwd_KPI_nrg_rcv_di:function(){return this.wwd_nrg_recv/this.wwd_vol_disc},
-			wwd_KPI_std_nrg_cons:function(){return this.wwd_nrg_cons/this.c_wwd_vol_head()},
+			wwd_KPI_std_nrg_cons:function(){return (this.wwd_nrg_cons+this.wwd_nrg_recv)/this.c_wwd_vol_head()},
 			wwd_KPI_std_nrg_recv:function(){return this.wwd_nrg_recv/this.c_wwd_trb_head()},
 			/*<Level3>*/
 				"wwd_vol_pump":0,

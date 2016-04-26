@@ -11,6 +11,9 @@ h4{margin:1em;font-size:14px;color:#58595b}
 legend{color:#58595b;font-size:16px}
 table{border-collapse:collapse;}
 
+#fixedTopBar{z-index:9}
+#sidebar{z-index:99}
+
 /*default cells*/
 th,td{border:1px solid #aaa;padding:0.4em;}
 th{font-weight:normal;background:#00adef;color:white;vertical-align:middle}

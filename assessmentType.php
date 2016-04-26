@@ -14,7 +14,7 @@
 		<input name=assessment type=radio 
 			value=advanced   
 			onchange="updateAssessment(this.value)">
-		Advanced (?)
+		Advanced
 	</label>
 </table>
 
