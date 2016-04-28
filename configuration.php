@@ -2,7 +2,7 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<script>
-		var Configuration = {};
+		var Configuration = {}; //namespace
 
 		/** Enable or disable stage <input type=checkbox id=id> */
 		Configuration.activate=function(id)
@@ -278,9 +278,6 @@
 			updateResult();
 		}
 	</script>
-	<style>
-		fieldset{margin:0 0 1.5em 0;padding:0.8em;border:1px solid #aaa}
-	</style>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
@@ -356,6 +353,7 @@
 
 	<!--right: ADDITIONAL INFO-->
 	<div class=inline style="width:50%;text-align:left;margin-left:1em">
+		<style> fieldset{margin:0 0 1.5em 0;padding:0.8em;border:1px solid #aaa} </style>
 		<!--conv_kwh_co2-->
 		<fieldset>
 			<legend> Conversion factor for grid electricity (<a href=variable.php?id=conv_kwh_co2>info</a>) </legend>

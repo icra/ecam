@@ -3,7 +3,7 @@
 		creates a table indicating active stages
 	*/
 
-	var aass={ }; //namespace
+	var aass={ }; //namespace "active stages"
 
 	aass.stageName=function(stage)
 	{
@@ -35,8 +35,9 @@
 		for(var i=0;i<elements.length;elements[i++].style.backgroundColor=newColor){}
 	}
 </script>
-<style>.stage:hover {background:#af0}</style>
+
 <table>
+	<style>.stage:hover {background:#af0}</style>
 	<tr><th colspan=8>Stages<tr>
 		<tr><script>
 		['water','waste'].forEach(function(stage)

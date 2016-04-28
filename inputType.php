@@ -1,7 +1,7 @@
-<!--grouped buttons inside edit.php [All | Water | Energy | GHG ]-->
+<!--grouped buttons inside edit.php: [All|Water|Energy|GHG] -->
+<!--CURRENTLY NOT USED-->
 
 <style>
-	/*temporal*/ #inputType{display:none}
 	span#inputType               { margin-left:1em;font-size:19px}
 	span#inputType button        { padding:0 10px 0 10px;border:1px solid #ccc;background:#f5f5f5;outline:none;}
 	span#inputType button:hover  { background:#e6e6e6}
@@ -12,6 +12,7 @@
 </style>
 
 <script>
+	/** make pressed button look like active*/
 	function inputType(button)
 	{
 		var isActive = button.classList.contains('active')

@@ -1,4 +1,4 @@
-<!--birds eye view: quick assessment-->
+<!--birds eye view:quick assessment view-->
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>

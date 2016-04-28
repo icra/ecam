@@ -1,5 +1,6 @@
 <?php 
 	/* stages.php: this pages lets the user navigate through active stages */
+	//it's visible when the user clicks on the "input data" menu 
 ?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>

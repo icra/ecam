@@ -1,7 +1,7 @@
 <?php
-	/*variable.php: page for viewing info of a unique variable */
+	/*variable.php: page for viewing info of a unique variable, when the user clicks the code, for example in "edit.php" or "level3.php"  */
 
-	//specified input
+	//specified code for input 
 	if(!isset($_GET['id'])){die('no input specified');}
 	$id=$_GET['id'];
 ?>
@@ -313,21 +313,24 @@
 		document.write("<div>ERROR. Variable not defined in dataModel/Info.js</div>")
 		window.stop()
 	}
-	//Define some global variables
-	var localization = locateVariable(id)
-	var level 		 = localization.level
-	var sublevel 	 = localization.sublevel
-	var currentStage = sublevel ? Global[level][sublevel] : Global[level]
-	var currSubstage = sublevel ? Substages[level][sublevel] : Substages[level]
+
+	//Define some necessary global variables
+	var localization = locateVariable(id);
+	var level 		 = localization.level;
+	var sublevel 	 = localization.sublevel;
+	var currentStage = sublevel ? Global[level][sublevel] : Global[level];
+	var currSubstage = sublevel ? Substages[level][sublevel] : Substages[level];
+
 	//make the user see "Water Supply" instead of "Water"
-	var levelAlias
+	var levelAlias;
 	switch(level)
 	{
-		case "Water":levelAlias="Water Supply";break
-		case "Waste":levelAlias="Wastewater";break
+		case "Water":levelAlias="Water Supply";break;
+		case "Waste":levelAlias="Wastewater";break;
 		default:levelAlias=level;break;
 	}
 </script>
+
 <!--subtitle--><h4>Detailed info</h4>
 <!--TITLE--><h1><script>document.write(Info[id].description+" ("+id+")")</script></h1>
 <!--VARIABLE INFO--><table style="text-align:left;width:50%" id=info></table>

@@ -772,7 +772,7 @@
 		<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:1em;
 				<?php if($sublevel || $level=="Energy") echo "display:none;"; ?>
 			">
-			<tr><th colspan=7 class=tableHeader>OUTPUTS — Greenhouse gas emissions (GHG) |
+			<tr><th colspan=7 class=tableHeader>OUTPUTS — Greenhouse gas emissions |
 			<!--assessment info-->
 			<span style="text-align:left;font-size:11px">
 				<a href=variable.php?id=Days >Assessment period</a>: <script>document.write(format(Global.General.Days()))</script> days

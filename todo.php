@@ -14,7 +14,6 @@
 		<tr><td>Finish questions variable hidings<td>Pending (difficult)</td>
 		<tr><td>Wrong benchmarking<td>Need more info</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
-		<tr><td>Bar graphs<td>Wait</td>
 </table>
 
 <!--FOOTER--><?php include'footer.php'?>
