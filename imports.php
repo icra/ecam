@@ -31,6 +31,7 @@
 <script src="js/updateGlobalFromCookies.js"></script><!--update Global object from cookie "GLOBAL" here-->
 <script src="dataModel/normalization.js"></script>		 <!--variables that have some special behaviour-->
 <script src="dataModel/averagedVariables.js"></script>
+<?php include'languages/write.php'; //for languages?>
 
 <!--title-->
 <title>ECAM Web Tool</title>

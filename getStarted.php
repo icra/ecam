@@ -14,11 +14,11 @@
 		}
 
 		/** Create a row for a field in Global.General */
-		function tableRow(field,input,type)
+		function tableRow(name,field,input,type)
 		{
 			/*default values for input and type*/input=input||"input";type=type||"text";
 			var onchange="onchange=\"updateField('"+field+"',this.value)\""
-			var ret="<tr><th>"+field+"<td>"
+			var ret="<tr><th>"+name+"<td>"
 			switch(input)
 			{
 				case "textarea":
@@ -41,12 +41,12 @@
 			document.querySelector("#sidebar #Name").innerHTML=Global.General.Name;
 			/*fill form*/
 			t.innerHTML=(function(){
-				return tableRow("Name")+
+				return tableRow("<?php write('#getStarted_table_name')?>","Name")+
 					createLocationSelection()+
-					tableRow("Assessment Period Start",'input','date')+
-					tableRow("Assessment Period End",'input','date')+
-					"<tr><th>Assessment Period<td>"+Global.General.Days()+" days (<a href=variable.php?id=Days>info</a>)"+
-					tableRow("Comments",'textarea','date')
+					tableRow("<?php write('#getStarted_table_start')?>","Assessment Period Start",'input','date')+
+					tableRow("<?php write('#getStarted_table_end')?>","Assessment Period End",'input','date')+
+					"<tr><th><?php write('#getStarted_table_period')?><td>"+Global.General.Days()+" days (<a href=variable.php?id=Days>info</a>)"+
+					tableRow("<?php write('#getStarted_table_comments')?>","Comments",'textarea','date')
 			})();
 		}
 
@@ -64,7 +64,7 @@
 				option.innerHTML=country;
 				select.appendChild(option);
 			}
-			return "<tr><th>Location<td>"+select.outerHTML;
+			return "<tr><th><?php write('#getStarted_table_location')?><td>"+select.outerHTML;
 		}
 
 		function init()
@@ -77,16 +77,16 @@
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>General info</h1>
-<!--SUBTITLE--><h4>General data of your system. You can edit this information later.</h4>
+<!--TITLE--><h1><?php write('#getStarted_general_info')?></h1>
+<!--SUBTITLE--><h4><?php write('#getStarted_subtitle')?></h4>
 
 <div style="padding:0;margin-bottom:1em;background:#d7bfaf;height:5px"></div>
 
 <!--FORM--><table id=form style="text-align:left;"></table>
 <!--PREV&NEXT-->
 <div style=margin:1em>
-	<button class="button prev" onclick="event.stopPropagation();window.location='index.php'">Previous</button> 
-	<button class="button next" onclick="event.stopPropagation();window.location='configuration.php'">Next</button>
+	<button class="button prev" onclick="event.stopPropagation();window.location='index.php'">PREVIOUS</button> 
+	<button class="button next" onclick="event.stopPropagation();window.location='configuration.php'">NEXT</button>
 </div>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

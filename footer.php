@@ -15,6 +15,8 @@
 </style>
 
 <div id=footer>
-	<a href=about.php>About</a>
+	<a href=about.php>
+		<?php write("#footer_about")?>
+	</a>
 </div>
 

@@ -121,7 +121,8 @@
 			top:0;right:0;z-index:999;
 			background:white;
 			padding:0;margin:0;
-			box-shadow: 5px 5px 50px 5px #888;
+			box-shadow:5px 5px 40px 5px #cacaca;
+			border-left:1px solid #ccc;
 			overflow:auto;
 		}
 		div#sidebar.off{width:0;height:0;top:0;}

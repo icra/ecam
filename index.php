@@ -15,41 +15,30 @@
 	<style>
 		#main *:not(button){margin:0;padding:0;padding-top:0.7em;padding-bottom:0.7em}
 	</style>
-	<!--TITLE--><h1 class=blue style="text-align:left;font-size:30px;"><b>ECAM</b> Web Tool
+	<!--TITLE--><h1 class=blue style="text-align:left;font-size:30px;"><b>ECAM</b> <?php write("#index_web_tool")?>
 
-	<span style=color:#bf5050>(beta version)</span>
+	<span style=color:#bf5050>(beta)</span>
 	
 	</h1>
 
 	<!--DESCRIPTION--><div style="color:#58595b;font-size:18px;text-align:left">
-		This tool evaluates utilities's operations in terms of GHG emissions and energy usage based on their own data. <br>
-		ECAM is part of the knowledge platform provided by the <a href="http://www.iwa-network.org/WaCCliM/">WaCCliM project</a>. 
-		This tool is free and open source.
+		<?php write('#index_description')?>
+		<br>
+		<a href="http://www.iwa-network.org/WaCCliM/">WaCCliM project</a>. 
 	</div>
 
 	<!--FIRST TIME?-->
 	<h4 style=font-size:18px;color:#58595b>
-		First time using ECAM Web Tool? Click on "New" or learn more in <a href=about.php>About</a>.
+		<?php write('#index_first_time_using')?>
+		<a href=about.php>About</a>.
 	</h4>
 
 	<!--MENU--><div style=padding:1em><?php include'menu.php'?></div>
 
 	<ul>
-	<!--WARNING--><li><b>Optimized for Google Chrome. Not tested in other browsers.</b>
-	<!--LATEST UPD--><li><?php echo "Latest update: ".date("F d Y, H:i:s",filemtime("index.php"))?>.
+	<!--WARNING--><li><b><?php write('#index_chrome_warning')?></b>
+	<!--LATEST UPD--><li><?php write('#index_latest_update');echo ": ".date("F d Y, H:i:s",filemtime("index.php"))?>.
 	</ul>
-
-	<!--translate-->
-	<!--
-	<div id="google_translate_element"></div>
-	<script type="text/javascript">
-		function googleTranslateElementInit() 
-		{
-			new google.translate.TranslateElement({pageLanguage:'en',includedLanguages:'es',layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-		}
-	</script>
-	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-	-->
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>
