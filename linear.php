@@ -2,16 +2,16 @@
 <!--LINEAR DIAGRAM: file inside edit.php, level3.php and stages.php-->
 <div id=linearDiagram>
 	<div>
-		<span style="color:#666">Quick assessment</span>
+		<span style="color:#666"><?php write('#quick_assessment')?></span>
 			<img class=l1 stage=birds src=img/birds.png onclick=window.location="birds.php"            title="Quick assessment">
 
 		<!--vertbar--><span style="line-height:3em;border-left:1px solid #666;margin:0 1em 0 1em"></span>
-		<span style="color:#666"> GHG assessment </span>
+		<span style="color:#666"><?php write('#ghg_assessment')?> </span>
 			<img class=l1 stage=water src=img/water.png onclick=window.location="edit.php?level=Water" title="Water supply"> 
 			<img class=l1 stage=waste src=img/waste.png onclick=window.location="edit.php?level=Waste" title="Wastewater"> 
 
 		<!--vertbar--><span style="line-height:3em;border-left:1px solid #666;margin:0 1em 0 1em"></span>
-		<span style="color:#666"> Energy performance </span>
+		<span style="color:#666"><?php write('#energy_performance')?> </span>
 			<img class=l2 stage=waterAbs src=img/waterAbs.png onclick=window.location="edit.php?level=Water&sublevel=Abstraction"  title="Abstraction" >
 			<img class=l2 stage=waterTre src=img/waterTre.png onclick=window.location="edit.php?level=Water&sublevel=Treatment"    title="Treatment">
 			<img class=l2 stage=waterDis src=img/waterDis.png onclick=window.location="edit.php?level=Water&sublevel=Distribution" title="Distribution">

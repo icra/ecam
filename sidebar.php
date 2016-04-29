@@ -142,11 +142,11 @@
 		<table id=menu style="margin-top:1em">
 			<tr><th colspan=4 id=Name> <script>document.write(Global.General.Name)</script>
 			<tr>
-				<td align=center><button onclick=newSystem()>New</button>
+				<td align=center><button onclick=newSystem()><?php write('#menu_new')?></button>
 				<input type="file" id="loadfile" accept=".json" onchange="loadFile(event)" style="display:none">
-				<td align=center><button onclick=document.getElementById('loadfile').click()>Open</button>
-				<td align=center><button onclick=saveToFile()>Save</button>
-				<td align=center><button onclick=clearSystem()>Clear</button>
+				<td align=center><button onclick=document.getElementById('loadfile').click()><?php write('#menu_open')?></button>
+				<td align=center><button onclick=saveToFile()><?php write('#menu_save')?></button>
+				<td align=center><button onclick=clearSystem()><?php write('#menu_clear')?></button>
 		</table>
 
 		<!--USED MEMORY-->
@@ -160,15 +160,15 @@
 		<div style="padding:0;margin:0;background:#0aaff1;height:5px"></div>
 
 		<table style=width:95%>
-			<tr><th>General
+			<tr><th><?php write('#sidebar_general')?>
 			<tr><td><a href=index.php>Home</a>
-			<tr><td><a href=getStarted.php>General info</a>
-			<tr><td><a href=configuration.php>Configuration</a>
-			<tr><th>GHG assessment
-			<tr><td><a href=birds.php>Quick assessment</a>
+			<tr><td><a href=getStarted.php><?php write('#getStarted_general_info')?></a>
+			<tr><td><a href=configuration.php><?php write('#configuration')?></a>
+			<tr><th><?php write('#ghg_assessment')?>
+			<tr><td><a href=birds.php><?php write('#quick_assessment')?></a>
 			<tr><td><a class=water stage=water    href=edit.php?level=Water>Water supply</a>
 			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste>Wastewater</a>
-			<tr><th>Energy performance
+			<tr><th><?php write('#energy_performance')?>
 			<tr><td><a href=edit.php?level=Energy>Energy summary</a>
 			<tr><td>&emsp;<a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction>Water abstraction</a>
 			<tr><td>&emsp;&emsp;<a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment>Water treatment</a>
@@ -176,11 +176,11 @@
 			<tr><td>&emsp;<a class=waste stage=wasteCol href=edit.php?level=Waste&sublevel=Collection>Wastewater collection</a>
 			<tr><td>&emsp;&emsp;<a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment>Wastewater treatment</a>
 			<tr><td>&emsp;&emsp;&emsp;<a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge>Wastewater discharge</a>
-			<tr><th>Summary
-			<tr><td><a href=summary.php?type=input>All Inputs</a>
-			<tr><td><a href=summary.php?type=ccvv>All Calculated variables</a>
-			<tr><td><a href=summary.php?type=output>All Performance indicators</a>
-			<tr><th>Other
+			<tr><th><?php write('#summary')?>
+			<tr><td><a href=summary.php?type=input><?php write('#sidebar_all_inputs')?></a>
+			<tr><td><a href=summary.php?type=ccvv><?php write('#sidebar_all_ccvv')?></a>
+			<tr><td><a href=summary.php?type=output><?php write('#sidebar_all_kpis')?></a>
+			<tr><th><?php write('#sidebar_other')?>
 			<tr><td><a href=graph.php?g=graph1>Graphs (debug mode)</a>
 			<tr><td><a href=export.php>Export (debug mode)</a>
 			<tr><td><a href=todo.php>To do (debug mode)</a>
@@ -192,7 +192,7 @@
 <script>Sidebar.update()</script>
 
 <script>
-	//make the current page on the navbar be highlighted
+	//make the current page on the sidebar be highlighted
 	(function()
 	{
 		<?php
@@ -207,12 +207,11 @@
 			{
 				links[i].parentNode.classList.add('sidebar_selected');
 				links[i].style.color="black";
+				links[i].style.fontWeight="bold";
 				break;
 			}
 		}
 	})();
 </script>
 
-<style>
-#sidebar td.sidebar_selected {background:linear-gradient(#eee,#fefefe,#ddd);}
-</style>
+<style> #sidebar td.sidebar_selected {background:linear-gradient(#eee,#fefefe,#ddd);} </style>

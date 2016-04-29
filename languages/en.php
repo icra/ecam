@@ -2,15 +2,27 @@
 
 $Languages["en"]=array
 (
+	'#days' => 'days',
+	'#currency' => 'Currency',
+	'#next' => 'Next',
+	'#previous' => 'Previous',
+	'#quick_assessment' => 'Quick assessment',
+	'#ghg_assessment' => 'GHG assessment',
+	'#energy_performance' => 'Energy performance',
+	'#summary' => 'Summary',
+
 	'#index_first_time_using' => 'First time using ECAM Web Tool? Click on "New" or learn more in ',
 	'#index_web_tool' => 'Web tool',
 	'#index_description' => 'This tool evaluates utilities\'s operations in terms of GHG emissions and energy usage based on their own data.<br>ECAM is part of the knowledge platform provided by the WaCCliM project. This tool is free and open source.',
 	'#index_chrome_warning' => 'Please use Google Chrome browser.',
 	'#index_latest_update' => 'Latest update',
+
 	'#footer_about' => 'About',
 	'#navbar_title' => 'Energy performance and Carbon emissions Assessment and Monitoring Tool',
+
 	'#menu_new' => 'New',
 	'#menu_open' => 'Open',
+	'#menu_save' => 'Save',
 	'#menu_save_as' => 'Save as',
 	'#menu_clear' => 'Clear',
 	'#menu_next' => 'Next',
@@ -30,7 +42,6 @@ $Languages["en"]=array
 		This software was written entirely using the <a href=http://www.vim.org>Vim</a> editor, inside a <a href=https://www.cygwin.com/>Cygwin</a> terminal. <br>
 		Tool coded in HTML/PHP/CSS/Javascript languages. <br>
 	',
-
 	'#about_graphs_lib' => 'Graphs library used',
 	'#about_json_viewer' => 'JSON viewer used',
 	'#about_license' => 'License',
@@ -58,20 +69,32 @@ $Languages["en"]=array
 	'#getStarted_table_end' => 'Assessment Period End',
 	'#getStarted_table_period' => 'Assessment Period',
 	'#getStarted_table_comments' => 'Comments',
+	'#getStarted_previous' => 'Previous',
+	'#getStarted_next' => 'Next',
+	'#getStarted_max_200' => 'Max 200 characters',
+
+	'#configuration' => 'Configuration',
+	'#configuration_activate_all' => 'Activate all',
+	'#configuration_subtitle' => 'Click on the left table to activate stages. The table on the right contains additional information about your system',
+	'#configuration_ghg_assessment' => 'GHG assessment',
+	'#configuration_energy_performance' => 'Energy performance',
+	'#configuration_conversion_factor' => 'Conversion factor for grid electricity',
+	'#configuration_enter_custom_value' => 'enter custom value or select country',
+	'#configuration_custom' => 'CUSTOM',
+	'#configuration_current_value' => 'Current value',
+	'#configuration_new_currency' => 'Write new currency (3 letters max)',
+	'#configuration_additional_questions' => 'Additional questions',
+	'#configuration_active_stages_error' => 'There are no active stages. Click on the left table to activate them.',
+
+	'#sidebar_general' => 'General',
+	'#sidebar_other' => 'Other',
+	'#sidebar_all_inputs' => 'All inputs',
+	'#sidebar_all_ccvv' => 'All Calculated variables',
+	'#sidebar_all_kpis' => 'All Performance indicators',
+
 	/** I'm here **/
 	'#new_description' => 'new description',
+
 );
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-

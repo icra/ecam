@@ -11,6 +11,7 @@ $Languages["es"] = array(
 	'#navbar_title' => 'Herramienta de asesoramiento y monitorización de rendimiento energético y emisiones de Carbono',
 	'#menu_new' => 'Nuevo',
 	'#menu_open' => 'Abrir',
+	'#menu_save' => 'Guardar',
 	'#menu_save_as' => 'Guardar como',
 	'#menu_clear' => 'Borrar todo',
 	'#menu_next' => 'Siguiente',

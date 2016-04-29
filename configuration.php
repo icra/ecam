@@ -281,12 +281,12 @@
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>Configuration</h1>
+<!--TITLE--><h1><?php write('#configuration')?></h1>
 
 <!--activate all debug button
 -->
 <div style="margin:0.5em 0 0.5em 0">
-	<button class=button onclick="activateAllStages()">Activate all</button>
+	<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
 	<script>
 		function activateAllStages()
 		{
@@ -306,7 +306,7 @@
 	</script>
 </div>
 
-<!--SUBTITLE--><h4>Click on the left table to activate stages. The table on the right contains additional information about your system</h4>
+<!--SUBTITLE--><h4><?php write('#configuration_subtitle')?></h4>
 
 <!--container-->
 <div>
@@ -319,7 +319,7 @@
 			#selectStage td[rowspan='3']{text-align:center;}
 			#selectStage label{cursor:pointer;display:block;min-height:100%;padding:0.5em}
 		</style>
-		<tr><th>GHG assessment <th>Energy performance
+		<tr><th><?php write('#configuration_ghg_assessment')?><th><?php write('#configuration_energy_performance')?>
 			<?php 
 				function printL1stage($alias,$name)
 				{
@@ -356,29 +356,29 @@
 		<style> fieldset{margin:0 0 1.5em 0;padding:0.8em;border:1px solid #aaa} </style>
 		<!--conv_kwh_co2-->
 		<fieldset>
-			<legend> Conversion factor for grid electricity (<a href=variable.php?id=conv_kwh_co2>info</a>) </legend>
+			<legend><?php write('#configuration_conversion_factor')?> (<a href=variable.php?id=conv_kwh_co2>info</a>) </legend>
 			<table><tr><th>
 				<select id=countryUW1 onchange=updateUW1(this.value)>
-					<option value=0>--enter custom value or select country--
+					<option value=0>--<?php write('#configuration_enter_custom_value')?>--
 					<option value=0.237721212>Peru
 					<option value=0.626742612>Thailand
 					<option value=0.452483345>Mexico
-					<option value=custom>--CUSTOM--
+					<option value=custom>--<?php write('#configuration_custom')?>--
 				</select>
-				<td>Current value <input style=width:80px id=uw1 value=0 onchange=updateUW1(this.value)> kg CO<sub>2</sub>/kWh
+				<td><?php write('#configuration_current_value')?> <input style=width:80px id=uw1 value=0 onchange=updateUW1(this.value)> kg CO<sub>2</sub>/kWh
 			</table>
 		</fieldset>
 
 		<!--currency: 3 letters-->
 		<fieldset>
-			<legend>Currency: <span id=currency></span></legend>
-			Write new currency (3 letters max):
+			<legend><?php write('#currency')?>: <span id=currency></span></legend>
+			<?php write('#configuration_new_currency')?>:
 			<input size=3 maxlength=3 placeholder="new" onchange=updateField(Global.General,"Currency",this.value)>
 		</fieldset>
 
 		<!--questions-->
 		<fieldset>
-			<legend>Additional questions (<a href=questions.php>info</a>)</legend>
+			<legend><?php write('#configuration_additional_questions')?> (<a href=questions.php>info</a>)</legend>
 			<table id=questions>
 				<style>
 					#questions td{border-top:none;border-left:none;border-right:none}
@@ -404,7 +404,7 @@
 
 <!--PREV & NEXT BUTTONS-->
 <div style=margin-top:4em> 
-	<button class="button prev" onclick="event.stopPropagation();window.location='getStarted.php'">Previous</button> 
+	<button class="button prev" onclick="event.stopPropagation();window.location='getStarted.php'"><?php write('#previous')?></button> 
 	<script>
 		//find first available stage to start entering data
 		function nextPage()
@@ -412,13 +412,13 @@
 			event.stopPropagation();
 			if(Global.Configuration['Active Stages'].water==0 && Global.Configuration['Active Stages'].waste==0)
 			{
-				alert("There are no active stages. Click on the left table to activate them.");
+				alert("<?php write('#configuration_active_stages_error')?>");
 				return;
 			}
 			window.location="birds.php"; return;
 		}
 	</script>
-	<button class="button next" onclick=nextPage()>Next</button>
+	<button class="button next" onclick=nextPage()><?php write('#next')?></button>
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>

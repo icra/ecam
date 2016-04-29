@@ -22,7 +22,7 @@
 			switch(input)
 			{
 				case "textarea":
-					ret+="<textarea placeholder='Max 200 characters' rows=5 cols=50 maxlength=200 field='"+field+"' "+onchange+">"+Global.General[field]+"</textarea>";
+					ret+="<textarea placeholder='<?php write('#getStarted_max_200')?>' rows=5 cols=50 maxlength=200 field='"+field+"' "+onchange+">"+Global.General[field]+"</textarea>";
 					break;
 				case "input":
 					ret+="<input maxlength=25 field='"+field+"' type='"+type+"' value='"+Global.General[field]+"' "+onchange+">";
@@ -45,7 +45,7 @@
 					createLocationSelection()+
 					tableRow("<?php write('#getStarted_table_start')?>","Assessment Period Start",'input','date')+
 					tableRow("<?php write('#getStarted_table_end')?>","Assessment Period End",'input','date')+
-					"<tr><th><?php write('#getStarted_table_period')?><td>"+Global.General.Days()+" days (<a href=variable.php?id=Days>info</a>)"+
+					"<tr><th><?php write('#getStarted_table_period')?><td>"+Global.General.Days()+" <?php write('#days')?>(<a href=variable.php?id=Days>info</a>)"+
 					tableRow("<?php write('#getStarted_table_comments')?>","Comments",'textarea','date')
 			})();
 		}
@@ -85,8 +85,8 @@
 <!--FORM--><table id=form style="text-align:left;"></table>
 <!--PREV&NEXT-->
 <div style=margin:1em>
-	<button class="button prev" onclick="event.stopPropagation();window.location='index.php'">PREVIOUS</button> 
-	<button class="button next" onclick="event.stopPropagation();window.location='configuration.php'">NEXT</button>
+	<button class="button prev" onclick="event.stopPropagation();window.location='index.php'"><?php write('#getStarted_previous')?></button> 
+	<button class="button next" onclick="event.stopPropagation();window.location='configuration.php'"><?php write('#getStarted_next')?></button>
 </div>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

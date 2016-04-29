@@ -7,6 +7,7 @@
 		right:5%;
 		top:20px;
 		cursor:pointer;
+		z-index:99;
 	}
 
 	/**select element*/
@@ -59,7 +60,7 @@
 		<!--spanish-->
 		<div lang=es>
 			<img src="img/flags/es.png">
-			es	
+			es (work in progress)
 		</div>
 	</div> 
 </div>

@@ -14,7 +14,7 @@ function write($id)
 	global $lang;
 
 	//find text or display [not found]
-	$text = isset($Languages[$lang][$id]) ? $Languages[$lang][$id] : "[ $id not found for lang '$lang' ]";
+	$text = isset($Languages[$lang][$id]) ? $Languages[$lang][$id] : "[ $id not found for lang $lang ]";
 
 	echo $text;
 }
