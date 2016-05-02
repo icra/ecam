@@ -30,11 +30,11 @@
 		<?php
 			if($level=="Waste")
 			{?>
-				table#inputs th:not(.tableHeader) {background:#bf5050}
-				#inputs a,#inputs a:visited{color:#bf5050}
-				#outputs a,#outputs a:visited{color:#bf5050}
-				#otherOutputs a,#otherOutputs a:visited{color:#bf5050}
-				#nrgOutputs a,#nrgOutputs a:visited{color:#bf5050}
+				table#inputs th:not(.tableHeader) {background:#d71d24}
+				#inputs a,#inputs a:visited{color:#d71d24}
+				#outputs a,#outputs a:visited{color:#d71d24}
+				#otherOutputs a,#otherOutputs a:visited{color:#d71d24}
+				#nrgOutputs a,#nrgOutputs a:visited{color:#d71d24}
 			<?php }
 		?>
 		th.tableHeader
@@ -495,7 +495,7 @@
 				newCell.innerHTML=(function()
 				{
 					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
-					var color = field.search(/^ww/)==0 ? "#bf5050" : "";
+					var color = field.search(/^ww/)==0 ? "#d71d24" : "";
 					var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";
 				})();
@@ -584,7 +584,7 @@
 				newCell.innerHTML=(function()
 				{
 					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
-					var color = field.search(/^ww/)==0 ? "#bf5050" : "";
+					var color = field.search(/^ww/)==0 ? "#d71d24" : "";
 					var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";
 				})();
@@ -703,8 +703,9 @@
 		//Set a navigable title for page
 		switch($level)
 		{
-			case "Water":  $titleLevel="Water supply";break;
-			case "Waste":  $titleLevel="Wastewater";break;
+			case "Water":case "Waste":  
+				$titleLevel=$Languages[$lang]["#$level"];break;
+
 			case "Energy": $titleLevel="Energy summary";break;
 			default:	   $titleLevel=$level;break;
 		}
@@ -712,14 +713,14 @@
 		{
 			switch($sublevel)
 			{
-				default:	   $titleSublevel=$sublevel;break;
+				default:	   $titleSublevel=$Languages[$lang]["#$sublevel"];break;
 			}
 		}
 		/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
-		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (Energy performance)</span>" : "<span style=color:black>$titleLevel</span>";
+		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (".$Languages[$lang]['#energy_performance'].")</span>" : "<span style=color:black>$titleLevel</span>";
 	?>
 	<style> h1 {text-align:left;padding-left:20em;line-height:2.1em} </style>
-	<h1><a href=stages.php>Input data</a> <?php echo "$sep $title"?>
+	<h1><a href=stages.php><?php write('#edit_input_data')?></a> <?php echo "$sep $title"?>
 
 		<!--go to level 3 button-->
 		<?php
@@ -733,7 +734,7 @@
 							style='background:$color;font-size:12px;vertical-align:middle'
 							onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
 								<img src=img/substages.png style='width:40px;margin-right:1em'>
-								Substages
+							    ".$Languages[$lang]['#substages']."	
 						</button> 
 						<span style=font-size:12px;color:#666>
 							&rarr; Divided in 
@@ -761,10 +762,10 @@
 		">
 		<tr><th colspan=5 class=tableHeader>INPUTS
 		<tr>
-			<th>Description
-			<th>Current value
-			<th>Unit
-			<th>Data quality
+			<th><?php write('#edit_description')?>
+			<th><?php write('#edit_current_value')?>
+			<th><?php write('#edit_unit')?>
+			<th><?php write('#edit_data_quality')?>
 	</table>
 	<!--OUTPUTS-->
 	<div class=inline style="max-width:47%;margin-left:1em">
@@ -772,25 +773,26 @@
 		<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:1em;
 				<?php if($sublevel || $level=="Energy") echo "display:none;"; ?>
 			">
-			<tr><th colspan=7 class=tableHeader>OUTPUTS — Greenhouse gas emissions |
+			<tr><th colspan=7 class=tableHeader>OUTPUTS — <?php write('#edit_ghg_emissions')?> |
+
 			<!--assessment info-->
 			<span style="text-align:left;font-size:11px">
-				<a href=variable.php?id=Days >Assessment period</a>: <script>document.write(format(Global.General.Days()))</script> days
-				(<script>document.write(format(Global.General.Years()))</script> years)
+				<a href=variable.php?id=Days ><?php write('#assessment_period')?></a>: <script>document.write(format(Global.General.Days()))</script> <?php write('#days')?>
+				(<script>document.write(format(Global.General.Years()))</script> <?php write('#years')?>)
 				|
-				<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity">Conversion factor</a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
+				<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity"><?php write('#conversion_factor')?></a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
 			</span>
 			<tr>
-				<th>Origin
-				<th style=width:20%>Value per year (kgCO<sub>2</sub>eq/year)
-				<th style=width:20%>Per inhab (kgCO<sub>2</sub>eq/year/inhab)
-				<th style=width:20%>Per serv. pop. (kgCO<sub>2</sub>eq/year/serv.pop)
-				<th style=width:20%>Per water volume (kgCO<sub>2</sub>eq/m<sup>3</sup>)
+				<th><?php write('#edit_origin')?>
+				<th style=width:20%><?php write('#edit_value_per_year')?> (kgCO<sub>2</sub>eq/year)
+				<th style=width:20%><?php write('#edit_per_inhab')?> (kgCO<sub>2</sub>eq/year/inhab)
+				<th style=width:20%><?php write('#edit_per_serv_pop')?> (kgCO<sub>2</sub>eq/year/serv.pop)
+				<th style=width:20%><?php write('#edit_per_water_volume')?> (kgCO<sub>2</sub>eq/m<sup>3</sup>)
 				<?php
 					if($level=="Waste" && !$sublevel)
 					{
 						?>
-							<th style=width:20%>Per BOD removed (kgCO<sub>2</sub>eq/kg)
+							<th style=width:20%><?php write('#edit_per_bod_removed')?> (kgCO<sub>2</sub>eq/kg)
 						<?php
 					}
 				?>
@@ -798,22 +800,28 @@
 
 		<!--energy performance-->
 		<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
-			<tr><th colspan=4 class=tableHeader>OUTPUTS — Energy performance
+			<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#energy_performance')?>
 			<tr>
-				<th title=Performance style=cursor:help>Benchmark
-				<th>Description
-				<th>Current value
-				<th>Unit
+				<th title=Performance style=cursor:help><?php write('#edit_benchmark')?>
+				<th><?php write('#edit_description')?>
+				<th><?php write('#edit_current_value')?>
+				<th><?php write('#edit_unit')?>
 		</table>
 
 		<!--other-->
 		<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:1em">
 			<tr><th colspan=4 class=tableHeader>OUTPUTS —
-				<?php if($sublevel) echo "Context "; else echo "Service level "; ?> indicators
+				<?php 
+					if($sublevel) 
+						echo "Context "; 
+					else 
+						echo "Service level ";
+					write('#edit_indicators');
+				?>
 			<tr>
-				<th>Description
-				<th>Current value
-				<th>Unit
+				<th><?php write('#edit_description')?>
+				<th><?php write('#edit_current_value')?>
+				<th><?php write('#edit_unit')?>
 		</table>
 	</div>
 </div>

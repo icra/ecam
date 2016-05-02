@@ -250,23 +250,6 @@
 		}
 	</script>
 	<script>
-		function stageName(stage)
-		{
-			var r; //returned string
-			switch(stage)
-			{
-				case "water":	 r="<b>L1</b> Water Supply";break;
-				case "waterAbs": r="<b>L2</b> Water Abstraction";break;
-				case "waterTre": r="<b>L2</b> Water Treatment";break;
-				case "waterDis": r="<b>L2</b> Water Distribution";break;
-				case "waste":	 r="<b>L1</b> Wastewater";break;
-				case "wasteCol": r="<b>L2</b> Wastewater Collection";break;
-				case "wasteTre": r="<b>L2</b> Wastewater Treatment";break;
-				case "wasteDis": r="<b>L2</b> Wastewater Discharge";break;
-				default: r=stage;break;
-			}
-			return r;
-		}
 		function init()
 		{
 			redisplayUW1menu();
@@ -283,73 +266,75 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1><?php write('#configuration')?></h1>
 
-<!--activate all debug button
--->
-<div style="margin:0.5em 0 0.5em 0">
-	<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
-	<script>
-		function activateAllStages()
-		{
-			event.stopPropagation();
-			['waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
-			{
-				/**set checked*/document.getElementById(stage).checked=true;
-				Configuration.activate(stage);
-			});
-			Global.General.conv_kwh_co2=1;
-			for(var question in Global.Configuration['Yes/No'])
-			{
-				Global.Configuration['Yes/No'][question]=1;
-			}
-			init();
-		}
-	</script>
-</div>
-
 <!--SUBTITLE--><h4><?php write('#configuration_subtitle')?></h4>
 
 <!--container-->
 <div>
 	<!--left: STAGES-->
-	<table id=selectStage class=inline style="margin-left:auto">
-		<style>
-			#selectStage img{width:40px;vertical-align:middle}
-			#selectStage th{width:220px;}
-			#selectStage td{text-align:left;padding:0}
-			#selectStage td[rowspan='3']{text-align:center;}
-			#selectStage label{cursor:pointer;display:block;min-height:100%;padding:0.5em}
-		</style>
-		<tr><th><?php write('#configuration_ghg_assessment')?><th><?php write('#configuration_energy_performance')?>
-			<?php 
-				function printL1stage($alias,$name)
-				{
-					echo "<tr><td rowspan=3 style=text-align:center> 
-						<label>
-							<input type=checkbox id=$alias onchange=Configuration.activate(this.id)> 
-							<img src=img/$alias.png> $name
-						</label>";
-				}
-				function printL2stage($class,$alias,$name,$newRow)
-				{
-					if($newRow){echo "<tr>";}
-					echo "<td>
-						<label>
-							<input type=checkbox id=$alias class=$class onchange=Configuration.activate(this.id)> 
-							<img src=img/$alias.png> $name
-						</label>";
-				}
+	<div class=inline style=margin-left:auto>
+		<table id=selectStage>
+			<style>
+				#selectStage img{width:40px;vertical-align:middle}
+				#selectStage th{width:220px;}
+				#selectStage td{text-align:left;padding:0}
+				#selectStage td[rowspan='3']{text-align:center;}
+				#selectStage label{cursor:pointer;display:block;min-height:100%;padding:0.5em}
+			</style>
+			<tr><th><?php write('#ghg_assessment')?><th><?php write('#energy_performance')?>
+				<?php 
+					function printL1stage($alias,$name)
+					{
+						echo "<tr><td rowspan=3 style=text-align:center> 
+							<label>
+								<input type=checkbox id=$alias onchange=Configuration.activate(this.id)> 
+								<img src=img/$alias.png> $name
+							</label>";
+					}
+					function printL2stage($class,$alias,$name,$newRow)
+					{
+						if($newRow){echo "<tr>";}
+						echo "<td>
+							<label>
+								<input type=checkbox id=$alias class=$class onchange=Configuration.activate(this.id)> 
+								<img src=img/$alias.png> $name
+							</label>";
+					}
 
-				printL1stage("water","Water supply");
-				printL2stage("water","waterAbs","Abstraction", false);
-				printL2stage("water","waterTre","Treatment",   true);
-				printL2stage("water","waterDis","Distribution",true);
+					printL1stage("water",$Languages[$lang]['#Water']);
+					printL2stage("water","waterAbs",$Languages[$lang]["#Abstraction"], false);
+					printL2stage("water","waterTre",$Languages[$lang]["#Treatment"],   true);
+					printL2stage("water","waterDis",$Languages[$lang]["#Distribution"],true);
 
-				printL1stage('waste',"Wastewater");
-				printL2stage("waste","wasteCol","Collection",false);
-				printL2stage("waste","wasteTre","Treatment", true);
-				printL2stage("waste","wasteDis","Discharge", true);
-			?>
-	</table>
+					printL1stage("waste",$Languages[$lang]['#Waste']);
+					printL2stage("waste","wasteCol",$Languages[$lang]["#Collection"],false);
+					printL2stage("waste","wasteTre",$Languages[$lang]["#Treatment"], true);
+					printL2stage("waste","wasteDis",$Languages[$lang]["#Discharge"], true);
+				?>
+		</table>
+
+		<!--activate all debug button
+		-->
+		<div style="margin:0.5em 0 0.5em 0">
+			<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
+			<script>
+				function activateAllStages()
+				{
+					event.stopPropagation();
+					['waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
+					{
+						/**set checked*/document.getElementById(stage).checked=true;
+						Configuration.activate(stage);
+					});
+					Global.General.conv_kwh_co2=1;
+					for(var question in Global.Configuration['Yes/No'])
+					{
+						Global.Configuration['Yes/No'][question]=1;
+					}
+					init();
+				}
+			</script>
+		</div>
+	</div>
 
 	<!--right: ADDITIONAL INFO-->
 	<div class=inline style="width:50%;text-align:left;margin-left:1em">
@@ -388,12 +373,12 @@
 
 		<!--fuel-->
 		<fieldset id=fuel style=display:none>
-			<legend>Fuel options (<a href=fuelInfo.php>info</a>)</legend>
+			<legend><?php write('#configuration_fuel_options')?> (<a href=fuelInfo.php>info</a>)</legend>
 			<table id=fuelSelection class=inline>
 				<style>
 					#fuelSelection tr.inactive {background:#ccc;color:#999}
 				</style>
-				<tr><th>Stage<th>Selected Fuel type
+				<tr><th><?php write('#configuration_stage')?><th><?php write('#configuration_selected_fuel')?>
 				<tr stage=water>   <td>GHG assessment - Water supply (engines)
 				<tr stage=waste>   <td>GHG assessment - Wastewater (engines)
 				<tr stage=wasteTre><td>Energy performance - Wastewater treatment (vehicles)

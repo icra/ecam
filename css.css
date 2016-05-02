@@ -7,7 +7,7 @@ body{font-family:'Open Sans','Helvetica',sans-serif;overflow-y:scroll;font-size:
 button{padding:0.3em;height:2.3em}
 h1,h2,h3{padding:0.6em;color:#00aff1;font-weight:normal}
 h1{font-size:18px}
-h4{margin:1em;font-size:14px;color:#58595b}
+h4{font-weight:normal;margin:1.2em;font-size:15px;color:#58595b}
 legend{color:#58595b;font-size:16px}
 table{border-collapse:collapse;}
 
@@ -22,7 +22,7 @@ hr{display:block;height:1px;border:0;margin:0;padding:0;}
 
 /*highlight inputs when mouse goes over a row that has a formula*/
 tr.isCV{background:#f6f6f6}
-tr{transition:all 0.5s}
+tr{transition:all 0.3s}
 tr[hl=yes]{background:#a7bfaf;color:white}
 tr[hl=no]{background:default}
 tr[hl_output=yes]{background:#e1cfc4;color:white}
@@ -31,7 +31,7 @@ tr[hl_output=no]{background:default}
 span.estimated{color:red;font-size:16px;cursor:help}
 
 /*ECAM blue*/.blue{color:#00AFF1;}
-/*ECAM red*/.red{color:#bf5050;}
+/*ECAM red*/.red{color:#d71d24;}
 
 /*BUTTONS*/
 	.button

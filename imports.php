@@ -1,6 +1,7 @@
 <!--utf8 and CSS-->
 <meta charset="utf-8">
 <link rel="stylesheet" href="css.css">
+<link rel="icon" href="img/favicon.ico" type="image/x-icon">
 
 <!--things for mobiles-->
 <meta name="description" content="">

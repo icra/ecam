@@ -4,7 +4,7 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1><?php write('#about_about')?></h1>
+<!--TITLE--><h1><?php write('#about')?></h1>
 
 <div style=max-width:40%;text-align:justify;line-height:2em>
 	<?php write('#about_credits')?>

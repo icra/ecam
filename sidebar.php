@@ -142,11 +142,11 @@
 		<table id=menu style="margin-top:1em">
 			<tr><th colspan=4 id=Name> <script>document.write(Global.General.Name)</script>
 			<tr>
-				<td align=center><button onclick=newSystem()><?php write('#menu_new')?></button>
+				<td align=center><button onclick=newSystem()><?php write('#new')?></button>
 				<input type="file" id="loadfile" accept=".json" onchange="loadFile(event)" style="display:none">
-				<td align=center><button onclick=document.getElementById('loadfile').click()><?php write('#menu_open')?></button>
-				<td align=center><button onclick=saveToFile()><?php write('#menu_save')?></button>
-				<td align=center><button onclick=clearSystem()><?php write('#menu_clear')?></button>
+				<td align=center><button onclick=document.getElementById('loadfile').click()><?php write('#open')?></button>
+				<td align=center><button onclick=saveToFile()><?php write('#save')?></button>
+				<td align=center><button onclick=clearSystem()><?php write('#clear')?></button>
 		</table>
 
 		<!--USED MEMORY-->
@@ -161,7 +161,7 @@
 
 		<table style=width:95%>
 			<tr><th><?php write('#sidebar_general')?>
-			<tr><td><a href=index.php>Home</a>
+			<tr><td><a href=index.php><?php write('#sidebar_home')?></a>
 			<tr><td><a href=getStarted.php><?php write('#getStarted_general_info')?></a>
 			<tr><td><a href=configuration.php><?php write('#configuration')?></a>
 			<tr><th><?php write('#ghg_assessment')?>

@@ -19,7 +19,7 @@
 		top:100%;
 		width:200px;
 		background:#eeece4;
-		transition:all 0.7s;
+		transition:all 0.4s;
 		box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
 	}
 

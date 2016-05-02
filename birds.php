@@ -187,16 +187,20 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
-<!--TITLE--><h1>Quick assesment of <script>document.write(Global.General.Name)</script></h1>
+<!--TITLE--><h1><?php write('#birds_quick_assessment_of')?> [<script>document.write(Global.General.Name)</script>]</h1>
 </center>
 
 <!--inputs table-->
 <div class=inline style="margin-left:10px;width:30%;">
-	<div>Assessment period: <script>document.write(Global.General.Days())</script> days</div> 
-	<div>Conversion factor: <script>document.write(format(Global.General.conv_kwh_co2))</script> kg CO<sub>2</sub>/kWh</div> 
-	<div style="color:#666;font-size:16px;margin:0.5em 0 0.5em 0">INPUTS - Enter typical values from your daily operation</div>
+	<!--assessment period-->
+	<div><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a>: <script>document.write(Global.General.Days())</script> <?php write('#days')?></div> 
+	<!--conversion factor-->
+	<div><a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kg CO<sub>2</sub>/kWh</div> 
+	<!--description-->
+	<div style="color:#666;font-size:16px;margin:0.5em 0 0.5em 0">INPUTS - <?php write('#birds_enter_typical')?></div>
 	<table id=inputs>
-		<tr><th colspan=3>Water supply
+		<tr><th colspan=3>
+				<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Water')?>
 			<tr stage=water class=hidden><td>Resident population                      <td><input id='ws_resi_pop' onchange="BEV.updateField(this)"> <td>People
 			<tr stage=water class=hidden><td>Serviced population                      <td><input id='ws_serv_pop' onchange="BEV.updateField(this)"> <td>People
 			<tr stage=water class=hidden><td>Annual average authorized consumption    <td><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>m3/year
@@ -205,8 +209,9 @@
 			<tr stage=water class=hidden><td>Monthly running costs                    <td><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
 			<tr stage=water class=hidden><td>Monthly volume of fuel consumed          <td><input id='ws_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
 			<tr stage=water class=hidden><td>Percentage of non revenue water          <td><input id='ws_non_revw' onchange="BEV.updateField(this)"> <td>%
-			<tr indic=water class=hidden><td colspan=3> Stage not active
-		<tr><th colspan=3 style=background:#bf5050>Wastewater
+			<tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
+		<tr><th colspan=3 style=background:#d71d24>
+				<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
 			<tr stage=waste class=hidden><td>Resident population                      <td><input id='ww_resi_pop' onchange="BEV.updateField(this)"> <td>People
 			<tr stage=waste class=hidden><td>Population connected                     <td><input id='ww_conn_pop' onchange="BEV.updateField(this)"> <td>People
 			<tr stage=waste class=hidden>
@@ -227,7 +232,7 @@
 				<td> <input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
 			<tr stage=waste class=hidden><td>Monthly volume of fuel consumed          <td><input id='ww_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
 			<tr stage=waste class=hidden><td>Annual protein consumption per capita    <td><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/year
-			<tr indic=waste class=hidden><td colspan=3> Stage not active
+			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 	</table>
 </div>
 
