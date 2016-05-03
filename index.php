@@ -30,7 +30,7 @@
 	<!--FIRST TIME?-->
 	<h4 style=font-size:18px;color:#58595b>
 		<?php write('#index_first_time_using')?>
-		<a href=about.php>About</a>.
+		<a href=about.php><?php write('#about')?></a>.
 	</h4>
 
 	<!--MENU--><div style=padding:1em><?php include'menu.php'?></div>

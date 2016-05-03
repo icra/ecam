@@ -40,18 +40,19 @@ $Languages["es"] = array
 	'#index_latest_update' => 'Última actualización',
 
 	'#about_credits' => '
-		Developed by <a href=http://icra.cat>ICRA</a> in cooperation with <a href=http://www.iwa-network.org/>IWA</a>,
-		GIZ under the WaCCliM project and Cobalt Water.<br>
-		The tool was formerly developed in June 2015 as an EXCEL tool by the consortium Global Water Commons (LNEC and University of Valencia) in collaboration with Cobalt Water. 
-		We want to acknowledge how extremely valuable The Excel tool has been to enable the development of this web-tool.
-
+		Desarrollado por <a href=http://icra.cat/>ICRA</a> en colaboración con <a href=http://www.iwa-network.org/>IWA</a>,
+		GIZ, en el proyecto WaCClim, y Cobalt Water.<br>
+		La herramienta fue desarrollada en Junio de 2015 en EXCEL por el consorcio Global Water Commons (LNEC i la Universidad de Valencia) 
+		en colaboración con Cobalt Water.
+		Queremos reconocer la utilidad de la herramienta EXCEL para permitir el desarrollo de esta herramienta web.
 		<br><br>
 		
-		The source code of this project is in <a href=https://github.com/holalluis/ecam>GitHub</a>.
-		There you can download the tool and have it offline. <br>
-		You will need a PHP localhost (such as <a href=https://www.apachefriends.org/index.html>XAMPP</a>).<br>
-		This software was written entirely using the <a href=http://www.vim.org>Vim</a> editor, inside a <a href=https://www.cygwin.com/>Cygwin</a> terminal. <br>
-		Tool coded in HTML/PHP/CSS/Javascript languages. <br>
+		El código fuente de este proyecto esta en <a href=https://github.com/holalluis/ecam>GitHub</a>.
+		Allí puede descargarlo y tenerlo offline.<br>
+		Necesitarà un host PHP local, como <a href=https://www.apachefriends.org/index.html>XAMPP</a>.<br>
+		Este software fue escrito completament usando el editor <a href=http://www.vim.org>Vim</a>, 
+		dentro de un terminal <a href=https://www.cygwin.com/>Cygwin</a>. <br>
+		Creado en los lenguajes HTML/PHP/CSS/Javascript. <br>
 	',
 
 	'#about_graphs_lib' => 'Biblioteca para gráficos utilizada',

@@ -2,7 +2,7 @@
 
 $Languages["en"]=array
 (
-	'#about' => 'Acerca de',
+	'#about' => 'About',
 	'#assessment_period' => 'Assessment period',
 	'#conversion_factor' => 'Conversion factor',
 	'#currency' => 'Currency',
