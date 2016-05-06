@@ -14,6 +14,7 @@ $Languages["en"]=array
 	'#quick_assessment' => 'Quick assessment',
 	'#summary' => 'Summary',
 	'#years' => 'years',
+	'#substage' => 'Substage',
 	'#substages' => 'Substages',
 
 	'#Water' => 'Water supply',
@@ -125,9 +126,47 @@ $Languages["en"]=array
 	'#edit_per_water_volume' => 'Per water volume',
 	'#edit_per_bod_removed' => 'Per BOD removed',
 	'#edit_indicators' => 'indicators',
+	'#edit_divided_in' => 'Divided in',
+
+	'#variable_detailed_info' => 'Detailed info',
+	'#variable_stage' => 'Stage',
+	'#variable_go_back_to' => 'Go back to',
+	'#variable_explanation' => 'Description',
+	'#variable_type' => 'Type',
+	'#variable_advanced' => 'Advanced',
+	'#variable_inputs_involved' => 'Inputs involved',
+	'#variable_value' => 'Value',
+	'#variable_magnitude' => 'Magnitude',
+	'#variable_unit' => 'Unidad',
+	'#variable_is_used_to_calculate' => 'Is used to calculate',
+	'#variable_nothing' => 'Nothing',
+	'#variable_warning' => 'Warning',
+	'#variable_this_equation_contains_estimated_data' => 'This equation contains estimated data in at least one input',
+	'#variable_this_input_is_considered_estimated' => 'This input is considered estimated data by the user',
+
+	'#stages_this_is_an_overview_of_your_system' => 'This is an overview of the active stages of your system. Click on a stage to input data. To activate more stages go to',
+	'#stages_system_assessment_overview' => 'System assessment overview',
+	'#stages_stage' => 'Stage',
+	'#stages_num_of_substages' => 'Nº of substages',
+	'#stages_type_of_assessment' => 'Type of assessment',
+
+	'#level3_split_this_stage' => 'Split this stage in substages',
+	'#level3_new_substage' => 'New substage',
+	'#level3_results_kpis' => 'RESULTS - Key performance indicators',
+	'#level3_code' => 'Code',
+	'#level3_description' => 'Description',
+	'#level3_TOTAL' => 'TOTAL',
+	'#level3_unit' => 'Unit',
+	'#level3_new_name' => 'New name for the substage',
+	'#level3_click_to_modify_the_name' => 'Click here to modify the name',
+	'#level3_advanced' => 'advanced',
+	'#level3_error_memory_full' => 'Substage not added: memory is full',
+	'#level3_error_cannot_delete_last_substage' => 'You can not delete the last substage',
+
+	'#assessment_type' => 'Type of assessment',
+	'#assessment_simple' => 'Simple',
+	'#assessment_advanced' => 'Advanced',
 
 	/** I'm here **/
 	'#new_description' => 'new description',
-);
-
-?>
+)?>

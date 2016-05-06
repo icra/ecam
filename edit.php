@@ -737,12 +737,15 @@
 							    ".$Languages[$lang]['#substages']."	
 						</button> 
 						<span style=font-size:12px;color:#666>
-							&rarr; Divided in 
+							&rarr; ";
+				write('#edit_divided_in');
+				echo"
 							<script>
 								var length = Substages['$level']['$sublevel'].length;
 								document.write(length)
-							</script>
-							substage/s
+							</script> ";
+				write('#substage');
+				echo "/s
 						</span>
 					</span>";
 			}

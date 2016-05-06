@@ -56,19 +56,19 @@
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
-			newCell.innerHTML="Stage"
+			newCell.innerHTML="<?php write('#variable_stage')?>"
 			newCell=newRow.insertCell(-1)
 			if(sublevel!=0)
 			{
 				var url = Level3.isInList(id) ? "level3.php" : "edit.php";
-				newCell.innerHTML+="Go back to <a href="+url+"?level="+level+"&sublevel="+sublevel+">"+levelAlias+" "+sublevel+"</a>"
+				newCell.innerHTML+="<?php write('#variable_go_back_to')?> <a href="+url+"?level="+level+"&sublevel="+sublevel+">"+levelAlias+" "+sublevel+"</a>"
 			}
-			else newCell.innerHTML="Go back to <a href=edit.php?level="+level+">"+levelAlias+"</a>"
+			else newCell.innerHTML="<?php write('#variable_go_back_to')?> <a href=edit.php?level="+level+">"+levelAlias+"</a>"
 			//Explanation
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
-			newCell.innerHTML="Explanation"
+			newCell.innerHTML="<?php write('#variable_explanation')?>"
 			newRow.insertCell(-1).innerHTML=(function()
 			{
 				var exp = Info[id].explanation
@@ -83,7 +83,7 @@
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
-			newCell.innerHTML="Type"
+			newCell.innerHTML="<?php write('#variable_type')?>"
 			newRow.insertCell(-1).innerHTML=typeof(currentStage[id])=="function"? ("Output <br><br><b>Formula:</b> "+Formulas.prettify(currentStage[id].toString())) : "Input"
 
 			//Is "id" level 3 specific?
@@ -92,7 +92,7 @@
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
-				newCell.innerHTML="Advanced"
+				newCell.innerHTML="<?php write('#variable_advanced')?>"
 				newRow.insertCell(-1).innerHTML="YES";
 			}
 
@@ -103,7 +103,7 @@
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
-				newCell.innerHTML="Inputs involved"
+				newCell.innerHTML="<?php write('#variable_inputs_involved')?>"
 				newCell=newRow.insertCell(-1)
 				newCell.innerHTML=(function(){
 					var matches=Formulas.idsPerFormula(currentStage[id].toString())
@@ -155,7 +155,7 @@
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
-			newCell.innerHTML="Value"
+			newCell.innerHTML="<?php write('#variable_advanced')?>"
 			newCell=newRow.insertCell(-1)
 			if(typeof(currentStage[id])=="function")
 			{
@@ -186,7 +186,7 @@
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
-			newCell.innerHTML="Magnitude"
+			newCell.innerHTML="<?php write('#variable_magnitude')?>"
 			newRow.insertCell(-1).innerHTML=Info[id].magnitude
 
 			//Select units -- only inputs!
@@ -195,7 +195,7 @@
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
-				newCell.innerHTML="Unit"
+				newCell.innerHTML="<?php write('#variable_unit')?>"
 				newRow.insertCell(-1).innerHTML=(function()
 				{
 					if(Info[id].magnitude=="Currency")
@@ -224,7 +224,7 @@
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
-			newCell.innerHTML="Is used to calculate"
+			newCell.innerHTML="<?php write('#variable_is_used_to_calculate')?>"
 			newCell=newRow.insertCell(-1)
 			newCell.innerHTML=(function()
 			{
@@ -235,7 +235,7 @@
 				//if is not used to calculate anything, hide row
 				if(outputsPerInput.length==0) 
 				{
-					return "<span style=color:#999>Nothing</span>";
+					return "<span style=color:#999><?php write('#variable_nothing')?></span>";
 				}
 
 				outputsPerInput.forEach(function(output)
@@ -267,8 +267,8 @@
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
-				newCell.innerHTML="Warning"
-				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span> This equation contains estimated data in at least one input";
+				newCell.innerHTML="<?php write('#variable_warning')?>"
+				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span><?php write('#variable_this_equation_contains_estimated_data')?> ";
 			}
 
 			if(typeof(currentStage[id])=='number' && Global.Configuration.DataQuality[id]=="Estimated")
@@ -276,10 +276,9 @@
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
-				newCell.innerHTML="Warning"
-				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span> This input is considered estimated data by the user";
+				newCell.innerHTML="<?php write('#variable_warning')?>"
+				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span><?php write('#variable_this_input_is_considered_estimated')?> ";
 			}
-
 		}
 
 		/** 
@@ -325,13 +324,13 @@
 	var levelAlias;
 	switch(level)
 	{
-		case "Water":levelAlias="Water Supply";break;
-		case "Waste":levelAlias="Wastewater";break;
+		case "Water":levelAlias="<?php write('#Water')?>";break;
+		case "Waste":levelAlias="<?php write('#Waste')?>";break;
 		default:levelAlias=level;break;
 	}
 </script>
 
-<!--subtitle--><h4>Detailed info</h4>
+<!--subtitle--><h4><?php write('#variable_detailed_info')?></h4>
 <!--TITLE--><h1><script>document.write(Info[id].description+" ("+id+")")</script></h1>
 <!--VARIABLE INFO--><table style="text-align:left;width:50%" id=info></table>
 <!--FOOTER--><?php include'footer.php'?>

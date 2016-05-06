@@ -358,7 +358,7 @@
 		<fieldset>
 			<legend><?php write('#currency')?>: <span id=currency></span></legend>
 			<?php write('#configuration_new_currency')?>:
-			<input size=3 maxlength=3 placeholder="new" onchange=updateField(Global.General,"Currency",this.value)>
+			<input size=3 maxlength=3 placeholder="ccc" onchange=updateField(Global.General,"Currency",this.value)>
 		</fieldset>
 
 		<!--questions-->

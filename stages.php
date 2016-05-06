@@ -15,17 +15,17 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear diagram--><?php include'linear.php'?>
 <style> h1 {text-align:left;padding-left:20em} </style>
-<!--TITLE--><h1>Input data</h1>
+<!--TITLE--><h1><?php write('#edit_input_data')?></h1>
 <hr>
-<!--SUBTITLE--><h4>This is an overview of the active stages of your system. Click on a stage to input data. To activate more stages go to <a href=configuration.php>Configuration</a>.</h4>
+<!--SUBTITLE--><h4><?php write('#stages_this_is_an_overview_of_your_system')?> <a href=configuration.php><?php write('#configuration')?></a>.</h4>
 
 <!--level 3 overview-->
 <fieldset class=inline>
-	<legend>System assessment overview</legend>
+	<legend><?php write('#stages_system_assessment_overview')?></legend>
 	<table id=l3overview>
-		<tr><th>Stage
-			<th>Nº of substages
-			<th>Type of assessment
+		<tr><th><?php write('#stages_stage')?>
+			<th><?php write('#stages_num_of_substages')?>
+			<th><?php write('#stages_type_of_assessment')?>
 		<script>
 			function tableRow(alias,level,sublevel,name)
 			{
@@ -34,12 +34,12 @@
 					"<td>"+Global.Configuration.Assessment[level][sublevel]+
 					"")
 			}
-			tableRow('waterAbs','Water','Abstraction' ,'Water Abstraction');
-			tableRow('waterTre','Water','Treatment'   ,'Water Treatment');
-			tableRow('waterDis','Water','Distribution','Water Distribution');
-			tableRow('wasteCol','Waste','Collection'  ,'Wastewater Collection');
-			tableRow('wasteTre','Waste','Treatment'   ,'Wastewater Treatment');
-			tableRow('wasteDis','Waste','Discharge'   ,'Wastewater Discharge');
+			tableRow('waterAbs','Water','Abstraction' ,'<?php write('#Water'); echo " "; write('#Abstraction')?>');
+			tableRow('waterTre','Water','Treatment'   ,'<?php write('#Water'); echo " "; write('#Treatment')?>');
+			tableRow('waterDis','Water','Distribution','<?php write('#Water'); echo " "; write('#Distribution')?>');
+			tableRow('wasteCol','Waste','Collection'  ,'<?php write('#Waste'); echo " "; write('#Collection')?>');
+			tableRow('wasteTre','Waste','Treatment'   ,'<?php write('#Waste'); echo " "; write('#Treatment')?>');
+			tableRow('wasteDis','Waste','Discharge'   ,'<?php write('#Waste'); echo " "; write('#Discharge')?>');
 		</script>
 	</table>
 	<script>

@@ -1,20 +1,20 @@
 <!--inside level3.php-->
 
 <table class=inline><tr>
-	<th>Type of assessment <td>
+	<th><?php write('#assessment_type')?><td>
 
 	<label>
 		<input name=assessment type=radio 
 			value=simple   
 			onchange="updateAssessment(this.value)">
-		Simple
+		<?php write('#assessment_simple')?>
 	</label>
 	&emsp;
 	<label title="Advanced assessment consists of more inputs and indicators" style=cursor:help>
 		<input name=assessment type=radio 
 			value=advanced   
 			onchange="updateAssessment(this.value)">
-		Advanced
+		<?php write('#assessment_advanced')?>
 	</label>
 </table>
 

@@ -97,7 +97,7 @@
 			//check memory usage
 			if(document.cookie.length>=8100)
 			{
-				alert("Substage not added: memory is full ("+document.cookie.length+" bytes used)");
+				alert("<?php write('#level3_error_memory_full')?> ("+document.cookie.length+" bytes used)");
 				return
 			}
 
@@ -110,7 +110,7 @@
 		{
 			if(substages.length==1)
 			{
-				alert("You can not delete the last substage");
+				alert("<?php write('#level3_error_cannot_delete_last_substage')?>");
 				return;
 			}
 			substages.splice(index,1);
@@ -135,12 +135,12 @@
 			div.style.top=ev.pageY+"px"
 			div.style.left=ev.pageX+"px"
 			//add to screen
-			div.innerHTML="<div style=color:white>New name for substage "+(index+1)+":</div>"
+			div.innerHTML="<div style=color:white><?php write('#level3_new_name')?> "+(index+1)+":</div>"
 			//new input element
 			var input = document.createElement('input')
 			div.appendChild(input)
 			input.className="substageMenu"
-			input.placeholder='New name'
+			input.placeholder='<?php write('#level3_new_name_short')?>'
 			input.value=substages[index].name
 			//onblur: remove it
 			input.onblur=function(){document.body.removeChild(div)}
@@ -172,20 +172,20 @@
 					newTH.style.cursor="pointer";
 					newTH.style.width="120px";
 					newTH.innerHTML=""+
-						"Substage "+(parseInt(s)+1)+" "+
+						"<?php write('#substage')?> "+(parseInt(s)+1)+" "+
 						"<div style=font-weight:bold>"+substages[s].name+"</div>";
 					newTH.setAttribute('onclick','showSubstageMenu('+s+',event)');
-					newTH.title="Click to modify the name";
+					newTH.title="<?php write('#level3_click_to_modify_the_name')?>";
 					t.rows[0].appendChild(newTH);
 				}
 				//TOTAL header
 				var newTH = document.createElement('th');
-				newTH.innerHTML="&sum; TOTAL";
+				newTH.innerHTML="&sum; <?php write('#level3_TOTAL')?>";
 				t.rows[0].appendChild(newTH);
 
 				//UNIT header
 				var newTH = document.createElement('th');
-				newTH.innerHTML="Unit";
+				newTH.innerHTML="<?php write('#level3_unit')?>";
 				t.rows[0].appendChild(newTH);
 			/*end headers*/
 
@@ -254,7 +254,7 @@
 					newCell.style.fontSize='10px';
 					newCell.innerHTML=(function()
 					{
-						var extra = Level3.isInList(code) ? "(<span style=font-size:10px>advanced</span>)" : "" ;
+						var extra = Level3.isInList(code) ? "(<span style=font-size:10px><?php write('#level3_advanced')?></span>)" : "" ;
 						return extra+" <a href=variable.php?id="+code+">"+code+"</a>";
 					})();
 
@@ -364,7 +364,7 @@
 			var newRow=t.insertRow(-1);
 
 			//headers
-				['Code','Description'].forEach(function(element)
+				['<?php write('#level3_code')?>','<?php write('#level3_description')?>'].forEach(function(element)
 				{
 					var newTH=document.createElement('th'); newRow.appendChild(newTH);
 					newTH.innerHTML=element;
@@ -373,10 +373,10 @@
 				{
 					var newTH=document.createElement('th'); 
 					newRow.appendChild(newTH);
-					newTH.innerHTML="Substage "+(parseInt(s)+1)+" "+
+					newTH.innerHTML="<?php write('#substage')?> "+(parseInt(s)+1)+" "+
 					"<div style=font-weight:bold>"+substages[s].name+"</div>"
 				};
-				['&sum; TOTAL','Unit'].forEach(function(element)
+				['&sum; <?php write('#level3_TOTAL')?>','<?php write('#level3_unit')?>'].forEach(function(element)
 				{
 					var newTH=document.createElement('th'); newRow.appendChild(newTH);
 					newTH.innerHTML=element;
@@ -429,7 +429,7 @@
 				//show code
 				newRow.insertCell(-1).innerHTML=(function()
 				{
-					var extra = Level3.isInList(field) ? "(advanced)" : "" ;
+					var extra = Level3.isInList(field) ? "(<?php write('#level3_advanced')?>)" : "" ;
 					return extra+" <a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
 				})();
 
@@ -576,33 +576,33 @@
 		//Navigable <h1>title</h1>
 		switch($level)
 		{
-			case "Water": $titleLevel="<a href=edit.php?level=$level>Water Supply</a>";break;
-			case "Waste": $titleLevel="<a href=edit.php?level=$level>Wastewater</a>";break;
+			case "Water": $titleLevel="<a href=edit.php?level=$level>".$Languages[$lang]['#Water']."</a>";break;
+			case "Waste": $titleLevel="<a href=edit.php?level=$level>".$Languages[$lang]['#Waste']."</a>";break;
 		}
 		/*Separator*/$sep="<span style=color:black>&rsaquo;</span>";
-		$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>$sublevel</a>";
-		$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>Substages</a>";
+		$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>".$Languages[$lang]["#$sublevel"]."</a>";
+		$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>".$Languages[$lang]['#substages']."</a>";
 	?>
 	<style> h1 {text-align:left;padding-left:20em} </style>
 	<!--TITLE--><h1><?php echo $title?></h1>
 </div>
 <!--separator--><div style=margin-top:180px></div>
 
-<!--HELP--><h4 class=inline style=line-height:0.1em>Split this stage in multiple substages</h4>
+<!--HELP--><h4 class=inline style=line-height:0.1em><?php write('#level3_split_this_stage')?></h4>
 <!--type of assessment--><?php include'assessmentType.php'?>
 <!--SUBSTAGES TABLE-->
 <table id=substages style=margin:1em> <tr>
 	<td colspan=2 style="text-align:center;min-width:400px;table-layout:fixed">
 		<!--substages counter-->
-		<div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle">Substages: <span id=counter>0</span></div>
+		<div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle"><?php write('#substages')?>: <span id=counter>0</span></div>
 		<!--new substage button-->
-		<button onclick=newSubstage() class=button>+ New substage</button>
+		<button onclick=newSubstage() class=button>+ <?php write('#level3_new_substage')?></button>
 </table>
 
 <!--OUTPUTS TABLE-->
 <table id=outputs class=inline style=background:#f6f6f6> 
 	<tr><th colspan=42 style="background:white;border:none;color:black;padding-bottom:0.7em;font-size:17px">
-		RESULTS - Key performance indicators
+		<?php write('#level3_results_kpis')?>
 </table>
 
 <!--display graphs-->
