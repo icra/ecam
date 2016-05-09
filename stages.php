@@ -34,12 +34,12 @@
 					"<td>"+Global.Configuration.Assessment[level][sublevel]+
 					"")
 			}
-			tableRow('waterAbs','Water','Abstraction' ,'<?php write('#Water'); echo " "; write('#Abstraction')?>');
-			tableRow('waterTre','Water','Treatment'   ,'<?php write('#Water'); echo " "; write('#Treatment')?>');
-			tableRow('waterDis','Water','Distribution','<?php write('#Water'); echo " "; write('#Distribution')?>');
-			tableRow('wasteCol','Waste','Collection'  ,'<?php write('#Waste'); echo " "; write('#Collection')?>');
-			tableRow('wasteTre','Waste','Treatment'   ,'<?php write('#Waste'); echo " "; write('#Treatment')?>');
-			tableRow('wasteDis','Waste','Discharge'   ,'<?php write('#Waste'); echo " "; write('#Discharge')?>');
+			tableRow('waterAbs','Water','Abstraction' ,'<?php write('#Water'); echo ": "; write('#Abstraction')?>');
+			tableRow('waterTre','Water','Treatment'   ,'<?php write('#Water'); echo ": "; write('#Treatment')?>');
+			tableRow('waterDis','Water','Distribution','<?php write('#Water'); echo ": "; write('#Distribution')?>');
+			tableRow('wasteCol','Waste','Collection'  ,'<?php write('#Waste'); echo ": "; write('#Collection')?>');
+			tableRow('wasteTre','Waste','Treatment'   ,'<?php write('#Waste'); echo ": "; write('#Treatment')?>');
+			tableRow('wasteDis','Waste','Discharge'   ,'<?php write('#Waste'); echo ": "; write('#Discharge')?>');
 		</script>
 	</table>
 	<script>

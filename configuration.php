@@ -312,8 +312,7 @@
 				?>
 		</table>
 
-		<!--activate all debug button
-		-->
+		<!--activate all debug button -->
 		<div style="margin:0.5em 0 0.5em 0">
 			<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
 			<script>
@@ -350,7 +349,7 @@
 					<option value=0.452483345>Mexico
 					<option value=custom>--<?php write('#configuration_custom')?>--
 				</select>
-				<td><?php write('#configuration_current_value')?> <input style=width:80px id=uw1 value=0 onchange=updateUW1(this.value)> kg CO<sub>2</sub>/kWh
+				<td> <input style=width:80px id=uw1 value=0 onchange=updateUW1(this.value)> kg CO<sub>2</sub>/kWh
 			</table>
 		</fieldset>
 
@@ -379,9 +378,9 @@
 					#fuelSelection tr.inactive {background:#ccc;color:#999}
 				</style>
 				<tr><th><?php write('#configuration_stage')?><th><?php write('#configuration_selected_fuel')?>
-				<tr stage=water>   <td>GHG assessment - Water supply (engines)
-				<tr stage=waste>   <td>GHG assessment - Wastewater (engines)
-				<tr stage=wasteTre><td>Energy performance - Wastewater treatment (vehicles)
+				<tr stage=water>   <td><?php write('#ghg_assessment')?> - <?php write('#Water')?> (<?php write('#configuration_engines')?>)
+				<tr stage=waste>   <td><?php write('#ghg_assessment')?> - <?php write('#Waste')?> (<?php write('#configuration_engines')?>)
+				<tr stage=wasteTre><td><?php write('#energy_performance')?> - <?php write('#Waste')?>:<?php write('#Treatment')?> (<?php write('#configuration_vehicles')?>)
 			</table>
 		</fieldset>
 	</div>

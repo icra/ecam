@@ -34,6 +34,5 @@
 			document.querySelector('input[name=assessment][value=simple]').setAttribute('checked',true);
 		else
 			document.querySelector('input[name=assessment][value=advanced]').setAttribute('checked',true);
-
 	}
 </script>

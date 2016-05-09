@@ -58,10 +58,10 @@
 			newCell.className='th'
 			newCell.innerHTML="<?php write('#variable_stage')?>"
 			newCell=newRow.insertCell(-1)
-			if(sublevel!=0)
+			if(sublevel)
 			{
 				var url = Level3.isInList(id) ? "level3.php" : "edit.php";
-				newCell.innerHTML+="<?php write('#variable_go_back_to')?> <a href="+url+"?level="+level+"&sublevel="+sublevel+">"+levelAlias+" "+sublevel+"</a>"
+				newCell.innerHTML+="<?php write('#variable_go_back_to')?> <a href="+url+"?level="+level+"&sublevel="+sublevel+">"+levelAlias+": "+sublevelAlias+"</a>"
 			}
 			else newCell.innerHTML="<?php write('#variable_go_back_to')?> <a href=edit.php?level="+level+">"+levelAlias+"</a>"
 			//Explanation
@@ -77,7 +77,6 @@
 				else
 					return exp;
 			})();
-
 
 			//Type (input or output)
 			newRow=t.insertRow(-1)
@@ -155,7 +154,7 @@
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
-			newCell.innerHTML="<?php write('#variable_advanced')?>"
+			newCell.innerHTML="<?php write('#variable_value')?>"
 			newCell=newRow.insertCell(-1)
 			if(typeof(currentStage[id])=="function")
 			{
@@ -327,6 +326,19 @@
 		case "Water":levelAlias="<?php write('#Water')?>";break;
 		case "Waste":levelAlias="<?php write('#Waste')?>";break;
 		default:levelAlias=level;break;
+	}
+
+	if(sublevel)
+	{
+		var sublevelAlias;
+		switch(sublevel)
+		{
+			case "Abstraction":sublevelAlias="<?php write('#Abstraction')?>";break;
+			case "Treatment":sublevelAlias="<?php write('#Treatment')?>";break;
+			case "Distribution":sublevelAlias="<?php write('#Distribution')?>";break;
+			case "Collection":sublevelAlias="<?php write('#Collection')?>";break;
+			case "Discharge":sublevelAlias="<?php write('#Discharge')?>";break;
+		}
 	}
 </script>
 

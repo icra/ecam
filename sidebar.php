@@ -108,10 +108,9 @@
 	$sbd = (isset($_COOKIE['sidebar']) && $_COOKIE['sidebar']==1) ? "on":"off";
 ?>
 
-<div id=sidebar class="<?php echo $sbd ?>" 
-	 onclick="event.stopPropagation()";
-	 >
+<div id=sidebar class="<?php echo $sbd ?>" onclick="event.stopPropagation()">
 	 <script>
+	 	//if you click anywhere except the sidebar, it will hide the sidebar
 	 	document.documentElement.onclick=function(){Sidebar.hide()};
 	 </script>
 	<style>
@@ -166,25 +165,32 @@
 			<tr><td><a href=configuration.php><?php write('#configuration')?></a>
 			<tr><th><?php write('#ghg_assessment')?>
 			<tr><td><a href=birds.php><?php write('#quick_assessment')?></a>
-			<tr><td><a class=water stage=water    href=edit.php?level=Water>Water supply</a>
-			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste>Wastewater</a>
+			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
+			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
 			<tr><th><?php write('#energy_performance')?>
-			<tr><td><a href=edit.php?level=Energy>Energy summary</a>
-			<tr><td>&emsp;<a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction>Water abstraction</a>
-			<tr><td>&emsp;&emsp;<a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment>Water treatment</a>
-			<tr><td>&emsp;&emsp;&emsp;<a class=water stage=waterDis href=edit.php?level=Water&sublevel=Distribution>Water distribution</a>
-			<tr><td>&emsp;<a class=waste stage=wasteCol href=edit.php?level=Waste&sublevel=Collection>Wastewater collection</a>
-			<tr><td>&emsp;&emsp;<a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment>Wastewater treatment</a>
-			<tr><td>&emsp;&emsp;&emsp;<a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge>Wastewater discharge</a>
+			<tr><td><a href=edit.php?level=Energy><?php write('#energy_summary')?></a>
+			<tr><td style=background:#aaa>
+			<tr><td>&emsp;
+				<a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction><?php write('#Abstraction')?></a>
+			<tr><td>&emsp;&emsp;
+				<a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment><?php write('#Treatment')?></a>
+			<tr><td>&emsp;&emsp;&emsp;
+				<a class=water stage=waterDis href=edit.php?level=Water&sublevel=Distribution><?php write('#Distribution')?></a>
+			<tr><td>&emsp;
+				<a class=waste stage=wasteCol href=edit.php?level=Waste&sublevel=Collection><?php write('#Collection')?></a>
+			<tr><td>&emsp;&emsp;
+				<a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment><?php write('#Treatment')?></a>
+			<tr><td>&emsp;&emsp;&emsp;
+				<a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge><?php write('#Discharge')?></a>
 			<tr><th><?php write('#summary')?>
 			<tr><td><a href=summary.php?type=input><?php write('#sidebar_all_inputs')?></a>
 			<tr><td><a href=summary.php?type=ccvv><?php write('#sidebar_all_ccvv')?></a>
 			<tr><td><a href=summary.php?type=output><?php write('#sidebar_all_kpis')?></a>
 			<tr><th><?php write('#sidebar_other')?>
-			<tr><td><a href=graph.php?g=graph1>Graphs (debug mode)</a>
-			<tr><td><a href=export.php>Export (debug mode)</a>
-			<tr><td><a href=todo.php>To do (debug mode)</a>
-			<tr><td><a href=problems.php>Problems (debug mode)</a>
+			<tr><td><a href=graph.php?g=graph1><?php write('#sidebar_graphs')?></a>
+			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
+			<tr><td><a href=todo.php><?php write('#sidebar_todo')?></a>
+			<tr><td><a href=problems.php><?php write('#sidebar_problems')?></a>
 		</table>
 	</div>
 </div>

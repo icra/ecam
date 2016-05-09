@@ -244,21 +244,46 @@
 		#graphs div[id^=graph] {border:1px solid #ccc}
 	</style>
 
-	<div id=graph1 class=inline style=width:49%></div>
-	<div id=graph2 class=inline style=width:49%></div>
+	<div id=graph1 class=inline style=width:49%><?php write('#loading')?></div>
+	<div id=graph2 class=inline style=width:49%><?php write('#loading')?></div>
 	<!--graph 3 container-->
 	<div style=margin-top:2px>
-		<div id=graph3a class=inline style=width:49%></div>
-		<div id=graph3b class=inline style=width:49%></div>
+		<div id=graph3a class=inline style=width:49%><?php write('#loading')?></div>
+		<div id=graph3b class=inline style=width:49%><?php write('#loading')?></div>
 	</div>
 	<div style=margin-top:2px>
-		<div id=graph3c class=inline style=width:49%></div>
-		<div id=graph3d class=inline style=width:49%></div>
+		<div id=graph3c class=inline style=width:49%><?php write('#loading')?></div>
+		<div id=graph3d class=inline style=width:49%><?php write('#loading')?></div>
 	</div>
 	<script>
 		google.charts.load('current',{'packages':['corechart']});
 		google.charts.setOnLoadCallback(init)
 	</script>
+</div>
+
+<!--PREV & NEXT BUTTONS-->
+<div style=margin-top:4em;text-align:center> 
+	<button class="button prev" onclick="event.stopPropagation();window.location='configuration.php'"><?php write('#previous')?></button> 
+	<script>
+		//find first available stage to start entering data
+		function nextPage()
+		{
+			event.stopPropagation();
+			//default location to go
+			var location = "edit.php?level=Water";
+			if(Global.Configuration['Active Stages'].water==0 && Global.Configuration['Active Stages'].waste==0)
+			{
+				alert("<?php write('#configuration_active_stages_error')?>");
+				return;
+			}
+			if(Global.Configuration['Active Stages'].water==0)
+			{
+				location = "edit.php?level=Waste";
+			}
+			window.location=location;
+		}
+	</script>
+	<button class="button next" onclick=nextPage()><?php write('#next')?></button>
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>

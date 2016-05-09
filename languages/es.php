@@ -2,47 +2,49 @@
 
 $Languages["es"] = array
 (
-	'#about' => 'Acerca de',
-	'#assessment_period' => 'Período de evaluación',
-	'#conversion_factor' => 'Factor de conversión',
-	'#currency' => 'Moneda',
-	'#days' => 'días',
-	'#energy_performance' => 'Rendimiento energético',
-	'#ghg_assessment' => 'Evaluación GEI',
-	'#next' => 'Siguiente',
-	'#previous' => 'Anterior',
-	'#quick_assessment' => 'Evaluación rápida',
-	'#summary' => 'Resumen',
-	'#years' => 'años',
-	'#substage' => 'Subetapa',
-	'#substages' => 'Subetapas',
-
 	'#Water' => 'Suministro de agua',
 	'#Waste' => 'Aguas residuales',
-
 	'#Abstraction' => 'Extracción',
 	'#Treatment' => 'Tratamiento',
 	'#Distribution' => 'Distribución',
 	'#Collection' => 'Recolección',
 	'#Discharge' => 'Descarga',
-	
-	'#navbar_title' => 'Herramienta de asesoramiento y monitorización de rendimiento energético y emisiones de Carbono',
 
 	'#new' => 'Nuevo',
 	'#open' => 'Abrir',
 	'#save' => 'Guardar',
 	'#save_as' => 'Guardar como',
 	'#clear' => 'Borrar todo',
+	
+	'#about' => 'Acerca de',
+	'#assessment_period' => 'Período de evaluación',
+	'#conversion_factor' => 'Factor de conversión',
+	'#currency' => 'Moneda',
+	'#days' => 'días',
+	'#energy_performance' => 'Rendimiento energético',
+	'#energy_summary' => 'Resumen energía',
+	'#ghg_assessment' => 'Evaluación GEI',
+	'#loading' => 'Cargando...',
+	'#next' => 'Siguiente',
+	'#previous' => 'Anterior',
+	'#quick_assessment' => 'Evaluación rápida',
+	'#summary' => 'Resumen',
+	'#years' => 'años',
+	'#stages' => 'Etapas',
+	'#substage' => 'Subetapa',
+	'#substages' => 'Subetapas',
 
-	'#index_first_time_using' => '¿Es tu primera vez usando ECAM Web Tool? Clic en "Nuevo" para empezar, o lee el tutorial en ',
+	'#navbar_title' => 'Herramienta de asesoramiento y monitorización de rendimiento energético y emisiones de Carbono',
+
+	'#index_first_time_using' => '¿Es tu primera vez usando ECAM Web Tool? Pulsa "Nuevo" para empezar, o lee más información en ',
 	'#index_web_tool' => 'Herramienta web',
-	'#index_description' => 'Esta herramienta evalúa las operaciones de las infraestructuras en términos de emisiones de GEI y uso de energía basado en sus propios datos.<br>ECAM es parte de la plataforma de conocimiento proporcionada por el proyecto WaCClim. Esta herramienta es gratuita y de código abierto.',
+	'#index_description' => 'Esta herramienta evalúa las infraestructuras en términos de emisiones de GEI y uso de energía basado en sus propios datos.<br>ECAM es parte de la plataforma de conocimiento proporcionada por el <a href="http://www.iwa-network.org/WaCCliM/">proyecto WaCClim</a>. Esta herramienta es gratuita y de código abierto.',
 	'#index_chrome_warning' => 'Por favor, utiliza el explorador Google Chrome.',
 	'#index_latest_update' => 'Última actualización',
 
 	'#about_credits' => '
 		Desarrollado por <a href=http://icra.cat/>ICRA</a> en colaboración con <a href=http://www.iwa-network.org/>IWA</a>,
-		GIZ, en el proyecto WaCClim, y Cobalt Water.<br>
+		GIZ, en el <a href="http://www.iwa-network.org/WaCCliM/">proyecto WaCClim</a>, y Cobalt Water.<br>
 		La herramienta fue desarrollada en Junio de 2015 en EXCEL por el consorcio Global Water Commons (LNEC i la Universidad de Valencia) 
 		en colaboración con Cobalt Water.
 		Queremos reconocer la utilidad de la herramienta EXCEL para permitir el desarrollo de esta herramienta web.
@@ -99,6 +101,8 @@ $Languages["es"] = array
 	'#configuration_fuel_options' => 'Opciones para combustibles',
 	'#configuration_stage' => 'Etapa',
 	'#configuration_selected_fuel' => 'Combustible seleccionado',
+	'#configuration_engines' => 'Motores',
+	'#configuration_vehicles' => 'Vehículos',
 
 	'#sidebar_general' => 'General',
 	'#sidebar_home' => 'Principal',
@@ -167,6 +171,37 @@ $Languages["es"] = array
 	'#assessment_simple' => 'Simple',
 	'#assessment_advanced' => 'Avanzado',
 
+	'#export_title' => 'Exportar a Excel',
+	'#export_description' => 'Pulse en una etapa para ver sus variables. Luego, pulse "Seleccionar toda la tabla" para copiar y pegar a una nueva hoja de Excel',
+	'#export_highlight_button' => 'Seleccionar toda la tabla',
+	'#export_no_stage_selected' => 'Ninguna etapa seleccionada',
+	'#export_code' => 'Código',
+	'#export_type' => 'Tipo',
+	'#export_name' => 'Nombre',
+	'#export_form' => 'Formula o valor por defecto',
+	'#export_unit' => 'Unidad',
+	'#export_desc' => 'Descripción',
+	'#export_click_on_a_stage' => 'Pulse una etapa',
+
+	'#sidebar_graphs' => 'Gráficos',
+	'#sidebar_export' => 'Exportar',
+	'#sidebar_todo' => 'Pendiente',
+	'#sidebar_problems' => 'Problemas',
+
+	'#summary' => 'Resumen',
+	'#summary_no_active_stages' => 'Ninguna etapa activada',
+	'#summary_all_active_inputs' => 'Todos los inputs activados (ordenados por etapas)',
+	'#summary_all_active_outputs' => 'Todos los outputs activados (ordenados por etapas)',
+
+	'#todo' => 'TAREAS PENDIENTES',
+	'#todo_task' => 'Tarea',
+	'#todo_status' => 'Estado',
+
+	'#graphs' => 'Gráficos',
+
 	/** I'm here **/
+	'#ws_resi_pop' => 'Población residente',
+	'#ws_resi_pop' => 'Población residente',
+
 	'#new_description' => 'new description',
 )?>

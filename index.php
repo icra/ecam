@@ -23,8 +23,6 @@
 
 	<!--DESCRIPTION--><div style="color:#58595b;font-size:18px;text-align:left">
 		<?php write('#index_description')?>
-		<br>
-		<a href="http://www.iwa-network.org/WaCCliM/">WaCCliM project</a>. 
 	</div>
 
 	<!--FIRST TIME?-->

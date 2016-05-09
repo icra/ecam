@@ -2,31 +2,13 @@
 
 $Languages["en"]=array
 (
-	'#about' => 'About',
-	'#assessment_period' => 'Assessment period',
-	'#conversion_factor' => 'Conversion factor',
-	'#currency' => 'Currency',
-	'#days' => 'days',
-	'#energy_performance' => 'Energy performance',
-	'#ghg_assessment' => 'GHG assessment',
-	'#next' => 'Next',
-	'#previous' => 'Previous',
-	'#quick_assessment' => 'Quick assessment',
-	'#summary' => 'Summary',
-	'#years' => 'years',
-	'#substage' => 'Substage',
-	'#substages' => 'Substages',
-
 	'#Water' => 'Water supply',
 	'#Waste' => 'Wastewater',
-
 	'#Abstraction' => 'Abstraction',
 	'#Treatment' => 'Treatment',
 	'#Distribution' => 'Distribution',
 	'#Collection' => 'Collection',
 	'#Discharge' => 'Discharge',
-
-	'#navbar_title' => 'Energy performance and Carbon emissions Assessment and Monitoring Tool',
 
 	'#new' => 'New',
 	'#open' => 'Open',
@@ -34,18 +16,37 @@ $Languages["en"]=array
 	'#save_as' => 'Save as',
 	'#clear' => 'Clear',
 
+	'#about' => 'About',
+	'#assessment_period' => 'Assessment period',
+	'#conversion_factor' => 'Conversion factor',
+	'#currency' => 'Currency',
+	'#days' => 'days',
+	'#energy_performance' => 'Energy performance',
+	'#energy_summary' => 'Energy summary',
+	'#ghg_assessment' => 'GHG assessment',
+	'#loading' => 'Loading...',
+	'#next' => 'Next',
+	'#previous' => 'Previous',
+	'#quick_assessment' => 'Quick assessment',
+	'#summary' => 'Summary',
+	'#years' => 'years',
+	'#stages' => 'Stages',
+	'#substage' => 'Substage',
+	'#substages' => 'Substages',
+
+	'#navbar_title' => 'Energy performance and Carbon emissions Assessment and Monitoring Tool',
+
 	'#index_first_time_using' => 'First time using ECAM Web Tool? Click on "New" or learn more in ',
 	'#index_web_tool' => 'Web tool',
-	'#index_description' => 'This tool evaluates utilities\'s operations in terms of GHG emissions and energy usage based on their own data.<br>ECAM is part of the knowledge platform provided by the WaCCliM project. This tool is free and open source.',
+	'#index_description' => 'This tool evaluates utilities\'s operations in terms of GHG emissions and energy usage based on their own data.<br>ECAM is part of the knowledge platform provided by the <a href="http://www.iwa-network.org/WaCCliM/">WaCCliM project</a>. This tool is free and open source.',
 	'#index_chrome_warning' => 'Please use Google Chrome browser.',
 	'#index_latest_update' => 'Latest update',
 
 	'#about_credits' => '
 		Developed by <a href=http://icra.cat>ICRA</a> in cooperation with <a href=http://www.iwa-network.org/>IWA</a>,
-		GIZ under the WaCCliM project and Cobalt Water.<br>
+		GIZ under the <a href="http://www.iwa-network.org/WaCCliM/">WaCCliM project</a> and Cobalt Water.<br>
 		The tool was formerly developed in June 2015 as an EXCEL tool by the consortium Global Water Commons (LNEC and University of Valencia) in collaboration with Cobalt Water. 
 		We want to acknowledge how extremely valuable The Excel tool has been to enable the development of this web-tool.
-
 		<br><br>
 		
 		The source code of this project is in <a href=https://github.com/holalluis/ecam>GitHub</a>.
@@ -100,6 +101,8 @@ $Languages["en"]=array
 	'#configuration_fuel_options' => 'Fuel options',
 	'#configuration_stage' => 'Stage',
 	'#configuration_selected_fuel' => 'Selected Fuel type',
+	'#configuration_engines' => 'Engines',
+	'#configuration_vehicles' => 'Vehicles',
 
 	'#sidebar_general' => 'General',
 	'#sidebar_home' => 'Home',
@@ -117,6 +120,7 @@ $Languages["en"]=array
 	'#edit_current_value' => 'Current value',
 	'#edit_unit' => 'Unit',
 	'#edit_data_quality' => 'Data quality',
+	'#edit_benchmark' => 'Benchmark',
 	'#edit_ghg_emissions' => 'Greenhouse gas emissions',
 
 	'#edit_origin' => 'Origin',
@@ -167,6 +171,37 @@ $Languages["en"]=array
 	'#assessment_simple' => 'Simple',
 	'#assessment_advanced' => 'Advanced',
 
+	'#export_title' => 'Export to Excel',
+	'#export_description' => 'Click on a stage to view its variables. Then click on "Highlight the whole table" to copy and paste to an empty Excel file',
+	'#export_highlight_button' => 'Highlight the whole table',
+	'#export_no_stage_selected' => 'No stage selected',
+	'#export_code' => 'Code',
+	'#export_type' => 'Type',
+	'#export_name' => 'Name',
+	'#export_form' => 'Formula or default value',
+	'#export_unit' => 'Unit',
+	'#export_desc' => 'Description',
+	'#export_click_on_a_stage' => 'Click on a stage',
+
+	'#sidebar_graphs' => 'Graphs',
+	'#sidebar_export' => 'Export',
+	'#sidebar_todo' => 'To do',
+	'#sidebar_problems' => 'Problems',
+
+	'#summary' => 'Summary',
+	'#summary_no_active_stages' => 'No active stages',
+	'#summary_all_active_inputs' => 'All active inputs (sorted by stage)',
+	'#summary_all_active_outputs' => 'All active outputs (sorted by stage)',
+
+	'#todo' => 'TO DO LIST',
+	'#todo_task' => 'Task',
+	'#todo_status' => 'Status',
+
+	'#graphs' => 'Gráficos',
+
 	/** I'm here **/
 	'#new_description' => 'new description',
+
+	'#new_description' => 'new description',
+
 )?>

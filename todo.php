@@ -6,10 +6,10 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--> <?php include'navbar.php'?>
 <!--linear--> <?php include'linear.php'?>
-<!--TITLE--><h1>TO DO LIST</h1>
+<!--TITLE--><h1><?php write('#todo')?></h1>
 <!--TO DO LIST-->
 <table id=todo>
-	<tr><th>Task<th>Status
+	<tr><th><?php write('#todo_task')?><th><?php write('#todo_status')?>
 	<tr><td colspan=2 class=taskgroup>BACK-END
 		<tr><td>Finish questions variable hidings<td>Pending (difficult)</td>
 		<tr><td>Wrong benchmarking<td>Need more info</td>

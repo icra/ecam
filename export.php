@@ -9,10 +9,14 @@
 	<script>
 		function updateTable(obj,name)
 		{
+			//make highlight button enabled
+			document.querySelector('#highlight').removeAttribute('disabled')
+
+			//get the table t
 			var t=document.querySelector('#table')
 			t.rows[0].cells[0].innerHTML=name;
 
-			if(name.search('Wastewater')>-1)
+			if(name.search('<?php write('#Waste')?>')>-1)
 				t.classList.add('ww')
 			else
 				t.classList.remove('ww')
@@ -96,35 +100,45 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--> <?php include'linear.php'?>
-<!--TITLE--><h1>Export to excel</h1>
-<h4>Click on a stage to view its variables. Then click on "Highlight text inside table" and paste to Excel</h4>
-<!--buttons to select stage-->
-<button class=button onclick=selectText(document.querySelector('#table'))>Highlight text inside table</button>
+<!--TITLE--><h1><?php write('#export_title')?></h1>
+<h4><?php write('#export_description')?></h4>
 
-<div>
-	<table style=margin:1em>
-		<tr><td>GHG assessment<td>Energy performance
-		<tr>
+<!--buttons to select stage-->
+<div class=inline>
+	<table>
+		<tr><td><?php write('#ghg_assessment')?><td><?php write('#energy_performance')?>
+		<tr><td>
+			<button onclick="updateTable(Global.Water, '<?php write("#Water")?>')" class="button"><?php write('#Water')?></button>
 			<td>
-				<button onclick="updateTable(Global.Water,              'GHG assessment - Water supply')"       class="button">Water supply</button>
-				<button onclick="updateTable(Global.Waste,            'GHG assessment - Wastewater')"            class="button">Wastewater</button>
+				<button onclick="updateTable(Global.Water.Abstraction,  '<?php write('#energy_performance')?> - Abstraction')"   class="button l2"><?php write('#Abstraction')?></button>
+				<button onclick="updateTable(Global.Water.Treatment,    '<?php write('#energy_performance')?> - Treatment')"     class="button l2"><?php write('#Treatment')?></button>
+				<button onclick="updateTable(Global.Water.Distribution, '<?php write('#energy_performance')?> - Distribution')"  class="button l2"><?php write('#Distribution')?></button> <br>
+		<tr><td>
+			<button onclick="updateTable(Global.Waste, '<?php write("#Waste")?>')" class="button"><?php write('#Waste')?></button>
 			<td>
-				<button onclick="updateTable(Global.Energy,  'Energy summary')"  class="button l2">Energy summary</button>
-				<br>
-				<button onclick="updateTable(Global.Water.Abstraction,  'Energy performance - Water Abstraction')"  class="button l2">Abstraction</button>
-				<button onclick="updateTable(Global.Water.Treatment,    'Energy performance - Water Treatment')"    class="button l2">Treatment</button>
-				<button onclick="updateTable(Global.Water.Distribution, 'Energy performance - Water Distribution')" class="button l2">Distribution</button>
-				<br>
-				<button onclick="updateTable(Global.Waste.Collection, 'Energy performance - Wastewater Collection')" class="button l2">Collection</button>
-				<button onclick="updateTable(Global.Waste.Treatment,  'Energy performance - Wastewater Treatment')"  class="button l2">Treatment</button>
-				<button onclick="updateTable(Global.Waste.Discharge,  'Energy performance - Wastewater Discharge')"  class="button l2">Discharge</button>
+				<button onclick="updateTable(Global.Waste.Collection,   '<?php write('#energy_performance')?> - <?php write('#Collection')?>')" class="button l2"><?php write('#Collection')?></button>
+				<button onclick="updateTable(Global.Waste.Treatment,    '<?php write('#energy_performance')?> - <?php write('#Treatment')?>')"  class="button l2"><?php write('#Treatment')?></button>
+				<button onclick="updateTable(Global.Waste.Discharge,    '<?php write('#energy_performance')?> - <?php write('#Discharge')?>')"  class="button l2"><?php write('#Discharge')?></button>
+		<tr><td><td><button onclick="updateTable(Global.Energy, '<?php write('#energy_summary')?>')" class="button l2"><?php write('#energy_summary')?></button> <br>
 	</table>
 </div>
 
+<button id=highlight disabled class=button style="margin:2em;font-size:18px" onclick=selectText(document.querySelector('#table'))>
+	<?php write('#export_highlight_button')?>
+</button>
+
 <!--info table-->
-<table id=table>
-	<tr><th colspan=6 style=font-size:18px>No stage selected
-	<tr><th>Code<th>Type<th>Name<th>Formula or Default value<th>Unit<th>Description
-	<tr><td colspan=6 style="text-align:center;">Click on a stage
+<table id=table style=margin-top:0.5em>
+	<tr><th colspan=6 style=font-size:18px><?php write('#export_no_stage_selected')?>
+	<tr>
+		<th><?php write('#export_code')?>
+		<th><?php write('#export_type')?>
+		<th><?php write('#export_name')?>
+		<th><?php write('#export_form')?>
+		<th><?php write('#export_unit')?>
+		<th><?php write('#export_desc')?>
+	<tr><td colspan=6 style="text-align:center;">
+		<?php write('#export_click_on_a_stage')?>
 </table>
+
 <!--FOOTER--><?php include'footer.php'?>

@@ -830,12 +830,12 @@
 </div>
 
 <!--GRAPHS-->
-<div id=graph style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%" >Graphs here</div>
+<div id=graph style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%"><?php write('#loading')?></div>
 
 <?php
 	if($level=='Energy')
 	{ ?>
-		<div id=graph2 style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%" >Substages graph</div>
+		<div id=graph2 style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%" ><?php write('#loading')?></div>
 	  <?php
 	}
 ?>
