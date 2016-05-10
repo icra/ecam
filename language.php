@@ -60,7 +60,7 @@
 		<!--spanish-->
 		<div lang=es>
 			<img src="img/flags/es.png">
-			es (work in progress)
+			es
 		</div>
 	</div> 
 </div>

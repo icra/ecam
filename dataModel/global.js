@@ -1,7 +1,7 @@
 /** Main data structure */
 var Global = {
 	General:{
-		"Name":                    "My system",
+		"Name":                    "No name",
 		"Location":                "Canada, Europe, Russia, Oceania",
 		"Assessment Period Start": "2016-01-01",
 		"Assessment Period End":   "2016-01-31",

@@ -71,7 +71,8 @@
 			newCell.innerHTML="<?php write('#variable_explanation')?>"
 			newRow.insertCell(-1).innerHTML=(function()
 			{
-				var exp = Info[id].explanation
+				//var exp = Info[id].explanation
+				var exp = translate(id+"_expla")
 				if(exp=="")
 					return "<span style=color:#999>No explanation</span>";
 				else
@@ -343,7 +344,7 @@
 </script>
 
 <!--subtitle--><h4><?php write('#variable_detailed_info')?></h4>
-<!--TITLE--><h1><script>document.write(Info[id].description+" ("+id+")")</script></h1>
+<!--TITLE--><h1><script>document.write(translate(id+'_descr')+" ("+id+")")</script></h1>
 <!--VARIABLE INFO--><table style="text-align:left;width:50%" id=info></table>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

@@ -15,9 +15,9 @@
 	<tr><th colspan=8 style=text-align:center>Emission Factors for different fuel types (table 6.3 IPCC vol 6)
 	<tr>
 		<th rowspan=2>Fuel type
-		<th colspan=2>EFCH4 (kg/TJ)
-		<th colspan=2>EFN2O (kg/TJ)
-		<th rowspan=2>EFCO2          (kg/TJ)
+		<th colspan=2>EF CH<sub>4</sub> (kg/TJ)
+		<th colspan=2>EF N<sub>2</sub>O (kg/TJ)
+		<th rowspan=2>EF CO<sub>2</sub>          (kg/TJ)
 		<th rowspan=2>FD             (kg/L)
 		<th rowspan=2>NCV            (TJ/Gg)
 	<tr>

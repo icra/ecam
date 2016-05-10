@@ -109,7 +109,7 @@
 				collection[i].classList.add('inactive');
 				collection[i].onclick="";
 				collection[i].style.cursor="default";
-				collection[i].title+=" (inactive)";
+				collection[i].title+=" (<?php write('#inactive')?>)";
 			}
 		}
 	})();

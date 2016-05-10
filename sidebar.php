@@ -45,7 +45,7 @@
 			var progress = document.querySelector('#sidebar #progress')
 			var length = getCookie('GLOBAL') ? document.cookie.length : 0;
 			progress.value = length;
-			progress.title = "Used memory: "+format(100*length/8100)+" %";
+			progress.title = format(100*length/8100)+"%";
 		}
 	}
 
@@ -120,17 +120,20 @@
 			top:0;right:0;z-index:999;
 			background:white;
 			padding:0;margin:0;
-			box-shadow:5px 5px 40px 5px #cacaca;
-			border-left:1px solid #ccc;
+			box-shadow:5px 5px 40px 5px #666;
+			border-left:2px solid #666;
+			border-right:1px solid #666;
 			overflow:auto;
 		}
 		div#sidebar.off{width:0;height:0;top:0;}
-		div#sidebar.on{width:260px;bottom:0;transition:all 0.3s}
+		div#sidebar.on{width:260px;bottom:0;transition:all 0.2s}
 		div#sidebar.on  div#sidecontent{display:block}
 		div#sidebar.off div#sidecontent{display:none}
 		div#sidebar div{padding:0;margin:0}
-		div#sidebar table{margin:0.1em}
-		div#sidebar td, div#sidebar th {padding:0.3em}
+		div#sidebar table{width:100%;margin:0;}
+		div#sidebar table th {background:#d7bfaf;color:black}
+		div#sidebar td, div#sidebar th {border-left:0;border-right:0;padding:0.3em}
+		div#sidebar table#menu td {border-bottom:0}
 
 		/*links*/
 		#sidebar a.water{color:#00adef} 
@@ -138,8 +141,8 @@
 		#sidebar a.inactive{pointer-events:none;color:#ccc;text-decoration:none} 
 	</style>
 	<div id=sidecontent>
-		<table id=menu style="margin-top:1em">
-			<tr><th colspan=4 id=Name> <script>document.write(Global.General.Name)</script>
+		<table id=menu>
+			<tr><th colspan=4 id=Name style=font-size:18px> <script>document.write(Global.General.Name)</script>
 			<tr>
 				<td align=center><button onclick=newSystem()><?php write('#new')?></button>
 				<input type="file" id="loadfile" accept=".json" onchange="loadFile(event)" style="display:none">
@@ -148,28 +151,30 @@
 				<td align=center><button onclick=clearSystem()><?php write('#clear')?></button>
 		</table>
 
+		<!--red/blue separator bars--> 
+		<div style="padding:0;margin:0;background:#d71d24;height:5px"></div>
+		<div style="padding:0;margin:0;background:#0aaff1;height:5px"></div>
+
 		<!--USED MEMORY-->
 		<style>
 			progress {margin:0.5em;cursor:help}
 		</style>
-		<progress id=progress title="Used memory" value=0 max=8100></progress>
 
-		<!--red/blue separator bars-->
-		<div style="padding:0;margin:0;background:#d71d24;height:5px"></div>
-		<div style="padding:0;margin:0;background:#0aaff1;height:5px"></div>
+		<div style="padding-top:0.2em"><?php write('#memory')?></div>
 
-		<table style=width:95%>
+		<progress id=progress title="<?php write('#memory')?>" value=0 max=8100></progress>
+
+		<table>
 			<tr><th><?php write('#sidebar_general')?>
 			<tr><td><a href=index.php><?php write('#sidebar_home')?></a>
 			<tr><td><a href=getStarted.php><?php write('#getStarted_general_info')?></a>
 			<tr><td><a href=configuration.php><?php write('#configuration')?></a>
 			<tr><th><?php write('#ghg_assessment')?>
 			<tr><td><a href=birds.php><?php write('#quick_assessment')?></a>
-			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
-			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
+			<tr><td>&emsp;		<a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
+			<tr><td>&emsp;&emsp;<a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
 			<tr><th><?php write('#energy_performance')?>
 			<tr><td><a href=edit.php?level=Energy><?php write('#energy_summary')?></a>
-			<tr><td style=background:#aaa>
 			<tr><td>&emsp;
 				<a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction><?php write('#Abstraction')?></a>
 			<tr><td>&emsp;&emsp;
@@ -213,11 +218,11 @@
 			{
 				links[i].parentNode.classList.add('sidebar_selected');
 				links[i].style.color="black";
-				links[i].style.fontWeight="bold";
+				links[i].style.fontWeight="";
 				break;
 			}
 		}
 	})();
 </script>
 
-<style> #sidebar td.sidebar_selected {background:linear-gradient(#eee,#fefefe,#ddd);} </style>
+<style> #sidebar td.sidebar_selected {background:linear-gradient(lightgreen,#fefefe,lightgreen);} </style>

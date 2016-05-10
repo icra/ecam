@@ -155,12 +155,13 @@
 				/*description*/ 
 				var newCell=newRow.insertCell(-1);
 
-				newCell.setAttribute('title', Info[field] ? Info[field].explanation : "no explanation");
+				newCell.setAttribute('title', translate(field+"_expla"));
 				newCell.style.cursor='help';
 
 				newCell.innerHTML=(function()
 				{
-					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description <button onclick=removeGhost('"+field+"')>Remove it</button></span>";
+					//implementing translation:
+					var description = translate(field+"_descr");
 					var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";
 				})();
@@ -258,11 +259,11 @@
 				})();
 			}
 
-			//here check if t.rows.length is 2
+			//here check if table is empty (==t.rows.length is 2)
 			if(t.rows.length<3)
 				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#ccc>No inputs</span>";
 
-			//bottom line with the color of W/WW
+			//bottom line decoration with the color of W/WW
 			var newRow=t.insertRow(-1);
 			var newTh=document.createElement('th');
 			newTh.setAttribute('colspan',4)
@@ -301,15 +302,12 @@
 				newCell=newRow.insertCell(-1);
 				newCell.setAttribute('title',(function()
 				{
-					if(!Info[field] || Info[field].explanation == "") 
-						return "no explanation";
-					else
-						return Info[field].explanation;
+					return translate(field+"_expla");
 				})());
 				newCell.style.cursor='help';
 				newCell.innerHTML=(function()
 				{
-					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
+					var description = translate(field+"_descr");
 					var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";
 				})();
@@ -485,16 +483,13 @@
 				newCell=newRow.insertCell(-1);
 				newCell.setAttribute('title',(function()
 				{
-					if(!Info[field] || Info[field].explanation == "") 
-						return "no explanation";
-					else
-						return Info[field].explanation;
+					return translate(field+"_expla");
 				})());
 
 				newCell.style.cursor='help';
 				newCell.innerHTML=(function()
 				{
-					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
+					var description = translate(field+"_descr");
 					var color = field.search(/^ww/)==0 ? "#d71d24" : "";
 					var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";
@@ -574,16 +569,13 @@
 				newCell=newRow.insertCell(-1);
 				newCell.setAttribute('title',(function()
 				{
-					if(!Info[field] || Info[field].explanation == "") 
-						return "no explanation";
-					else
-						return Info[field].explanation;
+					return translate(field+"_expla");
 				})());
 
 				newCell.style.cursor='help';
 				newCell.innerHTML=(function()
 				{
-					var description = Info[field]?Info[field].description:"<span style=color:#ccc>no description</span>";
+					var description = translate(field+"_descr");
 					var color = field.search(/^ww/)==0 ? "#d71d24" : "";
 					var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";

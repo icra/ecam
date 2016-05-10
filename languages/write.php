@@ -2,10 +2,10 @@
 
 /** GLOBALS */
 
-//current
+//current selection is stored in cookies
 $lang = isset($_COOKIE['lang']) ? $_COOKIE['lang'] : "en" ;
 
-//load language
+//load selected language
 include "$lang.php";
 
 function write($id)
