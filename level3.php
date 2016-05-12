@@ -84,7 +84,7 @@
 		function Substage()
 		{
 			/*get a list of variables for this level*/ var inputs=getInputs();
-			/*substage default name*/ this.name="name";
+			/*substage default name*/ this.name="<?php write('#name')?>";
 			//make the object look like, e.g. Substage {tV1: 0, tV2: 0, tV3: 0, tV4: 0, tV5: 0, ...}
 			for(var i in inputs){this[inputs[i]]=0;}
 		}
@@ -262,8 +262,8 @@
 					var newCell=newRow.insertCell(-1);
 					newCell.style.textAlign="left";
 					newCell.style.cursor="help";
-					newCell.setAttribute('title',Info[code] ? Info[code].explanation : "no explanation");
-					newCell.innerHTML=Info[code]?Info[code].description:"<span style=color:#ccc>not defined</span>";
+					newCell.setAttribute('title', translate(code+'_expla'));
+					newCell.innerHTML=translate(code+'_descr');
 
 					//values: go over substages
 					var multiplier=Units.multiplier(code);
@@ -415,7 +415,7 @@
 				//new row
 				var newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
-				newRow.setAttribute('title',Info[field] ? Info[field].explanation : "no explanation");
+				newRow.setAttribute('title',translate(field+'_expla'));
 
 				//if is calculated variable, hide it (no continue bc we need it)
 				if(field.search(/^c_/)>=0) newRow.style.display='none';
@@ -434,7 +434,7 @@
 				})();
 
 				//description
-				newRow.insertCell(-1).innerHTML = Info[field] ? (Info[field].description) : "<span style=color:#ccc>no description</span>";
+				newRow.insertCell(-1).innerHTML = translate(field+'_descr');
 
 				/** value: Compute CurrentStage[field]() for each substage*/
 				(function()

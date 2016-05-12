@@ -613,7 +613,7 @@
 
 			//if the table is empty, add a warning
 			if(t.rows.length<3)
-				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#999>There are no formulas in this level</span>";
+				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#999><?php write('#edit_no_formulas')?></span>";
 
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
@@ -808,10 +808,9 @@
 			<tr><th colspan=4 class=tableHeader>OUTPUTS —
 				<?php 
 					if($sublevel) 
-						echo "Context "; 
+						write('#edit_context_indicators');
 					else 
-						echo "Service level ";
-					write('#edit_indicators');
+						write('#edit_service_level_indicators');
 				?>
 			<tr>
 				<th><?php write('#edit_description')?>

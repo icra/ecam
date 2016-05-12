@@ -10,9 +10,6 @@
 <script src="js/lz-string.js"></script>
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 
-<!--graphs functions-->
-<script src="graphs.js"></script>
-
 <!--the order of the imports is important. first global, then cookies-->
 <script src="dataModel/global.js"></script>          <!--Default Global object here-->
 <script src="dataModel/substages.js"></script>
@@ -44,6 +41,9 @@
 		return sol.response;
 	}
 </script>
+
+<!--graphs functions-->
+<?php include'graphs.php'?>
 
 <!--title-->
 <title>ECAM Web Tool</title>

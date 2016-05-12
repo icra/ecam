@@ -105,7 +105,7 @@
 					}
 				?>
 
-				var description=Info[variable] ? Info[variable].description : "<span style=color:#ccc>no description</span>";
+				var description=translate(variable+'_descr');
 				var unit = Info[variable] ? (Global.Configuration.Units[variable] || Info[variable].unit) : "<span style=color:#ccc>no unit</a>"
 				var multiplier = Units.multiplier(variable);
 				ret+="<tr field='"+variable+"' family='"+family+"'>"+

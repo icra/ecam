@@ -188,50 +188,53 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
 <!--TITLE--><h1><?php write('#birds_quick_assessment_of')?> [<script>document.write(Global.General.Name)</script>]</h1>
+<div style="padding:0;margin-bottom:1em;background:#d7bfaf;height:5px"></div>
 </center>
 
 <!--inputs table-->
 <div class=inline style="margin-left:10px;width:30%;">
+	<!--description-->
+	<div style="color:#666;font-size:16px;margin:0.5em 0 0.5em 0">INPUTS - <?php write('#birds_enter_typical')?></div>
 	<!--assessment period-->
 	<div><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a>: <script>document.write(Global.General.Days())</script> <?php write('#days')?></div> 
 	<!--conversion factor-->
 	<div><a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kg CO<sub>2</sub>/kWh</div> 
-	<!--description-->
-	<div style="color:#666;font-size:16px;margin:0.5em 0 0.5em 0">INPUTS - <?php write('#birds_enter_typical')?></div>
+	<!--inputs-->
 	<table id=inputs>
 		<tr><th colspan=3>
-				<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Water')?>
-			<tr stage=water class=hidden><td>Resident population                      <td><input id='ws_resi_pop' onchange="BEV.updateField(this)"> <td>People
-			<tr stage=water class=hidden><td>Serviced population                      <td><input id='ws_serv_pop' onchange="BEV.updateField(this)"> <td>People
-			<tr stage=water class=hidden><td>Annual average authorized consumption    <td><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>m3/year
-			<tr stage=water class=hidden><td>Energy consumed from the grid per month  <td><input id='ws_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/month
-			<tr stage=water class=hidden><td>Monthly energy costs                     <td><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
-			<tr stage=water class=hidden><td>Monthly running costs                    <td><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
-			<tr stage=water class=hidden><td>Monthly volume of fuel consumed          <td><input id='ws_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
-			<tr stage=water class=hidden><td>Percentage of non revenue water          <td><input id='ws_non_revw' onchange="BEV.updateField(this)"> <td>%
+
+			<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Water')?>
+			<tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?> <td><input id='ws_resi_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
+			<tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?> <td><input id='ws_serv_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
+			<tr stage=water class=hidden><td><?php write('#birds_ws_vol_auth')?> <td><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>m3/<?php write('#birds_year')?>
+			<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cons')?> <td><input id='ws_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/<?php write('#birds_month')?>
+			<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
+			<tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
+			<tr stage=water class=hidden><td><?php write('#birds_ws_vol_fuel')?> <td><input id='ws_vol_fuel' onchange="BEV.updateField(this)"> <td>L/<?php write('#birds_month')?>
+			<tr stage=water class=hidden><td><?php write('#ws_non_revw_descr')?> <td><input id='ws_non_revw' onchange="BEV.updateField(this)"> <td>%
 			<tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
+
 		<tr><th colspan=3 style=background:#d71d24>
-				<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
-			<tr stage=waste class=hidden><td>Resident population                      <td><input id='ww_resi_pop' onchange="BEV.updateField(this)"> <td>People
-			<tr stage=waste class=hidden><td>Population connected                     <td><input id='ww_conn_pop' onchange="BEV.updateField(this)"> <td>People
+
+			<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
+			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?><td><input id='ww_resi_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#ww_conn_pop_descr')?><td><input id='ww_conn_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
 			<tr stage=waste class=hidden>
-				<td>Serviced population                      
-					<span 
-						title="The serviced population in the wastewater system is the population connected to the sewer and which wastewater reaches the treatment plant to be treated prior to discharge. This input is not a known value for the typical utility ECAM-Tool-user. It needs to be calculated using the input 'BOD load in the influent',in kg BOD mg/L multiplied by the  “Volume of treated wastewater” in m3 divided by the utility specific standard value of  “BOD per person” in g of BOD/pers/day. The tool proposes a default value per country, based on the IPCC recommendations" 
-						style="color:orange;cursor:help">(note)</span>
-				<td><input id='ww_serv_pop' onchange="BEV.updateField(this)"> <td>People
-			<tr stage=waste class=hidden><td>Treated wastewater daily flow            <td><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>/day
-			<tr stage=waste class=hidden><td>Energy consumed from the grid per month  <td><input id='ww_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/month
-			<tr stage=waste class=hidden><td>Monthly energy costs                     <td><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
-			<tr stage=waste class=hidden><td>Monthly running costs                    <td><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/month
-			<tr stage=waste class=hidden><td>Trips to sludge disposal site per week   <td><input id='ww_num_trip' onchange="BEV.updateField(this)"> <td>trips/week
-			<tr stage=waste class=hidden><td>Distance to disposal site                <td><input id='ww_dist_dis' onchange="BEV.updateField(this)"> <td>km
+				<td><?php write('#ww_serv_pop_descr')?>
+					<span title="<?php write('#birds_ww_serv_pop_note')?>" style="color:orange;cursor:help">(<?php write('#birds_note')?>)</span>
+				<td><input id='ww_serv_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_wwtr')?> <td><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>/day
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cons')?> <td><input id='ww_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/<?php write('#birds_month')?>
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?> <td><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?> <td><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_num_trip')?> <td><input id='ww_num_trip' onchange="BEV.updateField(this)"> <td><?php write('#birds_trips_week')?>
+			<tr stage=waste class=hidden><td><?php write('#ww_dist_dis_descr')?> <td><input id='ww_dist_dis' onchange="BEV.updateField(this)"> <td>km
 			<tr stage=waste class=hidden>
-				<td>Average Total Nitrogen at discharge 
-					<span title="ECAM stores the total kg internally, not the concentration. You need to enter the 'Treated wastewater daily flow' first" style=color:orange;cursor:help>(note)</span>
-				<td> <input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
-			<tr stage=waste class=hidden><td>Monthly volume of fuel consumed          <td><input id='ww_vol_fuel' onchange="BEV.updateField(this)"> <td>L/month
-			<tr stage=waste class=hidden><td>Annual protein consumption per capita    <td><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/year
+				<td><?php write('#birds_ww_n2o_effl')?> 
+					<span title="<?php write('#birds_ww_n2o_effl_note')?>" style=color:orange;cursor:help>(<?php write('#birds_note')?>)</span>
+				<td><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_fuel')?><td><input id='ww_vol_fuel' onchange="BEV.updateField(this)"> <td>L/<?php write('#birds_month')?>
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_prot_con')?><td><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/<?php write('#birds_people')?>/<?php write('#birds_year')?>
 			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 	</table>
 </div>
@@ -240,8 +243,10 @@
 <div id=graphs class=inline style="width:65%;">
 	<style> 
 		#graphs table{margin:auto}
-		#graphs button{display:block;margin:auto} 
-		#graphs div[id^=graph] {border:1px solid #ccc}
+		#graphs button{display:block;margin:auto;margin-bottom:0.5em;margin-top:0;font-size:10px} 
+		#graphs div[id^=graph] {border:1px solid #ccc;}
+		#graphs div div {padding:0}
+		#graphs div.options {text-align:center;padding:1em}
 	</style>
 
 	<div id=graph1 class=inline style=width:49%><?php write('#loading')?></div>

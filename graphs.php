@@ -1,29 +1,40 @@
+<script>
 var Graphs = {}
 
 Graphs.graph1=function(withTable,container)
 {
 	//pointers
-	var years = Global.General.Days()/365;
+	var years = Global.General.Years();
 
-	//values
+	//values: 4 combinations with electricity/non & water/waste
 	var wsYes = Global.Water.ws_KPI_GHG_elec()/years;
 	var wsNon = Global.Water.ws_KPI_GHG_ne()/years;
 	var wwYes = Global.Waste.ww_KPI_GHG_elec()/years;
 	var wwNon = Global.Waste.ww_KPI_GHG_ne()/years;
 
-	//actual graph data
+	//names
+	var names = [
+		"<?php echo '[';write('#Water');echo '] ';write('#ws_KPI_GHG_elec_descr')?>",
+		"<?php echo '[';write('#Water');echo '] ';write('#ws_KPI_GHG_ne_descr')?>  ",
+		"<?php echo '[';write('#Waste');echo '] ';write('#ww_KPI_GHG_elec_descr')?>",
+		"<?php echo '[';write('#Waste');echo '] ';write('#ww_KPI_GHG_ne_descr')?>",
+	];
+
+	//array graph data
 	var data=google.visualization.arrayToDataTable([
-		['Stage',                            'Emissions'],
-		["From electricity (Water)",          wsYes],
-		["From fuel engines (Water)",         wsNon],
-		["From electricity (Wastewater)",     wwYes],
-		["From non electricity (Wastewater)", wwNon],
+		['<?php write('#stage')?>','<?php write('#emissions')?>'],
+		[names[0],wsYes],
+		[names[1],wsNon],
+		[names[2],wwYes],
+		[names[3],wwNon],
 	]);
 
 	//options
 	var options= 
 	{ 
-		title:"Greenhouse gas emissions (kg/year)",
+		height:400,
+		legend:{position:'left'},
+		title:"<?php write('#graphs_graph1')?>",
 		slices:
 		{
 			0:{color:'#bca613' },
@@ -31,29 +42,33 @@ Graphs.graph1=function(withTable,container)
 			2:{color:'#89375c' },
 			3:{color:'#f08080' },
 		},
-		allowHtml:true,
 	}
 
-	//do empty the container element
+	//empty the container element
 	document.getElementById(container).innerHTML='';
 
 	//draw
 	var chart=new google.visualization.PieChart(document.getElementById(container));
 	chart.draw(data,options);
 
+	var yy='<?php write('#years')?>'; //string
+
 	//create a table string
 	if(withTable)
 	{
 		var table=""+
-		"<table>"+
-		"<button onclick=Graphs.graph1(false,'"+container+"')>Hide table</button>"+
-			"<tr><th>Slice                             <th>Variable                                                    <th>Value (kgCO<sub>2</sub>/year)"+
-			"<tr><td>From electricity  (Water)         <td><a href=variable.php?id=ws_KPI_GHG_elec>ws_KPI_GHG_elec</a>/years <td>"+format(wsYes)+
-			"<tr><td>From fuel engines (Water)         <td><a href=variable.php?id=ws_KPI_GHG_ne>ws_KPI_GHG_ne</a>/years     <td>"+format(wsNon)+
-			"<tr><td>From electricity (Wastewater)     <td><a href=variable.php?id=ww_KPI_GHG_elec>ww_KPI_GHG_elec</a>/years <td>"+format(wwYes)+
-			"<tr><td>From non electricity (Wastewater) <td><a href=variable.php?id=ww_KPI_GHG_ne>ww_KPI_GHG_ne</a>/years     <td>"+format(wwNon)+
+		"<table title=graph1>"+
+		"<button onclick=Graphs.graph1(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
+			"<tr><th><?php write('#graphs_slice')?>    <th><?php write('#graphs_formula')?>                                  <th><?php write('#graphs_value')?>"+
+			"<tr><td>"+names[0]+"<td><a href=variable.php?id=ws_KPI_GHG_elec>ws_KPI_GHG_elec</a>/"+yy+" <td>"+format(wsYes)+
+			"<tr><td>"+names[1]+"<td><a href=variable.php?id=ws_KPI_GHG_ne>ws_KPI_GHG_ne</a>/"+yy+"     <td>"+format(wsNon)+
+			"<tr><td>"+names[2]+"<td><a href=variable.php?id=ww_KPI_GHG_elec>ww_KPI_GHG_elec</a>/"+yy+" <td>"+format(wwYes)+
+			"<tr><td>"+names[3]+"<td><a href=variable.php?id=ww_KPI_GHG_ne>ww_KPI_GHG_ne</a>/"+yy+"     <td>"+format(wwNon)+
 		"</table>"+
-		'<a href="'+chart.getImageURI()+'" download="image.png">Printable version</a>'+
+		'<div class=options>'+
+		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+
+		"	<a href='graph.php?g=graph1'><?php write('#graphs_go_to')?></a>"+
+		'</div>'+
 		"";
 		var div=document.createElement('div');
 		div.style.fontSize="10px";
@@ -65,37 +80,40 @@ Graphs.graph1=function(withTable,container)
 		//button "show table"
 		var div=document.createElement('div');
 		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.graph1(true,'"+container+"')>Show table</button>"
+		div.innerHTML="<button onclick=Graphs.graph1(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
 	}
 }
 
 Graphs.graph2=function(withTable,container)
 {
-	//pointer
-	var Days=Global.General.Days(); //TBD
-
 	//values
 	var ws=Global.Water.ws_nrg_cons;
 	var ww=Global.Waste.ww_nrg_cons;
 
+	var names=[
+		"<?php write('#Water')?>",
+		"<?php write('#Waste')?>",
+	]
+
 	//actual graph data
 	var data=google.visualization.arrayToDataTable([
-		['Stage',       'Emissions'],
-		["Water supply", ws],
-		["Wastewater",   ww],
+		['<?php write('#stage')?>','<?php write('#emissions')?>'],
+		[names[0], ws],
+		[names[1], ww],
 	]);
 
 	//options
 	var options= 
 	{ 
+		height:400,
+		legend:{position:'left'},
 		pieHole:0.4,
-		title:"Energy consumption (kWh)",
+		title:"<?php write('#graphs_graph2')?>",
 		slices:
 		{
 			0:{ color: '#0aaeef' },
 			1:{ color: '#bf5050' },
 		},
-		allowHtml:true,
 	};
 
 	//empty the container element
@@ -110,13 +128,16 @@ Graphs.graph2=function(withTable,container)
 	{
 		//create a table string
 		var table=""+
-		"<button onclick=Graphs.graph2(false,'"+container+"')>Hide table</button>"+
-		"<table>"+
-			"<tr><th>Slice        <th>Variable <th>Value (kWh)"+
-			"<tr><td>Water supply <td><a href=variable.php?id=ws_nrg_cons>ws_nrg_cons</a><td>"+format(ws)+
-			"<tr><td>Wastewater   <td><a href=variable.php?id=ww_nrg_cons>ww_nrg_cons</a><td>"+format(ww)+
+		"<button onclick=Graphs.graph2(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
+		"<table title=graph2>"+
+			"<tr><th><?php write('#graphs_slice')?><th><?php write('#graphs_formula')?><th><?php write('#graphs_value')?>"+
+			"<tr><td>"+names[0]+"<td><a href=variable.php?id=ws_nrg_cons>ws_nrg_cons</a><td>"+format(ws)+
+			"<tr><td>"+names[1]+"<td><a href=variable.php?id=ww_nrg_cons>ww_nrg_cons</a><td>"+format(ww)+
 		"</table>"+
-		'<a href="'+chart.getImageURI()+'" download="image.png">Printable version</a>'+
+		'<div class=options>'+
+		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+
+		"	<a href='graph.php?g=graph2'><?php write('#graphs_go_to')?></a>"+
+		'</div>'+
 		"";
 		var div = document.createElement('div');
 		div.style.fontSize="10px";
@@ -128,7 +149,7 @@ Graphs.graph2=function(withTable,container)
 		//button "show table"
 		var div=document.createElement('div');
 		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.graph2(true,'"+container+"')>Show table</button>"
+		div.innerHTML="<button onclick=Graphs.graph2(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
 	}
 }
 
@@ -140,7 +161,7 @@ Graphs.graph2=function(withTable,container)
 		//pointers
 		var WS = Global.Water;
 		var WW = Global.Waste;
-		var years = Global.General.Days()/365;
+		var years = Global.General.Years();
 
 		//total kg 
 		var ws_el = WS.ws_KPI_GHG_elec();
@@ -154,29 +175,32 @@ Graphs.graph2=function(withTable,container)
 		var slice_3  = ww_el/years;
 		var slice_4  = ww_ne/years;
 
+		var names=[
+			"<?php write('#ws_KPI_GHG_elec_descr')?>",
+			"<?php write('#ws_KPI_GHG_ne_descr')?>",
+			"<?php write('#ww_KPI_GHG_elec_descr')?>",
+			"<?php write('#ww_KPI_GHG_ne_descr')?>",
+		]
+
 		//data
 		var data=google.visualization.arrayToDataTable
 		([
 			[ 
-				'Emission type', 
-				'Electrical related (Water)', 
-				'Non-electrical related (Water)', 
-				'Electrical related (Wastewater)', 
-				'Non-electrical related (Wastewater)', 
+				'Emission type', names[0], names[1], names[2], names[3], 
 				{role:'annotation'} 
 			],
-			['Water'      , slice_1, slice_2, 0,       0,      ''],
-			['Wastewater' , 0,       0,       slice_3, slice_4,''],
+			['<?php write('#Water')?>',slice_1,slice_2,0,0,''],
+			['<?php write('#Waste')?>',0,0,slice_3,slice_4,''],
 		]);
 
 		//options
 		var options=
 		{
-			title:"GHG emissions (kg/year)",
-			legend:{position:'top',maxLines:3},
+			title:"kg CO2/year",
+			height:400,
+			legend:{position:'top'},
 			isStacked:true,
 			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
-			allowHtml:true,
 			bar: { groupWidth: '75' },
 		};
 
@@ -188,18 +212,23 @@ Graphs.graph2=function(withTable,container)
 		var chart=new google.visualization.ColumnChart(document.getElementById(container));
 		chart.draw(view, options);
 
+		var yy='<?php write('#years')?>';
+
 		//tables
 		if(withTable)
 		{
 			//create a table string
 			var table=""+
-			"<button onclick=Graphs.graph3a(false,'"+container+"')>Hide table</button>"+
-			"<table >"+
-				"<tr><th>Stage                  <th>Water                 <th>kg/year            <th>Wastewater            <th>kg/year"+
-				"<tr><th>Non electrical related <td>ws_KPI_GHG_ne  /years <td>"+format(slice_2)+"<td>ww_KPI_GHG_elec/years <td>"+format(slice_4)+
-				"<tr><th>Electrical related     <td>ws_KPI_GHG_elec/years <td>"+format(slice_1)+"<td>ww_KPI_GHG_ne  /years <td>"+format(slice_3)+
+			"<button onclick=Graphs.graph3a(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
+			"<table title=graph3a>"+
+				"<tr><th><?php write('#graphs_slice')?><th><?php write('#Water')?><th>kg CO2/<?php write('#year')?><th><?php write('#Waste')?><th>kg CO2/<?php write('#year')?>"+
+				"<tr><th><?php write('#ww_KPI_GHG_ne_descr')?><td>ws_KPI_GHG_ne/"+yy+"<td>"+format(slice_2)+"<td>ww_KPI_GHG_ne/"+yy+" <td>"+format(slice_4)+
+				"<tr><th><?php write('#ww_KPI_GHG_elec_descr')?><td>ws_KPI_GHG_elec/"+yy+" <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/"+yy+" <td>"+format(slice_3)+
 			"</table>"+
-			'<a href="'+chart.getImageURI()+'" download="image.png">Printable version</a>'+
+			'<div class=options>'+
+			'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+
+			"	<a href='graph.php?g=graph3a'><?php write('#graphs_go_to')?></a>"+
+			'</div>'+
 			"";
 			var div = document.createElement('div');
 			div.style.fontSize="10px";
@@ -211,7 +240,7 @@ Graphs.graph2=function(withTable,container)
 			//button "show table"
 			var div=document.createElement('div');
 			document.getElementById(container).appendChild(div);
-			div.innerHTML="<button onclick=Graphs.graph3a(true,'"+container+"')>Show table</button>"
+			div.innerHTML="<button onclick=Graphs.graph3a(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
 		}
 	}
 
@@ -221,7 +250,7 @@ Graphs.graph2=function(withTable,container)
 		//pointers
 		var WS = Global.Water;
 		var WW = Global.Waste;
-		var years = Global.General.Days()/365;
+		var years = Global.General.Years();
 
 		//total kg 
 		var ws_el = WS.ws_KPI_GHG_elec();
@@ -235,28 +264,32 @@ Graphs.graph2=function(withTable,container)
 		var slice_3 = ww_el/years/WW.ww_serv_pop;
 		var slice_4 = ww_ne/years/WW.ww_serv_pop;
 
+		var names = [
+			"<?php write('#ws_KPI_GHG_elec_descr')?>",
+			"<?php write('#ws_KPI_GHG_ne_descr')?>",
+			"<?php write('#ww_KPI_GHG_elec_descr')?>",
+			"<?php write('#ww_KPI_GHG_ne_descr')?>",
+		]
+
 		//data
 		var data=google.visualization.arrayToDataTable
 		([
 			[ 
 				'Emission type', 
-				'Electrical related (Water)', 
-				'Non-electrical related (Water)', 
-				'Electrical related (Wastewater)', 
-				'Non-electrical related (Wastewater)', 
-				{role:'annotation'} 
+				names[0], names[1], names[2], names[3], {role:'annotation'} 
 			],
-			['Water'      , slice_1, slice_2, 0,       0,      ''],
-			['Wastewater' , 0,       0,       slice_3, slice_4,''],
+			['<?php write('#Water')?>', slice_1, slice_2,       0,       0,''],
+			['<?php write('#Waste')?>',       0,       0, slice_3, slice_4,''],
 		]);
 
 		//options
-		var options={
-			title:"GHG emissions (kg/serv.pop./year)",
-			legend:{position:'right',maxLines:100},
+		var options=
+		{
+			title:"kg CO2/serv.pop./year",
+			height:400,
+			legend:{position:'top'},
 			isStacked:true,
 			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
-			allowHtml:true,
 			bar: { groupWidth: '75' },
 		};
 
@@ -268,18 +301,23 @@ Graphs.graph2=function(withTable,container)
 		var chart=new google.visualization.ColumnChart(document.getElementById(container));
 		chart.draw(view, options);
 
+		var yy='<?php write('#years')?>';
+
 		//tables
 		if(withTable)
 		{
 			//create a table string
 			var table=""+
-			"<button onclick=Graphs.graph3b(false,'"+container+"')>Hide table</button>"+
-			"<table>"+
-				"<tr><th>Stage                  <th>Water                             <th>kg/serv.pop./year  <th>Wastewater                                                              <th>kg/serv.pop./year"+
-				"<tr><th>Non electrical related <td>ws_KPI_GHG_ne  /ws_serv_pop/years <td>"+format(slice_2)+"<td>(ww_KPI_GHG_ne-ww_KPI_GHG_ch4_unt-ww_KPI_GHG_n2o_unt)/ws_serv_pop/years <td>"+format(slice_4)+
-				"<tr><th>Electrical related     <td>ws_KPI_GHG_elec/ww_serv_pop/years <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/ww_serv_pop/years                                       <td>"+format(slice_3)+
+			"<button onclick=Graphs.graph3b(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
+			"<table title=graph3b>"+
+				"<tr><th><?php write('#graphs_slice')?><th><?php write('#Water')?><th>kg CO2/serv.pop./"+yy+"  <th><?php write('#Waste')?><th>kg CO2/serv.pop./"+yy+""+
+				"<tr><th><?php write('#ww_KPI_GHG_ne_descr')?><td>ws_KPI_GHG_ne/ws_serv_pop/"+yy+" <td>"+format(slice_2)+"<td>(ww_KPI_GHG_ne-ww_KPI_GHG_ch4_unt-ww_KPI_GHG_n2o_unt)/ws_serv_pop/"+yy+" <td>"+format(slice_4)+
+				"<tr><th><?php write('#ww_KPI_GHG_elec_descr')?><td>ws_KPI_GHG_elec/ww_serv_pop/"+yy+" <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/ww_serv_pop/"+yy+"                                       <td>"+format(slice_3)+
 			"</table>"+
-			'<a href="'+chart.getImageURI()+'" download="image.png">Printable version</a>'+
+			'<div class=options>'+
+			'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+
+			"	<a href='graph.php?g=graph3b'><?php write('#graphs_go_to')?></a>"+
+			'</div>'+
 			"";
 			var div = document.createElement('div');
 			div.style.fontSize="10px";
@@ -291,7 +329,7 @@ Graphs.graph2=function(withTable,container)
 			//button "show table"
 			var div=document.createElement('div');
 			document.getElementById(container).appendChild(div);
-			div.innerHTML="<button onclick=Graphs.graph3b(true,'"+container+"')>Show table</button>"
+			div.innerHTML="<button onclick=Graphs.graph3b(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
 		}
 	}
 
@@ -301,7 +339,7 @@ Graphs.graph2=function(withTable,container)
 		//pointers
 		var WS = Global.Water;
 		var WW = Global.Waste;
-		var years = Global.General.Days()/365;
+		var years = Global.General.Years();
 
 		//total kg 
 		var ws_el = WS.ws_KPI_GHG_elec();
@@ -315,28 +353,31 @@ Graphs.graph2=function(withTable,container)
 		var slice_3 = ww_el/years/WW.ww_resi_pop;
 		var slice_4 = ww_ne/years/WW.ww_resi_pop;
 
+		var names=[
+			"<?php write('#ws_KPI_GHG_elec_descr')?>",
+			"<?php write('#ws_KPI_GHG_ne_descr')?>",
+			"<?php write('#ww_KPI_GHG_elec_descr')?>",
+			"<?php write('#ww_KPI_GHG_ne_descr')?>",
+		]
+
 		//data
 		var data=google.visualization.arrayToDataTable
 		([
 			[ 
-				'Emission type', 
-				'Electrical related (Water)', 
-				'Non-electrical related (Water)', 
-				'Electrical related (Wastewater)', 
-				'Non-electrical related (Wastewater)', 
-				{role:'annotation'} 
+				'Emission type', names[0], names[1], names[2], names[3], {role:'annotation'} 
 			],
-			['Water'      , slice_1, slice_2, 0,       0,      ''],
-			['Wastewater' , 0,       0,       slice_3, slice_4,''],
+			['<?php write('#Water')?>', slice_1, slice_2, 0,       0,      ''],
+			['<?php write('#Waste')?>', 0,       0,       slice_3, slice_4,''],
 		]);
 
 		//options
-		var options={
-			title:"GHG emissions (kg/resi.pop./year)",
-			legend:{position:'right',maxLines:100},
+		var options=
+		{
+			title:"kg CO2/resi.pop./year",
+			height:400,
+			legend:{position:'top'},
 			isStacked:true,
 			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
-			allowHtml:true,
 			bar: { groupWidth: '75' },
 		};
 
@@ -348,18 +389,23 @@ Graphs.graph2=function(withTable,container)
 		var chart=new google.visualization.ColumnChart(document.getElementById(container));
 		chart.draw(view, options);
 
+		var yy='<?php write('#years')?>';
+
 		//tables
 		if(withTable)
 		{
 			//create a table string
 			var table=""+
-			"<button onclick=Graphs.graph3c(false,'"+container+"')>Hide table</button>"+
-			"<table >"+
-				"<tr><th>Stage                  <th>Water                             <th>kg/resi.pop./year       <th>Wastewater                   <th>kg/resi.pop./year"+
-				"<tr><th>Non electrical related <td>ws_KPI_GHG_ne  /ws_resi_pop/years <td>"+format(slice_2)+"<td>ww_KPI_GHG_elec/ws_resi_pop/years <td>"+format(slice_4)+
-				"<tr><th>Electrical related     <td>ws_KPI_GHG_elec/ww_resi_pop/years <td>"+format(slice_1)+"<td>ww_KPI_GHG_ne  /ww_resi_pop/years <td>"+format(slice_3)+
+			"<button onclick=Graphs.graph3c(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
+			"<table title=graph3c>"+
+				"<tr><th><?php write('#graphs_slice')?><th><?php write('#Water')?><th>kg CO2/resi.pop./"+yy+" <th><?php write('#Waste')?><th>kg CO2/resi.pop./"+yy+""+
+				"<tr><th><?php write('#ww_KPI_GHG_ne_descr')?>  <td>ws_KPI_GHG_ne/ws_resi_pop/"+yy+"   <td>"+format(slice_2)+"<td>ww_KPI_GHG_ne/ws_resi_pop/"+yy+"   <td>"+format(slice_4)+
+				"<tr><th><?php write('#ww_KPI_GHG_elec_descr')?><td>ws_KPI_GHG_elec/ww_resi_pop/"+yy+" <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/ww_resi_pop/"+yy+" <td>"+format(slice_3)+
 			"</table>"+
-			'<a href="'+chart.getImageURI()+'" download="image.png">Printable version</a>'+
+			'<div class=options>'+
+			'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+
+			"	<a href='graph.php?g=graph3c'><?php write('#graphs_go_to')?></a>"+
+			'</div>'+
 			"";
 			var div = document.createElement('div');
 			div.style.fontSize="10px";
@@ -371,7 +417,7 @@ Graphs.graph2=function(withTable,container)
 			//button "show table"
 			var div=document.createElement('div');
 			document.getElementById(container).appendChild(div);
-			div.innerHTML="<button onclick=Graphs.graph3c(true,'"+container+"')>Show table</button>"
+			div.innerHTML="<button onclick=Graphs.graph3c(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
 		}
 	}
 
@@ -394,30 +440,31 @@ Graphs.graph2=function(withTable,container)
 		var slice_3  = ww_el/WW.ww_vol_coll;
 		var slice_4  = ww_ne/WW.ww_vol_coll;
 
+		var names=[
+			"<?php write('#ws_KPI_GHG_elec_descr')?>",
+			"<?php write('#ws_KPI_GHG_ne_descr')?>",
+			"<?php write('#ww_KPI_GHG_elec_descr')?>",
+			"<?php write('#ww_KPI_GHG_ne_descr')?>",
+		]
+
 		//data
 		var data=google.visualization.arrayToDataTable
 		([
 			[ 
-				'Emission type', 
-				'Electrical related (Water)', 
-				'Non-electrical related (Water)', 
-				'Electrical related (Wastewater)', 
-				'Non-electrical related (Wastewater)', 
-				{role:'annotation'} 
+				'Emission type', names[0], names[1], names[2], names[3], {role:'annotation'} 
 			],
-			['Water'      , slice_1, slice_2, 0,       0,      ''],
-			['Wastewater' , 0,       0,       slice_3, slice_4,''],
+			['<?php write('#Water')?>', slice_1, slice_2, 0,       0,      ''],
+			['<?php write('#Waste')?>', 0,       0,       slice_3, slice_4,''],
 		]);
-
 
 		//options
 		var options=
 		{
-			title:"GHG emissions (kg/m3)",
-			legend:{position:'right',maxLines:100},
+			title:"kg CO2/m3",
+			height:400,
+			legend:{position:'top'},
 			isStacked:true,
 			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
-			allowHtml:true,
 			bar: { groupWidth: '75' },
 		};
 
@@ -434,13 +481,16 @@ Graphs.graph2=function(withTable,container)
 		{
 			//create a table string
 			var table=""+
-			"<button onclick=Graphs.graph3d(false,'"+container+"')>Hide table</button>"+
-			"<table >"+
-				"<tr><th>Stage                  <th>Water                       <th>kg/m3              <th>Wastewater                                                        <th>kg/m3"+
-				"<tr><th>Non electrical related <td>ws_KPI_GHG_ne  /ws_vol_auth <td>"+format(slice_2)+"<td>(ww_KPI_GHG_ne-ww_KPI_GHG_ch4_unt-ww_KPI_GHG_n2o_unt)/ws_vol_auth <td>"+format(slice_4)+
-				"<tr><th>Electrical related     <td>ws_KPI_GHG_elec/ww_vol_coll <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/ww_vol_coll                                       <td>"+format(slice_3)+
+			"<button onclick=Graphs.graph3d(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
+			"<table title=graph3d>"+
+				"<tr><th><?php write('#graphs_slice')?><th><?php write('#Water')?><th>kg CO2/m3><?php write('#Wastewater')?><th>kg CO2/m3"+
+				"<tr><th><?php write('#ww_KPI_GHG_ne_descr')?>  <td>ws_KPI_GHG_ne/ws_vol_auth   <td>"+format(slice_2)+"<td>(ww_KPI_GHG_ne-ww_KPI_GHG_ch4_unt-ww_KPI_GHG_n2o_unt)/ws_vol_coll <td>"+format(slice_4)+
+				"<tr><th><?php write('#ww_KPI_GHG_elec_descr')?><td>ws_KPI_GHG_elec/ww_vol_auth <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/ww_vol_coll                                       <td>"+format(slice_3)+
 			"</table>"+
-			'<a href="'+chart.getImageURI()+'" download="image.png">Printable version</a>'+
+			'<div class=options>'+
+			'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+
+			"	<a href='graph.php?g=graph3d'><?php write('#graphs_go_to')?></a>"+
+			'</div>'+
 			"";
 			var div = document.createElement('div');
 			div.style.fontSize="10px";
@@ -452,24 +502,21 @@ Graphs.graph2=function(withTable,container)
 			//button "show table"
 			var div=document.createElement('div');
 			document.getElementById(container).appendChild(div);
-			div.innerHTML="<button onclick=Graphs.graph3d(true,'"+container+"')>Show table</button>"
+			div.innerHTML="<button onclick=Graphs.graph3d(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
 		}
 	}
 // end bar graphs
 
-//TODO
 Graphs.graph4=function(withTable,container)
 {
 	//Pointers
 	var ws = Global.Water;
 	var ww = Global.Waste;
-	var years = Global.General.Days()/365;
+	var years = Global.General.Years();
 
-	//Values: 2 bars
-	//bar 1
+	//Values
 	var slice_1 = ws.ws_KPI_GHG_elec()/years;
 	var slice_2 = ws.ws_KPI_GHG_ne()/years;
-	//bar 2
 	var slice_3 = ww.ww_KPI_GHG_elec()/years;
 	var slice_4 = ww.ww_KPI_GHG_ne_ch4_wwt()/years;
 	var slice_5 = ww.ww_KPI_GHG_ne_n2o_tre()/years;
@@ -478,27 +525,40 @@ Graphs.graph4=function(withTable,container)
 	var slice_8 = ww.ww_KPI_GHG_ne_n2o_unt()/years;
 	var slice_9 = ww.ww_KPI_GHG_ne_engines()/years;
 
+	//names
+	var names=[
+		"[<?php write('#Water')?>] <?php write('#ws_KPI_GHG_elec_descr')?>",
+		"[<?php write('#Water')?>] <?php write('#ws_KPI_GHG_ne_descr')?>",
+		"[<?php write('#Waste')?>] <?php write('#ww_KPI_GHG_elec_descr')?>",
+		"[<?php write('#Waste')?>] <?php write('#ww_KPI_GHG_ne_ch4_wwt_descr')?>",
+		"[<?php write('#Waste')?>] <?php write('#ww_KPI_GHG_ne_n2o_tre_descr')?>",
+		"[<?php write('#Waste')?>] <?php write('#ww_KPI_GHG_ne_tsludge_descr')?>",
+		"[<?php write('#Waste')?>] <?php write('#ww_KPI_GHG_ne_ch4_unt_descr')?>",
+		"[<?php write('#Waste')?>] <?php write('#ww_KPI_GHG_ne_n2o_unt_descr')?>",
+		"[<?php write('#Waste')?>] <?php write('#ww_KPI_GHG_ne_engines_descr')?>",
+	]
+
 	//actual graph data
 	var data=google.visualization.arrayToDataTable
 	([
-		['Stage',                             'Emissions'],
-		['From electricity (Water)',           slice_1],
-		['From fuel engines (Water)',          slice_2],
-		['From electricity (Wastewater)',      slice_3],
-		['From CH4 from WWTP (Wastewater)',    slice_4],
-
-		['From N2O treated (Wastewater)',      slice_5],
-		['From sludge transport (Wastewater)', slice_6],
-		['From CH4 untreated (Wastewater)',    slice_7],
-		['From N2O untreated (Wastewater)',    slice_8],
-		['From fuel engines (Wastewater)',     slice_9],
+		['Stage','Emissions'],
+		[names[0],slice_1],
+		[names[1],slice_2],
+		[names[2],slice_3],
+		[names[3],slice_4],
+		[names[4],slice_5],
+		[names[5],slice_6],
+		[names[6],slice_7],
+		[names[7],slice_8],
+		[names[8],slice_9],
 	]);
 
 	//options
 	var options= 
 	{ 
-		height:500,
-		title:"Greenhouse gas emissions (kg/year)",
+		height:400,
+		legend:{position:'left'},
+		title:"<?php write('#graphs_graph4')?>",
 		slices:
 		{
 			0:{color:'#bca613' },
@@ -510,7 +570,6 @@ Graphs.graph4=function(withTable,container)
 			6:{color:'#672945'},
 			7:{color:'#451c2e'},
 		},
-		allowHtml:true,
 	};
 
 	//empty the container
@@ -520,25 +579,30 @@ Graphs.graph4=function(withTable,container)
 	var chart=new google.visualization.PieChart(document.getElementById(container));
 	chart.draw(data,options);
 
+	var yy='<?php write('#years')?>'; //string
+
 	//tables
 	if(withTable)
 	{
 		//create a table (as a string)
 		var table=""+
-		"<button onclick=Graphs.graph4(false,'"+container+"')>Hide table</button>"+
-		"<table >"+
-			"<tr><th>Field                              <th>Variable              <th>Value (kgCO2/year)"+
-			"<tr><td>From electricity (Water)           <td>ws_KPI_GHG_elec/years       <td>"+format(slice_1)+
-			"<tr><td>From fuel engines (Water)          <td>ws_KPI_GHG_ne/years         <td>"+format(slice_2)+
-			"<tr><td>From electricity (Wastewater)      <td>ww_KPI_GHG_elec/years       <td>"+format(slice_3)+
-			"<tr><td>From CH4 from WWTP (Wastewater)    <td>ww_KPI_GHG_ne_ch4_wwt/years <td>"+format(slice_4)+
-			"<tr><td>From N2O treated (Wastewater)      <td>ww_KPI_GHG_ne_n2o_tre/years <td>"+format(slice_5)+
-			"<tr><td>From sludge transport (Wastewater) <td>ww_KPI_GHG_ne_tsludge/years <td>"+format(slice_6)+
-			"<tr><td>From CH4 untreated (Wastewater)    <td>ww_KPI_GHG_ne_ch4_unt/years <td>"+format(slice_7)+
-			"<tr><td>From N2O untreated (Wastewater)    <td>ww_KPI_GHG_ne_n2o_unt/years <td>"+format(slice_8)+
-			"<tr><td>From fuel engines (Wastewater)     <td>ww_KPI_GHG_ne_engines/years <td>"+format(slice_9)+
+		"<button onclick=Graphs.graph4(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
+		"<table title=graph4>"+
+			"<tr><th><?php write('#graphs_slice')?><th><?php write('#graphs_formula')?><th><?php write('#graphs_value')?>"+
+			"<tr><td>"+names[0]+"<td>ws_KPI_GHG_elec/"+yy+"	      <td>"+format(slice_1)+
+			"<tr><td>"+names[1]+"<td>ws_KPI_GHG_ne/"+yy+"	      <td>"+format(slice_2)+
+			"<tr><td>"+names[2]+"<td>ww_KPI_GHG_elec/"+yy+"	      <td>"+format(slice_3)+
+			"<tr><td>"+names[3]+"<td>ww_KPI_GHG_ne_ch4_wwt/"+yy+" <td>"+format(slice_4)+
+			"<tr><td>"+names[4]+"<td>ww_KPI_GHG_ne_n2o_tre/"+yy+" <td>"+format(slice_5)+
+			"<tr><td>"+names[5]+"<td>ww_KPI_GHG_ne_tsludge/"+yy+" <td>"+format(slice_6)+
+			"<tr><td>"+names[6]+"<td>ww_KPI_GHG_ne_ch4_unt/"+yy+" <td>"+format(slice_7)+
+			"<tr><td>"+names[7]+"<td>ww_KPI_GHG_ne_n2o_unt/"+yy+" <td>"+format(slice_8)+
+			"<tr><td>"+names[8]+"<td>ww_KPI_GHG_ne_engines/"+yy+" <td>"+format(slice_9)+
 		"</table>"+
-		'<a href="'+chart.getImageURI()+'" download="image.png">Printable version</a>'+
+		'<div class=options>'+
+		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+
+		"	<a href='graph.php?g=graph4'><?php write('#graphs_go_to')?></a>"+
+		'</div>'+
 		"";
 		var div = document.createElement('div');
 		div.style.fontSize="10px";
@@ -550,15 +614,12 @@ Graphs.graph4=function(withTable,container)
 		//button "show table"
 		var div=document.createElement('div');
 		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.graph4(true,'"+container+"')>Show table</button>"
+		div.innerHTML="<button onclick=Graphs.graph4(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
 	}
 }
 
 Graphs.graph5=function(withTable,container)
 {
-	//pointers
-	var Days=Global.General.Days();
-
 	//values
 	var slice_1 = Global.Water.Abstraction.wsa_nrg_cons;
 	var slice_2 = Global.Water.Treatment.wst_nrg_cons;
@@ -567,24 +628,34 @@ Graphs.graph5=function(withTable,container)
 	var slice_5 = Global.Waste.Treatment.wwt_nrg_cons;
 	var slice_6 = Global.Waste.Discharge.wwd_nrg_cons;
 
+	var names=[
+		"[<?php write('#Water')?>] <?php write('#Abstraction')?>",
+		"[<?php write('#Water')?>] <?php write('#Treatment')?>",
+		"[<?php write('#Water')?>] <?php write('#Distribution')?>",
+		"[<?php write('#Waste')?>] <?php write('#Collection')?>",
+		"[<?php write('#Waste')?>] <?php write('#Treatment')?>",
+		"[<?php write('#Waste')?>] <?php write('#Discharge')?>",
+	]
+
 	//actual graph data
 	var data=google.visualization.arrayToDataTable
 	([
-		['Stage',                 'Emissions'],
-		["Water Abstraction",     slice_1],
-		["Water Treatment",       slice_2],
-		["Water Distribution",    slice_3],
-		["Wastewater Collection", slice_4],
-		["Wastewater Treatment",  slice_5],
-		["Wastewater Discharge",  slice_6],
+		['Stage','Emissions'],
+		[names[0],slice_1],
+		[names[1],slice_2],
+		[names[2],slice_3],
+		[names[3],slice_4],
+		[names[4],slice_5],
+		[names[5],slice_6],
 	]);
 
 	//options
 	var options= 
 	{ 
-		height:500,
+		height:400,
+		legend:{position:'left'},
 		pieHole:0.3,
-		title:"Energy consumption (kWh)",
+		title:"<?php write('#graphs_graph5')?>",
 		slices:
 		{
 			0:{color:'#66cef5'},
@@ -594,7 +665,6 @@ Graphs.graph5=function(withTable,container)
 			4:{color:'#f8c666'},
 			5:{color:'#fad999'},
 		},
-		allowHtml:true,
 	};
 
 	//empty the container
@@ -609,17 +679,20 @@ Graphs.graph5=function(withTable,container)
 	{
 		//create a table (as a string)
 		var table=""+
-		"<button onclick=Graphs.graph5(false,'"+container+"')>Hide table</button>"+
-		"<table>"+
-			"<tr><th>Slice                 <th>Variable                                              <th>Value (kWh/m<sup>3</sup>)"+
-			"<tr><td>Water Abstraction     <td><a href=variable.php?id=wsa_nrg_cons>wsa_nrg_cons</a> <td>"+format(slice_1)+
-			"<tr><td>Water Treatment       <td><a href=variable.php?id=wst_nrg_cons>wst_nrg_cons</a> <td>"+format(slice_2)+
-			"<tr><td>Water Distribution    <td><a href=variable.php?id=wsd_nrg_cons>wsd_nrg_cons</a> <td>"+format(slice_3)+
-			"<tr><td>Wastewater Collection <td><a href=variable.php?id=wwc_nrg_cons>wwc_nrg_cons</a> <td>"+format(slice_4)+
-			"<tr><td>Wastewater Treatment  <td><a href=variable.php?id=wwt_nrg_cons>wwt_nrg_cons</a> <td>"+format(slice_5)+
-			"<tr><td>Wastewater Discharge  <td><a href=variable.php?id=wwd_nrg_cons>wwd_nrg_cons</a> <td>"+format(slice_6)+
+		"<button onclick=Graphs.graph5(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
+		"<table title=graph5>"+
+			"<tr><th><?php write('#graphs_slice')?><th><?php write('#graphs_formula')?><th><?php write('#graphs_value')?>"+
+			"<tr><td>"+names[0]+"<td><a href=variable.php?id=wsa_nrg_cons>wsa_nrg_cons</a> <td>"+format(slice_1)+
+			"<tr><td>"+names[1]+"<td><a href=variable.php?id=wst_nrg_cons>wst_nrg_cons</a> <td>"+format(slice_2)+
+			"<tr><td>"+names[2]+"<td><a href=variable.php?id=wsd_nrg_cons>wsd_nrg_cons</a> <td>"+format(slice_3)+
+			"<tr><td>"+names[3]+"<td><a href=variable.php?id=wwc_nrg_cons>wwc_nrg_cons</a> <td>"+format(slice_4)+
+			"<tr><td>"+names[4]+"<td><a href=variable.php?id=wwt_nrg_cons>wwt_nrg_cons</a> <td>"+format(slice_5)+
+			"<tr><td>"+names[5]+"<td><a href=variable.php?id=wwd_nrg_cons>wwd_nrg_cons</a> <td>"+format(slice_6)+
 		"</table>"+
-		'<a href="'+chart.getImageURI()+'" download="image.png">Printable version</a>'+
+		'<div class=options>'+
+		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+
+		"	<a href='graph.php?g=graph5'><?php write('#graphs_go_to')?></a>"+
+		'</div>'+
 		"";
 		var div = document.createElement('div');
 		div.innerHTML=table;
@@ -630,7 +703,7 @@ Graphs.graph5=function(withTable,container)
 		//button "show table"
 		var div=document.createElement('div');
 		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.graph5(true,'"+container+"')>Show table</button>"
+		div.innerHTML="<button onclick=Graphs.graph5(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
 	}
 }
 
@@ -732,7 +805,7 @@ Graphs.graph6=function(withTable,container)
 	var options=
 	{
 		title:"Greenhouse gas emissions(TBD)",
-		legend:{position:'right',maxLines:100},
+		legend:{position:'left'},
 		isStacked:true,
 		colors: [
 			'#bca613', 
@@ -743,7 +816,6 @@ Graphs.graph6=function(withTable,container)
 			'#b8879d',
 			'#d0afbe',
 		],
-		allowHtml:true,
 	}
 
 	//empty the container
@@ -759,8 +831,8 @@ Graphs.graph6=function(withTable,container)
 	{
 		//create a table (as a string)
 		var table=""+
-		"<button onclick=Graphs.graph6(false,'"+container+"')>Hide table</button>"+
-		"<table>"+
+		"<button onclick=Graphs.graph6(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
+		"<table title=graph6>"+
 			"<tr><th>Bar		   <th>From electricity            <th>Value                <th>Fuel used in engines     <th>Value  <th>Biogas <th>Value <th>Treated <th>Value <th>Untreated <th>Value <th>Sludge transport <th>Value"+
 			"<tr><th>WS per capita <td>ws_KPI_GHG_elec/ws_resi_pop <td>"+format(slice_1 )+ "<td> <td>"+format(slice_2 )+
 			"<tr><th>WW per capita <td>ww_KPI_GHG_elec/ww_resi_pop <td>"+format(slice_3 )+ "<td> <td>"+format(slice_4 )+"<td> <td>"+format(slice_5 )+"<td> <td>"+format(slice_6) +"<td> <td>"+format(slice_7) +"<td> <td>"+format(slice_8) +
@@ -781,7 +853,7 @@ Graphs.graph6=function(withTable,container)
 		//button "show table"
 		var div=document.createElement('div');
 		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.graph6(true,'"+container+"')>Show table</button>"
+		div.innerHTML="<button onclick=Graphs.graph6(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
 	}
 }
 
@@ -807,6 +879,15 @@ Graphs.graph7=function(withTable,container)
 	//push data to DATA
 	for(var s in stages)
 	{
+		//special case: if there are zero substages:
+		if(stages[s].length==0)
+		{
+			var loc = locateVariable(names[s]);
+			var value = Global[loc.level][loc.sublevel][names[s]]
+			console.log(value);
+			DATA.push([loc.sublevel,value ])
+		}
+		//go over substages
 		for(var i in stages[s])
 		{
 			var name = stages[s][i].name;
@@ -814,31 +895,36 @@ Graphs.graph7=function(withTable,container)
 			var title;
 			switch(names[s])
 			{
-				case 'wsa_nrg_cons': title="Abst - ";break;
-				case 'wst_nrg_cons': title="Trea - ";break;
-				case 'wsd_nrg_cons': title="Dist - ";break;
-				case 'wwc_nrg_cons': title="Coll - ";break;
-				case 'wwt_nrg_cons': title="Trea - ";break;
-				case 'wwd_nrg_cons': title="Disc - ";break;
+				case 'wsa_nrg_cons': title="<?php write('#Abstraction')?>";break;
+				case 'wst_nrg_cons': title="<?php write('#Treatment')?>";break;
+				case 'wsd_nrg_cons': title="<?php write('#Distribution')?>";break;
+				case 'wwc_nrg_cons': title="<?php write('#Collection')?>";break;
+				case 'wwt_nrg_cons': title="<?php write('#Treatment')?>";break;
+				case 'wwd_nrg_cons': title="<?php write('#Discharge')?>";break;
 				default:break;
 			}
-			DATA.push([ title+" S"+(parseInt(i)+1) +" ("+name+")", value])
+			DATA.push([ title+" "+(parseInt(i)+1) +" ("+name+")", value])
 		}
 	}
 
 	var data=google.visualization.arrayToDataTable(DATA);
 	var options= 
 	{ 
-		height:500,
+		height:400,
+		legend:{position:'left'},
 		pieHole:0.3,
-		title:"Energy consumption per substage (kWh)",
+		title:"<?php write('#graphs_graph7')?>",
 		slices:{},
-		allowHtml:true,
 	};
 	var colors = [ '#66cef5', '#0083b3', '#cceffc', '#b67800', '#f8c666', '#fad999' ];
 	var current_slice = 0;
 	for(var s in stages)
 	{
+		if(stages[s].length==0)
+		{
+			options.slices[current_slice++]={color:colors[s],offset:0.1}
+			continue;
+		}
 		for(var i in stages[s])
 		{
 			options.slices[current_slice++]={color:colors[s],offset:0.1}
@@ -851,9 +937,10 @@ Graphs.graph7=function(withTable,container)
 	if(withTable)
 	{
 		//create a table (as a string)
-		var table="<table>"+
-		"<button onclick=Graphs.graph7(false,'"+container+"')>Hide table</button>"+
-		"<tr><th>Variable <th colspan=30>kWh for each substage";
+		var table=""+
+		"<table title=graph7>"+
+		"<button onclick=Graphs.graph7(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
+		"<tr><th><?php write('#graphs_formula')?><th colspan=30>kWh <?php write('#substages')?>";
 			for(var s in stages)
 			{
 				table+="<tr><td><a href=variable.php?id="+names[s]+">"+names[s]+"</a>";
@@ -861,7 +948,10 @@ Graphs.graph7=function(withTable,container)
 					table+="<td>"+stages[s][i][names[s]];
 			}
 		table+="</table>"+
-		'<a href="'+chart.getImageURI()+'" download="image.png">Printable version</a>'+
+		'<div class=options>'+
+		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+
+		"	<a href='graph.php?g=graph7'><?php write('#graphs_go_to')?></a>"+
+		'</div>'+
 		"";
 		var div = document.createElement('div');
 		div.innerHTML=table;
@@ -872,7 +962,7 @@ Graphs.graph7=function(withTable,container)
 		//button "show table"
 		var div=document.createElement('div');
 		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.graph7(true,'"+container+"')>Show table</button>"
+		div.innerHTML="<button onclick=Graphs.graph7(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
 	}
 }
 
@@ -932,6 +1022,7 @@ Graphs.sankey=function(withTable,container)
 	var colors=['#00aff1','#bf5050'];
 	var options = 
 	{
+		legend:{position:'left'},
 		sankey: 
 		{
 			iterations:32,
@@ -944,7 +1035,6 @@ Graphs.sankey=function(withTable,container)
 				colors: colors
 			}
 		},
-		allowHtml:true,
 	};
 
 	//empty the container
@@ -959,8 +1049,8 @@ Graphs.sankey=function(withTable,container)
 	{
 		//create a table (as a string)
 		var table=""+
-		"<button onclick=Graphs.sankey(false,'"+container+"')>Hide table</button>"+
-		"<table>"+
+		"<button onclick=Graphs.sankey(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
+		"<table title=sankey>"+
 			"<tr><th>Stage        <th>Variable                                              <th>Volume (m3)"+
 			"<tr><td>Abstraction  <td><a href=variable.php?id=wsa_vol_conv>wsa_vol_conv</a> <td>"+slice_1+
 			"<tr><td>Treatment    <td><a href=variable.php?id=wst_vol_trea>wst_vol_trea</a> <td>"+slice_2+
@@ -982,6 +1072,7 @@ Graphs.sankey=function(withTable,container)
 		//button "show table"
 		var div=document.createElement('div');
 		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.sankey(true,'"+container+"')>Show table</button>"
+		div.innerHTML="<button onclick=Graphs.sankey(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
 	}
 }
+</script>

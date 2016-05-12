@@ -1,27 +1,25 @@
 <?php /*fuel information.php: information about the different fuels*/?>
-
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Fuel info</h1>
-
-
-<h4>Depending on which fuel you select in your stages, the following emission factors will be applied</h4>
+<!--description--><h4><?php write('#fuelInfo_description')?></h4>
 
 <!--fuel info-->
 <table id=fuelInfo class=inline> 
-	<tr><th colspan=8 style=text-align:center>Emission Factors for different fuel types (table 6.3 IPCC vol 6)
+	<tr><th colspan=8 style=text-align:center><?php write('#fuelInfo_eeff')?>
 	<tr>
-		<th rowspan=2>Fuel type
+		<th rowspan=2><?php write('#fuelInfo_type')?>
 		<th colspan=2>EF CH<sub>4</sub> (kg/TJ)
 		<th colspan=2>EF N<sub>2</sub>O (kg/TJ)
-		<th rowspan=2>EF CO<sub>2</sub>          (kg/TJ)
-		<th rowspan=2>FD             (kg/L)
-		<th rowspan=2>NCV            (TJ/Gg)
+		<th rowspan=2>EF CO<sub>2</sub> (kg/TJ)
+		<th rowspan=2 style=cursor:help title="<?php write('#fuelInfo_fd')?>">FD   (kg/L)
+		<th rowspan=2 style=cursor:help title="<?php write('#fuelInfo_ncv')?>">NCV (TJ/Gg)
 	<tr>
-		<th>engines <th>vehicles <th>engines <th>vehicles
+		<th><?php write('#fuelInfo_engines')?><th><?php write('#fuelInfo_vehicles')?>
+		<th><?php write('#fuelInfo_engines')?><th><?php write('#fuelInfo_vehicles')?>
 	<script>
 		(function()
 		{

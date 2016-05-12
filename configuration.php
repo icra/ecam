@@ -265,8 +265,8 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1><?php write('#configuration')?></h1>
-
 <!--SUBTITLE--><h4><?php write('#configuration_subtitle')?></h4>
+<div style="padding:0;margin-bottom:1em;background:#d7bfaf;height:5px"></div>
 
 <!--container-->
 <div>
@@ -340,7 +340,7 @@
 		<style> fieldset{margin:0 0 1.5em 0;padding:0.8em;border:1px solid #aaa} </style>
 		<!--conv_kwh_co2-->
 		<fieldset>
-			<legend><?php write('#configuration_conversion_factor')?> (<a href=variable.php?id=conv_kwh_co2>info</a>) </legend>
+			<legend style=cursor:help title="<?php write('#conv_kwh_co2_expla')?>"><?php write('#conv_kwh_co2_descr')?></legend>
 			<table><tr><th>
 				<select id=countryUW1 onchange=updateUW1(this.value)>
 					<option value=0>--<?php write('#configuration_enter_custom_value')?>--
@@ -355,7 +355,7 @@
 
 		<!--currency: 3 letters-->
 		<fieldset>
-			<legend><?php write('#currency')?>: <span id=currency></span></legend>
+			<legend><?php write('#currency')?>: <span id=currency style="color:black;font-weight:bold"></span></legend>
 			<?php write('#configuration_new_currency')?>:
 			<input size=3 maxlength=3 placeholder="ccc" onchange=updateField(Global.General,"Currency",this.value)>
 		</fieldset>

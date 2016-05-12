@@ -20,6 +20,9 @@
 			  <?php 
 			}
 		?>
+		/** table "used to calculate" and "inputs involved" */
+		table#utc td, table#ininv td{padding:2px 5px 2px 7px;border:none}
+		span.unit{color:#aaa}
 	</style>
 	<script>
 		var id='<?php echo $id?>'; //make the id variable live in javascript scope
@@ -84,7 +87,18 @@
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
 			newCell.innerHTML="<?php write('#variable_type')?>"
-			newRow.insertCell(-1).innerHTML=typeof(currentStage[id])=="function"? ("Output <br><br><b>Formula:</b> "+Formulas.prettify(currentStage[id].toString())) : "Input"
+			newRow.insertCell(-1).innerHTML=(function(){
+				if(typeof(currentStage[id])=="function")
+				{
+					var pretf = Formulas.prettify(currentStage[id].toString());
+					var ret = "Output <div><pre style='padding:1em;background:#eee'><b><?php write('#variable_formula')?>:</b>"+pretf+"<pre></div>";
+					return ret;
+				}
+				else
+				{
+					return "Input";
+				}
+			})();
 
 			//Is "id" level 3 specific?
 			if(Level3.isInList(id))
@@ -107,7 +121,7 @@
 				newCell=newRow.insertCell(-1)
 				newCell.innerHTML=(function(){
 					var matches=Formulas.idsPerFormula(currentStage[id].toString())
-					var ret=""
+					var ret="<table id=ininv>"
 					matches.forEach(function(match)
 					{
 						var match_localization = locateVariable(match)
@@ -121,7 +135,7 @@
 						else var currentUnit = "no unit";
 						//matches can be either numbers or other functions
 						var currValue = typeof(match_stage[match])=="function" ? match_stage[match]() : match_stage[match];
-						currValue=format(currValue);
+						currValueF=format(currValue);
 						var color = match.search('ww')==-1 ? "#0aaff1":"#bf5050";
 
 						//here we have to show the internal value of inputs, not the multiplied by the unit multiplier
@@ -140,18 +154,18 @@
 							
 						}
 
-						ret+="<div>"+
-							"<a style='color:"+color+"' href=variable.php?id="+match+" "+
-							"title='["+match_localization.toString()+"] "+Info[match].description+"'"+
-							">"+match+"</a> "+
-							" = "+currValue+" "+currentUnit+
-							"</div>"
+						ret+="<tr>"+
+							"<td><a style='color:"+color+"' href=variable.php?id="+match+" "+
+							"title='["+match_localization.toString()+"] "+translate(match+"_descr")+"'"+
+							">"+match+"</a>: "+
+							"<td title='"+currValue+"' style=cursor:help>"+currValueF+"<td><span class=unit>"+currentUnit+"</span>";
 					});
+					ret+="</table>";
 					return ret;
 				})();
 			}
 
-			//Value
+			//Current Value
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
@@ -163,8 +177,10 @@
 				{
 					var unit=Info[id].magnitude=="Currency"?Global.General.Currency : Info[id].unit;
 					var currValue=currentStage[id]()/Units.multiplier(id);
-					currValue=format(currValue);
-					return currValue+" "+unit;
+					currValueF=format(currValue);
+					newCell.title=currValue;
+					newCell.style.cursor='help';
+					return currValueF+" <span class=unit>"+unit+"</span>";
 				})();
 			}
 			else
@@ -229,7 +245,7 @@
 			newCell.innerHTML=(function()
 			{
 				//look for the code "id" inside each output
-				var ret="";
+				var ret="<table id=utc>";
 				var outputsPerInput=Formulas.outputsPerInput(id);
 
 				//if is not used to calculate anything, hide row
@@ -250,14 +266,15 @@
 					}
 					else var currentUnit = "no unit";
 					var currValue = match_stage[output]()/Units.multiplier(output);
-					currValue=format(currValue);
+					currValueF=format(currValue);
 					var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
-					ret+="<div>"+
-						" <a style='color:"+color+"' title='["+match_localization.toString()+"] "+Info[output].description+"'"+
-						" href=variable.php?id="+output+">"+output+"</a> = "+
-						currValue+" "+currentUnit+
-						"</div>";
+					ret+="<tr>"+
+						" <td><a style='color:"+color+"' title='["+match_localization.toString()+"] "+translate(output+"_descr")+"'"+
+						" href=variable.php?id="+output+">"+output+"</a>:"+
+						"<td title='"+currValue+"' style=cursor:help>"+
+						currValueF+"<td> <span class=unit>"+currentUnit+"</span>";
 				});
+				ret+="</table>";
 				return ret;
 			})();
 

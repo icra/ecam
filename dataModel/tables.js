@@ -15,7 +15,7 @@ var Tables =
 		"Mexico":0,
 	},
 
-	/** Technologies for wst and wwt (table not used right now). I was told that this would be used for benchmarking */
+	/** Technologies for wst and wwt (table not used right now). I was told that this will be used for benchmarking */
 	"Technologies":{
 		"Water":{
 			"None":{},

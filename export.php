@@ -44,7 +44,7 @@
 					}
 				})();
 				//name
-				newRow.insertCell(-1).innerHTML=Info[field].description;
+				newRow.insertCell(-1).innerHTML=translate(field+'_descr');
 				//formula or default value
 				newRow.insertCell(-1).innerHTML=(function()
 				{
@@ -65,7 +65,7 @@
 				//unit
 				newRow.insertCell(-1).innerHTML=Info[field].unit;
 				//description
-				newRow.insertCell(-1).innerHTML=Info[field].explanation;
+				newRow.insertCell(-1).innerHTML=translate(field+'_expla');
 			}
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);

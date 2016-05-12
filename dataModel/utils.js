@@ -8,8 +8,8 @@ function locateVariable(code)
 		{
 			switch(localization.level)
 			{
-				case "Water": return "Water supply";break;
-				case "Waste": return "Wastewater";break;
+				case "Water": return translate('Water');break;
+				case "Waste": return translate('Waste');break;
 				default: return localization.level;break;
 			}
 		})();

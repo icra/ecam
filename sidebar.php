@@ -174,7 +174,6 @@
 			<tr><td>&emsp;		<a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
 			<tr><td>&emsp;&emsp;<a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
 			<tr><th><?php write('#energy_performance')?>
-			<tr><td><a href=edit.php?level=Energy><?php write('#energy_summary')?></a>
 			<tr><td>&emsp;
 				<a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction><?php write('#Abstraction')?></a>
 			<tr><td>&emsp;&emsp;
@@ -187,6 +186,7 @@
 				<a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment><?php write('#Treatment')?></a>
 			<tr><td>&emsp;&emsp;&emsp;
 				<a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge><?php write('#Discharge')?></a>
+			<tr><td><a href=edit.php?level=Energy><?php write('#energy_summary')?></a>
 			<tr><th><?php write('#summary')?>
 			<tr><td><a href=summary.php?type=input><?php write('#sidebar_all_inputs')?></a>
 			<tr><td><a href=summary.php?type=ccvv><?php write('#sidebar_all_ccvv')?></a>
