@@ -15,6 +15,7 @@
 var Info = {
 	//GENERAL
 	"Days":{magnitude:"Time",unit:"days",},
+	"Years":{magnitude:"Time",unit:"years",},
 	"conv_kwh_co2":{magnitude:"Conversion",unit:"kgCO2e/kWh",},
 	
 	/* +================+ */

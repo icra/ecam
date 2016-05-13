@@ -1,6 +1,6 @@
 <?php
 
-$Languages["es"] = array
+$Languages["es"]=array
 (
 	'#Water' => 'Suministro de agua',
 	'#Waste' => 'Aguas residuales',
@@ -15,6 +15,9 @@ $Languages["es"] = array
 	'#save' => 'Guardar',
 	'#save_as' => 'Guardar como',
 	'#clear' => 'Borrar todo',
+
+	'#yes' => 'Sí',
+	'#no' => 'No',
 	
 	'#about' => 'Acerca de',
 	'#assessment_period' => 'Período de evaluación',
@@ -28,6 +31,7 @@ $Languages["es"] = array
 	'#inactive' => 'inactivo',
 	'#loading' => 'Cargando...',
 	'#memory' => 'Uso de memoria',
+	'#missing_inputs' => 'Faltan datos',
 	'#next' => 'Siguiente',
 	'#name' => 'nombre',
 	'#previous' => 'Anterior',
@@ -49,10 +53,10 @@ $Languages["es"] = array
 	'#graphs_formula' => 'Formula',
 	'#graphs_value' => 'Valor',
 	'#graphs_graph1' => 'Emisiones de GEI (kg CO2/año)',
-	'#graphs_graph2' => 'Consumo de energía (kWh)',
+	'#graphs_graph2' => 'Consumo de electricidad (kWh)',
 	'#graphs_graph4' => 'Emisiones de GEI (DETALLADO) (kg CO2/año)',
-	'#graphs_graph5' => 'Consumo de energía (DETALLADO) (kWh)',
-	'#graphs_graph7' => 'Consumo de energía subetapas (kWh)',
+	'#graphs_graph5' => 'Consumo de electricidad (DETALLADO) (kWh)',
+	'#graphs_graph7' => 'Consumo de electricidad subetapas (kWh)',
 	/**GRAPHS*/
 
 	'#navbar_title' => 'Herramienta de asesoramiento y monitorización de rendimiento energético y emisiones de Carbono',
@@ -63,41 +67,12 @@ $Languages["es"] = array
 	'#index_chrome_warning' => 'Por favor, utiliza el explorador Google Chrome.',
 	'#index_latest_update' => 'Última actualización',
 
-	'#about_credits' => '
-		Desarrollado por <a href=http://icra.cat/>ICRA</a> en colaboración con <a href=http://www.iwa-network.org/>IWA</a>,
-		GIZ, en el <a href="http://www.iwa-network.org/WaCCliM/">proyecto WaCClim</a>, y Cobalt Water.<br>
-		La herramienta fue desarrollada en Junio de 2015 en EXCEL por el consorcio Global Water Commons (LNEC i la Universidad de Valencia) 
-		en colaboración con Cobalt Water.
-		Queremos reconocer la utilidad de la herramienta EXCEL para permitir el desarrollo de esta herramienta web.
-		<br><br>
-		
-		El código fuente de este proyecto esta en <a href=https://github.com/holalluis/ecam>GitHub</a>.
-		Allí puede descargarlo y tenerlo offline.<br>
-		Necesitarà un host PHP local, como <a href=https://www.apachefriends.org/index.html>XAMPP</a>.<br>
-		Este software fue escrito completament usando el editor <a href=http://www.vim.org>Vim</a>, 
-		dentro de un terminal <a href=https://www.cygwin.com/>Cygwin</a>. <br>
-		Creado en los lenguajes HTML/PHP/CSS/Javascript. <br>
-	',
-
+	'#about_credits' => 'Desarrollado por <a href=http://icra.cat/>ICRA</a> en colaboración con <a href=http://www.iwa-network.org/>IWA</a>, GIZ, en el <a href="http://www.iwa-network.org/WaCCliM/">proyecto WaCClim</a>, y Cobalt Water.<br> La herramienta fue desarrollada en Junio de 2015 en EXCEL por el consorcio Global Water Commons (LNEC i la Universidad de Valencia) en colaboración con Cobalt Water.  Queremos reconocer la utilidad de la herramienta EXCEL para permitir el desarrollo de esta herramienta web.  <br><br> El código fuente de este proyecto esta en <a href=https://github.com/holalluis/ecam>GitHub</a>.  Allí puede descargarlo y tenerlo offline.<br> Necesitarà un host PHP local, como <a href=https://www.apachefriends.org/index.html>XAMPP</a>.<br> Este software fue escrito completament usando el editor <a href=http://www.vim.org>Vim</a>, dentro de un terminal <a href=https://www.cygwin.com/>Cygwin</a>. <br> Creado en los lenguajes HTML/PHP/CSS/Javascript. <br> ',
 	'#about_graphs_lib' => 'Biblioteca para gráficos utilizada',
 	'#about_json_viewer' => 'Visor JSON utilizado',
 	'#about_license' => 'Licencia',
 
-	'#license_license' => '
-	Copyright 2016 IWA
-
-	Autorizado en virtud de la Licencia de Apache, Versión 2.0 (la "Licencia"); 
-	se prohíbe utilizar este archivo, excepto en cumplimiento con la Licencia.
-	Puede obtener una copia de la Licencia en:
-
-		http://www.apache.org/licenses/LICENSE-2.0
-
-	A menos que lo exijan las leyes pertinentes o se haya establecido por escrito, 
-	el software distribuido bajo la Licencia se distribuye “TAL CUAL”, 
-	SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.
-	Véase la Licencia para consultar el texto específico relativo a los permisos 
-	y limitaciones establecidos en la Licencia.
-	',
+	'#license_license' => 'Copyright 2016 IWA<br><br>Autorizado en virtud de la Licencia de Apache, Versión 2.0 (la "Licencia");<br>se prohíbe utilizar este archivo, excepto en cumplimiento con la Licencia.<br>Puede obtener una copia de la Licencia en:<br><br>&emsp;&emsp;http://www.apache.org/licenses/LICENSE-2.0<br><br>A menos que lo exijan las leyes pertinentes o se haya establecido por escrito,<br>el software distribuido bajo la Licencia se distribuye “TAL CUAL”,<br>SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.<br>Véase la Licencia para consultar el texto específico relativo a los permisos<br>y limitaciones establecidos en la Licencia.',
 
 	'#getStarted_general_info' => 'Información general',
 	'#getStarted_subtitle' => 'Información general sobre su sistema. Puede editar esta información más tarde.',
@@ -123,6 +98,7 @@ $Languages["es"] = array
 	'#configuration_selected_fuel' => 'Combustible seleccionado',
 	'#configuration_engines' => 'Motores',
 	'#configuration_vehicles' => 'Vehículos',
+	'#configuration_only_if' => 'Sólo si',
 
 	'#sidebar_general' => 'General',
 	'#sidebar_home' => 'Principal',
@@ -136,13 +112,13 @@ $Languages["es"] = array
 	'#birds_stage_not_active' => 'Etapa inactiva',
 	'#birds_note' => 'nota',
 	'#birds_ws_vol_auth' => 'Consumo autorizado promedio anual',
-	'#birds_ws_nrg_cons' => 'Energía mensual consumida de la red',
-	'#birds_ws_nrg_cost' => 'Costes energéticos mensuales',
+	'#birds_ws_nrg_cons' => 'Electricidad mensual consumida de la red',
+	'#birds_ws_nrg_cost' => 'Costes eléctrico mensuales',
 	'#birds_ws_run_cost' => 'Costes operacionales mensuales',
 	'#birds_ws_vol_fuel' => 'Combustible consumido mensualmente',
 	'#birds_ww_vol_wwtr' => 'Agua residual tratada a diario',
-	'#birds_ww_nrg_cons' => 'Energía mensual consumida de la red',
-	'#birds_ww_nrg_cost' => 'Costes energéticos mensuales',
+	'#birds_ww_nrg_cons' => 'Electricidad mensual consumida de la red',
+	'#birds_ww_nrg_cost' => 'Costes eléctrico mensuales',
 	'#birds_ww_run_cost' => 'Costes operacionales mensuales',
 	'#birds_ww_num_trip' => 'Viajes semanales al sitio de disposición de lodos',
 	'#birds_ww_vol_fuel' => 'Combustible consumido mensualmente',
@@ -173,6 +149,7 @@ $Languages["es"] = array
 	'#edit_no_formulas' => 'No hay outputs disponibles',
 	'#edit_context_indicators' => 'Indicadores de contexto',
 	'#edit_service_level_indicators' => 'Indicadores de nivel de servicio',
+	'#edit_click_to_modify' => 'Clic aquí para modificar el valor',
 
 	'#variable_detailed_info' => 'Información detallada',
 	'#variable_stage' => 'Etapa',
@@ -190,6 +167,7 @@ $Languages["es"] = array
 	'#variable_this_equation_contains_estimated_data' => 'Esta ecuación contiene datos estimados en almenos un input',
 	'#variable_this_input_is_considered_estimated' => 'Este input es considerado estimado por el usuario',
 	'#variable_formula' => 'Formula',
+	'#variable_go_to_substages' => 	'Este valor es la suma de todas las subetapas, no puede cambiarlo aquí, vaya a Subetapas',
 
 	'#stages_this_is_an_overview_of_your_system' => 'Visión general de las etapas activas de su sistema. Para activar etapas vaya a',
 	'#stages_system_assessment_overview' => 'Visión general por subetapas',
@@ -214,6 +192,7 @@ $Languages["es"] = array
 	'#assessment_type' => 'Tipo de asesoramiento',
 	'#assessment_simple' => 'Simple',
 	'#assessment_advanced' => 'Avanzado',
+	'#assessment_adv_descr' => 'El asesoramiento avanzado consiste en más inputs y más indicadores',
 
 	'#export_title' => 'Exportar a Excel',
 	'#export_description' => 'Pulse en una etapa para ver sus variables. Luego, pulse "Seleccionar toda la tabla" para copiar y pegar a una nueva hoja de Excel',
@@ -253,7 +232,9 @@ $Languages["es"] = array
 
 	/** VARIABLES **/
 	"#Days_descr"         => "Período de evaluación",
-	"#Days_expla"         => "Period of time adopted for the assessment of the data and of the PI",
+	"#Days_expla"         => "Período de evaluación",
+	"#Years_descr"        => "Período de evaluación",
+	"#Years_expla"        => "Período de evaluación",
 	"#conv_kwh_co2_descr" => "Factor de conversión de electricidad a CO2",
 	"#conv_kwh_co2_expla" => "Masa emitida de CO2 por cada kWh de energía consumido",
 
@@ -262,18 +243,19 @@ $Languages["es"] = array
 	'#ws_SL_non_revw_descr' => 'Volumen de agua no comptabilizada',
 	'#ws_SL_non_revw_expla' => '',
 	'#ws_SL_auth_con_descr' => 'Consumo autorizado diario por persona',
-	'#ws_SL_auth_con_expla' => 'Volume of authorized consumption per serviced person in the service area managed by the undertaking divided by the duration of the assessment period',
-	'#ws_SL_nrg_cost_descr' => 'Porcentaje de costes energéticos',
-	'#ws_SL_nrg_cost_expla' => 'Proportion of the utility energy costs referred to the total running costs related to urban drinking water system',
+	'#ws_SL_auth_con_expla' => 'Consumo autorizado diario por persona',
+	'#ws_SL_nrg_cost_descr' => 'Porcentaje de costes eléctricos',
+	'#ws_SL_nrg_cost_expla' => 'Porcentaje de costes eléctricos',
 	'#ww_SL_serv_pop_descr' => 'Población residente servida',
-	'#ww_SL_serv_pop_expla' => 'Percentage of the resident population that are connected to the sewer systems and which wastewater is treated by the undertaking',
+	'#ww_SL_serv_pop_expla' => 'Población conectada al sistema de colectores, cuya agua residual está tratada',
+
 	'#ww_SL_treat_m3_descr' => 'Agua residual recolectada tratada',
 	'#ww_SL_treat_m3_expla' => 'Percentage of the collected sewage prior to dilution or overflows in the sewer system that are treated in wastewater treatment plants',
 	'#ww_SL_dilution_descr' => 'Porcentaje de dilución en el sistema de colectores',
 	'#ww_SL_dilution_expla' => 'Percentage of Infiltration and inflow water entering the sewer system compared to the volume of collected wastewater prior to dilution',
 	'#ww_SL_vol_pday_descr' => 'Agua residual diaria tratada por persona',
 	'#ww_SL_vol_pday_expla' => 'Volume of treated wastewater per serviced person in the service area managed by the undertaking divided by the duration of the assessment period',
-	'#ww_SL_nrg_cost_descr' => 'Porcentaje de costes energéticos',
+	'#ww_SL_nrg_cost_descr' => 'Porcentaje de costes eléctricos',
 	'#ww_SL_nrg_cost_expla' => 'Proportion of the utility energy costs referred to the total running costs',
 
 	'#ws_resi_pop_descr'     => 'Población residente',
@@ -282,9 +264,9 @@ $Languages["es"] = array
 	'#ws_serv_pop_expla'     => 'Número de residentes permanentes en el área de servicio connectados al sistema de suministro de agua',
 	'#ws_vol_auth_descr'     => 'Volumen de consumo autorizado',
 	'#ws_vol_auth_expla'     => 'Sum of the volume of metered and/or non-metered water that during the assessment period, is taken by registered customers, by the water supplier itself, or by others who are implicitly or explicitly authorised to do so by the water supplier, for residential, commercial, industrial or public purposes. It includes water exported',
-	'#ws_nrg_cons_descr'     => 'Energía consumida de la red eléctrica',
+	'#ws_nrg_cons_descr'     => 'Electricidad consumida de la red eléctrica',
 	'#ws_nrg_cons_expla'     => 'Total energy consumed from the grid for the entire water supply utilty, based on the electricity bill during the entire assessment period',
-	'#ws_nrg_cost_descr'     => 'Costes energéticos',
+	'#ws_nrg_cost_descr'     => 'Costes eléctricos',
 	'#ws_nrg_cost_expla'     => 'Costs from electric energy consumption for the entire water supply utilty, based on the electricity bill during the entire assessment period',
 	'#ws_run_cost_descr'     => 'Costes totales de operación',
 	'#ws_run_cost_expla'     => 'Total operations and maintenance net costs and internal manpower net costs (i.e. not including the capitalised cost of self constructed assets) related to water supply within the service area managed by the undertaking during the entire assessment period',
@@ -305,16 +287,16 @@ $Languages["es"] = array
 	"#ww_bod_effl_expla" => "DBO5 load at the effluent of the WWTP during the assessment period. It can be estimated by multiplying the average BOD5 concentration in the effluent by the effluent volume the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate",
 	"#ww_bod_slud_descr" => "DBO eliminada como lodo",
 	"#ww_bod_slud_expla" => "BOD removed from the wastewater though the process of removing primary or secondary sludge from the aerobic treatment process. This value is used to estimate the Methane emissions from poorly aerated biological treatment of wastewater",
-	"#ww_nrg_cost_descr" => "Costes energéticos",
+	"#ww_nrg_cost_descr" => "Costes eléctricos",
 	"#ww_nrg_cost_expla" => "Costs from electric energy consumption for the entire wastewater utilty, based on the electricity bill during the entire assessment period.",
 	"#ww_run_cost_descr" => "Costes operacionales totales",
 	"#ww_run_cost_expla" => "Total operations and maintenance net costs and internal manpower net costs (i.e. not including the capitalised cost of self constructed assets) related to wastewater management within the service area managed by the undertaking during the entire assessment period",
-	"#ww_nrg_cons_descr" => "Energía consumida de la red",
+	"#ww_nrg_cons_descr" => "Electricidad consumida de la red",
 	"#ww_nrg_cons_expla" => "Total electric energy consumed from the grid related to wastewater management within the service area managed by the undertaking during the entire assessment period",
 	"#ww_vol_coll_descr" => "Volumen de agua residual recolectada",
 	"#ww_vol_coll_expla" => "Volume of wastewater discharged from water consumers (households, industries, etc.) to the sewer system during the assessment period and prior to any dilution from groundwater infiltration or surface water inflow, and prior to any overflows to sewage to the natural environment. This value can be estimated with 80% of the authorized consumption per person multiplied by the number of people connected to sewers.",
 	"#ww_vol_wwtr_descr" => "Volumen de agua residual tratada",
-	"#ww_vol_wwtr_expla" => "treated wastewater volume (m3) ",
+	"#ww_vol_wwtr_expla" => "Treated wastewater volume (m3) ",
 	"#ww_resi_pop_descr" => "Población residente",
 	"#ww_resi_pop_expla" => "Number of permanent residents within the area of service for wastewater services managed by the undertaking (whether they are connected or not) , at the reference date ",
 	"#ww_conn_pop_descr" => "Población conectada a los colectores",
@@ -368,19 +350,19 @@ $Languages["es"] = array
 	"#ww_KPI_GHG_descr" => "<b>Total GEI</b>",
 	"#ww_KPI_GHG_expla" => "GHG Emissions from non-electricity and electricity consumption",
 
-	"#wsg_KPI_nrg_cons_descr"=> "Consumo energético en el Suministro de agua (Extracción+Tratamiento+Distribución)",
+	"#wsg_KPI_nrg_cons_descr"=> "Consumo eléctrico en el Suministro de agua (Extracción+Tratamiento+Distribución)",
 	"#wsg_KPI_nrg_cons_expla"=> "Electric energy consumption including both from the grid and self-produced, for the water stages, by the undertaking during the entire assessment period",
-	"#wsg_KPI_nrg_x_ye_descr" => "Consumo energético anual (Suministro de agua)",
+	"#wsg_KPI_nrg_x_ye_descr" => "Consumo eléctrico anual (Suministro de agua)",
 	"#wsg_KPI_nrg_x_ye_expla" => "",
-	"#wsg_KPI_nrg_x_m3_descr" => "Consumo energético por consumo autorizado (suministro de agua)",
+	"#wsg_KPI_nrg_x_m3_descr" => "Consumo eléctrico por consumo autorizado (suministro de agua)",
 	"#wsg_KPI_nrg_x_m3_expla" => "",
-	"#wsg_KPI_std_nrg__descr" => "Consumo energético estandarizado promedio de todas las subetapas de suministro de agua",
+	"#wsg_KPI_std_nrg__descr" => "Consumo eléctrico estandarizado promedio de todas las subetapas de suministro de agua",
 	"#wsg_KPI_std_nrg__expla" => "Average energy consumption per pumping water per head in the drinking water system",
-	"#wsg_KPI_nrg_perc_descr" => "Porcentaje de costes energéticos de suministro de agua respecto de los costes totales",
+	"#wsg_KPI_nrg_perc_descr" => "Porcentaje de costes eléctrico de suministro de agua respecto de los costes totales",
 	"#wsg_KPI_nrg_perc_expla" => "",
-	"#wwg_KPI_nrg_cons_descr" => "Consumo energético en Aguas residuales (Recolección+Tratamiento+Descarga)",
-	"#wwg_KPI_nrg_cons_expla" => "Electric energy consumption including both from the grid and self-produced, for the water stages, by the undertaking during the entire assessment period",
-	"#wwg_KPI_nrg_x_ye_descr" => "Consumo energético anual (Aguas residuales)",
+	"#wwg_KPI_nrg_cons_descr" => "Consumo eléctrico en Aguas residuales (Recolección+Tratamiento+Descarga)",
+	"#wwg_KPI_nrg_cons_expla" => "Consumo eléctrico incluyendo la auto producida",
+	"#wwg_KPI_nrg_x_ye_descr" => "Consumo eléctrico anual (Aguas residuales)",
 	"#wwg_KPI_nrg_x_ye_expla" => "",
 	"#wwg_KPI_nrg_x_br_descr" => "Energía consumida por DBO eliminada (Aguas residuales)",
 	"#wwg_KPI_nrg_x_br_expla" => "Energía total consumida en el sistema de aguas residuales por DBO5 eliminada",
@@ -389,7 +371,7 @@ $Languages["es"] = array
 	"#wwg_KPI_nrg_perc_descr" => "Porcentaje de costo de energía de Aguas Residuales de coste total de ejecución",
 	"#wwg_KPI_nrg_perc_expla" => "",
 
-	"#wsa_nrg_cons_descr" => "Energía consumida de la red",
+	"#wsa_nrg_cons_descr" => "Electricidad consumida de la red",
 	"#wsa_nrg_cons_expla" => "Consumo de energía eléctrica que incluye tanto de la red y de producción propia, para la abstractionunit agua, de la empresa durante todo el período de evaluación",
 	"#wsa_vol_conv_descr" => "Volumen de agua transportada",
 	"#wsa_vol_conv_expla" => "Suma del volumen de agua transportada (por gravedad o por bombeo) en el abstractionunit agua que son responsabilidad de la empresa, durante el plazo de evaluación",
@@ -428,8 +410,8 @@ $Languages["es"] = array
 
 	"#wst_vol_trea_descr" => "Volumen de agua tratada",
 	"#wst_vol_trea_expla" => "Suma del volumen de agua tratada por ETAs que son responsabilidad de la empresa de agua, durante el plazo de evaluación",
-	"#wst_nrg_cons_descr" => "Energía consumida de la red",
-	"#wst_nrg_cons_expla" => "Energía consumida durante el período de evaluación por cada una planta de tratamiento de aguas urbanas gestionado por la empresa",
+	"#wst_nrg_cons_descr" => "Electricidad consumida de la red",
+	"#wst_nrg_cons_expla" => "Electricidad consumida durante el período de evaluación por cada una planta de tratamiento de aguas urbanas gestionado por la empresa",
 	"#wst_tst_carr_descr" => "Pruebas de calidad del agua tratada llevadas a cabo",
 	"#wst_tst_carr_expla" => "Número de pruebas de agua tratada llevadas a cabo durante el período de evaluación",
 	"#wst_tst_aest_descr" => "Cumplimiento de las pruebas estéticas",
@@ -446,17 +428,17 @@ $Languages["es"] = array
 	"#wst_mass_slu_expla" => "Lodo producido durante el periodo de evaluación por cada una planta de tratamiento de aguas urbanas gestionado por la empresa",
 	"#wst_trea_cap_descr" => "Capacidad de tratamiento",
 	"#wst_trea_cap_expla" => "Capacidad de tratamiento de cada DAP o en las instalaciones del sistema de sitio que son responsabilidad de la empresa de aguas residuales, durante el plazo de evaluación",
-	"#wst_t_PCFSFD_descr" => "Volumen de agua tratada en la EDAR con Pre-ox / C / F / S / Filt / Des",
+	"#wst_t_PCFSFD_descr" => "Volumen de agua tratada en la ETA con Pre-ox / C / F / S / Filt / Des",
 	"#wst_t_PCFSFD_expla" => "Volumen de agua tratada por ETAs con pre-oxidación (Pre-ox), coagulación (C), la filtración (F), sedimentación (S), Filtración (Filt) y Desinfección (Des)",
-	"#wst_t_PCF_FD_descr" => "Volumen de agua tratada en la EDAR con Pre-ox / C / M / Filt / Des",
+	"#wst_t_PCF_FD_descr" => "Volumen de agua tratada en la ETA con Pre-ox / C / M / Filt / Des",
 	"#wst_t_PCF_FD_expla" => "Volumen de agua tratada por ETAs con Pre-ox / C / M / Filt / Des",
-	"#wst_t__CFSFD_descr" => "Volumen de agua tratada en la EDAR con C / F / S / Filt / Des",
+	"#wst_t__CFSFD_descr" => "Volumen de agua tratada en la ETA con C / F / S / Filt / Des",
 	"#wst_t__CFSFD_expla" => "Volumen de agua tratada por ETAs con C / F / S / Filt / Des",
-	"#wst_t__CF_FD_descr" => "Volumen de agua tratada en la EDAR con C / F / Filt / Des",
+	"#wst_t__CF_FD_descr" => "Volumen de agua tratada en la ETA con C / F / Filt / Des",
 	"#wst_t__CF_FD_expla" => "Volumen de agua tratada por ETAs con C / F / Filt / Des",
-	"#wst_t______D_descr" => "Volumen de agua tratada en la EDAR con Des",
+	"#wst_t______D_descr" => "Volumen de agua tratada en la ETA con Des",
 	"#wst_t______D_expla" => "Volumen de agua tratada por ETAs con Des",
-	"#wst_t__other_descr" => "Volumen de agua tratada en la EDAR con otros",
+	"#wst_t__other_descr" => "Volumen de agua tratada en la ETA con otros",
 	"#wst_t__other_expla" => "Volumen de agua tratada por ETAs con otra secuencia",
 
 	"#wst_KPI_nrg_per_m3_descr" => "Consumo de energía por agua tratada",
@@ -467,20 +449,20 @@ $Languages["es"] = array
 	"#wst_KPI_capac_util_expla" => "Porcentaje de la capacidad de tratamiento utilizado",
 	"#wst_SL_qual_com_descr"    => "Porcentaje de cumplimiento de la calidad",
 	"#wst_SL_qual_com_expla"    => "Porcentaje de la cantidad total de las pruebas de agua tratados realiza que cumplan con",
-	"#wst_KPI_t_PCFSFD_descr"   => "EDAR con Pre-ox / C / F / S / Filt / Des",
+	"#wst_KPI_t_PCFSFD_descr"   => "ETA con Pre-ox / C / F / S / Filt / Des",
 	"#wst_KPI_t_PCFSFD_expla"   => "",
-	"#wst_KPI_t_PCF_FD_descr"   => "EDAR con Pre-ox / C / M / Filt / Des",
+	"#wst_KPI_t_PCF_FD_descr"   => "ETA con Pre-ox / C / M / Filt / Des",
 	"#wst_KPI_t_PCF_FD_expla"   => "",
-	"#wst_KPI_t__CFSFD_descr"   => "EDAR con C / F / S / Filt / Des",
+	"#wst_KPI_t__CFSFD_descr"   => "ETA con C / F / S / Filt / Des",
 	"#wst_KPI_t__CFSFD_expla"   => "",
-	"#wst_KPI_t__CF_FD_descr"   => "EDAR con C / F / Filt / Des",
+	"#wst_KPI_t__CF_FD_descr"   => "ETA con C / F / Filt / Des",
 	"#wst_KPI_t__CF_FD_expla"   => "",
-	"#wst_KPI_t______D_descr"   => "EDAR con Des",
+	"#wst_KPI_t______D_descr"   => "ETA con Des",
 	"#wst_KPI_t______D_expla"   => "",
-	"#wst_KPI_t__other_descr"   => "EDAR con otra secuencia",
+	"#wst_KPI_t__other_descr"   => "ETA con otra secuencia",
 	"#wst_KPI_t__other_expla"   => "",
 
-	"#wsd_nrg_cons_descr" => "Energía consumida de la red",
+	"#wsd_nrg_cons_descr" => "Electricidad consumida de la red",
 	"#wsd_nrg_cons_expla" => "Consumo de energía eléctrica que incluye tanto de la red y de producción propia, para la distribución de agua durante todo el período de evaluación",
 	"#wsd_vol_dist_descr" => "Volumen de entrada",
 	"#wsd_vol_dist_expla" => "Volumen de agua que entra en el sistema de distribución del tratamiento de agua o directamente desde la abstracción durante el período de evaluación",
@@ -544,7 +526,7 @@ $Languages["es"] = array
 
 	"#wwc_vol_conv_descr"         => "Volumen de aguas residuales transmitido al tratamiento o a un emisario para la descarga sin tratamiento",
 	"#wwc_vol_conv_expla"         => "Aguas residuales recolectadas, que corresponde al volumen de los productos domésticos, comerciales e industriales a la red de alcantarillado que llega a la planta de tratamiento o un emisario durante el período de evaluación (bombeado o no). A nivel sub-etapa, si se bombea el volumen, sólo se entrar en esta línea si se está bombeando directamente a la planta o la descarga. en caso de bombeo de múltiples etapas no incluyen el volumen en esta línea ",
-	"#wwc_nrg_cons_descr"         => "Energía consumida de la red",
+	"#wwc_nrg_cons_descr"         => "Electricidad consumida de la red",
 	"#wwc_nrg_cons_expla"         => "Energía consumida durante el período de evaluación por cada una estación de bombeo para el transporte de las aguas residuales al tratamiento administrado por la empresa",
 	"#wwc_vol_pump_descr"         => "Volumen bombeado",
 	"#wwc_vol_pump_expla"         => "",
@@ -563,7 +545,7 @@ $Languages["es"] = array
 	"#wwt_biog_val_expla"         => "Biogas valorizados en la planta de tratamiento para calentar los digestores o el edificio y / o para ejecutar un Co-generador para generar calor y electricidad",
 	"#wwt_vol_trea_descr"         => "Volumen de aguas residuales tratadas",
 	"#wwt_vol_trea_expla"         => "Volumen de aguas residuales tratadas por eachunit, durante el período de evaluación",
-	"#wwt_nrg_cons_descr"         => "Energía consumida de la red",
+	"#wwt_nrg_cons_descr"         => "Electricidad consumida de la red",
 	"#wwt_nrg_cons_expla"         => "Energía total consumida durante el período de evaluación de todas las plantas de tratamiento de aguas residuales gestionadas por la empresa",
 	"#wwt_bod_infl_descr"         => "Carga de DBO5 del influente",
 	"#wwt_bod_infl_expla"         => "Carga de DBO5 de entrar en la EDAR durante el período de evaluación. Puede estimarse multiplicando el promedio de concentración de DBO en el influente por el volumen que entra a la planta. Si esto se realiza a diario y se suma largo de la duración del periodo de evaluación el valor será mayor preciso",
@@ -632,7 +614,7 @@ $Languages["es"] = array
 
 	"#wwd_vol_disc_descr"         => "Volumen de agua residual descargada (tratada y no tratada)",
 	"#wwd_vol_disc_expla"         => "Volumen de aguas residuales vertidas por cada planta de tratamiento de aguas residuales que son responsabilidad de la empresa, durante el período de evaluación. Esto incluye todas las aguas residuales recogidas, si se transporta al tratamiento o se descarga sin tratamiento",
-	"#wwd_nrg_cons_descr"         => "Energía consumida de la red",
+	"#wwd_nrg_cons_descr"         => "Electricidad consumida de la red",
 	"#wwd_nrg_cons_expla"         => "Suma de energía consumida (de la red o de producción propia) durante el período de evaluación de cada uno de todos los estaciones de bombeo de aguas residuales descargadas gestionado por la empresa",
 	"#wwd_nrg_recv_descr"         => "Energía recuperada durante la descarga de aguas residuales",
 	"#wwd_nrg_recv_expla"         => "Suma de energía recuperada durante el período de evaluación de todas las turbinas de aguas residuales vertidas gestionado por la empresa",

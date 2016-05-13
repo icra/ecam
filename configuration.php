@@ -95,7 +95,7 @@
 								Global.Configuration["Yes/No"][question]=0;
 								newRow.style.backgroundColor='#f6f6f6';
 								newRow.style.color='#aaa';
-								return "Only if [ww] or [wwt]"; 
+								return "<?php write('#configuration_only_if')?> [ww] or [wwt]"; 
 							}
 						}
 						//check for biogas valorised
@@ -106,7 +106,7 @@
 								Global.Configuration["Yes/No"][question]=0;
 								newRow.style.backgroundColor='#f6f6f6';
 								newRow.style.color='#aaa';
-								return "Only if ['Are you producing biogas'] is [Yes]";
+								return "<?php write('#configuration_only_if')?> ['Are you producing biogas'] is [Yes]";
 							}
 						}
 
@@ -117,7 +117,7 @@
 								Global.Configuration["Yes/No"][question]=0;
 								newRow.style.backgroundColor='#f6f6f6';
 								newRow.style.color='#aaa';
-								return "Only if [wsa]"; 
+								return "<?php write('#configuration_only_if')?> [wsa]"; 
 							}
 						}
 						if(question=="Do you have fuel engines to run pumps")
@@ -127,7 +127,7 @@
 								Global.Configuration["Yes/No"][question]=0;
 								newRow.style.backgroundColor='#f6f6f6';
 								newRow.style.color='#aaa';
-								return "Only if [ws] or [ww]"; 
+								return "<?php write('#configuration_only_if')?> [ws] or [ww]"; 
 							}
 						}
 						if(question=="Are you using truck transport to convey sludge to the disposal site")
@@ -137,7 +137,7 @@
 								Global.Configuration["Yes/No"][question]=0;
 								newRow.style.backgroundColor='#f6f6f6';
 								newRow.style.color='#aaa';
-								return "Only if [ww]"; 
+								return "<?php write('#configuration_only_if')?> [ww]"; 
 							}
 						}
 						if(question=="Do you want to investigate topographic energy")
@@ -147,7 +147,7 @@
 								Global.Configuration["Yes/No"][question]=0;
 								newRow.style.backgroundColor='#f6f6f6';
 								newRow.style.color='#aaa';
-								return "Only if [wsd]"; 
+								return "<?php write('#configuration_only_if')?> [wsd]"; 
 							}
 						}
 						if(question=="Are industrial or commercial users connected to the sewer system without pre-treatment")
@@ -157,15 +157,16 @@
 								Global.Configuration["Yes/No"][question]=0;
 								newRow.style.backgroundColor='#f6f6f6';
 								newRow.style.color='#aaa';
-								return "Only if [wwt]"; 
+								return "<?php write('#configuration_only_if')?> [wwt]"; 
 							}
 						}
 					//above code works but it should be moved
 
 
-					r="<label>No "+
+					r="<label>"+
+							"<?php write('#no')?> "+
 							"<input name='"+question+"' type=radio value=0 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" checked></label> "+
-							"<label>Yes "+
+							"<label><?php write('#yes')?> "+
 							"<input name='"+question+"' type=radio value=1 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" "+checked+"></label> ";
 					return r;
 				})();
@@ -337,7 +338,7 @@
 
 	<!--right: ADDITIONAL INFO-->
 	<div class=inline style="width:50%;text-align:left;margin-left:1em">
-		<style> fieldset{margin:0 0 1.5em 0;padding:0.8em;border:1px solid #aaa} </style>
+		<style> fieldset{margin:0 0 1.4em 0;padding:0.9em;border:1px solid #aaa} </style>
 		<!--conv_kwh_co2-->
 		<fieldset>
 			<legend style=cursor:help title="<?php write('#conv_kwh_co2_expla')?>"><?php write('#conv_kwh_co2_descr')?></legend>

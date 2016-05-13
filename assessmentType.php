@@ -10,7 +10,7 @@
 		<?php write('#assessment_simple')?>
 	</label>
 	&emsp;
-	<label title="Advanced assessment consists of more inputs and indicators" style=cursor:help>
+	<label title="<?php write('#assessment_adv_descr')?>" style=cursor:help>
 		<input name=assessment type=radio 
 			value=advanced   
 			onchange="updateAssessment(this.value)">

@@ -16,6 +16,9 @@ $Languages["en"]=array
 	'#save_as' => 'Save as',
 	'#clear' => 'Clear',
 
+	'#yes' => 'Yes',
+	'#no' => 'No',
+
 	'#about' => 'About',
 	'#assessment_period' => 'Assessment period',
 	'#conversion_factor' => 'Conversion factor',
@@ -28,6 +31,7 @@ $Languages["en"]=array
 	'#inactive' => 'inactive',
 	'#loading' => 'Loading...',
 	'#memory' => 'Memory usage',
+	'#missing_inputs' => 'Missing inputs',
 	'#next' => 'Next',
 	'#name' => 'name',
 	'#previous' => 'Previous',
@@ -124,6 +128,7 @@ $Languages["en"]=array
 	'#configuration_selected_fuel' => 'Selected Fuel type',
 	'#configuration_engines' => 'Engines',
 	'#configuration_vehicles' => 'Vehicles',
+	'#configuration_only_if' => 'Only if',
 
 	'#sidebar_general' => 'General',
 	'#sidebar_home' => 'Home',
@@ -174,6 +179,7 @@ $Languages["en"]=array
 	'#edit_no_formulas' => 'There are no outputs here',
 	'#edit_context_indicators' => 'Context indicators',
 	'#edit_service_level_indicators' => 'Service level indicators',
+	'#edit_click_to_modify' => 'Click to modify this input',
 
 	'#variable_detailed_info' => 'Detailed info',
 	'#variable_stage' => 'Stage',
@@ -185,12 +191,13 @@ $Languages["en"]=array
 	'#variable_value' => 'Value',
 	'#variable_magnitude' => 'Magnitude',
 	'#variable_unit' => 'Unidad',
-	'#variable_is_used_to_calculate' => 'Is used to calculate',
+	'#variable_is_used_to_calculate' => 'Outputs that use this input',
 	'#variable_nothing' => 'Nothing',
 	'#variable_warning' => 'Warning',
 	'#variable_this_equation_contains_estimated_data' => 'This equation contains estimated data in at least one input',
 	'#variable_this_input_is_considered_estimated' => 'This input is considered estimated data by the user',
 	'#variable_formula' => 'Formula',
+	'#variable_go_to_substages' => 	'This value is the sum of all substages, you can not change it here, go to Substages',
 
 	'#stages_this_is_an_overview_of_your_system' => 'This is an overview of the active stages of your system. Click on a stage to input data. To activate more stages go to',
 	'#stages_system_assessment_overview' => 'System assessment overview',
@@ -214,6 +221,7 @@ $Languages["en"]=array
 	'#assessment_type' => 'Type of assessment',
 	'#assessment_simple' => 'Simple',
 	'#assessment_advanced' => 'Advanced',
+	'#assessment_adv_descr' => 'Advanced assessment consists of more inputs and more indicators',
 
 	'#export_title' => 'Export to Excel',
 	'#export_description' => 'Click on a stage to view its variables. Then click on "Highlight the whole table" to copy and paste to an empty Excel file',
@@ -252,8 +260,10 @@ $Languages["en"]=array
 	'#fuelInfo_ncv' => 'Net calorific values',
 
 	/** VARIABLES **/
-	"#Days_descr" => "Assessment period",
-	"#Days_expla" => "Period of time adopted for the assessment of the data and of the PI",
+	"#Days_descr"         => "Assessment period",
+	"#Days_expla"         => "Period of time adopted for the assessment of the data and of the PI",
+	"#Years_descr"        => "Assessment period",
+	"#Years_expla"        => "Period of time adopted for the assessment of the data and of the PI",
 	"#conv_kwh_co2_descr" => "Conversion factor for grid electricity",
 	"#conv_kwh_co2_expla" => "Ratio of CO2 emission per energy consumed",
 

@@ -174,12 +174,12 @@
 					{
 						//this means you are in level 2 and you should NOT be able to modify inputs here
 						newCell.style.cursor='help';
-						newCell.title="To modify this input, go to 'Substages'. This is because this field now the sum of all fields in substages";
+						newCell.title="<?php write('#variable_go_to_substages')?>";
 					}
 					else
 					{
 						newCell.className="input";
-						newCell.title="Click to modify this input";
+						newCell.title="<?php write('#edit_click_to_modifiy')?>";
 						newCell.setAttribute('onclick','transformField(this)');
 					}
 				}
@@ -198,7 +198,7 @@
 				})();
 
 				//check if this cv has estimated data
-				var ed=DQ.hasEstimatedData(field) ? " <span title='This equation contains estimated data' class=estimated>&#9888;</span>" : "";
+				var ed=DQ.hasEstimatedData(field) ? " <span title='<?php write('#variable_this_equation_contains_estimated_data')?>' class=estimated>&#9888;</span>" : "";
 				newCell.innerHTML+=ed;
 
 				//unit
@@ -320,7 +320,7 @@
 				{
 
 					//has estimated data warning
-					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='This equation contains estimated data'>&#9888;</span>" : "";
+					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
 
 					// level 2 warnings
 					var l2w = Level2Warnings.isIn(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
@@ -499,9 +499,8 @@
 				newCell=newRow.insertCell(-1)
 				newCell.innerHTML=(function()
 				{
-
 					//has estimated data warning
-					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='This equation contains estimated data'>&#9888;</span>" : "";
+					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
 
 					// level 2 warnings
 					var l2w = Level2Warnings.isIn(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
@@ -587,7 +586,7 @@
 				{
 
 					//has estimated data warning
-					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='This equation contains estimated data'>&#9888;</span>" : "";
+					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
 
 					// level 2 warnings
 					var l2w = Level2Warnings.isIn(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
@@ -720,7 +719,7 @@
 			{
 				$color = ($level=="Waste")?"lightcoral":"lightblue";
 				echo "
-					<span class=inline style='float:right;margin-right:0.5em'>
+					<span class=inline style='float:right;margin-right:5.9em'>
 						<button 
 							class=button
 							style='background:$color;font-size:12px;vertical-align:middle'

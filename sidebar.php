@@ -117,22 +117,22 @@
 		div#sidebar
 		{
 			position:fixed;
-			top:0;right:0;z-index:999;
+			/*dreta*/top:0;right:0;z-index:999;
+			/*esquerra*/top:59px;left:0;z-index:999;
 			background:white;
 			padding:0;margin:0;
-			box-shadow:5px 5px 40px 5px #666;
-			border-left:2px solid #666;
-			border-right:1px solid #666;
+			box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
 			overflow:auto;
+			border-right:1px solid #ccc;
 		}
 		div#sidebar.off{width:0;height:0;top:0;}
-		div#sidebar.on{width:260px;bottom:0;transition:all 0.2s}
+		div#sidebar.on{width:255px;bottom:0;transition:all 0s}
 		div#sidebar.on  div#sidecontent{display:block}
 		div#sidebar.off div#sidecontent{display:none}
 		div#sidebar div{padding:0;margin:0}
 		div#sidebar table{width:100%;margin:0;}
-		div#sidebar table th {background:#d7bfaf;color:black}
-		div#sidebar td, div#sidebar th {border-left:0;border-right:0;padding:0.3em}
+		div#sidebar td, div#sidebar th {border-left:0;border-right:0;padding:0.3em;padding-left:1em}
+		/*BROWN? div#sidebar table th {background:#d7bfaf;color:black}*/
 		div#sidebar table#menu td {border-bottom:0}
 
 		/*links*/
@@ -142,13 +142,14 @@
 	</style>
 	<div id=sidecontent>
 		<table id=menu>
-			<tr><th colspan=4 id=Name style=font-size:18px> <script>document.write(Global.General.Name)</script>
+			<tr><th id=Name style=font-size:18px> <script>document.write(Global.General.Name)</script>
 			<tr>
-				<td align=center><button onclick=newSystem()><?php write('#new')?></button>
+				<td align=center>
 				<input type="file" id="loadfile" accept=".json" onchange="loadFile(event)" style="display:none">
-				<td align=center><button onclick=document.getElementById('loadfile').click()><?php write('#open')?></button>
-				<td align=center><button onclick=saveToFile()><?php write('#save')?></button>
-				<td align=center><button onclick=clearSystem()><?php write('#clear')?></button>
+				<button onclick=newSystem()><?php write('#new')?></button>
+				<button onclick=document.getElementById('loadfile').click()><?php write('#open')?></button>
+				<button onclick=saveToFile()><?php write('#save')?></button>
+				<button onclick=clearSystem()><?php write('#clear')?></button>
 		</table>
 
 		<!--red/blue separator bars--> 
@@ -171,21 +172,15 @@
 			<tr><td><a href=configuration.php><?php write('#configuration')?></a>
 			<tr><th><?php write('#ghg_assessment')?>
 			<tr><td><a href=birds.php><?php write('#quick_assessment')?></a>
-			<tr><td>&emsp;		<a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
-			<tr><td>&emsp;&emsp;<a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
+			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
+			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
 			<tr><th><?php write('#energy_performance')?>
-			<tr><td>&emsp;
-				<a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction><?php write('#Abstraction')?></a>
-			<tr><td>&emsp;&emsp;
-				<a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment><?php write('#Treatment')?></a>
-			<tr><td>&emsp;&emsp;&emsp;
-				<a class=water stage=waterDis href=edit.php?level=Water&sublevel=Distribution><?php write('#Distribution')?></a>
-			<tr><td>&emsp;
-				<a class=waste stage=wasteCol href=edit.php?level=Waste&sublevel=Collection><?php write('#Collection')?></a>
-			<tr><td>&emsp;&emsp;
-				<a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment><?php write('#Treatment')?></a>
-			<tr><td>&emsp;&emsp;&emsp;
-				<a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge><?php write('#Discharge')?></a>
+			<tr><td><a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction><?php write('#Abstraction')?></a>
+			<tr><td><a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment><?php write('#Treatment')?></a>
+			<tr><td><a class=water stage=waterDis href=edit.php?level=Water&sublevel=Distribution><?php write('#Distribution')?></a>
+			<tr><td><a class=waste stage=wasteCol href=edit.php?level=Waste&sublevel=Collection><?php write('#Collection')?></a>
+			<tr><td><a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment><?php write('#Treatment')?></a>
+			<tr><td><a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge><?php write('#Discharge')?></a>
 			<tr><td><a href=edit.php?level=Energy><?php write('#energy_summary')?></a>
 			<tr><th><?php write('#summary')?>
 			<tr><td><a href=summary.php?type=input><?php write('#sidebar_all_inputs')?></a>

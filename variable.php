@@ -190,7 +190,8 @@
 				//get substages
 				if(typeof(currSubstage)=="object" && currSubstage.length > 1)
 				{
-					newCell.title='Go to substages to edit this value (sum)'
+					newCell.title='<?php write('#variable_go_to_substages')?>'
+					newCell.style.cursor='help'
 				}
 				else{
 					newCell.className='input'

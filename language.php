@@ -4,7 +4,7 @@
 	/**container element*/
 	#lang{
 		position:absolute;
-		right:5%;
+		right:2%;
 		top:20px;
 		cursor:pointer;
 		z-index:99;
