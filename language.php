@@ -20,7 +20,7 @@
 		width:200px;
 		background:#eeece4;
 		transition:all 0.4s;
-		box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
+		box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 5px 10px 15px 5px rgba(0,0,0,.1);
 	}
 
 	/**show select element*/

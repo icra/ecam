@@ -31,7 +31,7 @@
 			{
 				document.write("<tr><td><a stage="+alias+" href=level3.php?level="+level+"&sublevel="+sublevel+">"+name+
 					"<td>"+Substages[level][sublevel].length+
-					"<td>"+Global.Configuration.Assessment[level][sublevel]+
+					"<td>"+translate("assessment_"+Global.Configuration.Assessment[level][sublevel])+
 					"")
 			}
 			tableRow('waterAbs','Water','Abstraction' ,'<?php write('#Water'); echo ": "; write('#Abstraction')?>');

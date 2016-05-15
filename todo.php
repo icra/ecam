@@ -1,4 +1,3 @@
-<!--todo.php: to do list-->
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style> #todo td.taskgroup{background:#ccc;text-align:center;} </style>
@@ -11,9 +10,10 @@
 <table id=todo>
 	<tr><th><?php write('#todo_task')?><th><?php write('#todo_status')?>
 	<tr><td colspan=2 class=taskgroup>BACK-END
-		<tr><td>Finish questions variable hidings<td>Pending (difficult)</td>
 		<tr><td>Wrong benchmarking<td>Need more info</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
+		<tr><td>Translate benchmarking<td>Need more info</td>
+		<tr><td>Translate units<td>Pending</td>
 </table>
 
 <!--FOOTER--><?php include'footer.php'?>

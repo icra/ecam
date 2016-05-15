@@ -51,13 +51,7 @@ span.estimated{color:red;font-size:16px;cursor:help}
 		font: bold 1em/2em Arial, Helvetica;
 		text-decoration: none;
 		color: #333;
-		text-shadow: 0 1px 0 rgba(255,255,255,.8);
-		-moz-border-radius: .2em;
-		-webkit-border-radius: .2em;
 		border-radius: .2em;
-		-moz-box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
-		-webkit-box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
-		box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
 	}
 
 	.button:hover

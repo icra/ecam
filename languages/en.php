@@ -19,6 +19,8 @@ $Languages["en"]=array
 	'#yes' => 'Yes',
 	'#no' => 'No',
 
+	'#Actual' => 'Actual',
+	'#Estimated' => 'Estimated',
 	'#about' => 'About',
 	'#assessment_period' => 'Assessment period',
 	'#conversion_factor' => 'Conversion factor',
@@ -29,6 +31,7 @@ $Languages["en"]=array
 	'#energy_summary' => 'Energy summary',
 	'#ghg_assessment' => 'GHG assessment',
 	'#inactive' => 'inactive',
+	'#Inactive' => 'Inactive',
 	'#loading' => 'Loading...',
 	'#memory' => 'Memory usage',
 	'#missing_inputs' => 'Missing inputs',
@@ -67,39 +70,12 @@ $Languages["en"]=array
 	'#index_chrome_warning' => 'Please use Google Chrome browser.',
 	'#index_latest_update' => 'Latest update',
 
-	'#about_credits' => '
-		Developed by <a href=http://icra.cat>ICRA</a> in cooperation with <a href=http://www.iwa-network.org/>IWA</a>,
-		GIZ under the <a href="http://www.iwa-network.org/WaCCliM/">WaCCliM project</a> and Cobalt Water.<br>
-		The tool was formerly developed in June 2015 as an EXCEL tool by the consortium Global Water Commons (LNEC and University of Valencia) in collaboration with Cobalt Water. 
-		We want to acknowledge how extremely valuable The Excel tool has been to enable the development of this web-tool.
-		<br><br>
-		
-		The source code of this project is in <a href=https://github.com/holalluis/ecam>GitHub</a>.
-		There you can download the tool and have it offline. <br>
-		You will need a PHP localhost (such as <a href=https://www.apachefriends.org/index.html>XAMPP</a>).<br>
-		This software was written entirely using the <a href=http://www.vim.org>Vim</a> editor, inside a <a href=https://www.cygwin.com/>Cygwin</a> terminal. <br>
-		Tool coded in HTML/PHP/CSS/Javascript languages. <br>
-	',
-
+	'#about_credits' => ' Developed by <a href=http://icra.cat>ICRA</a> in cooperation with <a href=http://www.iwa-network.org/>IWA</a>, GIZ under the <a href="http://www.iwa-network.org/WaCCliM/">WaCCliM project</a> and Cobalt Water.<br> The tool was formerly developed in June 2015 as an EXCEL tool by the consortium Global Water Commons (LNEC and University of Valencia) in collaboration with Cobalt Water.  We want to acknowledge how extremely valuable The Excel tool has been to enable the development of this web-tool.  <br><br> The source code of this project is in <a href=https://github.com/holalluis/ecam>GitHub</a>.  There you can download the tool and have it offline. <br> You will need a PHP localhost (such as <a href=https://www.apachefriends.org/index.html>XAMPP</a>).<br> This software was written entirely using the <a href=http://www.vim.org>Vim</a> editor, inside a <a href=https://www.cygwin.com/>Cygwin</a> terminal. <br> Tool coded in HTML/PHP/CSS/Javascript languages. <br> ',
 	'#about_graphs_lib' => 'Graphs library used',
 	'#about_json_viewer' => 'JSON viewer used',
 	'#about_license' => 'License',
 
-	'#license_license' => '
-	Copyright 2016 IWA
-
-	Licensed under the Apache License, Version 2.0 (the "License");
-	you may not use this file except in compliance with the License.
-	You may obtain a copy of the License at
-
-		http://www.apache.org/licenses/LICENSE-2.0
-
-	Unless required by applicable law or agreed to in writing, software
-	distributed under the License is distributed on an "AS IS" BASIS,
-	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	See the License for the specific language governing permissions and
-	limitations under the License.
-	',
+	'#license_license' => ' Copyright 2016 IWA Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.  You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the specific language governing permissions and limitations under the License.  ',
 
 	'#getStarted_general_info' => 'General info',
 	'#getStarted_subtitle' => 'General info about your system. You can edit this information later.',
@@ -114,9 +90,6 @@ $Languages["en"]=array
 	'#configuration' => 'Configuration',
 	'#configuration_activate_all' => 'Activate all',
 	'#configuration_subtitle' => 'Use the left table to activate stages, which will form your system. Then, fill the options on the right.',
-	'#configuration_ghg_assessment' => 'GHG assessment',
-	'#configuration_energy_performance' => 'Energy performance',
-	'#configuration_conversion_factor' => 'Conversion factor for grid electricity',
 	'#configuration_enter_custom_value' => 'enter custom value or select country',
 	'#configuration_custom' => 'CUSTOM',
 	'#configuration_current_value' => 'Current value',
@@ -131,7 +104,6 @@ $Languages["en"]=array
 	'#configuration_only_if' => 'Only if',
 
 	'#sidebar_general' => 'General',
-	'#sidebar_home' => 'Home',
 	'#sidebar_other' => 'Other',
 	'#sidebar_all_inputs' => 'All inputs',
 	'#sidebar_all_ccvv' => 'All Calculated variables',
@@ -160,6 +132,7 @@ $Languages["en"]=array
 	'#birds_year' => 'year',
 	'#birds_trips_week' => 'trips/week',
 	'#birds_month' => 'month',
+	'#birds_warning_conv_factor' => 'Conversion factor is zero',
 
 	'#edit_input_data' => 'Input data',
 	'#edit_description' => 'Description',
@@ -192,7 +165,7 @@ $Languages["en"]=array
 	'#variable_magnitude' => 'Magnitude',
 	'#variable_unit' => 'Unidad',
 	'#variable_is_used_to_calculate' => 'Outputs that use this input',
-	'#variable_nothing' => 'Nothing',
+	'#variable_nothing' => 'None',
 	'#variable_warning' => 'Warning',
 	'#variable_this_equation_contains_estimated_data' => 'This equation contains estimated data in at least one input',
 	'#variable_this_input_is_considered_estimated' => 'This input is considered estimated data by the user',
@@ -205,7 +178,7 @@ $Languages["en"]=array
 	'#stages_num_of_substages' => 'Nº of substages',
 	'#stages_type_of_assessment' => 'Type of assessment',
 
-	'#level3_split_this_stage' => 'Split this stage in substages',
+	'#level3_split_this_stage' => 'Here you can split this stage in substages',
 	'#level3_new_substage' => 'New substage',
 	'#level3_results_kpis' => 'RESULTS - Key performance indicators',
 	'#level3_code' => 'Code',
@@ -213,10 +186,12 @@ $Languages["en"]=array
 	'#level3_TOTAL' => 'TOTAL',
 	'#level3_unit' => 'Unit',
 	'#level3_new_name' => 'New name for the substage',
+	'#level3_new_name_short' => 'Nuevo nombre',
 	'#level3_click_to_modify_the_name' => 'Click here to modify the name',
 	'#level3_advanced' => 'advanced',
 	'#level3_error_memory_full' => 'Substage not added: memory is full',
 	'#level3_error_cannot_delete_last_substage' => 'You can not delete the last substage',
+	'#level3_delete_substage' => 'Delete substage',
 
 	'#assessment_type' => 'Type of assessment',
 	'#assessment_simple' => 'Simple',
@@ -258,6 +233,22 @@ $Languages["en"]=array
 	'#fuelInfo_vehicles' => 'vehicles',
 	'#fuelInfo_fd' => 'Fuel density',
 	'#fuelInfo_ncv' => 'Net calorific values',
+
+	'#questions_about' => 'About additional questions',
+	'#questions_question' => 'Question',
+	'#questions_variables_hidden' => 'Variables hidden if answer is No',
+	'#questions_questions_hidden' => 'Questions hidden if answer is No',
+
+	/** QUESTIONS **/
+	"#engines_in_water" => "Do you have fuel engines for pumps (Water supply)",
+	"#engines_in_waste" => "Do you have fuel engines for pumps (Wastewater)",
+	"#producing_energy_waterAbs" => "Are you producing energy in Abstraction stage",
+	"#topographic_energy" => "Do you want to investigate topographic energy (Distribution)",
+	"#truck_transport_waste" => "Are you using truck transport to convey sludge to disposal site",
+	"#industrial_wasteTre" => "Are industrial users connected to the sewer system without pre-treatment",
+	"#producing_biogas" => "Are you producing biogas",
+	"#valorizing_biogas" => "Are you valorizing biogas",
+	/** QUESTIONS **/
 
 	/** VARIABLES **/
 	"#Days_descr"         => "Assessment period",
@@ -302,34 +293,34 @@ $Languages["en"]=array
 	'#ws_non_revw_expla' => 'Non-revenue water as estimated by the user in the inputs of the GHG assessment page or as calculated based on the difference between the volume of water abstracted and the volume of authorized consumption',
 	'#ws_vol_fuel_descr' => 'Volume of fuel consumed',
 	'#ws_vol_fuel_expla' => 'Fuel consumption in water supply, for instance, due to the use of on-site generators or devices that work on fuel',
-	'#ws_KPI_GHG_elec_descr' => 'Electricidad',
+	'#ws_KPI_GHG_elec_descr' => 'Electricity',
 	'#ws_KPI_GHG_elec_expla' => 'GHG Emissions from electricity consumption in all stages of urban drinking water system',
-	'#ws_KPI_GHG_ne_descr' => 'Combustible de los motores',
+	'#ws_KPI_GHG_ne_descr' => 'Fuel',
 	'#ws_KPI_GHG_ne_expla' => 'GHG Emissions other from electricity consumption in all stages of urban drinking water system',
-	'#ws_KPI_GHG_descr' => '<b>Total GEI</b>',
+	'#ws_KPI_GHG_descr' => '<b>Total GHG</b>',
 	'#ws_KPI_GHG_expla' => 'GHG Emissions from non-electricity and electricity consumption ',
 
-	"#ww_bod_infl_descr" => "BOD5 Carga en el influente",
+	"#ww_bod_infl_descr" => "BOD5 load influent",
 	"#ww_bod_infl_expla" => "BOD5 load entering the WWTP during the assessment period. It can be estimated by multiplying the average BOD concentration in the influent by the volume entering the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate",
-	"#ww_bod_effl_descr" => "BOD5 Carga en el effluent",
+	"#ww_bod_effl_descr" => "BOD5 load effluent",
 	"#ww_bod_effl_expla" => "BOD5 load at the effluent of the WWTP during the assessment period. It can be estimated by multiplying the average BOD5 concentration in the effluent by the effluent volume the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate",
-	"#ww_bod_slud_descr" => "DBO eliminado como fango",
+	"#ww_bod_slud_descr" => "BOD removed as sludge",
 	"#ww_bod_slud_expla" => "BOD removed from the wastewater though the process of removing primary or secondary sludge from the aerobic treatment process. This value is used to estimate the Methane emissions from poorly aerated biological treatment of wastewater",
-	"#ww_nrg_cost_descr" => "Costes energéticos",
+	"#ww_nrg_cost_descr" => "Energy costs",
 	"#ww_nrg_cost_expla" => "Costs from electric energy consumption for the entire wastewater utilty, based on the electricity bill during the entire assessment period.",
-	"#ww_run_cost_descr" => "Costes operacionales totales",
+	"#ww_run_cost_descr" => "Total running costs",
 	"#ww_run_cost_expla" => "Total operations and maintenance net costs and internal manpower net costs (i.e. not including the capitalised cost of self constructed assets) related to wastewater management within the service area managed by the undertaking during the entire assessment period",
-	"#ww_nrg_cons_descr" => "Energía consumida de la red",
+	"#ww_nrg_cons_descr" => "Energy consumed from the grid",
 	"#ww_nrg_cons_expla" => "Total electric energy consumed from the grid related to wastewater management within the service area managed by the undertaking during the entire assessment period",
-	"#ww_vol_coll_descr" => "Volumen de agua residual recolectada",
+	"#ww_vol_coll_descr" => "Volume of collected wastewater",
 	"#ww_vol_coll_expla" => "Volume of wastewater discharged from water consumers (households, industries, etc.) to the sewer system during the assessment period and prior to any dilution from groundwater infiltration or surface water inflow, and prior to any overflows to sewage to the natural environment. This value can be estimated with 80% of the authorized consumption per person multiplied by the number of people connected to sewers.",
-	"#ww_vol_wwtr_descr" => "Volumen de agua residual tratada",
-	"#ww_vol_wwtr_expla" => "treated wastewater volume (m3) ",
-	"#ww_resi_pop_descr" => "Población residente",
+	"#ww_vol_wwtr_descr" => "Volume of treated wastewater",
+	"#ww_vol_wwtr_expla" => "Treated wastewater volume (m3) ",
+	"#ww_resi_pop_descr" => "Resident population",
 	"#ww_resi_pop_expla" => "Number of permanent residents within the area of service for wastewater services managed by the undertaking (whether they are connected or not) , at the reference date ",
-	"#ww_conn_pop_descr" => "Población conectada a los colectores",
+	"#ww_conn_pop_descr" => "Population connected to sewers",
 	"#ww_conn_pop_expla" => "Number of permanent residents within the service area managed by the undertaking which are connected to the sewer system , at the reference date ",
-	"#ww_serv_pop_descr" => "Población servida",
+	"#ww_serv_pop_descr" => "Serviced population",
 	"#ww_serv_pop_expla" => "Number permanent residents within the service area managed by the undertaking which wastewater is collected and treated, at the reference date",
 	"#ww_num_trip_descr" => "Number of trips to sludge disposal site",
 	"#ww_num_trip_expla" => "Number of truck trips to dispose sludge from the WWTP to the disposal site during the assessment period. Note that round trips to the disposal site shall be counted as 1 trip ",

@@ -19,7 +19,8 @@
 			<img class=l2 stage=wasteTre src=img/wasteTre.png onclick=window.location="edit.php?level=Waste&sublevel=Treatment"    title="<?php write('#Treatment')?>">
 			<img class=l2 stage=wasteDis src=img/wasteDis.png onclick=window.location="edit.php?level=Waste&sublevel=Discharge"    title="<?php write('#Discharge')?>">
 
-			<img class=l2 stage=energy src=img/energy.png onclick=window.location="edit.php?level=Energy" title="Energy summary"> 
+			<span style="color:#666"><?php write('#energy_summary')?></span>
+			<img class=l2 stage=energy src=img/energy.png onclick=window.location="edit.php?level=Energy" title="<?php write('#energy_summary')?>"> 
 		<hr id=line>
 	</div>
 </div>
@@ -32,7 +33,7 @@
 	div#linearDiagram img{border-radius:90%;border:4px solid transparent}
 	div#linearDiagram img.selected{border:4px solid lightgreen}
 	div#linearDiagram img:not(.inactive):hover {border:4px solid #d7bfaf}
-	div#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(260px);z-index:1;width:250px;}
+	div#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(210px);z-index:1;width:250px;}
 </style>
 
 <script>

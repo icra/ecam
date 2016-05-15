@@ -13,6 +13,7 @@ var Tables =
 		"Peru":0,
 		"Thailand":0,
 		"Mexico":0,
+		"Other":0,
 	},
 
 	/** Technologies for wst and wwt (table not used right now). I was told that this will be used for benchmarking */

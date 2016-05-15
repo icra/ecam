@@ -1,6 +1,11 @@
 <script>
 var Graphs = {}
 
+function scrollTo(id)
+{
+	document.querySelector('#'+id).scrollIntoView();
+}
+
 Graphs.graph1=function(withTable,container)
 //GHG
 {
@@ -329,7 +334,7 @@ Graphs.graph5=function(withTable,container)
 	{
 		//create a table (as a string)
 		var table=""+
-		"<button onclick=Graphs.graph5(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
+		"<button onclick=\"Graphs.graph5(false,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_hide_table')?></button>"+
 		"<table title=graph5>"+
 			"<tr><th><?php write('#graphs_slice')?><th><?php write('#graphs_formula')?><th><?php write('#graphs_value')?>"+
 			"<tr><td>"+names[0]+"<td><a href=variable.php?id=wsa_nrg_cons>wsa_nrg_cons</a> <td>"+format(slice_1)+
@@ -353,7 +358,8 @@ Graphs.graph5=function(withTable,container)
 		//button "show table"
 		var div=document.createElement('div');
 		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.graph5(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
+		div.innerHTML="<button onclick=\"Graphs.graph5(true,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_show_table')?></button>"+
+			"<button onclick=\"Graphs.graph7(false,'"+container+"');scrollTo('"+container+"')\"><?php write('#substages')?></button>";
 	}
 }
 
@@ -439,7 +445,7 @@ Graphs.graph7=function(withTable,container)
 		//create a table (as a string)
 		var table=""+
 		"<table title=graph7>"+
-		"<button onclick=Graphs.graph7(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
+		"<button onclick=\"Graphs.graph7(false,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_hide_table')?></button>"+
 		"<tr><th><?php write('#graphs_slice')?><th><?php write('#graphs_formula')?><th colspan=30>kWh <?php write('#substages')?>";
 			for(var s in stages)
 			{
@@ -475,7 +481,8 @@ Graphs.graph7=function(withTable,container)
 		//button "show table"
 		var div=document.createElement('div');
 		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.graph7(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
+		div.innerHTML="<button onclick=\"Graphs.graph7(true,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_show_table')?></button>"+
+			"<button onclick=\"Graphs.graph5(false,'"+container+"');scrollTo('"+container+"')\"><?php write('#substages')?></button>";
 	}
 }
 

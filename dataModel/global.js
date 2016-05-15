@@ -159,7 +159,7 @@ var Global = {
 		{
 			if(this.ww_biog_pro==0)
 			{
-				if(Global.Configuration["Yes/No"]["Are you producing biogas"])
+				if(Global.Configuration["Yes/No"]["#producing_biogas"])
 					return this.ww_serv_pop * this.ww_bod_pday * 0.9 * 0.4/1000 * Global.General.Days();
 				else
 					return 0;
@@ -337,13 +337,14 @@ var Global = {
 
 		"Yes/No":
 		{
-			"Do you have fuel engines to run pumps"                                                  :0,
-			"Are you producing electrical energy in your drinking water system"                      :0,
-			"Do you want to investigate topographic energy"                                          :0,
-			"Are you using truck transport to convey sludge to the disposal site"                    :0,
-			"Are industrial or commercial users connected to the sewer system without pre-treatment" :0,
-			"Are you producing biogas"                                                               :0,
-			"Are you valorizing biogas"                                                              :0,
+			"engines_in_water":0,
+			"engines_in_waste":0,
+			"producing_energy_waterAbs":0,
+			"topographic_energy":0,
+			"truck_transport_waste":0,
+			"industrial_wasteTre":0,
+			"producing_biogas":0,
+			"valorizing_biogas":0,
 		},
 	},
 }

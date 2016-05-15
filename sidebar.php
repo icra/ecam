@@ -1,5 +1,4 @@
 <!--menu bar at the right of the page-->
-
 <script>
 	var Sidebar = //Namespace
 	{
@@ -109,10 +108,10 @@
 ?>
 
 <div id=sidebar class="<?php echo $sbd ?>" onclick="event.stopPropagation()">
-	 <script>
-	 	//if you click anywhere except the sidebar, it will hide the sidebar
-	 	document.documentElement.onclick=function(){Sidebar.hide()};
-	 </script>
+	<script>
+		//if you click anywhere except the sidebar, it will hide the sidebar
+		document.documentElement.onclick=function(){Sidebar.hide()};
+	</script>
 	<style>
 		div#sidebar
 		{
@@ -125,26 +124,25 @@
 			overflow:auto;
 			border-right:1px solid #ccc;
 		}
-		div#sidebar.off{width:0;height:0;top:0;}
+		div#sidebar.off{width:0;height:0;top:0;display:none}
 		div#sidebar.on{width:255px;bottom:0;transition:all 0s}
 		div#sidebar.on  div#sidecontent{display:block}
 		div#sidebar.off div#sidecontent{display:none}
 		div#sidebar div{padding:0;margin:0}
 		div#sidebar table{width:100%;margin:0;}
-		div#sidebar td, div#sidebar th {border-left:0;border-right:0;padding:0.3em;padding-left:1em}
-		/*BROWN? div#sidebar table th {background:#d7bfaf;color:black}*/
+		div#sidebar td, div#sidebar th {border-left:0;border-right:0;padding:0.33em;padding-left:1em;}
 		div#sidebar table#menu td {border-bottom:0}
 
 		/*links*/
-		#sidebar a.water{color:#00adef} 
-		#sidebar a.waste{color:#d71d24} 
-		#sidebar a.inactive{pointer-events:none;color:#ccc;text-decoration:none} 
+		div#sidebar a.water{color:#00adef} 
+		div#sidebar a.waste{color:#d71d24} 
+		div#sidebar a.inactive{pointer-events:none;color:#ccc;text-decoration:none} 
 	</style>
 	<div id=sidecontent>
 		<table id=menu>
 			<tr><th id=Name style=font-size:18px> <script>document.write(Global.General.Name)</script>
 			<tr>
-				<td align=center>
+				<td align=center style="padding:0.7em">
 				<input type="file" id="loadfile" accept=".json" onchange="loadFile(event)" style="display:none">
 				<button onclick=newSystem()><?php write('#new')?></button>
 				<button onclick=document.getElementById('loadfile').click()><?php write('#open')?></button>
@@ -167,7 +165,6 @@
 
 		<table>
 			<tr><th><?php write('#sidebar_general')?>
-			<tr><td><a href=index.php><?php write('#sidebar_home')?></a>
 			<tr><td><a href=getStarted.php><?php write('#getStarted_general_info')?></a>
 			<tr><td><a href=configuration.php><?php write('#configuration')?></a>
 			<tr><th><?php write('#ghg_assessment')?>
@@ -219,5 +216,4 @@
 		}
 	})();
 </script>
-
 <style> #sidebar td.sidebar_selected {background:linear-gradient(lightgreen,#fefefe,lightgreen);} </style>

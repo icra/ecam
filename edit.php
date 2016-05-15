@@ -179,7 +179,7 @@
 					else
 					{
 						newCell.className="input";
-						newCell.title="<?php write('#edit_click_to_modifiy')?>";
+						newCell.title="<?php write('#edit_click_to_modify')?>";
 						newCell.setAttribute('onclick','transformField(this)');
 					}
 				}
@@ -236,11 +236,9 @@
 					}
 				})();
 				//data quality
-				newRow.insertCell(-1).innerHTML=(function(){
-					if(isCV)
-					{
-						return "Calculated";
-					}
+				newRow.insertCell(-1).innerHTML=(function()
+				{
+					if(isCV) { return "Calculated" }
 					else
 					{
 						var select=document.createElement('select');
@@ -249,10 +247,12 @@
 						{
 							var option=document.createElement('option');
 							select.appendChild(option);
-							option.innerHTML=opt;
+							option.value=opt;
+							option.innerHTML=translate(opt);
 							if(Global.Configuration.DataQuality[field]==opt)
+							{
 								option.setAttribute('selected',true);
-								
+							}
 						});
 						return select.outerHTML;
 					}
@@ -643,11 +643,6 @@
 				{
 					//old L2
 					echo "Graphs.graph5(false,'graph');";
-
-					if($level=='Energy')
-					{
-						echo "Graphs.graph7(false,'graph2')";
-					}
 				}
 				else
 				{
@@ -666,7 +661,7 @@
 			updateOtherOutputs();
 			Exceptions.apply();
 			//when user updates any input, trigger this:
-			try{ drawCharts(); }
+			try{drawCharts();}
 			catch(e) { console.log(e); }
 			updateResult();
 		}
@@ -710,7 +705,7 @@
 		/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
 		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (".$Languages[$lang]['#energy_performance'].")</span>" : "<span style=color:black>$titleLevel</span>";
 	?>
-	<style> h1 {text-align:left;padding-left:20em;line-height:2.1em} </style>
+	<style> h1 {text-align:left;padding-left:17em;line-height:2.1em} </style>
 	<h1><a href=stages.php><?php write('#edit_input_data')?></a> <?php echo "$sep $title"?>
 
 		<!--go to level 3 button-->
@@ -719,7 +714,7 @@
 			{
 				$color = ($level=="Waste")?"lightcoral":"lightblue";
 				echo "
-					<span class=inline style='float:right;margin-right:5.9em'>
+					<span class=inline style='float:right;margin-right:2em'>
 						<button 
 							class=button
 							style='background:$color;font-size:12px;vertical-align:middle'
@@ -771,23 +766,30 @@
 
 			<!--assessment info-->
 			<span style="text-align:left;font-size:11px">
-				<a href=variable.php?id=Days ><?php write('#assessment_period')?></a>: <script>document.write(format(Global.General.Days()))</script> <?php write('#days')?>
-				(<script>document.write(format(Global.General.Years()))</script> <?php write('#years')?>)
+				<a href=variable.php?id=Days><?php write('#assessment_period')?></a>: 
+					<script>document.write(format(Global.General.Days()))</script> <?php write('#days')?>
 				|
-				<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity"><?php write('#conversion_factor')?></a>: <script>document.write(format(Global.General.conv_kwh_co2))</script> kgCO<sub>2</sub>/kWh
+				<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity"><?php write('#conversion_factor')?></a>: 
+					<script>
+						(function(){
+							var c = Global.General.conv_kwh_co2;
+							var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c); 
+							document.write(str)
+						})();
+					</script> kg CO<sub>2</sub>/kWh
 			</span>
 			<tr>
 				<th><?php write('#edit_origin')?>
-				<th style=width:20%><?php write('#edit_value_per_year')?> (kgCO<sub>2</sub>eq/year)
-				<th style=width:20%><?php write('#edit_per_inhab')?> (kgCO<sub>2</sub>eq/year/inhab)
-				<th style=width:20%><?php write('#edit_per_serv_pop')?> (kgCO<sub>2</sub>eq/year/serv.pop)
-				<th style=width:20%><?php write('#edit_per_water_volume')?> (kgCO<sub>2</sub>eq/m<sup>3</sup>)
+				<th style=width:20%><?php write('#edit_value_per_year')?><br>kg CO<sub>2</sub>/<?php write('#year')?>
+				<th style=width:20%><?php write('#edit_per_inhab')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/inhab
+				<th style=width:20%><?php write('#edit_per_serv_pop')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/serv.pop
+				<th style=width:20%><?php write('#edit_per_water_volume')?><br>kg CO<sub>2</sub>/m<sup>3</sup>
 				<?php
 					if($level=="Waste" && !$sublevel)
-					{
+					{	
 						?>
-							<th style=width:20%><?php write('#edit_per_bod_removed')?> (kgCO<sub>2</sub>eq/kg)
-						<?php
+						<th style=width:20%><?php write('#edit_per_bod_removed')?><br>kg CO<sub>2</sub>eq/kg BOD
+						<?php 
 					}
 				?>
 		</table>
@@ -820,15 +822,12 @@
 </div>
 
 <!--GRAPHS-->
+<style>
+	#graph div.options{padding:1em}
+	#graph button {margin:0.5em}
+</style>
 <div id=graph style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%"><?php write('#loading')?></div>
 
-<?php
-	if($level=='Energy')
-	{ ?>
-		<div id=graph2 style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%" ><?php write('#loading')?></div>
-	  <?php
-	}
-?>
 <script>
 	google.charts.load('current',{'packages':['corechart']});
 	google.charts.setOnLoadCallback(drawCharts);

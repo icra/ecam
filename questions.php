@@ -5,10 +5,11 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>About additional questions</h1>
+<!--TITLE--><h1><?php write('#questions_about')?></h1>
 
+<!--questions and variables hidden-->
 <table>
-	<tr><th>Question<th>Related variables that are hidden if answer is no<th>Related questions hidden if answer is no
+	<tr><th><?php write('#questions_question')?><th><?php write('#questions_variables_hidden')?><th><?php write('#questions_questions_hidden')?>
 	<script>
 		for(var question in Questions)
 		{
@@ -24,13 +25,13 @@
 				if(Info[code]==undefined)
 					link = "<span title='not found' style=color:red>"+code+"</span>, "
 				else
-					link = "<a title='"+Info[code].description+"' href=variable.php?id="+code+">"+code+"</a><br> "
+					link = "<a title='"+translate(code+'_descr')+"' href=variable.php?id="+code+">"+code+"</a><br> "
 					
 				document.write(link)
 			}
 			var q="";
 
-			if(question=="Are you producing biogas")q="Are you valorizing biogas?";
+			if(question=="producing_biogas")q="valorizing_biogas";
 			document.write("<td>"+q);
 		}
 	</script>

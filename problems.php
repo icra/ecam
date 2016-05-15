@@ -116,53 +116,8 @@
 		</script>
 	</table>
 
-	<table>
-		<tr><td style=font-weight:bold>Problem 3: INEXISTING CODES IN QUESTIONS
-		<tr><th>Code
-		<script>
-			(function()
-			{
-				var inex=[];
-				for(var question in Questions)
-				{
-					for(var i in Questions[question])
-					{
-						var field = Questions[question][i]
-						if(locateVariable(field)==false)
-							inex.push(field)
-					}
-				}
-				return inex;
-			})().forEach(function(code)
-			{
-				document.write("<tr><td>"+code);
-			})
-		</script>
-	</table>
-
-	<table>
-		<tr><td style=font-weight:bold>Problem 3: INEXISTING QUESTIONS IN CFG
-		<tr><th>Code
-		<script>
-			(function()
-			{
-				var inex = [];
-				for(var question in Questions)
-				{
-					if(typeof(Questions[question])=='function') continue
-					if(Global.Configuration["Yes/No"].hasOwnProperty(question)) continue
-					else inex.push(question)
-				}
-				return inex;
-			})().forEach(function(question)
-			{
-				document.write("<tr><td>"+question)
-			})
-		</script>
-	</table>
-
-	<table>
-		<tr><td style=font-weight:bold>Problem 4: INEXISTING VARIABLES IN BENCHMARKING
+	<table id=problem3>
+		<tr><td style=font-weight:bold>Problem 3: INEXISTING VARIABLES IN BENCHMARKING
 		<tr><th>Code
 		<script>
 			(function()
@@ -170,7 +125,7 @@
 				var inex=[];
 				for(var field in RefValues)
 				{
-					if(field=="isInside")continue;
+					if(field=="isInside")continue; //function to locate
 					if(locateVariable(field)==false) inex.push(field);
 				}
 				return inex;
@@ -180,6 +135,18 @@
 			});
 		</script>
 	</table>
+	<script>
+		(function()
+		{
+			var t=document.querySelector('#problem3');
+			if(t.rows.length==2)
+			{
+				var newCell=t.insertRow(-1).insertCell(-1);
+				newCell.innerHTML="<i>All variables exist</i>"
+				newCell.style.background='lightgreen'
+			}
+		})();
+	</script>
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>

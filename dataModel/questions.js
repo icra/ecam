@@ -4,19 +4,22 @@
 
 var Questions = 
 {
-	"Do you have fuel engines to run pumps":[
+	"engines_in_water":[
 		"ws_vol_fuel",
 		"ws_KPI_GHG_ne",
+	],
+
+	"engines_in_waste":[
 		"ww_vol_fuel",
 		"c_ww_nrg_engines"
 	],
 
-	"Are you producing electrical energy in your drinking water system":[
+	"producing_energy_waterAbs":[
 		"wsa_nrg_turb",
 		"wsa_KPI_nrg_recovery",
 	],
 
-	"Do you want to investigate topographic energy":[
+	"topographic_energy":[
 		"wsd_hi_no_el",
 		"wsd_lo_no_el",
 		"wsd_av_no_el",
@@ -24,24 +27,24 @@ var Questions =
 		"c_wsd_nrg_topo",
 	],
 
-	"Are you using truck transport to convey sludge to the disposal site":[
+	"truck_transport_waste":[
 		"ww_dist_dis",
 		"ww_num_trip",
 		"c_ww_nrg_tsludge"
 	],
 
-	"Are industrial or commercial users connected to the sewer system without pre-treatment":[
+	"industrial_wasteTre":[
 		/*it's only used to calculate c_wwt_ann_ndis*/ 
 	],
 
-	"Are you producing biogas": [
+	"producing_biogas": [
 		"ww_biog_pro",
 		"c_ww_biogas_flar",
 		"wwt_biog_pro",
 		"wwt_KPI_biog_x_bod",
 	],
 
-	"Are you valorizing biogas":[
+	"valorizing_biogas":[
 		"wwt_biog_val",
 		"ww_biog_val",
 		"wwt_nrg_biog",

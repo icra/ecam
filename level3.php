@@ -346,9 +346,11 @@
 				newCell.colSpan=2
 				for(s in substages)
 				{
+					newCell=newRow.insertCell(-1);
+					newCell.style.textAlign='center'
 					var str=""+
-						"<button class=delete onclick=deleteSubstage("+s+") title='Delete substage'></button>"
-					newRow.insertCell(-1).innerHTML=str
+						"<button class=button onclick=deleteSubstage("+s+") title='<?php write('#level3_delete_substage')?>'>&#9003;</button>"
+					newCell.innerHTML=str
 				}
 			/*end update body*/
 			/*update counter*/ document.getElementById('counter').innerHTML=substages.length
@@ -583,13 +585,14 @@
 		$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>".$Languages[$lang]["#$sublevel"]."</a>";
 		$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>".$Languages[$lang]['#substages']."</a>";
 	?>
-	<style> h1 {text-align:left;padding-left:20em} </style>
-	<!--TITLE--><h1><?php echo $title?></h1>
+	<style> h1 {text-align:left;padding-left:17em} </style>
+	<!--TITLE--><h1><?php echo $title?>
+		<!--type of assessment--><?php include'assessmentType.php'?>
+	</h1>
 </div>
 <!--separator--><div style=margin-top:180px></div>
 
 <!--HELP--><h4 class=inline style=line-height:0.1em><?php write('#level3_split_this_stage')?></h4>
-<!--type of assessment--><?php include'assessmentType.php'?>
 <!--SUBSTAGES TABLE-->
 <table id=substages style=margin:1em> <tr>
 	<td colspan=2 style="text-align:center;min-width:400px;table-layout:fixed">

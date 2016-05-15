@@ -81,96 +81,94 @@
 				var currentAnswer = Global.Configuration["Yes/No"][question];
 				var checked = currentAnswer ? "checked":"";
 				var newRow = t.insertRow(-1);
-				newRow.insertCell(-1).innerHTML=question+"?";
+				newRow.insertCell(-1).innerHTML=translate(question)+"?";
 				newRow.insertCell(-1).innerHTML=(function()
 				{
-					var r;//ret value
-
-					//this code here should be refactored in an appropiate place
-						var as = Global.Configuration['Active Stages'];
-						if(question=="Are you producing biogas")
-						{
+					var as = Global.Configuration['Active Stages'];
+					switch(question)
+					{
+						case "valorizing_biogas":
+							if(Global.Configuration["Yes/No"]["producing_biogas"]==0)
+							{
+								makeInactive(question,newRow);
+								newRow.title="<?php write('#configuration_only_if')?> ['producing_biogas'] is [<?php write('#yes')?>]";
+								return "<?php write('#Inactive')?>";
+							}
+							break;
+						case "producing_biogas":
 							if(as.waste==0 && as.wasteTre==0)
 							{
-								Global.Configuration["Yes/No"][question]=0;
-								newRow.style.backgroundColor='#f6f6f6';
-								newRow.style.color='#aaa';
-								return "<?php write('#configuration_only_if')?> [ww] or [wwt]"; 
+								makeInactive(question,newRow);
+								newRow.title= "<?php write('#configuration_only_if')?> [ww] or [wwt]"; 
+								return "<?php write('#Inactive')?>";
 							}
-						}
-						//check for biogas valorised
-						if(question=="Are you valorizing biogas")
-						{
-							if(Global.Configuration["Yes/No"]["Are you producing biogas"]==0)
-							{
-								Global.Configuration["Yes/No"][question]=0;
-								newRow.style.backgroundColor='#f6f6f6';
-								newRow.style.color='#aaa';
-								return "<?php write('#configuration_only_if')?> ['Are you producing biogas'] is [Yes]";
-							}
-						}
-
-						if(question=="Are you producing electrical energy in your drinking water system")
-						{
+							break;
+						case "producing_energy_waterAbs":
 							if(as.waterAbs==0)
 							{
-								Global.Configuration["Yes/No"][question]=0;
-								newRow.style.backgroundColor='#f6f6f6';
-								newRow.style.color='#aaa';
-								return "<?php write('#configuration_only_if')?> [wsa]"; 
+								makeInactive(question,newRow);
+								newRow.title= "<?php write('#configuration_only_if')?> [wsa]"; 
+								return "<?php write('#Inactive')?>";
 							}
-						}
-						if(question=="Do you have fuel engines to run pumps")
-						{
-							if(as.water==0 && as.waste==0)
+							break;
+						case "engines_in_water":
+							if(as.water==0)
 							{
-								Global.Configuration["Yes/No"][question]=0;
-								newRow.style.backgroundColor='#f6f6f6';
-								newRow.style.color='#aaa';
-								return "<?php write('#configuration_only_if')?> [ws] or [ww]"; 
+								makeInactive(question,newRow);
+								newRow.title= "<?php write('#configuration_only_if')?> [ws]"; 
+								return "<?php write('#Inactive')?>";
 							}
-						}
-						if(question=="Are you using truck transport to convey sludge to the disposal site")
-						{
+							break;
+						case "engines_in_waste":
 							if(as.waste==0)
 							{
-								Global.Configuration["Yes/No"][question]=0;
-								newRow.style.backgroundColor='#f6f6f6';
-								newRow.style.color='#aaa';
-								return "<?php write('#configuration_only_if')?> [ww]"; 
+								makeInactive(question,newRow);
+								newRow.title= "<?php write('#configuration_only_if')?> [ww]"; 
+								return "<?php write('#Inactive')?>";
 							}
-						}
-						if(question=="Do you want to investigate topographic energy")
-						{
+							break;
+						case "truck_transport_waste":
+							if(as.waste==0)
+							{
+								makeInactive(question,newRow);
+								newRow.title= "<?php write('#configuration_only_if')?> [ww]"; 
+								return "<?php write('#Inactive')?>";
+							}
+							break;
+						case "topographic_energy":
 							if(as.waterDis==0)
 							{
-								Global.Configuration["Yes/No"][question]=0;
-								newRow.style.backgroundColor='#f6f6f6';
-								newRow.style.color='#aaa';
-								return "<?php write('#configuration_only_if')?> [wsd]"; 
+								makeInactive(question,newRow);
+								newRow.title= "<?php write('#configuration_only_if')?> [wsd]"; 
+								return "<?php write('#Inactive')?>";
 							}
-						}
-						if(question=="Are industrial or commercial users connected to the sewer system without pre-treatment")
-						{
+							break;
+						case "industrial_wasteTre":
 							if(as.wasteTre==0)
 							{
-								Global.Configuration["Yes/No"][question]=0;
-								newRow.style.backgroundColor='#f6f6f6';
-								newRow.style.color='#aaa';
-								return "<?php write('#configuration_only_if')?> [wwt]"; 
+								makeInactive(question,newRow);
+								newRow.title= "<?php write('#configuration_only_if')?> [wwt]"; 
+								return "<?php write('#Inactive')?>";
 							}
-						}
+							break;
+					}
 					//above code works but it should be moved
 
-
-					r="<label>"+
+					var ret="<label>"+
 							"<?php write('#no')?> "+
 							"<input name='"+question+"' type=radio value=0 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" checked></label> "+
 							"<label><?php write('#yes')?> "+
 							"<input name='"+question+"' type=radio value=1 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" "+checked+"></label> ";
-					return r;
+					return ret;
 				})();
 			}
+		}
+
+		function makeInactive(question,newRow)
+		{
+			Global.Configuration["Yes/No"][question]=0;
+			newRow.style.backgroundColor='#f6f6f6';
+			newRow.style.color='#aaa';
 		}
 
 		function updateUW1(newValue)
@@ -342,7 +340,7 @@
 		<!--conv_kwh_co2-->
 		<fieldset>
 			<legend style=cursor:help title="<?php write('#conv_kwh_co2_expla')?>"><?php write('#conv_kwh_co2_descr')?></legend>
-			<table><tr><th>
+			<table><tr><td style=border:none>
 				<select id=countryUW1 onchange=updateUW1(this.value)>
 					<option value=0>--<?php write('#configuration_enter_custom_value')?>--
 					<option value=0.237721212>Peru
@@ -350,7 +348,7 @@
 					<option value=0.452483345>Mexico
 					<option value=custom>--<?php write('#configuration_custom')?>--
 				</select>
-				<td> <input style=width:80px id=uw1 value=0 onchange=updateUW1(this.value)> kg CO<sub>2</sub>/kWh
+				<td style=border:none> <input style=width:80px id=uw1 value=0 onchange=updateUW1(this.value)> kg CO<sub>2</sub>/kWh
 			</table>
 		</fieldset>
 
@@ -366,7 +364,7 @@
 			<legend><?php write('#configuration_additional_questions')?> (<a href=questions.php>info</a>)</legend>
 			<table id=questions>
 				<style>
-					#questions td{border-top:none;border-left:none;border-right:none}
+					#questions td{padding:0.65em;border-top:none;border-left:none;border-right:none}
 				</style>
 			</table>
 		</fieldset>
@@ -389,7 +387,6 @@
 
 <!--PREV & NEXT BUTTONS-->
 <div style=margin-top:4em> 
-	<button class="button prev" onclick="event.stopPropagation();window.location='getStarted.php'"><?php write('#previous')?></button> 
 	<script>
 		//find first available stage to start entering data
 		function nextPage()
@@ -403,7 +400,8 @@
 			window.location="birds.php"; return;
 		}
 	</script>
-	<button class="button next" onclick=nextPage()><?php write('#next')?></button>
+	<button class="button prev" onclick="event.stopPropagation();window.location='getStarted.php'"><?php write('#previous')?></button><!--
+	--><button class="button next" onclick=nextPage()><?php write('#next')?></button>
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>
