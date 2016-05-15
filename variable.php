@@ -154,11 +154,14 @@
 							
 						}
 
+						var estimated = Global.Configuration.DataQuality[match]=="Estimated" ? "<span class=estimated title='<?php write('#variable_estimated')?>'>&#9888;</span>" : "";
+
 						ret+="<tr>"+
 							"<td><a style='color:"+color+"' href=variable.php?id="+match+" "+
 							"title='["+match_localization.toString()+"] "+translate(match+"_descr")+"'"+
 							">"+match+"</a>: "+
-							"<td title='"+currValue+"' style=cursor:help>"+currValueF+"<td><span class=unit>"+currentUnit+"</span>";
+							"<td title='"+currValue+"' style=cursor:help>"+currValueF+"<td><span class=unit>"+currentUnit+"</span> "+
+							estimated;
 					});
 					ret+="</table>";
 					return ret;
@@ -269,11 +272,14 @@
 					var currValue = match_stage[output]()/Units.multiplier(output);
 					currValueF=format(currValue);
 					var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
+
+					var estimated = DQ.hasEstimatedData(output) ? "<span class=estimated title='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span> " : "";
+
 					ret+="<tr>"+
 						" <td><a style='color:"+color+"' title='["+match_localization.toString()+"] "+translate(output+"_descr")+"'"+
 						" href=variable.php?id="+output+">"+output+"</a>:"+
 						"<td title='"+currValue+"' style=cursor:help>"+
-						currValueF+"<td> <span class=unit>"+currentUnit+"</span>";
+						currValueF+"<td> <span class=unit>"+currentUnit+"</span> "+estimated;
 				});
 				ret+="</table>";
 				return ret;
@@ -286,7 +292,7 @@
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
 				newCell.innerHTML="<?php write('#variable_warning')?>"
-				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span><?php write('#variable_this_equation_contains_estimated_data')?> ";
+				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span> <?php write('#variable_this_equation_contains_estimated_data')?> ";
 			}
 
 			if(typeof(currentStage[id])=='number' && Global.Configuration.DataQuality[id]=="Estimated")
@@ -295,7 +301,7 @@
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
 				newCell.innerHTML="<?php write('#variable_warning')?>"
-				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span><?php write('#variable_this_input_is_considered_estimated')?> ";
+				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span> <?php write('#variable_this_input_is_considered_estimated')?> ";
 			}
 		}
 

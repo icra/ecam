@@ -86,7 +86,8 @@ Graphs.graph1=function(withTable,container)
 		//button "show table"
 		var div=document.createElement('div');
 		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.graph1(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
+		div.innerHTML="<button onclick=Graphs.graph1(true,'"+container+"')><?php write('#graphs_show_table')?></button>"+
+			"<button onclick=\"Graphs.graph4(false,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_detailed')?></button>"
 	}
 }
 
@@ -198,7 +199,8 @@ Graphs.graph4=function(withTable,container)
 		//button "show table"
 		var div=document.createElement('div');
 		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.graph4(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
+		div.innerHTML="<button onclick=Graphs.graph4(true,'"+container+"')><?php write('#graphs_show_table')?></button>"+
+			"<button onclick=\"Graphs.graph1(false,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_detailed')?></button>"
 	}
 }
 

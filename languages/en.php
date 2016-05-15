@@ -48,6 +48,7 @@ $Languages["en"]=array
 	'#substages' => 'Substages',
 
 	/**GRAPHS*/
+	'#graphs' => 'Graphs',
 	'#graphs_show_table' => 'Show table',
 	'#graphs_hide_table' => 'Hide table',
 	'#graphs_printable_version' => 'Printable version',
@@ -55,6 +56,7 @@ $Languages["en"]=array
 	'#graphs_slice' => 'Slice',
 	'#graphs_formula' => 'Formula',
 	'#graphs_value' => 'Value',
+	'#graphs_detailed' => 'Detailed',
 	'#graphs_graph1' => 'GHG emissions (kg CO2/year)',
 	'#graphs_graph2' => 'Energy consumption (kWh)',
 	'#graphs_graph4' => 'GHG emissions (DETAILED) (kg CO2/year)',
@@ -102,6 +104,7 @@ $Languages["en"]=array
 	'#configuration_engines' => 'Engines',
 	'#configuration_vehicles' => 'Vehicles',
 	'#configuration_only_if' => 'Only if',
+	'#configuration_conv_error' => 'The conversion factor for electricity is zero, please provide a value',
 
 	'#sidebar_general' => 'General',
 	'#sidebar_other' => 'Other',
@@ -169,6 +172,7 @@ $Languages["en"]=array
 	'#variable_warning' => 'Warning',
 	'#variable_this_equation_contains_estimated_data' => 'This equation contains estimated data in at least one input',
 	'#variable_this_input_is_considered_estimated' => 'This input is considered estimated data by the user',
+	'#variable_estimated' => 'Estimated value (approximate)',
 	'#variable_formula' => 'Formula',
 	'#variable_go_to_substages' => 	'This value is the sum of all substages, you can not change it here, go to Substages',
 
@@ -223,8 +227,6 @@ $Languages["en"]=array
 	'#todo' => 'TO DO LIST',
 	'#todo_task' => 'Task',
 	'#todo_status' => 'Status',
-
-	'#graphs' => 'Gráficos',
 
 	'#fuelInfo_description' => 'Depending on which fuel you select in your stages, the following emission factors will be applied',
 	'#fuelInfo_eeff' => 'Emission Factors (EF) for different fuel types (table 6.3 IPCC vol 6)',

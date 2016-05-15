@@ -46,7 +46,6 @@
 			{
 				if(Global.Configuration["Active Stages"][stage])
 				{
-					console.log(stage)
 					/**set checked*/document.getElementById(stage).checked=true;
 					this.activate(stage);
 				}
@@ -365,6 +364,7 @@
 			<table id=questions>
 				<style>
 					#questions td{padding:0.65em;border-top:none;border-left:none;border-right:none}
+					#questions tr:last-child td{border-bottom:none;}
 				</style>
 			</table>
 		</fieldset>
@@ -395,6 +395,11 @@
 			if(Global.Configuration['Active Stages'].water==0 && Global.Configuration['Active Stages'].waste==0)
 			{
 				alert("<?php write('#configuration_active_stages_error')?>");
+				return;
+			}
+			if(Global.General.conv_kwh_co2==0)
+			{
+				alert("<?php write('#configuration_conv_error')?>");
 				return;
 			}
 			window.location="birds.php"; return;

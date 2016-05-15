@@ -610,6 +610,10 @@
 
 <!--display graphs-->
 <div id=graph style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%" >Graphs here</div>
+<style>
+	#graph div.options {padding:1em}
+	#graph button {margin:0.5em}
+</style>
 <script>
 	function drawCharts()
 	{

@@ -339,12 +339,12 @@ var Global = {
 		{
 			"engines_in_water":0,
 			"engines_in_waste":0,
-			"producing_energy_waterAbs":0,
-			"topographic_energy":0,
 			"truck_transport_waste":0,
-			"industrial_wasteTre":0,
 			"producing_biogas":0,
 			"valorizing_biogas":0,
+			"producing_energy_waterAbs":0,
+			"topographic_energy":0,
+			"industrial_wasteTre":0,
 		},
 	},
 }

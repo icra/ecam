@@ -11,9 +11,11 @@
 	<tr><th><?php write('#todo_task')?><th><?php write('#todo_status')?>
 	<tr><td colspan=2 class=taskgroup>BACK-END
 		<tr><td>Wrong benchmarking<td>Need more info</td>
+		<tr><td>Export to CSV button<td>Pending</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
 		<tr><td>Translate benchmarking<td>Need more info</td>
 		<tr><td>Translate units<td>Pending</td>
+		<tr><td>Translate selections in ww_prot_con and ww_ch4_efac<td>Pending</td>
 </table>
 
 <!--FOOTER--><?php include'footer.php'?>

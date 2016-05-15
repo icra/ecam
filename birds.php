@@ -7,6 +7,7 @@
 		table#inputs tr.hidden {display:none}
 		table#inputs tr[indic]{text-align:center;color:#999;background:#eee}
 		table#inputs th{text-align:left}
+		table#inputs td{border-left:none;border-right:none}
 	</style>
 	<script>
 		function init()
@@ -286,7 +287,8 @@
 <div id=graphs class=inline style="width:65%;">
 	<style> 
 		#graphs table{margin:auto}
-		#graphs button{display:block;margin:auto;margin-bottom:0.5em;margin-top:0;font-size:10px} 
+		#graphs button{margin:0.5em;margin-top:0;font-size:10px} 
+		#graphs div{text-align:center} 
 		#graphs div[id^=graph] {border:1px solid #ccc;}
 		#graphs div div {padding:0}
 		#graphs div.options {text-align:center;padding:1em}
