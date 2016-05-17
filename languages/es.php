@@ -241,6 +241,8 @@ $Languages["es"]=array
 	'#questions_variables_hidden' => 'Variables ocultas si la respuesta es No',
 	'#questions_questions_hidden' => 'Preguntas ocultas si la respuesta es No',
 
+	'#constants' => 'Constantes',
+
 	/** QUESTIONS **/
 	"#engines_in_water" => "¿Tiene motores de combustible para bombas (Suministro de agua)",
 	"#engines_in_waste" => "¿Tiene motores de combustible para bombas (Aguas residuales)",
