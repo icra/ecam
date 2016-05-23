@@ -77,7 +77,7 @@ $Languages["en"]=array
 	'#about_json_viewer' => 'JSON viewer used',
 	'#about_license' => 'License',
 
-	'#license_license' => ' Copyright 2016 IWA Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.  You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the specific language governing permissions and limitations under the License.  ',
+	'#license_license' => 'Copyright 2016 IWA<br><br>Licensed under the Apache License, Version 2.0 (the "License");<br>You may not use this file except in compliance with the License.<br>You may obtain a copy of the License at<br><br>&emsp;&emsp;http://www.apache.org/licenses/LICENSE-2.0<br><br>Unless required by applicable law or agreed to in writing, software distributed under the License<br>is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,<br>either express or implied.<br>See the License for the specific language governing permissions and limitations under the License.  ',
 
 	'#getStarted_general_info' => 'General info',
 	'#getStarted_subtitle' => 'General info about your system. You can edit this information later.',
