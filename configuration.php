@@ -317,16 +317,20 @@
 				function activateAllStages()
 				{
 					event.stopPropagation();
-					['waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
+					['water','waste','waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
 					{
-						/**set checked*/document.getElementById(stage).checked=true;
-						Configuration.activate(stage);
+						Global.Configuration['Active Stages'][stage]=1;
+						var checkbox = document.getElementById(stage)
+						checkbox.checked=true;
+						checkbox.parentNode.parentNode.style.backgroundColor="lightgreen";
 					});
+
 					Global.General.conv_kwh_co2=1;
 					for(var question in Global.Configuration['Yes/No'])
 					{
 						Global.Configuration['Yes/No'][question]=1;
 					}
+
 					init();
 				}
 			</script>
