@@ -690,7 +690,7 @@
 		switch($level)
 		{
 			case "Water":case "Waste":  
-				$titleLevel=$Languages[$lang]["#$level"];break;
+				$titleLevel=$lang_json["#$level"];break;
 
 			case "Energy": $titleLevel="Energy summary";break;
 			default:	   $titleLevel=$level;break;
@@ -699,11 +699,11 @@
 		{
 			switch($sublevel)
 			{
-				default:	   $titleSublevel=$Languages[$lang]["#$sublevel"];break;
+				default:	   $titleSublevel=$lang_json["#$sublevel"];break;
 			}
 		}
 		/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
-		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (".$Languages[$lang]['#energy_performance'].")</span>" : "<span style=color:black>$titleLevel</span>";
+		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (".$lang_json['#energy_performance'].")</span>" : "<span style=color:black>$titleLevel</span>";
 	?>
 	<style> h1 {text-align:left;padding-left:17em;line-height:2.1em} </style>
 	<h1><a href=stages.php><?php write('#edit_input_data')?></a> <?php echo "$sep $title"?>
@@ -720,7 +720,7 @@
 							style='background:$color;font-size:12px;vertical-align:middle'
 							onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
 								<img src=img/substages.png style='width:40px;margin-right:1em'>
-							    ".$Languages[$lang]['#substages']."	
+							    ".$lang_json['#substages']."	
 						</button> 
 						<span style=font-size:12px;color:#666>
 							&rarr; ";

@@ -578,12 +578,12 @@
 		//Navigable <h1>title</h1>
 		switch($level)
 		{
-			case "Water": $titleLevel="<a href=edit.php?level=$level>".$Languages[$lang]['#Water']."</a>";break;
-			case "Waste": $titleLevel="<a href=edit.php?level=$level>".$Languages[$lang]['#Waste']."</a>";break;
+			case "Water": $titleLevel="<a href=edit.php?level=$level>".$lang_json['#Water']."</a>";break;
+			case "Waste": $titleLevel="<a href=edit.php?level=$level>".$lang_json['#Waste']."</a>";break;
 		}
 		/*Separator*/$sep="<span style=color:black>&rsaquo;</span>";
-		$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>".$Languages[$lang]["#$sublevel"]."</a>";
-		$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>".$Languages[$lang]['#substages']."</a>";
+		$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>".$lang_json["#$sublevel"]."</a>";
+		$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>".$lang_json['#substages']."</a>";
 	?>
 	<style> h1 {text-align:left;padding-left:17em} </style>
 	<!--TITLE--><h1><?php echo $title?>

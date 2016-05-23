@@ -30,16 +30,7 @@
 <script src="dataModel/averagedVariables.js"></script>
 
 <!--translation related-->
-<?php include'languages/write.php'; //loads all strings?>
-<script>
-	function translate(id)
-	{
-		var sol = new XMLHttpRequest()	
-		sol.open('GET','languages/translate.php?id='+id,false)
-		sol.send()
-		return sol.response;
-	}
-</script>
+<?php include'languages/write.php'; //loads all strings ?>
 
 <!--graphs functions: import after translation!-->
 <?php include'graphs.php'?>

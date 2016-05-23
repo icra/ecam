@@ -298,15 +298,15 @@
 							</label>";
 					}
 
-					printL1stage("water",$Languages[$lang]['#Water']);
-					printL2stage("water","waterAbs",$Languages[$lang]["#Abstraction"], false);
-					printL2stage("water","waterTre",$Languages[$lang]["#Treatment"],   true);
-					printL2stage("water","waterDis",$Languages[$lang]["#Distribution"],true);
+					printL1stage("water",$lang_json['#Water']);
+					printL2stage("water","waterAbs",$lang_json["#Abstraction"], false);
+					printL2stage("water","waterTre",$lang_json["#Treatment"],   true);
+					printL2stage("water","waterDis",$lang_json["#Distribution"],true);
 
-					printL1stage("waste",$Languages[$lang]['#Waste']);
-					printL2stage("waste","wasteCol",$Languages[$lang]["#Collection"],false);
-					printL2stage("waste","wasteTre",$Languages[$lang]["#Treatment"], true);
-					printL2stage("waste","wasteDis",$Languages[$lang]["#Discharge"], true);
+					printL1stage("waste",$lang_json['#Waste']);
+					printL2stage("waste","wasteCol",$lang_json["#Collection"],false);
+					printL2stage("waste","wasteTre",$lang_json["#Treatment"], true);
+					printL2stage("waste","wasteDis",$lang_json["#Discharge"], true);
 				?>
 		</table>
 

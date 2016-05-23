@@ -45,7 +45,7 @@
 <div id=lang>
 	<!--current language-->
 	<?php
-		$lang = isset($_COOKIE['lang']) ? $_COOKIE['lang'] : "en" ;
+		//$lang is a global variable defined in languages/write.php
 		echo "<img id=currentLang src='img/flags/$lang.png'";
 	?>
 
