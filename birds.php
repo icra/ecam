@@ -12,11 +12,11 @@
 	<script>
 		function init()
 		{
-			drawCharts();
 			Exceptions.apply();
 			BEV.showActive();
 			BEV.updateDefaults();
 			updateResult();
+			drawCharts();
 		}
 
 		function drawCharts()
@@ -29,7 +29,7 @@
 			Graphs.graph3d(false,'graph3d');
 		}
 
-		var BEV={};
+		var BEV={}; //'Birds Eye View' namespace
 
 		//Generic f for updating internal values
 		BEV.update=function(obj,field,newValue)
@@ -294,9 +294,10 @@
 		#graphs div.options {text-align:center;padding:1em}
 	</style>
 
-	<div id=graph1 class=inline style=width:49%><?php write('#loading')?></div>
-	<div id=graph2 class=inline style=width:49%><?php write('#loading')?></div>
-	<!--graph 3 container-->
+	<div style=margin-top:2px>
+		<div id=graph1 class=inline style=width:49%><?php write('#loading')?></div>
+		<div id=graph2 class=inline style=width:49%><?php write('#loading')?></div>
+	</div>
 	<div style=margin-top:2px>
 		<div id=graph3a class=inline style=width:49%><?php write('#loading')?></div>
 		<div id=graph3b class=inline style=width:49%><?php write('#loading')?></div>

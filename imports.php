@@ -10,6 +10,9 @@
 <script src="js/lz-string.js"></script>
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 
+<!--translation related-->
+<?php include'languages/write.php'; //loads all strings ?>
+
 <!--the order of the imports is important. first global, then cookies-->
 <script src="dataModel/global.js"></script>          <!--Default Global object here-->
 <script src="dataModel/substages.js"></script>
@@ -28,9 +31,6 @@
 <script src="js/updateGlobalFromCookies.js"></script><!--update Global object from cookie "GLOBAL" here-->
 <script src="dataModel/normalization.js"></script>		 <!--variables that have some special behaviour-->
 <script src="dataModel/averagedVariables.js"></script>
-
-<!--translation related-->
-<?php include'languages/write.php'; //loads all strings ?>
 
 <!--graphs functions: import after translation!-->
 <?php include'graphs.php'?>

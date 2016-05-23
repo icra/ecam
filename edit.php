@@ -474,7 +474,7 @@
 						return "<span style='font-size:20px;color:"+color+"'>&#128308;</span>";
 					}
 					else{
-						newCell.title='This formula has no indicator associated';
+						newCell.title='<?php write('#edit_no_indicator_associated')?>';
 						return "<span style=color:#ccc>NA</span>";
 					}
 				})();

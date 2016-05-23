@@ -151,6 +151,8 @@
 	"#edit_context_indicators" : "Indicadores de contexto",
 	"#edit_service_level_indicators" : "Indicadores de nivel de servicio",
 	"#edit_click_to_modify" : "Clic aquí para modificar el valor",
+	"#edit_no_indicator_associated" : "Esta fórmula no tiene un un indicador asociado",
+	"#edit_advanced_inputs_required" : "Esta fórmula necesita Inputs avanzados",
 
 	"#variable_detailed_info" : "Información detallada",
 	"#variable_stage" : "Etapa",
