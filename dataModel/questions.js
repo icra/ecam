@@ -11,7 +11,16 @@ var Questions =
 
 	"engines_in_waste":[
 		"ww_vol_fuel",
-		"c_ww_nrg_engines"
+		"c_ww_nrg_engines",
+		"ww_KPI_GHG_ne_engines",
+
+	],
+
+	"truck_transport_waste":[
+		"ww_dist_dis",
+		"ww_num_trip",
+		"c_ww_nrg_tsludge",
+		"ww_KPI_GHG_ne_tsludge"
 	],
 
 	"producing_energy_waterAbs":[
@@ -27,20 +36,14 @@ var Questions =
 		"c_wsd_nrg_topo",
 	],
 
-	"truck_transport_waste":[
-		"ww_dist_dis",
-		"ww_num_trip",
-		"c_ww_nrg_tsludge"
-	],
-
 	"industrial_wasteTre":[
 		/*it's only used to calculate c_wwt_ann_ndis*/ 
 	],
 
 	"producing_biogas": [
 		"ww_biog_pro",
-		"c_ww_biogas_flar",
 		"wwt_biog_pro",
+		"c_ww_biogas_flar",
 		"wwt_KPI_biog_x_bod",
 	],
 

@@ -107,6 +107,21 @@
 		if(str=="NaN" || !isFinite(number)) return "<span style=color:#666>[<?php write('#missing_inputs')?>]</span>";
 		return str;
 	}
+
+	/** make a row from a table element inactive. used to inactivate rows according to Questions**/
+	function disableRow(row)
+	{
+		//Change color
+		row.style.display='none';
+		row.style.background='#eee';
+		row.style.color='#aaa';
+		//get the name of the field (variable)
+		var field = row.getAttribute('field');
+		//create a new css element
+		var style = document.createElement('style');
+		document.body.appendChild(style);
+		style.innerHTML="tr[field="+field+"] * {pointer-events:none;font-size:10px;font-style:italic;cursor:not-allowed}"
+	}
 </script>
 
 <!--title-->

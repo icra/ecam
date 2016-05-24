@@ -9,13 +9,13 @@
 
 <!--questions and variables hidden-->
 <table>
-	<tr><th><?php write('#questions_question')?><th><?php write('#questions_variables_hidden')?><th><?php write('#questions_questions_hidden')?>
+	<tr><th colspan=2><?php write('#questions_question')?><th><?php write('#questions_variables_hidden')?><th><?php write('#questions_questions_hidden')?>
 	<script>
 		for(var question in Questions)
 		{
 			if(typeof(Questions[question])=="function")continue;
 			//question
-			document.write("<tr><td>"+question+"?")
+			document.write("<tr><td>"+question+"<td>"+translate(question)+"?")
 			//related variables
 			document.write("<td>")
 			for(var i in Questions[question])

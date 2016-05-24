@@ -123,9 +123,6 @@
 					if(field.search(/^c_/)==-1) continue;
 				}
 
-				/*check if should be hidden according to questions*/
-				if(Questions.isHidden(field)) continue;
-
 				/*check if field is level3 specific*/if(Level3.isInList(field)) continue;
 
 				//bool for if current field is a calculated variable (CV)
@@ -151,6 +148,12 @@
 				
 				/*new ro attribute field=field>*/
 				newRow.setAttribute('field',field);
+
+				/*disable row according to questions*/
+				if(Questions.isHidden(field))
+				{
+					disableRow(newRow);
+				}
 
 				/*description*/ 
 				var newCell=newRow.insertCell(-1);
@@ -282,13 +285,15 @@
 				if(field.search(/^c_/)>=0)continue;
 				if(field.search("_KPI_GHG")==-1)continue;
 				if(field=="ww_KPI_GHG_ne")continue;
-				/*check if should be hidden according to questions*/
-				if(Questions.isHidden(field)) continue;
 
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
 				var newCell,newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
+
+				//disable row if specified by questions
+				if(Questions.isHidden(field)) disableRow(newRow);
+
 				var formula=CurrentLevel[field].toString();
 				var prettyFormula=Formulas.prettify(formula);
 				newRow.setAttribute('title',prettyFormula);
@@ -435,14 +440,15 @@
 				if(field.search("_KPI_GHG")>=0)continue;
 				if(field.search('_nrg_')<0)continue;
 
-				/*check if should be hidden according to questions*/
-				if(Questions.isHidden(field)) continue;
-
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
 
 				var newCell,newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
+
+				/*check if should be hidden according to questions*/
+				if(Questions.isHidden(field)) disableRow(newRow);
+
 				var formula=CurrentLevel[field].toString();
 				var prettyFormula=Formulas.prettify(formula);
 				newRow.setAttribute('title',prettyFormula);
@@ -547,14 +553,16 @@
 				if(field.search(/^c_/)!=-1){continue;}
 				if(field.search("_KPI_GHG")>=0)continue;
 				if(field.search('_nrg_')>-1)continue;
-				/*check if should be hidden according to questions*/
-				if(Questions.isHidden(field)) continue;
 
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
 
 				var newCell,newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
+
+				/*check if should be hidden according to questions*/
+				if(Questions.isHidden(field)) disableRow(newRow);
+
 				var formula=CurrentLevel[field].toString();
 				var prettyFormula=Formulas.prettify(formula);
 				newRow.setAttribute('title',prettyFormula);

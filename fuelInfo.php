@@ -4,11 +4,11 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>Fuel info</h1>
+<!--TITLE--><h1><?php write('#configuration_fuel_options')?></h1>
 <!--description--><h4><?php write('#fuelInfo_description')?></h4>
 
 <!--fuel info-->
-<table id=fuelInfo class=inline> 
+<table id=fuelInfo style="font-size:20px"> 
 	<tr><th colspan=8 style=text-align:center><?php write('#fuelInfo_eeff')?>
 	<tr>
 		<th rowspan=2><?php write('#fuelInfo_type')?>

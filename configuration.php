@@ -176,17 +176,6 @@
 			updateField(Global.General,'conv_kwh_co2',newValue);
 		}
 
-		function updateFuelSelectionVisibility()
-		{
-			//if engines or transport is on, make fuel selection visible
-			var eng_water = Global.Configuration["Yes/No"].engines_in_water;
-			var eng_waste = Global.Configuration["Yes/No"].engines_in_waste;
-			var trp_waste = Global.Configuration["Yes/No"].truck_transport_waste;
-			//
-			var display = ( eng_water || eng_waste || trp_waste ) ? "" : "none";
-			document.querySelector('#fuel').style.display=display;
-		}
-
 		function redisplayUW1menu()
 		{
 			//input element
@@ -208,22 +197,24 @@
 
 		function updateFuelSelection()
 		{
-			['water','waste','wasteTre'].forEach(function(stage)
+			['engines_in_water','engines_in_waste','truck_transport_waste'].forEach(function(question)
 			{
-				var row = document.querySelector('#fuelSelection tr[stage='+stage+']')
+				//select the correct row in the fuel table
+				var row = document.querySelector('#fuelSelection tr[question='+question+']')
 
+				//empty the row
 				while(row.cells.length>1){row.deleteCell(-1);}
 
-				//new select menu
+				//create new select menu
 				var select = document.createElement('select');
 				row.insertCell(-1).appendChild(select);
+				select.setAttribute('onchange',"updateField(Global.Configuration.Selected['Fuel type'],'"+question+"',this.value)");
 
-				select.setAttribute('onchange',"updateField(Global.Configuration.Selected['Fuel type'],'"+stage+"',this.value)");
-
-				if(Global.Configuration["Active Stages"][stage]==0)
+				//disable the row if question is NO
+				if(Global.Configuration["Yes/No"][question]==0)
 				{
 					select.disabled=true;
-					select.parentNode.parentNode.title="Inactive stage";
+					select.parentNode.parentNode.title="<?php write('#inactive')?>";
 					select.parentNode.parentNode.className="inactive"
 				}
 				else
@@ -234,7 +225,7 @@
 				{
 					var option = document.createElement('option');
 					option.innerHTML=fuel;
-					if(fuel==Global.Configuration.Selected["Fuel type"][stage])
+					if(fuel==Global.Configuration.Selected["Fuel type"][question])
 					{
 						option.setAttribute('selected','true')
 					}
@@ -253,9 +244,10 @@
 		{
 			redisplayUW1menu();
 			updateCurrency();
-			updateFuelSelectionVisibility();
-			updateFuelSelection();
+
 			updateQuestionsTable();
+			updateFuelSelection();
+
 			Sidebar.update();
 			updateResult();
 		}
@@ -375,16 +367,18 @@
 		</fieldset>
 
 		<!--fuel-->
-		<fieldset id=fuel style=display:none>
+		<fieldset id=fuel>
 			<legend><?php write('#configuration_fuel_options')?> (<a href=fuelInfo.php>info</a>)</legend>
 			<table id=fuelSelection class=inline>
 				<style>
-					#fuelSelection tr.inactive {background:#ccc;color:#999}
+					#fuelSelection tr.inactive {background:#f6f6f6;color:#aaa}
+					#fuelSelection td {border-left:none;border-right:none}
+					#fuelSelection tr:last-child td {border:none}
+					#fuelSelection tr:first-child td {border:none}
 				</style>
-				<tr><th><?php write('#configuration_stage')?><th><?php write('#configuration_selected_fuel')?>
-				<tr stage=water>   <td><?php write('#ghg_assessment')?> - <?php write('#Water')?> (<?php write('#configuration_engines')?>)
-				<tr stage=waste>   <td><?php write('#ghg_assessment')?> - <?php write('#Waste')?> (<?php write('#configuration_engines')?>)
-				<tr stage=wasteTre><td><?php write('#energy_performance')?> - <?php write('#Waste')?>:<?php write('#Treatment')?> (<?php write('#configuration_vehicles')?>)
+				<tr question=engines_in_water>     <td><?php write('#Water')?> (<?php write('#configuration_engines')?>)
+				<tr question=engines_in_waste>     <td><?php write('#Waste')?> (<?php write('#configuration_engines')?>)
+				<tr question=truck_transport_waste><td><?php write('#Waste')?> (<?php write('#configuration_vehicles')?>)
 			</table>
 		</fieldset>
 	</div>

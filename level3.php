@@ -226,11 +226,12 @@
 					{
 						if(Level3.isInList(code)) continue;
 					}
-					if(Questions.isHidden(code)) continue;
 
 					/*new row*/
 					var newRow=t.insertRow(-1);
 					newRow.setAttribute('field',code);
+
+					if(Questions.isHidden(code)) disableRow(newRow);
 
 					/*bg color*/ if(isCV)newRow.classList.add('isCV');
 
@@ -399,9 +400,6 @@
 				//only functions
 				if(typeof(CurrentStage[field])!="function"){continue;}
 
-				/*check if should be hidden according to questions*/
-				if(Questions.isHidden(field)) continue;
-
 				/*if assessment type is simple, hide L3 variables*/
 				if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
 				{
@@ -417,6 +415,10 @@
 				//new row
 				var newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
+
+				/*check if should be hidden according to questions*/
+				if(Questions.isHidden(field)) disableRow(newRow);
+
 				newRow.setAttribute('title',translate(field+'_expla'));
 
 				//if is calculated variable, hide it (no continue bc we need it)
