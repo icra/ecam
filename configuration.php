@@ -1,4 +1,4 @@
-<?php /*configuration.php: active stages of your system*/ ?>
+<?php /* configuration.php */ ?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<script>
@@ -179,10 +179,11 @@
 		function updateFuelSelectionVisibility()
 		{
 			//if engines or transport is on, make fuel selection visible
-
-			var engines = Global.Configuration["Yes/No"]["Do you have fuel engines to run pumps"];
-			var transport = Global.Configuration["Yes/No"]["Are you using truck transport to convey sludge to the disposal site"];
-			var display = (engines || transport) ? "" : "none";
+			var eng_water = Global.Configuration["Yes/No"].engines_in_water;
+			var eng_waste = Global.Configuration["Yes/No"].engines_in_waste;
+			var trp_waste = Global.Configuration["Yes/No"].truck_transport_waste;
+			//
+			var display = ( eng_water || eng_waste || trp_waste ) ? "" : "none";
 			document.querySelector('#fuel').style.display=display;
 		}
 
