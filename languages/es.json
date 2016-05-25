@@ -210,6 +210,7 @@
 	"#export_unit" : "Unidad",
 	"#export_desc" : "Descripción",
 	"#export_click_on_a_stage" : "Pulse una etapa",
+	"#export_csv" : "Crear archivo CSV des de la tabla",
 
 	"#sidebar_graphs" : "Gráficos",
 	"#sidebar_export" : "Exportar",
@@ -239,8 +240,8 @@
 
 	"#constants" : "Constantes",
 
-	"#engines_in_water" : "¿Tiene motores de combustible para bombas (Suministro de agua)",
-	"#engines_in_waste" : "¿Tiene motores de combustible para bombas (Aguas residuales)",
+	"#engines_in_water" : "¿Tiene grupo electrógeno para bombas (Suministro de agua)",
+	"#engines_in_waste" : "¿Tiene grupo electrógeno para bombas (Aguas residuales)",
 	"#producing_energy_waterAbs" : "¿Produce energía en la etapa de Captación",
 	"#topographic_energy" : "¿Quiere investigar la energía topográfica (Distribución)",
 	"#truck_transport_waste" : "¿Usa transporte en camiones para llevar los lodos al sitio de disposición",

@@ -210,6 +210,7 @@
 	"#export_unit" : "Unit",
 	"#export_desc" : "Description",
 	"#export_click_on_a_stage" : "Click on a stage",
+	"#export_csv" : "Create CSV file from table",
 
 	"#sidebar_graphs" : "Graphs",
 	"#sidebar_export" : "Export",

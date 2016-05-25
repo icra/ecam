@@ -11,6 +11,7 @@
 		{
 			//make highlight button enabled
 			document.querySelector('#highlight').removeAttribute('disabled')
+			document.querySelector('#createCSV').removeAttribute('disabled')
 
 			//get the table t
 			var t=document.querySelector('#table')
@@ -95,6 +96,34 @@
 				range.select();
 			}
 		}
+		function createCSV()
+		{
+			//get the table "table"
+			var t = document.getElementById('table');
+
+			//string where we will write the entire file
+			var str="";
+
+			//go over the table
+			for(var i=0; i<t.rows.length; i++)
+			{
+				for(var j=0; j<t.rows[i].cells.length; j++)
+				{
+					str += t.rows[i].cells[j].textContent.replace(/,/g,' ')+",";
+				}
+				str += '\r\n'
+			}
+
+			//generate clickable link
+			var a         = document.createElement('a');
+			a.href        = 'data:text/csv;charset=utf-8,' + encodeURI(str);
+			a.target      = '_blank';
+			a.download    = 'export.csv';
+
+			//click the link
+			document.body.appendChild(a);
+			a.click();
+		}
 	</script>
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
@@ -123,8 +152,12 @@
 	</table>
 </div>
 
-<button id=highlight disabled class=button style="margin:2em;font-size:18px" onclick=selectText(document.querySelector('#table'))>
+<button id=highlight disabled class=button style="margin:1em;font-size:18px" onclick=selectText(document.querySelector('#table'))>
 	<?php write('#export_highlight_button')?>
+</button>
+
+<button class=button id=createCSV disabled onclick=createCSV() style="font-size:18px">
+	<?php write('#export_csv')?>
 </button>
 
 <!--info table-->
