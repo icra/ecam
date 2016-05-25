@@ -168,7 +168,6 @@
 			<tr><th><?php write('#sidebar_general')?>
 			<tr><td><a href=getStarted.php><?php write('#getStarted_general_info')?></a>
 			<tr><td><a href=configuration.php><?php write('#configuration')?></a>
-			<tr><td><a href=constants.php><?php write('#constants')?></a>
 			<tr><th><?php write('#ghg_assessment')?>
 			<tr><td><a href=birds.php><?php write('#quick_assessment')?></a>
 			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
@@ -190,6 +189,7 @@
 			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
 			<tr><td><a href=todo.php><?php write('#sidebar_todo')?></a>
 			<tr><td><a href=problems.php><?php write('#sidebar_problems')?></a>
+			<tr><td><a href=constants.php><?php write('#constants')?></a>
 		</table>
 	</div>
 </div>

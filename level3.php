@@ -20,7 +20,7 @@
 		table#substages td:not(.level2){text-align:right}
 		td.input input { margin:0;padding:0;width:95%;}
 		td.input{width:80px;text-align:right;background-color:#eee;cursor:cell}
-		#outputs tr:hover { background:orange; }
+		#outputs tr:hover { background:#ccc; }
 		#outputs th{background:#d7bfaf;text-align:left}
 		#outputs td, #outputs th{border-left:none;border-top:none;border-right:none}
 		div.substageMenu{

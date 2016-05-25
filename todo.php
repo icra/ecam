@@ -10,7 +10,10 @@
 <table id=todo>
 	<tr><th><?php write('#todo_task')?><th><?php write('#todo_status')?>
 	<tr><td colspan=2 class=taskgroup>BACK-END
-		<tr><td>Benchmark is wrong, IWA needs to define it correctly<td>Need more info</td>
+		<tr><td>Benchmark is wrong, IWA needs to define it correctly          <td>Need more info</td>
+		<tr><td>Calculated variables are useless, need to separate from inputs<td>Need more info</td>
+		<tr><td>The question "Are industrial users connected to the sewer system without pre-treatment?" is not used anywhere<td>Need more info</td>
+		<tr><td>IWA has to provide a description for <a href=constants.php>constants</a><td>Need more info</td>
 	<tr><td colspan=2 class=taskgroup>FRONT-END
 </table>
 

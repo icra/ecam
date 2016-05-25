@@ -112,7 +112,7 @@
 	function disableRow(row)
 	{
 		//Change color
-		row.style.display='none';
+		//row.style.display='none';
 		row.style.background='#eee';
 		row.style.color='#aaa';
 		//get the name of the field (variable)

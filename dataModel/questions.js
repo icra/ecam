@@ -25,7 +25,11 @@ var Questions =
 
 	"producing_energy_waterAbs":[
 		"wsa_nrg_turb",
+		"wsa_vol_turb",
+		"wsa_trb_head",
+		"c_wsa_trb_head",
 		"wsa_KPI_nrg_recovery",
+		"wsd_nrg_recv",
 	],
 
 	"topographic_energy":[
