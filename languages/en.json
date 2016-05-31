@@ -153,6 +153,7 @@
 	"#edit_click_to_modify" : "Click to modify this input",
 	"#edit_no_indicator_associated" : "This formula has no indicator associated",
 	"#edit_advanced_inputs_required" : "Advanced inputs required",
+	"#edit_results" : "RESULTS",
 
 	"#variable_detailed_info" : "Detailed info",
 	"#variable_stage" : "Stage",

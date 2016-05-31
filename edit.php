@@ -749,97 +749,102 @@
 
 <!--separator--><div style=margin-top:200px></div>
 
-<!--IO-->
-<div id=io>
-	<!--INPUTS-->
-	<table id=inputs class=inline 
-		style="
-			margin-left:auto;max-width:47%;
-			<?php if($level=="Energy")echo "display:none;"; ?>
-		">
-		<tr><th colspan=5 class=tableHeader>INPUTS
-		<tr>
-			<th><?php write('#edit_description')?>
-			<th><?php write('#edit_current_value')?>
-			<th><?php write('#edit_unit')?>
-			<th><?php write('#edit_data_quality')?>
-	</table>
-	<!--OUTPUTS-->
-	<div class=inline style="max-width:47%;margin-left:1em">
-		<!--GHG-->
-		<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:1em;
-				<?php if($sublevel || $level=="Energy") echo "display:none;"; ?>
+<!--container-->
+<div style=text-align:left>
+	<!--IO-->
+	<div class=inline style="width:45%;padding-left:2em">
+		<!--INPUTS-->
+		<table id=inputs style="width:100%;
+				<?php if($level=="Energy")echo "display:none;"; ?>
 			">
-			<tr><th colspan=7 class=tableHeader>OUTPUTS — <?php write('#edit_ghg_emissions')?> |
-
-			<!--assessment info-->
-			<span style="text-align:left;font-size:11px">
-				<a href=variable.php?id=Days><?php write('#assessment_period')?></a>: 
-					<script>document.write(format(Global.General.Days()))</script> <?php write('#days')?>
-				|
-				<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity"><?php write('#conversion_factor')?></a>: 
-					<script>
-						(function(){
-							var c = Global.General.conv_kwh_co2;
-							var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c); 
-							document.write(str)
-						})();
-					</script> kg CO<sub>2</sub>/kWh
-			</span>
-			<tr>
-				<th><?php write('#edit_origin')?>
-				<th style=width:20%><?php write('#edit_value_per_year')?><br>kg CO<sub>2</sub>/<?php write('#year')?>
-				<th style=width:20%><?php write('#edit_per_inhab')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/inhab
-				<th style=width:20%><?php write('#edit_per_serv_pop')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/serv.pop
-				<th style=width:20%><?php write('#edit_per_water_volume')?><br>kg CO<sub>2</sub>/m<sup>3</sup>
-				<?php
-					if($level=="Waste" && !$sublevel)
-					{	
-						?>
-						<th style=width:20%><?php write('#edit_per_bod_removed')?><br>kg CO<sub>2</sub>eq/kg BOD
-						<?php 
-					}
-				?>
-		</table>
-
-		<!--energy performance-->
-		<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
-			<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#energy_performance')?>
-			<tr>
-				<th title=Performance style=cursor:help><?php write('#edit_benchmark')?>
-				<th><?php write('#edit_description')?>
-				<th><?php write('#edit_current_value')?>
-				<th><?php write('#edit_unit')?>
-		</table>
-
-		<!--other-->
-		<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:1em">
-			<tr><th colspan=4 class=tableHeader>OUTPUTS —
-				<?php 
-					if($sublevel) 
-						write('#edit_context_indicators');
-					else 
-						write('#edit_service_level_indicators');
-				?>
+			<tr><th colspan=5 class=tableHeader>INPUTS
 			<tr>
 				<th><?php write('#edit_description')?>
 				<th><?php write('#edit_current_value')?>
 				<th><?php write('#edit_unit')?>
+				<th><?php write('#edit_data_quality')?>
 		</table>
+		<!--OUTPUTS-->
+		<div>
+			<!--GHG-->
+			<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:1em;margin-top:1em;
+					<?php if($sublevel || $level=="Energy") echo "display:none;"; ?>
+				">
+				<tr><th colspan=7 class=tableHeader>OUTPUTS — <?php write('#edit_ghg_emissions')?> |
+
+				<!--assessment info-->
+				<span style="text-align:left;font-size:11px">
+					<a href=variable.php?id=Days><?php write('#assessment_period')?></a>: 
+						<script>document.write(format(Global.General.Days()))</script> <?php write('#days')?>
+					|
+					<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity"><?php write('#conversion_factor')?></a>: 
+						<script>
+							(function(){
+								var c = Global.General.conv_kwh_co2;
+								var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c); 
+								document.write(str)
+							})();
+						</script> kg CO<sub>2</sub>/kWh
+				</span>
+				<tr>
+					<th><?php write('#edit_origin')?>
+					<th style=width:20%><?php write('#edit_value_per_year')?><br>kg CO<sub>2</sub>/<?php write('#year')?>
+					<th style=width:20%><?php write('#edit_per_inhab')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/inhab
+					<th style=width:20%><?php write('#edit_per_serv_pop')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/serv.pop
+					<th style=width:20%><?php write('#edit_per_water_volume')?><br>kg CO<sub>2</sub>/m<sup>3</sup>
+					<?php
+						if($level=="Waste" && !$sublevel)
+						{	
+							?>
+							<th style=width:20%><?php write('#edit_per_bod_removed')?><br>kg CO<sub>2</sub>eq/kg BOD
+							<?php 
+						}
+					?>
+			</table>
+
+			<!--energy performance-->
+			<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
+				<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#energy_performance')?>
+				<tr>
+					<th title=Performance style=cursor:help><?php write('#edit_benchmark')?>
+					<th><?php write('#edit_description')?>
+					<th><?php write('#edit_current_value')?>
+					<th><?php write('#edit_unit')?>
+			</table>
+
+			<!--other-->
+			<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:1em">
+				<tr><th colspan=4 class=tableHeader>OUTPUTS —
+					<?php 
+						if($sublevel) 
+							write('#edit_context_indicators');
+						else 
+							write('#edit_service_level_indicators');
+					?>
+				<tr>
+					<th><?php write('#edit_description')?>
+					<th><?php write('#edit_current_value')?>
+					<th><?php write('#edit_unit')?>
+			</table>
+		</div>
+	</div>
+
+	<!--GRAPHS-->
+	<div class=inline style="width:50%">
+		<h3 style="color:#58595b"><?php write('#edit_results')?></h3>
+		<div id=graph><?php write('#loading')?></div>
+		<script>
+			google.charts.load('current',{'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawCharts);
+		</script>
+		<style>
+			#graph div.options{padding:1em}
+			#graph button {margin:0.5em}
+			#graph {text-align:center}
+			#graph * {margin:auto}
+		</style>
 	</div>
 </div>
-
-<!--GRAPHS-->
-<style>
-	#graph div.options{padding:1em}
-	#graph button {margin:0.5em}
-</style>
-<div id=graph style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%"><?php write('#loading')?></div>
-
-<script>
-	google.charts.load('current',{'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawCharts);
-</script>
 
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

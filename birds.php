@@ -23,10 +23,12 @@
 		{
 			Graphs.graph1(false,'graph1');
 			Graphs.graph2(false,'graph2');
+			/**
 			Graphs.graph3a(false,'graph3a');
 			Graphs.graph3b(false,'graph3b');
 			Graphs.graph3c(false,'graph3c');
 			Graphs.graph3d(false,'graph3d');
+			**/
 		}
 
 		var BEV={}; //'Birds Eye View' namespace
@@ -203,7 +205,7 @@
 </center>
 
 <!--inputs table-->
-<div class=inline style="margin-left:10px;width:30%;">
+<div class=inline style="margin-left:2em;width:30%;">
 	<!--description-->
 	<div style="color:#666;font-size:16px;margin:0.5em 0 0.5em 0">INPUTS - <?php write('#birds_enter_typical')?></div>
 	<!--assessment period-->
@@ -294,10 +296,13 @@
 		#graphs div.options {text-align:center;padding:1em}
 	</style>
 
+	<h4><?php write('#graphs')?></h4>
+
 	<div style=margin-top:2px>
-		<div id=graph1 class=inline style=width:49%><?php write('#loading')?></div>
-		<div id=graph2 class=inline style=width:49%><?php write('#loading')?></div>
+		<div id=graph1 class=inline style="width:49%"><?php write('#loading')?></div>
+		<div id=graph2 class=inline style="width:49%"><?php write('#loading')?></div>
 	</div>
+	<!--
 	<div style=margin-top:2px>
 		<div id=graph3a class=inline style=width:49%><?php write('#loading')?></div>
 		<div id=graph3b class=inline style=width:49%><?php write('#loading')?></div>
@@ -306,6 +311,7 @@
 		<div id=graph3c class=inline style=width:49%><?php write('#loading')?></div>
 		<div id=graph3d class=inline style=width:49%><?php write('#loading')?></div>
 	</div>
+	-->
 	<script>
 		google.charts.load('current',{'packages':['corechart']});
 		google.charts.setOnLoadCallback(init)

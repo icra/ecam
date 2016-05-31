@@ -23,9 +23,7 @@
 
 Pie &amp; Donut
 	<button class=button id=graph1  onclick=window.location='graph.php?g=graph1'>GHG</button><!--
-	--><button class=button id=graph4  onclick=window.location='graph.php?g=graph4'>GHG detailed</button><!--
 	--><button class=button id=graph2  onclick=window.location='graph.php?g=graph2'>NRG</button><!--
-	--><button class=button id=graph5  onclick=window.location='graph.php?g=graph5'>NRG detailed</button><!--
 	--><button class=button id=graph7  onclick=window.location='graph.php?g=graph7'>NRG substages</button>
 
 Bars
@@ -37,15 +35,19 @@ Bars
 Water flow
 	<button class=button id=sankey  onclick=window.location='graph.php?g=sankey'>Sankey</button>
 
+Other
+	<button class=button id=gauge  onclick=window.location='graph.php?g=gauge'>Gauge</button>
+	<button class=button id=ws_SL_serv_pop  onclick=window.location='graph.php?g=ws_SL_serv_pop'>Serviced population</button>
+
 <!--graph--><div id="graph"><?php write('#loading')?></div>
 
 <script>
-	google.charts.load('current',{'packages':['corechart','sankey']});
+	google.charts.load('current',{'packages':['corechart','sankey','gauge']});
 	google.charts.setOnLoadCallback(drawChart);
 	function drawChart() 
 	{
 		var g = '<?php echo $g ?>';
-		Graphs[g](true,'graph')
+		Graphs[g](false,'graph')
 		document.getElementById('<?php echo $g?>').classList.add('selected');
 	}
 </script>

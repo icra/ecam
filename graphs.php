@@ -2,9 +2,24 @@
 var Graphs = {}
 
 function scrollTo(id)
+//scroll only if element is not visible
 {
-	document.querySelector('#'+id).scrollIntoView();
+	var element = document.getElementById(id);
+
+	//get position
+	var rect = element.getBoundingClientRect();
+	var top = rect.top
+	var bottom = rect.bottom
+
+	//get screen visibility
+	var visible_area_start = window.pageYOffset;
+	var visible_area_end = visible_area_start + window.innerHeight;
+
+	//scroll if element is not in view
+	if(top < visible_area_start || bottom > visible_area_end)
+		element.scrollIntoView()
 }
+
 
 Graphs.graph1=function(withTable,container)
 //GHG
@@ -951,5 +966,38 @@ Graphs.sankey=function(withTable,container)
 		document.getElementById(container).appendChild(div);
 		div.innerHTML="<button onclick=Graphs.sankey(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
 	}
+}
+
+//new -  31 may 2016
+Graphs.gauge=function(withTable,container)
+{
+	var data = google.visualization.arrayToDataTable([
+	['Label', 'Value'],
+	['Serviced Population', Global.Water.ws_SL_serv_pop()],
+	]);
+
+	var options = {
+		animation:{duration:500},
+		width: 800, height: 600,
+		redFrom: 0, redTo: 50,
+		yellowFrom:50, yellowTo: 80,
+		greenFrom:80, greenTo: 100,
+		minorTicks: 5
+	};
+
+	var chart = new google.visualization.Gauge(document.getElementById(container));
+
+	chart.draw(data, options);
+}
+
+Graphs.ws_SL_serv_pop=function(withTable,container)
+{
+	var progress = document.createElement('progress');
+	progress.value=Global.Water.ws_SL_serv_pop();
+	progress.max=100;
+
+	var con = document.getElementById(container)
+	con.innerHTML=""
+	con.appendChild(progress)
 }
 </script>
