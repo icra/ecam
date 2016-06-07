@@ -44,7 +44,6 @@ var Global = {
 			"wsa_nrg_turb":0,
 			wsa_KPI_nrg_per_m3:function(){return this.wsa_nrg_cons/this.wsa_vol_conv},
 			wsa_KPI_nrg_recovery : function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
-			ws_SL_non_revw: function(){return Global.Water.ws_SL_non_revw()},
 			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_cons+this.wsa_nrg_turb)/this.c_wsa_vol_head()},
 			wsa_KPI_std_nrg_recv:function(){return this.wsa_nrg_turb/this.c_wsa_trb_head()},
 			/*<Level3>*/
@@ -230,7 +229,7 @@ var Global = {
 			wwt_KPI_nrg_x_biog :function(){return 100*this.wwt_nrg_biog/this.c_wwt_nrg_biog()},
 			wwt_KPI_sludg_prod :function(){return this.wwt_mass_slu/this.wwt_vol_trea},
 			wwt_KPI_dry_sludge :function(){return 100*this.wwt_dryw_slu/this.wwt_mass_slu},
-			wwt_KPI_capac_util :function(){return this.wwt_vol_trea/this.wwt_trea_cap},
+			wwt_KPI_capac_util :function(){return 100*this.wwt_vol_trea/this.wwt_trea_cap},
 			/*<Level3>*/
 				"wwt_tst_cmpl":0,
 				"wwt_tst_cond":0,
@@ -275,13 +274,15 @@ var Global = {
 	/** Old "General" Level2 */
 	Energy:{
 		wsg_KPI_nrg_cons:function(){return Global.Water.Abstraction.wsa_nrg_cons + Global.Water.Treatment.wst_nrg_cons + Global.Water.Distribution.wsd_nrg_cons},
-		wsg_KPI_nrg_x_ye:function(){return this.wsg_KPI_nrg_cons()/Global.General.Days()*365},
+		wsg_KPI_nrg_x_ye:function(){return this.wsg_KPI_nrg_cons()/Global.General.Years()},
+		wsg_KPI_nrg_x_ys:function(){return this.wsg_KPI_nrg_cons()/Global.General.Years()/Global.Water.ws_serv_pop},
 		wsg_KPI_nrg_x_m3:function(){return this.wsg_KPI_nrg_cons()/Global.Water.Distribution.wsd_auth_con},
 		wsg_KPI_std_nrg_:function(){return (Global.Water.Abstraction.wsa_KPI_std_nrg_cons()+Global.Water.Distribution.wsd_KPI_std_nrg_cons())/2},
 		wsg_KPI_nrg_perc:function(){return 100*this.wsg_KPI_nrg_cons()/Global.Water.ws_nrg_cons},
 
 		wwg_KPI_nrg_cons:function(){return Global.Waste.Collection.wwc_nrg_cons+Global.Waste.Treatment.wwt_nrg_cons+Global.Waste.Discharge.wwd_nrg_cons},
 		wwg_KPI_nrg_x_ye:function(){return this.wwg_KPI_nrg_cons()/Global.General.Days()*365},
+		wwg_KPI_nrg_x_ys:function(){return this.wwg_KPI_nrg_cons()/Global.General.Years()/Global.Waste.ww_serv_pop},
 		wwg_KPI_nrg_x_br:function(){return this.wwg_KPI_nrg_cons()/Global.Waste.Treatment.c_wwt_bod_rmvd()},
 		wwg_KPI_std_nrg_:function(){return (Global.Waste.Collection.wwc_KPI_std_nrg_cons()+Global.Waste.Discharge.wwd_KPI_std_nrg_cons())/2},
 		wwg_KPI_nrg_perc:function(){return 100*this.wwg_KPI_nrg_cons()/Global.Waste.ww_nrg_cons},

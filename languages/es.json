@@ -605,7 +605,7 @@
 	"#wwt_KPI_nrg_per_kg_expla"   : "Porcentaje de energía consumida en el tratamiento de aguas residuales con respecto a la energía total consumida de la red y auto producido en los sistemas de agua y aguas residuales",
 	"#wwt_KPI_biog_x_bod_descr"   : "Biogás producido por masa eliminado",
 	"#wwt_KPI_biog_x_bod_expla"   : "Producción de energía por unidad de aguas residuales tratadas en las plantas de tratamiento de aguas residuales",
-	"#wwt_KPI_nrg_biogas_descr"   : "Producción de energía a partir del biogás",
+	"#wwt_KPI_nrg_biogas_descr"   : "Producción de energía por masa eliminada",
 	"#wwt_KPI_nrg_biogas_expla"   : "Consumo de energía por unidad de masa de DBO eliminada en las plantas de tratamiento de aguas residuales",
 	"#wwt_KPI_nrg_x_biog_descr"   : "Energía eléctrica producida por la energía total disponible en el biogás",
 	"#wwt_KPI_nrg_x_biog_expla"   : "Biogás unidad producida por DBO removidos en masa en las plantas de tratamiento de aguas residuales",

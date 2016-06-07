@@ -72,7 +72,7 @@
 			"Substages":Substages,
 		}
 
-		link.href="data:text/json;charset=utf-8,"+JSON.stringify(SavedFile);
+		link.href="data:application/json;charset=utf-8,"+JSON.stringify(SavedFile);
 		link.download=Global.General.Name+".json";
 		link.click();
 	}

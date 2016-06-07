@@ -605,7 +605,7 @@
 	"#wwt_KPI_nrg_per_kg_expla" : "Percentage of energy consumed in wastewater treatment with regards to the Total energy consumed from the grid and self produced in the water and wastewater systems",
 	"#wwt_KPI_biog_x_bod_descr" : "Biogas produced per mass removed",
 	"#wwt_KPI_biog_x_bod_expla" : "Unit energy production per treated wastewater in wastewater treatment plants",
-	"#wwt_KPI_nrg_biogas_descr" : "Energy production from biogas",
+	"#wwt_KPI_nrg_biogas_descr" : "Energy production per mass removed",
 	"#wwt_KPI_nrg_biogas_expla" : "Unit energy consumption per BOD mass removed in wastewater treatment plants",
 	"#wwt_KPI_nrg_x_biog_descr" : "Electrical energy produced per total available energy in biogas",
 	"#wwt_KPI_nrg_x_biog_expla" : "Unit biogas produced per BOD mass removed in wastewater treatment plants",
