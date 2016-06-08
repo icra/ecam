@@ -814,13 +814,7 @@
 
 			<!--other-->
 			<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:1em">
-				<tr><th colspan=4 class=tableHeader>OUTPUTS —
-					<?php 
-						if($sublevel) 
-							write('#edit_context_indicators');
-						else 
-							write('#edit_service_level_indicators');
-					?>
+				<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#edit_service_level_indicators') ?>
 				<tr>
 					<th><?php write('#edit_description')?>
 					<th><?php write('#edit_current_value')?>

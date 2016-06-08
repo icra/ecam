@@ -122,7 +122,12 @@ var Global = {
 			c_wsd_vol_head:function(){return this.wsd_vol_pump*this.wsd_pmp_head/100},
 			wsd_KPI_nrg_efficien:function(){return 100*this.c_wsd_nrg_mini()/(this.c_wsd_nrg_supp()-this.wsd_nrg_recv)},
 			wsd_KPI_nrg_topgraph:function(){return 100*this.c_wsd_nrg_topo()/(this.c_wsd_nrg_supp()-this.wsd_nrg_recv)},
-			wsd_KPI_water_losses:function(){return 1000*this.wsd_vol_inje/this.wsd_main_len},
+			wsd_KPI_water_losses:function(){
+				if(Global.Water.Abstraction.wsa_vol_conv!=0)
+					return 1000*(Global.Water.Abstraction.wsa_vol_conv-Global.Water.ws_vol_auth)/(this.wsd_main_len)
+				else
+					return 0;
+			},
 			wsd_KPI_un_head_loss:function(){return 1000*this.wsd_fri_loss/this.wsd_main_len},
 			wsd_SL_pres_ade:function(){return 100*this.wsd_deli_pts/this.wsd_ser_cons},
 			wsd_SL_cont_sup:function(){return 100*this.wsd_time_pre/24},
