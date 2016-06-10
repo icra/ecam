@@ -103,7 +103,7 @@
 	/** return 3.999,4 instead of 3999.4*/
 	function format(number)
 	{
-		var str = new Intl.NumberFormat('en-EN',{maximumFractionDigits:1}).format(number);
+		var str = new Intl.NumberFormat('en-EN',{maximumFractionDigits:2}).format(number);
 		if(str=="NaN" || !isFinite(number)) return "<span style=color:#666>[<?php write('#missing_inputs')?>]</span>";
 		return str;
 	}
@@ -111,8 +111,8 @@
 	/** make a row from a table element inactive. used to inactivate rows according to Questions**/
 	function disableRow(row)
 	{
-		//Change color
 		//row.style.display='none';
+		//Change color
 		row.style.background='#eee';
 		row.style.color='#aaa';
 		//get the name of the field (variable)
