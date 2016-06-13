@@ -10,6 +10,32 @@
 			//checkbox that has been clicked
 			var checkbox=document.getElementById(id);
 
+			if(!checkbox.checked)
+			{
+				confirm("WARNING: All the inputs for this stage will be set to 0, and all the substages (if any) will be removed. Continue? This cannot be undone")
+				switch(id)
+				{
+					case "water": 		
+						this.reset(Global.Water);              
+						this.reset(Global.Water.Abstraction);  Substages.Water.Abstraction=[]; 
+						this.reset(Global.Water.Treatment);    Substages.Water.Treatment=[];   
+						this.reset(Global.Water.Distribution); Substages.Water.Distribution=[];
+						break;
+					case "waste": 		
+						this.reset(Global.Waste);
+						this.reset(Global.Waste.Collection);   Substages.Waste.Collection=[];
+						this.reset(Global.Waste.Treatment);    Substages.Waste.Treatment=[]; 
+						this.reset(Global.Waste.Discharge);    Substages.Waste.Discharge=[]; 
+						break;
+					case "waterAbs": 	this.reset(Global.Water.Abstraction);  Substages.Water.Abstraction=[];  break;
+					case "waterTre": 	this.reset(Global.Water.Treatment);    Substages.Water.Treatment=[];    break;
+					case "waterDis": 	this.reset(Global.Water.Distribution); Substages.Water.Distribution=[]; break;
+					case "wasteCol": 	this.reset(Global.Waste.Collection);   Substages.Waste.Collection=[];   break;
+					case "wasteTre": 	this.reset(Global.Waste.Treatment);    Substages.Waste.Treatment=[];    break;
+					case "wasteDis": 	this.reset(Global.Waste.Discharge);    Substages.Waste.Discharge=[];    break;
+				}
+			}
+
 			//if a level 1 is deactivated, deactivate the corresponding level 2 ones
 			var elements=document.getElementsByClassName(id)
 			for(var i=0;i<elements.length;i++)
@@ -37,6 +63,17 @@
 			Global.Configuration["Active Stages"][id] = checkbox.checked ? 1 : 0;
 
 			init();
+		}
+
+		/** Set all inputs inside the object to 0 */
+		Configuration.reset=function(obj)
+		{
+			for(var field in obj)
+			{
+				if(typeof(obj[field])=="number")
+					obj[field]=0;
+			}
+			updateResult();
 		}
 
 		/** Activate stages depending on Global.Configuration["Active Stages"] */

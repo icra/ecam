@@ -241,6 +241,8 @@
 
 	"#constants" : "Constantes",
 
+	"#help" : "Ayuda",
+
 	"#engines_in_water" : "¿Tiene grupo electrógeno para bombas (Suministro de agua)",
 	"#engines_in_waste" : "¿Tiene grupo electrógeno para bombas (Aguas residuales)",
 	"#producing_energy_waterAbs" : "¿Produce energía en la etapa de Captación",

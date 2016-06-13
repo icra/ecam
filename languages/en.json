@@ -241,6 +241,8 @@
 
 	"#constants" : "Constants",
 
+	"#help" : "Help",
+
 	"#engines_in_water" : "Do you have fuel engines for pumps (Water supply)",
 	"#engines_in_waste" : "Do you have fuel engines for pumps (Wastewater)",
 	"#producing_energy_waterAbs" : "Are you producing energy in Abstraction stage",
