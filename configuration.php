@@ -12,7 +12,11 @@
 
 			if(!checkbox.checked)
 			{
-				confirm("WARNING: All the inputs for this stage will be set to 0, and all the substages (if any) will be removed. Continue? This cannot be undone")
+				if(!confirm("WARNING: All the inputs for this stage will be set to 0, and all the substages (if any) will be removed. Continue? This cannot be undone"))
+				{
+					checkbox.checked=true;
+					return
+				}
 				switch(id)
 				{
 					case "water": 		
