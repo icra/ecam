@@ -234,7 +234,6 @@
 					}
 				})();
 			</script>
-			<tr stage=water class=hidden><td><?php write('#ws_non_revw_descr')?> <td><input id='ws_non_revw' onchange="BEV.updateField(this)"> <td>%
 			<tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 		<tr><th colspan=3 style=background:#d71d24>
 			<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
