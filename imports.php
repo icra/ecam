@@ -8,7 +8,7 @@
 
 <!--libraries here-->
 <script src="js/lz-string.js"></script>
-<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="js/charts/loader.js"></script>
 
 <!--translation related-->
 <?php include'languages/write.php'; //loads all strings ?>
