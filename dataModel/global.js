@@ -337,9 +337,9 @@ var Global = {
 		{
 			"Fuel type":
 			{
-				engines_in_water      : "Gas/Diesel Oil",
-				engines_in_waste      : "Gas/Diesel Oil",
-				truck_transport_waste : "Gas/Diesel Oil",
+				engines_in_water      : "Diesel",
+				engines_in_waste      : "Diesel",
+				truck_transport_waste : "Diesel",
 			},
 			"Country"      : "Africa",
 			"Technologies" : {"waterTre":"None","wasteTre":"None"},
