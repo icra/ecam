@@ -124,7 +124,7 @@
 	"#birds_ww_vol_fuel" : "Combustible consumido mensualmente",
 	"#birds_ww_prot_con" : "Consumo de proteína anual per cápita",
 	"#birds_ww_n2o_effl" : "Nitrógeno total promedio en la descarga",
-	"#birds_ww_serv_pop_note" : "The serviced population in the wastewater system is the population connected to the sewer and which wastewater reaches the treatment plant to be treated prior to discharge. This input is not a known value for the typical utility ECAM-Tool-user. It needs to be calculated using the input 'BOD load in the influent',in kg BOD mg/L multiplied by the  “Volume of treated wastewater” in m3 divided by the utility specific standard value of  “BOD per person” in g of BOD/pers/day. The tool proposes a default value per country, based on the IPCC recommendations",
+	"#birds_ww_serv_pop_note" : "La población atendida en el sistema de aguas residuales es la población conectada a la red de alcantarillado y aguas residuales, que llega a la planta de tratamiento que debe tratarse antes de su vertido. Esta entrada no es un valor conocido para la ECAM-herramienta para el usuario típico de utilidad. Tiene que ser calculada utilizando la entrada de 'carga de DBO en el influente', en kg DBO mg / L multiplicado por el 'volumen de aguas residuales tratadas' en m3 dividido por el valor estándar específico utilidad de 'BOD por persona' en g de BOD / pers / día. La herramienta propone un valor predeterminado por país, sobre la base de las recomendaciones del IPCC",
 	"#birds_ww_n2o_effl_note" : "ECAM almacena los kg totales, no la concentración. Primero es necesario entrar el 'Agua residual tratada a diario'",
 	"#birds_people" : "personas",
 	"#birds_year" : "año",

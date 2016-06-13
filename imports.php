@@ -2,45 +2,37 @@
 <meta charset="utf-8">
 <link rel="stylesheet" href="css.css">
 <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-
-<!--things for mobiles-->
 <meta name="description" content="">
-
-<!--libraries here-->
+<!--libs-->
 <script src="js/lz-string.js"></script>
 <script src="js/charts/loader.js"></script>
-
-<!--translation related-->
-<?php include'languages/write.php'; //loads all strings ?>
-
-<!--the order of the imports is important. first global, then cookies-->
-<script src="dataModel/global.js"></script>          <!--Default Global object here-->
+<!--translation--><?php include'languages/write.php' ?>
+<!--order is important. first dataModel, then cookies-->
+<script src="dataModel/global.js"></script>
 <script src="dataModel/substages.js"></script>
-<script src="dataModel/info.js"></script>            <!--All variable descriptions and units object here-->
-<script src="dataModel/dataQuality.js"></script>  <!--data quality-->
-<script src="dataModel/level3variables.js"></script> <!--list of variables exclusive to level3-->
-<script src="dataModel/level2warnings.js"></script>  <!--variables shown in level 2 with a warning-->
-<script src="dataModel/level2only.js"></script>      <!--variables shown in level 2 but not in level 3-->
+<script src="dataModel/info.js"></script>
+<script src="dataModel/dataQuality.js"></script>
+<script src="dataModel/level3variables.js"></script>
+<script src="dataModel/level2warnings.js"></script>
+<script src="dataModel/level2only.js"></script>
 <script src="dataModel/questions.js"></script>
-<script src="dataModel/formulas.js"></script>        <!--functions dealing with formulas-->
-<script src="dataModel/units.js"></script>           <!--functions dealing with unit conversion in-->
-<script src="dataModel/tables.js"></script>          <!--data regarding constants-->
-<script src="dataModel/refValues.js"></script>		 <!--reference values for some kpis (good,acceptable,bad)-->
-<script src="dataModel/exceptions.js"></script>		 <!--variables that have some special behaviour-->
-<script src="js/cookies.js"></script>                <!--basic cookie functions here-->
-<script src="js/updateGlobalFromCookies.js"></script><!--update Global object from cookie "GLOBAL" here-->
-<script src="dataModel/normalization.js"></script>		 <!--variables that have some special behaviour-->
+<script src="dataModel/formulas.js"></script>
+<script src="dataModel/units.js"></script>
+<script src="dataModel/tables.js"></script>
+<script src="dataModel/refValues.js"></script>
+<script src="dataModel/exceptions.js"></script>
+<script src="dataModel/normalization.js"></script>
 <script src="dataModel/averagedVariables.js"></script>
+<script src="js/cookies.js"></script>
+<script src="js/updateGlobalFromCookies.js"></script>
+<!--graphs: import after translation--><?php include'graphs.php'?>
 
-<!--graphs functions: import after translation!-->
-<?php include'graphs.php'?>
-
-<!--utils: format numbers and locate variables-->
+<!--utils-->
 <script>
-	/** Find a variable code, e.g 'gV2' inside 'Global' and tell where it is */
+	/** Find a variable code inside 'Global'*/
 	function locateVariable(code)
 	{
-		var localization={}; //e.g {"level":"Water","sublevel":"Abstraction"}
+		var localization={};//e.g {"level":"Water","sublevel":"Abstraction"}
 		localization['toString']=function()
 		{
 			var levelName=(function()
@@ -59,9 +51,7 @@
 				{
 					switch(localization.sublevel)
 					{
-						default: 
-							return localization.sublevel;
-							break;
+						default: return localization.sublevel; break;
 					}
 				})(); 
 				return levelName+"/"+sublevelName
@@ -83,6 +73,7 @@
 							localization["level"]=level;
 							localization["sublevel"]=field;
 							return localization;
+							break;
 						}
 					}
 				}
@@ -93,6 +84,7 @@
 						localization["level"]=level;
 						localization["sublevel"]=0;
 						return localization;
+						break;
 					}
 				}
 			}
@@ -103,12 +95,12 @@
 	/** return 3.999,4 instead of 3999.4*/
 	function format(number)
 	{
-		var str = new Intl.NumberFormat('en-EN',{maximumFractionDigits:2}).format(number);
+		var str=new Intl.NumberFormat('en-EN',{maximumFractionDigits:2}).format(number);
 		if(str=="NaN" || !isFinite(number)) return "<span style=color:#666>[<?php write('#missing_inputs')?>]</span>";
 		return str;
 	}
 
-	/** make a row from a table element inactive. used to inactivate rows according to Questions**/
+	/** make a table row inactive. Used according to Questions**/
 	function disableRow(row)
 	{
 		//row.style.display='none';

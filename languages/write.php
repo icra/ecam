@@ -1,9 +1,7 @@
 <?php
 
-/** GLOBALS */
-
-//current language is in COOKIE lang. Default is english
-$lang = isset($_COOKIE['lang']) ? $_COOKIE['lang'] : "en" ;
+//current language is in COOKIE "lang". Default is english ("en")
+$lang=isset($_COOKIE['lang']) ? $_COOKIE['lang'] : "en" ;
 
 //load selected language
 	$lang_file = file_get_contents("languages/$lang.json");
@@ -17,11 +15,10 @@ $lang = isset($_COOKIE['lang']) ? $_COOKIE['lang'] : "en" ;
 		die("Error in $lang.json file. Paste the $lang.json file <a href='https://jsonformatter.curiousconcept.com/'>here</a> find the error.");
 	}
 
-//use $lang_json to fetch $id
+//use $lang_json to fetch $id inside file "$lang".json
 function write($id)
 {
-	global $lang;
-	global $lang_json;
+	global $lang;global $lang_json;
 
 	//find text or display [not found]
 	$text = isset($lang_json[$id]) ? $lang_json[$id] : "[ $id not found for lang $lang ]";
@@ -30,17 +27,5 @@ function write($id)
 }
 
 ?>
-
-<script>
-	<?php
-		//Fake javascript code to create the lang object
-		echo "
-			var lang = $lang_file;
-		";
-	?>
-	function translate(id)
-	{
-		return lang['#'+id] || "[translation not found]";
-	}
-</script>
-
+<script><?php echo "var lang=$lang_file;" ?></script>
+<script>function translate(id){return lang['#'+id]||"[translation not found]"}</script>

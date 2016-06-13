@@ -281,10 +281,8 @@
 		{
 			redisplayUW1menu();
 			updateCurrency();
-
 			updateQuestionsTable();
 			updateFuelSelection();
-
 			Sidebar.update();
 			updateResult();
 		}

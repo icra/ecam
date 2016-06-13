@@ -36,16 +36,10 @@
 		//Generic f for updating internal values
 		BEV.update=function(obj,field,newValue)
 		{
-			if(obj[field]===undefined)
-			{
-				alert('field '+field+' undefined');
-				return;
-			}
+			if(obj[field]===undefined) { alert('field '+field+' undefined'); return; }
 
 			//newValue may be a string from input.value, it should be a float
 			newValue=parseFloat(newValue);
-
-			//update
 			obj[field]=newValue;
 		}
 
