@@ -111,6 +111,24 @@
 			init();
 		}
 
+		/** make the inputs affected by a question be 0 when the question is "no" */
+		function resetInputsByQuestion(question)
+		{
+			for(var field in Questions[question])
+			{
+				var code = Questions[question][field];
+				var localization = locateVariable(code);
+				var origin
+				if(localization.sublevel)
+					origin = Global[localization.level][localization.sublevel]
+				else
+					origin = Global[localization.level]
+
+				if(typeof(origin[code])=="number")
+					origin[code]=0;
+			}
+		}
+
 		function updateQuestionsTable()
 		{
 			var t = document.querySelector('#questions');
@@ -120,6 +138,10 @@
 			{
 				var currentAnswer = Global.Configuration["Yes/No"][question];
 				var checked = currentAnswer ? "checked":"";
+
+				//reset depending inputs
+				if(!currentAnswer) resetInputsByQuestion(question);
+
 				var newRow = t.insertRow(-1);
 				newRow.insertCell(-1).innerHTML=translate(question)+"?";
 				newRow.insertCell(-1).innerHTML=(function()
