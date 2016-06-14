@@ -675,99 +675,97 @@
 		}
 	</script>
 
-</head><body onload=init()><center>
+</head><body onload=init() style=background:#fdfdfd><center>
 <!--sidebar--><?php include'sidebar.php'?>
-<div id=fixedTopBar>
-	<style>
-		div#fixedTopBar {
-			position:fixed;
-			top:0;
-			width:100%;
-			margin:0;padding:0;
-			border-bottom:1px solid #ccc;
-			background:white;
-		}
-	</style>
+<!--NAVBAR--><?php include"navbar.php"?>
+<!--linear diagram--><?php include'linear.php'?>
+<!--TITLE-->
+<?php 
+	//Set a navigable title for page
+	switch($level)
+	{
+		case "Water":case "Waste":  
+			$titleLevel=$lang_json["#$level"];break;
 
-	<!--NAVBAR--><?php include"navbar.php"?>
-	<!--linear diagram--><?php include'linear.php'?>
-
-	<!--TITLE-->
-	<?php 
-		//Set a navigable title for page
-		switch($level)
+		case "Energy": $titleLevel="Energy summary";break;
+		default:	   $titleLevel=$level;break;
+	}
+	if($sublevel)
+	{
+		switch($sublevel)
 		{
-			case "Water":case "Waste":  
-				$titleLevel=$lang_json["#$level"];break;
-
-			case "Energy": $titleLevel="Energy summary";break;
-			default:	   $titleLevel=$level;break;
+			default:	   $titleSublevel=$lang_json["#$sublevel"];break;
 		}
+	}
+	/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
+	$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (".$lang_json['#energy_performance'].")</span>" : "<span style=color:black>$titleLevel</span>";
+?>
+<style> h1 {text-align:left;padding-left:17em;line-height:2.1em;border-bottom:1px solid #ccc;background:white} </style>
+<h1><a href=stages.php><?php write('#edit_input_data')?></a> <?php echo "$sep $title"?>
+	<!--go to level 3 button-->
+	<?php
 		if($sublevel)
 		{
-			switch($sublevel)
-			{
-				default:	   $titleSublevel=$lang_json["#$sublevel"];break;
-			}
+			$color = ($level=="Waste")?"lightcoral":"lightblue";
+			echo "
+				<span class=inline style='float:right;margin-right:2em'>
+					<button 
+						class=button
+						style='background:$color;font-size:12px;vertical-align:middle'
+						onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
+							<img src=img/substages.png style='width:40px;margin-right:1em'>
+							".$lang_json['#substages']."	
+					</button> 
+					<span style=font-size:12px;color:#666>
+						&rarr; ";
+			write('#edit_divided_in');
+			echo"
+						<script>
+							var length = Substages['$level']['$sublevel'].length;
+							document.write(length)
+						</script> ";
+			write('#substage');
+			echo "/s
+					</span>
+				</span>";
 		}
-		/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
-		$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (".$lang_json['#energy_performance'].")</span>" : "<span style=color:black>$titleLevel</span>";
 	?>
-	<style> h1 {text-align:left;padding-left:17em;line-height:2.1em} </style>
-	<h1><a href=stages.php><?php write('#edit_input_data')?></a> <?php echo "$sep $title"?>
+</h1>
 
-		<!--go to level 3 button-->
-		<?php
-			if($sublevel)
-			{
-				$color = ($level=="Waste")?"lightcoral":"lightblue";
-				echo "
-					<span class=inline style='float:right;margin-right:2em'>
-						<button 
-							class=button
-							style='background:$color;font-size:12px;vertical-align:middle'
-							onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-								<img src=img/substages.png style='width:40px;margin-right:1em'>
-							    ".$lang_json['#substages']."	
-						</button> 
-						<span style=font-size:12px;color:#666>
-							&rarr; ";
-				write('#edit_divided_in');
-				echo"
-							<script>
-								var length = Substages['$level']['$sublevel'].length;
-								document.write(length)
-							</script> ";
-				write('#substage');
-				echo "/s
-						</span>
-					</span>";
-			}
-		?>
-	</h1>
+<!--questions-->
+<div class=card style=text-align:left><?php cardMenu('Questions')?>
+	<table style=margin:1em>
+		<tr><td>Question 1<td>No <input type=radio checked> Yes <input type=radio>
+		<tr><td>Question 2<td>No <input type=radio checked> Yes <input type=radio>
+	</table>
 </div>
-
-<!--separator--><div style=margin-top:200px></div>
 
 <!--container-->
 <div style=text-align:left>
-	<!--IO-->
-	<div class=inline style="width:45%;padding-left:2em">
-		<!--INPUTS-->
-		<table id=inputs style="width:100%;
-				<?php if($level=="Energy")echo "display:none;"; ?>
-			">
-			<tr><th colspan=5 class=tableHeader>INPUTS
-			<tr>
-				<th><?php write('#edit_description')?>
-				<th><?php write('#edit_current_value')?>
-				<th><?php write('#edit_unit')?>
-				<th><?php write('#edit_data_quality')?>
-		</table>
-		<!--OUTPUTS-->
-		<div>
+	<div class=card>
+		<div class=menu>
+			<button onclick=this.parentNode.parentNode.classList.toggle('folded')>
+			</button>
+			Inputs &amp; Outputs
+		</div>
+
+		<!--Inputs-->
+		<div class=inline style="width:45%;margin-left:2em">
+			<!--INPUTS-->
+			<table id=inputs style="width:100%">
+				<tr><th colspan=5 class=tableHeader>INPUTS
+				<tr>
+					<th><?php write('#edit_description')?>
+					<th><?php write('#edit_current_value')?>
+					<th><?php write('#edit_unit')?>
+					<th><?php write('#edit_data_quality')?>
+			</table>
+		</div>
+
+		<!--Outputs-->
+		<div class=inline style="width:50%">
 			<!--GHG-->
-			<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:1em;margin-top:1em;
+			<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:1em;
 					<?php if($sublevel || $level=="Energy") echo "display:none;"; ?>
 				">
 				<tr><th colspan=7 class=tableHeader>OUTPUTS — <?php write('#edit_ghg_emissions')?> |
@@ -813,7 +811,7 @@
 			</table>
 
 			<!--other-->
-			<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:1em">
+			<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:1em;margin-bottom:1em">
 				<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#edit_service_level_indicators') ?>
 				<tr>
 					<th><?php write('#edit_description')?>
@@ -824,8 +822,12 @@
 	</div>
 
 	<!--GRAPHS-->
-	<div class=inline style="width:50%">
-		<h3 style="color:#58595b"><?php write('#edit_results')?></h3>
+	<div class=card>
+		<div class=menu>
+			<button onclick=this.parentNode.parentNode.classList.toggle('folded')>
+			</button>
+			Graphs
+		</div>
 		<div id=graph><?php write('#loading')?></div>
 		<script>
 			google.charts.load('current',{'packages':['corechart']});

@@ -560,76 +560,69 @@
 			}
 		}
 	</script>
-</head><body onload=init()><center>
+</head><body onload=init() style="background:#F5ECCE"><center>
 <!--sidebar--><?php include'sidebar.php'?>
-
-<div id=fixedTopBar>
-	<style>
-		div#fixedTopBar {
-			position:fixed;top:0;
-			margin:0;padding:0;
-			width:100%;
-			border-bottom:1px solid #ccc;
-			background:white;
-		}
-	</style>
-	<!--NAVBAR--><?php include"navbar.php"?>
-	<!--linear diagram--><?php include'linear.php'?>
-	<!--TITLE-->
-	<?php 
-		//Navigable <h1>title</h1>
-		switch($level)
-		{
-			case "Water": $titleLevel="<a href=edit.php?level=$level>".$lang_json['#Water']."</a>";break;
-			case "Waste": $titleLevel="<a href=edit.php?level=$level>".$lang_json['#Waste']."</a>";break;
-		}
-		/*Separator*/$sep="<span style=color:black>&rsaquo;</span>";
-		$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>".$lang_json["#$sublevel"]."</a>";
-		$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>".$lang_json['#substages']."</a>";
-	?>
-	<style> h1 {text-align:left;padding-left:17em} </style>
-	<!--TITLE--><h1><?php echo $title?>
-		<!--type of assessment--><?php include'assessmentType.php'?>
-	</h1>
-</div>
-<!--separator--><div style=margin-top:180px></div>
+<!--NAVBAR--><?php include"navbar.php"?>
+<!--linear diagram--><?php include'linear.php'?>
+<!--TITLE-->
+<?php 
+	//Navigable <h1>title</h1>
+	switch($level)
+	{
+		case "Water": $titleLevel="<a href=edit.php?level=$level>".$lang_json['#Water']."</a>";break;
+		case "Waste": $titleLevel="<a href=edit.php?level=$level>".$lang_json['#Waste']."</a>";break;
+	}
+	/*Separator*/$sep="<span style=color:black>&rsaquo;</span>";
+	$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>".$lang_json["#$sublevel"]."</a>";
+	$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>".$lang_json['#substages']."</a>";
+?>
+<style> h1 {text-align:left;padding-left:17em;border-bottom:1px solid #ccc;background:white} </style>
+<!--TITLE--><h1><?php echo $title?>
+	<!--type of assessment--><?php include'assessmentType.php'?>
+</h1>
 
 <!--HELP--><h4 class=inline style=line-height:0.1em><?php write('#level3_split_this_stage')?></h4>
+
 <!--SUBSTAGES TABLE-->
-<table id=substages style=margin:1em> <tr>
-	<td colspan=2 style="text-align:center;min-width:400px;table-layout:fixed">
-		<!--substages counter-->
-		<div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle"><?php write('#substages')?>: <span id=counter>0</span></div>
-		<!--new substage button-->
-		<button onclick=newSubstage() class=button>+ <?php write('#level3_new_substage')?></button>
-</table>
+<div class=card><?php cardMenu('Substages')?>
+	<table id=substages style=margin:1em> <tr>
+		<td colspan=2 style="text-align:center;min-width:400px;table-layout:fixed">
+			<!--substages counter-->
+			<div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle"><?php write('#substages')?>: <span id=counter>0</span></div>
+			<!--new substage button-->
+			<button onclick=newSubstage() class=button>+ <?php write('#level3_new_substage')?></button>
+	</table>
+</div>
 
 <!--OUTPUTS TABLE-->
-<table id=outputs class=inline style=background:#f6f6f6> 
-	<tr><th colspan=42 style="background:white;border:none;color:black;padding-bottom:0.7em;font-size:17px">
-		<?php write('#level3_results_kpis')?>
-</table>
+<div class=card><?php cardMenu($lang_json['#level3_results_kpis'])?>
+	<table id=outputs class=inline style=background:#f6f6f6> 
+		<tr><th colspan=42 style="background:white;border:none;color:black;padding-bottom:0.7em;font-size:17px">
+	</table>
+</div>
 
 <!--display graphs-->
-<div id=graph style="margin:1em;padding:1em;border:1px solid #ccc;max-width:60%" >Graphs here</div>
-<style>
-	#graph div.options {padding:1em}
-	#graph button {margin:0.5em}
-</style>
-<script>
-	function drawCharts()
-	{
-		Graphs.graph7(false,'graph')
-	}
-	google.charts.load('current',{'packages':['corechart','sankey']});
-	google.charts.setOnLoadCallback(drawCharts);
-</script>
+<div class=card><?php cardMenu('Graphs')?>
+	<div id=graph style="margin:1em;padding:1em" >Graphs here</div>
+	<style>
+		#graph div.options {padding:1em}
+		#graph button {margin:0.5em}
+	</style>
+	<script>
+		function drawCharts()
+		{
+			Graphs.graph7(false,'graph')
+		}
+		google.charts.load('current',{'packages':['corechart','sankey']});
+		google.charts.setOnLoadCallback(drawCharts);
+	</script>
+</div>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
 
 <script>
 /** If no substages (first time entering advanced assessment, create one substage with L2 values*/
-function checkIfNoSubstages()
+(function checkIfNoSubstages()
 {
 	if(substages.length==0)
 	{
@@ -645,6 +638,5 @@ function checkIfNoSubstages()
 			substages[0][field] = CurrentStage[field]
 		});
 	}
-}
-checkIfNoSubstages();
+})();
 </script>

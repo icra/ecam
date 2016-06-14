@@ -79,8 +79,6 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1><?php write('#getStarted_general_info')?></h1>
 <!--SUBTITLE--><h4><?php write('#getStarted_subtitle')?></h4>
-<div style="padding:0;margin-bottom:1em;background:#d7bfaf;height:5px"></div>
-
 <!--FORM--><table id=form style="text-align:left;"></table>
 <!--PREV&NEXT-->
 <div style=margin:1em>

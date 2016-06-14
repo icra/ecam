@@ -119,7 +119,7 @@
 		{
 			position:fixed;
 			/*dreta*/top:0;right:0;z-index:999;
-			/*esquerra*/top:59px;left:0;z-index:999;
+			/*esquerra*/top:57px;left:0;z-index:999;
 			background:white;
 			padding:0;margin:0;
 			box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
@@ -141,7 +141,7 @@
 	</style>
 	<div id=sidecontent>
 		<table id=menu>
-			<tr><th id=Name style=font-size:18px> <script>document.write(Global.General.Name)</script>
+			<tr><th style="padding:5px 5px 5px 5px">Main menu <span id=Name style="float:right"> <script>document.write(Global.General.Name)</script>
 			<tr>
 				<td align=center style="padding:0.7em">
 				<input type="file" id="loadfile" accept=".json" onchange="loadFile(event)" style="display:none">
@@ -168,6 +168,7 @@
 			<tr><th><?php write('#sidebar_general')?>
 			<tr><td><a href=getStarted.php><?php write('#getStarted_general_info')?></a>
 			<tr><td><a href=configuration.php><?php write('#configuration')?></a>
+			<tr><td><a href=dashboard.php>Dashboard</a>
 			<tr><th><?php write('#ghg_assessment')?>
 			<tr><td><a href=birds.php><?php write('#quick_assessment')?></a>
 			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>

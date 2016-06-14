@@ -462,7 +462,7 @@
 				alert("<?php write('#configuration_conv_error')?>");
 				return;
 			}
-			window.location="birds.php"; return;
+			window.location="dashboard.php"; return;
 		}
 	</script>
 	<button class="button prev" onclick="event.stopPropagation();window.location='getStarted.php'"><?php write('#previous')?></button><!--

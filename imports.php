@@ -29,6 +29,19 @@
 
 <!--utils-->
 <script>
+	<?php
+		//create a menu for folding the parent div.card element
+		function cardMenu($name)
+		{
+			echo "
+			<div class=menu>
+			<button onclick=this.parentNode.parentNode.classList.toggle('folded')></button>
+			$name
+			</div>
+			";
+		}
+	?>
+
 	/** Find a variable code inside 'Global'*/
 	function locateVariable(code)
 	{

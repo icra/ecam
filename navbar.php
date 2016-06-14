@@ -28,7 +28,7 @@
 <div id=navbar>
 	<!--menu symbol--><span id=burger onclick="event.stopPropagation();Sidebar.toggle()">&#9776;</span>
 
-	<img src=img/IWA-logo.png style="margin:0.6em;margin-left:5em;margin-right:4em;width:75px;cursor:pointer" onclick=window.location='index.php'>
+	<img src=img/IWA-logo.png style="margin:0.6em 2em 0.4em 6em;height:40px;cursor:pointer" onclick=window.location='index.php'>
 
 	<a href=index.php>ECAM — <?php write('#navbar_title')?></a>
 
