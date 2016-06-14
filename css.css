@@ -188,7 +188,7 @@ span.estimated{color:red;font-size:16px;cursor:help}
 		text-align:left;
 		opacity:1;
 		background:#f6f6f6;
-		cursor:default;
+		cursor:pointer;
 	}
 	.card .menu button {
 		margin-left:-1px;
