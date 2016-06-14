@@ -8,7 +8,7 @@
 	</script>
 	<style>
 		#recmm, #nextsteps {margin:1em}
-		#recmm td, #nextsteps td {padding:1.5em}
+		#recmm td, #nextsteps td {padding:1em}
 	</style>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
@@ -23,11 +23,11 @@
 			<td>Incomplete
 			<td>Click on Quick Assessment
 		<tr><td>GHG Assessment
-			<td>Not started
-			<td>Not started
+			<td style=color:#ccc>Not started
+			<td style=color:#ccc>Not started
 		<tr><td>Energy performance
-			<td>Not started
-			<td>Not started
+			<td style=color:#ccc>Not started
+			<td style=color:#ccc>Not started
 	</table>
 </div>
 <div class=card><?php cardMenu('Recommendations to reduce GHG') ?>

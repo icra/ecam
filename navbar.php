@@ -10,7 +10,7 @@
 		border-bottom:1px solid #ccc;
 	}
 	#navbar a {color:white;}
-	#navbar a:hover {text-decoration:none;}
+	#navbar a:hover {}
 	#navbar img{vertical-align:middle}
 
 	#navbar #burger 

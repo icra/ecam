@@ -7,16 +7,6 @@
 
 var RefValues = 
 {
-	//check if input "code" is inside this object
-	isInside:function(code)
-	{
-		for(var field in this) 
-		{ 
-			if(code==field){return true;break;} 
-		}
-		return false;
-	},
-
 	wsg_KPI_std_nrg_:function(value)
 	{
 			 if(0.2725 <= value && value <= 0.40){return "Good"}
@@ -241,5 +231,14 @@ var RefValues =
 		   else if(0.12 <= value && value < 0.19)  {return "Acceptable"}
 		   else if(value < 0.12)                   {return "Unsatisfactory"}
 		   else                                    {return "Out of range"}
+	},
+	//check if input "code" is inside this object
+	isInside:function(code)
+	{
+		for(var field in this) 
+		{ 
+			if(code==field){return true;break;} 
+		}
+		return false;
 	},
 }
