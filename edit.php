@@ -663,6 +663,7 @@
 		/** Update all */
 		function init()
 		{
+			updateQuestionsTable();
 			updateInputs();
 			updateOutputs();
 			updateNrgOutputs();
@@ -732,26 +733,57 @@
 	?>
 </h1>
 
-<!--questions-->
-<div class=card style=text-align:left><?php cardMenu('Questions')?>
-	<table style=margin:1em>
-		<tr><td>Question 1<td>No <input type=radio checked> Yes <input type=radio>
-		<tr><td>Question 2<td>No <input type=radio checked> Yes <input type=radio>
-	</table>
-</div>
-
 <!--container-->
 <div style=text-align:left>
-	<div class=card>
-		<div class=menu>
-			<button onclick=this.parentNode.parentNode.classList.toggle('folded')>
-			</button>
-			Inputs &amp; Outputs
-		</div>
+	<!--questions-->
+	<div class=card style=text-align:left><?php cardMenu($lang_json['#questions'])?>
+		<table style=margin:1em id=questions> </table>
+		<script>
+			function updateQuestionsTable()
+			{
+				var t = document.querySelector('#questions');
+				while(t.rows.length>0)t.deleteRow(-1);
 
+				var questions = Questions.getQuestions(CurrentLevel);
+
+				if(questions.length==0)
+					t.insertRow(-1).insertCell(-1).innerHTML="<i>N/A</i>"
+
+				for(var q in questions)
+				{
+					var question = questions[q];
+					var currentAnswer = Global.Configuration["Yes/No"][question];
+					var checked = currentAnswer ? "checked":"";
+
+					//reset values that are inputs
+					if(!currentAnswer)
+						for(var i in Questions[question])
+						{
+							var code = Questions[question][i]
+							if(typeof(CurrentLevel[code])=="number")
+								CurrentLevel[code]=0;
+						}
+
+					var newRow = t.insertRow(-1);
+					newRow.insertCell(-1).innerHTML=translate(question)+"?";
+					newRow.insertCell(-1).innerHTML=(function()
+					{
+						var as = Global.Configuration['Active Stages'];
+						var ret="<label>"+
+								"<?php write('#no')?> "+
+								"<input name='"+question+"' type=radio value=0 onclick=\"Global.Configuration['Yes/No']['"+question+"']=0;init()\" checked></label> "+
+								"<label><?php write('#yes')?> "+
+								"<input name='"+question+"' type=radio value=1 onclick=\"Global.Configuration['Yes/No']['"+question+"']=1;init()\" "+checked+"></label> ";
+						return ret;
+					})();
+				}
+			}
+
+		</script>
+	</div>
+	<div class=card><?php cardMenu("Inputs &amp; Outputs") ?>
 		<!--Inputs-->
 		<div class=inline style="width:45%;margin-left:2em">
-			<!--INPUTS-->
 			<table id=inputs style="width:100%">
 				<tr><th colspan=5 class=tableHeader>INPUTS
 				<tr>
@@ -763,7 +795,7 @@
 		</div>
 
 		<!--Outputs-->
-		<div class=inline style="width:50%">
+		<div class=inline style="width:50%;margin-left:1em">
 			<!--GHG-->
 			<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:1em;
 					<?php if($sublevel || $level=="Energy") echo "display:none;"; ?>
@@ -820,14 +852,8 @@
 			</table>
 		</div>
 	</div>
-
 	<!--GRAPHS-->
-	<div class=card>
-		<div class=menu>
-			<button onclick=this.parentNode.parentNode.classList.toggle('folded')>
-			</button>
-			Graphs
-		</div>
+	<div class=card><?php cardMenu($lang_json['#graphs']) ?>
 		<div id=graph><?php write('#loading')?></div>
 		<script>
 			google.charts.load('current',{'packages':['corechart']});

@@ -79,3 +79,25 @@ Questions.isHidden=function(field)
 	}
 	return false;
 }
+
+//return the codes according to an ubication inside "Global"
+Questions.getQuestions=function(ubication)
+{
+	var questions=[];
+	//go over all questions
+	for(var question in this)
+	{
+		//check all codes inside
+		for(var input in this[question])
+		{
+			var code = this[question][input]
+			//check if exists inside ubication
+			if(ubication[code])
+			{
+				questions.push(question)
+				break;
+			}
+		}
+	}
+	return questions;
+}

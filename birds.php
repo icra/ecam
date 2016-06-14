@@ -220,12 +220,9 @@
 <!--linear--><?php include'linear.php'?>
 <!--TITLE--><h1><?php write('#birds_quick_assessment_of')?> [<script>document.write(Global.General.Name)</script>]</h1>
 </center>
+
 <!--inputs-->
-<div class=card>
-	<div class=menu>
-		<button onclick=this.parentNode.parentNode.classList.toggle('folded')></button>
-		Inputs
-	</div>
+<div class=card><?php cardMenu('Inputs')?>
 	<div style="margin-left:1em">
 		<!--description-->
 		<div style=margin:0.5em>
@@ -241,7 +238,7 @@
 				</script> kg CO<sub>2</sub>/kWh</div> 
 		</div>
 		<!--table-->
-		<table id=inputs style="margin:0.5em">
+		<table id=inputs style="margin:0.5em;width:90%">
 			<tr><th colspan=3>
 				<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Water')?>
 				<tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?> <td><input id='ws_resi_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>

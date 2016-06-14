@@ -234,6 +234,7 @@
 	"#fuelInfo_fd" : "Densidad del combustible",
 	"#fuelInfo_ncv" : "Valores caloríficos netos",
 
+	"#questions" : "Preguntas",
 	"#questions_about" : "Acerca de las preguntas adicionales",
 	"#questions_question" : "Pregunta",
 	"#questions_variables_hidden" : "Variables ocultas si la respuesta es No",

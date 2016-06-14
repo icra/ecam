@@ -581,10 +581,9 @@
 	<!--type of assessment--><?php include'assessmentType.php'?>
 </h1>
 
-<!--HELP--><h4 class=inline style=line-height:0.1em><?php write('#level3_split_this_stage')?></h4>
-
 <!--SUBSTAGES TABLE-->
-<div class=card><?php cardMenu('Substages')?>
+<div class=card><?php cardMenu("Inputs - ".$lang_json['#substages'])?>
+	<!--HELP--><h4 class=inline style=line-height:0.1em><?php write('#level3_split_this_stage')?></h4>
 	<table id=substages style=margin:1em> <tr>
 		<td colspan=2 style="text-align:center;min-width:400px;table-layout:fixed">
 			<!--substages counter-->
@@ -596,14 +595,14 @@
 
 <!--OUTPUTS TABLE-->
 <div class=card><?php cardMenu($lang_json['#level3_results_kpis'])?>
-	<table id=outputs class=inline style=background:#f6f6f6> 
+	<table id=outputs class=inline style=margin-bottom:1em;background:#f6f6f6> 
 		<tr><th colspan=42 style="background:white;border:none;color:black;padding-bottom:0.7em;font-size:17px">
 	</table>
 </div>
 
 <!--display graphs-->
-<div class=card><?php cardMenu('Graphs')?>
-	<div id=graph style="margin:1em;padding:1em" >Graphs here</div>
+<div class=card><?php cardMenu($lang_json['#graphs'])?>
+	<div id=graph style="margin:1em;padding:1em">Loading...</div>
 	<style>
 		#graph div.options {padding:1em}
 		#graph button {margin:0.5em}

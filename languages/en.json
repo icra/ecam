@@ -182,7 +182,7 @@
 
 	"#level3_split_this_stage" : "Here you can split this stage in substages",
 	"#level3_new_substage" : "New substage",
-	"#level3_results_kpis" : "RESULTS - Key performance indicators",
+	"#level3_results_kpis" : "OUTPUTS - Performance indicators",
 	"#level3_code" : "Code",
 	"#level3_description" : "Description",
 	"#level3_TOTAL" : "TOTAL",
@@ -234,6 +234,7 @@
 	"#fuelInfo_fd" : "Fuel density",
 	"#fuelInfo_ncv" : "Net calorific values",
 
+	"#questions" : "Questions",
 	"#questions_about" : "About additional questions",
 	"#questions_question" : "Question",
 	"#questions_variables_hidden" : "Variables hidden if answer is No",

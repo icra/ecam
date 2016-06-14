@@ -34,9 +34,9 @@
 		function cardMenu($name)
 		{
 			echo "
-			<div class=menu>
-			<button onclick=this.parentNode.parentNode.classList.toggle('folded')></button>
-			$name
+			<div class=menu onclick=this.parentNode.classList.toggle('folded')>
+				<button></button>
+				$name</span>
 			</div>
 			";
 		}
@@ -120,12 +120,7 @@
 		//Change color
 		row.style.background='#eee';
 		row.style.color='#aaa';
-		//get the name of the field (variable)
-		var field = row.getAttribute('field');
-		//create a new css element
-		var style = document.createElement('style');
-		document.body.appendChild(style);
-		style.innerHTML="tr[field="+field+"] * {pointer-events:none;font-size:10px;font-style:italic;cursor:not-allowed}"
+		row.style.cursor="not-allowed";
 	}
 </script>
 
