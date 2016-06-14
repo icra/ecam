@@ -18,18 +18,22 @@
 
 <div class=card><?php cardMenu('Next steps') ?>
 	<table id=nextsteps class=inline>
+		<tr><th>Section<th>Status<th>Action
 		<tr><td>Quick Assessment
 			<td>Incomplete
+			<td>Click on Quick Assessment
 		<tr><td>GHG Assessment
 			<td>Not started
+			<td>Not started
 		<tr><td>Energy performance
+			<td>Not started
 			<td>Not started
 	</table>
 </div>
 <div class=card><?php cardMenu('Recommendations to reduce GHG') ?>
 	<table id=recmm class=inline>
 		<tr><td>Quick Assessment
-			<td>Input data
+			<td>N/A
 		<tr><td>GHG Assessment
 			<td>N/A
 		<tr><td>Energy performance
