@@ -7,7 +7,8 @@
 		table#inputs tr.hidden {display:none}
 		table#inputs tr[indic]{text-align:center;color:#999;background:#eee}
 		table#inputs th{text-align:left}
-		table#inputs td{border-left:none;border-right:none}
+		table#inputs td,
+		table#inputs th{border-left:none;border-right:none}
 	</style>
 	<script>
 		function init()
@@ -23,6 +24,7 @@
 		{
 			Graphs.graph1(false,'graph1');
 			Graphs.graph2(false,'graph2');
+			Graphs.ws_nrg_cost(false,'ws_nrg_cost_graph');
 			/**
 			Graphs.graph3a(false,'graph3a');
 			Graphs.graph3b(false,'graph3b');
@@ -222,7 +224,7 @@
 </center>
 
 <!--inputs-->
-<div class=card><?php cardMenu('Inputs')?>
+<div class="card inline" style="width:30%"><?php cardMenu('Inputs')?>
 	<div style="margin-left:1em">
 		<!--description-->
 		<div style=margin:0.5em>
@@ -304,19 +306,20 @@
 </div>
 
 <!--graphs-->
-<div class=card><?php cardMenu($lang_json['#graphs'])?>
-	<div id=graphs class=inline style="width:65%;">
+<div class="card inline" style="width:68%"><?php cardMenu($lang_json['#graphs'])?>
+	<div id=graphs>
 		<style> 
 			#graphs table{margin:auto}
 			#graphs button{margin:0.5em;margin-top:0;font-size:10px} 
 			#graphs div{text-align:center} 
-			#graphs div div {padding:0}
+			#graphs > div > div.inline {padding:0;margin:2px;border:1px solid #ccc}
 			#graphs div.options {text-align:center;padding:1em}
 		</style>
 
-		<div style=margin-top:2px>
-			<div id=graph1 class=inline style="width:49%"><?php write('#loading')?></div>
-			<div id=graph2 class=inline style="width:49%"><?php write('#loading')?></div>
+		<div style=margin-top:2px;text-align:left>
+			<div id=graph1            class=inline style="width:49%"><?php write('#loading')?></div>
+			<div id=graph2            class=inline style="width:49%"><?php write('#loading')?></div>
+			<div id=ws_nrg_cost_graph class=inline style="width:49%"><?php write('#loading')?></div>
 		</div>
 		<!--
 		<div style=margin-top:2px>

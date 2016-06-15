@@ -460,6 +460,7 @@
 			if(Global.General.conv_kwh_co2==0)
 			{
 				alert("<?php write('#configuration_conv_error')?>");
+				document.getElementById('uw1').style.background='red'
 				return;
 			}
 			window.location="dashboard.php"; return;

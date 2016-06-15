@@ -3,7 +3,7 @@ function copyFieldsFrom(object_from,object_to)
 {
 	for(var field in object_from)
 	{
-		//this is for level 3
+		console.log(field)
 		if(object_from[field].constructor===Array)
 		{
 			object_to[field] = object_from[field];
@@ -17,11 +17,22 @@ function copyFieldsFrom(object_from,object_to)
 		*/
 		if(typeof(object_from[field])=="object")
 		{
+			//TODO stringify supresses spaces!
+			/*HOTFIX*/if(field=="ActiveStages")
+			{
+				copyFieldsFrom(object_from[field],object_to["Active Stages"]);
+				continue;
+			}
+			/*HOTFIX*/if(field=="Fueltype")
+			{
+				copyFieldsFrom(object_from[field],object_to["Fuel type"]);
+				continue;
+			}
 			copyFieldsFrom(object_from[field],object_to[field]);
 		}
 		else 
 		{
-			object_to[field] = object_from[field];
+			object_to[field]=object_from[field];
 		}
 	}
 };

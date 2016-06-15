@@ -21,7 +21,7 @@
 		<tr><th>Section<th>Status<th>Action
 		<tr><td>Quick Assessment
 			<td>Incomplete
-			<td>Click on Quick Assessment
+			<td>Go to <a href=birds.php>Quick Assessment</a>
 		<tr><td>GHG Assessment
 			<td style=color:#ccc>Not started
 			<td style=color:#ccc>Not started
@@ -31,13 +31,13 @@
 	</table>
 </div>
 <div class=card><?php cardMenu('Recommendations to reduce GHG') ?>
-	<table id=recmm class=inline>
-		<tr><td>Quick Assessment
-			<td>N/A
-		<tr><td>GHG Assessment
-			<td>N/A
-		<tr><td>Energy performance
-			<td>N/A
+	<table id=recmm style="width:80%">
+		<tr>
+			<td style="background:#0aaff1;color:white;text-align:center">Water supply
+			<td style="background:#d71d24;color:white;text-align:center">Wastewater
+		<tr>	
+			<td style=color:#ccc>N/A (i.e. increase serviced population to P to reduce N kg CO2)
+			<td style=color:#ccc>N/A (i.e. increase serviced population to P to reduce N kg CO2)
 	</table>
 </div>
 
