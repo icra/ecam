@@ -80,18 +80,19 @@
 	/** Update Global object with loaded file parsed to JSON */
 	function loadFile(evt)
 	{
-		var file = evt.target.files[0];
-		var reader = new FileReader();
-		var contents;
-		reader.onload=function()
-		{
-			var SavedFile = JSON.parse(reader.result);
-			copyFieldsFrom(SavedFile.Global,Global);
-			copyFieldsFrom(SavedFile.Substages,Substages);
-			updateResult();
-			window.location='birds.php';
-		}
-		reader.readAsText(file);
+			var file = evt.target.files[0];
+			var reader = new FileReader();
+			reader.onload=function()
+			{
+				var SavedFile = JSON.parse(reader.result);
+				copyFieldsFrom(SavedFile.Global,Global);
+				copyFieldsFrom(SavedFile.Substages,Substages);
+				updateResult();
+				window.location='birds.php';
+			}
+			try{
+			reader.readAsText(file);
+			}catch(e){alert(e)}
 	}
 
 	function clearSystem()
