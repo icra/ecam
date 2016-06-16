@@ -759,9 +759,8 @@
 					if(!currentAnswer)
 						for(var i in Questions[question])
 						{
-							var code = Questions[question][i]
-							if(typeof(CurrentLevel[code])=="number")
-								CurrentLevel[code]=0;
+							var code=Questions[question][i];
+							if(typeof(CurrentLevel[code])=="number") CurrentLevel[code]=0;
 						}
 
 					var newRow = t.insertRow(-1);
@@ -771,15 +770,31 @@
 						var as = Global.Configuration['Active Stages'];
 						var ret="<label>"+
 								"<?php write('#no')?> "+
-								"<input name='"+question+"' type=radio value=0 onclick=\"Global.Configuration['Yes/No']['"+question+"']=0;init()\" checked></label> "+
+								"<input name='"+question+"' type=radio value=0 onclick=setQuestion('"+question+"',0) checked></label> "+
 								"<label><?php write('#yes')?> "+
-								"<input name='"+question+"' type=radio value=1 onclick=\"Global.Configuration['Yes/No']['"+question+"']=1;init()\" "+checked+"></label> ";
+								"<input name='"+question+"' type=radio value=1 onclick=setQuestion('"+question+"',1) "+checked+"></label> ";
 						return ret;
 					})();
 				}
 			}
 
+			function setQuestion(question,newValue)
+			{
+				if(newValue)
+					Global.Configuration['Yes/No'][question]=1;
+				else
+					if(confirm("Inputs that depend on this question will be set to 0. Continue?"))
+						Global.Configuration['Yes/No'][question]=0;
+				init()
+			}
 		</script>
+		<?php 
+			//fuel options for water and wastewater only
+			if($sublevel==false)
+			{
+				echo "fuel options here";
+			}
+		?>
 	</div>
 	<div class=card><?php cardMenu("Inputs &amp; Outputs") ?>
 		<!--Inputs-->
