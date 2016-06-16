@@ -3,7 +3,6 @@ function copyFieldsFrom(object_from,object_to)
 {
 	for(var field in object_from)
 	{
-		console.log(field)
 		if(object_from[field].constructor===Array)
 		{
 			object_to[field] = object_from[field];

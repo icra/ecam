@@ -224,7 +224,7 @@
 </center>
 
 <!--inputs-->
-<div class="card inline" style="width:30%"><?php cardMenu('Inputs')?>
+<div class="card inline" style="width:35%"><?php cardMenu('Inputs')?>
 	<div style="margin-left:1em">
 		<!--description-->
 		<div style=margin:0.5em>
@@ -240,7 +240,7 @@
 				</script> kg CO<sub>2</sub>/kWh</div> 
 		</div>
 		<!--table-->
-		<table id=inputs style="margin:0.5em;width:90%">
+		<table id=inputs style="margin:0.2em;width:95%">
 			<tr><th colspan=3>
 				<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Water')?>
 				<tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?> <td><input id='ws_resi_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
@@ -306,7 +306,7 @@
 </div>
 
 <!--graphs-->
-<div class="card inline" style="width:68%"><?php cardMenu($lang_json['#graphs'])?>
+<div class="card inline" style="width:63%"><?php cardMenu($lang_json['#graphs'])?>
 	<div id=graphs>
 		<style> 
 			#graphs table{margin:auto}
