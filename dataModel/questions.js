@@ -29,7 +29,7 @@ var Questions =
 		"wsa_trb_head",
 		"c_wsa_trb_head",
 		"wsa_KPI_nrg_recovery",
-		"wsd_nrg_recv",
+		"wsa_KPI_std_nrg_recv",	
 	],
 
 	"topographic_energy":[
@@ -38,10 +38,6 @@ var Questions =
 		"wsd_av_no_el",
 		"wsd_wt_el_no",
 		"c_wsd_nrg_topo",
-	],
-
-	"industrial_wasteTre":[
-		/*it's only used to calculate c_wwt_ann_ndis*/ 
 	],
 
 	"producing_biogas": [
@@ -92,7 +88,7 @@ Questions.getQuestions=function(ubication)
 		{
 			var code = this[question][input]
 			//check if exists inside ubication
-			if(ubication[code])
+			if(ubication[code]!=undefined)
 			{
 				questions.push(question)
 				break;

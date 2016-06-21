@@ -111,128 +111,6 @@
 			init();
 		}
 
-		/** make the inputs affected by a question be 0 when the question is "no" */
-		function resetInputsByQuestion(question)
-		{
-			for(var field in Questions[question])
-			{
-				var code = Questions[question][field];
-				var localization = locateVariable(code);
-				var origin
-				if(localization.sublevel)
-					origin = Global[localization.level][localization.sublevel]
-				else
-					origin = Global[localization.level]
-
-				if(typeof(origin[code])=="number")
-					origin[code]=0;
-			}
-		}
-
-		function updateQuestionsTable()
-		{
-			var t = document.querySelector('#questions');
-			while(t.rows.length>0)t.deleteRow(-1);
-
-			for(var question in Global.Configuration["Yes/No"])
-			{
-				var currentAnswer = Global.Configuration["Yes/No"][question];
-				var checked = currentAnswer ? "checked":"";
-
-				//reset depending inputs
-				if(!currentAnswer) resetInputsByQuestion(question);
-
-				var newRow = t.insertRow(-1);
-				newRow.insertCell(-1).innerHTML=translate(question)+"?";
-				newRow.insertCell(-1).innerHTML=(function()
-				{
-					var as = Global.Configuration['Active Stages'];
-					switch(question)
-					{
-						case "valorizing_biogas":
-							if(Global.Configuration["Yes/No"]["producing_biogas"]==0)
-							{
-								makeInactive(question,newRow);
-								newRow.title="<?php write('#configuration_only_if')?> ['producing_biogas'] is [<?php write('#yes')?>]";
-								return "<?php write('#Inactive')?>";
-							}
-							break;
-						case "producing_biogas":
-							if(as.waste==0 && as.wasteTre==0)
-							{
-								makeInactive(question,newRow);
-								newRow.title= "<?php write('#configuration_only_if')?> [ww] or [wwt]"; 
-								return "<?php write('#Inactive')?>";
-							}
-							break;
-						case "producing_energy_waterAbs":
-							if(as.waterAbs==0)
-							{
-								makeInactive(question,newRow);
-								newRow.title= "<?php write('#configuration_only_if')?> [wsa]"; 
-								return "<?php write('#Inactive')?>";
-							}
-							break;
-						case "engines_in_water":
-							if(as.water==0)
-							{
-								makeInactive(question,newRow);
-								newRow.title= "<?php write('#configuration_only_if')?> [ws]"; 
-								return "<?php write('#Inactive')?>";
-							}
-							break;
-						case "engines_in_waste":
-							if(as.waste==0)
-							{
-								makeInactive(question,newRow);
-								newRow.title= "<?php write('#configuration_only_if')?> [ww]"; 
-								return "<?php write('#Inactive')?>";
-							}
-							break;
-						case "truck_transport_waste":
-							if(as.waste==0)
-							{
-								makeInactive(question,newRow);
-								newRow.title= "<?php write('#configuration_only_if')?> [ww]"; 
-								return "<?php write('#Inactive')?>";
-							}
-							break;
-						case "topographic_energy":
-							if(as.waterDis==0)
-							{
-								makeInactive(question,newRow);
-								newRow.title= "<?php write('#configuration_only_if')?> [wsd]"; 
-								return "<?php write('#Inactive')?>";
-							}
-							break;
-						case "industrial_wasteTre":
-							if(as.wasteTre==0)
-							{
-								makeInactive(question,newRow);
-								newRow.title= "<?php write('#configuration_only_if')?> [wwt]"; 
-								return "<?php write('#Inactive')?>";
-							}
-							break;
-					}
-					//above code works but it should be moved
-
-					var ret="<label>"+
-							"<?php write('#no')?> "+
-							"<input name='"+question+"' type=radio value=0 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" checked></label> "+
-							"<label><?php write('#yes')?> "+
-							"<input name='"+question+"' type=radio value=1 onclick=\"updateField(Global.Configuration['Yes/No'],'"+question+"',this.value)\" "+checked+"></label> ";
-					return ret;
-				})();
-			}
-		}
-
-		function makeInactive(question,newRow)
-		{
-			Global.Configuration["Yes/No"][question]=0;
-			newRow.style.backgroundColor='#f6f6f6';
-			newRow.style.color='#aaa';
-		}
-
 		function updateUW1(newValue)
 		{
 			document.querySelector('#uw1').value=newValue;
@@ -258,45 +136,6 @@
 			select.value="custom";
 		}
 
-		function updateFuelSelection()
-		{
-			['engines_in_water','engines_in_waste','truck_transport_waste'].forEach(function(question)
-			{
-				//select the correct row in the fuel table
-				var row = document.querySelector('#fuelSelection tr[question='+question+']')
-
-				//empty the row
-				while(row.cells.length>1){row.deleteCell(-1);}
-
-				//create new select menu
-				var select = document.createElement('select');
-				row.insertCell(-1).appendChild(select);
-				select.setAttribute('onchange',"updateField(Global.Configuration.Selected['Fuel type'],'"+question+"',this.value)");
-
-				//disable the row if question is NO
-				if(Global.Configuration["Yes/No"][question]==0)
-				{
-					select.disabled=true;
-					select.parentNode.parentNode.title="<?php write('#inactive')?>";
-					select.parentNode.parentNode.className="inactive"
-				}
-				else
-					select.parentNode.parentNode.className=""
-
-				//go over fuel types
-				for(var fuel in Tables['Fuel types'])
-				{
-					var option = document.createElement('option');
-					option.innerHTML=fuel;
-					if(fuel==Global.Configuration.Selected["Fuel type"][question])
-					{
-						option.setAttribute('selected','true')
-					}
-					select.appendChild(option)
-				}
-			});
-		}
-
 		function updateCurrency()
 		{
 			document.getElementById('currency').innerHTML=Global.General.Currency
@@ -307,8 +146,6 @@
 		{
 			redisplayUW1menu();
 			updateCurrency();
-			updateQuestionsTable();
-			updateFuelSelection();
 			Sidebar.update();
 			updateResult();
 		}
@@ -380,10 +217,6 @@
 					});
 
 					Global.General.conv_kwh_co2=1;
-					for(var question in Global.Configuration['Yes/No'])
-					{
-						Global.Configuration['Yes/No'][question]=1;
-					}
 
 					init();
 				}
@@ -392,7 +225,7 @@
 	</div>
 
 	<!--right: ADDITIONAL INFO-->
-	<div class=inline style="width:50%;text-align:left;margin-left:1em">
+	<div class=inline style="width:35%;text-align:left;margin-left:1em">
 		<style> fieldset{margin:0 0 1.4em 0;padding:0.9em;border:1px solid #aaa} </style>
 		<!--conv_kwh_co2-->
 		<fieldset>
@@ -414,33 +247,6 @@
 			<legend><?php write('#currency')?>: <span id=currency style="color:black;font-weight:bold"></span></legend>
 			<?php write('#configuration_new_currency')?>:
 			<input size=3 maxlength=3 placeholder="ccc" onchange=updateField(Global.General,"Currency",this.value)>
-		</fieldset>
-
-		<!--questions-->
-		<fieldset>
-			<legend><?php write('#configuration_additional_questions')?> (<a href=questions.php>info</a>)</legend>
-			<table id=questions>
-				<style>
-					#questions td{padding:0.65em;border-top:none;border-left:none;border-right:none}
-					#questions tr:last-child td{border-bottom:none;}
-				</style>
-			</table>
-		</fieldset>
-
-		<!--fuel-->
-		<fieldset id=fuel>
-			<legend><?php write('#configuration_fuel_options')?> (<a href=fuelInfo.php>info</a>)</legend>
-			<table id=fuelSelection class=inline>
-				<style>
-					#fuelSelection tr.inactive {background:#f6f6f6;color:#aaa}
-					#fuelSelection td {border-left:none;border-right:none}
-					#fuelSelection tr:last-child td {border:none}
-					#fuelSelection tr:first-child td {border:none}
-				</style>
-				<tr question=engines_in_water>     <td><?php write('#Water')?> (<?php write('#configuration_engines')?>)
-				<tr question=engines_in_waste>     <td><?php write('#Waste')?> (<?php write('#configuration_engines')?>)
-				<tr question=truck_transport_waste><td><?php write('#Waste')?> (<?php write('#configuration_vehicles')?>)
-			</table>
 		</fieldset>
 	</div>
 </div>

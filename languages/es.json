@@ -93,7 +93,7 @@
 	"#configuration_new_currency" : "Escriba nueva moneda (3 letras máximo)",
 	"#configuration_additional_questions" : "Preguntas adicionales",
 	"#configuration_active_stages_error" : "No hay etapas activas. Active etapas en la tabla de la izquierda de la página.",
-	"#configuration_fuel_options" : "Opciones para combustibles",
+	"#configuration_fuel_options" : "Tipo de combustible",
 	"#configuration_stage" : "Etapa",
 	"#configuration_selected_fuel" : "Combustible seleccionado",
 	"#configuration_engines" : "Grupo electrógeno",
@@ -249,7 +249,6 @@
 	"#producing_energy_waterAbs" : "¿Produce energía en la etapa de Captación",
 	"#topographic_energy" : "¿Quiere investigar la energía topográfica (Distribución)",
 	"#truck_transport_waste" : "¿Usa transporte en camiones para llevar los lodos al sitio de disposición",
-	"#industrial_wasteTre" : "¿Hay usuarios industriales conectados al sistema de colectores sin pre-tratamiento",
 	"#producing_biogas" : "¿Está produciendo biogás",
 	"#valorizing_biogas" : "¿Está valorizando biogás",
 

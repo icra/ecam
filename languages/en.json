@@ -93,7 +93,7 @@
 	"#configuration_new_currency" : "Write new currency (3 letters max)",
 	"#configuration_additional_questions" : "Additional questions",
 	"#configuration_active_stages_error" : "There are no active stages. Click on the left table to activate them.",
-	"#configuration_fuel_options" : "Fuel options",
+	"#configuration_fuel_options" : "Fuel type",
 	"#configuration_stage" : "Stage",
 	"#configuration_selected_fuel" : "Selected Fuel type",
 	"#configuration_engines" : "Engines",
@@ -226,7 +226,7 @@
 	"#todo_task" : "Task",
 	"#todo_status" : "Status",
 
-	"#fuelInfo_description" : "Depending on which fuel you select in your stages, the following emission factors will be applied",
+	"#fuelInfo_description" : "Depending on the fuel you select, the following emission factors will be applied in the equations",
 	"#fuelInfo_eeff" : "Emission Factors (EF) for different fuel types (table 6.3 IPCC vol 6)",
 	"#fuelInfo_type" : "Fuel type",
 	"#fuelInfo_engines" : "engines",
@@ -249,7 +249,6 @@
 	"#producing_energy_waterAbs" : "Are you producing energy in Abstraction stage",
 	"#topographic_energy" : "Do you want to investigate topographic energy (Distribution)",
 	"#truck_transport_waste" : "Are you using truck transport to convey sludge to disposal site",
-	"#industrial_wasteTre" : "Are industrial users connected to the sewer system without pre-treatment",
 	"#producing_biogas" : "Are you producing biogas",
 	"#valorizing_biogas" : "Are you valorizing biogas",
 

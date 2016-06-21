@@ -4,7 +4,7 @@ var Global = {
 		"Name":                    "Unnamed system",
 		"Location":                "Canada, Europe, Russia, Oceania",
 		"Assessment Period Start": "2016-01-01",
-		"Assessment Period End":   "2016-01-31",
+		"Assessment Period End":   "2017-01-01",
 		"Comments":                "",
 		"Currency":                "USD",
 		"conv_kwh_co2":            0,  /** conversion factor for grid electricity () */
@@ -158,7 +158,6 @@ var Global = {
 		"ww_biog_pro":0,
 		"ww_biog_val":0,
 		c_ww_bod_rmvd:function(){return this.ww_bod_infl-this.ww_bod_effl},
-
 		c_ww_biogas_flar:function()
 		{
 			if(this.ww_biog_pro==0)
@@ -171,28 +170,23 @@ var Global = {
 			else
 				return this.ww_biog_pro-this.ww_biog_val;
 		},
-		c_ww_nrg_engines     :function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].engines_in_waste]; return this.ww_vol_fuel*fuel.FD/1000*fuel.NCV/1000; },
-		c_ww_nrg_tsludge     :function(){return this.ww_num_trip*2*this.ww_dist_dis*0.25*0.84*43/1000000/1000},
-		c_ww_in_dilution     :function(){if(this.Treatment.wwt_vol_trea==0) return 0; else return this.Treatment.wwt_vol_trea-this.ww_vol_coll*this.ww_serv_pop/this.ww_conn_pop},
-
-		ww_KPI_GHG_elec	     :function(){return this.ww_nrg_cons*Global.General.conv_kwh_co2},
-		ww_KPI_GHG_ne_engines:function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].engines_in_waste]; return this.c_ww_nrg_engines()*(fuel.EFCO2+34*fuel.EFCH4.engines+298*fuel.EFN2O.engines) }, //old c_ww57
-		ww_KPI_GHG_ne_tsludge:function(){return this.c_ww_nrg_tsludge()*(74100+34*3.9+298*3.9)},       //old c_ww54
-
-		ww_KPI_GHG_ne_ch4_wwt:function(){return ((this.ww_bod_infl-this.ww_bod_slud-this.ww_bod_effl)*this.ww_ch4_efac+0.02*this.c_ww_biogas_flar()*0.59*0.66)*34}, //old c_ww55
-		ww_KPI_GHG_ne_n2o_tre:function(){return 298*this.ww_n2o_effl*0.005*44/28}, //old c_ww53
-
-		ww_KPI_GHG_ne_ch4_unt:function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_bod_pday/1000*Global.General.Days()*0.06*34},                   //old c_ww52
-		ww_KPI_GHG_ne_n2o_unt:function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_prot_con*Global.General.Years()*0.16*1.1*1.25*0.005*44/28*298}, //old c_ww51
-
-		ww_KPI_GHG_ne:  function(){return this.ww_KPI_GHG_ne_ch4_wwt()+this.ww_KPI_GHG_ne_n2o_tre()+this.ww_KPI_GHG_ne_tsludge()+this.ww_KPI_GHG_ne_ch4_unt()+this.ww_KPI_GHG_ne_n2o_unt()+this.ww_KPI_GHG_ne_engines()}, 
-		ww_KPI_GHG:     function(){return this.ww_KPI_GHG_elec()+this.ww_KPI_GHG_ne()},
-
-		ww_SL_nrg_cost: function(){return 100*this.ww_nrg_cost/this.ww_run_cost},
-		ww_SL_serv_pop: function(){return 100*Global.Waste.ww_serv_pop/Global.Waste.ww_resi_pop},
-		ww_SL_vol_pday: function(){return 1000*this.ww_vol_wwtr/this.ww_serv_pop/Global.General.Days()},
-		ww_SL_treat_m3: function(){return 100*this.ww_serv_pop/this.ww_conn_pop},
-		ww_SL_dilution: function(){return 100*this.c_ww_in_dilution()/this.ww_vol_coll},
+		c_ww_nrg_engines     : function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].engines_in_waste]; return this.ww_vol_fuel*fuel.FD/1000*fuel.NCV/1000; },
+		c_ww_nrg_tsludge     : function(){return this.ww_num_trip*2*this.ww_dist_dis*0.25*0.84*43/1000000/1000},
+		c_ww_in_dilution     : function(){if(this.Treatment.wwt_vol_trea==0) return 0; else return this.Treatment.wwt_vol_trea-this.ww_vol_coll*this.ww_serv_pop/this.ww_conn_pop},
+		ww_KPI_GHG_elec	     : function(){return this.ww_nrg_cons*Global.General.conv_kwh_co2},
+		ww_KPI_GHG_ne_engines: function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['Fuel type'].engines_in_waste]; return this.c_ww_nrg_engines()*(fuel.EFCO2+34*fuel.EFCH4.engines+298*fuel.EFN2O.engines) }, //old c_ww57
+		ww_KPI_GHG_ne_tsludge: function(){return this.c_ww_nrg_tsludge()*(74100+34*3.9+298*3.9)},       //old c_ww54
+		ww_KPI_GHG_ne_ch4_wwt: function(){return ((this.ww_bod_infl-this.ww_bod_slud-this.ww_bod_effl)*this.ww_ch4_efac+0.02*this.c_ww_biogas_flar()*0.59*0.66)*34}, //old c_ww55
+		ww_KPI_GHG_ne_n2o_tre: function(){return 298*this.ww_n2o_effl*0.005*44/28}, //old c_ww53
+		ww_KPI_GHG_ne_ch4_unt: function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_bod_pday/1000*Global.General.Days()*0.06*34},                   //old c_ww52
+		ww_KPI_GHG_ne_n2o_unt: function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_prot_con*Global.General.Years()*0.16*1.1*1.25*0.005*44/28*298}, //old c_ww51
+		ww_KPI_GHG_ne:         function(){return this.ww_KPI_GHG_ne_ch4_wwt()+this.ww_KPI_GHG_ne_n2o_tre()+this.ww_KPI_GHG_ne_tsludge()+this.ww_KPI_GHG_ne_ch4_unt()+this.ww_KPI_GHG_ne_n2o_unt()+this.ww_KPI_GHG_ne_engines()}, 
+		ww_KPI_GHG:            function(){return this.ww_KPI_GHG_elec()+this.ww_KPI_GHG_ne()},
+		ww_SL_nrg_cost:        function(){return 100*this.ww_nrg_cost/this.ww_run_cost},
+		ww_SL_serv_pop:        function(){return 100*Global.Waste.ww_serv_pop/Global.Waste.ww_resi_pop},
+		ww_SL_vol_pday:        function(){return 1000*this.ww_vol_wwtr/this.ww_serv_pop/Global.General.Days()},
+		ww_SL_treat_m3:        function(){return 100*this.ww_serv_pop/this.ww_conn_pop},
+		ww_SL_dilution:        function(){return 100*this.c_ww_in_dilution()/this.ww_vol_coll},
 
 		"Collection":{
 			"wwc_nrg_cons":0,
@@ -335,26 +329,24 @@ var Global = {
 
 		Selected:
 		{
+			"Country":"Africa", //check where i use this TODO
 			"Fuel type":
 			{
 				engines_in_water      : "Diesel",
 				engines_in_waste      : "Diesel",
 				truck_transport_waste : "Diesel",
 			},
-			"Country"      : "Africa",
-			"Technologies" : {"waterTre":"None","wasteTre":"None"},
 		},
 
 		"Yes/No":
 		{
-			engines_in_water:0,
-			engines_in_waste:0,
-			truck_transport_waste:0,
+			engines_in_water:1,
+			engines_in_waste:1,
+			truck_transport_waste:1,
 			producing_biogas:0,
 			valorizing_biogas:0,
 			producing_energy_waterAbs:0,
 			topographic_energy:0,
-			industrial_wasteTre:0,
 		},
 	},
 }

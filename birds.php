@@ -7,8 +7,8 @@
 		table#inputs tr.hidden {display:none}
 		table#inputs tr[indic]{text-align:center;color:#999;background:#eee}
 		table#inputs th{text-align:left}
-		table#inputs td,
-		table#inputs th{border-left:none;border-right:none}
+		table#inputs td {border-left:none;border-right:none;border-bottom:none}
+		#inputs th{border:none}
 	</style>
 	<script>
 		function init()
@@ -25,12 +25,6 @@
 			Graphs.graph1(false,'graph1');
 			Graphs.graph2(false,'graph2');
 			Graphs.ws_nrg_cost(false,'ws_nrg_cost_graph');
-			/**
-			Graphs.graph3a(false,'graph3a');
-			Graphs.graph3b(false,'graph3b');
-			Graphs.graph3c(false,'graph3c');
-			Graphs.graph3d(false,'graph3d');
-			**/
 		}
 
 		var BEV={}; //'Birds Eye View' namespace

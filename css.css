@@ -173,15 +173,14 @@ span.estimated{color:red;font-size:16px;cursor:help}
 	.card{
 		border-radius:0em;
 		border:1px solid #bbb;
-		margin-bottom:0.5em;
 		transition:all 0.2s linear;
-		margin:5px 2px 8px 5px;
+		margin:5px 4px 7px 5px;
 		max-height:1200px;
 		background:white;
 		opacity:0.98;
 		border-bottom:2px solid #bbb;
 	}
-	.card:hover { border-color:#666; }
+	.card:active { border-color:#666; }
 	.card.folded{ max-height:3.0em; overflow:hidden; }
 	.card.folded > *:nth-child(n+2) { opacity:0; }
 	.card .menu {
@@ -193,6 +192,7 @@ span.estimated{color:red;font-size:16px;cursor:help}
 	.card .menu button {
 		margin-left:-1px;
 		margin-top:-1px;
+		border-radius:0;
 	}
 	.card        .menu button:before {content:"v";}
 	.card.folded .menu button:before {content:">";}

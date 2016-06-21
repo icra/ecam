@@ -18,8 +18,9 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
-		td.input input { margin:0;padding:0;width:95%;}
-		td.input { width:80px;text-align:right;color:#666;cursor:cell;transition:all 0.5s}
+		body{background:#F5ECCE}
+		td.input input {text-align:right;margin:0;padding:0;width:95%;height:100%}
+		td.input {width:80px;text-align:right;color:#666;cursor:cell;line-height:1em}
 		tr:not([hl=yes]) td.input {background-color:#eee;}
 
 		table#inputs tr:hover  {background:#ccc;}
@@ -84,6 +85,7 @@
 		 */
 		function transformField(element)
 		{
+			element.style.padding=0
 			element.removeAttribute('onclick')
 			var field=element.parentNode.getAttribute('field')
 			element.innerHTML=""
@@ -92,7 +94,10 @@
 			input.classList.add('input')
 			input.autocomplete='off'
 			input.onblur=function(){updateField(field,input.value)}
-			input.onkeypress=function(event) { if(event.which==13) {input.onblur()} }
+			input.onkeypress=function(event)
+			{ 
+				if(event.which==13)input.onblur() //somehow creates an error but does not affect to anything
+			}
 			//value converted
 			var multiplier = Units.multiplier(field);
 			var currentValue = CurrentLevel[field]/multiplier;
@@ -103,6 +108,14 @@
 				{
 					case 38: input.value++;break;
 					case 40: input.value--;break;
+					case 9: //TAB
+						setTimeout(function()
+						{
+							var el=document.querySelector('#inputs tr[field='+field+']').nextSibling.childNodes[1];
+							if(el)
+								el.onclick();
+						},100);
+						break;
 				}
 			}
 			element.appendChild(input)
@@ -660,23 +673,63 @@
 			?>
 		}
 
+		function updateFuelSelection()
+		{
+			var rows = document.querySelectorAll('#fuelSelection tr[question]')
+			for(var i=0;i<rows.length;i++)
+			{
+				var row = rows[i];
+				if(row==null)continue;
+				var question = row.getAttribute('question');
+
+				//empty the row
+				while(row.cells.length>1){row.deleteCell(-1);}
+
+				//create new select menu
+				var select = document.createElement('select');
+				row.insertCell(-1).appendChild(select);
+				select.setAttribute('onchange',"Global.Configuration.Selected['Fuel type']['"+question+"']=this.value;init()");
+
+				//disable the row if question is NO
+				if(Global.Configuration["Yes/No"][question]==0)
+				{
+					select.disabled=true;
+					select.parentNode.parentNode.title="<?php write('#inactive')?>";
+					select.parentNode.parentNode.className="inactive"
+				}
+				else
+					select.parentNode.parentNode.className=""
+
+				//go over fuel types
+				for(var fuel in Tables['Fuel types'])
+				{
+					var option = document.createElement('option');
+					option.innerHTML=fuel;
+					if(fuel==Global.Configuration.Selected["Fuel type"][question])
+					{
+						option.setAttribute('selected','true')
+					}
+					select.appendChild(option)
+				}
+			}
+		}
+
 		/** Update all */
 		function init()
 		{
-			updateQuestionsTable();
-			updateInputs();
-			updateOutputs();
-			updateNrgOutputs();
-			updateOtherOutputs();
-			Exceptions.apply();
-			//when user updates any input, trigger this:
-			try{drawCharts();}
-			catch(e) { console.log(e); }
-			updateResult();
+			updateQuestionsTable()
+			updateInputs()
+			updateOutputs()
+			updateNrgOutputs()
+			updateOtherOutputs()
+			Exceptions.apply()
+			updateFuelSelection()
+			try{drawCharts()}
+			catch(e){console.log(e)}
+			updateResult()
 		}
 	</script>
-
-</head><body onload=init() style=background:#fdfdfd><center>
+</head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear diagram--><?php include'linear.php'?>
@@ -702,6 +755,7 @@
 	$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (".$lang_json['#energy_performance'].")</span>" : "<span style=color:black>$titleLevel</span>";
 ?>
 <style> h1 {text-align:left;padding-left:17em;line-height:2.1em;border-bottom:1px solid #ccc;background:white} </style>
+
 <h1><a href=stages.php><?php write('#edit_input_data')?></a> <?php echo "$sep $title"?>
 	<!--go to level 3 button-->
 	<?php
@@ -720,15 +774,9 @@
 					<span style=font-size:12px;color:#666>
 						&rarr; ";
 			write('#edit_divided_in');
-			echo"
-						<script>
-							var length = Substages['$level']['$sublevel'].length;
-							document.write(length)
-						</script> ";
+			echo" <script>document.write(Substages['$level']['$sublevel'].length)</script> ";
 			write('#substage');
-			echo "/s
-					</span>
-				</span>";
+			echo "/s </span> </span>";
 		}
 	?>
 </h1>
@@ -736,8 +784,8 @@
 <!--container-->
 <div style=text-align:left>
 	<!--questions-->
-	<div class=card style=text-align:left><?php cardMenu($lang_json['#questions'])?>
-		<table style=margin:1em id=questions> </table>
+	<div class=card style=text-align:left><?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
+		<table style=margin:1em id=questions class=inline></table>
 		<script>
 			function updateQuestionsTable()
 			{
@@ -746,8 +794,7 @@
 
 				var questions = Questions.getQuestions(CurrentLevel);
 
-				if(questions.length==0)
-					t.insertRow(-1).insertCell(-1).innerHTML="<i>N/A</i>"
+				if(questions.length==0) t.insertRow(-1).insertCell(-1).innerHTML="<i>N/A</i>"
 
 				for(var q in questions)
 				{
@@ -764,6 +811,7 @@
 						}
 
 					var newRow = t.insertRow(-1);
+					newRow.title=question
 					newRow.insertCell(-1).innerHTML=translate(question)+"?";
 					newRow.insertCell(-1).innerHTML=(function()
 					{
@@ -792,14 +840,39 @@
 			//fuel options for water and wastewater only
 			if($sublevel==false)
 			{
-				echo "fuel options here";
+				?>
+				 <table id=fuelSelection class=inline>
+					<tr><td colspan=2><?php write('#configuration_fuel_options')?> (<a href=fuelInfo.php>info</a>)</legend>
+					<style>
+						#fuelSelection {margin:1em;}
+						#fuelSelection tr.inactive {background:#f6f6f6;color:#aaa}
+					</style>
+					<?php
+						if($level=="Water")
+						{ 
+							?>
+							<tr question=engines_in_water><td><?php write('#configuration_engines')?>
+							<?php 
+						}
+						else //means if level=="Waste"
+						{
+							?>
+							<tr question=engines_in_waste>     <td><?php write('#configuration_engines')?>
+							<tr question=truck_transport_waste><td><?php write('#configuration_vehicles')?>
+							<?php 
+						}
+					?>
+				</table>
+				<?php
 			}
 		?>
 	</div>
+
+	<!--i/o-->
 	<div class=card><?php cardMenu("Inputs &amp; Outputs") ?>
 		<!--Inputs-->
 		<div class=inline style="width:45%;margin-left:2em">
-			<table id=inputs style="width:100%">
+			<table id=inputs style="width:100%;margin-bottom:1em">
 				<tr><th colspan=5 class=tableHeader>INPUTS
 				<tr>
 					<th><?php write('#edit_description')?>
@@ -867,6 +940,7 @@
 			</table>
 		</div>
 	</div>
+
 	<!--GRAPHS-->
 	<div class=card><?php cardMenu($lang_json['#graphs']) ?>
 		<div id=graph><?php write('#loading')?></div>
