@@ -151,7 +151,6 @@ var Info = {
 	"wsd_deli_pts" :{magnitude:"Number",unit:"number",},
 	"wsd_ser_cons" :{magnitude:"Number",unit:"number",},
 	"wsd_time_pre" :{magnitude:"% Time",unit:"hours/day",},
-	"wsd_vol_inje" :{magnitude:"Volume",unit:"m3",},
 	"wsd_min_pres" :{magnitude:"Pressure",unit:"m",},
 	"wsd_hi_no_el" :{magnitude:"Distance",unit:"m asl",},
 	"wsd_lo_no_el" :{magnitude:"Distance",unit:"m asl",},

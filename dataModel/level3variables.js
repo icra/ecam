@@ -48,7 +48,6 @@ Level3.list=
 		"wsd_deli_pts",
 		"wsd_ser_cons",
 		"wsd_time_pre",
-		"wsd_vol_inje",
 		"wsd_min_pres",
 		"wsd_hi_no_el",
 		"wsd_lo_no_el",

@@ -45,7 +45,8 @@
 					createLocationSelection()+
 					tableRow("<?php write('#getStarted_table_start')?>","Assessment Period Start",'input','date')+
 					tableRow("<?php write('#getStarted_table_end')?>","Assessment Period End",'input','date')+
-					"<tr><th><?php write('#getStarted_table_period')?><td>"+Global.General.Days()+" <?php write('#days')?> (<a href=variable.php?id=Days>info</a>)"+
+					"<tr><th><?php write('#getStarted_table_period')?><td>"+Global.General.Days()+" <?php write('#days')?> "+
+						"(<a href=variable.php?id=Days title='<?php echo $lang_json["#Days_expla"] ?>'>info</a>)"+
 					tableRow("<?php write('#getStarted_table_comments')?>","Comments",'textarea','date')
 			})();
 		}

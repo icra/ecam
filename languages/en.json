@@ -494,8 +494,6 @@
 	"#wsd_ser_cons_expla" : "Total number of service connections, at the reference date",
 	"#wsd_time_pre_descr" : "Time system is pressurised",
 	"#wsd_time_pre_expla" : "Amount of time of the year the system is pressurised ",
-	"#wsd_vol_inje_descr" : "Input volume for each substage",
-	"#wsd_vol_inje_expla" : "Volume injected to the water distribution stage, for each water distributionunit",
 	"#wsd_min_pres_descr" : "Minimum pressure to be supplied at the distribution nodes",
 	"#wsd_min_pres_expla" : "According the standards, a minimum pressure must be provided to the consumers (20 - 30 m) , for each water distributionunit",
 	"#wsd_hi_no_el_descr" : "Highest node elevation",

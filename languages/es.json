@@ -494,8 +494,6 @@
 	"#wsd_ser_cons_expla" : "Número total de conexiones de servicio, en la fecha de referencia",
 	"#wsd_time_pre_descr" : "Sistema de tiempo se pone a presión",
 	"#wsd_time_pre_expla" : "Cantidad de tiempo del año se presuriza el sistema",
-	"#wsd_vol_inje_descr" : "Volumen de entrada para cada subetapa",
-	"#wsd_vol_inje_expla" : "Volumen inyectado a la etapa de distribución de agua, para cada distributionunit agua",
 	"#wsd_min_pres_descr" : "Presión mínima que debe proporcionarse a los nodos de distribución",
 	"#wsd_min_pres_expla" : "Según las normas, una presión mínima debe ser proporcionada a los consumidores (20 - 30 m), para cada distributionunit agua",
 	"#wsd_hi_no_el_descr" : "Elevación del nodo más alto",
