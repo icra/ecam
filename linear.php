@@ -33,19 +33,24 @@
 		<img class=l2 stage=energy src=img/energy.png onclick=window.location="edit.php?level=Energy" title="<?php write('#energy_summary')?>"> 
 		<hr id=line>
 	</div>
+
+	<!--Opportunities-->
+	<div>
+		<span style="color:#666">Opportunities</span>
+		<img class=l1 stage=opps src=img/opps.png onclick=window.location="opps.php" title="Opportunities to reduce GHG emissions">
+	</div>
 </div>
 
 <style>
 	#linearDiagram {background:#f6f6f6;border-bottom:1px solid #ccc;padding:0.4em 0 0.4em 0}
-	#linearDiagram > div {transition:all 0.3s;display:inline-block;padding:0.2em;margin-right:-5px;border-radius:0.5em}
-	#linearDiagram > div:hover {background:#fff}
+	#linearDiagram > div {height:50px;background:#dfdfdf;vertical-align:middle;transition:all 0.3s;display:inline-block;padding:0.2em;margin-right:-2px;border-radius:0.5em}
 	#linearDiagram img {position:relative;z-index:2;cursor:pointer;margin:0 0.2em 0 0.2em;vertical-align:middle;padding:0} /*icons inside buttons to navigate to Level2*/
 	#linearDiagram img.l1 {width:43px;} 
-	#linearDiagram img.l2 {width:33px;}
+	#linearDiagram img.l2 {width:43px;}
 	#linearDiagram img{border-radius:90%;border:4px solid transparent}
 	#linearDiagram img.selected{border:4px solid lightgreen}
 	#linearDiagram img:not(.inactive):hover {border:4px solid #d7bfaf}
-	#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-21px) translateX(-15px);z-index:1;width:250px;}
+	#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(-21px);z-index:1;width:305px;}
 </style>
 
 <script>
@@ -111,6 +116,13 @@
 			document.querySelector('img[stage=dash]').classList.add('selected');
 			<?php
 		}
+		//hl opps if we are in opps.php
+		if(strpos($_SERVER['PHP_SELF'],"opps.php"))
+		{
+			?>
+			document.querySelector('img[stage=opps]').classList.add('selected');
+			<?php
+		}
 	?>
 
 	//go over images to deactivate inactives
@@ -120,7 +132,7 @@
 		for(var i=0;i<collection.length;i++)
 		{
 			var stage = collection[i].getAttribute('stage');
-			if(stage=="birds" || stage=="energy" || stage=="dash")continue;
+			if(stage=="birds" || stage=="energy" || stage=="dash" || stage=='opps')continue;
 			var isActive = Global.Configuration['Active Stages'][stage];
 			if(!isActive)
 			{
