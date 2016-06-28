@@ -328,7 +328,7 @@ var Global = {
 
 		Selected:
 		{
-			"Country":"Africa", //check where i use this TODO
+			"Country_protein":"Albania", //this is for consumed protein
 			"Fuel type":
 			{
 				engines_in_water      : "Diesel",
