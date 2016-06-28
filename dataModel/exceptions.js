@@ -1,5 +1,6 @@
 
 //variables that not behave like normal ones are treated here
+//basically: they are inputs with a list of possible values that set the number
 var Exceptions =
 {
 	//wrapper

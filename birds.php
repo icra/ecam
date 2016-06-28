@@ -13,7 +13,6 @@
 	<script>
 		function init()
 		{
-			Exceptions.apply();
 			BEV.showActive();
 			BEV.updateDefaults();
 			updateResult();

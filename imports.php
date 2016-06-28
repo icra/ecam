@@ -23,6 +23,7 @@
 <script src="dataModel/exceptions.js"></script>
 <script src="dataModel/normalization.js"></script>
 <script src="dataModel/averagedVariables.js"></script>
+<script src="dataModel/opps.js"></script>
 <script src="js/cookies.js"></script>
 <script src="js/updateGlobalFromCookies.js"></script>
 <!--graphs: import after translation--><?php include'graphs.php'?>
