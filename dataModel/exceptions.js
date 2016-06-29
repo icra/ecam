@@ -14,7 +14,8 @@ var Exceptions =
 	ww13:function()
 	{
 		var select = document.createElement('select')
-		document.querySelector('tr[field=ww_prot_con] td').appendChild(select)
+		var td = document.querySelector('tr[field=ww_prot_con] td')
+		if(td)td.appendChild(select)
 		select.id="ww13options"
 		select.onchange=function()
 		{

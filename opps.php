@@ -38,7 +38,7 @@
 			Connected population is <script>document.write(Global.Waste.ww_conn_pop)</script> people.<br>
 			Serviced population is <script>document.write(Global.Waste.ww_serv_pop)</script> people.<br>
 			If Serviced population was:
-			<input type=number id=idealServPop onchange=ww_ch4_unt(parseFloat(this.value)) style=width:30px> people,
+			<input type=number id=idealServPop onchange=ww_ch4_unt(parseFloat(this.value)) style=width:50px> people,
 			GHG emissions would be reduced by
 			<b><u><span id=ww_ch4_unt>0</span></u></b> kg CO<sub>2</sub>
 		</div></div>

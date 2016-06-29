@@ -305,25 +305,35 @@
 			#graphs table{margin:auto}
 			#graphs button{margin:0.5em;margin-top:0;font-size:10px} 
 			#graphs div{text-align:center} 
-			#graphs > div > div.inline {padding:0;margin:2px;border:1px solid #ccc}
 			#graphs div.options {text-align:center;padding:1em}
+			#graphs div[graph] {
+				display:inline-block;
+				vertical-align:top;
+				width:49%;
+				border:1px solid #ccc;
+				padding:0;margin:2px;
+			}
 		</style>
 
 		<div style=margin-top:2px;text-align:left>
-			<div id=graph1            class=inline style="width:49%"><?php write('#loading')?></div>
-			<div id=graph2            class=inline style="width:49%"><?php write('#loading')?></div>
-			<div id=ws_nrg_cost_graph class=inline style="width:49%"><?php write('#loading')?></div>
+			<div graph id=graph1><?php write('#loading')?></div>
+			<div graph id=graph2><?php write('#loading')?></div>
+			<!---->
+			<div graph>
+				placeholder: Wastewater Serviced Population
+			</div>
+			<div graph>
+				placeholder: Water Supply Serviced Population
+			</div>
+			<!---->
+			<div graph> placeholder: collected wastewater &amp; emissions related to non treated wastewater </div>
+			<div graph> placeholder: non revenue water &amp; emissions related to non revenue water </div>
+			<!---->
+			<div graph> placeholder: % of dilution &amp; emissions related to WW collection dilution </div>
+			<div graph> placeholder: authorized per capita consumption &amp; emissions related to excess per capita consumption </div>
+
+			<div graph id=ws_nrg_cost_graph class=inline style="width:49%"><?php write('#loading')?></div>
 		</div>
-		<!--
-		<div style=margin-top:2px>
-			<div id=graph3a class=inline style=width:49%><?php write('#loading')?></div>
-			<div id=graph3b class=inline style=width:49%><?php write('#loading')?></div>
-		</div>
-		<div style=margin-top:2px>
-			<div id=graph3c class=inline style=width:49%><?php write('#loading')?></div>
-			<div id=graph3d class=inline style=width:49%><?php write('#loading')?></div>
-		</div>
-		-->
 		<script>
 			google.charts.load('current',{'packages':['corechart']});
 			google.charts.setOnLoadCallback(init)
