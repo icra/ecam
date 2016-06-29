@@ -2,6 +2,7 @@
 	<?php include'imports.php'?>
 	<style>
 		table#table{width:90%}
+		table#table td {max-width:100px}
 		button.button{margin:1px}
 		button.l2{font-size:10px}
 		table.ww th{background:#bf5050}
@@ -34,6 +35,8 @@
 
 				//code
 				newRow.insertCell(-1).innerHTML=field
+				//name
+				newRow.insertCell(-1).innerHTML=translate(field+'_descr');
 				//type
 				newRow.insertCell(-1).innerHTML=(function()
 				{
@@ -44,14 +47,27 @@
 						case "function": return "PI";    break;
 					}
 				})();
-				//name
-				newRow.insertCell(-1).innerHTML=translate(field+'_descr');
+
+				//value
+				newRow.insertCell(-1).innerHTML=(function()
+				{
+					switch(type)
+					{
+						case "number":
+							return format(obj[field]);
+							break;
+						case "function": 
+							return format(obj[field]());
+							break;
+					}
+				})();
+
 				//formula or default value
 				newRow.insertCell(-1).innerHTML=(function()
 				{
 					switch(type)
 					{
-						case "number":return obj[field];break;;
+						case "number":return "--";break;;
 						case "function": 
 							var formula=obj[field].toString();
 							(function()
@@ -71,7 +87,7 @@
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
 			var newTh=document.createElement('th');
-			newTh.setAttribute('colspan',6)
+			newTh.setAttribute('colspan',7)
 			newTh.style.borderBottom='none';
 			newTh.style.borderTop='none';
 			newRow.appendChild(newTh);
@@ -161,16 +177,17 @@
 </button>
 
 <!--info table-->
-<table id=table style=margin-top:0.5em>
-	<tr><th colspan=6 style=font-size:18px><?php write('#export_no_stage_selected')?>
+<table id=table style="margin-top:0.5em;width:95%">
+	<tr><th colspan=7 style=font-size:18px><?php write('#export_no_stage_selected')?>
 	<tr>
 		<th><?php write('#export_code')?>
-		<th><?php write('#export_type')?>
 		<th><?php write('#export_name')?>
-		<th><?php write('#export_form')?>
+		<th><?php write('#export_type')?>
+		<th>Current value
+		<th>Formula
 		<th><?php write('#export_unit')?>
 		<th><?php write('#export_desc')?>
-	<tr><td colspan=6 style="text-align:center;">
+	<tr><td colspan=7 style="text-align:center;">
 		<?php write('#export_click_on_a_stage')?>
 </table>
 
