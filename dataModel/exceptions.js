@@ -224,13 +224,33 @@ var Exceptions =
 
 	ww_ch4_efac:function()
 	{
-		var options=document.querySelectorAll('#ww_ch4_efac_options option');
-		for(var i=0;i<options.length;i++)
+		var select = document.createElement('select')
+		var td = document.querySelector('tr[field=ww_ch4_efac] td')
+		if(td){
+			td.appendChild(document.createElement('br'))
+			td.appendChild(select)
+		}
+		select.id="ww_ch4_efac_options"
+		select.onchange=function()
 		{
-			if(parseFloat(options[i].value)==Global.Waste.ww_ch4_efac)
-			{
-				options[i].selected='true'; break;
-			}
+			Global.Waste.ww_ch4_efac=parseFloat(select.value)
+			init()
+		}
+		var options = {
+			"Well managed":0.00,
+			"Minor poorly aerated zones":0.06,
+			"Some aerated zones":0.12,
+			"Not well managed":0.18,
+		}
+		for(var op in options)
+		{
+			var option = document.createElement('option');
+			var value = options[op]
+			select.appendChild(option);
+			option.value=value
+			option.innerHTML=op+" ("+value+")"
+			if(Global.Waste.ww_ch4_efac==value)
+				option.selected=true
 		}
 	},
 }

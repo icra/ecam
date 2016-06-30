@@ -42,7 +42,6 @@
 <!--LOGOS-->
 <div style="background:#fff;padding:0;margin:0">
 	<!--giz--><img src=img/giz.png>
-	<!--bmb--><img src=img/BMUB.png width=13%>
 </div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

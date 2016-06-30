@@ -4,10 +4,11 @@
 		function init()
 		{
 			document.querySelector('#idealServPop').value=Global.Waste.ww_serv_pop
-			ww_ch4_unt(Global.Waste.ww_serv_pop)
+			setServPop(Global.Waste.ww_serv_pop)
 		}
 
-		function ww_ch4_unt(idealServPop)
+		//untreated wastewater
+		function setServPop(idealServPop)
 		{
 			if(idealServPop>Global.Waste.ww_conn_pop)
 			{
@@ -15,8 +16,10 @@
 				document.querySelector('#idealServPop').value=Global.Waste.ww_conn_pop
 				return;
 			}
-			var reduction = Opps.Waste.ww_ch4_unt(idealServPop);
-			document.querySelector('#ww_ch4_unt').innerHTML=format(reduction)
+			var reduction = 0;
+			reduction +=Opps.Waste.ww_ch4_unt(idealServPop);
+			reduction +=Opps.Waste.ww_n2o_unt(idealServPop);
+			document.querySelector('#servPopReduction').innerHTML=format(reduction)
 		}
 	</script>
 </head><body onload=init()><center>
@@ -34,13 +37,19 @@
 
 <div class="card inline" style="background:#d71d24;width:45%;">
 	<?php cardMenu('Wastewater') ?>
-		<div class=card><?php cardMenu("1. Increase Serviced Population")?><div style=padding:1em;text-align:left>
-			Connected population is <script>document.write(Global.Waste.ww_conn_pop)</script> people.<br>
-			Serviced population is <script>document.write(Global.Waste.ww_serv_pop)</script> people.<br>
+		<div class=card><?php cardMenu("1. Increase Serviced Population: this reduces CH<sub>4</sub> and N<sub>2</sub>O emissions from untreated wastewater")?><div style=padding:1em;text-align:left>
+			Connected population is <b><script>document.write(Global.Waste.ww_conn_pop)</script></b> people.<br>
+			Serviced population is <b><script>document.write(Global.Waste.ww_serv_pop)</script></b> people 
+			(<script>
+				(function(){
+					var percentage = 100*Global.Waste.ww_serv_pop/Global.Waste.ww_conn_pop;
+					document.write(format(percentage));
+				})();
+			</script> %).<br>
 			If Serviced population was:
-			<input type=number id=idealServPop onchange=ww_ch4_unt(parseFloat(this.value)) style=width:50px> people,
+			<input type=number min=0 id=idealServPop onchange=setServPop(parseFloat(this.value)) style=width:50px> people,
 			GHG emissions would be reduced by
-			<b><u><span id=ww_ch4_unt>0</span></u></b> kg CO<sub>2</sub>
+			<b><u><span id=servPopReduction>0</span></u></b> kg CO<sub>2</sub>
 		</div></div>
 </div>
 

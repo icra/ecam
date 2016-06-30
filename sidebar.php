@@ -120,7 +120,7 @@
 		{
 			position:fixed;
 			/*dreta*/top:0;right:0;z-index:999;
-			/*esquerra*/top:57px;left:0;z-index:999;
+			/*esquerra*/top:51px;left:0;z-index:999;
 			background:white;
 			padding:0;margin:0;
 			box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);

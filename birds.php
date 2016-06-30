@@ -23,7 +23,17 @@
 		{
 			Graphs.graph1(false,'graph1');
 			Graphs.graph2(false,'graph2');
-			Graphs.ws_nrg_cost(false,'ws_nrg_cost_graph');
+			Graphs.authCon('graph3');
+			Graphs.gauge('graph4',
+				[
+					[translate("Water"),Global.Water.ws_SL_serv_pop()||0],
+					[translate("Waste"),Global.Waste.ww_SL_serv_pop()||0],
+				],translate("ws_SL_serv_pop_descr")+" (%)");
+			Graphs.progress('graph5',Global.Water.ws_SL_non_revw(),translate("ws_SL_non_revw_descr"));
+			Graphs.progress('graph6',Global.Waste.ww_SL_treat_m3(),translate("ww_SL_treat_m3_descr"));
+			Graphs.untreatedww('graph6b',"GHG emissions from untreated wastewater (kg CO2)")
+			Graphs.ws_nrg_cost(false,'graph7');
+			Graphs.progress('graph8',Global.Waste.ww_SL_dilution(),translate("ww_SL_dilution_descr"));
 		}
 
 		var BEV={}; //'Birds Eye View' namespace
@@ -302,16 +312,18 @@
 <div class="card inline" style="width:63%"><?php cardMenu($lang_json['#graphs'])?>
 	<div id=graphs>
 		<style> 
-			#graphs table{margin:auto}
+			#graphs table{text-align:left;width:80%;margin:auto}
 			#graphs button{margin:0.5em;margin-top:0;font-size:10px} 
-			#graphs div{text-align:center} 
+			#graphs div div {text-align:center;position:relative} 
 			#graphs div.options {text-align:center;padding:1em}
 			#graphs div[graph] {
 				display:inline-block;
 				vertical-align:top;
 				width:49%;
+				margin-right:-24px;
 				border:1px solid #ccc;
 				padding:0;margin:2px;
+				position:relative;
 			}
 		</style>
 
@@ -319,23 +331,20 @@
 			<div graph id=graph1><?php write('#loading')?></div>
 			<div graph id=graph2><?php write('#loading')?></div>
 			<!---->
-			<div graph>
-				placeholder: Wastewater Serviced Population
-			</div>
-			<div graph>
-				placeholder: Water Supply Serviced Population
-			</div>
+			<div graph id=graph3><?php write('#loading')?></div>
+			<div graph id=graph4><?php write('#loading')?></div>
 			<!---->
-			<div graph> placeholder: collected wastewater &amp; emissions related to non treated wastewater </div>
-			<div graph> placeholder: non revenue water &amp; emissions related to non revenue water </div>
+			<div graph id=graph5><?php write('#loading')?></div>
+			<div graph id=graph5b>nrw emissions here tbd (waiting for equation)</div>
 			<!---->
-			<div graph> placeholder: % of dilution &amp; emissions related to WW collection dilution </div>
-			<div graph> placeholder: authorized per capita consumption &amp; emissions related to excess per capita consumption </div>
-
-			<div graph id=ws_nrg_cost_graph class=inline style="width:49%"><?php write('#loading')?></div>
+			<div graph id=graph6><?php write('#loading')?></div>
+			<div graph id=graph6b>untreated ww emissions ch4 i n2o</div>
+			<!---->
+			<div graph id=graph7><?php write('#loading')?></div>
+			<div graph id=graph8><?php write('#loading')?></div>
 		</div>
 		<script>
-			google.charts.load('current',{'packages':['corechart']});
+			google.charts.load('current',{'packages':['corechart','gauge']});
 			google.charts.setOnLoadCallback(init)
 		</script>
 	</div>

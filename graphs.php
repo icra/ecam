@@ -52,7 +52,7 @@ Graphs.graph1=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		height:400,
+		height:300,
 		legend:{position:'left'},
 		title:"<?php write('#graphs_graph1')?>",
 		slices:
@@ -155,7 +155,7 @@ Graphs.graph4=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		height:400,
+		height:300,
 		legend:{position:'left'},
 		title:"<?php write('#graphs_graph4')?>",
 		slices:
@@ -240,7 +240,7 @@ Graphs.graph2=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		height:400,
+		height:300,
 		legend:{position:'left'},
 		pieHole:0.4,
 		title:"<?php write('#graphs_graph2')?>",
@@ -323,7 +323,7 @@ Graphs.graph5=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		height:400,
+		height:300,
 		legend:{position:'left'},
 		pieHole:0.3,
 		title:"<?php write('#graphs_graph5')?>",
@@ -432,7 +432,7 @@ Graphs.graph7=function(withTable,container)
 	var data=google.visualization.arrayToDataTable(DATA);
 	var options= 
 	{ 
-		height:400,
+		height:300,
 		legend:{position:'left'},
 		pieHole:0.3,
 		title:"<?php write('#graphs_graph7')?>",
@@ -546,7 +546,7 @@ Graphs.graph7=function(withTable,container)
 		var options=
 		{
 			title:"kg CO2/year",
-			height:400,
+			height:300,
 			legend:{position:'top'},
 			isStacked:true,
 			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
@@ -635,7 +635,7 @@ Graphs.graph7=function(withTable,container)
 		var options=
 		{
 			title:"kg CO2/year per serviced population",
-			height:400,
+			height:300,
 			legend:{position:'top'},
 			isStacked:true,
 			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
@@ -723,7 +723,7 @@ Graphs.graph7=function(withTable,container)
 		var options=
 		{
 			title:"kg CO2/year per resident population",
-			height:400,
+			height:300,
 			legend:{position:'top'},
 			isStacked:true,
 			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
@@ -810,7 +810,7 @@ Graphs.graph7=function(withTable,container)
 		var options=
 		{
 			title:"kg CO2 per m3",
-			height:400,
+			height:300,
 			legend:{position:'top'},
 			isStacked:true,
 			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
@@ -967,37 +967,54 @@ Graphs.sankey=function(withTable,container)
 	}
 }
 
-//new -  31 may 2016
-Graphs.gauge=function(withTable,container)
+/** Generic gauge */
+Graphs.gauge=function(container,values,header,max)
 {
-	var data = google.visualization.arrayToDataTable([
-	['Label', 'Value'],
-	['Serviced Population', Global.Water.ws_SL_serv_pop()],
-	]);
+	//inputs
+	max=max||100;
 
+	var DATA =[
+		['Label','Value'],
+	];
+	for(var i in values) //values is [ ["title",value],["title",value],... ]
+		DATA.push(values[i])
+
+	var data = google.visualization.arrayToDataTable(DATA);
 	var options = {
-		animation:{duration:500},
-		width: 800, height: 600,
+		height:150,
 		redFrom: 0, redTo: 50,
 		yellowFrom:50, yellowTo: 80,
 		greenFrom:80, greenTo: 100,
-		minorTicks: 5
+		minorTicks:5,
+		max:max,
 	};
-
-	var chart = new google.visualization.Gauge(document.getElementById(container));
-
-	chart.draw(data, options);
+	var element = document.getElementById(container)
+	var chart = new google.visualization.Gauge(element);
+	chart.draw(data,options);
+	var h = document.createElement('h3');
+	h.innerHTML=header
+	element.insertBefore(h,element.firstChild)
 }
 
-Graphs.ws_SL_serv_pop=function(withTable,container)
+Graphs.progress=function(container,value,header,color)
 {
-	var progress = document.createElement('progress');
-	progress.value=Global.Water.ws_SL_serv_pop();
-	progress.max=100;
-
+	value=value||0;
+	//container
 	var con = document.getElementById(container)
 	con.innerHTML=""
-	con.appendChild(progress)
+	//header
+	var h=document.createElement('h3');
+	h.innerHTML=header+" ("+format(value)+"%)"
+	con.appendChild(h)
+	//element
+	var pro=document.createElement('progress');
+	con.appendChild(pro)
+	pro.value=value
+	pro.max=100;
+	//css
+	pro.style.fontSize="30px"
+	pro.style.cursor="default"
+	pro.style.background="#fff"
 }
 
 Graphs.ws_nrg_cost=function(withTable,container)
@@ -1025,7 +1042,7 @@ Graphs.ws_nrg_cost=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		height:400,
+		height:300,
 		legend:{position:'left'},
 		title:"Total costs ("+(rest+ws+ww)+" "+Global.General.Currency+")",
 		slices:
@@ -1068,5 +1085,52 @@ Graphs.ws_nrg_cost=function(withTable,container)
 		document.getElementById(container).appendChild(div);
 		div.innerHTML="<button onclick=Graphs.ws_nrg_cost(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
 	}
+}
+
+Graphs.untreatedww=function(container,header)
+{
+	var ch4 = Global.Waste.ww_KPI_GHG_ne_ch4_unt()||0
+	var n2o = Global.Waste.ww_KPI_GHG_ne_n2o_unt()||0
+	var DATA=[
+		['Label','Value'],
+		['CH4',ch4],
+		['N2O',n2o],
+		['Total',ch4+n2o],
+	];
+	var data = google.visualization.arrayToDataTable(DATA);
+	var options = {
+		height:150,
+		minorTicks: 5,
+		max:Math.floor(Global.Waste.ww_KPI_GHG()),
+	};
+	var element = document.getElementById(container)
+	var chart = new google.visualization.Gauge(element);
+	chart.draw(data,options);
+	var h = document.createElement('h3');
+	h.innerHTML=header
+	element.insertBefore(h,element.firstChild)
+}
+
+Graphs.authCon=function(container)
+{
+	var DATA=[
+		['Label','Value'],
+		[Info["ws_SL_auth_con"].unit,Global.Water.ws_SL_auth_con()||0],
+	];
+	var data = google.visualization.arrayToDataTable(DATA);
+	var options = {
+		height:150,
+		minorTicks: 5,
+		max:500,
+		greenFrom:0, greenTo: 100,
+		yellowFrom:100, yellowTo:400,
+		redFrom:400, redTo:500,
+	};
+	var element = document.getElementById(container)
+	var chart = new google.visualization.Gauge(element);
+	chart.draw(data,options);
+	var h = document.createElement('h3');
+	h.innerHTML=translate("ws_SL_auth_con_descr")+" ("+Info['ws_SL_auth_con'].unit+")"
+	element.insertBefore(h,element.firstChild)
 }
 </script>

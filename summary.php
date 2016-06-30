@@ -28,7 +28,6 @@
 			updateLevel1();
 			updateLevel2();
 			updateCounts();
-			Exceptions.apply();
 			updateResult();
 		}
 

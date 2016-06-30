@@ -28,5 +28,9 @@
 	<a href=help.php>
 		<?php write("#help")?>
 	</a>
+	·
+	<a href=mailto:WaCCliM@iwahq.com>
+		Contact
+	</a>
 </div>
 
