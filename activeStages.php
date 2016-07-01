@@ -25,8 +25,8 @@
 
 	aass.printCell=function(stage,colspan)
 	{
-		var color = Global.Configuration["Active Stages"][stage] ? "black" : "#ccc";
-		var background = Global.Configuration["Active Stages"][stage] ? "" : "#eee";
+		var color = Global.Configuration.ActiveStages[stage] ? "black" : "#ccc";
+		var background = Global.Configuration.ActiveStages[stage] ? "" : "#eee";
 		document.write(""+
 			"<td class=stage onmouseover=aass.hlStage('"+stage+"',1) onmouseout=aass.hlStage('"+stage+"',0) colspan="+colspan+
 				" style='text-align:center;background:"+background+";color:"+color+"'>"+

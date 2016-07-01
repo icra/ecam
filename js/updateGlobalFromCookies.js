@@ -16,22 +16,14 @@ function copyFieldsFrom(object_from,object_to)
 		*/
 		if(typeof(object_from[field])=="object")
 		{
-			//TODO stringify supresses spaces!
-			/*HOTFIX*/if(field=="ActiveStages")
-			{
-				copyFieldsFrom(object_from[field],object_to["Active Stages"]);
-				continue;
-			}
-			/*HOTFIX*/if(field=="Fueltype")
-			{
-				copyFieldsFrom(object_from[field],object_to["Fuel type"]);
-				continue;
-			}
 			copyFieldsFrom(object_from[field],object_to[field]);
 		}
 		else 
 		{
-			object_to[field]=object_from[field];
+			try
+			{
+				object_to[field]=object_from[field];
+			}catch(e){ alert(e); }
 		}
 	}
 };

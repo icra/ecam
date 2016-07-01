@@ -50,7 +50,7 @@
 			for(var i=0;i<links.length;i++)
 			{
 				var stage = links[i].getAttribute('stage');
-				if(Global.Configuration['Active Stages'][stage]==0)
+				if(Global.Configuration.ActiveStages[stage]==0)
 				{
 					links[i].parentNode.parentNode.style.backgroundColor='#eee';
 					links[i].parentNode.parentNode.title="Inactive";

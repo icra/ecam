@@ -485,6 +485,7 @@
 								}
 								else{return "";}
 							})();
+							indicator=""/**disabled for now*/
 							return indicator+" "+format(value);
 						})();
 					}

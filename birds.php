@@ -23,17 +23,21 @@
 		{
 			Graphs.graph1(false,'graph1');
 			Graphs.graph2(false,'graph2');
-			Graphs.authCon('graph3');
-			Graphs.gauge('graph4',
-				[
-					[translate("Water"),Global.Water.ws_SL_serv_pop()||0],
-					[translate("Waste"),Global.Waste.ww_SL_serv_pop()||0],
-				],translate("ws_SL_serv_pop_descr")+" (%)");
-			Graphs.progress('graph5',Global.Water.ws_SL_non_revw(),translate("ws_SL_non_revw_descr"));
-			Graphs.progress('graph6',Global.Waste.ww_SL_treat_m3(),translate("ww_SL_treat_m3_descr"));
-			Graphs.untreatedww('graph6b',"GHG emissions from untreated wastewater (kg CO2)")
-			Graphs.ws_nrg_cost(false,'graph7');
-			Graphs.progress('graph8',Global.Waste.ww_SL_dilution(),translate("ww_SL_dilution_descr"));
+			Graphs.ws_cost('graph3');
+			Graphs.ww_cost('graph4');
+			Graphs.gauge('graph5', [
+				[translate("Water"),Global.Water.ws_SL_serv_pop()||0],
+				[translate("Waste"),Global.Waste.ww_SL_serv_pop()||0],
+			], translate("ws_SL_serv_pop_descr")+" (%)");
+
+			Graphs.progress('graph6',Global.Water.ws_SL_non_revw(),translate("ws_SL_non_revw_descr"));
+			Graphs.progress('graph7',Global.Waste.ww_SL_treat_m3(),translate("ww_SL_treat_m3_descr"));
+
+			Graphs.untreatedww('graph8',"GHG emissions from untreated wastewater (kg CO2)")
+			Graphs.progress('graph9',Global.Waste.ww_SL_dilution(),translate("ww_SL_dilution_descr"));
+			return
+
+			Graphs.authCon('graph10');
 		}
 
 		var BEV={}; //'Birds Eye View' namespace
@@ -172,7 +176,7 @@
 		{
 			['water','waste'].forEach(function(stage)
 			{
-				if(Global.Configuration['Active Stages'][stage]==1)
+				if(Global.Configuration.ActiveStages[stage]==1)
 				{
 					//show all rows with stage=stage
 					var rows = document.querySelectorAll('table#inputs tr[stage='+stage+']');
@@ -223,7 +227,7 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
-<!--TITLE--><h1><?php write('#birds_quick_assessment_of')?> [<script>document.write(Global.General.Name)</script>]</h1>
+<!--TITLE--><h1><?php write('#birds_quick_assessment_of')?> <b><script>document.write(Global.General.Name)</script></b></h1>
 </center>
 
 <!--inputs-->
@@ -320,28 +324,39 @@
 				display:inline-block;
 				vertical-align:top;
 				width:49%;
-				margin-right:-24px;
+				margin:2px;
 				border:1px solid #ccc;
-				padding:0;margin:2px;
+				padding:0;
 				position:relative;
 			}
 		</style>
 
-		<div style=margin-top:2px;text-align:left>
+		<div style=margin-top:2px;text-align:center>
 			<div graph id=graph1><?php write('#loading')?></div>
 			<div graph id=graph2><?php write('#loading')?></div>
 			<!---->
 			<div graph id=graph3><?php write('#loading')?></div>
 			<div graph id=graph4><?php write('#loading')?></div>
 			<!---->
-			<div graph id=graph5><?php write('#loading')?></div>
-			<div graph id=graph5b>nrw emissions here tbd (waiting for equation)</div>
+			<div graph id=graph5 style="border:1px solid #ccc;width:99%;display:block;"></div>
+			<style>
+				/**THIS CODE HERE DEALS WITH GRAPHS.GAUGE TABLES CREATED BY GOOGLE CHARTS*/
+				#graph5 table td:nth-child(n+3){display:none;background:red !important}
+				#graph5 table td {width:100% !important}
+				#graph5 table {display:inline-block;}
+				#graph5 * {text-align:center !important}
+			</style>
+			<!---->
+			<div style="border:1px solid #ccc;width:99%;margin:auto;padding:0.7em 0 0.7em 0">
+				For further details and opportunities to reduce GHG emissions and energy consumption 
+				go to GHG Assessment and Energy Performance (see top menu &uarr;)
+			</div>
 			<!---->
 			<div graph id=graph6><?php write('#loading')?></div>
-			<div graph id=graph6b>untreated ww emissions ch4 i n2o</div>
+			<div graph id=graph7>untreated ww emissions ch4 i n2o</div>
 			<!---->
-			<div graph id=graph7><?php write('#loading')?></div>
 			<div graph id=graph8><?php write('#loading')?></div>
+			<div graph id=graph9><?php write('#loading')?></div>
 		</div>
 		<script>
 			google.charts.load('current',{'packages':['corechart','gauge']});
@@ -359,12 +374,12 @@
 			event.stopPropagation();
 			//default location to go
 			var location = "edit.php?level=Water";
-			if(Global.Configuration['Active Stages'].water==0 && Global.Configuration['Active Stages'].waste==0)
+			if(Global.Configuration.ActiveStages.water==0 && Global.Configuration.ActiveStages.waste==0)
 			{
 				alert("<?php write('#configuration_active_stages_error')?>");
 				return;
 			}
-			if(Global.Configuration['Active Stages'].water==0)
+			if(Global.Configuration.ActiveStages.water==0)
 			{
 				location = "edit.php?level=Waste";
 			}

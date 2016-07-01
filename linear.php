@@ -133,7 +133,7 @@
 		{
 			var stage = collection[i].getAttribute('stage');
 			if(stage=="birds" || stage=="energy" || stage=="dash" || stage=='opps')continue;
-			var isActive = Global.Configuration['Active Stages'][stage];
+			var isActive = Global.Configuration.ActiveStages[stage];
 			if(!isActive)
 			{
 				collection[i].src="img/"+stage+"-off.png";

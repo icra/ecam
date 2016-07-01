@@ -33,7 +33,7 @@
 			for(var i=0;i<collection.length;i++)
 			{
 				var stage = collection[i].getAttribute('stage');
-				var isActive = Global.Configuration['Active Stages'][stage];
+				var isActive = Global.Configuration.ActiveStages[stage];
 				if(!isActive)
 					collection[i].classList.add('inactive'); 
 				else
@@ -91,7 +91,7 @@
 				window.location='birds.php';
 			}
 			try{
-			reader.readAsText(file);
+				reader.readAsText(file);
 			}catch(e){alert(e)}
 	}
 

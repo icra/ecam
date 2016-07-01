@@ -183,7 +183,7 @@
 					currValueF=format(currValue);
 					newCell.title=currValue;
 					newCell.style.cursor='help';
-					return currValueF+" <span class=unit>"+unit+"</span>";
+					return currValueF+" &emsp;<span class=unit>"+unit+"</span>";
 				})();
 			}
 			else

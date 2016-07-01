@@ -471,7 +471,7 @@
 				//compute the value
 				var value = CurrentLevel[field]()/Units.multiplier(field)
 
-				/*circle indicator*/ 
+				/*circle indicator 
 				newCell=newRow.insertCell(-1);
 				newCell.style.textAlign='center';
 				newCell.innerHTML=(function()
@@ -497,6 +497,7 @@
 						return "<span style=color:#ccc>NA</span>";
 					}
 				})();
+				*/
 
 				/*description*/ 
 				newCell=newRow.insertCell(-1);
@@ -688,7 +689,7 @@
 				//create new select menu
 				var select = document.createElement('select');
 				row.insertCell(-1).appendChild(select);
-				select.setAttribute('onchange',"Global.Configuration.Selected['Fuel type']['"+question+"']=this.value;init()");
+				select.setAttribute('onchange',"Global.Configuration.Selected.FuelType['"+question+"']=this.value;init()");
 
 				//disable the row if question is NO
 				if(Global.Configuration["Yes/No"][question]==0)
@@ -705,7 +706,7 @@
 				{
 					var option = document.createElement('option');
 					option.innerHTML=fuel;
-					if(fuel==Global.Configuration.Selected["Fuel type"][question])
+					if(fuel==Global.Configuration.Selected.FuelType[question])
 					{
 						option.setAttribute('selected','true')
 					}
@@ -815,7 +816,6 @@
 					newRow.insertCell(-1).innerHTML=translate(question)+"?";
 					newRow.insertCell(-1).innerHTML=(function()
 					{
-						var as = Global.Configuration['Active Stages'];
 						var ret="<label>"+
 								"<?php write('#no')?> "+
 								"<input name='"+question+"' type=radio value=0 onclick=setQuestion('"+question+"',0) checked></label> "+
@@ -924,7 +924,7 @@
 			<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
 				<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#energy_performance')?>
 				<tr>
-					<th title=Performance style=cursor:help><?php write('#edit_benchmark')?>
+					<!--<th title=Performance style=cursor:help><?php write('#edit_benchmark')?>-->
 					<th><?php write('#edit_description')?>
 					<th><?php write('#edit_current_value')?>
 					<th><?php write('#edit_unit')?>

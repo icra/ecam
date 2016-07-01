@@ -48,7 +48,7 @@
 				{
 					/**uncheck*/elements[i].checked=false;
 					/**remove green color*/elements[i].parentNode.parentNode.style.backgroundColor="";
-					/**modifiy Active Stages*/Global.Configuration["Active Stages"][elements[i].id]=0
+					/**modifiy Active Stages*/Global.Configuration.ActiveStages[elements[i].id]=0
 				}
 			}
 
@@ -64,7 +64,7 @@
 			checkbox.parentNode.parentNode.style.backgroundColor=checkbox.checked?"lightgreen":"";
 
 			//update Active Stages
-			Global.Configuration["Active Stages"][id] = checkbox.checked ? 1 : 0;
+			Global.Configuration.ActiveStages[id] = checkbox.checked ? 1 : 0;
 
 			init();
 		}
@@ -80,12 +80,12 @@
 			updateResult();
 		}
 
-		/** Activate stages depending on Global.Configuration["Active Stages"] */
+		/** Activate stages depending on Global.Configuration.ActiveStages */
 		Configuration.activateLevels=function()
 		{
-			for(var stage in Global.Configuration["Active Stages"])
+			for(var stage in Global.Configuration.ActiveStages)
 			{
-				if(Global.Configuration["Active Stages"][stage])
+				if(Global.Configuration.ActiveStages[stage])
 				{
 					/**set checked*/document.getElementById(stage).checked=true;
 					this.activate(stage);
@@ -210,7 +210,7 @@
 					event.stopPropagation();
 					['water','waste','waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
 					{
-						Global.Configuration['Active Stages'][stage]=1;
+						Global.Configuration.ActiveStages[stage]=1;
 						var checkbox = document.getElementById(stage)
 						checkbox.checked=true;
 						checkbox.parentNode.parentNode.style.backgroundColor="lightgreen";
@@ -258,7 +258,7 @@
 		function nextPage()
 		{
 			event.stopPropagation();
-			if(Global.Configuration['Active Stages'].water==0 && Global.Configuration['Active Stages'].waste==0)
+			if(Global.Configuration.ActiveStages.water==0 && Global.Configuration.ActiveStages.waste==0)
 			{
 				alert("<?php write('#configuration_active_stages_error')?>");
 				return;

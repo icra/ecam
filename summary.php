@@ -57,7 +57,7 @@
 
 		function updateCounts()
 		{
-			for(family in Global.Configuration["Active Stages"])
+			for(family in Global.Configuration.ActiveStages)
 			{
 				var count=document.querySelectorAll("[family='"+family+"']").length;
 				if(count!=0)document.querySelector("[count='"+family+"']").innerHTML = count;
@@ -68,7 +68,7 @@
 		function tableRows(object,name,family,href)
 		{
 			//make link or not depending on active 
-			if(Global.Configuration["Active Stages"][family]==0){return "";}
+			if(Global.Configuration.ActiveStages[family]==0){return "";}
 
 			//color blue or red
 			var color = family.search('waste')==-1 ? "#00aff1" : "#bf5050";

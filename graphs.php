@@ -52,7 +52,7 @@ Graphs.graph1=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		height:300,
+		height:250,
 		legend:{position:'left'},
 		title:"<?php write('#graphs_graph1')?>",
 		slices:
@@ -155,7 +155,7 @@ Graphs.graph4=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		height:300,
+		height:250,
 		legend:{position:'left'},
 		title:"<?php write('#graphs_graph4')?>",
 		slices:
@@ -240,7 +240,7 @@ Graphs.graph2=function(withTable,container)
 	//options
 	var options= 
 	{ 
-		height:300,
+		height:250,
 		legend:{position:'left'},
 		pieHole:0.4,
 		title:"<?php write('#graphs_graph2')?>",
@@ -1017,73 +1017,99 @@ Graphs.progress=function(container,value,header,color)
 	pro.style.background="#fff"
 }
 
-Graphs.ws_nrg_cost=function(withTable,container)
+Graphs.ws_cost=function(container)
 {
 	//values
-	var ws = Global.Water.ws_nrg_cost;
-	var ww = Global.Waste.ww_nrg_cost;
-	var rest = Global.Water.ws_run_cost + Global.Waste.ww_run_cost - ws - ww;
+	var nrg = Global.Water.ws_nrg_cost;
+	var run = Global.Water.ws_run_cost-nrg;
 
 	//names
 	var names = [
-		"Energy (water)",
-		"Energy (wastewater)",
-		"Non electricity costs (water+wastewater)",
+		"Energy",
+		"Non energy",
 	];
 
 	//array graph data
 	var data=google.visualization.arrayToDataTable([
 		['type','cost [currency]'],
-		[names[0],ws  ],
-		[names[1],ww  ],
-		[names[2],rest],
+		[names[0],nrg  ],
+		[names[1],run  ],
 	]);
 
 	//options
 	var options= 
 	{ 
-		height:300,
+		height:225,
 		legend:{position:'left'},
-		title:"Total costs ("+(rest+ws+ww)+" "+Global.General.Currency+")",
+		title:"Water supply costs ("+format(run+nrg)+" "+Global.General.Currency+")",
 		slices:
 		{
 			0:{color:'#0aaff1' },
-			1:{color:'#d71d24' },
-			2:{color:'#aaa' },
+			1:{color:'#aaa' },
 		},
 	}
 	//empty container and draw
-	document.getElementById(container).innerHTML='';
-	var chart=new google.visualization.PieChart(document.getElementById(container));
+	var con=document.getElementById(container)
+	con.title="Double click here to download this chart as an image"
+	con.innerHTML='';
+	var chart=new google.visualization.PieChart(con);
 	chart.draw(data,options);
 
-	//create a table string
-	if(withTable)
-	{
-		var table=""+
-		"<table title=ws_nrg_cost>"+
-		"<button onclick=Graphs.ws_nrg_cost(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
-			"<tr><th><?php write('#graphs_slice')?><th><?php write('#graphs_formula')?><th><?php write('#graphs_value')?>"+
-			"<tr><td>"+names[0]+"<td><a href=variable.php?id=ws_nrg_cost>ws_nrg_cost</a> <td>"+format(ws)+
-			"<tr><td>"+names[1]+"<td><a href=variable.php?id=ws_run_cost>ws_run_cost</a> <td>"+format(ww)+
-			"<tr><td>"+names[2]+"<td>ws_run_cost+ww_run_cost-ws_nrg_cost-ww_nrg_cost <td>"+format(rest)+
-		"</table>"+
-		'<div class=options>'+
-		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+
-		"	<a href='graph.php?g=ws_nrg_cost'><?php write('#graphs_go_to')?></a>"+
-		'</div>'+
-		"";
-		var div=document.createElement('div');
-		div.style.fontSize="10px";
-		div.innerHTML=table;
-		document.getElementById(container).appendChild(div);
+	//double click
+	con.ondblclick=function(){
+		var a=document.createElement('a');
+		document.body.appendChild(a);
+		a.href=chart.getImageURI()
+		a.download="image.png"
+		a.click()
 	}
-	else
-	{
-		//button "show table"
-		var div=document.createElement('div');
-		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.ws_nrg_cost(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
+}
+
+Graphs.ww_cost=function(container)
+{
+	//values
+	var nrg = Global.Waste.ww_nrg_cost;
+	var run = Global.Waste.ww_run_cost-nrg;
+
+	//names
+	var names = [
+		"Energy",
+		"Non energy",
+	];
+
+	//array graph data
+	var data=google.visualization.arrayToDataTable([
+		['type','cost [currency]'],
+		[names[0],nrg],
+		[names[1],run],
+	]);
+
+	//options
+	var options= 
+	{ 
+		height:225,
+		legend:{position:'left'},
+		title:"Wastewater costs ("+format(run+nrg)+" "+Global.General.Currency+")",
+		slices:
+		{
+			0:{color:'#d71d24' },
+			1:{color:'#aaa' },
+		},
+	}
+	//empty container and draw
+	var con=document.getElementById(container)
+	con.title="Double click here to download this chart as an image"
+	con.innerHTML='';
+	var chart=new google.visualization.PieChart(con);
+	chart.draw(data,options);
+
+	//double click
+	con.ondblclick=function(){
+		var a=document.createElement('a');
+		document.body.appendChild(a);
+		a.href=chart.getImageURI()
+		a.download="image.png"
+		a.click()
 	}
 }
 

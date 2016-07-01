@@ -296,7 +296,7 @@
 	"#ws_vol_fuel_expla" : "Consumo de combustible en el suministro de agua, por ejemplo, debido al uso de generadores o dispositivos que funcionan con combustible in situ",
 	"#ws_KPI_GHG_elec_descr" : "Electricidad",
 	"#ws_KPI_GHG_elec_expla" : "Emisiones de GEI derivadas del consumo eléctrico en todas las etapas del sistema de agua potable en zonas urbanas",
-	"#ws_KPI_GHG_ne_descr"   : "Combustible",
+	"#ws_KPI_GHG_ne_descr"   : "Grupo electrógeno",
 	"#ws_KPI_GHG_ne_expla" : "Emisiones de GEI que no provienen de consumo de electricidad en todas las etapas del sistema de agua potable en zonas urbanas",
 	"#ws_KPI_GHG_descr"      : "<b>Total GEI</b>",
 	"#ws_KPI_GHG_expla" : "Emisiones de GEI totales",
