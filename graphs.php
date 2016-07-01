@@ -1121,7 +1121,7 @@ Graphs.untreatedww=function(container,header)
 		['Label','Value'],
 		['CH4',ch4],
 		['N2O',n2o],
-		['Total',ch4+n2o],
+		['CH4+N2O',ch4+n2o],
 	];
 	var data = google.visualization.arrayToDataTable(DATA);
 	var options = {

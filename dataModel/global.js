@@ -38,6 +38,11 @@ var Global = {
 		ws_SL_auth_con : function(){return 1000*this.ws_vol_auth/this.ws_serv_pop/Global.General.Days()},
 		ws_SL_non_revw : function(){if(this.Abstraction.wsa_vol_conv==0) return this.ws_non_revw; else return 100*(this.Abstraction.wsa_vol_conv-this.ws_vol_auth)/this.Abstraction.wsa_vol_conv},
 
+		ws_SL_nrw_emis : function(){ return 0 },
+		ws_SL_auc_emis : function(){ 
+			return Global.Water.ws_KPI_GHG()/Global.Water.ws_vol_auth*Global.Water.ws_SL_auth_con()*Global.Water.ws_serv_pop*Global.General.Days()/1000;
+		},
+
 		"Abstraction":{
 			"wsa_nrg_cons":0,
 			"wsa_vol_conv":0,
@@ -189,6 +194,9 @@ var Global = {
 		ww_SL_vol_pday:        function(){return 1000*this.ww_vol_wwtr/this.ww_serv_pop/Global.General.Days()},
 		ww_SL_treat_m3:        function(){return 100*this.ww_serv_pop/this.ww_conn_pop},
 		ww_SL_dilution:        function(){return 100*this.c_ww_in_dilution()/this.ww_vol_coll},
+		ww_SL_dil_emis:			   function(){ 
+			return 0 
+		},
 
 		"Collection":{
 			"wwc_nrg_cons":0,

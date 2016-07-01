@@ -349,7 +349,7 @@
 			<!---->
 			<div style="border:1px solid #ccc;width:99%;margin:auto;padding:0.7em 0 0.7em 0">
 				For further details and opportunities to reduce GHG emissions and energy consumption 
-				go to GHG Assessment and Energy Performance (see top menu &uarr;)
+				go to GHG Assessment and Energy Performance (&uarr;)
 			</div>
 			<!---->
 			<div graph id=graph6><?php write('#loading')?></div>
