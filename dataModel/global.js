@@ -33,15 +33,18 @@ var Global = {
 		ws_KPI_GHG_elec: function(){return this.ws_nrg_cons*Global.General.conv_kwh_co2},
 		ws_KPI_GHG_ne  : function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['FuelType'].engines_in_water]; return this.ws_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+298*fuel.EFN2O.engines+34*fuel.EFCH4.engines) } ,
 		ws_KPI_GHG     : function(){return this.ws_KPI_GHG_elec()+this.ws_KPI_GHG_ne()},
+
 		ws_SL_serv_pop : function(){return 100*Global.Water.ws_serv_pop/Global.Water.ws_resi_pop},
 		ws_SL_nrg_cost : function(){return 100*this.ws_nrg_cost/this.ws_run_cost},
 		ws_SL_auth_con : function(){return 1000*this.ws_vol_auth/this.ws_serv_pop/Global.General.Days()},
 		ws_SL_non_revw : function(){if(this.Abstraction.wsa_vol_conv==0) return this.ws_non_revw; else return 100*(this.Abstraction.wsa_vol_conv-this.ws_vol_auth)/this.Abstraction.wsa_vol_conv},
 
-		ws_SL_nrw_emis : function(){ return 0 },
+		ws_SL_nrw_emis : function(){ 
+			return this.ws_KPI_GHG()*this.ws_SL_non_revw()/100;
+		},
+
 		ws_SL_auc_emis : function(){ 
-			// TO DO
-			return Global.Water.ws_KPI_GHG()/Global.Water.ws_vol_auth*Global.Water.ws_SL_auth_con()*Global.Water.ws_serv_pop*Global.General.Days()/1000;
+			return this.ws_KPI_GHG()-this.ws_SL_nrw_emis();
 		},
 
 		"Abstraction":{
