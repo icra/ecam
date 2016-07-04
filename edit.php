@@ -871,7 +871,11 @@
 	<!--i/o-->
 	<div class=card><?php cardMenu("Inputs &amp; Outputs") ?>
 		<!--Inputs-->
-		<div class=inline style="width:45%;margin-left:2em">
+		<div class=inline style="width:45%;margin-left:2em;
+			<?php
+				if($level=="Energy") echo "display:none";
+			?>
+		">
 			<table id=inputs style="width:100%;margin-bottom:1em">
 				<tr><th colspan=5 class=tableHeader>INPUTS
 				<tr>

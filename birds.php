@@ -27,17 +27,10 @@
 			Graphs.ww_cost('graph4');
 			Graphs.gauge('graph5', [
 				[translate("Water"),Global.Water.ws_SL_serv_pop()||0],
-				[translate("Waste"),Global.Waste.ww_SL_serv_pop()||0],
 			], translate("ws_SL_serv_pop_descr")+" (%)");
-
-			Graphs.progress('graph6',Global.Water.ws_SL_non_revw(),translate("ws_SL_non_revw_descr"));
-			Graphs.progress('graph7',Global.Waste.ww_SL_treat_m3(),translate("ww_SL_treat_m3_descr"));
-
-			Graphs.untreatedww('graph8',"GHG emissions from untreated wastewater (kg CO2)")
-			Graphs.progress('graph9',Global.Waste.ww_SL_dilution(),translate("ww_SL_dilution_descr"));
-			return
-
-			Graphs.authCon('graph10');
+			Graphs.gauge('graph6', [
+				[translate("Waste"),Global.Waste.ww_SL_serv_pop()||0],
+			], translate("ww_SL_serv_pop_descr")+" (%)");
 		}
 
 		var BEV={}; //'Birds Eye View' namespace
@@ -338,25 +331,13 @@
 			<div graph id=graph3><?php write('#loading')?></div>
 			<div graph id=graph4><?php write('#loading')?></div>
 			<!---->
-			<div graph id=graph5 style="border:1px solid #ccc;width:99%;display:block;"></div>
-			<style>
-				/**THIS CODE HERE DEALS WITH GRAPHS.GAUGE TABLES CREATED BY GOOGLE CHARTS*/
-				#graph5 table td:nth-child(n+3){display:none;background:red !important}
-				#graph5 table td {width:100% !important}
-				#graph5 table {display:inline-block;}
-				#graph5 * {text-align:center !important}
-			</style>
-			<!---->
-			<div style="border:1px solid #ccc;width:99%;margin:auto;padding:0.7em 0 0.7em 0">
-				For further details and opportunities to reduce GHG emissions and energy consumption 
-				go to GHG Assessment and Energy Performance (&uarr;)
+			<div graph id=graph5></div>
+			<div graph id=graph6></div>
+			<div style="border:1px solid #ccc;margin:1px 3px 1px 3px">
+				For further details and opportunities to reduce GHG emissions and energy consumption go to 
+				<b>GHG Assessment</b> and 
+				<b>Energy Performance</b> (&uarr;)
 			</div>
-			<!---->
-			<div graph id=graph6><?php write('#loading')?></div>
-			<div graph id=graph7>untreated ww emissions ch4 i n2o</div>
-			<!---->
-			<div graph id=graph8><?php write('#loading')?></div>
-			<div graph id=graph9><?php write('#loading')?></div>
 		</div>
 		<script>
 			google.charts.load('current',{'packages':['corechart','gauge']});

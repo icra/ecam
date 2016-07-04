@@ -1001,6 +1001,7 @@ Graphs.progress=function(container,value,header,color)
 	value=value||0;
 	//container
 	var con = document.getElementById(container)
+	con.style.textAlign="left"
 	con.innerHTML=""
 	//header
 	var h=document.createElement('h3');
@@ -1148,15 +1149,15 @@ Graphs.authCon=function(container)
 		height:150,
 		minorTicks: 5,
 		max:500,
-		greenFrom:0, greenTo: 100,
-		yellowFrom:100, yellowTo:400,
-		redFrom:400, redTo:500,
+		greenFrom:0, greenTo: 225,
+		yellowFrom:225, yellowTo:400,
+		redFrom:400, redTo:600,
 	};
 	var element = document.getElementById(container)
 	var chart = new google.visualization.Gauge(element);
 	chart.draw(data,options);
 	var h = document.createElement('h3');
-	h.innerHTML=translate("ws_SL_auth_con_descr")+" ("+Info['ws_SL_auth_con'].unit+")"
+	h.innerHTML="Current "+translate("ws_SL_auth_con_descr")+" ("+Info['ws_SL_auth_con'].unit+")"
 	element.insertBefore(h,element.firstChild)
 }
 </script>

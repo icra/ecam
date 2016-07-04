@@ -269,6 +269,10 @@
 	"#ws_SL_nrg_cost_expla" : "Porcentaje de costes eléctricos",
 	"#ws_SL_nrw_emis_descr" : "Emisiones de GEI relacinadas con el agua no comptabilizada",
 	"#ws_SL_nrw_emis_expla" : "Emisiones de GEI relacinadas con el agua no comptabilizada",
+
+	"#ws_SL_auc_emis_descr" : "GHG emissions related to excessive water consumption",
+	"#ws_SL_auc_emis_expla" : "GHG emissions related to excessive water consumption",
+
 	"#ww_SL_serv_pop_descr" : "Población residente servida",
 	"#ww_SL_serv_pop_expla" : "Población conectada al sistema de colectores, cuya agua residual está tratada",
 	"#ww_SL_treat_m3_descr" : "Agua residual recolectada tratada",
