@@ -40,6 +40,7 @@ var Global = {
 
 		ws_SL_nrw_emis : function(){ return 0 },
 		ws_SL_auc_emis : function(){ 
+			// TO DO
 			return Global.Water.ws_KPI_GHG()/Global.Water.ws_vol_auth*Global.Water.ws_SL_auth_con()*Global.Water.ws_serv_pop*Global.General.Days()/1000;
 		},
 
