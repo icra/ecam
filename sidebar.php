@@ -120,7 +120,7 @@
 		{
 			position:fixed;
 			/*dreta*/top:0;right:0;z-index:999;
-			/*esquerra*/top:51px;left:0;z-index:999;
+			/*esquerra*/top:52px;left:0;z-index:999;
 			background:white;
 			padding:0;margin:0;
 			box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
@@ -174,6 +174,7 @@
 			<tr><td><a href=birds.php><?php write('#quick_assessment')?></a>
 			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
 			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
+			<tr><td><a href=opps.php>Opportunities</a>
 			<tr><th><?php write('#energy_performance')?>
 			<tr><td><a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction><?php write('#Abstraction')?></a>
 			<tr><td><a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment><?php write('#Treatment')?></a>

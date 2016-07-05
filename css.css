@@ -30,8 +30,8 @@ tr[hl_output=no]{background:default}
 
 span.estimated{color:red;font-size:16px;cursor:help}
 
-/*ECAM blue*/.blue{color:#00AFF1;}
-/*ECAM red*/.red{color:#d71d24;}
+/*ECAM blue*/.blue{background:#00AFF1;}
+/*ECAM red*/.red{background:#d71d24;}
 
 /*BUTTONS*/
 	.button
@@ -178,7 +178,7 @@ span.estimated{color:red;font-size:16px;cursor:help}
 		max-height:1200px;
 		background:white;
 		opacity:0.98;
-		border-bottom:2px solid #bbb;
+		overflow:auto;
 	}
 	.card:active { border-color:#666; }
 	.card.folded{ max-height:3.0em; overflow:hidden; }

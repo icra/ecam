@@ -39,7 +39,10 @@ Select graph to display
 	function drawChart() 
 	{
 		var g = '<?php echo $g ?>';
-		Graphs[g](false,'graph')
+		try{
+			Graphs[g](false,'graph')
+		}
+		catch(e){alert(e)}
 		document.querySelector('#g_select').value=g
 	}
 </script>

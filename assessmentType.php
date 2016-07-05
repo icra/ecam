@@ -1,6 +1,6 @@
 <!--inside level3.php-->
 
-<table class=inline style="font-size:13px;margin-left:2em"><tr>
+<table class=inline style="font-size:13px;margin-left:4em"><tr>
 	<th><?php write('#assessment_type')?><td>
 
 	<label>

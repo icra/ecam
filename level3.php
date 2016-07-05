@@ -18,11 +18,21 @@
 		td{text-align:left}
 		th{vertical-align:middle}
 		table#substages td:not(.level2){text-align:right}
+		table#substages tr:first-child td:first-child {
+			border-top:none;
+			border-left:none;
+			text-align:left;
+		}
+
+		table#substages td:nth-child(2) {max-width:300px}
+
 		td.input input { margin:0;padding:0;width:95%;}
 		td.input{width:80px;text-align:right;background-color:#eee;cursor:cell}
+
 		#outputs tr:hover { background:#ccc; }
 		#outputs th{background:#d7bfaf;text-align:left}
 		#outputs td, #outputs th{border-left:none;border-top:none;border-right:none}
+		#outputs td:nth-child(n+3) {text-align:right}
 		div.substageMenu{
 			padding:0.1em;
 			border:2px solid #ccc;
@@ -583,10 +593,9 @@
 </h1>
 
 <!--SUBSTAGES TABLE-->
-<div class=card><?php cardMenu("Inputs - ".$lang_json['#substages'])?>
-	<!--HELP--><h4 class=inline style=line-height:0.1em><?php write('#level3_split_this_stage')?></h4>
-	<table id=substages style=margin:1em> <tr>
-		<td colspan=2 style="text-align:center;min-width:400px;table-layout:fixed">
+<div class=card style=text-align:left><?php cardMenu("Inputs - ".$lang_json['#level3_split_this_stage'])?>
+	<table id=substages style="margin:1em;table-layout:fixed"> <tr>
+		<td colspan=2>
 			<!--substages counter-->
 			<div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle"><?php write('#substages')?>: <span id=counter>0</span></div>
 			<!--new substage button-->
@@ -595,8 +604,8 @@
 </div>
 
 <!--OUTPUTS TABLE-->
-<div class=card><?php cardMenu($lang_json['#level3_results_kpis'])?>
-	<table id=outputs class=inline style=margin-bottom:1em;background:#f6f6f6> 
+<div class=card style=text-align:left><?php cardMenu($lang_json['#level3_results_kpis'])?>
+	<table id=outputs class=inline style="margin:0 1em 1em 1em;background:#f6f6f6"> 
 		<tr><th colspan=42 style="background:white;border:none;color:black;padding-bottom:0.7em;font-size:17px">
 	</table>
 </div>

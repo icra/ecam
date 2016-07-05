@@ -29,7 +29,7 @@
 	<!--menu symbol--><span id=burger onclick="event.stopPropagation();Sidebar.toggle()">&#9776;</span>
 
 	<a href=index.php>
-		<span style=font-size:30px;margin-right:35px;>ECAM</span>
+		<span style=font-size:30px;margin-right:35px;font-weight:bold>ECAM</span>
 		<?php write('#navbar_title')?></a>
 
 	<!--language selection--><?php include'language.php'?>

@@ -23,30 +23,21 @@ function scrollTo(id)
 Graphs.graph1=function(withTable,container)
 //GHG
 {
-	//pointers
-	var years = Global.General.Years();
-
 	//values: 4 combinations with electricity/non & water/waste
-	var wsYes = Global.Water.ws_KPI_GHG_elec()/years;
-	var wsNon = Global.Water.ws_KPI_GHG_ne()/years;
-	var wwYes = Global.Waste.ww_KPI_GHG_elec()/years;
-	var wwNon = Global.Waste.ww_KPI_GHG_ne()/years;
+	var ws = Global.Water.ws_KPI_GHG()
+	var ww = Global.Waste.ww_KPI_GHG()
 
 	//names
 	var names = [
-		"<?php echo '[';write('#Water');echo '] ';write('#ws_KPI_GHG_elec_descr')?>",
-		"<?php echo '[';write('#Water');echo '] ';write('#ws_KPI_GHG_ne_descr')?>  ",
-		"<?php echo '[';write('#Waste');echo '] ';write('#ww_KPI_GHG_elec_descr')?>",
-		"<?php echo '[';write('#Waste');echo '] ';write('#ww_KPI_GHG_ne_descr')?>",
+		"<?php write('#Water');?>",
+		"<?php write('#Waste');?>",
 	];
 
 	//array graph data
 	var data=google.visualization.arrayToDataTable([
 		['<?php write('#stage')?>','<?php write('#emissions')?>'],
-		[names[0],wsYes],
-		[names[1],wsNon],
-		[names[2],wwYes],
-		[names[3],wwNon],
+		[names[0],ws],
+		[names[1],ww],
 	]);
 
 	//options
@@ -54,13 +45,11 @@ Graphs.graph1=function(withTable,container)
 	{ 
 		height:250,
 		legend:{position:'left'},
-		title:"<?php write('#graphs_graph1')?>",
+		title:"<?php write('#graphs_graph1')?> (kg CO2)",
 		slices:
 		{
-			0:{color:'#bca613' },
-			1:{color:'#453f1c' },
-			2:{color:'#89375c' },
-			3:{color:'#f08080' },
+			0:{color:'#00aff1' },
+			1:{color:'#d71d24' },
 		},
 	}
 
@@ -71,19 +60,16 @@ Graphs.graph1=function(withTable,container)
 	var chart=new google.visualization.PieChart(document.getElementById(container));
 	chart.draw(data,options);
 
-	var yy='<?php write('#years')?>'; //string
-
 	//create a table string
 	if(withTable)
 	{
 		var table=""+
 		"<table title=graph1>"+
 		"<button onclick=Graphs.graph1(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
-			"<tr><th><?php write('#graphs_slice')?>    <th><?php write('#graphs_formula')?>                                  <th><?php write('#graphs_value')?>"+
-			"<tr><td>"+names[0]+"<td><a href=variable.php?id=ws_KPI_GHG_elec>ws_KPI_GHG_elec</a>/"+yy+" <td>"+format(wsYes)+
-			"<tr><td>"+names[1]+"<td><a href=variable.php?id=ws_KPI_GHG_ne>ws_KPI_GHG_ne</a>/"+yy+"     <td>"+format(wsNon)+
-			"<tr><td>"+names[2]+"<td><a href=variable.php?id=ww_KPI_GHG_elec>ww_KPI_GHG_elec</a>/"+yy+" <td>"+format(wwYes)+
-			"<tr><td>"+names[3]+"<td><a href=variable.php?id=ww_KPI_GHG_ne>ww_KPI_GHG_ne</a>/"+yy+"     <td>"+format(wwNon)+
+			"<button onclick=\"Graphs.graph4(false,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_detailed')?></button>"+
+			"<tr><th><?php write('#graphs_slice')?><th><?php write('#graphs_formula')?><th><?php write('#graphs_value')?>"+
+			"<tr><td>"+names[0]+"<td><a href=variable.php?id=ws_KPI_GHG>ws_KPI_GHG</a><td>"+format(ws)+
+			"<tr><td>"+names[1]+"<td><a href=variable.php?id=ww_KPI_GHG>ww_KPI_GHG</a><td>"+format(ww)+
 		"</table>"+
 		'<div class=options>'+
 		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+
@@ -111,18 +97,17 @@ Graphs.graph4=function(withTable,container)
 	//Pointers
 	var ws = Global.Water;
 	var ww = Global.Waste;
-	var years = Global.General.Years();
 
 	//Values
-	var slice_1 = ws.ws_KPI_GHG_elec()/years;
-	var slice_2 = ws.ws_KPI_GHG_ne()/years;
-	var slice_3 = ww.ww_KPI_GHG_elec()/years;
-	var slice_4 = ww.ww_KPI_GHG_ne_ch4_wwt()/years;
-	var slice_5 = ww.ww_KPI_GHG_ne_n2o_tre()/years;
-	var slice_6 = ww.ww_KPI_GHG_ne_tsludge()/years;
-	var slice_7 = ww.ww_KPI_GHG_ne_ch4_unt()/years;
-	var slice_8 = ww.ww_KPI_GHG_ne_n2o_unt()/years;
-	var slice_9 = ww.ww_KPI_GHG_ne_engines()/years;
+	var slice_1 = ws.ws_KPI_GHG_elec()
+	var slice_2 = ws.ws_KPI_GHG_ne()
+	var slice_3 = ww.ww_KPI_GHG_elec()
+	var slice_4 = ww.ww_KPI_GHG_ne_ch4_wwt()
+	var slice_5 = ww.ww_KPI_GHG_ne_n2o_tre()
+	var slice_6 = ww.ww_KPI_GHG_ne_tsludge()
+	var slice_7 = ww.ww_KPI_GHG_ne_ch4_unt()
+	var slice_8 = ww.ww_KPI_GHG_ne_n2o_unt()
+	var slice_9 = ww.ww_KPI_GHG_ne_engines()
 
 	//names
 	var names=[
@@ -157,7 +142,7 @@ Graphs.graph4=function(withTable,container)
 	{ 
 		height:250,
 		legend:{position:'left'},
-		title:"<?php write('#graphs_graph4')?>",
+		title:"<?php write('#graphs_graph4')?> (kg CO2)",
 		slices:
 		{
 			0:{color:'#bca613' },
@@ -178,25 +163,24 @@ Graphs.graph4=function(withTable,container)
 	var chart=new google.visualization.PieChart(document.getElementById(container));
 	chart.draw(data,options);
 
-	var yy='<?php write('#years')?>'; //string
-
 	//tables
 	if(withTable)
 	{
 		//create a table (as a string)
 		var table=""+
 		"<button onclick=Graphs.graph4(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
+		"<button onclick=\"Graphs.graph1(false,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_detailed')?></button>"+
 		"<table title=graph4>"+
 			"<tr><th><?php write('#graphs_slice')?><th><?php write('#graphs_formula')?><th><?php write('#graphs_value')?>"+
-			"<tr><td>"+names[0]+"<td>ws_KPI_GHG_elec/"+yy+"	      <td>"+format(slice_1)+
-			"<tr><td>"+names[1]+"<td>ws_KPI_GHG_ne/"+yy+"	      <td>"+format(slice_2)+
-			"<tr><td>"+names[2]+"<td>ww_KPI_GHG_elec/"+yy+"	      <td>"+format(slice_3)+
-			"<tr><td>"+names[3]+"<td>ww_KPI_GHG_ne_ch4_wwt/"+yy+" <td>"+format(slice_4)+
-			"<tr><td>"+names[4]+"<td>ww_KPI_GHG_ne_n2o_tre/"+yy+" <td>"+format(slice_5)+
-			"<tr><td>"+names[5]+"<td>ww_KPI_GHG_ne_tsludge/"+yy+" <td>"+format(slice_6)+
-			"<tr><td>"+names[6]+"<td>ww_KPI_GHG_ne_ch4_unt/"+yy+" <td>"+format(slice_7)+
-			"<tr><td>"+names[7]+"<td>ww_KPI_GHG_ne_n2o_unt/"+yy+" <td>"+format(slice_8)+
-			"<tr><td>"+names[8]+"<td>ww_KPI_GHG_ne_engines/"+yy+" <td>"+format(slice_9)+
+			"<tr><td>"+names[0]+"<td>ws_KPI_GHG_elec	     <td>"+format(slice_1)+
+			"<tr><td>"+names[1]+"<td>ws_KPI_GHG_ne	       <td>"+format(slice_2)+
+			"<tr><td>"+names[2]+"<td>ww_KPI_GHG_elec	     <td>"+format(slice_3)+
+			"<tr><td>"+names[3]+"<td>ww_KPI_GHG_ne_ch4_wwt <td>"+format(slice_4)+
+			"<tr><td>"+names[4]+"<td>ww_KPI_GHG_ne_n2o_tre <td>"+format(slice_5)+
+			"<tr><td>"+names[5]+"<td>ww_KPI_GHG_ne_tsludge <td>"+format(slice_6)+
+			"<tr><td>"+names[6]+"<td>ww_KPI_GHG_ne_ch4_unt <td>"+format(slice_7)+
+			"<tr><td>"+names[7]+"<td>ww_KPI_GHG_ne_n2o_unt <td>"+format(slice_8)+
+			"<tr><td>"+names[8]+"<td>ww_KPI_GHG_ne_engines <td>"+format(slice_9)+
 		"</table>"+
 		'<div class=options>'+
 		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+

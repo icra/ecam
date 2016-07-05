@@ -53,9 +53,9 @@
 	"#graphs_formula" : "Formula",
 	"#graphs_value" : "Value",
 	"#graphs_detailed" : "Detailed",
-	"#graphs_graph1" : "GHG emissions (kg CO2/year)",
+	"#graphs_graph1" : "GHG emissions",
 	"#graphs_graph2" : "Energy consumption (kWh)",
-	"#graphs_graph4" : "GHG emissions (DETAILED) (kg CO2/year)",
+	"#graphs_graph4" : "GHG emissions (DETAILED)",
 	"#graphs_graph5" : "Energy consumption (DETAILED) (kWh)",
 	"#graphs_graph7" : "Energy consumption substages (kWh)",
 
@@ -115,6 +115,7 @@
 	"#birds_ws_nrg_cons" : "Energy consumed from the grid per month",
 	"#birds_ws_nrg_cost" : "Monthly energy costs",
 	"#birds_ws_run_cost" : "Monthly running costs",
+	"#birds_ws_non_revw" : "Non revenue water",
 	"#birds_ws_vol_fuel" : "Monthly volume of fuel consumed",
 	"#birds_ww_vol_wwtr" : "Treated wastewater daily flow",
 	"#birds_ww_nrg_cons" : "Energy consumed from the grid per month",
@@ -270,8 +271,8 @@
 	"#ws_SL_nrw_emis_descr" : "GHG emissions related to non revenue water",
 	"#ws_SL_nrw_emis_expla" : "GHG emissions related to non revenue water",
 
-	"#ws_SL_auc_emis_descr" : "GHG emissions related to excessive water consumption",
-	"#ws_SL_auc_emis_expla" : "GHG emissions related to excessive water consumption",
+	"#ws_SL_auc_emis_descr" : "GHG emissions related to water consumption",
+	"#ws_SL_auc_emis_expla" : "GHG emissions related to water consumption",
 
 	"#ww_SL_serv_pop_descr" : "Serviced population",
 	"#ww_SL_serv_pop_expla" : "Percentage of the resident population that are connected to the sewer systems and which wastewater is treated by the undertaking",
@@ -284,8 +285,8 @@
 	"#ww_SL_nrg_cost_descr" : "Energy costs percentage",
 	"#ww_SL_nrg_cost_expla" : "Proportion of the utility energy costs referred to the total running costs",
 
-	"#ww_SL_dil_emis_descr" : "GHG emissions related to excessive water consumption",
-	"#ww_SL_dil_emis_expla" : "GHG emissions related to excessive water consumption",
+	"#ww_SL_dil_emis_descr" : "GHG emissions related to dilution in the sewer system",
+	"#ww_SL_dil_emis_expla" : "GHG emissions related to dilution in the sewer system",
 
 	"#ws_resi_pop_descr" : "Resident population",
 	"#ws_resi_pop_expla" : "Number of permanent residents within the water utility area of service",

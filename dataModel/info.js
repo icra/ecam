@@ -37,7 +37,7 @@ var Info = {
 	ww_SL_vol_pday :{magnitude:"Volume/inhab/time",unit:"L/serv.pop./day",},
 	ww_SL_nrg_cost :{magnitude:"Percentage",unit:"%",},
 
-	ws_SL_dil_emis :{magnitude:"Mass",unit:"kgCO2e"},
+	ww_SL_dil_emis :{magnitude:"Mass",unit:"kgCO2e"},
 
 	//L1 Water Supply
 	"ws_resi_pop":{magnitude:"People",unit:"People",},

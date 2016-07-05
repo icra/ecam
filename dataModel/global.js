@@ -3,8 +3,8 @@ var Global = {
 	General:{
 		"Name":                    "Unnamed system",
 		"Location":                "Canada, Europe, Russia, Oceania",
-		"Assessment Period Start": "2016-01-01",
-		"Assessment Period End":   "2017-01-01",
+		"Assessment Period Start": "2017-01-01",
+		"Assessment Period End":   "2018-01-01",
 		"Comments":                "",
 		"Currency":                "USD",
 		"conv_kwh_co2":            0,  /** conversion factor for grid electricity () */
@@ -17,6 +17,10 @@ var Global = {
 		Years:function()
 		{
 			return this.Days()/365;
+		},
+		TotalGHG:function()
+		{
+			return Global.Water.ws_KPI_GHG()+Global.Waste.ww_KPI_GHG();
 		},
 	},
 
@@ -37,7 +41,7 @@ var Global = {
 		ws_SL_serv_pop : function(){return 100*Global.Water.ws_serv_pop/Global.Water.ws_resi_pop},
 		ws_SL_nrg_cost : function(){return 100*this.ws_nrg_cost/this.ws_run_cost},
 		ws_SL_auth_con : function(){return 1000*this.ws_vol_auth/this.ws_serv_pop/Global.General.Days()},
-		ws_SL_non_revw : function(){if(this.Abstraction.wsa_vol_conv==0) return this.ws_non_revw; else return 100*(this.Abstraction.wsa_vol_conv-this.ws_vol_auth)/this.Abstraction.wsa_vol_conv},
+		ws_SL_non_revw : function(){if(this.Abstraction.wsa_vol_conv==0) return this.ws_non_revw; else return Math.max(0,100*(this.Abstraction.wsa_vol_conv-this.ws_vol_auth)/this.Abstraction.wsa_vol_conv)},
 
 		ws_SL_nrw_emis : function(){ 
 			return this.ws_KPI_GHG()*this.ws_SL_non_revw()/100;
@@ -191,6 +195,7 @@ var Global = {
 		ww_KPI_GHG_ne_n2o_tre: function(){return 298*this.ww_n2o_effl*0.005*44/28}, //old c_ww53
 		ww_KPI_GHG_ne_ch4_unt: function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_bod_pday/1000*Global.General.Days()*0.06*34},                   //old c_ww52
 		ww_KPI_GHG_ne_n2o_unt: function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_prot_con*Global.General.Years()*0.16*1.1*1.25*0.005*44/28*298}, //old c_ww51
+		ww_KPI_GHG_ne_unt:     function(){return this.ww_KPI_GHG_ne_ch4_unt()+this.ww_KPI_GHG_ne_n2o_unt()},
 		ww_KPI_GHG_ne:         function(){return this.ww_KPI_GHG_ne_ch4_wwt()+this.ww_KPI_GHG_ne_n2o_tre()+this.ww_KPI_GHG_ne_tsludge()+this.ww_KPI_GHG_ne_ch4_unt()+this.ww_KPI_GHG_ne_n2o_unt()+this.ww_KPI_GHG_ne_engines()}, 
 		ww_KPI_GHG:            function(){return this.ww_KPI_GHG_elec()+this.ww_KPI_GHG_ne()},
 		ww_SL_nrg_cost:        function(){return 100*this.ww_nrg_cost/this.ww_run_cost},
@@ -199,7 +204,7 @@ var Global = {
 		ww_SL_treat_m3:        function(){return 100*this.ww_serv_pop/this.ww_conn_pop},
 		ww_SL_dilution:        function(){return 100*this.c_ww_in_dilution()/this.ww_vol_coll},
 		ww_SL_dil_emis:			   function(){ 
-			return 0 
+			return -1 //not implemented
 		},
 
 		"Collection":{

@@ -16,7 +16,7 @@
 
 <!--main-->
 <div id=main style="padding:0 25em 0 10em;text-align:left">
-	<!--TITLE--><h1 class=blue style="text-align:left;font-size:30px;"><b>ECAM</b> <?php write("#index_web_tool")?>
+	<!--TITLE--><h1 style="text-align:left;font-size:30px;"><b>ECAM</b> <?php write("#index_web_tool")?>
 		<span style=color:#bf5050>(beta)</span>
 	</h1>
 

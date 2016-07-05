@@ -53,9 +53,9 @@
 	"#graphs_formula" : "Formula",
 	"#graphs_value" : "Valor",
 	"#graphs_detailed" : "Detallado",
-	"#graphs_graph1" : "Emisiones de GEI (kg CO2/año)",
+	"#graphs_graph1" : "Emisiones de GEI",
 	"#graphs_graph2" : "Consumo de electricidad (kWh)",
-	"#graphs_graph4" : "Emisiones de GEI (DETALLADO) (kg CO2/año)",
+	"#graphs_graph4" : "Emisiones de GEI (DETALLADO)",
 	"#graphs_graph5" : "Consumo de electricidad (DETALLADO) (kWh)",
 	"#graphs_graph7" : "Consumo de electricidad subetapas (kWh)",
 
@@ -115,6 +115,7 @@
 	"#birds_ws_nrg_cons" : "Electricidad mensual consumida de la red",
 	"#birds_ws_nrg_cost" : "Costes eléctrico mensuales",
 	"#birds_ws_run_cost" : "Costes operacionales mensuales",
+	"#birds_ws_non_revw" : "Agua no comptabilizada",
 	"#birds_ws_vol_fuel" : "Combustible consumido mensualmente",
 	"#birds_ww_vol_wwtr" : "Agua residual tratada a diario",
 	"#birds_ww_nrg_cons" : "Electricidad mensual consumida de la red",
@@ -270,8 +271,8 @@
 	"#ws_SL_nrw_emis_descr" : "Emisiones de GEI relacinadas con el agua no comptabilizada",
 	"#ws_SL_nrw_emis_expla" : "Emisiones de GEI relacinadas con el agua no comptabilizada",
 
-	"#ws_SL_auc_emis_descr" : "GHG emissions related to excessive water consumption",
-	"#ws_SL_auc_emis_expla" : "GHG emissions related to excessive water consumption",
+	"#ws_SL_auc_emis_descr" : "GHG emissions related to water consumption",
+	"#ws_SL_auc_emis_expla" : "GHG emissions related to water consumption",
 
 	"#ww_SL_serv_pop_descr" : "Población residente servida",
 	"#ww_SL_serv_pop_expla" : "Población conectada al sistema de colectores, cuya agua residual está tratada",

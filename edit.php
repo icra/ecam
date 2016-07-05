@@ -24,10 +24,19 @@
 		tr:not([hl=yes]) td.input {background-color:#eee;}
 
 		table#inputs tr:hover  {background:#ccc;}
+
 		table#outputs tr:hover {background:#ccc;}
 		table#outputs th:not(.tableHeader) {background:#c9ab98}
+		table#outputs th:nth-child(n+2) {text-align:right}
+		table#outputs td:nth-child(n+2) {text-align:right}
+
 		table#nrgOutputs th:not(.tableHeader) {background:#c9ab98}
+		table#nrgOutputs th:nth-child(2) {text-align:right}
+		table#nrgOutputs td:nth-child(2) {text-align:right}
+
 		table#otherOutputs th:not(.tableHeader) {background:#c9ab98}
+		table#otherOutputs th:nth-child(2) {text-align:right}
+		table#otherOutputs td:nth-child(2) {text-align:right}
 		<?php
 			if($level=="Waste")
 			{?>
@@ -297,7 +306,8 @@
 				if(typeof(CurrentLevel[field])!="function")continue;
 				if(field.search(/^c_/)>=0)continue;
 				if(field.search("_KPI_GHG")==-1)continue;
-				if(field=="ww_KPI_GHG_ne")continue;
+				if(field=="ww_KPI_GHG_ne")continue; //exception
+				if(field=="ww_KPI_GHG_ne_unt")continue; //exception
 
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
@@ -332,18 +342,22 @@
 
 				/*value*/ 
 				newCell=newRow.insertCell(-1)
+				newCell.innerHTML=(function()
+				{
+					//has estimated data warning
+					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
+					// level 2 warnings
+					var l2w = Level2Warnings.isIn(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
+					return format(value)+" "+ed+" "+l2w;
+				})();
+
+				/*value per things*/
+				newCell=newRow.insertCell(-1)
 					//the first cell will be the value divided by Years
 				newCell.setAttribute('title',"("+prettyFormula+")/Years");
 				newCell.innerHTML=(function()
 				{
-
-					//has estimated data warning
-					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
-
-					// level 2 warnings
-					var l2w = Level2Warnings.isIn(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
-
-					return format(value/Global.General.Years())+" "+ed+" "+l2w;
+					return format(value/Global.General.Years());
 				})();
 
 				/*Normalization*/
@@ -436,7 +450,7 @@
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
 			var newTh=document.createElement('th');
-			newTh.setAttribute('colspan',6)
+			newTh.setAttribute('colspan',7)
 			newTh.style.borderBottom='none';
 			newTh.style.borderTop='none';
 			newRow.appendChild(newTh);
@@ -753,7 +767,7 @@
 		}
 	}
 	/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
-	$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel (".$lang_json['#energy_performance'].")</span>" : "<span style=color:black>$titleLevel</span>";
+	$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel</span>" : "<span style=color:black>$titleLevel</span>";
 ?>
 <style> h1 {text-align:left;padding-left:17em;line-height:2.1em;border-bottom:1px solid #ccc;background:white} </style>
 
@@ -764,12 +778,11 @@
 		{
 			$color = ($level=="Waste")?"lightcoral":"lightblue";
 			echo "
-				<span class=inline style='float:right;margin-right:2em'>
+				<span class=inline style='float:right;margin-right:10em'>
 					<button 
-						class=button
-						style='background:$color;font-size:12px;vertical-align:middle'
+						style='height:auto;font-size:12px;border-radius:0.3em;border:1px solid #aaa'
 						onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-							<img src=img/substages.png style='width:40px;margin-right:1em'>
+							<img src=img/substage.png style='width:30px;margin-right:1em;vertical-align:middle'>
 							".$lang_json['#substages']."	
 					</button> 
 					<span style=font-size:12px;color:#666>
@@ -831,14 +844,14 @@
 				if(newValue)
 					Global.Configuration['Yes/No'][question]=1;
 				else
-					if(confirm("Inputs that depend on this question will be set to 0. Continue?"))
+					if(confirm("Inputs that depend on this question will be set to 0."))
 						Global.Configuration['Yes/No'][question]=0;
 				init()
 			}
 		</script>
 		<?php 
 			//fuel options for water and wastewater only
-			if($sublevel==false)
+			if($sublevel==false && $level!="Energy")
 			{
 				?>
 				 <table id=fuelSelection class=inline>
@@ -909,16 +922,17 @@
 						</script> kg CO<sub>2</sub>/kWh
 				</span>
 				<tr>
-					<th><?php write('#edit_origin')?>
-					<th style=width:20%><?php write('#edit_value_per_year')?><br>kg CO<sub>2</sub>/<?php write('#year')?>
-					<th style=width:20%><?php write('#edit_per_inhab')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/inhab
-					<th style=width:20%><?php write('#edit_per_serv_pop')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/serv.pop
-					<th style=width:20%><?php write('#edit_per_water_volume')?><br>kg CO<sub>2</sub>/m<sup>3</sup>
+					<th style=width:10%><?php write('#edit_origin')?>
+					<th style=width:17%>Kg CO<sub>2</sub>
+					<th style=width:17%><?php write('#edit_value_per_year')?><br>kg CO<sub>2</sub>/<?php write('#year')?>
+					<th style=width:17%><?php write('#edit_per_inhab')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/inhab
+					<th style=width:17%><?php write('#edit_per_serv_pop')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/serv.pop
+					<th style=width:17%><?php write('#edit_per_water_volume')?><br>kg CO<sub>2</sub>/m<sup>3</sup>
 					<?php
 						if($level=="Waste" && !$sublevel)
 						{	
 							?>
-							<th style=width:20%><?php write('#edit_per_bod_removed')?><br>kg CO<sub>2</sub>eq/kg BOD
+							<th style=width:17%><?php write('#edit_per_bod_removed')?><br>kg CO<sub>2</sub>eq/kg BOD
 							<?php 
 						}
 					?>
