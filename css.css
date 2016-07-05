@@ -179,6 +179,7 @@ span.estimated{color:red;font-size:16px;cursor:help}
 		background:white;
 		opacity:0.98;
 		overflow:auto;
+		box-shadow: 0 1px 2px rgba(0,0,0,.1);
 	}
 	.card:active { border-color:#666; }
 	.card.folded{ max-height:3.0em; overflow:hidden; }
