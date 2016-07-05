@@ -235,7 +235,7 @@
 </h1></center>
 
 <!--inputs-->
-<div class="card inline" style="width:33%"><?php cardMenu("Inputs - Enter typical values from your daily operation")?>
+<div class="card inline" style="width:35%"><?php cardMenu("Inputs - Enter typical values from your daily operation")?>
 	<!--table-->
 	<table id=inputs style=width:100%>
 		<tr><th colspan=3>
