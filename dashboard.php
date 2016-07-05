@@ -12,6 +12,8 @@
 <!--linear diagram--><?php include'linear.php'?>
 <h1>Dashboard — Start</h1>
 
+<div id=main>
+
 <!--next steps-->
 <div class="card inline" style="width:49%;text-align:left"><?php cardMenu('Next steps') ?>
 	<ol style=margin:1em>
@@ -20,6 +22,8 @@
 		<li>Go to Opportunities to see the possible GHG emissions reduction
 		<li>Go to Energy performance to study energy issues
 	</ol>
+</div>
+
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>

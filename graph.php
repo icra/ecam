@@ -20,6 +20,8 @@
 <!--linear--><?php include'linear.php'?>
 <!--TITLE--><h1><?php write('#graphs')?></h1>
 
+<div id=main>
+
 <!--select-->
 Select graph to display 
 <select id=g_select onchange="window.location='graph.php?g='+this.value">
@@ -46,6 +48,8 @@ Select graph to display
 		document.querySelector('#g_select').value=g
 	}
 </script>
+
+</div>
 
 <!--foot--><?php include'footer.php'?>
 <!--json--><?php include'currentJSON.php'?>

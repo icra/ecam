@@ -35,7 +35,7 @@ var Global = {
 		"ws_vol_fuel"   :0,
 		"ws_non_revw"   :0,
 		ws_KPI_GHG_elec: function(){return this.ws_nrg_cons*Global.General.conv_kwh_co2},
-		ws_KPI_GHG_ne  : function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['FuelType'].engines_in_water]; return this.ws_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+298*fuel.EFN2O.engines+34*fuel.EFCH4.engines) } ,
+		ws_KPI_GHG_ne  : function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected['FuelType'].engines_in_water]; return this.ws_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) } ,
 		ws_KPI_GHG     : function(){return this.ws_KPI_GHG_elec()+this.ws_KPI_GHG_ne()},
 
 		ws_SL_serv_pop : function(){return 100*Global.Water.ws_serv_pop/Global.Water.ws_resi_pop},

@@ -126,6 +126,8 @@
 <!--linear diagram--><?php include'linear.php'?>
 <h1>Opportunities to reduce GHG emissions</h1>
 
+<div id=main>
+
 <!--sources of ghg-->
 <div class="card inline" style="width:28%"><?php cardMenu('Sources of GHG: Kg of CO<sub>2</sub> emitted') ?>
 	<table id=sources>
@@ -223,6 +225,8 @@
 				</div>
 			</div>
 	</div>
+</div>
+
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>

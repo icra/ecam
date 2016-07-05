@@ -150,14 +150,17 @@
 			updateResult();
 		}
 	</script>
+	<style>
+		h4{margin-bottom:2em}
+	</style>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1><?php write('#configuration')?></h1>
 <!--SUBTITLE--><h4><?php write('#configuration_subtitle')?></h4>
-<div style="padding:0;margin-bottom:1em;background:#d7bfaf;height:5px"></div>
 
-<!--container-->
+<div id=main>
+
 <div>
 	<!--left: STAGES-->
 	<div class=inline style=margin-left:auto>
@@ -276,7 +279,9 @@
 	--><button class="button next" onclick=nextPage()><?php write('#next')?></button>
 </div>
 
+</div>
+
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
 
-<script> Configuration.activateLevels(); </script>
+<script>Configuration.activateLevels()</script>

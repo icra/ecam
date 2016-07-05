@@ -6,6 +6,9 @@
 <!--NAVBAR--> <?php include'navbar.php'?>
 <!--linear--> <?php include'linear.php'?>
 <!--TITLE--><h1><?php write('#todo')?></h1>
+
+<div id=main>
+
 <!--TO DO LIST-->
 <table id=todo>
 	<tr><th><?php write('#todo_task')?><th><?php write('#todo_status')?>
@@ -17,7 +20,6 @@
 	<tr><td colspan=2 class=taskgroup>FRONT-END
 </table>
 
-<!--FOOTER--><?php include'footer.php'?>
 <script>
 	//go over all cells: color them according to status
 	(function()
@@ -36,3 +38,7 @@
 		}
 	})();
 </script>
+
+</div>
+
+<!--FOOTER--><?php include'footer.php'?>

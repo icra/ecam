@@ -8,14 +8,20 @@
 		}
 	</script>
 	<style>
-		#main *:not(button){margin:0;padding:0;padding-top:0.7em;padding-bottom:0.7em}
+		#content *:not(button){margin:0;padding:0;padding-top:0.7em;padding-bottom:0.7em}
+		#content {
+			padding:0 25em 0 10em;
+			text-align:left;
+		}
 	</style>
 </head><body onload=init()><center style=background:#bce3f8>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--navbar--><?php include"navbar.php"?>
 
 <!--main-->
-<div id=main style="padding:0 25em 0 10em;text-align:left">
+<div id=main> 
+	<div id=content>
+
 	<!--TITLE--><h1 style="text-align:left;font-size:30px;"><b>ECAM</b> <?php write("#index_web_tool")?>
 		<span style=color:#bf5050>(beta)</span>
 	</h1>
@@ -36,12 +42,11 @@
 		<li><b><?php write('#index_chrome_warning')?></b>
 		<li><?php write('#index_latest_update');echo ": ".date("F d Y, H:i:s",filemtime("index.php"))?>.
 	</ul>
+
+	</div>
+
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>
-<!--LOGOS-->
-<div style="background:#fff;padding:0;margin:0">
-	<!--giz--><img src=img/giz.png>
-</div>
-
+<!--LOGOS--> <div style=background:white;wid> <!--giz--><img src=img/giz.png> </div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

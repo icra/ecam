@@ -13,6 +13,8 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1>Benchmarking</h1>
 
+<div id=main>
+
 <div style=text-align:left;padding:0.5em>
 	<script>
 		for(var f in RefValues)
@@ -35,6 +37,8 @@
 			document.write("</div>");
 		}
 	</script>
+</div>
+
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>

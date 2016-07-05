@@ -3,7 +3,7 @@
 a{font-weight:bold;text-decoration:none}
 a,a:visited,a:hover,a:active {color:#00AFF1;font-weight:normal}
 a:hover {text-decoration:underline}
-body{font-family:'Open Sans','Helvetica',sans-serif;overflow-y:scroll;font-size:13px;}
+body{min-height:100%;height:100%;font-family:'Open Sans','Helvetica',sans-serif;overflow-y:scroll;font-size:13px;}
 button{padding:0.3em;height:2.3em}
 h1,h2,h3{padding:0.6em;color:#00aff1;font-weight:normal}
 h1{font-size:18px}
@@ -39,11 +39,6 @@ span.estimated{color:red;font-size:16px;cursor:help}
 		display: inline-block;
 		white-space: nowrap;
 		background-color: #ddd;
-		background-image: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc));
-		background-image: -webkit-linear-gradient(top, #eee, #ccc);
-		background-image: -moz-linear-gradient(top, #eee, #ccc);
-		background-image: -ms-linear-gradient(top, #eee, #ccc);
-		background-image: -o-linear-gradient(top, #eee, #ccc);
 		background-image: linear-gradient(top, #eee, #ccc);
 		border: 1px solid #777;
 		padding: 0 1.5em;
@@ -57,18 +52,11 @@ span.estimated{color:red;font-size:16px;cursor:help}
 	.button:hover
 	{
 		background-color: #eee;        
-		background-image: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#ddd));
-		background-image: -webkit-linear-gradient(top, #fafafa, #ddd);
-		background-image: -moz-linear-gradient(top, #fafafa, #ddd);
-		background-image: -ms-linear-gradient(top, #fafafa, #ddd);
-		background-image: -o-linear-gradient(top, #fafafa, #ddd);
 		background-image: linear-gradient(top, #fafafa, #ddd);
 	}
 
 	.button:active
 	{
-		-moz-box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
-		-webkit-box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
 		box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
 		position: relative;
 		top: 1px;
@@ -90,34 +78,16 @@ span.estimated{color:red;font-size:16px;cursor:help}
 		font-size: 1.5em;
 		margin: 0 1em 0 -1em;
 		padding: 0 .2em;
-		-moz-box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
-		-webkit-box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
 		box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
-		-moz-border-radius: .15em 0 0 .15em;
-		-webkit-border-radius: .15em 0 0 .15em;
 		border-radius: .15em 0 0 .15em;     
 		pointer-events: none;		
 	}
 
 	/* Buttons and inputs */
-
 	button.button
 	{ 
 		cursor: pointer;
 		overflow: visible; /* removes extra side spacing in IE */
-	}
-
-	/* removes extra inner spacing in Firefox */
-	button::-moz-focus-inner 
-	{
-		border: 0;
-		padding: 0;
-	}
-
-	/* If line-height can't be modified, then fix Firefox spacing with padding */
-	input::-moz-focus-inner 
-	{
-		padding: .4em;
 	}
 
 	/* The disabled styles */
@@ -129,8 +99,6 @@ span.estimated{color:red;font-size:16px;cursor:help}
 		cursor: default;
 		text-shadow: none;
 		position: static;
-		-moz-box-shadow: none;
-		-webkit-box-shadow: none;
 		box-shadow: none;		
 	}
 
@@ -180,7 +148,7 @@ span.estimated{color:red;font-size:16px;cursor:help}
 		opacity:0.98;
 		overflow:auto;
 		box-shadow: 0 1px 2px rgba(0,0,0,.1);
-	  box-sizing: border-box;
+		box-sizing: border-box;
 	}
 	.card:active { border-color:#666; }
 	.card.folded{ max-height:3.0em; overflow:hidden; }

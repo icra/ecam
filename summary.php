@@ -125,23 +125,21 @@
 <!--STAGES--><?php include"activeStages.php"?>
 
 <!--AVAILABLE INPUTS-->
-<div id=main>
+<div id=main style=margin-bottom:3em>
 	<style> #main *:not(h4) {text-align:left}</style>
 
 	<!--description--><h4><?php write("#summary_all_active_$type"."s")?></h4>
 
 	<!--level 1 fields-->
-	<div class=inline style="font-size:11px;max-width:48%;padding:0">
-		<table level=1>
-			<tr><th colspan=4><?php write('#ghg_assessment')?>
-		</table>
+	<div class="card inline" style="font-size:11px;max-width:49%;padding:0">
+		<?php cardMenu($lang_json['#ghg_assessment'])?>
+		<table level=1></table>
 	</div>
 
 	<!--level 2 fields-->
-	<div class=inline style="font-size:11px;max-width:48%;padding:0">
-		<table level=2>
-			<tr><th colspan=4><?php write('#energy_performance')?>
-		</table>
+	<div class="card inline" style="font-size:11px;max-width:49%;padding:0">
+		<?php cardMenu($lang_json['#energy_performance'])?>
+		<table level=2></table>
 	</div>
 </div>
 

@@ -6,8 +6,8 @@
 		background:#00aff1;
 		color:white;
 		font-size:16px;
-		border-bottom:1px solid #ccc;
 		padding:0.5em 1em 0.5em 5em;
+		box-shadow: 0 1px 2px rgba(0,0,0,.1);
 	}
 	#navbar a {color:white;}
 	#navbar a:hover {text-decoration:none}

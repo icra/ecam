@@ -61,6 +61,8 @@
 <!--linear--><?php include'linear.php'?>
 <!--TITLE--><h1>Automatic finding of potential sources of Problems (debug mode)</h1>
 
+<div id=main>
+
 <div id=problems>
 	<table>
 		<tr><td colspan=3 style=font-weight:bold>Problem 1: NOT USED INPUTS in any formula
@@ -147,6 +149,8 @@
 			}
 		})();
 	</script>
+</div>
+
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>

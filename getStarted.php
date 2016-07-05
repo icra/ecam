@@ -80,11 +80,18 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1><?php write('#getStarted_general_info')?></h1>
 <!--SUBTITLE--><h4><?php write('#getStarted_subtitle')?></h4>
-<!--FORM--><table id=form style="text-align:left;"></table>
+
+<div id=main>
+
+<!--FORM-->
+	<table id=form style="text-align:left;"></table>
+
 <!--PREV&NEXT-->
-<div style=margin:1em>
-	<button class="button prev" onclick="event.stopPropagation();window.location='index.php'"><?php write('#previous')?></button><!--
-	--><button class="button next" onclick="event.stopPropagation();window.location='configuration.php'"><?php write('#next')?></button>
+	<div style=margin:1em>
+		<button class="button prev" onclick="event.stopPropagation();window.location='index.php'"><?php write('#previous')?></button><!--
+		--><button class="button next" onclick="event.stopPropagation();window.location='configuration.php'"><?php write('#next')?></button>
+	</div>
+
 </div>
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

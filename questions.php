@@ -7,8 +7,10 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1><?php write('#questions_about')?></h1>
 
+<div id=main>
+
 <!--questions and variables hidden-->
-<table>
+<table style=margin-bottom:3em>
 	<tr><th colspan=2><?php write('#questions_question')?><th><?php write('#questions_variables_hidden')?>
 	<script>
 		for(var question in Questions)
@@ -33,5 +35,7 @@
 		}
 	</script>
 </table>
+
+</div>
 
 <!--FOOTER--><?php include'footer.php'?>

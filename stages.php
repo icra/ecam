@@ -19,8 +19,10 @@
 <hr>
 <!--SUBTITLE--><h4><?php write('#stages_this_is_an_overview_of_your_system')?> <a href=configuration.php><?php write('#configuration')?></a>.</h4>
 
+<div id=main>
+
 <!--level 3 overview-->
-<fieldset class=inline>
+<fieldset class=inline style=margin-bottom:3em>
 	<legend><?php write('#stages_system_assessment_overview')?></legend>
 	<table id=l3overview>
 		<tr><th><?php write('#stages_stage')?>
@@ -61,6 +63,8 @@
 		})();
 	</script>
 </fieldset>
+
+</div>
 
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

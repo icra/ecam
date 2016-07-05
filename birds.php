@@ -2,12 +2,14 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
+		body {background:#e9ebee}
 		table#inputs input {width:70px;transition:background 1s;border:1px solid #ccc}
 		table#inputs input.edited {background:lightgreen;}
 		table#inputs tr.hidden {display:none}
 		table#inputs tr[indic]{text-align:center;color:#999;background:#eee}
 		table#inputs th{text-align:left;border:none}
 		table#inputs td {border-left:none;border-right:none;border-bottom:none}
+		h1{background:white}
 	</style>
 	<script>
 		function init()
@@ -234,6 +236,8 @@
 	</span>
 </h1></center>
 
+<div id=main>
+
 <!--inputs-->
 <div class="card inline" style="width:35%"><?php cardMenu("Inputs - Enter typical values from your daily operation")?>
 	<!--table-->
@@ -366,6 +370,8 @@
 	</script>
 	<button class="button prev" onclick="event.stopPropagation();window.location='configuration.php'"><?php write('#previous')?></button><!--
 	--><button class="button next" onclick=nextPage()><?php write('#next')?></button>
+</div>
+
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>

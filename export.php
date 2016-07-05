@@ -148,6 +148,8 @@
 <!--TITLE--><h1><?php write('#export_title')?></h1>
 <h4><?php write('#export_description')?></h4>
 
+<div id=main style=margin-bottom:3em>
+
 <!--buttons to select stage-->
 <div class=inline>
 	<table>
@@ -190,5 +192,7 @@
 	<tr><td colspan=7 style="text-align:center;">
 		<?php write('#export_click_on_a_stage')?>
 </table>
+
+</div>
 
 <!--FOOTER--><?php include'footer.php'?>

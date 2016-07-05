@@ -22,7 +22,7 @@
 		?>
 		/** table "used to calculate" and "inputs involved" */
 		table#utc td, table#ininv td{padding:2px 5px 2px 7px;border:none}
-		span.unit{color:#aaa}
+		.unit{color:#aaa}
 	</style>
 	<script>
 		var id='<?php echo $id?>'; //make the id variable live in javascript scope
@@ -124,44 +124,52 @@
 					var ret="<table id=ininv>"
 					matches.forEach(function(match)
 					{
-						var match_localization = locateVariable(match)
-						var match_level = match_localization.level
-						var match_sublevel = match_localization.sublevel
-						var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level]
-						if(Info[match])
+						if(match.substring(0,3)=="ct_")
 						{
-							var currentUnit= (Info[match].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[match]||Info[match].unit);
+							//means this is a constant
+							ret+="<tr><td title='Constant: "+Cts[match].descr+"'><a href=constants.php>"+match+"</a>:<td>"+Cts[match].value+"<td class=unit>"+Cts[match].unit;
 						}
-						else var currentUnit = "no unit";
-						//matches can be either numbers or other functions
-						var currValue = typeof(match_stage[match])=="function" ? match_stage[match]() : match_stage[match];
-						currValueF=format(currValue);
-						var color = match.search('ww')==-1 ? "#0aaff1":"#bf5050";
-
-						//here we have to show the internal value of inputs, not the multiplied by the unit multiplier
-						var multiplier=Units.multiplier(match);
-						if(multiplier!=1)
+						else
 						{
-							var magnitude=Info[match].magnitude;
-							for(var unit in Units[magnitude])
+							var match_localization = locateVariable(match)
+							var match_level = match_localization.level
+							var match_sublevel = match_localization.sublevel
+							var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level]
+							if(Info[match])
 							{
-								if(Units[magnitude][unit]==1)
-								{
-									currentUnit=unit;
-									break;
-								}
+								var currentUnit= (Info[match].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[match]||Info[match].unit);
 							}
-							
+							else var currentUnit = "no unit";
+							//matches can be either numbers or other functions
+							var currValue = typeof(match_stage[match])=="function" ? match_stage[match]() : match_stage[match];
+							currValueF=format(currValue);
+							var color = match.search('ww')==-1 ? "#0aaff1":"#bf5050";
+
+							//here we have to show the internal value of inputs, not the multiplied by the unit multiplier
+							var multiplier=Units.multiplier(match);
+							if(multiplier!=1)
+							{
+								var magnitude=Info[match].magnitude;
+								for(var unit in Units[magnitude])
+								{
+									if(Units[magnitude][unit]==1)
+									{
+										currentUnit=unit;
+										break;
+									}
+								}
+								
+							}
+
+							var estimated = Global.Configuration.DataQuality[match]=="Estimated" ? "<span class=estimated title='<?php write('#variable_estimated')?>'>&#9888;</span>" : "";
+
+							ret+="<tr>"+
+								"<td><a style='color:"+color+"' href=variable.php?id="+match+" "+
+								"title='["+match_localization.toString()+"] "+translate(match+"_descr")+"'"+
+								">"+match+"</a>: "+
+								"<td title='"+currValue+"' style=cursor:help>"+currValueF+"<td><span class=unit>"+currentUnit+"</span> "+
+								estimated;
 						}
-
-						var estimated = Global.Configuration.DataQuality[match]=="Estimated" ? "<span class=estimated title='<?php write('#variable_estimated')?>'>&#9888;</span>" : "";
-
-						ret+="<tr>"+
-							"<td><a style='color:"+color+"' href=variable.php?id="+match+" "+
-							"title='["+match_localization.toString()+"] "+translate(match+"_descr")+"'"+
-							">"+match+"</a>: "+
-							"<td title='"+currValue+"' style=cursor:help>"+currValueF+"<td><span class=unit>"+currentUnit+"</span> "+
-							estimated;
 					});
 					ret+="</table>";
 					return ret;
@@ -369,6 +377,13 @@
 
 <!--subtitle--><h4><?php write('#variable_detailed_info')?></h4>
 <!--TITLE--><h1><script>document.write(translate(id+'_descr')+" ("+id+")")</script></h1>
-<!--VARIABLE INFO--><table style="text-align:left;width:50%" id=info></table>
+
+<div id=main>
+
+<!--VARIABLE INFO-->
+	<table style="text-align:left;width:50%;margin-bottom:3em" id=info></table>
+
+</div>
+
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

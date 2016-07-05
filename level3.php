@@ -31,7 +31,6 @@
 
 		#outputs tr:hover { background:#ccc; }
 		#outputs th{background:#d7bfaf;text-align:left}
-		#outputs td, #outputs th{border-left:none;border-top:none;border-right:none}
 		#outputs td:nth-child(n+3) {text-align:right}
 		div.substageMenu{
 			padding:0.1em;
@@ -592,6 +591,8 @@
 	<!--type of assessment--><?php include'assessmentType.php'?>
 </h1>
 
+<div id=main>
+
 <!--SUBSTAGES TABLE-->
 <div class=card style=text-align:left><?php cardMenu("Inputs - ".$lang_json['#level3_split_this_stage'])?>
 	<table id=substages style="margin:1em;table-layout:fixed"> <tr>
@@ -626,6 +627,9 @@
 		google.charts.setOnLoadCallback(drawCharts);
 	</script>
 </div>
+
+</div>
+
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
 

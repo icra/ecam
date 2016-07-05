@@ -57,8 +57,6 @@
 			border:none;
 			text-align:left;
 		}
-		#inputs th, #outputs th, #otherOutputs th, #nrgOutputs th {text-align:left;border:none}
-		#inputs td, #outputs td, #otherOutputs td, #nrgOutputs td {border-top:none;border-left:none;border-right:none}
 	</style>
 
 	<script>
@@ -796,7 +794,7 @@
 </h1>
 
 <!--container-->
-<div style=text-align:left>
+<div id=main style=text-align:left>
 	<!--questions-->
 	<div class=card style=text-align:left><?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
 		<table style=margin:1em id=questions class=inline></table>
