@@ -23,6 +23,10 @@
 		/** table "used to calculate" and "inputs involved" */
 		table#utc td, table#ininv td{padding:2px 5px 2px 7px;border:none}
 		.unit{color:#aaa}
+		.constant a {color:black}
+		.fuel {color:#088A29}
+		.fuel a {font-weight:bold;color:#088A29;}
+		.fuel:first-child {cursor:help}
 	</style>
 	<script>
 		var id='<?php echo $id?>'; //make the id variable live in javascript scope
@@ -124,10 +128,22 @@
 					var ret="<table id=ininv>"
 					matches.forEach(function(match)
 					{
+						//means this is a constant
 						if(match.substring(0,3)=="ct_")
 						{
-							//means this is a constant
-							ret+="<tr><td title='Constant: "+Cts[match].descr+"'><a href=constants.php>"+match+"</a>:<td>"+Cts[match].value+"<td class=unit>"+Cts[match].unit;
+							ret+="<tr><td class=constant title='CONSTANT: "+Cts[match].descr+"'><a href=constants.php>"+match+"</a>:<td>"+Cts[match].value+"<td class=unit>"+Cts[match].unit;
+						}
+						else if(Global.Configuration.Selected.FuelType.hasOwnProperty(match))
+						{
+							var fuel = Global.Configuration.Selected.FuelType[match]
+							ret+="<tr><td class=fuel><a href=fuelInfo.php>fuel selected</a><td>"+fuel;
+							ret+="<tr><td class=fuel title='Fuel density       '>fuel.FD             <td>"+Tables["Fuel types"][fuel].FD             +"<td class=unit>kg/L";
+							ret+="<tr><td class=fuel title='Net calorific value'>fuel.NCV            <td>"+Tables["Fuel types"][fuel].NCV            +"<td class=unit>TJ/Gg";
+							ret+="<tr><td class=fuel title='CO2 emission factor'>fuel.EFCO2          <td>"+Tables["Fuel types"][fuel].EFCO2          +"<td class=unit>kg CO2/TJ";
+							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.engines  <td>"+Tables["Fuel types"][fuel].EFCH4.engines  +"<td class=unit>kg CH4/TJ";
+							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.vehicles <td>"+Tables["Fuel types"][fuel].EFCH4.vehicles +"<td class=unit>kg CH4/TJ";
+							ret+="<tr><td class=fuel title='N2O emission factor'>fuel.EFN2O.engines  <td>"+Tables["Fuel types"][fuel].EFN2O.engines  +"<td class=unit>kg N2O/TJ";
+							ret+="<tr><td class=fuel title='N2O emission factor'>fuel.EFN2O.vehibles <td>"+Tables["Fuel types"][fuel].EFN2O.vehicles +"<td class=unit>kg N2O/TJ";
 						}
 						else
 						{

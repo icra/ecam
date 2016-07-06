@@ -18,7 +18,7 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
-<!--TITLE--><h1><?php write('#graphs')?></h1>
+<!--TITLE--><h1><?php write('#graphs')?> - (development tool)</h1>
 
 <div id=main>
 

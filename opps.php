@@ -208,7 +208,7 @@
 		<?php cardMenu('Wastewater') ?>
 			<div class=card><?php cardMenu("3. Untreated wastewater")?>
 				<div class=opp>
-					Connected population is <b><script>document.write(Global.Waste.ww_conn_pop)</script></b> people.<br>
+					Connected population is <b><script>document.write(Global.Waste.ww_conn_pop)</script></b> people.
 					Serviced population is <b><script>document.write(Global.Waste.ww_serv_pop)</script></b> people
 					(<script>
 						(function(){

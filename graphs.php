@@ -16,7 +16,7 @@ function scrollTo(id)
 	var visible_area_end = visible_area_start + window.innerHeight;
 
 	//scroll if element is not in view
-	if(top < visible_area_start || bottom > visible_area_end)
+	if(top <= visible_area_start || bottom >= visible_area_end)
 		element.scrollIntoView()
 }
 
@@ -231,7 +231,7 @@ Graphs.graph2=function(withTable,container)
 		slices:
 		{
 			0:{ color: '#0aaeef' },
-			1:{ color: '#bf5050' },
+			1:{ color: '#d71d24' },
 		},
 	};
 

@@ -2,8 +2,9 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
-		#problems table{display:inline-block;vertical-align:top;margin:0.5em}
 		#problems tr:hover {background:lightcoral}
+		#main table {margin:0.5em;width:99%}
+		#main {text-align:left}
 	</style>
 	<script>
 		//get unused inputs
@@ -61,9 +62,29 @@
 <!--linear--><?php include'linear.php'?>
 <!--TITLE--><h1>Automatic finding of potential sources of Problems (debug mode)</h1>
 
-<div id=main>
+<div id=main style=display:table;margin-bottom:3em>
 
-<div id=problems>
+<!--todo-->
+<div style="display:table-cell;">
+	<table id=todo>
+		<style> 
+			#todo {margin:1em}
+			#todo td.taskgroup{background:#ccc;text-align:center;} 
+		</style>
+		<tr><th><?php write('#todo_task')?><th><?php write('#todo_status')?>
+		<tr><td colspan=2 class=taskgroup>BACK-END
+			<tr><td><a href=benchmark.php>Benchmark</a> is wrong, IWA needs to define it correctly          <td>Need more info</td>
+			<tr><td>IWA still has to provide a description for some <a href=constants.php>constants</a><td>Need more info</td>
+		<tr><td colspan=2 class=taskgroup>FRONT-END
+			<tr><td>Calculated variables are useless, need to separate from inputs<td>Need more info</td>
+			<tr><td>Footer should remain in the bottom of the page always<td>Don't know how to do
+			<tr><td>Translation of new features requested is not done<td>Wait at the end
+			<tr><td>Help resources<td>Wait at the end
+	</table>
+</div>
+
+<!--problems-->
+<div id=problems style="display:table-cell;">
 	<table>
 		<tr><td colspan=3 style=font-weight:bold>Problem 1: NOT USED INPUTS in any formula
 		<tr><th>Code<th>Stage
@@ -152,6 +173,5 @@
 </div>
 
 </div>
-
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

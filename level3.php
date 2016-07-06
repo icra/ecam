@@ -595,8 +595,8 @@
 
 <!--SUBSTAGES TABLE-->
 <div class=card style=text-align:left><?php cardMenu("Inputs - ".$lang_json['#level3_split_this_stage'])?>
-	<table id=substages style="margin:1em;table-layout:fixed"> <tr>
-		<td colspan=2>
+	<table id=substages style="margin:1em"> <tr>
+		<td colspan=2 style="min-width:260px">
 			<!--substages counter-->
 			<div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle"><?php write('#substages')?>: <span id=counter>0</span></div>
 			<!--new substage button-->

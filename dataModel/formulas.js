@@ -7,6 +7,7 @@ var Formulas = {
 	{
 		var matches=[];
 		var match;
+		//normal inputs
 		for(var field in Info)
 		{
 			/* 
@@ -20,14 +21,18 @@ var Formulas = {
 		//constants
 		for(var field in Cts)
 		{
-			/* 
-				\W matches any non-word characters (short for [^a-zA-Z0-9_]). 
-				\D matches any non-digit (short for [^0-9]).
-			*/
 			var reg=new RegExp("\\W"+field+"(\\W|$)");
 			match=formula.search(reg); //will return -1 if not found
 			if(match!=-1){matches.push(field);}
 		}
+		//fuel selected
+		for(var field in Global.Configuration.Selected.FuelType)
+		{
+			var reg=new RegExp("\\W"+field+"(\\W|$)");
+			match=formula.search(reg); //will return -1 if not found
+			if(match!=-1){matches.push(field);}
+		}
+
 		return matches;
 	},
 
@@ -81,10 +86,9 @@ var Formulas = {
 		result = result.replace(/\(\)/g,"")
 		result = result.replace(/[{}]/g,"")
 		result = result.replace(/Cts./g,"")
-		result = result.replace(/.value/g,"")
-		result = result.replace(/fuel=Tables.Fuel.types..Selected.FuelType..engines_in_......; /g,"")
-		result = result.replace(/fuel./g,"")
-		result = result.replace(/.engines/g,"")
+		result = result.replace(/().value/g,"$1")
+		result = result.replace(/fuel=Tables.Fuel.types..Selected.FuelType.engines_in_......; /g,"")
+		result = result.replace(/fuel=Tables.Fuel.types..Selected.FuelType.truck_transport_waste.; /g,"")
 		return result;
 	},
 

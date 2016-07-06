@@ -120,7 +120,7 @@
 		{
 			position:fixed;
 			/*dreta*/top:0;right:0;z-index:999;
-			/*esquerra*/top:51px;left:0;z-index:999;
+			/*esquerra*/top:52px;left:0;z-index:999;
 			background:white;
 			padding:0;margin:0;
 			box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
@@ -193,7 +193,6 @@
 			<tr><td><a href=problems.php><?php write('#sidebar_problems')?></a>
 			<tr><td><a href=constants.php><?php write('#constants')?></a>
 			<tr><td><a href=benchmark.php>Benchmarking</a>
-			<tr><td><a href=todo.php><?php write('#sidebar_todo')?></a>
 		</table>
 	</div>
 </div>

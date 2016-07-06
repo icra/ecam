@@ -1,13 +1,13 @@
 var Cts = 
 {
 	ct_bod_kg:{
-		descr:"ratio BOD entering the plant / dry weight of organic matter in the sludge collected",
+		descr:"Ratio BOD entering the plant / dry weight of organic matter in the sludge collected",
 		value:0.9,
 		unit:"?????",
 	},
 
 	ct_biog_g:{
-		descr:"biogas produced per g of organic matter contained in the sludge",
+		descr:"Biogas produced per g of organic matter contained in the sludge",
 		value:0.4,
 		unit:"?????",
 	},
@@ -26,7 +26,7 @@ var Cts =
 
 
 	ct_ch4_m3:{
-		descr:"kg CH4/m3",
+		descr:"Kg CH4/m3",
 		value:0.66,
 		unit:"kg CH4/m3",
 	},
@@ -34,7 +34,7 @@ var Cts =
 	ct_ch4_eq:{
 		descr:"Conversion for CH4 emissions to CO2 equivalent emissions",
 		value:34,
-		unit:"kg CO2/kg CH4",
+		unit:"kg CO2 / kg CH4",
 	},
 
 	ct_fra_np:{
@@ -62,9 +62,9 @@ var Cts =
 	},
 
 	ct_n2o_co:{
-		descr:"Conversion for kg N2O-N / kg N2O",
+		descr:"Conversion factor N2O-N to N2O (=44/28)",
 		value:44/28,
-		unit:"kg N2O-N / kg N2O",
+		unit:"kg N2O / kg N2O-N",
 	},
 
 	ct_n2o_eq:{
@@ -74,7 +74,7 @@ var Cts =
 	},
 
 	ct_ch4_ef:{
-		descr:"EF. This comes from the multiplication of Bo (kg CH4/kg BOD) (0.6) x MCFj (=0.1, for direct discharge into a river, lake or sea)",
+		descr:"EF. This comes from the multiplication of Bo (kg CH4/kg BOD) (=0.6) x MCFj (=0.1, for direct discharge into a river, lake or sea)",
 		value:0.06,
 		unit:"kg CH4 / kg BOD",
 	},
