@@ -477,7 +477,7 @@
 							var value=CurrentStage['modification']()/Units.multiplier(field);
 							var indicator=(function()
 							{
-								var hasIndicator=RefValues.isInside(field);
+								var hasIndicator=RefValues.hasOwnProperty(field);
 								if(hasIndicator)
 								{
 									var text=RefValues[field](value);
@@ -494,7 +494,6 @@
 								}
 								else{return "";}
 							})();
-							indicator=""/**disabled for now*/
 							return indicator+" "+format(value);
 						})();
 					}

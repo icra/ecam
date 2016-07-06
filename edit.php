@@ -488,7 +488,7 @@
 				newCell.style.textAlign='center';
 				newCell.innerHTML=(function()
 				{
-					var hasIndicator=RefValues.isInside(field);
+					var hasIndicator=RefValues.hasOwnProperty(field);
 					if(hasIndicator)
 					{
 						var indicator=RefValues[field](value);
@@ -940,7 +940,9 @@
 			<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
 				<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#energy_performance')?>
 				<tr>
-					<!--<th title=Performance style=cursor:help><?php write('#edit_benchmark')?>-->
+					<!--
+					<th title=Performance style=cursor:help><?php write('#edit_benchmark')?>
+					-->
 					<th><?php write('#edit_description')?>
 					<th><?php write('#edit_current_value')?>
 					<th><?php write('#edit_unit')?>

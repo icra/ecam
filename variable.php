@@ -7,6 +7,10 @@
 ?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
+
+	<!--prettify benchmark code-->
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
 	<style>
 		#info th,#info td{padding:1em}
 		#info td.th{background:#00aff1;color:white;vertical-align:middle}
@@ -27,7 +31,9 @@
 		.fuel {color:#088A29}
 		.fuel a {font-weight:bold;color:#088A29;}
 		.fuel:first-child {cursor:help}
+		pre.prettyprint {margin:0.5em;padding:1em}
 	</style>
+
 	<script>
 		var id='<?php echo $id?>'; //make the id variable live in javascript scope
 
@@ -36,6 +42,7 @@
 			updateInfoTable();
 			Exceptions.apply();
 			updateResult();
+			PR.prettyPrint();
 		}
 
 		/**
@@ -95,7 +102,7 @@
 				if(typeof(currentStage[id])=="function")
 				{
 					var pretf = Formulas.prettify(currentStage[id].toString());
-					var ret = "Output <div><pre style='padding:1em;background:#eee'><b><?php write('#variable_formula')?>:</b>"+pretf+"<pre></div>";
+					var ret = "Output <div><pre class=prettyprint style='padding:1em;background:#eee'><b><?php write('#variable_formula')?>:</b>"+pretf+"<pre></div>";
 					return ret;
 				}
 				else
@@ -309,6 +316,17 @@
 				return ret;
 			})();
 
+			//Is "id" benchmarked?
+			if(RefValues.hasOwnProperty(id))
+			{
+				newRow=t.insertRow(-1)
+				newCell=newRow.insertCell(-1)
+				newCell.className='th'
+				newCell.innerHTML="Is benchmarked?"
+				newRow.insertCell(-1).innerHTML="YES (<a href=benchmark.php>info</a>)"+
+					"<pre class='prettyprint'>"+RefValues[id].toString()+"</pre>";
+			}
+
 			//Contains estimated data?
 			if(DQ.hasEstimatedData(id))
 			{
@@ -395,11 +413,10 @@
 <!--TITLE--><h1><script>document.write(translate(id+'_descr')+" ("+id+")")</script></h1>
 
 <div id=main>
-
-<!--VARIABLE INFO-->
+	<!--VARIABLE INFO-->
 	<table style="text-align:left;width:50%;margin-bottom:3em" id=info></table>
-
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
+

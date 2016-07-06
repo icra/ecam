@@ -148,7 +148,6 @@
 				var inex=[];
 				for(var field in RefValues)
 				{
-					if(field=="isInside")continue; //function to locate
 					if(locateVariable(field)==false) inex.push(field);
 				}
 				return inex;
