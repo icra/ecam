@@ -10,37 +10,22 @@ ECAM BUG DATABASE
     4. Who it's assigned to
     5. Whether it has been fixed or not
 ==============================================================================
-  Example Bug:
+  *Bug* |#1|: Date selector in getStarted.php
 
-    * Complete steps to reproduce the bug:
-      ...
-    * Expected behavior
-      ...
-    * Observed (buggy) behavior
-      ...
-    * Who it's assigned to
-      ...
-    * Whether it has been fixed or not
-      ...
-==============================================================================
-  Bug 1: Date selector in getStarted.php
-
-    * Complete steps to reproduce the bug:
-
+    * 1. Complete steps to reproduce the bug:
       In getStarted.php, press tab until you reach 2016 number and then try 
       to type 2017. It will remain as 0002. and you won't be able to type it 
       correctly because the focus disappears. 
 
-    * Expected behavior:
-
+    * 2. Expected behavior:
       Type numbers normally
       
-    * Observed (buggy) behavior:
-      
-      Already described. To solve it the page should be fixed not dynamic
+    * 3. Observed (buggy) behavior:
+      Already described. To solve it the page should be a fixed layout, 
+      not a dynamic one
 
-    * Whether it has been fixed or not
-      Not
+    * 4. Whether it has been fixed or not
+      Yes, now the page has a fixed layout
 ==============================================================================
 *do not modify this line*
 vim:tw=78:ts=2:sw=2:expandtab:ft=help:norl:

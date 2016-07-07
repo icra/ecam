@@ -53,6 +53,9 @@ var Global = {
 			wsa_KPI_nrg_recovery : function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
 			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_cons+this.wsa_nrg_turb)/this.c_wsa_vol_head()},
 			wsa_KPI_std_nrg_recv:function(){return this.wsa_nrg_turb/this.c_wsa_trb_head()},
+			ws_SL_serv_pop:function(){return Global.Water.ws_SL_serv_pop()},
+			ws_SL_auth_con:function(){return Global.Water.ws_SL_auth_con()},
+			ws_SL_non_revw:function(){return Global.Water.ws_SL_non_revw()},
 			/*<Level3>*/
 			"wsa_vol_pump":0,
 			"wsa_pmp_head":0,
@@ -74,7 +77,8 @@ var Global = {
 			wst_KPI_nrg_per_m3 : function(){return this.wst_nrg_cons/this.wst_vol_trea},
 			wst_KPI_slu_per_m3 : function(){return this.wst_mass_slu/this.wst_vol_trea},
 			wst_KPI_capac_util : function(){return 100*this.wst_vol_trea/this.wst_trea_cap},
-			ws_SL_non_revw: function(){return Global.Water.ws_SL_non_revw()},
+			ws_SL_serv_pop:function(){return Global.Water.ws_SL_serv_pop()},
+			ws_SL_auth_con:function(){return Global.Water.ws_SL_auth_con()},
 			/*<Level3>*/
 			"wst_tst_carr":0,
 			"wst_tst_disc":0,
@@ -106,7 +110,9 @@ var Global = {
 			"wsd_auth_con":0,
 			wsd_KPI_nrg_per_m3:function(){return this.wsd_nrg_cons/this.wsd_auth_con},
 			wsd_KPI_std_nrg_cons:function(){return (this.wsd_nrg_cons+this.wsd_nrg_recv)/this.c_wsd_vol_head()},
-			ws_SL_non_revw: function(){return Global.Water.ws_SL_non_revw()},
+			ws_SL_serv_pop:function(){return Global.Water.ws_SL_serv_pop()},
+			ws_SL_auth_con:function(){return Global.Water.ws_SL_auth_con()},
+			ws_SL_non_revw:function(){return Global.Water.ws_SL_non_revw()},
 			/*<Level3>*/
 			"wsd_deli_pts":0,
 			"wsd_ser_cons":0,
@@ -209,6 +215,9 @@ var Global = {
 			"wwc_nrg_cons":0,
 			"wwc_vol_conv":0,
 			wwc_KPI_nrg_per_m3 : function(){return this.wwc_nrg_cons/this.wwc_vol_conv},
+			ww_SL_serv_pop: function(){return Global.Waste.ww_SL_serv_pop()},
+			ww_SL_treat_m3: function(){return Global.Waste.ww_SL_treat_m3()},
+			ww_SL_dilution: function(){return Global.Waste.ww_SL_dilution()},
 			/*<Level3>*/
 			"wwc_vol_pump":0,
 			"wwc_pmp_head":0,
@@ -236,6 +245,9 @@ var Global = {
 			wwt_KPI_sludg_prod :function(){return this.wwt_mass_slu/this.wwt_vol_trea},
 			wwt_KPI_dry_sludge :function(){return 100*this.wwt_dryw_slu/this.wwt_mass_slu},
 			wwt_KPI_capac_util :function(){return 100*this.wwt_vol_trea/this.wwt_trea_cap},
+			ww_SL_serv_pop: function(){return Global.Waste.ww_SL_serv_pop()},
+			ww_SL_vol_pday: function(){return Global.Waste.ww_SL_vol_pday()},
+			ww_SL_dilution: function(){return Global.Waste.ww_SL_dilution()},
 			/*<Level3>*/
 				"wwt_tst_cmpl":0,
 				"wwt_tst_cond":0,
@@ -266,6 +278,8 @@ var Global = {
 			wwd_KPI_nrg_rcv_di:function(){return this.wwd_nrg_recv/this.wwd_vol_disc},
 			wwd_KPI_std_nrg_cons:function(){return (this.wwd_nrg_cons+this.wwd_nrg_recv)/this.c_wwd_vol_head()},
 			wwd_KPI_std_nrg_recv:function(){return this.wwd_nrg_recv/this.c_wwd_trb_head()},
+			ww_SL_serv_pop: function(){return Global.Waste.ww_SL_serv_pop()},
+			ww_SL_vol_pday: function(){return Global.Waste.ww_SL_vol_pday()},
 			/*<Level3>*/
 				"wwd_vol_pump":0,
 				"wwd_pmp_head":0,
