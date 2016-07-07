@@ -5,6 +5,7 @@
 		body {background:#e9ebee}
 		table#inputs input {width:70px;transition:background 1s;border:1px solid #ccc}
 		table#inputs input.edited {background:lightgreen;}
+		table#inputs label input {width:auto;}
 		table#inputs tr.hidden {display:none}
 		table#inputs tr[indic]{text-align:center;color:#999;background:#eee}
 		table#inputs th{text-align:left;border:none}
@@ -301,6 +302,17 @@
 					<span title="<?php write('#birds_ww_n2o_effl_note')?>" style=color:orange;cursor:help>(<?php write('#birds_note')?>)</span>
 				<td><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
 			<tr stage=waste class=hidden><td><?php write('#birds_ww_prot_con')?><td><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/<?php write('#birds_people')?>/<?php write('#birds_year')?>
+			<tr stage=waste class=hidden><td>
+				<?php write("#producing_biogas")?>?
+				<td colspan=2>
+				<label><?php write("#no")?>  <input name=producing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=0;init()"></label>
+				<label><?php write("#yes")?> <input name=producing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=1;init()"></label>
+				<script>
+					(function(){
+						var ans = Global.Configuration['Yes/No'].producing_biogas;
+						document.querySelector('input[name=producing_biogas][ans="'+ans+'"]').checked=true;
+					})();
+				</script>
 			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 	</table>
 </div>

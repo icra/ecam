@@ -27,7 +27,7 @@
 		/** table "used to calculate" and "inputs involved" */
 		table#utc td, table#ininv td{padding:2px 5px 2px 7px;border:none}
 		.unit{color:#aaa}
-		.constant a {color:black}
+		#info .constant a {color:black; !important}
 		.fuel {color:#088A29}
 		.fuel a {font-weight:bold;color:#088A29;}
 		.fuel:first-child {cursor:help}
@@ -143,16 +143,16 @@
 						else if(Global.Configuration.Selected.FuelType.hasOwnProperty(match))
 						{
 							var fuel = Global.Configuration.Selected.FuelType[match]
-							ret+="<tr><td class=fuel><a href=fuelInfo.php>fuel selected</a><td>"+fuel;
-							ret+="<tr><td class=fuel title='Fuel density       '>fuel.FD             <td>"+Tables["Fuel types"][fuel].FD             +"<td class=unit>kg/L";
-							ret+="<tr><td class=fuel title='Net calorific value'>fuel.NCV            <td>"+Tables["Fuel types"][fuel].NCV            +"<td class=unit>TJ/Gg";
-							ret+="<tr><td class=fuel title='CO2 emission factor'>fuel.EFCO2          <td>"+Tables["Fuel types"][fuel].EFCO2          +"<td class=unit>kg CO2/TJ";
-							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.engines  <td>"+Tables["Fuel types"][fuel].EFCH4.engines  +"<td class=unit>kg CH4/TJ";
-							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.vehicles <td>"+Tables["Fuel types"][fuel].EFCH4.vehicles +"<td class=unit>kg CH4/TJ";
-							ret+="<tr><td class=fuel title='N2O emission factor'>fuel.EFN2O.engines  <td>"+Tables["Fuel types"][fuel].EFN2O.engines  +"<td class=unit>kg N2O/TJ";
-							ret+="<tr><td class=fuel title='N2O emission factor'>fuel.EFN2O.vehibles <td>"+Tables["Fuel types"][fuel].EFN2O.vehicles +"<td class=unit>kg N2O/TJ";
+							ret+="<tr><td class=fuel><a href=fuelInfo.php>fuel selected</a>:<td>"+fuel;
+							ret+="<tr><td class=fuel title='Fuel density       '>fuel.FD:             <td>"+Tables["Fuel types"][fuel].FD             +"<td class=unit>kg/L";
+							ret+="<tr><td class=fuel title='Net calorific value'>fuel.NCV:            <td>"+Tables["Fuel types"][fuel].NCV            +"<td class=unit>TJ/Gg";
+							ret+="<tr><td class=fuel title='CO2 emission factor'>fuel.EFCO2:          <td>"+Tables["Fuel types"][fuel].EFCO2          +"<td class=unit>kg CO2/TJ";
+							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.engines:  <td>"+Tables["Fuel types"][fuel].EFCH4.engines  +"<td class=unit>kg CH4/TJ";
+							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.vehicles: <td>"+Tables["Fuel types"][fuel].EFCH4.vehicles +"<td class=unit>kg CH4/TJ";
+							ret+="<tr><td class=fuel title='N2O emission factor'>fuel.EFN2O.engines:  <td>"+Tables["Fuel types"][fuel].EFN2O.engines  +"<td class=unit>kg N2O/TJ";
+							ret+="<tr><td class=fuel title='N2O emission factor'>fuel.EFN2O.vehibles: <td>"+Tables["Fuel types"][fuel].EFN2O.vehicles +"<td class=unit>kg N2O/TJ";
 						}
-						else
+						else //normal inputs
 						{
 							var match_localization = locateVariable(match)
 							var match_level = match_localization.level
