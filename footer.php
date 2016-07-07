@@ -29,8 +29,8 @@
 		<?php write("#help")?>
 	</a>
 	·
-	<a href=mailto:WaCCliM@iwahq.com>
-		Contact
+	<a href=mailto:WaCCliM@iwahq.org>
+		Contact: WaCCliM@iwahq.org
 	</a>
 </footer>
 

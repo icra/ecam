@@ -165,7 +165,7 @@ var Global = {
 		"ww_n2o_effl" :0,
 		"ww_vol_fuel" :0,
 		"ww_prot_con" :3.2,
-		"ww_bod_pday" :55,
+		"ww_bod_pday" :40,
 		"ww_ch4_efac" :0.06,
 		"ww_biog_pro":0,
 		"ww_biog_val":0,

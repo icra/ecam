@@ -408,6 +408,7 @@
 			{
 				//only functions
 				if(typeof(CurrentStage[field])!="function"){continue;}
+				if(field.search('_SL_')>-1)continue;
 
 				/*if assessment type is simple, hide L3 variables*/
 				if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
@@ -560,13 +561,7 @@
 			updateOutputs();
 			Sidebar.update();
 			updateResult();
-			try{
-				drawCharts();
-			}
-			catch(e)
-			{
-				console.log(e);
-			}
+			try{drawCharts()}catch(e){console.log(e)}
 		}
 	</script>
 </head><body onload=init() style="background:#F5ECCE"><center>

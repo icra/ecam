@@ -88,6 +88,26 @@
 
 <!--main-->
 <div id=main style="text-align:left">
+
+	<div style="margin-top:1em;text-align:center">
+	<button onclick=unfoldAll()>Unfold all</button>
+	<button onclick=foldAll()>Fold all</button>
+	</div>
+
+	<script>
+		function unfoldAll()
+		{
+			var elements = document.querySelectorAll('div.card.folded');
+			for(var i=0;i<elements.length;i++)
+				elements[i].classList.remove('folded');
+		}
+		function foldAll()
+		{
+			var elements = document.querySelectorAll('div.card');
+			for(var i=0;i<elements.length;i++)
+				elements[i].classList.add('folded');
+		}
+	</script>
 	<script>printAll()</script>
 </div>
 
