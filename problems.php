@@ -82,7 +82,6 @@
 					<li>wwt_KPI_nrg_per_m3
 				</ul>
 				<td>Need more info</td>
-			<tr><td>Missing units for 2 constants: see them in <a href=constants.php>constants</a><td>Need more info</td>
 		<tr><td colspan=2 class=taskgroup>FRONT-END
 			<tr><td>Calculated variables are useless, need to separate from inputs<td>Need more info</td>
 			<tr><td>Footer should remain in the bottom of the page always<td>Don't know how to do

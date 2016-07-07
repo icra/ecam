@@ -92,12 +92,14 @@ var Info = {
 		//Water Supply
 			wsg_KPI_nrg_cons:{magnitude:"Energy",unit:"kWh",},
 			wsg_KPI_nrg_x_ye:{magnitude:"Energy/Time",unit:"kWh/year",},
+			wsg_KPI_nrg_x_ys:{magnitude:"Energy/Time/People",unit:"kWh/year/person",},
 			wsg_KPI_nrg_x_m3:{magnitude:"Energy/Volume",unit:"kWh/m3",},
 			wsg_KPI_std_nrg_:{magnitude:"Energy/Headloss",unit:"kWh/m3/100",},
 			wsg_KPI_nrg_perc:{magnitude:"Percentage",unit:"%",},
 		//Wastewater
 			wwg_KPI_nrg_cons:{magnitude:"Energy",unit:"kWh",},
 			wwg_KPI_nrg_x_ye:{magnitude:"Energy/Time",unit:"kWh/year",},
+			wwg_KPI_nrg_x_ys:{magnitude:"Energy/Time/People",unit:"kWh/year/person",},
 			wwg_KPI_nrg_x_br:{magnitude:"Energy/Volume",unit:"kWh/m3",},
 			wwg_KPI_std_nrg_:{magnitude:"Energy/Headloss",unit:"kWh/m3/100",},
 			wwg_KPI_nrg_perc:{magnitude:"Percentage",unit:"%",},
