@@ -73,8 +73,16 @@
 		</style>
 		<tr><th><?php write('#todo_task')?><th><?php write('#todo_status')?>
 		<tr><td colspan=2 class=taskgroup>BACK-END
-			<tr><td><a href=benchmark.php>Benchmark</a> is wrong, IWA needs to define it correctly          <td>Need more info</td>
-			<tr><td>IWA still has to provide a description for some <a href=constants.php>constants</a><td>Need more info</td>
+			<tr><td><a href=benchmark.php>Benchmark</a> list of not implemented:
+				<ul>
+					<li>wst_KPI_nrg_per_m3
+					<li>wsd_KPI_nrg_efficien
+					<li>wsd_KPI_nrg_topgraph
+					<li>wwt_KPI_capac_util
+					<li>wwt_KPI_nrg_per_m3
+				</ul>
+				<td>Need more info</td>
+			<tr><td>Missing units for 2 constants: see them in <a href=constants.php>constants</a><td>Need more info</td>
 		<tr><td colspan=2 class=taskgroup>FRONT-END
 			<tr><td>Calculated variables are useless, need to separate from inputs<td>Need more info</td>
 			<tr><td>Footer should remain in the bottom of the page always<td>Don't know how to do
