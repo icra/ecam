@@ -3,6 +3,7 @@
 	<?php include'imports.php'?>
 	<style>
 		body {background:#e9ebee}
+		h1{background:white}
 		table#inputs input {width:70px;transition:background 1s;border:1px solid #ccc}
 		table#inputs input.edited {background:lightgreen;}
 		table#inputs label input {width:auto;}
@@ -10,7 +11,7 @@
 		table#inputs tr[indic]{text-align:center;color:#999;background:#eee}
 		table#inputs th{text-align:left;border:none}
 		table#inputs td {border-left:none;border-right:none;border-bottom:none}
-		h1{background:white}
+		#graphs td { text-align: left; }
 	</style>
 	<script>
 		function init()
