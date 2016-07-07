@@ -164,18 +164,20 @@ var Global = {
 		"ww_biog_pro":0,
 		"ww_biog_val":0,
 		c_ww_bod_rmvd:function(){return this.ww_bod_infl-this.ww_bod_effl},
+
 		c_ww_biogas_flar:function()
 		{
-			if(this.ww_biog_pro==0)
+			if(Global.Configuration["Yes/No"]["producing_biogas"])
 			{
-				if(Global.Configuration["Yes/No"]["#producing_biogas"])
+				if(this.ww_biog_pro==0)
 					return this.ww_serv_pop * this.ww_bod_pday * Cts.ct_bod_kg.value * Cts.ct_biog_g.value/1000 * Global.General.Days();
 				else
-					return 0;
+					return this.ww_biog_pro - this.ww_biog_val;
 			}
 			else
-				return this.ww_biog_pro-this.ww_biog_val;
+				return 0;
 		},
+
 		c_ww_nrg_engines     : function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.engines_in_waste]; return this.ww_vol_fuel*fuel.FD*fuel.NCV/1000; },
 		c_ww_nrg_tsludge     : function(){return this.ww_num_trip*2*this.ww_dist_dis*0.25*0.84*43/1000000/1000},
 		c_ww_in_dilution     : function(){if(this.Treatment.wwt_vol_trea==0) return 0; else return this.Treatment.wwt_vol_trea-this.ww_vol_coll*this.ww_serv_pop/this.ww_conn_pop},

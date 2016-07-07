@@ -9,46 +9,8 @@
 	<script>
 		function updateField(field,newValue)
 		{
-			Global.General[field]=newValue;
-			init();
-		}
-
-		/** Create a row for a field in Global.General */
-		function tableRow(name,field,input,type)
-		{
-			/*default values for input and type*/input=input||"input";type=type||"text";
-			var onchange="onchange=\"updateField('"+field+"',this.value)\""
-			var ret="<tr><th>"+name+"<td>"
-			switch(input)
-			{
-				case "textarea":
-					ret+="<textarea placeholder='<?php write('#getStarted_max_200')?>' rows=5 cols=50 maxlength=200 field='"+field+"' "+onchange+">"+Global.General[field]+"</textarea>";
-					break;
-				case "input":
-					ret+="<input maxlength=25 field='"+field+"' type='"+type+"' value='"+Global.General[field]+"' "+onchange+">";
-					break;
-				default:
-					break;
-			}
-			return ret
-		}
-
-		function updateForm()
-		{
-			var t = document.getElementById('form')
-			/*clean form*/ while(t.rows.length>0){t.deleteRow(-1);}
-			//update also sidebar name
-			document.querySelector("#sidebar #Name").innerHTML=Global.General.Name;
-			/*fill form*/
-			t.innerHTML=(function(){
-				return tableRow("<?php write('#getStarted_table_name')?>","Name")+
-					createLocationSelection()+
-					tableRow("<?php write('#getStarted_table_start')?>","Assessment Period Start",'input','date')+
-					tableRow("<?php write('#getStarted_table_end')?>","Assessment Period End",'input','date')+
-					"<tr><th><?php write('#getStarted_table_period')?><td>"+Global.General.Days()+" <?php write('#days')?> "+
-						"(<a href=variable.php?id=Days title='<?php echo $lang_json["#Days_expla"] ?>'>info</a>)"+
-					tableRow("<?php write('#getStarted_table_comments')?>","Comments",'textarea','date')
-			})();
+			Global.General[field]=newValue
+			init()
 		}
 
 		function createLocationSelection()
@@ -65,14 +27,20 @@
 				option.innerHTML=country;
 				select.appendChild(option);
 			}
-			return "<tr><th><?php write('#getStarted_table_location')?><td>"+select.outerHTML;
+			return select;
 		}
 
 		function init()
 		{
-			updateForm()
-			updateResult()
-			Sidebar.update()
+			Sidebar.update();
+			updateResult();
+			document.querySelector('#form #Name').value=Global.General.Name;
+			document.querySelector('#form #Start').value=Global.General["Assessment Period Start"];
+			document.querySelector('#form #End').value=Global.General["Assessment Period End"];
+			document.querySelector('#form #Days').innerHTML=Global.General.Days();
+			document.querySelector('#form #Comments').value=Global.General.Comments;
+			document.querySelector('#form #Location').innerHTML="";
+			document.querySelector('#form #Location').appendChild(createLocationSelection());
 		}
 	</script>
 </head><body onload=init()><center>
@@ -84,7 +52,30 @@
 <div id=main>
 
 <!--FORM-->
-	<table id=form style="text-align:left;"></table>
+	<table id=form style="text-align:left;">
+		<tr>
+			<th><?php write('#getStarted_table_name')?>
+			<td><input id=Name onchange=updateField('Name',this.value)>
+		<tr>
+			<th><?php write('#getStarted_table_location')?>
+			<td id=Location>
+		<tr>
+			<th><?php write('#getStarted_table_start')?>
+			<td><input id=Start type=date onchange="updateField('Assessment Period Start',this.value)">
+		<tr>
+			<th><?php write('#getStarted_table_end')?>
+			<td><input id=End type=date onchange="updateField('Assessment Period End',this.value)">
+		<tr>
+			<th><?php write('#getStarted_table_period')?>
+			<td><span id=Days>0</span> <?php write('#days')?>
+		<tr>
+			<th><?php write('#getStarted_table_comments')?>
+			<td>
+				<textarea 
+					id=Comments
+					onchange="updateField('Comments',this.value)"
+					placeholder='<?php write('#getStarted_max_200')?>' rows=5 cols=50 maxlength=200></textarea>
+	</table>
 
 <!--PREV&NEXT-->
 	<div style=margin:1em>

@@ -193,6 +193,7 @@
 			<tr><td><a href=problems.php><?php write('#sidebar_problems')?></a>
 			<tr><td><a href=constants.php><?php write('#constants')?></a>
 			<tr><td><a href=benchmark.php>Benchmarking</a>
+			<tr><td><a href=bugs.txt>Known bugs</a>
 		</table>
 	</div>
 </div>
