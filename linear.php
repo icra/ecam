@@ -20,12 +20,6 @@
 		<span style="color:#666"><?php write('#ghg_assessment')?> </span>
 	</div>
 
-	<!--Opportunities-->
-	<div>
-		<img class=l1 stage=opps src=img/opps.png onclick=window.location="opps.php" title="Opportunities to reduce GHG emissions">
-		<a href=opps.php style="color:#666">Opportunities</a>
-	</div>
-
 	<!--Energy-->
 	<div>
 		<img class=l2 stage=waterAbs src=img/waterAbs.png onclick=window.location="edit.php?level=Water&sublevel=Abstraction"  title="<?php write('#Abstraction')?>" >
@@ -42,6 +36,12 @@
 	<div>
 		<img class=l2 stage=energy src=img/energy.png onclick=window.location="edit.php?level=Energy" title="<?php write('#energy_summary')?>"> 
 		<a href=edit.php?level=Energy style="color:#666"><?php write('#energy_summary')?></a>
+	</div>
+
+	<!--Opportunities-->
+	<div>
+		<img class=l1 stage=opps src=img/opps.png onclick=window.location="opps.php" title="Opportunities to reduce GHG emissions">
+		<a href=opps.php style="color:#666">Opportunities</a>
 	</div>
 </div>
 

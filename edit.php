@@ -583,11 +583,8 @@
 				if(field.search("_KPI_GHG")>=0)continue;
 				if(field.search('_nrg_')>-1)continue;
 
-				/**TBD**/
-				/**	this equation is still not clear
+				/** TBD **///this equation is still not clear
 				if(field=="ww_SL_dil_emis")continue; 
-				**/
-				/**TBD**/
 
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}

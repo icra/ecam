@@ -333,6 +333,18 @@
 					})();
 				</script>
 				<span class=circle style=background:#b8879d></span>
+			<tr stage=waste class=hidden><td>
+				<?php write("#valorizing_biogas")?>?
+				<td colspan=2>
+				<label><?php write("#no")?>  <input name=valorizing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=0;init(true)"></label>
+				<label><?php write("#yes")?> <input name=valorizing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=1;init(true)"></label>
+				<script>
+					(function(){
+						var ans = Global.Configuration['Yes/No'].valorizing_biogas;
+						document.querySelector('input[name=valorizing_biogas][ans="'+ans+'"]').checked=true;
+					})();
+				</script>
+				<span class=circle style=background:#b8879d></span>
 			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 	</table>
 </div>

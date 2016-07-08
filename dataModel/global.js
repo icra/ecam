@@ -171,12 +171,18 @@ var Global = {
 		"ww_biog_val":0,
 		c_ww_bod_rmvd:function(){return this.ww_bod_infl-this.ww_bod_effl},
 
+		//we consider that 100% of biogas is valorized if the user did not enter ww_biog_pro
 		c_ww_biogas_flar:function()
 		{
 			if(Global.Configuration["Yes/No"]["producing_biogas"])
 			{
 				if(this.ww_biog_pro==0)
-					return this.ww_serv_pop * this.ww_bod_pday * Cts.ct_bod_kg.value * Cts.ct_biog_g.value/1000 * Global.General.Days();
+				{
+					if(Global.Configuration["Yes/No"]["valorizing_biogas"])
+						return 0;
+					else
+						return this.ww_serv_pop * this.ww_bod_pday * Cts.ct_bod_kg.value * Cts.ct_biog_g.value/1000 * Global.General.Days();
+				}
 				else
 					return this.ww_biog_pro - this.ww_biog_val;
 			}

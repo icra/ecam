@@ -75,7 +75,7 @@
 				return;
 			}
 			//calculate total ghg
-			var total = Global.Water.ws_KPI_GHG()+Global.Waste.ww_KPI_GHG();
+			var total = Global.Waste.ww_KPI_GHG();
 			var reduction = Opps.unt(ideal);
 			var percent = format(100*reduction/total);
 			document.querySelector('#servPopReduction').innerHTML=format(reduction)+" kg CO<sub>2</sub> ("+percent+"%)"
@@ -122,10 +122,9 @@
 			animation: blink 4s ease 0.5s infinite alternate;
 		}
 
-		/* temporal invisible
-		*/
+		/* temporally invisible
 		span.circle{display:none}
-		/**/
+		*/
 
 	</style>
 </head><body><center>
@@ -204,7 +203,7 @@
 				</div>
 				<div id=nrwGraph style=display:none>Loading...</div>
 			</div>
-			<div class=card><?php cardMenu("2. Authorized consumption")?>
+			<div class=card><?php cardMenu("2. Authorized consumption per capita")?>
 				<div class=opp>
 					Authorized consumption is
 					<b><script>
@@ -224,12 +223,57 @@
 				</div>
 				<div id=aucGraph style=display:none>Loading...</div>
 			</div>
+			<div class=card><?php cardMenu("3. Energy efficiency")?>
+				<div class=opp>
+					Energy consumption is
+					<b><script>
+						document.write(format(Global.Water.ws_nrg_cons))
+					</script></b> kWh
+					(<script>
+						document.write(format(Global.Water.ws_nrg_cost)+" ")
+						document.write(Global.General.Currency)
+					</script>).
+					Its related emissions are
+					<b><script>
+						document.write(format(Global.Water.ws_KPI_GHG_elec()))
+					</script></b> kg CO<sub>2</sub>.
+					<br><br>
+					If you reduce energy consumption by
+					<input value=0 onchange=setNrgCons(parseFloat(this.value)) type=number id=ideal_ws_nrg_cons_percent style="width:40px"> %,
+					you can reduce GHG emissions by <b><span id=ws_KPI_GHG_elec_reduction>0</span></b> kg CO<sub>2</sub>
+					(<span id=ws_KPI_GHG_elec_reduction_prc>0</span>% of Water supply emissions)
+					<br>
+					and save <b><span id=ws_KPI_GHG_elec_reduction_money>0</span></b>
+					<script>document.write(Global.General.Currency)</script>
+					(<span id=ws_KPI_GHG_elec_reduction_money_prc>0</span>% of energy costs).
+					<script>
+						function setNrgCons(ideal)
+						{
+							var current = Global.Water.ws_nrg_cons;
+							var newCons = (100-ideal)/100*current;
+							var newGHGs = newCons*Global.General.conv_kwh_co2;
+							var reduction = Global.Water.ws_KPI_GHG_elec()-newGHGs;
+							document.querySelector('#ws_KPI_GHG_elec_reduction').innerHTML=format(reduction);
+							var reduction_prc = 100*reduction/Global.Water.ws_KPI_GHG();
+							document.querySelector('#ws_KPI_GHG_elec_reduction_prc').innerHTML=format(reduction_prc);
+							//money reduction
+							var factor = Global.Water.ws_nrg_cost / current; 
+							var newCost = newCons*factor;
+							var reduction_money = Global.Water.ws_nrg_cost-newCost;
+							document.querySelector('#ws_KPI_GHG_elec_reduction_money').innerHTML=format(reduction_money);
+							var reduction_money_prc = 100*reduction_money/Global.Water.ws_nrg_cost;
+							document.querySelector('#ws_KPI_GHG_elec_reduction_money_prc').innerHTML=format(reduction_money_prc);
+						}
+					</script>
+				</div>
+				<div id=aucGraph style=display:none>Loading...</div>
+			</div>
 	</div>
 
 	<!--Wastewater-->
 	<div class="card" style="background:#d71d24;">
 		<?php cardMenu('Wastewater') ?>
-			<div class=card><?php cardMenu("3. Untreated wastewater")?>
+			<div class=card><?php cardMenu("1. Untreated wastewater")?>
 				<div class=opp>
 					Connected population is <b><script>document.write(Global.Waste.ww_conn_pop)</script></b> people.
 					Serviced population is <b><script>document.write(Global.Waste.ww_serv_pop)</script></b> people
@@ -243,9 +287,54 @@
 					<input type=number id=idealServPop onchange=setServPop(parseFloat(this.value)) style=width:50px> people
 					(<span id=idealServPop_prc></span>%),
 					it would reduce 
-					<b><span id=servPopReduction>0</span></b> of total emissions.
+					<b><span id=servPopReduction>0</span></b> of Wastewater emissions.
 					<div id=trtGraph style=display:none>Loading...</div>
 				</div>
+			</div>
+			<div class=card><?php cardMenu("2. Energy efficiency")?>
+				<div class=opp>
+					Energy consumption is
+					<b><script>
+						document.write(format(Global.Waste.ww_nrg_cons))
+					</script></b> kWh
+					(<script>
+						document.write(format(Global.Waste.ww_nrg_cost)+" ")
+						document.write(Global.General.Currency)
+					</script>).
+					Its related emissions are
+					<b><script>
+						document.write(format(Global.Waste.ww_KPI_GHG_elec()))
+					</script></b> kg CO<sub>2</sub>.
+					<br><br>
+					If you reduce energy consumption by
+					<input value=0 onchange=setNrgCons_ww(parseFloat(this.value)) type=number id=ideal_ww_nrg_cons_percent style="width:40px"> %,
+					you can reduce GHG emissions by <b><span id=ww_KPI_GHG_elec_reduction>0</span></b> kg CO<sub>2</sub>
+					(<span id=ww_KPI_GHG_elec_reduction_prc>0</span>% of Wastewater emissions)
+					<br>
+					and save <b><span id=ww_KPI_GHG_elec_reduction_money>0</span></b>
+					<script>document.write(Global.General.Currency)</script>
+					(<span id=ww_KPI_GHG_elec_reduction_money_prc>0</span>% of energy costs).
+					<script>
+						function setNrgCons_ww(ideal)
+						{
+							var current = Global.Waste.ww_nrg_cons;
+							var newCons = (100-ideal)/100*current;
+							var newGHGs = newCons*Global.General.conv_kwh_co2;
+							var reduction = Global.Waste.ww_KPI_GHG_elec()-newGHGs;
+							document.querySelector('#ww_KPI_GHG_elec_reduction').innerHTML=format(reduction);
+							var reduction_prc = 100*reduction/Global.Waste.ww_KPI_GHG();
+							document.querySelector('#ww_KPI_GHG_elec_reduction_prc').innerHTML=format(reduction_prc);
+							//money reduction
+							var factor = Global.Waste.ww_nrg_cost / current; 
+							var newCost = newCons*factor;
+							var reduction_money = Global.Waste.ww_nrg_cost-newCost;
+							document.querySelector('#ww_KPI_GHG_elec_reduction_money').innerHTML=format(reduction_money);
+							var reduction_money_prc = 100*reduction_money/Global.Waste.ww_nrg_cost;
+							document.querySelector('#ww_KPI_GHG_elec_reduction_money_prc').innerHTML=format(reduction_money_prc);
+						}
+					</script>
+				</div>
+				<div id=aucGraph style=display:none>Loading...</div>
 			</div>
 	</div>
 </div>
