@@ -199,8 +199,11 @@ var Global = {
 		ww_KPI_GHG_ne_n2o_unt: function(){
 			return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value
 			}, //old c_ww51
+
 		ww_KPI_GHG_ne_unt:     function(){return this.ww_KPI_GHG_ne_ch4_unt()+this.ww_KPI_GHG_ne_n2o_unt()},
+		ww_KPI_GHG_ne_tre:     function(){return this.ww_KPI_GHG_ne_ch4_wwt()+this.ww_KPI_GHG_ne_n2o_tre()},
 		ww_KPI_GHG_ne:         function(){return this.ww_KPI_GHG_ne_ch4_wwt()+this.ww_KPI_GHG_ne_n2o_tre()+this.ww_KPI_GHG_ne_tsludge()+this.ww_KPI_GHG_ne_ch4_unt()+this.ww_KPI_GHG_ne_n2o_unt()+this.ww_KPI_GHG_ne_engines()}, 
+
 		ww_KPI_GHG:            function(){return this.ww_KPI_GHG_elec()+this.ww_KPI_GHG_ne()},
 		ww_SL_nrg_cost:        function(){return 100*this.ww_nrg_cost/this.ww_run_cost},
 		ww_SL_serv_pop:        function(){return 100*Global.Waste.ww_serv_pop/Global.Waste.ww_resi_pop},

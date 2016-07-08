@@ -54,6 +54,9 @@
 				var value=Global[level][code]();
 				element.innerHTML=format(value);
 				element.setAttribute('value',value);
+
+				if(element.nodeName=="TD")
+					element.nextSibling.firstChild.style.backgroundColor=ColorsGHG[code]
 			}
 		}
 
@@ -119,6 +122,11 @@
 			animation: blink 4s ease 0.5s infinite alternate;
 		}
 
+		/* temporal invisible
+		*/
+		span.circle{display:none}
+		/**/
+
 	</style>
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
@@ -129,6 +137,10 @@
 <div id=main>
 
 <!--sources of ghg-->
+<script>
+
+
+</script>
 <div class="card inline" style="width:28%"><?php cardMenu('Sources of GHG: Kg of CO<sub>2</sub> emitted') ?>
 	<table id=sources>
 		<style>
@@ -141,16 +153,27 @@
 
 		<th rowspan=2>Water<br>supply<br>(<span field=ws_KPI_GHG>0</span>)
 			<td colspan=2>Electricity<td field=ws_KPI_GHG_elec>0
+				<td><span class=circle>
 			<tr><td colspan=2>Fuel engines<td field=ws_KPI_GHG_ne>0
+				<td><span class=circle>
 
 		<tr><th rowspan=7 class=red>Wastewater <br>(<span field=ww_KPI_GHG>0</span>)
 			<td colspan=2>Electricity <td field=ww_KPI_GHG_elec>0
+			<td><span class=circle>
 			<tr><td colspan=2>Fuel engines <td field=ww_KPI_GHG_ne_engines>0
+			<td><span class=circle>
 			<tr><td colspan=2>Sludge transport <td field=ww_KPI_GHG_ne_tsludge>0
-			<tr><td colspan=2>CH<sub>4</sub> in WWTP <td field=ww_KPI_GHG_ne_ch4_wwt>0
+			<td><span class=circle>
+			<tr><td rowspan=2>Treated wastewater<br>(<span field=ww_KPI_GHG_ne_tre>0</span>)
+				<td>    From CH<sub>4</sub><td field=ww_KPI_GHG_ne_ch4_wwt>0
+				<td><span class=circle>
+				<tr><td>From N<sub>2</sub>O<td field=ww_KPI_GHG_ne_n2o_tre>0
+				<td><span class=circle>
 			<tr><td rowspan=2>Untreated wastewater<br>(<span field=ww_KPI_GHG_ne_unt>0</span>)
 				<td>From CH<sub>4</sub> <td field=ww_KPI_GHG_ne_ch4_unt>0
+				<td><span class=circle>
 				<tr><td>From N<sub>2</sub>O <td field=ww_KPI_GHG_ne_n2o_unt>0
+				<td><span class=circle>
 	</table>
 </div>
 

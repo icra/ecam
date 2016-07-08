@@ -45,7 +45,7 @@ Graphs.graph1=function(withTable,container)
 	{ 
 		height:250,
 		legend:{position:'left'},
-		title:"<?php write('#graphs_graph1')?> (kg CO2)",
+		title:"<?php write('#graphs_graph1')?> ("+format(Global.General.TotalGHG())+" kg CO2)",
 		slices:
 		{
 			0:{color:'#00aff1' },
@@ -111,16 +111,16 @@ Graphs.graph4=function(withTable,container)
 
 	//names
 	var names=[
-		"[<?php write('#Water')?>] <?php write('#ws_KPI_GHG_elec_descr')?>",
-		"[<?php write('#Water')?>] <?php write('#ws_KPI_GHG_ne_descr')?>",
-		"[<?php write('#Waste')?>] <?php write('#ww_KPI_GHG_elec_descr')?>",
-		"[<?php write('#Waste')?>] <?php write('#ww_KPI_GHG_ne_ch4_wwt_descr')?>",
-		"[<?php write('#Waste')?>] <?php write('#ww_KPI_GHG_ne_n2o_tre_descr')?>",
-		"[<?php write('#Waste')?>] <?php write('#ww_KPI_GHG_ne_tsludge_descr')?>",
-		"[<?php write('#Waste')?>] <?php write('#ww_KPI_GHG_ne_ch4_unt_descr')?>",
-		"[<?php write('#Waste')?>] <?php write('#ww_KPI_GHG_ne_n2o_unt_descr')?>",
-		"[<?php write('#Waste')?>] <?php write('#ww_KPI_GHG_ne_engines_descr')?>",
-	]
+		"ws electricity",
+		"ws fuel engine",
+		"ww electricity",
+		"ww CH4 treated",
+		"ww N2O treated",
+		"ww transport",
+		"ww CH4 untreat",
+		"ww N2O untreat",
+		"ww fuel engine",
+	];
 
 	//actual graph data
 	var data=google.visualization.arrayToDataTable
@@ -142,26 +142,38 @@ Graphs.graph4=function(withTable,container)
 	{ 
 		height:250,
 		legend:{position:'left'},
-		title:"<?php write('#graphs_graph4')?> (kg CO2)",
+		title:"<?php write('#graphs_graph4')?> ("+format(Global.General.TotalGHG())+" kg CO2) [Detailed]",
 		slices:
 		{
-			0:{color:'#bca613' },
-			1:{color:'#453f1c'},
-			2:{color:'#89375c'},
-			3:{color:'#b8879d'},
-			4:{color:'#a15f7d'},
-			5:{color:'#d0afbe'},
-			6:{color:'#672945'},
-			7:{color:'#451c2e'},
+			0:{color:ColorsGHG.ws_KPI_GHG_elec      },
+			1:{color:ColorsGHG.ws_KPI_GHG_ne        },
+			2:{color:ColorsGHG.ww_KPI_GHG_elec      },
+			3:{color:ColorsGHG.ww_KPI_GHG_ne_ch4_wwt},
+			4:{color:ColorsGHG.ww_KPI_GHG_ne_n2o_tre},
+			5:{color:ColorsGHG.ww_KPI_GHG_ne_tsludge},
+			6:{color:ColorsGHG.ww_KPI_GHG_ne_ch4_unt},
+			7:{color:ColorsGHG.ww_KPI_GHG_ne_n2o_unt},
+			8:{color:ColorsGHG.ww_KPI_GHG_ne_engines},
 		},
 	};
 
 	//empty the container
-	document.getElementById(container).innerHTML='';
+	var con = document.getElementById(container);
+	con.innerHTML='';
+	con.title="Double click here to download this chart as an image"
 
 	//draw
-	var chart=new google.visualization.PieChart(document.getElementById(container));
+	var chart=new google.visualization.PieChart(con);
 	chart.draw(data,options);
+
+	//double click
+	con.ondblclick=function(){
+		var a=document.createElement('a');
+		document.body.appendChild(a);
+		a.href=chart.getImageURI()
+		a.download="image.png"
+		a.click()
+	}
 
 	//tables
 	if(withTable)

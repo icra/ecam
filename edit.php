@@ -304,8 +304,11 @@
 				if(typeof(CurrentLevel[field])!="function")continue;
 				if(field.search(/^c_/)>=0)continue;
 				if(field.search("_KPI_GHG")==-1)continue;
-				if(field=="ww_KPI_GHG_ne")continue; //exception
-				if(field=="ww_KPI_GHG_ne_unt")continue; //exception
+
+				//hidden ones
+				if(field=="ww_KPI_GHG_ne")    continue;
+				if(field=="ww_KPI_GHG_ne_unt")continue;
+				if(field=="ww_KPI_GHG_ne_tre")continue;
 
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
@@ -580,6 +583,12 @@
 				if(field.search("_KPI_GHG")>=0)continue;
 				if(field.search('_nrg_')>-1)continue;
 
+				/**TBD**/
+				/**	this equation is still not clear
+				if(field=="ww_SL_dil_emis")continue; 
+				**/
+				/**TBD**/
+
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
 
@@ -795,8 +804,9 @@
 
 <!--container-->
 <div id=main style=text-align:left>
+
 	<!--questions-->
-	<div class=card style=text-align:left><?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
+	<div class=card><?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
 		<table style=margin:1em id=questions class=inline></table>
 		<script>
 			function updateQuestionsTable()
@@ -960,7 +970,7 @@
 	</div>
 
 	<!--GRAPHS-->
-	<div class=card><?php cardMenu($lang_json['#graphs']) ?>
+	<div class="card"><?php cardMenu($lang_json['#graphs']) ?>
 		<div id=graph><?php write('#loading')?></div>
 		<script>
 			google.charts.load('current',{'packages':['corechart']});
@@ -973,6 +983,7 @@
 			#graph * {margin:auto}
 		</style>
 	</div>
+
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>

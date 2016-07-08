@@ -31,6 +31,19 @@
 
 <!--utils-->
 <script>
+	/** Colors for GHG emissions */
+	var ColorsGHG = {
+		ws_KPI_GHG_elec      :"#3366CC", //electricity
+		ws_KPI_GHG_ne        :"#DC3912", //fuel
+		ww_KPI_GHG_elec      :"#FF9900", //electricity
+		ww_KPI_GHG_ne_ch4_wwt:"#109618", //methane treated
+		ww_KPI_GHG_ne_n2o_tre:"#990099", //nitrogen treated
+		ww_KPI_GHG_ne_tsludge:"#0099C6", //transport
+		ww_KPI_GHG_ne_ch4_unt:"#DD4477", //methane untreated
+		ww_KPI_GHG_ne_n2o_unt:"#66AA00", //nitrogen untreated
+		ww_KPI_GHG_ne_engines:"#B82E2E", //fuel
+	}
+
 	<?php
 		//create a menu for folding the parent div.card element
 		function cardMenu($name)
