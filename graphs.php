@@ -54,10 +54,21 @@ Graphs.graph1=function(withTable,container)
 	}
 
 	//empty the container element
-	document.getElementById(container).innerHTML='';
+	var con = document.getElementById(container)
+	con.innerHTML='';
+	con.title="Double click here to download this chart as an image"
+
+	//double click
+	con.ondblclick=function(){
+		var a=document.createElement('a');
+		document.body.appendChild(a);
+		a.href=chart.getImageURI()
+		a.download="image.png"
+		a.click()
+	}
 
 	//draw
-	var chart=new google.visualization.PieChart(document.getElementById(container));
+	var chart=new google.visualization.PieChart(con);
 	chart.draw(data,options);
 
 	//create a table string
