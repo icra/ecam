@@ -85,7 +85,7 @@
 	"#getStarted_max_200" : "Max 200 characters",
 
 	"#configuration" : "Configuration",
-	"#configuration_activate_all" : "Activate all",
+	"#configuration_activate_all" : "Activate all &amp; set conversion factor to 1",
 	"#configuration_subtitle" : "Use the left table to activate stages, which will form your system. Then, fill the options on the right.",
 	"#configuration_enter_custom_value" : "enter custom value or select country",
 	"#configuration_custom" : "CUSTOM",
@@ -93,7 +93,7 @@
 	"#configuration_new_currency" : "Write new currency (3 letters max)",
 	"#configuration_additional_questions" : "Additional questions",
 	"#configuration_active_stages_error" : "There are no active stages. Click on the left table to activate them.",
-	"#configuration_fuel_options" : "Fuel type",
+	"#configuration_fuel_options" : "Select fuel type",
 	"#configuration_stage" : "Stage",
 	"#configuration_selected_fuel" : "Selected Fuel type",
 	"#configuration_engines" : "Engines",
@@ -228,7 +228,7 @@
 	"#todo_status" : "Status",
 
 	"#fuelInfo_description" : "Depending on the fuel you select, the following emission factors will be applied in the equations",
-	"#fuelInfo_eeff" : "Emission Factors (EF) for different fuel types (table 6.3 IPCC vol 6)",
+	"#fuelInfo_eeff" : "Emission Factors (EF) for different fuel types (table 2.2 IPCC vol 2)",
 	"#fuelInfo_type" : "Fuel type",
 	"#fuelInfo_engines" : "engines",
 	"#fuelInfo_vehicles" : "vehicles",
@@ -262,7 +262,7 @@
 
 	"#ws_SL_serv_pop_descr" : "Serviced population",
 	"#ws_SL_serv_pop_expla" : "Serviced population",
-	"#ws_SL_non_revw_descr" : "Non revenue water",
+	"#ws_SL_non_revw_descr" : "Non revenue water (%volume) over the entire drinking water system",
 	"#ws_SL_non_revw_expla" : "Non revenue water",
 	"#ws_SL_auth_con_descr" : "Authorized consumption per person per day",
 	"#ws_SL_auth_con_expla" : "Volume of authorized consumption per serviced person in the service area managed by the undertaking divided by the duration of the assessment period",

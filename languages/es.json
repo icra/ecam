@@ -85,7 +85,7 @@
 	"#getStarted_max_200" : "Máximo 200 caracteres",
 
 	"#configuration" : "Configuración",
-	"#configuration_activate_all" : "Activar todos",
+	"#configuration_activate_all" : "Activar todos &amp; establecer factor de conversión a 1",
 	"#configuration_subtitle" : "Use el menú de la izquierda para activar las etapas del ciclo del agua que formarán su sistema. Luego rellene las opciones de la derecha.",
 	"#configuration_enter_custom_value" : "escribe valor personalizado, o elige un país",
 	"#configuration_custom" : "PERSONALIZADO",
@@ -93,7 +93,7 @@
 	"#configuration_new_currency" : "Escriba nueva moneda (3 letras máximo)",
 	"#configuration_additional_questions" : "Preguntas adicionales",
 	"#configuration_active_stages_error" : "No hay etapas activas. Active etapas en la tabla de la izquierda de la página.",
-	"#configuration_fuel_options" : "Tipo de combustible",
+	"#configuration_fuel_options" : "Seleccione tipo de combustible",
 	"#configuration_stage" : "Etapa",
 	"#configuration_selected_fuel" : "Combustible seleccionado",
 	"#configuration_engines" : "Grupo electrógeno",
@@ -262,7 +262,7 @@
 
 	"#ws_SL_serv_pop_descr" : "Población residente servida",
 	"#ws_SL_serv_pop_expla" : "Porcentaje de población residente conectada al suministro de agua",
-	"#ws_SL_non_revw_descr" : "Volumen de agua no comptabilizada",
+	"#ws_SL_non_revw_descr" : "Volumen de agua no comptabilizada en todo el sistema de agua potable",
 	"#ws_SL_non_revw_expla" : "",
 	"#ws_SL_auth_con_descr" : "Consumo autorizado diario por persona",
 	"#ws_SL_auth_con_expla" : "Consumo autorizado diario por persona",

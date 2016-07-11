@@ -10,7 +10,13 @@ ECAM BUG DATABASE
     4. Who it's assigned to
     5. Whether it has been fixed or not
 ==============================================================================
-  *Bug* |#1|: Date selector in getStarted.php
+  Know bugs *NOT* fixed
+==============================================================================
+  *NONE*
+==============================================================================
+  Know bugs fixed
+==============================================================================
+  *Bug* : Date selector in getStarted.php
 
     * 1. Complete steps to reproduce the bug:
       In getStarted.php, press tab until you reach 2016 number and then try 

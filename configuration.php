@@ -156,6 +156,7 @@
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
+<!--linear diagram--><?php include'linear.php'?>
 <!--TITLE--><h1><?php write('#configuration')?></h1>
 <!--SUBTITLE--><h4><?php write('#configuration_subtitle')?></h4>
 
@@ -272,7 +273,7 @@
 				document.getElementById('uw1').style.background='red'
 				return;
 			}
-			window.location="dashboard.php"; return;
+			window.location="birds.php"; return;
 		}
 	</script>
 	<button class="button prev" onclick="event.stopPropagation();window.location='getStarted.php'"><?php write('#previous')?></button><!--

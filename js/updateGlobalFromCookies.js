@@ -16,6 +16,11 @@ function copyFieldsFrom(object_from,object_to)
 		*/
 		if(typeof(object_from[field])=="object")
 		{
+			/* <hotfix> FOR OLD JSON FILES */
+			if(field=="Active Stages") { copyFieldsFrom(object_from[field],object_to["ActiveStages"]); continue; }
+			if(field=="Fuel Type")     { copyFieldsFrom(object_from[field],object_to["FuelType"]);     continue; }
+			/* </hotfix> */
+
 			copyFieldsFrom(object_from[field],object_to[field]);
 		}
 		else 

@@ -1,10 +1,11 @@
 
 <!--LINEAR DIAGRAM: file inside edit.php, level3.php and stages.php-->
 <div id=linearDiagram>
-	<!--dashboard-->
+	<!--configuration
+	-->
 	<div>
-		<img class=l1 stage=dash src=img/dashboard.png onclick=window.location="dashboard.php" title="Dashboard">
-		<a href=dashboard.php style="color:#666">Dashboard</a>
+		<img class=l1 stage=conf src=img/dashboard.png onclick=window.location="configuration.php" title="<?php write('#configuration')?>">
+		<a href=configuration.php style="color:#666"><?php write('#configuration')?></a>
 	</div>
 
 	<!--QA-->
@@ -59,7 +60,7 @@
 	#linearDiagram img{border-radius:90%;border:4px solid transparent}
 	#linearDiagram img.selected{border:4px solid lightgreen}
 	#linearDiagram img:not(.inactive):hover {border:4px solid #d7bfaf}
-	#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(-61px);z-index:1;width:305px;}
+	#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(-69px);z-index:1;width:305px;}
 </style>
 
 <script>
@@ -119,10 +120,10 @@
 			<?php
 		}
 		//hl birds if we are in birds eye view
-		if(strpos($_SERVER['PHP_SELF'],"dashboard.php"))
+		if(strpos($_SERVER['PHP_SELF'],"configuration.php"))
 		{
 			?>
-			document.querySelector('img[stage=dash]').classList.add('selected');
+			document.querySelector('img[stage=conf]').classList.add('selected');
 			<?php
 		}
 		//hl opps if we are in opps.php
@@ -141,7 +142,7 @@
 		for(var i=0;i<collection.length;i++)
 		{
 			var stage = collection[i].getAttribute('stage');
-			if(stage=="birds" || stage=="energy" || stage=="dash" || stage=='opps')continue;
+			if(stage=="birds" || stage=="energy" || stage=="conf" || stage=='opps')continue;
 			var isActive = Global.Configuration.ActiveStages[stage];
 			if(!isActive)
 			{

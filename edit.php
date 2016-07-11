@@ -890,12 +890,24 @@
 	<div class=card><?php cardMenu("Inputs &amp; Outputs") ?>
 		<!--Inputs-->
 		<div class=inline style="width:45%;margin-left:2em;
-			<?php
-				if($level=="Energy") echo "display:none";
-			?>
-		">
+					<?php if($level=="Energy") echo "display:none"; ?>"
+		>
 			<table id=inputs style="width:100%;margin-bottom:1em">
-				<tr><th colspan=5 class=tableHeader>INPUTS
+				<tr><th colspan=5 class=tableHeader>INPUTS &mdash;
+					<!--assessment info-->
+					<span style="text-align:left;font-size:11px">
+						<a href=variable.php?id=Days><?php write('#assessment_period')?></a>: 
+							<script>document.write(format(Global.General.Days()))</script> <?php write('#days')?>
+						&mdash;
+						<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity"><?php write('#conversion_factor')?></a>: 
+							<script>
+								(function(){
+									var c = Global.General.conv_kwh_co2;
+									var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c); 
+									document.write(str)
+								})();
+							</script> kg CO<sub>2</sub>/kWh
+					</span>
 				<tr>
 					<th><?php write('#edit_description')?>
 					<th><?php write('#edit_current_value')?>
@@ -910,22 +922,8 @@
 			<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:1em;
 					<?php if($sublevel || $level=="Energy") echo "display:none;"; ?>
 				">
-				<tr><th colspan=7 class=tableHeader>OUTPUTS — <?php write('#edit_ghg_emissions')?> |
+				<tr><th colspan=7 class=tableHeader>OUTPUTS — <?php write('#edit_ghg_emissions')?>
 
-				<!--assessment info-->
-				<span style="text-align:left;font-size:11px">
-					<a href=variable.php?id=Days><?php write('#assessment_period')?></a>: 
-						<script>document.write(format(Global.General.Days()))</script> <?php write('#days')?>
-					|
-					<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity"><?php write('#conversion_factor')?></a>: 
-						<script>
-							(function(){
-								var c = Global.General.conv_kwh_co2;
-								var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c); 
-								document.write(str)
-							})();
-						</script> kg CO<sub>2</sub>/kWh
-				</span>
 				<tr>
 					<th style=width:10%><?php write('#edit_origin')?>
 					<th style=width:17%>Kg CO<sub>2</sub>

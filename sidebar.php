@@ -169,7 +169,6 @@
 			<tr><th><?php write('#sidebar_general')?>
 			<tr><td><a href=getStarted.php><?php write('#getStarted_general_info')?></a>
 			<tr><td><a href=configuration.php><?php write('#configuration')?></a>
-			<tr><td><a href=dashboard.php>Dashboard</a>
 			<tr><th><?php write('#ghg_assessment')?>
 			<tr><td><a href=birds.php><?php write('#quick_assessment')?></a>
 			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
@@ -194,6 +193,7 @@
 			<tr><td><a href=constants.php><?php write('#constants')?></a>
 			<tr><td><a href=benchmark.php>Benchmarking</a>
 			<tr><td><a href=bugs.txt>Known bugs</a>
+			<tr><td><a href=dashboard.php>Dashboard</a>
 		</table>
 	</div>
 </div>
