@@ -803,7 +803,8 @@
 <div id=main style=text-align:left>
 
 	<!--questions-->
-	<div class=card><?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
+	<div class=card>
+		<?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
 		<table style=margin:1em id=questions class=inline></table>
 		<script>
 			function updateQuestionsTable()
@@ -813,7 +814,11 @@
 
 				var questions = Questions.getQuestions(CurrentLevel);
 
-				if(questions.length==0) t.insertRow(-1).insertCell(-1).innerHTML="<i>N/A</i>"
+				if(questions.length==0)
+				{
+					t.parentNode.style.display="none"
+					t.insertRow(-1).insertCell(-1).innerHTML="<i>N/A</i>"
+				}
 
 				for(var q in questions)
 				{

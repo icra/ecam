@@ -192,7 +192,7 @@ var Global = {
 
 		c_ww_nrg_engines     : function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.engines_in_waste]; return this.ww_vol_fuel*fuel.FD*fuel.NCV/1000; },
 		c_ww_nrg_tsludge     : function(){return this.ww_num_trip*2*this.ww_dist_dis*0.25*0.84*43/1000000/1000},
-		c_ww_in_dilution     : function(){if(this.Treatment.wwt_vol_trea==0) return 0; else return this.Treatment.wwt_vol_trea-this.ww_vol_coll*this.ww_serv_pop/this.ww_conn_pop},
+		c_ww_in_dilution     : function(){if(this.ww_vol_wwtr==0) return 0; else return this.ww_vol_wwtr-this.ww_vol_coll*this.ww_serv_pop/this.ww_conn_pop},
 		ww_KPI_GHG_elec	     : function(){return this.ww_nrg_cons*Global.General.conv_kwh_co2},
 		ww_KPI_GHG_ne_engines: function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.engines_in_waste]; return this.c_ww_nrg_engines()*(fuel.EFCO2+Cts.ct_ch4_eq.value*fuel.EFCH4.engines+Cts.ct_n2o_eq.value*fuel.EFN2O.engines) }, //old c_ww57
 		ww_KPI_GHG_ne_tsludge: function(){
