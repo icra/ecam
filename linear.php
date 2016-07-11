@@ -60,7 +60,7 @@
 	#linearDiagram img{border-radius:90%;border:4px solid transparent}
 	#linearDiagram img.selected{border:4px solid lightgreen}
 	#linearDiagram img:not(.inactive):hover {border:4px solid #d7bfaf}
-	#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(-69px);z-index:1;width:305px;}
+	#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(-61px);z-index:1;width:278px;}
 </style>
 
 <script>

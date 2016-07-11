@@ -980,9 +980,7 @@ Graphs.gauge=function(container,values,header,max)
 	//inputs
 	max=max||100;
 
-	var DATA =[
-		['Label','Value'],
-	];
+	var DATA =[ ['Label','Value'], ];
 	for(var i in values) //values is [ ["title",value],["title",value],... ]
 		DATA.push(values[i])
 
@@ -1001,6 +999,11 @@ Graphs.gauge=function(container,values,header,max)
 	var h = document.createElement('h3');
 	h.innerHTML=header
 	element.insertBefore(h,element.firstChild)
+	//CSS
+		h.style.color="black"
+		h.style.fontWeight="bold"
+		h.style.fontSize="12px"
+	//CSS
 }
 
 Graphs.progress=function(container,value,header,color)
