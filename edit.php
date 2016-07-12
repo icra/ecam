@@ -894,9 +894,9 @@
 	<!--i/o-->
 	<div class=card><?php cardMenu("Inputs &amp; Outputs") ?>
 		<!--Inputs-->
-		<div class=inline style="width:45%;margin-left:2em;
-					<?php if($level=="Energy") echo "display:none"; ?>"
-		>
+		<div class=inline 
+			 style="width:45%;margin-left:2em;
+				<?php if($level=="Energy")echo "display:none"?>">
 			<table id=inputs style="width:100%;margin-bottom:1em">
 				<tr><th colspan=5 class=tableHeader>INPUTS &mdash;
 					<!--assessment info-->
@@ -920,9 +920,10 @@
 					<th><?php write('#edit_data_quality')?>
 			</table>
 		</div>
-
 		<!--Outputs-->
-		<div class=inline style="width:50%;margin-left:1em">
+		<div class=inline 
+			 style="width:50%;margin-left:1em;">
+
 			<!--GHG-->
 			<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:1em;
 					<?php if($sublevel || $level=="Energy") echo "display:none;"; ?>
@@ -970,7 +971,7 @@
 	</div>
 
 	<!--GRAPHS-->
-	<div class="card"><?php cardMenu($lang_json['#graphs']) ?>
+	<div class=card><?php cardMenu($lang_json['#graphs']) ?>
 		<div id=graph><?php write('#loading')?></div>
 		<script>
 			google.charts.load('current',{'packages':['corechart']});
