@@ -916,7 +916,7 @@
 									var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c); 
 									document.write(str)
 								})();
-							</script> kg CO<sub>2</sub>/kWh
+							</script> kg<sub>CO<sub>2</sub></sub>/kWh
 					</span>
 				<tr>
 					<th><?php write('#edit_description')?>
@@ -937,16 +937,16 @@
 
 				<tr>
 					<th style=width:10%><?php write('#edit_origin')?>
-					<th style=width:17%>Kg CO<sub>2</sub>
-					<th style=width:17%><?php write('#edit_value_per_year')?><br>kg CO<sub>2</sub>/<?php write('#year')?>
-					<th style=width:17%><?php write('#edit_per_inhab')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/inhab
-					<th style=width:17%><?php write('#edit_per_serv_pop')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/serv.pop
-					<th style=width:17%><?php write('#edit_per_water_volume')?><br>kg CO<sub>2</sub>/m<sup>3</sup>
+					<th style=width:17%>Kg<sub>CO<sub>2</sub></sub>
+					<th style=width:17%><?php write('#edit_value_per_year')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>
+					<th style=width:17%><?php write('#edit_per_inhab')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>/inhab
+					<th style=width:17%><?php write('#edit_per_serv_pop')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>/serv.pop
+					<th style=width:17%><?php write('#edit_per_water_volume')?><br>kg<sub>CO<sub>2</sub></sub>/m<sup>3</sup>
 					<?php
 						if($level=="Waste" && !$sublevel)
 						{	
 							?>
-							<th style=width:17%><?php write('#edit_per_bod_removed')?><br>kg CO<sub>2</sub>eq/kg BOD
+							<th style=width:17%><?php write('#edit_per_bod_removed')?><br>kg<sub>CO<sub>2</sub></sub>/kg BOD
 							<?php 
 						}
 					?>

@@ -242,7 +242,7 @@
 					<option value=0.452483345>Mexico
 					<option value=custom>--<?php write('#configuration_custom')?>--
 				</select>
-				<td style=border:none><input id=uw1 value=0 style="width:80px" onchange=updateUW1(this.value)> kg CO<sub>2</sub>/kWh
+				<td style=border:none><input id=uw1 value=0 style="width:80px" onchange=updateUW1(this.value)> kg<sub>CO<sub>2</sub></sub>/kWh
 			</table>
 		</fieldset>
 

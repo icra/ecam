@@ -244,7 +244,7 @@
 					var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c); 
 					document.write(str)
 				})();
-			</script> kg CO<sub>2</sub>/kWh</span> 
+			</script> kg<sub>CO<sub>2</sub></sub>/kWh</span> 
 	</span>
 </h1></center>
 

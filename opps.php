@@ -75,7 +75,7 @@
 			var total = Global.Waste.ww_KPI_GHG();
 			var reduction = Opps.unt(ideal);
 			var percent = format(100*reduction/total);
-			document.querySelector('#servPopReduction').innerHTML=format(reduction)+" kg CO<sub>2</sub> ("+percent+"%)"
+			document.querySelector('#servPopReduction').innerHTML=format(reduction)+" kg<sub>CO<sub>2</sub></sub> ("+percent+"%)"
 			document.querySelector('#idealServPop_prc').innerHTML=format(100*ideal/Global.Waste.ww_conn_pop);
 		}
 
@@ -90,7 +90,7 @@
 			var reduction = Opps.nrw(ideal);
 			var total = Global.Water.ws_KPI_GHG();
 			var percent = format(100*reduction/total);
-			document.querySelector('#nrwReduction').innerHTML=format(reduction)+" kg CO<sub>2</sub> ("+percent+"%)";
+			document.querySelector('#nrwReduction').innerHTML=format(reduction)+" kg<sub>CO<sub>2</sub></sub> ("+percent+"%)";
 		}
 
 		function setAuc(ideal)
@@ -98,7 +98,7 @@
 			var reduction = Opps.auc(ideal);
 			var total = Global.Water.ws_KPI_GHG();
 			var percent = format(100*reduction/total);
-			document.querySelector('#aucReduction').innerHTML=format(reduction)+" kg CO<sub>2</sub> ("+percent+"%)";
+			document.querySelector('#aucReduction').innerHTML=format(reduction)+" kg<sub>CO<sub>2</sub></sub> ("+percent+"%)";
 			var aucPerCapita = ideal*1000/Global.Water.ws_serv_pop/Global.General.Days();
 			document.querySelector('#aucPerCapita').innerHTML=format(aucPerCapita)
 		}
@@ -184,7 +184,7 @@
 					<b><script> document.write(format(Global.Water.ws_SL_non_revw())) </script>%</b>. 
 					Its related emissions are
 					<b><script> document.write(format(Global.Water.ws_SL_nrw_emis())) </script></b>
-					kg CO<sub>2</sub>
+					kg<sub>CO<sub>2</sub></sub>
 					(<script> document.write(format(Global.Water.ws_SL_non_revw())) </script>% of Water supply emissions).
 					<br> <br>
 					If NRW was 
@@ -206,7 +206,7 @@
 					Its related emissions are
 					<b><script>
 						document.write(format(Global.Water.ws_SL_auc_emis()))
-					</script></b> kg CO<sub>2</sub>.
+					</script></b> kg<sub>CO<sub>2</sub></sub>.
 					<br><br>If Authorized consumption was
 					<input type=number style="width:50px" id=idealAuc onchange=setAuc(parseFloat(this.value))> m<sup>3</sup> 
 						(<span id=aucPerCapita>0</span> L/person/day), it would reduce
@@ -227,11 +227,11 @@
 					Its related emissions are
 					<b><script>
 						document.write(format(Global.Water.ws_KPI_GHG_elec()))
-					</script></b> kg CO<sub>2</sub>.
+					</script></b> kg<sub>CO<sub>2</sub></sub>.
 					<br><br>
 					If you reduce energy consumption by
 					<input value=0 onchange=setNrgCons(parseFloat(this.value)) type=number id=ideal_ws_nrg_cons_percent style="width:40px"> %,
-					you can reduce GHG emissions by <b><span id=ws_KPI_GHG_elec_reduction>0</span></b> kg CO<sub>2</sub>
+					you can reduce GHG emissions by <b><span id=ws_KPI_GHG_elec_reduction>0</span></b> kg<sub>CO<sub>2</sub></sub>
 					(<span id=ws_KPI_GHG_elec_reduction_prc>0</span>% of Water supply emissions)
 					<br>
 					and save <b><span id=ws_KPI_GHG_elec_reduction_money>0</span></b>
@@ -295,11 +295,11 @@
 					Its related emissions are
 					<b><script>
 						document.write(format(Global.Waste.ww_KPI_GHG_elec()))
-					</script></b> kg CO<sub>2</sub>.
+					</script></b> kg<sub>CO<sub>2</sub></sub>.
 					<br><br>
 					If you reduce energy consumption by
 					<input value=0 onchange=setNrgCons_ww(parseFloat(this.value)) type=number id=ideal_ww_nrg_cons_percent style="width:40px"> %,
-					you can reduce GHG emissions by <b><span id=ww_KPI_GHG_elec_reduction>0</span></b> kg CO<sub>2</sub>
+					you can reduce GHG emissions by <b><span id=ww_KPI_GHG_elec_reduction>0</span></b> kg<sub>CO<sub>2</sub></sub>
 					(<span id=ww_KPI_GHG_elec_reduction_prc>0</span>% of Wastewater emissions)
 					<br>
 					and save <b><span id=ww_KPI_GHG_elec_reduction_money>0</span></b>
