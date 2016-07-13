@@ -125,7 +125,6 @@
 		/* temporally invisible
 		span.circle{display:none}
 		*/
-
 	</style>
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
@@ -181,7 +180,8 @@
 	<style>
 		#opps > div.card {margin:1em}
 		#opps > div.card > div.card {
-			margin:0.7em;
+			margin:0.2em;
+			opacity:0.99;
 		}
 		#opps div.opp {padding:0.5em;text-align:left}
 	</style>

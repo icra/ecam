@@ -250,7 +250,7 @@ Graphs.graph2=function(withTable,container)
 		height:250,
 		legend:{position:'left'},
 		pieHole:0.4,
-		title:"<?php write('#graphs_graph2')?> ("+(ws+ww)+" kWh)",
+		title:"<?php write('#graphs_graph2')?> ("+format(ws+ww)+" kWh)",
 		slices:
 		{
 			0:{ color: '#0aaeef' },

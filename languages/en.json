@@ -54,7 +54,7 @@
 	"#graphs_value" : "Value",
 	"#graphs_detailed" : "Detailed",
 	"#graphs_graph1" : "GHG emissions",
-	"#graphs_graph2" : "Energy consumption (kWh)",
+	"#graphs_graph2" : "Energy consumption",
 	"#graphs_graph4" : "GHG emissions",
 	"#graphs_graph5" : "Energy consumption (DETAILED) (kWh)",
 	"#graphs_graph7" : "Energy consumption substages (kWh)",

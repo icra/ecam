@@ -54,7 +54,7 @@
 	"#graphs_value" : "Valor",
 	"#graphs_detailed" : "Detallado",
 	"#graphs_graph1" : "Emisiones de GEI",
-	"#graphs_graph2" : "Consumo de electricidad (kWh)",
+	"#graphs_graph2" : "Consumo de electricidad",
 	"#graphs_graph4" : "Emisiones de GEI (DETALLADO)",
 	"#graphs_graph5" : "Consumo de electricidad (DETALLADO) (kWh)",
 	"#graphs_graph7" : "Consumo de electricidad subetapas (kWh)",
