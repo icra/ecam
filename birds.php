@@ -379,7 +379,7 @@
 			<div graph id=graph5></div>
 			<div graph id=graph6></div>
 			<div graph style="width:98%;padding:1em 0;margin-bottom:1em;border:none">
-				For further details &amp; opportunities to reduce GHG emissions go to 
+				For further details on energy consumption &amp; opportunities to reduce GHG emissions go to 
 				<b>GHG Assessment</b> and/or 
 				<b>Energy Performance</b> (<a href=#>&uarr;</a>)
 			</div>

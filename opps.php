@@ -54,9 +54,6 @@
 				var value=Global[level][code]();
 				element.innerHTML=format(value);
 				element.setAttribute('value',value);
-
-				if(element.nodeName=="TD")
-					element.nextSibling.firstChild.style.backgroundColor=ColorsGHG[code]
 			}
 		}
 
@@ -122,9 +119,6 @@
 			animation: blink 4s ease 0.5s infinite alternate;
 		}
 
-		/* temporally invisible
-		span.circle{display:none}
-		*/
 	</style>
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
@@ -139,40 +133,37 @@
 
 
 </script>
-<div class="card inline" style="width:28%"><?php cardMenu('Sources of GHG: Kg of CO<sub>2</sub> emitted') ?>
+<div class="card inline" style="width:28%"><?php cardMenu('GHG emissions during the Assessment Period') ?>
+	<h4>Kg<sub>CO<sub>2</sub></sub> emitted in <script>document.write(Global.General.Days())</script> days
+	(<span class=circle style=background:orange></span> Highest emission)
+	</h4>
 	<table id=sources>
 		<style>
 			table#sources{ margin: 10px 3px ; }
 			table#sources td {max-width:70px}
 		</style>
 		
-		<tr><th rowspan=9 style=font-weight:bold;background:lightgreen;color:black>T<br>O<br>T<br>A<br>L<br><br>G<br>H<br>G<br><br>
+		<tr><th rowspan=9 style=font-weight:bold;background:lightgreen;color:black>T<br>O<br>T<br>A<br>L<br><br>
 			(<span><script>document.write(format(Global.General.TotalGHG()))</script></span>)
 
 		<th rowspan=2>Water<br>supply<br>(<span field=ws_KPI_GHG>0</span>)
 			<td colspan=2>Electricity<td field=ws_KPI_GHG_elec>0
-				<td><span class=circle>
 			<tr><td colspan=2>Fuel engines<td field=ws_KPI_GHG_ne>0
-				<td><span class=circle>
 
 		<tr><th rowspan=7 class=red>Wastewater <br>(<span field=ww_KPI_GHG>0</span>)
 			<td colspan=2>Electricity <td field=ww_KPI_GHG_elec>0
-			<td><span class=circle>
 			<tr><td colspan=2>Fuel engines <td field=ww_KPI_GHG_ne_engines>0
-			<td><span class=circle>
 			<tr><td colspan=2>Sludge transport <td field=ww_KPI_GHG_ne_tsludge>0
-			<td><span class=circle>
 			<tr><td rowspan=2>Treated wastewater<br>(<span field=ww_KPI_GHG_ne_tre>0</span>)
 				<td>    From CH<sub>4</sub><td field=ww_KPI_GHG_ne_ch4_wwt>0
-				<td><span class=circle>
 				<tr><td>From N<sub>2</sub>O<td field=ww_KPI_GHG_ne_n2o_tre>0
-				<td><span class=circle>
 			<tr><td rowspan=2>Untreated wastewater<br>(<span field=ww_KPI_GHG_ne_unt>0</span>)
 				<td>From CH<sub>4</sub> <td field=ww_KPI_GHG_ne_ch4_unt>0
-				<td><span class=circle>
 				<tr><td>From N<sub>2</sub>O <td field=ww_KPI_GHG_ne_n2o_unt>0
-				<td><span class=circle>
 	</table>
+	<style>
+		#sources td:last-child {text-align:right}
+	</style>
 </div>
 
 <!--Opportunities-->

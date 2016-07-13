@@ -143,6 +143,9 @@
 					if(field.search(/^c_/)==-1) continue;
 				}
 
+				//equation not clear, tbd in v2
+				if(field=="c_ww_in_dilution")continue;
+
 				/*check if field is level3 specific*/if(Level3.isInList(field)) continue;
 
 				//bool for if current field is a calculated variable (CV)
@@ -583,8 +586,10 @@
 				if(field.search("_KPI_GHG")>=0)continue;
 				if(field.search('_nrg_')>-1)continue;
 
-				/** TBD **///this equation is still not clear
+				/*these equations are still not clear (tbd in v2)*/
+				if(field=="ww_SL_dilution")continue; 
 				if(field=="ww_SL_dil_emis")continue; 
+				/**/
 
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
