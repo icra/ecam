@@ -29,7 +29,7 @@ function copyFieldsFrom(object_from,object_to)
 			{
 				object_to[field]=object_from[field];
 			}
-			catch(e){alert(e)}
+			catch(e){console.log(e+" field:"+field)}
 		}
 	}
 }

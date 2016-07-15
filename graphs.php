@@ -987,9 +987,9 @@ Graphs.gauge=function(container,values,header,max)
 	var data = google.visualization.arrayToDataTable(DATA);
 	var options = {
 		height:150,
-		redFrom: 0, redTo: 50,
-		yellowFrom:50, yellowTo: 80,
-		greenFrom:80, greenTo: 100,
+		redFrom: 0, redTo: 80,
+		yellowFrom:80, yellowTo: 95,
+		greenFrom:95, greenTo: 100,
 		minorTicks:5,
 		max:max,
 	};

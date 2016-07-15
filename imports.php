@@ -51,7 +51,7 @@
 			echo "
 			<div class=menu onclick=this.parentNode.classList.toggle('folded')>
 				<button></button>
-				$name</span>
+				$name
 			</div>
 			";
 		}

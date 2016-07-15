@@ -324,7 +324,13 @@
 				newCell.className='th'
 				newCell.innerHTML="Is benchmarked?"
 				newRow.insertCell(-1).innerHTML="YES (<a href=benchmark.php>info</a>)"+
-					"<pre class='prettyprint'>"+RefValues[id].toString()+"</pre>";
+					"<div class='card folded'>"+
+					"	<div class=menu onclick=this.parentNode.classList.toggle('folded')>"+
+					"		<button></button> See formula"+
+					"	</div>"+
+					"	<pre class='prettyprint'>"+RefValues[id].toString()+"</pre>"+
+					"</div>"+
+					"";
 			}
 
 			//Contains estimated data?

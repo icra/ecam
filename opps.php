@@ -12,7 +12,6 @@
 
 			calculateGHG()
 			findCriticGHG()
-			drawCharts()
 		}
 
 		function findCriticGHG()
@@ -102,13 +101,6 @@
 			var aucPerCapita = ideal*1000/Global.Water.ws_serv_pop/Global.General.Days();
 			document.querySelector('#aucPerCapita').innerHTML=format(aucPerCapita)
 		}
-		
-		function drawCharts()
-		{
-			Graphs.progress('nrwGraph',Global.Water.ws_SL_non_revw(),"Current "+translate("ws_SL_non_revw_descr"));
-			Graphs.authCon('aucGraph');
-			Graphs.progress('trtGraph',Global.Waste.ww_SL_treat_m3(),"Current serviced population");
-		}
 	</script>
 	<style>
 		@keyframes blink { from {background-color: white;} to {background-color: orange;} }
@@ -118,9 +110,8 @@
 			font-weight:bold;
 			animation: blink 4s ease 0.5s infinite alternate;
 		}
-
 	</style>
-</head><body><center>
+</head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--navbar--><?php include"navbar.php"?>
 <!--linear diagram--><?php include'linear.php'?>
@@ -128,45 +119,66 @@
 
 <div id=main>
 
-<!--sources of ghg-->
-<script>
+<!--ghg sources column-->
+<div class=inline style="width:28%">
+	<!--sources of ghg-->
+	<div class="card"><?php cardMenu('GHG emissions during the Assessment Period') ?>
+		<h4>Kg<sub>CO<sub>2</sub></sub> emitted in <script>document.write(Global.General.Days())</script> days
+		(<span class=circle style=background:orange></span> Highest emission)
+		</h4>
+		<table id=sources>
+			<style>
+				table#sources{ margin: 10px 3px ; }
+				table#sources td {max-width:70px}
+			</style>
+			
+			<tr><th rowspan=9 style=font-weight:bold;background:lightgreen;color:black>T<br>O<br>T<br>A<br>L<br><br>
+				(<span><script>document.write(format(Global.General.TotalGHG()))</script></span>)
 
+			<th rowspan=2>Water<br>supply<br>(<span field=ws_KPI_GHG>0</span>)
+				<td colspan=2>Electricity<td field=ws_KPI_GHG_elec>0
+				<tr><td colspan=2>Fuel engines<td field=ws_KPI_GHG_ne>0
 
-</script>
-<div class="card inline" style="width:28%"><?php cardMenu('GHG emissions during the Assessment Period') ?>
-	<h4>Kg<sub>CO<sub>2</sub></sub> emitted in <script>document.write(Global.General.Days())</script> days
-	(<span class=circle style=background:orange></span> Highest emission)
-	</h4>
-	<table id=sources>
+			<tr><th rowspan=7 class=red>Wastewater <br>(<span field=ww_KPI_GHG>0</span>)
+				<td colspan=2>Electricity <td field=ww_KPI_GHG_elec>0
+				<tr><td colspan=2>Fuel engines <td field=ww_KPI_GHG_ne_engines>0
+				<tr><td colspan=2>Sludge transport <td field=ww_KPI_GHG_ne_tsludge>0
+				<tr><td rowspan=2>Treated wastewater<br>(<span field=ww_KPI_GHG_ne_tre>0</span>)
+					<td>    From CH<sub>4</sub><td field=ww_KPI_GHG_ne_ch4_wwt>0
+					<tr><td>From N<sub>2</sub>O<td field=ww_KPI_GHG_ne_n2o_tre>0
+				<tr><td rowspan=2>Untreated wastewater<br>(<span field=ww_KPI_GHG_ne_unt>0</span>)
+					<td>From CH<sub>4</sub> <td field=ww_KPI_GHG_ne_ch4_unt>0
+					<tr><td>From N<sub>2</sub>O <td field=ww_KPI_GHG_ne_n2o_unt>0
+		</table>
 		<style>
-			table#sources{ margin: 10px 3px ; }
-			table#sources td {max-width:70px}
+			#sources td:last-child {text-align:right}
 		</style>
-		
-		<tr><th rowspan=9 style=font-weight:bold;background:lightgreen;color:black>T<br>O<br>T<br>A<br>L<br><br>
-			(<span><script>document.write(format(Global.General.TotalGHG()))</script></span>)
+	</div>
 
-		<th rowspan=2>Water<br>supply<br>(<span field=ws_KPI_GHG>0</span>)
-			<td colspan=2>Electricity<td field=ws_KPI_GHG_elec>0
-			<tr><td colspan=2>Fuel engines<td field=ws_KPI_GHG_ne>0
+	<!--Catalog of Solutions-->
+	<div class=card id=CoS><?php cardMenu("Catalog of Solutions")?>
 
-		<tr><th rowspan=7 class=red>Wastewater <br>(<span field=ww_KPI_GHG>0</span>)
-			<td colspan=2>Electricity <td field=ww_KPI_GHG_elec>0
-			<tr><td colspan=2>Fuel engines <td field=ww_KPI_GHG_ne_engines>0
-			<tr><td colspan=2>Sludge transport <td field=ww_KPI_GHG_ne_tsludge>0
-			<tr><td rowspan=2>Treated wastewater<br>(<span field=ww_KPI_GHG_ne_tre>0</span>)
-				<td>    From CH<sub>4</sub><td field=ww_KPI_GHG_ne_ch4_wwt>0
-				<tr><td>From N<sub>2</sub>O<td field=ww_KPI_GHG_ne_n2o_tre>0
-			<tr><td rowspan=2>Untreated wastewater<br>(<span field=ww_KPI_GHG_ne_unt>0</span>)
-				<td>From CH<sub>4</sub> <td field=ww_KPI_GHG_ne_ch4_unt>0
-				<tr><td>From N<sub>2</sub>O <td field=ww_KPI_GHG_ne_n2o_unt>0
-	</table>
-	<style>
-		#sources td:last-child {text-align:right}
-	</style>
+		<a href="http://www.iwa-network.org/waccli/public/" target=_blank>
+			IWA Catalog of solutions
+		</a>
+		<style>
+			#CoS a{
+				display:block;
+				margin:0.5em;
+				color:white;
+				font-weight:bold;
+				border:1px solid #ccc;
+				padding:1em;
+				background:#0aaff1;
+				border-radius:0.5em;
+			}
+			#CoS a:hover {background:#d7bfaf}
+		</style>
+
+	</div>
 </div>
 
-<!--Opportunities-->
+<!--Opportunities column-->
 <div class="card inline" id=opps style="width:70%"><?php cardMenu("Opportunities")?>
 	<style>
 		#opps > div.card {margin:1em}
@@ -175,6 +187,9 @@
 			opacity:0.99;
 		}
 		#opps div.opp {padding:0.5em;text-align:left}
+		#opps input[type=number] {
+			width:70px;
+		}
 	</style>
 	<!--Water-->
 	<div class=card style="background:#0aaff1;"><?php cardMenu('Water supply')?>
@@ -188,11 +203,10 @@
 					(<script> document.write(format(Global.Water.ws_SL_non_revw())) </script>% of Water supply emissions).
 					<br> <br>
 					If NRW was 
-					<input type=number id=idealNRW onchange=setNRW(parseFloat(this.value)) style="width:40px"> %,
+					<input type=number id=idealNRW onchange=setNRW(parseFloat(this.value))> %,
 					it would reduce 
 					<b><span id=nrwReduction>0</span></b> of Water supply emissions.
 				</div>
-				<div id=nrwGraph style=display:none>Loading...</div>
 			</div>
 			<div class=card><?php cardMenu("2. Authorized consumption per capita")?>
 				<div class=opp>
@@ -208,11 +222,10 @@
 						document.write(format(Global.Water.ws_SL_auc_emis()))
 					</script></b> kg<sub>CO<sub>2</sub></sub>.
 					<br><br>If Authorized consumption was
-					<input type=number style="width:50px" id=idealAuc onchange=setAuc(parseFloat(this.value))> m<sup>3</sup> 
+					<input type=number id=idealAuc onchange=setAuc(parseFloat(this.value))> m<sup>3</sup> 
 						(<span id=aucPerCapita>0</span> L/person/day), it would reduce
 						<b><span id=aucReduction>0</span></b> of Water supply emissions
 				</div>
-				<div id=aucGraph style=display:none>Loading...</div>
 			</div>
 			<div class=card><?php cardMenu("3. Energy efficiency")?>
 				<div class=opp>
@@ -230,7 +243,7 @@
 					</script></b> kg<sub>CO<sub>2</sub></sub>.
 					<br><br>
 					If you reduce energy consumption by
-					<input value=0 onchange=setNrgCons(parseFloat(this.value)) type=number id=ideal_ws_nrg_cons_percent style="width:40px"> %,
+					<input value=0 onchange=setNrgCons(parseFloat(this.value)) type=number id=ideal_ws_nrg_cons_percent> %,
 					you can reduce GHG emissions by <b><span id=ws_KPI_GHG_elec_reduction>0</span></b> kg<sub>CO<sub>2</sub></sub>
 					(<span id=ws_KPI_GHG_elec_reduction_prc>0</span>% of Water supply emissions)
 					<br>
@@ -257,7 +270,6 @@
 						}
 					</script>
 				</div>
-				<div id=aucGraph style=display:none>Loading...</div>
 			</div>
 	</div>
 
@@ -275,11 +287,10 @@
 						})();
 					</script>%).
 					<br><br>If serviced population was
-					<input type=number id=idealServPop onchange=setServPop(parseFloat(this.value)) style=width:50px> people
+					<input type=number id=idealServPop onchange=setServPop(parseFloat(this.value))> people
 					(<span id=idealServPop_prc></span>%),
 					it would reduce 
 					<b><span id=servPopReduction>0</span></b> of Wastewater emissions.
-					<div id=trtGraph style=display:none>Loading...</div>
 				</div>
 			</div>
 			<div class=card><?php cardMenu("2. Energy efficiency")?>
@@ -298,7 +309,7 @@
 					</script></b> kg<sub>CO<sub>2</sub></sub>.
 					<br><br>
 					If you reduce energy consumption by
-					<input value=0 onchange=setNrgCons_ww(parseFloat(this.value)) type=number id=ideal_ww_nrg_cons_percent style="width:40px"> %,
+					<input value=0 onchange=setNrgCons_ww(parseFloat(this.value)) type=number id=ideal_ww_nrg_cons_percent> %,
 					you can reduce GHG emissions by <b><span id=ww_KPI_GHG_elec_reduction>0</span></b> kg<sub>CO<sub>2</sub></sub>
 					(<span id=ww_KPI_GHG_elec_reduction_prc>0</span>% of Wastewater emissions)
 					<br>
@@ -325,7 +336,6 @@
 						}
 					</script>
 				</div>
-				<div id=aucGraph style=display:none>Loading...</div>
 			</div>
 	</div>
 </div>
@@ -334,7 +344,3 @@
 
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
-<script>
-	google.charts.load('current',{'packages':['corechart','gauge']});
-	google.charts.setOnLoadCallback(init)
-</script>
