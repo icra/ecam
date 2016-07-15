@@ -119,13 +119,13 @@
 		div#sidebar
 		{
 			position:fixed;
-			/*dreta*/top:0;right:0;z-index:999;
-			/*esquerra*/top:52px;left:0;z-index:999;
+			/*esquerra*/top:50px;left:0;z-index:999;
 			background:white;
 			padding:0;margin:0;
 			box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
 			overflow:auto;
 			border-right:2px solid #ccc;
+			border-top:1px solid #ccc;
 		}
 		div#sidebar.off{width:0;height:0;top:0;display:none}
 		div#sidebar.on{width:255px;bottom:0;transition:all 0s}

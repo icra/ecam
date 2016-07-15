@@ -38,8 +38,8 @@
 			Graphs.graph2(false,'graph2');
 			Graphs.ws_cost('graph3');
 			Graphs.ww_cost('graph4');
-			Graphs.gauge('graph5', [ [translate("Water"),Global.Water.ws_SL_serv_pop()||0], ], translate("ws_SL_serv_pop_descr")+" (%)");
-			Graphs.gauge('graph6', [ [translate("Waste"),Global.Waste.ww_SL_serv_pop()||0], ], translate("ww_SL_serv_pop_descr")+" (%)");
+			Graphs.gaugeWS('graph5', [ [translate("Water"),Global.Water.ws_SL_serv_pop()||0], ], translate("ws_SL_serv_pop_descr")+" (%)");
+			Graphs.gaugeWW('graph6', [ [translate("Waste"),Global.Waste.ww_SL_serv_pop()||0], ], translate("ww_SL_serv_pop_descr")+" (%)");
 		}
 
 		var BEV={}; //'Birds Eye View' namespace

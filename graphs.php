@@ -974,8 +974,8 @@ Graphs.sankey=function(withTable,container)
 	}
 }
 
-/** Generic gauge */
-Graphs.gauge=function(container,values,header,max)
+/** gauges for serviced population */
+Graphs.gaugeWS=function(container,values,header,max)
 {
 	//inputs
 	max=max||100;
@@ -1005,6 +1005,38 @@ Graphs.gauge=function(container,values,header,max)
 		h.style.fontSize="12px"
 	//CSS
 }
+
+Graphs.gaugeWW=function(container,values,header,max)
+{
+	//inputs
+	max=max||100;
+
+	var DATA =[ ['Label','Value'], ];
+	for(var i in values) //values is [ ["title",value],["title",value],... ]
+		DATA.push(values[i])
+
+	var data = google.visualization.arrayToDataTable(DATA);
+	var options = {
+		height:150,
+		redFrom: 0, redTo: 50,
+		yellowFrom:50, yellowTo: 80,
+		greenFrom:80, greenTo: 100,
+		minorTicks:5,
+		max:max,
+	};
+	var element = document.getElementById(container)
+	var chart = new google.visualization.Gauge(element);
+	chart.draw(data,options);
+	var h = document.createElement('h3');
+	h.innerHTML=header
+	element.insertBefore(h,element.firstChild)
+	//CSS
+		h.style.color="black"
+		h.style.fontWeight="bold"
+		h.style.fontSize="12px"
+	//CSS
+}
+/***/
 
 Graphs.progress=function(container,value,header,color)
 {

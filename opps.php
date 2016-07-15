@@ -128,11 +128,15 @@
 		</h4>
 		<table id=sources>
 			<style>
-				table#sources{ margin: 10px 3px ; }
+				table#sources{ 
+					margin:10px 0; 
+					width:95%;
+				}
 				table#sources td {max-width:70px}
+				table#sources td:last-child {text-align:right}
 			</style>
 			
-			<tr><th rowspan=9 style=font-weight:bold;background:lightgreen;color:black>T<br>O<br>T<br>A<br>L<br><br>
+			<tr><th rowspan=9 style=font-weight:bold;background:#d7bfaf;color:black>TOTAL<br>
 				(<span><script>document.write(format(Global.General.TotalGHG()))</script></span>)
 
 			<th rowspan=2>Water<br>supply<br>(<span field=ws_KPI_GHG>0</span>)
@@ -150,16 +154,15 @@
 					<td>From CH<sub>4</sub> <td field=ww_KPI_GHG_ne_ch4_unt>0
 					<tr><td>From N<sub>2</sub>O <td field=ww_KPI_GHG_ne_n2o_unt>0
 		</table>
-		<style>
-			#sources td:last-child {text-align:right}
-		</style>
 	</div>
 
 	<!--Catalog of Solutions-->
-	<div class=card id=CoS><?php cardMenu("Catalog of Solutions")?>
-
+	<div class=card id=CoS><?php cardMenu("IWA Catalogue of solutions")?>
+		<div style="text-align:left;padding:1.0em">
+		This catalogue offers inspiring water, climate and energy solutions for each stage.
+		</div>
 		<a href="http://www.iwa-network.org/waccli/public/" target=_blank>
-			IWA Catalog of solutions
+			IWA Catalogue of solutions
 		</a>
 		<style>
 			#CoS a{
@@ -172,9 +175,7 @@
 				background:#0aaff1;
 				border-radius:0.5em;
 			}
-			#CoS a:hover {background:#d7bfaf}
 		</style>
-
 	</div>
 </div>
 
