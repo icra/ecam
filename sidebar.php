@@ -188,6 +188,7 @@
 			<tr><td><a href=summary.php?type=ccvv><?php write('#sidebar_all_ccvv')?></a>
 			<tr><td><a href=summary.php?type=output><?php write('#sidebar_all_kpis')?></a>
 			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
+			<!--hidden
 			<tr><th>Development
 			<tr><td><a href=graph.php?g=graph1><?php write('#sidebar_graphs')?></a>
 			<tr><td><a href=problems.php><?php write('#sidebar_problems')?></a>
@@ -195,6 +196,7 @@
 			<tr><td><a href=benchmark.php>Benchmarking</a>
 			<tr><td><a href=bugs.txt>Known bugs</a>
 			<tr><td><a href=dashboard.php>Dashboard</a>
+			-->
 		</table>
 	</div>
 </div>
