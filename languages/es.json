@@ -170,7 +170,7 @@
 	"#variable_value" : "Valor",
 	"#variable_magnitude" : "Magnitud",
 	"#variable_unit" : "Unidad",
-	"#variable_is_used_to_calculate" : "Outputs que utilizan este input",
+	"#variable_is_used_to_calculate" : "Outputs que utilizan esta ecuación como input",
 	"#variable_nothing" : "Ninguno",
 	"#variable_warning" : "Aviso",
 	"#variable_this_equation_contains_estimated_data" : "Esta ecuación contiene datos estimados en almenos un input",
@@ -251,11 +251,15 @@
 
 	"#engines_in_water" : "¿Tiene grupo electrógeno para bombas (Suministro de agua)",
 	"#engines_in_waste" : "¿Tiene grupo electrógeno para bombas (Aguas residuales)",
-	"#producing_energy_waterAbs" : "¿Produce energía en la etapa de Captación",
-	"#topographic_energy" : "¿Quiere investigar la energía topográfica (Distribución)",
+	"#producing_energy_waterAbs" : "¿Produce energía en la etapa de captación",
+	"#topographic_energy" : "¿Quiere investigar la energía topográfica (avanzado)",
 	"#truck_transport_waste" : "¿Usa transporte en camiones para llevar los lodos al sitio de disposición",
 	"#producing_biogas" : "¿Está produciendo biogás",
 	"#valorizing_biogas" : "¿Está valorizando biogás",
+	"#water_conduction":"¿Tiene conducción de agua",
+	"#pumping_for_abstraction":"¿Tiene bombeo en la la etapa de captación",
+	"#pumping_for_distribution":"¿Bombea directamente al sistema de distribución",
+
 
 	"#Days_descr"         : "Período de evaluación",
 	"#Days_expla"         : "Período de evaluación",

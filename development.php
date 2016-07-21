@@ -8,6 +8,7 @@
 <div id=main>
 
 <table>
+	<tr><td><a href=validate.php>Current JSON file</a>
 	<tr><td><a href=graph.php?g=graph1>Graph placeholder</a>
 	<tr><td><a href=problems.php>Problem finder</a>
 	<tr><td><a href=constants.php>All constants</a>
