@@ -23,15 +23,15 @@ function scrollTo(id)
 Graphs.graph1=function(withTable,container)
 //GHG
 {
+	withTable=withTable||false;
+	container=container||"graph";
+
 	//values: 4 combinations with electricity/non & water/waste
-	var ws = Global.Water.ws_KPI_GHG()
-	var ww = Global.Waste.ww_KPI_GHG()
+	var ws=Global.Water.ws_KPI_GHG()
+	var ww=Global.Waste.ww_KPI_GHG()
 
 	//names
-	var names = [
-		"<?php write('#Water');?>",
-		"<?php write('#Waste');?>",
-	];
+	var names = [ "<?php write('#Water')?>" , "<?php write('#Waste')?>" ];
 
 	//array graph data
 	var data=google.visualization.arrayToDataTable([
@@ -75,18 +75,15 @@ Graphs.graph1=function(withTable,container)
 	if(withTable)
 	{
 		var table=""+
-		"<table title=graph1>"+
 		"<button onclick=Graphs.graph1(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
-			"<button onclick=\"Graphs.graph4(false,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_detailed')?></button>"+
+		"<button onclick=\"Graphs.graph4(true,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_detailed')?></button>"+
+		"<table title=graph1>"+
 			"<tr><th><?php write('#graphs_slice')?><th><?php write('#graphs_formula')?><th><?php write('#graphs_value')?>"+
 			"<tr><td>"+names[0]+"<td><a href=variable.php?id=ws_KPI_GHG>ws_KPI_GHG</a><td>"+format(ws)+
 			"<tr><td>"+names[1]+"<td><a href=variable.php?id=ww_KPI_GHG>ww_KPI_GHG</a><td>"+format(ww)+
 		"</table>"+
-		'<div class=options>'+
-		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+
-		"	<a href='graph.php?g=graph1'><?php write('#graphs_go_to')?></a>"+
-		'</div>'+
 		"";
+
 		var div=document.createElement('div');
 		div.style.fontSize="10px";
 		div.innerHTML=table;
@@ -105,20 +102,19 @@ Graphs.graph1=function(withTable,container)
 Graphs.graph4=function(withTable,container)
 //GHG detailed
 {
-	//Pointers
-	var ws = Global.Water;
-	var ww = Global.Waste;
+	withTable=withTable||false;
+	container=container||"graph";
 
 	//Values
-	var slice_1 = ws.ws_KPI_GHG_elec()
-	var slice_2 = ws.ws_KPI_GHG_ne()
-	var slice_3 = ww.ww_KPI_GHG_elec()
-	var slice_4 = ww.ww_KPI_GHG_ne_ch4_wwt()
-	var slice_5 = ww.ww_KPI_GHG_ne_n2o_tre()
-	var slice_6 = ww.ww_KPI_GHG_ne_tsludge()
-	var slice_7 = ww.ww_KPI_GHG_ne_ch4_unt()
-	var slice_8 = ww.ww_KPI_GHG_ne_n2o_unt()
-	var slice_9 = ww.ww_KPI_GHG_ne_engines()
+	var slice_1 = Global.Water.ws_KPI_GHG_elec();
+	var slice_2 = Global.Water.ws_KPI_GHG_ne();
+	var slice_3 = Global.Waste.ww_KPI_GHG_elec();
+	var slice_4 = Global.Waste.ww_KPI_GHG_ne_ch4_wwt();
+	var slice_5 = Global.Waste.ww_KPI_GHG_ne_n2o_tre();
+	var slice_6 = Global.Waste.ww_KPI_GHG_ne_tsludge();
+	var slice_7 = Global.Waste.ww_KPI_GHG_ne_ch4_unt();
+	var slice_8 = Global.Waste.ww_KPI_GHG_ne_n2o_unt();
+	var slice_9 = Global.Waste.ww_KPI_GHG_ne_engines();
 
 	//names
 	var names=[
@@ -173,10 +169,6 @@ Graphs.graph4=function(withTable,container)
 	con.innerHTML='';
 	con.title="Double click here to download this chart as an image"
 
-	//draw
-	var chart=new google.visualization.PieChart(con);
-	chart.draw(data,options);
-
 	//double click
 	con.ondblclick=function(){
 		var a=document.createElement('a');
@@ -186,13 +178,21 @@ Graphs.graph4=function(withTable,container)
 		a.click()
 	}
 
-	//tables
+	//draw
+	var chart=new google.visualization.PieChart(con);
+	chart.draw(data,options);
+
+	//extra options
+	var div=document.createElement('div');
+	document.getElementById(container).appendChild(div);
+	div.style.fontSize="10px";
+
+	//create a table (string)
 	if(withTable)
 	{
-		//create a table (as a string)
 		var table=""+
 		"<button onclick=Graphs.graph4(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
-		"<button onclick=\"Graphs.graph1(false,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_detailed')?></button>"+
+		"<button onclick=\"Graphs.graph1(true,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_non_detailed')?></button>"+
 		"<table title=graph4>"+
 			"<tr><th><?php write('#graphs_slice')?><th><?php write('#graphs_formula')?><th><?php write('#graphs_value')?>"+
 			"<tr><td>"+names[0]+"<td>ws_KPI_GHG_elec	     <td>"+format(slice_1)+
@@ -205,23 +205,13 @@ Graphs.graph4=function(withTable,container)
 			"<tr><td>"+names[7]+"<td>ww_KPI_GHG_ne_n2o_unt <td>"+format(slice_8)+
 			"<tr><td>"+names[8]+"<td>ww_KPI_GHG_ne_engines <td>"+format(slice_9)+
 		"</table>"+
-		'<div class=options>'+
-		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+
-		"	<a href='graph.php?g=graph4'><?php write('#graphs_go_to')?></a>"+
-		'</div>'+
 		"";
-		var div = document.createElement('div');
-		div.style.fontSize="10px";
 		div.innerHTML=table;
-		document.getElementById(container).appendChild(div);
 	}
 	else
 	{
-		//button "show table"
-		var div=document.createElement('div');
-		document.getElementById(container).appendChild(div);
 		div.innerHTML="<button onclick=Graphs.graph4(true,'"+container+"')><?php write('#graphs_show_table')?></button>"+
-			"<button onclick=\"Graphs.graph1(false,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_detailed')?></button>"
+		"<button onclick=\"Graphs.graph1(false,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_non_detailed')?></button>"
 	}
 }
 
@@ -232,10 +222,7 @@ Graphs.graph2=function(withTable,container)
 	var ws=Global.Water.ws_nrg_cons;
 	var ww=Global.Waste.ww_nrg_cons;
 
-	var names=[
-		"<?php write('#Water')?>",
-		"<?php write('#Waste')?>",
-	]
+	var names=[ "<?php write('#Water')?>", "<?php write('#Waste')?>" ];
 
 	//actual graph data
 	var data=google.visualization.arrayToDataTable([
@@ -259,11 +246,27 @@ Graphs.graph2=function(withTable,container)
 	};
 
 	//empty the container element
-	document.getElementById(container).innerHTML='';
+	var con=document.getElementById(container);
+	con.innerHTML='';
+	con.title="Double click here to download this chart as an image"
+
+	//double click
+	con.ondblclick=function(){
+		var a=document.createElement('a');
+		document.body.appendChild(a);
+		a.href=chart.getImageURI()
+		a.download="image.png"
+		a.click()
+	}
 
 	//draw
-	var chart=new google.visualization.PieChart(document.getElementById(container));
+	var chart=new google.visualization.PieChart(con);
 	chart.draw(data,options);
+
+	//extra options
+	var div=document.createElement('div');
+	div.style.fontSize="10px";
+	document.getElementById(container).appendChild(div);
 
 	//table
 	if(withTable)
@@ -276,22 +279,18 @@ Graphs.graph2=function(withTable,container)
 			"<tr><td>"+names[0]+"<td><a href=variable.php?id=ws_nrg_cons>ws_nrg_cons</a><td>"+format(ws)+
 			"<tr><td>"+names[1]+"<td><a href=variable.php?id=ww_nrg_cons>ww_nrg_cons</a><td>"+format(ww)+
 		"</table>"+
-		'<div class=options>'+
-		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable><?php write('#graphs_printable_version')?></a> | '+
-		"	<a href='graph.php?g=graph2'><?php write('#graphs_go_to')?></a>"+
-		'</div>'+
 		"";
-		var div = document.createElement('div');
-		div.style.fontSize="10px";
 		div.innerHTML=table;
-		document.getElementById(container).appendChild(div);
 	}
 	else
 	{
-		//button "show table"
-		var div=document.createElement('div');
-		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.graph2(true,'"+container+"')><?php write('#graphs_show_table')?></button>"
+		//add a button to show the table
+		(function(){
+			var btn=document.createElement('button');
+			div.appendChild(btn)
+			btn.innerHTML="<?php write('#graphs_show_table')?>";
+			btn.onclick=function(){Graphs.graph2(true,container)};
+		})();
 	}
 }
 

@@ -31,7 +31,7 @@
 	</a>
 	·
 	<a href=mailto:WaCCliM@iwahq.org>
-		Contact: WaCCliM@iwahq.org
+		<?php write("#contact")?>: WaCCliM@iwahq.org
 	</a>
 </footer>
 

@@ -134,6 +134,7 @@
 		div#sidebar div{padding:0;margin:0}
 		div#sidebar table{width:100%;margin:0;}
 		div#sidebar td, div#sidebar th {border-left:0;border-right:0;padding:0.2em;padding-left:1em;}
+		div#sidebar th {border-top:0;}
 		div#sidebar table#menu td {border-bottom:0}
 		div#sidebar a.water{color:#00adef} 
 		div#sidebar a.waste{color:#d71d24} 
@@ -142,7 +143,7 @@
 	</style>
 	<div id=sidecontent>
 		<table id=menu>
-			<tr><th style="padding:5px 5px 5px 5px">Main menu <span id=Name style="float:right"> <script>document.write(Global.General.Name)</script>
+			<tr><th style="padding:5px 5px 5px 5px"><?php write("#sidebar_mainMenu")?><span id=Name style="float:right"> <script>document.write(Global.General.Name)</script>
 			<tr>
 				<td align=center style="padding:0.7em">
 				<input type="file" id="loadfile" accept=".json" onchange="loadFile(event)" style="display:none">
@@ -181,23 +182,22 @@
 			<tr><td><a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment><?php write('#Treatment')?></a>
 			<tr><td><a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge><?php write('#Discharge')?></a>
 			<tr><td><a href=edit.php?level=Energy><?php write('#energy_summary')?></a>
-			<tr><th>Opportunities
-			<tr><td><a href=opps.php>Opportunities</a>
+			<tr><th><?php write("#opportunities")?>
+			<tr><td><a href=opps.php><?php write("#opportunities")?></a>
 			<tr><th><?php write('#summary')?>
 			<tr><td><a href=summary.php?type=input><?php write('#sidebar_all_inputs')?></a>
 			<tr><td><a href=summary.php?type=ccvv><?php write('#sidebar_all_ccvv')?></a>
 			<tr><td><a href=summary.php?type=output><?php write('#sidebar_all_kpis')?></a>
 			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
-			<!--hidden
-			<tr><th>Development
-			<tr><td><a href=graph.php?g=graph1><?php write('#sidebar_graphs')?></a>
-			<tr><td><a href=problems.php><?php write('#sidebar_problems')?></a>
-			<tr><td><a href=constants.php><?php write('#constants')?></a>
-			<tr><td><a href=benchmark.php>Benchmarking</a>
-			<tr><td><a href=bugs.txt>Known bugs</a>
-			<tr><td><a href=dashboard.php>Dashboard</a>
-			-->
+			<tr><th>
 		</table>
+		<div style="
+			position:absolute;
+			bottom:0;
+			padding:0.5em;
+			">
+			<a href=development.php>Development</a>
+		</div>
 	</div>
 </div>
 

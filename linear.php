@@ -42,7 +42,7 @@
 	<!--Opportunities-->
 	<div>
 		<img class=l1 stage=opps src=img/opps.png onclick=window.location="opps.php" title="Opportunities to reduce GHG emissions">
-		<a href=opps.php style="color:#666">Opportunities</a>
+		<a href=opps.php style="color:#666"><?php write('#opportunities')?></a>
 	</div>
 </div>
 

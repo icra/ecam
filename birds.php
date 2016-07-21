@@ -353,7 +353,7 @@
 <div class="card inline" style="width:63%"><?php cardMenu($lang_json['#graphs'])?>
 	<div id=graphs>
 		<style> 
-			#graphs table{margin:auto !important}
+			#graphs table{margin:auto !important;margin-bottom:0.5em !important}
 			#graphs button{margin:0.5em;margin-top:0;font-size:10px} 
 			#graphs div div {text-align:center;position:relative} 
 			#graphs div.options {text-align:center;padding:1em}
