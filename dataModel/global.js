@@ -377,6 +377,9 @@ var Global = {
 			valorizing_biogas:0,
 			producing_energy_waterAbs:0,
 			topographic_energy:0,
+			water_conduction:0,
+			pumping_for_abstraction:0,
+			pumping_for_distribution:0,
 		},
 	},
 }
