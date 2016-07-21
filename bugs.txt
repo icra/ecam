@@ -1,6 +1,6 @@
 *bugs.txt*          For ECAM        Last change: 2016 July 7
 
-ECAM BUG DATABASE
+E C A M   B U G   D A T A B A S E
 
 ==============================================================================
   All found bugs have to be included with these fields:
@@ -10,9 +10,19 @@ ECAM BUG DATABASE
     4. Who it's assigned to
     5. Whether it has been fixed or not
 ==============================================================================
-  KNOW BUGS *NOT* FIXED
+
+  *KNOWN BUGS NOT FIXED*
+
 ==============================================================================
-  *Bug* : Assessment period duplicates itself because of space in name
+
+*N/A*
+
+==============================================================================
+
+  *KNOWN BUGS FIXED*
+
+==============================================================================
+  *Bug* : Assessment period duplicates itself because of space character in name
 
     * 1. Complete steps to reproduce the bug:
       Save a file, and when you load it the assessment period changes.
@@ -24,9 +34,7 @@ ECAM BUG DATABASE
       Already described.
 
     * 4. Whether it has been fixed or not
-      work in progress
-==============================================================================
-  KNOW BUGS FIXED
+      YES
 ==============================================================================
   *Bug* : Date selector in getStarted.php
 
@@ -45,5 +53,6 @@ ECAM BUG DATABASE
     * 4. Whether it has been fixed or not
       Yes, now the page has a fixed layout
 ==============================================================================
+
 *do not modify this line*
 vim:tw=78:ts=2:sw=2:expandtab:ft=help:norl:
