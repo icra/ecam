@@ -1,17 +1,17 @@
 /** Main data structure */
 var Global = {
 	General:{
-		"Name":                    "Unnamed system",
-		"Location":                "Canada, Europe, Russia, Oceania",
-		"Assessment Period Start": "2017-01-01",
-		"Assessment Period End":   "2018-01-01",
-		"Comments":                "",
-		"Currency":                "USD",
-		"conv_kwh_co2":            0,  /** conversion factor for grid electricity () */
+		Name:                  "Unnamed system",
+		Location:              "Canada, Europe, Russia, Oceania",
+		AssessmentPeriodStart: "2017-01-01",
+		AssessmentPeriodEnd:   "2018-01-01",
+		Comments:              "",
+		Currency:              "USD",
+		conv_kwh_co2:          0,  /** conversion factor for grid electricity () */
 		Days:function()
 		{
-			var startDate = new Date(Global.General["Assessment Period Start"]);
-			var finalDate = new Date(Global.General["Assessment Period End"]);
+			var startDate = new Date(Global.General.AssessmentPeriodStart);
+			var finalDate = new Date(Global.General.AssessmentPeriodEnd);
 			return (finalDate-startDate)/1000/60/60/24;
 		},
 		Years:function()

@@ -35,8 +35,8 @@
 			Sidebar.update();
 			updateResult();
 			document.querySelector('#form #Name').value=Global.General.Name;
-			document.querySelector('#form #Start').value=Global.General["Assessment Period Start"];
-			document.querySelector('#form #End').value=Global.General["Assessment Period End"];
+			document.querySelector('#form #Start').value=Global.General.AssessmentPeriodStart;
+			document.querySelector('#form #End').value=Global.General.AssessmentPeriodEnd;
 			document.querySelector('#form #Days').innerHTML=Global.General.Days();
 			document.querySelector('#form #Comments').value=Global.General.Comments;
 			document.querySelector('#form #Location').innerHTML="";
@@ -61,10 +61,10 @@
 			<td id=Location>
 		<tr>
 			<th><?php write('#getStarted_table_start')?>
-			<td><input id=Start type=date onchange="updateField('Assessment Period Start',this.value)">
+			<td><input id=Start type=date onchange="updateField('AssessmentPeriodStart',this.value)">
 		<tr>
 			<th><?php write('#getStarted_table_end')?>
-			<td><input id=End type=date onchange="updateField('Assessment Period End',this.value)">
+			<td><input id=End type=date onchange="updateField('AssessmentPeriodEnd',this.value)">
 		<tr>
 			<th><?php write('#getStarted_table_period')?>
 			<td><span id=Days>0</span> <?php write('#days')?>

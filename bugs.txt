@@ -10,11 +10,23 @@ ECAM BUG DATABASE
     4. Who it's assigned to
     5. Whether it has been fixed or not
 ==============================================================================
-  Know bugs *NOT* fixed
+  KNOW BUGS *NOT* FIXED
 ==============================================================================
-  *NONE*
+  *Bug* : Assessment period duplicates itself because of space in name
+
+    * 1. Complete steps to reproduce the bug:
+      Save a file, and when you load it the assessment period changes.
+
+    * 2. Expected behavior:
+      The assessment period should not change unexpectedly
+      
+    * 3. Observed (buggy) behavior:
+      Already described.
+
+    * 4. Whether it has been fixed or not
+      work in progress
 ==============================================================================
-  Know bugs fixed
+  KNOW BUGS FIXED
 ==============================================================================
   *Bug* : Date selector in getStarted.php
 

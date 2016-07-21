@@ -59,7 +59,7 @@
 		{
 			//get info from the input element
 			var field = input.id;
-			var value = parseFloat(input.value);
+			var value = parseFloat(input.value.replace(",","")); //replace commmas for copy paste easyness
 
 			//if value is not a number, set to zero
 			if(isNaN(value))value=0;
