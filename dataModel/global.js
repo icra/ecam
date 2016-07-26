@@ -129,8 +129,8 @@ var Global = {
 			wsd_KPI_nrg_efficien:function(){return 100*this.c_wsd_nrg_mini()/(this.c_wsd_nrg_supp()-this.wsd_nrg_recv)},
 			wsd_KPI_nrg_topgraph:function(){return 100*this.c_wsd_nrg_topo()/(this.c_wsd_nrg_supp()-this.wsd_nrg_recv)},
 			wsd_KPI_water_losses:function(){
-				if(Global.Water.Abstraction.wsa_vol_conv!=0)
-					return 1000*(Global.Water.Abstraction.wsa_vol_conv-Global.Water.ws_vol_auth)/(this.wsd_main_len)
+				if(this.wsd_vol_dist>0)
+					return 1000*(this.wsd_vol_dist-Global.Water.ws_vol_auth)/(this.wsd_main_len)
 				else
 					return 0;
 			},

@@ -118,7 +118,8 @@
 	/** make a table row inactive. Used according to Questions**/
 	function disableRow(row)
 	{
-		//row.style.display='none';
+		row.style.display='none';
+		return
 		//Change color
 		row.style.background='#eee';
 		row.style.color='#aaa';

@@ -38,6 +38,8 @@ var Questions =
 		"wsd_av_no_el",
 		"wsd_wt_el_no",
 		"c_wsd_nrg_topo",
+		"c_wsd_nrg_natu",
+		"wsd_KPI_nrg_topgraph",
 	],
 
 	"producing_biogas": [

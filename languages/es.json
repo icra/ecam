@@ -248,7 +248,7 @@
 	"#engines_in_water" : "¿Tiene grupo electrógeno para bombas (Suministro de agua)",
 	"#engines_in_waste" : "¿Tiene grupo electrógeno para bombas (Aguas residuales)",
 	"#producing_energy_waterAbs" : "¿Produce energía en la etapa de Captación",
-	"#topographic_energy" : "¿Quiere investigar la energía topográfica (Distribución)",
+	"#topographic_energy" : "¿Quiere investigar la energía topográfica",
 	"#truck_transport_waste" : "¿Usa transporte en camiones para llevar los lodos al sitio de disposición",
 	"#producing_biogas" : "¿Está produciendo biogás",
 	"#valorizing_biogas" : "¿Está valorizando biogás",

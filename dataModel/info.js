@@ -178,7 +178,7 @@ var Info = {
 	wsd_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m",},
 	wsd_KPI_nrg_efficien:{magnitude:"Percent",unit:"%",},
 	wsd_KPI_nrg_topgraph:{magnitude:"Percent",unit:"%",},
-	wsd_KPI_water_losses:{magnitude:"Volume/Distance/Time",unit:"m3/km/days",},
+	wsd_KPI_water_losses:{magnitude:"Volume/Distance",unit:"m3/km",},
 	wsd_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km",},
 
 	//L2 Wastewater Collection

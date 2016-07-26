@@ -248,7 +248,7 @@
 	"#engines_in_water" : "Do you have fuel engines for pumps (Water supply)",
 	"#engines_in_waste" : "Do you have fuel engines for pumps (Wastewater)",
 	"#producing_energy_waterAbs" : "Are you producing energy in Abstraction stage",
-	"#topographic_energy" : "Do you want to investigate topographic energy (Distribution)",
+	"#topographic_energy" : "Do you want to investigate topographic energy",
 	"#truck_transport_waste" : "Are you using truck transport to convey sludge to disposal site",
 	"#producing_biogas" : "Are you producing biogas",
 	"#valorizing_biogas" : "Are you valorizing biogas",
