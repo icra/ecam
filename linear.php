@@ -3,14 +3,18 @@
 <div id=linearDiagram>
 	<!--configuration
 	-->
-	<div>
-		<img class=l1 stage=conf src=img/dashboard.png onclick=window.location="configuration.php" title="<?php write('#configuration')?>">
+	<div 
+		style=cursor:pointer
+		onclick=window.location="configuration.php">
+		<img class=l1 stage=conf src=img/dashboard.png title="<?php write('#configuration')?>">
 		<a href=configuration.php style="color:#666"><?php write('#configuration')?></a>
 	</div>
 
 	<!--QA-->
-	<div>
-		<img class=l1 stage=birds src=img/birds.png onclick=window.location="birds.php" title="<?php write('#quick_assessment')?>">
+	<div
+		style=cursor:pointer
+		onclick=window.location="birds.php">
+		<img class=l1 stage=birds src=img/birds.png title="<?php write('#quick_assessment')?>">
 		<a href=birds.php style="color:#666"><?php write('#quick_assessment')?></a>
 	</div>
 
@@ -33,15 +37,19 @@
 		<hr id=line>
 	</div>
 
-	<!--summary-->
-	<div>
-		<img class=l2 stage=energy src=img/energy.png onclick=window.location="edit.php?level=Energy" title="<?php write('#energy_summary')?>"> 
+	<!--nrg summary-->
+	<div
+		style=cursor:pointer
+		onclick=window.location="edit.php?level=Energy">
+		<img class=l2 stage=energy src=img/energy.png title="<?php write('#energy_summary')?>"> 
 		<a href=edit.php?level=Energy style="color:#666"><?php write('#energy_summary')?></a>
 	</div>
 
 	<!--Opportunities-->
-	<div>
-		<img class=l1 stage=opps src=img/opps.png onclick=window.location="opps.php" title="Opportunities to reduce GHG emissions">
+	<div
+		style=cursor:pointer
+		onclick=window.location="opps.php">
+		<img class=l1 stage=opps src=img/opps.png title="Opportunities to reduce GHG emissions">
 		<a href=opps.php style="color:#666"><?php write('#opportunities')?></a>
 	</div>
 </div>
