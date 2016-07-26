@@ -143,6 +143,9 @@
 					if(field.search(/^c_/)==-1) continue;
 				}
 
+				//equation not clear, tbd in v2
+				if(field=="c_ww_in_dilution")continue;
+
 				/*check if field is level3 specific*/if(Level3.isInList(field)) continue;
 
 				//bool for if current field is a calculated variable (CV)
@@ -304,8 +307,11 @@
 				if(typeof(CurrentLevel[field])!="function")continue;
 				if(field.search(/^c_/)>=0)continue;
 				if(field.search("_KPI_GHG")==-1)continue;
-				if(field=="ww_KPI_GHG_ne")continue; //exception
-				if(field=="ww_KPI_GHG_ne_unt")continue; //exception
+
+				//hidden ones
+				if(field=="ww_KPI_GHG_ne")    continue;
+				if(field=="ww_KPI_GHG_ne_unt")continue;
+				if(field=="ww_KPI_GHG_ne_tre")continue;
 
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
@@ -488,7 +494,7 @@
 				newCell.style.textAlign='center';
 				newCell.innerHTML=(function()
 				{
-					var hasIndicator=RefValues.isInside(field);
+					var hasIndicator=RefValues.hasOwnProperty(field);
 					if(hasIndicator)
 					{
 						var indicator=RefValues[field](value);
@@ -579,6 +585,11 @@
 				if(field.search(/^c_/)!=-1){continue;}
 				if(field.search("_KPI_GHG")>=0)continue;
 				if(field.search('_nrg_')>-1)continue;
+
+				/*these equations are still not clear (tbd in v2)*/
+				if(field=="ww_SL_dilution")continue; 
+				if(field=="ww_SL_dil_emis")continue; 
+				/**/
 
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
@@ -795,8 +806,10 @@
 
 <!--container-->
 <div id=main style=text-align:left>
+
 	<!--questions-->
-	<div class=card style=text-align:left><?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
+	<div class=card>
+		<?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
 		<table style=margin:1em id=questions class=inline></table>
 		<script>
 			function updateQuestionsTable()
@@ -806,7 +819,11 @@
 
 				var questions = Questions.getQuestions(CurrentLevel);
 
-				if(questions.length==0) t.insertRow(-1).insertCell(-1).innerHTML="<i>N/A</i>"
+				if(questions.length==0)
+				{
+					t.parentNode.style.display="none"
+					t.insertRow(-1).insertCell(-1).innerHTML="<i>N/A</i>"
+				}
 
 				for(var q in questions)
 				{
@@ -880,13 +897,30 @@
 	</div>
 
 	<!--i/o-->
-	<div class=card><?php cardMenu("Inputs &amp; Outputs") ?>
+	<div class=card>
+		<div class=menu onclick=this.parentNode.classList.toggle('folded')>
+			<button></button>
+			Inputs &amp; Outputs &mdash;
+				<!--assessment info TO BE INCLUDED in edit.php-->
+				<span style="text-align:left;font-size:11px">
+					<a href=variable.php?id=Days><?php write('#assessment_period')?></a>: 
+						<script>document.write(format(Global.General.Days()))</script> <?php write('#days')?>
+					&mdash;
+					<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity"><?php write('#conversion_factor')?></a>: 
+						<script>
+							(function(){
+								var c = Global.General.conv_kwh_co2;
+								var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c); 
+								document.write(str)
+							})();
+						</script> kg<sub>CO<sub>2</sub></sub>/kWh
+				</span>
+			</span>
+		</div>
 		<!--Inputs-->
-		<div class=inline style="width:45%;margin-left:2em;
-			<?php
-				if($level=="Energy") echo "display:none";
-			?>
-		">
+		<div class=inline 
+			 style="width:45%;margin-left:2em;
+				<?php if($level=="Energy")echo "display:none"?>">
 			<table id=inputs style="width:100%;margin-bottom:1em">
 				<tr><th colspan=5 class=tableHeader>INPUTS
 				<tr>
@@ -896,41 +930,28 @@
 					<th><?php write('#edit_data_quality')?>
 			</table>
 		</div>
-
 		<!--Outputs-->
-		<div class=inline style="width:50%;margin-left:1em">
+		<div class=inline 
+			 style="width:50%;margin-left:1em;">
+
 			<!--GHG-->
 			<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:1em;
 					<?php if($sublevel || $level=="Energy") echo "display:none;"; ?>
 				">
-				<tr><th colspan=7 class=tableHeader>OUTPUTS — <?php write('#edit_ghg_emissions')?> |
+				<tr><th colspan=7 class=tableHeader>OUTPUTS — <?php write('#edit_ghg_emissions')?>
 
-				<!--assessment info-->
-				<span style="text-align:left;font-size:11px">
-					<a href=variable.php?id=Days><?php write('#assessment_period')?></a>: 
-						<script>document.write(format(Global.General.Days()))</script> <?php write('#days')?>
-					|
-					<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity"><?php write('#conversion_factor')?></a>: 
-						<script>
-							(function(){
-								var c = Global.General.conv_kwh_co2;
-								var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c); 
-								document.write(str)
-							})();
-						</script> kg CO<sub>2</sub>/kWh
-				</span>
 				<tr>
 					<th style=width:10%><?php write('#edit_origin')?>
-					<th style=width:17%>Kg CO<sub>2</sub>
-					<th style=width:17%><?php write('#edit_value_per_year')?><br>kg CO<sub>2</sub>/<?php write('#year')?>
-					<th style=width:17%><?php write('#edit_per_inhab')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/inhab
-					<th style=width:17%><?php write('#edit_per_serv_pop')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/serv.pop
-					<th style=width:17%><?php write('#edit_per_water_volume')?><br>kg CO<sub>2</sub>/m<sup>3</sup>
+					<th style=width:17%>Kg<sub>CO<sub>2</sub></sub>
+					<th style=width:17%><?php write('#edit_value_per_year')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>
+					<th style=width:17%><?php write('#edit_per_inhab')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>/inhab
+					<th style=width:17%><?php write('#edit_per_serv_pop')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>/serv.pop
+					<th style=width:17%><?php write('#edit_per_water_volume')?><br>kg<sub>CO<sub>2</sub></sub>/m<sup>3</sup>
 					<?php
 						if($level=="Waste" && !$sublevel)
 						{	
 							?>
-							<th style=width:17%><?php write('#edit_per_bod_removed')?><br>kg CO<sub>2</sub>eq/kg BOD
+							<th style=width:17%><?php write('#edit_per_bod_removed')?><br>kg<sub>CO<sub>2</sub></sub>/kg BOD
 							<?php 
 						}
 					?>
@@ -940,7 +961,9 @@
 			<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
 				<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#energy_performance')?>
 				<tr>
-					<!--<th title=Performance style=cursor:help><?php write('#edit_benchmark')?>-->
+					<!--
+					<th title=Performance style=cursor:help><?php write('#edit_benchmark')?>
+					-->
 					<th><?php write('#edit_description')?>
 					<th><?php write('#edit_current_value')?>
 					<th><?php write('#edit_unit')?>
@@ -971,6 +994,7 @@
 			#graph * {margin:auto}
 		</style>
 	</div>
+
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>

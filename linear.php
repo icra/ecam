@@ -1,10 +1,11 @@
 
 <!--LINEAR DIAGRAM: file inside edit.php, level3.php and stages.php-->
 <div id=linearDiagram>
-	<!--dashboard-->
+	<!--configuration
+	-->
 	<div>
-		<img class=l1 stage=dash src=img/dashboard.png onclick=window.location="dashboard.php" title="Dashboard">
-		<a href=dashboard.php style="color:#666">Dashboard</a>
+		<img class=l1 stage=conf src=img/dashboard.png onclick=window.location="configuration.php" title="<?php write('#configuration')?>">
+		<a href=configuration.php style="color:#666"><?php write('#configuration')?></a>
 	</div>
 
 	<!--QA-->
@@ -18,12 +19,6 @@
 		<img class=l1 stage=water src=img/water.png onclick=window.location="edit.php?level=Water" title="<?php write('#Water')?>"> 
 		<img class=l1 stage=waste src=img/waste.png onclick=window.location="edit.php?level=Waste" title="<?php write('#Waste')?>"> 
 		<span style="color:#666"><?php write('#ghg_assessment')?> </span>
-	</div>
-
-	<!--Opportunities-->
-	<div>
-		<img class=l1 stage=opps src=img/opps.png onclick=window.location="opps.php" title="Opportunities to reduce GHG emissions">
-		<a href=opps.php style="color:#666">Opportunities</a>
 	</div>
 
 	<!--Energy-->
@@ -43,6 +38,12 @@
 		<img class=l2 stage=energy src=img/energy.png onclick=window.location="edit.php?level=Energy" title="<?php write('#energy_summary')?>"> 
 		<a href=edit.php?level=Energy style="color:#666"><?php write('#energy_summary')?></a>
 	</div>
+
+	<!--Opportunities-->
+	<div>
+		<img class=l1 stage=opps src=img/opps.png onclick=window.location="opps.php" title="Opportunities to reduce GHG emissions">
+		<a href=opps.php style="color:#666"><?php write('#opportunities')?></a>
+	</div>
 </div>
 
 <style>
@@ -59,7 +60,7 @@
 	#linearDiagram img{border-radius:90%;border:4px solid transparent}
 	#linearDiagram img.selected{border:4px solid lightgreen}
 	#linearDiagram img:not(.inactive):hover {border:4px solid #d7bfaf}
-	#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(-61px);z-index:1;width:305px;}
+	#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(-61px);z-index:1;width:278px;}
 </style>
 
 <script>
@@ -119,10 +120,10 @@
 			<?php
 		}
 		//hl birds if we are in birds eye view
-		if(strpos($_SERVER['PHP_SELF'],"dashboard.php"))
+		if(strpos($_SERVER['PHP_SELF'],"configuration.php"))
 		{
 			?>
-			document.querySelector('img[stage=dash]').classList.add('selected');
+			document.querySelector('img[stage=conf]').classList.add('selected');
 			<?php
 		}
 		//hl opps if we are in opps.php
@@ -141,7 +142,7 @@
 		for(var i=0;i<collection.length;i++)
 		{
 			var stage = collection[i].getAttribute('stage');
-			if(stage=="birds" || stage=="energy" || stage=="dash" || stage=='opps')continue;
+			if(stage=="birds" || stage=="energy" || stage=="conf" || stage=='opps')continue;
 			var isActive = Global.Configuration.ActiveStages[stage];
 			if(!isActive)
 			{

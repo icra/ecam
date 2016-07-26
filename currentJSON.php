@@ -1,9 +1,8 @@
-<!--CURRENT GLOBAL OBJECT--><div style="display:
+<!--CURRENT GLOBAL OBJECT--><div id=currentJson style="display:
 none;
-margin-top:4em;"> 
-
+"> 
 	<!--global-->
-	<div class=inline style="margin-top:4em;text-align:left;border:1px solid #ccc;width:50%;background:#fafafa">
+	<div class=inline style="text-align:left;border:1px solid #ccc;width:50%;background:#fafafa">
 		<pre><b>Current System</b><br><span id=currentGlobal></span></pre>
 	</div>
 </div>

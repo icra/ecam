@@ -11,12 +11,12 @@
 
 <!--questions and variables hidden-->
 <table style=margin-bottom:3em>
-	<tr><th colspan=2><?php write('#questions_question')?><th><?php write('#questions_variables_hidden')?>
+	<tr><th>Code<th><?php write('#questions_question')?><th><?php write('#questions_variables_hidden')?>
 	<script>
 		for(var question in Questions)
 		{
 			if(typeof(Questions[question])=="function")continue;
-			document.write("<tr><td>"+question+"<td>"+translate(question)+"?")
+			document.write("<tr><td>#"+question+"<td>"+translate(question)+"?")
 			document.write("<td>")
 			for(var i in Questions[question])
 			{

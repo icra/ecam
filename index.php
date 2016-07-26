@@ -23,7 +23,7 @@
 	<div id=content>
 
 	<!--TITLE--><h1 style="text-align:left;font-size:30px;"><b>ECAM</b> <?php write("#index_web_tool")?>
-		<span style=color:#bf5050>(beta)</span>
+		<span style=color:#bf5050>v1.0</span>
 	</h1>
 
 	<!--DESCRIPTION--><div style="color:#58595b;font-size:18px;text-align:left">

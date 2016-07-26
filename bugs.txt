@@ -1,0 +1,58 @@
+*bugs.txt*          For ECAM        Last change: 2016 July 7
+
+E C A M   B U G   D A T A B A S E
+
+==============================================================================
+  All found bugs have to be included with these fields:
+    1. Complete steps to reproduce the bug
+    2. Expected behavior
+    3. Observed (buggy) behavior
+    4. Who it's assigned to
+    5. Whether it has been fixed or not
+==============================================================================
+
+  *KNOWN BUGS NOT FIXED*
+
+==============================================================================
+
+*N/A*
+
+==============================================================================
+
+  *KNOWN BUGS FIXED*
+
+==============================================================================
+  *Bug* : Assessment period duplicates itself because of space character in name
+
+    * 1. Complete steps to reproduce the bug:
+      Save a file, and when you load it the assessment period changes.
+
+    * 2. Expected behavior:
+      The assessment period should not change unexpectedly
+      
+    * 3. Observed (buggy) behavior:
+      Already described.
+
+    * 4. Whether it has been fixed or not
+      YES
+==============================================================================
+  *Bug* : Date selector in getStarted.php
+
+    * 1. Complete steps to reproduce the bug:
+      In getStarted.php, press tab until you reach 2016 number and then try 
+      to type 2017. It will remain as 0002. and you won't be able to type it 
+      correctly because the focus disappears. 
+
+    * 2. Expected behavior:
+      Type numbers normally
+      
+    * 3. Observed (buggy) behavior:
+      Already described. To solve it the page should be a fixed layout, 
+      not a dynamic one
+
+    * 4. Whether it has been fixed or not
+      Yes, now the page has a fixed layout
+==============================================================================
+
+*do not modify this line*
+vim:tw=78:ts=2:sw=2:expandtab:ft=help:norl:

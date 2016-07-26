@@ -8,7 +8,7 @@ var Tables =
 		"Natural Gas"     :{EFCH4:{engines:10,vehicles:92},EFN2O:{engines:0.1,vehicles:0.2},EFCO2:56100,FD:0.75,NCV:48.0},
 	},
 
-	"Countries": //selection for conversion factor "conv_kwh_co2"
+	"Countries":
 	{
 		"Peru":0,
 		"Thailand":0,

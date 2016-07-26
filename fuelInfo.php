@@ -14,9 +14,9 @@
 	<tr><th colspan=8 style=text-align:center><?php write('#fuelInfo_eeff')?>
 	<tr>
 		<th rowspan=2><?php write('#fuelInfo_type')?>
-		<th colspan=2>EF CH<sub>4</sub> (kg/TJ)
-		<th colspan=2>EF N<sub>2</sub>O (kg/TJ)
-		<th rowspan=2>EF CO<sub>2</sub> (kg/TJ)
+		<th colspan=2>EF<sub>CH<sub>4</sub></sub> (kg/TJ)
+		<th colspan=2>EF<sub>N<sub>2</sub>O</sub> (kg/TJ)
+		<th rowspan=2>EF<sub>CO<sub>2</sub></sub> (kg/TJ)
 		<th rowspan=2 style=cursor:help title="<?php write('#fuelInfo_fd')?>">FD   (kg/L)
 		<th rowspan=2 style=cursor:help title="<?php write('#fuelInfo_ncv')?>">NCV (TJ/Gg)
 	<tr>

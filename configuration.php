@@ -156,6 +156,7 @@
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
+<!--linear diagram--><?php include'linear.php'?>
 <!--TITLE--><h1><?php write('#configuration')?></h1>
 <!--SUBTITLE--><h4><?php write('#configuration_subtitle')?></h4>
 
@@ -241,7 +242,7 @@
 					<option value=0.452483345>Mexico
 					<option value=custom>--<?php write('#configuration_custom')?>--
 				</select>
-				<td style=border:none><input id=uw1 value=0 style="width:80px" onchange=updateUW1(this.value)> kg CO<sub>2</sub>/kWh
+				<td style=border:none><input id=uw1 value=0 style="width:80px" onchange=updateUW1(this.value)> kg<sub>CO<sub>2</sub></sub>/kWh
 			</table>
 		</fieldset>
 
@@ -272,7 +273,7 @@
 				document.getElementById('uw1').style.background='red'
 				return;
 			}
-			window.location="dashboard.php"; return;
+			window.location="birds.php"; return;
 		}
 	</script>
 	<button class="button prev" onclick="event.stopPropagation();window.location='getStarted.php'"><?php write('#previous')?></button><!--

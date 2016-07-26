@@ -16,17 +16,27 @@ function copyFieldsFrom(object_from,object_to)
 		*/
 		if(typeof(object_from[field])=="object")
 		{
-			copyFieldsFrom(object_from[field],object_to[field]);
+			/* 
+			 * HOTFIX FOR OLD JSON FILES
+			 * Problem: "field" may have space characters
+			 * Solution: Remove spaces with String.replace()
+			 *
+			 */
+
+			var newField = field.replace(/ /g,"");
+
+			copyFieldsFrom(object_from[field],object_to[newField]);
 		}
 		else 
 		{
 			try
 			{
 				object_to[field]=object_from[field];
-			}catch(e){ alert(e); }
+			}
+			catch(e){console.log(e+" field:"+field)}
 		}
 	}
-};
+}
 
 /**
   *

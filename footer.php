@@ -19,6 +19,7 @@
 <footer id=footer >
 	<img src=img/IWA-logo.png style=height:25px;vertical-align:middle>
 	Copyright <?php echo date("Y")?> 
+	·
 	<a href="http://www.iwa-network.org/" target=_blank>International Water Association</a>
 	·
 	<a href=about.php>
@@ -29,8 +30,8 @@
 		<?php write("#help")?>
 	</a>
 	·
-	<a href=mailto:WaCCliM@iwahq.com>
-		Contact
+	<a href=mailto:WaCCliM@iwahq.org>
+		<?php write("#contact")?>: WaCCliM@iwahq.org
 	</a>
 </footer>
 

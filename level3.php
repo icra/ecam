@@ -408,6 +408,7 @@
 			{
 				//only functions
 				if(typeof(CurrentStage[field])!="function"){continue;}
+				if(field.search('_SL_')>-1)continue;
 
 				/*if assessment type is simple, hide L3 variables*/
 				if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
@@ -477,7 +478,7 @@
 							var value=CurrentStage['modification']()/Units.multiplier(field);
 							var indicator=(function()
 							{
-								var hasIndicator=RefValues.isInside(field);
+								var hasIndicator=RefValues.hasOwnProperty(field);
 								if(hasIndicator)
 								{
 									var text=RefValues[field](value);
@@ -494,7 +495,6 @@
 								}
 								else{return "";}
 							})();
-							indicator=""/**disabled for now*/
 							return indicator+" "+format(value);
 						})();
 					}
@@ -561,13 +561,7 @@
 			updateOutputs();
 			Sidebar.update();
 			updateResult();
-			try{
-				drawCharts();
-			}
-			catch(e)
-			{
-				console.log(e);
-			}
+			try{drawCharts()}catch(e){console.log(e)}
 		}
 	</script>
 </head><body onload=init() style="background:#F5ECCE"><center>

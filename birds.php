@@ -3,21 +3,33 @@
 	<?php include'imports.php'?>
 	<style>
 		body {background:#e9ebee}
+		h1{background:white;border-bottom:1px solid #ccc}
 		table#inputs input {width:70px;transition:background 1s;border:1px solid #ccc}
 		table#inputs input.edited {background:lightgreen;}
+		table#inputs label input {width:auto;}
 		table#inputs tr.hidden {display:none}
 		table#inputs tr[indic]{text-align:center;color:#999;background:#eee}
 		table#inputs th{text-align:left;border:none}
 		table#inputs td {border-left:none;border-right:none;border-bottom:none}
-		h1{background:white}
+		#graphs td { text-align: left; }
+
+		/*
+			colors for graphs
+		*/
+		span.circle{display:none}
+		span.circle{float:right}
 	</style>
 	<script>
-		function init()
+		function init(detailed)
 		{
+			detailed=detailed||false;
+
 			BEV.showActive();
 			BEV.updateDefaults();
 			updateResult();
 			drawCharts();
+
+			if(detailed) Graphs.graph4(false,'graph1');//make first graph detailed
 		}
 
 		function drawCharts()
@@ -26,8 +38,8 @@
 			Graphs.graph2(false,'graph2');
 			Graphs.ws_cost('graph3');
 			Graphs.ww_cost('graph4');
-			Graphs.gauge('graph5', [ [translate("Water"),Global.Water.ws_SL_serv_pop()||0], ], translate("ws_SL_serv_pop_descr")+" (%)");
-			Graphs.gauge('graph6', [ [translate("Waste"),Global.Waste.ww_SL_serv_pop()||0], ], translate("ww_SL_serv_pop_descr")+" (%)");
+			Graphs.gaugeWS('graph5', [ [translate("Water"),Global.Water.ws_SL_serv_pop()||0], ], translate("ws_SL_serv_pop_descr")+" (%)");
+			Graphs.gaugeWW('graph6', [ [translate("Waste"),Global.Waste.ww_SL_serv_pop()||0], ], translate("ww_SL_serv_pop_descr")+" (%)");
 		}
 
 		var BEV={}; //'Birds Eye View' namespace
@@ -47,7 +59,7 @@
 		{
 			//get info from the input element
 			var field = input.id;
-			var value = parseFloat(input.value);
+			var value = parseFloat(input.value.replace(",","")); //replace commmas for copy paste easyness
 
 			//if value is not a number, set to zero
 			if(isNaN(value))value=0;
@@ -97,7 +109,7 @@
 			this.update(Global[L1],field,value);
 			//add a color to the field
 			input.classList.add('edited');
-			init();
+			init(true);
 		}
 
 		//Refresh default values from the table
@@ -232,7 +244,7 @@
 					var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c); 
 					document.write(str)
 				})();
-			</script> kg CO<sub>2</sub>/kWh</span> 
+			</script> kg<sub>CO<sub>2</sub></sub>/kWh</span> 
 	</span>
 </h1></center>
 
@@ -248,9 +260,11 @@
 			<tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?> <td><input id='ws_serv_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
 			<tr stage=water class=hidden><td><?php write('#birds_ws_vol_auth')?> <td><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>m3/<?php write('#birds_year')?>
 			<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cons')?> <td><input id='ws_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/<?php write('#birds_month')?>
+				<span class=circle style=background:#bca613></span>
 			<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
 			<tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
 			<tr stage=water class=hidden><td><?php write('#birds_ws_vol_fuel')?> <td><input id='ws_vol_fuel' onchange="BEV.updateField(this)"> <td>L/<?php write('#birds_month')?>
+				<span class=circle style=background:#453f1c></span>
 			<script>
 				//fuel depends on question #engines_in_water
 				(function(){
@@ -272,11 +286,15 @@
 				<td><input id='ww_serv_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
 			<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_wwtr')?> <td><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>/day
 			<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cons')?> <td><input id='ww_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/<?php write('#birds_month')?>
+				<span class=circle style=background:#89375c></span>
 			<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?> <td><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
 			<tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?> <td><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
 			<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_fuel')?><td><input id='ww_vol_fuel' onchange="BEV.updateField(this)"> <td>L/<?php write('#birds_month')?>
+				<span class=circle style=background:#d71d24></span>
 			<tr stage=waste class=hidden><td><?php write('#birds_ww_num_trip')?> <td><input id='ww_num_trip' onchange="BEV.updateField(this)"> <td><?php write('#birds_trips_week')?>
+				<span class=circle style=background:#d0afbe></span>
 			<tr stage=waste class=hidden><td><?php write('#ww_dist_dis_descr')?> <td><input id='ww_dist_dis' onchange="BEV.updateField(this)"> <td>km
+				<span class=circle style=background:#d0afbe></span>
 			<script>
 				//fuel depends on question #engines_in_waste
 				//trips and distance depend on question #truck_transport_waste
@@ -300,7 +318,33 @@
 				<td><?php write('#birds_ww_n2o_effl')?> 
 					<span title="<?php write('#birds_ww_n2o_effl_note')?>" style=color:orange;cursor:help>(<?php write('#birds_note')?>)</span>
 				<td><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
-			<tr stage=waste class=hidden><td><?php write('#birds_ww_prot_con')?><td><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/<?php write('#birds_people')?>/<?php write('#birds_year')?>
+					<span class=circle style=background:#b8879d></span>
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_prot_con')?><td><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/<?php write('#birds_year')?>
+				<span class=circle style=background:#451c2e></span>
+			<tr stage=waste class=hidden><td>
+				<?php write("#producing_biogas")?>?
+				<td colspan=2>
+				<label><?php write("#no")?>  <input name=producing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=0;init(true)"></label>
+				<label><?php write("#yes")?> <input name=producing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=1;init(true)"></label>
+				<script>
+					(function(){
+						var ans = Global.Configuration['Yes/No'].producing_biogas;
+						document.querySelector('input[name=producing_biogas][ans="'+ans+'"]').checked=true;
+					})();
+				</script>
+				<span class=circle style=background:#b8879d></span>
+			<tr stage=waste class=hidden><td>
+				<?php write("#valorizing_biogas")?>?
+				<td colspan=2>
+				<label><?php write("#no")?>  <input name=valorizing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=0;init(true)"></label>
+				<label><?php write("#yes")?> <input name=valorizing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=1;init(true)"></label>
+				<script>
+					(function(){
+						var ans = Global.Configuration['Yes/No'].valorizing_biogas;
+						document.querySelector('input[name=valorizing_biogas][ans="'+ans+'"]').checked=true;
+					})();
+				</script>
+				<span class=circle style=background:#b8879d></span>
 			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 	</table>
 </div>
@@ -309,7 +353,7 @@
 <div class="card inline" style="width:63%"><?php cardMenu($lang_json['#graphs'])?>
 	<div id=graphs>
 		<style> 
-			#graphs table{margin:auto !important}
+			#graphs table{margin:auto !important;margin-bottom:0.5em !important}
 			#graphs button{margin:0.5em;margin-top:0;font-size:10px} 
 			#graphs div div {text-align:center;position:relative} 
 			#graphs div.options {text-align:center;padding:1em}
@@ -335,9 +379,9 @@
 			<div graph id=graph5></div>
 			<div graph id=graph6></div>
 			<div graph style="width:98%;padding:1em 0;margin-bottom:1em;border:none">
-				For further details &amp; opportunities to reduce GHG emissions go to 
-				<b>GHG Assessment</b> and 
-				<b>Energy Performance</b> (&uarr;)
+				For further details on energy consumption &amp; opportunities to reduce GHG emissions go to 
+				<b>GHG Assessment</b> and/or 
+				<b>Energy Performance</b> (<a href=#>&uarr;</a>)
 			</div>
 		</div>
 		<script>

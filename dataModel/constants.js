@@ -2,14 +2,14 @@ var Cts =
 {
 	ct_bod_kg:{
 		descr:"Ratio BOD entering the plant / dry weight of organic matter in the sludge collected",
-		value:0.9,
-		unit:"?????",
+		value:0.8,
+		unit:"g VS / g BOD load",
 	},
 
 	ct_biog_g:{
-		descr:"Biogas produced per g of organic matter contained in the sludge",
+		descr:"Biogas produced (NL) per g of organic matter contained in the sludge",
 		value:0.4,
-		unit:"?????",
+		unit:"NL / gVS",
 	},
 
 	ct_ch4_lo:{
