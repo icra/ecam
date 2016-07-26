@@ -224,8 +224,8 @@
 	"#sidebar_problems" : "Problemas",
 
 	"#summary_no_active_stages" : "Ninguna etapa activada",
-	"#summary_all_active_inputs" : "Todos los inputs activados (ordenados por etapas)",
-	"#summary_all_active_outputs" : "Todos los outputs activados (ordenados por etapas)",
+	"#summary_all_active_inputs" : "Todos los inputs activados (por etapas)",
+	"#summary_all_active_outputs" : "Todos los outputs activados (por etapas)",
 
 	"#todo" : "TAREAS PENDIENTES",
 	"#todo_task" : "Tarea",

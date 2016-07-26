@@ -119,7 +119,7 @@
 		div#sidebar
 		{
 			position:fixed;
-			/*esquerra*/top:50px;left:0;z-index:999;
+			/*esquerra*/top:51px;left:0;z-index:999;
 			background:white;
 			padding:0;margin:0;
 			box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
@@ -170,8 +170,8 @@
 			<tr><th><?php write('#sidebar_general')?>
 			<tr><td><a href=getStarted.php><?php write('#getStarted_general_info')?></a>
 			<tr><td><a href=configuration.php><?php write('#configuration')?></a>
-			<tr><th><?php write('#ghg_assessment')?>
 			<tr><td><a href=birds.php><?php write('#quick_assessment')?></a>
+			<tr><th><?php write('#ghg_assessment')?>
 			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
 			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
 			<tr><th><?php write('#energy_performance')?>

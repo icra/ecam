@@ -2,24 +2,30 @@
 
 E C A M   B U G   D A T A B A S E
 
-==============================================================================
-  All found bugs have to be included with these fields:
+INDEX
+  0. INTRO
+  1. NOT FIXED BUGS
+  2. FIXED BUGS
+
+0. INTRO
+  All bugs must have the following info:
     1. Complete steps to reproduce the bug
     2. Expected behavior
     3. Observed (buggy) behavior
     4. Who it's assigned to
     5. Whether it has been fixed or not
-==============================================================================
-
-  *KNOWN BUGS NOT FIXED*
 
 ==============================================================================
 
-*N/A*
+  *1. NOT FIXED BUGS*
 
 ==============================================================================
 
-  *KNOWN BUGS FIXED*
+Empty
+
+==============================================================================
+
+  *2. FIXED BUGS*
 
 ==============================================================================
   *Bug* : Assessment period duplicates itself because of space character in name

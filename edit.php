@@ -836,8 +836,7 @@
 
 				if(questions.length==0)
 				{
-					t.parentNode.style.display="none"
-					t.insertRow(-1).insertCell(-1).innerHTML="<i>N/A</i>"
+					t.parentNode.style.display="none" //hide whole table
 				}
 
 				for(var q in questions)
@@ -874,7 +873,7 @@
 				if(newValue)
 					Global.Configuration['Yes/No'][question]=1;
 				else
-					if(confirm("Inputs that depend on this question will be set to 0."))
+					if(confirm("WARNING! Inputs from this question will be reseted to zero. Continue?"))
 						Global.Configuration['Yes/No'][question]=0;
 				init()
 			}
@@ -927,7 +926,7 @@
 						<script>
 							(function(){
 								var c = Global.General.conv_kwh_co2;
-								var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c); 
+								var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+"</span>" : format(c); 
 								document.write(str)
 							})();
 						</script> kg<sub>CO<sub>2</sub></sub>/kWh

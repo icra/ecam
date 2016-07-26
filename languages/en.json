@@ -224,8 +224,8 @@
 	"#sidebar_problems" : "Problems",
 
 	"#summary_no_active_stages" : "No active stages",
-	"#summary_all_active_inputs" : "All active inputs (sorted by stage)",
-	"#summary_all_active_outputs" : "All active outputs (sorted by stage)",
+	"#summary_all_active_inputs" : "All active inputs (by stage)",
+	"#summary_all_active_outputs" : "All active outputs (by stage)",
 
 	"#todo" : "TO DO LIST",
 	"#todo_task" : "Task",
