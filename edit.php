@@ -148,6 +148,13 @@
 
 				/*check if field is level3 specific*/if(Level3.isInList(field)) continue;
 
+				/*disable row according to questions*/
+				if(Questions.isHidden(field))
+				{
+					continue
+					//disableRow(newRow);
+				}
+
 				//bool for if current field is a calculated variable (CV)
 				var isCV = field.search(/^c_/)!=-1;
 
@@ -171,12 +178,6 @@
 				
 				/*new ro attribute field=field>*/
 				newRow.setAttribute('field',field);
-
-				/*disable row according to questions*/
-				if(Questions.isHidden(field))
-				{
-					disableRow(newRow);
-				}
 
 				/*description*/ 
 				var newCell=newRow.insertCell(-1);
@@ -315,11 +316,16 @@
 
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
-				var newCell,newRow=t.insertRow(-1);
-				newRow.setAttribute('field',field);
 
 				//disable row if specified by questions
-				if(Questions.isHidden(field)) disableRow(newRow);
+				if(Questions.isHidden(field))
+				{
+					continue
+					//disableRow(newRow);
+				}
+
+				var newCell,newRow=t.insertRow(-1);
+				newRow.setAttribute('field',field);
 
 				var formula=CurrentLevel[field].toString();
 				var prettyFormula=Formulas.prettify(formula);
@@ -474,11 +480,15 @@
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
 
+				/*check if should be hidden according to questions*/
+				if(Questions.isHidden(field))
+				{
+					continue
+					//disableRow(newRow);
+				}
+
 				var newCell,newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
-
-				/*check if should be hidden according to questions*/
-				if(Questions.isHidden(field)) disableRow(newRow);
 
 				var formula=CurrentLevel[field].toString();
 				var prettyFormula=Formulas.prettify(formula);
@@ -564,7 +574,7 @@
 
 			//if the table is empty, add a warning
 			if(t.rows.length<3)
-				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#999>There are no formulas in this level</span>";
+				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#999>~No active outputs</span>";
 
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
@@ -594,11 +604,15 @@
 				/*check if field is level3 specific*/
 				if(Level3.isInList(field)){continue;}
 
+				/*check if should be hidden according to questions*/
+				if(Questions.isHidden(field))
+				{
+					continue
+					//disableRow(newRow);
+				}
+
 				var newCell,newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
-
-				/*check if should be hidden according to questions*/
-				if(Questions.isHidden(field)) disableRow(newRow);
 
 				var formula=CurrentLevel[field].toString();
 				var prettyFormula=Formulas.prettify(formula);
@@ -657,7 +671,7 @@
 
 			//if the table is empty, add a warning
 			if(t.rows.length<3)
-				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#999><?php write('#edit_no_formulas')?></span>";
+				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#999>~No active outputs</span>";
 
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
@@ -789,7 +803,8 @@
 			echo "
 				<span class=inline style='float:right;margin-right:10em'>
 					<button 
-						style='height:auto;font-size:12px;border-radius:0.3em;border:1px solid #aaa'
+						style='height:auto;font-size:12px;border-radius:0.3em;border:1px solid #aaa;
+							box-shadow: 0 1px 2px rgba(0,0,0,.1); '
 						onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
 							<img src=img/substage.png style='width:30px;margin-right:1em;vertical-align:middle'>
 							".$lang_json['#substages']."	
@@ -870,10 +885,12 @@
 			{
 				?>
 				 <table id=fuelSelection class=inline>
-					<tr><td colspan=2><?php write('#configuration_fuel_options')?> (<a href=fuelInfo.php>info</a>)</legend>
+					<tr><td colspan=2>
+						<img src=img/fuel.png> <?php write('#configuration_fuel_options')?> (<a href=fuelInfo.php>info</a>)</legend>
 					<style>
 						#fuelSelection {margin:1em;}
 						#fuelSelection tr.inactive {background:#f6f6f6;color:#aaa}
+						#fuelSelection img {width:20px;vertical-align:middle}
 					</style>
 					<?php
 						if($level=="Water")

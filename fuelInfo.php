@@ -5,6 +5,7 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1><?php write('#configuration_fuel_options')?></h1>
+<img src=img/fuel.png>
 <!--description--><h4><?php write('#fuelInfo_description')?></h4>
 
 <div id=main>

@@ -54,12 +54,14 @@
 		background:#e6e6e6;
 		box-shadow: 0 1px 2px rgba(0,0,0,.1);
 	}
-	#linearDiagram img {position:relative;z-index:2;cursor:pointer;vertical-align:middle;padding:0} /*icons inside buttons to navigate to Level2*/
+	#linearDiagram img {position:relative;z-index:2;vertical-align:middle;padding:0} /*icons inside buttons to navigate to Level2*/
 	#linearDiagram img.l1 {width:43px;} 
 	#linearDiagram img.l2 {width:43px;}
 	#linearDiagram img{border-radius:90%;border:4px solid transparent}
 	#linearDiagram img.selected{border:4px solid lightgreen}
+	#linearDiagram img.inactive {pointer-events:none;}
 	#linearDiagram img:not(.inactive):hover {border:4px solid #d7bfaf}
+	#linearDiagram img:not(.inactive) {cursor:pointer}
 	#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(-61px);z-index:1;width:278px;}
 </style>
 
@@ -148,9 +150,6 @@
 			{
 				collection[i].src="img/"+stage+"-off.png";
 				collection[i].classList.add('inactive');
-				collection[i].onclick="";
-				collection[i].style.cursor="default";
-				collection[i].title+=" (<?php write('#inactive')?>)";
 			}
 		}
 	})();

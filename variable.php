@@ -415,8 +415,10 @@
 	}
 </script>
 
-<!--subtitle--><h4><?php write('#variable_detailed_info')?></h4>
-<!--TITLE--><h1><script>document.write(translate(id+'_descr')+" ("+id+")")</script></h1>
+<!--TITLE--><h1>
+	<span style=color:#999><?php write('#variable_detailed_info')?>: </span>
+	<script>document.write(translate(id+'_descr')+" ("+id+")")</script>
+</h1>
 
 <div id=main>
 	<!--VARIABLE INFO-->

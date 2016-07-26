@@ -370,7 +370,7 @@
 		function updateOutputs()
 		{
 			var t=document.getElementById('outputs');
-			while(t.rows.length>1) t.deleteRow(-1);
+			while(t.rows.length>0) t.deleteRow(-1);
 
 			//new row
 			var newRow=t.insertRow(-1);
@@ -417,17 +417,17 @@
 				}
 
 				//exclude the "level2only" variables
-				if(Level2only.isInList(field)){continue;}
+				if(Level2only.isInList(field)){continue}
 
 				//skip field "modification" (auxiliar variable)
-				if(field=="modification"){continue;}
+				if(field=="modification"){continue}
+
+				/*check if should be hidden according to questions*/
+				if(Questions.isHidden(field)){continue}
 
 				//new row
 				var newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
-
-				/*check if should be hidden according to questions*/
-				if(Questions.isHidden(field)) disableRow(newRow);
 
 				newRow.setAttribute('title',translate(field+'_expla'));
 
@@ -516,6 +516,15 @@
 				})();
 			}
 
+			//if no formulas, warning
+			console.log(t.rows.length)
+			if(t.rows.length<2)
+			{
+				var newCell = t.insertRow(-1).insertCell(-1)
+				newCell.colSpan=42;
+				newCell.innerHTML="<i style=color:#999>~No active outputs</i>";
+			}
+
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
 			var newTh=document.createElement('th');
@@ -600,9 +609,9 @@
 
 <!--OUTPUTS TABLE-->
 <div class=card style=text-align:left><?php cardMenu($lang_json['#level3_results_kpis'])?>
-	<table id=outputs class=inline style="margin:0 1em 1em 1em;background:#f6f6f6"> 
-		<tr><th colspan=42 style="background:white;border:none;color:black;padding-bottom:0.7em;font-size:17px">
-	</table>
+
+	<table id=outputs class=inline style="margin:1em 1em;background:#f6f6f6"></table>
+
 </div>
 
 <!--display graphs-->

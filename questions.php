@@ -8,6 +8,9 @@
 <!--TITLE--><h1><?php write('#questions_about')?></h1>
 
 <div id=main>
+	<style>
+		i.advanced{color:#999}
+	</style>
 
 <!--questions and variables hidden-->
 <table style=margin-bottom:3em>
@@ -21,6 +24,7 @@
 			for(var i in Questions[question])
 			{
 				var code = Questions[question][i];
+				var isL3 = Level3.isInList(code) ? "<i class=advanced>(advanced)</i>" : "";
 				var link;
 				if(Info[code]==undefined)
 				{
@@ -28,7 +32,7 @@
 				}
 				else
 				{
-					link = "<a title='"+translate(code+'_descr')+"' href=variable.php?id="+code+">"+code+"</a><br> "
+					link = "<a title='"+translate(code+'_descr')+"' href=variable.php?id="+code+">"+code+" "+isL3+"</a><br> "
 				}
 				document.write(link)
 			}

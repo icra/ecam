@@ -148,6 +148,25 @@
 			updateCurrency();
 			Sidebar.update();
 			updateResult();
+
+			//update linear diagram
+			(function()
+			{
+				['water','waterAbs','waterTre','waterDis','waste','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
+				{
+					var img = document.querySelector('#linearDiagram img[stage='+stage+']')
+					if(Global.Configuration.ActiveStages[stage])
+					{
+						img.src="img/"+stage+".png";
+						img.classList.remove('inactive');
+					}
+					else
+					{
+						img.src="img/"+stage+"-off.png";
+						img.classList.add('inactive');
+					}
+				})
+			})();
 		}
 	</script>
 	<style>
