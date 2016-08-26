@@ -66,11 +66,11 @@
 
 	"#index_first_time_using" : "¿Es tu primera vez usando ECAM Web Tool? Pulsa 'Nuevo' para empezar, o lee más información en ",
 	"#index_web_tool" : "Herramienta web",
-	"#index_description" : "ECAM es una herramienta para la evaluación y monitoreo del desempeño energético y las emisiones de carbono para empresas de servicios de agua y saneamiento.<br>ECAM es parte de la plataforma de conocimiento proporcionada por el <a href='http://www.iwa-network.org/WaCCliM/'>proyecto WaCCliM</a>. Esta herramienta es gratuita y de código abierto.",
+	"#index_description" : "ECAM es una herramienta para la evaluación y monitoreo del desempeño energético y las emisiones de carbono para empresas de servicios de agua y saneamiento.<br>ECAM es parte de la plataforma de conocimiento proporcionada por el <a target=_blank href='http://www.iwa-network.org/WaCCliM/'>proyecto WaCCliM</a>. Esta herramienta es gratuita y de código abierto.",
 	"#index_chrome_warning" : "Por favor, utiliza el explorador Google Chrome.",
 	"#index_latest_update" : "Última actualización",
 
-	"#about_credits" : "Desarrollado por <a href=http://icra.cat/>ICRA</a> en colaboración con <a href=http://www.iwa-network.org/>IWA</a>, GIZ, en el <a href=http://www.iwa-network.org/WaCCliM/>proyecto WaCCliM</a>, y Cobalt Water.<br> La herramienta fue desarrollada en Junio de 2015 en EXCEL por el consorcio Global Water Commons (LNEC i la Universidad de Valencia) en colaboración con Cobalt Water.  Queremos reconocer la utilidad de la herramienta EXCEL para permitir el desarrollo de esta herramienta web.  <br><br> El código fuente de este proyecto esta en <a href=https://github.com/holalluis/ecam>GitHub</a>.  Allí puede descargarlo y tenerlo offline.<br> Necesitarà un host PHP local, como <a href=https://www.apachefriends.org/index.html>XAMPP</a>.<br> Este software fue escrito completament usando el editor <a href=http://www.vim.org>Vim</a>, dentro de un terminal <a href=https://www.cygwin.com/>Cygwin</a>. <br> Creado en los lenguajes HTML/PHP/CSS/Javascript. <br> ",
+	"#about_credits" : "",
 	"#about_graphs_lib" : "Biblioteca para gráficos utilizada",
 	"#about_json_viewer" : "Visor JSON utilizado",
 	"#about_license" : "Licencia",

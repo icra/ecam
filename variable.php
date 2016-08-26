@@ -146,9 +146,9 @@
 							ret+="<tr><td class=fuel><a href=fuelInfo.php>fuel selected</a>:<td>"+fuel;
 							ret+="<tr><td class=fuel title='Fuel density       '>fuel.FD:             <td>"+Tables["Fuel types"][fuel].FD             +"<td class=unit>kg/L";
 							ret+="<tr><td class=fuel title='Net calorific value'>fuel.NCV:            <td>"+Tables["Fuel types"][fuel].NCV            +"<td class=unit>TJ/Gg";
-							ret+="<tr><td class=fuel title='CO2 emission factor'>fuel.EFCO2:          <td>"+Tables["Fuel types"][fuel].EFCO2          +"<td class=unit>kg<sub>CO<sub>2</sub>/TJ";
-							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.engines:  <td>"+Tables["Fuel types"][fuel].EFCH4.engines  +"<td class=unit>kg<sub>CH<sub>4</sub>/TJ";
-							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.vehicles: <td>"+Tables["Fuel types"][fuel].EFCH4.vehicles +"<td class=unit>kg<sub>CH<sub>4</sub>/TJ";
+							ret+="<tr><td class=fuel title='CO2 emission factor'>fuel.EFCO2:          <td>"+Tables["Fuel types"][fuel].EFCO2          +"<td class=unit>kg<sub>CO<sub>2</sub></sub>/TJ";
+							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.engines:  <td>"+Tables["Fuel types"][fuel].EFCH4.engines  +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
+							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.vehicles: <td>"+Tables["Fuel types"][fuel].EFCH4.vehicles +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
 							ret+="<tr><td class=fuel title='N2O emission factor'>fuel.EFN2O.engines:  <td>"+Tables["Fuel types"][fuel].EFN2O.engines  +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
 							ret+="<tr><td class=fuel title='N2O emission factor'>fuel.EFN2O.vehibles: <td>"+Tables["Fuel types"][fuel].EFN2O.vehicles +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
 						}

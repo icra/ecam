@@ -28,4 +28,4 @@ function write($id)
 
 ?>
 <script><?php echo "var lang=$lang_file;" ?></script>
-<script>function translate(id){return lang['#'+id]||"[translation not found]"}</script>
+<script>function translate(id){return lang['#'+id]||"[translation not found, please report this error]"}</script>
