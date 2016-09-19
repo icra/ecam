@@ -27,6 +27,12 @@
 	 
 	The Excel tool laid the foundation and basic equations for the web-tool. 
 
+	<br><br>
+
+	This project is part of the <a href="https://www.international-climate-initiative.com/">International Climate Initiative (IKI)</a>. 
+	The German Federal Ministry for the Environment, Nature Conservation, 
+	Building and Nuclear Safety (BMUB) supports this initiative on the basis of a decision adopted by the German Bundestag.
+
 	<br><br> 
 
 	This software is open source (<a target=_blank href='https://github.com/holalluis/ecam'>GitHub</a>). 
