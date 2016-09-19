@@ -29,7 +29,7 @@
 
 	<br><br>
 
-	This project is part of the <a href="https://www.international-climate-initiative.com/">International Climate Initiative (IKI)</a>. 
+	This project is part of the <a target=_blank href="https://www.international-climate-initiative.com/">International Climate Initiative (IKI)</a>. 
 	The German Federal Ministry for the Environment, Nature Conservation, 
 	Building and Nuclear Safety (BMUB) supports this initiative on the basis of a decision adopted by the German Bundestag.
 
