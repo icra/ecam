@@ -161,7 +161,7 @@
 		<div style="text-align:left;padding:1.0em">
 		This catalogue offers inspiring water, climate and energy solutions for each stage.
 		</div>
-		<a href="http://www.iwa-network.org/waccli/public/" target=_blank>
+		<a href="http://www.iwa-network.org/water-climate-energy-solutions/public/" target=_blank>
 			IWA Catalogue of solutions
 		</a>
 		<style>
