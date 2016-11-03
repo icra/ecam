@@ -25,7 +25,6 @@
 				<?php write('#clear')?>
 			</button>
 
-			<br>
 			<!--next button-->
 			<button class="button next" onclick="event.stopPropagation();window.location='getStarted.php'">
 				<?php write('#next')?>

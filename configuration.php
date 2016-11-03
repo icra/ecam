@@ -94,58 +94,8 @@
 		}
 	</script>
 	<script>
-		/**
-		  * Functions related to Additional info
-		  *
-		  */
-
-		/** Modify any field of Global and init() */
-		function updateField(object,field,newValue)
-		{
-			if(typeof(object[field])=="number")
-			{
-				newValue=parseFloat(newValue);
-				if(isNaN(newValue))newValue=0;
-			}
-			object[field]=newValue;
-			init();
-		}
-
-		function updateUW1(newValue)
-		{
-			document.querySelector('#uw1').value=newValue;
-			updateField(Global.General,'conv_kwh_co2',newValue);
-		}
-
-		function redisplayUW1menu()
-		{
-			//input element
-			document.querySelector('#uw1').value=Global.General.conv_kwh_co2;
-			//select element
-			var select = document.querySelector('#countryUW1');
-			//go over options and select the one with same value as uw1
-			for(var i=1;i<select.childNodes.length;i++)
-			{
-				if(parseFloat(select.childNodes.item(i).value)==Global.General.conv_kwh_co2)
-				{
-					select.childNodes.item(i).setAttribute('selected','true');
-					return;
-				}
-			}
-			//if we go out of the list make it custom
-			select.value="custom";
-		}
-
-		function updateCurrency()
-		{
-			document.getElementById('currency').innerHTML=Global.General.Currency
-		}
-	</script>
-	<script>
 		function init()
 		{
-			redisplayUW1menu();
-			updateCurrency();
 			Sidebar.update();
 			updateResult();
 
@@ -170,20 +120,39 @@
 		}
 	</script>
 	<style>
-		h4{margin-bottom:2em}
+		h4{margin-bottom:1em}
 	</style>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear diagram--><?php include'linear.php'?>
 <!--TITLE--><h1><?php write('#configuration')?></h1>
-<!--SUBTITLE--><h4><?php write('#configuration_subtitle')?></h4>
+<!--SUBTITLE--><h4><?php write('#configuration_subtitle')?>
+	<!--activate all debug button -->
+	<span style=font-size:12px>
+		<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
+		<script>
+			function activateAllStages()
+			{
+				event.stopPropagation();
+				['water','waste','waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
+				{
+					Global.Configuration.ActiveStages[stage]=1;
+					var checkbox = document.getElementById(stage)
+					checkbox.checked=true;
+					checkbox.parentNode.parentNode.style.backgroundColor="lightgreen";
+				});
+				init();
+			}
+		</script>
+	</span>
+</h4>
 
 <div id=main>
 
 <div>
-	<!--left: STAGES-->
-	<div class=inline style=margin-left:auto>
+	<!--stages-->
+	<div>
 		<table id=selectStage>
 			<style>
 				#selectStage img{width:40px;vertical-align:middle}
@@ -192,7 +161,10 @@
 				#selectStage td[rowspan='3']{text-align:center;}
 				#selectStage label{cursor:pointer;display:block;min-height:100%;padding:0.5em}
 			</style>
-			<tr><th><?php write('#ghg_assessment')?><th><?php write('#energy_performance')?>
+			<tr>
+				<th><?php write('#ghg_assessment')?>
+				<th><?php write('#energy_performance')?>
+				<th>Water efficiency module
 				<?php 
 					function printL1stage($alias,$name)
 					{
@@ -210,72 +182,33 @@
 								<input type=checkbox id=$alias class=$class onchange=Configuration.activate(this.id)> 
 								<img src=img/$alias.png> $name
 							</label>";
+
+						//water efficiency
+						echo "<td style='text-align:center'>
+							<input type=checkbox>";
+
+						//sludge only in "wasteTre"
+						if($alias=="wasteTre")
+							echo "<td style='text-align:center;padding:0.5em'>
+								<label>Sludge module <input type=checkbox></label>";
 					}
 
 					printL1stage("water",$lang_json['#Water']);
 					printL2stage("water","waterAbs",$lang_json["#Abstraction"], false);
 					printL2stage("water","waterTre",$lang_json["#Treatment"],   true);
 					printL2stage("water","waterDis",$lang_json["#Distribution"],true);
-
 					printL1stage("waste",$lang_json['#Waste']);
 					printL2stage("waste","wasteCol",$lang_json["#Collection"],false);
 					printL2stage("waste","wasteTre",$lang_json["#Treatment"], true);
 					printL2stage("waste","wasteDis",$lang_json["#Discharge"], true);
 				?>
 		</table>
-
-		<!--activate all debug button -->
-		<div style="margin:0.5em 0 0.5em 0">
-			<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
-			<script>
-				function activateAllStages()
-				{
-					event.stopPropagation();
-					['water','waste','waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
-					{
-						Global.Configuration.ActiveStages[stage]=1;
-						var checkbox = document.getElementById(stage)
-						checkbox.checked=true;
-						checkbox.parentNode.parentNode.style.backgroundColor="lightgreen";
-					});
-
-					Global.General.conv_kwh_co2=1;
-
-					init();
-				}
-			</script>
-		</div>
 	</div>
 
-	<!--right: ADDITIONAL INFO-->
-	<div class=inline style="width:35%;text-align:left;margin-left:1em">
-		<style> fieldset{margin:0 0 1.4em 0;padding:0.9em;border:1px solid #aaa} </style>
-		<!--conv_kwh_co2-->
-		<fieldset>
-			<legend style=cursor:help title="<?php write('#conv_kwh_co2_expla')?>"><?php write('#conv_kwh_co2_descr')?></legend>
-			<table><tr><td style=border:none>
-				<select id=countryUW1 onchange=updateUW1(this.value)>
-					<option value=0>--<?php write('#configuration_enter_custom_value')?>--
-					<option value=0.237721212>Peru
-					<option value=0.626742612>Thailand
-					<option value=0.452483345>Mexico
-					<option value=custom>--<?php write('#configuration_custom')?>--
-				</select>
-				<td style=border:none><input id=uw1 value=0 style="width:80px" onchange=updateUW1(this.value)> kg<sub>CO<sub>2</sub></sub>/kWh
-			</table>
-		</fieldset>
-
-		<!--currency: 3 letters-->
-		<fieldset>
-			<legend><?php write('#currency')?>: <span id=currency style="color:black;font-weight:bold"></span></legend>
-			<?php write('#configuration_new_currency')?>:
-			<input size=3 maxlength=3 placeholder="ccc" onchange=updateField(Global.General,"Currency",this.value)>
-		</fieldset>
-	</div>
 </div>
 
 <!--PREV & NEXT BUTTONS-->
-<div style=margin-top:4em> 
+<div style=margin-top:2em> 
 	<script>
 		//find first available stage to start entering data
 		function nextPage()
@@ -284,12 +217,6 @@
 			if(Global.Configuration.ActiveStages.water==0 && Global.Configuration.ActiveStages.waste==0)
 			{
 				alert("<?php write('#configuration_active_stages_error')?>");
-				return;
-			}
-			if(Global.General.conv_kwh_co2==0)
-			{
-				alert("<?php write('#configuration_conv_error')?>");
-				document.getElementById('uw1').style.background='red'
 				return;
 			}
 			window.location="birds.php"; return;

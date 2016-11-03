@@ -62,6 +62,12 @@
 			<img src="img/flags/es.png">
 			es
 		</div>
+
+		<!--null-->
+		<div lang=null>
+			<img src="img/flags/null.png">
+			null (development)	
+		</div>
 	</div> 
 </div>
 

@@ -794,7 +794,7 @@
 ?>
 <style> h1 {text-align:left;padding-left:17em;line-height:2.1em;border-bottom:1px solid #ccc;background:white} </style>
 
-<h1><a href=stages.php><?php write('#edit_input_data')?></a> <?php echo "$sep $title"?>
+<h1><a href=stages.php><script>document.write(Global.General.Name)</script></a> <?php echo "$sep $title"?>
 	<!--go to level 3 button-->
 	<?php
 		if($sublevel)

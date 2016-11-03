@@ -10,5 +10,7 @@
 
 <p>This page will have resources (example json files and a user manual)</p>
 
+<div> EXAMPLE JSON FILES </div>
+
 </div>
 <!--footer--><?php include'footer.php'?>

@@ -158,13 +158,14 @@
 		<div style="padding:0;margin:0;background:#0aaff1;height:5px"></div>
 
 		<!--USED MEMORY-->
-		<style>
-			progress {margin:0.5em;cursor:help}
-		</style>
+		<div style="padding:0.2em;text-align:center">
+			<?php write('#memory')?><br>
+			<progress id=progress title="<?php write('#memory')?>" value=0 max=8100></progress>
+			<style>
+				progress {margin:0.5em;cursor:help}
+			</style>
+		</div>
 
-		<div style="padding-top:0.2em"><?php write('#memory')?></div>
-
-		<progress id=progress title="<?php write('#memory')?>" value=0 max=8100></progress>
 
 		<table>
 			<tr><th><?php write('#sidebar_general')?>

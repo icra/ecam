@@ -22,7 +22,7 @@
 			for(var i=0;i<fields.length;i++)
 			{
 				var value = parseFloat(fields[i].getAttribute('value'))
-				if(value>max)
+				if(value>=max)
 				{
 					max=value;
 					critic=fields[i].getAttribute('field')
@@ -31,9 +31,9 @@
 			if(!critic)return
 			var element=document.querySelector("#sources td[field="+critic+"]")
 			element.classList.add('critic')
-			element.title="This is the highest GHG emission"
+			element.title="This is the highest GHG emission of your system"
 			element.previousSibling.classList.add('critic')
-			element.previousSibling.title="This is the highest GHG emission"
+			element.previousSibling.title=element.title
 		}
 
 		function calculateGHG()

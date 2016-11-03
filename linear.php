@@ -1,8 +1,15 @@
 
 <!--LINEAR DIAGRAM: file inside edit.php, level3.php and stages.php-->
 <div id=linearDiagram>
-	<!--configuration
-	-->
+	<!--general info-->
+	<div 
+		style=cursor:pointer
+		onclick=window.location="getStarted.php">
+		<img class=l1 stage=gets src=img/getStarted.png title="<?php write('#getStarted_general_info')?>">
+		<a href=getStarted.php style="color:#666"><?php write('#getStarted_general_info')?></a>
+	</div>
+
+	<!--configuration-->
 	<div 
 		style=cursor:pointer
 		onclick=window.location="configuration.php">
@@ -10,7 +17,7 @@
 		<a href=configuration.php style="color:#666"><?php write('#configuration')?></a>
 	</div>
 
-	<!--QA-->
+	<!--GLOBAL-->
 	<div
 		style=cursor:pointer
 		onclick=window.location="birds.php">
@@ -18,18 +25,13 @@
 		<a href=birds.php style="color:#666"><?php write('#quick_assessment')?></a>
 	</div>
 
-	<!--GHG-->
+	<!--DETAILED-->
 	<div>
 		<img class=l1 stage=water src=img/water.png onclick=window.location="edit.php?level=Water" title="<?php write('#Water')?>"> 
-		<img class=l1 stage=waste src=img/waste.png onclick=window.location="edit.php?level=Waste" title="<?php write('#Waste')?>"> 
-		<span style="color:#666"><?php write('#ghg_assessment')?> </span>
-	</div>
-
-	<!--Energy-->
-	<div>
 		<img class=l2 stage=waterAbs src=img/waterAbs.png onclick=window.location="edit.php?level=Water&sublevel=Abstraction"  title="<?php write('#Abstraction')?>" >
 		<img class=l2 stage=waterTre src=img/waterTre.png onclick=window.location="edit.php?level=Water&sublevel=Treatment"    title="<?php write('#Treatment')?>">
 		<img class=l2 stage=waterDis src=img/waterDis.png onclick=window.location="edit.php?level=Water&sublevel=Distribution" title="<?php write('#Distribution')?>">
+		<img class=l1 stage=waste src=img/waste.png onclick=window.location="edit.php?level=Waste" title="<?php write('#Waste')?>"> 
 		<img class=l2 stage=wasteCol src=img/wasteCol.png onclick=window.location="edit.php?level=Waste&sublevel=Collection"   title="<?php write('#Collection')?>">
 		<img class=l2 stage=wasteTre src=img/wasteTre.png onclick=window.location="edit.php?level=Waste&sublevel=Treatment"    title="<?php write('#Treatment')?>">
 		<img class=l2 stage=wasteDis src=img/wasteDis.png onclick=window.location="edit.php?level=Waste&sublevel=Discharge"    title="<?php write('#Discharge')?>">
@@ -63,14 +65,14 @@
 		box-shadow: 0 1px 2px rgba(0,0,0,.1);
 	}
 	#linearDiagram img {position:relative;z-index:2;vertical-align:middle;padding:0} /*icons inside buttons to navigate to Level2*/
-	#linearDiagram img.l1 {width:43px;} 
-	#linearDiagram img.l2 {width:43px;}
+	#linearDiagram img.l1 {width:42px;} 
+	#linearDiagram img.l2 {width:34px;}
 	#linearDiagram img{border-radius:90%;border:4px solid transparent}
 	#linearDiagram img.selected{border:4px solid lightgreen}
 	#linearDiagram img.inactive {pointer-events:none;}
 	#linearDiagram img:not(.inactive):hover {border:4px solid #d7bfaf}
 	#linearDiagram img:not(.inactive) {cursor:pointer}
-	#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(-61px);z-index:1;width:278px;}
+	#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(-76px);z-index:1;width:333px;}
 </style>
 
 <script>
@@ -152,7 +154,7 @@
 		for(var i=0;i<collection.length;i++)
 		{
 			var stage = collection[i].getAttribute('stage');
-			if(stage=="birds" || stage=="energy" || stage=="conf" || stage=='opps')continue;
+			if(["birds","energy","conf",'opps','gets'].indexOf(stage)>=0)continue;
 			var isActive = Global.Configuration.ActiveStages[stage];
 			if(!isActive)
 			{

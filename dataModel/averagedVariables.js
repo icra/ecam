@@ -12,6 +12,7 @@ var Averaged=
 		"wsd_lo_no_el",
 		"wsd_av_no_el",
 		"wsd_wt_el_no",
+		"wwt_ch4_biog",
 	],
 
 	isAveraged:function(code)

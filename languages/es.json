@@ -78,7 +78,7 @@
 	"#license_license" : "Copyright 2016 IWA<br><br>Autorizado en virtud de la Licencia de Apache, Versión 2.0 (la 'Licencia');<br>se prohíbe utilizar este archivo, excepto en cumplimiento con la Licencia.<br>Puede obtener una copia de la Licencia en:<br><br>&emsp;&emsp;http://www.apache.org/licenses/LICENSE-2.0<br><br>A menos que lo exijan las leyes pertinentes o se haya establecido por escrito,<br>el software distribuido bajo la Licencia se distribuye “TAL CUAL”,<br>SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.<br>Véase la Licencia para consultar el texto específico relativo a los permisos<br>y limitaciones establecidos en la Licencia.",
 
 	"#getStarted_general_info" : "Información general",
-	"#getStarted_subtitle" : "Información general sobre su sistema. Puede editar esta información más tarde.",
+	"#getStarted_subtitle" : "Información general sobre su sistema.",
 	"#getStarted_table_name" : "Nombre",
 	"#getStarted_table_location" : "Localización",
 	"#getStarted_table_start" : "Período de evaluación Inicio",
@@ -88,7 +88,7 @@
 	"#getStarted_max_200" : "Máximo 200 caracteres",
 
 	"#configuration" : "Configuración",
-	"#configuration_activate_all" : "Activar todos &amp; establecer factor de conversión a 1",
+	"#configuration_activate_all" : "Activar todos",
 	"#configuration_subtitle" : "Use el menú de la izquierda para activar las etapas del ciclo del agua que formarán su sistema. Luego rellene las opciones de la derecha.",
 	"#configuration_enter_custom_value" : "escribe valor personalizado, o elige un país",
 	"#configuration_custom" : "PERSONALIZADO",
