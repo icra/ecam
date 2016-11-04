@@ -112,7 +112,7 @@
 			<th style=cursor:help title="<?php write('#conv_kwh_co2_expla')?>"><?php write('#conv_kwh_co2_descr')?>
 			<td>
 			<!--conv_kwh_co2-->
-				<table><tr><td style=border:none>
+				<table><tr><td style=border:none;padding:0>
 					<select id=countryUW1 onchange=updateUW1(this.value)>
 						<option value=0>--<?php write('#configuration_enter_custom_value')?>--
 						<option value=0.237721212>Peru

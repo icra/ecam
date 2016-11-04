@@ -108,7 +108,7 @@
 			color:black;
 			cursor:help;
 			font-weight:bold;
-			animation: blink 4s ease 0.5s infinite alternate;
+			animation: blink 3s ease 0.5s infinite alternate;
 		}
 	</style>
 </head><body onload=init()><center>
@@ -123,8 +123,8 @@
 <div class=inline style="width:28%">
 	<!--sources of ghg-->
 	<div class="card"><?php cardMenu('GHG emissions during the Assessment Period') ?>
-		<h4>Kg<sub>CO<sub>2</sub></sub> emitted in <script>document.write(Global.General.Days())</script> days
-		(<span class=circle style=background:orange></span> Highest emission)
+		<h4>CO<sub>2</sub> emitted in <script>document.write(Global.General.Days())</script> days
+		(<span class=circle style=background:orange></span> highest emission)
 		</h4>
 		<table id=sources>
 			<style>
@@ -136,7 +136,7 @@
 				table#sources td:last-child {text-align:right}
 			</style>
 			
-			<tr><th rowspan=9 style=font-weight:bold;background:#d7bfaf;color:black>TOTAL<br>
+			<tr><th rowspan=9 style=font-weight:bold;background:#d7bfaf;color:black>TOTAL<br>kg CO<sub>2</sub><br>
 				(<span><script>document.write(format(Global.General.TotalGHG()))</script></span>)
 
 			<th rowspan=2>Water<br>supply<br>(<span field=ws_KPI_GHG>0</span>)

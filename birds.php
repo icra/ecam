@@ -2,22 +2,15 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
-		body {background:#e9ebee}
+		body {background:#F5ECCE}
 		h1{background:white;border-bottom:1px solid #ccc}
-		table#inputs input {width:70px;transition:background 1s;border:1px solid #ccc}
-		table#inputs input.edited {background:lightgreen;}
-		table#inputs label input {width:auto;}
-		table#inputs tr.hidden {display:none}
-		table#inputs tr[indic]{text-align:center;color:#999;background:#eee}
-		table#inputs th{text-align:left;border:none}
-		table#inputs td {border-left:none;border-right:none;border-bottom:none}
-		#graphs td { text-align: left; }
 
 		/*
-			colors for graphs
+			legend colors for graphs
 		*/
 		span.circle{display:none}
 		span.circle{float:right}
+
 	</style>
 	<script>
 		function init(detailed)
@@ -29,7 +22,7 @@
 			updateResult();
 			drawCharts();
 
-			if(detailed) Graphs.graph4(false,'graph1');//make first graph detailed
+			if(detailed) Graphs.graph4(false,'graph1'); //make first graph detailed
 		}
 
 		function drawCharts()
@@ -48,13 +41,12 @@
 		BEV.update=function(obj,field,newValue)
 		{
 			if(obj[field]===undefined) { alert('field '+field+' undefined'); return; }
-
 			//newValue may be a string from input.value, it should be a float
 			newValue=parseFloat(newValue);
 			obj[field]=newValue;
 		}
 
-		//Specific behaviours for each formula when user inputs data
+		//Specific behaviour for each formula when user inputs data
 		BEV.updateField=function(input)
 		{
 			//get info from the input element
@@ -200,43 +192,16 @@
 			tr.title="<?php write('#Inactive')?>"
 			tr.style.color="#888"
 		}
-
-		//list of inputs that are here (unused by now)
-		var QAinputs = 
-		[
-			Global.Water.ws_resi_pop,
-			Global.Water.ws_serv_pop,
-			Global.Water.ws_vol_auth,
-			Global.Water.ws_nrg_cons,
-			Global.Water.ws_nrg_cost,
-			Global.Water.ws_run_cost,
-			Global.Water.ws_vol_fuel,
-			Global.Waste.ww_resi_pop,
-			Global.Waste.ww_conn_pop,
-			Global.Waste.ww_serv_pop,
-			Global.Waste.ww_vol_wwtr,
-			Global.Waste.ww_nrg_cons,
-			Global.Waste.ww_nrg_cost,
-			Global.Waste.ww_run_cost,
-			Global.Waste.ww_vol_fuel,
-			Global.Waste.ww_num_trip,
-			Global.Waste.ww_dist_dis,
-			Global.Waste.ww_n2o_effl,
-			Global.Waste.ww_prot_con,
-		];
 	</script>
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
-<!--TITLE--><h1><?php write('#birds_quick_assessment_of')?> 
-	<b onclick=window.location='getStarted.php'>
-		<script>document.write(Global.General.Name)</script>
-	</b>
+<!--TITLE--><h1><?php write('#quick_assessment')?> 
 	<span style="font-size:12px;color:#666">
-		|
+		&mdash;
 		<span><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a>: <script>document.write(Global.General.Days())</script> <?php write('#days')?></span> 
-		|
+		&mdash;
 		<span><a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a>: 
 			<script>
 				(function(){
@@ -251,19 +216,53 @@
 <div id=main>
 
 <!--inputs-->
-<div class="card inline" style="width:35%"><?php cardMenu("Inputs - Enter typical values from your daily operation")?>
+<div class="card inline" style="width:35%;"><?php cardMenu("Inputs - Enter typical values from your daily operation")?>
 	<!--table-->
 	<table id=inputs style=width:100%>
+		<style>
+			#inputs th, #inputs td {text-align:left;}
+			#inputs th, #inputs td {border-left:none;border-right:none}
+			#inputs input.edited {background:lightgreen;}
+
+			#inputs td.input {
+				width:70px;
+				border:1px solid #aaa;
+				color:#666;
+				background:#eee;
+				padding:0 !important;
+			}
+			#inputs td.input input {
+				background:inherit;
+				border:none;
+				text-align:right;
+				cursor: cell;
+				line-height:1em;
+				width:70px;
+				height:24px;
+				display:block;
+				padding:0.2em;
+			}
+			#inputs td.input input:focus {
+				background:white;
+			}
+
+			#inputs tr.hidden {display:none}
+
+			/**indication "not active"**/
+			#inputs tr[indic]{text-align:center;color:#999;background:#eee}
+
+		</style>
+
 		<tr><th colspan=3>
 			<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Water')?>
-			<tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?> <td><input id='ws_resi_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
-			<tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?> <td><input id='ws_serv_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
-			<tr stage=water class=hidden><td><?php write('#birds_ws_vol_auth')?> <td><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>m3/<?php write('#birds_year')?>
-			<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cons')?> <td><input id='ws_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/<?php write('#birds_month')?>
+			<tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?> <td class=input><input id='ws_resi_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
+			<tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?> <td class=input><input id='ws_serv_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
+			<tr stage=water class=hidden><td><?php write('#birds_ws_vol_auth')?> <td class=input><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>m3/<?php write('#birds_year')?>
+			<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cons')?> <td class=input><input id='ws_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/<?php write('#birds_month')?>
 				<span class=circle style=background:#bca613></span>
-			<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
-			<tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
-			<tr stage=water class=hidden><td><?php write('#birds_ws_vol_fuel')?> <td><input id='ws_vol_fuel' onchange="BEV.updateField(this)"> <td>L/<?php write('#birds_month')?>
+			<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
+			<tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
+			<tr stage=water class=hidden><td><?php write('#birds_ws_vol_fuel')?> <td class=input><input id='ws_vol_fuel' onchange="BEV.updateField(this)"> <td>L/<?php write('#birds_month')?>
 				<span class=circle style=background:#453f1c></span>
 			<script>
 				//fuel depends on question #engines_in_water
@@ -278,22 +277,22 @@
 			<tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 		<tr><th colspan=3 style=background:#d71d24>
 			<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
-			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?><td><input id='ww_resi_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td><?php write('#ww_conn_pop_descr')?><td><input id='ww_conn_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?><td class=input><input id='ww_resi_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#ww_conn_pop_descr')?><td class=input><input id='ww_conn_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
 			<tr stage=waste class=hidden>
 				<td><?php write('#ww_serv_pop_descr')?>
 					<span title="<?php write('#birds_ww_serv_pop_note')?>" style="color:orange;cursor:help">(<?php write('#birds_note')?>)</span>
-				<td><input id='ww_serv_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_wwtr')?> <td><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>/day
-			<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cons')?> <td><input id='ww_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/<?php write('#birds_month')?>
+				<td class=input><input id='ww_serv_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_wwtr')?><td class=input><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>/day
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cons')?><td class=input><input id='ww_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh/<?php write('#birds_month')?>
 				<span class=circle style=background:#89375c></span>
-			<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?> <td><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
-			<tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?> <td><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
-			<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_fuel')?><td><input id='ww_vol_fuel' onchange="BEV.updateField(this)"> <td>L/<?php write('#birds_month')?>
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?><td class=input><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?><td class=input><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>/<?php write('#birds_month')?>
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_fuel')?><td class=input><input id='ww_vol_fuel' onchange="BEV.updateField(this)"> <td>L/<?php write('#birds_month')?>
 				<span class=circle style=background:#d71d24></span>
-			<tr stage=waste class=hidden><td><?php write('#birds_ww_num_trip')?> <td><input id='ww_num_trip' onchange="BEV.updateField(this)"> <td><?php write('#birds_trips_week')?>
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_num_trip')?><td class=input><input id='ww_num_trip' onchange="BEV.updateField(this)"> <td><?php write('#birds_trips_week')?>
 				<span class=circle style=background:#d0afbe></span>
-			<tr stage=waste class=hidden><td><?php write('#ww_dist_dis_descr')?> <td><input id='ww_dist_dis' onchange="BEV.updateField(this)"> <td>km
+			<tr stage=waste class=hidden><td><?php write('#ww_dist_dis_descr')?><td class=input><input id='ww_dist_dis' onchange="BEV.updateField(this)"> <td>km
 				<span class=circle style=background:#d0afbe></span>
 			<script>
 				//fuel depends on question #engines_in_waste
@@ -317,15 +316,21 @@
 			<tr stage=waste class=hidden>
 				<td><?php write('#birds_ww_n2o_effl')?> 
 					<span title="<?php write('#birds_ww_n2o_effl_note')?>" style=color:orange;cursor:help>(<?php write('#birds_note')?>)</span>
-				<td><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
+				<td class=input><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
 					<span class=circle style=background:#b8879d></span>
-			<tr stage=waste class=hidden><td><?php write('#birds_ww_prot_con')?><td><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/<?php write('#birds_year')?>
+			<tr stage=waste class=hidden><td><?php write('#birds_ww_prot_con')?>
+				<td class=input><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/<?php write('#birds_year')?>
 				<span class=circle style=background:#451c2e></span>
 			<tr stage=waste class=hidden><td>
 				<?php write("#producing_biogas")?>?
-				<td colspan=2>
-				<label><?php write("#no")?>  <input name=producing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=0;init(true)"></label>
-				<label><?php write("#yes")?> <input name=producing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=1;init(true)"></label>
+				<td class=input>
+					<label><?php write("#no")?>  
+					<input name=producing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=0;init(true)">
+					</label>
+				<td class=input>
+					<label><?php write("#yes")?> 
+					<input name=producing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=1;init(true)">
+					</label>
 				<script>
 					(function(){
 						var ans = Global.Configuration['Yes/No'].producing_biogas;
@@ -335,9 +340,14 @@
 				<span class=circle style=background:#b8879d></span>
 			<tr stage=waste class=hidden><td>
 				<?php write("#valorizing_biogas")?>?
-				<td colspan=2>
-				<label><?php write("#no")?>  <input name=valorizing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=0;init(true)"></label>
-				<label><?php write("#yes")?> <input name=valorizing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=1;init(true)"></label>
+				<td class=input>
+					<label><?php write("#no")?>
+					<input name=valorizing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=0;init(true)">
+					</label>
+				<td class=input>
+					<label><?php write("#yes")?>
+					<input name=valorizing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=1;init(true)">
+					</label>
 				<script>
 					(function(){
 						var ans = Global.Configuration['Yes/No'].valorizing_biogas;
@@ -347,6 +357,16 @@
 				<span class=circle style=background:#b8879d></span>
 			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 	</table>
+
+	<script>
+		(function(){
+			var inputs = document.querySelectorAll("#inputs input")
+			for(var i=0;i<inputs.length;i++)
+			{
+				inputs[i].onclick=function(){this.select()}
+			}
+		})()
+	</script>
 </div>
 
 <!--graphs-->
@@ -361,15 +381,15 @@
 				display:inline-block;
 				text-align:center;
 				vertical-align:top;
-				width:49%;
-				margin-left:-4px;
+				width:50%;
+				margin-left:-5px;
 				margin-bottom:-1px;
 				border:1px solid #ddd;
 				padding:0;
 			}
 		</style>
 
-		<div style=margin-top:2px;text-align:center>
+		<div style=text-align:center>
 			<div graph id=graph1><?php write('#loading')?></div>
 			<div graph id=graph2><?php write('#loading')?></div>
 			<!---->

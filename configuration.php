@@ -162,7 +162,7 @@
 				#selectStage label{cursor:pointer;display:block;min-height:100%;padding:0.5em}
 			</style>
 			<tr>
-				<th><?php write('#ghg_assessment')?>
+				<th><?php write('#quick_assessment')?>
 				<th><?php write('#energy_performance')?>
 				<th>Water efficiency module
 				<?php 
