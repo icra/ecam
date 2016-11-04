@@ -186,6 +186,7 @@
 			<tr><th><?php write("#opportunities")?>
 			<tr><td><a href=opps.php><?php write("#opportunities")?></a>
 			<tr><th><?php write('#summary')?>
+			<tr><td><a href=viewer.php>Data structure viewer</a>
 			<tr><td><a href=summary.php?type=input><?php write('#sidebar_all_inputs')?></a>
 			<tr><td><a href=summary.php?type=ccvv><?php write('#sidebar_all_ccvv')?></a>
 			<tr><td><a href=summary.php?type=output><?php write('#sidebar_all_kpis')?></a>
