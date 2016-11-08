@@ -3,11 +3,8 @@
 ## About
 ECAM web tool is a web application developed by [ICRA](http://icra.cat), 
 [IWA](http://www.iwa-network.org) and GIZ under the WaCCliM project, and Cobalt Water.
-The tool was formerly developed in June 2015 as an EXCEL tool by the 
-consortium Global Water Commons (LNEC and University of Valencia) in collaboration with Cobalt Water. 
-We want to acknowledge how extremely valuable The Excel tool has been to enable the development of this web-tool.
 
-## Components
+## Off-line web application
 We have open sourced the tool to work as stand-alone application inside a localhost, for example:
  * Apache PHP server software, like XAMPP or similars
 
