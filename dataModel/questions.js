@@ -1,5 +1,14 @@
 /**
 	This object stores in arrays the codes of variables that are hidden if answer is NO
+	format:
+
+		"question_code":[
+			"input/output code 1",
+			"input/output code 2",
+			"input/output code 3",
+			...
+		]
+
 */
 
 var Questions = 
@@ -14,6 +23,7 @@ var Questions =
 	],
 
 	"water_conduction":[
+		"wsa_vol_conv",
 		"wsa_wat_loss",
 		"wsa_main_len",
 		"wsa_fri_loss",
@@ -25,8 +35,11 @@ var Questions =
 		"wsa_nrg_cons",
 		"wsa_vol_pump",
 		"wsa_pmp_head",
+		"c_wsa_vol_head",
 		"wsa_KPI_nrg_per_m3",
 		"wsa_KPI_std_nrg_cons",
+		"wsa_KPI_std_elec_eff",
+		"wsa_KPI_GHG_elec",
 	],
 
 	"engines_in_water":[
@@ -38,7 +51,16 @@ var Questions =
 		"ww_vol_fuel",
 		"c_ww_nrg_engines",
 		"ww_KPI_GHG_ne_engines",
+	],
 
+	"producing_energy_waterAbs":[
+		"wsa_nrg_turb",
+		"wsa_KPI_nrg_recovery",
+	],
+
+	"engines_in_waterAbs":[
+		"wsa_vol_fuel",
+		"wsa_KPI_GHG_ne",
 	],
 
 	"truck_transport_waste":[
@@ -46,15 +68,6 @@ var Questions =
 		"ww_num_trip",
 		"c_ww_nrg_tsludge",
 		"ww_KPI_GHG_ne_tsludge"
-	],
-
-	"producing_energy_waterAbs":[
-		"wsa_nrg_turb",
-		"wsa_vol_turb",
-		"wsa_trb_head",
-		"c_wsa_trb_head",
-		"wsa_KPI_nrg_recovery",
-		"wsa_KPI_std_nrg_recv",	
 	],
 
 	"topographic_energy":[
@@ -94,9 +107,10 @@ Questions.isHidden=function(field)
 		if(Global.Configuration['Yes/No'][question]==1)continue;
 
 		//if answer is no, look for "field" inside
+		var code;
 		for(var i in this[question])
 		{
-			var code=this[question][i];
+			code=this[question][i];
 			if(code==field) return true;
 		}
 	}
@@ -106,18 +120,18 @@ Questions.isHidden=function(field)
 //return the codes according to an ubication inside "Global"
 Questions.getQuestions=function(ubication)
 {
-	var questions=[];
+	var code,questions=[];
 	//go over all questions
 	for(var question in this)
 	{
 		//check all codes inside
 		for(var input in this[question])
 		{
-			var code = this[question][input]
+			code=this[question][input];
 			//check if exists inside ubication
 			if(ubication[code]!=undefined)
 			{
-				questions.push(question)
+				questions.push(question);
 				break;
 			}
 		}

@@ -8,14 +8,6 @@ var Tables =
 		"Natural Gas"     :{EFCH4:{engines:10,vehicles:92},EFN2O:{engines:0.1,vehicles:0.2},EFCO2:56100,FD:0.75,NCV:48.0},
 	},
 
-	"Countries":
-	{
-		"Peru":0,
-		"Thailand":0,
-		"Mexico":0,
-		"Other":0,
-	},
-
 	/** Technologies for wst and wwt (table not used right now). I was told that this will be used for benchmarking */
 	"Technologies":{
 		"Water":{
@@ -29,11 +21,15 @@ var Tables =
 		},
 		"Waste":{
 			"None":{},
+			"Primary treatment (PT)":{},
 			"Trickling filters (TF)":{},
 			"Activated sludge (AS)":{},
 			"AS and Coagulation/Filtration (C/F)":{},
 			"AS nitrification and C/F":{},
-			"Laggons":{},
+			"Aerated Laggons":{},
+			"Anaerobic Laggons":{},
+			"UASB":{},
+			"Artificial Wetlands":{},
 			"Other":{},
 		},
 	},

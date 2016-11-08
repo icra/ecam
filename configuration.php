@@ -12,7 +12,8 @@
 
 			if(!checkbox.checked)
 			{
-				if(!confirm("WARNING: All the inputs for this stage will be set to 0, and all the substages (if any) will be removed. Continue? This cannot be undone"))
+				//if(!confirm("WARNING: All the inputs for this stage will be set to 0, and all the substages (if any) will be removed. Continue? This cannot be undone"))
+				if(0)
 				{
 					checkbox.checked=true;
 					return
@@ -164,7 +165,7 @@
 			<tr>
 				<th><?php write('#quick_assessment')?>
 				<th><?php write('#energy_performance')?>
-				<th>Water efficiency module
+				<th>Water efficiency module<br>(in development)
 				<?php 
 					function printL1stage($alias,$name)
 					{
@@ -190,7 +191,7 @@
 						//sludge only in "wasteTre"
 						if($alias=="wasteTre")
 							echo "<td style='text-align:center;padding:0.5em'>
-								<label>Sludge module <input type=checkbox></label>";
+								<label>Sludge module (in development) <input type=checkbox></label>";
 					}
 
 					printL1stage("water",$lang_json['#Water']);
@@ -204,7 +205,6 @@
 				?>
 		</table>
 	</div>
-
 </div>
 
 <!--PREV & NEXT BUTTONS-->

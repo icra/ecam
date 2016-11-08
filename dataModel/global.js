@@ -2,7 +2,6 @@
 var Global = {
 	General:{
 		Name:                  "Unnamed system",
-		Location:              "Canada, Europe, Russia, Oceania",
 		AssessmentPeriodStart: "2017-01-01",
 		AssessmentPeriodEnd:   "2018-01-01",
 		Comments:              "",
@@ -49,23 +48,20 @@ var Global = {
 			"wsa_nrg_cons":0,
 			"wsa_vol_conv":0,
 			"wsa_nrg_turb":0,
+			"wsa_vol_pump":0,
+			"wsa_vol_fuel":0,
+			wsa_KPI_GHG_elec:function(){return this.wsa_nrg_cons*Global.General.conv_kwh_co2},
+			wsa_KPI_GHG_ne:function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.engines_in_water]; return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) } ,
 			wsa_KPI_nrg_per_m3:function(){return this.wsa_nrg_cons/this.wsa_vol_conv},
 			wsa_KPI_nrg_recovery : function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
 			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_cons+this.wsa_nrg_turb)/this.c_wsa_vol_head()},
-			wsa_KPI_std_nrg_recv:function(){return this.wsa_nrg_turb/this.c_wsa_trb_head()},
-			ws_SL_serv_pop:function(){return Global.Water.ws_SL_serv_pop()},
-			ws_SL_auth_con:function(){return Global.Water.ws_SL_auth_con()},
-			ws_SL_non_revw:function(){return Global.Water.ws_SL_non_revw()},
 			/*<Level3>*/
-			"wsa_vol_pump":0,
 			"wsa_pmp_head":0,
-			"wsa_vol_turb":0,
-			"wsa_trb_head":0,
 			"wsa_wat_loss":0,
 			"wsa_main_len":0,
 			"wsa_fri_loss":0,
 			c_wsa_vol_head:function(){return this.wsa_vol_pump*this.wsa_pmp_head/100},
-			c_wsa_trb_head:function(){return this.wsa_vol_turb*this.wsa_trb_head/100},
+			wsa_KPI_std_elec_eff:function(){return 0.2725/this.wsa_KPI_std_nrg_cons()},
 			wsa_KPI_water_losses:function(){return 1000*this.wsa_wat_loss/this.wsa_main_len},
 			wsa_KPI_un_head_loss:function(){return 1000*this.wsa_fri_loss/this.wsa_main_len},
 			/*</Level3>*/
@@ -77,8 +73,6 @@ var Global = {
 			wst_KPI_nrg_per_m3 : function(){return this.wst_nrg_cons/this.wst_vol_trea},
 			wst_KPI_slu_per_m3 : function(){return this.wst_mass_slu/this.wst_vol_trea},
 			wst_KPI_capac_util : function(){return 100*this.wst_vol_trea/this.wst_trea_cap},
-			ws_SL_serv_pop:function(){return Global.Water.ws_SL_serv_pop()},
-			ws_SL_auth_con:function(){return Global.Water.ws_SL_auth_con()},
 			/*<Level3>*/
 			"wst_tst_carr":0,
 			"wst_tst_disc":0,
@@ -360,6 +354,7 @@ var Global = {
 		Selected:
 		{
 			Country_protein:"Albania", //this is for consumed protein
+			ww_treatment:"None",
 			FuelType:
 			{
 				engines_in_water      : "Diesel",
@@ -368,18 +363,13 @@ var Global = {
 			},
 		},
 
-		"Yes/No":
+		"Yes/No": //default questions with answer "yes". All questions are in "questions.js" (go there with gf)
 		{
 			engines_in_water:1,
 			engines_in_waste:1,
 			truck_transport_waste:1,
 			producing_biogas:0,
 			valorizing_biogas:0,
-			producing_energy_waterAbs:0,
-			topographic_energy:0,
-			water_conduction:0,
-			pumping_for_abstraction:0,
-			pumping_for_distribution:0,
 		},
 	},
 }

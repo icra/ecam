@@ -288,7 +288,11 @@
 
 			//here check if table is empty (==t.rows.length is 2)
 			if(t.rows.length<3)
-				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#ccc>No inputs</span>";
+			{
+				var newCell=t.insertRow(-1).insertCell(-1)
+				newCell.colSpan=4
+				newCell.innerHTML="<span style=color:#999>~All inputs inactive</span>";
+			}
 
 			//bottom line decoration with the color of W/WW
 			var newRow=t.insertRow(-1);
@@ -455,7 +459,11 @@
 
 			//if the table is empty, add a warning
 			if(t.rows.length<3)
-				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#999>There are no GHG formulas in this level</span>";
+			{
+				var newCell=t.insertRow(-1).insertCell(-1)
+				newCell.colSpan=6 //7 si ww TODO
+				newCell.innerHTML="<span style=color:#999>~All GHG outputs inactive</span>";
+			}
 
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
@@ -574,7 +582,11 @@
 
 			//if the table is empty, add a warning
 			if(t.rows.length<3)
-				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#999>~No active outputs</span>";
+			{
+				var newCell=t.insertRow(-1).insertCell(-1)
+				newCell.colSpan=3
+				newCell.innerHTML="<span style=color:#999>~All Energy outputs inactive</span>";
+			}
 
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
@@ -671,7 +683,11 @@
 
 			//if the table is empty, add a warning
 			if(t.rows.length<3)
-				t.insertRow(-1).insertCell(-1).innerHTML="<span style=color:#999>~No active outputs</span>";
+			{
+				var newCell=t.insertRow(-1).insertCell(-1)
+				newCell.colSpan=3
+				newCell.innerHTML="<span style=color:#999>~All Service Level outputs inactive</span>";
+			}
 
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
@@ -823,9 +839,9 @@
 <div id=main style=text-align:left>
 
 	<!--questions-->
-	<div class=card>
+	<div class="card inline">
 		<?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
-		<table style=margin:1em id=questions class=inline></table>
+		<table style=margin:0.5em id=questions class=inline></table>
 		<script>
 			function updateQuestionsTable()
 			{
@@ -872,9 +888,8 @@
 			{
 				if(newValue)
 					Global.Configuration['Yes/No'][question]=1;
-				else
-					if(confirm("WARNING! Inputs from this question will be reseted to zero. Continue?"))
-						Global.Configuration['Yes/No'][question]=0;
+				else //if(confirm("WARNING! Inputs from this question will be reseted to zero. Continue?"))
+					Global.Configuration['Yes/No'][question]=0;
 				init()
 			}
 		</script>
@@ -887,7 +902,7 @@
 					<tr><td colspan=2>
 						<img src=img/fuel.png> <?php write('#configuration_fuel_options')?> (<a href=fuelInfo.php>info</a>)</legend>
 					<style>
-						#fuelSelection {margin:1em;}
+						#fuelSelection {margin:0.5em 0.5em 0.5em 0;}
 						#fuelSelection tr.inactive {background:#f6f6f6;color:#aaa}
 						#fuelSelection img {width:20px;vertical-align:middle}
 					</style>
@@ -898,7 +913,7 @@
 							<tr question=engines_in_water><td><?php write('#configuration_engines')?>
 							<?php 
 						}
-						else //means if level=="Waste"
+						else if($level=="Waste")
 						{
 							?>
 							<tr question=engines_in_waste>     <td><?php write('#configuration_engines')?>
@@ -934,10 +949,10 @@
 			</span>
 		</div>
 		<!--Inputs-->
-		<div class=inline 
-			 style="width:45%;margin-left:2em;
-				<?php if($level=="Energy")echo "display:none"?>">
-			<table id=inputs style="width:100%;margin-bottom:1em">
+		<div 
+			class=inline 
+			style="width:45%;margin-left:0.5em;<?php if($level=="Energy") echo "display:none;"?>">
+			<table id=inputs style="width:100%;margin-bottom:0.5em">
 				<tr><th colspan=5 class=tableHeader>INPUTS
 				<tr>
 					<th><?php write('#edit_description')?>
@@ -947,15 +962,10 @@
 			</table>
 		</div>
 		<!--Outputs-->
-		<div class=inline 
-			 style="width:50%;margin-left:1em;">
-
+		<div class=inline style="width:50%;margin-left:0.5em;">
 			<!--GHG-->
-			<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:1em;
-					<?php if($sublevel || $level=="Energy") echo "display:none;"; ?>
-				">
+			<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:0.5em;">
 				<tr><th colspan=7 class=tableHeader>OUTPUTS — <?php write('#edit_ghg_emissions')?>
-
 				<tr>
 					<th style=width:10%><?php write('#edit_origin')?>
 					<th style=width:17%>Kg<sub>CO<sub>2</sub></sub>
@@ -985,8 +995,8 @@
 					<th><?php write('#edit_unit')?>
 			</table>
 
-			<!--other-->
-			<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:1em;margin-bottom:1em">
+			<!--other (SL indicators)-->
+			<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:0.5em;margin-bottom:0.5em">
 				<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#edit_service_level_indicators') ?>
 				<tr>
 					<th><?php write('#edit_description')?>

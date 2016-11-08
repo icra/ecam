@@ -517,7 +517,6 @@
 			}
 
 			//if no formulas, warning
-			console.log(t.rows.length)
 			if(t.rows.length<2)
 			{
 				var newCell = t.insertRow(-1).insertCell(-1)
@@ -587,7 +586,7 @@
 	}
 	/*Separator*/$sep="<span style=color:black>&rsaquo;</span>";
 	$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>".$lang_json["#$sublevel"]."</a>";
-	$title="<a href=stages.php>Input data</a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>".$lang_json['#substages']."</a>";
+	$title="<a href=stages.php><script>document.write(Global.General.Name)</script></a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>".$lang_json['#substages']."</a>";
 ?>
 <style> h1 {text-align:left;padding-left:17em;border-bottom:1px solid #ccc;background:white} </style>
 <!--TITLE--><h1><?php echo $title?>
@@ -597,8 +596,8 @@
 <div id=main>
 
 <!--SUBSTAGES TABLE-->
-<div class=card style=text-align:left><?php cardMenu("Inputs - ".$lang_json['#level3_split_this_stage'])?>
-	<table id=substages style="margin:1em"> <tr>
+<div class=card style=text-align:left><?php cardMenu("INPUTS - ".$lang_json['#level3_split_this_stage'])?>
+	<table id=substages style="margin:0.5em"> <tr>
 		<td colspan=2 style="min-width:260px">
 			<!--substages counter-->
 			<div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle"><?php write('#substages')?>: <span id=counter>0</span></div>
@@ -610,8 +609,12 @@
 <!--OUTPUTS TABLE-->
 <div class=card style=text-align:left><?php cardMenu($lang_json['#level3_results_kpis'])?>
 
-	<table id=outputs class=inline style="margin:1em 1em;background:#f6f6f6"></table>
+	<table id=outputs class=inline style="margin:0.5em 0.5em;background:#f6f6f6"></table>
 
+</div>
+
+<div class=card><?php cardMenu("Opportunities")?>
+	TO DO
 </div>
 
 <!--display graphs-->

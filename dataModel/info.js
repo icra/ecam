@@ -1,15 +1,11 @@
 /** 
 *
-	Info: one-level-depth object that stores all variable magnitudes and units
+	Info: one-level-depth object that stores magnitudes and units for all inputs and outputs
 		descriptions in english are inside languages/en.php
-		descriptions in spanish are inside languages/es.php and so on...
+		descriptions in spanish are inside languages/es.php
 
 	Format:
-		"code":
-		{
-			"magnitude"	: string,
-			"unit"		: string,
-		},
+		"code": { "magnitude": string, "unit": string }
 */
 
 var Info = {
@@ -26,7 +22,6 @@ var Info = {
 	ws_SL_non_revw :{magnitude:"Percentage",unit:"%",},	
 	ws_SL_auth_con :{magnitude:"Volume/inhab/time",unit:"L/serv.pop./day",},
 	ws_SL_nrg_cost :{magnitude:"Percentage",unit:"%",},
-
 	ws_SL_nrw_emis :{magnitude:"Mass",unit:"kgCO2e"},
 	ws_SL_auc_emis :{magnitude:"Mass",unit:"kgCO2e"},
 
@@ -36,7 +31,6 @@ var Info = {
 	ww_SL_dilution :{magnitude:"Percentage",unit:"%",},
 	ww_SL_vol_pday :{magnitude:"Volume/inhab/time",unit:"L/serv.pop./day",},
 	ww_SL_nrg_cost :{magnitude:"Percentage",unit:"%",},
-
 	ww_SL_dil_emis :{magnitude:"Mass",unit:"kgCO2e"},
 
 	//L1 Water Supply
@@ -108,21 +102,21 @@ var Info = {
 	"wsa_nrg_cons":{magnitude:"Energy",unit:"kWh",},
 	"wsa_vol_conv":{magnitude:"Volume",unit:"m3",},
 	"wsa_nrg_turb":{magnitude:"Energy",unit:"kWh",},
-	"wsa_pmp_head":{magnitude:"Head",unit:"m",},
 	"wsa_vol_pump":{magnitude:"Volume",unit:"m3",},
-	"wsa_vol_turb":{magnitude:"Volume",unit:"m3",},
-	"wsa_trb_head":{magnitude:"Head",unit:"m",},
+	"wsa_vol_fuel":{magnitude:"Volume",unit:"m3",},
+	wsa_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m3",},
+	wsa_KPI_nrg_recovery:{magnitude:"Energy/Volume",unit:"kWh/m3",},
+	wsa_KPI_std_nrg_cons:{magnitude:"Energy",unit:"kWh/m3/100m",},
+	"wsa_pmp_head":{magnitude:"Head",unit:"m",},
 	"wsa_wat_loss":{magnitude:"Volume",unit:"m3",},
 	"wsa_main_len":{magnitude:"Distance",unit:"km",},
 	"wsa_fri_loss":{magnitude:"Head",unit:"m",},
-	wsa_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m3",},
-	wsa_KPI_nrg_recovery:{magnitude:"Energy/Volume",unit:"kWh/m3",},
 	c_wsa_vol_head:{magnitude:"Volume x Head",unit:"m3 x 100m",},
-	c_wsa_trb_head:{magnitude:"Volume x Head",unit:"m3 x 100m",},
-	wsa_KPI_std_nrg_cons:{magnitude:"Energy",unit:"kWh/m3/100m",},
-	wsa_KPI_std_nrg_recv:{magnitude:"Energy/Volume",unit:"kWh/m3",},
-	wsa_KPI_water_losses:{magnitude:"Volume/",unit:"m3/km/days",},
+	wsa_KPI_std_elec_eff:{magnitude:"Percentage",unit:"%"},
+	wsa_KPI_water_losses:{magnitude:"Volume/Distance",unit:"m3/km",},
 	wsa_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km",},
+	wsa_KPI_GHG_elec:{magnitude:"Mass",unit:"kgCO2e",},
+	wsa_KPI_GHG_ne:{magnitude:"Mass",unit:"kgCO2e",},
 
 	//L2 Water Treatment
 	"wst_vol_trea":{magnitude:"Volume",unit:"m3",},

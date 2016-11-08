@@ -6,16 +6,13 @@
 	"#Distribution" : "Distribución",
 	"#Collection" : "Recolección",
 	"#Discharge" : "Vertido",
-
 	"#new" : "Nuevo",
 	"#open" : "Abrir",
 	"#save" : "Guardar",
 	"#save_as" : "Guardar como",
 	"#clear" : "Borrar todo",
-
 	"#yes" : "Sí",
 	"#no" : "No",
-	
 	"#Actual" : "Real",
 	"#Estimated" : "Estimado",
 	"#about" : "Acerca de",
@@ -45,7 +42,6 @@
 	"#stages" : "Etapas",
 	"#substage" : "Subetapa",
 	"#substages" : "Subetapas",
-
 	"#graphs" : "Gráficos",
 	"#graphs_show_table" : "Ver tabla",
 	"#graphs_hide_table" : "Ocultar tabla",
@@ -61,35 +57,28 @@
 	"#graphs_graph4" : "Emisiones de GEI",
 	"#graphs_graph5" : "Consumo de electricidad (kWh)",
 	"#graphs_graph7" : "Consumo de electricidad subetapas (kWh)",
-
 	"#navbar_title" : "Herramienta de asesoramiento y monitorización de rendimiento energético y emisiones de Carbono",
-
 	"#index_first_time_using" : "¿Es tu primera vez usando ECAM Web Tool? Pulsa 'Nuevo' para empezar, o lee más información en ",
 	"#index_web_tool" : "Herramienta web",
 	"#index_description" : "ECAM es una herramienta para la evaluación y monitoreo del desempeño energético y las emisiones de carbono para empresas de servicios de agua y saneamiento.<br>ECAM es parte de la plataforma de conocimiento proporcionada por el <a target=_blank href='http://www.iwa-network.org/WaCCliM/'>proyecto WaCCliM</a>. Esta herramienta es gratuita y de código abierto.",
 	"#index_chrome_warning" : "Por favor, utiliza el explorador Google Chrome.",
 	"#index_latest_update" : "Última actualización",
-
 	"#about_credits" : "",
 	"#about_graphs_lib" : "Biblioteca para gráficos utilizada",
 	"#about_json_viewer" : "Visor JSON utilizado",
 	"#about_license" : "Licencia",
-
 	"#license_license" : "Copyright 2016 IWA<br><br>Autorizado en virtud de la Licencia de Apache, Versión 2.0 (la 'Licencia');<br>se prohíbe utilizar este archivo, excepto en cumplimiento con la Licencia.<br>Puede obtener una copia de la Licencia en:<br><br>&emsp;&emsp;http://www.apache.org/licenses/LICENSE-2.0<br><br>A menos que lo exijan las leyes pertinentes o se haya establecido por escrito,<br>el software distribuido bajo la Licencia se distribuye “TAL CUAL”,<br>SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.<br>Véase la Licencia para consultar el texto específico relativo a los permisos<br>y limitaciones establecidos en la Licencia.",
-
 	"#getStarted_general_info" : "Información general",
-	"#getStarted_subtitle" : "Información general sobre su sistema.",
+	"#getStarted_subtitle" : "Información general sobre su sistema",
 	"#getStarted_table_name" : "Nombre",
-	"#getStarted_table_location" : "Localización",
 	"#getStarted_table_start" : "Período de evaluación Inicio",
 	"#getStarted_table_end" : "Período de evaluación Final",
 	"#getStarted_table_period" : "Período de evaluación",
 	"#getStarted_table_comments" : "Comentarios",
 	"#getStarted_max_200" : "Máximo 200 caracteres",
-
 	"#configuration" : "Configuración",
 	"#configuration_activate_all" : "Activar todos",
-	"#configuration_subtitle" : "Use el menú de la izquierda para activar las etapas del ciclo del agua que formarán su sistema. Luego rellene las opciones de la derecha.",
+	"#configuration_subtitle" : "Active las etapas del ciclo urbano del agua que forman su sistema",
 	"#configuration_enter_custom_value" : "escribe valor personalizado, o elige un país",
 	"#configuration_custom" : "PERSONALIZADO",
 	"#configuration_current_value" : "Valor actual",
@@ -103,14 +92,12 @@
 	"#configuration_vehicles" : "Vehículos",
 	"#configuration_only_if" : "Sólo si",
 	"#configuration_conv_error" : "El factor de conversión para electricidad es cero, por favor proporcione un valor",
-
 	"#sidebar_mainMenu" : "Menú principal",
 	"#sidebar_general" : "General",
 	"#sidebar_other" : "Otros",
 	"#sidebar_all_inputs" : "Todos los inputs",
 	"#sidebar_all_ccvv" : "Todas las variables calculadas",
 	"#sidebar_all_kpis" : "Todos los indicadores de rendimiento",
-
 	"#birds_quick_assessment_of" : "Evaluación rápida de",
 	"#birds_enter_typical" : "Escriba los valores típicos de sus operaciones diarias",
 	"#birds_stage_not_active" : "Etapa inactiva",
@@ -136,7 +123,6 @@
 	"#birds_trips_week" : "viajes/semana",
 	"#birds_month" : "mes",
 	"#birds_warning_conv_factor" : "El factor de conversión es cero",
-
 	"#edit_input_data" : "Entrar datos",
 	"#edit_description" : "Descripción",
 	"#edit_current_value" : "Valor actual",
@@ -159,7 +145,6 @@
 	"#edit_no_indicator_associated" : "Esta fórmula no tiene un un indicador asociado",
 	"#edit_advanced_inputs_required" : "Esta fórmula necesita Inputs avanzados",
 	"#edit_results" : "RESULTADOS",
-
 	"#variable_detailed_info" : "Información detallada",
 	"#variable_stage" : "Etapa",
 	"#variable_go_back_to" : "Ir atrás a",
@@ -177,14 +162,12 @@
 	"#variable_this_input_is_considered_estimated" : "Este input es considerado estimado por el usuario",
 	"#variable_estimated" : "Valor estimado (aproximado)",
 	"#variable_formula" : "Formula",
-	"#variable_go_to_substages" : 	"Este valor es la suma de todas las subetapas, no puede cambiarlo aquí, vaya a Subetapas",
-
+	"#variable_go_to_substages" :"Vaya a Subetapas para modificar este input (ahora es la suma de todas la subetapas)",
 	"#stages_this_is_an_overview_of_your_system" : "Visión general de las etapas activas de su sistema. Para activar etapas vaya a",
 	"#stages_system_assessment_overview" : "Visión general por subetapas",
 	"#stages_stage" : "Etapa",
 	"#stages_num_of_substages" : "Nº de subetapas",
 	"#stages_type_of_assessment" : "Tipo de asesoramiento",
-
 	"#level3_split_this_stage" : "Aquí puede dividir esta etapa en subetapas",
 	"#level3_new_substage" : "Nueva subetapa",
 	"#level3_results_kpis" : "RESULTADOS - Indicadores de rendimiento",
@@ -199,12 +182,10 @@
 	"#level3_error_memory_full" : "Subetapa no añadida: memoria llena",
 	"#level3_error_cannot_delete_last_substage" : "No se puede borrar la última subetapa",
 	"#level3_delete_substage" : "Borrar subetapa",
-
 	"#assessment_type" : "Tipo de asesoramiento",
 	"#assessment_simple" : "Simple",
 	"#assessment_advanced" : "Avanzado",
 	"#assessment_adv_descr" : "El asesoramiento avanzado consiste en más inputs y más indicadores",
-
 	"#export_title" : "Exportar a Excel",
 	"#export_description" : "Pulse en una etapa para ver sus variables. Luego, pulse 'Seleccionar toda la tabla' para copiar y pegar a una nueva hoja de Excel",
 	"#export_highlight_button" : "Seleccionar toda la tabla",
@@ -217,20 +198,16 @@
 	"#export_desc" : "Descripción",
 	"#export_click_on_a_stage" : "Pulse una etapa",
 	"#export_csv" : "Crear archivo CSV des de la tabla",
-
 	"#sidebar_graphs" : "Gráficos",
 	"#sidebar_export" : "Exportar",
 	"#sidebar_todo" : "Pendiente",
 	"#sidebar_problems" : "Problemas",
-
 	"#summary_no_active_stages" : "Ninguna etapa activada",
 	"#summary_all_active_inputs" : "Todos los inputs activados (por etapas)",
 	"#summary_all_active_outputs" : "Todos los outputs activados (por etapas)",
-
 	"#todo" : "TAREAS PENDIENTES",
 	"#todo_task" : "Tarea",
 	"#todo_status" : "Estado",
-
 	"#fuelInfo_description" : "Dependiendo del combustible elegido, los siguientes factores de emisión (EF) serán aplicados para los cálculos que lo requieran",
 	"#fuelInfo_eeff" : "Factores de emisión (EF) para diferentes tipos de combustible (tabla 6.3 IPCC vol 6)",
 	"#fuelInfo_type" : "Combustible",
@@ -238,15 +215,12 @@
 	"#fuelInfo_vehicles" : "vehículos",
 	"#fuelInfo_fd" : "Densidad del combustible",
 	"#fuelInfo_ncv" : "Valores caloríficos netos",
-
 	"#questions" : "Preguntas",
 	"#questions_about" : "Acerca de las preguntas adicionales",
 	"#questions_question" : "Pregunta",
 	"#questions_variables_hidden" : "Variables ocultas si la respuesta es No",
 	"#questions_questions_hidden" : "Preguntas ocultas si la respuesta es No",
-
 	"#constants" : "Constantes",
-
 	"#help" : "Ayuda",
 
 	"#engines_in_water" : "¿Tiene grupo electrógeno para bombas (Suministro de agua)",
@@ -259,7 +233,7 @@
 	"#water_conduction":"¿Tiene conducción de agua",
 	"#pumping_for_abstraction":"¿Tiene bombeo en la la etapa de captación",
 	"#pumping_for_distribution":"¿Bombea directamente al sistema de distribución",
-
+	"#engines_in_waterAbs":"¿Tiene grupo electrógeno",
 
 	"#Days_descr"         : "Período de evaluación",
 	"#Days_expla"         : "Período de evaluación",
@@ -267,7 +241,6 @@
 	"#Years_expla"        : "Período de evaluación",
 	"#conv_kwh_co2_descr" : "Factor de conversión de electricidad a CO2",
 	"#conv_kwh_co2_expla" : "Masa emitida de CO2 por cada kWh de energía consumido",
-
 	"#ws_SL_serv_pop_descr" : "Población residente servida",
 	"#ws_SL_serv_pop_expla" : "Porcentaje de población residente conectada al suministro de agua",
 	"#ws_SL_non_revw_descr" : "Volumen de agua no comptabilizada en todo el sistema de agua potable",
@@ -278,10 +251,8 @@
 	"#ws_SL_nrg_cost_expla" : "Porcentaje de costes eléctricos",
 	"#ws_SL_nrw_emis_descr" : "Emisiones de GEI relacinadas con el agua no comptabilizada",
 	"#ws_SL_nrw_emis_expla" : "Emisiones de GEI relacinadas con el agua no comptabilizada",
-
 	"#ws_SL_auc_emis_descr" : "GHG emissions related to water consumption",
 	"#ws_SL_auc_emis_expla" : "GHG emissions related to water consumption",
-
 	"#ww_SL_serv_pop_descr" : "Población residente servida",
 	"#ww_SL_serv_pop_expla" : "Población conectada al sistema de colectores, cuya agua residual está tratada",
 	"#ww_SL_treat_m3_descr" : "Agua residual recolectada tratada",
@@ -292,7 +263,6 @@
 	"#ww_SL_vol_pday_expla" : "Volume of treated wastewater per serviced person in the service area managed by the undertaking divided by the duration of the assessment period",
 	"#ww_SL_nrg_cost_descr" : "Porcentaje de costes eléctricos",
 	"#ww_SL_nrg_cost_expla" : "Proportion of the utility energy costs referred to the total running costs",
-
 	"#ws_resi_pop_descr"     : "Población residente",
 	"#ws_resi_pop_expla"     : "Número de residentes permanentes en el área de servicio",
 	"#ws_serv_pop_descr"     : "Población servida",
@@ -315,7 +285,6 @@
 	"#ws_KPI_GHG_ne_expla" : "Emisiones de GEI que no provienen de consumo de electricidad en todas las etapas del sistema de agua potable en zonas urbanas",
 	"#ws_KPI_GHG_descr"      : "<b>Total GEI</b>",
 	"#ws_KPI_GHG_expla" : "Emisiones de GEI totales",
-
 	"#ww_bod_infl_descr" : "DBO5 Carga en el influente",
 	"#ww_bod_infl_expla" : "Carga DBO5 en el influente de la PTAR durante el período de evaluación. Se puede estimar multiplicando la concentración media de BOD en el afluente por el volumen de entrar en la planta. Si esto se realiza a diario y se suma sobre la duración de el período de evaluación del valor será la más precisa ",
 	"#ww_bod_effl_descr" : "DBO5 Carga en el efluente",
@@ -384,7 +353,6 @@
 	"#ww_KPI_GHG_ne_expla" : "Emisiones de GEI otros de consumo de electricidad en todas las etapas del sistema de aguas residuales",
 	"#ww_KPI_GHG_descr" : "<b>Total GEI</b>",
 	"#ww_KPI_GHG_expla" : "Emisiones de GEI procedentes de fuera del sector eléctrico y el consumo de electricidad",
-
 	"#wsg_KPI_nrg_cons_descr": "Consumo eléctrico en el Suministro de agua (Captación+Tratamiento+Distribución)",
 	"#wsg_KPI_nrg_cons_expla" : "Consumo de energía eléctrica que incluye tanto de la red y de producción propia, para las fases de agua, de la empresa durante todo el período de evaluación",
 	"#wsg_KPI_nrg_x_ye_descr" : "Consumo eléctrico anual (Suministro de agua)",
@@ -410,7 +378,7 @@
 	"#wwg_KPI_nrg_perc_descr" : "Porcentaje de costo de energía de Aguas Residuales de coste total de ejecución",
 	"#wwg_KPI_nrg_perc_expla" : "",
 
-	"#wsa_nrg_cons_descr" : "Electricidad consumida de la red",
+	"#wsa_nrg_cons_descr" : "Electricidad consumida de la red (bombeo)",
 	"#wsa_nrg_cons_expla" : "Consumo de energía eléctrica que incluye tanto de la red y de producción propia, para la abstractionunit agua, de la empresa durante todo el período de evaluación",
 	"#wsa_vol_conv_descr" : "Volumen de agua transportada",
 	"#wsa_vol_conv_expla" : "Suma del volumen de agua transportada (por gravedad o por bombeo) en el abstractionunit agua que son responsabilidad de la empresa, durante el plazo de evaluación",
@@ -420,13 +388,9 @@
 	"#wsa_pmp_head_expla" : "La carga a la que el agua se bombea en cada abstractionunit que son responsabilidad de la empresa, durante el plazo de evaluación",
 	"#wsa_vol_pump_descr" : "Volumen bombeado",
 	"#wsa_vol_pump_expla" : "El volumen de agua bombeada en cada abstractionunit agua que son responsabilidad de la empresa, durante el plazo de evaluación",
-	"#wsa_vol_turb_descr" : "Volumen de agua de la turbina",
-	"#wsa_vol_turb_expla" : "Suma del volumen que pasa por una turbina gestionado por la empresa para producir electricidad, para cada systemunit abstracción",
-	"#wsa_trb_head_descr" : "Pérdida de carga de la turbina",
-	"#wsa_trb_head_expla" : "La carga en la que el agua está cayendo a través de turbinas en cada abstractionunit agua que son responsabilidad de la empresa, durante el plazo de evaluación",
 	"#wsa_wat_loss_descr" : "Las pérdidas de agua",
 	"#wsa_wat_loss_expla" : "Diferencia entre el sistema abstraído volumen y el volumen de entrar en la planta de tratamiento de agua y / o introduciendo directamente el sistema de distribución",
-	"#wsa_main_len_descr" : "Longitud de la red",
+	"#wsa_main_len_descr" : "Longitud de la red de transmisión",
 	"#wsa_main_len_expla" : "Transmisión y distribución de la longitud total de la red (no hay conexiones de servicio en la abstracción y la etapa de transporte)",
 	"#wsa_fri_loss_descr" : "Pérdidas por fricción",
 	"#wsa_fri_loss_expla" : "Todas las pérdidas por fricción (incluyendo los locales en válvulas y accesorios) se debe incluir",
@@ -436,16 +400,20 @@
 	"#wsa_KPI_nrg_recovery_expla" : "Unidad de energía recuperada en la conducción de agua",
 	"#c_wsa_vol_head_descr" : "Agua extraída por bombeo por pérdida de la bomba",
 	"#c_wsa_vol_head_expla" : "Suma, para todas las bombas del sistema de agua extraída, el volumen total bombeado por la bomba i (m3) veces la altura de la bomba i (m) / 100",
-	"#c_wsa_trb_head_descr" : "Agua extraída bombeada de la pérdida de la bomba x (turbinas)",
-	"#c_wsa_trb_head_expla" : "Suma de todas las turbinas para el sistema de captación de agua, de las turbinas volumen total de la turbina i (m3) veces la altura de la bomba i (m) / 100",
 	"#wsa_KPI_std_nrg_cons_descr" : "Consumo de energía estandarizado",
 	"#wsa_KPI_std_nrg_cons_expla" : "",
-	"#wsa_KPI_std_nrg_recv_descr" : "Recuperación de energía estandarizada",
-	"#wsa_KPI_std_nrg_recv_expla" : "Representa una eficiencia media turbina de energía",
-	"#wsa_KPI_water_losses_descr" : "Pérdidas de agua por unidad de longitud de red",
+	"#wsa_KPI_water_losses_descr" : "Pérdidas de agua por unidad de longitud de la red de transmisión",
 	"#wsa_KPI_water_losses_expla" : "Total (aparente y real) las pérdidas de agua, expresada en términos de volumen anual perdidas por longitud de red",
 	"#wsa_KPI_un_head_loss_descr" : "Pérdida de carga unitaria",
 	"#wsa_KPI_un_head_loss_expla" : "Pérdida por fricción Unidad de energía en el sistema de transporte", 
+	"#wsa_vol_fuel_descr" :"Volumen de combustible consumido",
+	"#wsa_vol_fuel_expla" :"Volumen de combustible consumido",
+	"#wsa_KPI_std_elec_eff_descr":"Eficiencia electromecánica estimada bombeo",
+	"#wsa_KPI_std_elec_eff_expla":"Eficiencia electromecánica estimada bombeo",
+	"#wsa_KPI_GHG_elec_descr":"Electricidad",
+	"#wsa_KPI_GHG_elec_expla":"Electricidad",
+	"#wsa_KPI_GHG_ne_descr":"Motores de combustible",
+	"#wsa_KPI_GHG_ne_expla":"Motores de combustible",
 
 	"#wst_vol_trea_descr" : "Volumen de agua tratada",
 	"#wst_vol_trea_expla" : "Suma del volumen de agua tratada por ETAs que son responsabilidad de la empresa de agua, durante el plazo de evaluación",
@@ -479,7 +447,6 @@
 	"#wst_t______D_expla" : "Volumen de agua tratada por ETAs con Des",
 	"#wst_t__other_descr" : "Volumen de agua tratada en la ETA con otros",
 	"#wst_t__other_expla" : "Volumen de agua tratada por ETAs con otra secuencia",
-
 	"#wst_KPI_nrg_per_m3_descr" : "Consumo de energía por agua tratada",
 	"#wst_KPI_nrg_per_m3_expla" : "Consumo de energía por unidad de agua tratada en las plantas de tratamiento de agua",
 	"#wst_KPI_slu_per_m3_descr" : "Producción de lodos por agua tratada",
@@ -500,10 +467,9 @@
 	"#wst_KPI_t______D_expla"   : "",
 	"#wst_KPI_t__other_descr"   : "ETA con otra secuencia",
 	"#wst_KPI_t__other_expla"   : "",
-
 	"#wsd_nrg_cons_descr" : "Electricidad consumida de la red",
 	"#wsd_nrg_cons_expla" : "Consumo de energía eléctrica que incluye tanto de la red y de producción propia, para la distribución de agua durante todo el período de evaluación",
-	"#wsd_vol_dist_descr" : "Volumen de entrada",
+	"#wsd_vol_dist_descr" : "Volumen de agua inyectada a la distribución",
 	"#wsd_vol_dist_expla" : "Volumen de agua que entra en el sistema de distribución del tratamiento de agua o directamente desde la abstracción durante el período de evaluación",
 	"#wsd_auth_con_descr" : "Volumen de consumo autorizado",
 	"#wsd_auth_con_expla" : "Suma del volumen de agua medido y / o sin taxímetro que, durante el período de evaluación, se toma por los clientes registrados, por el proveedor de agua en sí, o por otras personas que están autorizadas implícita o explícitamente a hacerlo por el proveedor de agua, para fines residenciales, comerciales, industriales o públicas. incluye agua exportado ",
@@ -533,7 +499,6 @@
 	"#wsd_main_len_expla" : "Longitud total de la red de transmisión y distribución (conexiones de servicio no incluido), para cada distributionunit agua a la fecha de referencia",
 	"#wsd_fri_loss_descr" : "Pérdidas por fricción",
 	"#wsd_fri_loss_expla" : "Las pérdidas por fricción (incluyendo los locales en válvulas y accesorios), para cada distributionunit agua a la fecha de referencia.",
-
 	"#wsd_KPI_nrg_per_m3_descr"   : "Consumo de energía por el consumo autorizado",
 	"#wsd_KPI_nrg_per_m3_expla"   : "Consumo de energía por unidad de consumo homologado en la distribución del agua",
 	"#wsd_SL_pres_ade_descr"      : "Porcentaje de adecuación de suministro de presión",
@@ -560,7 +525,6 @@
 	"#wsd_KPI_water_losses_expla" : "Pérdidas totales de agua (aparentes y reales), expresados en términos de volumen anual perdidas por longitud de red",
 	"#wsd_KPI_un_head_loss_descr" : "Pérdida de carga Unidad",
 	"#wsd_KPI_un_head_loss_expla" : "Pérdida por fricción Unidad de energía en el sistema de transporte",
-
 	"#wwc_vol_conv_descr"         : "Volumen de aguas residuales transmitido al tratamiento o a un emisario para la descarga sin tratamiento",
 	"#wwc_vol_conv_expla"         : "Aguas residuales recolectadas, que corresponde al volumen de los productos domésticos, comerciales e industriales a la red de alcantarillado que llega a la planta de tratamiento o un emisario durante el período de evaluación (bombeado o no). A nivel sub-etapa, si se bombea el volumen, sólo se entrar en esta línea si se está bombeando directamente a la planta o la descarga. en caso de bombeo de múltiples etapas no incluyen el volumen en esta línea ",
 	"#wwc_nrg_cons_descr"         : "Electricidad consumida de la red",
@@ -575,7 +539,6 @@
 	"#wwc_KPI_nrg_per_m3_expla"   : "Porcentaje de horas cuando el sistema (suministro intermitente) se presuriza",
 	"#wwc_KPI_std_nrg_cons_descr" : "Consumo de energía estandarizados",
 	"#wwc_KPI_std_nrg_cons_expla" : "Porcentaje de energía consumida en la recolección de aguas residuales en lo que respecta a la energía total consumida de la red y auto producido en los sistemas de agua y aguas residuales",
-
 	"#wwt_biog_pro_descr"         : "Biogás producido",
 	"#wwt_biog_pro_expla"         : "Biogás producido durante el periodo de evaluación por cada una planta de tratamiento de aguas residuales gestionadas por la empresa",
 	"#wwt_biog_val_descr"         : "Biogás valorizadas en forma de calor y / o electricidad",
@@ -648,7 +611,6 @@
 	"#wwt_KPI_t__other_expla"     : "",
 	"#wwt_SL_qual_com_descr"      : "Porcentaje de cumplimiento de la calidad",
 	"#wwt_SL_qual_com_expla"      : "Porcentaje de pruebas de calidad del agua llevado a cabo en las plantas de tratamiento de aguas que cumplen con las autorizaciones de vertido",
-
 	"#wwd_vol_disc_descr"         : "Volumen de agua residual descargada (tratada y no tratada)",
 	"#wwd_vol_disc_expla"         : "Volumen de aguas residuales vertidas por cada planta de tratamiento de aguas residuales que son responsabilidad de la empresa, durante el período de evaluación. Esto incluye todas las aguas residuales recogidas, si se transporta al tratamiento o se descarga sin tratamiento",
 	"#wwd_nrg_cons_descr"         : "Electricidad consumida de la red",

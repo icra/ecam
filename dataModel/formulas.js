@@ -1,3 +1,7 @@
+/*
+	Functions to deal with formulas/equations
+*/
+
 var Formulas = {
 	/*
 		return array of strings corresponding to variables matched in formula string
@@ -104,7 +108,7 @@ var Formulas = {
 	/**
 	 * Hihghlight a field <tr field=field>
 	 * @param {string} field - the variable codes we want to highlight e.g. 'c_ww50'
-	 * @param {object} object - pointer to the object
+	 * @param {object} object - pointer to the DOM object
 	 * @param {boolean} hl - turn on/off highlighting
 	 */
 	hlInputs:function(field,object,hl)
@@ -123,6 +127,7 @@ var Formulas = {
 	/**
 	 * Hihghlight a field <tr field=field>
 	 * @param {array of strings} fields - the variable codes we want to highlight e.g. ['sV1','sV2']
+	 * @param {object} object - pointer to the DOM object
 	 * @param {boolean} hl - turn on/off highlighting
 	 */
 	hlOutputs:function(input,obj,hl)

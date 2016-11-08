@@ -19,28 +19,10 @@
 			init();
 		}
 
-		function createLocationSelection()
-		{
-			var select = document.createElement('select');
-			select.setAttribute('onchange','updateField(Global.General,"Location",this.value)');
-			for(var country in Tables.Countries)
-			{
-				var option = document.createElement('option');
-				if(country==Global.General.Location)
-				{
-					option.setAttribute('selected','true');
-				}
-				option.innerHTML=country;
-				select.appendChild(option);
-			}
-			return select;
-		}
-
 		function init()
 		{
 			redisplayUW1menu();
 			updateCurrency();
-
 			Sidebar.update();
 			updateResult();
 			document.querySelector('#form #Name').value=Global.General.Name;
@@ -48,15 +30,12 @@
 			document.querySelector('#form #End').value=Global.General.AssessmentPeriodEnd;
 			document.querySelector('#form #Days').innerHTML=Global.General.Days();
 			document.querySelector('#form #Comments').value=Global.General.Comments;
-			document.querySelector('#form #Location').innerHTML="";
-			document.querySelector('#form #Location').appendChild(createLocationSelection());
 		}
 	</script>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1><?php write('#getStarted_general_info')?></1>
-<!--SUBTITLE--><h4><?php write('#getStarted_subtitle')?></h4>
+<!--TITLE--><h1><?php write('#getStarted_subtitle')?></h1>
 
 <div id=main>
 	<!--form-->
@@ -64,9 +43,6 @@
 		<tr>
 			<th><?php write('#getStarted_table_name')?>
 			<td><input id=Name onchange=updateField(Global.General,'Name',this.value)>
-		<tr>
-			<th><?php write('#getStarted_table_location')?>
-			<td id=Location>
 		<tr>
 			<th><?php write('#getStarted_table_start')?>
 			<td><input id=Start type=date onchange="updateField(Global.General,'AssessmentPeriodStart',this.value)">

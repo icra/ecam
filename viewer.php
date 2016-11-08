@@ -65,9 +65,10 @@
 </script>
 <style>
 	ul {list-style:circle}
+	div.card {background:none}
 	.function {color:blue}
 	.object {color:white;font-size:16px;font-weight:bold;color:#bf5050}
-	ul#root li {
+	li {
 		border:1px solid transparent;
 		border-radius:0.3em;
 		padding:0.1em;
@@ -75,7 +76,7 @@
 		font-family:monospace;
 		transition:all 0.2s;
 	}
-	ul#root li:hover {
+	li:hover {
 		border:1px solid #ccc;
 		background:white;
 		cursor:default;
@@ -93,19 +94,35 @@
 <!--menu--> <?php include'linear.php'?>
 
 <!--title-->
-<h1>Data structure viewer &mdash; All inputs and equations</h1>
+<h1>Data structure viewer - All data structures in ECAM</h1></center>
 
 <!--legend-->
 <div id=legend>
 	<span style=color:#666>Legend</span> &rarr;
-	<div class=inline style=background:#bf5050></div> Categories
-	<div class=inline style=background:black></div>   Inputs
-	<div class=inline style=background:blue></div>    Equations
+	<div class=inline style=background:#bf5050></div> Category
+	<div class=inline style=background:black></div>   Input
+	<div class=inline style=background:blue></div>    Equation
 </div>
-</center>
 
-<!--tree viewer-->
-<ul id=root></ul>
+<!--main structure: Global-->
+<div class=inline style=max-width:75%>
+	<h2>Main data structure: Global</h2>
+	<ul id=root></ul>
+</div>
 
+<!--other data structures-->
+<div class=inline style=max-width:20%>
+	<h2>Other data structures</h2>
+	<ul><?php
+		//see all files in the "dataModel" folder
+		$files=scandir("dataModel");
+		forEach($files as $file)
+		{
+			if(!is_dir("dataModel/$file")) 
+				echo "<li><a href='dataModel/$file'>$file</a>";
+		}
+	?>
+	</ul>
+</div>
 <!--FOOTER--> <?php include'footer.php'?>
 <!--JSON-->   <?php include'currentJSON.php'?>
