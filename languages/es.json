@@ -401,7 +401,7 @@
 	"#c_wsa_vol_head_descr" : "Agua extraída por bombeo por pérdida de la bomba",
 	"#c_wsa_vol_head_expla" : "Suma, para todas las bombas del sistema de agua extraída, el volumen total bombeado por la bomba i (m3) veces la altura de la bomba i (m) / 100",
 	"#wsa_KPI_std_nrg_cons_descr" : "Consumo de energía estandarizado",
-	"#wsa_KPI_std_nrg_cons_expla" : "",
+	"#wsa_KPI_std_nrg_cons_expla" : "Consumo de energía estandarizado",
 	"#wsa_KPI_water_losses_descr" : "Pérdidas de agua por unidad de longitud de la red de transmisión",
 	"#wsa_KPI_water_losses_expla" : "Total (aparente y real) las pérdidas de agua, expresada en términos de volumen anual perdidas por longitud de red",
 	"#wsa_KPI_un_head_loss_descr" : "Pérdida de carga unitaria",

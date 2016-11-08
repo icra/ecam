@@ -403,7 +403,7 @@
 	"#c_wsa_vol_head_descr" : "Abstracted water pumped x pump head",
 	"#c_wsa_vol_head_expla" : "Sum, for all the pumps of the water abstracted system, of the total volume pumped by pump i (m3) times the pump head i (m) / 100",
 	"#wsa_KPI_std_nrg_cons_descr" : "Standardized energy consumption",
-	"#wsa_KPI_std_nrg_cons_expla" : "",
+	"#wsa_KPI_std_nrg_cons_expla" : "Standardized energy consumption",
 	"#wsa_KPI_water_losses_descr" : "Water losses per transmission mains length",
 	"#wsa_KPI_water_losses_expla" : "Total (apparent and real) water losses, expressed in terms of annual volume lost per mains length",
 	"#wsa_KPI_un_head_loss_descr" : "Unit head loss",

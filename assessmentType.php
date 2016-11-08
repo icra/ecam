@@ -1,5 +1,4 @@
-<!--inside level3.php-->
-
+<!--fragment of code inside level3.php-->
 <table class=inline style="font-size:13px;float:right;
 	box-shadow: 0 1px 2px rgba(0,0,0,.1);
 	"><tr>
@@ -23,15 +22,15 @@
 <script>
 	function updateAssessment(newValue)
 	{
-		<?php echo "var level='$level';\n" ?>
-		<?php echo "var sublevel='$sublevel';\n" ?>
+		<?php echo "var level='$level';" ?>
+		<?php echo "var sublevel='$sublevel';" ?>
 		Global.Configuration.Assessment[level][sublevel]=newValue;
 		init();
 	}
 	function updateAssessmentMenu()
 	{
-		<?php echo "var level='$level';\n" ?>
-		<?php echo "var sublevel='$sublevel';\n" ?>
+		<?php echo "var level='$level';" ?>
+		<?php echo "var sublevel='$sublevel';" ?>
 		if(Global.Configuration.Assessment[level][sublevel]=='simple')
 			document.querySelector('input[name=assessment][value=simple]').setAttribute('checked',true);
 		else

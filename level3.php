@@ -23,12 +23,9 @@
 			border-left:none;
 			text-align:left;
 		}
-
 		table#substages td:nth-child(2) {max-width:300px}
-
 		td.input input { margin:0;padding:0;width:95%;}
 		td.input{width:80px;text-align:right;background-color:#eee;cursor:cell}
-
 		#outputs tr:hover { background:#ccc; }
 		#outputs th{background:#d7bfaf;text-align:left}
 		#outputs td:nth-child(n+3) {text-align:right}
@@ -56,16 +53,14 @@
 			}
 			else
 			{
-				?>
-					td.level2{background:#00aff1}
-				<?php 
+				?> td.level2{background:#00aff1} <?php 
 			}
 		?>
 	</style>
 
 	<script>
 		<?php
-			/** establish the level 2 stage we are going to be focused, since substages of level 3 have the same variables*/
+			/** level 2 stage we are going to be focused, since substages of level 3 have the same variables*/
 			echo "var CurrentStage = Global['$level']['$sublevel'];";
 		?>
 
@@ -77,7 +72,7 @@
 			echo "var substages=Substages['$level']['$sublevel'];";
 		?>
 
-		/** Returns array of strings which are input identifiers for current stage, e.g ["aV1","av2"] */
+		/** Returns array of strings: they are identifiers for current stage variables, e.g ["aV1","av2"] */
 		function getInputs()
 		{
 			var inputs=[];
@@ -89,12 +84,12 @@
 			return inputs;
 		}
 
-		/** Substage class for storing all variables that correspond to current stage */
+		/** new Substage class for storing all variables that correspond to current stage */
 		function Substage()
 		{
 			/*get a list of variables for this level*/ var inputs=getInputs();
 			/*substage default name*/ this.name="<?php write('#name')?>";
-			//make the object look like, e.g. Substage {tV1: 0, tV2: 0, tV3: 0, tV4: 0, tV5: 0, ...}
+			//init with zero values, e.g. Substage {tV1: 0, tV2: 0, tV3: 0, tV4: 0, tV5: 0, ...}
 			for(var i in inputs){this[inputs[i]]=0;}
 		}
 
@@ -168,18 +163,19 @@
 			return sum;
 		}
 
-		/** update substages table */
+		/** Redisplay inputs */
 		function updateSubstagesTable()
 		{
-			/*table element*/ var t=document.getElementById('substages');
+			/*table element*/
+			var t=document.getElementById('substages');
+			while(t.rows[0].cells.length>1)t.rows[0].deleteCell(-1);
+
 			/*table headers */
-				while(t.rows[0].cells.length>1)t.rows[0].deleteCell(-1);
 				//go over substages: create a column for each
 				for(var s in substages)
 				{
 					var newTH = document.createElement('th');
-					newTH.style.cursor="pointer";
-					newTH.style.width="120px";
+					newTH.style.cursor="pointer";newTH.style.width="120px";
 					newTH.innerHTML=""+
 						"<?php write('#substage')?> "+(parseInt(s)+1)+" "+
 						"<div style=font-weight:bold>"+substages[s].name+"</div>";
@@ -189,32 +185,34 @@
 				}
 				//TOTAL header
 				var newTH = document.createElement('th');
-				newTH.innerHTML="&sum; <?php write('#level3_TOTAL')?>";
 				t.rows[0].appendChild(newTH);
+				newTH.innerHTML="&sum; <?php write('#level3_TOTAL')?>";
 
 				//UNIT header
 				var newTH = document.createElement('th');
-				newTH.innerHTML="<?php write('#level3_unit')?>";
 				t.rows[0].appendChild(newTH);
+				newTH.innerHTML="<?php write('#level3_unit')?>";
 			/*end headers*/
 
 			/*update table body*/
 				while(t.rows.length>1)t.deleteRow(-1)
+
 				//each row corresponds to a variable of the current stage
 				var inputs=getInputs();
-				//Calculated variables
+
+				//find calculated variables
 				var cvs=[];
 				(function()
 				{
 					for(var f in CurrentStage)
 					{
-						//if "c_" is found, add f to cvs
+						//if "c_" is found at the beggining, add f to cvs
 						if(f.search(/^c_/)!=-1){cvs.push(f);}
 					}
+					inputs=inputs.concat(cvs);
 				})();
 
-				inputs=inputs.concat(cvs);
-
+				//go over inputs array we've just created
 				for(var input in inputs)
 				{
 					/*variable code*/
@@ -231,20 +229,19 @@
 					}
 
 					/*if assessment type is simple, hide L3 variables*/
-					if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
+					if(Global.Configuration.Assessment['<?php echo "$level']['$sublevel"?>']=="simple")
 					{
-						if(Level3.isInList(code)) continue;
+						if(Level3.hasOwnProperty(code)) continue;
 					}
 
 					/*new row*/
 					var newRow=t.insertRow(-1);
 					newRow.setAttribute('field',code);
-
 					if(Questions.isHidden(code)) disableRow(newRow);
 
-					/*bg color*/ if(isCV)newRow.classList.add('isCV');
+					/*bg color*/ if(isCV) newRow.classList.add('isCV');
 
-					//highlight fields if is a CV
+					//mouse over listener for highlighting
 					if(isCV)
 					{
 						var formula=CurrentStage[code].toString();
@@ -258,24 +255,22 @@
 						newRow.setAttribute('onmouseout', 'Formulas.hlOutputs("'+code+'",CurrentStage,0)');
 					}
 
-					/*code*/
+					/*1st cell: show code*/
 					var newCell=newRow.insertCell(-1);
-					newCell.style.textAlign='left';
-					newCell.style.fontSize='10px';
+					newCell.style.textAlign='left';newCell.style.fontSize='10px';
 					newCell.innerHTML=(function()
 					{
 						var extra = Level3.isInList(code) ? "(<span style=font-size:10px><?php write('#level3_advanced')?></span>)" : "" ;
 						return extra+" <a href=variable.php?id="+code+">"+code+"</a>";
 					})();
 
-					/*variable description*/
+					/*2nd cell: variable name*/
 					var newCell=newRow.insertCell(-1);
-					newCell.style.textAlign="left";
-					newCell.style.cursor="help";
+					newCell.style.textAlign="left";newCell.style.cursor="help";
 					newCell.setAttribute('title', translate(code+'_expla'));
 					newCell.innerHTML=translate(code+'_descr');
 
-					//values: go over substages
+					//3rd cell and so on: go over substages
 					var multiplier=Units.multiplier(code);
 					for(var s in substages)
 					{
@@ -288,7 +283,7 @@
 						}
 						else
 						{
-							newCell.className="input";
+							newCell.classList.add("input");
 							newCell.setAttribute('onclick','transformField(this)');
 							newCell.setAttribute('substage',s);
 							newCell.innerHTML=format(substages[s][code]/multiplier);
@@ -299,15 +294,15 @@
 					var sum=sumAll(code);
 
 					//some variables are averaged instead of summed up
-					if(Averaged.isAveraged(code)) sum/=substages.length;
+					if(Averaged.isAveraged(code)) 
+						sum/=substages.length;
 
-					//only update real inputs
+					//BUG FIX: only update real inputs
 					if(!isCV) CurrentStage[code]=sum;
 
 					//LEVEL 2 current value
 					var newCell=newRow.insertCell(-1);
-					newCell.style.textAlign="center";
-					newCell.style.fontWeight="bold";
+					newCell.style.textAlign="center";newCell.style.fontWeight="bold";
 					newCell.innerHTML=(function()
 					{
 						if(isCV) 
@@ -323,20 +318,18 @@
 					//Unit for current input
 					newRow.insertCell(-1).innerHTML=(function()
 					{
-						if(!Info[code])
-							return "undefined";
+						//check if unit is entered in "Info"
+						if(!Info[code]) return "undefined";
+						//check if unit is currency
+						if(Info[code].magnitude=="Currency") { return Global.General.Currency; }
+						//if no magnitude, return unit string
+						if(Units[Info[code].magnitude]===undefined) { return Info[code].unit }
 
-						if(Info[code].magnitude=="Currency")
-						{
-							return Global.General.Currency;
-						}
-
-						var str="<select onchange=Units.selectUnit('"+code+"',this.value)>";
-						if(Units[Info[code].magnitude]===undefined)
-						{
-							return Info[code].unit
-						}
+						//look for current unit
 						var currentUnit = Global.Configuration.Units[code] || Info[code].unit
+
+						//create a <select> for unit changing
+						var str="<select onchange=Units.selectUnit('"+code+"',this.value)>";
 						for(unit in Units[Info[code].magnitude])
 						{
 							if(unit==currentUnit)
@@ -349,24 +342,25 @@
 					})();
 				}
 
-				//Options
-				var newRow = t.insertRow(-1)
-				var newCell = newRow.insertCell(-1)
-				newCell.style.border="none"
-				newCell.colSpan=2
-				for(s in substages)
+				//last row: delete substage
+				var newRow=t.insertRow(-1);
+				var newCell=newRow.insertCell(-1);
+				newCell.style.border="none";newCell.colSpan=2;
+				for(var s in substages)
 				{
 					newCell=newRow.insertCell(-1);
-					newCell.style.textAlign='center'
+					newCell.style.textAlign='center';
 					var str=""+
 						"<button class=button onclick=deleteSubstage("+s+") title='<?php write('#level3_delete_substage')?>'>&#9003;</button>"
 					newCell.innerHTML=str
 				}
 			/*end update body*/
-			/*update counter*/ document.getElementById('counter').innerHTML=substages.length
+
+			/*update substage counter*/ 
+			document.getElementById('counter').innerHTML=substages.length
 		}
 
-		/** Redisplay table id=outputs */
+		/** Redisplay outputs */
 		function updateOutputs()
 		{
 			var t=document.getElementById('outputs');
@@ -375,18 +369,18 @@
 			//new row
 			var newRow=t.insertRow(-1);
 
-			//headers
-				['<?php write('#level3_code')?>','<?php write('#level3_description')?>'].forEach(function(element)
+			//brown headers
+				['<?php write('#level3_code')?>','<?php write('#level3_description')?>'].forEach(function(str)
 				{
 					var newTH=document.createElement('th'); newRow.appendChild(newTH);
-					newTH.innerHTML=element;
+					newTH.innerHTML=str;
 				});
 				for(var s in substages)
 				{
 					var newTH=document.createElement('th'); 
 					newRow.appendChild(newTH);
 					newTH.innerHTML="<?php write('#substage')?> "+(parseInt(s)+1)+" "+
-					"<div style=font-weight:bold>"+substages[s].name+"</div>"
+					"<div><b>"+substages[s].name+"</div>"
 				};
 				['&sum; <?php write('#level3_TOTAL')?>','<?php write('#level3_unit')?>'].forEach(function(element)
 				{
@@ -395,66 +389,71 @@
 				});
 			//end headers
 
+			//get inputs (and outputs that are inputs)
 			var inputs=getInputs();
 			var cvs=[];
 			(function(){
 				for(var f in CurrentStage)
 				{
-					//if "c_" is found, add f to cvs
 					if(f.search(/^c_/)>=0){cvs.push(f);}
 				}
 			})();
+
+			//go over CurrentStage
 			for(var field in CurrentStage)
 			{
 				//only functions
 				if(typeof(CurrentStage[field])!="function"){continue;}
+
+				//exclude service level indicators
 				if(field.search('_SL_')>-1)continue;
 
 				/*if assessment type is simple, hide L3 variables*/
 				if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
 				{
-					if(Level3.isInList(field)) continue;
+					if(Level3.hasOwnProperty(field)) continue;
 				}
 
 				//exclude the "level2only" variables
-				if(Level2only.isInList(field)){continue}
+				if(Level2only.hasOwnProperty(field)) continue;
 
 				//skip field "modification" (auxiliar variable)
-				if(field=="modification"){continue}
+				if(field=="modification") continue;
 
 				/*check if should be hidden according to questions*/
-				if(Questions.isHidden(field)){continue}
+				if(Questions.isHidden(field)) continue;
 
 				//new row
 				var newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
-
 				newRow.setAttribute('title',translate(field+'_expla'));
 
-				//if is calculated variable, hide it (no continue bc we need it)
+				//if is calculated variable, hide it (not 'continue' here because we need it)
 				if(field.search(/^c_/)>=0) newRow.style.display='none';
 
 				//set highlighting 
-				var formula=CurrentStage[field].toString();
-				var prettyFormula=Formulas.prettify(formula);
 				newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentStage,1)');
 				newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentStage,0)');
 
-				//show code
+				//1st cell: show code
 				newRow.insertCell(-1).innerHTML=(function()
 				{
-					var extra = Level3.isInList(field) ? "(<?php write('#level3_advanced')?>)" : "" ;
-					return extra+" <a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
+					var adv=Level3.isInList(field) ? "(<?php write('#level3_advanced')?>)" : "" ;
+					return adv+" <a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
 				})();
 
-				//description
-				newRow.insertCell(-1).innerHTML = translate(field+'_descr');
+				//2nd cell: description
+				newRow.insertCell(-1).innerHTML=translate(field+'_descr');
+
+				//3rd cell and so on: values. get formula
+				var formula=CurrentStage[field].toString();
+				var prettyFormula=Formulas.prettify(formula);
 
 				/** value: Compute CurrentStage[field]() for each substage*/
 				(function()
 				{
 					//the formula will be modified starting by the current field formula
-					var modification=formula; //string
+					var modification=formula; //string: exemple: "function(){return this.wsa_nrg_cons/this.wsa_vol_conv}"
 
 					//create an array of inputs and calculated variables to replace the formula
 					//go over this stage's inputs to gradually modify the formula
@@ -462,6 +461,14 @@
 					{
 						var regexp=new RegExp('(.)this.('+input+')(\\D)','g');
 						modification=modification.replace(regexp,'$1substages[0].$2$3');
+						/* 
+						modification example: (if input=="wsa_nrg_cons") 
+
+							CONTINUE HERE
+							from: "function(){return this.wsa_nrg_cons/this.wsa_vol_conv}"
+							  to: "function(){return substages[0].wsa_nrg_cons/this.wsa_vol_conv}"
+
+						*/
 					});
 
 					for(var s in substages)
@@ -475,25 +482,23 @@
 
 						newCell.innerHTML=(function()
 						{
+							//compute value and bechmark it
 							var value=CurrentStage['modification']()/Units.multiplier(field);
+							//color circle benchmarking (TO DO: extract function from here)
 							var indicator=(function()
 							{
-								var hasIndicator=RefValues.hasOwnProperty(field);
-								if(hasIndicator)
+								if(!RefValues.hasOwnProperty(field)) return "";
+								var text=RefValues[field](value);
+								var color;
+								switch(text)
 								{
-									var text=RefValues[field](value);
-									var color;
-									switch(text)
-									{
-										case "Good":           color="#af0";break;
-										case "Acceptable":     color="orange";break;
-										case "Unsatisfactory": color="red";break;
-										case "Out of range":   color="brown";break;
-										default:               color="#ccc";break;
-									}
-									return "<span title='"+text+"' style='font-size:20px;color:"+color+"'>&#128308;</span>";
+									case "Good":           color="#af0";break;
+									case "Acceptable":     color="orange";break;
+									case "Unsatisfactory": color="red";break;
+									case "Out of range":   color="brown";break;
+									default:               color="#ccc";break;
 								}
-								else{return "";}
+								return "<span title='Benchmarking: "+text+"' class=circle style='background:"+color+"'></span>";
 							})();
 							return indicator+" "+format(value);
 						})();
@@ -503,11 +508,8 @@
 				//level 2 value
 				var newCell=newRow.insertCell(-1);
 				newCell.title=prettyFormula;
-				newCell.innerHTML=(function()
-				{
-					var value=format(CurrentStage[field]()/Units.multiplier(field));
-					return '<b>'+value+'</b>';
-				})();
+				newCell.style.fontWeight="bold"
+				newCell.innerHTML=format(CurrentStage[field]()/Units.multiplier(field));
 
 				//unit
 				newRow.insertCell(-1).innerHTML=(function()
@@ -519,18 +521,17 @@
 			//if no formulas, warning
 			if(t.rows.length<2)
 			{
-				var newCell = t.insertRow(-1).insertCell(-1)
-				newCell.colSpan=42;
+				var newCell=t.insertRow(-1).insertCell(-1)
+				newCell.colSpan=4+substages.length;
 				newCell.innerHTML="<i style=color:#999>~No active outputs</i>";
 			}
 
 			//bottom line with the color of W/WW
 			var newRow=t.insertRow(-1);
 			var newTh=document.createElement('th');
-			newTh.setAttribute('colspan',42)
-			newTh.style.borderBottom='none';
-			newTh.style.borderTop='none';
 			newRow.appendChild(newTh);
+			newTh.setAttribute('colspan',4+substages.length)
+			newTh.style.borderBottom='none';newTh.style.borderTop='none';
 		}
 
 		//transform a cell to make it editable
@@ -564,7 +565,7 @@
 		/** Update all tables */
 		function init()
 		{
-			updateAssessmentMenu();
+			updateAssessmentMenu(); //inside "assessmentType.php"
 			updateSubstagesTable();
 			updateOutputs();
 			Sidebar.update();
@@ -586,19 +587,20 @@
 	}
 	/*Separator*/$sep="<span style=color:black>&rsaquo;</span>";
 	$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>".$lang_json["#$sublevel"]."</a>";
-	$title="<a href=stages.php><script>document.write(Global.General.Name)</script></a> $sep $titleLevel $sep $titleSublevel $sep <span style=color:black>".$lang_json['#substages']."</a>";
+	$title="<a href=stages.php><script>document.write(Global.General.Name)</script></a> 
+		$sep $titleLevel $sep $titleSublevel $sep <span style=color:black>".$lang_json['#substages']."</a>";
 ?>
-<style> h1 {text-align:left;padding-left:17em;border-bottom:1px solid #ccc;background:white} </style>
+<style> h1 {text-align:left;padding-left:17em;border-bottom:1px solid #ccc;background:white}</style>
 <!--TITLE--><h1><?php echo $title?>
-	<!--type of assessment--><?php include'assessmentType.php'?>
+<!--type of assessment--><?php include'assessmentType.php'?>
 </h1>
 
 <div id=main>
 
 <!--SUBSTAGES TABLE-->
 <div class=card style=text-align:left><?php cardMenu("INPUTS - ".$lang_json['#level3_split_this_stage'])?>
-	<table id=substages style="margin:0.5em"> <tr>
-		<td colspan=2 style="min-width:260px">
+	<table id=substages style="margin:0.5em"> 
+		<tr><td colspan=2 style="min-width:260px">
 			<!--substages counter-->
 			<div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle"><?php write('#substages')?>: <span id=counter>0</span></div>
 			<!--new substage button-->
@@ -608,16 +610,14 @@
 
 <!--OUTPUTS TABLE-->
 <div class=card style=text-align:left><?php cardMenu($lang_json['#level3_results_kpis'])?>
-
 	<table id=outputs class=inline style="margin:0.5em 0.5em;background:#f6f6f6"></table>
-
 </div>
 
 <div class=card><?php cardMenu("Opportunities")?>
-	TO DO
+	<div style=padding:0.5em>In development</div>
 </div>
 
-<!--display graphs-->
+<!--graphs-->
 <div class=card><?php cardMenu($lang_json['#graphs'])?>
 	<div id=graph style="margin:1em;padding:1em">Loading...</div>
 	<style>
@@ -640,7 +640,7 @@
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
 
 <script>
-/** If no substages (first time entering advanced assessment, create one substage with L2 values*/
+/** If no substages (==first time entering level3: create one substage with L2 values*/
 (function checkIfNoSubstages()
 {
 	if(substages.length==0)
