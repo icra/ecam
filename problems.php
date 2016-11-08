@@ -1,11 +1,6 @@
 <?php /*about.php: information about the ecam tool*/?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
-	<style>
-		#problems tr:hover {background:lightcoral}
-		#main table {margin:0.5em;width:99%}
-		#main {text-align:left}
-	</style>
 	<script>
 		//get unused inputs
 		function getUnused(obj)
@@ -56,44 +51,42 @@
 			return n;
 		}
 	</script>
+	<style>
+		#main table {
+			display:inline-block;
+			vertical-align:top;
+			margin:2px 1px;
+		}
+	</style>
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
-<!--TITLE--><h1>Automatic finding of potential sources of Problems (debug mode)</h1>
+<!--TITLE--><h1>Tasks and problem finder (debug mode)</h1></center>
 
-<div id=main style=display:table;margin-bottom:3em>
+<div id=main style=margin-bottom:3em>
 
-<!--todo-->
-<div style="display:table-cell;">
-	<table id=todo>
-		<style> 
-			#todo {margin:1em}
-			#todo td.taskgroup{background:#ccc;text-align:center;} 
-		</style>
-		<tr><th><?php write('#todo_task')?><th><?php write('#todo_status')?>
-		<tr><td colspan=2 class=taskgroup>BACK-END
-			<tr><td><a href=benchmark.php>Benchmark</a> list of not implemented:
-				<ul>
-					<li>wst_KPI_nrg_per_m3
-					<li>wsd_KPI_nrg_efficien
-					<li>wsd_KPI_nrg_topgraph
-					<li>wwt_KPI_capac_util
-					<li>wwt_KPI_nrg_per_m3
-				</ul>
-				<td>Need more info</td>
-		<tr><td colspan=2 class=taskgroup>FRONT-END
-			<tr><td>Calculated variables are useless, need to separate from inputs<td>Need more info</td>
-			<tr><td>Footer should remain in the bottom of the page always<td>Don't know how to do
-			<tr><td>Translation of new features requested is not done<td>Wait at the end
-			<tr><td>Help resources<td>Wait at the end
-	</table>
+<!--to do-->
+<div class=inline style="max-width:30%;border:1px solid #ccc;padding:0.5em;margin:2px">
+	<h3>Tasks</h3>
+	<ul>
+		<li> BACK-END <ul>
+				<li><a href=benchmark.php>Benchmark</a> 
+				<li>Calculated variables, need to separate from inputs
+				<li>Translation of new features of the tool
+			</ul>
+		<li> FRONT-END <ul>
+			<li>Footer should remain in the bottom of the page always
+			<li>Help resources
+		</ul>
+	</ul>
 </div>
 
 <!--problems-->
-<div id=problems style="display:table-cell;">
+<div class=inline style="max-width:68%;border:1px solid #ccc;padding:0.5em;margin:2px">
+	<h3 style=padding-left:2px>Problems found</h3>
 	<table>
-		<tr><td colspan=3 style=font-weight:bold>Problem 1: NOT USED INPUTS in any formula
+		<tr><td colspan=3 style=font-weight:bold>Problem 1: NOT USED INPUTS in any equation
 		<tr><th>Code<th>Stage
 		<script>
 			['Water','Waste'].forEach(function(level)
@@ -113,7 +106,6 @@
 					}
 				});
 			});
-			document.write("<tr><td colspan=3 style=text-align:center><i>End of table</i>");
 		</script>
 	</table>
 
@@ -176,6 +168,11 @@
 			}
 		})();
 	</script>
+
+	<table id=problem4>
+		<tr><th>Problem 4: ?
+		<tr><td>Code it here
+	</table>
 </div>
 
 </div>

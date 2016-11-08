@@ -22,16 +22,13 @@
 	·
 	<a href="http://www.iwa-network.org/" target=_blank>International Water Association</a>
 	·
-	<a href=about.php>
-		<?php write("#about")?>
-	</a>
+	<a href=about.php><?php write("#about")?></a>
 	·
-	<a href=help.php>
-		<?php write("#help")?>
-	</a>
+	<a href=help.php><?php write("#help")?></a>
 	·
-	<a href=mailto:WaCCliM@iwahq.org>
-		<?php write("#contact")?>: WaCCliM@iwahq.org
-	</a>
+	<a href=mailto:WaCCliM@iwahq.org><?php write("#contact")?>: WaCCliM@iwahq.org</a>
+	·
+	<a href="problems.php">Tasks and problems towards v2.0</a>
+	·
 </footer>
 

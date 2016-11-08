@@ -43,7 +43,7 @@
 	<div
 		style=cursor:pointer
 		onclick=window.location="edit.php?level=Energy">
-		<img class=l2 stage=energy src=img/energy.png title="<?php write('#energy_summary')?>"> 
+		<img class=l1 stage=energy src=img/energy.png title="<?php write('#energy_summary')?>"> 
 		<a href=edit.php?level=Energy style="color:#666"><?php write('#energy_summary')?></a>
 	</div>
 
