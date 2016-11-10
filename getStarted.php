@@ -63,6 +63,9 @@
 				{
 					document.querySelector('#uw1').value=newValue;
 					updateField(Global.General,'conv_kwh_co2',newValue);
+
+					//hide warning
+					document.querySelector('#uw1_warning').classList.remove('visible');
 				}
 
 				function redisplayUW1menu()
@@ -93,7 +96,7 @@
 			<th style=cursor:help title="<?php write('#conv_kwh_co2_expla')?>"><?php write('#conv_kwh_co2_descr')?>
 			<td>
 			<!--conv_kwh_co2-->
-				<table><tr><td style=border:none;padding:0>
+				<table><tr><td style="border:none;padding:0;" colspan=2>
 					<select id=countryUW1 onchange=updateUW1(this.value)>
 						<option value=0>--<?php write('#configuration_enter_custom_value')?>--
 						<option value=0.237721212>Peru
@@ -101,8 +104,19 @@
 						<option value=0.452483345>Mexico
 						<option value=custom>--<?php write('#configuration_custom')?>--
 					</select>
-					<td style=border:none><input id=uw1 value=0 style="width:80px" onchange=updateUW1(this.value)> kg<sub>CO<sub>2</sub></sub>/kWh
-					<div id=uw1_warning></div>
+
+					<input id=uw1 value=0 style="width:80px" onchange=updateUW1(this.value)> kg<sub>CO<sub>2</sub></sub>/kWh
+					<div id=uw1_warning>
+						<b><?php write('#configuration_conv_error')?></b>
+					</div>
+					<style>
+						#uw1_warning {
+							background:red;
+							padding:0.5em;
+							display:none;
+						}
+						#uw1_warning.visible {display:block;}
+					</style>
 				</table>
 		<tr>
 			<!--currency: 3 letters-->
@@ -131,11 +145,9 @@
 			{
 				if(Global.General.conv_kwh_co2==0)
 				{
-					document.getElementById('uw1').style.background='red'
-					var warning=document.getElementById('uw1_warning')
-					warning.style.background='red'
-					warning.style.padding='0.5em'
-					warning.innerHTML="<b><?php write('#configuration_conv_error')?></b>";
+					document.getElementById('uw1').style.background='red';
+					var warning=document.getElementById('uw1_warning');
+					warning.classList.add('visible');
 					return;
 				}
 				window.location='configuration.php'

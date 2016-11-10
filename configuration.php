@@ -11,7 +11,7 @@
 			var checkbox=document.getElementById(id);
 
 			//hide warning
-			document.querySelector("#inactive_warning").innerHTML=""
+			document.querySelector("#inactive_warning").classList.remove('visible');
 
 			if(!checkbox.checked)
 			{
@@ -220,11 +220,11 @@
 			if(Global.Configuration.ActiveStages.water==0 && Global.Configuration.ActiveStages.waste==0)
 			{
 				var warning=document.querySelector("#inactive_warning")
-				warning.style.background="red"
-				warning.style.padding="1em"
-				warning.style.transition="all 1s"
-				warning.innerHTML="<b><?php write('#configuration_active_stages_error')?></b>";
-				setTimeout(function(){warning.style.padding="0.5em"},1000)
+				warning.classList.add('visible');
+
+				//animation
+				warning.style.padding="1em";
+				setTimeout(function(){warning.style.padding="0.5em"},1000);
 				return;
 			}
 			window.location="birds.php"; return;
@@ -232,7 +232,20 @@
 	</script>
 	<button class="button prev" onclick="event.stopPropagation();window.location='getStarted.php'"><?php write('#previous')?></button><!--
 	--><button class="button next" onclick=nextPage()><?php write('#next')?></button>
-	<div id=inactive_warning></div>
+
+	<div id=inactive_warning>
+		<b><?php write('#configuration_active_stages_error')?></b>
+	</div>
+	<style>
+		#inactive_warning {
+			background:red;
+			transition:all 1s;
+			display:none;
+		}
+		#inactive_warning.visible {
+			display:block;
+		}
+	</style>
 </div>
 
 </div>
