@@ -163,7 +163,7 @@
 			return sum;
 		}
 
-		/** Redisplay inputs */
+		/** INPUTS redisplay */
 		function updateSubstagesTable()
 		{
 			/*table element*/
@@ -206,8 +206,7 @@
 				{
 					for(var f in CurrentStage)
 					{
-						//if "c_" is found at the beggining, add f to cvs
-						if(f.search(/^c_/)!=-1){cvs.push(f);}
+						if(f.search(/^c_/)!=-1) {cvs.push(f);}
 					}
 					inputs=inputs.concat(cvs);
 				})();
@@ -219,7 +218,7 @@
 					var code=inputs[input];
 					
 					/*is a calculated variable*/
-					var isCV=code.search(/^c_/)>=0 ? true : false;
+					var isCV=typeof(CurrentStage[code])=="function" ? true : false;
 
 					//copy the function inside current substage
 					if(isCV) 
@@ -231,7 +230,7 @@
 					/*if assessment type is simple, hide L3 variables*/
 					if(Global.Configuration.Assessment['<?php echo "$level']['$sublevel"?>']=="simple")
 					{
-						if(Level3.hasOwnProperty(code)) continue;
+						if(Level3.list.indexOf(code)>-1) continue;
 					}
 
 					/*new row*/
@@ -239,7 +238,7 @@
 					newRow.setAttribute('field',code);
 					if(Questions.isHidden(code)) disableRow(newRow);
 
-					/*bg color*/ if(isCV) newRow.classList.add('isCV');
+					/*background color*/ if(isCV) newRow.classList.add('isCV');
 
 					//mouse over listener for highlighting
 					if(isCV)
@@ -260,7 +259,7 @@
 					newCell.style.textAlign='left';newCell.style.fontSize='10px';
 					newCell.innerHTML=(function()
 					{
-						var extra = Level3.isInList(code) ? "(<span style=font-size:10px><?php write('#level3_advanced')?></span>)" : "" ;
+						var extra = Level3.list.indexOf(code)>-1 ? "(<span style=font-size:10px><?php write('#level3_advanced')?></span>)" : "" ;
 						return extra+" <a href=variable.php?id="+code+">"+code+"</a>";
 					})();
 
@@ -366,10 +365,9 @@
 			var t=document.getElementById('outputs');
 			while(t.rows.length>0) t.deleteRow(-1);
 
-			//new row
-			var newRow=t.insertRow(-1);
-
-			//brown headers
+			//headers
+				//new row
+				var newRow=t.insertRow(-1);
 				['<?php write('#level3_code')?>','<?php write('#level3_description')?>'].forEach(function(str)
 				{
 					var newTH=document.createElement('th'); newRow.appendChild(newTH);
@@ -389,15 +387,15 @@
 				});
 			//end headers
 
-			//get inputs (and outputs that are inputs)
-			var inputs=getInputs();
-			var cvs=[];
-			(function(){
-				for(var f in CurrentStage)
-				{
-					if(f.search(/^c_/)>=0){cvs.push(f);}
-				}
-			})();
+			//copy all functions to each substage
+			for(var field in CurrentStage)
+			{
+				//only functions
+				if(typeof(CurrentStage[field])!="function") continue;
+				//IMPORTANT: for this to work all formulas that refer to internal variables should refer to them with "this" keyword
+				for(var s in substages)
+					substages[s][field]=CurrentStage[field];
+			}
 
 			//go over CurrentStage
 			for(var field in CurrentStage)
@@ -411,99 +409,73 @@
 				/*if assessment type is simple, hide L3 variables*/
 				if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
 				{
-					if(Level3.hasOwnProperty(field)) continue;
+					if(Level3.list.indexOf(field)>-1) continue;
 				}
 
 				//exclude the "level2only" variables
 				if(Level2only.hasOwnProperty(field)) continue;
 
-				//skip field "modification" (auxiliar variable)
-				if(field=="modification") continue;
-
 				/*check if should be hidden according to questions*/
 				if(Questions.isHidden(field)) continue;
+
+				//if is calculated variable, not show it
+				if(field.search(/^c_/)>=0) continue;
 
 				//new row
 				var newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
 				newRow.setAttribute('title',translate(field+'_expla'));
 
-				//if is calculated variable, hide it (not 'continue' here because we need it)
-				if(field.search(/^c_/)>=0) newRow.style.display='none';
-
 				//set highlighting 
 				newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentStage,1)');
 				newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentStage,0)');
 
-				//1st cell: show code
+				//1st cell: show code identifier
 				newRow.insertCell(-1).innerHTML=(function()
 				{
-					var adv=Level3.isInList(field) ? "(<?php write('#level3_advanced')?>)" : "" ;
+					var adv=Level3.list.indexOf(field)>-1 ? "(<?php write('#level3_advanced')?>)" : "" ;
 					return adv+" <a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
 				})();
 
 				//2nd cell: description
 				newRow.insertCell(-1).innerHTML=translate(field+'_descr');
 
-				//3rd cell and so on: values. get formula
+				//get equation formula
 				var formula=CurrentStage[field].toString();
 				var prettyFormula=Formulas.prettify(formula);
 
-				/** value: Compute CurrentStage[field]() for each substage*/
-				(function()
+				//3rd cell and so on: values.
+				for(var s in substages)
 				{
-					//the formula will be modified starting by the current field formula
-					var modification=formula; //string: exemple: "function(){return this.wsa_nrg_cons/this.wsa_vol_conv}"
-
-					//create an array of inputs and calculated variables to replace the formula
-					//go over this stage's inputs to gradually modify the formula
-					inputs.concat(cvs).forEach(function(input)
+					//new cell
+					var newCell=newRow.insertCell(-1);
+					//title for mouseover show formula
+					newCell.title=prettyFormula;
+					//value
+					newCell.innerHTML=(function()
 					{
-						var regexp=new RegExp('(.)this.('+input+')(\\D)','g');
-						modification=modification.replace(regexp,'$1substages[0].$2$3');
-						/* 
-						modification example: (if input=="wsa_nrg_cons") 
+						//compute value and bechmark it
+						var value=substages[s][field]()/Units.multiplier(field);
 
-							CONTINUE HERE
-							from: "function(){return this.wsa_nrg_cons/this.wsa_vol_conv}"
-							  to: "function(){return substages[0].wsa_nrg_cons/this.wsa_vol_conv}"
-
-						*/
-					});
-
-					for(var s in substages)
-					{
-						var modificationSubstage=modification.replace(/\[0\]/g,'['+s+']');
-						eval("CurrentStage['modification']="+modificationSubstage+";");
-
-						//value
-						var newCell=newRow.insertCell(-1);
-						newCell.title=prettyFormula;
-
-						newCell.innerHTML=(function()
+						//color circle benchmarking (TO DO: extract function from here)
+						var indicator=(function()
 						{
-							//compute value and bechmark it
-							var value=CurrentStage['modification']()/Units.multiplier(field);
-							//color circle benchmarking (TO DO: extract function from here)
-							var indicator=(function()
+							if(!RefValues.hasOwnProperty(field)) return "";
+							var text=RefValues[field](value);
+							var color;
+							switch(text)
 							{
-								if(!RefValues.hasOwnProperty(field)) return "";
-								var text=RefValues[field](value);
-								var color;
-								switch(text)
-								{
-									case "Good":           color="#af0";break;
-									case "Acceptable":     color="orange";break;
-									case "Unsatisfactory": color="red";break;
-									case "Out of range":   color="brown";break;
-									default:               color="#ccc";break;
-								}
-								return "<span title='Benchmarking: "+text+"' class=circle style='background:"+color+"'></span>";
-							})();
-							return indicator+" "+format(value);
+								case "Good":           color="#af0";break;
+								case "Acceptable":     color="orange";break;
+								case "Unsatisfactory": color="red";break;
+								case "Out of range":   color="brown";break;
+								default:               color="#ccc";break;
+							}
+							return "<span title='Benchmarking: "+text+"' class=circle style='background:"+color+"'></span>";
 						})();
-					}
-				})();
+						return indicator+" "+format(value);
+					})();
+				}
 
 				//level 2 value
 				var newCell=newRow.insertCell(-1);
@@ -518,7 +490,7 @@
 				})();
 			}
 
-			//if no formulas, warning
+			//if no active equations show warning
 			if(t.rows.length<2)
 			{
 				var newCell=t.insertRow(-1).insertCell(-1)
@@ -609,29 +581,56 @@
 </div>
 
 <!--OUTPUTS TABLE-->
-<div class=card style=text-align:left><?php cardMenu($lang_json['#level3_results_kpis'])?>
-	<table id=outputs class=inline style="margin:0.5em 0.5em;background:#f6f6f6"></table>
+<div class=card style=text-align:left>
+	<div class=menu onclick=this.parentNode.classList.toggle('folded')>
+		<button></button>
+		Outputs
+
+		<!--button toggle graph display-->
+		<script>
+			function toggleGraph(event,thisB)
+			{
+				event.stopPropagation();
+				var graph=document.querySelector('#graphContainer')
+				var ioCon=document.querySelector('#outputs')
+				if(graph.style.display=='none'){ioCon.style.display='none';graph.style.display='';thisB.style.background='#bce4d3'}
+				else                           {ioCon.style.display='';graph.style.display='none';thisB.style.background=''}
+				init()
+			}
+		</script>
+		<button 
+			id=btn_toggle class=toggle 
+			onclick="event.stopPropagation();toggleGraph(event,this)">
+			VIEW GRAPHIC
+		</button>
+	</div>
+
+	<!--outputs-->
+	<table id=outputs style="margin:0.5em 0.5em;background:#f6f6f6"></table>
+
+	<!--graphs-->
+	<div id=graphContainer style=display:none>
+		<div id=graph>Loading...</div>
+		<style>
+			#graph div.options{padding:1em}
+			#graph button {margin:0.2em}
+			#graph {text-align:center}
+			#graph * {margin:auto}
+		</style>
+		<script>
+			function drawCharts()
+			{
+				Graphs.graph7(false,'graph')
+			}
+			google.charts.load('current',{'packages':['corechart','sankey']});
+			google.charts.setOnLoadCallback(drawCharts);
+		</script>
+	</div>
 </div>
 
+<!--opportunities-->
 <div class=card><?php cardMenu("Opportunities")?>
 	<div style=padding:0.5em>In development</div>
-</div>
-
-<!--graphs-->
-<div class=card><?php cardMenu($lang_json['#graphs'])?>
-	<div id=graph style="margin:1em;padding:1em">Loading...</div>
-	<style>
-		#graph div.options {padding:1em}
-		#graph button {margin:0.5em}
-	</style>
-	<script>
-		function drawCharts()
-		{
-			Graphs.graph7(false,'graph')
-		}
-		google.charts.load('current',{'packages':['corechart','sankey']});
-		google.charts.setOnLoadCallback(drawCharts);
-	</script>
 </div>
 
 </div>

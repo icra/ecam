@@ -1,7 +1,7 @@
 /** Main data structure */
 var Global = {
 	General:{
-		Name:                  "Unnamed system",
+		Name:                  "untitled system",
 		AssessmentPeriodStart: "2017-01-01",
 		AssessmentPeriodEnd:   "2018-01-01",
 		Comments:              "",
@@ -75,25 +75,15 @@ var Global = {
 			wst_KPI_capac_util : function(){return 100*this.wst_vol_trea/this.wst_trea_cap},
 			/*<Level3>*/
 			"wst_tst_carr":0,
-			"wst_tst_disc":0,
 			"wst_tst_aest":0,
 			"wst_tst_micr":0,
 			"wst_tst_phch":0,
 			"wst_tst_radi":0,
 			"wst_mass_slu":0,
 			"wst_trea_cap":0, 
+			"wst_vol_trea":0,
+
 			"wst_t_PCFSFD":0,
-			"wst_t_PCF_FD":0,
-			"wst_t__CFSFD":0,
-			"wst_t__CF_FD":0,
-			"wst_t______D":0,
-			"wst_t__other":0,
-			wst_KPI_t_PCFSFD:function(){return this.wst_t_PCFSFD/this.wst_vol_trea},
-			wst_KPI_t_PCF_FD:function(){return this.wst_t_PCF_FD/this.wst_vol_trea},
-			wst_KPI_t__CFSFD:function(){return this.wst_t__CFSFD/this.wst_vol_trea},
-			wst_KPI_t__CF_FD:function(){return this.wst_t__CF_FD/this.wst_vol_trea},
-			wst_KPI_t______D:function(){return this.wst_t______D/this.wst_vol_trea},
-			wst_KPI_t__other:function(){return this.wst_t__other/this.wst_vol_trea},
 			wst_SL_qual_com :function(){return 100*(this.wst_tst_aest+this.wst_tst_micr+this.wst_tst_phch+this.wst_tst_radi)/this.wst_tst_carr},
 			/*</Level3>*/
 		},
@@ -163,7 +153,6 @@ var Global = {
 		"ww_ch4_efac" :0.06,
 		"ww_biog_pro":0,
 		"ww_biog_val":0,
-		c_ww_bod_rmvd:function(){return this.ww_bod_infl-this.ww_bod_effl},
 
 		//we consider that 100% of biogas is valorized if the user did not enter ww_biog_pro
 		c_ww_biogas_flar:function()
@@ -254,21 +243,9 @@ var Global = {
 			/*<Level3>*/
 				"wwt_tst_cmpl":0,
 				"wwt_tst_cond":0,
-				"wwt_t_T_____":0,
-				"wwt_t__A____":0,
-				"wwt_t__A_CF_":0,
-				"wwt_t__ANCF_":0,
-				"wwt_t______L":0,
-				"wwt_t__other":0,
 				"wwt_mass_slu":0,
 				"wwt_dryw_slu":0,
 				"wwt_trea_cap":0,
-				wwt_KPI_t_T_____:function(){return 100*this.wwt_t_T_____/this.wwt_vol_trea},
-				wwt_KPI_t__A____:function(){return 100*this.wwt_t__A____/this.wwt_vol_trea},
-				wwt_KPI_t__A_CF_:function(){return 100*this.wwt_t__A_CF_/this.wwt_vol_trea},
-				wwt_KPI_t__ANCF_:function(){return 100*this.wwt_t__ANCF_/this.wwt_vol_trea},
-				wwt_KPI_t______L:function(){return 100*this.wwt_t______L/this.wwt_vol_trea},
-				wwt_KPI_t__other:function(){return 100*this.wwt_t__other/this.wwt_vol_trea},
 				wwt_SL_qual_com: function(){return 100*this.wwt_tst_cmpl/this.wwt_tst_cond},
 			/*</Level3>*/
 		},

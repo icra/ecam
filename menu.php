@@ -3,7 +3,7 @@
 <!--menu-->
 <div style=text-align:left;padding:0em class=inline>
 	<!--new-->
-	<button class="button add" onclick=newSystem()>
+	<button class="button add" style=margin-left:0 onclick=newSystem()>
 	<?php write('#new')?>
 	</button><!--
 	LOAD

@@ -24,7 +24,7 @@
 			for(var i in Questions[question])
 			{
 				var code = Questions[question][i];
-				var isL3 = Level3.isInList(code) ? "<i class=advanced>(advanced)</i>" : "";
+				var isL3 = Level3.list.indexOf(code)>-1 ? "<i class=advanced>(advanced)</i>" : "";
 				var link;
 				if(Info[code]==undefined)
 				{

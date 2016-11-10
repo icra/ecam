@@ -74,7 +74,7 @@
 			newCell=newRow.insertCell(-1)
 			if(sublevel)
 			{
-				var url = Level3.isInList(id) ? "level3.php" : "edit.php";
+				var url = Level3.list.indexOf(id)>-1 ? "level3.php" : "edit.php";
 				newCell.innerHTML+="<?php write('#variable_go_back_to')?> <a href="+url+"?level="+level+"&sublevel="+sublevel+">"+levelAlias+": "+sublevelAlias+"</a>"
 			}
 			else newCell.innerHTML="<?php write('#variable_go_back_to')?> <a href=edit.php?level="+level+">"+levelAlias+"</a>"
@@ -112,7 +112,7 @@
 			})();
 
 			//Is "id" level 3 specific?
-			if(Level3.isInList(id))
+			if(Level3.list.indexOf(id)>-1)
 			{
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)

@@ -172,4 +172,15 @@ span.circle {
 	}
 	.card        .menu button:before {content:"v";}
 	.card.folded .menu button:before {content:">";}
+	.card .menu button.toggle:before{content:""}
+	.card .menu button.toggle {
+		position:absolute;
+		padding:0.5em;
+		padding-left:5em;
+		padding-right:5em;
+		left:39%;
+		border:1px solid #ccc;
+		background:none;
+		outline:none;
+	}
 /*end cards*/

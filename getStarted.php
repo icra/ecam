@@ -19,8 +19,10 @@
 			init();
 		}
 
-		function init()
+		function init(selectName)
 		{
+			selectName=selectName||false;
+
 			redisplayUW1menu();
 			updateCurrency();
 			Sidebar.update();
@@ -30,9 +32,12 @@
 			document.querySelector('#form #End').value=Global.General.AssessmentPeriodEnd;
 			document.querySelector('#form #Days').innerHTML=Global.General.Days();
 			document.querySelector('#form #Comments').value=Global.General.Comments;
+
+			//only when the page loads select first element of the form, not after
+			if(selectName) document.querySelector('#form #Name').select()
 		}
 	</script>
-</head><body onload=init()><center>
+</head><body onload=init(true)><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--TITLE--><h1><?php write('#getStarted_subtitle')?></h1>
@@ -97,6 +102,7 @@
 						<option value=custom>--<?php write('#configuration_custom')?>--
 					</select>
 					<td style=border:none><input id=uw1 value=0 style="width:80px" onchange=updateUW1(this.value)> kg<sub>CO<sub>2</sub></sub>/kWh
+					<div id=uw1_warning></div>
 				</table>
 		<tr>
 			<!--currency: 3 letters-->
@@ -125,8 +131,10 @@
 			{
 				if(Global.General.conv_kwh_co2==0)
 				{
-					alert("<?php write('#configuration_conv_error')?>");
 					document.getElementById('uw1').style.background='red'
+					var warning=document.getElementById('uw1_warning')
+					warning.style.background='red'
+					warning.innerHTML="<?php write('#configuration_conv_error')?>";
 					return;
 				}
 				window.location='configuration.php'
@@ -134,5 +142,6 @@
 		</script>
 	</div>
 </div>
+
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

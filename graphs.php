@@ -306,12 +306,12 @@ Graphs.graph5=function(withTable,container)
 	var slice_6 = Global.Waste.Discharge.wwd_nrg_cons;
 
 	var names=[
-		"[<?php write('#Water')?>] <?php write('#Abstraction')?>",
-		"[<?php write('#Water')?>] <?php write('#Treatment')?>",
-		"[<?php write('#Water')?>] <?php write('#Distribution')?>",
-		"[<?php write('#Waste')?>] <?php write('#Collection')?>",
-		"[<?php write('#Waste')?>] <?php write('#Treatment')?>",
-		"[<?php write('#Waste')?>] <?php write('#Discharge')?>",
+		"<?php write('#Abstraction')?>",
+		"<?php write('#Treatment')?>",
+		"<?php write('#Distribution')?>",
+		"<?php write('#Collection')?>",
+		"<?php write('#Treatment')?>",
+		"<?php write('#Discharge')?>",
 	]
 
 	//actual graph data
@@ -357,8 +357,9 @@ Graphs.graph5=function(withTable,container)
 		//create a table (as a string)
 		var table=""+
 		"<button onclick=\"Graphs.graph5(false,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_hide_table')?></button>"+
+		"<button onclick=\"Graphs.graph7(true,'"+container+"');scrollTo('"+container+"')\"><?php write('#substages')?></button>"+
 		"<table title=graph5>"+
-			"<tr><th><?php write('#graphs_slice')?><th><?php write('#graphs_formula')?><th><?php write('#graphs_value')?>"+
+			"<tr><th><?php write('#graphs_slice')?><th><?php write('#graphs_formula')?><th><?php write('#graphs_value')?> (kWh)"+
 			"<tr><td>"+names[0]+"<td><a href=variable.php?id=wsa_nrg_cons>wsa_nrg_cons</a> <td>"+format(slice_1)+
 			"<tr><td>"+names[1]+"<td><a href=variable.php?id=wst_nrg_cons>wst_nrg_cons</a> <td>"+format(slice_2)+
 			"<tr><td>"+names[2]+"<td><a href=variable.php?id=wsd_nrg_cons>wsd_nrg_cons</a> <td>"+format(slice_3)+
@@ -431,7 +432,7 @@ Graphs.graph7=function(withTable,container)
 		{
 			var name = stages[s][i].name;
 			var value = stages[s][i][names[s]];
-			DATA.push([ title+" "+(parseInt(i)+1) +" ("+name+")", value])
+			DATA.push([ name+" ("+title+" substage "+(parseInt(i)+1)+")", value])
 		}
 	}
 
@@ -466,9 +467,10 @@ Graphs.graph7=function(withTable,container)
 	{
 		//create a table (as a string)
 		var table=""+
-		"<table title=graph7>"+
 		"<button onclick=\"Graphs.graph7(false,'"+container+"');scrollTo('"+container+"')\"><?php write('#graphs_hide_table')?></button>"+
-		"<tr><th><?php write('#graphs_slice')?><th><?php write('#graphs_formula')?><th colspan=30>kWh <?php write('#substages')?>";
+		"<button onclick=\"Graphs.graph5(true,'"+container+"');scrollTo('"+container+"')\"><?php write('#substages')?></button>"+
+		"<table title=graph7>"+
+		"<tr><th><?php write('#graphs_slice')?><th><?php write('#graphs_formula')?><th colspan=30><?php write('#substages')?> (kWh)";
 			for(var s in stages)
 			{
 				var title;

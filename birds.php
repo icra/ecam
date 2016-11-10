@@ -184,10 +184,9 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
 <!--TITLE--><h1><?php write('#quick_assessment')?> 
-	<span style="font-size:12px;color:#666">
-		&mdash;
+	<div style="font-size:13px;color:#666;margin-top:5px">
 		<span><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a>: <script>document.write(Global.General.Days())</script> <?php write('#days')?></span> 
-		&mdash;
+		·
 		<span><a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a>: 
 			<script>
 				(function(){
@@ -195,14 +194,15 @@
 					var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c); 
 					document.write(str)
 				})();
-			</script> kg<sub>CO<sub>2</sub></sub>/kWh</span> 
+			</script> kg CO<sub>2</sub>/kWh
+		</span> 
 	</span>
 </h1></center>
 
 <!--content-->
 <div>
 	<!--inputs-->
-	<div class="card inline" style="width:35%;"><?php cardMenu("Inputs - Enter typical values from your daily operation")?>
+	<div class="card inline" style="width:35%;"><?php cardMenu("Inputs &mdash; Enter typical values from your daily operation")?>
 		<!--table-->
 		<table id=inputs style=width:100%>
 			<style>
@@ -400,8 +400,7 @@
 				<div graph id=graph6></div>
 				<div graph style="width:98%;padding:1em 0;margin-bottom:1em;border:none">
 					For further details on energy consumption &amp; opportunities to reduce GHG emissions go to 
-					<b>GHG Assessment</b> and/or 
-					<b>Energy Performance</b> (<a href=#>&uarr;</a>)
+					<b>Detailed GHG Assessment</b> (<a href=#>&uarr;</a>)
 				</div>
 			</div>
 			<script>
@@ -412,7 +411,7 @@
 	</div>
 
 	<!--PREV & NEXT BUTTONS-->
-	<div style=margin-top:1em;text-align:center> 
+	<div style=margin:1em;text-align:center> 
 		<script>
 			//find first available stage to start entering data
 			function nextPage()

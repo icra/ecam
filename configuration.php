@@ -128,26 +128,26 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear diagram--><?php include'linear.php'?>
 <!--TITLE--><h1><?php write('#configuration')?></h1>
-<!--SUBTITLE--><h4><?php write('#configuration_subtitle')?>
-	<!--activate all debug button -->
-	<span style=font-size:12px>
-		<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
-		<script>
-			function activateAllStages()
+<!--SUBTITLE--><h4 style=margin:0><?php write('#configuration_subtitle')?></h4>
+
+<!--activate all debug button -->
+<div style=font-size:12px;margin:0.3em>
+	<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
+	<script>
+		function activateAllStages()
+		{
+			event.stopPropagation();
+			['water','waste','waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
 			{
-				event.stopPropagation();
-				['water','waste','waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
-				{
-					Global.Configuration.ActiveStages[stage]=1;
-					var checkbox = document.getElementById(stage)
-					checkbox.checked=true;
-					checkbox.parentNode.parentNode.style.backgroundColor="lightgreen";
-				});
-				init();
-			}
-		</script>
-	</span>
-</h4>
+				Global.Configuration.ActiveStages[stage]=1;
+				var checkbox = document.getElementById(stage)
+				checkbox.checked=true;
+				checkbox.parentNode.parentNode.style.backgroundColor="lightgreen";
+			});
+			init();
+		}
+	</script>
+</div>
 
 <div id=main>
 
@@ -208,7 +208,7 @@
 </div>
 
 <!--PREV & NEXT BUTTONS-->
-<div style=margin-top:2em> 
+<div style=margin:1em> 
 	<script>
 		//find first available stage to start entering data
 		function nextPage()

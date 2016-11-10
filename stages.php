@@ -14,16 +14,14 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear diagram--><?php include'linear.php'?>
-<style> h1 {text-align:left;padding-left:20em} </style>
-<!--TITLE--><h1><?php write('#edit_input_data')?></h1>
-<hr>
-<!--SUBTITLE--><h4><?php write('#stages_this_is_an_overview_of_your_system')?> <a href=configuration.php><?php write('#configuration')?></a>.</h4>
+<!--TITLE--><h1><script>document.write(Global.General.Name)</script></h1>
+<!--SUBTITLE--><h4 style=margin-top:0>
+	<?php write('#stages_this_is_an_overview_of_your_system')?> <a href=configuration.php><?php write('#configuration')?></a>.</h4>
 
 <div id=main>
 
 <!--level 3 overview-->
-<fieldset class=inline style=margin-bottom:3em>
-	<legend><?php write('#stages_system_assessment_overview')?></legend>
+<div style=margin-bottom:3em>
 	<table id=l3overview>
 		<tr><th><?php write('#stages_stage')?>
 			<th><?php write('#stages_num_of_substages')?>
@@ -62,7 +60,7 @@
 			}
 		})();
 	</script>
-</fieldset>
+</div>
 
 </div>
 

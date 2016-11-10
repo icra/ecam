@@ -10,6 +10,7 @@
 		overflow:hidden;
 		height: 6em;
 		box-shadow: 0 1px 2px rgba(0,0,0,.1);
+		bottom:0;
 	}
 	#footer a, #footer a:visited {
 		color:white;
@@ -27,8 +28,10 @@
 	<a href=help.php><?php write("#help")?></a>
 	·
 	<a href=mailto:WaCCliM@iwahq.org><?php write("#contact")?>: WaCCliM@iwahq.org</a>
-	·
+	<br>
+	Debug mode &rarr;
 	<a href="problems.php">Tasks and problems towards v2.0</a>
 	·
+	<a href="viewer.php">Data structures</a>
 </footer>
 

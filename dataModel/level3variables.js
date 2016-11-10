@@ -20,25 +20,12 @@ Level3.list=
 		"wst_tst_micr",
 		"wst_tst_phch",
 		"wst_tst_radi",
-		"wst_tst_disc",
 		"wst_mass_slu",
 		"wst_trea_cap",
 		"wst_t_PCFSFD",
-		"wst_t_PCF_FD",
-		"wst_t__CFSFD",
-		"wst_t__CF_FD",
-		"wst_t______D",
-		"wst_t__other",
-		"c_wst_tests_compl",
 		"wst_KPI_slu_per_m3",
 		"wst_KPI_capac_util",
 		"wst_SL_qual_com",
-		"wst_KPI_t_PCFSFD",
-		"wst_KPI_t_PCF_FD",
-		"wst_KPI_t__CFSFD",
-		"wst_KPI_t__CF_FD",
-		"wst_KPI_t______D",
-		"wst_KPI_t__other",
 	//WSD
 		"wsd_deli_pts",
 		"wsd_ser_cons",
@@ -73,24 +60,12 @@ Level3.list=
 	//WWT
 		"wwt_tst_cmpl",
 		"wwt_tst_cond",
-		"wwt_t_T_____",
-		"wwt_t__A____",
-		"wwt_t__A_CF_",
-		"wwt_t__ANCF_",
-		"wwt_t______L",
-		"wwt_t__other",
 		"wwt_mass_slu",
 		"wwt_dryw_slu",
 		"wwt_trea_cap",
 		"wwt_KPI_sludg_prod",
 		"wwt_KPI_dry_sludge",
 		"wwt_KPI_capac_util",
-		"wwt_KPI_t_T_____",
-		"wwt_KPI_t__A____",
-		"wwt_KPI_t__A_CF_",
-		"wwt_KPI_t__ANCF_",
-		"wwt_KPI_t______L",
-		"wwt_KPI_t__other",
 		"wwt_SL_qual_com",
 	//WWD
 		"wwd_vol_pump",
@@ -102,12 +77,3 @@ Level3.list=
 		"wwd_KPI_std_nrg_cons",
 		"wwd_KPI_std_nrg_recv",
 ];
-
-Level3.isInList=function(code)
-{
-	for(var i in this.list)
-	{
-		if(code==this.list[i]){return true;break;}
-	}
-	return false;
-}

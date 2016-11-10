@@ -146,7 +146,7 @@
 				//equation not clear, tbd in v2
 				if(field=="c_ww_in_dilution")continue;
 
-				/*check if field is level3 specific*/if(Level3.isInList(field)) continue;
+				/*check if field is level3 specific*/if(Level3.list.indexOf(field)>-1) continue;
 
 				/*disable row according to questions*/
 				if(Questions.isHidden(field))
@@ -200,7 +200,6 @@
 					if(typeof(substages)=="object" && substages.length > 1)
 					{
 						//this means you are in level 2 and you should NOT be able to modify inputs here
-						newCell.style.cursor='help';
 						newCell.title="<?php write('#variable_go_to_substages')?>";
 					}
 					else
@@ -210,7 +209,7 @@
 						newCell.setAttribute('onclick','transformField(this)');
 					}
 				}
-				else //add an annotation 
+				else //calculated variable, show formula
 				{
 					newCell.title=Formulas.prettify(CurrentLevel[field].toString());
 				}
@@ -319,7 +318,7 @@
 				if(field=="ww_KPI_GHG_ne_tre")continue;
 
 				/*check if field is level3 specific*/
-				if(Level3.isInList(field)){continue;}
+				if(Level3.list.indexOf(field)>-1){continue;}
 
 				//disable row if specified by questions
 				if(Questions.isHidden(field))
@@ -361,7 +360,7 @@
 					//has estimated data warning
 					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
 					// level 2 warnings
-					var l2w = Level2Warnings.isIn(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
+					var l2w = Level2Warnings.hasOwnProperty(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
 					return format(value)+" "+ed+" "+l2w;
 				})();
 
@@ -486,7 +485,7 @@
 				if(field.search('_nrg_')<0)continue;
 
 				/*check if field is level3 specific*/
-				if(Level3.isInList(field)){continue;}
+				if(Level3.list.indexOf(field)>-1){continue;}
 
 				/*check if should be hidden according to questions*/
 				if(Questions.isHidden(field))
@@ -557,10 +556,8 @@
 				{
 					//has estimated data warning
 					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
-
 					// level 2 warnings
-					var l2w = Level2Warnings.isIn(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
-
+					var l2w = Level2Warnings.hasOwnProperty(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
 					return format(value)+" "+ed+" "+l2w;
 				})();
 
@@ -614,7 +611,7 @@
 				/**/
 
 				/*check if field is level3 specific*/
-				if(Level3.isInList(field)){continue;}
+				if(Level3.list.indexOf(field)>-1){continue;}
 
 				/*check if should be hidden according to questions*/
 				if(Questions.isHidden(field))
@@ -660,7 +657,7 @@
 					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
 
 					// level 2 warnings
-					var l2w = Level2Warnings.isIn(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
+					var l2w = Level2Warnings.hasOwnProperty(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
 
 					return format(value)+" "+ed+" "+l2w;
 				})();
@@ -833,194 +830,224 @@
 			echo "/s </span> </span>";
 		}
 	?>
-</h1>
+</h1></center>
 
-<!--container-->
-<div id=main style=text-align:left>
-
-	<!--questions-->
-	<div class="card inline">
-		<?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
-		<table style=margin:0.5em id=questions class=inline></table>
-		<script>
-			function updateQuestionsTable()
-			{
-				var t = document.querySelector('#questions');
-				while(t.rows.length>0)t.deleteRow(-1);
-
-				var questions = Questions.getQuestions(CurrentLevel);
-
-				if(questions.length==0)
+<!--main container-->
+<div>
+	<!--container for questions and assessment info-->
+	<div>
+		<!--questions-->
+		<div class="card inline">
+			<?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
+			<table style=margin:0.5em id=questions class=inline></table>
+			<script>
+				function updateQuestionsTable()
 				{
-					t.parentNode.style.display="none" //hide whole table
-				}
+					var t = document.querySelector('#questions');
+					while(t.rows.length>0)t.deleteRow(-1);
 
-				for(var q in questions)
-				{
-					var question = questions[q];
-					var currentAnswer = Global.Configuration["Yes/No"][question];
-					var checked = currentAnswer ? "checked":"";
+					var questions = Questions.getQuestions(CurrentLevel);
 
-					//reset values that are inputs
-					if(!currentAnswer)
-						for(var i in Questions[question])
-						{
-							var code=Questions[question][i];
-							if(typeof(CurrentLevel[code])=="number") CurrentLevel[code]=0;
-						}
-
-					var newRow = t.insertRow(-1);
-					newRow.title=question
-					newRow.insertCell(-1).innerHTML=translate(question)+"?";
-					newRow.insertCell(-1).innerHTML=(function()
+					if(questions.length==0)
 					{
-						var ret="<label>"+
-								"<?php write('#no')?> "+
-								"<input name='"+question+"' type=radio value=0 onclick=setQuestion('"+question+"',0) checked></label> "+
-								"<label><?php write('#yes')?> "+
-								"<input name='"+question+"' type=radio value=1 onclick=setQuestion('"+question+"',1) "+checked+"></label> ";
-						return ret;
-					})();
-				}
-			}
+						t.parentNode.style.display="none" //hide whole table
+					}
 
-			function setQuestion(question,newValue)
-			{
-				if(newValue)
-					Global.Configuration['Yes/No'][question]=1;
-				else //if(confirm("WARNING! Inputs from this question will be reseted to zero. Continue?"))
-					Global.Configuration['Yes/No'][question]=0;
-				init()
-			}
-		</script>
-		<?php 
-			//fuel options for water and wastewater only
-			if($sublevel==false && $level!="Energy")
-			{
-				?>
-				 <table id=fuelSelection class=inline>
-					<tr><td colspan=2>
-						<img src=img/fuel.png> <?php write('#configuration_fuel_options')?> (<a href=fuelInfo.php>info</a>)</legend>
-					<style>
-						#fuelSelection {margin:0.5em 0.5em 0.5em 0;}
-						#fuelSelection tr.inactive {background:#f6f6f6;color:#aaa}
-						#fuelSelection img {width:20px;vertical-align:middle}
-					</style>
-					<?php
-						if($level=="Water")
-						{ 
-							?>
-							<tr question=engines_in_water><td><?php write('#configuration_engines')?>
-							<?php 
-						}
-						else if($level=="Waste")
+					for(var q in questions)
+					{
+						var question = questions[q];
+						var currentAnswer = Global.Configuration["Yes/No"][question];
+						var checked = currentAnswer ? "checked":"";
+
+						//reset values that are inputs
+						if(!currentAnswer)
+							for(var i in Questions[question])
+							{
+								var code=Questions[question][i];
+								if(typeof(CurrentLevel[code])=="number") CurrentLevel[code]=0;
+							}
+
+						var newRow = t.insertRow(-1);
+						newRow.title=question
+						newRow.insertCell(-1).innerHTML=translate(question)+"?";
+						newRow.insertCell(-1).innerHTML=(function()
 						{
-							?>
-							<tr question=engines_in_waste>     <td><?php write('#configuration_engines')?>
-							<tr question=truck_transport_waste><td><?php write('#configuration_vehicles')?>
-							<?php 
-						}
-					?>
-				</table>
-				<?php
-			}
-		?>
-	</div>
+							var ret="<label>"+
+									"<?php write('#no')?> "+
+									"<input name='"+question+"' type=radio value=0 onclick=setQuestion('"+question+"',0) checked></label> "+
+									"<label><?php write('#yes')?> "+
+									"<input name='"+question+"' type=radio value=1 onclick=setQuestion('"+question+"',1) "+checked+"></label> ";
+							return ret;
+						})();
+					}
+				}
 
-	<!--i/o-->
-	<div class=card>
-		<div class=menu onclick=this.parentNode.classList.toggle('folded')>
-			<button></button>
-			Inputs &amp; Outputs &mdash;
-				<!--assessment info TO BE INCLUDED in edit.php-->
-				<span style="text-align:left;font-size:11px">
-					<a href=variable.php?id=Days><?php write('#assessment_period')?></a>: 
+				function setQuestion(question,newValue)
+				{
+					if(newValue)
+						Global.Configuration['Yes/No'][question]=1;
+					else //if(confirm("WARNING! Inputs from this question will be reseted to zero. Continue?"))
+						Global.Configuration['Yes/No'][question]=0;
+					init()
+				}
+			</script>
+			<?php 
+				//fuel options for water and wastewater only
+				if($sublevel==false && $level!="Energy")
+				{
+					?>
+					<table id=fuelSelection class=inline>
+						<tr><td colspan=2>
+							<img src=img/fuel.png> <?php write('#configuration_fuel_options')?> (<a href=fuelInfo.php>info</a>)</legend>
+						<style>
+							#fuelSelection {margin:0.5em 0.5em 0.5em 0;}
+							#fuelSelection tr.inactive {background:#f6f6f6;color:#aaa}
+							#fuelSelection img {width:20px;vertical-align:middle}
+						</style>
+						<?php
+							if($level=="Water")
+							{ 
+								?>
+								<tr question=engines_in_water><td><?php write('#configuration_engines')?>
+								<?php 
+							}
+							else if($level=="Waste")
+							{
+								?>
+								<tr question=engines_in_waste>     <td><?php write('#configuration_engines')?>
+								<tr question=truck_transport_waste><td><?php write('#configuration_vehicles')?>
+								<?php 
+							}
+						?>
+					</table>
+					<?php
+				}
+			?>
+		</div>
+
+		<!--assessment info-->
+		<div class="card inline"><?php cardMenu("Info")?>
+			<div style="padding:0.5em 0.7em 0.5em 0">
+				<ul>
+					<li> 
+						<a href=variable.php?id=Days><?php write('#assessment_period')?></a>: 
 						<script>document.write(format(Global.General.Days()))</script> <?php write('#days')?>
-					&mdash;
-					<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity"><?php write('#conversion_factor')?></a>: 
+					<li>
+						<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity"><?php write('#conversion_factor')?></a>: 
 						<script>
 							(function(){
 								var c = Global.General.conv_kwh_co2;
 								var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+"</span>" : format(c); 
 								document.write(str)
 							})();
-						</script> kg<sub>CO<sub>2</sub></sub>/kWh
-				</span>
-			</span>
-		</div>
-		<!--Inputs-->
-		<div 
-			class=inline 
-			style="width:45%;margin-left:0.5em;<?php if($level=="Energy") echo "display:none;"?>">
-			<table id=inputs style="width:100%;margin-bottom:0.5em">
-				<tr><th colspan=5 class=tableHeader>INPUTS
-				<tr>
-					<th><?php write('#edit_description')?>
-					<th><?php write('#edit_current_value')?>
-					<th><?php write('#edit_unit')?>
-					<th><?php write('#edit_data_quality')?>
-			</table>
-		</div>
-		<!--Outputs-->
-		<div class=inline style="width:50%;margin-left:0.5em;">
-			<!--GHG-->
-			<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:0.5em;">
-				<tr><th colspan=7 class=tableHeader>OUTPUTS — <?php write('#edit_ghg_emissions')?>
-				<tr>
-					<th style=width:10%><?php write('#edit_origin')?>
-					<th style=width:17%>Kg<sub>CO<sub>2</sub></sub>
-					<th style=width:17%><?php write('#edit_value_per_year')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>
-					<th style=width:17%><?php write('#edit_per_inhab')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>/inhab
-					<th style=width:17%><?php write('#edit_per_serv_pop')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>/serv.pop
-					<th style=width:17%><?php write('#edit_per_water_volume')?><br>kg<sub>CO<sub>2</sub></sub>/m<sup>3</sup>
-					<?php
-						if($level=="Waste" && !$sublevel)
-						{	
-							?>
-							<th style=width:17%><?php write('#edit_per_bod_removed')?><br>kg<sub>CO<sub>2</sub></sub>/kg BOD
-							<?php 
-						}
-					?>
-			</table>
-
-			<!--energy performance-->
-			<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
-				<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#energy_performance')?>
-				<tr>
-					<!--
-					<th title=Performance style=cursor:help><?php write('#edit_benchmark')?>
-					-->
-					<th><?php write('#edit_description')?>
-					<th><?php write('#edit_current_value')?>
-					<th><?php write('#edit_unit')?>
-			</table>
-
-			<!--other (SL indicators)-->
-			<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:0.5em;margin-bottom:0.5em">
-				<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#edit_service_level_indicators') ?>
-				<tr>
-					<th><?php write('#edit_description')?>
-					<th><?php write('#edit_current_value')?>
-					<th><?php write('#edit_unit')?>
-			</table>
+						</script> kg CO<sub>2</sub>/kWh
+				</ul>
+			</div>
 		</div>
 	</div>
 
-	<!--GRAPHS-->
-	<div class=card><?php cardMenu($lang_json['#graphs']) ?>
-		<div id=graph><?php write('#loading')?></div>
-		<script>
-			google.charts.load('current',{'packages':['corechart']});
-			google.charts.setOnLoadCallback(drawCharts);
-		</script>
-		<style>
-			#graph div.options{padding:1em}
-			#graph button {margin:0.5em}
-			#graph {text-align:center}
-			#graph * {margin:auto}
-		</style>
-	</div>
+	<!--i/o-->
+	<div class=card>
+		<div class=menu onclick=this.parentNode.classList.toggle('folded')>
+			<button></button>
+			Inputs &amp; Outputs
 
+			<!--button toggle outputs/graph display-->
+			<script>
+				function toggleGraph(event,thisB)
+				{
+					event.stopPropagation();
+					var graph=document.querySelector('#graphContainer')
+					var ioCon=document.querySelector('#ioContainer')
+					if(graph.style.display=='none') {ioCon.style.display='none';graph.style.display='';thisB.style.background='#bce4d3'}
+					else                            {ioCon.style.display='';graph.style.display='none';thisB.style.background=''}
+					init()
+					graph.scrollIntoView()
+				}
+			</script>
+
+			<button 
+				id=btn_toggle class=toggle 
+				onclick="event.stopPropagation();toggleGraph(event,this)">
+				VIEW GRAPH
+			</button>
+		</div>
+
+		<!--Input Output-->
+		<div id=ioContainer>
+			<!--Inputs-->
+			<div 
+				class=inline 
+				style="width:45%;margin-left:0.5em;<?php if($level=="Energy") echo "display:none;"?>">
+				<table id=inputs style="width:100%;margin-bottom:0.5em">
+					<tr><th colspan=5 class=tableHeader>INPUTS
+					<tr>
+						<th><?php write('#edit_description')?>
+						<th><?php write('#edit_current_value')?>
+						<th><?php write('#edit_unit')?>
+						<th><?php write('#edit_data_quality')?>
+				</table>
+			</div>
+			<!--Outputs-->
+			<div class=inline style="width:50%;margin-left:0.5em;margin-bottom:2em">
+				<!--GHG-->
+				<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:0.5em;">
+					<tr><th colspan=7 class=tableHeader>OUTPUTS — <?php write('#edit_ghg_emissions')?>
+					<tr>
+						<th style=width:10%><?php write('#edit_origin')?>
+						<th style=width:17%>Kg<sub>CO<sub>2</sub></sub>
+						<th style=width:17%><?php write('#edit_value_per_year')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>
+						<th style=width:17%><?php write('#edit_per_inhab')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>/inhab
+						<th style=width:17%><?php write('#edit_per_serv_pop')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>/serv.pop
+						<th style=width:17%><?php write('#edit_per_water_volume')?><br>kg<sub>CO<sub>2</sub></sub>/m<sup>3</sup>
+						<?php
+							if($level=="Waste" && !$sublevel)
+							{	
+								?>
+								<th style=width:17%><?php write('#edit_per_bod_removed')?><br>kg<sub>CO<sub>2</sub></sub>/kg BOD
+								<?php 
+							}
+						?>
+				</table>
+
+				<!--energy performance-->
+				<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
+					<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#energy_performance')?>
+					<tr>
+						<!--
+						<th title=Performance style=cursor:help><?php write('#edit_benchmark')?>
+						-->
+						<th><?php write('#edit_description')?>
+						<th><?php write('#edit_current_value')?>
+						<th><?php write('#edit_unit')?>
+				</table>
+
+				<!--other (SL indicators)-->
+				<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:0.5em;margin-bottom:0.5em">
+					<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#edit_service_level_indicators') ?>
+					<tr>
+						<th><?php write('#edit_description')?>
+						<th><?php write('#edit_current_value')?>
+						<th><?php write('#edit_unit')?>
+				</table>
+			</div>
+		</div>
+
+		<!--GRAPHS-->
+		<div id=graphContainer style=display:none>
+			<div id=graph><?php write('#loading')?></div>
+			<script>
+				google.charts.load('current',{'packages':['corechart']});
+				google.charts.setOnLoadCallback(drawCharts);
+			</script>
+			<style>
+				#graph div.options{padding:1em}
+				#graph button {margin:0.2em}
+				#graph {text-align:center}
+				#graph * {margin:auto}
+			</style>
+		</div>
+	</div>
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>
