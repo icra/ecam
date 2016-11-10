@@ -16,6 +16,7 @@
 	#linearDiagram img:not(.inactive):hover {border:4px solid #d7bfaf}
 	#linearDiagram img:not(.inactive) {cursor:pointer}
 	#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(-76px);z-index:1;width:333px;}
+	#linearDiagram a:hover {text-decoration:none}
 </style>
 
 <div id=linearDiagram>

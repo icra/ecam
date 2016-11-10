@@ -31,7 +31,7 @@ Graphs.graph1=function(withTable,container)
 	var ww=Global.Waste.ww_KPI_GHG()
 
 	//names
-	var names = [ "<?php write('#Water')?>" , "<?php write('#Waste')?>" ];
+	var names = [ "<?php write('#ws_KPI_GHG_descr')?>" , "<?php write('#ww_KPI_GHG_descr')?>" ];
 
 	//array graph data
 	var data=google.visualization.arrayToDataTable([
@@ -118,15 +118,15 @@ Graphs.graph4=function(withTable,container)
 
 	//names
 	var names=[
-		"ws electricity",
-		"ws fuel engine",
-		"ww electricity",
-		"ww CH4 treatment",
-		"ww N2O effluent",
-		"ww transport",
-		"ww CH4 untreat",
-		"ww N2O untreat",
-		"ww fuel engine",
+		"<?php write("#ws_KPI_GHG_elec_descr")?>",
+		"<?php write("#ws_KPI_GHG_ne_descr")?>",
+		"<?php write("#ww_KPI_GHG_elec_descr")?>",
+		"<?php write("#ww_KPI_GHG_ne_ch4_wwt_descr")?>",
+		"<?php write("#ww_KPI_GHG_ne_n2o_tre_descr")?>",
+		"<?php write("#ww_KPI_GHG_ne_tsludge_descr")?>",
+		"<?php write("#ww_KPI_GHG_ne_ch4_unt_descr")?>",
+		"<?php write("#ww_KPI_GHG_ne_n2o_unt_descr")?>",
+		"<?php write("#ww_KPI_GHG_ne_engines_descr")?>",
 	];
 
 	//actual graph data

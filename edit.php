@@ -428,31 +428,6 @@
 							return format(norm);
 						})();
 					});
-
-					//if wastewater, also normalize for bod 
-					if(level=="Waste")
-					{
-						newCell=newRow.insertCell(-1);
-						newCell.setAttribute('onmouseover',"Formulas.hlField('c_ww_bod_rmvd',1)")
-						newCell.setAttribute('onmouseout', "Formulas.hlField('c_ww_bod_rmvd',0)")
-						newCell.title=newCell.parentNode.title+"/c_ww_bod_rmvd";
-						newCell.innerHTML=(function()
-						{
-							//special case corinne request
-							if(field.search('_unt')>=0) return "<span style=color:#ccc>NA</span>";
-							if(field=="ww_KPI_GHG")
-							{
-								newCell.title="custom formula";
-								//we have to subtract the untreated from the total
-								var minus_untreated = Global.Waste.ww_KPI_GHG() - Global.Waste.ww_KPI_GHG_ne_ch4_unt() - Global.Waste. ww_KPI_GHG_ne_n2o_unt();
-								minus_untreated/=Global.Waste.c_ww_bod_rmvd();
-								return format(minus_untreated);
-							}
-							var value = CurrentLevel[field]()/Units.multiplier(field);
-							value/=Global.Waste.c_ww_bod_rmvd();
-							return format(value);
-						})();
-					}
 				})();
 			}
 
@@ -1000,14 +975,6 @@
 						<th style=width:17%><?php write('#edit_per_inhab')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>/inhab
 						<th style=width:17%><?php write('#edit_per_serv_pop')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>/serv.pop
 						<th style=width:17%><?php write('#edit_per_water_volume')?><br>kg<sub>CO<sub>2</sub></sub>/m<sup>3</sup>
-						<?php
-							if($level=="Waste" && !$sublevel)
-							{	
-								?>
-								<th style=width:17%><?php write('#edit_per_bod_removed')?><br>kg<sub>CO<sub>2</sub></sub>/kg BOD
-								<?php 
-							}
-						?>
 				</table>
 
 				<!--energy performance-->

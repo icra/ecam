@@ -134,7 +134,8 @@
 					document.getElementById('uw1').style.background='red'
 					var warning=document.getElementById('uw1_warning')
 					warning.style.background='red'
-					warning.innerHTML="<?php write('#configuration_conv_error')?>";
+					warning.style.padding='0.5em'
+					warning.innerHTML="<b><?php write('#configuration_conv_error')?></b>";
 					return;
 				}
 				window.location='configuration.php'

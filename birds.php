@@ -402,6 +402,21 @@
 					For further details on energy consumption &amp; opportunities to reduce GHG emissions go to 
 					<b>Detailed GHG Assessment</b> (<a href=#>&uarr;</a>)
 				</div>
+				<script>
+					(function(){
+						//hide inactive graphs
+						if(Global.Configuration.ActiveStages.water==0)
+						{
+							document.querySelector("#graph3").style.display="none"
+							document.querySelector("#graph5").style.display="none"
+						}
+						if(Global.Configuration.ActiveStages.waste==0)
+						{
+							document.querySelector("#graph4").style.display="none"
+							document.querySelector("#graph6").style.display="none"
+						}
+					})();
+				</script>
 			</div>
 			<script>
 				google.charts.load('current',{'packages':['corechart','gauge']});

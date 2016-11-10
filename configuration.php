@@ -10,6 +10,9 @@
 			//checkbox that has been clicked
 			var checkbox=document.getElementById(id);
 
+			//hide warning
+			document.querySelector("#inactive_warning").innerHTML=""
+
 			if(!checkbox.checked)
 			{
 				//if(!confirm("WARNING: All the inputs for this stage will be set to 0, and all the substages (if any) will be removed. Continue? This cannot be undone"))
@@ -216,7 +219,12 @@
 			event.stopPropagation();
 			if(Global.Configuration.ActiveStages.water==0 && Global.Configuration.ActiveStages.waste==0)
 			{
-				alert("<?php write('#configuration_active_stages_error')?>");
+				var warning=document.querySelector("#inactive_warning")
+				warning.style.background="red"
+				warning.style.padding="1em"
+				warning.style.transition="all 1s"
+				warning.innerHTML="<b><?php write('#configuration_active_stages_error')?></b>";
+				setTimeout(function(){warning.style.padding="0.5em"},1000)
 				return;
 			}
 			window.location="birds.php"; return;
@@ -224,6 +232,7 @@
 	</script>
 	<button class="button prev" onclick="event.stopPropagation();window.location='getStarted.php'"><?php write('#previous')?></button><!--
 	--><button class="button next" onclick=nextPage()><?php write('#next')?></button>
+	<div id=inactive_warning></div>
 </div>
 
 </div>
