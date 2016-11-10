@@ -432,16 +432,28 @@
 			function nextPage()
 			{
 				event.stopPropagation();
-				//default location to go
-				var location = "edit.php?level=Water";
-				if(Global.Configuration.ActiveStages.water==0 && Global.Configuration.ActiveStages.waste==0)
+				//go to first active substage
+				var location;
+				if(Global.Configuration.ActiveStages.waterAbs)
+					location = "edit.php?level=Water&sublevel=Abstraction";
+				else if(Global.Configuration.ActiveStages.waterTre)
+					location = "edit.php?level=Water&sublevel=Treatment";
+				else if(Global.Configuration.ActiveStages.waterDis)
+					location = "edit.php?level=Water&sublevel=Distribution";
+				else if(Global.Configuration.ActiveStages.wasteCol)
+					location = "edit.php?level=Waste&sublevel=Collection";
+				else if(Global.Configuration.ActiveStages.wasteTre)
+					location = "edit.php?level=Waste&sublevel=Treatment";
+				else if(Global.Configuration.ActiveStages.wasteDis)
+					location = "edit.php?level=Waste&sublevel=Discharge";
+				else if(Global.Configuration.ActiveStages.water)
+					location = "edit.php?level=Water";
+				else if(Global.Configuration.ActiveStages.waste)
+					location = "edit.php?level=Waste";
+				else
 				{
 					alert("<?php write('#configuration_active_stages_error')?>");
 					return;
-				}
-				if(Global.Configuration.ActiveStages.water==0)
-				{
-					location = "edit.php?level=Waste";
 				}
 				window.location=location;
 			}

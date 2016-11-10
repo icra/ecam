@@ -40,7 +40,6 @@ var Info = {
 	"ws_nrg_cons":{magnitude:"Energy",unit:"kWh",},
 	"ws_nrg_cost":{magnitude:"Currency",unit:"USD",},
 	"ws_run_cost":{magnitude:"Currency",unit:"USD",},
-	"ws_non_revw":{magnitude:"Percent",unit:"%",},
 	"ws_vol_fuel":{magnitude:"Volume",unit:"L",},
 	ws_KPI_GHG_elec:{magnitude:"Mass",unit:"kgCO2e",},
 	ws_KPI_GHG_ne:{magnitude:"Mass",unit:"kgCO2e",},

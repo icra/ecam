@@ -378,6 +378,7 @@
 				{
 					var level    = '<?php echo $level?>';
 					var sublevel = '<?php if($sublevel) echo $sublevel; else echo 'false' ?>';
+					if(level=="Energy"){return "NA"}
 					//value per resident population
 					//value per serviced population
 					//value per water volume
@@ -790,6 +791,7 @@
 			$color = ($level=="Waste")?"lightcoral":"lightblue";
 			echo "
 				<span class=inline style='float:right;margin-right:10em'>
+					<span style='color:#666;font-size:12px'>If you have multiple facilities &rarr;</span>
 					<button 
 						style='height:auto;font-size:12px;border-radius:0.3em;border:1px solid #aaa;
 							box-shadow: 0 1px 2px rgba(0,0,0,.1); '
@@ -797,12 +799,11 @@
 							<img src=img/substage.png style='width:30px;margin-right:1em;vertical-align:middle'>
 							".$lang_json['#substages']."	
 					</button> 
-					<span style=font-size:12px;color:#666>
-						&rarr; ";
-			write('#edit_divided_in');
-			echo" <script>document.write(Substages['$level']['$sublevel'].length)</script> ";
+					<span style=font-size:12px;color:#666>(
+						<script> document.write(Substages['$level']['$sublevel'].length) </script> ";
 			write('#substage');
-			echo "/s </span> </span>";
+			echo "/s) </span> 
+			</span>";
 		}
 	?>
 </h1></center>
@@ -1013,6 +1014,14 @@
 				#graph {text-align:center}
 				#graph * {margin:auto}
 			</style>
+		</div>
+	</div>
+
+	<!--opportunities-->
+	<div class=card>
+		<?php cardMenu("Opportunities")?>
+		<div style=padding:1em>
+		In development
 		</div>
 	</div>
 </div>
