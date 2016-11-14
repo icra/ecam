@@ -144,8 +144,8 @@ var Global = {
 		"ww_bod_infl" :0,
 		"ww_bod_effl" :0,
 		"ww_bod_slud" :0,
-		"ww_num_trip" :0,
-		"ww_dist_dis" :0,
+		"ww_num_trip" :4,
+		"ww_dist_dis" :40000,
 		"ww_n2o_effl" :0,
 		"ww_vol_fuel" :0,
 		"ww_prot_con" :25,
@@ -367,7 +367,7 @@ var Global = {
 
 		"Yes/No": //default questions with answer "yes". All questions are in "questions.js" (go there with gf)
 		{
-			water_conduction:1,
+			pumping_for_abstraction:1,
 			engines_in_water:1,
 			engines_in_waste:1,
 			truck_transport_waste:1,

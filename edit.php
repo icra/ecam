@@ -144,7 +144,7 @@
 				}
 
 				//equation not clear, tbd in v2
-				if(field=="c_ww_in_dilution")continue;
+				if(field=="c_ww_in_dilution") continue;
 
 				/*check if field is level3 specific*/if(Level3.list.indexOf(field)>-1) continue;
 
@@ -800,13 +800,27 @@
 					<div style=padding:1.5em>
 						<?php
 								echo "
+									<div>
+										In this page you can input the general info about 
+										<script>
+											document.write(translate('$sublevel'))
+										</script>.<br>
+
+										<b>If you have multiple 
+										<script>
+											document.write(translate('$sublevel'))
+										</script>
+										facilities, please go to:</b>
+									</div>
+									<div style='margin-top:0.5em'>
 										<button 
 											style='font-size:18px;border-radius:0.3em;border:1px solid #aaa;box-shadow: 0 1px 2px rgba(0,0,0,.1);'
 											onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
 												<img src=img/substage.png style='width:30px;margin-right:0.5em;vertical-align:middle'>
-												Go to 
+												Edit
 												".$lang_json['#substages']."	
-										</button>";
+										</button>
+									</div>";
 						?>
 					</div>
 				</div><?php 
@@ -815,7 +829,7 @@
 		<!--questions-->
 		<div class="card inline">
 			<?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
-			<table style=margin:0.5em id=questions class=inline></table>
+			<table style=margin:0.5em id=questions></table>
 			<script>
 				function updateQuestionsTable()
 				{
@@ -844,6 +858,7 @@
 							}
 
 						var newRow = t.insertRow(-1);
+						newRow.onmouseover=function(){hlQuestionFields(q)}
 						newRow.title=question
 						newRow.insertCell(-1).innerHTML=translate(question)+"?";
 						newRow.insertCell(-1).innerHTML=(function()
@@ -855,6 +870,15 @@
 									"<input name='"+question+"' type=radio value=1 onclick=setQuestion('"+question+"',1) "+checked+"></label> ";
 							return ret;
 						})();
+					}
+				}
+
+				function hlQuestionFields(question)
+				{
+					var fields=Questions[question];
+					for(var i in fields)
+					{
+						Formulas.hlField(fields[i],1)
 					}
 				}
 
@@ -942,7 +966,20 @@
 						<span>Assessment period: <script>document.write(Global.General.Days())</script> days</span>
 					<tr>
 						<th><?php write('#edit_description')?>
-						<th><?php write('#edit_current_value')?>
+						<th><?php if($sublevel) {
+								echo "<script>
+									if(Substages['$level']['$sublevel'].length>1)
+									{
+										document.write('Sum of all substages')
+									}
+									else
+									{
+										document.write(translate('edit_current_value'))
+									}
+								</script>
+								";
+							}
+							else write('#edit_current_value')?>
 						<th><?php write('#edit_unit')?>
 						<th><?php write('#edit_data_quality')?>
 				</table>
@@ -965,11 +1002,11 @@
 					</span>
 					<tr>
 						<th style=width:10%><?php write('#edit_origin')?>
-						<th style=width:17%>Kg<sub>CO<sub>2</sub></sub>
-						<th style=width:17%><?php write('#edit_value_per_year')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>
-						<th style=width:17%><?php write('#edit_per_inhab')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>/inhab
-						<th style=width:17%><?php write('#edit_per_serv_pop')?><br>kg<sub>CO<sub>2</sub></sub>/<?php write('#year')?>/serv.pop
-						<th style=width:17%><?php write('#edit_per_water_volume')?><br>kg<sub>CO<sub>2</sub></sub>/m<sup>3</sup>
+						<th style=width:17%>Kg CO<sub>2</sub> during the assessment period
+						<th style=width:17%><?php write('#edit_value_per_year')?><br>kg CO<sub>2</sub>/<?php write('#year')?>
+						<th style=width:17%><?php write('#edit_per_inhab')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/inhab
+						<th style=width:17%><?php write('#edit_per_serv_pop')?><br>kg CO<sub>2</sub>/<?php write('#year')?>/serv.pop
+						<th style=width:17%><?php write('#edit_per_water_volume')?><br>kg CO<sub>2</sub>/m<sup>3</sup>
 				</table>
 
 				<!--energy performance-->

@@ -16,30 +16,29 @@ var Questions =
 	"pumping_for_distribution":[
 		"wsd_nrg_cons",
 		"wsd_vol_pump",
-		"wsd_pmp_head",
-		"c_wsd_vol_head",
 		"wsd_KPI_nrg_per_m3",
 		"wsd_KPI_std_nrg_cons",
-	],
-
-	"water_conduction":[
-		"wsa_vol_conv",
-		"wsa_wat_loss",
-		"wsa_main_len",
-		"wsa_fri_loss",
-		"wsa_KPI_water_losses",
-		"wsa_KPI_un_head_loss",
+		"wsd_pmp_head",
+		"c_wsd_vol_head",
 	],
 
 	"pumping_for_abstraction":[
 		"wsa_nrg_cons",
 		"wsa_vol_pump",
-		"wsa_pmp_head",
-		"c_wsa_vol_head",
 		"wsa_KPI_nrg_per_m3",
+		"wsa_KPI_GHG_elec",
+	],
+
+	"wsa_pumping_efficiency":[
+		"wsa_pmp_head",
+		"wsa_wat_loss",
+		"wsa_main_len",
+		"wsa_fri_loss",
+		"c_wsa_vol_head",
+		"wsa_KPI_water_losses",
+		"wsa_KPI_un_head_loss",
 		"wsa_KPI_std_nrg_cons",
 		"wsa_KPI_std_elec_eff",
-		"wsa_KPI_GHG_elec",
 	],
 
 	"engines_in_water":[

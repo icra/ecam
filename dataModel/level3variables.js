@@ -5,11 +5,7 @@ var Level3={};
 Level3.list=
 [
 	//WSA
-		"wsa_pmp_head", 
 		"wsa_wat_loss",
-		"wsa_main_len",
-		"wsa_fri_loss",
-		"c_wsa_vol_head",
 		"wsa_KPI_un_head_loss",
 		"wsa_KPI_std_nrg_cons",
 		"wsa_KPI_std_elec_eff",

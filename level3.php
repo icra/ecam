@@ -576,7 +576,7 @@
 			<!--substages counter-->
 			<div class=inline style="border-radius:1em;padding:0.5em;border:1px solid #ccc;vertical-align:middle"><?php write('#substages')?>: <span id=counter>0</span></div>
 			<!--new substage button-->
-			<button onclick=newSubstage() class=button style="box-shadow: 0 1px 2px rgba(0,0,0,.1);">+ <?php write('#level3_new_substage')?></button>
+			<button onclick=newSubstage() class=button style="background:#af0;box-shadow: 0 1px 2px rgba(0,0,0,.1);">+ <?php write('#level3_new_substage')?></button>
 	</table>
 </div>
 

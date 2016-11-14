@@ -27,8 +27,8 @@ Graphs.graph1=function(withTable,container)
 	container=container||"graph";
 
 	//values: 4 combinations with electricity/non & water/waste
-	var ws=Global.Water.ws_KPI_GHG()
-	var ww=Global.Waste.ww_KPI_GHG()
+	var ws=Global.Water.ws_KPI_GHG()*Global.Configuration.ActiveStages.water; //0 if not active
+	var ww=Global.Waste.ww_KPI_GHG()*Global.Configuration.ActiveStages.waste; //0 if not active
 
 	//names
 	var names = [ "<?php write('#ws_KPI_GHG_descr')?>" , "<?php write('#ww_KPI_GHG_descr')?>" ];
@@ -105,16 +105,20 @@ Graphs.graph4=function(withTable,container)
 	withTable=withTable||false;
 	container=container||"graph";
 
+	//ws and ww active
+	var ws=Global.Configuration.ActiveStages.water;
+	var ww=Global.Configuration.ActiveStages.waste;
+
 	//Values
-	var slice_1 = Global.Water.ws_KPI_GHG_elec();
-	var slice_2 = Global.Water.ws_KPI_GHG_ne();
-	var slice_3 = Global.Waste.ww_KPI_GHG_elec();
-	var slice_4 = Global.Waste.ww_KPI_GHG_ne_ch4_wwt();
-	var slice_5 = Global.Waste.ww_KPI_GHG_ne_n2o_tre();
-	var slice_6 = Global.Waste.ww_KPI_GHG_ne_tsludge();
-	var slice_7 = Global.Waste.ww_KPI_GHG_ne_ch4_unt();
-	var slice_8 = Global.Waste.ww_KPI_GHG_ne_n2o_unt();
-	var slice_9 = Global.Waste.ww_KPI_GHG_ne_engines();
+	var slice_1 = ws * Global.Water.ws_KPI_GHG_elec();
+	var slice_2 = ws * Global.Water.ws_KPI_GHG_ne();
+	var slice_3 = ww * Global.Waste.ww_KPI_GHG_elec();
+	var slice_4 = ww * Global.Waste.ww_KPI_GHG_ne_ch4_wwt();
+	var slice_5 = ww * Global.Waste.ww_KPI_GHG_ne_n2o_tre();
+	var slice_6 = ww * Global.Waste.ww_KPI_GHG_ne_tsludge();
+	var slice_7 = ww * Global.Waste.ww_KPI_GHG_ne_ch4_unt();
+	var slice_8 = ww * Global.Waste.ww_KPI_GHG_ne_n2o_unt();
+	var slice_9 = ww * Global.Waste.ww_KPI_GHG_ne_engines();
 
 	//names
 	var names=[
@@ -976,66 +980,35 @@ Graphs.sankey=function(withTable,container)
 }
 
 /** gauges for serviced population */
-Graphs.gaugeWS=function(container,values,header,max)
+Graphs.gauge=function(container,value,header)
 {
-	//inputs
-	max=max||100;
+	//empty container
+	var element=document.getElementById(container)
+	element.style.padding="1em 0"
+	element.innerHTML="";
 
-	var DATA =[ ['Label','Value'], ];
-	for(var i in values) //values is [ ["title",value],["title",value],... ]
-		DATA.push(values[i])
+	//title
+	var h4=document.createElement('div')
+	element.appendChild(h4);
+	h4.innerHTML=header;
+	h4.style.fontWeight="bold";
 
-	var data = google.visualization.arrayToDataTable(DATA);
-	var options = {
-		height:150,
-		redFrom: 0, redTo: 80,
-		yellowFrom:80, yellowTo: 95,
-		greenFrom:95, greenTo: 100,
-		minorTicks:5,
-		max:max,
-	};
-	var element = document.getElementById(container)
-	var chart = new google.visualization.Gauge(element);
-	chart.draw(data,options);
-	var h = document.createElement('h3');
-	h.innerHTML=header
-	element.insertBefore(h,element.firstChild)
-	//CSS
-		h.style.color="black"
-		h.style.fontWeight="bold"
-		h.style.fontSize="12px"
-	//CSS
-}
+	//value
+	var div=document.createElement('div');
+	element.appendChild(div);
+	div.innerHTML=format(value)+" %";
+	div.style.marginTop="0.3em"
+	div.style.padding="0.2em";
+	div.style.fontWeight="bold";
+	div.style.fontSize="35px";
+	div.style.border="1px solid #ccc"
+	div.style.borderRadius="0.3em"
+	div.classList.add('inline')
 
-Graphs.gaugeWW=function(container,values,header,max)
-{
-	//inputs
-	max=max||100;
-
-	var DATA =[ ['Label','Value'], ];
-	for(var i in values) //values is [ ["title",value],["title",value],... ]
-		DATA.push(values[i])
-
-	var data = google.visualization.arrayToDataTable(DATA);
-	var options = {
-		height:150,
-		redFrom: 0, redTo: 50,
-		yellowFrom:50, yellowTo: 80,
-		greenFrom:80, greenTo: 100,
-		minorTicks:5,
-		max:max,
-	};
-	var element = document.getElementById(container)
-	var chart = new google.visualization.Gauge(element);
-	chart.draw(data,options);
-	var h = document.createElement('h3');
-	h.innerHTML=header
-	element.insertBefore(h,element.firstChild)
-	//CSS
-		h.style.color="black"
-		h.style.fontWeight="bold"
-		h.style.fontSize="12px"
-	//CSS
+	if(value>100 || value<0) {
+		div.style.color="red"
+		div.innerHTML+=" &#9888;"
+	}
 }
 /***/
 
@@ -1070,7 +1043,7 @@ Graphs.ws_cost=function(container)
 	//names
 	var names = [
 		"Energy",
-		"Non energy",
+		"Other",
 	];
 
 	//array graph data
@@ -1118,7 +1091,7 @@ Graphs.ww_cost=function(container)
 	//names
 	var names = [
 		"Energy",
-		"Non energy",
+		"Other",
 	];
 
 	//array graph data
