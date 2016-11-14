@@ -409,6 +409,8 @@
 	"#wsa_KPI_GHG_elec_expla":"Electricidad",
 	"#wsa_KPI_GHG_ne_descr":"Motores de combustible",
 	"#wsa_KPI_GHG_ne_expla":"Motores de combustible",
+	"#wsa_KPI_GHG_descr":"Total GEI Captación",
+	"#wsa_KPI_GHG_expla":"Total GEI Captación",
 
 	"#wst_vol_trea_descr" : "Volumen de agua tratada",
 	"#wst_vol_trea_expla" : "Suma del volumen de agua tratada por ETAs que son responsabilidad de la empresa de agua, durante el plazo de evaluación",

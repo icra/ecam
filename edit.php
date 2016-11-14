@@ -785,33 +785,33 @@
 
 <h1><a href=stages.php><script>document.write(Global.General.Name)</script></a> <?php echo "$sep $title"?>
 	<!--go to level 3 button-->
-	<?php
-		if($sublevel)
-		{
-			$color = ($level=="Waste")?"lightcoral":"lightblue";
-			echo "
-				<span class=inline style='float:right;margin-right:10em'>
-					<span style='color:#666;font-size:12px'>If you have multiple facilities &rarr;</span>
-					<button 
-						style='height:auto;font-size:12px;border-radius:0.3em;border:1px solid #aaa;
-							box-shadow: 0 1px 2px rgba(0,0,0,.1); '
-						onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-							<img src=img/substage.png style='width:30px;margin-right:1em;vertical-align:middle'>
-							".$lang_json['#substages']."	
-					</button> 
-					<span style=font-size:12px;color:#666>(
-						<script> document.write(Substages['$level']['$sublevel'].length) </script> ";
-			write('#substage');
-			echo "/s) </span> 
-			</span>";
-		}
-	?>
 </h1></center>
 
 <!--main container-->
 <div>
 	<!--container for questions and assessment info-->
 	<div>
+		<!--go to substages-->
+		<?php 
+			if($sublevel)
+			{ 
+				?><div class="card inline"><?php cardMenu("Nº of substages: 
+							<script>document.write(Substages['$level']['$sublevel'].length)</script>")?>
+					<div style=padding:1.5em>
+						<?php
+								echo "
+										<button 
+											style='font-size:18px;border-radius:0.3em;border:1px solid #aaa;box-shadow: 0 1px 2px rgba(0,0,0,.1);'
+											onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
+												<img src=img/substage.png style='width:30px;margin-right:0.5em;vertical-align:middle'>
+												Go to 
+												".$lang_json['#substages']."	
+										</button>";
+						?>
+					</div>
+				</div><?php 
+			}
+		?>
 		<!--questions-->
 		<div class="card inline">
 			<?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
@@ -900,26 +900,6 @@
 				}
 			?>
 		</div>
-
-		<!--assessment info-->
-		<div class="card inline"><?php cardMenu("Info")?>
-			<div style="padding:0.5em 0.7em 0.5em 0">
-				<ul>
-					<li> 
-						<a href=variable.php?id=Days><?php write('#assessment_period')?></a>: 
-						<script>document.write(format(Global.General.Days()))</script> <?php write('#days')?>
-					<li>
-						<a href=variable.php?id=conv_kwh_co2 title="Conversion factor for grid electricity"><?php write('#conversion_factor')?></a>: 
-						<script>
-							(function(){
-								var c = Global.General.conv_kwh_co2;
-								var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+"</span>" : format(c); 
-								document.write(str)
-							})();
-						</script> kg CO<sub>2</sub>/kWh
-				</ul>
-			</div>
-		</div>
 	</div>
 
 	<!--i/o-->
@@ -944,7 +924,7 @@
 
 			<button 
 				id=btn_toggle class=toggle 
-				onclick="event.stopPropagation();toggleGraph(event,this)">
+				onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleGraph(event,this)">
 				VIEW GRAPH
 			</button>
 		</div>
@@ -957,6 +937,9 @@
 				style="width:45%;margin-left:0.5em;<?php if($level=="Energy") echo "display:none;"?>">
 				<table id=inputs style="width:100%;margin-bottom:0.5em">
 					<tr><th colspan=5 class=tableHeader>INPUTS
+					&mdash; 
+						<!--show assessment period-->
+						<span>Assessment period: <script>document.write(Global.General.Days())</script> days</span>
 					<tr>
 						<th><?php write('#edit_description')?>
 						<th><?php write('#edit_current_value')?>
@@ -968,7 +951,18 @@
 			<div class=inline style="width:50%;margin-left:0.5em;margin-bottom:2em">
 				<!--GHG-->
 				<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:0.5em;">
-					<tr><th colspan=7 class=tableHeader>OUTPUTS — <?php write('#edit_ghg_emissions')?>
+					<tr><th colspan=7 class=tableHeader>OUTPUTS — <?php write('#edit_ghg_emissions')?> &mdash;
+					<!--show conv factor-->
+					<span>Conversion factor: 
+						<script>
+							(function(){
+								var c = Global.General.conv_kwh_co2;
+								var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+"</span>" : format(c); 
+								document.write(str)
+							})();
+						</script> 
+						kg CO<sub>2</sub>/kWh
+					</span>
 					<tr>
 						<th style=width:10%><?php write('#edit_origin')?>
 						<th style=width:17%>Kg<sub>CO<sub>2</sub></sub>

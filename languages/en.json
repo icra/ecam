@@ -411,6 +411,8 @@
 	"#wsa_KPI_GHG_elec_expla":"Electricity",
 	"#wsa_KPI_GHG_ne_descr":"Fuel engines",
 	"#wsa_KPI_GHG_ne_expla":"Fuel engines",
+	"#wsa_KPI_GHG_descr":"Total GHG Abstraction",
+	"#wsa_KPI_GHG_expla":"Total GHG Abstraction",
 
 	"#wst_vol_trea_descr" : "Volume of treated water",
 	"#wst_vol_trea_expla" : "Sum of the volume of water treated by WTPs that are the responsibility of the water undertaking, during the assessment period",

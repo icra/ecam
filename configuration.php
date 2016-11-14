@@ -7,12 +7,16 @@
 		/** Enable or disable stage <input type=checkbox id=id> */
 		Configuration.activate=function(id)
 		{
+			//hide warning "all inactive"
+			document.querySelector("#inactive_warning").classList.remove('visible');
+
 			//checkbox that has been clicked
 			var checkbox=document.getElementById(id);
 
-			//hide warning
-			document.querySelector("#inactive_warning").classList.remove('visible');
+			//update Active Stages
+			Global.Configuration.ActiveStages[id]=checkbox.checked ? 1 : 0;
 
+			//reset all variables to zero if !checked
 			if(!checkbox.checked)
 			{
 				//if(!confirm("WARNING: All the inputs for this stage will be set to 0, and all the substages (if any) will be removed. Continue? This cannot be undone"))
@@ -45,31 +49,38 @@
 			}
 
 			//if a level 1 is deactivated, deactivate the corresponding level 2 ones
-			var elements=document.getElementsByClassName(id)
-			for(var i=0;i<elements.length;i++)
+			if(["water","waste"].indexOf(id)>-1 && !checkbox.checked)
 			{
-				if(!checkbox.checked)
+				var elements=document.querySelectorAll("table#selectStage input[class="+id+"]")
+				for(var i=0;i<elements.length;i++)
 				{
-					/**uncheck*/elements[i].checked=false;
-					/**remove green color*/elements[i].parentNode.parentNode.style.backgroundColor="";
-					/**modifiy Active Stages*/Global.Configuration.ActiveStages[elements[i].id]=0
+					var alias=elements[i].id;
+					elements[i].checked=false;
+					this.activate(alias);
+
+					//Water efficiency
+					var element_we=document.querySelector("input[waterEff][alias="+alias+"]")
+					element_we.checked=false;
+					this.activateWaterEff(alias);
 				}
 			}
 
 			//if a level 2 stage is activated, activate L1 if not active
-			if(checkbox.getAttribute('class') && checkbox.checked)
+			if(["waterAbs","waterTre","waterDis","wasteCol","wasteTre","wasteDis"].indexOf(id)>-1 && checkbox.checked)
 			{
 				var l1=checkbox.getAttribute('class');
-				/**set checked*/document.getElementById(l1).checked=true;
+				document.getElementById(l1).checked=true;
 				this.activate(l1);
 			}
 
-			//background color: green or white
-			checkbox.parentNode.parentNode.style.backgroundColor=checkbox.checked?"lightgreen":"";
-
-			//update Active Stages
-			Global.Configuration.ActiveStages[id] = checkbox.checked ? 1 : 0;
-
+			//if a level 2 stage is deactivated, deactivate waterEff
+			if(["waterAbs","waterTre","waterDis","wasteCol","wasteTre","wasteDis"].indexOf(id)>-1 && !checkbox.checked)
+			{
+				var alias=checkbox.id;
+				var element_we=document.querySelector("input[waterEff][alias="+alias+"]");
+				element_we.checked=false;
+				this.activateWaterEff(alias);
+			}
 			init();
 		}
 
@@ -84,15 +95,52 @@
 			updateResult();
 		}
 
-		/** Activate stages depending on Global.Configuration.ActiveStages */
+		Configuration.activateWaterEff=function(alias)
+		{
+			var element=document.querySelector('input[waterEff][alias='+alias+']')
+			Global.Configuration.ActiveStages.WaterEff[alias] = element.checked ? 1:0;
+			if(element.checked)
+			{
+				//activate L2 stage also
+				document.querySelector("table#selectStage input[id="+alias+"]").checked=true
+				this.activate(alias)
+			}
+
+			init()
+		}
+
+		/** set visuals depending on Global.Configuration.ActiveStages */
 		Configuration.activateLevels=function()
 		{
 			for(var stage in Global.Configuration.ActiveStages)
 			{
-				if(Global.Configuration.ActiveStages[stage])
+				if(stage=="")continue;
+				if(Global.Configuration.ActiveStages[stage]==1)
 				{
 					/**set checked*/document.getElementById(stage).checked=true;
-					this.activate(stage);
+					/**set checked*/document.getElementById(stage).parentNode.style.backgroundColor='lightgreen'
+					/**set checked*/document.getElementById(stage).parentNode.parentNode.style.backgroundColor='lightgreen'
+				}
+				else if(Global.Configuration.ActiveStages[stage]==0)
+				{
+					/**set checked*/document.getElementById(stage).checked=false;
+					/**set checked*/document.getElementById(stage).parentNode.style.backgroundColor=''
+					/**set checked*/document.getElementById(stage).parentNode.parentNode.style.backgroundColor=''
+				}
+			}
+			//activate water efficiency
+			for(var stage in Global.Configuration.ActiveStages.WaterEff)
+			{
+				if(stage=="")continue;
+				if(Global.Configuration.ActiveStages.WaterEff[stage]==1)
+				{
+					/**set checked*/document.querySelector('input[waterEff][alias='+stage+']').checked=true;
+					/**set checked*/document.querySelector('input[waterEff][alias='+stage+']').parentNode.style.backgroundColor='lightgreen'
+				}
+				else if(Global.Configuration.ActiveStages.WaterEff[stage]==0)
+				{
+					/**set checked*/document.querySelector('input[waterEff][alias='+stage+']').checked=false;
+					/**set checked*/document.querySelector('input[waterEff][alias='+stage+']').parentNode.style.backgroundColor=''
 				}
 			}
 		}
@@ -101,14 +149,13 @@
 		function init()
 		{
 			Sidebar.update();
-			updateResult();
-
-			//update linear diagram
+			Configuration.activateLevels();
+			//update linear diagram when clicking configuration
 			(function()
 			{
 				['water','waterAbs','waterTre','waterDis','waste','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
 				{
-					var img = document.querySelector('#linearDiagram img[stage='+stage+']')
+					var img=document.querySelector('#linearDiagram img[stage='+stage+']')
 					if(Global.Configuration.ActiveStages[stage])
 					{
 						img.src="img/"+stage+".png";
@@ -121,6 +168,7 @@
 					}
 				})
 			})();
+			updateResult();
 		}
 	</script>
 	<style>
@@ -142,12 +190,15 @@
 			event.stopPropagation();
 			['water','waste','waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
 			{
-				Global.Configuration.ActiveStages[stage]=1;
-				var checkbox = document.getElementById(stage)
-				checkbox.checked=true;
-				checkbox.parentNode.parentNode.style.backgroundColor="lightgreen";
+				var checkbox=document.querySelector("table#selectStage #"+stage).checked=true
+				Configuration.activate(stage)
+
+				if(stage!="water" && stage!="waste")
+				{
+					var checkbox=document.querySelector("table#selectStage input[waterEff][alias="+stage+"]").checked=true
+					Configuration.activateWaterEff(stage)
+				}
 			});
-			init();
 		}
 	</script>
 </div>
@@ -189,7 +240,7 @@
 
 						//water efficiency
 						echo "<td style='text-align:center'>
-							<input type=checkbox>";
+							<input type=checkbox waterEff alias=$alias onchange=Configuration.activateWaterEff(this.getAttribute('alias'))>";
 
 						//sludge only in "wasteTre"
 						if($alias=="wasteTre")
@@ -252,5 +303,3 @@
 
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
-
-<script>Configuration.activateLevels()</script>

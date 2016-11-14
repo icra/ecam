@@ -51,6 +51,7 @@ var Global = {
 			"wsa_vol_fuel":0,
 			wsa_KPI_GHG_elec:function(){return this.wsa_nrg_cons*Global.General.conv_kwh_co2},
 			wsa_KPI_GHG_ne:function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.engines_in_water]; return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) } ,
+			wsa_KPI_GHG:function(){return this.wsa_KPI_GHG_elec()+this.wsa_KPI_GHG_ne()} ,
 			wsa_KPI_nrg_per_m3:function(){return this.wsa_nrg_cons/this.wsa_vol_conv},
 			wsa_KPI_nrg_recovery : function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
 			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_cons+this.wsa_nrg_turb)/this.c_wsa_vol_head()},
@@ -325,6 +326,14 @@ var Global = {
 			"wasteCol":0,
 			"wasteTre":0,
 			"wasteDis":0,
+			WaterEff:{
+				"waterAbs":0,
+				"waterTre":0,
+				"waterDis":0,
+				"wasteCol":0,
+				"wasteTre":0,
+				"wasteDis":0,
+			},
 		},
 		Assessment:{
 			Water:{
@@ -358,6 +367,7 @@ var Global = {
 
 		"Yes/No": //default questions with answer "yes". All questions are in "questions.js" (go there with gf)
 		{
+			water_conduction:1,
 			engines_in_water:1,
 			engines_in_waste:1,
 			truck_transport_waste:1,

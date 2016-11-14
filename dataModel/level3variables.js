@@ -13,6 +13,7 @@ Level3.list=
 		"wsa_KPI_un_head_loss",
 		"wsa_KPI_std_nrg_cons",
 		"wsa_KPI_std_elec_eff",
+		"wsa_KPI_water_losses",
 		"wsa_KPI_nrg_recovery",
 	//WST
 		"wst_tst_carr",

@@ -114,6 +114,7 @@ var Info = {
 	wsa_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km",},
 	wsa_KPI_GHG_elec:{magnitude:"Mass",unit:"kgCO2e",},
 	wsa_KPI_GHG_ne:{magnitude:"Mass",unit:"kgCO2e",},
+	wsa_KPI_GHG:{magnitude:"Mass",unit:"kgCO2e",},
 
 	//L2 Water Treatment
 	"wst_vol_trea":{magnitude:"Volume",unit:"m3",},

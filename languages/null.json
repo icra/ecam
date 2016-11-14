@@ -411,6 +411,8 @@
 	"#wsa_KPI_GHG_elec_expla":"#wsa_KPI_GHG_elec_expla",
 	"#wsa_KPI_GHG_ne_descr":"#wsa_KPI_GHG_ne_descr",
 	"#wsa_KPI_GHG_ne_expla":"#wsa_KPI_GHG_ne_expla",
+	"#wsa_KPI_GHG_descr":"#wsa_KPI_GHG_descr",
+	"#wsa_KPI_GHG_expla":"#wsa_KPI_GHG_expla",
 
 	"#wst_vol_trea_descr" :"#wst_vol_trea_descr",
 	"#wst_vol_trea_expla" :"#wst_vol_trea_expla",
