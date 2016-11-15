@@ -24,12 +24,12 @@ var Questions =
 
 	"pumping_for_abstraction":[
 		"wsa_nrg_cons",
-		"wsa_vol_pump",
 		"wsa_KPI_nrg_per_m3",
 		"wsa_KPI_GHG_elec",
 	],
 
 	"wsa_pumping_efficiency":[
+		"wsa_vol_pump",
 		"wsa_pmp_head",
 		"wsa_wat_loss",
 		"wsa_main_len",

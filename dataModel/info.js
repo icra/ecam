@@ -100,7 +100,7 @@ var Info = {
 	"wsa_vol_conv":{magnitude:"Volume",unit:"m3",},
 	"wsa_nrg_turb":{magnitude:"Energy",unit:"kWh",},
 	"wsa_vol_pump":{magnitude:"Volume",unit:"m3",},
-	"wsa_vol_fuel":{magnitude:"Volume",unit:"m3",},
+	"wsa_vol_fuel":{magnitude:"Volume",unit:"L",},
 	wsa_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m3",},
 	wsa_KPI_nrg_recovery:{magnitude:"Energy/Volume",unit:"kWh/m3",},
 	wsa_KPI_std_nrg_cons:{magnitude:"Energy",unit:"kWh/m3/100m",},

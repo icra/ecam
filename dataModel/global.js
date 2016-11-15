@@ -44,27 +44,30 @@ var Global = {
 		ws_SL_auc_emis : function(){return this.ws_KPI_GHG()-this.ws_SL_nrw_emis()},
 
 		"Abstraction":{
-			"wsa_nrg_cons":0,
+
 			"wsa_vol_conv":0,
-			"wsa_nrg_turb":0,
+			"wsa_nrg_cons":0,
 			"wsa_vol_pump":0,
+			"wsa_pmp_head":0,
+			"wsa_main_len":0,
+			"wsa_fri_loss":0,
+			"wsa_nrg_turb":0,
 			"wsa_vol_fuel":0,
+
 			wsa_KPI_GHG_elec:function(){return this.wsa_nrg_cons*Global.General.conv_kwh_co2},
 			wsa_KPI_GHG_ne:function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.engines_in_water]; return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) } ,
 			wsa_KPI_GHG:function(){return this.wsa_KPI_GHG_elec()+this.wsa_KPI_GHG_ne()} ,
 			wsa_KPI_nrg_per_m3:function(){return this.wsa_nrg_cons/this.wsa_vol_conv},
-			wsa_KPI_nrg_recovery : function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
-			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_cons+this.wsa_nrg_turb)/this.c_wsa_vol_head()},
 			/*<Level3>*/
-			"wsa_pmp_head":0,
 			"wsa_wat_loss":0,
-			"wsa_main_len":0,
-			"wsa_fri_loss":0,
-			c_wsa_vol_head:function(){return this.wsa_vol_pump*this.wsa_pmp_head/100},
+			wsa_KPI_nrg_recovery : function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
 			wsa_KPI_std_elec_eff:function(){return 0.2725/this.wsa_KPI_std_nrg_cons()},
 			wsa_KPI_water_losses:function(){return 1000*this.wsa_wat_loss/this.wsa_main_len},
 			wsa_KPI_un_head_loss:function(){return 1000*this.wsa_fri_loss/this.wsa_main_len},
+			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_cons+this.wsa_nrg_turb)/this.c_wsa_vol_head()},
 			/*</Level3>*/
+
+			c_wsa_vol_head:function(){return this.wsa_vol_pump*this.wsa_pmp_head/100},
 		},
 
 		"Treatment":{

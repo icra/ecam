@@ -4,13 +4,7 @@ var Level3={};
 
 Level3.list=
 [
-	//WSA
-		"wsa_wat_loss",
-		"wsa_KPI_un_head_loss",
-		"wsa_KPI_std_nrg_cons",
-		"wsa_KPI_std_elec_eff",
-		"wsa_KPI_water_losses",
-		"wsa_KPI_nrg_recovery",
+	//WSA (empty: replaced by filters (question) )
 	//WST
 		"wst_tst_carr",
 		"wst_tst_aest",

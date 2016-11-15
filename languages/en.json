@@ -164,7 +164,7 @@
 	"#stages_stage" : "Stage",
 	"#stages_num_of_substages" : "Nº of substages",
 	"#stages_type_of_assessment" : "Type of assessment",
-	"#level3_split_this_stage" : "Split the stage in substages",
+	"#level3_split_this_stage" : "Create substages inside the stage",
 	"#level3_new_substage" : "Add substage",
 	"#level3_results_kpis" : "OUTPUTS - Performance indicators",
 	"#level3_code" : "Code",

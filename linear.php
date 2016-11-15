@@ -120,8 +120,7 @@
 		//highlight current stage
 		//only if currently we are in edit.php or level3.php
 		if(strpos($_SERVER['PHP_SELF'],"edit.php") || strpos($_SERVER['PHP_SELF'],"level3.php"))
-		{ 
-			?>
+		{ ?>
 			(function()
 			{
 				//we need to find level and sublevel to create a stage name i.e. "waterAbs"
@@ -157,37 +156,23 @@
 						stage=false;
 						break;
 				}
-				if(stage)
-				{ 
-					document.querySelector('img[stage='+stage+']').classList.add('selected')
-				}
+				if(stage) { document.querySelector('img[stage='+stage+']').classList.add('selected') }
 			})();
 			<?php 
 		}
 		//hl birds if we are in birds eye view
 		if(strpos($_SERVER['PHP_SELF'],"birds.php"))
-		{
-			?>
-			document.querySelector('img[stage=birds]').classList.add('selected');
-			<?php
-		}
-		//hl birds if we are in birds eye view
+		{ ?>document.querySelector('img[stage=birds]').classList.add('selected');<?php }
+
+		//hl configuration if we are in configuration
 		if(strpos($_SERVER['PHP_SELF'],"configuration.php"))
-		{
-			?>
-			document.querySelector('img[stage=conf]').classList.add('selected');
-			<?php
-		}
+		{ ?>document.querySelector('img[stage=conf]').classList.add('selected');<?php }
 		//hl opps if we are in opps.php
 		if(strpos($_SERVER['PHP_SELF'],"opps.php"))
-		{
-			?>
-			document.querySelector('img[stage=opps]').classList.add('selected');
-			<?php
-		}
+		{ ?>document.querySelector('img[stage=opps]').classList.add('selected');<?php }
 	?>
 
-	//go over images to deactivate inactives --> do in PHP better?
+	//go over icon images to deactivate inactives --> do in PHP better?
 	(function()
 	{
 		var collection=document.querySelectorAll("#linearDiagram img[stage]");

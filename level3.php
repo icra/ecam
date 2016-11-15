@@ -186,7 +186,7 @@
 				//TOTAL header
 				var newTH = document.createElement('th');
 				t.rows[0].appendChild(newTH);
-				newTH.innerHTML="&sum; <?php write('#level3_TOTAL')?>";
+				newTH.innerHTML="&sum; Sum of substages";
 
 				//UNIT header
 				var newTH = document.createElement('th');
@@ -350,7 +350,7 @@
 					newCell=newRow.insertCell(-1);
 					newCell.style.textAlign='center';
 					var str=""+
-						"<button class=button onclick=deleteSubstage("+s+") title='<?php write('#level3_delete_substage')?>'>&#9003;</button>"
+						"<button class=button onclick=deleteSubstage("+s+") title='<?php write('#level3_delete_substage')?>' style='margin:0;'>&#9003;</button>"
 					newCell.innerHTML=str
 				}
 			/*end update body*/
@@ -570,7 +570,7 @@
 <div id=main>
 
 <!--SUBSTAGES TABLE-->
-<div class=card style=text-align:left><?php cardMenu("INPUTS - ".$lang_json['#level3_split_this_stage'])?>
+<div class=card style=text-align:left><?php cardMenu("INPUTS &mdash; ".$lang_json['#level3_split_this_stage'])?>
 	<table id=substages style="margin:0.5em"> 
 		<tr><td colspan=2 style="min-width:260px">
 			<!--substages counter-->
@@ -601,7 +601,7 @@
 		<button 
 			id=btn_toggle class=toggle 
 			onclick="event.stopPropagation();toggleGraph(event,this)">
-			VIEW GRAPHIC
+			VIEW GRAPH
 		</button>
 	</div>
 

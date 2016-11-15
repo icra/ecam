@@ -200,6 +200,7 @@
 					if(typeof(substages)=="object" && substages.length > 1)
 					{
 						//this means you are in level 2 and you should NOT be able to modify inputs here
+						newCell.style.textAlign="center"
 						newCell.title="<?php write('#variable_go_to_substages')?>";
 					}
 					else
@@ -814,7 +815,7 @@
 									</div>
 									<div style='margin-top:0.5em'>
 										<button 
-											style='font-size:18px;border-radius:0.3em;border:1px solid #aaa;box-shadow: 0 1px 2px rgba(0,0,0,.1);'
+											id=btn_goto_substages
 											onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
 												<img src=img/substage.png style='width:30px;margin-right:0.5em;vertical-align:middle'>
 												Edit
@@ -822,6 +823,16 @@
 										</button>
 									</div>";
 						?>
+						<style>
+							#btn_goto_substages {
+								background:#fafef1;
+								border-radius:0.3em;
+								border:1px solid #aaa;
+								box-shadow: 0 1px 2px rgba(0,0,0,.1);
+								font-size:18px;
+								width:100%;
+							}
+						</style>
 					</div>
 				</div><?php 
 			}
@@ -835,13 +846,10 @@
 				{
 					var t = document.querySelector('#questions');
 					while(t.rows.length>0)t.deleteRow(-1);
-
 					var questions = Questions.getQuestions(CurrentLevel);
 
-					if(questions.length==0)
-					{
-						t.parentNode.style.display="none" //hide whole table
-					}
+					//hide whole table if no questions
+					if(questions.length==0) t.parentNode.style.display="none" 
 
 					for(var q in questions)
 					{
@@ -858,8 +866,10 @@
 							}
 
 						var newRow = t.insertRow(-1);
-						newRow.onmouseover=function(){hlQuestionFields(q)}
-						newRow.title=question
+						newRow.style.background = currentAnswer ? "lightgreen" : ""
+						newRow.setAttribute('question',question)
+						newRow.onmouseover=function(){hlQuestionFields(this.getAttribute('question'),1)}
+						newRow.onmouseout=function(){hlQuestionFields(this.getAttribute('question'),0)}
 						newRow.insertCell(-1).innerHTML=translate(question)+"?";
 						newRow.insertCell(-1).innerHTML=(function()
 						{
@@ -873,13 +883,12 @@
 					}
 				}
 
-				function hlQuestionFields(question)
+				//highlight fields linked to the question
+				function hlQuestionFields(question,hl)
 				{
-					var fields=Questions[question];
+					var fields=Questions[question]; //array
 					for(var i in fields)
-					{
-						Formulas.hlField(fields[i],1)
-					}
+						Formulas.hlField(fields[i],hl)
 				}
 
 				function setQuestion(question,newValue)
@@ -889,6 +898,7 @@
 					else //if(confirm("WARNING! Inputs from this question will be reseted to zero. Continue?"))
 						Global.Configuration['Yes/No'][question]=0;
 					init()
+					hlQuestionFields(question,1)
 				}
 			</script>
 			<?php 
@@ -970,7 +980,7 @@
 								echo "<script>
 									if(Substages['$level']['$sublevel'].length>1)
 									{
-										document.write('Sum of all substages')
+										document.write('&sum; Sum of substages')
 									}
 									else
 									{
