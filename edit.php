@@ -1,18 +1,14 @@
 <?php
-	/* edit.php this page lets the user modify inputs and see automatically the outputs */
-
 	if(!isset($_GET['level'])){die("ERROR: stage not specified");}
-
 	/**
-	  * Process input:
-	  *  - $level: 	   mandatory {"Water","Waste","UWS"}
+	  * Inputs:
+	  *  - $level: 	   mandatory {"Water","Waste"}
 	  *  - $sublevel:  optional. If set, enables level 3 {"Abstraction","Treatment","Distribution",[...]}
 	  */
-
 	$level=$_GET['level'];
 	$sublevel=isset($_GET['sublevel']) ? $_GET['sublevel'] : false;
 
-	//if someone tries to go "General" (i.e. from variable.php?id=Days)
+	//if user tries to go "General" (i.e. from variable.php?id=Days)
 	if($level=="General") { header("Location: getStarted.php"); }
 ?>
 <!doctype html><html><head>
@@ -687,18 +683,8 @@
 		//depending on stage, draw different charts
 		function drawCharts()
 		{
-			<?php
-				if($sublevel || $level=="Energy")
-				{
-					//old L2
-					echo "Graphs.graph5(false,'graph');";
-				}
-				else
-				{
-					//old L1
-					echo "Graphs.graph4(false,'graph');";
-				}
-			?>
+			Graphs.graph4(false,'graph'); //GHG
+			//Graphs.graph5(false,'graph'); //Energy
 		}
 
 		function updateFuelSelection()
@@ -783,10 +769,7 @@
 	$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel</span>" : "<span style=color:black>$titleLevel</span>";
 ?>
 <style> h1 {text-align:left;padding-left:17em;line-height:2.1em;border-bottom:1px solid #ccc;background:white} </style>
-
-<h1><a href=stages.php><script>document.write(Global.General.Name)</script></a> <?php echo "$sep $title"?>
-	<!--go to level 3 button-->
-</h1></center>
+<h1><a href=stages.php><script>document.write(Global.General.Name)</script></a> <?php echo "$sep $title"?></h1></center>
 
 <!--main container-->
 <div>
@@ -818,7 +801,6 @@
 											id=btn_goto_substages
 											onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
 												<img src=img/substage.png style='width:30px;margin-right:0.5em;vertical-align:middle'>
-												Edit
 												".$lang_json['#substages']."	
 										</button>
 									</div>";
@@ -840,7 +822,7 @@
 		<!--questions-->
 		<div class="card inline">
 			<?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
-			<table style=margin:0.5em id=questions></table>
+			<table style=margin:0.5em id=questions class=inline></table>
 			<script>
 				function updateQuestionsTable()
 				{
@@ -866,8 +848,8 @@
 							}
 
 						var newRow = t.insertRow(-1);
-						newRow.style.background = currentAnswer ? "lightgreen" : ""
-						newRow.setAttribute('question',question)
+						newRow.style.background = currentAnswer ? "lightgreen" : "";
+						newRow.setAttribute('question',question);
 						newRow.onmouseover=function(){hlQuestionFields(this.getAttribute('question'),1)}
 						newRow.onmouseout=function(){hlQuestionFields(this.getAttribute('question'),0)}
 						newRow.insertCell(-1).innerHTML=translate(question)+"?";
@@ -947,12 +929,11 @@
 				function toggleGraph(event,thisB)
 				{
 					event.stopPropagation();
-					var graph=document.querySelector('#graphContainer')
-					var ioCon=document.querySelector('#ioContainer')
+					var graph=document.querySelector('#graph_container')
+					var ioCon=document.querySelector('#outputs_container')
 					if(graph.style.display=='none') {ioCon.style.display='none';graph.style.display='';thisB.style.background='#bce4d3'}
 					else                            {ioCon.style.display='';graph.style.display='none';thisB.style.background=''}
 					init()
-					graph.scrollIntoView()
 				}
 			</script>
 
@@ -994,22 +975,24 @@
 						<th><?php write('#edit_data_quality')?>
 				</table>
 			</div>
+
 			<!--Outputs-->
-			<div class=inline style="width:50%;margin-left:0.5em;margin-bottom:2em">
+			<div id=outputs_container class=inline style="width:50%;margin-left:0.5em;margin-bottom:2em">
 				<!--GHG-->
 				<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:0.5em;">
-					<tr><th colspan=7 class=tableHeader>OUTPUTS — <?php write('#edit_ghg_emissions')?> &mdash;
-					<!--show conv factor-->
-					<span>Conversion factor: 
-						<script>
-							(function(){
-								var c = Global.General.conv_kwh_co2;
-								var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+"</span>" : format(c); 
-								document.write(str)
-							})();
-						</script> 
-						kg CO<sub>2</sub>/kWh
-					</span>
+					<tr><th colspan=7 class=tableHeader>
+						OUTPUTS — <?php write('#edit_ghg_emissions')?> &mdash;
+						<!--show conv factor-->
+						<span>Conversion factor: 
+							<script>
+								(function(){
+									var c = Global.General.conv_kwh_co2;
+									var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+"</span>" : format(c); 
+									document.write(str)
+								})();
+							</script> 
+							kg CO<sub>2</sub>/kWh
+						</span>
 					<tr>
 						<th style=width:10%><?php write('#edit_origin')?>
 						<th style=width:17%>Kg CO<sub>2</sub> during the assessment period
@@ -1021,7 +1004,7 @@
 
 				<!--energy performance-->
 				<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
-					<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#energy_performance')?>
+					<tr><th colspan=4 class=tableHeader>OUTPUTS — Energy performance
 					<tr>
 						<!--
 						<th title=Performance style=cursor:help><?php write('#edit_benchmark')?>
@@ -1040,21 +1023,23 @@
 						<th><?php write('#edit_unit')?>
 				</table>
 			</div>
-		</div>
-
-		<!--GRAPHS-->
-		<div id=graphContainer style=display:none>
-			<div id=graph><?php write('#loading')?></div>
-			<script>
-				google.charts.load('current',{'packages':['corechart']});
-				google.charts.setOnLoadCallback(drawCharts);
-			</script>
-			<style>
-				#graph div.options{padding:1em}
-				#graph button {margin:0.2em}
-				#graph {text-align:center}
-				#graph * {margin:auto}
-			</style>
+			<!--GRAPHS-->
+			<div id=graph_container class=inline style="display:none;width:50%;margin-left:0.5em;margin-bottom:2em">
+				<!--choose graph type buttons-->
+				<?php include'buttonsGraphType.php'?>
+				<!--actual graph-->
+				<div id=graph><?php write('#loading')?></div>
+				<script>
+					google.charts.load('current',{'packages':['corechart']});
+					google.charts.setOnLoadCallback(drawCharts);
+				</script>
+				<style>
+					#graph div.options{padding:1em}
+					#graph button {margin:0.2em}
+					#graph {text-align:center}
+					#graph * {margin:auto}
+				</style>
+			</div>
 		</div>
 	</div>
 
@@ -1062,7 +1047,7 @@
 	<div class=card>
 		<?php cardMenu("Opportunities")?>
 		<div style=padding:1em>
-		In development
+		under development
 		</div>
 	</div>
 </div>

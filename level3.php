@@ -610,6 +610,10 @@
 
 	<!--graphs-->
 	<div id=graphContainer style=display:none>
+		<!--choose graph type buttons-->
+		<?php include'buttonsGraphType.php'?>
+
+		<!--actual graph-->
 		<div id=graph>Loading...</div>
 		<style>
 			#graph div.options{padding:1em}
@@ -630,7 +634,7 @@
 
 <!--opportunities-->
 <div class=card><?php cardMenu("Opportunities")?>
-	<div style=padding:0.5em>In development</div>
+	<div style=padding:0.5em>under development</div>
 </div>
 
 </div>
