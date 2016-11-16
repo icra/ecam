@@ -20,7 +20,7 @@
 		</h1>
 
 		<!--DEVELOPMENT-->
-		<div id=commits style="padding:0"> 
+		<div id=commits style="display:none;padding:0"> 
 			<button onclick="document.querySelector('#commits').style.display='none'">Hide</button>
 			<b>Development log &mdash; All code commits (
 				<?php 
