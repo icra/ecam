@@ -20,6 +20,29 @@
 			<span style=color:#bf5050>Development version (towards v2.0)</span>
 		</h1>
 
+		<!--DEVELOPMENT-->
+		<div id=commits style="padding:0"> 
+			<button onclick="document.querySelector('#commits').style.display='none'">Hide</button>
+			<b>Development log &mdash; Last commits: </b>
+			<div style="height:150px;overflow-y:auto;padding:0">
+			<table>
+				<style>
+					#commits table * {padding:0;font-family:monospace;font-size:11px}
+				</style>
+			<?php 
+				//show git commit hash code
+				$command="git log --pretty=format:'<tr><td><b>%h</b><td>%ad<td>%s'";
+				exec($command,$lines);
+				foreach($lines as $line)
+				{
+					$line=preg_replace("/\+0[0-2]00/",'',$line); //hide GMT zone +1 +2, etc stuff
+					echo $line;
+				}
+			?>
+			</table>
+			</div>
+		</div>
+
 		<!--DESCRIPTION--><div style="color:#58595b;font-size:18px;text-align:left">
 			<?php write('#index_description')?>
 		</div>
@@ -45,6 +68,7 @@
 		</ul>
 	</div>
 </div>
+
 
 <!--FOOTER--><?php include'footer.php'?>
 <!--LOGOS--> <div style=background:white;text-align:center> <!--giz--><img src=img/giz.png> </div>
