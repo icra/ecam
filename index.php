@@ -4,7 +4,6 @@
 </head><body onload=init() style=background:#bce3f8>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--navbar--><?php include"navbar.php"?>
-
 <!--main-->
 <div id=main> 
 	<div id=content>
@@ -73,7 +72,6 @@
 		</ul>
 	</div>
 </div>
-
 
 <!--FOOTER--><?php include'footer.php'?>
 <!--LOGOS--> <div style=background:white;text-align:center> <!--giz--><img src=img/giz.png> </div>
