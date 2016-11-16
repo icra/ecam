@@ -21,6 +21,9 @@
 
 		table#inputs tr:hover  {background:#ccc;}
 
+		/*temporal: data qualith column*/
+		table#inputs tr *:nth-child(n+4) {background:red;display:none}
+
 		table#outputs tr:hover {background:#ccc;}
 		table#outputs th:not(.tableHeader) {background:#c9ab98}
 		table#outputs th:nth-child(n+2) {text-align:right}
@@ -920,10 +923,8 @@
 
 	<!--i/o-->
 	<div class=card>
-		<div class=menu onclick=this.parentNode.classList.toggle('folded')>
-			<button></button>
+		<div class=menu onclick=this.parentNode.classList.toggle('folded')><button></button>
 			Inputs &amp; Outputs
-
 			<!--button toggle outputs/graph display-->
 			<script>
 				function toggleGraph(event,thisB)
@@ -936,7 +937,6 @@
 					init()
 				}
 			</script>
-
 			<button 
 				id=btn_toggle class=toggle 
 				onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleGraph(event,this)">
@@ -947,8 +947,7 @@
 		<!--Input Output-->
 		<div id=ioContainer>
 			<!--Inputs-->
-			<div 
-				class=inline 
+			<div class=inline 
 				style="width:45%;margin-left:0.5em;<?php if($level=="Energy") echo "display:none;"?>">
 				<table id=inputs style="width:100%;margin-bottom:0.5em">
 					<tr><th colspan=5 class=tableHeader>INPUTS
@@ -1023,6 +1022,7 @@
 						<th><?php write('#edit_unit')?>
 				</table>
 			</div>
+
 			<!--GRAPHS-->
 			<div id=graph_container class=inline style="display:none;width:50%;margin-left:0.5em;margin-bottom:2em">
 				<!--choose graph type buttons-->
