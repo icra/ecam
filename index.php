@@ -23,7 +23,12 @@
 		<!--DEVELOPMENT-->
 		<div id=commits style="padding:0"> 
 			<button onclick="document.querySelector('#commits').style.display='none'">Hide</button>
-			<b>Development log &mdash; Last commits: </b>
+			<b>Development log &mdash; All code commits (
+				<?php 
+					$n=shell_exec("git log --oneline|wc -l");
+					echo "$n";
+				?>
+				): </b>
 			<div style="height:150px;overflow-y:auto;padding:0">
 			<table>
 				<style>
