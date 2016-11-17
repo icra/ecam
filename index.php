@@ -1,9 +1,9 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
-	<script> function init() { updateResult() } </script>
+	<script>function init(){updateResult()}</script>
 </head><body onload=init() style=background:#bce3f8>
 <!--sidebar--><?php include'sidebar.php'?>
-<!--navbar--><?php include"navbar.php"?>
+<!--navbar--><?php include'navbar.php'?>
 <!--main-->
 <div id=main> 
 	<div id=content>
