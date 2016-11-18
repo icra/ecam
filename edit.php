@@ -21,8 +21,9 @@
 
 		table#inputs tr:hover  {background:#ccc;}
 
-		/*temporal: data qualith column*/
-		table#inputs tr *:nth-child(n+4) {background:red;display:none}
+		/*temporal: hide data quality column*/
+		table#inputs tr td:nth-child(n+4) {background:red;display:none}
+    table#inputs tr th:nth-child(n+4) {background:red;display:none}
 
 		table#outputs tr:hover {background:#ccc;}
 		table#outputs th:not(.tableHeader) {background:#c9ab98}
@@ -742,7 +743,7 @@
 			Exceptions.apply()
 			updateFuelSelection()
 			try{drawCharts()}
-			catch(e){console.log(e)}
+			catch(e){/*console.log(e)*/}
 			updateResult()
 		}
 	</script>
@@ -786,18 +787,14 @@
 							<script>document.write(Substages['$level']['$sublevel'].length)</script>")?>
 					<div style=padding:1.5em>
 						<?php
+                //re do this part outside the echo function better TODO
 								echo "
 									<div>
-										In this page you can input the general info about 
+										In this page you input general info about the
 										<script>
 											document.write(translate('$sublevel'))
-										</script>.<br>
-
-										<b>If you have multiple 
-										<script>
-											document.write(translate('$sublevel'))
-										</script>
-										facilities, please go to:</b>
+										</script> stage.<br>
+										If you have multiple facilities please go to:
 									</div>
 									<div style='margin-top:0.5em'>
 										<button 
@@ -932,8 +929,19 @@
 					event.stopPropagation();
 					var graph=document.querySelector('#graph_container')
 					var ioCon=document.querySelector('#outputs_container')
-					if(graph.style.display=='none') {ioCon.style.display='none';graph.style.display='';thisB.style.background='#bce4d3'}
-					else                            {ioCon.style.display='';graph.style.display='none';thisB.style.background=''}
+					if(graph.style.display=='none') 
+          {
+            ioCon.style.display='none';
+            graph.style.display='';
+            thisB.classList.add('active');
+
+          }
+					else
+          {
+            ioCon.style.display='';
+            graph.style.display='none';
+            thisB.classList.remove('active');
+          }
 					init()
 				}
 			</script>

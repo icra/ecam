@@ -542,7 +542,7 @@
 			updateOutputs();
 			Sidebar.update();
 			updateResult();
-			try{drawCharts()}catch(e){console.log(e)}
+      try{drawCharts()}catch(e){/*console.log(e)*/}
 		}
 	</script>
 </head><body onload=init() style="background:#F5ECCE"><center>
@@ -593,8 +593,15 @@
 				event.stopPropagation();
 				var graph=document.querySelector('#graphContainer')
 				var ioCon=document.querySelector('#outputs')
-				if(graph.style.display=='none'){ioCon.style.display='none';graph.style.display='';thisB.style.background='#bce4d3'}
-				else                           {ioCon.style.display='';graph.style.display='none';thisB.style.background=''}
+				if(graph.style.display=='none')
+        {
+          ioCon.style.display='none';graph.style.display='';
+          thisB.classList.add('active');
+        }
+				else{
+          ioCon.style.display='';graph.style.display='none';
+          thisB.classList.remove('active');
+        }
 				init()
 			}
 		</script>

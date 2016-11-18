@@ -11,13 +11,13 @@ var Tables =
 	/** Technologies for wst and wwt (table not used right now). I was told that this will be used for benchmarking */
 	"Technologies":{
 		"Water":{
-			"None":{},
-			"Pre-ox/C/F/S/Filt/Des":{},
-			"Pre-ox/C/F/Filt/Des":{},
-			"C/F/S/Filt/Des":{},
-			"C/F/Filt/Des":{},
-			"Des":{},
-			"Other":{},
+			"None":{value:0,},
+			"Pre-ox/C/F/S/Filt/Des":{value:1,},
+			"Pre-ox/C/F/Filt/Des":{value:2,},
+			"C/F/S/Filt/Des":{value:3,},
+			"C/F/Filt/Des":{value:4,},
+			"Des":{value:5,},
+			"Other":{value:6,},
 		},
 		"Waste":{
 			"None":{},

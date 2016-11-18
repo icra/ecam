@@ -244,24 +244,6 @@
 					<td class=input><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/<?php write('#birds_year')?>
 					<span class=circle style=background:#451c2e></span>
 
-				<tr stage=waste class=hidden><td>WW Treatment
-					<td colspan=2>
-					<select id=ww_treatment onchange="Global.Configuration.Selected.ww_treatment=this.value;init(true)"></select>
-					<script>
-						(function(){
-							var select=document.querySelector("#ww_treatment")
-							for(var tec in Tables.Technologies.Waste)
-							{
-								var option=document.createElement('option')
-								select.appendChild(option)
-								option.value=tec
-								option.innerHTML=tec
-								if(Global.Configuration.Selected.ww_treatment==tec)
-									option.selected=true
-							}
-						})()
-					</script>
-
 				<tr stage=waste class=hidden><td>
 					<?php write("#producing_biogas")?>?
 					<td>

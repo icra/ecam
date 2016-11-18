@@ -64,7 +64,7 @@
 	"#index_description":"ECAM es una herramienta para la evaluación y monitoreo del desempeño energético y las emisiones de carbono para empresas de servicios de agua y saneamiento.<br>ECAM es parte de la plataforma de conocimiento proporcionada por el <a target=_blank href='http://www.iwa-network.org/WaCCliM/'>proyecto WaCCliM</a>. Esta herramienta es gratuita y de código abierto.",
 	"#index_chrome_warning":"Por favor, utiliza el explorador Google Chrome.",
 	"#index_latest_update":"Última actualización",
-	"#about_credits":"",
+	"#about_credits":" ",
 	"#about_graphs_lib":"Biblioteca para gráficos utilizada",
 	"#about_license":"Licencia",
 	"#license_license":"Copyright 2016 IWA<br><br>Autorizado en virtud de la Licencia de Apache, Versión 2.0 (la 'Licencia');<br>se prohíbe utilizar este archivo, excepto en cumplimiento con la Licencia.<br>Puede obtener una copia de la Licencia en:<br><br>&emsp;&emsp;http://www.apache.org/licenses/LICENSE-2.0<br><br>A menos que lo exijan las leyes pertinentes o se haya establecido por escrito,<br>el software distribuido bajo la Licencia se distribuye “TAL CUAL”,<br>SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.<br>Véase la Licencia para consultar el texto específico relativo a los permisos<br>y limitaciones establecidos en la Licencia.",
@@ -191,7 +191,6 @@
 
 	"#engines_in_water":"¿Tiene grupo electrógeno para bombas (Suministro de agua)",
 	"#engines_in_waste":"¿Tiene grupo electrógeno para bombas (Aguas residuales)",
-	"#producing_energy_waterAbs":"¿Produce energía en la etapa de captación",
 	"#topographic_energy":"¿Quiere investigar la energía topográfica (avanzado)",
 	"#truck_transport_waste":"¿Usa transporte en camiones para llevar los lodos al sitio de disposición",
 	"#producing_biogas":"¿Está produciendo biogás",
@@ -376,6 +375,8 @@
 	"#wsa_KPI_GHG_ne_expla":"Motores de combustible",
 	"#wsa_KPI_GHG_descr":"Total GEI Captación",
 	"#wsa_KPI_GHG_expla":"Total GEI Captación",
+  "#wsa_nrg_per_pmp_watr_descr":"Energía consumida por m3 de agua bombeada",
+  "#wsa_nrg_per_pmp_watr_expla":"Energía consumida por m3 de agua bombeada",
 
 	"#wst_vol_trea_descr":"Volumen de agua tratada",
 	"#wst_vol_trea_expla":"Suma del volumen de agua tratada por ETAs que son responsabilidad de la empresa de agua, durante el plazo de evaluación",
@@ -405,6 +406,11 @@
 	"#wst_KPI_capac_util_expla":"Porcentaje de la capacidad de tratamiento utilizado",
 	"#wst_SL_qual_com_descr"   :"Porcentaje de cumplimiento de la calidad",
 	"#wst_SL_qual_com_expla"   :"Porcentaje de la cantidad total de las pruebas de agua tratados realiza que cumplan con",
+  "#wst_treatmen_descr":"Tecnología seleccionada para tratamiento",
+  "#wst_treatmen_expla":"Tecnología seleccionada para tratamiento",
+  "#wst_KPI_GHG_descr":"Total GEI Tratamiento",
+  "#wst_KPI_GHG_expla":"Total GEI Tratamiento",
+
 	"#wsd_nrg_cons_descr":"Electricidad consumida de la red",
 	"#wsd_nrg_cons_expla":"Consumo de energía eléctrica que incluye tanto de la red y de producción propia, para la distribución de agua durante todo el período de evaluación",
 	"#wsd_vol_dist_descr":"Volumen de agua inyectada a la distribución",
@@ -463,6 +469,9 @@
 	"#wsd_KPI_water_losses_expla":"Pérdidas totales de agua (aparentes y reales), expresados en términos de volumen anual perdidas por longitud de red",
 	"#wsd_KPI_un_head_loss_descr":"Pérdida de carga Unidad",
 	"#wsd_KPI_un_head_loss_expla":"Pérdida por fricción Unidad de energía en el sistema de transporte",
+  "#wsd_KPI_GHG_descr":"Total GEI Distribución",
+  "#wsd_KPI_GHG_expla":"Total GEI Distribución",
+
 	"#wwc_vol_conv_descr"        :"Volumen de aguas residuales transmitido al tratamiento o a un emisario para la descarga sin tratamiento",
 	"#wwc_vol_conv_expla"        :"Aguas residuales recolectadas, que corresponde al volumen de los productos domésticos, comerciales e industriales a la red de alcantarillado que llega a la planta de tratamiento o un emisario durante el período de evaluación (bombeado o no). A nivel sub-etapa, si se bombea el volumen, sólo se entrar en esta línea si se está bombeando directamente a la planta o la descarga. en caso de bombeo de múltiples etapas no incluyen el volumen en esta línea ",
 	"#wwc_nrg_cons_descr"        :"Electricidad consumida de la red",

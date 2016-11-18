@@ -15,14 +15,13 @@ var Exceptions =
 	{
 		this.ww13();
 		this.ww_ch4_efac();
+    this.wst_treatmen();
 	},
 
 	//make ww13 selection (which is inside its description) stay selected
 	ww13:function()
 	{
 		var select = document.createElement('select')
-		var td = document.querySelector('tr[field=ww_prot_con] td')
-		if(td)td.appendChild(select)
 		select.id="ww13options"
 		select.onchange=function()
 		{
@@ -30,6 +29,7 @@ var Exceptions =
 			Global.Configuration.Selected.Country_protein=select.options[select.options.selectedIndex].getAttribute('country')
 			init()
 		}
+
 		//in kg/person/year
 		var ww_prot_con = {
 			"Albania":36.135,
@@ -227,16 +227,56 @@ var Exceptions =
 				option.selected='true';
 			}
 		}
+
+    //put the name of the selected technology instead of the number
+    var td=document.querySelector('tr[field=ww_prot_con] td')
+    if(!td)return
+    td.appendChild(select)
 	},
 
+  wst_treatmen:function()
+  {
+    var select = document.createElement('select')
+    var td = document.querySelector('tr[field=wst_treatmen] td')
+
+    if(!td){ return }
+
+    select.id="wst_treatmen"
+    select.onchange=function()
+    {
+      Global.Water.Treatment.wst_treatmen=parseInt(select.value)
+      init()
+    }
+
+    var options = Tables.Technologies.Water;
+
+    for(var op in options)
+    {
+      var option = document.createElement('option');
+      var value = parseInt(options[op].value);
+      select.appendChild(option);
+      option.value=value
+      option.innerHTML=op+" ("+value+")"
+      if(Global.Water.Treatment.wst_treatmen==value) 
+      {
+        option.selected=true;
+      }
+    }
+
+    //put the select menu on the description
+    (function(){
+      var td=document.querySelector('tr[field=wst_treatmen] td.input')
+      if(!td)return
+      td.onclick=function(){} //replace onclick listener
+      td.innerHTML=""
+      td.appendChild(select)
+    })();
+  },
+
+  //emision factor (kg CH4 per kg BOD)
 	ww_ch4_efac:function()
 	{
 		var select = document.createElement('select')
-		var td = document.querySelector('tr[field=ww_ch4_efac] td')
-		if(td){
-			td.appendChild(document.createElement('br'))
-			td.appendChild(select)
-		}
 		select.id="ww_ch4_efac_options"
 		select.onchange=function()
 		{
@@ -259,5 +299,10 @@ var Exceptions =
 			if(Global.Waste.ww_ch4_efac==value)
 				option.selected=true
 		}
+
+    var td = document.querySelector('tr[field=ww_ch4_efac] td')
+    if(!td)return;
+    td.appendChild(document.createElement('br'));
+    td.appendChild(select);
 	},
 }

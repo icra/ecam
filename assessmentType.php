@@ -2,8 +2,7 @@
 <table class=inline style="font-size:13px;float:right;
 	box-shadow: 0 1px 2px rgba(0,0,0,.1);
 	"><tr>
-	<th><?php write('#assessment_type')?><td>
-
+	<th><?php write('#assessment_type')?> (this option is being replaced gradually by filters)<td>
 	<label>
 		<input name=assessment type=radio 
 			value=simple   

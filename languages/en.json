@@ -191,7 +191,6 @@
 
 	"#engines_in_water":"Do you have fuel engines for pumps (Water supply)",
 	"#engines_in_waste":"Do you have fuel engines for pumps (Wastewater)",
-	"#producing_energy_waterAbs":"Are you producing energy in abstraction stage",
 	"#topographic_energy":"Do you want to investigate topographic energy (advanced)",
 	"#truck_transport_waste":"Are you using truck transport to convey sludge to disposal site",
 	"#producing_biogas":"Are you producing biogas",
@@ -378,6 +377,8 @@
 	"#wsa_KPI_GHG_ne_expla":"Fuel engines",
 	"#wsa_KPI_GHG_descr":"Total GHG Abstraction",
 	"#wsa_KPI_GHG_expla":"Total GHG Abstraction",
+  "#wsa_nrg_per_pmp_watr_descr":"Energy consumed per m3 of pumped water",
+  "#wsa_nrg_per_pmp_watr_expla":"Energy consumed per m3 of pumped water",
 
 	"#wst_vol_trea_descr":"Volume of treated water",
 	"#wst_vol_trea_expla":"Sum of the volume of water treated by WTPs that are the responsibility of the water undertaking, during the assessment period",
@@ -407,6 +408,11 @@
 	"#wst_KPI_capac_util_expla":"Percentage of treatment capacity utilized",
 	"#wst_SL_qual_com_descr":"Percentage of quality compliance",
 	"#wst_SL_qual_com_expla":"Percentage of the total number of treated water tests performed that comply with",
+  "#wst_treatmen_descr":"Selected technology for treatment",
+  "#wst_treatmen_expla":"Selected technology for treatment",
+  "#wst_KPI_GHG_descr":"Total GHG Water Treatment",
+  "#wst_KPI_GHG_expla":"Total GHG Water Treatment",
+
 	"#wsd_nrg_cons_descr":"Energy consumed from the grid",
 	"#wsd_nrg_cons_expla":"Electric energy consumption including both from the grid and self-produced, for water distribution during the entire assessment period",
 	"#wsd_vol_dist_descr":"Volume of water injected to distribution",
@@ -465,6 +471,9 @@
 	"#wsd_KPI_water_losses_expla":"Total water losses (apparent and real), expressed in terms of annual volume lost per mains length",
 	"#wsd_KPI_un_head_loss_descr":"Unit head loss",
 	"#wsd_KPI_un_head_loss_expla":"Unit energy friction loss in the conveyance system ",
+  "#wsd_KPI_GHG_descr":"Total GHG Water Distribution",
+  "#wsd_KPI_GHG_expla":"Total GHG Water Distribution",
+
 	"#wwc_vol_conv_descr":"Volume of wastewater conveyed to treatment or to an outfall for untreated discharge",
 	"#wwc_vol_conv_expla":"Collected wastewater, corresponding to the volume of domestic, commercial and industrial outputs to the sewer system which reaches the treatment plant or an outfall during the assessment period (pumped or not). At sub-stage level, if the volume is pumped, only enter in this line if it is pumping directly to the plant or the discharge. In case of multiple stage pumping do not include the volume in this line.",
 	"#wwc_nrg_cons_descr":"Energy consumed from the grid",

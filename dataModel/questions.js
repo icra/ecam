@@ -39,6 +39,7 @@ var Questions =
 		"wsa_KPI_un_head_loss",
 		"wsa_KPI_std_nrg_cons",
 		"wsa_KPI_std_elec_eff",
+    "wsa_nrg_per_pmp_watr",
 	],
 
 	"engines_in_water":[
@@ -50,11 +51,6 @@ var Questions =
 		"ww_vol_fuel",
 		"c_ww_nrg_engines",
 		"ww_KPI_GHG_ne_engines",
-	],
-
-	"producing_energy_waterAbs":[
-		"wsa_nrg_turb",
-		"wsa_KPI_nrg_recovery",
 	],
 
 	"engines_in_waterAbs":[

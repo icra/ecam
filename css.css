@@ -21,7 +21,7 @@ th{font-weight:normal;background:#00adef;color:white;vertical-align:middle}
 hr{display:block;height:1px;border:0;margin:0;padding:0;}
 
 /*highlight inputs when mouse goes over a row that has a formula*/
-tr{transition:all 0.2s linear}
+tr{transition:all 0.1s linear}
 tr[hl=yes]{background:yellow;color:black}
 tr[hl=no]{background:default}
 tr[hl_output=yes]{background:blue;color:white}
@@ -182,4 +182,8 @@ span.circle {
 		background:none;
 		outline:none;
 	}
+  .card .menu button.toggle.active { 
+    background:#bce4d3;
+    box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05);
+  }
 /*end cards*/
