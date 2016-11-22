@@ -21,9 +21,10 @@
 
 		table#inputs tr:hover  {background:#ccc;}
 
-		/*temporal: hide data quality column*/
+		/*temporal: hide data quality column
 		table#inputs tr td:nth-child(n+4) {background:red;display:none}
-    table#inputs tr th:nth-child(n+4) {background:red;display:none}
+        table#inputs tr th:nth-child(n+4) {background:red;display:none}
+        */
 
 		table#outputs tr:hover {background:#ccc;}
 		table#outputs th:not(.tableHeader) {background:#c9ab98}
@@ -262,7 +263,9 @@
 						return str
 					}
 				})();
+
 				//data quality
+				/*
 				newRow.insertCell(-1).innerHTML=(function()
 				{
 					if(isCV) { return "Calculated" }
@@ -284,6 +287,7 @@
 						return select.outerHTML;
 					}
 				})();
+				*/
 			}
 
 			//here check if table is empty (==t.rows.length is 2)
@@ -979,7 +983,9 @@
 							}
 							else write('#edit_current_value')?>
 						<th><?php write('#edit_unit')?>
+						<!--
 						<th><?php write('#edit_data_quality')?>
+						-->
 				</table>
 			</div>
 

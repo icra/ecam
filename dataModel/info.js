@@ -119,6 +119,7 @@ var Info = {
 
 	//L2 Water Treatment
 	"wst_vol_trea":{magnitude:"Volume",unit:"m3",},
+	"wst_vol_fuel":{magnitude:"Volume",unit:"L",},
 	"wst_nrg_cons":{magnitude:"Energy",unit:"kWh",},
 	"wst_tst_carr":{magnitude:"Number",unit:"number",},
 	"wst_tst_aest":{magnitude:"Number",unit:"number",},
@@ -127,7 +128,7 @@ var Info = {
 	"wst_tst_radi":{magnitude:"Number",unit:"number",},
 	"wst_mass_slu":{magnitude:"Mass",unit:"kg",},
 	"wst_trea_cap":{magnitude:"Volume",unit:"m3",},
-  "wst_treatmen":{magnitude:"Technology",unit:"Technology",},
+	"wst_treatmen":{magnitude:"Technology",unit:"Technology",},
 	"wst_t_PCFSFD":{magnitude:"Volume",unit:"m3",},	
 	wst_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>",},
 	wst_KPI_slu_per_m3:{magnitude:"Mass/Volume",unit:"kg/m<sup>3</sup>",},

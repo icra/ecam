@@ -6,6 +6,7 @@ Level3.list=
 [
 	//WSA (empty: replaced by filters (question) )
 	//WST
+		"wst_treatmen",
 		"wst_tst_carr",
 		"wst_tst_aest",
 		"wst_tst_micr",

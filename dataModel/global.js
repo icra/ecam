@@ -58,7 +58,7 @@ var Global = {
 			wsa_KPI_GHG_elec:function(){return this.wsa_nrg_cons*Global.General.conv_kwh_co2},
 			wsa_KPI_GHG_ne:function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.engines_in_water]; return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) } ,
 			wsa_KPI_GHG:function(){return this.wsa_KPI_GHG_elec()+this.wsa_KPI_GHG_ne()} ,
-      wsa_nrg_per_pmp_watr:function(){return this.wsa_nrg_cons/this.wsa_vol_pump},
+			wsa_nrg_per_pmp_watr:function(){return this.wsa_nrg_cons/this.wsa_vol_pump},
 			wsa_KPI_nrg_per_m3:function(){return this.wsa_nrg_cons/this.wsa_vol_conv},
 			wsa_KPI_nrg_recovery : function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
 			wsa_KPI_std_elec_eff:function(){return 0.2725/this.wsa_KPI_std_nrg_cons()},
@@ -71,6 +71,7 @@ var Global = {
 		"Treatment":{
 			"wst_nrg_cons":0,
 			"wst_vol_trea":0,
+			"wst_vol_fuel":0,
 			wst_KPI_nrg_per_m3 : function(){return this.wst_nrg_cons/this.wst_vol_trea},
 			wst_KPI_slu_per_m3 : function(){return this.wst_mass_slu/this.wst_vol_trea},
 			wst_KPI_capac_util : function(){return 100*this.wst_vol_trea/this.wst_trea_cap},
@@ -82,10 +83,13 @@ var Global = {
 			"wst_mass_slu":0,
 			"wst_trea_cap":0, 
 			"wst_vol_trea":0,
-      "wst_treatmen":0, //dropdown exception, not a number
+			"wst_treatmen":0, //dropdown exception, not a number
 			"wst_t_PCFSFD":0,
-			wst_SL_qual_com :function(){return 100*(this.wst_tst_aest+this.wst_tst_micr+this.wst_tst_phch+this.wst_tst_radi)/this.wst_tst_carr},
-      wst_KPI_GHG:function(){return this.wst_nrg_cons*Global.General.conv_kwh_co2},
+			wst_SL_qual_com:function(){return 100*(this.wst_tst_aest+this.wst_tst_micr+this.wst_tst_phch+this.wst_tst_radi)/this.wst_tst_carr},
+			wst_KPI_GHG_elec:function(){return this.wst_nrg_cons*Global.General.conv_kwh_co2},
+			wst_KPI_GHG_slud:function(){return 0},
+			wst_KPI_GHG_fuel:function(){return 0},
+			wst_KPI_GHG:function(){return this.wst_KPI_GHG_elec()+this.wst_KPI_GHG_slud()+this.wst_KPI_GHG_fuel()},
 		},
 
 		"Distribution":{
