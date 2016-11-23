@@ -198,7 +198,16 @@
 	"#pumping_for_abstraction":"Do you have pumping for water abstraction",
 	"#pumping_for_distribution":"Do you pump directly to the distribution system",
 	"#engines_in_waterAbs":"Do you have fuel engines",
+
+	"#wsa_engines":"Do you have fuel engines",
+	"#wst_engines":"Do you have fuel engines",
+	"#wsd_engines":"Do you have fuel engines",
+	"#wwc_engines":"Do you have fuel engines",
+	"#wwt_engines":"Do you have fuel engines",
+	"#wwd_engines":"Do you have fuel engines",
 	"#wsa_pumping_efficiency":"Do you want to study pump efficiency",
+	"#wst_pumping_efficiency":"Do you want to study pump efficiency",
+	"#wst_chlorinate":"Do you chlorinate",
 
 	"#Days_descr"        :"Assessment period",
 	"#Days_expla"        :"Period of time adopted for the assessment of the data and of the PI",
@@ -377,8 +386,10 @@
 	"#wsa_KPI_GHG_ne_expla":"Fuel engines",
 	"#wsa_KPI_GHG_descr":"Total GHG Abstraction",
 	"#wsa_KPI_GHG_expla":"Total GHG Abstraction",
-	"#wsa_nrg_per_pmp_watr_descr":"Energy consumed per m3 of pumped water",
-	"#wsa_nrg_per_pmp_watr_expla":"Energy consumed per m3 of pumped water",
+	"#wsa_nrg_per_pmp_watr_descr":"Energy consumed per pumped water",
+	"#wsa_nrg_per_pmp_watr_expla":"Energy consumed per pumped water",
+	"#wsa_SL_water_losses_descr":"Losses in conduction system",
+	"#wsa_SL_water_losses_expla":"Losses in conduction system",
 
 	"#wst_vol_trea_descr":"Volume of treated water",
 	"#wst_vol_trea_expla":"Sum of the volume of water treated by WTPs that are the responsibility of the water undertaking, during the assessment period",
@@ -412,7 +423,6 @@
 	"#wst_treatmen_expla":"Selected technology for treatment",
 	"#wst_vol_fuel_descr":"Volume of fuel consumed",
 	"#wst_vol_fuel_expla":"Volume of fuel consumed",
-
 	"#wst_KPI_GHG_descr":"Total GHG Water Treatment",
 	"#wst_KPI_GHG_expla":"Total GHG Water Treatment",
 	"#wst_KPI_GHG_elec_descr":"From electricity",

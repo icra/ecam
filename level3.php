@@ -233,6 +233,9 @@
 						if(Level3.list.indexOf(code)>-1) continue;
 					}
 
+					//if is an option, continue (will show at the end of the table)
+					if(Info[code].magnitude=="Option") continue;
+
 					/*new row*/
 					var newRow=t.insertRow(-1);
 					newRow.setAttribute('field',code);
@@ -339,6 +342,51 @@
 						str+="</select>"
 						return str
 					})();
+				}
+
+				//go over inputs "magnitude==option"
+				for(var input in inputs)
+				{
+					/*variable code*/
+					var code=inputs[input];
+					console.log(code)
+					
+					//if is an option, continue (will show at the end of the table)
+					if(Info[code].magnitude!="Option") continue;
+
+
+					/*new row*/
+					var newRow=t.insertRow(-1);
+					newRow.setAttribute('field',code);
+					if(Questions.isHidden(code)) disableRow(newRow);
+
+					/*1st cell: show code*/
+					var newCell=newRow.insertCell(-1);
+					newCell.style.textAlign='left';
+					newCell.style.fontSize='10px';
+					newCell.innerHTML=(function()
+					{
+						var extra = Level3.list.indexOf(code)>-1 ? "(<span style=font-size:10px><?php write('#level3_advanced')?></span>)" : "" ;
+						return extra+" <a href=variable.php?id="+code+">"+code+"</a>";
+					})();
+
+					/*2nd cell: variable name*/
+					var newCell=newRow.insertCell(-1);
+					newCell.style.textAlign="left";newCell.style.cursor="help";
+					newCell.setAttribute('title', translate(code+'_expla'));
+					newCell.innerHTML=translate(code+'_descr');
+
+					//3rd cell and so on: go over substages
+					for(var s in substages)
+					{
+						var newCell=newRow.insertCell(-1);
+						newCell.classList.add("input");
+						newCell.setAttribute('substage',s);
+						newCell.innerHTML=(function()
+						{
+							return "under development<select><option>A<option>B<option>C</select>"
+						})()
+					}
 				}
 
 				//last row: delete substage
@@ -542,7 +590,7 @@
 			updateOutputs();
 			Sidebar.update();
 			updateResult();
-      try{drawCharts()}catch(e){/*console.log(e)*/}
+			try{drawCharts()}catch(e){/*console.log(e)*/}
 		}
 	</script>
 </head><body onload=init() style="background:#F5ECCE"><center>

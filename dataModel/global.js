@@ -44,9 +44,8 @@ var Global = {
 		ws_SL_auc_emis : function(){return this.ws_KPI_GHG()-this.ws_SL_nrw_emis()},
 
 		"Abstraction":{
-
 			"wsa_vol_conv":0,
-      "wsa_nrg_turb":0,
+			"wsa_nrg_turb":0,
 			"wsa_nrg_cons":0,
 			"wsa_vol_pump":0,
 			"wsa_pmp_head":0,
@@ -56,7 +55,7 @@ var Global = {
 			"wsa_vol_fuel":0,
 
 			wsa_KPI_GHG_elec:function(){return this.wsa_nrg_cons*Global.General.conv_kwh_co2},
-			wsa_KPI_GHG_ne:function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.engines_in_water]; return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) } ,
+			wsa_KPI_GHG_ne:function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.wsa_engines]; return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) } ,
 			wsa_KPI_GHG:function(){return this.wsa_KPI_GHG_elec()+this.wsa_KPI_GHG_ne()} ,
 			wsa_nrg_per_pmp_watr:function(){return this.wsa_nrg_cons/this.wsa_vol_pump},
 			wsa_KPI_nrg_per_m3:function(){return this.wsa_nrg_cons/this.wsa_vol_conv},
@@ -66,6 +65,7 @@ var Global = {
 			wsa_KPI_un_head_loss:function(){return 1000*this.wsa_fri_loss/this.wsa_main_len},
 			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_cons+this.wsa_nrg_turb)/this.c_wsa_vol_head()},
 			c_wsa_vol_head:function(){return this.wsa_vol_pump*this.wsa_pmp_head/100},
+			wsa_SL_water_losses:function(){return -999;}
 		},
 
 		"Treatment":{
@@ -87,8 +87,8 @@ var Global = {
 			"wst_t_PCFSFD":0,
 			wst_SL_qual_com:function(){return 100*(this.wst_tst_aest+this.wst_tst_micr+this.wst_tst_phch+this.wst_tst_radi)/this.wst_tst_carr},
 			wst_KPI_GHG_elec:function(){return this.wst_nrg_cons*Global.General.conv_kwh_co2},
-			wst_KPI_GHG_slud:function(){return 0},
-			wst_KPI_GHG_fuel:function(){return 0},
+			wst_KPI_GHG_slud:function(){return -999},
+			wst_KPI_GHG_fuel:function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.wst_engines]; return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) } ,
 			wst_KPI_GHG:function(){return this.wst_KPI_GHG_elec()+this.wst_KPI_GHG_slud()+this.wst_KPI_GHG_fuel()},
 		},
 
@@ -359,6 +359,8 @@ var Global = {
 				engines_in_water      : "Diesel",
 				engines_in_waste      : "Diesel",
 				truck_transport_waste : "Diesel",
+				wsa_engines           : "Diesel",
+				wst_engines           : "Diesel",
 			},
 		},
 

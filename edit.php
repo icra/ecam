@@ -144,10 +144,10 @@
 					if(field.search(/^c_/)==-1) continue;
 				}
 
-				//equation not clear, tbd in v2
-				if(field=="c_ww_in_dilution") continue;
+				/*check if is an option*/
+				if(Info[field].magnitude=="Option") continue;
 
-				/*check if field is level3 specific*/if(Level3.list.indexOf(field)>-1) continue;
+				/*check if field is level3 specific*/if(Level3.list.indexOf(field)+1) continue;
 
 				/*disable row according to questions*/
 				if(Questions.isHidden(field))
@@ -741,6 +741,7 @@
 		{
 			updateQuestionsTable()
 			updateInputs()
+			updateSelections()
 			updateOutputs()
 			updateNrgOutputs()
 			updateOtherOutputs()
@@ -794,11 +795,8 @@
                 //re do this part outside the echo function better TODO
 								echo "
 									<div>
-										In this page you input general info about the
-										<script>
-											document.write(translate('$sublevel'))
-										</script> stage.<br>
-										If you have multiple facilities please go to:
+										General info about the <script>document.write(translate('$sublevel'))</script> stage.<br>
+										If you have multiple facilities, please go to:
 									</div>
 									<div style='margin-top:0.5em'>
 										<button 
@@ -889,7 +887,7 @@
 			</script>
 			<?php 
 				//fuel options for water and wastewater only
-				if($sublevel==false && $level!="Energy")
+				if($level!="Energy")
 				{
 					?>
 					<table id=fuelSelection class=inline>
@@ -901,17 +899,29 @@
 							#fuelSelection img {width:20px;vertical-align:middle}
 						</style>
 						<?php
-							if($level=="Water")
+							if($level=="Water" && !$sublevel)
 							{ 
 								?>
 								<tr question=engines_in_water><td><?php write('#configuration_engines')?>
 								<?php 
 							}
-							else if($level=="Waste")
+							else if($level=="Waste" && !$sublevel)
 							{
 								?>
 								<tr question=engines_in_waste>     <td><?php write('#configuration_engines')?>
 								<tr question=truck_transport_waste><td><?php write('#configuration_vehicles')?>
+								<?php 
+							}
+							else if($level=="Water" && $sublevel=="Abstraction")
+							{
+								?>
+								<tr question=wsa_engines><td><?php write('#configuration_engines')?>
+								<?php 
+							}
+							else if($level=="Water" && $sublevel=="Treatment")
+							{
+								?>
+								<tr question=wst_engines><td><?php write('#configuration_engines')?>
 								<?php 
 							}
 						?>
@@ -934,18 +944,18 @@
 					var graph=document.querySelector('#graph_container')
 					var ioCon=document.querySelector('#outputs_container')
 					if(graph.style.display=='none') 
-          {
-            ioCon.style.display='none';
-            graph.style.display='';
-            thisB.classList.add('active');
+					{
+						ioCon.style.display='none';
+						graph.style.display='';
+						thisB.classList.add('active');
 
-          }
+					}
 					else
-          {
-            ioCon.style.display='';
-            graph.style.display='none';
-            thisB.classList.remove('active');
-          }
+					{
+						ioCon.style.display='';
+						graph.style.display='none';
+						thisB.classList.remove('active');
+					}
 					init()
 				}
 			</script>
@@ -987,6 +997,61 @@
 						<th><?php write('#edit_data_quality')?>
 						-->
 				</table>
+
+				<table id=selections style=margin-bottom:0.5em>
+					<tr><th colspan=2 style=text-align:left>Options [only if substages = 1]
+					under development
+				</table>
+				<script>
+					function updateSelections()
+					{
+						var t = document.querySelector('table#selections')
+						while(t.rows.length>1){t.deleteRow(-1)}
+
+						//go over CurrentLevel
+						for(var field in CurrentLevel)
+						{
+							if(!Info[field]) continue;
+							if(Info[field].magnitude!="Option") continue;
+
+							//new row
+							var newRow=t.insertRow(-1)
+							newRow.setAttribute('field',field);
+
+							//description
+							var newCell=newRow.insertCell(-1);
+							newCell.setAttribute('title', translate(field+"_expla"));
+							newCell.style.cursor='help';
+							newCell.innerHTML=(function()
+							{
+								//implementing translation:
+								var description = translate(field+"_descr");
+								var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
+								return description+" ("+code+")";
+							})();
+
+							//value
+							var newCell=newRow.insertCell(-1);
+							newCell.className="input";
+							newCell.title="<?php write('#edit_click_to_modify')?>";
+						}
+
+						//here check if table is empty (==t.rows.length is 2)
+						if(t.rows.length<2)
+						{
+							var newCell=t.insertRow(-1).insertCell(-1)
+							newCell.colSpan=4
+							newCell.innerHTML="<span style=color:#999>~All inputs inactive</span>";
+						}
+
+						//bottom line decoration with the color of W/WW
+						var newRow=t.insertRow(-1);
+						var newTh=document.createElement('th');
+						newTh.setAttribute('colspan',4)
+						newTh.style.borderBottom='none';
+						newRow.appendChild(newTh);
+					}
+				</script>
 			</div>
 
 			<!--Outputs-->

@@ -5,19 +5,7 @@ var Level3={};
 Level3.list=
 [
 	//WSA (empty: replaced by filters (question) )
-	//WST
-		"wst_treatmen",
-		"wst_tst_carr",
-		"wst_tst_aest",
-		"wst_tst_micr",
-		"wst_tst_phch",
-		"wst_tst_radi",
-		"wst_mass_slu",
-		"wst_trea_cap",
-		"wst_t_PCFSFD",
-		"wst_KPI_slu_per_m3",
-		"wst_KPI_capac_util",
-		"wst_SL_qual_com",
+	//WST DOING NOW
 	//WSD
 		"wsd_deli_pts",
 		"wsd_ser_cons",

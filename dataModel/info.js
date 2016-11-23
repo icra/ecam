@@ -115,7 +115,8 @@ var Info = {
 	wsa_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
 	wsa_KPI_GHG_ne:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
 	wsa_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
-  wsa_nrg_per_pmp_watr:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
+	wsa_nrg_per_pmp_watr:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
+	wsa_SL_water_losses:{magnitude:"Volume/Distance",unit:"m<sup>3</sup>/km"},
 
 	//L2 Water Treatment
 	"wst_vol_trea":{magnitude:"Volume",unit:"m3",},
@@ -128,12 +129,15 @@ var Info = {
 	"wst_tst_radi":{magnitude:"Number",unit:"number",},
 	"wst_mass_slu":{magnitude:"Mass",unit:"kg",},
 	"wst_trea_cap":{magnitude:"Volume",unit:"m3",},
-	"wst_treatmen":{magnitude:"Technology",unit:"Technology",},
+	"wst_treatmen":{magnitude:"Option",unit:"Technology",},
 	"wst_t_PCFSFD":{magnitude:"Volume",unit:"m3",},	
 	wst_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>",},
 	wst_KPI_slu_per_m3:{magnitude:"Mass/Volume",unit:"kg/m<sup>3</sup>",},
 	wst_KPI_capac_util:{magnitude:"Percent",unit:"%",},
 	wst_SL_qual_com :{magnitude:"Percentage",unit:"%",},
+	wst_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wst_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wst_KPI_GHG_slud:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	//L2 Water Distribution
 	"wsd_nrg_cons" :{magnitude:"Energy",unit:"kWh",},

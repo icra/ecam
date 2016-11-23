@@ -198,7 +198,16 @@
 	"#pumping_for_abstraction":"¿Tiene bombeo en la la etapa de captación",
 	"#pumping_for_distribution":"¿Bombea directamente al sistema de distribución",
 	"#engines_in_waterAbs":"¿Tiene grupo electrógeno",
+	  
+	"#wsa_engines":"¿Tiene grupo electrógeno",
+	"#wst_engines":"¿Tiene grupo electrógeno",
+	"#wsd_engines":"¿Tiene grupo electrógeno",
+	"#wwc_engines":"¿Tiene grupo electrógeno",
+	"#wwt_engines":"¿Tiene grupo electrógeno",
+	"#wwd_engines":"¿Tiene grupo electrógeno",
 	"#wsa_pumping_efficiency":"¿Quiere estudiar la eficiencia de las bombas",
+	"#wst_pumping_efficiency":"Do you want to study pump efficiency",
+	"#wst_chlorinate":"Do you chlorinate",
 
 	"#Days_descr"        :"Período de evaluación",
 	"#Days_expla"        :"Período de evaluación",

@@ -1,12 +1,12 @@
 /** 
-	TO DO:
-		variables that not behave like normal ones are treated here
-		they are inputs with a list of possible values that set the number
+  TO DO:
+  variables that not behave like normal ones are treated here
+  they are inputs with a list of possible values that set the number
 
-	rename to Dropdowns
-	select ws treatment
-	select ww treatment
-**/
+  rename to Dropdowns
+  select ws treatment
+  select ww treatment
+ **/
 
 var Exceptions =
 {
@@ -15,19 +15,19 @@ var Exceptions =
 	{
 		this.ww13();
 		this.ww_ch4_efac();
-    this.wst_treatmen();
+		this.wst_treatmen();
 	},
 
 	//make ww13 selection (which is inside its description) stay selected
 	ww13:function()
 	{
-		var select = document.createElement('select')
-		select.id="ww13options"
+		var select = document.createElement('select');
+		select.id="ww13options";
 		select.onchange=function()
 		{
-			Global.Waste.ww_prot_con=parseFloat(select.value)
-			Global.Configuration.Selected.Country_protein=select.options[select.options.selectedIndex].getAttribute('country')
-			init()
+			Global.Waste.ww_prot_con=parseFloat(select.value);
+			Global.Configuration.Selected.Country_protein=select.options[select.options.selectedIndex].getAttribute('country');
+			init();
 		}
 
 		//in kg/person/year
@@ -211,77 +211,77 @@ var Exceptions =
 		//initial option --select country--
 		var option = document.createElement('option');
 		select.appendChild(option);
-		option.innerHTML="--select country--"
+		option.innerHTML="--select country--";
 
 		//all countries
 		for(var country in ww_prot_con)
 		{
 			var option = document.createElement('option');
-			var cons = ww_prot_con[country]
+			var cons = ww_prot_con[country];
 			select.appendChild(option);
-			option.value=cons
+			option.value=cons;
 			option.setAttribute('country',country);
-			option.innerHTML=country+" ("+cons+")"
+			option.innerHTML=country+" ("+cons+")";
 			if(country==Global.Configuration.Selected.Country_protein && cons==Global.Waste.ww_prot_con)
 			{
 				option.selected='true';
 			}
 		}
 
-    //put the name of the selected technology instead of the number
-    var td=document.querySelector('tr[field=ww_prot_con] td')
-    if(!td)return
-    td.appendChild(select)
+		//put the name of the selected technology instead of the number
+		var td=document.querySelector('tr[field=ww_prot_con] td');
+		if(!td)return;
+		td.appendChild(select);
 	},
 
-  wst_treatmen:function()
-  {
-    var select = document.createElement('select')
-    var td = document.querySelector('tr[field=wst_treatmen] td')
-
-    if(!td){ return }
-
-    select.id="wst_treatmen"
-    select.onchange=function()
-    {
-      Global.Water.Treatment.wst_treatmen=parseInt(select.value)
-      init()
-    }
-
-    var options = Tables.Technologies.Water;
-
-    for(var op in options)
-    {
-      var option = document.createElement('option');
-      var value = parseInt(options[op].value);
-      select.appendChild(option);
-      option.value=value
-      option.innerHTML=op+" ("+value+")"
-      if(Global.Water.Treatment.wst_treatmen==value) 
-      {
-        option.selected=true;
-      }
-    }
-
-    //put the select menu on the description
-    (function(){
-      var td=document.querySelector('tr[field=wst_treatmen] td.input')
-      if(!td)return
-      td.onclick=function(){} //replace onclick listener
-      td.innerHTML=""
-      td.appendChild(select)
-    })();
-  },
-
-  //emision factor (kg CH4 per kg BOD)
-	ww_ch4_efac:function()
+	wst_treatmen:function()
 	{
-		var select = document.createElement('select')
-		select.id="ww_ch4_efac_options"
+		var select = document.createElement('select');
+		var td = document.querySelector('tr[field=wst_treatmen] td');
+
+		if(!td){ return }
+
+		select.id="wst_treatmen";
 		select.onchange=function()
 		{
-			Global.Waste.ww_ch4_efac=parseFloat(select.value)
-			init()
+			Global.Water.Treatment.wst_treatmen=parseInt(select.value);
+			init();
+		}
+
+		var options = Tables.Technologies.Water;
+
+		for(var op in options)
+		{
+			var option = document.createElement('option');
+			var value = parseInt(options[op].value);
+			select.appendChild(option);
+			option.value=value;
+			option.innerHTML=op+" ("+value+")";
+			if(Global.Water.Treatment.wst_treatmen==value) 
+			{
+				option.selected=true;
+			}
+		}
+
+		//put the select menu on the description
+		(function(){
+			var td=document.querySelector('tr[field=wst_treatmen] td.input');
+			if(!td)return;
+			td.onclick=function(){} //replace onclick listener
+			td.innerHTML="";
+			td.appendChild(select)
+			})();
+	},
+
+	//emision factor (kg CH4 per kg BOD)
+	ww_ch4_efac:function()
+	{
+		var select = document.createElement('select');
+		select.id="ww_ch4_efac_options";
+		select.onchange=function()
+		{
+			Global.Waste.ww_ch4_efac=parseFloat(select.value);
+			init();
 		}
 		var options = {
 			"Well managed":0.00,
@@ -292,17 +292,17 @@ var Exceptions =
 		for(var op in options)
 		{
 			var option = document.createElement('option');
-			var value = options[op]
+			var value = options[op];
 			select.appendChild(option);
-			option.value=value
-			option.innerHTML=op+" ("+value+")"
+			option.value=value;
+			option.innerHTML=op+" ("+value+")";
 			if(Global.Waste.ww_ch4_efac==value)
-				option.selected=true
+				option.selected=true;
 		}
 
-    var td = document.querySelector('tr[field=ww_ch4_efac] td')
-    if(!td)return;
-    td.appendChild(document.createElement('br'));
-    td.appendChild(select);
+		var td = document.querySelector('tr[field=ww_ch4_efac] td');
+		if(!td)return;
+		td.appendChild(document.createElement('br'));
+		td.appendChild(select);
 	},
 }

@@ -123,6 +123,9 @@
 	/** return 3.999,4 instead of 3999.4*/
 	function format(number)
 	{
+		//for work in progess formulas: -999
+		if(number==-999){return "<span style=background:yellow>Formula under development</span>";}
+
 		var str=new Intl.NumberFormat('en-EN',{maximumFractionDigits:2}).format(number);
 		if(str=="NaN" || !isFinite(number)) return "<span style=color:#666>[<?php write('#missing_inputs')?>]</span>";
 		return str;
