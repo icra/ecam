@@ -88,7 +88,7 @@ var Global = {
 			wst_SL_qual_com:function(){return 100*(this.wst_tst_aest+this.wst_tst_micr+this.wst_tst_phch+this.wst_tst_radi)/this.wst_tst_carr},
 			wst_KPI_GHG_elec:function(){return this.wst_nrg_cons*Global.General.conv_kwh_co2},
 			wst_KPI_GHG_slud:function(){return -999},
-			wst_KPI_GHG_fuel:function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.wst_engines]; return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) } ,
+			wst_KPI_GHG_fuel:function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.wst_engines]; return this.wst_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) } ,
 			wst_KPI_GHG:function(){return this.wst_KPI_GHG_elec()+this.wst_KPI_GHG_slud()+this.wst_KPI_GHG_fuel()},
 		},
 

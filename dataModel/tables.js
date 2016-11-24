@@ -9,16 +9,17 @@ var Tables =
 	},
 
 	/** Technologies for wst and wwt (table not used right now). I was told that this will be used for benchmarking */
+	"wst_treatmen":{
+		"None":{value:0,},
+		"Pre-ox/C/F/S/Filt/Des":{value:1,},
+		"Pre-ox/C/F/Filt/Des":{value:2,},
+		"C/F/S/Filt/Des":{value:3,},
+		"C/F/Filt/Des":{value:4,},
+		"Des":{value:5,},
+		"Other":{value:6,},
+	},
+
 	"Technologies":{
-		"Water":{
-			"None":{value:0,},
-			"Pre-ox/C/F/S/Filt/Des":{value:1,},
-			"Pre-ox/C/F/Filt/Des":{value:2,},
-			"C/F/S/Filt/Des":{value:3,},
-			"C/F/Filt/Des":{value:4,},
-			"Des":{value:5,},
-			"Other":{value:6,},
-		},
 		"Waste":{
 			"None":{},
 			"Primary treatment (PT)":{},
@@ -34,3 +35,14 @@ var Tables =
 		},
 	},
 }
+
+Tables.find=function(field,value)
+{
+	for(var option in Tables[field])
+	{
+		if(value==Tables[field][option].value)
+			return option
+	}
+	return false
+}
+

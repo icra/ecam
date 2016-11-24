@@ -11,13 +11,20 @@
 </style>
 
 <script>
-	/** make pressed button look like active*/
+	/** make pressed button look active*/
 	function buttonsGraph(button)
 	{
-		var isActive = button.classList.contains('active')
+		var isActive=button.classList.contains('active');
+
 		var others=document.querySelectorAll("div.buttonsGraph button")
 		for(var i=0;i<others.length;others[i++].classList.remove('active')){}
-		if(!isActive){button.classList.add('active')}
+
+		if(!isActive)
+		{
+			button.classList.add('active');
+		}else{
+			button.classList.remove('active');
+		}
 	}
 </script>
 

@@ -72,11 +72,13 @@
 			{
 				echo "
 					var CurrentLevel = Global['$level']['$sublevel'];
-					var substages = Substages['$level']['$sublevel'];";
+					var substages = Substages['$level']['$sublevel'];
+				";
 			}
 			else
 			{
 				echo "var CurrentLevel = Global['$level'];";
+				echo "var substages = false;";
 			}
 		?>
 
@@ -691,8 +693,16 @@
 		//depending on stage, draw different charts
 		function drawCharts()
 		{
-			Graphs.graph4(false,'graph'); //GHG
+			//draw the chart that is selected!!!
+			//Graphs.graph4(false,'graph'); //GHG
 			//Graphs.graph5(false,'graph'); //Energy
+			var button
+			button=document.querySelector("div.buttonsGraph button.active")
+			if(!button){
+				button=document.querySelector("div.buttonsGraph button")
+			}
+			button.classList.remove('active');
+			button.onclick()
 		}
 
 		function updateFuelSelection()
@@ -717,10 +727,13 @@
 				{
 					select.disabled=true;
 					select.parentNode.parentNode.title="<?php write('#inactive')?>";
-					select.parentNode.parentNode.className="inactive"
+					select.parentNode.parentNode.classList.add("inactive")
 				}
 				else
-					select.parentNode.parentNode.className=""
+				{
+					select.parentNode.parentNode.title=''
+					select.parentNode.parentNode.classList.remove('inactive')
+				}
 
 				//go over fuel types
 				for(var fuel in Tables['Fuel types'])
@@ -763,7 +776,6 @@
 	{
 		case "Water":case "Waste":  
 			$titleLevel=$lang_json["#$level"];break;
-
 		case "Energy": $titleLevel="Energy summary";break;
 		default:	   $titleLevel=$level;break;
 	}
@@ -771,11 +783,15 @@
 	{
 		switch($sublevel)
 		{
-			default:	   $titleSublevel=$lang_json["#$sublevel"];break;
+			default: $titleSublevel="<span style='font-size:26px'>".$lang_json["#$sublevel"]."</span>";break;
 		}
 	}
 	/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
-	$title=$sublevel ? "<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel</span>" : "<span style=color:black>$titleLevel</span>";
+	$title = $sublevel 
+		? 
+		"<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel</span>" 
+		: 
+		"<span style=color:black>$titleLevel</span>";
 ?>
 <style> h1 {text-align:left;padding-left:17em;line-height:2.1em;border-bottom:1px solid #ccc;background:white} </style>
 <h1><a href=stages.php><script>document.write(Global.General.Name)</script></a> <?php echo "$sep $title"?></h1></center>
@@ -788,25 +804,26 @@
 		<?php 
 			if($sublevel)
 			{ 
-				?><div class="card inline"><?php cardMenu("Nº of substages: 
+				?>
+				<div class="card inline"><?php cardMenu("Nº of substages: 
 							<script>document.write(Substages['$level']['$sublevel'].length)</script>")?>
 					<div style=padding:1.5em>
-						<?php
-                //re do this part outside the echo function better TODO
-								echo "
-									<div>
-										General info about the <script>document.write(translate('$sublevel'))</script> stage.<br>
-										If you have multiple facilities, please go to:
-									</div>
-									<div style='margin-top:0.5em'>
-										<button 
-											id=btn_goto_substages
-											onclick=window.location='level3.php?level=$level&sublevel=$sublevel'>
-												<img src=img/substage.png style='width:30px;margin-right:0.5em;vertical-align:middle'>
-												".$lang_json['#substages']."	
-										</button>
-									</div>";
-						?>
+						<div>
+							General info about the 
+							<b>
+							<script>document.write(translate('<?php echo $sublevel?>'))</script> 
+							</b>
+							stage. 
+							<br>
+							If you have multiple facilities, please go to:
+						</div>
+						<div style='margin-top:0.5em'>
+							<button id=btn_goto_substages
+								onclick="window.location='<?php echo"level3.php?level=$level&sublevel=$sublevel"?>'">
+								<img src=img/substage.png style='width:30px;margin-right:0.5em;vertical-align:middle'>
+								<?php echo $lang_json['#substages']?>
+							</button>
+						</div>
 						<style>
 							#btn_goto_substages {
 								background:#fafef1;
@@ -818,7 +835,8 @@
 							}
 						</style>
 					</div>
-				</div><?php 
+				</div>
+				<?php 
 			}
 		?>
 		<!--questions-->
@@ -998,17 +1016,20 @@
 						-->
 				</table>
 
-				<table id=selections style=margin-bottom:0.5em>
-					<tr><th colspan=2 style=text-align:left>Options [only if substages = 1]
-					under development
+				<table id=selections style=width:100%;margin-bottom:0.5em>
+					<tr><th colspan=2 style=text-align:left>Options
 				</table>
+
 				<script>
 					function updateSelections()
 					{
-						var t = document.querySelector('table#selections')
+						var t=document.querySelector('table#selections')
+						if(!t)return;
+
+						//empty table
 						while(t.rows.length>1){t.deleteRow(-1)}
 
-						//go over CurrentLevel
+						//go over variables in CurrentLevel
 						for(var field in CurrentLevel)
 						{
 							if(!Info[field]) continue;
@@ -1032,8 +1053,30 @@
 
 							//value
 							var newCell=newRow.insertCell(-1);
-							newCell.className="input";
-							newCell.title="<?php write('#edit_click_to_modify')?>";
+
+							//if substages==1, show value, else: show all values
+							if(typeof(substages)=='object' && substages.length > 1)
+							{
+								newCell.innerHTML=(function()
+								{
+									var n = substages.length;
+									var ret = "";
+									for(var i=0;i<n;i++)
+									{
+										var value = substages[i][field]
+										var option = Tables.find(field,value)
+										ret+="<div title='"+substages[i].name+"'>Substage "+(i+1)+": "+option+" ("+value+")</div>";
+									}
+									return ret;
+								})();
+								return;
+							}
+							else
+							{
+								newCell.className="input";
+								newCell.title="<?php write('#edit_click_to_modify')?>";
+
+							}
 						}
 
 						//here check if table is empty (==t.rows.length is 2)
@@ -1042,6 +1085,7 @@
 							var newCell=t.insertRow(-1).insertCell(-1)
 							newCell.colSpan=4
 							newCell.innerHTML="<span style=color:#999>~All inputs inactive</span>";
+							t.style.display='none'
 						}
 
 						//bottom line decoration with the color of W/WW

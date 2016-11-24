@@ -127,7 +127,7 @@
 		if(number==-999){return "<span style=background:yellow>Formula under development</span>";}
 
 		var str=new Intl.NumberFormat('en-EN',{maximumFractionDigits:2}).format(number);
-		if(str=="NaN" || !isFinite(number)) return "<span style=color:#666>[<?php write('#missing_inputs')?>]</span>";
+		if(str=="NaN" || !isFinite(number)) return "<span style=color:#666>~<?php write('#missing_inputs')?></span>";
 		return str;
 	}
 

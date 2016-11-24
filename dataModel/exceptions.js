@@ -248,7 +248,7 @@ var Exceptions =
 			init();
 		}
 
-		var options = Tables.Technologies.Water;
+		var options = Tables.wst_treatmen;
 
 		for(var op in options)
 		{

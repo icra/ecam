@@ -25,13 +25,11 @@
 	<table id=l3overview>
 		<tr><th><?php write('#stages_stage')?>
 			<th><?php write('#stages_num_of_substages')?>
-			<th><?php write('#stages_type_of_assessment')?>
 		<script>
 			function tableRow(alias,level,sublevel,name)
 			{
 				document.write("<tr><td><a stage="+alias+" href=edit.php?level="+level+"&sublevel="+sublevel+">"+name+
 					"<td>"+Substages[level][sublevel].length+
-					"<td>"+translate("assessment_"+Global.Configuration.Assessment[level][sublevel])+
 					"")
 			}
 			tableRow('waterAbs','Water','Abstraction' ,'<?php write('#Water'); echo ": "; write('#Abstraction')?>');

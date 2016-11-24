@@ -349,11 +349,9 @@
 				{
 					/*variable code*/
 					var code=inputs[input];
-					console.log(code)
 					
 					//if is an option, continue (will show at the end of the table)
 					if(Info[code].magnitude!="Option") continue;
-
 
 					/*new row*/
 					var newRow=t.insertRow(-1);
@@ -382,10 +380,24 @@
 						var newCell=newRow.insertCell(-1);
 						newCell.classList.add("input");
 						newCell.setAttribute('substage',s);
-						newCell.innerHTML=(function()
+						(function()
 						{
-							return "under development<select><option>A<option>B<option>C</select>"
-						})()
+							var select=document.createElement('select');
+							newCell.appendChild(select)
+							select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);init()')
+							for(var op in Tables[code])
+							{
+								var option = document.createElement('option');
+								var value = parseInt(Tables[code][op].value);
+								select.appendChild(option);
+								option.value=value;
+								option.innerHTML=op+" ("+value+")";
+								if(substages[s][code]==value) 
+								{
+									option.selected=true;
+								}
+							}
+						})();
 					}
 				}
 
@@ -608,7 +620,7 @@
 	/*Separator*/$sep="<span style=color:black>&rsaquo;</span>";
 	$titleSublevel="<a href=edit.php?level=$level&sublevel=$sublevel>".$lang_json["#$sublevel"]."</a>";
 	$title="<a href=stages.php><script>document.write(Global.General.Name)</script></a> 
-		$sep $titleLevel $sep $titleSublevel $sep <span style=color:black>".$lang_json['#substages']."</a>";
+		$sep $titleLevel $sep $titleSublevel $sep <span style='color:black;font-size:26px'>".$lang_json['#substages']."</a>";
 ?>
 <style> h1 {text-align:left;padding-left:17em;border-bottom:1px solid #ccc;background:white}</style>
 <!--TITLE--><h1><?php echo $title?>

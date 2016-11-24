@@ -352,7 +352,7 @@
 	"#wsa_nrg_cons_expla":"Electric energy consumption including both from the grid and self-produced, for the water abstractionunit, by the undertaking during the entire assessment period",
 	"#wsa_vol_conv_descr":"Volume of abstracted water",
 	"#wsa_vol_conv_expla":"Sum of the volume of water abstracted (gravity or pumped) in the water abstractionunit that are the responsibility of the undertaking, during the assessment period",
-	"#wsa_nrg_turb_descr":"Electric energy produced from turbines",
+	"#wsa_nrg_turb_descr":"Electric energy produced (turbines)",
 	"#wsa_nrg_turb_expla":"Sum of energy recovered during the assessment period by all turbines for abstracted water managed by the undertaking",
 	"#wsa_pmp_head_descr":"Pumping head",
 	"#wsa_pmp_head_expla":"Head at which the water is pumped in each water abstractionunit that are the responsibility of the undertaking, during the assessment period",
