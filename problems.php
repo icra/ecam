@@ -70,7 +70,7 @@
 <div id=main style=margin-bottom:3em>
 
 <!--problems-->
-<div class=inline style="max-width:68%;border:1px solid #ccc;padding:0.5em;margin:2px">
+<div class=inline style="max-width:65%;border:1px solid #ccc;padding:0.5em;margin:2px">
 	<h3 style=padding-left:2px>Problems found</h3>
 
 	<!--questions-->
@@ -165,17 +165,22 @@
 </div>
 
 <!--to do-->
-<div class=inline style="max-width:30%;border:1px solid #ccc;padding:0.5em;margin:2px">
-	<h3>Tasks</h3>
+<div id=tasks class=inline style="max-width:30%;border:1px solid #ccc;padding:0.5em;margin:2px">
+	<style> #tasks ul {padding-left:1em}</style>
+	<h3>Tasks / Issues</h3>
 	<ul>
-		<li> BACK-END <ul>
-				<li><a href=benchmark.php>Benchmark</a> 
-				<li>Calculated variables, need to separate from inputs
-				<li>Translation of new features of the tool
+		<li><b>BACK-END</b><ul>
+				<li>ws_nrg_cons should be an output not input (sum of abs+tre+dis)
+				<li>Fuel consumed in Quick assessment should be an output: sum of abs+tre+dis
+				<li>Auth cons in ws is not linket to wsd
+				<li>Define <a href=benchmark.php>Benchmark</a> 
 			</ul>
-		<li> FRONT-END <ul>
+		<li><b>FRONT-END</b><ul>
+			<li>Draw table of options in variable.php for variables that are magnitude:Option
 			<li>Footer should remain in the bottom of the page always
 			<li>Help resources
+			<li>Translation of new features of the tool
+			<li>Calculated variables, need to separate from inputs, or remove them
 		</ul>
 	</ul>
 </div>

@@ -384,7 +384,10 @@
 						{
 							var select=document.createElement('select');
 							newCell.appendChild(select)
-							select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);init()')
+							if(substages.length==1)
+								select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);CurrentStage["'+code+'"]=parseInt(this.value);init()')
+							else
+								select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);init()')
 							for(var op in Tables[code])
 							{
 								var option = document.createElement('option');

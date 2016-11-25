@@ -179,11 +179,10 @@
 			<tr><td><a class=waste stage=wasteCol href=edit.php?level=Waste&sublevel=Collection><?php write('#Collection')?></a>
 			<tr><td><a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment><?php write('#Treatment')?></a>
 			<tr><td><a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge><?php write('#Discharge')?></a>
-			<tr><td><a href=edit.php?level=Energy><?php write('#energy_summary')?></a>
 			<tr><th><?php write('#summary')?>
 			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
 			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
-			<tr><td><a href=viewer.php>Data structure viewer</a>
+			<tr><td><a href=edit.php?level=Energy><?php write('#energy_summary')?></a>
 			<tr><td><a href=summary.php?type=input><?php write('#sidebar_all_inputs')?></a>
 			<tr><td><a href=summary.php?type=ccvv><?php write('#sidebar_all_ccvv')?></a>
 			<tr><td><a href=summary.php?type=output><?php write('#sidebar_all_kpis')?></a>

@@ -44,9 +44,9 @@ var Global = {
 		ws_SL_auc_emis : function(){return this.ws_KPI_GHG()-this.ws_SL_nrw_emis()},
 
 		"Abstraction":{
+			"wsa_nrg_cons":0,
 			"wsa_vol_conv":0,
 			"wsa_nrg_turb":0,
-			"wsa_nrg_cons":0,
 			"wsa_vol_pump":0,
 			"wsa_pmp_head":0,
 			"wsa_main_len":0,

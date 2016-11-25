@@ -292,6 +292,58 @@
 				*/
 			}
 
+			//go over variables magnitude==Option
+			for(var field in CurrentLevel)
+			{
+				if(!Info[field]) continue;
+				if(Info[field].magnitude!="Option") continue;
+
+				//new row
+				var newRow=t.insertRow(-1)
+				newRow.setAttribute('field',field);
+
+				//description
+				var newCell=newRow.insertCell(-1);
+				newCell.setAttribute('title', translate(field+"_expla"));
+				newCell.style.cursor='help';
+				newCell.innerHTML=(function()
+				{
+					//implementing translation:
+					var description = translate(field+"_descr");
+					var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
+					return description+" ("+code+")";
+				})();
+
+				//value
+				var newCell=newRow.insertCell(-1);
+				newCell.colSpan=2;
+				newCell.style.textAlign='left'
+
+				//if substages==1, show value, else: show all values
+				if(typeof(substages)=='object' && substages.length > 1)
+				{
+					newCell.innerHTML=(function()
+					{
+						var n = substages.length;
+						var ret = "";
+						for(var i=0;i<n;i++)
+						{
+							var value = substages[i][field]
+							var option = Tables.find(field,value)
+							ret+="<div title='"+substages[i].name+"'><b>Substage "+(i+1)+":</b> "+option+" ("+value+")</div>";
+						}
+						return ret;
+					})();
+					return;
+				}
+				else
+				{
+					newCell.className="input";
+					newCell.title="<?php write('#edit_click_to_modify')?>";
+
+				}
+			}
+
 			//here check if table is empty (==t.rows.length is 2)
 			if(t.rows.length<3)
 			{
@@ -723,7 +775,7 @@
 				select.setAttribute('onchange',"Global.Configuration.Selected.FuelType['"+question+"']=this.value;init()");
 
 				//disable the row if question is NO
-				if(Global.Configuration["Yes/No"][question]==0)
+				if(!Global.Configuration["Yes/No"][question])
 				{
 					select.disabled=true;
 					select.parentNode.parentNode.title="<?php write('#inactive')?>";
@@ -754,7 +806,6 @@
 		{
 			updateQuestionsTable()
 			updateInputs()
-			updateSelections()
 			updateOutputs()
 			updateNrgOutputs()
 			updateOtherOutputs()
@@ -948,6 +999,16 @@
 				}
 			?>
 		</div>
+
+		<!--random tip-->
+		<div class="card inline" style="text-align:center">
+			<?php cardMenu("Tip")?>
+			<div style=padding:0.5em>
+				<span id=tip style="font-style:italic"><script>document.write(Tips.random())</script></span>
+				&emsp;
+				<button onclick="document.querySelector('#tip').innerHTML=Tips.random()">Another</button>
+			</div>
+		</div>
 	</div>
 
 	<!--i/o-->
@@ -1015,87 +1076,6 @@
 						<th><?php write('#edit_data_quality')?>
 						-->
 				</table>
-
-				<table id=selections style=width:100%;margin-bottom:0.5em>
-					<tr><th colspan=2 style=text-align:left>Options
-				</table>
-
-				<script>
-					function updateSelections()
-					{
-						var t=document.querySelector('table#selections')
-						if(!t)return;
-
-						//empty table
-						while(t.rows.length>1){t.deleteRow(-1)}
-
-						//go over variables in CurrentLevel
-						for(var field in CurrentLevel)
-						{
-							if(!Info[field]) continue;
-							if(Info[field].magnitude!="Option") continue;
-
-							//new row
-							var newRow=t.insertRow(-1)
-							newRow.setAttribute('field',field);
-
-							//description
-							var newCell=newRow.insertCell(-1);
-							newCell.setAttribute('title', translate(field+"_expla"));
-							newCell.style.cursor='help';
-							newCell.innerHTML=(function()
-							{
-								//implementing translation:
-								var description = translate(field+"_descr");
-								var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
-								return description+" ("+code+")";
-							})();
-
-							//value
-							var newCell=newRow.insertCell(-1);
-
-							//if substages==1, show value, else: show all values
-							if(typeof(substages)=='object' && substages.length > 1)
-							{
-								newCell.innerHTML=(function()
-								{
-									var n = substages.length;
-									var ret = "";
-									for(var i=0;i<n;i++)
-									{
-										var value = substages[i][field]
-										var option = Tables.find(field,value)
-										ret+="<div title='"+substages[i].name+"'>Substage "+(i+1)+": "+option+" ("+value+")</div>";
-									}
-									return ret;
-								})();
-								return;
-							}
-							else
-							{
-								newCell.className="input";
-								newCell.title="<?php write('#edit_click_to_modify')?>";
-
-							}
-						}
-
-						//here check if table is empty (==t.rows.length is 2)
-						if(t.rows.length<2)
-						{
-							var newCell=t.insertRow(-1).insertCell(-1)
-							newCell.colSpan=4
-							newCell.innerHTML="<span style=color:#999>~All inputs inactive</span>";
-							t.style.display='none'
-						}
-
-						//bottom line decoration with the color of W/WW
-						var newRow=t.insertRow(-1);
-						var newTh=document.createElement('th');
-						newTh.setAttribute('colspan',4)
-						newTh.style.borderBottom='none';
-						newRow.appendChild(newTh);
-					}
-				</script>
 			</div>
 
 			<!--Outputs-->

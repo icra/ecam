@@ -191,7 +191,7 @@
 					<td class=input><input id='wsa_vol_conv' onchange="BEV.updateField(this)"> 
 					<td>m<sup>3</sup>
 
-				<tr stage=water class=hidden><td><?php write('#birds_ws_vol_auth')?> <td class=input><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>m3
+				<tr stage=water class=hidden><td><?php write('#birds_ws_vol_auth')?> <td class=input><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
 				<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cons')?> <td class=input><input id='ws_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh
 					<span class=circle style=background:#bca613></span>
 				<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
