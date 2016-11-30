@@ -19,7 +19,7 @@
 		td.input {width:80px;text-align:right;color:#666;cursor:cell;line-height:1em}
 		tr:not([hl=yes]) td.input {background-color:#eee;}
 
-		table#inputs tr:hover  {background:#ccc;}
+		table#substages tr[field]:hover  {background:#ccc;}
 
 		/*temporal: hide data quality column
 		table#inputs tr td:nth-child(n+4) {background:red;display:none}
@@ -58,14 +58,21 @@
 			border:none;
 			text-align:left;
 		}
+		div.substageMenu{
+			padding:0.1em;
+			border:2px solid #ccc;
+			background:#00aff1;
+			position:absolute;
+			box-shadow: 5px 5px 5px #888;
+		}
+		input.substageMenu{
+			padding:0.5em;
+			outline:none;
+			font-size:20px;
+		}
 	</style>
 
 	<script>
-		/** 
-		  * Note: Try to follow JSdoc structure (http://usejsdoc.org/about-getting-started.html) 
-		  *
-		  */
-
 		<?php
 			//establish the stage we are going to be focused
 			if($sublevel)
@@ -81,6 +88,9 @@
 				echo "var substages = false;";
 			}
 		?>
+
+		//namespace for old level3.php structure
+		var level3={};
 
 		//remove a variable from the data structure which is no longer inside
 		function removeGhost(field)
@@ -135,136 +145,11 @@
 		/** Redisplay table id=inputs */
 		function updateInputs()
 		{
-			var t=document.getElementById('inputs')
-			while(t.rows.length>2){t.deleteRow(-1)}
 			for(var field in CurrentLevel)
 			{
-				/*first check if function*/
-				if(typeof(CurrentLevel[field])!="number")
-				{
-					/*then, check if is calculated variable "c_xxxxxx" */
-					if(field.search(/^c_/)==-1) continue;
-				}
-
-				/*check if is an option*/
-				if(Info[field].magnitude=="Option") continue;
-
-				/*check if field is level3 specific*/if(Level3.list.indexOf(field)+1) continue;
-
-				/*disable row according to questions*/
-				if(Questions.isHidden(field))
-				{
-					continue
-					//disableRow(newRow);
-				}
-
-				//bool for if current field is a calculated variable (CV)
-				var isCV = field.search(/^c_/)!=-1;
-
-				/*new row*/var newRow=t.insertRow(-1);
-
-				/*background*/if(isCV){newRow.classList.add('isCV');}
-
-				/*hlInputs for formula and show formula, only if CV*/
-				if(isCV)
-				{
-					var formula = CurrentLevel[field].toString();
-					var prettyFormula = Formulas.prettify(formula);
-					newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
-					newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
-					newRow.setAttribute('title',prettyFormula);
-				}
-				else{
-					newRow.setAttribute('onmouseover','Formulas.hlOutputs("'+field+'",CurrentLevel,1)');
-					newRow.setAttribute('onmouseout', 'Formulas.hlOutputs("'+field+'",CurrentLevel,0)');
-				}
-				
-				/*new ro attribute field=field>*/
-				newRow.setAttribute('field',field);
-
-				/*description*/ 
-				var newCell=newRow.insertCell(-1);
-
-				newCell.setAttribute('title', translate(field+"_expla"));
-				newCell.style.cursor='help';
-
-				newCell.innerHTML=(function()
-				{
-					//implementing translation:
-					var description = translate(field+"_descr");
-					var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
-					return description+" ("+code+")";
-				})();
-
-				//editable cell if not CV
-				var newCell=newRow.insertCell(-1);
-				if(!isCV)
-				{
-					if(typeof(substages)=="object" && substages.length > 1)
-					{
-						//this means you are in level 2 and you should NOT be able to modify inputs here
-						newCell.style.textAlign="center"
-						newCell.title="<?php write('#variable_go_to_substages')?>";
-					}
-					else
-					{
-						newCell.className="input";
-						newCell.title="<?php write('#edit_click_to_modify')?>";
-						newCell.setAttribute('onclick','transformField(this)');
-					}
-				}
-				else //calculated variable, show formula
-				{
-					newCell.title=Formulas.prettify(CurrentLevel[field].toString());
-				}
-
-				/*value*/
-				newCell.innerHTML=(function()
-				{
-					var value = isCV ? CurrentLevel[field]() : CurrentLevel[field];
-					value/=Units.multiplier(field);
-					value=format(value);
-					return value
-				})();
-
 				//check if this cv has estimated data
 				var ed=DQ.hasEstimatedData(field) ? " <span title='<?php write('#variable_this_equation_contains_estimated_data')?>' class=estimated>&#9888;</span>" : "";
 				newCell.innerHTML+=ed;
-
-				//unit
-				newRow.insertCell(-1).innerHTML=(function()
-				{
-					if(!Info[field])
-						return "<span style=color:#ccc>no unit</span>";
-
-					if(Info[field].magnitude=="Currency")
-					{
-						return Global.General.Currency;
-					}
-
-					if(isCV) 
-					{
-						return Info[field].unit;
-					}
-					else
-					{
-						var str="<select onchange=Units.selectUnit('"+field+"',this.value)>";
-						if(Units[Info[field].magnitude]===undefined)
-						{
-							return Info[field].unit
-						}
-						var currentUnit = Global.Configuration.Units[field] || Info[field].unit
-						for(var unit in Units[Info[field].magnitude])
-						{
-							if(unit==currentUnit)
-								str+="<option selected>"+unit+"</option>";
-							else
-								str+="<option>"+unit+"</option>";
-						}
-						str+="</select>"
-						return str
-					}
-				})();
 
 				//data quality
 				/*
@@ -291,73 +176,6 @@
 				})();
 				*/
 			}
-
-			//go over variables magnitude==Option
-			for(var field in CurrentLevel)
-			{
-				if(!Info[field]) continue;
-				if(Info[field].magnitude!="Option") continue;
-
-				//new row
-				var newRow=t.insertRow(-1)
-				newRow.setAttribute('field',field);
-
-				//description
-				var newCell=newRow.insertCell(-1);
-				newCell.setAttribute('title', translate(field+"_expla"));
-				newCell.style.cursor='help';
-				newCell.innerHTML=(function()
-				{
-					//implementing translation:
-					var description = translate(field+"_descr");
-					var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
-					return description+" ("+code+")";
-				})();
-
-				//value
-				var newCell=newRow.insertCell(-1);
-				newCell.colSpan=2;
-				newCell.style.textAlign='left'
-
-				//if substages==1, show value, else: show all values
-				if(typeof(substages)=='object' && substages.length > 1)
-				{
-					newCell.innerHTML=(function()
-					{
-						var n = substages.length;
-						var ret = "";
-						for(var i=0;i<n;i++)
-						{
-							var value = substages[i][field]
-							var option = Tables.find(field,value)
-							ret+="<div title='"+substages[i].name+"'><b>Substage "+(i+1)+":</b> "+option+" ("+value+")</div>";
-						}
-						return ret;
-					})();
-					return;
-				}
-				else
-				{
-					newCell.className="input";
-					newCell.title="<?php write('#edit_click_to_modify')?>";
-
-				}
-			}
-
-			//here check if table is empty (==t.rows.length is 2)
-			if(t.rows.length<3)
-			{
-				var newCell=t.insertRow(-1).insertCell(-1)
-				newCell.colSpan=4
-				newCell.innerHTML="<span style=color:#999>~All inputs inactive</span>";
-			}
-
-			//bottom line decoration with the color of W/WW
-			var newRow=t.insertRow(-1);
-			var newTh=document.createElement('th');
-			newTh.setAttribute('colspan',4)
-			newTh.style.borderBottom='none';
-			newRow.appendChild(newTh);
 		}
 
 		/** Redisplay table id=outputs */
@@ -804,8 +622,8 @@
 		/** Update all */
 		function init()
 		{
+			level3.updateSubstagesTable()
 			updateQuestionsTable()
-			updateInputs()
 			updateOutputs()
 			updateNrgOutputs()
 			updateOtherOutputs()
@@ -851,45 +669,6 @@
 <div>
 	<!--container for questions and assessment info-->
 	<div>
-		<!--go to substages-->
-		<?php 
-			if($sublevel)
-			{ 
-				?>
-				<div class="card inline"><?php cardMenu("Nº of substages: 
-							<script>document.write(Substages['$level']['$sublevel'].length)</script>")?>
-					<div style=padding:1.5em>
-						<div>
-							General info about the 
-							<b>
-							<script>document.write(translate('<?php echo $sublevel?>'))</script> 
-							</b>
-							stage. 
-							<br>
-							If you have multiple facilities, please go to:
-						</div>
-						<div style='margin-top:0.5em'>
-							<button id=btn_goto_substages
-								onclick="window.location='<?php echo"level3.php?level=$level&sublevel=$sublevel"?>'">
-								<img src=img/substage.png style='width:30px;margin-right:0.5em;vertical-align:middle'>
-								<?php echo $lang_json['#substages']?>
-							</button>
-						</div>
-						<style>
-							#btn_goto_substages {
-								background:#fafef1;
-								border-radius:0.3em;
-								border:1px solid #aaa;
-								box-shadow: 0 1px 2px rgba(0,0,0,.1);
-								font-size:18px;
-								width:100%;
-							}
-						</style>
-					</div>
-				</div>
-				<?php 
-			}
-		?>
 		<!--questions-->
 		<div class="card inline">
 			<?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
@@ -1011,10 +790,424 @@
 		</div>
 	</div>
 
-	<!--i/o-->
+	<!--SUBSTAGES-->
+	<div class=card style=text-align:left>
+		<?php cardMenu("
+			INPUTS 
+			&mdash; 
+			Substages: <span id=counter>0</span>
+			&mdash; 
+			Assessment Period: <script>document.write(Global.General.Days())</script> days
+		")?>
+		<table id=substages style="margin:0.5em"> 
+			<tr><td colspan=2 style="min-width:260px;text-align:right">
+				<!--new substage button-->
+				<button onclick=level3.newSubstage() class=button style="background:#af0;box-shadow: 0 1px 2px rgba(0,0,0,.1);">
+					+ <?php write('#level3_new_substage')?>
+				</button>
+				<button class=button onclick=level3.toggleViewSum()>View sum only</button>
+				<script>
+					level3.toggleViewSum=function()
+					{
+						var newDisplay=document.querySelector('#substages td.input').style.display=='none' ? '':'none';
+						var n=substages.length;
+						var tr=document.querySelector('#substages tr');//fist tr
+						for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay
+						var tr=document.querySelector('#substages tr:last-child');//last tr
+						for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay
+						var collection=document.querySelectorAll('#substages td.input');
+						for(var i=0;i<collection.length;i++) collection[i].style.display=newDisplay
+					}
+				</script>
+		</table>
+		<script>
+			/** INPUTS redisplay */
+			level3.updateSubstagesTable=function()
+			{
+				/*table element*/
+				var t=document.getElementById('substages');
+				while(t.rows[0].cells.length>1)t.rows[0].deleteCell(-1);
+
+				/*table headers */
+					//go over substages: create a column for each
+					for(var s in substages)
+					{
+						var newTH = document.createElement('th');
+						newTH.style.cursor="pointer";newTH.style.width="120px";
+						newTH.innerHTML=""+
+							"<?php write('#substage')?> "+(parseInt(s)+1)+" "+
+							"<div style=font-weight:bold>"+substages[s].name+"</div>";
+						newTH.setAttribute('onclick','level3.showSubstageMenu('+s+',event)');
+						newTH.title="<?php write('#level3_click_to_modify_the_name')?>";
+						t.rows[0].appendChild(newTH);
+					}
+					//TOTAL header
+					var newTH = document.createElement('th');
+					t.rows[0].appendChild(newTH);
+					newTH.innerHTML="&sum; Sum of substages";
+
+					//UNIT header
+					var newTH = document.createElement('th');
+					t.rows[0].appendChild(newTH);
+					newTH.innerHTML="<?php write('#level3_unit')?>";
+				/*end headers*/
+
+				/*update table body*/
+					while(t.rows.length>1)t.deleteRow(-1)
+
+					//each row corresponds to a variable of the current stage
+					var inputs=level3.getInputs();
+
+					//find calculated variables
+					var cvs=[];
+					(function()
+					{
+						for(var f in CurrentLevel)
+						{
+							if(f.search(/^c_/)!=-1) {cvs.push(f);}
+						}
+						inputs=inputs.concat(cvs);
+					})();
+
+					//go over inputs array we've just created
+					for(var input in inputs)
+					{
+						/*variable code*/
+						var code=inputs[input];
+						
+						/*is a calculated variable*/
+						var isCV=typeof(CurrentLevel[code])=="function" ? true : false;
+
+						//copy the function inside current substage
+						if(isCV) 
+						{
+							for(var s in substages)
+								substages[s][code]=CurrentLevel[code]; 
+						}
+
+						/*if assessment type is simple, hide L3 variables*/
+						if(Global.Configuration.Assessment['<?php echo "$level']['$sublevel"?>']=="simple")
+						{
+							if(Level3.list.indexOf(code)>-1) continue;
+						}
+
+						//if is an option, continue (will show at the end of the table)
+						if(Info[code].magnitude=="Option") continue;
+
+						/*new row*/
+						var newRow=t.insertRow(-1);
+						newRow.setAttribute('field',code);
+						if(Questions.isHidden(code)) disableRow(newRow);
+
+						/*background color*/ if(isCV) newRow.classList.add('isCV');
+
+						//mouse over listener for highlighting
+						if(isCV)
+						{
+							var formula=CurrentLevel[code].toString();
+							var prettyFormula=Formulas.prettify(formula);
+							newRow.setAttribute('onmouseover','Formulas.hlInputs("'+code+'",CurrentLevel,1)');
+							newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+code+'",CurrentLevel,0)');
+						}
+						else
+						{
+							newRow.setAttribute('onmouseover','Formulas.hlOutputs("'+code+'",CurrentLevel,1)');
+							newRow.setAttribute('onmouseout', 'Formulas.hlOutputs("'+code+'",CurrentLevel,0)');
+						}
+
+						/*1st cell: show code*/
+						var newCell=newRow.insertCell(-1);
+						newCell.style.textAlign='left';newCell.style.fontSize='10px';
+						newCell.innerHTML=(function()
+						{
+							var extra = Level3.list.indexOf(code)>-1 ? "(<span style=font-size:10px><?php write('#level3_advanced')?></span>)" : "" ;
+							return extra+" <a href=variable.php?id="+code+">"+code+"</a>";
+						})();
+
+						/*2nd cell: variable name*/
+						var newCell=newRow.insertCell(-1);
+						newCell.style.textAlign="left";newCell.style.cursor="help";
+						newCell.setAttribute('title', translate(code+'_expla'));
+						newCell.innerHTML=translate(code+'_descr');
+
+						//3rd cell and so on: go over substages
+						var multiplier=Units.multiplier(code);
+						for(var s in substages)
+						{
+							var newCell=newRow.insertCell(-1);
+
+							if(isCV)
+							{
+								newCell.innerHTML=format(substages[s][code]()/multiplier);
+								newCell.title=prettyFormula;
+							}
+							else
+							{
+								newCell.classList.add("input");
+								newCell.setAttribute('onclick','level3.transformField(this)');
+								newCell.setAttribute('substage',s);
+								newCell.innerHTML=format(substages[s][code]/multiplier);
+							}
+						}
+
+						//SUM OF SUBSTAGES = LEVEL 2
+						var sum=level3.sumAll(code);
+
+						//some variables are averaged instead of summed up
+						if(Averaged.isAveraged(code)) 
+							sum/=substages.length;
+
+						//BUG FIX: only update real inputs
+						if(!isCV) CurrentLevel[code]=sum;
+
+						//LEVEL 2 current value
+						var newCell=newRow.insertCell(-1);
+						newCell.style.textAlign="center";newCell.style.fontWeight="bold";
+						newCell.innerHTML=(function()
+						{
+							if(isCV) 
+								return format(CurrentLevel[code]()/multiplier);
+							else
+							{
+								var isAvg = Averaged.isAveraged(code) ? " (average)": "";
+
+								return format(CurrentLevel[code]/multiplier)+isAvg;
+							}
+						})();
+
+						//Unit for current input
+						newRow.insertCell(-1).innerHTML=(function()
+						{
+							//check if unit is entered in "Info"
+							if(!Info[code]) return "undefined";
+							//check if unit is currency
+							if(Info[code].magnitude=="Currency") { return Global.General.Currency; }
+							//if no magnitude, return unit string
+							if(Units[Info[code].magnitude]===undefined) { return Info[code].unit }
+
+							//look for current unit
+							var currentUnit = Global.Configuration.Units[code] || Info[code].unit
+
+							//create a <select> for unit changing
+							var str="<select onchange=Units.selectUnit('"+code+"',this.value)>";
+							for(unit in Units[Info[code].magnitude])
+							{
+								if(unit==currentUnit)
+									str+="<option selected>"+unit+"</option>";
+								else
+									str+="<option>"+unit+"</option>";
+							}
+							str+="</select>"
+							return str
+						})();
+					}
+
+					//go over inputs "magnitude==option"
+					for(var input in inputs)
+					{
+						/*variable code*/
+						var code=inputs[input];
+						
+						//if is an option, continue (will show at the end of the table)
+						if(Info[code].magnitude!="Option") continue;
+
+						/*new row*/
+						var newRow=t.insertRow(-1);
+						newRow.setAttribute('field',code);
+						if(Questions.isHidden(code)) disableRow(newRow);
+
+						/*1st cell: show code*/
+						var newCell=newRow.insertCell(-1);
+						newCell.style.textAlign='left';
+						newCell.style.fontSize='10px';
+						newCell.innerHTML=(function()
+						{
+							var extra = Level3.list.indexOf(code)>-1 ? "(<span style=font-size:10px><?php write('#level3_advanced')?></span>)" : "" ;
+							return extra+" <a href=variable.php?id="+code+">"+code+"</a>";
+						})();
+
+						/*2nd cell: variable name*/
+						var newCell=newRow.insertCell(-1);
+						newCell.style.textAlign="left";newCell.style.cursor="help";
+						newCell.setAttribute('title', translate(code+'_expla'));
+						newCell.innerHTML=translate(code+'_descr');
+
+						//3rd cell and so on: go over substages
+						for(var s in substages)
+						{
+							var newCell=newRow.insertCell(-1);
+							newCell.classList.add("input");
+							newCell.setAttribute('substage',s);
+							(function()
+							{
+								var select=document.createElement('select');
+								newCell.appendChild(select)
+								if(substages.length==1)
+									select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);CurrentLevel["'+code+'"]=parseInt(this.value);init()')
+								else
+									select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);init()')
+								for(var op in Tables[code])
+								{
+									var option = document.createElement('option');
+									var value = parseInt(Tables[code][op].value);
+									select.appendChild(option);
+									option.value=value;
+									option.innerHTML=op+" ("+value+")";
+									if(substages[s][code]==value) 
+									{
+										option.selected=true;
+									}
+								}
+							})();
+						}
+					}
+
+					//last row: delete substage
+					var newRow=t.insertRow(-1);
+					var newCell=newRow.insertCell(-1);
+					newCell.style.border="none";newCell.colSpan=2;
+					for(var s in substages)
+					{
+						newCell=newRow.insertCell(-1);
+						newCell.style.textAlign='center';
+						var str=""+
+							"<button class=button onclick=level3.deleteSubstage("+s+") title='<?php write('#level3_delete_substage')?>' style='margin:0;'>&#9003;</button>"
+						newCell.innerHTML=str
+					}
+				/*end update body*/
+
+				/*update substage counter*/ 
+				document.getElementById('counter').innerHTML=substages.length
+			}
+			level3.getInputs=function()
+			{
+				var inputs=[];
+				for(var field in CurrentLevel)
+				{
+					if(typeof(CurrentLevel[field])!="number" ){continue;}
+					inputs.push(field);
+				}
+				return inputs;
+			}
+			level3.sumAll=function(code)
+			{
+				var sum=0;
+				for(var s in substages){sum+=parseFloat(substages[s][code])}
+				return sum;
+			}
+			/** new Substage class for storing all variables that correspond to current stage */
+			level3.Substage=function()
+			{
+				/*get a list of variables for this level*/ var inputs=level3.getInputs();
+				/*substage default name*/ this.name="<?php write('#name')?>";
+				//init with zero values, e.g. Substage {tV1: 0, tV2: 0, tV3: 0, tV4: 0, tV5: 0, ...}
+				for(var i in inputs){this[inputs[i]]=0;}
+			}
+			/** New substage button pushed */
+			level3.newSubstage=function()
+			{
+				event.stopPropagation(); //this is to see the memory progress
+				//check memory usage
+				if(document.cookie.length>=8100)
+				{
+					alert("<?php write('#level3_error_memory_full')?> ("+document.cookie.length+" bytes used)");
+					return
+				}
+				substages.push(new level3.Substage());
+				init();
+			}
+			/** button delete substage pushed */
+			level3.deleteSubstage=function(index)
+			{
+				if(substages.length==1)
+				{
+					alert("<?php write('#level3_error_cannot_delete_last_substage')?>");
+					return;
+				}
+				substages.splice(index,1);
+				init();
+			}
+			/** update substage name */
+			level3.changeName=function(index,newValue)
+			{
+				substages[index].name=newValue;
+				init();
+			}
+			/** make appear a menu for changing substage[index] name */
+			level3.showSubstageMenu=function(index,ev)
+			{
+				//new div element
+				var div = document.createElement('div')
+				document.body.appendChild(div)
+				div.className="substageMenu"
+				//get mouse coordinates
+				div.style.top=ev.pageY+"px"
+				div.style.left=ev.pageX+"px"
+				//add to screen
+				div.innerHTML="<div style=color:white><?php write('#level3_new_name')?> "+(index+1)+":</div>"
+				//new input element
+				var input = document.createElement('input')
+				div.appendChild(input)
+				input.className="substageMenu"
+				input.placeholder='New name'
+				input.value=substages[index].name
+				//onblur: remove it
+				input.onblur=function(){document.body.removeChild(div)}
+				//on enter pressed (13) hide it
+				input.onkeypress=function(ev){if(ev.which==13)div.style.display='none'}
+				//onchange: update name
+				input.onchange=function(){level3.changeName(index,input.value)}
+				input.select()
+			}
+			//transform a cell to make it editable
+			level3.transformField=function(element)
+			{
+				element.removeAttribute('onclick')
+				var field=element.parentNode.getAttribute('field')
+				var substage=element.getAttribute('substage')
+				element.innerHTML=""
+				var input=document.createElement('input')
+				input.autocomplete='off'
+				input.setAttribute('onkeypress',"if(event.which==13){level3.updateSubstage("+substage+",'"+field+"',this.value)}")
+				input.setAttribute('onblur',"level3.updateSubstage("+substage+",'"+field+"',this.value)") //now works
+				input.onkeydown=function(event)
+				{
+					switch(event.which)
+					{
+						case 38: input.value++;break;
+						case 40: input.value--;break;
+						case 9: //TAB
+							setTimeout(function()
+							{
+								var el=document.querySelector('#inputs tr[field='+field+']').nextSibling.childNodes[1];
+								if(el)
+									el.onclick();
+							},100);
+							break;
+					}
+				}
+				//value converted
+				var multiplier = Units.multiplier(field);
+				input.value=substages[substage][field]/multiplier;
+				element.appendChild(input)
+				input.select()
+			}
+			//update a field of the substage[index]
+			level3.updateSubstage=function(index,field,newValue)
+			{
+				newValue=parseFloat(newValue);
+				if(isNaN(newValue))newValue=0;
+				var multiplier=Units.multiplier(field);
+				substages[index][field]=multiplier*newValue;
+				init();
+			}
+		</script>
+	</div>
+
+	<!--Edit.php-->
 	<div class=card>
 		<div class=menu onclick=this.parentNode.classList.toggle('folded')><button></button>
-			Inputs &amp; Outputs
+			OUTPUTS
 			<!--button toggle outputs/graph display-->
 			<script>
 				function toggleGraph(event,thisB)
@@ -1045,41 +1238,10 @@
 			</button>
 		</div>
 
-		<!--Input Output-->
+		<!--Outputs-->
 		<div id=ioContainer>
-			<!--Inputs-->
-			<div class=inline 
-				style="width:45%;margin-left:0.5em;<?php if($level=="Energy") echo "display:none;"?>">
-				<table id=inputs style="width:100%;margin-bottom:0.5em">
-					<tr><th colspan=5 class=tableHeader>INPUTS
-					&mdash; 
-						<!--show assessment period-->
-						<span>Assessment period: <script>document.write(Global.General.Days())</script> days</span>
-					<tr>
-						<th><?php write('#edit_description')?>
-						<th><?php if($sublevel) {
-								echo "<script>
-									if(Substages['$level']['$sublevel'].length>1)
-									{
-										document.write('&sum; Sum of substages')
-									}
-									else
-									{
-										document.write(translate('edit_current_value'))
-									}
-								</script>
-								";
-							}
-							else write('#edit_current_value')?>
-						<th><?php write('#edit_unit')?>
-						<!--
-						<th><?php write('#edit_data_quality')?>
-						-->
-				</table>
-			</div>
-
 			<!--Outputs-->
-			<div id=outputs_container class=inline style="width:50%;margin-left:0.5em;margin-bottom:2em">
+			<div id=outputs_container class=inline style="width:40%;margin-left:0.5em;margin-bottom:2em">
 				<!--GHG-->
 				<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:0.5em;">
 					<tr><th colspan=7 class=tableHeader>
@@ -1127,7 +1289,7 @@
 			</div>
 
 			<!--GRAPHS-->
-			<div id=graph_container class=inline style="display:none;width:50%;margin-left:0.5em;margin-bottom:2em">
+			<div id=graph_container class=inline style="width:55%;margin-left:0.5em;margin-bottom:2em">
 				<!--choose graph type buttons-->
 				<?php include'buttonsGraphType.php'?>
 				<!--actual graph-->
@@ -1145,15 +1307,28 @@
 			</div>
 		</div>
 	</div>
-
-	<!--opportunities-->
-	<div class=card>
-		<?php cardMenu("Opportunities")?>
-		<div style=padding:1em>
-		under development
-		</div>
-	</div>
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
+
+<script>
+/** If no substages (==first time entering level3: create one substage with L2 values*/
+(function checkIfNoSubstages()
+{
+	if(substages.length==0)
+	{
+		//create a substage
+		substages.push(new level3.Substage());
+	}
+	//if there is already one substage
+	if(substages.length==1)
+	{
+		//make the first substage have L2 values
+		level3.getInputs().forEach(function(field)
+		{
+			substages[0][field]=CurrentLevel[field];
+		});
+	}
+})();
+</script>

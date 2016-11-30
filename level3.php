@@ -97,14 +97,12 @@
 		function newSubstage()
 		{
 			event.stopPropagation(); //this is to see the memory progress
-
 			//check memory usage
 			if(document.cookie.length>=8100)
 			{
 				alert("<?php write('#level3_error_memory_full')?> ("+document.cookie.length+" bytes used)");
 				return
 			}
-
 			substages.push(new Substage());
 			init();
 		}
@@ -600,7 +598,6 @@
 		/** Update all tables */
 		function init()
 		{
-			updateAssessmentMenu(); //inside "assessmentType.php"
 			updateSubstagesTable();
 			updateOutputs();
 			Sidebar.update();
@@ -612,6 +609,7 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear diagram--><?php include'linear.php'?>
+
 <!--TITLE-->
 <?php 
 	//Navigable <h1>title</h1>
@@ -625,10 +623,8 @@
 	$title="<a href=stages.php><script>document.write(Global.General.Name)</script></a> 
 		$sep $titleLevel $sep $titleSublevel $sep <span style='color:black;font-size:26px'>".$lang_json['#substages']."</a>";
 ?>
-<style> h1 {text-align:left;padding-left:17em;border-bottom:1px solid #ccc;background:white}</style>
-<!--TITLE--><h1><?php echo $title?>
-<!--type of assessment--><?php include'assessmentType.php'?>
-</h1>
+<h1><?php echo $title?></h1>
+<style>h1{text-align:left;padding-left:17em;border-bottom:1px solid #ccc;background:white}</style>
 
 <div id=main>
 
@@ -648,24 +644,24 @@
 	<div class=menu onclick=this.parentNode.classList.toggle('folded')>
 		<button></button>
 		Outputs
-
 		<!--button toggle graph display-->
 		<script>
 			function toggleGraph(event,thisB)
 			{
 				event.stopPropagation();
-				var graph=document.querySelector('#graphContainer')
-				var ioCon=document.querySelector('#outputs')
+				var graph=document.querySelector('#graphContainer');
+				var ioCon=document.querySelector('#outputs');
 				if(graph.style.display=='none')
-        {
-          ioCon.style.display='none';graph.style.display='';
-          thisB.classList.add('active');
-        }
-				else{
-          ioCon.style.display='';graph.style.display='none';
-          thisB.classList.remove('active');
-        }
-				init()
+				{
+					ioCon.style.display='none';graph.style.display='';
+					thisB.classList.add('active');
+				}
+				else
+				{
+					ioCon.style.display='';graph.style.display='none';
+					thisB.classList.remove('active');
+				}
+				init();
 			}
 		</script>
 		<button 
@@ -702,11 +698,6 @@
 	</div>
 </div>
 
-<!--opportunities-->
-<div class=card><?php cardMenu("Opportunities")?>
-	<div style=padding:0.5em>under development</div>
-</div>
-
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>
@@ -727,7 +718,7 @@
 		//make the first substage have L2 values
 		getInputs().forEach(function(field)
 		{
-			substages[0][field] = CurrentStage[field]
+			substages[0][field]=CurrentStage[field];
 		});
 	}
 })();

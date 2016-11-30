@@ -42,7 +42,7 @@ Graphs.graph1=function(withTable,container)
 	{ 
 		height:250,
 		legend:{position:'left'},
-		title:"<?php write('#graphs_graph1')?> ("+format(Global.General.TotalGHG())+" kg CO2)",
+		title:"<?php write('#graphs_graph1')?> ("+format(ws+ww)+" kg CO2)",
 		slices:
 		{
 			0:{color:'#00aff1' },
@@ -117,6 +117,8 @@ Graphs.graph4=function(withTable,container)
 	var slice_8 = ww * Global.Waste.ww_KPI_GHG_ne_n2o_unt();
 	var slice_9 = ww * Global.Waste.ww_KPI_GHG_ne_engines();
 
+	var sum = slice_1+slice_2+slice_3+slice_4+slice_5+slice_6+slice_7+slice_8+slice_9;
+
 	//names
 	var names=[
 		"WS <?php write("#ws_KPI_GHG_elec_descr")?>",
@@ -150,7 +152,7 @@ Graphs.graph4=function(withTable,container)
 	{ 
 		height:250,
 		legend:{position:'left'},
-		title:"<?php write('#graphs_graph4')?> ("+format(Global.General.TotalGHG())+" kg CO2) [Detailed]",
+		title:"<?php write('#graphs_graph4')?> ("+format(sum)+" kg CO2) [Detailed]",
 		slices:
 		{
 			0:{color:ColorsGHG.ws_KPI_GHG_elec      },
@@ -433,7 +435,7 @@ Graphs.graph7=function(withTable,container)
 		{
 			var name = stages[s][i].name;
 			var value = stages[s][i][names[s]];
-			DATA.push([ name+" ("+title+" substage "+(parseInt(i)+1)+")", value])
+			DATA.push([title+" S"+(parseInt(i)+1)+": "+name, value])
 		}
 	}
 

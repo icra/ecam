@@ -334,14 +334,14 @@ var Global = {
 		},
 		Assessment:{
 			Water:{
-				Abstraction:"simple",
-				Treatment:"simple",
-				Distribution:"simple",
+				Abstraction:"advanced",
+				Treatment:"advanced",
+				Distribution:"advanced",
 			},
 			Waste:{
-				Collection:"simple",
-				Treatment:"simple",
-				Discharge:"simple",
+				Collection:"advanced",
+				Treatment:"advanced",
+				Discharge:"advanced",
 			}
 		},
 
