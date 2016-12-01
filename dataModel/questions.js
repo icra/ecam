@@ -14,7 +14,7 @@
 var Questions = 
 {
 	//L1 WATER
-	//L1 WASTE
+	//L1 WASTE TBD
 		"truck_transport_waste":[
 			"ww_dist_dis",
 			"ww_num_trip",
@@ -36,6 +36,7 @@ var Questions =
 			"wwt_KPI_nrg_biogas",
 			"wwt_KPI_nrg_x_biog",
 		],
+
 	//L2 wsa
 		"pumping_for_abstraction":[ 
 			"wsa_nrg_cons", 
@@ -54,6 +55,8 @@ var Questions =
 			"wsa_KPI_un_head_loss",
 			"wsa_KPI_std_nrg_cons",
 			"wsa_KPI_std_elec_eff",
+			"wsa_pmp_type",
+			"wsa_pmp_size",
 		],
 		"wsa_engines":[ "wsa_vol_fuel", "wsa_KPI_GHG_ne", ],
 	//L2 wst
@@ -77,6 +80,15 @@ var Questions =
 			"c_wsd_nrg_natu",
 			"wsd_KPI_nrg_topgraph",
 		],
+
+	//L2 wwc
+	//L2 wwt
+		"wwt_sludge_mgmt":[
+			"wwt_mass_slu",
+			"wwt_dryw_slu",
+		],
+	//L2 wwd
+
 }
 
 Questions.isHidden=function(field)

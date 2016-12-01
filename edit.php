@@ -29,7 +29,7 @@
 		tr:not([hl=yes]) td.input {background-color:#eee;}
 		tr:not([hl=yes]) td.CV {background-color:white}
 
-		table#substages {margin-left:0.2em}
+		table#substages {margin:0.2em 0 0.2em 0.2em;}
 		table#substages tr[field]:hover  {background:#ccc;}
 		table#substages tr:first-child td {border-top:none;border-left:none}
 
@@ -632,14 +632,42 @@
 		"<span style=color:black>$titleLevel</span>";
 ?>
 <style> h1 {text-align:left;padding-left:17em;line-height:2.1em;border-bottom:1px solid #ccc;background:white} </style>
-<h1><a href=stages.php><script>document.write(Global.General.Name)</script></a> <?php echo "$sep $title"?></h1></center>
+<h1><a href=stages.php><script>document.write(Global.General.Name)</script></a> <?php echo "$sep $title"?>
+
+<!--See description (link to iwa web)-->
+<?php if($sublevel)
+	{ 
+		?>
+		<span style="font-size:12px;"><?php
+				$iwaLink='http://www.iwa-network.org/water-climate-energy-solutions/public/catalogue/';
+				if($level=="Water" && $sublevel=="Abstraction")      $iwaLink.='stage/water_abstraction';
+				elseif($level=="Water" && $sublevel=="Treatment")    $iwaLink.='stage/water_treatment';
+				elseif($level=="Water" && $sublevel=="Distribution") $iwaLink.='stage/water_distribution';
+				elseif($level=="Waste" && $sublevel=="Collection")   $iwaLink.='stage/wastewater_collection';
+				elseif($level=="Waste" && $sublevel=="Treatment")    $iwaLink.='stage/wastewater_treatment';
+				elseif($level=="Waste" && $sublevel=="Discharge")    $iwaLink.='stage/wastewater_discharge';
+			?>&emsp;<a target=_blank href="<?php echo $iwaLink?>">See description</a>
+		</span>
+		<?php 
+	}
+?>
+
+<!--random tip-->
+<span style="font-size:12px;color:#666;float:right">
+	<div style="padding:0.5em;cursor:pointer" onclick="document.querySelector('#tip').innerHTML=Tips.random()">
+		<b><i>Tip</i></b> &rarr; <span id=tip style="font-style:italic" ><script>document.write(Tips.random())</script></span>
+	</div>
+</span>
+
+</h1>
+</center>
 
 <!--main container-->
 <div>
 	<!--container for questions and other info-->
 	<div>
 		<!--questions-->
-		<div class="card inline">
+		<div class="card">
 			<?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
 			<table style=margin:0.5em id=questions class=inline></table>
 			<script>
@@ -745,24 +773,6 @@
 				}
 			?>
 		</div>
-
-		<!--random tip-->
-		<div class="card inline" style="text-align:center">
-			<?php cardMenu("Tip")?>
-			<div style=padding:0.5em>
-				<span id=tip style="font-style:italic"><script>document.write(Tips.random())</script></span>
-				&emsp;
-				<button onclick="document.querySelector('#tip').innerHTML=Tips.random()">Another</button>
-			</div>
-		</div>
-
-		<!--old level3-->
-		<div class="card inline" style="text-align:center">
-			<?php cardMenu("Old substages link")?>
-			<div style="padding:1em 3em">
-				<button onclick="window.location='level3.php?level=<?php echo $level?>&sublevel=<?php echo $sublevel?>'">Substages</button>
-			</div>
-		</div>
 	</div>
 
 	<!--SUBSTAGES (inputs)-->
@@ -774,29 +784,33 @@
 				<?php cardMenu("
 					INPUTS 
 					&mdash; 
-					Substages: <span id=counter>0</span>
+					Stages: <b><span id=counter style='border-radius:0.3em;background:lightgreen;padding:0.1em 0.5em'>0</span></b>
 					&mdash; 
-					Assessment Period: <script>document.write(Global.General.Days())</script> days
+					Assessment Period: <b><script>document.write(Global.General.Days())</script> days</b>
 				")?>
 				<table id=substages> 
 					<tr><td colspan=2 style="min-width:260px;text-align:right">
-						<button class=button onclick=level3.toggleViewSum()>Toggle view all</button>
-						<script>
-							level3.toggleViewSum=function()
-							{
-								var newDisplay=document.querySelector('#substages td.input').style.display=='none' ? '':'none';
-								var n=substages.length;
-								var tr=document.querySelector('#substages tr');//fist tr
-								for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay
-								var tr=document.querySelector('#substages tr:last-child');//last tr
-								for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay
-								var collection=document.querySelectorAll('#substages td.input');
-								for(var i=0;i<collection.length;i++) collection[i].style.display=newDisplay
-							}
-						</script>
+						<!--view all-->
+						<label style=float:left>
+							View all
+							<input type=checkbox onclick=level3.toggleViewSum() checked> 
+							<script>
+								level3.toggleViewSum=function()
+								{
+									var newDisplay=document.querySelector('#substages td.input').style.display=='none' ? '':'none';
+									var n=substages.length;
+									var tr=document.querySelector('#substages tr');//fist tr
+									for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay
+									var tr=document.querySelector('#substages tr:last-child');//last tr
+									for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay
+									var collection=document.querySelectorAll('#substages td.input');
+									for(var i=0;i<collection.length;i++) collection[i].style.display=newDisplay
+								}
+							</script>
+						</label>
 						<!--new substage button-->
-						<button onclick=level3.newSubstage() class=button style="background:#af0;box-shadow: 0 1px 2px rgba(0,0,0,.1);">
-							+ <?php write('#level3_new_substage')?>
+						<button onclick=level3.newSubstage() class=button style="padding:auto;background:lightgreen;box-shadow: 0 1px 2px rgba(0,0,0,.1);">
+							+ Add stage
 						</button>
 				</table>
 				<script>
@@ -824,7 +838,7 @@
 							//TOTAL header
 							var newTH = document.createElement('th');
 							t.rows[0].appendChild(newTH);
-							newTH.innerHTML="&sum; Sum of substages";
+							newTH.innerHTML="&sum; Sum of stages";
 
 							//UNIT header
 							var newTH = document.createElement('th');
@@ -1016,6 +1030,7 @@
 								for(var s in substages)
 								{
 									var newCell=newRow.insertCell(-1);
+									newCell.style.textAlign='left';
 									newCell.classList.add("input");
 									newCell.setAttribute('substage',s);
 									(function()
@@ -1296,6 +1311,11 @@
 						<th style=width:17%><br>kg CO<sub>2</sub><br>per m<sup>3</sup>
 				</table>
 
+				<?php
+					//hide GHG if level is energy
+					if($level=="Energy") echo "<style>#outputs{display:none}</style>";
+				?>
+
 				<!--energy performance-->
 				<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
 					<tr><th colspan=4 class=tableHeader>OUTPUTS — Energy performance
@@ -1317,6 +1337,15 @@
 						<th><?php write('#edit_unit')?>
 				</table>
 			</div>
+		</div>
+	</div>
+
+	<!--old level3 link-->
+	<div class="card" style="text-align:center">
+		<?php cardMenu(" ")?>
+		<div style="padding:1em 3em;font-size:20px">
+			<a href='level3.php?level=<?php echo $level?>&sublevel=<?php echo $sublevel?>'>Outputs per Stage</a>
+			<b style=background:red>TBD</b>
 		</div>
 	</div>
 </div>

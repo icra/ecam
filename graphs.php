@@ -42,7 +42,7 @@ Graphs.graph1=function(withTable,container)
 	{ 
 		height:250,
 		legend:{position:'left'},
-		title:"<?php write('#graphs_graph1')?> ("+format(ws+ww)+" kg CO2)",
+		title:"Total GHG emissions ("+format(ws+ww)+" kg CO2) [Simple]",
 		slices:
 		{
 			0:{color:'#00aff1' },
@@ -152,7 +152,7 @@ Graphs.graph4=function(withTable,container)
 	{ 
 		height:250,
 		legend:{position:'left'},
-		title:"<?php write('#graphs_graph4')?> ("+format(sum)+" kg CO2) [Detailed]",
+		title:"Total GHG emissions ("+format(sum)+" kg CO2) [Detailed]",
 		slices:
 		{
 			0:{color:ColorsGHG.ws_KPI_GHG_elec      },

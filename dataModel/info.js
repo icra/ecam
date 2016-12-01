@@ -115,6 +115,8 @@ var Info = {
 	wsa_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
 	wsa_nrg_per_pmp_watr:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
 	wsa_SL_water_losses:{magnitude:"Volume/Distance",unit:"m<sup>3</sup>/km"},
+	"wsa_pmp_type":{magnitude:"Option",unit:"Pump type"},
+	"wsa_pmp_size":{magnitude:"Option",unit:"Pump size"},
 
 	//L2 Water Treatment
 	"wst_vol_trea":{magnitude:"Volume",unit:"m3",},
@@ -128,7 +130,7 @@ var Info = {
 	"wst_mass_slu":{magnitude:"Mass",unit:"kg",},
 	"wst_trea_cap":{magnitude:"Volume",unit:"m3",},
 	"wst_treatmen":{magnitude:"Option",unit:"Technology",},
-	"wst_t_PCFSFD":{magnitude:"Volume",unit:"m3",},	
+	"wst_trea_vol":{magnitude:"Volume",unit:"m3",},	
 	wst_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>",},
 	wst_KPI_slu_per_m3:{magnitude:"Mass/Volume",unit:"kg/m<sup>3</sup>",},
 	wst_KPI_capac_util:{magnitude:"Percent",unit:"%",},

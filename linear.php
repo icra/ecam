@@ -67,7 +67,7 @@
 	<div>
 		<div><span style="color:#666"><?php write('#summary')?></span></div>
 		<img class=l1 stage=water src=img/water.png onclick=window.location="summary.php?type=input" caption="<?php write('#Water')?>"> 
-		<img class=l1 stage=energy src=img/energy.png onclick=window.location="summary.php?type=input" caption="<?php write('#energy_summary')?>"> 
+		<img class=l1 stage=energy src=img/energy.png onclick=window.location="edit.php?level=Energy" caption="<?php write('#energy_summary')?>"> 
 		<img class=l1 stage=waste src=img/waste.png onclick=window.location="summary.php?type=input" caption="<?php write('#Waste')?>"> 
 	</div>
 

@@ -146,7 +146,7 @@
 <!--content-->
 <div>
 	<!--inputs-->
-	<div class="card inline" style="width:35%;"><?php cardMenu("Inputs &mdash; Operational Values during the assessment period")?>
+	<div class="card inline" style="width:35%;"><?php cardMenu("Inputs &mdash; Global values of the system")?>
 		<!--table-->
 		<table id=inputs style=width:100%>
 			<style>
