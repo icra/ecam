@@ -222,8 +222,8 @@ Graphs.graph2=function(withTable,container)
 //NRG
 {
 	//values
-	var ws=Global.Water.ws_nrg_cons;
-	var ww=Global.Waste.ww_nrg_cons;
+	var ws=Global.Water.ws_nrg_cons();
+	var ww=Global.Waste.ww_nrg_cons();
 
 	var names=[ "<?php write('#Water')?>", "<?php write('#Waste')?>" ];
 

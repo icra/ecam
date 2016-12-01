@@ -14,9 +14,7 @@
 var Questions = 
 {
 	//L1 WATER
-		"engines_in_water":[ "ws_vol_fuel", "ws_KPI_GHG_ne", ],
 	//L1 WASTE
-		"engines_in_waste":[ "ww_vol_fuel", "c_ww_nrg_engines", "ww_KPI_GHG_ne_engines", ],
 		"truck_transport_waste":[
 			"ww_dist_dis",
 			"ww_num_trip",

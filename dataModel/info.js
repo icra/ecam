@@ -12,7 +12,7 @@ var Info = {
 	//GENERAL
 	"Days":{magnitude:"Time",unit:"days",},
 	"Years":{magnitude:"Time",unit:"years",},
-	"conv_kwh_co2":{magnitude:"Conversion",unit:"kgCO2e/kWh",},
+	"conv_kwh_co2":{magnitude:"Conversion",unit:"kg CO<sub>2</sub>/kWh",},
 	
 	/* +================+ */
 	/* | Service levels | */
@@ -22,8 +22,8 @@ var Info = {
 	ws_SL_non_revw :{magnitude:"Percentage",unit:"%",},	
 	ws_SL_auth_con :{magnitude:"Volume/inhab/time",unit:"L/serv.pop./day",},
 	ws_SL_nrg_cost :{magnitude:"Percentage",unit:"%",},
-	ws_SL_nrw_emis :{magnitude:"Mass",unit:"kgCO2e"},
-	ws_SL_auc_emis :{magnitude:"Mass",unit:"kgCO2e"},
+	ws_SL_nrw_emis :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
+	ws_SL_auc_emis :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
 
 	//Wastewater
 	ww_SL_serv_pop :{magnitude:"Percentage",unit:"%",},
@@ -31,7 +31,7 @@ var Info = {
 	ww_SL_dilution :{magnitude:"Percentage",unit:"%",},
 	ww_SL_vol_pday :{magnitude:"Volume/inhab/time",unit:"L/serv.pop./day",},
 	ww_SL_nrg_cost :{magnitude:"Percentage",unit:"%",},
-	ww_SL_dil_emis :{magnitude:"Mass",unit:"kgCO2e"},
+	ww_SL_dil_emis :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
 
 	//L1 Water Supply
 	"ws_resi_pop":{magnitude:"People",unit:"People",},
@@ -40,10 +40,9 @@ var Info = {
 	"ws_nrg_cons":{magnitude:"Energy",unit:"kWh",},
 	"ws_nrg_cost":{magnitude:"Currency",unit:"USD",},
 	"ws_run_cost":{magnitude:"Currency",unit:"USD",},
-	"ws_vol_fuel":{magnitude:"Volume",unit:"L",},
-	ws_KPI_GHG_elec:{magnitude:"Mass",unit:"kgCO2e",},
-	ws_KPI_GHG_ne:{magnitude:"Mass",unit:"kgCO2e",},
-	ws_KPI_GHG :{magnitude:"Mass",unit:"kgCO2e",},
+	ws_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>",},
+	ws_KPI_GHG_ne:{magnitude:"Mass",unit:"kg CO<sub>2</sub>",},
+	ws_KPI_GHG :{magnitude:"Mass",unit:"kg CO<sub>2</sub>",},
 
 	//L1 Wastewater
 	"ww_bod_infl" :{magnitude:"Mass",unit:"kg",},
@@ -60,7 +59,6 @@ var Info = {
 	"ww_num_trip" :{magnitude:"Number",unit:"Number",},
 	"ww_dist_dis" :{magnitude:"Distance",unit:"km",},
 	"ww_n2o_effl" :{magnitude:"Mass",unit:"kg",},
-	"ww_vol_fuel" :{magnitude:"Volume",unit:"L",},
 	"ww_prot_con" :{magnitude:"Annual per capita consumption",unit:"kg/person/year",},
 	"ww_bod_pday" :{magnitude:"Mass/inhab/time",unit:"g/person/day",},
 	"ww_ch4_efac" :{magnitude:"Mass/Mass",unit:"kgCH<sub>4</sub>/kgBOD",},
@@ -70,15 +68,15 @@ var Info = {
 	c_ww_nrg_engines :{magnitude:"Energy",unit:"TJ",},
 	c_ww_nrg_tsludge :{magnitude:"Energy",unit:"TJ",},
 	c_ww_in_dilution:{magnitude:"Volume",unit:"m3",},
-	ww_KPI_GHG_elec  :{magnitude:"Mass",unit:"kgCO2e",},
-	ww_KPI_GHG_ne_ch4_wwt :{magnitude:"Mass",unit:"kgCO2e",},
-	ww_KPI_GHG_ne_n2o_tre :{magnitude:"Mass",unit:"kgCO2e",},
-	ww_KPI_GHG_ne_tsludge :{magnitude:"Mass",unit:"kgCO2e",},
-	ww_KPI_GHG_ne_ch4_unt :{magnitude:"Mass",unit:"kgCO2e",},
-	ww_KPI_GHG_ne_n2o_unt :{magnitude:"Mass",unit:"kgCO2e",},
-	ww_KPI_GHG_ne_engines :{magnitude:"Mass",unit:"kgCO2e",},
-	ww_KPI_GHG_ne :{magnitude:"Mass",unit:"kgCO2e",},
-	ww_KPI_GHG:{magnitude:"Mass",unit:"kgCO2e",},
+	ww_KPI_GHG_elec  :{magnitude:"Mass",unit:"kg CO<sub>2</sub>",},
+	ww_KPI_GHG_ne_ch4_wwt :{magnitude:"Mass",unit:"kg CO<sub>2</sub>",},
+	ww_KPI_GHG_ne_n2o_tre :{magnitude:"Mass",unit:"kg CO<sub>2</sub>",},
+	ww_KPI_GHG_ne_tsludge :{magnitude:"Mass",unit:"kg CO<sub>2</sub>",},
+	ww_KPI_GHG_ne_ch4_unt :{magnitude:"Mass",unit:"kg CO<sub>2</sub>",},
+	ww_KPI_GHG_ne_n2o_unt :{magnitude:"Mass",unit:"kg CO<sub>2</sub>",},
+	ww_KPI_GHG_ne_engines :{magnitude:"Mass",unit:"kg CO<sub>2</sub>",},
+	ww_KPI_GHG_ne :{magnitude:"Mass",unit:"kg CO<sub>2</sub>",},
+	ww_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>",},
 
 	//L1 ENERGY SUMMARY 
 		//Water Supply
@@ -135,9 +133,12 @@ var Info = {
 	wst_KPI_slu_per_m3:{magnitude:"Mass/Volume",unit:"kg/m<sup>3</sup>",},
 	wst_KPI_capac_util:{magnitude:"Percent",unit:"%",},
 	wst_SL_qual_com :{magnitude:"Percentage",unit:"%",},
+
 	wst_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wst_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wst_KPI_GHG_ne:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wst_KPI_GHG_slud:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wst_KPI_GHG_fuel:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	//L2 Water Distribution
 	"wsd_nrg_cons" :{magnitude:"Energy",unit:"kWh",},
@@ -169,6 +170,9 @@ var Info = {
 	wsd_KPI_nrg_topgraph:{magnitude:"Percent",unit:"%",},
 	wsd_KPI_water_losses:{magnitude:"Volume/Distance",unit:"m<sup>3</sup>/km",},
 	wsd_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km",},
+	wsd_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wsd_KPI_GHG_ne:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wsd_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	//L2 Wastewater Collection
 	"wwc_vol_conv":{magnitude:"Volume",unit:"m3",},

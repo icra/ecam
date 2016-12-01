@@ -137,10 +137,7 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear diagram--><?php include'linear.php'?>
 <!--TITLE--><h1><?php write('#configuration')?></h1>
-<!--SUBTITLE--><h4 style=margin:0><?php write('#configuration_subtitle')?></h4>
-
-<!--activate all debug button -->
-<div style=font-size:12px;margin:0.3em>
+<!--SUBTITLE--><h4 style=margin:0><?php write('#configuration_subtitle')?>
 	<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
 	<script>
 		function activateAllStages()
@@ -153,7 +150,7 @@
 			});
 		}
 	</script>
-</div>
+</h4>
 
 <div id=main>
 

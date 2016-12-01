@@ -192,22 +192,8 @@
 					<td>m<sup>3</sup>
 
 				<tr stage=water class=hidden><td><?php write('#birds_ws_vol_auth')?> <td class=input><input id='ws_vol_auth' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
-				<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cons')?> <td class=input><input id='ws_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh
-					<span class=circle style=background:#bca613></span>
 				<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
 				<tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
-				<tr stage=water class=hidden><td><?php write('#birds_ws_vol_fuel')?> <td class=input><input id='ws_vol_fuel' onchange="BEV.updateField(this)"> <td>L
-					<span class=circle style=background:#453f1c></span>
-				<script>
-					//fuel depends on question #engines_in_water
-					(function(){
-						if(Global.Configuration["Yes/No"]['engines_in_water']==0)
-						{
-							var input = document.querySelector('#ws_vol_fuel');
-							makeInactive(input);
-						}
-					})();
-				</script>
 				<tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 
 			<!--WASTEWATER-->
@@ -219,23 +205,9 @@
 					<td>Population serviced with WW treatment
 					<td class=input><input id='ww_serv_pop' onchange="BEV.updateField(this)"> <td><?php write('#birds_people')?>
 				<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_wwtr')?><td class=input><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
-				<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cons')?><td class=input><input id='ww_nrg_cons' onchange="BEV.updateField(this)"> <td>kWh
 					<span class=circle style=background:#89375c></span>
 				<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?><td class=input><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
 				<tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?><td class=input><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
-				<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_fuel')?><td class=input><input id='ww_vol_fuel' onchange="BEV.updateField(this)"> <td>L
-					<span class=circle style=background:#d71d24></span>
-				<script>
-					//fuel depends on question #engines_in_waste
-					//trips and distance depend on question #truck_transport_waste
-					(function(){
-						if(Global.Configuration["Yes/No"]['engines_in_waste']==0)
-						{
-							var input = document.querySelector('#ww_vol_fuel');
-							makeInactive(input);
-						}
-					})();
-				</script>
 				<tr stage=waste class=hidden>
 					<td><?php write('#birds_ww_n2o_effl')?> 
 					<td class=input><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L

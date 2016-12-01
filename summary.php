@@ -128,7 +128,15 @@
 <div id=main style=margin-bottom:3em>
 	<style> #main *:not(h4) {text-align:left}</style>
 
-	<!--description--><h4><?php write("#summary_all_active_$type"."s")?></h4>
+	<!--description--><h4>
+		<?php echo "All active ".ucfirst($type."s")?>
+		<span>
+			<?php
+				$otherType = $type=="input" ? "output" : "input";
+				echo "<a href=summary.php?type=$otherType>See $otherType"."s</a>"
+			?>
+		</span>
+	</h4>
 
 	<!--level 1 fields-->
 	<div class="card inline" style="font-size:11px;max-width:49%;padding:0">

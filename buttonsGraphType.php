@@ -15,10 +15,8 @@
 	function buttonsGraph(button)
 	{
 		var isActive=button.classList.contains('active');
-
 		var others=document.querySelectorAll("div.buttonsGraph button")
 		for(var i=0;i<others.length;others[i++].classList.remove('active')){}
-
 		if(!isActive)
 		{
 			button.classList.add('active');
