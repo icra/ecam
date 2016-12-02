@@ -55,6 +55,7 @@ var Global = {
 			"wsa_main_len":0,
 			"wsa_fri_loss":0,
 			"wsa_wat_loss":0,
+			"wsa_watr_src":0,
 			"wsa_pmp_type":0,
 			"wsa_pmp_size":0,
 			"wsa_vol_fuel":0,

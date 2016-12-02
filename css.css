@@ -11,6 +11,8 @@ h4{font-weight:normal;margin:1.2em;font-size:15px;color:#58595b}
 legend{color:#58595b;font-size:16px}
 table{border-collapse:collapse;}
 
+.tbd {background:red;padding:0.5em}
+
 #fixedTopBar{z-index:9}
 #sidebar{z-index:99}
 
@@ -66,7 +68,6 @@ span.circle {
 	.button:active
 	{
 		box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
-		position: relative;
 		top: 1px;
 	}
 
@@ -169,8 +170,8 @@ span.circle {
 		margin-top:-1px;
 		border-radius:0;
 	}
-	.card        .menu button:before {content:"v";}
-	.card.folded .menu button:before {content:">";}
+	.card        .menu button:before {content:"-";}
+	.card.folded .menu button:before {content:"+";}
 	.card .menu button.toggle:before{content:""}
 	.card .menu button.toggle {
 		position:absolute;

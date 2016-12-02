@@ -13,8 +13,40 @@
 ?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
+	<script>
+		/** buttons class "prevNext" for closing current section and opening next one*/
+		var PrevNext={
+			next:function(btn,nextId) //close current section and open "nextId"
+			{
+				//fold container div.card of the btn
+				btn.parentNode.parentNode.classList.add('folded');
+				//open nextId div.card 
+				document.querySelector('#'+nextId).parentNode.classList.remove('folded');
+			},
+		};
+	</script>
 	<style>
+		div#main button.button.prevNext {
+			vertical-align:bottom;
+			margin:0.5em 0.5em;
+			background:#acb;
+		}
 		body{background:#F5ECCE}
+
+		div.card .number {
+			border-radius:0.3em;
+			background:orange;
+			padding:0.1em 0.5em;
+		}
+
+		td.variableCode {
+			background:#00adef;
+			text-align:left;
+			font-size:11px;
+			color:white;
+		}
+
+		td.variableCode a {color:white}
 
 		td.input {
 			width:70px;
@@ -29,7 +61,9 @@
 		tr:not([hl=yes]) td.input {background-color:#eee;}
 		tr:not([hl=yes]) td.CV {background-color:white}
 
-		table#substages {margin:0.2em 0 0.2em 0.2em;}
+		table#substages {
+			margin:0.2em 0 0.2em 0.2em;
+		}
 		table#substages tr[field]:hover  {background:#ccc;}
 		table#substages tr:first-child td {border-top:none;border-left:none}
 
@@ -83,7 +117,6 @@
 			font-size:20px;
 		}
 	</style>
-
 	<script>
 		<?php
 			//establish the stage we are going to be focused
@@ -592,15 +625,17 @@
 		function init()
 		{
 			if(typeof(level3.updateSubstagesTable)=="function") level3.updateSubstagesTable()
-			updateQuestionsTable()
-			updateOutputs()
-			updateNrgOutputs()
-			updateOtherOutputs()
-			Exceptions.apply()
-			updateFuelSelection()
+			updateQuestionsTable();
+			updateOutputs();
+			updateNrgOutputs();
+			updateOtherOutputs();
+			Exceptions.apply();
+			updateFuelSelection();
 			try{drawCharts()}
 			catch(e){/*console.log(e)*/}
-			updateResult()
+			updateResult();
+			//fake click in "View all"
+			document.querySelector('#viewAll').checked=true;
 		}
 	</script>
 </head><body onload=init()><center>
@@ -633,42 +668,38 @@
 ?>
 <style> h1 {text-align:left;padding-left:17em;line-height:2.1em;border-bottom:1px solid #ccc;background:white} </style>
 <h1><a href=stages.php><script>document.write(Global.General.Name)</script></a> <?php echo "$sep $title"?>
-
-<!--See description (link to iwa web)-->
-<?php if($sublevel)
-	{ 
-		?>
-		<span style="font-size:12px;"><?php
-				$iwaLink='http://www.iwa-network.org/water-climate-energy-solutions/public/catalogue/';
-				if($level=="Water" && $sublevel=="Abstraction")      $iwaLink.='stage/water_abstraction';
-				elseif($level=="Water" && $sublevel=="Treatment")    $iwaLink.='stage/water_treatment';
-				elseif($level=="Water" && $sublevel=="Distribution") $iwaLink.='stage/water_distribution';
-				elseif($level=="Waste" && $sublevel=="Collection")   $iwaLink.='stage/wastewater_collection';
-				elseif($level=="Waste" && $sublevel=="Treatment")    $iwaLink.='stage/wastewater_treatment';
-				elseif($level=="Waste" && $sublevel=="Discharge")    $iwaLink.='stage/wastewater_discharge';
-			?>&emsp;<a target=_blank href="<?php echo $iwaLink?>">See description</a>
-		</span>
-		<?php 
-	}
-?>
-
-<!--random tip-->
-<span style="font-size:12px;color:#666;float:right">
-	<div style="padding:0.5em;cursor:pointer" onclick="document.querySelector('#tip').innerHTML=Tips.random()">
+	<!--See description (link to iwa web)-->
+	<?php if($sublevel)
+		{ 
+			?>
+			<span style="font-size:12px;"><?php
+					$iwaLink='http://www.iwa-network.org/water-climate-energy-solutions/public/catalogue/';
+					if($level=="Water" && $sublevel=="Abstraction")      $iwaLink.='stage/water_abstraction';
+					elseif($level=="Water" && $sublevel=="Treatment")    $iwaLink.='stage/water_treatment';
+					elseif($level=="Water" && $sublevel=="Distribution") $iwaLink.='stage/water_distribution';
+					elseif($level=="Waste" && $sublevel=="Collection")   $iwaLink.='stage/wastewater_collection';
+					elseif($level=="Waste" && $sublevel=="Treatment")    $iwaLink.='stage/wastewater_treatment';
+					elseif($level=="Waste" && $sublevel=="Discharge")    $iwaLink.='stage/wastewater_discharge';
+				?>&emsp;<a target=_blank href="<?php echo $iwaLink?>">See description</a>
+			</span>
+			<?php 
+		}
+	?>
+	<!--random tip-->
+	<span style="font-size:12px;color:#666;float:right">
+		<div style="padding:0.5em;cursor:pointer" onclick="document.querySelector('#tip').innerHTML=Tips.random()">
 		<b><i>Tip</i></b> &rarr; <span id=tip style="font-style:italic" ><script>document.write(Tips.random())</script></span>
-	</div>
-</span>
-
-</h1>
-</center>
+		</div>
+	</span>
+</h1></center>
 
 <!--main container-->
-<div>
+<div id=main>
 	<!--container for questions and other info-->
 	<div>
 		<!--questions-->
 		<div class="card">
-			<?php cardMenu($lang_json['#questions']." (<a href=questions.php>info</a>)")?> 
+			<?php cardMenu("<b>Questions</b> &mdash; Answer these questions first of all (<a href=questions.php>info</a>)")?> 
 			<table style=margin:0.5em id=questions class=inline></table>
 			<script>
 				function updateQuestionsTable()
@@ -772,6 +803,9 @@
 					<?php
 				}
 			?>
+			<div>
+			<button class="button next prevNext" onclick="PrevNext.next(this,'substages')">Next</button>
+			</div>
 		</div>
 	</div>
 
@@ -780,20 +814,29 @@
 		if($sublevel)
 		{ 
 			?>
-			<div class=card style="text-align:left">
-				<?php cardMenu("
-					INPUTS 
-					&mdash; 
-					Stages: <b><span id=counter style='border-radius:0.3em;background:lightgreen;padding:0.1em 0.5em'>0</span></b>
-					&mdash; 
-					Assessment Period: <b><script>document.write(Global.General.Days())</script> days</b>
+			<div class="card folded" style="text-align:left">
+				<?php 
+					$resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
+					$serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
+					cardMenu("
+						<b>Inputs</b>
+						&mdash; 
+						Enter operational values and create stages here
+						&mdash; 
+						Stages <b><span id=counter class=number>0</span></b>
+						&middot;
+						Resident population <b class=number><script>document.write(Global.$level.$resi_pop)</script></b>
+						&middot;
+						Serviced population <b class=number><script>document.write(Global.$level.$serv_pop)</script></b>
+						&middot;
+						Assessment Period <b class=number><script>document.write(Global.General.Days())</script></b> days
 				")?>
 				<table id=substages> 
 					<tr><td colspan=2 style="min-width:260px;text-align:right">
 						<!--view all-->
 						<label style=float:left>
 							View all
-							<input type=checkbox onclick=level3.toggleViewSum() checked> 
+							<input id=viewAll type=checkbox onclick=level3.toggleViewSum() checked> 
 							<script>
 								level3.toggleViewSum=function()
 								{
@@ -911,7 +954,7 @@
 
 								/*1st cell: show code*/
 								var newCell=newRow.insertCell(-1);
-								newCell.style.textAlign='left';newCell.style.fontSize='10px';
+								newCell.classList.add('variableCode');
 								newCell.innerHTML=(function()
 								{
 									var extra = Level3.list.indexOf(code)>-1 ? "(<span style=font-size:10px><?php write('#level3_advanced')?></span>)" : "" ;
@@ -1012,8 +1055,7 @@
 
 								/*1st cell: show code*/
 								var newCell=newRow.insertCell(-1);
-								newCell.style.textAlign='left';
-								newCell.style.fontSize='10px';
+								newCell.classList.add('variableCode');
 								newCell.innerHTML=(function()
 								{
 									var extra = Level3.list.indexOf(code)>-1 ? "(<span style=font-size:10px><?php write('#level3_advanced')?></span>)" : "" ;
@@ -1224,15 +1266,34 @@
 						init();
 					}
 				</script>
+
+				<div>
+				<button class="button prev prevNext" onclick="PrevNext.next(this,'questions')">Prev</button>
+				<button class="button next prevNext" onclick="PrevNext.next(this,'ioContainer')">Next</button>
+				</div>
 			</div>
 			<?php
 		}
 	?>
 
 	<!--graphs and outputs-->
-	<div class=card>
+	<div class="card folded">
 		<div class=menu onclick=this.parentNode.classList.toggle('folded')><button></button>
-			OUTPUTS
+			<b>Outputs</b>
+			&mdash;
+			<!--show conv factor-->
+			Conversion factor 
+			<script>
+				(function(){
+					var c = Global.General.conv_kwh_co2;
+					var str = c==0 ? 
+						"<b class=number style=background:red title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</b>" 
+							: 
+						"<b class=number>"+format(c)+"</b>"; 
+					document.write(str+"</b>")
+				})();
+			</script> kg CO<sub>2</sub>/kWh
+
 			<!--button toggle outputs/graph display-->
 			<script>
 				function toggleGraph(event,thisB)
@@ -1290,18 +1351,7 @@
 				<!--GHG-->
 				<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:0.5em;">
 					<tr><th colspan=7 class=tableHeader>
-						OUTPUTS — <?php write('#edit_ghg_emissions')?> &mdash;
-						<!--show conv factor-->
-						<span>Conversion factor: 
-							<script>
-								(function(){
-									var c = Global.General.conv_kwh_co2;
-									var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+"</span>" : format(c); 
-									document.write(str)
-								})();
-							</script> 
-							kg CO<sub>2</sub>/kWh
-						</span>
+						OUTPUTS — <?php write('#edit_ghg_emissions')?> 
 					<tr>
 						<th style=width:10%><?php write('#edit_origin')?>
 						<th style=width:17%>Kg CO<sub>2</sub> during the assessment period
@@ -1338,16 +1388,26 @@
 				</table>
 			</div>
 		</div>
+
+		<div>
+		<button class="button prev prevNext" onclick="PrevNext.next(this,'substages')">Prev</button>
+		</div>
 	</div>
 
 	<!--old level3 link-->
-	<div class="card" style="text-align:center">
-		<?php cardMenu(" ")?>
-		<div style="padding:1em 3em;font-size:20px">
-			<a href='level3.php?level=<?php echo $level?>&sublevel=<?php echo $sublevel?>'>Outputs per Stage</a>
-			<b style=background:red>TBD</b>
-		</div>
-	</div>
+	<?php 
+		if($sublevel)
+		{
+			?>
+			<div class="card folded" style="text-align:center">
+				<?php cardMenu("<b>Outputs detailed per substage</b> <b class=tbd>TBD</b>")?>
+				<div style="padding:1em 3em;font-size:20px">
+					<a href='level3.php?level=<?php echo $level?>&sublevel=<?php echo $sublevel?>'>Outputs per Stage</a>
+				</div>
+			</div>
+			<?php
+		}
+	?>
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>

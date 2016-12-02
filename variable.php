@@ -302,6 +302,9 @@
 					else var currentUnit = "no unit";
 					var currValue = match_stage[output]()/Units.multiplier(output);
 					currValueF=format(currValue);
+
+					var pretf = Formulas.prettify(match_stage[output].toString());
+
 					var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
 
 					var estimated = DQ.hasEstimatedData(output) ? "<span class=estimated title='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span> " : "";
@@ -309,7 +312,7 @@
 					ret+="<tr>"+
 						" <td><a style='color:"+color+"' title='["+match_localization.toString()+"] "+translate(output+"_descr")+"'"+
 						" href=variable.php?id="+output+">"+output+"</a>:"+
-						"<td title='"+currValue+"' style=cursor:help>"+
+						"<td title='"+pretf+"' style=cursor:help>"+
 						currValueF+"<td> <span class=unit>"+currentUnit+"</span> "+estimated;
 				});
 				ret+="</table>";

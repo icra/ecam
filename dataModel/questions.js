@@ -45,6 +45,7 @@ var Questions =
 			"wsa_vol_pump",
 			"wsa_nrg_per_pmp_watr",
 		],
+		"wsa_engines":[ "wsa_vol_fuel", "wsa_KPI_GHG_ne", ],
 		"wsa_pumping_efficiency":[
 			"wsa_pmp_head",
 			"wsa_wat_loss",
@@ -58,7 +59,10 @@ var Questions =
 			"wsa_pmp_type",
 			"wsa_pmp_size",
 		],
-		"wsa_engines":[ "wsa_vol_fuel", "wsa_KPI_GHG_ne", ],
+		"wsa_producing_energy":[
+			"wsa_nrg_turb",
+			"wsa_KPI_nrg_recovery",
+		],
 	//L2 wst
 		"wst_engines":[ "wst_vol_fuel", "wst_KPI_GHG_fuel", ],
 		"wst_pumping_efficiency":[ ],

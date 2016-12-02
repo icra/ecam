@@ -9,6 +9,12 @@ var Tables =
 	},
 
 	//wsa Abstraction options
+	
+	"wsa_watr_src":{
+		"Groundwater":{value:0},
+		"Surface":{value:1},
+		"Rainwater":{value:2},
+	},
 	"wsa_pmp_type":{
 		"None":{value:0},
 		"External":{value:1},
