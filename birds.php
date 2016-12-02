@@ -14,11 +14,16 @@
 		function init(detailed)
 		{
 			detailed=detailed||false;
+
 			BEV.showActive();
 			BEV.updateDefaults();
 			drawCharts();
 			if(detailed) Graphs.graph4(false,'graph1'); //make first graph detailed
 			updateResult();
+
+			//first input click
+			var first=document.querySelector('#inputs input[id]');
+			if(first.value==0) first.click()
 		}
 
 		function drawCharts()
@@ -358,5 +363,7 @@
 		--><button class="button next" onclick=nextPage()><?php write('#next')?></button>
 	</div>
 </div>
-<!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
+
+<script>
+</script>

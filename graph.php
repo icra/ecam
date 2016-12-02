@@ -43,5 +43,4 @@
 		}
 	</script>
 </div>
-<!--foot--><?php include'footer.php'?>
 <!--json--><?php include'currentJSON.php'?>

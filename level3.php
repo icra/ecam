@@ -364,7 +364,7 @@
 		$sep $titleLevel $sep $titleSublevel $sep <span style='color:black;font-size:26px'>".$lang_json['#substages']."</a>";
 ?>
 <h1><?php echo $title?></h1>
-<style>h1{text-align:left;padding-left:17em;border-bottom:1px solid #ccc;background:white}</style>
+<style>h1{text-align:left;border-bottom:1px solid #ccc;background:white}</style>
 
 <h3 style=color:red>TBD: What to do with this table?</h3>
 

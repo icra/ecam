@@ -428,6 +428,4 @@
 	<table style="text-align:left;width:50%;margin-bottom:3em" id=info></table>
 </div>
 
-<!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
-

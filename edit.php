@@ -666,7 +666,7 @@
 		: 
 		"<span style=color:black>$titleLevel</span>";
 ?>
-<style> h1 {text-align:left;padding-left:17em;line-height:2.1em;border-bottom:1px solid #ccc;background:white} </style>
+<style> h1 {text-align:left;line-height:2.1em;border-bottom:1px solid #ccc;background:white} </style>
 <h1><a href=stages.php><script>document.write(Global.General.Name)</script></a> <?php echo "$sep $title"?>
 	<!--See description (link to iwa web)-->
 	<?php if($sublevel)
@@ -852,8 +852,8 @@
 							</script>
 						</label>
 						<!--new substage button-->
-						<button onclick=level3.newSubstage() class=button style="padding:auto;background:lightgreen;box-shadow: 0 1px 2px rgba(0,0,0,.1);">
-							+ Add stage
+						<button onclick=level3.newSubstage() class="button add" style="padding:auto;background:lightgreen;box-shadow: 0 1px 2px rgba(0,0,0,.1);">
+							Add stage
 						</button>
 				</table>
 				<script>
@@ -1277,10 +1277,9 @@
 	?>
 
 	<!--graphs and outputs-->
-	<div class="card folded">
+	<div class="card <?php if($sublevel) echo 'folded'?>">
 		<div class=menu onclick=this.parentNode.classList.toggle('folded')><button></button>
-			<b>Outputs</b>
-			&mdash;
+			<b>Outputs</b> &mdash; Performance indicators &mdash;
 			<!--show conv factor-->
 			Conversion factor 
 			<script>
@@ -1410,7 +1409,6 @@
 	?>
 </div>
 
-<!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
 
 <script>

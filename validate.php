@@ -12,7 +12,7 @@
 	<input name=jsontemplate value=1 type=hidden>
 </form>
 
-<button onclick=document.forms[0].submit()>Validate with JSON formatter</button>
+<button onclick=document.forms[0].submit() style=margin-bottom:1em>Validate with JSON formatter</button>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
 

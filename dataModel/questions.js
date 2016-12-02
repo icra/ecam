@@ -14,7 +14,7 @@
 var Questions = 
 {
 	//L1 WATER
-	//L1 WASTE TBD
+	//L1 WASTE TODO
 		"truck_transport_waste":[
 			"ww_dist_dis",
 			"ww_num_trip",

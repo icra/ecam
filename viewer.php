@@ -124,5 +124,4 @@
 	?>
 	</ul>
 </div>
-<!--FOOTER--> <?php include'footer.php'?>
 <!--JSON-->   <?php include'currentJSON.php'?>

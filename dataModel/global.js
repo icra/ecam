@@ -1,7 +1,7 @@
 /** Main data structure */
 var Global = {
 	General:{
-		Name:                  "untitled system",
+		Name:                  "Untitled system",
 		AssessmentPeriodStart: "2017-01-01",
 		AssessmentPeriodEnd:   "2018-01-01",
 		Comments:              "",
@@ -385,7 +385,7 @@ var Global = {
 
 		"Yes/No": //default questions with answer "yes". All questions are in "questions.js" (go there with gf)
 		{
-			pumping_for_abstraction:1,
+			pumping_for_abstraction:0,
 			truck_transport_waste:1,
 			producing_biogas:0,
 			valorizing_biogas:0,

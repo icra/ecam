@@ -186,6 +186,7 @@
 			<tr><td><a href=summary.php?type=input><?php write('#sidebar_all_inputs')?></a>
 			<tr><td><a href=summary.php?type=ccvv><?php write('#sidebar_all_ccvv')?></a>
 			<tr><td><a href=summary.php?type=output><?php write('#sidebar_all_kpis')?></a>
+			<tr><td><a href=constants.php>All constants</a>
 			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
       <tr><th><?php write("#opportunities")?>
       <tr><td><a href=opps.php><?php write("#opportunities")?></a>

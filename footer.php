@@ -2,18 +2,21 @@
 
 <style>
 	#footer {
-		text-align:left;
+		text-align:center;
 		padding:0.5em 2em 0.5em 2em;
 		background:#00aff1;
+		background:inherit;
 		line-height:2em;
 		color:white;
+		color:#333;
 		overflow:hidden;
 		height: 6em;
-		box-shadow: 0 1px 2px rgba(0,0,0,.1);
 		bottom:0;
 	}
 	#footer a, #footer a:visited {
 		color:white;
+		color:#333;
+		color:#00aff1;
 	}
 </style>
 
