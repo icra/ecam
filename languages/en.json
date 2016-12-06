@@ -427,6 +427,8 @@
 	"#c_wst_vol_head_expla":"Volume pumped x pump head",
 	"#wst_KPI_std_nrg_cons_descr":"Standardized energy consumption pumping",
 	"#wst_KPI_std_nrg_cons_expla":"Standardized energy consumption pumping",
+	"#wst_tst_type_descr":"Type of tests",
+	"#wst_tst_type_expla":"Type of tests",
 
 	"#wst_KPI_GHG_descr":"Total GHG Water Treatment",
 	"#wst_KPI_GHG_expla":"Total GHG Water Treatment",

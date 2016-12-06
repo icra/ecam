@@ -133,8 +133,8 @@
 
 <!--prev next-->
 <div>
-	<button class="button prev" onclick=window.location='configuration.php'>Prev</button>
-	<button class="button next" onclick=window.location='birds.php'>Next</button>
+	<button class="button prev" onclick="event.stopPropagation();window.location='configuration.php'">Prev</button>
+	<button class="button next" onclick="event.stopPropagation();window.location='birds.php'">Next</button>
 </div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

@@ -29,27 +29,6 @@ var RefValues =
 			}
 		},
 
-		wsa_KPI_water_losses:function(value)
-		{
-			//description: aE6: Good: aE6 ≤ 6, Acceptable: 6 < aE6 ≤ 12, Unsatisfactory: aE6 > 12
-			if(value <= 6)                   
-			{
-				return "Good"
-			}
-			else if(6     <  value && value <= 12)
-			{
-				return "Acceptable"
-			}
-			else if(value >  12)                  
-			{
-				return "Unsatisfactory"
-			}
-			else                                  
-			{
-				return "Out of range"
-			}
-		},
-
 		wsa_KPI_un_head_loss:function(value)
 		{
 			//description: aE7: Good: aE7 ≤ 2, Acceptable: 2 < aE7 ≤ 4, Unsatisfactory: aE7> 4,

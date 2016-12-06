@@ -1,4 +1,4 @@
-/** Main data structure */
+/** Main data structure: inputs get saved to cookies */
 var Global = {
 	General:{
 		Name:                  "Untitled system",
@@ -54,18 +54,15 @@ var Global = {
 			"wsa_pmp_head":0,
 			"wsa_main_len":0,
 			"wsa_fri_loss":0,
-			"wsa_wat_loss":0,
 			"wsa_watr_src":0,
 			"wsa_pmp_type":0,
 			"wsa_pmp_size":0,
+			wsa_nrg_per_pmp_watr:function(){return this.wsa_nrg_cons/this.wsa_vol_pump},
 			wsa_KPI_GHG_elec:function(){return this.wsa_nrg_cons*Global.General.conv_kwh_co2},
 			wsa_KPI_GHG_ne:function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.wsa_engines]; return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) } ,
 			wsa_KPI_GHG:function(){return this.wsa_KPI_GHG_elec()+this.wsa_KPI_GHG_ne()} ,
-			wsa_nrg_per_pmp_watr:function(){return this.wsa_nrg_cons/this.wsa_vol_pump},
-			wsa_KPI_nrg_per_m3:function(){return this.wsa_nrg_cons/this.wsa_vol_conv},
 			wsa_KPI_nrg_recovery : function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
 			wsa_KPI_std_elec_eff:function(){return 0.2725/this.wsa_KPI_std_nrg_cons()},
-			wsa_KPI_water_losses:function(){return 1000*this.wsa_wat_loss/this.wsa_main_len},
 			wsa_KPI_un_head_loss:function(){return 1000*this.wsa_fri_loss/this.wsa_main_len},
 			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_cons+this.wsa_nrg_turb)/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
 			wsa_SL_water_losses:function(){return -999;}
@@ -80,13 +77,10 @@ var Global = {
 			wst_KPI_slu_per_m3 : function(){return this.wst_mass_slu/this.wst_vol_trea},
 			wst_KPI_capac_util : function(){return 100*this.wst_vol_trea/this.wst_trea_cap},
 			"wst_tst_carr":0,
-			"wst_tst_aest":0,
-			"wst_tst_micr":0,
-			"wst_tst_phch":0,
 			"wst_mass_slu":0,
 			"wst_trea_cap":0, 
 			"wst_vol_trea":0,
-			"wst_treatmen":0, //dropdown exception, not a number
+			"wst_treatmen":0, //dropdown
 			"wst_trea_vol":0,
 			"wst_disnfctn":0,
 			"wst_vol_disn":0,
@@ -95,8 +89,8 @@ var Global = {
 			"wst_bod_effl":0,
 			"wst_vol_pump":0,
 			"wst_pmp_head":0,
+			"wst_tst_type":0, //dropdown
 			c_wst_vol_head:function(){return this.wst_vol_pump*this.wst_pmp_head/100},
-			wst_SL_qual_com:function(){return 100*(this.wst_tst_aest+this.wst_tst_micr+this.wst_tst_phch+this.wst_tst_radi)/this.wst_tst_carr},
 			wst_KPI_std_nrg_cons:function(){return this.wst_nrg_cons/this.c_wst_vol_head()},
 
 			wst_KPI_GHG_elec:function(){return this.wst_nrg_cons*Global.General.conv_kwh_co2},
@@ -396,7 +390,7 @@ var Global = {
 	},
 };
 
-//HERE put the equations that do not belong to its stage, this is because otherwise they appear incorrectly at variable.php
+//Equations that do not belong to its stage, this is because otherwise they appear incorrectly at variable.php
 Global.Water.wsa_KPI_GHG=function(){return Global.Water.Abstraction.wsa_KPI_GHG()};
 Global.Water.wst_KPI_GHG=function(){return Global.Water.Treatment.wst_KPI_GHG()};
 Global.Water.wsd_KPI_GHG=function(){return Global.Water.Distribution.wsd_KPI_GHG()};

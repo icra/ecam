@@ -9,12 +9,12 @@
 <!--constants-->
 <div id=main style=margin-bottom:3em>
 <table>
-	<tr><th>Constant<th>Description<th>Value<th>Unit
+	<tr><th>Code<th>Description<th>Value<th>Unit
 	<script>
 		for(var ct in Cts)
 		{
 			document.write("<tr>"+
-				"<td>"+ct+
+				"<td><b>"+ct+"</b>"+
 				"<td>"+Cts[ct].descr+
 				"<td>"+Cts[ct].value+
 				"<td>"+(function(){ 

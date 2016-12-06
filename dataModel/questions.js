@@ -39,7 +39,6 @@ var Questions =
 
 	//L2 wsa
 		"pumping_for_abstraction":[ 
-			"wsa_KPI_nrg_per_m3", 
 			"wsa_KPI_GHG_elec", 
 			"wsa_vol_pump",
 			"wsa_nrg_per_pmp_watr",
@@ -47,10 +46,8 @@ var Questions =
 		"wsa_engines":[ "wsa_vol_fuel", "wsa_KPI_GHG_ne", ],
 		"wsa_pumping_efficiency":[
 			"wsa_pmp_head",
-			"wsa_wat_loss",
 			"wsa_main_len",
 			"wsa_fri_loss",
-			"wsa_KPI_water_losses",
 			"wsa_KPI_un_head_loss",
 			"wsa_KPI_std_nrg_cons",
 			"wsa_KPI_std_elec_eff",

@@ -8,8 +8,7 @@ var Tables =
 		"Natural Gas"     :{EFCH4:{engines:10,vehicles:92},EFN2O:{engines:0.1,vehicles:0.2},EFCO2:56100,FD:0.75,NCV:48.0},
 	},
 
-	//wsa Abstraction options
-	
+	//wsa
 	"wsa_watr_src":{
 		"Groundwater":{value:0},
 		"Surface":{value:1},
@@ -28,6 +27,7 @@ var Tables =
 		"Vane pump":{value:4},
 	},
 
+	//wst
 	"wst_disnfctn":{
 		"None":{value:0},
 		"Chlorination":{value:1},
@@ -36,8 +36,12 @@ var Tables =
 		"Ozon":{value:4},
 		"UV":{value:5},
 	},
-
-	/** Technologies for wst and wwt (table not used right now). I was told that this will be used for benchmarking */
+	"wst_tst_type":{
+		"None":{value:0},
+		"Aesthetic":{value:1},
+		"Microbiological":{value:2},
+		"Physical-chemical":{value:3},
+	},
 	"wst_treatmen":{
 		"None":{value:0,},
 		"Pre-ox/C/F/S/Filt/Des":{value:1,},

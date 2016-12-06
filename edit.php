@@ -38,14 +38,19 @@
 			color:black;
 			font-size:10px;
 			float:right;
-			background:#eee;
+			background:#fafafa;
 			margin-left:0.4em;
-			border-radius:0.2em;
+			border-radius:0.5em;
+			box-shadow: 0 1px 2px rgba(0,0,0,.1);
+			padding:0.3em;
+		}
+		.advanced.ghg {
+			background:#bca;
 		}
 
 		div.card .number {
 			border-radius:0.3em;
-			background:orange;
+			background:#fff;
 			padding:0.1em 0.5em;
 		}
 
@@ -150,31 +155,26 @@
 			init();
 		}
 
-		/** Redisplay table id=outputs */
+		/** Redisplay table id=outputs (level2)*/
 		function updateOutputs()
 		{
 			var t=document.getElementById('outputs');
 			while(t.rows.length>2){t.deleteRow(-1);}
 			for(var field in CurrentLevel)
 			{
-				if(typeof(CurrentLevel[field])!="function")continue;
-				if(field.search(/^c_/)>=0)continue;
-				if(field.search("_KPI_GHG")==-1)continue;
+				if(typeof(CurrentLevel[field])!="function") continue;
+				if(field.search(/^c_/)>=0) continue;
+				if(field.search("_KPI_GHG")==-1) continue;
 
-				//hidden ones
-				//if(field=="ww_KPI_GHG_ne")    continue;
+				//exceptions. use "dataModel/level3variables.js" for this purpose
 				//if(field=="ww_KPI_GHG_ne_unt")continue;
 				//if(field=="ww_KPI_GHG_ne_tre")continue;
 
 				/*check if field is level3 specific*/
-				if(Level3.list.indexOf(field)>-1){continue;}
+				if(Level3.list.indexOf(field)+1) continue;
 
-				//disable row if specified by questions
-				if(Questions.isHidden(field))
-				{
-					continue
-					//disableRow(newRow);
-				}
+				//Apply question filters
+				if(Questions.isHidden(field)) continue;
 
 				var newCell,newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
@@ -641,7 +641,7 @@
 					elseif($level=="Waste" && $sublevel=="Collection")   $iwaLink.='stage/wastewater_collection';
 					elseif($level=="Waste" && $sublevel=="Treatment")    $iwaLink.='stage/wastewater_treatment';
 					elseif($level=="Waste" && $sublevel=="Discharge")    $iwaLink.='stage/wastewater_discharge';
-				?>&emsp;<a target=_blank href="<?php echo $iwaLink?>">See description</a>
+				?>&emsp;<a target=_blank href="<?php echo $iwaLink?>">description</a>
 			</span>
 			<?php 
 		}
@@ -649,7 +649,9 @@
 	<!--random tip-->
 	<span style="font-size:12px;color:#666;float:right">
 		<div style="padding:0.5em;cursor:pointer" onclick="document.querySelector('#tip').innerHTML=Tips.random()">
-		<b><i>Tip</i></b> &rarr; <span id=tip style="font-style:italic" ><script>document.write(Tips.random())</script></span>
+			<b>Tip</b> &rarr;
+			<i id=tip><script>document.write(Tips.random())</script></i>
+			&emsp; &#9654;
 		</div>
 	</span>
 </h1></center>
@@ -659,7 +661,7 @@
 	<!--questions-->
 	<div class="card">
 		<?php cardMenu("<b>Questions</b> &mdash; Answer these questions first (<a href=questions.php>info</a>)")?> 
-		<table style=margin:0.5em id=questions class=inline></table>
+		<table id=questions class=inline></table>
 		<script>
 			function updateQuestionsTable()
 			{
@@ -729,9 +731,9 @@
 					<tr><td colspan=2>
 						<img src=img/fuel.png> <?php write('#configuration_fuel_options')?> (<a href=fuelInfo.php>info</a>)</legend>
 					<style>
-						#fuelSelection {margin:0.5em 0.5em 0.5em 0;}
+						#fuelSelection {margin:0 0.2em}
 						#fuelSelection tr.inactive {background:#f6f6f6;color:#aaa}
-						#fuelSelection img {width:20px;vertical-align:middle}
+						#fuelSelection img {width:13px;vertical-align:middle}
 					</style>
 					<?php
 						if($level=="Water" && !$sublevel)
@@ -768,13 +770,8 @@
 	<!--inputs outputs level2-->
 	<div class="card">
 		<div class=menu onclick=this.parentNode.classList.toggle('folded')><button></button>
-			<b>Inputs &amp; Outputs</b> 
-			&mdash; 
-			All <?php echo "$sublevel"?> stages
-			&mdash; 
-			Assessment period 
-			<b class=number><script>document.write(Global.General.Days())</script></b> days
-			&middot;
+			<b>Inputs &amp; Outputs</b> &mdash; 
+			Assessment period <b class=number><script>document.write(Global.General.Days())</script></b> days &middot;
 			Conversion factor 
 			<script>
 				(function(){
@@ -785,7 +782,16 @@
 						"<b class=number>"+format(c)+"</b>"; 
 					document.write(str+"</b>")
 				})();
-			</script> kg CO<sub>2</sub>/kWh
+			</script> kg CO<sub>2</sub>/kWh &middot;
+			<?php
+				$resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
+				$serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
+				echo "
+					Resident population <b class=number><script>document.write(Global.$level.$resi_pop)</script></b>
+					&middot;
+					Serviced population <b class=number><script>document.write(Global.$level.$serv_pop)</script></b>
+				";
+			?>
 			<!--button toggle outputs/graph display-->
 			<button 
 				id=btn_toggle class=toggle 
@@ -822,13 +828,15 @@
 			<div class=inline
 				style="width:45%;margin-left:0.5em;<?php if($level=="Energy") echo "display:none;"?>">
 				<?php include'level2.php'?> 
-				<!--Next-->
+				<!--next btn-->
 				<button class="button save prevNext" style=margin-left:0 onclick="PrevNext.next(this.parentNode.parentNode.parentNode,'tbd')">Ok, next</button>
 			</div>
 
-			<!--Outputs level2-->
+			<!--outputs level2-->
 			<div id=outputs_container class=inline style="width:40%;margin-left:0.5em;margin-bottom:2em">
-				<!--GHG-->
+				<?php if($level=="Energy") echo "<style>#outputs{display:none}</style>"; ?>
+
+				<!--level2 GHG outputs-->
 				<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:0.5em;">
 					<tr><th colspan=7 class=tableHeader>
 						OUTPUTS — <?php write('#edit_ghg_emissions')?> 
@@ -841,12 +849,7 @@
 						<th style=width:17%><br>kg CO<sub>2</sub><br>per m<sup>3</sup>
 				</table>
 
-				<?php
-					//hide GHG if level is energy
-					if($level=="Energy") echo "<style>#outputs{display:none}</style>";
-				?>
-
-				<!--energy performance-->
+				<!--level2 outputs energy performance-->
 				<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
 					<tr><th colspan=4 class=tableHeader>OUTPUTS — Energy performance
 					<tr>
@@ -858,11 +861,10 @@
 						<th><?php write('#edit_unit')?>
 				</table>
 
-				<!--other (SL indicators)-->
+				<!--level2 outputs (SL)-->
 				<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:0.5em;margin-bottom:0.5em">
 					<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#edit_service_level_indicators') ?>
-					<tr>
-						<th><?php write('#edit_description')?>
+					<tr><th><?php write('#edit_description')?>
 						<th><?php write('#edit_current_value')?>
 						<th><?php write('#edit_unit')?>
 				</table>
@@ -1103,8 +1105,8 @@
 							newCell.classList.add('variableCode');
 							newCell.innerHTML=(function()
 							{
-								var extra = Level3.list.indexOf(code)>-1 ? "(<span style=font-size:10px><?php write('#level3_advanced')?></span>)" : "" ;
-								return extra+" <a href=variable.php?id="+code+">"+code+"</a>";
+								var adv="<span class=advanced title='Advanced'>adv</span>";
+								return "<a href=variable.php?id="+code+">"+code+"</a>"+adv;
 							})();
 
 							/*2nd cell: variable name*/
@@ -1320,37 +1322,30 @@
 			</script>
 			<div class="card" style="text-align:left">
 				<?php 
-					$resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
-					$serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
-					cardMenu("
-						<b>Substages</b>
+					cardMenu(" <b>Substages</b>
 						&mdash; 
 						Create substages here
 						&mdash; 
 						Stages <b><span id=counter class=number>0</span></b>
-						&middot;
-						Resident population <b class=number><script>document.write(Global.$level.$resi_pop)</script></b>
-						&middot;
-						Serviced population <b class=number><script>document.write(Global.$level.$serv_pop)</script></b>
 				")?>
 
 				<table id=substages> 
 					<tr><td colspan=2 style="min-width:260px;text-align:right">
 						<!--view all-->
 						<label style=float:left>
-							View all stages
 							<input id=viewAll type=checkbox onclick=level3.toggleViewSum() checked> 
+							View all stages
 							<script>
 								level3.toggleViewSum=function()
 								{
 									var newDisplay=document.querySelector('#substages td.input').style.display=='none' ? '':'none';
 									var n=substages.length;
 									var tr=document.querySelector('#substages tr');//fist tr
-									for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay
+									for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay;
 									var tr=document.querySelector('#substages tr:last-child');//last tr
-									for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay
+									for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay;
 									var collection=document.querySelectorAll('#substages td.input');
-									for(var i=0;i<collection.length;i++) collection[i].style.display=newDisplay
+									for(var i=0;i<collection.length;i++) collection[i].style.display=newDisplay;
 								}
 							</script>
 						</label>
@@ -1414,16 +1409,22 @@
 						for(var field in CurrentLevel)
 						{
 							//only functions
-							if(typeof(CurrentLevel[field])!="function"){continue;}
+							if(typeof(CurrentLevel[field])!="function") continue;
 
 							//exclude service level indicators
-							if(field.search('_SL_')>-1)continue;
+							if(field.search('_SL_')>-1) continue;
 
 							/*if assessment type is simple, hide L3 variables*/
 							if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
 							{
 								if(Level3.list.indexOf(field)>-1) continue;
 							}
+
+							//exclude _KPI_GHG if checkbox is enabled
+							var isGHG=(field.search('_KPI_GHG')+1) ? true : false;
+							if(isGHG) 
+								if(!document.querySelector('#showGHGss').checked)
+									continue;
 
 							//exclude the "level2only" variables
 							if(Level2only.hasOwnProperty(field)) continue;
@@ -1446,8 +1447,9 @@
 							//1st cell: show code identifier
 							newRow.insertCell(-1).innerHTML=(function()
 							{
-								var adv=Level3.list.indexOf(field)>-1 ? "(<?php write('#level3_advanced')?>)" : "" ;
-								return adv+" <a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
+								var adv=Level3.list.indexOf(field)+1 ? "<span class=advanced title='Advanced'>adv</span>" : "" ;
+								var ghg=isGHG                        ? "<span class='advanced ghg' title='Advanced'>GHG</span>" : "" ;
+								return "<a href=variable.php?id="+field+">"+field+"</a>"+ghg+adv;
 							})();
 
 							//2nd cell: description
@@ -1519,6 +1521,9 @@
 						newTh.style.borderBottom='none';newTh.style.borderTop='none';
 					}
 				</script>
+				<div style=margin:0.5em>
+				<label><input type=checkbox onclick=init() id=showGHGss> Show GHG</label>
+				</div>
 				<button class="button save prevNext" onclick="PrevNext.next(this.parentNode,'tbd')">Ok, next</button>
 			</div>
 			<?php

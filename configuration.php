@@ -159,6 +159,9 @@
 	<div>
 		<table id=selectStage>
 			<style>
+				#selectStage {
+					box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05);
+				}
 				#selectStage img{width:40px;vertical-align:middle}
 				#selectStage th{width:220px;}
 				#selectStage td{text-align:left;padding:0}

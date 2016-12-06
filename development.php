@@ -9,11 +9,11 @@
 
 <table>
 	<tr><td><a href=validate.php>Current JSON file</a>
-	<tr><td><a href=graph.php?g=graph1>Graph placeholder</a>
-	<tr><td><a href=problems.php>Problem finder</a>
-	<tr><td><a href=constants.php>All constants</a>
-	<tr><td><a href=benchmark.php>All benchmarking formulas</a>
-	<tr><td><a href=bugs.txt>All Known bugs</a>
+	<tr><td><a href=graph.php?g=graph1>Graphs</a>
+	<tr><td><a href=problems.php>Problems</a>
+	<tr><td><a href=constants.php>Constants</a>
+	<tr><td><a href=benchmark.php>Benchmarking</a>
+	<tr><td><a href=bugs.txt>Bugs</a>
 	<tr><td><a href=dashboard.php>Dashboard</a>
 </table>
 

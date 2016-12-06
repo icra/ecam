@@ -5,15 +5,17 @@ var Level3={};
 Level3.list=
 [
 	//WSA
-		"wsa_wat_loss",
 		"wsa_fri_loss",
 		"wsa_main_len",
 		"wsa_pmp_head",
 		"wsa_nrg_turb",
-	//WST DOING NOW
-		"wst_tst_aest",
-		"wst_tst_micr",
-		"wst_tst_phch",
+		"wsa_KPI_GHG",
+		"wsa_KPI_nrg_recovery",
+		"wsa_KPI_std_nrg_cons",
+		"wsa_KPI_std_elec_eff",
+		"wsa_KPI_un_head_loss",
+		"wsa_SL_water_losses",
+	//wst 
 		"wst_mass_slu",
 		"wst_trea_cap",
 		"wst_tst_carr",
@@ -25,6 +27,13 @@ Level3.list=
 		"wst_vol_pump",
 		"wst_pmp_head",
 		"c_wst_vol_head",
+		"wst_KPI_GHG_slud",
+		"wst_KPI_GHG_ne",
+		"wst_KPI_GHG",
+		"wst_KPI_nrg_disnfc",
+		"wst_KPI_std_nrg_cons",
+		"wst_KPI_slu_per_m3",
+		"wst_KPI_capac_util",
 	//WSD
 		"wsd_deli_pts",
 		"wsd_ser_cons",

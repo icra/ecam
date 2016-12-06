@@ -30,14 +30,17 @@
 		{
 			switch(event.which)
 			{
-				case 38: input.value++;break;
-				case 40: input.value--;break;
-				case 9: //TAB
+				case 38: //up key
+					if(!event.shiftKey){input.value++;updateChart();} 
+					break;
+				case 40: //down key
+					if(!event.shiftKey){input.value--;updateChart();} 
+					break;
+				case  9: //TAB
 					setTimeout(function()
 					{
-						var el=document.querySelector('#inputs tr[field='+field+']').nextSibling.childNodes[1];
-						if(el)
-							el.onclick();
+						var el=document.querySelector('#inputs tr[field='+field+']').nextSibling.childNodes[2];
+						if(el){el.onclick();}
 					},100);
 					break;
 			}
@@ -126,10 +129,17 @@
 				if(typeof(substages)=="object" && substages.length > 1)
 				{
 					//this means you are in level 2 and you should NOT be able to modify inputs here
-					newCell.style.textAlign="center"
-					newCell.title="<?php write('#variable_go_to_substages')?>";
+					newCell.title="This value is the sum of all substages. Click here to scroll to substages";
+					newCell.classList.add('non-editable');
+					newCell.onclick=function()
+					{
+						//navigate to substages to modify the input
+						var f=this.parentNode.getAttribute('field');
+						document.querySelector('#substages').scrollIntoView(false); //false means bottom of screen
+						document.querySelector('#substages tr[field='+f+'] td[substage]').click();
+					};
 				}
-				else
+				else //normal case
 				{
 					newCell.className="input";
 					newCell.title="<?php write('#edit_click_to_modify')?>";
@@ -256,8 +266,24 @@
 </table>
 
 <style>
-	th.tableHeader
-	{
+	#inputs .non-editable {
+		text-align:center;
+		cursor:pointer;
+		transition:all 1s;
+	}
+	#inputs .non-editable:hover {
+		background:#eaeeea;
+	}
+	#inputs .non-editable:before {
+		content:' ∑';
+		float:left;
+		color:#999;
+	}
+	#inputs .non-editable:hover:before {
+		color:black;
+		content:' ∑';
+	}
+	#inputs th.tableHeader {
 		background:white;
 		color:#666;
 		font-size:15px;
