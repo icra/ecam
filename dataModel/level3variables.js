@@ -14,7 +14,6 @@ Level3.list=
 		"wst_tst_aest",
 		"wst_tst_micr",
 		"wst_tst_phch",
-		"wst_tst_radi",
 		"wst_mass_slu",
 		"wst_trea_cap",
 		"wst_tst_carr",

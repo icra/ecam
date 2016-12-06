@@ -1,11 +1,11 @@
 #!/bin/bash
 
-#script to check if all dialogs are used
-echo "Checking not used language ids"
-echo "=============================="
-
 #check input file
 if (( $# < 1 )); then echo "Usage: $0 [language_file.json]";exit;fi
+
+#script to check if all dialogs are used
+echo "Not used language tags for [$1]"
+echo "===================================="
 
 #get file name
 file=$1

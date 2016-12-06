@@ -39,7 +39,6 @@ var Questions =
 
 	//L2 wsa
 		"pumping_for_abstraction":[ 
-			"wsa_nrg_cons", 
 			"wsa_KPI_nrg_per_m3", 
 			"wsa_KPI_GHG_elec", 
 			"wsa_vol_pump",

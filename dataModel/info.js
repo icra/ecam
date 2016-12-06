@@ -126,7 +126,6 @@ var Info = {
 	"wst_tst_aest":{magnitude:"Number",unit:"number",},
 	"wst_tst_micr":{magnitude:"Number",unit:"number",},
 	"wst_tst_phch":{magnitude:"Number",unit:"number",},
-	"wst_tst_radi":{magnitude:"Number",unit:"number",},
 	"wst_mass_slu":{magnitude:"Mass",unit:"kg",},
 	"wst_trea_cap":{magnitude:"Volume",unit:"m3",},
 	"wst_treatmen":{magnitude:"Option",unit:"Technology",},
