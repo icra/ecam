@@ -4,8 +4,28 @@ var Level3={};
 
 Level3.list=
 [
-	//WSA (empty: replaced by filters (question) )
+	//WSA
+		"wsa_wat_loss",
+		"wsa_fri_loss",
+		"wsa_main_len",
+		"wsa_pmp_head",
+		"wsa_nrg_turb",
 	//WST DOING NOW
+		"wst_tst_aest",
+		"wst_tst_micr",
+		"wst_tst_phch",
+		"wst_tst_radi",
+		"wst_mass_slu",
+		"wst_trea_cap",
+		"wst_tst_carr",
+		"wst_trea_vol",
+		"wst_bod_infl",
+		"wst_bod_effl",
+		"wst_vol_disn",
+		"wst_nrg_disn",
+		"wst_vol_pump",
+		"wst_pmp_head",
+		"c_wst_vol_head",
 	//WSD
 		"wsd_deli_pts",
 		"wsd_ser_cons",

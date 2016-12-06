@@ -17,7 +17,7 @@ var Opps =
 	auc:function(ideal) //ideal authorized consumption (m3)
 	{
 		var current = Global.Water.ws_SL_auc_emis();
-		var factor = Global.Water.ws_SL_auc_emis()/Global.Water.ws_vol_auth;
+		var factor = Global.Water.ws_SL_auc_emis()/Global.Water.Distribution.wsd_auth_con;
 		//electricity has to be here not volume
 		var newGHGs = factor*ideal;
 		var reduction = current-newGHGs;

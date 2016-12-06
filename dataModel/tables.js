@@ -28,6 +28,14 @@ var Tables =
 		"Vane pump":{value:4},
 	},
 
+	"wst_disnfctn":{
+		"None":{value:0},
+		"Chlorination":{value:1},
+		"UF":{value:2},
+		"MF":{value:3},
+		"Ozon":{value:4},
+		"UV":{value:5},
+	},
 
 	/** Technologies for wst and wwt (table not used right now). I was told that this will be used for benchmarking */
 	"wst_treatmen":{

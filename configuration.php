@@ -202,26 +202,8 @@
 
 <!--PREV & NEXT BUTTONS-->
 <div style=margin:1em> 
-	<script>
-		//find first available stage to start entering data
-		function nextPage()
-		{
-			event.stopPropagation();
-			if(Global.Configuration.ActiveStages.water==0 && Global.Configuration.ActiveStages.waste==0)
-			{
-				var warning=document.querySelector("#inactive_warning")
-				warning.classList.add('visible');
-
-				//animation
-				warning.style.padding="1em";
-				setTimeout(function(){warning.style.padding="0.5em"},1000);
-				return;
-			}
-			window.location="birds.php"; return;
-		}
-	</script>
 	<button class="button prev" onclick="event.stopPropagation();window.location='getStarted.php'"><?php write('#previous')?></button><!--
-	--><button class="button next" onclick=nextPage()><?php write('#next')?></button>
+	--><button class="button next" onclick="event.stopPropagation();window.location='inhabitants.php'"><?php write('#next')?></button>
 
 	<div id=inactive_warning>
 		<b><?php write('#configuration_active_stages_error')?></b>

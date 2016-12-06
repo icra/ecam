@@ -127,7 +127,7 @@
 						var color=field.search('ww')==-1 ? "" : "#bf5050";
 						try{
 							document.write("<tr><td>");
-							document.write("<a title='"+Info[field].description+"' style=color:"+color+" href=variable.php?id="+field+">"+field+"</a>");
+							document.write("<a title='"+translate(field+"_descr")+"' style=color:"+color+" href=variable.php?id="+field+">"+field+"</a>");
 						}
 						catch(e)
 						{
@@ -170,14 +170,10 @@
 	<h3>Tasks / Issues</h3>
 	<ul>
 		<li><b>BACK-END</b><ul>
-				<li>ws_nrg_cons should be an output not input (sum of abs+tre+dis)
-				<li>Fuel consumed in Quick assessment should be an output: sum of abs+tre+dis
-				<li>Auth cons in ws is not linket to wsd
 				<li>Define <a href=benchmark.php>Benchmark</a> 
 			</ul>
 		<li><b>FRONT-END</b><ul>
 			<li>Draw table of options in variable.php for variables that are magnitude:Option
-			<li>Footer should remain in the bottom of the page always
 			<li>Help resources
 			<li>Translation of new features of the tool
 			<li>Calculated variables, need to separate from inputs, or remove them

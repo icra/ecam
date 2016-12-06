@@ -43,6 +43,14 @@
 		<img class=l1 stage=conf src=img/dashboard.png caption="<?php write('#configuration')?>">
 	</div>
 
+	<!--inhabitants-->
+	<div 
+		style=cursor:pointer
+		onclick=window.location="inhabitants.php">
+		<div><a href=inhabitants.php style="color:#666">Population</a></div>
+		<img class=l1 stage=inha src=img/inhabitants.png caption="Population">
+	</div>
+
 	<!--GLOBAL-->
 	<div
 		style=cursor:pointer
@@ -66,9 +74,9 @@
 	<!--Summaries-->
 	<div>
 		<div><span style="color:#666"><?php write('#summary')?></span></div>
-		<img class=l1 stage=water src=img/water.png onclick=window.location="summary.php?type=input" caption="<?php write('#Water')?>"> 
+		<img class=l1 stage=water src=img/water.png onclick=window.location="edit.php?level=Water" caption="<?php write('#Water')?>"> 
 		<img class=l1 stage=energy src=img/energy.png onclick=window.location="edit.php?level=Energy" caption="<?php write('#energy_summary')?>"> 
-		<img class=l1 stage=waste src=img/waste.png onclick=window.location="summary.php?type=input" caption="<?php write('#Waste')?>"> 
+		<img class=l1 stage=waste src=img/waste.png onclick=window.location="edit.php?level=Waste" caption="<?php write('#Waste')?>"> 
 	</div>
 
 	<!--Opportunities-->
@@ -163,13 +171,15 @@
 		//hl birds if we are in birds eye view
 		if(strpos($_SERVER['PHP_SELF'],"birds.php"))
 		{ ?>document.querySelector('img[stage=birds]').classList.add('selected');<?php }
-
 		//hl configuration if we are in configuration
 		if(strpos($_SERVER['PHP_SELF'],"configuration.php"))
 		{ ?>document.querySelector('img[stage=conf]').classList.add('selected');<?php }
 		//hl opps if we are in opps.php
 		if(strpos($_SERVER['PHP_SELF'],"opps.php"))
 		{ ?>document.querySelector('img[stage=opps]').classList.add('selected');<?php }
+		//hl inhabitants
+		if(strpos($_SERVER['PHP_SELF'],"inhabitants.php"))
+		{ ?>document.querySelector('img[stage=inha]').classList.add('selected');<?php }
 	?>
 
 	//go over icon images to deactivate inactives --> do in PHP better?
@@ -179,7 +189,7 @@
 		for(var i=0;i<collection.length;i++)
 		{
 			var stage = collection[i].getAttribute('stage');
-			if(["birds","energy","conf",'opps','gets'].indexOf(stage)>=0) continue;
+			if(["birds","energy","conf",'opps','gets','inha'].indexOf(stage)>=0) continue;
 			var isActive = Global.Configuration.ActiveStages[stage];
 			if(!isActive)
 			{

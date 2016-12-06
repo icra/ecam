@@ -795,8 +795,8 @@ Graphs.graph7=function(withTable,container)
 		var ww_ne = WW.ww_KPI_GHG_ne() - WW.ww_KPI_GHG_ne_ch4_unt() - WW.ww_KPI_GHG_ne_n2o_unt();
 
 		//per AC and CW
-		var slice_1  = ws_el/WS.ws_vol_auth;
-		var slice_2  = ws_ne/WS.ws_vol_auth;
+		var slice_1  = ws_el/WS.Distribution.wsd_auth_con;
+		var slice_2  = ws_ne/WS.Distribution.wsd_auth_con;
 		var slice_3  = ww_el/WW.ww_vol_coll;
 		var slice_4  = ww_ne/WW.ww_vol_coll;
 
@@ -844,7 +844,7 @@ Graphs.graph7=function(withTable,container)
 			"<button onclick=Graphs.graph3d(false,'"+container+"')><?php write('#graphs_hide_table')?></button>"+
 			"<table title=graph3d>"+
 				"<tr><th><?php write('#graphs_slice')?><th><?php write('#Water')?><th>kg CO2/m3<th><?php write('#Waste')?><th>kg CO2/m3"+
-				"<tr><th><?php write('#ww_KPI_GHG_ne_descr')?>  <td>ws_KPI_GHG_ne/ws_vol_auth   <td>"+format(slice_2)+"<td>(ww_KPI_GHG_ne-ww_KPI_GHG_ch4_unt-ww_KPI_GHG_n2o_unt)/ws_vol_coll <td>"+format(slice_4)+
+				"<tr><th><?php write('#ww_KPI_GHG_ne_descr')?>  <td>ws_KPI_GHG_ne/wsd_auth_con   <td>"+format(slice_2)+"<td>(ww_KPI_GHG_ne-ww_KPI_GHG_ch4_unt-ww_KPI_GHG_n2o_unt)/ws_vol_coll <td>"+format(slice_4)+
 				"<tr><th><?php write('#ww_KPI_GHG_elec_descr')?><td>ws_KPI_GHG_elec/ww_vol_auth <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/ww_vol_coll                                       <td>"+format(slice_3)+
 			"</table>"+
 			'<div class=options>'+
@@ -979,8 +979,10 @@ Graphs.sankey=function(withTable,container)
 }
 
 /** gauges for serviced population */
-Graphs.gauge=function(container,value,header)
+Graphs.gauge=function(container,value,header,unit)
 {
+	unit=unit||"%";
+	unit="<span style=font-size:20px> "+unit+"</span>";
 	//empty container
 	var element=document.getElementById(container)
 	element.style.padding="1em 0"
@@ -995,7 +997,7 @@ Graphs.gauge=function(container,value,header)
 	//value
 	var div=document.createElement('div');
 	element.appendChild(div);
-	div.innerHTML=format(value)+" %";
+	div.innerHTML=format(value)+unit;
 	div.style.marginTop="0.3em"
 	div.style.padding="0.2em";
 	div.style.fontWeight="bold";

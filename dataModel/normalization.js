@@ -5,7 +5,7 @@ var Normalization =
 	{
 		reside:"ws_resi_pop",
 		servic:"ws_serv_pop",
-		volume:"ws_vol_auth",
+		volume:"wsd_auth_con",
 		energy:"ws_nrg_cons",
 		Abstraction: {volume:"wsa_vol_conv", energy:"wsa_nrg_cons" },
 		Treatment:   {volume:"wst_vol_trea", energy:"wst_nrg_cons" },

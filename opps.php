@@ -7,8 +7,8 @@
 			setServPop(Global.Waste.ww_serv_pop)
 			document.querySelector('#idealNRW').value=Global.Water.ws_SL_non_revw()
 			setNRW(Global.Water.ws_SL_non_revw())
-			document.querySelector('#idealAuc').value=Global.Water.ws_vol_auth
-			setAuc(Global.Water.ws_vol_auth)
+			document.querySelector('#idealAuc').value=Global.Water.Distribution.wsd_auth_con;
+			setAuc(Global.Water.Distribution.wsd_auth_con;)
 
 			calculateGHG()
 			findCriticGHG()
@@ -213,7 +213,7 @@
 				<div class=opp>
 					Authorized consumption is
 					<b><script>
-						document.write(format(Global.Water.ws_vol_auth))
+						document.write(format(Global.Water.Distribution.wsd_auth_con;))
 					</script></b> m<sup>3</sup> 
 					(<script>
 						document.write(format(Global.Water.ws_SL_auth_con()))

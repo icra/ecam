@@ -51,7 +51,6 @@ var Questions =
 			"wsa_wat_loss",
 			"wsa_main_len",
 			"wsa_fri_loss",
-			"c_wsa_vol_head",
 			"wsa_KPI_water_losses",
 			"wsa_KPI_un_head_loss",
 			"wsa_KPI_std_nrg_cons",
@@ -65,7 +64,11 @@ var Questions =
 		],
 	//L2 wst
 		"wst_engines":[ "wst_vol_fuel", "wst_KPI_GHG_fuel", ],
-		"wst_pumping_efficiency":[ ],
+		"wst_pumping_efficiency":[ 
+			"wst_vol_pump",
+			"wst_pmp_head",
+			"c_wst_vol_head",
+		],
 	//L2 wsd
 		"pumping_for_distribution":[
 			"wsd_nrg_cons",

@@ -237,8 +237,6 @@
 	"#ws_resi_pop_expla"    :"Número de residentes permanentes en el área de servicio",
 	"#ws_serv_pop_descr"    :"Población servida",
 	"#ws_serv_pop_expla"    :"Número de residentes permanentes en el área de servicio connectados al sistema de suministro de agua",
-	"#ws_vol_auth_descr"    :"Consumo autorizado",
-	"#ws_vol_auth_expla":"Suma del volumen de dosificación y/o agua sin taxímetro que durante el período de evaluación, es tomada por los clientes registrados, por el proveedor de agua en sí, o por otras personas que están implícita o explícitamente autorizadas a hacerlo por la empresa proveedora de agua para fines residenciales, comerciales, industriales o públicas. Incluye agua exportada",
 	"#ws_nrg_cons_descr"    :"Electricidad consumida de la red eléctrica",
 	"#ws_nrg_cons_expla":"Energía total consumida de la red para todo el suministro de agua, basado en la factura de electricidad durante todo el período de evaluación",
 	"#ws_nrg_cost_descr"    :"Costes eléctricos",
