@@ -138,12 +138,17 @@
 			tr.style.color="#888"
 		}
 	</script>
-</head><body><center>
+</head><body>
+<center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
-<!--TITLE--><h1><?php write('#quick_assessment')?> 
-	<div style="font-size:13px;color:#666;margin-top:5px">
+</center>
+
+<!--TITLE-->
+<h1><?php write('#quick_assessment')?> 
+
+	<span style="font-size:13px;color:#666;float:right">
 		<span><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a>: <script>document.write(Global.General.Days())</script> <?php write('#days')?></span> 
 		·
 		<span><a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a>: 
@@ -156,7 +161,7 @@
 			</script> kg CO<sub>2</sub>/kWh
 		</span> 
 	</span>
-</h1></center>
+</h1>
 
 <!--content-->
 <div>
