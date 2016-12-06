@@ -258,11 +258,11 @@
 					<?php write("#producing_biogas")?>?
 					<td>
 						<label><?php write("#no")?>  
-							<input name=producing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=0;init())">
+							<input name=producing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=0;init()">
 						</label>
 					<td>
 						<label><?php write("#yes")?> 
-							<input name=producing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=1;init())">
+							<input name=producing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=1;init()">
 						</label>
 						<script>
 							(function(){
@@ -275,11 +275,11 @@
 					<?php write("#valorizing_biogas")?>?
 					<td>
 						<label><?php write("#no")?>
-						<input name=valorizing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=0;init())">
+						<input name=valorizing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=0;init()">
 						</label>
 					<td>
 						<label><?php write("#yes")?>
-						<input name=valorizing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=1;init())">
+						<input name=valorizing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=1;init()">
 						</label>
 					<script>
 						(function(){
