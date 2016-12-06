@@ -125,7 +125,7 @@
 			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?><td class=input><input id='ww_resi_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
 			<tr stage=waste class=hidden><td><?php write('#ww_conn_pop_descr')?><td class=input><input id='ww_conn_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
 			<tr stage=waste class=hidden>
-				<td>Population serviced with WW treatment
+				<td>Population serviced with wastewater treatment
 				<td class=input><input id='ww_serv_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
 			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 	</table>
