@@ -28,6 +28,21 @@
 		}
 		input.onkeydown=function(event)
 		{
+			function updateChart()
+			{
+				//problem: this only updates if we are plotting inputs. WHY?
+				var newValue=parseFloat(input.value);
+				if(isNaN(newValue))newValue=0;
+				newValue*=Units.multiplier(field);
+				//only update real inputs
+				if(typeof(CurrentLevel[field])!="function")
+				{
+					CurrentLevel[field]=newValue;
+					if(substages.length==1) substages[0][field]=newValue;
+				}
+				//try to draw charts
+				drawCharts();
+			}
 			switch(event.which)
 			{
 				case 38: //up key
@@ -135,8 +150,12 @@
 					{
 						//navigate to substages to modify the input
 						var f=this.parentNode.getAttribute('field');
-						document.querySelector('#substages').scrollIntoView(false); //false means bottom of screen
-						document.querySelector('#substages tr[field='+f+'] td[substage]').click();
+						var sscon=document.querySelector('#substages').parentNode;
+						sscon.scrollIntoView();
+						setTimeout(function(){sscon.classList.remove('folded')},300);
+						setTimeout(function(){
+							document.querySelector('#substages tr[field='+f+'] td[substage]').click();
+						},600);
 					};
 				}
 				else //normal case
@@ -257,7 +276,9 @@
 </script>
 
 <table id=inputs style="width:100%;margin-bottom:0.5em">
-	<tr><th colspan=5 class=tableHeader> INPUTS &mdash; All stages
+	<tr><th colspan=5 class=tableHeader> INPUTS &mdash; 
+	All stages in 
+	<?php if($sublevel){echo $sublevel;}else{echo $level;} ?>
 	<tr>
 		<th>Code
 		<th><?php write('#edit_description')?>

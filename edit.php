@@ -44,9 +44,9 @@
 			box-shadow: 0 1px 2px rgba(0,0,0,.1);
 			padding:0.3em;
 		}
-		.advanced.ghg {
-			background:#bca;
-		}
+		.advanced.ghg {background:#bca;}
+		.advanced.nrg {background:yellow;}
+		.advanced.sl  {background:white;}
 
 		div.card .number {
 			border-radius:0.3em;
@@ -95,16 +95,11 @@
 		table#nrgOutputs th:nth-child(2) {text-align:right}
 		table#nrgOutputs td:nth-child(2) {text-align:right}
 
-		table#otherOutputs th:not(.tableHeader) {background:#c9ab98}
-		table#otherOutputs th:nth-child(2) {text-align:right}
-		table#otherOutputs td:nth-child(2) {text-align:right}
 		<?php
 			if($level=="Waste")
 			{?>
 				table#inputs th:not(.tableHeader) {background:#d71d24}
-				#inputs a,#inputs a:visited{color:#d71d24}
 				#outputs a,#outputs a:visited{color:#d71d24}
-				#otherOutputs a,#otherOutputs a:visited{color:#d71d24}
 				#nrgOutputs a,#nrgOutputs a:visited{color:#d71d24}
 			<?php }
 		?>
@@ -297,6 +292,7 @@
 			newRow.appendChild(newTh);
 		}
 
+		// Redisplay NRG and SL outputs
 		function updateNrgOutputs()
 		{
 			var t=document.getElementById('nrgOutputs');
@@ -370,7 +366,8 @@
 					var description = translate(field+"_descr");
 					var color = field.search(/^ww/)==0 ? "#d71d24" : "";
 					var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
-					return description+" ("+code+")";
+					var nrg="<span class='advanced nrg'>NRG</span>";
+					return description+"<br>("+code+")"+nrg;
 				})();
 
 				/*value*/ 
@@ -399,39 +396,12 @@
 						return Info[field].unit;
 				})();
 			}
-
-			//if the table is empty, add a warning
-			if(t.rows.length<3)
-			{
-				var newCell=t.insertRow(-1).insertCell(-1)
-				newCell.colSpan=3
-				newCell.innerHTML="<span style=color:#999>~All Energy outputs inactive</span>";
-			}
-
-			//bottom line with the color of W/WW
-			var newRow=t.insertRow(-1);
-			var newTh=document.createElement('th');
-			newTh.setAttribute('colspan',6)
-			newTh.style.borderBottom='none';
-			newTh.style.borderTop='none';
-			newRow.appendChild(newTh);
-		}
-
-		function updateOtherOutputs()
-		{
-			var t=document.getElementById('otherOutputs');
-			while(t.rows.length>2){t.deleteRow(-1);}
 			for(var field in CurrentLevel)
 			{
 				if(typeof(CurrentLevel[field])!="function"){continue;}
 				if(field.search(/^c_/)!=-1){continue;}
 				if(field.search("_KPI_GHG")>=0)continue;
 				if(field.search('_nrg_')>-1)continue;
-
-				/*these equations are still not clear (tbd in v2)*/
-				if(field=="ww_SL_dilution")continue; 
-				if(field=="ww_SL_dil_emis")continue; 
-				/**/
 
 				/*check if field is level3 specific*/
 				if(Level3.list.indexOf(field)>-1){continue;}
@@ -467,7 +437,8 @@
 					var description = translate(field+"_descr");
 					var color = field.search(/^ww/)==0 ? "#d71d24" : "";
 					var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
-					return description+" ("+code+")";
+					var sl="<span class='advanced sl'>SL</span>";
+					return description+"<br>("+code+")"+sl;
 				})();
 
 				/*value*/ 
@@ -505,7 +476,7 @@
 			{
 				var newCell=t.insertRow(-1).insertCell(-1)
 				newCell.colSpan=3
-				newCell.innerHTML="<span style=color:#999>~All Service Level outputs inactive</span>";
+				newCell.innerHTML="<span style=color:#999>~All Energy outputs inactive</span>";
 			}
 
 			//bottom line with the color of W/WW
@@ -588,7 +559,6 @@
 			updateQuestionsTable();
 			updateOutputs();
 			updateNrgOutputs();
-			updateOtherOutputs();
 			Exceptions.apply();
 			updateFuelSelection();
 			try{drawCharts()}
@@ -849,22 +819,14 @@
 						<th style=width:17%><br>kg CO<sub>2</sub><br>per m<sup>3</sup>
 				</table>
 
-				<!--level2 outputs energy performance-->
+				<!--level2 outputs: NRG and SL-->
 				<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
-					<tr><th colspan=4 class=tableHeader>OUTPUTS — Energy performance
+					<tr><th colspan=4 class=tableHeader>OUTPUTS &mdash; Energy performance &amp; Service Level indicators
 					<tr>
 						<!--
 						<th title=Performance style=cursor:help><?php write('#edit_benchmark')?>
 						-->
 						<th><?php write('#edit_description')?>
-						<th><?php write('#edit_current_value')?>
-						<th><?php write('#edit_unit')?>
-				</table>
-
-				<!--level2 outputs (SL)-->
-				<table id=otherOutputs style="width:100%;background:#f6f6f6;margin-top:0.5em;margin-bottom:0.5em">
-					<tr><th colspan=4 class=tableHeader>OUTPUTS — <?php write('#edit_service_level_indicators') ?>
-					<tr><th><?php write('#edit_description')?>
 						<th><?php write('#edit_current_value')?>
 						<th><?php write('#edit_unit')?>
 				</table>
@@ -1251,6 +1213,7 @@
 					var substage=element.getAttribute('substage')
 					element.innerHTML=""
 					var input=document.createElement('input')
+					element.appendChild(input);
 					input.autocomplete='off'
 					input.setAttribute('onkeypress',"if(event.which==13){this.onblur()}")
 					input.setAttribute('onblur',"level3.updateSubstage("+substage+",'"+field+"',this.value)") //now works
@@ -1270,7 +1233,7 @@
 							//some variables are averaged instead of summed up
 							if(Averaged.isAveraged(field)) sum/=substages.length;
 
-							//BUG FIX: only update real inputs
+							//only update real inputs
 							if(typeof(CurrentLevel[field])!="function") CurrentLevel[field]=sum;
 
 							//try to draw charts
@@ -1300,7 +1263,6 @@
 					//value converted
 					var multiplier = Units.multiplier(field);
 					input.value=substages[substage][field]/multiplier;
-					element.appendChild(input);
 					input.select();
 				}
 				//update a field of the substage[index]
@@ -1360,7 +1322,7 @@
 
 			<!--outputs per substage-->
 			<div class="card" style="text-align:left"><?php cardMenu("<b>Outputs per substage</b>")?>
-				<table id=substageOutputs style="width:95%;margin:0.2em 0 0 0.5em;background:#f6f6f6"></table>
+				<table id=substageOutputs style="width:95%;margin:0 0 0.2em 0;background:#f6f6f6"></table>
 				<style>
 					#substageOutputs tr:hover { background:#ccc; }
 					#substageOutputs th{background:#d7bfaf;text-align:left}
