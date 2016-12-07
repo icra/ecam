@@ -1,4 +1,3 @@
-<?php /*about.php: information about the ecam tool*/?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<script>
@@ -55,7 +54,7 @@
 		}
 	</script>
 	<style>
-		#main table {
+		div#main table {
 			display:inline-block;
 			vertical-align:top;
 			margin:2px 1px;
@@ -63,14 +62,14 @@
 	</style>
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
-<!--NAVBAR--><?php include"navbar.php"?>
+<!--navbar--><?php include'navbar.php'?>
 <!--linear--><?php include'linear.php'?>
-<!--TITLE--><h1>Tasks and problem finder (debug mode)</h1></center>
+<!--title--><h1>Tasks and problem finder (debug mode)</h1></center>
 
 <div id=main style=margin-bottom:3em>
 
 <!--problems-->
-<div class=inline style="max-width:65%;border:1px solid #ccc;padding:0.5em;margin:2px">
+<div class=inline style="max-width:60%;border:1px solid #ccc;padding:0.5em;margin:2px">
 	<h3 style=padding-left:2px>Problems found</h3>
 
 	<!--questions-->
@@ -87,7 +86,7 @@
 		</table>
 	</div>
 
-	<!--rest-->
+	<!--rest of data structures-->
 	<div class=inline style="width:75%">
 		<table><tr><th>Inputs not used
 			<script>
@@ -165,18 +164,21 @@
 </div>
 
 <!--to do-->
-<div id=tasks class=inline style="max-width:30%;border:1px solid #ccc;padding:0.5em;margin:2px">
+<div id=tasks class=inline style="max-width:35%;border:1px solid #ccc;padding:0.5em;margin:2px">
 	<style> #tasks ul {padding-left:1em}</style>
-	<h3>Tasks / Issues</h3>
+	<h3>Tasks TO DO / Issues / Bugs / Requests</h3>
 	<ul>
 		<li><b>BACK-END</b><ul>
-				<li>Define <a href=benchmark.php>Benchmark</a> 
-			</ul>
+			<li>'Natural Gas bug': space characters in json file do not save correctly
+			<li>Remake <a href=benchmark.php>Benchmark</a> data structure
+			<li>Create Opportunities data structure from zero
+			<li>Calculated variables: separate from inputs, or remove them. <a href=summary.php?type=ccvv>List</a>
+		</ul>
 		<li><b>FRONT-END</b><ul>
-			<li>Draw table of options in variable.php for variables that are magnitude:Option
-			<li>Help resources
-			<li>Translation of new features of the tool
-			<li>Calculated variables, need to separate from inputs, or remove them
+			<li>Move advanced filters to the substage table (Andrés)
+			<li>Create select menu for options in variable.php for variables that are magnitude:Option
+			<li>Help resources: example json file and manual
+			<li>Translate new features
 		</ul>
 	</ul>
 </div>

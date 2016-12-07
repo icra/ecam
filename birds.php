@@ -309,7 +309,11 @@
 	</div>
 
 	<!--graphs-->
-	<div class="card inline" style="width:63%"><?php cardMenu($lang_json['#graphs'])?>
+	<div class="card inline" style="width:63%">
+		<?php 
+			cardMenu("
+				Graphs 
+			")?>
 		<div id=graphs>
 			<style> 
 				#graphs table{margin:auto !important;margin-bottom:0.5em !important}
