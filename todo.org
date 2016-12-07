@@ -1,2 +1,0 @@
-* TASKS
-** TODO Bug de "Natural Gas" quan es guarda arxiu i hi ha un espai
