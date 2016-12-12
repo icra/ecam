@@ -29,8 +29,9 @@
 		div#main button.button.prevNext {
 			display:block;
 			vertical-align:bottom;
-			margin:0.5em 0.5em;
+			margin:0.5em 0.5em 0 0;
 			background:#acb;
+			border-radius:0;
 		}
 		body{background:#F5ECCE}
 
