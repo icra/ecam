@@ -23,7 +23,6 @@ th{font-weight:normal;background:#00adef;color:white;vertical-align:middle}
 hr{display:block;height:1px;border:0;margin:0;padding:0;}
 
 /*highlight inputs when mouse goes over a row that has a formula*/
-tr{transition:all 0.1s linear}
 tr[hl=yes]{background:yellow;color:black}
 tr[hl=no]{background:default}
 tr[hl_output=yes]{background:blue;color:white}
@@ -147,16 +146,27 @@ span.circle {
 
 /*cards*/
 	.card {
-		border-radius:0em;
-		transition:all 0.2s linear;
-		margin:6px 2px 7px 5px;
 		background:white;
+		border-radius:0em;
+		border:1px solid #ccc;
+		margin:6px 0px 7px 2px;
 		opacity:0.98;
 		overflow:auto;
+		transition:all 0.2s linear;
 		box-shadow: 0 1px 2px rgba(0,0,0,.1);
 	}
-	.card.folded{max-height:3.0em;overflow:hidden;}
+	.card.inline {
+		margin:6px 2px 7px 2px;
+	}
+	.card.folded{
+		max-height:3.0em;
+		overflow:hidden;
+		border:1px solid #eee;
+	}
 	.card.folded > *:nth-child(n+2) {opacity:0;}
+	.card.folded .menu {
+		color:#aaa;
+	}
 	.card .menu {
 		text-align:left;
 		opacity:1;
@@ -168,9 +178,9 @@ span.circle {
 		margin-top:-1px;
 		border-radius:0;
 	}
-	.card        .menu button:before {content:"-";}
-	.card.folded .menu button:before {content:"+";}
-	.card .menu button.toggle:before{content:""}
+	.card        .menu button:before {content:"-"}
+	.card.folded .menu button:before {content:"+"}
+	.card .menu button.toggle:before {content:""}
 	.card .menu button.toggle {
 		float:right;
 		padding:0.5em;

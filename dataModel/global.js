@@ -107,11 +107,8 @@ var Global = {
 			"wsd_nrg_cons":0,
 			"wsd_vol_dist":0,
 			"wsd_auth_con":0,
-			wsd_KPI_nrg_per_m3:function(){return this.wsd_nrg_cons/this.wsd_auth_con},
-			wsd_KPI_std_nrg_cons:function(){return (this.wsd_nrg_cons+this.wsd_nrg_recv)/this.c_wsd_vol_head()},
-			ws_SL_serv_pop:function(){return Global.Water.ws_SL_serv_pop()},
-			ws_SL_auth_con:function(){return Global.Water.ws_SL_auth_con()},
-			ws_SL_non_revw:function(){return Global.Water.ws_SL_non_revw()},
+			"wsd_vol_fuel":0,
+			"wsd_vol_trck":0,
 			"wsd_deli_pts":0,
 			"wsd_ser_cons":0,
 			"wsd_time_pre":0,
@@ -125,11 +122,15 @@ var Global = {
 			"wsd_nrg_recv":0,
 			"wsd_main_len":0,
 			"wsd_fri_loss":0,
+
 			c_wsd_nrg_natu:function(){return Cts.ct_gravit.value*this.wsd_vol_dist*(this.wsd_wt_el_no-this.wsd_lo_no_el)/3600000},
 			c_wsd_nrg_mini:function(){return Cts.ct_gravit.value*this.wsd_auth_con*(this.wsd_min_pres+this.wsd_av_no_el-this.wsd_lo_no_el)/3600000},
 			c_wsd_nrg_supp:function(){return this.wsd_nrg_cons+this.c_wsd_nrg_natu()},
 			c_wsd_nrg_topo:function(){return Cts.ct_gravit.value*this.wsd_vol_dist*(this.wsd_hi_no_el-this.wsd_av_no_el)/3600000},
 			c_wsd_vol_head:function(){return this.wsd_vol_pump*this.wsd_pmp_head/100},
+
+			wsd_KPI_nrg_per_m3:function(){return this.wsd_nrg_cons/this.wsd_auth_con},
+			wsd_KPI_std_nrg_cons:function(){return (this.wsd_nrg_cons+this.wsd_nrg_recv)/this.c_wsd_vol_head()},
 			wsd_KPI_nrg_efficien:function(){return 100*this.c_wsd_nrg_mini()/(this.c_wsd_nrg_supp()-this.wsd_nrg_recv)},
 			wsd_KPI_nrg_topgraph:function(){return 100*this.c_wsd_nrg_topo()/(this.c_wsd_nrg_supp()-this.wsd_nrg_recv)},
 			wsd_KPI_water_losses:function(){
@@ -139,11 +140,19 @@ var Global = {
 					return 0;
 			},
 			wsd_KPI_un_head_loss:function(){return 1000*this.wsd_fri_loss/this.wsd_main_len},
-			wsd_SL_pres_ade:function(){return 100*this.wsd_deli_pts/this.wsd_ser_cons},
-			wsd_SL_cont_sup:function(){return 100*this.wsd_time_pre/24},
+
       wsd_KPI_GHG_elec:function(){return this.wsd_nrg_cons*Global.General.conv_kwh_co2},
+			wsd_KPI_GHG_ne_fuel:function(){return -999;},
+			wsd_KPI_GHG_ne_trck:function(){return -999;},
 			wsd_KPI_GHG_ne:function(){return 0},
 			wsd_KPI_GHG:function(){return this.wsd_KPI_GHG_elec()+this.wsd_KPI_GHG_ne()},
+			wsd_KPI_GHG_nrw:function(){return Global.Water.ws_KPI_GHG()*Global.Water.ws_SL_non_revw()/100},
+
+			ws_SL_serv_pop:function(){return Global.Water.ws_SL_serv_pop()},
+			ws_SL_auth_con:function(){return Global.Water.ws_SL_auth_con()},
+			ws_SL_non_revw:function(){return Global.Water.ws_SL_non_revw()},
+			wsd_SL_pres_ade:function(){return 100*this.wsd_deli_pts/this.wsd_ser_cons},
+			wsd_SL_cont_sup:function(){return 100*this.wsd_time_pre/24},
 		}
 	},
 

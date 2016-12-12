@@ -166,7 +166,7 @@
 <!--content-->
 <div>
 	<!--inputs-->
-	<div class="card inline" style="width:35%;"><?php cardMenu("Inputs &mdash; Global values of the system")?>
+	<div class="card inline" style="width:35%;"><?php cardMenu("<b>Inputs</b> &mdash; Global values of the system")?>
 		<!--table-->
 		<table id=inputs style=width:100%>
 			<style>
@@ -312,7 +312,7 @@
 	<div class="card inline" style="width:63%">
 		<?php 
 			cardMenu("
-				Graphs 
+				<b>Graphs</b> 
 			")?>
 		<div id=graphs>
 			<style> 

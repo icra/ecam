@@ -162,6 +162,8 @@ var Info = {
 	"wsd_nrg_recv" :{magnitude:"Energy",unit:"kWh",},
 	"wsd_main_len" :{magnitude:"Distance",unit:"km",},
 	"wsd_fri_loss" :{magnitude:"Head",unit:"m",},
+	"wsd_vol_fuel":{magnitude:"Volume",unit:"L",},
+	"wsd_vol_trck":{magnitude:"Volume",unit:"L",},
 	wsd_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>",},
 	wsd_SL_pres_ade :{magnitude:"Percentage",unit:"%",},
 	wsd_SL_cont_sup :{magnitude:"Percentage",unit:"%",},
@@ -176,8 +178,11 @@ var Info = {
 	wsd_KPI_water_losses:{magnitude:"Volume/Distance",unit:"m<sup>3</sup>/km",},
 	wsd_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km",},
 	wsd_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wsd_KPI_GHG_ne_fuel:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wsd_KPI_GHG_ne_trck:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wsd_KPI_GHG_ne:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wsd_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wsd_KPI_GHG_nrw:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	//L2 Wastewater Collection
 	"wwc_vol_conv":{magnitude:"Volume",unit:"m3",},

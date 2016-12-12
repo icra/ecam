@@ -20,7 +20,7 @@
 			{
 				//fold container div.card of the btn
 				container.classList.add('folded');
-				//open nextId div.card 
+				//open nextId div.card TBD 
 				//document.querySelector('#'+nextId).parentNode.classList.remove('folded');
 			},
 		};
@@ -550,13 +550,16 @@
 		/** Update all */
 		function init()
 		{
+			updateQuestionsTable('questions');
+			updateQuestionsTable('adv_questions',true);
 			if(typeof(level3)!="undefined") 
 			{
 				level3.updateSubstagesTable();
 				level3.updateOutputs();
 			}
-			if(typeof(level2)!="undefined") level2.updateInputs();
-			updateQuestionsTable();
+			if(typeof(level2)!="undefined"){
+				level2.updateInputs();
+			}
 			updateOutputs();
 			updateNrgOutputs();
 			Exceptions.apply();
@@ -564,7 +567,7 @@
 			try{drawCharts()}
 			catch(e){/*console.log(e)*/}
 			updateResult();
-			//fake click in "View all"
+			//fake click in "View all" checkbox (cb)
 			var cb=document.querySelector('#viewAll');
 			if(cb)cb.checked=true;
 		}
@@ -590,8 +593,9 @@
 			default: $titleSublevel="<span style='font-size:26px'>".$lang_json["#$sublevel"]."</span>";break;
 		}
 	}
-	/*separator*/ $sep="<span style=color:black>&rsaquo;</span>";
-	$title = $sublevel 
+	/*separator*/ 
+	$sep="<span style=color:black>&rsaquo;</span>";
+	$title=$sublevel 
 		? 
 		"<a href=edit.php?level=$level>$titleLevel</a> $sep <span style=color:black>$titleSublevel</span>" 
 		: 
@@ -633,29 +637,52 @@
 		<?php cardMenu("<b>Questions</b> &mdash; Answer these questions first (<a href=questions.php>info</a>)")?> 
 		<table id=questions class=inline></table>
 		<script>
-			function updateQuestionsTable()
+			function updateQuestionsTable(id_table,adv)
 			{
-				var t = document.querySelector('#questions');
-				while(t.rows.length>0)t.deleteRow(-1);
-				var questions = Questions.getQuestions(CurrentLevel);
+				adv=adv||false; //show advanced or normal
 
-				//hide whole table if no questions
-				if(questions.length==0) t.parentNode.style.display="none" 
+				var t=document.getElementById(id_table);
+				if(!t)return;
+				while(t.rows.length>0)t.deleteRow(-1);
+				var questions=Questions.getQuestions(CurrentLevel);
 
 				for(var q in questions)
 				{
 					var question = questions[q];
+					if(Questions.isHiddenQuestion(question)){continue;}
+
+					//check if question is "advanced"
+					if(!adv){ if( Questions[question].advanced){continue;}}
+					else{     if(!Questions[question].advanced){continue;}}
+
+					//fetch current state
 					var currentAnswer = Global.Configuration["Yes/No"][question];
 					var checked = currentAnswer ? "checked":"";
 
-					//reset values that are inputs
+					//reset values that are inputs ! codi lleig, es podria refactoritzar
 					if(!currentAnswer)
-						for(var i in Questions[question])
+					{
+						//reset a les variables
+						for(var i in Questions[question].variables)
 						{
-							var code=Questions[question][i];
+							var code=Questions[question].variables[i];
 							if(typeof(CurrentLevel[code])=="number") CurrentLevel[code]=0;
 						}
+						//reset a les otherQuestions
+						for(var i in Questions[question].otherQuestions)
+						{
+							var code_q=Questions[question].otherQuestions[i];
+							Global.Configuration["Yes/No"][code_q]=0;
+							//reset a les variables de les otherQuestions
+							for(var j in Questions[code_q].variables)
+							{
+								var code_v=Questions[question].variables[j];
+								if(typeof(CurrentLevel[code_v])=="number") CurrentLevel[code_v]=0;
+							}
+						}
+					}
 
+					//new row
 					var newRow = t.insertRow(-1);
 					newRow.style.background = currentAnswer ? "lightgreen" : "";
 					newRow.setAttribute('question',question);
@@ -672,14 +699,20 @@
 						return ret;
 					})();
 				}
+
+				//hide whole table if no questions
+				t.parentNode.style.display="";
+				if(t.rows.length==0){t.parentNode.style.display="none";}
 			}
 
 			//highlight fields linked to the question
 			function hlQuestionFields(question,hl)
 			{
-				var fields=Questions[question]; //array
+				var fields=Questions[question].variables; //array
 				for(var i in fields)
-					Formulas.hlField(fields[i],hl)
+				{
+					Formulas.hlField(fields[i],hl);
+				}
 			}
 
 			function setQuestion(question,newValue)
@@ -688,8 +721,8 @@
 					Global.Configuration['Yes/No'][question]=1;
 				else //if(confirm("WARNING! Inputs from this question will be reseted to zero. Continue?"))
 					Global.Configuration['Yes/No'][question]=0;
-				init()
-				hlQuestionFields(question,1)
+				init();
+				hlQuestionFields(question,1);
 			}
 		</script>
 		<?php 
@@ -708,8 +741,7 @@
 					<?php
 						if($level=="Water" && !$sublevel)
 						{ 
-							?>
-							<?php 
+							?> <?php 
 						}
 						else if($level=="Waste" && !$sublevel)
 						{
@@ -727,6 +759,13 @@
 						{
 							?>
 							<tr question=wst_engines><td><?php write('#configuration_engines')?>
+							<?php 
+						}
+						else if($level=="Water" && $sublevel=="Distribution")
+						{
+							?>
+							<tr question=wsd_engines><td><?php write('#configuration_engines')?>
+							<tr question=wsd_trucks><td><?php write('#configuration_vehicles')?>
 							<?php 
 						}
 					?>
@@ -935,7 +974,7 @@
 							}
 
 							//if is an option, continue (will show at the end of the table)
-							if(Info[code].magnitude=="Option") continue;
+							if(Info[code]&&Info[code].magnitude=="Option") continue;
 
 							/*new row*/
 							var newRow=t.insertRow(-1);
@@ -1055,7 +1094,7 @@
 							var code=inputs[input];
 							
 							//if is an option, continue (will show at the end of the table)
-							if(Info[code].magnitude!="Option") continue;
+							if(Info[code] && Info[code].magnitude!="Option") continue;
 
 							/*new row*/
 							var newRow=t.insertRow(-1);
@@ -1282,6 +1321,14 @@
 					init();
 				}
 			</script>
+
+			<!--advanced questions-->
+			<div class="card">
+				<?php cardMenu("<b>Advanced Questions for Substages</b>")?> 
+				<table id=adv_questions class=inline></table>
+				<button class="button save prevNext" onclick="PrevNext.next(this.parentNode,'tbd')">Ok, next</button>
+			</div>
+
 			<div class="card" style="text-align:left">
 				<?php 
 					cardMenu(" <b>Substages</b>
@@ -1409,9 +1456,10 @@
 							//1st cell: show code identifier
 							newRow.insertCell(-1).innerHTML=(function()
 							{
-								var adv=Level3.list.indexOf(field)+1 ? "<span class=advanced title='Advanced'>adv</span>" : "" ;
-								var ghg=isGHG                        ? "<span class='advanced ghg' title='Advanced'>GHG</span>" : "" ;
-								return "<a href=variable.php?id="+field+">"+field+"</a>"+ghg+adv;
+								var adv=Level3.list.indexOf(field)+1 ? "<span class=advanced title='Advanced'>adv</span>":"";
+								var ghg=isGHG                        ? "<span class='advanced ghg' title='GHG'>GHG</span>":"";
+								var nrg=field.search('_nrg_')+1      ? "<span class='advanced nrg' title='Energy performance'>NRG</span>":""; 
+								return "<a href=variable.php?id="+field+">"+field+"</a>"+ghg+adv+nrg;
 							})();
 
 							//2nd cell: description
@@ -1497,11 +1545,12 @@
 		if($sublevel)
 		{
 			?>
-				<div class=card><?php cardMenu("<b>Opportunities</b> <span class=tbd>TBD</span>")?>
-					<div style=padding:0.5em>
-					Under development
-					</div>
+			<div class=card><?php cardMenu("<b>Opportunities</b> <span class=tbd>TBD</span>")?>
+				<div style=padding:0.5em>
+				Under development
 				</div>
+				<button class="button save prevNext" onclick="PrevNext.next(this.parentNode,'tbd')">Ok, next</button>
+			</div>
 			<?php 
 		}
 	?>

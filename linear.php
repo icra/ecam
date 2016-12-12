@@ -22,7 +22,6 @@
 	#linearDiagram img.selected{border:4px solid lightgreen}
 	#linearDiagram img.inactive {pointer-events:none;}
 	#linearDiagram img:not(.inactive) {cursor:pointer}
-	#linearDiagram #line {background-color:#aaa;position:relative; transform:translateY(-26px) translateX(0px);z-index:1;width:270px;}
 	#linearDiagram a:hover {text-decoration:none}
 </style>
 
@@ -68,7 +67,6 @@
 		<img class=l2 stage=wasteCol src=img/wasteCol.png onclick=window.location="edit.php?level=Waste&sublevel=Collection"   caption="<?php write('#Collection')?>">
 		<img class=l2 stage=wasteTre src=img/wasteTre.png onclick=window.location="edit.php?level=Waste&sublevel=Treatment"    caption="<?php write('#Treatment')?>">
 		<img class=l2 stage=wasteDis src=img/wasteDis.png onclick=window.location="edit.php?level=Waste&sublevel=Discharge"    caption="<?php write('#Discharge')?>">
-		<hr id=line>
 	</div>
 
 	<!--Summaries-->
@@ -85,6 +83,10 @@
 		onclick=window.location="opps.php">
 		<div><a href=opps.php style="color:#666"><?php write('#opportunities')?></a></div>
 		<img class=l1 stage=opps src=img/opps.png caption="Opportunities to reduce GHG emissions">
+	</div>
+
+	<div style=float:right;vertical-align:middle;height:100%>
+		<a href=problems.php>Debugging utility</a>
 	</div>
 </div>
 

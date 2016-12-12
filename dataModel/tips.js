@@ -6,6 +6,9 @@ var Tips = [
 	"Export results to Excel at Main Menu/Summary/Export",
 	"Press &uarr; and &darr; when editing inputs to quickly modify the number",
 	"Click on the 'untitled' substage header to change its name",
+	"Drag the mouse over inputs to highlight related outputs",
+	"Drag the mouse over outputs highlight related inputs",
+	"Drag the mouse over active questions to highlight related inputs and outputs",
 ];
 
 Tips.random=function()

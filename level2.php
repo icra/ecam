@@ -78,7 +78,7 @@
 			}
 
 			/*check if is an option*/
-			if(Info[field].magnitude=="Option") continue;
+			if(Info[field] && Info[field].magnitude=="Option") continue;
 
 			if(Level3.list.indexOf(field)+1){continue;}
 

@@ -229,7 +229,30 @@
 				}
 				else{
 					newCell.className='input'
-					newCell.setAttribute('onclick',"transformField(this)")
+					//if input has magnitude Option
+					if(Info[id].magnitude=="Option")
+					{
+						var select=document.createElement('select');
+						newCell.innerHTML="";
+						newCell.appendChild(select);
+						select.setAttribute('onchange','currentStage["'+id+'"]=parseInt(this.value);init()')
+						for(var op in Tables[id])
+						{
+							var option = document.createElement('option');
+							var value = parseInt(Tables[id][op].value);
+							select.appendChild(option);
+							option.value=value;
+							option.innerHTML=op+" ("+value+")";
+							if(currentStage[id]==value) 
+							{
+								option.selected=true;
+							}
+						}
+					}
+					else
+					{
+						newCell.setAttribute('onclick',"transformField(this)")
+					}
 				}
 			}
 

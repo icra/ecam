@@ -44,5 +44,3 @@
 </table>
 
 </div>
-
-<!--FOOTER--><?php include'footer.php'?>
