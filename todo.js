@@ -10,6 +10,10 @@ var TODO=
 	],
 	Front:
 	[
+		"fix yes/no question in global",
+		"new graph for wsd_KPI_std_nrg_cons",
+		"Population in Global again",
+		"Graphs: add benchmark circles (difficult)",
 		"Filter at the beginning (configuration page?), asking if there are fuel engines at any point, to hide all fuel related filters, inputs and outputs (Andrés)",
 		"Help resources: example json file and manual",
 		"Translate new features",
