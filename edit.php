@@ -843,7 +843,7 @@
 			</div>
 
 			<!--outputs level2-->
-			<div id=outputs_container class=inline style="width:40%;margin-left:0.5em;margin-bottom:2em">
+			<div id=outputs_container class=inline style="width:53%;margin-left:0.5em;margin-bottom:2em">
 				<?php if($level=="Energy") echo "<style>#outputs{display:none}</style>"; ?>
 
 				<!--level2 GHG outputs-->

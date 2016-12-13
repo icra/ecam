@@ -9,6 +9,35 @@
 		span.circle{display:none}
 		span.circle{float:right}
 	</style>
+	<style>
+		table#inputs th, #inputs td {text-align:left;}
+		#inputs th, #inputs td {border-left:none;border-right:none}
+		#inputs input.edited {background:lightgreen;}
+		#inputs td.input, #inputs td.output {
+			width:70px;
+			border:1px solid #aaa;
+			color:#666;
+			background:#eee;
+			padding:0 !important;
+		}
+		#inputs input {
+			background:inherit;
+			border:none;
+			text-align:right;
+			cursor: cell;
+			line-height:1em;
+			width:95%;
+			height:24px;
+			display:block;
+			padding:0.2em;
+		}
+		#inputs input:focus {
+			background:white;
+		}
+		#inputs tr.hidden {display:none}
+		/**indication "not active"**/
+		#inputs tr[indic]{text-align:center;color:#999;background:#eee}
+	</style>
 	<script>
 		function init()
 		{
@@ -130,14 +159,50 @@
 
 		function makeInactive(input)
 		{
-			input.setAttribute('disabled',true)
-			input.style.background="#eee"
+			input.setAttribute('disabled',true);
+			input.style.background="#eee";
+			//change parent color
 			var tr = input.parentNode.parentNode;
-			tr.style.background="#eee"
-			tr.title="<?php write('#Inactive')?>"
-			tr.style.color="#888"
+			tr.style.background="#eee";
+			tr.title="<?php write('#Inactive')?>";
+			tr.style.color="#888";
 		}
 	</script>
+	<script>
+		BEV.updateOutput=function(input)
+		{
+			var field=input.id;
+			var value=parseFloat(input.value)*Units.multiplier(field);
+			//spred the value among the stages
+			//get L1 name: "Water" or "Waste"
+			var L1=field.search("ws_")==0 ? "Water" : "Waste";
+			if(L1=="Water")
+			{
+				//count active stages
+				var wsa=Global.Configuration.ActiveStages.waterAbs;
+				var wst=Global.Configuration.ActiveStages.waterTre;
+				var wsd=Global.Configuration.ActiveStages.waterDis;
+				var n=wsa+wst+wsd;
+				Global.Water.Abstraction [field.replace("ws_","wsa_")]=wsa*value/n;
+				Global.Water.Treatment   [field.replace("ws_","wst_")]=wst*value/n;
+				Global.Water.Distribution[field.replace("ws_","wsd_")]=wsd*value/n;
+			}
+			else if(L1=="Waste")
+			{
+				//count active stages
+				var wwc=Global.Configuration.ActiveStages.wasteCol;
+				var wwt=Global.Configuration.ActiveStages.wasteTre;
+				var wwd=Global.Configuration.ActiveStages.wasteDis;
+				var n=wwc+wwt+wwd;
+				Global.Waste.Collection[field.replace("ww_","wwc_")]=wwc*value/n;
+				Global.Waste.Treatment [field.replace("ww_","wwt_")]=wwt*value/n;
+				Global.Waste.Discharge [field.replace("ww_","wwd_")]=wwd*value/n;
+			}
+			input.classList.add('edited');
+			init();
+		}
+	</script>
+
 </head><body>
 <center>
 <!--sidebar--><?php include'sidebar.php'?>
@@ -147,7 +212,6 @@
 
 <!--TITLE-->
 <h1><?php write('#quick_assessment')?> 
-
 	<span style="font-size:13px;color:#666;float:right">
 		<span><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a> <script>document.write(Global.General.Days())</script> <?php write('#days')?></span> 
 		·
@@ -169,71 +233,6 @@
 	<div class="card inline" style="width:35%;"><?php cardMenu("<b>Inputs</b> &mdash; Global values of the system")?>
 		<!--table-->
 		<table id=inputs style=width:100%>
-			<style>
-				table#inputs th, #inputs td {text-align:left;}
-				#inputs th, #inputs td {border-left:none;border-right:none}
-				#inputs input.edited {background:lightgreen;}
-				#inputs td.input, #inputs td.output {
-					width:70px;
-					border:1px solid #aaa;
-					color:#666;
-					background:#eee;
-					padding:0 !important;
-				}
-				#inputs input {
-					background:inherit;
-					border:none;
-					text-align:right;
-					cursor: cell;
-					line-height:1em;
-					width:95%;
-					height:24px;
-					display:block;
-					padding:0.2em;
-				}
-				#inputs input:focus {
-					background:white;
-				}
-				#inputs tr.hidden {display:none}
-				/**indication "not active"**/
-				#inputs tr[indic]{text-align:center;color:#999;background:#eee}
-			</style>
-
-			<script>
-				BEV.updateOutput=function(input)
-				{
-					var field=input.id;
-					var value=parseFloat(input.value)*Units.multiplier(field);
-					//spred the value among the stages
-					//get L1 name: "Water" or "Waste"
-					var L1=field.search("ws_")==0 ? "Water" : "Waste";
-					if(L1=="Water")
-					{
-						//count active stages
-						var wsa=Global.Configuration.ActiveStages.waterAbs;
-						var wst=Global.Configuration.ActiveStages.waterTre;
-						var wsd=Global.Configuration.ActiveStages.waterDis;
-						var n=wsa+wst+wsd;
-						Global.Water.Abstraction [field.replace("ws_","wsa_")]=wsa*value/n;
-						Global.Water.Treatment   [field.replace("ws_","wst_")]=wst*value/n;
-						Global.Water.Distribution[field.replace("ws_","wsd_")]=wsd*value/n;
-					}
-					else if(L1=="Waste")
-					{
-						//count active stages
-						var wwc=Global.Configuration.ActiveStages.wasteCol;
-						var wwt=Global.Configuration.ActiveStages.wasteTre;
-						var wwd=Global.Configuration.ActiveStages.wasteDis;
-						var n=wwc+wwt+wwd;
-						Global.Waste.Collection[field.replace("ww_","wwc_")]=wwc*value/n;
-						Global.Waste.Treatment [field.replace("ww_","wwt_")]=wwt*value/n;
-						Global.Waste.Discharge [field.replace("ww_","wwd_")]=wwd*value/n;
-					}
-					input.classList.add('edited');
-					init();
-				}
-			</script>
-
 			<!--WATER-->
 			<tr><th colspan=3>
 				<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
@@ -295,25 +294,21 @@
 					<span class=circle style=background:#b8879d></span>
 				<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 		</table>
-
 		<script>
 			(function(){
-				var inputs = document.querySelectorAll("#inputs input")
+				var inputs=document.querySelectorAll("#inputs input")
 				for(var i=0;i<inputs.length;i++)
 				{
 					if(inputs[i].type=="radio") continue;
 					inputs[i].onclick=function(){this.select()}
 				}
-			})()
+			})();
 		</script>
 	</div>
 
 	<!--graphs-->
 	<div class="card inline" style="width:63%">
-		<?php 
-			cardMenu("
-				<b>Graphs</b> 
-			")?>
+		<?php cardMenu("<b>Graphs</b>")?>
 		<div id=graphs>
 			<style> 
 				#graphs table{margin:auto !important;margin-bottom:0.5em !important}

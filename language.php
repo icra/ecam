@@ -1,5 +1,27 @@
 <!--menu inside navbar.php-->
 
+<!--container for language options-->
+<div id=lang>
+	<!--current language-->
+	<?php
+		//$lang is a global variable defined in languages/write.php
+		echo "<img id=currentLang src='img/flags/$lang.png'";
+	?>
+
+	<!--all languages-->
+	<div id=select> 
+		<!--en--><div lang=en><img src="img/flags/en.png"> en</div>
+		<!--es--><div lang=es><img src="img/flags/es.png"> es (under development)</div>
+		<!--th--><div lang=th><img src="img/flags/th.png"> th (under development)</div>
+
+		<!--null (no lang, only codes)-->
+		<div lang=null>
+			<img src="img/flags/null.png">
+			null - only codes (development)	
+		</div>
+	</div> 
+</div>
+
 <style>
 	/**container element*/
 	#lang{
@@ -41,52 +63,18 @@
 	}
 </style>
 
-<!--container for language options-->
-<div id=lang>
-	<!--current language-->
-	<?php
-		//$lang is a global variable defined in languages/write.php
-		echo "<img id=currentLang src='img/flags/$lang.png'";
-	?>
-
-	<!--all languages-->
-	<div id=select> 
-		<!--english-->
-		<div lang=en>
-			<img src="img/flags/en.png">
-			en
-		</div>
-
-		<!--spanish-->
-		<div lang=es>
-			<img src="img/flags/es.png">
-			es
-		</div>
-
-		<!--null-->
-		<div lang=null>
-			<img src="img/flags/null.png">
-			null (development)	
-		</div>
-	</div> 
-</div>
-
 <script>
 	//Add an onclick listener to each language
 	(function()
 	{
 		var langs = document.querySelectorAll('#lang #select div[lang]');
-
 		for(var i=0; i<langs.length; i++)
 		{
 			var lang=langs[i].getAttribute('lang');
 			langs[i].setAttribute('onclick',"Language.set('"+lang+"')")
 		}
-
 	})();
-
 	var Language = {}; //namespace
-
 	Language.set = function(lang)
 	{
 		console.log(lang);
