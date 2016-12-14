@@ -1177,4 +1177,28 @@ Graphs.authCon=function(container)
 	h.innerHTML="Current "+translate("ws_SL_auth_con_descr")+" ("+Info['ws_SL_auth_con'].unit+")"
 	element.insertBefore(h,element.firstChild)
 }
+
+Graphs.wsa_KPI_std_nrg_cons=function(withTable,container)
+{
+	var DATA=[
+		['Substage','kpi'],
+		//['Copper',8.94],
+	];
+
+	for(var i=0;i<substages.length;i++)
+	{
+		var name=substages[i].name;
+		var value=substages[i].wsa_KPI_std_nrg_cons();
+		if(isNaN(value))value=0;
+		DATA.push([name,value]);
+	}
+	var options = {
+		height:250,
+		chart: {title:translate('wsa_KPI_std_nrg_cons_descr')+" kWh/m3/100m"},
+		legend:{position:'none'},
+	};
+	var chart=new google.charts.Bar(document.getElementById(container));
+	var data=google.visualization.arrayToDataTable(DATA);
+	chart.draw(data,options);
+}
 </script>

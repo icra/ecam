@@ -101,8 +101,11 @@ var Formulas = {
 	hlField:function(field,hl)
 	{
 		var yesno=hl?"yes":"no";
-		var element=document.querySelector('[field='+field+']');
-		if(element) element.setAttribute('hl',yesno);
+		var elements=document.querySelectorAll('[field='+field+']');
+		for(var i=0;i<elements.length;i++)
+		{
+			elements[i].setAttribute('hl',yesno);
+		}
 	},
 
 	/**
@@ -137,8 +140,11 @@ var Formulas = {
 		{
 			var field=outputs[i];
 			var yesno=hl?"yes":"no";
-			var element=document.querySelector('[field='+field+']');
-			if(element) element.setAttribute('hl_output',yesno);
+			var elements=document.querySelectorAll('[field='+field+']');
+			for(var i=0;i<elements.length;i++)
+			{
+				elements[i].setAttribute('hl_output',yesno);
+			}
 		}
 	},
 }

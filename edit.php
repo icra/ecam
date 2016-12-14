@@ -495,11 +495,10 @@
 			//draw the chart that is selected!!!
 			//Graphs.graph4(false,'graph'); //GHG
 			//Graphs.graph5(false,'graph'); //Energy
-			var button;
-			button=document.querySelector("div.buttonsGraph button.active");
-			if(!button){
-				button=document.querySelector("div.buttonsGraph button");
-			}
+
+			//draw the active button graph
+			var button;button=document.querySelector("div.buttonsGraph button.active");
+			if(!button){button=document.querySelector("div.buttonsGraph button");}
 			button.classList.remove('active');
 			button.onclick()
 		}
@@ -566,7 +565,7 @@
 			Exceptions.apply();
 			updateFuelSelection();
 			try{drawCharts()}
-			catch(e){/*console.log(e)*/}
+			catch(e){console.log(e)}
 			Caption.listeners();
 			updateResult();
 			//fake click in "View all" checkbox (cb)
@@ -885,7 +884,7 @@
 				<!--actual graph-->
 				<div id=graph><?php write('#loading')?></div>
 				<script>
-					google.charts.load('current',{'packages':['corechart']});
+					google.charts.load('current',{'packages':['corechart','bar']});
 					google.charts.setOnLoadCallback(drawCharts);
 				</script>
 				<style>

@@ -432,7 +432,7 @@
 				</script>
 			</div>
 			<script>
-				google.charts.load('current',{'packages':['corechart','gauge']});
+				google.charts.load('current',{'packages':['corechart','gauge','bar']});
 				google.charts.setOnLoadCallback(init)
 			</script>
 		</div>
