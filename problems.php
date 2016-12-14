@@ -60,18 +60,25 @@
 			font-style:italic;
 		}
 	</style>
-</head><body><center>
+	<script>
+		function init()
+		{
+			Caption.listeners();
+		}
+	</script>
+</head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--navbar--><?php include'navbar.php'?>
 <!--linear--><?php include'linear.php'?>
-<!--title--><h1>Tasks and problem finder (debug mode)</h1></center>
+<!--caption--><?php include'caption.php'?>
+<!--title--><h1>Debugging utility</h1></center>
 <div id=main style=margin-bottom:3em>
 	<!--to do-->
 	<div id=tasks class=inline style="max-width:35%;border:1px solid #ccc;padding:0.5em;margin:2px">
 		<style> 
 			#tasks ul {font-family:monospace;padding-left:1em}
 		</style>
-		<h3>Tasks TO DO / Issues / Bugs / Requests</h3>
+		<h3>Tasks / Issues / Bugs / Requests</h3>
 		<script src="todo.js"></script>
 		<ul>
 			<li><b>BACK-END</b><ul><script>TODO.list(TODO.Back)</script></ul>
@@ -80,7 +87,7 @@
 	</div>
 	<!--problems-->
 	<div class=inline style="max-width:60%;border:1px solid #ccc;padding:0.5em;margin:2px">
-		<h3 style=padding-left:2px>Problems found</h3>
+		<h3 style=padding-left:2px>Automatic problem finder</h3>
 
 		<!--questions-->
 		<div class=inline style="max-width:20%">

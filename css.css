@@ -3,7 +3,7 @@
 a{font-weight:bold;text-decoration:none}
 a,a:visited,a:hover,a:active {color:#00AFF1;font-weight:normal}
 a:hover {text-decoration:underline}
-body{min-height:100%;height:100%;font-family:'Open Sans','Helvetica',sans-serif;overflow-y:scroll;font-size:13px;}
+body{font-family:'Open Sans','Helvetica',sans-serif;overflow-y:scroll;font-size:13px;}
 button{padding:0.3em;height:2.3em}
 h1,h2,h3{padding:0.6em;color:#00aff1;font-weight:normal}
 h1{font-size:18px}
@@ -19,7 +19,6 @@ table{border-collapse:collapse;}
 /*default cells*/
 th,td{border:1px solid #aaa;padding:0.4em;}
 th{font-weight:normal;background:#00adef;color:white;vertical-align:middle}
-
 hr{display:block;height:1px;border:0;margin:0;padding:0;}
 
 /*highlight inputs when mouse goes over a row that has a formula*/
@@ -27,7 +26,6 @@ tr[hl=yes]{background:yellow;color:black}
 tr[hl=no]{background:default}
 tr[hl_output=yes]{background:blue;color:white}
 tr[hl_output=no]{background:default}
-
 span.estimated{color:red;font-size:16px;cursor:help}
 
 /*ECAM blue*/.blue{background:#00AFF1;}
@@ -149,14 +147,11 @@ span.circle {
 		background:white;
 		border-radius:0em;
 		border:1px solid #ccc;
-		margin:6px 0px 7px 2px;
 		opacity:0.98;
 		overflow:auto;
 		transition:all 0.2s linear;
 		box-shadow: 0 1px 2px rgba(0,0,0,.1);
-	}
-	.card.inline {
-		margin:6px 2px 7px 2px;
+		margin:2px 0px 2px 3px;
 	}
 	.card.folded{
 		max-height:3.0em;

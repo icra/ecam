@@ -567,6 +567,7 @@
 			updateFuelSelection();
 			try{drawCharts()}
 			catch(e){/*console.log(e)*/}
+			Caption.listeners();
 			updateResult();
 			//fake click in "View all" checkbox (cb)
 			var cb=document.querySelector('#viewAll');
@@ -576,7 +577,9 @@
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--linear diagram--><?php include'linear.php'?>
+<!--linear--><?php include'linear.php'?>
+<!--caption--><?php include'caption.php'?>
+
 <!--TITLE-->
 <?php 
 	//Set a navigable title for page
@@ -602,7 +605,9 @@
 		: 
 		"<span style=color:black;font-size:26px>$titleLevel</span>";
 ?>
+
 <style> h1 {text-align:left;line-height:2.1em;border-bottom:1px solid #ccc;background:white} </style>
+
 <h1><a href=stages.php><script>document.write(Global.General.Name)</script></a> <?php echo "$sep $title"?>
 	<!--See description (link to iwa web)-->
 	<?php if($sublevel)
@@ -629,7 +634,8 @@
 			&emsp; &#9654;
 		</div>
 	</span>
-</h1></center>
+</h1>
+</center>
 
 <!--main container-->
 <div id=main>

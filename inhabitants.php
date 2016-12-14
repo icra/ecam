@@ -5,8 +5,8 @@
 		{
 			Inh.updateDefaults();
 			Inh.showActive();
+			Caption.listeners();
 			updateResult();
-
 			//add listeners for onclick
 			(function(){
 				var inputs = document.querySelectorAll("#inputs tr[stage] td.input input[id]")
@@ -15,7 +15,6 @@
 					inputs[i].onclick=function(){this.select()}
 				}
 			})();
-
 			//first input click
 			var first=document.querySelector('#inputs tr[stage] td.input input[id]');
 			if(first.value=="0") first.click()
@@ -76,7 +75,8 @@
 <center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--navbar--><?php include'navbar.php'?>
-<!--linear diagram--><?php include'linear.php'?>
+<!--linear--><?php include'linear.php'?>
+<!--caption--><?php include'caption.php'?>
 
 <h1>Population</h1>
 

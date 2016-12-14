@@ -5,13 +5,15 @@
 		{
 			document.querySelector('#idealServPop').value=Global.Waste.ww_serv_pop
 			setServPop(Global.Waste.ww_serv_pop)
-			document.querySelector('#idealNRW').value=Global.Water.ws_SL_non_revw()
+			document.querySelector('#idealNRW').value=Global.Water.ws_SL_non_revw()||0;
 			setNRW(Global.Water.ws_SL_non_revw())
 			document.querySelector('#idealAuc').value=Global.Water.Distribution.wsd_auth_con;
-			setAuc(Global.Water.Distribution.wsd_auth_con;)
+			setAuc(Global.Water.Distribution.wsd_auth_con)
 
 			calculateGHG()
 			findCriticGHG()
+
+			Caption.listeners();
 		}
 
 		function findCriticGHG()
@@ -114,7 +116,9 @@
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--navbar--><?php include"navbar.php"?>
-<!--linear diagram--><?php include'linear.php'?>
+<!--linear--><?php include'linear.php'?>
+<!--caption--><?php include'caption.php'?>
+
 <h1>Opportunities to reduce GHG emissions</h1>
 
 <div id=main>
@@ -213,7 +217,7 @@
 				<div class=opp>
 					Authorized consumption is
 					<b><script>
-						document.write(format(Global.Water.Distribution.wsd_auth_con;))
+						document.write(format(Global.Water.Distribution.wsd_auth_con))
 					</script></b> m<sup>3</sup> 
 					(<script>
 						document.write(format(Global.Water.ws_SL_auth_con()))

@@ -45,6 +45,7 @@
 			BEV.updateDefaults();
 			drawCharts();
 			updateResult();
+			Caption.listeners();
 
 			//first input click
 			var first=document.querySelector('#inputs input[id]');
@@ -202,18 +203,20 @@
 			init();
 		}
 	</script>
-
 </head><body>
+
 <center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--NAVBAR--><?php include"navbar.php"?>
-<!--linear--><?php include'linear.php'?>
+	<!--sidebar--><?php include'sidebar.php'?>
+	<!--navbar--><?php include'navbar.php'?>
+	<!--linear--><?php include'linear.php'?>
+	<!--caption--><?php include'caption.php'?>
 </center>
 
 <!--TITLE-->
 <h1><?php write('#quick_assessment')?> 
 	<span style="font-size:13px;color:#666;float:right">
-		<span><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a> <script>document.write(Global.General.Days())</script> <?php write('#days')?></span> 
+		<span><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a> 
+		<script>document.write(Global.General.Days())</script><?php write('#days')?></span> 
 		·
 		<span><a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a> 
 			<script>
@@ -229,81 +232,148 @@
 
 <!--content-->
 <div>
-	<!--inputs-->
-	<div class="card inline" style="width:35%;"><?php cardMenu("<b>Inputs</b> &mdash; Global values of the system")?>
-		<!--table-->
-		<table id=inputs style=width:100%>
-			<!--WATER-->
-			<tr><th colspan=3>
-				<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
-				<tr stage=water class=hidden><td>Energy consumed from the grid<td class=output><input id='ws_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
-				<tr stage=water class=hidden><td>Volume of fuel consumed<td class=output><input id='ws_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
-				<tr stage=water class=hidden> <td>Total water abstracted <td class=input><input id='wsa_vol_conv' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
-				<tr stage=water class=hidden><td><?php write('#birds_ws_vol_auth')?> <td class=input><input id='wsd_auth_con' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
-				<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
-				<tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
-				<tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
-			<!--WASTEWATER-->
-			<tr><th colspan=3 style=background:#d71d24>
-				<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
-				<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_wwtr')?><td class=input><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
-					<span class=circle style=background:#89375c></span>
-				<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?><td class=input><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
-				<tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?><td class=input><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
-				<tr stage=waste class=hidden>
-					<td><?php write('#birds_ww_n2o_effl')?> 
-					<td class=input><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
-						<span class=circle style=background:#b8879d></span>
-				<tr stage=waste class=hidden><td><?php write('#birds_ww_prot_con')?>
-					<td class=input><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/<?php write('#birds_year')?>
-					<span class=circle style=background:#451c2e></span>
+	<div class=inline style=width:35%>
+		<!--inputs-->
+		<div class="card"><?php cardMenu("<b>Inputs</b> &mdash; Global values of the system")?>
+			<!--table-->
+			<table id=inputs style=width:100%>
+				<!--WATER-->
+				<tr><th colspan=3>
+					<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
 
-				<tr stage=waste class=hidden><td>
-					<?php write("#producing_biogas")?>?
-					<td>
-						<label><?php write("#no")?>  
-							<input name=producing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=0;init()">
-						</label>
-					<td>
-						<label><?php write("#yes")?> 
-							<input name=producing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=1;init()">
-						</label>
+					<!--water population-->
+					<span style=float:right>
+						<img src=img/inhabitants.png width=25 caption="Population" style=vertical-align:middle>
+						<b caption="Serviced population">
+							<script>document.write(Global.Water.ws_serv_pop)</script>
+						</b>/
+						<b caption="Resident population">
+							<script>document.write(Global.Water.ws_resi_pop)</script>
+						</b>
+					</span>
+
+					<tr stage=water class=hidden><td>Energy consumed from the grid<td class=output><input id='ws_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
+					<tr stage=water class=hidden><td>Volume of fuel consumed<td class=output><input id='ws_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
+					<tr stage=water class=hidden> <td>Total water abstracted <td class=input><input id='wsa_vol_conv' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
+					<tr stage=water class=hidden><td><?php write('#birds_ws_vol_auth')?> <td class=input><input id='wsd_auth_con' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
+					<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
+					<tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
+					<tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
+				<!--WASTEWATER-->
+				<tr><th colspan=3 style=background:#d71d24>
+					<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
+
+					<!--wastewater population-->
+					<span style=float:right>
+						<img src=img/inhabitants.png width=25 caption="Population" style="vertical-align:middle">
+						<b caption="Serviced population">
+							<script>document.write(Global.Waste.ww_serv_pop)</script>
+						</b>/<!--
+						--><b caption="Connected population">
+							<script>document.write(Global.Waste.ww_conn_pop)</script>
+						</b>/<!--
+						--><b caption="Resident population">
+							<script>document.write(Global.Waste.ww_resi_pop)</script>
+						</b>
+					</span>
+
+					<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_wwtr')?><td class=input><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
+						<span class=circle style=background:#89375c></span>
+					<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?><td class=input><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
+					<tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?><td class=input><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
+					<tr stage=waste class=hidden>
+						<td><?php write('#birds_ww_n2o_effl')?> 
+						<td class=input><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
+							<span class=circle style=background:#b8879d></span>
+					<tr stage=waste class=hidden><td><?php write('#birds_ww_prot_con')?>
+						<td class=input><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/<?php write('#birds_year')?>
+						<span class=circle style=background:#451c2e></span>
+
+					<tr stage=waste class=hidden><td>
+						<?php write("#producing_biogas")?>?
+						<td>
+							<label><?php write("#no")?>  
+								<input name=producing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=0;init()">
+							</label>
+						<td>
+							<label><?php write("#yes")?> 
+								<input name=producing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=1;init()">
+							</label>
+							<script>
+								(function(){
+									var ans=Global.Configuration['Yes/No'].producing_biogas;
+									document.querySelector('input[name=producing_biogas][ans="'+ans+'"]').checked=true;
+								})();
+							</script>
+						<span class=circle style=background:#b8879d></span>
+					<tr stage=waste class=hidden><td>
+						<?php write("#valorizing_biogas")?>?
+						<td>
+							<label><?php write("#no")?>
+							<input name=valorizing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=0;init()">
+							</label>
+						<td>
+							<label><?php write("#yes")?>
+							<input name=valorizing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=1;init()">
+							</label>
 						<script>
 							(function(){
-								var ans=Global.Configuration['Yes/No'].producing_biogas;
-								document.querySelector('input[name=producing_biogas][ans="'+ans+'"]').checked=true;
+								var ans = Global.Configuration['Yes/No'].valorizing_biogas;
+								document.querySelector('input[name=valorizing_biogas][ans="'+ans+'"]').checked=true;
 							})();
 						</script>
-					<span class=circle style=background:#b8879d></span>
-				<tr stage=waste class=hidden><td>
-					<?php write("#valorizing_biogas")?>?
-					<td>
-						<label><?php write("#no")?>
-						<input name=valorizing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=0;init()">
-						</label>
-					<td>
-						<label><?php write("#yes")?>
-						<input name=valorizing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=1;init()">
-						</label>
-					<script>
-						(function(){
-							var ans = Global.Configuration['Yes/No'].valorizing_biogas;
-							document.querySelector('input[name=valorizing_biogas][ans="'+ans+'"]').checked=true;
-						})();
-					</script>
-					<span class=circle style=background:#b8879d></span>
-				<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
-		</table>
-		<script>
-			(function(){
-				var inputs=document.querySelectorAll("#inputs input")
-				for(var i=0;i<inputs.length;i++)
+						<span class=circle style=background:#b8879d></span>
+					<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
+			</table>
+			<script>
+				(function(){
+					var inputs=document.querySelectorAll("#inputs input")
+					for(var i=0;i<inputs.length;i++)
+					{
+						if(inputs[i].type=="radio") continue;
+						inputs[i].onclick=function(){this.select()}
+					}
+				})();
+			</script>
+
+		</div>
+
+		<!--PREV & NEXT BUTTONS-->
+		<div style=margin:1em;text-align:center> 
+			<script>
+				//find first available stage to start entering data
+				function nextPage()
 				{
-					if(inputs[i].type=="radio") continue;
-					inputs[i].onclick=function(){this.select()}
+					event.stopPropagation();
+					//go to first active substage
+					var location;
+					if(Global.Configuration.ActiveStages.waterAbs)
+						location = "edit.php?level=Water&sublevel=Abstraction";
+					else if(Global.Configuration.ActiveStages.waterTre)
+						location = "edit.php?level=Water&sublevel=Treatment";
+					else if(Global.Configuration.ActiveStages.waterDis)
+						location = "edit.php?level=Water&sublevel=Distribution";
+					else if(Global.Configuration.ActiveStages.wasteCol)
+						location = "edit.php?level=Waste&sublevel=Collection";
+					else if(Global.Configuration.ActiveStages.wasteTre)
+						location = "edit.php?level=Waste&sublevel=Treatment";
+					else if(Global.Configuration.ActiveStages.wasteDis)
+						location = "edit.php?level=Waste&sublevel=Discharge";
+					else if(Global.Configuration.ActiveStages.water)
+						location = "edit.php?level=Water";
+					else if(Global.Configuration.ActiveStages.waste)
+						location = "edit.php?level=Waste";
+					else
+					{
+						alert("<?php write('#configuration_active_stages_error')?>");
+						return;
+					}
+					window.location=location;
 				}
-			})();
-		</script>
+			</script>
+			<button class="button prev" onclick="event.stopPropagation();window.location='inhabitants.php'"><?php write('#previous')?></button><!--
+			--><button class="button next" onclick=nextPage()><?php write('#next')?></button>
+		</div>
 	</div>
 
 	<!--graphs-->
@@ -366,43 +436,6 @@
 				google.charts.setOnLoadCallback(init)
 			</script>
 		</div>
-	</div>
-
-	<!--PREV & NEXT BUTTONS-->
-	<div style=margin:1em;text-align:center> 
-		<script>
-			//find first available stage to start entering data
-			function nextPage()
-			{
-				event.stopPropagation();
-				//go to first active substage
-				var location;
-				if(Global.Configuration.ActiveStages.waterAbs)
-					location = "edit.php?level=Water&sublevel=Abstraction";
-				else if(Global.Configuration.ActiveStages.waterTre)
-					location = "edit.php?level=Water&sublevel=Treatment";
-				else if(Global.Configuration.ActiveStages.waterDis)
-					location = "edit.php?level=Water&sublevel=Distribution";
-				else if(Global.Configuration.ActiveStages.wasteCol)
-					location = "edit.php?level=Waste&sublevel=Collection";
-				else if(Global.Configuration.ActiveStages.wasteTre)
-					location = "edit.php?level=Waste&sublevel=Treatment";
-				else if(Global.Configuration.ActiveStages.wasteDis)
-					location = "edit.php?level=Waste&sublevel=Discharge";
-				else if(Global.Configuration.ActiveStages.water)
-					location = "edit.php?level=Water";
-				else if(Global.Configuration.ActiveStages.waste)
-					location = "edit.php?level=Waste";
-				else
-				{
-					alert("<?php write('#configuration_active_stages_error')?>");
-					return;
-				}
-				window.location=location;
-			}
-		</script>
-		<button class="button prev" onclick="event.stopPropagation();window.location='inhabitants.php'"><?php write('#previous')?></button><!--
-		--><button class="button next" onclick=nextPage()><?php write('#next')?></button>
 	</div>
 </div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

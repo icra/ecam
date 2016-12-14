@@ -85,45 +85,12 @@
 		<img class=l1 stage=opps src=img/opps.png caption="Opportunities to reduce GHG emissions">
 	</div>
 
-	<div style=float:right;vertical-align:middle;height:100%>
-		<a href=problems.php>Debugging utility</a>
+	<div>
+		<div style=float:right;vertical-align:middle;height:100%>
+			<a href=problems.php>Debugging utility</a>
+		</div>
 	</div>
 </div>
-
-<style>
-	div#linearCaption {
-		position:fixed;
-		z-index:999;
-		background:white;
-		padding:0.3em 0.5em;
-		box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
-		border:1px solid #ccc;
-		color:#666;
-	}
-</style>
-<div id=linearCaption style=display:none>#linearCaption</div>
-
-<script>
-	//add mouse over listeners to imgs inside #linearDiagram
-	(function()
-	{
-		function showLC(ev,innerHTML)
-		{
-			var lc=document.querySelector("#linearCaption")
-			lc.style.display=''
-			lc.style.left=(ev.pageX-10)+"px"
-			lc.style.top=(ev.pageY+15)+"px"
-			lc.innerHTML=innerHTML
-		}
-		function hideLC(){document.querySelector("#linearCaption").style.display='none'}
-		var imgs=document.querySelectorAll("#linearDiagram img[caption]");
-		for(var i=0;i<imgs.length;i++)
-		{
-			imgs[i].onmousemove=function(){showLC(event,this.getAttribute('caption'))}
-			imgs[i].onmouseout=function(){hideLC()}
-		}
-	})();
-</script>
 
 <script>
 	<?php

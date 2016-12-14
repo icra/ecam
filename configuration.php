@@ -126,6 +126,7 @@
 					}
 				})
 			})();
+			Caption.listeners();
 			updateResult();
 		}
 	</script>
@@ -135,7 +136,9 @@
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--linear diagram--><?php include'linear.php'?>
+<!--linear--><?php include'linear.php'?>
+<!--caption--><?php include'caption.php'?>
+
 <!--TITLE--><h1><?php write('#configuration')?></h1>
 <!--SUBTITLE--><h4 style=margin:0><?php write('#configuration_subtitle')?>
 	<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
