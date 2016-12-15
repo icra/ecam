@@ -29,7 +29,7 @@ tr[hl_output=no]{background:default}
 span.estimated{color:red;font-size:16px;cursor:help}
 
 /*ECAM blue*/.blue{background:#00AFF1;}
-/*ECAM red*/.red{background:#d71d24;}
+/*ECAM red*/.red{background:#D71D24;}
 
 /*circles for benchmarking*/
 span.circle {
@@ -175,8 +175,8 @@ span.circle {
 	}
 	.card        .menu button:before {content:"-"}
 	.card.folded .menu button:before {content:"+"}
-	.card .menu button.toggle:before {content:""}
-	.card .menu button.toggle {
+	.card .menu button.btn_toggle:before {content:""}
+	.card .menu button.btn_toggle {
 		float:right;
 		padding:0.5em;
 		padding-left:5em;
@@ -185,8 +185,8 @@ span.circle {
 		background:none;
 		outline:none;
 	}
-	.card .menu button.toggle:hover {background:#bce4d3}
-	.card .menu button.toggle.active { 
+	.card .menu button.btn_toggle:hover {background:#bce4d3}
+	.card .menu button.btn_toggle.active { 
 		background:#bce4d3;
 		box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05);
 	}

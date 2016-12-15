@@ -25,6 +25,26 @@
 			},
 		};
 	</script>
+	<script>
+		function toggleDivs(event,btn,id1,id2)
+		{
+			event.stopPropagation();
+			var div1=document.querySelector(id1);
+			var div2=document.querySelector(id2);
+			btn.classList.toggle('active');
+			if(div1.style.display=='none') 
+			{
+				div2.style.display='none';
+				div1.style.display='';
+			}
+			else
+			{
+				div2.style.display='';
+				div1.style.display='none';
+			}
+			init();
+		}
+	</script>
 	<style>
 		div#main button.button.prevNext {
 			display:block;
@@ -604,9 +624,7 @@
 		: 
 		"<span style=color:black;font-size:26px>$titleLevel</span>";
 ?>
-
 <style> h1 {text-align:left;line-height:2.1em;border-bottom:1px solid #ccc;background:white} </style>
-
 <h1><a href=stages.php><script>document.write(Global.General.Name)</script></a> <?php echo "$sep $title"?>
 	<!--See description (link to iwa web)-->
 	<?php if($sublevel)
@@ -625,6 +643,10 @@
 			<?php 
 		}
 	?>
+
+	<!--fold all div.cards-->
+	<button style="margin:0 5em;" onclick="var divs=document.querySelectorAll('div.card');for(var i=0;i<divs.length;i++){divs[i].classList.add('folded')}">Fold all sections</button>
+
 	<!--random tip-->
 	<span style="font-size:12px;color:#666;float:right">
 		<div style="padding:0.5em;cursor:pointer" onclick="document.querySelector('#tip').innerHTML=Tips.random()">
@@ -636,7 +658,7 @@
 </h1>
 </center>
 
-<!--main container-->
+<!--main-->
 <div id=main>
 	<!--questions-->
 	<div class="card">
@@ -782,9 +804,11 @@
 		<button class="button save prevNext" onclick="PrevNext.next(this.parentNode,'tbd')">Ok, next</button>
 	</div>
 
-	<!--inputs outputs level2-->
+	<!--level2 container-->
 	<div class="card">
-		<div class=menu onclick=this.parentNode.classList.toggle('folded')><button></button>
+		<!--level 2 menu-->
+		<div class=menu onclick=this.parentNode.classList.toggle('folded')>
+			<button></button>
 			<b>Inputs &amp; Outputs</b> &mdash; 
 			Assessment period <b class=number><script>document.write(Global.General.Days())</script></b> days &middot;
 			Conversion factor 
@@ -809,59 +833,34 @@
 			?>
 			<!--button toggle outputs/graph display-->
 			<button 
-				id=btn_toggle class=toggle 
-				onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleGraph(event,this)">
+				class=btn_toggle 
+				onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#graph_container','#outputs_container')">
 				VIEW GRAPH
 			</button>
-			<script>
-				function toggleGraph(event,thisB)
-				{
-					event.stopPropagation();
-					var graph=document.querySelector('#graph_container')
-					var ioCon=document.querySelector('#outputs_container')
-					if(graph.style.display=='none') 
-					{
-						ioCon.style.display='none';
-						graph.style.display='';
-						thisB.classList.add('active');
-
-					}
-					else
-					{
-						ioCon.style.display='';
-						graph.style.display='none';
-						thisB.classList.remove('active');
-					}
-					init()
-				}
-			</script>
 		</div>
 
 		<!--level2-->
-		<div id=ioContainer>
+		<div style=padding-top:1px;>
 			<!--inputs level2-->
-			<div class=inline
-				style="width:45%;margin-left:0.5em;<?php if($level=="Energy") echo "display:none;"?>">
+			<div class=inline style="width:40%;margin-left:0.2em;<?php if($level=="Energy") echo "display:none;"?>">
 				<?php include'level2.php'?> 
-				<!--next btn-->
-				<button class="button save prevNext" style=margin-left:0 onclick="PrevNext.next(this.parentNode.parentNode.parentNode,'tbd')">Ok, next</button>
 			</div>
 
 			<!--outputs level2-->
-			<div id=outputs_container class=inline style="width:53%;margin-left:0.5em;margin-bottom:2em">
+			<div id=outputs_container class=inline style="width:58%;">
 				<?php if($level=="Energy") echo "<style>#outputs{display:none}</style>"; ?>
 
 				<!--level2 GHG outputs-->
-				<table id=outputs style="width:100%;background:#f6f6f6;margin-bottom:0.5em;">
+				<table id=outputs style="width:100%;background:#f6f6f6;">
 					<tr><th colspan=7 class=tableHeader>
 						OUTPUTS — <?php write('#edit_ghg_emissions')?> 
 					<tr>
-						<th style=width:10%>GHG <?php write('#edit_origin')?>
-						<th style=width:17%>Kg CO<sub>2</sub> assessment period
-						<th style=width:17%><br>kg CO<sub>2</sub><br>per <?php write('#year')?>
-						<th style=width:17%><br>kg CO<sub>2</sub><br>per <?php write('#year')?><br>per inhab
-						<th style=width:17%><br>kg CO<sub>2</sub><br>per <?php write('#year')?><br>per serv.pop
-						<th style=width:17%><br>kg CO<sub>2</sub><br>per m<sup>3</sup>
+						<th>GHG <?php write('#edit_origin')?>
+						<th>kg CO<sub>2</sub><br>whole period
+						<th>kg CO<sub>2</sub><br>per <?php write('#year')?>
+						<th>kg CO<sub>2</sub><br>per <?php write('#year')?><br>per inhab
+						<th>kg CO<sub>2</sub><br>per <?php write('#year')?><br>per serv.pop
+						<th>kg CO<sub>2</sub><br>per m<sup>3</sup>
 				</table>
 
 				<!--level2 outputs: NRG and SL-->
@@ -878,7 +877,7 @@
 			</div>
 
 			<!--GRAPHS-->
-			<div id=graph_container class=inline style="width:40%;display:none;border:1px solid #ccc">
+			<div id=graph_container class=inline style="width:58%;display:none;border:0px solid #ccc">
 				<!--choose graph type buttons-->
 				<?php include'buttonsGraphType.php'?>
 				<!--actual graph-->
@@ -895,9 +894,12 @@
 				</style>
 			</div>
 		</div>
+
+		<!--next btn-->
+		<button class="button save prevNext" style=margin-left:0 onclick="PrevNext.next(this.parentNode,'tbd')">Ok, next</button>
 	</div>
 
-	<!--substages (inputs)-->
+	<!--level3-->
 	<?php 
 		if($sublevel)
 		{ 
@@ -1335,6 +1337,7 @@
 				<button class="button save prevNext" onclick="PrevNext.next(this.parentNode,'tbd')">Ok, next</button>
 			</div>
 
+			<!--substage inputs-->
 			<div class="card" style="text-align:left">
 				<?php 
 					cardMenu(" <b>Substages</b>
@@ -1343,7 +1346,6 @@
 						&mdash; 
 						Stages <b><span id=counter class=number>0</span></b>
 				")?>
-
 				<table id=substages> 
 					<tr><td colspan=2 style="min-width:260px;text-align:right">
 						<!--view all-->
@@ -1369,177 +1371,202 @@
 							Add stage
 						</button>
 				</table>
-
 				<button class="button save prevNext" onclick="PrevNext.next(this.parentNode,'tbd')">Ok, next</button>
 			</div>
 
 			<!--outputs per substage-->
-			<div class="card" style="text-align:left"><?php cardMenu("<b>Outputs per substage</b>")?>
-				<table id=substageOutputs style="width:95%;margin:0 0 0.2em 0;background:#f6f6f6"></table>
-				<style>
-					#substageOutputs tr:hover { background:#ccc; }
-					#substageOutputs th{background:#d7bfaf;text-align:left}
-					#substageOutputs td:nth-child(n+3) {text-align:right}
-				</style>
-				<script>
-					/** Redisplay outputs */
-					level3.updateOutputs=function()
-					{
-						var t=document.getElementById('substageOutputs');
-						while(t.rows.length>0) t.deleteRow(-1);
+			<div class="card" style="text-align:left">
+				<!--menu-->
+				<div class=menu onclick=this.parentNode.classList.toggle('folded')>
+					<button></button>
+					<b>Outputs per substage</b>
+					<!--button toggle outputs/graph display-->
+					<button 
+						class=btn_toggle 
+						onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#substageOutputs_container','#substageGraphs')">
+						VIEW GRAPH
+					</button>
+				</div>
 
-						//headers
-							//new row
-							var newRow=t.insertRow(-1);
-							['<?php write('#level3_code')?>','<?php write('#level3_description')?>'].forEach(function(str)
-							{
-								var newTH=document.createElement('th'); newRow.appendChild(newTH);
-								newTH.innerHTML=str;
-							});
-							for(var s in substages)
-							{
-								var newTH=document.createElement('th'); 
-								newRow.appendChild(newTH);
-								newTH.innerHTML="<?php write('#substage')?> "+(parseInt(s)+1)+" "+
-								"<div><b>"+substages[s].name+"</div>"
-							};
-							['&sum; <?php write('#level3_TOTAL')?>','<?php write('#level3_unit')?>'].forEach(function(element)
-							{
-								var newTH=document.createElement('th'); newRow.appendChild(newTH);
-								newTH.innerHTML=element;
-							});
-						//end headers
-
-						//copy all functions to each substage
-						for(var field in CurrentLevel)
+				<!--Substage outputs-->
+				<div id=substageOutputs_container>
+					<table id=substageOutputs style="width:95%;margin:auto;background:#f6f6f6"></table>
+					<div style=margin:0.5em> <label><input type=checkbox onclick=init() id=showGHGss> Show GHG</label> </div>
+					<style>
+						#substageOutputs tr:hover { background:#ccc; }
+						#substageOutputs th{background:#d7bfaf;text-align:left}
+						#substageOutputs td:nth-child(n+3) {text-align:right}
+					</style>
+					<script>
+						/** Redisplay outputs */
+						level3.updateOutputs=function()
 						{
-							//only functions
-							if(typeof(CurrentLevel[field])!="function") continue;
-							//IMPORTANT: for this to work all formulas that refer to internal variables should refer to them with "this" keyword
-							for(var s in substages)
-								substages[s][field]=CurrentLevel[field];
-						}
+							var t=document.getElementById('substageOutputs');
+							while(t.rows.length>0) t.deleteRow(-1);
 
-						//go over CurrentLevel
-						for(var field in CurrentLevel)
-						{
-							//only functions
-							if(typeof(CurrentLevel[field])!="function") continue;
+							//headers
+								//new row
+								var newRow=t.insertRow(-1);
+								['<?php write('#level3_code')?>','<?php write('#level3_description')?>'].forEach(function(str)
+								{
+									var newTH=document.createElement('th'); newRow.appendChild(newTH);
+									newTH.innerHTML=str;
+								});
+								for(var s in substages)
+								{
+									var newTH=document.createElement('th'); 
+									newRow.appendChild(newTH);
+									newTH.innerHTML="<?php write('#substage')?> "+(parseInt(s)+1)+" "+
+									"<div><b>"+substages[s].name+"</div>"
+								};
+								['&sum; <?php write('#level3_TOTAL')?>','<?php write('#level3_unit')?>'].forEach(function(element)
+								{
+									var newTH=document.createElement('th'); newRow.appendChild(newTH);
+									newTH.innerHTML=element;
+								});
+							//end headers
 
-							//exclude service level indicators
-							if(field.search('_SL_')>-1) continue;
-
-							/*if assessment type is simple, hide L3 variables*/
-							if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
+							//copy all functions to each substage
+							for(var field in CurrentLevel)
 							{
-								if(Level3.list.indexOf(field)>-1) continue;
+								//only functions
+								if(typeof(CurrentLevel[field])!="function") continue;
+								//IMPORTANT: for this to work all formulas that refer to internal variables should refer to them with "this" keyword
+								for(var s in substages)
+									substages[s][field]=CurrentLevel[field];
 							}
 
-							//exclude _KPI_GHG if checkbox is enabled
-							var isGHG=(field.search('_KPI_GHG')+1) ? true : false;
-							if(isGHG) 
-								if(!document.querySelector('#showGHGss').checked)
-									continue;
-
-							//exclude the "level2only" variables
-							if(Level2only.hasOwnProperty(field)) continue;
-
-							/*check if should be hidden according to questions*/
-							if(Questions.isHidden(field)) continue;
-
-							//if is calculated variable, not show it
-							if(field.search(/^c_/)>=0) continue;
-
-							//new row
-							var newRow=t.insertRow(-1);
-							newRow.setAttribute('field',field);
-							newRow.setAttribute('title',translate(field+'_expla'));
-
-							//set highlighting 
-							newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
-							newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
-
-							//1st cell: show code identifier
-							newRow.insertCell(-1).innerHTML=(function()
+							//go over CurrentLevel
+							for(var field in CurrentLevel)
 							{
-								var adv=Level3.list.indexOf(field)+1 ? "<span class=advanced title='Advanced'>adv</span>":"";
-								var ghg=isGHG                        ? "<span class='advanced ghg' title='GHG'>GHG</span>":"";
-								var nrg=field.search('_nrg_')+1      ? "<span class='advanced nrg' title='Energy performance'>NRG</span>":""; 
-								return "<a href=variable.php?id="+field+">"+field+"</a>"+ghg+adv+nrg;
-							})();
+								//only functions
+								if(typeof(CurrentLevel[field])!="function") continue;
 
-							//2nd cell: description
-							newRow.insertCell(-1).innerHTML=translate(field+'_descr');
+								//exclude service level indicators
+								if(field.search('_SL_')>-1) continue;
 
-							//get equation formula
-							var formula=CurrentLevel[field].toString();
-							var prettyFormula=Formulas.prettify(formula);
-
-							//3rd cell and so on: values.
-							for(var s in substages)
-							{
-								//new cell
-								var newCell=newRow.insertCell(-1);
-								//title for mouseover show formula
-								newCell.title=prettyFormula;
-								//value
-								newCell.innerHTML=(function()
+								/*if assessment type is simple, hide L3 variables*/
+								if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
 								{
-									//compute value and bechmark it
-									var value=substages[s][field]()/Units.multiplier(field);
+									if(Level3.list.indexOf(field)>-1) continue;
+								}
 
-									//color circle benchmarking (TO DO: extract function from here)
-									var indicator=(function()
+								//exclude _KPI_GHG if checkbox is enabled
+								var isGHG=(field.search('_KPI_GHG')+1) ? true : false;
+								if(isGHG) 
+									if(!document.querySelector('#showGHGss').checked)
+										continue;
+
+								//exclude the "level2only" variables
+								if(Level2only.hasOwnProperty(field)) continue;
+
+								/*check if should be hidden according to questions*/
+								if(Questions.isHidden(field)) continue;
+
+								//if is calculated variable, not show it
+								if(field.search(/^c_/)>=0) continue;
+
+								//new row
+								var newRow=t.insertRow(-1);
+								newRow.setAttribute('field',field);
+								newRow.setAttribute('title',translate(field+'_expla'));
+
+								//set highlighting 
+								newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
+								newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
+
+								//1st cell: show code identifier
+								newRow.insertCell(-1).innerHTML=(function()
+								{
+									var adv=Level3.list.indexOf(field)+1 ? "<span class=advanced title='Advanced'>adv</span>":"";
+									var ghg=isGHG                        ? "<span class='advanced ghg' title='GHG'>GHG</span>":"";
+									var nrg=field.search('_nrg_')+1      ? "<span class='advanced nrg' title='Energy performance'>NRG</span>":""; 
+									return "<a href=variable.php?id="+field+">"+field+"</a>"+ghg+adv+nrg;
+								})();
+
+								//2nd cell: description
+								newRow.insertCell(-1).innerHTML=translate(field+'_descr');
+
+								//get equation formula
+								var formula=CurrentLevel[field].toString();
+								var prettyFormula=Formulas.prettify(formula);
+
+								//3rd cell and so on: values.
+								for(var s in substages)
+								{
+									//new cell
+									var newCell=newRow.insertCell(-1);
+									//title for mouseover show formula
+									newCell.title=prettyFormula;
+									//value
+									newCell.innerHTML=(function()
 									{
-										if(!RefValues.hasOwnProperty(field)) return "";
-										var text=RefValues[field](value);
-										var color;
-										switch(text)
+										//compute value and bechmark it
+										var value=substages[s][field]()/Units.multiplier(field);
+
+										//color circle benchmarking (TO DO: extract function from here)
+										var indicator=(function()
 										{
-											case "Good":           color="#af0";break;
-											case "Acceptable":     color="orange";break;
-											case "Unsatisfactory": color="red";break;
-											case "Out of range":   color="brown";break;
-											default:               color="#ccc";break;
-										}
-										return "<span title='Benchmarking: "+text+"' class=circle style='background:"+color+"'></span>";
+											if(!RefValues.hasOwnProperty(field)) return "";
+											var text=RefValues[field](value);
+											var color;
+											switch(text)
+											{
+												case "Good":           color="#af0";break;
+												case "Acceptable":     color="orange";break;
+												case "Unsatisfactory": color="red";break;
+												case "Out of range":   color="brown";break;
+												default:               color="#ccc";break;
+											}
+											return "<span title='Benchmarking: "+text+"' class=circle style='background:"+color+"'></span>";
+										})();
+										return format(value)+" "+indicator;
 									})();
-									return format(value)+" "+indicator;
+								}
+
+								//level 2 value
+								var newCell=newRow.insertCell(-1);
+								newCell.title=prettyFormula;
+								newCell.style.fontWeight="bold"
+								newCell.innerHTML=format(CurrentLevel[field]()/Units.multiplier(field));
+
+								//unit
+								newRow.insertCell(-1).innerHTML=(function()
+								{
+									return Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
 								})();
 							}
 
-							//level 2 value
-							var newCell=newRow.insertCell(-1);
-							newCell.title=prettyFormula;
-							newCell.style.fontWeight="bold"
-							newCell.innerHTML=format(CurrentLevel[field]()/Units.multiplier(field));
-
-							//unit
-							newRow.insertCell(-1).innerHTML=(function()
+							//if no active equations show warning
+							if(t.rows.length<2)
 							{
-								return Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
-							})();
-						}
+								var newCell=t.insertRow(-1).insertCell(-1)
+								newCell.colSpan=4+substages.length;
+								newCell.innerHTML="<i style=color:#999>~No active outputs</i>";
+							}
 
-						//if no active equations show warning
-						if(t.rows.length<2)
-						{
-							var newCell=t.insertRow(-1).insertCell(-1)
-							newCell.colSpan=4+substages.length;
-							newCell.innerHTML="<i style=color:#999>~No active outputs</i>";
+							//bottom line with the color of W/WW
+							var newRow=t.insertRow(-1);
+							var newTh=document.createElement('th');
+							newRow.appendChild(newTh);
+							newTh.setAttribute('colspan',4+substages.length)
+							newTh.style.borderBottom='none';newTh.style.borderTop='none';
 						}
-
-						//bottom line with the color of W/WW
-						var newRow=t.insertRow(-1);
-						var newTh=document.createElement('th');
-						newRow.appendChild(newTh);
-						newTh.setAttribute('colspan',4+substages.length)
-						newTh.style.borderBottom='none';newTh.style.borderTop='none';
-					}
-				</script>
-				<div style=margin:0.5em>
-				<label><input type=checkbox onclick=init() id=showGHGss> Show GHG</label>
+					</script>
 				</div>
+
+				<!--Substage graphs-->
+				<div id=substageGraphs style=padding:1em;display:none>
+					<div class=buttonsGraph><!--
+						--><button class="left"    onclick="buttonsGraph(this);Graphs.wsa_KPI_std_nrg_cons(false,'substageGraph')">Standardized energy consumption</button><!--
+						--><button class="middle"  onclick="buttonsGraph(this);document.querySelector('#substageGraph').innerHTML='TBD'">Another graph</button><!--
+						--><button class="right"   onclick="buttonsGraph(this);document.querySelector('#substageGraph').innerHTML='TBD'">Another graph</button><!--
+						-->
+					</div>
+					<div id=substageGraph style=text-align:center>Click a graph to display</div>
+				</div>
+
+				<!--ok next btn-->
 				<button class="button save prevNext" onclick="PrevNext.next(this.parentNode,'tbd')">Ok, next</button>
 			</div>
 			<?php
@@ -1570,10 +1597,9 @@
 	{
 		if(substages.length==0)
 		{
-			//create a substage
-			substages.push(new level3.Substage());
+			substages.push(new level3.Substage()); //create a substage
 		}
-		//if there is already one substage
+		//if there is already one substage...
 		if(substages.length==1)
 		{
 			//make the first substage have L2 values

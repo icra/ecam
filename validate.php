@@ -3,7 +3,7 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>Current JSON file</h1>
+<!--title--><h1><a href=development.php>Development</a> &rsaquo; Current JSON file</h1>
 
 <!--form for json formatter-->
 <form action="https://jsonformatter.curiousconcept.com/process" method=POST>

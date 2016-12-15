@@ -38,6 +38,9 @@
 		/**indication "not active"**/
 		#inputs tr[indic]{text-align:center;color:#999;background:#eee}
 	</style>
+	<style>
+		b[caption]{cursor:default}
+	</style>
 	<script>
 		function init()
 		{

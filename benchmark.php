@@ -4,15 +4,14 @@
 	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
 	<style>
-		body {background:#bdbdbd}
 		h1{background:white}
 		div.bm {
 			border:1px solid #ccc;
-			margin:10px;
-			padding:5px;
+			margin:1px;
+			padding:1px;
 		}
-		div.card {margin:20px}
-		pre.prettyprint {border:none;margin:5px;padding:5px}
+		div.card {margin:10px}
+		pre.prettyprint {border:none;margin:1px;padding:1px}
 	</style>
 
 	<script>
@@ -50,7 +49,7 @@
 			var codes = Bm.getCodes(prefix);
 			codes.forEach(function(code)
 			{
-				document.write("<div class='card folded'>"+
+				document.write("<div class='card'>"+
 					"<div class=menu onclick=this.parentNode.classList.toggle('folded')><button></button> "+
 						translate(code+"_descr")+
 						" (<a href='variable.php?id="+code+"'>"+code+"</a>) "+
@@ -66,10 +65,9 @@
 
 		function printLevel(prefixArray,name)
 		{
-			document.write("<div class='card '>"+
+			document.write("<div class='card'>"+
 				"<div class=menu onclick=this.parentNode.classList.toggle('folded')><button></button> "+
 				name+"</span></div>");
-
 			prefixArray.forEach(function(prefix){printDiv(prefix)});
 			document.write("</div>")
 		}
@@ -84,16 +82,15 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>Variables Benchmarked</h1>
+<!--TITLE--><h1>Benchmarking summary</h1>
 
 <!--main-->
 <div id=main style="text-align:left">
 
 	<div style="margin-top:1em;text-align:center">
-	<button onclick=unfoldAll()>Unfold all</button>
-	<button onclick=foldAll()>Fold all</button>
+		<button onclick=foldAll()>Fold all</button>
+		<button onclick=unfoldAll()>Unfold all</button>
 	</div>
-
 	<script>
 		function unfoldAll()
 		{

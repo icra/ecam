@@ -275,7 +275,7 @@
 	}
 </script>
 
-<table id=inputs style="width:100%;margin-bottom:0.5em">
+<table id=inputs style="width:100%">
 	<tr><th colspan=5 class=tableHeader> INPUTS &mdash; 
 	All stages in 
 	<?php if($sublevel){echo $sublevel;}else{echo $level;} ?>

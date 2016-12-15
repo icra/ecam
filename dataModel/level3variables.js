@@ -61,7 +61,7 @@ Level3.list=
 		"wsd_KPI_nrg_topgraph",
 		"wsd_KPI_std_nrg_cons",
 		"wsd_KPI_GHG_ne",
-		"wsd_KPI_GHG",
+		//"wsd_KPI_GHG",
 	//WWC
 		"wwc_vol_pump",
 		"wwc_pmp_head",

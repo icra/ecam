@@ -1180,21 +1180,33 @@ Graphs.authCon=function(container)
 
 Graphs.wsa_KPI_std_nrg_cons=function(withTable,container)
 {
-	var DATA=[
-		['Substage','kpi'],
-		//['Copper',8.94],
-	];
+	var DATA=[['Abstraction substage','kWh/m3/100m'],];
+	var substages=Substages.Water.Abstraction;
+
+	//copy all functions inside
+	for(var field in Global.Water.Abstraction)
+	{
+		if(typeof(Global.Water.Abstraction[field])!="function"){continue;}
+		for(var i in substages)
+		{
+			substages[i][field]=Global.Water.Abstraction[field];
+		}
+	}
 
 	for(var i=0;i<substages.length;i++)
 	{
 		var name=substages[i].name;
+
 		var value=substages[i].wsa_KPI_std_nrg_cons();
 		if(isNaN(value))value=0;
+		if(!isFinite(value))value=0;
+
 		DATA.push([name,value]);
 	}
 	var options = {
 		height:250,
-		chart: {title:translate('wsa_KPI_std_nrg_cons_descr')+" kWh/m3/100m"},
+		bar: {groupWidth: "95%"},
+		chart: {title:translate('wsa_KPI_std_nrg_cons_descr')+" (kWh/m3/100m)"},
 		legend:{position:'none'},
 	};
 	var chart=new google.charts.Bar(document.getElementById(container));

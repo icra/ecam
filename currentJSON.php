@@ -12,7 +12,7 @@ none;
 	/** COOKIE SIZE LIMIT FOR GOOGLE CHROME IS CLOSE TO 8170 CHARACTERS */
 	function updateResult()
 	{
-		document.getElementById('currentGlobal').innerHTML=JSON.stringify(Global,null,"    ");
+		document.getElementById('currentGlobal').innerHTML=JSON.stringify(Global,null,"  ");
 
 		/**
 		  *

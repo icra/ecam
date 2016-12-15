@@ -76,15 +76,14 @@
 		/** Generate a json/text file of the Global object */
 		function saveToFile()
 		{
-			var link=document.createElement('a');
-
 			var SavedFile = 
 			{
 				"Global":Global,
 				"Substages":Substages,
 			}
 
-			link.href="data:application/json;charset=utf-8,"+JSON.stringify(SavedFile);
+			var link=document.createElement('a');
+			link.href="data:text/json;charset=utf-8,"+JSON.stringify(SavedFile,null);
 			link.download=Global.General.Name+".json";
 			link.click();
 		}
@@ -147,6 +146,9 @@
 			<tr><td><a href=configuration.php><?php write('#configuration')?></a>
 			<tr><td><a href=inhabitants.php>Population</a>
 			<tr><td><a href=birds.php><?php write('#quick_assessment')?></a>
+			<tr><th>GHG Summary 
+			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
+			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
 			<tr><th><?php write('#energy_performance')?>
 			<tr><td><a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction><?php write('#Abstraction')?></a>
 			<tr><td><a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment><?php write('#Treatment')?></a>
@@ -154,17 +156,15 @@
 			<tr><td><a class=waste stage=wasteCol href=edit.php?level=Waste&sublevel=Collection><?php write('#Collection')?></a>
 			<tr><td><a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment><?php write('#Treatment')?></a>
 			<tr><td><a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge><?php write('#Discharge')?></a>
-			<tr><th><?php write("#opportunities")?>
-			<tr><td><a href=opps.php><?php write("#opportunities")?></a>
 			<tr><th><?php write('#summary')?>
-			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
-			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
 			<tr><td><a href=edit.php?level=Energy><?php write('#energy_summary')?></a>
 			<tr><td><a href=summary.php?type=input><?php write('#sidebar_all_inputs')?></a>
 			<tr><td><a href=summary.php?type=ccvv><?php write('#sidebar_all_ccvv')?></a>
 			<tr><td><a href=summary.php?type=output><?php write('#sidebar_all_kpis')?></a>
 			<tr><td><a href=constants.php>All constants</a>
 			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
+			<tr><th><?php write("#opportunities")?>
+			<tr><td><a href=opps.php><?php write("#opportunities")?></a>
 			<tr><th>
 		</table>
 		<div style="
@@ -175,9 +175,7 @@
 		</div>
 	</div>
 </div>
-
 <script>Sidebar.update()</script>
-
 <script>
 	//make the current page on the sidebar be highlighted
 	(function()

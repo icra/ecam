@@ -349,7 +349,7 @@
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
 				newCell.innerHTML="Is benchmarked?"
-				newRow.insertCell(-1).innerHTML="YES (<a href=benchmark.php>info</a>)"+
+				newRow.insertCell(-1).innerHTML="YES (<a href=benchmark.php>Benchmark summary</a>)"+
 					"<div class='card folded'>"+
 					"	<div class=menu onclick=this.parentNode.classList.toggle('folded')>"+
 					"		<button></button> See formula"+
