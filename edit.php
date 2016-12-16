@@ -1428,7 +1428,7 @@
 
 				<!--Substage outputs-->
 				<div id=substageOutputs_container>
-					<table id=substageOutputs style="width:95%;margin:auto;background:#f6f6f6"></table>
+					<table id=substageOutputs style="width:95%;background:#f6f6f6"></table>
 					<style>
 						#substageOutputs tr:hover { background:#ccc; }
 						#substageOutputs th{background:#d7bfaf;text-align:left}

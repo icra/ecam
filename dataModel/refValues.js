@@ -1,32 +1,18 @@
 /**
   * BENCHMARKING
-  *
-  * KPIs that have reference values to consider them "good","acceptable","bad",etc
+  * Outputs reference values for considering them as "good","acceptable","bad",etc
   *
   */
 
 var RefValues = 
 {
 	//wsa
-		wsa_KPI_std_nrg_cons:function(value)
-		{
-			//description: aE3: Good: 0.2725 ≤ aE3 ≤ 0.40, Acceptable: 0.40 < aE3 ≤ 0.54, Unsatisfactory: aE3 > 0.54
-			if(0.2725 <= value && value <= 0.40)
-			{
-				return "Good"
-			}
-			else if(0.40 < value && value <= 0.54)
-			{
-				return "Acceptable"
-			}
-			else if(value > 0.54)
-			{
-				return "Unsatisfactory"
-			}
-			else
-			{
-				return "Out of range"
-			}
+		wsa_KPI_std_nrg_cons:function(value){
+			/* Good: 0.2725 ≤ value ≤ 0.40, Acceptable: 0.40 < value ≤ 0.54, Unsatisfactory: value > 0.54 */
+			if     (0.2725 <= value && value <= 0.40) return "Good";
+			else if(0.40   <  value && value <= 0.54) return "Acceptable";
+			else if(value  >  0.54)                   return "Unsatisfactory";
+			else                                      return "Out of range";
 		},
 
 		wsa_KPI_un_head_loss:function(value)

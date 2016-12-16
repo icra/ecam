@@ -3,16 +3,17 @@ var TODO=
 {
 	Back:
 	[
-		"<b style=background:yellow>NOW</b> Opportunities in Abstraction",
-		"Recode <a href=benchmark.php>Benchmark</a> data structure",
-		"Deal with calculated variables. <a href=summary.php?type=ccvv>List</a>",
+		"<b>NOW</b> Recode <a href=benchmark.php>Benchmark</a> data structure",
+		"<b>NOW</b> wsa_std_nrg_cons benchmark: argument should be pointer to object instead of value",
+		"Opportunities in Abstraction",
+		"Calculated variables. <a href=summary.php?type=ccvv>List</a>",
 	],
 	Front:
 	[
-		"Filter at the beginning (configuration page?), asking if there are fuel engines at any point, to hide all fuel related filters, inputs and outputs (Andrés)",
-		"Fix yes/no question in global",
+		"Filter at the beginning, asking if there are fuel engines at any point, to hide all fuel related filters, inputs and outputs (Andrés)",
+		"Fix question in Global",
 		"Graphs: add benchmark circles (difficult). Idea color graphs with green/orange/red ",
-		"Help resources: example json file and manual",
+		"Help resources: json file and manual to download",
 		"Translate new features",
 	],
 };

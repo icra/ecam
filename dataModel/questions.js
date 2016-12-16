@@ -45,6 +45,7 @@ var Questions = {
 			"wsa_KPI_un_head_loss",
 			"wsa_KPI_std_nrg_cons",
 			"wsa_KPI_std_elec_eff",
+			"wsa_pmp_powr",
 			"wsa_pmp_type",
 			"wsa_pmp_size",
 		],

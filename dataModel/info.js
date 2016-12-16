@@ -111,6 +111,7 @@ var Info = {
 	wsa_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
 	wsa_nrg_per_pmp_watr:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
 	wsa_SL_water_losses:{magnitude:"Volume/Distance",unit:"m<sup>3</sup>/km"},
+	"wsa_pmp_powr":{magnitude:"Power",unit:"kW"},
 	"wsa_pmp_type":{magnitude:"Option",unit:"Pump type"},
 	"wsa_pmp_size":{magnitude:"Option",unit:"Pump size"},
 	"wsa_watr_src":{magnitude:"Option",unit:"Water source"},

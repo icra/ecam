@@ -375,6 +375,8 @@
 	"#wsa_pmp_size_expla":"Pump size",
 	"#wsa_watr_src_descr":"Water source",
 	"#wsa_watr_src_expla":"Water source",
+	"#wsa_pmp_powr_descr":"Pump power",
+	"#wsa_pmp_powr_expla":"Power required by the pump (kW)",
 
 	"#wst_vol_trea_descr":"Volume of treated water",
 	"#wst_vol_trea_expla":"Sum of the volume of water treated by WTPs that are the responsibility of the water undertaking, during the assessment period",
