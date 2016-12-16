@@ -116,10 +116,16 @@
 		table#nrgOutputs th:nth-child(2) {text-align:right}
 		table#nrgOutputs td:nth-child(2) {text-align:right}
 
+		table#nrgOutputs table#inputs table#outputs {
+			
+		}
+
 		<?php
 			if($level=="Waste")
 			{?>
 				table#inputs th:not(.tableHeader) {background:#d71d24}
+				table#substages th {background:#d71d24}
+				table#substages td.variableCode {background:#d71d24}
 				#outputs a,#outputs a:visited{color:#d71d24}
 				#nrgOutputs a,#nrgOutputs a:visited{color:#d71d24}
 			<?php }
@@ -644,10 +650,40 @@
 		}
 	?>
 
-	<!--fold all div.cards-->
-	<button style="margin:0 5em;" onclick="var divs=document.querySelectorAll('div.card');for(var i=0;i<divs.length;i++){divs[i].classList.add('folded')}">Fold all sections</button>
+	<!--btn fold all div.cards-->
+	<div id=btn_all_container class=inline style="position:absolute;right:40%">
+		<style>
+			#btn_all_container a {
+				border:1px solid #bbb;
+				font-size:14px;
+				font-family:Courier;
+				padding:0.1em 0.5em;
+				border-radius:0.5em;
+				color:black;
+				background:#eee;
+			}
+		</style>
+		<a id=btn_all_fold href=# style="margin-right:0.1em;" 
+			onclick="
+				var divs=document.querySelectorAll('div.card');
+				for(var i=0;i<divs.length;i++){divs[i].classList.add('folded')}
+				document.querySelector('#btn_all_expand').style.display=''
+				document.querySelector('#btn_all_fold').style.display='none'
+			"
+			>[-] Fold all sections
+		</a>
+		<a id=btn_all_expand href=# style="display:none;" 
+			onclick="
+				var divs=document.querySelectorAll('div.card');
+				for(var i=0;i<divs.length;i++){divs[i].classList.remove('folded')}
+				document.querySelector('#btn_all_expand').style.display='none'
+				document.querySelector('#btn_all_fold').style.display=''
+			"
+			>[+] Expand all sections
+		</a>
+	</div>
 
-	<!--random tip-->
+	<!--Tips-->
 	<span style="font-size:12px;color:#666;float:right">
 		<div style="padding:0.5em;cursor:pointer" onclick="document.querySelector('#tip').innerHTML=Tips.random()">
 			<b>Tip</b> &rarr;
@@ -1380,6 +1416,8 @@
 				<div class=menu onclick=this.parentNode.classList.toggle('folded')>
 					<button></button>
 					<b>Outputs per substage</b>
+					&emsp;
+					<label onclick="event.stopPropagation();init()" ><input type=checkbox id=showGHGss> Show GHG</label>
 					<!--button toggle outputs/graph display-->
 					<button 
 						class=btn_toggle 
@@ -1391,7 +1429,6 @@
 				<!--Substage outputs-->
 				<div id=substageOutputs_container>
 					<table id=substageOutputs style="width:95%;margin:auto;background:#f6f6f6"></table>
-					<div style=margin:0.5em> <label><input type=checkbox onclick=init() id=showGHGss> Show GHG</label> </div>
 					<style>
 						#substageOutputs tr:hover { background:#ccc; }
 						#substageOutputs th{background:#d7bfaf;text-align:left}

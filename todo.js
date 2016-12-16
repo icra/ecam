@@ -1,9 +1,9 @@
-/* tasks items structure*/
+/* Tasks data structure*/
 var TODO=
 {
 	Back:
 	[
-		"Opportunities in Abstraction",
+		"<b style=background:yellow>NOW</b> Opportunities in Abstraction",
 		"Recode <a href=benchmark.php>Benchmark</a> data structure",
 		"Deal with calculated variables. <a href=summary.php?type=ccvv>List</a>",
 	],
@@ -18,10 +18,4 @@ var TODO=
 };
 
 /*write tasks inside a <ul>*/
-TODO.list=function(arr)
-{
-	arr.forEach(function(task)
-	{
-		document.write("<li>"+task);
-	});
-};
+TODO.list=function(arr){arr.forEach(function(task){document.write("<li>"+task)})};

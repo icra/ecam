@@ -246,7 +246,7 @@
 
 					<!--water population-->
 					<span style=float:right>
-						<img src=img/inhabitants.png width=25 caption="Population" style=vertical-align:middle>
+						<img src=img/inhabitants.png width=25 caption="Water supply population" style=vertical-align:middle>
 						<b caption="Serviced population">
 							<script>document.write(Global.Water.ws_serv_pop)</script>
 						</b>/
@@ -268,7 +268,7 @@
 
 					<!--wastewater population-->
 					<span style=float:right>
-						<img src=img/inhabitants.png width=25 caption="Population" style="vertical-align:middle">
+						<img src=img/inhabitants.png width=25 caption="Wastewater population" style="vertical-align:middle">
 						<b caption="Serviced population">
 							<script>document.write(Global.Waste.ww_serv_pop)</script>
 						</b>/<!--

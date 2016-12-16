@@ -16,7 +16,10 @@
 		</style>
 
 		<!--TITLE--><h1 style="text-align:left;font-size:30px;"><b>ECAM</b> <?php write("#index_web_tool")?>
-			<span style=color:#bf5050>Development version (towards v2.0)</span>
+			<span style=color:#bf5050>Development version (towards v2.0)
+			&mdash;
+			<a href=development.php>(dev menu)</a>
+			</span>
 		</h1>
 
 		<!--DEVELOPMENT-->
