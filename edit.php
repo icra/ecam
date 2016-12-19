@@ -49,7 +49,7 @@
 		div#main button.button.prevNext {
 			display:block;
 			vertical-align:bottom;
-			margin:0.5em 0.5em 0 0;
+			margin:0.5em auto 0 auto;
 			background:#acb;
 			border-radius:0;
 		}
@@ -698,146 +698,148 @@
 <div id=main>
 	<!--questions-->
 	<div class="card">
-		<?php cardMenu("<b>Questions</b> &mdash; Answer these questions first (<a href=questions.php>info</a>)")?> 
-		<table id=questions class=inline></table>
-		<script>
-			function updateQuestionsTable(id_table,adv)
-			{
-				adv=adv||false; //show advanced or normal
-
-				var t=document.getElementById(id_table);
-				if(!t)return;
-				while(t.rows.length>0)t.deleteRow(-1);
-				var questions=Questions.getQuestions(CurrentLevel);
-
-				for(var q in questions)
+		<?php cardMenu("<b>Questions</b> &mdash; Answer these first (<a href=questions.php>info</a>)")?> 
+		<div style=padding:0.5em>
+			<table id=questions class=inline></table>
+			<script>
+				function updateQuestionsTable(id_table,adv)
 				{
-					var question = questions[q];
-					if(Questions.isHiddenQuestion(question)){continue;}
+					adv=adv||false; //show advanced or normal
 
-					//check if question is "advanced"
-					if(!adv){ if( Questions[question].advanced){continue;}}
-					else{     if(!Questions[question].advanced){continue;}}
+					var t=document.getElementById(id_table);
+					if(!t)return;
+					while(t.rows.length>0)t.deleteRow(-1);
+					var questions=Questions.getQuestions(CurrentLevel);
 
-					//fetch current state
-					var currentAnswer = Global.Configuration["Yes/No"][question];
-					var checked = currentAnswer ? "checked":"";
-
-					//reset values that are inputs ! codi lleig, es podria refactoritzar
-					if(!currentAnswer)
+					for(var q in questions)
 					{
-						//reset a les variables
-						for(var i in Questions[question].variables)
+						var question = questions[q];
+						if(Questions.isHiddenQuestion(question)){continue;}
+
+						//check if question is "advanced"
+						if(!adv){ if( Questions[question].advanced){continue;}}
+						else{     if(!Questions[question].advanced){continue;}}
+
+						//fetch current state
+						var currentAnswer = Global.Configuration["Yes/No"][question];
+						var checked = currentAnswer ? "checked":"";
+
+						//reset values that are inputs ! codi lleig, es podria refactoritzar
+						if(!currentAnswer)
 						{
-							var code=Questions[question].variables[i];
-							if(typeof(CurrentLevel[code])=="number") CurrentLevel[code]=0;
-						}
-						//reset a les otherQuestions
-						for(var i in Questions[question].otherQuestions)
-						{
-							var code_q=Questions[question].otherQuestions[i];
-							Global.Configuration["Yes/No"][code_q]=0;
-							//reset a les variables de les otherQuestions
-							for(var j in Questions[code_q].variables)
+							//reset a les variables
+							for(var i in Questions[question].variables)
 							{
-								var code_v=Questions[question].variables[j];
-								if(typeof(CurrentLevel[code_v])=="number") CurrentLevel[code_v]=0;
+								var code=Questions[question].variables[i];
+								if(typeof(CurrentLevel[code])=="number") CurrentLevel[code]=0;
+							}
+							//reset a les otherQuestions
+							for(var i in Questions[question].otherQuestions)
+							{
+								var code_q=Questions[question].otherQuestions[i];
+								Global.Configuration["Yes/No"][code_q]=0;
+								//reset a les variables de les otherQuestions
+								for(var j in Questions[code_q].variables)
+								{
+									var code_v=Questions[question].variables[j];
+									if(typeof(CurrentLevel[code_v])=="number") CurrentLevel[code_v]=0;
+								}
 							}
 						}
+
+						//new row
+						var newRow = t.insertRow(-1);
+						newRow.style.background = currentAnswer ? "lightgreen" : "";
+						newRow.setAttribute('question',question);
+						newRow.onmouseover=function(){hlQuestionFields(this.getAttribute('question'),1)}
+						newRow.onmouseout=function(){hlQuestionFields(this.getAttribute('question'),0)}
+						newRow.insertCell(-1).innerHTML=translate(question)+"?";
+						newRow.insertCell(-1).innerHTML=(function()
+						{
+							var ret="<label>"+
+									"<?php write('#no')?> "+
+									"<input name='"+question+"' type=radio value=0 onclick=setQuestion('"+question+"',0) checked></label> "+
+									"<label><?php write('#yes')?> "+
+									"<input name='"+question+"' type=radio value=1 onclick=setQuestion('"+question+"',1) "+checked+"></label> ";
+							return ret;
+						})();
 					}
 
-					//new row
-					var newRow = t.insertRow(-1);
-					newRow.style.background = currentAnswer ? "lightgreen" : "";
-					newRow.setAttribute('question',question);
-					newRow.onmouseover=function(){hlQuestionFields(this.getAttribute('question'),1)}
-					newRow.onmouseout=function(){hlQuestionFields(this.getAttribute('question'),0)}
-					newRow.insertCell(-1).innerHTML=translate(question)+"?";
-					newRow.insertCell(-1).innerHTML=(function()
-					{
-						var ret="<label>"+
-								"<?php write('#no')?> "+
-								"<input name='"+question+"' type=radio value=0 onclick=setQuestion('"+question+"',0) checked></label> "+
-								"<label><?php write('#yes')?> "+
-								"<input name='"+question+"' type=radio value=1 onclick=setQuestion('"+question+"',1) "+checked+"></label> ";
-						return ret;
-					})();
+					//hide whole table if no questions
+					t.parentNode.style.display="";
+					if(t.rows.length==0){t.parentNode.style.display="none";}
 				}
 
-				//hide whole table if no questions
-				t.parentNode.style.display="";
-				if(t.rows.length==0){t.parentNode.style.display="none";}
-			}
-
-			//highlight fields linked to the question
-			function hlQuestionFields(question,hl)
-			{
-				var fields=Questions[question].variables; //array
-				for(var i in fields)
+				//highlight fields linked to the question
+				function hlQuestionFields(question,hl)
 				{
-					Formulas.hlField(fields[i],hl);
+					var fields=Questions[question].variables; //array
+					for(var i in fields)
+					{
+						Formulas.hlField(fields[i],hl);
+					}
 				}
-			}
 
-			function setQuestion(question,newValue)
-			{
-				if(newValue)
-					Global.Configuration['Yes/No'][question]=1;
-				else //if(confirm("WARNING! Inputs from this question will be reseted to zero. Continue?"))
-					Global.Configuration['Yes/No'][question]=0;
-				init();
-				hlQuestionFields(question,1);
-			}
-		</script>
-		<?php 
-			//fuel options for water and wastewater only
-			if($level!="Energy")
-			{
-				?>
-				<table id=fuelSelection class=inline>
-					<tr><td colspan=2>
-						<img src=img/fuel.png> <?php write('#configuration_fuel_options')?> (<a href=fuelInfo.php>info</a>)</legend>
-					<style>
-						#fuelSelection {margin:0 0.2em}
-						#fuelSelection tr.inactive {background:#f6f6f6;color:#aaa}
-						#fuelSelection img {width:13px;vertical-align:middle}
-					</style>
-					<?php
-						if($level=="Water" && !$sublevel)
-						{ 
-							?> <?php 
-						}
-						else if($level=="Waste" && !$sublevel)
-						{
-							?>
-							<tr question=truck_transport_waste><td><?php write('#configuration_vehicles')?>
-							<?php 
-						}
-						else if($level=="Water" && $sublevel=="Abstraction")
-						{
-							?>
-							<tr question=wsa_engines><td><?php write('#configuration_engines')?>
-							<?php 
-						}
-						else if($level=="Water" && $sublevel=="Treatment")
-						{
-							?>
-							<tr question=wst_engines><td><?php write('#configuration_engines')?>
-							<?php 
-						}
-						else if($level=="Water" && $sublevel=="Distribution")
-						{
-							?>
-							<tr question=wsd_engines><td><?php write('#configuration_engines')?>
-							<tr question=wsd_trucks><td><?php write('#configuration_vehicles')?>
-							<?php 
-						}
+				function setQuestion(question,newValue)
+				{
+					if(newValue)
+						Global.Configuration['Yes/No'][question]=1;
+					else //if(confirm("WARNING! Inputs from this question will be reseted to zero. Continue?"))
+						Global.Configuration['Yes/No'][question]=0;
+					init();
+					hlQuestionFields(question,1);
+				}
+			</script>
+			<?php 
+				//fuel options for water and wastewater only
+				if($level!="Energy")
+				{
 					?>
-				</table>
-				<?php
-			}
-		?>
-		<button class="button save prevNext" onclick="PrevNext.next(this.parentNode,'tbd')">Ok, next</button>
+					<table id=fuelSelection class=inline>
+						<tr><td colspan=2>
+							<img src=img/fuel.png> <?php write('#configuration_fuel_options')?> (<a href=fuelInfo.php>info</a>)</legend>
+						<style>
+							#fuelSelection {margin:0 0.2em}
+							#fuelSelection tr.inactive {background:#f6f6f6;color:#aaa}
+							#fuelSelection img {width:13px;vertical-align:middle}
+						</style>
+						<?php
+							if($level=="Water" && !$sublevel)
+							{ 
+								?> <?php 
+							}
+							else if($level=="Waste" && !$sublevel)
+							{
+								?>
+								<tr question=truck_transport_waste><td><?php write('#configuration_vehicles')?>
+								<?php 
+							}
+							else if($level=="Water" && $sublevel=="Abstraction")
+							{
+								?>
+								<tr question=wsa_engines><td><?php write('#configuration_engines')?>
+								<?php 
+							}
+							else if($level=="Water" && $sublevel=="Treatment")
+							{
+								?>
+								<tr question=wst_engines><td><?php write('#configuration_engines')?>
+								<?php 
+							}
+							else if($level=="Water" && $sublevel=="Distribution")
+							{
+								?>
+								<tr question=wsd_engines><td><?php write('#configuration_engines')?>
+								<tr question=wsd_trucks><td><?php write('#configuration_vehicles')?>
+								<?php 
+							}
+						?>
+					</table>
+					<?php
+				}
+			?>
+			<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')">Ok, next</button>
+		</div>
 	</div>
 
 	<!--level2 container-->
@@ -876,14 +878,14 @@
 		</div>
 
 		<!--level2-->
-		<div style=padding-top:1px;>
+		<div style=padding:0.5em>
 			<!--inputs level2-->
-			<div class=inline style="width:40%;margin-left:0.2em;<?php if($level=="Energy") echo "display:none;"?>">
+			<div class=inline style="width:44%;margin-left:0.2em;<?php if($level=="Energy") echo "display:none;"?>">
 				<?php include'level2.php'?> 
 			</div>
 
 			<!--outputs level2-->
-			<div id=outputs_container class=inline style="width:58%;">
+			<div id=outputs_container class=inline style="width:54%;">
 				<?php if($level=="Energy") echo "<style>#outputs{display:none}</style>"; ?>
 
 				<!--level2 GHG outputs-->
@@ -913,7 +915,7 @@
 			</div>
 
 			<!--GRAPHS-->
-			<div id=graph_container class=inline style="width:58%;display:none;border:0px solid #ccc">
+			<div id=graph_container class=inline style="width:54%;display:none;border:0px solid #ccc">
 				<!--choose graph type buttons-->
 				<?php include'buttonsGraphType.php'?>
 				<!--actual graph-->
@@ -929,10 +931,9 @@
 					#graph * {margin:auto}
 				</style>
 			</div>
-		</div>
 
-		<!--next btn-->
-		<button class="button save prevNext" style=margin-left:0 onclick="PrevNext.next(this.parentNode,'tbd')">Ok, next</button>
+			<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')">Ok, next</button>
+		</div>
 	</div>
 
 	<!--level3-->
@@ -1181,7 +1182,7 @@
 										var value = parseInt(Tables[code][op].value);
 										select.appendChild(option);
 										option.value=value;
-										option.innerHTML=op+" ("+value+")";
+										option.innerHTML="("+value+") "+op;
 										if(substages[s][code]==value) 
 										{
 											option.selected=true;
@@ -1369,8 +1370,10 @@
 			<!--advanced questions-->
 			<div class="card">
 				<?php cardMenu("<b>Advanced Questions for Substages</b>")?> 
-				<table id=adv_questions class=inline></table>
-				<button class="button save prevNext" onclick="PrevNext.next(this.parentNode,'tbd')">Ok, next</button>
+				<div style=padding:0.5em>
+					<table id=adv_questions class=inline></table>
+					<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')">Ok, next</button>
+				</div>
 			</div>
 
 			<!--substage inputs-->
@@ -1382,32 +1385,34 @@
 						&mdash; 
 						Stages <b><span id=counter class=number>0</span></b>
 				")?>
-				<table id=substages> 
-					<tr><td colspan=2 style="min-width:260px;text-align:right">
-						<!--view all-->
-						<label style=float:left>
-							<input id=viewAll type=checkbox onclick=level3.toggleViewSum() checked> 
-							View all stages
-							<script>
-								level3.toggleViewSum=function()
-								{
-									var newDisplay=document.querySelector('#substages td.input').style.display=='none' ? '':'none';
-									var n=substages.length;
-									var tr=document.querySelector('#substages tr');//fist tr
-									for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay;
-									var tr=document.querySelector('#substages tr:last-child');//last tr
-									for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay;
-									var collection=document.querySelectorAll('#substages td.input');
-									for(var i=0;i<collection.length;i++) collection[i].style.display=newDisplay;
-								}
-							</script>
-						</label>
-						<!--new substage button-->
-						<button onclick=level3.newSubstage() class="button add" style="padding:auto;background:lightgreen;box-shadow: 0 1px 2px rgba(0,0,0,.1);">
-							Add stage
-						</button>
-				</table>
-				<button class="button save prevNext" onclick="PrevNext.next(this.parentNode,'tbd')">Ok, next</button>
+				<div style=padding:0.5em>
+					<table id=substages> 
+						<tr><td colspan=2 style="min-width:260px;text-align:right">
+							<!--view all-->
+							<label style=float:left>
+								<input id=viewAll type=checkbox onclick=level3.toggleViewSum() checked> 
+								View all stages
+								<script>
+									level3.toggleViewSum=function()
+									{
+										var newDisplay=document.querySelector('#substages td.input').style.display=='none' ? '':'none';
+										var n=substages.length;
+										var tr=document.querySelector('#substages tr');//fist tr
+										for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay;
+										var tr=document.querySelector('#substages tr:last-child');//last tr
+										for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay;
+										var collection=document.querySelectorAll('#substages td.input');
+										for(var i=0;i<collection.length;i++) collection[i].style.display=newDisplay;
+									}
+								</script>
+							</label>
+							<!--new substage button-->
+							<button onclick=level3.newSubstage() class="button add" style="padding:auto;background:lightgreen;box-shadow: 0 1px 2px rgba(0,0,0,.1);">
+								Add stage
+							</button>
+					</table>
+					<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')">Ok, next</button>
+				</div>
 			</div>
 
 			<!--outputs per substage-->
@@ -1426,185 +1431,185 @@
 					</button>
 				</div>
 
-				<!--Substage outputs-->
-				<div id=substageOutputs_container>
-					<table id=substageOutputs style="width:95%;background:#f6f6f6"></table>
-					<style>
-						#substageOutputs tr:hover { background:#ccc; }
-						#substageOutputs th{background:#d7bfaf;text-align:left}
-						#substageOutputs td:nth-child(n+3) {text-align:right}
-					</style>
-					<script>
-						/** Redisplay outputs */
-						level3.updateOutputs=function()
-						{
-							var t=document.getElementById('substageOutputs');
-							while(t.rows.length>0) t.deleteRow(-1);
-
-							//headers
-								//new row
-								var newRow=t.insertRow(-1);
-								['<?php write('#level3_code')?>','<?php write('#level3_description')?>'].forEach(function(str)
-								{
-									var newTH=document.createElement('th'); newRow.appendChild(newTH);
-									newTH.innerHTML=str;
-								});
-								for(var s in substages)
-								{
-									var newTH=document.createElement('th'); 
-									newRow.appendChild(newTH);
-									newTH.innerHTML="<?php write('#substage')?> "+(parseInt(s)+1)+" "+
-									"<div><b>"+substages[s].name+"</div>"
-								};
-								['&sum; <?php write('#level3_TOTAL')?>','<?php write('#level3_unit')?>'].forEach(function(element)
-								{
-									var newTH=document.createElement('th'); newRow.appendChild(newTH);
-									newTH.innerHTML=element;
-								});
-							//end headers
-
-							//copy all functions to each substage
-							for(var field in CurrentLevel)
+				<div style=padding:0.5em>
+					<!--Substage outputs-->
+					<div id=substageOutputs_container>
+						<table id=substageOutputs style="width:95%;background:#f6f6f6"></table>
+						<style>
+							#substageOutputs tr:hover { background:#ccc; }
+							#substageOutputs th{background:#d7bfaf;text-align:left}
+							#substageOutputs td:nth-child(n+3) {text-align:right}
+						</style>
+						<script>
+							/** Redisplay outputs */
+							level3.updateOutputs=function()
 							{
-								//only functions
-								if(typeof(CurrentLevel[field])!="function") continue;
-								//IMPORTANT: for this to work all formulas that refer to internal variables should refer to them with "this" keyword
-								for(var s in substages)
-									substages[s][field]=CurrentLevel[field];
-							}
+								var t=document.getElementById('substageOutputs');
+								while(t.rows.length>0) t.deleteRow(-1);
 
-							//go over CurrentLevel
-							for(var field in CurrentLevel)
-							{
-								//only functions
-								if(typeof(CurrentLevel[field])!="function") continue;
+								//headers
+									//new row
+									var newRow=t.insertRow(-1);
+									['<?php write('#level3_code')?>','<?php write('#level3_description')?>'].forEach(function(str)
+									{
+										var newTH=document.createElement('th'); newRow.appendChild(newTH);
+										newTH.innerHTML=str;
+									});
+									for(var s in substages)
+									{
+										var newTH=document.createElement('th'); 
+										newRow.appendChild(newTH);
+										newTH.innerHTML="<?php write('#substage')?> "+(parseInt(s)+1)+" "+
+										"<div><b>"+substages[s].name+"</div>"
+									};
+									['&sum; <?php write('#level3_TOTAL')?>','<?php write('#level3_unit')?>'].forEach(function(element)
+									{
+										var newTH=document.createElement('th'); newRow.appendChild(newTH);
+										newTH.innerHTML=element;
+									});
+								//end headers
 
-								//exclude service level indicators
-								if(field.search('_SL_')>-1) continue;
-
-								/*if assessment type is simple, hide L3 variables*/
-								if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
+								//copy all functions to each substage
+								for(var field in CurrentLevel)
 								{
-									if(Level3.list.indexOf(field)>-1) continue;
+									//only functions
+									if(typeof(CurrentLevel[field])!="function") continue;
+									//IMPORTANT: for this to work all formulas that refer to internal variables should refer to them with "this" keyword
+									for(var s in substages)
+										substages[s][field]=CurrentLevel[field];
 								}
 
-								//exclude _KPI_GHG if checkbox is enabled
-								var isGHG=(field.search('_KPI_GHG')+1) ? true : false;
-								if(isGHG) 
-									if(!document.querySelector('#showGHGss').checked)
-										continue;
-
-								//exclude the "level2only" variables
-								if(Level2only.hasOwnProperty(field)) continue;
-
-								/*check if should be hidden according to questions*/
-								if(Questions.isHidden(field)) continue;
-
-								//if is calculated variable, not show it
-								if(field.search(/^c_/)>=0) continue;
-
-								//new row
-								var newRow=t.insertRow(-1);
-								newRow.setAttribute('field',field);
-								newRow.setAttribute('title',translate(field+'_expla'));
-
-								//set highlighting 
-								newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
-								newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
-
-								//1st cell: show code identifier
-								newRow.insertCell(-1).innerHTML=(function()
+								//go over CurrentLevel
+								for(var field in CurrentLevel)
 								{
-									var adv=Level3.list.indexOf(field)+1 ? "<span class=advanced title='Advanced'>adv</span>":"";
-									var ghg=isGHG                        ? "<span class='advanced ghg' title='GHG'>GHG</span>":"";
-									var nrg=field.search('_nrg_')+1      ? "<span class='advanced nrg' title='Energy performance'>NRG</span>":""; 
-									return "<a href=variable.php?id="+field+">"+field+"</a>"+ghg+adv+nrg;
-								})();
+									//only functions
+									if(typeof(CurrentLevel[field])!="function") continue;
 
-								//2nd cell: description
-								newRow.insertCell(-1).innerHTML=translate(field+'_descr');
+									//exclude service level indicators
+									if(field.search('_SL_')>-1) continue;
 
-								//get equation formula
-								var formula=CurrentLevel[field].toString();
-								var prettyFormula=Formulas.prettify(formula);
-
-								//3rd cell and so on: values.
-								for(var s in substages)
-								{
-									//new cell
-									var newCell=newRow.insertCell(-1);
-									//title for mouseover show formula
-									newCell.title=prettyFormula;
-									//value
-									newCell.innerHTML=(function()
+									/*if assessment type is simple, hide L3 variables*/
+									if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
 									{
-										//compute value and bechmark it
-										var value=substages[s][field]()/Units.multiplier(field);
+										if(Level3.list.indexOf(field)>-1) continue;
+									}
 
-										//color circle benchmarking (TO DO: extract function from here)
-										var indicator=(function()
+									//exclude _KPI_GHG if checkbox is enabled
+									var isGHG=(field.search('_KPI_GHG')+1) ? true : false;
+									if(isGHG) 
+										if(!document.querySelector('#showGHGss').checked)
+											continue;
+
+									//exclude the "level2only" variables
+									if(Level2only.hasOwnProperty(field)) continue;
+
+									/*check if should be hidden according to questions*/
+									if(Questions.isHidden(field)) continue;
+
+									//if is calculated variable, not show it
+									if(field.search(/^c_/)>=0) continue;
+
+									//new row
+									var newRow=t.insertRow(-1);
+									newRow.setAttribute('field',field);
+									newRow.setAttribute('title',translate(field+'_expla'));
+
+									//set highlighting 
+									newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
+									newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
+
+									//1st cell: show code identifier
+									newRow.insertCell(-1).innerHTML=(function()
+									{
+										var adv=Level3.list.indexOf(field)+1 ? "<span class=advanced title='Advanced'>adv</span>":"";
+										var ghg=isGHG                        ? "<span class='advanced ghg' title='GHG'>GHG</span>":"";
+										var nrg=field.search('_nrg_')+1      ? "<span class='advanced nrg' title='Energy performance'>NRG</span>":""; 
+										return "<a href=variable.php?id="+field+">"+field+"</a>"+ghg+adv+nrg;
+									})();
+
+									//2nd cell: description
+									newRow.insertCell(-1).innerHTML=translate(field+'_descr');
+
+									//get equation formula
+									var formula=CurrentLevel[field].toString();
+									var prettyFormula=Formulas.prettify(formula);
+
+									//3rd cell and so on: values.
+									for(var s in substages)
+									{
+										//new cell
+										var newCell=newRow.insertCell(-1);
+										//title for mouseover show formula
+										newCell.title=prettyFormula;
+										//value
+										newCell.innerHTML=(function()
 										{
-											if(!RefValues.hasOwnProperty(field)) return "";
-											var text=RefValues[field](value);
-											var color;
-											switch(text)
+											//compute value and bechmark it
+											var value=substages[s][field]()/Units.multiplier(field);
+
+											//color circle benchmarking (TO DO: extract function from here)
+											var indicator=(function()
 											{
-												case "Good":           color="#af0";break;
-												case "Acceptable":     color="orange";break;
-												case "Unsatisfactory": color="red";break;
-												case "Out of range":   color="brown";break;
-												default:               color="#ccc";break;
-											}
-											return "<span title='Benchmarking: "+text+"' class=circle style='background:"+color+"'></span>";
+												if(!RefValues.hasOwnProperty(field)) return "";
+												var text=RefValues[field](value);
+												var color;
+												switch(text)
+												{
+													case "Good":           color="#af0";break;
+													case "Acceptable":     color="orange";break;
+													case "Unsatisfactory": color="red";break;
+													case "Out of range":   color="brown";break;
+													default:               color="#ccc";break;
+												}
+												return "<span title='Benchmarking: "+text+"' class=circle style='background:"+color+"'></span>";
+											})();
+											return format(value)+" "+indicator;
 										})();
-										return format(value)+" "+indicator;
+									}
+
+									//level 2 value
+									var newCell=newRow.insertCell(-1);
+									newCell.title=prettyFormula;
+									newCell.style.fontWeight="bold"
+									newCell.innerHTML=format(CurrentLevel[field]()/Units.multiplier(field));
+
+									//unit
+									newRow.insertCell(-1).innerHTML=(function()
+									{
+										return Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
 									})();
 								}
 
-								//level 2 value
-								var newCell=newRow.insertCell(-1);
-								newCell.title=prettyFormula;
-								newCell.style.fontWeight="bold"
-								newCell.innerHTML=format(CurrentLevel[field]()/Units.multiplier(field));
-
-								//unit
-								newRow.insertCell(-1).innerHTML=(function()
+								//if no active equations show warning
+								if(t.rows.length<2)
 								{
-									return Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
-								})();
+									var newCell=t.insertRow(-1).insertCell(-1)
+									newCell.colSpan=4+substages.length;
+									newCell.innerHTML="<i style=color:#999>~No active outputs</i>";
+								}
+
+								//bottom line with the color of W/WW
+								var newRow=t.insertRow(-1);
+								var newTh=document.createElement('th');
+								newRow.appendChild(newTh);
+								newTh.setAttribute('colspan',4+substages.length)
+								newTh.style.borderBottom='none';newTh.style.borderTop='none';
 							}
-
-							//if no active equations show warning
-							if(t.rows.length<2)
-							{
-								var newCell=t.insertRow(-1).insertCell(-1)
-								newCell.colSpan=4+substages.length;
-								newCell.innerHTML="<i style=color:#999>~No active outputs</i>";
-							}
-
-							//bottom line with the color of W/WW
-							var newRow=t.insertRow(-1);
-							var newTh=document.createElement('th');
-							newRow.appendChild(newTh);
-							newTh.setAttribute('colspan',4+substages.length)
-							newTh.style.borderBottom='none';newTh.style.borderTop='none';
-						}
-					</script>
-				</div>
-
-				<!--Substage graphs-->
-				<div id=substageGraphs style=padding:1em;display:none>
-					<div class=buttonsGraph><!--
-						--><button class="left"    onclick="buttonsGraph(this);Graphs.wsa_KPI_std_nrg_cons(false,'substageGraph')">Standardized energy consumption</button><!--
-						--><button class="middle"  onclick="buttonsGraph(this);document.querySelector('#substageGraph').innerHTML='TBD'">Another graph</button><!--
-						--><button class="right"   onclick="buttonsGraph(this);document.querySelector('#substageGraph').innerHTML='TBD'">Another graph</button><!--
-						-->
+						</script>
 					</div>
-					<div id=substageGraph style=text-align:center>Click a graph to display</div>
+					<!--Substage graphs-->
+					<div id=substageGraphs style=padding:1em;display:none>
+						<div class=buttonsGraph><!--
+							--><button class="left"    onclick="buttonsGraph(this);Graphs.wsa_KPI_std_nrg_cons(false,'substageGraph')">Standardized energy consumption</button><!--
+							--><button class="middle"  onclick="buttonsGraph(this);document.querySelector('#substageGraph').innerHTML='TBD'">Another graph</button><!--
+							--><button class="right"   onclick="buttonsGraph(this);document.querySelector('#substageGraph').innerHTML='TBD'">Another graph</button><!--
+							-->
+						</div>
+						<div id=substageGraph style=text-align:center>Click a graph to display</div>
+					</div>
+					<!--ok next btn-->
+					<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')">Ok, next</button>
 				</div>
-
-				<!--ok next btn-->
-				<button class="button save prevNext" onclick="PrevNext.next(this.parentNode,'tbd')">Ok, next</button>
 			</div>
 			<?php
 		}
@@ -1619,7 +1624,6 @@
 				<div style=padding:0.5em>
 				Under development
 				</div>
-				<button class="button save prevNext" onclick="PrevNext.next(this.parentNode,'tbd')">Ok, next</button>
 			</div>
 			<?php 
 		}

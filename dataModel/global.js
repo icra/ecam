@@ -54,7 +54,6 @@ var Global = {
 			"wsa_main_len":0,
 			"wsa_fri_loss":0,
 			"wsa_watr_src":0,
-			"wsa_pmp_powr":0,
 			"wsa_pmp_type":0,
 			"wsa_pmp_size":0,
 			wsa_nrg_per_pmp_watr:function(){return this.wsa_nrg_cons/this.wsa_vol_pump},

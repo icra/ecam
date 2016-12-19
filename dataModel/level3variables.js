@@ -8,7 +8,6 @@ Level3.list=
 		"wsa_fri_loss",
 		"wsa_main_len",
 		"wsa_pmp_head",
-		"wsa_pmp_powr",
 		"wsa_nrg_turb",
 		//"wsa_KPI_GHG",
 		"wsa_KPI_nrg_recovery",

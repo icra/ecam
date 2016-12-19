@@ -150,25 +150,24 @@ span.circle {
 		opacity:0.98;
 		overflow:auto;
 		transition:all 0.2s linear;
-		box-shadow: 0 1px 2px rgba(0,0,0,.1);
-		margin:2px 0px 2px 3px;
 		border:1px solid #ccc;
+		box-shadow: 0 1px 2px rgba(0,0,0,.1);
+		margin:5px 1px 2px 4px;
 	}
 	.card.folded{
 		max-height:3.0em;
 		overflow:hidden;
-		border:1px solid #eee;
 	}
 	.card.folded > *:nth-child(n+2) {opacity:0;}
-	.card.folded .menu {
-		color:#999;
-	}
 	.card .menu {
 		text-align:left;
 		opacity:1;
 		background:#f6f6f6;
 		cursor:pointer;
 	}
+
+	.card.folded .menu{color:#777;}
+
 	.card .menu button {
 		margin-left:-1px;
 		margin-top:-1px;

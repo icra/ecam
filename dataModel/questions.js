@@ -21,8 +21,9 @@ var Questions = {
 	"wsa_pumping":{
 		variables:[ 
 			"wsa_vol_pump",
-			//"wsa_KPI_GHG_elec", 
 			"wsa_nrg_per_pmp_watr",
+			"wsa_KPI_GHG_elec", 
+			"wsa_nrg_cons",
 		],
 		advanced:0,
 		otherQuestions:[

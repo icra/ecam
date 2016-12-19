@@ -6,36 +6,24 @@
 
 var RefValues = 
 {
-	//wsa
+	//wsa: 2 variables benchmarked
 		wsa_KPI_std_nrg_cons:function(value){
-			/* Good: 0.2725 ≤ value ≤ 0.40, Acceptable: 0.40 < value ≤ 0.54, Unsatisfactory: value > 0.54 */
-			if     (0.2725 <= value && value <= 0.40) return "Good";
-			else if(0.40   <  value && value <= 0.54) return "Acceptable";
-			else if(value  >  0.54)                   return "Unsatisfactory";
-			else                                      return "Out of range";
+			//Good: 0.2725 ≤ value ≤ 0.40, Acceptable: 0.40 < value ≤ 0.54, Unsatisfactory: value > 0.54
+			if      (0.2725 <= value && value <= 0.40) return "Good";
+			else if (0.40   <  value && value <= 0.54) return "Acceptable";
+			else if (value  >  0.54)                   return "Unsatisfactory";
+			else                                       return "Out of range";
 		},
-
 		wsa_KPI_un_head_loss:function(value)
 		{
-			//description: aE7: Good: aE7 ≤ 2, Acceptable: 2 < aE7 ≤ 4, Unsatisfactory: aE7> 4,
-			if(value <= 2)                  
-			{
-				return "Good"
-			}
-			else if(2     <  value && value <= 4)
-			{
-				return "Acceptable"
-			}
-			else if(value >  4)                  
-			{
-				return "Unsatisfactory"
-			}
-			else                                 
-			{
-				return "Out of range"
-			}
+			//Good: value ≤ 2, Acceptable: 2 < value ≤ 4, Unsatisfactory: value > 4
+			if      (value <= 2)                   return "Good";
+			else if (2     <  value && value <= 4) return "Acceptable";
+			else if (value >  4)                   return "Unsatisfactory";
+			else                                   return "Out of range";
 		},
-	//wst
+
+	//wst: 3 variables benchmarked
 		wst_KPI_capac_util:function(value)
 		{
 			//description: Capacity util: Good: 90 ≤ tE4 ≤ 70, Acceptable: 100 ≤ tE4 < 90 and 70 < tE4 ≤ 50, Unsatisfactory: tE4 > 100 and tE4 < 50,
@@ -56,7 +44,6 @@ var RefValues =
 				return "Out of range"
 			}
 		},
-
 		wst_KPI_nrg_per_m3:function(value)
 		{
 			//description: this is the most complex
@@ -69,7 +56,6 @@ var RefValues =
 			*/
 			return "Implementation needs revision";
 		},
-
 		wst_KPI_slu_per_m3:function(value)
 		{
 			//description: tE3: Good: tE3 ≤ 0.06, Acceptable: 0.06 < tE3 ≤ 0.10, Unsatisfactory: tE3 > 0.10,
@@ -90,6 +76,7 @@ var RefValues =
 				return "Out of range"
 			}
 		},
+
 	//wsd
 		wsd_KPI_nrg_efficien:function(value,dE5)
 		{
