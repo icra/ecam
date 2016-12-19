@@ -361,7 +361,7 @@
 					var hasIndicator=RefValues.hasOwnProperty(field);
 					if(hasIndicator)
 					{
-						var indicator=RefValues[field](value);
+						var indicator=RefValues[field](CurrentLevel);
 						newCell.title=indicator;
 						var color;
 						switch(indicator)
@@ -1551,7 +1551,7 @@
 											var indicator=(function()
 											{
 												if(!RefValues.hasOwnProperty(field)) return "";
-												var text=RefValues[field](value);
+												var text=RefValues[field](substages[s]);
 												var color;
 												switch(text)
 												{
