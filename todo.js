@@ -3,6 +3,7 @@ var TODO=
 {
 	Back:
 	[
+		"In variable.php show if a variable is used only for benchmark (like 'wsa_pmp_size')",
 		"<b>NOW</b> EXCEL Water Distribution",
 		"Calculated variables. <a href=summary.php?type=ccvv>List</a>",
 		"No manual, do FAQ instead: a page which is a JSON file reader with a structure {Question:Answer,Question:Answer}",
