@@ -15,7 +15,6 @@ var Exceptions =
 	{
 		this.ww13();
 		this.ww_ch4_efac();
-		this.wst_treatmen();
 	},
 
 	//make ww13 selection (which is inside its description) stay selected
@@ -232,45 +231,6 @@ var Exceptions =
 		var td=document.querySelector('tr[field=ww_prot_con] td');
 		if(!td)return;
 		td.appendChild(select);
-	},
-
-	wst_treatmen:function()
-	{
-		var select = document.createElement('select');
-		var td = document.querySelector('tr[field=wst_treatmen] td');
-
-		if(!td){ return }
-
-		select.id="wst_treatmen";
-		select.onchange=function()
-		{
-			Global.Water.Treatment.wst_treatmen=parseInt(select.value);
-			init();
-		}
-
-		var options = Tables.wst_treatmen;
-
-		for(var op in options)
-		{
-			var option = document.createElement('option');
-			var value = parseInt(options[op].value);
-			select.appendChild(option);
-			option.value=value;
-			option.innerHTML=op+" ("+value+")";
-			if(Global.Water.Treatment.wst_treatmen==value) 
-			{
-				option.selected=true;
-			}
-		}
-
-		//put the select menu on the description
-		(function(){
-			var td=document.querySelector('tr[field=wst_treatmen] td.input');
-			if(!td)return;
-			td.onclick=function(){} //replace onclick listener
-			td.innerHTML="";
-			td.appendChild(select)
-			})();
 	},
 
 	//emision factor (kg CH4 per kg BOD)

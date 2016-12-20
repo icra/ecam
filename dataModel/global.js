@@ -79,8 +79,8 @@ var Global = {
 			"wst_mass_slu":0,
 			"wst_trea_cap":0, 
 			"wst_vol_trea":0,
-			"wst_treatmen":0, //dropdown
 			"wst_trea_vol":0,
+			"wst_treatmen":0,
 			"wst_disnfctn":0,
 			"wst_vol_disn":0,
 			"wst_nrg_disn":0,
@@ -88,7 +88,6 @@ var Global = {
 			"wst_bod_effl":0,
 			"wst_vol_pump":0,
 			"wst_pmp_head":0,
-			"wst_tst_type":0, //dropdown
 			c_wst_vol_head:function(){return this.wst_vol_pump*this.wst_pmp_head/100},
 			wst_KPI_std_nrg_cons:function(){return this.wst_nrg_cons/this.c_wst_vol_head()},
 

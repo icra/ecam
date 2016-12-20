@@ -1,5 +1,4 @@
 /* Random tips */
-
 var Tips = [
 	"Use the TAB key to input values faster",
 	"Double click a graph to download it",
@@ -13,7 +12,10 @@ var Tips = [
 
 Tips.random=function()
 {
-	var leng = Tips.length;
-	var rand = Math.floor(Math.random()*leng)
-	return Tips[rand];
+	var leng=Tips.length;
+	if(leng==0){return}
+	var rand=Math.floor(Math.random()*leng);
+	var tip=Tips[rand];
+	Tips.splice(rand,1);
+	return tip;
 }

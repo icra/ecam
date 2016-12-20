@@ -157,6 +157,7 @@
 		<div class=inline style="max-width:60%">
 
 			<table id=vawomu><tr><th>Variables without magnitude/unit
+				<tr><td class=allok>All OK
 				<script>
 					(function(){
 						function listUnitless(obj)
@@ -183,7 +184,6 @@
 						listUnitless(Global.Waste.Discharge);
 					})()
 				</script>
-				<tr><td class=allok>All OK
 			</table>
 
 			<table><tr><th>Info object

@@ -650,7 +650,7 @@
 <div id=main>
 	<!--questions-->
 	<div class="card">
-		<?php cardMenu("<b>Questions</b> &mdash; Answer these first (<a href=questions.php>info</a>)")?> 
+		<?php cardMenu("<b>Questions</b> &mdash; Answer these questions first (<a href=questions.php>info</a>)")?> 
 		<div style=padding:0.5em>
 			<table id=questions class=inline>
 			<tr><td style=color:#ccc>Loading...

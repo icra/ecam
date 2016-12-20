@@ -138,19 +138,19 @@
 						//means this is a constant
 						if(match.substring(0,3)=="ct_")
 						{
-							ret+="<tr><td class=constant title='CONSTANT: "+Cts[match].descr+"'><a href=constants.php>"+match+"</a>:<td>"+Cts[match].value+"<td class=unit>"+Cts[match].unit;
+							ret+="<tr><td class=constant title='CONSTANT: "+Cts[match].descr+"'><a href=constants.php>"+match+"</a><td>"+Cts[match].value+"<td class=unit>"+Cts[match].unit;
 						}
 						else if(Global.Configuration.Selected.FuelType.hasOwnProperty(match))
 						{
 							var fuel = Global.Configuration.Selected.FuelType[match]
 							ret+="<tr><td class=fuel><a href=fuelInfo.php>fuel selected</a>:<td>"+fuel;
-							ret+="<tr><td class=fuel title='Fuel density       '>fuel.FD:             <td>"+Tables["Fuel types"][fuel].FD             +"<td class=unit>kg/L";
-							ret+="<tr><td class=fuel title='Net calorific value'>fuel.NCV:            <td>"+Tables["Fuel types"][fuel].NCV            +"<td class=unit>TJ/Gg";
-							ret+="<tr><td class=fuel title='CO2 emission factor'>fuel.EFCO2:          <td>"+Tables["Fuel types"][fuel].EFCO2          +"<td class=unit>kg<sub>CO<sub>2</sub></sub>/TJ";
-							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.engines:  <td>"+Tables["Fuel types"][fuel].EFCH4.engines  +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
-							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.vehicles: <td>"+Tables["Fuel types"][fuel].EFCH4.vehicles +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
-							ret+="<tr><td class=fuel title='N2O emission factor'>fuel.EFN2O.engines:  <td>"+Tables["Fuel types"][fuel].EFN2O.engines  +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
-							ret+="<tr><td class=fuel title='N2O emission factor'>fuel.EFN2O.vehibles: <td>"+Tables["Fuel types"][fuel].EFN2O.vehicles +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
+							ret+="<tr><td class=fuel title='Fuel density       '>fuel.FD             <td>"+Tables["Fuel types"][fuel].FD             +"<td class=unit>kg/L";
+							ret+="<tr><td class=fuel title='Net calorific value'>fuel.NCV            <td>"+Tables["Fuel types"][fuel].NCV            +"<td class=unit>TJ/Gg";
+							ret+="<tr><td class=fuel title='CO2 emission factor'>fuel.EFCO2          <td>"+Tables["Fuel types"][fuel].EFCO2          +"<td class=unit>kg<sub>CO<sub>2</sub></sub>/TJ";
+							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.engines  <td>"+Tables["Fuel types"][fuel].EFCH4.engines  +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
+							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.vehicles <td>"+Tables["Fuel types"][fuel].EFCH4.vehicles +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
+							ret+="<tr><td class=fuel title='N2O emission factor'>fuel.EFN2O.engines  <td>"+Tables["Fuel types"][fuel].EFN2O.engines  +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
+							ret+="<tr><td class=fuel title='N2O emission factor'>fuel.EFN2O.vehibles <td>"+Tables["Fuel types"][fuel].EFN2O.vehicles +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
 						}
 						else //normal inputs
 						{
@@ -189,7 +189,7 @@
 							ret+="<tr>"+
 								"<td><a style='color:"+color+"' href=variable.php?id="+match+" "+
 								"title='["+match_localization.toString()+"] "+translate(match+"_descr")+"'"+
-								">"+match+"</a>: "+
+								">"+match+"</a> "+
 								"<td title='"+currValue+"' style=cursor:help>"+currValueF+"<td><span class=unit>"+currentUnit+"</span> "+
 								estimated;
 						}
@@ -354,7 +354,7 @@
 					"	<div class=menu onclick=this.parentNode.classList.toggle('folded')>"+
 					"		<button></button> See formula"+
 					"	</div>"+
-					"	<pre class='prettyprint'>"+RefValues[id].toString()+"</pre>"+
+					"	<pre class='prettyprint'>"+RefValues[id].toString().replace(/	/g,'  ')+"</pre>"+
 					"</div>"+
 					"";
 			}

@@ -20,11 +20,10 @@ var Tables =
 		"Submersible":{value:2},
 	},
 	"wsa_pmp_size":{
-		"< 5.6 kW":{value:0},
-		"5.6 - 15.7 kW":{value:1},
-		"15.7 - 38 kW":{value:2},
-		"39 - 96 kW":{value:3},
-		"> 96 kW":{value:4},
+		"5.6 - 15.7 kW":{value:0},
+		"15.7 - 38 kW":{value:1},
+		"39 - 96 kW":{value:2},
+		"> 96 kW":{value:3},
 	},
 
 	//wst
@@ -35,12 +34,6 @@ var Tables =
 		"MF":{value:3},
 		"Ozon":{value:4},
 		"UV":{value:5},
-	},
-	"wst_tst_type":{
-		"None":{value:0},
-		"Aesthetic":{value:1},
-		"Microbiological":{value:2},
-		"Physical-chemical":{value:3},
 	},
 	"wst_treatmen":{
 		"None":{value:0,},

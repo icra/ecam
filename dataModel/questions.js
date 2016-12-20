@@ -46,7 +46,6 @@ var Questions = {
 			"wsa_KPI_un_head_loss",
 			"wsa_KPI_std_nrg_cons",
 			"wsa_KPI_std_elec_eff",
-			"wsa_pmp_powr",
 			"wsa_pmp_type",
 			"wsa_pmp_size",
 		],
@@ -67,18 +66,28 @@ var Questions = {
 			"wst_KPI_GHG_fuel",
 		],
 		advanced:0,
-		otherQuestions:[
-			"wst_pumping_efficiency",
-		],
+		otherQuestions:[],
 	},
 	"wst_pumping_efficiency":{
 		variables:[ 
 			"wst_vol_pump",
 			"wst_pmp_head",
 			"c_wst_vol_head",
+			"wst_KPI_std_nrg_cons",
 		],
 		advanced:1,
 		otherQuestions:[],
+	},
+	"wst_treatment_performance":{
+		variables:[ 
+			"wst_bod_infl",
+			"wst_bod_effl",
+			"wst_nrg_disn",
+			"wst_KPI_nrg_disnfc",
+			"wst_KPI_slu_per_m3",
+		],
+		advanced:1,
+		otherQuestions:[ ],
 	},
 	"wsd_pumping":{
 		variables:[

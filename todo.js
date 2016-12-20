@@ -3,11 +3,7 @@ var TODO=
 {
 	Back:
 	[
-		"What is old code dE5, used in benchmarking",
-		"<b>NOW</b> EXCEL Water Treatment and Distribution",
-		"Recode <a href=benchmark.php>Benchmark</a> data structure",
-		"wsa_std_nrg_cons benchmark: argument should be pointer to object instead of value",
-		"Opportunities in Abstraction",
+		"<b>NOW</b> EXCEL Water Distribution",
 		"Calculated variables. <a href=summary.php?type=ccvv>List</a>",
 		"No manual, do FAQ instead: a page which is a JSON file reader with a structure {Question:Answer,Question:Answer}",
 	],
