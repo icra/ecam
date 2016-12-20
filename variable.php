@@ -41,6 +41,7 @@
 		{
 			updateInfoTable();
 			Exceptions.apply();
+			Caption.listeners();
 			updateResult();
 			PR.prettyPrint();
 		}
@@ -138,19 +139,19 @@
 						//means this is a constant
 						if(match.substring(0,3)=="ct_")
 						{
-							ret+="<tr><td class=constant title='CONSTANT: "+Cts[match].descr+"'><a href=constants.php>"+match+"</a><td>"+Cts[match].value+"<td class=unit>"+Cts[match].unit;
+							ret+="<tr><td class=constant caption='CONSTANT: "+Cts[match].descr+"'><a href=constants.php>"+match+"</a><td>"+Cts[match].value+"<td class=unit>"+Cts[match].unit;
 						}
 						else if(Global.Configuration.Selected.FuelType.hasOwnProperty(match))
 						{
 							var fuel = Global.Configuration.Selected.FuelType[match]
 							ret+="<tr><td class=fuel><a href=fuelInfo.php>fuel selected</a>:<td>"+fuel;
-							ret+="<tr><td class=fuel title='Fuel density       '>fuel.FD             <td>"+Tables["Fuel types"][fuel].FD             +"<td class=unit>kg/L";
-							ret+="<tr><td class=fuel title='Net calorific value'>fuel.NCV            <td>"+Tables["Fuel types"][fuel].NCV            +"<td class=unit>TJ/Gg";
-							ret+="<tr><td class=fuel title='CO2 emission factor'>fuel.EFCO2          <td>"+Tables["Fuel types"][fuel].EFCO2          +"<td class=unit>kg<sub>CO<sub>2</sub></sub>/TJ";
-							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.engines  <td>"+Tables["Fuel types"][fuel].EFCH4.engines  +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
-							ret+="<tr><td class=fuel title='CH4 emission factor'>fuel.EFCH4.vehicles <td>"+Tables["Fuel types"][fuel].EFCH4.vehicles +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
-							ret+="<tr><td class=fuel title='N2O emission factor'>fuel.EFN2O.engines  <td>"+Tables["Fuel types"][fuel].EFN2O.engines  +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
-							ret+="<tr><td class=fuel title='N2O emission factor'>fuel.EFN2O.vehibles <td>"+Tables["Fuel types"][fuel].EFN2O.vehicles +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
+							ret+="<tr><td class=fuel caption='Fuel density       '>fuel.FD             <td>"+Tables["Fuel types"][fuel].FD             +"<td class=unit>kg/L";
+							ret+="<tr><td class=fuel caption='Net calorific value'>fuel.NCV            <td>"+Tables["Fuel types"][fuel].NCV            +"<td class=unit>TJ/Gg";
+							ret+="<tr><td class=fuel caption='CO2 emission factor'>fuel.EFCO2          <td>"+Tables["Fuel types"][fuel].EFCO2          +"<td class=unit>kg<sub>CO<sub>2</sub></sub>/TJ";
+							ret+="<tr><td class=fuel caption='CH4 emission factor'>fuel.EFCH4.engines  <td>"+Tables["Fuel types"][fuel].EFCH4.engines  +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
+							ret+="<tr><td class=fuel caption='CH4 emission factor'>fuel.EFCH4.vehicles <td>"+Tables["Fuel types"][fuel].EFCH4.vehicles +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
+							ret+="<tr><td class=fuel caption='N2O emission factor'>fuel.EFN2O.engines  <td>"+Tables["Fuel types"][fuel].EFN2O.engines  +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
+							ret+="<tr><td class=fuel caption='N2O emission factor'>fuel.EFN2O.vehibles <td>"+Tables["Fuel types"][fuel].EFN2O.vehicles +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
 						}
 						else //normal inputs
 						{
@@ -184,13 +185,13 @@
 								
 							}
 
-							var estimated = Global.Configuration.DataQuality[match]=="Estimated" ? "<span class=estimated title='<?php write('#variable_estimated')?>'>&#9888;</span>" : "";
+							var estimated = Global.Configuration.DataQuality[match]=="Estimated" ? "<span class=estimated caption='<?php write('#variable_estimated')?>'>&#9888;</span>" : "";
 
 							ret+="<tr>"+
 								"<td><a style='color:"+color+"' href=variable.php?id="+match+" "+
-								"title='["+match_localization.toString()+"] "+translate(match+"_descr")+"'"+
+								"caption='["+match_localization.toString()+"] "+translate(match+"_descr")+"'"+
 								">"+match+"</a> "+
-								"<td title='"+currValue+"' style=cursor:help>"+currValueF+"<td><span class=unit>"+currentUnit+"</span> "+
+								"<td caption='"+currValue+"' style=cursor:help>"+currValueF+"<td><span class=unit>"+currentUnit+"</span> "+
 								estimated;
 						}
 					});
@@ -212,7 +213,7 @@
 					var unit=Info[id].magnitude=="Currency"?Global.General.Currency : Info[id].unit;
 					var currValue=currentStage[id]()/Units.multiplier(id);
 					currValueF=format(currValue);
-					newCell.title=currValue;
+					newCell.setAttribute('caption',currValue);
 					newCell.style.cursor='help';
 					return currValueF+" &emsp;<span class=unit>"+unit+"</span>";
 				})();
@@ -330,12 +331,12 @@
 
 					var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
 
-					var estimated = DQ.hasEstimatedData(output) ? "<span class=estimated title='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span> " : "";
+					var estimated = DQ.hasEstimatedData(output) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span> " : "";
 
 					ret+="<tr>"+
-						" <td><a style='color:"+color+"' title='["+match_localization.toString()+"] "+translate(output+"_descr")+"'"+
+						" <td><a style='color:"+color+"' caption='["+match_localization.toString()+"] "+translate(output+"_descr")+"'"+
 						" href=variable.php?id="+output+">"+output+"</a>:"+
-						"<td title='"+pretf+"' style=cursor:help>"+
+						"<td caption='"+pretf+"' style=cursor:help>"+
 						currValueF+"<td> <span class=unit>"+currentUnit+"</span> "+estimated;
 				});
 				ret+="</table>";
@@ -402,7 +403,8 @@
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--linear diagram--><?php include'linear.php'?>
+<!--linear--><?php include'linear.php'?>
+<!--caption--><?php include'caption.php'?>
 
 <script>
 	if(!Info[id])
