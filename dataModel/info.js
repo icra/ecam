@@ -127,7 +127,6 @@ var Info = {
 	"wst_trea_vol":{magnitude:"Volume",unit:"m3",},	
 	"wst_bod_infl":{magnitude:"BOD",unit:"ntu",},
 	"wst_bod_effl":{magnitude:"BOD",unit:"ntu",},
-	"wst_vol_disn":{magnitude:"Volume",unit:"m3",},
 	"wst_nrg_disn":{magnitude:"Energy",unit:"kWh",},
 	"wst_vol_pump":{magnitude:"Volume",unit:"m3",},
 	"wst_pmp_head":{magnitude:"Head",unit:"m",},

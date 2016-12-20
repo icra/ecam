@@ -23,7 +23,6 @@ Level3.list=
 		"wst_treatmen",
 		"wst_bod_infl",
 		"wst_bod_effl",
-		"wst_vol_disn",
 		"wst_nrg_disn",
 		"wst_vol_pump",
 		"wst_pmp_head",
