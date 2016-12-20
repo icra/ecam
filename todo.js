@@ -3,18 +3,20 @@ var TODO=
 {
 	Back:
 	[
+		"What is old code dE5, used in benchmarking",
 		"<b>NOW</b> EXCEL Water Treatment and Distribution",
 		"Recode <a href=benchmark.php>Benchmark</a> data structure",
 		"wsa_std_nrg_cons benchmark: argument should be pointer to object instead of value",
 		"Opportunities in Abstraction",
 		"Calculated variables. <a href=summary.php?type=ccvv>List</a>",
+		"No manual, do FAQ instead: a page which is a JSON file reader with a structure {Question:Answer,Question:Answer}",
 	],
 	Front:
 	[
 		"Filter at the beginning, asking if there are fuel engines at any point, to hide all fuel related filters, inputs and outputs (Andrés)",
 		"Fix question in Global",
 		"Graphs: add benchmark circles (difficult). Idea color graphs with green/orange/red ",
-		"Help resources: json file and manual to download",
+		"Help resources: json file to download",
 		"Translate new features",
 	],
 };

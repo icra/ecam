@@ -2,7 +2,7 @@
 	if(!isset($_GET['level'])){die("ERROR: stage not specified");}
 	/**
 	  * Inputs:
-	  *  - $level: 	   mandatory {"Water","Waste"}
+	  *  - $level: 	   mandatory {"Water","Waste","Energy"}
 	  *  - $sublevel:  optional. If set, enables level 3 {"Abstraction","Treatment","Distribution",[...]}
 	  */
 	$level=$_GET['level'];
@@ -34,13 +34,13 @@
 			btn.classList.toggle('active');
 			if(div1.style.display=='none') 
 			{
-				div2.style.display='none';
 				div1.style.display='';
+				div2.style.display='none';
 			}
 			else
 			{
-				div2.style.display='';
 				div1.style.display='none';
+				div2.style.display='';
 			}
 			init();
 		}
@@ -92,20 +92,12 @@
 			line-height:1em;
 		}
 		td.input input {width:95%;border:none;text-align:right;margin:0;padding:0 0.2em;height:24px}
-
 		tr:not([hl=yes]) td.input {background-color:#eee;}
 		tr:not([hl=yes]) td.CV {background-color:white}
 
-		table#substages {
-			margin:0.2em 0 0.2em 0.2em;
-		}
+		table#substages { margin:0.2em 0 0.2em 0.2em; }
 		table#substages tr[field]:hover  {background:#ccc;}
 		table#substages tr:first-child td {border-top:none;border-left:none}
-
-		/*temporal: hide data quality column
-		table#inputs tr td:nth-child(n+4) {background:red;display:none}
-        table#inputs tr th:nth-child(n+4) {background:red;display:none}
-        */
 
 		table#outputs tr:hover {background:#ccc;}
 		table#outputs th:not(.tableHeader) {background:#c9ab98}
@@ -115,7 +107,6 @@
 		table#nrgOutputs th:not(.tableHeader) {background:#c9ab98}
 		table#nrgOutputs th:nth-child(2) {text-align:right}
 		table#nrgOutputs td:nth-child(2) {text-align:right}
-
 		table#nrgOutputs table#inputs table#outputs {
 			
 		}
@@ -155,7 +146,7 @@
 	</style>
 	<script>
 		<?php
-			//establish the stage we are going to be focused
+			//establish the stage pointers we are going to be focused
 			if($sublevel)
 			{
 				echo "
@@ -169,35 +160,24 @@
 				echo "var substages = false;";
 			}
 		?>
-
-		//remove a variable from the data structure which is no longer inside
-		function removeGhost(field)
-		{
-			CurrentLevel[field]=undefined;
-			init();
-		}
-
 		/** Redisplay table id=outputs (level2)*/
 		function updateOutputs()
 		{
 			var t=document.getElementById('outputs');
-			while(t.rows.length>2){t.deleteRow(-1);}
+			while(t.rows.length>2){t.deleteRow(-1)}
 			for(var field in CurrentLevel)
 			{
 				if(typeof(CurrentLevel[field])!="function") continue;
 				if(field.search(/^c_/)>=0) continue;
 				if(field.search("_KPI_GHG")==-1) continue;
 
-				//exceptions. use "dataModel/level3variables.js" for this purpose
-				//if(field=="ww_KPI_GHG_ne_unt")continue;
-				//if(field=="ww_KPI_GHG_ne_tre")continue;
-
 				/*check if field is level3 specific*/
 				if(Level3.list.indexOf(field)+1) continue;
 
-				//Apply question filters
+				//apply filters
 				if(Questions.isHidden(field)) continue;
 
+				//new row
 				var newCell,newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
 
@@ -208,27 +188,24 @@
 				newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
 
 				//compute the ABSOLUTE value, not normalized
-				var value = CurrentLevel[field]()/Units.multiplier(field)
+				var value=CurrentLevel[field]()/Units.multiplier(field);
 
 				/*description and code*/ 
 				newCell=newRow.insertCell(-1);
-				newCell.setAttribute('title',(function()
-				{
-					return translate(field+"_expla");
-				})());
+				newCell.setAttribute('title',translate(field+"_expla"));
 				newCell.innerHTML=(function()
 				{
-					var description = translate(field+"_descr");
-					var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
+					var description=translate(field+"_descr");
+					var code="<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";
 				})();
 
 				/*value*/ 
-				newCell=newRow.insertCell(-1)
+				newCell=newRow.insertCell(-1);
 				newCell.innerHTML=(function()
 				{
-					//has estimated data warning
-					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
+					//"has estimated data" warning
+					var ed=DQ.hasEstimatedData(field) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
 					// level 2 warnings
 					var l2w = Level2Warnings.hasOwnProperty(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
 					return format(value)+" "+ed+" "+l2w;
@@ -262,34 +239,11 @@
 						newCell.setAttribute('onmouseout',"Formulas.hlField('"+hlfield+"',0)")
 
 						//the formula shoud change adding "/hlfield"
-						newCell.title="("+newCell.parentNode.title+")/"+hlfield;
+						newCell.setAttribute('title',"("+newCell.parentNode.title+")/"+hlfield);
 
 						newCell.innerHTML=(function()
 						{
-							//special cases: corinne request
-							if(category!='reside' && field.search('_unt')>=0) 
-							{
-								newCell.title="NA";
-								return "<span style=color:#ccc>NA</span>";
-							}
-							if(field=="ww_KPI_GHG")
-							{
-								//we have to subtract the untreated from the total
-								var minus_untreated = Global.Waste.ww_KPI_GHG() - Global.Waste.ww_KPI_GHG_ne_ch4_unt() - Global.Waste. ww_KPI_GHG_ne_n2o_unt();
-								newCell.title="custom formula";
-
-								if(category=='servic')
-								{
-									return format(minus_untreated/Global.General.Years()/Global.Waste.ww_serv_pop);
-								}
-								if(category=="volume")
-								{
-									return format(minus_untreated/Global.Waste.ww_vol_wwtr);
-								}
-							}
-
 							var norm=Normalization.normalize(category,field,level,sublevel);
-
 							//the fields per inhab and per serv.pop are also per year
 							if(category=="reside" || category=="servic")
 							{
@@ -402,7 +356,7 @@
 				newCell.innerHTML=(function()
 				{
 					//has estimated data warning
-					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
+					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
 					// level 2 warnings
 					var l2w = Level2Warnings.hasOwnProperty(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
 					return format(value)+" "+ed+" "+l2w;
@@ -472,13 +426,10 @@
 				newCell=newRow.insertCell(-1)
 				newCell.innerHTML=(function()
 				{
-
 					//has estimated data warning
-					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated title='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
-
+					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
 					// level 2 warnings
 					var l2w = Level2Warnings.hasOwnProperty(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
-
 					return format(value)+" "+ed+" "+l2w;
 				})();
 
@@ -594,9 +545,10 @@
 			catch(e){console.log(e)}
 			Caption.listeners();
 			updateResult();
-			//fake click in "View all" checkbox (cb)
+
+			//fake a click in "View all" checkbox (cb)
 			var cb=document.querySelector('#viewAll');
-			if(cb)cb.checked=true;
+			if(cb){cb.checked=true}
 		}
 	</script>
 </head><body onload=init()><center>
@@ -657,8 +609,8 @@
 				border:1px solid #bbb;
 				font-size:14px;
 				font-family:Courier;
-				padding:0.1em 0.5em;
-				border-radius:0.5em;
+				padding:0.2em 0.5em;
+				border-radius:0.3em;
 				color:black;
 				background:#eee;
 			}
@@ -700,7 +652,9 @@
 	<div class="card">
 		<?php cardMenu("<b>Questions</b> &mdash; Answer these first (<a href=questions.php>info</a>)")?> 
 		<div style=padding:0.5em>
-			<table id=questions class=inline></table>
+			<table id=questions class=inline>
+			<tr><td style=color:#ccc>Loading...
+			</table>
 			<script>
 				function updateQuestionsTable(id_table,adv)
 				{
@@ -766,8 +720,8 @@
 					}
 
 					//hide whole table if no questions
-					t.parentNode.style.display="";
-					if(t.rows.length==0){t.parentNode.style.display="none";}
+					t.parentNode.parentNode.style.display="";
+					if(t.rows.length==0){t.parentNode.parentNode.style.display="none";}
 				}
 
 				//highlight fields linked to the question
@@ -854,7 +808,7 @@
 				(function(){
 					var c = Global.General.conv_kwh_co2;
 					var str = c==0 ? 
-						"<b class=number style=background:red title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</b>" 
+						"<b class=number style=background:red caption='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</b>" 
 							: 
 						"<b class=number>"+format(c)+"</b>"; 
 					document.write(str+"</b>")
@@ -899,18 +853,17 @@
 						<th>kg CO<sub>2</sub><br>per <?php write('#year')?><br>per inhab
 						<th>kg CO<sub>2</sub><br>per <?php write('#year')?><br>per serv.pop
 						<th>kg CO<sub>2</sub><br>per m<sup>3</sup>
+					<tr><td style=color:#ccc colspan=6>Loading...
 				</table>
 
 				<!--level2 outputs: NRG and SL-->
 				<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
 					<tr><th colspan=4 class=tableHeader>OUTPUTS &mdash; Energy performance &amp; Service Level indicators
 					<tr>
-						<!--
-						<th title=Performance style=cursor:help><?php write('#edit_benchmark')?>
-						-->
 						<th><?php write('#edit_description')?>
 						<th><?php write('#edit_current_value')?>
 						<th><?php write('#edit_unit')?>
+					<tr><td style=color:#ccc colspan=3>Loading...
 				</table>
 			</div>
 
@@ -1047,7 +1000,7 @@
 							newCell.classList.add('variableCode');
 							newCell.innerHTML=(function()
 							{
-								var adv=Level3.list.indexOf(code)+1 ? "<span class=advanced title='Advanced'>adv</span>" : "" ;
+								var adv=Level3.list.indexOf(code)+1 ? "<span class=advanced caption='Advanced'>adv</span>" : "" ;
 								return "<a href=variable.php?id="+code+">"+code+"</a> "+adv;
 							})();
 
@@ -1068,7 +1021,7 @@
 								if(isCV)
 								{
 									newCell.innerHTML=format(substages[s][code]()/multiplier);
-									newCell.title=prettyFormula;
+									newCell.setAttribute('title',prettyFormula);
 									newCell.classList.add("CV");
 								}
 								else
@@ -1151,7 +1104,7 @@
 							newCell.classList.add('variableCode');
 							newCell.innerHTML=(function()
 							{
-								var adv="<span class=advanced title='Advanced'>adv</span>";
+								var adv="<span class=advanced caption='Advanced'>adv</span>";
 								return "<a href=variable.php?id="+code+">"+code+"</a>"+adv;
 							})();
 
@@ -1201,7 +1154,7 @@
 							newCell=newRow.insertCell(-1);
 							newCell.style.textAlign='center';
 							var str=""+
-								"<button class=button onclick=level3.deleteSubstage("+s+") title='<?php write('#level3_delete_substage')?>' style='margin:0;'>&#9003;</button>"
+								"<button class=button onclick=level3.deleteSubstage("+s+") caption='<?php write('#level3_delete_substage')?>' style='margin:0;'>&#9003;</button>"
 							newCell.innerHTML=str
 						}
 					/*end update body*/
@@ -1383,7 +1336,7 @@
 						&mdash; 
 						Create substages here
 						&mdash; 
-						Stages <b><span id=counter class=number>0</span></b>
+						Substages <b><span id=counter class=number>0</span></b>
 				")?>
 				<div style=padding:0.5em>
 					<table id=substages> 
@@ -1521,9 +1474,9 @@
 									//1st cell: show code identifier
 									newRow.insertCell(-1).innerHTML=(function()
 									{
-										var adv=Level3.list.indexOf(field)+1 ? "<span class=advanced title='Advanced'>adv</span>":"";
-										var ghg=isGHG                        ? "<span class='advanced ghg' title='GHG'>GHG</span>":"";
-										var nrg=field.search('_nrg_')+1      ? "<span class='advanced nrg' title='Energy performance'>NRG</span>":""; 
+										var adv=Level3.list.indexOf(field)+1 ? "<span class='advanced'     caption='Advanced'>adv</span>":"";
+										var ghg=isGHG                        ? "<span class='advanced ghg' caption='GHG'>GHG</span>":"";
+										var nrg=field.search('_nrg_')+1      ? "<span class='advanced nrg' caption='Energy performance'>NRG</span>":""; 
 										return "<a href=variable.php?id="+field+">"+field+"</a>"+ghg+adv+nrg;
 									})();
 
@@ -1540,7 +1493,7 @@
 										//new cell
 										var newCell=newRow.insertCell(-1);
 										//title for mouseover show formula
-										newCell.title=prettyFormula;
+										newCell.setAttribute('title',prettyFormula);
 										//value
 										newCell.innerHTML=(function()
 										{
@@ -1561,7 +1514,7 @@
 													case "Out of range":   color="brown";break;
 													default:               color="#ccc";break;
 												}
-												return "<span title='Benchmarking: "+text+"' class=circle style='background:"+color+"'></span>";
+												return "<span caption='Benchmarking: "+text+"' class=circle style='background:"+color+"'></span>";
 											})();
 											return format(value)+" "+indicator;
 										})();
@@ -1569,7 +1522,7 @@
 
 									//level 2 value
 									var newCell=newRow.insertCell(-1);
-									newCell.title=prettyFormula;
+									newCell.setAttribute('title',prettyFormula);
 									newCell.style.fontWeight="bold"
 									newCell.innerHTML=format(CurrentLevel[field]()/Units.multiplier(field));
 

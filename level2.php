@@ -284,6 +284,7 @@
 		<th><?php write('#edit_description')?>
 		<th>Current value
 		<th><?php write('#edit_unit')?>
+	<tr><td colspan=4 style=color:#ccc><i>Loading...</i>
 </table>
 
 <style>
