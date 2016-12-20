@@ -85,11 +85,6 @@
 		<img class=l1 stage=opps src=img/opps.png caption="Opportunities to reduce GHG emissions">
 	</div>
 
-	<div>
-		<div style=float:right;vertical-align:middle;height:100%>
-			<a href=problems.php>Debugging utility</a>
-		</div>
-	</div>
 </div>
 
 <script>

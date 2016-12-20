@@ -144,7 +144,7 @@
 				if(typeof(substages)=="object" && substages.length > 1)
 				{
 					//this means you are in level 2 and you should NOT be able to modify inputs here
-					newCell.title="This value is the sum of all substages. Click here to scroll to substages";
+					newCell.setAttribute('caption',"This value is the sum of all substages. Click here to scroll to substages");
 					newCell.classList.add('non-editable');
 					newCell.onclick=function()
 					{

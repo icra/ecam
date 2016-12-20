@@ -32,7 +32,12 @@
 
 	<a href=index.php>
 		<span style=font-size:30px;margin-right:35px;font-weight:bold>ECAM</span>
-		<?php write('#navbar_title')?></a>
+		<?php write('#navbar_title')?>
+	</a>
+
+	<span style=position:absolute;font-size:14px;right:10%;top:18px>
+		<a href=problems.php>Debugging utility</a>
+	</span>
 
 	<!--language selection--><?php include'language.php'?>
 </div>

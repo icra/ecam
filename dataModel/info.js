@@ -165,6 +165,7 @@ var Info = {
 	wsd_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>",},
 	wsd_SL_pres_ade :{magnitude:"Percentage",unit:"%",},
 	wsd_SL_cont_sup :{magnitude:"Percentage",unit:"%",},
+
 	c_wsd_nrg_natu:{magnitude:"Energy",unit:"kWh",},
 	c_wsd_nrg_mini:{magnitude:"Energy",unit:"kWh",},
 	c_wsd_nrg_supp:{magnitude:"Energy",unit:"kWh",},
@@ -175,6 +176,10 @@ var Info = {
 	wsd_KPI_nrg_topgraph:{magnitude:"Percent",unit:"%",},
 	wsd_KPI_water_losses:{magnitude:"Volume/Distance",unit:"m<sup>3</sup>/km",},
 	wsd_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km",},
+	"wsd_pmp_size":{magnitude:"Option",unit:"Pump size"},
+	"wsd_sta_head":{magnitude:"Head",unit:"m"},
+	wsd_KPI_non_revw:{magnitude:"Percentage",unit:"%"},
+
 	wsd_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wsd_KPI_GHG_ne_fuel:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wsd_KPI_GHG_ne_trck:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},

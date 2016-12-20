@@ -53,7 +53,6 @@ Graphs.graph1=function(withTable,container)
 	//empty the container element
 	var con = document.getElementById(container)
 	con.innerHTML='';
-	con.title="Double click here to download this chart as an image"
 
 	//double click
 	con.ondblclick=function(){
@@ -170,7 +169,6 @@ Graphs.graph4=function(withTable,container)
 	//empty the container
 	var con = document.getElementById(container);
 	con.innerHTML='';
-	con.title="Double click here to download this chart as an image"
 
 	//double click
 	con.ondblclick=function(){
@@ -251,7 +249,6 @@ Graphs.graph2=function(withTable,container)
 	//empty the container element
 	var con=document.getElementById(container);
 	con.innerHTML='';
-	con.title="Double click here to download this chart as an image"
 
 	//double click
 	con.ondblclick=function(){
@@ -1068,7 +1065,6 @@ Graphs.ws_cost=function(container)
 	}
 	//empty container and draw
 	var con=document.getElementById(container)
-	con.title="Double click here to download this chart as an image"
 	con.innerHTML='';
 	var chart=new google.visualization.PieChart(con);
 	chart.draw(data,options);
@@ -1116,7 +1112,6 @@ Graphs.ww_cost=function(container)
 	}
 	//empty container and draw
 	var con=document.getElementById(container)
-	con.title="Double click here to download this chart as an image"
 	con.innerHTML='';
 	var chart=new google.visualization.PieChart(con);
 	chart.draw(data,options);

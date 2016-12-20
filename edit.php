@@ -137,6 +137,7 @@
 			background:#00aff1;
 			position:absolute;
 			box-shadow: 5px 5px 5px #888;
+			z-index:1000;
 		}
 		input.substageMenu{
 			padding:0.5em;
@@ -603,37 +604,43 @@
 	?>
 
 	<!--btn fold all div.cards-->
-	<div id=btn_all_container class=inline style="position:absolute;right:40%">
-		<style>
-			#btn_all_container a {
-				border:1px solid #bbb;
-				font-size:14px;
-				font-family:Courier;
-				padding:0.2em 0.5em;
-				border-radius:0.3em;
-				color:black;
-				background:#eee;
-			}
-		</style>
-		<a id=btn_all_fold href=# style="margin-right:0.1em;" 
-			onclick="
-				var divs=document.querySelectorAll('div.card');
-				for(var i=0;i<divs.length;i++){divs[i].classList.add('folded')}
-				document.querySelector('#btn_all_expand').style.display=''
-				document.querySelector('#btn_all_fold').style.display='none'
-			"
-			>[-] Fold all sections
-		</a>
-		<a id=btn_all_expand href=# style="display:none;" 
-			onclick="
-				var divs=document.querySelectorAll('div.card');
-				for(var i=0;i<divs.length;i++){divs[i].classList.remove('folded')}
-				document.querySelector('#btn_all_expand').style.display='none'
-				document.querySelector('#btn_all_fold').style.display=''
-			"
-			>[+] Expand all sections
-		</a>
-	</div>
+	<?php if($sublevel)
+	{
+		?>
+		<div id=btn_all_container class=inline style="position:absolute;right:40%">
+			<style>
+				#btn_all_container a {
+					border:1px solid #bbb;
+					font-size:14px;
+					font-family:Courier;
+					padding:0.2em 0.5em;
+					border-radius:0.3em;
+					color:black;
+					background:#eee;
+				}
+			</style>
+			<a id=btn_all_fold href=# style="margin-right:0.1em;" 
+				onclick="
+					var divs=document.querySelectorAll('div.card');
+					for(var i=0;i<divs.length;i++){divs[i].classList.add('folded')}
+					document.querySelector('#btn_all_expand').style.display=''
+					document.querySelector('#btn_all_fold').style.display='none'
+				"
+				>[-] Fold all sections
+			</a>
+			<a id=btn_all_expand href=# style="display:none;" 
+				onclick="
+					var divs=document.querySelectorAll('div.card');
+					for(var i=0;i<divs.length;i++){divs[i].classList.remove('folded')}
+					document.querySelector('#btn_all_expand').style.display='none'
+					document.querySelector('#btn_all_fold').style.display=''
+				"
+				>[+] Expand all sections
+			</a>
+		</div>
+		<?php
+	}
+	?>
 
 	<!--Tips-->
 	<span style="font-size:12px;color:#666;float:right">
@@ -784,7 +791,7 @@
 							{
 								?>
 								<tr question=wsd_engines><td><?php write('#configuration_engines')?>
-								<tr question=wsd_trucks><td><?php write('#configuration_vehicles')?>
+								<tr question=wsd_trucks><td>Trucks
 								<?php 
 							}
 						?>
@@ -915,7 +922,7 @@
 								"<?php write('#substage')?> "+(parseInt(s)+1)+" "+
 								"<div style=font-weight:bold>"+substages[s].name+"</div>";
 							newTH.setAttribute('onclick','level3.showSubstageMenu('+s+',event)');
-							newTH.title="<?php write('#level3_click_to_modify_the_name')?>";
+							newTH.setAttribute('caption',"<?php write('#level3_click_to_modify_the_name')?>");
 							t.rows[0].appendChild(newTH);
 						}
 						//TOTAL header only if substages.length==1
@@ -1361,7 +1368,7 @@
 							</label>
 							<!--new substage button-->
 							<button onclick=level3.newSubstage() class="button add" style="padding:auto;background:lightgreen;box-shadow: 0 1px 2px rgba(0,0,0,.1);">
-								Add stage
+								Add substage
 							</button>
 					</table>
 					<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')">Ok, next</button>
@@ -1374,8 +1381,6 @@
 				<div class=menu onclick=this.parentNode.classList.toggle('folded')>
 					<button></button>
 					<b>Outputs per substage</b>
-					&emsp;
-					<label onclick="event.stopPropagation();init()" ><input type=checkbox id=showGHGss> Show GHG</label>
 					<!--button toggle outputs/graph display-->
 					<button 
 						class=btn_toggle 
@@ -1385,6 +1390,12 @@
 				</div>
 
 				<div style=padding:0.5em>
+
+					<!--show ghgs checkbox-->
+					<div style=margin-bottom:0.5em>
+						<label onclick="event.stopPropagation();init()"><input type=checkbox id=showGHGss> Show GHG</label>
+					</div>
+
 					<!--Substage outputs-->
 					<div id=substageOutputs_container>
 						<table id=substageOutputs style="width:95%;background:#f6f6f6"></table>
@@ -1465,7 +1476,6 @@
 									//new row
 									var newRow=t.insertRow(-1);
 									newRow.setAttribute('field',field);
-									newRow.setAttribute('title',translate(field+'_expla'));
 
 									//set highlighting 
 									newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
@@ -1477,7 +1487,7 @@
 										var adv=Level3.list.indexOf(field)+1 ? "<span class='advanced'     caption='Advanced'>adv</span>":"";
 										var ghg=isGHG                        ? "<span class='advanced ghg' caption='GHG'>GHG</span>":"";
 										var nrg=field.search('_nrg_')+1      ? "<span class='advanced nrg' caption='Energy performance'>NRG</span>":""; 
-										return "<a href=variable.php?id="+field+">"+field+"</a>"+ghg+adv+nrg;
+										return "<a caption='"+translate(field+'_expla')+"' href=variable.php?id="+field+">"+field+"</a>"+ghg+adv+nrg;
 									})();
 
 									//2nd cell: description
@@ -1493,7 +1503,7 @@
 										//new cell
 										var newCell=newRow.insertCell(-1);
 										//title for mouseover show formula
-										newCell.setAttribute('title',prettyFormula);
+										//newCell.setAttribute('title',prettyFormula);
 										//value
 										newCell.innerHTML=(function()
 										{
@@ -1516,14 +1526,15 @@
 												}
 												return "<span caption='Benchmarking: "+text+"' class=circle style='background:"+color+"'></span>";
 											})();
-											return format(value)+" "+indicator;
+											return "<span style='display:inline-block;width:75%' caption='"+prettyFormula+"'>"+format(value)+"</span> "+indicator;
 										})();
 									}
 
 									//level 2 value
 									var newCell=newRow.insertCell(-1);
 									newCell.setAttribute('title',prettyFormula);
-									newCell.style.fontWeight="bold"
+									newCell.style.fontWeight="bold";
+									newCell.style.background="white";
 									newCell.innerHTML=format(CurrentLevel[field]()/Units.multiplier(field));
 
 									//unit

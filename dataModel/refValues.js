@@ -151,10 +151,43 @@ var RefValues =
 		{
 			//dE3: Good: 0.2725 ≤ dE3 ≤ 0.40 , Acceptable: 0.40 < dE3 ≤ 0.54, Unsatisfactory: dE3 > 0.54,
 			var value=obj.wsd_KPI_std_nrg_cons();
-			if      (0.2725 <= value && value <= 0.40) { return "Good" }
-			else if (0.40   <  value && value <= 0.54) { return "Acceptable" }
-			else if (value  >  0.54)                   { return "Unsatisfactory" }
-			else                                       { return "Out of range" }
+
+			//find pump size for current object
+			var pmp_size; //will be a string
+			for(var op in Tables.wsd_pmp_size)
+			{
+				if(obj.wsd_pmp_size==Tables.wsd_pmp_size[op].value)
+				{
+					pmp_size=op;
+				}
+			}
+
+			//different values depending on pump size
+			if(pmp_size=="5.6 - 15.7 kW")
+			{
+				if      (value  >= 0.5302)                    return "Unsatisfactory";
+				else if (0.5302 >  value && value > 0.3322)   return "Acceptable";
+				else if (value  <= 0.3322)                    return "Good";
+			}
+			else if(pmp_size=="15.7 - 38 kW")
+			{
+				if      (value  >= 0.4923)                    return "Unsatisfactory";
+				else if (0.4923 >  value && value > 0.3169)   return "Acceptable";
+				else if (value  <= 0.3169)                    return "Good";
+			}
+			else if(pmp_size=="39 - 96 kW")
+			{
+				if      (value  >= 0.4595)                    return "Unsatisfactory";
+				else if (0.4595 >  value && value > 0.3080)   return "Acceptable";
+				else if (value  <= 0.3080)                    return "Good";
+			}
+			else if(pmp_size=="> 96 kW")
+			{
+				if      (value  >= 0.4308)                    return "Unsatisfactory";
+				else if (0.4308 >  value && value > 0.3080)   return "Acceptable";
+				else if (value  <= 0.3080)                    return "Good";
+			}
+			else return "Out of range";
 		},
 
 		wsd_KPI_water_losses:function(obj)
@@ -170,6 +203,15 @@ var RefValues =
 		wsd_KPI_un_head_loss:function(obj)
 		{
 			//dE7: Good: dE7 ≤ 2, Acceptable: 2 < dE7 ≤ 4, Unsatisfactory: dE7 > 4,
+			var value=obj.wsd_KPI_un_head_loss();
+			if      (value <= 2)                  { return "Good" }
+			else if (2     < value && value <= 4) { return "Acceptable" }
+			else if (value > 4)                   { return "Unsatisfactory" }
+			else                                  { return "Out of range" }
+		},
+
+		wsd_KPI_un_head_loss:function(obj)
+		{
 			var value=obj.wsd_KPI_un_head_loss();
 			if      (value <= 2)                  { return "Good" }
 			else if (2     < value && value <= 4) { return "Acceptable" }

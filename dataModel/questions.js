@@ -89,6 +89,8 @@ var Questions = {
 		advanced:1,
 		otherQuestions:[ ],
 	},
+
+	//wsd
 	"wsd_pumping":{
 		variables:[
 			"wsd_nrg_cons",
@@ -97,9 +99,12 @@ var Questions = {
 			"wsd_KPI_std_nrg_cons",
 			"wsd_pmp_head",
 			"c_wsd_vol_head",
+			"wsd_KPI_GHG_elec",
 		],
 		advanced:0,
-		otherQuestions:[],
+		otherQuestions:[
+			"wsd_pumping_efficiency",
+		],
 	},
 	"wsd_engines":{
 		variables:[
@@ -117,19 +122,41 @@ var Questions = {
 		advanced:0,
 		otherQuestions:[],
 	},
+	"wsd_pumping_efficiency":{
+		variables:[ 
+			"wsd_vol_pump",
+			"wsd_pmp_head",
+			"c_wsd_vol_head",
+			"wsd_KPI_std_nrg_cons",
+			"wsd_pmp_size",
+			"wsd_main_len",
+			"wsd_fri_loss",
+			"wsd_KPI_water_losses",
+			"wsd_KPI_un_head_loss",	
+			"wsd_sta_head",
+		],
+		advanced:1,
+		otherQuestions:[],
+	},
 	"wsd_topographic":{
 		variables:[
+			"wsd_min_pres",
 			"wsd_hi_no_el",
 			"wsd_lo_no_el",
 			"wsd_av_no_el",
 			"wsd_wt_el_no",
 			"c_wsd_nrg_topo",
 			"c_wsd_nrg_natu",
+			"c_wsd_nrg_mini",
+			"c_wsd_nrg_supp",
 			"wsd_KPI_nrg_topgraph",
+			"wsd_KPI_nrg_efficien",
 		],
-		advanced:0,
+		advanced:1,
 		otherQuestions:[],
 	},
+
+	//other workinprogress
 	"truck_transport_waste":{
 		variables:[
 			"ww_dist_dis",

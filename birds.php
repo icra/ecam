@@ -219,7 +219,7 @@
 <h1><?php write('#quick_assessment')?> 
 	<span style="font-size:13px;color:#666;float:right">
 		<span><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a> 
-		<script>document.write(Global.General.Days())</script><?php write('#days')?></span> 
+		<script>document.write(Global.General.Days())</script> <?php write('#days')?></span> 
 		·
 		<span><a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a> 
 			<script>

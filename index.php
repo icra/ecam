@@ -16,14 +16,11 @@
 		</style>
 
 		<!--TITLE--><h1 style="text-align:left;font-size:30px;"><b>ECAM</b> <?php write("#index_web_tool")?>
-			<span style=color:#bf5050>Development version (towards v2.0)
-			&mdash;
-			<a href=development.php>(dev menu)</a>
-			</span>
+			<span style=color:#bf5050>Development version (towards v2.0)</span>
 		</h1>
 
-		<!--DEVELOPMENT-->
-		<div id=commits style="display:none;padding:0"> 
+		<!--DEVELOPMENT
+		<div id=commits style="display:;padding:0"> 
 			<button onclick="document.querySelector('#commits').style.display='none'">Hide</button>
 			<b>Development log &mdash; All code commits (
 				<?php 
@@ -49,6 +46,7 @@
 			</table>
 			</div>
 		</div>
+		-->
 
 		<!--DESCRIPTION--><div style="color:#58595b;font-size:18px;text-align:left">
 			<?php write('#index_description')?>
