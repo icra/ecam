@@ -36,25 +36,25 @@ var RefValues =
 				if(pmp_size=="5.6 - 15.7 kW")
 				{
 					if      (value  >= 0.7877)           return "Unsatisfactory";
-					else if (0.7877 >  value > 0.5013)   return "Acceptable";
+					else if (0.7877 >  value && value > 0.5013)   return "Acceptable";
 					else if (value  <= 0.5013)           return "Good";
 				}
 				else if(pmp_size=="15.7 - 38 kW")
 				{
 					if      (value  >= 0.5866)           return "Unsatisfactory";
-					else if (0.5866 >  value > 0.4447)   return "Acceptable";
+					else if (0.5866 >  value && value > 0.4447)   return "Acceptable";
 					else if (value  <= 0.4447)           return "Good";
 				}
 				else if(pmp_size=="39 - 96 kW")
 				{
 					if      (value  >= 0.4837)           return "Unsatisfactory";
-					else if (0.4837 >  value > 0.4115)   return "Acceptable";
+					else if (0.4837 >  value && value > 0.4115)   return "Acceptable";
 					else if (value  <= 0.4115)           return "Good";
 				}
 				else if(pmp_size=="> 96 kW")
 				{
 					if      (value  >= 0.4673)           return "Unsatisfactory";
-					else if (0.4673 >  value > 0.4054)   return "Acceptable";
+					else if (0.4673 >  value && value > 0.4054)   return "Acceptable";
 					else if (value  <= 0.4054)           return "Good";
 				}
 				else return "Out of range";
@@ -64,25 +64,25 @@ var RefValues =
 				if(pmp_size=="5.6 - 15.7 kW")
 				{
 					if      (value  >= 0.5302)           return "Unsatisfactory";
-					else if (0.5302 >  value > 0.3322)   return "Acceptable";
+					else if (0.5302 >  value && value > 0.3322)   return "Acceptable";
 					else if (value  <= 0.3322)           return "Good";
 				}
 				else if(pmp_size=="15.7 - 38 kW")
 				{
 					if      (value  >= 0.4923)           return "Unsatisfactory";
-					else if (0.4923 >  value > 0.3169)   return "Acceptable";
+					else if (0.4923 >  value && value > 0.3169)   return "Acceptable";
 					else if (value  <= 0.3169)           return "Good";
 				}
 				else if(pmp_size=="39 - 96 kW")
 				{
 					if      (value  >= 0.4595)           return "Unsatisfactory";
-					else if (0.4595 >  value > 0.3080)   return "Acceptable";
+					else if (0.4595 >  value && value > 0.3080)   return "Acceptable";
 					else if (value  <= 0.3080)           return "Good";
 				}
 				else if(pmp_size=="> 96 kW")
 				{
 					if      (value  >= 0.4308)           return "Unsatisfactory";
-					else if (0.4308 >  value > 0.3080)   return "Acceptable";
+					else if (0.4308 >  value && value > 0.3080)   return "Acceptable";
 					else if (value  <= 0.3080)           return "Good";
 				}
 				else return "Out of range";
