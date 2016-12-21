@@ -44,7 +44,6 @@ Level3.list=
 	"wsd_wt_el_no",
 	"wsd_vol_pump",
 	"wsd_pmp_head",
-	"wsd_nrg_recv",
 	"wsd_main_len",
 	"wsd_fri_loss",
 	"c_wsd_nrg_natu",

@@ -25,7 +25,7 @@
 			}
 		?>
 		/** table "used to calculate" and "inputs involved" */
-		table#utc td, table#ininv td{padding:2px 5px 2px 7px;border:none}
+		table#bminv td, table#utc td, table#ininv td{padding:2px 5px 2px 7px;border:none}
 		.unit{color:#aaa}
 		#info .constant a {color:black; !important}
 		.fuel {color:#088A29}
@@ -225,8 +225,7 @@
 				//get substages
 				if(typeof(currSubstage)=="object" && currSubstage.length > 1)
 				{
-					newCell.title='<?php write('#variable_go_to_substages')?>'
-					newCell.style.cursor='help'
+					newCell.setAttribute('caption','Go to Substages to modify this input');
 				}
 				else{
 					newCell.className='input'
@@ -243,7 +242,7 @@
 							var value = parseInt(Tables[id][op].value);
 							select.appendChild(option);
 							option.value=value;
-							option.innerHTML=op+" ("+value+")";
+							option.innerHTML="("+value+") "+op;
 							if(currentStage[id]==value) 
 							{
 								option.selected=true;
@@ -334,7 +333,7 @@
 
 					ret+="<tr>"+
 						" <td><a style='color:"+color+"' caption='["+match_localization.toString()+"] "+translate(output+"_descr")+"'"+
-						" href=variable.php?id="+output+">"+output+"</a>:"+
+						" href=variable.php?id="+output+">"+output+"</a>"+
 						"<td caption='"+pretf+"' style=cursor:help>"+
 						currValueF+"<td> <span class=unit>"+currentUnit+"</span> "+estimated;
 				});
@@ -349,28 +348,17 @@
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
-				newCell.innerHTML="Used in any benchmark"
+				newCell.innerHTML="Benchmarks where is used"
 				newCell=newRow.insertCell(-1)
 				newCell.innerHTML=(function()
 				{
 					//find if input is used in benchmark
-					var benchmarks=[];//TODO
-					for(var bm in RefValues)
-					{
-						var bm_formula=RefValues[bm];
-						if(bm_formula.toString().indexOf(id)+1)
-						{
-							benchmarks.push(bm);
-						}
-					}
-
-					if(benchmarks.length==0) return "<span style=color:#ccc>None</span>";
-
-					var ret="";
-					ret+="<table>";
+					var benchmarks=Utils.usedInBenchmarks(id);
+					if(benchmarks.length==0) return "<span style=color:#999>None</span>";
+					var ret="<table id=bminv>";
 					benchmarks.forEach(function(bm)
 					{
-						ret+="<tr><td><a href=variable.php?id="+bm+">"+bm+"</a>";
+						ret+="<tr><td><a caption='"+translate(bm+"_descr")+"' href=variable.php?id="+bm+">"+bm+"</a>";
 					});
 					ret+="</table>";
 					return ret;

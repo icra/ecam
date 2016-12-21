@@ -156,7 +156,6 @@ var Info = {
 	"wsd_wt_el_no" :{magnitude:"Distance",unit:"m",},
 	"wsd_vol_pump" :{magnitude:"Volume",unit:"m3",},
 	"wsd_pmp_head" :{magnitude:"Head",unit:"m",},
-	"wsd_nrg_recv" :{magnitude:"Energy",unit:"kWh",},
 	"wsd_main_len" :{magnitude:"Distance",unit:"km",},
 	"wsd_fri_loss" :{magnitude:"Head",unit:"m",},
 	"wsd_vol_fuel":{magnitude:"Volume",unit:"L",},

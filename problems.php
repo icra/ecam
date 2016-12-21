@@ -103,7 +103,7 @@
 		</div>
 
 		<div class=inline style="max-width:20%">
-		<table><tr><th>Inputs not used
+		<table><tr><th>Inputs not used in <br><b>Outputs</b><br> and<br> <b>Benchmarks</b>
 			<script>
 				//get unused inputs
 				function getUnused(obj)
@@ -138,14 +138,18 @@
 					var unused=getUnused(Global[level])
 					unused.forEach(function(field)
 					{
-						var color=field.search('ww')==-1 ? "" : "#bf5050";
-						try{
-							document.write("<tr><td>");
-							document.write("<a caption='"+translate(field+"_descr")+"' style=color:"+color+" href=variable.php?id="+field+">"+field+"</a>");
-						}
-						catch(e)
+						//is used in benchmark?
+						if(Utils.usedInBenchmarks(field).length==0)
 						{
-							document.write("<tr><td colspan=3>"+field+" need to be removed. Reset chaché")
+							var color=field.search('ww')==-1 ? "" : "#bf5050";
+							try{
+								document.write("<tr><td>");
+								document.write("<a caption='"+translate(field+"_descr")+"' style=color:"+color+" href=variable.php?id="+field+">"+field+"</a>");
+							}
+							catch(e)
+							{
+								document.write("<tr><td colspan=3>"+field+" need to be removed. Reset chaché")
+							}
 						}
 					});
 				});

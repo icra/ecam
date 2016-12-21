@@ -445,8 +445,6 @@
 	"#wsd_vol_pump_expla":"Volume of water in the drinking water distribution system which requires pumping, for each distributionunit",
 	"#wsd_pmp_head_descr":"Pump head",
 	"#wsd_pmp_head_expla":"",
-	"#wsd_nrg_recv_descr":"Energy recovered at water distribution",
-	"#wsd_nrg_recv_expla":"Total energy recovered during the assessment period by each water distributionunit ",
 	"#wsd_main_len_descr":"Mains length",
 	"#wsd_main_len_expla":"Total transmission and distribution mains length (service connections not included), for each water distributionunit at the reference date",
 	"#wsd_fri_loss_descr":"Friction pipe losses",

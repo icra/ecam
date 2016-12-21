@@ -28,6 +28,7 @@
 <script src="js/cookies.js"></script>
 <script src="js/updateGlobalFromCookies.js"></script>
 <script src="dataModel/tips.js"></script>
+<script src="utils.js"></script>
 <!--graphs: import after translation--><?php include'graphs.php'?>
 
 <!--utils-->

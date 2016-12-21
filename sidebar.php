@@ -157,10 +157,9 @@
 			<tr><td><a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment><?php write('#Treatment')?></a>
 			<tr><td><a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge><?php write('#Discharge')?></a>
 			<tr><th><?php write('#summary')?>
-			<tr><td><a href=edit.php?level=Energy><?php write('#energy_summary')?></a>
 			<tr><td><a href=summary.php?type=input><?php write('#sidebar_all_inputs')?></a>
-			<tr><td><a href=summary.php?type=ccvv><?php write('#sidebar_all_ccvv')?></a>
-			<tr><td><a href=summary.php?type=output><?php write('#sidebar_all_kpis')?></a>
+			<tr><td><a href=summary.php?type=output>All outputs</a>
+			<tr><td><a href=summary.php?type=ccvv>All calculated variables</a>
 			<tr><td><a href=constants.php>All constants</a>
 			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
 			<tr><th><?php write("#opportunities")?>
