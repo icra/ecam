@@ -72,16 +72,16 @@ var Questions = {
 		variables:[ 
 			"wst_vol_pump",
 			"wst_pmp_head",
-			"c_wst_vol_head",
 			"wst_KPI_std_nrg_cons",
+			"wst_nrg_pump",
 		],
 		advanced:1,
 		otherQuestions:[],
 	},
 	"wst_treatment_performance":{
 		variables:[ 
-			"wst_bod_infl",
-			"wst_bod_effl",
+			"wst_turb_raw",
+			"wst_turb_fin",
 			"wst_nrg_disn",
 			"wst_KPI_nrg_disnfc",
 			"wst_KPI_slu_per_m3",
@@ -101,7 +101,6 @@ var Questions = {
 			"wsd_KPI_nrg_per_m3",
 			"wsd_KPI_std_nrg_cons",
 			"wsd_pmp_head",
-			"c_wsd_vol_head",
 			"wsd_KPI_GHG_elec",
 		],
 		advanced:0,
@@ -128,7 +127,6 @@ var Questions = {
 	"wsd_pumping_efficiency":{
 		variables:[ 
 			"wsd_pmp_head",
-			"c_wsd_vol_head",
 			"wsd_KPI_std_nrg_cons",
 			"wsd_pmp_size",
 			"wsd_main_len",
@@ -151,8 +149,6 @@ var Questions = {
 			"c_wsd_nrg_natu",
 			"c_wsd_nrg_mini",
 			"c_wsd_nrg_supp",
-			"wsd_KPI_nrg_topgraph",
-			"wsd_KPI_nrg_efficien",
 		],
 		advanced:1,
 		otherQuestions:[],

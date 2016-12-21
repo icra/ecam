@@ -141,7 +141,7 @@
 						var color=field.search('ww')==-1 ? "" : "#bf5050";
 						try{
 							document.write("<tr><td>");
-							document.write("<a title='"+translate(field+"_descr")+"' style=color:"+color+" href=variable.php?id="+field+">"+field+"</a>");
+							document.write("<a caption='"+translate(field+"_descr")+"' style=color:"+color+" href=variable.php?id="+field+">"+field+"</a>");
 						}
 						catch(e)
 						{

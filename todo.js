@@ -1,23 +1,22 @@
 /* Tasks data structure*/
 var TODO=
 {
-	Back:
+	Back://back-end
 	[
-		"Fix placing of titles above benchmarking, do not overlap",
 		"In variable.php show if a variable is used only for benchmark (like 'wsa_pmp_size')",
-		"<b>NOW</b> EXCEL Water Distribution",
 		"Calculated variables. <a href=summary.php?type=ccvv>List</a>",
-		"No manual, do FAQ instead: a page which is a JSON file reader with a structure {Question:Answer,Question:Answer}",
+		"debug: Automatic find repeated variables in dataModel/questions.js",
 	],
-	Front:
+	Front://front-end
 	[
 		"Filter at the beginning, asking if there are fuel engines at any point, to hide all fuel related filters, inputs and outputs (Andrés)",
-		"Fix question in Global",
+		"Fix question hide in Global (wait until we finish ww stages)",
+		"No manual: FAQ instead: a page JSON file reader structure {Question:Answer,Question:Answer}",
 		"Graphs: add benchmark circles (difficult). Idea color graphs with green/orange/red ",
 		"Help resources: json file to download",
 		"Translate new features",
 	],
 };
 
-/*write tasks inside a <ul>*/
+/*list tasks inside a <ul>*/
 TODO.list=function(arr){arr.forEach(function(task){document.write("<li>"+task)})};

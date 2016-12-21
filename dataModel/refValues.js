@@ -127,26 +127,6 @@ var RefValues =
 			else                                      return "Out of range";
 		},
 	//wsd
-		wsd_KPI_nrg_efficien:function(obj) {
-			//dE4 2 inputs: Good: dE4  ≥ 80 – dE5, Acceptable: 80-dE5 > dE4 ≥ 70-dE5, Unsatisfactory: dE4 < 70 – dE5,
-			var value = obj.wsd_KPI_nrg_efficien();
-			var dE5   = obj.wsd_KPI_nrg_topgraph();
-			if      (value  >= 80-dE5)                   { return "Good" }
-			else if (80-dE5 >  value && value >= 70-dE5) { return "Acceptable" }
-			else if (value  <  70-dE5)                   { return "Unsatisfactory" }
-			else                                         { return "Out of range" }
-		},
-
-		wsd_KPI_nrg_topgraph:function(obj)
-		{
-			//dE5 is different: Flat: dE5 ≤ 15, Medium: 15 < dE5 ≤ 30, Hilly: dE5 > 30,
-			var value=obj.wsd_KPI_nrg_topgraph();
-			if(value <= 15)                        { return "Flat" }
-			else if(15    <  value && value <= 30) { return "Medium" }
-			else if(value >  30)                   { return "Hilly" }
-			else                                   { return "Out of range" }
-		},
-
 		wsd_KPI_std_nrg_cons:function(obj)
 		{
 			//dE3: Good: 0.2725 ≤ dE3 ≤ 0.40 , Acceptable: 0.40 < dE3 ≤ 0.54, Unsatisfactory: dE3 > 0.54,
