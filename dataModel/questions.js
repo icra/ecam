@@ -85,6 +85,9 @@ var Questions = {
 			"wst_nrg_disn",
 			"wst_KPI_nrg_disnfc",
 			"wst_KPI_slu_per_m3",
+			"wst_mass_slu",
+			"wst_KPI_slu_per_m3",
+			"wst_disnfctn",
 		],
 		advanced:1,
 		otherQuestions:[ ],
@@ -124,7 +127,6 @@ var Questions = {
 	},
 	"wsd_pumping_efficiency":{
 		variables:[ 
-			"wsd_vol_pump",
 			"wsd_pmp_head",
 			"c_wsd_vol_head",
 			"wsd_KPI_std_nrg_cons",
