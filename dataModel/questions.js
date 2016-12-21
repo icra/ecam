@@ -149,6 +149,8 @@ var Questions = {
 			"c_wsd_nrg_natu",
 			"c_wsd_nrg_mini",
 			"c_wsd_nrg_supp",
+			"wsd_KPI_nrg_efficien",
+			"wsd_KPI_nrg_topgraph",
 		],
 		advanced:1,
 		otherQuestions:[],

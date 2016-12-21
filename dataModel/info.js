@@ -169,6 +169,9 @@ var Info = {
 	c_wsd_nrg_mini:{magnitude:"Energy",unit:"kWh",},
 	c_wsd_nrg_supp:{magnitude:"Energy",unit:"kWh",},
 	c_wsd_nrg_topo:{magnitude:"Energy",unit:"kWh",},
+
+	wsd_KPI_nrg_efficien:{magnitude:"Percent",unit:"%",},
+	wsd_KPI_nrg_topgraph:{magnitude:"Percent",unit:"%",},
 	wsd_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m",},
 	wsd_KPI_water_losses:{magnitude:"Volume/Distance",unit:"m<sup>3</sup>/km",},
 	wsd_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km",},

@@ -3,7 +3,8 @@ var TODO=
 {
 	Back://back-end
 	[
-		"In variable.php show if a variable is used only for benchmark (like 'wsa_pmp_size')",
+		"<b>NOW</b> In variable.php show if a variable is used only for benchmark (like 'wsa_pmp_size')",
+		"Namespace 'Utils' for orphan functions like locateVariable",
 		"Calculated variables. <a href=summary.php?type=ccvv>List</a>",
 		"debug: Automatic find repeated variables in dataModel/questions.js",
 	],

@@ -78,8 +78,8 @@ var Global = {
 			wst_KPI_slu_per_m3 : function(){return this.wst_mass_slu/this.wst_vol_trea},
 			wst_KPI_capac_util : function(){return 100*this.wst_vol_trea/this.wst_trea_cap},
 			"wst_tst_carr":0,
-			"wst_mass_slu":0,
 			"wst_trea_cap":0, 
+			"wst_mass_slu":0,
 			"wst_vol_trea":0,
 			"wst_treatmen":0,
 			"wst_disnfctn":0,
@@ -128,14 +128,11 @@ var Global = {
 			c_wsd_nrg_supp:function(){return this.wsd_nrg_cons+this.c_wsd_nrg_natu()},
 			c_wsd_nrg_topo:function(){return Cts.ct_gravit.value*this.wsd_vol_dist*(this.wsd_hi_no_el-this.wsd_av_no_el)/3600000},
 
+			wsd_KPI_nrg_efficien:function(){return 100*this.c_wsd_nrg_mini()/(this.c_wsd_nrg_supp()-this.wsd_nrg_recv)},
+			wsd_KPI_nrg_topgraph:function(){return 100*this.c_wsd_nrg_topo()/(this.c_wsd_nrg_supp()-this.wsd_nrg_recv)},
 			wsd_KPI_nrg_per_m3:function(){return this.wsd_nrg_cons/this.wsd_auth_con},
 			wsd_KPI_std_nrg_cons:function(){return (this.wsd_nrg_cons+this.wsd_nrg_recv)/(this.wsd_vol_pump*this.wsd_pmp_head/100)},
-			wsd_KPI_water_losses:function(){
-				if(this.wsd_vol_dist>0)
-					return 1000*(this.wsd_vol_dist-this.wsd_auth_con)/(this.wsd_main_len)
-				else
-					return 0;
-			},
+			wsd_KPI_water_losses:function(){return Math.max(0,1000*(this.wsd_vol_dist-this.wsd_auth_con)/(this.wsd_main_len))},
 			wsd_KPI_un_head_loss:function(){return 1000*this.wsd_fri_loss/this.wsd_main_len},
 			wsd_KPI_non_revw:function(){return 100*(this.wsd_vol_dist-this.wsd_auth_con)/this.wsd_vol_dist},
 
@@ -147,7 +144,7 @@ var Global = {
 			wsd_KPI_GHG_ne_trck:function(){
 				var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.wsd_trucks]; 
 				return this.wsd_vol_trck*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) } ,
-			wsd_KPI_GHG_ne:function(){return 0},
+			wsd_KPI_GHG_ne:function(){return this.wsd_KPI_GHG_ne_fuel()+this.wsd_KPI_GHG_ne_trck()},
 			wsd_KPI_GHG:function(){return this.wsd_KPI_GHG_elec()+this.wsd_KPI_GHG_ne()},
 
 			ws_SL_auth_con:function(){return Global.Water.ws_SL_auth_con()},

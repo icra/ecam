@@ -304,15 +304,14 @@
 			newCell.innerHTML=(function()
 			{
 				//look for the code "id" inside each output
-				var ret="<table id=utc>";
 				var outputsPerInput=Formulas.outputsPerInput(id);
-
 				//if is not used to calculate anything, hide row
 				if(outputsPerInput.length==0) 
 				{
 					return "<span style=color:#999><?php write('#variable_nothing')?></span>";
 				}
 
+				var ret="<table id=utc>";
 				outputsPerInput.forEach(function(output)
 				{
 					var match_localization = locateVariable(output);
@@ -340,8 +339,43 @@
 						currValueF+"<td> <span class=unit>"+currentUnit+"</span> "+estimated;
 				});
 				ret+="</table>";
+
 				return ret;
 			})();
+
+			//If input:is used in benchmarking?
+			if(typeof(currentStage[id])=='number')
+			{
+				newRow=t.insertRow(-1)
+				newCell=newRow.insertCell(-1)
+				newCell.className='th'
+				newCell.innerHTML="Used in any benchmark"
+				newCell=newRow.insertCell(-1)
+				newCell.innerHTML=(function()
+				{
+					//find if input is used in benchmark
+					var benchmarks=[];//TODO
+					for(var bm in RefValues)
+					{
+						var bm_formula=RefValues[bm];
+						if(bm_formula.toString().indexOf(id)+1)
+						{
+							benchmarks.push(bm);
+						}
+					}
+
+					if(benchmarks.length==0) return "<span style=color:#ccc>None</span>";
+
+					var ret="";
+					ret+="<table>";
+					benchmarks.forEach(function(bm)
+					{
+						ret+="<tr><td><a href=variable.php?id="+bm+">"+bm+"</a>";
+					});
+					ret+="</table>";
+					return ret;
+				})();
+			}
 
 			//Is "id" benchmarked?
 			if(RefValues.hasOwnProperty(id))

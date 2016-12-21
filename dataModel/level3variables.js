@@ -51,6 +51,8 @@ Level3.list=
 	"c_wsd_nrg_mini",
 	"c_wsd_nrg_supp",
 	"c_wsd_nrg_topo",
+	"wsd_KPI_nrg_efficien",
+	"wsd_KPI_nrg_topgraph",
 	"wsd_SL_pres_ade",
 	"wsd_SL_cont_sup",
 	"wsd_KPI_water_losses",
