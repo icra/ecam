@@ -3,6 +3,7 @@ var TODO=
 {
 	Back://back-end
 	[
+		"improve speed using https://developers.google.com/speed/pagespeed/insights/",
 		"<b>NOW</b> In variable.php show if a variable is used only for benchmark (like 'wsa_pmp_size')",
 		"Namespace 'Utils' for orphan functions like locateVariable",
 		"Calculated variables. <a href=summary.php?type=ccvv>List</a>",
