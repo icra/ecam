@@ -1,51 +1,44 @@
 /** Main data structure: inputs get saved to cookies */
 var Global = {
 	General:{
-		Name:                  "Untitled system",
-		AssessmentPeriodStart: "2017-01-01",
-		AssessmentPeriodEnd:   "2018-01-01",
-		Comments:              "",
-		Currency:              "USD",
-		conv_kwh_co2:          0,  /** conversion factor for grid electricity () */
-		Days:function()
-		{
+		Name:"Untitled system",
+		AssessmentPeriodStart:"2017-01-01",
+		AssessmentPeriodEnd:"2018-01-01",
+		Comments:"",
+		Currency:"USD",
+		conv_kwh_co2:0, //conversion factor for grid electricity
+		Days:function(){
 			var startDate = new Date(Global.General.AssessmentPeriodStart);
 			var finalDate = new Date(Global.General.AssessmentPeriodEnd);
 			return (finalDate-startDate)/1000/60/60/24;
 		},
-		Years:function()
-		{
-			return this.Days()/365;
-		},
-		TotalGHG:function()
-		{
-			return Global.Water.ws_KPI_GHG()+Global.Waste.ww_KPI_GHG();
-		},
+		Years:function(){ return this.Days()/365 },
+		TotalGHG:function(){ return Global.Water.ws_KPI_GHG()+Global.Waste.ww_KPI_GHG() },
 	},
 
 	/** Level 1 - Water Supply*/
 	Water:{
-		"ws_resi_pop"   :0,
-		"ws_serv_pop"   :0,
-		"ws_nrg_cost"   :0,
-		"ws_run_cost"   :0,
-		ws_KPI_GHG_elec:function(){return this.Abstraction.wsa_KPI_GHG_elec()+this.Treatment.wst_KPI_GHG_elec()+this.Distribution.wsd_KPI_GHG_elec()},
-		ws_KPI_GHG_ne  :function(){return this.Abstraction.wsa_KPI_GHG_ne()  +this.Treatment.wst_KPI_GHG_ne()  +this.Distribution.wsd_KPI_GHG_ne()},
+		"ws_resi_pop":0,
+		"ws_serv_pop":0,
+		"ws_nrg_cost":0,
+		"ws_run_cost":0,
+		ws_KPI_GHG_elec:function(){return this.Abstraction.wsa_KPI_GHG_elec() + this.Treatment.wst_KPI_GHG_elec() + this.Distribution.wsd_KPI_GHG_elec()},
+		ws_KPI_GHG_ne  :function(){return this.Abstraction.wsa_KPI_GHG_ne() + this.Treatment.wst_KPI_GHG_ne() + this.Distribution.wsd_KPI_GHG_ne()},
 
 		ws_nrg_cons:function(){return this.Abstraction.wsa_nrg_cons + this.Treatment.wst_nrg_cons + this.Distribution.wsd_nrg_cons},
 		ws_vol_fuel:function(){return this.Abstraction.wsa_vol_fuel + this.Treatment.wst_vol_fuel + this.Distribution.wsd_vol_fuel},
 
-		ws_SL_serv_pop : function(){return 100*Global.Water.ws_serv_pop/Global.Water.ws_resi_pop},
-		ws_SL_nrg_cost : function(){return 100*this.ws_nrg_cost/this.ws_run_cost},
-		ws_SL_auth_con : function(){return 1000*this.Distribution.wsd_auth_con/this.ws_serv_pop/Global.General.Days()},
-		ws_SL_non_revw : function(){return Math.max(0,100*(this.Abstraction.wsa_vol_conv-this.Distribution.wsd_auth_con)/this.Abstraction.wsa_vol_conv)},
-		ws_SL_nrw_emis : function(){return this.ws_KPI_GHG()*this.ws_SL_non_revw()/100},
-		ws_SL_auc_emis : function(){return this.ws_KPI_GHG()-this.ws_SL_nrw_emis()},
+		ws_SL_serv_pop:function(){return 100*Global.Water.ws_serv_pop/Global.Water.ws_resi_pop},
+		ws_SL_nrg_cost:function(){return 100*this.ws_nrg_cost/this.ws_run_cost},
+		ws_SL_auth_con:function(){return 1000*this.Distribution.wsd_auth_con/this.ws_serv_pop/Global.General.Days()},
+		ws_SL_non_revw:function(){return Math.max(0,100*(this.Abstraction.wsa_vol_conv-this.Distribution.wsd_auth_con)/this.Abstraction.wsa_vol_conv)},
+		ws_SL_nrw_emis:function(){return this.ws_KPI_GHG()*this.ws_SL_non_revw()/100},
+		ws_SL_auc_emis:function(){return this.ws_KPI_GHG()-this.ws_SL_nrw_emis()},
 
-
-		//WSA
+		//wsa
 		"Abstraction":{
 			"wsa_nrg_cons":0,
+			"wsa_nrg_pump":0,
 			"wsa_vol_conv":0,
 			"wsa_vol_pump":0,
 			"wsa_vol_fuel":0,
@@ -65,7 +58,7 @@ var Global = {
 			wsa_KPI_nrg_recovery : function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
 			wsa_KPI_std_elec_eff:function(){return 0.2725/this.wsa_KPI_std_nrg_cons()},
 			wsa_KPI_un_head_loss:function(){return 1000*this.wsa_fri_loss/this.wsa_main_len},
-			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_cons+this.wsa_nrg_turb)/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
+			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_pump+this.wsa_nrg_turb)/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
 			wsa_SL_water_losses:function(){return 0;}
 		},
 
@@ -103,6 +96,7 @@ var Global = {
 
 		"Distribution":{
 			"wsd_nrg_cons":0,
+			"wsd_nrg_pump":0,
 			"wsd_vol_dist":0,
 			"wsd_auth_con":0,
 			"wsd_vol_fuel":0,
@@ -130,7 +124,7 @@ var Global = {
 			wsd_KPI_nrg_efficien:function(){return 100*this.c_wsd_nrg_mini()/this.c_wsd_nrg_supp()},
 			wsd_KPI_nrg_topgraph:function(){return 100*this.c_wsd_nrg_topo()/this.c_wsd_nrg_supp()},
 			wsd_KPI_nrg_per_m3:function(){return this.wsd_nrg_cons/this.wsd_auth_con},
-			wsd_KPI_std_nrg_cons:function(){return this.wsd_nrg_cons/(this.wsd_vol_pump*this.wsd_pmp_head/100)},
+			wsd_KPI_std_nrg_cons:function(){return this.wsd_nrg_pump/(this.wsd_vol_pump*this.wsd_pmp_head/100)},
 			wsd_KPI_water_losses:function(){return Math.max(0,1000*(this.wsd_vol_dist-this.wsd_auth_con)/(this.wsd_main_len))},
 			wsd_KPI_un_head_loss:function(){return 1000*this.wsd_fri_loss/this.wsd_main_len},
 			wsd_KPI_non_revw:function(){return 100*(this.wsd_vol_dist-this.wsd_auth_con)/this.wsd_vol_dist},

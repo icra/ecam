@@ -965,6 +965,9 @@
 							/*is a calculated variable*/
 							var isCV=typeof(CurrentLevel[code])=="function" ? true : false;
 
+							/*Skip if is level2 only*/
+							if(Level2only.list.indexOf(code)+1) continue;
+
 							//copy the function inside current substage
 							if(isCV) 
 							{

@@ -95,6 +95,7 @@ var Info = {
 
 	//L2 Water Abstraction
 	"wsa_nrg_cons":{magnitude:"Energy",unit:"kWh",},
+	"wsa_nrg_pump":{magnitude:"Energy",unit:"kWh",},
 	"wsa_vol_conv":{magnitude:"Volume",unit:"m3",},
 	"wsa_nrg_turb":{magnitude:"Energy",unit:"kWh",},
 	"wsa_vol_pump":{magnitude:"Volume",unit:"m3",},
@@ -144,6 +145,7 @@ var Info = {
 
 	//L2 Water Distribution
 	"wsd_nrg_cons" :{magnitude:"Energy",unit:"kWh",},
+	"wsd_nrg_pump":{magnitude:"Energy",unit:"kWh",},
 	"wsd_vol_dist" :{magnitude:"Volume",unit:"m3",},
 	"wsd_auth_con" :{magnitude:"Volume",unit:"m3",},
 	"wsd_deli_pts" :{magnitude:"Number",unit:"number",},

@@ -21,9 +21,8 @@ var Questions = {
 	"wsa_pumping":{
 		variables:[ 
 			"wsa_vol_pump",
+			"wsa_nrg_pump",
 			"wsa_nrg_per_pmp_watr",
-			"wsa_KPI_GHG_elec", 
-			"wsa_nrg_cons",
 		],
 		advanced:0,
 		otherQuestions:[
@@ -96,12 +95,11 @@ var Questions = {
 	//wsd
 	"wsd_pumping":{
 		variables:[
-			"wsd_nrg_cons",
 			"wsd_vol_pump",
+			"wsd_nrg_pump",
 			"wsd_KPI_nrg_per_m3",
 			"wsd_KPI_std_nrg_cons",
 			"wsd_pmp_head",
-			"wsd_KPI_GHG_elec",
 		],
 		advanced:0,
 		otherQuestions:[
@@ -129,10 +127,7 @@ var Questions = {
 			"wsd_pmp_head",
 			"wsd_KPI_std_nrg_cons",
 			"wsd_pmp_size",
-			"wsd_main_len",
 			"wsd_fri_loss",
-			"wsd_KPI_water_losses",
-			"wsd_KPI_un_head_loss",	
 			"wsd_sta_head",
 		],
 		advanced:1,

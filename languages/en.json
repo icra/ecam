@@ -326,8 +326,10 @@
 	"#wwg_KPI_nrg_perc_descr":"Wastewater energy cost percentage of total running cost",
 	"#wwg_KPI_nrg_perc_expla":"",
 
-	"#wsa_nrg_cons_descr":"Energy consumed from the grid (pumping)",
+	"#wsa_nrg_cons_descr":"Energy consumed from the grid",
 	"#wsa_nrg_cons_expla":"Electric energy consumption including both from the grid and self-produced, for the water abstractionunit, by the undertaking during the entire assessment period",
+	"#wsa_nrg_pump_descr":"Energy consumed from the grid (pumping)",
+	"#wsa_nrg_pump_expla":"Electric energy consumption for pumping",
 	"#wsa_vol_conv_descr":"Volume of abstracted water",
 	"#wsa_vol_conv_expla":"Sum of the volume of water abstracted (gravity or pumped) in the water abstractionunit that are the responsibility of the undertaking, during the assessment period",
 	"#wsa_nrg_turb_descr":"Electric energy produced (turbines)",
@@ -405,8 +407,8 @@
 	"#wst_KPI_std_nrg_cons_expla":"Standardized energy consumption pumping",
 	"#wst_treatmen_descr":"Treatment type",
 	"#wst_treatmen_expla":"Treatment type",
-	"#wst_nrg_pump_descr":"Energy consumed (pumping)",
-	"#wst_nrg_pump_expla":"Energy consumed (pumping)",
+	"#wst_nrg_pump_descr":"Energy consumed from the grid (pumping)",
+	"#wst_nrg_pump_expla":"Energy consumed from the grid (pumping)",
 
 	"#wst_KPI_GHG_descr":"Total GHG Water Treatment",
 	"#wst_KPI_GHG_expla":"Total GHG Water Treatment",
@@ -421,6 +423,8 @@
 
 	"#wsd_nrg_cons_descr":"Energy consumed from the grid",
 	"#wsd_nrg_cons_expla":"Electric energy consumption including both from the grid and self-produced, for water distribution during the entire assessment period",
+	"#wsd_nrg_pump_descr":"Energy consumed from the grid (pumping)",
+	"#wsd_nrg_pump_expla":"Electric energy consumption for pumping",
 	"#wsd_vol_dist_descr":"Volume of water injected to distribution",
 	"#wsd_vol_dist_expla":"The water volume entering the distribution system from the water treatment or directly from abstraction during the assessment period ",
 	"#wsd_auth_con_descr":"Volume of authorized consumption",
