@@ -3,6 +3,7 @@ var TODO=
 {
 	Back://back-end
 	[
+		"Graphs: resurrect all in graph.php",
 		"Improve speed using https://developers.google.com/speed/pagespeed/insights/",
 		"Calculated variables. <a href=summary.php?type=ccvv>List</a>",
 		"debug: Automatic find repeated variables in dataModel/questions.js",

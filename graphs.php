@@ -1175,6 +1175,9 @@ Graphs.authCon=function(container)
 
 Graphs.wsa_KPI_std_nrg_cons=function(withTable,container)
 {
+	withTable=withTable||false;
+	container=container||"graph";
+
 	var DATA=[['Abstraction substage','kWh/m3/100m'],];
 	var substages=Substages.Water.Abstraction;
 
