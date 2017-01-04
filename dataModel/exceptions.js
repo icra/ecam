@@ -20,11 +20,14 @@ var Exceptions =
 	//make ww13 selection (which is inside its description) stay selected
 	ww13:function()
 	{
+		var td=document.querySelector('tr[field=wwc_prot_con] td');
+		if(!td)return;
+
 		var select = document.createElement('select');
 		select.id="ww13options";
 		select.onchange=function()
 		{
-			Global.Waste.ww_prot_con=parseFloat(select.value);
+			Global.Waste.Collection.wwc_prot_con=parseFloat(select.value);
 			Global.Configuration.Selected.Country_protein=select.options[select.options.selectedIndex].getAttribute('country');
 			init();
 		}
@@ -221,15 +224,13 @@ var Exceptions =
 			option.value=cons;
 			option.setAttribute('country',country);
 			option.innerHTML=country+" ("+cons+")";
-			if(country==Global.Configuration.Selected.Country_protein && cons==Global.Waste.ww_prot_con)
+			if(country==Global.Configuration.Selected.Country_protein && cons==Global.Waste.Collection.wwc_prot_con)
 			{
 				option.selected='true';
 			}
 		}
 
 		//put the name of the selected technology instead of the number
-		var td=document.querySelector('tr[field=ww_prot_con] td');
-		if(!td)return;
 		td.appendChild(select);
 	},
 

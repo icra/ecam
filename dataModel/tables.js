@@ -53,6 +53,9 @@ var Tables =
 		"> 96 kW":{value:3},
 	},
 
+	//wwt
+	//wwd
+
 	"Technologies":{//TODO
 		"Waste":{
 			"None":{},

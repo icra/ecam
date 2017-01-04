@@ -162,7 +162,6 @@ var Global = {
 		"ww_dist_dis" :40000,
 		"ww_n2o_effl" :0,
 		"ww_prot_con" :25,
-		"ww_bod_pday" :40,
 		"ww_ch4_efac" :0.06,
 		"ww_biog_pro":0,
 		"ww_biog_val":0,
@@ -177,7 +176,7 @@ var Global = {
 					if(Global.Configuration["Yes/No"]["valorizing_biogas"])
 						return 0;
 					else
-						return this.ww_serv_pop * this.ww_bod_pday * Cts.ct_bod_kg.value * Cts.ct_biog_g.value/1000 * Global.General.Days();
+						return this.ww_serv_pop * this.Collection.wwc_bod_pday * Cts.ct_bod_kg.value * Cts.ct_biog_g.value/1000 * Global.General.Days();
 				}
 				else
 					return this.ww_biog_pro - this.ww_biog_val;
@@ -194,7 +193,7 @@ var Global = {
 		ww_KPI_GHG_ne_tsludge: function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.truck_transport_waste];return this.c_ww_nrg_tsludge()*(fuel.EFCO2+Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles+Cts.ct_n2o_eq.value*fuel.EFN2O.vehicles)},
 		ww_KPI_GHG_ne_ch4_wwt: function(){return ((this.ww_bod_infl-this.ww_bod_slud-this.ww_bod_effl)*this.ww_ch4_efac+Cts.ct_ch4_lo.value/100*this.c_ww_biogas_flar()*Cts.ct_ch4_bi.value/100*Cts.ct_ch4_m3.value)*Cts.ct_ch4_eq.value}, //old c_ww55
 		ww_KPI_GHG_ne_n2o_tre: function(){return Cts.ct_n2o_eq.value*this.ww_n2o_effl*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value}, //old c_ww53
-		ww_KPI_GHG_ne_ch4_unt: function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_bod_pday/1000*Global.General.Days()*Cts.ct_ch4_ef.value*Cts.ct_ch4_eq.value},                   //old c_ww52
+		ww_KPI_GHG_ne_ch4_unt: function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.Collection.wwc_bod_pday/1000*Global.General.Days()*Cts.ct_ch4_ef.value*Cts.ct_ch4_eq.value},                   //old c_ww52
 		ww_KPI_GHG_ne_n2o_unt: function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value }, //old c_ww51
 		ww_KPI_GHG_ne_unt:     function(){return this.ww_KPI_GHG_ne_ch4_unt()+this.ww_KPI_GHG_ne_n2o_unt()},
 		ww_KPI_GHG_ne_tre:     function(){return this.ww_KPI_GHG_ne_ch4_wwt()+this.ww_KPI_GHG_ne_n2o_tre()},
@@ -205,31 +204,59 @@ var Global = {
 		ww_KPI_GHG_elec : function(){return this.ww_nrg_cons()*Global.General.conv_kwh_co2},
 		ww_KPI_GHG      : function(){return this.ww_KPI_GHG_elec()+this.ww_KPI_GHG_ne()},
 
-		ww_SL_nrg_cost:        function(){return 100*this.ww_nrg_cost/this.ww_run_cost},
-		ww_SL_serv_pop:        function(){return 100*Global.Waste.ww_serv_pop/Global.Waste.ww_resi_pop},
-		ww_SL_vol_pday:        function(){return 1000*this.ww_vol_wwtr/this.ww_serv_pop/Global.General.Days()},
-		ww_SL_treat_m3:        function(){return 100*this.ww_serv_pop/this.ww_conn_pop},
-		ww_SL_dilution:        function(){return 100*this.c_ww_in_dilution()/this.ww_vol_coll},
-		ww_SL_dil_emis:			   function(){ 
-			return -1 //not implemented
-		},
-		ww_nrg_cons     : function(){return this.Collection.wwc_nrg_cons    +this.Treatment.wwt_nrg_cons    +this.Discharge.wwd_nrg_cons},
+		ww_SL_nrg_cost: function(){return 100*this.ww_nrg_cost/this.ww_run_cost},
+		ww_SL_serv_pop: function(){return 100*Global.Waste.ww_serv_pop/Global.Waste.ww_resi_pop},
+		ww_SL_vol_pday: function(){return 1000*this.ww_vol_wwtr/this.ww_serv_pop/Global.General.Days()},
+		ww_SL_treat_m3: function(){return 100*this.ww_serv_pop/this.ww_conn_pop},
+		ww_SL_dilution: function(){return 100*this.c_ww_in_dilution()/this.ww_vol_coll},
+		ww_SL_dil_emis:	function(){return -1 /*not implemented*/ },
+		ww_nrg_cons   : function(){return this.Collection.wwc_nrg_cons    +this.Treatment.wwt_nrg_cons    +this.Discharge.wwd_nrg_cons},
 
 		"Collection":{
-			"wwc_nrg_cons":0,
+			"wwc_vol_coll":0,
 			"wwc_vol_conv":0,
+			"wwc_prot_con":0,
+			"wwc_bod_pday":0,
+			"wwc_nrg_cons":0,
 			"wwc_vol_pump":0,
 			"wwc_pmp_head":0,
+			"wwc_vol_fuel":0,
+
+			"wwc_pmp_type":0,
+			"wwc_pmp_sthd":0,
+			"wwc_comb_sew":0,
+			"wwc_wet_flow":0,
+			"wwc_dry_flow":0,
+			"wwc_cso_incd":0,
+			"wwc_coll_len":0,
+			"wwc_infl_inf":0,
+			"wwc_wd_ratio":0,
+
+			//Collection GHG
+			wwc_KPI_GHG_elec:function(){return this.wwc_nrg_cons*Global.General.conv_kwh_co2},
+			wwc_KPI_GHG_ne:function(){return this.wwc_KPI_GHG_ne_unt_ch4()+this.wwc_KPI_GHG_ne_unt_n2o()},
+			wwc_KPI_GHG:function(){return this.wwc_KPI_GHG_elec()+this.wwc_KPI_GHG_ne()},
+
+			wwc_KPI_GHG_ne_unt_ch4:function(){
+				return (Global.Waste.ww_conn_pop-Global.Waste.ww_serv_pop)*this.wwc_bod_pday/1000*Global.General.Days()*Cts.ct_ch4_ef.value*Cts.ct_ch4_eq.value
+			},//old c_ww52
+
+			wwc_KPI_GHG_ne_unt_n2o:function(){return 0},//(ww_pop_conn-ww_pop_wwt)*wwc_prot_con*Years*ct_fra_np*ct_fac_nc*ct_fac_ic*ct_ef_eff*ct_n2o_co*ct_n2o_eq						
+
+			/*
+
+			wwc_KPI_nrg_per_m3	Energy consumption per pumped wastewater		kWh/m3	A	>Evaluate name change… 						
+			wwc_SL_col_untr	Collected wastewater untreated		%	Only in  graph (donut)							
+			wwc_vol_untr	Volume of uncollected wastewater		m3 - L	Can be calculated with pop minus load reaching plant							
+			wwc_SL_un_col	Uncollected or untreated wastewater 	Need to work		Decide if both outputs (one above as well) or inly this one should be left in							
+			*/
+
 			wwc_KPI_nrg_per_m3 : function(){return this.wwc_nrg_cons/this.wwc_vol_conv},
 			ww_SL_serv_pop: function(){return Global.Waste.ww_SL_serv_pop()},
 			ww_SL_treat_m3: function(){return Global.Waste.ww_SL_treat_m3()},
 			ww_SL_dilution: function(){return Global.Waste.ww_SL_dilution()},
 			wwc_KPI_std_nrg_cons: function(){return this.wwc_nrg_cons/(this.wwc_vol_pump*this.wwc_pmp_head/100)},
 
-			//Collection GHG
-			wwc_KPI_GHG_elec:function(){return this.wwc_nrg_cons*Global.General.conv_kwh_co2},
-			wwc_KPI_GHG_ne:function(){return 0},   //TODO
-			wwc_KPI_GHG:function(){return this.wwc_KPI_GHG_elec()+this.wwc_KPI_GHG_ne()},
 		},
 
 		"Treatment":{
