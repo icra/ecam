@@ -7,7 +7,7 @@
 <!--TITLE--><h1>Constants</h1>
 
 <!--constants-->
-<div id=main style=margin-bottom:3em>
+<div id=main style=margin-bottom:3em;font-family:monospace>
 <table>
 	<tr><th>Code<th>Description<th>Value<th>Unit
 	<script>

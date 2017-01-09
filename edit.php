@@ -794,6 +794,12 @@
 								<tr question=wsd_trucks><td>Trucks
 								<?php 
 							}
+							else if($level=="Waste" && $sublevel=="Collection")
+							{
+								?>
+								<tr question=wwc_engines><td><?php write('#configuration_engines')?>
+								<?php 
+							}
 						?>
 					</table>
 					<?php

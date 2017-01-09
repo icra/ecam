@@ -151,6 +151,25 @@ var Questions = {
 		otherQuestions:[],
 	},
 
+	//wwc
+	"wwc_pumping":{
+		variables:[
+			"wwc_nrg_cons",
+			"wwc_vol_pump",
+		],
+		advanced:0,
+		otherQuestions:[],
+	},
+	"wwc_engines":{
+		variables:[
+			"wwc_vol_fuel",
+		],
+		advanced:0,
+		otherQuestions:[],
+	},
+	//wwt
+	//wwd
+
 	//other workinprogress
 	"truck_transport_waste":{
 		variables:[

@@ -60,7 +60,6 @@ var Info = {
 	"ww_dist_dis" :{magnitude:"Distance",unit:"km",},
 	"ww_n2o_effl" :{magnitude:"Mass",unit:"kg",},
 	"ww_prot_con" :{magnitude:"Annual per capita consumption",unit:"kg/person/year",},
-	"ww_bod_pday" :{magnitude:"Mass/inhab/time",unit:"g/person/day",},
 	"ww_ch4_efac" :{magnitude:"Mass/Mass",unit:"kgCH<sub>4</sub>/kgBOD",},
 	"ww_biog_pro":{magnitude:"Volume",unit:"Nm3",},
 	"ww_biog_val":{magnitude:"Volume",unit:"m3",},
@@ -188,16 +187,33 @@ var Info = {
 	wsd_KPI_GHG_nrw:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	//L2 Wastewater Collection
+	"wwc_vol_coll":{magnitude:"Volume",unit:"m3",},
 	"wwc_vol_conv":{magnitude:"Volume",unit:"m3",},
 	"wwc_nrg_cons":{magnitude:"Energy",unit:"kWh",},
+	"wwc_prot_con":{magnitude:"Annual per capita consumption",unit:"kg/person/year",},
+	"wwc_bod_pday":{magnitude:"Mass/inhab/time",unit:"g/person/day",},
 	"wwc_vol_pump":{magnitude:"Volume",unit:"m3",},
 	"wwc_pmp_head":{magnitude:"Head",unit:"m",},
+	"wwc_vol_fuel":{magnitude:"Volume",unit:"L",},
+
+	"wwc_pmp_type":{magnitude:"Option",unit:"Pump type"},
+	"wwc_pmp_sthd":{magnitude:"Head",unit:"m"},
+	"wwc_comb_sew":{magnitude:"Percentage",unit:"%"},
+	"wwc_wet_flow":{magnitude:"Flow",unit:"m3/day"},
+	"wwc_dry_flow":{magnitude:"Flow",unit:"m3/day"},
+	"wwc_cso_incd":{magnitude:"Number",unit:"incidences"},
+	"wwc_coll_len":{magnitude:"Distance",unit:"km"},
+	"wwc_infl_inf":{magnitude:"Percentage",unit:"%"},
+	"wwc_wd_ratio":{magnitude:"Ratio",unit:"adimensional"},
+
 	wwc_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>",},
 	wwc_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m",},
 	wwc_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m",},
 
 	wwc_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
 	wwc_KPI_GHG_ne:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
+	wwc_KPI_GHG_ne_unt_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
+	wwc_KPI_GHG_ne_unt_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
 	wwc_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
 
 	//L2 Wastewater Treatment
