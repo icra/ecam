@@ -986,22 +986,17 @@ Graphs.gauge=function(container,value,header,unit)
 	element.innerHTML="";
 
 	//title
-	var h4=document.createElement('div')
-	element.appendChild(h4);
-	h4.innerHTML=header;
-	h4.style.fontWeight="bold";
+	var he=document.createElement('span')
+	element.appendChild(he);
+	he.innerHTML=header+"&emsp;";
+	he.style.fontWeight='bold';
 
 	//value
-	var div=document.createElement('div');
-	element.appendChild(div);
+	var div=document.createElement('span');
+	he.appendChild(div);
 	div.innerHTML=format(value)+unit;
-	div.style.marginTop="0.3em"
-	div.style.padding="0.2em";
-	div.style.fontWeight="bold";
 	div.style.fontSize="35px";
-	div.style.border="1px solid #ccc"
-	div.style.borderRadius="0.3em"
-	div.classList.add('inline')
+	div.style.verticalAlign='middle';
 
 	if(value>100 || value<0) {
 		div.style.color="red"
@@ -1168,7 +1163,7 @@ Graphs.authCon=function(container)
 	var element = document.getElementById(container)
 	var chart = new google.visualization.Gauge(element);
 	chart.draw(data,options);
-	var h = document.createElement('h3');
+	var h=document.createElement('h3');
 	h.innerHTML="Current "+translate("ws_SL_auth_con_descr")+" ("+Info['ws_SL_auth_con'].unit+")"
 	element.insertBefore(h,element.firstChild)
 }

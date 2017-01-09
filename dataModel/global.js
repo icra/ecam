@@ -378,7 +378,7 @@ var Global = {
 			},
 		},
 
-		"Yes/No": //default questions with answer "yes". All questions are in "questions.js" (go there with gf)
+		"Yes/No": //default answers for question codes. All questions are in "questions.js"
 		{
 			pumping_for_abstraction:0,
 			truck_transport_waste:1,
