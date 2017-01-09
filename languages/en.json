@@ -192,6 +192,10 @@
 	"#wst_pumping_efficiency":"Do you want to evaluate pump efficiency",
 	"#wsd_pumping_efficiency":"Do you want to evaluate pump efficiency",
 
+	"#wwc_water_eff":"Do you want to evaluate water efficiency",
+	"#wwc_have_csos":"Do you have combined sewer system",
+	"#wwc_pumping_efficiency":"Do you want to evaluate pumping efficiency",
+
 	"#Days_descr"        :"Assessment period",
 	"#Days_expla"        :"Period of time adopted for the assessment of the data and of the PI",
 	"#Years_descr"       :"Assessment period",
@@ -554,6 +558,8 @@
 	"#wwc_KPI_GHG_ne_unt_ch4_expla":"CH4 untreated",
 	"#wwc_KPI_GHG_ne_unt_n2o_descr":"N2O untreated",
 	"#wwc_KPI_GHG_ne_unt_n2o_expla":"N2O untreated",
+	"#wwc_KPI_GHG_ne_fuel_descr":"Fuel engines",
+	"#wwc_KPI_GHG_ne_fuel_expla":"Fuel engines",
 
 	"#wwt_biog_pro_descr":"Biogas produced",
 	"#wwt_biog_pro_expla":"Biogas produced during the assessment period by each wastewater treatment plant managed by the undertaking",

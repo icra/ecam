@@ -61,9 +61,17 @@ Level3.list=
 	"wsd_sta_head",
 
 	//wwc
-	"wwc_vol_pump",
 	"wwc_pmp_head",
 	"wwc_KPI_std_nrg_cons",
+	"wwc_pmp_type",
+	"wwc_pmp_sthd",
+	"wwc_comb_sew",
+	"wwc_wet_flow",
+	"wwc_dry_flow",
+	"wwc_cso_incd",
+	"wwc_coll_len",
+	"wwc_infl_inf",
+	"wwc_wd_ratio",
 
 	//wwt
 	"wwt_tst_cmpl",

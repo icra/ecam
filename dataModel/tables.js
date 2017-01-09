@@ -53,6 +53,13 @@ var Tables =
 		"> 96 kW":{value:3},
 	},
 
+	//wwc
+	"wwc_pmp_type":{
+		"None":{value:0},
+		"External":{value:1},
+		"Submersible":{value:2},
+	},
+
 	//wwt
 	//wwd
 
@@ -82,4 +89,3 @@ Tables.find=function(field,value)
 	}
 	return false
 }
-

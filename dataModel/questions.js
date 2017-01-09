@@ -156,6 +156,7 @@ var Questions = {
 		variables:[
 			"wwc_nrg_cons",
 			"wwc_vol_pump",
+			"wwc_KPI_GHG_elec",
 		],
 		advanced:0,
 		otherQuestions:[],
@@ -163,8 +164,39 @@ var Questions = {
 	"wwc_engines":{
 		variables:[
 			"wwc_vol_fuel",
+			"wwc_KPI_GHG_ne_fuel",
 		],
 		advanced:0,
+		otherQuestions:[],
+	},
+	"wwc_water_eff": {
+		variables:[
+			"wwc_comb_sew",
+			"wwc_wet_flow",
+			"wwc_dry_flow",
+			"wwc_cso_incd",
+			"wwc_coll_len",
+			"wwc_infl_inf",
+			"wwc_wd_ratio",
+		],
+		advanced:1,
+		otherQuestions:[],
+	},
+	"wwc_have_csos": {
+		variables:[
+			"wwc_comb_sew",
+			"wwc_cso_incd",
+		],
+		advanced:1,
+		otherQuestions:[],
+	},
+	"wwc_pumping_efficiency": {
+		variables:[
+			"wwc_pmp_type",
+			"wwc_pmp_head",
+			"wwc_pmp_sthd",
+		],
+		advanced:1,
 		otherQuestions:[],
 	},
 	//wwt

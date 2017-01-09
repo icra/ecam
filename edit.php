@@ -830,11 +830,9 @@
 			<?php
 				$resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
 				$serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
-				echo "
-					Resident population <b class=number><script>document.write(Global.$level.$resi_pop)</script></b>
-					&middot;
-					Serviced population <b class=number><script>document.write(Global.$level.$serv_pop)</script></b>
-				";
+				echo "Resident population <b class=number><script>document.write(Global.$level.$resi_pop)</script></b> &middot; ";
+				if($level=="Waste"){echo "Connected population <b class=number><script>document.write(Global.Waste.ww_conn_pop)</script></b> &middot; ";}
+				echo "Serviced population <b class=number><script>document.write(Global.$level.$serv_pop)</script></b>";
 			?>
 			<!--button toggle outputs/graph display-->
 			<button 
