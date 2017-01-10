@@ -12,6 +12,9 @@ var Level2only = {
 		"wsd_vol_fuel",
 		"wsd_vol_trck",
 		//wwc
+		"wwc_prot_con",
+		"wwc_bod_pday",
+		"wwc_vol_fuel",
 		//wwt
 		//wwd
 	],

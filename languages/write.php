@@ -32,12 +32,12 @@ function write($id)
 ?>
 
 <?php
-  if($lang!="null")
-  { 
-    ?>
+  if($lang!="null") { ?>
     <script><?php echo "var lang=$lang_file;" ?></script>
-    <script>function translate(id){return lang['#'+id]||"[translation not found, please report this error]"}</script>
+    <script>function translate(id){return lang['#'+id]||"<span style=background:orange>[translation not found, please report]</span>"}</script>
     <?php 
   }
-  else { ?> <script>function translate(id){return '#'+id}</script><?php }
+  else { ?>
+  	<script>function translate(id){return '#'+id}</script><?php 
+  }
 ?>

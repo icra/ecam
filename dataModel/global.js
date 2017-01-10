@@ -186,7 +186,6 @@ var Global = {
 
 		c_ww_nrg_engines     :function(){return 0}, //TODO
 		c_ww_nrg_tsludge     :function(){return this.ww_num_trip*2*this.ww_dist_dis*0.25*0.84*43/1000000/1000},
-		c_ww_in_dilution     :function(){if(this.ww_vol_wwtr==0) return 0; else return this.ww_vol_wwtr-this.ww_vol_coll*this.ww_serv_pop/this.ww_conn_pop},
 
 		ww_KPI_GHG_ne_engines:function(){return 0 }, //TODO
 		ww_KPI_GHG_ne_tsludge:function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.truck_transport_waste];return this.c_ww_nrg_tsludge()*(fuel.EFCO2+Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles+Cts.ct_n2o_eq.value*fuel.EFN2O.vehicles)},
@@ -207,29 +206,34 @@ var Global = {
 		ww_SL_serv_pop: function(){return 100*Global.Waste.ww_serv_pop/Global.Waste.ww_resi_pop},
 		ww_SL_vol_pday: function(){return 1000*this.ww_vol_wwtr/this.ww_serv_pop/Global.General.Days()},
 		ww_SL_treat_m3: function(){return 100*this.ww_serv_pop/this.ww_conn_pop},
-		ww_SL_dilution: function(){return 100*this.c_ww_in_dilution()/this.ww_vol_coll},
+
+		ww_SL_dilution: function(){return -999},
+
 		ww_SL_dil_emis:	function(){return -1 /*not implemented*/ },
 		ww_nrg_cons   : function(){return this.Collection.wwc_nrg_cons+this.Treatment.wwt_nrg_cons+this.Discharge.wwd_nrg_cons},
 
 		"Collection":{
-			"wwc_vol_coll":0,
-			"wwc_vol_conv":0,
-			"wwc_prot_con":0,
 			"wwc_bod_pday":0,
 			"wwc_nrg_cons":0,
-			"wwc_vol_pump":0,
-			"wwc_pmp_head":0,
+			"wwc_prot_con":0,
+			"wwc_vol_coll":0,
+			"wwc_vol_conv":0,
 			"wwc_vol_fuel":0,
+			"wwc_vol_pump":0,
 
-			"wwc_pmp_type":0,
+			"wwc_fri_loss":0, // Friction pipe losses
+			"wwc_pmp_size":0, // Size of pump
+			"wwc_pmp_head":0,
 			"wwc_pmp_sthd":0,
+			"wwc_pmp_type":0,
+
+			"wwc_coll_len":0,
 			"wwc_comb_sew":0,
 			"wwc_cso_incd":0,
-			"wwc_wet_flow":0,
 			"wwc_dry_flow":0,
-			"wwc_coll_len":0,
 			"wwc_infl_inf":0,
 			"wwc_wd_ratio":0,
+			"wwc_wet_flow":0,
 
 			//Collection GHG
 			wwc_KPI_GHG_ne_unt_ch4:function(){return (Global.Waste.ww_conn_pop-Global.Waste.ww_serv_pop)*this.wwc_bod_pday/1000*Global.General.Days()*Cts.ct_ch4_ef.value*Cts.ct_ch4_eq.value },//old c_ww52
@@ -242,27 +246,24 @@ var Global = {
 			wwc_KPI_GHG_ne:function(){return this.wwc_KPI_GHG_ne_unt_ch4()+this.wwc_KPI_GHG_ne_unt_n2o()+this.wwc_KPI_GHG_ne_fuel()},
 			wwc_KPI_GHG:function(){return this.wwc_KPI_GHG_elec()+this.wwc_KPI_GHG_ne()},
 
-			/*
-			wwc_KPI_nrg_per_m3	Energy consumption per pumped wastewater		kWh/m3	A	>Evaluate name change… 						
-			wwc_SL_col_untr	Collected wastewater untreated		%	Only in  graph (donut)							
-			wwc_vol_untr	Volume of uncollected wastewater		m3 - L	Can be calculated with pop minus load reaching plant							
-			wwc_SL_un_col	Uncollected or untreated wastewater 	Need to work		Decide if both outputs (one above as well) or inly this one should be left in							
-			*/
-
+			//Collection SL
 			ww_SL_serv_pop: function(){return Global.Waste.ww_SL_serv_pop()},
-			wwc_KPI_nrg_per_m3: function(){return this.wwc_nrg_cons/this.wwc_vol_conv},
+			wwc_KPI_nrg_per_m3: function(){return this.wwc_nrg_cons/this.wwc_vol_pump},
 			ww_SL_treat_m3:function(){return 100*(Global.Waste.ww_serv_pop/Global.Waste.ww_conn_pop)},
-			ww_SL_dilution: function(){return Global.Waste.ww_SL_dilution()},
 			wwc_KPI_std_nrg_cons: function(){return this.wwc_nrg_cons/(this.wwc_vol_pump*this.wwc_pmp_head/100)},
-			/*
-			wwc_SL_vol_untr:function(){return 0},
-			wwc_SL_vol_uncoll:function(){return 0},
-			*/
+			wwc_KPI_un_head_loss:function(){return 1000*this.wwc_fri_loss/this.wwc_coll_len},
+
+			wwc_vol_infi:function(){return -999},   //TODO Volume of infiltration / inflow 	 	m3	B	Jose to provide Eqs
+			wwc_infl_infi:function(){return -999},  //TODO wwc_infl_infi	Inflow and Infiltration (I/I)	calculated	%	B*/
+			wwc_KPI_GHG_ii:function(){return -999}, //TODO GHG due to I&I 	 	kg CO2	B	Formula: wwc_infl_infi * wwc_vol_trea * wwt_nrg_cons
 		},
 
 		"Treatment":{
-			"wwt_nrg_cons":0,
 			"wwt_vol_trea":0,
+			"wwt_nrg_cons":0,
+			"wwt_vol_fuel":0,
+			"wwt_n2o_effl":0,
+
 			"wwt_bod_infl":0,
 			"wwt_bod_effl":0,
 			"wwt_nrg_biog":0,
@@ -274,6 +275,7 @@ var Global = {
 			"wwt_mass_slu":0,
 			"wwt_dryw_slu":0,
 			"wwt_trea_cap":0,
+
 			"c_wwt_nrg_biog":function(){return this.wwt_biog_val*this.wwt_ch4_biog/100*10},
 			"c_wwt_bod_rmvd":function(){return this.wwt_bod_infl-this.wwt_bod_effl},
 

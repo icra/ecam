@@ -59,10 +59,17 @@ var Tables =
 		"External":{value:1},
 		"Submersible":{value:2},
 	},
+	"wwc_pmp_size":{
+		"5.6 - 15.7 kW":{value:0},
+		"15.7 - 38 kW":{value:1},
+		"39 - 96 kW":{value:2},
+		"> 96 kW":{value:3},
+	},
 
 	//wwt
 	//wwd
 
+	//other TODO
 	"Technologies":{//TODO
 		"Waste":{
 			"None":{},

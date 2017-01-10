@@ -61,17 +61,20 @@ Level3.list=
 	"wsd_sta_head",
 
 	//wwc
-	"wwc_pmp_head",
 	"wwc_KPI_std_nrg_cons",
-	"wwc_pmp_type",
-	"wwc_pmp_sthd",
-	"wwc_comb_sew",
-	"wwc_wet_flow",
-	"wwc_dry_flow",
-	"wwc_cso_incd",
 	"wwc_coll_len",
+	"wwc_comb_sew",
+	"wwc_cso_incd",
+	"wwc_dry_flow",
+	"wwc_fri_loss",
 	"wwc_infl_inf",
+	"wwc_pmp_head",
+	"wwc_pmp_size",
+	"wwc_pmp_sthd",
+	"wwc_pmp_type",
 	"wwc_wd_ratio",
+	"wwc_wet_flow",
+	"wwc_KPI_un_head_loss",
 
 	//wwt
 	"wwt_tst_cmpl",

@@ -157,9 +157,12 @@ var Questions = {
 			"wwc_nrg_cons",
 			"wwc_vol_pump",
 			"wwc_KPI_GHG_elec",
+			"wwc_KPI_nrg_per_m3",
 		],
 		advanced:0,
-		otherQuestions:[],
+		otherQuestions:[
+			"wwc_pumping_efficiency",
+		],
 	},
 	"wwc_engines":{
 		variables:[
@@ -192,9 +195,13 @@ var Questions = {
 	},
 	"wwc_pumping_efficiency": {
 		variables:[
-			"wwc_pmp_type",
+			"wwc_fri_loss", // Friction pipe losses
 			"wwc_pmp_head",
+			"wwc_pmp_size", // Size of pump
 			"wwc_pmp_sthd",
+			"wwc_pmp_type",
+			"wwc_KPI_std_nrg_cons",
+			"wwc_KPI_un_head_loss",
 		],
 		advanced:1,
 		otherQuestions:[],
