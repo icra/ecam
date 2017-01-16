@@ -213,27 +213,27 @@ var Global = {
 		ww_nrg_cons   : function(){return this.Collection.wwc_nrg_cons+this.Treatment.wwt_nrg_cons+this.Discharge.wwd_nrg_cons},
 
 		"Collection":{
-			"wwc_bod_pday":0,
-			"wwc_nrg_cons":0,
-			"wwc_prot_con":0,
 			"wwc_vol_coll":0,
 			"wwc_vol_conv":0,
-			"wwc_vol_fuel":0,
+			"wwc_prot_con":0,
+			"wwc_bod_pday":0,
+			"wwc_nrg_cons":0,
 			"wwc_vol_pump":0,
+			"wwc_vol_fuel":0,
 
-			"wwc_fri_loss":0, // Friction pipe losses
-			"wwc_pmp_size":0, // Size of pump
+			"wwc_pmp_type":0,
 			"wwc_pmp_head":0,
 			"wwc_pmp_sthd":0,
-			"wwc_pmp_type":0,
+			"wwc_fri_loss":0, // Friction pipe losses
+			"wwc_pmp_size":0, // Size of pump
 
-			"wwc_coll_len":0,
 			"wwc_comb_sew":0,
-			"wwc_cso_incd":0,
+			"wwc_wet_flow":0,
 			"wwc_dry_flow":0,
+			"wwc_cso_incd":0,
+			"wwc_coll_len":0,
 			"wwc_infl_inf":0,
 			"wwc_wd_ratio":0,
-			"wwc_wet_flow":0,
 
 			//Collection GHG
 			wwc_KPI_GHG_ne_unt_ch4:function(){return (Global.Waste.ww_resi_pop-Global.Waste.ww_serv_pop)*this.wwc_bod_pday/1000*Global.General.Days()*Cts.ct_ch4_ef.value*Cts.ct_ch4_eq.value },//old c_ww52
@@ -245,6 +245,7 @@ var Global = {
 			wwc_KPI_GHG_elec:function(){return this.wwc_nrg_cons*Global.General.conv_kwh_co2},
 			wwc_KPI_GHG_ne:function(){return this.wwc_KPI_GHG_ne_unt_ch4()+this.wwc_KPI_GHG_ne_unt_n2o()+this.wwc_KPI_GHG_ne_fuel()},
 			wwc_KPI_GHG:function(){return this.wwc_KPI_GHG_elec()+this.wwc_KPI_GHG_ne()},
+			wwc_KPI_GHG_ii:function(){return this.wwc_infl_infi()*this.wwc_vol_coll*this.wwc_nrg_cons}, 
 
 			//Collection SL
 			ww_SL_serv_pop: function(){return Global.Waste.ww_SL_serv_pop()},
@@ -252,10 +253,8 @@ var Global = {
 			ww_SL_treat_m3:function(){return 100*(Global.Waste.ww_serv_pop/Global.Waste.ww_conn_pop)},
 			wwc_KPI_std_nrg_cons: function(){return this.wwc_nrg_cons/(this.wwc_vol_pump*this.wwc_pmp_head/100)},
 			wwc_KPI_un_head_loss:function(){return 1000*this.wwc_fri_loss/this.wwc_coll_len},
-
-			wwc_vol_infi:function(){return -999},   //TODO Volume of infiltration / inflow 	 	m3	B	Jose to provide Eqs
-			wwc_infl_infi:function(){return -999},  //TODO wwc_infl_infi	Inflow and Infiltration (I/I)	calculated	%	B*/
-			wwc_KPI_GHG_ii:function(){return -999}, //TODO GHG due to I&I 	 	kg CO2	B	Formula: wwc_infl_infi * wwc_vol_trea * wwt_nrg_cons
+			wwc_infl_infi:function(){return 100*(this.wwc_wet_flow-this.wwc_dry_flow)/this.wwc_dry_flow},
+			wwc_vol_infi:function(){return this.wwc_infl_infi/100*this.wwc_dry_flow},
 		},
 
 		"Treatment":{

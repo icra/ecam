@@ -75,6 +75,10 @@ Level3.list=
 	"wwc_wd_ratio",
 	"wwc_wet_flow",
 	"wwc_KPI_un_head_loss",
+	"wwc_infl_infi",
+	"wwc_vol_infi",
+	"wwc_KPI_GHG_ii",
+	"wwc_KPI_GHG_ne",
 
 	//wwt
 	"wwt_tst_cmpl",

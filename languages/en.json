@@ -554,12 +554,19 @@
 	"#wwc_KPI_un_head_loss_descr":"Unit head loss",
 	"#wwc_KPI_un_head_loss_expla":"Unit energy friction loss in the conveyance system",
 
+	"#wwc_infl_infi_descr":"Inflow and Infiltration",
+	"#wwc_infl_infi_expla":"Inflow and Infiltration",
+	"#wwc_vol_infi_descr":"Volme of infiltration / inflow",
+	"#wwc_vol_infi_expla":"Volme of infiltration / inflow",
+
 	"#wwc_KPI_GHG_descr":"Total GHG Wastewater Collection",
 	"#wwc_KPI_GHG_expla":"Total GHG Wastewater Collection",
 	"#wwc_KPI_GHG_elec_descr":"Electricity",
 	"#wwc_KPI_GHG_elec_expla":"GHG from electricity",
 	"#wwc_KPI_GHG_ne_descr":"Non electricity",
 	"#wwc_KPI_GHG_ne_expla":"Non electricity",
+	"#wwc_KPI_GHG_ii_descr":"From Infiltration and Inflow",
+	"#wwc_KPI_GHG_ii_expla":"From Infiltration and Inflow",
 
 	"#wwc_KPI_GHG_ne_unt_ch4_descr":"CH4 untreated",
 	"#wwc_KPI_GHG_ne_unt_ch4_expla":"CH4 untreated",

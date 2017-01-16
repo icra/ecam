@@ -213,8 +213,11 @@ var Info = {
 	wwc_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m",},
 	wwc_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m",},
 	wwc_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km",},
+	wwc_infl_infi:{magnitude:"Percentage",unit:"%"},
+	wwc_vol_infi:{magnitude:"Volume",unit:"m3"},
 
 	wwc_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
+	wwc_KPI_GHG_ii:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
 	wwc_KPI_GHG_ne:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
 	wwc_KPI_GHG_ne_unt_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
 	wwc_KPI_GHG_ne_unt_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e",},
