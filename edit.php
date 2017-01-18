@@ -96,10 +96,8 @@
 		tr:not([hl=yes]) td.CV {background-color:white}
 
 		table#substages { margin:0.2em 0 0.2em 0.2em; }
-		table#substages tr[field]:hover  {background:#ccc;}
 		table#substages tr:first-child td {border-top:none;border-left:none}
 
-		table#outputs tr:hover {background:#ccc;}
 		table#outputs th:not(.tableHeader) {background:#c9ab98}
 		table#outputs th:nth-child(n+2) {text-align:right}
 		table#outputs td:nth-child(n+2) {text-align:right}
@@ -1407,7 +1405,6 @@
 					<div id=substageOutputs_container>
 						<table id=substageOutputs style="width:95%;background:#f6f6f6"></table>
 						<style>
-							#substageOutputs tr:hover { background:#ccc; }
 							#substageOutputs th{background:#d7bfaf;text-align:left}
 							#substageOutputs td:nth-child(n+3) {text-align:right}
 						</style>
