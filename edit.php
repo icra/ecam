@@ -55,6 +55,17 @@
 		}
 		body{background:#F5ECCE}
 
+		<?php
+			if($level=="Waste")
+			{?>
+				table#inputs th:not(.tableHeader) {background:#d71d24}
+				table#substages th {background:#d71d24}
+				table#substages td.variableCode {background:#d71d24}
+				#outputs a,#outputs a:visited{color:#d71d24}
+				#nrgOutputs a,#nrgOutputs a:visited{color:#d71d24}
+			<?php }
+		?>
+
 		.advanced {
 			color:black;
 			font-size:10px;
@@ -77,6 +88,7 @@
 
 		.variableCode a {color:white}
 		.variableCode {
+			font-family:monospace;
 			background:#00adef;
 			text-align:left;
 			font-size:11px;
@@ -109,16 +121,6 @@
 			
 		}
 
-		<?php
-			if($level=="Waste")
-			{?>
-				table#inputs th:not(.tableHeader) {background:#d71d24}
-				table#substages th {background:#d71d24}
-				table#substages td.variableCode {background:#d71d24}
-				#outputs a,#outputs a:visited{color:#d71d24}
-				#nrgOutputs a,#nrgOutputs a:visited{color:#d71d24}
-			<?php }
-		?>
 		th.tableHeader
 		{
 			background:white;
@@ -142,6 +144,9 @@
 			outline:none;
 			font-size:20px;
 		}
+
+		table#inputs    th.variableCode.isCV {background:#999;}
+		table#substages td.variableCode.isCV {background:#999;}
 	</style>
 	<script>
 		<?php
@@ -991,8 +996,6 @@
 							newRow.setAttribute('field',code);
 							if(Questions.isHidden(code)) disableRow(newRow);
 
-							/*background color*/ if(isCV) newRow.classList.add('isCV');
-
 							//mouse over listener for highlighting
 							if(isCV)
 							{
@@ -1010,6 +1013,7 @@
 							/*1st cell: show code*/
 							var newCell=newRow.insertCell(-1);
 							newCell.classList.add('variableCode');
+							if(isCV) newCell.classList.add('isCV');
 							newCell.innerHTML=(function()
 							{
 								var adv=Level3.list.indexOf(code)+1 ? "<span class=advanced caption='Advanced'>adv</span>" : "" ;

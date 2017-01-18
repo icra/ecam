@@ -173,11 +173,11 @@ var Global={
 		"ww_biog_val":0,
 		c_ww_biogas_flar:function(){
       //TODO we consider that 100% of biogas is valorized if the user did not enter ww_biog_pro
-			if(Global.Configuration["Yes/No"]["producing_biogas"])
+			if(Global.Configuration["Yes/No"]["wwt_producing_biogas"])
 			{
 				if(this.ww_biog_pro==0)
 				{
-					if(Global.Configuration["Yes/No"]["valorizing_biogas"])
+					if(Global.Configuration["Yes/No"]["wwt_valorizing_biogas"])
 						return 0;
 					else
 						return this.ww_serv_pop * this.Collection.wwc_bod_pday * Cts.ct_bod_kg.value * Cts.ct_biog_g.value/1000 * Global.General.Days();
@@ -188,7 +188,6 @@ var Global={
 			else
 				return 0;
 		},
-		c_ww_nrg_engines     :function(){return 0}, //TODO
 		c_ww_nrg_tsludge     :function(){return this.ww_num_trip*2*this.ww_dist_dis*0.25*0.84*43/1000000/1000},
 
 		ww_SL_nrg_cost: function(){return 100*this.ww_nrg_cost/this.ww_run_cost},
@@ -199,7 +198,7 @@ var Global={
 		ww_SL_dil_emis:	function(){return -999},//TODO
 		ww_nrg_cons   : function(){return this.Collection.wwc_nrg_cons+this.Treatment.wwt_nrg_cons+this.Discharge.wwd_nrg_cons},
 
-		ww_KPI_GHG_ne_engines:function(){return 0 }, //TODO
+		ww_KPI_GHG_ne_engines:function(){return 0},//TODO
 		ww_KPI_GHG_ne_tsludge:function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.truck_transport_waste];return this.c_ww_nrg_tsludge()*(fuel.EFCO2+Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles+Cts.ct_n2o_eq.value*fuel.EFN2O.vehicles)},
 		ww_KPI_GHG_ne_ch4_wwt:function(){return ((this.ww_bod_infl-this.ww_bod_slud-this.ww_bod_effl)*this.ww_ch4_efac+Cts.ct_ch4_lo.value/100*this.c_ww_biogas_flar()*Cts.ct_ch4_bi.value/100*Cts.ct_ch4_m3.value)*Cts.ct_ch4_eq.value}, //old c_ww55
 		ww_KPI_GHG_ne_n2o_tre:function(){return Cts.ct_n2o_eq.value*this.ww_n2o_effl*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value}, //old c_ww53
@@ -261,18 +260,20 @@ var Global={
 			"wwt_nrg_cons":0,
 			"wwt_vol_fuel":0,
 			"wwt_n2o_effl":0,
+			"wwt_biog_pro":0,
+			"wwt_biog_val":0,
+			"wwt_ch4_biog":0,
+
+			"wwt_trea_cap":0,
 
 			"wwt_bod_infl":0,
 			"wwt_bod_effl":0,
 			"wwt_nrg_biog":0,
-			"wwt_ch4_biog":0,
-			"wwt_biog_pro":0,
-			"wwt_biog_val":0,
 			"wwt_tst_cmpl":0,
 			"wwt_tst_cond":0,
+
 			"wwt_mass_slu":0,
 			"wwt_dryw_slu":0,
-			"wwt_trea_cap":0,
 
 			"c_wwt_nrg_biog":function(){return this.wwt_biog_val*this.wwt_ch4_biog/100*10},
 			"c_wwt_bod_rmvd":function(){return this.wwt_bod_infl-this.wwt_bod_effl},
@@ -413,10 +414,10 @@ var Global={
 
 		"Yes/No": //default answers for questions ("questions.js")
 		{
-			pumping_for_abstraction: 0,
-			truck_transport_waste:   1,
-			producing_biogas:        0,
-			valorizing_biogas:       0,
+			wsa_pumping:           0,
+			wwt_producing_biogas:  0,
+			wwt_valorizing_biogas: 0,
+			truck_transport_waste: 1,
 		},
 	},
 };

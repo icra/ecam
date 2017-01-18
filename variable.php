@@ -16,10 +16,12 @@
 		#info td.th{background:#00aff1;color:white;vertical-align:middle}
 		#info td.input{color:#666;background-color:#eee;cursor:cell}
 		#info td.input input {margin:0;padding:0;width:95%;}
+		.variableCode { font-family:monospace; }
 		<?php
 			if(preg_match("/ww/",$id))
-			{ ?>
-				td.th{background:#bf5050}
+			{ 
+				?>
+				#info td.th{background:#d71d24}
 				#info a,#info a:visited,h1{color:#bf5050}
 			  <?php 
 			}
@@ -76,7 +78,7 @@
 			if(sublevel)
 			{
 				var url = "edit.php";
-				newCell.innerHTML+="<?php write('#variable_go_back_to')?> <a href="+url+"?level="+level+"&sublevel="+sublevel+">"+levelAlias+": "+sublevelAlias+"</a>"
+				newCell.innerHTML+="&larr; <a href="+url+"?level="+level+"&sublevel="+sublevel+">"+levelAlias+": "+sublevelAlias+"</a>"
 			}
 			else newCell.innerHTML="<?php write('#variable_go_back_to')?> <a href=edit.php?level="+level+">"+levelAlias+"</a>"
 			//Explanation
@@ -188,7 +190,7 @@
 							var estimated = Global.Configuration.DataQuality[match]=="Estimated" ? "<span class=estimated caption='<?php write('#variable_estimated')?>'>&#9888;</span>" : "";
 
 							ret+="<tr>"+
-								"<td><a style='color:"+color+"' href=variable.php?id="+match+" "+
+								"<td class=variableCode><a style='color:"+color+"' href=variable.php?id="+match+" "+
 								"caption='["+match_localization.toString()+"] "+translate(match+"_descr")+"'"+
 								">"+match+"</a> "+
 								"<td caption='"+currValue+"' style=cursor:help>"+currValueF+"<td><span class=unit>"+currentUnit+"</span> "+
@@ -332,7 +334,7 @@
 					var estimated = DQ.hasEstimatedData(output) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span> " : "";
 
 					ret+="<tr>"+
-						" <td><a style='color:"+color+"' caption='["+match_localization.toString()+"] "+translate(output+"_descr")+"'"+
+						" <td class=variableCode><a style='color:"+color+"' caption='["+match_localization.toString()+"] "+translate(output+"_descr")+"'"+
 						" href=variable.php?id="+output+">"+output+"</a>"+
 						"<td caption='"+pretf+"' style=cursor:help>"+
 						currValueF+"<td> <span class=unit>"+currentUnit+"</span> "+estimated;

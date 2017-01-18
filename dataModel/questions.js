@@ -98,7 +98,6 @@ var Questions = {
 			"wsd_vol_pump",
 			"wsd_nrg_pump",
 			"wsd_KPI_nrg_per_m3",
-			"wsd_KPI_std_nrg_cons",
 			"wsd_pmp_head",
 		],
 		advanced:0,
@@ -126,6 +125,8 @@ var Questions = {
 		variables:[ 
 			"wsd_pmp_head",
 			"wsd_KPI_std_nrg_cons",
+			"wsd_KPI_un_head_loss",
+			"wsd_main_len",
 			"wsd_pmp_size",
 			"wsd_fri_loss",
 			"wsd_sta_head",
@@ -207,20 +208,7 @@ var Questions = {
 		otherQuestions:[],
 	},
 	//wwt
-	//wwd
-
-	//other workinprogress
-	"truck_transport_waste":{
-		variables:[
-			"ww_dist_dis",
-			"ww_num_trip",
-			"c_ww_nrg_tsludge",
-			"ww_KPI_GHG_ne_tsludge"
-			],
-		advanced:0,
-		otherQuestions:[],
-	},
-	"producing_biogas":{
+	"wwt_producing_biogas":{
 		variables:[
 			"ww_biog_pro",
 			"wwt_biog_pro",
@@ -230,7 +218,7 @@ var Questions = {
 		advanced:0,
 		otherQuestions:[],
 	},
-	"valorizing_biogas":{
+	"wwt_valorizing_biogas":{
 		variables:[
 			"wwt_biog_val",
 			"ww_biog_val",
@@ -243,11 +231,39 @@ var Questions = {
 		advanced:0,
 		otherQuestions:[],
 	},
+	"wwt_engines":{
+		variables:[
+			"wwt_vol_fuel",
+			"wwt_KPI_GHG_ne",
+		],
+		advanced:0,
+		otherQuestions:[],
+	},
+	"wwt_pumping_efficiency":{
+		variables:[
+			//TODO empty!
+		],
+		advanced:1,
+		otherQuestions:[],
+	},
 	"wwt_sludge_mgmt":{
 		variables:[
 			"wwt_mass_slu",
 			"wwt_dryw_slu",
 		],
+		advanced:1,
+		otherQuestions:[],
+	},
+	//wwd
+
+	//other workinprogress
+	"truck_transport_waste":{
+		variables:[
+			"ww_dist_dis",
+			"ww_num_trip",
+			"c_ww_nrg_tsludge",
+			"ww_KPI_GHG_ne_tsludge"
+			],
 		advanced:0,
 		otherQuestions:[],
 	},

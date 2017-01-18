@@ -119,6 +119,7 @@
 			var newCell=document.createElement('th');
 			newRow.append(newCell);
 			newCell.classList.add('variableCode');
+			if(isCV)newCell.classList.add('isCV');
 			newCell.innerHTML=(function()
 			{
 				var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";

@@ -64,7 +64,6 @@ var Info = {
 	"ww_biog_pro":{magnitude:"Volume",unit:"Nm3",},
 	"ww_biog_val":{magnitude:"Volume",unit:"m3",},
 	c_ww_biogas_flar :{magnitude:"Volume",unit:"Nm3",},
-	c_ww_nrg_engines :{magnitude:"Energy",unit:"TJ",},
 	c_ww_nrg_tsludge :{magnitude:"Energy",unit:"TJ",},
 	ww_KPI_GHG_elec  :{magnitude:"Mass",unit:"kg CO<sub>2</sub>",},
 	ww_KPI_GHG_ne_ch4_wwt :{magnitude:"Mass",unit:"kg CO<sub>2</sub>",},

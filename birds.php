@@ -291,41 +291,6 @@
 					<tr stage=waste class=hidden><td><?php write('#birds_ww_prot_con')?>
 						<td class=input><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/<?php write('#birds_year')?>
 						<span class=circle style=background:#451c2e></span>
-
-					<tr stage=waste class=hidden><td>
-						<?php write("#producing_biogas")?>?
-						<td>
-							<label><?php write("#no")?>  
-								<input name=producing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=0;init()">
-							</label>
-						<td>
-							<label><?php write("#yes")?> 
-								<input name=producing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].producing_biogas=1;init()">
-							</label>
-							<script>
-								(function(){
-									var ans=Global.Configuration['Yes/No'].producing_biogas;
-									document.querySelector('input[name=producing_biogas][ans="'+ans+'"]').checked=true;
-								})();
-							</script>
-						<span class=circle style=background:#b8879d></span>
-					<tr stage=waste class=hidden><td>
-						<?php write("#valorizing_biogas")?>?
-						<td>
-							<label><?php write("#no")?>
-							<input name=valorizing_biogas ans=0 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=0;init()">
-							</label>
-						<td>
-							<label><?php write("#yes")?>
-							<input name=valorizing_biogas ans=1 type=radio onclick="Global.Configuration['Yes/No'].valorizing_biogas=1;init()">
-							</label>
-						<script>
-							(function(){
-								var ans = Global.Configuration['Yes/No'].valorizing_biogas;
-								document.querySelector('input[name=valorizing_biogas][ans="'+ans+'"]').checked=true;
-							})();
-						</script>
-						<span class=circle style=background:#b8879d></span>
 					<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 			</table>
 			<script>
