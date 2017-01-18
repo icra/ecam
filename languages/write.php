@@ -32,6 +32,7 @@ function write($id)
 ?>
 
 <?php
+	//TRANSLATE JS FUNCTION
   if($lang!="null") { ?>
     <script><?php echo "var lang=$lang_file;" ?></script>
     <script>function translate(id){return lang['#'+id]||"<span style=background:orange>[translation not found, please report]</span>"}</script>

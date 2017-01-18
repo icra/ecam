@@ -1,11 +1,15 @@
-/** update Global object without overwriting functions, since JSON.stringify does not stringify fields that are functions */
+/** 
+	Update Global and Substages objects without overwriting functions, 
+	since JSON.stringify does not stringify object fields that are functions 
+**/
+
 function copyFieldsFrom(object_from,object_to)
 {
 	for(var field in object_from)
 	{
 		if(object_from[field].constructor===Array)
 		{
-			object_to[field] = object_from[field];
+			object_to[field]=object_from[field];
 			continue;
 		}
 
@@ -17,20 +21,16 @@ function copyFieldsFrom(object_from,object_to)
 		if(typeof(object_from[field])=="object")
 		{
 			/* 
-			 * HOTFIX FOR OLD JSON FILES
+			 * HOTFIX FOR OLD JSON FILES //TODO
 			 * Problem: "field" may have space characters
 			 * Solution: Remove spaces with String.replace()
-			 *
 			 */
-
-			var newField = field.replace(/ /g,"");
-
+			var newField=field.replace(/ /g,"");
 			copyFieldsFrom(object_from[field],object_to[newField]);
 		}
 		else 
 		{
-			try
-			{
+			try {
 				object_to[field]=object_from[field];
 			}
 			catch(e){console.log(e+" field:"+field)}
@@ -40,7 +40,7 @@ function copyFieldsFrom(object_from,object_to)
 
 /**
   *
-  * OVERWRITE GLOBAL AND SUBSTAGES
+  * OVERWRITE "Global" AND "Substages" objects with cookie content
   *
   */
 if(getCookie("GLOBAL")!==null) 
@@ -54,16 +54,16 @@ if(getCookie("GLOBAL")!==null)
 	//compressed is a string with weird symbols
 	var compressed=getCookie('GLOBAL');
 
-	//decompressed now is the JSON structure of Global as a string
+	//decompressed is a string with the JSON structure of Global
 	var decompressed=LZString.decompressFromEncodedURIComponent(compressed);
 
-	//parsed now is an object
+	//parsed now is a real object
 	var parsed=JSON.parse(decompressed);
 
-	//now we can copy the fields from decompressed to Global
+	//copy the fields from parsed to Global
 	copyFieldsFrom(parsed,Global);
 
-	//Now decompress and parse Substages
+	//decompress and parse Substages in one step
 	Substages.Water.Abstraction  = JSON.parse(LZString.decompressFromEncodedURIComponent(getCookie('waterAbs')));
 	Substages.Water.Treatment    = JSON.parse(LZString.decompressFromEncodedURIComponent(getCookie('waterTre')));
 	Substages.Water.Distribution = JSON.parse(LZString.decompressFromEncodedURIComponent(getCookie('waterDis')));
