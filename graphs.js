@@ -991,7 +991,7 @@ Graphs.gauge=function(container,value,header,unit)
 	he.style.fontWeight='bold';
 
 	//value
-	var div=document.createElement('span');
+	var div=document.createElement('div');
 	he.appendChild(div);
 	div.innerHTML=format(value)+unit;
 	div.style.fontSize="35px";
