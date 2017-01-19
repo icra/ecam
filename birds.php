@@ -284,14 +284,19 @@
 						<span class=circle style=background:#89375c></span>
 					<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?><td class=input><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
 					<tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?><td class=input><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
-					<tr stage=waste class=hidden>
-						<td><?php write('#birds_ww_n2o_effl')?> 
-						<td class=input><input id='ww_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
-							<span class=circle style=background:#b8879d></span>
+
+					<!--wwc protein consumption-->
 					<tr stage=waste class=hidden><td><?php write('#birds_ww_prot_con')?>
-						<td class=input><input id='ww_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/<?php write('#birds_year')?>
+						<td class=input><input id='wwc_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/<?php write('#birds_year')?>
 						<span class=circle style=background:#451c2e></span>
 					<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
+
+					<!--wwt n2o in effluent-->
+					<tr stage=waste class=hidden>
+						<td><?php write('#birds_ww_n2o_effl')?> 
+						<td class=input><input id='wwt_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
+							<span class=circle style=background:#b8879d></span>
+					</tr>
 			</table>
 			<script>
 				(function(){

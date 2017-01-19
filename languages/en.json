@@ -547,6 +547,9 @@
 	"#wwc_pmp_size_descr":"Size of pump (kW)",
 	"#wwc_pmp_size_expla":"Pump size kW",
 
+	"#wwc_SL_conn_pop_descr":"Population connected to sewer",
+	"#wwc_SL_conn_pop_expla":"Population connected to sewer",
+
 	"#wwc_KPI_nrg_per_m3_descr":"Energy consumption per pumped wastewater",
 	"#wwc_KPI_nrg_per_m3_expla":"?",
 	"#wwc_KPI_std_nrg_cons_descr":"Standardized Energy Consumption",
