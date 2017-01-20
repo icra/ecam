@@ -16,7 +16,9 @@
 <!--linear diagram--><?php include'linear.php'?>
 <!--TITLE--><h1 onclick=window.location='getStarted.php' style=cursor:pointer><script>document.write(Global.General.Name)</script></h1>
 <!--SUBTITLE--><h4 style=margin-top:0>
-	<?php write('#stages_this_is_an_overview_of_your_system')?> <a href=configuration.php><?php write('#configuration')?></a>.</h4>
+	Overview of your system. To activate or disable water stages go to 
+	<a href=configuration.php>Configuration</a>.
+</h4>
 
 <div id=main>
 

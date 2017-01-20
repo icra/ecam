@@ -14,7 +14,7 @@
 		for(var ct in Cts)
 		{
 			document.write("<tr>"+
-				"<td><b>"+ct+"</b>"+
+				"<td><a href=constant.php?id="+ct+">"+ct+"</a>"+
 				"<td>"+Cts[ct].descr+
 				"<td>"+Cts[ct].value+
 				"<td>"+(function(){ 

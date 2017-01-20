@@ -213,9 +213,8 @@ var Questions = {
 	//wwt
 	"wwt_producing_biogas":{
 		variables:[
-			"ww_biog_pro",
 			"wwt_biog_pro",
-			"c_ww_biogas_flar",
+			"c_wwt_biog_fla",
 			"wwt_KPI_biog_x_bod",
 		],
 		advanced:0,
@@ -237,7 +236,7 @@ var Questions = {
 	"wwt_engines":{
 		variables:[
 			"wwt_vol_fuel",
-			"wwt_KPI_GHG_ne",
+			"wwt_KPI_GHG_ne_fuel",
 		],
 		advanced:0,
 		otherQuestions:[],

@@ -3,6 +3,7 @@ var TODO=
 {
 	Back://back-end
 	[
+		"<b>NOW</b> Function to detect equations that use a constant 'x' for all constants",
 		"Graphs: resurrect flow diagram",
 		"Calculated variables. <a href=summary.php?type=ccvv>List</a>",
 		"Automatic find repeated variables in dataModel/questions.js",

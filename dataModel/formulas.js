@@ -60,7 +60,7 @@ var Formulas = {
 			if(typeof object[field]=="function" || typeof object[field]=="number")
 			{
 				match=object[field].toString().search(reg); //will return -1 if not found
-				if(match!=-1){matches.push(field);}
+				if(match+1){matches.push(field);}
 			}
 		}
 		return matches;

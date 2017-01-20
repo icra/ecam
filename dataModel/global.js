@@ -171,24 +171,16 @@ var Global={
 		"ww_ch4_efac" :0.06,
 		"ww_biog_pro":0,
 		"ww_biog_val":0,
+
+      	//TODO we consider that 100% of biogas is valorized if the user did not enter ww_biog_pro
 		c_ww_biogas_flar:function(){
-      //TODO we consider that 100% of biogas is valorized if the user did not enter ww_biog_pro
-			if(Global.Configuration["Yes/No"]["wwt_producing_biogas"])
-			{
-				if(this.ww_biog_pro==0)
-				{
-					if(Global.Configuration["Yes/No"]["wwt_valorizing_biogas"])
-						return 0;
-					else
-						return this.ww_serv_pop * this.Collection.wwc_bod_pday * Cts.ct_bod_kg.value * Cts.ct_biog_g.value/1000 * Global.General.Days();
-				}
-				else
-					return this.ww_biog_pro - this.ww_biog_val;
-			}
+			if(this.ww_biog_pro==0)
+				return this.ww_serv_pop*this.Collection.wwc_bod_pday*Cts.ct_bod_kg.value*Cts.ct_biog_g.value/1000*Global.General.Days();
 			else
-				return 0;
+				return this.ww_biog_pro-this.ww_biog_val;
 		},
-		c_ww_nrg_tsludge     :function(){return this.ww_num_trip*2*this.ww_dist_dis*0.25*0.84*43/1000000/1000},
+
+		c_ww_nrg_tsludge:function(){return this.ww_num_trip*2*this.ww_dist_dis*0.25*0.84*43/1000000/1000},
 
 		ww_SL_nrg_cost: function(){return 100*this.ww_nrg_cost/this.ww_run_cost},
 		ww_SL_serv_pop: function(){return 100*Global.Waste.ww_serv_pop/Global.Waste.ww_resi_pop},
@@ -263,20 +255,22 @@ var Global={
 			"wwt_biog_pro":0,
 			"wwt_biog_val":0,
 			"wwt_ch4_biog":0,
-
 			"wwt_trea_cap":0,
-
 			"wwt_bod_infl":0,
 			"wwt_bod_effl":0,
 			"wwt_nrg_biog":0,
 			"wwt_tst_cmpl":0,
 			"wwt_tst_cond":0,
-
 			"wwt_mass_slu":0,
 			"wwt_dryw_slu":0,
+			"wwt_type_tre":0, //type of treatment
+			"wwt_num_trip":0,
+			"wwt_dist_dis":0,
 
+			"c_wwt_biog_fla":function(){return this.wwt_biog_pro-this.wwt_biog_val},
 			"c_wwt_nrg_biog":function(){return this.wwt_biog_val*this.wwt_ch4_biog/100*10},
 			"c_wwt_bod_rmvd":function(){return this.wwt_bod_infl-this.wwt_bod_effl},
+			"c_wwt_nrg_tran":function(){return this.wwt_num_trip*2*this.wwt_dist_dis*0.25*0.84*43/1000000/1000},
 
 			wwt_KPI_nrg_per_m3:function(){return this.wwt_nrg_cons/this.wwt_vol_trea},
 			wwt_KPI_nrg_per_kg:function(){return this.wwt_nrg_cons/this.c_wwt_bod_rmvd()},
@@ -293,7 +287,21 @@ var Global={
 
 			//wwt GHG
 			wwt_KPI_GHG_elec:function(){return this.wwt_nrg_cons*Global.General.conv_kwh_co2},
-			wwt_KPI_GHG_ne:function(){return 0},   //TODO
+			wwt_KPI_GHG_ne_engines:function(){
+				var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.wwt_engines]; 
+				return this.wwt_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines)
+			},
+
+			wwt_KPI_GHG_ne_tsludge:function(){var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.wwt_trucks];return this.c_ww_nrg_tsludge()*(fuel.EFCO2+Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles+Cts.ct_n2o_eq.value*fuel.EFN2O.vehicles)},
+			wwt_KPI_GHG_ne_tre_ch4:function(){return ((this.ww_bod_infl-this.ww_bod_slud-this.ww_bod_effl)*this.ww_ch4_efac+Cts.ct_ch4_lo.value/100*this.c_ww_biogas_flar()*Cts.ct_ch4_bi.value/100*Cts.ct_ch4_m3.value)*Cts.ct_ch4_eq.value}, //old c_ww55
+			wwt_KPI_GHG_ne_tre_n2o:function(){return Cts.ct_n2o_eq.value*this.ww_n2o_effl*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value}, //old c_ww53
+			wwt_KPI_GHG_ne_unt_ch4:function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.Collection.wwc_bod_pday/1000*Global.General.Days()*Cts.ct_ch4_ef.value*Cts.ct_ch4_eq.value},                   //old c_ww52
+			wwt_KPI_GHG_ne_unt_n2o:function(){return (this.ww_conn_pop-this.ww_serv_pop)*this.ww_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value }, //old c_ww51
+
+			//ghg agrupats
+			wwt_KPI_GHG_ne_unt:function(){return this.ww_KPI_GHG_ne_ch4_unt()+this.ww_KPI_GHG_ne_n2o_unt()},
+			wwt_KPI_GHG_ne_tre:function(){return this.ww_KPI_GHG_ne_ch4_wwt()+this.ww_KPI_GHG_ne_n2o_tre()},
+			wwt_KPI_GHG_ne:function(){return this.wwt_KPI_GHG_ne_fuel()},//TODO acabar
 			wwt_KPI_GHG:function(){return this.wwt_KPI_GHG_elec()+this.wwt_KPI_GHG_ne()},
 		},
 
@@ -409,6 +417,9 @@ var Global={
 				wsd_engines           : "Diesel",
 				wsd_trucks            : "Diesel",
 				wwc_engines           : "Diesel",
+				wwt_engines           : "Diesel",
+				wwt_trucks            : "Diesel",
+				wwd_engines           : "Diesel",
 			},
 		},
 

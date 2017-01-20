@@ -5,8 +5,7 @@
 	 * Transform a <td> cell to a <input> to make modifications in the Global object
 	 * @param {element} element - the <td> cell
 	 */
-	level2.transformField=function (element)
-	{
+	level2.transformField=function(element) {
 		element.removeAttribute('onclick');
 		element.innerHTML="";
 
@@ -64,9 +63,8 @@
 	}
 
 	/** Redisplay table id=inputs */
-	level2.updateInputs=function ()
-	{
-		var t=document.getElementById('inputs')
+	level2.updateInputs=function() {
+		var t=document.getElementById('inputs');
 		while(t.rows.length>2){t.deleteRow(-1)}
 		for(var field in CurrentLevel)
 		{
@@ -80,39 +78,35 @@
 			/*check if is an option*/
 			if(Info[field] && Info[field].magnitude=="Option") continue;
 
-			if(Level3.list.indexOf(field)+1){continue;}
+			/*check if level3 only*/
+			if(Level3.list.indexOf(field)+1) continue;
 
-			/*check if field is level3 specific*/if(Level3.list.indexOf(field)+1) continue;
-
-			/*disable row according to questions*/
-			if(Questions.isHidden(field))
-			{
-				continue
-				//disableRow(newRow);
-			}
+			/*check if current question answers make it inactive*/
+			if(Questions.isHidden(field)) continue;
 
 			//bool for if current field is a calculated variable (CV)
 			var isCV = field.search(/^c_/)!=-1;
 
-			/*new row*/var newRow=t.insertRow(-1);
+			/*new row*/
+			var newRow=t.insertRow(-1);
 
-			/*background*/if(isCV){newRow.classList.add('isCV');}
+			/*class*/
+			if(isCV) newRow.classList.add('isCV');
 
 			/*hlInputs for formula and show formula, only if CV*/
-			if(isCV)
-			{
+			if(isCV) {
 				var formula = CurrentLevel[field].toString();
 				var prettyFormula = Formulas.prettify(formula);
 				newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
 				newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
 				newRow.setAttribute('title',prettyFormula);
 			}
-			else{
+			else {
 				newRow.setAttribute('onmouseover','Formulas.hlOutputs("'+field+'",CurrentLevel,1)');
 				newRow.setAttribute('onmouseout', 'Formulas.hlOutputs("'+field+'",CurrentLevel,0)');
 			}
 			
-			/*new ro attribute field=field>*/
+			/*new attribute field=field>*/
 			newRow.setAttribute('field',field);
 
 			/*code*/ 
@@ -120,28 +114,19 @@
 			newRow.append(newCell);
 			newCell.classList.add('variableCode');
 			if(isCV)newCell.classList.add('isCV');
-			newCell.innerHTML=(function()
-			{
+			newCell.innerHTML=(function() {
 				var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
 				return code;
 			})();
 
 			/*description*/ 
 			var newCell=newRow.insertCell(-1);
-
 			newCell.setAttribute('title', translate(field+"_expla"));
-
-			newCell.innerHTML=(function()
-			{
-				//implementing translation:
-				var description = translate(field+"_descr");
-				return description;
-			})();
+			newCell.innerHTML=translate(field+"_descr");
 
 			//editable cell if not CV
 			var newCell=newRow.insertCell(-1);
-			if(!isCV)
-			{
+			if(!isCV) {
 				if(typeof(substages)=="object" && substages.length > 1)
 				{
 					//this means you are in level 2 and you should NOT be able to modify inputs here
@@ -159,21 +144,20 @@
 						},600);
 					};
 				}
-				else //normal case
+				else //normal case: substages==1, user can modify level2
 				{
 					newCell.className="input";
 					newCell.title="<?php write('#edit_click_to_modify')?>";
 					newCell.setAttribute('onclick','level2.transformField(this)');
 				}
 			}
-			else //calculated variable, show formula
-			{
+			else {
+				//field is calculated variable, so show formula
 				newCell.title=Formulas.prettify(CurrentLevel[field].toString());
 			}
 
 			/*value*/
-			newCell.innerHTML=(function()
-			{
+			newCell.innerHTML=(function() {
 				var value = isCV ? CurrentLevel[field]() : CurrentLevel[field];
 				value/=Units.multiplier(field);
 				value=format(value);
@@ -181,7 +165,9 @@
 			})();
 
 			//check if this cv has estimated data
-			var ed=DQ.hasEstimatedData(field) ? " <span title='<?php write('#variable_this_equation_contains_estimated_data')?>' class=estimated>&#9888;</span>" : "";
+			var ed=DQ.hasEstimatedData(field) ? 
+				" <span title='<?php write('#variable_this_equation_contains_estimated_data')?>' class=estimated>&#9888;</span>" 
+				: "";
 			newCell.innerHTML+=ed;
 
 			//unit
@@ -264,9 +250,9 @@
 	/**
 	 * Update a field from the Global object
 	 * @param {string} field - The field of the CurrentLevel object
+	 * @param {number} newValue - new numeric value of the field
 	 */
-	level2.updateField=function(field,newValue)
-	{
+	level2.updateField=function(field,newValue) {
 		newValue=parseFloat(newValue);
 		if(isNaN(newValue))newValue=0;
 		CurrentLevel[field]=newValue*Units.multiplier(field);
@@ -289,7 +275,7 @@
 </table>
 
 <style>
-	#inputs .non-editable {
+	table#inputs .non-editable {
 		text-align:center;
 		cursor:pointer;
 		transition:all 1s;

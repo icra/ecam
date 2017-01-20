@@ -15,8 +15,14 @@
 					inputs[i].onclick=function(){this.select()}
 				}
 			})();
-			//first input click
-			var first=document.querySelector('#inputs tr[stage] td.input input[id]');
+
+			//first input click depending on active stages
+			var first=(function(){
+				if(Global.Configuration.ActiveStages.water)
+					return document.querySelector('#inputs tr[stage=water] td.input input[id]');
+				if(Global.Configuration.ActiveStages.waste)
+					return document.querySelector('#inputs tr[stage=waste] td.input input[id]');
+			})();
 			if(first.value=="0") first.click()
 		}
 	</script>

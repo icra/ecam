@@ -49,7 +49,7 @@
 		div#main button.button.prevNext {
 			display:block;
 			vertical-align:bottom;
-			margin:0.5em auto 0 auto;
+			margin:0.5em 0;
 			background:#acb;
 			border-radius:0;
 		}
@@ -620,6 +620,7 @@
 					border-radius:0.3em;
 					color:black;
 					background:#eee;
+					box-shadow: 0 1px 2px rgba(0,0,0,.1);
 				}
 			</style>
 			<a id=btn_all_fold href=# style="margin-right:0.1em;" 
@@ -801,6 +802,13 @@
 							{
 								?>
 								<tr question=wwc_engines><td><?php write('#configuration_engines')?>
+								<?php 
+							}
+							else if($level=="Waste" && $sublevel=="Treatment")
+							{
+								?>
+								<tr question=wwt_engines><td><?php write('#configuration_engines')?>
+								<tr question=wwt_trucks><td><?php write('#configuration_engines')?>
 								<?php 
 							}
 						?>

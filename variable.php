@@ -29,7 +29,7 @@
 		/** table "used to calculate" and "inputs involved" */
 		table#bminv td, table#utc td, table#ininv td{padding:2px 5px 2px 7px;border:none}
 		.unit{color:#aaa}
-		#info .constant a {color:black; !important}
+		#info .constant a {color:blue; !important}
 		.fuel {color:#088A29}
 		.fuel a {font-weight:bold;color:#088A29;}
 		.fuel:first-child {cursor:help}
@@ -141,7 +141,7 @@
 						//means this is a constant
 						if(match.substring(0,3)=="ct_")
 						{
-							ret+="<tr><td class=constant caption='CONSTANT: "+Cts[match].descr+"'><a href=constants.php>"+match+"</a><td>"+Cts[match].value+"<td class=unit>"+Cts[match].unit;
+							ret+="<tr><td class=constant caption='CONSTANT: "+Cts[match].descr+"'><a href=constant.php?id="+match+">"+match+"</a><td>"+Cts[match].value+"<td class=unit>"+Cts[match].unit;
 						}
 						else if(Global.Configuration.Selected.FuelType.hasOwnProperty(match))
 						{
@@ -203,11 +203,11 @@
 			}
 
 			//Current Value
-			newRow=t.insertRow(-1)
-			newCell=newRow.insertCell(-1)
-			newCell.className='th'
-			newCell.innerHTML="<?php write('#variable_value')?>"
-			newCell=newRow.insertCell(-1)
+			newRow=t.insertRow(-1);
+			newCell=newRow.insertCell(-1);
+			newCell.className='th';
+			newCell.innerHTML="Current value";
+			newCell=newRow.insertCell(-1);
 			if(typeof(currentStage[id])=="function")
 			{
 				newCell.innerHTML=(function()

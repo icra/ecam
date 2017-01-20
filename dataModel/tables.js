@@ -67,6 +67,29 @@ var Tables =
 	},
 
 	//wwt
+	"wwt_type_tre":{
+		"":{value:0},
+		"":{value:1},
+		"":{value:2},
+		"":{value:3},
+		//continue here
+		/*
+			Activated Sludge - Well managed
+			Activated Sludge - minor poorly aerated zones
+			Activated Sludge - some aerated zones
+			Activated Sludge - Wnot well managed
+			Aerated Lagoon
+			Anaerobic Lagoon <2m depth
+			Anaerobic Lagoon >2m depth
+			Anaerobic Lagoon covered
+			Trickling Filter
+			UASB - CH4 recovery not considered
+			UASB - CH4 recovery considered
+			Wetlands - Surface flow
+			Wetlands - Horizontal subsurface flow
+			Wetlands - Vertical subsurface flow
+		*/
+	},
 	//wwd
 
 	//other TODO
