@@ -1,6 +1,5 @@
 /*Tasks data structure*/
-var TODO=
-{
+var TODO = {
 	Back://back-end
 	[
 		"<b>NOW</b> Function to detect equations that use a constant 'x' for all constants",

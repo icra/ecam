@@ -2,8 +2,7 @@
 function locateVariable(code)
 {
 	var localization={};//e.g {"level":"Water","sublevel":"Abstraction"}
-	localization['toString']=function()
-	{
+	localization.toString=function() {
 		var levelName=(function()
 		{
 			switch(localization.level)

@@ -191,7 +191,7 @@
 
 							ret+="<tr>"+
 								"<td class=variableCode><a style='color:"+color+"' href=variable.php?id="+match+" "+
-								"caption='["+match_localization.toString()+"] "+translate(match+"_descr")+"'"+
+								"caption='INPUT: "+translate(match+"_descr")+"'"+
 								">"+match+"</a> "+
 								"<td caption='"+currValue+"' style=cursor:help>"+currValueF+"<td><span class=unit>"+currentUnit+"</span> "+
 								estimated;

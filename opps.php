@@ -10,52 +10,7 @@
 			document.querySelector('#idealAuc').value=Global.Water.Distribution.wsd_auth_con;
 			setAuc(Global.Water.Distribution.wsd_auth_con)
 
-			calculateGHG()
-			findCriticGHG()
-
 			Caption.listeners();
-		}
-
-		function findCriticGHG()
-		{
-			var max = 0
-			var critic = false;
-			var fields = document.querySelectorAll('#sources td[field]')
-			for(var i=0;i<fields.length;i++)
-			{
-				var value = parseFloat(fields[i].getAttribute('value'))
-				if(value>=max)
-				{
-					max=value;
-					critic=fields[i].getAttribute('field')
-				}
-			}
-			if(!critic)return
-			var element=document.querySelector("#sources td[field="+critic+"]")
-			element.classList.add('critic')
-			element.title="This is the highest GHG emission of your system"
-			element.previousSibling.classList.add('critic')
-			element.previousSibling.title=element.title
-		}
-
-		function calculateGHG()
-		{
-			var fields = document.querySelectorAll('#sources [field]')
-			for(var i=0;i<fields.length;i++)
-			{
-				var element = fields[i]
-				var code = element.getAttribute('field')
-				var level=(function()
-				{
-					if(code.substring(0,2)=="ws")
-						return "Water"
-					else
-						return "Waste"
-				})()
-				var value=Global[level][code]();
-				element.innerHTML=format(value);
-				element.setAttribute('value',value);
-			}
 		}
 
 		function setServPop(ideal) //ideal serviced pop for untreated wastewater
@@ -104,15 +59,6 @@
 			document.querySelector('#aucPerCapita').innerHTML=format(aucPerCapita)
 		}
 	</script>
-	<style>
-		@keyframes blink { from {background-color: white;} to {background-color: orange;} }
-		#sources .critic {
-			color:black;
-			cursor:help;
-			font-weight:bold;
-			animation: blink 3s ease 0.5s infinite alternate;
-		}
-	</style>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--navbar--><?php include"navbar.php"?>
@@ -126,39 +72,7 @@
 <!--ghg sources column-->
 <div class=inline style="width:28%">
 	<!--sources of ghg-->
-	<div class="card"><?php cardMenu('GHG emissions during the Assessment Period') ?>
-		<h4>CO<sub>2</sub> emitted in <script>document.write(Global.General.Days())</script> days
-		(<span class=circle style=background:orange></span> highest emission)
-		</h4>
-		<table id=sources>
-			<style>
-				table#sources{ 
-					margin:10px 0; 
-					width:95%;
-				}
-				table#sources td {max-width:70px}
-				table#sources td:last-child {text-align:right}
-			</style>
-			
-			<tr><th rowspan=9 style=font-weight:bold;background:#d7bfaf;color:black>TOTAL<br>kg CO<sub>2</sub><br>
-				(<span><script>document.write(format(Global.General.TotalGHG()))</script></span>)
-
-			<th rowspan=2>Water<br>supply<br>(<span field=ws_KPI_GHG>0</span>)
-				<td colspan=2>Electricity<td field=ws_KPI_GHG_elec>0
-				<tr><td colspan=2>Fuel engines<td field=ws_KPI_GHG_ne>0
-
-			<tr><th rowspan=7 class=red>Wastewater <br>(<span field=ww_KPI_GHG>0</span>)
-				<td colspan=2>Electricity <td field=ww_KPI_GHG_elec>0
-				<tr><td colspan=2>Fuel engines <td field=ww_KPI_GHG_ne_engines>0
-				<tr><td colspan=2>Sludge transport <td field=ww_KPI_GHG_ne_tsludge>0
-				<tr><td rowspan=2>Treated wastewater<br>(<span field=ww_KPI_GHG_ne_tre>0</span>)
-					<td>    From CH<sub>4</sub><td field=ww_KPI_GHG_ne_ch4_wwt>0
-					<tr><td>From N<sub>2</sub>O<td field=ww_KPI_GHG_ne_n2o_tre>0
-				<tr><td rowspan=2>Untreated wastewater<br>(<span field=ww_KPI_GHG_ne_unt>0</span>)
-					<td>From CH<sub>4</sub> <td field=ww_KPI_GHG_ne_ch4_unt>0
-					<tr><td>From N<sub>2</sub>O <td field=ww_KPI_GHG_ne_n2o_unt>0
-		</table>
-	</div>
+	<?php include'ghg_sources.php'?>
 
 	<!--Catalog of Solutions-->
 	<div class=card id=CoS><?php cardMenu("IWA Catalogue of solutions")?>

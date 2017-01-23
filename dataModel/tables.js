@@ -67,49 +67,28 @@ var Tables =
 	},
 
 	//wwt
-	"wwt_type_tre":{
-		"":{value:0},
-		"":{value:1},
-		"":{value:2},
-		"":{value:3},
-		//continue here
-		/*
-			Activated Sludge - Well managed
-			Activated Sludge - minor poorly aerated zones
-			Activated Sludge - some aerated zones
-			Activated Sludge - Wnot well managed
-			Aerated Lagoon
-			Anaerobic Lagoon <2m depth
-			Anaerobic Lagoon >2m depth
-			Anaerobic Lagoon covered
-			Trickling Filter
-			UASB - CH4 recovery not considered
-			UASB - CH4 recovery considered
-			Wetlands - Surface flow
-			Wetlands - Horizontal subsurface flow
-			Wetlands - Vertical subsurface flow
-		*/
-	},
-	//wwd
+	"wwt_type_tre":{ //they also have ch4 emission factor inside
+		"Activated Sludge - Well managed":{value:0,               ch4_ef:0},
+		"Activated Sludge - Minor poorly aerated zones":{value:1, ch4_ef:0.06},
+		"Activated Sludge - Some aerated zones":{value:2,         ch4_ef:0.12},
+		"Activated Sludge - Not well managed":{value:3,           ch4_ef:0.18},
+		"Aerated Lagoon":{value:4,                                ch4_ef:0.18},
+		"Anaerobic Lagoon <2m depth":{value:5,                    ch4_ef:0.12},
+		"Anaerobic Lagoon >2m depth":{value:6,                    ch4_ef:0.48},
+		"Anaerobic Lagoon covered":{value:7,                      ch4_ef:0}, //MISSING VALUE
+		"Trickling Filter":{value:8,                              ch4_ef:0.036},
+		"UASB - CH4 recovery not considered":{value:9,            ch4_ef:0.48},
+		"UASB - CH4 recovery considered":{value:10,               ch4_ef:0.3},
+		"Wetlands - Surface flow":{value:11,                      ch4_ef:0.24},
+		"Wetlands - Horizontal subsurface flow":{value:12,        ch4_ef:0.06},
+		"Wetlands - Vertical subsurface flow":{value:13,          ch4_ef:0.006},
 
-	//other TODO
-	"Technologies":{//TODO
-		"Waste":{
-			"None":{},
-			"Primary treatment (PT)":{},
-			"Trickling filters (TF)":{},
-			"Activated sludge (AS)":{},
-			"AS and Coagulation/Filtration (C/F)":{},
-			"AS nitrification and C/F":{},
-			"Aerated Laggons":{},
-			"Anaerobic Laggons":{},
-			"UASB":{},
-			"Artificial Wetlands":{},
-			"Other":{},
-		},
 	},
+
+	//wwd
 }
 
+//find the option name by value
 Tables.find=function(field,value)
 {
 	for(var option in Tables[field])

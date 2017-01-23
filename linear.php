@@ -77,12 +77,12 @@
 		<img class=l1 stage=waste src=img/waste.png onclick=window.location="edit.php?level=Waste" caption="<?php write('#Waste')?>"> 
 	</div>
 
-	<!--Opportunities-->
+	<!--Total GHG Sources-->
 	<div
 		style=cursor:pointer
-		onclick=window.location="opps.php">
-		<div><a href=opps.php style="color:#666"><?php write('#opportunities')?></a></div>
-		<img class=l1 stage=opps src=img/opps.png caption="Opportunities to reduce GHG emissions">
+		onclick=window.location="sources.php">
+		<div><a href=sources.php style="color:#666">GHG Sources</a></div>
+		<img class=l1 stage=sources src=img/sources.png caption="GHG Sources">
 	</div>
 
 </div>
@@ -138,9 +138,9 @@
 		//hl configuration if we are in configuration
 		if(strpos($_SERVER['PHP_SELF'],"configuration.php"))
 		{ ?>document.querySelector('img[stage=conf]').classList.add('selected');<?php }
-		//hl opps if we are in opps.php
-		if(strpos($_SERVER['PHP_SELF'],"opps.php"))
-		{ ?>document.querySelector('img[stage=opps]').classList.add('selected');<?php }
+		//hl sources if we are in sources.php
+		if(strpos($_SERVER['PHP_SELF'],"sources.php"))
+		{ ?>document.querySelector('img[stage=sources]').classList.add('selected');<?php }
 		//hl inhabitants
 		if(strpos($_SERVER['PHP_SELF'],"inhabitants.php"))
 		{ ?>document.querySelector('img[stage=inha]').classList.add('selected');<?php }
@@ -153,7 +153,7 @@
 		for(var i=0;i<collection.length;i++)
 		{
 			var stage = collection[i].getAttribute('stage');
-			if(["birds","energy","conf",'opps','gets','inha'].indexOf(stage)>=0) continue;
+			if(["birds","energy","conf",'sources','gets','inha'].indexOf(stage)>=0) continue;
 			var isActive = Global.Configuration.ActiveStages[stage];
 			if(!isActive)
 			{

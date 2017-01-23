@@ -47,6 +47,8 @@ var Units =
 	},
 	"Energy":{
 		kWh:1,
+		MWh:1000,
 		Joule:(1/3600000),
+		TJ:(1e7/36),
 	},
 }

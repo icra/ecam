@@ -223,7 +223,6 @@ var Questions = {
 	"wwt_valorizing_biogas":{
 		variables:[
 			"wwt_biog_val",
-			"ww_biog_val",
 			"wwt_nrg_biog",
 			"wwt_ch4_biog",
 			"c_wwt_nrg_biog",
@@ -257,18 +256,6 @@ var Questions = {
 		otherQuestions:[],
 	},
 	//wwd
-
-	//other workinprogress
-	"truck_transport_waste":{
-		variables:[
-			"ww_dist_dis",
-			"ww_num_trip",
-			"c_ww_nrg_tsludge",
-			"ww_KPI_GHG_ne_tsludge"
-			],
-		advanced:0,
-		otherQuestions:[],
-	},
 };
 
 Questions.isHidden=function(field)

@@ -9,14 +9,17 @@
 <!--constants-->
 <div id=main style=margin-bottom:3em;font-family:monospace>
 <table>
-	<tr><th>Code<th>Description<th>Value<th>Unit
+	<tr><th>Code
+	<th>Value
+	<th>Description
+	<th>Units
 	<script>
 		for(var ct in Cts)
 		{
 			document.write("<tr>"+
 				"<td><a href=constant.php?id="+ct+">"+ct+"</a>"+
+				"<td title='"+Cts[ct].value+"'>"+format(Cts[ct].value)+
 				"<td>"+Cts[ct].descr+
-				"<td>"+Cts[ct].value+
 				"<td>"+(function(){ 
 					return (Cts[ct].unit == "?????" ? "<span style=background:red>"+Cts[ct].unit+"</span>" : Cts[ct].unit); 
 				}()) +
