@@ -216,9 +216,12 @@ var Questions = {
 			"wwt_biog_pro",
 			"c_wwt_biog_fla",
 			"wwt_KPI_biog_x_bod",
+			"wwt_KPI_GHG_ne_biog",
 		],
 		advanced:0,
-		otherQuestions:[],
+		otherQuestions:[
+			"wwt_valorizing_biogas",
+		],
 	},
 	"wwt_valorizing_biogas":{
 		variables:[
@@ -236,6 +239,16 @@ var Questions = {
 		variables:[
 			"wwt_vol_fuel",
 			"wwt_KPI_GHG_ne_fuel",
+		],
+		advanced:0,
+		otherQuestions:[],
+	},
+	"wwt_trucks":{
+		variables:[
+			"wwt_num_trip",
+			"wwt_dist_dis",
+			"c_wwt_nrg_tran",
+			"wwt_KPI_GHG_ne_tsludge",
 		],
 		advanced:0,
 		otherQuestions:[],

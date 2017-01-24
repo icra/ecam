@@ -69,20 +69,20 @@
 		<img class=l2 stage=wasteDis src=img/wasteDis.png onclick=window.location="edit.php?level=Waste&sublevel=Discharge"    caption="<?php write('#Discharge')?>">
 	</div>
 
-	<!--Summaries-->
+	<!--Total GHG Summary-->
+	<div
+		style=cursor:pointer
+		onclick=window.location="sources.php">
+		<div><a href=sources.php style="color:#666">GHG Summary</a></div>
+		<img class=l1 stage=sources src=img/sources.png caption="GHG Sources">
+	</div>
+
+	<!--Other Summaries-->
 	<div>
 		<div><span style="color:#666"><?php write('#summary')?></span></div>
 		<img class=l1 stage=water src=img/water.png onclick=window.location="edit.php?level=Water" caption="<?php write('#Water')?>"> 
 		<img class=l1 stage=energy src=img/energy.png onclick=window.location="edit.php?level=Energy" caption="<?php write('#energy_summary')?>"> 
 		<img class=l1 stage=waste src=img/waste.png onclick=window.location="edit.php?level=Waste" caption="<?php write('#Waste')?>"> 
-	</div>
-
-	<!--Total GHG Sources-->
-	<div
-		style=cursor:pointer
-		onclick=window.location="sources.php">
-		<div><a href=sources.php style="color:#666">GHG Sources</a></div>
-		<img class=l1 stage=sources src=img/sources.png caption="GHG Sources">
 	</div>
 
 </div>

@@ -4,6 +4,11 @@ var Level3={};
 
 Level3.list=
 [
+	//ws
+	"ws_KPI_GHG_elec",
+	"ws_KPI_GHG_ne",
+	//ww
+
 	//wsa
 	"wsa_fri_loss",
 	"wsa_main_len",
@@ -25,13 +30,14 @@ Level3.list=
 	"wst_nrg_disn",
 	"wst_vol_pump",
 	"wst_pmp_head",
+	"wst_nrg_pump",
 	"wst_KPI_GHG_slud",
 	"wst_KPI_GHG_ne",
 	"wst_KPI_nrg_disnfc",
 	"wst_KPI_std_nrg_cons",
 	"wst_KPI_slu_per_m3",
 	"wst_KPI_capac_util",
-	"wst_nrg_pump",
+	"wst_KPI_std_elec_eff",
 
 	//wsd
 	"wsd_deli_pts",
@@ -79,6 +85,7 @@ Level3.list=
 	"wwc_vol_infi",
 	"wwc_KPI_GHG_ii",
 	"wwc_KPI_GHG_ne",
+	"wwc_KPI_GHG_ne_unt",
 
 	//wwt
 	"wwt_tst_cmpl",
@@ -90,6 +97,8 @@ Level3.list=
 	"wwt_KPI_dry_sludge",
 	"wwt_KPI_capac_util",
 	"wwt_SL_qual_com",
+	"wwt_KPI_GHG_ne_tre",
+	"wwt_KPI_GHG_ne",
 
 	//wwd
 	"wwd_vol_pump",

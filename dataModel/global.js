@@ -44,23 +44,23 @@ var Global={
 
 		//wsa
 		"Abstraction":{
+			"wsa_vol_conv":0,
 			"wsa_nrg_cons":0,
 			"wsa_nrg_pump":0,
-			"wsa_vol_conv":0,
 			"wsa_vol_pump":0,
 			"wsa_vol_fuel":0,
-			"wsa_nrg_turb":0,
 			"wsa_pmp_head":0,
 			"wsa_main_len":0,
 			"wsa_fri_loss":0,
+			"wsa_nrg_turb":0,
 			"wsa_watr_src":0,
 			"wsa_pmp_type":0,
 			"wsa_pmp_size":0,
 			wsa_nrg_per_pmp_watr:function(){return this.wsa_nrg_cons/this.wsa_vol_pump},
 			wsa_KPI_nrg_recovery:function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
 			wsa_KPI_std_elec_eff:function(){return 0.2725/this.wsa_KPI_std_nrg_cons()},
-			wsa_KPI_un_head_loss:function(){return 1000*this.wsa_fri_loss/this.wsa_main_len},
 			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_pump+this.wsa_nrg_turb)/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
+			wsa_KPI_un_head_loss:function(){return 1000*this.wsa_fri_loss/this.wsa_main_len},
 			wsa_SL_water_losses:function(){return 0}, //TODO
 			wsa_KPI_GHG_elec:function(){return this.wsa_nrg_cons*Global.General.conv_kwh_co2},
 			wsa_KPI_GHG_ne:function(){
@@ -71,9 +71,10 @@ var Global={
 		},
 
 		"Treatment":{
-			"wst_nrg_cons":0,
 			"wst_vol_trea":0,
+			"wst_nrg_cons":0,
 			"wst_vol_fuel":0,
+
 			"wst_tst_carr":0,
 			"wst_trea_cap":0, 
 			"wst_mass_slu":0,
@@ -88,9 +89,12 @@ var Global={
 			"wst_pmp_head":0,
 			wst_KPI_nrg_per_m3:function(){return this.wst_nrg_cons/this.wst_vol_trea},
 			wst_KPI_nrg_disnfc:function(){return this.wst_nrg_disn/this.wst_vol_trea},
+			wst_KPI_std_nrg_cons:function(){return this.wst_nrg_pump/(this.wst_vol_pump*this.wst_pmp_head/100)},
 			wst_KPI_slu_per_m3:function(){return this.wst_mass_slu/this.wst_vol_trea},
 			wst_KPI_capac_util:function(){return 100*this.wst_vol_trea/this.wst_trea_cap},
-			wst_KPI_std_nrg_cons:function(){return this.wst_nrg_pump/(this.wst_vol_pump*this.wst_pmp_head/100)},
+			wst_KPI_std_elec_eff:function(){return 0.2725/this.wst_KPI_std_nrg_cons()},
+
+			//wst GHG
 			wst_KPI_GHG_elec:function(){return this.wst_nrg_cons*Global.General.conv_kwh_co2},
 			wst_KPI_GHG_slud:function(){return 0},
 			wst_KPI_GHG_fuel:function(){
@@ -250,23 +254,26 @@ var Global={
 			"c_wwt_nrg_tran":function(){return this.wwt_num_trip*2*this.wwt_dist_dis*0.25*0.84*43/1000000/1000},
 
 			//SSLL
-			//wwt_KPI_nrg_per_m3:function(){return this.wwt_nrg_cons/this.wwt_vol_trea},
-			//wwt_KPI_nrg_per_kg:function(){return this.wwt_nrg_cons/this.c_wwt_bod_rmvd()},
-			//wwt_KPI_nrg_biogas:function(){return this.wwt_nrg_biog/this.wwt_vol_trea},
-			//wwt_KPI_biog_x_bod:function(){return this.wwt_biog_pro/this.c_wwt_bod_rmvd()},
-			//wwt_KPI_nrg_x_biog:function(){return 100*this.wwt_nrg_biog/this.c_wwt_nrg_biog()},
-			//wwt_KPI_sludg_prod:function(){return this.wwt_mass_slu/this.wwt_vol_trea},
-			//wwt_KPI_dry_sludge:function(){return 100*this.wwt_dryw_slu/this.wwt_mass_slu},
-			//wwt_KPI_capac_util:function(){return 100*this.wwt_vol_trea/this.wwt_trea_cap},
-			//wwt_SL_qual_com:function(){return 100*this.wwt_tst_cmpl/this.wwt_tst_cond},
+			wwt_KPI_nrg_per_m3:function(){return this.wwt_nrg_cons/this.wwt_vol_trea},
+			wwt_KPI_nrg_per_kg:function(){return this.wwt_nrg_cons/this.c_wwt_bod_rmvd()},
+			wwt_KPI_nrg_biogas:function(){return this.wwt_nrg_biog/this.wwt_vol_trea},
+			wwt_KPI_biog_x_bod:function(){return this.wwt_biog_pro/this.c_wwt_bod_rmvd()},
+			wwt_KPI_nrg_x_biog:function(){return 100*this.wwt_nrg_biog/this.c_wwt_nrg_biog()},
+			wwt_KPI_sludg_prod:function(){return this.wwt_mass_slu/this.wwt_vol_trea},
+			wwt_KPI_dry_sludge:function(){return 100*this.wwt_dryw_slu/this.wwt_mass_slu},
+			wwt_KPI_capac_util:function(){return 100*this.wwt_vol_trea/this.wwt_trea_cap},
+			wwt_SL_qual_com:function(){return 100*this.wwt_tst_cmpl/this.wwt_tst_cond},
 			ww_SL_vol_pday:function(){return Global.Waste.ww_SL_vol_pday()},
-			//ww_SL_serv_pop:function(){return Global.Waste.ww_SL_serv_pop()},
+			ww_SL_serv_pop:function(){return Global.Waste.ww_SL_serv_pop()},
 
 			//wwt GHG
 			wwt_KPI_GHG_elec:function(){return this.wwt_nrg_cons*Global.General.conv_kwh_co2},
 			wwt_KPI_GHG_ne_fuel:function(){
 				var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.wwt_engines]; 
 				return this.wwt_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines)
+			},
+			wwt_KPI_GHG_ne_biog:function(){
+				return -999;//TODO
 			},
 			wwt_KPI_GHG_ne_tsludge:function(){
 				var fuel=Tables['Fuel types'][Global.Configuration.Selected.FuelType.wwt_trucks];

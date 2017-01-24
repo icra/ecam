@@ -808,7 +808,7 @@
 							{
 								?>
 								<tr question=wwt_engines><td><?php write('#configuration_engines')?>
-								<tr question=wwt_trucks><td><?php write('#configuration_engines')?>
+								<tr question=wwt_trucks><td>Trucks
 								<?php 
 							}
 						?>

@@ -105,29 +105,24 @@ Graphs.graph4=function(withTable,container)
 	var ww=Global.Configuration.ActiveStages.waste;
 
 	//Values
-	var slice_1 = ws * Global.Water.ws_KPI_GHG_elec();
-	var slice_2 = ws * Global.Water.ws_KPI_GHG_ne();
-	var slice_3 = ww * Global.Waste.ww_KPI_GHG_elec();
-	var slice_4 = ww * Global.Waste.ww_KPI_GHG_ne_ch4_wwt();
-	var slice_5 = ww * Global.Waste.ww_KPI_GHG_ne_n2o_tre();
-	var slice_6 = ww * Global.Waste.ww_KPI_GHG_ne_tsludge();
-	var slice_7 = ww * Global.Waste.ww_KPI_GHG_ne_ch4_unt();
-	var slice_8 = ww * Global.Waste.ww_KPI_GHG_ne_n2o_unt();
-	var slice_9 = ww * Global.Waste.ww_KPI_GHG_ne_engines();
+	var slice_1 = ws * Global.Water.Abstraction.wsa_KPI_GHG();
+	var slice_2 = ws * Global.Water.Treatment.wst_KPI_GHG();
+	var slice_3 = ws * Global.Water.Distribution.wsd_KPI_GHG();
+	var slice_4 = ww * Global.Waste.Collection.wwc_KPI_GHG();
+	var slice_5 = ww * Global.Waste.Treatment.wwt_KPI_GHG();
+	var slice_6 = ww * Global.Waste.Discharge.wwd_KPI_GHG();
 
-	var sum = slice_1+slice_2+slice_3+slice_4+slice_5+slice_6+slice_7+slice_8+slice_9;
+	//sum
+	var sum = slice_1+slice_2+slice_3+slice_4+slice_5+slice_6;
 
 	//names
 	var names=[
-		"WS "+translate("ws_KPI_GHG_elec_descr"),
-		"WS "+translate("ws_KPI_GHG_ne_descr"),
-		"WW "+translate("ww_KPI_GHG_elec_descr"),
-		"WW "+translate("ww_KPI_GHG_ne_ch4_wwt_descr"),
-		"WW "+translate("ww_KPI_GHG_ne_n2o_tre_descr"),
-		"WW "+translate("ww_KPI_GHG_ne_tsludge_descr"),
-		"WW "+translate("ww_KPI_GHG_ne_ch4_unt_descr"),
-		"WW "+translate("ww_KPI_GHG_ne_n2o_unt_descr"),
-		"WW "+translate("ww_KPI_GHG_ne_engines_descr"),
+		"WS Abstraction",
+		"WS Treatment",
+		"WS Distribution",
+		"WW Collection",
+		"WW Treatment",
+		"WW Discharge",
 	];
 
 	//actual graph data
@@ -140,9 +135,6 @@ Graphs.graph4=function(withTable,container)
 		[names[3],slice_4],
 		[names[4],slice_5],
 		[names[5],slice_6],
-		[names[6],slice_7],
-		[names[7],slice_8],
-		[names[8],slice_9],
 	]);
 
 	//options
@@ -159,9 +151,6 @@ Graphs.graph4=function(withTable,container)
 			3:{color:ColorsGHG.ww_KPI_GHG_ne_ch4_wwt},
 			4:{color:ColorsGHG.ww_KPI_GHG_ne_n2o_tre},
 			5:{color:ColorsGHG.ww_KPI_GHG_ne_tsludge},
-			6:{color:ColorsGHG.ww_KPI_GHG_ne_ch4_unt},
-			7:{color:ColorsGHG.ww_KPI_GHG_ne_n2o_unt},
-			8:{color:ColorsGHG.ww_KPI_GHG_ne_engines},
 		},
 	};
 
@@ -195,15 +184,12 @@ Graphs.graph4=function(withTable,container)
 		"<button onclick=\"Graphs.graph1(true,'"+container+"');scrollToItem('"+container+"')\">"+translate('graphs_non_detailed')+"</button>"+
 		"<table title=graph4>"+
 			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+""+
-			"<tr><td>"+names[0]+"<td>ws_KPI_GHG_elec	     <td>"+format(slice_1)+
-			"<tr><td>"+names[1]+"<td>ws_KPI_GHG_ne	       <td>"+format(slice_2)+
-			"<tr><td>"+names[2]+"<td>ww_KPI_GHG_elec	     <td>"+format(slice_3)+
-			"<tr><td>"+names[3]+"<td>ww_KPI_GHG_ne_ch4_wwt <td>"+format(slice_4)+
-			"<tr><td>"+names[4]+"<td>ww_KPI_GHG_ne_n2o_tre <td>"+format(slice_5)+
-			"<tr><td>"+names[5]+"<td>ww_KPI_GHG_ne_tsludge <td>"+format(slice_6)+
-			"<tr><td>"+names[6]+"<td>ww_KPI_GHG_ne_ch4_unt <td>"+format(slice_7)+
-			"<tr><td>"+names[7]+"<td>ww_KPI_GHG_ne_n2o_unt <td>"+format(slice_8)+
-			"<tr><td>"+names[8]+"<td>ww_KPI_GHG_ne_engines <td>"+format(slice_9)+
+			"<tr><td>"+names[0]+"<td>wsa_KPI_GHG <td>"+format(slice_1)+
+			"<tr><td>"+names[1]+"<td>wst_KPI_GHG <td>"+format(slice_2)+
+			"<tr><td>"+names[2]+"<td>wsd_KPI_GHG <td>"+format(slice_3)+
+			"<tr><td>"+names[3]+"<td>wwc_KPI_GHG <td>"+format(slice_4)+
+			"<tr><td>"+names[4]+"<td>wwt_KPI_GHG <td>"+format(slice_5)+
+			"<tr><td>"+names[5]+"<td>wwd_KPI_GHG <td>"+format(slice_6)+
 		"</table>"+
 		"";
 		div.innerHTML=table;
