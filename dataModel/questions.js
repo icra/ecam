@@ -32,6 +32,7 @@ var Questions = {
 	"wsa_engines":{
 		variables:[
 			"wsa_vol_fuel",
+			"wsa_fuel_typ",
 			"wsa_KPI_GHG_ne",
 		],
 		advanced:0,
@@ -62,6 +63,7 @@ var Questions = {
 	"wst_engines":{
 		variables:[
 			"wst_vol_fuel",
+			"wst_fuel_typ",
 			"wst_KPI_GHG_fuel",
 		],
 		advanced:0,
@@ -108,6 +110,7 @@ var Questions = {
 	"wsd_engines":{
 		variables:[
 			"wsd_vol_fuel",
+			"wsd_fuel_typ",
 			"wsd_KPI_GHG_ne_fuel",
 		],
 		advanced:0,
@@ -168,6 +171,7 @@ var Questions = {
 	"wwc_engines":{
 		variables:[
 			"wwc_vol_fuel",
+			"wwc_fuel_typ",
 			"wwc_KPI_GHG_ne_fuel",
 		],
 		advanced:0,
@@ -238,6 +242,7 @@ var Questions = {
 	"wwt_engines":{
 		variables:[
 			"wwt_vol_fuel",
+			"wwt_fuel_typ",
 			"wwt_KPI_GHG_ne_fuel",
 		],
 		advanced:0,
@@ -245,6 +250,7 @@ var Questions = {
 	},
 	"wwt_trucks":{
 		variables:[
+			"wwt_trck_typ",
 			"wwt_num_trip",
 			"wwt_dist_dis",
 			"c_wwt_nrg_tran",
@@ -269,10 +275,18 @@ var Questions = {
 		otherQuestions:[],
 	},
 	//wwd
+	"wwd_engines":{
+		variables:[
+			"wwd_vol_fuel",
+			"wwd_fuel_typ",
+			"wwd_KPI_GHG_ne_fuel",
+		],
+		advanced:0,
+		otherQuestions:[],
+	},
 };
 
-Questions.isHidden=function(field)
-{
+Questions.isHidden=function(field) {
 	//go over all questions
 	for(var question in this)
 	{
@@ -291,8 +305,7 @@ Questions.isHidden=function(field)
 }
 
 //return the codes according to an ubication inside "Global". ubication is a pointer to object
-Questions.getQuestions=function(ubication)
-{
+Questions.getQuestions=function(ubication) {
 	var code,questions=[];
 	//go over all questions
 	for(var question in this)
@@ -314,8 +327,7 @@ Questions.getQuestions=function(ubication)
 }
 
 //check if the question "field" should be hidden
-Questions.isHiddenQuestion=function(field)
-{
+Questions.isHiddenQuestion=function(field) {
 	//go over all questions
 	for(var question in this)
 	{

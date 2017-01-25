@@ -2,7 +2,7 @@
 	<?php include'imports.php'?>
 	<style>
 		body {background:#F5ECCE}
-		h1{background:white;border-bottom:1px solid #ccc}
+		h1{background:white;border-bottom:1px solid #ccc;}
 		/*
 			legend colors for graphs
 		*/
@@ -280,6 +280,8 @@
 						</b>
 					</span>
 
+					<tr stage=waste class=hidden><td>Energy consumed from the grid<td class=output><input id='ww_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_nrg_cons'].unit)</script>
+					<tr stage=waste class=hidden><td>Volume of fuel consumed<td class=output><input id='ww_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_vol_fuel'].unit)</script>
 					<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_wwtr')?><td class=input><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
 						<span class=circle style=background:#89375c></span>
 					<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?><td class=input><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>

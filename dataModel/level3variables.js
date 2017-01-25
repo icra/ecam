@@ -8,6 +8,8 @@ Level3.list=
 	"ws_KPI_GHG_elec",
 	"ws_KPI_GHG_ne",
 	//ww
+	"ww_KPI_GHG_elec",
+	"ww_KPI_GHG_ne",
 
 	//wsa
 	"wsa_fri_loss",
@@ -19,6 +21,9 @@ Level3.list=
 	"wsa_KPI_std_elec_eff",
 	"wsa_KPI_un_head_loss",
 	"wsa_SL_water_losses",
+	"wsa_watr_src",
+	"wsa_pmp_type",
+	"wsa_pmp_size",
 
 	//wst 
 	"wst_mass_slu",
@@ -99,6 +104,13 @@ Level3.list=
 	"wwt_SL_qual_com",
 	"wwt_KPI_GHG_ne_tre",
 	"wwt_KPI_GHG_ne",
+	"c_wwt_ch4_efac",
+	"wwt_KPI_nrg_per_m3",
+	"wwt_KPI_nrg_per_kg",
+	"wwt_KPI_nrg_biogas",
+	"wwt_KPI_nrg_x_biog",
+	"wwt_KPI_biog_x_bod",
+	"ww_SL_serv_pop",
 
 	//wwd
 	"wwd_vol_pump",
@@ -107,4 +119,5 @@ Level3.list=
 	"wwd_trb_head",
 	"wwd_KPI_std_nrg_cons",
 	"wwd_KPI_std_nrg_recv",
+	"wwd_KPI_GHG_ne",
 ];

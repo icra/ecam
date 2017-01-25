@@ -49,11 +49,16 @@
 		div#main button.button.prevNext {
 			display:block;
 			vertical-align:bottom;
-			margin:0.5em 0;
+			margin:0.5em auto;
 			background:#acb;
 			border-radius:0;
 		}
+		div#main button.button.prevNext:after {
+			content:'Ok';
+		}
 		body{background:#F5ECCE}
+
+		#questions td, #adv_questions td {padding:1em 1.618em;text-align:left}
 
 		<?php
 			if($level=="Waste")
@@ -481,70 +486,25 @@
 			var button;button=document.querySelector("div.buttonsGraph button.active");
 			if(!button){button=document.querySelector("div.buttonsGraph button");}
 			button.classList.remove('active');
-			button.onclick()
-		}
-
-		function updateFuelSelection()
-		{
-			var rows = document.querySelectorAll('#fuelSelection tr[question]')
-			for(var i=0;i<rows.length;i++)
-			{
-				var row = rows[i];
-				if(row==null)continue;
-				var question = row.getAttribute('question');
-
-				//empty the row
-				while(row.cells.length>1){row.deleteCell(-1);}
-
-				//create new select menu
-				var select = document.createElement('select');
-				row.insertCell(-1).appendChild(select);
-				select.setAttribute('onchange',"Global.Configuration.Selected.FuelType['"+question+"']=this.value;init()");
-
-				//disable the row if question is NO
-				if(!Global.Configuration["Yes/No"][question])
-				{
-					select.disabled=true;
-					select.parentNode.parentNode.title="<?php write('#inactive')?>";
-					select.parentNode.parentNode.classList.add("inactive")
-				}
-				else
-				{
-					select.parentNode.parentNode.title=''
-					select.parentNode.parentNode.classList.remove('inactive')
-				}
-
-				//go over fuel types
-				for(var fuel in Tables['Fuel types'])
-				{
-					var option = document.createElement('option');
-					option.innerHTML=fuel;
-					if(fuel==Global.Configuration.Selected.FuelType[question])
-					{
-						option.setAttribute('selected','true')
-					}
-					select.appendChild(option)
-				}
-			}
+			button.onclick();
 		}
 
 		/** Update all */
 		function init()
 		{
-			updateQuestionsTable('questions');
-			updateQuestionsTable('adv_questions',true);
+			if(typeof updateQuestionsTable !== 'undefined') {
+				updateQuestionsTable('questions');
+				updateQuestionsTable('adv_questions',true);
+			}
 			if(typeof(level3)!="undefined") 
 			{
 				level3.updateSubstagesTable();
 				level3.updateOutputs();
 			}
-			if(typeof(level2)!="undefined"){
-				level2.updateInputs();
-			}
+			if(typeof(level2)!="undefined"){ level2.updateInputs() }
 			updateOutputs();
 			updateNrgOutputs();
 			Exceptions.apply();
-			updateFuelSelection();
 			try{drawCharts()}
 			catch(e){console.log(e)}
 			Caption.listeners();
@@ -660,165 +620,114 @@
 <!--main-->
 <div id=main>
 	<!--questions-->
-	<div class="card">
-		<?php cardMenu("<b>Questions</b> &mdash; Answer these questions first (<a href=questions.php>info</a>)")?> 
-		<div style=padding:0.5em>
-			<table id=questions class=inline>
-			<tr><td style=color:#ccc>Loading...
-			</table>
-			<script>
-				function updateQuestionsTable(id_table,adv)
-				{
-					adv=adv||false; //show advanced or normal
-
-					var t=document.getElementById(id_table);
-					if(!t)return;
-					while(t.rows.length>0)t.deleteRow(-1);
-					var questions=Questions.getQuestions(CurrentLevel);
-
-					for(var q in questions)
-					{
-						var question = questions[q];
-						if(Questions.isHiddenQuestion(question)){continue;}
-
-						//check if question is "advanced"
-						if(!adv){ if( Questions[question].advanced){continue;}}
-						else{     if(!Questions[question].advanced){continue;}}
-
-						//fetch current state
-						var currentAnswer = Global.Configuration["Yes/No"][question];
-						var checked = currentAnswer ? "checked":"";
-
-						//reset values that are inputs ! codi lleig, es podria refactoritzar
-						if(!currentAnswer)
+	<?php 
+		if($sublevel)
+		{
+			?>
+			<div class="card">
+				<?php cardMenu("<b>Questions</b> &mdash; Answer these questions first (<a href=questions.php>info</a>)")?> 
+				<div style=padding:0.5em;text-align:center>
+					<table id=questions class=inline><tr><td style=color:#ccc>Loading...</table>
+					<script>
+						function updateQuestionsTable(id_table,adv)
 						{
-							//reset a les variables
-							for(var i in Questions[question].variables)
+							adv=adv||false; //show advanced or normal
+
+							var t=document.getElementById(id_table);
+							if(!t)return;
+							while(t.rows.length>0)t.deleteRow(-1);
+							var questions=Questions.getQuestions(CurrentLevel);
+
+							for(var q in questions)
 							{
-								var code=Questions[question].variables[i];
-								if(typeof(CurrentLevel[code])=="number") CurrentLevel[code]=0;
-							}
-							//reset a les otherQuestions
-							for(var i in Questions[question].otherQuestions)
-							{
-								var code_q=Questions[question].otherQuestions[i];
-								Global.Configuration["Yes/No"][code_q]=0;
-								//reset a les variables de les otherQuestions
-								for(var j in Questions[code_q].variables)
+								var question = questions[q];
+								if(Questions.isHiddenQuestion(question)){continue;}
+
+								//check if question is "advanced"
+								if(!adv){ if( Questions[question].advanced){continue;}}
+								else{     if(!Questions[question].advanced){continue;}}
+
+								//fetch current state
+								var currentAnswer = Global.Configuration["Yes/No"][question];
+								var checked = currentAnswer ? "checked":"";
+
+								//reset values that are inputs ! codi lleig, es podria refactoritzar
+								if(!currentAnswer)
 								{
-									var code_v=Questions[question].variables[j];
-									if(typeof(CurrentLevel[code_v])=="number") CurrentLevel[code_v]=0;
+									//reset a les variables
+									for(var i in Questions[question].variables)
+									{
+										var code=Questions[question].variables[i];
+										if(typeof(CurrentLevel[code])=="number") CurrentLevel[code]=0;
+									}
+									//reset a les otherQuestions
+									for(var i in Questions[question].otherQuestions)
+									{
+										var code_q=Questions[question].otherQuestions[i];
+										Global.Configuration["Yes/No"][code_q]=0;
+										//reset a les variables de les otherQuestions
+										for(var j in Questions[code_q].variables)
+										{
+											var code_v=Questions[question].variables[j];
+											if(typeof(CurrentLevel[code_v])=="number") CurrentLevel[code_v]=0;
+										}
+									}
 								}
+
+								//new row
+								var newRow = t.insertRow(-1);
+								newRow.style.background = currentAnswer ? "lightgreen" : "";
+								newRow.setAttribute('question',question);
+								newRow.onmouseover=function(){hlQuestionFields(this.getAttribute('question'),1)}
+								newRow.onmouseout=function(){hlQuestionFields(this.getAttribute('question'),0)}
+								var newCell=newRow.insertCell(-1)
+								newCell.innerHTML=translate(question)+"?";
+								newCell.style.borderRight="none"
+								newCell.style.fontWeight="bold"
+								var newCell=newRow.insertCell(-1)
+								newCell.style.borderLeft="none"
+								newCell.innerHTML=(function()
+								{
+									var ret="<label>"+
+											"<?php write('#no')?> "+
+											"<input name='"+question+"' type=radio value=0 onclick=setQuestion('"+question+"',0) checked></label> "+
+											"<label><?php write('#yes')?> "+
+											"<input name='"+question+"' type=radio value=1 onclick=setQuestion('"+question+"',1) "+checked+"></label> ";
+									return ret;
+								})();
+							}
+
+							//hide whole table if no questions
+							t.parentNode.parentNode.style.display="";
+							if(t.rows.length==0){t.parentNode.parentNode.style.display="none";}
+						}
+
+						//highlight fields linked to the question
+						function hlQuestionFields(question,hl)
+						{
+							var fields=Questions[question].variables; //array
+							for(var i in fields)
+							{
+								Formulas.hlField(fields[i],hl);
 							}
 						}
 
-						//new row
-						var newRow = t.insertRow(-1);
-						newRow.style.background = currentAnswer ? "lightgreen" : "";
-						newRow.setAttribute('question',question);
-						newRow.onmouseover=function(){hlQuestionFields(this.getAttribute('question'),1)}
-						newRow.onmouseout=function(){hlQuestionFields(this.getAttribute('question'),0)}
-						newRow.insertCell(-1).innerHTML=translate(question)+"?";
-						newRow.insertCell(-1).innerHTML=(function()
+						function setQuestion(question,newValue)
 						{
-							var ret="<label>"+
-									"<?php write('#no')?> "+
-									"<input name='"+question+"' type=radio value=0 onclick=setQuestion('"+question+"',0) checked></label> "+
-									"<label><?php write('#yes')?> "+
-									"<input name='"+question+"' type=radio value=1 onclick=setQuestion('"+question+"',1) "+checked+"></label> ";
-							return ret;
-						})();
-					}
-
-					//hide whole table if no questions
-					t.parentNode.parentNode.style.display="";
-					if(t.rows.length==0){t.parentNode.parentNode.style.display="none";}
-				}
-
-				//highlight fields linked to the question
-				function hlQuestionFields(question,hl)
-				{
-					var fields=Questions[question].variables; //array
-					for(var i in fields)
-					{
-						Formulas.hlField(fields[i],hl);
-					}
-				}
-
-				function setQuestion(question,newValue)
-				{
-					if(newValue)
-						Global.Configuration['Yes/No'][question]=1;
-					else //if(confirm("WARNING! Inputs from this question will be reseted to zero. Continue?"))
-						Global.Configuration['Yes/No'][question]=0;
-					init();
-					hlQuestionFields(question,1);
-				}
-			</script>
-			<?php 
-				//fuel options for water and wastewater only
-				if($level!="Energy")
-				{
-					?>
-					<table id=fuelSelection class=inline>
-						<tr><td colspan=2>
-							<img src=img/fuel.png> <?php write('#configuration_fuel_options')?> (<a href=fuelInfo.php>info</a>)</legend>
-						<style>
-							#fuelSelection {margin:0 0.2em}
-							#fuelSelection tr.inactive {background:#f6f6f6;color:#aaa}
-							#fuelSelection img {width:13px;vertical-align:middle}
-						</style>
-						<?php
-							if($level=="Water" && !$sublevel)
-							{ 
-								?> <?php 
-							}
-							else if($level=="Waste" && !$sublevel)
-							{
-								?>
-								<tr question=truck_transport_waste><td><?php write('#configuration_vehicles')?>
-								<?php 
-							}
-							else if($level=="Water" && $sublevel=="Abstraction")
-							{
-								?>
-								<tr question=wsa_engines><td><?php write('#configuration_engines')?>
-								<?php 
-							}
-							else if($level=="Water" && $sublevel=="Treatment")
-							{
-								?>
-								<tr question=wst_engines><td><?php write('#configuration_engines')?>
-								<?php 
-							}
-							else if($level=="Water" && $sublevel=="Distribution")
-							{
-								?>
-								<tr question=wsd_engines><td><?php write('#configuration_engines')?>
-								<tr question=wsd_trucks><td>Trucks
-								<?php 
-							}
-							else if($level=="Waste" && $sublevel=="Collection")
-							{
-								?>
-								<tr question=wwc_engines><td><?php write('#configuration_engines')?>
-								<?php 
-							}
-							else if($level=="Waste" && $sublevel=="Treatment")
-							{
-								?>
-								<tr question=wwt_engines><td><?php write('#configuration_engines')?>
-								<tr question=wwt_trucks><td>Trucks
-								<?php 
-							}
-						?>
-					</table>
-					<?php
-				}
-			?>
-			<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')">Ok, next</button>
-		</div>
-	</div>
+							if(newValue)
+								Global.Configuration['Yes/No'][question]=1;
+							else //if(confirm("WARNING! Inputs from this question will be reseted to zero. Continue?"))
+								Global.Configuration['Yes/No'][question]=0;
+							init();
+							hlQuestionFields(question,1);
+						}
+					</script>
+					<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')"></button>
+				</div>
+			</div>
+			<?php
+		}
+	?>
 
 	<!--level2 container-->
 	<div class="card">
@@ -907,7 +816,7 @@
 				</style>
 			</div>
 
-			<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')">Ok, next</button>
+			<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')"></button>
 		</div>
 	</div>
 
@@ -1118,6 +1027,9 @@
 							//if is an option, continue (will show at the end of the table)
 							if(Info[code] && Info[code].magnitude!="Option") continue;
 
+							/*Skip if is level2 only*/
+							if(Level2only.list.indexOf(code)+1) continue;
+
 							/*new row*/
 							var newRow=t.insertRow(-1);
 							newRow.setAttribute('field',code);
@@ -1232,6 +1144,10 @@
 						return;
 					}
 					substages.splice(index,1);
+
+					//bug fix: caption onmouseout does not trigger, do it manually
+					document.querySelector("#caption").style.display='none';
+
 					init();
 				}
 				/** update substage name */
@@ -1346,10 +1262,11 @@
 
 			<!--advanced questions-->
 			<div class="card">
-				<?php cardMenu("<b>Advanced Questions for Substages</b>")?> 
-				<div style=padding:0.5em>
+				<?php cardMenu("<b>Advanced Assessment</b>")?> 
+				<div style=padding:0.5em;text-align:center>
 					<table id=adv_questions class=inline></table>
-					<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')">Ok, next</button>
+					<style> #adv_questions td {text-align:left} </style>
+					<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')"></button>
 				</div>
 			</div>
 
@@ -1358,7 +1275,7 @@
 				<?php 
 					cardMenu(" <b>Substages</b>
 						&mdash; 
-						Create substages here
+						Create substages to get more accurate results
 						&mdash; 
 						Substages <b><span id=counter class=number>0</span></b>
 				")?>
@@ -1388,7 +1305,7 @@
 								Add substage
 							</button>
 					</table>
-					<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')">Ok, next</button>
+					<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')"></button>
 				</div>
 			</div>
 
@@ -1588,7 +1505,7 @@
 						<div id=substageGraph style=text-align:center>Click a graph to display</div>
 					</div>
 					<!--ok next btn-->
-					<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')">Ok, next</button>
+					<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')"></button>
 				</div>
 			</div>
 			<?php
@@ -1597,7 +1514,7 @@
 	
 	<!--opportunities-->
 	<?php 
-		if($sublevel)
+		if(0 && $sublevel) //hidden now
 		{
 			?>
 			<div class=card><?php cardMenu("<b>Opportunities</b> <span class=tbd>TBD</span>")?>

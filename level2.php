@@ -230,6 +230,60 @@
 			})();
 			*/
 		}
+
+		//go over inputs "magnitude==option"
+		for(var code in CurrentLevel)
+		{
+			//check if is an input
+			if(typeof(CurrentLevel[code])!="number") continue;
+
+			/*check if level3 only*/
+			if(Level3.list.indexOf(code)+1) continue;
+
+			/*check if current question answers make it inactive*/
+			if(Questions.isHidden(code)) continue;
+			
+			//if is an option, continue (will show at the end of the table)
+			if(Info[code] && Info[code].magnitude!="Option") continue;
+
+			/*new row*/
+			var newRow=t.insertRow(-1);
+			newRow.setAttribute('field',code);
+
+			/*1st cell: show code*/
+			var newCell=document.createElement('th');
+			newRow.append(newCell);
+			newCell.classList.add('variableCode');
+			newCell.innerHTML=(function()
+			{
+				return "<a href=variable.php?id="+code+">"+code+"</a>";
+			})();
+
+			/*2nd cell: variable name*/
+			var newCell=newRow.insertCell(-1);
+			newCell.style.textAlign="left";
+			newCell.setAttribute('title', translate(code+'_expla'));
+			newCell.innerHTML=translate(code+'_descr');
+
+			//3rd cell: value
+			var newCell=newRow.insertCell(-1);
+			newCell.colSpan=2;
+			(function()
+			{
+				var select=document.createElement('select');
+				newCell.appendChild(select)
+				select.setAttribute('onchange','level2.updateField("'+code+'",this.value)'); 
+				for(var op in Tables[code])
+				{
+					var option=document.createElement('option');
+					var value=parseInt(Tables[code][op].value);
+					select.appendChild(option);
+					option.value=value;
+					option.innerHTML="("+value+") "+op;
+					if(CurrentLevel[code]==value) { option.selected=true; }
+				}
+			})();
+		}
 		
 		//here check if table is empty (==t.rows.length is 2)
 		if(t.rows.length<3)
@@ -264,8 +318,9 @@
 
 <table id=inputs style="width:99%">
 	<tr><th colspan=5 class=tableHeader> INPUTS &mdash; 
-	All stages in 
+	Enter values for 
 	<?php if($sublevel){echo $sublevel;}else{echo $level;} ?>
+	stages
 	<tr>
 		<th>Code
 		<th><?php write('#edit_description')?>

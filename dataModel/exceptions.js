@@ -14,7 +14,6 @@ var Exceptions =
 	apply:function()
 	{
 		this.ww13();
-		this.ww_ch4_efac();
 	},
 
 	//make ww13 selection (which is inside its description) stay selected
@@ -23,7 +22,7 @@ var Exceptions =
 		var td=document.querySelector('tr[field=wwc_prot_con] td');
 		if(!td)return;
 
-		var select = document.createElement('select');
+		var select=document.createElement('select');
 		select.id="ww13options";
 		select.onchange=function()
 		{
@@ -231,39 +230,6 @@ var Exceptions =
 		}
 
 		//put the name of the selected technology instead of the number
-		td.appendChild(select);
-	},
-
-	//emision factor (kg CH4 per kg BOD)
-	ww_ch4_efac:function()
-	{
-		var select = document.createElement('select');
-		select.id="ww_ch4_efac_options";
-		select.onchange=function()
-		{
-			Global.Waste.ww_ch4_efac=parseFloat(select.value);
-			init();
-		}
-		var options = {
-			"Well managed":0.00,
-			"Minor poorly aerated zones":0.06,
-			"Some aerated zones":0.12,
-			"Not well managed":0.18,
-		}
-		for(var op in options)
-		{
-			var option = document.createElement('option');
-			var value = options[op];
-			select.appendChild(option);
-			option.value=value;
-			option.innerHTML=op+" ("+value+")";
-			if(Global.Waste.ww_ch4_efac==value)
-				option.selected=true;
-		}
-
-		var td = document.querySelector('tr[field=ww_ch4_efac] td');
-		if(!td)return;
-		td.appendChild(document.createElement('br'));
 		td.appendChild(select);
 	},
 }

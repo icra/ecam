@@ -169,6 +169,13 @@
 							//matches can be either numbers or other functions
 							var currValue = typeof(match_stage[match])=="function" ? match_stage[match]() : match_stage[match];
 							currValueF=format(currValue);
+
+							//handle dropdowns
+							if(Info[match].magnitude=="Option")
+							{
+								currValueF=Tables.find(match,currValue);
+							}
+
 							var color = match.search('ww')==-1 ? "#0aaff1":"#bf5050";
 
 							//here we have to show the internal value of inputs, not the multiplied by the unit multiplier
@@ -184,8 +191,14 @@
 										break;
 									}
 								}
-								
 							}
+
+							/**
+							  *
+							  *	BUG here: c_wwt_nrg_tran: it is a function with unit=TJ (multiplier!=1) //TODO
+								*	the way it is now shows kWh with the TJ value
+							  *
+							  */
 
 							var estimated = Global.Configuration.DataQuality[match]=="Estimated" ? "<span class=estimated caption='<?php write('#variable_estimated')?>'>&#9888;</span>" : "";
 

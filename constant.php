@@ -40,5 +40,6 @@
 			document.write("<td>"+translate(equation+"_descr"));
 			i++;
 		})
+		if(i==1){ document.write("<tr><td style=color:#666>~Constant not used. Consider removing it"); }
 	</script>
 </table>

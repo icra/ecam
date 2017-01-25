@@ -47,7 +47,7 @@
 <!--navbar--><?php include'navbar.php'?>
 <!--linear--><?php include'linear.php'?>
 <!--caption--><?php include'caption.php'?>
-<h1>GHG Summary</h1>
+<h1>GHG Emissions Summary</h1>
 
 <div id=main>
 <!--ghg column-->
@@ -56,7 +56,7 @@
 	<div>
 		<div>
 			<h4>
-				Kg of CO<sub>2</sub> emitted in <script>document.write(Global.General.Days())</script> days
+				Overview &mdash; Kg of CO<sub>2</sub> emitted in <script>document.write(Global.General.Days())</script> days
 				&mdash;
 				<span class=circle style=background:orange></span> highest emission
 			</h4>
@@ -64,15 +64,16 @@
 				<tr><th rowspan=9 style=font-weight:bold;background:rgb(64,83,109);color:white>
 					TOTAL GHG <br> (<span field=TotalGHG>0</span>)
 
-				<th rowspan=3>Water<br>supply<br>(<span field=ws_KPI_GHG>0</span>)
-					    <td><img src=img/waterAbs.png> Abstraction   <td field=wsa_KPI_GHG>0
-					<tr><td><img src=img/waterTre.png> Treatment     <td field=wst_KPI_GHG>0
-					<tr><td><img src=img/waterDis.png> Distribution  <td field=wsd_KPI_GHG>0
+				<th rowspan=3><a href="edit.php?level=Water" style=color:white>Water supply</a><br>(<span field=ws_KPI_GHG>0</span>)
+					    <td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'> Abstraction </a> <td field=wsa_KPI_GHG>0
+					<tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'>   Treatment   </a> <td field=wst_KPI_GHG>0
+					<tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'>Distribution</a> <td field=wsd_KPI_GHG>0
 
-				<tr><th rowspan=3 class=red>Wastewater <br>(<span  field=ww_KPI_GHG>0</span>)
-							<td><img src=img/wasteCol.png> Collection    <td field=wwc_KPI_GHG>0
-					<tr><td><img src=img/wasteTre.png> Treatment     <td field=wwt_KPI_GHG>0
-					<tr><td><img src=img/wasteDis.png> Discharge     <td field=wwd_KPI_GHG>0
+				<tr>
+				<th rowspan=3 class=red><a href="edit.php?level=Waste" style=color:white>Wastewater</a> <br>(<span  field=ww_KPI_GHG>0</span>)
+							<td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'>Collection</a> <td field=wwc_KPI_GHG>0
+					<tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment' > Treatment </a> <td field=wwt_KPI_GHG>0
+					<tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge' > Discharge </a> <td field=wwd_KPI_GHG>0
 				</tr>
 			</table>
 		</div>
@@ -85,6 +86,7 @@
 				font-weight:bold;
 				animation:blink 3s ease 0.5s infinite alternate;
 			}
+			#sources a {color:black;font-weight:bold}
 			table#sources td[field][value].critic:before {
 				content:'\26a0 ';
 				float:left;
