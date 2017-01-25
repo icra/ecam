@@ -127,7 +127,7 @@
 			//editable cell if not CV
 			var newCell=newRow.insertCell(-1);
 			if(!isCV) {
-				if(typeof(substages)=="object" && substages.length > 1)
+				if(typeof(substages)=="object" && substages.length > 1 && !(Level2only.list.indexOf(field)+1))
 				{
 					//this means you are in level 2 and you should NOT be able to modify inputs here
 					newCell.setAttribute('caption',"This value is the sum of all substages. Click here to scroll to substages");
@@ -140,13 +140,13 @@
 						sscon.scrollIntoView();
 						setTimeout(function(){sscon.classList.remove('folded')},300);
 						setTimeout(function(){
-							document.querySelector('#substages tr[field='+f+'] td[substage]').click();
+							document.querySelector('#substages tr[field='+f+'] td[substage]').onclick();
 						},600);
 					};
 				}
 				else //normal case: substages==1, user can modify level2
 				{
-					newCell.className="input";
+					newCell.classList.add("input");
 					newCell.title="<?php write('#edit_click_to_modify')?>";
 					newCell.setAttribute('onclick','level2.transformField(this)');
 				}
@@ -154,6 +154,7 @@
 			else {
 				//field is calculated variable, so show formula
 				newCell.title=Formulas.prettify(CurrentLevel[field].toString());
+				newCell.style.textAlign="center";
 			}
 
 			/*value*/

@@ -112,6 +112,8 @@
 		tr:not([hl=yes]) td.input {background-color:#eee;}
 		tr:not([hl=yes]) td.CV {background-color:white}
 
+		td.input.CV {text-align:center;cursor:default}
+
 		table#substages { margin:0.2em 0 0.2em 0.2em; }
 		table#substages tr:first-child td {border-top:none;border-left:none}
 
@@ -735,23 +737,12 @@
 		<div class=menu onclick=this.parentNode.classList.toggle('folded')>
 			<button></button>
 			<b>Inputs &amp; Outputs</b> &mdash; 
-			Assessment period <b class=number><script>document.write(Global.General.Days())</script></b> days &middot;
-			Conversion factor 
-			<script>
-				(function(){
-					var c = Global.General.conv_kwh_co2;
-					var str = c==0 ? 
-						"<b class=number style=background:red caption='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</b>" 
-							: 
-						"<b class=number>"+format(c)+"</b>"; 
-					document.write(str+"</b>")
-				})();
-			</script> kg CO<sub>2</sub>/kWh &middot;
+			Assessment period <b class=number><script>document.write(Global.General.Days())</script></b> days &mdash;
 			<?php
 				$resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
 				$serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
-				echo "Resident population <b class=number><script>document.write(Global.$level.$resi_pop)</script></b> &middot; ";
-				if($level=="Waste"){echo "Connected population <b class=number><script>document.write(Global.Waste.ww_conn_pop)</script></b> &middot; ";}
+				echo "Resident population <b class=number><script>document.write(Global.$level.$resi_pop)</script></b> &mdash; ";
+				if($level=="Waste"){echo "Connected population <b class=number><script>document.write(Global.Waste.ww_conn_pop)</script></b> &mdash; ";}
 				echo "Serviced population <b class=number><script>document.write(Global.$level.$serv_pop)</script></b>";
 			?>
 			<!--button toggle outputs/graph display-->
@@ -843,7 +834,7 @@
 							newTH.style.cursor="pointer";
 							newTH.style.width="90px";
 							newTH.innerHTML=""+
-								"<?php write('#substage')?> "+(parseInt(s)+1)+" "+
+								"Substage "+(parseInt(s)+1)+" "+
 								"<div style=font-weight:bold>"+substages[s].name+"</div>";
 							newTH.setAttribute('onclick','level3.showSubstageMenu('+s+',event)');
 							newTH.setAttribute('caption',"<?php write('#level3_click_to_modify_the_name')?>");
@@ -886,23 +877,19 @@
 							/*variable code*/
 							var code=inputs[input];
 							
-							/*is a calculated variable*/
-							var isCV=typeof(CurrentLevel[code])=="function" ? true : false;
-
 							/*Skip if is level2 only*/
 							if(Level2only.list.indexOf(code)+1) continue;
 
-							//copy the function inside current substage
+							if(Questions.isHidden(code)) continue;
+
+							/*is a calculated variable*/
+							var isCV=typeof(CurrentLevel[code])=="function" ? true : false;
+
+							//copy the function inside substages
 							if(isCV) 
 							{
-								for(var s in substages)
+								for(var s in substages) 
 									substages[s][code]=CurrentLevel[code]; 
-							}
-
-							/*if assessment type is simple, hide L3 variables*/
-							if(Global.Configuration.Assessment['<?php echo "$level']['$sublevel"?>']=="simple")
-							{
-								if(Level3.list.indexOf(code)>-1) continue;
 							}
 
 							//if is an option, continue (will show at the end of the table)
@@ -911,7 +898,6 @@
 							/*new row*/
 							var newRow=t.insertRow(-1);
 							newRow.setAttribute('field',code);
-							if(Questions.isHidden(code)) disableRow(newRow);
 
 							//mouse over listener for highlighting
 							if(isCV)

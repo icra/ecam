@@ -21,8 +21,8 @@ var Level2only = {
 		"wwc_prot_con",
 		"wwc_bod_pday",
 		//wwt
-		"wwc_vol_fuel",
-		"wwc_fuel_typ",
+		"wwt_vol_fuel",
+		"wwt_fuel_typ",
 		"wwt_trck_typ",
 		//wwd
 		"wwd_vol_fuel",

@@ -143,17 +143,18 @@
 						{
 							ret+="<tr><td class=constant caption='CONSTANT: "+Cts[match].descr+"'><a href=constant.php?id="+match+">"+match+"</a><td>"+Cts[match].value+"<td class=unit>"+Cts[match].unit;
 						}
-						else if(Global.Configuration.Selected.FuelType.hasOwnProperty(match))
+						//check if its a fuel type input
+						else if(Tables[match]==Tables["Fuel types"])
 						{
-							var fuel = Global.Configuration.Selected.FuelType[match]
+							var fuel=Tables.find(match,currentStage[match]);
 							ret+="<tr><td class=fuel><a href=fuelInfo.php>Fuel selected</a>:<td><b>"+fuel+"</b>";
-							ret+="<tr><td class=fuel caption='Fuel density       '> fuel.FD             <td>"+Tables["Fuel types"][fuel].FD             +"<td class=unit>kg/L";
-							ret+="<tr><td class=fuel caption='Net calorific value'> fuel.NCV            <td>"+Tables["Fuel types"][fuel].NCV            +"<td class=unit>TJ/Gg";
-							ret+="<tr><td class=fuel caption='CO2 emission factor'> fuel.EFCO2          <td>"+Tables["Fuel types"][fuel].EFCO2          +"<td class=unit>kg<sub>CO<sub>2</sub></sub>/TJ";
-							ret+="<tr><td class=fuel caption='CH4 emission factor'> fuel.EFCH4.engines  <td>"+Tables["Fuel types"][fuel].EFCH4.engines  +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
-							ret+="<tr><td class=fuel caption='CH4 emission factor'> fuel.EFCH4.vehicles <td>"+Tables["Fuel types"][fuel].EFCH4.vehicles +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
-							ret+="<tr><td class=fuel caption='N2O emission factor'> fuel.EFN2O.engines  <td>"+Tables["Fuel types"][fuel].EFN2O.engines  +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
-							ret+="<tr><td class=fuel caption='N2O emission factor'> fuel.EFN2O.vehibles <td>"+Tables["Fuel types"][fuel].EFN2O.vehicles +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
+							ret+="<tr><td class=fuel caption='Fuel density       '         >&emsp; · FD              <td>"+Tables["Fuel types"][fuel].FD             +"<td class=unit>kg/L";
+							ret+="<tr><td class=fuel caption='Net calorific value'         >&emsp; · NCV             <td>"+Tables["Fuel types"][fuel].NCV            +"<td class=unit>TJ/Gg";
+							ret+="<tr><td class=fuel caption='CO2 emission factor'         >&emsp; · EFCO2          <td>"+Tables["Fuel types"][fuel].EFCO2          +"<td class=unit>kg<sub>CO<sub>2</sub></sub>/TJ";
+							ret+="<tr><td class=fuel caption='CH4 emission factor engines' >&emsp; · EFCH4.engines  <td>"+Tables["Fuel types"][fuel].EFCH4.engines  +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
+							ret+="<tr><td class=fuel caption='CH4 emission factor vehicles'>&emsp; · EFCH4.vehicles <td>"+Tables["Fuel types"][fuel].EFCH4.vehicles +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
+							ret+="<tr><td class=fuel caption='N2O emission factor engines' >&emsp; · EFN2O.engines  <td>"+Tables["Fuel types"][fuel].EFN2O.engines  +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
+							ret+="<tr><td class=fuel caption='N2O emission factor vehicles'>&emsp; · EFN2O.vehibles <td>"+Tables["Fuel types"][fuel].EFN2O.vehicles +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
 						}
 						else //normal inputs
 						{
