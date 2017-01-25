@@ -33,7 +33,7 @@
 		.fuel {color:#088A29}
 		.fuel a {font-weight:bold;color:#088A29;}
 		.fuel:first-child {cursor:help}
-		pre.prettyprint {margin:0.5em;padding:1em}
+		pre.prettyprint {margin:0.5em;margin-left:0;padding:1em}
 	</style>
 
 	<script>
