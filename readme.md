@@ -4,9 +4,14 @@
 ECAM web tool is a web application developed by [ICRA](http://icra.cat), 
 [IWA](http://www.iwa-network.org) and GIZ under the WaCCliM project, and Cobalt Water.
 
-## Off-line web application
-We've open sourced the tool, it can work as stand-alone application inside a localhost, for example:
- * Apache PHP server software, like XAMPP or similars
+## Using ecam online
+To use ecam, just go to ecam.hol.es 
+
+## Installation (offline use)
+Ecam can be also used offline (it's a bit faster).
+You need XAMPP (or a similar web server program).
+Download the package, unzip it and move it to the "htdocs" folder of XAMPP.
+Then, start XAMPP, and go to http://localhost/ecam
 
 ## License
 > Copyright © 2015-2012 ICRA. All Rights Reserved.

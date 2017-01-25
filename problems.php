@@ -81,8 +81,8 @@
 		<h3>Tasks / Issues / Bugs / Requests</h3>
 		<script src="todo.js"></script>
 		<ul>
-			<li><b>BACK-END</b><ul><script>TODO.list(TODO.Back)</script></ul>
 			<li><b>FRONT-END</b><ul><script>TODO.list(TODO.Front)</script></ul>
+			<li><b>BACK-END</b><ul><script>TODO.list(TODO.Back)</script></ul>
 		</ul>
 	</div>
 	<!--problems-->

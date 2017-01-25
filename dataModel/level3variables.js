@@ -43,6 +43,7 @@ Level3.list=
 	"wst_KPI_slu_per_m3",
 	"wst_KPI_capac_util",
 	"wst_KPI_std_elec_eff",
+	"wst_disnfctn",
 
 	//wsd
 	"wsd_deli_pts",
@@ -70,6 +71,7 @@ Level3.list=
 	"wsd_KPI_std_nrg_cons",
 	"wsd_KPI_GHG_ne",
 	"wsd_sta_head",
+	"wsd_pmp_size",
 
 	//wwc
 	"wwc_KPI_std_nrg_cons",
@@ -111,6 +113,7 @@ Level3.list=
 	"wwt_KPI_nrg_x_biog",
 	"wwt_KPI_biog_x_bod",
 	"ww_SL_serv_pop",
+	"wwt_type_tre",
 
 	//wwd
 	"wwd_vol_pump",

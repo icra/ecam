@@ -24,8 +24,11 @@ hr{display:block;height:1px;border:0;margin:0;padding:0;}
 /*highlight inputs when mouse goes over a row that has a formula*/
 tr[hl=yes]{background:yellow;color:black}
 tr[hl=no]{background:default}
-tr[hl_output=yes]{background:blue;color:white}
+tr[hl_output=yes]{background:orange;color:black}
 tr[hl_output=no]{background:default}
+tr[hl=yes], tr[hl_output=yes]{
+	transition:background 3s,color 3s;
+}
 span.estimated{color:red;font-size:16px;cursor:help}
 
 /*ECAM blue*/.blue{background:#00AFF1;}

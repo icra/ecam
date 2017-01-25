@@ -34,13 +34,12 @@
 
 	<br><br> 
 
-	This software is open source (<a target=_blank href='https://github.com/holalluis/ecam'>GitHub</a>). 
-	You can use it offline in your browser if you download the source package and use a localhost (like 
-	<a target=_blank href='https://www.apachefriends.org/index.html'>XAMPP</a>).
+	This software is open source.<br>
+	You can browse the source code and download the tool for offline use at <a target=_blank href='https://github.com/holalluis/ecam'>github</a>. 
 	
 	<br><br>
 
-	<?php write('#about_graphs_lib')?> <a target=_blank href="https://google-developers.appspot.com/chart/">Google Charts</a>
+	Charts used: <a target=_blank href="https://google-developers.appspot.com/chart/">Google Charts</a>
 
 	<br><br>
 

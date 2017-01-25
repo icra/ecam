@@ -34,13 +34,13 @@
 			btn.classList.toggle('active');
 			if(div1.style.display=='none') 
 			{
-				div1.style.display='';
+				div1.style.display='<?php if($level=="Energy")echo "initial"?>';
 				div2.style.display='none';
 			}
 			else
 			{
 				div1.style.display='none';
-				div2.style.display='';
+				div2.style.display='<?php if($level=="Energy")echo "initial"?>';
 			}
 			init();
 		}
@@ -737,13 +737,17 @@
 		<div class=menu onclick=this.parentNode.classList.toggle('folded')>
 			<button></button>
 			<b>Inputs &amp; Outputs</b> &mdash; 
-			Assessment period <b class=number><script>document.write(Global.General.Days())</script></b> days &mdash;
+			Assessment period <b class=number><script>document.write(Global.General.Days())</script></b> days 
 			<?php
-				$resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
-				$serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
-				echo "Resident population <b class=number><script>document.write(Global.$level.$resi_pop)</script></b> &mdash; ";
-				if($level=="Waste"){echo "Connected population <b class=number><script>document.write(Global.Waste.ww_conn_pop)</script></b> &mdash; ";}
-				echo "Serviced population <b class=number><script>document.write(Global.$level.$serv_pop)</script></b>";
+					if($level!="Energy") 
+					{
+						echo "&mdash;";
+						$resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
+						$serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
+						echo "Resident population <b class=number><script>document.write(Global.$level.$resi_pop)</script></b> &mdash; ";
+						if($level=="Waste"){echo "Connected population <b class=number><script>document.write(Global.Waste.ww_conn_pop)</script></b> &mdash; ";}
+						echo "Serviced population <b class=number><script>document.write(Global.$level.$serv_pop)</script></b>";
+					}
 			?>
 			<!--button toggle outputs/graph display-->
 			<button 
@@ -761,7 +765,7 @@
 			</div>
 
 			<!--outputs level2-->
-			<div id=outputs_container class=inline style="width:54%;">
+			<div id=outputs_container class=inline style="width:54%;<?php if($level=="Energy") echo "width:90%;margin:auto;display:block;"?>">
 				<?php if($level=="Energy") echo "<style>#outputs{display:none}</style>"; ?>
 
 				<!--level2 GHG outputs-->
@@ -1248,7 +1252,7 @@
 
 			<!--advanced questions-->
 			<div class="card">
-				<?php cardMenu("<b>Advanced Assessment</b>")?> 
+				<?php cardMenu("<b>Advanced Assessment: Questions</b>")?> 
 				<div style=padding:0.5em;text-align:center>
 					<table id=adv_questions class=inline></table>
 					<style> #adv_questions td {text-align:left} </style>
@@ -1259,9 +1263,7 @@
 			<!--substage inputs-->
 			<div class="card" style="text-align:left">
 				<?php 
-					cardMenu(" <b>Substages</b>
-						&mdash; 
-						Create substages to get more accurate results
+					cardMenu(" <b>Advanced Assessment: Substages</b>
 						&mdash; 
 						Substages <b><span id=counter class=number>0</span></b>
 				")?>
@@ -1300,7 +1302,7 @@
 				<!--menu-->
 				<div class=menu onclick=this.parentNode.classList.toggle('folded')>
 					<button></button>
-					<b>Outputs per substage</b>
+					<b>Advanced Assessment: Outputs per substage</b>
 					<!--button toggle outputs/graph display-->
 					<button 
 						class=btn_toggle 

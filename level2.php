@@ -54,7 +54,7 @@
 					setTimeout(function()
 					{
 						var el=document.querySelector('#inputs tr[field='+field+']').nextSibling.childNodes[2];
-						if(el){el.onclick();}
+						if(el && el.onclick){el.onclick();}
 					},100);
 					break;
 			}
