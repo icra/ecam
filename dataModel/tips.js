@@ -6,7 +6,7 @@ var Tips = [
 	"Press &uarr; and &darr; when editing inputs to quickly modify the numbers",
 	"Click on the 'untitled' substage header to change its name",
 	"Move the mouse over inputs to highlight related outputs",
-	"Move the mouse over outputs highlight related inputs",
+	"Move the mouse over outputs to highlight related inputs",
 	"Move the mouse over active questions to highlight related inputs and outputs",
 	"Use your browser's fullscreen mode to work more comfortably",
 ];
