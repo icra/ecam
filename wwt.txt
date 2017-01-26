@@ -1,0 +1,73 @@
+FINISH THIS
+
+# WASTEWATER TREATMENT
+
+## NORMAL ASSESSMENT (STAGE LEVEL)
+	1. FILTERS (Yes/No)
+		- Are you producing biogas?
+		- Are you valorizing biogas?
+		- Do you have fuel engines?
+																										
+	2. INPUTS	& CALCULATED VARIABLES
+		- Volume of treated wastewater
+		- Energy consumed from the grid
+		- Fuel consumed
+		- Total Nitrogen load in effluent discharged to water body
+		- Biogas produced
+		- Biogas flared
+		- Biogas valorized
+
+	3. OUTPUTS (GHG & NRG & SL)
+		- GHG from electricity
+		- GHG from CH4 in WWTP
+		- GHG from fuel
+		- GHG from N2O emission from WWT process
+		- GHG from discharge to water body, N2O from WWTP effluent discharge, especifically to water body																							
+		- GHG from Biogas flared
+		- Total GHG WW Treatment
+		- Treated wastewater per person per day
+
+## ADVANCED ASSESSMENT (SUBSTAGE LEVEL)
+	1. FILTERS (Yes/No)
+		- Are you interested in evaluating pumping efficiency?
+		- Do you want to evaluate treatment performance?
+		- Do you want to evaluate digester efficiency?
+																										
+	2. INPUTS	& CALCULATED VARIABLES
+		2.1 GENERAL INPUTS							
+			- Volume of treated wastewater
+			- Treatment capacity
+			- Total energy consumed from the grid for WWTP
+		2.2 PUMPING		
+			- Volume of wastewater pumped in WWTP
+			- Energy consumed from the grid for pumping
+			- Pump head
+		2.3 TREATMENT 							
+			- Influent BOD5 load
+			- Effluent BOD5 load
+			- Percent of complaince tests in compliance
+			- BOD5 mass removed
+		2.4 SLUDGE
+			- Sludge produced in WWTPs
+			- Dry weight in sludge produced
+			- Sludge storage time
+			- Sludge volume stored
+			- Dry sludge volume disposed of
+			- Sludge type disposed of
+			- Disposal type
+			- Trips to sludge disposal
+			- Distance to sludge disposal site
+		2.5 DIGESTER				
+			- Biogas produced
+			- Biogas valorised as heat and/or electricity
+			- Total energy content of biogas valorized
+			- Electrical energy produced from biogas valorization
+
+	3. OUTPUTS (GHG & NRG & SL)
+		- Energy consumption for wastewater pumping to treatment
+		- Standardized Energy Consumption pumping
+		- Calculated existing electromechanical efficiency of new pump
+		- Energy consumption per treated wastewater
+		- Energy consumption per BOD5 mass removed
+		- Capacity utilization
+		- N2O treated wastewater 																										

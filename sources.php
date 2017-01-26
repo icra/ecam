@@ -9,48 +9,58 @@
 		}
 
 		function calculateGHG() {
-			var fields=document.querySelectorAll('#sources [field]')
-			for(var i=0;i<fields.length;i++)
-			{
-				var element=fields[i]
-				var code=element.getAttribute('field')
+			var fields=document.querySelectorAll('#sources [field]');
+			for(var i=0;i<fields.length;i++) {
+				var element=fields[i];
+				var code=element.getAttribute('field');
 				var loc=locateVariable(code);
-				var value = loc.sublevel ? Global[loc.level][loc.sublevel][code]() : Global[loc.level][code]();
-				element.innerHTML=format(value)+" kg";
+				var value=loc.sublevel ? Global[loc.level][loc.sublevel][code]() : Global[loc.level][code]();
+				element.innerHTML=format(value)+" kg CO<sub>2</sub>";
 				element.setAttribute('value',value);
 			}
 		}
 
 		function findCriticGHG() {
-			var max = 0
-			var critic = false;
-			var fields = document.querySelectorAll('#sources td[field]')
-			for(var i=0;i<fields.length;i++)
-			{
-				var value = parseFloat(fields[i].getAttribute('value'))
-				if(value>=max)
-				{
+			var max=0;
+			var critic=false;
+			var fields=document.querySelectorAll('#sources td[field]');
+			for(var i=0;i<fields.length;i++) {
+				var value=parseFloat(fields[i].getAttribute('value'));
+				if(value>max) {
 					max=value;
 					critic=fields[i].getAttribute('field')
 				}
 			}
-			if(!critic)return
-			var element=document.querySelector("#sources td[field="+critic+"]")
-			element.classList.add('critic')
+			if(!critic)return;
+			var element=document.querySelector("#sources td[field="+critic+"]");
+
+			//CO2
+			element.classList.add('critic');
 			element.setAttribute('caption',"This is the highest GHG emission of your system");
-			element.previousSibling.classList.add('critic')
+
+			//substages number
+			element.previousSibling.classList.add('critic');
 			element.previousSibling.setAttribute('caption',element.getAttribute('caption'));
+
+			//name
+			element.previousSibling.previousSibling.classList.add('critic');
+			element.previousSibling.previousSibling.setAttribute('caption',element.getAttribute('caption'));
 		}
 	</script>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
-<!--navbar--><?php include'navbar.php'?>
-<!--linear--><?php include'linear.php'?>
+<!--navbar--> <?php include'navbar.php'?>
+<!--linear--> <?php include'linear.php'?>
 <!--caption--><?php include'caption.php'?>
-<h1>GHG Emissions Summary</h1>
 
-<div id=main>
-<!--ghg column-->
+<!--title-->
+<h1>
+	<script>document.write(Global.General.Name)</script> 
+	&mdash; 
+	GHG Emissions Summary
+</h1>
+
+<!--content-->
 <div style=width:60%>
 	<!--sources of ghg-->
 	<div>
@@ -61,19 +71,35 @@
 				<span class=circle style=background:orange></span> highest emission
 			</h4>
 			<table id=sources>
-				<tr><th rowspan=9 style=font-weight:bold;background:rgb(64,83,109);color:white>
-					TOTAL GHG <br> (<span field=TotalGHG>0</span>)
+				<tr><th rowspan=9 style="font-weight:bold;background:rgb(64,83,109);color:white">TOTAL GHG<br>(<span field=TotalGHG>0</span>)
 
 				<th rowspan=3><a href="edit.php?level=Water" style=color:white>Water supply</a><br>(<span field=ws_KPI_GHG>0</span>)
-					    <td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'> Abstraction </a> <td field=wsa_KPI_GHG>0
-					<tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'>   Treatment   </a> <td field=wst_KPI_GHG>0
-					<tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'>Distribution</a> <td field=wsd_KPI_GHG>0
 
-				<tr>
-				<th rowspan=3 class=red><a href="edit.php?level=Waste" style=color:white>Wastewater</a> <br>(<span  field=ww_KPI_GHG>0</span>)
-							<td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'>Collection</a> <td field=wwc_KPI_GHG>0
-					<tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment' > Treatment </a> <td field=wwt_KPI_GHG>0
-					<tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge' > Discharge </a> <td field=wwd_KPI_GHG>0
+					<td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'>Abstraction </a> 
+						<td caption="Number of substages"><script>document.write(Substages.Water.Abstraction.length)</script> 
+						<td field=wsa_KPI_GHG>0
+
+					<tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'>Treatment   </a> 
+						<td caption="Number of substages"><script>document.write(Substages.Water.Treatment.length)</script> 
+						<td field=wst_KPI_GHG>0
+
+					<tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'>Distribution</a> 
+						<td caption="Number of substages"><script>document.write(Substages.Water.Distribution.length)</script> 
+						<td field=wsd_KPI_GHG>0
+
+				<tr><th rowspan=3 class=red><a href="edit.php?level=Waste" style=color:white>Wastewater</a><br>(<span field=ww_KPI_GHG>0</span>)
+
+					<td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'>Collection</a> 
+						<td caption="Number of substages"><script>document.write(Substages.Waste.Collection.length)</script>
+						<td field=wwc_KPI_GHG>0
+
+					<tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'>Treatment </a> 
+						<td caption="Number of substages"><script>document.write(Substages.Waste.Treatment.length)</script> 
+						<td field=wwt_KPI_GHG>0
+
+					<tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'>Discharge </a> 
+						<td caption="Number of substages"><script>document.write(Substages.Waste.Discharge.length)</script> 
+						<td field=wwd_KPI_GHG>0
 				</tr>
 			</table>
 		</div>
@@ -124,5 +150,5 @@
 		</style>
 	</div>
 </div>
-</div>
+
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

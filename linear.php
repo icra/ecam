@@ -1,4 +1,3 @@
-<!--LINEAR DIAGRAM: file inside edit.php, level3.php and stages.php-->
 <style>
 	#linearDiagram {background:#f6f6f6;border-bottom:1px solid #ccc;padding:0.4em 0 0.4em 0}
 	#linearDiagram > div {

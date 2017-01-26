@@ -375,12 +375,14 @@ var Global={
 		ww_SL_nrg_cost:  function(){return Global.Waste.ww_SL_nrg_cost()},
 
 		//rest of service level indicators
+		/*
 		ws_SL_serv_pop:function(){return Global.Water.ws_SL_serv_pop()},
 		ws_SL_auth_con:function(){return Global.Water.ws_SL_auth_con()},
 		ws_SL_non_revw:function(){return Global.Water.ws_SL_non_revw()},
 		ww_SL_serv_pop:function(){return Global.Waste.ww_SL_serv_pop()},
 		ww_SL_treat_m3:function(){return Global.Waste.ww_SL_treat_m3()},
 		ww_SL_dilution:function(){return Global.Waste.ww_SL_dilution()},
+		*/
 	},
 
 	/**Configuration: custom user preferences*/

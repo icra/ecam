@@ -119,6 +119,7 @@ var Questions = {
 	"wsd_trucks":{
 		variables:[
 			"wsd_vol_trck",
+			"wsd_trck_typ",
 			"wsd_KPI_GHG_ne_trck",
 		],
 		advanced:0,
@@ -286,6 +287,22 @@ var Questions = {
 	},
 };
 
+//check if the "field" is inside questions
+Questions.isInside=function(field) {
+	//go over all questions
+	var code;
+	for(var question in this)
+	{
+		for(var i in this[question].variables)
+		{
+			code=this[question].variables[i];
+			if(code==field) return true;
+		}
+	}
+	return false;
+}
+
+//check if the "field" is shown or hidden
 Questions.isHidden=function(field) {
 	//go over all questions
 	for(var question in this)

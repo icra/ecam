@@ -26,8 +26,8 @@ tr[hl=yes]{background:yellow;color:black}
 tr[hl=no]{background:default}
 tr[hl_output=yes]{background:orange;color:black}
 tr[hl_output=no]{background:default}
-tr[hl=yes], tr[hl_output=yes]{
-	transition:background 3s,color 3s;
+tr[hl], tr[hl_output]{
+	transition:background 1s,color 1s;
 }
 span.estimated{color:red;font-size:16px;cursor:help}
 
