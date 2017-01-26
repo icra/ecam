@@ -241,7 +241,7 @@ var Global={
 			"wwt_n2o_effl":0,
 			"wwt_biog_pro":0,
 			"wwt_biog_val":0,
-			"wwt_ch4_biog":0,
+			"wwt_ch4_biog":59,
 			"wwt_bod_infl":0,
 			"wwt_bod_effl":0,
 			"wwt_nrg_biog":0,

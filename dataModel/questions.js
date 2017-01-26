@@ -31,8 +31,8 @@ var Questions = {
 	},
 	"wsa_engines":{
 		variables:[
-			"wsa_vol_fuel",
 			"wsa_fuel_typ",
+			"wsa_vol_fuel",
 			"wsa_KPI_GHG_ne",
 		],
 		advanced:0,
@@ -62,8 +62,8 @@ var Questions = {
 	},
 	"wst_engines":{
 		variables:[
-			"wst_vol_fuel",
 			"wst_fuel_typ",
+			"wst_vol_fuel",
 			"wst_KPI_GHG_fuel",
 		],
 		advanced:0,
@@ -109,8 +109,8 @@ var Questions = {
 	},
 	"wsd_engines":{
 		variables:[
-			"wsd_vol_fuel",
 			"wsd_fuel_typ",
+			"wsd_vol_fuel",
 			"wsd_KPI_GHG_ne_fuel",
 		],
 		advanced:0,
@@ -118,8 +118,8 @@ var Questions = {
 	},
 	"wsd_trucks":{
 		variables:[
-			"wsd_vol_trck",
 			"wsd_trck_typ",
+			"wsd_vol_trck",
 			"wsd_KPI_GHG_ne_trck",
 		],
 		advanced:0,
@@ -171,8 +171,8 @@ var Questions = {
 	},
 	"wwc_engines":{
 		variables:[
-			"wwc_vol_fuel",
 			"wwc_fuel_typ",
+			"wwc_vol_fuel",
 			"wwc_KPI_GHG_ne_fuel",
 		],
 		advanced:0,
@@ -278,8 +278,8 @@ var Questions = {
 	//wwd
 	"wwd_engines":{
 		variables:[
-			"wwd_vol_fuel",
 			"wwd_fuel_typ",
+			"wwd_vol_fuel",
 			"wwd_KPI_GHG_ne_fuel",
 		],
 		advanced:0,
