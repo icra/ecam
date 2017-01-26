@@ -336,28 +336,8 @@ var Global={
 		},
 	},
 
-	/**Old "General" Level2 */ //TODO
+	/**Old "General" Level2 */ //
 	Energy:{
-		/*
-		//WS 
-		ws_KPI_GHG_elec:function(){return Global.Water.ws_KPI_GHG_elec()},
-		ws_KPI_GHG_ne  :function(){return Global.Water.ws_KPI_GHG_ne()},
-		ws_KPI_GHG     :function(){return Global.Water.ws_KPI_GHG()},
-		//WW
-		ww_KPI_GHG_elec:      function(){return Global.Waste.ww_KPI_GHG_elec()},
-		ww_KPI_GHG_ne_engines:function(){return Global.Waste.ww_KPI_GHG_ne_engines()}, //old c_ww57
-		ww_KPI_GHG_ne_tsludge:function(){return Global.Waste.ww_KPI_GHG_ne_tsludge()},
-		ww_KPI_GHG_ne_ch4_wwt:function(){return Global.Waste.ww_KPI_GHG_ne_ch4_wwt()}, //old c_ww55
-		ww_KPI_GHG_ne_n2o_tre:function(){return Global.Waste.ww_KPI_GHG_ne_n2o_tre()}, //old c_ww53
-		ww_KPI_GHG_ne_ch4_unt:function(){return Global.Waste.ww_KPI_GHG_ne_ch4_unt()}, //old c_ww52
-		ww_KPI_GHG_ne_n2o_unt:function(){return Global.Waste.ww_KPI_GHG_ne_n2o_unt()}, //old c_ww51 
-		ww_KPI_GHG_ne_unt:    function(){return Global.Waste.ww_KPI_GHG_ne_unt()},
-		ww_KPI_GHG_ne_tre:    function(){return Global.Waste.ww_KPI_GHG_ne_tre()},
-		ww_KPI_GHG_ne:        function(){return Global.Waste.ww_KPI_GHG_ne()}, 
-		ww_KPI_GHG:           function(){return Global.Waste.ww_KPI_GHG()},
-		*/
-
-		//other
 		//ws
 		wsg_KPI_nrg_cons:function(){return Global.Water.Abstraction.wsa_nrg_cons + Global.Water.Treatment.wst_nrg_cons + Global.Water.Distribution.wsd_nrg_cons},
 		wsg_KPI_nrg_x_ye:function(){return this.wsg_KPI_nrg_cons()/Global.General.Years()},
@@ -373,16 +353,6 @@ var Global={
 		wwg_KPI_std_nrg_:function(){return (Global.Waste.Collection.wwc_KPI_std_nrg_cons()+Global.Waste.Discharge.wwd_KPI_std_nrg_cons())/2},
 		wwg_KPI_nrg_perc:function(){return 100*this.wwg_KPI_nrg_cons()/Global.Waste.ww_nrg_cons},
 		ww_SL_nrg_cost:  function(){return Global.Waste.ww_SL_nrg_cost()},
-
-		//rest of service level indicators
-		/*
-		ws_SL_serv_pop:function(){return Global.Water.ws_SL_serv_pop()},
-		ws_SL_auth_con:function(){return Global.Water.ws_SL_auth_con()},
-		ws_SL_non_revw:function(){return Global.Water.ws_SL_non_revw()},
-		ww_SL_serv_pop:function(){return Global.Waste.ww_SL_serv_pop()},
-		ww_SL_treat_m3:function(){return Global.Waste.ww_SL_treat_m3()},
-		ww_SL_dilution:function(){return Global.Waste.ww_SL_dilution()},
-		*/
 	},
 
 	/**Configuration: custom user preferences*/

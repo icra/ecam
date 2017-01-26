@@ -65,12 +65,6 @@ var Info = {
 	"ww_vol_fuel" :{magnitude:"Volume",unit:"L"},
 
 	ww_KPI_GHG_elec       :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
-	ww_KPI_GHG_ne_ch4_wwt :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
-	ww_KPI_GHG_ne_n2o_tre :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
-	ww_KPI_GHG_ne_tsludge :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
-	ww_KPI_GHG_ne_ch4_unt :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
-	ww_KPI_GHG_ne_n2o_unt :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
-	ww_KPI_GHG_ne_engines :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
 	ww_KPI_GHG_ne         :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
 	ww_KPI_GHG            :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
 
