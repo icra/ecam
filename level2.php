@@ -77,7 +77,7 @@
 		newCell.classList.add('variableCode');
 		newCell.innerHTML=(function()
 		{
-			return "<a href=variable.php?id="+code+">"+code+"</a>";
+			return "<a style=font-size:10px href=variable.php?id="+code+">"+code+"</a>";
 		})();
 
 		/*2nd cell: variable name*/

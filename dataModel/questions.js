@@ -219,6 +219,7 @@ var Questions = {
 	"wwt_producing_biogas":{
 		variables:[
 			"wwt_biog_pro",
+			"wwt_biog_val",
 			"c_wwt_biog_fla",
 			"wwt_KPI_biog_x_bod",
 			"wwt_KPI_GHG_ne_biog",
@@ -230,14 +231,13 @@ var Questions = {
 	},
 	"wwt_valorizing_biogas":{
 		variables:[
-			"wwt_biog_val",
 			"wwt_nrg_biog",
 			"wwt_ch4_biog",
 			"c_wwt_nrg_biog",
 			"wwt_KPI_nrg_biogas",
 			"wwt_KPI_nrg_x_biog",
 		],
-		advanced:0,
+		advanced:1,
 		otherQuestions:[],
 	},
 	"wwt_engines":{
@@ -257,7 +257,7 @@ var Questions = {
 			"c_wwt_nrg_tran",
 			"wwt_KPI_GHG_ne_tsludge",
 		],
-		advanced:0,
+		advanced:1,
 		otherQuestions:[],
 	},
 	"wwt_pumping_efficiency":{
@@ -271,10 +271,29 @@ var Questions = {
 		variables:[
 			"wwt_mass_slu",
 			"wwt_dryw_slu",
+			"wwt_slu_stor",
+			"wwt_slu_st_v",
+			"wwt_slu_dr_v",
+			"wwt_slu_disp",
+			"wwt_slu_type",
 		],
 		advanced:1,
 		otherQuestions:[],
 	},
+	"wwt_pumping_efficiency":{
+		variables:[
+			"wwt_pmp_head",
+			"wwt_pmp_type",
+			"wwt_pmp_size",
+			"wwt_vol_pump",
+			"wwt_nrg_pump",
+			"wwt_KPI_std_nrg_cons",
+			"wwt_KPI_std_elec_eff",
+		],
+		advanced:1,
+		otherQuestions:[],
+	},
+
 	//wwd
 	"wwd_engines":{
 		variables:[

@@ -234,9 +234,21 @@ var Info = {
 	"wwt_mass_slu":{magnitude:"Mass",unit:"kg"},
 	"wwt_dryw_slu":{magnitude:"Mass",unit:"kg"},
 	"wwt_trea_cap":{magnitude:"Volume",unit:"m3"},
-	"wwt_type_tre":{magnitude:"Option",unit:"Technology"},
 	"wwt_dist_dis":{magnitude:"Distance",unit:"km"},
 	"wwt_num_trip":{magnitude:"Number",unit:"Number"},
+	"wwt_main_tre":{magnitude:"Option",unit:"Technology"},
+	"wwt_type_tre":{magnitude:"Option",unit:"Technology"},
+
+	"wwt_pmp_type":{magnitude:"Option",unit:"Type"},
+	"wwt_vol_pump":{magnitude:"Volume",unit:"m3"},
+	"wwt_nrg_pump":{magnitude:"Energy",unit:"kWh"},
+	"wwt_pmp_head":{magnitude:"Head",unit:"m"},
+
+	"wwt_slu_stor":{magnitude:"Time",unit:"h"},
+	"wwt_slu_st_v":{magnitude:"Volume",unit:"m3"},
+	"wwt_slu_dr_v":{magnitude:"Volume",unit:"m3"},
+	"wwt_slu_disp":{magnitude:"Option",unit:"Sludge type disposed of"},
+	"wwt_slu_type":{magnitude:"Option",unit:"Disposal type"},
 
 	c_wwt_ch4_efac:{magnitude:"Mass/Mass",unit:"kgCH<sub>4</sub>/kgBOD"},
 	c_wwt_nrg_biog:{magnitude:"Energy",unit:"kWh"},
@@ -254,6 +266,11 @@ var Info = {
 	wwt_KPI_capac_util:{magnitude:"Percent",unit:"%"},
 	wwt_SL_qual_com :{magnitude:"Percentage",unit:"%"},
 
+	wwt_KPI_nrg_per_pump:{magnitude:"Energy/Volume",unit:"kWh/m3"},
+	wwt_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m"},
+	wwt_KPI_std_elec_eff:{magnitude:"Percentage",unit:"%"},
+	wwt_KPI_slu_per_wwm3:{magnitude:"Mass/Volume",unit:"kg/m<sup>3</sup>"},
+
 	wwt_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG_ne:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
@@ -263,6 +280,7 @@ var Info = {
 	wwt_KPI_GHG_ne_tre_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG_ne_tre: {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG_ne_biog:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wwt_KPI_GHG_ne_disc:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	//L2 Wastewater Discharge
 	"wwd_vol_disc" :      {magnitude:"Volume",unit:"m3"},

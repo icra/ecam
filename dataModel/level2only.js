@@ -24,6 +24,7 @@ var Level2only = {
 		"wwt_vol_fuel",
 		"wwt_fuel_typ",
 		"wwt_trck_typ",
+		"wwt_main_tre",
 		//wwd
 		"wwd_vol_fuel",
 		"wwd_fuel_typ",

@@ -84,8 +84,35 @@ var Tables =
 		"Wetlands - Horizontal subsurface flow":{value:12,        ch4_efac:0.06},
 		"Wetlands - Vertical subsurface flow":{value:13,          ch4_efac:0.006},
 	},
+	"wwt_main_tre":{
+		"Activated sludge":{value:0},
+		"Aerated Lagoon":{value:1},
+		"Anaerobic Lagoon":{value:2},
+		"Trickling Filter":{value:3},
+		"UASB":{value:4},
+		"Wetlands":{value:5},
+	},
+	"wwt_pmp_type":{
+		"None":{value:0},
+		"External":{value:1},
+		"Submersible":{value:2},
+	},
+	"wwt_slu_disp":{
+		"Option 1":{value:0},
+		"Option 2":{value:1},
+		"Option 3":{value:2},
+	},
+	"wwt_slu_type":{
+		"Option 1":{value:0},
+		"Option 2":{value:1},
+		"Option 3":{value:2},
+		"Option 4":{value:3},
+		"Option 5":{value:4},
+		"Option 6":{value:5},
+	},
 
 	//wwd
+	//wwd TODO
 }
 
 //copy fuel options for all stages

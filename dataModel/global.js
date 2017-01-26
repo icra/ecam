@@ -252,7 +252,21 @@ var Global={
 			"wwt_tst_cond":0,
 			"wwt_mass_slu":0,
 			"wwt_dryw_slu":0,
+			"wwt_main_tre":0, //main type of treatment
 			"wwt_type_tre":0, //type of treatment
+
+			//pump inputs
+			"wwt_pmp_type":0,
+			"wwt_vol_pump":0,
+			"wwt_nrg_pump":0,
+			"wwt_pmp_head":0,
+
+			//sludge inputs
+			"wwt_slu_stor":0,
+			"wwt_slu_st_v":0,
+			"wwt_slu_dr_v":0,
+			"wwt_slu_disp":0,
+			"wwt_slu_type":0,
 
 			//CCVV
 			c_wwt_biog_fla:function(){return this.wwt_biog_pro-this.wwt_biog_val},
@@ -277,9 +291,13 @@ var Global={
 			ww_SL_vol_pday:function(){return Global.Waste.ww_SL_vol_pday()},
 			ww_SL_serv_pop:function(){return Global.Waste.ww_SL_serv_pop()},
 
+			wwt_KPI_nrg_per_pump:function(){return this.wwt_nrg_pump/this.wwt_vol_pump},
+			wwt_KPI_std_nrg_cons:function(){return (this.wwt_nrg_pump)/(this.wwt_vol_pump*this.wwt_pmp_head/100)},
+			wwt_KPI_std_elec_eff:function(){return 0.2725/this.wwt_KPI_std_nrg_cons()},
+			wwt_KPI_slu_per_wwm3:function(){return this.wwt_mass_slu/this.wwt_vol_trea},
+
 			//wwt GHG
 			wwt_KPI_GHG_elec:function(){return this.wwt_nrg_cons*Global.General.conv_kwh_co2},
-
 			wwt_KPI_GHG_ne_fuel:function(){
 				var fuel=Tables['Fuel types'][Tables.find('wwt_fuel_typ',this.wwt_fuel_typ)]; 
 				return this.wwt_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines)
@@ -297,6 +315,12 @@ var Global={
 			wwt_KPI_GHG_ne_tre_n2o:function(){
 				return Cts.ct_n2o_eq.value*this.wwt_n2o_effl*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value;
 			}, //former c_ww53
+
+			//Indirect GHG from discharge to water body TODO
+			wwt_KPI_GHG_ne_disc:function(){
+				return -999;
+			},
+
 			wwt_KPI_GHG_ne_tre:function(){ return this.wwt_KPI_GHG_ne_tre_ch4() + this.wwt_KPI_GHG_ne_tre_n2o() },
 			wwt_KPI_GHG_ne:function(){
 				return this.wwt_KPI_GHG_ne_fuel()+
