@@ -208,10 +208,10 @@ var Global={
 			"wwc_wd_ratio":0,
 
 			//Collection SL
-			wwc_SL_conn_pop: function(){return 100*Global.Waste.ww_conn_pop/Global.Waste.ww_resi_pop},
-			wwc_KPI_nrg_per_m3: function(){return this.wwc_nrg_cons/this.wwc_vol_pump},
+			wwc_SL_conn_pop:function(){return 100*Global.Waste.ww_conn_pop/Global.Waste.ww_resi_pop},
+			wwc_KPI_nrg_per_m3:function(){return this.wwc_nrg_cons/this.wwc_vol_pump},
 			ww_SL_treat_m3:function(){return 100*(Global.Waste.ww_serv_pop/Global.Waste.ww_conn_pop)},
-			wwc_KPI_std_nrg_cons: function(){return this.wwc_nrg_cons/(this.wwc_vol_pump*this.wwc_pmp_head/100)},
+			wwc_KPI_std_nrg_cons:function(){return this.wwc_nrg_cons/(this.wwc_vol_pump*this.wwc_pmp_head/100)},
 			wwc_KPI_un_head_loss:function(){return 1000*this.wwc_fri_loss/this.wwc_coll_len},
 			wwc_infl_infi:function(){return 100*(this.wwc_wet_flow-this.wwc_dry_flow)/this.wwc_dry_flow},
 			wwc_vol_infi:function(){return this.wwc_infl_infi/100*this.wwc_dry_flow},

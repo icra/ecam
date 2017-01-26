@@ -180,10 +180,8 @@ var Questions = {
 	},
 	"wwc_water_eff": {
 		variables:[
-			"wwc_comb_sew",
 			"wwc_wet_flow",
 			"wwc_dry_flow",
-			"wwc_cso_incd",
 			"wwc_coll_len",
 			"wwc_infl_inf",
 			"wwc_wd_ratio",
@@ -284,7 +282,6 @@ var Questions = {
 		variables:[
 			"wwt_pmp_head",
 			"wwt_pmp_type",
-			"wwt_pmp_size",
 			"wwt_vol_pump",
 			"wwt_nrg_pump",
 			"wwt_KPI_std_nrg_cons",
