@@ -1,8 +1,0 @@
-# WASTEWATER TREATMENT as in excel 20Jan 
-
-## ADVANCED ASSESSMENT (SUBSTAGE LEVEL)
-	1. FILTERS (Yes/No)
-		CREATE - Are you interested in evaluating pumping efficiency?
-
-	2. INPUTS	& CALCULATED VARIABLES
-	3. OUTPUTS (GHG & NRG & SL)
