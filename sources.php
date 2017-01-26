@@ -47,6 +47,9 @@
 			element.previousSibling.previousSibling.setAttribute('caption',element.getAttribute('caption'));
 		}
 	</script>
+	<style>
+		#sources td.ss {text-align:center}
+	</style>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--navbar--> <?php include'navbar.php'?>
@@ -76,29 +79,29 @@
 				<th rowspan=3><a href="edit.php?level=Water" style=color:white>Water supply</a><br>(<span field=ws_KPI_GHG>0</span>)
 
 					<td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'>Abstraction </a> 
-						<td caption="Number of substages"><script>document.write(Substages.Water.Abstraction.length)</script> 
+						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Abstraction.length)</script> 
 						<td field=wsa_KPI_GHG>0
 
 					<tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'>Treatment   </a> 
-						<td caption="Number of substages"><script>document.write(Substages.Water.Treatment.length)</script> 
+						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Treatment.length)</script> 
 						<td field=wst_KPI_GHG>0
 
 					<tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'>Distribution</a> 
-						<td caption="Number of substages"><script>document.write(Substages.Water.Distribution.length)</script> 
+						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Distribution.length)</script> 
 						<td field=wsd_KPI_GHG>0
 
 				<tr><th rowspan=3 class=red><a href="edit.php?level=Waste" style=color:white>Wastewater</a><br>(<span field=ww_KPI_GHG>0</span>)
 
 					<td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'>Collection</a> 
-						<td caption="Number of substages"><script>document.write(Substages.Waste.Collection.length)</script>
+						<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Collection.length)</script>
 						<td field=wwc_KPI_GHG>0
 
 					<tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'>Treatment </a> 
-						<td caption="Number of substages"><script>document.write(Substages.Waste.Treatment.length)</script> 
+						<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Treatment.length)</script> 
 						<td field=wwt_KPI_GHG>0
 
 					<tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'>Discharge </a> 
-						<td caption="Number of substages"><script>document.write(Substages.Waste.Discharge.length)</script> 
+						<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Discharge.length)</script> 
 						<td field=wwd_KPI_GHG>0
 				</tr>
 			</table>

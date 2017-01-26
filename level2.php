@@ -366,7 +366,7 @@
 	stages
 	<tr>
 		<th>Code
-		<th><?php write('#edit_description')?>
+		<th style="width:100% !important">Description
 		<th>Current value
 		<th><?php write('#edit_unit')?>
 	<tr><td colspan=4 style=color:#ccc><i>Loading...</i>
