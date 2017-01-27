@@ -41,7 +41,7 @@
 					}
 				}
 				else return [];
-				if(inex.length==0) { document.write("<tr><td class=allok>All OK") }
+				if(inex.length==0) { document.write("<tr><td class=allok></td>") }
 				return inex;
 			})().forEach(function(field)
 			{
@@ -59,6 +59,7 @@
 			background:lightgreen;
 			font-style:italic;
 		}
+		td.allok:before {content:"All OK"}
 	</style>
 	<script>
 		function init()
@@ -91,7 +92,7 @@
 
 		<!--questions-->
 		<div class=inline style="max-width:20%">
-			<table><tr><th>questions.js 
+			<table><tr><th>Inexisting in questions.js 
 				<script>
 					for(var q in Questions)
 					{
@@ -159,9 +160,8 @@
 
 		<!--rest of data structures-->
 		<div class=inline style="max-width:60%">
-
 			<table id=vawomu><tr><th>Variables without magnitude/unit
-				<tr><td class=allok>All OK
+				<tr><td class=allok>
 				<script>
 					(function(){
 						function listUnitless(obj)
@@ -189,29 +189,20 @@
 					})()
 				</script>
 			</table>
-
-			<table><tr><th>Info object
-				<script>findInexisting(Info)</script>
-			</table>
-
-			<table><tr><th>Benchmarking (RefValues)
-				<script>findInexisting(RefValues)</script>
-			</table>
-
-			<table><tr><th>averagedVariables.js
-				<script>findInexisting(Averaged.list)</script>
-			</table>
-
-			<table><tr><th>level2only.js
-				<script>findInexisting(Level2only.list)</script>
-			</table>
-
-			<table><tr><th>level2Warnings.js
-				<script>findInexisting(Level2Warnings)</script>
-			</table>
-
-			<table><tr><th>level3variables.js
-				<script>findInexisting(Level3.list)</script>
+			<table><tr><th>Inexisting in info.js <script>findInexisting(Info)</script> </table>
+			<table><tr><th>Inexisting in refValues.js (Benchmarking) <script>findInexisting(RefValues)</script> </table>
+			<table><tr><th>Inexisting in averagedVariables.js <script>findInexisting(Averaged.list)</script> </table>
+			<table><tr><th>Inexisting in level2only.js <script>findInexisting(Level2only.list)</script> </table>
+			<table><tr><th>Inexisting in level2Warnings.js <script>findInexisting(Level2Warnings)</script> </table>
+			<table><tr><th>Inexisting in level3variables.js <script>findInexisting(Level3.list)</script> </table>
+			<table><tr><th>Repeated variables in questions.js
+				<script>
+					var repeated=Questions.findRepeated()
+					repeated.forEach(function(variable){
+						document.write("<tr><td>"+variable)
+					})
+					if(repeated.length==0)document.write("<tr><td class=allok>")
+				</script>
 			</table>
 		</div>
 	</div>

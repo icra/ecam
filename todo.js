@@ -2,11 +2,9 @@
 var TODO = {
 	Back://back-end
 	[
-		"unwrap wrapping ghg variables, like wsa_KPI_GHG_ne",
-		"finish WWT txt file to send by email",
+		"Unwrap wrapping ghg variables, like wsa_KPI_GHG_ne",
 		"Cookies that remember folding of cards while using the tool",
 		"Graphs: resurrect flow diagram",
-		"Automatic find repeated variables in dataModel/questions.js",
 		"Improve speed using https://developers.google.com/speed/pagespeed/insights/",
 		"c_wwt_nrg_tran bug units TJ to kWh to solve",
 	],

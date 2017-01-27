@@ -87,7 +87,6 @@ var Questions = {
 			"wst_KPI_nrg_disnfc",
 			"wst_KPI_slu_per_m3",
 			"wst_mass_slu",
-			"wst_KPI_slu_per_m3",
 			"wst_disnfctn",
 		],
 		advanced:1,
@@ -100,7 +99,6 @@ var Questions = {
 			"wsd_vol_pump",
 			"wsd_nrg_pump",
 			"wsd_KPI_nrg_per_m3",
-			"wsd_pmp_head",
 		],
 		advanced:0,
 		otherQuestions:[
@@ -376,4 +374,38 @@ Questions.isHiddenQuestion=function(field) {
 		}
 	}
 	return false;
+}
+
+//Automatic find repeated variables in Questions 
+Questions.findRepeated=function()
+{
+	//count how many times appears field in Questions
+	function countField(field)
+	{
+		var n=0;
+		//go over all questions
+		for(var question in Questions)
+		{
+			//go over all questions
+			for(var i in Questions[question].variables)
+			{
+				//check if code==field
+				if(field==Questions[question].variables[i]) n++;
+			}
+		}
+		return n;
+	}
+	var repeated=[];
+	var code;
+	//go over all questions and check that appear 1 time
+	for(var question in this)
+	{
+		for(var i in this[question].variables)
+		{
+			code=this[question].variables[i];
+			if(countField(code)>1) repeated.push(code);
+		}
+	}
+	//remove duplicates
+	return repeated.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
 }
