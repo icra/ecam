@@ -20,6 +20,7 @@
 		</h1>
 
 		<!--DEVELOPMENT
+		-->
 		<div id=commits style="display:;padding:0"> 
 			<button onclick="document.querySelector('#commits').style.display='none'">Hide</button>
 			<b>Development log &mdash; All code commits (
@@ -46,7 +47,6 @@
 			</table>
 			</div>
 		</div>
-		-->
 
 		<!--DESCRIPTION--><div style="color:#58595b;font-size:18px;text-align:left">
 			<?php write('#index_description')?>
@@ -62,7 +62,7 @@
 
 		<!--picture-->
 		<div style="padding:0;text-align:center">
-			<img src=svg/diagram.svg style=width:70%>
+			<img src=svg/diagram.png style=width:70%>
 		</div>
 
 		<!--other info-->
