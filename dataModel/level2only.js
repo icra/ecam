@@ -28,5 +28,7 @@ var Level2only = {
 		//wwd
 		"wwd_vol_fuel",
 		"wwd_fuel_typ",
+		"wwd_vol_trck",
+		"wwd_trck_typ",
 	],
 };

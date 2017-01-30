@@ -299,6 +299,27 @@ var Questions = {
 		advanced:0,
 		otherQuestions:[],
 	},
+	"wwd_trucks":{
+		variables:[
+			"wwd_trck_typ",
+			"wwd_vol_trck",
+			"wwd_KPI_GHG_ne_trck",
+		],
+		advanced:0,
+		otherQuestions:[],
+	},
+	"wwd_pumping_efficiency":{
+		variables:[ 
+			"wwd_vol_pump",
+			"wwd_pmp_head",
+			"wwd_vol_turb",
+			"wwd_trb_head",
+			"wwd_main_len",
+			"wwd_KPI_std_nrg_cons",
+		],
+		advanced:1,
+		otherQuestions:[],
+	},
 };
 
 //check if the "field" is inside questions

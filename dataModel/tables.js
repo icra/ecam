@@ -112,7 +112,15 @@ var Tables =
 	},
 
 	//wwd
-	//wwd TODO
+	"wwd_reus_typ":{
+		"Volume of water discharged for non-potable use":{value:0},
+		"Volume of reused water for green areas":{value:1},
+		"Volume of reused water for industrial use":{value:2},
+		"Volume of reused water for irrigation with resticted access":{value:3},
+		"Volume of reused water for irrigation without restricted access":{value:4},
+		"Volume of reused water food crop irrigation":{value:5},
+		"Volume of reused water for fishfarming":{value:6},
+	},
 }
 
 //copy fuel options for all stages
@@ -124,6 +132,7 @@ Tables.wwc_fuel_typ=Tables["Fuel types"];
 Tables.wwt_fuel_typ=Tables["Fuel types"];
 Tables.wwt_trck_typ=Tables["Fuel types"];//trucks
 Tables.wwd_fuel_typ=Tables["Fuel types"];
+Tables.wwd_trck_typ=Tables["Fuel types"];//trucks
 
 //find the option name by value
 Tables.find=function(field,value)

@@ -19,35 +19,6 @@
 			<span style=color:#bf5050>Development version (towards v2.0)</span>
 		</h1>
 
-		<!--DEVELOPMENT
-		-->
-		<div id=commits style="display:;padding:0"> 
-			<button onclick="document.querySelector('#commits').style.display='none'">Hide</button>
-			<b>Development log &mdash; All code commits (
-				<?php 
-					$n=shell_exec("git log --oneline|wc -l");
-					echo "$n";
-				?>
-				): </b>
-			<div style="height:150px;overflow-y:auto;padding:0">
-			<table>
-				<style>
-					#commits table * {padding:0;font-family:monospace;font-size:11px}
-				</style>
-			<?php 
-				//show git commit hash code
-				$command="git log --pretty=format:'<tr><td><b>%h</b><td>%ad<td>%s'";
-				exec($command,$lines);
-				foreach($lines as $line)
-				{
-					$line=preg_replace("/\+0[0-2]00/",'',$line); //hide GMT zone +1 +2, etc stuff
-					echo $line;
-				}
-			?>
-			</table>
-			</div>
-		</div>
-
 		<!--DESCRIPTION--><div style="color:#58595b;font-size:18px;text-align:left">
 			<?php write('#index_description')?>
 		</div>

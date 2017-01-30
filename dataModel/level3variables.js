@@ -143,6 +143,12 @@ Level3.list=
 	"wwd_pmp_head",
 	"wwd_vol_turb",
 	"wwd_trb_head",
+	"wwd_nrg_recv",
+	"wwd_reus_typ",
+	"wwd_main_len",
+
+	"wwd_KPI_ghg_red",
+	"wwd_KPI_nrg_rcv_di",
 	"wwd_KPI_std_nrg_cons",
 	"wwd_KPI_std_nrg_recv",
 	"wwd_KPI_GHG_ne",
