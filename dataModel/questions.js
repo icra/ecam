@@ -310,7 +310,6 @@ var Questions = {
 	},
 	"wwd_pumping_efficiency":{
 		variables:[ 
-			"wwd_vol_pump",
 			"wwd_pmp_head",
 			"wwd_vol_turb",
 			"wwd_trb_head",

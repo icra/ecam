@@ -284,16 +284,16 @@ var Info = {
 	wwt_KPI_GHG_ne_disc:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	//L2 Wastewater Discharge
-	"wwd_vol_disc" :      {magnitude:"Volume",unit:"m3"},
-	"wwd_nrg_cons" :      {magnitude:"Energy",unit:"kWh"},
-	"wwd_nrg_recv" :      {magnitude:"Energy",unit:"kWh"},
-	"wwd_vol_pump":       {magnitude:"Volume",unit:"m3"},
-	"wwd_pmp_head":       {magnitude:"Head",unit:"m"},
-	"wwd_vol_turb":       {magnitude:"Volume",unit:"m3"},
-	"wwd_trb_head":       {magnitude:"Head",unit:"m3"},
-	"wwd_vol_fuel":       {magnitude:"Volume",unit:"L"},
-	"wwd_vol_trck":       {magnitude:"Volume",unit:"L"},
-
+	"wwd_vol_disc":{magnitude:"Volume",unit:"m3"},
+	"wwd_nrg_cons":{magnitude:"Energy",unit:"kWh"},
+	"wwd_nrg_recv":{magnitude:"Energy",unit:"kWh"},
+	"wwd_vol_pump":{magnitude:"Volume",unit:"m3"},
+	"wwd_pmp_head":{magnitude:"Head",unit:"m"},
+	"wwd_vol_turb":{magnitude:"Volume",unit:"m3"},
+	"wwd_trb_head":{magnitude:"Head",unit:"m3"},
+	"wwd_vol_fuel":{magnitude:"Volume",unit:"L"},
+	"wwd_vol_trck":{magnitude:"Volume",unit:"L"},
+	"wwd_vol_nonp":{magnitude:"Volume",unit:"m3"},
 	"wwd_reus_typ":{magnitude:"Option",unit:"Discharge/Reuse type"},
 	"wwd_main_len":{magnitude:"Distance",unit:"km"},
 
@@ -302,6 +302,7 @@ var Info = {
 	wwd_KPI_std_nrg_cons: {magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m"},
 	wwd_KPI_std_nrg_recv: {magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m"},
 	wwd_KPI_ghg_red:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wwd_KPI_nrg_sav:{magnitude:"Energy",unit:"kWh"}, 
 
 	wwd_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwd_KPI_GHG_ne_fuel:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},

@@ -706,7 +706,7 @@
 	"#wwt_KPI_GHG_ne_disc_descr":"Discharge to water body",
 	"#wwt_KPI_GHG_ne_disc_expla":"Discharge to water body",
 
-	"#wwd_vol_disc_descr":"Volume of treated or untreated discharged wastewater",
+	"#wwd_vol_disc_descr":"Volume of discharged wastewater",
 	"#wwd_vol_disc_expla":"Volume of wastewater discharged by each wastewater treatment plant that are the responsibility of the undertaking, during the assessment period. This includes all the wastewater collected, whether it is conveyed to treatment or discharged untreated",
 	"#wwd_nrg_cons_descr":"Energy consumed from the grid",
 	"#wwd_nrg_cons_expla":"Sum of energy consumed (from the grid or self-produced) during the assessment period by all each pumping stations for discharged wastewater managed by the undertaking",
@@ -728,6 +728,8 @@
 	"#wwd_main_len_expla":"Total transmission mains length",
 	"#wwd_reus_typ_descr":"Type of reuse/discharge",
 	"#wwd_reus_typ_expla":"Type of reuse/discharge",
+	"#wwd_vol_nonp_descr":"Volume of reused water",
+	"#wwd_vol_nonp_expla":"Volume of reused water",
 
 	"#wwd_KPI_nrg_per_m3_descr":"Energy consumption per discharged wastewater",
 	"#wwd_KPI_nrg_per_m3_expla":"Unit energy consumption per discharged water",
@@ -739,6 +741,8 @@
 	"#wwd_KPI_std_nrg_recv_expla":"Unit energy recovered in water discharge",
 	"#wwd_KPI_ghg_red_descr":"GHG reduction from water reuse",
 	"#wwd_KPI_ghg_red_expla":"GHG reduction from water reuse",
+	"#wwd_KPI_nrg_sav_descr":"Energy saved by reuse",
+	"#wwd_KPI_nrg_sav_expla":"Energy saved by reuse",
 
 	"#wwd_KPI_GHG_elec_descr":"Electricity",
 	"#wwd_KPI_GHG_elec_expla":"GHG from electricity",

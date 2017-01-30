@@ -139,7 +139,7 @@ Level3.list=
 	"wwt_KPI_slu_per_wwm3",
 
 	//wwd
-	"wwd_vol_pump",
+	"wwd_vol_nonp",//Volume of water reused
 	"wwd_pmp_head",
 	"wwd_vol_turb",
 	"wwd_trb_head",
@@ -148,6 +148,7 @@ Level3.list=
 	"wwd_main_len",
 
 	"wwd_KPI_ghg_red",
+	"wwd_KPI_nrg_sav",
 	"wwd_KPI_nrg_rcv_di",
 	"wwd_KPI_std_nrg_cons",
 	"wwd_KPI_std_nrg_recv",

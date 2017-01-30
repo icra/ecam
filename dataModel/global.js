@@ -332,10 +332,13 @@ var Global={
 		},
 
 		"Discharge":{
-			"wwd_nrg_cons":0,
 			"wwd_vol_disc":0,
-			"wwd_nrg_recv":0,
 			"wwd_vol_pump":0,
+			"wwd_nrg_cons":0,
+
+			"wwd_vol_nonp":0,//Volume of water reused
+
+			"wwd_nrg_recv":0,
 			"wwd_pmp_head":0,
 			"wwd_vol_turb":0,
 			"wwd_trb_head":0,
@@ -351,6 +354,7 @@ var Global={
 			wwd_KPI_std_nrg_cons:function(){return (this.wwd_nrg_cons+this.wwd_nrg_recv)/(this.wwd_vol_pump*this.wwd_pmp_head/100)},
 			wwd_KPI_std_nrg_recv:function(){return this.wwd_nrg_recv/(this.wwd_vol_turb*this.wwd_trb_head/100)},
 			wwd_KPI_ghg_red:function(){return -999},
+			wwd_KPI_nrg_sav:function(){return -999}, //kwh saved by reuse TODO
 			ww_SL_serv_pop: function(){return Global.Waste.ww_SL_serv_pop()},
 
 			//wwd GHG
