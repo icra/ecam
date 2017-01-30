@@ -354,7 +354,7 @@
 		if(isNaN(newValue))newValue=0;
 		CurrentLevel[field]=newValue*Units.multiplier(field);
 		//if field is not level 2 only
-		if(!(Level2.list.indexOf(field)+1))
+		if(!(Level2only.list.indexOf(field)+1))
 		{
 			//also update stage if substages==1
 			if(substages.length==1) 
