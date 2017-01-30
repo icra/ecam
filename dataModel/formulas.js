@@ -94,6 +94,9 @@ var Formulas = {
 		result = result.replace(/fuel=Tables.Fuel.types..Selected.FuelType.truck_transport_waste.; /g,"")
 		result = result.replace(/}$/g,"")
 		result = result.replace(/^ {/g," ")
+		result = result.replace(/\*/g," * ")
+		result = result.replace(/\-/g," - ")
+		result = result.replace(/\+/g," + ")
 		return result;
 	},
 

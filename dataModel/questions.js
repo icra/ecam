@@ -33,7 +33,7 @@ var Questions = {
 		variables:[
 			"wsa_fuel_typ",
 			"wsa_vol_fuel",
-			"wsa_KPI_GHG_ne",
+			"wsa_KPI_GHG_fuel",
 		],
 		advanced:0,
 		otherQuestions:[],
@@ -109,7 +109,7 @@ var Questions = {
 		variables:[
 			"wsd_fuel_typ",
 			"wsd_vol_fuel",
-			"wsd_KPI_GHG_ne_fuel",
+			"wsd_KPI_GHG_fuel",
 		],
 		advanced:0,
 		otherQuestions:[],
@@ -118,7 +118,7 @@ var Questions = {
 		variables:[
 			"wsd_trck_typ",
 			"wsd_vol_trck",
-			"wsd_KPI_GHG_ne_trck",
+			"wsd_KPI_GHG_trck",
 		],
 		advanced:0,
 		otherQuestions:[],
@@ -171,7 +171,7 @@ var Questions = {
 		variables:[
 			"wwc_fuel_typ",
 			"wwc_vol_fuel",
-			"wwc_KPI_GHG_ne_fuel",
+			"wwc_KPI_GHG_fuel",
 		],
 		advanced:0,
 		otherQuestions:[],
@@ -218,7 +218,7 @@ var Questions = {
 			"wwt_biog_val",
 			"c_wwt_biog_fla",
 			"wwt_KPI_biog_x_bod",
-			"wwt_KPI_GHG_ne_biog",
+			"wwt_KPI_GHG_biog",
 		],
 		advanced:0,
 		otherQuestions:[
@@ -240,7 +240,7 @@ var Questions = {
 		variables:[
 			"wwt_vol_fuel",
 			"wwt_fuel_typ",
-			"wwt_KPI_GHG_ne_fuel",
+			"wwt_KPI_GHG_fuel",
 		],
 		advanced:0,
 		otherQuestions:[],
@@ -251,7 +251,7 @@ var Questions = {
 			"wwt_num_trip",
 			"wwt_dist_dis",
 			"c_wwt_nrg_tran",
-			"wwt_KPI_GHG_ne_tsludge",
+			"wwt_KPI_GHG_tsludge",
 		],
 		advanced:1,
 		otherQuestions:[],
@@ -294,7 +294,7 @@ var Questions = {
 		variables:[
 			"wwd_fuel_typ",
 			"wwd_vol_fuel",
-			"wwd_KPI_GHG_ne_fuel",
+			"wwd_KPI_GHG_fuel",
 		],
 		advanced:0,
 		otherQuestions:[],
@@ -303,7 +303,7 @@ var Questions = {
 		variables:[
 			"wwd_trck_typ",
 			"wwd_vol_trck",
-			"wwd_KPI_GHG_ne_trck",
+			"wwd_KPI_GHG_trck",
 		],
 		advanced:0,
 		otherQuestions:[],

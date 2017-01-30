@@ -5,11 +5,7 @@ var Level3={};
 Level3.list=
 [
 	//ws
-	"ws_KPI_GHG_elec",
-	"ws_KPI_GHG_ne",
 	//ww
-	"ww_KPI_GHG_elec",
-	"ww_KPI_GHG_ne",
 
 	//wsa
 	"wsa_fri_loss",
@@ -37,7 +33,6 @@ Level3.list=
 	"wst_pmp_head",
 	"wst_nrg_pump",
 	"wst_KPI_GHG_slud",
-	"wst_KPI_GHG_ne",
 	"wst_KPI_nrg_disnfc",
 	"wst_KPI_std_nrg_cons",
 	"wst_KPI_slu_per_m3",
@@ -69,7 +64,6 @@ Level3.list=
 	"wsd_KPI_water_losses",
 	"wsd_KPI_un_head_loss",
 	"wsd_KPI_std_nrg_cons",
-	"wsd_KPI_GHG_ne",
 	"wsd_sta_head",
 	"wsd_pmp_size",
 
@@ -91,8 +85,6 @@ Level3.list=
 	"wwc_infl_infi",
 	"wwc_vol_infi",
 	"wwc_KPI_GHG_ii",
-	"wwc_KPI_GHG_ne",
-	"wwc_KPI_GHG_ne_unt",
 
 	//wwt
 	"wwt_trck_typ",
@@ -124,9 +116,7 @@ Level3.list=
 	"wwt_KPI_dry_sludge",
 	"wwt_KPI_capac_util",
 	"wwt_SL_qual_com",
-	"wwt_KPI_GHG_ne_tre",
-	"wwt_KPI_GHG_ne",
-	"wwt_KPI_GHG_ne_tsludge",
+	"wwt_KPI_GHG_tsludge",
 	"wwt_KPI_nrg_per_m3",
 	"wwt_KPI_nrg_per_kg",
 	"wwt_KPI_nrg_biogas",
@@ -152,5 +142,4 @@ Level3.list=
 	"wwd_KPI_nrg_rcv_di",
 	"wwd_KPI_std_nrg_cons",
 	"wwd_KPI_std_nrg_recv",
-	"wwd_KPI_GHG_ne",
 ];

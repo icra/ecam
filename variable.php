@@ -141,7 +141,7 @@
 						//means this is a constant
 						if(match.substring(0,3)=="ct_")
 						{
-							ret+="<tr><td class=constant caption='CONSTANT: "+Cts[match].descr+"'><a href=constant.php?id="+match+">"+match+"</a><td>"+Cts[match].value+"<td class=unit>"+Cts[match].unit;
+							ret+="<tr><td class=constant caption='CONSTANT: "+Cts[match].descr+"'><a href=constant.php?id="+match+">"+match+"</a><td>"+format(Cts[match].value)+"<td class=unit>"+Cts[match].unit;
 						}
 						//check if its a fuel type input
 						else if(Tables[match]==Tables["Fuel types"])
