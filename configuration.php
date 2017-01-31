@@ -1,4 +1,3 @@
-<?php /* configuration.php */ ?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<script>
@@ -130,17 +129,14 @@
 			updateResult();
 		}
 	</script>
-	<style>
-		h4{margin-bottom:1em}
-	</style>
+	<style> h4{margin-bottom:1em} </style>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
-<!--NAVBAR--><?php include"navbar.php"?>
-<!--linear--><?php include'linear.php'?>
+<!--navbar--> <?php include'navbar.php' ?>
+<!--linear--> <?php include'linear.php' ?>
 <!--caption--><?php include'caption.php'?>
-
-<!--TITLE--><h1><?php write('#configuration')?></h1>
-<!--SUBTITLE--><h4 style=margin:0><?php write('#configuration_subtitle')?>
+<!--title--><h1><?php write('#configuration')?></h1>
+<!--subtitle--><h4 style=margin:0><?php write('#configuration_subtitle')?>
 	<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
 	<script>
 		function activateAllStages()
@@ -155,9 +151,11 @@
 	</script>
 </h4>
 
+<!--main container-->
 <div id=main>
 
-<div>
+<!--activate stages table-->
+<div class=inline style="max-width:50%">
 	<!--stages-->
 	<div>
 		<table id=selectStage>
@@ -206,7 +204,21 @@
 	</div>
 </div>
 
-<!--PREV & NEXT BUTTONS-->
+<!--fuel question-->
+<div class=inline style="max-width:45%;padding:1em 1em 1em 1em">
+	<style> 
+		#main fieldset{margin:0 0 1.4em 0;padding:0.9em;border:1px solid #aaa} 
+	</style>
+	<fieldset>
+		<legend>Do you have fuel engines in any stage?</legend>
+		<label> No  <input type=radio name=fuel checked></label> &emsp; 
+		<label> Yes <input type=radio name=fuel></label>
+		<br> <br>
+		(option under development)
+	</fieldset>
+</div>
+
+<!--prev & next buttons-->
 <div style=margin:1em> 
 	<button class="button prev" onclick="event.stopPropagation();window.location='getStarted.php'"><?php write('#previous')?></button><!--
 	--><button class="button next" onclick="event.stopPropagation();window.location='inhabitants.php'"><?php write('#next')?></button>
@@ -228,4 +240,4 @@
 
 </div>
 
-<!--CURRENT JSON--><?php include'currentJSON.php'?>
+<!--json--><?php include'currentJSON.php'?>

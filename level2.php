@@ -273,20 +273,20 @@
 		//1st cell: show question
 		var newCell=newRow.insertCell(-1);
 		newCell.colSpan=2;
-		newCell.style.padding="1em 0 1em 1em";
+		newCell.style.padding="0.5em 0 0.5em 1em";
 		newCell.innerHTML=translate(question)+"?";
 
 		//2nd cell: show yes no
 		var newCell=newRow.insertCell(-1);
 		newCell.colSpan=2;
-		newCell.style.padding="1em 0 1em 1em";
 		newCell.innerHTML=(function() {
 			var checked_n = checked ? "" : "checked";
 			var checked_y = checked ? "checked" : "";
 			var str = ""+
 			"&emsp; "+
-			"<label>No  <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',0) "+checked_n+"></label> "+
-			"<label>Yes <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',1) "+checked_y+"></label> "+
+			"<label>No  <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',0) "+checked_n+"></label>"+
+			"&emsp; "+
+			"<label>Yes <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',1) "+checked_y+"></label>"+
 			"";
 			return str;
 		})();

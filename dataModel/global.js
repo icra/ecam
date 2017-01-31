@@ -234,7 +234,8 @@ var Global={
 				this.wwc_KPI_GHG_fuel()+
 				this.wwc_KPI_GHG_unt_ch4()+
 				this.wwc_KPI_GHG_unt_n2o()+
-				this.wwc_KPI_GHG_ii()
+				//this.wwc_KPI_GHG_ii()+
+				0
 			},
 		},
 
