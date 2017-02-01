@@ -2,20 +2,24 @@
 var TODO = {
 	Back://back-end
 	[
-		"TBD - Create a new page for individual substage",
-		"Unwrap wrapping ghg variables, like wsa_KPI_GHG_ne",
-		"Cookies that remember folding of cards while using the tool",
-		"Graphs: resurrect flow diagram",
-		"Improve speed using https://developers.google.com/speed/pagespeed/insights/",
-		"c_wwt_nrg_tran bug units TJ to kWh to solve",
+		"[<b style=background:yellow>DOING NOW</b>] Create a page for individual substages & substage browser",
+		"[REQUESTED TO IWA] formula <a href=variable.php?id=wsa_SL_water_losses>wsa_SL_water_losses</a>",
+		"[REQUESTED TO IWA] formula <a href=variable.php?id=ww_SL_dilution>ww_SL_dilution</a>",
+		"[REQUESTED TO IWA] formula <a href=variable.php?id=ww_SL_dil_emis>ww_SL_dil_emis</a>",
+		"[REQUESTED TO IWA] formula <a href=variable.php?id=wwd_KPI_nrg_sav>wwd_KPI_nrg_sav</a>",
+		"[REQUESTED TO IWA] formula <a href=variable.php?id=wwd_KPI_ghg_red>wwd_KPI_ghg_red</a>",
+		"[IDEA] edit.php, change stage simply modifying the variable CurrentLevel, then call init() function (works very good but needs work)",
+		"[IDEA] Graphs: resurrect flow diagram",
+		"[IDEA] Create new cookies that remember folding of cards while using the tool",
+		"[WAIT] c_wwt_nrg_tran bug units TJ to kWh to solve",
 	],
 	Front://front-end
 	[
-		"Include a link to IPCC book in PDF and references (page or chapter) in equations",
-		"FAQ: a JSON file reader. structure {Question:Answer,Question:Answer}",
-		"Graphs: add benchmark circles (difficult). Idea color graphs with green/orange/red ",
-		"Translate new features after v2",
-		"Help page: upload an example json file to download after v2",
+		"[IDEA] Include a link to IPCC book in PDF and references (page or chapter) in equations",
+		"[IDEA] FAQ: a JSON file reader. structure {Question:Answer,Question:Answer}",
+		"[WAIT] Translation - after v2 is complete in english",
+		"[WAIT] upload example json file after v2",
+		"[IWA WANTS] Graphs with benchmark circles (difficult). Idea color graphs with green/orange/red ",
 	],
 };
 

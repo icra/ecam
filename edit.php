@@ -271,7 +271,7 @@
 			if(t.rows.length<3)
 			{
 				var newCell=t.insertRow(-1).insertCell(-1)
-				newCell.colSpan=6 //7 si ww TODO
+				newCell.colSpan=6; 
 				newCell.innerHTML="<span style=color:#999>~All GHG outputs inactive</span>";
 			}
 
@@ -1260,9 +1260,12 @@
 					cardMenu(" <b>Advanced Assessment: Substages</b>
 						&mdash; 
 						Substages <b><span id=counter class=number>0</span></b>
+						&mdash; 
+						<a href=substage.php>Overview</a>
 				")?>
 				<div style=padding:0.5em>
 					<table id=substages> 
+
 						<tr><td colspan=2 style="min-width:260px;text-align:right">
 							<!--view all-->
 							<label style=float:left>
@@ -1282,10 +1285,12 @@
 									}
 								</script>
 							</label>
+
 							<!--new substage button-->
 							<button onclick=level3.newSubstage() class="button add" style="padding:auto;background:lightgreen;box-shadow: 0 1px 2px rgba(0,0,0,.1);">
 								Add substage
 							</button>
+
 					</table>
 					<button class="button save prevNext" onclick="PrevNext.next(this.parentNode.parentNode,'tbd')"></button>
 				</div>
@@ -1366,12 +1371,6 @@
 
 									//exclude service level indicators
 									if(field.search('_SL_')>-1) continue;
-
-									/*if assessment type is simple, hide L3 variables*/
-									if(Global.Configuration.Assessment['<?php echo $level?>']['<?php echo $sublevel?>']=="simple")
-									{
-										if(Level3.list.indexOf(field)>-1) continue;
-									}
 
 									//exclude _KPI_GHG if checkbox is enabled
 									var isGHG=(field.search('_KPI_GHG')+1) ? true : false;
@@ -1496,6 +1495,7 @@
 	
 	<!--opportunities-->
 	<?php 
+		/*
 		if(0 && $sublevel) //hidden now
 		{
 			?>
@@ -1506,6 +1506,7 @@
 			</div>
 			<?php 
 		}
+		*/
 	?>
 </div>
 

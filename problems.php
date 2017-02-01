@@ -79,7 +79,11 @@
 		<style> 
 			#tasks ul {font-family:monospace;padding-left:1em}
 		</style>
-		<h3>Tasks / Issues / Bugs / Requests</h3>
+		<h3>Tasks/Bugs/Ideas/Requests 
+			<br> 
+			<br> 
+			<span style=color:#666;font-family:monospace>format: [STATUS] "task description"</span>
+		</h3>
 		<script src="todo.js"></script>
 		<ul>
 			<li><b>FRONT-END</b><ul><script>TODO.list(TODO.Front)</script></ul>

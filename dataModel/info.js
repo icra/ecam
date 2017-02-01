@@ -13,6 +13,7 @@ var Info = {
 	"Days":{magnitude:"Time",unit:"days"},
 	"Years":{magnitude:"Time",unit:"years"},
 	"conv_kwh_co2":{magnitude:"Conversion",unit:"kg CO<sub>2</sub>/kWh"},
+	TotalGHG :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
 
 	//fuel types
 	"wsa_fuel_typ":{magnitude:"Option",unit:"Fuel type"},

@@ -18,6 +18,8 @@
 	},
 */
 var Questions = {
+
+	//wsa
 	"wsa_pumping":{
 		variables:[ 
 			"wsa_vol_pump",
@@ -60,6 +62,8 @@ var Questions = {
 		advanced:1,
 		otherQuestions:[],
 	},
+
+	//wst
 	"wst_engines":{
 		variables:[
 			"wst_fuel_typ",
@@ -211,6 +215,7 @@ var Questions = {
 		advanced:1,
 		otherQuestions:[],
 	},
+
 	//wwt
 	"wwt_producing_biogas":{
 		variables:[
@@ -252,13 +257,6 @@ var Questions = {
 			"wwt_dist_dis",
 			"c_wwt_nrg_tran",
 			"wwt_KPI_GHG_tsludge",
-		],
-		advanced:1,
-		otherQuestions:[],
-	},
-	"wwt_pumping_efficiency":{
-		variables:[
-			//TODO empty!
 		],
 		advanced:1,
 		otherQuestions:[],
@@ -397,8 +395,7 @@ Questions.isHiddenQuestion=function(field) {
 }
 
 //Automatic find repeated variables in Questions 
-Questions.findRepeated=function()
-{
+Questions.findRepeated=function() {
 	//count how many times appears field in Questions
 	function countField(field)
 	{

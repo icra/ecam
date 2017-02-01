@@ -410,29 +410,15 @@ var Global={
 			"wasteTre":0,
 			"wasteDis":0,
 		},
-		Assessment:{//TODO to be removed
-			Water:{
-				Abstraction:"advanced",
-				Treatment:"advanced",
-				Distribution:"advanced",
-			},
-			Waste:{
-				Collection:"advanced",
-				Treatment:"advanced",
-				Discharge:"advanced",
-			}
-		},
 
 		Units:{ }, //custom unit selections for variables are stored here //TODO write an example
 
 		/**Calculated or "estimated" assumptions are added here. (calculated is default, so only estimated is added here) */
-		//TBD
 		DataQuality:{ },
 
-		//TODO check where this is used
 		Selected:
 		{
-			Country_protein:"Albania", //this is for consumed protein //TODO
+			wwc_prot_con:"Albania",//string value for wwc_prot_con exception (see "exceptions.js")
 		},
 
 		"Yes/No": //default answers for questions ("questions.js")

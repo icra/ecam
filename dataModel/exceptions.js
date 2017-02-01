@@ -3,9 +3,7 @@
   variables that not behave like normal ones are treated here
   they are inputs with a list of possible values that set the number
 
-  rename to Dropdowns
-  select ws treatment
-  select ww treatment
+  what is different of normal dropdowns is that the user can also enter a number besides selecting an option
  **/
 
 var Exceptions =
@@ -13,25 +11,24 @@ var Exceptions =
 	//wrapper
 	apply:function()
 	{
-		this.ww13();
+		this.wwc_prot_con();
 	},
 
-	//make ww13 selection (which is inside its description) stay selected
-	ww13:function()
+	//make wwc_prot_con selection (which is inside its description) stay selected
+	wwc_prot_con:function()
 	{
 		var td=document.querySelector('tr[field=wwc_prot_con] td');
 		if(!td)return;
 
 		var select=document.createElement('select');
-		select.id="ww13options";
 		select.onchange=function()
 		{
 			Global.Waste.Collection.wwc_prot_con=parseFloat(select.value);
-			Global.Configuration.Selected.Country_protein=select.options[select.options.selectedIndex].getAttribute('country');
+			Global.Configuration.Selected.wwc_prot_con=select.options[select.options.selectedIndex].getAttribute('country');
 			init();
 		}
 
-		//in kg/person/year
+		//table for prot consumption in kg/person/year
 		var ww_prot_con = {
 			"Albania":36.135,
 			"Algeria":31.39,
@@ -209,21 +206,21 @@ var Exceptions =
 			"Zimbabwe":20.075,
 		}
 
-		//initial option --select country--
+		//initial option "--select country--"
 		var option = document.createElement('option');
 		select.appendChild(option);
 		option.innerHTML="--select country--";
 
-		//all countries
+		//go over all countries
 		for(var country in ww_prot_con)
 		{
-			var option = document.createElement('option');
-			var cons = ww_prot_con[country];
+			var option=document.createElement('option');
 			select.appendChild(option);
+			var cons=ww_prot_con[country];
 			option.value=cons;
 			option.setAttribute('country',country);
 			option.innerHTML=country+" ("+cons+")";
-			if(country==Global.Configuration.Selected.Country_protein && cons==Global.Waste.Collection.wwc_prot_con)
+			if(country==Global.Configuration.Selected.wwc_prot_con && cons==Global.Waste.Collection.wwc_prot_con)
 			{
 				option.selected='true';
 			}

@@ -1,4 +1,6 @@
 {
+	"#TotalGHG_descr":"Total GHG emitted during the Assessment period for all stages",
+	"#TotalGHG_expla":"Total GHG emitted during the Assessment period for all stages",
 	"#Water":"Water supply",
 	"#Waste":"Wastewater",
 	"#Abstraction":"Abstraction",
@@ -140,8 +142,6 @@
 	"#level3_error_cannot_delete_last_substage":"You can not delete the last substage",
 	"#level3_delete_substage":"Delete substage",
 	"#assessment_type":"Type of assessment",
-	"#assessment_simple":"Simple",
-	"#assessment_advanced":"Advanced",
 	"#assessment_adv_descr":"Advanced assessment consists of more inputs and more indicators",
 	"#export_title":"Export to Excel",
 	"#export_description":"Click on a stage to view its variables. Then click on 'Highlight the whole table' to copy and paste to an empty Excel file",
