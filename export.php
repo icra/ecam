@@ -44,7 +44,7 @@
 					switch(type)
 					{
 						case "number":   return "Input"; break;
-						case "function": return "PI";    break;
+						case "function": return "Output";    break;
 					}
 				})();
 
@@ -146,7 +146,11 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--> <?php include'linear.php'?>
 <!--TITLE--><h1><?php write('#export_title')?></h1>
-<h4><?php write('#export_description')?></h4>
+
+<h4>You can export individual stages to excel using this menu</h4>
+<h4>
+	Click on a stage to view its variables. Then, click on 'Highlight the whole table' to copy and paste to an empty Excel file, or create a csv file.
+</h4>
 
 <div id=main style=margin-bottom:3em>
 
@@ -175,7 +179,7 @@
 </button>
 
 <button class=button id=createCSV disabled onclick=createCSV() style="font-size:18px">
-	<?php write('#export_csv')?>
+	Create CSV from current table
 </button>
 
 <!--info table-->

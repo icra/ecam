@@ -11,7 +11,7 @@ h4{font-weight:normal;margin:1.2em;font-size:15px;color:#58595b}
 legend{color:#58595b;font-size:16px}
 table{border-collapse:collapse;}
 
-.tbd {background:red;padding:0.5em}
+.tbd {background:red;padding:0.5em;text-align:center}
 
 #fixedTopBar{z-index:9}
 #sidebar{z-index:99}

@@ -60,12 +60,17 @@
 	</table>
 </div>
 
-<!--selected substage-->
+<div class=tbd>
+flow diagram here?
+</div>
+
+<!--selected substage
 <div style=margin-top:1em>
 	<table id=substage>
 		<tr><th>substage selected 
 		<tr><td>work in progress
 	</table>
 </div>
+-->
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

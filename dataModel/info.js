@@ -40,10 +40,8 @@ var Info = {
 	//Wastewater
 	ww_SL_serv_pop :{magnitude:"Percentage",unit:"%"},
 	ww_SL_treat_m3 :{magnitude:"Percentage",unit:"%"},
-	ww_SL_dilution :{magnitude:"Percentage",unit:"%"},
 	ww_SL_vol_pday :{magnitude:"Volume/inhab/time",unit:"L/serv.pop./day"},
 	ww_SL_nrg_cost :{magnitude:"Percentage",unit:"%"},
-	ww_SL_dil_emis :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
 
 	//L1 Water Supply
 	"ws_resi_pop":{magnitude:"People",unit:"People"},

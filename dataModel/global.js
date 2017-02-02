@@ -184,8 +184,6 @@ var Global={
 		ww_SL_serv_pop: function(){return 100*Global.Waste.ww_serv_pop/Global.Waste.ww_resi_pop},
 		ww_SL_treat_m3: function(){return 100*this.ww_serv_pop/this.ww_conn_pop},
 		ww_SL_vol_pday: function(){return 1000*this.ww_vol_wwtr/this.ww_serv_pop/Global.General.Days()},
-		ww_SL_dilution: function(){return -999},//TODO
-		ww_SL_dil_emis:	function(){return -999},//TODO
 		ww_nrg_cons   : function(){return this.Collection.wwc_nrg_cons+this.Treatment.wwt_nrg_cons+this.Discharge.wwd_nrg_cons},
 
 		"Collection":{

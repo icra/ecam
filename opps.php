@@ -69,36 +69,8 @@
 
 <div id=main>
 
-<!--ghg sources column-->
-<div class=inline style="width:28%">
-	<!--sources of ghg-->
-	<?php include'ghg_sources.php'?>
-
-	<!--Catalog of Solutions-->
-	<div class=card id=CoS><?php cardMenu("IWA Catalogue of solutions")?>
-		<div style="text-align:left;padding:1.0em">
-		This catalogue offers inspiring water, climate and energy solutions for each stage.
-		</div>
-		<a href="http://www.iwa-network.org/water-climate-energy-solutions/public/" target=_blank>
-			IWA Catalogue of solutions
-		</a>
-		<style>
-			#CoS a{
-				display:block;
-				margin:0.5em;
-				color:white;
-				font-weight:bold;
-				border:1px solid #ccc;
-				padding:1em;
-				background:#0aaff1;
-				border-radius:0.5em;
-			}
-		</style>
-	</div>
-</div>
-
 <!--Opportunities column-->
-<div class="card inline" id=opps style="width:70%"><?php cardMenu("Opportunities")?>
+<div id=opps>
 	<style>
 		#opps > div.card {margin:1em}
 		#opps > div.card > div.card {

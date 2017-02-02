@@ -70,17 +70,16 @@
 
 	<!--Stages Summaries-->
 	<div>
-		<div><span style="color:#666">Stages Summary</span></div>
-		<img class=l1 stage=water src=img/water.png onclick=window.location="edit.php?level=Water" caption="<?php write('#Water')?>"> 
-		<img class=l1 stage=waste src=img/waste.png onclick=window.location="edit.php?level=Waste" caption="<?php write('#Waste')?>"> 
+		<div><span style="color:#666">GHG Summary</span></div>
+		<img class=l1 stage=water   src=img/water.png   onclick=window.location="edit.php?level=Water" caption="<?php write('#Water')?>"> 
+		<img class=l1 stage=waste   src=img/waste.png   onclick=window.location="edit.php?level=Waste" caption="<?php write('#Waste')?>"> 
+		<img class=l1 stage=sources src=img/sources.png onclick=window.location="sources.php"          caption="GHG Sources">
 	</div>
 
-	<!--Total GHG Summary-->
-	<div
-		style=cursor:pointer
-		onclick=window.location="sources.php">
-		<div><a href=sources.php style="color:#666">GHG Summary</a></div>
-		<img class=l1 stage=sources src=img/sources.png caption="GHG Sources">
+	<!--I/O Summary-->
+	<div>
+		<div><span style="color:#666">I/O Summary</span></div>
+		<img class=l1 stage=io src=img/io.png onclick=window.location="summary.php?type=input"    caption="I/O Summary">
 	</div>
 
 	<!--Energy Summaries-->
@@ -157,7 +156,7 @@
 		for(var i=0;i<collection.length;i++)
 		{
 			var stage = collection[i].getAttribute('stage');
-			if(["birds","energy","conf",'sources','gets','inha'].indexOf(stage)>=0) continue;
+			if(["birds","energy","conf",'sources','gets','inha','io'].indexOf(stage)>=0) continue;
 			var isActive = Global.Configuration.ActiveStages[stage];
 			if(!isActive)
 			{
