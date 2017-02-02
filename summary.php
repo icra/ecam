@@ -136,6 +136,8 @@
 				echo "<a href=summary.php?type=$otherType>See $otherType"."s</a>"
 			?>
 		</span>
+		&mdash;
+		<a href=substage.php>See Substages overview</a>
 	</h4>
 
 	<!--level 1 fields-->

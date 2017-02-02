@@ -5,13 +5,12 @@ var TODO = {
 		"[<b style=background:yellow>DOING NOW</b>] Create a page for individual substages & substage browser",
 		"[MISSING] options for wwt_slu_disp Sludge type disposed of",
 		"[MISSING] options for wwt_slu_type Disposal type",
-		"[REQUESTED TO IWA] formula <a href=variable.php?id=wsa_SL_water_losses>wsa_SL_water_losses</a>",
 		"[REQUESTED TO IWA] formula <a href=variable.php?id=wwd_KPI_nrg_sav>wwd_KPI_nrg_sav</a>",
 		"[REQUESTED TO IWA] formula <a href=variable.php?id=wwd_KPI_ghg_red>wwd_KPI_ghg_red</a>",
 		"[IDEA] edit.php, change stage simply modifying the variable CurrentLevel, then call init() function (works very good but needs work)",
 		"[IDEA] Graphs: resurrect flow diagram",
-		"[IDEA] Create new cookies that remember folding of cards while using the tool",
-		"[WAIT] c_wwt_nrg_tran bug units TJ to kWh to solve",
+		"[IDEA] Create new cookies that remember folding of sections while using the tool",
+		"[WAIT] c_wwt_nrg_tran bug: units TJ to kWh",
 	],
 	Front://front-end
 	[

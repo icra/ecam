@@ -44,12 +44,12 @@
 <div>
 	<table id=substages>
 	<tr>
-		<th>Abstraction  
-		<th>Treatment    
-		<th>Distribution 
-		<th waste>Collection   
-		<th waste>Treatment    
-		<th waste>Discharge    
+		<th>              Abstraction  &rarr;
+		<th>       &rarr; Treatment    &rarr;
+		<th>       &rarr; Distribution &rarr;
+		<th waste> &rarr; Collection   &rarr;
+		<th waste> &rarr; Treatment    &rarr;
+		<th waste> &rarr; Discharge    
 	<tr>
 		<td level=Water sublevel=Abstraction>
 		<td level=Water sublevel=Treatment>
@@ -60,8 +60,8 @@
 	</table>
 </div>
 
-<div class=tbd>
-flow diagram here?
+<div style="text-align:center;margin:1em 0">
+flow diagram here? (TBD)
 </div>
 
 <!--selected substage
