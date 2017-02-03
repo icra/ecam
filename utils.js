@@ -67,7 +67,7 @@ function format(number)
 	if(number==-999){return "<span style=background:yellow>Formula under development</span>";}
 
 	var str=new Intl.NumberFormat('en-EN',{maximumFractionDigits:2}).format(number);
-	if(str=="NaN" || !isFinite(number)) return "<span style=color:#666>~"+translate('missing_inputs')+"</span>";
+	if(str=="NaN" || !isFinite(number)) return "<span style=color:#666;font-size:10px>~"+translate('missing_inputs')+"</span>";
 	return str;
 }
 

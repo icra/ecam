@@ -4,6 +4,7 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
+<!--linear--><?php include"linear.php"?>
 <!--TITLE--><h1>Constants</h1>
 
 <!--constants-->

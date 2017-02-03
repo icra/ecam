@@ -318,7 +318,7 @@ var Global={
 				return (this.c_wwt_bod_rmvd()*this.c_wwt_ch4_efac()+Cts.ct_ch4_lo.value/100*this.c_wwt_biog_fla()*Cts.ct_ch4_bi.value/100*Cts.ct_ch4_m3.value)*Cts.ct_ch4_eq.value
 			}, //former c_ww55
 			wwt_KPI_GHG_tre_n2o:function(){
-				return Cts.ct_n2o_eq.value*this.wwt_n2o_effl*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value;
+				return this.wwt_n2o_effl/1000*this.wwt_vol_trea*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value; 
 			}, //former c_ww53
 
 			wwt_KPI_GHG:function(){

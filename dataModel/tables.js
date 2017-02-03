@@ -98,17 +98,17 @@ var Tables =
 		"Submersible":{value:2},
 	},
 	"wwt_slu_disp":{
-		"Option 1":{value:0},
-		"Option 2":{value:1},
-		"Option 3":{value:2},
+		"Primary":{value:0},
+		"Secondary Non-digested":{value:1},
+		"Digested":{value:2},
 	},
 	"wwt_slu_type":{
-		"Option 1":{value:0},
-		"Option 2":{value:1},
-		"Option 3":{value:2},
-		"Option 4":{value:3},
-		"Option 5":{value:4},
-		"Option 6":{value:5},
+		"Land application":{value:0},
+		"Open landfill":{value:1},
+		"Covered landfill with gas recovery":{value:2},
+		"Incineration with heat recovery":{value:3},
+		"Composting":{value:4},
+		"Other":{value:5},
 	},
 
 	//wwd

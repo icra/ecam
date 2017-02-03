@@ -12,8 +12,9 @@
 
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
-<!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1><a href=constants.php>All constants</a> &rsaquo; <span style=color:black>Constant</span></h1>
+<!--navbar--> <?php include'navbar.php'?>
+<!--linear--> <?php include'linear.php'?>
+<!--title--><h1><a href=constants.php>All constants</a> &rsaquo; <span style=color:black>Constant</span></h1>
 
 <!--description-->
 <div><script>document.write(Cts[id].descr)</script></div>

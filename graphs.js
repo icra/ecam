@@ -73,7 +73,7 @@ Graphs.graph1=function(withTable,container)
 		"<button onclick=Graphs.graph1(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
 		"<button onclick=\"Graphs.graph4(true,'"+container+"');scrollToItem('"+container+"')\">"+translate('graphs_detailed')+"</button>"+
 		"<table title=graph1>"+
-			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+
+			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kg CO2)"+
 			"<tr><td>"+names[0]+"<td><a href=variable.php?id=ws_KPI_GHG>ws_KPI_GHG</a><td>"+format(ws)+
 			"<tr><td>"+names[1]+"<td><a href=variable.php?id=ww_KPI_GHG>ww_KPI_GHG</a><td>"+format(ww)+
 		"</table>"+
@@ -183,7 +183,7 @@ Graphs.graph4=function(withTable,container)
 		"<button onclick=Graphs.graph4(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
 		"<button onclick=\"Graphs.graph1(true,'"+container+"');scrollToItem('"+container+"')\">"+translate('graphs_non_detailed')+"</button>"+
 		"<table title=graph4>"+
-			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+""+
+			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kg CO2)"+
 			"<tr><td>"+names[0]+"<td>wsa_KPI_GHG <td>"+format(slice_1)+
 			"<tr><td>"+names[1]+"<td>wst_KPI_GHG <td>"+format(slice_2)+
 			"<tr><td>"+names[2]+"<td>wsd_KPI_GHG <td>"+format(slice_3)+

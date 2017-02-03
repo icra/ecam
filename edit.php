@@ -100,6 +100,9 @@
 			color:white;
 		}
 
+		#substageOutputs td.variableCode {background:inherit;}
+		#substageOutputs td.variableCode a {color:initial;}
+
 		td.input {
 			width:70px;
 			padding:0 0.2em;
@@ -1265,7 +1268,6 @@
 				")?>
 				<div style=padding:0.5em>
 					<table id=substages> 
-
 						<tr><td colspan=2 style="min-width:260px;text-align:right">
 							<!--view all-->
 							<label style=float:left>
@@ -1319,7 +1321,7 @@
 
 					<!--Substage outputs-->
 					<div id=substageOutputs_container>
-						<table id=substageOutputs style="width:95%;background:#f6f6f6"></table>
+						<table id=substageOutputs style="background:#f6f6f6"></table>
 						<style>
 							#substageOutputs th{background:#d7bfaf;text-align:left}
 							#substageOutputs td:nth-child(n+3) {text-align:right}
@@ -1396,7 +1398,9 @@
 									newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
 
 									//1st cell: show code identifier
-									newRow.insertCell(-1).innerHTML=(function()
+									var newCell=newRow.insertCell(-1);
+									newCell.classList.add('variableCode');
+									newCell.innerHTML=(function()
 									{
 										var adv=Level3.list.indexOf(field)+1 ? "<span class='advanced'     caption='Advanced'>adv</span>":"";
 										var ghg=isGHG                        ? "<span class='advanced ghg' caption='GHG'>GHG</span>":"";
