@@ -57,7 +57,7 @@ var Global={
 			wsa_nrg_per_pmp_watr:function(){return this.wsa_nrg_cons/this.wsa_vol_pump},
 			wsa_KPI_nrg_recovery:function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
 			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_pump+this.wsa_nrg_turb)/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
-			wsa_KPI_std_elec_eff:function(){return 0.2725/this.wsa_KPI_std_nrg_cons()},
+			wsa_KPI_std_elec_eff:function(){return 100*0.2725/this.wsa_KPI_std_nrg_cons()},
 			wsa_KPI_un_head_loss:function(){return 1000*this.wsa_fri_loss/this.wsa_main_len},
 
 			//GHG
@@ -92,7 +92,7 @@ var Global={
 			wst_KPI_std_nrg_cons:function(){return this.wst_nrg_pump/(this.wst_vol_pump*this.wst_pmp_head/100)},
 			wst_KPI_slu_per_m3:function(){return this.wst_mass_slu/this.wst_vol_trea},
 			wst_KPI_capac_util:function(){return 100*this.wst_vol_trea/this.wst_trea_cap},
-			wst_KPI_std_elec_eff:function(){return 0.2725/this.wst_KPI_std_nrg_cons()},
+			wst_KPI_std_elec_eff:function(){return 100*0.2725/this.wst_KPI_std_nrg_cons()},
 
 			//wst GHG
 			wst_KPI_GHG_elec:function(){return this.wst_nrg_cons*Global.General.conv_kwh_co2},
@@ -169,12 +169,12 @@ var Global={
 
 	/**Level 1 - Wastewater*/
 	Waste:{
-		"ww_resi_pop" :0,
-		"ww_conn_pop" :0,
-		"ww_serv_pop" :0,
-		"ww_nrg_cost" :0,
-		"ww_run_cost" :0,
-		"ww_vol_wwtr" :0,
+		"ww_resi_pop":0,
+		"ww_conn_pop":0,
+		"ww_serv_pop":0,
+		"ww_nrg_cost":0,
+		"ww_run_cost":0,
+		"ww_vol_wwtr":0,
 
 		ww_nrg_cons:function(){return this.Collection.wwc_nrg_cons+this.Treatment.wwt_nrg_cons+this.Discharge.wwd_nrg_cons},
 		ww_vol_fuel:function(){return this.Collection.wwc_vol_fuel+this.Treatment.wwt_vol_fuel+this.Discharge.wwd_vol_fuel},
@@ -298,7 +298,7 @@ var Global={
 
 			wwt_KPI_nrg_per_pump:function(){return this.wwt_nrg_pump/this.wwt_vol_pump},
 			wwt_KPI_std_nrg_cons:function(){return (this.wwt_nrg_pump)/(this.wwt_vol_pump*this.wwt_pmp_head/100)},
-			wwt_KPI_std_elec_eff:function(){return 0.2725/this.wwt_KPI_std_nrg_cons()},
+			wwt_KPI_std_elec_eff:function(){return 100*0.2725/this.wwt_KPI_std_nrg_cons()},
 			wwt_KPI_slu_per_wwm3:function(){return this.wwt_mass_slu/this.wwt_vol_trea},
 
 			//wwt GHG
@@ -408,18 +408,17 @@ var Global={
 			"wasteDis":0,
 		},
 
-		Units:{ }, //custom unit selections for variables are stored here //TODO write an example
+		Units:{}, //custom unit selections for variables are stored here
 
 		/**Calculated or "estimated" assumptions are added here. (calculated is default, so only estimated is added here) */
-		DataQuality:{ },
+		DataQuality:{},
 
-		Selected:
-		{
+		Selected: {
 			wwc_prot_con:"Albania",//string value for wwc_prot_con exception (see "exceptions.js")
 		},
 
-		"Yes/No": //default answers for questions ("questions.js")
-		{
+		//default answers for questions ("questions.js")
+		"Yes/No": {
 			wsa_pumping:           0,
 			wwt_producing_biogas:  0,
 			wwt_valorizing_biogas: 0,
