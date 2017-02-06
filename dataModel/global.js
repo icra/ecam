@@ -188,8 +188,8 @@ var Global={
 		"Collection":{
 			"wwc_vol_coll":0,
 			"wwc_vol_conv":0,
-			"wwc_prot_con":0,
-			"wwc_bod_pday":0,
+			"wwc_prot_con":25,
+			"wwc_bod_pday":40,
 			"wwc_nrg_cons":0,
 			"wwc_vol_pump":0,
 			"wwc_vol_fuel":0,
@@ -239,11 +239,14 @@ var Global={
 		"Treatment":{
 			"wwt_vol_trea":0,
 			"wwt_nrg_cons":0,
-			"wwt_vol_fuel":0,
-			"wwt_fuel_typ":0,
-			"wwt_trck_typ":0,
 
-			"wwt_n2o_effl":0,
+			//fuel
+			"wwt_fuel_typ":0,
+			"wwt_vol_fuel":0,
+			"wwt_trck_typ":0,
+			"wwt_vol_trck":0,
+
+			"wwt_n2o_effl":15,
 			"wwt_biog_pro":0,
 			"wwt_biog_val":0,
 			"wwt_ch4_biog":59,
@@ -277,7 +280,6 @@ var Global={
 			c_wwt_biog_fla:function(){return this.wwt_biog_pro-this.wwt_biog_val},
 			c_wwt_nrg_biog:function(){return this.wwt_biog_val*this.wwt_ch4_biog/100*10},
 			c_wwt_bod_rmvd:function(){return this.wwt_bod_infl-this.wwt_bod_effl},
-			c_wwt_nrg_tran:function(){return this.wwt_num_trip*2*this.wwt_dist_dis*0.25*0.84*43/1000000/1000},
 			c_wwt_ch4_efac:function(){
 				var type=Tables.find("wwt_type_tre",this.wwt_type_tre);
 				return Tables.wwt_type_tre[type].ch4_efac;
@@ -312,7 +314,7 @@ var Global={
 			},
 			wwt_KPI_GHG_tsludge:function(){
 				var fuel=Tables['Fuel types'][Tables.find('wwt_trck_typ',this.wwt_trck_typ)]; 
-				return this.c_wwt_nrg_tran()*(fuel.EFCO2+Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles+Cts.ct_n2o_eq.value*fuel.EFN2O.vehicles)
+				return (this.wwt_num_trip*2*this.wwt_dist_dis/1000*0.25)*fuel.FD/1000000*fuel.NCV*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.vehicles+Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles)
 			},
 			wwt_KPI_GHG_tre_ch4:function(){
 				return (this.c_wwt_bod_rmvd()*this.c_wwt_ch4_efac()+Cts.ct_ch4_lo.value/100*this.c_wwt_biog_fla()*Cts.ct_ch4_bi.value/100*Cts.ct_ch4_m3.value)*Cts.ct_ch4_eq.value

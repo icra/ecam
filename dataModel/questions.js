@@ -243,8 +243,8 @@ var Questions = {
 	},
 	"wwt_engines":{
 		variables:[
-			"wwt_vol_fuel",
 			"wwt_fuel_typ",
+			"wwt_vol_fuel",
 			"wwt_KPI_GHG_fuel",
 		],
 		advanced:0,
@@ -253,9 +253,9 @@ var Questions = {
 	"wwt_trucks":{
 		variables:[
 			"wwt_trck_typ",
+			"wwt_vol_trck",
 			"wwt_num_trip",
 			"wwt_dist_dis",
-			"c_wwt_nrg_tran",
 			"wwt_KPI_GHG_tsludge",
 		],
 		advanced:1,

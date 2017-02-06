@@ -23,7 +23,6 @@ var TODO = {
 		"[WAITING IWA] formula for <a href=variable.php?id=wwd_KPI_ghg_red>wwd_KPI_ghg_red</a>",
 		"[IDEA] edit.php, change stage simply modifying the variable CurrentLevel, then call init() function (works very good but needs work)",
 		"[IDEA] Create new cookies that remember folding of sections while using the tool",
-		"[WAIT] c_wwt_nrg_tran bug: units TJ to kWh",
 	],
 };
 

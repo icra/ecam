@@ -214,6 +214,7 @@ var Info = {
 	"wwt_vol_trea":{magnitude:"Volume",unit:"m3"},
 	"wwt_nrg_cons":{magnitude:"Energy",unit:"kWh"},
 	"wwt_vol_fuel":{magnitude:"Volume",unit:"L"},
+	"wwt_vol_trck":{magnitude:"Volume",unit:"L"},
 	"wwt_n2o_effl":{magnitude:"Mass/Volume",unit:"mg/L"},
 	"wwt_bod_infl":{magnitude:"Mass",unit:"kg"},
 	"wwt_bod_effl":{magnitude:"Mass",unit:"kg"},
@@ -244,7 +245,6 @@ var Info = {
 	c_wwt_nrg_biog:{magnitude:"Energy",unit:"kWh"},
 	c_wwt_bod_rmvd:{magnitude:"Mass",unit:"kg"},
 	c_wwt_biog_fla:{magnitude:"Volume",unit:"m3"},
-	c_wwt_nrg_tran:{magnitude:"Energy",unit:"TJ"},
 
 	wwt_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
 	wwt_KPI_nrg_per_kg:{magnitude:"Energy/Mass",unit:"kWh/Kg BOD removed"},

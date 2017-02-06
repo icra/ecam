@@ -23,8 +23,8 @@ Graphs.graph1=function(withTable,container)
 	container=container||"graph";
 
 	//values: 4 combinations with electricity/non & water/waste
-	var ws=Global.Water.ws_KPI_GHG()*Global.Configuration.ActiveStages.water; //0 if not active
-	var ww=Global.Waste.ww_KPI_GHG()*Global.Configuration.ActiveStages.waste; //0 if not active
+	var ws=Global.Water.ws_KPI_GHG()
+	var ww=Global.Waste.ww_KPI_GHG()
 
 	//names
 	var names = [ translate('ws_KPI_GHG_descr') , translate('ww_KPI_GHG_descr') ];
@@ -100,17 +100,13 @@ Graphs.graph4=function(withTable,container)
 	withTable=withTable||false;
 	container=container||"graph";
 
-	//ws and ww active
-	var ws=Global.Configuration.ActiveStages.water;
-	var ww=Global.Configuration.ActiveStages.waste;
-
 	//Values
-	var slice_1 = ws * Global.Water.Abstraction.wsa_KPI_GHG();
-	var slice_2 = ws * Global.Water.Treatment.wst_KPI_GHG();
-	var slice_3 = ws * Global.Water.Distribution.wsd_KPI_GHG();
-	var slice_4 = ww * Global.Waste.Collection.wwc_KPI_GHG();
-	var slice_5 = ww * Global.Waste.Treatment.wwt_KPI_GHG();
-	var slice_6 = ww * Global.Waste.Discharge.wwd_KPI_GHG();
+	var slice_1 = Global.Water.Abstraction.wsa_KPI_GHG();
+	var slice_2 = Global.Water.Treatment.wst_KPI_GHG();
+	var slice_3 = Global.Water.Distribution.wsd_KPI_GHG();
+	var slice_4 = Global.Waste.Collection.wwc_KPI_GHG();
+	var slice_5 = Global.Waste.Treatment.wwt_KPI_GHG();
+	var slice_6 = Global.Waste.Discharge.wwd_KPI_GHG();
 
 	//sum
 	var sum = slice_1+slice_2+slice_3+slice_4+slice_5+slice_6;

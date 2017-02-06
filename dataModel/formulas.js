@@ -90,8 +90,7 @@ var Formulas = {
 		result = result.replace(/\(\)/g,"")
 		result = result.replace(/Cts./g,"")
 		result = result.replace(/().value/g,"$1")
-		result = result.replace(/fuel=Tables.Fuel.types..Selected.FuelType.engines_in_......; /g,"")
-		result = result.replace(/fuel=Tables.Fuel.types..Selected.FuelType.truck_transport_waste.; /g,"")
+		result = result.replace(/fuel=Tables\[Fuel types\]\[Tables.find\(w.._...._typ,w.._...._typ\)\]; /g,"");
 		result = result.replace(/}$/g,"")
 		result = result.replace(/^ {/g," ")
 		result = result.replace(/\*/g," * ")

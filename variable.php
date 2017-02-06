@@ -154,7 +154,7 @@
 							ret+="<tr><td class=fuel caption='CH4 emission factor engines' >&emsp; · EFCH4.engines  <td>"+Tables["Fuel types"][fuel].EFCH4.engines  +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
 							ret+="<tr><td class=fuel caption='CH4 emission factor vehicles'>&emsp; · EFCH4.vehicles <td>"+Tables["Fuel types"][fuel].EFCH4.vehicles +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
 							ret+="<tr><td class=fuel caption='N2O emission factor engines' >&emsp; · EFN2O.engines  <td>"+Tables["Fuel types"][fuel].EFN2O.engines  +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
-							ret+="<tr><td class=fuel caption='N2O emission factor vehicles'>&emsp; · EFN2O.vehibles <td>"+Tables["Fuel types"][fuel].EFN2O.vehicles +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
+							ret+="<tr><td class=fuel caption='N2O emission factor vehicles'>&emsp; · EFN2O.vehicles <td>"+Tables["Fuel types"][fuel].EFN2O.vehicles +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
 						}
 						else //normal inputs
 						{
