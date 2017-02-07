@@ -15,7 +15,7 @@ var Normalization =
 	{
 		reside:"ww_resi_pop",
 		servic:"ww_serv_pop",
-		volume:"ww_vol_wwtr",
+		volume:"wwt_vol_trea",
 		energy:"ww_nrg_cons",
 		Collection:{volume:"wwc_vol_conv", energy:"wwc_nrg_cons"},
 		Treatment: {volume:"wwt_vol_trea", energy:"wwt_nrg_cons"},

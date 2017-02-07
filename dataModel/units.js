@@ -38,8 +38,11 @@ var Units =
 	},
 	//derived magnitudes from mass,distance and time
 	"Volume":{ 
-		m3:1,
 		L:0.001,
+		m3:1,
+		dam3:1000,
+		hm3:1000000,
+		km3:1000000000,
 	},
 	"Flow":{ 
 		"m3/s":1,

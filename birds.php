@@ -63,7 +63,7 @@
 		}
 
 		function drawCharts() {
-			Graphs.graph4(false,'graph1');
+			Graphs.ghgSources(false,'graph1');
 			Graphs.graph2(false,'graph2');
 			Graphs.ws_cost('graph3');
 			Graphs.ww_cost('graph4');
@@ -312,7 +312,7 @@
 					<tr stage=waste class=hidden><td>Volume of fuel consumed<td class=output><input id='ww_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_vol_fuel'].unit)</script>
 
 					<!--treated wastewater volume-->
-					<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_wwtr')?><td class=input><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
+					<tr stage=waste class=hidden><td><?php write('#wwt_vol_trea_descr')?><td class=input><input id='wwt_vol_trea' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
 						<span class=circle style=background:#89375c></span>
 
 					<!--energy costs-->

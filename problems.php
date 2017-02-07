@@ -73,8 +73,9 @@
 <!--linear--><?php include'linear.php'?>
 <!--caption--><?php include'caption.php'?>
 <!--title--><h1><a href=development.php>Development</a> &rsaquo; Debugging utility</h1></center>
+
 <div id=main style=margin-bottom:3em>
-	<!--to do-->
+	<!--todo list-->
 	<div id=tasks class=inline style="max-width:45%;border:1px solid #ccc;padding:0.5em;margin:2px">
 		<style> 
 			#tasks ul {font-family:monospace;padding-left:1em}
@@ -82,7 +83,7 @@
 		<h3>Tasks/Bugs/Ideas/Requests 
 			<br> 
 			<br> 
-			<span style=color:#666;font-family:monospace>format: [STATUS] "task description"</span>
+			<span style=color:#666;font-family:monospace>format: [PRIORITY] [STATUS] "task description"</span>
 		</h3>
 		<script src="todo.js"></script>
 		<ul>
@@ -90,25 +91,14 @@
 			<li><b>BACK-END</b><ul><script>TODO.list(TODO.Back)</script></ul>
 		</ul>
 	</div>
+
 	<!--problems-->
 	<div class=inline style="max-width:50%;border:1px solid #ccc;padding:0.5em;margin:2px">
 		<h3 style=padding-left:2px>Automatic problem finder</h3>
 
-		<!--questions-->
+		<!--not used inputs-->
 		<div class=inline style="max-width:20%">
-			<table><tr><th>Inexisting in questions.js 
-				<script>
-					for(var q in Questions)
-					{
-						if(typeof(Questions[q])=="function") continue;
-						findInexisting(Questions[q].variables)
-					}
-				</script>
-			</table>
-		</div>
-
-		<div class=inline style="max-width:20%">
-		<table><tr><th>Inputs not used in <br><b>Outputs</b><br> and<br> <b>Benchmarks</b>
+		<table><tr><th>Inputs not used in any<br><b>Outputs</b><br> and<br> <b>Benchmarks</b>
 			<script>
 				//get unused inputs
 				function getUnused(obj)
@@ -160,6 +150,19 @@
 				});
 			</script>
 		</table>
+		</div>
+
+		<!--questions-->
+		<div class=inline style="max-width:20%">
+			<table><tr><th>Inexisting in questions.js 
+				<script>
+					for(var q in Questions)
+					{
+						if(typeof(Questions[q])=="function") continue;
+						findInexisting(Questions[q].variables)
+					}
+				</script>
+			</table>
 		</div>
 
 		<!--rest of data structures-->
@@ -227,4 +230,5 @@
 		</div>
 	</div>
 </div>
+
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

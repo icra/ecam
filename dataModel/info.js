@@ -56,7 +56,6 @@ var Info = {
 	"ww_nrg_cost" :{magnitude:"Currency",unit:"USD"},
 	"ww_run_cost" :{magnitude:"Currency",unit:"USD"},
 	"ww_nrg_cons" :{magnitude:"Energy",unit:"kWh"},
-	"ww_vol_wwtr" :{magnitude:"Volume",unit:"m3"},
 	"ww_resi_pop" :{magnitude:"People",unit:"People"},
 	"ww_conn_pop" :{magnitude:"People",unit:"People"},
 	"ww_serv_pop" :{magnitude:"People",unit:"People"},

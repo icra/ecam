@@ -71,7 +71,8 @@ Graphs.graph1=function(withTable,container)
 	{
 		var table=""+
 		"<button onclick=Graphs.graph1(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
-		"<button onclick=\"Graphs.graph4(true,'"+container+"');scrollToItem('"+container+"')\">"+translate('graphs_detailed')+"</button>"+
+		"<button onclick=\"Graphs.graph4(true,'"+container+"');scrollToItem('"+container+"')\">By stage</button>"+
+		"<button onclick=\"Graphs.ghgSources(true,'"+container+"');scrollToItem('"+container+"')\">By source</button>"+
 		"<table title=graph1>"+
 			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kg CO2)"+
 			"<tr><td>"+names[0]+"<td><a href=variable.php?id=ws_KPI_GHG>ws_KPI_GHG</a><td>"+format(ws)+
@@ -90,7 +91,9 @@ Graphs.graph1=function(withTable,container)
 		var div=document.createElement('div');
 		document.getElementById(container).appendChild(div);
 		div.innerHTML="<button onclick=Graphs.graph1(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"+
-			"<button onclick=\"Graphs.graph4(false,'"+container+"');scrollToItem('"+container+"')\">"+translate('graphs_detailed')+"</button>"
+			"<button onclick=\"Graphs.graph4(false,'"+container+"');scrollToItem('"+container+"')\">By stage</button>"+
+			"<button onclick=\"Graphs.ghgSources(false,'"+container+"');scrollToItem('"+container+"')\">By source</button>"+
+			"";
 	}
 }
 
@@ -138,7 +141,7 @@ Graphs.graph4=function(withTable,container)
 	{ 
 		height:250,
 		legend:{position:'left'},
-		title:"Total GHG emissions ("+format(sum)+" kg CO2) [Detailed]",
+		title:"Total GHG emissions ("+format(sum)+" kg CO2) [By stage]",
 		slices:
 		{
 			0:{color:ColorsGHG.ws_KPI_GHG_elec      },
@@ -177,7 +180,8 @@ Graphs.graph4=function(withTable,container)
 	{
 		var table=""+
 		"<button onclick=Graphs.graph4(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
-		"<button onclick=\"Graphs.graph1(true,'"+container+"');scrollToItem('"+container+"')\">"+translate('graphs_non_detailed')+"</button>"+
+		"<button onclick=\"Graphs.graph1(true,'"+container+"');scrollToItem('"+container+"')\">Simple</button>"+
+		"<button onclick=\"Graphs.ghgSources(true,'"+container+"');scrollToItem('"+container+"')\">By source</button>"+
 		"<table title=graph4>"+
 			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kg CO2)"+
 			"<tr><td>"+names[0]+"<td>wsa_KPI_GHG <td>"+format(slice_1)+
@@ -193,7 +197,146 @@ Graphs.graph4=function(withTable,container)
 	else
 	{
 		div.innerHTML="<button onclick=Graphs.graph4(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"+
-		"<button onclick=\"Graphs.graph1(false,'"+container+"');scrollToItem('"+container+"')\">"+translate('graphs_non_detailed')+"</button>"
+		"<button onclick=\"Graphs.graph1(false,'"+container+"');scrollToItem('"+container+"')\">Simple</button>"+
+		"<button onclick=\"Graphs.ghgSources(false,'"+container+"');scrollToItem('"+container+"')\">By source</button>"+
+		"";
+	}
+}
+
+//ghg sources
+Graphs.ghgSources=function(withTable,container)
+{
+	withTable=withTable||false;
+	container=container||"graph";
+
+	/*
+		sources: 
+			elec, fuel, fuel trucks, sludge wst, 
+			ch4_unt, n2o_unt, ch4_tre, n2o_tre, biogas 
+	*/
+	var elec=(function(){
+		return 0+
+			Global.Water.Abstraction.wsa_KPI_GHG_elec()+
+			Global.Water.Treatment.wst_KPI_GHG_elec()+
+			Global.Water.Distribution.wsd_KPI_GHG_elec()+
+			Global.Waste.Collection.wwc_KPI_GHG_elec()+
+			Global.Waste.Treatment.wwt_KPI_GHG_elec()+
+			Global.Waste.Discharge.wwd_KPI_GHG_elec();
+	})();
+	var fuel=(function(){
+		return 0+
+			 Global.Water.Abstraction.wsa_KPI_GHG_fuel()+
+			   Global.Water.Treatment.wst_KPI_GHG_fuel()+
+			Global.Water.Distribution.wsd_KPI_GHG_fuel()+
+			  Global.Waste.Collection.wwc_KPI_GHG_fuel()+
+			   Global.Waste.Treatment.wwt_KPI_GHG_fuel()+
+			   Global.Waste.Discharge.wwd_KPI_GHG_fuel();
+	})();
+	var trck=(function(){
+		return 0+
+			Global.Water.Distribution.wsd_KPI_GHG_trck()+
+				 Global.Waste.Treatment.wwt_KPI_GHG_tsludge()+
+				 Global.Waste.Discharge.wwd_KPI_GHG_trck();
+	})();
+	var wsts=Global.Water.Treatment.wst_KPI_GHG_slud();
+	var ch4u=Global.Waste.Collection.wwc_KPI_GHG_unt_ch4();
+	var n2ou=Global.Waste.Collection.wwc_KPI_GHG_unt_n2o();
+	var ch4t=Global.Waste.Treatment.wwt_KPI_GHG_tre_ch4();
+	var n2ot=Global.Waste.Treatment.wwt_KPI_GHG_tre_n2o();
+	var biog=Global.Waste.Treatment.wwt_KPI_GHG_biog();
+
+	//names
+	var names = [
+		"Electricity",
+		"Fuel engines",
+		"Truck transport",
+		"Sludge water treatment",
+		"CH4 untreated wastewater",
+		"N2O untreated wastewater",
+		"CH4 treatment process",
+		"N2O discharge water body",
+		"Biogas flared",
+	];
+
+	//array graph data
+	var data=google.visualization.arrayToDataTable([
+		["Source",translate('emissions')],
+		[names[0],elec],
+		[names[1],fuel],
+		[names[2],trck],
+		[names[3],wsts],
+		[names[4],ch4u],
+		[names[5],n2ou],
+		[names[6],ch4t],
+		[names[7],n2ot],
+		[names[8],biog],
+	]);
+
+	//options
+	var options= 
+	{ 
+		height:250,
+		legend:{position:'left'},
+		title:"Total GHG emissions ("+format(Global.General.TotalGHG())+" kg CO2) [By source]",
+		slices:
+		{
+			0:{color:'#00aff1' },
+			1:{color:'#d71d24' },
+		},
+	}
+
+	//empty the container element
+	var con = document.getElementById(container)
+	con.innerHTML='';
+
+	//double click
+	con.ondblclick=function(){
+		var a=document.createElement('a');
+		document.body.appendChild(a);
+		a.href=chart.getImageURI()
+		a.download="image.png"
+		a.click()
+	}
+
+	//draw
+	var chart=new google.visualization.PieChart(con);
+	chart.draw(data,options);
+
+	//create a table string
+	if(withTable)
+	{
+		var table=""+
+		"<button onclick=Graphs.ghgSources(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
+		"<button onclick=\"Graphs.graph1(true,'"+container+"');scrollToItem('"+container+"')\">Simple</button>"+
+		"<button onclick=\"Graphs.graph4(true,'"+container+"');scrollToItem('"+container+"')\">By stage</button>"+
+		"<table title=graph1>"+
+			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_value')+" (kg CO2)"+
+			"<tr><td>"+names[0]+"<td>"+format(elec)+
+			"<tr><td>"+names[1]+"<td>"+format(fuel)+
+			"<tr><td>"+names[2]+"<td>"+format(trck)+
+			"<tr><td>"+names[3]+"<td>"+format(wsts)+
+			"<tr><td>"+names[4]+"<td>"+format(ch4u)+
+			"<tr><td>"+names[5]+"<td>"+format(n2ou)+
+			"<tr><td>"+names[6]+"<td>"+format(ch4t)+
+			"<tr><td>"+names[7]+"<td>"+format(n2ot)+
+			"<tr><td>"+names[8]+"<td>"+format(biog)+
+		"</table>"+
+		"";
+
+		var div=document.createElement('div');
+		div.style.fontSize="10px";
+		div.innerHTML=table;
+		document.getElementById(container).appendChild(div);
+	}
+	else
+	{
+		//button "show table"
+		var div=document.createElement('div');
+		document.getElementById(container).appendChild(div);
+		div.innerHTML="<button onclick=Graphs.ghgSources(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"+
+		"<button onclick=\"Graphs.graph1(false,'"+container+"');scrollToItem('"+container+"')\">Simple</button>"+
+		"<button onclick=\"Graphs.graph4(false,'"+container+"');scrollToItem('"+container+"')\">By stage</button>"+
+			"";
 	}
 }
 
@@ -469,7 +612,7 @@ Graphs.graph7=function(withTable,container)
 					"<tr><td>"+title+
 					"<td><a href=variable.php?id="+names[s]+">"+names[s]+"</a>";
 				for(var i in stages[s])
-					table+="<td>"+stages[s][i][names[s]];
+					table+="<td>"+format(stages[s][i][names[s]]);
 			}
 		table+="</table>"+
 		'<div class=options>'+
@@ -848,22 +991,29 @@ Graphs.graph7=function(withTable,container)
 Graphs.sankey=function(withTable,container)
 //Water volumes
 {
+	withTable=withTable||false;
+	container=container||"graph";
 	//data
 	var slice_1 = Global.Water.Abstraction.wsa_vol_conv;
 	var slice_2 = Global.Water.Treatment.wst_vol_trea;
 	var slice_3 = Global.Water.Distribution.wsd_vol_dist;
 	var slice_4 = Global.Water.Distribution.wsd_auth_con;
-	var slice_5 = Global.Waste.Collection.wwc_vol_conv;
-	var slice_6 = Global.Waste.Treatment.wwt_vol_trea;
-	var slice_7 = Global.Waste.Discharge.wwd_vol_disc;
 
-	var losses_1 = slice_1 - slice_2;
-	var losses_2 = slice_2 - slice_3;
-	var losses_3 = slice_3 - slice_4;
-	var losses_4 = slice_4 - slice_5;
-	var losses_5 = slice_5 - slice_6;
-	var losses_6 = slice_6 - slice_7;
-	var losses = losses_1 + losses_2 + losses_3 + losses_4 + losses_5 + losses_6;
+	var slice_5 = Global.Waste.Collection.wwc_vol_coll;
+	var slice_6 = Global.Waste.Collection.wwc_vol_conv;
+	var slice_7 = Global.Waste.Treatment.wwt_vol_trea;
+	var slice_8 = Global.Waste.Discharge.wwd_vol_disc;
+
+	//divide all data by the last slice to make it look good
+	slice_1=10*slice_1/slice_4;
+	slice_2=10*slice_2/slice_4;
+	slice_3=10*slice_3/slice_4;
+	slice_4=10*slice_4/slice_4;
+
+	slice_5=10*slice_5/slice_8;
+	slice_6=10*slice_6/slice_8;
+	slice_7=10*slice_7/slice_8;
+	slice_8=10*slice_8/slice_8;
 
 	//data
 	var data = new google.visualization.DataTable();
@@ -871,31 +1021,29 @@ Graphs.sankey=function(withTable,container)
 	data.addColumn('string', 'To');
 	data.addColumn('number', 'Volume');
 	data.addRows([
-		['Abstraction', 	     'Water treatment', 	 slice_1 || 0.01 ],
-		['Water treatment',	     'Distribution',         slice_2 || 0.01 ],
-		['Water treatment',      'Losses1', losses_1 || 0.01 ],
+		//ws flows
+		['Start',    'wsa',      slice_1],
+		['wsa',      'wst',      slice_2],
+		['wsa',      'wsa_loss', slice_1-slice_2],
+		['wst',      'wsd',      slice_3],
+		['wst',      'wst_loss', slice_2-slice_3],
+		['wsd',      'usr_in',   slice_4],
+		['wsd',      'wsd_loss', slice_3-slice_4],
+		['wsa_loss', 'ws_loss',  slice_1-slice_2],
+		['wst_loss', 'ws_loss',  slice_2-slice_3],
+		['wsd_loss', 'ws_loss',  slice_3-slice_4],
 
-		['Distribution', 	     'Users in',             slice_3 || 0.01 ],
-		['Distribution', 	     'Losses2', losses_2 || 0.01 ],
-
-		['Users in',             'Users out',            slice_4 || 0.01 ],
-		['Users in', 	         'Losses3', losses_3 || 0.01 ],
-
-		['Users out',	         'Collection',           slice_5 || 0.01 ],
-		['Users out', 	         'Losses4', losses_4 || 0.01 ],
-
-		['Collection',	         'Wastewater treatment', slice_6 || 0.01 ],
-		['Collection', 	         'Losses5', losses_5 || 0.01 ],
-
-		['Wastewater treatment', 'Discharge',            slice_7 || 0.01 ],
-		['Wastewater treatment', 'Losses6', losses_6 || 0.01 ],
-
-		['Losses1', 'Losses2', losses_1||0.01],
-		['Losses2', 'Losses3', losses_1+losses_2||0.01],
-		['Losses3', 'Losses4', losses_1+losses_2+losses_3||0.01],
-		['Losses4', 'Losses5', losses_1+losses_2+losses_3+losses_4||0.01],
-		['Losses5', 'Losses6', losses_1+losses_2+losses_3+losses_4+losses_5||0.01],
-		['Losses6', 'Water Losses', losses||0.01],
+		//ww flows
+		['usr_out',  'wwc',      slice_5],
+		['wwc',      'wwt',      slice_6],
+		['wwc',      'wwc_loss', slice_5-slice_6],
+		['wwt',      'wwd',      slice_7],
+		['wwt',      'wwt_loss', slice_6-slice_7],
+		['wwd',      'End',      slice_8],
+		['wwd',      'wwd_loss', slice_7-slice_8],
+		['wwc_loss', 'ww_loss',  slice_5-slice_6],
+		['wwt_loss', 'ww_loss',  slice_6-slice_7],
+		['wwd_loss', 'ww_loss',  slice_7-slice_8],
 	]);
 
 	//options
