@@ -252,7 +252,7 @@
 	"#ws_resi_pop_expla":"Number of permanent residents within the water utility area of service",
 	"#ws_serv_pop_descr":"Serviced population",
 	"#ws_serv_pop_expla":"Serviced population is referred to the number of inhabitants, within the area of service managed by the utility, which are connected to the distribution system and are receiving the service",
-	"#ws_nrg_cons_descr":"Energy consumed from the grid",
+	"#ws_nrg_cons_descr":"Energy consumed from the grid (Abstraction+Treatment+Distribution)",
 	"#ws_nrg_cons_expla":"Total energy consumed from the grid for the entire water supply utilty, based on the electricity bill during the entire assessment period",
 	"#ws_nrg_cost_descr":"Energy costs",
 	"#ws_nrg_cost_expla":"Costs from electric energy consumption for the entire water supply utilty, based on the electricity bill during the entire assessment period",

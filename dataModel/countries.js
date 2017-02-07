@@ -1,8 +1,183 @@
 /*
-	list of countries, with:
-		- conversion factor
-		- protein consumption
-		- bod per day 
+	List of countries, with:
+		- Conversion factor
+		- Protein consumption
+		- Bod per day 
+
+		Albania
+		Algeria
+		Angola
+		Antigua and Barbuda
+		Argentina
+		Armenia
+		Australia
+		Austria
+		Azerbaijan
+		Bahamas
+		Bangladesh
+		Barbados
+		Belarus
+		Belgium
+		Belize
+		Benin
+		Bermuda
+		Bolivia (Plurinational State of)
+		Bosnia and Herzegovina
+		Botswana
+		Brazil
+		Brunei Darussalam
+		Bulgaria
+		Burkina Faso
+		Burundi
+		Cambodia
+		Cameroon
+		Canada
+		Cape Verde
+		Central African Republic
+		Chad
+		Chile
+		China
+		Colombia
+		Comoros
+		Congo
+		Costa Rica
+		Côte d'Ivoire
+		Croatia
+		Cuba
+		Cyprus
+		Czech Republic
+		Democratic People's Republic of Korea
+		Denmark
+		Djibouti
+		Dominica
+		Dominican Republic
+		Ecuador
+		Egypt
+		El Salvador
+		Eritrea
+		Estonia
+		Ethiopia
+		Fiji
+		Finland
+		France
+		French Polynesia
+		Gabon
+		Gambia
+		Georgia
+		Germany
+		Ghana
+		Greece
+		Grenada
+		Guatemala
+		Guinea
+		Guinea-Bissau
+		Guyana
+		Haiti
+		Honduras
+		Hungary
+		Iceland
+		India
+		Indonesia
+		Iran (Islamic Republic of)
+		Ireland
+		Israel
+		Italy
+		Jamaica
+		Japan
+		Jordan
+		Kazakhstan
+		Kenya
+		Kiribati
+		Kuwait
+		Kyrgyzstan
+		Lao People's Democratic Republic
+		Latvia
+		Lebanon
+		Lesotho
+		Liberia
+		Libyan Arab Jamahiriya
+		Lithuania
+		Luxembourg
+		Madagascar
+		Malawi
+		Malaysia
+		Maldives
+		Mali
+		Malta
+		Mauritania
+		Mauritius
+		Mexico
+		Mongolia
+		Morocco
+		Mozambique
+		Namibia
+		Nepal
+		Netherlands
+		Netherlands Antilles
+		New Caledonia
+		New Zealand
+		Nicaragua
+		Niger
+		Nigeria
+		Norway
+		Occupied Palestinian Territory
+		Pakistan
+		Panama
+		Paraguay
+		Peru
+		Philippines
+		Poland
+		Portugal
+		Republic of Korea
+		Republic of Moldova
+		Romania
+		Russian Federation
+		Rwanda
+		Saint Kitts and Nevis
+		Saint Lucia
+		Saint Vincent and the Grenadines
+		Samoa
+		Sao Tome and Principe
+		Saudi Arabia
+		Senegal
+		Serbia and Montenegro
+		Seychelles
+		Sierra Leone
+		Slovakia
+		Slovenia
+		Solomon Islands
+		South Africa
+		Spain
+		Sri Lanka
+		Sudan
+		Suriname
+		Swaziland
+		Sweden
+		Switzerland
+		Syrian Arab Republic
+		Tajikistan
+		Thailand
+		The former Yugoslav Republic of Macedonia
+		Timor-Leste
+		Togo
+		Trinidad and Tobago
+		Tunisia
+		Turkey
+		Turkmenistan
+		Uganda
+		Ukraine
+		United Arab Emirates
+		United Kingdom
+		United Republic of Tanzania
+		United States of America
+		Uruguay
+		Uzbekistan
+		Vanuatu
+		Venezuela (Bolivarian Republic of)
+		Viet Nam
+		Yemen
+		Zambia
+		Zimbabwe
 */
 
 var Countries={
