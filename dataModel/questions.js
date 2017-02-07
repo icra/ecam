@@ -220,7 +220,7 @@ var Questions = {
 	"wwt_producing_biogas":{
 		variables:[
 			"wwt_biog_pro",
-			"wwt_biog_val",
+			"wwt_ch4_biog",
 			"c_wwt_biog_fla",
 			"wwt_KPI_biog_x_bod",
 			"wwt_KPI_GHG_biog",
@@ -232,13 +232,13 @@ var Questions = {
 	},
 	"wwt_valorizing_biogas":{
 		variables:[
+			"wwt_biog_val",
 			"wwt_nrg_biog",
-			"wwt_ch4_biog",
 			"c_wwt_nrg_biog",
 			"wwt_KPI_nrg_biogas",
 			"wwt_KPI_nrg_x_biog",
 		],
-		advanced:1,
+		advanced:0,
 		otherQuestions:[],
 	},
 	"wwt_engines":{
@@ -253,7 +253,6 @@ var Questions = {
 	"wwt_trucks":{
 		variables:[
 			"wwt_trck_typ",
-			"wwt_vol_trck",
 			"wwt_num_trip",
 			"wwt_dist_dis",
 			"wwt_KPI_GHG_tsludge",

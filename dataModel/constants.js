@@ -18,13 +18,6 @@ var Cts =
 		unit:"%",
 	},
 
-	ct_ch4_bi:{
-		descr:"Percentage of methane in biogas",
-		value:59,
-		unit:"%",
-	},
-
-
 	ct_ch4_m3:{
 		descr:"Kg CH4/m3",
 		value:0.66,

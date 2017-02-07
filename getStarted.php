@@ -22,8 +22,6 @@
 		function init(selectName)
 		{
 			selectName=selectName||false;
-
-			redisplayUW1menu();
 			updateCurrency();
 			Sidebar.update();
 			updateResult();
@@ -59,65 +57,11 @@
 			<td><span id=Days>0</span> <?php write('#days')?>
 		<tr>
 			<script>
-				function updateUW1(newValue)
-				{
-					document.querySelector('#uw1').value=newValue;
-					updateField(Global.General,'conv_kwh_co2',newValue);
-
-					//hide warning
-					document.querySelector('#uw1_warning').classList.remove('visible');
-				}
-
-				function redisplayUW1menu()
-				{
-					//input element
-					document.querySelector('#uw1').value=Global.General.conv_kwh_co2;
-					//select element
-					var select = document.querySelector('#countryUW1');
-					//go over options and select the one with same value as uw1
-					for(var i=1;i<select.childNodes.length;i++)
-					{
-						if(parseFloat(select.childNodes.item(i).value)==Global.General.conv_kwh_co2)
-						{
-							select.childNodes.item(i).setAttribute('selected','true');
-							return;
-						}
-					}
-					//if we go out of the list make it custom
-					select.value="custom";
-				}
-
 				function updateCurrency()
 				{
 					document.getElementById('currency').innerHTML=Global.General.Currency
 				}
 			</script>
-
-			<th style=cursor:help title="<?php write('#conv_kwh_co2_expla')?>"><?php write('#conv_kwh_co2_descr')?>
-			<td>
-			<!--conv_kwh_co2-->
-				<table><tr><td style="border:none;padding:0;" colspan=2>
-					<select id=countryUW1 onchange=updateUW1(this.value)>
-						<option value=0>--<?php write('#configuration_enter_custom_value')?>--
-						<option value=0.237721212>Peru
-						<option value=0.626742612>Thailand
-						<option value=0.452483345>Mexico
-						<option value=custom>--<?php write('#configuration_custom')?>--
-					</select>
-
-					<input id=uw1 value=0 style="width:80px" onchange=updateUW1(this.value)> kg<sub>CO<sub>2</sub></sub>/kWh
-					<div id=uw1_warning>
-						<b><?php write('#configuration_conv_error')?></b>
-					</div>
-					<style>
-						#uw1_warning {
-							background:red;
-							padding:0.5em;
-							display:none;
-						}
-						#uw1_warning.visible {display:block;}
-					</style>
-				</table>
 		<tr>
 			<!--currency: 3 letters-->
 			<th><?php write("#currency")?>
@@ -143,13 +87,6 @@
 		<script>
 			function nextPage()
 			{
-				if(Global.General.conv_kwh_co2==0)
-				{
-					document.getElementById('uw1').style.background='red';
-					var warning=document.getElementById('uw1_warning');
-					warning.classList.add('visible');
-					return;
-				}
 				window.location='configuration.php'
 			}
 		</script>

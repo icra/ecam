@@ -20,7 +20,7 @@
 			background:#eee;
 			padding:0 !important;
 		}
-		#inputs input {
+		#inputs input[id] {
 			background:inherit;
 			border:none;
 			text-align:right;
@@ -29,6 +29,13 @@
 			width:95%;
 			height:24px;
 			display:block;
+			padding:0.2em;
+		}
+		#inputs input[type=radio] {
+			display:auto;
+			line-height:1em;
+			width:95%;
+			height:24px;
 			padding:0.2em;
 		}
 		#inputs input:focus {
@@ -42,10 +49,10 @@
 		b[caption]{cursor:default}
 	</style>
 	<script>
-		function init()
-		{
+		function init() {
 			BEV.showActive();
 			BEV.updateDefaults();
+			BEV.defaultQuestions();
 			drawCharts();
 			updateResult();
 			Caption.listeners();
@@ -55,8 +62,7 @@
 			if(first.value=="0") first.click()
 		}
 
-		function drawCharts()
-		{
+		function drawCharts() {
 			Graphs.graph4(false,'graph1');
 			Graphs.graph2(false,'graph2');
 			Graphs.ws_cost('graph3');
@@ -70,8 +76,7 @@
 		var BEV={}; //'Birds Eye View' namespace
 
 		//Generic f for updating internal values
-		BEV.update=function(obj,field,newValue)
-		{
+		BEV.update=function(obj,field,newValue) {
 			if(obj[field]===undefined) { alert('field '+field+' undefined'); return; }
 			//newValue may be a string from input.value, it should be a float
 			newValue=parseFloat(newValue);
@@ -144,8 +149,38 @@
 			}
 		}
 
-		BEV.showActive=function() //only show water/wastewater inputs if active
+		//producing biogas and valorizing biogas default values
+		BEV.defaultQuestions=function() 
 		{
+			//valorizing
+			var val = Global.Configuration["Yes/No"].wwt_valorizing_biogas;
+			//producing
+			var pro = Global.Configuration["Yes/No"].wwt_producing_biogas;
+
+			if(pro)
+			{
+				document.querySelector('input[name=wwt_producing_biogas][ans="1"]').checked=true;
+			}
+			else
+			{
+				document.querySelector('input[name=wwt_valorizing_biogas][ans="0"]').checked=true;
+				Global.Configuration["Yes/No"].wwt_valorizing_biogas=0;
+			}
+			if(val && pro)
+			{
+				document.querySelector('input[name=wwt_valorizing_biogas][ans="1"]').checked=true;
+			}
+
+		}
+
+		BEV.updateQuestion=function(code,newValue)
+		{
+			Global.Configuration['Yes/No'][code]=newValue;
+			init();
+		}
+
+		//only show water/wastewater inputs if active
+		BEV.showActive=function() {
 			['water','waste'].forEach(function(stage)
 			{
 				if(Global.Configuration.ActiveStages[stage]==1)
@@ -159,17 +194,6 @@
 					document.querySelector('table#inputs tr[indic='+stage+']').classList.remove('hidden');
 				}
 			});
-		}
-
-		function makeInactive(input)
-		{
-			input.setAttribute('disabled',true);
-			input.style.background="#eee";
-			//change parent color
-			var tr = input.parentNode.parentNode;
-			tr.style.background="#eee";
-			tr.title="<?php write('#Inactive')?>";
-			tr.style.color="#888";
 		}
 	</script>
 	<script>
@@ -237,7 +261,8 @@
 <div>
 	<div class=inline style=width:35%>
 		<!--inputs-->
-		<div class="card"><?php cardMenu("<b>Inputs</b> &mdash; Global values of the system")?>
+		<div class="card"><?php cardMenu("<b>Inputs</b> &mdash; Enter values from your system")?>
+
 			<!--table-->
 			<table id=inputs style=width:100%>
 				<!--WATER-->
@@ -280,10 +305,17 @@
 						</b>
 					</span>
 
+					<!--energy consumed from the grid-->
 					<tr stage=waste class=hidden><td>Energy consumed from the grid<td class=output><input id='ww_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_nrg_cons'].unit)</script>
+
+					<!--volume of fuel consumed-->
 					<tr stage=waste class=hidden><td>Volume of fuel consumed<td class=output><input id='ww_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_vol_fuel'].unit)</script>
+
+					<!--treated wastewater volume-->
 					<tr stage=waste class=hidden><td><?php write('#birds_ww_vol_wwtr')?><td class=input><input id='ww_vol_wwtr' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
 						<span class=circle style=background:#89375c></span>
+
+					<!--energy costs-->
 					<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?><td class=input><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
 					<tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?><td class=input><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
 
@@ -299,18 +331,31 @@
 						<td class=input><input id='wwt_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
 							<span class=circle style=background:#b8879d></span>
 					</tr>
+
+					<!--wwt are you producing biogas-->
+					<tr stage=waste class=hidden>
+						<td> Are you producing biogas?
+						<td> <label>No  <input name=wwt_producing_biogas type=radio onclick="BEV.updateQuestion(this.name,0)" ans=0 checked></label>
+						<td> <label>Yes <input name=wwt_producing_biogas type=radio onclick="BEV.updateQuestion(this.name,1)" ans=1></label>
+					</tr>
+
+					<!--wwt are you valorizing biogas-->
+					<tr stage=waste class=hidden>
+						<td> Are you valorizing biogas?
+						<td> <label>No  <input name=wwt_valorizing_biogas type=radio onclick="BEV.updateQuestion(this.name,0)" ans=0 checked></label>
+						<td> <label>Yes <input name=wwt_valorizing_biogas type=radio onclick="BEV.updateQuestion(this.name,1)" ans=1></label>
+					</tr>
 			</table>
+
 			<script>
 				(function(){
-					var inputs=document.querySelectorAll("#inputs input")
+					var inputs=document.querySelectorAll("#inputs input[id]")
 					for(var i=0;i<inputs.length;i++)
 					{
-						if(inputs[i].type=="radio") continue;
 						inputs[i].onclick=function(){this.select()}
 					}
 				})();
 			</script>
-
 		</div>
 
 		<!--PREV & NEXT BUTTONS-->

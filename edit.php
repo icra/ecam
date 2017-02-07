@@ -1249,7 +1249,7 @@
 
 			<!--advanced questions-->
 			<div class="card">
-				<?php cardMenu("<b>Advanced Assessment: Questions</b>")?> 
+				<?php cardMenu("<b>Advanced Assessment: Questions (<a href=questions.php>info</a>)</b>")?> 
 				<div style=padding:0.5em;text-align:center>
 					<table id=adv_questions class=inline></table>
 					<style> #adv_questions td {text-align:left} </style>

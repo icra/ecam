@@ -71,9 +71,9 @@
 	<!--Stages Summaries-->
 	<div>
 		<div><span style="color:#666">GHG Summary</span></div>
+		<img class=l1 stage=sources src=img/sources.png onclick=window.location="sources.php"          caption="GHG Sources">
 		<img class=l1 stage=water   src=img/water.png   onclick=window.location="edit.php?level=Water" caption="<?php write('#Water')?>"> 
 		<img class=l1 stage=waste   src=img/waste.png   onclick=window.location="edit.php?level=Waste" caption="<?php write('#Waste')?>"> 
-		<img class=l1 stage=sources src=img/sources.png onclick=window.location="sources.php"          caption="GHG Sources">
 	</div>
 
 	<!--I/O Summary-->

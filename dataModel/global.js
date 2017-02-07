@@ -12,7 +12,11 @@ var Global={
 		AssessmentPeriodEnd:"2018-01-01",
 		Comments:"",
 		Currency:"USD",
-		conv_kwh_co2:0, //conversion factor for grid electricity
+
+		conv_kwh_co2:0,//conversion factor for grid electricity
+		gwp:0,//global warming potential of the selected country
+		Country:"--select--",
+
 		Days:function(){
 			var startDate=new Date(Global.General.AssessmentPeriodStart);
 			var finalDate=new Date(Global.General.AssessmentPeriodEnd);
@@ -244,7 +248,7 @@ var Global={
 			"wwt_fuel_typ":0,
 			"wwt_vol_fuel":0,
 			"wwt_trck_typ":0,
-			"wwt_vol_trck":0,
+			//"wwt_vol_trck":0, volume is estimated
 
 			"wwt_n2o_effl":15,
 			"wwt_biog_pro":0,
@@ -277,7 +281,28 @@ var Global={
 			"wwt_slu_type":0,
 
 			//CCVV
-			c_wwt_biog_fla:function(){return this.wwt_biog_pro-this.wwt_biog_val},
+			c_wwt_biog_fla:function()
+			{
+				if(Global.Configuration['Yes/No'].wwt_producing_biogas==0)
+				{
+					return 0
+				}
+				else if(this.wwt_biog_pro)
+				{
+					return this.wwt_biog_pro-this.wwt_biog_val
+				}
+				else
+				{
+					if(Global.Configuration['Yes/No'].wwt_valorizing_biogas)
+					{
+						return 0
+					}
+					else
+					{
+						return Global.Waste.ww_serv_pop*Global.Waste.Collection.wwc_bod_pday*Cts.ct_bod_kg.value*Cts.ct_biog_g.value*Global.General.Days()/1000
+					}
+				}
+			},
 			c_wwt_nrg_biog:function(){return this.wwt_biog_val*this.wwt_ch4_biog/100*10},
 			c_wwt_bod_rmvd:function(){return this.wwt_bod_infl-this.wwt_bod_effl},
 			c_wwt_ch4_efac:function(){
@@ -310,26 +335,23 @@ var Global={
 				return this.wwt_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines)
 			},
 			wwt_KPI_GHG_biog:function(){
-				return this.c_wwt_biog_fla()*Cts.ct_ch4_bi.value/100*Cts.ct_ch4_m3.value*Cts.ct_ch4_eq.value;
+				return this.c_wwt_biog_fla()*this.wwt_ch4_biog/100*Cts.ct_ch4_m3.value*Cts.ct_ch4_eq.value;
 			},
 			wwt_KPI_GHG_tsludge:function(){
 				var fuel=Tables['Fuel types'][Tables.find('wwt_trck_typ',this.wwt_trck_typ)]; 
 				return (this.wwt_num_trip*2*this.wwt_dist_dis/1000*0.25)*fuel.FD/1000000*fuel.NCV*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.vehicles+Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles)
 			},
-			wwt_KPI_GHG_tre_ch4:function(){
-				return (this.c_wwt_bod_rmvd()*this.c_wwt_ch4_efac()+Cts.ct_ch4_lo.value/100*this.c_wwt_biog_fla()*Cts.ct_ch4_bi.value/100*Cts.ct_ch4_m3.value)*Cts.ct_ch4_eq.value
+			wwt_KPI_GHG_tre_ch4:function()
+			{
+				return Cts.ct_ch4_eq.value*(this.c_wwt_bod_rmvd()*this.c_wwt_ch4_efac()+Cts.ct_ch4_lo.value/100*this.c_wwt_biog_fla()*this.wwt_ch4_biog/100*Cts.ct_ch4_m3.value)
 			}, //former c_ww55
 			wwt_KPI_GHG_tre_n2o:function(){
 				return this.wwt_n2o_effl/1000*this.wwt_vol_trea*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value; 
 			}, //former c_ww53
 
+			//wwt total ghg
 			wwt_KPI_GHG:function(){
-				return this.wwt_KPI_GHG_elec()+
-							 this.wwt_KPI_GHG_fuel()+
-               this.wwt_KPI_GHG_biog()+
-               this.wwt_KPI_GHG_tsludge()+
-               this.wwt_KPI_GHG_tre_ch4()+
-               this.wwt_KPI_GHG_tre_n2o()
+				return this.wwt_KPI_GHG_elec()+this.wwt_KPI_GHG_fuel()+this.wwt_KPI_GHG_biog()+this.wwt_KPI_GHG_tsludge()+this.wwt_KPI_GHG_tre_ch4()+this.wwt_KPI_GHG_tre_n2o()
 			},
 		},
 

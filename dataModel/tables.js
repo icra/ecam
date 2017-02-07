@@ -8,7 +8,7 @@ var Tables =
 		"Gasoline/Petrol" :{value:1,EFCH4:{engines:3,vehicles:3.8},EFN2O:{engines:0.6,vehicles:1.9},EFCO2:69300,FD:0.74,NCV:44.3},
 		"Natural Gas"     :{value:2,EFCH4:{engines:10,vehicles:92},EFN2O:{engines:0.1,vehicles:0.2},EFCO2:56100,FD:0.75,NCV:48.0},
 	},
-
+	
 	//wsa
 	"wsa_watr_src":{
 		"Groundwater":{value:0},

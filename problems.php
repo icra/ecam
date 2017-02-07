@@ -75,7 +75,7 @@
 <!--title--><h1><a href=development.php>Development</a> &rsaquo; Debugging utility</h1></center>
 <div id=main style=margin-bottom:3em>
 	<!--to do-->
-	<div id=tasks class=inline style="max-width:35%;border:1px solid #ccc;padding:0.5em;margin:2px">
+	<div id=tasks class=inline style="max-width:45%;border:1px solid #ccc;padding:0.5em;margin:2px">
 		<style> 
 			#tasks ul {font-family:monospace;padding-left:1em}
 		</style>
@@ -91,7 +91,7 @@
 		</ul>
 	</div>
 	<!--problems-->
-	<div class=inline style="max-width:60%;border:1px solid #ccc;padding:0.5em;margin:2px">
+	<div class=inline style="max-width:50%;border:1px solid #ccc;padding:0.5em;margin:2px">
 		<h3 style=padding-left:2px>Automatic problem finder</h3>
 
 		<!--questions-->
@@ -206,6 +206,22 @@
 						document.write("<tr><td>"+variable)
 					})
 					if(repeated.length==0)document.write("<tr><td class=allok>")
+				</script>
+			</table>
+
+			<table><tr><th>Not used constants
+				<script>
+					var j=0;
+					for(var constant in Cts)
+					{
+						var i=0;
+						Formulas.outputsPerInput(constant).forEach(function(equation)
+						{
+							i++;
+						})
+						if(i==0){ document.write("<tr><td style=background:red><a href=constant.php?id="+constant+">"+constant+"</a>");j++; }
+					}
+					if(j==0)document.write("<tr><td class=allok>")
 				</script>
 			</table>
 		</div>

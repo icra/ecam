@@ -214,7 +214,6 @@ var Info = {
 	"wwt_vol_trea":{magnitude:"Volume",unit:"m3"},
 	"wwt_nrg_cons":{magnitude:"Energy",unit:"kWh"},
 	"wwt_vol_fuel":{magnitude:"Volume",unit:"L"},
-	"wwt_vol_trck":{magnitude:"Volume",unit:"L"},
 	"wwt_n2o_effl":{magnitude:"Mass/Volume",unit:"mg/L"},
 	"wwt_bod_infl":{magnitude:"Mass",unit:"kg"},
 	"wwt_bod_effl":{magnitude:"Mass",unit:"kg"},

@@ -101,12 +101,29 @@
 				}
 			}
 		}
+
+		Configuration.defaults=function()
+		{
+			//default country
+			document.querySelector('#country').value=Global.General.Country;
+
+			var variables=document.querySelectorAll('table#general_inputs input[id]');
+			for(var i=0;i<variables.length;i++)
+			{
+				var id=variables[i].id;
+				var loc=locateVariable(id);
+				var obj = loc.sublevel ? Global[loc.level][loc.sublevel] : Global[loc.level];
+				//update value
+				variables[i].value=obj[id]
+			}
+		}
 	</script>
 	<script>
 		function init()
 		{
 			Sidebar.update();
 			Configuration.activateLevels();
+			Configuration.defaults();
 			//update linear diagram when clicking configuration
 			(function()
 			{
@@ -127,6 +144,15 @@
 			})();
 			Caption.listeners();
 			updateResult();
+		}
+
+		//update a field
+		function update(obj,field,newValue) 
+		{
+			newValue=parseFloat(newValue);
+			if(isNaN(newValue))newValue=0;
+			obj[field]=newValue;
+			init();
 		}
 	</script>
 	<style> h4{margin-bottom:1em} </style>
@@ -204,17 +230,64 @@
 	</div>
 </div>
 
-<!--fuel question-->
+<!--other questions-->
 <div class=inline style="max-width:45%;padding:1em 1em 1em 1em">
 	<style> 
 		#main fieldset{margin:0 0 1.4em 0;padding:0.9em;border:1px solid #aaa} 
 	</style>
+
+	<!--select country-->
+	<fieldset>
+		<legend>Select country
+			<select id=country onchange=selectCountry(this)>
+				<option>--select--</option>
+				<script>for(var country in Countries){document.write("<option>"+country)}</script>
+			</select>
+			<script>
+				function selectCountry(select)
+				{
+					var country=select.value
+					Global.General.Country=country;
+					Global.Configuration.Selected.wwc_prot_con=country;
+					['conv_kwh_co2','wwc_prot_con','wwc_bod_pday'].forEach(function(code)
+					{
+						var input=document.querySelector("table#general_inputs input#"+code)
+						input.value=Countries[country][code];
+						input.onchange();
+					});
+					init();
+				}
+			</script>
+		</legend>
+
+		<table id=general_inputs>
+			<tr>
+				<td>Emission factor for grid electricity
+				<td><input id=conv_kwh_co2 onchange="update(Global.General,'conv_kwh_co2',this.value)">
+				<td>kg<sub>CO<sub>2</sub></sub>/kWh
+			<tr>
+				<td>Annual protein consumption per capita 
+				<td><input id=wwc_prot_con onchange="update(Global.Waste.Collection,'wwc_prot_con',this.value)">
+				<td>kg/person/year
+			<tr>
+				<td>BOD5 per person per day
+				<td><input id=wwc_bod_pday onchange="update(Global.Waste.Collection,'wwc_bod_pday',this.value)">
+				<td>g/person/day
+			<tr>
+				<td>Global Warming Potential
+				<td><input id=gwp          onchange="update(Global.General,'gwp',this.value)">
+				<td>gwp units
+		</table>
+
+	</fieldset>
+
+	<!--fuel engines in any stage-->
 	<fieldset>
 		<legend>Do you have fuel engines in any stage?</legend>
 		<label> No  <input type=radio name=fuel checked></label> &emsp; 
 		<label> Yes <input type=radio name=fuel></label>
 		<br> <br>
-		(option under development)
+		[under development]
 	</fieldset>
 </div>
 

@@ -74,7 +74,7 @@ var Formulas = {
 		result = result.replace(/"/g,"")
 		result = result.replace(/var/g,"")
 		result = result.replace(/\|\|0/g,"")
-		result = result.replace(/return/g,"")
+		result = result.replace(/return /g,"")
 		result = result.replace(/[\r\n\t]/g,"")
 		result = result.replace(/Global./g,"")
 		result = result.replace(/Water./g,"")
@@ -96,6 +96,7 @@ var Formulas = {
 		result = result.replace(/\*/g," * ")
 		result = result.replace(/\-/g," - ")
 		result = result.replace(/\+/g," + ")
+		result = result.replace(/\(\./g,"(")
 		return result;
 	},
 
