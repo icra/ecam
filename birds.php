@@ -194,6 +194,18 @@
 					document.querySelector('table#inputs tr[indic='+stage+']').classList.remove('hidden');
 				}
 			});
+			BEV.hideFuelConsumed();
+		}
+
+		BEV.hideFuelConsumed=function()
+		{
+			if(Global.General.anyFuelEngines==0)
+			{
+				['ws_vol_fuel','ww_vol_fuel'].forEach(function(field)
+				{
+					document.querySelector('#inputs tr[stage] input[id='+field+']').parentNode.parentNode.classList.add('hidden');
+				});
+			}
 		}
 	</script>
 	<script>
