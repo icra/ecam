@@ -31,10 +31,5 @@
 	<a href=help.php><?php write("#help")?></a>
 	·
 	<a href=mailto:WaCCliM@iwahq.org><?php write("#contact")?>: WaCCliM@iwahq.org</a>
-	<br>
-	Debug mode &rarr;
-	<a href="problems.php">Tasks and problems towards v2.0</a>
-	·
-	<a href="viewer.php">Data structures</a>
 </footer>
 

@@ -40,7 +40,6 @@
 		<ul>
 			<li><b><?php write('#index_chrome_warning')?></b>
 			<li><?php write('#index_latest_update');echo ": ".date("F d Y, H:i:s",filemtime("index.php"))?>.
-				<a target=_blank href="https://github.com/holalluis/ecam">GitHub</a>
 		</ul>
 	</div>
 </div>

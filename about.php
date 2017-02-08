@@ -34,8 +34,7 @@
 
 	<br><br> 
 
-	This software is open source.<br>
-	You can browse the source code and download the tool for offline use at <a target=_blank href='https://github.com/holalluis/ecam'>github</a>. 
+	This software is <a href=https://github.com/holalluis/ecam>open source</a>.
 	
 	<br><br>
 

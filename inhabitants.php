@@ -36,7 +36,16 @@
 				var input = inputs[i];
 				var field = input.id; 
 				//set the longer description in the input <td> element
-				input.parentNode.parentNode.childNodes[0].title=translate(field+'_expla');
+
+				var prnt=input.parentNode.parentNode.childNodes[0];
+
+				try{
+					prnt.setAttribute('caption',translate(field+'_expla'));
+				}
+				catch(e){
+					console.log(prnt)
+				}
+
 				var L1 = field.search("ws")==0 ? "Water" : "Waste";
 				//the value we are going to put in the input
 				var value = Global[L1][field];
@@ -130,8 +139,7 @@
 			<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
 			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?><td class=input><input id='ww_resi_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
 			<tr stage=waste class=hidden><td><?php write('#ww_conn_pop_descr')?><td class=input><input id='ww_conn_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
-			<tr stage=waste class=hidden>
-				<td>Population serviced with wastewater treatment
+			<tr stage=waste class=hidden><td>Population serviced with wastewater treatment
 				<td class=input><input id='ww_serv_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
 			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 	</table>
