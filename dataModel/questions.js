@@ -24,9 +24,8 @@ var Questions = {
 		variables:[ 
 			"wsa_vol_pump",
 			"wsa_nrg_pump",
-			"wsa_nrg_per_pmp_watr",
 		],
-		advanced:0,
+		advanced:1,
 		otherQuestions:[
 			"wsa_pumping_efficiency",
 		],
@@ -105,10 +104,23 @@ var Questions = {
 			"wsd_nrg_pump",
 			"wsd_KPI_nrg_per_m3",
 		],
-		advanced:0,
+		advanced:1,
 		otherQuestions:[
 			"wsd_pumping_efficiency",
 		],
+	},
+	"wsd_pumping_efficiency":{
+		variables:[ 
+			"wsd_pmp_head",
+			"wsd_KPI_std_nrg_cons",
+			"wsd_KPI_un_head_loss",
+			"wsd_main_len",
+			"wsd_pmp_size",
+			"wsd_fri_loss",
+			"wsd_sta_head",
+		],
+		advanced:1,
+		otherQuestions:[],
 	},
 	"wsd_engines":{
 		variables:[
@@ -126,19 +138,6 @@ var Questions = {
 			"wsd_KPI_GHG_trck",
 		],
 		advanced:0,
-		otherQuestions:[],
-	},
-	"wsd_pumping_efficiency":{
-		variables:[ 
-			"wsd_pmp_head",
-			"wsd_KPI_std_nrg_cons",
-			"wsd_KPI_un_head_loss",
-			"wsd_main_len",
-			"wsd_pmp_size",
-			"wsd_fri_loss",
-			"wsd_sta_head",
-		],
-		advanced:1,
 		otherQuestions:[],
 	},
 	"wsd_topographic":{

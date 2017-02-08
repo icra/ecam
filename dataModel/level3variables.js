@@ -8,6 +8,8 @@ Level3.list=
 	//ww
 
 	//wsa
+	"wsa_nrg_pump",
+	"wsa_vol_pump",
 	"wsa_fri_loss",
 	"wsa_main_len",
 	"wsa_pmp_head",
@@ -31,7 +33,6 @@ Level3.list=
 	"wst_vol_pump",
 	"wst_pmp_head",
 	"wst_nrg_pump",
-	"wst_KPI_GHG_slud",
 	"wst_KPI_nrg_disnfc",
 	"wst_KPI_std_nrg_cons",
 	"wst_KPI_slu_per_m3",
@@ -40,6 +41,7 @@ Level3.list=
 	"wst_disnfctn",
 
 	//wsd
+	"wsd_nrg_pump",
 	"wsd_deli_pts",
 	"wsd_ser_cons",
 	"wsd_time_pre",
