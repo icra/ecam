@@ -216,7 +216,7 @@ var Global={
 			ww_SL_treat_m3:function(){return 100*(Global.Waste.ww_serv_pop/Global.Waste.ww_conn_pop)},
 			wwc_KPI_std_nrg_cons:function(){return this.wwc_nrg_cons/(this.wwc_vol_pump*this.wwc_pmp_head/100)},
 			wwc_KPI_un_head_loss:function(){return 1000*this.wwc_fri_loss/this.wwc_coll_len},
-			wwc_infl_infi:function(){return 100*(this.wwc_wet_flow-this.wwc_dry_flow)/this.wwc_dry_flow},
+			wwc_infl_infi:function(){return 100*(this.wwc_wet_flow-this.wwc_dry_flow)/this.wwc_dry_flow||0},
 			wwc_vol_infi:function(){return this.wwc_infl_infi/100*this.wwc_dry_flow},
 
 			//Collection GHG
@@ -233,9 +233,7 @@ var Global={
 				return this.wwc_KPI_GHG_elec()+
 				this.wwc_KPI_GHG_fuel()+
 				this.wwc_KPI_GHG_unt_ch4()+
-				this.wwc_KPI_GHG_unt_n2o()+
-				//this.wwc_KPI_GHG_ii()+
-				0
+				this.wwc_KPI_GHG_unt_n2o()
 			},
 		},
 

@@ -13,6 +13,7 @@ var TODO = {
 	],
 	Back://back-end
 	[
+		"[PENDING] ask what is infiltration and inflow GHG and if it adds up a new emission",
 		"[1] [PENDING] program the fuel question in configuration to take effect",
 		"[PENDING] Go through non used inputs -> see right list",
 		"[BUG] non revenue water emissions should not be in wsd, should be in ws because is general",
