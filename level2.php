@@ -84,7 +84,12 @@
 		var newCell=newRow.insertCell(-1);
 		newCell.style.textAlign="left";
 		newCell.setAttribute('title', translate(code+'_expla'));
-		newCell.innerHTML=translate(code+'_descr');
+		newCell.innerHTML=(function()
+		{
+			var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ? 
+				" <span class=not_used_input caption='Input not used for any equation'></span>" : "";
+			return translate(code+"_descr")+warning;
+		})();
 
 		//3rd cell: value
 		var newCell=newRow.insertCell(-1);
@@ -147,6 +152,7 @@
 		newCell.classList.add('variableCode');
 		if(isCV)newCell.classList.add('isCV');
 		newCell.innerHTML=(function() {
+			//warning for variable not used
 			var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
 			return code;
 		})();
@@ -154,7 +160,11 @@
 		/*description*/ 
 		var newCell=newRow.insertCell(-1);
 		newCell.setAttribute('title', translate(field+"_expla"));
-		newCell.innerHTML=translate(field+"_descr");
+		newCell.innerHTML=(function(){
+			var warning=(Formulas.outputsPerInput(field).length==0 && Utils.usedInBenchmarks(field).length==0) ? 
+				" <span class=not_used_input caption='Input not used for any equation'></span>" : "";
+			return translate(field+"_descr")+warning;
+		})();
 
 		//editable cell if not CV
 		var newCell=newRow.insertCell(-1);

@@ -249,7 +249,7 @@
 			<script>
 				(function(){
 					var c = Global.General.conv_kwh_co2;
-					var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' title='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c); 
+					var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' caption='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c); 
 					document.write(str)
 				})();
 			</script> kg CO<sub>2</sub>/kWh

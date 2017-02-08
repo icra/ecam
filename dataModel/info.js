@@ -167,7 +167,7 @@ var Info = {
 	wsd_KPI_GHG_fuel:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wsd_KPI_GHG_trck:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wsd_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
-	wsd_KPI_GHG_nrw:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wsd_SL_GHG_nrw:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	//L2 Wastewater Collection
 	"wwc_vol_coll":{magnitude:"Volume",unit:"m3"},

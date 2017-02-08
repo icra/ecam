@@ -273,7 +273,7 @@
 				<td>BOD5 per person per day
 				<td><input id=wwc_bod_pday onchange="update(Global.Waste.Collection,'wwc_bod_pday',this.value)">
 				<td>g/person/day
-			<tr>
+			<tr style=display:none><!--TODO-->
 				<td>Global Warming Potential
 				<td><input id=gwp          onchange="update(Global.General,'gwp',this.value)">
 				<td>gwp units

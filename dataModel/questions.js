@@ -79,6 +79,7 @@ var Questions = {
 			"wst_pmp_head",
 			"wst_KPI_std_nrg_cons",
 			"wst_nrg_pump",
+			"wst_KPI_std_elec_eff",
 		],
 		advanced:1,
 		otherQuestions:[],

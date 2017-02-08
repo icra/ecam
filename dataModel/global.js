@@ -152,8 +152,8 @@ var Global={
 			ws_SL_auth_con:function(){return Global.Water.ws_SL_auth_con()},
 			wsd_SL_pres_ade:function(){return 100*this.wsd_deli_pts/this.wsd_ser_cons},
 			wsd_SL_cont_sup:function(){return 100*this.wsd_time_pre/24},
+			wsd_SL_GHG_nrw:function(){return Global.Water.ws_KPI_GHG()*Global.Water.ws_SL_non_revw()/100},
 
-			wsd_KPI_GHG_nrw:function(){return Global.Water.ws_KPI_GHG()*Global.Water.ws_SL_non_revw()/100},
 			wsd_KPI_GHG_elec:function(){return this.wsd_nrg_cons*Global.General.conv_kwh_co2},
 			wsd_KPI_GHG_fuel:function(){
 				var fuel=Tables['Fuel types'][Tables.find('wsd_fuel_typ',this.wsd_fuel_typ)]; 
@@ -374,8 +374,8 @@ var Global={
 			wwd_KPI_nrg_rcv_di:function(){return this.wwd_nrg_recv/this.wwd_vol_disc},
 			wwd_KPI_std_nrg_cons:function(){return (this.wwd_nrg_cons+this.wwd_nrg_recv)/(this.wwd_vol_pump*this.wwd_pmp_head/100)},
 			wwd_KPI_std_nrg_recv:function(){return this.wwd_nrg_recv/(this.wwd_vol_turb*this.wwd_trb_head/100)},
-			wwd_KPI_ghg_red:function(){return -999},
-			wwd_KPI_nrg_sav:function(){return -999}, //kwh saved by reuse TODO
+			wwd_KPI_ghg_red:function(){return 0}, //kg co2 saved by reuse TODO
+			wwd_KPI_nrg_sav:function(){return 0}, //kwh saved by reuse TODO
 			ww_SL_serv_pop: function(){return Global.Waste.ww_SL_serv_pop()},
 
 			//wwd GHG

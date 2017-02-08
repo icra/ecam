@@ -9,7 +9,7 @@
 	$sublevel=isset($_GET['sublevel']) ? $_GET['sublevel'] : false;
 
 	//if user tries to go "General" (i.e. from variable.php?id=Days)
-	if($level=="General") { header("Location: getStarted.php"); }
+	if($level=="General") { header("Location: configuration.php"); }
 ?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
@@ -157,6 +157,18 @@
 
 		table#inputs    th.variableCode.isCV {background:#999;}
 		table#substages td.variableCode.isCV {background:#999;}
+
+		/*useful for development*/
+		span.not_used_input {
+			float:right;
+			background:red;
+			border-radius:0.2em;
+			padding:0.1em 0.5em;
+			box-shadow: 1px 1px 1px #888;
+		}
+		span.not_used_input:before {
+			content:"not used";
+		}
 	</style>
 	<script>
 		<?php
@@ -928,7 +940,11 @@
 							var newCell=newRow.insertCell(-1);
 							newCell.style.textAlign="left";
 							newCell.setAttribute('title', translate(code+'_expla'));
-							newCell.innerHTML=translate(code+'_descr');
+							newCell.innerHTML=(function(){
+								var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ? 
+									" <span class=not_used_input caption='Input not used for any equation'></span>" : "";
+								return translate(code+'_descr')+warning;
+							})();
 
 							//3rd cell and so on: go over substages
 							var multiplier=Units.multiplier(code);
@@ -1011,7 +1027,7 @@
 							/*variable code*/
 							var code=inputs[input];
 							
-							//if is an option, continue (will show at the end of the table)
+							//if not option, continue
 							if(Info[code] && Info[code].magnitude!="Option") continue;
 
 							/*Skip if is level2 only*/
@@ -1035,7 +1051,11 @@
 							var newCell=newRow.insertCell(-1);
 							newCell.style.textAlign="left";
 							newCell.setAttribute('title', translate(code+'_expla'));
-							newCell.innerHTML=translate(code+'_descr');
+							newCell.innerHTML=(function(){
+								var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ? 
+									" <span class=not_used_input caption='Input not used for any equation'></span>" : "";
+								return translate(code+'_descr')+warning;
+							})();
 
 							//3rd cell and so on: go over substages
 							for(var s in substages)
