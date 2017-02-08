@@ -81,6 +81,9 @@ var Global={
 
 			"wst_tst_carr":0,
 			"wst_trea_cap":0, 
+			"wst_nrg_pump":0,
+			"wst_vol_pump":0,
+			"wst_pmp_head":0,
 			"wst_mass_slu":0,
 			"wst_vol_trea":0,
 			"wst_treatmen":0,
@@ -88,9 +91,6 @@ var Global={
 			"wst_nrg_disn":0,
 			"wst_turb_raw":0,
 			"wst_turb_fin":0,
-			"wst_nrg_pump":0,
-			"wst_vol_pump":0,
-			"wst_pmp_head":0,
 			wst_KPI_nrg_per_m3:function(){return this.wst_nrg_cons/this.wst_vol_trea},
 			wst_KPI_nrg_disnfc:function(){return this.wst_nrg_disn/this.wst_vol_trea},
 			wst_KPI_std_nrg_cons:function(){return this.wst_nrg_pump/(this.wst_vol_pump*this.wst_pmp_head/100)},
@@ -202,13 +202,13 @@ var Global={
 			"wwc_pmp_sthd":0,
 			"wwc_fri_loss":0, // Friction pipe losses
 			"wwc_pmp_size":0, // Size of pump
-			"wwc_comb_sew":0,
 			"wwc_wet_flow":0,
 			"wwc_dry_flow":0,
-			"wwc_cso_incd":0,
 			"wwc_coll_len":0,
 			"wwc_infl_inf":0,
 			"wwc_wd_ratio":0,
+			"wwc_comb_sew":0,
+			"wwc_cso_incd":0,
 
 			//Collection SL
 			wwc_SL_conn_pop:function(){return 100*Global.Waste.ww_conn_pop/Global.Waste.ww_resi_pop},
@@ -246,6 +246,7 @@ var Global={
 			"wwt_vol_fuel":0,
 			"wwt_trck_typ":0,
 			//"wwt_vol_trck":0, volume is estimated
+			//
 
 			"wwt_n2o_effl":15,
 			"wwt_biog_pro":0,
@@ -254,28 +255,28 @@ var Global={
 			"wwt_bod_infl":0,
 			"wwt_bod_effl":0,
 			"wwt_nrg_biog":0,
-			"wwt_num_trip":0,
-			"wwt_dist_dis":0,
 			"wwt_trea_cap":0,
 			"wwt_tst_cmpl":0,
 			"wwt_tst_cond":0,
-			"wwt_mass_slu":0,
-			"wwt_dryw_slu":0,
+			"wwt_num_trip":0,
+			"wwt_dist_dis":0,
 			"wwt_main_tre":0, //main type of treatment
 			"wwt_type_tre":0, //type of treatment
 
-			//pump inputs
-			"wwt_pmp_type":0,
-			"wwt_vol_pump":0,
-			"wwt_nrg_pump":0,
-			"wwt_pmp_head":0,
-
 			//sludge inputs
+			"wwt_mass_slu":0,
+			"wwt_dryw_slu":0,
 			"wwt_slu_stor":0,
 			"wwt_slu_st_v":0,
 			"wwt_slu_dr_v":0,
 			"wwt_slu_disp":0,
 			"wwt_slu_type":0,
+
+			//pump eff
+			"wwt_vol_pump":0,
+			"wwt_nrg_pump":0,
+			"wwt_pmp_head":0,
+			"wwt_pmp_type":0,
 
 			//CCVV
 			c_wwt_biog_fla:function()
