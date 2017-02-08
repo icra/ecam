@@ -61,7 +61,7 @@
 	"#navbar_title":"Energy performance and Carbon emissions Assessment and Monitoring Tool",
 	"#index_first_time_using":"First time using ECAM Web Tool? Click on 'New' or learn more in ",
 	"#index_web_tool":"Web tool",
-	"#index_description":"This tool evaluates utilities's operations in terms of GHG emissions and energy usage based on their own data.<br>ECAM is part of the knowledge platform provided by the <a target=_blank href='http://www.iwa-network.org/WaCCliM/'>WaCCliM project</a>. This tool is free and open source.",
+	"#index_description":"This tool evaluates utilities's operations in terms of GHG emissions and energy usage based on their own data.<br>ECAM is part of the knowledge platform provided by the <a target=_blank href='http://www.iwa-network.org/WaCCliM/'>WaCCliM project</a>. This tool is free and <a href=http://github.com/holalluis/ecam>open source</a>.",
 	"#index_chrome_warning":"Please use Google Chrome browser. Other browsers may not work as expected.",
 	"#index_latest_update":"Latest update",
 	"#about_credits":" ",
