@@ -343,6 +343,9 @@ Graphs.ghgSources=function(withTable,container)
 Graphs.graph2=function(withTable,container)
 //NRG
 {
+	withTable=withTable||false;
+	container=container||"graph";
+
 	//values
 	var ws=Global.Water.ws_nrg_cons();
 	var ww=Global.Waste.ww_nrg_cons();
@@ -421,6 +424,9 @@ Graphs.graph2=function(withTable,container)
 Graphs.graph5=function(withTable,container)
 //NRG detailed
 {
+	withTable=withTable||false;
+	container=container||"graph";
+
 	//values
 	var slice_1 = Global.Water.Abstraction.wsa_nrg_cons;
 	var slice_2 = Global.Water.Treatment.wst_nrg_cons;
@@ -513,6 +519,9 @@ Graphs.graph5=function(withTable,container)
 Graphs.graph7=function(withTable,container)
 //NRG detailed substages
 {
+	withTable=withTable||false;
+	container=container||"graph";
+
 	//pointers to objects
 	var wsa = Substages.Water.Abstraction
 	var wst = Substages.Water.Treatment
@@ -635,358 +644,96 @@ Graphs.graph7=function(withTable,container)
 }
 
 //BAR GRAPHS
-//graphs 3{a,b,c,d}
+//graphs 3{a,b,c,d} TODO not used
+/*
+Graphs.graph3a=function(withTable,container)
+{
+	//pointers
+	var WS = Global.Water;
+	var WW = Global.Waste;
+	var years = Global.General.Years();
+
+	//total kg 
+	var ws_el = WS.ws_KPI_GHG_elec();
+	var ws_ne = WS.ws_KPI_GHG_ne();
+	var ww_el = WW.ww_KPI_GHG_elec();
+	var ww_ne = WW.ww_KPI_GHG_ne();
+
 	//per year
-	Graphs.graph3a=function(withTable,container)
+	var slice_1  = ws_el/years;
+	var slice_2  = ws_ne/years;
+	var slice_3  = ww_el/years;
+	var slice_4  = ww_ne/years;
+
+	var names=[
+		""+translate('ws_KPI_GHG_elec_descr')+"",
+		""+translate('ws_KPI_GHG_ne_descr')+"",
+		""+translate('ww_KPI_GHG_elec_descr')+"",
+		""+translate('ww_KPI_GHG_ne_descr')+"",
+	]
+
+	//data
+	var data=google.visualization.arrayToDataTable
+	([
+		[ 
+			'Emission type', names[0], names[1], names[2], names[3], 
+			{role:'annotation'} 
+		],
+		[translate('Water'),slice_1,slice_2,0,0,''],
+		[translate('Waste'),0,0,slice_3,slice_4,''],
+	]);
+
+	//options
+	var options=
 	{
-		//pointers
-		var WS = Global.Water;
-		var WW = Global.Waste;
-		var years = Global.General.Years();
+		title:"kg CO2/year",
+		height:300,
+		legend:{position:'top'},
+		isStacked:true,
+		colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
+		bar: { groupWidth: '75' },
+	};
 
-		//total kg 
-		var ws_el = WS.ws_KPI_GHG_elec();
-		var ws_ne = WS.ws_KPI_GHG_ne();
-		var ww_el = WW.ww_KPI_GHG_elec();
-		var ww_ne = WW.ww_KPI_GHG_ne();
+	//empty container element
+	document.getElementById(container).innerHTML='';
 
-		//per year
-		var slice_1  = ws_el/years;
-		var slice_2  = ws_ne/years;
-		var slice_3  = ww_el/years;
-		var slice_4  = ww_ne/years;
+	//draw
+	var view=new google.visualization.DataView(data);
+	var chart=new google.visualization.ColumnChart(document.getElementById(container));
+	chart.draw(view, options);
 
-		var names=[
-			""+translate('ws_KPI_GHG_elec_descr')+"",
-			""+translate('ws_KPI_GHG_ne_descr')+"",
-			""+translate('ww_KPI_GHG_elec_descr')+"",
-			""+translate('ww_KPI_GHG_ne_descr')+"",
-		]
+	var yy=translate('years');
 
-		//data
-		var data=google.visualization.arrayToDataTable
-		([
-			[ 
-				'Emission type', names[0], names[1], names[2], names[3], 
-				{role:'annotation'} 
-			],
-			[translate('Water'),slice_1,slice_2,0,0,''],
-			[translate('Waste'),0,0,slice_3,slice_4,''],
-		]);
-
-		//options
-		var options=
-		{
-			title:"kg CO2/year",
-			height:300,
-			legend:{position:'top'},
-			isStacked:true,
-			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
-			bar: { groupWidth: '75' },
-		};
-
-		//empty container element
-		document.getElementById(container).innerHTML='';
-
-		//draw
-		var view=new google.visualization.DataView(data);
-		var chart=new google.visualization.ColumnChart(document.getElementById(container));
-		chart.draw(view, options);
-
-		var yy=translate('years');
-
-		//tables
-		if(withTable)
-		{
-			//create a table string
-			var table=""+
-			"<button onclick=Graphs.graph3a(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
-			"<table title=graph3a>"+
-				"<tr><th>"+translate('graphs_slice')+"<th>"+translate('Water')+"<th>kg CO2/"+translate('year')+"<th>"+translate('Waste')+"<th>kg CO2/"+translate('year')+""+
-				"<tr><th>"+translate('ww_KPI_GHG_ne_descr')+"<td>ws_KPI_GHG_ne/"+yy+"<td>"+format(slice_2)+"<td>ww_KPI_GHG_ne/"+yy+" <td>"+format(slice_4)+
-				"<tr><th>"+translate('ww_KPI_GHG_elec_descr')+"<td>ws_KPI_GHG_elec/"+yy+" <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/"+yy+" <td>"+format(slice_3)+
-			"</table>"+
-			'<div class=options>'+
-			'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable>'+translate('graphs_printable_version')+'</a> | '+
-			"	<a href='graph.php?g=graph3a'>"+translate('graphs_go_to')+"</a>"+
-			'</div>'+
-			"";
-			var div = document.createElement('div');
-			div.style.fontSize="10px";
-			div.innerHTML=table;
-			document.getElementById(container).appendChild(div);
-		}
-		else
-		{
-			//button "show table"
-			var div=document.createElement('div');
-			document.getElementById(container).appendChild(div);
-			div.innerHTML="<button onclick=Graphs.graph3a(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"
-		}
-	}
-
-	//per serv pop per year
-	Graphs.graph3b=function(withTable,container)
+	//tables
+	if(withTable)
 	{
-		//pointers
-		var WS = Global.Water;
-		var WW = Global.Waste;
-		var years = Global.General.Years();
-
-		//total kg 
-		var ws_el = WS.ws_KPI_GHG_elec();
-		var ws_ne = WS.ws_KPI_GHG_ne();
-		var ww_el = WW.ww_KPI_GHG_elec();
-		var ww_ne = WW.ww_KPI_GHG_ne() - WW.ww_KPI_GHG_ne_ch4_unt() - WW.ww_KPI_GHG_ne_n2o_unt();
-
-		//per year per serv population
-		var slice_1 = ws_el/years/WS.ws_serv_pop;
-		var slice_2 = ws_ne/years/WS.ws_serv_pop;
-		var slice_3 = ww_el/years/WW.ww_serv_pop;
-		var slice_4 = ww_ne/years/WW.ww_serv_pop;
-
-		var names = [
-			""+translate('ws_KPI_GHG_elec_descr')+"",
-			""+translate('ws_KPI_GHG_ne_descr')+"",
-			""+translate('ww_KPI_GHG_elec_descr')+"",
-			""+translate('ww_KPI_GHG_ne_descr')+"",
-		]
-
-		//data
-		var data=google.visualization.arrayToDataTable
-		([
-			[ 
-				'Emission type', 
-				names[0], names[1], names[2], names[3], {role:'annotation'} 
-			],
-			[translate('Water'), slice_1, slice_2,       0,       0,''],
-			[translate('Waste'),       0,       0, slice_3, slice_4,''],
-		]);
-
-		//options
-		var options=
-		{
-			title:"kg CO2/year per serviced population",
-			height:300,
-			legend:{position:'top'},
-			isStacked:true,
-			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
-			bar: { groupWidth: '75' },
-		};
-
-		//empty container element
-		document.getElementById(container).innerHTML='';
-
-		//draw
-		var view=new google.visualization.DataView(data);
-		var chart=new google.visualization.ColumnChart(document.getElementById(container));
-		chart.draw(view, options);
-
-		var yy=translate('years');
-
-		//tables
-		if(withTable)
-		{
-			//create a table string
-			var table=""+
-			"<button onclick=Graphs.graph3b(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
-			"<table title=graph3b>"+
-				"<tr><th>"+translate('graphs_slice')+"<th>"+translate('Water')+"<th>kg CO2/serv.pop./"+yy+"  <th>"+translate('Waste')+"<th>kg CO2/serv.pop./"+yy+""+
-				"<tr><th>"+translate('ww_KPI_GHG_ne_descr')+"<td>ws_KPI_GHG_ne/ws_serv_pop/"+yy+" <td>"+format(slice_2)+"<td>(ww_KPI_GHG_ne-ww_KPI_GHG_ch4_unt-ww_KPI_GHG_n2o_unt)/ws_serv_pop/"+yy+" <td>"+format(slice_4)+
-				"<tr><th>"+translate('ww_KPI_GHG_elec_descr')+"<td>ws_KPI_GHG_elec/ww_serv_pop/"+yy+" <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/ww_serv_pop/"+yy+"                                       <td>"+format(slice_3)+
-			"</table>"+
-			'<div class=options>'+
-			'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable>'+translate('graphs_printable_version')+'</a> | '+
-			"	<a href='graph.php?g=graph3b'>"+translate('graphs_go_to')+"</a>"+
-			'</div>'+
-			"";
-			var div = document.createElement('div');
-			div.style.fontSize="10px";
-			div.innerHTML=table;
-			document.getElementById(container).appendChild(div);
-		}
-		else
-		{
-			//button "show table"
-			var div=document.createElement('div');
-			document.getElementById(container).appendChild(div);
-			div.innerHTML="<button onclick=Graphs.graph3b(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"
-		}
+		//create a table string
+		var table=""+
+		"<button onclick=Graphs.graph3a(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
+		"<table title=graph3a>"+
+			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('Water')+"<th>kg CO2/"+translate('year')+"<th>"+translate('Waste')+"<th>kg CO2/"+translate('year')+""+
+			"<tr><th>"+translate('ww_KPI_GHG_ne_descr')+"<td>ws_KPI_GHG_ne/"+yy+"<td>"+format(slice_2)+"<td>ww_KPI_GHG_ne/"+yy+" <td>"+format(slice_4)+
+			"<tr><th>"+translate('ww_KPI_GHG_elec_descr')+"<td>ws_KPI_GHG_elec/"+yy+" <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/"+yy+" <td>"+format(slice_3)+
+		"</table>"+
+		'<div class=options>'+
+		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable>'+translate('graphs_printable_version')+'</a> | '+
+		"	<a href='graph.php?g=graph3a'>"+translate('graphs_go_to')+"</a>"+
+		'</div>'+
+		"";
+		var div = document.createElement('div');
+		div.style.fontSize="10px";
+		div.innerHTML=table;
+		document.getElementById(container).appendChild(div);
 	}
-
-	//per resi pop per year
-	Graphs.graph3c=function(withTable,container)
+	else
 	{
-		//pointers
-		var WS = Global.Water;
-		var WW = Global.Waste;
-		var years = Global.General.Years();
-
-		//total kg 
-		var ws_el = WS.ws_KPI_GHG_elec();
-		var ws_ne = WS.ws_KPI_GHG_ne();
-		var ww_el = WW.ww_KPI_GHG_elec();
-		var ww_ne = WW.ww_KPI_GHG_ne();
-
-		//per year per serv population
-		var slice_1 = ws_el/years/WS.ws_resi_pop;
-		var slice_2 = ws_ne/years/WS.ws_resi_pop;
-		var slice_3 = ww_el/years/WW.ww_resi_pop;
-		var slice_4 = ww_ne/years/WW.ww_resi_pop;
-
-		var names=[
-			""+translate('ws_KPI_GHG_elec_descr')+"",
-			""+translate('ws_KPI_GHG_ne_descr')+"",
-			""+translate('ww_KPI_GHG_elec_descr')+"",
-			""+translate('ww_KPI_GHG_ne_descr')+"",
-		]
-
-		//data
-		var data=google.visualization.arrayToDataTable
-		([
-			[ 
-				'Emission type', names[0], names[1], names[2], names[3], {role:'annotation'} 
-			],
-			[translate('Water'), slice_1, slice_2, 0,       0,      ''],
-			[translate('Waste'), 0,       0,       slice_3, slice_4,''],
-		]);
-
-		//options
-		var options=
-		{
-			title:"kg CO2/year per resident population",
-			height:300,
-			legend:{position:'top'},
-			isStacked:true,
-			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
-			bar: { groupWidth: '75' },
-		};
-
-		//empty container element
-		document.getElementById(container).innerHTML='';
-
-		//draw
-		var view=new google.visualization.DataView(data);
-		var chart=new google.visualization.ColumnChart(document.getElementById(container));
-		chart.draw(view, options);
-
-		var yy=translate('years');
-
-		//tables
-		if(withTable)
-		{
-			//create a table string
-			var table=""+
-			"<button onclick=Graphs.graph3c(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
-			"<table title=graph3c>"+
-				"<tr><th>"+translate('graphs_slice')+"<th>"+translate('Water')+"<th>kg CO2/resi.pop./"+yy+" <th>"+translate('Waste')+"<th>kg CO2/resi.pop./"+yy+""+
-				"<tr><th>"+translate('ww_KPI_GHG_ne_descr')+"  <td>ws_KPI_GHG_ne/ws_resi_pop/"+yy+"   <td>"+format(slice_2)+"<td>ww_KPI_GHG_ne/ws_resi_pop/"+yy+"   <td>"+format(slice_4)+
-				"<tr><th>"+translate('ww_KPI_GHG_elec_descr')+"<td>ws_KPI_GHG_elec/ww_resi_pop/"+yy+" <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/ww_resi_pop/"+yy+" <td>"+format(slice_3)+
-			"</table>"+
-			'<div class=options>'+
-			'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable>'+translate('graphs_printable_version')+'</a> | '+
-			"	<a href='graph.php?g=graph3c'>"+translate('graphs_go_to')+"</a>"+
-			'</div>'+
-			"";
-			var div = document.createElement('div');
-			div.style.fontSize="10px";
-			div.innerHTML=table;
-			document.getElementById(container).appendChild(div);
-		}
-		else
-		{
-			//button "show table"
-			var div=document.createElement('div');
-			document.getElementById(container).appendChild(div);
-			div.innerHTML="<button onclick=Graphs.graph3c(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"
-		}
+		//button "show table"
+		var div=document.createElement('div');
+		document.getElementById(container).appendChild(div);
+		div.innerHTML="<button onclick=Graphs.graph3a(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"
 	}
-
-	//per AC and CW
-	Graphs.graph3d=function(withTable,container)
-	{
-		//pointers
-		var WS = Global.Water;
-		var WW = Global.Waste;
-
-		//total kg 
-		var ws_el = WS.ws_KPI_GHG_elec();
-		var ws_ne = WS.ws_KPI_GHG_ne();
-		var ww_el = WW.ww_KPI_GHG_elec();
-		var ww_ne = WW.ww_KPI_GHG_ne() - WW.ww_KPI_GHG_ne_ch4_unt() - WW.ww_KPI_GHG_ne_n2o_unt();
-
-		//per AC and CW
-		var slice_1  = ws_el/WS.Distribution.wsd_auth_con;
-		var slice_2  = ws_ne/WS.Distribution.wsd_auth_con;
-		var slice_3  = ww_el/WW.ww_vol_coll;
-		var slice_4  = ww_ne/WW.ww_vol_coll;
-
-		var names=[
-			""+translate('ws_KPI_GHG_elec_descr')+"",
-			""+translate('ws_KPI_GHG_ne_descr')+"",
-			""+translate('ww_KPI_GHG_elec_descr')+"",
-			""+translate('ww_KPI_GHG_ne_descr')+"",
-		]
-
-		//data
-		var data=google.visualization.arrayToDataTable
-		([
-			[ 
-				'Emission type', names[0], names[1], names[2], names[3], {role:'annotation'} 
-			],
-			[translate('Water'), slice_1, slice_2, 0,       0,      ''],
-			[translate('Waste'), 0,       0,       slice_3, slice_4,''],
-		]);
-
-		//options
-		var options=
-		{
-			title:"kg CO2 per m3",
-			height:300,
-			legend:{position:'top'},
-			isStacked:true,
-			colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
-			bar: { groupWidth: '75' },
-		};
-
-		//empty container element
-		document.getElementById(container).innerHTML='';
-
-		//draw
-		var view=new google.visualization.DataView(data);
-		var chart=new google.visualization.ColumnChart(document.getElementById(container));
-		chart.draw(view, options);
-
-		//tables
-		if(withTable)
-		{
-			//create a table string
-			var table=""+
-			"<button onclick=Graphs.graph3d(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
-			"<table title=graph3d>"+
-				"<tr><th>"+translate('graphs_slice')+"<th>"+translate('Water')+"<th>kg CO2/m3<th>"+translate('Waste')+"<th>kg CO2/m3"+
-				"<tr><th>"+translate('ww_KPI_GHG_ne_descr')+"  <td>ws_KPI_GHG_ne/wsd_auth_con   <td>"+format(slice_2)+"<td>(ww_KPI_GHG_ne-ww_KPI_GHG_ch4_unt-ww_KPI_GHG_n2o_unt)/ws_vol_coll <td>"+format(slice_4)+
-				"<tr><th>"+translate('ww_KPI_GHG_elec_descr')+"<td>ws_KPI_GHG_elec/ww_vol_auth <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/ww_vol_coll                                       <td>"+format(slice_3)+
-			"</table>"+
-			'<div class=options>'+
-			'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable>'+translate('graphs_printable_version')+'</a> | '+
-			"	<a href='graph.php?g=graph3d'>"+translate('graphs_go_to')+"</a>"+
-			'</div>'+
-			"";
-			var div = document.createElement('div');
-			div.style.fontSize="10px";
-			div.innerHTML=table;
-			document.getElementById(container).appendChild(div);
-		}
-		else
-		{
-			//button "show table"
-			var div=document.createElement('div');
-			document.getElementById(container).appendChild(div);
-			div.innerHTML="<button onclick=Graphs.graph3d(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"
-		}
-	}
-//end bar graphs
+}
+*/
 
 Graphs.sankey=function(withTable,container)
 //Water volumes
@@ -1107,8 +854,14 @@ Graphs.sankey=function(withTable,container)
 /** gauges for serviced population */
 Graphs.gauge=function(container,value,header,unit)
 {
+	container=container||'graph';
+	value=value||0;
+	header=header||'header not defined';
 	unit=unit||"%";
+
+	//format unit
 	unit="<span style=font-size:20px> "+unit+"</span>";
+
 	//empty container
 	var element=document.getElementById(container)
 	element.style.padding="1em 0"
@@ -1136,7 +889,11 @@ Graphs.gauge=function(container,value,header,unit)
 
 Graphs.progress=function(container,value,header,color)
 {
+	container=container||'graph';
 	value=value||0;
+	header=header||'header';
+	color=color||'white'
+
 	//container
 	var con = document.getElementById(container)
 	con.style.textAlign="left"
@@ -1158,6 +915,8 @@ Graphs.progress=function(container,value,header,color)
 
 Graphs.ws_cost=function(container)
 {
+	container=container||'graph';
+
 	//values
 	var nrg = Global.Water.ws_nrg_cost;
 	var run = Global.Water.ws_run_cost-nrg;
@@ -1205,6 +964,8 @@ Graphs.ws_cost=function(container)
 
 Graphs.ww_cost=function(container)
 {
+	container=container||'graph';
+
 	//values
 	var nrg = Global.Waste.ww_nrg_cost;
 	var run = Global.Waste.ww_run_cost-nrg;
@@ -1252,8 +1013,11 @@ Graphs.ww_cost=function(container)
 
 Graphs.untreatedww=function(container,header)
 {
-	var ch4 = Global.Waste.ww_KPI_GHG_ne_ch4_unt()||0
-	var n2o = Global.Waste.ww_KPI_GHG_ne_n2o_unt()||0
+	container=container||"graph";
+	header=header||"kg CO2 equivalents from CH4 and N2O";
+
+	var ch4 = Global.Waste.Collection.wwc_KPI_GHG_unt_ch4()||0;
+	var n2o = Global.Waste.Collection.wwc_KPI_GHG_unt_n2o()||0;
 	var DATA=[
 		['Label','Value'],
 		['CH4',ch4],
@@ -1276,6 +1040,8 @@ Graphs.untreatedww=function(container,header)
 
 Graphs.authCon=function(container)
 {
+	container=container||'graph';
+
 	var DATA=[
 		['Label','Value'],
 		[Info["ws_SL_auth_con"].unit,Global.Water.ws_SL_auth_con()||0],

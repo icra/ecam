@@ -359,6 +359,12 @@ Questions.getQuestions=function(ubication) {
 	for(var question in this)
 	{
 		if(typeof(this[question])=="function")continue;
+		//skip fuel engines questions if anyFuelEngines is zero
+		if(Global.General.anyFuelEngines==0)
+		{
+			if(["wsa_engines","wst_engines","wsd_engines","wwc_engines","wwt_engines","wwd_engines"].indexOf(question)+1)
+				continue
+		}
 		//check all codes inside
 		for(var i in this[question].variables)
 		{

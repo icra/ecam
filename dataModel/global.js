@@ -12,10 +12,11 @@ var Global={
 		AssessmentPeriodEnd:"2018-01-01",
 		Comments:"",
 		Currency:"USD",
-
+		Country:"--select--",
 		conv_kwh_co2:0,//conversion factor for grid electricity
 		gwp:0,//global warming potential of the selected country
-		Country:"--select--",
+
+		anyFuelEngines:0,//do you have fuel engines in any stage?
 
 		Days:function(){
 			var startDate=new Date(Global.General.AssessmentPeriodStart);
@@ -430,21 +431,22 @@ var Global={
 			"wasteDis":0,
 		},
 
-		Units:{}, //custom unit selections for variables are stored here
+		//custom unit selections for variables are stored here
+		Units:{}, 
 
-		/**Calculated or "estimated" assumptions are added here. (calculated is default, so only estimated is added here) */
+		/*Calculated or "estimated" assumptions are stored here 
+		(only estimated, if not here, calculated) */
 		DataQuality:{},
 
 		Selected: {
 			wwc_prot_con:"Albania",//string value for wwc_prot_con exception (see "exceptions.js")
 		},
 
-		//default answers for questions ("questions.js")
+		//default answers for filters ("questions.js")
 		"Yes/No": {
 			wsa_pumping:           0,
 			wwt_producing_biogas:  0,
 			wwt_valorizing_biogas: 0,
-			truck_transport_waste: 1,
 		},
 	},
 };

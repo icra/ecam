@@ -116,6 +116,10 @@
 				//update value
 				variables[i].value=obj[id]
 			}
+
+			//default anyFuelEngines
+			if(Global.General.anyFuelEngines)
+				document.querySelector("input[name=anyFuelEngines][ans='1']").checked=true;
 		}
 	</script>
 	<script>
@@ -284,10 +288,8 @@
 	<!--fuel engines in any stage-->
 	<fieldset>
 		<legend>Do you have fuel engines in any stage?</legend>
-		<label> No  <input type=radio name=fuel checked></label> &emsp; 
-		<label> Yes <input type=radio name=fuel></label>
-		<br> <br>
-		[under development]
+		<label> No  <input type=radio name=anyFuelEngines ans=0 onclick=update(Global.General,this.name,0) checked></label> &emsp; 
+		<label> Yes <input type=radio name=anyFuelEngines ans=1 onclick=update(Global.General,this.name,1)></label>
 	</fieldset>
 </div>
 
