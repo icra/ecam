@@ -1,6 +1,5 @@
 # [ECAM](http://ecam.hol.es/)
 
-## About
 ECAM web tool is a web application developed by [ICRA](http://icra.cat), 
 [IWA](http://www.iwa-network.org) and GIZ under the WaCCliM project, and Cobalt Water.
 
