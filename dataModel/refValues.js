@@ -107,15 +107,30 @@ var RefValues =
 		else                                                                   { return "Out of range" }
 	},
 	wst_KPI_nrg_per_m3:function(obj) {
-		//this is the most complex
+		//see mail andres 9 feb 2017 2:30 AM TODO
 		/*
-		WTP > 5000 m3/d - Good: tE1 ≤ 0.025; Acceptable: 0.025 < tE1 ≤ 0.04; Unsatisfactory: tE1 > 0.04                                                          
-		WTP <= 5000 m3/d  - Good: tE1 ≤ 0.04; Acceptable: 0.04 < tE1 ≤ 0.055; Unsatisfactory: tE1 > 0.055                                                        
-		WTP with Pre-ox > 5000 m3/d  - Good: tE1 ≤ 0.055; Acceptable: 0.055 < tE1 ≤ 0.07; Unsatisfactory: tE1 > 0.07                                 
-		WTP with Pre-ox <= 5000 m3/d  - Good: tE1 ≤ 0.07; Acceptable: 0.07 < tE1 ≤ 0.085; Unsatisfactory: tE1 > 0.085
-		WTP (with raw and treated water pumping) - Good: tE1 ≤ 0.4; Acceptable: 0.4 < tE1 ≤ 0.5; Unsatisfactory: tE1 > 0.5  
+			WTP with Pre-ox >  5000 m3/d - Good: tE1 ≤ 0.055; Acceptable: 0.055 < tE1 ≤ 0.07;  Unsatisfactory: tE1 > 0.07                                 
+			WTP with Pre-ox <= 5000 m3/d - Good: tE1 ≤ 0.07;  Acceptable: 0.07  < tE1 ≤ 0.085; Unsatisfactory: tE1 > 0.085
+			WTP             >  5000 m3/d - Good: tE1 ≤ 0.025; Acceptable: 0.025 < tE1 ≤ 0.04;  Unsatisfactory: tE1 > 0.04                         
+			WTP             <= 5000 m3/d - Good: tE1 ≤ 0.04;  Acceptable: 0.04  < tE1 ≤ 0.055; Unsatisfactory: tE1 > 0.055                                                        
+			TODO WTP (with raw and treated water pumping) - Good: tE1 ≤ 0.4; Acceptable: 0.4 < tE1 ≤ 0.5; Unsatisfactory: tE1 > 0.5  
 		*/
-		return "Implementation needs revision";
+		var wtp = obj.wst_vol_trea/Global.General.Days();
+		var tre = Tables.find('wst_treatmen',obj.wst_treatmen);
+		var val = obj.wst_KPI_nrg_per_m3();
+
+		     if(wtp> 5000 && (tre.search("Pre-ox")+1) && val<=0.055)               return "Good";
+		else if(wtp> 5000 && (tre.search("Pre-ox")+1) && val> 0.055 && val<=0.07 ) return "Acceptable";
+		else if(wtp> 5000 && (tre.search("Pre-ox")+1) && val> 0.07)                return "Unsatisfactory";
+		else if(wtp<=5000 && (tre.search("Pre-ox")+1) && val<=0.07)                return "Good";
+		else if(wtp<=5000 && (tre.search("Pre-ox")+1) && val> 0.07  && val<=0.085) return "Acceptable";
+		else if(wtp<=5000 && (tre.search("Pre-ox")+1) && val> 0.085)               return "Unsatisfactory";
+		else if(wtp> 5000 &&                             val<=0.025)               return "Good";
+		else if(wtp> 5000 &&                             val> 0.025 && val<=0.04 ) return "Acceptable";
+		else if(wtp> 5000 &&                             val> 0.04)                return "Unsatisfactory";
+		else if(wtp<=5000 &&                             val<=0.04)                return "Good";
+		else if(wtp<=5000 &&                             val> 0.04  && val<=0.055) return "Acceptable";
+		else if(wtp<=5000 &&                             val> 0.055)               return "Unsatisfactory";
 	},
 	wst_KPI_slu_per_m3:function(obj) {
 		//tE3: Good: tE3 ≤ 0.06, Acceptable: 0.06 < tE3 ≤ 0.10, Unsatisfactory: tE3 > 0.10

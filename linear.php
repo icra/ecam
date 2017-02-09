@@ -68,24 +68,14 @@
 		<img class=l2 stage=wasteDis src=img/wasteDis.png onclick=window.location="edit.php?level=Waste&sublevel=Discharge"    caption="<?php write('#Discharge')?>">
 	</div>
 
-	<!--Stages Summaries-->
+	<!--Summaries-->
 	<div>
-		<div><span style="color:#666">GHG Summary</span></div>
-		<img class=l1 stage=sources src=img/sources.png onclick=window.location="sources.php"          caption="GHG Sources">
+		<div><span style="color:#666">Summaries</span></div>
+		<img class=l1 stage=sources src=img/sources.png onclick=window.location="sources.php"          caption="GHG Summary">
+		<img class=l1 stage=energy src=img/energy.png onclick=window.location="edit.php?level=Energy" caption="<?php write('#energy_summary')?>"> 
 		<img class=l1 stage=water   src=img/water.png   onclick=window.location="edit.php?level=Water" caption="<?php write('#Water')?>"> 
 		<img class=l1 stage=waste   src=img/waste.png   onclick=window.location="edit.php?level=Waste" caption="<?php write('#Waste')?>"> 
-	</div>
-
-	<!--I/O Summary-->
-	<div>
-		<div><span style="color:#666">I/O Summary</span></div>
 		<img class=l1 stage=io src=img/io.png onclick=window.location="summary.php?type=input"    caption="I/O Summary">
-	</div>
-
-	<!--Energy Summaries-->
-	<div>
-		<div><span style="color:#666">Energy Summary</span></div>
-		<img class=l1 stage=energy src=img/energy.png onclick=window.location="edit.php?level=Energy" caption="<?php write('#energy_summary')?>"> 
 	</div>
 
 </div>

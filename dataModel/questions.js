@@ -114,7 +114,6 @@ var Questions = {
 			"wsd_pmp_head",
 			"wsd_KPI_std_nrg_cons",
 			"wsd_KPI_un_head_loss",
-			"wsd_main_len",
 			"wsd_pmp_size",
 			"wsd_fri_loss",
 			"wsd_sta_head",

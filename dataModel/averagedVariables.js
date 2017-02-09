@@ -6,6 +6,7 @@
 var Averaged=
 {
 	list:[
+		"wst_tst_carr",
 		"wsd_time_pre",
 		"wsd_min_pres",
 		"wsd_hi_no_el",

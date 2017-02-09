@@ -154,7 +154,7 @@
 
 		<!--questions-->
 		<div class=inline style="max-width:20%">
-			<table><tr><th>Inexisting in questions.js 
+			<table><tr><th>Inexisting that appear in questions.js 
 				<script>
 					for(var q in Questions)
 					{
@@ -196,12 +196,12 @@
 					})()
 				</script>
 			</table>
-			<table><tr><th>Inexisting in info.js <script>findInexisting(Info)</script> </table>
-			<table><tr><th>Inexisting in refValues.js (Benchmarking) <script>findInexisting(RefValues)</script> </table>
-			<table><tr><th>Inexisting in averagedVariables.js <script>findInexisting(Averaged.list)</script> </table>
-			<table><tr><th>Inexisting in level2only.js <script>findInexisting(Level2only.list)</script> </table>
-			<table><tr><th>Inexisting in level2Warnings.js <script>findInexisting(Level2Warnings)</script> </table>
-			<table><tr><th>Inexisting in level3variables.js <script>findInexisting(Level3.list)</script> </table>
+			<table><tr><th>Inexisting that appear in info.js <script>findInexisting(Info)</script> </table>
+			<table><tr><th>Inexisting that appear in refValues.js (Benchmarking) <script>findInexisting(RefValues)</script> </table>
+			<table><tr><th>Inexisting that appear in averagedVariables.js <script>findInexisting(Averaged.list)</script> </table>
+			<table><tr><th>Inexisting that appear in level2only.js <script>findInexisting(Level2only.list)</script> </table>
+			<table><tr><th>Inexisting that appear in level2Warnings.js <script>findInexisting(Level2Warnings)</script> </table>
+			<table><tr><th>Inexisting that appear in level3variables.js <script>findInexisting(Level3.list)</script> </table>
 			<table><tr><th>Repeated variables in questions.js
 				<script>
 					var repeated=Questions.findRepeated()

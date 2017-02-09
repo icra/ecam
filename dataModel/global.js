@@ -56,7 +56,7 @@ var Global={
 			"wsa_main_len":0,
 			"wsa_fri_loss":0,
 			"wsa_nrg_turb":0,
-			"wsa_watr_src":0,
+			//"wsa_watr_src":0, //not used
 			"wsa_pmp_type":0,
 			"wsa_pmp_size":0,
 			wsa_nrg_per_pmp_watr:function(){return this.wsa_nrg_cons/this.wsa_vol_conv},
@@ -88,10 +88,12 @@ var Global={
 			"wst_mass_slu":0,
 			"wst_vol_trea":0,
 			"wst_treatmen":0,
-			"wst_disnfctn":0,
+			//"wst_disnfctn":0,
 			"wst_nrg_disn":0,
-			"wst_turb_raw":0,
-			"wst_turb_fin":0,
+			//"wst_turb_raw":0,
+			//"wst_turb_fin":0,
+
+			wst_KPI_tst_carr:function(){return this.wst_tst_carr},
 			wst_KPI_nrg_per_m3:function(){return this.wst_nrg_cons/this.wst_vol_trea},
 			wst_KPI_nrg_disnfc:function(){return this.wst_nrg_disn/this.wst_vol_trea},
 			wst_KPI_std_nrg_cons:function(){return this.wst_nrg_pump/(this.wst_vol_pump*this.wst_pmp_head/100)},
@@ -101,17 +103,15 @@ var Global={
 
 			//wst GHG
 			wst_KPI_GHG_elec:function(){return this.wst_nrg_cons*Global.General.conv_kwh_co2},
-			wst_KPI_GHG_slud:function(){return 0},
 			wst_KPI_GHG_fuel:function(){
 				var fuel=Tables['Fuel types'][Tables.find('wst_fuel_typ',this.wst_fuel_typ)]; 
 				return this.wst_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) 
 			},
-			wst_KPI_GHG:function(){
+			//TBD wst_KPI_GHG_slud:function(){return 0},
+			wst_KPI_GHG:function(){ 
 				return this.wst_KPI_GHG_elec()+
-				this.wst_KPI_GHG_fuel()+
-				this.wst_KPI_GHG_slud()+
-				0
-				},
+					this.wst_KPI_GHG_fuel()
+			},
 		},
 
 		"Distribution":{
@@ -131,7 +131,7 @@ var Global={
 			"wsd_pmp_head":0,
 			"wsd_main_len":0,
 			"wsd_fri_loss":0,
-			"wsd_sta_head":0,
+			//"wsd_sta_head":0,
 			"wsd_min_pres":0,
 			"wsd_hi_no_el":0,
 			"wsd_lo_no_el":0,

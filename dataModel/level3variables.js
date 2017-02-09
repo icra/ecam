@@ -39,6 +39,7 @@ Level3.list=
 	"wst_KPI_capac_util",
 	"wst_KPI_std_elec_eff",
 	"wst_disnfctn",
+	"wst_KPI_tst_carr",
 
 	//wsd
 	"wsd_nrg_pump",

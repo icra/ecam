@@ -414,6 +414,8 @@
 	"#wst_nrg_pump_expla":"Energy consumed from the grid (pumping)",
 	"#wst_KPI_std_elec_eff_descr":"Estimated electromechanical efficiency of current pump",
 	"#wst_KPI_std_elec_eff_expla":"Estimated electromechanical efficiency of current pump",
+	"#wst_KPI_tst_carr_descr":"Percent of quality tests in compliance",
+	"#wst_KPI_tst_carr_expla":"Percent of quality tests in compliance",
 
 	"#wst_KPI_GHG_descr":"Total GHG Water Treatment",
 	"#wst_KPI_GHG_expla":"Total GHG Water Treatment",
