@@ -214,7 +214,6 @@ var Info = {
 	"wwt_vol_trea":{magnitude:"Volume",unit:"m3"},
 	"wwt_nrg_cons":{magnitude:"Energy",unit:"kWh"},
 	"wwt_vol_fuel":{magnitude:"Volume",unit:"L"},
-	"wwt_n2o_effl":{magnitude:"Mass/Volume",unit:"mg/L"},
 	"wwt_bod_infl":{magnitude:"Mass",unit:"kg"},
 	"wwt_bod_effl":{magnitude:"Mass",unit:"kg"},
 	"wwt_nrg_biog":{magnitude:"Energy",unit:"kWh"},
@@ -265,7 +264,6 @@ var Info = {
 	wwt_KPI_GHG_fuel:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG_tsludge:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG_tre_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
-	wwt_KPI_GHG_tre_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG_biog:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	//L2 Wastewater Discharge
@@ -281,6 +279,7 @@ var Info = {
 	"wwd_vol_nonp":{magnitude:"Volume",unit:"m3"},
 	"wwd_reus_typ":{magnitude:"Option",unit:"Discharge/Reuse type"},
 	"wwd_main_len":{magnitude:"Distance",unit:"km"},
+	"wwd_n2o_effl":{magnitude:"Mass/Volume",unit:"mg/L"},
 
 	wwd_KPI_nrg_per_m3:   {magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
 	wwd_KPI_nrg_rcv_di:   {magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"}, 
@@ -292,5 +291,6 @@ var Info = {
 	wwd_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwd_KPI_GHG_fuel:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwd_KPI_GHG_trck:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wwd_KPI_GHG_tre_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwd_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 }

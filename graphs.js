@@ -238,12 +238,12 @@ Graphs.ghgSources=function(withTable,container)
 				 Global.Waste.Treatment.wwt_KPI_GHG_tsludge()+
 				 Global.Waste.Discharge.wwd_KPI_GHG_trck();
 	})();
-	var wsts=Global.Water.Treatment.wst_KPI_GHG_slud();
+	var wsts=0;//Global.Water.Treatment.wst_KPI_GHG_slud();
 	var ch4u=Global.Waste.Collection.wwc_KPI_GHG_unt_ch4();
 	var n2ou=Global.Waste.Collection.wwc_KPI_GHG_unt_n2o();
 	var ch4t=Global.Waste.Treatment.wwt_KPI_GHG_tre_ch4();
-	var n2ot=Global.Waste.Treatment.wwt_KPI_GHG_tre_n2o();
 	var biog=Global.Waste.Treatment.wwt_KPI_GHG_biog();
+	var n2ot=Global.Waste.Discharge.wwd_KPI_GHG_tre_n2o();
 
 	//names
 	var names = [

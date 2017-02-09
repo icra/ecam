@@ -70,6 +70,7 @@ Level3.list=
 	"wsd_pmp_size",
 
 	//wwc
+	"wwc_vol_coll",
 	"wwc_KPI_std_nrg_cons",
 	"wwc_coll_len",
 	"wwc_comb_sew",
@@ -97,7 +98,6 @@ Level3.list=
 	"wwt_mass_slu",
 	"wwt_dryw_slu",
 	"wwt_trea_cap",
-	"wwt_type_tre",
 	"wwt_pmp_type",
 	"wwt_vol_pump",
 	"wwt_nrg_pump",
@@ -107,7 +107,9 @@ Level3.list=
 	"wwt_slu_dr_v",
 	"wwt_slu_disp",
 	"wwt_slu_type",
-	"c_wwt_ch4_efac",
+	"wwt_nrg_biog",
+	"c_wwt_nrg_biog",
+
 	"wwt_KPI_sludg_prod",
 	"wwt_KPI_dry_sludge",
 	"wwt_KPI_capac_util",

@@ -93,9 +93,10 @@ var Tables =
 		"Wetlands":{value:5},
 	},
 	"wwt_pmp_type":{
-		"None":{value:0},
-		"External":{value:1},
-		"Submersible":{value:2},
+		"Archimedean screw":{value:0},
+		"Centrifugal pump":{value:1},
+		"Propeller pump":{value:2},
+		"Vane pump":{value:3},
 	},
 	"wwt_slu_disp":{
 		"Primary":{value:0},

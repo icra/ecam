@@ -340,7 +340,7 @@
 					<!--wwt n2o in effluent-->
 					<tr stage=waste class=hidden>
 						<td><?php write('#birds_ww_n2o_effl')?> 
-						<td class=input><input id='wwt_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
+						<td class=input><input id='wwd_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
 							<span class=circle style=background:#b8879d></span>
 					</tr>
 
