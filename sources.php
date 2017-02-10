@@ -91,6 +91,7 @@
 	<style>
 		#sources td.ss {text-align:center} /*substages counter*/
 		#sources td[field][level][sublevel]{cursor:help;padding-right:1em}
+		#sources td[field][level][sublevel]:hover{background:rgba(64,83,109,0.2);transition:all 0.5s}
 		#sources {
 			box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
 		}

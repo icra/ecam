@@ -2,8 +2,8 @@
 var TODO = {
 	Front://front-end
 	[
-		"[1] [PENDING] Create new cookies that remember folding of sections while using the tool",
-		"[2] [PENDING] Make cells in substage outputs smaller (like inputs above)",
+		"[1] [PENDING] Create cookies to remember folding of sections",
+		"[2] [PENDING] Cells in substage outputs smaller (to match inputs above)",
 		"[PENDING]     Discuss graphs, skype with IWA",
 		"[WAITING IWA] Select country data from configuration",
 		"[WAIT]        Translation after v2 is complete in english",

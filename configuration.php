@@ -166,20 +166,8 @@
 <!--linear--> <?php include'linear.php' ?>
 <!--caption--><?php include'caption.php'?>
 <!--title--><h1><?php write('#configuration')?></h1>
-<!--subtitle--><h4 style=margin:0><?php write('#configuration_subtitle')?>
-	<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
-	<script>
-		function activateAllStages()
-		{
-			event.stopPropagation();
-			['water','waste','waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
-			{
-				var checkbox=document.querySelector("table#selectStage #"+stage).checked=true
-				Configuration.activate(stage)
-			});
-		}
-	</script>
-</h4>
+
+<!--subtitle--><h4 style=margin:0;margin-bottom:1em><?php write('#configuration_subtitle')?></h4>
 
 <!--main container-->
 <div id=main>
@@ -235,7 +223,7 @@
 </div>
 
 <!--other questions-->
-<div class=inline style="max-width:45%;padding:1em 1em 1em 1em">
+<div class=inline style="max-width:45%;padding:0em 1em 1em 1em">
 	<style> 
 		#main fieldset{margin:0 0 1.4em 0;padding:0.9em;border:1px solid #aaa} 
 	</style>
@@ -291,6 +279,23 @@
 		<label> No  <input type=radio name=anyFuelEngines ans=0 onclick=update(Global.General,this.name,0) checked></label> &emsp; 
 		<label> Yes <input type=radio name=anyFuelEngines ans=1 onclick=update(Global.General,this.name,1)></label>
 	</fieldset>
+
+	<!--btn activate all-->
+	<div style=text-align:left>
+		<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
+		<script>
+			function activateAllStages()
+			{
+				event.stopPropagation();
+				['water','waste','waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
+				{
+					var checkbox=document.querySelector("table#selectStage #"+stage).checked=true
+					Configuration.activate(stage)
+				});
+			}
+		</script>
+	</div>
+
 </div>
 
 <!--prev & next buttons-->

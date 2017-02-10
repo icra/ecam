@@ -23,13 +23,13 @@ var Units =
 
 	/** CONVERSION BETWEEN MAGNITUDES */
 	"Distance":{
-		cm:0.01,
 		m:1,
+		cm:0.01,
 		km:1000,
 	},
 	"Mass":{ 
-		g:0.001,
 		kg:1,
+		g:0.001,
 	},
 	"Time":{ 
 		sec:1,
@@ -38,8 +38,8 @@ var Units =
 	},
 	//derived magnitudes from mass,distance and time
 	"Volume":{ 
-		L:0.001,
 		m3:1,
+		L:0.001,
 		dam3:1000,
 		hm3:1000000,
 		km3:1000000000,
