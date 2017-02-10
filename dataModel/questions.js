@@ -42,8 +42,8 @@ var Questions = {
 	"wsa_pumping_efficiency":{
 		variables:[
 			"wsa_pmp_head",
+			"wsa_sta_head",
 			"wsa_main_len",
-			"wsa_fri_loss",
 			"wsa_KPI_un_head_loss",
 			"wsa_KPI_std_nrg_cons",
 			"wsa_KPI_std_elec_eff",
@@ -111,12 +111,11 @@ var Questions = {
 	},
 	"wsd_pumping_efficiency":{
 		variables:[ 
-			"wsd_pmp_head",
 			"wsd_KPI_std_nrg_cons",
 			"wsd_KPI_un_head_loss",
 			"wsd_pmp_size",
-			"wsd_fri_loss",
 			"wsd_sta_head",
+			"wsd_pmp_head",
 		],
 		advanced:1,
 		otherQuestions:[],
@@ -203,10 +202,9 @@ var Questions = {
 	},
 	"wwc_pumping_efficiency": {
 		variables:[
-			"wwc_fri_loss", // Friction pipe losses
 			"wwc_pmp_head",
 			"wwc_pmp_size", // Size of pump
-			"wwc_pmp_sthd",
+			"wwc_sta_head",
 			"wwc_pmp_type",
 			"wwc_KPI_std_nrg_cons",
 			"wwc_KPI_un_head_loss",
@@ -286,6 +284,16 @@ var Questions = {
 	},
 
 	//wwd
+	"wwd_pumping":{
+		variables:[
+			"wwd_nrg_cons",
+			"wwd_vol_pump",
+		],
+		advanced:0,
+		otherQuestions:[
+			"wwd_pumping_efficiency",
+		],
+	},
 	"wwd_engines":{
 		variables:[
 			"wwd_fuel_typ",

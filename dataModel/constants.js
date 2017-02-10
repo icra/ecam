@@ -1,5 +1,10 @@
 var Cts = 
 {
+	ct_bod_slu:{
+		descr:"Ratio BOD entering the plant / BOD in the sludge collected",
+		value:0.33,
+		unit:"g BOD influent / g BOD sludge",
+	},
 	ct_bod_kg:{
 		descr:"Ratio BOD entering the plant / dry weight of organic matter in the sludge collected",
 		value:0.8,

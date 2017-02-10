@@ -172,6 +172,7 @@
 	"#wsa_pumping":"Do you have pumping in water abstraction",
 	"#wsd_pumping":"Do you have pumping in water distribution",
 	"#wwc_pumping":"Do you have pumping in wastewater collection",
+	"#wwd_pumping":"Do you have pumping in wastewater reuse/discharge",
 
 	"#wsa_pumping_efficiency":"Do you want to evaluate pump efficiency",
 	"#wst_pumping_efficiency":"Do you want to evaluate pump efficiency",
@@ -339,6 +340,8 @@
 	"#wsa_nrg_turb_expla":"Sum of energy recovered during the assessment period by all turbines for abstracted water managed by the undertaking",
 	"#wsa_pmp_head_descr":"Pumping head",
 	"#wsa_pmp_head_expla":"Head at which the water is pumped in each water abstractionunit that are the responsibility of the undertaking, during the assessment period",
+	"#wsa_sta_head_descr":"Static head",
+	"#wsa_sta_head_expla":"Static head",
 	"#wsa_vol_pump_descr":"Volume pumped",
 	"#wsa_vol_pump_expla":"Volume of water pumped in each water abstractionunit that are the responsibility of the undertaking, during the assessment period",
 	"#wsa_main_len_descr":"Transmission mains length",
@@ -523,8 +526,8 @@
 
 	"#wwc_pmp_type_descr":"Pump type",
 	"#wwc_pmp_type_expla":"Pump type",
-	"#wwc_pmp_sthd_descr":"Static head",
-	"#wwc_pmp_sthd_expla":"Static head",
+	"#wwc_sta_head_descr":"Static head",
+	"#wwc_sta_head_expla":"Static head",
 	"#wwc_comb_sew_descr":"Percentage of combined sewer",
 	"#wwc_comb_sew_expla":"Percentage of combined sewer",
 	"#wwc_wet_flow_descr":"Average daily wet weather flow",
@@ -559,13 +562,13 @@
 	"#wwc_infl_infi_expla":"Inflow and Infiltration",
 	"#wwc_vol_infi_descr":"Volme of infiltration / inflow",
 	"#wwc_vol_infi_expla":"Volme of infiltration / inflow",
+	"#wwc_SL_GHG_ii_descr":"From Infiltration and Inflow",
+	"#wwc_SL_GHG_ii_expla":"From Infiltration and Inflow",
 
 	"#wwc_KPI_GHG_descr":"Total GHG Wastewater Collection",
 	"#wwc_KPI_GHG_expla":"Total GHG Wastewater Collection",
 	"#wwc_KPI_GHG_elec_descr":"Electricity",
 	"#wwc_KPI_GHG_elec_expla":"GHG from electricity",
-	"#wwc_KPI_GHG_ii_descr":"From Infiltration and Inflow",
-	"#wwc_KPI_GHG_ii_expla":"From Infiltration and Inflow",
 
 	"#wwc_KPI_GHG_unt_descr":"Untreated wastewater",
 	"#wwc_KPI_GHG_unt_expla":"Untreated wastewater",

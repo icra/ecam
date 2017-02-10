@@ -304,7 +304,11 @@
 		//show variables
 		if(checked) {
 			Questions[question].variables.forEach(function(field) {
-				level2.createInput(field,table);
+				/*check if level3 only*/
+				if((Level3.list.indexOf(field)+1)==0)
+				{
+					level2.createInput(field,table);
+				}
 			});
 		}
 	}

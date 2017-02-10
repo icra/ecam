@@ -87,8 +87,8 @@ var Info = {
 	wsa_KPI_nrg_recovery:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
 	wsa_KPI_std_nrg_cons:{magnitude:"Energy",unit:"kWh/m<sup>3</sup>/100m"},
 	"wsa_pmp_head":{magnitude:"Head",unit:"m"},
+	"wsa_sta_head":{magnitude:"Head",unit:"m"},
 	"wsa_main_len":{magnitude:"Distance",unit:"km"},
-	"wsa_fri_loss":{magnitude:"Head",unit:"m"},
 	wsa_KPI_std_elec_eff:{magnitude:"Percentage",unit:"%"},
 	wsa_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km"},
 	wsa_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
@@ -124,7 +124,6 @@ var Info = {
 
 	wst_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wst_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
-	wst_KPI_GHG_slud:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wst_KPI_GHG_fuel:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	//L2 Water Distribution
@@ -143,7 +142,6 @@ var Info = {
 	"wsd_vol_pump" :{magnitude:"Volume",unit:"m3"},
 	"wsd_pmp_head" :{magnitude:"Head",unit:"m"},
 	"wsd_main_len" :{magnitude:"Distance",unit:"km"},
-	"wsd_fri_loss" :{magnitude:"Head",unit:"m"},
 	"wsd_vol_fuel":{magnitude:"Volume",unit:"L"},
 	"wsd_vol_trck":{magnitude:"Volume",unit:"L"},
 	wsd_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
@@ -178,10 +176,9 @@ var Info = {
 	"wwc_bod_pday":{magnitude:"Mass/inhab/time",unit:"g/person/day"},
 	"wwc_vol_pump":{magnitude:"Volume",unit:"m3"},
 	"wwc_pmp_head":{magnitude:"Head",unit:"m"},
+	"wwc_sta_head":{magnitude:"Head",unit:"m"},
 	"wwc_vol_fuel":{magnitude:"Volume",unit:"L"},
-
 	"wwc_pmp_type":{magnitude:"Option",unit:"Pump type"},
-	"wwc_pmp_sthd":{magnitude:"Head",unit:"m"},
 	"wwc_comb_sew":{magnitude:"Percentage",unit:"%"},
 	"wwc_wet_flow":{magnitude:"Flow",unit:"m3/day"},
 	"wwc_dry_flow":{magnitude:"Flow",unit:"m3/day"},
@@ -190,7 +187,6 @@ var Info = {
 	"wwc_infl_inf":{magnitude:"Percentage",unit:"%"},
 	"wwc_wd_ratio":{magnitude:"Ratio",unit:"adimensional"},
 
-	"wwc_fri_loss":{magnitude:"Head",unit:"m"},
 	"wwc_pmp_size":{magnitude:"Option",unit:"Size"},
 
 	wwc_SL_conn_pop:{magnitude:"Percentage",unit:"%"},
@@ -200,9 +196,9 @@ var Info = {
 	wwc_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km"},
 	wwc_infl_infi:{magnitude:"Percentage",unit:"%"},
 	wwc_vol_infi:{magnitude:"Volume",unit:"m3"},
+	wwc_SL_GHG_ii:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	wwc_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
-	wwc_KPI_GHG_ii:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwc_KPI_GHG_unt_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwc_KPI_GHG_unt_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwc_KPI_GHG_fuel:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
