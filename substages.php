@@ -26,6 +26,12 @@
 				sta.appendChild(newTable);
 
 				var pointer = Substages[level][sublevel];
+				if(pointer.length==0)
+				{
+					var newCell=newTable.insertRow(-1).insertCell(-1);
+					newCell.style.border='none';
+					newCell.innerHTML="<i style=color:#666;font-size:12px>~No substages</i>"
+				}
 				for(var j=0;j<pointer.length;j++)
 				{
 					newTable.insertRow(-1).insertCell(-1).innerHTML=(function()
@@ -67,18 +73,5 @@
 		<td level=Waste sublevel=Discharge>
 	</table>
 </div>
-
-<div style="text-align:center;margin:1em 0">
-flow diagram here? (TBD)
-</div>
-
-<!--selected substage
-<div style=margin-top:1em>
-	<table id=substage>
-		<tr><th>substage selected 
-		<tr><td>work in progress
-	</table>
-</div>
--->
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

@@ -111,6 +111,11 @@
 	</center>
 <!--END TITLE-->
 
+<!--go back to overview-->
+<div style=text-align:center;padding:0.5em>
+	<a href=substages.php>&larr; Substages overview</a>
+</div>
+
 <!--main container-->
 <div>
 	<!--substage table-->

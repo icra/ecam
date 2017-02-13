@@ -7,6 +7,13 @@
 			Caption.listeners();
 			addDetailedListeners();
 			updateResult();
+
+			//onclick listeners for substage counters: link to substages.php
+			var tds=document.querySelectorAll('td.ss');
+			for(var i=0;i<tds.length;i++)
+			{
+				tds[i].onclick=function(){window.location='substages.php'}
+			}
 		}
 
 		function calculateGHG() {
@@ -89,7 +96,7 @@
 		}
 	</script>
 	<style>
-		#sources td.ss {text-align:center} /*substages counter*/
+		#sources td.ss {text-align:center;cursor:pointer} /*substages counter*/
 		#sources td[field][level][sublevel]{cursor:help;padding-right:1em}
 		#sources td[field][level][sublevel]:hover{background:rgba(64,83,109,0.2);transition:all 0.5s}
 		#sources {
