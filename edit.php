@@ -1284,7 +1284,7 @@
 						&mdash; 
 						Substages <b><span id=counter class=number>0</span></b>
 						&mdash; 
-						<a href=substage.php>Overview</a>
+						<a href=substages.php>Overview</a>
 				")?>
 				<div style=padding:0.5em>
 					<table id=substages> 

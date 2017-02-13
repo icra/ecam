@@ -137,7 +137,7 @@
 			?>
 		</span>
 		&mdash;
-		<a href=substage.php>See Substages overview</a>
+		<a href=substages.php>See Substages overview</a>
 	</h4>
 
 	<!--level 1 fields-->
