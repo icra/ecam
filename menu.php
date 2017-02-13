@@ -26,7 +26,7 @@
 			</button><!--
 			
 			next button
-			--><br><button class="button next" style="margin-left:0" onclick="event.stopPropagation();window.location='getStarted.php'">
+			--><button class="button next" onclick="event.stopPropagation();window.location='getStarted.php'">
 				<?php write('#next')?>
 			</button>
 		  <?php 

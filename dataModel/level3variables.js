@@ -1,12 +1,7 @@
 /* variables hidden in level 2, shown in level3: */
-
 var Level3={};
-
 Level3.list=
 [
-	//ws
-	//ww
-
 	//wsa
 	"wsa_nrg_pump",
 	"wsa_vol_pump",
@@ -18,7 +13,7 @@ Level3.list=
 	"wsa_KPI_std_nrg_cons",
 	"wsa_KPI_std_elec_eff",
 	"wsa_KPI_un_head_loss",
-	"wsa_watr_src",
+	//"wsa_watr_src", HIDDEN
 	"wsa_pmp_type",
 	"wsa_pmp_size",
 
@@ -27,8 +22,8 @@ Level3.list=
 	"wst_trea_cap",
 	"wst_tst_carr",
 	"wst_treatmen",
-	"wst_turb_raw",
-	"wst_turb_fin",
+	//"wst_turb_raw", HIDDEN
+	//"wst_turb_fin", HIDDEN
 	"wst_nrg_disn",
 	"wst_vol_pump",
 	"wst_pmp_head",
@@ -38,7 +33,7 @@ Level3.list=
 	"wst_KPI_slu_per_m3",
 	"wst_KPI_capac_util",
 	"wst_KPI_std_elec_eff",
-	"wst_disnfctn",
+	//"wst_disnfctn", HIDDEN
 	"wst_KPI_tst_carr",
 
 	//wsd
@@ -69,23 +64,23 @@ Level3.list=
 	"wsd_pmp_size",
 
 	//wwc
-	"wwc_vol_coll",
 	"wwc_KPI_std_nrg_cons",
+	"wwc_KPI_un_head_loss",
+	"wwc_SL_GHG_ii",
 	"wwc_coll_len",
-	"wwc_comb_sew",
-	"wwc_cso_incd",
+	//"wwc_comb_sew", HIDDEN
+	//"wwc_cso_incd", HIDDEN
 	"wwc_dry_flow",
-	"wwc_infl_inf",
-	"wwc_sta_head",
+	//"wwc_infl_inf", HIDDEN
+	//"wwc_infl_infi", HIDDEN
 	"wwc_pmp_head",
-	"wwc_pmp_size",
-	"wwc_pmp_type",
+	//"wwc_pmp_size", HIDDEN
+	//"wwc_pmp_type", HIDDEN
+	"wwc_sta_head",
+	"wwc_vol_coll",
+	//"wwc_vol_infi", HIDDEN
 	"wwc_wd_ratio",
 	"wwc_wet_flow",
-	"wwc_KPI_un_head_loss",
-	"wwc_infl_infi",
-	"wwc_vol_infi",
-	"wwc_SL_GHG_ii",
 
 	//wwt
 	"wwt_trck_typ",
@@ -107,7 +102,6 @@ Level3.list=
 	"wwt_slu_type",
 	"wwt_nrg_biog",
 	"c_wwt_nrg_biog",
-
 	"wwt_KPI_sludg_prod",
 	"wwt_KPI_dry_sludge",
 	"wwt_KPI_capac_util",
@@ -126,15 +120,14 @@ Level3.list=
 	//wwd
 	"wwd_vol_nonp",//Volume of water reused
 	"wwd_pmp_head",
-	"wwd_vol_turb",
+	//"wwd_vol_turb", HIDDEN
 	"wwd_trb_head",
-	"wwd_nrg_recv",
+	//"wwd_nrg_recv", HIDDEN
 	"wwd_reus_typ",
 	"wwd_main_len",
-
 	"wwd_KPI_ghg_red",
 	"wwd_KPI_nrg_sav",
-	"wwd_KPI_nrg_rcv_di",
+	//"wwd_KPI_nrg_rcv_di", HIDDEN
 	"wwd_KPI_std_nrg_cons",
-	"wwd_KPI_std_nrg_recv",
+	//"wwd_KPI_std_nrg_recv", HIDDEN
 ];

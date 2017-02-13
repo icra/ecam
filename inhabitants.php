@@ -98,7 +98,7 @@
 <!--main-->
 <div id=main> 
 	<!--table-->
-	<table id=inputs style="margin:1em;width:50%">
+	<table id=inputs style="font-size:16px;margin:1em;width:50%">
 		<style>
 			table#inputs th, #inputs td {text-align:left;}
 			#inputs td.input {

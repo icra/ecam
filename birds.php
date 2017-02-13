@@ -253,6 +253,8 @@
 
 <!--TITLE-->
 <h1><?php write('#quick_assessment')?> 
+	&mdash;
+	Starting point for rough estimation of total GHG production
 	<span style="font-size:13px;color:#666;float:right">
 		<span><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a> 
 		<script>document.write(Global.General.Days())</script> <?php write('#days')?></span> 
@@ -410,7 +412,7 @@
 
 	<!--graphs-->
 	<div class="card inline" style="width:63%">
-		<?php cardMenu("<b>Graphs</b>")?>
+		<?php cardMenu("<b>Figures</b>")?>
 		<div id=graphs>
 			<style> 
 				#graphs table{margin:auto !important;margin-bottom:0.5em !important}

@@ -85,13 +85,13 @@ var Questions = {
 	},
 	"wst_treatment_performance":{
 		variables:[ 
-			"wst_turb_raw",
-			"wst_turb_fin",
+			//"wst_turb_raw",HIDDEN
+			//"wst_turb_fin",HIDDEN
+			//"wst_disnfctn",HIDDEN
 			"wst_nrg_disn",
 			"wst_KPI_nrg_disnfc",
 			"wst_KPI_slu_per_m3",
 			"wst_mass_slu",
-			"wst_disnfctn",
 		],
 		advanced:1,
 		otherQuestions:[ ],
@@ -183,19 +183,19 @@ var Questions = {
 			"wwc_wet_flow",
 			"wwc_dry_flow",
 			"wwc_coll_len",
-			"wwc_infl_inf",
+			//"wwc_infl_inf",HIDDEN
+			//"wwc_infl_infi",HIDDEN
 			"wwc_wd_ratio",
-			"wwc_infl_infi",
-			"wwc_vol_infi",
-			"wwc_KPI_GHG_ii",
+			//"wwc_vol_infi",HIDDEN
+			//"wwc_KPI_GHG_ii",HIDDEN
 		],
 		advanced:1,
 		otherQuestions:[],
 	},
 	"wwc_have_csos": {
 		variables:[
-			"wwc_comb_sew",
-			"wwc_cso_incd",
+			//"wwc_comb_sew",HIDDEN
+			//"wwc_cso_incd",HIDDEN
 		],
 		advanced:1,
 		otherQuestions:[],
@@ -203,9 +203,9 @@ var Questions = {
 	"wwc_pumping_efficiency": {
 		variables:[
 			"wwc_pmp_head",
-			"wwc_pmp_size", // Size of pump
+			//"wwc_pmp_size", // Size of pumpHIDDEN
 			"wwc_sta_head",
-			"wwc_pmp_type",
+			//"wwc_pmp_type",HIDDEN
 			"wwc_KPI_std_nrg_cons",
 			"wwc_KPI_un_head_loss",
 		],
@@ -315,7 +315,7 @@ var Questions = {
 	"wwd_pumping_efficiency":{
 		variables:[ 
 			"wwd_pmp_head",
-			"wwd_vol_turb",
+			//"wwd_vol_turb",HIDDEN
 			"wwd_trb_head",
 			"wwd_main_len",
 			"wwd_KPI_std_nrg_cons",

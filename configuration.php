@@ -220,6 +220,22 @@
 				?>
 		</table>
 	</div>
+
+	<!--btn activate all-->
+	<div>
+		<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
+		<script>
+			function activateAllStages()
+			{
+				event.stopPropagation();
+				['water','waste','waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
+				{
+					var checkbox=document.querySelector("table#selectStage #"+stage).checked=true
+					Configuration.activate(stage)
+				});
+			}
+		</script>
+	</div>
 </div>
 
 <!--other questions-->
@@ -279,22 +295,6 @@
 		<label> No  <input type=radio name=anyFuelEngines ans=0 onclick=update(Global.General,this.name,0) checked></label> &emsp; 
 		<label> Yes <input type=radio name=anyFuelEngines ans=1 onclick=update(Global.General,this.name,1)></label>
 	</fieldset>
-
-	<!--btn activate all-->
-	<div style=text-align:left>
-		<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
-		<script>
-			function activateAllStages()
-			{
-				event.stopPropagation();
-				['water','waste','waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
-				{
-					var checkbox=document.querySelector("table#selectStage #"+stage).checked=true
-					Configuration.activate(stage)
-				});
-			}
-		</script>
-	</div>
 
 </div>
 

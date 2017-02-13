@@ -71,13 +71,12 @@
 	<!--Summaries-->
 	<div>
 		<div><span style="color:#666">Summaries</span></div>
-		<img class=l1 stage=sources src=img/sources.png onclick=window.location="sources.php"          caption="GHG Summary">
-		<img class=l1 stage=energy src=img/energy.png onclick=window.location="edit.php?level=Energy" caption="<?php write('#energy_summary')?>"> 
-		<img class=l1 stage=water   src=img/water.png   onclick=window.location="edit.php?level=Water" caption="<?php write('#Water')?>"> 
-		<img class=l1 stage=waste   src=img/waste.png   onclick=window.location="edit.php?level=Waste" caption="<?php write('#Waste')?>"> 
-		<img class=l1 stage=io src=img/io.png onclick=window.location="summary.php?type=input"    caption="I/O Summary">
+		<img class=l1 stage=sources src=img/sources.png onclick=window.location="sources.php"            caption="GHG Summary">
+		<img class=l1 stage=energy  src=img/energy.png  onclick=window.location="edit.php?level=Energy"  caption="Energy Summary"> 
+		<img class=l1 stage=water   src=img/water.png   onclick=window.location="edit.php?level=Water"   caption="Water"> 
+		<img class=l1 stage=waste   src=img/waste.png   onclick=window.location="edit.php?level=Waste"   caption="Wastewater"> 
+		<img class=l1 stage=io      src=img/io.png      onclick=window.location="summary.php?type=input" caption="I/O Summary">
 	</div>
-
 </div>
 
 <script>

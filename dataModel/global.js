@@ -374,7 +374,7 @@ var Global={
 			//"wwd_vol_turb":0,
 			//"wwd_nrg_recv":0,
 			//wwd_KPI_nrg_rcv_di:function(){return this.wwd_nrg_recv/this.wwd_vol_disc},
-			//wwd_KPI_std_nrg_recv:function(){return this.wwd_nrg_recv/(this.wwd_vol_turb*this.wwd_trb_head/100)},
+			wwd_KPI_std_nrg_recv:function(){return this.wwd_nrg_recv/(this.wwd_vol_turb*this.wwd_trb_head/100)},
 
 			wwd_KPI_nrg_per_m3:function(){return this.wwd_nrg_cons/this.wwd_vol_disc||0},
 			wwd_KPI_std_nrg_cons:function(){return (this.wwd_nrg_cons)/(this.wwd_vol_pump*this.wwd_pmp_head/100)},
