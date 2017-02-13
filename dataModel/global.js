@@ -29,8 +29,8 @@ var Global={
 
 	/**Level 1 - Water Supply*/
 	Water:{
-		"ws_resi_pop":0,
-		"ws_serv_pop":0,
+		"ws_resi_pop":1000,
+		"ws_serv_pop":950,
 		"ws_nrg_cost":0,
 		"ws_run_cost":0,
 
@@ -175,9 +175,9 @@ var Global={
 
 	/**Level 1 - Wastewater*/
 	Waste:{
-		"ww_resi_pop":0,
-		"ww_conn_pop":0,
-		"ww_serv_pop":0,
+		"ww_resi_pop":1000,
+		"ww_conn_pop":950,
+		"ww_serv_pop":900,
 		"ww_nrg_cost":0,
 		"ww_run_cost":0,
 

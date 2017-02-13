@@ -283,7 +283,8 @@
 		//1st cell: show question
 		var newCell=newRow.insertCell(-1);
 		newCell.colSpan=2;
-		newCell.style.padding="0.5em 0 0.5em 1em";
+		newCell.style.paddingRight="1em";
+		newCell.style.textAlign="right";
 		newCell.innerHTML=translate(question)+"?";
 
 		//2nd cell: show yes no
