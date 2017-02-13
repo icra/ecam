@@ -1097,7 +1097,10 @@
 							newCell=newRow.insertCell(-1);
 							newCell.style.textAlign='center';
 							var str=""+
-								"<button class=button onclick=level3.deleteSubstage("+s+") caption='<?php write('#level3_delete_substage')?>' style='margin:0;'>&#9003;</button>"
+								"<button class=button onclick=level3.deleteSubstage("+s+") caption='<?php write('#level3_delete_substage')?>' style='margin:0;'>&#9003;</button>"+
+								"<br><br>"+
+								"<a href='substage.php?level=<?php echo $level?>&sublevel=<?php echo $sublevel?>&index="+s+"'>Summary</a>"+
+								"";
 							newCell.innerHTML=str
 						}
 					/*end update body*/

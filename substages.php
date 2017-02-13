@@ -28,7 +28,15 @@
 				var pointer = Substages[level][sublevel];
 				for(var j=0;j<pointer.length;j++)
 				{
-					newTable.insertRow(-1).insertCell(-1).innerHTML=(j+1)+". "+pointer[j].name
+					newTable.insertRow(-1).insertCell(-1).innerHTML=(function()
+					{
+						var str=""+
+							(j+1)+". "+
+							"<a href='substage.php?level="+level+"&sublevel="+sublevel+"&index="+j+"'>"+
+							pointer[j].name+
+							"</a>";
+						return str;
+					})()
 				}
 			}
 		}

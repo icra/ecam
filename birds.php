@@ -254,7 +254,7 @@
 <!--TITLE-->
 <h1><?php write('#quick_assessment')?> 
 	&mdash;
-	Starting point for rough estimation of total GHG production
+	Rough estimation of total GHG production
 	<span style="font-size:13px;color:#666;float:right">
 		<span><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a> 
 		<script>document.write(Global.General.Days())</script> <?php write('#days')?></span> 
