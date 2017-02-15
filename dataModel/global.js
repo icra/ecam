@@ -197,10 +197,10 @@ var Global={
 			"wwc_vol_pump":0,
 			"wwc_vol_fuel":0,
 			"wwc_fuel_typ":0,
-			"wwc_vol_coll":0,
 			"wwc_pmp_head":0,
 			"wwc_sta_head":0,
 			"wwc_coll_len":0,
+			//"wwc_vol_coll":0,
 			//"wwc_pmp_type":0,
 			//"wwc_fri_loss":0, // Friction pipe losses
 			//"wwc_pmp_size":0, // Size of pump
@@ -229,8 +229,8 @@ var Global={
 				var fuel=Tables['Fuel types'][Tables.find('wwc_fuel_typ',this.wwc_fuel_typ)]; 
 				return this.wwc_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) 
 			},
-			wwc_KPI_GHG_unt_ch4:function(){return (Global.Waste.ww_resi_pop-Global.Waste.ww_serv_pop)*this.wwc_bod_pday/1000*Global.General.Days()*Cts.ct_ch4_ef.value*Cts.ct_ch4_eq.value },//old c_ww52
-			wwc_KPI_GHG_unt_n2o:function(){return (Global.Waste.ww_resi_pop-Global.Waste.ww_serv_pop)*this.wwc_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value },
+			wwc_KPI_GHG_unt_ch4:function(){return (Global.Waste.ww_conn_pop-Global.Waste.ww_serv_pop)*this.wwc_bod_pday/1000*Global.General.Days()*Cts.ct_ch4_ef.value*Cts.ct_ch4_eq.value },//old c_ww52
+			wwc_KPI_GHG_unt_n2o:function(){return (Global.Waste.ww_conn_pop-Global.Waste.ww_serv_pop)*this.wwc_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value },
 			wwc_KPI_GHG:function(){
 				return this.wwc_KPI_GHG_elec()+
 				this.wwc_KPI_GHG_fuel()+
