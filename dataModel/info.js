@@ -174,12 +174,12 @@ var Info = {
 	wsd_SL_GHG_nrw:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	//L2 Wastewater Collection
-	"wwc_vol_coll":{magnitude:"Volume",unit:"m3"},
 	"wwc_vol_conv":{magnitude:"Volume",unit:"m3"},
 	"wwc_nrg_cons":{magnitude:"Energy",unit:"kWh"},
 	"wwc_prot_con":{magnitude:"Annual per capita consumption",unit:"kg/person/year"},
 	"wwc_bod_pday":{magnitude:"Mass/inhab/time",unit:"g/person/day"},
 	"wwc_vol_pump":{magnitude:"Volume",unit:"m3"},
+	"wwc_nrg_pump":{magnitude:"Energy",unit:"kWh"},
 	"wwc_pmp_head":{magnitude:"Head",unit:"m"},
 	"wwc_sta_head":{magnitude:"Head",unit:"m"},
 	"wwc_vol_fuel":{magnitude:"Volume",unit:"L"},
@@ -233,9 +233,6 @@ var Info = {
 	"wwt_nrg_pump":{magnitude:"Energy",unit:"kWh"},
 	"wwt_pmp_head":{magnitude:"Head",unit:"m"},
 
-	"wwt_slu_stor":{magnitude:"Time",unit:"h"},
-	"wwt_slu_st_v":{magnitude:"Volume",unit:"m3"},
-	"wwt_slu_dr_v":{magnitude:"Volume",unit:"m3"},
 	"wwt_slu_disp":{magnitude:"Option",unit:"Sludge type disposed of"},
 	"wwt_slu_type":{magnitude:"Option",unit:"Disposal type"},
 
@@ -286,8 +283,6 @@ var Info = {
 	"c_wwt_slu_n":{magnitude:"Mass",unit:"kg"},
 	"c_wwt_slu_cn":{magnitude:"Adimensional",unit:"Adimensional"},
 	"wwt_KPI_GHG_dig_fuel":{magnitude:"Mass",unit:"kg"},
-	"wwt_KPI_GHG_dig_flar_ch4":{magnitude:"Mass",unit:"kg"},
-	"wwt_KPI_GHG_dig_co2eq":{magnitude:"Mass",unit:"kg"},
 	"wwt_KPI_GHG_sto_ch4":{magnitude:"Mass",unit:"kg"},
 	"wwt_KPI_GHG_sto_n2o":{magnitude:"Mass",unit:"kg"},
 	"wwt_KPI_GHG_sto_co2eq":{magnitude:"Mass",unit:"kg"},

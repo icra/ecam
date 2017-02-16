@@ -157,16 +157,6 @@ var Questions = {
 	},
 
 	//wwc
-	"wwc_pumping":{
-		variables:[
-			"wwc_vol_pump",
-			"wwc_nrg_pump",
-		],
-		advanced:0,
-		otherQuestions:[
-			"wwc_pumping_efficiency",
-		],
-	},
 	"wwc_engines":{
 		variables:[
 			"wwc_fuel_typ",
@@ -174,6 +164,28 @@ var Questions = {
 			"wwc_KPI_GHG_fuel",
 		],
 		advanced:0,
+		otherQuestions:[],
+	},
+	"wwc_pumping":{
+		variables:[
+			"wwc_vol_pump",
+			"wwc_nrg_pump",
+		],
+		advanced:1,
+		otherQuestions:[
+			"wwc_pumping_efficiency",
+		],
+	},
+	"wwc_pumping_efficiency": {
+		variables:[
+			"wwc_pmp_head",
+			//"wwc_pmp_size", // Size of pumpHIDDEN
+			"wwc_sta_head",
+			//"wwc_pmp_type",HIDDEN
+			"wwc_KPI_std_nrg_cons",
+			"wwc_KPI_un_head_loss",
+		],
+		advanced:1,
 		otherQuestions:[],
 	},
 	"wwc_water_eff": {
@@ -186,26 +198,6 @@ var Questions = {
 			"wwc_wd_ratio",
 			//"wwc_vol_infi",HIDDEN
 			//"wwc_KPI_GHG_ii",HIDDEN
-		],
-		advanced:1,
-		otherQuestions:[],
-	},
-	"wwc_have_csos": {
-		variables:[
-			//"wwc_comb_sew",HIDDEN
-			//"wwc_cso_incd",HIDDEN
-		],
-		advanced:1,
-		otherQuestions:[],
-	},
-	"wwc_pumping_efficiency": {
-		variables:[
-			"wwc_pmp_head",
-			//"wwc_pmp_size", // Size of pumpHIDDEN
-			"wwc_sta_head",
-			//"wwc_pmp_type",HIDDEN
-			"wwc_KPI_std_nrg_cons",
-			"wwc_KPI_un_head_loss",
 		],
 		advanced:1,
 		otherQuestions:[],
@@ -250,9 +242,6 @@ var Questions = {
 		variables:[
 			"wwt_mass_slu",
 			"wwt_dryw_slu",
-			"wwt_slu_stor",
-			"wwt_slu_st_v",
-			"wwt_slu_dr_v",
 			"wwt_slu_disp",
 			"wwt_slu_type",
 			"wwt_fuel_dig",
@@ -274,8 +263,6 @@ var Questions = {
 			"c_wwt_slu_n",
 			"c_wwt_slu_cn",
 			"wwt_KPI_GHG_dig_fuel",
-			"wwt_KPI_GHG_dig_flar_ch4",
-			"wwt_KPI_GHG_dig_co2eq",
 			"wwt_KPI_GHG_sto_ch4",
 			"wwt_KPI_GHG_sto_n2o",
 			"wwt_KPI_GHG_sto_co2eq",

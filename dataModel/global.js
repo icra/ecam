@@ -195,6 +195,7 @@ var Global={
 			"wwc_bod_pday":40,
 			"wwc_prot_con":25,
 			"wwc_vol_pump":0,
+			"wwc_nrg_pump":0,
 			"wwc_vol_fuel":0,
 			"wwc_fuel_typ":0,
 			"wwc_pmp_head":0,
@@ -220,7 +221,7 @@ var Global={
 			wwc_SL_conn_pop:function(){return 100*Global.Waste.ww_conn_pop/Global.Waste.ww_resi_pop},
 			wwc_KPI_nrg_per_m3:function(){return this.wwc_nrg_cons/this.wwc_vol_conv},
 			ww_SL_treat_m3:function(){return 100*(Global.Waste.ww_serv_pop/Global.Waste.ww_conn_pop)},
-			wwc_KPI_std_nrg_cons:function(){return this.wwc_nrg_cons/(this.wwc_vol_pump*this.wwc_pmp_head/100)},
+			wwc_KPI_std_nrg_cons:function(){return this.wwc_nrg_pump/(this.wwc_vol_pump*this.wwc_pmp_head/100)},
 			wwc_KPI_un_head_loss:function(){return 1000*(this.wwc_sta_head-this.wwc_pmp_head)/this.wwc_coll_len},
 
 			//Collection GHG

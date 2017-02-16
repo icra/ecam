@@ -13,13 +13,12 @@ var TODO = {
 	],
 	Back://back-end
 	[
-		"[WAITING IWA] Sludge management formulas",
+		"[WAITING IWA] Sludge management check implementation iteration 1",
 		"[WAITING IWA] Infiltration and inflow is not clear",
 		"[WAITING IWA] Formula for <a href=variable.php?id=wwd_KPI_nrg_sav>wwd_KPI_nrg_sav</a>",
 		"[WAITING IWA] Formula for <a href=variable.php?id=wwd_KPI_ghg_red>wwd_KPI_ghg_red</a>",
 		"[WAIT]        Opportunities page, wait for structure v2 does not change anymore, otherwise can't code it",
 		"[IDEA]        Set to zero engine fuel volumes when user selects 'No' in Configuration",
-		"[IDEA]        Improve speed, changing stage simply modifying the variable CurrentLevel, then calling init() function (works very good but needs work)",
 	],
 };
 

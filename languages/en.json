@@ -527,6 +527,8 @@
 	"#wwc_pmp_head_expla":"Pump head",
 	"#wwc_vol_fuel_descr":"Volume of fuel consumed",
 	"#wwc_vol_fuel_expla":"Volume of fuel consumed",
+	"#wwc_nrg_pump_descr":"Energy consumed from the grid (pumping)",
+	"#wwc_nrg_pump_expla":"Energy consumed from the grid (pumping)",
 
 	"#wwc_pmp_type_descr":"Pump type",
 	"#wwc_pmp_type_expla":"Pump type",
@@ -625,8 +627,8 @@
 	"#wwt_pmp_type_expla":"Type of pump",
 	"#wwt_vol_pump_descr":"Volume of wastewater pumped",
 	"#wwt_vol_pump_expla":"Volume of wastewater pumped",
-	"#wwt_nrg_pump_descr":"Energy consumed from the grid from pumping",
-	"#wwt_nrg_pump_expla":"Energy consumed from the grid from pumping",
+	"#wwt_nrg_pump_descr":"Energy consumed from the grid (pumping)",
+	"#wwt_nrg_pump_expla":"Energy consumed from the grid (pumping)",
 	"#wwt_pmp_head_descr":"Pump head",
 	"#wwt_pmp_head_expla":"Pump head",
 

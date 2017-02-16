@@ -77,10 +77,11 @@ Level3.list=
 	//"wwc_pmp_size", HIDDEN
 	//"wwc_pmp_type", HIDDEN
 	"wwc_sta_head",
-	"wwc_vol_coll",
 	//"wwc_vol_infi", HIDDEN
 	"wwc_wd_ratio",
 	"wwc_wet_flow",
+	"wwc_vol_pump",
+	"wwc_nrg_pump",
 
 	//wwt
 	"wwt_trck_typ",
@@ -95,9 +96,6 @@ Level3.list=
 	"wwt_vol_pump",
 	"wwt_nrg_pump",
 	"wwt_pmp_head",
-	"wwt_slu_stor",
-	"wwt_slu_st_v",
-	"wwt_slu_dr_v",
 	"wwt_slu_disp",
 	"wwt_slu_type",
 	"wwt_nrg_biog",
@@ -135,8 +133,6 @@ Level3.list=
 	"c_wwt_slu_n",
 	"c_wwt_slu_cn",
 	"wwt_KPI_GHG_dig_fuel",
-	"wwt_KPI_GHG_dig_flar_ch4",
-	"wwt_KPI_GHG_dig_co2eq",
 	"wwt_KPI_GHG_sto_ch4",
 	"wwt_KPI_GHG_sto_n2o",
 	"wwt_KPI_GHG_sto_co2eq",
