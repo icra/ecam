@@ -259,10 +259,9 @@ var RefValues =
 	wwt_KPI_capac_util:function(obj)
 	{
 		//wtE9: Good: 95 ≤ wtE9 ≤ 70, Acceptable: 100 ≤ wtE9 < 95 and 70 < wtE9 ≤ 50, Unsatisfactory: wtE9 > 100 and wtE9 < 50,
-		//NEED CORRECTION TBD
 		var value=obj.wwt_KPI_capac_util();
 		if      (70 <= value && value <= 95)                            return "Good";
-		else if ((95 < value && value <= 100) || (50<value&&value<70) ) return "Acceptable";
+		else if ((95 < value && value <= 100) || (50 < value && value < 70) ) return "Acceptable";
 		else if (value > 100 || value < 50)                             return "Unsatisfactory";
 		else                                                            return "Out of range";
 	},

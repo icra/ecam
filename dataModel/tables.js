@@ -107,9 +107,15 @@ var Tables =
 		"Land application":{value:0},
 		"Open landfill":{value:1},
 		"Covered landfill with gas recovery":{value:2},
-		"Incineration with heat recovery":{value:3},
-		"Composting":{value:4},
-		"Other":{value:5},
+		"Covered landfill (flaring)":{value:3},
+		"Incineration with heat recovery":{value:4},
+		"Composting":{value:5},
+		"Other":{value:6},
+	},
+	"wwt_soil_typ":{
+		"Fine-Textured":{value:0},
+		"Coarse-Textured":{value:1},
+		"Other":{value:2},
 	},
 
 	//wwd
@@ -128,12 +134,14 @@ var Tables =
 Tables.wsa_fuel_typ=Tables["Fuel types"];
 Tables.wst_fuel_typ=Tables["Fuel types"];
 Tables.wsd_fuel_typ=Tables["Fuel types"];
-Tables.wsd_trck_typ=Tables["Fuel types"];//trucks
 Tables.wwc_fuel_typ=Tables["Fuel types"];
 Tables.wwt_fuel_typ=Tables["Fuel types"];
-Tables.wwt_trck_typ=Tables["Fuel types"];//trucks
 Tables.wwd_fuel_typ=Tables["Fuel types"];
-Tables.wwd_trck_typ=Tables["Fuel types"];//trucks
+Tables.wsd_trck_typ=Tables["Fuel types"]; //trucks
+Tables.wwt_trck_typ=Tables["Fuel types"]; //trucks
+Tables.wwd_trck_typ=Tables["Fuel types"]; //trucks
+Tables.wwt_dige_typ=Tables["Fuel types"]; //type of fuel dig afegida per mi
+Tables.wwt_appl_typ=Tables["Fuel types"]; //type of fuel app afegida per mi
 
 //find the option name by value
 Tables.find=function(field,value)

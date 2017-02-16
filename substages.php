@@ -52,18 +52,23 @@
 <!--NAVBAR--><?php include'navbar.php'?>
 <!--linear--><?php include'linear.php'?>
 <!--caption--><?php include'caption.php'?>
+
+<div style=margin-top:0.5em> <a href="sources.php">&larr; GHG Summary</a> </div>
 <!--TITLE--><h1>Substages Overview</h1></center>
 
 <!--main-->
 <div>
 	<table id=substages>
+	<style>
+		#substages th a {color:white}
+	</style>
 	<tr>
-		<th>              Abstraction  &rarr;
-		<th>       &rarr; Treatment    &rarr;
-		<th>       &rarr; Distribution &rarr;
-		<th waste> &rarr; Collection   &rarr;
-		<th waste> &rarr; Treatment    &rarr;
-		<th waste> &rarr; Discharge    
+		<th>              <a href="edit.php?level=Water&sublevel=Abstraction">Abstraction</a>  &rarr;
+		<th>       &rarr; <a href="edit.php?level=Water&sublevel=Treatment">Treatment</a>    &rarr;
+		<th>       &rarr; <a href="edit.php?level=Water&sublevel=Distribution">Distribution</a> &rarr;
+		<th waste> &rarr; <a href="edit.php?level=Waste&sublevel=Collection">Collection</a>   &rarr;
+		<th waste> &rarr; <a href="edit.php?level=Waste&sublevel=Treatment">Treatment</a>    &rarr;
+		<th waste> &rarr; <a href="edit.php?level=Waste&sublevel=Discharge">Discharge</a>    
 	<tr>
 		<td level=Water sublevel=Abstraction>
 		<td level=Water sublevel=Treatment>

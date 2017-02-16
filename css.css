@@ -160,7 +160,6 @@ span.circle {
 		max-height:3.0em;
 		overflow:hidden;
 		font-size:10px;
-		transition:all 0.1s;
 	}
 	.card.folded > *:nth-child(n+2) {opacity:0;}
 	.card .menu {

@@ -32,7 +32,6 @@
 		#info .constant a {color:blue; !important}
 		.fuel {color:#088A29}
 		.fuel a {font-weight:bold;color:#088A29;}
-		.fuel:first-child {cursor:help}
 		pre.prettyprint {margin:0.5em;margin-left:0;padding:1em}
 	</style>
 
@@ -147,7 +146,7 @@
 						else if(Tables[match]==Tables["Fuel types"])
 						{
 							var fuel=Tables.find(match,currentStage[match]);
-							ret+="<tr><td class=fuel><a href=fuelInfo.php>Fuel selected</a>:<td><b>"+fuel+"</b>";
+							ret+="<tr><td class=fuel><a href=variable.php?id="+match+">Fuel selected</a>:<td><b>"+fuel+"</b><td><a href=fuelInfo.php>(more info)</a>";
 							ret+="<tr><td class=fuel caption='Fuel density       '         >&emsp; · FD              <td>"+Tables["Fuel types"][fuel].FD             +"<td class=unit>kg/L";
 							ret+="<tr><td class=fuel caption='Net calorific value'         >&emsp; · NCV             <td>"+Tables["Fuel types"][fuel].NCV            +"<td class=unit>TJ/Gg";
 							ret+="<tr><td class=fuel caption='CO2 emission factor'         >&emsp; · EFCO2          <td>"+Tables["Fuel types"][fuel].EFCO2          +"<td class=unit>kg<sub>CO<sub>2</sub></sub>/TJ";

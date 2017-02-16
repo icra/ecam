@@ -94,9 +94,9 @@ var Formulas = {
 		result = result.replace(/}$/g,"")
 		result = result.replace(/^ {/g," ")
 		result = result.replace(/\*/g," * ")
-		result = result.replace(/\-/g," - ")
 		result = result.replace(/\+/g," + ")
 		result = result.replace(/\(\./g,"(")
+		result = result.replace(/\/\//g,"")
 		return result;
 	},
 

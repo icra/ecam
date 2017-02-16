@@ -578,7 +578,7 @@
 					elseif($level=="Waste" && $sublevel=="Collection")   $iwaLink.='stage/wastewater_collection';
 					elseif($level=="Waste" && $sublevel=="Treatment")    $iwaLink.='stage/wastewater_treatment';
 					elseif($level=="Waste" && $sublevel=="Discharge")    $iwaLink.='stage/wastewater_discharge';
-				?>&emsp;<a target=_blank href="<?php echo $iwaLink?>">description</a>
+				?>&emsp;<a target=_blank href="<?php echo $iwaLink?>">(Info)</a>
 			</span>
 			<?php 
 		}
@@ -1099,7 +1099,7 @@
 							var str=""+
 								"<button class=button onclick=level3.deleteSubstage("+s+") caption='<?php write('#level3_delete_substage')?>' style='margin:0;'>&#9003;</button>"+
 								"<br><br>"+
-								"<a href='substage.php?level=<?php echo $level?>&sublevel=<?php echo $sublevel?>&index="+s+"'>Summary</a>"+
+								"<a href='substage.php?level=<?php echo $level?>&sublevel=<?php echo $sublevel?>&index="+s+"'>Details</a>"+
 								"";
 							newCell.innerHTML=str
 						}

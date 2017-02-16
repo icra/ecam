@@ -1,9 +1,9 @@
 <?php
 	/* 
+		All substage's info
 		Inputs: level, sublevel, index
 	*/
 	if(!isset($_GET['index'])) die('index not defined');
-
 	$level    = $_GET['level'] or die('level not defined');
 	$sublevel = $_GET['sublevel'] or die ('sublevel not defined');
 	$index    = $_GET['index'];
@@ -12,7 +12,7 @@
 	<?php include'imports.php'?>
 	<script>
 		<?php
-			//establish the substage pointer and parent stage
+			//set the substage pointer and parent stage
 			echo "
 				var substage = Substages['$level']['$sublevel'][$index];
 				var sublevel = Global['$level']['$sublevel'];
@@ -28,6 +28,7 @@
 				if(typeof(sublevel[field])!="function") continue;
 				substage[field]=sublevel[field];
 			}
+			//redisplay table
 			updateSubstage();
 			Caption.listeners();
 			updateResult();
@@ -44,14 +45,11 @@
 				//new row
 				var newRow=t.insertRow(-1);
 
+				//description
+				newRow.setAttribute('caption', translate(field+"_descr"));
+
 				//code
 				newRow.insertCell(-1).innerHTML=field;
-
-				//description
-				newRow.insertCell(-1).innerHTML=(function()
-				{
-					return translate(field+"_descr")
-				})();
 
 				//value
 				newRow.insertCell(-1).innerHTML=(function()
@@ -63,7 +61,7 @@
 
 						if(Info[field].magnitude=="Option")
 						{
-							return "\""+Tables.find(field,value)+"\"";
+							return Tables.find(field,value);
 						}
 					}
 					else if(typeof(substage[field])=="function")
@@ -81,13 +79,6 @@
 			}
 		}
 	</script>
-</head><body onload=init()><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--navbar--><?php include'navbar.php'?>
-<!--linear--><?php include'linear.php'?>
-<!--caption--><?php include'caption.php'?>
-
-<!--TITLE-->
 	<style>
 		h1{
 			text-align: left;
@@ -95,7 +86,15 @@
 			border-bottom: 1px solid #ccc;
 			background: white;
 		}
+		#substage tr td:first-child {font-family:monospace;font-size:11px}
 	</style>
+</head><body onload=init()><center>
+<!--sidebar--><?php include'sidebar.php'?>
+<!--navbar--><?php include'navbar.php'?>
+<!--linear--><?php include'linear.php'?>
+<!--caption--><?php include'caption.php'?>
+
+<!--TITLE-->
 	<h1>
 		<a href=sources.php><script>document.write(Global.General.Name)</script></a> 
 		&rsaquo;
@@ -116,11 +115,14 @@
 	<a href=substages.php>&larr; Substages overview</a>
 </div>
 
+<!--subtitle-->
+<h3 style=text-align:center>All inputs and outputs from substage "<script>document.write(substage.name)</script>"</h3>
+
 <!--main container-->
 <div>
 	<!--substage table-->
 	<table id=substage style=margin:auto;margin-top:0.5em>
-		<tr><th>Variable<th>Description<th>Current Value<th>Units
+		<tr><th>Variable<th>Current Value<th>Units
 	</table>
 </div>
 <!--end main container-->

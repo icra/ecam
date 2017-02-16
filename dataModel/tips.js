@@ -9,6 +9,7 @@ var Tips = [
 	"Move the mouse over outputs to highlight related inputs",
 	"Move the mouse over active questions to highlight related inputs and outputs",
 	"Use your browser's fullscreen mode to work more comfortably",
+	"Move the mouse over an output to see its formula",
 ];
 
 Tips.random=function()
