@@ -209,6 +209,7 @@
 		}
 	</script>
 	<script>
+		//"fake" input that updates an output
 		BEV.updateOutput=function(input)
 		{
 			var field=input.id;
@@ -223,6 +224,7 @@
 				var wst=Global.Configuration.ActiveStages.waterTre;
 				var wsd=Global.Configuration.ActiveStages.waterDis;
 				var n=wsa+wst+wsd;
+				if(n==0){alert("Error: no Water stages active, go back to Configuration");return}
 				Global.Water.Abstraction [field.replace("ws_","wsa_")]=wsa*value/n;
 				Global.Water.Treatment   [field.replace("ws_","wst_")]=wst*value/n;
 				Global.Water.Distribution[field.replace("ws_","wsd_")]=wsd*value/n;
@@ -234,6 +236,7 @@
 				var wwt=Global.Configuration.ActiveStages.wasteTre;
 				var wwd=Global.Configuration.ActiveStages.wasteDis;
 				var n=wwc+wwt+wwd;
+				if(n==0){alert("Error: no Wastewater stages active, go back to Configuration");return}
 				Global.Waste.Collection[field.replace("ww_","wwc_")]=wwc*value/n;
 				Global.Waste.Treatment [field.replace("ww_","wwt_")]=wwt*value/n;
 				Global.Waste.Discharge [field.replace("ww_","wwd_")]=wwd*value/n;

@@ -396,7 +396,7 @@
 	table#inputs .non-editable {
 		text-align:center;
 		cursor:pointer;
-		transition:all 1s;
+		transition:background 1s;
 	}
 	#inputs .non-editable:hover {
 		background:#eaeeea;

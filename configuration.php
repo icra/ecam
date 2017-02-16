@@ -248,13 +248,14 @@
 	<fieldset>
 		<legend>Select country
 			<select id=country onchange=selectCountry(this)>
-				<option>--select--</option>
+				<option value="false">--select--</option>
 				<script>for(var country in Countries){document.write("<option>"+country)}</script>
 			</select>
 			<script>
 				function selectCountry(select)
 				{
 					var country=select.value
+					if(country=="false") return;
 					Global.General.Country=country;
 					Global.Configuration.Selected.wwc_prot_con=country;
 					['conv_kwh_co2','wwc_prot_con','wwc_bod_pday'].forEach(function(code)
@@ -281,10 +282,6 @@
 				<td>BOD5 per person per day
 				<td><input id=wwc_bod_pday onchange="update(Global.Waste.Collection,'wwc_bod_pday',this.value)">
 				<td>g/person/day
-			<tr style=display:none><!--TODO-->
-				<td>Global Warming Potential
-				<td><input id=gwp          onchange="update(Global.General,'gwp',this.value)">
-				<td>gwp units
 		</table>
 
 	</fieldset>

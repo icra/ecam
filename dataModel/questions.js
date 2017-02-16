@@ -91,7 +91,6 @@ var Questions = {
 			"wst_nrg_disn",
 			"wst_KPI_nrg_disnfc",
 			"wst_KPI_slu_per_m3",
-			"wst_mass_slu",
 		],
 		advanced:1,
 		otherQuestions:[ ],
@@ -166,6 +165,7 @@ var Questions = {
 		advanced:0,
 		otherQuestions:[],
 	},
+
 	"wwc_pumping":{
 		variables:[
 			"wwc_vol_pump",
@@ -176,6 +176,7 @@ var Questions = {
 			"wwc_pumping_efficiency",
 		],
 	},
+
 	"wwc_pumping_efficiency": {
 		variables:[
 			"wwc_pmp_head",
@@ -188,6 +189,7 @@ var Questions = {
 		advanced:1,
 		otherQuestions:[],
 	},
+
 	"wwc_water_eff": {
 		variables:[
 			"wwc_wet_flow",
@@ -204,11 +206,24 @@ var Questions = {
 	},
 
 	//wwt
+	"wwt_engines":{
+		variables:[
+			"wwt_fuel_typ",
+			"wwt_vol_fuel",
+			"wwt_KPI_GHG_fuel",
+		],
+		advanced:0,
+		otherQuestions:[],
+	},
+
 	"wwt_producing_biogas":{
 		variables:[
 			"wwt_biog_pro",
 			"wwt_ch4_biog",
 			"c_wwt_biog_fla",
+			"wwt_dige_typ",
+			"wwt_fuel_dig",
+			"wwt_KPI_GHG_dig_fuel",
 			"wwt_KPI_biog_x_bod",
 			"wwt_KPI_GHG_biog",
 		],
@@ -217,6 +232,7 @@ var Questions = {
 			"wwt_valorizing_biogas",
 		],
 	},
+
 	"wwt_valorizing_biogas":{
 		variables:[
 			"wwt_biog_val",
@@ -228,11 +244,19 @@ var Questions = {
 		advanced:0,
 		otherQuestions:[],
 	},
-	"wwt_engines":{
+
+	"wwt_slu_storage":{
 		variables:[
-			"wwt_fuel_typ",
-			"wwt_vol_fuel",
-			"wwt_KPI_GHG_fuel",
+			"wwt_dryw_slu",
+			"wwt_mass_slu_sto",
+			"wwt_time_slu_sto",
+			"c_wwt_ch4_pot",
+			"c_wwt_slu_c",
+			"c_wwt_slu_n",
+			"c_wwt_slu_cn",
+			"wwt_KPI_GHG_sto_ch4",
+			"wwt_KPI_GHG_sto_n2o",
+			"wwt_KPI_GHG_sto_co2eq",
 		],
 		advanced:0,
 		otherQuestions:[],
@@ -240,40 +264,19 @@ var Questions = {
 
 	"wwt_sludge_mgmt":{
 		variables:[
-			"wwt_mass_slu",
-			"wwt_dryw_slu",
-			"wwt_slu_disp",
 			"wwt_slu_type",
-			"wwt_fuel_dig",
 			"wwt_mass_slu_app",
 			"wwt_mass_slu_comp",
-			"wwt_mass_slu_inc",
 			"wwt_mass_slu_land",
-			"wwt_mass_slu_sto",
 			"wwt_mass_slu_stock",
-			"wwt_nrg_inc",
-			"wwt_temp_inc",
-			"wwt_time_slu_sto",
 			"wwt_time_slu_stock",
 			"wwt_vol_fuel_app",
 			"wwt_soil_typ",
 			"wwt_nrg_app",
-			"c_wwt_ch4_pot",
-			"c_wwt_slu_c",
-			"c_wwt_slu_n",
-			"c_wwt_slu_cn",
-			"wwt_KPI_GHG_dig_fuel",
-			"wwt_KPI_GHG_sto_ch4",
-			"wwt_KPI_GHG_sto_n2o",
-			"wwt_KPI_GHG_sto_co2eq",
 			"wwt_KPI_GHG_comp_co2",
 			"wwt_KPI_GHG_comp_ch4",
 			"wwt_KPI_GHG_comp_n2o",
 			"wwt_KPI_GHG_comp_co2eq",
-			"wwt_KPI_GHG_inc_co2",
-			"wwt_KPI_GHG_inc_ch4",
-			"wwt_KPI_GHG_inc_n2o",
-			"wwt_KPI_GHG_inc_co2eq",
 			"wwt_KPI_GHG_app_co2",
 			"wwt_KPI_GHG_app_n2o",
 			"wwt_KPI_GHG_app_co2eq",
@@ -286,7 +289,24 @@ var Questions = {
 			"wwt_dige_typ",	
 			"wwt_appl_typ",
 		],
-		advanced:1,
+		advanced:0,
+		otherQuestions:[
+			"wwt_incineration",
+			"wwt_trucks",
+		],
+	},
+
+	"wwt_incineration":{
+		variables:[
+			"wwt_mass_slu_inc",
+			"wwt_nrg_inc",
+			"wwt_temp_inc",
+			"wwt_KPI_GHG_inc_co2",
+			"wwt_KPI_GHG_inc_ch4",
+			"wwt_KPI_GHG_inc_n2o",
+			"wwt_KPI_GHG_inc_co2eq",
+		],
+		advanced:0,
 		otherQuestions:[
 			"wwt_trucks",
 		],
@@ -302,6 +322,7 @@ var Questions = {
 		advanced:1,
 		otherQuestions:[],
 	},
+
 
 	"wwt_pumping_efficiency":{
 		variables:[
