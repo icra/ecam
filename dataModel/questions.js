@@ -253,8 +253,8 @@ var Questions = {
 			"c_wwt_slu_c",
 			"c_wwt_slu_n",
 			"c_wwt_slu_cn",
-			"wwt_KPI_GHG_sto_ch4",
-			"wwt_KPI_GHG_sto_n2o",
+			"wwt_slu_storage_ch4",
+			"wwt_slu_storage_n2o",
 			"wwt_KPI_GHG_sto_co2eq",
 		],
 		advanced:0,
@@ -263,7 +263,6 @@ var Questions = {
 
 	"wwt_sludge_mgmt":{
 		variables:[
-			"wwt_KPI_GHG_disp_co2eq",
 			"wwt_KPI_GHG_slu",
 		],
 		advanced:0,
@@ -293,7 +292,6 @@ var Questions = {
 
 	"wwt_stockpiling":{
 		variables:[
-			"wwt_KPI_GHG_land_co2eq",
 			"wwt_mass_slu_stock",
 			"wwt_time_slu_stock",
 			"wwt_KPI_GHG_stock_co2eq",

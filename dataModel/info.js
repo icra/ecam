@@ -283,8 +283,8 @@ var Info = {
 	"c_wwt_slu_n":{magnitude:"Mass",unit:"kg"},
 	"c_wwt_slu_cn":{magnitude:"Mass/Mass",unit:"kg C / kg N"},
 	"wwt_KPI_GHG_dig_fuel":{magnitude:"Mass",unit:"kg"},
-	"wwt_KPI_GHG_sto_ch4":{magnitude:"Mass",unit:"kg"},
-	"wwt_KPI_GHG_sto_n2o":{magnitude:"Mass",unit:"kg"},
+	"wwt_slu_storage_ch4":{magnitude:"Mass",unit:"kg"},
+	"wwt_slu_storage_n2o":{magnitude:"Mass",unit:"kg"},
 	"wwt_KPI_GHG_sto_co2eq":{magnitude:"Mass",unit:"kg"},
 	"wwt_KPI_GHG_comp_co2":{magnitude:"Mass",unit:"kg"},
 	"wwt_KPI_GHG_comp_ch4":{magnitude:"Mass",unit:"kg"},
@@ -301,7 +301,6 @@ var Info = {
 	"wwt_KPI_GHG_land_ch4":{magnitude:"Mass",unit:"kg"},
 	"wwt_KPI_GHG_land_n2o":{magnitude:"Mass",unit:"kg"},
 	"wwt_KPI_GHG_land_co2eq":{magnitude:"Mass",unit:"kg"},
-	"wwt_KPI_GHG_disp_co2eq":{magnitude:"Mass",unit:"kg"},
 	"wwt_KPI_GHG_slu":{magnitude:"Mass",unit:"kg"},
 
 	//L2 Wastewater Discharge

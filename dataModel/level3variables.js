@@ -111,8 +111,6 @@ Level3.list=
 	"wwt_KPI_std_nrg_cons",
 	"wwt_KPI_std_elec_eff",
 	"wwt_KPI_slu_per_wwm3",
-	"wwt_KPI_GHG_sto_ch4",
-	"wwt_KPI_GHG_sto_n2o",
 	"wwt_KPI_GHG_comp_co2",
 	"wwt_KPI_GHG_comp_ch4",
 	"wwt_KPI_GHG_comp_n2o",
@@ -128,7 +126,6 @@ Level3.list=
 	"wwt_KPI_GHG_land_ch4",
 	"wwt_KPI_GHG_land_n2o",
 	"wwt_KPI_GHG_land_co2eq",
-	"wwt_KPI_GHG_disp_co2eq",
 
 	//wwd
 	"wwd_vol_nonp",//Volume of water reused
