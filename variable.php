@@ -221,6 +221,7 @@
 			newCell.className='th';
 			newCell.innerHTML="Current value";
 			newCell=newRow.insertCell(-1);
+			newCell.style.fontSize="18px";
 			if(typeof(currentStage[id])=="function")
 			{
 				newCell.innerHTML=(function()
@@ -313,7 +314,7 @@
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
-			newCell.innerHTML="<?php write('#variable_is_used_to_calculate')?>"
+			newCell.innerHTML="Outputs that use this value"
 			newCell=newRow.insertCell(-1)
 			newCell.innerHTML=(function()
 			{

@@ -36,6 +36,7 @@ var Units =
 		min:60,
 		hour:3600,
 		day:86400,
+		month:365*86400/12,
 	},
 	//derived magnitudes from mass,distance and time
 	"Volume":{ 

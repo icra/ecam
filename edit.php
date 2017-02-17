@@ -780,9 +780,9 @@
 				<!--level2 GHG outputs-->
 				<table id=outputs style="width:100%;background:#f6f6f6;">
 					<tr><th colspan=7 class=tableHeader>
-						OUTPUTS — <?php write('#edit_ghg_emissions')?> 
+						OUTPUTS — GHG emissions (kg CO<sub>2</sub>)
 					<tr>
-						<th>GHG <?php write('#edit_origin')?>
+						<th>Origin
 						<th>kg CO<sub>2</sub><br>whole period
 						<th>kg CO<sub>2</sub><br>per <?php write('#year')?>
 						<th>kg CO<sub>2</sub><br>per <?php write('#year')?><br>per inhab

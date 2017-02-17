@@ -247,7 +247,6 @@ var Questions = {
 
 	"wwt_slu_storage":{
 		variables:[
-			"wwt_dryw_slu",
 			"wwt_mass_slu_sto",
 			"wwt_time_slu_sto",
 			"c_wwt_ch4_pot",
@@ -264,35 +263,72 @@ var Questions = {
 
 	"wwt_sludge_mgmt":{
 		variables:[
-			"wwt_slu_type",
-			"wwt_mass_slu_app",
-			"wwt_mass_slu_comp",
-			"wwt_mass_slu_land",
-			"wwt_mass_slu_stock",
-			"wwt_time_slu_stock",
-			"wwt_vol_fuel_app",
-			"wwt_soil_typ",
-			"wwt_nrg_app",
-			"wwt_KPI_GHG_comp_co2",
-			"wwt_KPI_GHG_comp_ch4",
-			"wwt_KPI_GHG_comp_n2o",
-			"wwt_KPI_GHG_comp_co2eq",
-			"wwt_KPI_GHG_app_co2",
-			"wwt_KPI_GHG_app_n2o",
-			"wwt_KPI_GHG_app_co2eq",
-			"wwt_KPI_GHG_stock_co2eq",
-			"wwt_KPI_GHG_land_ch4",
-			"wwt_KPI_GHG_land_n2o",
-			"wwt_KPI_GHG_land_co2eq",
 			"wwt_KPI_GHG_disp_co2eq",
 			"wwt_KPI_GHG_slu",
-			"wwt_dige_typ",	
-			"wwt_appl_typ",
 		],
 		advanced:0,
 		otherQuestions:[
 			"wwt_incineration",
-			"wwt_trucks",
+			"wwt_composting",
+			"wwt_land_application",
+			"wwt_landfilling",
+			"wwt_stockpiling",
+			"wwt_trucks",//TODO
+		],
+	},
+	
+	"wwt_landfilling":{ 
+		variables:[
+			"wwt_mass_slu_land",
+			"wwt_dryw_slu",
+			"wwt_slu_type",
+			"wwt_KPI_GHG_land_ch4",
+			"wwt_KPI_GHG_land_n2o",
+			"wwt_KPI_GHG_land_co2eq",
+		],
+		advanced:0,
+		otherQuestions:[
+		],
+	},
+
+	"wwt_stockpiling":{
+		variables:[
+			"wwt_KPI_GHG_land_co2eq",
+			"wwt_mass_slu_stock",
+			"wwt_time_slu_stock",
+			"wwt_KPI_GHG_stock_co2eq",
+		],
+		advanced:0,
+		otherQuestions:[
+		],
+	},
+
+	"wwt_land_application":{
+		variables:[
+			"wwt_mass_slu_app",
+			"wwt_appl_typ",
+			"wwt_vol_fuel_app",
+			"wwt_soil_typ",
+			"wwt_nrg_app",
+			"wwt_KPI_GHG_app_co2",
+			"wwt_KPI_GHG_app_n2o",
+			"wwt_KPI_GHG_app_co2eq",
+		],
+		advanced:0,
+		otherQuestions:[
+		],
+	},
+
+	"wwt_composting":{
+		variables:[
+			"wwt_mass_slu_comp",
+			"wwt_KPI_GHG_comp_co2",
+			"wwt_KPI_GHG_comp_ch4",
+			"wwt_KPI_GHG_comp_n2o",
+			"wwt_KPI_GHG_comp_co2eq",
+		],
+		advanced:0,
+		otherQuestions:[
 		],
 	},
 
@@ -308,7 +344,6 @@ var Questions = {
 		],
 		advanced:0,
 		otherQuestions:[
-			"wwt_trucks",
 		],
 	},
 

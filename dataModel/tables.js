@@ -100,8 +100,7 @@ var Tables =
 	},
 	"wwt_slu_disp":{
 		"Primary":{value:0},
-		"Secondary Non-digested":{value:1},
-		"Digested":{value:2},
+		"Digested":{value:1},
 	},
 	"wwt_slu_type":{
 		"Land application":{value:0},
@@ -110,7 +109,8 @@ var Tables =
 		"Covered landfill (flaring)":{value:3},
 		"Incineration with heat recovery":{value:4},
 		"Composting":{value:5},
-		"Other":{value:6},
+		"Stockpiling":{value:6},
+		"Other":{value:7},
 	},
 	"wwt_soil_typ":{
 		"Fine-Textured":{value:0},
