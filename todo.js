@@ -13,8 +13,7 @@ var TODO = {
 	],
 	Back://back-end
 	[
-		"[BUG]         When user clicks on sum of values in edit.php and section is closed, the section turns blank. Solution: open it when clicking on input",
-		"[BUG]         If the user does not activate at least one of the six stages in Configuration (Abstraction, Treatment, etc), errors happen in global ghg",
+		"[WAIT]        I had specified that new codes had to be the same length in characters, in sludge management they are longer and this creates visualization problems",
 		"[WAITING IWA] Sludge management check implementation",
 		"[WAITING IWA] Infiltration and inflow is not clear",
 		"[WAITING IWA] CH4 emission factor for 'Anaerobic Lagoon covered' treatment type",

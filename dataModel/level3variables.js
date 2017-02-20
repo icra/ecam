@@ -106,7 +106,6 @@ Level3.list=
 	"wwt_KPI_nrg_per_pump",
 	"wwt_KPI_std_nrg_cons",
 	"wwt_KPI_std_elec_eff",
-	"wwt_KPI_slu_per_wwm3",
 	"wwt_KPI_GHG_sto_co2eq",
 	"wwt_KPI_GHG_comp_co2eq",
 	"wwt_KPI_GHG_inc_co2eq",

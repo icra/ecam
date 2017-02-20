@@ -62,7 +62,7 @@
 	"#index_first_time_using":"First time using ECAM Web Tool? Click on 'New' or learn more in ",
 	"#index_web_tool":"Web tool",
 	"#index_description":"This tool evaluates utilities's operations in terms of GHG emissions and energy usage based on their own data.<br>ECAM is part of the knowledge platform provided by the <a target=_blank href='http://www.iwa-network.org/WaCCliM/'>WaCCliM project</a>. This tool is free and <a href=http://github.com/holalluis/ecam>open source</a>.",
-	"#index_chrome_warning":"Please use Google Chrome browser. Other browsers may not work as expected.",
+	"#index_chrome_warning":"Please use Google Chrome browser. It is not optimized for other browsers.",
 	"#index_latest_update":"Latest update",
 	"#about_credits":" ",
 	"#about_graphs_lib":"Graphs: ",
@@ -197,7 +197,7 @@
 	"#wwt_valorizing_biogas":"Are you valorizing biogas",
 
 	"#wwt_sludge_mgmt":     "Evaluate sludge management (SM)",
-	"#wwt_slu_storage":     "[SM] Evaluate sludge storing in WWTP",
+	"#wwt_slu_storage":     "[SM] Evaluate sludge storage in WWTP",
 	"#wwt_incineration":    "[SM] Is sludge sent to incinerate",
 	"#wwt_composting":      "[SM] Is sludge sent to composting",
 	"#wwt_land_application":"[SM] Is sludge sent to land application",

@@ -291,7 +291,7 @@
 						<img src=img/inhabitants.png width=25 caption="Water supply population" style=vertical-align:middle>
 						<b caption="Serviced population">
 							<script>document.write(Global.Water.ws_serv_pop)</script>
-						</b>/
+						</b>|
 						<b caption="Resident population">
 							<script>document.write(Global.Water.ws_resi_pop)</script>
 						</b>
@@ -301,8 +301,8 @@
 					<tr stage=water class=hidden><td>Volume of fuel consumed<td class=output><input id='ws_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
 					<tr stage=water class=hidden> <td>Total water abstracted <td class=input><input id='wsa_vol_conv' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
 					<tr stage=water class=hidden><td><?php write('#birds_ws_vol_auth')?> <td class=input><input id='wsd_auth_con' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
-					<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
 					<tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
+					<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
 					<tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 				<!--WASTEWATER-->
 				<tr><th colspan=3 style=background:#d71d24>
@@ -313,10 +313,10 @@
 						<img src=img/inhabitants.png width=25 caption="Wastewater population" style="vertical-align:middle">
 						<b caption="Serviced population">
 							<script>document.write(Global.Waste.ww_serv_pop)</script>
-						</b>/<!--
+						</b>|<!--
 						--><b caption="Connected population">
 							<script>document.write(Global.Waste.ww_conn_pop)</script>
-						</b>/<!--
+						</b>|<!--
 						--><b caption="Resident population">
 							<script>document.write(Global.Waste.ww_resi_pop)</script>
 						</b>
@@ -333,8 +333,8 @@
 						<span class=circle style=background:#89375c></span>
 
 					<!--energy costs-->
-					<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?><td class=input><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
 					<tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?><td class=input><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
+					<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?><td class=input><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
 
 					<!--wwc protein consumption-->
 					<tr stage=waste class=hidden><td><?php write('#birds_ww_prot_con')?>

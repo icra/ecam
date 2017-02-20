@@ -373,7 +373,7 @@
 					var description = translate(field+"_descr");
 					var color = field.search(/^ww/)==0 ? "#d71d24" : "";
 					var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
-					var nrg="<span class='advanced nrg'>NRG</span>";
+					var nrg="<span class='advanced nrg' caption='Energy performance'>NRG</span>";
 					return description+"<br>("+code+")"+nrg;
 				})();
 
@@ -1288,7 +1288,7 @@
 			</div>
 
 			<!--substage inputs-->
-			<div class="card" style="text-align:left">
+			<div id=substageInputs_container class="card" style="text-align:left">
 				<?php 
 					cardMenu(" <b>Advanced Assessment: Substages</b>
 						&mdash; 

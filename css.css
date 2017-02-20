@@ -27,7 +27,7 @@ tr[hl=no]{background:default}
 tr[hl_output=yes]{background:orange;color:black}
 tr[hl_output=no]{background:default}
 tr[hl], tr[hl_output]{
-	transition:background 1.1s,color 1.1s;
+	transition:background 0.8s,color 0.8s;
 }
 span.estimated{color:red;font-size:16px;cursor:help}
 

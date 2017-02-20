@@ -162,7 +162,6 @@
 			<tr><td><a href=summary.php?type=ccvv>All calculated variables</a>
 			<tr><td><a href=constants.php>All constants</a>
 			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
-			<tr><th><?php write("#opportunities")?>
 			<tr><td><a href=opps.php><?php write("#opportunities")?></a>
 			<tr><th>
 		</table>

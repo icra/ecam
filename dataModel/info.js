@@ -254,7 +254,6 @@ var Info = {
 	wwt_KPI_nrg_per_pump:{magnitude:"Energy/Volume",unit:"kWh/m3"},
 	wwt_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m"},
 	wwt_KPI_std_elec_eff:{magnitude:"Percentage",unit:"%"},
-	wwt_KPI_slu_per_wwm3:{magnitude:"Mass/Volume",unit:"kg/m<sup>3</sup>"},
 
 	wwt_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},

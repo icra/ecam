@@ -233,6 +233,9 @@
 				newCell.classList.add('non-editable');
 				newCell.onclick=function()
 				{
+					//make sure that section is not folded
+					document.querySelector('#substageInputs_container').classList.remove('folded');
+
 					//navigate to substages to modify the input
 					var f=this.parentNode.getAttribute('field');
 					var sscon=document.querySelector('#substages').parentNode;
@@ -345,6 +348,11 @@
 		newCell.innerHTML=(function()
 		{
 			var ret="";
+			if(checked)
+			{
+				var expanded = Expanded[question] || 0;
+				ret+="<span style=float:left;cursor:pointer onclick=level2.toggleQuestionVisibility(this,'"+question+"') expanded="+expanded+">&#9660;</span>"
+			}
 			ret+=translate(question)+"?";
 			return ret;
 		})()
@@ -361,11 +369,6 @@
 			"&emsp; "+
 			"<label>Yes <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',1) "+checked_y+"></label>"+
 			"";
-			if(checked)
-			{
-				var expanded = Expanded[question] || 0;
-				str+="<span style='float:right;cursor:pointer;' onclick=level2.toggleQuestionVisibility(this,'"+question+"') expanded="+expanded+">&#9660;</span>"
-			}
 			return str;
 		})();
 
