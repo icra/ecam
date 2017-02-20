@@ -4,10 +4,9 @@
 	span[expanded='0']{transform:rotate(-90deg);}
 </style>
 <script>
-	//namespace to remember folding
-	var Folding={
-		//TODO unfinished
-		"question":1,
+	//namespace to remember folding of questions (not saved to cookies)
+	var Expanded={
+		//"question":1,
 	}
 </script>
 <script>
@@ -15,19 +14,19 @@
 
 	level2.toggleQuestionVisibility=function(btn,question)
 	{
-		var currentState=btn.getAttribute('expanded'); //1 or 0;
+		var currentState=Expanded[question]||0;
 
-		//CSS visual effect
-		if(currentState=="1") {btn.setAttribute('expanded','0')}
-		else                  {btn.setAttribute('expanded','1')}
+		//toggle html attribute
+		if(currentState) {btn.setAttribute('expanded','0')}
+		else             {btn.setAttribute('expanded','1')}
 
-		//modify "Folding" object
-		if(currentState=="1") {Folding[question]=1}
-		else                  {Folding[question]=0}
+		//modify "Expanded" object
+		if(currentState) {Expanded[question]=0}
+		else             {Expanded[question]=1}
 
 		//hide or show fields
 		var trs=document.querySelectorAll('tr[field][question='+question+']');
-		var newDisplay= trs[0].style.display=='none' ? '':'none';
+		var newDisplay = currentState ? 'none':'';
 		for(var i=0;i<trs.length;i++)
 		{
 			trs[i].style.display=newDisplay;
@@ -107,7 +106,14 @@
 		newRow.setAttribute('field',code);
 
 		//question it belongs to
-		if(question)newRow.setAttribute('question',question);
+		if(question)
+		{
+			newRow.setAttribute('question',question)
+			if(!Expanded[question])
+			{
+				newRow.style.display='none';
+			}
+		}
 
 		/*1st cell: show code*/
 		var newCell=document.createElement('th');
@@ -168,11 +174,15 @@
 		var t=table;
 		var newRow=t.insertRow(-1);
 
-		//question it belongs //TODO
-		if(question) newRow.setAttribute('question',question)
-		var display='';
-		if(question && Folding[question]==1)display='none';
-		newRow.style.display=display;
+		//question it belongs
+		if(question)
+		{
+			newRow.setAttribute('question',question)
+			if(!Expanded[question])
+			{
+				newRow.style.display='none';
+			}
+		}
 
 		/*class*/
 		if(isCV) newRow.classList.add('isCV');
@@ -353,7 +363,8 @@
 			"";
 			if(checked)
 			{
-				str+="<span style='float:right;cursor:pointer;' onclick=level2.toggleQuestionVisibility(this,'"+question+"') expanded=1>&#9660;</span>"
+				var expanded = Expanded[question] || 0;
+				str+="<span style='float:right;cursor:pointer;' onclick=level2.toggleQuestionVisibility(this,'"+question+"') expanded="+expanded+">&#9660;</span>"
 			}
 			return str;
 		})();

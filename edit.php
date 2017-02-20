@@ -698,7 +698,10 @@
 
 		function setQuestion(question,newValue) {
 			if(newValue)
+			{
 				Global.Configuration['Yes/No'][question]=1;
+				Expanded[question]=1;//start by showing the new variables
+			}
 			else //if(confirm("WARNING! Inputs from this question will be reseted to zero. Continue?"))
 				Global.Configuration['Yes/No'][question]=0;
 

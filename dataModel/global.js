@@ -374,10 +374,7 @@ var Global={
 					return f*this.c_wwt_ch4_pot();
 				},
 				wwt_slu_storage_n2o:function(){
-					if(this.wwt_KPI_dry_sludge()>0.55*this.wwt_mass_slu) 
-					{
-						return 0
-					}
+					if(this.wwt_dryw_slu > 0.55*this.wwt_mass_slu){return 0}
 					else
 					{
 						return this.wwt_mass_slu_sto/1005*0.95*4.3/1e7*103

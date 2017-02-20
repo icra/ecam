@@ -256,6 +256,7 @@ var Questions = {
 		"wwt_sludge_mgmt":{
 			variables:[
 				"wwt_mass_slu",
+				"wwt_dryw_slu",
 				"wwt_slu_disp",
 				"c_wwt_slu_c",
 				"c_wwt_slu_n",
@@ -334,7 +335,6 @@ var Questions = {
 		"wwt_landfilling":{ 
 			variables:[
 				"wwt_mass_slu_land",
-				"wwt_dryw_slu",
 				"wwt_slu_type",
 				"wwt_slu_landfill_ch4",
 				"wwt_slu_landfill_n2o",
