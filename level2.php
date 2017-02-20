@@ -1,6 +1,38 @@
 <!--fragment inside edit.php-->
+<style>
+	span[expanded]{transition:transform 0.15s;}
+	span[expanded='0']{transform:rotate(-90deg);}
+</style>
+<script>
+	//namespace to remember folding
+	var Folding={
+		//TODO unfinished
+		"question":1,
+	}
+</script>
 <script>
 	var level2 = {};//namespace
+
+	level2.toggleQuestionVisibility=function(btn,question)
+	{
+		var currentState=btn.getAttribute('expanded'); //1 or 0;
+
+		//CSS visual effect
+		if(currentState=="1") {btn.setAttribute('expanded','0')}
+		else                  {btn.setAttribute('expanded','1')}
+
+		//modify "Folding" object
+		if(currentState=="1") {Folding[question]=1}
+		else                  {Folding[question]=0}
+
+		//hide or show fields
+		var trs=document.querySelectorAll('tr[field][question='+question+']');
+		var newDisplay= trs[0].style.display=='none' ? '':'none';
+		for(var i=0;i<trs.length;i++)
+		{
+			trs[i].style.display=newDisplay;
+		}
+	}
 
 	/** 
 	 * Transform a <td> cell to a <input> to make modifications in the Global object
@@ -62,7 +94,10 @@
 	}
 
 	//draw a dropdown menu in inputs table
-	level2.createDropdown=function(field,table) {
+	level2.createDropdown=function(field,table,question) {
+
+		question=question||false; //question it belongs to
+
 		var code=field;
 		var t=table;
 
@@ -70,6 +105,9 @@
 		/*new row*/
 		var newRow=t.insertRow(-1);
 		newRow.setAttribute('field',code);
+
+		//question it belongs to
+		if(question)newRow.setAttribute('question',question);
 
 		/*1st cell: show code*/
 		var newCell=document.createElement('th');
@@ -110,10 +148,13 @@
 	}
 
 	//draw an input in inputs table
-	level2.createInput=function(field,table) {
+	level2.createInput=function(field,table,question) {
+		
+		question=question||false; //code of the question it belongs to
+
 		//if dropdown, call create dropdown instead
 		if(Info[field] && Info[field].magnitude=="Option") {
-			level2.createDropdown(field,table);
+			level2.createDropdown(field,table,question);
 			return;
 		};
 
@@ -126,6 +167,12 @@
 		/*new row*/
 		var t=table;
 		var newRow=t.insertRow(-1);
+
+		//question it belongs //TODO
+		if(question) newRow.setAttribute('question',question)
+		var display='';
+		if(question && Folding[question]==1)display='none';
+		newRow.style.display=display;
 
 		/*class*/
 		if(isCV) newRow.classList.add('isCV');
@@ -189,7 +236,7 @@
 			else //normal case: substages==1, user can modify level2
 			{
 				newCell.classList.add("input");
-				newCell.title="<?php write('#edit_click_to_modify')?>";
+				newCell.setAttribute('caption',"<?php write('#edit_click_to_modify')?>");
 				newCell.setAttribute('onclick','level2.transformField(this)');
 			}
 		}
@@ -285,7 +332,12 @@
 		newCell.colSpan=2;
 		newCell.style.paddingRight="1em";
 		newCell.style.textAlign="right";
-		newCell.innerHTML=translate(question)+"?";
+		newCell.innerHTML=(function()
+		{
+			var ret="";
+			ret+=translate(question)+"?";
+			return ret;
+		})()
 
 		//2nd cell: show yes no
 		var newCell=newRow.insertCell(-1);
@@ -299,6 +351,10 @@
 			"&emsp; "+
 			"<label>Yes <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',1) "+checked_y+"></label>"+
 			"";
+			if(checked)
+			{
+				str+="<span style='float:right;cursor:pointer;' onclick=level2.toggleQuestionVisibility(this,'"+question+"') expanded=1>&#9660;</span>"
+			}
 			return str;
 		})();
 
@@ -308,7 +364,7 @@
 				/*check if level3 only*/
 				if((Level3.list.indexOf(field)+1)==0)
 				{
-					level2.createInput(field,table);
+					level2.createInput(field,table,question);
 				}
 			});
 		}

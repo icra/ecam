@@ -84,10 +84,6 @@ Level3.list=
 	"wwc_nrg_pump",
 
 	//wwt
-	"wwt_slu_disp",
-	"wwt_trck_typ",
-	"wwt_num_trip",
-	"wwt_dist_dis",
 	"wwt_tst_cmpl",
 	"wwt_tst_cond",
 	"wwt_trea_cap",
@@ -111,21 +107,13 @@ Level3.list=
 	"wwt_KPI_std_nrg_cons",
 	"wwt_KPI_std_elec_eff",
 	"wwt_KPI_slu_per_wwm3",
-	"wwt_KPI_GHG_comp_co2",
-	"wwt_KPI_GHG_comp_ch4",
-	"wwt_KPI_GHG_comp_n2o",
+	"wwt_KPI_GHG_sto_co2eq",
 	"wwt_KPI_GHG_comp_co2eq",
-	"wwt_KPI_GHG_inc_co2",
-	"wwt_KPI_GHG_inc_ch4",
-	"wwt_KPI_GHG_inc_n2o",
 	"wwt_KPI_GHG_inc_co2eq",
-	"wwt_KPI_GHG_app_co2",
-	"wwt_KPI_GHG_app_n2o",
 	"wwt_KPI_GHG_app_co2eq",
 	"wwt_KPI_GHG_stock_co2eq",
-	"wwt_KPI_GHG_land_ch4",
-	"wwt_KPI_GHG_land_n2o",
 	"wwt_KPI_GHG_land_co2eq",
+	"wwt_KPI_GHG_tsludge",
 
 	//wwd
 	"wwd_vol_nonp",//Volume of water reused

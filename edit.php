@@ -705,7 +705,8 @@
 			//reset variables if checked=false
 			if(!newValue) {
 				//reset variables to zero
-				for(var i in Questions[question].variables) {
+				for(var i in Questions[question].variables) 
+				{
 					var code=Questions[question].variables[i];
 					if(typeof(CurrentLevel[code])=="number") 
 					{
@@ -718,12 +719,15 @@
 					}
 				}
 				//reset a les otherQuestions
-				for(var i in Questions[question].otherQuestions) {
+				for(var i in Questions[question].otherQuestions) 
+				{
 					var code_q=Questions[question].otherQuestions[i];
 					Global.Configuration["Yes/No"][code_q]=0;
+
 					//reset a les variables de les otherQuestions
-					for(var j in Questions[code_q].variables) {
-						var code_v=Questions[question].variables[j];
+					for(var j in Questions[code_q].variables) 
+					{
+						var code_v=Questions[code_q].variables[j];
 						if(typeof(CurrentLevel[code_v])=="number") 
 						{
 							CurrentLevel[code_v]=0;

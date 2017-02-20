@@ -13,8 +13,10 @@ var TODO = {
 	],
 	Back://back-end
 	[
-		"[BUG]         when user clicks on sum of values in edit.php and section is closed, the section turns blank. Solution: open it when clicking on input",
+		"[WAITING IWA] CH4 emission factor for 'Anaerobic Lagoon covered' treatment type",
+		"[BUG]         When user clicks on sum of values in edit.php and section is closed, the section turns blank. Solution: open it when clicking on input",
 		"[BUG]         If the user does not activate at least one of the six stages in Configuration (Abstraction, Treatment, etc), errors happen in global ghg",
+		"[WAITING IWA] How to address sludge transport",
 		"[WAITING IWA] Sludge management check implementation iteration 1",
 		"[WAITING IWA] Infiltration and inflow is not clear",
 		"[WAITING IWA] Formula for <a href=variable.php?id=wwd_KPI_nrg_sav>wwd_KPI_nrg_sav</a>",
