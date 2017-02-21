@@ -14,7 +14,7 @@
 
 	level2.toggleQuestionVisibility=function(btn,question)
 	{
-		var currentState=Expanded[question]||0;
+		var currentState=Expanded[question]||1;//expanded by default
 
 		//toggle html attribute
 		if(currentState) {btn.setAttribute('expanded','0')}
@@ -350,7 +350,7 @@
 			var ret="";
 			if(checked)
 			{
-				var expanded = Expanded[question] || 0;
+				var expanded = Expanded[question] || 1;//expanded by default
 				ret+="<span style=float:left;cursor:pointer onclick=level2.toggleQuestionVisibility(this,'"+question+"') expanded="+expanded+">&#9660;</span>"
 			}
 			ret+=translate(question)+"?";

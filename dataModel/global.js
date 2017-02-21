@@ -285,7 +285,7 @@ var Global={
 			wwt_dige_typ:0,//type of fuel dig afegida per mi
 			wwt_fuel_dig:0,
 			"wwt_biog_val":0,
-			//sludge
+			//sludge (general)
 			"wwt_mass_slu":0,
 			"wwt_slu_disp":0,
 			c_wwt_slu_c:function(){
@@ -384,7 +384,10 @@ var Global={
 				wwt_slu_composting_n2o:function(){return this.wwt_mass_slu_comp*6/10000*Cts.ct_n2o_eq.value},
 				wwt_slu_inciner_co2:function(){return (this.wwt_nrg_inc*Global.General.conv_kwh_co2)},
 				wwt_slu_inciner_ch4:function(){return (4.85/1e5)*this.wwt_mass_slu_inc*Cts.ct_ch4_eq.value},
-				wwt_slu_inciner_n2o:function(){return this.wwt_mass_slu_inc*0.04*this.c_wwt_slu_n()*(161.3-0.14*this.wwt_temp_inc)*Cts.ct_n2o_eq.value},
+				wwt_slu_inciner_n2o:function(){//<br>
+					var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
+					var sludge_N=content_N(this.wwt_mass_slu_inc,sludge_type);//<br>
+					return 0.04*sludge_N*(161.3-0.14*this.wwt_temp_inc)*Cts.ct_n2o_eq.value},
 				wwt_slu_landapp_co2:function(){
 					var fuel=Tables['Fuel types'][Tables.find('wwt_appl_typ',this.wwt_appl_typ)]; 
 					var fuel_co2=this.wwt_vol_fuel_app*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines);

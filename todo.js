@@ -13,6 +13,7 @@ var TODO = {
 	],
 	Back://back-end
 	[
+		"add a new option no flaring no gas recovery on slu_type for landfill",
 		"[WAIT]        I had specified that new codes had to be the same length in characters, in sludge management they are longer and this creates visualization problems",
 		"[WAITING IWA] Sludge management check implementation",
 		"[WAITING IWA] Infiltration and inflow is not clear",
