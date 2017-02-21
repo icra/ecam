@@ -402,7 +402,7 @@ var Global={
 					//<br>
 					var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
 					var soil_type=Tables.find('wwt_soil_typ',this.wwt_soil_typ);//<br>
-					var ratio_CN=Global.General.content_C(this.wwt_mass_slu_app,sludge_type)/Global.General.content_N(this.wwt_mass_slu_app,sludge_type);//<br>
+					var ratio_CN=Global.General.content_C(this.wwt_mass_slu_app,sludge_type)/Global.General.content_N(this.wwt_mass_slu_app,sludge_type)||0;//<br>
 					if(sludge_type=="Primary")//<br>
 					{//<br>
 						if(soil_type=="Fine-Textured"   && this.wwt_slu_dryw > 0.80*this.wwt_mass_slu){return this.wwt_mass_slu_app*0.04*0.023*46/14*0.5}//<br>
@@ -433,7 +433,7 @@ var Global={
 				},
 				wwt_slu_landfill_n2o:function(){//<br>
 					var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
-					var ratio_CN=Global.General.content_C(this.wwt_mass_slu_land,sludge_type)/Global.General.content_N(this.wwt_mass_slu_land,sludge_type);//<br>
+					var ratio_CN=Global.General.content_C(this.wwt_mass_slu_land,sludge_type)/Global.General.content_N(this.wwt_mass_slu_land,sludge_type)||0;//<br>
 					if(ratio_CN>30)//<br>
 					{return 0}//<br>
 					else

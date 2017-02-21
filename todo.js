@@ -13,9 +13,8 @@ var TODO = {
 	],
 	Back://back-end
 	[
-		"add a new option no flaring no gas recovery on slu_type for landfill",
-		"[WAIT]        I had specified that new codes had to be the same length in characters, in sludge management they are longer and this creates visualization problems",
 		"[WAITING IWA] Sludge management check implementation",
+		"[WAIT]        I had specified that new codes had to be the same length in characters, in sludge management they are longer and this creates visualization problems",
 		"[WAITING IWA] Infiltration and inflow is not clear",
 		"[WAITING IWA] CH4 emission factor for 'Anaerobic Lagoon covered' treatment type",
 		"[WAITING IWA] Formula for <a href=variable.php?id=wwd_KPI_nrg_sav>wwd_KPI_nrg_sav</a>",
