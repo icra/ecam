@@ -13,10 +13,11 @@ var TODO = {
 	],
 	Back://back-end
 	[
+		"[PENDING] [NOW] Change codes for CO2 eq emissions in [SM] to make it appear in SL table",
 		"[WAITING IWA] Sludge management check implementation",
 		"[WAIT]        I had specified that new codes had to be the same length in characters, in sludge management they are longer and this creates visualization problems",
-		"[WAITING IWA] Infiltration and inflow is not clear",
-		"[WAITING IWA] CH4 emission factor for 'Anaerobic Lagoon covered' treatment type",
+		"[WAITING IWA] Infiltration and inflow is not clear (WW Collection)",
+		"[WAITING IWA] CH4 emission factor for 'Anaerobic Lagoon covered' treatment type. see all <a href=variable.php?id=c_wwt_ch4_efac>here</a>",
 		"[WAITING IWA] Formula for <a href=variable.php?id=wwd_KPI_nrg_sav>wwd_KPI_nrg_sav</a>",
 		"[WAITING IWA] Formula for <a href=variable.php?id=wwd_KPI_ghg_red>wwd_KPI_ghg_red</a>",
 		"[WAIT]        Opportunities page, wait for structure v2 does not change anymore, otherwise can't code it",
