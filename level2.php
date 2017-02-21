@@ -14,7 +14,8 @@
 
 	level2.toggleQuestionVisibility=function(btn,question)
 	{
-		var currentState=Expanded[question]||1;//expanded by default
+		var currentState=Expanded[question];
+		if(currentState===undefined)currentState=1;//expanded by default
 
 		//toggle html attribute
 		if(currentState) {btn.setAttribute('expanded','0')}
@@ -109,7 +110,7 @@
 		if(question)
 		{
 			newRow.setAttribute('question',question)
-			if(!Expanded[question])
+			if(Expanded[question]==0)
 			{
 				newRow.style.display='none';
 			}
@@ -178,7 +179,7 @@
 		if(question)
 		{
 			newRow.setAttribute('question',question)
-			if(!Expanded[question])
+			if(Expanded[question]==0)
 			{
 				newRow.style.display='none';
 			}
@@ -350,7 +351,8 @@
 			var ret="";
 			if(checked)
 			{
-				var expanded = Expanded[question] || 1;//expanded by default
+				var expanded=Expanded[question];
+				if(expanded===undefined)expanded=1;//expanded by default
 				ret+="<span style=float:left;cursor:pointer onclick=level2.toggleQuestionVisibility(this,'"+question+"') expanded="+expanded+">&#9660;</span>"
 			}
 			ret+=translate(question)+"?";

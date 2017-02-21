@@ -1,6 +1,11 @@
 {
 	"#TotalGHG_descr":"Total GHG emitted during the Assessment period for all stages",
 	"#TotalGHG_expla":"Total GHG emitted during the Assessment period for all stages",
+	"#content_C_descr":"Sludge Carbon Content",
+	"#content_C_expla":"Mass of carbon C that is contained in the sludge",
+	"#content_N_descr":"Sludge Nitrogen Content",
+	"#content_N_expla":"Mass of nitrogen N that is contained in the sludge",
+
 	"#Water":"Water supply",
 	"#Waste":"Wastewater",
 	"#Abstraction":"Abstraction",
@@ -677,10 +682,6 @@
 	"#wwt_nrg_app_expla":"Energy employed for land application ",
 	"#c_wwt_ch4_pot_descr":"Methane potential",
 	"#c_wwt_ch4_pot_expla":"Maximum methane emission potential for sludge stored",
-	"#c_wwt_slu_c_descr":"Sludge Carbon Content",
-	"#c_wwt_slu_c_expla":"Mass of carbon C that is contained in the sludge",
-	"#c_wwt_slu_n_descr":"Sludge Nitrogen Content",
-	"#c_wwt_slu_n_expla":"Mass of nitrogen N that is contained in the sludge",
 	"#c_wwt_slu_cn_descr":"Sludge Carbon/Nitrogen Ratio",
 	"#c_wwt_slu_cn_expla":"CN Ratio",
 	"#wwt_KPI_GHG_dig_fuel_descr":"Fuel employed for digester",

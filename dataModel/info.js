@@ -14,6 +14,8 @@ var Info = {
 	"Years":{magnitude:"Time",unit:"years"},
 	"conv_kwh_co2":{magnitude:"Conversion",unit:"kg CO<sub>2</sub>/kWh"},
 	TotalGHG :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
+	content_C:{magnitude:"Mass",unit:"kg C"},
+	content_N:{magnitude:"Mass",unit:"kg N"},
 
 	/* +============+ */
 	/* | Fuel types |
@@ -224,8 +226,7 @@ var Info = {
 	"wwt_dryw_slu":{magnitude:"Mass",unit:"kg"},
 	"wwt_trea_cap":{magnitude:"Volume",unit:"m3"},
 	"wwt_dist_dis":{magnitude:"Distance",unit:"km"},
-	"wwt_num_trip":{magnitude:"Number",unit:"Number"},
-	//"wwt_main_tre":{magnitude:"Option",unit:"Technology"}, HIDDEN
+	"wwt_num_trip":{magnitude:"Number",unit:"Trips"},
 	"wwt_type_tre":{magnitude:"Option",unit:"Technology"},
 
 	"wwt_pmp_type":{magnitude:"Option",unit:"Type"},
@@ -277,34 +278,31 @@ var Info = {
 	"wwt_vol_fuel_app":{magnitude:"Volume",unit:"L"},
 	"wwt_soil_typ":{magnitude:"Option",unit:"Soil type"},
 	"wwt_nrg_app":{magnitude:"Energy",unit:"kWh"},
-	"c_wwt_ch4_pot":{magnitude:"Mass",unit:"kg"},
-	"c_wwt_slu_c":{magnitude:"Mass",unit:"kg"},
-	"c_wwt_slu_n":{magnitude:"Mass",unit:"kg"},
-	"c_wwt_slu_cn":{magnitude:"Mass/Mass",unit:"kg C / kg N"},
+	"c_wwt_ch4_pot":{magnitude:"Mass",unit:"kg CH4"},
 
 	"wwt_KPI_GHG_dig_fuel":{magnitude:"Mass",unit:"kg"},
 
-	"wwt_slu_storage_ch4":{magnitude:"Mass",unit:"kg"},
-	"wwt_slu_storage_n2o":{magnitude:"Mass",unit:"kg"},
-	"wwt_KPI_GHG_sto_co2eq":{magnitude:"Mass",unit:"kg"},
+	"wwt_slu_storage_ch4":{magnitude:"Mass",unit:"kg CH4"},
+	"wwt_slu_storage_n2o":{magnitude:"Mass",unit:"kg N2O"},
+	"wwt_KPI_GHG_sto_co2eq":{magnitude:"Mass",unit:"kg CO2 eq"},
 
-	"wwt_slu_composting_co2":{magnitude:"Mass",unit:"kg"},
-	"wwt_slu_composting_ch4":{magnitude:"Mass",unit:"kg"},
-	"wwt_slu_composting_n2o":{magnitude:"Mass",unit:"kg"},
-	"wwt_KPI_GHG_comp_co2eq":{magnitude:"Mass",unit:"kg"},
+	"wwt_slu_composting_co2":{magnitude:"Mass",unit:"kg CO2"},
+	"wwt_slu_composting_ch4":{magnitude:"Mass",unit:"kg CO2 eq"},
+	"wwt_slu_composting_n2o":{magnitude:"Mass",unit:"kg CO2 eq"},
+	"wwt_KPI_GHG_comp_co2eq":{magnitude:"Mass",unit:"kg CO2 eq"},
 
-	"wwt_slu_inciner_co2":{magnitude:"Mass",unit:"kg"},
-	"wwt_slu_inciner_ch4":{magnitude:"Mass",unit:"kg"},
-	"wwt_slu_inciner_n2o":{magnitude:"Mass",unit:"kg"},
-	"wwt_KPI_GHG_inc_co2eq":{magnitude:"Mass",unit:"kg"},
-	"wwt_slu_landapp_co2":{magnitude:"Mass",unit:"kg"},
-	"wwt_slu_landapp_n2o":{magnitude:"Mass",unit:"kg"},
-	"wwt_KPI_GHG_app_co2eq":{magnitude:"Mass",unit:"kg"},
-	"wwt_slu_landfill_ch4":{magnitude:"Mass",unit:"kg"},
-	"wwt_slu_landfill_n2o":{magnitude:"Mass",unit:"kg"},
-	"wwt_KPI_GHG_land_co2eq":{magnitude:"Mass",unit:"kg"},
-	"wwt_KPI_GHG_stock_co2eq":{magnitude:"Mass",unit:"kg"},
-	"wwt_KPI_GHG_slu":{magnitude:"Mass",unit:"kg"},
+	"wwt_slu_inciner_co2":{magnitude:"Mass",unit:"kg CO2"},
+	"wwt_slu_inciner_ch4":{magnitude:"Mass",unit:"kg CO2 eq"},
+	"wwt_slu_inciner_n2o":{magnitude:"Mass",unit:"kg CO2 eq"},
+	"wwt_KPI_GHG_inc_co2eq":{magnitude:"Mass",unit:"kg CO2 eq"},
+	"wwt_slu_landapp_co2":{magnitude:"Mass",unit:"kg CO2"},
+	"wwt_slu_landapp_n2o":{magnitude:"Mass",unit:"kg N2O"},
+	"wwt_KPI_GHG_app_co2eq":{magnitude:"Mass",unit:"kg CO2 eq"},
+	"wwt_slu_landfill_ch4":{magnitude:"Mass",unit:"kg CH4"},
+	"wwt_slu_landfill_n2o":{magnitude:"Mass",unit:"kg N2O"},
+	"wwt_KPI_GHG_land_co2eq":{magnitude:"Mass",unit:"kg CO2 eq"},
+	"wwt_KPI_GHG_stock_co2eq":{magnitude:"Mass",unit:"kg CO2 eq"},
+	"wwt_KPI_GHG_slu":{magnitude:"Mass",unit:"kg CO2 eq"},
 
 	//L2 Wastewater Discharge
 	"wwd_vol_disc":{magnitude:"Volume",unit:"m3"},

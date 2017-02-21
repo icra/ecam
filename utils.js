@@ -1,15 +1,3 @@
-/*get carbon and nitrogen content based on sludge type and mass TODO move this utilities somewhere else*/
-function content_C(sludge_mass,sludge_type){
-	if(sludge_type=="Primary"){return 0.56*0.70*sludge_mass}//<br>
-	if(sludge_type=="Digested"){return 0.56*0.51*sludge_mass}//<br>
-	else{return 0}
-}
-function content_N(sludge_mass,sludge_type){
-	if(sludge_type=="Primary"){return sludge_mass*0.04}//<br>
-	if(sludge_type=="Digested"){return sludge_mass*0.05}//<br>
-	else{return 0}
-}
-
 /** Find a variable code inside 'Global'*/
 function locateVariable(code)
 {

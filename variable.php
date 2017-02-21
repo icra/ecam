@@ -350,7 +350,7 @@
 					ret+="<tr>"+
 						" <td class=variableCode><a style='color:"+color+"' caption='["+match_localization.toString()+"] "+translate(output+"_descr")+"'"+
 						" href=variable.php?id="+output+">"+output+"</a>"+
-						"<td caption='"+pretf+"' style=cursor:help>"+
+						"<td caption='"+encodeURIComponent(pretf)+"' style=cursor:help>"+
 						currValueF+"<td> <span class=unit>"+currentUnit+"</span> "+estimated;
 				});
 				ret+="</table>";

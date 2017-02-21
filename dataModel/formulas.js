@@ -70,9 +70,7 @@ var Formulas = {
 	{
 		var result = formula.replace(/function/,"")
 		result = result.replace(/this./g,"")
-		result = result.replace(/'/g,"")
-		result = result.replace(/"/g,"")
-		result = result.replace(/var/g,"")
+		result = result.replace(/var /g,"")
 		result = result.replace(/\|\|0/g,"")
 		result = result.replace(/return /g,"")
 		result = result.replace(/[\r\n\t]/g,"")

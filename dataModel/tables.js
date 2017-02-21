@@ -105,6 +105,7 @@ var Tables =
 	"wwt_slu_type":{
 		"Covered landfill with gas recovery":{value:0},
 		"Covered landfill (flaring)":{value:1},
+		"Open landfill":{value:2},
 		/*"Land application":{value:0},
 		"Open landfill":{value:1},
 		"Incineration with heat recovery":{value:4},

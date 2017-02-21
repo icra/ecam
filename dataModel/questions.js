@@ -258,9 +258,6 @@ var Questions = {
 				"wwt_mass_slu",
 				"wwt_dryw_slu",
 				"wwt_slu_disp",
-				"c_wwt_slu_c",
-				"c_wwt_slu_n",
-				"c_wwt_slu_cn",
 				"wwt_KPI_GHG_slu",
 			],
 			advanced:0,
@@ -271,7 +268,7 @@ var Questions = {
 				"wwt_land_application",
 				"wwt_landfilling",
 				"wwt_stockpiling",
-				"wwt_trucks",//TODO
+				"wwt_trucks",
 			],
 		},
 
