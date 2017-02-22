@@ -53,6 +53,11 @@
 			BEV.showActive();
 			BEV.updateDefaults();
 			BEV.defaultQuestions();
+			BEV.defaultSludge();
+
+			//default treatment type
+			document.querySelector('#main_treatment_type').value=Global.Waste.Treatment.wwt_type_tre;
+
 			drawCharts();
 			updateResult();
 			Caption.listeners();
@@ -170,7 +175,11 @@
 			{
 				document.querySelector('input[name=wwt_valorizing_biogas][ans="1"]').checked=true;
 			}
+		}
 
+		BEV.defaultSludge=function()
+		{
+			document.querySelector('#sludge_estimation').value=Global.Configuration.Selected.sludge_estimation_method;
 		}
 
 		BEV.updateQuestion=function(code,newValue)
@@ -257,7 +266,7 @@
 <!--TITLE-->
 <h1><?php write('#quick_assessment')?> 
 	&mdash;
-	Rough estimation of total GHG production
+	Initial estimation of total GHG emissions at system-wide level
 	<span style="font-size:13px;color:#666;float:right">
 		<span><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a> 
 		<script>document.write(Global.General.Days())</script> <?php write('#days')?></span> 
@@ -336,10 +345,6 @@
 					<tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?><td class=input><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
 					<tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?><td class=input><input id='ww_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
 
-					<!--wwc protein consumption-->
-					<tr stage=waste class=hidden><td><?php write('#birds_ww_prot_con')?>
-						<td class=input><input id='wwc_prot_con' onchange="BEV.updateField(this)"> <td>kg/person/<?php write('#birds_year')?>
-						<span class=circle style=background:#451c2e></span>
 					<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 
 					<!--wwt n2o in effluent-->
@@ -362,6 +367,18 @@
 						<td> <label>No  <input name=wwt_valorizing_biogas type=radio onclick="BEV.updateQuestion(this.name,0)" ans=0 checked></label>
 						<td> <label>Yes <input name=wwt_valorizing_biogas type=radio onclick="BEV.updateQuestion(this.name,1)" ans=1></label>
 					</tr>
+
+					<!--sludge management-->
+					<tr stage=waste class=hidden>
+						<td> Select main treatment type
+						<td colspan=2><?php include'treatment_birds.php'?>
+					</tr>
+
+					<!--sludge management-->
+					<tr stage=waste class=hidden>
+						<td> Select sludge disposal method
+						<td colspan=2><?php include'sludge_birds.php'?>
+					</tr>
 			</table>
 
 			<script>
@@ -369,7 +386,11 @@
 					var inputs=document.querySelectorAll("#inputs input[id]")
 					for(var i=0;i<inputs.length;i++)
 					{
-						inputs[i].onclick=function(){this.select()}
+						inputs[i].onclick=function(){
+							this.value=parseFloat(this.value.replace(',',''));
+							this.select()
+						}
+						inputs[i].onblur=function(){init()}
 					}
 				})();
 			</script>

@@ -5,25 +5,16 @@ var TODO = {
 		"[PENDING]     Create cookies to remember folding of sections",
 		"[PENDING]     Cells in substage outputs smaller (to match inputs above)",
 		"[PENDING]     Discuss graphs with IWA",
-		"[WAITING IWA] Country data (EF electricity, bod/person/day, protein consumption/year)",
+		"[WAITING IWA] Country data for configuration (EF electricity)",
 		"[WAIT]        Translation after v2 in english is complete",
 		"[WAIT]        Example json file after I/O structure does not change anymore",
-		"[IDEA]        Add references (page,chapter,book) to equations (IPCC, BEAM, ...?)",
 		"[IDEA]        Water flow diagram (in 'graphs.js', 'sankey' function)",
+		"[IDEA]        Add references (page,chapter,book) to equations (IPCC, BEAM, ...?)",
 	],
 	Back://back-end
 	[
-		"dubte kgN2O-N",
-		//mail jose
-		"preguntar - •	GHG related to Sludge disposal:",
-		"clear - N2O related to WWT process",
-		//fi mail jose
-
-		"arreglar decimals a global ghg",
-		"[PENDING] Sludge stored: N2O emissions can be removed from the tool.",
-		"[PENDING] [NOW] Change codes for CO2 eq emissions in [SM] to make it appear in SL table",
-		"[WAITING IWA] Sludge management check implementation",
-		"[WAIT]        I had specified that new codes had to be the same length in characters, in sludge management they are longer and this creates visualization problems",
+		"[PENDING] IPCC table 6.4 add list of BOD g/person/day",
+		"[PENDING] DO LAST - wsa,wst,wsd,wwc - pink table for pump efficiency equations in 'mail.txt'",
 		"[WAITING IWA] Infiltration and inflow is not clear (WW Collection)",
 		"[WAITING IWA] CH4 emission factor for 'Anaerobic Lagoon covered' treatment type. see all <a href=variable.php?id=c_wwt_ch4_efac>here</a>",
 		"[WAITING IWA] Formula for <a href=variable.php?id=wwd_KPI_nrg_sav>wwd_KPI_nrg_sav</a>",

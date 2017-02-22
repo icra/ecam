@@ -374,9 +374,6 @@ var Global={
 					else if(this.wwt_time_slu_sto >= 20*day){f=0.05}//<br>
 					return f*this.c_wwt_ch4_pot();
 				},
-				wwt_slu_storage_n2o:function(){
-					return 0;//formula to be removed
-				},
 				wwt_slu_composting_co2:function(){return this.wwt_mass_slu_comp*18/1000},
 				wwt_slu_composting_ch4:function(){return this.wwt_mass_slu_comp*1e-5*Cts.ct_ch4_eq.value},
 				wwt_slu_composting_n2o:function(){return this.wwt_mass_slu_comp*6*1e-7*Cts.ct_n2o_eq.value},
@@ -441,7 +438,7 @@ var Global={
 					}
 				},
 
-				wwt_KPI_GHG_sto_co2eq:function(){return this.wwt_slu_storage_ch4()*Cts.ct_ch4_eq.value+this.wwt_slu_storage_n2o()*Cts.ct_n2o_eq.value},
+				wwt_KPI_GHG_sto_co2eq:function(){return this.wwt_slu_storage_ch4()*Cts.ct_ch4_eq.value},
 				wwt_KPI_GHG_comp_co2eq:function(){return this.wwt_slu_composting_co2()+this.wwt_slu_composting_ch4()+this.wwt_slu_composting_n2o()},
 				wwt_KPI_GHG_inc_co2eq:function(){return this.wwt_slu_inciner_co2()+this.wwt_slu_inciner_ch4()+this.wwt_slu_inciner_n2o()},
 				wwt_KPI_GHG_app_co2eq:function(){return this.wwt_slu_landapp_co2()+this.wwt_slu_landapp_n2o()*Cts.ct_n2o_eq.value},
@@ -469,7 +466,7 @@ var Global={
 				return (this.wwt_bod_infl*(1-Cts.ct_bod_slu.value)-this.wwt_bod_effl)*this.c_wwt_ch4_efac()*Cts.ct_ch4_eq.value
 			}, //former c_ww55
 			wwt_KPI_GHG_tre_n2o:function(){
-				return Global.Waste.ww_conn_pop*Cts.ct_fac_ic.value*Cts.ct_n2o_efp.value*Global.General.Years()*1e-3*Cts.ct_n2o_eq.value;
+				return Global.Waste.ww_serv_pop*Cts.ct_fac_ic.value*Cts.ct_n2o_efp.value*Global.General.Years()*1e-3*Cts.ct_n2o_eq.value;
 			},
 			wwt_KPI_GHG_dig_fuel:function(){
 				var fuel=Tables['Fuel types'][Tables.find('wwt_dige_typ',this.wwt_dige_typ)]; 
@@ -508,8 +505,9 @@ var Global={
 
 		"Discharge":{
 			"wwd_vol_disc":0,
-			"wwd_vol_pump":0,
 			"wwd_nrg_cons":0,
+			"wwd_vol_pump":0,
+			"wwd_nrg_pump":0,
 			"wwd_vol_nonp":0,//Volume of water reused
 			"wwd_pmp_head":0,
 			"wwd_trb_head":0,
@@ -524,9 +522,9 @@ var Global={
 			//"wwd_vol_turb":0,
 			//"wwd_nrg_recv":0,
 			//wwd_KPI_nrg_rcv_di:function(){return this.wwd_nrg_recv/this.wwd_vol_disc},
-			wwd_KPI_std_nrg_recv:function(){return this.wwd_nrg_recv/(this.wwd_vol_turb*this.wwd_trb_head/100)},
+			//wwd_KPI_std_nrg_recv:function(){return this.wwd_nrg_recv/(this.wwd_vol_turb*this.wwd_trb_head/100)},
 			wwd_KPI_nrg_per_m3:function(){return this.wwd_nrg_cons/this.wwd_vol_disc||0},
-			wwd_KPI_std_nrg_cons:function(){return (this.wwd_nrg_cons)/(this.wwd_vol_pump*this.wwd_pmp_head/100)},
+			wwd_KPI_std_nrg_cons:function(){return (this.wwd_nrg_pump)/(this.wwd_vol_pump*this.wwd_pmp_head/100)},
 			wwd_KPI_ghg_red:function(){return 0}, //kg co2 saved by reuse TODO
 			wwd_KPI_nrg_sav:function(){return 0}, //kwh saved by reuse TODO
 			ww_SL_serv_pop: function(){return Global.Waste.ww_SL_serv_pop()},
@@ -543,8 +541,8 @@ var Global={
 			},
 			wwd_KPI_GHG_tre_n2o:function(){//<br>
 				var Nwwt = Global.Waste.Treatment.wwt_KPI_GHG_tre_n2o()/Cts.ct_n2o_eq.value/Cts.ct_n2o_co.value;//<br>
-				return (this.wwd_n2o_effl/1000*this.wwd_vol_disc-Nwwt)*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value; 
-			}, //former c_ww53
+				return Math.max((this.wwd_n2o_effl/1000*this.wwd_vol_disc-Nwwt),0)*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value; 
+			},
 
 			wwd_KPI_GHG:function(){
 				return this.wwd_KPI_GHG_elec()+
@@ -596,6 +594,7 @@ var Global={
 
 		Selected: {
 			wwc_prot_con:"Albania",//string value for wwc_prot_con exception (see "exceptions.js")
+			sludge_estimation_method:"0",
 		},
 
 		//default answers for filters ("questions.js")

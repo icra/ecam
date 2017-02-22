@@ -283,7 +283,6 @@ var Info = {
 	"wwt_KPI_GHG_dig_fuel":{magnitude:"Mass",unit:"kg"},
 
 	"wwt_slu_storage_ch4":{magnitude:"Mass",unit:"kg CH4"},
-	"wwt_slu_storage_n2o":{magnitude:"Mass",unit:"kg N2O"},
 	"wwt_KPI_GHG_sto_co2eq":{magnitude:"Mass",unit:"kg CO2 eq"},
 
 	"wwt_slu_composting_co2":{magnitude:"Mass",unit:"kg CO2"},
@@ -307,10 +306,9 @@ var Info = {
 	//L2 Wastewater Discharge
 	"wwd_vol_disc":{magnitude:"Volume",unit:"m3"},
 	"wwd_nrg_cons":{magnitude:"Energy",unit:"kWh"},
-	//"wwd_nrg_recv":{magnitude:"Energy",unit:"kWh"}, HIDDEN
+	"wwd_nrg_pump":{magnitude:"Energy",unit:"kWh"},
 	"wwd_vol_pump":{magnitude:"Volume",unit:"m3"},
 	"wwd_pmp_head":{magnitude:"Head",unit:"m"},
-	//"wwd_vol_turb":{magnitude:"Volume",unit:"m3"}, HIDDEN
 	"wwd_trb_head":{magnitude:"Head",unit:"m3"},
 	"wwd_vol_fuel":{magnitude:"Volume",unit:"L"},
 	"wwd_vol_trck":{magnitude:"Volume",unit:"L"},
@@ -320,9 +318,7 @@ var Info = {
 	"wwd_n2o_effl":{magnitude:"Mass/Volume",unit:"mg/L"},
 
 	wwd_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
-	//wwd_KPI_nrg_rcv_di:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},  HIDDEN
 	wwd_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m"},
-	wwd_KPI_std_nrg_recv:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m"}, 
 	wwd_KPI_ghg_red:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwd_KPI_nrg_sav:{magnitude:"Energy",unit:"kWh"}, 
 

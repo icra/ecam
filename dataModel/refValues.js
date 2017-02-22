@@ -2,6 +2,18 @@
   * BENCHMARKING
   * Outputs reference values for considering them as "good","acceptable","bad",etc
   *
+
+	HIDDEN
+	wwd_KPI_std_nrg_recv:function(obj)
+	{
+		//wdE5: Good: 0.2725 > wdE5 ≥ 0.19 , Acceptable: 0.19 > wdE5 ≥ 0.12, Unsatisfactory: wdE5 < 0.12,
+		var value=obj.wwd_KPI_std_nrg_recv();
+		if      (0.19 <= value && value < 0.2725) return "Good";
+		else if (0.12 <= value && value < 0.19)   return "Acceptable";
+		else if (value < 0.12)                    return "Unsatisfactory";
+		else                                      return "Out of range";
+	},
+
   */
 
 var RefValues = 
@@ -293,15 +305,6 @@ var RefValues =
 		else if (0.40   <  value && value <= 0.54) return "Acceptable";
 		else if (value  > 0.54)                    return "Unsatisfactory";
 		else                                       return "Out of range";
-	},
-	wwd_KPI_std_nrg_recv:function(obj)
-	{
-		//wdE5: Good: 0.2725 > wdE5 ≥ 0.19 , Acceptable: 0.19 > wdE5 ≥ 0.12, Unsatisfactory: wdE5 < 0.12,
-		var value=obj.wwd_KPI_std_nrg_recv();
-		if      (0.19 <= value && value < 0.2725) return "Good";
-		else if (0.12 <= value && value < 0.19)   return "Acceptable";
-		else if (value < 0.12)                    return "Unsatisfactory";
-		else                                      return "Out of range";
 	},
 	//w{sw}g
 	wsg_KPI_std_nrg_:function(obj)

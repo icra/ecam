@@ -1474,7 +1474,7 @@
 												}
 												return "<span caption='Benchmarking: "+text+"' class=circle style='background:"+color+"'></span>";
 											})();
-											return "<span style='display:inline-block;width:75%' caption='"+prettyFormula+"'>"+format(value)+"</span> "+indicator;
+											return "<span style='display:inline-block;width:75%'>"+format(value)+"</span> "+indicator;
 										})();
 									}
 

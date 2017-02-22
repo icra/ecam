@@ -235,27 +235,28 @@ Graphs.ghgSources=function(withTable,container)
 	var trck=(function(){
 		return 0+
 			Global.Water.Distribution.wsd_KPI_GHG_trck()+
-				 Global.Waste.Treatment.wwt_KPI_GHG_tsludge()+
 				 Global.Waste.Discharge.wwd_KPI_GHG_trck();
 	})();
-	var wsts=0;//Global.Water.Treatment.wst_KPI_GHG_slud();
 	var ch4u=Global.Waste.Collection.wwc_KPI_GHG_unt_ch4();
 	var n2ou=Global.Waste.Collection.wwc_KPI_GHG_unt_n2o();
 	var ch4t=Global.Waste.Treatment.wwt_KPI_GHG_tre_ch4();
+	var n2ot=Global.Waste.Treatment.wwt_KPI_GHG_tre_n2o();
 	var biog=Global.Waste.Treatment.wwt_KPI_GHG_biog();
-	var n2ot=Global.Waste.Discharge.wwd_KPI_GHG_tre_n2o();
+	var slud=Global.Waste.Treatment.wwt_KPI_GHG_slu();
+	var n2od=Global.Waste.Discharge.wwd_KPI_GHG_tre_n2o();
 
 	//names
 	var names = [
 		"Electricity",
 		"Fuel engines",
 		"Truck transport",
-		"Sludge water treatment",
 		"CH4 untreated wastewater",
 		"N2O untreated wastewater",
 		"CH4 treatment process",
-		"N2O discharge water body",
+		"N2O treatment process",
 		"Biogas flared",
+		"Sludge management",
+		"N2O discharge water body",
 	];
 
 	//array graph data
@@ -264,12 +265,13 @@ Graphs.ghgSources=function(withTable,container)
 		[names[0],elec],
 		[names[1],fuel],
 		[names[2],trck],
-		[names[3],wsts],
-		[names[4],ch4u],
-		[names[5],n2ou],
-		[names[6],ch4t],
-		[names[7],n2ot],
-		[names[8],biog],
+		[names[3],ch4u],
+		[names[4],n2ou],
+		[names[5],ch4t],
+		[names[6],n2ot],
+		[names[7],biog],
+		[names[8],slud],
+		[names[9],n2od],
 	]);
 
 	//options
@@ -280,8 +282,10 @@ Graphs.ghgSources=function(withTable,container)
 		title:"Total GHG emissions ("+format(Global.General.TotalGHG())+" kg CO2) [By source]",
 		slices:
 		{
+			/*
 			0:{color:'#00aff1' },
 			1:{color:'#d71d24' },
+			*/
 		},
 	}
 
@@ -309,17 +313,18 @@ Graphs.ghgSources=function(withTable,container)
 		"<button onclick=Graphs.ghgSources(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
 		"<button onclick=\"Graphs.graph1(true,'"+container+"');scrollToItem('"+container+"')\">Simple</button>"+
 		"<button onclick=\"Graphs.graph4(true,'"+container+"');scrollToItem('"+container+"')\">By stage</button>"+
-		"<table title=graph1>"+
+		"<table title=ghgSources>"+
 			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_value')+" (kg CO2)"+
 			"<tr><td>"+names[0]+"<td>"+format(elec)+
 			"<tr><td>"+names[1]+"<td>"+format(fuel)+
 			"<tr><td>"+names[2]+"<td>"+format(trck)+
-			"<tr><td>"+names[3]+"<td>"+format(wsts)+
-			"<tr><td>"+names[4]+"<td>"+format(ch4u)+
-			"<tr><td>"+names[5]+"<td>"+format(n2ou)+
-			"<tr><td>"+names[6]+"<td>"+format(ch4t)+
-			"<tr><td>"+names[7]+"<td>"+format(n2ot)+
-			"<tr><td>"+names[8]+"<td>"+format(biog)+
+			"<tr><td>"+names[3]+"<td>"+format(ch4u)+
+			"<tr><td>"+names[4]+"<td>"+format(n2ou)+
+			"<tr><td>"+names[5]+"<td>"+format(ch4t)+
+			"<tr><td>"+names[6]+"<td>"+format(n2ot)+
+			"<tr><td>"+names[7]+"<td>"+format(biog)+
+			"<tr><td>"+names[8]+"<td>"+format(slud)+
+			"<tr><td>"+names[9]+"<td>"+format(n2od)+
 		"</table>"+
 		"";
 

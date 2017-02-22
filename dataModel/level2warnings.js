@@ -7,5 +7,4 @@ var Level2Warnings=
 	"wsd_KPI_std_nrg_cons": translate("edit_advanced_inputs_required"),
 	"wwc_KPI_std_nrg_cons": translate("edit_advanced_inputs_required"),
 	"wwd_KPI_std_nrg_cons": translate("edit_advanced_inputs_required"),
-	"wwd_KPI_std_nrg_recv": translate("edit_advanced_inputs_required"),
 }

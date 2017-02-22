@@ -797,6 +797,8 @@
 	"#wwd_nrg_recv_expla":"Sum of energy recovered during the assessment period by all turbines for wastewater discharged managed by the undertaking",
 	"#wwd_vol_pump_descr":"Pumped volume",
 	"#wwd_vol_pump_expla":"",
+	"#wwd_nrg_pump_descr":"Energy consumed from the grid (pumping)",
+	"#wwd_nrg_pump_expla":"Electric energy consumption for pumping",
 	"#wwd_pmp_head_descr":"Head pumped against",
 	"#wwd_pmp_head_expla":"",
 	"#wwd_vol_turb_descr":"Turbine water volume pumped",

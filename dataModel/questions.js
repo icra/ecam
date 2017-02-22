@@ -19,6 +19,16 @@
 */
 var Questions = {
 	//wsa
+		"wsa_engines":{
+			variables:[
+				"wsa_fuel_typ",
+				"wsa_vol_fuel",
+				"wsa_KPI_GHG_fuel",
+			],
+			advanced:0,
+			otherQuestions:[],
+		},
+
 		"wsa_pumping":{
 			variables:[ 
 				"wsa_vol_pump",
@@ -28,16 +38,6 @@ var Questions = {
 			otherQuestions:[
 				"wsa_pumping_efficiency",
 			],
-		},
-
-		"wsa_engines":{
-			variables:[
-				"wsa_fuel_typ",
-				"wsa_vol_fuel",
-				"wsa_KPI_GHG_fuel",
-			],
-			advanced:0,
-			otherQuestions:[],
 		},
 
 		"wsa_pumping_efficiency":{
@@ -278,7 +278,6 @@ var Questions = {
 				"wwt_time_slu_sto",
 				"c_wwt_ch4_pot",
 				"wwt_slu_storage_ch4",
-				"wwt_slu_storage_n2o",
 				"wwt_KPI_GHG_sto_co2eq",
 			],
 			advanced:0,
@@ -377,17 +376,6 @@ var Questions = {
 		},
 
 	//wwd
-		"wwd_pumping":{
-			variables:[
-				"wwd_nrg_cons",
-				"wwd_vol_pump",
-			],
-			advanced:0,
-			otherQuestions:[
-				"wwd_pumping_efficiency",
-			],
-		},
-
 		"wwd_engines":{
 			variables:[
 				"wwd_fuel_typ",
@@ -397,7 +385,6 @@ var Questions = {
 			advanced:0,
 			otherQuestions:[],
 		},
-
 		"wwd_trucks":{
 			variables:[
 				"wwd_trck_typ",
@@ -408,10 +395,20 @@ var Questions = {
 			otherQuestions:[],
 		},
 
+		"wwd_pumping":{
+			variables:[
+				"wwd_vol_pump",
+				"wwd_nrg_pump",
+			],
+			advanced:0,
+			otherQuestions:[
+				"wwd_pumping_efficiency",
+			],
+		},
+
 		"wwd_pumping_efficiency":{
 			variables:[ 
 				"wwd_pmp_head",
-				//"wwd_vol_turb",HIDDEN
 				"wwd_trb_head",
 				"wwd_main_len",
 				"wwd_KPI_std_nrg_cons",
