@@ -103,16 +103,9 @@ var Tables =
 		"Digested":{value:1},
 	},
 	"wwt_slu_type":{
-		"Covered landfill with gas recovery":{value:0},
-		"Covered landfill (flaring)":{value:1},
-		"Open landfill":{value:2},
-		/*"Land application":{value:0},
-		"Open landfill":{value:1},
-		"Incineration with heat recovery":{value:4},
-		"Composting":{value:5},
-		"Stockpiling":{value:6},
-		"Other":{value:7},
-		*/
+		"Landfill":{value:0},
+		"Landfill (with gas recovery)":{value:1},
+		"Landfill (flaring)":{value:2},
 	},
 	"wwt_soil_typ":{
 		"Fine-Textured":{value:0},

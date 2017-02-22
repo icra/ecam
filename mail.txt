@@ -1,0 +1,32 @@
+
+
+*OK CLEAR : 
+	
+	convert wwt_KPI_GHG_tre_n2o to kg of N2O and subtract from wwd_n2o_effl
+
+	we have to subtract the nitrogen related to these emissions from the nitrogen in the effluent ( wwd_n2o_effl ). 
+	So we have to revise the equation for N2O emissions from effluent as follows:
+	(wwd_n2o_effl - (wwt_KPI_GHG_tre_N2O * (28/44)) /1000 * wwd_vol_disc * ct_n2o_eq * ct_ef_eff * ct_n2o_co
+	I realize this is using EQ in Detailed, so you may need to tweak a little for Global. However, this is how it works exactly for Detailed.
+
+--------------------------------------------------------------------------------
+*CLEAR
+***In global 
+	For GHG emissions related to Sludge disposal use this equation:
+
+	For example if we have incineration selected:
+
+	wwt_mass_slu_inc = 0.55*wwt_vol_trea*171*1e-3*1.176*days
+
+--------------------------------------------------------------------------------
+IPCC table 6.4 add list of BOD g/person/day 
+--------------------------------------------------------------------------------
+do last
+WSA - pink table for pump efficiency
+WST - pink table for pump efficiency
+WWC - pink table for pump efficiency
+--------------------------------------------------------------------------------
+
+
+
+

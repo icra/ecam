@@ -261,6 +261,7 @@ var Info = {
 	wwt_KPI_GHG_fuel:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG_tsludge:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG_tre_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wwt_KPI_GHG_tre_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG_biog:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	//sludge mgmt
@@ -274,7 +275,6 @@ var Info = {
 	"wwt_nrg_inc":{magnitude:"Energy",unit:"kWh"},
 	"wwt_temp_inc":{magnitude:"Temperture",unit:"K"},
 	"wwt_time_slu_sto":{magnitude:"Time",unit:"day"},
-	"wwt_time_slu_stock":{magnitude:"Time",unit:"month"},
 	"wwt_vol_fuel_app":{magnitude:"Volume",unit:"L"},
 	"wwt_soil_typ":{magnitude:"Option",unit:"Soil type"},
 	"wwt_nrg_app":{magnitude:"Energy",unit:"kWh"},

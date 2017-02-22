@@ -1,5 +1,11 @@
 var Cts = 
 {
+	ct_n2o_efp:{
+		descr:"N2O Emission factor",
+		value:3.2,
+		unit:"g N2O/person/year",
+	},
+
 	ct_bod_slu:{
 		descr:"Ratio BOD entering the plant / BOD in the sludge collected",
 		value:0.33,

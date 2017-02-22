@@ -345,7 +345,6 @@ var Questions = {
 		"wwt_stockpiling":{
 			variables:[
 				"wwt_mass_slu_stock",
-				"wwt_time_slu_stock",
 				"wwt_KPI_GHG_stock_co2eq",
 			],
 			advanced:0,

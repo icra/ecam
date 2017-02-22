@@ -13,6 +13,14 @@ var TODO = {
 	],
 	Back://back-end
 	[
+		"dubte kgN2O-N",
+		//mail jose
+		"preguntar - •	GHG related to Sludge disposal:",
+		"clear - N2O related to WWT process",
+		//fi mail jose
+
+		"arreglar decimals a global ghg",
+		"[PENDING] Sludge stored: N2O emissions can be removed from the tool.",
 		"[PENDING] [NOW] Change codes for CO2 eq emissions in [SM] to make it appear in SL table",
 		"[WAITING IWA] Sludge management check implementation",
 		"[WAIT]        I had specified that new codes had to be the same length in characters, in sludge management they are longer and this creates visualization problems",
