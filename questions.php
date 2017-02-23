@@ -26,7 +26,7 @@
 						}
 						else
 						{
-							links.push("<a title='"+translate(code+'_descr')+"' href=variable.php?id="+code+">"+code+" "+isL3+"</a><br>");
+							links.push("<a caption='"+translate(code+'_descr')+"' href=variable.php?id="+code+">"+code+" "+isL3+"</a><br>");
 						}
 					}
 					return links.join('');
@@ -37,16 +37,21 @@
 					for(var i in Questions[question].otherQuestions)
 					{
 						var code = Questions[question].otherQuestions[i];
-						links.push("<a title='"+translate(code)+"'>"+code+"</a>");
+						links.push("<a caption='"+translate(code)+"'>"+code+"</a>");
 					}
 					return links.join()
 				})();
 			}
+
+			//add caption listeners
+			Caption.listeners();
 		}
 	</script>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
+<!--linear--><?php include'linear.php'?>
+<!--caption--><?php include'caption.php'?>
 <!--TITLE--><h1><?php write('#questions_about')?></h1>
 
 <div id=main>

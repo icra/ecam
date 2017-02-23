@@ -89,31 +89,26 @@ var Global={
 			wsa_main_len:0,
 			wsa_pmp_type:0,
 			wsa_pmp_size:0,
-			wsa_pmp_flow:0, //Measured pump flow L/s 
-			wsa_pmp_volt:0, //Measured pump voltage V 
-			wsa_pmp_amps:0, //Measured pump current Amp 
-			wsa_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
-
-			//Calculated water power kW 
-			c_wsa_pmp_pw:function(){return this.wsa_pmp_flow*this.wsa_pmp_head*9.81*1000*0.001/1000}, 
-
 			//SL indicators water eff
 			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_pump+this.wsa_nrg_turb)/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
 			wsa_KPI_std_elec_eff:function(){return 100*0.2725/this.wsa_KPI_std_nrg_cons()},
 			wsa_KPI_un_head_loss:function(){return 1000*(this.wsa_sta_head-this.wsa_pmp_head)/this.wsa_main_len},
 
+			//new inputs and outputs
+			wsa_pmp_flow:0, //Measured pump flow L/s 
+			wsa_pmp_volt:0, //Measured pump voltage V 
+			wsa_pmp_amps:0, //Measured pump current Amp 
+			wsa_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
+			//Calculated water power kW 
+			c_wsa_pmp_pw:function(){return this.wsa_pmp_flow*this.wsa_pmp_head*9.81*1000*0.001/1000}, 
 			//Electromechanical efficiency of existing pump %
 			wsa_KPI_nrg_elec_eff:function(){return this.c_wsa_pmp_pw()/(this.wsa_pmp_volt*this.wsa_pmp_amps*1.64/1000)*100}, 
-
 			//Standarized energy consumption of new pump kWh/m3/100m C
 			wsa_KPI_std_nrg_newp:function(){return 0.2725/this.wsa_pmp_exff},
-
 			//Energy consumption with expected new pump efficiency kWh C
 			wsa_KPI_nrg_cons_new:function(){return this.wsa_vol_pump*this.wsa_KPI_std_nrg_newp()/100*this.wsa_pmp_head}, 
-
 			//Estimated electricity savings kWh/assessment C
 			wsa_KPI_nrg_estm_sav:function(){return this.wsa_nrg_per_pmp_watr()-this.wsa_KPI_nrg_cons_new()}, 
-
 			//Estimated GHG reduction per assessment period % C
 			wsa_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wsa_KPI_nrg_estm_sav()},
 			//end pumping efficiency

@@ -1,23 +1,23 @@
 /*Tasks data structure*/
 var TODO = {
-	Front://front-end
+	Front: //front-end
 	[
-		"[PENDING]     Create cookies to remember folding of sections",
-		"[PENDING]     Discuss graphs with IWA",
-		"[WAIT]        Translation after v2 in english is complete",
-		"[WAIT]        Example json file after I/O structure does not change anymore",
-		"[IDEA]        Water flow diagram (in 'graphs.js', 'sankey' function)",
-		"[IDEA]        Add references (page,chapter,book) to equations (IPCC, BEAM, ...?)",
+		"[PENDING] Remember folding of sections (cookies)",
+		"[WAIT]    Discuss graphs with IWA",
+		"[WAIT]    Translation after v2 in english is complete",
+		"[WAIT]    Add in 'help' an example json file after I/O structure does not change anymore",
+		"[IDEA]    Add somewhere the water flow diagram (at 'graphs.js', function sankey)",
+		"[IDEA]    Add references (page,chapter,book) to equations (IPCC, BEAM, ...?)",
 	],
-	Back://back-end
+	Back: //back-end
 	[
-		"[PENDING]     <b>NOW</b> - wsa,wst,wsd,wwc - pink table for pump efficiency equations in 'mail.txt'",
-		"[WAITING IWA] Conversion factor for electricity for each country",
-		"[WAITING IWA] BOD per person per day for each country",
+		"[PENDING]     <b>[NOW]</b> - wst,wsd,wwc - pink table for pump efficiency equations pdf",
+		"[WAITING IWA] Default value for Dry weight in sludge produced (kg)",
+		"[WAITING IWA] Conversion factor for electricity (kgCO2eq per kWh) for each country",
+		"[WAITING IWA] BOD per person per day (g/person/day) for each country",
 		"[WAITING IWA] Infiltration and inflow is not clear (WW Collection)",
 		"[WAITING IWA] CH4 emission factor for 'Anaerobic Lagoon covered' treatment type. see all <a href=variable.php?id=c_wwt_ch4_efac>here</a>",
 		"[WAIT]        Opportunities page, wait for structure v2 does not change anymore, otherwise can't code it",
-		"[IDEA]        Set to zero engine fuel volumes when user selects 'No' in Configuration",
 	],
 };
 

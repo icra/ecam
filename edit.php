@@ -36,7 +36,6 @@
 	<style>
 		body{background:#F5ECCE}
 
-		#adv_questions td {padding:0.2em 0.618em;text-align:left}
 
 		<?php
 			if($level=="Waste")
@@ -645,7 +644,6 @@
 				var newCell=newRow.insertCell(-1)
 				newCell.innerHTML=translate(question)+"?";
 				newCell.style.borderRight="none"
-				newCell.style.fontWeight="bold"
 				var newCell=newRow.insertCell(-1)
 				newCell.style.borderLeft="none"
 				newCell.innerHTML=(function()
@@ -841,13 +839,15 @@
 						{
 							var newTH = document.createElement('th');
 							t.rows[0].appendChild(newTH);
-							newTH.innerHTML="&sum; Sum of stages";
+							newTH.innerHTML="&sum; Sum";
+							newTH.rowSpan=2;
 						}
 
 						//UNIT header
 						var newTH = document.createElement('th');
 						t.rows[0].appendChild(newTH);
 						newTH.innerHTML="<?php write('#level3_unit')?>";
+						newTH.rowSpan=2;
 					/*end headers*/
 
 					/*update table body*/
@@ -1130,6 +1130,22 @@
 					}
 					substages.push(new level3.Substage());
 					init();
+
+					//visual efect (color blink new stage)
+					(function(){
+						var els=document.querySelectorAll('td[substage="'+parseInt(substages.length-1)+'"]');
+						for(var i=0;i<els.length;i++)
+						{
+							els[i].style.background='lightgreen';
+							els[i].style.transition='background 1s';
+						}
+						setTimeout(function(){
+							for(var i=0;i<els.length;i++)
+							{
+								els[i].style.background='';
+							}
+						},500);
+					})();
 				}
 				/** button delete substage pushed */
 				level3.deleteSubstage=function(index)
@@ -1362,17 +1378,21 @@
 						}
 
 						//level 2 value
-						var newCell=newRow.insertCell(-1);
-						newCell.setAttribute('title',prettyFormula);
-						newCell.style.fontWeight="bold";
-						newCell.style.background="white";
-						newCell.innerHTML=format(CurrentLevel[field]()/Units.multiplier(field));
+						if(substages.length>1)
+						{
+							var newCell=newRow.insertCell(-1);
+							newCell.setAttribute('title',prettyFormula);
+							newCell.style.fontWeight="bold";
+							newCell.style.background="white";
+							newCell.innerHTML=format(CurrentLevel[field]()/Units.multiplier(field));
+						}
 
 						//unit
 						newRow.insertCell(-1).innerHTML=(function()
 						{
 							return Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
 						})();
+
 					}
 
 					//if no active equations show warning
@@ -1382,6 +1402,9 @@
 						newCell.colSpan=4+substages.length;
 						newCell.innerHTML="<i style=color:#999>~No active outputs</i>";
 					}
+
+					//final row empty ()
+					t.insertRow(-1).insertCell(-1).colSpan=4+substages.length;
 				}
 			</script>
 
@@ -1389,8 +1412,10 @@
 			<div class="card">
 				<?php cardMenu("<b>Advanced Assessment: Questions (<a href=questions.php>info</a>)</b>")?> 
 				<div style=padding:0.5em;>
-					<table id=adv_questions class=inline></table>
-					<style> #adv_questions td {text-align:left} </style>
+					<table id=adv_questions></table>
+					<style> 
+						#adv_questions td {padding:0.3em 0.618em;text-align:left}
+					</style>
 				</div>
 			</div>
 
@@ -1425,10 +1450,10 @@
 									{
 										var newDisplay=document.querySelector('#substages td.input').style.display=='none' ? '':'none';
 										var n=substages.length;
-										var tr=document.querySelector('#substages tr');//fist tr
+
+										var tr=document.querySelector('#substages tr');//first tr
 										for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay;
-										var tr=document.querySelector('#substages tr:last-child');//last tr
-										for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay;
+
 										var collection=document.querySelectorAll('#substages td.input');
 										for(var i=0;i<collection.length;i++) collection[i].style.display=newDisplay;
 										var collection=document.querySelectorAll('#substages td.outputValue');

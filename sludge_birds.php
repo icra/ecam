@@ -49,8 +49,16 @@
 			default: alert('Error in sludge method');return;break;
 		}
 
+		//default values for other inputs
+		if(method=="inc")
+		{
+			Global.Waste.Treatment.wwt_temp_inc=750; //K Fluidized Bed Reactor Temperature
+		}
+
 		//kg of sludge estimated: reset all minus the selected
 		var mass_est=0.55*Global.Waste.Treatment.wwt_vol_trea/Global.General.Days()*171*1e-3*1.176;
+		console.log('Method selected: '+method);
+		console.log('Estimated mass of sludge: '+mass_est+' kg');
 		Global.Waste.Treatment['wwt_mass_slu']=mass_est;
 		Global.Waste.Treatment['wwt_mass_slu_'+method]=mass_est;
 
