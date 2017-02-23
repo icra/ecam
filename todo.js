@@ -12,6 +12,7 @@ var TODO = {
 	Back: //back-end
 	[
 		"[PENDING]     <b>[NOW]</b> - wst,wsd,wwc - pink table for pump efficiency equations pdf",
+		"[PENDING]     Fix sludge CO2eq variable codes so they don't appear at GHG summary",
 		"[WAITING IWA] Default value for Dry weight in sludge produced (kg)",
 		"[WAITING IWA] Conversion factor for electricity (kgCO2eq per kWh) for each country",
 		"[WAITING IWA] BOD per person per day (g/person/day) for each country",
