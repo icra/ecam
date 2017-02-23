@@ -44,6 +44,7 @@
 				table#inputs th:not(.tableHeader) {background:#d71d24}
 				table#substages th {background:#d71d24}
 				table#substages td.variableCode {background:#d71d24}
+				table#substages td.variableCode.output {background:#c9ab98}
 				#outputs a,#outputs a:visited{color:#d71d24}
 				#nrgOutputs a,#nrgOutputs a:visited{color:#d71d24}
 			<?php }

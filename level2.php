@@ -466,7 +466,7 @@
 
 <style>
 	table#inputs .non-editable {
-		text-align:center;
+		text-align:right;
 		cursor:pointer;
 		transition:background 1s;
 	}
