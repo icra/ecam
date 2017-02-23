@@ -103,7 +103,17 @@ var Info = {
 	wsa_nrg_per_pmp_watr:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
 	"wsa_pmp_type":{magnitude:"Option",unit:"Pump type"},
 	"wsa_pmp_size":{magnitude:"Option",unit:"Pump size"},
-	//"wsa_watr_src":{magnitude:"Option",unit:"Water source"},HIDDEN
+
+	wsa_pmp_flow:{magnitude:"Flow",unit:"L/s"},
+	wsa_pmp_volt:{magnitude:"Voltage",unit:"V"},
+	wsa_pmp_amps:{magnitude:"Intensity",unit:"A"},
+	wsa_pmp_exff:{magnitude:"Efficiency",unit:"%"},
+	c_wsa_pmp_pw:{magnitude:"Power",unit:"kW"},
+	wsa_KPI_nrg_elec_eff:{magnitude:"Efficiency",unit:"%"},
+	wsa_KPI_std_nrg_newp:{magnitude:"Energy",unit:"kWh/m3/100m"},
+	wsa_KPI_nrg_cons_new:{magnitude:"Energy",unit:"kWh"},
+	wsa_KPI_nrg_estm_sav:{magnitude:"Energy",unit:"kWh"},
+	wsa_KPI_ghg_estm_red:{magnitude:"Mass",unit:"kg CO2 eq"},
 
 	//L2 Water Treatment
 	"wst_vol_trea":{magnitude:"Volume",unit:"m3"},

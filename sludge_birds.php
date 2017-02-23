@@ -50,7 +50,7 @@
 		}
 
 		//kg of sludge estimated: reset all minus the selected
-		var mass_est=0.55*Global.Waste.Treatment.wwt_vol_trea*171*1e-3*1.176*Global.General.Days();
+		var mass_est=0.55*Global.Waste.Treatment.wwt_vol_trea/Global.General.Days()*171*1e-3*1.176;
 		Global.Waste.Treatment['wwt_mass_slu']=mass_est;
 		Global.Waste.Treatment['wwt_mass_slu_'+method]=mass_est;
 

@@ -386,7 +386,8 @@
 					var inputs=document.querySelectorAll("#inputs input[id]")
 					for(var i=0;i<inputs.length;i++)
 					{
-						inputs[i].onclick=function(){
+						inputs[i].onfocus=function()
+						{
 							this.value=parseFloat(this.value.replace(',',''));
 							this.select()
 						}

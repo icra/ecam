@@ -3,19 +3,18 @@ var Level3={};
 Level3.list=
 [
 	//wsa
-	"wsa_nrg_pump",
-	"wsa_vol_pump",
-	"wsa_main_len",
-	"wsa_sta_head",
-	"wsa_pmp_head",
 	"wsa_nrg_turb",
+
 	"wsa_KPI_nrg_recovery",
 	"wsa_KPI_std_nrg_cons",
 	"wsa_KPI_std_elec_eff",
 	"wsa_KPI_un_head_loss",
-	//"wsa_watr_src", HIDDEN
-	"wsa_pmp_type",
-	"wsa_pmp_size",
+	"wsa_KPI_nrg_elec_eff",
+	"wsa_KPI_std_nrg_newp",
+	"wsa_KPI_nrg_cons_new",
+	"wsa_KPI_nrg_estm_sav",
+	"wsa_KPI_ghg_estm_red",
+
 
 	//wst 
 	"wst_mass_slu",
@@ -33,7 +32,6 @@ Level3.list=
 	"wst_KPI_slu_per_m3",
 	"wst_KPI_capac_util",
 	"wst_KPI_std_elec_eff",
-	//"wst_disnfctn", HIDDEN
 	"wst_KPI_tst_carr",
 
 	//wsd
