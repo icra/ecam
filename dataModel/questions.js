@@ -29,12 +29,21 @@ var Questions = {
 			otherQuestions:[],
 		},
 
+		"wsa_producing_energy":{
+			variables:[
+				"wsa_nrg_turb",
+				"wsa_KPI_nrg_recovery",
+			],
+			advanced:0,
+			otherQuestions:[],
+		},
+
 		"wsa_pumping":{
 			variables:[ 
 				"wsa_vol_pump",
 				"wsa_nrg_pump",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[
 				"wsa_pumping_efficiency",
 			],
@@ -61,19 +70,9 @@ var Questions = {
 				"wsa_KPI_nrg_estm_sav",
 				"wsa_KPI_ghg_estm_red",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[],
 		},
-
-		"wsa_producing_energy":{
-			variables:[
-				"wsa_nrg_turb",
-				"wsa_KPI_nrg_recovery",
-			],
-			advanced:1,
-			otherQuestions:[],
-		},
-
 	//wst
 		"wst_engines":{
 			variables:[
@@ -85,56 +84,31 @@ var Questions = {
 			otherQuestions:[],
 		},
 
-		"wst_pumping_efficiency":{
-			variables:[ 
-				"wst_vol_pump",
-				"wst_pmp_head",
-				"wst_KPI_std_nrg_cons",
-				"wst_nrg_pump",
-				"wst_KPI_std_elec_eff",
-			],
-			advanced:1,
-			otherQuestions:[],
-		},
-
 		"wst_treatment_performance":{
 			variables:[ 
-				//"wst_turb_raw",HIDDEN
-				//"wst_turb_fin",HIDDEN
-				//"wst_disnfctn",HIDDEN
 				"wst_nrg_disn",
+				"wst_tst_carr",
+				"wst_trea_cap", 
 				"wst_KPI_nrg_disnfc",
-				"wst_KPI_slu_per_m3",
+				"wst_KPI_capac_util",
+				"wst_KPI_tst_carr",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[ ],
 		},
 
-	//wsd
-		"wsd_pumping":{
-			variables:[
-				"wsd_vol_pump",
-				"wsd_nrg_pump",
-				"wsd_KPI_nrg_per_m3",
-			],
-			advanced:1,
-			otherQuestions:[
-				"wsd_pumping_efficiency",
-			],
-		},
-
-		"wsd_pumping_efficiency":{
+		"wst_pumping_efficiency":{
 			variables:[ 
-				"wsd_KPI_std_nrg_cons",
-				"wsd_KPI_un_head_loss",
-				"wsd_pmp_size",
-				"wsd_sta_head",
-				"wsd_pmp_head",
+				"wst_vol_pump",
+				"wst_nrg_pump",
+				"wst_pmp_head",
+				"wst_KPI_std_nrg_cons",
+				"wst_KPI_std_elec_eff",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[],
 		},
-
+	//wsd
 		"wsd_engines":{
 			variables:[
 				"wsd_fuel_typ",
@@ -155,6 +129,18 @@ var Questions = {
 			otherQuestions:[],
 		},
 
+		"wsd_service_performance":{
+			variables:[
+				"wsd_deli_pts",
+				"wsd_ser_cons",
+				"wsd_time_pre",
+				"wsd_SL_pres_ade",
+				"wsd_SL_cont_sup",
+			],
+			advanced:0,
+			otherQuestions:[],
+		},
+
 		"wsd_topographic":{
 			variables:[
 				"wsd_min_pres",
@@ -169,10 +155,44 @@ var Questions = {
 				"wsd_KPI_nrg_efficien",
 				"wsd_KPI_nrg_topgraph",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[],
 		},
 
+		"wsd_pumping":{
+			variables:[
+				"wsd_vol_pump",
+				"wsd_nrg_pump",
+			],
+			advanced:0,
+			otherQuestions:[
+				"wsd_pumping_efficiency",
+			],
+		},
+
+		"wsd_pumping_efficiency":{
+			variables:[ 
+				"wsd_pmp_size",
+				"wsd_sta_head",
+				"wsd_pmp_head",
+				"wsd_pmp_flow",
+				"wsd_pmp_volt",
+				"wsd_pmp_amps",
+				"wsd_pmp_exff",
+				"wsd_main_len",
+				"c_wsd_pmp_pw",
+				"wsd_KPI_water_losses",
+				"wsd_KPI_std_nrg_cons",
+				"wsd_KPI_un_head_loss",
+				"wsd_KPI_nrg_elec_eff",
+				"wsd_KPI_std_nrg_newp",
+				"wsd_KPI_nrg_cons_new",
+				"wsd_KPI_nrg_estm_sav",
+				"wsd_KPI_ghg_estm_red",
+			],
+			advanced:0,
+			otherQuestions:[],
+		},
 	//wwc
 		"wwc_engines":{
 			variables:[
@@ -184,12 +204,23 @@ var Questions = {
 			otherQuestions:[],
 		},
 
+		"wwc_water_eff": {
+			variables:[
+				"wwc_wet_flow",
+				"wwc_rain_day",
+				"c_wwc_vol_infl",
+				"wwc_SL_GHG_ii",
+			],
+			advanced:0,
+			otherQuestions:[],
+		},
+
 		"wwc_pumping":{
 			variables:[
 				"wwc_vol_pump",
 				"wwc_nrg_pump",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[
 				"wwc_pumping_efficiency",
 			],
@@ -198,28 +229,23 @@ var Questions = {
 		"wwc_pumping_efficiency": {
 			variables:[
 				"wwc_pmp_head",
-				//"wwc_pmp_size", // Size of pumpHIDDEN
 				"wwc_sta_head",
-				//"wwc_pmp_type",HIDDEN
-				"wwc_KPI_std_nrg_cons",
-				"wwc_KPI_un_head_loss",
-			],
-			advanced:1,
-			otherQuestions:[],
-		},
-
-		"wwc_water_eff": {
-			variables:[
-				"wwc_wet_flow",
-				"wwc_dry_flow",
 				"wwc_coll_len",
-				//"wwc_infl_inf",HIDDEN
-				//"wwc_infl_infi",HIDDEN
-				"wwc_wd_ratio",
-				//"wwc_vol_infi",HIDDEN
-				//"wwc_KPI_GHG_ii",HIDDEN
+				"wwc_pmp_flow",
+				"wwc_pmp_volt",
+				"wwc_pmp_amps",
+				"wwc_pmp_exff",
+				"c_wwc_pmp_pw",
+				"wwc_KPI_std_nrg_cons",
+				"wwc_KPI_std_elec_eff",
+				"wwc_KPI_un_head_loss",
+				"wwc_KPI_nrg_elec_eff",
+				"wwc_KPI_std_nrg_newp",
+				"wwc_KPI_nrg_cons_new",
+				"wwc_KPI_nrg_estm_sav",
+				"wwc_KPI_ghg_estm_red",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[],
 		},
 
@@ -234,6 +260,31 @@ var Questions = {
 			otherQuestions:[],
 		},
 
+		"wwt_treatment_performance":{
+			variables:[
+				"wwt_trea_cap",
+				"wwt_tst_cmpl",
+				"wwt_tst_cond",
+				"wwt_KPI_capac_util",
+				"wwt_SL_qual_com",
+			],
+			advanced:0,
+			otherQuestions:[],
+		},
+
+		"wwt_pumping_efficiency":{
+			variables:[
+				"wwt_vol_pump",
+				"wwt_nrg_pump",
+				"wwt_pmp_head",
+				"wwt_KPI_nrg_per_pump",
+				"wwt_KPI_std_nrg_cons",
+				"wwt_KPI_std_elec_eff",
+			],
+			advanced:0,
+			otherQuestions:[],
+		},
+
 		"wwt_producing_biogas":{
 			variables:[
 				"wwt_biog_pro",
@@ -241,8 +292,8 @@ var Questions = {
 				"c_wwt_biog_fla",
 				"wwt_dige_typ",
 				"wwt_fuel_dig",
-				"wwt_KPI_GHG_dig_fuel",
 				"wwt_KPI_biog_x_bod",
+				"wwt_KPI_GHG_dig_fuel",
 				"wwt_KPI_GHG_biog",
 			],
 			advanced:0,
@@ -268,6 +319,8 @@ var Questions = {
 				"wwt_mass_slu",
 				"wwt_dryw_slu",
 				"wwt_slu_disp",
+				"wwt_KPI_sludg_prod",
+				"wwt_KPI_dry_sludge",
 				"wwt_KPI_GHG_slu",
 			],
 			advanced:0,
@@ -372,19 +425,6 @@ var Questions = {
 			otherQuestions:[],
 		},
 
-		"wwt_pumping_efficiency":{
-			variables:[
-				"wwt_pmp_head",
-				"wwt_pmp_type",
-				"wwt_vol_pump",
-				"wwt_nrg_pump",
-				"wwt_KPI_std_nrg_cons",
-				"wwt_KPI_std_elec_eff",
-			],
-			advanced:1,
-			otherQuestions:[],
-		},
-
 	//wwd
 		"wwd_engines":{
 			variables:[
@@ -395,6 +435,7 @@ var Questions = {
 			advanced:0,
 			otherQuestions:[],
 		},
+
 		"wwd_trucks":{
 			variables:[
 				"wwd_trck_typ",
@@ -423,7 +464,7 @@ var Questions = {
 				"wwd_main_len",
 				"wwd_KPI_std_nrg_cons",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[],
 		},
 };

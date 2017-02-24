@@ -49,6 +49,7 @@ var Units =
 	"Flow":{ 
 		"m3/s":1,
 		"L/s":0.001,
+		"m3/d":1/86400,
 	},
 	"Energy":{
 		kWh:1,

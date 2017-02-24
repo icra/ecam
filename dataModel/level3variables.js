@@ -3,9 +3,7 @@ var Level3={};
 Level3.list=
 [
 	//wsa
-	"wsa_nrg_turb",
-
-	"wsa_KPI_nrg_recovery",
+	/*
 	"wsa_KPI_std_nrg_cons",
 	"wsa_KPI_std_elec_eff",
 	"wsa_KPI_un_head_loss",
@@ -14,74 +12,48 @@ Level3.list=
 	"wsa_KPI_nrg_cons_new",
 	"wsa_KPI_nrg_estm_sav",
 	"wsa_KPI_ghg_estm_red",
-
+	*/
 
 	//wst 
-	"wst_mass_slu",
-	"wst_trea_cap",
-	"wst_tst_carr",
-	"wst_treatmen",
-	//"wst_turb_raw", HIDDEN
-	//"wst_turb_fin", HIDDEN
-	"wst_nrg_disn",
-	"wst_vol_pump",
-	"wst_pmp_head",
-	"wst_nrg_pump",
+	/*
 	"wst_KPI_nrg_disnfc",
 	"wst_KPI_std_nrg_cons",
-	"wst_KPI_slu_per_m3",
 	"wst_KPI_capac_util",
 	"wst_KPI_std_elec_eff",
 	"wst_KPI_tst_carr",
+	*/
 
 	//wsd
-	"wsd_nrg_pump",
-	"wsd_deli_pts",
-	"wsd_ser_cons",
-	"wsd_time_pre",
-	"wsd_min_pres",
-	"wsd_hi_no_el",
-	"wsd_lo_no_el",
-	"wsd_av_no_el",
-	"wsd_wt_el_no",
-	"wsd_vol_pump",
-	"wsd_pmp_head",
-	"wsd_main_len",
-	"c_wsd_nrg_natu",
-	"c_wsd_nrg_mini",
-	"c_wsd_nrg_supp",
-	"c_wsd_nrg_topo",
+	/*
 	"wsd_KPI_nrg_efficien",
 	"wsd_KPI_nrg_topgraph",
-	"wsd_SL_pres_ade",
-	"wsd_SL_cont_sup",
 	"wsd_KPI_water_losses",
-	"wsd_KPI_un_head_loss",
 	"wsd_KPI_std_nrg_cons",
-	"wsd_sta_head",
-	"wsd_pmp_size",
+	"wsd_KPI_un_head_loss",
+	"wsd_KPI_nrg_elec_eff",
+	"wsd_KPI_std_nrg_newp",
+	"wsd_KPI_nrg_cons_new",
+	"wsd_KPI_nrg_estm_sav",
+	"wsd_KPI_ghg_estm_red",
+	*/
 
 	//wwc
+	/*
 	"wwc_KPI_std_nrg_cons",
 	"wwc_KPI_un_head_loss",
 	"wwc_SL_GHG_ii",
 	"wwc_coll_len",
-	//"wwc_comb_sew", HIDDEN
-	//"wwc_cso_incd", HIDDEN
 	"wwc_dry_flow",
-	//"wwc_infl_inf", HIDDEN
-	//"wwc_infl_infi", HIDDEN
 	"wwc_pmp_head",
-	//"wwc_pmp_size", HIDDEN
-	//"wwc_pmp_type", HIDDEN
 	"wwc_sta_head",
-	//"wwc_vol_infi", HIDDEN
 	"wwc_wd_ratio",
 	"wwc_wet_flow",
 	"wwc_vol_pump",
 	"wwc_nrg_pump",
+	*/
 
 	//wwt
+	/*
 	"wwt_tst_cmpl",
 	"wwt_tst_cond",
 	"wwt_trea_cap",
@@ -111,8 +83,10 @@ Level3.list=
 	"wwt_KPI_GHG_stock_co2eq",
 	"wwt_KPI_GHG_land_co2eq",
 	"wwt_KPI_GHG_tsludge",
+	*/
 
 	//wwd
+	/*
 	"wwd_vol_nonp",//Volume of water reused
 	"wwd_pmp_head",
 	//"wwd_vol_turb", HIDDEN
@@ -125,4 +99,5 @@ Level3.list=
 	//"wwd_KPI_nrg_rcv_di", HIDDEN
 	"wwd_KPI_std_nrg_cons",
 	//"wwd_KPI_std_nrg_recv", HIDDEN
+	*/
 ];

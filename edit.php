@@ -879,9 +879,9 @@
 							newCell.classList.add('outputValue');
 							newCell.style.textAlign='center';
 							var str=""+
-								"<a href=# onclick=\"level3.deleteSubstage("+s+");return false\" caption='<?php write('#level3_delete_substage')?>'>Delete</a>"+
-								" | "+
 								"<a href='substage.php?level=<?php echo $level?>&sublevel=<?php echo $sublevel?>&index="+s+"'>Details</a>"+
+								" | "+
+								"<a href=# onclick=\"level3.deleteSubstage("+s+");return false\" caption='<?php write('#level3_delete_substage')?>'>Delete</a>"+
 								"";
 							newCell.innerHTML=str
 						}
@@ -934,8 +934,7 @@
 							if(isCV) newCell.classList.add('isCV');
 							newCell.innerHTML=(function()
 							{
-								var adv=Level3.list.indexOf(code)+1 ? "<span class=advanced caption='Advanced'>adv</span>" : "" ;
-								return "<a href=variable.php?id="+code+">"+code+"</a> "+adv;
+								return "<a href=variable.php?id="+code+">"+code+"</a>";
 							})();
 
 							/*2nd cell: variable name*/
@@ -1045,8 +1044,7 @@
 							newCell.classList.add('variableCode');
 							newCell.innerHTML=(function()
 							{
-								var adv="<span class=advanced caption='Advanced'>adv</span>";
-								return "<a href=variable.php?id="+code+">"+code+"</a>"+adv;
+								return "<a href=variable.php?id="+code+">"+code+"</a>";
 							})();
 
 							/*2nd cell: variable name*/
@@ -1330,10 +1328,9 @@
 
 						newCell.innerHTML=(function()
 						{
-							var adv=Level3.list.indexOf(field)+1 ? "<span class='advanced'     caption='Advanced'>adv</span>":"";
 							var ghg=isGHG                        ? "<span class='advanced ghg' caption='GHG'>GHG</span>":"";
 							var nrg=field.search('_nrg_')+1      ? "<span class='advanced nrg' caption='Energy performance'>NRG</span>":""; 
-							return "<a caption='"+translate(field+'_expla')+"' href=variable.php?id="+field+">"+field+"</a>"+ghg+adv+nrg;
+							return "<a caption='"+translate(field+'_expla')+"' href=variable.php?id="+field+">"+field+"</a>"+ghg+nrg;
 						})();
 
 						//2nd cell: description

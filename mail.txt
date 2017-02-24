@@ -1,4 +1,5 @@
 COLLECTION
+
 Add the following inputs for is water efficiency is selected, after wet weater flow and dry weather flow input:
 new
 wwc_wef_wwd
@@ -12,3 +13,41 @@ Infiltration/inflow
 m3
 
 Infiltration/inflow m3 = no. of rain days during assessment period * wwc_wet_flow
+
+--------------------------------------------------------------------------------
+This can be added to only global but after everything else.  See discussion below.  
+jose
+ 
+From: Rojo Maurer, Andres GIZ MX [mailto:andres.rojo@giz.de] 
+Sent: Thursday, February 23, 2017 5:50 PM
+Cc: Alarcon, Willy GIZ <willy.alarcon@giz.de>; Fernando, Ranjin GIZ <ranjin.fernando@giz.de>
+Subject: RE: ECAM Plan for this week
+ 
+Hi José,
+
+Uncollected wastewater:
+Formula for CH4 uncollected wastewater:
+(ww_resi_pop - ww_conn_pop) * wwc_bod_pday/1000 * Days * ct_ch4_ef * ct_ch4_eq
+ 
+Formula for N2O from uncollected wastewater:
+(ww_resi_pop - ww_conn_pop) * wwc_prot_con * Years * ct_fra_np * ct_fac_nc * ct_fac_ic * ct_ef_eff * ct_n2o_co * ct_n2o_eq
+ 
+I haven’t looked too much into the details, but they follow the same logic as “untreated wastewater”. We might need to revise is the EF (ct_ch4_ef), but should be ok for now.
+ 
+ 
+Onsite treatment:
+New input: Population with onsite treatment (ww_pop_onsite)
+ 
+Formula for CH4 from  onsite treatment:
+(ww_onsite_pop) * wwc_bod_pday/1000 * Days * ct_ch4_ef_sep * ct_ch4_eq
+ct_ch4_ef_sep for Septic systems: 0.3
+ 
+ 
+Formula for N2O from onsite treatment:
+I don´t know… would need to look at IPCC…  could adapt from untreated water (like below), but have no idea if it is adequate.  
+(ww_onsite_pop) * wwc_prot_con * Years * ct_fra_np * ct_fac_nc * ct_fac_ic * ct_ef_eff * ct_n2o_co * ct_n2o_eq
+ 
+ 
+Best, 
+Andrés
+--------------------------------------------------------------------------------

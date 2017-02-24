@@ -185,6 +185,17 @@ var Info = {
 	wsd_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wsd_SL_GHG_nrw:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
+	wsd_pmp_flow:{magnitude:"Flow",unit:"L/s"},
+	wsd_pmp_volt:{magnitude:"Voltage",unit:"V"},
+	wsd_pmp_amps:{magnitude:"Intensity",unit:"A"},
+	wsd_pmp_exff:{magnitude:"Efficiency",unit:"%"},
+	c_wsd_pmp_pw:{magnitude:"Power",unit:"kW"},
+	wsd_KPI_nrg_elec_eff:{magnitude:"Efficiency",unit:"%"},
+	wsd_KPI_std_nrg_newp:{magnitude:"Energy",unit:"kWh/m3/100m"},
+	wsd_KPI_nrg_cons_new:{magnitude:"Energy",unit:"kWh"},
+	wsd_KPI_nrg_estm_sav:{magnitude:"Energy",unit:"kWh"},
+	wsd_KPI_ghg_estm_red:{magnitude:"Mass",unit:"kg CO2 eq"},
+
 	//L2 Wastewater Collection
 	"wwc_vol_conv":{magnitude:"Volume",unit:"m3"},
 	"wwc_nrg_cons":{magnitude:"Energy",unit:"kWh"},
@@ -195,30 +206,34 @@ var Info = {
 	"wwc_pmp_head":{magnitude:"Head",unit:"m"},
 	"wwc_sta_head":{magnitude:"Head",unit:"m"},
 	"wwc_vol_fuel":{magnitude:"Volume",unit:"L"},
-	//"wwc_pmp_type":{magnitude:"Option",unit:"Pump type"},HIDDEN
-	//"wwc_comb_sew":{magnitude:"Percentage",unit:"%"}, HIDDEN
-	"wwc_wet_flow":{magnitude:"Flow",unit:"m3/day"},
-	"wwc_dry_flow":{magnitude:"Flow",unit:"m3/day"},
-	//"wwc_cso_incd":{magnitude:"Number",unit:"incidences"}, HIDDEN
 	"wwc_coll_len":{magnitude:"Distance",unit:"km"},
-	//"wwc_infl_inf":{magnitude:"Percentage",unit:"%"}, HIDDEN
-	"wwc_wd_ratio":{magnitude:"Ratio",unit:"adimensional"},
-	//"wwc_pmp_size":{magnitude:"Option",unit:"Size"}, HIDDEN
+
+	wwc_wet_flow:{magnitude:"Flow",unit:"m3/d"},
+	wwc_rain_day:{magnitude:"Time",unit:"day"},
+	c_wwc_vol_infl:{magnitude:"Volume",unit:"m3"},
+	wwc_SL_GHG_ii:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	wwc_SL_conn_pop:{magnitude:"Percentage",unit:"%"},
 	wwc_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
 	wwc_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m"},
 	wwc_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m"},
 	wwc_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km"},
-	//wwc_infl_infi:{magnitude:"Percentage",unit:"%"}, HIDDEN
-	//wwc_vol_infi:{magnitude:"Volume",unit:"m3"}, HIDDEN
-	wwc_SL_GHG_ii:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
-
 	wwc_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwc_KPI_GHG_unt_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwc_KPI_GHG_unt_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwc_KPI_GHG_fuel:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwc_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wwc_pmp_flow:{magnitude:"Flow",unit:"L/s"},
+	wwc_pmp_volt:{magnitude:"Voltage",unit:"V"},
+	wwc_pmp_amps:{magnitude:"Intensity",unit:"A"},
+	wwc_pmp_exff:{magnitude:"Efficiency",unit:"%"},
+	c_wwc_pmp_pw:{magnitude:"Power",unit:"kW"},
+	wwc_KPI_nrg_elec_eff:{magnitude:"Efficiency",unit:"%"},
+	wwc_KPI_std_nrg_newp:{magnitude:"Energy",unit:"kWh/m3/100m"},
+	wwc_KPI_nrg_cons_new:{magnitude:"Energy",unit:"kWh"},
+	wwc_KPI_nrg_estm_sav:{magnitude:"Energy",unit:"kWh"},
+	wwc_KPI_ghg_estm_red:{magnitude:"Mass",unit:"kg CO2 eq"},
+	wwc_KPI_std_elec_eff:{magnitude:"Percentage",unit:"%"},
 
 	//L2 Wastewater Treatment
 	"wwt_biog_pro":{magnitude:"Volume",unit:"m3"},
@@ -239,7 +254,6 @@ var Info = {
 	"wwt_num_trip":{magnitude:"Number",unit:"Trips"},
 	"wwt_type_tre":{magnitude:"Option",unit:"Technology"},
 
-	"wwt_pmp_type":{magnitude:"Option",unit:"Type"},
 	"wwt_vol_pump":{magnitude:"Volume",unit:"m3"},
 	"wwt_nrg_pump":{magnitude:"Energy",unit:"kWh"},
 	"wwt_pmp_head":{magnitude:"Head",unit:"m"},
@@ -326,12 +340,8 @@ var Info = {
 	"wwd_reus_typ":{magnitude:"Option",unit:"Discharge/Reuse type"},
 	"wwd_main_len":{magnitude:"Distance",unit:"km"},
 	"wwd_n2o_effl":{magnitude:"Mass/Volume",unit:"mg/L"},
-
 	wwd_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
 	wwd_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m"},
-	wwd_KPI_ghg_red:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
-	wwd_KPI_nrg_sav:{magnitude:"Energy",unit:"kWh"}, 
-
 	wwd_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwd_KPI_GHG_fuel:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwd_KPI_GHG_trck:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
