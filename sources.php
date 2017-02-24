@@ -108,22 +108,17 @@
 <!--navbar--> <?php include'navbar.php'?>
 <!--linear--> <?php include'linear.php'?>
 <!--caption--><?php include'caption.php'?>
-
 <!--title-->
 <h1>
 	<script>document.write(Global.General.Name)</script> 
-	&mdash; 
-	GHG Emissions Summary
+	&mdash; GHG Emissions Summary
 </h1>
-<h4>
-	Overview of all GHG emitted in <script>document.write(Global.General.Days())</script> days
-</h4>
+<h4>Overview of all GHG emitted in <script>document.write(Global.General.Days())</script> days</h4>
 <h4>Move the mouse over the emissions to get a detailed view at each stage</h4>
 
 <!--mobile div detailed sources-->
 <div id=container_detailed style=display:none>
 	<div><b> Detailed GHG sources </b></div>
-
 	<table id=detailed></table>
 	<style>
 		div#container_detailed {
@@ -212,7 +207,6 @@
 			table#sources img {vertical-align:middle;width:30px;margin-right:10px}
 		</style>
 	</div>
-
 	<!--Catalog of Solutions-->
 	<div class=card id=CoS style=display:none><?php cardMenu("IWA Catalogue of solutions")?>
 		<div style="text-align:left;padding:1.0em">

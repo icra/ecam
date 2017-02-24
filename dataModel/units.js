@@ -1,10 +1,8 @@
-var Units =
-{
+var Units={
 	/*Modify or add a unit change in Global.Configuration.Units*/
-	selectUnit:function(field,newUnit)
-	{
+	selectUnit:function(field,newUnit){
 		Global.Configuration.Units[field]=newUnit;
-		init()
+		init();//common function everywhere
 	},
 
 	/* return a multiplier for a field */
@@ -15,7 +13,7 @@ var Units =
 		if(Units[Info[field].magnitude]===undefined){return 1}
 
 		//look for current unit: first inside configuration, if not, in Info[field]
-		var currentUnit = Global.Configuration.Units[field] || Info[field].unit
+		var currentUnit = Global.Configuration.Units[field] || Info[field].unit;
 
 		//multiplier is in Units[magnitude][unit]
 		return Units[Info[field].magnitude][currentUnit] || 1;
@@ -54,7 +52,7 @@ var Units =
 	"Energy":{
 		kWh:1,
 		MWh:1000,
-		Joule:(1/3600000),
-		TJ:(1e7/36),
+		Joule:1/3600000,
+		TJ:1e7/36,
 	},
 }

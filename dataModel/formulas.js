@@ -1,16 +1,13 @@
 /*
 	Functions to deal with formulas/equations
 */
-
-var Formulas = {
+var Formulas={
 	/*
 		return array of strings corresponding to variables matched in formula string
 		example: "this.sV1+this.aV2" returns ['sV1','aV2']
 	*/
-	idsPerFormula:function(formula)
-	{
-		var matches=[];
-		var match;
+	idsPerFormula:function(formula) {
+		var match,matches=[];
 		//normal inputs
 		for(var field in Info)
 		{
@@ -36,7 +33,6 @@ var Formulas = {
 			match=formula.search(reg); //will return -1 if not found
 			if(match!=-1){matches.push(field);}
 		}
-
 		return matches;
 	},
 
@@ -44,8 +40,7 @@ var Formulas = {
 		return array of strings: outputs that use input
 		example: "sV1" returns ['c_wwt1','c_aV2']
 	*/
-	outputsPerInput:function(id,object)
-	{
+	outputsPerInput:function(id,object) {
 		object=object||Global;
 		var matches=[];
 		var match;
@@ -66,8 +61,7 @@ var Formulas = {
 		return matches;
 	},
 
-	prettify:function(formula)
-	{
+	prettify:function(formula) {
 		var result = formula.replace(/function/,"")
 		result = result.replace(/this./g,"")
 		result = result.replace(/var /g,"")
@@ -99,8 +93,7 @@ var Formulas = {
 	},
 
 	/* highlight a single field*/
-	hlField:function(field,hl)
-	{
+	hlField:function(field,hl) {
 		var yesno=hl?"yes":"no";
 		var elements=document.querySelectorAll('[field='+field+']');
 		for(var i=0;i<elements.length;i++)
@@ -115,8 +108,7 @@ var Formulas = {
 	 * @param {object} object - pointer to the DOM object
 	 * @param {boolean} hl - turn on/off highlighting
 	 */
-	hlInputs:function(field,object,hl)
-	{
+	hlInputs:function(field,object,hl) {
 		var formula=object[field].toString();
 		formula=Formulas.prettify(formula);
 		var inputs=this.idsPerFormula(formula);
@@ -134,8 +126,7 @@ var Formulas = {
 	 * @param {object} object - pointer to the DOM object
 	 * @param {boolean} hl - turn on/off highlighting
 	 */
-	hlOutputs:function(input,obj,hl)
-	{
+	hlOutputs:function(input,obj,hl) {
 		var outputs=this.outputsPerInput(input,obj);
 		for(var i in outputs)
 		{

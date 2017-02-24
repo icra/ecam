@@ -17,7 +17,7 @@
 		],
 	},
 */
-var Questions = {
+var Questions={
 	//wsa
 		"wsa_engines":{
 			variables:[

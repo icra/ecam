@@ -1,5 +1,5 @@
 /* Random tips */
-var Tips = [
+var Tips=[
 	"Use the TAB key (&rarrb;) to input values faster",
 	"Double click a graph to download it",
 	"Export results to Excel at Main Menu/Summary/Export",
@@ -12,11 +12,10 @@ var Tips = [
 	"Move the mouse over an output to see its formula",
 ];
 
-Tips.random=function()
-{
+Tips.random=function() {
 	var leng=Tips.length;
 	var rand=Math.floor(Math.random()*leng);
 	var tip=Tips[rand];
-	if(leng>1) Tips.splice(rand,1);
+	if(leng>1){Tips.splice(rand,1);}
 	return tip;
 }

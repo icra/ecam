@@ -1,15 +1,17 @@
 <?php
-	/**summary.php: summary for inputs or outputs */
+	/**summary.php: for inputs or outputs */
 
 	if(!isset($_GET['type']))
 		die('Error. type not specified<br>Try: <a href=summary.php?type=input>Inputs</a> or <a href=summary.php?type=output>Outputs</a> or <a href=summary.php?type=ccvv>calculated variables</a>');
 	
-	//tipus de variable: inputs o outputs
+	//variable type chosen: input / output / ccvv
 	$type=$_GET['type'];
 
 	//check correct $type value
 	if($type!="input" && $type!="output" && $type!="ccvv")
-		die('Error. type must be "inputs", "outputs" or "ccvv"');
+	{
+		die('Error. type must be "input", "output" or "ccvv"');
+	}
 
 	//if ccvv (calculated variables, create a boolean $ccvv)
 	if($type=="ccvv")
@@ -18,7 +20,9 @@
 		$ccvv=true;
 	}
 	else
+	{
 		$ccvv=false;
+	}
 ?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>

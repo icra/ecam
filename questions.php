@@ -1,8 +1,6 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
-	<style>
-		i.advanced{color:#999}
-	</style>
+	<style> i.advanced{color:#999} </style>
 	<script>
 		function init() 
 		{
@@ -53,8 +51,7 @@
 <!--linear--><?php include'linear.php'?>
 <!--caption--><?php include'caption.php'?>
 <!--TITLE--><h1><?php write('#questions_about')?></h1>
-
-<div id=main>
+<div id=root>
 	<!--questions and variables hidden-->
 	<table id=questions style=margin-bottom:3em>
 		<tr>

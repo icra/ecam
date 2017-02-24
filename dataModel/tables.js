@@ -1,4 +1,4 @@
-
+//Data structure for tabled values or dropdown menus
 var Tables = 
 {
 	//fuel types
@@ -76,7 +76,7 @@ var Tables =
 		"Aerated Lagoon":{value:4,                                ch4_efac:0.18},
 		"Anaerobic Lagoon <2m depth":{value:5,                    ch4_efac:0.12},
 		"Anaerobic Lagoon >2m depth":{value:6,                    ch4_efac:0.48},
-		"Anaerobic Lagoon covered":{value:7,                      ch4_efac:0}, //MISSING VALUE
+		"Anaerobic Lagoon covered":{value:7,                      ch4_efac:0}, //MISSING VALUE TODO
 		"Trickling Filter":{value:8,                              ch4_efac:0.036},
 		"UASB - CH4 recovery not considered":{value:9,            ch4_efac:0.48},
 		"UASB - CH4 recovery considered":{value:10,               ch4_efac:0.3},
@@ -138,13 +138,12 @@ Tables.wwd_trck_typ=Tables["Fuel types"]; //trucks
 Tables.wwt_dige_typ=Tables["Fuel types"]; //type of fuel dig afegida per mi
 Tables.wwt_appl_typ=Tables["Fuel types"]; //type of fuel app afegida per mi
 
-//find the option name by value
-Tables.find=function(field,value)
-{
-	for(var option in Tables[field])
-	{
-		if(value==Tables[field][option].value)
-			return option
+//find the option (string) by field (string) and value (float)
+Tables.find=function(field,value) {
+	for(var option in Tables[field]) {
+		if(value==Tables[field][option].value) {
+			return option;
+		}
 	}
-	return false
+	return false;
 }

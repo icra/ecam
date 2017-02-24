@@ -13,8 +13,9 @@ var TODO = {
 	],
 	Back: //back-end
 	[
+		"[PENDING]     Mail from Andres (uncollected wastewater)",
 		"[PENDING]     wsd: not clear how to calculate Non revenue water for Abstraction and Treatment",
-		"[PENDING]     wwd Discharge: pumping efficiency not implemented",
+		"[PENDING]     wwd Discharge: pumping efficiency not implemented (not requested by IWA)",
 		"[PENDING]     Fix code of sludge CO2eq variable codes so they don't appear at GHG summary",
 		"[PENDING]     Ask IWA what to do with Energy Summary",
 		"[WAITING IWA] Default value for Dry weight in sludge produced (kg)",

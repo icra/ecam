@@ -16,8 +16,7 @@
 
   */
 
-var RefValues = 
-{
+var RefValues = {
 	//wsa: 2 variables benchmarked
 	wsa_KPI_std_nrg_cons:function(obj) {
 		var value=obj.wsa_KPI_std_nrg_cons();

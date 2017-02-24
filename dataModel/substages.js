@@ -1,4 +1,5 @@
 /** Substages Arrays For Level 3 */
+//each stage has its own cookie
 var Substages=
 {
 	"Water":{
@@ -12,5 +13,3 @@ var Substages=
 		"Discharge":[],
 	},
 }
-
-//each stage has its own cookie

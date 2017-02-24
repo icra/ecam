@@ -1,6 +1,5 @@
 /** Data Quality */
-
-var DQ = { };
+var DQ={};
 
 //newValue can be "Actual" or "Estimated"
 DQ.update=function(field,newValue)

@@ -1,7 +1,7 @@
 <?php
 	/* 
 		All substage's info
-		Inputs: level, sublevel, index
+		Inputs (3): level, sublevel, index
 	*/
 	if(!isset($_GET['index'])) die('index not defined');
 	$level    = $_GET['level'] or die('level not defined');
@@ -118,13 +118,14 @@
 <!--subtitle-->
 <h3 style=text-align:center>All inputs and outputs from substage "<script>document.write(substage.name)</script>"</h3>
 
-<!--main container-->
+<!--root container-->
 <div>
 	<!--substage table-->
-	<table id=substage style=margin:auto;margin-top:0.5em>
-		<tr><th>Variable<th>Current Value<th>Units
+	<table id=substage style=margin:auto;margin-top:0.5em><tr>
+			<th>Variable
+			<th>Current Value
+			<th>Units
 	</table>
 </div>
-<!--end main container-->
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

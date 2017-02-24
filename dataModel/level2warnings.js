@@ -1,5 +1,4 @@
 /* variables shown in level2 with a warning that cannot be calculated*/
-
 var Level2Warnings=
 {
 	/*

@@ -1,6 +1,6 @@
 <?php
 
-//current language is in COOKIE "lang". Default is english ($lang="en")
+//Current language is in COOKIE "lang". Default is english ($lang="en")
 $lang=isset($_COOKIE['lang']) ? $_COOKIE['lang'] : "en" ;
 
 //load selected language
@@ -37,13 +37,11 @@ function write($id)
 	{ 
 		?>
 		<script><?php echo "var lang=$lang_file;" ?></script>
-		<script> function translate(id){ return lang['#'+id]||"<span style=background:yellow>#"+id+" undefined</span>"; } </script>
+		<script>function translate(id){return lang['#'+id]||"<span style=background:yellow>#"+id+" undefined</span>";}</script>
 		<?php 
 	}
 	else 
 	{ 
-		?>
-		<script>function translate(id){return '#'+id}</script>
-		<?php 
+		?><script>function translate(id){return '#'+id}</script><?php 
 	}
 ?>

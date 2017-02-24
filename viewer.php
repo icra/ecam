@@ -1,6 +1,12 @@
 <!doctype html><html><head>
 <?php include'imports.php'?>
 <script>
+	/*data structures viewer*/
+	function init() 
+	{ 
+		createTree()
+		updateResult() 
+	} 
 	function createTree(obj,name,destiny)
 	{
 		//initial conditions
@@ -56,12 +62,6 @@
 			}
 		}
 	}
-
-	function init() 
-	{ 
-		createTree()
-		updateResult() 
-	} 
 </script>
 <style>
 	ul {list-style:circle}
@@ -92,10 +92,8 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--navbar--> <?php include'navbar.php'?>
 <!--menu--> <?php include'linear.php'?>
-
 <!--title-->
 <h1><a href=development.php>Development</a> &rsaquo; All data structures in ECAM</h1></center>
-
 <!--legend-->
 <div id=legend>
 	<span style=color:#666>Legend</span> &rarr;
@@ -103,13 +101,11 @@
 	<div class=inline style=background:black></div>   Input
 	<div class=inline style=background:blue></div>    Equation
 </div>
-
 <!--main structure: Global-->
 <div class=inline style=max-width:75%>
 	<h2>Main data structure: Global</h2>
 	<ul id=root></ul>
 </div>
-
 <!--other data structures-->
 <div class=inline style=max-width:20%>
 	<h2>Other data structures</h2>
@@ -118,10 +114,12 @@
 		$files=scandir("dataModel");
 		forEach($files as $file)
 		{
-			if(!is_dir("dataModel/$file")) 
+			if(!is_dir("dataModel/$file"))
+			{
 				echo "<li><a href='dataModel/$file'>$file</a>";
+			}
 		}
 	?>
 	</ul>
 </div>
-<!--JSON-->   <?php include'currentJSON.php'?>
+<!--JSON--><?php include'currentJSON.php'?>

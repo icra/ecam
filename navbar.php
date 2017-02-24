@@ -1,5 +1,4 @@
-<!--navbar.php: menu of sections at the top of each page-->
-
+<!--navbar.php: just the logo and lang selection-->
 <style>
 	#navbar {
 		text-align:left;
@@ -14,7 +13,6 @@
 	#navbar a {color:white;}
 	#navbar a:hover {text-decoration:none}
 	#navbar img{vertical-align:middle}
-
 	#navbar #burger 
 	{
 		color:white;
@@ -26,18 +24,14 @@
 	}
 	#navbar #burger:hover {color:#666}
 </style>
-
 <div id=navbar>
 	<!--menu symbol--><span id=burger onclick="event.stopPropagation();Sidebar.toggle()">&#9776;</span>
-
 	<a href=index.php>
 		<span style=font-size:30px;margin-right:35px;font-weight:bold>ECAM</span>
 		<?php write('#navbar_title')?>
 	</a>
-
 	<span style=position:absolute;font-size:14px;right:10%;top:18px>
 		<a href=problems.php>Debugging utility</a>
 	</span>
-
 	<!--language selection--><?php include'language.php'?>
 </div>

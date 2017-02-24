@@ -11,9 +11,32 @@
 		div.card {margin:10px}
 		pre.prettyprint {border:none;margin:1px;padding:1px}
 	</style>
+</head><body><center>
+<!--sidebar--><?php include'sidebar.php'?>
+<!--NAVBAR--><?php include"navbar.php"?>
+<!--TITLE--><h1><a href=development.php>Development</a> &rsaquo; Benchmarking summary</h1>
+<!--root-->
+<div id=root style="text-align:left">
+	<div style="margin-top:1em;text-align:center">
+		<button onclick=foldAll()>Fold all</button>
+		<button onclick=unfoldAll()>Unfold all</button>
+		<script>
+			function unfoldAll()
+			{
+				var elements = document.querySelectorAll('div.card.folded');
+				for(var i=0;i<elements.length;i++)
+					elements[i].classList.remove('folded');
+			}
+			function foldAll()
+			{
+				var elements = document.querySelectorAll('div.card');
+				for(var i=0;i<elements.length;i++)
+					elements[i].classList.add('folded');
+			}
+		</script>
+	</div>
 	<script>
 		var Bm = {};
-
 		Bm.getCodes = function(prefix)
 		{
 			var codes = new Array();
@@ -22,7 +45,6 @@
 					codes.push(f);
 			return codes
 		}
-
 		function printDiv(prefix)
 		{
 			var stage;
@@ -59,7 +81,6 @@
 			if(codes.length==0){document.write('empty')}
 			document.write("</div>")
 		}
-
 		function printLevel(prefixArray,name)
 		{
 			document.write("<div class='card'>"+
@@ -68,7 +89,6 @@
 			prefixArray.forEach(function(prefix){printDiv(prefix)});
 			document.write("</div>")
 		}
-
 		function printAll()
 		{
 			printLevel(['wsa','wst','wsd'],"Water");
@@ -76,33 +96,6 @@
 			printLevel(['wsg','wwg'],"Energy");
 		}
 	</script>
-</head><body><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1><a href=development.php>Development</a> &rsaquo; Benchmarking summary</h1>
-
-<!--main-->
-<div id=main style="text-align:left">
-
-	<div style="margin-top:1em;text-align:center">
-		<button onclick=foldAll()>Fold all</button>
-		<button onclick=unfoldAll()>Unfold all</button>
-	</div>
-	<script>
-		function unfoldAll()
-		{
-			var elements = document.querySelectorAll('div.card.folded');
-			for(var i=0;i<elements.length;i++)
-				elements[i].classList.remove('folded');
-		}
-		function foldAll()
-		{
-			var elements = document.querySelectorAll('div.card');
-			for(var i=0;i<elements.length;i++)
-				elements[i].classList.add('folded');
-		}
-	</script>
 	<script>printAll()</script>
 </div>
-
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

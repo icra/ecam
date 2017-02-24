@@ -1,6 +1,5 @@
 /* variables only in level2, not in level3 */
 //note: only inputs
-
 var Level2only = {
 	list:
 	[

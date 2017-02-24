@@ -63,23 +63,13 @@ function locateVariable(code)
 /** return 3.999,4 instead of 3999.4*/
 function format(number)
 {
-	//for work in progess formulas: -999
+	//for work in progess formulas: -999 (bad practice)
 	if(number==-999){return "<span style=background:yellow>Formula under development</span>";}
 
 	var str=new Intl.NumberFormat('en-EN',{maximumFractionDigits:2}).format(number);
+	//display error if "NaN" or "Infinity"
 	if(str=="NaN" || !isFinite(number)) return "<span style=color:#666;font-size:10px>~"+translate('missing_inputs')+"</span>";
 	return str;
-}
-
-/** make a table row inactive. Used according to Questions**/
-function disableRow(row)
-{
-	row.style.display='none';
-	return
-	//Change color
-	row.style.background='#eee';
-	row.style.color='#aaa';
-	row.style.cursor="not-allowed";
 }
 
 /** Colors for GHG emissions */
@@ -96,7 +86,6 @@ var ColorsGHG = {
 }
 
 var Utils={};//namespace
-
 //return array of codes that use "code" in its formula
 Utils.usedInBenchmarks=function(code)
 {

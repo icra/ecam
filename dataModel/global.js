@@ -2,7 +2,6 @@
 	Main data structure
 	This object stores user inputs and has all equations.
 	All inputs are saved to cookies (compressed) (see "js/updateGlobalFromCookies.js")
-
 	After ecam v2 it would be good to separate all equations in another object
 */
 var Global={
@@ -89,7 +88,6 @@ var Global={
 			wsa_KPI_nrg_cons_new:function(){return this.wsa_vol_pump*this.wsa_KPI_std_nrg_newp()/100*this.wsa_pmp_head}, 
 			wsa_KPI_nrg_estm_sav:function(){return this.wsa_nrg_per_pmp_watr()-this.wsa_KPI_nrg_cons_new()}, 
 			wsa_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wsa_KPI_nrg_estm_sav()},
-
 			//GHG emissions Abstraction
 			wsa_KPI_GHG_elec:function(){return this.wsa_nrg_cons*Global.General.conv_kwh_co2},
 			wsa_KPI_GHG_fuel:function(){
@@ -189,7 +187,7 @@ var Global={
 			wsd_KPI_nrg_cons_new:function(){return this.wsd_vol_pump*this.wsd_KPI_std_nrg_newp()/100*this.wsd_pmp_head}, 
 			wsd_KPI_nrg_estm_sav:function(){return this.wsd_KPI_nrg_per_m3()-this.wsd_KPI_nrg_cons_new()}, 
 			wsd_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wsd_KPI_nrg_estm_sav()},
-
+			//wsd GHG
 			wsd_KPI_GHG_elec:function(){return this.wsd_nrg_cons*Global.General.conv_kwh_co2},
 			wsd_KPI_GHG_fuel:function(){
 				var fuel=Tables['Fuel types'][Tables.find('wsd_fuel_typ',this.wsd_fuel_typ)]; 
@@ -339,7 +337,6 @@ var Global={
 			"wwt_biog_val":0,
 			wwt_KPI_nrg_biogas:function(){return this.wwt_nrg_biog/this.wwt_vol_trea},
 			wwt_KPI_nrg_x_biog:function(){return 100*this.wwt_nrg_biog/this.c_wwt_nrg_biog()},
-
 			//sludge (general)
 			wwt_mass_slu:0,
 			wwt_dryw_slu:0,
@@ -450,7 +447,6 @@ var Global={
 			"wwt_trck_typ":0,
 			"wwt_num_trip":0,
 			"wwt_dist_dis":0,
-
 			//MODULE sludge management GHG emissions: 
 			wwt_KPI_GHG_sto_co2eq:function(){return this.wwt_slu_storage_ch4()*Cts.ct_ch4_eq.value},
 			wwt_KPI_GHG_comp_co2eq:function(){return this.wwt_slu_composting_co2()+this.wwt_slu_composting_ch4()+this.wwt_slu_composting_n2o()},
@@ -468,7 +464,6 @@ var Global={
 				{return 0}//<br>
 			},
 			wwt_KPI_GHG_stock_co2eq:function(){return this.wwt_mass_slu_stock*90.3*1e-3},
-
 			//wwt GHG
 			wwt_KPI_GHG_elec:function(){return this.wwt_nrg_cons*Global.General.conv_kwh_co2},
 			wwt_KPI_GHG_fuel:function(){
@@ -601,28 +596,27 @@ var Global={
 		(only estimated, if not here, calculated) */
 		DataQuality:{},
 
+		//auxiliar object to store user selections
 		Selected: {
-			wwc_prot_con:"Albania",//string value for wwc_prot_con exception (see "exceptions.js")
+			wwc_prot_con:"Albania",//country selected for protein consumption
 			sludge_estimation_method:"0",
 		},
 
-		//default answers for filters ("questions.js")
+		//answers for filters ("questions.js")
 		"Yes/No": {
-			wsa_pumping:           0,
-			wwt_producing_biogas:  0,
-			wwt_valorizing_biogas: 0,
+			wsa_pumping:0,
+			wwt_producing_biogas:0,
+			wwt_valorizing_biogas:0,
 		},
 	},
 };
 
-//fix for wrapper equations, otherwise the formula appears incorrectly at variable.php
-//WS
+//following block is a fix for wrapper equations, so they don't appear incorrectly at variable.php
 Global.Water.wsa_KPI_GHG=function(){return Global.Water.Abstraction.wsa_KPI_GHG()};
 Global.Water.wst_KPI_GHG=function(){return Global.Water.Treatment.wst_KPI_GHG()};
 Global.Water.wsd_KPI_GHG=function(){return Global.Water.Distribution.wsd_KPI_GHG()};
-Global.Water.ws_KPI_GHG=function(){return this.wsa_KPI_GHG()+this.wst_KPI_GHG()+this.wsd_KPI_GHG()};
-//WW
+Global.Water.ws_KPI_GHG =function(){return this.wsa_KPI_GHG()+this.wst_KPI_GHG()+this.wsd_KPI_GHG()};
 Global.Waste.wwc_KPI_GHG=function(){return Global.Waste.Collection.wwc_KPI_GHG()};
 Global.Waste.wwt_KPI_GHG=function(){return Global.Waste.Treatment.wwt_KPI_GHG()};
 Global.Waste.wwd_KPI_GHG=function(){return Global.Waste.Discharge.wwd_KPI_GHG()};
-Global.Waste.ww_KPI_GHG=function(){return this.wwc_KPI_GHG()+this.wwt_KPI_GHG()+this.wwd_KPI_GHG()};
+Global.Waste.ww_KPI_GHG =function(){return this.wwc_KPI_GHG()+this.wwt_KPI_GHG()+this.wwd_KPI_GHG()};

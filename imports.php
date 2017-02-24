@@ -3,13 +3,11 @@
 <link rel="stylesheet" href="css.css">
 <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 <meta name="description" content="">
-
 <!--libs-->
 <script src="js/lz-string.js"></script>
 <script src="js/charts/loader.js"></script>
-
 <!--translation--><?php include'languages/write.php' ?>
-<!--order is important. first dataModel, then cookies-->
+<!--order is important: dataModel then cookies-->
 <script src="dataModel/global.js"></script>
 <script src="dataModel/substages.js"></script>
 <script src="dataModel/info.js"></script>
@@ -25,21 +23,16 @@
 <script src="dataModel/exceptions.js"></script>
 <script src="dataModel/normalization.js"></script>
 <script src="dataModel/averagedVariables.js"></script>
-<script src="dataModel/opps.js"></script>
 <script src="dataModel/constants.js"></script>
 <script src="dataModel/tips.js"></script>
 <script src="dataModel/countries.js"></script>
 <script src="js/cookies.js"></script>
 <script src="js/updateGlobalFromCookies.js"></script>
 <script src="utils.js"></script>
-
 <!--graphs--><script src="graphs.js"></script>
-
-<?php /** php utils **/
-
+<?php /**php utils**/
 	//create a menu for folding the parent div.card element
-	function cardMenu($name)
-	{
+	function cardMenu($name){
 		echo "
 		<div class=menu onclick=this.parentNode.classList.toggle('folded')>
 			<button></button>
@@ -48,6 +41,4 @@
 		";
 	}
 ?>
-
-<!--title-->
-<title>ECAM Web Tool</title>
+<!--title--><title>ECAM Web Tool</title>
