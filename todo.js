@@ -10,6 +10,7 @@ var TODO = {
 		"[IDEA]    Add references (page,chapter,book) to equations (IPCC, BEAM, ...?)",
 		"[IDEA]    Add a into variable.php the question it belongs to (filter)",
 		"[IDEA]    Add a into variable.php the current benchmarking if any"
+		"[IDEA]    Recode in php the 'linear diagram' so image does not blink",
 	],
 	Back: //back-end
 	[

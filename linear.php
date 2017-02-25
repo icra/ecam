@@ -42,7 +42,7 @@
 		<img class=l1 stage=conf src=img/dashboard.png caption="<?php write('#configuration')?>">
 	</div>
 
-	<!--inhabitants-->
+	<!--population-->
 	<div 
 		style=cursor:pointer
 		onclick=window.location="inhabitants.php">
@@ -142,6 +142,10 @@
 		{ ?>document.querySelector('img[stage=io]').classList.add('selected');<?php }
 	?>
 
+	//go over icon images to deactivate inactives --> do in PHP better?
+	<?php
+		//try it here
+	?>
 	//go over icon images to deactivate inactives --> do in PHP better?
 	(function()
 	{
