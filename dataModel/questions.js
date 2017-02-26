@@ -341,7 +341,7 @@ var Questions={
 				"wwt_time_slu_sto",
 				"c_wwt_ch4_pot",
 				"wwt_slu_storage_ch4",
-				"wwt_KPI_GHG_sto_co2eq",
+				"wwt_KPI_ghg_sto_co2eq",
 			],
 			advanced:0,
 			otherQuestions:[],
@@ -353,7 +353,7 @@ var Questions={
 				"wwt_slu_composting_co2",
 				"wwt_slu_composting_ch4",
 				"wwt_slu_composting_n2o",
-				"wwt_KPI_GHG_comp_co2eq",
+				"wwt_KPI_ghg_comp_co2eq",
 			],
 			advanced:0,
 			otherQuestions:[
@@ -368,7 +368,7 @@ var Questions={
 				"wwt_slu_inciner_co2",
 				"wwt_slu_inciner_ch4",
 				"wwt_slu_inciner_n2o",
-				"wwt_KPI_GHG_inc_co2eq",
+				"wwt_KPI_ghg_inc_co2eq",
 			],
 			advanced:0,
 			otherQuestions:[
@@ -384,7 +384,7 @@ var Questions={
 				"wwt_vol_fuel_app",
 				"wwt_slu_landapp_co2",
 				"wwt_slu_landapp_n2o",
-				"wwt_KPI_GHG_app_co2eq",
+				"wwt_KPI_ghg_app_co2eq",
 			],
 			advanced:0,
 			otherQuestions:[
@@ -397,7 +397,7 @@ var Questions={
 				"wwt_slu_type",
 				"wwt_slu_landfill_ch4",
 				"wwt_slu_landfill_n2o",
-				"wwt_KPI_GHG_land_co2eq",
+				"wwt_KPI_ghg_land_co2eq",
 			],
 			advanced:0,
 			otherQuestions:[
@@ -407,7 +407,7 @@ var Questions={
 		"wwt_stockpiling":{
 			variables:[
 				"wwt_mass_slu_stock",
-				"wwt_KPI_GHG_stock_co2eq",
+				"wwt_KPI_ghg_stock_co2eq",
 			],
 			advanced:0,
 			otherQuestions:[
@@ -419,7 +419,7 @@ var Questions={
 				"wwt_trck_typ",
 				"wwt_num_trip",
 				"wwt_dist_dis",
-				"wwt_KPI_GHG_tsludge",
+				"wwt_KPI_ghg_tsludge",
 			],
 			advanced:0,
 			otherQuestions:[],
@@ -479,7 +479,7 @@ Questions.isInside=function(field) {
 		for(var i in this[question].variables)
 		{
 			code=this[question].variables[i];
-			if(code==field) return true;
+			if(field===code) return question;
 		}
 	}
 	return false;

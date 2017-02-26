@@ -75,7 +75,8 @@
 				newCell.innerHTML=str
 			}
 
-			//go over inputs array we've just created
+			//go over normal inputs and then dropdown menus
+			//1. go over inputs array we've just created
 			for(var input in inputs)
 			{
 				/*variable code*/
@@ -84,9 +85,10 @@
 				/*Skip if is level2 only*/
 				if(Level2only.list.indexOf(code)+1) continue;
 
+				//skip if filtered
 				if(Questions.isHidden(code)) continue;
 
-				/*is a calculated variable*/
+				//is a calculated variable?
 				var isCV=typeof(CurrentLevel[code])=="function" ? true : false;
 
 				//copy the function inside substages
@@ -125,6 +127,14 @@
 				{
 					return "<a href=variable.php?id="+code+">"+code+"</a>";
 				})();
+				//show question it belongs
+				(function(){
+					var question=Questions.isInside(code);
+					if(question)
+					{
+						newCell.innerHTML+=" <span class='advanced'>"+question.substring(4)+"</span>";
+					}
+				})()
 
 				/*2nd cell: variable name*/
 				var newCell=newRow.insertCell(-1);
@@ -210,8 +220,7 @@
 					return str
 				})();
 			}
-
-			//go over inputs "magnitude==option"
+			//2. go over inputs "magnitude==option"
 			for(var input in inputs)
 			{
 				/*variable code*/
@@ -459,7 +468,7 @@
 		init();
 	}
 	/** Redisplay outputs */
-	level3.updateOutputs2=function()
+	level3.updateOutputs=function()
 	{
 		var t=document.getElementById('substages');
 

@@ -147,7 +147,7 @@
 			}
 			if(typeof(level3)!="undefined") {
 				level3.updateSubstagesTable();
-				level3.updateOutputs2();
+				level3.updateOutputs();
 			}
 			if(typeof(level2)!="undefined"){ level2.updateInputs() }
 			updateOutputs();

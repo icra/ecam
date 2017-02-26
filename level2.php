@@ -393,7 +393,7 @@
 
 		//variables without questions associated 
 		for(var field in CurrentLevel) {
-			/*check if current question answers make it inactive*/
+			/*check if current field is filtered*/
 			if(Questions.isInside(field)) continue;
 
 			/*first check if function*/

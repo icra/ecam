@@ -80,6 +80,7 @@
 				newCell.innerHTML+="&larr; <a href="+url+"?level="+level+"&sublevel="+sublevel+">"+levelAlias+": "+sublevelAlias+"</a>"
 			}
 			else newCell.innerHTML="<?php write('#variable_go_back_to')?> <a href=edit.php?level="+level+">"+levelAlias+"</a>"
+
 			//Explanation
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
@@ -93,6 +94,22 @@
 					return "<span style=color:#999>No explanation</span>";
 				else
 					return exp;
+			})();
+
+			//Is filtered?
+			(function(){
+				var question=Questions.isInside(id);
+				console.log(question);
+				if(question)
+				{
+					newRow=t.insertRow(-1)
+					newCell=newRow.insertCell(-1)
+					newCell.className='th';
+					newCell.innerHTML="Filter that activates it";
+					newCell=newRow.insertCell(-1)
+					var currentAnswer = Global.Configuration['Yes/No'][question] ? "Yes" : "No";
+					newCell.innerHTML=translate(question)+"? ["+currentAnswer+"]";
+				}
 			})();
 
 			//Type (input or output)
@@ -388,13 +405,16 @@
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
 				newCell.innerHTML="Is benchmarked?"
-				newRow.insertCell(-1).innerHTML="YES (<a href=benchmark.php>Benchmark summary</a>)"+
-					"<div class='card'>"+
-					"	<div class=menu onclick=this.parentNode.classList.toggle('folded')>"+
-					"		<button></button> See formula"+
-					"	</div>"+
-					"	<pre class='prettyprint'>"+RefValues[id].toString().replace(/	/g,'  ')+"</pre>"+
+				//evaluate benchmarking and show formula
+				newRow.insertCell(-1).innerHTML=""+
+					"<div style='margin:1em 0'><b>Benchmarking status &rarr;</b> <span style=font-size:16px>"+RefValues[id](currentStage)+"</span></div>"+
+					"<div class='card folded' style=margin:0>"+
+					"<div class=menu onclick=this.parentNode.classList.toggle('folded')>"+
+					"	<button></button> Benchmarking Formula"+
 					"</div>"+
+					"<pre class='prettyprint'>"+RefValues[id].toString().replace(/	/g,'  ')+"</pre>"+
+					"</div>"+
+					"<div style=margin-top:1em><a href=benchmark.php>All variables benchmarked</a></div>"+
 					"";
 			}
 

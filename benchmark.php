@@ -68,10 +68,10 @@
 			var codes = Bm.getCodes(prefix);
 			codes.forEach(function(code)
 			{
-				document.write("<div class='card'>"+
+				document.write("<div class='card folded'>"+
 					"<div class=menu onclick=this.parentNode.classList.toggle('folded')><button></button> "+
 						translate(code+"_descr")+
-						" (<a href='variable.php?id="+code+"'>"+code+"</a>) "+
+						" (<a href='variable.php?id="+code+"' onclick=\"event.stopPropagation()\">"+code+"</a>) "+
 					"</span></div>"+
 					"<pre class='prettyprint'>"+
 					RefValues[code].toString()+
