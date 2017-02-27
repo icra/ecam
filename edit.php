@@ -609,6 +609,22 @@
 			init();
 		}
 	</script>
+	<script>
+		//generate cookies for div.card folding
+		//called after divs are clicked
+		function fold(card)
+		{
+			card.classList.toggle('folded');
+			if(card.classList.contains('folded'))
+			{
+				setCookie("Folded_"+card.id,1);
+			}
+			else
+			{
+				removeCookie("Folded_"+card.id);
+			}
+		}
+	</script>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include'navbar.php'?>
@@ -709,9 +725,10 @@
 <!--main-->
 <div id=main>
 	<!--level2 container-->
-	<div class="card">
+	<?php $folded=isset($_COOKIE['Folded_level2_container'])?"folded":"";?>
+	<div id=level2_container class="card <?php echo $folded?>">
 		<!--level 2 menu-->
-		<div class=menu onclick=this.parentNode.classList.toggle('folded')>
+		<div class=menu onclick=fold(this.parentNode)>
 			<button></button>
 			<b>Inputs &amp; Outputs</b> &mdash; 
 			Assessment period <b class=number><script>document.write(Global.General.Days())</script></b> days 

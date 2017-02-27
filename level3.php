@@ -245,6 +245,14 @@
 				{
 					return "<a href=variable.php?id="+code+">"+code+"</a>";
 				})();
+				//show question it belongs
+				(function(){
+					var question=Questions.isInside(code);
+					if(question)
+					{
+						newCell.innerHTML+=" <span class='advanced'>"+question.substring(4)+"</span>";
+					}
+				})()
 
 				/*2nd cell: variable name*/
 				var newCell=newRow.insertCell(-1);
@@ -524,13 +532,20 @@
 			var newCell=newRow.insertCell(-1);
 			newCell.classList.add('variableCode'); 
 			newCell.classList.add('output');
-
 			newCell.innerHTML=(function()
 			{
 				var ghg=isGHG                        ? "<span class='advanced ghg' caption='GHG'>GHG</span>":"";
 				var nrg=field.search('_nrg_')+1      ? "<span class='advanced nrg' caption='Energy performance'>NRG</span>":""; 
 				return "<a caption='"+translate(field+'_expla')+"' href=variable.php?id="+field+">"+field+"</a>"+ghg+nrg;
 			})();
+			//show question it belongs
+			(function(){
+				var question=Questions.isInside(field);
+				if(question)
+				{
+					newCell.innerHTML+=" <span class='advanced'>"+question.substring(4)+"</span>";
+				}
+			})()
 
 			//2nd cell: description
 			newRow.insertCell(-1).innerHTML=translate(field+'_descr');
@@ -605,8 +620,11 @@
 </script>
 
 <!--advanced questions-->
-<div class="card">
-	<?php cardMenu("<b>Advanced Assessment: Questions (<a href=questions.php>info</a>)</b>")?> 
+<div id=adv_questions_container class="card">
+	<div class=menu onclick=fold(this.parentNode)>
+		<button></button>
+		<b>Advanced Assessment: Questions (<a href=questions.php>info</a>)</b> 
+	</div>
 	<div style=padding:0.5em;>
 		<table id=adv_questions></table>
 		<style> 
@@ -615,10 +633,11 @@
 	</div>
 </div>
 
-<!--substages-->
-<div id=substageInputs_container class="card" style="text-align:left">
+<!--substages container-->
+<?php $folded=isset($_COOKIE['Folded_substageInputs_container'])?"folded":"";?>
+<div id=substageInputs_container class="card <?php echo $folded?>" style="text-align:left">
 	<!--menu-->
-	<div class=menu onclick=this.parentNode.classList.toggle('folded')>
+	<div class=menu onclick=fold(this.parentNode)>
 		<button></button>
 		<b>Advanced Assessment: Substages</b>
 		Substages <b><span id=counter class=number>0</span></b>

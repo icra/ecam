@@ -14,7 +14,6 @@ function setCookie(name,value,days)
 	var expires="expires="+d.toUTCString();
 	//set cookie
 	document.cookie=name+"="+value+";"+expires;
-
 }
 
 /** Read cookie */
