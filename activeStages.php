@@ -27,10 +27,11 @@
 	{
 		var color = Global.Configuration.ActiveStages[stage] ? "black" : "#ccc";
 		var background = Global.Configuration.ActiveStages[stage] ? "" : "#eee";
+		var link_color = stage.search(/^waste/)==0 ? "#d71d24" : "";
 		document.write(""+
 			"<td class=stage onmouseover=aass.hlStage('"+stage+"',1) onmouseout=aass.hlStage('"+stage+"',0) colspan="+colspan+
 				" style='text-align:center;background:"+background+";color:"+color+"'>"+
-				"<a href='#"+stage+"'>"+this.stageName(stage)+"</a>");
+				"<a href='#"+stage+"' style=color:"+link_color+">"+this.stageName(stage)+"</a>");
 	}
 
 	aass.hlStage=function(stage,hl)

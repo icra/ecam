@@ -145,14 +145,14 @@
 	</h4>
 
 	<!--level 1 fields-->
-	<div class="card inline" style="font-size:11px;max-width:49%;padding:0">
-		<?php cardMenu($lang_json['#ghg_assessment'])?>
+	<div class="inline" style="font-size:11px;max-width:49%;padding:0">
+		<div style=text-align:center>GHG assessment</div>
 		<table level=1></table>
 	</div>
 
 	<!--level 2 fields-->
-	<div class="card inline" style="font-size:11px;max-width:49%;padding:0">
-		<?php cardMenu($lang_json['#energy_performance'])?>
+	<div class="inline" style="font-size:11px;max-width:49%;padding:0">
+		<div style=text-align:center>Detailed GHG assessment</div>
 		<table level=2></table>
 	</div>
 </div>

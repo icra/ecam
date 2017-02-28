@@ -17,8 +17,10 @@
 		body{background:#F5ECCE}
 
 		<?php
+			//color in red wastewater stages links
 			if($level=="Waste")
 			{ ?>
+				h1 a:not([id]) {color:#d71d24 !important}
 				table#inputs th:not(.tableHeader) {background:#d71d24}
 				table#substages th {background:#d71d24}
 				table#substages td.variableCode {background:#d71d24}
