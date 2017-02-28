@@ -482,13 +482,4 @@
 		color:black;
 		content:' ∑';
 	}
-	#inputs th.tableHeader {
-		background:white;
-		color:#666;
-		font-size:15px;
-		padding:0.7em 0 0.2em 0;
-		font-weight:normal;
-		border:none;
-		text-align:left;
-	}
 </style>

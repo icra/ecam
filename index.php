@@ -31,16 +31,16 @@
 
 		<!--MENU--><div style="padding:1em 0"><?php include'menu.php'?></div>
 
+		<!--chrome warning-->
+		<div> 
+			<b><?php write('#index_chrome_warning')?></b>
+		</div>
+
 		<!--picture-->
 		<div style="padding:0;text-align:center">
 			<img src=svg/diagram.png style=width:70%>
 		</div>
 
-		<!--other info-->
-		<ul>
-			<li><b><?php write('#index_chrome_warning')?></b>
-			<li><?php write('#index_latest_update');echo ": ".date("F d Y, H:i:s",filemtime("index.php"))?>.
-		</ul>
 	</div>
 </div>
 

@@ -388,7 +388,7 @@
 					{
 						inputs[i].onfocus=function()
 						{
-							this.value=parseFloat(this.value.replace(',',''));
+							this.value=parseFloat(this.value.replace(/,/g,''));
 							this.select()
 						}
 						inputs[i].onblur=function(){init()}

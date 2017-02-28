@@ -766,7 +766,7 @@
 				<!--level2 GHG outputs-->
 				<table id=outputs style="width:100%;background:#f6f6f6;">
 					<tr><th colspan=7 class=tableHeader>
-						OUTPUTS — GHG emissions (kg CO<sub>2</sub>)
+						OUTPUTS — GHG emissions (kg CO2)
 					<tr>
 						<th>Origin
 						<th>kg CO<sub>2</sub><br>whole period
