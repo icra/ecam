@@ -165,8 +165,9 @@ span.circle {
 	.card .menu {
 		text-align:left;
 		opacity:1;
-		background:#f6f6f6;
+		background:#f5f5f5;
 		cursor:pointer;
+		font-size:11px;
 	}
 
 	.card.folded .menu{color:#777;}

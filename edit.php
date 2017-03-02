@@ -30,8 +30,9 @@
 			<?php }
 		?>
 
+		/*TAGS*/
 		.advanced {
-			color:black;
+			color:rgba(0,0,0,0.85);
 			font-size:10px;
 			float:right;
 			background:#fafafa;
@@ -39,6 +40,9 @@
 			border-radius:0.5em;
 			box-shadow: 0 1px 2px rgba(0,0,0,.1);
 			padding:0.3em;
+		}
+		.advanced.SM { /*sludge management*/
+			float:left;
 		}
 		.advanced.ghg {background:#bca;}
 		.advanced.nrg {background:yellow;}
@@ -683,32 +687,32 @@
 			<style>
 				#btn_all_container a {
 					border:1px solid #bbb;
-					font-size:14px;
-					font-family:Courier;
+					font-size:11px;
+					font-family:monospace;
 					padding:0.2em 0.5em;
 					border-radius:0.3em;
-					color:black;
-					background:#eee;
+					color:rgba(0,0,0,0.55);
+					background:#f5f5f5;
 					box-shadow: 0 1px 2px rgba(0,0,0,.1);
+					text-decoration:none;
+				}
+				#btn_all_container a:hover {
+					color:rgba(0,0,0,0.85);
 				}
 			</style>
 			<a id=btn_all_fold href=# style="margin-right:0.1em;" 
 				onclick="
 					var divs=document.querySelectorAll('div.card');
 					for(var i=0;i<divs.length;i++){divs[i].classList.add('folded')}
-					document.querySelector('#btn_all_expand').style.display=''
-					document.querySelector('#btn_all_fold').style.display='none'
 				"
-				>[-] Fold all sections
+				>Fold all
 			</a>
-			<a id=btn_all_expand href=# style="display:none;" 
+			<a id=btn_all_expand href=# style="" 
 				onclick="
 					var divs=document.querySelectorAll('div.card');
 					for(var i=0;i<divs.length;i++){divs[i].classList.remove('folded')}
-					document.querySelector('#btn_all_expand').style.display='none'
-					document.querySelector('#btn_all_fold').style.display=''
 				"
-				>[+] Expand all sections
+				>Expand all
 			</a>
 		</div>
 		<?php

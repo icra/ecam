@@ -201,21 +201,26 @@
 	div#sidebar
 	{
 		position:absolute;
-		/*esquerra*/top:51px;left:0;z-index:999;
+		top:51px;
+		left:0;
+		z-index:999;
 		background:white;
-		padding:0;margin:0;
+		padding:0;
+		margin:0;
 		box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
 		overflow:auto;
 		border-right:2px solid #ccc;
 		border-top:1px solid #ccc;
+		transition:width 0.15s ease;
 	}
-	div#sidebar.off{width:0;height:0;top:0;display:none}
-	div#sidebar.on{width:255px;bottom:0;transition:all 0s}
+	div#sidebar.off{width:0;height:0;top:0;z-index:-1}
+	div#sidebar.on{width:255px;bottom:0;}
 	div#sidebar.on  div#sidecontent{display:block}
 	div#sidebar.off div#sidecontent{display:none}
 	div#sidebar div{padding:0;margin:0}
 	div#sidebar table{width:100%;margin:0;}
 	div#sidebar td, div#sidebar th {border-left:0;border-right:0;padding:0.2em;padding-left:1em;}
+	div#sidebar td:hover {background:#f5f5f5}
 	div#sidebar th {border-top:0;}
 	div#sidebar table#menu td {border-bottom:0}
 	div#sidebar a.water{color:#00adef} 
