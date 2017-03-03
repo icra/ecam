@@ -1,6 +1,5 @@
 From: Rojo Maurer, Andres GIZ MX [mailto:andres.rojo@giz.de] 
 Sent: Thursday, February 23, 2017 5:50 PM
-Cc: Alarcon, Willy GIZ <willy.alarcon@giz.de>; Fernando, Ranjin GIZ <ranjin.fernando@giz.de>
  
 Hi José,
 
@@ -18,7 +17,8 @@ New input: Population with onsite treatment (ww_pop_onsite)
  
 Formula for CH4 from  onsite treatment:
 (ww_onsite_pop) * wwc_bod_pday/1000 * Days * ct_ch4_ef_sep * ct_ch4_eq
-ct_ch4_ef_sep for Septic systems: 0.3
+
+ct_ch4_ef_sep for Septic systems: 0.3 (unit?)
  
 Formula for N2O from onsite treatment:
 I don´t know… would need to look at IPCC…  could adapt from untreated water (like below), but have no idea if it is adequate.  

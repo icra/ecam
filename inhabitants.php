@@ -98,35 +98,34 @@
 <!--main-->
 <div id=main> 
 	<!--table-->
+	<style>
+		table#inputs th, #inputs td {text-align:left;}
+		#inputs td.input {
+			width:70px;
+			border:1px solid #aaa;
+			color:#666;
+			background:#eee;
+			padding:0 !important;
+		}
+		#inputs td.input input {
+			background:inherit;
+			border:none;
+			text-align:right;
+			cursor: cell;
+			line-height:1em;
+			width:70px;
+			height:24px;
+			display:block;
+			padding:0.2em;
+		}
+		#inputs td.input input:focus {
+			background:white;
+		}
+		#inputs tr.hidden {display:none}
+		/**indication "not active"**/
+		#inputs tr[indic]{text-align:center;color:#999;background:#eee}
+	</style>
 	<table id=inputs style="font-size:16px;margin:1em;width:50%">
-		<style>
-			table#inputs th, #inputs td {text-align:left;}
-			#inputs td.input {
-				width:70px;
-				border:1px solid #aaa;
-				color:#666;
-				background:#eee;
-				padding:0 !important;
-			}
-			#inputs td.input input {
-				background:inherit;
-				border:none;
-				text-align:right;
-				cursor: cell;
-				line-height:1em;
-				width:70px;
-				height:24px;
-				display:block;
-				padding:0.2em;
-			}
-			#inputs td.input input:focus {
-				background:white;
-			}
-			#inputs tr.hidden {display:none}
-			/**indication "not active"**/
-			#inputs tr[indic]{text-align:center;color:#999;background:#eee}
-		</style>
-
 		<!--WATER-->
 		<tr><th colspan=3>
 			<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
@@ -139,8 +138,8 @@
 			<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
 			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?><td class=input><input id='ww_resi_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
 			<tr stage=waste class=hidden><td><?php write('#ww_conn_pop_descr')?><td class=input><input id='ww_conn_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td>Population serviced with wastewater treatment
-				<td class=input><input id='ww_serv_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td>Population serviced with wastewater treatment <td class=input><input id='ww_serv_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td>Population with onsite treatment <td class=input><input id='ww_onsi_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
 			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 	</table>
 </div>

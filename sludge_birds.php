@@ -55,12 +55,23 @@
 			Global.Waste.Treatment.wwt_temp_inc=750; //K Fluidized Bed Reactor Temperature
 		}
 
-		//kg of sludge estimated: reset all minus the selected
+		//kg of sludge estimated
 		var mass_est=0.55*Global.Waste.Treatment.wwt_vol_trea/Global.General.Days()*171*1e-3*1.176;
 		console.log('Method selected: '+method);
 		console.log('Estimated mass of sludge: '+mass_est+' kg');
 		Global.Waste.Treatment['wwt_mass_slu']=mass_est;
 		Global.Waste.Treatment['wwt_mass_slu_'+method]=mass_est;
+
+		//kg of dry weight estimated
+		/*
+			For GHG emissions related to Sludge disposal use this equation to estimate dry weight of sludge produced/disposed in the case of no biogas production as well as biogas production:
+			Kg dry weight sludge disposed no biogas = 
+			Kg dry weight sludge disposed biogas = 
+
+			[0.55*(wwt_vol_trea/days)*(wwc_bod_pday*ww_resi_pop*days/wwt_vol_trea - (wwc_bod_pday*ww_resi_pop*days/wwt_vol_trea*0.1))*10^-3*1.176]/4*days
+			[0.55*(wwt_vol_trea/days)*(wwc_bod_pday*ww_resi_pop*days/wwt_vol_trea - (wwc_bod_pday*ww_resi_pop*days/wwt_vol_trea*0.1))*10^-3*1.176*0.6/4*days
+		*/
+		var dry_est = 0; //??? TODO
 
 		//end
 		init();

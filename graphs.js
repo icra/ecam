@@ -211,14 +211,17 @@ Graphs.ghgSources=function(withTable,container)
 
 	/*
 		sources: 
-			elec, fuel, fuel trucks, sludge wst, 
+			elecWS, elecWW, fuel, fuel trucks, sludge wst, 
 			ch4_unt, n2o_unt, ch4_tre, n2o_tre, biogas 
 	*/
-	var elec=(function(){
+	var elecWS=(function(){
 		return 0+
 			Global.Water.Abstraction.wsa_KPI_GHG_elec()+
 			Global.Water.Treatment.wst_KPI_GHG_elec()+
-			Global.Water.Distribution.wsd_KPI_GHG_elec()+
+			Global.Water.Distribution.wsd_KPI_GHG_elec();
+	})();
+	var elecWW=(function(){
+		return 0+
 			Global.Waste.Collection.wwc_KPI_GHG_elec()+
 			Global.Waste.Treatment.wwt_KPI_GHG_elec()+
 			Global.Waste.Discharge.wwd_KPI_GHG_elec();
@@ -247,7 +250,8 @@ Graphs.ghgSources=function(withTable,container)
 
 	//names
 	var names = [
-		"Electricity",
+		"Electricity WS",
+		"Electricity WW",
 		"Fuel engines",
 		"Truck transport",
 		"CH4 untreated wastewater",
@@ -262,16 +266,17 @@ Graphs.ghgSources=function(withTable,container)
 	//array graph data
 	var data=google.visualization.arrayToDataTable([
 		["Source",translate('emissions')],
-		[names[0],elec],
-		[names[1],fuel],
-		[names[2],trck],
-		[names[3],ch4u],
-		[names[4],n2ou],
-		[names[5],ch4t],
-		[names[6],n2ot],
-		[names[7],biog],
-		[names[8],slud],
-		[names[9],n2od],
+		[names[0],elecWS],
+		[names[1],elecWW],
+		[names[2],fuel],
+		[names[3],trck],
+		[names[4],ch4u],
+		[names[5],n2ou],
+		[names[6],ch4t],
+		[names[7],n2ot],
+		[names[8],biog],
+		[names[9],slud],
+		[names[10],n2od],
 	]);
 
 	//options
@@ -315,16 +320,17 @@ Graphs.ghgSources=function(withTable,container)
 		"<button onclick=\"Graphs.graph4(true,'"+container+"');scrollToItem('"+container+"')\">By stage</button>"+
 		"<table title=ghgSources>"+
 			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_value')+" (kg CO2)"+
-			"<tr><td>"+names[0]+"<td>"+format(elec)+
-			"<tr><td>"+names[1]+"<td>"+format(fuel)+
-			"<tr><td>"+names[2]+"<td>"+format(trck)+
-			"<tr><td>"+names[3]+"<td>"+format(ch4u)+
-			"<tr><td>"+names[4]+"<td>"+format(n2ou)+
-			"<tr><td>"+names[5]+"<td>"+format(ch4t)+
-			"<tr><td>"+names[6]+"<td>"+format(n2ot)+
-			"<tr><td>"+names[7]+"<td>"+format(biog)+
-			"<tr><td>"+names[8]+"<td>"+format(slud)+
-			"<tr><td>"+names[9]+"<td>"+format(n2od)+
+			"<tr><td>"+names[0]+"<td>"+format(elecWS)+
+			"<tr><td>"+names[1]+"<td>"+format(elecWW)+
+			"<tr><td>"+names[2]+"<td>"+format(fuel)+
+			"<tr><td>"+names[3]+"<td>"+format(trck)+
+			"<tr><td>"+names[4]+"<td>"+format(ch4u)+
+			"<tr><td>"+names[5]+"<td>"+format(n2ou)+
+			"<tr><td>"+names[6]+"<td>"+format(ch4t)+
+			"<tr><td>"+names[7]+"<td>"+format(n2ot)+
+			"<tr><td>"+names[8]+"<td>"+format(biog)+
+			"<tr><td>"+names[9]+"<td>"+format(slud)+
+			"<tr><td>"+names[10]+"<td>"+format(n2od)+
 		"</table>"+
 		"";
 

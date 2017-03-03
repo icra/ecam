@@ -2,7 +2,7 @@
 var TODO = {
 	Front: //front-end
 	[
-		"[PENDING] Organize inputs in substages using filters",
+		"[THURSDAY WITH ANDRES] Organize inputs in substages using filters",
 		"[WAIT]    Discuss graphs with IWA",
 		"[WAIT]    Translation after v2 in english is complete",
 		"[WAIT]    Add in the help page an example json file, after I/O structure does not change anymore",
@@ -11,15 +11,11 @@ var TODO = {
 	],
 	Back: //back-end
 	[
-		"[SHOULD BE ADDED?] Mail from Andres (uncollected wastewater)",
-		"[PENDING]          wsd: not clear how to calculate Non revenue water for Abstraction and Treatment",
-		"[PENDING]          wwd Discharge pumping efficiency - not implemented (not requested by IWA)",
-		"[WAITING IWA]      Jose provides default value for Dry weight in sludge produced (kg)",
-		"[WAITING IWA]      Value of CH4 emission factor for type of treatment 'Anaerobic Lagoon covered', <a href=variable.php?id=c_wwt_ch4_efac>see all</a>",
+		"[DONE] Add uncollected wastewater and onsite treatment variables",
+		"[DONE] leave only countries in configuration",
+		"[DONE] Modify N2O discharge emission",
+		"[WAITING IWA]      Jose answers corrections for estimation of Dry weight in sludge produced (kg)",
 		"[WAITING IWA]      List of Conversion factor for electricity (kgCO2eq per kWh) for each country",
-		"[WAITING IWA]      List of BOD per person per day (g/person/day) for each country",
-		"[WAITING IWA]      What to do with Energy Summary?",
-		"[WAIT]             Opportunities: wait for structure v2 is finished, otherwise can't code it",
 	],
 };
 

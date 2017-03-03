@@ -2,185 +2,9 @@
 	List of countries, with:
 		- Conversion factor
 		- Protein consumption
-		- Bod per day 
-
-		Albania
-		Algeria
-		Angola
-		Antigua and Barbuda
-		Argentina
-		Armenia
-		Australia
-		Austria
-		Azerbaijan
-		Bahamas
-		Bangladesh
-		Barbados
-		Belarus
-		Belgium
-		Belize
-		Benin
-		Bermuda
-		Bolivia (Plurinational State of)
-		Bosnia and Herzegovina
-		Botswana
-		Brazil
-		Brunei Darussalam
-		Bulgaria
-		Burkina Faso
-		Burundi
-		Cambodia
-		Cameroon
-		Canada
-		Cape Verde
-		Central African Republic
-		Chad
-		Chile
-		China
-		Colombia
-		Comoros
-		Congo
-		Costa Rica
-		Côte d'Ivoire
-		Croatia
-		Cuba
-		Cyprus
-		Czech Republic
-		Democratic People's Republic of Korea
-		Denmark
-		Djibouti
-		Dominica
-		Dominican Republic
-		Ecuador
-		Egypt
-		El Salvador
-		Eritrea
-		Estonia
-		Ethiopia
-		Fiji
-		Finland
-		France
-		French Polynesia
-		Gabon
-		Gambia
-		Georgia
-		Germany
-		Ghana
-		Greece
-		Grenada
-		Guatemala
-		Guinea
-		Guinea-Bissau
-		Guyana
-		Haiti
-		Honduras
-		Hungary
-		Iceland
-		India
-		Indonesia
-		Iran (Islamic Republic of)
-		Ireland
-		Israel
-		Italy
-		Jamaica
-		Japan
-		Jordan
-		Kazakhstan
-		Kenya
-		Kiribati
-		Kuwait
-		Kyrgyzstan
-		Lao People's Democratic Republic
-		Latvia
-		Lebanon
-		Lesotho
-		Liberia
-		Libyan Arab Jamahiriya
-		Lithuania
-		Luxembourg
-		Madagascar
-		Malawi
-		Malaysia
-		Maldives
-		Mali
-		Malta
-		Mauritania
-		Mauritius
-		Mexico
-		Mongolia
-		Morocco
-		Mozambique
-		Namibia
-		Nepal
-		Netherlands
-		Netherlands Antilles
-		New Caledonia
-		New Zealand
-		Nicaragua
-		Niger
-		Nigeria
-		Norway
-		Occupied Palestinian Territory
-		Pakistan
-		Panama
-		Paraguay
-		Peru
-		Philippines
-		Poland
-		Portugal
-		Republic of Korea
-		Republic of Moldova
-		Romania
-		Russian Federation
-		Rwanda
-		Saint Kitts and Nevis
-		Saint Lucia
-		Saint Vincent and the Grenadines
-		Samoa
-		Sao Tome and Principe
-		Saudi Arabia
-		Senegal
-		Serbia and Montenegro
-		Seychelles
-		Sierra Leone
-		Slovakia
-		Slovenia
-		Solomon Islands
-		South Africa
-		Spain
-		Sri Lanka
-		Sudan
-		Suriname
-		Swaziland
-		Sweden
-		Switzerland
-		Syrian Arab Republic
-		Tajikistan
-		Thailand
-		The former Yugoslav Republic of Macedonia
-		Timor-Leste
-		Togo
-		Trinidad and Tobago
-		Tunisia
-		Turkey
-		Turkmenistan
-		Uganda
-		Ukraine
-		United Arab Emirates
-		United Kingdom
-		United Republic of Tanzania
-		United States of America
-		Uruguay
-		Uzbekistan
-		Vanuatu
-		Venezuela (Bolivarian Republic of)
-		Viet Nam
-		Yemen
-		Zambia
-		Zimbabwe
+		- Bod per day (IPCC TABLE 6.4)
 */
-
-var Countries={
+/*
 	"Albania":{
 		wwc_prot_con:36.135,
 		conv_kwh_co2:0.5,
@@ -281,11 +105,6 @@ var Countries={
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
-	"Brazil":{
-		wwc_prot_con:30.66,
-		conv_kwh_co2:0.5,
-		wwc_bod_pday:40,
-	},
 	"Brunei Darussalam":{
 		wwc_prot_con:31.755,
 		conv_kwh_co2:0.5,
@@ -313,11 +132,6 @@ var Countries={
 	},
 	"Cameroon":{
 		wwc_prot_con:21.17,
-		conv_kwh_co2:0.5,
-		wwc_bod_pday:40,
-	},
-	"Canada":{
-		wwc_prot_con:38.325,
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
@@ -396,11 +210,6 @@ var Countries={
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
-	"Denmark":{
-		wwc_prot_con:40.515,
-		conv_kwh_co2:0.5,
-		wwc_bod_pday:40,
-	},
 	"Djibouti":{
 		wwc_prot_con:21.17,
 		conv_kwh_co2:0.5,
@@ -418,11 +227,6 @@ var Countries={
 	},
 	"Ecuador":{
 		wwc_prot_con:20.805,
-		conv_kwh_co2:0.5,
-		wwc_bod_pday:40,
-	},
-	"Egypt":{
-		wwc_prot_con:33.215,
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
@@ -481,18 +285,8 @@ var Countries={
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
-	"Germany":{
-		wwc_prot_con:36.135,
-		conv_kwh_co2:0.5,
-		wwc_bod_pday:40,
-	},
 	"Ghana":{
 		wwc_prot_con:21.535,
-		conv_kwh_co2:0.5,
-		wwc_bod_pday:40,
-	},
-	"Greece":{
-		wwc_prot_con:43.07,
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
@@ -541,11 +335,6 @@ var Countries={
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
-	"India":{
-		wwc_prot_con:20.44,
-		conv_kwh_co2:0.5,
-		wwc_bod_pday:40,
-	},
 	"Indonesia":{
 		wwc_prot_con:20.44,
 		conv_kwh_co2:0.5,
@@ -566,18 +355,8 @@ var Countries={
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
-	"Italy":{
-		wwc_prot_con:40.88,
-		conv_kwh_co2:0.5,
-		wwc_bod_pday:40,
-	},
 	"Jamaica":{
 		wwc_prot_con:28.47,
-		conv_kwh_co2:0.5,
-		wwc_bod_pday:40,
-	},
-	"Japan":{
-		wwc_prot_con:33.58,
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
@@ -691,11 +470,6 @@ var Countries={
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
-	"Mexico":{
-		wwc_prot_con:33.58,
-		conv_kwh_co2:0.452483345,
-		wwc_bod_pday:40,
-	},
 	"Mongolia":{
 		wwc_prot_con:26.28,
 		conv_kwh_co2:0.5,
@@ -781,11 +555,6 @@ var Countries={
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
-	"Peru":{
-		wwc_prot_con:24.455,
-		conv_kwh_co2:0.237721212,
-		wwc_bod_pday:40,
-	},
 	"Philippines":{
 		wwc_prot_con:21.535,
 		conv_kwh_co2:0.5,
@@ -813,11 +582,6 @@ var Countries={
 	},
 	"Romania":{
 		wwc_prot_con:40.515,
-		conv_kwh_co2:0.5,
-		wwc_bod_pday:40,
-	},
-	"Russian Federation":{
-		wwc_prot_con:35.405,
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
@@ -921,11 +685,6 @@ var Countries={
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
-	"Sweden":{
-		wwc_prot_con:39.055,
-		conv_kwh_co2:0.5,
-		wwc_bod_pday:40,
-	},
 	"Switzerland":{
 		wwc_prot_con:33.58,
 		conv_kwh_co2:0.5,
@@ -939,11 +698,6 @@ var Countries={
 	"Tajikistan":{
 		wwc_prot_con:19.71,
 		conv_kwh_co2:0.5,
-		wwc_bod_pday:40,
-	},
-	"Thailand":{
-		wwc_prot_con:20.805,
-		conv_kwh_co2:0.626742612,
 		wwc_bod_pday:40,
 	},
 	"The former Yugoslav Republic of Macedonia":{
@@ -968,11 +722,6 @@ var Countries={
 	},
 	"Tunisia":{
 		wwc_prot_con:33.945,
-		conv_kwh_co2:0.5,
-		wwc_bod_pday:40,
-	},
-	"Turkey":{
-		wwc_prot_con:36.135,
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
@@ -1003,11 +752,6 @@ var Countries={
 	},
 	"United Republic of Tanzania":{
 		wwc_prot_con:18.25,
-		conv_kwh_co2:0.5,
-		wwc_bod_pday:40,
-	},
-	"United States of America":{
-		wwc_prot_con:41.61,
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
@@ -1051,5 +795,87 @@ var Countries={
 		conv_kwh_co2:0.5,
 		wwc_bod_pday:40,
 	},
-};
+*/
 
+var Countries={
+	"Brazil":{ 
+		conv_kwh_co2:0.5,
+		wwc_prot_con:30.66,
+		wwc_bod_pday:50,
+	},
+	"Canada":{ 
+		conv_kwh_co2:0.5,
+		wwc_prot_con:38.325,
+		wwc_bod_pday:60,
+	}, 
+	"Denmark":{ 
+		conv_kwh_co2:0.5,
+		wwc_prot_con:40.515,
+		wwc_bod_pday:62,
+	},
+	"Egypt":{ 
+		conv_kwh_co2:0.5,
+		wwc_prot_con:33.215,
+		wwc_bod_pday:34,
+	},
+	"Germany":{ 
+		conv_kwh_co2:0.5,
+		wwc_prot_con:36.135,
+		wwc_bod_pday:62,
+	},
+	"Greece":{ 
+		conv_kwh_co2:0.5,
+		wwc_prot_con:43.07,
+		wwc_bod_pday:57,
+	},
+	"India":{ 
+		conv_kwh_co2:0.5,
+		wwc_prot_con:20.44,
+		wwc_bod_pday:34,
+	},
+	"Italy":{ 
+		conv_kwh_co2:0.5,
+		wwc_prot_con:40.88,
+		wwc_bod_pday:60,
+	},
+	"Japan":{ 
+		conv_kwh_co2:0.5,
+		wwc_prot_con:33.58,
+		wwc_bod_pday:42,
+	},
+	"Mexico":{ 
+		conv_kwh_co2:0.452483345,
+		wwc_prot_con:33.58,
+		wwc_bod_pday:40,
+	},
+	"Peru":{ 
+		conv_kwh_co2:0.237721212,
+		wwc_prot_con:24.455,
+		wwc_bod_pday:40,
+	},
+	"Russian Federation":{ 
+		conv_kwh_co2:0.5,
+		wwc_prot_con:35.405,
+		wwc_bod_pday:60,
+	},
+	"Sweden":{ 
+		conv_kwh_co2:0.5,
+		wwc_prot_con:39.055,
+		wwc_bod_pday:75,
+	},
+	"Thailand":{ 
+		conv_kwh_co2:0.626742612,
+		wwc_prot_con:20.805,
+		wwc_bod_pday:40,
+	},
+	"Turkey":{ 
+		conv_kwh_co2:0.5,
+		wwc_prot_con:36.135,
+		wwc_bod_pday:38,
+	},
+	"United States of America":{ 
+		conv_kwh_co2:0.5,
+		wwc_prot_con:41.61,
+		wwc_bod_pday:85,
+	},
+};
