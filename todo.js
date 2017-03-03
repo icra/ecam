@@ -1,6 +1,6 @@
 /*Tasks data structure*/
 var TODO = {
-	Front: //front-end
+	Front://front-end
 	[
 		"[THURSDAY WITH ANDRES] Organize inputs in substages using filters",
 		"[WAIT]    Discuss graphs with IWA",
@@ -9,13 +9,13 @@ var TODO = {
 		"[IDEA]    Add the sankey diagram (all water flows) (at 'graphs.js')",
 		"[IDEA]    Add references (page,chapter,book) to equations (IPCC, BEAM, ...?)",
 	],
-	Back: //back-end
+	Back://back-end
 	[
-		"[DONE] Add uncollected wastewater and onsite treatment variables",
-		"[DONE] leave only countries in configuration",
-		"[DONE] Modify N2O discharge emission",
-		"[WAITING IWA]      Jose answers corrections for estimation of Dry weight in sludge produced (kg)",
-		"[WAITING IWA]      List of Conversion factor for electricity (kgCO2eq per kWh) for each country",
+		"[DONE]         Add uncollected wastewater and onsite treatment variables",
+		"[DONE]         Leave only ipcc countries in configuration",
+		"[DONE]         Modify N2O discharge emission",
+		"[WAITING IWA]  Jose answers corrections for estimation of Dry weight in sludge produced (kg)",
+		"[WAITING IWA]  List of Conversion factor for electricity (kgCO2eq per kWh) for each country",
 	],
 };
 

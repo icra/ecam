@@ -251,6 +251,7 @@
 				<option value="false">--select--</option>
 				<script>for(var country in Countries){document.write("<option>"+country)}</script>
 			</select>
+			<a href=countries.php>Info</a>
 			<script>
 				function selectCountry(select)
 				{
