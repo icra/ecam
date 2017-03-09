@@ -339,7 +339,9 @@
 
 					<!--treated wastewater volume-->
 					<tr stage=waste class=hidden><td><?php write('#wwt_vol_trea_descr')?><td class=input><input id='wwt_vol_trea' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
-						<span class=circle style=background:#89375c></span>
+
+					<!--discharged wastewater volume-->
+					<tr stage=waste class=hidden><td><?php write('#wwd_vol_disc_descr')?><td class=input><input id='wwd_vol_disc' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
 
 					<!--energy costs-->
 					<tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?><td class=input><input id='ww_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>

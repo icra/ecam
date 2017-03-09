@@ -29,19 +29,18 @@ var Questions={
 			otherQuestions:[],
 		},
 
-		"wsa_producing_energy":{
-			variables:[
-				"wsa_nrg_turb",
-				"wsa_KPI_nrg_recovery",
-			],
-			advanced:0,
-			otherQuestions:[],
-		},
-
 		"wsa_pumping":{
 			variables:[ 
-				"wsa_vol_pump",
+				"wsa_pmp_type",
+				"wsa_pmp_size",
 				"wsa_nrg_pump",
+				"wsa_vol_pump",
+				"wsa_pmp_head",
+				"wsa_sta_head",
+				"wsa_main_len",
+				"wsa_KPI_std_nrg_cons",
+				"wsa_KPI_std_elec_eff",
+				"wsa_KPI_un_head_loss",
 			],
 			advanced:0,
 			otherQuestions:[
@@ -51,20 +50,28 @@ var Questions={
 
 		"wsa_pumping_efficiency":{
 			variables:[
-				"wsa_pmp_head",
-				"wsa_sta_head",
-				"wsa_main_len",
-				"wsa_pmp_type",
-				"wsa_pmp_size",
 				"wsa_pmp_flow",
                 "wsa_pmp_volt",
                 "wsa_pmp_amps",
-                "wsa_pmp_exff",
-                "c_wsa_pmp_pw",
-				"wsa_KPI_std_nrg_cons",
-				"wsa_KPI_std_elec_eff",
-				"wsa_KPI_un_head_loss",
+				"c_wsa_pmp_pw",
 				"wsa_KPI_nrg_elec_eff",
+			],
+			advanced:0,
+			otherQuestions:[],
+		},
+
+		"wsa_producing_energy":{
+			variables:[
+				"wsa_nrg_turb",
+				"wsa_KPI_nrg_recovery",
+			],
+			advanced:0,
+			otherQuestions:[],
+		},
+
+		"wsa_opportunities":{
+			variables:[
+				"wsa_pmp_exff",
 				"wsa_KPI_std_nrg_newp",
 				"wsa_KPI_nrg_cons_new",
 				"wsa_KPI_nrg_estm_sav",
@@ -73,6 +80,7 @@ var Questions={
 			advanced:0,
 			otherQuestions:[],
 		},
+
 	//wst
 		"wst_engines":{
 			variables:[
@@ -161,8 +169,14 @@ var Questions={
 
 		"wsd_pumping":{
 			variables:[
-				"wsd_vol_pump",
+				"wsd_pmp_size",
 				"wsd_nrg_pump",
+				"wsd_vol_pump",
+				"wsd_pmp_head",
+				"wsd_sta_head",
+				"wsd_main_len",
+				"wsd_KPI_std_nrg_cons",
+				"wsd_KPI_un_head_loss",
 			],
 			advanced:0,
 			otherQuestions:[
@@ -172,19 +186,20 @@ var Questions={
 
 		"wsd_pumping_efficiency":{
 			variables:[ 
-				"wsd_pmp_size",
-				"wsd_sta_head",
-				"wsd_pmp_head",
 				"wsd_pmp_flow",
 				"wsd_pmp_volt",
 				"wsd_pmp_amps",
-				"wsd_pmp_exff",
-				"wsd_main_len",
 				"c_wsd_pmp_pw",
-				"wsd_KPI_water_losses",
-				"wsd_KPI_std_nrg_cons",
-				"wsd_KPI_un_head_loss",
 				"wsd_KPI_nrg_elec_eff",
+			],
+			advanced:0,
+			otherQuestions:[],
+		},
+
+		"wsd_opportunities":{
+			variables:[ 
+				"wsd_pmp_exff",
+				"wsd_KPI_water_losses",
 				"wsd_KPI_std_nrg_newp",
 				"wsd_KPI_nrg_cons_new",
 				"wsd_KPI_nrg_estm_sav",

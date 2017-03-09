@@ -109,10 +109,10 @@ var Global={
 			"wst_fuel_typ":0,
 			"wst_vol_fuel":0,
 			//treatment performance?
-			"wst_nrg_disn":0,
+			//"wst_nrg_disn":0,
 			"wst_tst_carr":0,
 			"wst_trea_cap":0, 
-			wst_KPI_nrg_disnfc:function(){return this.wst_nrg_disn/this.wst_vol_trea},
+			//wst_KPI_nrg_disnfc:function(){return this.wst_nrg_disn/this.wst_vol_trea},
 			wst_KPI_capac_util:function(){return 100*this.wst_vol_trea/this.wst_trea_cap},
 			wst_KPI_tst_carr:function(){return this.wst_tst_carr},
 			//pumping efficiency?
