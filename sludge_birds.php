@@ -20,7 +20,7 @@
 		//save selection in Configuration
 		Global.Configuration.Selected.sludge_estimation_method=method;
 
-		//reset all
+		//reset all filters and mass of sludge for all methods
 		Global.Waste.Treatment['wwt_mass_slu']=0;
 		Global.Waste.Treatment['wwt_mass_slu_comp']=0;
 		Global.Waste.Treatment['wwt_mass_slu_inc']=0;
@@ -49,29 +49,37 @@
 			default: alert('Error in sludge method');return;break;
 		}
 
-		//default values for other inputs
+		//default values for inicineration
 		if(method=="inc")
 		{
 			Global.Waste.Treatment.wwt_temp_inc=750; //K Fluidized Bed Reactor Temperature
 		}
 
-		//kg of sludge estimated
-		var mass_est=0.55*Global.Waste.Treatment.wwt_vol_trea/Global.General.Days()*171*1e-3*1.176;
-		console.log('Method selected: '+method);
-		console.log('Estimated mass of sludge: '+mass_est+' kg');
-		Global.Waste.Treatment['wwt_mass_slu']=mass_est;
-		Global.Waste.Treatment['wwt_mass_slu_'+method]=mass_est;
+		//estimation of kg of sludge (wwt_mass_slu)
+		(function(){
+			var mass_est=0.55*Global.Waste.Treatment.wwt_vol_trea/Global.General.Days()*171*1e-3*1.176;
+			console.log('Method selected: '+method);
+			console.log('Estimated mass of sludge (wwt_mass_slu & wwt_mass_slu_'+method+'): '+mass_est+' kg');
+			Global.Waste.Treatment['wwt_mass_slu']=mass_est;
+			Global.Waste.Treatment['wwt_mass_slu_'+method]=mass_est;
+		})();
 
-		//kg of dry weight estimated
-		/*
-			For GHG emissions related to Sludge disposal use this equation to estimate dry weight of sludge produced/disposed in the case of no biogas production as well as biogas production:
-			Kg dry weight sludge disposed no biogas = 
-			Kg dry weight sludge disposed biogas = 
-
-			[0.55*(wwt_vol_trea/days)*(wwc_bod_pday*ww_resi_pop*days/wwt_vol_trea - (wwc_bod_pday*ww_resi_pop*days/wwt_vol_trea*0.1))*10^-3*1.176]/4*days
-			[0.55*(wwt_vol_trea/days)*(wwc_bod_pday*ww_resi_pop*days/wwt_vol_trea - (wwc_bod_pday*ww_resi_pop*days/wwt_vol_trea*0.1))*10^-3*1.176*0.6/4*days
-		*/
-		var dry_est = 0; //??? TODO
+		//estimation of kg of dry weight (wwt_dryw_slu)
+		(function(){
+			var dry_est=(function(){
+				var wwt_vol_trea=Global.Waste.Treatment.wwt_vol_trea;
+				var Days=Global.General.Days();
+				var wwc_bod_pday=Global.Waste.Collection.wwc_bod_pday;
+				var ww_resi_pop=Global.Waste.ww_resi_pop;
+				return 0.55*0.9*wwc_bod_pday*ww_resi_pop*1e-3*1.176/4*Days;
+			})();
+			var biogas=Global.Configuration['Yes/No'].wwt_producing_biogas;
+			if(biogas){
+				dry_est*=0.6;
+			}
+			console.log('Estimated mass of dry weight sludge (wwt_dryw_slu): '+dry_est+' kg');
+			Global.Waste.Treatment['wwt_dryw_slu']=dry_est;
+		})();
 
 		//end
 		init();

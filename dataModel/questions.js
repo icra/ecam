@@ -94,10 +94,8 @@ var Questions={
 
 		"wst_treatment_performance":{
 			variables:[ 
-				"wst_nrg_disn",
 				"wst_tst_carr",
 				"wst_trea_cap", 
-				"wst_KPI_nrg_disnfc",
 				"wst_KPI_capac_util",
 				"wst_KPI_tst_carr",
 			],
@@ -232,8 +230,14 @@ var Questions={
 
 		"wwc_pumping":{
 			variables:[
-				"wwc_vol_pump",
 				"wwc_nrg_pump",
+				"wwc_vol_pump",
+				"wwc_pmp_head",
+				"wwc_sta_head",
+				"wwc_coll_len",
+				"wwc_KPI_std_nrg_cons",
+				"wwc_KPI_std_elec_eff",
+				"wwc_KPI_un_head_loss",
 			],
 			advanced:0,
 			otherQuestions:[
@@ -243,18 +247,19 @@ var Questions={
 
 		"wwc_pumping_efficiency": {
 			variables:[
-				"wwc_pmp_head",
-				"wwc_sta_head",
-				"wwc_coll_len",
 				"wwc_pmp_flow",
 				"wwc_pmp_volt",
 				"wwc_pmp_amps",
-				"wwc_pmp_exff",
 				"c_wwc_pmp_pw",
-				"wwc_KPI_std_nrg_cons",
-				"wwc_KPI_std_elec_eff",
-				"wwc_KPI_un_head_loss",
 				"wwc_KPI_nrg_elec_eff",
+			],
+			advanced:0,
+			otherQuestions:[],
+		},
+
+		"wwc_opportunities":{
+			variables:[
+				"wwc_pmp_exff",
 				"wwc_KPI_std_nrg_newp",
 				"wwc_KPI_nrg_cons_new",
 				"wwc_KPI_nrg_estm_sav",
@@ -378,9 +383,7 @@ var Questions={
 		"wwt_incineration":{
 			variables:[
 				"wwt_mass_slu_inc",
-				"wwt_nrg_inc",
 				"wwt_temp_inc",
-				"wwt_slu_inciner_co2",
 				"wwt_slu_inciner_ch4",
 				"wwt_slu_inciner_n2o",
 				"wwt_KPI_ghg_inc_co2eq",
@@ -465,17 +468,7 @@ var Questions={
 			variables:[
 				"wwd_vol_pump",
 				"wwd_nrg_pump",
-			],
-			advanced:0,
-			otherQuestions:[
-				"wwd_pumping_efficiency",
-			],
-		},
-
-		"wwd_pumping_efficiency":{
-			variables:[ 
 				"wwd_pmp_head",
-				"wwd_trb_head",
 				"wwd_main_len",
 				"wwd_KPI_std_nrg_cons",
 			],

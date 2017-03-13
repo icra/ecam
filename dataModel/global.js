@@ -230,7 +230,7 @@ var Global={
 			ww_SL_treat_m3:function(){return 100*(Global.Waste.ww_serv_pop/Global.Waste.ww_conn_pop)},
 			wwc_KPI_nrg_per_m3:function(){return this.wwc_nrg_cons/this.wwc_vol_conv},
 			wwc_SL_ghg_unc_ch4:function(){
-				return (Global.Waste.ww_resi_pop-Global.Waste.ww_conn_pop)*this.wwc_bod_pday/1000*Global.General.Days()*Cts.ct_ch4_ef.value*Cts.ct_ch4_eq.value;
+				return (Global.Waste.ww_resi_pop-Global.Waste.ww_conn_pop)*this.wwc_bod_pday/1000*Global.General.Days()*0.3*Cts.ct_ch4_eq.value;
 			},
 			wwc_SL_ghg_unc_n2o:function(){
 				return (Global.Waste.ww_resi_pop-Global.Waste.ww_conn_pop)*this.wwc_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
@@ -384,9 +384,7 @@ var Global={
 			wwt_KPI_ghg_comp_co2eq:function(){return this.wwt_slu_composting_co2()+this.wwt_slu_composting_ch4()+this.wwt_slu_composting_n2o()},
 			//incineration
 			wwt_mass_slu_inc:0,
-			wwt_nrg_inc:0,
 			wwt_temp_inc:0,
-			wwt_slu_inciner_co2:function(){return (this.wwt_nrg_inc*Global.General.conv_kwh_co2)},
 			wwt_slu_inciner_ch4:function(){return (4.85/1e5)*this.wwt_mass_slu_inc*Cts.ct_ch4_eq.value},
 			wwt_slu_inciner_n2o:function(){//<br>
 				if(this.wwt_temp_inc > 1152){return 0}//<br>
@@ -394,7 +392,7 @@ var Global={
 				var sludge_N=Global.General.content_N(this.wwt_mass_slu_inc,sludge_type);//<br>
 				return 0.04*sludge_N*(161.3-0.14*Math.max(750,this.wwt_temp_inc))*Cts.ct_n2o_eq.value
 			},
-			wwt_KPI_ghg_inc_co2eq:function(){return this.wwt_slu_inciner_co2()+this.wwt_slu_inciner_ch4()+this.wwt_slu_inciner_n2o()},
+			wwt_KPI_ghg_inc_co2eq:function(){return this.wwt_slu_inciner_ch4()+this.wwt_slu_inciner_n2o()},
 			//land application
 			wwt_mass_slu_app:0,
 			wwt_soil_typ:0, //Options: ["Fine","Coarse"]
@@ -542,7 +540,6 @@ var Global={
 			"wwd_nrg_pump":0,
 			//pumping efficiency?
 			"wwd_pmp_head":0,
-			"wwd_trb_head":0,
 			"wwd_main_len":0,
 			wwd_KPI_std_nrg_cons:function(){return (this.wwd_nrg_pump)/(this.wwd_vol_pump*this.wwd_pmp_head/100)},
 			//wwd GHG
