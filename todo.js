@@ -13,6 +13,7 @@ var TODO = {
 		"[DONE] GHG summary, modify units (easy, but time consuming)",
 		"[DONE] Energy summary only for consumption (easy, but time consuming)",
 		"[PENDING] Formulas for estimation of mass of sludge produced are wrong",
+		"[PENDING] kWh to CO2 factor for each country",
 		"[PENDING] wwt Treatment - hide energy for land application, fuel for land application and related outputs (long)",
 		"[PENDING] wwt Treatment - hide CO2 for each disposal method",
 	],

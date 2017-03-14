@@ -57,7 +57,7 @@
 
 		//estimation of kg of sludge (wwt_mass_slu)
 		(function(){
-			var mass_est=0.55*Global.Waste.Treatment.wwt_vol_trea/Global.General.Days()*171*1e-3*1.176;
+			var mass_est=0.55*Global.Waste.Treatment.wwt_vol_trea/Global.General.Days()*171*(1e-3)*1.176;
 			console.log('Method selected: '+method);
 			console.log('Estimated mass of sludge (wwt_mass_slu & wwt_mass_slu_'+method+'): '+mass_est+' kg');
 			Global.Waste.Treatment['wwt_mass_slu']=mass_est;
@@ -71,7 +71,7 @@
 				var Days=Global.General.Days();
 				var wwc_bod_pday=Global.Waste.Collection.wwc_bod_pday;
 				var ww_resi_pop=Global.Waste.ww_resi_pop;
-				return 0.55*0.9*wwc_bod_pday*ww_resi_pop*1e-3*1.176/4*Days;
+				return 0.55*0.9*wwc_bod_pday*ww_resi_pop*(1e-3)*1.176/4*Days;
 			})();
 			var biogas=Global.Configuration['Yes/No'].wwt_producing_biogas;
 			if(biogas){
