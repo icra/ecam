@@ -16,13 +16,50 @@
 			}
 		}
 
-		function calculateGHG() {
+		function calculateGHG() 
+		{
+			//kg, kg per year, or kg per serviced population
+			var divisor=(function()
+			{
+				var ret=1;//return value
+				var select=document.querySelector('#ghg_divisor');
+				switch(select.value)
+				{
+					case 'years':
+						ret=Global.General.Years();
+						break;
+					case 'serv_pop':
+						ret=function(firstTwoLetters)
+						{
+							var di=1;//divisor
+							switch(firstTwoLetters)
+							{
+								case "ws":
+									di=Global.Water.ws_serv_pop;
+									break;
+								case "ww":
+									di=Global.Waste.ww_serv_pop;
+									break;
+								default:
+									break;
+							}
+							return di;
+						};
+						break;
+					default:
+						break;
+				}
+				return ret;
+			})();
+
 			var fields=document.querySelectorAll('#sources [field]');
-			for(var i=0;i<fields.length;i++) {
+			for(var i=0;i<fields.length;i++) 
+			{
 				var element=fields[i];
 				var code=element.getAttribute('field');
+				var divisor_value = typeof(divisor)=="function" ? divisor(code.substring(0,2)) : divisor;
 				var loc=locateVariable(code);
-				var value=loc.sublevel ? Global[loc.level][loc.sublevel][code]() : Global[loc.level][code]();
+				var value=loc.sublevel ? (Global[loc.level][loc.sublevel][code]()/divisor_value) : (Global[loc.level][code]()/divisor_value);
 				element.innerHTML=format(value);
 				element.setAttribute('value',value);
 			}
@@ -111,9 +148,15 @@
 <!--title-->
 <h1>
 	<script>document.write(Global.General.Name)</script> 
-	&mdash; GHG Emissions Summary
+	&mdash; GHG Emissions Summary (Overview)
 </h1>
-<h4>Overview of all GHG emitted in <script>document.write(Global.General.Days())</script> days</h4>
+<h4>
+	Assessment period: 
+	<b>
+		<script>document.write(Global.General.Days())</script> days
+		(<script>document.write(Global.General.Years())</script> years)
+	</b>
+</h4>
 <h4>Move the mouse over the emissions to get a detailed view at each stage</h4>
 
 <!--mobile div detailed sources-->
@@ -142,13 +185,29 @@
 		<div>
 			<table id=sources>
 				<tr><td colspan=5 style=text-align:center>
-					GHG emissions &mdash; Kg CO<sub>2</sub>
-					&mdash;
-					<span class=circle style=background:orange></span> highest emission
+					GHG emissions &mdash;
+					<!--select divisor-->
+					<select id=ghg_divisor onchange=init()>
+						<option value=none>Kg CO2
+						<option value=years>Kg CO2 / Year
+						<option value=serv_pop>Kg CO2 / Serviced population
+					</select>
+					<!--legend-->
+					<span style=float:right>
+						<span class=circle style=background:orange></span> 
+						highest emission
+					</span>
 				<tr><th rowspan=9 style="font-weight:bold;background:rgb(64,83,109);color:white">TOTAL GHG<br><br><span field=TotalGHG>0</span>
 
-				<th rowspan=3><a href="edit.php?level=Water" style=color:white>Water supply</a><br><br><span field=ws_KPI_GHG>0</span>
-
+				<th rowspan=3>
+					<a href="edit.php?level=Water" style=color:white>
+						Water supply 
+						(<script> 
+						document.write(Global.Water.ws_serv_pop)
+						</script> people)
+					</a>
+					<br><br><span field=ws_KPI_GHG>0</span>
+				</th>
 					<!--wsa-->
 					<td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'>Abstraction </a> 
 						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Abstraction.length)</script> 
@@ -164,7 +223,17 @@
 						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Distribution.length)</script> 
 						<td field=wsd_KPI_GHG level=Water sublevel=Distribution onmouseenter=fillSources(this,event)>0
 
-				<tr><th rowspan=3 class=red><a href="edit.php?level=Waste" style=color:white>Wastewater</a><br><br><span field=ww_KPI_GHG>0</span>
+				<tr>
+				
+				<th rowspan=3 class=red>
+					<a href="edit.php?level=Waste" style=color:white>
+						Wastewater
+						(<script> 
+						document.write(Global.Waste.ww_serv_pop)
+						</script> people)
+					</a>
+					<br><br><span field=ww_KPI_GHG>0</span>
+				</th>
 
 					<!--wwc-->
 					<td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'>Collection</a> 
