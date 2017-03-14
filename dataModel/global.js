@@ -22,6 +22,7 @@ var Global={
 		},
 		Years:function(){return this.Days()/365},
 		TotalGHG:function(){return Global.Water.ws_KPI_GHG()+Global.Waste.ww_KPI_GHG()},
+		TotalNRG:function(){return Global.Water.ws_nrg_cons()+Global.Waste.ww_nrg_cons()},
 		/*carbon and nitrogen content based on sludge type and mass*/
 		content_C:function(sludge_mass,sludge_type){//<br>
 			if(sludge_type=="Primary"){//<br>

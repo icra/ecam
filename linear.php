@@ -74,7 +74,7 @@
 	<div>
 		<div><span style="color:inherit">Summaries</span></div>
 		<img class=l1 stage=sources src=img/sources.png onclick=window.location="sources.php"            caption="GHG Summary">
-		<img class=l1 stage=energy  src=img/energy.png  onclick=window.location="edit.php?level=Energy"  caption="Energy Summary"> 
+		<img class=l1 stage=energy  src=img/energy.png  onclick=window.location="energy_summary.php"     caption="Energy Summary"> 
 		<img class=l1 stage=water   src=img/water.png   onclick=window.location="edit.php?level=Water"   caption="Water"> 
 		<img class=l1 stage=waste   src=img/waste.png   onclick=window.location="edit.php?level=Waste"   caption="Wastewater"> 
 		<img class=l1 stage=io      src=img/io.png      onclick=window.location="summary.php?type=input" caption="I/O Summary">
@@ -115,9 +115,6 @@
 						}
 						break;
 
-					case "Energy":
-						stage="energy";break;
-
 					default: 
 						stage=false;
 						break;
@@ -135,6 +132,9 @@
 		//hl sources if we are in sources.php
 		else if(strpos($_SERVER['PHP_SELF'],"sources.php"))
 		{ ?>document.querySelector('img[stage=sources]').classList.add('selected');<?php }
+		//hl energy_summary if we are in energy_summary.php
+		else if(strpos($_SERVER['PHP_SELF'],"energy_summary.php"))
+		{ ?>document.querySelector('img[stage=energy]').classList.add('selected');<?php }
 		//hl inhabitants
 		else if(strpos($_SERVER['PHP_SELF'],"inhabitants.php"))
 		{ ?>document.querySelector('img[stage=inha]').classList.add('selected');<?php }
