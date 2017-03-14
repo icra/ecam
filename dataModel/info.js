@@ -30,7 +30,6 @@ var Info = {
 	wwt_trck_typ:{magnitude:"Option",unit:"Fuel type"},
 	wwd_trck_typ:{magnitude:"Option",unit:"Fuel type"},
 	wwt_dige_typ:{magnitude:"Option",unit:"Fuel type"},
-	wwt_appl_typ:{magnitude:"Option",unit:"Fuel type"},
 
 	/* +================+ */
 	/* | Service levels | */
@@ -281,9 +280,7 @@ var Info = {
 	wwt_mass_slu_stock:{magnitude:"Mass",unit:"kg"},
 	wwt_temp_inc:{magnitude:"Temperture",unit:"K"},
 	wwt_time_slu_sto:{magnitude:"Time",unit:"day"},
-	wwt_vol_fuel_app:{magnitude:"Volume",unit:"L"},
 	wwt_soil_typ:{magnitude:"Option",unit:"Soil type"},
-	wwt_nrg_app:{magnitude:"Energy",unit:"kWh"},
 	c_wwt_ch4_pot:{magnitude:"Mass",unit:"kg CH4"},
 	wwt_KPI_GHG_dig_fuel:{magnitude:"Mass",unit:"kg"},
 	wwt_slu_storage_ch4:{magnitude:"Mass",unit:"kg CH4"},
@@ -292,7 +289,6 @@ var Info = {
 	wwt_slu_composting_n2o:{magnitude:"Mass",unit:"kg CO2 eq"},
 	wwt_slu_inciner_ch4:{magnitude:"Mass",unit:"kg CO2 eq"},
 	wwt_slu_inciner_n2o:{magnitude:"Mass",unit:"kg CO2 eq"},
-	wwt_slu_landapp_co2:{magnitude:"Mass",unit:"kg CO2"},
 	wwt_slu_landapp_n2o:{magnitude:"Mass",unit:"kg N2O"},
 	wwt_slu_landfill_ch4:{magnitude:"Mass",unit:"kg CH4"},
 	wwt_slu_landfill_n2o:{magnitude:"Mass",unit:"kg N2O"},

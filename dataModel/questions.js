@@ -397,10 +397,6 @@ var Questions={
 			variables:[
 				"wwt_mass_slu_app",
 				"wwt_soil_typ",
-				"wwt_nrg_app",
-				"wwt_appl_typ",
-				"wwt_vol_fuel_app",
-				"wwt_slu_landapp_co2",
 				"wwt_slu_landapp_n2o",
 				"wwt_KPI_ghg_app_co2eq",
 			],

@@ -399,14 +399,6 @@ var Global={
 			//land application
 			wwt_mass_slu_app:0,
 			wwt_soil_typ:0, //Options: ["Fine","Coarse"]
-			wwt_nrg_app:0,  //afegida per mi
-			wwt_appl_typ:0, //type of fuel app afegida per mi
-			wwt_vol_fuel_app:0,
-			wwt_slu_landapp_co2:function(){//<br>
-				var fuel=Tables['Fuel types'][Tables.find('wwt_appl_typ',this.wwt_appl_typ)];//<br>
-				var fuel_co2=this.wwt_vol_fuel_app*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines);//<br>
-				return (this.wwt_nrg_app*Global.General.conv_kwh_co2)+fuel_co2;
-			},
 			wwt_slu_landapp_n2o:function(){//<br>
 				var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
 				var soil_type=Tables.find('wwt_soil_typ',this.wwt_soil_typ);//<br>
@@ -429,7 +421,7 @@ var Global={
 				}
 				else{return 0}
 			},
-			wwt_KPI_ghg_app_co2eq:function(){return this.wwt_slu_landapp_co2()+this.wwt_slu_landapp_n2o()*Cts.ct_n2o_eq.value},
+			wwt_KPI_ghg_app_co2eq:function(){return this.wwt_slu_landapp_n2o()*Cts.ct_n2o_eq.value},
 			//landfilling
 			wwt_mass_slu_land:0,
 			wwt_slu_type:0,
