@@ -99,7 +99,6 @@
 			//Is filtered?
 			(function(){
 				var question=Questions.isInside(id);
-				console.log(question);
 				if(question)
 				{
 					newRow=t.insertRow(-1)

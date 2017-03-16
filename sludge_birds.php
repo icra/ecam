@@ -11,7 +11,7 @@
 <script>
 	/*mass of sludge (kg) estimated (Global)*/
 	//For example if we have incineration selected:
-	//wwt_mass_slu_inc = sludge
+	//wwt_mass_slu_inc = dry weight estimation
 	function sludge_estimation() 
 	{
 		//method picked
@@ -57,28 +57,31 @@
 
 		//estimation of kg of sludge (wwt_mass_slu)
 		(function(){
-			var mass_est=0.55*Global.Waste.Treatment.wwt_vol_trea/Global.General.Days()*171*(1e-3)*1.176;
-			console.log('Method selected: '+method);
-			console.log('Estimated mass of sludge (wwt_mass_slu & wwt_mass_slu_'+method+'): '+mass_est+' kg');
+			var wwt_vol_trea=Global.Waste.Treatment.wwt_vol_trea;
+			var Days=Global.General.Days();
+			var wwc_bod_pday=Global.Waste.Collection.wwc_bod_pday;
+			var ww_serv_pop=Global.Waste.ww_serv_pop;
+
+			//kg of sludge estimation formula simplified
+			var mass_est=0.55*wwc_bod_pday*ww_serv_pop*(1-0.1)*1e-3*1.176*Days;
+
+			//modification for biogas
+			var biogas=Global.Configuration['Yes/No'].wwt_producing_biogas;
+			if(biogas){
+				mass_est*=0.6;
+			}
+			console.log('Estimated mass of sludge (wwt_mass_slu): '+mass_est+' kg');
 			Global.Waste.Treatment['wwt_mass_slu']=mass_est;
-			Global.Waste.Treatment['wwt_mass_slu_'+method]=mass_est;
 		})();
 
 		//estimation of kg of dry weight (wwt_dryw_slu)
 		(function(){
-			var dry_est=(function(){
-				var wwt_vol_trea=Global.Waste.Treatment.wwt_vol_trea;
-				var Days=Global.General.Days();
-				var wwc_bod_pday=Global.Waste.Collection.wwc_bod_pday;
-				var ww_resi_pop=Global.Waste.ww_resi_pop;
-				return 0.55*0.9*wwc_bod_pday*ww_resi_pop*(1e-3)*1.176/4*Days;
-			})();
-			var biogas=Global.Configuration['Yes/No'].wwt_producing_biogas;
-			if(biogas){
-				dry_est*=0.6;
-			}
+			var dry_est=0.04*Global.Waste.Treatment.wwt_mass_slu;
 			console.log('Estimated mass of dry weight sludge (wwt_dryw_slu): '+dry_est+' kg');
+			//set the estimation for dry weight
 			Global.Waste.Treatment['wwt_dryw_slu']=dry_est;
+			//set the estimation for the method equal to dry weight
+			Global.Waste.Treatment['wwt_mass_slu_'+method]=dry_est;
 		})();
 
 		//end

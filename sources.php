@@ -299,4 +299,22 @@
 	</div>
 </div>
 
+<div>
+	<table>
+		<tr>
+			<th rowspan=2 style=background:purple>
+				GHG Emissions outside utility boundaries
+				<br><br>
+				0
+			</th>
+			<td>Uncollected wastewater
+			<td>0
+		</tr>
+		<tr>
+			<td>Onsite treatment
+			<td>0
+		</tr>
+	</table>
+</div>
+
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

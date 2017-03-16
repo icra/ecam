@@ -110,7 +110,6 @@ var Tables =
 	"wwt_soil_typ":{
 		"Fine-Textured":{value:0},
 		"Coarse-Textured":{value:1},
-		"Other":{value:2},
 	},
 
 	//wwd
