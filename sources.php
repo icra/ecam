@@ -303,7 +303,7 @@
 		<table id=outside style="width:95%;margin-top:2em">
 			<tr>
 				<th rowspan=2 style=background:purple>
-					GHG Emissions
+					GHG emissions
 					<br>from outside utility boundaries 
 					<br><br>
 				</th>
