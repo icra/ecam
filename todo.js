@@ -10,12 +10,7 @@ var TODO = {
 	],
 	Back://back-end
 	[
-		"[DONE] GHG summary, modify units (easy, but time consuming)",
-		"[DONE] Energy summary only for consumption (easy, but time consuming)",
-		"[DONE] Hide energy for land application, fuel for land application and related outputs",
-		"[PENDING] wwt Treatment - hide CO2 for each disposal method",
 		"[WAITING IWA] kWh to CO2 factor for each country",
-		"[WAITING JOSE] Formulas for estimation of mass of sludge produced are wrong",
 	],
 };
 
