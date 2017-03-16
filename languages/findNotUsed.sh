@@ -1,4 +1,5 @@
 #!/bin/bash
+#script for cleaning a language json file
 
 #check input file
 if (( $# < 1 )); then echo "Usage: $0 [language_file.json]";exit;fi

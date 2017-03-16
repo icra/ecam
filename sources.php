@@ -52,7 +52,7 @@
 				return ret;
 			})();
 
-			var fields=document.querySelectorAll('#sources [field]');
+			var fields=document.querySelectorAll('#sources [field], #outside [field]');
 			for(var i=0;i<fields.length;i++) 
 			{
 				var element=fields[i];
@@ -297,24 +297,29 @@
 			}
 		</style>
 	</div>
+
+	<!--emissions outside boundaries-->
+	<div>
+		<table id=outside style="width:95%;margin-top:2em">
+			<tr>
+				<th rowspan=2 style=background:purple>
+					GHG Emissions
+					<br>from outside utility boundaries 
+					<br><br>
+				</th>
+				<td>From Uncollected wastewater
+				<td field="wwc_SL_ghg_unc"></td>
+			</tr>
+			<tr>
+				<td>From Onsite treatment
+				<td field="wwc_SL_ghg_ons"></td>
+			</tr>
+		</table>
+		<style>
+			table#outside td[field] {text-align:right}
+		</style>
+	</div>
 </div>
 
-<div>
-	<table>
-		<tr>
-			<th rowspan=2 style=background:purple>
-				GHG Emissions outside utility boundaries
-				<br><br>
-				0
-			</th>
-			<td>Uncollected wastewater
-			<td>0
-		</tr>
-		<tr>
-			<td>Onsite treatment
-			<td>0
-		</tr>
-	</table>
-</div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

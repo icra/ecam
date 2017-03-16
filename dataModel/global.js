@@ -238,10 +238,12 @@ var Global={
 			wwc_SL_ghg_unc_n2o:function(){
 				return (Global.Waste.ww_resi_pop-Global.Waste.ww_conn_pop)*this.wwc_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
 			},
+			wwc_SL_ghg_unc:function(){return this.wwc_SL_ghg_unc_ch4()+this.wwc_SL_ghg_unc_n2o()},
 			wwc_SL_ghg_ons_ch4:function(){return Global.Waste.ww_onsi_pop*this.wwc_bod_pday/1000*Global.General.Days()*0.3*Cts.ct_ch4_eq.value},
 			wwc_SL_ghg_ons_n2o:function(){
 				return Global.Waste.ww_onsi_pop*this.wwc_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value
 			},
+			wwc_SL_ghg_ons:function(){return this.wwc_SL_ghg_ons_ch4()+this.wwc_SL_ghg_ons_n2o()},
 			//fuel engines?
 			"wwc_fuel_typ":0,
 			"wwc_vol_fuel":0,
