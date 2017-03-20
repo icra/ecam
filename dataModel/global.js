@@ -25,14 +25,14 @@ var Global={
 		TotalNRG:function(){return Global.Water.ws_nrg_cons()+Global.Waste.ww_nrg_cons()},
 		/*carbon and nitrogen content based on sludge type and mass*/
 		content_C:function(sludge_mass,sludge_type){//<br>
-			if(sludge_type=="Primary"){//<br>
+			if(sludge_type=="Non-digested"){//<br>
 				return 0.56*0.70*sludge_mass}//<br>
 			if(sludge_type=="Digested"){//<br>
 				return 0.56*0.51*sludge_mass}//<br>
 			else{return 0}
 		},
 		content_N:function (sludge_mass,sludge_type){//<br>
-			if(sludge_type=="Primary"){//<br>
+			if(sludge_type=="Non-digested"){//<br>
 				return sludge_mass*0.04}//<br>
 			if(sludge_type=="Digested"){//<br>
 				return sludge_mass*0.05}//<br>
@@ -106,18 +106,15 @@ var Global={
 			"wst_nrg_cons":0,
 			"wst_mass_slu":0,
 			"wst_treatmen":0,
+			"wst_tst_carr":0,
+			"wst_trea_cap":0, 
 			wst_KPI_nrg_per_m3:function(){return this.wst_nrg_cons/this.wst_vol_trea},
 			wst_KPI_slu_per_m3:function(){return this.wst_mass_slu/this.wst_vol_trea},
+			wst_KPI_capac_util:function(){return 100*this.wst_vol_trea/this.wst_trea_cap},
+			wst_KPI_tst_carr:function(){return this.wst_tst_carr},
 			//fuel engines?
 			"wst_fuel_typ":0,
 			"wst_vol_fuel":0,
-			//treatment performance?
-			//"wst_nrg_disn":0,
-			"wst_tst_carr":0,
-			"wst_trea_cap":0, 
-			//wst_KPI_nrg_disnfc:function(){return this.wst_nrg_disn/this.wst_vol_trea},
-			wst_KPI_capac_util:function(){return 100*this.wst_vol_trea/this.wst_trea_cap},
-			wst_KPI_tst_carr:function(){return this.wst_tst_carr},
 			//pumping efficiency?
 			"wst_vol_pump":0,
 			"wst_nrg_pump":0,
@@ -365,11 +362,11 @@ var Global={
 			wwt_time_slu_sto:0,
 			c_wwt_ch4_pot:function(){//<br>
 				var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp)//<br>
-				if(sludge_type=="Digested"){//<br>
-					return this.wwt_mass_slu_sto*0.65*0.51*0.56*(4/3)//<br>
+				if(sludge_type=="Non-digested"){//<br>
+					return this.wwt_mass_slu_sto*0.65*0.70*0.56*(4/3) //<br>
 				}
-				if(sludge_type=="Primary"){//<br>
-					return this.wwt_mass_slu_sto*0.65*0.70*0.56*(4/3)//<br>
+				else if(sludge_type=="Digested"){//<br>
+					return this.wwt_mass_slu_sto*0.65*0.51*0.56*(4/3) //<br>
 				}
 				else{return 0}
 			},
@@ -385,16 +382,15 @@ var Global={
 			wwt_KPI_ghg_sto_co2eq:function(){return this.wwt_slu_storage_ch4()},
 			//composting
 			wwt_mass_slu_comp:0,
-			wwt_slu_composting_co2:function(){return this.wwt_mass_slu_comp*18/1000},
 			wwt_slu_composting_ch4:function(){
 				var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
-				if(sludge_type=="Primary")//<br>
+				if(sludge_type=="Non-digested")//<br>
 				{
 					return this.wwt_mass_slu_comp*0.56*0.7*0.56*0.7*this.wwt_mass_slu_comp*0.025*1.3*Cts.ct_ch4_eq.value
 				}//<br>
 				else if(sludge_type=="Digested")//<br>
 				{
-					return wwt_mass_slu_comp*0.56*0.51*0.025*1.3*Cts.ct_ch4_eq.value
+					return this.wwt_mass_slu_comp*0.56*0.51*0.025*1.3*Cts.ct_ch4_eq.value
 				}//<br>
 				else
 				{
@@ -421,7 +417,7 @@ var Global={
 				var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
 				var soil_type=Tables.find('wwt_soil_typ',this.wwt_soil_typ);//<br>
 				var ratio_CN=Global.General.content_C(this.wwt_mass_slu_app,sludge_type)/Global.General.content_N(this.wwt_mass_slu_app,sludge_type)||0;//<br>
-				if(sludge_type=="Primary")//<br>
+				if(sludge_type=="Non-digested")//<br>
 				{//<br>
 					if(soil_type=="Fine-Textured"   && ratio_CN < 30){return this.wwt_mass_slu_app*0.03*0.023*44/28*Cts.ct_n2o_eq.value} //<br>
 					if(soil_type=="Coarse-Textured" && ratio_CN < 30){return this.wwt_mass_slu_app*0.03*0.005*44/28*Cts.ct_n2o_eq.value} //<br>
@@ -439,11 +435,11 @@ var Global={
 			wwt_slu_type:0,
 			wwt_slu_landfill_ch4:function(){//<br>
 				var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
-				if(sludge_type=="Digested"){//<br>
-					return this.wwt_mass_slu_land*0.56*0.51*0.9*1.3*0.5*0.8*0.70*Cts.ct_ch4_eq.value //<br>
-				}//<br>
-				else if(sludge_type=="Primary"){//<br>
+				if(sludge_type=="Non-digested"){//<br>
 					return this.wwt_mass_slu_land*0.56*0.70*0.9*1.3*0.5*0.8*0.69*Cts.ct_ch4_eq.value //<br>
+				}//<br>
+				else if(sludge_type=="Digested"){//<br>
+					return this.wwt_mass_slu_land*0.56*0.51*0.9*1.3*0.5*0.8*0.70*Cts.ct_ch4_eq.value //<br>
 				}//<br>
 				else{return 0}
 			},
@@ -454,13 +450,13 @@ var Global={
 				{return 0}//<br>
 				else
 				{//<br>
-					if(sludge_type=="Primary")//<br>
+					if(sludge_type=="Non-digested")//<br>
 					{ 
-						return this.wwt_mass_slu_land*0.03*0.015*0.03*this.wwt_mass_slu*(1.57)*Cts.ct_n2o_eq.value //<br>
+						return this.wwt_mass_slu_land*0.03*0.015*1.57*Cts.ct_n2o_eq.value //<br>
 					}//<br>
 					if(sludge_type=="Digested")//<br>
 					{
-						return this.wwt_mass_slu_land*0.04*0.015*0.03*this.wwt_mass_slu*(1.57)*Cts.ct_n2o_eq.value //<br>
+						return this.wwt_mass_slu_land*0.04*0.015*1.57*Cts.ct_n2o_eq.value //<br>
 					}//<br>
 				}
 			},

@@ -92,17 +92,6 @@ var Questions={
 			otherQuestions:[],
 		},
 
-		"wst_treatment_performance":{
-			variables:[ 
-				"wst_tst_carr",
-				"wst_trea_cap", 
-				"wst_KPI_capac_util",
-				"wst_KPI_tst_carr",
-			],
-			advanced:0,
-			otherQuestions:[ ],
-		},
-
 		"wst_pumping_efficiency":{
 			variables:[ 
 				"wst_vol_pump",

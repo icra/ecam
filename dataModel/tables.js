@@ -99,7 +99,7 @@ var Tables =
 		"Vane pump":{value:3},
 	},
 	"wwt_slu_disp":{
-		"Primary":{value:0},
+		"Non-digested":{value:0},
 		"Digested":{value:1},
 	},
 	"wwt_slu_type":{

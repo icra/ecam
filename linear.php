@@ -55,13 +55,13 @@
 	<div
 		style=cursor:pointer
 		onclick=window.location="birds.php">
-		<div><a href=birds.php style="color:inherit">Initial GHG assessment &mdash; Tier A</a></div>
+		<div><a href=birds.php style="color:inherit">Tier A &mdash; Initial GHG assessment</a></div>
 		<img class=l1 stage=birds src=img/birds.png caption="<?php write('#quick_assessment')?>">
 	</div>
 
 	<!--DETAILED-->
 	<div>
-		<div><span style="color:inherit">Detailed GHG assessment &mdash; Tier B</span></div>
+		<div><span style="color:inherit">Tier B &mdash; Detailed GHG assessment</span></div>
 		<img class=l2 stage=waterAbs src=img/waterAbs.png onclick=window.location="edit.php?level=Water&sublevel=Abstraction"  caption="<?php write('#Abstraction')?>" >
 		<img class=l2 stage=waterTre src=img/waterTre.png onclick=window.location="edit.php?level=Water&sublevel=Treatment"    caption="<?php write('#Treatment')?>">
 		<img class=l2 stage=waterDis src=img/waterDis.png onclick=window.location="edit.php?level=Water&sublevel=Distribution" caption="<?php write('#Distribution')?>">
