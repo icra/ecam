@@ -7,7 +7,6 @@ var TODO = {
 		"[WAIT] Add in the help page an example json file, after I/O structure does not change anymore",
 		"[WAIT] Sankey diagram (all water flows) (at 'graphs.js')",
 		"[WAIT] Add references (page,chapter,book) to equations (IPCC, BEAM, ...?)",
-		"[PENDING] summary of estimations in Initial GHG Assessment",
 	],
 	Back://back-end
 	[
