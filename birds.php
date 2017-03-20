@@ -288,7 +288,6 @@
 	<div class=inline style=width:35%>
 		<!--inputs-->
 		<div class="card"><?php cardMenu("<b>Inputs</b> &mdash; Enter values from your system")?>
-
 			<!--table-->
 			<table id=inputs style=width:100%>
 				<!--WATER-->
@@ -434,6 +433,33 @@
 			</script>
 			<button class="button prev" onclick="event.stopPropagation();window.location='inhabitants.php'"><?php write('#previous')?></button><!--
 			--><button class="button next" onclick=nextPage()><?php write('#next')?></button>
+		</div>
+
+		<div style="margin:1em"> 
+			Summary of estimations:
+			<ul>
+				<li>
+					Setting the 'main treatment type' estimates:
+					<ul>
+						<li><a href=variable.php?id=wwt_bod_infl><script>document.write(translate("wwt_bod_infl_descr"))</script></a>
+						<li><a href=variable.php?id=wwt_bod_effl><script>document.write(translate("wwt_bod_effl_descr"))</script></a>
+						<li><a href=variable.php?id=wwt_bod_slud><script>document.write(translate("wwt_bod_slud_descr"))</script></a>
+					</ul>
+				</li>
+				<li>
+					Setting the 'sludge disposal method' estimates:
+					<ul>
+						<li><a href=variable.php?id=wwt_mass_slu><script>document.write(translate("wwt_mass_slu_descr"))</script></a>
+						<li><a href=variable.php?id=wwt_dryw_slu><script>document.write(translate("wwt_dryw_slu_descr"))</script></a>
+						<li><a href=variable.php?id=wwt_mass_slu_comp><script>document.write(translate("wwt_mass_slu_comp_descr"))</script></a>
+						<li><a href=variable.php?id=wwt_mass_slu_inc><script>document.write(translate("wwt_mass_slu_inc_descr"))</script></a>
+						<li><a href=variable.php?id=wwt_mass_slu_app><script>document.write(translate("wwt_mass_slu_app_descr"))</script></a>
+						<li><a href=variable.php?id=wwt_mass_slu_land><script>document.write(translate("wwt_mass_slu_land_descr"))</script></a>
+						<li><a href=variable.php?id=wwt_mass_slu_stock><script>document.write(translate("wwt_mass_slu_stock_descr"))</script></a>
+						<li><a href=variable.php?id=wwt_temp_inc><script>document.write(translate("wwt_temp_inc_descr"))</script></a>
+					</ul>
+				</li>
+			</ul>
 		</div>
 	</div>
 

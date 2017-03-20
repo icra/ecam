@@ -286,7 +286,6 @@ var Info = {
 	c_wwt_ch4_pot:{magnitude:"Mass",unit:"kg CH4"},
 	wwt_KPI_GHG_dig_fuel:{magnitude:"Mass",unit:"kg"},
 	wwt_slu_storage_ch4:{magnitude:"Mass",unit:"kg CO2 eq"},
-	wwt_slu_composting_co2:{magnitude:"Mass",unit:"kg CO2"},
 	wwt_slu_composting_ch4:{magnitude:"Mass",unit:"kg CO2 eq"},
 	wwt_slu_composting_n2o:{magnitude:"Mass",unit:"kg CO2 eq"},
 	wwt_slu_inciner_ch4:{magnitude:"Mass",unit:"kg CO2 eq"},

@@ -493,16 +493,27 @@
 			event.stopPropagation();
 			var div1=document.querySelector(id1);
 			var div2=document.querySelector(id2);
+
+			//change btn text
 			btn.classList.toggle('active');
+			if(btn.innerHTML=="VIEW GRAPH")
+			{
+				btn.innerHTML="VIEW TABLE";
+			}
+			else
+			{
+				btn.innerHTML="VIEW GRAPH";
+			}
+
 			if(div1.style.display=='none') 
 			{
-				div1.style.display='<?php if($level=="Energy")echo "initial"?>';
+				div1.style.display='';
 				div2.style.display='none';
 			}
 			else
 			{
 				div1.style.display='none';
-				div2.style.display='<?php if($level=="Energy")echo "initial"?>';
+				div2.style.display='';
 			}
 			init();
 		}
@@ -753,9 +764,8 @@
 			<!--button toggle outputs/graph display-->
 			<button 
 				class=btn_toggle 
-				onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#graph_container','#outputs_container')">
-				VIEW GRAPH
-			</button>
+				onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#graph_container','#outputs_container')"
+			>VIEW GRAPH</button>
 		</div>
 
 		<!--level2-->

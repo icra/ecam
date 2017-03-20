@@ -647,9 +647,8 @@
 		<!--button toggle outputs/graph display-->
 		<button 
 			class=btn_toggle 
-			onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#substages','#substageGraphs')">
-			VIEW GRAPH
-		</button>
+			onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#substages','#substageGraphs')"
+		>VIEW GRAPH</button>
 	</div>
 
 	<!--substages table-->

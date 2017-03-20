@@ -359,7 +359,6 @@ var Questions={
 		"wwt_composting":{
 			variables:[
 				"wwt_mass_slu_comp",
-				"wwt_slu_composting_co2",
 				"wwt_slu_composting_ch4",
 				"wwt_slu_composting_n2o",
 				"wwt_KPI_ghg_comp_co2eq",
