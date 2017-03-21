@@ -29,21 +29,18 @@
 						ret=Global.General.Years();
 						break;
 					case 'serv_pop':
-						ret=function(firstTwoLetters)
+						ret=function(code)
 						{
-							var di=1;//divisor
-							switch(firstTwoLetters)
+							var ws=Global.Water.ws_serv_pop;
+							var ww=Global.Waste.ww_serv_pop;
+							var To=ws+ww;
+							switch(code.substring(0,2))
 							{
-								case "ws":
-									di=Global.Water.ws_serv_pop;
-									break;
-								case "ww":
-									di=Global.Waste.ww_serv_pop;
-									break;
-								default:
-									break;
+								case "ws": return ws; break;
+								case "ww": return ww; break;
+								case "To": return To; break;
+								default:   return  1; break;
 							}
-							return di;
 						};
 						break;
 					default:
@@ -57,7 +54,7 @@
 			{
 				var element=fields[i];
 				var code=element.getAttribute('field');
-				var divisor_value = typeof(divisor)=="function" ? divisor(code.substring(0,2)) : divisor;
+				var divisor_value = typeof(divisor)=="function" ? divisor(code) : divisor;
 				var loc=locateVariable(code);
 				var value=loc.sublevel ? (Global[loc.level][loc.sublevel][code]()/divisor_value) : (Global[loc.level][code]()/divisor_value);
 				element.innerHTML=format(value);
