@@ -2,7 +2,11 @@ var Units={
 	/*Modify or add a unit change in Global.Configuration.Units*/
 	selectUnit:function(field,newUnit){
 		Global.Configuration.Units[field]=newUnit;
-		init();//common function everywhere
+		//call init if it exists, common function everywhere
+		if(typeof(init)=='function')
+		{
+			init();
+		}
 	},
 
 	/* return a multiplier for a field */

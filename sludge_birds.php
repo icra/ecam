@@ -52,7 +52,7 @@
 		//default values for inicineration
 		if(method=="inc")
 		{
-			Global.Waste.Treatment.wwt_temp_inc=750; //K Fluidized Bed Reactor Temperature
+			Global.Waste.Treatment.wwt_temp_inc=1023; //K Fluidized Bed Reactor Temperature
 		}
 
 		//estimation of kg of sludge (wwt_mass_slu)

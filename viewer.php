@@ -99,7 +99,7 @@
 	<span style=color:#666>Legend</span> &rarr;
 	<div class=inline style=background:#bf5050></div> Category
 	<div class=inline style=background:black></div>   Input
-	<div class=inline style=background:blue></div>    Equation
+	<div class=inline style=background:blue></div>    Output
 </div>
 <!--main structure: Global-->
 <div class=inline style=max-width:75%>

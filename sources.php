@@ -52,7 +52,7 @@
 				return ret;
 			})();
 
-			var fields=document.querySelectorAll('#sources [field], #outside [field]');
+			var fields=document.querySelectorAll('#sources [field]');
 			for(var i=0;i<fields.length;i++) 
 			{
 				var element=fields[i];
@@ -188,9 +188,9 @@
 					GHG emissions &mdash;
 					<!--select divisor-->
 					<select id=ghg_divisor onchange=init()>
-						<option value=none>Kg CO2
-						<option value=years>Kg CO2 / Year
-						<option value=serv_pop>Kg CO2 / Serviced population
+						<option value=none>Kg CO2 eq
+						<option value=years>Kg CO2 eq / Year
+						<option value=serv_pop>Kg CO2 eq / Serviced population
 					</select>
 					<!--legend-->
 					<span style=float:right>
@@ -300,19 +300,29 @@
 
 	<!--emissions outside boundaries-->
 	<div>
-		<table id=outside style="width:95%;margin-top:2em">
+		<table id=outside style="width:95%;margin:2em 0">
 			<tr>
 				<th rowspan=2 style=background:purple>
 					GHG emissions
-					<br>from outside utility boundaries 
-					<br><br>
+					<br>
+					outside utility boundaries 
+					<br>
+					(kg CO2 eq)
 				</th>
 				<td>From Uncollected wastewater
-				<td field="wwc_SL_ghg_unc"></td>
+				<td field=wwc_SL_ghg_unc>
+					<script>
+						document.write(format(Global.Waste.Collection.wwc_SL_ghg_unc()))
+					</script>
+				</td>
 			</tr>
 			<tr>
 				<td>From Onsite treatment
-				<td field="wwc_SL_ghg_ons"></td>
+				<td field=wwc_SL_ghg_ons>
+					<script>
+						document.write(format(Global.Waste.Collection.wwc_SL_ghg_ons()))
+					</script>
+				</td>
 			</tr>
 		</table>
 		<style>
@@ -320,6 +330,5 @@
 		</style>
 	</div>
 </div>
-
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
