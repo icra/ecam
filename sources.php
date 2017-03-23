@@ -10,14 +10,12 @@
 
 			//onclick listeners for substage counters: link to substages.php
 			var tds=document.querySelectorAll('td.ss');
-			for(var i=0;i<tds.length;i++)
-			{
+			for(var i=0;i<tds.length;i++) {
 				tds[i].onclick=function(){window.location='substages.php'}
 			}
 		}
 
-		function calculateGHG() 
-		{
+		function calculateGHG() {
 			//kg, kg per year, or kg per serviced population
 			var divisor=(function()
 			{
@@ -31,15 +29,16 @@
 					case 'serv_pop':
 						ret=function(code)
 						{
-							var ws=Global.Water.ws_serv_pop;
-							var ww=Global.Waste.ww_serv_pop;
-							var To=ws+ww;
+							var ye=Global.General.Years();
+							var ws=ye*Global.Water.ws_serv_pop;
+							var ww=ye*Global.Waste.ww_serv_pop;
+							var To=ye*(ws+ww);
 							switch(code.substring(0,2))
 							{
 								case "ws": return ws; break;
 								case "ww": return ww; break;
 								case "To": return To; break;
-								default:   return  1; break;
+								default:   return ye; break;
 							}
 						};
 						break;
@@ -89,8 +88,7 @@
 			element.previousSibling.previousSibling.setAttribute('caption',element.getAttribute('cap'));
 		}
 
-		function addDetailedListeners()
-		{
+		function addDetailedListeners() {
 			var tds=document.querySelectorAll("td[field][level][sublevel]");
 			for(var i=0;i<tds.length;i++)
 			{
@@ -105,8 +103,7 @@
 		}
 
 		//fill table of detailed ghg sources
-		function fillSources(td,ev)
-		{
+		function fillSources(td,ev) {
 			//fill table
 			var lvl=td.getAttribute('level');
 			var sub=td.getAttribute('sublevel');
@@ -187,7 +184,7 @@
 					<select id=ghg_divisor onchange=init()>
 						<option value=none>Kg CO2 eq
 						<option value=years>Kg CO2 eq / Year
-						<option value=serv_pop>Kg CO2 eq / Serviced population
+						<option value=serv_pop>Kg CO2 eq / Year / Serviced population
 					</select>
 					<!--legend-->
 					<span style=float:right>

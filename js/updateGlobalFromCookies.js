@@ -21,7 +21,7 @@ function copyFieldsFrom(object_from,object_to)
 		if(typeof(object_from[field])=="object")
 		{
 			/* 
-			 * HOTFIX FOR OLD JSON FILES //TODO
+			 * HOTFIX FOR OLD JSON FILES
 			 * Problem: "field" may have space characters
 			 * Solution: Remove spaces with String.replace()
 			 */

@@ -655,7 +655,7 @@ Graphs.graph7=function(withTable,container)
 }
 
 //BAR GRAPHS
-//graphs 3{a,b,c,d} TODO not used
+//graphs 3{a,b,c,d} not used
 /*
 Graphs.graph3a=function(withTable,container)
 {

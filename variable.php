@@ -1,6 +1,5 @@
 <?php
 	/*variable.php: page for viewing info of a unique variable, when the user clicks the code, for example in "edit.php" or "level3.php"  */
-
 	//specified code for input 
 	if(!isset($_GET['id'])){die('no input specified');}
 	$id=$_GET['id'];
@@ -208,13 +207,6 @@
 									}
 								}
 							}
-
-							/**
-							  *
-							  *	BUG here: c_wwt_nrg_tran: it is a function with unit=TJ (multiplier!=1) //TODO
-								*	the way it is now shows kWh with the TJ value
-							  *
-							  */
 
 							var estimated = Global.Configuration.DataQuality[match]=="Estimated" ? "<span class=estimated caption='<?php write('#variable_estimated')?>'>&#9888;</span>" : "";
 

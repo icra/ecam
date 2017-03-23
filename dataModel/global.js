@@ -38,8 +38,7 @@ var Global={
 				return sludge_mass*0.05}//<br>
 			else{return 0}
 		},
-		//sludge estimations can go here
-		//TODO
+		//sludge estimations could go here TODO
 	},
 
 	/**Level 1 - Water Supply*/

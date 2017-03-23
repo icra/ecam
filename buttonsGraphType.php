@@ -29,6 +29,6 @@
 <div class=buttonsGraph><!--
 	--><button class="left active" onclick="buttonsGraph(this);Graphs.graph4(false,'graph')">GHG</button><!--
 	--><button class="middle"      onclick="buttonsGraph(this);Graphs.graph7(false,'graph')">Energy consumed</button><!--
-	--><button class="right"       onclick="buttonsGraph(this);document.querySelector('#graph').innerHTML='under development'">Water efficiency</button><!--
+	--><button class="right"       onclick="buttonsGraph(this);document.querySelector('#graph').innerHTML='TBD'">Water efficiency</button><!--
 	-->
 </div>
