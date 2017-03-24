@@ -799,47 +799,47 @@
 
 var Countries={
 	"Brazil":{ 
-		conv_kwh_co2:0.5,
+		conv_kwh_co2:-1,
 		wwc_prot_con:30.66,
 		wwc_bod_pday:50,
 	},
 	"Canada":{ 
-		conv_kwh_co2:0.5,
+		conv_kwh_co2:0.2560802,
 		wwc_prot_con:38.325,
 		wwc_bod_pday:60,
 	}, 
 	"Denmark":{ 
-		conv_kwh_co2:0.5,
+		conv_kwh_co2:0.42312956,
 		wwc_prot_con:40.515,
 		wwc_bod_pday:62,
 	},
 	"Egypt":{ 
-		conv_kwh_co2:0.5,
+		conv_kwh_co2:-1,
 		wwc_prot_con:33.215,
 		wwc_bod_pday:34,
 	},
 	"Germany":{ 
-		conv_kwh_co2:0.5,
+		conv_kwh_co2:0.55213521,
 		wwc_prot_con:36.135,
 		wwc_bod_pday:62,
 	},
 	"Greece":{ 
-		conv_kwh_co2:0.5,
+		conv_kwh_co2:0.73365771,
 		wwc_prot_con:43.07,
 		wwc_bod_pday:57,
 	},
 	"India":{ 
-		conv_kwh_co2:0.5,
+		conv_kwh_co2:1.2790027,
 		wwc_prot_con:20.44,
 		wwc_bod_pday:34,
 	},
 	"Italy":{ 
-		conv_kwh_co2:0.5,
+		conv_kwh_co2:0.42293989,
 		wwc_prot_con:40.88,
 		wwc_bod_pday:60,
 	},
 	"Japan":{ 
-		conv_kwh_co2:0.5,
+		conv_kwh_co2:0.75593917,
 		wwc_prot_con:33.58,
 		wwc_bod_pday:42,
 	},
@@ -854,12 +854,12 @@ var Countries={
 		wwc_bod_pday:40,
 	},
 	"Russian Federation":{ 
-		conv_kwh_co2:0.5,
+		conv_kwh_co2:-1,
 		wwc_prot_con:35.405,
 		wwc_bod_pday:60,
 	},
 	"Sweden":{ 
-		conv_kwh_co2:0.5,
+		conv_kwh_co2:0.037301121,
 		wwc_prot_con:39.055,
 		wwc_bod_pday:75,
 	},
@@ -869,12 +869,12 @@ var Countries={
 		wwc_bod_pday:40,
 	},
 	"Turkey":{ 
-		conv_kwh_co2:0.5,
+		conv_kwh_co2:0.54442488,
 		wwc_prot_con:36.135,
 		wwc_bod_pday:38,
 	},
 	"United States of America":{ 
-		conv_kwh_co2:0.5,
+		conv_kwh_co2:-1,
 		wwc_prot_con:41.61,
 		wwc_bod_pday:85,
 	},
