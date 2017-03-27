@@ -724,8 +724,8 @@
 	"#wwt_KPI_GHG_slu_descr":"From sludge management",
 	"#wwt_KPI_GHG_slu_expla":"From sludge management operations (storing, composting, incineration, land application, landfilling, stockpiling and truck transport)",
 
-	"#c_wwt_ch4_efac_descr":"CH4 emission factor",
-	"#c_wwt_ch4_efac_expla":"Methane emission factor of selected biological wastewater aerobic treatment processes.<br>Activated Sludge - Well managed:0 <br>Activated Sludge - Minor poorly aerated zones:0.06 <br>Activated Sludge - Some aerated zones:0.12 <br>Activated Sludge - Not well managed:0.18 <br>Aerated Lagoon: 0.18 <br>Anaerobic Lagoon <2m depth: 0.12 <br>Anaerobic Lagoon >2m depth: 0.48 <br>Anaerobic Lagoon covered: 0.00 //MISSING VALUE <br>Trickling Filter: 0.036 <br>UASB - CH4 recovery not considered: 0.48 <br>UASB - CH4 recovery considered: 0.3 <br>Wetlands - Surface flow:0.24 <br>Wetlands - Horizontal subsurface flow:0.06 <br>Wetlands - Vertical subsurface flow:0.006",
+	"#wwt_ch4_efac_descr":"CH4 emission factor",
+	"#wwt_ch4_efac_expla":"Methane emission factor of selected biological wastewater aerobic treatment processes.<br>Activated Sludge - Well managed:0 <br>Activated Sludge - Minor poorly aerated zones:0.06 <br>Activated Sludge - Some aerated zones:0.12 <br>Activated Sludge - Not well managed:0.18 <br>Aerated Lagoon: 0.18 <br>Anaerobic Lagoon <2m depth: 0.12 <br>Anaerobic Lagoon >2m depth: 0.48 <br>Anaerobic Lagoon covered: 0.00 //MISSING VALUE <br>Trickling Filter: 0.036 <br>UASB - CH4 recovery not considered: 0.48 <br>UASB - CH4 recovery considered: 0.3 <br>Wetlands - Surface flow:0.24 <br>Wetlands - Horizontal subsurface flow:0.06 <br>Wetlands - Vertical subsurface flow:0.006",
 	"#c_wwt_nrg_biog_descr":"Total energy content of biogas valorized",
 	"#c_wwt_nrg_biog_expla":"Sum of energy content of biogas used in a cogenerator or a boiler during the assessment period by all wastewater treatment plants managed by the undertaking",
 	"#c_wwt_bod_rmvd_descr":"BOD5 mass removed",

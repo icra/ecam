@@ -2,12 +2,11 @@
 var TODO = {
 	Front://front-end
 	[
-		"[WAIT] Discuss graphs with IWA",
+		"[WAIT] IWA did not specify graphs",
 		"[WAIT] Translation after v2 in english is complete",
 		"[WAIT] Add in the help page an example json file, after I/O structure does not change anymore",
 		"[WAIT] Sankey diagram (all water flows) (at 'graphs.js')",
 		"[WAIT] Add references (page,chapter,book) to equations (IPCC, BEAM, ...?)",
-		"[WAIT] Write 'coming soon' to graphs",
 	],
 	Back://back-end
 	[

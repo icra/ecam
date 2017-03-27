@@ -444,6 +444,7 @@
 						<li><a href=variable.php?id=wwt_bod_infl><script>document.write(translate("wwt_bod_infl_descr"))</script></a>
 						<li><a href=variable.php?id=wwt_bod_effl><script>document.write(translate("wwt_bod_effl_descr"))</script></a>
 						<li><a href=variable.php?id=wwt_bod_slud><script>document.write(translate("wwt_bod_slud_descr"))</script></a>
+						<li><a href=variable.php?id=wwt_ch4_efac><script>document.write(translate("wwt_ch4_efac_descr"))</script></a>
 					</ul>
 				</li>
 				<li>

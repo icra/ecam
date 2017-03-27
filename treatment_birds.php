@@ -16,6 +16,11 @@
 		//set treatment type in wwt
 		Global.Waste.Treatment.wwt_type_tre=parseInt(value);
 
+		var treatment=Tables.find('wwt_type_tre',parseInt(value));
+
+		//set ch4 efac
+		Global.Waste.Treatment.wwt_ch4_efac=Tables.wwt_type_tre[treatment].ch4_efac;
+
 		//BOD estimation: Assume g/person/day * 0.001 * population * days
 		//wwc_bod_pday*1e-3*ww_serv_pop*Days
 		var bod_estimation=Global.Waste.Collection.wwc_bod_pday*1e-3*Global.Waste.ww_serv_pop*Global.General.Days();
@@ -33,6 +38,7 @@
 		Global.Waste.Treatment.wwt_bod_slud=estimation;
 
 		//log
+		console.log("CH4 efac: "+Global.Waste.Treatment.wwt_ch4_efac+" kg CH4 / kg BOD");
 		console.log("BOD estimations");
 		console.log("  - BOD influent: "+Global.Waste.Treatment.wwt_bod_infl+" kg");
 		console.log("  - BOD effluent: "+Global.Waste.Treatment.wwt_bod_effl+" kg");

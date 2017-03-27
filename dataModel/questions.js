@@ -42,7 +42,7 @@ var Questions={
 				"wsa_KPI_std_elec_eff",
 				"wsa_KPI_un_head_loss",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[
 				"wsa_pumping_efficiency",
 			],
@@ -56,7 +56,7 @@ var Questions={
 				"c_wsa_pmp_pw",
 				"wsa_KPI_nrg_elec_eff",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 
@@ -65,7 +65,7 @@ var Questions={
 				"wsa_nrg_turb",
 				"wsa_KPI_nrg_recovery",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 
@@ -77,7 +77,7 @@ var Questions={
 				"wsa_KPI_nrg_estm_sav",
 				"wsa_KPI_ghg_estm_red",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 
@@ -100,9 +100,10 @@ var Questions={
 				"wst_KPI_std_nrg_cons",
 				"wst_KPI_std_elec_eff",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
+
 	//wsd
 		"wsd_engines":{
 			variables:[
@@ -132,7 +133,7 @@ var Questions={
 				"wsd_SL_pres_ade",
 				"wsd_SL_cont_sup",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 
@@ -150,7 +151,7 @@ var Questions={
 				"wsd_KPI_nrg_efficien",
 				"wsd_KPI_nrg_topgraph",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 
@@ -165,7 +166,7 @@ var Questions={
 				"wsd_KPI_std_nrg_cons",
 				"wsd_KPI_un_head_loss",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[
 				"wsd_pumping_efficiency",
 			],
@@ -179,7 +180,7 @@ var Questions={
 				"c_wsd_pmp_pw",
 				"wsd_KPI_nrg_elec_eff",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 
@@ -192,9 +193,10 @@ var Questions={
 				"wsd_KPI_nrg_estm_sav",
 				"wsd_KPI_ghg_estm_red",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
+
 	//wwc
 		"wwc_engines":{
 			variables:[
@@ -213,7 +215,7 @@ var Questions={
 				"c_wwc_vol_infl",
 				"wwc_SL_GHG_ii",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 
@@ -228,7 +230,7 @@ var Questions={
 				"wwc_KPI_std_elec_eff",
 				"wwc_KPI_un_head_loss",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[
 				"wwc_pumping_efficiency",
 			],
@@ -242,7 +244,7 @@ var Questions={
 				"c_wwc_pmp_pw",
 				"wwc_KPI_nrg_elec_eff",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 
@@ -254,7 +256,7 @@ var Questions={
 				"wwc_KPI_nrg_estm_sav",
 				"wwc_KPI_ghg_estm_red",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 
@@ -277,7 +279,7 @@ var Questions={
 				"wwt_KPI_capac_util",
 				"wwt_SL_qual_com",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 
@@ -290,7 +292,7 @@ var Questions={
 				"wwt_KPI_std_nrg_cons",
 				"wwt_KPI_std_elec_eff",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 
@@ -305,7 +307,7 @@ var Questions={
 				"wwt_KPI_GHG_dig_fuel",
 				"wwt_KPI_GHG_biog",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[
 				"wwt_valorizing_biogas",
 			],
@@ -319,7 +321,7 @@ var Questions={
 				"wwt_KPI_nrg_biogas",
 				"wwt_KPI_nrg_x_biog",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 
@@ -332,7 +334,7 @@ var Questions={
 				"wwt_KPI_dry_sludge",
 				"wwt_KPI_GHG_slu",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[
 				"wwt_slu_storage",
 				"wwt_composting",
@@ -352,7 +354,7 @@ var Questions={
 				"wwt_slu_storage_ch4",
 				"wwt_KPI_ghg_sto_co2eq",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 
@@ -363,7 +365,7 @@ var Questions={
 				"wwt_slu_composting_n2o",
 				"wwt_KPI_ghg_comp_co2eq",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[
 			],
 		},
@@ -376,7 +378,7 @@ var Questions={
 				"wwt_slu_inciner_n2o",
 				"wwt_KPI_ghg_inc_co2eq",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[
 			],
 		},
@@ -388,7 +390,7 @@ var Questions={
 				"wwt_slu_landapp_n2o",
 				"wwt_KPI_ghg_app_co2eq",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[
 			],
 		},
@@ -401,7 +403,7 @@ var Questions={
 				"wwt_slu_landfill_n2o",
 				"wwt_KPI_ghg_land_co2eq",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[
 			],
 		},
@@ -411,7 +413,7 @@ var Questions={
 				"wwt_mass_slu_stock",
 				"wwt_KPI_ghg_stock_co2eq",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[
 			],
 		},
@@ -423,7 +425,7 @@ var Questions={
 				"wwt_dist_dis",
 				"wwt_KPI_ghg_tsludge",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 
@@ -456,7 +458,7 @@ var Questions={
 				"wwd_main_len",
 				"wwd_KPI_std_nrg_cons",
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 };
