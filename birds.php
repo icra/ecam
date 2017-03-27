@@ -439,7 +439,7 @@
 			Summary of estimations:
 			<ul>
 				<li>
-					Setting the 'main treatment type' estimates:
+					Setting the "main treatment type" estimates:
 					<ul>
 						<li><a href=variable.php?id=wwt_bod_infl><script>document.write(translate("wwt_bod_infl_descr"))</script></a>
 						<li><a href=variable.php?id=wwt_bod_effl><script>document.write(translate("wwt_bod_effl_descr"))</script></a>
@@ -447,7 +447,7 @@
 					</ul>
 				</li>
 				<li>
-					Setting the 'sludge disposal method' estimates:
+					Setting the "sludge disposal method" estimates:
 					<ul>
 						<li><a href=variable.php?id=wwt_mass_slu><script>document.write(translate("wwt_mass_slu_descr"))</script></a>
 						<li><a href=variable.php?id=wwt_dryw_slu><script>document.write(translate("wwt_dryw_slu_descr"))</script></a>

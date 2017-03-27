@@ -31,6 +31,14 @@ var Info = {
 	wwd_trck_typ:{magnitude:"Option",unit:"Fuel type"},
 	wwt_dige_typ:{magnitude:"Option",unit:"Fuel type"},
 
+	//non revenue water 
+	wsa_SL_non_revw:{magnitude:"Percentage",unit:"%"},
+	wsa_SL_nrw_emis:{magnitude:"Mass",unit:"kgCO2eq"},
+	wst_SL_non_revw:{magnitude:"Percentage",unit:"%"},
+	wst_SL_nrw_emis:{magnitude:"Mass",unit:"kgCO2eq"},
+	wsd_SL_non_revw:{magnitude:"Percentage",unit:"%"},
+	wsd_SL_nrw_emis:{magnitude:"Mass",unit:"kgCO2eq"},
+
 	/* +================+ */
 	/* | Service levels | */
 	/* +================+ */

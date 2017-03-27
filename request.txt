@@ -1,0 +1,145 @@
+1) Water Abstraction
+	1.1) Summary tables
+		[input] wsa_vol_conv
+		[input] wsa_nrg_cons
+		[filter] Do you have fuel engines?
+		[output] wsa_KPI_GHG_elec
+		[output] wsa_KPI_GHG
+		[output] wsa_nrg_per_pmp_watr
+	1.2) Substages
+		[filter] Do you want to evaluate pumping efficiency?
+		[filter] Do you want to evaluate electromechanical efficiency of pump?
+		[filter] Are you producing energy?
+		[filter] Opportunities
+
+2) Water Treatment
+	2.1) Summary tables
+		[input] wst_vol_trea
+		[input] wst_nrg_cons
+		[filter] Do you have fuel engines?
+		[output] wst_KPI_GHG_elec
+		[output] wst_KPI_GHG
+		[output] wst_nrg_per_pmp_watr
+
+	2.2) Substages
+		[input] wst_vol_trea
+		[input] wst_nrg_cons
+		[input] wst_treatment
+		[input] wst_mass_slu
+		[input] wst_tst_carr (there was a request to have an additional input to calculate output wst_KPI_tst_carr)
+		[input] wst_trea_cap
+		[filter] Do you want to evaluate pumping efficiency?
+		wst_KPI_nrg_per_m3
+		wst_KPI_slu_per_m3
+		wst_KPI_capac_util
+		wst_KPI_tst_carr
+
+3) Water Distribution
+	3.1) Summary tables
+		[input] wsd_vol_dist    
+		[input] wsd_auth_con                           
+		[input] wsd_nrg_cons
+		[filter] Do you have fuel engines?
+		[filter] Do you have distribution by “water trucks”?
+		[output] wsd_KPI_GHG_elec
+		[output] wsd_KPI_GHG
+		[output] wsd_KPI_nrg_per_m3
+		[output] ws_SL_non_revw
+		[output] wsd_SL_GHG_nrw
+
+	3.2) Substages
+		[input] wsd_vol_dist    
+		[input] wsd_auth_con 
+		[input] wsd_nrg_cons                          
+		[filter] Do you want to evaluate pumping efficiency?
+		[filter] Do you want to evaluate distribution service performance?
+		[filter] Do you  want to investigate topographic energy?
+		[filter] Opportunities
+		[output] wsd_KPI_nrg_per_m3
+		[output] ws_SL_non_revw
+
+4) Wastewater Collection
+	4.1) Summary tables
+		[input] wwc_vol_conv    
+		[input] wwc_nrg_cons                           
+		[input] wwc_bod_pday
+		[input] wwc_prot_con
+		[filter] Do you have fuel engines?
+		[output] wwc_KPI_GHG_elec
+		[output] wwc_KPI_GHG_unt_ch4
+		[output] wwc_KPI_GHG_unt_n2o
+		[output] wwc_KPI_GHG
+		[output] wwc_KPI_nrg_per_m3
+		[output] wwc_SL_conn_pop
+		[output] ww_SL_treat_m3
+		[output] wwc_SL_ghg_unc_ch4 (best to show this in the CO2 summary only)
+		[output] wwc_SL_ghg_unc_n2o (best to show this in the CO2 summary only)
+		[output] wwc_SL_ghg_unc (best to show this in the CO2 summary only)
+		[output] wwc_SL_ghg_ons_ch4 (best to show this in the CO2 summary only)
+		[output] wwc_SL_ghg_ons_n2o (best to show this in the CO2 summary only)
+		[output] wwc_SL_ghg_ons (best to show this in the CO2 summary only
+
+	4.2) Substages
+		[input] wwc_vol_conv    
+		[input] wwc_nrg_cons        
+		[filter] Do you want to evaluate water efficiency?  
+		[filter] Do you want to evaluate pumping efficiency?
+		[filter] Oportunities?
+
+5) Wastewater Treatment
+	5.1) Summary tables
+		[input] wwt_vol_trea
+		[input] wwt_nrg_cons
+		[input] wwt_type_tre
+		c_wwt_ch4_efac (need to be able to also input directly like in v1). 
+		[input] wwt_bod_infl
+		[input] wwt_bod_effl
+		[input] wwt_bod_slud
+		c_wwt_bod_rmvd
+		[filter] Do you have fuel engines?
+		[output] wwt_KPI_GHG_elec
+		[output] wwt_KPI_GHG_tre_ch4
+		[output] wwt_KPI_GHG_tre_n2o
+		[output] wwt_KPI_GHG
+		[output] wwt_KPI_nrg_per_m3
+		[output] wwt_KPI_nrg_per_kg
+		[output] wwt_SL_vol_day
+		[output] ww_SL_serv_pop
+
+	5.2) Substages
+		[input] wwt_vol_trea
+		[input] wwt_nrg_cons
+		[input] wwt_type_tre
+		c_wwt_ch4_efac (need to be able to also input directly like in v1). 
+		[input] wwt_bod_infl
+		[input] wwt_bod_effl
+		[input] wwt_bod_slud
+		c_wwt_bod_rmvd
+		[filter] Are you  producing biogas from anaerobic digestion?
+		[filter] Do you want to evaluate treatment performance
+		[filter] Do you want to evaluate pump efficiency?
+		[filter] Evaluate sludge managemenent(SM)?
+
+6) Wastewater Discharge/Reuse
+	6.1) Summary tables
+		[input] wwd_vol_disc    
+		[input] wwd_n2o_effl                           
+		[input] wwd_nrg_cons
+		[input] wwd_vol_nonp                           
+		[input] wwd_reus_typ
+		[filter] Do you have fuel engines?
+		[filter] Do you have truck transport for reused water?
+		[output] wwd_KPI_GHG_elec
+		[output] wwd_KPI_GHG_tre_n2o
+		[output] wwd_KPI_GHG
+		[output] wwd_KPI_nrg_per_m3
+		[output] wwd_SL_serv_pop
+
+	6.2) Substages
+		[input] wwd_vol_disc    
+		[input] wwd_n2o_effl                           
+		[input] wwd_nrg_cons
+		[input] wwd_vol_nonp                           
+		[input] wwd_reus_typ
+		[filter] Do you want to evaluate pump efficiency
+		[output] wwd_KPI_nrg_per_m3

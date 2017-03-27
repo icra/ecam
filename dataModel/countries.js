@@ -799,7 +799,7 @@
 
 var Countries={
 	"Brazil":{ 
-		conv_kwh_co2:-1,
+		conv_kwh_co2:1,
 		wwc_prot_con:30.66,
 		wwc_bod_pday:50,
 	},
@@ -814,7 +814,7 @@ var Countries={
 		wwc_bod_pday:62,
 	},
 	"Egypt":{ 
-		conv_kwh_co2:-1,
+		conv_kwh_co2:1,
 		wwc_prot_con:33.215,
 		wwc_bod_pday:34,
 	},
@@ -854,7 +854,7 @@ var Countries={
 		wwc_bod_pday:40,
 	},
 	"Russian Federation":{ 
-		conv_kwh_co2:-1,
+		conv_kwh_co2:1,
 		wwc_prot_con:35.405,
 		wwc_bod_pday:60,
 	},
@@ -874,7 +874,7 @@ var Countries={
 		wwc_bod_pday:38,
 	},
 	"United States of America":{ 
-		conv_kwh_co2:-1,
+		conv_kwh_co2:1,
 		wwc_prot_con:41.61,
 		wwc_bod_pday:85,
 	},
