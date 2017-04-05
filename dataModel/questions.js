@@ -184,6 +184,16 @@ var Questions={
 			otherQuestions:[],
 		},
 
+		"wsd_water_eff":{
+			variables:[ 
+				"wsd_SL_nrw_emis",
+				"wsd_wst_SL_nrw_emis",
+				"wsd_wsa_SL_nrw_emis",
+			],
+			advanced:0,
+			otherQuestions:[],
+		},
+
 		"wsd_opportunities":{
 			variables:[ 
 				"wsd_pmp_exff",
@@ -211,9 +221,12 @@ var Questions={
 		"wwc_water_eff": {
 			variables:[
 				"wwc_wet_flow",
+				"wwc_dry_flow",
 				"wwc_rain_day",
 				"c_wwc_vol_infl",
 				"wwc_SL_GHG_ii",
+				"wwc_SL_fratio",
+				"wwc_SL_inf_emis",
 			],
 			advanced:1,
 			otherQuestions:[],

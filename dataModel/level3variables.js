@@ -11,8 +11,6 @@ Level3.list=[
 	"wsa_KPI_std_nrg_cons",
 	"wsa_KPI_std_nrg_newp",
 	"wsa_KPI_un_head_loss",
-	"wsa_SL_non_revw",
-	"wsa_SL_nrw_emis",
 
 	//wst
 	"wst_mass_slu",
@@ -24,8 +22,6 @@ Level3.list=[
 	"wst_KPI_std_elec_eff",
 	"wst_KPI_std_nrg_cons",
 	"wst_KPI_tst_carr",
-	"wst_SL_non_revw",
-	"wst_SL_nrw_emis",
 
 	//wsd
 	"wsd_KPI_nrg_efficien",
@@ -49,6 +45,7 @@ Level3.list=[
 	"wwc_KPI_nrg_cons_new",
 	"wwc_KPI_nrg_estm_sav",
 	"wwc_SL_GHG_ii",
+	"wwc_SL_fratio",
 	"wwc_KPI_std_elec_eff",
 	"wwc_KPI_un_head_loss",
 	"wwc_KPI_ghg_estm_red",

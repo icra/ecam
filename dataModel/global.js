@@ -150,6 +150,9 @@ var Global={
 			//water efficiency?
 			wsd_SL_non_revw:function(){return Math.max(0,100*(this.wsd_vol_dist-this.wsd_auth_con)/this.wsd_vol_dist)},
 			wsd_SL_nrw_emis:function(){return this.wsd_KPI_GHG()*this.wsd_SL_non_revw()/100},
+			wsd_wst_SL_nrw_emis:function(){return Global.Water.Treatment.wst_SL_nrw_emis()},
+			wsd_wsa_SL_nrw_emis:function(){return Global.Water.Abstraction.wsa_SL_nrw_emis()},
+
 			//water trucks?
 			"wsd_trck_typ":0,
 			"wsd_vol_trck":0,
@@ -251,9 +254,12 @@ var Global={
 			"wwc_vol_fuel":0,
 			//water efficiency?
 			"wwc_wet_flow":0,
+			"wwc_dry_flow":0,
 			"wwc_rain_day":0,
 			c_wwc_vol_infl:function(){return this.wwc_rain_day*this.wwc_wet_flow},
 			wwc_SL_GHG_ii:function(){return this.wwc_KPI_nrg_per_m3()*this.c_wwc_vol_infl()*Global.General.conv_kwh_co2}, 
+			wwc_SL_fratio:function(){return this.wwc_wet_flow/this.wwc_dry_flow},
+			wwc_SL_inf_emis:function(){return this.wwc_KPI_GHG()*this.c_wwc_vol_infl()/this.wwc_vol_conv},
 			//pumping?
 			"wwc_vol_pump":0,
 			"wwc_nrg_pump":0,
@@ -540,6 +546,7 @@ var Global={
 			"wwd_reus_typ":0,
 			wwd_KPI_nrg_per_m3:function(){return this.wwd_nrg_cons/this.wwd_vol_disc||0},
 			ww_SL_serv_pop: function(){return Global.Waste.ww_SL_serv_pop()},
+			wwd_SL_ghg_non: function(){return this.wwd_n2o_effl/1000*this.wwd_vol_nonp*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value},
 			//fuel engines?
 			"wwd_fuel_typ":0,
 			"wwd_vol_fuel":0,
