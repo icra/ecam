@@ -45,7 +45,6 @@ Level3.list=[
 	"wwc_KPI_nrg_cons_new",
 	"wwc_KPI_nrg_estm_sav",
 	"wwc_SL_GHG_ii",
-	"wwc_SL_fratio",
 	"wwc_KPI_std_elec_eff",
 	"wwc_KPI_un_head_loss",
 	"wwc_KPI_ghg_estm_red",
