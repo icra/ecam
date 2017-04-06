@@ -182,8 +182,8 @@
 	"#wsd_wsa_SL_nrw_emis_expla":"GHG emissions attributable to non revenue water (Abstraction)",
 	"#wsd_wst_SL_nrw_emis_descr":"GHG emissions attributable to non revenue water (Treatment)",
 	"#wsd_wst_SL_nrw_emis_expla":"GHG emissions attributable to non revenue water (Treatment)",
-	"#wsd_ws_SL_nrw_emis_descr":"GHG emissions attributable to non revenue water (total)",
-	"#wsd_ws_SL_nrw_emis_expla":"GHG emissions attributable to non revenue water (total)",
+	"#wsd_all_SL_nrw_emis_descr":"GHG emissions attributable to non revenue water (total)",
+	"#wsd_all_SL_nrw_emis_expla":"GHG emissions attributable to non revenue water (total)",
 
 	"#wsa_opportunities":"Pump efficiency opportunities",
 	"#wsd_opportunities":"Pump efficiency opportunities",

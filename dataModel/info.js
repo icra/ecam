@@ -38,6 +38,9 @@ var Info = {
 	wst_SL_nrw_emis:{magnitude:"Mass",unit:"kgCO2eq"},
 	wsd_SL_non_revw:{magnitude:"Percentage",unit:"%"},
 	wsd_SL_nrw_emis:{magnitude:"Mass",unit:"kgCO2eq"},
+	wsd_wsa_SL_nrw_emis:{magnitude:"Mass",unit:"kgCO2eq"},
+	wsd_wst_SL_nrw_emis:{magnitude:"Mass",unit:"kgCO2eq"},
+	wsd_all_SL_nrw_emis:{magnitude:"Mass",unit:"kgCO2eq"},
 
 	/* +================+ */
 	/* | Service levels | */
@@ -199,8 +202,8 @@ var Info = {
 	wwc_sta_head:{magnitude:"Head",unit:"m"},
 	wwc_vol_fuel:{magnitude:"Volume",unit:"L"},
 	wwc_coll_len:{magnitude:"Distance",unit:"km"},
-	wwc_wet_flow:{magnitude:"Flow",unit:"m3/d"},
-	wwc_dry_flow:{magnitude:"Flow",unit:"m3/d"},
+	wwc_wet_flow:{magnitude:"Flow",unit:"m3/day"},
+	wwc_dry_flow:{magnitude:"Flow",unit:"m3/day"},
 	wwc_rain_day:{magnitude:"Time",unit:"day"},
 	c_wwc_vol_infl:{magnitude:"Volume",unit:"m3"},
 	wwc_SL_GHG_ii:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
