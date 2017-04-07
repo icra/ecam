@@ -863,12 +863,14 @@ Graphs.sankey=function(withTable,container)
 }
 
 /** gauges for serviced population */
-Graphs.gauge=function(container,value,header,unit)
+Graphs.gauge=function(container,value,header,unit,lowerLimit,upperLimit)
 {
 	container=container||'graph';
 	value=value||0;
 	header=header||'header not defined';
 	unit=unit||"%";
+	lowerLimit=lowerLimit||0;
+	upperLimit=upperLimit||100;
 
 	//format unit
 	unit="<span style=font-size:20px> "+unit+"</span>";
@@ -891,7 +893,8 @@ Graphs.gauge=function(container,value,header,unit)
 	div.style.fontSize="35px";
 	div.style.verticalAlign='middle';
 
-	if(value>100 || value<0) {
+	//warning for out of limits
+	if(value>upperLimit || value<lowerLimit) {
 		div.style.color="red"
 		div.innerHTML+=" &#9888;"
 	}
