@@ -753,7 +753,7 @@
 				//population
 				if($level!="Energy") 
 				{
-					echo "&mdash;";
+					echo "&mdash; ";
 					$resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
 					$serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
 					echo "Resident population <b class=number><script>document.write(Global.$level.$resi_pop)</script></b> &mdash; ";
