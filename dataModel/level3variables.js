@@ -85,6 +85,6 @@ Level3.list=[
 
 	//wwd
 	"wwd_KPI_std_nrg_cons",
-
-
+	"wwd_reus_typ",//hidden
+	"wwd_main_len",//hidden
 ];
