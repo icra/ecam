@@ -620,7 +620,8 @@
 </script>
 
 <!--advanced questions-->
-<?php $folded=isset($_COOKIE['Folded_adv_questions_container'])?"folded":"";?>
+<?php 
+	$folded=isset($_COOKIE['Folded_adv_questions_container'])?"folded":"";?>
 <div id=adv_questions_container class="card <?php echo $folded?>">
 	<div class=menu onclick=fold(this.parentNode)>
 		<button></button>
@@ -635,7 +636,16 @@
 </div>
 
 <!--substages container-->
-<?php $folded=isset($_COOKIE['Folded_substageInputs_container'])?"folded":"";?>
+<?php 
+	if(isset($_COOKIE['Folded_substageInputs_container']))
+	{
+		$folded="folded";
+	}
+	else
+	{
+		$folded="";
+	}
+?>
 <div id=substageInputs_container class="card <?php echo $folded?>" style="text-align:left">
 	<!--menu-->
 	<div class=menu onclick=fold(this.parentNode)>

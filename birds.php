@@ -287,7 +287,7 @@
 <div>
 	<div class=inline style=width:35%>
 		<!--inputs-->
-		<div class="card"><?php cardMenu("<b>Inputs</b> &mdash; Enter values from your system")?>
+		<div class="card"><?php cardMenu("Inputs &mdash; Enter values from your system")?>
 			<!--table-->
 			<table id=inputs style=width:100%>
 				<!--WATER-->
@@ -466,7 +466,7 @@
 
 	<!--graphs-->
 	<div class="card inline" style="width:63%">
-		<?php cardMenu("<b>Figures</b>")?>
+		<?php cardMenu("Figures")?>
 		<div id=graphs>
 			<style> 
 				#graphs table{margin:auto !important;margin-bottom:0.5em !important}

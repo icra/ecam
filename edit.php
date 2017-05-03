@@ -711,19 +711,19 @@
 					color:rgba(0,0,0,0.85);
 				}
 			</style>
-			<a id=btn_all_fold href=# style="margin-right:0.1em;" 
-				onclick="
-					var divs=document.querySelectorAll('div.card');
-					for(var i=0;i<divs.length;i++){divs[i].classList.add('folded')}
-				"
-				>Fold all
-			</a>
-			<a id=btn_all_expand href=# style="" 
+			<a id=btn_all_expand href=# style="margin-right:0.1em;" 
 				onclick="
 					var divs=document.querySelectorAll('div.card');
 					for(var i=0;i<divs.length;i++){divs[i].classList.remove('folded')}
 				"
 				>Expand all
+			</a>
+			<a id=btn_all_fold href=# style="" 
+				onclick="
+					var divs=document.querySelectorAll('div.card');
+					for(var i=0;i<divs.length;i++){divs[i].classList.add('folded')}
+				"
+				>Fold all
 			</a>
 		</div>
 		<?php
