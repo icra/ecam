@@ -57,7 +57,7 @@ var Cts =
 	ct_ef_eff:{
 		descr:"EF effluent (tabled value)",
 		value:0.005,
-		unit:"kg N2O-N / kg N2O",
+		unit:"kg N2O-N / kg N",
 	},
 
 	ct_n2o_co:{
