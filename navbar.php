@@ -1,36 +1,60 @@
 <!--navbar.php: just the logo and lang selection-->
 <style>
-	#navbar {
-		text-align:left;
+	div#navbar {
 		color:white;
-		font-size:16px;
-		padding:0.5em 1em 0.5em 5em;
-		box-shadow: 0 1px 2px rgba(0,0,0,.1);
+		font-size:15px;
+		padding:0.5em 1em;
+		box-shadow:0 1px 2px rgba(0,0,0,.5);
 		background:#00aff1;
 		background: linear-gradient(to right, rgba(0,175,241,1) 0%, rgb(215,29,36) 61%, rgba(0,175,241,1) 100%);
+		display:flex;
+		flex-wrap:wrap;
+		justify-content:space-between;
 	}
-	#navbar a {color:white;}
-	#navbar a:hover {text-decoration:none}
+	#navbar > div{
+		padding:13px 5px 5px 5px;/*values adjusted for the sidebar*/
+	}
+
+	#navbar a{color:white;}
+	#navbar a:hover{text-decoration:none}
 	#navbar img{vertical-align:middle}
-	#navbar #burger 
-	{
+
+	#navbar #burger {
 		color:white;
-		position:absolute;
-		left:27px;
-		top:2px;
-		font-size:30px;
 		cursor:pointer;
+		font-size:30px;
+		line-height:28%;
 	}
-	#navbar #burger:hover {color:#666}
+	#navbar #burger:hover{color:#666}
+
+	#navbar #logo {
+		font-size:30px;
+		line-height:9%;
+		margin:5px 5px;
+	}
 </style>
+
 <div id=navbar>
-	<!--menu symbol--><span id=burger onclick="event.stopPropagation();Sidebar.toggle()">&#9776;</span>
-	<a href=index.php>
-		<span style=font-size:30px;margin-right:35px;font-weight:bold>ECAM</span>
-		<?php write('#navbar_title')?>
-	</a>
-	<span style=position:absolute;font-size:14px;right:10%;top:18px>
-		<a href=problems.php>Debugging utility</a>
-	</span>
-	<!--language selection--><?php include'language.php'?>
+	<div class=flex>
+		<!--burger symbol-->
+		<div id=burger onclick="event.stopPropagation();Sidebar.toggle()">
+			&#9776;
+		</div>
+
+		<!--logo-->
+		<div>
+			<a href=index.php>
+				<b id=logo >ECAM</b>
+				<?php write('#navbar_title')?>
+			</a>
+		</div>
+	</div>
+
+	<div class=flex>
+		<!--debugging-->
+		<div><a href=problems.php>Debugging utility</a></div>
+
+		<!--language selection-->
+		<?php include'language.php'?>
+	</div>
 </div>

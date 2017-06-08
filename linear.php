@@ -1,14 +1,19 @@
 <!--main menu for navigation at the top-->
 <style>
-	#linearDiagram {background:#f5f5f5;border-bottom:1px solid #e5e5e5;padding:0.4em 0 0.4em 0}
+	#linearDiagram {
+		background:#f5f5f5;
+		background:linear-gradient(#f5f5f5,#ddd);
+		border-bottom:1px solid #e5e5e5;
+		padding:0.4em 0 0.4em 0;
+		display:flex;
+		flex-wrap:wrap;
+		justify-content:center;
+	}
 	#linearDiagram > div {
+		margin:0 5px;
 		font-size:12px;
 		vertical-align:middle;
-		transition:background,color 0s ease;
-		display:inline-block;
 		padding:0.2em;
-		margin-right:-1px;
-		margin-left:5px;
 		border-radius:0.5em;
 		color:rgba(0,0,0,0.55);
 	}
@@ -75,9 +80,6 @@
 		<div><span style="color:inherit">Summaries</span></div>
 		<img class=l1 stage=sources src=img/sources.png onclick=window.location="sources.php"            caption="GHG Summary">
 		<img class=l1 stage=energy  src=img/energy.png  onclick=window.location="energy_summary.php"     caption="Energy Summary"> 
-		<img class=l1 stage=water   src=img/water.png   onclick=window.location="edit.php?level=Water"   caption="Water"> 
-		<img class=l1 stage=waste   src=img/waste.png   onclick=window.location="edit.php?level=Waste"   caption="Wastewater"> 
-		<img class=l1 stage=io      src=img/io.png      onclick=window.location="summary.php?type=input" caption="I/O Summary">
 	</div>
 </div>
 
@@ -92,7 +94,7 @@
 				//we need to find level and sublevel to create a stage name i.e. "waterAbs"
 				var level    = '<?php echo $level?>';
 				var sublevel = '<?php echo $sublevel?>';
-				var stage;
+				var stage=false;
 				switch(level)
 				{
 					case "Water":
@@ -101,7 +103,6 @@
 							case "Abstraction":stage="waterAbs";break;
 							case "Treatment":stage="waterTre";break;
 							case "Distribution":stage="waterDis";break;
-							default:stage="water";break;
 						}
 						break;
 
@@ -111,12 +112,7 @@
 							case "Collection":stage="wasteCol";break;
 							case "Treatment":stage="wasteTre";break;
 							case "Discharge":stage="wasteDis";break;
-							default:stage="waste";break;
 						}
-						break;
-
-					default: 
-						stage=false;
 						break;
 				}
 				if(stage) { document.querySelector('img[stage='+stage+']').classList.add('selected') }
@@ -138,9 +134,6 @@
 		//hl inhabitants
 		else if(strpos($_SERVER['PHP_SELF'],"inhabitants.php"))
 		{ ?>document.querySelector('img[stage=inha]').classList.add('selected');<?php }
-		//hl io summary
-		else if(strpos($_SERVER['PHP_SELF'],"summary.php"))
-		{ ?>document.querySelector('img[stage=io]').classList.add('selected');<?php }
 	?>
 
 	//go over icon images to deactivate inactives --> do in PHP better?
@@ -154,7 +147,7 @@
 		for(var i=0;i<collection.length;i++)
 		{
 			var stage = collection[i].getAttribute('stage');
-			if(["birds","energy","conf",'sources','gets','inha','io'].indexOf(stage)>=0) continue;
+			if(["birds","energy","conf",'sources','gets','inha'].indexOf(stage)>=0) continue;
 			var isActive = Global.Configuration.ActiveStages[stage];
 			if(!isActive)
 			{

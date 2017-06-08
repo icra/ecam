@@ -1,6 +1,19 @@
 <?php /*fuel information.php: information about the different fuels*/?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
+	<style>
+		#info td:nth-child(n+2) {
+			text-align:right;
+		}
+		#references {
+			margin-top:10px;
+		}
+		#references td {
+			border:none;
+			padding:2px;
+			font-size:11px;
+		}
+	</style>
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--navbar--><?php include'navbar.php'?>
@@ -11,19 +24,22 @@
 <table id=info> 
 	<tr>
 		<th rowspan=2>Country
-		<th>Emission factor
-		<th>Annual protein consumption
-		<th>BOD5
+		<th>Emission factor<sup>1</sup>
+		<th>Annual protein consumption<sup>2</sup>
+		<th>BOD<sub>5</sub><sup>3</sup>
 	<tr>
 		<th>kgCO<sub>2</sub>/kWh
 		<th>kg/person/year
 		<th>g/person/day
 </table>
-	<style>
-		#info td:nth-child(n+2) {
-			text-align:right;
-		}
-	</style>
+
+<table id=references>
+	<tr><td colspan=2>References
+	<tr><td>1<td>José to provide this one
+	<tr><td>2<td>FAO Statistics Division
+	<tr><td>3<td>IPCC(2006)
+</table>
+
 
 <script>
 	(function()

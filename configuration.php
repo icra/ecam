@@ -131,7 +131,7 @@
 			//update linear diagram when clicking configuration
 			(function()
 			{
-				['water','waterAbs','waterTre','waterDis','waste','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
+				['waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
 				{
 					var img=document.querySelector('#linearDiagram img[stage='+stage+']')
 					if(Global.Configuration.ActiveStages[stage])
@@ -151,8 +151,7 @@
 		}
 
 		//update a field
-		function update(obj,field,newValue) 
-		{
+		function update(obj,field,newValue) {
 			newValue=parseFloat(newValue);
 			if(isNaN(newValue))newValue=0;
 			obj[field]=newValue;
@@ -166,7 +165,6 @@
 <!--linear--> <?php include'linear.php' ?>
 <!--caption--><?php include'caption.php'?>
 <!--title--><h1><?php write('#configuration')?></h1>
-
 <!--subtitle--><h4 style=margin:0;margin-bottom:1em><?php write('#configuration_subtitle')?></h4>
 
 <!--main container-->
