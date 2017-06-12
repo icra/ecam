@@ -676,15 +676,19 @@
 	<?php if($sublevel)
 		{ 
 			?>
-			<span style="font-size:12px;"><?php
+			<span style=line-height:10px>
+				<?php
 					$iwaLink='http://www.iwa-network.org/water-climate-energy-solutions/public/catalogue/';
-					if($level=="Water" && $sublevel=="Abstraction")      $iwaLink.='stage/water_abstraction';
-					elseif($level=="Water" && $sublevel=="Treatment")    $iwaLink.='stage/water_treatment';
-					elseif($level=="Water" && $sublevel=="Distribution") $iwaLink.='stage/water_distribution';
-					elseif($level=="Waste" && $sublevel=="Collection")   $iwaLink.='stage/wastewater_collection';
-					elseif($level=="Waste" && $sublevel=="Treatment")    $iwaLink.='stage/wastewater_treatment';
-					elseif($level=="Waste" && $sublevel=="Discharge")    $iwaLink.='stage/wastewater_discharge';
-				?>&emsp;<a target=_blank href="<?php echo $iwaLink?>">(Info)</a>
+					if($level=="Water" && $sublevel=="Abstraction")      {$alias="waterAbs"; $iwaLink.='stage/water_abstraction';}
+					elseif($level=="Water" && $sublevel=="Treatment")    {$alias="waterTre"; $iwaLink.='stage/water_treatment';}
+					elseif($level=="Water" && $sublevel=="Distribution") {$alias="waterDis"; $iwaLink.='stage/water_distribution';}
+					elseif($level=="Waste" && $sublevel=="Collection")   {$alias="wasteCol"; $iwaLink.='stage/wastewater_collection';}
+					elseif($level=="Waste" && $sublevel=="Treatment")    {$alias="wasteTre"; $iwaLink.='stage/wastewater_treatment';}
+					elseif($level=="Waste" && $sublevel=="Discharge")    {$alias="wasteDis"; $iwaLink.='stage/wastewater_discharge';}
+				?>
+				<a target=_blank href="<?php echo $iwaLink?>">
+					<img style=width:27px;margin-left:10px title="More info" src='img/<?php echo "$alias.png"?>'>
+				</a>
 			</span>
 			<?php 
 		}

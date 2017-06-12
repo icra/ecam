@@ -1,11 +1,14 @@
 <?php
 	/* 
 		All substage's info
-		Inputs (3): level, sublevel, index
+		3 Inputs: level (string), sublevel (string), index (integer)
 	*/
-	if(!isset($_GET['index'])) die('index not defined');
-	$level    = $_GET['level'] or die('level not defined');
-	$sublevel = $_GET['sublevel'] or die ('sublevel not defined');
+	if(!isset($_GET['index'])) die('error: index not defined');
+	if(!isset($_GET['level'])) die('error: level not defined');
+	if(!isset($_GET['sublevel'])) die('error: sublevel not defined');
+
+	$level    = $_GET['level'];
+	$sublevel = $_GET['sublevel'];
 	$index    = $_GET['index'];
 ?>
 <!doctype html><html><head>
@@ -20,11 +23,9 @@
 		?>
 
 		/** Update all */
-		function init()
-		{
+		function init() {
 			//copy all functions from parent sublevel into the substage
-			for(var field in sublevel)
-			{
+			for(var field in sublevel) {
 				if(typeof(sublevel[field])!="function") continue;
 				substage[field]=sublevel[field];
 			}
@@ -35,25 +36,34 @@
 		}
 
 		//redisplay table
-		function updateSubstage()
-		{
+		function updateSubstage() {
+
 			var t=document.querySelector('table#substage');
-			for(var field in substage)
-			{
+			for(var field in substage) {
 				if(typeof(substage[field])=="string") continue;
 
 				//new row
 				var newRow=t.insertRow(-1);
 
-				//description
-				newRow.setAttribute('caption', translate(field+"_descr"));
-
 				//code
-				newRow.insertCell(-1).innerHTML=field;
+				newRow.insertCell(-1).innerHTML="<a href='variable.php?id="+field+"'>"+field+"</a>";
+
+				//name
+				newRow.insertCell(-1).innerHTML=translate(field+"_descr");
+
+				//type
+				newRow.insertCell(-1).innerHTML=(function(){
+					if(typeof substage[field]=="function")
+					{
+						return "Output";
+					}
+					else{
+						return "Input";
+					}
+				})();
 
 				//value
-				newRow.insertCell(-1).innerHTML=(function()
-				{
+				newRow.insertCell(-1).innerHTML=(function() {
 					var value;
 					if(typeof(substage[field])=="number")
 					{
@@ -87,6 +97,9 @@
 			background: white;
 		}
 		#substage tr td:first-child {font-family:monospace;font-size:11px}
+		table tr:nth-child(odd){
+			background:#eee;
+		}
 	</style>
 </head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
@@ -116,13 +129,15 @@
 </div>
 
 <!--subtitle-->
-<h3 style=text-align:center>All inputs and outputs from substage "<script>document.write(substage.name)</script>"</h3>
+<h3 style=text-align:center;color:black>Substage "<script>document.write(substage.name)</script>" summary</h3>
 
 <!--root container-->
 <div>
 	<!--substage table-->
 	<table id=substage style=margin:auto;margin-top:0.5em><tr>
 			<th>Variable
+			<th>Name
+			<th>Type
 			<th>Current Value
 			<th>Units
 	</table>

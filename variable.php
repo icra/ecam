@@ -37,8 +37,7 @@
 	<script>
 		var id='<?php echo $id?>'; //make the id variable live in javascript scope
 
-		function init()
-		{
+		function init() {
 			updateInfoTable();
 			Exceptions.apply();
 			Caption.listeners();
@@ -250,6 +249,24 @@
 				if(typeof(currSubstage)=="object" && currSubstage.length > 1)
 				{
 					newCell.setAttribute('caption','Go to Substages to modify this input');
+
+					//dump all substage values in a table inside newCell
+					(function(){
+						var subsTable=document.createElement('table');
+						newCell.appendChild(subsTable);
+						subsTable.style.fontSize="10px";
+
+						//add header
+						var s_newRow=subsTable.insertRow(-1);
+						s_newRow.insertCell(-1).outerHTML="<td colspan=2>This input is the sum of:"
+
+						var n=currSubstage.length;
+						for(var i=0;i<n;i++){
+							var s_newRow=subsTable.insertRow(-1)
+							s_newRow.insertCell(-1).innerHTML="<a href=substage.php?level="+level+"&sublevel="+sublevel+"&index="+i+">Substage "+(i+1)+" ("+currSubstage[i].name+")</a>";
+							s_newRow.insertCell(-1).innerHTML=currSubstage[i][id];
+						}
+					})();
 				}
 				else{
 					newCell.className='input'
@@ -398,7 +415,7 @@
 				newCell.innerHTML="Is benchmarked?"
 				//evaluate benchmarking and show formula
 				newRow.insertCell(-1).innerHTML=""+
-					"<div style='margin:1em 0'><b>Benchmarking status &rarr;</b> <span style=font-size:16px>"+RefValues[id](currentStage)+"</span></div>"+
+					"<div style='margin:1em 0'><b>Benchmarking status &rarr;</b> <span style=font-size:16px>\""+RefValues[id](currentStage)+"\"</span></div>"+
 					"<div class='card folded' style=margin:0>"+
 					"<div class=menu onclick=this.parentNode.classList.toggle('folded')>"+
 					"	<button></button> Benchmarking Formula"+

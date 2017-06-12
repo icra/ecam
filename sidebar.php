@@ -116,7 +116,8 @@
 
 	<div id=sidecontent>
 		<table id=menu>
-			<tr><th style="padding:5px 5px 5px 5px"><?php write("#sidebar_mainMenu")?><span id=Name style="float:right"> <script>document.write(Global.General.Name)</script>
+			<tr><th style="padding:5px"><?php write("#sidebar_mainMenu")?><span id=Name style="float:right">
+				<script>document.write(Global.General.Name)</script>
 			<tr>
 				<td align=center style="padding:0.7em">
 				<input type="file" id="loadfile" accept=".json" onchange="loadFile(event)" style="display:none">
@@ -146,9 +147,6 @@
 			<tr><td><a href=configuration.php><?php write('#configuration')?></a>
 			<tr><td><a href=inhabitants.php>Population</a>
 			<tr><td><a href=birds.php><?php write('#quick_assessment')?></a>
-			<tr><th>GHG Summary 
-			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
-			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
 			<tr><th><?php write('#energy_performance')?>
 			<tr><td><a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction><?php write('#Abstraction')?></a>
 			<tr><td><a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment><?php write('#Treatment')?></a>
@@ -156,13 +154,19 @@
 			<tr><td><a class=waste stage=wasteCol href=edit.php?level=Waste&sublevel=Collection><?php write('#Collection')?></a>
 			<tr><td><a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment><?php write('#Treatment')?></a>
 			<tr><td><a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge><?php write('#Discharge')?></a>
-			<tr><th><?php write('#summary')?>
-			<tr><td><a href=summary.php?type=input><?php write('#sidebar_all_inputs')?></a>
+			<tr><th>Summaries
+			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
+			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
+			<tr><td><a href=substages.php?>All substages</a>
+			<tr><td><a href=sources.php?>GHG Summary</a>
+			<tr><td><a href=energy_summary.php?>Energy Summary</a>
+			<tr><td><a href=summary.php?type=input>All inputs</a>
 			<tr><td><a href=summary.php?type=output>All outputs</a>
 			<tr><td><a href=summary.php?type=ccvv>All calculated variables</a>
 			<tr><td><a href=constants.php>All constants</a>
-			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
+			<tr><th>Other
 			<tr><td><a href=opps.php><?php write("#opportunities")?></a>
+			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
 			<tr><th>
 		</table>
 		<div style="

@@ -53,7 +53,6 @@
 <!--linear--><?php include'linear.php'?>
 <!--caption--><?php include'caption.php'?>
 
-<div style=margin-top:0.5em> <a href="sources.php">&larr; GHG Summary</a> </div>
 <!--TITLE--><h1>Substages Overview</h1></center>
 
 <!--main-->
