@@ -10,6 +10,7 @@ var TODO = {
 	],
 	Back://back-end
 	[
+		"[TODO] Avoid document.write function when possible",
 		"[WAIT] Translation will be done after v2 in english is complete (IWA should say this)",
 	],
 };

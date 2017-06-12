@@ -1,15 +1,14 @@
 <script>
-	/*  part of "summary.php"
-		creates a table indicating active stages
+	/*  
+		file included in "summary.php"
+		creates a table view indicating active stages
 	*/
 
 	var aass={ }; //namespace "active stages"
 
-	aass.stageName=function(stage)
-	{
+	aass.stageName=function(stage) {
 		var r;
-		switch(stage)
-		{
+		switch(stage) {
 			case "water":	 r="<?php write('#Water')?>";break;
 			case "waste":	 r="<?php write('#Waste')?>";break;
 			case "waterAbs": r="<?php write('#Abstraction')?>";break;
@@ -23,8 +22,7 @@
 		return r;
 	}
 
-	aass.printCell=function(stage,colspan)
-	{
+	aass.printCell=function(stage,colspan) {
 		var color = Global.Configuration.ActiveStages[stage] ? "black" : "#ccc";
 		var background = Global.Configuration.ActiveStages[stage] ? "" : "#eee";
 		var link_color = stage.search(/^waste/)==0 ? "#d71d24" : "";
@@ -34,8 +32,7 @@
 				"<a href='#"+stage+"' style=color:"+link_color+">"+this.stageName(stage)+"</a>");
 	}
 
-	aass.hlStage=function(stage,hl)
-	{
+	aass.hlStage=function(stage,hl) {
 		var newColor = hl ? "lightgreen":"";
 		var elements = document.querySelectorAll('tr[family='+stage+']')
 		for(var i=0;i<elements.length;elements[i++].style.backgroundColor=newColor){}
@@ -46,17 +43,14 @@
 	<style>.stage:hover {background:lightgreen}</style>
 	<tr><th colspan=8><?php write('#stages')?><tr>
 		<tr><script>
-		['water','waste'].forEach(function(stage)
-		{
+		['water','waste'].forEach(function(stage) {
 			aass.printCell(stage,3);
 		});
 		</script><tr><script>
-		['waterAbs','waterTre','waterDis'].forEach(function(stage)
-		{
+		['waterAbs','waterTre','waterDis'].forEach(function(stage) {
 			aass.printCell(stage,1);
 		});
-		['wasteCol','wasteTre','wasteDis'].forEach(function(stage)
-		{
+		['wasteCol','wasteTre','wasteDis'].forEach(function(stage) {
 			aass.printCell(stage,1);
 		});
 	</script>

@@ -3,24 +3,28 @@
 	$id=$_GET['id']; //constant code
 ?>
 <!doctype html><html><head>
-<?php include'imports.php'?>
-
-<script> 
-	/* Global variable "id" */
-	var id="<?php echo $id?>"; 
-</script>
-
+	<?php include'imports.php'?>
+	<script> 
+		/* Global variable "id" */
+		var id="<?php echo $id?>"; 
+	</script>
 </head><body><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--navbar--> <?php include'navbar.php'?>
-<!--linear--> <?php include'linear.php'?>
-<!--title--><h1><a href=constants.php>All constants</a> &rsaquo; <span style=color:black>Constant</span></h1>
+<?php 
+	include'sidebar.php';
+	include'navbar.php';
+	include'linear.php';
+?>
+<h1>
+	<a href=constants.php>All constants</a> &rsaquo; 
+	<span style=color:black>Constant</span>
+</h1>
 
 <!--description-->
 <div><script>document.write(Cts[id].descr)</script></div>
 
 <!--value and unit-->
 <div style="padding:2em 0">
+	<!--try to avoid document.write-->
 	<script>
 		document.write(id+" = ")
 		document.write("<span style=font-size:42px;color:black>"+Cts[id].value+" </span>")
@@ -34,13 +38,12 @@
 <div style="margin:1em 0"> This constant is used in the following equations </div>
 <table>
 	<script>
-		var i=1;//counter
-		Formulas.outputsPerInput(id).forEach(function(equation)
-		{
+		var i=1;//counter for outputs
+		Formulas.outputsPerInput(id).forEach(function(equation){
 			document.write("<tr><td>"+i+".<td><a href=variable.php?id="+equation+">"+equation+"</a>");
 			document.write("<td>"+translate(equation+"_descr"));
 			i++;
-		})
+		});
 		if(i==1){ document.write("<tr><td style=color:#666>~Constant not used. Consider removing it"); }
 	</script>
 </table>

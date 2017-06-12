@@ -45,7 +45,6 @@
 	2015-<?php echo date("Y")?> <a href='license.php'><?php write('#about_license')?></a>. <br>
 
 	<br><br>
-
 </div>
 
 </div>

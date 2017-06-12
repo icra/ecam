@@ -1,6 +1,5 @@
-<!--php file to import everywhere, at the end of document <body>-->
+<!--file to import everywhere-->
 <div id=caption style=display:none>#caption</div>
-
 <script>
 	var Caption={};//namespace
 	Caption.show=function(ev,element){
@@ -11,18 +10,15 @@
 		caption.innerHTML=element.getAttribute('caption');
 	}
 	Caption.hide=function(){document.querySelector("#caption").style.display='none';}
-	//add mouse listeners. To call when page loads (<body onload>)
-	Caption.listeners=function()
-	{
+	//add mouse listeners, to be called when html loads (<body onload>)
+	Caption.listeners=function() {
 		var els=document.querySelectorAll("[caption]");
-		for(var i=0;i<els.length;i++)
-		{
+		for(var i=0;i<els.length;i++){
 			els[i].onmouseout=function(){Caption.hide();}
 			els[i].onmousemove=function(){Caption.show(event,this);}
 		}
 	}
 </script>
-
 <style>
 	div#caption {
 		position:fixed;

@@ -2,13 +2,11 @@
 <?php include'imports.php'?>
 <script>
 	/*data structures viewer*/
-	function init() 
-	{ 
+	function init() { 
 		createTree()
 		updateResult() 
 	} 
-	function createTree(obj,name,destiny)
-	{
+	function createTree(obj,name,destiny) {
 		//initial conditions
 		obj=obj||Global
 		name=name||"Global"
@@ -89,17 +87,19 @@
 	}
 </style>
 </head><body onload=init() style=background:#bce3f8><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--navbar--> <?php include'navbar.php'?>
-<!--menu--> <?php include'linear.php'?>
+<?php 
+	include'sidebar.php';
+	include'navbar.php';
+	include'linear.php';
+?>
 <!--title-->
 <h1><a href=development.php>Development</a> &rsaquo; All data structures in ECAM</h1></center>
 <!--legend-->
 <div id=legend>
 	<span style=color:#666>Legend</span> &rarr;
-	<div class=inline style=background:#bf5050></div> Category
-	<div class=inline style=background:black></div>   Input
-	<div class=inline style=background:blue></div>    Output
+	<div class=inline style=background:#bf5050></div>Category
+	<div class=inline style=background:black></div>Input
+	<div class=inline style=background:blue></div>Output
 </div>
 <!--main structure: Global-->
 <div class=inline style=max-width:75%>
@@ -112,10 +112,8 @@
 	<ul><?php
 		//see all files in the "dataModel" folder
 		$files=scandir("dataModel");
-		forEach($files as $file)
-		{
-			if(!is_dir("dataModel/$file"))
-			{
+		forEach($files as $file) {
+			if(!is_dir("dataModel/$file")) {
 				echo "<li><a href='dataModel/$file'>$file</a>";
 			}
 		}

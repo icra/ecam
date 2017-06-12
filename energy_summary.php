@@ -9,30 +9,24 @@
 
 			//onclick listeners for substage counters: link to substages.php
 			var tds=document.querySelectorAll('td.ss');
-			for(var i=0;i<tds.length;i++)
-			{
+			for(var i=0;i<tds.length;i++){
 				tds[i].onclick=function(){window.location='substages.php'}
 			}
 		}
 
-		function calculateGHG() 
-		{
+		function calculateGHG() {
 			//kg, kg per year, or kg per serviced population
-			var divisor=(function()
-			{
+			var divisor=(function() {
 				var ret=1;//return value
 				var select=document.querySelector('#ghg_divisor');
-				switch(select.value)
-				{
+				switch(select.value) {
 					case 'years':
 						ret=Global.General.Years();
 						break;
 					case 'serv_pop':
-						ret=function(firstTwoLetters)
-						{
+						ret=function(firstTwoLetters) {
 							var di=1;//divisor
-							switch(firstTwoLetters)
-							{
+							switch(firstTwoLetters) {
 								case "ws":
 									di=Global.Water.ws_serv_pop;
 									break;
@@ -52,8 +46,7 @@
 			})();
 
 			var fields=document.querySelectorAll('#sources [field]');
-			for(var i=0;i<fields.length;i++) 
-			{
+			for(var i=0;i<fields.length;i++) {
 				var element=fields[i];
 				var code=element.getAttribute('field');
 				var divisor_value = typeof(divisor)=="function" ? divisor(code.substring(0,2)) : divisor;
@@ -62,15 +55,13 @@
 				//check if variable is an input or an output
 				var object=loc.sublevel ? Global[loc.level][loc.sublevel][code] : Global[loc.level][code];
 				var value=0;
-				if(typeof(object)=="function")
-				{
+				if(typeof(object)=="function") {
 					value=loc.sublevel ? 
 						Global[loc.level][loc.sublevel][code]()/divisor_value 
 						: 
 						Global[loc.level][code]()/divisor_value;
 				}
-				else
-				{
+				else {
 					value=object/divisor_value;
 				}
 				element.innerHTML=format(value);
@@ -86,7 +77,7 @@
 				var value=parseFloat(fields[i].getAttribute('value'));
 				if(value>max) {
 					max=value;
-					critic=fields[i].getAttribute('field')
+					critic=fields[i].getAttribute('field');
 				}
 			}
 			if(!critic)return;
@@ -115,10 +106,12 @@
 		}
 	</style>
 </head><body onload=init()><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--navbar--> <?php include'navbar.php'?>
-<!--linear--> <?php include'linear.php'?>
-<!--caption--><?php include'caption.php'?>
+<?php 
+	include'sidebar.php';
+	include'navbar.php';
+	include'linear.php';
+	include'caption.php';
+?>
 <!--title-->
 <h1>
 	<script>document.write(Global.General.Name)</script> 

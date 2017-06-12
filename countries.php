@@ -1,4 +1,3 @@
-<?php /*fuel information.php: information about the different fuels*/?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
@@ -15,10 +14,12 @@
 		}
 	</style>
 </head><body><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--navbar--><?php include'navbar.php'?>
-<!--linear--><?php include'linear.php'?>
-<!--TITLE--><h1>Countries</h1>
+<?php 
+	include'sidebar.php';
+	include'navbar.php';
+	include'linear.php';
+?>
+<h1>Countries</h1>
 
 <!--fuel info-->
 <table id=info> 
@@ -40,13 +41,10 @@
 	<tr><td>3<td>IPCC(2006)
 </table>
 
-
 <script>
-	(function()
-	{
+	(function() {
 		var table=document.querySelector('#info');
-		for(var country in Countries)
-		{
+		for(var country in Countries) {
 			var newRow=table.insertRow(-1);
 			newRow.insertCell(-1).innerHTML="<b>"+country+"</b>";
 			newRow.insertCell(-1).innerHTML=Countries[country].conv_kwh_co2;
