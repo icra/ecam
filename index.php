@@ -40,10 +40,9 @@
 		<div style="padding:0;text-align:center">
 			<img src=svg/diagram.png style=width:70%>
 		</div>
-
 	</div>
 </div>
 
 <!--FOOTER--><?php include'footer.php'?>
-<!--LOGOS--> <div style=background:white;text-align:center> <!--giz--><img src=img/giz.png> </div>
+<!--LOGOS--><div style=background:white;text-align:center><!--giz--><img src=img/giz.png></div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
