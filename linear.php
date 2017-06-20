@@ -4,7 +4,7 @@
 		background:#f5f5f5;
 		background:linear-gradient(#f5f5f5,#ddd);
 		border-bottom:1px solid #e5e5e5;
-		padding:0.4em 0 0.4em 0;
+		padding:0.4em 0 0.2em 0;
 		display:flex;
 		flex-wrap:wrap;
 		justify-content:center;

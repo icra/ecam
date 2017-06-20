@@ -15,18 +15,29 @@
 			}
 		</style>
 
-		<!--TITLE--><h1 style="text-align:left;font-size:30px;"><b>ECAM</b> <?php write("#index_web_tool")?>
-			<span style=color:#bf5050>Development version (towards v2.0)</span>
+		<!--new title-->
+		<h1 style=font-size:32px>
+			Assess you utility's carbon footprint,<br>
+			energy consumption and service levels
 		</h1>
 
-		<!--DESCRIPTION--><div style="color:#58595b;font-size:18px;text-align:left">
-			<?php write('#index_description')?>
-		</div>
-
-		<!--FIRST TIME?-->
+		<!--new text-->
 		<h4 style=font-size:18px;color:#58595b>
-			<?php write('#index_first_time_using')?>
-			<a href=about.php><?php write('#about')?></a>.
+			The Energy Performance and Carbon Emissions Assessment and Monitoring Tool is <br>
+			designed for assessing the carbon emissions that utilities can control within the<br>
+			urban water cycle and prepare these utilities for future reporting needs on cimate<br>
+			mitigation.
+		</h4>
+		<h4 style=font-size:18px;color:#58595b>
+			ECAM is a free and 
+			<a target=_blank href=//github.com/holalluis/ecam>open source</a>
+			tool, developed as part of the
+			<a target=_blank href=http://wacclim.org/>WaCCliM project</a>
+		</h4>
+
+		<h4 style=font-size:18px;color:#58595b>
+			First time using ECAM? 
+			Click on 'New' or learn more in <a href=about.php target=_blank>About</a>.
 		</h4>
 
 		<!--MENU--><div style="padding:1em 0"><?php include'menu.php'?></div>
@@ -44,6 +55,11 @@
 	</div>
 </div>
 
-<!--FOOTER--><?php include'footer.php'?>
-<!--LOGOS--> <div style=background:white;text-align:center> <!--giz--><img src=img/giz.png> </div>
+<?php include'footer.php'?>
+
+<!--logos--> 
+<div style=background:white;text-align:center> 
+	<img src=img/logos.png width=40%> 
+</div>
+
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

@@ -1,8 +1,9 @@
-<!--fragment inside edit.php-->
+<!--included once in edit.php-->
 <style>
 	span[expanded]{transition:transform 0.15s;}
 	span[expanded='0']{transform:rotate(-90deg);}
 </style>
+
 <script>
 	//namespace to remember folding of questions (not saved to cookies)
 	var Expanded={
@@ -12,8 +13,7 @@
 <script>
 	var level2 = {};//namespace
 
-	level2.toggleQuestionVisibility=function(btn,question)
-	{
+	level2.toggleQuestionVisibility=function(btn,question) {
 		var currentState=Expanded[question];
 		if(currentState===undefined)currentState=1;//expanded by default
 
@@ -105,13 +105,10 @@
 		/*new row*/
 		var newRow=t.insertRow(-1);
 		newRow.setAttribute('field',code);
-
 		//question it belongs to
-		if(question)
-		{
+		if(question) {
 			newRow.setAttribute('question',question)
-			if(Expanded[question]==0)
-			{
+			if(Expanded[question]==0) {
 				newRow.style.display='none';
 			}
 		}
@@ -120,8 +117,7 @@
 		var newCell=document.createElement('th');
 		newRow.append(newCell);
 		newCell.classList.add('variableCode');
-		newCell.innerHTML=(function()
-		{
+		newCell.innerHTML=(function() {
 			return "<a style=font-size:10px href=variable.php?id="+code+">"+code+"</a>";
 		})();
 
@@ -129,8 +125,7 @@
 		var newCell=newRow.insertCell(-1);
 		newCell.style.textAlign="left";
 		newCell.setAttribute('title', translate(code+'_expla'));
-		newCell.innerHTML=(function()
-		{
+		newCell.innerHTML=(function() {
 			var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ? 
 				" <span class=not_used_input caption='Input not used for any equation'></span>" : "";
 			return translate(code+"_descr")+warning;
@@ -346,8 +341,7 @@
 		newCell.colSpan=2;
 		newCell.style.paddingRight="1em";
 		newCell.style.textAlign="right";
-		newCell.innerHTML=(function()
-		{
+		newCell.innerHTML=(function() {
 			var ret="";
 			if(checked)
 			{
@@ -366,10 +360,14 @@
 			var checked_n = checked ? "" : "checked";
 			var checked_y = checked ? "checked" : "";
 			var str = ""+
-			"&emsp; "+
-			"<label>No  <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',0) "+checked_n+"></label>"+
-			"&emsp; "+
-			"<label>Yes <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',1) "+checked_y+"></label>"+
+			"<div class=flex style=justify-content:center>"+
+			"  <div>"+
+			"    <label>No <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',0) "+checked_n+"></label>"+
+			"  </div>"+
+			"  <div>"+
+			"    <label>Yes <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',1) "+checked_y+"></label>"+
+			"  </div>"+
+			"</div>"+
 			"";
 			return str;
 		})();

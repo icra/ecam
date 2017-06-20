@@ -292,6 +292,8 @@
 		<label> Yes <input type=radio name=anyFuelEngines ans=1 onclick=update(Global.General,this.name,1)></label>
 	</fieldset>
 
+	<?php include'gwp.php'?>
+
 </div>
 
 <!--prev & next buttons-->

@@ -4,8 +4,7 @@
 	#footer {
 		text-align:center;
 		padding:0.5em 2em 0.5em 2em;
-		background:#00aff1;
-		background:inherit;
+		background:white;
 		line-height:2em;
 		color:white;
 		color:#333;
@@ -21,15 +20,15 @@
 </style>
 
 <footer id=footer >
-	<img src=img/IWA-logo.png style=height:25px;vertical-align:middle>
+	<img src="img/logo-wacclim.jpg" style=height:25px;vertical-align:middle>
 	Copyright <?php echo date("Y")?> 
 	·
-	<a href="http://www.iwa-network.org/" target=_blank>International Water Association</a>
+	<a href="http://wacclim.org/" target=_blank>WaCCliM</a>
 	·
 	<a href=about.php><?php write("#about")?></a>
 	·
 	<a href=help.php><?php write("#help")?></a>
 	·
-	<a href=mailto:WaCCliM@iwahq.org><?php write("#contact")?>: WaCCliM@iwahq.org</a>
+	<a href=mailto:info@wacclim.org><?php write("#contact")?>: info@wacclim.org</a>
 </footer>
 

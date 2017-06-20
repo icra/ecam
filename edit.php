@@ -14,12 +14,11 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
-		body{background:#F5ECCE}
-
+		body{background:#f5ecce}
 		<?php
 			//color in red wastewater stages links
-			if($level=="Waste")
-			{ ?>
+			if($level=="Waste") { 
+				?>
 				h1 a:not([id]) {color:#d71d24 !important}
 				table#inputs th:not(.tableHeader) {background:#d71d24}
 				table#substages th {background:#d71d24}
@@ -27,7 +26,8 @@
 				table#substages td.variableCode.output {background:#c9ab98}
 				#outputs a,#outputs a:visited{color:#d71d24}
 				#nrgOutputs a,#nrgOutputs a:visited{color:#d71d24}
-			<?php }
+				<?php 
+			}
 		?>
 
 		/*TAGS*/
@@ -629,15 +629,12 @@
 	<script>
 		//generate cookies for div.card folding
 		//called after divs are clicked
-		function fold(card)
-		{
+		function fold(card) {
 			card.classList.toggle('folded');
-			if(card.classList.contains('folded'))
-			{
+			if(card.classList.contains('folded')) {
 				setCookie("Folded_"+card.id,1);
 			}
-			else
-			{
+			else {
 				removeCookie("Folded_"+card.id);
 			}
 		}
@@ -650,16 +647,14 @@
 
 <!--TITLE-->
 <?php 
-	//Set a navigable title for page
-	switch($level)
-	{
+	//navigable title
+	switch($level) {
 		case "Water":
 		case "Waste":  $titleLevel=$lang_json["#$level"];break;
 		case "Energy": $titleLevel="Energy summary";break;
 		default:	     $titleLevel=$level;break;
 	}
-	if($sublevel)
-	{
+	if($sublevel) {
 		$titleSublevel="<span style='font-size:26px'>".$lang_json["#$sublevel"]."</span>";
 	}
 	/*separator*/ 
@@ -755,8 +750,7 @@
 			Assessment period <b class=number><script>document.write(Global.General.Days())</script></b> days 
 			<?php
 				//population
-				if($level!="Energy") 
-				{
+				if($level!="Energy") {
 					echo "&mdash; ";
 					$resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
 					$serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
