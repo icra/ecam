@@ -147,6 +147,7 @@
 				})
 			})();
 			Caption.listeners();
+			showGWPconstants();
 			updateResult();
 		}
 

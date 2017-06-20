@@ -628,6 +628,7 @@ var Global={
 		Selected: {
 			wwc_prot_con:"Albania",//country selected for protein consumption
 			sludge_estimation_method:"0",
+			gwp_reports_index:0,
 		},
 
 		//answers for filters ("questions.js")

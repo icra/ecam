@@ -1,5 +1,17 @@
 var Cts = 
 {
+	ct_ch4_eq:{
+		descr:"Conversion for CH4 emissions to CO2 equivalent emissions",
+		value:34,
+		unit:"kg CO2 / kg CH4",
+	},
+
+	ct_n2o_eq:{
+		descr:"Conversion for N2O emissions to CO2 equivalent emissions",
+		value:298,
+		unit:"kg CO2 / kg N2O",
+	},
+
 	ct_n2o_efp:{
 		descr:"N2O Emission factor",
 		value:3.2,
@@ -30,12 +42,6 @@ var Cts =
 		unit:"kg CH4/m3",
 	},
 
-	ct_ch4_eq:{
-		descr:"Conversion for CH4 emissions to CO2 equivalent emissions",
-		value:34,
-		unit:"kg CO2 / kg CH4",
-	},
-
 	ct_fra_np:{
 		descr:"Fraction of nitrogen in proteins",
 		value:0.16,
@@ -64,12 +70,6 @@ var Cts =
 		descr:"Conversion factor N2O-N to N2O (=44/28)",
 		value:44/28,
 		unit:"kg N2O / kg N2O-N",
-	},
-
-	ct_n2o_eq:{
-		descr:"Conversion for N2O emissions to CO2 equivalent emissions",
-		value:298,
-		unit:"kg CO2 / kg N2O",
 	},
 
 	ct_ch4_ef:{

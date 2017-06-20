@@ -25,7 +25,7 @@
 		<h4 style=font-size:18px;color:#58595b>
 			The Energy Performance and Carbon Emissions Assessment and Monitoring Tool is <br>
 			designed for assessing the carbon emissions that utilities can control within the<br>
-			urban water cycle and prepare these utilities for future reporting needs on cimate<br>
+			urban water cycle and prepare these utilities for future reporting needs on climate<br>
 			mitigation.
 		</h4>
 		<h4 style=font-size:18px;color:#58595b>
