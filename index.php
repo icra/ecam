@@ -51,7 +51,6 @@
 		<div style="padding:0;text-align:center">
 			<img src=svg/diagram.png style=width:70%>
 		</div>
-
 	</div>
 </div>
 
