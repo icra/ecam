@@ -157,9 +157,9 @@
 			<tr><th>Summaries
 			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
 			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
-			<tr><td><a href=substages.php?>All substages</a>
-			<tr><td><a href=sources.php?>GHG Summary</a>
-			<tr><td><a href=energy_summary.php?>Energy Summary</a>
+			<tr><td><a href=substages.php>All substages</a>
+			<tr><td><a href=sources.php>GHG Summary</a>
+			<tr><td><a href=energy_summary.php>Energy Summary</a>
 			<tr><td><a href=summary.php?type=input>All inputs</a>
 			<tr><td><a href=summary.php?type=output>All outputs</a>
 			<tr><td><a href=summary.php?type=ccvv>All calculated variables</a>
