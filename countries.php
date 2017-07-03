@@ -6,6 +6,7 @@
 		}
 		#references {
 			margin-top:10px;
+			margin-bottom:50px;
 		}
 		#references td {
 			border:none;
@@ -36,9 +37,9 @@
 
 <table id=references>
 	<tr><td colspan=2>References
-	<tr><td>1<td>José to provide this one
-	<tr><td>2<td>FAO Statistics Division
-	<tr><td>3<td>IPCC(2006)
+	<tr><td>1<td>BRANDER, M. SOOD A. WYLIE, C. HAUGHTON, A. LOVELL, J., 2011,Technical Paper Electricity-specific emission factors for grid electricity, Ecometrica, 
+	<tr><td>2<td>FAO Statistics Division, 2010, Food Balance Sheets
+	<tr><td>3<td>IPCC, 2006, Guidelines for National Greenhouse Gas Inventories Volume 5 Waste
 </table>
 
 <script>
