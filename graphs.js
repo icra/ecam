@@ -41,7 +41,7 @@ Graphs.graph1=function(withTable,container)
 	{ 
 		height:250,
 		legend:{position:'left'},
-		title:"Total GHG emissions ("+format(ws+ww)+" kg CO2) [Simple]",
+		title:"Total GHG emissions ("+format(ws+ww)+" kg CO2) [System]",
 		slices:
 		{
 			0:{color:'#00aff1' },
@@ -180,7 +180,7 @@ Graphs.graph4=function(withTable,container)
 	{
 		var table=""+
 		"<button onclick=Graphs.graph4(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
-		"<button onclick=\"Graphs.graph1(true,'"+container+"');scrollToItem('"+container+"')\">Simple</button>"+
+		"<button onclick=\"Graphs.graph1(true,'"+container+"');scrollToItem('"+container+"')\">System</button>"+
 		"<button onclick=\"Graphs.ghgSources(true,'"+container+"');scrollToItem('"+container+"')\">By source</button>"+
 		"<table title=graph4>"+
 			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kg CO2)"+
@@ -197,7 +197,7 @@ Graphs.graph4=function(withTable,container)
 	else
 	{
 		div.innerHTML="<button onclick=Graphs.graph4(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"+
-		"<button onclick=\"Graphs.graph1(false,'"+container+"');scrollToItem('"+container+"')\">Simple</button>"+
+		"<button onclick=\"Graphs.graph1(false,'"+container+"');scrollToItem('"+container+"')\">System</button>"+
 		"<button onclick=\"Graphs.ghgSources(false,'"+container+"');scrollToItem('"+container+"')\">By source</button>"+
 		"";
 	}
@@ -246,6 +246,7 @@ Graphs.ghgSources=function(withTable,container)
 	var n2ot=Global.Waste.Treatment.wwt_KPI_GHG_tre_n2o();
 	var biog=Global.Waste.Treatment.wwt_KPI_GHG_biog();
 	var slud=Global.Waste.Treatment.wwt_KPI_GHG_slu();
+	var digf=Global.Waste.Treatment.wwt_KPI_GHG_dig_fuel();
 	var n2od=Global.Waste.Discharge.wwd_KPI_GHG_tre_n2o();
 
 	//names
@@ -260,6 +261,7 @@ Graphs.ghgSources=function(withTable,container)
 		"N2O treatment process",
 		"Biogas flared",
 		"Sludge management",
+		"Fuel digester",
 		"N2O discharge water body",
 	];
 
@@ -276,7 +278,8 @@ Graphs.ghgSources=function(withTable,container)
 		[names[7],n2ot],
 		[names[8],biog],
 		[names[9],slud],
-		[names[10],n2od],
+		[names[10],digf],
+		[names[11],n2od],
 	]);
 
 	//options
@@ -316,7 +319,7 @@ Graphs.ghgSources=function(withTable,container)
 	{
 		var table=""+
 		"<button onclick=Graphs.ghgSources(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
-		"<button onclick=\"Graphs.graph1(true,'"+container+"');scrollToItem('"+container+"')\">Simple</button>"+
+		"<button onclick=\"Graphs.graph1(true,'"+container+"');scrollToItem('"+container+"')\">System</button>"+
 		"<button onclick=\"Graphs.graph4(true,'"+container+"');scrollToItem('"+container+"')\">By stage</button>"+
 		"<table title=ghgSources>"+
 			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_value')+" (kg CO2)"+
@@ -330,7 +333,8 @@ Graphs.ghgSources=function(withTable,container)
 			"<tr><td>"+names[7]+"<td>"+format(n2ot)+
 			"<tr><td>"+names[8]+"<td>"+format(biog)+
 			"<tr><td>"+names[9]+"<td>"+format(slud)+
-			"<tr><td>"+names[10]+"<td>"+format(n2od)+
+			"<tr><td>"+names[10]+"<td>"+format(digf)+
+			"<tr><td>"+names[11]+"<td>"+format(n2od)+
 		"</table>"+
 		"";
 
@@ -345,7 +349,7 @@ Graphs.ghgSources=function(withTable,container)
 		var div=document.createElement('div');
 		document.getElementById(container).appendChild(div);
 		div.innerHTML="<button onclick=Graphs.ghgSources(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"+
-		"<button onclick=\"Graphs.graph1(false,'"+container+"');scrollToItem('"+container+"')\">Simple</button>"+
+		"<button onclick=\"Graphs.graph1(false,'"+container+"');scrollToItem('"+container+"')\">System</button>"+
 		"<button onclick=\"Graphs.graph4(false,'"+container+"');scrollToItem('"+container+"')\">By stage</button>"+
 			"";
 	}

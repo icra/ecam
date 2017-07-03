@@ -292,10 +292,7 @@ var Global={
 			wwc_KPI_GHG_unt_ch4:function(){return (Global.Waste.ww_conn_pop-Global.Waste.ww_serv_pop)*this.wwc_bod_pday/1000*Global.General.Days()*Cts.ct_ch4_ef.value*Cts.ct_ch4_eq.value },//old c_ww52
 			wwc_KPI_GHG_unt_n2o:function(){return (Global.Waste.ww_conn_pop-Global.Waste.ww_serv_pop)*this.wwc_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value },
 			wwc_KPI_GHG:function(){
-				return this.wwc_KPI_GHG_elec()+
-				this.wwc_KPI_GHG_fuel()+
-				this.wwc_KPI_GHG_unt_ch4()+
-				this.wwc_KPI_GHG_unt_n2o()
+				return this.wwc_KPI_GHG_elec()+this.wwc_KPI_GHG_fuel();
 			},
 		},
 

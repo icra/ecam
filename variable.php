@@ -248,13 +248,14 @@
 				//get substages
 				if(typeof(currSubstage)=="object" && currSubstage.length > 1)
 				{
-					newCell.setAttribute('caption','Go to Substages to modify this input');
+					newCell.setAttribute('caption','Go to the Substages table to modify this input');
 
 					//dump all substage values in a table inside newCell
 					(function(){
 						var subsTable=document.createElement('table');
 						newCell.appendChild(subsTable);
 						subsTable.style.fontSize="10px";
+						subsTable.style.marginTop="5px";
 
 						//add header
 						var s_newRow=subsTable.insertRow(-1);
@@ -264,7 +265,7 @@
 						for(var i=0;i<n;i++){
 							var s_newRow=subsTable.insertRow(-1)
 							s_newRow.insertCell(-1).innerHTML="<a href=substage.php?level="+level+"&sublevel="+sublevel+"&index="+i+">Substage "+(i+1)+" ("+currSubstage[i].name+")</a>";
-							s_newRow.insertCell(-1).innerHTML=currSubstage[i][id];
+							s_newRow.insertCell(-1).innerHTML=currSubstage[i][id]/Units.multiplier(id);
 						}
 					})();
 				}
