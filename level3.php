@@ -689,7 +689,7 @@
 
 				<!--show ghgs checkbox-->
 				<div style=float:left;margin-bottom:0.5em>
-					<label onclick="event.stopPropagation();init()"><input type=checkbox id=showGHGss> Show GHG</label>
+					<label onclick="event.stopPropagation();init()"><input type=checkbox id=showGHGss checked> Show GHG</label>
 				</div>
 
 				<!--new substage button-->

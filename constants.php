@@ -19,7 +19,7 @@
 		{
 			document.write("<tr>"+
 				"<td><a href=constant.php?id="+ct+">"+ct+"</a>"+
-				"<td title='"+Cts[ct].value+"'>"+format(Cts[ct].value)+
+				"<td align=right title='"+Cts[ct].value+"'>"+format(Cts[ct].value)+
 				"<td>"+Cts[ct].descr+
 				"<td>"+(function(){ 
 					return (Cts[ct].unit == "?????" ? "<span style=background:red>"+Cts[ct].unit+"</span>" : Cts[ct].unit); 

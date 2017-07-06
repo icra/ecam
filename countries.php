@@ -38,8 +38,17 @@
 <table id=references>
 	<tr><td colspan=2>References
 	<tr><td>1<td>BRANDER, M. SOOD A. WYLIE, C. HAUGHTON, A. LOVELL, J., 2011,Technical Paper Electricity-specific emission factors for grid electricity, Ecometrica, 
-	<tr><td>2<td>FAO Statistics Division, 2010, Food Balance Sheets
-	<tr><td>3<td>IPCC, 2006, Guidelines for National Greenhouse Gas Inventories Volume 5 Waste
+	<tr><td>2<td>
+		<a href="docs/FAO.xls" target=_blank>
+			FAO Statistics Division, 2010, Food Balance Sheets
+		</a>
+	<tr>
+	<tr><td>3<td>
+		<a href="docs/IPCC_V5_6_Ch6_Wastewater.pdf" target=_blank>
+			IPCC, 2006, Guidelines for National Greenhouse Gas Inventories 
+			Volume 5 Waste, Chapter 6
+		</a>
+	</tr>
 </table>
 
 <script>
