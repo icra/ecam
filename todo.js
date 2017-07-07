@@ -12,6 +12,7 @@ var TODO = {
 	[
 		"[TODO] Avoid document.write function when possible",
 		"[WAIT] Translation will be done after v2 in english is complete (IWA should say this)",
+		"[IDEA] function to check if two constant codes are repeated",
 	],
 };
 

@@ -12,26 +12,31 @@ var Cts =
 		unit:"kg CO2 / kg N2O",
 	},
 
-	ct_oc_vss: {
+	ct_oc_vs: {
 		descr:"Organic Carbon content in Volatile Solids",
 		value:0.56,
-		unit:"g C / g VSS",
+		unit:"g OC / g TVS",
 	},
 
-	ct_vss_dig: {
+	ct_vs_dig: {
 		descr:"Volatile Solids content in Digested Sludge",
 		value:0.51,
-		unit:"g VSS / g digested sludge",
+		unit:"g TVS / g digested sludge",
 	},
 
-	ct_vss_slu: {
+	ct_vs_slu: {
 		descr:"Volatile Solids content in not Digested Sludge",
 		value:0.70,
-		unit:"g VSS / g digested sludge",
+		unit:"g TVS / g digested sludge",
+	},
+
+	ct_ch4_oc: {
+		descr:"C to CH4 conversion factor",
+		value:1.3,
+		unit:"g CH4 / g OC",
 	},
 
 	/*
-		1.3:  C to CH4 conversion factor (ct_slu_C_ch4)
 		50:   % of CH4 in landfill gas (ct_slu_lafl_ch4)
 		80:   % DOCf -the decomposable organic fraction of raw wastewater solids (ct_slu_lafl_decp_%)
 		69.9: % decomposed in first 3 years (ct_slu_lafl_decp_3yr)
