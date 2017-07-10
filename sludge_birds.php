@@ -33,6 +33,7 @@
 		Global.Configuration['Yes/No'].wwt_land_application=0;
 		Global.Configuration['Yes/No'].wwt_landfilling=0;
 		Global.Configuration['Yes/No'].wwt_stockpiling=0;
+		Global.Waste.Treatment.wwt_temp_inc=0; //K Fluidized Bed Reactor Temperature
 
 		//if method==none end
 		if(method=="0") { init(); return; }
@@ -49,10 +50,10 @@
 			default: alert('Error in sludge method');return;break;
 		}
 
-		//default values for inicineration
+		//default value for inicineration
 		if(method=="inc")
 		{
-			Global.Waste.Treatment.wwt_temp_inc=1023; //K Fluidized Bed Reactor Temperature
+			Global.Waste.Treatment.wwt_temp_inc=1023;
 		}
 
 		//estimation of kg of sludge (wwt_mass_slu)
@@ -78,7 +79,7 @@
 			*/
 			var mass_est=0.55*wwc_bod_pday*ww_serv_pop*(1-0.1)*1e-3*1.176*Days;
 
-			//modification for biogas
+			//modification if producing biogas
 			var biogas=Global.Configuration['Yes/No'].wwt_producing_biogas;
 			if(biogas){
 				mass_est*=0.6;

@@ -264,7 +264,8 @@
 </center>
 
 <!--TITLE-->
-<h1><?php write('#quick_assessment')?> 
+<h1>
+	<?php write('#quick_assessment')?> 
 	&mdash;
 	Initial estimation of total GHG emissions at system-wide level
 	<span style="font-size:13px;color:#666;float:right">
@@ -434,34 +435,6 @@
 			<button class="button prev" onclick="event.stopPropagation();window.location='inhabitants.php'"><?php write('#previous')?></button><!--
 			--><button class="button next" onclick=nextPage()><?php write('#next')?></button>
 		</div>
-
-		<div style="margin:1em"> 
-			Summary of estimations:
-			<ul>
-				<li>
-					Setting the "main treatment type" estimates:
-					<ul>
-						<li><a href=variable.php?id=wwt_bod_infl><script>document.write(translate("wwt_bod_infl_descr"))</script></a>
-						<li><a href=variable.php?id=wwt_bod_effl><script>document.write(translate("wwt_bod_effl_descr"))</script></a>
-						<li><a href=variable.php?id=wwt_bod_slud><script>document.write(translate("wwt_bod_slud_descr"))</script></a>
-						<li><a href=variable.php?id=wwt_ch4_efac><script>document.write(translate("wwt_ch4_efac_descr"))</script></a>
-					</ul>
-				</li>
-				<li>
-					Setting the "sludge disposal method" estimates:
-					<ul>
-						<li><a href=variable.php?id=wwt_mass_slu><script>document.write(translate("wwt_mass_slu_descr"))</script></a>
-						<li><a href=variable.php?id=wwt_dryw_slu><script>document.write(translate("wwt_dryw_slu_descr"))</script></a>
-						<li><a href=variable.php?id=wwt_mass_slu_comp><script>document.write(translate("wwt_mass_slu_comp_descr"))</script></a>
-						<li><a href=variable.php?id=wwt_mass_slu_inc><script>document.write(translate("wwt_mass_slu_inc_descr"))</script></a>
-						<li><a href=variable.php?id=wwt_mass_slu_app><script>document.write(translate("wwt_mass_slu_app_descr"))</script></a>
-						<li><a href=variable.php?id=wwt_mass_slu_land><script>document.write(translate("wwt_mass_slu_land_descr"))</script></a>
-						<li><a href=variable.php?id=wwt_mass_slu_stock><script>document.write(translate("wwt_mass_slu_stock_descr"))</script></a>
-						<li><a href=variable.php?id=wwt_temp_inc><script>document.write(translate("wwt_temp_inc_descr"))</script></a>
-					</ul>
-				</li>
-			</ul>
-		</div>
 	</div>
 
 	<!--graphs-->
@@ -500,6 +473,14 @@
 				<div style="width:98%;padding:1em 0;margin-bottom:1em;border:none">
 					For further details on energy consumption &amp; opportunities to reduce GHG emissions go to 
 					<b>Detailed GHG Assessment</b> (<a href=#>&uarr;</a>)
+				</div>
+				<div style="text-align:left;padding-left:10px">
+					See also:
+					<ul>
+						<li> <a href='estimations.php'>Summary of estimations at this level</a> </li>
+						<li> <a href='non_revenue_water.php'>About non revenue water</a> </li>
+						<li> <a href='fuelInfo.php'>About fuel types</a> </li>
+					</ul>
 				</div>
 				<script>
 					(function(){
