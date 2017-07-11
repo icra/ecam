@@ -2,7 +2,6 @@
 var TODO = {
 	Front://front-end
 	[
-		"[TODO] summary of estimations in birds eye view",
 		"[WAIT] Graphs",
 		"[WAIT] Add in the help page an example json file, after I/O structure does not change anymore",
 		"[WAIT] Sankey diagram (all water flows) (at 'graphs.js')",
@@ -10,8 +9,10 @@ var TODO = {
 	],
 	Back://back-end
 	[
-		"[TODO] Avoid document.write function when possible",
+		"[TODO] add tasks from last meeting (6-7-17, 7-7-17)",
+		"[RANJIN] add estimations for biogas produced and valorised",
 		"[WAIT] Translation will be done after v2 in english is complete (IWA should say this)",
+		"[IDEA] Avoid document.write function when possible",
 		"[IDEA] function to check if two constant codes are repeated",
 	],
 };
