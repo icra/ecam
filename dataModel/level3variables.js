@@ -2,6 +2,9 @@
 var Level3={};
 Level3.list=[
 	//wsa
+	"wsa_KPI_GHG_fuel_co2",
+	"wsa_KPI_GHG_fuel_n2o",
+	"wsa_KPI_GHG_fuel_ch4",
 	"wsa_KPI_ghg_estm_red",
 	"wsa_KPI_nrg_cons_new",
 	"wsa_KPI_nrg_elec_eff",
@@ -13,6 +16,9 @@ Level3.list=[
 	"wsa_KPI_un_head_loss",
 
 	//wst
+	"wst_KPI_GHG_fuel_co2",
+	"wst_KPI_GHG_fuel_n2o",
+	"wst_KPI_GHG_fuel_ch4",
 	"wst_mass_slu",
 	"wst_trea_cap",
 	"wst_treatmen",
@@ -24,6 +30,9 @@ Level3.list=[
 	"wst_KPI_tst_carr",
 
 	//wsd
+	"wsd_KPI_GHG_fuel_co2",
+	"wsd_KPI_GHG_fuel_n2o",
+	"wsd_KPI_GHG_fuel_ch4",
 	"wsd_KPI_nrg_efficien",
 	"wsd_KPI_nrg_topgraph",
 	"wsd_KPI_std_nrg_cons",
@@ -39,6 +48,11 @@ Level3.list=[
 	"wsd_KPI_ghg_estm_red",
 
 	//wwc
+	"wwc_KPI_GHG_fuel_co2",
+	"wwc_KPI_GHG_fuel_n2o",
+	"wwc_KPI_GHG_fuel_ch4",
+	"wwc_KPI_GHG_unt_n2o",
+	"wwc_KPI_GHG_unt_ch4",
 	"wwc_KPI_std_nrg_cons",
 	"wwc_KPI_nrg_elec_eff",
 	"wwc_KPI_std_nrg_newp",
@@ -56,6 +70,9 @@ Level3.list=[
 	"wwc_SL_ghg_ons",
 
 	//wwt
+	"wwt_KPI_GHG_fuel_co2",
+	"wwt_KPI_GHG_fuel_n2o",
+	"wwt_KPI_GHG_fuel_ch4",
 	"wwt_KPI_nrg_per_pump",
 	"wwt_KPI_std_nrg_cons",
 	"wwt_KPI_nrg_biogas",
@@ -84,6 +101,9 @@ Level3.list=[
 	"wwt_type_tre",
 
 	//wwd
+	"wwd_KPI_GHG_fuel_co2",
+	"wwd_KPI_GHG_fuel_n2o",
+	"wwd_KPI_GHG_fuel_ch4",
 	"wwd_KPI_std_nrg_cons",
 	"wwd_reus_typ",//hidden
 	"wwd_main_len",//hidden

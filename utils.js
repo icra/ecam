@@ -63,6 +63,9 @@ function locateVariable(code)
 /** return 3.999,4 instead of 3999.4*/
 function format(number)
 {
+	//for non applicable
+	if(number=="NA")return "<span style=color:#ccc>NA</span>"
+
 	//for work in progess formulas: -999 (bad practice)
 	if(number==-999){return "<span style=background:yellow>Formula under development</span>";}
 

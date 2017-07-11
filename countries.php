@@ -13,6 +13,9 @@
 			padding:2px;
 			font-size:11px;
 		}
+		#info a {
+			color:white;
+		}
 	</style>
 </head><body><center>
 <?php 
@@ -26,9 +29,18 @@
 <table id=info> 
 	<tr>
 		<th rowspan=2>Country
-		<th>Emission factor<sup>1</sup>
-		<th>Annual protein consumption<sup>2</sup>
-		<th>BOD<sub>5</sub><sup>3</sup>
+		<th>
+			Emission factor<sup>1</sup>
+			<br><a href=variable.php?id=conv_kwh_co2>(conv_kwh_co2)</a>
+		</th>
+		<th>
+			Annual protein consumption<sup>2</sup>
+			<br><a href=variable.php?id=wwc_prot_con>(wwc_prot_con)</a>
+		</th>
+		<th>
+			BOD<sub>5</sub><sup>3</sup>
+			<br><a href=variable.php?id=wwc_bod_pday>(wwc_bod_pday)</a>
+		</th>
 	<tr>
 		<th>kgCO<sub>2</sub>/kWh
 		<th>kg/person/year

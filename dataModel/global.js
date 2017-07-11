@@ -95,8 +95,19 @@ var Global={
 			//GHG emissions Abstraction
 			wsa_KPI_GHG_elec:function(){return this.wsa_nrg_cons*Global.General.conv_kwh_co2},
 			wsa_KPI_GHG_fuel:function(){//<br>
+				return this.wsa_KPI_GHG_fuel_co2()+this.wsa_KPI_GHG_fuel_n2o()+this.wsa_KPI_GHG_fuel_ch4();
+			},
+			wsa_KPI_GHG_fuel_co2:function(){//<br>
 				var fuel=Tables['Fuel types'][Tables.find('wsa_fuel_typ',this.wsa_fuel_typ)];//<br>
-				return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines)
+				return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
+			},
+			wsa_KPI_GHG_fuel_n2o:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wsa_fuel_typ',this.wsa_fuel_typ)];//<br>
+				return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFN2O.engines*Cts.ct_n2o_eq.value;
+			},
+			wsa_KPI_GHG_fuel_ch4:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wsa_fuel_typ',this.wsa_fuel_typ)];//<br>
+				return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
 			},
 			wsa_KPI_GHG:function(){return this.wsa_KPI_GHG_elec()+this.wsa_KPI_GHG_fuel()} ,
 		},
@@ -127,10 +138,23 @@ var Global={
 			wst_KPI_std_elec_eff:function(){return 100*0.2725/this.wst_KPI_std_nrg_cons()},
 			//wst GHG
 			wst_KPI_GHG_elec:function(){return this.wst_nrg_cons*Global.General.conv_kwh_co2},
-			wst_KPI_GHG_fuel:function(){
-				var fuel=Tables['Fuel types'][Tables.find('wst_fuel_typ',this.wst_fuel_typ)]; 
-				return this.wst_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) 
+
+			wst_KPI_GHG_fuel:function(){//<br>
+				return this.wst_KPI_GHG_fuel_co2()+this.wst_KPI_GHG_fuel_n2o()+this.wst_KPI_GHG_fuel_ch4();
 			},
+			wst_KPI_GHG_fuel_co2:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wst_fuel_typ',this.wst_fuel_typ)];//<br>
+				return this.wst_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
+			},
+			wst_KPI_GHG_fuel_n2o:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wst_fuel_typ',this.wst_fuel_typ)];//<br>
+				return this.wst_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFN2O.engines*Cts.ct_n2o_eq.value;
+			},
+			wst_KPI_GHG_fuel_ch4:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wst_fuel_typ',this.wst_fuel_typ)];//<br>
+				return this.wst_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
+			},
+
 			wst_KPI_GHG:function(){ 
 				return this.wst_KPI_GHG_elec()+
 					this.wst_KPI_GHG_fuel()
@@ -189,7 +213,11 @@ var Global={
 			wsd_pmp_amps:0, //Measured pump current Amp 
 			wsd_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
 			wsd_main_len:0,
-			c_wsd_pmp_pw:function(){return this.wsd_pmp_flow*this.wsd_pmp_head*9.81*1000*0.001/1000}, 
+
+			c_wsd_pmp_pw:function(){
+				return this.wsd_pmp_flow*this.wsd_pmp_head*Cts.ct_gravit.value/1000
+			}, 
+
 			wsd_KPI_std_nrg_cons:function(){return this.wsd_nrg_pump/(this.wsd_vol_pump*this.wsd_pmp_head/100)},
 			wsd_KPI_un_head_loss:function(){return 1000*(this.wsd_pmp_head-this.wsd_sta_head)/this.wsd_main_len},
 			wsd_KPI_water_losses:function(){return Math.max(0,1000*(this.wsd_vol_dist-this.wsd_auth_con)/(this.wsd_main_len))},
@@ -200,10 +228,23 @@ var Global={
 			wsd_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wsd_KPI_nrg_estm_sav()},
 			//wsd GHG
 			wsd_KPI_GHG_elec:function(){return this.wsd_nrg_cons*Global.General.conv_kwh_co2},
-			wsd_KPI_GHG_fuel:function(){
-				var fuel=Tables['Fuel types'][Tables.find('wsd_fuel_typ',this.wsd_fuel_typ)]; 
-				return this.wsd_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines)
+
+			wsd_KPI_GHG_fuel:function(){//<br>
+				return this.wsd_KPI_GHG_fuel_co2()+this.wsd_KPI_GHG_fuel_n2o()+this.wsd_KPI_GHG_fuel_ch4();
 			},
+			wsd_KPI_GHG_fuel_co2:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wsd_fuel_typ',this.wsd_fuel_typ)];//<br>
+				return this.wsd_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
+			},
+			wsd_KPI_GHG_fuel_n2o:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wsd_fuel_typ',this.wsd_fuel_typ)];//<br>
+				return this.wsd_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFN2O.engines*Cts.ct_n2o_eq.value;
+			},
+			wsd_KPI_GHG_fuel_ch4:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wsd_fuel_typ',this.wsd_fuel_typ)];//<br>
+				return this.wsd_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
+			},
+
 			wsd_KPI_GHG_trck:function(){
 				var fuel=Tables['Fuel types'][Tables.find('wsd_trck_typ',this.wsd_trck_typ)]; 
 				return this.wsd_vol_trck*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.vehicles+Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles)
@@ -283,16 +324,34 @@ var Global={
 			wwc_KPI_nrg_cons_new:function(){return this.wwc_vol_pump*this.wwc_KPI_std_nrg_newp()/100*this.wwc_pmp_head}, 
 			wwc_KPI_nrg_estm_sav:function(){return this.wwc_nrg_cons-this.wwc_KPI_nrg_cons_new()}, 
 			wwc_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wwc_KPI_nrg_estm_sav()},
+
 			//Collection GHG
 			wwc_KPI_GHG_elec:function(){return this.wwc_nrg_cons*Global.General.conv_kwh_co2},
-			wwc_KPI_GHG_fuel:function(){
-				var fuel=Tables['Fuel types'][Tables.find('wwc_fuel_typ',this.wwc_fuel_typ)]; 
-				return this.wwc_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines) 
+
+			wwc_KPI_GHG_fuel:function(){//<br>
+				return this.wwc_KPI_GHG_fuel_co2()+this.wwc_KPI_GHG_fuel_n2o()+this.wwc_KPI_GHG_fuel_ch4();
+			},
+			wwc_KPI_GHG_fuel_co2:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wwc_fuel_typ',this.wwc_fuel_typ)];//<br>
+				return this.wwc_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
+			},
+			wwc_KPI_GHG_fuel_n2o:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wwc_fuel_typ',this.wwc_fuel_typ)];//<br>
+				return this.wwc_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFN2O.engines*Cts.ct_n2o_eq.value;
+			},
+			wwc_KPI_GHG_fuel_ch4:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wwc_fuel_typ',this.wwc_fuel_typ)];//<br>
+				return this.wwc_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
+			},
+
+			wwc_KPI_GHG_unt:function(){
+				return this.wwc_KPI_GHG_unt_ch4()+this.wwc_KPI_GHG_unt_n2o()
 			},
 			wwc_KPI_GHG_unt_ch4:function(){return (Global.Waste.ww_conn_pop-Global.Waste.ww_serv_pop)*this.wwc_bod_pday/1000*Global.General.Days()*Cts.ct_ch4_ef.value*Cts.ct_ch4_eq.value },//old c_ww52
 			wwc_KPI_GHG_unt_n2o:function(){return (Global.Waste.ww_conn_pop-Global.Waste.ww_serv_pop)*this.wwc_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value },
+
 			wwc_KPI_GHG:function(){
-				return this.wwc_KPI_GHG_elec()+this.wwc_KPI_GHG_fuel();
+				return this.wwc_KPI_GHG_elec()+this.wwc_KPI_GHG_fuel()+this.wwc_KPI_GHG_unt();
 			},
 		},
 
@@ -490,10 +549,23 @@ var Global={
 			"wwt_dist_dis":0,
 			//wwt GHG
 			wwt_KPI_GHG_elec:function(){return this.wwt_nrg_cons*Global.General.conv_kwh_co2},
-			wwt_KPI_GHG_fuel:function(){
-				var fuel=Tables['Fuel types'][Tables.find('wwt_fuel_typ',this.wwt_fuel_typ)]; 
-				return this.wwt_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines)
+
+			wwt_KPI_GHG_fuel:function(){//<br>
+				return this.wwt_KPI_GHG_fuel_co2()+this.wwt_KPI_GHG_fuel_n2o()+this.wwt_KPI_GHG_fuel_ch4();
 			},
+			wwt_KPI_GHG_fuel_co2:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wwt_fuel_typ',this.wwt_fuel_typ)];//<br>
+				return this.wwt_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
+			},
+			wwt_KPI_GHG_fuel_n2o:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wwt_fuel_typ',this.wwt_fuel_typ)];//<br>
+				return this.wwt_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFN2O.engines*Cts.ct_n2o_eq.value;
+			},
+			wwt_KPI_GHG_fuel_ch4:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wwt_fuel_typ',this.wwt_fuel_typ)];//<br>
+				return this.wwt_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
+			},
+
 			wwt_KPI_GHG_tre_ch4:function(){
 				return (this.wwt_bod_infl-this.wwt_bod_slud-this.wwt_bod_effl)*this.wwt_ch4_efac*Cts.ct_ch4_eq.value
 			},
@@ -560,10 +632,23 @@ var Global={
 			wwd_KPI_std_nrg_cons:function(){return (this.wwd_nrg_pump)/(this.wwd_vol_pump*this.wwd_pmp_head/100)},
 			//wwd GHG
 			wwd_KPI_GHG_elec:function(){return this.wwd_nrg_cons*Global.General.conv_kwh_co2},
-			wwd_KPI_GHG_fuel:function(){
-				var fuel=Tables['Fuel types'][Tables.find('wwd_fuel_typ',this.wwd_fuel_typ)]; 
-				return this.wwd_vol_fuel*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.engines+Cts.ct_ch4_eq.value*fuel.EFCH4.engines)
+
+			wwd_KPI_GHG_fuel:function(){//<br>
+				return this.wwd_KPI_GHG_fuel_co2()+this.wwd_KPI_GHG_fuel_n2o()+this.wwd_KPI_GHG_fuel_ch4();
 			},
+			wwd_KPI_GHG_fuel_co2:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wwd_fuel_typ',this.wwd_fuel_typ)];//<br>
+				return this.wwd_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
+			},
+			wwd_KPI_GHG_fuel_n2o:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wwd_fuel_typ',this.wwd_fuel_typ)];//<br>
+				return this.wwd_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFN2O.engines*Cts.ct_n2o_eq.value;
+			},
+			wwd_KPI_GHG_fuel_ch4:function(){//<br>
+				var fuel=Tables['Fuel types'][Tables.find('wwd_fuel_typ',this.wwd_fuel_typ)];//<br>
+				return this.wwd_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
+			},
+
 			wwd_KPI_GHG_trck:function(){
 				var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)]; 
 				return this.wwd_vol_trck*fuel.FD*fuel.NCV/1000*(fuel.EFCO2+Cts.ct_n2o_eq.value*fuel.EFN2O.vehicles+Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles)

@@ -39,6 +39,7 @@ var Normalization={
 		var divisor = (sublevel=='false' || category=='reside' || category=='servic') ? this[level][category] : this[level][sublevel][category];
 		var loc = locateVariable(divisor);
 		var div = loc.sublevel ?  Global[loc.level][loc.sublevel][divisor] : Global[loc.level][divisor];
+
 		return num/div;
 	},
 }

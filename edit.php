@@ -252,6 +252,37 @@
 
 						newCell.innerHTML=(function()
 						{
+							//special cases for not including untreated wastewater to ghg/year/serv.pop
+								//special case 1: wwc_KPI_GHG_unt / year / serv. pop. is not applicable
+								if( 
+									field=="wwc_KPI_GHG_unt"
+									&& 
+									(category=="servic" || category=="volume") 
+								){
+									return "<span style=color:#ccc>NA</span>"
+								}
+
+								//special case 2: wwc_KPI_GHG should not include untreated wastewater
+								if( 
+									field=="wwc_KPI_GHG"
+									&& 
+									(category=="servic" || category=="volume") 
+								){
+									var norm=Normalization.normalize(category,field,level,sublevel);
+									var subt=Normalization.normalize(category,'wwc_KPI_GHG_unt',level,sublevel);
+									var resu=norm-subt;
+
+									//the fields per inhab and per serv.pop are also per year
+									if(category=="reside" || category=="servic")
+									{
+										resu/=Global.General.Years();
+										newCell.title+="/Years"
+									}
+									newCell.title=newCell.title.replace('wwc_KPI_GHG_unt','0')
+									return format(resu);
+								}
+							//special cases end
+
 							var norm=Normalization.normalize(category,field,level,sublevel);
 							//the fields per inhab and per serv.pop are also per year
 							if(category=="reside" || category=="servic")

@@ -49,7 +49,7 @@
 <!--title--><h1>Summary of estimations at Initial GHG assessment</h1>
 
 <div id=root>
-Index:
+<b><u>Index:</u></b>
 <ul>
 	<script>
 		for (var estimation in EstimatedInputs){
@@ -67,7 +67,7 @@ Index:
 </ul>
 
 <hr>
-Detailed equations for input estimations:
+<b><u>Detailed equations for input estimations:</u></b>
 
 <h3>1. Estimations performed when the main treatment type is chosen</h3>
 <ul>
