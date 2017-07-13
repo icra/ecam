@@ -57,27 +57,15 @@ var Info = {
 	wwd_KPI_GHG_fuel_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwd_KPI_GHG_fuel_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
-	//non revenue water 
-	wsa_SL_non_revw:{magnitude:"Percentage",unit:"%"},
-	wsa_SL_nrw_emis:{magnitude:"Mass",unit:"kgCO2eq"},
-	wst_SL_non_revw:{magnitude:"Percentage",unit:"%"},
-	wst_SL_nrw_emis:{magnitude:"Mass",unit:"kgCO2eq"},
-	wsd_SL_non_revw:{magnitude:"Percentage",unit:"%"},
-	wsd_SL_nrw_emis:{magnitude:"Mass",unit:"kgCO2eq"},
-	wsd_wsa_SL_nrw_emis:{magnitude:"Mass",unit:"kgCO2eq"},
-	wsd_wst_SL_nrw_emis:{magnitude:"Mass",unit:"kgCO2eq"},
-	wsd_all_SL_nrw_emis:{magnitude:"Mass",unit:"kgCO2eq"},
+	//non revenue water //TODO
 
 	/* +================+ */
 	/* | Service levels | */
 	/* +================+ */
 	//Water Supply
 	ws_SL_serv_pop:{magnitude:"Percentage",unit:"%"},
-	ws_SL_non_revw:{magnitude:"Percentage",unit:"%"},	
 	ws_SL_auth_con:{magnitude:"Volume/inhab/time",unit:"L/serv.pop./day"},
 	ws_SL_nrg_cost:{magnitude:"Percentage",unit:"%"},
-	ws_SL_nrw_emis:{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
-	ws_SL_auc_emis:{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
 
 	//Wastewater
 	ww_SL_serv_pop:{magnitude:"Percentage",unit:"%"},
@@ -173,6 +161,11 @@ var Info = {
 	wsd_nrg_pump:{magnitude:"Energy",unit:"kWh"},
 	wsd_vol_dist:{magnitude:"Volume",unit:"m3"},
 	wsd_auth_con:{magnitude:"Volume",unit:"m3"},
+	wsd_bill_con:{magnitude:"Volume",unit:"m3"},
+
+	wsd_SL_nr_water:{magnitude:"Percentage",unit:"%"},
+	wsd_SL_water_loss:{magnitude:"Percentage",unit:"%"},
+
 	wsd_deli_pts:{magnitude:"Number",unit:"number"},
 	wsd_ser_cons:{magnitude:"Number",unit:"number"},
 	wsd_time_pre:{magnitude:"% Time",unit:"hours/day"},

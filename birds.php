@@ -74,7 +74,7 @@
 			Graphs.ww_cost('graph4');
 			Graphs.gauge('graph5', Global.Water.ws_SL_serv_pop()||0, translate("ws_SL_serv_pop_descr"));
 			Graphs.gauge('graph6', Global.Waste.ww_SL_serv_pop()||0, translate("ww_SL_serv_pop_descr"));
-			Graphs.gauge('graph7', Global.Water.ws_SL_non_revw()||0, translate("ws_SL_non_revw_descr"));
+			Graphs.gauge('graph7', Global.Water.Distribution.wsd_SL_nr_water()||0, translate("wsd_SL_nr_water_descr"));
 			Graphs.gauge('graph8', Global.Water.ws_SL_auth_con()||0, translate("ws_SL_auth_con_descr"),Info.ws_SL_auth_con.unit,0,200); //with unit and limits
 		}
 

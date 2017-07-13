@@ -165,10 +165,27 @@
 			<tr><td><a href=summary.php?type=output>All outputs</a>
 			<tr><td><a href=summary.php?type=ccvv>All calculated variables</a>
 			<tr><td><a href=constants.php>All constants</a>
+			<tr><td><a href=benchmark.php>All benchmarks</a>
 			<tr><th>Other
 			<tr><td><a href=opps.php><?php write("#opportunities")?></a>
 			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
-			<tr><th>
+			<!--go to variable-->
+			<tr><th>Go to variable code
+			<tr><td>
+				<form id=go_to method=GET action="variable.php">
+					<input name=id placeholder="ws_KPI_GHG">
+					<button>Go</button>
+				</form>
+				<style>
+					#go_to{
+						display:flex;
+					}
+					#go_to button {
+						display:block;
+						margin-left:-1px;
+					}
+				</style>
+			</tr>
 		</table>
 		<ul style="
 			text-align:left;

@@ -1,115 +1,99 @@
 var Cts = 
 {
 	ct_ch4_eq:{
-		descr:"Conversion for CH4 emissions to CO2 equivalent emissions",
 		value:34,
-		unit:"kg CO2 / kg CH4",
+		descr:"Conversion for CH<sub>4</sub> emissions to CO<sub>2</sub> equivalent emissions",
+		unit:"kg CO<sub>2</sub> / kg CH<sub>4</sub>",
 	},
 
 	ct_n2o_eq:{
-		descr:"Conversion for N2O emissions to CO2 equivalent emissions",
 		value:298,
-		unit:"kg CO2 / kg N2O",
+		descr:"Conversion for N<sub>2</sub> emissions to CO<sub>2</sub> equivalent emissions",
+		unit:"kg CO<sub>2</sub> / kg N<sub>2</sub>",
 	},
 
-	ct_oc_vs: {
-		descr:"Organic Carbon content in Volatile Solids",
-		value:0.56,
-		unit:"g OC / g TVS",
-	},
-
-	ct_vs_dig: {
-		descr:"Volatile Solids content in Digested Sludge",
-		value:0.51,
-		unit:"g TVS / g digested sludge",
-	},
-
-	ct_vs_slu: {
-		descr:"Volatile Solids content in not Digested Sludge",
-		value:0.70,
-		unit:"g TVS / g digested sludge",
-	},
-
-	ct_ch4_oc: {
-		descr:"C to CH4 conversion factor",
-		value:1.3,
-		unit:"g CH4 / g OC",
-	},
+	//constants for sludge management proposed by Girum
+	ct_oc_vs:{value:0.56,descr:"Organic Carbon content in Volatile Solids",unit:"g OC / g TVS"},
+	ct_vs_dig:{value:0.51,descr:"Volatile Solids content in Digested Sludge",unit:"g TVS / g digested sludge"},
+	ct_vs_slu:{value:0.70,descr:"Volatile Solids content in not Digested Sludge",unit:"g TVS / g digested sludge"},
+	ct_ch4_oc:{value:1.3,descr:"C to CH<sub>4</sub> conversion factor",unit:"g CH<sub>4</sub> / g OC"},
+	ct_ch4_up:{value:0.025,descr:"Percentage of CH<sub>4</sub> emission for uncoverd pile",unit:"ratio"},
 
 	/*
-		50:   % of CH4 in landfill gas (ct_slu_lafl_ch4)
+		50:   % of CH<sub>4</sub> in landfill gas (ct_ch4_lf)
 		80:   % DOCf -the decomposable organic fraction of raw wastewater solids (ct_slu_lafl_decp_%)
 		69.9: % decomposed in first 3 years (ct_slu_lafl_decp_3yr)
 	*/
 
 	ct_n2o_efp:{
-		descr:"N2O Emission factor",
 		value:3.2,
-		unit:"g N2O/person/year",
+		descr:"N<sub>2</sub> Emission factor",
+		unit:"g N<sub>2</sub>/person/year",
 	},
 
 	ct_bod_kg:{
-		descr:"Ratio BOD entering the plant / dry weight of organic matter in the sludge collected",
 		value:0.8,
+		descr:"Ratio BOD entering the plant / dry weight of organic matter in the sludge collected",
 		unit:"g VS / g BOD load",
 	},
 
 	ct_biog_g:{
-		descr:"Biogas produced (NL) per g of organic matter contained in the sludge",
 		value:0.4,
+		descr:"Biogas produced (NL) per g of organic matter contained in the sludge",
 		unit:"NL / gVS",
 	},
 
 	ct_ch4_lo:{
-		descr:"Percentage of methane losses",
 		value:2,
+		descr:"Percentage of methane losses",
 		unit:"%",
 	},
 
 	ct_ch4_m3:{
-		descr:"Kg CH4/m3",
 		value:0.66,
-		unit:"kg CH4/m3",
+		descr:"Kg CH<sub>4</sub>/m3",
+		unit:"kg CH<sub>4</sub>/m3",
 	},
 
 	ct_fra_np:{
-		descr:"Fraction of nitrogen in proteins",
 		value:0.16,
+		descr:"Fraction of nitrogen in proteins",
 		unit:"kg N/kg protein",
 	},
 
 	ct_fac_nc:{
-		descr:"Factor for non consumed protein added to the wastewater",
 		value:1.1,
+		descr:"Factor for non consumed protein added to the wastewater",
 		unit:"adimensional",
 	},
 
 	ct_fac_ic:{
-		descr:"Factor for industrial and commercial co-discharged protein into the sewer",
 		value:1.25,
+		descr:"Factor for industrial and commercial co-discharged protein into the sewer",
 		unit:"adimensional",
 	},
 
 	ct_ef_eff:{
-		descr:"EF effluent (tabled value)",
 		value:0.005,
-		unit:"kg N2O-N / kg N",
+		descr:"EF effluent (tabled value)",
+		unit:"kg N<sub>2</sub>-N / kg N",
 	},
 
 	ct_n2o_co:{
-		descr:"Conversion factor N2O-N to N2O (=44/28)",
 		value:44/28,
-		unit:"kg N2O / kg N2O-N",
+		descr:"Conversion factor N<sub>2</sub>-N to N<sub>2</sub> (=44/28)",
+		unit:"kg N<sub>2</sub> / kg N<sub>2</sub>-N",
 	},
 
 	ct_ch4_ef:{
-		descr:"EF. This comes from the multiplication of Bo (kg CH4/kg BOD) (=0.6) x MCFj (=0.1, for direct discharge into a river, lake or sea)",
 		value:0.06,
-		unit:"kg CH4 / kg BOD",
+		descr:"EF. This comes from the multiplication of Bo (kg CH<sub>4</sub>/kg BOD) (=0.6) x MCFj (=0.1, for direct discharge into a river, lake or sea)",
+		unit:"kg CH<sub>4</sub> / kg BOD",
 	},
+
 	ct_gravit:{
-		descr:"Specific weight of H2O",
 		value:9810,
+		descr:"Specific weight of H<sub>2</sub>O",
 		unit:"kg/(s2*m2)",
 	},
 }

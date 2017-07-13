@@ -1,4 +1,3 @@
-<?php /*license.php:*/?>
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 </head><body><center>

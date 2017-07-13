@@ -43,15 +43,15 @@
 	<table id=gwp_inputs>
 		<tr>
 			<td>Carbon dioxide (CO<sub>2</sub>)
-			<td>1
+			<td align=right>1
 			<td>CO<sub>2</sub> equivalents
 		<tr>
 			<td>Methane (CH<sub>4</sub>)
-			<td><span id=ct_ch4_eq>loading...</span>
+			<td align=right><span id=ct_ch4_eq>loading...</span>
 			<td>CO<sub>2</sub> equivalents
 		<tr>
 			<td>Nitrous Oxide (N<sub>2</sub>O)
-			<td><span id=ct_n2o_eq>loading...</span>
+			<td align=right><span id=ct_n2o_eq>loading...</span>
 			<td>CO<sub>2</sub> equivalents
 	</table>
 </fieldset>

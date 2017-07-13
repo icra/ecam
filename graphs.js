@@ -1095,15 +1095,15 @@ Graphs.sankey=function(withTable,container) {
 	data.addColumn('string', 'From');
 	data.addColumn('string', 'To');
 	data.addColumn('number', 'Volume');
-	data.addRows([
+	data.addRows([ //if flows are zero, problems. add a ||1 in case this happens
 		//ws flows
-		['wsa', 'wst', flow_1],
-		['wst', 'wsd', flow_2],
-		['wsd', 'usr', flow_3],
+		['wsa', 'wst', flow_1||1],
+		['wst', 'wsd', flow_2||1],
+		['wsd', 'usr', flow_3||1],
 		//ww flows
-		['wwc', 'wwt', flow_4],
-		['wwt', 'wwd', flow_5],
-		['wwd', 'out', flow_6],
+		['wwc', 'wwt', flow_4||1],
+		['wwt', 'wwd', flow_5||1],
+		['wwd', 'out', flow_6||1],
 	]);
 
 	//options

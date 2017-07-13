@@ -196,12 +196,8 @@ var Questions={
 			otherQuestions:[],
 		},
 
-		"wsd_water_eff":{
+		"wsd_water_eff":{ //TODO
 			variables:[ 
-				"wsd_SL_nrw_emis",
-				"wsd_wst_SL_nrw_emis",
-				"wsd_wsa_SL_nrw_emis",
-				"wsd_all_SL_nrw_emis",
 			],
 			advanced:0,
 			otherQuestions:[],
