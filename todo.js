@@ -3,7 +3,8 @@ var TODO = {
 	Front://front-end
 	[
 		"[DONE] Graphs requests, add here from paper notes after meeting",
-
+		
+		"[JOSE] Opportunities page as discussed with Jose",
 		"[RANJIN] add graphs also in ghg summary as discussed",
 		"[LLUIS] new page to display authorized consumption per person per day indicators (good,acceptable,bad)",
 
