@@ -44,7 +44,7 @@ Graphs.graph1=function(withTable,container) {
 	var options={ 
 		height:250,
 		legend:{position:'left'},
-		title:"Total GHG emissions ("+format(ws+ww)+" kg CO2) [System]",
+		title:"GHG emissions by system ("+format(ws+ww)+" kg CO2e)",
 		slices:{
 			0:{color:'#00aff1'},
 			1:{color:'#d71d24'},
@@ -74,9 +74,9 @@ Graphs.graph1=function(withTable,container) {
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
 			"<button class=left   onclick=Graphs.graph1("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
-			"<button class=middle onclick=Graphs.graph1("+withTable.toString()+",'"+container+"') disabled>By system</button>"+
-			"<button class=middle onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>By source</button>"+
-			"<button class=middle onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>By source (detailed)</button>"+
+			"<button class=middle onclick=Graphs.graph1("+withTable.toString()+",'"+container+"') disabled>System</button>"+
+			"<button class=middle onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>Source</button>"+
+			"<button class=middle onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>Source (detailed)</button>"+
 			"<button class=right  onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC</button>"+
 		"";
 	})();
@@ -195,7 +195,7 @@ Graphs.ghg_by_source=function(withTable,container) {
 	var options={ 
 		height:250,
 		legend:{position:'left'},
-		title:"GHG emissions grouped by source ("+format(Global.General.TotalGHG())+") kg CO2)",
+		title:"GHG emissions by source ("+format(Global.General.TotalGHG())+") kg CO2e)",
 	}
 
 	//empty the container element
@@ -221,9 +221,9 @@ Graphs.ghg_by_source=function(withTable,container) {
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
 			"<button class=left    onclick=Graphs.ghg_by_source("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
-			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>By system</button>"+
-			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"') disabled>By source</button>"+
-			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>By source (detailed)</button>"+
+			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>System</button>"+
+			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"') disabled>Source</button>"+
+			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>Source (detailed)</button>"+
 			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC</button>"+
 		"";
 	})();
@@ -330,7 +330,7 @@ Graphs.ghgSources=function(withTable,container) {
 	{ 
 		height:250,
 		legend:{position:'left'},
-		title:"Total GHG emissions ("+format(Global.General.TotalGHG())+" kg CO2) [By source]",
+		title:"GHG emissions by source (detailed) ("+format(Global.General.TotalGHG())+" kg CO2e)",
 		slices:
 		{
 			/*
@@ -363,9 +363,9 @@ Graphs.ghgSources=function(withTable,container) {
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
 			"<button class=left    onclick=Graphs.ghgSources("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
-			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>By system</button>"+
-			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>By source</button>"+
-			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"') disabled>By source (detailed)</button>"+
+			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>System</button>"+
+			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>Source</button>"+
+			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"') disabled>Source (detailed)</button>"+
 			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC</button>"+
 		"";
 	})();
@@ -442,7 +442,7 @@ Graphs.unfccc=function(withTable,container){
 	var options={ 
 		height:250,
 		legend:{position:'left'},
-		title:"UNFCCC categories (kg CO2 eq)",
+		title:"GHG emissions by UNFCCC category (kg CO2e)",
 	}
 
 	//empty the container element
@@ -468,9 +468,9 @@ Graphs.unfccc=function(withTable,container){
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
 			"<button class=left    onclick=Graphs.unfccc("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
-			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>By system</button>"+
-			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>By source</button>"+
-			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>By source (detailed)</button>"+
+			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>System</button>"+
+			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>Source</button>"+
+			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>Source (detailed)</button>"+
 			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"') disabled>UNFCCC</button>"+
 		"";
 	})();
@@ -480,7 +480,7 @@ Graphs.unfccc=function(withTable,container){
 	if(withTable){
 		var table=""+
 		"<table title=unfccc>"+
-			"<tr><th>Category<th>Code<th>Value (kg CO2 eq)"+
+			"<tr><th>Category<th>Code<th>Value (kg CO2e)"+
 		"";
 		for(var func in UNFCCC){
 			table+="<tr><td align=left>"+translate(func)+"<td align=left><a href=variable.php?id="+func+">"+func+"</a><td align=right>"+format(UNFCCC[func]());
@@ -539,11 +539,22 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 	//array graph data
 	var data=google.visualization.arrayToDataTable(DATA);
 
+	var stageName=(function(){
+		return {
+			"wsa":"Water Abstraction",
+			"wst":"Water Treatment",
+			"wsd":"Water Distribution",
+			"wwc":"Wastewater Collection",
+			"wwt":"Wastewater Treatment",
+			"wwd":"Wastewater Discharge",
+		}[prefix];
+	})();
+
 	//options
 	var options={ 
 		height:250,
 		legend:{position:'left'},
-		title:"This stage's GHG emissions ("+format(value)+" kg CO2) ["+code+"]",
+		title:"GHG emissions of "+stageName+" ("+format(value)+" kg CO2e)",
 	}
 
 	//empty the container element
@@ -635,7 +646,7 @@ Graphs.graph4=function(withTable,container) {
 	{ 
 		height:250,
 		legend:{position:'left'},
-		title:"Total GHG emissions ("+format(sum)+" kg CO2) [By stage]",
+		title:"GHG emissions ("+format(sum)+" kg CO2) [By stage]",
 		slices:
 		{
 			0:{color:ColorsGHG.ws_KPI_GHG_elec      },
@@ -834,8 +845,8 @@ Graphs.graph5=function(withTable,container) {
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
 			"<button class=left   onclick=Graphs.graph5("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
-			"<button class=middle onclick=Graphs.graph5("+withTable.toString()+",'"+container+"') disabled>By stage</button>"+
-			"<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"')>By substage</button>"+
+			"<button class=middle onclick=Graphs.graph5("+withTable.toString()+",'"+container+"') disabled>Stage</button>"+
+			"<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"')>Substage</button>"+
 		"";
 	})();
 
@@ -947,8 +958,8 @@ Graphs.graph7=function(withTable,container) {
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
 			"<button class=left   onclick=Graphs.graph7("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
-			"<button class=middle onclick=Graphs.graph5("+withTable.toString()+",'"+container+"')>By stage</button>"+
-			"<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"') disabled>By substage</button>"+
+			"<button class=middle onclick=Graphs.graph5("+withTable.toString()+",'"+container+"')>Stage</button>"+
+			"<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"') disabled>Substage</button>"+
 		"";
 	})();
 
