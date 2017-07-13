@@ -4,6 +4,7 @@ var TODO = {
 	[
 		"[DONE] Graphs requests, add here from paper notes after meeting",
 
+		"[RANJIN] add graphs also in ghg summary as discussed",
 		"[LLUIS] new page to display authorized consumption per person per day indicators (good,acceptable,bad)",
 
 		"[WAIT] Sankey diagram (all water flows) (at 'graphs.js')",
@@ -13,7 +14,6 @@ var TODO = {
 	Back://back-end
 	[
 		"[DONE] Add estimations for biogas produced and valorised",
-
 		"[DONE] Fix non revenue water formulas. I've moved them to Distribution",
 
 		"[LLUIS] Variables that have 'magic numbers' (numbers not referenced)<ul>"+
