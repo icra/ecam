@@ -44,7 +44,6 @@ Level3.list=[
 	"wsd_KPI_std_nrg_newp",
 	"wsd_KPI_nrg_cons_new",
 	"wsd_KPI_nrg_estm_sav",
-	"ws_SL_auth_con",
 	"wsd_SL_pres_ade",
 	"wsd_SL_cont_sup",
 	"wsd_KPI_un_head_loss",

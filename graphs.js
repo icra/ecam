@@ -86,8 +86,8 @@ Graphs.graph1=function(withTable,container) {
 		var table=""+
 		"<table title=graph1>"+
 			"<tr><th>"+translate('graphs_slice')+"<th>Code<th>"+translate('graphs_value')+" (kg CO2)"+
-			"<tr><td>"+names[0]+"<td><a href=variable.php?id=ws_KPI_GHG>ws_KPI_GHG</a><td>"+format(ws)+
-			"<tr><td>"+names[1]+"<td><a href=variable.php?id=ww_KPI_GHG>ww_KPI_GHG</a><td>"+format(ww)+
+			"<tr><td align=left>"+names[0]+"<td align=left><a href=variable.php?id=ws_KPI_GHG>ws_KPI_GHG</a><td align=right>"+format(ws)+
+			"<tr><td align=left>"+names[1]+"<td align=left><a href=variable.php?id=ww_KPI_GHG>ww_KPI_GHG</a><td align=right>"+format(ww)+
 		"</table>"+
 		"";
 
@@ -233,10 +233,10 @@ Graphs.ghg_by_source=function(withTable,container) {
 		var table=""+
 		"<table title=ghg_by_source>"+
 			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_value')+" (kg CO2)"+
-			"<tr><td>Electricity<td>"+format(elec)+
-			"<tr><td>CO2<td>"+format(co2)+
-			"<tr><td>N2O<td>"+format(n2o)+
-			"<tr><td>CH4<td>"+format(ch4)+
+			"<tr><td align=left>Electricity   <td align=right>"+format(elec)+
+			"<tr><td align=left>CO<sub>2</sub><td align=right>"+format(co2)+
+			"<tr><td align=left>N<sub>2</sub>O<td align=right>"+format(n2o)+
+			"<tr><td align=left>CH<sub>4</sub><td align=right>"+format(ch4)+
 		"</table>"+
 		"";
 
@@ -845,12 +845,12 @@ Graphs.graph5=function(withTable,container) {
 		var table=""+
 		"<table title=graph5>"+
 			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kWh)"+
-			"<tr><td>"+names[0]+"<td><a href=variable.php?id=wsa_nrg_cons>wsa_nrg_cons</a> <td>"+format(slice_1)+
-			"<tr><td>"+names[1]+"<td><a href=variable.php?id=wst_nrg_cons>wst_nrg_cons</a> <td>"+format(slice_2)+
-			"<tr><td>"+names[2]+"<td><a href=variable.php?id=wsd_nrg_cons>wsd_nrg_cons</a> <td>"+format(slice_3)+
-			"<tr><td>"+names[3]+"<td><a href=variable.php?id=wwc_nrg_cons>wwc_nrg_cons</a> <td>"+format(slice_4)+
-			"<tr><td>"+names[4]+"<td><a href=variable.php?id=wwt_nrg_cons>wwt_nrg_cons</a> <td>"+format(slice_5)+
-			"<tr><td>"+names[5]+"<td><a href=variable.php?id=wwd_nrg_cons>wwd_nrg_cons</a> <td>"+format(slice_6)+
+			"<tr><td align=left>"+names[0]+"<td align=left><a href=variable.php?id=wsa_nrg_cons>wsa_nrg_cons</a> <td align=right>"+format(slice_1)+
+			"<tr><td align=left>"+names[1]+"<td align=left><a href=variable.php?id=wst_nrg_cons>wst_nrg_cons</a> <td align=right>"+format(slice_2)+
+			"<tr><td align=left>"+names[2]+"<td align=left><a href=variable.php?id=wsd_nrg_cons>wsd_nrg_cons</a> <td align=right>"+format(slice_3)+
+			"<tr><td align=left>"+names[3]+"<td align=left><a href=variable.php?id=wwc_nrg_cons>wwc_nrg_cons</a> <td align=right>"+format(slice_4)+
+			"<tr><td align=left>"+names[4]+"<td align=left><a href=variable.php?id=wwt_nrg_cons>wwt_nrg_cons</a> <td align=right>"+format(slice_5)+
+			"<tr><td align=left>"+names[5]+"<td align=left><a href=variable.php?id=wwd_nrg_cons>wwd_nrg_cons</a> <td align=right>"+format(slice_6)+
 		"</table>"+
 		'<div class=options>'+
 		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable>Save as image</a> '+
@@ -956,7 +956,7 @@ Graphs.graph7=function(withTable,container) {
 		//create a table (as a string)
 		var table=""+
 		"<table title=graph7>"+
-		"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th colspan=30>"+translate('substages')+" (kWh)";
+		"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th colspan='"+stages.length+"'>"+translate('substages')+" (kWh)";
 			for(var s in stages)
 			{
 				var title;
@@ -971,10 +971,10 @@ Graphs.graph7=function(withTable,container) {
 					default:break;
 				}
 				table+=""+
-					"<tr><td>"+title+
-					"<td><a href=variable.php?id="+names[s]+">"+names[s]+"</a>";
+					"<tr><td align=left>"+title+
+					"<td align=left><a href=variable.php?id="+names[s]+">"+names[s]+"</a>";
 				for(var i in stages[s])
-					table+="<td>"+format(stages[s][i][names[s]]);
+					table+="<td align=right>"+format(stages[s][i][names[s]]);
 			}
 		table+="</table>"+
 		'<div class=options>'+

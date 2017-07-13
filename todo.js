@@ -4,6 +4,8 @@ var TODO = {
 	[
 		"[RANJIN] Graphs requests, add here from paper notes after meeting",
 
+		"[LLUIS] make a page to display authorized consumption per person per day indicators (good,acceptable,bad)",
+
 		"[WAIT] Sankey diagram (all water flows) (at 'graphs.js')",
 		"[WAIT] Add references (page, chapter, book) to equations (IPCC, BEAM, ...?)",
 		"[WAIT] Add in the help page an example json file, after I/O structure does not change anymore",
@@ -11,6 +13,8 @@ var TODO = {
 	Back://back-end
 	[
 		"[DONE] add estimations for biogas produced and valorised",
+
+		"[JOSE] fix non revenue water formulas",
 
 		"[LLUIS] create constants for numbers in <a href=variable.php?id=c_wwt_nrg_biog>c_wwt_nrg_biog</a> (energy content in biogas valorized)",
 		"[LLUIS] create a list with formulas that have numbers that have to be turned into constants",

@@ -505,44 +505,34 @@
 		}
 
 		//depending on stage, draw different charts
-		function drawCharts()
-		{
+		function drawCharts() {
 			//draw the chart that is selected!!!
-			//Graphs.ghg_by_stage(false,'graph'); //GHG
-			//Graphs.graph5(false,'graph'); //Energy
-
-			//draw the active button graph
-			var button;button=document.querySelector("div.buttonsGraph button.active");
+			var button=document.querySelector("div.buttonsGraph button.active");
 			if(!button){button=document.querySelector("div.buttonsGraph button");}
 			button.classList.remove('active');
 			button.onclick();
 		}
 
 		//function for "View Graphs" buttons
-		function toggleDivs(event,btn,id1,id2)
-		{
+		function toggleDivs(event,btn,id1,id2) {
 			event.stopPropagation();
 			var div1=document.querySelector(id1);
 			var div2=document.querySelector(id2);
 
 			//change btn text
 			btn.classList.toggle('active');
-			if(btn.innerHTML=="VIEW GRAPH")
-			{
+			if(btn.innerHTML=="VIEW GRAPH") {
 				btn.innerHTML="VIEW TABLE";
 			}
-			else
-			{
+			else {
 				btn.innerHTML="VIEW GRAPH";
 			}
 
-			if(div1.style.display=='none') 
-			{
+			if(div1.style.display=='none') {
 				div1.style.display='';
 				div2.style.display='none';
 			}
-			else
-			{
+			else {
 				div1.style.display='none';
 				div2.style.display='';
 			}
@@ -557,8 +547,7 @@
 			while(t.rows.length>0)t.deleteRow(-1);
 			var questions=Questions.getQuestions(CurrentLevel);
 
-			for(var q in questions)
-			{
+			for(var q in questions) {
 				var question = questions[q];
 				if(Questions.isHiddenQuestion(question)){continue;}
 
@@ -581,8 +570,7 @@
 				newCell.style.borderRight="none"
 				var newCell=newRow.insertCell(-1)
 				newCell.style.borderLeft="none"
-				newCell.innerHTML=(function()
-				{
+				newCell.innerHTML=(function() {
 					var ret="<label>"+
 							"<?php write('#no')?> "+
 							"<input name='"+question+"' type=radio value=0 onclick=setQuestion('"+question+"',0) checked></label> "+
@@ -600,16 +588,14 @@
 		//highlight fields linked to the question
 		function hlQuestionFields(question,hl) {
 			var fields=Questions[question].variables; //array
-			for(var i in fields)
-			{
+			for(var i in fields) {
 				Formulas.hlField(fields[i],hl);
 			}
 		}
 
 		//update the value
 		function setQuestion(question,newValue) {
-			if(newValue)
-			{
+			if(newValue) {
 				Global.Configuration['Yes/No'][question]=1;
 				Expanded[question]=1;//start by showing the new variables
 			}
@@ -619,34 +605,27 @@
 			//reset variables if checked=false
 			if(!newValue) {
 				//reset variables to zero
-				for(var i in Questions[question].variables) 
-				{
+				for(var i in Questions[question].variables) {
 					var code=Questions[question].variables[i];
-					if(typeof(CurrentLevel[code])=="number") 
-					{
+					if(typeof(CurrentLevel[code])=="number") {
 						CurrentLevel[code]=0;
 						//also substages
-						for(var j in substages)
-						{
+						for(var j in substages) {
 							substages[j][code]=0;
 						}
 					}
 				}
 				//reset a les otherQuestions
-				for(var i in Questions[question].otherQuestions) 
-				{
+				for(var i in Questions[question].otherQuestions) {
 					var code_q=Questions[question].otherQuestions[i];
 					Global.Configuration["Yes/No"][code_q]=0;
 
 					//reset a les variables de les otherQuestions
-					for(var j in Questions[code_q].variables) 
-					{
+					for(var j in Questions[code_q].variables) {
 						var code_v=Questions[code_q].variables[j];
-						if(typeof(CurrentLevel[code_v])=="number") 
-						{
+						if(typeof(CurrentLevel[code_v])=="number") {
 							CurrentLevel[code_v]=0;
-							for(var k in substages)
-							{
+							for(var k in substages) {
 								substages[k][code_v]=0;
 							}
 						}
@@ -869,8 +848,7 @@
 		//if there is already one substage...
 		if(substages.length==1) {
 			//make the first substage have L2 values
-			level3.getInputs().forEach(function(field)
-			{
+			level3.getInputs().forEach(function(field) {
 				substages[0][field]=CurrentLevel[field];
 			});
 		}

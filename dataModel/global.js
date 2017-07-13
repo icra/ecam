@@ -167,7 +167,6 @@ var Global={
 			"wsd_vol_dist":0,
 			"wsd_auth_con":0,
 			wsd_KPI_nrg_per_m3:function(){return this.wsd_nrg_cons/this.wsd_auth_con},
-			ws_SL_auth_con:function(){return Global.Water.ws_SL_auth_con()},
 			//fuel engines?
 			"wsd_fuel_typ":0,
 			"wsd_vol_fuel":0,
