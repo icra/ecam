@@ -1,7 +1,7 @@
 var Graphs={};
 
-function scrollToItem(id) 
-{
+//utils
+function scrollToItem(id) {
 	//http://stackoverflow.com/questions/17722497/scroll-smoothly-to-specific-element-on-page
 	var element = document.getElementById(id);
 	//get position
@@ -15,14 +15,18 @@ function scrollToItem(id)
 		element.scrollIntoView()
 	}
 }
+//delete html subscript tag
+function replaceTags(str){
+	str=str.replace(/<\/{0,1}sub>/g,'')
+	return str;
+}
 
-Graphs.graph1=function(withTable,container)
-//GHG
-{
+//GHG 'By system'
+Graphs.graph1=function(withTable,container) {
 	withTable=withTable||false;
 	container=container||"graph";
 
-	//values: 4 combinations with electricity/non & water/waste
+	//emissions
 	var ws=Global.Water.ws_KPI_GHG()
 	var ww=Global.Waste.ww_KPI_GHG()
 
@@ -37,15 +41,13 @@ Graphs.graph1=function(withTable,container)
 	]);
 
 	//options
-	var options= 
-	{ 
+	var options={ 
 		height:250,
 		legend:{position:'left'},
 		title:"Total GHG emissions ("+format(ws+ww)+" kg CO2) [System]",
-		slices:
-		{
-			0:{color:'#00aff1' },
-			1:{color:'#d71d24' },
+		slices:{
+			0:{color:'#00aff1'},
+			1:{color:'#d71d24'},
 		},
 	}
 
@@ -66,15 +68,24 @@ Graphs.graph1=function(withTable,container)
 	var chart=new google.visualization.PieChart(con);
 	chart.draw(data,options);
 
+	(function(){
+		var buttons=document.createElement('div');
+		buttons.classList.add('tab_buttons');
+		document.getElementById(container).appendChild(buttons);
+		buttons.innerHTML=""+
+			"<button class=left   onclick=Graphs.graph1("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+			"<button class=middle onclick=Graphs.graph1("+withTable.toString()+",'"+container+"') disabled>By system</button>"+
+			"<button class=middle onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>By source</button>"+
+			"<button class=middle onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>By source (detailed)</button>"+
+			"<button class=right  onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC</button>"+
+		"";
+	})();
+
 	//create a table string
-	if(withTable)
-	{
+	if(withTable) {
 		var table=""+
-		"<button onclick=Graphs.graph1(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
-		"<button onclick=\"Graphs.graph4(true,'"+container+"');scrollToItem('"+container+"')\">By stage</button>"+
-		"<button onclick=\"Graphs.ghgSources(true,'"+container+"');scrollToItem('"+container+"')\">By source</button>"+
 		"<table title=graph1>"+
-			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kg CO2)"+
+			"<tr><th>"+translate('graphs_slice')+"<th>Code<th>"+translate('graphs_value')+" (kg CO2)"+
 			"<tr><td>"+names[0]+"<td><a href=variable.php?id=ws_KPI_GHG>ws_KPI_GHG</a><td>"+format(ws)+
 			"<tr><td>"+names[1]+"<td><a href=variable.php?id=ww_KPI_GHG>ww_KPI_GHG</a><td>"+format(ww)+
 		"</table>"+
@@ -85,21 +96,504 @@ Graphs.graph1=function(withTable,container)
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
 	}
-	else
-	{
-		//button "show table"
+}
+
+//GHG 'By source' (non-detailed: elec,co2,n2o,ch4)
+Graphs.ghg_by_source=function(withTable,container) {
+	withTable=withTable||false;
+	container=container||"graph";
+
+	var elec = 0+
+		Global.Water.Abstraction.wsa_KPI_GHG_elec()+
+		Global.Water.Treatment.wst_KPI_GHG_elec()+
+		Global.Water.Distribution.wsd_KPI_GHG_elec()+
+		Global.Waste.Collection.wwc_KPI_GHG_elec()+
+		Global.Waste.Treatment.wwt_KPI_GHG_elec()+
+		Global.Waste.Discharge.wwd_KPI_GHG_elec()+
+	0;
+	var co2 = 0+
+		Global.Water.Abstraction.wsa_KPI_GHG_fuel_co2()+
+		Global.Water.Treatment.wst_KPI_GHG_fuel_co2()+
+		Global.Water.Distribution.wsd_KPI_GHG_fuel_co2()+
+		Global.Waste.Collection.wwc_KPI_GHG_fuel_co2()+
+		Global.Waste.Treatment.wwt_KPI_GHG_fuel_co2()+
+		Global.Waste.Discharge.wwd_KPI_GHG_fuel_co2()+
+
+		Global.Water.Distribution.wsd_KPI_GHG_trck_co2()+
+		Global.Waste.Discharge.wwd_KPI_GHG_trck_co2()+
+
+		Global.Waste.Treatment.wwt_KPI_ghg_tsludge_co2()+
+		Global.Waste.Treatment.wwt_KPI_GHG_dig_fuel_co2()+
+
+		Global.Waste.Treatment.wwt_KPI_ghg_stock_co2eq()+
+	0;
+
+	var n2o = 0+
+		Global.Water.Abstraction.wsa_KPI_GHG_fuel_n2o()+
+		Global.Water.Treatment.wst_KPI_GHG_fuel_n2o()+
+		Global.Water.Distribution.wsd_KPI_GHG_fuel_n2o()+
+		Global.Waste.Collection.wwc_KPI_GHG_fuel_n2o()+
+		Global.Waste.Treatment.wwt_KPI_GHG_fuel_n2o()+
+		Global.Waste.Discharge.wwd_KPI_GHG_fuel_n2o()+
+
+		Global.Water.Distribution.wsd_KPI_GHG_trck_n2o()+
+		Global.Waste.Discharge.wwd_KPI_GHG_trck_n2o()+
+
+		Global.Waste.Treatment.wwt_KPI_ghg_tsludge_n2o()+
+		Global.Waste.Treatment.wwt_KPI_GHG_dig_fuel_n2o()+
+
+		Global.Waste.Collection.wwc_KPI_GHG_unt_n2o()+
+
+		Global.Waste.Treatment.wwt_KPI_GHG_tre_n2o()+
+
+		Global.Waste.Treatment.wwt_slu_composting_n2o()+
+		Global.Waste.Treatment.wwt_slu_inciner_n2o()+
+		Global.Waste.Treatment.wwt_slu_landapp_n2o()+
+		Global.Waste.Treatment.wwt_slu_landfill_n2o()+
+
+		Global.Waste.Discharge.wwd_KPI_GHG_tre_n2o()+
+	0;
+	var ch4 = 0+
+		Global.Water.Abstraction.wsa_KPI_GHG_fuel_ch4()+
+		Global.Water.Treatment.wst_KPI_GHG_fuel_ch4()+
+		Global.Water.Distribution.wsd_KPI_GHG_fuel_ch4()+
+		Global.Waste.Collection.wwc_KPI_GHG_fuel_ch4()+
+		Global.Waste.Treatment.wwt_KPI_GHG_fuel_ch4()+
+		Global.Waste.Discharge.wwd_KPI_GHG_fuel_ch4()+
+
+		Global.Water.Distribution.wsd_KPI_GHG_trck_ch4()+
+		Global.Waste.Discharge.wwd_KPI_GHG_trck_ch4()+
+
+		Global.Waste.Treatment.wwt_KPI_ghg_tsludge_ch4()+
+		Global.Waste.Treatment.wwt_KPI_GHG_dig_fuel_ch4()+
+
+		Global.Waste.Collection.wwc_KPI_GHG_unt_ch4()+
+
+		Global.Waste.Treatment.wwt_KPI_GHG_tre_ch4()+
+
+		Global.Waste.Treatment.wwt_KPI_GHG_biog()+
+
+		Global.Waste.Treatment.wwt_slu_storage_ch4()+
+		Global.Waste.Treatment.wwt_slu_composting_ch4()+
+		Global.Waste.Treatment.wwt_slu_inciner_ch4()+
+		Global.Waste.Treatment.wwt_slu_landfill_ch4()+
+	0;
+
+	//data
+	var DATA=[ 
+		['variable','emission'],
+		['Electricity',elec],
+		['CO2',co2],
+		['N2O',n2o],
+		['CH4',ch4],
+	];
+
+	//array graph data
+	var data=google.visualization.arrayToDataTable(DATA);
+
+	//options
+	var options={ 
+		height:250,
+		legend:{position:'left'},
+		title:"GHG emissions grouped by source ("+format(Global.General.TotalGHG())+") kg CO2)",
+	}
+
+	//empty the container element
+	var con=document.getElementById(container);
+	con.innerHTML='';
+
+	//double click
+	con.ondblclick=function(){
+		var a=document.createElement('a');
+		document.body.appendChild(a);
+		a.href=chart.getImageURI()
+		a.download="image.png"
+		a.click()
+	}
+
+	//draw
+	var chart=new google.visualization.PieChart(con);
+	chart.draw(data,options);
+
+	(function(){
+		var buttons=document.createElement('div');
+		buttons.classList.add('tab_buttons');
+		document.getElementById(container).appendChild(buttons);
+		buttons.innerHTML=""+
+			"<button class=left    onclick=Graphs.ghg_by_source("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>By system</button>"+
+			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"') disabled>By source</button>"+
+			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>By source (detailed)</button>"+
+			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC</button>"+
+		"";
+	})();
+
+	//create a table string
+	if(withTable) {
+		var table=""+
+		"<table title=ghg_by_source>"+
+			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_value')+" (kg CO2)"+
+			"<tr><td>Electricity<td>"+format(elec)+
+			"<tr><td>CO2<td>"+format(co2)+
+			"<tr><td>N2O<td>"+format(n2o)+
+			"<tr><td>CH4<td>"+format(ch4)+
+		"</table>"+
+		"";
+
 		var div=document.createElement('div');
+		div.style.fontSize="10px";
+		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.graph1(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"+
-			"<button onclick=\"Graphs.graph4(false,'"+container+"');scrollToItem('"+container+"')\">By stage</button>"+
-			"<button onclick=\"Graphs.ghgSources(false,'"+container+"');scrollToItem('"+container+"')\">By source</button>"+
-			"";
 	}
 }
 
-Graphs.graph4=function(withTable,container)
-//GHG detailed
-{
+//GHG 'By source (detailed)'
+Graphs.ghgSources=function(withTable,container) {
+	withTable=withTable||false;
+	container=container||"graph";
+
+	/*
+		sources: 
+			elecWS, elecWW, fuel, fuel trucks, sludge wst, 
+			ch4_unt, n2o_unt, ch4_tre, n2o_tre, biogas 
+	*/
+	var elecWS=(function(){
+		return 0+
+			Global.Water.Abstraction.wsa_KPI_GHG_elec()+
+			Global.Water.Treatment.wst_KPI_GHG_elec()+
+			Global.Water.Distribution.wsd_KPI_GHG_elec();
+	})();
+	var elecWW=(function(){
+		return 0+
+			Global.Waste.Collection.wwc_KPI_GHG_elec()+
+			Global.Waste.Treatment.wwt_KPI_GHG_elec()+
+			Global.Waste.Discharge.wwd_KPI_GHG_elec();
+	})();
+	var fuel=(function(){
+		return 0+
+			 Global.Water.Abstraction.wsa_KPI_GHG_fuel()+
+				 Global.Water.Treatment.wst_KPI_GHG_fuel()+
+			Global.Water.Distribution.wsd_KPI_GHG_fuel()+
+				Global.Waste.Collection.wwc_KPI_GHG_fuel()+
+				 Global.Waste.Treatment.wwt_KPI_GHG_fuel()+
+				 Global.Waste.Discharge.wwd_KPI_GHG_fuel();
+	})();
+	var trck=(function(){
+		return 0+
+			Global.Water.Distribution.wsd_KPI_GHG_trck()+
+				 Global.Waste.Discharge.wwd_KPI_GHG_trck();
+	})();
+	var ch4u=Global.Waste.Collection.wwc_KPI_GHG_unt_ch4();
+	var n2ou=Global.Waste.Collection.wwc_KPI_GHG_unt_n2o();
+	var ch4t=Global.Waste.Treatment.wwt_KPI_GHG_tre_ch4();
+	var n2ot=Global.Waste.Treatment.wwt_KPI_GHG_tre_n2o();
+	var biog=Global.Waste.Treatment.wwt_KPI_GHG_biog();
+	var slud=Global.Waste.Treatment.wwt_KPI_GHG_slu();
+	var digf=Global.Waste.Treatment.wwt_KPI_GHG_dig_fuel();
+	var n2od=Global.Waste.Discharge.wwd_KPI_GHG_tre_n2o();
+
+	//names
+	var names = [
+		"Electricity WS",
+		"Electricity WW",
+		"Fuel engines",
+		"Truck transport",
+		""+translate('wwc_KPI_GHG_unt_ch4_descr'),
+		""+translate('wwc_KPI_GHG_unt_n2o_descr'),
+		""+translate('wwt_KPI_GHG_tre_ch4_descr'),
+		""+translate('wwt_KPI_GHG_tre_n2o_descr'),
+		""+translate('wwt_KPI_GHG_biog_descr'),
+		""+translate('wwt_KPI_GHG_slu_descr'),
+		""+translate('wwt_KPI_GHG_dig_fuel_descr'),
+		""+translate('wwd_KPI_GHG_tre_n2o_descr'),
+	];
+
+	//array graph data
+	var data=google.visualization.arrayToDataTable([
+		["Source",translate('emissions')],
+		[replaceTags(names[0] ),elecWS],
+		[replaceTags(names[1] ),elecWW],
+		[replaceTags(names[2] ),fuel],
+		[replaceTags(names[3] ),trck],
+		[replaceTags(names[4] ),ch4u],
+		[replaceTags(names[5] ),n2ou],
+		[replaceTags(names[6] ),ch4t],
+		[replaceTags(names[7] ),n2ot],
+		[replaceTags(names[8] ),biog],
+		[replaceTags(names[9] ),slud],
+		[replaceTags(names[10]),digf],
+		[replaceTags(names[11]),n2od],
+	]);
+
+	//options
+	var options= 
+	{ 
+		height:250,
+		legend:{position:'left'},
+		title:"Total GHG emissions ("+format(Global.General.TotalGHG())+" kg CO2) [By source]",
+		slices:
+		{
+			/*
+			0:{color:'#00aff1' },
+			1:{color:'#d71d24' },
+			*/
+		},
+	}
+
+	//empty the container element
+	var con = document.getElementById(container)
+	con.innerHTML='';
+
+	//double click
+	con.ondblclick=function(){
+		var a=document.createElement('a');
+		document.body.appendChild(a);
+		a.href=chart.getImageURI()
+		a.download="image.png"
+		a.click()
+	}
+
+	//draw
+	var chart=new google.visualization.PieChart(con);
+	chart.draw(data,options);
+
+	(function(){
+		var buttons=document.createElement('div');
+		buttons.classList.add('tab_buttons');
+		document.getElementById(container).appendChild(buttons);
+		buttons.innerHTML=""+
+			"<button class=left    onclick=Graphs.ghgSources("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>By system</button>"+
+			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>By source</button>"+
+			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"') disabled>By source (detailed)</button>"+
+			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC</button>"+
+		"";
+	})();
+
+	var elecWS_formula = ""+
+		"<a href=variable.php?id=wsa_KPI_GHG_elec>wsa_KPI_GHG_elec</a> + <br>"+
+		"<a href=variable.php?id=wst_KPI_GHG_elec>wst_KPI_GHG_elec</a> + <br>"+
+		"<a href=variable.php?id=wsd_KPI_GHG_elec>wsd_KPI_GHG_elec</a>"+
+	"";
+	var elecWW_formula = ""+
+		"<a href=variable.php?id=wwc_KPI_GHG_elec>wwc_KPI_GHG_elec</a> + <br>"+
+		"<a href=variable.php?id=wwt_KPI_GHG_elec>wwt_KPI_GHG_elec</a> + <br>"+
+		"<a href=variable.php?id=wwd_KPI_GHG_elec>wwd_KPI_GHG_elec</a>"+
+	"";
+	var fuel_formula = ""+
+		"<a href=variable.php?id=wsa_KPI_GHG_fuel>wsa_KPI_GHG_fuel</a> + <br>"+
+		"<a href=variable.php?id=wst_KPI_GHG_fuel>wst_KPI_GHG_fuel</a> + <br>"+
+		"<a href=variable.php?id=wsd_KPI_GHG_fuel>wsd_KPI_GHG_fuel</a> + <br>"+
+		"<a href=variable.php?id=wwc_KPI_GHG_fuel>wwc_KPI_GHG_fuel</a> + <br>"+
+		"<a href=variable.php?id=wwt_KPI_GHG_fuel>wwt_KPI_GHG_fuel</a> + <br>"+
+		"<a href=variable.php?id=wwd_KPI_GHG_fuel>wwd_KPI_GHG_fuel</a>"+
+	"";
+	var trck_formula = ""+
+		"<a href=variable.php?id=wsd_KPI_GHG_trck>wsd_KPI_GHG_trck</a> + <br>"+
+		"<a href=variable.php?id=wwd_KPI_GHG_trck>wwd_KPI_GHG_trck</a>"+
+	"";
+
+	//create a table string
+	if(withTable) {
+		var table=""+
+		"<style>"+
+		"	table[title=ghgSources] td:nth-child(2){font-family:monospace}"+
+		"</style>"+
+		"<table title=ghgSources>"+
+			"<tr><th>"+translate('graphs_slice')+"<th>Code<th>"+translate('graphs_value')+" (kg CO2)"+
+			"<tr><td align=left>"+names[0]+ "<td align=left>"+elecWS_formula+"<td align=right>"+format(elecWS)+
+			"<tr><td align=left>"+names[1]+ "<td align=left>"+elecWW_formula+"<td align=right>"+format(elecWW)+
+			"<tr><td align=left>"+names[2]+ "<td align=left>"+fuel_formula+"<td align=right>"+format(fuel)+
+			"<tr><td align=left>"+names[3]+ "<td align=left>"+trck_formula+"<td align=right>"+format(trck)+
+			"<tr><td align=left>"+names[4]+ "<td align=left><a href=variable.php?id=wwc_KPI_GHG_unt_ch4 >wwc_KPI_GHG_unt_ch4 </a><td align=right>"+format(ch4u)+
+			"<tr><td align=left>"+names[5]+ "<td align=left><a href=variable.php?id=wwc_KPI_GHG_unt_n2o >wwc_KPI_GHG_unt_n2o </a><td align=right>"+format(n2ou)+
+			"<tr><td align=left>"+names[6]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_tre_ch4 >wwt_KPI_GHG_tre_ch4 </a><td align=right>"+format(ch4t)+
+			"<tr><td align=left>"+names[7]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_tre_n2o >wwt_KPI_GHG_tre_n2o </a><td align=right>"+format(n2ot)+
+			"<tr><td align=left>"+names[8]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_biog    >wwt_KPI_GHG_biog    </a><td align=right>"+format(biog)+
+			"<tr><td align=left>"+names[9]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_slu     >wwt_KPI_GHG_slu     </a><td align=right>"+format(slud)+
+			"<tr><td align=left>"+names[10]+"<td align=left><a href=variable.php?id=wwt_KPI_GHG_dig_fuel>wwt_KPI_GHG_dig_fuel</a><td align=right>"+format(digf)+
+			"<tr><td align=left>"+names[11]+"<td align=left><a href=variable.php?id=wwd_KPI_GHG_tre_n2o >wwd_KPI_GHG_tre_n2o </a><td align=right>"+format(n2od)+
+		"</table>"+
+		"";
+		var div=document.createElement('div');
+		div.style.fontSize="10px";
+		div.innerHTML=table;
+		document.getElementById(container).appendChild(div);
+	}
+}
+
+//GHG UNFCCC
+Graphs.unfccc=function(withTable,container){
+	withTable=withTable||false;
+	container=container||"graph";
+
+	var DATA=[
+		['category', translate('emissions')],
+	]
+
+	for(var func in UNFCCC){
+		DATA.push([translate(func),UNFCCC[func]()]);
+	}
+
+	//array graph data
+	var data=google.visualization.arrayToDataTable(DATA);
+
+	//options
+	var options={ 
+		height:250,
+		legend:{position:'left'},
+		title:"UNFCCC categories (kg CO2 eq)",
+	}
+
+	//empty the container element
+	var con = document.getElementById(container)
+	con.innerHTML='';
+
+	//double click
+	con.ondblclick=function(){
+		var a=document.createElement('a');
+		document.body.appendChild(a);
+		a.href=chart.getImageURI()
+		a.download="image.png"
+		a.click()
+	}
+
+	//draw
+	var chart=new google.visualization.PieChart(con);
+	chart.draw(data,options);
+
+	(function(){
+		var buttons=document.createElement('div');
+		buttons.classList.add('tab_buttons');
+		document.getElementById(container).appendChild(buttons);
+		buttons.innerHTML=""+
+			"<button class=left    onclick=Graphs.unfccc("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>By system</button>"+
+			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>By source</button>"+
+			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>By source (detailed)</button>"+
+			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"') disabled>UNFCCC</button>"+
+		"";
+	})();
+
+
+	//create a table string
+	if(withTable){
+		var table=""+
+		"<table title=unfccc>"+
+			"<tr><th>Category<th>Code<th>Value (kg CO2 eq)"+
+		"";
+		for(var func in UNFCCC){
+			table+="<tr><td align=left>"+translate(func)+"<td align=left><a href=variable.php?id="+func+">"+func+"</a><td align=right>"+format(UNFCCC[func]());
+		}
+
+		table+="</table>"+
+		"";
+
+		var div=document.createElement('div');
+		div.style.fontSize="10px";
+		div.innerHTML=table;
+		document.getElementById(container).appendChild(div);
+	}
+}
+
+//GHG one stage only: (wsa,wst,wsd,wwc,wwt,wwd)
+Graphs.ghg_by_stage=function(withTable,container,prefix) {
+	withTable=withTable||false;
+	container=container||"graph";
+	prefix=prefix||"wsa"; //first 3 letters [wsa,wst,wsd,wwc,wwt,wwd]
+
+	//check if prefix is correct
+	if(-1==['wsa','wst','wsd','wwc','wwt','wwd'].indexOf(prefix)) 
+	{
+		document.getElementById(container).innerHTML="not available for this stage";
+		return //if prefix is not in this list, stop
+	}
+
+	//utils
+	function getPointer(variable_code){
+		var loc = locateVariable(variable_code);
+		var pointer = loc.sublevel ? Global[loc.level][loc.sublevel] : Global[loc.level];
+		return pointer;
+	}
+	function getValue(variable_code){
+		var pointer = getPointer(variable_code);
+		var total = pointer ? pointer[variable_code]() : 0;
+		return total;
+	}
+
+	//complete code of w**_KPI_GHG
+	var code = prefix+'_KPI_GHG'
+	var value = getValue(code);
+
+	//data
+	var DATA=[ 
+		['variable','emission'],
+	];
+
+	//get inputs for this function (works)
+	var inputs = Formulas.idsPerFormula(getPointer(code)[code].toString());
+	inputs.forEach(input=>{
+		DATA.push( [translate(input+"_descr"),getValue(input)] );
+	});
+
+	//array graph data
+	var data=google.visualization.arrayToDataTable(DATA);
+
+	//options
+	var options={ 
+		height:250,
+		legend:{position:'left'},
+		title:"This stage's GHG emissions ("+format(value)+" kg CO2) ["+code+"]",
+	}
+
+	//empty the container element
+	var con=document.getElementById(container);
+	con.innerHTML='';
+
+	//double click
+	con.ondblclick=function(){
+		var a=document.createElement('a');
+		document.body.appendChild(a);
+		a.href=chart.getImageURI()
+		a.download="image.png"
+		a.click()
+	}
+
+	//draw
+	var chart=new google.visualization.PieChart(con);
+	chart.draw(data,options);
+
+	(function(){
+		var buttons=document.createElement('div');
+		buttons.classList.add('tab_buttons');
+		document.getElementById(container).appendChild(buttons);
+		buttons.innerHTML=""+
+			"<button onclick=Graphs.ghg_by_stage("+(!withTable).toString()+",'"+container+"','"+prefix+"')>Show/Hide table</button>"+
+		"";
+	})();
+
+	//create a table string
+	if(withTable) {
+		var table=""+
+		"<table title=ghg_by_stage>"+
+			"<tr><th>"+translate('graphs_slice')+"<th>Code<th>"+translate('graphs_value')+" (kg CO2)";
+
+		inputs.forEach(input=>{
+			table+="<tr><td align=left>"+translate(input+"_descr")+"<td align=left><a href=variable.php?id="+input+">"+input+"</a><td align=right>"+format(getValue(input))
+		});
+
+		table+="</table>"+
+		"";
+
+		var div=document.createElement('div');
+		div.style.fontSize="10px";
+		div.innerHTML=table;
+		document.getElementById(container).appendChild(div);
+	}
+}
+
+//GHG 'By stage' (all stages)
+Graphs.graph4=function(withTable,container) {
 	withTable=withTable||false;
 	container=container||"graph";
 
@@ -170,18 +664,18 @@ Graphs.graph4=function(withTable,container)
 	var chart=new google.visualization.PieChart(con);
 	chart.draw(data,options);
 
-	//extra options
-	var div=document.createElement('div');
-	document.getElementById(container).appendChild(div);
-	div.style.fontSize="10px";
+	(function(){
+		var buttons=document.createElement('div');
+		buttons.classList.add('tab_buttons');
+		document.getElementById(container).appendChild(buttons);
+		buttons.innerHTML=""+
+			"<button onclick=Graphs.graph4("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+		"";
+	})();
 
 	//create a table (string)
-	if(withTable)
-	{
+	if(withTable) {
 		var table=""+
-		"<button onclick=Graphs.graph4(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
-		"<button onclick=\"Graphs.graph1(true,'"+container+"');scrollToItem('"+container+"')\">System</button>"+
-		"<button onclick=\"Graphs.ghgSources(true,'"+container+"');scrollToItem('"+container+"')\">By source</button>"+
 		"<table title=graph4>"+
 			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kg CO2)"+
 			"<tr><td>"+names[0]+"<td>wsa_KPI_GHG <td>"+format(slice_1)+
@@ -192,172 +686,16 @@ Graphs.graph4=function(withTable,container)
 			"<tr><td>"+names[5]+"<td>wwd_KPI_GHG <td>"+format(slice_6)+
 		"</table>"+
 		"";
-		div.innerHTML=table;
-	}
-	else
-	{
-		div.innerHTML="<button onclick=Graphs.graph4(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"+
-		"<button onclick=\"Graphs.graph1(false,'"+container+"');scrollToItem('"+container+"')\">System</button>"+
-		"<button onclick=\"Graphs.ghgSources(false,'"+container+"');scrollToItem('"+container+"')\">By source</button>"+
-		"";
-	}
-}
-
-//ghg sources
-Graphs.ghgSources=function(withTable,container)
-{
-	withTable=withTable||false;
-	container=container||"graph";
-
-	/*
-		sources: 
-			elecWS, elecWW, fuel, fuel trucks, sludge wst, 
-			ch4_unt, n2o_unt, ch4_tre, n2o_tre, biogas 
-	*/
-	var elecWS=(function(){
-		return 0+
-			Global.Water.Abstraction.wsa_KPI_GHG_elec()+
-			Global.Water.Treatment.wst_KPI_GHG_elec()+
-			Global.Water.Distribution.wsd_KPI_GHG_elec();
-	})();
-	var elecWW=(function(){
-		return 0+
-			Global.Waste.Collection.wwc_KPI_GHG_elec()+
-			Global.Waste.Treatment.wwt_KPI_GHG_elec()+
-			Global.Waste.Discharge.wwd_KPI_GHG_elec();
-	})();
-	var fuel=(function(){
-		return 0+
-			 Global.Water.Abstraction.wsa_KPI_GHG_fuel()+
-			   Global.Water.Treatment.wst_KPI_GHG_fuel()+
-			Global.Water.Distribution.wsd_KPI_GHG_fuel()+
-			  Global.Waste.Collection.wwc_KPI_GHG_fuel()+
-			   Global.Waste.Treatment.wwt_KPI_GHG_fuel()+
-			   Global.Waste.Discharge.wwd_KPI_GHG_fuel();
-	})();
-	var trck=(function(){
-		return 0+
-			Global.Water.Distribution.wsd_KPI_GHG_trck()+
-				 Global.Waste.Discharge.wwd_KPI_GHG_trck();
-	})();
-	var ch4u=Global.Waste.Collection.wwc_KPI_GHG_unt_ch4();
-	var n2ou=Global.Waste.Collection.wwc_KPI_GHG_unt_n2o();
-	var ch4t=Global.Waste.Treatment.wwt_KPI_GHG_tre_ch4();
-	var n2ot=Global.Waste.Treatment.wwt_KPI_GHG_tre_n2o();
-	var biog=Global.Waste.Treatment.wwt_KPI_GHG_biog();
-	var slud=Global.Waste.Treatment.wwt_KPI_GHG_slu();
-	var digf=Global.Waste.Treatment.wwt_KPI_GHG_dig_fuel();
-	var n2od=Global.Waste.Discharge.wwd_KPI_GHG_tre_n2o();
-
-	//names
-	var names = [
-		"Electricity WS",
-		"Electricity WW",
-		"Fuel engines",
-		"Truck transport",
-		"CH4 untreated wastewater",
-		"N2O untreated wastewater",
-		"CH4 treatment process",
-		"N2O treatment process",
-		"Biogas flared",
-		"Sludge management",
-		"Fuel digester",
-		"N2O discharge water body",
-	];
-
-	//array graph data
-	var data=google.visualization.arrayToDataTable([
-		["Source",translate('emissions')],
-		[names[0],elecWS],
-		[names[1],elecWW],
-		[names[2],fuel],
-		[names[3],trck],
-		[names[4],ch4u],
-		[names[5],n2ou],
-		[names[6],ch4t],
-		[names[7],n2ot],
-		[names[8],biog],
-		[names[9],slud],
-		[names[10],digf],
-		[names[11],n2od],
-	]);
-
-	//options
-	var options= 
-	{ 
-		height:250,
-		legend:{position:'left'},
-		title:"Total GHG emissions ("+format(Global.General.TotalGHG())+" kg CO2) [By source]",
-		slices:
-		{
-			/*
-			0:{color:'#00aff1' },
-			1:{color:'#d71d24' },
-			*/
-		},
-	}
-
-	//empty the container element
-	var con = document.getElementById(container)
-	con.innerHTML='';
-
-	//double click
-	con.ondblclick=function(){
-		var a=document.createElement('a');
-		document.body.appendChild(a);
-		a.href=chart.getImageURI()
-		a.download="image.png"
-		a.click()
-	}
-
-	//draw
-	var chart=new google.visualization.PieChart(con);
-	chart.draw(data,options);
-
-	//create a table string
-	if(withTable)
-	{
-		var table=""+
-		"<button onclick=Graphs.ghgSources(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
-		"<button onclick=\"Graphs.graph1(true,'"+container+"');scrollToItem('"+container+"')\">System</button>"+
-		"<button onclick=\"Graphs.graph4(true,'"+container+"');scrollToItem('"+container+"')\">By stage</button>"+
-		"<table title=ghgSources>"+
-			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_value')+" (kg CO2)"+
-			"<tr><td>"+names[0]+"<td>"+format(elecWS)+
-			"<tr><td>"+names[1]+"<td>"+format(elecWW)+
-			"<tr><td>"+names[2]+"<td>"+format(fuel)+
-			"<tr><td>"+names[3]+"<td>"+format(trck)+
-			"<tr><td>"+names[4]+"<td>"+format(ch4u)+
-			"<tr><td>"+names[5]+"<td>"+format(n2ou)+
-			"<tr><td>"+names[6]+"<td>"+format(ch4t)+
-			"<tr><td>"+names[7]+"<td>"+format(n2ot)+
-			"<tr><td>"+names[8]+"<td>"+format(biog)+
-			"<tr><td>"+names[9]+"<td>"+format(slud)+
-			"<tr><td>"+names[10]+"<td>"+format(digf)+
-			"<tr><td>"+names[11]+"<td>"+format(n2od)+
-		"</table>"+
-		"";
-
+		//extra options
 		var div=document.createElement('div');
+		document.getElementById(container).appendChild(div);
 		div.style.fontSize="10px";
 		div.innerHTML=table;
-		document.getElementById(container).appendChild(div);
-	}
-	else
-	{
-		//button "show table"
-		var div=document.createElement('div');
-		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.ghgSources(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"+
-		"<button onclick=\"Graphs.graph1(false,'"+container+"');scrollToItem('"+container+"')\">System</button>"+
-		"<button onclick=\"Graphs.graph4(false,'"+container+"');scrollToItem('"+container+"')\">By stage</button>"+
-			"";
 	}
 }
 
-Graphs.graph2=function(withTable,container)
-//NRG
-{
+//NRG global
+Graphs.graph2=function(withTable,container) {
 	withTable=withTable||false;
 	container=container||"graph";
 
@@ -405,40 +743,35 @@ Graphs.graph2=function(withTable,container)
 	var chart=new google.visualization.PieChart(con);
 	chart.draw(data,options);
 
-	//extra options
-	var div=document.createElement('div');
-	div.style.fontSize="10px";
-	document.getElementById(container).appendChild(div);
+	//buttons
+	(function(){
+		var buttons=document.createElement('div');
+		buttons.classList.add('tab_buttons');
+		document.getElementById(container).appendChild(buttons);
+		buttons.innerHTML=""+
+			"<button onclick=Graphs.graph2("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+		"";
+	})();
 
 	//table
-	if(withTable)
-	{
+	if(withTable) {
 		//create a table string
 		var table=""+
-		"<button onclick=Graphs.graph2(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
 		"<table title=graph2>"+
 			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+""+
 			"<tr><td>"+names[0]+"<td><a href=variable.php?id=ws_nrg_cons>ws_nrg_cons</a><td>"+format(ws)+
 			"<tr><td>"+names[1]+"<td><a href=variable.php?id=ww_nrg_cons>ww_nrg_cons</a><td>"+format(ww)+
 		"</table>"+
 		"";
+		var div=document.createElement('div');
+		div.style.fontSize="10px";
+		document.getElementById(container).appendChild(div);
 		div.innerHTML=table;
-	}
-	else
-	{
-		//add a button to show the table
-		(function(){
-			var btn=document.createElement('button');
-			div.appendChild(btn)
-			btn.innerHTML=""+translate('graphs_show_table')+"";
-			btn.onclick=function(){Graphs.graph2(true,container)};
-		})();
 	}
 }
 
-Graphs.graph5=function(withTable,container)
-//NRG detailed
-{
+//NRG by stage
+Graphs.graph5=function(withTable,container) {
 	withTable=withTable||false;
 	container=container||"graph";
 
@@ -477,9 +810,8 @@ Graphs.graph5=function(withTable,container)
 		height:300,
 		legend:{position:'left'},
 		pieHole:0.3,
-		title:""+translate('graphs_graph5')+"",
-		slices:
-		{
+		title:"Energy consumption ("+format(Global.General.TotalNRG())+" kWh)",
+		slices: {
 			0:{color:'#66cef5'},
 			1:{color:'#0083b3'},
 			2:{color:'#cceffc'},
@@ -496,13 +828,21 @@ Graphs.graph5=function(withTable,container)
 	var chart=new google.visualization.PieChart(document.getElementById(container));
 	chart.draw(data,options);
 
+	(function(){
+		var buttons=document.createElement('div');
+		buttons.classList.add('tab_buttons');
+		document.getElementById(container).appendChild(buttons);
+		buttons.innerHTML=""+
+			"<button class=left   onclick=Graphs.graph5("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+			"<button class=middle onclick=Graphs.graph5("+withTable.toString()+",'"+container+"') disabled>By stage</button>"+
+			"<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"')>By substage</button>"+
+		"";
+	})();
+
 	//tables
-	if(withTable)
-	{
+	if(withTable) {
 		//create a table (as a string)
 		var table=""+
-		"<button onclick=\"Graphs.graph5(false,'"+container+"');scrollToItem('"+container+"')\">"+translate('graphs_hide_table')+"</button>"+
-		"<button onclick=\"Graphs.graph7(true,'"+container+"');scrollToItem('"+container+"')\">"+translate('substages')+"</button>"+
 		"<table title=graph5>"+
 			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kWh)"+
 			"<tr><td>"+names[0]+"<td><a href=variable.php?id=wsa_nrg_cons>wsa_nrg_cons</a> <td>"+format(slice_1)+
@@ -513,27 +853,17 @@ Graphs.graph5=function(withTable,container)
 			"<tr><td>"+names[5]+"<td><a href=variable.php?id=wwd_nrg_cons>wwd_nrg_cons</a> <td>"+format(slice_6)+
 		"</table>"+
 		'<div class=options>'+
-		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable>'+translate('graphs_printable_version')+'</a> | '+
-		"	<a href='graph.php?g=graph5'>"+translate('graphs_go_to')+"</a>"+
+		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable>Save as image</a> '+
 		'</div>'+
 		"";
 		var div = document.createElement('div');
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
 	}
-	else
-	{
-		//button "show table"
-		var div=document.createElement('div');
-		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=\"Graphs.graph5(true,'"+container+"');scrollToItem('"+container+"')\">"+translate('graphs_show_table')+"</button>"+
-			"<button onclick=\"Graphs.graph7(false,'"+container+"');scrollToItem('"+container+"')\">"+translate('substages')+"</button>";
-	}
 }
 
-Graphs.graph7=function(withTable,container)
-//NRG detailed substages
-{
+//NRG by substage
+Graphs.graph7=function(withTable,container) {
 	withTable=withTable||false;
 	container=container||"graph";
 
@@ -590,7 +920,7 @@ Graphs.graph7=function(withTable,container)
 		height:300,
 		legend:{position:'left'},
 		pieHole:0.3,
-		title:""+translate('graphs_graph7')+"",
+		title:"Energy consumption (by substage) ("+format(Global.General.TotalNRG())+" kWh)",
 		slices:{},
 	};
 	var colors = [ '#66cef5', '#0083b3', '#cceffc', '#b67800', '#f8c666', '#fad999' ];
@@ -611,12 +941,20 @@ Graphs.graph7=function(withTable,container)
 	var chart=new google.visualization.PieChart(document.getElementById(container));
 	chart.draw(data,options);
 
-	if(withTable)
-	{
+	(function(){
+		var buttons=document.createElement('div');
+		buttons.classList.add('tab_buttons');
+		document.getElementById(container).appendChild(buttons);
+		buttons.innerHTML=""+
+			"<button class=left   onclick=Graphs.graph7("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+			"<button class=middle onclick=Graphs.graph5("+withTable.toString()+",'"+container+"')>By stage</button>"+
+			"<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"') disabled>By substage</button>"+
+		"";
+	})();
+
+	if(withTable) {
 		//create a table (as a string)
 		var table=""+
-		"<button onclick=\"Graphs.graph7(false,'"+container+"');scrollToItem('"+container+"')\">"+translate('graphs_hide_table')+"</button>"+
-		"<button onclick=\"Graphs.graph5(true,'"+container+"');scrollToItem('"+container+"')\">"+translate('substages')+"</button>"+
 		"<table title=graph7>"+
 		"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th colspan=30>"+translate('substages')+" (kWh)";
 			for(var s in stages)
@@ -640,29 +978,19 @@ Graphs.graph7=function(withTable,container)
 			}
 		table+="</table>"+
 		'<div class=options>'+
-		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable>'+translate('graphs_printable_version')+'</a> | '+
-		"	<a href='graph.php?g=graph7'>"+translate('graphs_go_to')+"</a>"+
+		'	<a href="'+chart.getImageURI()+'" download="image.png" class=printable>Save as image</a> '+
 		'</div>'+
 		"";
 		var div = document.createElement('div');
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
 	}
-	else
-	{
-		//button "show table"
-		var div=document.createElement('div');
-		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=\"Graphs.graph7(true,'"+container+"');scrollToItem('"+container+"')\">"+translate('graphs_show_table')+"</button>"+
-			"<button onclick=\"Graphs.graph5(false,'"+container+"');scrollToItem('"+container+"')\">"+translate('substages')+"</button>";
-	}
 }
 
 //BAR GRAPHS
 //graphs 3{a,b,c,d} not used
 /*
-Graphs.graph3a=function(withTable,container)
-{
+Graphs.graph3a=function(withTable,container) {
 	//pointers
 	var WS = Global.Water;
 	var WW = Global.Waste;
@@ -750,32 +1078,17 @@ Graphs.graph3a=function(withTable,container)
 }
 */
 
-Graphs.sankey=function(withTable,container)
-//Water volumes
-{
+//Water flows picture
+Graphs.sankey=function(withTable,container) {
 	withTable=withTable||false;
 	container=container||"graph";
 	//data
-	var slice_1 = Global.Water.Abstraction.wsa_vol_conv;
-	var slice_2 = Global.Water.Treatment.wst_vol_trea;
-	var slice_3 = Global.Water.Distribution.wsd_vol_dist;
-	var slice_4 = Global.Water.Distribution.wsd_auth_con;
-
-	var slice_5 = Global.Waste.Collection.wwc_vol_coll;
-	var slice_6 = Global.Waste.Collection.wwc_vol_conv;
-	var slice_7 = Global.Waste.Treatment.wwt_vol_trea;
-	var slice_8 = Global.Waste.Discharge.wwd_vol_disc;
-
-	//divide all data by the last slice to make it look good
-	slice_1=10*slice_1/slice_4;
-	slice_2=10*slice_2/slice_4;
-	slice_3=10*slice_3/slice_4;
-	slice_4=10*slice_4/slice_4;
-
-	slice_5=10*slice_5/slice_8;
-	slice_6=10*slice_6/slice_8;
-	slice_7=10*slice_7/slice_8;
-	slice_8=10*slice_8/slice_8;
+	var flow_1 = Global.Water.Abstraction.wsa_vol_conv;
+	var flow_2 = Global.Water.Treatment.wst_vol_trea;
+	var flow_3 = Global.Water.Distribution.wsd_vol_dist;
+	var flow_4 = Global.Waste.Collection.wwc_vol_conv;
+	var flow_5 = Global.Waste.Treatment.wwt_vol_trea;
+	var flow_6 = Global.Waste.Discharge.wwd_vol_disc;
 
 	//data
 	var data = new google.visualization.DataTable();
@@ -784,43 +1097,26 @@ Graphs.sankey=function(withTable,container)
 	data.addColumn('number', 'Volume');
 	data.addRows([
 		//ws flows
-		['Start',    'wsa',      slice_1],
-		['wsa',      'wst',      slice_2],
-		['wsa',      'wsa_loss', slice_1-slice_2],
-		['wst',      'wsd',      slice_3],
-		['wst',      'wst_loss', slice_2-slice_3],
-		['wsd',      'usr_in',   slice_4],
-		['wsd',      'wsd_loss', slice_3-slice_4],
-		['wsa_loss', 'ws_loss',  slice_1-slice_2],
-		['wst_loss', 'ws_loss',  slice_2-slice_3],
-		['wsd_loss', 'ws_loss',  slice_3-slice_4],
-
+		['wsa', 'wst', flow_1],
+		['wst', 'wsd', flow_2],
+		['wsd', 'usr', flow_3],
 		//ww flows
-		['usr_out',  'wwc',      slice_5],
-		['wwc',      'wwt',      slice_6],
-		['wwc',      'wwc_loss', slice_5-slice_6],
-		['wwt',      'wwd',      slice_7],
-		['wwt',      'wwt_loss', slice_6-slice_7],
-		['wwd',      'End',      slice_8],
-		['wwd',      'wwd_loss', slice_7-slice_8],
-		['wwc_loss', 'ww_loss',  slice_5-slice_6],
-		['wwt_loss', 'ww_loss',  slice_6-slice_7],
-		['wwd_loss', 'ww_loss',  slice_7-slice_8],
+		['wwc', 'wwt', flow_4],
+		['wwt', 'wwd', flow_5],
+		['wwd', 'out', flow_6],
 	]);
 
 	//options
 	var colors=['#00aff1','#bf5050'];
-	var options = 
-	{
+	var options={
 		legend:{position:'left'},
-		sankey: 
-		{
+		sankey:{
 			iterations:32,
-			node: {
-				colors: colors,
+			node:{
+				colors:colors,
 				nodePadding:20,
 			},
-			link: {
+			link:{
 				colorMode: 'gradient',
 				colors: colors
 			}
@@ -835,40 +1131,28 @@ Graphs.sankey=function(withTable,container)
 	chart.draw(data,options);
 
 	//tables
-	if(withTable)
-	{
+	if(true) {
 		//create a table (as a string)
 		var table=""+
-		"<button onclick=Graphs.sankey(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
 		"<table title=sankey>"+
 			"<tr><th>Stage        <th>Variable                                              <th>Volume (m3)"+
-			"<tr><td>Abstraction  <td><a href=variable.php?id=wsa_vol_conv>wsa_vol_conv</a> <td>"+slice_1+
-			"<tr><td>Treatment    <td><a href=variable.php?id=wst_vol_trea>wst_vol_trea</a> <td>"+slice_2+
-			"<tr><td>Distribution <td><a href=variable.php?id=wsd_vol_dist>wsd_vol_dist</a> <td>"+slice_3+
-			"<tr><td>Consumption  <td><a href=variable.php?id=wsd_auth_con>wsd_auth_con</a> <td>"+slice_4+
-			"<tr><td>Collection   <td><a href=variable.php?id=wwc_vol_conv>wwc_vol_conv</a> <td>"+slice_5+
-			"<tr><td>Treatment    <td><a href=variable.php?id=wwt_vol_trea>wwt_vol_trea</a> <td>"+slice_6+
-			"<tr><td>Discharge    <td><a href=variable.php?id=wwd_vol_disc>wwd_vol_disc</a> <td>"+slice_7+
+			"<tr><td>Abstraction  <td><a href=variable.php?id=wsa_vol_conv>wsa_vol_conv</a> <td>"+flow_1+
+			"<tr><td>Treatment    <td><a href=variable.php?id=wst_vol_trea>wst_vol_trea</a> <td>"+flow_2+
+			"<tr><td>Distribution <td><a href=variable.php?id=wsd_vol_dist>wsd_vol_dist</a> <td>"+flow_3+
+			"<tr><td>Collection   <td><a href=variable.php?id=wwc_vol_conv>wwc_vol_conv</a> <td>"+flow_4+
+			"<tr><td>Treatment    <td><a href=variable.php?id=wwt_vol_trea>wwt_vol_trea</a> <td>"+flow_5+
+			"<tr><td>Discharge    <td><a href=variable.php?id=wwd_vol_disc>wwd_vol_disc</a> <td>"+flow_6+
 		"</table>"+
-		'Printable version not available for Sankey diagram'+
 		"";
 		var div = document.createElement('div');
 		div.style.fontSize="10px";
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
 	}
-	else
-	{
-		//button "show table"
-		var div=document.createElement('div');
-		document.getElementById(container).appendChild(div);
-		div.innerHTML="<button onclick=Graphs.sankey(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"
-	}
 }
 
-/** gauges for serviced population */
-Graphs.gauge=function(container,value,header,unit,lowerLimit,upperLimit)
-{
+//Gauge for serviced population
+Graphs.gauge=function(container,value,header,unit,lowerLimit,upperLimit) {
 	container=container||'graph';
 	value=value||0;
 	header=header||'header not defined';
@@ -903,10 +1187,9 @@ Graphs.gauge=function(container,value,header,unit,lowerLimit,upperLimit)
 		div.innerHTML+=" &#9888;"
 	}
 }
-/***/
 
-Graphs.progress=function(container,value,header,color)
-{
+//? not used
+Graphs.progress=function(container,value,header,color) {
 	container=container||'graph';
 	value=value||0;
 	header=header||'header';
@@ -931,8 +1214,7 @@ Graphs.progress=function(container,value,header,color)
 	pro.style.background="#fff"
 }
 
-Graphs.ws_cost=function(container)
-{
+Graphs.ws_cost=function(container) {
 	container=container||'graph';
 
 	//values
@@ -980,8 +1262,7 @@ Graphs.ws_cost=function(container)
 	}
 }
 
-Graphs.ww_cost=function(container)
-{
+Graphs.ww_cost=function(container) {
 	container=container||'graph';
 
 	//values
@@ -1029,8 +1310,7 @@ Graphs.ww_cost=function(container)
 	}
 }
 
-Graphs.untreatedww=function(container,header)
-{
+Graphs.untreatedww=function(container,header) {
 	container=container||"graph";
 	header=header||"kg CO2 equivalents from CH4 and N2O";
 
@@ -1056,8 +1336,7 @@ Graphs.untreatedww=function(container,header)
 	element.insertBefore(h,element.firstChild)
 }
 
-Graphs.authCon=function(container)
-{
+Graphs.authCon=function(container) {
 	container=container||'graph';
 
 	var DATA=[
@@ -1081,8 +1360,7 @@ Graphs.authCon=function(container)
 	element.insertBefore(h,element.firstChild)
 }
 
-Graphs.wsa_KPI_std_nrg_cons=function(withTable,container)
-{
+Graphs.wsa_KPI_std_nrg_cons=function(withTable,container) {
 	withTable=withTable||false;
 	container=container||"graph";
 

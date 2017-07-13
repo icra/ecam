@@ -34,6 +34,13 @@
 		pre.prettyprint {margin:0.5em;margin-left:0;padding:1em}
 	</style>
 
+	<style>
+		div.error {
+			font-size:16px;
+			padding:10px;
+		}
+	</style>
+
 	<script>
 		var id='<?php echo $id?>'; //make the id variable live in javascript scope
 
@@ -87,7 +94,7 @@
 			newRow.insertCell(-1).innerHTML=(function()
 			{
 				//var exp = Info[id].explanation
-				var exp = translate(id+"_expla")
+				var exp = translate(id+"_expla") || translate(id);
 				if(exp=="")
 					return "<span style=color:#999>No explanation</span>";
 				else
@@ -211,7 +218,7 @@
 
 							ret+="<tr>"+
 								"<td class=variableCode><a style='color:"+color+"' href=variable.php?id="+match+" "+
-								"caption='INPUT: "+translate(match+"_descr")+"'"+
+								"caption='INPUT: "+(translate(match+"_descr")||translate(match))+"'"+
 								">"+match+"</a> "+
 								"<td caption='"+currValue+"' style=cursor:help>"+currValueF+"<td><span class=unit>"+currentUnit+"</span> "+
 								estimated;
@@ -374,7 +381,7 @@
 					var estimated = DQ.hasEstimatedData(output) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span> " : "";
 
 					ret+="<tr>"+
-						" <td class=variableCode><a style='color:"+color+"' caption='["+match_localization.toString()+"] "+translate(output+"_descr")+"'"+
+						" <td class=variableCode><a style='color:"+color+"' caption='["+match_localization.toString()+"] "+(translate(output+"_descr")||translate(output))+"'"+
 						" href=variable.php?id="+output+">"+output+"</a>"+
 						"<td caption='"+encodeURIComponent(pretf)+"' style=cursor:help>"+
 						currValueF+"<td> <span class=unit>"+currentUnit+"</span> "+estimated;
@@ -476,12 +483,18 @@
 <script>
 	if(!Info[id])
 	{
-		document.write("<div>ERROR. Variable not defined in dataModel/Info.js</div>")
+		document.write("<div class=error>ERROR: Variable '"+id+"' not defined in dataModel/Info.js</div>")
 		window.stop()
 	}
 
 	//Define some necessary global variables
 	var localization = locateVariable(id);
+	if(!localization)
+	{
+		document.write("<div class=error>ERROR: Variable '"+id+"' not found in dataModel/Global.js</div>")
+		window.stop()
+	}
+
 	var level 		 = localization.level;
 	var sublevel 	 = localization.sublevel;
 	var currentStage = sublevel ? Global[level][sublevel] : Global[level];
@@ -489,18 +502,15 @@
 
 	//make the user see "Water Supply" instead of "Water"
 	var levelAlias;
-	switch(level)
-	{
+	switch(level) {
 		case "Water":levelAlias="<?php write('#Water')?>";break;
 		case "Waste":levelAlias="<?php write('#Waste')?>";break;
 		default:levelAlias=level;break;
 	}
 
-	if(sublevel)
-	{
+	if(sublevel) {
 		var sublevelAlias;
-		switch(sublevel)
-		{
+		switch(sublevel) {
 			case "Abstraction":sublevelAlias="<?php write('#Abstraction')?>";break;
 			case "Treatment":sublevelAlias="<?php write('#Treatment')?>";break;
 			case "Distribution":sublevelAlias="<?php write('#Distribution')?>";break;
@@ -512,7 +522,12 @@
 
 <!--TITLE--><h1>
 	<span style=color:#999><?php write('#variable_detailed_info')?>: </span>
-	<script>document.write(translate(id+'_descr')+" ("+id+")")</script>
+	<script>
+		(function(){
+			var description=translate(id+'_descr')||translate(id);
+			document.write(description+" ("+id+")")
+		})();
+	</script>
 </h1>
 
 <div id=main>

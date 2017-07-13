@@ -31,8 +31,8 @@
 		<h4 style=font-size:18px;color:#58595b>
 			ECAM is a free and 
 			<a target=_blank href=//github.com/holalluis/ecam>open source</a>
-			tool, developed as part of the
-			<a target=_blank href=http://wacclim.org/>WaCCliM project</a>
+			tool developed as part of the
+			<a target=_blank href=http://wacclim.org/>WaCCliM project</a>.
 		</h4>
 
 		<h4 style=font-size:18px;color:#58595b>

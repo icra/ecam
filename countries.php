@@ -16,6 +16,9 @@
 		#info a {
 			color:white;
 		}
+		#info tr.selected {
+			background:yellow;
+		}
 	</style>
 </head><body><center>
 <?php 
@@ -68,6 +71,10 @@
 		var table=document.querySelector('#info');
 		for(var country in Countries) {
 			var newRow=table.insertRow(-1);
+			if(country==Global.General.Country){
+				newRow.classList.add('selected');
+				newRow.title="Current selected country";
+			}
 			newRow.insertCell(-1).innerHTML="<b>"+country+"</b>";
 			newRow.insertCell(-1).innerHTML=Countries[country].conv_kwh_co2;
 			newRow.insertCell(-1).innerHTML=Countries[country].wwc_prot_con;

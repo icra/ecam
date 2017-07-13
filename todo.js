@@ -2,16 +2,22 @@
 var TODO = {
 	Front://front-end
 	[
-		"[RANJIN] Graphs requests, add here from notes",
-		"[WAIT] Add in the help page an example json file, after I/O structure does not change anymore",
+		"[RANJIN] Graphs requests, add here from paper notes after meeting",
+
 		"[WAIT] Sankey diagram (all water flows) (at 'graphs.js')",
-		"[WAIT] Add references (page,chapter,book) to equations (IPCC, BEAM, ...?)",
+		"[WAIT] Add references (page, chapter, book) to equations (IPCC, BEAM, ...?)",
+		"[WAIT] Add in the help page an example json file, after I/O structure does not change anymore",
 	],
 	Back://back-end
 	[
-		"[RANJIN] add estimations for biogas produced and valorised",
-		"[TODO] add tasks from last meeting (6-7-17, 7-7-17)",
+		"[DONE] add estimations for biogas produced and valorised",
+
+		"[LLUIS] create constants for numbers in <a href=variable.php?id=c_wwt_nrg_biog>c_wwt_nrg_biog</a> (energy content in biogas valorized)",
+		"[LLUIS] create a list with formulas that have numbers that have to be turned into constants",
+		"[LLUIS] add tasks from last meeting (6-7-17, 7-7-17) from paper notes",
+
 		"[WAIT] Translation will be done after v2 in english is complete (IWA should say this)",
+
 		"[IDEA] Avoid document.write function when possible",
 		"[IDEA] function to check if two constant codes are repeated",
 	],

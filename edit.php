@@ -204,7 +204,7 @@
 				newCell.setAttribute('title',translate(field+"_expla"));
 				newCell.innerHTML=(function()
 				{
-					var description=translate(field+"_descr");
+					var description=translate(field+"_descr")||translate(field);
 					var code="<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
 					return description+" ("+code+")";
 				})();
@@ -383,7 +383,7 @@
 
 				newCell.innerHTML=(function()
 				{
-					var description = translate(field+"_descr");
+					var description = translate(field+"_descr")||translate(field);
 					var color = field.search(/^ww/)==0 ? "#d71d24" : "";
 					var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
 					var nrg="<span class='advanced nrg' caption='Energy performance'>NRG</span>";
@@ -453,7 +453,7 @@
 
 				newCell.innerHTML=(function()
 				{
-					var description = translate(field+"_descr");
+					var description = translate(field+"_descr")||translate(field);
 					var color = field.search(/^ww/)==0 ? "#d71d24" : "";
 					var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
 					var sl="<span class='advanced sl'>SL</span>";
@@ -508,7 +508,7 @@
 		function drawCharts()
 		{
 			//draw the chart that is selected!!!
-			//Graphs.graph4(false,'graph'); //GHG
+			//Graphs.ghg_by_stage(false,'graph'); //GHG
 			//Graphs.graph5(false,'graph'); //Energy
 
 			//draw the active button graph
@@ -845,9 +845,8 @@
 				</script>
 				<style>
 					#graph div.options{padding:1em}
-					#graph button {margin:0.2em}
 					#graph {text-align:center}
-					#graph * {margin:auto}
+					#graph table {margin:auto}
 				</style>
 			</div>
 		</div>

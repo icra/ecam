@@ -28,5 +28,6 @@
 		box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
 		border:1px solid #ccc;
 		color:#666;
+		text-align:left;
 	}
 </style>

@@ -201,7 +201,12 @@ var Info = {
 	wsd_pmp_size:{magnitude:"Option",unit:"Pump size"},
 	wsd_sta_head:{magnitude:"Head",unit:"m"},
 	wsd_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+
 	wsd_KPI_GHG_trck:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wsd_KPI_GHG_trck_co2:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wsd_KPI_GHG_trck_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wsd_KPI_GHG_trck_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+
 	wsd_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wsd_pmp_flow:{magnitude:"Flow",unit:"L/s"},
 	wsd_pmp_volt:{magnitude:"Voltage",unit:"V"},
@@ -304,6 +309,7 @@ var Info = {
 	wwt_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG_tre_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG_tre_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wwt_KPI_GHG_tre:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG_biog:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	//sludge mgmt
@@ -319,6 +325,9 @@ var Info = {
 	wwt_soil_typ:{magnitude:"Option",unit:"Soil type"},
 	c_wwt_ch4_pot:{magnitude:"Mass",unit:"kg CH4"},
 	wwt_KPI_GHG_dig_fuel:{magnitude:"Mass",unit:"kg"},
+	wwt_KPI_GHG_dig_fuel_co2:{magnitude:"Mass",unit:"kg"},
+	wwt_KPI_GHG_dig_fuel_n2o:{magnitude:"Mass",unit:"kg"},
+	wwt_KPI_GHG_dig_fuel_ch4:{magnitude:"Mass",unit:"kg"},
 	wwt_slu_storage_ch4:{magnitude:"Mass",unit:"kg CO2 eq"},
 	wwt_slu_composting_ch4:{magnitude:"Mass",unit:"kg CO2 eq"},
 	wwt_slu_composting_n2o:{magnitude:"Mass",unit:"kg CO2 eq"},
@@ -334,6 +343,9 @@ var Info = {
 	wwt_KPI_ghg_land_co2eq:{magnitude:"Mass",unit:"kg CO2 eq"},
 	wwt_KPI_ghg_stock_co2eq:{magnitude:"Mass",unit:"kg CO2 eq"},
 	wwt_KPI_ghg_tsludge:{magnitude:"Mass",unit:"kg CO2 eq"},
+	wwt_KPI_ghg_tsludge_co2:{magnitude:"Mass",unit:"kg CO2 eq"},
+	wwt_KPI_ghg_tsludge_n2o:{magnitude:"Mass",unit:"kg CO2 eq"},
+	wwt_KPI_ghg_tsludge_ch4:{magnitude:"Mass",unit:"kg CO2 eq"},
 	wwt_KPI_GHG_slu:{magnitude:"Mass",unit:"kg CO2 eq"},
 
 	//L2 Wastewater Discharge
@@ -353,6 +365,17 @@ var Info = {
 	wwd_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m"},
 	wwd_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwd_KPI_GHG_trck:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wwd_KPI_GHG_trck_co2:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wwd_KPI_GHG_trck_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wwd_KPI_GHG_trck_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwd_KPI_GHG_tre_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwd_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+
+	//UNFCCC categories
+	unfccc_1A1 :{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	unfccc_1A3 :{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	unfccc_5A  :{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	unfccc_5B  :{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	unfccc_5C  :{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	unfccc_5D  :{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 }

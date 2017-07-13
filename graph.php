@@ -7,9 +7,7 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<style>
-		button.button{margin:1px}
 		#graph{margin:3em}
-		#graph button{margin:0.5em}
 		#graph div.options{margin:1em}
 	</style>
 	<script>
@@ -38,6 +36,9 @@
 <!--navbar--><?php include'navbar.php'?>
 <!--linear--><?php include'linear.php'?>
 <!--title--><h1><a href=development.php>Development</a> &rsaquo; Graphs</h1>
+
+<h3>Playground zone for graphs</h3>
+
 <!--json--><?php include'currentJSON.php'?>
 
 <div id=main>

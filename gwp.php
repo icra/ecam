@@ -2,7 +2,7 @@
 
 <!--select assessment report-->
 <fieldset>
-	<legend>Select source for global warming potential
+	<legend>Select Global Warming Potential source
 		<select id=select_gwp onchange=selectGWP(this)>
 			<option value="false">--select--</option>
 			<!--fill with options-->

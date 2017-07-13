@@ -160,6 +160,7 @@
 			<tr><td><a href=substages.php>All substages</a>
 			<tr><td><a href=sources.php>GHG Summary</a>
 			<tr><td><a href=energy_summary.php>Energy Summary</a>
+			<tr><td><a href=edit.php?level=UNFCCC>UNFCCC</a>
 			<tr><td><a href=summary.php?type=input>All inputs</a>
 			<tr><td><a href=summary.php?type=output>All outputs</a>
 			<tr><td><a href=summary.php?type=ccvv>All calculated variables</a>
@@ -169,12 +170,13 @@
 			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
 			<tr><th>
 		</table>
-		<div style="
+		<ul style="
 			text-align:left;
 			padding:0.5em;
 			">
-			<a href=development.php>Development</a>
-		</div>
+			<li><a href=development.php>Development</a>
+			<li><a href=graph.php?g=sankey>Sankey</a>
+		</ul>
 	</div>
 </div>
 <script>Sidebar.update()</script>

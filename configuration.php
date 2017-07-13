@@ -271,15 +271,15 @@
 
 		<table id=general_inputs>
 			<tr>
-				<td>Emission factor for grid electricity
+				<td><?php write('#conv_kwh_co2_descr')?>
 				<td><input id=conv_kwh_co2 onchange="update(Global.General,'conv_kwh_co2',this.value)">
 				<td>kg<sub>CO<sub>2</sub></sub>/kWh
 			<tr>
-				<td>Annual protein consumption per capita 
+				<td><?php write('#wwc_prot_con_descr')?>
 				<td><input id=wwc_prot_con onchange="update(Global.Waste.Collection,'wwc_prot_con',this.value)">
 				<td>kg/person/year
 			<tr>
-				<td>BOD5 per person per day
+				<td><?php write('#wwc_bod_pday_descr')?>
 				<td><input id=wwc_bod_pday onchange="update(Global.Waste.Collection,'wwc_bod_pday',this.value)">
 				<td>g/person/day
 		</table>
@@ -293,8 +293,8 @@
 		<label> Yes <input type=radio name=anyFuelEngines ans=1 onclick=update(Global.General,this.name,1)></label>
 	</fieldset>
 
+	<!--global warming potential-->
 	<?php include'gwp.php'?>
-
 </div>
 
 <!--prev & next buttons-->

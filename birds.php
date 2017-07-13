@@ -356,19 +356,7 @@
 							<span class=circle style=background:#b8879d></span>
 					</tr>
 
-					<!--wwt are you producing biogas-->
-					<tr stage=waste class=hidden>
-						<td> Are you producing biogas?
-						<td> <label>No  <input name=wwt_producing_biogas type=radio onclick="BEV.updateQuestion(this.name,0)" ans=0 checked></label>
-						<td> <label>Yes <input name=wwt_producing_biogas type=radio onclick="BEV.updateQuestion(this.name,1)" ans=1></label>
-					</tr>
-
-					<!--wwt are you valorizing biogas-->
-					<tr stage=waste class=hidden>
-						<td> Are you valorizing biogas?
-						<td> <label>No  <input name=wwt_valorizing_biogas type=radio onclick="BEV.updateQuestion(this.name,0)" ans=0 checked></label>
-						<td> <label>Yes <input name=wwt_valorizing_biogas type=radio onclick="BEV.updateQuestion(this.name,1)" ans=1></label>
-					</tr>
+					<?php include'biogas_birds.php'?>
 
 					<!--sludge management-->
 					<tr stage=waste class=hidden>
@@ -443,7 +431,6 @@
 		<div id=graphs>
 			<style> 
 				#graphs table{margin:auto !important;margin-bottom:0.5em !important}
-				#graphs button{margin:0.5em;margin-top:0;font-size:10px} 
 				#graphs div div {text-align:center;position:relative} 
 				#graphs div.options {text-align:center;padding:1em}
 				#graphs div[graph] {

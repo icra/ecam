@@ -2,10 +2,24 @@
 	<?php include'imports.php'?>
 	<script>
 		function showVarName(code){
-			document.write("<a href=variable.php?id="+code+">"+code+"</a> : "+translate(code+'_descr'))
-			document.write(" ("+Info[code].unit+")")
+			//constant?
+			if(code.substring(0,3)=="ct_") {
+				document.write("<a href=constant.php?id="+code+">"+code+"</a> : [constant="+Cts[code].value+"] "+Cts[code].descr)
+				document.write(" ("+Cts[code].unit+")")
+			}
+			else{ //normal variable
+				document.write("<a href=variable.php?id="+code+">"+code+"</a> : "+translate(code+'_descr'))
+				document.write(" ("+Info[code].unit+")")
+			}
 		}
 		var EstimatedInputs = {
+			"Answering whether biogas is produced or not estimates":[
+				"wwt_biog_pro",
+				"wwt_ch4_biog",
+			],
+			"Answering whether biogas is valorised or not estimates":[
+				"wwt_biog_val",
+			],
 			"Setting the 'main treatment type' estimates":[
 				"wwt_bod_infl",
 				"wwt_bod_effl",
@@ -21,7 +35,7 @@
 				"wwt_mass_slu_land",
 				"wwt_mass_slu_stock",
 				"wwt_temp_inc",
-			]
+			],
 		};
 	</script>
 	<style>
@@ -69,19 +83,55 @@
 <hr>
 <b><u>Detailed equations for input estimations:</u></b>
 
-<h3>1. Estimations performed when the main treatment type is chosen</h3>
+<h3>1. Estimations performed when answering biogas questions (produced and valorised)</h3>
+<ul>
+	<li class=estimation>
+		<script>showVarName('wwt_biog_pro')</script>
+		<p> If answer is "yes": </p>
+		<code>
+			wwt_biog_pro = ww_serv_pop * wwc_bod_pday * ct_bod_kg * ct_biog_g * Days / 1000
+		</code>
+		<p>If answer is "no":</p>
+		<code>
+			wwt_biog_pro = 0
+		</code>
+		where,
+		<ul>
+			<li><script>showVarName('ww_serv_pop')</script>
+			<li><script>showVarName('wwc_bod_pday')</script>
+			<li><script>showVarName('ct_bod_kg')</script>
+			<li><script>showVarName('ct_biog_g')</script>
+			<li><script>showVarName('Days')</script>
+			<li>1000: L to m3
+		</ul>
+	</li>
+	<li class=estimation>
+		<script>showVarName('wwt_ch4_biog')</script>
+		<p>A default value of 59% is assumed for wwt_ch4_biog:</p>
+		<code>
+			wwt_ch4_biog = 59
+		</code>
+	</li>
+	<li class=estimation>
+		<script>showVarName('wwt_biog_val')</script>
+		<p> If answer is "yes": </p>
+		<code>
+			wwt_biog_val = ww_biog_pro
+		</code>
+		<p>If answer is "no":</p>
+		<code>
+			wwt_biog_val = 0
+		</code>
+	</li>
+</ul>
+
+<h3>2. Estimations performed when the main treatment type is chosen</h3>
 <ul>
 	<li class=estimation>
 		<script>showVarName('wwt_bod_infl')</script>
 		<code>
 			wwt_bod_infl = wwc_bod_pday / 1000 · ww_serv_pop · Days
 		</code>
-		where,
-		<ul>
-			<li><script>showVarName('wwc_bod_pday')</script>
-			<li><script>showVarName('ww_serv_pop')</script>
-			<li><script>showVarName('Days')</script>
-		</ul>
 	</li>
 
 	<li class=estimation>
@@ -121,18 +171,16 @@
 
 	<li class=estimation>
 		<script>showVarName('wwt_ch4_efac')</script>
-		<div>
-			This variable is set from the above table
-		</div>
+		<p> This variable is set from the above table </p>
 	</li>
 </ul>
 
-<h3>2. Estimations performed when the sludge disposal method is chosen</h3>
+<h3>3. Estimations performed when the sludge disposal method is chosen</h3>
 <ul>
 	<li class=estimation>
 		<script>showVarName('wwt_mass_slu')</script>
 		<code>
-			wwt_mass_slu = 0.55 · wwc_bod_pday · ww_serv_pop · (1-0.1) · 1e-3 · 1.176 · Days;
+			wwt_mass_slu = 0.55 · wwc_bod_pday · ww_serv_pop · (1-0.1) · 1e-3 · 1.176 · Days
 		</code>
 		where,
 		<ul>
@@ -142,9 +190,9 @@
 			<li>1.176: Conversion factor, ratio of total suspended solids to volatile suspended solids (g TSS/ g VSS )in typical activated sludge per Metcalf and Eddy (2003).  
 			<li>Days: Assessment period in days
 		</ul>
-		if we are producing biogas, we add a 0.6 factor:
+		<p>if we are producing biogas, we add a 0.6 factor:</p>
 		<code>
-			wwt_mass_slu = 0.6 · 0.55 · wwc_bod_pday · ww_serv_pop · (1-0.1) · 1e-3 · 1.176 · Days;
+			wwt_mass_slu = 0.6 · 0.55 · wwc_bod_pday · ww_serv_pop · (1-0.1) · 1e-3 · 1.176 · Days
 		</code>
 	</li>
 	<li class=estimation>
@@ -154,7 +202,7 @@
 		</code>
 	</li>
 	<li class=estimation>
-		Depending on the sludge disposal method, the corresponding variable is set equal to wwt_dryw_slu:
+		<p>Depending on the sludge disposal method, the corresponding variable is set equal to wwt_dryw_slu:</p>
 		<table>
 			<tr><th>Sludge disposal method chosen<th>Estimation
 			<tr><td> Composting      </td> <td><code>wwt_mass_slu_comp  = wwt_dry_slu </code>
@@ -176,6 +224,7 @@
 </ul>
 
 </div>
+
 
 <!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

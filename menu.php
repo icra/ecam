@@ -9,7 +9,7 @@
 	</style>
 
 	<!--new-->
-	<button class="button add" onclick=newSystem()>
+	<button class="button add" onclick=newSystem() style=margin-left:0>
 		<?php write('#new')?>
 	</button>
 
@@ -22,8 +22,7 @@
 	</button>
 
 	<?php
-		if(isset($_COOKIE['GLOBAL']))
-		{ 
+		if(isset($_COOKIE['GLOBAL'])) { 
 			?>
 			<!--SAVE-->
 			<button class="button save" onclick=saveToFile()>

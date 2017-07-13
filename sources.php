@@ -303,7 +303,7 @@
 					<br>
 					(kg CO2 eq)
 				</th>
-				<td>From Uncollected wastewater
+				<td>From Uncollected wastewater (<a href=variable.php?id=wwc_SL_ghg_unc>wwc_SL_ghg_unc</a>)
 				<td field=wwc_SL_ghg_unc>
 					<script>
 						document.write(format(Global.Waste.Collection.wwc_SL_ghg_unc()))
@@ -311,7 +311,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>From Onsite treatment
+				<td>From Onsite treatment (<a href=variable.php?id=wwc_SL_ghg_ons>wwc_SL_ghg_ons</a>)
 				<td field=wwc_SL_ghg_ons>
 					<script>
 						document.write(format(Global.Waste.Collection.wwc_SL_ghg_ons()))

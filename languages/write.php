@@ -37,7 +37,12 @@ function write($id)
 	{ 
 		?>
 		<script><?php echo "var lang=$lang_file;" ?></script>
-		<script>function translate(id){return lang['#'+id]||"<span style=background:yellow>#"+id+" undefined</span>";}</script>
+		<script>
+			function translate(id){
+				return lang['#'+id] || false;
+				//"<span style=background:yellow>#"+id+" undefined</span>";
+			}
+		</script>
 		<?php 
 	}
 	else 

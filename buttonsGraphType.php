@@ -12,8 +12,7 @@
 
 <script>
 	/** make pressed button look active*/
-	function buttonsGraph(button)
-	{
+	function buttonsGraph(button) {
 		var isActive=button.classList.contains('active');
 		var others=document.querySelectorAll("div.buttonsGraph button")
 		for(var i=0;i<others.length;others[i++].classList.remove('active')){}
@@ -26,9 +25,31 @@
 	}
 </script>
 
+<?php
+	function getPrefix(){ //Get wsa,wst,wsd,wwc,wwt,wwd
+		global $level, $sublevel;
+		if($sublevel) {
+				switch($sublevel){
+					case "Abstraction"  :return "wsa";break;
+					case "Distribution" :return "wsd";break;
+					case "Collection"   :return "wwc";break;
+					case "Discharge"    :return "wwd";break;
+					case "Treatment"    :
+						if($level=="Water") return "wst";
+						if($level=="Waste") return "wwt";
+						break;
+				}
+		}
+		else{
+			if($level=="Water") return "ws";
+			else if($level=="Waste") return "ww";
+		}
+		return "nothing";
+	}
+?>
+
 <div class=buttonsGraph><!--
-	--><button class="left active" onclick="buttonsGraph(this);Graphs.graph4(false,'graph')">GHG</button><!--
-	--><button class="middle"      onclick="buttonsGraph(this);Graphs.graph7(false,'graph')">Energy consumed</button><!--
-	--><button class="right"       onclick="buttonsGraph(this);document.querySelector('#graph').innerHTML='TBD'">Water efficiency</button><!--
+	--><button class="left active" onclick="buttonsGraph(this);Graphs.ghg_by_stage(false,'graph','<?php echo getPrefix()?>')">GHG</button><!--
+	--><button class="right"       onclick="buttonsGraph(this);Graphs.graph7(false,'graph')">Energy consumed</button><!--
 	-->
 </div>

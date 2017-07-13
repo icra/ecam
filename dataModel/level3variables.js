@@ -33,6 +33,10 @@ Level3.list=[
 	"wsd_KPI_GHG_fuel_co2",
 	"wsd_KPI_GHG_fuel_n2o",
 	"wsd_KPI_GHG_fuel_ch4",
+	"wsd_KPI_GHG_trck_co2",
+	"wsd_KPI_GHG_trck_n2o",
+	"wsd_KPI_GHG_trck_ch4",
+
 	"wsd_KPI_nrg_efficien",
 	"wsd_KPI_nrg_topgraph",
 	"wsd_KPI_std_nrg_cons",
@@ -73,6 +77,11 @@ Level3.list=[
 	"wwt_KPI_GHG_fuel_co2",
 	"wwt_KPI_GHG_fuel_n2o",
 	"wwt_KPI_GHG_fuel_ch4",
+	"wwt_KPI_GHG_tre_ch4",
+	"wwt_KPI_GHG_tre_n2o",
+	"wwt_KPI_GHG_dig_fuel_co2",
+	"wwt_KPI_GHG_dig_fuel_n2o",
+	"wwt_KPI_GHG_dig_fuel_ch4",
 	"wwt_KPI_nrg_per_pump",
 	"wwt_KPI_std_nrg_cons",
 	"wwt_KPI_nrg_biogas",
@@ -98,12 +107,18 @@ Level3.list=[
 	"wwt_KPI_ghg_land_co2eq",
 	"wwt_KPI_ghg_stock_co2eq",
 	"wwt_KPI_ghg_tsludge",
+	"wwt_KPI_ghg_tsludge_co2",
+	"wwt_KPI_ghg_tsludge_n2o",
+	"wwt_KPI_ghg_tsludge_ch4",
 	"wwt_type_tre",
 
 	//wwd
 	"wwd_KPI_GHG_fuel_co2",
 	"wwd_KPI_GHG_fuel_n2o",
 	"wwd_KPI_GHG_fuel_ch4",
+	"wwd_KPI_GHG_trck_co2",
+	"wwd_KPI_GHG_trck_n2o",
+	"wwd_KPI_GHG_trck_ch4",
 	"wwd_KPI_std_nrg_cons",
 	"wwd_reus_typ",//hidden
 	"wwd_main_len",//hidden

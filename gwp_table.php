@@ -4,7 +4,10 @@
 		#info td:nth-child(n+2) {
 			text-align:right;
 		}
-		tr.selected {
+		#info td:nth-child(5) {
+			text-align:left;
+		}
+		#info tr.selected {
 			background:yellow;
 		}
 	</style>
@@ -25,7 +28,7 @@
 		<th>CO<sub>2</sub> (CO<sub>2</sub> equivalents)
 		<th>CH<sub>4</sub> (CO<sub>2</sub> equivalents)
 		<th>N<sub>2</sub>O (CO<sub>2</sub> equivalents)
-		<th>Comment
+		<th>Comments
 </table>
 
 <script>
