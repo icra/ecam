@@ -371,4 +371,5 @@ var Info = {
 	unfccc_5B  :{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	unfccc_5C  :{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	unfccc_5D  :{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+
 }

@@ -27,6 +27,7 @@
 <script src="dataModel/tips.js"></script>
 <script src="dataModel/countries.js"></script>
 <script src="dataModel/gwp_reports.js"></script>
+<script src="dataModel/estimations.js"></script>
 <script src="js/cookies.js"></script>
 <script src="js/updateGlobalFromCookies.js"></script>
 <script src="utils.js"></script>

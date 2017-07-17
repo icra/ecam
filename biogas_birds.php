@@ -15,6 +15,7 @@
 </tr>
 
 <script>
+	//estimations hand coded
 	BEV.updateProducingBiogas=function(newValue){
 		if(newValue){
 			//Estimation for "producing_biogas" and "not valorizing biogas"

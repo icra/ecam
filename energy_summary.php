@@ -6,12 +6,17 @@
 			findCriticGHG();
 			Caption.listeners();
 			updateResult();
+			drawCharts();
 
 			//onclick listeners for substage counters: link to substages.php
 			var tds=document.querySelectorAll('td.ss');
 			for(var i=0;i<tds.length;i++){
 				tds[i].onclick=function(){window.location='substages.php'}
 			}
+		}
+
+		function drawCharts() {
+			Graphs.graph5(false,'graph');
 		}
 
 		function calculateGHG() {
@@ -105,7 +110,7 @@
 			box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
 		}
 	</style>
-</head><body onload=init()><center>
+</head><body><center>
 <?php 
 	include'sidebar.php';
 	include'navbar.php';
@@ -243,6 +248,16 @@
 			}
 		</style>
 	</div>
+
+	<!--graph-->
+	<div style="border-top:1px solid #ccc"></div>
+	<div id=graph>Loading...</div>
+
 </div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
+
+<script>
+	google.charts.load('current',{'packages':['corechart','gauge','bar']});
+	google.charts.setOnLoadCallback(init)
+</script>

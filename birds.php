@@ -68,7 +68,7 @@
 		}
 
 		function drawCharts() {
-			Graphs.ghgSources(false,'graph1');
+			Graphs.ghg_by_source(false,'graph1');
 			Graphs.graph2(false,'graph2');
 			Graphs.ws_cost('graph3');
 			Graphs.ww_cost('graph4');
@@ -308,8 +308,11 @@
 
 					<tr stage=water class=hidden><td>Energy consumed from the grid<td class=output><input id='ws_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
 					<tr stage=water class=hidden><td>Volume of fuel consumed<td class=output><input id='ws_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
-					<tr stage=water class=hidden> <td>Total water abstracted <td class=input><input id='wsa_vol_conv' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
-					<tr stage=water class=hidden><td><?php write('#birds_ws_vol_auth')?> <td class=input><input id='wsd_auth_con' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
+
+					<tr stage=water class=hidden> <td><?php write('#wsd_vol_dist_descr')?><td class=input><input id='wsd_vol_dist' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
+					<tr stage=water class=hidden><td><?php write('#wsd_auth_con_descr')?> <td class=input><input id='wsd_auth_con' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
+					<tr stage=water class=hidden><td><?php write('#wsd_bill_con_descr')?> <td class=input><input id='wsd_bill_con' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
+
 					<tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
 					<tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost' onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
 					<tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
@@ -332,7 +335,7 @@
 					</span>
 
 					<!--energy consumed from the grid-->
-					<tr stage=waste class=hidden><td>Energy consumed from the grid<td class=output><input id='ww_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_nrg_cons'].unit)</script>
+					<tr stage=waste class=hidden><td><?php write('#ww_nrg_cons_descr') ?><td class=output><input id='ww_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_nrg_cons'].unit)</script>
 
 					<!--volume of fuel consumed-->
 					<tr stage=waste class=hidden><td>Volume of fuel consumed<td class=output><input id='ww_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_vol_fuel'].unit)</script>
@@ -466,32 +469,31 @@
 					<ul>
 						<li> <a href='estimations.php'>Summary of estimations at this level</a> </li>
 						<li> <a href='non_revenue_water.php'>About non revenue water</a> </li>
+						<li> <a href='authorized_consumption.php'>About authorized consumption</a> </li>
 						<li> <a href='fuelInfo.php'>About fuel types</a> </li>
 					</ul>
 				</div>
 				<script>
 					(function(){
 						//hide inactive graphs
-						if(Global.Configuration.ActiveStages.water==0)
-						{
+						if(Global.Configuration.ActiveStages.water==0) {
 							document.querySelector("#graph3").style.display="none"
 							document.querySelector("#graph5").style.display="none"
 							document.querySelector("#graph7").style.display="none"
 							document.querySelector("#graph8").style.display="none"
 						}
-						if(Global.Configuration.ActiveStages.waste==0)
-						{
+						if(Global.Configuration.ActiveStages.waste==0) {
 							document.querySelector("#graph4").style.display="none"
 							document.querySelector("#graph6").style.display="none"
 						}
 					})();
 				</script>
 			</div>
-			<script>
-				google.charts.load('current',{'packages':['corechart','gauge','bar']});
-				google.charts.setOnLoadCallback(init)
-			</script>
 		</div>
 	</div>
 </div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
+<script>
+	google.charts.load('current',{'packages':['corechart','gauge','bar']});
+	google.charts.setOnLoadCallback(init)
+</script>

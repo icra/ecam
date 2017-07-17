@@ -7,12 +7,19 @@
 			Caption.listeners();
 			addDetailedListeners();
 			updateResult();
+			drawCharts();
 
 			//onclick listeners for substage counters: link to substages.php
 			var tds=document.querySelectorAll('td.ss');
 			for(var i=0;i<tds.length;i++) {
 				tds[i].onclick=function(){window.location='substages.php'}
 			}
+
+
+		}
+
+		function drawCharts() {
+			Graphs.graph1(false,'graph');
 		}
 
 		function calculateGHG() {
@@ -134,7 +141,7 @@
 			box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
 		}
 	</style>
-</head><body onload=init()><center>
+</head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--navbar--> <?php include'navbar.php'?>
 <!--linear--> <?php include'linear.php'?>
@@ -323,6 +330,18 @@
 			table#outside td[field] {text-align:right}
 		</style>
 	</div>
+
+	<div style="border-top:1px solid #ccc"></div>
+
+	<!--graph-->
+	<div id=graph>Loading...</div>
+
 </div>
 
+
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
+
+<script>
+	google.charts.load('current',{'packages':['corechart','gauge','bar']});
+	google.charts.setOnLoadCallback(init)
+</script>

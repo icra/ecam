@@ -12,8 +12,7 @@
 	/*mass of sludge (kg) estimated (Global)*/
 	//For example if we have incineration selected:
 	//wwt_mass_slu_inc = dry weight estimation
-	function sludge_estimation() 
-	{
+	function sludge_estimation() {
 		//method picked
 		var method=document.querySelector('#sludge_estimation').value;
 

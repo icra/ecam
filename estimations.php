@@ -9,7 +9,8 @@
 			}
 			else{ //normal variable
 				document.write("<a href=variable.php?id="+code+">"+code+"</a> : "+translate(code+'_descr'))
-				document.write(" ("+Info[code].unit+")")
+				document.write(" ("+Info[code].unit+") ")
+				document.write("(<a href=variable.php?id=estm_"+code+">estm_"+code+"</a>)")
 			}
 		}
 		var EstimatedInputs = {
@@ -116,7 +117,7 @@
 		<script>showVarName('wwt_biog_val')</script>
 		<p> If answer is "yes": </p>
 		<code>
-			wwt_biog_val = ww_biog_pro
+			wwt_biog_val = wwt_biog_pro
 		</code>
 		<p>If answer is "no":</p>
 		<code>
@@ -158,8 +159,7 @@
 			</tr>
 			<script>
 				(function(){
-					for(var type in Tables.wwt_type_tre)
-					{
+					for(var type in Tables.wwt_type_tre) {
 						document.write("<tr><td>"+type);
 						document.write("<td align=right>"+100*Tables.wwt_type_tre[type].bod_rmvd_as_sludge_estm);
 						document.write("<td align=right>"+Tables.wwt_type_tre[type].ch4_efac);

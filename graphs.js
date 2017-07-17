@@ -73,11 +73,11 @@ Graphs.graph1=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=left   onclick=Graphs.graph1("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+			"<button class=left   onclick=Graphs.graph1("+(!withTable).toString()+",'"+container+"')>Table</button>"+
 			"<button class=middle onclick=Graphs.graph1("+withTable.toString()+",'"+container+"') disabled>System</button>"+
 			"<button class=middle onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>Source</button>"+
 			"<button class=middle onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>Source (detailed)</button>"+
-			"<button class=right  onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC</button>"+
+			"<button class=right  onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC categories</button>"+
 		"";
 	})();
 
@@ -96,6 +96,7 @@ Graphs.graph1=function(withTable,container) {
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
 	}
+	scrollToItem(container)
 }
 
 //GHG 'By source' (non-detailed: elec,co2,n2o,ch4)
@@ -220,11 +221,11 @@ Graphs.ghg_by_source=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=left    onclick=Graphs.ghg_by_source("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+			"<button class=left    onclick=Graphs.ghg_by_source("+(!withTable).toString()+",'"+container+"')>Table</button>"+
 			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>System</button>"+
 			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"') disabled>Source</button>"+
 			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>Source (detailed)</button>"+
-			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC</button>"+
+			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC categories</button>"+
 		"";
 	})();
 
@@ -245,6 +246,7 @@ Graphs.ghg_by_source=function(withTable,container) {
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
 	}
+	scrollToItem(container)
 }
 
 //GHG 'By source (detailed)'
@@ -362,11 +364,11 @@ Graphs.ghgSources=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=left    onclick=Graphs.ghgSources("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+			"<button class=left    onclick=Graphs.ghgSources("+(!withTable).toString()+",'"+container+"')>Table</button>"+
 			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>System</button>"+
 			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>Source</button>"+
 			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"') disabled>Source (detailed)</button>"+
-			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC</button>"+
+			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC categories</button>"+
 		"";
 	})();
 
@@ -420,9 +422,10 @@ Graphs.ghgSources=function(withTable,container) {
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
 	}
+	scrollToItem(container)
 }
 
-//GHG UNFCCC
+//GHG UNFCCC categories
 Graphs.unfccc=function(withTable,container){
 	withTable=withTable||false;
 	container=container||"graph";
@@ -467,11 +470,11 @@ Graphs.unfccc=function(withTable,container){
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=left    onclick=Graphs.unfccc("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+			"<button class=left    onclick=Graphs.unfccc("+(!withTable).toString()+",'"+container+"')>Table</button>"+
 			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>System</button>"+
 			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>Source</button>"+
 			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>Source (detailed)</button>"+
-			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"') disabled>UNFCCC</button>"+
+			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"') disabled>UNFCCC categories</button>"+
 		"";
 	})();
 
@@ -494,6 +497,7 @@ Graphs.unfccc=function(withTable,container){
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
 	}
+	scrollToItem(container)
 }
 
 //GHG one stage only: (wsa,wst,wsd,wwc,wwt,wwd)
@@ -579,7 +583,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button onclick=Graphs.ghg_by_stage("+(!withTable).toString()+",'"+container+"','"+prefix+"')>Show/Hide table</button>"+
+			"<button onclick=Graphs.ghg_by_stage("+(!withTable).toString()+",'"+container+"','"+prefix+"')>Table</button>"+
 		"";
 	})();
 
@@ -601,6 +605,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
 	}
+	scrollToItem(container)
 }
 
 //GHG 'By stage' (all stages)
@@ -642,13 +647,11 @@ Graphs.graph4=function(withTable,container) {
 	]);
 
 	//options
-	var options= 
-	{ 
+	var options={ 
 		height:250,
 		legend:{position:'left'},
 		title:"GHG emissions ("+format(sum)+" kg CO2) [By stage]",
-		slices:
-		{
+		slices:{
 			0:{color:ColorsGHG.ws_KPI_GHG_elec      },
 			1:{color:ColorsGHG.ws_KPI_GHG_ne        },
 			2:{color:ColorsGHG.ww_KPI_GHG_elec      },
@@ -680,7 +683,7 @@ Graphs.graph4=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button onclick=Graphs.graph4("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+			"<button onclick=Graphs.graph4("+(!withTable).toString()+",'"+container+"')>Table</button>"+
 		"";
 	})();
 
@@ -703,6 +706,7 @@ Graphs.graph4=function(withTable,container) {
 		div.style.fontSize="10px";
 		div.innerHTML=table;
 	}
+	scrollToItem(container)
 }
 
 //NRG global
@@ -760,7 +764,7 @@ Graphs.graph2=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button onclick=Graphs.graph2("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+			"<button onclick=Graphs.graph2("+(!withTable).toString()+",'"+container+"')>Table</button>"+
 		"";
 	})();
 
@@ -779,6 +783,8 @@ Graphs.graph2=function(withTable,container) {
 		document.getElementById(container).appendChild(div);
 		div.innerHTML=table;
 	}
+	scrollToItem(container);
+
 }
 
 //NRG by stage
@@ -844,7 +850,7 @@ Graphs.graph5=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=left   onclick=Graphs.graph5("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+			"<button class=left   onclick=Graphs.graph5("+(!withTable).toString()+",'"+container+"')>Table</button>"+
 			"<button class=middle onclick=Graphs.graph5("+withTable.toString()+",'"+container+"') disabled>Stage</button>"+
 			"<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"')>Substage</button>"+
 		"";
@@ -871,6 +877,7 @@ Graphs.graph5=function(withTable,container) {
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
 	}
+	scrollToItem(container)
 }
 
 //NRG by substage
@@ -957,7 +964,7 @@ Graphs.graph7=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=left   onclick=Graphs.graph7("+(!withTable).toString()+",'"+container+"')>Show/Hide table</button>"+
+			"<button class=left   onclick=Graphs.graph7("+(!withTable).toString()+",'"+container+"')>Table</button>"+
 			"<button class=middle onclick=Graphs.graph5("+withTable.toString()+",'"+container+"')>Stage</button>"+
 			"<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"') disabled>Substage</button>"+
 		"";
@@ -996,6 +1003,7 @@ Graphs.graph7=function(withTable,container) {
 		div.innerHTML=table;
 		document.getElementById(container).appendChild(div);
 	}
+	scrollToItem(container)
 }
 
 //BAR GRAPHS
@@ -1059,8 +1067,7 @@ Graphs.graph3a=function(withTable,container) {
 	var yy=translate('years');
 
 	//tables
-	if(withTable)
-	{
+	if(withTable) {
 		//create a table string
 		var table=""+
 		"<button onclick=Graphs.graph3a(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
@@ -1111,6 +1118,8 @@ Graphs.sankey=function(withTable,container) {
 		['wsa', 'wst', flow_1||1],
 		['wst', 'wsd', flow_2||1],
 		['wsd', 'usr', flow_3||1],
+		['usr', 'billed consumption', Global.Water.Distribution.wsd_bill_con],
+		['usr', 'non revenue water', Global.Water.Distribution.wsd_vol_dist-Global.Water.Distribution.wsd_bill_con],
 		//ww flows
 		['wwc', 'wwt', flow_4||1],
 		['wwt', 'wwd', flow_5||1],

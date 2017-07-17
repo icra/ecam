@@ -80,7 +80,6 @@
 		<style> 
 			#tasks ul {font-family:monospace;padding-left:1em;}
 			#tasks ul li ul li {padding:0.3em 0;border-radius:0.5em;}
-			#tasks ul li ul li:hover {background:#ede13d;}
 		</style>
 		<h3>Tasks/Bugs/Ideas/Requests 
 			<br> 
