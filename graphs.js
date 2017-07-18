@@ -507,8 +507,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 	prefix=prefix||"wsa"; //first 3 letters [wsa,wst,wsd,wwc,wwt,wwd]
 
 	//check if prefix is correct
-	if(-1==['wsa','wst','wsd','wwc','wwt','wwd'].indexOf(prefix)) 
-	{
+	if(-1==['wsa','wst','wsd','wwc','wwt','wwd'].indexOf(prefix)) {
 		document.getElementById(container).innerHTML="not available for this stage";
 		return //if prefix is not in this list, stop
 	}
@@ -583,7 +582,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button onclick=Graphs.ghg_by_stage("+(!withTable).toString()+",'"+container+"','"+prefix+"')>Table</button>"+
+			"<button class=single onclick=Graphs.ghg_by_stage("+(!withTable).toString()+",'"+container+"','"+prefix+"')>Table</button>"+
 		"";
 	})();
 
@@ -728,14 +727,12 @@ Graphs.graph2=function(withTable,container) {
 	]);
 
 	//options
-	var options= 
-	{ 
+	var options={ 
 		height:250,
 		legend:{position:'left'},
 		pieHole:0.4,
 		title:""+translate('graphs_graph2')+" ("+format(ws+ww)+" kWh)",
-		slices:
-		{
+		slices:{
 			0:{ color: '#0aaeef' },
 			1:{ color: '#d71d24' },
 		},
@@ -764,7 +761,7 @@ Graphs.graph2=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button onclick=Graphs.graph2("+(!withTable).toString()+",'"+container+"')>Table</button>"+
+			"<button class=single onclick=Graphs.graph2("+(!withTable).toString()+",'"+container+"')>Table</button>"+
 		"";
 	})();
 

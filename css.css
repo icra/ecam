@@ -212,5 +212,6 @@ span.circle {
 	div.tab_buttons button.left   { border-radius:0.5em 0.0em 0.0em 0.5em; border-right-style:none}
 	div.tab_buttons button.right  { border-radius:0.0em 0.5em 0.5em 0.0em; }
 	div.tab_buttons button.middle { border-right-style:none}
+	div.tab_buttons button.single { border-radius:0.5em}
 	div.tab_buttons button[disabled] { background-color:#ccc;box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05);}
 /*tab buttons*/
