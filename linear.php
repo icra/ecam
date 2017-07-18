@@ -81,6 +81,13 @@
 		<img class=l1 stage=sources src=img/sources.png onclick=window.location="sources.php"            caption="GHG Summary">
 		<img class=l1 stage=energy  src=img/energy.png  onclick=window.location="energy_summary.php"     caption="Energy Summary"> 
 	</div>
+
+	<div 
+		style=cursor:pointer
+		onclick=window.location="opps.php">
+		<div><a href=opps.php style="color:inherit">Opportunities</a></div>
+		<img class=l1 stage=gets src=img/opps.png caption="Opportunities">
+	</div>
 </div>
 
 <script>
@@ -89,17 +96,14 @@
 		//only if currently we are in edit.php or level3.php
 		if(strpos($_SERVER['PHP_SELF'],"edit.php") || strpos($_SERVER['PHP_SELF'],"level3.php"))
 		{ ?>
-			(function()
-			{
+			(function() {
 				//we need to find level and sublevel to create a stage name i.e. "waterAbs"
 				var level    = '<?php echo $level?>';
 				var sublevel = '<?php echo $sublevel?>';
 				var stage=false;
-				switch(level)
-				{
+				switch(level) {
 					case "Water":
-						switch(sublevel)
-						{
+						switch(sublevel) {
 							case "Abstraction":stage="waterAbs";break;
 							case "Treatment":stage="waterTre";break;
 							case "Distribution":stage="waterDis";break;
@@ -107,8 +111,7 @@
 						break;
 
 					case "Waste":
-						switch(sublevel)
-						{
+						switch(sublevel) {
 							case "Collection":stage="wasteCol";break;
 							case "Treatment":stage="wasteTre";break;
 							case "Discharge":stage="wasteDis";break;

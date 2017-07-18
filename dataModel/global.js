@@ -453,7 +453,7 @@ var Global={
 				  return 0
 				}
 			},
-			wwt_slu_composting_n2o:function(){return this.wwt_mass_slu_comp*0.03*0.015*1.57*Cts.ct_n2o_eq.value},
+			wwt_slu_composting_n2o:function(){return this.wwt_mass_slu_comp*0.03*0.015*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value},
 			wwt_KPI_ghg_comp_co2eq:function(){return this.wwt_slu_composting_ch4()+this.wwt_slu_composting_n2o()},
 			//incineration
 			wwt_mass_slu_inc:0,
@@ -464,7 +464,7 @@ var Global={
 				  return 0 //<br>
 				}//<br>
 				else{//<br>
-				  return 0.03*this.wwt_mass_slu_inc*(161.3-0.14*Math.max(1023,this.wwt_temp_inc))*0.01*(Cts.ct_n2o_co.value)*Cts.ct_n2o_eq.value //<br>
+				  return 0.03*this.wwt_mass_slu_inc*(161.3-0.14*Math.max(1023,this.wwt_temp_inc))*0.01*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
 				}//<br>
 			},
 			wwt_KPI_ghg_inc_co2eq:function(){return this.wwt_slu_inciner_ch4()+this.wwt_slu_inciner_n2o()},
@@ -508,11 +508,11 @@ var Global={
 				{//<br>
 					if(sludge_type=="Non-digested")//<br>
 					{ 
-						return this.wwt_mass_slu_land*0.03*0.015*(Cts.ct_n2o_co.value)*Cts.ct_n2o_eq.value //<br>
+						return this.wwt_mass_slu_land*0.03*0.015*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
 					}//<br>
 					if(sludge_type=="Digested")//<br>
 					{
-						return this.wwt_mass_slu_land*0.04*0.015*(Cts.ct_n2o_co.value)*Cts.ct_n2o_eq.value //<br>
+						return this.wwt_mass_slu_land*0.04*0.015*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
 					}//<br>
 				}
 			},
