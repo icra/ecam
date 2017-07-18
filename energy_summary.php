@@ -6,17 +6,12 @@
 			findCriticGHG();
 			Caption.listeners();
 			updateResult();
-			drawCharts();
 
 			//onclick listeners for substage counters: link to substages.php
 			var tds=document.querySelectorAll('td.ss');
 			for(var i=0;i<tds.length;i++){
 				tds[i].onclick=function(){window.location='substages.php'}
 			}
-		}
-
-		function drawCharts() {
-			Graphs.graph5(false,'graph');
 		}
 
 		function calculateGHG() {
@@ -100,7 +95,6 @@
 			element.previousSibling.previousSibling.classList.add('critic');
 			element.previousSibling.previousSibling.setAttribute('caption',element.getAttribute('cap'));
 		}
-
 	</script>
 	<style>
 		#sources td.ss {text-align:center;cursor:pointer} /*substages counter*/
@@ -110,7 +104,7 @@
 			box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
 		}
 	</style>
-</head><body><center>
+</head><body onload=init()><center>
 <?php 
 	include'sidebar.php';
 	include'navbar.php';
@@ -132,8 +126,30 @@
 
 <!--content-->
 <div style=width:66%;>
-	<!--stages-->
-	<div>
+
+	<!--tab buttons-->
+	<div class=tab_buttons>
+		<button class=left onclick="tabs_show_tables()" disabled>Tables</button>
+		<button class=right onclick="tabs_show_graphs()">Graphs</button>
+		<script>
+			function tabs_show_graphs(){
+				document.getElementById('tables').style.display='none'
+				document.getElementById('graph').style.display=''
+				Graphs.graph5(false,'graph');
+				document.querySelector('div.tab_buttons button.right').setAttribute('disabled',true)
+				document.querySelector('div.tab_buttons button.left').removeAttribute('disabled')
+			}
+			function tabs_show_tables(){
+				document.getElementById('tables').style.display=''
+				document.getElementById('graph').style.display='none'
+				document.querySelector('div.tab_buttons button.right').removeAttribute('disabled')
+				document.querySelector('div.tab_buttons button.left').setAttribute('disabled',true)
+			}
+		</script>
+	</div>
+
+	<!--tables: left tab-->
+	<div id=tables>
 		<div>
 			<table id=sources>
 				<tr><td colspan=5 style=text-align:center>
@@ -149,7 +165,7 @@
 						<span class=circle style=background:orange></span> 
 						highest energy consumption
 					</span>
-				<tr><th rowspan=9 style="font-weight:bold;background:lightgreen;color:black">TOTAL ENERGY CONSUMED<br><br><span field=TotalNRG>0</span>
+				<tr><th rowspan=9 style="font-weight:bold;background:lightgreen;color:black">TOTAL ENERGY CONSUMED<br><br><span field=TotalNRG>Loading...</span>
 
 				<th rowspan=3>
 					<a href="edit.php?level=Water" style=color:white>
@@ -158,22 +174,22 @@
 						document.write(Global.Water.ws_serv_pop)
 						</script> people)
 					</a>
-					<br><br><span field=ws_nrg_cons>0</span>
+					<br><br><span field=ws_nrg_cons>Loading...</span>
 				</th>
 					<!--wsa-->
 					<td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'>Abstraction </a> 
 						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Abstraction.length)</script> 
-						<td field=wsa_nrg_cons level=Water sublevel=Abstraction>0
+						<td field=wsa_nrg_cons level=Water sublevel=Abstraction>Loading...
 
 					<!--wst-->
 					<tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'>Treatment   </a> 
 						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Treatment.length)</script> 
-						<td field=wst_nrg_cons level=Water sublevel=Treatment>0
+						<td field=wst_nrg_cons level=Water sublevel=Treatment>Loading...
 
 					<!--wsd-->
 					<tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'>Distribution</a> 
 						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Distribution.length)</script> 
-						<td field=wsd_nrg_cons level=Water sublevel=Distribution>0
+						<td field=wsd_nrg_cons level=Water sublevel=Distribution>Loading...
 
 				<tr>
 				
@@ -184,23 +200,23 @@
 						document.write(Global.Waste.ww_serv_pop)
 						</script> people)
 					</a>
-					<br><br><span field=ww_nrg_cons>0</span>
+					<br><br><span field=ww_nrg_cons>Loading...</span>
 				</th>
 
 					<!--wwc-->
 					<td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'>Collection</a> 
 						<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Collection.length)</script>
-						<td field=wwc_nrg_cons level=Waste sublevel=Collection>0
+						<td field=wwc_nrg_cons level=Waste sublevel=Collection>Loading...
 
 					<!--wwt-->
 					<tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'>Treatment </a> 
 						<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Treatment.length)</script> 
-						<td field=wwt_nrg_cons level=Waste sublevel=Treatment>0
+						<td field=wwt_nrg_cons level=Waste sublevel=Treatment>Loading...
 
 					<!--wwd-->
 					<tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'>Discharge </a> 
 						<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Discharge.length)</script> 
-						<td field=wwd_nrg_cons level=Waste sublevel=Discharge>0
+						<td field=wwd_nrg_cons level=Waste sublevel=Discharge>Loading...
 				</tr>
 			</table>
 		</div>
@@ -227,37 +243,12 @@
 			table#sources img {vertical-align:middle;width:30px;margin-right:10px}
 		</style>
 	</div>
-	<!--Catalog of Solutions-->
-	<div class=card id=CoS style=display:none><?php cardMenu("IWA Catalogue of solutions")?>
-		<div style="text-align:left;padding:1.0em">
-		This catalogue offers inspiring water, climate and energy solutions for each stage.
-		</div>
-		<a href="http://www.iwa-network.org/water-climate-energy-solutions/public/" target=_blank>
-			IWA Catalogue of solutions
-		</a>
-		<style>
-			#CoS a{
-				display:block;
-				margin:0.5em;
-				color:white;
-				font-weight:bold;
-				border:1px solid #ccc;
-				padding:1em;
-				background:#0aaff1;
-				border-radius:0.5em;
-			}
-		</style>
-	</div>
 
-	<!--graph-->
-	<div style="border-top:1px solid #ccc"></div>
-	<div id=graph>Loading...</div>
+	<!--graph: right tab-->
+	<div id=graph style=display:none>Loading...</div>
 
 </div>
-
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
-
 <script>
 	google.charts.load('current',{'packages':['corechart','gauge','bar']});
-	google.charts.setOnLoadCallback(init)
 </script>

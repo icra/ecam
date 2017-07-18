@@ -3,37 +3,11 @@
 	<script>
 		// Opportunities: potential GHG reductions
 		var Opps = [
-			{
-				name:"Non-revenue water volume",
-			},{
-				name:"End user consumption",
-			},{
-				name:"Water reuse (to replace potable water for non-potable purposes",
-			},{
-				name:"Drinking water grid energy consumption",
-			},{
-				name:"Infiltration inflow",
-			},{
-				name:"Wastewater grid energy consumption",
-			},{
-				name:"Biogas production / recovery",
-			},{
-				name:"Sludge disposal",
-			},{
-				name:"Wastewater treatment coverage",
-			},{
-				name:"Wastewater reuse (avoid discharge to water body)",
-			},
 		];
 
 		//render opportunities table
 		function renderOpps(){
-			var t=document.getElementById('opps');
-			Opps.forEach(op=>{
-				var newRow=t.insertRow(-1);
-				//name
-				newRow.insertCell(-1).innerHTML=op.name;
-			});
+			//TODO
 		}
 
 		function init(){
@@ -44,7 +18,7 @@
 	</script>
 	<style>
 		#root #container_TotalGHG {
-			font-size:20px;
+			font-size:18px;
 		}
 	</style>
 </head><body onload=init()><center>
@@ -53,7 +27,7 @@
 	<!--navbar--><?php include'navbar.php'?>
 	<!--linear--><?php include'linear.php'?>
 <!--/includes-->
-<h1>Opportunities to reduce GHG emissions (in construction)</h1>
+<h1>Opportunities to reduce GHG emissions (in development)</h1>
 
 <div id=root>
 
@@ -68,22 +42,72 @@
 	<div>
 		<table id=opps>
 			<tr>
-				<th>Name
+				<th>Opportunities
+				<th>Related variable
 				<th>Current value
 				<th>Unit
-				<th>Related GHG emissions (kg CO2e)
-				<th>kg CO2e change per 1% change
+				<th>kg CO<sub>2</sub>e reduction <br> per 1% reduction
 			</tr>
 
-			<!--example-->
-			<tr id=wsa_>
-				<td>
-					Non revenue water volume
-				</td>
-				<td>
-				</td>
+			<!--example 1-->
+			<tr>
+				<script>
+					//name
+					document.write("<td>Reduce Non revenue water volume <td><a href=variable.php?id=wsd_SL_nr_water>wsd_SL_nr_water</a>");
+					var val=Global.Water.Distribution.wsd_SL_nr_water();
+					var unit=Info.wsd_SL_nr_water.unit;
+					//value + unit
+					document.write("<td align=right>"+format(val)+"<td>"+unit);
+					//1% change in emissions
+					var emissions = 0.01 * Global.Water.Distribution.wsd_SL_ghg_attr();
+					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
+				</script>
 			</tr>
+			<!--example 2-->
+			<tr>
+				<script>
+					//name
+					document.write("<td>Reduce End user consumption <td><a href=variable.php?id=wsd_auth_con>wsd_auth_con</a>");
+					var val=Global.Water.Distribution.wsd_auth_con;
+					var unit=Info.wsd_auth_con.unit;
+					//value + unit
+					document.write("<td align=right>"+format(val)+"<td>"+unit);
+					//1% change in emissions
+					var emissions = 0.01 * val * Global.Water.Distribution.wsd_KPI_nrg_per_m3() * Global.General.conv_kwh_co2;
+					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
+				</script>
+			</tr>
+
 		</table>
 	</div>
 </div>
+
+<ul style=text-align:left;display:inline-block;margin:auto;margin-top:10px>
+	<li>
+		Implementation fields:
+		<ul>
+			<li>name
+			<li>relatedVariable
+			<li>currentValue
+			<li>unit
+			<li>reduction
+		</ul>
+	</li>
+	<li>
+		All opportunities to be implemented
+		<ul>
+			<li>Non-revenue water volume
+			<li>End user consumption
+			<li>Water reuse (to replace potable water for non-potable purposes)
+			<li>Drinking water grid energy consumption
+			<li>Infiltration inflow
+			<li>Wastewater grid energy consumption
+			<li>Biogas production / recovery
+			<li>Sludge disposal
+			<li>Wastewater treatment coverage
+			<li>Wastewater reuse (avoid discharge to water body)
+		</ul>
+	</li>
+</ul>
+
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

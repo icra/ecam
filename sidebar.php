@@ -12,38 +12,30 @@
 		document.documentElement.onkeydown=function(e){if(e.which==27){Sidebar.hide()}};
 	</script>
 	<script>
-		var Sidebar = //Namespace
-		{
-			toggle:function()
-			{
+		var Sidebar = {
+
+			toggle:function() {
 				var element=document.querySelector('#sidebar')
-				if(element.className=="on")
-				{
+				if(element.className=="on") {
 					setCookie('sidebar',0)
 					element.className="off"
-				}
-				else
-				{
+				} else {
 					setCookie('sidebar',1)
 					element.className="on"
 				}
 			},
 
-			hide:function()
-			{
+			hide:function() {
 				var element=document.querySelector('#sidebar')
-				if(element.className=='on')
-				{
+				if(element.className=='on') {
 					this.toggle();
 				}
 			},
 
-			update: function()
-			{
+			update: function() {
 				var collection = document.querySelectorAll("#sidebar a[stage]")
 				//go over links <a stage> to deactivate the ones inactive according to user
-				for(var i=0;i<collection.length;i++)
-				{
+				for(var i=0;i<collection.length;i++) {
 					var stage = collection[i].getAttribute('stage');
 					var isActive = Global.Configuration.ActiveStages[stage];
 					if(!isActive)
@@ -60,24 +52,20 @@
 			}
 		}
 
-		function removeAllCookies()
-		{
+		function removeAllCookies() {
 			removeCookie("GLOBAL");
 		}
 
 		/** New system */
 		//simply remove cookie and default values will load
-		function newSystem()
-		{
+		function newSystem() {
 			removeAllCookies();
 			window.location="getStarted.php";
 		}
 
 		/** Generate a json/text file of the Global object */
-		function saveToFile()
-		{
-			var SavedFile = 
-			{
+		function saveToFile() {
+			var SavedFile = {
 				"Global":Global,
 				"Substages":Substages,
 			}
@@ -89,12 +77,10 @@
 		}
 
 		/** Update Global object with loaded file parsed to JSON */
-		function loadFile(evt)
-		{
+		function loadFile(evt) {
 				var file = evt.target.files[0];
 				var reader = new FileReader();
-				reader.onload=function()
-				{
+				reader.onload=function() {
 					var SavedFile = JSON.parse(reader.result);
 					copyFieldsFrom(SavedFile.Global,Global);
 					copyFieldsFrom(SavedFile.Substages,Substages);
@@ -106,8 +92,7 @@
 				}catch(e){alert(e)}
 		}
 
-		function clearSystem()
-		{
+		function clearSystem() {
 			//simply remove cookie and default values will load
 			removeAllCookies();
 			window.location='index.php';
@@ -140,7 +125,6 @@
 			</style>
 		</div>
 
-
 		<table>
 			<tr><th>Main
 			<tr><td><a href=getStarted.php><?php write('#getStarted_general_info')?></a>
@@ -160,7 +144,7 @@
 			<tr><td><a href=substages.php>All substages</a>
 			<tr><td><a href=sources.php>GHG Summary</a>
 			<tr><td><a href=energy_summary.php>Energy Summary</a>
-			<tr><td><a href=edit.php?level=UNFCCC>UNFCCC</a>
+			<tr><td><a href=edit.php?level=UNFCCC>UNFCCC categories</a>
 			<tr><td><a href=summary.php?type=input>All inputs</a>
 			<tr><td><a href=summary.php?type=output>All outputs</a>
 			<tr><td><a href=summary.php?type=ccvv>All calculated variables</a>
@@ -192,25 +176,21 @@
 			padding:0.5em;
 			">
 			<li><a href=development.php>Development</a>
-			<li><a href=graph.php?g=sankey>Sankey</a>
 		</ul>
 	</div>
 </div>
 <script>Sidebar.update()</script>
 <script>
 	//make the current page on the sidebar be highlighted
-	(function()
-	{
+	(function() {
 		<?php
 			$requri=$_SERVER['REQUEST_URI'];
 			echo "var requri='$requri';";
 		?>
 		var links=document.querySelectorAll('#sidebar a');
-		for(var i=0;i<links.length;i++)
-		{
+		for(var i=0;i<links.length;i++) {
 			var href=links[i].getAttribute('href');
-			if(encodeURIComponent(requri).search(encodeURIComponent(href)+"$")!=-1)	
-			{
+			if(encodeURIComponent(requri).search(encodeURIComponent(href)+"$")!=-1)	{
 				links[i].parentNode.classList.add('sidebar_selected');
 				links[i].style.color="black";
 				links[i].style.fontWeight="";
@@ -219,10 +199,8 @@
 		}
 	})();
 </script>
-<style> #sidebar td.sidebar_selected {background:linear-gradient(lightgreen,white,lightgreen);} </style>
 <style>
-	div#sidebar
-	{
+	div#sidebar {
 		position:absolute;
 		top:51px;
 		left:0;
@@ -236,6 +214,7 @@
 		border-top:1px solid #ccc;
 		transition:width 0.15s ease;
 	}
+	div#sidebar td.sidebar_selected {background:linear-gradient(lightgreen,white,lightgreen)} 
 	div#sidebar.off{width:0;height:0;top:0;z-index:-1}
 	div#sidebar.on{width:255px;bottom:0;}
 	div#sidebar.on  div#sidecontent{display:block}

@@ -468,6 +468,10 @@
 	"#wsd_bill_con_expla":"Volume of billed metered consumption",
 	"#wsd_SL_nr_water_descr":"Non revenue water",
 	"#wsd_SL_nr_water_expla":"Non revenue water includes: water losses + unbilled authorized consumption + billed un-metered consumption.<br> See <a href=non_revenue_water.php>non revenue water table</a>",
+
+	"#wsd_SL_ghg_attr_descr":"GHG emissions attributable to non revenue water",
+	"#wsd_SL_ghg_attr_expla":"GHG emissions attributable to non revenue water",
+
 	"#wsd_SL_water_loss_descr":"Water losses",
 	"#wsd_SL_water_loss_expla":"Water losses include: unauthorized consumption + Customer meter inaccuracies and data handling errors + leakage in transmission and distribution mains + storage leaks and overflows from water storage tanks + service connections leaks up to the meter.<br> See <a href=non_revenue_water.php>non revenue water table</a>",
 
@@ -495,6 +499,8 @@
 	"#wsd_main_len_expla":"Total transmission and distribution mains length (service connections not included), for each water distributionunit at the reference date",
 	"#wsd_KPI_nrg_per_m3_descr":"Energy consumption per authorized consumption",
 	"#wsd_KPI_nrg_per_m3_expla":"Unit energy consumption per authorized consumption in water distribution",
+	"#wsd_KPI_nrg_per_vd_descr":"Energy consumption per volume injected to distribution",
+	"#wsd_KPI_nrg_per_vd_expla":"Unit energy consumption per water injected to distribution",
 	"#wsd_SL_pres_ade_descr":"Percentage of supply pressure adequacy",
 	"#wsd_SL_pres_ade_expla":"Percentage of delivery points (one per service connection) that receive and are likely to receive adequate pressure",
 	"#wsd_SL_cont_sup_descr":"Continuity of supply",

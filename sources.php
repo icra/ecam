@@ -7,7 +7,6 @@
 			Caption.listeners();
 			addDetailedListeners();
 			updateResult();
-			drawCharts();
 
 			//onclick listeners for substage counters: link to substages.php
 			var tds=document.querySelectorAll('td.ss');
@@ -19,7 +18,6 @@
 		}
 
 		function drawCharts() {
-			Graphs.graph1(false,'graph');
 		}
 
 		function calculateGHG() {
@@ -141,7 +139,7 @@
 			box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
 		}
 	</style>
-</head><body><center>
+</head><body onload=init()><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--navbar--> <?php include'navbar.php'?>
 <!--linear--> <?php include'linear.php'?>
@@ -181,167 +179,166 @@
 
 <!--content-->
 <div style=width:66%;>
-	<!--sources of ghg-->
-	<div>
+	
+	<!--tab buttons-->
+	<div class=tab_buttons>
+		<button class=left onclick="tabs_show_tables()" disabled>Tables</button>
+		<button class=right onclick="tabs_show_graphs()">Graphs</button>
+		<script>
+			function tabs_show_graphs(){
+				document.getElementById('tables').style.display='none'
+				document.getElementById('graph').style.display=''
+				Graphs.graph4(false,'graph');
+				document.querySelector('div.tab_buttons button.right').setAttribute('disabled',true)
+				document.querySelector('div.tab_buttons button.left').removeAttribute('disabled')
+			}
+			function tabs_show_tables(){
+				document.getElementById('tables').style.display=''
+				document.getElementById('graph').style.display='none'
+				document.querySelector('div.tab_buttons button.right').removeAttribute('disabled')
+				document.querySelector('div.tab_buttons button.left').setAttribute('disabled',true)
+			}
+		</script>
+	</div>
+	
+	<!--tables: left tab-->
+	<div id=tables>
+		<!--sources of ghg-->
 		<div>
-			<table id=sources>
-				<tr><td colspan=5 style=text-align:center>
-					GHG emissions &mdash;
-					<!--select divisor-->
-					<select id=ghg_divisor onchange=init()>
-						<option value=none>Kg CO2 eq
-						<option value=years>Kg CO2 eq / Year
-						<option value=serv_pop>Kg CO2 eq / Year / Serviced population
-					</select>
-					<!--legend-->
-					<span style=float:right>
-						<span class=circle style=background:orange></span> 
-						highest emission
-					</span>
-				<tr><th rowspan=9 style="font-weight:bold;background:rgb(64,83,109);color:white">TOTAL GHG<br><br><span field=TotalGHG>0</span>
+			<div>
+				<table id=sources>
+					<tr><td colspan=5 style=text-align:center>
+						GHG emissions &mdash;
+						<!--select divisor-->
+						<select id=ghg_divisor onchange=init()>
+							<option value=none>Kg CO2 eq
+							<option value=years>Kg CO2 eq / Year
+							<option value=serv_pop>Kg CO2 eq / Year / Serviced population
+						</select>
+						<!--legend-->
+						<span style=float:right>
+							<span class=circle style=background:orange></span> 
+							highest emission
+						</span>
+					<tr><th rowspan=9 style="font-weight:bold;background:rgb(64,83,109);color:white">TOTAL GHG<br><br><span field=TotalGHG>Loading...</span>
 
-				<th rowspan=3>
-					<a href="edit.php?level=Water" style=color:white>
-						Water supply 
-						(<script> 
-						document.write(Global.Water.ws_serv_pop)
-						</script> people)
-					</a>
-					<br><br><span field=ws_KPI_GHG>0</span>
-				</th>
-					<!--wsa-->
-					<td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'>Abstraction </a> 
-						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Abstraction.length)</script> 
-						<td field=wsa_KPI_GHG level=Water sublevel=Abstraction onmouseenter=fillSources(this,event)>0
+					<th rowspan=3>
+						<a href="edit.php?level=Water" style=color:white>
+							Water supply 
+							(<script> 
+								document.write(Global.Water.ws_serv_pop)
+							</script> people)
+						</a>
+						<br><br><span field=ws_KPI_GHG>Loading...</span>
+					</th>
+						<!--wsa-->
+						<td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'>Abstraction </a> 
+							<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Abstraction.length)</script> 
+							<td field=wsa_KPI_GHG level=Water sublevel=Abstraction onmouseenter=fillSources(this,event)>Loading...
 
-					<!--wst-->
-					<tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'>Treatment   </a> 
-						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Treatment.length)</script> 
-						<td field=wst_KPI_GHG level=Water sublevel=Treatment onmouseenter=fillSources(this,event)>0
+						<!--wst-->
+						<tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'>Treatment   </a> 
+							<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Treatment.length)</script> 
+							<td field=wst_KPI_GHG level=Water sublevel=Treatment onmouseenter=fillSources(this,event)>Loading...
 
-					<!--wsd-->
-					<tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'>Distribution</a> 
-						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Distribution.length)</script> 
-						<td field=wsd_KPI_GHG level=Water sublevel=Distribution onmouseenter=fillSources(this,event)>0
+						<!--wsd-->
+						<tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'>Distribution</a> 
+							<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Distribution.length)</script> 
+							<td field=wsd_KPI_GHG level=Water sublevel=Distribution onmouseenter=fillSources(this,event)>Loading...
 
+					<tr>
+					
+					<th rowspan=3 class=red>
+						<a href="edit.php?level=Waste" style=color:white>
+							Wastewater
+							(<script> 
+								document.write(Global.Waste.ww_serv_pop)
+							</script> people)
+						</a>
+						<br><br><span field=ww_KPI_GHG>Loading...</span>
+					</th>
+
+						<!--wwc-->
+						<td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'>Collection</a> 
+							<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Collection.length)</script>
+							<td field=wwc_KPI_GHG level=Waste sublevel=Collection onmouseenter=fillSources(this,event)>Loading...
+
+						<!--wwt-->
+						<tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'>Treatment </a> 
+							<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Treatment.length)</script> 
+							<td field=wwt_KPI_GHG level=Waste sublevel=Treatment onmouseenter=fillSources(this,event)>Loading...
+
+						<!--wwd-->
+						<tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'>Discharge </a> 
+							<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Discharge.length)</script> 
+							<td field=wwd_KPI_GHG level=Waste sublevel=Discharge onmouseenter=fillSources(this,event)>Loading...
+					</tr>
+				</table>
+			</div>
+
+			<style>
+				@keyframes blink { from {background-color: white;} to {background-color: orange;} }
+				table#sources .critic {
+					color:black;
+					cursor:help;
+					font-weight:bold;
+					animation:blink 3s ease 0.5s infinite alternate;
+				}
+				#sources a {color:black;font-weight:bold}
+				table#sources td[field][value].critic:before {
+					content:'\26a0 ';
+					float:left;
+					color:red;
+				}
+				table#sources{ 
+					margin:10px 0; 
+					width:95%;
+				}
+				table#sources td {padding:1.2em 0.5em;max-width:70px}
+				table#sources td[field] {text-align:right}
+				table#sources img {vertical-align:middle;width:30px;margin-right:10px}
+			</style>
+		</div>
+
+		<!--emissions outside boundaries-->
+		<div>
+			<table id=outside style="width:95%;margin:2em 0">
 				<tr>
-				
-				<th rowspan=3 class=red>
-					<a href="edit.php?level=Waste" style=color:white>
-						Wastewater
-						(<script> 
-						document.write(Global.Waste.ww_serv_pop)
-						</script> people)
-					</a>
-					<br><br><span field=ww_KPI_GHG>0</span>
-				</th>
-
-					<!--wwc-->
-					<td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'>Collection</a> 
-						<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Collection.length)</script>
-						<td field=wwc_KPI_GHG level=Waste sublevel=Collection onmouseenter=fillSources(this,event)>0
-
-					<!--wwt-->
-					<tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'>Treatment </a> 
-						<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Treatment.length)</script> 
-						<td field=wwt_KPI_GHG level=Waste sublevel=Treatment onmouseenter=fillSources(this,event)>0
-
-					<!--wwd-->
-					<tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'>Discharge </a> 
-						<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Discharge.length)</script> 
-						<td field=wwd_KPI_GHG level=Waste sublevel=Discharge onmouseenter=fillSources(this,event)>0
+					<th rowspan=2 style=background:purple>
+						GHG emissions
+						<br>
+						outside utility boundaries 
+						<br>
+						(kg CO2 eq)
+					</th>
+					<td>From Uncollected wastewater (<a href=variable.php?id=wwc_SL_ghg_unc>wwc_SL_ghg_unc</a>)
+					<td field=wwc_SL_ghg_unc>
+						<script>
+							document.write(format(Global.Waste.Collection.wwc_SL_ghg_unc()))
+						</script>
+					</td>
+				</tr>
+				<tr>
+					<td>From Onsite treatment (<a href=variable.php?id=wwc_SL_ghg_ons>wwc_SL_ghg_ons</a>)
+					<td field=wwc_SL_ghg_ons>
+						<script>
+							document.write(format(Global.Waste.Collection.wwc_SL_ghg_ons()))
+						</script>
+					</td>
 				</tr>
 			</table>
+			<style>
+				table#outside td[field] {text-align:right}
+			</style>
 		</div>
-
-		<style>
-			@keyframes blink { from {background-color: white;} to {background-color: orange;} }
-			table#sources .critic {
-				color:black;
-				cursor:help;
-				font-weight:bold;
-				animation:blink 3s ease 0.5s infinite alternate;
-			}
-			#sources a {color:black;font-weight:bold}
-			table#sources td[field][value].critic:before {
-				content:'\26a0 ';
-				float:left;
-				color:red;
-			}
-			table#sources{ 
-				margin:10px 0; 
-				width:95%;
-			}
-			table#sources td {padding:1.2em 0.5em;max-width:70px}
-			table#sources td[field] {text-align:right}
-			table#sources img {vertical-align:middle;width:30px;margin-right:10px}
-		</style>
-	</div>
-	<!--Catalog of Solutions-->
-	<div class=card id=CoS style=display:none><?php cardMenu("IWA Catalogue of solutions")?>
-		<div style="text-align:left;padding:1.0em">
-		This catalogue offers inspiring water, climate and energy solutions for each stage.
-		</div>
-		<a href="http://www.iwa-network.org/water-climate-energy-solutions/public/" target=_blank>
-			IWA Catalogue of solutions
-		</a>
-		<style>
-			#CoS a{
-				display:block;
-				margin:0.5em;
-				color:white;
-				font-weight:bold;
-				border:1px solid #ccc;
-				padding:1em;
-				background:#0aaff1;
-				border-radius:0.5em;
-			}
-		</style>
 	</div>
 
-	<!--emissions outside boundaries-->
-	<div>
-		<table id=outside style="width:95%;margin:2em 0">
-			<tr>
-				<th rowspan=2 style=background:purple>
-					GHG emissions
-					<br>
-					outside utility boundaries 
-					<br>
-					(kg CO2 eq)
-				</th>
-				<td>From Uncollected wastewater (<a href=variable.php?id=wwc_SL_ghg_unc>wwc_SL_ghg_unc</a>)
-				<td field=wwc_SL_ghg_unc>
-					<script>
-						document.write(format(Global.Waste.Collection.wwc_SL_ghg_unc()))
-					</script>
-				</td>
-			</tr>
-			<tr>
-				<td>From Onsite treatment (<a href=variable.php?id=wwc_SL_ghg_ons>wwc_SL_ghg_ons</a>)
-				<td field=wwc_SL_ghg_ons>
-					<script>
-						document.write(format(Global.Waste.Collection.wwc_SL_ghg_ons()))
-					</script>
-				</td>
-			</tr>
-		</table>
-		<style>
-			table#outside td[field] {text-align:right}
-		</style>
-	</div>
-
-	<div style="border-top:1px solid #ccc"></div>
-
-	<!--graph-->
-	<div id=graph>Loading...</div>
+	<!--graph: right tab-->
+	<div id=graph style=display:none>Loading...</div>
 
 </div>
 
-
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
-
 <script>
 	google.charts.load('current',{'packages':['corechart','gauge','bar']});
-	google.charts.setOnLoadCallback(init)
 </script>

@@ -19,11 +19,12 @@
 
 			//set the th color to red
 			if([
-				Global.Waste,
-				Global.Waste.Collection,
-				Global.Waste.Treatment,
-				Global.Waste.Discharge
-			].indexOf(obj)+1) { 
+					Global.Waste,
+					Global.Waste.Collection,
+					Global.Waste.Treatment,
+					Global.Waste.Discharge
+				].indexOf(obj)+1
+			){ 
 				t.classList.add('ww');
 			}
 			else{
@@ -31,14 +32,15 @@
 			}
 			
 			while(t.rows.length>2){t.deleteRow(-1);}
+
 			for(var field in obj) {
 				//type of the field
 				var type=typeof(obj[field]);
 				//only this object
 				if(type=='object')continue;
+
 				//new row
 				var newRow=t.insertRow(-1);
-
 				//code
 				newRow.insertCell(-1).innerHTML=field
 				//name
@@ -46,10 +48,7 @@
 				//type
 				newRow.insertCell(-1).innerHTML=(function() {
 					if(field.search("c_")>=0) return "Calculated variable";
-					switch(type) {
-						case "number":   return "Input"; break;
-						case "function": return "Output";    break;
-					}
+					return { "number":"Input", "function":"Output", }[type];
 				})();
 
 				//value
@@ -65,22 +64,17 @@
 				})();
 
 				//formula or default value
-				newRow.insertCell(-1).innerHTML=(function()
-				{
-					switch(type)
-					{
+				newRow.insertCell(-1).innerHTML=(function() {
+					switch(type) {
 						case "number":return "--";break;;
 						case "function": 
 							var formula=obj[field].toString();
-							(function()
-							{
-								formula=Formulas.prettify(formula)
-								
-							})();
+							formula=Formulas.prettify(formula)
 							return formula;
 							break;
 					}
 				})();
+
 				//unit
 				newRow.insertCell(-1).innerHTML=Info[field].unit;
 				//description
@@ -211,7 +205,7 @@
 					})();
 
 					//unit
-					newRow.insertCell(-1).innerHTML=Info[field].unit;
+					newRow.insertCell(-1).innerHTML=Info[field] ? Info[field].unit : "";
 					//description
 					newRow.insertCell(-1).innerHTML=translate(field+'_expla');
 				}

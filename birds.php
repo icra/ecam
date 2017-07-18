@@ -471,6 +471,7 @@
 						<li> <a href='non_revenue_water.php'>About non revenue water</a> </li>
 						<li> <a href='authorized_consumption.php'>About authorized consumption</a> </li>
 						<li> <a href='fuelInfo.php'>About fuel types</a> </li>
+						<li> <a href=sankey.php>Sankey diagram</a>
 					</ul>
 				</div>
 				<script>

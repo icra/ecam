@@ -164,6 +164,7 @@ var Info = {
 	wsd_bill_con:{magnitude:"Volume",unit:"m3"},
 
 	wsd_SL_nr_water:{magnitude:"Percentage",unit:"%"},
+	wsd_SL_ghg_attr:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wsd_SL_water_loss:{magnitude:"Percentage",unit:"%"},
 
 	wsd_deli_pts:{magnitude:"Number",unit:"number"},
@@ -180,6 +181,7 @@ var Info = {
 	wsd_vol_fuel:{magnitude:"Volume",unit:"L"},
 	wsd_vol_trck:{magnitude:"Volume",unit:"L"},
 	wsd_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
+	wsd_KPI_nrg_per_vd:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
 	wsd_SL_pres_ade:{magnitude:"Percentage",unit:"%"},
 	wsd_SL_cont_sup:{magnitude:"Percentage",unit:"%"},
 	c_wsd_nrg_natu:{magnitude:"Energy",unit:"kWh"},

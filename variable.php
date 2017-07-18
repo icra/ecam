@@ -134,6 +134,19 @@
 				}
 			})();
 
+			//Is estimated somewhere?
+			if(Global.Estimations['estm_'+id]) {
+				newRow=t.insertRow(-1)
+				newCell=newRow.insertCell(-1)
+				newCell.className='th'
+				newCell.innerHTML="Is estimated?"
+				newRow.insertCell(-1).innerHTML=(function(){
+					var code='estm_'+id
+					var str="YES &rarr; <a href=variable.php?id="+code+")>"+code+"</a>: "+format(Global.Estimations[code]())
+					return str;
+				})();
+			}
+
 			//Is "id" level 3 specific?
 			if(Level3.list.indexOf(id)>-1)
 			{
@@ -145,8 +158,7 @@
 			}
 
 			//if output: show inputs involved
-			if(typeof(currentStage[id])=="function")
-			{
+			if(typeof(currentStage[id])=="function") {
 				//add a row with matched variables in formula
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
@@ -156,18 +168,15 @@
 				newCell.innerHTML=(function(){
 					var matches=Formulas.idsPerFormula(currentStage[id].toString())
 					var ret="<table id=ininv>"
-					matches.forEach(function(match)
-					{
+					matches.forEach(function(match) {
 						//means this is a constant
-						if(match.substring(0,3)=="ct_")
-						{
+						if(match.substring(0,3)=="ct_") {
 							ret+="<tr><td class=constant caption='CONSTANT: "+Cts[match].descr+"'><a href=constant.php?id="+match+">"+match+"</a><td caption='"+Cts[match].value+"'>"+format(Cts[match].value)+"<td class=unit>"+Cts[match].unit;
 						}
 						//check if its a fuel type input
-						else if(Tables[match]==Tables["Fuel types"])
-						{
+						else if(Tables[match]==Tables["Fuel types"]) {
 							var fuel=Tables.find(match,currentStage[match]);
-							ret+="<tr><td class=fuel><a href=variable.php?id="+match+">Fuel selected</a>:<td><b>"+fuel+"</b><td><a href=fuelInfo.php>(more info)</a>";
+							ret+="<tr><td class=fuel><a href=variable.php?id="+match+">"+match+" (fuel type)</a>:<td><b>"+fuel+"</b><td><a href=fuelInfo.php>(more info)</a>";
 							ret+="<tr><td class=fuel caption='Fuel density       '         >&emsp; · FD              <td>"+Tables["Fuel types"][fuel].FD             +"<td class=unit>kg/L";
 							ret+="<tr><td class=fuel caption='Net calorific value'         >&emsp; · NCV             <td>"+Tables["Fuel types"][fuel].NCV            +"<td class=unit>TJ/Gg";
 							ret+="<tr><td class=fuel caption='CO2 emission factor'         >&emsp; · EFCO2          <td>"+Tables["Fuel types"][fuel].EFCO2          +"<td class=unit>kg<sub>CO<sub>2</sub></sub>/TJ";
@@ -176,8 +185,7 @@
 							ret+="<tr><td class=fuel caption='N2O emission factor engines' >&emsp; · EFN2O.engines  <td>"+Tables["Fuel types"][fuel].EFN2O.engines  +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
 							ret+="<tr><td class=fuel caption='N2O emission factor vehicles'>&emsp; · EFN2O.vehicles <td>"+Tables["Fuel types"][fuel].EFN2O.vehicles +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
 						}
-						else //normal inputs
-						{
+						else { //normal inputs
 							var match_localization = locateVariable(match)
 							var match_level = match_localization.level
 							var match_sublevel = match_localization.sublevel
@@ -236,10 +244,8 @@
 			newCell.innerHTML="Current value";
 			newCell=newRow.insertCell(-1);
 			newCell.style.fontSize="18px";
-			if(typeof(currentStage[id])=="function")
-			{
-				newCell.innerHTML=(function()
-				{
+			if(typeof(currentStage[id])=="function") {
+				newCell.innerHTML=(function() {
 					var unit=Info[id].magnitude=="Currency"?Global.General.Currency : Info[id].unit;
 					var currValue=currentStage[id]()/Units.multiplier(id);
 					currValueF=format(currValue);
@@ -248,8 +254,7 @@
 					return currValueF+" &emsp;<span class=unit>"+unit+"</span>";
 				})();
 			}
-			else
-			{
+			else {
 				newCell.innerHTML=format(currentStage[id]/Units.multiplier(id));
 
 				//get substages

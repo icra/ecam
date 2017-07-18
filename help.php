@@ -8,13 +8,10 @@
 
 <div id=main>
 
-<p>This page will have resources (example json files and a user manual)</p>
-
-<div> EXAMPLE JSON FILES </div>
-
-<div>
-	<a href=docs/IPCC_V5_6_Ch6_Wastewater.pdf>IPCC</a>
-</div>
+<p>
+	This page will have resources (example json files and a user manual)
+	(in development)
+</p>
 
 </div>
 <!--footer--><?php include'footer.php'?>

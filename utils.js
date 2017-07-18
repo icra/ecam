@@ -1,6 +1,5 @@
 /** Find a variable code inside 'Global'*/
-function locateVariable(code)
-{
+function locateVariable(code) {
 	var localization={};//e.g {"level":"Water","sublevel":"Abstraction"}
 	localization.toString=function() {
 		var levelName=(function()
@@ -61,17 +60,17 @@ function locateVariable(code)
 }
 
 /** return 3.999,4 instead of 3999.4*/
-function format(number)
-{
+function format(number,digits){
+	digits=digits||2;
+
 	//for non applicable
 	if(number=="NA")return "<span style=color:#ccc>NA</span>"
 
-	//for work in progess formulas: -999 (bad practice)
-	if(number==-999){return "<span style=background:yellow>Formula under development</span>";}
+	var str=new Intl.NumberFormat('en-EN',{maximumFractionDigits:digits}).format(number);
 
-	var str=new Intl.NumberFormat('en-EN',{maximumFractionDigits:2}).format(number);
 	//display error if "NaN" or "Infinity"
 	if(str=="NaN" || !isFinite(number)) return "<span style=color:#666;font-size:10px>~"+translate('missing_inputs')+"</span>";
+
 	return str;
 }
 

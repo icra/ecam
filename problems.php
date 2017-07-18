@@ -81,15 +81,19 @@
 			#tasks ul {font-family:monospace;padding-left:1em;}
 			#tasks ul li ul li {padding:0.3em 0;border-radius:0.5em;}
 		</style>
-		<h3>Tasks/Bugs/Ideas/Requests 
+		<h3>Tasks/Bugs/Ideas/Requests/WishList
 			<br> 
 			<br> 
 			<span style=color:#666;font-family:monospace>format: [PRIORITY] [STATUS] "task description"</span>
 		</h3>
 		<script src="todo.js"></script>
 		<ul>
-			<li><b>FRONT-END</b><ul><script>TODO.list(TODO.Front)</script></ul>
-			<li><b>BACK-END</b><ul><script>TODO.list(TODO.Back)</script></ul>
+			<li><b>FRONTEND</b>          <ul id=Front></ul>
+			<li><b>BACKEND</b>           <ul id=Back ></ul>
+			<li><b>WISH LIST (for v3)</b><ul id=Wish ></ul>
+			<script>
+				TODO.list()
+			</script>
 		</ul>
 	</div>
 
@@ -102,21 +106,17 @@
 		<table><tr><th>Inputs not used in any<br><b>Outputs</b><br> and<br> <b>Benchmarks</b>
 			<script>
 				//get unused inputs
-				function getUnused(obj)
-				{
+				function getUnused(obj) {
 					var unused=[];
-					for(var field in obj)
-					{
+					for(var field in obj) {
 						var type = typeof(obj[field]);
-						switch(type)
-						{
+						switch(type) {
 							case 'number':
 								var n=Formulas.outputsPerInput(field).length;
 								if(n==0) unused.push(field);
 								break;
 							case 'function':
-								if(field.search(/^c_/)==0)
-								{
+								if(field.search(/^c_/)==0) {
 									var n=Formulas.outputsPerInput(field).length;
 									if(n==0) unused.push(field);
 								}
@@ -129,21 +129,16 @@
 					return unused;
 				}
 
-				['Water','Waste','Energy'].forEach(function(level)
-				{
+				['Water','Waste','Energy'].forEach(function(level) {
 					var unused=getUnused(Global[level])
-					unused.forEach(function(field)
-					{
+					unused.forEach(function(field) {
 						//is used in benchmark?
-						if(Utils.usedInBenchmarks(field).length==0)
-						{
+						if(Utils.usedInBenchmarks(field).length==0) {
 							var color=field.search('ww')==-1 ? "" : "#bf5050";
 							try{
 								document.write("<tr><td>");
 								document.write("<a caption='"+translate(field+"_descr")+"' style=color:"+color+" href=variable.php?id="+field+">"+field+"</a>");
-							}
-							catch(e)
-							{
+							} catch(e) {
 								document.write("<tr><td colspan=3>"+field+" need to be removed. Reset chaché")
 							}
 						}
@@ -157,8 +152,7 @@
 		<div class=inline style="max-width:20%">
 			<table><tr><th>Inexisting that appear in questions.js 
 				<script>
-					for(var q in Questions)
-					{
+					for(var q in Questions) {
 						if(typeof(Questions[q])=="function") continue;
 						findInexisting(Questions[q].variables)
 					}
@@ -172,13 +166,10 @@
 				<tr><td class=allok>
 				<script>
 					(function(){
-						function listUnitless(obj)
-						{
-							for(var field in obj)
-							{
+						function listUnitless(obj) {
+							for(var field in obj) {
 								if(typeof(obj[field])=="object"){return};
-								if(Info[field]==undefined) 
-								{
+								if(Info[field]==undefined) {
 									document.querySelector("#vawomu td.allok").style.display='none';
 									var loc=locateVariable(field);
 									var link = "edit.php?level="+loc.level;

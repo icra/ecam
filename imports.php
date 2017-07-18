@@ -34,17 +34,6 @@
 <!--graphs--><script src="graphs.js"></script>
 <!--unfccc--><script src="dataModel/unfccc.js"></script>
 
-<style>
-	div.tab_buttons               { text-align:center;font-size:19px;padding:0.5em 0;display:flex;justify-content:center}
-	div.tab_buttons button        { display:block;padding:0 5px;border:1px solid #ccc;background:#f5f5f5;outline:none;}
-	div.tab_buttons button:hover  { background:#e6e6e6}
-	div.tab_buttons button.left   { border-radius:0.5em 0.0em 0.0em 0.5em; border-right-style:none}
-	div.tab_buttons button.right  { border-radius:0.0em 0.5em 0.5em 0.0em; }
-	div.tab_buttons button.middle { border-right-style:none}
-
-	div.tab_buttons button[disabled] { background-color:#ccc;box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05);}
-</style>
-
 <?php /**php utils**/
 	//create a menu for folding the parent div.card element
 	function cardMenu($name){

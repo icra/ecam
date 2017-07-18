@@ -692,12 +692,12 @@ Graphs.graph4=function(withTable,container) {
 		var table=""+
 		"<table title=graph4>"+
 			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kg CO2)"+
-			"<tr><td>"+names[0]+"<td>wsa_KPI_GHG <td>"+format(slice_1)+
-			"<tr><td>"+names[1]+"<td>wst_KPI_GHG <td>"+format(slice_2)+
-			"<tr><td>"+names[2]+"<td>wsd_KPI_GHG <td>"+format(slice_3)+
-			"<tr><td>"+names[3]+"<td>wwc_KPI_GHG <td>"+format(slice_4)+
-			"<tr><td>"+names[4]+"<td>wwt_KPI_GHG <td>"+format(slice_5)+
-			"<tr><td>"+names[5]+"<td>wwd_KPI_GHG <td>"+format(slice_6)+
+			"<tr><td>"+names[0]+"<td><a href=variable.php?id=wsa_KPI_GHG>wsa_KPI_GHG</a> <td align=right>"+format(slice_1)+
+			"<tr><td>"+names[1]+"<td><a href=variable.php?id=wst_KPI_GHG>wst_KPI_GHG</a> <td align=right>"+format(slice_2)+
+			"<tr><td>"+names[2]+"<td><a href=variable.php?id=wsd_KPI_GHG>wsd_KPI_GHG</a> <td align=right>"+format(slice_3)+
+			"<tr><td>"+names[3]+"<td><a href=variable.php?id=wwc_KPI_GHG>wwc_KPI_GHG</a> <td align=right>"+format(slice_4)+
+			"<tr><td>"+names[4]+"<td><a href=variable.php?id=wwt_KPI_GHG>wwt_KPI_GHG</a> <td align=right>"+format(slice_5)+
+			"<tr><td>"+names[5]+"<td><a href=variable.php?id=wwd_KPI_GHG>wwd_KPI_GHG</a> <td align=right>"+format(slice_6)+
 		"</table>"+
 		"";
 		//extra options
@@ -1117,9 +1117,9 @@ Graphs.sankey=function(withTable,container) {
 		//ws flows
 		['wsa', 'wst', flow_1||1],
 		['wst', 'wsd', flow_2||1],
-		['wsd', 'usr', flow_3||1],
-		['usr', 'billed consumption', Global.Water.Distribution.wsd_bill_con],
-		['usr', 'non revenue water', Global.Water.Distribution.wsd_vol_dist-Global.Water.Distribution.wsd_bill_con],
+		['wsd', 'injected volume', flow_3||1],
+		['injected volume', 'billed consumption', Global.Water.Distribution.wsd_bill_con],
+		['injected volume', 'non revenue water', Global.Water.Distribution.wsd_vol_dist-Global.Water.Distribution.wsd_bill_con],
 		//ww flows
 		['wwc', 'wwt', flow_4||1],
 		['wwt', 'wwd', flow_5||1],
