@@ -181,22 +181,23 @@
 <div style=width:66%;>
 	
 	<!--tab buttons-->
-	<div class=tab_buttons>
+	<div class=tab_buttons id=ghg_summary_tabs>
 		<button class=left onclick="tabs_show_tables()" disabled>Tables</button>
 		<button class=right onclick="tabs_show_graphs()">Graphs</button>
 		<script>
 			function tabs_show_graphs(){
 				document.getElementById('tables').style.display='none'
-				document.getElementById('graph').style.display=''
-				Graphs.graph4(false,'graph');
-				document.querySelector('div.tab_buttons button.right').setAttribute('disabled',true)
-				document.querySelector('div.tab_buttons button.left').removeAttribute('disabled')
+				document.getElementById('graphs_container').style.display=''
+				Graphs.graph4(false,'graph_1');
+				Graphs.graph1(false,'graph_2');
+				document.querySelector('#ghg_summary_tabs button.right').setAttribute('disabled',true)
+				document.querySelector('#ghg_summary_tabs button.left').removeAttribute('disabled')
 			}
 			function tabs_show_tables(){
 				document.getElementById('tables').style.display=''
-				document.getElementById('graph').style.display='none'
-				document.querySelector('div.tab_buttons button.right').removeAttribute('disabled')
-				document.querySelector('div.tab_buttons button.left').setAttribute('disabled',true)
+				document.getElementById('graphs_container').style.display='none'
+				document.querySelector('#ghg_summary_tabs button.right').removeAttribute('disabled')
+				document.querySelector('#ghg_summary_tabs button.left').setAttribute('disabled',true)
 			}
 		</script>
 	</div>
@@ -333,8 +334,12 @@
 		</div>
 	</div>
 
-	<!--graph: right tab-->
-	<div id=graph style=display:none>Loading...</div>
+	<!--graph 1: right tab-->
+	<div id=graphs_container style=display:none>
+		<div id=graph_1>Loading...</div>
+		<div style="border-top:1px solid #ccc"></div>
+		<div id=graph_2>Loading...</div>
+	</div>
 
 </div>
 

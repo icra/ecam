@@ -908,11 +908,11 @@
 	"#wwd_KPI_GHG_descr":"Total GHG Wastewater Discharge",
 	"#wwd_KPI_GHG_expla":"Total GHG Wastewater Discharge",
 
-	"#unfccc_1A1":"Energy - Electricity and Heat [1.A.1]",
-	"#unfccc_1A3":"Energy - Transport [1.A.3]",
-	"#unfccc_5A":"Waste - Solid Waste Disposal [5.A]",
-	"#unfccc_5B":"Waste - Biological Treatment of Solid Waste [5.B]",
-	"#unfccc_5C":"Waste - Incineration [5.C.1]",
-	"#unfccc_5D":"Waste – Wastewater treatment and Discharge [5.D]",
+	"#unfccc_1A1":"Energy - Electricity and Heat",
+	"#unfccc_1A3":"Energy - Transport",
+	"#unfccc_5A":"Waste - Solid Waste Disposal",
+	"#unfccc_5B":"Waste - Biological Treatment of Solid Waste",
+	"#unfccc_5C":"Waste - Incineration",
+	"#unfccc_5D":"Waste – Wastewater treatment and Discharge",
 
 "last":"last"}

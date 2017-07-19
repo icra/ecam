@@ -2,13 +2,11 @@
 var TODO = {
 	Front:[//frontend
 		"[LLUIS] Opportunities page as discussed with Jose",
-
 		"[IWA] Where I should place the <a href=sankey.php>Sankey diagram</a>? (all water flows)",
 		"[WAIT] Add in the <a href=help.php>help page</a> an example json file, after variable structure does not change anymore",
 	],
 	Back:[//backend
 		"[LLUIS] In export: the formula for wsa_KPI_GHG does not appear correctly, when seen from level 1 ws, because belongs to another data structure, find solution. This happens also for analog L1 formulas also",
-
 		"[IWA] This list of equations still have 'magic numbers' (numbers not referenced)<ul>"+
 			"<li>c_wwt_nrg_biog (10)"+
 			"<li>c_wwt_ch4_pot (0.65)"+

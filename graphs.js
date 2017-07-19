@@ -196,7 +196,7 @@ Graphs.ghg_by_source=function(withTable,container) {
 	var options={ 
 		height:250,
 		legend:{position:'left'},
-		title:"GHG emissions by source ("+format(Global.General.TotalGHG())+") kg CO2e)",
+		title:"GHG emissions by source ("+format(Global.General.TotalGHG())+" kg CO2e)",
 	}
 
 	//empty the container element
@@ -434,8 +434,11 @@ Graphs.unfccc=function(withTable,container){
 		['category', translate('emissions')],
 	]
 
+	var total_ghg = 0;
+
 	for(var func in UNFCCC){
 		DATA.push([translate(func),UNFCCC[func]()]);
+		total_ghg += UNFCCC[func]();
 	}
 
 	//array graph data
@@ -445,7 +448,7 @@ Graphs.unfccc=function(withTable,container){
 	var options={ 
 		height:250,
 		legend:{position:'left'},
-		title:"GHG emissions by UNFCCC category (kg CO2e)",
+		title:"GHG emissions by UNFCCC category ("+format(total_ghg)+" kg CO2e)",
 	}
 
 	//empty the container element
@@ -500,7 +503,7 @@ Graphs.unfccc=function(withTable,container){
 	scrollToItem(container)
 }
 
-//GHG one stage only: (wsa,wst,wsd,wwc,wwt,wwd)
+//GHG one stage only: (wsa|wst|wsd|wwc|wwt|wwd)
 Graphs.ghg_by_stage=function(withTable,container,prefix) {
 	withTable=withTable||false;
 	container=container||"graph";
@@ -607,7 +610,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 	scrollToItem(container)
 }
 
-//GHG 'By stage' (all stages)
+//GHG all stages (wsa+wst+wsd+wwc+wwt+wwd)
 Graphs.graph4=function(withTable,container) {
 	withTable=withTable||false;
 	container=container||"graph";
@@ -634,8 +637,7 @@ Graphs.graph4=function(withTable,container) {
 	];
 
 	//actual graph data
-	var data=google.visualization.arrayToDataTable
-	([
+	var data=google.visualization.arrayToDataTable([
 		['Stage','Emissions'],
 		[names[0],slice_1],
 		[names[1],slice_2],
@@ -649,7 +651,7 @@ Graphs.graph4=function(withTable,container) {
 	var options={ 
 		height:250,
 		legend:{position:'left'},
-		title:"GHG emissions ("+format(sum)+" kg CO2) [By stage]",
+		title:"GHG emissions by stage ("+format(sum)+" kg CO2e)",
 		slices:{
 			0:{color:ColorsGHG.ws_KPI_GHG_elec      },
 			1:{color:ColorsGHG.ws_KPI_GHG_ne        },
@@ -682,7 +684,7 @@ Graphs.graph4=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button onclick=Graphs.graph4("+(!withTable).toString()+",'"+container+"')>Table</button>"+
+			"<button class=single onclick=Graphs.graph4("+(!withTable).toString()+",'"+container+"')>Table</button>"+
 		"";
 	})();
 
