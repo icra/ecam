@@ -142,7 +142,7 @@
 				newCell.innerHTML="Is estimated?"
 				newRow.insertCell(-1).innerHTML=(function(){
 					var code='estm_'+id
-					var str="YES &rarr; <a href=variable.php?id="+code+")>"+code+"</a>: "+format(Global.Estimations[code]())
+					var str="YES &rarr; <a href=variable.php?id="+code+">"+code+"</a>: "+format(Global.Estimations[code]())
 					return str;
 				})();
 			}
