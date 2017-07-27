@@ -27,7 +27,7 @@
 	<!--navbar--><?php include'navbar.php'?>
 	<!--linear--><?php include'linear.php'?>
 <!--/includes-->
-<h1>Opportunities to reduce GHG emissions (in development)</h1>
+<h1>Opportunities to reduce GHG emissions</h1>
 
 <div id=root>
 
@@ -46,10 +46,9 @@
 				<th>Related variable
 				<th>Current value
 				<th>Unit
-				<th>kg CO<sub>2</sub>e reduction <br> per 1% reduction
+				<th>kg CO<sub>2</sub>e reduction <br> per 1% change <br> of current value
 			</tr>
 
-			<!--example 1-->
 			<tr>
 				<script>
 					//name
@@ -63,7 +62,6 @@
 					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
 				</script>
 			</tr>
-			<!--example 2-->
 			<tr>
 				<script>
 					//name
@@ -77,22 +75,127 @@
 					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
 				</script>
 			</tr>
-
+			<tr>
+				<script>
+					document.write("<td>Reduce water supply energy consumption <td><a href=variable.php?id=ws_nrg_cons>ws_nrg_cons</a>");
+					var val=Global.Water.ws_nrg_cons();
+					var unit=Info.ws_nrg_cons.unit;
+					//value + unit
+					document.write("<td align=right>"+format(val)+"<td>"+unit);
+					//1% change in emissions
+					var emissions = 0.01 * val * Global.General.conv_kwh_co2;
+					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
+					//TODO
+				</script>
+			</tr>
+			<tr>
+				<script>
+					//name
+					document.write("<td>Reduce Infiltration and inflow<td><a href=variable.php?id=c_wwc_vol_infl>c_wwc_vol_infl</a>");
+					var val=Global.Waste.Collection.c_wwc_vol_infl();
+					var unit=Info.c_wwc_vol_infl.unit;
+					//value + unit
+					document.write("<td align=right>"+format(val)+"<td>"+unit);
+					//1% change in emissions
+					var emissions = 0.01 * Global.Waste.Collection.wwc_SL_GHG_ii();
+					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
+				</script>
+			</tr>
+			<tr>
+				<script>
+					document.write("<td>Reduce wastewater supply energy consumption <td><a href=variable.php?id=ww_nrg_cons>ww_nrg_cons</a>");
+					var val=Global.Waste.ww_nrg_cons();
+					var unit=Info.ww_nrg_cons.unit;
+					//value + unit
+					document.write("<td align=right>"+format(val)+"<td>"+unit);
+					//1% change in emissions
+					var emissions = 0.01 * val * Global.General.conv_kwh_co2;
+					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
+				</script>
+			</tr>
+			<tr>
+				<script>
+					document.write("<td>Reduce biogas flared<td><a href=variable.php?id=wwt_KPI_GHG_biog>wwt_KPI_GHG_biog</a>");
+					var val=Global.Waste.Treatment.wwt_KPI_GHG_biog();
+					var unit=Info.wwt_KPI_GHG_biog.unit;
+					//value + unit
+					document.write("<td align=right>"+format(val)+"<td>"+unit);
+					//1% change in emissions
+					var emissions = 0.01 * val * Global.Waste.Treatment.wwt_KPI_GHG_biog();
+					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
+				</script>
+			</tr>
+			<tr>
+				<script>
+					document.write("<td>Reduce sludge disposal<td>wwt_mass_slu_comp+wwt_mass_slu_inc+wwt_mass_slu_app<br>+wwt_mass_slu_land+wwt_mass_slu_stock");
+					//value + unit
+					var val=(function(){
+						return Global.Waste.Treatment.wwt_mass_slu_comp +
+									 Global.Waste.Treatment.wwt_mass_slu_inc  +
+									 Global.Waste.Treatment.wwt_mass_slu_app  +
+									 Global.Waste.Treatment.wwt_mass_slu_land +
+									 Global.Waste.Treatment.wwt_mass_slu_stock
+					})();
+					var unit="kg sludge";
+					document.write("<td align=right>"+format(val)+"<td>"+unit);
+					//1% change in emissions
+					//modify inputs, get the value, then restore them
+					Global.Waste.Treatment.wwt_mass_slu_comp *=0.01;
+					Global.Waste.Treatment.wwt_mass_slu_inc  *=0.01;
+					Global.Waste.Treatment.wwt_mass_slu_app  *=0.01;
+					Global.Waste.Treatment.wwt_mass_slu_land *=0.01;
+					Global.Waste.Treatment.wwt_mass_slu_stock*=0.01;
+					var emissions=Global.Waste.Treatment.wwt_KPI_GHG_slu();
+					Global.Waste.Treatment.wwt_mass_slu_comp *=100;
+					Global.Waste.Treatment.wwt_mass_slu_inc  *=100;
+					Global.Waste.Treatment.wwt_mass_slu_app  *=100;
+					Global.Waste.Treatment.wwt_mass_slu_land *=100;
+					Global.Waste.Treatment.wwt_mass_slu_stock*=100;
+					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
+				</script>
+			</tr>
+			<tr>
+				<script>
+					document.write("<td>Increase wastewater treatment coverage<td><a href=variable.php?id=ww_serv_pop>ww_serv_pop</a>");
+					//value + unit
+					var val=Global.Waste.ww_serv_pop;
+					var unit=Info.ww_serv_pop.unit;
+					document.write("<td align=right>"+format(val)+"<td>"+unit);
+					//1% change in emissions
+					var emissions=(function(){
+						//modify serv pop and recalc GHGs that depend on it
+						var ret=Global.Waste.Collection.wwc_KPI_GHG_unt_ch4();
+						ret+=Global.Waste.Collection.wwc_KPI_GHG_unt_n2o();
+						ret+=Global.Waste.Treatment.wwt_KPI_GHG_tre_n2o();
+						Global.Waste.ww_serv_pop*=1.01;
+						ret-=Global.Waste.Collection.wwc_KPI_GHG_unt_ch4();
+						ret-=Global.Waste.Collection.wwc_KPI_GHG_unt_n2o();
+						ret-=Global.Waste.Treatment.wwt_KPI_GHG_tre_n2o();
+						//undo change in serv pop
+						Global.Waste.ww_serv_pop/=1.01;
+						return ret;
+					})();
+					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
+				</script>
+			</tr>
+			<tr>
+				<script>
+					document.write("<td>Reduce wastewater discharged to water body <br>(wastewater reuse)<td><a href=variable.php?id=wwd_vol_disc>wwd_vol_disc</a>");
+					//value + unit
+					var val=Global.Waste.Discharge.wwd_vol_disc;
+					var unit=Info.wwd_vol_disc.unit;
+					document.write("<td align=right>"+format(val)+"<td>"+unit);
+					//1% change in emissions
+					var emissions=0.01 * Global.Waste.Discharge.wwd_KPI_GHG_tre_n2o();
+					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
+				</script>
+			</tr>
 		</table>
 	</div>
 </div>
 
+<!--
 <ul style=text-align:left;display:inline-block;margin:auto;margin-top:10px>
-	<li>
-		Implementation fields:
-		<ul>
-			<li>name
-			<li>relatedVariable
-			<li>currentValue
-			<li>unit
-			<li>reduction
-		</ul>
-	</li>
 	<li>
 		All opportunities to be implemented
 		<ul>
@@ -104,10 +207,11 @@
 			<li>Wastewater grid energy consumption
 			<li>Biogas production / recovery
 			<li>Sludge disposal
-			<li>Wastewater treatment coverage
+			<li>Wastewater treatment coverage (?)
 			<li>Wastewater reuse (avoid discharge to water body)
 		</ul>
 	</li>
 </ul>
+-->
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

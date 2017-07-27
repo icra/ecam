@@ -596,6 +596,20 @@
 				newCell.style.fontWeight="bold";
 				newCell.style.background="white";
 				newCell.innerHTML=format(CurrentLevel[field]()/Units.multiplier(field));
+
+				/* quick fix sum of substages problem
+					if(Info[field].magnitude=="Mass"){
+						console.log(field);
+						newCell.innerHTML=(function(){
+							var sum=0;
+							for(var s in substages){sum+=parseFloat(substages[s][field]())}
+							return format(sum);
+						})();
+					}
+					else{
+						newCell.innerHTML=format(CurrentLevel[field]()/Units.multiplier(field));
+					}
+				*/
 			}
 
 			//unit

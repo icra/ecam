@@ -6,10 +6,12 @@ var TODO = {
 		"[WAIT] Add in the <a href=help.php>help page</a> an example json file, after variable structure does not change anymore",
 	],
 	Back:[//backend
+		"[lluis] wwt_ch4_efac problemes suma de substages",
+		"[lluis] treure wwt_slu_storage_ch4",
 		"[LLUIS] In export: the formula for wsa_KPI_GHG does not appear correctly, when seen from level 1 ws, because belongs to another data structure, find solution. This happens also for analog L1 formulas also",
 		"[IWA] This list of equations still have 'magic numbers' (numbers not referenced)<ul>"+
 			"<li>c_wwt_nrg_biog (10)"+
-			"<li>c_wwt_ch4_pot (0.65)"+
+			"<li>c_wwt_ch4_pot (0.65, 4/3)"+
 			"<li>wwt_slu_inciner_n2o (0.03, 161.3, 0.14, 0.01)"+
 			"<li>wwt_slu_landapp_n2o (30, 0.03, 0.023, 0.005)"+
 			"<li>wwt_slu_landfill_ch4 (0.9, 0.5, 0.8, 0.69)"+
@@ -21,6 +23,7 @@ var TODO = {
 		"[WAIT] Translation will be done only after v2 in english is complete",
 	],
 	Wish:[//wishlist
+		"[LLUIS] In summary ghg, when kgco2 per year per serv pop is selected, total ghg should be 'N/A'",
 		"[LLUIS] Custom Configuration to increase/decrease decimals",
 		"[LLUIS] In substages some values are not added correctly, for example: wwt_ch4_efac makes wwt_KPI_GHG_tre_ch4 sum of substages not be correct",
 		"[LLUIS] See formulas for 'Sources graph' (elec,co2,n2o,ch4) (add object inside Global)",

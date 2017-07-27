@@ -14,6 +14,8 @@ var Averaged=
 		"wsd_av_no_el",
 		"wsd_wt_el_no",
 		"wwt_ch4_biog",
+		"wwt_temp_inc",
+		"wwt_ch4_efac",
 	],
 
 	isAveraged:function(code)
