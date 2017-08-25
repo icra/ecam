@@ -72,6 +72,6 @@
 
 <!--logos--> 
 <div style=background:white;text-align:center;margin-top:50px;> 
-	<img src=img/logos_about.png width=45%>
+	<img src=img/logos_about.png >
 </div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
