@@ -18,17 +18,20 @@
 		color:rgba(0,0,0,0.55);
 	}
 	#linearDiagram > div:hover {
-		background:#e6e6e6;
+		/*background:#e6e6e6;*/
 		color:black;
 	}
-	#linearDiagram img {position:relative;z-index:2;vertical-align:middle;padding:0} /*icons inside buttons to navigate to Level2*/
+	#linearDiagram > div:not(.detailed_img):hover img{
+		border:4px solid #89c23f;
+	}
+	#linearDiagram img {position:relative;z-index:2;vertical-align:middle;padding:0;} /*icons inside buttons to navigate to Level2*/
 	#linearDiagram img.l1 {width:42px;} 
 	#linearDiagram img.l2 {width:42px;}
-	#linearDiagram img{border-radius:90%;border:4px solid transparent}
-	#linearDiagram img.selected{border:4px solid lightgreen}
+	#linearDiagram img{border-radius:90%;border:4px solid transparent;}
+	#linearDiagram img.selected{border:4px solid #89c23f;}
 	#linearDiagram img.inactive {pointer-events:none;}
-	#linearDiagram img:not(.inactive) {cursor:pointer}
-	#linearDiagram a:hover {text-decoration:none}
+	#linearDiagram img:not(.inactive) {cursor:pointer;}
+	#linearDiagram a:hover {text-decoration:none;}
 </style>
 
 <div id=linearDiagram>
@@ -65,7 +68,7 @@
 	</div>
 
 	<!--DETAILED-->
-	<div>
+	<div class="detailed_img">
 		<div><span style="color:inherit">Tier B &mdash; Detailed GHG assessment</span></div>
 		<img class=l2 stage=waterAbs src=img/waterAbs.png onclick=window.location="edit.php?level=Water&sublevel=Abstraction"  caption="<?php write('#Abstraction')?>" >
 		<img class=l2 stage=waterTre src=img/waterTre.png onclick=window.location="edit.php?level=Water&sublevel=Treatment"    caption="<?php write('#Treatment')?>">
@@ -82,11 +85,11 @@
 		<img class=l1 stage=energy  src=img/energy.png  onclick=window.location="energy_summary.php"     caption="Energy Summary"> 
 	</div>
 
-	<div 
-		style=cursor:pointer
-		onclick=window.location="opps.php">
-		<div><a href=opps.php style="color:inherit">Opportunities</a></div>
-		<img class=l1 stage=gets src=img/opps.png caption="Opportunities">
+	<div>
+		<div>
+		<a href=opps.php style="color:inherit">Opportunities</a>
+		</div>
+		<img class=l1 stage=opps src=img/opps.png caption="Opportunities" onclick=window.location="opps.php">
 	</div>
 </div>
 
@@ -137,6 +140,9 @@
 		//hl inhabitants
 		else if(strpos($_SERVER['PHP_SELF'],"inhabitants.php"))
 		{ ?>document.querySelector('img[stage=inha]').classList.add('selected');<?php }
+		//hl Opportunities
+		else if(strpos($_SERVER['PHP_SELF'],"opps.php"))
+		{ ?>document.querySelector('img[stage=opps]').classList.add('selected');<?php }
 	?>
 
 	//go over icon images to deactivate inactives --> do in PHP better?
@@ -150,7 +156,7 @@
 		for(var i=0;i<collection.length;i++)
 		{
 			var stage = collection[i].getAttribute('stage');
-			if(["birds","energy","conf",'sources','gets','inha'].indexOf(stage)>=0) continue;
+			if(["birds","energy","conf",'sources','gets','inha','opps'].indexOf(stage)>=0) continue;
 			var isActive = Global.Configuration.ActiveStages[stage];
 			if(!isActive)
 			{

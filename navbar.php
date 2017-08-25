@@ -3,13 +3,14 @@
 	div#navbar {
 		color:white;
 		font-size:15px;
-		padding:0.5em 1em;
+		padding:0.5em 8em;
 		box-shadow:0 1px 2px rgba(0,0,0,.5);
-		background:#00aff1;
-		background: linear-gradient(to right, rgba(0,175,241,1) 0%, rgb(215,29,36) 61%, rgba(0,175,241,1) 100%);
+		background:#2b6488;
+		/*background: linear-gradient(to right, rgba(0,175,241,1) 0%, rgb(215,29,36) 61%, rgba(0,175,241,1) 100%);*/
 		display:flex;
 		flex-wrap:wrap;
 		justify-content:space-between;
+
 	}
 	#navbar > div{
 		padding:13px 5px 5px 5px;/*values adjusted for the sidebar*/
@@ -34,7 +35,7 @@
 	}
 </style>
 
-<div id=navbar>
+<div id="navbar">
 	<div class=flex>
 		<!--burger symbol-->
 		<div id=burger onclick="event.stopPropagation();Sidebar.toggle()">
@@ -52,7 +53,7 @@
 
 	<div class=flex>
 		<!--debugging-->
-		<div><a href=problems.php>Debugging utility</a></div>
+		<!-- <div><a href=problems.php>Debugging utility</a></div> -->
 
 		<!--language selection-->
 		<?php include'language.php'?>

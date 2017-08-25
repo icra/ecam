@@ -28,25 +28,49 @@
 
 	<br><br>
 
-	This project is part of the <a target=_blank href="https://www.international-climate-initiative.com/">International Climate Initiative (IKI)</a>. 
+	WaCCliM project is part of the <a target=_blank href="https://www.international-climate-initiative.com/">International Climate Initiative (IKI)</a>. 
 	The German Federal Ministry for the Environment, Nature Conservation, 
 	Building and Nuclear Safety (BMUB) supports this initiative on the basis of a decision adopted by the German Bundestag.
+
+	<br><br>
+	<h3>Special acknowledgements</h3>
+
+	ECAM tool is the result of a collaborative effort. WaCCliM project team thanks
+	<ul>
+		<li>Members of the WaCCliM Taskforce and WaCCliM Expert pool for their voluntary
+		contribution, providing scientific input and peer-review of ECAM.</li>
+		<li>REaCH project (CTM2015-66892-R (MINECO/FEDER, UE), funded by the Spanish
+		Ministry of Economy and Competitiveness and FEDER, for their support to ICRA.</li>
+	</ul>
 
 	<br><br> 
 
 	This software is <a href=https://github.com/holalluis/ecam>open source</a>.
 	
-	<br><br>
+	<br>
 
 	Charts used: <a target=_blank href="https://google-developers.appspot.com/chart/">Google Charts</a>
 
-	<br><br>
+	<br>
 
 	2015-<?php echo date("Y")?> <a href='license.php'><?php write('#about_license')?></a>. <br>
-
+	<img class="license_img" src="img/cc_icon_white_x2.png" alt="">
+	<img class="license_img" src="img/attribution_icon_white_x2.png" alt="">
+	<img class="license_img" src="img/sa_white_x2.png" alt="">
 	<br><br>
+	ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under
+	a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work
+	at <a target="_blank" href="https://creativecommons.org/choose/www.wacclim.org">www.wacclim.org</a>. Permissions beyond the scope of this license may be available
+	at <a target="_blank" href="https://creativecommons.org/choose/info@wacclim.org">info@wacclim.org</a>.
 </div>
 
 </div>
-<!--FOOTER--><?php include'footer.php'?>
+<div class="footer_wrap">
+	<!--FOOTER--><?php include'footer.php'?>
+</div>
+
+<!--logos--> 
+<div style=background:white;text-align:center;margin-top:50px;> 
+	<img src=img/logos_about.png width=45%>
+</div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
