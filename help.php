@@ -8,10 +8,14 @@
 
 <div id=main>
 
-<p>
+<!-- <p>
 	This page will have resources (example json files and a user manual)
 	(in development)
-</p>
+</p>  -->
+<h4><a href="help_pdf/ECAM V2 FAQ_Aug2017.pdf">ECAM V2 - Frequently Asked Questions</a></h4>
+<h4><a href="help_pdf/ECAM V2 Methodology_Aug2017.pdf">ECAM V2 - Methodology</a></h4>
+<h4><a href="help_pdf/ECAM_2.0_Manual_170822.pdf">ECAM V2 - Manual</a></h4>
+<h4><a href="help_pdf/ECAMV2 Example.json.zip">ECAM V2 - Example json file</a></h4>
 
 </div>
 <!--footer--><?php include'footer.php'?>

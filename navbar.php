@@ -3,7 +3,7 @@
 	div#navbar {
 		color:white;
 		font-size:15px;
-		padding:0.5em 8em;
+		padding:0.5em 8em 0.5em 5em;
 		box-shadow:0 1px 2px rgba(0,0,0,.5);
 		background:#2b6488;
 		/*background: linear-gradient(to right, rgba(0,175,241,1) 0%, rgb(215,29,36) 61%, rgba(0,175,241,1) 100%);*/
@@ -31,7 +31,7 @@
 	#navbar #logo {
 		font-size:30px;
 		line-height:9%;
-		margin:5px 5px;
+		margin:5px 10px 5px 20px;
 	}
 </style>
 

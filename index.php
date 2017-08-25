@@ -21,9 +21,11 @@
 
 		<!--new title-->
 		<div class="width_50">
-			<h1 style=font-size:32px>
-				Assess you utility's carbon footprint,<br>
-				energy consumption and service levels
+			<h1 class="blue_h1" style=padding-bottom:0px>A toolkit for utilities</h1> 
+			<h1 class="green_h1" style=font-size:32px>
+				Assess your utility's carbon<br>
+				footprint, energy consumption
+				<br>and service levels
 			</h1>
 
 			<!--new text-->
@@ -44,21 +46,24 @@
 
 			<h4 style=font-size:18px;color:#58595b>
 				First time using ECAM? 
-				Click on 'New' or learn more <a href=about.php target=_blank>here</a>.
+				Click on 'New' or learn more <a href=help.php target=_blank>here</a>.
 			</h4>
 
 			<!--MENU--><div style="padding:1em 0"><?php include'menu.php'?></div>
 
 			<!--chrome warning-->
-			<div> 
+			<div class="chrome_big"> 
 				<b><?php write('#index_chrome_warning')?></b>
 			</div>
+			<br>
+			<br>
 			<div>
-				<a href="http://wacclim.org/" target=_blank>WaCCliM</a> - <a href=about.php><?php write("#about")?></a> - <a href=help.php><?php write("#help")?></a> - <a href=mailto:info@wacclim.org><?php write("#contact")?>: info@wacclim.org</a>
+				<a class="blue_links" href="http://wacclim.org/" target=_blank>WaCCliM</a> - <a class="blue_links" href=about.php><?php write("#about")?></a> - <a class="blue_links" href=help.php><?php write("#help")?></a> - <a class="blue_links" href=mailto:info@wacclim.org><?php write("#contact")?>: info@wacclim.org</a>
 			</div>
-			<img class="license_img" src="img/cc_icon_white_x2.png" alt="">
+			<!-- <img class="license_img" src="img/cc_icon_white_x2.png" alt="">
 			<img class="license_img" src="img/attribution_icon_white_x2.png" alt="">
-			<img class="license_img" src="img/sa_white_x2.png" alt="">
+			<img class="license_img" src="img/sa_white_x2.png" alt=""> -->
+			<img class="license_img license_img-big" src="img/CC_license_small.png" alt="">
 			<br>
 			ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
 			<div>
@@ -79,7 +84,7 @@
 
 <!--logos--> 
 <div style="background:white;text-align:left;padding:0em 10em;margin-top:50px;"> 
-	<img src=img/logos.png width=60%> 
+	<img src=img/logos.png> 
 </div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

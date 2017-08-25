@@ -10,7 +10,7 @@
 		color:#333;
 		height: 6em;
 		bottom:0;
-		margin-top: 50px;
+		margin-top: 30px;
 	}
 	#footer a, #footer a:visited {
 		color:white;
@@ -23,8 +23,8 @@
 </style>
 
 <footer id=footer >
-	<img src="img/logo-wacclim.jpg" style=height:70px;vertical-align:middle>
-	<div>Copyright <?php echo date("Y")?> </div>
+	<img src="img/logo-wacclim.jpg" style=height:95px;vertical-align:middle>
+	<!-- <div>Copyright <?php echo date("Y")?> </div> -->
 	<!-- ·
 	<a href="http://wacclim.org/" target=_blank>WaCCliM</a>
 	·
