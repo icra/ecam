@@ -84,7 +84,7 @@
 
 <!--logos--> 
 <div style="background:white;text-align:left;padding:0em 10em;margin-top:50px;"> 
-	<img src=img/logos.png width=48%> 
+	<img src=img/logos.png> 
 </div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
