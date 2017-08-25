@@ -228,9 +228,32 @@ span.circle {
     display: table;
 }
 /*end of content*/
+/*header*/
+.chrome_big{
+	font-size: 19px;
+}
+.green_h1{
+	color: #9fc231;
+}
+.blue_h1{
+	font-size: 42px;
+	font-weight: 700;
+	color: #2b6488;
+}
+.blue_links{
+	color: #2b6488;
+	font-size: 16px;
+}
+.blue_links:visited{
+	color: #2b6488;
+}
+/*end of header*/
 /*footer*/
 .license_img{
 	width: 20px;
 	height: auto;
+}
+.license_img-big{
+	width: 90px;
 }
 /*end of footer*/

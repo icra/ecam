@@ -54,9 +54,10 @@
 	<br>
 
 	2015-<?php echo date("Y")?> <a href='license.php'><?php write('#about_license')?></a>. <br>
-	<img class="license_img" src="img/cc_icon_white_x2.png" alt="">
+<!-- 	<img class="license_img" src="img/cc_icon_white_x2.png" alt="">
 	<img class="license_img" src="img/attribution_icon_white_x2.png" alt="">
-	<img class="license_img" src="img/sa_white_x2.png" alt="">
+	<img class="license_img" src="img/sa_white_x2.png" alt=""> -->
+	<img class="license_img license_img-big" src="img/CC_license_big.png" alt="">
 	<br><br>
 	ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under
 	a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work
