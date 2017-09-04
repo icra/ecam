@@ -1,27 +1,37 @@
-/** 
-	Main data structure
-	This object stores user inputs and has all equations.
-	All inputs are saved to cookies (compressed) (see "js/updateGlobalFromCookies.js")
-	After ecam v2 it would be good to separate all equations in another object
+/**
+  Main data structure
+  This object stores user inputs and has all equations.
+  All inputs are saved to cookies (compressed) (see "js/updateGlobalFromCookies.js")
+  After ecam v2 it would be good to separate all equations in another object
 */
-var Global={
-	General:{
-		Name:"Untitled system",
-		AssessmentPeriodStart:"2017-01-01",
+var Global = {
+  General : {
+    Name:"Untitled system",
+    AssessmentPeriodStart:"2017-01-01",
 		AssessmentPeriodEnd:"2018-01-01",
-		Comments:"",
-		Currency:"USD",
-		Country:"false",
-		conv_kwh_co2:0,//conversion factor for grid electricity
-		gwp:0,//global warming potential of the selected country
-		anyFuelEngines:0,//do you have fuel engines in any stage?
-		Days:function(){
-			var startDate=new Date(Global.General.AssessmentPeriodStart);
+    Comments:"",
+    Currency:"USD",
+    Country:"false",
+    conv_kwh_co2:0,//conversion factor for grid electricity
+    gwp:0,//global warming potential of the selected country
+    anyFuelEngines:0,//do you have fuel engines in any stage?
+    Days:function(){
+      var startDate=new Date(Global.General.AssessmentPeriodStart);
 			var finalDate=new Date(Global.General.AssessmentPeriodEnd);
 			return (finalDate-startDate)/1000/60/60/24;
 		},
 		Years:function(){return this.Days()/365},
-		TotalGHG:function(){return Global.Water.ws_KPI_GHG()+Global.Waste.ww_KPI_GHG()},
+
+		TotalGHG:function(ghg_type){
+			ghg_type = ghg_type || 'default';
+			// patch for total GHG emissions per serviced population - improv #2
+			if(ghg_type == 'serv_pop') {
+				return NaN;
+			}else {
+			  return Global.Water.ws_KPI_GHG() + Global.Waste.ww_KPI_GHG();
+			}
+		},
+
 		TotalNRG:function(){return Global.Water.ws_nrg_cons()+Global.Waste.ww_nrg_cons()},
 		/*carbon and nitrogen content based on sludge type and mass*/
 		content_C:function(sludge_mass,sludge_type){//<br>
@@ -74,18 +84,18 @@ var Global={
 			wsa_main_len:0,
 			wsa_pmp_type:0,
 			wsa_pmp_size:0,
-			wsa_pmp_flow:0, //Measured pump flow L/s 
-			wsa_pmp_volt:0, //Measured pump voltage V 
-			wsa_pmp_amps:0, //Measured pump current Amp 
+			wsa_pmp_flow:0, //Measured pump flow L/s
+			wsa_pmp_volt:0, //Measured pump voltage V
+			wsa_pmp_amps:0, //Measured pump current Amp
 			wsa_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
-			c_wsa_pmp_pw:function(){return this.wsa_pmp_flow*this.wsa_pmp_head*9.81*1000*0.001/1000}, 
+			c_wsa_pmp_pw:function(){return this.wsa_pmp_flow*this.wsa_pmp_head*9.81*1000*0.001/1000},
 			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_pump+this.wsa_nrg_turb)/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
 			wsa_KPI_std_elec_eff:function(){return 100*0.2725/this.wsa_KPI_std_nrg_cons()},
 			wsa_KPI_un_head_loss:function(){return 1000*(this.wsa_pmp_head-this.wsa_sta_head)/this.wsa_main_len},
-			wsa_KPI_nrg_elec_eff:function(){return this.c_wsa_pmp_pw()/(this.wsa_pmp_volt*this.wsa_pmp_amps*1.64/1000)*100}, 
+			wsa_KPI_nrg_elec_eff:function(){return this.c_wsa_pmp_pw()/(this.wsa_pmp_volt*this.wsa_pmp_amps*1.64/1000)*100},
 			wsa_KPI_std_nrg_newp:function(){return 0.2725/this.wsa_pmp_exff},
-			wsa_KPI_nrg_cons_new:function(){return this.wsa_vol_pump*this.wsa_KPI_std_nrg_newp()/100*this.wsa_pmp_head}, 
-			wsa_KPI_nrg_estm_sav:function(){return this.wsa_nrg_cons-this.wsa_KPI_nrg_cons_new()}, 
+			wsa_KPI_nrg_cons_new:function(){return this.wsa_vol_pump*this.wsa_KPI_std_nrg_newp()/100*this.wsa_pmp_head},
+			wsa_KPI_nrg_estm_sav:function(){return this.wsa_nrg_cons-this.wsa_KPI_nrg_cons_new()},
 			wsa_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wsa_KPI_nrg_estm_sav()},
 			//GHG emissions Abstraction
 			wsa_KPI_GHG_elec:function(){return this.wsa_nrg_cons*Global.General.conv_kwh_co2},
@@ -114,7 +124,7 @@ var Global={
 			"wst_mass_slu":0,
 			"wst_treatmen":0,
 			"wst_tst_carr":0,
-			"wst_trea_cap":0, 
+			"wst_trea_cap":0,
 			wst_KPI_nrg_per_m3:function(){return this.wst_nrg_cons/this.wst_vol_trea},
 			wst_KPI_slu_per_m3:function(){return this.wst_mass_slu/this.wst_vol_trea},
 			wst_KPI_capac_util:function(){return 100*this.wst_vol_trea/this.wst_trea_cap},
@@ -148,7 +158,7 @@ var Global={
 				return this.wst_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
 			},
 
-			wst_KPI_GHG:function(){ 
+			wst_KPI_GHG:function(){
 				return this.wst_KPI_GHG_elec()+
 					this.wst_KPI_GHG_fuel()
 			},
@@ -202,23 +212,23 @@ var Global={
 			wsd_pmp_size:0,
 			wsd_sta_head:0,
 			wsd_pmp_head:0,
-			wsd_pmp_flow:0, //Measured pump flow L/s 
-			wsd_pmp_volt:0, //Measured pump voltage V 
-			wsd_pmp_amps:0, //Measured pump current Amp 
+			wsd_pmp_flow:0, //Measured pump flow L/s
+			wsd_pmp_volt:0, //Measured pump voltage V
+			wsd_pmp_amps:0, //Measured pump current Amp
 			wsd_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
 			wsd_main_len:0,
 
 			c_wsd_pmp_pw:function(){
 				return this.wsd_pmp_flow*this.wsd_pmp_head*Cts.ct_gravit.value/1000
-			}, 
+			},
 
 			wsd_KPI_std_nrg_cons:function(){return this.wsd_nrg_pump/(this.wsd_vol_pump*this.wsd_pmp_head/100)},
 			wsd_KPI_un_head_loss:function(){return 1000*(this.wsd_pmp_head-this.wsd_sta_head)/this.wsd_main_len},
 			wsd_KPI_water_losses:function(){return Math.max(0,1000*(this.wsd_vol_dist-this.wsd_auth_con)/(this.wsd_main_len))},
-			wsd_KPI_nrg_elec_eff:function(){return this.c_wsd_pmp_pw()/(this.wsd_pmp_volt*this.wsd_pmp_amps*1.64/1000)*100}, 
+			wsd_KPI_nrg_elec_eff:function(){return this.c_wsd_pmp_pw()/(this.wsd_pmp_volt*this.wsd_pmp_amps*1.64/1000)*100},
 			wsd_KPI_std_nrg_newp:function(){return 0.2725/this.wsd_pmp_exff},
-			wsd_KPI_nrg_cons_new:function(){return this.wsd_vol_pump*this.wsd_KPI_std_nrg_newp()/100*this.wsd_pmp_head}, 
-			wsd_KPI_nrg_estm_sav:function(){return this.wsd_nrg_cons-this.wsd_KPI_nrg_cons_new()}, 
+			wsd_KPI_nrg_cons_new:function(){return this.wsd_vol_pump*this.wsd_KPI_std_nrg_newp()/100*this.wsd_pmp_head},
+			wsd_KPI_nrg_estm_sav:function(){return this.wsd_nrg_cons-this.wsd_KPI_nrg_cons_new()},
 			wsd_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wsd_KPI_nrg_estm_sav()},
 			//wsd GHG
 			wsd_KPI_GHG_elec:function(){return this.wsd_nrg_cons*Global.General.conv_kwh_co2},
@@ -310,7 +320,7 @@ var Global={
 			"wwc_dry_flow":0,
 			"wwc_rain_day":0,
 			c_wwc_vol_infl:function(){return this.wwc_rain_day*(this.wwc_wet_flow-this.wwc_dry_flow)},
-			wwc_SL_GHG_ii:function(){return this.wwc_KPI_nrg_per_m3()*this.c_wwc_vol_infl()*Global.General.conv_kwh_co2}, 
+			wwc_SL_GHG_ii:function(){return this.wwc_KPI_nrg_per_m3()*this.c_wwc_vol_infl()*Global.General.conv_kwh_co2},
 			wwc_SL_fratio:function(){return this.wwc_wet_flow/this.wwc_dry_flow},
 			wwc_SL_inf_emis:function(){return this.wwc_KPI_GHG()*this.c_wwc_vol_infl()/this.wwc_vol_conv},
 			//pumping?
@@ -320,18 +330,18 @@ var Global={
 			wwc_pmp_head:0,
 			wwc_sta_head:0,
 			wwc_coll_len:0,
-			wwc_pmp_flow:0, //Measured pump flow L/s 
-			wwc_pmp_volt:0, //Measured pump voltage V 
-			wwc_pmp_amps:0, //Measured pump current Amp 
+			wwc_pmp_flow:0, //Measured pump flow L/s
+			wwc_pmp_volt:0, //Measured pump voltage V
+			wwc_pmp_amps:0, //Measured pump current Amp
 			wwc_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
-			c_wwc_pmp_pw:function(){return this.wwc_pmp_flow*this.wwc_pmp_head*9.81*1000*0.001/1000}, 
+			c_wwc_pmp_pw:function(){return this.wwc_pmp_flow*this.wwc_pmp_head*9.81*1000*0.001/1000},
 			wwc_KPI_std_nrg_cons:function(){return this.wwc_nrg_pump/(this.wwc_vol_pump*this.wwc_pmp_head/100)},
 			wwc_KPI_std_elec_eff:function(){return 100*0.2725/this.wwc_KPI_std_nrg_cons()},
 			wwc_KPI_un_head_loss:function(){return 1000*(this.wwc_pmp_head-this.wwc_sta_head)/this.wwc_coll_len},
-			wwc_KPI_nrg_elec_eff:function(){return this.c_wwc_pmp_pw()/(this.wwc_pmp_volt*this.wwc_pmp_amps*1.64/1000)*100}, 
+			wwc_KPI_nrg_elec_eff:function(){return this.c_wwc_pmp_pw()/(this.wwc_pmp_volt*this.wwc_pmp_amps*1.64/1000)*100},
 			wwc_KPI_std_nrg_newp:function(){return 0.2725/this.wwc_pmp_exff},
-			wwc_KPI_nrg_cons_new:function(){return this.wwc_vol_pump*this.wwc_KPI_std_nrg_newp()/100*this.wwc_pmp_head}, 
-			wwc_KPI_nrg_estm_sav:function(){return this.wwc_nrg_cons-this.wwc_KPI_nrg_cons_new()}, 
+			wwc_KPI_nrg_cons_new:function(){return this.wwc_vol_pump*this.wwc_KPI_std_nrg_newp()/100*this.wwc_pmp_head},
+			wwc_KPI_nrg_estm_sav:function(){return this.wwc_nrg_cons-this.wwc_KPI_nrg_cons_new()},
 			wwc_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wwc_KPI_nrg_estm_sav()},
 
 			//Collection GHG
@@ -511,7 +521,7 @@ var Global={
 				else
 				{//<br>
 					if(sludge_type=="Non-digested")//<br>
-					{ 
+					{
 						return this.wwt_mass_slu_land*0.03*0.015*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
 					}//<br>
 					if(sludge_type=="Digested")//<br>
@@ -673,15 +683,15 @@ var Global={
 				return this.wwd_KPI_GHG_trck_co2()+this.wwd_KPI_GHG_trck_n2o()+this.wwd_KPI_GHG_trck_ch4()
 			},
 			wwd_KPI_GHG_trck_co2:function(){
-				var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)]; 
+				var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)];
 				return this.wwd_vol_trck*fuel.FD*fuel.NCV/1000*(fuel.EFCO2)
 			},
 			wwd_KPI_GHG_trck_n2o:function(){
-				var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)]; 
+				var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)];
 				return this.wwd_vol_trck*fuel.FD*fuel.NCV/1000*(Cts.ct_n2o_eq.value*fuel.EFN2O.vehicles)
 			},
 			wwd_KPI_GHG_trck_ch4:function(){
-				var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)]; 
+				var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)];
 				return this.wwd_vol_trck*fuel.FD*fuel.NCV/1000*(Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles)
 			},
 
@@ -730,9 +740,9 @@ var Global={
 		},
 
 		//custom unit selections for variables are stored here
-		Units:{}, 
+		Units:{},
 
-		/*Calculated or "estimated" assumptions are stored here 
+		/*Calculated or "estimated" assumptions are stored here
 		(only estimated, if not here, calculated) */
 		DataQuality:{},
 
@@ -760,4 +770,8 @@ Global.Water.ws_KPI_GHG =function(){return this.wsa_KPI_GHG()+this.wst_KPI_GHG()
 Global.Waste.wwc_KPI_GHG=function(){return Global.Waste.Collection.wwc_KPI_GHG()};
 Global.Waste.wwt_KPI_GHG=function(){return Global.Waste.Treatment.wwt_KPI_GHG()};
 Global.Waste.wwd_KPI_GHG=function(){return Global.Waste.Discharge.wwd_KPI_GHG()};
-Global.Waste.ww_KPI_GHG =function(){return this.wwc_KPI_GHG()+this.wwt_KPI_GHG()+this.wwd_KPI_GHG()};
+
+Global.Waste.ww_KPI_GHG =function(ghg_type) {
+	ghg_type = ghg_type || 'default';
+  return this.wwc_KPI_GHG(ghg_type)+this.wwt_KPI_GHG()+this.wwd_KPI_GHG();
+};
