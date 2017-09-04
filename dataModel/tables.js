@@ -1,5 +1,5 @@
 //Data structure for tabled values or dropdown menus
-var Tables = 
+var Tables =
 {
 	//fuel types
 	"Fuel types": //EFxxx: [kg/TJ], NCV: [TJ/Gg], FD: [kg/L].
@@ -8,7 +8,7 @@ var Tables =
 		"Gasoline/Petrol" :{value:1,EFCH4:{engines:3,vehicles:3.8},EFN2O:{engines:0.6,vehicles:1.9},EFCO2:69300,FD:0.74,NCV:44.3},
 		"Natural Gas"     :{value:2,EFCH4:{engines:10,vehicles:92},EFN2O:{engines:0.1,vehicles:0.2},EFCO2:56100,FD:0.75,NCV:48.0},
 	},
-	
+
 	//wsa
 	"wsa_watr_src":{
 		"Groundwater":{value:0},
@@ -79,7 +79,7 @@ var Tables =
 		"Anaerobic Lagoon covered":{value:7,                      ch4_efac:0,     bod_rmvd_as_sludge_estm:0.10},
 		"Trickling Filter":{value:8,                              ch4_efac:0.036, bod_rmvd_as_sludge_estm:0.65},
 		"UASB - CH4 recovery not considered":{value:9,            ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
-		"UASB - CH4 recovery considered":{value:10,               ch4_efac:0.3,   bod_rmvd_as_sludge_estm:0.10},
+		"UASB - CH4 recovery considered":{value:10,               ch4_efac:0.0,   bod_rmvd_as_sludge_estm:0.10},
 		"Wetlands - Surface flow":{value:11,                      ch4_efac:0.24,  bod_rmvd_as_sludge_estm:0.30},
 		"Wetlands - Horizontal subsurface flow":{value:12,        ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
 		"Wetlands - Vertical subsurface flow":{value:13,          ch4_efac:0.006, bod_rmvd_as_sludge_estm:0.65},
