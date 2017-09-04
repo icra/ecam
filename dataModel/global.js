@@ -114,7 +114,13 @@ var Global = {
 				var fuel=Tables['Fuel types'][Tables.find('wsa_fuel_typ',this.wsa_fuel_typ)];//<br>
 				return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
 			},
-			wsa_KPI_GHG:function(){return this.wsa_KPI_GHG_elec()+this.wsa_KPI_GHG_fuel()} ,
+			wsa_KPI_GHG:function() {
+				if(Substages.Water.Abstraction.length > 0) {
+					return this.wsa_KPI_GHG_elec()+this.wsa_KPI_GHG_fuel();
+				}else {
+					return 0;
+				}
+			}
 		},
 
 		"Treatment":{
@@ -158,10 +164,13 @@ var Global = {
 				return this.wst_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
 			},
 
-			wst_KPI_GHG:function(){
-				return this.wst_KPI_GHG_elec()+
-					this.wst_KPI_GHG_fuel()
-			},
+			wst_KPI_GHG:function() {
+				if(Substages.Water.Treatment.length > 0) {
+					return this.wst_KPI_GHG_elec() + this.wst_KPI_GHG_fuel();
+				}else {
+					return 0;
+				}
+			}
 		},
 
 		"Distribution":{
@@ -265,11 +274,13 @@ var Global = {
 				return this.wsd_vol_trck*fuel.FD*fuel.NCV/1000*(Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles)
 			},
 
-			wsd_KPI_GHG:function(){
-				return this.wsd_KPI_GHG_elec()+
-				this.wsd_KPI_GHG_fuel()+
-				this.wsd_KPI_GHG_trck()
-			},
+			wsd_KPI_GHG:function() {
+				if(Substages.Water.Distribution.length > 0) {
+					return this.wsd_KPI_GHG_elec() + this.wsd_KPI_GHG_fuel() + this.wsd_KPI_GHG_trck();
+				}else {
+					return 0;
+				}
+			}
 		}
 	},
 
@@ -379,7 +390,11 @@ var Global = {
 				if(ghg_type === 'serv_pop') {
 					return this.wwc_KPI_GHG_elec();
 				}else {
-					return this.wwc_KPI_GHG_elec() + this.wwc_KPI_GHG_fuel() + this.wwc_KPI_GHG_unt();
+					if(Substages.Waste.Collection.length > 0){
+						return this.wwc_KPI_GHG_elec() + this.wwc_KPI_GHG_fuel() + this.wwc_KPI_GHG_unt();
+					}else {
+						return 0;
+					}
 				}
 			}
 
@@ -636,16 +651,19 @@ var Global = {
 				return (this.wwt_num_trip*2*this.wwt_dist_dis/1000*0.25)*fuel.FD/1000000*fuel.NCV*(Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles)
 			},
 
-			//wwt total ghg
-			wwt_KPI_GHG:function(){
-				return this.wwt_KPI_GHG_elec()+
-					this.wwt_KPI_GHG_fuel()+
-					this.wwt_KPI_GHG_tre()+
-					this.wwt_KPI_GHG_dig_fuel()+
-					this.wwt_KPI_GHG_biog()+
-					this.wwt_KPI_GHG_slu()+
-					0;
-			},
+			wwt_KPI_GHG:function() {
+				if(Substages.Waste.Treatment.length > 0){
+					return this.wwt_KPI_GHG_elec()+
+						this.wwt_KPI_GHG_fuel()+
+						this.wwt_KPI_GHG_tre()+
+						this.wwt_KPI_GHG_dig_fuel()+
+						this.wwt_KPI_GHG_biog()+
+						this.wwt_KPI_GHG_slu()+
+						0;
+				}else {
+					return 0;
+				}
+			}
 		},
 
 		"Discharge":{
@@ -709,12 +727,17 @@ var Global = {
 			wwd_KPI_GHG_tre_n2o:function(){//<br>
 				return this.wwd_n2o_effl/1000*this.wwd_vol_disc*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value
 			},
+
 			wwd_KPI_GHG:function(){
-				return this.wwd_KPI_GHG_elec()+
-				this.wwd_KPI_GHG_fuel()+
-				this.wwd_KPI_GHG_trck()+
-				this.wwd_KPI_GHG_tre_n2o()
-			},
+				if(Substages.Waste.Discharge.length > 0){
+					return this.wwd_KPI_GHG_elec() +
+						this.wwd_KPI_GHG_fuel() +
+						this.wwd_KPI_GHG_trck() +
+						this.wwd_KPI_GHG_tre_n2o();
+				}else {
+					return 0;
+				}
+			}
 		},
 	},
 
