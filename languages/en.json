@@ -131,7 +131,7 @@
 	"#sidebar_export":"Export",
 	"#summary_no_active_stages":"No active stages",
 	"#fuelInfo_description":"Depending on the fuel you select, the following emission factors (EF) will be applied in the equations",
-	"#fuelInfo_eeff":"Emission Factors (EF) for different fuel types (table 2.2 IPCC vol 2)",
+  "#fuelInfo_eeff":"Emission Factors (EF), Fuel Density (FD), and Net Calorific Values (NCV) for different fuel types (IPCC, 2006)",
 	"#fuelInfo_type":"Fuel type",
 	"#fuelInfo_engines":"engines",
 	"#fuelInfo_vehicles":"vehicles",
