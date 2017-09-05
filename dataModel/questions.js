@@ -196,10 +196,14 @@ var Questions={
 			otherQuestions:[],
 		},
 
-		"wsd_water_eff":{ //TODO
+		"wsd_water_eff":{
 			variables:[
+				"wsd_SL_GHG_nrw",
+				"wst_SL_GHG_nrw",
+				"wsa_SL_GHG_nrw",
+				"wsd_SL_ghg_attr"
 			],
-			advanced:0,
+			advanced:1,
 			otherQuestions:[],
 		},
 

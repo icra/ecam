@@ -188,9 +188,15 @@ var Global = {
 			wsd_SL_nr_water:function(){
 				return 100*(this.wsd_vol_dist-this.wsd_bill_con)/this.wsd_vol_dist;
 			},
+			// improv. for GHG due to non-revenue water in abstration, treatment, and distribution
+			// substages cal for wsd_SL_ghg_attr
+			wsd_SL_GHG_nrw:function(){return (this.wsd_KPI_GHG() * (this.wsd_vol_dist - this.wsd_bill_con) / this.wsd_vol_dist)},
+			wst_SL_GHG_nrw:function(){return (Global.Water.Treatment.wst_KPI_GHG() * (this.wsd_vol_dist - this.wsd_bill_con) / Global.Water.Treatment.wst_vol_trea)},
+			wsa_SL_GHG_nrw:function(){return (Global.Water.Abstraction.wsa_KPI_GHG() * (this.wsd_vol_dist - this.wsd_bill_con) / Global.Water.Abstraction.wsa_vol_conv)},
 			wsd_SL_ghg_attr:function(){
-				return this.wsd_KPI_GHG()*this.wsd_SL_nr_water()/100;
+				return this.wsd_SL_GHG_nrw() + this.wst_SL_GHG_nrw() + this.wsa_SL_GHG_nrw();
 			},
+			//
 			wsd_SL_water_loss:function(){
 				return 100*(this.wsd_vol_dist-this.wsd_auth_con)/this.wsd_vol_dist;
 			},

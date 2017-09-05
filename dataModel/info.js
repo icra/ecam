@@ -165,6 +165,9 @@ var Info = {
 
 	wsd_SL_nr_water:{magnitude:"Percentage",unit:"%"},
 	wsd_SL_ghg_attr:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wsd_SL_GHG_nrw:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wst_SL_GHG_nrw:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wsa_SL_GHG_nrw:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wsd_SL_water_loss:{magnitude:"Percentage",unit:"%"},
 
 	wsd_deli_pts:{magnitude:"Number",unit:"number"},
