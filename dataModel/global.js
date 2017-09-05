@@ -347,7 +347,12 @@ var Global = {
 			c_wwc_vol_infl:function(){return this.wwc_rain_day*(this.wwc_wet_flow-this.wwc_dry_flow)},
 			wwc_SL_GHG_ii:function(){return this.wwc_KPI_nrg_per_m3()*this.c_wwc_vol_infl()*Global.General.conv_kwh_co2},
 			wwc_SL_fratio:function(){return this.wwc_wet_flow/this.wwc_dry_flow},
-			wwc_SL_inf_emis:function(){return this.wwc_KPI_GHG()*this.c_wwc_vol_infl()/this.wwc_vol_conv},
+			// improv. for GHG due to I/I in collection, treatment, and discharge
+			// substages cal for wwc_SL_inf_emis
+			wwc_SL_GHG_inf:function(){return this.wwc_KPI_GHG_elec() * this.c_wwc_vol_infl() / this.wwc_vol_conv},
+			wwt_SL_GHG_inf:function(){return Global.Waste.Treatment.wwt_KPI_GHG_elec() * this.c_wwc_vol_infl() / this.wwc_vol_conv},
+			wwd_SL_GHG_inf:function(){return Global.Waste.Discharge.wwd_KPI_GHG_elec() * this.c_wwc_vol_infl() / this.wwc_vol_conv},
+			wwc_SL_inf_emis:function(){return this.wwc_SL_GHG_inf() + this.wwt_SL_GHG_inf() + this.wwd_SL_GHG_inf()},
 			//pumping?
 			"wwc_vol_pump":0,
 			"wwc_nrg_pump":0,

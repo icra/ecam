@@ -620,8 +620,14 @@
 
 	"#wwc_SL_fratio_descr":"Wet weather flow to dry weather flow ratio",
 	"#wwc_SL_fratio_expla":"Wet weather flow to dry weather flow ratio",
-	"#wwc_SL_inf_emis_descr":"GHG emissions attributable to infiltration/inflow",
-	"#wwc_SL_inf_emis_expla":"GHG emissions attributable to infiltration/inflow",
+	"#wwc_SL_GHG_inf_descr": "GHG in wastewater collection due to infiltration/inflow",
+	"#wwc_SL_GHG_inf_expla": "GHG in wastewater collection due to infiltration/inflow",
+	"#wwt_SL_GHG_inf_descr": "GHG in wastewater treatment due to infiltration/inflow",
+	"#wwt_SL_GHG_inf_expla": "GHG in wastewater treatment due to infiltration/inflow",
+	"#wwd_SL_GHG_inf_descr": "GHG in wastewater discharge/reuse due to infiltration/inflow",
+	"#wwd_SL_GHG_inf_expla": "GHG in wastewater discharge/reuse due to infiltration/inflow",
+	"#wwc_SL_inf_emis_descr":"Total GHG emissions attributable to infiltration/inflow",
+	"#wwc_SL_inf_emis_expla":"Total GHG emissions attributable to infiltration/inflow",
 
 	"#wwc_SL_ghg_unc_ch4_descr":"CH<sub>4</sub> from uncollected wastewater",
 	"#wwc_SL_ghg_unc_ch4_expla":"CH<sub>4</sub> from uncollected wastewater. 0.3 is kgCH<sub>4</sub>/kgBOD",
