@@ -1,4 +1,4 @@
-/** 
+/**
 *
 	Info: one-level-depth object that stores magnitudes and units for all inputs and outputs
 		descriptions in english are inside languages/en.php
@@ -93,7 +93,7 @@ var Info = {
 	ww_vol_fuel:{magnitude:"Volume",unit:"L"},
 	ww_KPI_GHG :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
 
-	//L1 ENERGY SUMMARY 
+	//L1 ENERGY SUMMARY
 	wsg_KPI_nrg_cons:{magnitude:"Energy",unit:"kWh"},
 	wsg_KPI_nrg_x_ye:{magnitude:"Energy/Time",unit:"kWh/year"},
 	wsg_KPI_nrg_x_ys:{magnitude:"Energy/Time/People",unit:"kWh/year/person"},
@@ -165,6 +165,9 @@ var Info = {
 
 	wsd_SL_nr_water:{magnitude:"Percentage",unit:"%"},
 	wsd_SL_ghg_attr:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wsd_SL_GHG_nrw:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wst_SL_GHG_nrw:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wsa_SL_GHG_nrw:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wsd_SL_water_loss:{magnitude:"Percentage",unit:"%"},
 
 	wsd_deli_pts:{magnitude:"Number",unit:"number"},
@@ -232,6 +235,9 @@ var Info = {
 	wwc_SL_GHG_ii:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwc_SL_fratio:{magnitude:"No dimension",unit:"ratio"},
 	wwc_SL_inf_emis:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wwc_SL_GHG_inf:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wwt_SL_GHG_inf:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+	wwd_SL_GHG_inf:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwc_SL_conn_pop:{magnitude:"Percentage",unit:"%"},
 	wwc_SL_ghg_unc_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwc_SL_ghg_unc_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},

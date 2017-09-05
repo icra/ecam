@@ -81,7 +81,7 @@
 			{
 				/*variable code*/
 				var code=inputs[input];
-				
+
 				/*Skip if is level2 only*/
 				if(Level2only.list.indexOf(code)+1) continue;
 
@@ -92,10 +92,10 @@
 				var isCV=typeof(CurrentLevel[code])=="function" ? true : false;
 
 				//copy the function inside substages
-				if(isCV) 
+				if(isCV)
 				{
-					for(var s in substages) 
-						substages[s][code]=CurrentLevel[code]; 
+					for(var s in substages)
+						substages[s][code]=CurrentLevel[code];
 				}
 
 				//if is an option, continue (will show at the end of the table)
@@ -141,7 +141,7 @@
 				newCell.style.textAlign="left";
 				newCell.setAttribute('title', translate(code+'_expla'));
 				newCell.innerHTML=(function(){
-					var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ? 
+					var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ?
 						" <span class=not_used_input caption='Input not used for any equation'></span>" : "";
 					return translate(code+'_descr')+warning;
 				})();
@@ -179,7 +179,7 @@
 					newCell.style.textAlign="center";newCell.style.fontWeight="bold";
 					newCell.innerHTML=(function()
 					{
-						if(isCV) 
+						if(isCV)
 						{
 							return format(CurrentLevel[code]()/multiplier);
 						}
@@ -225,7 +225,7 @@
 			{
 				/*variable code*/
 				var code=inputs[input];
-				
+
 				//if not option, continue
 				if(Info[code] && Info[code].magnitude!="Option") continue;
 
@@ -259,7 +259,7 @@
 				newCell.style.textAlign="left";
 				newCell.setAttribute('title', translate(code+'_expla'));
 				newCell.innerHTML=(function(){
-					var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ? 
+					var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ?
 						" <span class=not_used_input caption='Input not used for any equation'></span>" : "";
 					return translate(code+'_descr')+warning;
 				})();
@@ -286,7 +286,7 @@
 							select.appendChild(option);
 							option.value=value;
 							option.innerHTML="("+value+") "+op;
-							if(substages[s][code]==value) 
+							if(substages[s][code]==value)
 							{
 								option.selected=true;
 							}
@@ -296,7 +296,7 @@
 			}
 		/*end update body*/
 
-		/*update substage counter*/ 
+		/*update substage counter*/
 		document.getElementById('counter').innerHTML=substages.length
 	}
 	level3.getInputs=function()
@@ -436,16 +436,16 @@
 			switch(event.which)
 			{
 				case 38: //up key
-					if(!event.shiftKey){input.value++;updateChart();} 
+					if(!event.shiftKey){input.value++;updateChart();}
 					break;
 				case 40: //down key
-					if(!event.shiftKey){input.value--;updateChart();} 
+					if(!event.shiftKey){input.value--;updateChart();}
 					break;
 				case  9: //TAB key
 					setTimeout(function()
 					{
 						var el;//element to be clicked
-						if(event.shiftKey) //shift+tab navigates back 
+						if(event.shiftKey) //shift+tab navigates back
 							el=document.querySelector('#substages tr[field='+field+'] td[substage="'+(parseInt(substage)-1)+'"]')
 						else
 							el=document.querySelector('#substages tr[field='+field+'] td[substage="'+(parseInt(substage)+1)+'"]')
@@ -507,7 +507,7 @@
 
 			//exclude _KPI_GHG if checkbox is enabled
 			var isGHG=(field.search('_KPI_GHG')+1) ? true : false;
-			if(isGHG) 
+			if(isGHG)
 				if(!document.querySelector('#showGHGss').checked)
 					continue;
 
@@ -524,18 +524,18 @@
 			var newRow=t.insertRow(-1);
 			newRow.setAttribute('field',field);
 
-			//set highlighting 
+			//set highlighting
 			newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
 			newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
 
 			//1st cell: show code identifier
 			var newCell=newRow.insertCell(-1);
-			newCell.classList.add('variableCode'); 
+			newCell.classList.add('variableCode');
 			newCell.classList.add('output');
 			newCell.innerHTML=(function()
 			{
 				var ghg=isGHG                        ? "<span class='advanced ghg' caption='GHG'>GHG</span>":"";
-				var nrg=field.search('_nrg_')+1      ? "<span class='advanced nrg' caption='Energy performance'>NRG</span>":""; 
+				var nrg=field.search('_nrg_')+1      ? "<span class='advanced nrg' caption='Energy performance'>NRG</span>":"";
 				return "<a caption='"+translate(field+'_expla')+"' href=variable.php?id="+field+">"+field+"</a>"+ghg+nrg;
 			})();
 			//show question it belongs
@@ -584,7 +584,9 @@
 						}
 						return "<span caption='Benchmarking: "+text+"' class=circle style='background:"+color+"'></span>";
 					})();
-					return "<span style='display:inline-block;width:75%'>"+format(value)+"</span> "+indicator;
+					// patch for sums of CH4 & N2O from treatment - improv #9b //
+					return "<span style='display:inline-block;width:75%'>" +
+									((field == 'wwt_KPI_GHG_tre') ? "-" : format(value)) + "</span> " + indicator;
 				})();
 			}
 
@@ -634,23 +636,23 @@
 </script>
 
 <!--advanced questions-->
-<?php 
+<?php
 	$folded=isset($_COOKIE['Folded_adv_questions_container'])?"folded":"";?>
 <div id=adv_questions_container class="card <?php echo $folded?>">
 	<div class=menu onclick=fold(this.parentNode)>
 		<button></button>
-		<b>Advanced Assessment: Questions (<a href=questions.php>info</a>)</b> 
+		<b>Advanced Assessment: Questions (<a href=questions.php>info</a>)</b>
 	</div>
 	<div style=padding:0.5em;>
 		<table id=adv_questions></table>
-		<style> 
+		<style>
 			#adv_questions td {padding:0.3em 0.618em;text-align:left}
 		</style>
 	</div>
 </div>
 
 <!--substages container-->
-<?php 
+<?php
 	if(isset($_COOKIE['Folded_substageInputs_container']))
 	{
 		$folded="folded";
@@ -666,23 +668,23 @@
 		<button></button>
 		<b>Advanced Assessment: Substages</b>
 		Substages <b><span id=counter class=number>0</span></b>
-		&mdash; 
+		&mdash;
 		<a href=substages.php>Overview</a>
 
 		<!--button toggle outputs/graph display-->
-		<button 
-			class=btn_toggle 
+		<button
+			class=btn_toggle
 			onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#substages','#substageGraphs')"
 		>VIEW GRAPH</button>
 	</div>
 
 	<!--substages table-->
 	<div style=padding:0.5em>
-		<table id=substages> 
+		<table id=substages>
 			<tr><td colspan=2 style="min-width:260px;text-align:right;border:none">
 				<!--view all-->
 				<label style=float:left>
-					<input id=viewAll type=checkbox onclick=level3.toggleViewSum() checked> 
+					<input id=viewAll type=checkbox onclick=level3.toggleViewSum() checked>
 					View all stages &emsp;
 					<script>
 						level3.toggleViewSum=function()
