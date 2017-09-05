@@ -459,10 +459,10 @@ var Global = {
 			c_wwt_ch4_pot:function(){//<br>
 				var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp)//<br>
 				if(sludge_type=="Non-digested"){//<br>
-					return this.wwt_mass_slu_sto*0.65*Cts.ct_vs_slu.value*Cts.ct_oc_vs.value*(4/3) //<br>
+					return this.wwt_mass_slu_sto*0.53*Cts.ct_vs_slu.value*Cts.ct_oc_vs.value*(4/3) //<br>
 				}
 				else if(sludge_type=="Digested"){//<br>
-					return this.wwt_mass_slu_sto*0.65*Cts.ct_vs_dig.value*Cts.ct_oc_vs.value*(4/3) //<br>
+					return this.wwt_mass_slu_sto*0.06*Cts.ct_vs_dig.value*Cts.ct_oc_vs.value*(4/3) //<br>
 				}
 				else{return 0}
 			},
