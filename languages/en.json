@@ -364,7 +364,7 @@
 	"#wsa_sta_head_expla":"Static head",
 	"#wsa_vol_pump_descr":"Volume pumped",
 	"#wsa_vol_pump_expla":"Volume of water pumped in each water abstraction unit that are the responsibility of the undertaking, during the assessment period",
-	"#wsa_main_len_descr":"Transmission mains length",
+	"#wsa_main_len_descr":"Mains length",
 	"#wsa_main_len_expla":"Total transmission and distribution mains length (there are not service connections at the abstraction and conveyance stage)",
 	"#wsa_KPI_nrg_recovery_descr":"Energy recovery per abstracted water",
 	"#wsa_KPI_nrg_recovery_expla":"Unit energy recovered in water conveyance",

@@ -1,14 +1,14 @@
 /**
 	Codes of variables that are hidden if answer is NO
 
-	Question object structure: 
+	Question object structure:
 		1. "variables" (array)      variables hidden if answer is no
 		2. "advanced" (boolean)     show only in substages
 		3. "otherQuestions" (array) questions hidden if answer is no
-	
+
 	Template:
 	"newQuestion":{
-		variables:[ 
+		variables:[
 			"",
 		],
 		advanced:0,
@@ -33,8 +33,8 @@ var Questions={
 		},
 
 		"wsa_pumping":{
-			variables:[ 
-				"wsa_pmp_type",
+			variables:[
+				"wsa_pmp_type",    // comment for the sake of making it eq.
 				"wsa_pmp_size",
 				"wsa_nrg_pump",
 				"wsa_vol_pump",
@@ -54,8 +54,8 @@ var Questions={
 		"wsa_pumping_efficiency":{
 			variables:[
 				"wsa_pmp_flow",
-                "wsa_pmp_volt",
-                "wsa_pmp_amps",
+        "wsa_pmp_volt",
+        "wsa_pmp_amps",
 				"c_wsa_pmp_pw",
 				"wsa_KPI_nrg_elec_eff",
 			],
@@ -99,7 +99,7 @@ var Questions={
 		},
 
 		"wst_pumping_efficiency":{
-			variables:[ 
+			variables:[
 				"wst_vol_pump",
 				"wst_nrg_pump",
 				"wst_pmp_head",
@@ -185,7 +185,7 @@ var Questions={
 		},
 
 		"wsd_pumping_efficiency":{
-			variables:[ 
+			variables:[
 				"wsd_pmp_flow",
 				"wsd_pmp_volt",
 				"wsd_pmp_amps",
@@ -197,14 +197,14 @@ var Questions={
 		},
 
 		"wsd_water_eff":{ //TODO
-			variables:[ 
+			variables:[
 			],
 			advanced:0,
 			otherQuestions:[],
 		},
 
 		"wsd_opportunities":{
-			variables:[ 
+			variables:[
 				"wsd_pmp_exff",
 				"wsd_KPI_water_losses",
 				"wsd_KPI_std_nrg_newp",
@@ -425,8 +425,8 @@ var Questions={
 			otherQuestions:[
 			],
 		},
-		
-		"wwt_landfilling":{ 
+
+		"wwt_landfilling":{
 			variables:[
 				"wwt_mass_slu_land",
 				"wwt_slu_type",
@@ -585,7 +585,7 @@ Questions.isHiddenQuestion=function(field) {
 	return false;
 }
 
-//Automatic find repeated variables in Questions 
+//Automatic find repeated variables in Questions
 Questions.findRepeated=function() {
 	//count how many times appears field in Questions
 	function countField(field)
