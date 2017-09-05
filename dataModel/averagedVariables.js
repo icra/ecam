@@ -15,7 +15,8 @@ var Averaged=
 		"wsd_wt_el_no",
 		"wwt_ch4_biog",
 		"wwt_temp_inc",
-		"wwt_ch4_efac",
+		//"wwt_ch4_efac",    // est. of wwt_ch4_efac causes sum of average
+		                     // might not be the best approach here -garyl
 	],
 
 	isAveraged:function(code)
