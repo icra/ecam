@@ -56,9 +56,9 @@
 				var object=loc.sublevel ? Global[loc.level][loc.sublevel][code] : Global[loc.level][code];
 				var value=0;
 				if(typeof(object)=="function") {
-					value=loc.sublevel ? 
-						Global[loc.level][loc.sublevel][code]()/divisor_value 
-						: 
+					value=loc.sublevel ?
+						Global[loc.level][loc.sublevel][code]()/divisor_value
+						:
 						Global[loc.level][code]()/divisor_value;
 				}
 				else {
@@ -105,7 +105,7 @@
 		}
 	</style>
 </head><body onload=init()><center>
-<?php 
+<?php
 	include'sidebar.php';
 	include'navbar.php';
 	include'linear.php';
@@ -113,11 +113,11 @@
 ?>
 <!--title-->
 <h1>
-	<script>document.write(Global.General.Name)</script> 
+	<script>document.write(Global.General.Name)</script>
 	&mdash; Energy consumption Summary (Overview)
 </h1>
 <h4>
-	Assessment period: 
+	Assessment period:
 	<b>
 		<script>document.write(Global.General.Days())</script> days
 		(<script>document.write(Global.General.Years())</script> years)
@@ -129,21 +129,29 @@
 
 	<!--tab buttons-->
 	<div class=tab_buttons>
-		<button class=left onclick="tabs_show_tables()" disabled>Tables</button>
-		<button class=right onclick="tabs_show_graphs()">Graphs</button>
+		<button class=left onclick="tabs_show_tables()" id=tb_tables disabled>Tables</button>
+		<button class=right onclick="tabs_show_graphs()" id=tb_graphs>Graphs</button>
 		<script>
 			function tabs_show_graphs(){
 				document.getElementById('tables').style.display='none'
 				document.getElementById('graph').style.display=''
 				Graphs.graph5(false,'graph');
-				document.querySelector('div.tab_buttons button.right').setAttribute('disabled',true)
-				document.querySelector('div.tab_buttons button.left').removeAttribute('disabled')
+				// 'div.tab_buttons button.right' collides other tabs with tab_buttons classes
+				// ADDED button ids - not tested completely
+				document.querySelector('div.tab_buttons button#tb_graphs').setAttribute('disabled', true);
+				document.querySelector('div.tab_buttons button#tb_tables').removeAttribute('disabled');
+				// improvement list - #4 - graphs & tables switching
+				//document.querySelector('div.tab_buttons button.right').setAttribute('disabled',true);
+				//document.querySelector('div.tab_buttons button.left').removeAttribute('disabled');
 			}
 			function tabs_show_tables(){
 				document.getElementById('tables').style.display=''
 				document.getElementById('graph').style.display='none'
-				document.querySelector('div.tab_buttons button.right').removeAttribute('disabled')
-				document.querySelector('div.tab_buttons button.left').setAttribute('disabled',true)
+				document.querySelector('div.tab_buttons button#tb_tables').setAttribute('disabled', true);
+				document.querySelector('div.tab_buttons button#tb_graphs').removeAttribute('disabled');
+				// improvement list - #4 - graphs & tables switching
+				//document.querySelector('div.tab_buttons button.right').removeAttribute('disabled');
+				//document.querySelector('div.tab_buttons button.left').setAttribute('disabled',true);
 			}
 		</script>
 	</div>
@@ -162,41 +170,41 @@
 					</select>
 					<!--legend-->
 					<span style=float:right>
-						<span class=circle style=background:orange></span> 
+						<span class=circle style=background:orange></span>
 						highest energy consumption
 					</span>
 				<tr><th rowspan=9 style="font-weight:bold;background:lightgreen;color:black">TOTAL ENERGY CONSUMED<br><br><span field=TotalNRG>Loading...</span>
 
 				<th rowspan=3>
 					<a href="edit.php?level=Water" style=color:white>
-						Water supply 
-						(<script> 
+						Water supply
+						(<script>
 						document.write(Global.Water.ws_serv_pop)
 						</script> people)
 					</a>
 					<br><br><span field=ws_nrg_cons>Loading...</span>
 				</th>
 					<!--wsa-->
-					<td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'>Abstraction </a> 
-						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Abstraction.length)</script> 
+					<td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'>Abstraction </a>
+						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Abstraction.length)</script>
 						<td field=wsa_nrg_cons level=Water sublevel=Abstraction>Loading...
 
 					<!--wst-->
-					<tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'>Treatment   </a> 
-						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Treatment.length)</script> 
+					<tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'>Treatment   </a>
+						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Treatment.length)</script>
 						<td field=wst_nrg_cons level=Water sublevel=Treatment>Loading...
 
 					<!--wsd-->
-					<tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'>Distribution</a> 
-						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Distribution.length)</script> 
+					<tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'>Distribution</a>
+						<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Distribution.length)</script>
 						<td field=wsd_nrg_cons level=Water sublevel=Distribution>Loading...
 
 				<tr>
-				
+
 				<th rowspan=3 class=red>
 					<a href="edit.php?level=Waste" style=color:white>
 						Wastewater
-						(<script> 
+						(<script>
 						document.write(Global.Waste.ww_serv_pop)
 						</script> people)
 					</a>
@@ -204,18 +212,18 @@
 				</th>
 
 					<!--wwc-->
-					<td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'>Collection</a> 
+					<td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'>Collection</a>
 						<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Collection.length)</script>
 						<td field=wwc_nrg_cons level=Waste sublevel=Collection>Loading...
 
 					<!--wwt-->
-					<tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'>Treatment </a> 
-						<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Treatment.length)</script> 
+					<tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'>Treatment </a>
+						<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Treatment.length)</script>
 						<td field=wwt_nrg_cons level=Waste sublevel=Treatment>Loading...
 
 					<!--wwd-->
-					<tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'>Discharge </a> 
-						<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Discharge.length)</script> 
+					<tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'>Discharge </a>
+						<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Discharge.length)</script>
 						<td field=wwd_nrg_cons level=Waste sublevel=Discharge>Loading...
 				</tr>
 			</table>
@@ -234,8 +242,8 @@
 				float:left;
 				color:red;
 			}
-			table#sources{ 
-				margin:10px 0; 
+			table#sources{
+				margin:10px 0;
 				width:95%;
 			}
 			table#sources td {padding:1.2em 0.5em;max-width:70px}
