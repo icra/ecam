@@ -36,10 +36,11 @@
 											this.g_ww_biogas_opps_em;
 
 				var total = Global.General.TotalGHG() - ghg_sum;
-				var percent = ((Global.General.TotalGHG() - total) / Global.General.TotalGHG());
+				var percent = ((Global.General.TotalGHG() - total) / Global.General.TotalGHG()) * 100;
 				document.querySelector('#measure-footer-reduction').innerHTML=format(ghg_sum);
 				document.querySelector('#measure-footer-total').innerHTML=format(total);
 				document.querySelector('#measure-footer-percent-reduction').innerHTML=format(percent.toFixed(2));
+				updateResult();
 			},
 
 			tbl_opps : {
@@ -175,115 +176,133 @@
 					"title" : "Measure",
 					"col1" : "Desired Percent Change",
 					"col2" : "GHG Emission Reduction (kg CO<sub>2</sub>e)",
-					"col3" : "New Total System-Wide GHG Emission (gh CO<sub>2</sub>e)",
+					"col3" : "New Total System-Wide GHG Emission (kg CO<sub>2</sub>e)",
 					"col4" : "Percent GHG Reduction"
 				},
 				"body" : [
 					{ "type" : "ws",
 						"title" : "Non Revenue Water Volume",
+						"dper" : function() { return Global.Opps.g_nrw_water_vol_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_nrw_water_vol_opps_em = ((percent / 100) * opps.g_nrw_water_vol_opps);
 							var total_nrw = Global.General.TotalGHG() - opps.g_nrw_water_vol_opps_em;
-							var total_nrw_percent = (Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG();
+							var total_nrw_percent = ((Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG()) * 100;
 							document.querySelector('#measure-body-reduction' + '-'.concat(i)).innerHTML = format(opps.g_nrw_water_vol_opps_em);
 							document.querySelector('#measure-body-total' + '-'.concat(i)).innerHTML = format(total_nrw);
 							document.querySelector('#measure-body-percent-reduction' + '-'.concat(i)).innerHTML = format(total_nrw_percent);
+							Global.Opps.g_nrw_water_vol_dper = percent;
 							opps.g_update_total();
 						}
 					},
 					{ "type" : "ws",
 						"title" : "End-user consumption",
+						"dper" : function() { return Global.Opps.g_end_user_consumption_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_end_user_consumption_opps_em = ((percent / 100) * opps.g_end_user_consumption_opps);
 							var total_nrw = Global.General.TotalGHG() - opps.g_end_user_consumption_opps_em;
-							var total_nrw_percent = (Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG();
+							var total_nrw_percent = ((Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG()) * 100;
 							document.querySelector('#measure-body-reduction' + '-'.concat(i)).innerHTML = format(opps.g_end_user_consumption_opps_em);
 							document.querySelector('#measure-body-total' + '-'.concat(i)).innerHTML = format(total_nrw);
 							document.querySelector('#measure-body-percent-reduction' + '-'.concat(i)).innerHTML = format(total_nrw_percent);
+							Global.Opps.g_end_user_consumption_dper = percent;
 							opps.g_update_total();
 						}
 					},
 					{ "type" : "ws",
 						"title" : "*Water reuse (to replace potable water for non-potable purposes)",
+						"dper" : function() { return Global.Opps.g_water_reuse_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_water_reuse_opps_em = ((percent / 100) * opps.g_water_reuse_opps);
 							var total_nrw = Global.General.TotalGHG() - opps.g_water_reuse_opps_em;
-							var total_nrw_percent = (Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG();
+							var total_nrw_percent = ((Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG()) * 100;
 							document.querySelector('#measure-body-reduction' + '-'.concat(i)).innerHTML = format(opps.g_water_reuse_opps_em);
 							document.querySelector('#measure-body-total' + '-'.concat(i)).innerHTML = format(total_nrw);
 							document.querySelector('#measure-body-percent-reduction' + '-'.concat(i)).innerHTML = format(total_nrw_percent);
+							Global.Opps.g_water_reuse_dper = percent;
 							opps.g_update_total();
 						}
 					},
 					{ "type" : "ws",
 						"title" : "Drinking water grid energy consumption",
+						"dper" : function() { return Global.Opps.g_dw_energy_consumption_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_dw_energy_consumption_opps_em = ((percent / 100) * opps.g_dw_energy_consumption_opps);
-							var total_nrw = Global.General.TotalGHG() - opps.g_water_reuse_opps_em;
-							var total_nrw_percent = (Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG();
+							var total_nrw = Global.General.TotalGHG() - opps.g_dw_energy_consumption_opps_em;
+							var total_nrw_percent = ((Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG()) * 100;
 							document.querySelector('#measure-body-reduction' + '-'.concat(i)).innerHTML = format(opps.g_dw_energy_consumption_opps_em);
 							document.querySelector('#measure-body-total' + '-'.concat(i)).innerHTML = format(total_nrw);
 							document.querySelector('#measure-body-percent-reduction' + '-'.concat(i)).innerHTML = format(total_nrw_percent);
+							Global.Opps.g_dw_energy_consumption_dper = percent;
 							opps.g_update_total();
 						}
 					},
 					{ "type" : "ww",
 						"title" : "Infiltration/Inflow",
+						"dper" : function() { return Global.Opps.g_ww_infl_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_ww_infl_opps_em = ((percent / 100) * opps.g_ww_infl_opps);
 							var total_nrw = Global.General.TotalGHG() - opps.g_ww_infl_opps_em;
-							var total_nrw_percent = (Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG();
+							var total_nrw_percent = ((Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG()) * 100;
 							document.querySelector('#measure-body-reduction' + '-'.concat(i)).innerHTML = format(opps.g_ww_infl_opps_em);
 							document.querySelector('#measure-body-total' + '-'.concat(i)).innerHTML = format(total_nrw);
 							document.querySelector('#measure-body-percent-reduction' + '-'.concat(i)).innerHTML = format(total_nrw_percent);
+							Global.Opps.g_ww_infl_dper = percent;
 							opps.g_update_total();
 						}
 					},
 					{ "type" : "ww",
 						"title" : "Wastewater grid energy consumption",
+						"dper" : function() { return Global.Opps.g_ww_grid_energy_consumption_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_ww_grid_energy_consumption_opps_em = ((percent / 100) * opps.g_ww_grid_energy_consumption_opps);
 							var total_nrw = Global.General.TotalGHG() - opps.g_ww_grid_energy_consumption_opps_em;
-							var total_nrw_percent = (Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG();
+							var total_nrw_percent = ((Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG()) * 100;
 							document.querySelector('#measure-body-reduction' + '-'.concat(i)).innerHTML = format(opps.g_ww_grid_energy_consumption_opps_em);
 							document.querySelector('#measure-body-total' + '-'.concat(i)).innerHTML = format(total_nrw);
 							document.querySelector('#measure-body-percent-reduction' + '-'.concat(i)).innerHTML = format(total_nrw_percent);
+							Global.Opps.g_ww_grid_energy_consumption_dper = percent;
 							opps.g_update_total();
 						}
 					},
 					{ "type" : "ww",
 						"title" : "Sludge Disposed",
+						"dper" : function() { return Global.Opps.g_ww_slu_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_ww_slu_opps_em = ((percent / 100) * opps.g_ww_slu_opps);
 							var total_nrw = Global.General.TotalGHG() - opps.g_ww_slu_opps_em;
-							var total_nrw_percent = (Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG();
+							var total_nrw_percent = ((Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG()) * 100;
 							document.querySelector('#measure-body-reduction' + '-'.concat(i)).innerHTML = format(opps.g_ww_slu_opps_em);
 							document.querySelector('#measure-body-total' + '-'.concat(i)).innerHTML = format(total_nrw);
 							document.querySelector('#measure-body-percent-reduction' + '-'.concat(i)).innerHTML = format(total_nrw_percent);
+							Global.Opps.g_ww_slu_dper = percent;
 							opps.g_update_total();
 						}
 					},
 					{ "type" : "ww",
 						"title" : "Water Reuse (to avoid discharge to water body)",
+						"dper" : function() { return Global.Opps.g_ww_water_reuse_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_ww_water_reuse_opps_em = ((percent / 100) * opps.g_ww_water_reuse_opps);
 							var total_nrw = Global.General.TotalGHG() - opps.g_ww_water_reuse_opps_em;
-							var total_nrw_percent = (Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG();
+							var total_nrw_percent = ((Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG()) * 100;
 							document.querySelector('#measure-body-reduction' + '-'.concat(i)).innerHTML = format(opps.g_ww_water_reuse_opps_em);
 							document.querySelector('#measure-body-total' + '-'.concat(i)).innerHTML = format(total_nrw);
 							document.querySelector('#measure-body-percent-reduction' + '-'.concat(i)).innerHTML = format(total_nrw_percent);
+							Global.Opps.g_ww_water_reuse_dper = percent;
 							opps.g_update_total();
 						}
 					},
 					{ "type" : "ww",
 						"title" : "Reduce Biogas Flared",
+						"dper" : function() { return Global.Opps.g_ww_biogas_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_ww_biogas_opps_em = ((percent / 100) * opps.g_ww_biogas_opps);
 							var total_nrw = Global.General.TotalGHG() - opps.g_ww_biogas_opps_em;
-							var total_nrw_percent = (Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG();
+							var total_nrw_percent = ((Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG()) * 100;
 							document.querySelector('#measure-body-reduction' + '-'.concat(i)).innerHTML = format(opps.g_ww_biogas_opps_em);
 							document.querySelector('#measure-body-total' + '-'.concat(i)).innerHTML = format(total_nrw);
 							document.querySelector('#measure-body-percent-reduction' + '-'.concat(i)).innerHTML = format(total_nrw_percent);
+							Global.Opps.g_ww_biogas_dper = percent;
 							opps.g_update_total();
 						}
 					}
@@ -354,6 +373,7 @@
 			}
 		}
 
+		// Render Measure Table //
 		function renderMeasureTemplate(measure_tbl) {
 			if('content' in document.createElement('template')) {
 					// HEADER
@@ -370,7 +390,8 @@
 						title.innerHTML = val.title;
 
 						var input = tmpl.getElementById('measure-body-input');
-						input.onchange = function(){ val.ghg_em(parseFloat(input.value),i) };
+						input.value = val.dper();
+
 						var reduction = tmpl.getElementById('measure-body-reduction');
 						reduction.id += '-' + i;
 					  reduction.style.textAlign = 'right';
@@ -383,7 +404,12 @@
 						percent.id += '-' + i;
 					  percent.style.textAlign = 'right';
 						percent.innerHTML = "-";
+
+						input.onchange = function(event) { val.ghg_em(parseFloat(event.target.value), i) };    // attach onchange callback
+
 						document.getElementById('measure-body').appendChild(tmpl);
+
+						val.ghg_em(parseFloat(input.value), i);    // invoke on init table
 					});
 
 					// FOOTER
@@ -409,6 +435,7 @@
 			renderOppsTemplate(opps.tbl_opps);
 			renderStageTemplate(opps.tbl_stage);
 			renderMeasureTemplate(opps.tbl_measure);
+			opps.g_update_total();
 			updateResult();
 		}
 
@@ -518,8 +545,12 @@
 				  <template id="measure-body-template">
 						<tr>
 					  	<td class="body-title" id="measure-body-title">Loading....</td>
-							<td class="body-ghg" id="measure-body-percent">
-								<input type=number style='text-align:right;' id='measure-body-input' step='0.1'></input>
+							<td style="text-align: center;" class="body-ghg" id="measure-body-percent">
+								<input type=number
+									     style="text-align: center; width: 68%; outline-width: 0;"
+											 id='measure-body-input'
+									     step='0.1' />
+								<span>%</span>
 							</td>
 							<td class="body-ghg" id="measure-body-reduction">Loading....</td>
 							<td class="body-ghg" id="measure-body-total">Loading....</td>

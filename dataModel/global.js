@@ -809,6 +809,18 @@ var Global = {
 			wwt_valorizing_biogas:0,
 		},
 	},
+
+  Opps : {
+    g_nrw_water_vol_dper : 0,
+    g_end_user_consumption_dper : 0,
+    g_water_reuse_dper : 0,
+    g_dw_energy_consumption_dper : 0,
+    g_ww_infl_dper : 0,
+    g_ww_grid_energy_consumption_dper : 0,
+    g_ww_slu_dper : 0,
+    g_ww_water_reuse_dper : 0,
+    g_ww_biogas_dper : 0,
+  }
 };
 
 //following block is a fix for wrapper equations, so they don't appear incorrectly at variable.php
