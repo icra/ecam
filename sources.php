@@ -74,30 +74,60 @@
 		}
 
 		function findCriticGHG() {
+			let value = 0;
+			let area = '';
 			var max=0;
 			var critic=false;
+
 			var fields=document.querySelectorAll('#sources td[field]');
+
 			for(var i=0;i<fields.length;i++) {
-				var value=parseFloat(fields[i].getAttribute('value'));
+				value=parseFloat(fields[i].getAttribute('value'));
 				if(value>max) {
 					max=value;
 					critic=fields[i].getAttribute('field')
+					area = 'sources';
 				}
 			}
+			// patch - also seek max with outside utility boundaries
+			var outside_fields = document.querySelectorAll('#outside td[field]');
+
+			outside_fields.forEach(function(td) {
+				value=parseFloat(td.innerText.split(',').join(''));
+				if(value > max) {
+					max = value;
+					critic=td.getAttribute('field');
+					area = 'outside';
+				}
+			});
+
 			if(!critic)return;
-			var element=document.querySelector("#sources td[field="+critic+"]");
 
-			//CO2
-			element.classList.add('critic');
-			element.setAttribute('cap',"This is the highest GHG emission of your system");
+			var element=document.querySelector("#"+area+" td[field="+critic+"]");
 
-			//substages number
-			element.previousSibling.classList.add('critic');
-			element.previousSibling.setAttribute('caption',element.getAttribute('cap'));
+			if (area === 'sources') {
+				//CO2
+				element.classList.add('critic');
+				element.setAttribute('cap',"This is the highest GHG emission of your system");
 
-			//name
-			element.previousSibling.previousSibling.classList.add('critic');
-			element.previousSibling.previousSibling.setAttribute('caption',element.getAttribute('cap'));
+				//substages number
+				element.previousSibling.classList.add('critic');
+				element.previousSibling.setAttribute('caption',element.getAttribute('cap'));
+
+				//name
+				element.previousSibling.previousSibling.classList.add('critic');
+				element.previousSibling.previousSibling.setAttribute('caption',element.getAttribute('cap'));
+
+			}else if (area === 'outside') {
+
+				element.classList.add('critic');
+				element.setAttribute('cap',"Outside utility has highest GHG emission of your system");
+
+				//name
+				element.previousSibling.classList.add('critic');
+				element.previousSibling.setAttribute('caption',element.getAttribute('cap'));
+			}
+
 		}
 
 		function addDetailedListeners() {
@@ -305,6 +335,8 @@
 				table#sources td {padding:1.2em 0.5em;max-width:70px}
 				table#sources td[field] {text-align:right}
 				table#sources img {vertical-align:middle;width:30px;margin-right:10px}
+				/* Patch for outside utility critial highlight */
+				table#outside .critic {animation:blink 3s ease 0.5s infinite alternate;}
 			</style>
 		</div>
 
