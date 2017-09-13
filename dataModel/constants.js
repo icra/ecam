@@ -1,4 +1,4 @@
-var Cts = 
+var Cts =
 {
 	ct_ch4_eq:{
 		value:34,
@@ -28,7 +28,7 @@ var Cts =
 	ct_n2o_efp:{
 		value:3.2,
 		descr:"N<sub>2</sub> Emission factor",
-		unit:"g N<sub>2</sub>/person/year",
+		unit:"g N<sub>2</sub>O/person/year",
 	},
 
 	ct_bod_kg:{
