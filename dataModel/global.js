@@ -238,7 +238,7 @@ var Global = {
 			wsd_main_len:0,
 
 			c_wsd_pmp_pw:function(){
-				return this.wsd_pmp_flow*this.wsd_pmp_head*Cts.ct_gravit.value/1000
+				return this.wsd_pmp_flow*this.wsd_pmp_head*Cts.ct_gravit.value*0.001/1000
 			},
 
 			wsd_KPI_std_nrg_cons:function(){return this.wsd_nrg_pump/(this.wsd_vol_pump*this.wsd_pmp_head/100)},
