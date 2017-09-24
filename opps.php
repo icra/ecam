@@ -461,7 +461,14 @@
 	<!--navbar--><?php include'navbar.php'?>
 	<!--linear--><?php include'linear.php'?>
 <!--/includes-->
-<h1>Opportunities to reduce GHG emissions</h1>
+<div style="textAlign: center">
+	<h1>Opportunities to reduce GHG emissions</h1>
+
+	<!-- including link to catalogue of solutions -->
+	<a href="http://www.iwa-network.org/water-climate-energy-solutions/public/"
+		style="font-weight: bold; color: grey;">[Catalogue of Solutions]
+	</a>
+</div>
 
 <div id=root>
 
@@ -482,7 +489,7 @@
 				<thead>
 					<tr>
 						<th style="background:#d7bfaf">Opportunities</th>
-						<th id="opps-col-1" style="text-align: center; background:black;">Loading....</th>
+						<th id="opps-col-1" style="text-align: center; color: black; background: #f5ecce;">Loading....</th>
 					</tr>
 				</thead>
 				<tbody id="opps-body">
@@ -503,7 +510,7 @@
 				<thead>
 					<tr>
 						<th style="background:#d7bfaf">Stage</th>
-						<th id="stage-col-1" style="text-align: center; background:black;">Loading....</th>
+						<th id="stage-col-1" style="text-align: center; color: black; background: #f5ecce;">Loading....</th>
 					</tr>
 				</thead>
 			  <tbody id="stage-body">
@@ -516,7 +523,7 @@
 		 	  </tbody>
 				<tfoot>
 					<tr>
-						<td class="footer-title" id="stage-footer-title" style="background:yellow;">Loading....</td>
+						<td class="footer-title" id="stage-footer-title" style="background: #8cc63f;">Loading....</td>
 						<td class="footer-ghg" id="stage-footer-ghg" style="text-align: right;">Loading....</td>
 					</tr>
 				</tfoot>
@@ -535,10 +542,10 @@
 				<thead>
 					<tr>
 						<th style="background:#d7bfaf" class="head-title">Measures</th>
-						<th class="head-col" id="measure-col-1" style="text-align: center; background:black;">Loading....</th>
-						<th class="head-col" id="measure-col-2" style="text-align: center; background:black;">Loading....</th>
-						<th class="head-col" id="measure-col-3" style="text-align: center; background:black;">Loading....</th>
-						<th class="head-col" id="measure-col-4" style="text-align: center; background:black;">Loading....</th>
+						<th class="head-col" id="measure-col-1" style="text-align: center; color: black; background: #f5ecce;">Loading....</th>
+						<th class="head-col" id="measure-col-2" style="text-align: center; color: black; background: #f5ecce;">Loading....</th>
+						<th class="head-col" id="measure-col-3" style="text-align: center; color: black; background: #f5ecce;">Loading....</th>
+						<th class="head-col" id="measure-col-4" style="text-align: center; color: black; background: #f5ecce;">Loading....</th>
 					</tr>
 				</thead>
 			  <tbody id="measure-body">
@@ -560,7 +567,7 @@
 		 	  </tbody>
 				<tfoot>
 					<tr>
-						<td colspan="2" class="footer-title" id="measure-footer-title" style="background:yellow;">Loading....</td>
+						<td colspan="2" class="footer-title" id="measure-footer-title" style="background: #8cc63f;">Loading....</td>
 						<td class="footer-ghg" id="measure-footer-reduction" style="text-align: right;">Loading....</td>
 						<td class="footer-ghg" id="measure-footer-total" style="text-align: right;">Loading....</td>
 						<td class="footer-ghg" id="measure-footer-percent-reduction" style="text-align: right;">Loading....</td>
@@ -572,5 +579,4 @@
 
 </div>
 
-<!--FOOTER--><?php include'footer.php'?>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
