@@ -134,13 +134,13 @@
 						"title" : "Water Reuse (to avoid discharge to water body)",
 						"ghg_em" : function() {
 							opps.g_ww_water_reuse_opps = Global.Waste.Discharge.wwd_vol_disc *
-																           (Global.Waste.Discharge.wwd_KPI_GHG() / Global.Waste.Discharge.wwd_vol_disc);
+																           (Global.Waste.Discharge.wwd_KPI_GHG_tre_n2o() / Global.Waste.Discharge.wwd_vol_disc);
 							var emissions = 0.01 * opps.g_ww_water_reuse_opps;
 							return emissions;
 						}
 					},
 					{ "type" : "ww",
-						"title" : "Reduce Biogas Flared",
+						"title" : "Biogas Production / Recovery",
 						"ghg_em" : function() {
 							var biog_kpi_ghg = (Global.Waste.Treatment.c_wwt_biog_fla() == (null || 0)) ? 0 : (Global.Waste.Treatment.wwt_KPI_GHG_biog() / Global.Waste.Treatment.c_wwt_biog_fla());
 							opps.g_ww_biogas_opps = Global.Waste.Treatment.c_wwt_biog_fla() * biog_kpi_ghg;
@@ -293,10 +293,10 @@
 						}
 					},
 					{ "type" : "ww",
-						"title" : "Reduce Biogas Flared",
+						"title" : "Biogas Production / Recovery",
 						"dper" : function() { return Global.Opps.g_ww_biogas_dper; },
 						"ghg_em" : function(percent,i) {
-							opps.g_ww_biogas_opps_em = ((percent / 100) * opps.g_ww_biogas_opps);
+							opps.g_ww_biogas_opps_em = (Global.Waste.Treatment.wwt_nrg_cons - (percent * 2)) * Global.General.conv_kwh_co2;
 							var total_nrw = Global.General.TotalGHG() - opps.g_ww_biogas_opps_em;
 							var total_nrw_percent = ((Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG()) * 100;
 							document.querySelector('#measure-body-reduction' + '-'.concat(i)).innerHTML = format(opps.g_ww_biogas_opps_em);

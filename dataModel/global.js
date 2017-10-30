@@ -612,6 +612,8 @@ var Global = {
 				return (this.wwt_bod_infl-this.wwt_bod_slud-this.wwt_bod_effl)*this.wwt_ch4_efac*Cts.ct_ch4_eq.value
 			},
 			wwt_KPI_GHG_tre_n2o:function(){
+        // returning wwt_KPI_GHG_tre_n20 needs to be zero if energy consumer is zero - yet to verify
+        if (this.wwt_nrg_cons === 0) { Cts.ct_n2o_efp.value = 0; }
 				return Global.Waste.ww_serv_pop*Cts.ct_fac_ic.value*Cts.ct_n2o_efp.value*Global.General.Years()*1e-3*Cts.ct_n2o_eq.value;
 			},
 			wwt_KPI_GHG_tre:function(){
