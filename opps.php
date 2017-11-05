@@ -47,7 +47,7 @@
 				"header" : { "title" : "Opportunities", "col1" : "kg CO<sub>2</sub>e reduction <br> per 1% change <br> of current value</th>"},
 				"body" : [
 					{ "type" : "ws",
-						"title" : "Non Revenue Water Volume",
+						"title" : "Non-revenue water volume",
 						"ghg_em" : function() {
 							var wsd_kpi_ghg_s = Global.Water.Distribution.wsd_KPI_GHG() / Global.Water.Distribution.wsd_vol_dist;
 						  var wst_kpi_ghg_s = Global.Water.Treatment.wst_KPI_GHG() / Global.Water.Treatment.wst_vol_trea;
@@ -111,7 +111,7 @@
 						}
 					},
 					{ "type" : "ww",
-						"title" : "Sludge Disposed",
+						"title" : "Sludge disposed",
 						"ghg_em" : function() {
 							var wwt_kpi_ghg_sto_co2eq_s   = (Global.Waste.Treatment.wwt_mass_slu_sto   == (null || 0)) ? 0 : (Global.Waste.Treatment.wwt_KPI_ghg_sto_co2eq() / Global.Waste.Treatment.wwt_mass_slu_sto);
 							var wwt_kpi_ghg_comp_co2eq_s  = (Global.Waste.Treatment.wwt_mass_slu_comp  == (null || 0)) ? 0 : (Global.Waste.Treatment.wwt_KPI_ghg_comp_co2eq() / Global.Waste.Treatment.wwt_mass_slu_comp);
@@ -159,7 +159,7 @@
 					{ "type" : "wsd", "title" : "Drinking Water Distribution", "ghg_em" : function() { return Global.Water.Distribution.wsd_KPI_GHG(); } },
 					{ "type" : "wwc", "title" : "Wastewater Collection", "ghg_em" : function() { return Global.Waste.Collection.wwc_KPI_GHG(); } },
 					{ "type" : "wwt", "title" : "Wastewater Treatment", "ghg_em" : function() { return Global.Waste.Treatment.wwt_KPI_GHG(); } },
-					{ "type" : "wwd", "title" : "Wastewater Discharge", "ghg_em" : function() { return Global.Waste.Discharge.wwd_KPI_GHG(); } }
+					{ "type" : "wwd", "title" : "Wastewater Discharge/Treatment", "ghg_em" : function() { return Global.Waste.Discharge.wwd_KPI_GHG(); } }
 				],
 				"footer" : { "title" : "Total System-Wide", "ghg_total" : function() {
 					return Global.Water.Abstraction.wsa_KPI_GHG() +
@@ -181,7 +181,7 @@
 				},
 				"body" : [
 					{ "type" : "ws",
-						"title" : "Non Revenue Water Volume",
+						"title" : "Non-revenue water reduction",
 						"dper" : function() { return Global.Opps.g_nrw_water_vol_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_nrw_water_vol_opps_em = ((percent / 100) * opps.g_nrw_water_vol_opps);
@@ -195,7 +195,7 @@
 						}
 					},
 					{ "type" : "ws",
-						"title" : "End-user consumption",
+						"title" : "End-user consumption reduction",
 						"dper" : function() { return Global.Opps.g_end_user_consumption_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_end_user_consumption_opps_em = ((percent / 100) * opps.g_end_user_consumption_opps);
@@ -223,7 +223,7 @@
 						}
 					},
 					{ "type" : "ws",
-						"title" : "Drinking water grid energy consumption",
+						"title" : "Drinking water grid energy consumption reduction",
 						"dper" : function() { return Global.Opps.g_dw_energy_consumption_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_dw_energy_consumption_opps_em = ((percent / 100) * opps.g_dw_energy_consumption_opps);
@@ -237,7 +237,7 @@
 						}
 					},
 					{ "type" : "ww",
-						"title" : "Infiltration/Inflow",
+						"title" : "Infiltration/Inflow reduction",
 						"dper" : function() { return Global.Opps.g_ww_infl_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_ww_infl_opps_em = ((percent / 100) * opps.g_ww_infl_opps);
@@ -251,7 +251,7 @@
 						}
 					},
 					{ "type" : "ww",
-						"title" : "Wastewater grid energy consumption",
+						"title" : "Wastewater grid energy consumption reduction",
 						"dper" : function() { return Global.Opps.g_ww_grid_energy_consumption_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_ww_grid_energy_consumption_opps_em = ((percent / 100) * opps.g_ww_grid_energy_consumption_opps);
@@ -265,7 +265,7 @@
 						}
 					},
 					{ "type" : "ww",
-						"title" : "Sludge Disposed",
+						"title" : "Sludge disposal reduction*",
 						"dper" : function() { return Global.Opps.g_ww_slu_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_ww_slu_opps_em = ((percent / 100) * opps.g_ww_slu_opps);
@@ -293,7 +293,7 @@
 						}
 					},
 					{ "type" : "ww",
-						"title" : "Biogas Production / Recovery",
+						"title" : "Biogas Production / Recovery (MUST ENTER cubic meters of additional biogas production & recovery desired, not precent)",
 						"dper" : function() { return Global.Opps.g_ww_biogas_dper; },
 						"ghg_em" : function(percent,i) {
 							opps.g_ww_biogas_opps_em = (Global.Waste.Treatment.wwt_nrg_cons - (percent * 2)) * Global.General.conv_kwh_co2;
@@ -311,7 +311,8 @@
 					"title" : "Measure Total",
 					"ghg_em" : function() {
 						opps.g_update_total();
-					}
+					},
+					"note" : "*assumes 1% water resued reduced end-user consumption by 1%"
 				}
 			}
 		};
@@ -424,6 +425,10 @@
 					var percent = document.getElementById('measure-footer-percent-reduction');
 					percent.style.textAlign = 'right';
 					percent.innerHTML = "-";
+
+					// FOOTER NOTE
+					var note = document.getElementById('measure-footer-note');
+					note.innerHTML = measure_tbl.footer.note;
 
 			}else {
 				console.log("==browser has no template support==");
@@ -571,6 +576,9 @@
 						<td class="footer-ghg" id="measure-footer-reduction" style="text-align: right;">Loading....</td>
 						<td class="footer-ghg" id="measure-footer-total" style="text-align: right;">Loading....</td>
 						<td class="footer-ghg" id="measure-footer-percent-reduction" style="text-align: right;">Loading....</td>
+					</tr>
+					<tr>
+						<td colspan="5" class="footer-note" id="measure-footer-note" sylte="background: white;">Loading...</td>
 					</tr>
 				</tfoot>
 			</table>
