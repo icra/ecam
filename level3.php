@@ -601,7 +601,6 @@
 
 				// quick fix sum of substages problem
 				if(Info[field].magnitude=="Mass"){
-					console.log(field);
 					newCell.innerHTML=(function(){
 						var sum=0;
 						for(var s in substages){sum+=parseFloat(substages[s][field]())}

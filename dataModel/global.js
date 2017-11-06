@@ -81,13 +81,13 @@ var Global = {
 			//pumping efficiency?
 			wsa_sta_head:0,
 			wsa_pmp_head:0,
+			wsa_main_len:0,
+			wsa_pmp_type:0,
 			wsa_pmp_size:0,
-			//wsa_pmp_type:0,
+			wsa_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
 			wsa_pmp_flow:0, //Measured pump flow L/s
 			wsa_pmp_volt:0, //Measured pump voltage V
 			wsa_pmp_amps:0, //Measured pump current Amp
-			wsa_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
-			wsa_main_len:0,
 			c_wsa_pmp_pw:function(){return this.wsa_pmp_flow*this.wsa_pmp_head*9.81*1000*0.001/1000},
 			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_pump+this.wsa_nrg_turb)/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
 			// improv list fix for #10
@@ -231,11 +231,11 @@ var Global = {
 			wsd_pmp_size:0,
 			wsd_sta_head:0,
 			wsd_pmp_head:0,
+			wsd_main_len:0,
+			wsd_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
 			wsd_pmp_flow:0, //Measured pump flow L/s
 			wsd_pmp_volt:0, //Measured pump voltage V
 			wsd_pmp_amps:0, //Measured pump current Amp
-			wsd_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
-			wsd_main_len:0,
 
 			c_wsd_pmp_pw:function(){
 				return this.wsd_pmp_flow*this.wsd_pmp_head*Cts.ct_gravit.value*0.001/1000
