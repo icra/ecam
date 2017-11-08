@@ -3,9 +3,9 @@
   *
   */
 
-var Averaged=
-{
+var Averaged={
 	list:[
+		"wsa_pmp_exff",
 		"wst_tst_carr",
 		"wsd_time_pre",
 		"wsd_min_pres",
@@ -13,17 +13,18 @@ var Averaged=
 		"wsd_lo_no_el",
 		"wsd_av_no_el",
 		"wsd_wt_el_no",
+		"wsd_pmp_exff",
+		"wwc_pmp_exff",
 		"wwt_ch4_biog",
 		"wwt_temp_inc",
 		"wwt_ch4_efac",
+		"wwd_n2o_effl",
 	],
 
-	isAveraged:function(code)
-	{
-		for(var i in this.list)
-		{
-			if(code==this.list[i]){return true;break;}
-		}
-		return false;
+	isAveraged:function(code){
+		if(this.list.indexOf(code)+1)
+			return true;
+		else
+			return false;
 	},
 }
