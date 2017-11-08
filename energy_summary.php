@@ -170,11 +170,11 @@
 						<span class=circle style=background:orange></span> 
 						<?php write('#highest energy consumption')?>
 					</span>
-				<tr><th rowspan=9 style="font-weight:bold;background:lightgreen;color:black">
+				<tr><th rowspan=9 style="font-weight:bold;background:#2b6488;">
 					<?php write('#TOTAL ENERGY CONSUMED')?>
 				<br><br><span field=TotalNRG><?php write('#Loading')?>...</span>
 
-				<th rowspan=3>
+				<th rowspan=3 style="background:#00aff1">
 					<a href="edit.php?level=Water" style=color:white>
 						<?php write('#Water')?>
 						(<script> 

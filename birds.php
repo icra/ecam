@@ -2,7 +2,13 @@
 	<?php include'imports.php'?>
 	<style>
 		body {background:#F5ECCE}
-		h1{background:white;border-bottom:1px solid #ccc;}
+		h1{
+			background:white;
+			border:none;
+			box-shadow:0 1px 2px rgba(0,0,0,.5);
+			line-height:2.1em;
+			text-align:left;
+		}
 		/*
 			legend colors for graphs
 		*/
@@ -29,7 +35,6 @@
 			width:95%;
 			height:24px;
 			display:block;
-			padding:0.2em;
 		}
 		#inputs input[type=radio] {
 			display:auto;

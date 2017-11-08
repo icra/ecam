@@ -4,14 +4,15 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1>Fuel types</h1>
+<!--TITLE-->
+<h1> <?php write('#Fuel types')?> </h1>
 <img src=img/fuel.png>
 <!--description--><h4><?php write('#fuelInfo_description')?></h4>
 
 <div id=main>
 
 <!--fuel info-->
-<table id=fuelInfo style="font-size:20px;margin-bottom:3em"> 
+<table id=fuelInfo style="font-size:16px;margin-bottom:3em"> 
 	<tr><th colspan=8 style=text-align:center><?php write('#fuelInfo_eeff')?>
 	<tr>
 		<th rowspan=2><?php write('#fuelInfo_type')?>

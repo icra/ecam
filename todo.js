@@ -1,14 +1,21 @@
 /*Tasks data structure*/
 var TODO = {
 	Front:[//frontend
-		"[LLUIS] Opportunities page as discussed with Jose",
 		"[IWA] Where I should place the <a href=sankey.php>Sankey diagram</a>? (all water flows)",
 		"[WAIT] Add in the <a href=help.php>help page</a> an example json file, after variable structure does not change anymore",
 	],
 	Back:[//backend
-		"[lluis] wwt_ch4_efac problemes suma de substages",
-		"[lluis] treure wwt_slu_storage_ch4",
-		"[LLUIS] In export: the formula for wsa_KPI_GHG does not appear correctly, when seen from level 1 ws, because belongs to another data structure, find solution. This happens also for analog L1 formulas also",
+		"[lluis] Translation templating. Missing to translate:<ul>"+
+			"<li>opportunities names (opportunites has never been well developed)"+
+			"<li>estimations page (very long to implement)"+
+			"<li>about auc (was requested but never explained what to show there)"+
+			"<li>about fuel"+
+			"<li>about page"+
+		"",
+
+		"[lluis] wwt_ch4_efac problems sum of substages",
+		"[lluis] remove wwt_slu_storage_ch4",
+		"[lluis] In export: the formula for wsa_KPI_GHG does not appear correctly, when seen from level 1 ws, because belongs to another data structure, find solution. This happens also for analog L1 formulas also",
 		"[IWA] This list of equations still have 'magic numbers' (numbers not referenced)<ul>"+
 			"<li>c_wwt_nrg_biog (10)"+
 			"<li>c_wwt_ch4_pot (0.65, 4/3)"+
@@ -20,16 +27,16 @@ var TODO = {
 			"<li>wwt_slu_composting_n2o (0.03, 0.015 )"+
 			"<li>wwt_slu_storage_ch4 (5, 20, 0.03, 0.05)"+
 		"</ul>",
-		"[WAIT] Translation will be done only after v2 in english is complete",
 	],
 	Wish:[//wishlist
+		"[lluis] unit test module",
 		"[LLUIS] In summary ghg, when kgco2 per year per serv pop is selected, total ghg should be 'N/A'",
 		"[LLUIS] Custom Configuration to increase/decrease decimals",
 		"[LLUIS] In substages some values are not added correctly, for example: wwt_ch4_efac makes wwt_KPI_GHG_tre_ch4 sum of substages not be correct",
 		"[LLUIS] See formulas for 'Sources graph' (elec,co2,n2o,ch4) (add object inside Global)",
-		"[LLUIS] Avoid document.write function, reimplement places where it is used for better performance",
+		"[LLUIS] Avoid document.write, reimplement places where it is used for better performance",
 		"[LLUIS] Function to check if two constant codes are repeated",
-		"[LLUIS] Add Firefox browser compatibility implementing 'event'",
+		"[LLUIS] Add Firefox browser compatibility reimplementing 'event'",
 	],
 };
 

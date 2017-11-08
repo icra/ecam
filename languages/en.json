@@ -130,6 +130,7 @@
 	"#export_click_on_a_stage":"Click on a stage",
 	"#sidebar_export":"Export",
 	"#summary_no_active_stages":"No active stages",
+	"#Fuel types":"Fuel types",
 	"#fuelInfo_description":"Depending on the fuel you select, the following emission factors (EF) will be applied in the equations",
 	"#fuelInfo_eeff":"Emission Factors (EF) for different fuel types (table 2.2 IPCC vol 2)",
 	"#fuelInfo_type":"Fuel type",
@@ -1066,7 +1067,7 @@
 	"#TOTAL ENERGY CONSUMED":"TOTAL ENERGY CONSUMED",
 	"#TOTAL GHG":"TOTAL GHG",
 
-	"#OPPORTUNITIES":"OPPORTUNITIES",
+	"OPPORTUNITIES":"OPPORTUNITIES",
 	"#Opportunities":"Opportunities",
 	"#opps_title":"Opportunities to reduce GHG emissions",
 	"#System wide GHG emissions":"System wide GHG emissions",
@@ -1074,7 +1075,7 @@
 	"#Current value":"Current value",
 	"#reduction per 1 percent change of current value":"reduction <br> per 1% change <br> of current value",
 
-	"#SUBSTAGES":"SUBSTAGES",
+	"SUBSTAGES":"SUBSTAGES",
 	"#No substages":"No substages",
 	"#Substages overview":"Substages overview",
 	"#Substage":"Substage",
@@ -1082,23 +1083,27 @@
 	"#Name":"Name",
 	"#Type":"Type",
 
-	"#SUMMARY":"SUMMARY",
+	"SUMMARY":"SUMMARY",
 	"#All active":"All active ",
 	"#See":"See ",
 	"#See Substages overview":"See Substages overview",
 
-	"#CONSTANTS":"CONSTANTS",
+	"CONSTANTS":"CONSTANTS",
 	"#Value":"Value",
 
-	"#BENCHMARK":"BENCHMARK",
+	"BENCHMARK":"BENCHMARK",
 	"#Benchmarking summary":"Benchmarking summary",
 	"#Energy":"Energy",
 
-	"#EXPORT":"EXPORT",
+	"EXPORT":"EXPORT",
 	"#You can export individual stages to excel using this menu":"You can export individual stages to excel using this menu",
 	"#export_explanation":"Click on a stage to view its variables. Then, click on 'Highlight the whole table' to copy and paste to an empty Excel file, or click on 'createa csv file'.",
 	"#All stages":"All stages",
 	"#Formula":"Formula",
 	"#Create CSV from current table":"Create CSV from current table",
+
+	"NRW":"NRW",
+	"#About non revenue water":"About non revenue water",
+	"#Water injected to distribution":"Water injected to distribution (=system input volume)",
 
 "END":"END"}

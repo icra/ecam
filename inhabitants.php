@@ -115,7 +115,6 @@
 			width:70px;
 			height:24px;
 			display:block;
-			padding:0.2em;
 		}
 		#inputs td.input input:focus {
 			background:white;

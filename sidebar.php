@@ -215,7 +215,6 @@
 		overflow:auto;
 		border-right:2px solid #ccc;
 		border-top:1px solid #ccc;
-		transition:width 0.15s ease;
 	}
 	div#sidebar td.sidebar_selected {background:linear-gradient(lightgreen,white,lightgreen)} 
 	div#sidebar.off{width:0;height:0;top:0;z-index:-1}

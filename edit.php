@@ -15,6 +15,13 @@
 	<?php include'imports.php'?>
 	<style>
 		body{background:#f5ecce}
+		h1{
+			background:white;
+			border:none;
+			box-shadow:0 1px 2px rgba(0,0,0,.5);
+			line-height:2.1em;
+			text-align:left;
+		}
 		<?php
 			//color in red wastewater stages links
 			if($level=="Waste") { 
@@ -675,7 +682,6 @@
 		: 
 		"<span style='color:black;font-size:26px'>$titleLevel</span>";
 ?>
-<style>h1{text-align:left;line-height:2.1em;border-bottom:1px solid #ccc;background:white}</style>
 <h1><a href=sources.php><script>document.write(Global.General.Name)</script></a> <?php echo "$sep $title"?>
 	<!--See description (link to iwa web)-->
 	<?php if($sublevel)

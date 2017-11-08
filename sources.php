@@ -224,13 +224,13 @@
 							<span class=circle style=background:orange></span> 
 							<?php write("#highest emission")?>
 						</span>
-					<tr><th rowspan=9 style="font-weight:bold;background:rgb(64,83,109);color:white">
+					<tr><th rowspan=9 style="font-weight:bold;background:#2b6488;color:white">
 						<?php write('#TOTAL GHG')?>
 						<br><br><span field=TotalGHG>
 						<?php write("#Loading")?>...
 					</span>
 
-					<th rowspan=3>
+					<th rowspan=3 style="background:#00aff1">
 						<a href="edit.php?level=Water" style=color:white>
 							<?php write("#Water")?>
 							(<script> 

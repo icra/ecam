@@ -1,23 +1,19 @@
 body{margin:0;font-family:'Open Sans','Helvetica',sans-serif;overflow-y:scroll;font-size:13px;}
 h1{margin:0;font-size:18px;}
 a{font-weight:bold;text-decoration:none}
-a,a:visited,a:hover,a:active {color:#00AFF1;font-weight:normal}
-a:hover {text-decoration:underline}
+a,a:visited,a:hover,a:active{color:#00AFF1;font-weight:normal}
+a:hover{text-decoration:underline}
 button{padding:0.3em;height:2.3em}
 h1,h2,h3{padding:0.6em;color:#00aff1;font-weight:normal}
 h4{font-weight:normal;margin:1.2em;font-size:15px;color:#58595b}
 legend{color:#58595b;font-size:16px}
 table{border-collapse:collapse;}
-
 .inline{display:inline-block;vertical-align:top}
-
 .flex{
 	display:flex;
 	flex-wrap:wrap;
 }
-
 .tbd {background:red;padding:0.5em;text-align:center}
-
 #fixedTopBar{z-index:9}
 #sidebar{z-index:99}
 
@@ -49,8 +45,7 @@ span.circle {
 }
 
 /*BUTTONS*/
-	.button
-	{        
+	.button {        
 		display: inline-block;
 		white-space: nowrap;
 		background-color: #ddd;
@@ -64,26 +59,22 @@ span.circle {
 		border-radius: .2em;
 	}
 
-	.button:hover
-	{
+	.button:hover {
 		background-color: #eee;        
 		background-image: linear-gradient(top, #fafafa, #ddd);
 	}
 
-	.button:active
-	{
+	.button:active {
 		box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
 		top: 1px;
 	}
 
-	.button:focus
-	{
+	.button:focus {
 		outline: 0;
 		background: #fafafa;
 	}    
 
-	.button:before
-	{
+	.button:before {
 		background: #ccc;
 		background: rgba(0,0,0,.1);
 		float: left;        
@@ -97,15 +88,13 @@ span.circle {
 	}
 
 	/* Buttons and inputs */
-	button.button
-	{ 
+	button.button { 
 		cursor: pointer;
 		overflow: visible; /* removes extra side spacing in IE */
 	}
 
 	/* The disabled styles */
-	.button[disabled], .button[disabled]:hover, .button.disabled, .button.disabled:hover 
-	{
+	.button[disabled], .button[disabled]:hover, .button.disabled, .button.disabled:hover {
 		background: #eee;
 		color: #aaa;
 		border-color: #aaa;
@@ -116,33 +105,27 @@ span.circle {
 	}
 
 	/* Hexadecimal entities for the icons */
-	.add:before
-	{
+	.add:before {
 		content: "\271A";
 	}
 
-	.edit:before
-	{
+	.edit:before {
 		content: "\270E";        
 	}
 
-	.delete:before
-	{
+	.delete:before {
 		content: "\2718";        
 	}
 
-	.save:before
-	{
+	.save:before {
 		content: "\2714";        
 	}
 
-	.next:before
-	{
+	.next:before {
 		content: "\279C";
 	}
 
-	.prev:before
-	{
+	.prev:before {
 		content: "\279C";
 		transform: rotate(180deg);
 		border-radius:0;
