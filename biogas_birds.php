@@ -2,16 +2,16 @@
 
 <!--wwt are you producing biogas-->
 <tr stage=waste class=hidden>
-	<td> Are you producing biogas?
-	<td> <label>No  <input name=wwt_producing_biogas type=radio onclick="BEV.updateProducingBiogas(0)" ans=0 checked></label>
-	<td> <label>Yes <input name=wwt_producing_biogas type=radio onclick="BEV.updateProducingBiogas(1)" ans=1></label>
+	<td><?php write('#wwt_producing_biogas')?>?
+	<td><label><?php write('#no')?>  <input name=wwt_producing_biogas type=radio onclick="BEV.updateProducingBiogas(0)" ans=0 checked></label>
+	<td><label><?php write('#yes')?> <input name=wwt_producing_biogas type=radio onclick="BEV.updateProducingBiogas(1)" ans=1></label>
 </tr>
 
 <!--wwt are you valorizing biogas-->
 <tr stage=waste class=hidden>
-	<td> Are you valorizing biogas?
-	<td> <label>No  <input name=wwt_valorizing_biogas type=radio onclick="BEV.updateValorizingBiogas(0)" ans=0 checked></label>
-	<td> <label>Yes <input name=wwt_valorizing_biogas type=radio onclick="BEV.updateValorizingBiogas(1)" ans=1></label>
+	<td><?php write('#wwt_valorizing_biogas')?>?
+	<td><label><?php write('#no')?>  <input name=wwt_valorizing_biogas type=radio onclick="BEV.updateValorizingBiogas(0)" ans=0 checked></label>
+	<td><label><?php write('#yes')?> <input name=wwt_valorizing_biogas type=radio onclick="BEV.updateValorizingBiogas(1)" ans=1></label>
 </tr>
 
 <script>

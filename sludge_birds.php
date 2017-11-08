@@ -1,11 +1,11 @@
 <!--estimation of sludge produced in wwt (birds.php)-->
 <select id=sludge_estimation onchange=sludge_estimation()>
-	<option value=0>None
-	<option value=comp>Composting
-	<option value=inc>Incineration
-	<option value=app>Land application
-	<option value=land>Landfilling
-	<option value=stock>Stockpiling
+	<option value=0><?php write('#none')?>
+	<option value=comp><?php write('#comp')?>
+	<option value=inc><?php write('#inc')?>
+	<option value=app><?php write('#app')?>
+	<option value=land><?php write('#land')?>
+	<option value=stock><?php write('#stock')?>
 </select>
 
 <script>

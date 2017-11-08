@@ -44,7 +44,7 @@ Graphs.graph1=function(withTable,container) {
 	var options={ 
 		height:250,
 		legend:{position:'left'},
-		title:"GHG emissions by system ("+format(ws+ww)+" kg CO2e)",
+		title:translate("ghg_emissions_by_system")+" ("+format(ws+ww)+" kg CO2e)",
 		slices:{
 			0:{color:'#00aff1'},
 			1:{color:'#d71d24'},
@@ -52,16 +52,16 @@ Graphs.graph1=function(withTable,container) {
 	}
 
 	//empty the container element
-	var con = document.getElementById(container)
+	var con=document.getElementById(container)
 	con.innerHTML='';
 
 	//double click
 	con.ondblclick=function(){
 		var a=document.createElement('a');
 		document.body.appendChild(a);
-		a.href=chart.getImageURI()
-		a.download="image.png"
-		a.click()
+		a.href=chart.getImageURI();
+		a.download="image.png";
+		a.click();
 	}
 
 	//draw
@@ -73,11 +73,11 @@ Graphs.graph1=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=left   onclick=Graphs.graph1("+(!withTable).toString()+",'"+container+"')>Table</button>"+
-			"<button class=middle onclick=Graphs.graph1("+withTable.toString()+",'"+container+"') disabled>System</button>"+
-			"<button class=middle onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>Source</button>"+
-			"<button class=middle onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>Source (detailed)</button>"+
-			"<button class=right  onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC categories</button>"+
+			"<button class=left   onclick=Graphs.graph1("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
+			"<button class=middle onclick=Graphs.graph1("+withTable.toString()+",'"+container+"') disabled>"+translate('system')+"</button>"+
+			"<button class=middle onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>"+translate('source')+"</button>"+
+			"<button class=middle onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>"+translate('source_detailed')+"</button>"+
+			"<button class=right  onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>"+translate('unfccc_categories')+"</button>"+
 		"";
 	})();
 
@@ -85,7 +85,7 @@ Graphs.graph1=function(withTable,container) {
 	if(withTable) {
 		var table=""+
 		"<table title=graph1>"+
-			"<tr><th>"+translate('graphs_slice')+"<th>Code<th>"+translate('graphs_value')+" (kg CO2)"+
+			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('Code')+"<th>"+translate('graphs_value')+" (kg CO2)"+
 			"<tr><td align=left>"+names[0]+"<td align=left><a href=variable.php?id=ws_KPI_GHG>ws_KPI_GHG</a><td align=right>"+format(ws)+
 			"<tr><td align=left>"+names[1]+"<td align=left><a href=variable.php?id=ww_KPI_GHG>ww_KPI_GHG</a><td align=right>"+format(ww)+
 		"</table>"+
@@ -196,7 +196,7 @@ Graphs.ghg_by_source=function(withTable,container) {
 	var options={ 
 		height:250,
 		legend:{position:'left'},
-		title:"GHG emissions by source ("+format(Global.General.TotalGHG())+" kg CO2e)",
+		title:translate("ghg_emissions_by_source")+" ("+format(Global.General.TotalGHG())+" kg CO2e)",
 	}
 
 	//empty the container element
@@ -221,11 +221,11 @@ Graphs.ghg_by_source=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=left    onclick=Graphs.ghg_by_source("+(!withTable).toString()+",'"+container+"')>Table</button>"+
-			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>System</button>"+
-			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"') disabled>Source</button>"+
-			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>Source (detailed)</button>"+
-			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC categories</button>"+
+			"<button class=left   onclick=Graphs.ghg_by_source("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
+			"<button class=middle onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>"+translate('system')+"</button>"+
+			"<button class=middle onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"') disabled>"+translate('source')+"</button>"+
+			"<button class=middle onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>"+translate('source_detailed')+"</button>"+
+			"<button class=right  onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>"+translate('unfccc_categories')+"</button>"+
 		"";
 	})();
 
@@ -332,7 +332,7 @@ Graphs.ghgSources=function(withTable,container) {
 	{ 
 		height:250,
 		legend:{position:'left'},
-		title:"GHG emissions by source (detailed) ("+format(Global.General.TotalGHG())+" kg CO2e)",
+		title:translate('ghg_emissions_by_source_detailed')+" ("+format(Global.General.TotalGHG())+" kg CO2e)",
 		slices:
 		{
 			/*
@@ -350,9 +350,9 @@ Graphs.ghgSources=function(withTable,container) {
 	con.ondblclick=function(){
 		var a=document.createElement('a');
 		document.body.appendChild(a);
-		a.href=chart.getImageURI()
-		a.download="image.png"
-		a.click()
+		a.href=chart.getImageURI();
+		a.download="image.png";
+		a.click();
 	}
 
 	//draw
@@ -364,11 +364,11 @@ Graphs.ghgSources=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=left    onclick=Graphs.ghgSources("+(!withTable).toString()+",'"+container+"')>Table</button>"+
-			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>System</button>"+
-			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>Source</button>"+
-			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"') disabled>Source (detailed)</button>"+
-			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>UNFCCC categories</button>"+
+			"<button class=left   onclick=Graphs.ghgSources("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
+			"<button class=middle onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>"+translate('system')+"</button>"+
+			"<button class=middle onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>"+translate('source')+"</button>"+
+			"<button class=middle onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"') disabled>"+translate('source_detailed')+"</button>"+
+			"<button class=right  onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>"+translate('unfccc_categories')+"</button>"+
 		"";
 	})();
 
@@ -402,7 +402,7 @@ Graphs.ghgSources=function(withTable,container) {
 		"	table[title=ghgSources] td:nth-child(2){font-family:monospace}"+
 		"</style>"+
 		"<table title=ghgSources>"+
-			"<tr><th>"+translate('graphs_slice')+"<th>Code<th>"+translate('graphs_value')+" (kg CO2)"+
+			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('Code')+"<th>"+translate('graphs_value')+" (kg CO2)"+
 			"<tr><td align=left>"+names[0]+ "<td align=left>"+elecWS_formula+"<td align=right>"+format(elecWS)+
 			"<tr><td align=left>"+names[1]+ "<td align=left>"+elecWW_formula+"<td align=right>"+format(elecWW)+
 			"<tr><td align=left>"+names[2]+ "<td align=left>"+fuel_formula+"<td align=right>"+format(fuel)+
@@ -448,7 +448,7 @@ Graphs.unfccc=function(withTable,container){
 	var options={ 
 		height:250,
 		legend:{position:'left'},
-		title:"GHG emissions by UNFCCC category ("+format(total_ghg)+" kg CO2e)",
+		title:translate('ghg_emissions_by_unfccc')+" ("+format(total_ghg)+" kg CO2e)",
 	}
 
 	//empty the container element
@@ -473,11 +473,11 @@ Graphs.unfccc=function(withTable,container){
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=left    onclick=Graphs.unfccc("+(!withTable).toString()+",'"+container+"')>Table</button>"+
-			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>System</button>"+
-			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>Source</button>"+
-			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>Source (detailed)</button>"+
-			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"') disabled>UNFCCC categories</button>"+
+			"<button class=left    onclick=Graphs.unfccc("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
+			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>"+translate('system')+"</button>"+
+			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>"+translate('source')+"</button>"+
+			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>"+translate('source_detailed')+"</button>"+
+			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"') disabled>"+translate('unfccc_categories')+"</button>"+
 		"";
 	})();
 
@@ -486,7 +486,7 @@ Graphs.unfccc=function(withTable,container){
 	if(withTable){
 		var table=""+
 		"<table title=unfccc>"+
-			"<tr><th>Category<th>Code<th>Value (kg CO2e)"+
+			"<tr><th>"+translate('Category')+"<th>"+translate('Code')+"<th>"+translate('Value')+" (kg CO2e)"+
 		"";
 		for(var func in UNFCCC){
 			table+="<tr><td align=left>"+translate(func)+"<td align=left><a href=variable.php?id="+func+">"+func+"</a><td align=right>"+format(UNFCCC[func]());
@@ -511,7 +511,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 
 	//check if prefix is correct
 	if(-1==['wsa','wst','wsd','wwc','wwt','wwd'].indexOf(prefix)) {
-		document.getElementById(container).innerHTML="not available for this stage";
+		document.getElementById(container).innerHTML="NA";
 		return //if prefix is not in this list, stop
 	}
 
@@ -547,12 +547,12 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 
 	var stageName=(function(){
 		return {
-			"wsa":"Water Abstraction",
-			"wst":"Water Treatment",
-			"wsd":"Water Distribution",
-			"wwc":"Wastewater Collection",
-			"wwt":"Wastewater Treatment",
-			"wwd":"Wastewater Discharge",
+			"wsa":translate("Abstraction"),
+			"wst":translate("Treatment"),
+			"wsd":translate("Distribution"),
+			"wwc":translate("Collection"),
+			"wwt":translate("Treatment"),
+			"wwd":translate("Discharge"),
 		}[prefix];
 	})();
 
@@ -560,7 +560,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 	var options={ 
 		height:250,
 		legend:{position:'left'},
-		title:"GHG emissions of "+stageName+" ("+format(value)+" kg CO2e)",
+		title:translate('ghg_emissions_by_l2')+" "+stageName+" ("+format(value)+" kg CO2e)",
 	}
 
 	//empty the container element
@@ -585,7 +585,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=single onclick=Graphs.ghg_by_stage("+(!withTable).toString()+",'"+container+"','"+prefix+"')>Table</button>"+
+			"<button class=single onclick=Graphs.ghg_by_stage("+(!withTable).toString()+",'"+container+"','"+prefix+"')>"+translate('table')+"</button>"+
 		"";
 	})();
 
@@ -593,7 +593,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 	if(withTable) {
 		var table=""+
 		"<table title=ghg_by_stage>"+
-			"<tr><th>"+translate('graphs_slice')+"<th>Code<th>"+translate('graphs_value')+" (kg CO2)";
+			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('Code')+"<th>"+translate('graphs_value')+" (kg CO2)";
 
 		inputs.forEach(input=>{
 			table+="<tr><td align=left>"+translate(input+"_descr")+"<td align=left><a href=variable.php?id="+input+">"+input+"</a><td align=right>"+format(getValue(input))
@@ -651,7 +651,7 @@ Graphs.graph4=function(withTable,container) {
 	var options={ 
 		height:250,
 		legend:{position:'left'},
-		title:"GHG emissions by stage ("+format(sum)+" kg CO2e)",
+		title:translate('ghg_emissions_by_stage')+" ("+format(sum)+" kg CO2e)",
 		slices:{
 			0:{color:ColorsGHG.ws_KPI_GHG_elec      },
 			1:{color:ColorsGHG.ws_KPI_GHG_ne        },
@@ -684,7 +684,7 @@ Graphs.graph4=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=single onclick=Graphs.graph4("+(!withTable).toString()+",'"+container+"')>Table</button>"+
+			"<button class=single onclick=Graphs.graph4("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
 		"";
 	})();
 
@@ -748,9 +748,9 @@ Graphs.graph2=function(withTable,container) {
 	con.ondblclick=function(){
 		var a=document.createElement('a');
 		document.body.appendChild(a);
-		a.href=chart.getImageURI()
-		a.download="image.png"
-		a.click()
+		a.href=chart.getImageURI();
+		a.download="image.png";
+		a.click();
 	}
 
 	//draw
@@ -763,7 +763,7 @@ Graphs.graph2=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=single onclick=Graphs.graph2("+(!withTable).toString()+",'"+container+"')>Table</button>"+
+			"<button class=single onclick=Graphs.graph2("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
 		"";
 	})();
 
@@ -783,7 +783,6 @@ Graphs.graph2=function(withTable,container) {
 		div.innerHTML=table;
 	}
 	scrollToItem(container);
-
 }
 
 //NRG by stage
@@ -821,12 +820,11 @@ Graphs.graph5=function(withTable,container) {
 	]);
 
 	//options
-	var options= 
-	{ 
+	var options={ 
 		height:300,
 		legend:{position:'left'},
 		pieHole:0.3,
-		title:"Energy consumption ("+format(Global.General.TotalNRG())+" kWh)",
+		title:translate('Energy consumption')+" ("+format(Global.General.TotalNRG())+" kWh)",
 		slices: {
 			0:{color:'#66cef5'},
 			1:{color:'#0083b3'},
@@ -849,9 +847,9 @@ Graphs.graph5=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=left   onclick=Graphs.graph5("+(!withTable).toString()+",'"+container+"')>Table</button>"+
-			"<button class=middle onclick=Graphs.graph5("+withTable.toString()+",'"+container+"') disabled>Stage</button>"+
-			"<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"')>Substage</button>"+
+			"<button class=left   onclick=Graphs.graph5("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
+			"<button class=middle onclick=Graphs.graph5("+withTable.toString()+",'"+container+"') disabled>"+translate('stage')+"</button>"+
+			"<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"')>"+translate('substage')+"</button>"+
 		"";
 	})();
 
@@ -937,7 +935,7 @@ Graphs.graph7=function(withTable,container) {
 		height:300,
 		legend:{position:'left'},
 		pieHole:0.3,
-		title:"Energy consumption (by substage) ("+format(Global.General.TotalNRG())+" kWh)",
+		title:translate('Energy consumption by substage')+" ("+format(Global.General.TotalNRG())+" kWh)",
 		slices:{},
 	};
 	var colors = [ '#66cef5', '#0083b3', '#cceffc', '#b67800', '#f8c666', '#fad999' ];
@@ -963,9 +961,9 @@ Graphs.graph7=function(withTable,container) {
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
 		buttons.innerHTML=""+
-			"<button class=left   onclick=Graphs.graph7("+(!withTable).toString()+",'"+container+"')>Table</button>"+
-			"<button class=middle onclick=Graphs.graph5("+withTable.toString()+",'"+container+"')>Stage</button>"+
-			"<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"') disabled>Substage</button>"+
+			"<button class=left   onclick=Graphs.graph7("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
+			"<button class=middle onclick=Graphs.graph5("+withTable.toString()+",'"+container+"')>"+translate('stage')+"</button>"+
+			"<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"') disabled>"+translate('substage')+"</button>"+
 		"";
 	})();
 
@@ -1242,30 +1240,28 @@ Graphs.ws_cost=function(container) {
 
 	//names
 	var names = [
-		"Energy",
-		"Other",
+		translate("Energy"),
+		translate("Other"),
 	];
 
 	//array graph data
 	var data=google.visualization.arrayToDataTable([
 		['type','cost [currency]'],
-		[names[0],nrg  ],
-		[names[1],run  ],
+		[names[0],nrg],
+		[names[1],run],
 	]);
 
 	//options
-	var options= 
-	{ 
+	var options={ 
 		height:225,
 		legend:{position:'left'},
-		title:"Water supply costs ("+format(run+nrg)+" "+Global.General.Currency+")",
-		slices:
-		{
+		title:translate('water_supply_costs')+" ("+format(run+nrg)+" "+Global.General.Currency+")",
+		slices: {
 			0:{color:'#0aaff1' },
 			1:{color:'#aaa' },
 		},
 	}
-	//empty container and draw
+	//empty container and draw chart
 	var con=document.getElementById(container)
 	con.innerHTML='';
 	var chart=new google.visualization.PieChart(con);
@@ -1275,9 +1271,9 @@ Graphs.ws_cost=function(container) {
 	con.ondblclick=function(){
 		var a=document.createElement('a');
 		document.body.appendChild(a);
-		a.href=chart.getImageURI()
-		a.download="image.png"
-		a.click()
+		a.href=chart.getImageURI();
+		a.download="image.png";
+		a.click();
 	}
 }
 
@@ -1290,8 +1286,8 @@ Graphs.ww_cost=function(container) {
 
 	//names
 	var names = [
-		"Energy",
-		"Other",
+		translate("Energy"),
+		translate("Other"),
 	];
 
 	//array graph data
@@ -1302,18 +1298,16 @@ Graphs.ww_cost=function(container) {
 	]);
 
 	//options
-	var options= 
-	{ 
+	var options={ 
 		height:225,
 		legend:{position:'left'},
-		title:"Wastewater costs ("+format(run+nrg)+" "+Global.General.Currency+")",
-		slices:
-		{
-			0:{color:'#d71d24' },
-			1:{color:'#aaa' },
+		title:translate('waste_supply_costs')+" ("+format(run+nrg)+" "+Global.General.Currency+")",
+		slices:{
+			0:{color:'#d71d24'},
+			1:{color:'#aaa'},
 		},
 	}
-	//empty container and draw
+	//empty container and draw chart
 	var con=document.getElementById(container)
 	con.innerHTML='';
 	var chart=new google.visualization.PieChart(con);
@@ -1323,9 +1317,9 @@ Graphs.ww_cost=function(container) {
 	con.ondblclick=function(){
 		var a=document.createElement('a');
 		document.body.appendChild(a);
-		a.href=chart.getImageURI()
-		a.download="image.png"
-		a.click()
+		a.href=chart.getImageURI();
+		a.download="image.png";
+		a.click();
 	}
 }
 

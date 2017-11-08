@@ -29,14 +29,16 @@
 				<?php write('#save_as')?>
 				<script>document.write(" '"+Global.General.Name+".json'")</script>
 			</button>
-			<!--CLEAR-->
-			<button class="button delete" onclick=clearSystem()>
-				<?php write('#clear')?>
-			</button>
-			<!--NEXT-->
-			<button class="button next" onclick="event.stopPropagation();window.location='getStarted.php'">
-				<?php write('#next')?>
-			</button>
+			<div class=flex>
+				<!--CLEAR-->
+				<button class="button delete" onclick=clearSystem() style=margin-left:0>
+					<?php write('#clear')?>
+				</button>
+				<!--NEXT-->
+				<button class="button next" onclick="event.stopPropagation();window.location='getStarted.php'">
+					<?php write('#next')?>
+				</button>
+			</div>
 		  <?php 
 		}
 	?>

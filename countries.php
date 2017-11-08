@@ -26,18 +26,18 @@
 	include'navbar.php';
 	include'linear.php';
 ?>
-<h1>Countries</h1>
+<h1><?php write('#Countries')?></h1>
 
 <!--fuel info-->
 <table id=info> 
 	<tr>
-		<th rowspan=2>Country
+		<th rowspan=2><?php write('#Country')?>
 		<th>
-			Emission factor<sup>1</sup>
+			<?php write('#Emission_factor')?><sup>1</sup>
 			<br><a href=variable.php?id=conv_kwh_co2>(conv_kwh_co2)</a>
 		</th>
 		<th>
-			Annual protein consumption<sup>2</sup>
+			<?php write('#Annual_protein_consumption')?><sup>2</sup>
 			<br><a href=variable.php?id=wwc_prot_con>(wwc_prot_con)</a>
 		</th>
 		<th>
@@ -46,12 +46,12 @@
 		</th>
 	<tr>
 		<th>kgCO<sub>2</sub>/kWh
-		<th>kg/person/year
-		<th>g/person/day
+		<th>kg/<?php write('#person')?>/<?php write('#year')?>
+		<th>g/<?php write('#person')?>/<?php write('#day')?>
 </table>
 
 <table id=references>
-	<tr><td colspan=2>References
+	<tr><td colspan=2><?php write('#References')?>
 	<tr><td>1<td>BRANDER, M. SOOD A. WYLIE, C. HAUGHTON, A. LOVELL, J., 2011,Technical Paper Electricity-specific emission factors for grid electricity, Ecometrica, 
 	<tr><td>2<td>
 		<a href="docs/FAO.xls" target=_blank>

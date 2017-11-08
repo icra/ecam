@@ -124,7 +124,7 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include"linear.php"?>
-<!--TITLE--><h1><?php write('#summary')?> (<?php echo $type?>s)</h1>
+<!--TITLE--><h1><?php write('#Summary')?> (<?php echo $type?>s)</h1>
 
 <!--STAGES--><?php include"activeStages.php"?>
 
@@ -133,26 +133,37 @@
 	<style> #main *:not(h4) {text-align:left}</style>
 
 	<!--description--><h4>
-		<?php echo "All active ".ucfirst($type."s")?>
+		<?php 
+			write('#All active');
+			echo " ".ucfirst($type."s");
+		?>
 		<span>
 			<?php
 				$otherType = $type=="input" ? "output" : "input";
-				echo "<a href=summary.php?type=$otherType>See $otherType"."s</a>"
+				echo "<a href=summary.php?type=$otherType>";
+				write('#See');
+				echo " $otherType"."s</a>"
 			?>
 		</span>
 		&mdash;
-		<a href=substages.php>See Substages overview</a>
+		<a href=substages.php>
+			<?php write('#See Substages overview')?>
+		</a>
 	</h4>
 
 	<!--level 1 fields-->
 	<div class="inline" style="font-size:11px;max-width:49%;padding:0">
-		<div style=text-align:center>GHG assessment</div>
+		<div style=text-align:center>
+			<?php write('#ghg_assessment')?>
+		</div>
 		<table level=1></table>
 	</div>
 
 	<!--level 2 fields-->
 	<div class="inline" style="font-size:11px;max-width:49%;padding:0">
-		<div style=text-align:center>Detailed GHG assessment</div>
+		<div style=text-align:center>
+			<?php write('#energy_performance')?>
+		</div>
 		<table level=2></table>
 	</div>
 </div>

@@ -128,11 +128,11 @@
 		</div>
 
 		<table>
-			<tr><th>Main
-			<tr><td><a href=getStarted.php><?php write('#getStarted_general_info')?></a>
+			<tr><th><?php write('#main')?>
+			<tr><td><a href=getStarted.php>   <?php write('#getStarted_general_info')?></a>
 			<tr><td><a href=configuration.php><?php write('#configuration')?></a>
-			<tr><td><a href=inhabitants.php>Population</a>
-			<tr><td><a href=birds.php><?php write('#quick_assessment')?></a>
+			<tr><td><a href=inhabitants.php>  <?php write('#population')?></a>
+			<tr><td><a href=birds.php>        <?php write('#quick_assessment')?></a>
 			<tr><th><?php write('#energy_performance')?>
 			<tr><td><a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction><?php write('#Abstraction')?></a>
 			<tr><td><a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment><?php write('#Treatment')?></a>
@@ -140,28 +140,28 @@
 			<tr><td><a class=waste stage=wasteCol href=edit.php?level=Waste&sublevel=Collection><?php write('#Collection')?></a>
 			<tr><td><a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment><?php write('#Treatment')?></a>
 			<tr><td><a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge><?php write('#Discharge')?></a>
-			<tr><th>Summaries
-			<tr><td><a href=sources.php>GHG Summary</a>
-			<tr><td><a href=energy_summary.php>Energy Summary</a>
-			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
-			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
-			<tr><td><a href=substages.php>All substages</a>
-			<tr><td><a href=edit.php?level=UNFCCC>UNFCCC categories</a>
-			<tr><td><a href=edit.php?level=Estimations>All estimations at Tier A</a>
-			<tr><td><a href=summary.php?type=input>All inputs</a>
-			<tr><td><a href=summary.php?type=output>All outputs</a>
-			<tr><td><a href=summary.php?type=ccvv>All calculated variables</a>
-			<tr><td><a href=constants.php>All constants</a>
-			<tr><td><a href=benchmark.php>All benchmarks</a>
-			<tr><th>Other
+			<tr><th><?php write('#summaries')?>
+			<tr><td><a href=sources.php><?php write('#ghg_summary')?></a>
+			<tr><td><a href=energy_summary.php><?php write('#nrg_summary')?></a>
+			<tr><td><a class=water stage=water href=edit.php?level=Water><?php write('#Water')?></a>
+			<tr><td><a class=waste stage=waste href=edit.php?level=Waste><?php write('#Waste')?></a>
+			<tr><td><a href=substages.php><?php write('#all_substages')?></a>
+			<tr><td><a href=edit.php?level=UNFCCC><?php write('#unfccc_categories')?></a>
+			<tr><td><a href=edit.php?level=Estimations><?php write('#all_estimations_tier_A')?></a>
+			<tr><td><a href=summary.php?type=input><?php write('#all_inputs')?></a>
+			<tr><td><a href=summary.php?type=output><?php write('#all_outputs')?></a>
+			<tr><td><a href=summary.php?type=ccvv><?php write('#all_ccvv')?></a>
+			<tr><td><a href=constants.php><?php write('#all_constants')?></a>
+			<tr><td><a href=benchmark.php><?php write('#all_benchmarks')?></a>
+			<tr><th><?php write('#other')?>
 			<tr><td><a href=opps.php><?php write("#opportunities")?></a>
 			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
 			<!--go to variable-->
-			<tr><th>Go to variable code
+			<tr><th><?php write('#go_to_variable_code')?> 
 			<tr><td>
 				<form id=go_to method=GET action="variable.php">
 					<input name=id placeholder="ws_KPI_GHG">
-					<button>Go</button>
+					<button><?php write('#go')?></button>
 				</form>
 				<style>
 					#go_to{
@@ -178,7 +178,7 @@
 			text-align:left;
 			padding:0.5em;
 			">
-			<li><a href=development.php>Development</a>
+			<li><a href=development.php><?php write('#dev')?></a>
 		</ul>
 	</div>
 </div>

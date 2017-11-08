@@ -725,14 +725,14 @@
 					var divs=document.querySelectorAll('div.card');
 					for(var i=0;i<divs.length;i++){divs[i].classList.remove('folded')}
 				"
-				>Expand all
+				><?php write("#Expand all")?>
 			</a>
 			<a id=btn_all_fold href=# style="" 
 				onclick="
 					var divs=document.querySelectorAll('div.card');
 					for(var i=0;i<divs.length;i++){divs[i].classList.add('folded')}
 				"
-				>Fold all
+				><?php write("#Fold all")?>
 			</a>
 		</div>
 		<?php
@@ -742,7 +742,8 @@
 	<!--Tips-->
 	<span style="font-size:12px;color:#666;float:right">
 		<div style="padding:0.5em;cursor:pointer" onclick="document.querySelector('#tip').innerHTML=Tips.random()">
-			<b>Tip</b> &rarr; <i id=tip><script>document.write(Tips.random())</script></i> &emsp; &#9654;
+			<b><?php write('#Tip')?></b> &rarr; 
+			<i id=tip><script>document.write(Tips.random())</script></i> &emsp; &#9654;
 		</div>
 	</span>
 </h1>
@@ -757,23 +758,29 @@
 		<div class=menu onclick=fold(this.parentNode)>
 			<button></button>
 			<b>Inputs &amp; Outputs</b> &mdash; 
-			Assessment period <b class=number><script>document.write(Global.General.Days())</script></b> days 
+			<?php write('#assessment_period')?>
+			<b class=number><script>document.write(Global.General.Days())</script></b> 
+			<?php write('#days')?>
 			<?php
 				//population
 				if($level!="Energy") {
 					echo "&mdash; ";
 					$resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
 					$serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
-					echo "Resident population <b class=number><script>document.write(Global.$level.$resi_pop)</script></b> &mdash; ";
+					write('#ws_resi_pop_descr');
+					echo " <b class=number><script>document.write(Global.$level.$resi_pop)</script></b> &mdash; ";
 					if($level=="Waste"){echo "Connected population <b class=number><script>document.write(Global.Waste.ww_conn_pop)</script></b> &mdash; ";}
-					echo "Serviced population <b class=number><script>document.write(Global.$level.$serv_pop)</script></b>";
+					write('#ws_serv_pop_descr');
+					echo " <b class=number><script>document.write(Global.$level.$serv_pop)</script></b>";
 				}
 			?>
 			<!--button toggle outputs/graph display-->
 			<button 
 				class=btn_toggle 
 				onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#graph_container','#outputs_container')"
-			>VIEW GRAPH</button>
+			>
+				<?php write('#VIEW GRAPH')?>
+			</button>
 		</div>
 
 		<!--level2-->
@@ -790,25 +797,31 @@
 				<!--level2 GHG outputs-->
 				<table id=outputs style="width:100%;background:#f6f6f6;">
 					<tr><th colspan=7 class=tableHeader>
-						OUTPUTS — GHG emissions (kg CO2)
+						<?php write('#OUTPUTS')?> &mdash;
+						<?php write('#GHG emissions')?>
+						(kg CO2)
 					<tr>
-						<th>Origin
-						<th>kg CO<sub>2</sub><br>whole period
+						<th><?php write('#Origin')?>
+						<th>kg CO<sub>2</sub><br><?php write('#whole period')?>
 						<th>kg CO<sub>2</sub><br>per <?php write('#year')?>
 						<th>kg CO<sub>2</sub><br>per <?php write('#year')?><br>per inhab
 						<th>kg CO<sub>2</sub><br>per <?php write('#year')?><br>per serv.pop
 						<th>kg CO<sub>2</sub><br>per m<sup>3</sup>
-					<tr><td style=color:#ccc colspan=6>Loading...
+					<tr><td style=color:#ccc colspan=6>
+						<?php write('#Loading')?>...
 				</table>
 
 				<!--level2 outputs: NRG and SL-->
 				<table id=nrgOutputs style="width:100%;background:#f6f6f6;">
-					<tr><th colspan=4 class=tableHeader>OUTPUTS &mdash; Energy performance &amp; Service Level indicators
+					<tr><th colspan=4 class=tableHeader>
+						<?php write('#OUTPUTS')?> &mdash; 
+						<?php write('#Energy performance and Service Level indicators')?>
 					<tr>
 						<th><?php write('#edit_description')?>
 						<th><?php write('#edit_current_value')?>
 						<th><?php write('#edit_unit')?>
-					<tr><td style=color:#ccc colspan=3>Loading...
+					<tr><td style=color:#ccc colspan=3>
+						<?php write('#Loading')?>...
 				</table>
 			</div>
 
@@ -817,7 +830,7 @@
 				<!--choose graph type buttons-->
 				<?php include'buttonsGraphType.php'?>
 				<!--actual graph-->
-				<div id=graph><?php write('#loading')?></div>
+				<div id=graph><?php write('#Loading')?></div>
 				<script>
 					google.charts.load('current',{'packages':['corechart','bar']});
 					google.charts.setOnLoadCallback(drawCharts);

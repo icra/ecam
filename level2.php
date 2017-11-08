@@ -10,6 +10,7 @@
 		//"question":1,
 	}
 </script>
+
 <script>
 	var level2 = {};//namespace
 
@@ -225,7 +226,7 @@
 			if(typeof(substages)=="object" && substages.length > 1 && !(Level2only.list.indexOf(field)+1))
 			{
 				//this means you are in level 2 and you should NOT be able to modify inputs here
-				newCell.setAttribute('caption',"This value is the sum of all substages. Click here to scroll to substages");
+				newCell.setAttribute('caption',translate("This value is the sum of all substages"));
 				newCell.classList.add('non-editable');
 				newCell.onclick=function()
 				{
@@ -362,10 +363,10 @@
 			var str = ""+
 			"<div class=flex style=justify-content:center>"+
 			"  <div>"+
-			"    <label>No <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',0) "+checked_n+"></label>"+
+			"    <label>"+translate('no')+" <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',0) "+checked_n+"></label>"+
 			"  </div>"+
 			"  <div>"+
-			"    <label>Yes <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',1) "+checked_y+"></label>"+
+			"    <label>"+translate('yes')+" <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',1) "+checked_y+"></label>"+
 			"  </div>"+
 			"</div>"+
 			"";
@@ -450,16 +451,18 @@
 </script>
 
 <table id=inputs style="width:99%">
-	<tr><th colspan=5 class=tableHeader> INPUTS &mdash; 
-	Enter values for 
-	<?php if($sublevel){echo $sublevel;}else{echo $level;} ?>
-	stages
+	<tr><th colspan=5 class=tableHeader>	
+		<?php write('#INPUTS')?>
+		&mdash; 
+		<?php write('#Enter values for')?>
+		<?php if($sublevel){write("#$sublevel");}else{write("#$level");} ?>
+		<?php write('#stages')?>
 	<tr>
-		<th>Code
-		<th style="width:100% !important">Description
-		<th>Current value
+		<th><?php write('#Code')?>
+		<th style="width:100% !important"><?php write('#Description')?>
+		<th><?php write('#Current value')?>
 		<th><?php write('#edit_unit')?>
-	<tr><td colspan=4 style=color:#ccc><i>Loading...</i>
+	<tr><td colspan=4 style=color:#ccc><i><?php write('#loading')?>...</i>
 </table>
 
 <style>

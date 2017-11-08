@@ -68,17 +68,16 @@
 				newCell.classList.add('outputValue');
 				newCell.style.textAlign='center';
 				var str=""+
-					"<a href='substage.php?level=<?php echo $level?>&sublevel=<?php echo $sublevel?>&index="+s+"'>Details</a>"+
+					"<a href='substage.php?level=<?php echo $level?>&sublevel=<?php echo $sublevel?>&index="+s+"'>"+translate('Details')+"</a>"+
 					" | "+
-					"<a href=# onclick=\"level3.deleteSubstage("+s+");return false\" caption='<?php write('#level3_delete_substage')?>'>Delete</a>"+
+					"<a href=# onclick=\"level3.deleteSubstage("+s+");return false\" caption='<?php write('#level3_delete_substage')?>'>"+translate('Delete')+"</a>"+
 					"";
 				newCell.innerHTML=str
 			}
 
 			//go over normal inputs and then dropdown menus
 			//1. go over inputs array we've just created
-			for(var input in inputs)
-			{
+			for(var input in inputs) {
 				/*variable code*/
 				var code=inputs[input];
 				
@@ -143,7 +142,7 @@
 				newCell.innerHTML=(function(){
 					var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ? 
 						" <span class=not_used_input caption='Input not used for any equation'></span>" : "";
-					return translate(code+'_descr')+warning;
+					return "<small>"+translate(code+'_descr')+warning+"</small>";
 				})();
 
 				//3rd cell and so on: go over substages
@@ -261,7 +260,7 @@
 				newCell.innerHTML=(function(){
 					var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ? 
 						" <span class=not_used_input caption='Input not used for any equation'></span>" : "";
-					return translate(code+'_descr')+warning;
+					return "<small>"+translate(code+'_descr')+warning+"</small>";
 				})();
 
 				//3rd cell and so on: go over substages
@@ -548,7 +547,7 @@
 			})()
 
 			//2nd cell: description
-			newRow.insertCell(-1).innerHTML=translate(field+'_descr');
+			newRow.insertCell(-1).innerHTML="<small>"+translate(field+'_descr')+"</small>";
 
 			//get equation formula
 			var formula=CurrentLevel[field].toString();
@@ -639,7 +638,10 @@
 <div id=adv_questions_container class="card <?php echo $folded?>">
 	<div class=menu onclick=fold(this.parentNode)>
 		<button></button>
-		<b>Advanced Assessment: Questions (<a href=questions.php>info</a>)</b> 
+		<b>
+			<?php write('#Advanced Assessment: Questions')?>
+			(<a href=questions.php>info</a>)
+		</b> 
 	</div>
 	<div style=padding:0.5em;>
 		<table id=adv_questions></table>
@@ -651,29 +653,28 @@
 
 <!--substages container-->
 <?php 
-	if(isset($_COOKIE['Folded_substageInputs_container']))
-	{
-		$folded="folded";
-	}
-	else
-	{
-		$folded="";
-	}
+	$folded=isset($_COOKIE['Folded_substageInputs_container']) ? "folded" : "";
 ?>
 <div id=substageInputs_container class="card <?php echo $folded?>" style="text-align:left">
 	<!--menu-->
 	<div class=menu onclick=fold(this.parentNode)>
 		<button></button>
-		<b>Advanced Assessment: Substages</b>
-		Substages <b><span id=counter class=number>0</span></b>
+		<b>
+			<?php write('#Advanced Assessment: Substages')?>
+		</b>
+		<b>(<span id=counter class=number>0</span>)</b>
 		&mdash; 
-		<a href=substages.php>Overview</a>
+		<a href=substages.php>
+			<?php write('#Overview')?>
+		</a>
 
 		<!--button toggle outputs/graph display-->
 		<button 
 			class=btn_toggle 
 			onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#substages','#substageGraphs')"
-		>VIEW GRAPH</button>
+		>
+			<?php write('#VIEW GRAPH')?>
+		</button>
 	</div>
 
 	<!--substages table-->
@@ -683,16 +684,14 @@
 				<!--view all-->
 				<label style=float:left>
 					<input id=viewAll type=checkbox onclick=level3.toggleViewSum() checked> 
-					View all stages &emsp;
+					<?php write('#View all stages')?>
+					&emsp;
 					<script>
-						level3.toggleViewSum=function()
-						{
+						level3.toggleViewSum=function() {
 							var newDisplay=document.querySelector('#substages td.input').style.display=='none' ? '':'none';
 							var n=substages.length;
-
 							var tr=document.querySelector('#substages tr');//first tr
 							for(var i=0;i<n;i++) tr.cells[i+1].style.display=newDisplay;
-
 							var collection=document.querySelectorAll('#substages td.input');
 							for(var i=0;i<collection.length;i++) collection[i].style.display=newDisplay;
 							var collection=document.querySelectorAll('#substages td.outputValue');
@@ -700,16 +699,17 @@
 						}
 					</script>
 				</label>
-
 				<!--show ghgs checkbox-->
 				<div style=float:left;margin-bottom:0.5em>
-					<label onclick="event.stopPropagation();init()"><input type=checkbox id=showGHGss checked> Show GHG</label>
+					<label onclick="event.stopPropagation();init()"><input type=checkbox id=showGHGss checked>
+						<?php write('#Show GHG')?>
+					</label>
 				</div>
-
 				<!--new substage button-->
 				<button onclick=level3.newSubstage() class="button add" style="padding:auto;background:lightgreen;box-shadow: 0 1px 2px rgba(0,0,0,.1);">
-					Add substage
+					<?php write('#Add substage')?>
 				</button>
+			</tr>
 		</table>
 	</div>
 

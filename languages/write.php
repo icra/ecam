@@ -17,15 +17,13 @@ if($lang_json==NULL && $lang!="null")
 }
 
 //use $lang_json to fetch $id inside file "$lang".json
-function write($id)
-{
+function write($id) {
 	global $lang;global $lang_json;
 
-  if($lang=="null") { echo $id; }
-  else
-  {
+  if($lang=="null") { echo "[$id]"; }
+  else {
     //find text or display [not found]
-    $text = isset($lang_json[$id]) ? $lang_json[$id] : "[ $id not found for lang $lang ]";
+    $text = isset($lang_json[$id]) ? $lang_json[$id] : "['$id' not found, lang '$lang']";
     echo $text;
   }
 }
@@ -33,20 +31,22 @@ function write($id)
 
 <?php
 	//TRANSLATE JS FUNCTION
-	if($lang!="null") 
-	{ 
+	if($lang!="null") { 
 		?>
-		<script><?php echo "var lang=$lang_file;" ?></script>
-		<script>
-			function translate(id){
-				return lang['#'+id] || false;
-				//"<span style=background:yellow>#"+id+" undefined</span>";
-			}
-		</script>
+			<script><?php echo "var lang=$lang_file;" ?></script>
+			<script>
+				function translate(id){
+					return lang['#'+id] || false;
+				}
+			</script>
 		<?php 
-	}
-	else 
-	{ 
-		?><script>function translate(id){return '#'+id}</script><?php 
+	} else { 
+		?>
+			<script>
+				function translate(id){
+					return '#'+id
+				}
+			</script>
+		<?php 
 	}
 ?>

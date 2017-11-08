@@ -23,7 +23,7 @@ table{border-collapse:collapse;}
 
 /*default cells*/
 th,td{border:1px solid #aaa;padding:0.35em;}
-th{font-weight:normal;background:#00adef;color:white;vertical-align:middle}
+th{font-weight:normal;background:#2b6488;color:white;vertical-align:middle}
 hr{display:block;height:1px;border:0;margin:0;padding:0;}
 
 /*highlight inputs when mouse goes over a row that has a formula*/

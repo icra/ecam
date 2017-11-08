@@ -2,7 +2,7 @@
 
 <!--select assessment report-->
 <fieldset>
-	<legend>Select Global Warming Potential source
+	<legend><?php write('#select_gwp_source')?>
 		<select id=select_gwp onchange=selectGWP(this)>
 			<option value="false">--select--</option>
 			<!--fill with options-->
@@ -38,20 +38,20 @@
 		</script>
 	</legend>
 	<div style="padding:0.5em 0">
-		GWP values relative to CO<sub>2</sub> for a 100 year time horizon
+		<?php write('#gwp_values_relative_to')?> 
 	</div>
 	<table id=gwp_inputs>
 		<tr>
-			<td>Carbon dioxide (CO<sub>2</sub>)
+			<td><?php write('#carbon_dioxide')?> (CO<sub>2</sub>)
 			<td align=right>1
-			<td>CO<sub>2</sub> equivalents
+			<td>CO<sub>2</sub> <?php write('#equivalents')?>
 		<tr>
-			<td>Methane (CH<sub>4</sub>)
+			<td><?php write('#methane')?> (CH<sub>4</sub>)
 			<td align=right><span id=ct_ch4_eq>loading...</span>
-			<td>CO<sub>2</sub> equivalents
+			<td>CO<sub>2</sub> <?php write('#equivalents')?>
 		<tr>
-			<td>Nitrous Oxide (N<sub>2</sub>O)
+			<td><?php write('#nitrouns_oxide')?> (N<sub>2</sub>O)
 			<td align=right><span id=ct_n2o_eq>loading...</span>
-			<td>CO<sub>2</sub> equivalents
+			<td>CO<sub>2</sub> <?php write('#equivalents')?>
 	</table>
 </fieldset>

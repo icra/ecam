@@ -125,21 +125,27 @@
 
 <!--go back to overview-->
 <div style=text-align:center;padding:0.5em>
-	<a href=substages.php>&larr; Substages overview</a>
+	<a href=substages.php>&larr; 
+		<?php write('#Substages overview')?>
+	</a>
 </div>
 
 <!--subtitle-->
-<h3 style=text-align:center;color:black>Substage "<script>document.write(substage.name)</script>" summary</h3>
+<h3 style=text-align:center;color:black>
+	<?php write('#Substage')?> 
+	"<script>document.write(substage.name)</script>" 
+	<?php write('#summary')?>
+</h3>
 
 <!--root container-->
 <div>
 	<!--substage table-->
-	<table id=substage style=margin:auto;margin-top:0.5em><tr>
-			<th>Variable
-			<th>Name
-			<th>Type
-			<th>Current Value
-			<th>Units
+	<table id=substage style=margin:auto;margin-top:0.5em> <tr>
+		<th><?php write('#Variable')?>
+		<th><?php write('#Name')?>
+		<th><?php write('#Type')?>
+		<th><?php write('#Current value')?>
+		<th><?php write('#Unit')?>
 	</table>
 </div>
 

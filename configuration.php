@@ -4,8 +4,7 @@
 		var Configuration = {}; //namespace
 
 		/** Enable or disable stage <input type=checkbox id=id> */
-		Configuration.activate=function(id)
-		{
+		Configuration.activate=function(id) {
 			//hide warning "all inactive"
 			document.querySelector("#inactive_warning").classList.remove('visible');
 
@@ -123,8 +122,7 @@
 		}
 	</script>
 	<script>
-		function init()
-		{
+		function init() {
 			Sidebar.update();
 			Configuration.activateLevels();
 			Configuration.defaults();
@@ -224,11 +222,10 @@
 	<div>
 		<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
 		<script>
-			function activateAllStages()
-			{
+			function activateAllStages(){
 				event.stopPropagation();
-				['water','waste','waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
-				{
+				['water','waste','waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis']
+				.forEach(stage=>{
 					var checkbox=document.querySelector("table#selectStage #"+stage).checked=true
 					Configuration.activate(stage)
 				});
@@ -245,7 +242,7 @@
 
 	<!--select country-->
 	<fieldset>
-		<legend>Select country
+		<legend><?php write('#select_country')?>
 			<select id=country onchange=selectCountry(this)>
 				<option value="false">--select--</option>
 				<script>for(var country in Countries){document.write("<option>"+country)}</script>
@@ -277,20 +274,20 @@
 			<tr>
 				<td><?php write('#wwc_prot_con_descr')?>
 				<td><input id=wwc_prot_con onchange="update(Global.Waste.Collection,'wwc_prot_con',this.value)">
-				<td>kg/person/year
+				<td>kg/<?php write('#person')?>/<?php write('#year')?>
 			<tr>
 				<td><?php write('#wwc_bod_pday_descr')?>
 				<td><input id=wwc_bod_pday onchange="update(Global.Waste.Collection,'wwc_bod_pday',this.value)">
-				<td>g/person/day
+				<td>g/<?php write('#person')?>/<?php write('#day')?>
 		</table>
 
 	</fieldset>
 
 	<!--fuel engines in any stage-->
 	<fieldset>
-		<legend>Do you have fuel engines in any stage?</legend>
-		<label> No  <input type=radio name=anyFuelEngines ans=0 onclick=update(Global.General,this.name,0) checked></label> &emsp; 
-		<label> Yes <input type=radio name=anyFuelEngines ans=1 onclick=update(Global.General,this.name,1)></label>
+		<legend><?php write('#do_you_have_engines')?></legend>
+		<label> <?php write('#no')?>  <input type=radio name=anyFuelEngines ans=0 onclick=update(Global.General,this.name,0) checked></label> &emsp; 
+		<label> <?php write('#yes')?> <input type=radio name=anyFuelEngines ans=1 onclick=update(Global.General,this.name,1)></label>
 	</fieldset>
 
 	<!--global warming potential-->

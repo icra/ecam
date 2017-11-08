@@ -92,8 +92,7 @@
 <!--navbar--><?php include'navbar.php'?>
 <!--linear--><?php include'linear.php'?>
 <!--caption--><?php include'caption.php'?>
-
-<h1>Population</h1>
+<h1><?php write('#population')?></h1>
 
 <!--main-->
 <div id=main> 
@@ -129,17 +128,17 @@
 		<!--WATER-->
 		<tr><th colspan=3>
 			<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
-			<tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?> <td class=input><input id='ws_resi_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
-			<tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?> <td class=input><input id='ws_serv_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
+			<tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?> <td class=input><input id='ws_resi_pop' onchange="Inh.updateField(this)"> <td><small><?php write('#birds_people')?>
+			<tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?> <td class=input><input id='ws_serv_pop' onchange="Inh.updateField(this)"> <td><small><?php write('#birds_people')?>
 			<tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 
 		<!--WASTEWATER-->
 		<tr><th colspan=3 style=background:#d71d24>
 			<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
-			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?><td class=input><input id='ww_resi_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td><?php write('#ww_conn_pop_descr')?><td class=input><input id='ww_conn_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td>Population serviced with wastewater treatment <td class=input><input id='ww_serv_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td>Population with onsite treatment <td class=input><input id='ww_onsi_pop' onchange="Inh.updateField(this)"> <td><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?><td class=input><input id='ww_resi_pop' onchange="Inh.updateField(this)"> <td><small><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#ww_conn_pop_descr')?><td class=input><input id='ww_conn_pop' onchange="Inh.updateField(this)"> <td><small><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#pop_ww_serv_pop')?><td class=input><input id='ww_serv_pop' onchange="Inh.updateField(this)">   <td><small><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#pop_ww_onsi_pop')?><td class=input><input id='ww_onsi_pop' onchange="Inh.updateField(this)">   <td><small><?php write('#birds_people')?>
 			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
 	</table>
 </div>

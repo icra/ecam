@@ -64,11 +64,14 @@ function format(number,digits){
 	digits=digits||2;
 
 	//for non applicable
-	if(number=="NA")return "<span style=color:#ccc>NA</span>"
+	if(number=="NA"){
+		return "<span style=color:#ccc>NA</span>";
+	}
 
+	//get the result string
 	var str=new Intl.NumberFormat('en-EN',{maximumFractionDigits:digits}).format(number);
 
-	//display error if "NaN" or "Infinity"
+	//if "NaN" or "Infinity" display 'missing inputs'
 	if(str=="NaN" || !isFinite(number)) return "<span style=color:#666;font-size:10px>~"+translate('missing_inputs')+"</span>";
 
 	return str;

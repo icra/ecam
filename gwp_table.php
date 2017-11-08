@@ -17,18 +17,16 @@
 	include'navbar.php';
 	include'linear.php';
 ?>
-<h1>Global Warming Potential Assessment Reports</h1>
+<h1><?php write('#gwp_title')?></h1>
 
-<!--fuel info-->
 <table id=info> 
+	<tr><th colspan=5><?php write('#gwp_title_table')?>
 	<tr>
-		<th colspan=5>Global Warming Potential for 100 year time horizon
-	<tr>
-		<th>Report
-		<th>CO<sub>2</sub> (CO<sub>2</sub> equivalents)
-		<th>CH<sub>4</sub> (CO<sub>2</sub> equivalents)
-		<th>N<sub>2</sub>O (CO<sub>2</sub> equivalents)
-		<th>Comments
+		<th><?php write('#Report')?>
+		<th>CO<sub>2</sub> (CO<sub>2</sub> <?php write('#equivalents')?>
+		<th>CH<sub>4</sub> (CO<sub>2</sub> <?php write('#equivalents')?>
+		<th>N<sub>2</sub>O (CO<sub>2</sub> <?php write('#equivalents')?>)
+		<th><?php write('#Comments')?>
 </table>
 
 <script>
@@ -45,7 +43,7 @@
 			newRow.insertCell(-1).innerHTML=1;
 			newRow.insertCell(-1).innerHTML=rep.ct_ch4_eq;
 			newRow.insertCell(-1).innerHTML=rep.ct_n2o_eq;
-			newRow.insertCell(-1).innerHTML=rep.comment;
+			newRow.insertCell(-1).innerHTML="<small>"+rep.comment+"</small>";
 		});
 	})();
 </script>

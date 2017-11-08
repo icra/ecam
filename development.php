@@ -4,7 +4,7 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
-<!--TITLE--><h1>Development utilities</h1>
+<!--TITLE--><h1 style=color:black>Development utilities</h1>
 
 <table style=font-size:18px>
 	<tr><td><a href="problems.php">Debugging utility</a>

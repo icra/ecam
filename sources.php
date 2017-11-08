@@ -1,33 +1,27 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<script>
-		function init() {
+		function init(){
 			calculateGHG();
 			findCriticGHG();
 			Caption.listeners();
 			addDetailedListeners();
 			updateResult();
-
 			//onclick listeners for substage counters: link to substages.php
 			var tds=document.querySelectorAll('td.ss');
 			for(var i=0;i<tds.length;i++) {
 				tds[i].onclick=function(){window.location='substages.php'}
 			}
-
-
 		}
 
-		function drawCharts() {
-		}
+		function drawCharts(){ }
 
 		function calculateGHG() {
 			//kg, kg per year, or kg per serviced population
-			var divisor=(function()
-			{
+			var divisor=(function() {
 				var ret=1;//return value
 				var select=document.querySelector('#ghg_divisor');
-				switch(select.value)
-				{
+				switch(select.value) {
 					case 'years':
 						ret=Global.General.Years();
 						break;
@@ -82,7 +76,7 @@
 
 			//CO2
 			element.classList.add('critic');
-			element.setAttribute('cap',"This is the highest GHG emission of your system");
+			element.setAttribute('cap',translate("This is the highest GHG emission of your system"));
 
 			//substages number
 			element.previousSibling.classList.add('critic');
@@ -147,20 +141,25 @@
 <!--title-->
 <h1>
 	<script>document.write(Global.General.Name)</script> 
-	&mdash; GHG Emissions Summary (Overview)
+	&mdash; 
+	<?php write("#GHG Emissions Summary (Overview)")?>
 </h1>
 <h4>
-	Assessment period: 
+	<?php write("#assessment_period")?>
 	<b>
-		<script>document.write(Global.General.Days())</script> days
-		(<script>document.write(Global.General.Years())</script> years)
+		<script>document.write(Global.General.Days())</script> <?php write("#days")?>
+		(<script>document.write(Global.General.Years())</script> <?php write("#years")?>)
 	</b>
 </h4>
-<h4>Move the mouse over the emissions to get a detailed view at each stage</h4>
+<h4>
+	<?php write("#move_the_mouse")?>
+</h4>
 
 <!--mobile div detailed sources-->
 <div id=container_detailed style=display:none>
-	<div><b> Detailed GHG sources </b></div>
+	<div><b>
+		<?php write("#Detailed GHG sources")?>
+	</b></div>
 	<table id=detailed></table>
 	<style>
 		div#container_detailed {
@@ -182,8 +181,12 @@
 	
 	<!--tab buttons-->
 	<div class=tab_buttons id=ghg_summary_tabs>
-		<button class=left onclick="tabs_show_tables()" disabled>Tables</button>
-		<button class=right onclick="tabs_show_graphs()">Graphs</button>
+		<button class=left onclick="tabs_show_tables()" disabled>
+			<?php write("#Tables")?>
+		</button>
+		<button class=right onclick="tabs_show_graphs()">
+			<?php write("#Charts")?>
+		</button>
 		<script>
 			function tabs_show_graphs(){
 				document.getElementById('tables').style.display='none'
@@ -209,70 +212,83 @@
 			<div>
 				<table id=sources>
 					<tr><td colspan=5 style=text-align:center>
-						GHG emissions &mdash;
+						<?php write("#GHG emissions")?>
 						<!--select divisor-->
 						<select id=ghg_divisor onchange=init()>
 							<option value=none>Kg CO2 eq
-							<option value=years>Kg CO2 eq / Year
-							<option value=serv_pop>Kg CO2 eq / Year / Serviced population
+							<option value=years>Kg CO2 eq / <?php write("#year")?>
+							<option value=serv_pop>Kg CO2 eq / <?php write("#year")?> / Serviced population
 						</select>
 						<!--legend-->
 						<span style=float:right>
 							<span class=circle style=background:orange></span> 
-							highest emission
+							<?php write("#highest emission")?>
 						</span>
-					<tr><th rowspan=9 style="font-weight:bold;background:rgb(64,83,109);color:white">TOTAL GHG<br><br><span field=TotalGHG>Loading...</span>
+					<tr><th rowspan=9 style="font-weight:bold;background:rgb(64,83,109);color:white">
+						<?php write('#TOTAL GHG')?>
+						<br><br><span field=TotalGHG>
+						<?php write("#Loading")?>...
+					</span>
 
 					<th rowspan=3>
 						<a href="edit.php?level=Water" style=color:white>
-							Water supply 
+							<?php write("#Water")?>
 							(<script> 
 								document.write(Global.Water.ws_serv_pop)
-							</script> people)
+							</script> 
+							<?php write("#people")?>
+							)
 						</a>
-						<br><br><span field=ws_KPI_GHG>Loading...</span>
+						<br><br><span field=ws_KPI_GHG>
+							<?php write("#Loading")?>...
+						</span>
 					</th>
 						<!--wsa-->
-						<td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'>Abstraction </a> 
+						<td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'><?php write('#Abstraction')?></a> 
 							<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Abstraction.length)</script> 
-							<td field=wsa_KPI_GHG level=Water sublevel=Abstraction onmouseenter=fillSources(this,event)>Loading...
+							<td field=wsa_KPI_GHG level=Water sublevel=Abstraction onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
 
 						<!--wst-->
-						<tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'>Treatment   </a> 
+						<tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'><?php write('#Treatment')?></a> 
 							<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Treatment.length)</script> 
-							<td field=wst_KPI_GHG level=Water sublevel=Treatment onmouseenter=fillSources(this,event)>Loading...
+							<td field=wst_KPI_GHG level=Water sublevel=Treatment onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
+						</tr>
 
 						<!--wsd-->
-						<tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'>Distribution</a> 
+						<tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'><?php write('#Distribution')?></a> 
 							<td caption="Number of substages" class=ss><script>document.write(Substages.Water.Distribution.length)</script> 
-							<td field=wsd_KPI_GHG level=Water sublevel=Distribution onmouseenter=fillSources(this,event)>Loading...
-
-					<tr>
-					
+							<td field=wsd_KPI_GHG level=Water sublevel=Distribution onmouseenter=fillSources(this,event)>
+								<?php write('#Loading')?>...
+						<tr>
 					<th rowspan=3 class=red>
 						<a href="edit.php?level=Waste" style=color:white>
-							Wastewater
+							<?php write("#Waste")?>
 							(<script> 
 								document.write(Global.Waste.ww_serv_pop)
-							</script> people)
+							</script> <?php write("#people")?>)
 						</a>
-						<br><br><span field=ww_KPI_GHG>Loading...</span>
+						<br><br>
+						<span field=ww_KPI_GHG>
+							<?php write('#Loading')?>...
+						</span>
 					</th>
 
-						<!--wwc-->
-						<td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'>Collection</a> 
-							<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Collection.length)</script>
-							<td field=wwc_KPI_GHG level=Waste sublevel=Collection onmouseenter=fillSources(this,event)>Loading...
+					<!--wwc-->
+					<td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'><?php write('#Collection')?></a> 
+						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Waste.Collection.length)</script>
+						<td field=wwc_KPI_GHG level=Waste sublevel=Collection onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
+					</td>
 
-						<!--wwt-->
-						<tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'>Treatment </a> 
-							<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Treatment.length)</script> 
-							<td field=wwt_KPI_GHG level=Waste sublevel=Treatment onmouseenter=fillSources(this,event)>Loading...
+					<!--wwt-->
+					<tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'><?php write('#Treatment')?></a> 
+						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Waste.Treatment.length)</script> 
+						<td field=wwt_KPI_GHG level=Waste sublevel=Treatment onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
+					</tr>
 
-						<!--wwd-->
-						<tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'>Discharge </a> 
-							<td caption="Number of substages" class=ss><script>document.write(Substages.Waste.Discharge.length)</script> 
-							<td field=wwd_KPI_GHG level=Waste sublevel=Discharge onmouseenter=fillSources(this,event)>Loading...
+					<!--wwd-->
+					<tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'><?php write('#Discharge')?></a> 
+						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Waste.Discharge.length)</script> 
+						<td field=wwd_KPI_GHG level=Waste sublevel=Discharge onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
 					</tr>
 				</table>
 			</div>
@@ -303,16 +319,18 @@
 
 		<!--emissions outside boundaries-->
 		<div>
-			<table id=outside style="width:95%;margin:2em 0">
+			<table id=outside style="width:95%;margin:1.5em 0">
 				<tr>
 					<th rowspan=2 style=background:purple>
-						GHG emissions
+						<?php write("#GHG emissions")?>
 						<br>
-						outside utility boundaries 
+						<?php write("#outside utility boundaries")?>
 						<br>
 						(kg CO2 eq)
 					</th>
-					<td>From Uncollected wastewater (<a href=variable.php?id=wwc_SL_ghg_unc>wwc_SL_ghg_unc</a>)
+					<td>
+						<?php write("#wwc_SL_ghg_unc_descr")?>
+					(<a href=variable.php?id=wwc_SL_ghg_unc>wwc_SL_ghg_unc</a>)
 					<td field=wwc_SL_ghg_unc>
 						<script>
 							document.write(format(Global.Waste.Collection.wwc_SL_ghg_unc()))
@@ -320,7 +338,9 @@
 					</td>
 				</tr>
 				<tr>
-					<td>From Onsite treatment (<a href=variable.php?id=wwc_SL_ghg_ons>wwc_SL_ghg_ons</a>)
+					<td>
+						<?php write("#wwc_SL_ghg_ons_descr")?>
+						(<a href=variable.php?id=wwc_SL_ghg_ons>wwc_SL_ghg_ons</a>)
 					<td field=wwc_SL_ghg_ons>
 						<script>
 							document.write(format(Global.Waste.Collection.wwc_SL_ghg_ons()))
@@ -336,14 +356,14 @@
 
 	<!--graph 1: right tab-->
 	<div id=graphs_container style=display:none>
-		<div id=graph_1>Loading...</div>
+		<div id=graph_1><?php write('#Loading')?>...</div>
 		<div style="border-top:1px solid #ccc"></div>
-		<div id=graph_2>Loading...</div>
+		<div id=graph_2><?php write('#Loading')?>...</div>
 	</div>
-
 </div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
+
 <script>
 	google.charts.load('current',{'packages':['corechart','gauge','bar']});
 </script>

@@ -267,7 +267,7 @@
 <h1>
 	<?php write('#quick_assessment')?> 
 	&mdash;
-	Initial estimation of total GHG emissions at system-wide level
+	<?php write('#initial_estimation_description')?> 
 	<span style="font-size:13px;color:#666;float:right">
 		<span><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a> 
 		<script>document.write(Global.General.Days())</script> <?php write('#days')?></span> 
@@ -288,7 +288,7 @@
 <div>
 	<div class=inline style=width:35%>
 		<!--inputs-->
-		<div class="card"><?php cardMenu("Inputs &mdash; Enter values from your system")?>
+		<div class="card"><?php cardMenu($lang_json['#inputs'].' &mdash; '.$lang_json['#enter_values'])?>
 			<!--table-->
 			<table id=inputs style=width:100%>
 				<!--WATER-->
@@ -306,8 +306,8 @@
 						</b>
 					</span>
 
-					<tr stage=water class=hidden><td>Energy consumed from the grid<td class=output><input id='ws_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
-					<tr stage=water class=hidden><td>Volume of fuel consumed<td class=output><input id='ws_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
+					<tr stage=water class=hidden><td><?php write('#nrg_cons')?><td class=output><input id='ws_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
+					<tr stage=water class=hidden><td><?php write('#vol_fuel')?><td class=output><input id='ws_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
 
 					<tr stage=water class=hidden> <td><?php write('#wsd_vol_dist_descr')?><td class=input><input id='wsd_vol_dist' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
 					<tr stage=water class=hidden><td><?php write('#wsd_auth_con_descr')?> <td class=input><input id='wsd_auth_con' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
@@ -338,7 +338,7 @@
 					<tr stage=waste class=hidden><td><?php write('#ww_nrg_cons_descr') ?><td class=output><input id='ww_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_nrg_cons'].unit)</script>
 
 					<!--volume of fuel consumed-->
-					<tr stage=waste class=hidden><td>Volume of fuel consumed<td class=output><input id='ww_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_vol_fuel'].unit)</script>
+					<tr stage=waste class=hidden><td><?php write('#vol_fuel')?><td class=output><input id='ww_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_vol_fuel'].unit)</script>
 
 					<!--treated wastewater volume-->
 					<tr stage=waste class=hidden><td><?php write('#wwt_vol_trea_descr')?><td class=input><input id='wwt_vol_trea' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
@@ -363,13 +363,13 @@
 
 					<!--sludge management-->
 					<tr stage=waste class=hidden>
-						<td> Select main treatment type
+						<td> <?php write('#select_main_treatment_type')?>
 						<td colspan=2><?php include'treatment_birds.php'?>
 					</tr>
 
 					<!--sludge management-->
 					<tr stage=waste class=hidden>
-						<td> Select sludge disposal method
+						<td><?php write('#select_sludge_disposal_method')?> 
 						<td colspan=2><?php include'sludge_birds.php'?>
 					</tr>
 			</table>
@@ -430,7 +430,7 @@
 
 	<!--graphs-->
 	<div class="card inline" style="width:63%">
-		<?php cardMenu("Figures")?>
+		<?php cardMenu($lang_json['#figures'])?>
 		<div id=graphs>
 			<style> 
 				#graphs table{margin:auto !important;margin-bottom:0.5em !important}
@@ -461,17 +461,19 @@
 				<div graph id=graph8><?php write('#loading')?></div>
 				<!---->
 				<div style="width:98%;padding:1em 0;margin-bottom:1em;border:none">
-					For further details on energy consumption &amp; opportunities to reduce GHG emissions go to 
-					<b>Detailed GHG Assessment</b> (<a href=#>&uarr;</a>)
+					<?php write('#for_further_details_go_to_detailed')?>
+					<b>
+						<?php write('#energy_performance')?>
+					</b> (<a href=#>&uarr;</a>)
 				</div>
 				<div style="text-align:left;padding-left:10px">
-					See also:
+					<?php write('#see_also')?>:
 					<ul>
-						<li> <a href='estimations.php'>Summary of estimations at this level</a> </li>
-						<li> <a href='non_revenue_water.php'>About non revenue water</a> </li>
-						<li> <a href='authorized_consumption.php'>About authorized consumption</a> </li>
-						<li> <a href='fuelInfo.php'>About fuel types</a> </li>
-						<li> <a href=sankey.php>Sankey diagram</a>
+						<li> <a href='estimations.php'><?php write('#summary_of_estimations_at_this_level')?></a> </li>
+						<li> <a href='non_revenue_water.php'><?php write('#about_nrw')?></a> </li>
+						<li> <a href='authorized_consumption.php'><?php write('#about_auc')?></a> </li>
+						<li> <a href='fuelInfo.php'><?php write('#about_fuel')?></a> </li>
+						<li> <a href=sankey.php><?php write('#sankey_diagram')?></a>
 					</ul>
 				</div>
 				<script>

@@ -76,7 +76,9 @@ Global.Estimations = {
 //add descriptions and units
 for(var code in Global.Estimations){
 	var original = code.replace('estm_','');
-	lang["#"+code+'_descr']=translate(original+'_descr')+" (estimation)";
-	lang["#"+code+'_expla']="Estimation";
+	if(typeof lang!="undefined"){
+		lang["#"+code+'_descr']=translate(original+'_descr')+" (estimation)";
+		lang["#"+code+'_expla']="Estimation";
+	}
 	Info[code]=Info[original];
 }

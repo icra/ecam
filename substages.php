@@ -30,7 +30,7 @@
 				{
 					var newCell=newTable.insertRow(-1).insertCell(-1);
 					newCell.style.border='none';
-					newCell.innerHTML="<i style=color:#666;font-size:12px>~No substages</i>"
+					newCell.innerHTML="<i style=color:#666;font-size:12px>~"+translate('No substages')+"</i>"
 				}
 				for(var j=0;j<pointer.length;j++)
 				{
@@ -53,7 +53,7 @@
 <!--linear--><?php include'linear.php'?>
 <!--caption--><?php include'caption.php'?>
 
-<!--TITLE--><h1>Substages Overview</h1></center>
+<!--TITLE--><h1><?php write('#Substages overview')?></h1></center>
 
 <!--main-->
 <div>
@@ -62,12 +62,12 @@
 		#substages th a {color:white}
 	</style>
 	<tr>
-		<th>              <a href="edit.php?level=Water&sublevel=Abstraction">Abstraction</a>  &rarr;
-		<th>       &rarr; <a href="edit.php?level=Water&sublevel=Treatment">Treatment</a>    &rarr;
-		<th>       &rarr; <a href="edit.php?level=Water&sublevel=Distribution">Distribution</a> &rarr;
-		<th waste> &rarr; <a href="edit.php?level=Waste&sublevel=Collection">Collection</a>   &rarr;
-		<th waste> &rarr; <a href="edit.php?level=Waste&sublevel=Treatment">Treatment</a>    &rarr;
-		<th waste> &rarr; <a href="edit.php?level=Waste&sublevel=Discharge">Discharge</a>    
+		<th>              <a href="edit.php?level=Water&sublevel=Abstraction"> <?php write('#Abstraction')?></a>  &rarr;
+		<th>       &rarr; <a href="edit.php?level=Water&sublevel=Treatment">   <?php write('#Treatment')?></a>    &rarr;
+		<th>       &rarr; <a href="edit.php?level=Water&sublevel=Distribution"><?php write('#Distribution')?></a> &rarr;
+		<th waste> &rarr; <a href="edit.php?level=Waste&sublevel=Collection">  <?php write('#Collection')?></a>   &rarr;
+		<th waste> &rarr; <a href="edit.php?level=Waste&sublevel=Treatment">   <?php write('#Treatment')?></a>    &rarr;
+		<th waste> &rarr; <a href="edit.php?level=Waste&sublevel=Discharge">   <?php write('#Discharge')?></a>    
 	<tr>
 		<td level=Water sublevel=Abstraction>
 		<td level=Water sublevel=Treatment>

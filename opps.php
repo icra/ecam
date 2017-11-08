@@ -26,15 +26,13 @@
 	<!--sidebar--><?php include'sidebar.php'?>
 	<!--navbar--><?php include'navbar.php'?>
 	<!--linear--><?php include'linear.php'?>
-<!--/includes-->
-<h1>Opportunities to reduce GHG emissions</h1>
+<!--title--><h1><?php write('#opps_title')?></h1>
 
 <div id=root>
-
 	<!--total ghg indicator-->
 	<p id=container_TotalGHG>
-		System wide GHG emissions: 
-		<span id=TotalGHG>Loading...</span> 
+		<?php write('#System wide GHG emissions')?>: 
+		<span id=TotalGHG><?php write('#Loading')?>...</span> 
 		kg CO<sub>2</sub>e
 	</p>
 
@@ -42,13 +40,12 @@
 	<div>
 		<table id=opps>
 			<tr>
-				<th>Opportunities
-				<th>Related variable
-				<th>Current value
-				<th>Unit
-				<th>kg CO<sub>2</sub>e reduction <br> per 1% change <br> of current value
-			</tr>
-
+				<th><?php write('#Opportunities')?>
+				<th><?php write('#Related variable')?>
+				<th><?php write('#Current value')?>
+				<th><?php write('#Unit')?>
+				<th>kg CO<sub>2</sub>e 
+					<?php write('#reduction per 1 percent change of current value')?>
 			<tr>
 				<script>
 					//name
@@ -61,7 +58,6 @@
 					var emissions = 0.01 * Global.Water.Distribution.wsd_SL_ghg_attr();
 					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
 				</script>
-			</tr>
 			<tr>
 				<script>
 					//name
@@ -74,7 +70,6 @@
 					var emissions = 0.01 * val * Global.Water.Distribution.wsd_KPI_nrg_per_m3() * Global.General.conv_kwh_co2;
 					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
 				</script>
-			</tr>
 			<tr>
 				<script>
 					document.write("<td>Reduce water supply energy consumption <td><a href=variable.php?id=ws_nrg_cons>ws_nrg_cons</a>");
@@ -87,7 +82,6 @@
 					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
 					//TODO
 				</script>
-			</tr>
 			<tr>
 				<script>
 					//name
@@ -100,7 +94,6 @@
 					var emissions = 0.01 * Global.Waste.Collection.wwc_SL_GHG_ii();
 					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
 				</script>
-			</tr>
 			<tr>
 				<script>
 					document.write("<td>Reduce wastewater supply energy consumption <td><a href=variable.php?id=ww_nrg_cons>ww_nrg_cons</a>");
@@ -112,7 +105,6 @@
 					var emissions = 0.01 * val * Global.General.conv_kwh_co2;
 					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
 				</script>
-			</tr>
 			<tr>
 				<script>
 					document.write("<td>Reduce biogas flared<td><a href=variable.php?id=wwt_KPI_GHG_biog>wwt_KPI_GHG_biog</a>");
@@ -124,7 +116,6 @@
 					var emissions = 0.01 * val * Global.Waste.Treatment.wwt_KPI_GHG_biog();
 					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
 				</script>
-			</tr>
 			<tr>
 				<script>
 					document.write("<td>Reduce sludge disposal<td>wwt_mass_slu_comp+wwt_mass_slu_inc+wwt_mass_slu_app<br>+wwt_mass_slu_land+wwt_mass_slu_stock");
@@ -153,7 +144,6 @@
 					Global.Waste.Treatment.wwt_mass_slu_stock*=100;
 					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
 				</script>
-			</tr>
 			<tr>
 				<script>
 					document.write("<td>Increase wastewater treatment coverage<td><a href=variable.php?id=ww_serv_pop>ww_serv_pop</a>");
@@ -177,7 +167,6 @@
 					})();
 					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
 				</script>
-			</tr>
 			<tr>
 				<script>
 					document.write("<td>Reduce wastewater discharged to water body <br>(wastewater reuse)<td><a href=variable.php?id=wwd_vol_disc>wwd_vol_disc</a>");
@@ -193,25 +182,5 @@
 		</table>
 	</div>
 </div>
-
-<!--
-<ul style=text-align:left;display:inline-block;margin:auto;margin-top:10px>
-	<li>
-		All opportunities to be implemented
-		<ul>
-			<li>Non-revenue water volume
-			<li>End user consumption
-			<li>Water reuse (to replace potable water for non-potable purposes)
-			<li>Drinking water grid energy consumption
-			<li>Infiltration inflow
-			<li>Wastewater grid energy consumption
-			<li>Biogas production / recovery
-			<li>Sludge disposal
-			<li>Wastewater treatment coverage (?)
-			<li>Wastewater reuse (avoid discharge to water body)
-		</ul>
-	</li>
-</ul>
--->
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

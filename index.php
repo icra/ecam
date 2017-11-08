@@ -10,7 +10,7 @@
 		<style>
 			#content *:not(button){margin:0;padding:0;padding-top:0.7em;padding-bottom:0.7em}
 			#content {
-			    padding: 0 10em 0 10em;
+			  padding: 0 10em 0 10em;
 				text-align:left;
 			}
 			#content .width_50 .img_resp{
@@ -21,35 +21,35 @@
 
 		<!--new title-->
 		<div class="width_50">
-			<h1 class="blue_h1" style=padding-bottom:0px>A toolkit for utilities</h1> 
+			<h1 class="blue_h1" style=padding-bottom:0px>
+				<?php write("#a_toolkit_for_utilities")?>
 			<h1 class="green_h1" style=font-size:32px>
-				Assess your utility's carbon<br>
-				footprint, energy consumption
-				<br>and service levels
+				<?php write("#assess_your_utility")?>
 			</h1>
 
 			<!--new text-->
 			<h4 style=font-size:18px;color:#58595b>
-				The Energy Performance and Carbon Emissions Assessment
-				and Monitoring Tool is designed for assessing the carbon
-				emissions of the urban water cycle that are within the
-				operational boundaries of water and wastewater utilities and
-				prepare these utilities for future reporting needs on climate
-				mitigation.
+				<?php write("#index_description")?>
 			</h4>
 			<h4 style=font-size:18px;color:#58595b>
-				ECAM is a free and 
-				<a target=_blank href=//github.com/holalluis/ecam>open source</a>
-				tool developed as part of the
-				<a target=_blank href=http://wacclim.org/>WaCCliM project</a>.
+				<?php write("#ecam_is_a_free_and")?>
+				<a target=_blank href=//github.com/holalluis/ecam>
+					<?php write("#open_source")?>
+				</a>
+				<?php write("#tool_developed_as_part_of_the")?>
+				<a target=_blank href=//wacclim.org/>
+					<?php write("#wacclim_project")?>
+				</a>
 			</h4>
 
 			<h4 style=font-size:18px;color:#58595b>
-				First time using ECAM? 
-				Click on 'New' or learn more <a href=help.php target=_blank>here</a>.
+				<?php write("#first_time_using_ecam")?>
+				<a href=help.php target=_blank>
+					<?php write("#here")?>.
+				</a>
 			</h4>
 
-			<!--MENU--><div style="padding:1em 0"><?php include'menu.php'?></div>
+			<!--MENU BUTTONS--><div style="padding:1em 0"><?php include'menu.php'?></div>
 
 			<!--chrome warning-->
 			<div class="chrome_big"> 
@@ -65,11 +65,12 @@
 			<img class="license_img" src="img/sa_white_x2.png" alt=""> -->
 			<img class="license_img license_img-big" src="img/CC_license_small.png" alt="">
 			<br>
-			ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-			<div>
-				* WaCCliM project is part of the International Climate Initiative (IKI). The German Federal Ministry for the Environment, Nature
-				Conservation, Building and Nuclear Safety (BMUB) supports this initiative on the basis of a decision adopted by the German
-				Bundestag.
+				<?php write("#ecam_by_iwa_giz_icra")?>
+			<a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+				<?php write("#creative_commons_attr")?>
+			</a>.
+			<div style=font-size:smaller>
+				<?php write("#wacclim_is_part_of_IKI")?>
 			</div>
 		</div>
 

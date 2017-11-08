@@ -141,7 +141,7 @@
 
 			//get the table t
 			var t=document.querySelector('#table');
-			t.rows[0].cells[0].innerHTML="All stages";
+			t.rows[0].cells[0].innerHTML=translate("All stages");
 			while(t.rows.length>2){t.deleteRow(-1);}
 
 			//all stages objects
@@ -217,10 +217,10 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--> <?php include'linear.php'?>
 <!--TITLE--><h1><?php write('#export_title')?></h1>
-
-<h4>You can export individual stages to excel using this menu</h4>
 <h4>
-	Click on a stage to view its variables. Then, click on 'Highlight the whole table' to copy and paste to an empty Excel file, or create a csv file.
+	<?php write('#You can export individual stages to excel using this menu')?>
+</h4><h4>
+	<?php write('#export_explanation')?> 
 </h4>
 
 <div id=main style=margin-bottom:3em>
@@ -232,7 +232,7 @@
 			<tr>
 				<td rowspan=4>
 					<button onclick="exportAll()" class=button style="font-size:18px">
-						All stages
+						<?php write('#All stages')?>
 					</button>
 				</td>
 				<td><?php write('#ghg_assessment')?><td><?php write('#energy_performance')?>
@@ -268,7 +268,7 @@
 			<?php write('#export_highlight_button')?>
 		</button>
 		<button class=button id=createCSV disabled onclick=createCSV() style="font-size:18px">
-			Create CSV from current table
+			<?php write('#Create CSV from current table')?>
 		</button>
 	</div>
 </div>
@@ -280,8 +280,8 @@
 		<th><?php write('#export_code')?>
 		<th><?php write('#export_name')?>
 		<th><?php write('#export_type')?>
-		<th>Current value
-		<th>Formula
+		<th><?php write('#Current value')?>
+		<th><?php write('#Formula')?>
 		<th><?php write('#export_unit')?>
 		<th><?php write('#export_desc')?>
 	<tr><td colspan=7 style="text-align:center;">

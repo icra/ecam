@@ -1,6 +1,6 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
-	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+	<script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 	<style>
 		h1{background:white}
 		div.bm {
@@ -14,15 +14,21 @@
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1><a href=development.php>Development</a> &rsaquo; Benchmarking summary</h1>
+<!--TITLE--><h1><a href=development.php>
+	<?php write('#dev')?></a> &rsaquo; 
+	<?php write('#Benchmarking summary')?>
+</h1>
 <!--root-->
 <div id=root style="text-align:left">
 	<div style="margin-top:1em;text-align:center">
-		<button onclick=foldAll()>Fold all</button>
-		<button onclick=unfoldAll()>Unfold all</button>
+		<button onclick=foldAll()>
+			<?php write('#Fold all')?>
+		</button>
+		<button onclick=unfoldAll()>
+			<?php write('#Expand all')?>
+		</button>
 		<script>
-			function unfoldAll()
-			{
+			function unfoldAll() {
 				var elements = document.querySelectorAll('div.card.folded');
 				for(var i=0;i<elements.length;i++)
 					elements[i].classList.remove('folded');
@@ -50,14 +56,14 @@
 			var stage;
 			switch(prefix)
 			{
-				case "wsa": stage="Water Abstraction";break;
-				case "wst": stage="Water Treatment";break;
-				case "wsd": stage="Water Distribution";break;
-				case "wwc": stage="Wastewater Collection";break;
-				case "wwt": stage="Wastewater Treatment";break;
-				case "wwd": stage="Wastewater Discharge";break;
-				case "wsg": stage="Water";break;
-				case "wwg": stage="Wastewater";break;
+				case "wsa": stage=translate("Abstraction");break;
+				case "wst": stage=translate("Treatment");break;
+				case "wsd": stage=translate("Distribution");break;
+				case "wwc": stage=translate("Collection");break;
+				case "wwt": stage=translate("Treatment");break;
+				case "wwd": stage=translate("Discharge");break;
+				case "wsg": stage=translate("Water");break;
+				case "wwg": stage=translate("Waste");break;
 			}
 
 			document.write("<div class='card '>"+
@@ -91,9 +97,9 @@
 		}
 		function printAll()
 		{
-			printLevel(['wsa','wst','wsd'],"Water");
-			printLevel(['wwc','wwt','wwd'],"Wastewater");
-			printLevel(['wsg','wwg'],"Energy");
+			printLevel(['wsa','wst','wsd'],translate("Water"));
+			printLevel(['wwc','wwt','wwd'],translate("Waste"));
+			printLevel(['wsg','wwg'],translate("Energy"));
 		}
 	</script>
 	<script>printAll()</script>
