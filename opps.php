@@ -1,17 +1,7 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<script>
-		// Opportunities: potential GHG reductions
-		var Opps = [
-		];
-
-		//render opportunities table
-		function renderOpps(){
-			//TODO
-		}
-
 		function init(){
-			//renderOpps();
 			document.getElementById('TotalGHG').innerHTML=format(Global.General.TotalGHG());
 			updateResult();
 		}
@@ -22,10 +12,10 @@
 		}
 	</style>
 </head><body onload=init()><center>
-<!--includes-->
-	<!--sidebar--><?php include'sidebar.php'?>
-	<!--navbar--><?php include'navbar.php'?>
-	<!--linear--><?php include'linear.php'?>
+<!--sidebar--><?php include'sidebar.php'?>
+<!--navbar--> <?php include'navbar.php'?>
+<!--linear--> <?php include'linear.php'?>
+
 <!--title--><h1><?php write('#opps_title')?></h1>
 
 <div id=root>
@@ -80,7 +70,6 @@
 					//1% change in emissions
 					var emissions = 0.01 * val * Global.General.conv_kwh_co2;
 					document.write("<td align=right>"+format(emissions)+" kg CO<sub>2</sub>e");
-					//TODO
 				</script>
 			<tr>
 				<script>

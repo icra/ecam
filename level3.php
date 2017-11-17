@@ -3,16 +3,14 @@
 	//namespace for level3.php structure
 	var level3={};
 	/** INPUTS redisplay */
-	level3.updateSubstagesTable=function()
-	{
+	level3.updateSubstagesTable=function() {
 		/*table element*/
 		var t=document.getElementById('substages');
 		while(t.rows[0].cells.length>1)t.rows[0].deleteCell(-1);
 
 		/*table headers */
 			//go over substages: create a column for each
-			for(var s in substages)
-			{
+			for(var s in substages) {
 				var newTH = document.createElement('th');
 				newTH.style.cursor="pointer";
 				newTH.style.width="90px";
@@ -24,8 +22,7 @@
 				t.rows[0].appendChild(newTH);
 			}
 			//TOTAL header only if substages.length==1
-			if(substages.length>1)
-			{
+			if(substages.length>1) {
 				var newTH = document.createElement('th');
 				t.rows[0].appendChild(newTH);
 				newTH.innerHTML="&sum; Sum";
@@ -47,23 +44,20 @@
 
 			//find calculated variables
 			var cvs=[];
-			(function()
-			{
-				for(var f in CurrentLevel)
-				{
+			(function() {
+				for(var f in CurrentLevel) {
 					if(f.search(/^c_/)!=-1) {cvs.push(f);}
 				}
 				inputs=inputs.concat(cvs);
 			})();
 
-			//first row: delete substage button
+			//first row: btn 'delete substage'
 			var newRow=t.insertRow(-1);
 			var newCell=newRow.insertCell(-1);
 			newCell.style.border="none";
 			newCell.colSpan=2;
 			newCell.innerHTML="<span style=font-size:10px>Inputs</span>";
-			for(var s in substages)
-			{
+			for(var s in substages) {
 				newCell=newRow.insertCell(-1);
 				newCell.classList.add('outputValue');
 				newCell.style.textAlign='center';
@@ -75,222 +69,195 @@
 				newCell.innerHTML=str
 			}
 
-			//go over normal inputs and then dropdown menus
-			//1. go over inputs array we've just created
+			//go over all inputs
 			for(var input in inputs) {
 				/*variable code*/
 				var code=inputs[input];
-				
+
 				/*Skip if is level2 only*/
 				if(Level2only.list.indexOf(code)+1) continue;
 
 				//skip if filtered
 				if(Questions.isHidden(code)) continue;
 
-				//is a calculated variable?
-				var isCV=typeof(CurrentLevel[code])=="function" ? true : false;
-
-				//copy the function inside substages
-				if(isCV) 
-				{
-					for(var s in substages) 
-						substages[s][code]=CurrentLevel[code]; 
-				}
+				/*new row*/
+				var newRow=t.insertRow(-1);
+				newRow.setAttribute('field',code);
 
 				//if is an option, continue (will show at the end of the table)
-				if(Info[code]&&Info[code].magnitude=="Option") continue;
-
-				/*new row*/
-				var newRow=t.insertRow(-1);
-				newRow.setAttribute('field',code);
-
-				//mouse over listener for highlighting
-				if(isCV)
-				{
-					var formula=CurrentLevel[code].toString();
-					var prettyFormula=Formulas.prettify(formula);
-					newRow.setAttribute('onmouseover','Formulas.hlInputs("'+code+'",CurrentLevel,1)');
-					newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+code+'",CurrentLevel,0)');
-				}
-				else
-				{
-					newRow.setAttribute('onmouseover','Formulas.hlOutputs("'+code+'",CurrentLevel,1)');
-					newRow.setAttribute('onmouseout', 'Formulas.hlOutputs("'+code+'",CurrentLevel,0)');
-				}
-
-				/*1st cell: show code*/
-				var newCell=newRow.insertCell(-1);
-				newCell.classList.add('variableCode');
-				if(isCV) newCell.classList.add('isCV');
-				newCell.innerHTML=(function()
-				{
-					return "<a href=variable.php?id="+code+">"+code+"</a>";
-				})();
-				//show question it belongs
-				(function(){
-					var question=Questions.isInside(code);
-					if(question)
-					{
-						newCell.innerHTML+=" <span class='advanced'>"+question.substring(4)+"</span>";
-					}
-				})()
-
-				/*2nd cell: variable name*/
-				var newCell=newRow.insertCell(-1);
-				newCell.style.textAlign="left";
-				newCell.setAttribute('title', translate(code+'_expla'));
-				newCell.innerHTML=(function(){
-					var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ? 
-						" <span class=not_used_input caption='Input not used for any equation'></span>" : "";
-					return "<small>"+translate(code+'_descr')+warning+"</small>";
-				})();
-
-				//3rd cell and so on: go over substages
-				var multiplier=Units.multiplier(code);
-				for(var s in substages)
-				{
-					var newCell=newRow.insertCell(-1);
-					newCell.setAttribute('substage',s);
-					newCell.classList.add("input");
-
-					if(isCV)
-					{
-						newCell.innerHTML=format(substages[s][code]()/multiplier);
-						newCell.setAttribute('title',prettyFormula);
-						newCell.classList.add("CV");
-					}
-					else
-					{
-						newCell.setAttribute('onclick','level3.transformField(this)');
-						newCell.innerHTML=format(substages[s][code]/multiplier);
-					}
-				}
-
-				//sum all inputs of this kind
-				var sum=level3.sumAll(code);
-				//some variables are averaged instead of summed up
-				if(Averaged.isAveraged(code)) sum/=substages.length;
-
-				//LEVEL 2 current value
-				if(substages.length>1)
-				{
-					var newCell=newRow.insertCell(-1);
-					newCell.style.textAlign="center";newCell.style.fontWeight="bold";
-					newCell.innerHTML=(function()
-					{
-						if(isCV) 
+				var isOption = (Info[code]&&Info[code].magnitude=="Option");
+				if(isOption){
+					(function(){
+						/*1st cell: show code*/
+						var newCell=newRow.insertCell(-1);
+						newCell.classList.add('variableCode');
+						newCell.innerHTML=(function()
 						{
-							return format(CurrentLevel[code]()/multiplier);
-						}
-						else
-						{
-							var isAvg = Averaged.isAveraged(code) ? " (average)": "";
-							return format(sum/multiplier)+isAvg;
-						}
-					})();
-					//UPDATE -> SUM OF SUBSTAGES to LEVEL 2
-					//only update real inputs
-					if(!isCV) CurrentLevel[code]=sum;
-				}
-
-				//Unit for current input
-				newRow.insertCell(-1).innerHTML=(function()
-				{
-					//check if unit is entered in "Info"
-					if(!Info[code]) return "undefined";
-					//check if unit is currency
-					if(Info[code].magnitude=="Currency") { return Global.General.Currency; }
-					//if no magnitude, return unit string
-					if(Units[Info[code].magnitude]===undefined) { return Info[code].unit }
-
-					//look for current unit
-					var currentUnit = Global.Configuration.Units[code] || Info[code].unit
-
-					//create a <select> for unit changing
-					var str="<select onchange=Units.selectUnit('"+code+"',this.value)>";
-					for(unit in Units[Info[code].magnitude])
-					{
-						if(unit==currentUnit)
-							str+="<option selected>"+unit+"</option>";
-						else
-							str+="<option>"+unit+"</option>";
-					}
-					str+="</select>"
-					return str
-				})();
-			}
-			//2. go over inputs "magnitude==option"
-			for(var input in inputs)
-			{
-				/*variable code*/
-				var code=inputs[input];
-				
-				//if not option, continue
-				if(Info[code] && Info[code].magnitude!="Option") continue;
-
-				/*Skip if is level2 only*/
-				if(Level2only.list.indexOf(code)+1) continue;
-
-				/*new row*/
-				var newRow=t.insertRow(-1);
-				newRow.setAttribute('field',code);
-
-				if(Questions.isHidden(code)){newRow.style.display='none'}
-
-				/*1st cell: show code*/
-				var newCell=newRow.insertCell(-1);
-				newCell.classList.add('variableCode');
-				newCell.innerHTML=(function()
-				{
-					return "<a href=variable.php?id="+code+">"+code+"</a>";
-				})();
-				//show question it belongs
-				(function(){
-					var question=Questions.isInside(code);
-					if(question)
-					{
-						newCell.innerHTML+=" <span class='advanced'>"+question.substring(4)+"</span>";
-					}
-				})()
-
-				/*2nd cell: variable name*/
-				var newCell=newRow.insertCell(-1);
-				newCell.style.textAlign="left";
-				newCell.setAttribute('title', translate(code+'_expla'));
-				newCell.innerHTML=(function(){
-					var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ? 
-						" <span class=not_used_input caption='Input not used for any equation'></span>" : "";
-					return "<small>"+translate(code+'_descr')+warning+"</small>";
-				})();
-
-				//3rd cell and so on: go over substages
-				for(var s in substages)
-				{
-					var newCell=newRow.insertCell(-1);
-					newCell.style.textAlign='left';
-					newCell.classList.add("input");
-					newCell.setAttribute('substage',s);
-					(function()
-					{
-						var select=document.createElement('select');
-						newCell.appendChild(select)
-						if(substages.length==1)
-							select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);CurrentLevel["'+code+'"]=parseInt(this.value);init()')
-						else
-							select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);init()')
-						for(var op in Tables[code])
-						{
-							var option = document.createElement('option');
-							var value = parseInt(Tables[code][op].value);
-							select.appendChild(option);
-							option.value=value;
-							option.innerHTML="("+value+") "+op;
-							if(substages[s][code]==value) 
+							return "<a href=variable.php?id="+code+">"+code+"</a>";
+						})();
+						//show question it belongs
+						(function(){
+							var question=Questions.isInside(code);
+							if(question)
 							{
-								option.selected=true;
+								newCell.innerHTML+=" <span class='advanced'>"+question.substring(4)+"</span>";
+							}
+						})()
+
+						/*2nd cell: variable name*/
+						var newCell=newRow.insertCell(-1);
+						newCell.style.textAlign="left";
+						newCell.setAttribute('title', translate(code+'_expla'));
+						newCell.innerHTML=(function(){
+							var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ? 
+								" <span class=not_used_input caption='Input not used for any equation'></span>" : "";
+							return "<small>"+translate(code+'_descr')+warning+"</small>";
+						})();
+
+						//3rd cell and so on: go over substages
+						for(var s in substages)
+						{
+							var newCell=newRow.insertCell(-1);
+							newCell.style.textAlign='left';
+							newCell.classList.add("input");
+							newCell.setAttribute('substage',s);
+							(function()
+							{
+								var select=document.createElement('select');
+								newCell.appendChild(select)
+								if(substages.length==1)
+									select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);CurrentLevel["'+code+'"]=parseInt(this.value);init()')
+								else
+									select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);init()')
+								for(var op in Tables[code])
+								{
+									var option = document.createElement('option');
+									var value = parseInt(Tables[code][op].value);
+									select.appendChild(option);
+									option.value=value;
+									option.innerHTML="("+value+") "+op;
+									if(substages[s][code]==value) 
+									{
+										option.selected=true;
+									}
+								}
+							})();
+						}
+					})()
+				}else{
+					(function(){
+						//is a calculated variable?
+						var isCV=typeof(CurrentLevel[code])=="function" ? true : false;
+
+						//copy the function inside substages
+						if(isCV) {
+							for(var s in substages) 
+								substages[s][code]=CurrentLevel[code]; 
+						}
+
+						//mouse over listener for highlighting
+						if(isCV) {
+							var formula=CurrentLevel[code].toString();
+							var prettyFormula=Formulas.prettify(formula);
+							newRow.setAttribute('onmouseover','Formulas.hlInputs("'+code+'",CurrentLevel,1)');
+							newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+code+'",CurrentLevel,0)');
+						} else {
+							newRow.setAttribute('onmouseover','Formulas.hlOutputs("'+code+'",CurrentLevel,1)');
+							newRow.setAttribute('onmouseout', 'Formulas.hlOutputs("'+code+'",CurrentLevel,0)');
+						}
+
+						/*1st cell: show code*/
+						var newCell=newRow.insertCell(-1);
+						newCell.classList.add('variableCode');
+						if(isCV) newCell.classList.add('isCV');
+						newCell.innerHTML=(function() {
+							return "<a href=variable.php?id="+code+">"+code+"</a>";
+						})();
+
+						//show question it belongs
+						(function(){
+							var question=Questions.isInside(code);
+							if(question) {
+								newCell.innerHTML+=" <span class='advanced'>"+question.substring(4)+"</span>";
+							}
+						})()
+
+						/*2nd cell: variable name*/
+						var newCell=newRow.insertCell(-1);
+						newCell.style.textAlign="left";
+						newCell.setAttribute('title', translate(code+'_expla'));
+						newCell.innerHTML=(function(){
+							var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ? 
+								" <span class=not_used_input caption='Input not used for any equation'></span>" : "";
+							return "<small>"+translate(code+'_descr')+warning+"</small>";
+						})();
+
+						//3rd cell and so on: go over substages
+						var multiplier=Units.multiplier(code);
+						for(var s in substages) {
+							var newCell=newRow.insertCell(-1);
+							newCell.setAttribute('substage',s);
+							newCell.classList.add("input");
+
+							if(isCV) {
+								newCell.innerHTML=format(substages[s][code]()/multiplier);
+								newCell.setAttribute('title',prettyFormula);
+								newCell.classList.add("CV");
+							}
+							else
+							{
+								newCell.setAttribute('onclick','level3.transformField(this)');
+								newCell.innerHTML=format(substages[s][code]/multiplier);
 							}
 						}
-					})();
+
+						//sum all inputs of this kind
+						var sum=level3.sumAll(code);
+						//some variables are averaged instead of summed up
+						if(Averaged.isAveraged(code)) sum/=substages.length;
+
+						//LEVEL 2 current value
+						if(substages.length>1) {
+							var newCell=newRow.insertCell(-1);
+							newCell.style.textAlign="center";newCell.style.fontWeight="bold";
+							newCell.innerHTML=(function() {
+								if(isCV) {
+									return format(CurrentLevel[code]()/multiplier);
+								} else {
+									var isAvg = Averaged.isAveraged(code) ? " (average)": "";
+									return format(sum/multiplier)+isAvg;
+								}
+							})();
+							//UPDATE -> SUM OF SUBSTAGES to LEVEL 2
+							//only update real inputs
+							if(!isCV) CurrentLevel[code]=sum;
+						}
+
+						//Unit for current input
+						newRow.insertCell(-1).innerHTML=(function() {
+							//check if unit is entered in "Info"
+							if(!Info[code]) return "undefined";
+							//check if unit is currency
+							if(Info[code].magnitude=="Currency") { return Global.General.Currency; }
+							//if no magnitude, return unit string
+							if(Units[Info[code].magnitude]===undefined) { return Info[code].unit }
+
+							//look for current unit
+							var currentUnit = Global.Configuration.Units[code] || Info[code].unit
+
+							//create a <select> for unit changing
+							var str="<select onchange=Units.selectUnit('"+code+"',this.value)>";
+							for(unit in Units[Info[code].magnitude])
+							{
+								if(unit==currentUnit)
+									str+="<option selected>"+unit+"</option>";
+								else
+									str+="<option>"+unit+"</option>";
+							}
+							str+="</select>"
+							return str
+						})();
+					})()
 				}
 			}
 		/*end update body*/
@@ -298,8 +265,7 @@
 		/*update substage counter*/ 
 		document.getElementById('counter').innerHTML=substages.length
 	}
-	level3.getInputs=function()
-	{
+	level3.getInputs=function() {
 		var inputs=[];
 		for(var field in CurrentLevel)
 		{
@@ -308,23 +274,20 @@
 		}
 		return inputs;
 	}
-	level3.sumAll=function(code)
-	{
+	level3.sumAll=function(code) {
 		var sum=0;
 		for(var s in substages){sum+=parseFloat(substages[s][code])}
 		return sum;
 	}
 	/** new Substage class for storing all variables that correspond to current stage */
-	level3.Substage=function()
-	{
+	level3.Substage=function() {
 		/*get a list of variables for this level*/ var inputs=level3.getInputs();
 		/*substage default name*/ this.name="<?php write("#$sublevel")?> "+(parseInt(substages.length)+1);
 		//init with zero values, e.g. Substage {tV1: 0, tV2: 0, tV3: 0, tV4: 0, tV5: 0, ...}
 		for(var i in inputs){this[inputs[i]]=0;}
 	}
 	/** New substage button pushed */
-	level3.newSubstage=function()
-	{
+	level3.newSubstage=function() {
 		event.stopPropagation(); //this is to see the memory progress
 		//check memory usage
 		if(document.cookie.length>=8100)
@@ -352,8 +315,7 @@
 		})();
 	}
 	/** button delete substage pushed */
-	level3.deleteSubstage=function(index)
-	{
+	level3.deleteSubstage=function(index) {
 		if(substages.length==1)
 		{
 			alert("<?php write('#level3_error_cannot_delete_last_substage')?>");
@@ -367,14 +329,12 @@
 		init();
 	}
 	/** update substage name */
-	level3.changeName=function(index,newValue)
-	{
+	level3.changeName=function(index,newValue) {
 		substages[index].name=newValue;
 		init();
 	}
 	/** make appear a menu for changing substage[index] name */
-	level3.showSubstageMenu=function(index,ev)
-	{
+	level3.showSubstageMenu=function(index,ev) {
 		//new div element
 		var div = document.createElement('div')
 		document.body.appendChild(div)
@@ -399,8 +359,7 @@
 		input.select()
 	}
 	//transform a cell to make it editable
-	level3.transformField=function(element)
-	{
+	level3.transformField=function(element) {
 		element.removeAttribute('onclick')
 		var field=element.parentNode.getAttribute('field')
 		var substage=element.getAttribute('substage')
@@ -459,8 +418,7 @@
 		input.select();
 	}
 	//update a field of the substage[index]
-	level3.updateSubstage=function(index,field,newValue)
-	{
+	level3.updateSubstage=function(index,field,newValue) {
 		newValue=parseFloat(newValue);
 		if(isNaN(newValue))newValue=0;
 		var multiplier=Units.multiplier(field);
@@ -475,13 +433,11 @@
 		init();
 	}
 	/** Redisplay outputs */
-	level3.updateOutputs=function()
-	{
+	level3.updateOutputs=function() {
 		var t=document.getElementById('substages');
 
 		//copy all functions to each substage
-		for(var field in CurrentLevel)
-		{
+		for(var field in CurrentLevel) {
 			//only functions
 			if(typeof(CurrentLevel[field])!="function") continue;
 			//IMPORTANT: for this to work all formulas that refer to internal variables should refer to them with "this" keyword
@@ -496,8 +452,7 @@
 		newCell.innerHTML="<span style=font-size:10px>Outputs</span>";
 
 		//go over CurrentLevel
-		for(var field in CurrentLevel)
-		{
+		for(var field in CurrentLevel) {
 			//only functions
 			if(typeof(CurrentLevel[field])!="function") continue;
 
@@ -616,25 +571,22 @@
 			{
 				return Info[field] ? Info[field].unit : "<span style=color:#ccc>no unit</span>";
 			})();
-
 		}
 
 		//if no active equations show warning
-		if(t.rows.length<2)
-		{
+		if(t.rows.length<2) {
 			var newCell=t.insertRow(-1).insertCell(-1)
 			newCell.colSpan=4+substages.length;
 			newCell.innerHTML="<i style=color:#999>~No active outputs</i>";
 		}
 
-		//final row empty ()
+		//final row empty
 		t.insertRow(-1).insertCell(-1).colSpan=4+substages.length;
 	}
 </script>
 
 <!--advanced questions-->
-<?php 
-	$folded=isset($_COOKIE['Folded_adv_questions_container'])?"folded":"";?>
+<?php $folded=isset($_COOKIE['Folded_adv_questions_container'])?"folded":"";?>
 <div id=adv_questions_container class="card <?php echo $folded?>">
 	<div class=menu onclick=fold(this.parentNode)>
 		<button></button>
@@ -652,9 +604,7 @@
 </div>
 
 <!--substages container-->
-<?php 
-	$folded=isset($_COOKIE['Folded_substageInputs_container']) ? "folded" : "";
-?>
+<?php $folded=isset($_COOKIE['Folded_substageInputs_container']) ? "folded" : ""; ?>
 <div id=substageInputs_container class="card <?php echo $folded?>" style="text-align:left">
 	<!--menu-->
 	<div class=menu onclick=fold(this.parentNode)>

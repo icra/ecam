@@ -96,7 +96,6 @@
 
 	//draw a dropdown menu in inputs table
 	level2.createDropdown=function(field,table,question) {
-
 		question=question||false; //question it belongs to
 
 		var code=field;
@@ -152,7 +151,6 @@
 
 	//draw an input in inputs table
 	level2.createInput=function(field,table,question) {
-		
 		question=question||false; //code of the question it belongs to
 
 		//if dropdown, call create dropdown instead
@@ -423,11 +421,13 @@
 		}
 
 		//bottom line decoration with the color of W/WW
-		var newRow=t.insertRow(-1);
-		var newTh=document.createElement('th');
-		newTh.setAttribute('colspan',4);
-		newTh.style.borderBottom='none';
-		newRow.appendChild(newTh);
+		(function(){
+			var newRow=t.insertRow(-1);
+			var newTh=document.createElement('th');
+			newTh.setAttribute('colspan',4);
+			newTh.style.borderBottom='none';
+			newRow.appendChild(newTh);
+		})();
 	}
 
 	/**

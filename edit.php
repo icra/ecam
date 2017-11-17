@@ -99,8 +99,7 @@
 			
 		}
 
-		th.tableHeader
-		{
+		th.tableHeader {
 			background:white;
 			color:#666;
 			font-size:15px;
@@ -134,27 +133,25 @@
 			padding:0.1em 0.5em;
 			box-shadow: 1px 1px 1px #888;
 		}
-		span.not_used_input:before { content:"not used"; }
+		span.not_used_input:before{
+			content:"not used";
+		}
 	</style>
 	<script>
 		<?php
 			//establish the stage pointers we are going to be focused
-			if($sublevel)
-			{
+			if($sublevel) {
 				echo "
 					var CurrentLevel = Global['$level']['$sublevel'];
 					var substages = Substages['$level']['$sublevel'];
 				";
-			}
-			else
-			{
+			}else{
 				echo "var CurrentLevel = Global['$level'];";
 				echo "var substages = false;";
 			}
 		?>
 		/** Update all */
-		function init()
-		{
+		function init() {
 			if(typeof updateQuestionsTable !== 'undefined') {
 				updateQuestionsTable('adv_questions',true);
 			}
@@ -177,12 +174,10 @@
 		}
 
 		/** Redisplay table id=outputs (level2)*/
-		function updateOutputs()
-		{
+		function updateOutputs() {
 			var t=document.getElementById('outputs');
 			while(t.rows.length>2){t.deleteRow(-1)}
-			for(var field in CurrentLevel)
-			{
+			for(var field in CurrentLevel) {
 				if(typeof(CurrentLevel[field])!="function") continue;
 				if(field.search(/^c_/)>=0) continue;
 				if(field.search("_KPI_GHG")==-1) continue;
@@ -304,8 +299,7 @@
 			}
 
 			//if the table is empty, add a warning
-			if(t.rows.length<3)
-			{
+			if(t.rows.length<3) {
 				var newCell=t.insertRow(-1).insertCell(-1)
 				newCell.colSpan=6; 
 				newCell.innerHTML="<span style=color:#999>~All GHG outputs inactive</span>";
@@ -321,12 +315,10 @@
 		}
 
 		//Redisplay NRG and SL outputs (level2)
-		function updateNrgOutputs()
-		{
+		function updateNrgOutputs() {
 			var t=document.getElementById('nrgOutputs');
 			while(t.rows.length>2){t.deleteRow(-1);}
-			for(var field in CurrentLevel)
-			{
+			for(var field in CurrentLevel) {
 				if(typeof(CurrentLevel[field])!="function")continue;
 				if(field.search(/^c_/)!=-1)continue;
 				if(field.search("_KPI_GHG")>=0)continue;
@@ -336,10 +328,7 @@
 				if(Level3.list.indexOf(field)>-1){continue;}
 
 				/*check if should be hidden according to questions*/
-				if(Questions.isHidden(field))
-				{
-					continue
-				}
+				if(Questions.isHidden(field)) { continue }
 
 				var newCell,newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
@@ -383,13 +372,11 @@
 
 				/*description*/ 
 				newCell=newRow.insertCell(-1);
-				newCell.setAttribute('title',(function()
-				{
+				newCell.setAttribute('title',(function() {
 					return translate(field+"_expla");
 				})());
 
-				newCell.innerHTML=(function()
-				{
+				newCell.innerHTML=(function() {
 					var description = translate(field+"_descr")||translate(field);
 					var color = field.search(/^ww/)==0 ? "#d71d24" : "";
 					var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
@@ -399,8 +386,7 @@
 
 				/*value*/ 
 				newCell=newRow.insertCell(-1)
-				newCell.innerHTML=(function()
-				{
+				newCell.innerHTML=(function() {
 					//has estimated data warning
 					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
 					// level 2 warnings
@@ -410,21 +396,19 @@
 
 				/*unit*/
 				newCell=newRow.insertCell(-1)
-				newCell.innerHTML=(function()
-				{
-					if(!Info[field])
+				newCell.innerHTML=(function() {
+					if(!Info[field]) {
 						return "no unit";
+					}
 
-					if(Info[field].magnitude=="Currency")
-					{
+					if(Info[field].magnitude=="Currency") {
 						return Global.General.Currency;
 					}
-					else 
-						return Info[field].unit;
+					
+					return Info[field].unit;
 				})();
 			}
-			for(var field in CurrentLevel)
-			{
+			for(var field in CurrentLevel) {
 				if(typeof(CurrentLevel[field])!="function"){continue;}
 				if(field.search(/^c_/)!=-1){continue;}
 				if(field.search("_KPI_GHG")>=0)continue;
@@ -434,10 +418,7 @@
 				if(Level3.list.indexOf(field)>-1){continue;}
 
 				/*check if should be hidden according to questions*/
-				if(Questions.isHidden(field))
-				{
-					continue
-				}
+				if(Questions.isHidden(field)) { continue }
 
 				var newCell,newRow=t.insertRow(-1);
 				newRow.setAttribute('field',field);
@@ -453,13 +434,11 @@
 
 				/*description*/ 
 				newCell=newRow.insertCell(-1);
-				newCell.setAttribute('title',(function()
-				{
+				newCell.setAttribute('title',(function() {
 					return translate(field+"_expla");
 				})());
 
-				newCell.innerHTML=(function()
-				{
+				newCell.innerHTML=(function() {
 					var description = translate(field+"_descr")||translate(field);
 					var color = field.search(/^ww/)==0 ? "#d71d24" : "";
 					var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
@@ -469,8 +448,7 @@
 
 				/*value*/ 
 				newCell=newRow.insertCell(-1)
-				newCell.innerHTML=(function()
-				{
+				newCell.innerHTML=(function() {
 					//has estimated data warning
 					var ed = DQ.hasEstimatedData(field) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
 					// level 2 warnings
@@ -480,23 +458,20 @@
 
 				/*unit*/
 				newCell=newRow.insertCell(-1)
-				newCell.innerHTML=(function()
-				{
+				newCell.innerHTML=(function() {
 					if(!Info[field])
 						return "no unit";
 
-					if(Info[field].magnitude=="Currency")
-					{
+					if(Info[field].magnitude=="Currency") {
 						return Global.General.Currency;
 					}
-					else 
-						return Info[field].unit;
+
+					return Info[field].unit;
 				})();
 			}
 
 			//if the table is empty, add a warning
-			if(t.rows.length<3)
-			{
+			if(t.rows.length<3) {
 				var newCell=t.insertRow(-1).insertCell(-1)
 				newCell.colSpan=3
 				newCell.innerHTML="<span style=color:#999>~All Energy outputs inactive</span>";
@@ -627,7 +602,7 @@
 					var code_q=Questions[question].otherQuestions[i];
 					Global.Configuration["Yes/No"][code_q]=0;
 
-					//reset a les variables de les otherQuestions
+					//reset variables of "otherQuestions"
 					for(var j in Questions[code_q].variables) {
 						var code_v=Questions[code_q].variables[j];
 						if(typeof(CurrentLevel[code_v])=="number") {
@@ -707,42 +682,42 @@
 
 	<!--btns fold all div.cards-->
 	<?php if($sublevel)
-	{
-		?>
-		<div id=btn_all_container class=inline style="position:absolute;right:40%">
-			<style>
-				#btn_all_container a {
-					border:1px solid #bbb;
-					font-size:11px;
-					font-family:monospace;
-					padding:0.2em 0.5em;
-					border-radius:0.3em;
-					color:rgba(0,0,0,0.55);
-					background:#f5f5f5;
-					box-shadow: 0 1px 2px rgba(0,0,0,.1);
-					text-decoration:none;
-				}
-				#btn_all_container a:hover {
-					color:rgba(0,0,0,0.85);
-				}
-			</style>
-			<a id=btn_all_expand href=# style="margin-right:0.1em;" 
-				onclick="
-					var divs=document.querySelectorAll('div.card');
-					for(var i=0;i<divs.length;i++){divs[i].classList.remove('folded')}
-				"
-				><?php write("#Expand all")?>
-			</a>
-			<a id=btn_all_fold href=# style="" 
-				onclick="
-					var divs=document.querySelectorAll('div.card');
-					for(var i=0;i<divs.length;i++){divs[i].classList.add('folded')}
-				"
-				><?php write("#Fold all")?>
-			</a>
-		</div>
-		<?php
-	}
+		{
+			?>
+			<div id=btn_all_container class=inline style="position:absolute;right:40%">
+				<style>
+					#btn_all_container a {
+						border:1px solid #bbb;
+						font-size:11px;
+						font-family:monospace;
+						padding:0.2em 0.5em;
+						border-radius:0.3em;
+						color:rgba(0,0,0,0.55);
+						background:#f5f5f5;
+						box-shadow: 0 1px 2px rgba(0,0,0,.1);
+						text-decoration:none;
+					}
+					#btn_all_container a:hover {
+						color:rgba(0,0,0,0.85);
+					}
+				</style>
+				<a id=btn_all_expand href=# style="margin-right:0.1em;" 
+					onclick="
+						var divs=document.querySelectorAll('div.card');
+						for(var i=0;i<divs.length;i++){divs[i].classList.remove('folded')}
+					"
+					><?php write("#Expand all")?>
+				</a>
+				<a id=btn_all_fold href=# style="" 
+					onclick="
+						var divs=document.querySelectorAll('div.card');
+						for(var i=0;i<divs.length;i++){divs[i].classList.add('folded')}
+					"
+					><?php write("#Fold all")?>
+				</a>
+			</div>
+			<?php
+		}
 	?>
 
 	<!--Tips-->
@@ -785,7 +760,7 @@
 				class=btn_toggle 
 				onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#graph_container','#outputs_container')"
 			>
-				<?php write('#VIEW GRAPH')?>
+			<?php write('#VIEW GRAPH')?>
 			</button>
 		</div>
 
@@ -851,9 +826,7 @@
 	</div>
 
 	<!--level3-->
-	<?php 
-		if($sublevel){include'level3.php';}
-	?>
+	<?php if($sublevel){include'level3.php';} ?>
 </div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

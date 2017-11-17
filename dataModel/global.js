@@ -38,7 +38,6 @@ var Global={
 				return sludge_mass*0.05}//<br>
 			else{return 0}
 		},
-		//sludge estimations could go here TODO
 	},
 
 	/**Level 1 - Water Supply*/
@@ -61,10 +60,6 @@ var Global={
 			//fuel engines?
 			wsa_fuel_typ:0,
 			wsa_vol_fuel:0,
-			//water efficiency? //TODO
-			//producing energy?
-			wsa_nrg_turb:0,
-			wsa_KPI_nrg_recovery:function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
 			//pumping?
 			wsa_nrg_pump:0,
 			wsa_vol_pump:0,
@@ -77,7 +72,6 @@ var Global={
 			wsa_pmp_flow:0, //Measured pump flow L/s 
 			wsa_pmp_volt:0, //Measured pump voltage V 
 			wsa_pmp_amps:0, //Measured pump current Amp 
-			wsa_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
 			c_wsa_pmp_pw:function(){return this.wsa_pmp_flow*this.wsa_pmp_head*9.81*1000*0.001/1000}, 
 			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_pump+this.wsa_nrg_turb)/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
 			wsa_KPI_std_elec_eff:function(){return 100*0.2725/this.wsa_KPI_std_nrg_cons()},
@@ -87,6 +81,11 @@ var Global={
 			wsa_KPI_nrg_cons_new:function(){return this.wsa_vol_pump*this.wsa_KPI_std_nrg_newp()/100*this.wsa_pmp_head}, 
 			wsa_KPI_nrg_estm_sav:function(){return this.wsa_nrg_cons-this.wsa_KPI_nrg_cons_new()}, 
 			wsa_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wsa_KPI_nrg_estm_sav()},
+			//producing energy?
+			wsa_nrg_turb:0,
+			wsa_KPI_nrg_recovery:function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
+			//opportunities
+			wsa_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
 			//GHG emissions Abstraction
 			wsa_KPI_GHG_elec:function(){return this.wsa_nrg_cons*Global.General.conv_kwh_co2},
 			wsa_KPI_GHG_fuel:function(){//<br>
@@ -160,6 +159,39 @@ var Global={
 			"wsd_vol_dist":0,
 			"wsd_auth_con":0,
 			"wsd_bill_con":0,
+			//fuel engines?
+			"wsd_fuel_typ":0,
+			"wsd_vol_fuel":0,
+			//water trucks?
+			"wsd_trck_typ":0,
+			"wsd_vol_trck":0,
+			//service performance?
+			"wsd_deli_pts":0,
+			"wsd_ser_cons":0,
+			"wsd_time_pre":0,
+			//topographic?
+			"wsd_min_pres":0,
+			"wsd_hi_no_el":0,
+			"wsd_lo_no_el":0,
+			"wsd_av_no_el":0,
+			"wsd_wt_el_no":0,
+			//pumping?
+			wsd_vol_pump:0,
+			wsd_nrg_pump:0,
+			wsd_pmp_size:0,
+			wsd_sta_head:0,
+			wsd_pmp_head:0,
+			wsd_main_len:0,
+			//pump efficiency
+			wsd_pmp_flow:0, //Measured pump flow L/s 
+			wsd_pmp_volt:0, //Measured pump voltage V 
+			wsd_pmp_amps:0, //Measured pump current Amp 
+			c_wsd_pmp_pw:function(){
+				return this.wsd_pmp_flow*this.wsd_pmp_head*Cts.ct_gravit.value/1000
+			}, 
+			//opportunities
+			wsd_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
+
 			wsd_KPI_nrg_per_m3:function(){return this.wsd_nrg_cons/this.wsd_auth_con},
 			wsd_KPI_nrg_per_vd:function(){return this.wsd_nrg_cons/this.wsd_vol_dist},
 			wsd_SL_nr_water:function(){
@@ -171,47 +203,14 @@ var Global={
 			wsd_SL_water_loss:function(){
 				return 100*(this.wsd_vol_dist-this.wsd_auth_con)/this.wsd_vol_dist;
 			},
-			//fuel engines?
-			"wsd_fuel_typ":0,
-			"wsd_vol_fuel":0,
-			//water trucks?
-			"wsd_trck_typ":0,
-			"wsd_vol_trck":0,
-			//service performance?
-			"wsd_deli_pts":0,
-			"wsd_ser_cons":0,
-			"wsd_time_pre":0,
 			wsd_SL_pres_ade:function(){return 100*this.wsd_deli_pts/this.wsd_ser_cons},
 			wsd_SL_cont_sup:function(){return 100*this.wsd_time_pre/24},
-			//topographic?
-			"wsd_min_pres":0,
-			"wsd_hi_no_el":0,
-			"wsd_lo_no_el":0,
-			"wsd_av_no_el":0,
-			"wsd_wt_el_no":0,
 			c_wsd_nrg_topo:function(){return Cts.ct_gravit.value*this.wsd_vol_dist*(this.wsd_hi_no_el-this.wsd_av_no_el)/3600000},
 			c_wsd_nrg_natu:function(){return Cts.ct_gravit.value*this.wsd_vol_dist*(this.wsd_wt_el_no-this.wsd_lo_no_el)/3600000},
 			c_wsd_nrg_mini:function(){return Cts.ct_gravit.value*this.wsd_auth_con*(this.wsd_min_pres+this.wsd_av_no_el-this.wsd_lo_no_el)/3600000},
 			c_wsd_nrg_supp:function(){return this.wsd_nrg_cons+this.c_wsd_nrg_natu()},
 			wsd_KPI_nrg_efficien:function(){return 100*this.c_wsd_nrg_mini()/this.c_wsd_nrg_supp()},
 			wsd_KPI_nrg_topgraph:function(){return 100*this.c_wsd_nrg_topo()/this.c_wsd_nrg_supp()},
-			//pumping?
-			wsd_vol_pump:0,
-			wsd_nrg_pump:0,
-			//pumping efficiency?
-			wsd_pmp_size:0,
-			wsd_sta_head:0,
-			wsd_pmp_head:0,
-			wsd_pmp_flow:0, //Measured pump flow L/s 
-			wsd_pmp_volt:0, //Measured pump voltage V 
-			wsd_pmp_amps:0, //Measured pump current Amp 
-			wsd_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
-			wsd_main_len:0,
-
-			c_wsd_pmp_pw:function(){
-				return this.wsd_pmp_flow*this.wsd_pmp_head*Cts.ct_gravit.value/1000
-			}, 
-
 			wsd_KPI_std_nrg_cons:function(){return this.wsd_nrg_pump/(this.wsd_vol_pump*this.wsd_pmp_head/100)},
 			wsd_KPI_un_head_loss:function(){return 1000*(this.wsd_pmp_head-this.wsd_sta_head)/this.wsd_main_len},
 			wsd_KPI_water_losses:function(){return Math.max(0,1000*(this.wsd_vol_dist-this.wsd_auth_con)/(this.wsd_main_len))},
@@ -222,7 +221,6 @@ var Global={
 			wsd_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wsd_KPI_nrg_estm_sav()},
 			//wsd GHG
 			wsd_KPI_GHG_elec:function(){return this.wsd_nrg_cons*Global.General.conv_kwh_co2},
-
 			wsd_KPI_GHG_fuel:function(){//<br>
 				return this.wsd_KPI_GHG_fuel_co2()+this.wsd_KPI_GHG_fuel_n2o()+this.wsd_KPI_GHG_fuel_ch4();
 			},

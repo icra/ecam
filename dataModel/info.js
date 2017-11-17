@@ -57,8 +57,6 @@ var Info = {
 	wwd_KPI_GHG_fuel_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwd_KPI_GHG_fuel_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
-	//non revenue water //TODO
-
 	/* +================+ */
 	/* | Service levels | */
 	/* +================+ */

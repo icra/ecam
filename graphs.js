@@ -10,8 +10,7 @@ function scrollToItem(id) {
 	var visible_area_start = window.pageYOffset;
 	var visible_area_end = visible_area_start + window.innerHeight;
 	//scroll if element is not in view
-	if(rect.top < visible_area_start || rect.bottom > visible_area_end)
-	{
+	if(rect.top < visible_area_start || rect.bottom > visible_area_end) {
 		element.scrollIntoView()
 	}
 }
