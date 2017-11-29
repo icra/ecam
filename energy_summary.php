@@ -56,9 +56,9 @@
 				var object=loc.sublevel ? Global[loc.level][loc.sublevel][code] : Global[loc.level][code];
 				var value=0;
 				if(typeof(object)=="function") {
-					value=loc.sublevel ? 
-						Global[loc.level][loc.sublevel][code]()/divisor_value 
-						: 
+					value=loc.sublevel ?
+						Global[loc.level][loc.sublevel][code]()/divisor_value
+						:
 						Global[loc.level][code]()/divisor_value;
 				}
 				else {
@@ -105,7 +105,7 @@
 		}
 	</style>
 </head><body onload=init()><center>
-<?php 
+<?php
 	include'sidebar.php';
 	include'navbar.php';
 	include'linear.php';
@@ -149,6 +149,22 @@
 				document.querySelector('#tabs button.left').removeAttribute('disabled');
 				document.querySelector('#tabs button.right').setAttribute('disabled',true);
 				Graphs.graph5(false,'graph');
+				// 'div.tab_buttons button.right' collides other tabs with tab_buttons classes
+				// ADDED button ids - not tested completely
+				document.querySelector('div.tab_buttons button#tb_graphs').setAttribute('disabled', true);
+				document.querySelector('div.tab_buttons button#tb_tables').removeAttribute('disabled');
+				// improvement list - #4 - graphs & tables switching
+				//document.querySelector('div.tab_buttons button.right').setAttribute('disabled',true);
+				//document.querySelector('div.tab_buttons button.left').removeAttribute('disabled');
+			}
+			function tabs_show_tables(){
+				document.getElementById('tables').style.display=''
+				document.getElementById('graph').style.display='none'
+				document.querySelector('div.tab_buttons button#tb_tables').setAttribute('disabled', true);
+				document.querySelector('div.tab_buttons button#tb_graphs').removeAttribute('disabled');
+				// improvement list - #4 - graphs & tables switching
+				//document.querySelector('div.tab_buttons button.right').removeAttribute('disabled');
+				//document.querySelector('div.tab_buttons button.left').setAttribute('disabled',true);
 			}
 		</script>
 	</div>
@@ -187,19 +203,17 @@
 					<td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'><?php write('#Abstraction')?></a> 
 						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Water.Abstraction.length)</script> 
 						<td field=wsa_nrg_cons level=Water sublevel=Abstraction><?php write('#Loading')?>...
-
 					<!--wst-->
 					<tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'><?php write('#Treatment')?></a> 
 						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Water.Treatment.length)</script> 
 						<td field=wst_nrg_cons level=Water sublevel=Treatment><?php write('#Loading')?>...
-
 					<!--wsd-->
 					<tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'><?php write('#Distribution')?></a> 
 						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Water.Distribution.length)</script> 
 						<td field=wsd_nrg_cons level=Water sublevel=Distribution><?php write('#Loading')?>...
-
+					</tr>
 				<tr>
-				
+
 				<th rowspan=3 class=red>
 					<a href="edit.php?level=Waste" style=color:white>
 						<?php write('#Waste')?>
@@ -241,8 +255,8 @@
 				float:left;
 				color:red;
 			}
-			table#sources{ 
-				margin:10px 0; 
+			table#sources{
+				margin:10px 0;
 				width:95%;
 			}
 			table#sources td {padding:1.2em 0.5em;max-width:70px}

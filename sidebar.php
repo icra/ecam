@@ -39,9 +39,9 @@
 					var stage = collection[i].getAttribute('stage');
 					var isActive = Global.Configuration.ActiveStages[stage];
 					if(!isActive)
-						collection[i].classList.add('inactive'); 
+						collection[i].classList.add('inactive');
 					else
-						collection[i].classList.remove('inactive'); 
+						collection[i].classList.remove('inactive');
 				}
 
 				//update the memory used in the progress bar
@@ -114,7 +114,7 @@
 				</div>
 		</table>
 
-		<!--red/blue separator bars--> 
+		<!--red/blue separator bars-->
 		<div style="padding:0;margin:0;background:#d71d24;height:5px"></div>
 		<div style="padding:0;margin:0;background:#0aaff1;height:5px"></div>
 
@@ -178,7 +178,8 @@
 			text-align:left;
 			padding:0.5em;
 			">
-			<li><a href=development.php><?php write('#dev')?></a>
+			<li><a href=development.php><?php write('#dev')?></a></li>
+			<li><a href="http://www.iwa-network.org/water-climate-energy-solutions/public/">Catalogue of Solutions [External]</a></li>
 		</ul>
 	</div>
 </div>
@@ -216,7 +217,7 @@
 		border-right:2px solid #ccc;
 		border-top:1px solid #ccc;
 	}
-	div#sidebar td.sidebar_selected {background:linear-gradient(lightgreen,white,lightgreen)} 
+	div#sidebar td.sidebar_selected {background:linear-gradient(lightgreen,white,lightgreen)}
 	div#sidebar.off{width:0;height:0;top:0;z-index:-1}
 	div#sidebar.on{width:255px;bottom:0;}
 	div#sidebar.on  div#sidecontent{display:block}
@@ -227,8 +228,8 @@
 	div#sidebar td:hover {background:#f5f5f5}
 	div#sidebar th {border-top:0;}
 	div#sidebar table#menu td {border-bottom:0}
-	div#sidebar a.water{color:#00adef} 
-	div#sidebar a.waste{color:#d71d24} 
-	div#sidebar a.inactive{pointer-events:none;color:#ccc;text-decoration:none} 
-	div#sidebar div#sidecontent th {text-align:left;border:none} 
+	div#sidebar a.water{color:#00adef}
+	div#sidebar a.waste{color:#d71d24}
+	div#sidebar a.inactive{pointer-events:none;color:#ccc;text-decoration:none}
+	div#sidebar div#sidecontent th {text-align:left;border:none}
 </style>
