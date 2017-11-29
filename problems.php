@@ -2,16 +2,12 @@
 	<?php include'imports.php'?>
 	<script>
 		//count all variables (inputs and outputs)
-		function countVariables(obj)
-		{
+		function countVariables(obj) {
+			obj=obj||Global;
 			var n=0;
-			for(var field in obj)
-			{
-				var type=typeof(obj[field]);
-				switch(type)
-				{
-					case 'number':
-					case 'function':
+			for(var field in obj) {
+				switch(typeof(obj[field])) {
+					case 'number': case 'function':
 						n++
 						break;
 					case 'object':
@@ -55,8 +51,7 @@
 		td.allok:before {content:"All OK"}
 	</style>
 	<script>
-		function init()
-		{
+		function init() {
 			Caption.listeners();
 		}
 	</script>
@@ -67,8 +62,9 @@
 <!--caption--><?php include'caption.php'?>
 <!--title--><h1><a href=development.php>Development</a> &rsaquo; Debugging utility</h1></center>
 
+<!--note: issues were moved to github-->
 <p style=text-align:center>
-	Issues have been moved to <a href='https://github.com/holalluis/ecam/issues'>github issues</a>
+	Issues were moved to <a href='https://github.com/holalluis/ecam/issues'>github issues</a>
 </p>
 
 <!--problems-->
@@ -79,10 +75,10 @@
 		<script>
 			//get unused inputs
 			function getUnused(obj) {
+				obj=obj||Global;
 				var unused=[];
 				for(var field in obj) {
-					var type = typeof(obj[field]);
-					switch(type) {
+					switch(typeof(obj[field])) {
 						case 'number':
 							var n=Formulas.outputsPerInput(field).length;
 							if(n==0) unused.push(field);
@@ -101,6 +97,7 @@
 				return unused;
 			}
 
+			//quick fix to see if fields are used in benchmarks also
 			['Water','Waste','Energy'].forEach(function(level) {
 				var unused=getUnused(Global[level])
 				unused.forEach(function(field) {
@@ -122,7 +119,7 @@
 
 	<!--questions-->
 	<div class=inline style="max-width:20%">
-		<table><tr><th>Inexisting that appear in questions.js 
+		<table><tr><th>Inexisting variable codes that appear in questions.js 
 			<script>
 				for(var q in Questions) {
 					if(typeof(Questions[q])=="function") continue;
@@ -170,7 +167,7 @@
 			<script>
 				var repeated=Questions.findRepeated()
 				repeated.forEach(function(variable){
-					document.write("<tr><td>"+variable)
+					document.write("<tr><td style=background:red>"+variable)
 				})
 				if(repeated.length==0)document.write("<tr><td class=allok>")
 			</script>

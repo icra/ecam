@@ -195,16 +195,13 @@
 
 		//only show water/wastewater inputs if active
 		BEV.showActive=function() {
-			['water','waste'].forEach(function(stage)
-			{
-				if(Global.Configuration.ActiveStages[stage]==1)
-				{
+			['water','waste'].forEach(function(stage) {
+				if(Global.Configuration.ActiveStages[stage]==1) {
 					//show all rows with stage=stage
 					var rows = document.querySelectorAll('#inputs tr[stage='+stage+']');
 					for(var i=0; i<rows.length; rows[i++].classList.remove('hidden')){}
-				}
-				else //show "Stage not active"
-				{
+				}else{
+					//show "Stage not active"
 					document.querySelector('table#inputs tr[indic='+stage+']').classList.remove('hidden');
 				}
 			});
@@ -311,7 +308,7 @@
 						</b>
 					</span>
 
-					<tr stage=water class=hidden><td><?php write('#nrg_cons')?><td class=output><input id='ws_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
+					<tr stage=water class=hidden><td style=width:40%><?php write('#nrg_cons')?><td class=output><input id='ws_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
 					<tr stage=water class=hidden><td><?php write('#vol_fuel')?><td class=output><input id='ws_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
 
 					<tr stage=water class=hidden> <td><?php write('#wsd_vol_dist_descr')?><td class=input><input id='wsd_vol_dist' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
@@ -362,20 +359,29 @@
 						<td><?php write('#birds_ww_n2o_effl')?> 
 						<td class=input><input id='wwd_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
 							<span class=circle style=background:#b8879d></span>
+						</td>
 					</tr>
 
 					<?php include'biogas_birds.php'?>
 
 					<!--sludge management-->
 					<tr stage=waste class=hidden>
-						<td> <?php write('#select_main_treatment_type')?>
-						<td colspan=2><?php include'treatment_birds.php'?>
+						<td colspan=3>
+							<?php write('#select_main_treatment_type')?>
+							<p>
+								<?php include'treatment_birds.php'?>
+							</p>
+						</td>
 					</tr>
 
 					<!--sludge management-->
 					<tr stage=waste class=hidden>
-						<td><?php write('#select_sludge_disposal_method')?> 
-						<td colspan=2><?php include'sludge_birds.php'?>
+						<td colspan=3>
+							<?php write('#select_sludge_disposal_method')?> 
+							<p>
+								<?php include'sludge_birds.php'?>
+							</p>
+						</td>
 					</tr>
 			</table>
 

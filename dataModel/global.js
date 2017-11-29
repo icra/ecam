@@ -834,7 +834,8 @@ var Global = {
   }
 };
 
-//following block is a fix for wrapper equations, so they don't appear incorrectly at variable.php
+//this block is a fix for wrapper equations, so they don't appear incorrectly at variable.php
+//problem: the formula does not appear correctly in export.php
 Global.Water.wsa_KPI_GHG=function(){return Global.Water.Abstraction.wsa_KPI_GHG()};
 Global.Water.wst_KPI_GHG=function(){return Global.Water.Treatment.wst_KPI_GHG()};
 Global.Water.wsd_KPI_GHG=function(){return Global.Water.Distribution.wsd_KPI_GHG()};

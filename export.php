@@ -10,11 +10,11 @@
 	<script>
 		function updateTable(obj,name) {
 			//make highlight button enabled
-			document.querySelector('#highlight').removeAttribute('disabled')
-			document.querySelector('#createCSV').removeAttribute('disabled')
+			document.querySelector('#highlight').removeAttribute('disabled');
+			document.querySelector('#createCSV').removeAttribute('disabled');
 
 			//get the table t
-			var t=document.querySelector('#table')
+			var t=document.querySelector('#table');
 			t.rows[0].cells[0].innerHTML=name;
 
 			//set the th color to red
@@ -26,8 +26,7 @@
 				].indexOf(obj)+1
 			){ 
 				t.classList.add('ww');
-			}
-			else{
+			}else{
 				t.classList.remove('ww');
 			}
 			
@@ -68,8 +67,8 @@
 					switch(type) {
 						case "number":return "--";break;;
 						case "function": 
-							var formula=obj[field].toString();
-							formula=Formulas.prettify(formula)
+							var formula=getVariable(field).toString();
+							formula=Formulas.prettify(formula);
 							return formula;
 							break;
 					}
@@ -195,10 +194,8 @@
 						switch(type) {
 							case "number":return "--";break;;
 							case "function": 
-								var formula=obj[field].toString();
-								(function() {
-									formula=Formulas.prettify(formula)
-								})();
+								var formula=getVariable(field).toString();
+								formula=Formulas.prettify(formula)
 								return formula;
 								break;
 						}

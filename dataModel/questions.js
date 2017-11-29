@@ -242,13 +242,10 @@ var Questions={
 				"c_wwc_vol_infl",
 				"wwc_SL_GHG_ii",
 				"wwc_SL_fratio",
-				"wwc_SL_inf_emis",
-				//
 				"wwc_SL_GHG_inf",
 				"wwt_SL_GHG_inf",
 				"wwd_SL_GHG_inf",
 				"wwc_SL_inf_emis"
-				//
 			],
 			advanced:1,
 			otherQuestions:[],
