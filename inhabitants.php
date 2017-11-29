@@ -125,7 +125,7 @@
 	</style>
 	<table id=inputs style="font-size:16px;margin:1em;width:50%">
 		<!--WATER-->
-		<tr><th colspan=3>
+		<tr><th colspan=3 style=background:#0aaff1>
 			<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
 			<tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?> <td class=input><input id='ws_resi_pop' onchange="Inh.updateField(this)"> <td><small><?php write('#birds_people')?>
 			<tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?> <td class=input><input id='ws_serv_pop' onchange="Inh.updateField(this)"> <td><small><?php write('#birds_people')?>

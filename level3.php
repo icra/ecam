@@ -216,9 +216,7 @@
 								newCell.innerHTML=format(substages[s][code]()/multiplier);
 								newCell.setAttribute('title',prettyFormula);
 								newCell.classList.add("CV");
-							}
-							else
-							{
+							} else {
 								newCell.setAttribute('onclick','level3.transformField(this)');
 								newCell.innerHTML=format(substages[s][code]/multiplier);
 							}
@@ -551,9 +549,17 @@
 						}
 						return "<span caption='Benchmarking: "+text+"' class=circle style='background:"+color+"'></span>";
 					})();
-					// patch for sums of CH4 & N2O from treatment - improv #9b //
-					return "<span style='display:inline-block;width:75%'>" +
-									((field == 'wwt_KPI_GHG_tre') ? "-" : format(value)) + "</span> " + indicator;
+
+					//patch for sums of CH4 & N2O from treatment - improv #9b
+					var div="<div class=flex style=justify-content:space-between>"+
+						"<div>"+
+							indicator+
+						"</div>"+
+						"<div>"+
+							((field=='wwt_KPI_GHG_tre')?"-":format(value))+
+						"</div>"+
+					"</div>";
+					return div;
 				})();
 			}
 

@@ -294,7 +294,7 @@
 			<!--table-->
 			<table id=inputs style=width:100%>
 				<!--WATER-->
-				<tr><th colspan=3>
+				<tr><th colspan=3 style="background:#0aaff1">
 					<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
 
 					<!--water population-->
