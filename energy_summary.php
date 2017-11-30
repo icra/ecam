@@ -179,7 +179,7 @@
 					<select id=ghg_divisor onchange=init()>
 						<option value=none>kWh
 						<option value=years>kWh / <?php write('#year')?>
-						<option value=serv_pop>kWh / Serviced population
+            <option value=serv_pop>KWh / <?php write("#ws_serv_pop_descr")?>
 					</select>
 					<!--legend-->
 					<span style=float:right>

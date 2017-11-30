@@ -254,7 +254,7 @@
 						<select id=ghg_divisor onchange=init()>
 							<option value=none>Kg CO2 eq
 							<option value=years>Kg CO2 eq / <?php write("#year")?>
-							<option value=serv_pop>Kg CO2 eq / <?php write("#year")?> / Serviced population
+							<option value=serv_pop>Kg CO2 eq / <?php write("#year")?> / <?php write("#ws_serv_pop_descr")?>
 						</select>
 						<!--legend-->
 						<span style=float:right>
