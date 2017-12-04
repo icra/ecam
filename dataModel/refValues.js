@@ -304,21 +304,4 @@ var RefValues = {
 		else if (value  > 0.54)                    return "Unsatisfactory";
 		else                                       return "Out of range";
 	},
-	//w{sw}g
-	wsg_KPI_std_nrg_:function(obj)
-	{
-		var value=obj.wsg_KPI_std_nrg_();
-		if      (0.2725 <= value && value <= 0.40) return "Good";
-		else if (0.40   <  value && value <= 0.54) return "Acceptable";
-		else if (value  >  0.54)                   return "Unsatisfactory";
-		else                                       return "Out of range";
-	},
-	wwg_KPI_std_nrg_:function(obj)
-	{
-		var value=obj.wwg_KPI_std_nrg_();
-		if      (0.2725 <= value && value <= 0.40) return "Good";
-		else if (0.40   <  value && value <= 0.54) return "Acceptable";
-		else if (value  > 0.54)                    return "Unsatisfactory";
-		else                                       return "Out of range";
-	},
 }

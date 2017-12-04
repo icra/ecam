@@ -99,7 +99,6 @@
 		{
 			printLevel(['wsa','wst','wsd'],translate("Water"));
 			printLevel(['wwc','wwt','wwd'],translate("Waste"));
-			printLevel(['wsg','wwg'],translate("Energy"));
 		}
 	</script>
 	<script>printAll()</script>

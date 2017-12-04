@@ -109,7 +109,7 @@
 					newRow=t.insertRow(-1)
 					newCell=newRow.insertCell(-1)
 					newCell.className='th';
-					newCell.innerHTML="Filter that activates it";
+					newCell.innerHTML="<?php write("Filter that activates it")?>";
 					newCell=newRow.insertCell(-1)
 					var currentAnswer = Global.Configuration['Yes/No'][question] ? "Yes" : "No";
 					newCell.innerHTML=translate(question)+"? ["+currentAnswer+"]";
@@ -122,14 +122,11 @@
 			newCell.className='th'
 			newCell.innerHTML="<?php write('#variable_type')?>"
 			newRow.insertCell(-1).innerHTML=(function(){
-				if(typeof(currentStage[id])=="function")
-				{
+				if(typeof(currentStage[id])=="function"){
 					var pretf = Formulas.prettify(currentStage[id].toString());
 					var ret = "Output <div><pre class=prettyprint style='padding:1em;background:#eee'><b><?php write('#variable_formula')?>:</b>"+pretf+"<pre></div>";
 					return ret;
-				}
-				else
-				{
+				}else{
 					return "Input";
 				}
 			})();
@@ -241,7 +238,7 @@
 			newRow=t.insertRow(-1);
 			newCell=newRow.insertCell(-1);
 			newCell.className='th';
-			newCell.innerHTML="Current value";
+			newCell.innerHTML="<?php write("#Current value")?>";
 			newCell=newRow.insertCell(-1);
 			newCell.style.fontSize="18px";
 			if(typeof(currentStage[id])=="function") {
@@ -352,7 +349,7 @@
 			newRow=t.insertRow(-1)
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
-			newCell.innerHTML="Outputs that use this value"
+			newCell.innerHTML="<?php write("#Outputs that use this value")?>"
 			newCell=newRow.insertCell(-1)
 			newCell.innerHTML=(function()
 			{
@@ -486,16 +483,14 @@
 <!--caption--><?php include'caption.php'?>
 
 <script>
-	if(!Info[id])
-	{
+	if(!Info[id]) {
 		document.write("<div class=error>ERROR: Variable '"+id+"' not defined in dataModel/Info.js</div>")
 		window.stop()
 	}
 
 	//Define some necessary global variables
 	var localization = locateVariable(id);
-	if(!localization)
-	{
+	if(!localization) {
 		document.write("<div class=error>ERROR: Variable '"+id+"' not found in dataModel/Global.js</div>")
 		window.stop()
 	}
@@ -526,13 +521,19 @@
 </script>
 
 <!--TITLE--><h1>
-	<span style=color:#999><?php write('#variable_detailed_info')?>: </span>
-	<script>
-		(function(){
-			var description=translate(id+'_descr')||translate(id);
-			document.write(description+" ("+id+")")
-		})();
-	</script>
+	<span style=color:#999>
+    <?php write('#variable_detailed_info')?>
+    &rarr;
+  </span>
+  <span>
+    <script>
+      (function(){
+        var description=translate(id+'_descr')||translate(id);
+        document.write("<code>"+id+"</code>")
+        document.write("<p>"+description+"</p>");
+      })();
+    </script>
+  </span>
 </h1>
 
 <div id=main>
