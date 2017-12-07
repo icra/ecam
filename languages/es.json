@@ -259,7 +259,7 @@
   "#main":"Principal",
   "#memory":"Uso de memoria",
   "#methane":"Metano",
-  "#missing_inputs":"Faltan insumos/datos ",
+  "#missing_inputs":"Faltan datos ",
   "#move_the_mouse":"Mover el mouse sobre las emisiones para obtener una vista detallada en cada etapa",
   "#name":"Nombre",
   "#navbar_title":"Herramienta de evaluación y monitoreo del rendimiento energético y emisiones de Carbono",
