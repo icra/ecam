@@ -901,10 +901,11 @@
    "#app":"นำไปใช้ปรับพื้นที่",
    "#land":"ฝังกลบ",
    "#stock":"เทกอง",
-   "#Activated Sludge - Well managed":"ตะกอนเร่ง (Activated Sludge) - เดินระบบปกติความเข้มข้นออกซิเจนเพียงพอทั้งระบบ",
-   "#Activated Sludge - Minor poorly aerated zones":"แบบตะกอนเร่ง (Activated Sludge) - เดินระบบปกติ ความเข้มข้นออกซิเจนเพียงพอ 80% ของพื้นที่ระบบ ",
-   "#Activated Sludge - Some aerated zones":"ตะกอนเร่ง (Activated Sludge) - เดินระบบปกติ ความเข้มข้นออกซิเจนเพียงพอน้อยกว่า 60% ของพื้นที่ระบบ ",
-   "#Activated Sludge - Not well managed":"ตะกอนเร่ง (Activated Sludge) - เดินระบบมีความเข้มข้นออกซิเจนเพียงพอน้อยกว่า 40% ของพื้นที่ระบบ ",
+
+   "#Activated Sludge - Well managed":"ตะกอนเร่ง (Activated Sludge) - เดินระบบปกติ",
+   "#Activated Sludge - Minor poorly aerated zones":"ตะกอนเร่ง (Activated Sludge) - มีพื้นที่ส่วนน้อยไม่เติมอากาศ ",
+   "#Activated Sludge - Some aerated zones":"ตะกอนเร่ง (Activated Sludge) - มีพื้นที่มากกว่าครึ่งไม่เติมอากาศ ",
+   "#Activated Sludge - Not well managed":"ตะกอนเร่ง (Activated Sludge) - ไม่ได้รับการดูแล ",
    "#Aerated Lagoon":"สระเติมอากาศ",
    "#Anaerobic Lagoon <2m depth":"บ่อไร้อากาศหรือบ่อผึ่ง ที่มีความลึกน้อยกว่า 2 เมตร",
    "#Anaerobic Lagoon >2m depth":"บ่อไร้อากาศหรือบ่อผึ่ง ที่มีความลึกมากกว่า 2 เมตร",
@@ -915,6 +916,7 @@
    "#Wetlands - Surface flow":"บึงประดิษฐ์  แบบไหลเหนือผิวดิน",
    "#Wetlands - Horizontal subsurface flow":"บึงประดิษฐ์  ไหลใต้ผิวดินในแนวนอน",
    "#Wetlands - Vertical subsurface flow":"บึงประดิษฐ์  ไหลใต้ผิวดินในแนวดิ่ง",
+
    "#for_further_details_go_to_detailed":"รายละเอียดเพิ่มเติมสำหรับการใช้พลังงานและแนวทางการลดก๊าซเรือนกระจก ไปที่การประเมินก๊าซเรือนกระจกอย่างละเอียด",
    "#see_also":"รายละเอียดเพิ่มเติม",
    "#summary_of_estimations_at_this_level":"ค่าที่ได้จากการประเมิน",
@@ -1008,6 +1010,20 @@
    "#About non revenue water":"คำอธิบายน้ำสูญเสีย",
    "#Water injected to distribution":"ปริมาณน้ำที่ส่งเข้าระบบประปา (=system input volume)",
    "VARIABLE":"VARIABLE",
-   "#Outputs that use this value":"Outputs that use this value",
+   "#Outputs that use this value":"ผลลัพธ์ที่ใช้ค่านี้",
+
+   "#wsa_SL_GHG_nrw_descr":"ก๊าซเรือนกระจกที่เกี่ยวข้องกับน้ำสูญเสียในระบบจำหน่ายน้ำ ",
+   "#wsa_SL_GHG_nrw_expla":"ก๊าซเรือนกระจกที่มาจากปริมาณน้ำที่ต้องผลิตเพิ่มขึ้นเพื่อรองรับน้ำสูญเสียในระบบจำหน่ายน้ำ ",
+   "#wst_SL_GHG_nrw_descr":"ก๊าซเรือนกระจกที่เกี่ยวข้องกับน้ำสูญเสียในระบบผลิตน้ำ ",
+   "#wst_SL_GHG_nrw_expla":"ก๊าซเรือนกระจกที่มาจากปริมาณน้ำที่ต้องผลิตเพิ่มขึ้นเพื่อรองรับน้ำสูญเสียในระบบผลิตน้ำ ",
+   "#wsd_SL_GHG_nrw_descr":"ก๊าซเรือนกระจกที่เกี่ยวข้องกับน้ำสูญเสียในระบบสูบน้ำดิบ ",
+   "#wsd_SL_GHG_nrw_expla":"ก๊าซเรือนกระจกที่มาจากปริมาณน้ำที่ต้องผลิตเพิ่มขึ้นเพื่อรองรับน้ำสูญเสียในระบบสูบน้ำดิบ ",
+   "#wwc_SL_GHG_inf_descr":"ก๊าซเรือนกระจกที่เกี่ยวข้องกับน้ำจากแหล่งอื่นเข้าระบบรวบรวมน้ำเสีย ",
+   "#wwc_SL_GHG_inf_expla":"ก๊าซเรือนกระจกที่มาจากปริมาณการใช้ไฟฟ้าที่เพิ่มขึ้นเพื่อสูบน้ำจากแหล่งอื่นที่เข้าระบบรวบรวมน้ำเสีย ",
+   "#wwt_SL_GHG_inf_descr":"ก๊าซเรือนกระจกที่เกี่ยวข้องกับน้ำจากแหล่งอื่นเข้าระบบบำบัดน้ำเสีย ",
+   "#wwt_SL_GHG_inf_expla":"ก๊าซเรือนกระจกที่มาจากการบำบัดน้ำที่เพิ่มขึ้นเพื่อบำบัดน้ำจากแหล่งอื่นที่เข้าระบบบำบัด ",
+   "#wwd_SL_GHG_inf_descr":"ก๊าซเรือนกระจกที่เกี่ยวข้องกับน้ำจากแหล่งอื่นในกระบวนการระบายน้ำทิ้ง ",
+   "#wwd_SL_GHG_inf_expla":"ก๊าซเรือนกระจกที่มาจากการจัดการที่เพิ่มขึ้นเพื่อระบายน้ำจากแหล่งอื่นที่เข้าระบบน้ำเสีย ",
+
    "END":"END"
 }
