@@ -66,6 +66,11 @@
 			<img src="img/flags/null.png">
 			null - only tags (development tool)	
 		</div>
+    <!--go to problems summary-->
+    <div lang=null>
+      <a href=translation_problems.php style=color:blue>language debugging tool</a>
+    </div>
+
 	</div> 
 </div>
 

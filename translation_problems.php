@@ -22,10 +22,19 @@
   file
   (selected language)
 </code>
+<br>
+<code>
+  To get a list of not used tags run the <a href="languages/findNotUsed.sh">findNotUsed.sh</a> bash script from the command line
+</code>
+
+<!--show number of tags-->
+<p>
+  Number of language tags: <b><?php echo count($lang_json)?></b>
+</p>
 
 <!--problems counter-->
 <p>
-  <span style="background:red;color:black;font-size:18px">
+  <span style="background:red;color:black;">
     Total problems found:
     <span id=problems_counter>0</span>
   </span>
@@ -79,26 +88,28 @@
         }
       }
 
-      //look for duplicated tags
-      echo '<tr><th colspan=2>Duplicated tags';
-      foreach($lang_json as $key_i=>$text_i){
-        $tags_amount=0;
-        foreach($lang_json as $key_j=>$text_j){
-          if($key_i==$key_j){
-            $tags_amount++;
-          }
-        }
-        if($tags_amount>1){
+      //look for duplicated tags (removed)
+      //NOTE: trying to add a duplicate on purpose fails, probably because json_decode already removes duplicates
+      /*
+      echo '<tr><th>Duplicated tags<th>Number of instances';
+      $tags=[];
+      foreach($lang_json as $key=>$text){
+        $tags[]=$key;
+      }
+      $duplicated=array_count_values($tags);
+      foreach($duplicated as $tag=>$n){
+        if($n>1){
           echo "<tr>
-            <td>$key_i <td><small>$text_i</small>
+            <td>$tag
+            <td>$n
           </tr>";
           $problems++;
         }
       }
+      */
 
       //update problems counter
       updateCounter($problems);
-
     }
     compareCurrentLanguage();
   ?>

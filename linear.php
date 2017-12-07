@@ -73,12 +73,28 @@
 	<!--DETAILED-->
 	<div class="detailed_img">
 		<div><span style="color:inherit"><?php write('#tier_B')?></span></div>
-		<img class=l2 stage=waterAbs src=img/waterAbs.png onclick=window.location="edit.php?level=Water&sublevel=Abstraction"  caption="<?php write('#Abstraction')?>" >
-		<img class=l2 stage=waterTre src=img/waterTre.png onclick=window.location="edit.php?level=Water&sublevel=Treatment"    caption="<?php write('#Treatment')?>">
-		<img class=l2 stage=waterDis src=img/waterDis.png onclick=window.location="edit.php?level=Water&sublevel=Distribution" caption="<?php write('#Distribution')?>">
-		<img class=l2 stage=wasteCol src=img/wasteCol.png onclick=window.location="edit.php?level=Waste&sublevel=Collection"   caption="<?php write('#Collection')?>">
-		<img class=l2 stage=wasteTre src=img/wasteTre.png onclick=window.location="edit.php?level=Waste&sublevel=Treatment"    caption="<?php write('#Treatment')?>">
-		<img class=l2 stage=wasteDis src=img/wasteDis.png onclick=window.location="edit.php?level=Waste&sublevel=Discharge"    caption="<?php write('#Discharge')?>">
+		<img class=l2 stage=waterAbs src="" onclick="window.location='edit.php?level=Water&sublevel=Abstraction'"  caption="<?php write('#Abstraction')?>" >
+		<img class=l2 stage=waterTre src="" onclick="window.location='edit.php?level=Water&sublevel=Treatment'"    caption="<?php write('#Treatment')?>">
+		<img class=l2 stage=waterDis src="" onclick="window.location='edit.php?level=Water&sublevel=Distribution'" caption="<?php write('#Distribution')?>">
+		<img class=l2 stage=wasteCol src="" onclick="window.location='edit.php?level=Waste&sublevel=Collection'"   caption="<?php write('#Collection')?>">
+		<img class=l2 stage=wasteTre src="" onclick="window.location='edit.php?level=Waste&sublevel=Treatment'"    caption="<?php write('#Treatment')?>">
+		<img class=l2 stage=wasteDis src="" onclick="window.location='edit.php?level=Waste&sublevel=Discharge'"    caption="<?php write('#Discharge')?>">
+    <script>
+      //set the img.l2[stage] src (icon path)
+      (function() {
+        var imgs=document.querySelectorAll("#linearDiagram div.detailed_img img.l2[stage]");
+        for(var i=0;i<imgs.length;i++) {
+          var stage=imgs[i].getAttribute('stage');
+          var isActive=Global.Configuration.ActiveStages[stage];
+          if(isActive) {
+            imgs[i].src="img/"+stage+".png";
+          }else{
+            imgs[i].src="img/"+stage+"-off.png";
+            imgs[i].classList.add('inactive');
+          }
+        }
+      })();
+    </script>
 	</div>
 
 	<!--Summaries-->
@@ -88,6 +104,7 @@
 		<img class=l1 stage=energy  src=img/energy.png  onclick=window.location="energy_summary.php" caption="<?php write('#nrg_summary')?>"> 
 	</div>
 
+  <!--Opportunities-->
 	<div>
 		<div>
 			<a href=opps.php style="color:inherit"><?php write('#opportunities')?></a>
@@ -148,24 +165,4 @@
 		{ ?>document.querySelector('img[stage=opps]').classList.add('selected');<?php }
 	?>
 
-	//go over icon images to deactivate inactives --> do in PHP better?
-	<?php
-		//try it here
-	?>
-	//go over icon images to deactivate inactives --> do in PHP better?
-	(function()
-	{
-		var collection=document.querySelectorAll("#linearDiagram img[stage]");
-		for(var i=0;i<collection.length;i++)
-		{
-			var stage = collection[i].getAttribute('stage');
-			if(["birds","energy","conf",'sources','gets','inha','opps'].indexOf(stage)>=0) continue;
-			var isActive = Global.Configuration.ActiveStages[stage];
-			if(!isActive)
-			{
-				collection[i].src="img/"+stage+"-off.png";
-				collection[i].classList.add('inactive');
-			}
-		}
-	})();
 </script>
