@@ -5,41 +5,71 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
 <!--TITLE--><h1 style=color:black>
-  <b>Automatic translation problems finder</b>
+  Automatic translation problems finder
   &mdash;
   Current language: 
-  <span style=color:black>
+  <span style=color:black;font-weight:bold>
     <?php echo $lang ?>
   </span>
 </h1>
 
+<?php
+  //solve problems if "null" is selected
+  if($lang=="null")$lang="en";
+?>
+
 <!--description-->
-<code>
+<p>
   This page compares the 
-  <a href="languages/en.json">en.json</a> (english file)
-  file with the 
-  <a href="languages/<?php echo $lang?>.json"><?php echo $lang?>.json</a> 
-  file
-  (selected language)
-</code>
-<br>
-<code>
-  To get a list of not used tags run the <a href="languages/findNotUsed.sh">findNotUsed.sh</a> bash script from the command line
-</code>
-
-<!--show number of tags-->
-<p>
-  Number of language tags: <b><?php echo count($lang_json)?></b>
+  <a target=_blank href="languages/en.json">en.json</a> (used for development)
+  against the 
+  <a target=_blank href="languages/<?php echo $lang?>.json"><?php echo $lang?>.json</a> 
+  file (the current selected language by the user)
 </p>
+<ul style=max-width:50%;text-align:left>
+  <li>
+    Language tags: <b><?php echo count($lang_json)?></b>
+  <li>
+    To list not used tags: run the <a href="languages/findNotUsed.sh">findNotUsed.sh</a> bash script from the command line.
+  <li> 
+    Duplicated tags:
+    <?php
+      function countLines($file){
+        $linecount = 0;
+        $handle=fopen($file,"r");
+        while(!feof($handle)){
+          $line=fgets($handle);
+          $linecount++;
+        }
+        fclose($handle);
+        return $linecount;
+      }
+      function compareFiles($file1,$file2){
+        global $lang;
+        $f1=countLines($file1);
+        $f2=countLines($file2);
+        if($f1!=$f2){
+          echo "<ul>
+            <li>$file1: $f1 lines
+            <li>$file2: $f2 lines 
+            &larr; probably has ".abs($f2-$f1)." duplicates. Paste the <a target=_blank href='languages/$lang.json'>$lang.json</a> file <a target=_blank href='https://jsonformatter.curiousconcept.com/'>here</a> to find them.
+          </ul>
+          ";
+        }else{
+          echo "<span style=background:#af0>No duplicated tags found &#128515;</a>";
+        }
+      }
+      compareFiles("languages/en.json","languages/$lang.json");
+    ?>
+  <li>
+    <span style="background:red;color:black;">
+      Other problems found:
+      <span id=problems_counter>0</span>
+    </span>
+</ul>
 
-<!--problems counter-->
-<p>
-  <span style="background:red;color:black;">
-    Total problems found:
-    <span id=problems_counter>0</span>
-  </span>
-</p>
   
+
 <!--problems found-->
 <table style=font-family:monospace>
   <tr><th>Missing tags in "<?php echo "$lang.json"?>"<th>English Text
@@ -49,7 +79,11 @@
     function updateCounter($problems){
       echo "<script>
         document.body.onload=function(){
-          document.querySelector('#problems_counter').innerHTML='<b>$problems</b>'
+          var pc=document.querySelector('#problems_counter');
+          pc.innerHTML='<b>$problems</b>';
+          if($problems==0){
+            pc.parentNode.style.background='#af0';
+          }
         }
       </script>";
     }

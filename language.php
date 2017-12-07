@@ -58,16 +58,15 @@
 	<!--all languages-->
 	<div id=select> 
 		<!--en--><div lang=en><img style=width:20px src="img/flags/en.png"> en</div>
-    <!--es--><div lang=es><img style=width:20px src="img/flags/es.png"> es (under development)</div>
+    <!--es--><div lang=es><img style=width:20px src="img/flags/es.png"> es</div>
 		<!--th--><div lang=fr><img style=width:20px src="img/flags/fr.png"> fr</div>
     <!--th--><div lang=th><img style=width:20px src="img/flags/th.png"> th</div>
 		<!--null (no lang only language tags)-->
 		<div lang=null>
-			<img src="img/flags/null.png">
-			null - only tags (development tool)	
+			<img src="img/flags/null.png"> null (only tags)	
 		</div>
     <!--go to problems summary-->
-    <div lang=null>
+    <div lang="<?php echo $lang?>">
       <a href=translation_problems.php style=color:blue>language debugging tool</a>
     </div>
 
@@ -77,14 +76,14 @@
 <script>
 	//Add an onclick listener to each language
 	(function() {
-		var langs = document.querySelectorAll('#lang #select div[lang]');
-		for(var i=0; i<langs.length; i++) {
+		var langs=document.querySelectorAll('#lang #select div[lang]');
+		for(var i=0;i<langs.length;i++) {
 			var lang=langs[i].getAttribute('lang');
 			langs[i].setAttribute('onclick',"Language.set('"+lang+"')")
 		}
 	})();
-	var Language = {}; //namespace
-	Language.set = function(lang) {
+	var Language={};//namespace
+	Language.set=function(lang){
 		setCookie('lang',lang);
 		window.location.reload();
 	}
