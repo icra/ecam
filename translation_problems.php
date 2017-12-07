@@ -5,7 +5,8 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
 <!--TITLE--><h1 style=color:black>
-  Automatic translation problems finder
+  Developer tool:
+  translation problems finder
   &mdash;
   Current language: 
   <span style=color:black;font-weight:bold>
