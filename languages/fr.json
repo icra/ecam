@@ -625,8 +625,8 @@
    "#wwt_ch4_biog_expla":"Pourcentage de la teneur en méthane dans les biogaz produits",
    "#wwt_tst_cmpl_descr":"Nombre de tests de qualité de l'eau conformes",
    "#wwt_tst_cmpl_expla":"Nombre de tests dans chaque UTEU respectant les autorisations de rejet durant la période d'évaluation",
-   "#wwt_tst_cond_descr":"Number of water quality tests conducted",
-   "#wwt_tst_cond_expla":"Number of tests carried out in each treated wastewater treatment plant during the assessment period",
+   "#wwt_tst_cond_descr":"Nombre de tests de qualité de l’eau effectués",
+   "#wwt_tst_cond_expla":"Nombre de tests effectués dans chaque UTEUs durant la période d'évaluation",
    "#wwt_mass_slu_descr":"Boues produites dans les UTEUs (poids total)",
    "#wwt_mass_slu_expla":"Boues produites dans les UTEUs gérées par l'entreprise durant la période d'évaluation",
    "#wwt_dryw_slu_descr":"Poids sec dans les boues produites",
@@ -749,6 +749,7 @@
    "#wwt_KPI_capac_util_expla":"Pourcentage de poids sec de boue sortant des UTEUs et allant vers l'étape d'élimination",
    "#wwt_SL_qual_com_descr":"Pourcentage de qualité conforme",
    "#wwt_SL_qual_com_expla":"Pourcentage de tests de qualité de l'eau effectués dans les UTEUs respectant les autorisations de rejet",
+
    "#wwt_KPI_nrg_per_pump_descr":"Consommation énergétique du pompage des eaux usée au traitement",
    "#wwt_KPI_nrg_per_pump_expla":"Consommation énergétique du pompage des eaux usée au traitement",
    "#wwt_KPI_std_nrg_cons_descr":"Consommation énergétique normalisée du pompage",
@@ -1009,5 +1010,19 @@
    "#Water injected to distribution":"Eau injectée dans la distribution (= volume d'entrée du système)",
    "VARIABLE":"VARIABLE",
    "#Outputs that use this value":"Outputs that use this value",
+
+   "#wsa_SL_GHG_nrw_descr":"GES au niveau du prélèvement dus à l'eau non rémunérée",
+   "#wsa_SL_GHG_nrw_expla":"GES au niveau du prélèvement dus à l'eau non rémunérée",
+   "#wst_SL_GHG_nrw_descr":"GES au niveau du traitement dus à l'eau non rémunérée",
+   "#wst_SL_GHG_nrw_expla":"GES au niveau du traitement dus à l'eau non rémunérée",
+   "#wsd_SL_GHG_nrw_descr":"GES au niveau de la distribution dus à l’eau non rémunérée",
+   "#wsd_SL_GHG_nrw_expla":"GES au niveau de la distribution dus à l’eau non rémunérée",
+   "#wwc_SL_GHG_inf_descr":"GES dus aux infiltrations au niveau de la collecte des eaux",
+   "#wwc_SL_GHG_inf_expla":"GES dus aux infiltrations au niveau de la collecte des eaux",
+   "#wwt_SL_GHG_inf_descr":"GES dus aux infiltrations au niveau du traitement des eaux usées",
+   "#wwt_SL_GHG_inf_expla":"GES dus aux infiltrations au niveau du traitement des eaux usées",
+   "#wwd_SL_GHG_inf_descr":"GES dus aux infiltrations au niveau de l'évacuation/réutilisation de l'eau",
+   "#wwd_SL_GHG_inf_expla":"GES dus aux infiltrations au niveau de l'évacuation/réutilisation de l'eau",
+
    "END":"FIN"
 }
