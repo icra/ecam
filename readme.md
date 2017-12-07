@@ -7,7 +7,7 @@ ECAM web tool is a web application developed by [ICRA](http://icra.cat),
 Currently we are developing the version 2.0.
 
 ## Using ecam online
-To use ecam, just go to [ecam.hol.es](http://ecam.hol.es/) (version 1.0 there)
+To use ecam, just go to [wacclim.org/ecam](http://wacclim.org/ecam)
 
 ## Installation (offline use)
 Ecam can be also used offline (it runs faster).
