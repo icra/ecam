@@ -65,9 +65,9 @@
         }
       }
 
-      echo '<tr><th>Not existing tags in "en.json"<th>Translated text (can be removed safely)';
 
       //look for existing tags that are not existing in en.json
+      echo '<tr><th>Not existing tags in "en.json"<th>Translated text (can be removed safely)';
       foreach($lang_json as $key=>$text){
         if(!$en_lang_json[$key]){
           echo "<tr>
@@ -79,7 +79,26 @@
         }
       }
 
+      //look for duplicated tags
+      echo '<tr><th colspan=2>Duplicated tags';
+      foreach($lang_json as $key_i=>$text_i){
+        $tags_amount=0;
+        foreach($lang_json as $key_j=>$text_j){
+          if($key_i==$key_j){
+            $tags_amount++;
+          }
+        }
+        if($tags_amount>1){
+          echo "<tr>
+            <td>$key_i <td><small>$text_i</small>
+          </tr>";
+          $problems++;
+        }
+      }
+
+      //update problems counter
       updateCounter($problems);
+
     }
     compareCurrentLanguage();
   ?>
