@@ -58,14 +58,13 @@
 	<!--all languages-->
 	<div id=select> 
 		<!--en--><div lang=en><img style=width:20px src="img/flags/en.png"> en</div>
-		<!--th--><div lang=th><img style=width:20px src="img/flags/th.png"> th</div>
+    <!--es--><div lang=es><img style=width:20px src="img/flags/es.png"> es (under development)</div>
 		<!--th--><div lang=fr><img style=width:20px src="img/flags/fr.png"> fr</div>
-		<!--es--><div lang=es><img style=width:20px src="img/flags/es.png"> es (under development)</div>
-
-		<!--null (no lang, only codes)-->
+    <!--th--><div lang=th><img style=width:20px src="img/flags/th.png"> th</div>
+		<!--null (no lang only language tags)-->
 		<div lang=null>
 			<img src="img/flags/null.png">
-			null - only codes (development)	
+			null - only tags (development tool)	
 		</div>
 	</div> 
 </div>
