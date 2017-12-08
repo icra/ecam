@@ -5,7 +5,7 @@ ECAM web tool is a web application developed by [ICRA](http://icra.cat),
 
 ## License
 ECAM is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
-[license.txt](license)
+[license.txt](license.txt)
 
 ## Development status
 Currently we are developing the version 2.0.
