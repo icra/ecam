@@ -1,65 +1,60 @@
 <!doctype html><html><head>
-	<?php include'imports.php'?>
+<?php include'imports.php'?>
 </head><body><center>
 <!--sidebar--><?php include'sidebar.php'?>
-<!--NAVBAR--><?php include"navbar.php"?>
+<!--NAVBAR--><?php include'navbar.php'?>
 <!--TITLE--><h1><?php write('#about')?></h1>
-
 <div id=main>
 
 <!--paragraph-->
 <div style=max-width:40%;text-align:justify;line-height:2em>
-	<?php //write('#about_credits')?>
+  <p>
+    The web interface and new features for the ECAM tool were developed by 
+    <a target=_blank href='http://www.icra.cat/'>ICRA</a>, 
+    <a target=_blank href='http://www.iwa-network.org'>IWA</a>, and 
+    <a target=_blank href='https://www.giz.de/en/html/index.html'>GIZ</a> under the 
+    <a target=_blank href='http://www.iwa-network.org/WaCCliM/es/'>WaCCliM project</a>.
+  </p>
 
-	The web interface and new features for the ECAM tool were developed by 
+  <p>
+    This tool was first developed within the project in 2015 as an Excel tool by the consortium Urban Water Commons 
+    (<a target=_blank href='http://www.lnec.pt/pt/'>LNEC</a> and 
+    <a target=_blank href='http://www.ita.upv.es/index-es.php'>ITA, Universitat Politècnica de València)</a> in collaboration with 
+    <a target=_blank href='http://www.cobaltwater-global.com/'>Cobalt Water Global</a>. 
+    The Excel tool laid the foundation and basic equations for the web-tool. 
+  </p>
 
-	<a target=_blank href='http://www.icra.cat/'>ICRA</a>, 
-	<a target=_blank href='http://www.iwa-network.org'>IWA</a>, and 
-	<a target=_blank href='https://www.giz.de/en/html/index.html'>GIZ</a> under the 
-	<a target=_blank href='http://www.iwa-network.org/WaCCliM/es/'>WaCCliM project</a>.
+  <p>
+    WaCCliM project is part of the <a target=_blank href="https://www.international-climate-initiative.com/">International Climate Initiative (IKI)</a>. 
+    The German Federal Ministry for the Environment, Nature Conservation, 
+    Building and Nuclear Safety (BMUB) supports this initiative on the basis of a decision adopted by the German Bundestag.
+  </p>
 
-	<br><br>
+  <p>
+    This software is free and <a href=https://github.com/holalluis/ecam>open source</a>.
+  </p>
 
-	This tool was first developed within the project in 2015 as an Excel tool by the consortium Urban Water Commons 
-	(<a target=_blank href='http://www.lnec.pt/pt/'>LNEC</a> and 
-	 <a target=_blank href='http://www.ita.upv.es/index-es.php'>ITA, Universitat Politècnica de València)</a> in collaboration with 
-	 <a target=_blank href='http://www.cobaltwater-global.com/'>Cobalt Water Global</a>. 
-	 
-	The Excel tool laid the foundation and basic equations for the web-tool. 
+  <p>
+    2015-<?php echo date("Y")?> <a href='license.txt'><?php write('#about_license')?></a>.
+  </p>
 
-	<br><br>
+	<h3 style=padding-left:0>Special acknowledgements</h3>
 
-	WaCCliM project is part of the <a target=_blank href="https://www.international-climate-initiative.com/">International Climate Initiative (IKI)</a>. 
-	The German Federal Ministry for the Environment, Nature Conservation, 
-	Building and Nuclear Safety (BMUB) supports this initiative on the basis of a decision adopted by the German Bundestag.
+  <p>
+    ECAM tool is the result of a collaborative effort. WaCCliM project team thanks
+    <ul>
+      <li>Members of the WaCCliM Taskforce and WaCCliM Expert pool for their voluntary
+      contribution, providing scientific input and peer-review of ECAM.</li>
+      <li>REaCH project (CTM2015-66892-R (MINECO/FEDER, UE), funded by the Spanish
+      Ministry of Economy and Competitiveness and FEDER, for their support to ICRA.</li>
+    </ul>
+  </p>
 
-	<br><br>
+  <p>
+    Charts used: <a target=_blank href="https://google-developers.appspot.com/chart/">Google Charts</a>
+  </p>
 
-	<h3>Special acknowledgements</h3>
-
-	ECAM tool is the result of a collaborative effort. WaCCliM project team thanks
-	<ul>
-		<li>Members of the WaCCliM Taskforce and WaCCliM Expert pool for their voluntary
-		contribution, providing scientific input and peer-review of ECAM.</li>
-		<li>REaCH project (CTM2015-66892-R (MINECO/FEDER, UE), funded by the Spanish
-		Ministry of Economy and Competitiveness and FEDER, for their support to ICRA.</li>
-	</ul>
-
-	<br><br> 
-
-	This software is free and <a href=https://github.com/holalluis/ecam>open source</a>.
-	
-	<br>
-
-	Charts used: <a target=_blank href="https://google-developers.appspot.com/chart/">Google Charts</a>
-
-	<br>
-
-  <!--
-	2015-<?php echo date("Y")?> <a href='license.php'><?php write('#about_license')?></a>. <br>
-  -->
-
-<!-- 	<img class="license_img" src="img/cc_icon_white_x2.png" alt="">
+  <!--<img class="license_img" src="img/cc_icon_white_x2.png" alt="">
 	<img class="license_img" src="img/attribution_icon_white_x2.png" alt="">
 	<img class="license_img" src="img/sa_white_x2.png" alt=""> -->
 	<img class="license_img license_img-big" src="img/CC_license_big.png" alt="">
