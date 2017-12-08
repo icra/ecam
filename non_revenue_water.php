@@ -14,7 +14,24 @@
 
 <!--non revenue water image-->
 <div>
-	<img src="img/nrw/nrw"></img>
+  <?php
+    if(file_exists("img/nrw/nrw-$lang.png")){
+      echo "
+        <img src='img/nrw/nrw-$lang.png'></img>
+      ";
+    }else{
+      ?>
+      <img src="img/nrw/nrw-en.png"></img>
+      <?php
+    }
+  ?>
 </div>
+
+<p>
+<code>
+Lambert, A. O. y Hirner, W., Losses from Water Supply Systems: Standard Terminology and
+Recommended Performance Measures. International Water Association, 2000.
+</code>
+</p>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

@@ -464,15 +464,12 @@
 	<!--linear--><?php include'linear.php'?>
 <!--/includes-->
 <div style="textAlign: center">
-	<h1>Opportunities to reduce GHG emissions</h1>
-
+  <!--title--><h1><?php write('#opps_title')?></h1>
 	<!-- including link to catalogue of solutions -->
 	<a href="http://www.iwa-network.org/water-climate-energy-solutions/public/"
 		style="font-weight: bold; color: grey;">[Catalogue of Solutions]
 	</a>
 </div>
-
-<!--title--><h1><?php write('#opps_title')?></h1>
 
 <div id=root>
 	<!--total ghg indicator-->
@@ -672,6 +669,7 @@
 					</tr>
 				</tfoot>
 			</table>
+      <p> Note: this section is under development (will not load values despite the "loading" messages). </p>
 		</div>
 	</div>
 

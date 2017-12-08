@@ -17,8 +17,7 @@
 		#info td.input input {margin:0;padding:0;width:95%;}
 		.variableCode { font-family:monospace; }
 		<?php
-			if(preg_match("/ww/",$id))
-			{ 
+			if(preg_match("/ww/",$id)) { 
 				?>
 				#info td.th{background:#d71d24}
 				#info a,#info a:visited,h1{color:#bf5050}
@@ -477,21 +476,17 @@
 		}
 	</script>
 </head><body onload=init()><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--NAVBAR--><?php include"navbar.php"?>
-<!--linear--><?php include'linear.php'?>
-<!--caption--><?php include'caption.php'?>
 
 <script>
 	if(!Info[id]) {
-		document.write("<div class=error>ERROR: Variable '"+id+"' not defined in dataModel/Info.js</div>")
+		document.body.innerHTML="<div class=error>ERROR: Variable '"+id+"' not defined in dataModel/Info.js</div>";
 		window.stop()
 	}
 
 	//Define some necessary global variables
 	var localization = locateVariable(id);
 	if(!localization) {
-		document.write("<div class=error>ERROR: Variable '"+id+"' not found in dataModel/Global.js</div>")
+		document.body.innerHTML="<div class=error>ERROR: Variable '"+id+"' not found in dataModel/Global.js</div>";
 		window.stop()
 	}
 
@@ -520,20 +515,25 @@
 	}
 </script>
 
+<!--sidebar--><?php include'sidebar.php'?>
+<!--NAVBAR--><?php include"navbar.php"?>
+<!--linear--><?php include'linear.php'?>
+<!--caption--><?php include'caption.php'?>
+
 <!--TITLE--><h1>
 	<span style=color:#999>
     <?php write('#variable_detailed_info')?>
     &rarr;
   </span>
-  <span>
-    <script>
-      (function(){
-        var description=translate(id+'_descr')||translate(id);
-        document.write("<code>"+id+"</code>")
-        document.write("<p>"+description+"</p>");
-      })();
-    </script>
-  </span>
+  <code id=variable_id></code>
+  <code id=variable_descr></code>
+  <script>
+    (function(){
+      var description=translate(id+'_descr')||translate(id);
+      document.querySelector('#variable_id').innerHTML="<code>"+id+"</code>";
+      document.querySelector('#variable_descr').innerHTML="<p>"+description+"</p>";
+    })();
+  </script>
 </h1>
 
 <div id=main>

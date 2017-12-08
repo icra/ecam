@@ -29,13 +29,12 @@
 		</button>
 		<script>
 			function unfoldAll() {
-				var elements = document.querySelectorAll('div.card.folded');
+				var elements=document.querySelectorAll('div.card.folded');
 				for(var i=0;i<elements.length;i++)
 					elements[i].classList.remove('folded');
 			}
-			function foldAll()
-			{
-				var elements = document.querySelectorAll('div.card');
+			function foldAll() {
+				var elements=document.querySelectorAll('div.card');
 				for(var i=0;i<elements.length;i++)
 					elements[i].classList.add('folded');
 			}
@@ -51,11 +50,9 @@
 					codes.push(f);
 			return codes
 		}
-		function printDiv(prefix)
-		{
+		function printDiv(prefix) {
 			var stage;
-			switch(prefix)
-			{
+			switch(prefix) {
 				case "wsa": stage=translate("Abstraction");break;
 				case "wst": stage=translate("Treatment");break;
 				case "wsd": stage=translate("Distribution");break;
@@ -72,8 +69,7 @@
 				"");
 
 			var codes = Bm.getCodes(prefix);
-			codes.forEach(function(code)
-			{
+			codes.forEach(function(code) {
 				document.write("<div class='card folded'>"+
 					"<div class=menu onclick=this.parentNode.classList.toggle('folded')><button></button> "+
 						translate(code+"_descr")+

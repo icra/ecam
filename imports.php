@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="css.css">
 <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 <meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--libs-->
 <script src="js/lz-string.js"></script>
 <script src="js/charts/loader.js"></script>

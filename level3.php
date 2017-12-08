@@ -84,8 +84,7 @@
 				var isCV=typeof(CurrentLevel[code])=="function" ? true : false;
 
 				//copy the function inside substages
-				if(isCV)
-				{
+				if(isCV){
 					for(var s in substages)
 						substages[s][code]=CurrentLevel[code];
 				}
@@ -99,58 +98,58 @@
 
 				//if is an option, continue (will show at the end of the table)
 				var isOption = (Info[code]&&Info[code].magnitude=="Option");
+
+        //checkbox
+        var showQstTags = document.querySelector('#showQstTags').checked;
+
 				if(isOption){
 					(function(){
 						/*1st cell: show code*/
 						var newCell=newRow.insertCell(-1);
 						newCell.classList.add('variableCode');
-						newCell.innerHTML=(function()
-						{
-							return "<a href=variable.php?id="+code+">"+code+"</a>";
+						newCell.innerHTML=(function(){
+							return "<div><a href=variable.php?id="+code+">"+code+"</a></div>";
 						})();
-						//show question it belongs
+
+						//2nd cell: show question it belongs
 						(function(){
-							var question=Questions.isInside(code);
-							if(question)
-							{
-								newCell.innerHTML+=" <span class='advanced'>"+question.substring(4)+"</span>";
+              if(!showQstTags)return;
+              var question=Questions.isInside(code);
+							if(question){
+								newCell.innerHTML+="<span class='advanced'>"+question.substring(4)+"</span>";
 							}
 						})()
 
-						/*2nd cell: variable name*/
+						/*3rd cell: variable name*/
 						var newCell=newRow.insertCell(-1);
 						newCell.style.textAlign="left";
-						newCell.setAttribute('title', translate(code+'_expla'));
+						newCell.setAttribute('title',translate(code+'_expla'));
 						newCell.innerHTML=(function(){
 							var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ? 
-								" <span class=not_used_input caption='Input not used for any equation'></span>" : "";
+								"<span class=not_used_input caption='Input not used for any equation'></span>" : "";
 							return "<small>"+translate(code+'_descr')+warning+"</small>";
 						})();
 
-						//3rd cell and so on: go over substages
-						for(var s in substages)
-						{
+						//4th cell and so on: go over substages
+						for(var s in substages) {
 							var newCell=newRow.insertCell(-1);
 							newCell.style.textAlign='left';
 							newCell.classList.add("input");
 							newCell.setAttribute('substage',s);
-							(function()
-							{
+							(function(){
 								var select=document.createElement('select');
 								newCell.appendChild(select)
 								if(substages.length==1)
 									select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);CurrentLevel["'+code+'"]=parseInt(this.value);init()')
 								else
 									select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);init()')
-								for(var op in Tables[code])
-								{
+								for(var op in Tables[code]){
 									var option = document.createElement('option');
 									var value = parseInt(Tables[code][op].value);
 									select.appendChild(option);
 									option.value=value;
 									option.innerHTML="("+value+") "+op;
-									if(substages[s][code]==value) 
-									{
+									if(substages[s][code]==value){
 										option.selected=true;
 									}
 								}
@@ -187,15 +186,16 @@
 							return "<a href=variable.php?id="+code+">"+code+"</a>";
 						})();
 
-						//show question it belongs
-						(function(){
-							var question=Questions.isInside(code);
-							if(question) {
-								newCell.innerHTML+=" <span class='advanced'>"+question.substring(4)+"</span>";
-							}
-						})()
+						//2nd cell: show question it belongs
+            (function(){
+              if(!showQstTags)return;
+              var question=Questions.isInside(code);
+              if(question){
+                newCell.innerHTML+="<span class='advanced'>"+question.substring(4)+"</span>";
+              }
+            })()
 
-						/*2nd cell: variable name*/
+						/*3rd cell: variable name*/
 						var newCell=newRow.insertCell(-1);
 						newCell.style.textAlign="left";
 						newCell.setAttribute('title', translate(code+'_expla'));
@@ -205,7 +205,7 @@
 							return "<small>"+translate(code+'_descr')+warning+"</small>";
 						})();
 
-						//3rd cell and so on: go over substages
+						//4th cell and so on: go over substages
 						var multiplier=Units.multiplier(code);
 						for(var s in substages) {
 							var newCell=newRow.insertCell(-1);
@@ -380,10 +380,8 @@
 		input.autocomplete='off'
 		input.setAttribute('onkeypress',"if(event.which==13){this.onblur()}")
 		input.setAttribute('onblur',"level3.updateSubstage("+substage+",'"+field+"',this.value)") //now works
-		input.onkeydown=function(event)
-		{
-			function updateChart()
-			{
+		input.onkeydown=function(event) {
+			function updateChart() {
 				//problem: this only updates if we are plotting inputs. WHY?
 				var newValue=parseFloat(input.value);
 				if(isNaN(newValue))newValue=0;
@@ -462,6 +460,10 @@
 		newCell.colSpan=4+substages.length;
 		newCell.innerHTML="<span style=font-size:10px>Outputs</span>";
 
+    //checkboxes
+    var showGHGss   = document.querySelector('#showGHGss').checked;
+    var showQstTags = document.querySelector('#showQstTags').checked;
+
 		//go over CurrentLevel
 		for(var field in CurrentLevel) {
 			//only functions
@@ -472,9 +474,8 @@
 
 			//exclude _KPI_GHG if checkbox is enabled
 			var isGHG=(field.search('_KPI_GHG')+1) ? true : false;
-			if(isGHG)
-				if(!document.querySelector('#showGHGss').checked)
-					continue;
+
+      if(isGHG && !showGHGss) continue;
 
 			//exclude the "level2only" variables
 			if(Level2only.hasOwnProperty(field)) continue;
@@ -497,31 +498,28 @@
 			var newCell=newRow.insertCell(-1);
 			newCell.classList.add('variableCode');
 			newCell.classList.add('output');
-			newCell.innerHTML=(function()
-			{
-				var ghg=isGHG                        ? "<span class='advanced ghg' caption='GHG'>GHG</span>":"";
-				var nrg=field.search('_nrg_')+1      ? "<span class='advanced nrg' caption='Energy performance'>NRG</span>":"";
-				return "<a caption='"+translate(field+'_expla')+"' href=variable.php?id="+field+">"+field+"</a>"+ghg+nrg;
+			newCell.innerHTML=(function(){
+				return "<a caption='"+translate(field+'_expla')+"' href=variable.php?id="+field+">"+field+"</a>";
 			})();
-			//show question it belongs
+
+			//2nd cell: show tags: question it belongs, nrg and/or GHG related
 			(function(){
+        if(!showQstTags)return;
 				var question=Questions.isInside(field);
-				if(question)
-				{
-					newCell.innerHTML+=" <span class='advanced'>"+question.substring(4)+"</span>";
-				}
+        if(question){
+          newCell.innerHTML+="<span class='advanced'>"+question.substring(4)+"</span>";
+        }
 			})()
 
-			//2nd cell: description
+			//3rd cell: description
 			newRow.insertCell(-1).innerHTML="<small>"+translate(field+'_descr')+"</small>";
 
 			//get equation formula
 			var formula=CurrentLevel[field].toString();
 			var prettyFormula=Formulas.prettify(formula);
 
-			//3rd cell and so on: values.
-			for(var s in substages)
-			{
+			//4th cell and so on: values.
+			for(var s in substages) {
 				//new cell
 				var newCell=newRow.insertCell(-1);
 				//title for mouseover show formula
@@ -534,13 +532,11 @@
 					var value=substages[s][field]()/Units.multiplier(field);
 
 					//color circle benchmarking (TO DO: extract function from here)
-					var indicator=(function()
-					{
+					var indicator=(function() {
 						if(!RefValues.hasOwnProperty(field)) return "";
 						var text=RefValues[field](substages[s]);
 						var color;
-						switch(text)
-						{
+						switch(text) {
 							case "Good":           color="#af0";break;
 							case "Acceptable":     color="orange";break;
 							case "Unsatisfactory": color="red";break;
@@ -623,23 +619,18 @@
 </div>
 
 <!--substages container-->
-<?php $folded=isset($_COOKIE['Folded_substageInputs_container']) ? "folded" : ""; ?>
+<?php $folded=isset($_COOKIE['Folded_substageInputs_container']) ? "folded" : ""?>
 <div id=substageInputs_container class="card <?php echo $folded?>" style="text-align:left">
 	<!--menu-->
 	<div class=menu onclick=fold(this.parentNode)>
 		<button></button>
-		<b>
-			<?php write('#Advanced Assessment: Substages')?>
-		</b>
+		<b><?php write('#Advanced Assessment: Substages')?></b>
 		<b>(<span id=counter class=number>0</span>)</b>
 		&mdash; 
-		<a href=substages.php>
-			<?php write('#Overview')?>
-		</a>
+		<a href=substages.php><?php write('#Overview')?></a>
 
 		<!--button toggle outputs/graph display-->
-		<button
-			class=btn_toggle
+		<button class=btn_toggle
 			onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#substages','#substageGraphs')"
 		>
 			<?php write('#VIEW GRAPH')?>
@@ -668,12 +659,21 @@
 						}
 					</script>
 				</label>
+
 				<!--show ghgs checkbox-->
 				<div style=float:left;margin-bottom:0.5em>
-					<label onclick="event.stopPropagation();init()"><input type=checkbox id=showGHGss checked>
+					<label onclick="event.stopPropagation();init()"><input type=checkbox id=showGHGss>
 						<?php write('#Show GHG')?>
 					</label>
 				</div>
+
+        <!--show question tags checkbox-->
+        <div style=float:left;margin-bottom:0.5em>
+          <label onclick="event.stopPropagation();init()"><input type=checkbox id=showQstTags>
+            <?php write('#Filter tags')?>
+          </label>
+        </div>
+
 				<!--new substage button-->
 				<button onclick=level3.newSubstage() class="button add" style="padding:auto;background:lightgreen;box-shadow: 0 1px 2px rgba(0,0,0,.1);">
 					<?php write('#Add substage')?>
@@ -685,9 +685,9 @@
 	<!--Substage graphs-->
 	<div id=substageGraphs style=padding:1em;display:none>
 		<div class=buttonsGraph><!--
-			--><button class="left"    onclick="buttonsGraph(this);Graphs.wsa_KPI_std_nrg_cons(false,'substageGraph')">Standardized energy consumption</button><!--
-			--><button class="middle"  onclick="buttonsGraph(this);document.querySelector('#substageGraph').innerHTML='TBD'">Another graph</button><!--
-			--><button class="right"   onclick="buttonsGraph(this);document.querySelector('#substageGraph').innerHTML='TBD'">Another graph</button><!--
+			--><button class="left"   onclick="buttonsGraph(this);Graphs.wsa_KPI_std_nrg_cons(false,'substageGraph')">Standardized energy consumption</button><!--
+			--><button class="middle" onclick="buttonsGraph(this);document.querySelector('#substageGraph').innerHTML='TBD'">Another graph</button><!--
+			--><button class="right"  onclick="buttonsGraph(this);document.querySelector('#substageGraph').innerHTML='TBD'">Another graph</button><!--
 			-->
 		</div>
 		<div id=substageGraph style=text-align:center>Click a graph to display</div>

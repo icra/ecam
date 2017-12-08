@@ -39,13 +39,13 @@
 
 		/*TAGS*/
 		.advanced {
+      float:right;
 			color:rgba(0,0,0,0.85);
 			font-size:10px;
-			float:right;
 			background:#fafafa;
-			margin-left:0.4em;
+			margin-left:1px;
 			border-radius:0.5em;
-			box-shadow: 0 1px 2px rgba(0,0,0,.1);
+			box-shadow:0 1px 2px rgba(0,0,0,.1);
 			padding:0.3em;
 		}
 		.advanced.SM { /*sludge management*/
@@ -152,6 +152,9 @@
 		?>
 		/** Update all */
 		function init() {
+      //performance
+      console.time('init');
+
 			if(typeof updateQuestionsTable !== 'undefined') {
 				updateQuestionsTable('adv_questions',true);
 			}
@@ -171,6 +174,9 @@
 			//fake a click in "View all" checkbox (cb)
 			var cb=document.querySelector('#viewAll');
 			if(cb){cb.checked=true}
+
+      //performance
+      console.timeEnd('init');
 		}
 
 		/** Redisplay table id=outputs (level2)*/
@@ -204,11 +210,10 @@
 				/*description and code*/ 
 				newCell=newRow.insertCell(-1);
 				newCell.setAttribute('title',translate(field+"_expla"));
-				newCell.innerHTML=(function()
-				{
+				newCell.innerHTML=(function() {
 					var description=translate(field+"_descr")||translate(field);
 					var code="<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
-					return description+" ("+code+")";
+					return description+"<br>("+code+")";
 				})();
 
 				/*value*/ 
@@ -531,7 +536,7 @@
 
 			for(var q in questions) {
 				var question = questions[q];
-				if(Questions.isHiddenQuestion(question)){continue;}
+
 
 				//check if question is "advanced"
 				if(!adv){ if( Questions[question].advanced){continue;}}
@@ -543,6 +548,11 @@
 
 				//new row
 				var newRow = t.insertRow(-1);
+
+        if(Questions.isHiddenQuestion(question)){
+          newRow.classList.add('disabled');
+        }
+
 				newRow.style.background = currentAnswer ? "lightgreen" : "";
 				newRow.setAttribute('question',question);
 				newRow.onmouseover=function(){hlQuestionFields(this.getAttribute('question'),1)}
@@ -560,6 +570,10 @@
 							"<input name='"+question+"' type=radio value=1 onclick=setQuestion('"+question+"',1) "+checked+"></label> ";
 					return ret;
 				})();
+
+        //question tag
+        var newCell=newRow.insertCell(-1)
+        newCell.outerHTML="<th><span class='advanced' style=float:left>"+question.substring(4)+"</span>";
 			}
 
 			//hide whole table if no questions
@@ -657,10 +671,12 @@
 		: 
 		"<span style='color:black;font-size:26px'>$titleLevel</span>";
 ?>
-<h1><a href=sources.php><script>document.write(Global.General.Name)</script></a> <?php echo "$sep $title"?>
+<h1><a href=sources.php id=Global_General_Name></a> 
+  <script>document.querySelector('#Global_General_Name').innerHTML=Global.General.Name</script>
+  <?php echo "$sep $title"?>
 	<!--See description (link to iwa web)-->
-	<?php if($sublevel)
-		{ 
+	<?php 
+    if($sublevel) { 
 			?>
 			<span style=line-height:10px>
 				<?php
@@ -724,7 +740,8 @@
 	<span style="font-size:12px;color:#666;float:right">
 		<div style="padding:0.5em;cursor:pointer" onclick="document.querySelector('#tip').innerHTML=Tips.random()">
 			<b><?php write('#Tip')?></b> &rarr; 
-			<i id=tip><script>document.write(Tips.random())</script></i> &emsp; &#9654;
+			<i id=tip></i> &emsp; &#9654;
+      <script>document.querySelector('#tip').innerHTML=Tips.random()</script>
 		</div>
 	</span>
 </h1>
@@ -740,19 +757,40 @@
 			<button></button>
 			<b>Inputs &amp; Outputs</b> &mdash; 
 			<?php write('#assessment_period')?>
-			<b class=number><script>document.write(Global.General.Days())</script></b> 
+			<b class=number id=Global_General_Days></b> 
+      <script>document.querySelector('#Global_General_Days').innerHTML=Global.General.Days()</script>
 			<?php write('#days')?>
 			<?php
 				//population
 				if($level!="Energy") {
-					echo "&mdash; ";
-					$resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
-					$serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
-					write('#ws_resi_pop_descr');
-					echo " <b class=number><script>document.write(Global.$level.$resi_pop)</script></b> &mdash; ";
-					if($level=="Waste"){echo "Connected population <b class=number><script>document.write(Global.Waste.ww_conn_pop)</script></b> &mdash; ";}
-					write('#ws_serv_pop_descr');
-					echo " <b class=number><script>document.write(Global.$level.$serv_pop)</script></b>";
+					echo " | ";
+
+          //serviced population
+          $serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
+          write("#$serv_pop"."_descr");
+          echo "
+            <b class=number id=Global_level_serv_pop></b> |
+            <script>document.querySelector('#Global_level_serv_pop').innerHTML=Global.$level.$serv_pop</script>
+          ";
+
+          //connected population (only for wastewater)
+					if($level=="Waste"){
+            write('#ww_conn_pop_descr');
+            echo "
+              <b class=number id=Global_level_conn_pop></b> |
+              <script>document.querySelector('#Global_level_conn_pop').innerHTML=Global.Waste.ww_conn_pop</script>
+            ";
+          }
+
+          //resident population
+          $resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
+          write("#$resi_pop"."_descr");
+          echo "
+            <b class=number id=Global_level_resi_pop></b>
+            <script>
+              document.querySelector('#Global_level_resi_pop').innerHTML=Global.$level.$resi_pop;
+            </script>
+          ";
 				}
 			?>
 			<!--button toggle outputs/graph display-->
@@ -846,3 +884,10 @@
 		}
 	})();
 </script>
+
+<style>
+  #adv_questions tr.disabled {
+    color:#aaa;
+    pointer-events:none;
+  }
+</style>
