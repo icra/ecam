@@ -4,7 +4,7 @@
 	$sbd = (isset($_COOKIE['sidebar']) && $_COOKIE['sidebar']==1) ? "on":"off";
 ?>
 
-<div id=sidebar class="<?php echo $sbd ?>" onclick="event.stopPropagation()">
+<div id=sidebar class="<?php echo $sbd ?>" onclick="event.stopPropagation()" style=display:none>
 	<script>
 		//if you click anywhere except the sidebar, it will hide the sidebar
 		document.documentElement.onclick=function(){Sidebar.hide()};
@@ -218,8 +218,8 @@
 		border-top:1px solid #ccc;
 	}
 	div#sidebar td.sidebar_selected {background:linear-gradient(lightgreen,white,lightgreen)}
-	div#sidebar.off{width:0;height:0;top:0;z-index:-1}
-	div#sidebar.on{width:255px;bottom:0;}
+	div#sidebar.off{width:0;height:0;top:0;z-index:-1;display:none}
+	div#sidebar.on{width:255px;bottom:0;display:block}
 	div#sidebar.on  div#sidecontent{display:block}
 	div#sidebar.off div#sidecontent{display:none}
 	div#sidebar div{padding:0;margin:0}
