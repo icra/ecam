@@ -4,7 +4,7 @@
 	$sbd = (isset($_COOKIE['sidebar']) && $_COOKIE['sidebar']==1) ? "on":"off";
 ?>
 
-<div id=sidebar class="<?php echo $sbd ?>" onclick="event.stopPropagation()" style=display:none>
+<div id=sidebar class="<?php echo $sbd ?>" onclick="event.stopPropagation()">
 	<script>
 		//if you click anywhere except the sidebar, it will hide the sidebar
 		document.documentElement.onclick=function(){Sidebar.hide()};
