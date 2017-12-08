@@ -90,6 +90,7 @@
   "#UASB - CH4 recovery not considered":"UASB - ไม่มีการนำก๊าซมีเทน (CH<sub>4</sub>) กลับมาใช้ประโยชน์",
   "#Unit":"หน่วย",
   "#VIEW GRAPH":"แสดงกราฟ",
+  "#VIEW TABLE":"ดูตาราง",
   "#Value":"ค่า",
   "#Variable":"ตัวแปร",
   "#View all stages":"ดูทุกกระบวนการ",

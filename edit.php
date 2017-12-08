@@ -505,28 +505,25 @@
 			event.stopPropagation();
 			var div1=document.querySelector(id1);
 			var div2=document.querySelector(id2);
-
 			//change btn text
 			btn.classList.toggle('active');
-			if(btn.innerHTML=="VIEW GRAPH") {
-				btn.innerHTML="VIEW TABLE";
+			if(btn.classList.contains('active')) {
+				btn.innerHTML="<?php write('#VIEW TABLE')?>";
+			}else{
+				btn.innerHTML="<?php write('#VIEW GRAPH')?>";
 			}
-			else {
-				btn.innerHTML="VIEW GRAPH";
-			}
-
+      //invert the display property
 			if(div1.style.display=='none') {
 				div1.style.display='';
 				div2.style.display='none';
-			}
-			else {
+			}else{
 				div1.style.display='none';
 				div2.style.display='';
 			}
 			init();
 		}
 
-		//functions for questions
+		//functions for question views
 		function updateQuestionsTable(id_table,adv) {
 			adv=adv||false; //show advanced or normal
 			var t=document.getElementById(id_table);
@@ -589,9 +586,9 @@
 			}
 		}
 
-		//update the value
+		//update the value of a question
 		function setQuestion(question,newValue) {
-			if(newValue) {
+			if(newValue){
 				Global.Configuration['Yes/No'][question]=1;
 				Expanded[question]=1;//start by showing the new variables
 			}
@@ -599,7 +596,7 @@
 				Global.Configuration['Yes/No'][question]=0;
 
 			//reset variables if checked=false
-			if(!newValue) {
+			if(!newValue){
 				//reset variables to zero
 				for(var i in Questions[question].variables) {
 					var code=Questions[question].variables[i];
@@ -611,7 +608,7 @@
 						}
 					}
 				}
-				//reset a les otherQuestions
+				//reset also to the otherQuestions
 				for(var i in Questions[question].otherQuestions) {
 					var code_q=Questions[question].otherQuestions[i];
 					Global.Configuration["Yes/No"][code_q]=0;
