@@ -10,6 +10,7 @@
 <!--paragraph-->
 <div style=max-width:40%;text-align:justify;line-height:2em>
 	<?php //write('#about_credits')?>
+
 	The web interface and new features for the ECAM tool were developed by 
 
 	<a target=_blank href='http://www.icra.cat/'>ICRA</a>, 
@@ -33,6 +34,7 @@
 	Building and Nuclear Safety (BMUB) supports this initiative on the basis of a decision adopted by the German Bundestag.
 
 	<br><br>
+
 	<h3>Special acknowledgements</h3>
 
 	ECAM tool is the result of a collaborative effort. WaCCliM project team thanks
@@ -45,7 +47,7 @@
 
 	<br><br> 
 
-	This software is <a href=https://github.com/holalluis/ecam>open source</a>.
+	This software is free and <a href=https://github.com/holalluis/ecam>open source</a>.
 	
 	<br>
 
