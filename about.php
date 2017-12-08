@@ -53,7 +53,10 @@
 
 	<br>
 
+  <!--
 	2015-<?php echo date("Y")?> <a href='license.php'><?php write('#about_license')?></a>. <br>
+  -->
+
 <!-- 	<img class="license_img" src="img/cc_icon_white_x2.png" alt="">
 	<img class="license_img" src="img/attribution_icon_white_x2.png" alt="">
 	<img class="license_img" src="img/sa_white_x2.png" alt=""> -->
