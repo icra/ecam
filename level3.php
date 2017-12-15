@@ -89,9 +89,6 @@
 						substages[s][code]=CurrentLevel[code];
 				}
 
-				//if is an option, continue (will show at the end of the table)
-				if(Info[code]&&Info[code].magnitude=="Option") continue;
-
 				/*new row*/
 				var newRow=t.insertRow(-1);
 				newRow.setAttribute('field',code);
