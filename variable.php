@@ -90,8 +90,7 @@
 			newCell=newRow.insertCell(-1)
 			newCell.className='th'
 			newCell.innerHTML="<?php write('#variable_explanation')?>"
-			newRow.insertCell(-1).innerHTML=(function()
-			{
+			newRow.insertCell(-1).innerHTML=(function() {
 				//var exp = Info[id].explanation
 				var exp = translate(id+"_expla") || translate(id);
 				if(exp=="")
@@ -103,12 +102,11 @@
 			//Is filtered?
 			(function(){
 				var question=Questions.isInside(id);
-				if(question)
-				{
+				if(question) {
 					newRow=t.insertRow(-1)
 					newCell=newRow.insertCell(-1)
 					newCell.className='th';
-					newCell.innerHTML="<?php write("Filter that activates it")?>";
+					newCell.innerHTML="<?php write("#Filter that activates it")?>";
 					newCell=newRow.insertCell(-1)
 					var currentAnswer = Global.Configuration['Yes/No'][question] ? "Yes" : "No";
 					newCell.innerHTML=translate(question)+"? ["+currentAnswer+"]";
