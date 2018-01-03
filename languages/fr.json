@@ -493,7 +493,7 @@
   "#wsd_SL_pres_ade_descr":"Pourcentage d'adéquation de la pression d'alimentation",
   "#wsd_SL_pres_ade_expla":"Pourcentage des points de livraison (un par raccordement de service) recevant ou susceptibles de recevoir une pression adéquate",
   "#wsd_SL_water_loss_descr":"Pertes d'eau",
-  "#wsd_SL_water_loss_expla":"Les pertes d'eau comprennent: les consommations non autorisées + l'inexactitude des compteurs des clients et les erreurs de manipulation des données + les fuites dans les conduites de transport et de distribution + les fuites et débordements des réservoirs d'eau + les fuites situées avant les compteurs.<br> Voir <a href=non_revenue_water.php>tableau de l'eau non rémunérée</a>",
+  "#wsd_SL_water_loss_expla":"Les pertes d'eau comprennent: Pertes apparentes + Pertes réelles.<br> Voir <a href=non_revenue_water.php>tableau de l'eau non rémunérée</a>",
   "#wsd_auth_con_descr":"Volume de consommation authorisée",
   "#wsd_auth_con_expla":"Somme du volume d'eau mesuré ou non mesuré prélevé par les clients enregistrés (par le fournisseur d'eau lui-même ou par d'autres personnes implicitement ou explicitement autorisées par celui-ci à le faire) pendant la période d'évaluation à des fins résidentielles, commerciales, industrielles ou publiques. Il comprend l'eau exportée",
   "#wsd_av_no_el_descr":"Altitude moyenne des noeuds",
