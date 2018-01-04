@@ -500,7 +500,7 @@
   "#wsd_av_no_el_descr":"Average nodes elevation",
   "#wsd_av_no_el_expla":"The average elevation of the network. If necessary it could be calculated as sum of lowest and the highest node elevation of the network divided by two, for each water distribution unit",
   "#wsd_bill_con_descr":"Volume of billed authorized consumption",
-  "#wsd_bill_con_expla":"Volume of billed authorized consumption",
+  "#wsd_bill_con_expla":"Authorized consumption which are billed and generate revenue (also known as revenue water). It is equal to billed metered consumption plus Billed Unmetered Consumption",
   "#wsd_deli_pts_descr":"Delivery points with adequate pressure",
   "#wsd_deli_pts_expla":"Number of delivery points that receive and are likely to receive pressure equal to or above the guaranteed or declared target level at the peak demand hour (but not when demand is abnormal).",
   "#wsd_engines":"Do you have fuel engines",
