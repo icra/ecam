@@ -84,11 +84,6 @@ var Global = {
 			wsa_pmp_amps:0, //Measured pump current Amp
 			c_wsa_pmp_pw:function(){return this.wsa_pmp_flow*this.wsa_pmp_head*9.81*1000*0.001/1000},
 			wsa_KPI_std_nrg_cons:function(){return this.wsa_nrg_pump/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
-			// improv list fix for #10
-			wsa_KPI_std_elec_eff:function(){
-				var val = 100 * this.c_wsa_pmp_pw() / (this.wsa_pmp_volt * this.wsa_pmp_amps * 1.64 / 1000);
-				return val;
-			},
 			wsa_KPI_un_head_loss:function(){return 1000*(this.wsa_pmp_head-this.wsa_sta_head)/this.wsa_main_len},
 			wsa_KPI_nrg_elec_eff:function(){return this.c_wsa_pmp_pw()/(this.wsa_pmp_volt*this.wsa_pmp_amps*1.64/1000)*100},
 			//producing energy?
