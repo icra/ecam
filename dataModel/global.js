@@ -122,7 +122,7 @@ var Global = {
       wsa_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
       wsa_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wsa_KPI_nrg_estm_sav()},
       wsa_KPI_std_nrg_newp:function(){return 0.2725/this.wsa_pmp_exff},
-      wsa_KPI_nrg_cons_new:function(){return this.wsa_vol_pump*this.wsa_KPI_std_nrg_newp()/100*this.wsa_pmp_head},
+      wsa_KPI_nrg_cons_new:function(){return this.wsa_KPI_nrg_elec_eff()/this.wsa_pmp_exff*this.wsa_nrg_pump},
       wsa_KPI_nrg_estm_sav:function(){return this.wsa_nrg_cons-this.wsa_KPI_nrg_cons_new()},
 		},
 
@@ -256,7 +256,7 @@ var Global = {
 			wsd_KPI_water_losses:function(){return Math.max(0,1000*(this.wsd_vol_dist-this.wsd_auth_con)/(this.wsd_main_len))},
 			wsd_KPI_nrg_elec_eff:function(){return this.c_wsd_pmp_pw()/(this.wsd_pmp_volt*this.wsd_pmp_amps*1.64/1000)*100},
 			wsd_KPI_std_nrg_newp:function(){return 0.2725/this.wsd_pmp_exff},
-			wsd_KPI_nrg_cons_new:function(){return this.wsd_vol_pump*this.wsd_KPI_std_nrg_newp()/100*this.wsd_pmp_head},
+            wsd_KPI_nrg_cons_new:function(){return this.wsd_KPI_nrg_elec_eff()/this.wsd_pmp_exff*this.wsd_nrg_pump},
 			wsd_KPI_nrg_estm_sav:function(){return this.wsd_nrg_cons-this.wsd_KPI_nrg_cons_new()},
 			wsd_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wsd_KPI_nrg_estm_sav()},
 			//wsd GHG
