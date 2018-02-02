@@ -83,7 +83,7 @@ var Global = {
 			wsa_pmp_volt:0, //Measured pump voltage V
 			wsa_pmp_amps:0, //Measured pump current Amp
 			c_wsa_pmp_pw:function(){return this.wsa_pmp_flow*this.wsa_pmp_head*9.81*1000*0.001/1000},
-			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_pump+this.wsa_nrg_turb)/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
+			wsa_KPI_std_nrg_cons:function(){return this.wsa_nrg_pump/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
 			// improv list fix for #10
 			wsa_KPI_std_elec_eff:function(){
 				var val = 100 * this.c_wsa_pmp_pw() / (this.wsa_pmp_volt * this.wsa_pmp_amps * 1.64 / 1000);
