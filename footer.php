@@ -23,7 +23,7 @@
 </style>
 
 <footer id=footer >
-	<img src="img/logo-wacclim_big.png" style="vertical-align:middle; height: 120px;">
+	<img src="img/logo-wacclim_big.png" style="display:block;margin:auto;vertical-align:middle;height:120px;">
 	<!-- <div>Copyright <?php echo date("Y")?> </div> -->
 	<!-- ·
 	<a href="http://wacclim.org/" target=_blank>WaCCliM</a>

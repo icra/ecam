@@ -5,6 +5,8 @@
 	<style>
 		#menu_buttons button {
 			display:block;
+      margin-left:0;
+      margin-top:0;
 		}
 	</style>
 
@@ -31,7 +33,7 @@
 				<script>document.write(" '"+Global.General.Name+".json'")</script>
 			</button>
 			</div>
-			<div class=flex>
+			<div class=flex style="padding-top:0">
 				<!--CLEAR-->
 				<button class="button delete" onclick=clearSystem() style=margin-left:0>
 					<?php write('#clear')?>

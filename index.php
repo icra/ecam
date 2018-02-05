@@ -5,7 +5,7 @@
 <!--sidebar--><?php include'sidebar.php'?>
 <!--navbar--><?php include'navbar.php'?>
 <!--main-->
-<div id=main> 
+<div id=main>
 	<div id=content>
 		<style>
 			#content *:not(button){margin:0;padding:0;padding-top:0.7em;padding-bottom:0.7em}
@@ -52,7 +52,7 @@
 			<!--MENU BUTTONS--><div style="padding:1em 0"><?php include'menu.php'?></div>
 
 			<!--chrome warning-->
-			<div class="chrome_big"> 
+			<div class="chrome_big">
 				<b><?php write('#index_chrome_warning')?></b>
 			</div>
 			<br>
@@ -83,9 +83,9 @@
 
 <?php include'footer.php'?>
 
-<!--logos--> 
-<div style="background:white;text-align:left;padding:0em 10em;margin-top:50px;"> 
-	<img src=img/logos.png> 
+<!--logos-->
+<div style="background:white;text-align:left;padding:0em 10em;margin-top:50px;">
+	<img src=img/logos.png>
 </div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
