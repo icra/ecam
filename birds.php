@@ -302,11 +302,11 @@
 					<!--water population-->
 					<span style=float:right>
 						<img src=img/inhabitants.png width=25 caption="Water supply population" style=vertical-align:middle>
-            <b caption="<?php write('#ws_serv_pop_descr')?>" id=ws_serv_pop>0</b> |
+            <b caption="<?php write('#ws_serv_pop_descr')?>" id=ws_serv_pop>0</b> /
             <b caption="<?php write('#ws_resi_pop_descr')?>" id=ws_resi_pop>0</b>
             <script>
-              document.querySelector('#ws_serv_pop').innerHTML=Global.Water.ws_serv_pop;
-              document.querySelector('#ws_resi_pop').innerHTML=Global.Water.ws_resi_pop;
+              document.querySelector('#ws_serv_pop').innerHTML=format(Global.Water.ws_serv_pop);
+              document.querySelector('#ws_resi_pop').innerHTML=format(Global.Water.ws_resi_pop);
             </script>
 					</span>
 
@@ -327,13 +327,13 @@
 					<!--wastewater population-->
 					<span style=float:right>
 						<img src=img/inhabitants.png width=25 caption="Wastewater population" style="vertical-align:middle">
-            <b caption="<?php write('#ww_serv_pop_descr')?>" id=ww_serv_pop>0</b> |
-            <b caption="<?php write('#ww_conn_pop_descr')?>" id=ww_conn_pop>0</b> |
+            <b caption="<?php write('#ww_serv_pop_descr')?>" id=ww_serv_pop>0</b> /
+            <b caption="<?php write('#ww_conn_pop_descr')?>" id=ww_conn_pop>0</b> /
             <b caption="<?php write('#ww_resi_pop_descr')?>" id=ww_resi_pop>0</b>
             <script>
-              document.querySelector('#ww_serv_pop').innerHTML=Global.Waste.ww_serv_pop;
-              document.querySelector('#ww_conn_pop').innerHTML=Global.Waste.ww_conn_pop;
-              document.querySelector('#ww_resi_pop').innerHTML=Global.Waste.ww_resi_pop;
+              document.querySelector('#ww_serv_pop').innerHTML=format(Global.Waste.ww_serv_pop);
+              document.querySelector('#ww_conn_pop').innerHTML=format(Global.Waste.ww_conn_pop);
+              document.querySelector('#ww_resi_pop').innerHTML=format(Global.Waste.ww_resi_pop);
             </script>
 					</span>
 
