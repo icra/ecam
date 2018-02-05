@@ -248,7 +248,7 @@ var Global = {
 			wsd_KPI_nrg_topgraph:function(){return 100*this.c_wsd_nrg_topo()/this.c_wsd_nrg_supp()},
 			wsd_KPI_std_nrg_cons:function(){return this.wsd_nrg_pump/(this.wsd_vol_pump*this.wsd_pmp_head/100)},
 			wsd_KPI_un_head_loss:function(){return 1000*(this.wsd_pmp_head-this.wsd_sta_head)/this.wsd_main_len},
-			wsd_KPI_water_losses:function(){return Math.max(0,1000*(this.wsd_vol_dist-this.wsd_auth_con)/(this.wsd_main_len))/Global.General.Days()},
+			wsd_KPI_water_losses:function(){return Math.max(0,1000*(this.wsd_vol_dist-this.wsd_auth_con)/(this.wsd_main_len))/Global.General.Years()},
 			wsd_KPI_nrg_elec_eff:function(){return this.c_wsd_pmp_pw()/(this.wsd_pmp_volt*this.wsd_pmp_amps*1.64/1000)*100},
 			wsd_KPI_std_nrg_newp:function(){return 0.2725/this.wsd_pmp_exff},
             wsd_KPI_nrg_cons_new:function(){return this.wsd_KPI_nrg_elec_eff()/this.wsd_pmp_exff*this.wsd_nrg_pump},
