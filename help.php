@@ -19,3 +19,4 @@
 
 </div>
 <!--footer--><?php include'footer.php'?>
+<!--CURRENT JSON--><?php include'currentJSON.php'?>
