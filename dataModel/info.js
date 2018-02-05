@@ -104,7 +104,6 @@ var Info = {
 	wsa_pmp_head:{magnitude:"Head",unit:"m"},
 	wsa_sta_head:{magnitude:"Head",unit:"m"},
 	wsa_main_len:{magnitude:"Distance",unit:"km"},
-	wsa_KPI_std_elec_eff:{magnitude:"Percentage",unit:"%"},
 	wsa_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km"},
 	wsa_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wsa_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},

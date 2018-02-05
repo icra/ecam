@@ -42,7 +42,6 @@ var Questions={
 				"wsa_sta_head",
 				"wsa_main_len",
 				"wsa_KPI_std_nrg_cons",
-				"wsa_KPI_std_elec_eff",
 				"wsa_KPI_un_head_loss",
 			],
 			advanced:1,

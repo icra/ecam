@@ -10,7 +10,6 @@ Level3.list=[
 	"wsa_KPI_nrg_elec_eff",
 	"wsa_KPI_nrg_estm_sav",
 	"wsa_KPI_nrg_recovery",
-	"wsa_KPI_std_elec_eff",
 	"wsa_KPI_std_nrg_cons",
 	"wsa_KPI_std_nrg_newp",
 	"wsa_KPI_un_head_loss",
