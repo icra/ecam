@@ -22,7 +22,7 @@
 				if(Global.Configuration.ActiveStages.waste)
 					return document.querySelector('#inputs tr[stage=waste] td.input input[id]');
 			})();
-			if(first.value=="0") first.click()
+			if(first && first.value=="0") first.click()
 		}
 	</script>
 	<script>
@@ -146,5 +146,4 @@
     <?php write('#next')?>
   </button>
 </div>
-
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

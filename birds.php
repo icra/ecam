@@ -105,6 +105,8 @@
 			//if value is not a number, set to zero
 			if(isNaN(value))value=0;
 
+      console.log(value);
+
 			//get L1 name: "Water" or "Waste"
 			var L1 = field.search("ws")==0 ? "Water" : "Waste";
 			var L2 = false;
@@ -120,7 +122,7 @@
 				this.update(Global[L1][L2],field,value);
 			else
 				this.update(Global[L1],field,value);
-				
+
 			//add a color to the field
 			input.classList.add('edited');
 			init();
@@ -267,14 +269,14 @@
 
 <!--TITLE-->
 <h1>
-	<?php write('#quick_assessment')?> 
+	<?php write('#quick_assessment')?>
 	&mdash;
-	<?php write('#initial_estimation_description')?> 
+	<?php write('#initial_estimation_description')?>
 	<span style="font-size:13px;color:#666;float:right">
-		<span><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a> 
-		<script>document.write(Global.General.Days())</script> <?php write('#days')?></span> 
+		<span><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a>
+		<script>document.write(Global.General.Days())</script> <?php write('#days')?></span>
 		·
-		<span><a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a> 
+		<span><a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a>
 			<script>
 				(function(){
 					var c = Global.General.conv_kwh_co2;
@@ -282,7 +284,7 @@
 					document.write(str)
 				})();
 			</script> kg CO<sub>2</sub>/kWh
-		</span> 
+		</span>
 	</span>
 </h1>
 
@@ -376,7 +378,7 @@
 					<!--sludge management-->
 					<tr stage=waste class=hidden>
 						<td colspan=3>
-							<?php write('#select_sludge_disposal_method')?> 
+							<?php write('#select_sludge_disposal_method')?>
 							<p>
 								<?php include'sludge_birds.php'?>
 							</p>
@@ -385,12 +387,11 @@
 			</table>
 
 			<script>
+        //add onfocus listener to all input elements
 				(function(){
 					var inputs=document.querySelectorAll("#inputs input[id]")
-					for(var i=0;i<inputs.length;i++)
-					{
-						inputs[i].onfocus=function()
-						{
+					for(var i=0;i<inputs.length;i++) {
+						inputs[i].onfocus=function() {
 							this.value=parseFloat(this.value.replace(/,/g,''));
 							this.select()
 						}
@@ -401,7 +402,7 @@
 		</div>
 
 		<!--PREV & NEXT BUTTONS-->
-		<div style=margin:1em;text-align:center> 
+		<div style=margin:1em;text-align:center>
 			<script>
 				//find first available stage to start entering data
 				function nextPage()
