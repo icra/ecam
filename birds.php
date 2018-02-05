@@ -302,12 +302,15 @@
 					<!--water population-->
 					<span style=float:right>
 						<img src=img/inhabitants.png width=25 caption="Water supply population" style=vertical-align:middle>
-            <b caption="<?php write('#ws_serv_pop_descr')?>" id=ws_serv_pop>0</b> /
-            <b caption="<?php write('#ws_resi_pop_descr')?>" id=ws_resi_pop>0</b>
+            <b caption="<?php write('#ws_serv_pop_descr')?>" id=ws_serv_pop onclick=window.location='inhabitants.php'>0</b> /
+            <b caption="<?php write('#ws_resi_pop_descr')?>" id=ws_resi_pop onclick=window.location='inhabitants.php'>0</b>
             <script>
               document.querySelector('#ws_serv_pop').innerHTML=format(Global.Water.ws_serv_pop);
               document.querySelector('#ws_resi_pop').innerHTML=format(Global.Water.ws_resi_pop);
             </script>
+            <style>
+              #ws_serv_pop, #ws_resi_pop { cursor:pointer; }
+            </style>
 					</span>
 
 					<tr stage=water class=hidden><td style=width:40%><?php write('#nrg_cons')?><td class=output><input id='ws_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
@@ -327,14 +330,17 @@
 					<!--wastewater population-->
 					<span style=float:right>
 						<img src=img/inhabitants.png width=25 caption="Wastewater population" style="vertical-align:middle">
-            <b caption="<?php write('#ww_serv_pop_descr')?>" id=ww_serv_pop>0</b> /
-            <b caption="<?php write('#ww_conn_pop_descr')?>" id=ww_conn_pop>0</b> /
-            <b caption="<?php write('#ww_resi_pop_descr')?>" id=ww_resi_pop>0</b>
+            <b caption="<?php write('#ww_serv_pop_descr')?>" id=ww_serv_pop onclick=window.location='inhabitants.php'>0</b> /
+            <b caption="<?php write('#ww_conn_pop_descr')?>" id=ww_conn_pop onclick=window.location='inhabitants.php'>0</b> /
+            <b caption="<?php write('#ww_resi_pop_descr')?>" id=ww_resi_pop onclick=window.location='inhabitants.php'>0</b>
             <script>
               document.querySelector('#ww_serv_pop').innerHTML=format(Global.Waste.ww_serv_pop);
               document.querySelector('#ww_conn_pop').innerHTML=format(Global.Waste.ww_conn_pop);
               document.querySelector('#ww_resi_pop').innerHTML=format(Global.Waste.ww_resi_pop);
             </script>
+            <style>
+              #ww_serv_pop, #ww_conn_pop, #ww_resi_pop { cursor:pointer; }
+            </style>
 					</span>
 
 					<!--energy consumed from the grid-->
