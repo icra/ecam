@@ -348,37 +348,35 @@
 			newCell.className='th'
 			newCell.innerHTML="<?php write("#Outputs that use this value")?>"
 			newCell=newRow.insertCell(-1)
-			newCell.innerHTML=(function()
-			{
+			newCell.innerHTML=(function() {
 				//look for the code "id" inside each output
 				var outputsPerInput=Formulas.outputsPerInput(id);
 				//if is not used to calculate anything, hide row
-				if(outputsPerInput.length==0) 
-				{
+				if(outputsPerInput.length==0) {
 					return "<span style=color:#999><?php write('#variable_nothing')?></span>";
 				}
 
 				var ret="<table id=utc>";
-				outputsPerInput.forEach(function(output)
-				{
+
+				outputsPerInput.forEach(function(output) {
 					var match_localization = locateVariable(output);
 					var match_level = match_localization.level;
 					var match_sublevel = match_localization.sublevel;
 					var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level];
-					if(Info[output])
-					{
+					if(Info[output]) {
 						var currentUnit= (Info[output].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[output]||Info[output].unit);
 					}
 					else var currentUnit = "no unit";
-					var currValue = match_stage[output]()/Units.multiplier(output);
+          try{
+            var currValue = match_stage[output]()/Units.multiplier(output);
+          }catch(e){
+            var currValue = 0;
+          }
+
 					currValueF=format(currValue);
-
 					var pretf = Formulas.prettify(match_stage[output].toString());
-
 					var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
-
 					var estimated = DQ.hasEstimatedData(output) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span> " : "";
-
 					ret+="<tr>"+
 						" <td class=variableCode><a style='color:"+color+"' caption='["+match_localization.toString()+"] "+(translate(output+"_descr")||translate(output))+"'"+
 						" href=variable.php?id="+output+">"+output+"</a>"+
@@ -453,7 +451,7 @@
 			}
 		}
 
-		/** 
+		/**
 		 * Add a <input> to a <td> cell to make modifications in the Global object
 		 * @param {element} element - the <td> cell
 		 */

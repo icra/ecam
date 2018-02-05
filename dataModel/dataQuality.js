@@ -23,7 +23,7 @@ DQ.hasEstimatedData = function(field)
 	if(typeof(stage[field])=='number') return false;
 
 	//default value
-	Global.Configuration.DataQuality[field]=undefined;
+	//Global.Configuration.DataQuality[field]=undefined;
 
 	//get formula
 	var formula=Formulas.prettify(stage[field].toString());
@@ -32,11 +32,9 @@ DQ.hasEstimatedData = function(field)
 	var inputs=Formulas.idsPerFormula(formula);
 
 	//go over inputs
-	for(var i=0; i<inputs.length; i++)
-	{
+	for(var i=0; i<inputs.length; i++) {
 		//check in data quality object
-		if(Global.Configuration.DataQuality[inputs[i]]=="Estimated")
-		{
+		if(Global.Configuration.DataQuality[inputs[i]]=="Estimated") {
 			Global.Configuration.DataQuality[field]="Estimated";
 			return true;
 		}

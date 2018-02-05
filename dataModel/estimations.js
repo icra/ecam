@@ -19,7 +19,7 @@ Global.Estimations = {
 		else return 0; //<br>
 	},
 	estm_wwt_bod_infl:function(){
-		return Global.Waste.Collection.wwc_bod_pday / 1000 * Global.Waste.ww_serv_pop * Global.General.Days()//<br>
+		return Global.Waste.Collection.wwc_bod_pday / 1000 * Global.Waste.ww_serv_pop * Global.General.Days(); //<br>
 	},
 	estm_wwt_bod_effl:function(){
 		return 0.10 * Global.Waste.Treatment.wwt_bod_infl;//<br>

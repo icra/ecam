@@ -750,7 +750,7 @@ Graphs.graph2=function(withTable,container) {
 	]);
 
 	//options
-	var options={ 
+	var options={
 		height:250,
 		legend:{position:'left'},
 		pieHole:0.4,
@@ -796,7 +796,7 @@ Graphs.graph2=function(withTable,container) {
 		//create a table string
 		var table=""+
 		"<table title=graph2>"+
-			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+""+
+			"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kWh)"+
 			"<tr><td>"+names[0]+"<td><a href=variable.php?id=ws_nrg_cons>ws_nrg_cons</a><td>"+format(ws)+
 			"<tr><td>"+names[1]+"<td><a href=variable.php?id=ww_nrg_cons>ww_nrg_cons</a><td>"+format(ww)+
 		"</table>"+

@@ -758,6 +758,9 @@ var Global = {
     //custom unit selections for variables are stored here
     Units:{},
 
+    //see "estimations.js"
+    Estimations:{},
+
     /*Calculated or "estimated" assumptions are stored here
     (only estimated, if not here, calculated) */
     DataQuality:{},
