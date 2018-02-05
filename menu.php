@@ -1,4 +1,4 @@
-<!--BUTTONS NEW LOAD SAVE CLEAR in INDEX.PHP--> 
+<!--BUTTONS NEW LOAD SAVE CLEAR in INDEX.PHP-->
 <!--functions are defined inside sidebar.php-->
 <!--menu-->
 <div style=text-align:left;padding:0em class=flex id=menu_buttons>
@@ -23,7 +23,7 @@
 	</button>
 
 	<?php
-		if(isset($_COOKIE['GLOBAL'])) { 
+		if(isset($_COOKIE['GLOBAL'])) {
 			?>
 			<!--SAVE-->
 			<button class="button save" onclick=saveToFile()>
@@ -41,7 +41,7 @@
 					<?php write('#next')?>
 				</button>
 			</div>
-		  <?php 
+		  <?php
 		}
 	?>
 </div>

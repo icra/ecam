@@ -71,7 +71,7 @@
 			}
 
 			var link=document.createElement('a');
-			link.href="data:text/json;charset=utf-8,"+JSON.stringify(SavedFile,null);
+			link.href="data:text/json;charset=utf-8,"+JSON.stringify(SavedFile,null,'  ');
 			link.download=Global.General.Name+".json";
 			link.click();
 		}

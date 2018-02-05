@@ -1,8 +1,7 @@
 <!doctype html><html><head>
 	<?php include'imports.php'?>
 	<script>
-		function init()
-		{
+		function init() {
 			Inh.updateDefaults();
 			Inh.showActive();
 			Caption.listeners();
@@ -28,17 +27,14 @@
 	</script>
 	<script>
 		var Inh = {}; //namespace
-		Inh.updateDefaults=function()
-		{
+		Inh.updateDefaults=function() {
 			var inputs=document.querySelectorAll('#inputs tr[stage] input[id]');
-			for(var i=0;i<inputs.length;i++)
-			{
+			for(var i=0;i<inputs.length;i++) {
 				var input = inputs[i];
-				var field = input.id; 
+				var field = input.id;
+
 				//set the longer description in the input <td> element
-
 				var prnt=input.parentNode.parentNode.childNodes[0];
-
 				try{
 					prnt.setAttribute('caption',translate(field+'_expla'));
 				}
@@ -55,34 +51,33 @@
 			}
 		};
 
-		Inh.updateField=function(input)
-		{
+		Inh.updateField=function(input) {
 			//get info from the input element
 			var field = input.id;
 			var value = parseFloat(input.value.replace(",","")); //replace commmas for copy paste easyness
 			value*=Units.multiplier(field);
+
 			//if value is not a number, set to zero
 			if(isNaN(value))value=0;
+
 			//get L1 name: "Water" or "Waste"
 			var L1 = field.search("ws")==0 ? "Water" : "Waste";
-			//update
+
+			//update Global
 			if(Global[L1][field]===undefined){alert('field '+field+' undefined');return;}
 			Global[L1][field]=value;
 			init();
 		};
 
-		Inh.showActive=function()
-		{
-			['water','waste'].forEach(function(stage)
-			{
-				if(Global.Configuration.ActiveStages[stage])
-				{
+		Inh.showActive=function() {
+			['water','waste'].forEach(function(stage) {
+				if(Global.Configuration.ActiveStages[stage]) {
 					var trs=document.querySelectorAll('#inputs tr[stage='+stage+']');
 					for(var i=0;i<trs.length;i++)
 						trs[i].classList.remove('hidden');
-				}
-				else
+				}else{
 					document.querySelector('#inputs tr[indic='+stage+']').classList.remove('hidden');
+        }
 			});
 		}
 	</script>
@@ -95,7 +90,7 @@
 <h1><?php write('#population')?></h1>
 
 <!--main-->
-<div id=main> 
+<div id=main>
 	<!--table-->
 	<style>
 		table#inputs th, #inputs td {text-align:left;}
@@ -144,8 +139,12 @@
 
 <!--prev next-->
 <div>
-	<button class="button prev" onclick="event.stopPropagation();window.location='configuration.php'">Prev</button>
-	<button class="button next" onclick="event.stopPropagation();window.location='birds.php'">Next</button>
+	<button class="button prev" onclick="event.stopPropagation();window.location='configuration.php'">
+    <?php write('#previous')?>
+  </button>
+	<button class="button next" onclick="event.stopPropagation();window.location='birds.php'">
+    <?php write('#next')?>
+  </button>
 </div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>

@@ -1,6 +1,6 @@
 <?php
 	/*variable.php: page for viewing info of a unique variable, when the user clicks the code, for example in "edit.php" or "level3.php"  */
-	//specified code for input 
+	//specified code for input
 	if(!isset($_GET['id'])){die('no input specified');}
 	$id=$_GET['id'];
 ?>
@@ -17,11 +17,11 @@
 		#info td.input input {margin:0;padding:0;width:95%;}
 		.variableCode { font-family:monospace; }
 		<?php
-			if(preg_match("/ww/",$id)) { 
+			if(preg_match("/ww/",$id)) {
 				?>
 				#info td.th{background:#d71d24}
 				#info a,#info a:visited,h1{color:#bf5050}
-			  <?php 
+			  <?php
 			}
 		?>
 		/** table "used to calculate" and "inputs involved" */

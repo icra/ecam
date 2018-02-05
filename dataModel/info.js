@@ -179,7 +179,7 @@ var Info = {
 	wsd_KPI_nrg_efficien:{magnitude:"Percent",unit:"%"},
 	wsd_KPI_nrg_topgraph:{magnitude:"Percent",unit:"%"},
 	wsd_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m"},
-	wsd_KPI_water_losses:{magnitude:"Volume/Distance",unit:"m<sup>3</sup>/km"},
+	wsd_KPI_water_losses:{magnitude:"Volume/Distance/Time",unit:"m<sup>3</sup>/km/year"},
 	wsd_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km"},
 	wsd_pmp_size:{magnitude:"Option",unit:"Pump Size"},
 	wsd_sta_head:{magnitude:"Head",unit:"m"},
