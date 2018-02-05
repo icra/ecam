@@ -316,12 +316,12 @@ var Global = {
 
       // Ch4 from Uncollected Wastewater - improv #4 [subtract population with onsite sanitation]
       wwc_SL_ghg_unc_ch4:function(){
-        return (Global.Waste.ww_resi_pop - Global.Waste.ww_conn_pop - Global.Waste.ww_onsi_pop)*this.wwc_bod_pday/1000*Global.General.Days()*0.3*Cts.ct_ch4_eq.value;
+        return Math.max(0,Global.Waste.ww_resi_pop - Global.Waste.ww_conn_pop - Global.Waste.ww_onsi_pop)*this.wwc_bod_pday/1000*Global.General.Days()*0.3*Cts.ct_ch4_eq.value;
       },
 
       // N20 from Uncollected Wastewater - improv #4 [subtract population with online sanitation]
       wwc_SL_ghg_unc_n2o:function(){
-        return (Global.Waste.ww_resi_pop - Global.Waste.ww_conn_pop - Global.Waste.ww_onsi_pop)*this.wwc_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+        return Math.max(0,Global.Waste.ww_resi_pop - Global.Waste.ww_conn_pop - Global.Waste.ww_onsi_pop)*this.wwc_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       },
 
       wwc_SL_ghg_ons:function(){return this.wwc_SL_ghg_ons_ch4()+this.wwc_SL_ghg_ons_n2o()},
