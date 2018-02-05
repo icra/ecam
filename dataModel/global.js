@@ -417,7 +417,6 @@ var Global = {
 					}
 				}
 			}
-
 		},
 
 		"Treatment":{
@@ -672,17 +671,94 @@ var Global = {
 				return (this.wwt_num_trip*2*this.wwt_dist_dis/1000*0.25)*fuel.FD/1000000*fuel.NCV*(Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles)
 			},
 
-			wwd_KPI_GHG:function(){
-				if(Substages.Waste.Discharge.length > 0){
-					return this.wwd_KPI_GHG_elec() +
-						this.wwd_KPI_GHG_fuel() +
-						this.wwd_KPI_GHG_trck() +
-						this.wwd_KPI_GHG_tre_n2o();
-				}else {
-					return 0;
-				}
-			}
+      wwt_KPI_GHG:function() {
+        if(Substages.Waste.Treatment.length > 0){
+          return this.wwt_KPI_GHG_elec()+
+            this.wwt_KPI_GHG_fuel()+
+            this.wwt_KPI_GHG_tre()+
+            this.wwt_KPI_GHG_dig_fuel()+
+            this.wwt_KPI_GHG_biog()+
+            this.wwt_KPI_GHG_slu()+
+            0;
+        }else {
+          return 0;
+        }
+      }
 		},
+
+    "Discharge":{
+      //no filter
+      "wwd_vol_disc":0,
+      "wwd_nrg_cons":0,
+      "wwd_n2o_effl":0,
+      "wwd_vol_nonp":0,//Volume of water reused
+      "wwd_reus_typ":0,
+      wwd_KPI_nrg_per_m3:function(){return this.wwd_nrg_cons/this.wwd_vol_disc||0},
+      ww_SL_serv_pop: function(){return Global.Waste.ww_SL_serv_pop()},
+      wwd_SL_ghg_non: function(){return this.wwd_n2o_effl/1000*this.wwd_vol_nonp*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value},
+      //fuel engines?
+      "wwd_fuel_typ":0,
+      "wwd_vol_fuel":0,
+      //trucks?
+      "wwd_trck_typ":0,
+      "wwd_vol_trck":0,
+      //pumping?
+      "wwd_vol_pump":0,
+      "wwd_nrg_pump":0,
+      //pumping efficiency?
+      "wwd_pmp_head":0,
+      "wwd_main_len":0,
+      wwd_KPI_std_nrg_cons:function(){return (this.wwd_nrg_pump)/(this.wwd_vol_pump*this.wwd_pmp_head/100)},
+      //wwd GHG
+      wwd_KPI_GHG_elec:function(){return this.wwd_nrg_cons*Global.General.conv_kwh_co2},
+
+      wwd_KPI_GHG_fuel:function(){//<br>
+        return this.wwd_KPI_GHG_fuel_co2()+this.wwd_KPI_GHG_fuel_n2o()+this.wwd_KPI_GHG_fuel_ch4();
+      },
+      wwd_KPI_GHG_fuel_co2:function(){//<br>
+        var fuel=Tables['Fuel types'][Tables.find('wwd_fuel_typ',this.wwd_fuel_typ)];//<br>
+        return this.wwd_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
+      },
+      wwd_KPI_GHG_fuel_n2o:function(){//<br>
+        var fuel=Tables['Fuel types'][Tables.find('wwd_fuel_typ',this.wwd_fuel_typ)];//<br>
+        return this.wwd_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFN2O.engines*Cts.ct_n2o_eq.value;
+      },
+      wwd_KPI_GHG_fuel_ch4:function(){//<br>
+        var fuel=Tables['Fuel types'][Tables.find('wwd_fuel_typ',this.wwd_fuel_typ)];//<br>
+        return this.wwd_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
+      },
+
+      wwd_KPI_GHG_trck:function(){
+        return this.wwd_KPI_GHG_trck_co2()+this.wwd_KPI_GHG_trck_n2o()+this.wwd_KPI_GHG_trck_ch4()
+      },
+      wwd_KPI_GHG_trck_co2:function(){
+        var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)];
+        return this.wwd_vol_trck*fuel.FD*fuel.NCV/1000*(fuel.EFCO2)
+      },
+      wwd_KPI_GHG_trck_n2o:function(){
+        var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)];
+        return this.wwd_vol_trck*fuel.FD*fuel.NCV/1000*(Cts.ct_n2o_eq.value*fuel.EFN2O.vehicles)
+      },
+      wwd_KPI_GHG_trck_ch4:function(){
+        var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)];
+        return this.wwd_vol_trck*fuel.FD*fuel.NCV/1000*(Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles)
+      },
+
+      wwd_KPI_GHG_tre_n2o:function(){//<br>
+        return this.wwd_n2o_effl/1000*this.wwd_vol_disc*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value
+      },
+
+      wwd_KPI_GHG:function(){
+        if(Substages.Waste.Discharge.length > 0){
+          return this.wwd_KPI_GHG_elec() +
+            this.wwd_KPI_GHG_fuel() +
+            this.wwd_KPI_GHG_trck() +
+            this.wwd_KPI_GHG_tre_n2o();
+        }else {
+          return 0;
+        }
+      }
+    },
 	},
 
 	/**Old "General" Level2 */
