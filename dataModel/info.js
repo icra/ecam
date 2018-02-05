@@ -14,6 +14,7 @@ var Info = {
 	Years:{magnitude:"Time",unit:"years"},
 	conv_kwh_co2:{magnitude:"Conversion",unit:"kg CO<sub>2</sub>/kWh"},
 	TotalGHG :{magnitude:"Mass",unit:"kg CO<sub>2</sub>"},
+  TotalNRG :{magnitude:"Energy", unit:"kWh"},
 	content_C:{magnitude:"Mass",unit:"kg C"},
 	content_N:{magnitude:"Mass",unit:"kg N"},
 
