@@ -208,7 +208,7 @@
 								var magnitude=Info[match].magnitude;
 								for(var unit in Units[magnitude])
 								{
-									if(Units[magnitude][unit]==1)
+									if(Units[magnitude][unit]===1)    // believe it meant to be matching multiplier //no: it should be 1, because we want the original unit
 									{
 										currentUnit=unit;
 										break;

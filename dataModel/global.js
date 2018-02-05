@@ -83,12 +83,7 @@ var Global = {
 			wsa_pmp_volt:0, //Measured pump voltage V
 			wsa_pmp_amps:0, //Measured pump current Amp
 			c_wsa_pmp_pw:function(){return this.wsa_pmp_flow*this.wsa_pmp_head*9.81*1000*0.001/1000},
-			wsa_KPI_std_nrg_cons:function(){return (this.wsa_nrg_pump+this.wsa_nrg_turb)/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
-			// improv list fix for #10
-			wsa_KPI_std_elec_eff:function(){
-				var val = 100 * this.c_wsa_pmp_pw() / (this.wsa_pmp_volt * this.wsa_pmp_amps * 1.64 / 1000);
-				return val;
-			},
+			wsa_KPI_std_nrg_cons:function(){return this.wsa_nrg_pump/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
 			wsa_KPI_un_head_loss:function(){return 1000*(this.wsa_pmp_head-this.wsa_sta_head)/this.wsa_main_len},
 			wsa_KPI_nrg_elec_eff:function(){return this.c_wsa_pmp_pw()/(this.wsa_pmp_volt*this.wsa_pmp_amps*1.64/1000)*100},
 			//producing energy?
@@ -123,7 +118,7 @@ var Global = {
       wsa_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
       wsa_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wsa_KPI_nrg_estm_sav()},
       wsa_KPI_std_nrg_newp:function(){return 0.2725/this.wsa_pmp_exff},
-      wsa_KPI_nrg_cons_new:function(){return this.wsa_vol_pump*this.wsa_KPI_std_nrg_newp()/100*this.wsa_pmp_head},
+      wsa_KPI_nrg_cons_new:function(){return this.wsa_KPI_nrg_elec_eff()/this.wsa_pmp_exff*this.wsa_nrg_pump},
       wsa_KPI_nrg_estm_sav:function(){return this.wsa_nrg_cons-this.wsa_KPI_nrg_cons_new()},
 		},
 
@@ -257,7 +252,7 @@ var Global = {
 			wsd_KPI_water_losses:function(){return Math.max(0,1000*(this.wsd_vol_dist-this.wsd_auth_con)/(this.wsd_main_len))/Global.General.Years()},
 			wsd_KPI_nrg_elec_eff:function(){return this.c_wsd_pmp_pw()/(this.wsd_pmp_volt*this.wsd_pmp_amps*1.64/1000)*100},
 			wsd_KPI_std_nrg_newp:function(){return 0.2725/this.wsd_pmp_exff},
-			wsd_KPI_nrg_cons_new:function(){return this.wsd_vol_pump*this.wsd_KPI_std_nrg_newp()/100*this.wsd_pmp_head},
+            wsd_KPI_nrg_cons_new:function(){return this.wsd_KPI_nrg_elec_eff()/this.wsd_pmp_exff*this.wsd_nrg_pump},
 			wsd_KPI_nrg_estm_sav:function(){return this.wsd_nrg_cons-this.wsd_KPI_nrg_cons_new()},
 			wsd_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wsd_KPI_nrg_estm_sav()},
 			//wsd GHG
