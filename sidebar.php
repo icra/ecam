@@ -157,7 +157,7 @@
 			<tr><td><a href=opps.php><?php write("#opportunities")?></a>
 			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
 			<!--go to variable-->
-			<tr><th><?php write('#go_to_variable_code')?> 
+			<tr><th><?php write('#go_to_variable_code')?>
 			<tr><td>
 				<form id=go_to method=GET action="variable.php">
 					<input name=id placeholder="ws_KPI_GHG">
@@ -173,6 +173,8 @@
 					}
 				</style>
 			</tr>
+      <tr><th>Cache
+      <tr><td><button onclick="window.location.reload(true)">Reset cache</button>
 		</table>
 		<ul style="
 			text-align:left;

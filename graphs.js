@@ -40,7 +40,7 @@ Graphs.graph1=function(withTable,container) {
 	]);
 
 	//options
-	var options={ 
+	var options={
 		height:250,
 		legend:{position:'left'},
 		title:translate("ghg_emissions_by_system")+" ("+format(ws+ww)+" kg CO2e)",
@@ -71,9 +71,13 @@ Graphs.graph1=function(withTable,container) {
 		var buttons=document.createElement('div');
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
+    var checked=withTable ? "checked" : "";
 		buttons.innerHTML=""+
-			"<button class=left   onclick=Graphs.graph1("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
-			"<button class=middle onclick=Graphs.graph1("+withTable.toString()+",'"+container+"') disabled>"+translate('system')+"</button>"+
+      "<label>"+
+			"<input type=checkbox "+checked+" onclick=Graphs.graph1("+(!withTable).toString()+",'"+container+"')>"+translate('table')+
+      "</label>"+
+      "&emsp;"+
+			"<button class=left onclick=Graphs.graph1("+withTable.toString()+",'"+container+"') disabled>"+translate('system')+"</button>"+
 			"<button class=middle onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>"+translate('source')+"</button>"+
 			"<button class=middle onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>"+translate('source_detailed')+"</button>"+
 			"<button class=right  onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>"+translate('unfccc_categories')+"</button>"+
@@ -219,9 +223,13 @@ Graphs.ghg_by_source=function(withTable,container) {
 		var buttons=document.createElement('div');
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
+    var checked=withTable ? "checked" : "";
 		buttons.innerHTML=""+
-			"<button class=left   onclick=Graphs.ghg_by_source("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
-			"<button class=middle onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>"+translate('system')+"</button>"+
+      "<label>"+
+      "<input type=checkbox "+checked+" onclick=Graphs.ghg_by_source("+(!withTable).toString()+",'"+container+"')>"+translate('table')+
+      "</label>"+
+      "&emsp;"+
+			"<button class=left onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>"+translate('system')+"</button>"+
 			"<button class=middle onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"') disabled>"+translate('source')+"</button>"+
 			"<button class=middle onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>"+translate('source_detailed')+"</button>"+
 			"<button class=right  onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>"+translate('unfccc_categories')+"</button>"+
@@ -362,9 +370,13 @@ Graphs.ghgSources=function(withTable,container) {
 		var buttons=document.createElement('div');
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
+    var checked=withTable ? "checked" : "";
 		buttons.innerHTML=""+
-			"<button class=left   onclick=Graphs.ghgSources("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
-			"<button class=middle onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>"+translate('system')+"</button>"+
+      "<label>"+
+      "<input type=checkbox "+checked+" onclick=Graphs.ghgSources("+(!withTable).toString()+",'"+container+"')>"+translate('table')+
+      "</label>"+
+      "&emsp;"+
+			"<button class=left onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>"+translate('system')+"</button>"+
 			"<button class=middle onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>"+translate('source')+"</button>"+
 			"<button class=middle onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"') disabled>"+translate('source_detailed')+"</button>"+
 			"<button class=right  onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"')>"+translate('unfccc_categories')+"</button>"+
@@ -471,9 +483,13 @@ Graphs.unfccc=function(withTable,container){
 		var buttons=document.createElement('div');
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
+    var checked=withTable ? "checked" : "";
 		buttons.innerHTML=""+
-			"<button class=left    onclick=Graphs.unfccc("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
-			"<button class=middle  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>"+translate('system')+"</button>"+
+      "<label>"+
+      "<input type=checkbox "+checked+" onclick=Graphs.unfccc("+(!withTable).toString()+",'"+container+"')>"+translate('table')+
+      "</label>"+
+      "&emsp;"+
+			"<button class=left  onclick=Graphs.graph1("+withTable.toString()+",'"+container+"')>"+translate('system')+"</button>"+
 			"<button class=middle  onclick=Graphs.ghg_by_source("+withTable.toString()+",'"+container+"')>"+translate('source')+"</button>"+
 			"<button class=middle  onclick=Graphs.ghgSources("+withTable.toString()+",'"+container+"')>"+translate('source_detailed')+"</button>"+
 			"<button class=right   onclick=Graphs.unfccc("+withTable.toString()+",'"+container+"') disabled>"+translate('unfccc_categories')+"</button>"+
@@ -583,8 +599,11 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 		var buttons=document.createElement('div');
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
+    var checked=withTable ? "checked" : "";
 		buttons.innerHTML=""+
-			"<button class=single onclick=Graphs.ghg_by_stage("+(!withTable).toString()+",'"+container+"','"+prefix+"')>"+translate('table')+"</button>"+
+      "<label>"+
+      "<input type=checkbox "+checked+" onclick=Graphs.ghg_by_stage("+(!withTable).toString()+",'"+container+"')>"+translate('table')+
+      "</label>"+
 		"";
 	})();
 
@@ -647,7 +666,7 @@ Graphs.graph4=function(withTable,container) {
 	]);
 
 	//options
-	var options={ 
+	var options={
 		height:250,
 		legend:{position:'left'},
 		title:translate('ghg_emissions_by_stage')+" ("+format(sum)+" kg CO2e)",
@@ -682,8 +701,11 @@ Graphs.graph4=function(withTable,container) {
 		var buttons=document.createElement('div');
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
+    var checked=withTable ? "checked" : "";
 		buttons.innerHTML=""+
-			"<button class=single onclick=Graphs.graph4("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
+      "<label>"+
+      "<input type=checkbox "+checked+" onclick=Graphs.graph4("+(!withTable).toString()+",'"+container+"')>"+translate('table')+
+      "</label>"+
 		"";
 	})();
 
@@ -761,8 +783,11 @@ Graphs.graph2=function(withTable,container) {
 		var buttons=document.createElement('div');
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
+    var checked=withTable ? "checked" : "";
 		buttons.innerHTML=""+
-			"<button class=single onclick=Graphs.graph2("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
+      "<label>"+
+      "<input type=checkbox "+checked+" onclick=Graphs.graph2("+(!withTable).toString()+",'"+container+"')>"+translate('table')+
+      "</label>"+
 		"";
 	})();
 
@@ -845,9 +870,13 @@ Graphs.graph5=function(withTable,container) {
 		var buttons=document.createElement('div');
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
+    var checked=withTable ? "checked" : "";
 		buttons.innerHTML=""+
-			"<button class=left   onclick=Graphs.graph5("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
-			"<button class=middle onclick=Graphs.graph5("+withTable.toString()+",'"+container+"') disabled>"+translate('stage')+"</button>"+
+      "<label>"+
+      "<input type=checkbox "+checked+" onclick=Graphs.graph5("+(!withTable).toString()+",'"+container+"')>"+translate('table')+
+      "</label>"+
+      "&emsp;"+
+			"<button class=left onclick=Graphs.graph5("+withTable.toString()+",'"+container+"') disabled>"+translate('stage')+"</button>"+
 			"<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"')>"+translate('substage')+"</button>"+
 		"";
 	})();
