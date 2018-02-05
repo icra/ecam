@@ -60,7 +60,7 @@ var Global = {
 		ws_vol_fuel:function(){return this.Abstraction.wsa_vol_fuel+this.Treatment.wst_vol_fuel+this.Distribution.wsd_vol_fuel},
 		ws_SL_serv_pop:function(){return 100*Global.Water.ws_serv_pop/Global.Water.ws_resi_pop},
 		ws_SL_nrg_cost:function(){return 100*this.ws_nrg_cost/this.ws_run_cost},
-		ws_SL_auth_con:function(){return 1000*this.Distribution.wsd_auth_con/this.ws_serv_pop/Global.General.Years()},
+		ws_SL_auth_con:function(){return 1000*this.Distribution.wsd_auth_con/this.ws_serv_pop/Global.General.Days()},
 
 		"Abstraction":{
 			//no filter
