@@ -1,10 +1,13 @@
-ECAM v2.1 template for requesting new inputs / filters / outputs
+#ECAM v2.1 template for requesting new inputs / filters / outputs
 
-Example
+Minimal example
+---------------
 
-1. New filter: do you want to evaluate x?
+## 1. New filter:
 
-1.1. New inputs
+Do you want to evaluate x?
+
+### 1.1. New inputs
 
 <table>
   <TR><TH>CODE <TH>NAME            <TH>DEFAULT VALUE <TH>UNIT
@@ -12,7 +15,7 @@ Example
   <tr><td>i2   <td>sludge produced <td>0             <td>kg
 </table>
 
-1.2. New outputs
+### 1.2. New outputs
 
 <table>
   <TR><TH>CODE <TH>NAME              <TH>FORMULA <TH>UNIT
