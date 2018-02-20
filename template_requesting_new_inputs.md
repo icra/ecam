@@ -8,8 +8,8 @@ Example
 
 <table>
   <TR><TH>CODE <TH>NAME            <TH>DEFAULT VALUE <TH>UNIT
-  <tr><td>i1   <th>energy consumed <td>0             <td>kWh
-  <tr><td>i2   <th>sludge produced <td>0             <td>kg
+  <tr><td>i1   <td>energy consumed <td>0             <td>kWh
+  <tr><td>i2   <td>sludge produced <td>0             <td>kg
 </table>
 
 1.2. New outputs
