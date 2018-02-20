@@ -1,4 +1,4 @@
-#ECAM v2.1 template for requesting new inputs / filters / outputs
+# ECAM v2.1 template for requesting new inputs / filters / outputs
 
 Minimal example
 ---------------
