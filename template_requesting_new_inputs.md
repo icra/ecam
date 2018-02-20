@@ -16,5 +16,5 @@ Do you want to evaluate x?
 ### 1.2. New outputs
 <table>
   <TR><TH>CODE <TH>NAME              <TH>FORMULA <TH>UNIT
-  <tr><td>o1   <td>energy per sludge <td>i1/i2   <th>kWh/kg
+  <tr><td>o1   <td>energy per sludge <td>i1/i2   <td>kWh/kg
 </table>
