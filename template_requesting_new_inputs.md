@@ -1,7 +1,6 @@
-# ECAM v2.1 template for requesting new inputs / filters / outputs
+## template for requesting new inputs / filters / outputs
 
-Minimal example
----------------
+This is a minimal example that shows all the information necessary to add new inputs, filters, and outputs to ecam
 
 ## 1. New filter:
 
