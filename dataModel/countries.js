@@ -100,6 +100,7 @@ var Countries={
 	"Bolivia (Plurinational State of)":{ conv_kwh_co2:0.534996875 ,wwc_prot_con:20.44 , wwc_bod_pday:40,},
 	"Botswana":{ conv_kwh_co2:1.825675055 ,wwc_prot_con:23.36 , wwc_bod_pday:37,},
 	"Brazil":{ conv_kwh_co2:0.092643638 ,wwc_prot_con:30.66 , wwc_bod_pday:50,},
+	"Burkina Faso":{ conv_kwh_co2:0.693 ,wwc_prot_con:29.2 , wwc_bod_pday:37,},
 	"Cameroon":{ conv_kwh_co2:0.216568535 ,wwc_prot_con:21.17 , wwc_bod_pday:37,},
 	"Canada":{ conv_kwh_co2:0.179763325 ,wwc_prot_con:38.325 , wwc_bod_pday:60,},
 	"Chile":{ conv_kwh_co2:0.408614261 ,wwc_prot_con:32.12 , wwc_bod_pday:40,},
