@@ -2,83 +2,7 @@
 	<?php include'imports.php'?>
 	<script>
 		function init() {
-			Inh.updateDefaults();
-			Inh.showActive();
-			Caption.listeners();
-			updateResult();
-			//add listeners for onclick
-			(function(){
-				var inputs = document.querySelectorAll("#inputs tr[stage] td.input input[id]")
-				for(var i=0;i<inputs.length;i++)
-				{
-					inputs[i].onclick=function(){this.select()}
-				}
-			})();
-
-			//first input click depending on active stages
-			var first=(function(){
-				if(Global.Configuration.ActiveStages.water)
-					return document.querySelector('#inputs tr[stage=water] td.input input[id]');
-				if(Global.Configuration.ActiveStages.waste)
-					return document.querySelector('#inputs tr[stage=waste] td.input input[id]');
-			})();
-			if(first && first.value=="0") first.click()
-		}
-	</script>
-	<script>
-		var Inh = {}; //namespace
-		Inh.updateDefaults=function() {
-			var inputs=document.querySelectorAll('#inputs tr[stage] input[id]');
-			for(var i=0;i<inputs.length;i++) {
-				var input = inputs[i];
-				var field = input.id;
-
-				//set the longer description in the input <td> element
-				var prnt=input.parentNode.parentNode.childNodes[0];
-				try{
-					prnt.setAttribute('caption',translate(field+'_expla'));
-				}
-				catch(e){
-					console.log(prnt)
-				}
-
-				var L1 = field.search("ws")==0 ? "Water" : "Waste";
-				//the value we are going to put in the input
-				var value = Global[L1][field];
-				value/=Units.multiplier(field);
-				//set the value
-				input.value=format(value);
-			}
-		};
-
-		Inh.updateField=function(input) {
-			//get info from the input element
-			var field = input.id;
-			var value = parseFloat(input.value.replace(",","")); //replace commmas for copy paste easyness
-			value*=Units.multiplier(field);
-
-			//if value is not a number, set to zero
-			if(isNaN(value))value=0;
-
-			//get L1 name: "Water" or "Waste"
-			var L1 = field.search("ws")==0 ? "Water" : "Waste";
-
-			//update Global
-			if(Global[L1][field]===undefined){alert('field '+field+' undefined');return;}
-			Global[L1][field]=value;
-			init();
-		};
-
-		Inh.showActive=function() {
-			['water','waste'].forEach(function(stage) {
-				if(Global.Configuration.ActiveStages[stage]) {
-					var trs=document.querySelectorAll('#inputs tr[stage='+stage+']');
-					for(var i=0;i<trs.length;i++)
-						trs[i].classList.remove('hidden');
-				}else{
-					document.querySelector('#inputs tr[indic='+stage+']').classList.remove('hidden');
-        }
-			});
+			updateResult(); //update cookies
 		}
 	</script>
 </head><body onload=init()>
@@ -122,18 +46,19 @@
 		<!--WATER-->
 		<tr><th colspan=3 style=background:#0aaff1>
 			<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
-			<tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?> <td class=input><input id='ws_resi_pop' onchange="Inh.updateField(this)"> <td><small><?php write('#birds_people')?>
-			<tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?> <td class=input><input id='ws_serv_pop' onchange="Inh.updateField(this)"> <td><small><?php write('#birds_people')?>
+			<tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?><td class=input><input id='ws_resi_pop'><td><small><?php write('#birds_people')?>
+			<tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?><td class=input><input id='ws_serv_pop'><td><small><?php write('#birds_people')?>
 			<tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
-
+    </tr>
 		<!--WASTEWATER-->
 		<tr><th colspan=3 style=background:#d71d24>
 			<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
-			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?><td class=input><input id='ww_resi_pop' onchange="Inh.updateField(this)"> <td><small><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td><?php write('#ww_conn_pop_descr')?><td class=input><input id='ww_conn_pop' onchange="Inh.updateField(this)"> <td><small><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td><?php write('#pop_ww_serv_pop')?><td class=input><input id='ww_serv_pop' onchange="Inh.updateField(this)">   <td><small><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td><?php write('#pop_ww_onsi_pop')?><td class=input><input id='ww_onsi_pop' onchange="Inh.updateField(this)">   <td><small><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?><td class=input><input id='ww_resi_pop'><td><small><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#ww_conn_pop_descr')?><td class=input><input id='ww_conn_pop'><td><small><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#pop_ww_serv_pop')?>  <td class=input><input id='ww_serv_pop'><td><small><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#pop_ww_onsi_pop')?>  <td class=input><input id='ww_onsi_pop'><td><small><?php write('#birds_people')?>
 			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
+    </tr>
 	</table>
 </div>
 
@@ -147,3 +72,81 @@
   </button>
 </div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
+
+<script>
+  //populate page onload
+  (function updateDefaults() {
+    var inputs=document.querySelectorAll('#inputs tr[stage] input[id]');
+    for(var i=0;i<inputs.length;i++) {
+      var input = inputs[i];
+      var field = input.id;
+
+      //set the longer description in the input <td> element
+      var prnt=input.parentNode.parentNode.childNodes[0];
+      try{
+        prnt.setAttribute('caption',translate(field+'_expla'));
+      } catch(e){ console.log(prnt) }
+
+      var L1 = field.search("ws")==0 ? "Water" : "Waste";
+      //the value we are going to put in the input
+      var value = Global[L1][field];
+      value/=Units.multiplier(field);
+      //set the value
+      input.value=format(value);
+    }
+  })();
+
+  Caption.listeners();
+
+  (function showActive() {
+    ['water','waste'].forEach(function(stage) {
+      if(Global.Configuration.ActiveStages[stage]) {
+        var trs=document.querySelectorAll('#inputs tr[stage='+stage+']');
+        for(var i=0;i<trs.length;i++)
+          trs[i].classList.remove('hidden');
+      }else{
+        document.querySelector('#inputs tr[indic='+stage+']').classList.remove('hidden');
+      }
+    });
+  })();
+
+  //add event listeners to inputs
+  (function(){
+    var els=document.querySelectorAll('#inputs input[id]');
+    for(var i=0; i<els.length; i++){
+      els[i].addEventListener('change',function(){
+        //get info from the input element
+        var field = this.id;
+        var value = parseFloat(this.value); //replace commmas for copy paste easyness
+        value*=Units.multiplier(field);
+
+        //if value is not a number, set to zero
+        if(isNaN(value))value=0;
+
+        //get L1 name: "Water" or "Waste"
+        var L1 = locateVariable(field).level;
+
+        //update Global
+        if(Global[L1][field]===undefined){alert('field '+field+' undefined');return;}
+        Global[L1][field]=value;
+        init();
+      });
+      els[i].addEventListener('focus', function(){ this.value=getVariable(this.id) });
+      els[i].addEventListener('blur',  function(){ this.value=format(getVariable(this.id)) });
+      els[i].addEventListener('click', function(){ this.select() });
+    }
+  })();
+
+  //first input fake click depending on active stages
+  (function(){
+    var first=(function(){
+      if(Global.Configuration.ActiveStages.water)
+        return document.querySelector('#inputs tr[stage=water] td.input input[id]');
+      if(Global.Configuration.ActiveStages.waste)
+        return document.querySelector('#inputs tr[stage=waste] td.input input[id]');
+    })();
+    if(first && getVariable(first.id)==0){
+      first.dispatchEvent(new CustomEvent('click'));
+    }
+  })();
+</script>

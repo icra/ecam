@@ -8,20 +8,18 @@ none;">
 
 <script>
 	/** Stringify Global object and display it */
-	/** COOKIE SIZE LIMIT FOR GOOGLE CHROME IS CLOSE TO 8170 CHARACTERS */
+	/** COOKIE SIZE LIMIT FOR GOOGLE CHROME IS ~ 8170 CHARACTERS */
 	function updateResult() {
 		document.getElementById('currentGlobal').innerHTML=JSON.stringify(Global,null,"  ");
-
 		/**
 		  *
 		  * Compress Global (using LZString library)
 		  *
 		  */
-
-		//JSON as a string
+		//stringify 'Global'
 		var uncompressed = JSON.stringify(Global);
 
-		//Compress the string
+		//compress the string
 		var compressed = LZString.compressToEncodedURIComponent(uncompressed); 
 
 		//Set cookie GLOBAL as compressed
@@ -35,7 +33,6 @@ none;">
 		setCookie("wasteTre",LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Waste.Treatment))); 
 		setCookie("wasteDis",LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Waste.Discharge))); 
 
-		//summary (debug mode)
 		//cookieSummary();
 	}
 
@@ -43,15 +40,15 @@ none;">
 	function cookieSummary(){
 		if(getCookie('GLOBAL')){
 			console.log( ""+
-				"[*] Global chars length (max is 4000)\n"+
+				"[*] Cookies chars lengths:\n"+
 				" |--* Uncompressed : "+JSON.stringify(Global).length+" \n"+
 				" |--* Compressed   : "+getCookie('GLOBAL').length+"\n"+
-				" |--* waterAbs   : "+getCookie('waterAbs').length+"\n"+
-				" |--* waterTre   : "+getCookie('waterTre').length+"\n"+
-				" |--* waterDis   : "+getCookie('waterDis').length+"\n"+
-				" |--* wasteCol   : "+getCookie('wasteCol').length+"\n"+
-				" |--* wasteTre   : "+getCookie('wasteTre').length+"\n"+
-				" |--* wasteDis   : "+getCookie('wasteDis').length+"\n"+
+				" |--* waterAbs     : "+getCookie('waterAbs').length+"\n"+
+				" |--* waterTre     : "+getCookie('waterTre').length+"\n"+
+				" |--* waterDis     : "+getCookie('waterDis').length+"\n"+
+				" |--* wasteCol     : "+getCookie('wasteCol').length+"\n"+
+				" |--* wasteTre     : "+getCookie('wasteTre').length+"\n"+
+				" |--* wasteDis     : "+getCookie('wasteDis').length+"\n"+
 			"");
 		}
 	}

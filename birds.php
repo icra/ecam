@@ -53,6 +53,7 @@
 	<style>
 		b[caption]{cursor:default}
 	</style>
+
 	<script>
 		function init() {
 			BEV.showActive();
@@ -94,8 +95,7 @@
 		}
 
 		//Specific behaviour for each formula when user inputs data
-		BEV.updateField=function(input)
-		{
+		BEV.updateField=function(input) {
 			//get info from the input element
 			var field = input.id;
 			var value = parseFloat(input.value.replace(",","")); //replace commmas for copy paste easyness
@@ -129,8 +129,7 @@
 		}
 
 		//Display default values from the table
-		BEV.updateDefaults=function()
-		{
+		BEV.updateDefaults=function() {
 			var inputs = document.querySelectorAll('#inputs input');
 			for(var i=0; i<inputs.length; i++)
 			{
@@ -162,8 +161,7 @@
 		}
 
 		//producing biogas and valorizing biogas default values
-		BEV.defaultQuestions=function() 
-		{
+		BEV.defaultQuestions=function() {
 			//valorizing
 			var val = Global.Configuration["Yes/No"].wwt_valorizing_biogas;
 			//producing
@@ -184,13 +182,11 @@
 			}
 		}
 
-		BEV.defaultSludge=function()
-		{
+		BEV.defaultSludge=function() {
 			document.querySelector('#sludge_estimation').value=Global.Configuration.Selected.sludge_estimation_method;
 		}
 
-		BEV.updateQuestion=function(code,newValue)
-		{
+		BEV.updateQuestion=function(code,newValue) {
 			Global.Configuration['Yes/No'][code]=newValue;
 			init();
 		}
@@ -210,12 +206,9 @@
 			BEV.hideFuelConsumed();
 		}
 
-		BEV.hideFuelConsumed=function()
-		{
-			if(Global.General.anyFuelEngines==0)
-			{
-				['ws_vol_fuel','ww_vol_fuel'].forEach(function(field)
-				{
+		BEV.hideFuelConsumed=function() {
+			if(Global.General.anyFuelEngines==0) {
+				['ws_vol_fuel','ww_vol_fuel'].forEach(function(field) {
 					document.querySelector('#inputs tr[stage] input[id='+field+']').parentNode.parentNode.classList.add('hidden');
 				});
 			}
@@ -223,8 +216,7 @@
 	</script>
 	<script>
 		//"fake" input that updates an output
-		BEV.updateOutput=function(input)
-		{
+		BEV.updateOutput=function(input) {
 			var field=input.id;
 			var value=parseFloat(input.value)*Units.multiplier(field);
 			//spred the value among the stages
@@ -258,9 +250,7 @@
 			init();
 		}
 	</script>
-</head><body>
-
-<center>
+</head><body><center>
 	<!--sidebar--><?php include'sidebar.php'?>
 	<!--navbar--><?php include'navbar.php'?>
 	<!--linear--><?php include'linear.php'?>
@@ -512,8 +502,12 @@
 		</div>
 	</div>
 </div>
+
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
+
 <script>
-	google.charts.load('current',{'packages':['corechart','gauge','bar']});
-	google.charts.setOnLoadCallback(init)
+  if(google){
+    google.charts.load('current',{'packages':['corechart','gauge','bar']});
+    google.charts.setOnLoadCallback(init)
+  }
 </script>
