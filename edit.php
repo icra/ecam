@@ -22,21 +22,9 @@
       line-height:2.1em;
       text-align:left;
     }
-    <?php
-      //color in red wastewater stages links
-      if($level=="Waste"){
-        ?>
-        h1 a:not([id]) {color:#d71d24 !important}
-        table#inputs th:not(.tableHeader) {background:#d71d24}
-        table#substages th {background:#d71d24}
-        table#substages td.variableCode {background:#d71d24}
-        table#substages td.variableCode.output {background:#c9ab98}
-        #outputs a,#outputs a:visited{color:#d71d24}
-        #nrgOutputs a,#nrgOutputs a:visited{color:#d71d24}
-        <?php
-      }
-    ?>
+  </style>
 
+  <style>
     /*TAGS*/
     .advanced {
       float:right;
@@ -136,6 +124,32 @@
       content:"not used";
     }
   </style>
+
+  <style>
+    <?php
+      function getL1color(){
+        global $level;
+        if($level=="Waste") 
+          echo "#d71d24";
+        else                
+          echo "#00aff1";
+      }
+    ?>
+    table#inputs th:not(.tableHeader),
+    table#substages th,
+    table#substages td.variableCode {
+      background:<?php getL1color()?>;
+    }
+
+    h1 a:not([id]),
+    #outputs a,#outputs a:visited,
+    #nrgOutputs a,#nrgOutputs a:visited{
+      color:<?php getL1color()?> !important;
+    }
+
+    table#substages td.variableCode.output {background:#c9ab98}
+  </style>
+
   <script>
     <?php
       //establish the stage pointers we are going to be focused
@@ -627,6 +641,7 @@
       init();
     }
   </script>
+
   <script>
     //generate cookies for div.card folding
     //called after divs are clicked
@@ -755,7 +770,7 @@
       <b>Inputs &amp; Outputs</b> &mdash;
       <?php write('#assessment_period')?>
       <b class=number id=Global_General_Days></b>
-      <script>document.querySelector('#Global_General_Days').innerHTML=Global.General.Days()</script>
+      <script>document.querySelector('#Global_General_Days').innerHTML=format(Global.General.Days())</script>
       <?php write('#days')?>
       <?php
         //population
@@ -767,7 +782,7 @@
           write("#$serv_pop"."_descr");
           echo "
             <b class=number id=Global_level_serv_pop></b> |
-            <script>document.querySelector('#Global_level_serv_pop').innerHTML=Global.$level.$serv_pop</script>
+            <script>document.querySelector('#Global_level_serv_pop').innerHTML=format(Global.$level.$serv_pop)</script>
           ";
 
           //connected population (only for wastewater)
@@ -775,7 +790,7 @@
             write('#ww_conn_pop_descr');
             echo "
               <b class=number id=Global_level_conn_pop></b> |
-              <script>document.querySelector('#Global_level_conn_pop').innerHTML=Global.Waste.ww_conn_pop</script>
+              <script>document.querySelector('#Global_level_conn_pop').innerHTML=format(Global.Waste.ww_conn_pop)</script>
             ";
           }
 
@@ -785,7 +800,7 @@
           echo "
             <b class=number id=Global_level_resi_pop></b>
             <script>
-              document.querySelector('#Global_level_resi_pop').innerHTML=Global.$level.$resi_pop;
+              document.querySelector('#Global_level_resi_pop').innerHTML=format(Global.$level.$resi_pop);
             </script>
           ";
         }
@@ -815,7 +830,6 @@
           <tr><th colspan=7 class=tableHeader>
             <?php write('#OUTPUTS')?> &mdash;
             <?php write('#GHG emissions')?>
-            (kg CO2)
           <tr>
             <th><?php write('#Origin')?>
             <th>kg CO<sub>2</sub><br><?php write('#whole period')?>

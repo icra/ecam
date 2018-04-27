@@ -1,5 +1,3 @@
-
-
 <!--wwt are you producing biogas-->
 <tr stage=waste class=hidden>
 	<td><?php write('#wwt_producing_biogas')?>?

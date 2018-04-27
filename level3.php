@@ -528,9 +528,6 @@
       newCell.colSpan=4+substages.length;
       newCell.innerHTML="<i style=color:#999>~No active outputs</i>";
     }
-
-    //final row empty
-    t.insertRow(-1).insertCell(-1).colSpan=3+substages.length;
   }
 </script>
 
@@ -581,10 +578,6 @@
           <label onclick="event.stopPropagation();init()"><input type=checkbox id=showGHGss>
             <?php write('#Show GHG')?>
           </label>
-        </div>
-
-        <!--show question tags checkbox-->
-        <div style=float:left;margin-bottom:0.5em>
           <label onclick="event.stopPropagation();init()"><input type=checkbox id=showQstTags>
             <?php write('#Filter tags')?>
           </label>

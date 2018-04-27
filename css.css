@@ -1,10 +1,16 @@
-body{margin:0;font-family:'Open Sans','Helvetica',sans-serif;overflow-y:scroll;font-size:13px;}
+body{
+  margin:0;
+  font-family:Charter,serif;
+  font-family:'Open Sans','Helvetica',sans-serif;
+  overflow-y:scroll;
+  font-size:13px;
+}
 h1{margin:0;font-size:18px;}
 a{font-weight:bold;text-decoration:none}
-a,a:visited,a:hover,a:active{color:#00AFF1;font-weight:normal}
+a,a:hover,a:active{color:#2b6488;font-weight:normal}
 a:hover{text-decoration:underline}
 button{padding:0.3em;height:2.3em}
-h1,h2,h3{padding:0.6em;color:#00aff1;font-weight:normal}
+h1,h2,h3{padding:0.6em;color:#2b6488;font-weight:normal}
 h4{font-weight:normal;margin:1.2em;font-size:15px;color:#58595b}
 legend{color:#58595b;font-size:16px}
 table{border-collapse:collapse;}
@@ -16,6 +22,7 @@ table{border-collapse:collapse;}
 .tbd {background:red;padding:0.5em;text-align:center}
 #fixedTopBar{z-index:9}
 #sidebar{z-index:99}
+[onclick]{cursor:pointer}
 
 /*default cells*/
 th,td{border:1px solid #aaa;padding:0.35em;}

@@ -140,7 +140,7 @@
 <!--root container-->
 <div>
 	<!--substage table-->
-	<table id=substage style=margin:auto;margin-top:0.5em> <tr>
+	<table id=substage style="margin:0.5em auto"> <tr>
 		<th><?php write('#Variable')?>
 		<th><?php write('#Name')?>
 		<th><?php write('#Type')?>

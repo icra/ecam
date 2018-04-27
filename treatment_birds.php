@@ -1,7 +1,6 @@
 <select id=main_treatment_type onchange=main_treatment_type()>
 	<script>
-		for(var type in Tables.wwt_type_tre)
-		{
+		for(var type in Tables.wwt_type_tre) {
 			var value=Tables.wwt_type_tre[type].value;
 			document.write("<option value="+value+">"+translate(type)+"</option>");
 		}
@@ -9,8 +8,7 @@
 </select>
 
 <script>
-	function main_treatment_type()
-	{
+	function main_treatment_type() {
 		var value=document.querySelector('#main_treatment_type').value
 
 		//set treatment type in wwt
