@@ -1,3 +1,2 @@
 #!/bin/bash
-
-ssh ecam@wacclim.org 'git pull'
+#ssh ecam@wacclim.org 'git pull'

@@ -46,7 +46,7 @@
 ?>
 
 <div class=buttonsGraph><!--
-	--><button class="left active" onclick="buttonsGraph(this);Graphs.ghg_by_stage(false,'graph','<?php echo getPrefix()?>')">
+	--><button class="left" onclick="buttonsGraph(this);Graphs.ghg_by_stage(false,'graph','<?php echo getPrefix()?>')">
 		<?php write('#GHG')?>
 	</button><!--
 	--><button class="right" onclick="buttonsGraph(this);Graphs.graph7(false,'graph')">

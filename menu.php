@@ -10,7 +10,6 @@
 		}
 	</style>
 
-	<div class=flex>
 	<!--new-->
 	<button class="button add" onclick=newSystem() style=margin-left:0>
 		<?php write('#new')?>
@@ -32,7 +31,7 @@
 				<?php write('#save_as')?>
 				<script>document.write(" '"+Global.General.Name+".json'")</script>
 			</button>
-			</div>
+
 			<div class=flex style="padding-top:0">
 				<!--CLEAR-->
 				<button class="button delete" onclick=clearSystem() style=margin-left:0>

@@ -238,7 +238,9 @@
 			newCell.innerHTML="<?php write("#Current value")?>";
 			newCell=newRow.insertCell(-1);
 			newCell.style.fontSize="18px";
-			if(typeof(currentStage[id])=="function") {
+
+      //calculate value if it is an output
+			if(typeof(currentStage[id])=="function"){
 				newCell.innerHTML=(function() {
 					var unit=Info[id].magnitude=="Currency"?Global.General.Currency : Info[id].unit;
 					var currValue=currentStage[id]()/Units.multiplier(id);
@@ -247,61 +249,28 @@
 					newCell.style.cursor='help';
 					return currValueF+" &emsp;<span class=unit>"+unit+"</span>";
 				})();
-			}
-			else {
+			}else{
 				newCell.innerHTML=format(currentStage[id]/Units.multiplier(id));
-
-				//get substages
-				if(typeof(currSubstage)=="object" && currSubstage.length > 1)
-				{
-					newCell.setAttribute('caption','Go to the Substages table to modify this input');
-
-					//dump all substage values in a table inside newCell
-					(function(){
-						var subsTable=document.createElement('table');
-						newCell.appendChild(subsTable);
-						subsTable.style.fontSize="10px";
-						subsTable.style.marginTop="5px";
-
-						//add header
-						var s_newRow=subsTable.insertRow(-1);
-						s_newRow.insertCell(-1).outerHTML="<td colspan=2>This input is the sum of:"
-
-						var n=currSubstage.length;
-						for(var i=0;i<n;i++){
-							var s_newRow=subsTable.insertRow(-1)
-							s_newRow.insertCell(-1).innerHTML="<a href=substage.php?level="+level+"&sublevel="+sublevel+"&index="+i+">Substage "+(i+1)+" ("+currSubstage[i].name+")</a>";
-							s_newRow.insertCell(-1).innerHTML=currSubstage[i][id]/Units.multiplier(id);
-						}
-					})();
-				}
-				else{
-					newCell.className='input'
-					//if input has magnitude Option
-					if(Info[id].magnitude=="Option")
-					{
-						var select=document.createElement('select');
-						newCell.innerHTML="";
-						newCell.appendChild(select);
-						select.setAttribute('onchange','currentStage["'+id+'"]=parseInt(this.value);init()')
-						for(var op in Tables[id])
-						{
-							var option = document.createElement('option');
-							var value = parseInt(Tables[id][op].value);
-							select.appendChild(option);
-							option.value=value;
-							option.innerHTML="("+value+") "+op;
-							if(currentStage[id]==value) 
-							{
-								option.selected=true;
-							}
-						}
-					}
-					else
-					{
-						newCell.setAttribute('onclick',"transformField(this)")
-					}
-				}
+        newCell.className='input'
+        //if input has magnitude Option
+        if(Info[id].magnitude=="Option") {
+          var select=document.createElement('select');
+          newCell.innerHTML="";
+          newCell.appendChild(select);
+          select.setAttribute('onchange','currentStage["'+id+'"]=parseInt(this.value);init()')
+          for(var op in Tables[id]) {
+            var option = document.createElement('option');
+            var value = parseInt(Tables[id][op].value);
+            select.appendChild(option);
+            option.value=value;
+            option.innerHTML="("+value+") "+op;
+            if(currentStage[id]==value) {
+              option.selected=true;
+            }
+          }
+        }else{
+          newCell.setAttribute('onclick',"transformField(this)")
+        }
 			}
 
 			//Magnitude
@@ -312,8 +281,7 @@
 			newRow.insertCell(-1).innerHTML=Info[id].magnitude
 
 			//Select units -- only inputs!
-			if(typeof(currentStage[id])=='number')
-			{
+			if(typeof(currentStage[id])=='number') {
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
@@ -341,6 +309,46 @@
 					return str
 				})();
 			}
+
+      //Values in substages
+      if(typeof(currSubstage)=="object" && currSubstage.length > 1) {
+        newRow=t.insertRow(-1);
+        newCell=newRow.insertCell(-1);
+        newCell.className='th';
+        newCell.innerHTML="<?php write('#Substages')?>";
+        newCell=newRow.insertCell(-1);
+
+        //copy all functions inside substages
+        Object.keys(currentStage).forEach(key=>{
+          if(typeof currentStage[key] == 'function'){
+            currSubstage.forEach(substage=>{
+              substage[key]=currentStage[key];
+            });
+          }
+        });
+
+        //show all substage values in a table
+        (function(){
+          var t=document.createElement('table');
+          newCell.appendChild(t);
+          t.style.fontSize="10px";
+          t.style.marginTop="5px";
+          var s_newRow=t.insertRow(-1);
+          var n=currSubstage.length;
+          for(var i=0;i<n;i++){
+            var s_newRow=t.insertRow(-1);
+            var value = (function(){
+              if(typeof(currentStage[id])=='function'){
+                return currSubstage[i][id]()/Units.multiplier(id);
+              }else{
+                return currSubstage[i][id]/Units.multiplier(id);
+              }
+            })();
+            s_newRow.insertCell(-1).innerHTML="<a href=substage.php?level="+level+"&sublevel="+sublevel+"&index="+i+">Substage "+(i+1)+" ("+currSubstage[i].name+")</a>";
+            s_newRow.insertCell(-1).innerHTML=format(value);
+          }
+        })();
+      }
 
 			//Is used to calculate
 			newRow=t.insertRow(-1)
@@ -389,8 +397,7 @@
 			})();
 
 			//If input:is used in benchmarking?
-			if(typeof(currentStage[id])=='number')
-			{
+			if(typeof(currentStage[id])=='number') {
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
@@ -412,8 +419,7 @@
 			}
 
 			//Is "id" benchmarked?
-			if(RefValues.hasOwnProperty(id))
-			{
+			if(RefValues.hasOwnProperty(id)) {
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
@@ -432,8 +438,7 @@
 			}
 
 			//Contains estimated data?
-			if(DQ.hasEstimatedData(id))
-			{
+			if(DQ.hasEstimatedData(id)) {
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
@@ -441,8 +446,7 @@
 				newRow.insertCell(-1).innerHTML="<span class=estimated>&#9888;</span> <?php write('#variable_this_equation_contains_estimated_data')?> ";
 			}
 
-			if(typeof(currentStage[id])=='number' && Global.Configuration.DataQuality[id]=="Estimated")
-			{
+			if(typeof(currentStage[id])=='number' && Global.Configuration.DataQuality[id]=="Estimated") {
 				newRow=t.insertRow(-1)
 				newCell=newRow.insertCell(-1)
 				newCell.className='th'
@@ -455,8 +459,7 @@
 		 * Add a <input> to a <td> cell to make modifications in the Global object
 		 * @param {element} element - the <td> cell
 		 */
-		function transformField(element)
-		{
+		function transformField(element) {
 			element.removeAttribute('onclick')
 			element.innerHTML=""
 			var input=document.createElement('input')
@@ -527,7 +530,7 @@
     (function(){
       var description=translate(id+'_descr')||translate(id);
       document.querySelector('#variable_id').innerHTML="<code>"+id+"</code>";
-      document.querySelector('#variable_descr').innerHTML="<p>"+description+"</p>";
+      document.querySelector('#variable_descr').innerHTML="<p style=margin-bottom:0>"+description+"</p>";
     })();
   </script>
 </h1>

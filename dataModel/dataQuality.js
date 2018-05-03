@@ -2,8 +2,7 @@
 var DQ={};
 
 //newValue can be "Actual" or "Estimated"
-DQ.update=function(field,newValue)
-{
+DQ.update=function(field,newValue) {
 	Global.Configuration.DataQuality[field]=newValue;
 	init();
 }

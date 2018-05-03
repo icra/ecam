@@ -1,20 +1,74 @@
 <!--included once in edit.php-->
 <style>
-  span[expanded]{transition:transform 0.15s;}
+  span[expanded]{float:left;transition:transform 0.15s;}
   span[expanded='0']{transform:rotate(-90deg);}
 </style>
 
 <script>
   //namespace to remember folding of questions (not saved to cookies)
-  var Expanded={
-    //"question":1,
-  }
+  var Expanded=Global.Configuration.Expanded;
 </script>
 
 <script>
   var level2 = {};//namespace
 
-  level2.toggleQuestionVisibility=function(btn,question) {
+  /** Redisplay table id=inputs */
+  level2.updateInputs=function() {
+    
+    console.time('updateInputs');
+
+    var t=document.getElementById('inputs');
+
+    while(t.rows.length>2){t.deleteRow(-1)}
+
+    //variables without questions associated
+    for(var field in CurrentLevel) {
+      /*check if current field is filtered*/
+      if(Questions.isInside(field)) continue;
+
+      /*check if CV*/
+      if(typeof(CurrentLevel[field])!="number") {
+        /*then, check if is calculated variable "c_xxxxxx" */
+        if(field.search(/^c_/)==-1) continue;
+      }
+
+      /*check if level3 only*/
+      if(Level3.list.indexOf(field)+1) continue;
+
+      //create input
+      level2.createInput(field,t);
+    }
+
+    //go over questions of this level, advanced=0
+    Questions.getQuestions(CurrentLevel).forEach(function(question) {
+      if(!Questions[question].advanced) {
+        level2.createQuestion(question,t);
+      }
+    });
+
+    //here check if table is empty (==t.rows.length is 2)
+    if(t.rows.length<3) {
+      var newCell=t.insertRow(-1).insertCell(-1);
+      newCell.colSpan=4;
+      newCell.innerHTML="<span style=color:#999>~All inputs inactive</span>";
+    }
+
+    //bottom line decoration with the color of W/WW
+    (function(){
+      var newRow=t.insertRow(-1);
+      var newTh=document.createElement('th');
+      newTh.setAttribute('colspan',4);
+      newTh.style.borderBottom='none';
+      newRow.appendChild(newTh);
+    })();
+
+    console.timeEnd('updateInputs');
+  }
+
+  level2.toggleQuestionVisibility=function(cell,question) {
+    var btn=cell.querySelector('span[expanded]');
+    if(!btn)return;
+
     var currentState=Expanded[question];
     if(currentState===undefined)currentState=1;//expanded by default
 
@@ -29,10 +83,12 @@
     //hide or show fields
     var trs=document.querySelectorAll('tr[field][question='+question+']');
     var newDisplay = currentState ? 'none':'';
-    for(var i=0;i<trs.length;i++)
-    {
+    for(var i=0;i<trs.length;i++) {
       trs[i].style.display=newDisplay;
     }
+
+    //remember "Expanded"
+    updateResult();
   }
 
   /**
@@ -42,7 +98,6 @@
   level2.transformField=function(element) {
     element.removeAttribute('onclick');
     element.innerHTML="";
-
     var field=element.parentNode.getAttribute('field');
     var input=document.createElement('input');
     element.appendChild(input);
@@ -53,14 +108,9 @@
     var multiplier = Units.multiplier(field);
     var currentValue = CurrentLevel[field]/multiplier;
     input.value=currentValue;
-
     input.onblur=function(){level2.updateField(field,input.value)};
-    input.onkeypress=function(event) {
-      if(event.which==13) input.onblur() //somehow creates an error but does not affect to anything
-    }
     input.onkeydown=function(event) {
-      function updateChart()
-      {
+      function updateChart() {
         //problem: this only updates if we are plotting inputs. WHY?
         var newValue=parseFloat(input.value);
         if(isNaN(newValue))newValue=0;
@@ -74,8 +124,7 @@
         //try to draw charts
         drawCharts();
       }
-      switch(event.which)
-      {
+      switch(event.which) {
         case 38: //up key
           if(!event.shiftKey){input.value++;updateChart();}
           break;
@@ -83,8 +132,7 @@
           if(!event.shiftKey){input.value--;updateChart();}
           break;
         case  9: //TAB
-          setTimeout(function()
-          {
+          setTimeout(function() {
             var el=document.querySelector('#inputs tr[field='+field+']').nextSibling.childNodes[2];
             if(el && el.onclick){el.onclick();}
           },100);
@@ -186,7 +234,6 @@
       var prettyFormula = Formulas.prettify(formula);
       newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
       newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
-      newRow.setAttribute('title',prettyFormula);
     }
     else {
       newRow.setAttribute('onmouseover','Formulas.hlOutputs("'+field+'",CurrentLevel,1)');
@@ -225,7 +272,7 @@
     }
     else {
       //field is calculated variable, so show formula
-      newCell.title=Formulas.prettify(CurrentLevel[field].toString());
+      newCell.setAttribute('caption',Formulas.prettify(CurrentLevel[field].toString()));
       newCell.style.textAlign="right";
     }
 
@@ -306,8 +353,6 @@
     //new row
     var newRow=t.insertRow(-1);
     newRow.setAttribute('question',question);
-    newRow.onmouseover=function(){hlQuestionFields(this.getAttribute('question'),1)}
-    newRow.onmouseout=function(){hlQuestionFields(this.getAttribute('question'),0)}
     newRow.style.background = checked ? "lightgreen" : "#eee";
 
     //1st cell: show question
@@ -315,13 +360,14 @@
     newCell.colSpan=2;
     newCell.style.paddingRight="1em";
     newCell.style.textAlign="right";
+    newCell.setAttribute('onclick','level2.toggleQuestionVisibility(this,"'+question+'")');
+
     newCell.innerHTML=(function() {
       var ret="";
-      if(checked)
-      {
+      if(checked) {
         var expanded=Expanded[question];
         if(expanded===undefined)expanded=1;//expanded by default
-        ret+="<span style=float:left;cursor:pointer onclick=level2.toggleQuestionVisibility(this,'"+question+"') expanded="+expanded+">&#9660;</span>"
+        ret+="<span expanded="+expanded+">&#9660;</span>"
       }
       ret+=translate(question)+"?";
       return ret;
@@ -336,10 +382,10 @@
       var str = ""+
       "<div class=flex style=justify-content:center>"+
       "  <div>"+
-      "    <label>"+translate('no')+" <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',0) "+checked_n+"></label>"+
+      "    <label>"+translate('no')+" <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',0); "+checked_n+"></label>"+
       "  </div>"+
       "  <div>"+
-      "    <label>"+translate('yes')+" <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',1) "+checked_y+"></label>"+
+      "    <label>"+translate('yes')+" <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',1); "+checked_y+"></label>"+
       "  </div>"+
       "</div>"+
       "";
@@ -350,59 +396,11 @@
     if(checked) {
       Questions[question].variables.forEach(function(field) {
         /*check if level3 only*/
-        if((Level3.list.indexOf(field)+1)==0)
-        {
+        if((Level3.list.indexOf(field)+1)==0) {
           level2.createInput(field,table,question);
         }
       });
     }
-  }
-
-  /** Redisplay table id=inputs */
-  level2.updateInputs=function() {
-    var t=document.getElementById('inputs');
-    while(t.rows.length>2){t.deleteRow(-1)}
-
-    //variables without questions associated
-    for(var field in CurrentLevel) {
-      /*check if current field is filtered*/
-      if(Questions.isInside(field)) continue;
-
-      /*check if CV*/
-      if(typeof(CurrentLevel[field])!="number") {
-        /*then, check if is calculated variable "c_xxxxxx" */
-        if(field.search(/^c_/)==-1) continue;
-      }
-
-      /*check if level3 only*/
-      if(Level3.list.indexOf(field)+1) continue;
-
-      //create input
-      level2.createInput(field,t);
-    }
-
-    //go over questions of this level, advanced=0
-    Questions.getQuestions(CurrentLevel).forEach(function(question) {
-      if(!Questions[question].advanced) {
-        level2.createQuestion(question,t);
-      }
-    });
-
-    //here check if table is empty (==t.rows.length is 2)
-    if(t.rows.length<3) {
-      var newCell=t.insertRow(-1).insertCell(-1);
-      newCell.colSpan=4;
-      newCell.innerHTML="<span style=color:#999>~All inputs inactive</span>";
-    }
-
-    //bottom line decoration with the color of W/WW
-    (function(){
-      var newRow=t.insertRow(-1);
-      var newTh=document.createElement('th');
-      newTh.setAttribute('colspan',4);
-      newTh.style.borderBottom='none';
-      newRow.appendChild(newTh);
-    })();
   }
 
   /**

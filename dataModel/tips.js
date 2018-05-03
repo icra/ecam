@@ -7,7 +7,6 @@ var Tips=[
 	"Click on the 'untitled' substage header to change its name",
 	"Move the mouse over inputs to highlight related outputs",
 	"Move the mouse over outputs to highlight related inputs",
-	"Move the mouse over active questions to highlight related inputs and outputs",
 	"Use fullscreen mode in your browser to work more comfortably",
 	"Move the mouse over an output to see its formula",
 ];

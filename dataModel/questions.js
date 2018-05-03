@@ -17,6 +17,7 @@
 		],
 	},
 */
+
 var Questions={
 	//wsa
 		"wsa_engines":{
@@ -31,6 +32,15 @@ var Questions={
 			advanced:0,
 			otherQuestions:[],
 		},
+
+    "wsa_producing_energy":{
+      variables:[
+        "wsa_nrg_turb",
+        "wsa_KPI_nrg_recovery",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
 
 		"wsa_pumping":{
 			variables:[
@@ -47,6 +57,7 @@ var Questions={
 			advanced:1,
 			otherQuestions:[
 				"wsa_pumping_eff",
+        "wsa_opportunities",
 			],
 		},
 
@@ -57,15 +68,6 @@ var Questions={
         "wsa_pmp_amps",
 				"c_wsa_pmp_pw",
 				"wsa_KPI_nrg_elec_eff",
-			],
-			advanced:1,
-			otherQuestions:[],
-		},
-
-		"wsa_producing_energy":{
-			variables:[
-				"wsa_nrg_turb",
-				"wsa_KPI_nrg_recovery",
 			],
 			advanced:1,
 			otherQuestions:[],
@@ -166,6 +168,17 @@ var Questions={
 			otherQuestions:[],
 		},
 
+    "wsd_water_eff":{
+      variables:[
+        "wsd_SL_GHG_nrw",
+        "wst_SL_GHG_nrw",
+        "wsa_SL_GHG_nrw",
+        "wsd_SL_ghg_attr"
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
+
 		"wsd_pumping":{
 			variables:[
 				"wsd_pmp_size",
@@ -181,6 +194,7 @@ var Questions={
 			advanced:1,
 			otherQuestions:[
 				"wsd_pumping_eff",
+        "wsd_opportunities",
 			],
 		},
 
@@ -191,17 +205,6 @@ var Questions={
 				"wsd_pmp_amps",
 				"c_wsd_pmp_pw",
 				"wsd_KPI_nrg_elec_eff",
-			],
-			advanced:1,
-			otherQuestions:[],
-		},
-
-		"wsd_water_eff":{
-			variables:[
-				"wsd_SL_GHG_nrw",
-				"wst_SL_GHG_nrw",
-				"wsa_SL_GHG_nrw",
-				"wsd_SL_ghg_attr"
 			],
 			advanced:1,
 			otherQuestions:[],
@@ -264,6 +267,7 @@ var Questions={
 			advanced:1,
 			otherQuestions:[
 				"wwc_pumping_eff",
+        "wwc_opportunities",
 			],
 		},
 
@@ -305,6 +309,38 @@ var Questions={
 			otherQuestions:[],
 		},
 
+    "wwt_producing_biogas":{
+      variables:[
+        "wwt_biog_pro",
+        "wwt_ch4_biog",
+        "c_wwt_biog_fla",
+        "wwt_dige_typ",
+        "wwt_fuel_dig",
+        "wwt_KPI_biog_x_bod",
+        "wwt_KPI_GHG_dig_fuel",
+        "wwt_KPI_GHG_dig_fuel_co2",
+        "wwt_KPI_GHG_dig_fuel_n2o",
+        "wwt_KPI_GHG_dig_fuel_ch4",
+        "wwt_KPI_GHG_biog",
+      ],
+      advanced:1,
+      otherQuestions:[
+        "wwt_valorizing_biogas",
+      ],
+    },
+
+    "wwt_valorizing_biogas":{
+      variables:[
+        "wwt_biog_val",
+        "wwt_nrg_biog",
+        "c_wwt_nrg_biog",
+        "wwt_KPI_nrg_biogas",
+        "wwt_KPI_nrg_x_biog",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
+
 		"wwt_treatment_perf":{
 			variables:[
 				"wwt_trea_cap",
@@ -325,38 +361,6 @@ var Questions={
 				"wwt_KPI_nrg_per_pump",
 				"wwt_KPI_std_nrg_cons",
 				"wwt_KPI_std_elec_eff",
-			],
-			advanced:1,
-			otherQuestions:[],
-		},
-
-		"wwt_producing_biogas":{
-			variables:[
-				"wwt_biog_pro",
-				"wwt_ch4_biog",
-				"c_wwt_biog_fla",
-				"wwt_dige_typ",
-				"wwt_fuel_dig",
-				"wwt_KPI_biog_x_bod",
-				"wwt_KPI_GHG_dig_fuel",
-				"wwt_KPI_GHG_dig_fuel_co2",
-				"wwt_KPI_GHG_dig_fuel_n2o",
-				"wwt_KPI_GHG_dig_fuel_ch4",
-				"wwt_KPI_GHG_biog",
-			],
-			advanced:1,
-			otherQuestions:[
-				"wwt_valorizing_biogas",
-			],
-		},
-
-		"wwt_valorizing_biogas":{
-			variables:[
-				"wwt_biog_val",
-				"wwt_nrg_biog",
-				"c_wwt_nrg_biog",
-				"wwt_KPI_nrg_biogas",
-				"wwt_KPI_nrg_x_biog",
 			],
 			advanced:1,
 			otherQuestions:[],
@@ -514,12 +518,10 @@ var Questions={
 Questions.isInside=function(field) {
 	//go over all questions
 	var code;
-	for(var question in this)
-	{
-		for(var i in this[question].variables)
-		{
+	for(var question in this) {
+		for(var i in this[question].variables) {
 			code=this[question].variables[i];
-			if(field===code) return question;
+      if(field===code) return question;
 		}
 	}
 	return false;
@@ -528,15 +530,13 @@ Questions.isInside=function(field) {
 //check if the "field" is shown or hidden
 Questions.isHidden=function(field) {
 	//go over all questions
-	for(var question in this)
-	{
+	for(var question in this) {
 		//if answer is yes, next question: all fields inside should be shown
 		if(Global.Configuration['Yes/No'][question]==1){continue;}
 
 		//if answer is no, look for "field" inside
 		var code;
-		for(var i in this[question].variables)
-		{
+		for(var i in this[question].variables) {
 			code=this[question].variables[i];
 			if(code==field) return true;
 		}
@@ -548,22 +548,18 @@ Questions.isHidden=function(field) {
 Questions.getQuestions=function(ubication) {
 	var code,questions=[];
 	//go over all questions
-	for(var question in this)
-	{
+	for(var question in this) {
 		if(typeof(this[question])=="function")continue;
 		//skip fuel engines questions if anyFuelEngines is zero
-		if(Global.General.anyFuelEngines==0)
-		{
+		if(Global.General.anyFuelEngines==0) {
 			if(["wsa_engines","wst_engines","wsd_engines","wwc_engines","wwt_engines","wwd_engines"].indexOf(question)+1)
 				continue
 		}
 		//check all codes inside ubication
-		for(var i in this[question].variables)
-		{
+		for(var i in this[question].variables) {
 			code=this[question].variables[i];
 			//check if exists inside ubication
-			if(ubication[code]!=undefined)
-			{
+			if(ubication[code]!=undefined) {
 				questions.push(question);
 				break;
 			}
@@ -575,15 +571,13 @@ Questions.getQuestions=function(ubication) {
 //check if the question "field" should be hidden
 Questions.isHiddenQuestion=function(field) {
 	//go over all questions
-	for(var question in this)
-	{
+	for(var question in this) {
 		//if answer is yes, next question: all fields inside should be shown
 		if(Global.Configuration['Yes/No'][question]==1){continue;}
 
 		//if answer is no, look for "field" inside
 		var code;
-		for(var i in this[question].otherQuestions)
-		{
+		for(var i in this[question].otherQuestions) {
 			code=this[question].otherQuestions[i];
 			if(code==field) return true;
 		}
@@ -594,15 +588,12 @@ Questions.isHiddenQuestion=function(field) {
 //Automatic find repeated variables in Questions
 Questions.findRepeated=function() {
 	//count how many times appears field in Questions
-	function countField(field)
-	{
+	function countField(field) {
 		var n=0;
 		//go over all questions
-		for(var question in Questions)
-		{
+		for(var question in Questions) {
 			//go over all questions
-			for(var i in Questions[question].variables)
-			{
+			for(var i in Questions[question].variables) {
 				//check if code==field
 				if(field==Questions[question].variables[i]) n++;
 			}
@@ -612,10 +603,8 @@ Questions.findRepeated=function() {
 	var repeated=[];
 	var code;
 	//go over all questions and check that appear 1 time
-	for(var question in this)
-	{
-		for(var i in this[question].variables)
-		{
+	for(var question in this) {
+		for(var i in this[question].variables) {
 			code=this[question].variables[i];
 			if(countField(code)>1) repeated.push(code);
 		}

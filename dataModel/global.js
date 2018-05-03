@@ -281,7 +281,7 @@ var Global = {
         return this.wsd_vol_trck*fuel.FD*fuel.NCV/1000*(Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles)
       },
 
-      wsd_KPI_GHG:function() {
+      wsd_KPI_GHG:function(){//<br>
         return this.wsd_KPI_GHG_elec() + this.wsd_KPI_GHG_fuel() + this.wsd_KPI_GHG_trck();
       }
     }
@@ -299,7 +299,6 @@ var Global = {
     ww_SL_nrg_cost: function(){return 100*this.ww_nrg_cost/this.ww_run_cost},
     ww_SL_serv_pop: function(){return 100*Global.Waste.ww_serv_pop/Global.Waste.ww_resi_pop},
     ww_SL_treat_m3: function(){return 100*this.ww_serv_pop/this.ww_conn_pop},
-    ww_SL_vol_pday: function(){return 1000*this.Treatment.wwt_vol_trea/this.ww_serv_pop/Global.General.Days()},
     ww_nrg_cons   : function(){return this.Collection.wwc_nrg_cons+this.Treatment.wwt_nrg_cons+this.Discharge.wwd_nrg_cons},
 
     "Collection":{
@@ -309,10 +308,7 @@ var Global = {
       "wwc_bod_pday":0,
       "wwc_prot_con":0,
       wwc_SL_conn_pop:function(){return 100*Global.Waste.ww_conn_pop/Global.Waste.ww_resi_pop},
-      ww_SL_treat_m3:function(){return 100*(Global.Waste.ww_serv_pop/Global.Waste.ww_conn_pop)},
       wwc_KPI_nrg_per_m3:function(){return this.wwc_nrg_cons/this.wwc_vol_conv},
-
-      wwc_SL_ghg_unc:function(){return this.wwc_SL_ghg_unc_ch4()+this.wwc_SL_ghg_unc_n2o()},
 
       // Ch4 from Uncollected Wastewater - improv #4 [subtract population with onsite sanitation]
       wwc_SL_ghg_unc_ch4:function(){
@@ -323,12 +319,13 @@ var Global = {
       wwc_SL_ghg_unc_n2o:function(){
         return Math.max(0,Global.Waste.ww_resi_pop - Global.Waste.ww_conn_pop - Global.Waste.ww_onsi_pop)*this.wwc_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       },
+      wwc_SL_ghg_unc:function(){return this.wwc_SL_ghg_unc_ch4()+this.wwc_SL_ghg_unc_n2o()},
 
-      wwc_SL_ghg_ons:function(){return this.wwc_SL_ghg_ons_ch4()+this.wwc_SL_ghg_ons_n2o()},
       wwc_SL_ghg_ons_ch4:function(){return Global.Waste.ww_onsi_pop*this.wwc_bod_pday/1000*Global.General.Days()*0.3*Cts.ct_ch4_eq.value},
       wwc_SL_ghg_ons_n2o:function(){
-        return Global.Waste.ww_onsi_pop*this.wwc_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value
+        return Global.Waste.ww_onsi_pop*this.wwc_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       },
+      wwc_SL_ghg_ons:function(){return this.wwc_SL_ghg_ons_ch4()+this.wwc_SL_ghg_ons_n2o()},
 
       //fuel engines?
       "wwc_fuel_typ":0,
@@ -415,8 +412,8 @@ var Global = {
       c_wwt_bod_rmvd:function(){return this.wwt_bod_infl-this.wwt_bod_effl},
       wwt_KPI_nrg_per_m3:function(){return this.wwt_nrg_cons/this.wwt_vol_trea},
       wwt_KPI_nrg_per_kg:function(){return this.wwt_nrg_cons/this.c_wwt_bod_rmvd()},
-      ww_SL_vol_pday:function(){return Global.Waste.ww_SL_vol_pday()},
-      ww_SL_serv_pop:function(){return Global.Waste.ww_SL_serv_pop()},
+      wwt_SL_vol_pday:function(){return 1000*this.wwt_vol_trea/Global.Waste.ww_serv_pop/Global.General.Days()},
+
       //fuel engines?
       "wwt_fuel_typ":0,
       "wwt_vol_fuel":0,
@@ -674,7 +671,6 @@ var Global = {
       "wwd_vol_nonp":0,//Volume of water reused
       "wwd_reus_typ":0,
       wwd_KPI_nrg_per_m3:function(){return this.wwd_nrg_cons/this.wwd_vol_disc||0},
-      ww_SL_serv_pop: function(){return Global.Waste.ww_SL_serv_pop()},
       wwd_SL_ghg_non: function(){return this.wwd_n2o_effl/1000*this.wwd_vol_nonp*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value},
       //fuel engines?
       "wwd_fuel_typ":0,
@@ -755,6 +751,12 @@ var Global = {
       "wasteDis":0,
     },
 
+    //highlight inputs/outputs
+    hl:0,
+
+    //remember if question 'x' is expanded or not (in edit.php)
+    Expanded:{},
+
     //custom unit selections for variables are stored here
     Units:{},
 
@@ -780,7 +782,8 @@ var Global = {
     },
   },
 
-  Opps : {
+  //TODO check what is this
+  Opps:{
     g_nrw_water_vol_dper : 0,
     g_end_user_consumption_dper : 0,
     g_water_reuse_dper : 0,

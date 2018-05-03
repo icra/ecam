@@ -242,7 +242,7 @@
       init();
     }
   </script>
-</head><body><center>
+</head><body onload=init()><center>
   <!--sidebar--><?php include'sidebar.php'?>
   <!--navbar--><?php include'navbar.php'?>
   <!--linear--><?php include'linear.php'?>
@@ -464,6 +464,5 @@
 <script>
   if(google){
     google.charts.load('current',{'packages':['corechart','gauge','bar']});
-    google.charts.setOnLoadCallback(init)
   }
 </script>

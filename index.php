@@ -21,16 +21,11 @@
 
 		<!--new title-->
 		<div class="width_50">
-			<h1 class="blue_h1" style=padding-bottom:0px>
-				<?php write("#a_toolkit_for_utilities")?>
-			<h1 class="green_h1" style=font-size:32px>
-				<?php write("#assess_your_utility")?>
-			</h1>
+			<h1 class="blue_h1" style=padding-bottom:0px> <?php write("#a_toolkit_for_utilities")?>
+			<h1 class="green_h1" style=font-size:32px> <?php write("#assess_your_utility")?> </h1>
 
 			<!--new text-->
-			<h4 style=font-size:18px;color:#58595b>
-				<?php write("#index_description")?>
-			</h4>
+			<h4 style=font-size:18px;color:#58595b> <?php write("#index_description")?> </h4>
 			<h4 style=font-size:18px;color:#58595b>
 				<?php write("#ecam_is_a_free_and")?>
 				<a target=_blank href=//github.com/holalluis/ecam>
@@ -49,14 +44,14 @@
 				</a>
 			</h4>
 
-			<!--MENU BUTTONS--><div style="padding:1em 0"><?php include'menu.php'?></div>
+			<!--MENU BUTTONS-->
+      <div style="padding:1em 0"><?php include'menu.php'?></div>
 
 			<!--chrome warning-->
 			<div class="chrome_big">
 				<b><?php write('#index_chrome_warning')?></b>
 			</div>
-			<br>
-			<br>
+			<br> <br>
 			<div>
 				<a class="blue_links" href="http://wacclim.org/" target=_blank>WaCCliM</a> - <a class="blue_links" href=about.php><?php write("#about")?></a> - <a class="blue_links" href=help.php><?php write("#help")?></a> - <a class="blue_links" href=mailto:info@wacclim.org><?php write("#contact")?>: info@wacclim.org</a>
 			</div>

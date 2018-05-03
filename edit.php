@@ -167,26 +167,19 @@
     function init() {
       //performance
       console.time('init');
+      Caption.hide();
 
-      if(typeof updateQuestionsTable !== 'undefined') {
-        updateQuestionsTable('adv_questions',true);
-      }
-      if(typeof(level3)!="undefined") {
-        level3.updateSubstagesTable();
-        level3.updateOutputs();
-      }
       if(typeof(level2)!="undefined"){ level2.updateInputs() }
       updateOutputs();
       updateNrgOutputs();
+
+      if(typeof(level3)!="undefined") { level3.updateSubstagesTable(); }
       Exceptions.apply();
+
       try{drawCharts()}
       catch(e){console.log(e)}
-      Caption.listeners();
-      updateResult();
 
-      //fake a click in "View all" checkbox (cb)
-      var cb=document.querySelector('#viewAll');
-      if(cb){cb.checked=true}
+      updateResult();
 
       //performance
       console.timeEnd('init');
@@ -194,304 +187,161 @@
 
     /** Redisplay table id=outputs (level2)*/
     function updateOutputs() {
+      console.time('updateOutputs');
+
       var t=document.getElementById('outputs');
       while(t.rows.length>2){t.deleteRow(-1)}
-      for(var field in CurrentLevel) {
-        if(typeof(CurrentLevel[field])!="function") continue;
-        if(field.search(/^c_/)>=0) continue;
-        if(field.search("_KPI_GHG")==-1) continue;
 
-        /*check if field is level3 specific*/
-        if(Level3.list.indexOf(field)+1) continue;
+      Object.keys(CurrentLevel)
+        .filter(key=>{return typeof(CurrentLevel[key])=="function"}) //only outputs
+        .filter(key=>{return key.search("_KPI_GHG")+1})              //only GHG
+        .filter(key=>{return Level3.list.indexOf(key)==-1})          //only L2
+        .filter(key=>{return !Questions.isHidden(key)})              //only not hidden
+        .forEach(field=>{
+          //new row
+          var newCell,newRow=t.insertRow(-1);
+          newRow.setAttribute('field',field);
 
-        //apply filters
-        if(Questions.isHidden(field)) continue;
+          var formula=CurrentLevel[field].toString();
+          var prettyFormula=Formulas.prettify(formula);
+          newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
+          newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
 
-        //new row
-        var newCell,newRow=t.insertRow(-1);
-        newRow.setAttribute('field',field);
+          //compute value
+          var value=CurrentLevel[field]()/Units.multiplier(field);
 
-        var formula=CurrentLevel[field].toString();
-        var prettyFormula=Formulas.prettify(formula);
-        newRow.setAttribute('title',prettyFormula);
-        newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
-        newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
+          /*description and code*/
+          newCell=newRow.insertCell(-1);
+          newCell.setAttribute('caption',translate(field+"_expla"));
+          newCell.innerHTML=(function(){
+            var description=translate(field+"_descr")||translate(field);
+            var code="<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
+            return description+"<br>("+code+")";
+          })();
 
-        //compute the ABSOLUTE value, not normalized
-        var value=CurrentLevel[field]()/Units.multiplier(field);
+          /*value*/
+          newCell=newRow.insertCell(-1);
+          newCell.setAttribute('caption',prettyFormula);
+          newCell.innerHTML=(function() {
+            //"has estimated data" warning
+            //var ed=DQ.hasEstimatedData(field) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
+            var ed="";
+            // level 2 warnings
+            //var l2w = Level2Warnings.hasOwnProperty(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
+            var l2w="";
+            return format(value)+" "+ed+" "+l2w;
+          })();
 
-        /*description and code*/
-        newCell=newRow.insertCell(-1);
-        newCell.setAttribute('title',translate(field+"_expla"));
-        newCell.innerHTML=(function() {
-          var description=translate(field+"_descr")||translate(field);
-          var code="<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
-          return description+"<br>("+code+")";
-        })();
-
-        /*value*/
-        newCell=newRow.insertCell(-1);
-        newCell.innerHTML=(function() {
-          //"has estimated data" warning
-          var ed=DQ.hasEstimatedData(field) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
-          // level 2 warnings
-          var l2w = Level2Warnings.hasOwnProperty(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
-          return format(value)+" "+ed+" "+l2w;
-        })();
-
-        /*value per things*/
-        newCell=newRow.insertCell(-1)
+          /*value per things*/
+          newCell=newRow.insertCell(-1)
           //the first cell will be the value divided by Years
-        newCell.setAttribute('title',"("+prettyFormula+")/Years");
-        newCell.innerHTML=(function()
-        {
-          return format(value/Global.General.Years());
-        })();
+          newCell.innerHTML=(function() {
+            return format(value/Global.General.Years());
+          })();
 
-        /*Normalization*/
-        (function()
-        {
-          var level    = '<?php echo $level?>';
-          var sublevel = '<?php if($sublevel) echo $sublevel; else echo 'false' ?>';
-          if(level=="Energy"){return "NA"}
-          //value per resident population
-          //value per serviced population
-          //value per water volume
-          ['reside','servic','volume'].forEach(function(category)
-          {
-            var newCell=newRow.insertCell(-1);
+          /*Normalization*/
+          (function() {
+            var level    = '<?php echo $level?>';
+            var sublevel = '<?php if($sublevel) echo $sublevel; else echo 'false' ?>';
+            if(level=="Energy"){return "NA"}
+            //value per resident population
+            //value per serviced population
+            //value per water volume
+            ['reside','servic','volume'].forEach(function(category) {
+              var newCell=newRow.insertCell(-1);
 
-            //determine the field to be highlighted
-            var hlfield = (sublevel=='false' || category=='reside' || category=='servic') ? Normalization[level][category] : Normalization[level][sublevel][category];
-            newCell.setAttribute('onmouseover',"Formulas.hlField('"+hlfield+"',1)")
-            newCell.setAttribute('onmouseout',"Formulas.hlField('"+hlfield+"',0)")
-
-            //the formula shoud change adding "/hlfield"
-            newCell.setAttribute('title',"("+newCell.parentNode.title+")/"+hlfield);
-
-            newCell.innerHTML=(function()
-            {
-              //special cases for not including untreated wastewater to ghg/year/serv.pop
-                //special case 1: wwc_KPI_GHG_unt / year / serv. pop. is not applicable
-                if(
-                  field=="wwc_KPI_GHG_unt"
-                  &&
-                  (category=="servic" || category=="volume")
-                ){
-                  return "<span style=color:#ccc>NA</span>"
-                }
-
-                //special case 2: wwc_KPI_GHG should not include untreated wastewater
-                if(
-                  field=="wwc_KPI_GHG"
-                  &&
-                  (category=="servic" || category=="volume")
-                ){
-                  var norm=Normalization.normalize(category,field,level,sublevel);
-                  var subt=Normalization.normalize(category,'wwc_KPI_GHG_unt',level,sublevel);
-                  var resu=norm-subt;
-
-                  //the fields per inhab and per serv.pop are also per year
-                  if(category=="reside" || category=="servic")
-                  {
-                    resu/=Global.General.Years();
-                    newCell.title+="/Years"
-                  }
-                  newCell.title=newCell.title.replace('wwc_KPI_GHG_unt','0')
-                  return format(resu);
-                }
-              //special cases end
-
-              var norm=Normalization.normalize(category,field,level,sublevel);
-              //the fields per inhab and per serv.pop are also per year
-              if(category=="reside" || category=="servic")
-              {
-                norm/=Global.General.Years();
-                newCell.title+="/Years"
-              }
-              return format(norm);
-            })();
-          });
-        })();
-      }
+              //determine the field to be highlighted
+              var hlfield = (sublevel=='false' || category=='reside' || category=='servic') ? Normalization[level][category] : Normalization[level][sublevel][category];
+              newCell.setAttribute('onmouseover',"Formulas.hlField('"+hlfield+"',1)")
+              newCell.setAttribute('onmouseout',"Formulas.hlField('"+hlfield+"',0)")
+              newCell.innerHTML=(function() {
+                var norm=Normalization.normalize(category,field,level,sublevel);
+                return format(norm);
+              })();
+            });
+          })();
+      });
 
       //if the table is empty, add a warning
       if(t.rows.length<3) {
         var newCell=t.insertRow(-1).insertCell(-1)
         newCell.colSpan=6;
-        newCell.innerHTML="<span style=color:#999>~All GHG outputs inactive</span>";
+        newCell.innerHTML="<span style=color:#999>~All outputs inactive</span>";
       }
 
       //bottom line with the color of W/WW
       var newRow=t.insertRow(-1);
       var newTh=document.createElement('th');
+      newRow.appendChild(newTh);
       newTh.setAttribute('colspan',7)
       newTh.style.borderBottom='none';
       newTh.style.borderTop='none';
-      newRow.appendChild(newTh);
+
+      console.timeEnd('updateOutputs');
     }
 
     //Redisplay NRG and SL outputs (level2)
     function updateNrgOutputs() {
+      console.time('updateNrgOutputs');
       var t=document.getElementById('nrgOutputs');
       while(t.rows.length>2){t.deleteRow(-1);}
-      for(var field in CurrentLevel) {
-        if(typeof(CurrentLevel[field])!="function")continue;
-        if(field.search(/^c_/)!=-1)continue;
-        if(field.search("_KPI_GHG")>=0)continue;
-        if(field.search('_nrg_')<0)continue;
 
-        /*check if field is level3 specific*/
-        if(Level3.list.indexOf(field)>-1){continue;}
+      Object.keys(CurrentLevel)
+        .filter(key=>{return typeof(CurrentLevel[key])=="function"}) //only outputs
+        .filter(key=>{return key.search("_nrg_")+1 || key.search("_SL_")+1})                 //only NRG or SL
+        .filter(key=>{return key.search(/^c_/)==-1})                 //only non CV
+        .filter(key=>{return Level3.list.indexOf(key)==-1})          //only L2 (non L3)
+        .filter(key=>{return !Questions.isHidden(key)})              //only not hidden
+        .forEach(field=>{
+          var newCell,newRow=t.insertRow(-1);
+          newRow.setAttribute('field',field);
 
-        /*check if should be hidden according to questions*/
-        if(Questions.isHidden(field)) { continue }
+          var formula=CurrentLevel[field].toString();
+          var prettyFormula=Formulas.prettify(formula);
+          newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
+          newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
 
-        var newCell,newRow=t.insertRow(-1);
-        newRow.setAttribute('field',field);
+          //compute the output value
+          var value=CurrentLevel[field]()/Units.multiplier(field);
 
-        var formula=CurrentLevel[field].toString();
-        var prettyFormula=Formulas.prettify(formula);
-        newRow.setAttribute('title',prettyFormula);
-        newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
-        newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
+          /*description*/
+          newCell=newRow.insertCell(-1);
+          newCell.setAttribute('caption',translate(field+"_expla"));
+          newCell.innerHTML=(function() {
+            var description = translate(field+"_descr")||translate(field);
+            var color = field.search(/^ww/)==0 ? "#d71d24" : "";
+            var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
+            //var nrg="<span class='advanced nrg' caption='Energy performance'>NRG</span>";
+            var nrg="";
+            return description+"<br>("+code+")"+nrg;
+          })();
 
-        //compute the value
-        var value = CurrentLevel[field]()/Units.multiplier(field)
+          /*value*/
+          newCell=newRow.insertCell(-1)
+          newCell.setAttribute('caption',prettyFormula);
+          newCell.innerHTML=(function() {
+            //has estimated data warning
+            //var ed = DQ.hasEstimatedData(field) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
+            // level 2 warnings
+            //var l2w = Level2Warnings.hasOwnProperty(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
+            //return format(value)+" "+ed+" "+l2w;
+            return format(value);
+          })();
 
-        /*circle indicator
-        newCell=newRow.insertCell(-1);
-        newCell.style.textAlign='center';
-        newCell.innerHTML=(function()
-        {
-          var hasIndicator=RefValues.hasOwnProperty(field);
-          if(hasIndicator)
-          {
-            var indicator=RefValues[field](CurrentLevel);
-            newCell.title=indicator;
-            var color;
-            switch(indicator)
-            {
-              case "Good":           color="#af0";break;
-              case "Acceptable":     color="orange";break;
-              case "Unsatisfactory": color="red";break;
-              case "Out of range":   color="brown";break;
-              default:               color="#ccc";break;
-            }
-            return "<span style='font-size:20px;color:"+color+"'>&#128308;</span>";
-          }
-          else{
-            newCell.title='<?php write('#edit_no_indicator_associated')?>';
-            return "<span style=color:#ccc>NA</span>";
-          }
-        })();
-        */
-
-        /*description*/
-        newCell=newRow.insertCell(-1);
-        newCell.setAttribute('title',(function() {
-          return translate(field+"_expla");
-        })());
-
-        newCell.innerHTML=(function() {
-          var description = translate(field+"_descr")||translate(field);
-          var color = field.search(/^ww/)==0 ? "#d71d24" : "";
-          var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
-          var nrg="<span class='advanced nrg' caption='Energy performance'>NRG</span>";
-          return description+"<br>("+code+")"+nrg;
-        })();
-
-        /*value*/
-        newCell=newRow.insertCell(-1)
-        newCell.innerHTML=(function() {
-          //has estimated data warning
-          var ed = DQ.hasEstimatedData(field) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
-          // level 2 warnings
-          var l2w = Level2Warnings.hasOwnProperty(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
-          return format(value)+" "+ed+" "+l2w;
-        })();
-
-        /*unit*/
-        newCell=newRow.insertCell(-1)
-        newCell.innerHTML=(function() {
-          if(!Info[field]) {
-            return "no unit";
-          }
-
-          if(Info[field].magnitude=="Currency") {
-            return Global.General.Currency;
-          }
-
-          return Info[field].unit;
-        })();
-      }
-      for(var field in CurrentLevel) {
-        if(typeof(CurrentLevel[field])!="function"){continue;}
-        if(field.search(/^c_/)!=-1){continue;}
-        if(field.search("_KPI_GHG")>=0)continue;
-        if(field.search('_nrg_')>-1)continue;
-
-        /*check if field is level3 specific*/
-        if(Level3.list.indexOf(field)>-1){continue;}
-
-        /*check if should be hidden according to questions*/
-        if(Questions.isHidden(field)) { continue }
-
-        var newCell,newRow=t.insertRow(-1);
-        newRow.setAttribute('field',field);
-
-        var formula=CurrentLevel[field].toString();
-        var prettyFormula=Formulas.prettify(formula);
-        newRow.setAttribute('title',prettyFormula);
-        newRow.setAttribute('onmouseover','Formulas.hlInputs("'+field+'",CurrentLevel,1)');
-        newRow.setAttribute('onmouseout', 'Formulas.hlInputs("'+field+'",CurrentLevel,0)');
-
-        //compute now the value for creating the indicator
-        var value = CurrentLevel[field]()/Units.multiplier(field)
-
-        /*description*/
-        newCell=newRow.insertCell(-1);
-        newCell.setAttribute('title',(function() {
-          return translate(field+"_expla");
-        })());
-
-        newCell.innerHTML=(function() {
-          var description = translate(field+"_descr")||translate(field);
-          var color = field.search(/^ww/)==0 ? "#d71d24" : "";
-          var code = "<a style='font-size:10px;color:"+color+"' href=variable.php?id="+field+">"+field+"</a>";
-          var sl="<span class='advanced sl'>SL</span>";
-          return description+"<br>("+code+")"+sl;
-        })();
-
-        /*value*/
-        newCell=newRow.insertCell(-1)
-        newCell.innerHTML=(function() {
-          //has estimated data warning
-          var ed = DQ.hasEstimatedData(field) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
-          // level 2 warnings
-          var l2w = Level2Warnings.hasOwnProperty(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
-          return format(value)+" "+ed+" "+l2w;
-        })();
-
-        /*unit*/
-        newCell=newRow.insertCell(-1)
-        newCell.innerHTML=(function() {
-          if(!Info[field])
-            return "no unit";
-
-          if(Info[field].magnitude=="Currency") {
-            return Global.General.Currency;
-          }
-
-          return Info[field].unit;
-        })();
-      }
+          /*unit*/
+          newCell=newRow.insertCell(-1)
+          newCell.innerHTML=(function() {
+            if(!Info[field]) return "no unit";
+            if(Info[field].magnitude=="Currency") return Global.General.Currency;
+            return Info[field].unit;
+          })();
+      });
 
       //if the table is empty, add a warning
       if(t.rows.length<3) {
         var newCell=t.insertRow(-1).insertCell(-1)
         newCell.colSpan=3
-        newCell.innerHTML="<span style=color:#999>~All Energy outputs inactive</span>";
+        newCell.innerHTML="<span style=color:#999>~No outputs here</span>";
       }
 
       //bottom line with the color of W/WW
@@ -501,15 +351,25 @@
       newTh.style.borderBottom='none';
       newTh.style.borderTop='none';
       newRow.appendChild(newTh);
+
+      //end
+      console.timeEnd('updateNrgOutputs');
     }
 
     //depending on stage, draw different charts
     function drawCharts() {
-      //draw the chart that is selected!!!
+      console.time('drawcharts');
+      //draw chart if selected
       var button=document.querySelector("div.buttonsGraph button.active");
-      if(!button){button=document.querySelector("div.buttonsGraph button");}
-      button.classList.remove('active');
-      button.onclick();
+      if(!button){
+        console.timeEnd('drawcharts');
+        return;
+      }
+      if(button.classList.contains('active')){
+        button.classList.remove('active');
+        button.onclick();
+      }
+      console.timeEnd('drawcharts');
     }
 
     //function for "View Graphs" buttons
@@ -533,69 +393,6 @@
         div2.style.display='';
       }
       init();
-    }
-
-    //functions for question views
-    function updateQuestionsTable(id_table,adv) {
-      adv=adv||false; //show advanced or normal
-      var t=document.getElementById(id_table);
-      if(!t)return;
-      while(t.rows.length>0)t.deleteRow(-1);
-      var questions=Questions.getQuestions(CurrentLevel);
-
-      for(var q in questions) {
-        var question = questions[q];
-
-
-        //check if question is "advanced"
-        if(!adv){ if( Questions[question].advanced){continue;}}
-        else{     if(!Questions[question].advanced){continue;}}
-
-        //fetch current state
-        var currentAnswer = Global.Configuration["Yes/No"][question];
-        var checked = currentAnswer ? "checked":"";
-
-        //new row
-        var newRow = t.insertRow(-1);
-
-        if(Questions.isHiddenQuestion(question)){
-          newRow.classList.add('disabled');
-        }
-
-        newRow.style.background = currentAnswer ? "lightgreen" : "";
-        newRow.setAttribute('question',question);
-        newRow.onmouseover=function(){hlQuestionFields(this.getAttribute('question'),1)}
-        newRow.onmouseout=function(){hlQuestionFields(this.getAttribute('question'),0)}
-        var newCell=newRow.insertCell(-1)
-        newCell.innerHTML=translate(question)+"?";
-        newCell.style.borderRight="none"
-        var newCell=newRow.insertCell(-1)
-        newCell.style.borderLeft="none"
-        newCell.innerHTML=(function() {
-          var ret="<label>"+
-              "<?php write('#no')?> "+
-              "<input name='"+question+"' type=radio value=0 onclick=setQuestion('"+question+"',0) checked></label> "+
-              "<label><?php write('#yes')?> "+
-              "<input name='"+question+"' type=radio value=1 onclick=setQuestion('"+question+"',1) "+checked+"></label> ";
-          return ret;
-        })();
-
-        //question tag
-        var newCell=newRow.insertCell(-1)
-        newCell.outerHTML="<th><span class='advanced' style=float:left>"+question.substring(4)+"</span>";
-      }
-
-      //hide whole table if no questions
-      t.parentNode.parentNode.style.display="";
-      if(t.rows.length==0){t.parentNode.parentNode.style.display="none";}
-    }
-
-    //highlight fields linked to the question
-    function hlQuestionFields(question,hl) {
-      var fields=Questions[question].variables; //array
-      for(var i in fields) {
-        Formulas.hlField(fields[i],hl);
-      }
     }
 
     //update the value of a question
@@ -637,7 +434,6 @@
           }
         }
       }
-
       init();
     }
   </script>
@@ -860,11 +656,7 @@
         <!--choose graph type buttons-->
         <?php include'buttonsGraphType.php'?>
         <!--actual graph-->
-        <div id=graph><?php write('#Loading')?></div>
-        <script>
-          google.charts.load('current',{'packages':['corechart','bar']});
-          google.charts.setOnLoadCallback(drawCharts);
-        </script>
+        <div id=graph>Click a graph to display</div>
         <style>
           #graph div.options{padding:1em}
           #graph {text-align:center}
@@ -885,20 +677,15 @@
   (function() {
     if(substages.length==0) {
       substages.push(new level3.Substage()); //create a substage
-    }
-    //if there is already one substage...
-    if(substages.length==1) {
-      //make the first substage have L2 values
-      level3.getInputs().forEach(function(field) {
-        substages[0][field]=CurrentLevel[field];
+      //modify the first substage's inputs
+      level3.getInputs().forEach(code=>{
+        substages[0][code]=CurrentLevel[code];
       });
     }
   })();
 </script>
 
-<style>
-  #adv_questions tr.disabled {
-    color:#aaa;
-    pointer-events:none;
-  }
-</style>
+<script>
+  //load charts
+  google.charts.load('current',{'packages':['corechart','bar']});
+</script>

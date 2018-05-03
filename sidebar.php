@@ -151,6 +151,7 @@
 			<tr><td><a href=summary.php?type=input><?php write('#all_inputs')?></a>
 			<tr><td><a href=summary.php?type=output><?php write('#all_outputs')?></a>
 			<tr><td><a href=summary.php?type=ccvv><?php write('#all_ccvv')?></a>
+      <tr><td><a href=questions.php>All questions</a>
 			<tr><td><a href=constants.php><?php write('#all_constants')?></a>
 			<tr><td><a href=benchmark.php><?php write('#all_benchmarks')?></a>
 			<tr><th><?php write('#other')?>

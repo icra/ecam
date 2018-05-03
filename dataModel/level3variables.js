@@ -43,11 +43,17 @@ Level3.list=[
 	"wsd_KPI_std_nrg_newp",
 	"wsd_KPI_nrg_cons_new",
 	"wsd_KPI_nrg_estm_sav",
+
 	"wsd_SL_pres_ade",
 	"wsd_SL_cont_sup",
-	"wsd_KPI_un_head_loss",
-	"wsd_KPI_water_losses",
-	"wsd_KPI_ghg_estm_red",
+  "wsd_SL_GHG_nrw",
+  "wst_SL_GHG_nrw",
+  "wsa_SL_GHG_nrw",
+  "wsd_SL_ghg_attr",
+
+  "wsd_KPI_un_head_loss",
+  "wsd_KPI_water_losses",
+  "wsd_KPI_ghg_estm_red",
 
 	//wwc
 	"wwc_KPI_GHG_fuel_co2",
@@ -70,6 +76,12 @@ Level3.list=[
 	"wwc_SL_ghg_ons_ch4",
 	"wwc_SL_ghg_ons_n2o",
 	"wwc_SL_ghg_ons",
+
+  "wwc_SL_fratio",
+  "wwc_SL_GHG_inf",
+  "wwt_SL_GHG_inf", // TODO
+  "wwd_SL_GHG_inf", // TODO
+  "wwc_SL_inf_emis",
 
 	//wwt
 	"wwt_KPI_GHG_fuel_co2",
