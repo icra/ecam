@@ -88,7 +88,7 @@
     }
 
     //remember "Expanded"
-    updateResult();
+    init();
   }
 
   /**
@@ -377,15 +377,15 @@
     var newCell=newRow.insertCell(-1);
     newCell.colSpan=2;
     newCell.innerHTML=(function() {
-      var checked_n = checked ? "" : "checked";
-      var checked_y = checked ? "checked" : "";
+      var checked_n = checked ? "" : "checked=true";
+      var checked_y = checked ? "checked=true" : "";
       var str = ""+
       "<div class=flex style=justify-content:center>"+
       "  <div>"+
-      "    <label>"+translate('no')+" <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',0); "+checked_n+"></label>"+
+      "    <label>"+translate('no')+" <input type=radio name='l2"+question+"' onclick=setQuestion('"+question+"',0); "+checked_n+"></label>"+
       "  </div>"+
       "  <div>"+
-      "    <label>"+translate('yes')+" <input type=radio name='"+question+"' onclick=setQuestion('"+question+"',1); "+checked_y+"></label>"+
+      "    <label>"+translate('yes')+" <input type=radio name='l2"+question+"' onclick=setQuestion('"+question+"',1); "+checked_y+"></label>"+
       "  </div>"+
       "</div>"+
       "";

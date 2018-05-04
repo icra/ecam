@@ -26,7 +26,7 @@
     }
 
     //"Expanded" is stored in cookies
-    updateResult();
+    init()
   }
 
   /** INPUTS redisplay */
@@ -112,7 +112,7 @@
       //go through questions
       (function(){
         Questions.getQuestions(CurrentLevel)
-          .filter(q=>{return Questions[q].advanced})
+          //.filter(q=>{return Questions[q].advanced})
           .forEach(question=>{
             //fetch current state
             var currentAnswer = Global.Configuration["Yes/No"][question];
@@ -324,7 +324,7 @@
 
       //button overwrite stage value with the sum
       var btn='<button '+onclick+' caption="Current value ('+format(CurrentLevel[code]/Units.multiplier(code))+') will be overwritten">'+
-        'upgrade stage value'+
+        'update stage value'+
         '</button>';
       return "<td style=text-align:center>"+format(value)+"<td>"+btn;
     })();

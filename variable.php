@@ -347,6 +347,14 @@
             s_newRow.insertCell(-1).innerHTML="<a href=substage.php?level="+level+"&sublevel="+sublevel+"&index="+i+">Substage "+(i+1)+" ("+currSubstage[i].name+")</a>";
             s_newRow.insertCell(-1).innerHTML=format(value);
           }
+          var s_newRow=t.insertRow(-1);
+          s_newRow.insertCell(-1).outerHTML="<td class=th>Substage total";
+
+          if(typeof(currentStage[id])=='function')
+            s_newRow.insertCell(-1).innerHTML=format(currSubstage.map(s=>s[id]()).reduce((pr,cu)=>pr+cu)/Units.multiplier(id));
+          else
+            s_newRow.insertCell(-1).innerHTML=format(currSubstage.map(s=>s[id]  ).reduce((pr,cu)=>pr+cu)/Units.multiplier(id));
+
         })();
       }
 
