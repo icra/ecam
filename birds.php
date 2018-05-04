@@ -105,7 +105,7 @@
       //if value is not a number, set to zero
       if(isNaN(value))value=0;
 
-      console.log(value);
+      //console.log(value);
 
       //get L1 name: "Water" or "Waste"
       var L1 = field.search("ws")==0 ? "Water" : "Waste";
@@ -345,7 +345,7 @@
     <div style=margin:1em;text-align:center>
       <script>
         //find first available stage to start entering data
-        function nextPage() {
+        function nextPage(event) {
           if(event)event.stopPropagation();
           //go to first active substage
           var location;
@@ -372,8 +372,8 @@
           window.location=location;
         }
       </script>
-      <button class="button prev" onclick="event.stopPropagation();window.location='inhabitants.php'"><?php write('#previous')?></button><!--
-      --><button class="button next" onclick=nextPage()><?php write('#next')?></button>
+      <button class="button prev" onclick="window.location='inhabitants.php'"><?php write('#previous')?></button><!--
+      --><button class="button next" onclick=nextPage(event)><?php write('#next')?></button>
     </div>
   </div>
 

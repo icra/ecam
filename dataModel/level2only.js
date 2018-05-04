@@ -4,7 +4,7 @@ var Level2only = {
 	list:
 	[
 		//wsa
-		"wsa_vol_fuel",
+		//"wsa_vol_fuel",
 		"wsa_fuel_typ",
 		//wst
 		"wst_vol_fuel",

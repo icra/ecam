@@ -2,20 +2,23 @@
 <div id=caption style=display:none>#caption</div>
 <script>
 	var Caption={};//namespace
-	Caption.show=function(ev,element){
-		var caption=document.querySelector("#caption")
-		caption.style.display=''
-		caption.style.left=(ev.clientX-10)+"px"
-		caption.style.top=(ev.clientY+15)+"px"
+
+	Caption.show=function(e,element){
+		var caption=document.querySelector("#caption");
+		caption.style.display='';
+		caption.style.left=(e.clientX-10)+"px";
+		caption.style.top=(e.clientY+15)+"px";
 		caption.innerHTML=element.getAttribute('caption');
 	}
+
 	Caption.hide=function(){document.querySelector("#caption").style.display='none';}
+
 	//add mouse listeners, to be called when html loads (<body onload>)
 	Caption.listeners=function() {
 		var els=document.querySelectorAll("[caption]");
 		for(var i=0;i<els.length;i++){
-			els[i].onmouseout=function(){Caption.hide();}
-			els[i].onmousemove=function(){Caption.show(event,this);}
+      els[i].addEventListener('mousemove',function(e){Caption.show(e,this)});
+      els[i].addEventListener('mouseout',function(){Caption.hide()});
 		}
 	}
 </script>

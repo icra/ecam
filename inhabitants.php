@@ -3,6 +3,7 @@
 	<script>
 		function init() {
 			updateResult(); //update cookies
+      Caption.listeners();
 		}
 	</script>
 </head><body onload=init()>

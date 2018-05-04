@@ -6,7 +6,7 @@
 
 <div id=sidebar class="<?php echo $sbd ?>" onclick="event.stopPropagation()">
 	<script>
-		//if you click anywhere except the sidebar, it will hide the sidebar
+		//if you click anywhere hide the sidebar
 		document.documentElement.onclick=function(){Sidebar.hide()};
 		//if you press escape, the sidebar will hide
 		document.documentElement.onkeydown=function(e){if(e.which==27){Sidebar.hide()}};
@@ -73,6 +73,10 @@
 			var link=document.createElement('a');
 			link.href="data:text/json;charset=utf-8,"+JSON.stringify(SavedFile,null,'  ');
 			link.download=Global.General.Name+".json";
+
+      link.style.display='none';
+      document.body.appendChild(link);
+
 			link.click();
 		}
 

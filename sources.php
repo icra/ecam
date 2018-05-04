@@ -26,8 +26,7 @@
 						ret=Global.General.Years();
 						break;
 					case 'serv_pop':
-						ret=function(code)
-						{
+						ret=function(code) {
 							var ye=Global.General.Years();
 							var ws=ye*Global.Water.ws_serv_pop;
 							var ww=ye*Global.Waste.ww_serv_pop;
@@ -48,8 +47,7 @@
 			})();
 
 			var fields=document.querySelectorAll('#sources [field]');
-			for(var i=0;i<fields.length;i++)
-			{
+			for(var i=0;i<fields.length;i++) {
 				var element=fields[i];
 				var code=element.getAttribute('field');
 				var divisor_value = typeof(divisor)=="function" ? divisor(code) : divisor;
@@ -99,7 +97,7 @@
 
 			var element=document.querySelector("#"+area+" td[field="+critic+"]");
 
-			if (area === 'sources') {
+			if(area == 'sources'){
 				//CO2
 				element.classList.add('critic');
 				element.setAttribute('cap',translate("This is the highest GHG emission of your system"));
@@ -112,8 +110,7 @@
 				element.previousSibling.previousSibling.classList.add('critic');
 				element.previousSibling.previousSibling.setAttribute('caption',element.getAttribute('cap'));
 
-			}else if (area === 'outside') {
-
+			}else if(area == 'outside'){
 				element.classList.add('critic');
 				element.setAttribute('cap',"Outside utility has highest GHG emission of your system");
 
@@ -121,15 +118,12 @@
 				element.previousSibling.classList.add('critic');
 				element.previousSibling.setAttribute('caption',element.getAttribute('cap'));
 			}
-
 		}
 
 		function addDetailedListeners() {
 			var tds=document.querySelectorAll("td[field][level][sublevel]");
-			for(var i=0;i<tds.length;i++)
-			{
-				tds[i].onmousemove=function(event)
-				{
+			for(var i=0;i<tds.length;i++) {
+				tds[i].onmousemove=function(event) {
 					var con=document.querySelector('#container_detailed');
 					con.style.display=''
 					con.style.left=(event.clientX+35)+"px"
@@ -146,10 +140,8 @@
 			var obj=Global[lvl][sub];
 			var t=document.querySelector('table#detailed');
 			while(t.rows.length>0)t.deleteRow(-1);
-			for(var field in obj)
-			{
-				if(field.search('_KPI_GHG_')+1)
-				{
+			for(var field in obj) {
+				if(field.search('_KPI_GHG_')+1) {
 					var newRow=t.insertRow(-1);
 					newRow.insertCell(-1).innerHTML=translate(field+"_descr");
 					var newCell=newRow.insertCell(-1)
@@ -215,7 +207,6 @@
 
 <!--content-->
 <div style=width:66%;>
-
 	<!--tab buttons-->
 	<div class=tab_buttons id=ghg_summary_tabs>
 		<button class=left onclick="tabs_show_tables()" disabled>
@@ -365,7 +356,7 @@
 						<br>
 						<?php write("#outside utility boundaries")?>
 						<br>
-						(kg CO2 eq)
+						(kg CO<sub>2</sub> eq)
 					</th>
 					<td>
 						<?php write("#wwc_SL_ghg_unc_descr")?>

@@ -15,16 +15,14 @@
 			Global.Configuration.ActiveStages[id]=checkbox.checked ? 1 : 0;
 
 			//reset all variables to zero if !checked
-			if(!checkbox.checked)
-			{
+			if(!checkbox.checked) {
 				//if(!confirm("WARNING: All the inputs for this stage will be set to 0, and all the substages (if any) will be removed. Continue? This cannot be undone"))
-				if(0)
-				{
+				if(0) {
 					checkbox.checked=true;
 					return
 				}
-				switch(id)
-				{
+
+				switch(id) {
 					case "water": 		
 						this.reset(Global.Water);              
 						this.reset(Global.Water.Abstraction);  Substages.Water.Abstraction=[]; 
@@ -47,11 +45,9 @@
 			}
 
 			//if a level 1 is deactivated, deactivate the corresponding level 2 ones
-			if(["water","waste"].indexOf(id)>-1 && !checkbox.checked)
-			{
+			if(["water","waste"].indexOf(id)>-1 && !checkbox.checked) {
 				var elements=document.querySelectorAll("table#selectStage input[class="+id+"]")
-				for(var i=0;i<elements.length;i++)
-				{
+				for(var i=0;i<elements.length;i++) {
 					var alias=elements[i].id;
 					elements[i].checked=false;
 					this.activate(alias);
@@ -59,8 +55,7 @@
 			}
 
 			//if a level 2 stage is activated, activate L1 if not active
-			if(["waterAbs","waterTre","waterDis","wasteCol","wasteTre","wasteDis"].indexOf(id)>-1 && checkbox.checked)
-			{
+			if(["waterAbs","waterTre","waterDis","wasteCol","wasteTre","wasteDis"].indexOf(id)>-1 && checkbox.checked) {
 				var l1=checkbox.getAttribute('class');
 				document.getElementById(l1).checked=true;
 				this.activate(l1);
@@ -70,10 +65,8 @@
 		}
 
 		/** Set all inputs inside the object to 0 */
-		Configuration.reset=function(obj)
-		{
-			for(var field in obj)
-			{
+		Configuration.reset=function(obj) {
+			for(var field in obj) {
 				if(typeof(obj[field])=="number")
 					obj[field]=0;
 			}
@@ -81,19 +74,14 @@
 		}
 
 		/** set visuals depending on Global.Configuration.ActiveStages */
-		Configuration.activateLevels=function()
-		{
-			for(var stage in Global.Configuration.ActiveStages)
-			{
+		Configuration.activateLevels=function() {
+			for(var stage in Global.Configuration.ActiveStages) {
 				if(stage=="")continue;
-				if(Global.Configuration.ActiveStages[stage]==1)
-				{
+				if(Global.Configuration.ActiveStages[stage]==1) {
 					/**set checked*/document.getElementById(stage).checked=true;
 					/**set checked*/document.getElementById(stage).parentNode.style.backgroundColor='lightgreen'
 					/**set checked*/document.getElementById(stage).parentNode.parentNode.style.backgroundColor='lightgreen'
-				}
-				else if(Global.Configuration.ActiveStages[stage]==0)
-				{
+				} else if(Global.Configuration.ActiveStages[stage]==0) {
 					/**set checked*/document.getElementById(stage).checked=false;
 					/**set checked*/document.getElementById(stage).parentNode.style.backgroundColor=''
 					/**set checked*/document.getElementById(stage).parentNode.parentNode.style.backgroundColor=''
@@ -101,14 +89,12 @@
 			}
 		}
 
-		Configuration.defaults=function()
-		{
+		Configuration.defaults=function() {
 			//default country
 			document.querySelector('#country').value=Global.General.Country;
 
 			var variables=document.querySelectorAll('table#general_inputs input[id]');
-			for(var i=0;i<variables.length;i++)
-			{
+			for(var i=0;i<variables.length;i++) {
 				var id=variables[i].id;
 				var loc=locateVariable(id);
 				var obj = loc.sublevel ? Global[loc.level][loc.sublevel] : Global[loc.level];
@@ -127,18 +113,13 @@
 			Configuration.activateLevels();
 			Configuration.defaults();
 			//update linear diagram when clicking configuration
-			(function()
-			{
-				['waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage)
-				{
+			(function() {
+				['waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage) {
 					var img=document.querySelector('#linearDiagram img[stage='+stage+']')
-					if(Global.Configuration.ActiveStages[stage])
-					{
+					if(Global.Configuration.ActiveStages[stage]) {
 						img.src="img/"+stage+".png";
 						img.classList.remove('inactive');
-					}
-					else
-					{
+					} else {
 						img.src="img/"+stage+"-off.png";
 						img.classList.add('inactive');
 					}
@@ -220,9 +201,9 @@
 
 	<!--btn activate all-->
 	<div>
-		<button class=button onclick="activateAllStages()"><?php write('#configuration_activate_all')?></button>
+		<button class=button onclick="activateAllStages(event)"><?php write('#configuration_activate_all')?></button>
 		<script>
-			function activateAllStages(){
+			function activateAllStages(event){
 				event.stopPropagation();
 				['water','waste','waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis']
 				.forEach(stage=>{

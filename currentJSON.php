@@ -10,7 +10,7 @@ none;">
 	/** Stringify Global object and display it */
 	/** COOKIE SIZE LIMIT FOR GOOGLE CHROME IS ~ 8170 CHARACTERS */
 	function updateResult() {
-    console.time('updateResult');
+    //console.time('updateResult');
 
 		document.getElementById('currentGlobal').innerHTML=JSON.stringify(Global,null,"  ");
 		/**
@@ -36,7 +36,7 @@ none;">
 		setCookie("wasteDis",LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Waste.Discharge))); 
 
 		//cookieSummary();
-    console.timeEnd('updateResult');
+    //console.timeEnd('updateResult');
 	}
 
 	/** Display an ascii table in Console to summarize all cookie sizes */

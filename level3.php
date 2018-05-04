@@ -41,7 +41,7 @@
       //go over substages: create a column for each
       var newRow=t.insertRow(-1);
       newRow.insertCell(-1).outerHTML="<td rowspan=2 colspan=2>"+
-      "<button onclick=level3.newSubstage() class='button add' style='float:right;padding:auto;background:lightgreen;box-shadow: 0 1px 2px rgba(0,0,0,.1);'>"+
+      "<button onclick=level3.newSubstage(event) class='button add' style='float:right;padding:auto;background:lightgreen;box-shadow: 0 1px 2px rgba(0,0,0,.1);'>"+
       "<?php write('#Add substage')?>"+
       "</button>"+
       "";
@@ -490,7 +490,7 @@
   }
 
   /** New substage button pushed */
-  level3.newSubstage=function(){
+  level3.newSubstage=function(event){
     if(event)event.stopPropagation(); //this is to see the memory progress
 
     //check memory usage
@@ -633,7 +633,7 @@
 
     <!--button toggle outputs/graph display-->
     <button class=btn_toggle
-      onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#substages','#substageGraphs')"
+      onclick="this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#substages','#substageGraphs')"
     >
       <?php write('#VIEW GRAPH')?>
     </button>
