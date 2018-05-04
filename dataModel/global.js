@@ -22,14 +22,8 @@ var Global = {
     },
     Years:function(){return this.Days()/365},
 
-    TotalGHG:function(ghg_type){
-      ghg_type = ghg_type || 'default';
-      // patch for total GHG emissions per serviced population - improv #2
-      if(ghg_type === 'serv_pop'){
-        return NaN;
-      }else{
-        return Global.Water.ws_KPI_GHG() + Global.Waste.ww_KPI_GHG();
-      }
+    TotalGHG:function(){
+      return Global.Water.ws_KPI_GHG() + Global.Waste.ww_KPI_GHG();
     },
 
     TotalNRG:function(){return Global.Water.ws_nrg_cons()+Global.Waste.ww_nrg_cons()},
@@ -383,21 +377,12 @@ var Global = {
         return this.wwc_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
       },
 
-      wwc_KPI_GHG_unt:function(){
-        return this.wwc_KPI_GHG_unt_ch4()+this.wwc_KPI_GHG_unt_n2o()
-      },
+      wwc_KPI_GHG_unt:function(){return this.wwc_KPI_GHG_unt_ch4()+this.wwc_KPI_GHG_unt_n2o()},
       wwc_KPI_GHG_unt_ch4:function(){return (Global.Waste.ww_conn_pop-Global.Waste.ww_serv_pop)*this.wwc_bod_pday/1000*Global.General.Days()*Cts.ct_ch4_ef.value*Cts.ct_ch4_eq.value },//old c_ww52
       wwc_KPI_GHG_unt_n2o:function(){return (Global.Waste.ww_conn_pop-Global.Waste.ww_serv_pop)*this.wwc_prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value },
 
       // Wastewater GHG emission calculation to neglect emission for collected but untreated per serviced pop. - improv. #6
-      wwc_KPI_GHG:function(ghg_type){
-        ghg_type=ghg_type||'default';
-        if(ghg_type==='serv_pop'){
-          return this.wwc_KPI_GHG_elec();
-        }else{
-          return this.wwc_KPI_GHG_elec() + this.wwc_KPI_GHG_fuel() + this.wwc_KPI_GHG_unt();
-        }
-      },
+      wwc_KPI_GHG:function(){return this.wwc_KPI_GHG_elec() + this.wwc_KPI_GHG_fuel() + this.wwc_KPI_GHG_unt()},
     },
 
     "Treatment":{
@@ -798,16 +783,11 @@ var Global = {
 
 //this block is a fix for wrapper equations, so they don't appear incorrectly at variable.php
 //problem: the formula does not appear correctly in export.php
-Global.Water.wsa_KPI_GHG=function(){return Global.Water.Abstraction.wsa_KPI_GHG()};
-Global.Water.wst_KPI_GHG=function(){return Global.Water.Treatment.wst_KPI_GHG()};
-Global.Water.wsd_KPI_GHG=function(){return Global.Water.Distribution.wsd_KPI_GHG()};
+Global.Water.wsa_KPI_GHG=function(){return Global.Water.Abstraction.wsa_KPI_GHG()  };
+Global.Water.wst_KPI_GHG=function(){return Global.Water.Treatment.wst_KPI_GHG()    };
+Global.Water.wsd_KPI_GHG=function(){return Global.Water.Distribution.wsd_KPI_GHG() };
 Global.Water.ws_KPI_GHG =function(){return this.wsa_KPI_GHG()+this.wst_KPI_GHG()+this.wsd_KPI_GHG()};
-Global.Waste.wwc_KPI_GHG=function(ghg_type) {
-  return Global.Waste.Collection.wwc_KPI_GHG(ghg_type);
-};
-Global.Waste.wwt_KPI_GHG=function(){return Global.Waste.Treatment.wwt_KPI_GHG()};
-Global.Waste.wwd_KPI_GHG=function(){return Global.Waste.Discharge.wwd_KPI_GHG()};
-Global.Waste.ww_KPI_GHG =function(ghg_type) {
-  ghg_type = ghg_type || 'default';
-  return this.wwc_KPI_GHG(ghg_type) + this.wwt_KPI_GHG() + this.wwd_KPI_GHG();
-};
+Global.Waste.wwc_KPI_GHG=function(){return Global.Waste.Collection.wwc_KPI_GHG() };
+Global.Waste.wwt_KPI_GHG=function(){return Global.Waste.Treatment.wwt_KPI_GHG()  };
+Global.Waste.wwd_KPI_GHG=function(){return Global.Waste.Discharge.wwd_KPI_GHG()  };
+Global.Waste.ww_KPI_GHG =function(){return this.wwc_KPI_GHG()+this.wwt_KPI_GHG()+this.wwd_KPI_GHG()};

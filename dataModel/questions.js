@@ -57,7 +57,6 @@ var Questions={
 			advanced:1,
 			otherQuestions:[
 				"wsa_pumping_eff",
-        "wsa_opportunities",
 			],
 		},
 
@@ -70,7 +69,9 @@ var Questions={
 				"wsa_KPI_nrg_elec_eff",
 			],
 			advanced:1,
-			otherQuestions:[],
+			otherQuestions:[
+        "wsa_opportunities",
+      ],
 		},
 
 		"wsa_opportunities":{
@@ -611,4 +612,21 @@ Questions.findRepeated=function() {
 	}
 	//remove duplicates
 	return repeated.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
+}
+
+//reset the values and the otherQuestions
+Questions.resetValues=function(question, ubication){
+  //reset inputs
+  Questions[question].variables.forEach(code=>{
+    if(typeof(ubication[code])=="number"){
+      ubication[code]=0;
+      //also reset substages
+      substages.forEach(substage=>{substage[code]=0});
+    }
+  });
+  //reset related questions RECURSIVELY
+  Questions[question].otherQuestions.forEach(q=>{
+    Global.Configuration["Yes/No"][q]=0;
+    Questions.resetValues(q,ubication);
+  });
 }

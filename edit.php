@@ -406,33 +406,7 @@
 
       //reset variables if checked=false
       if(!newValue){
-        //reset variables to zero
-        for(var i in Questions[question].variables) {
-          var code=Questions[question].variables[i];
-          if(typeof(CurrentLevel[code])=="number") {
-            CurrentLevel[code]=0;
-            //also substages
-            for(var j in substages) {
-              substages[j][code]=0;
-            }
-          }
-        }
-        //reset also to the otherQuestions
-        for(var i in Questions[question].otherQuestions) {
-          var code_q=Questions[question].otherQuestions[i];
-          Global.Configuration["Yes/No"][code_q]=0;
-
-          //reset variables of "otherQuestions"
-          for(var j in Questions[code_q].variables) {
-            var code_v=Questions[code_q].variables[j];
-            if(typeof(CurrentLevel[code_v])=="number") {
-              CurrentLevel[code_v]=0;
-              for(var k in substages) {
-                substages[k][code_v]=0;
-              }
-            }
-          }
-        }
+        Questions.resetValues(question,CurrentLevel);
       }
       init();
     }
@@ -669,6 +643,9 @@
   <!--level3-->
   <?php if($sublevel){include'level3.php';} ?>
 </div>
+
+<div style=margin-top:5em></div>
+</html>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
 

@@ -388,7 +388,7 @@
 					ret+="<tr>"+
 						" <td class=variableCode><a style='color:"+color+"' caption='["+match_localization.toString()+"] "+(translate(output+"_descr")||translate(output))+"'"+
 						" href=variable.php?id="+output+">"+output+"</a>"+
-						"<td caption='"+encodeURIComponent(pretf)+"' style=cursor:help>"+
+						"<td caption='"+encodeURIComponent(pretf)+"' style=cursor:help>"+ // TODO refactor encodeURIComponent here
 						currValueF+"<td> <span class=unit>"+currentUnit+"</span> "+estimated;
 				});
 				ret+="</table>";

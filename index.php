@@ -53,7 +53,7 @@
 			</div>
 			<br> <br>
 			<div>
-				<a class="blue_links" href="http://wacclim.org/" target=_blank>WaCCliM</a> - <a class="blue_links" href=about.php><?php write("#about")?></a> - <a class="blue_links" href=help.php><?php write("#help")?></a> - <a class="blue_links" href=mailto:info@wacclim.org><?php write("#contact")?>: info@wacclim.org</a>
+				<a class="blue_links" href="http://wacclim.org/" target=_blank>WaCCliM</a> - <a class="blue_links" href=about.php><?php write("#about")?></a> - <a class="blue_links" href=help.php><?php write("#help")?></a> - <a class="blue_links" href=mailto:info@wacclim.org target=_blank><?php write("#contact")?>: info@wacclim.org</a>
 			</div>
 			<!-- <img class="license_img" src="img/cc_icon_white_x2.png" alt="">
 			<img class="license_img" src="img/attribution_icon_white_x2.png" alt="">
