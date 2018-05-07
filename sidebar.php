@@ -149,18 +149,19 @@
 			<tr><td><a href=energy_summary.php><?php write('#nrg_summary')?></a>
 			<tr><td><a class=water stage=water href=edit.php?level=Water><?php write('#Water')?></a>
 			<tr><td><a class=waste stage=waste href=edit.php?level=Waste><?php write('#Waste')?></a>
-			<tr><td><a href=substages.php><?php write('#all_substages')?></a>
 			<tr><td><a href=edit.php?level=UNFCCC><?php write('#unfccc_categories')?></a>
-			<tr><td><a href=edit.php?level=Estimations><?php write('#all_estimations_tier_A')?></a>
+      <tr><td><a href=substages.php><?php write('#all_substages')?></a>
 			<tr><td><a href=summary.php?type=input><?php write('#all_inputs')?></a>
 			<tr><td><a href=summary.php?type=output><?php write('#all_outputs')?></a>
 			<tr><td><a href=summary.php?type=ccvv><?php write('#all_ccvv')?></a>
       <tr><td><a href=questions.php>All questions</a>
 			<tr><td><a href=constants.php><?php write('#all_constants')?></a>
+      <tr><td><a href=edit.php?level=Estimations><?php write('#all_estimations_tier_A')?></a>
 			<tr><td><a href=benchmark.php><?php write('#all_benchmarks')?></a>
 			<tr><th><?php write('#other')?>
 			<tr><td><a href=opps.php><?php write("#opportunities")?></a>
 			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
+      <tr><td><a href=sankey.php>Sankey diagram</a>
 			<!--go to variable-->
 			<tr><th><?php write('#go_to_variable_code')?>
 			<tr><td>

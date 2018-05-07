@@ -14,7 +14,6 @@
 
   /** Redisplay table id=inputs */
   level2.updateInputs=function() {
-    
     console.time('updateInputs');
 
     var t=document.getElementById('inputs');

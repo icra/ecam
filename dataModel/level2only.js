@@ -16,18 +16,16 @@ var Level2only = {
 		////wwc
 		//"wwc_vol_fuel",
 		//"wwc_fuel_typ",
-		//"wwc_prot_con",
-		//"wwc_bod_pday",
 		////wwt
 		//"wwt_vol_fuel",
 		//"wwt_fuel_typ",
 		//"wwt_trck_typ",
-		//"wwt_type_tre", //related to wwt_ch4_efac
 		////wwd
 		//"wwd_vol_fuel",
 		//"wwd_fuel_typ",
 		//"wwd_vol_trck",
 		//"wwd_trck_typ",
+    "wwt_type_tre", //related to wwt_ch4_efac
 		"wwd_reus_typ", //hidden
 		"wwd_main_len", //hidden
 	],

@@ -178,7 +178,6 @@
     document.getElementById('counter').innerHTML=substages.length
 
     //end
-    Caption.listeners();
     console.timeEnd('updateSubstagesTable');
   }
 
@@ -281,7 +280,7 @@
 
         //Unit for current variable
         var newCell=newRow.insertCell(-1)
-        newCell.setAttribute('caption',Info[code].magnitude);
+        newCell.setAttribute('caption', Info[code]?Info[code].magnitude:"");
         newCell.innerHTML=(function() {
           //check if unit is entered in "Info"
           if(!Info[code]) return "undefined";
@@ -318,7 +317,7 @@
       var onclick = value==CurrentLevel[code]/Units.multiplier(code) ? "disabled=true" :"onclick=level2.updateField('"+code+"',"+value+")";
 
       //if magnitude is not sumable
-      if(Sumable_magnitudes.indexOf(Info[code].magnitude)==-1){
+      if(!Info[code] || Sumable_magnitudes.indexOf(Info[code].magnitude)==-1){
         return "<td colspan=2>";
       }
 
@@ -326,6 +325,11 @@
       var btn='<button '+onclick+' caption="Current value ('+format(CurrentLevel[code]/Units.multiplier(code))+') will be overwritten">'+
         'update stage value'+
         '</button>';
+
+      //button "copy from substage"
+      if(substages.length==1 && substages[0][code]!=CurrentLevel[code]){
+        btn+=' <button caption="Current value ('+format(CurrentLevel[code]/Units.multiplier(code))+') will be used in this substage" onclick=substages[0]["'+code+'"]=CurrentLevel["'+code+'"];init()>copy from stage</button>';
+      }
       return "<td style=text-align:center>"+format(value)+"<td>"+btn;
     })();
   }
@@ -463,7 +467,7 @@
     var isOutput=typeof(CurrentLevel[code])=='function';
     //sum all values
     var sum=0;
-    if(isInput){
+    if(isInput || !isOutput){
       substages.forEach(substage=>{
         sum+=parseFloat(substage[code]);
       });

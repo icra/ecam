@@ -31,7 +31,7 @@
 									di=Global.Water.ws_serv_pop;
 									break;
 								case "ww":
-									di=Global.Waste.ww_serv_pop;
+									di=Global.Waste.ww_serv_pop();
 									break;
 								default:
 									break;
@@ -113,15 +113,15 @@
 ?>
 <!--title-->
 <h1>
-	<script>document.write(Global.General.Name)</script> 
-	&mdash; 
+	<script>document.write(Global.General.Name)</script>
+	&mdash;
 	<?php write('#Energy consumption Summary (Overview)')?>
 </h1>
 <h4>
 	<?php write('#assessment_period')?>:
 	<b>
-		<script>document.write(Global.General.Days())</script> <?php write('#days')?>
-		(<script>document.write(Global.General.Years())</script> <?php write('#years')?>)
+		<script>document.write(format(Global.General.Days()))</script> <?php write('#days')?>
+		(<script>document.write(format(Global.General.Years()))</script> <?php write('#years')?>)
 	</b>
 </h4>
 
@@ -149,22 +149,14 @@
 				document.querySelector('#tabs button.left').removeAttribute('disabled');
 				document.querySelector('#tabs button.right').setAttribute('disabled',true);
 				Graphs.graph5(false,'graph');
-				// 'div.tab_buttons button.right' collides other tabs with tab_buttons classes
-				// ADDED button ids - not tested completely
-				document.querySelector('div.tab_buttons button#tb_graphs').setAttribute('disabled', true);
-				document.querySelector('div.tab_buttons button#tb_tables').removeAttribute('disabled');
-				// improvement list - #4 - graphs & tables switching
-				//document.querySelector('div.tab_buttons button.right').setAttribute('disabled',true);
-				//document.querySelector('div.tab_buttons button.left').removeAttribute('disabled');
+				document.querySelector('div.tab_buttons button.right').setAttribute('disabled',true);
+				document.querySelector('div.tab_buttons button.left').removeAttribute('disabled');
 			}
 			function tabs_show_tables(){
 				document.getElementById('tables').style.display=''
 				document.getElementById('graph').style.display='none'
-				document.querySelector('div.tab_buttons button#tb_tables').setAttribute('disabled', true);
-				document.querySelector('div.tab_buttons button#tb_graphs').removeAttribute('disabled');
-				// improvement list - #4 - graphs & tables switching
-				//document.querySelector('div.tab_buttons button.right').removeAttribute('disabled');
-				//document.querySelector('div.tab_buttons button.left').setAttribute('disabled',true);
+				document.querySelector('div.tab_buttons button.right').removeAttribute('disabled');
+				document.querySelector('div.tab_buttons button.left').setAttribute('disabled',true);
 			}
 		</script>
 	</div>
@@ -183,7 +175,7 @@
 					</select>
 					<!--legend-->
 					<span style=float:right>
-						<span class=circle style=background:orange></span> 
+						<span class=circle style=background:orange></span>
 						<?php write('#highest energy consumption')?>
 					</span>
 				<tr><th rowspan=9 style="font-weight:bold;background:#2b6488;">
@@ -193,23 +185,23 @@
 				<th rowspan=3 style="background:#00aff1">
 					<a href="edit.php?level=Water" style=color:white>
 						<?php write('#Water')?>
-						(<script> 
+						(<script>
 						document.write(Global.Water.ws_serv_pop)
 						</script> <?php write('#people')?>)
 					</a>
 					<br><br><span field=ws_nrg_cons><?php write('#Loading')?>...</span>
 				</th>
 					<!--wsa-->
-					<td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'><?php write('#Abstraction')?></a> 
-						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Water.Abstraction.length)</script> 
+					<td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'><?php write('#Abstraction')?></a>
+						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Water.Abstraction.length)</script>
 						<td field=wsa_nrg_cons level=Water sublevel=Abstraction><?php write('#Loading')?>...
 					<!--wst-->
-					<tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'><?php write('#Treatment')?></a> 
-						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Water.Treatment.length)</script> 
+					<tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'><?php write('#Treatment')?></a>
+						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Water.Treatment.length)</script>
 						<td field=wst_nrg_cons level=Water sublevel=Treatment><?php write('#Loading')?>...
 					<!--wsd-->
-					<tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'><?php write('#Distribution')?></a> 
-						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Water.Distribution.length)</script> 
+					<tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'><?php write('#Distribution')?></a>
+						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Water.Distribution.length)</script>
 						<td field=wsd_nrg_cons level=Water sublevel=Distribution><?php write('#Loading')?>...
 					</tr>
 				<tr>
@@ -217,26 +209,26 @@
 				<th rowspan=3 class=red>
 					<a href="edit.php?level=Waste" style=color:white>
 						<?php write('#Waste')?>
-						(<script> 
-						document.write(Global.Waste.ww_serv_pop)
+						(<script>
+						document.write(Global.Waste.ww_serv_pop())
 						</script> <?php write('#people')?>)
 					</a>
 					<br><br><span field=ww_nrg_cons><?php write('#Loading')?>...</span>
 				</th>
 
 					<!--wwc-->
-					<td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'><?php write('#Collection')?></a> 
+					<td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'><?php write('#Collection')?></a>
 						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Waste.Collection.length)</script>
 						<td field=wwc_nrg_cons level=Waste sublevel=Collection><?php write('#Loading')?>...
 
 					<!--wwt-->
-					<tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'><?php write('#Treatment')?> </a> 
-						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Waste.Treatment.length)</script> 
+					<tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'><?php write('#Treatment')?> </a>
+						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Waste.Treatment.length)</script>
 						<td field=wwt_nrg_cons level=Waste sublevel=Treatment><?php write('#Loading')?>...
 
 					<!--wwd-->
-					<tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'><?php write('#Discharge')?> </a> 
-						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Waste.Discharge.length)</script> 
+					<tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'><?php write('#Discharge')?> </a>
+						<td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Waste.Discharge.length)</script>
 						<td field=wwd_nrg_cons level=Waste sublevel=Discharge><?php write('#Loading')?>...
 				</tr>
 			</table>

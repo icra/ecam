@@ -57,10 +57,10 @@
 		<!--WASTEWATER-->
 		<tr><th colspan=3 style=background:#d71d24>
 			<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
-			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?><td class=input><input id='ww_resi_pop'><td><small><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td><?php write('#ww_conn_pop_descr')?><td class=input><input id='ww_conn_pop'><td><small><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td><?php write('#pop_ww_serv_pop')?>  <td class=input><input id='ww_serv_pop'><td><small><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td><?php write('#pop_ww_onsi_pop')?>  <td class=input><input id='ww_onsi_pop'><td><small><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?> <td class=input><input id='ww_resi_pop'> <td><small><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#wwc_conn_pop_descr')?><td class=input><input id='wwc_conn_pop'><td><small><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#wwt_serv_pop_descr')?><td class=input><input id='wwt_serv_pop'><td><small><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#ww_onsi_pop_descr')?> <td class=input><input id='ww_onsi_pop'> <td><small><?php write('#birds_people')?>
 			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
     </tr>
 	</table>
@@ -81,6 +81,7 @@
   //populate page onload
   (function updateDefaults() {
     var inputs=document.querySelectorAll('#inputs tr[stage] input[id]');
+
     for(var i=0;i<inputs.length;i++) {
       var input = inputs[i];
       var field = input.id;
@@ -91,10 +92,10 @@
         prnt.setAttribute('caption',translate(field+'_expla'));
       } catch(e){ console.log(prnt) }
 
-      var L1 = field.search("ws")==0 ? "Water" : "Waste";
       //the value we are going to put in the input
-      var value = Global[L1][field];
-      value/=Units.multiplier(field);
+
+      var value = getVariable(field)/Units.multiplier(field);
+
       //set the value
       input.value=format(value);
     }
@@ -121,18 +122,23 @@
       els[i].addEventListener('change',function(){
         //get info from the input element
         var field = this.id;
-        var value = parseFloat(this.value); //replace commmas for copy paste easyness
+        var value = parseFloat(this.value); //convert string to float
         value*=Units.multiplier(field);
 
         //if value is not a number, set to zero
         if(isNaN(value))value=0;
 
-        //get L1 name: "Water" or "Waste"
-        var L1 = locateVariable(field).level;
+        //locate variable
+        var loc = locateVariable(field);
+        if(loc.sublevel){
+          Global[loc.level][loc.sublevel][field]=value;
+        }else if(loc.level){
+          Global[loc.level][field]=value;
+        }else{
+          alert('field '+field+' undefined');return;
+        }
 
-        //update Global
-        if(Global[L1][field]===undefined){alert('field '+field+' undefined');return;}
-        Global[L1][field]=value;
+        //end
         init();
       });
       els[i].addEventListener('focus', function(){ this.value=getVariable(this.id); this.select() });

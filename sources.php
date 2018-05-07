@@ -29,7 +29,7 @@
 						ret=function(code) {
 							var ye=Global.General.Years();
 							var ws=ye*Global.Water.ws_serv_pop;
-							var ww=ye*Global.Waste.ww_serv_pop;
+							var ww=ye*Global.Waste.ww_serv_pop();
 							var To=ye*(ws+ww);
 							switch(code.substring(0,2))
 							{
@@ -176,8 +176,8 @@
 <h4>
 	<?php write("#assessment_period")?>
 	<b>
-		<script>document.write(Global.General.Days())</script> <?php write("#days")?>
-		(<script>document.write(Global.General.Years())</script> <?php write("#years")?>)
+		 <script>document.write(format(Global.General.Days())) </script> <?php write("#days")?>
+		(<script>document.write(format(Global.General.Years()))</script> <?php write("#years")?>)
 	</b>
 </h4>
 <h4>
@@ -292,7 +292,7 @@
 						<a href="edit.php?level=Waste" style=color:white>
 							<?php write("#Waste")?>
 							(<script> 
-								document.write(Global.Waste.ww_serv_pop)
+								document.write(Global.Waste.ww_serv_pop())
 							</script> <?php write("#people")?>)
 						</a>
 						<br><br>
@@ -359,21 +359,21 @@
 						(kg CO<sub>2</sub> eq)
 					</th>
 					<td>
-						<?php write("#wwc_SL_ghg_unc_descr")?>
-					(<a href=variable.php?id=wwc_SL_ghg_unc>wwc_SL_ghg_unc</a>)
-					<td field=wwc_SL_ghg_unc>
+						<?php write("#ww_SL_ghg_unc_descr")?>
+					(<a href=variable.php?id=ww_SL_ghg_unc>ww_SL_ghg_unc</a>)
+					<td field=ww_SL_ghg_unc>
 						<script>
-							document.write(format(Global.Waste.Collection.wwc_SL_ghg_unc()))
+							document.write(format(Global.Waste.ww_SL_ghg_unc()))
 						</script>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<?php write("#wwc_SL_ghg_ons_descr")?>
-						(<a href=variable.php?id=wwc_SL_ghg_ons>wwc_SL_ghg_ons</a>)
-					<td field=wwc_SL_ghg_ons>
+						<?php write("#ww_SL_ghg_ons_descr")?>
+						(<a href=variable.php?id=ww_SL_ghg_ons>ww_SL_ghg_ons</a>)
+					<td field=ww_SL_ghg_ons>
 						<script>
-							document.write(format(Global.Waste.Collection.wwc_SL_ghg_ons()))
+							document.write(format(Global.Waste.ww_SL_ghg_ons()))
 						</script>
 					</td>
 				</tr>

@@ -181,6 +181,8 @@
 
       updateResult();
 
+      Caption.listeners();
+
       //performance
       console.timeEnd('init');
     }
@@ -288,8 +290,8 @@
 
       Object.keys(CurrentLevel)
         .filter(key=>{return typeof(CurrentLevel[key])=="function"}) //only outputs
-        .filter(key=>{return key.search("_nrg_")+1 || key.search("_SL_")+1})                 //only NRG or SL
         .filter(key=>{return key.search(/^c_/)==-1})                 //only non CV
+        .filter(key=>{return key.search("_KPI_GHG")==-1})            //only non-emissions
         .filter(key=>{return Level3.list.indexOf(key)==-1})          //only L2 (non L3)
         .filter(key=>{return !Questions.isHidden(key)})              //only not hidden
         .forEach(field=>{
@@ -550,9 +552,10 @@
           //serviced population
           $serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
           write("#$serv_pop"."_descr");
+          $value = $level=="Water" ? "Global.Water.ws_serv_pop" : "Global.Waste.ww_serv_pop()";
           echo "
             <b class=number id=Global_level_serv_pop></b> |
-            <script>document.querySelector('#Global_level_serv_pop').innerHTML=format(Global.$level.$serv_pop)</script>
+            <script>document.querySelector('#Global_level_serv_pop').innerHTML=format($value)</script>
           ";
 
           //connected population (only for wastewater)
@@ -560,7 +563,7 @@
             write('#ww_conn_pop_descr');
             echo "
               <b class=number id=Global_level_conn_pop></b> |
-              <script>document.querySelector('#Global_level_conn_pop').innerHTML=format(Global.Waste.ww_conn_pop)</script>
+              <script>document.querySelector('#Global_level_conn_pop').innerHTML=format(Global.Waste.ww_conn_pop())</script>
             ";
           }
 

@@ -310,8 +310,8 @@
             <b caption="<?php write('#ww_conn_pop_descr')?>" id=ww_conn_pop onclick=window.location='inhabitants.php'>0</b> /
             <b caption="<?php write('#ww_resi_pop_descr')?>" id=ww_resi_pop onclick=window.location='inhabitants.php'>0</b>
             <script>
-              document.querySelector('#ww_serv_pop').innerHTML=format(Global.Waste.ww_serv_pop);
-              document.querySelector('#ww_conn_pop').innerHTML=format(Global.Waste.ww_conn_pop);
+              document.querySelector('#ww_serv_pop').innerHTML=format(Global.Waste.ww_serv_pop());
+              document.querySelector('#ww_conn_pop').innerHTML=format(Global.Waste.ww_conn_pop());
               document.querySelector('#ww_resi_pop').innerHTML=format(Global.Waste.ww_resi_pop);
             </script>
           </span>

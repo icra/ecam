@@ -90,7 +90,7 @@
 		<script>showVarName('wwt_biog_pro')</script>
 		<p> If answer is "yes": </p>
 		<code>
-			wwt_biog_pro = ww_serv_pop * wwc_bod_pday * ct_bod_kg * ct_biog_g * Days / 1000
+			wwt_biog_pro = ww_serv_pop * bod_pday * ct_bod_kg * ct_biog_g * Days / 1000
 		</code>
 		<p>If answer is "no":</p>
 		<code>
@@ -99,7 +99,7 @@
 		where,
 		<ul>
 			<li><script>showVarName('ww_serv_pop')</script>
-			<li><script>showVarName('wwc_bod_pday')</script>
+			<li><script>showVarName('bod_pday')</script>
 			<li><script>showVarName('ct_bod_kg')</script>
 			<li><script>showVarName('ct_biog_g')</script>
 			<li><script>showVarName('Days')</script>
@@ -131,7 +131,7 @@
 	<li class=estimation>
 		<script>showVarName('wwt_bod_infl')</script>
 		<code>
-			wwt_bod_infl = wwc_bod_pday / 1000 · ww_serv_pop · Days
+			wwt_bod_infl = bod_pday / 1000 · ww_serv_pop · Days
 		</code>
 	</li>
 
@@ -180,19 +180,19 @@
 	<li class=estimation>
 		<script>showVarName('wwt_mass_slu')</script>
 		<code>
-			wwt_mass_slu = 0.55 · wwc_bod_pday · ww_serv_pop · (1-0.1) · 1e-3 · 1.176 · Days
+			wwt_mass_slu = 0.55 · bod_pday · ww_serv_pop · (1-0.1) · 1e-3 · 1.176 · Days
 		</code>
 		where,
 		<ul>
 			<li>0.55 : ratio of g volatile suspended solids to g of substrate (BOD) removed per Metcalf and Eddy (2003).
-			<li>0.1: Assumes 10% of the influent BOD load escapes treatment and leaves the wwtp in the effluent  
+			<li>0.1: Assumes 10% of the influent BOD load escapes treatment and leaves the wwtp in the effluent
 			<li>1e-3: Unit conversion factor kg/g
 			<li>1.176: Conversion factor, ratio of total suspended solids to volatile suspended solids (g TSS/ g VSS )in typical activated sludge per Metcalf and Eddy (2003).  
 			<li>Days: Assessment period in days
 		</ul>
 		<p>if we are producing biogas, we add a 0.6 factor:</p>
 		<code>
-			wwt_mass_slu = 0.6 · 0.55 · wwc_bod_pday · ww_serv_pop · (1-0.1) · 1e-3 · 1.176 · Days
+			wwt_mass_slu = 0.6 · 0.55 · bod_pday · ww_serv_pop · (1-0.1) · 1e-3 · 1.176 · Days
 		</code>
 	</li>
 	<li class=estimation>

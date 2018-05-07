@@ -20,8 +20,8 @@
 		Global.Waste.Treatment.wwt_ch4_efac=Tables.wwt_type_tre[treatment].ch4_efac;
 
 		//BOD estimation: Assume g/person/day * 0.001 * population * days
-		//wwc_bod_pday*1e-3*ww_serv_pop*Days
-		var bod_estimation=Global.Waste.Collection.wwc_bod_pday*1e-3*Global.Waste.ww_serv_pop*Global.General.Days();
+		//bod_pday*1e-3*ww_serv_pop*Days
+		var bod_estimation=Global.General.bod_pday*1e-3*Global.Waste.ww_serv_pop()*Global.General.Days();
 
 		//Influent
 		Global.Waste.Treatment.wwt_bod_infl=bod_estimation;

@@ -5,6 +5,7 @@ var Sumable_magnitudes = [
   "Mass",
   "Distance",
   "Time",
+  "People",
   "Volume",
   "Flow",
   "Energy",

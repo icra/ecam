@@ -17,7 +17,7 @@
 	BEV.updateProducingBiogas=function(newValue){
 		if(newValue){
 			//Estimation for "producing_biogas" and "not valorizing biogas"
-			Global.Waste.Treatment.wwt_biog_pro = Global.Waste.ww_serv_pop * Global.Waste.Collection.wwc_bod_pday*Cts.ct_bod_kg.value*Cts.ct_biog_g.value*Global.General.Days()/1000;
+			Global.Waste.Treatment.wwt_biog_pro = Global.Waste.ww_serv_pop() * Global.General.bod_pday*Cts.ct_bod_kg.value*Cts.ct_biog_g.value*Global.General.Days()/1000;
 			Global.Waste.Treatment.wwt_ch4_biog = 59; //default of 59 of ch4 in biogas
 		}
 		else{

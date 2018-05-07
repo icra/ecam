@@ -146,7 +146,7 @@ Graphs.ghg_by_source=function(withTable,container) {
 		Global.Waste.Treatment.wwt_KPI_ghg_tsludge_n2o()+
 		Global.Waste.Treatment.wwt_KPI_GHG_dig_fuel_n2o()+
 
-		Global.Waste.Collection.wwc_KPI_GHG_unt_n2o()+
+		Global.Waste.ww_KPI_GHG_unt_n2o()+
 
 		Global.Waste.Treatment.wwt_KPI_GHG_tre_n2o()+
 
@@ -171,7 +171,7 @@ Graphs.ghg_by_source=function(withTable,container) {
 		Global.Waste.Treatment.wwt_KPI_ghg_tsludge_ch4()+
 		Global.Waste.Treatment.wwt_KPI_GHG_dig_fuel_ch4()+
 
-		Global.Waste.Collection.wwc_KPI_GHG_unt_ch4()+
+		Global.Waste.ww_KPI_GHG_unt_ch4()+
 
 		Global.Waste.Treatment.wwt_KPI_GHG_tre_ch4()+
 
@@ -184,7 +184,7 @@ Graphs.ghg_by_source=function(withTable,container) {
 	0;
 
 	//data
-	var DATA=[ 
+	var DATA=[
 		['variable','emission'],
 		['Electricity',elec],
 		['CO2',co2],
@@ -196,7 +196,7 @@ Graphs.ghg_by_source=function(withTable,container) {
 	var data=google.visualization.arrayToDataTable(DATA);
 
 	//options
-	var options={ 
+	var options={
 		height:250,
 		legend:{position:'left'},
 		title:translate("ghg_emissions_by_source")+" ("+format(Global.General.TotalGHG())+" kg CO2e)",
@@ -292,8 +292,8 @@ Graphs.ghgSources=function(withTable,container) {
 			Global.Water.Distribution.wsd_KPI_GHG_trck()+
 				 Global.Waste.Discharge.wwd_KPI_GHG_trck();
 	})();
-	var ch4u=Global.Waste.Collection.wwc_KPI_GHG_unt_ch4();
-	var n2ou=Global.Waste.Collection.wwc_KPI_GHG_unt_n2o();
+	var ch4u=Global.Waste.ww_KPI_GHG_unt_ch4();
+	var n2ou=Global.Waste.ww_KPI_GHG_unt_n2o();
 	var ch4t=Global.Waste.Treatment.wwt_KPI_GHG_tre_ch4();
 	var n2ot=Global.Waste.Treatment.wwt_KPI_GHG_tre_n2o();
 	var biog=Global.Waste.Treatment.wwt_KPI_GHG_biog();
@@ -307,8 +307,8 @@ Graphs.ghgSources=function(withTable,container) {
 		"Electricity WW",
 		"Fuel engines",
 		"Truck transport",
-		""+translate('wwc_KPI_GHG_unt_ch4_descr'),
-		""+translate('wwc_KPI_GHG_unt_n2o_descr'),
+		""+translate('ww_KPI_GHG_unt_ch4_descr'),
+		""+translate('ww_KPI_GHG_unt_n2o_descr'),
 		""+translate('wwt_KPI_GHG_tre_ch4_descr'),
 		""+translate('wwt_KPI_GHG_tre_n2o_descr'),
 		""+translate('wwt_KPI_GHG_biog_descr'),
@@ -418,8 +418,8 @@ Graphs.ghgSources=function(withTable,container) {
 			"<tr><td align=left>"+names[1]+ "<td align=left>"+elecWW_formula+"<td align=right>"+format(elecWW)+
 			"<tr><td align=left>"+names[2]+ "<td align=left>"+fuel_formula+"<td align=right>"+format(fuel)+
 			"<tr><td align=left>"+names[3]+ "<td align=left>"+trck_formula+"<td align=right>"+format(trck)+
-			"<tr><td align=left>"+names[4]+ "<td align=left><a href=variable.php?id=wwc_KPI_GHG_unt_ch4 >wwc_KPI_GHG_unt_ch4 </a><td align=right>"+format(ch4u)+
-			"<tr><td align=left>"+names[5]+ "<td align=left><a href=variable.php?id=wwc_KPI_GHG_unt_n2o >wwc_KPI_GHG_unt_n2o </a><td align=right>"+format(n2ou)+
+			"<tr><td align=left>"+names[4]+ "<td align=left><a href=variable.php?id=ww_KPI_GHG_unt_ch4 >ww_KPI_GHG_unt_ch4 </a><td align=right>"+format(ch4u)+
+			"<tr><td align=left>"+names[5]+ "<td align=left><a href=variable.php?id=ww_KPI_GHG_unt_n2o >ww_KPI_GHG_unt_n2o </a><td align=right>"+format(n2ou)+
 			"<tr><td align=left>"+names[6]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_tre_ch4 >wwt_KPI_GHG_tre_ch4 </a><td align=right>"+format(ch4t)+
 			"<tr><td align=left>"+names[7]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_tre_n2o >wwt_KPI_GHG_tre_n2o </a><td align=right>"+format(n2ot)+
 			"<tr><td align=left>"+names[8]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_biog    >wwt_KPI_GHG_biog    </a><td align=right>"+format(biog)+
@@ -832,8 +832,7 @@ Graphs.graph5=function(withTable,container) {
 	]
 
 	//actual graph data
-	var data=google.visualization.arrayToDataTable
-	([
+	var data=google.visualization.arrayToDataTable([
 		['Stage','Emissions'],
 		[names[0],slice_1],
 		[names[1],slice_2],
@@ -844,7 +843,7 @@ Graphs.graph5=function(withTable,container) {
 	]);
 
 	//options
-	var options={ 
+	var options={
 		height:300,
 		legend:{position:'left'},
 		pieHole:0.3,
@@ -921,18 +920,15 @@ Graphs.graph7=function(withTable,container) {
 	var stages = [ wsa , wst , wsd , wwc , wwt , wwd];
 	var names =  ["wsa_nrg_cons", "wst_nrg_cons", "wsd_nrg_cons", "wwc_nrg_cons", "wwt_nrg_cons", "wwd_nrg_cons" ];
 	//variable DATA will be inserted into the graph
-	var DATA = 
-	[
+	var DATA = [
 		['Stage', 'Emissions'],
 		//['name', value],
 	]
 
 	//push data to DATA
-	for(var s in stages)
-	{
+	for(var s in stages) {
 		var title;
-		switch(names[s])
-		{
+		switch(names[s]) {
 			case 'wsa_nrg_cons': title=""+translate('Abstraction')+"";break;
 			case 'wst_nrg_cons': title=""+translate('Treatment')+"";break;
 			case 'wsd_nrg_cons': title=""+translate('Distribution')+"";break;
@@ -942,15 +938,13 @@ Graphs.graph7=function(withTable,container) {
 			default:break;
 		}
 		//special case: if there are zero substages:
-		if(stages[s].length==0)
-		{
+		if(stages[s].length==0) {
 			var loc = locateVariable(names[s]);
 			var value = Global[loc.level][loc.sublevel][names[s]]
 			DATA.push([title,value])
 		}
 		//go over substages
-		for(var i in stages[s])
-		{
+		for(var i in stages[s]) {
 			var name = stages[s][i].name;
 			var value = stages[s][i][names[s]];
 			DATA.push([title+" S"+(parseInt(i)+1)+": "+name, value])
@@ -958,8 +952,7 @@ Graphs.graph7=function(withTable,container) {
 	}
 
 	var data=google.visualization.arrayToDataTable(DATA);
-	var options= 
-	{ 
+	var options= { 
 		height:300,
 		legend:{position:'left'},
 		pieHole:0.3,
@@ -968,15 +961,12 @@ Graphs.graph7=function(withTable,container) {
 	};
 	var colors = [ '#66cef5', '#0083b3', '#cceffc', '#b67800', '#f8c666', '#fad999' ];
 	var current_slice = 0;
-	for(var s in stages)
-	{
-		if(stages[s].length==0)
-		{
+	for(var s in stages) {
+		if(stages[s].length==0) {
 			options.slices[current_slice++]={color:colors[s],offset:0.1}
 			continue;
 		}
-		for(var i in stages[s])
-		{
+		for(var i in stages[s]) {
 			options.slices[current_slice++]={color:colors[s],offset:0.1}
 		}
 	}
@@ -988,10 +978,14 @@ Graphs.graph7=function(withTable,container) {
 		var buttons=document.createElement('div');
 		buttons.classList.add('tab_buttons');
 		document.getElementById(container).appendChild(buttons);
+    var checked=withTable ? "checked" : "";
 		buttons.innerHTML=""+
-			"<button class=left   onclick=Graphs.graph7("+(!withTable).toString()+",'"+container+"')>"+translate('table')+"</button>"+
-			"<button class=middle onclick=Graphs.graph5("+withTable.toString()+",'"+container+"')>"+translate('stage')+"</button>"+
-			"<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"') disabled>"+translate('substage')+"</button>"+
+      "<label>"+
+      "<input type=checkbox "+checked+" onclick=Graphs.graph7("+(!withTable).toString()+",'"+container+"')>"+translate('table')+
+      "</label>"+
+      "&emsp;"+
+			"<button class=left  onclick=Graphs.graph5("+withTable.toString()+",'"+container+"')>"+translate('stage')+"</button>"+
+			"<button class=right onclick=Graphs.graph7("+withTable.toString()+",'"+container+"') disabled>"+translate('substage')+"</button>"+
 		"";
 	})();
 
@@ -1000,11 +994,9 @@ Graphs.graph7=function(withTable,container) {
 		var table=""+
 		"<table title=graph7>"+
 		"<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th colspan='"+stages.length+"'>"+translate('substages')+" (kWh)";
-			for(var s in stages)
-			{
+			for(var s in stages) {
 				var title;
-				switch(names[s])
-				{
+				switch(names[s]) {
 					case 'wsa_nrg_cons': title=""+translate('Abstraction')+"";break;
 					case 'wst_nrg_cons': title=""+translate('Treatment')+"";break;
 					case 'wsd_nrg_cons': title=""+translate('Distribution')+"";break;
@@ -1355,8 +1347,8 @@ Graphs.untreatedww=function(container,header) {
 	container=container||"graph";
 	header=header||"kg CO2 equivalents from CH4 and N2O";
 
-	var ch4 = Global.Waste.Collection.wwc_KPI_GHG_unt_ch4()||0;
-	var n2o = Global.Waste.Collection.wwc_KPI_GHG_unt_n2o()||0;
+	var ch4 = Global.Waste.ww_KPI_GHG_unt_ch4()||0;
+	var n2o = Global.Waste.ww_KPI_GHG_unt_n2o()||0;
 	var DATA=[
 		['Label','Value'],
 		['CH4',ch4],

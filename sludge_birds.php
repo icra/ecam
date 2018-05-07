@@ -59,24 +59,23 @@
 		(function(){
 			var wwt_vol_trea=Global.Waste.Treatment.wwt_vol_trea;
 			var Days=Global.General.Days();
-			var wwc_bod_pday=Global.Waste.Collection.wwc_bod_pday;
-			var ww_serv_pop=Global.Waste.ww_serv_pop;
+			var bod_pday=Global.General.bod_pday;
+			var ww_serv_pop=Global.Waste.ww_serv_pop();
 
 			//kg of sludge estimation formula simplified
 			/*
 				Jose Porr mail:
 				Btw, here is the full sludge production equation with references and units…
 				Sludge produced (estimated at initial assessment versus actual values at detailed assessment):
-				(kgTSS) = 0.55 * (wwt_vol_trea/Days) * (wwc_bod_pday*ww_serv_pop*days/wwt_vol_trea*(1-0.1)) * 1e-3 * 1.176 * (days) 
+				(kgTSS) = 0.55 * (wwt_vol_trea/Days) * (bod_pday*ww_serv_pop*days/wwt_vol_trea*(1-0.1)) * 1e-3 * 1.176 * (days)
 				Where:
-				 
 				•	x 0.55 : ratio of g volatile suspended solids to g of substrate (BOD) removed per Metcalf and Eddy (2003).
-				•	x 0.1: Assumes 10% of the influent BOD load escapes treatment and leaves the wwtp in the effluent  
+				•	x 0.1: Assumes 10% of the influent BOD load escapes treatment and leaves the wwtp in the effluent
 				•	x 1e-3: Unit conversion factor kg/g
 				•	x 1.176: Conversion factor, ratio of total suspended solids to volatile suspended solids (g TSS/ g VSS )in typical activated sludge per Metcalf and Eddy (2003).  
 				•	Ap: Assessment period in days
 			*/
-			var mass_est=0.55*wwc_bod_pday*ww_serv_pop*(1-0.1)*1e-3*1.176*Days;
+			var mass_est=0.55*bod_pday*ww_serv_pop*(1-0.1)*1e-3*1.176*Days;
 
 			//modification if producing biogas
 			var biogas=Global.Configuration['Yes/No'].wwt_producing_biogas;

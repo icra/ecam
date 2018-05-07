@@ -348,23 +348,28 @@
             s_newRow.insertCell(-1).innerHTML=format(value);
           }
           var s_newRow=t.insertRow(-1);
-          s_newRow.insertCell(-1).outerHTML="<td class=th>Substage total";
 
-          if(typeof(currentStage[id])=='function')
-            s_newRow.insertCell(-1).innerHTML=format(currSubstage.map(s=>s[id]()).reduce((pr,cu)=>pr+cu)/Units.multiplier(id));
-          else
-            s_newRow.insertCell(-1).innerHTML=format(currSubstage.map(s=>s[id]  ).reduce((pr,cu)=>pr+cu)/Units.multiplier(id));
-
+          if(Sumable_magnitudes.indexOf(Info[id].magnitude)+1){
+            s_newRow.insertCell(-1).outerHTML="<td class=th>Substage total";
+            if(typeof(currentStage[id])=='function')
+              s_newRow.insertCell(-1).innerHTML=format(currSubstage.map(s=>s[id]()).reduce((pr,cu)=>pr+cu)/Units.multiplier(id));
+            else
+              s_newRow.insertCell(-1).innerHTML=format(currSubstage.map(s=>s[id]  ).reduce((pr,cu)=>pr+cu)/Units.multiplier(id));
+          }
         })();
       }
 
-			//Is used to calculate
-			newRow=t.insertRow(-1)
-			newCell=newRow.insertCell(-1)
-			newCell.className='th'
-			newCell.innerHTML="<?php write("#Outputs that use this value")?>"
-			newCell=newRow.insertCell(-1)
+			//Is used to calculate "utc"
+			newRow=t.insertRow(-1);
+			newCell=newRow.insertCell(-1);
+			newCell.className='th';
+			newCell.innerHTML="<?php write("#Outputs that use this value")?>";
+
+			newCell=newRow.insertCell(-1);
 			newCell.innerHTML=(function() {
+        var ret=document.createElement('table');
+        ret.id='utc';
+
 				//look for the code "id" inside each output
 				var outputsPerInput=Formulas.outputsPerInput(id);
 				//if is not used to calculate anything, hide row
@@ -372,15 +377,14 @@
 					return "<span style=color:#999><?php write('#variable_nothing')?></span>";
 				}
 
-				var ret="<table id=utc>";
-
 				outputsPerInput.forEach(function(output) {
 					var match_localization = locateVariable(output);
 					var match_level = match_localization.level;
 					var match_sublevel = match_localization.sublevel;
 					var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level];
 					if(Info[output]) {
-						var currentUnit= (Info[output].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[output]||Info[output].unit);
+						var currentUnit=(Info[output].magnitude=="Currency") ?
+              Global.General.Currency : (Global.Configuration.Units[output]||Info[output].unit);
 					}
 					else var currentUnit = "no unit";
           try{
@@ -392,16 +396,28 @@
 					currValueF=format(currValue);
 					var pretf = Formulas.prettify(match_stage[output].toString());
 					var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
-					var estimated = DQ.hasEstimatedData(output) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span> " : "";
-					ret+="<tr>"+
-						" <td class=variableCode><a style='color:"+color+"' caption='["+match_localization.toString()+"] "+(translate(output+"_descr")||translate(output))+"'"+
-						" href=variable.php?id="+output+">"+output+"</a>"+
-						"<td caption='"+encodeURIComponent(pretf)+"' style=cursor:help>"+ // TODO refactor encodeURIComponent here
-						currValueF+"<td> <span class=unit>"+currentUnit+"</span> "+estimated;
-				});
-				ret+="</table>";
+					var estimated = DQ.hasEstimatedData(output) ?
+            "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span> " : "";
+          var ret_newRow=ret.insertRow(-1);
 
-				return ret;
+          //variable code
+          ret_newRow.insertCell(-1).outerHTML=""+
+            "<td class=variableCode>"+
+            "  <a style='color:"+color+"' "+
+            "    href=variable.php?id="+output+
+            "    caption='["+match_localization.toString()+"] "+ (translate(output+"_descr")||translate(output))+"'"+
+            "  >"+output+"</a>";
+
+          //variable value and formula
+          var ret_newCell=ret_newRow.insertCell(-1);
+          ret_newCell.innerHTML=currValueF;
+          ret_newCell.setAttribute('caption',pretf);
+
+          //unit
+          ret_newRow.insertCell(-1).innerHTML="<span class=unit>"+currentUnit+"</span> "+estimated;
+				});
+
+				return ret.outerHTML;
 			})();
 
 			//If input:is used in benchmarking?
