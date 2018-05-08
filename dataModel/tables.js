@@ -1,6 +1,5 @@
 //Data structure for tabled values or dropdown menus
-var Tables =
-{
+var Tables = {
 	//fuel types
 	"Fuel types": //EFxxx: [kg/TJ], NCV: [TJ/Gg], FD: [kg/L].
 	{
@@ -134,8 +133,8 @@ Tables.wwd_fuel_typ=Tables["Fuel types"];
 Tables.wsd_trck_typ=Tables["Fuel types"]; //trucks
 Tables.wwt_trck_typ=Tables["Fuel types"]; //trucks
 Tables.wwd_trck_typ=Tables["Fuel types"]; //trucks
-Tables.wwt_dige_typ=Tables["Fuel types"]; //type of fuel dig afegida per mi
-Tables.wwt_appl_typ=Tables["Fuel types"]; //type of fuel app afegida per mi
+Tables.wwt_dige_typ=Tables["Fuel types"]; //type of fuel dig
+Tables.wwt_appl_typ=Tables["Fuel types"]; //type of fuel app
 
 //find the option (string) by field (string) and value (float)
 Tables.find=function(field,value) {

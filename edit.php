@@ -2,7 +2,7 @@
   if(!isset($_GET['level'])){die("ERROR: stage not specified");}
   /**
     * Inputs:
-    *  - $level:     mandatory {"Water","Waste","Energy"}
+    *  - $level:     mandatory {"Water","Waste"}
     *  - $sublevel:  optional. If set, enables level 3 {"Abstraction","Treatment","Distribution",[...]}
     */
   $level=$_GET['level'];
@@ -245,7 +245,6 @@
           (function() {
             var level    = '<?php echo $level?>';
             var sublevel = '<?php if($sublevel) echo $sublevel; else echo 'false' ?>';
-            if(level=="Energy"){return "NA"}
             //value per resident population
             //value per serviced population
             //value per water volume
@@ -439,7 +438,6 @@
   switch($level) {
     case "Water":
     case "Waste":  $titleLevel=$lang_json["#$level"];break;
-    case "Energy": $titleLevel="Energy summary";break;
     default:       $titleLevel=$level;break;
   }
   if($sublevel) {
@@ -590,13 +588,12 @@
     <!--level2-->
     <div style=padding:0.5em>
       <!--inputs level2-->
-      <div class=inline style="width:44%;margin-left:0.2em;<?php if($level=="Energy") echo "display:none;"?>">
+      <div class=inline style="width:44%;margin-left:0.2em;">
         <?php include'level2.php'?>
       </div>
 
       <!--outputs level2-->
-      <div id=outputs_container class=inline style="width:54%;<?php if($level=="Energy") echo "margin:auto;display:initial;"?>">
-        <?php if($level=="Energy") echo "<style>#outputs{display:none}</style>"; ?>
+      <div id=outputs_container class=inline style="width:54%;">
 
         <!--level2 GHG outputs-->
         <table id=outputs style="width:100%;background:#f6f6f6;">

@@ -153,7 +153,6 @@
 				Global.Waste.Collection,
 				Global.Waste.Treatment,
 				Global.Waste.Discharge,
-				Global.Energy
 			].forEach( obj => {
 				for(var field in obj)
 				{
@@ -251,11 +250,6 @@
 					<button onclick="updateTable(Global.Waste.Collection,   '<?php write('#energy_performance')?> - <?php write('#Collection')?>')" class="button l2"><?php write('#Collection')?></button>
 					<button onclick="updateTable(Global.Waste.Treatment,    '<?php write('#energy_performance')?> - <?php write('#Treatment')?>')"  class="button l2"><?php write('#Treatment')?></button>
 					<button onclick="updateTable(Global.Waste.Discharge,    '<?php write('#energy_performance')?> - <?php write('#Discharge')?>')"  class="button l2"><?php write('#Discharge')?></button>
-				</td>
-			</tr>
-			<tr>
-				<td colspan=2 align=center>
-					<button onclick="updateTable(Global.Energy, '<?php write('#energy_summary')?>')" class="button l2"><?php write('#energy_summary')?></button>
 				</td>
 			</tr>
 		</table>

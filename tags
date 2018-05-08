@@ -37,8 +37,7 @@ Configuration.activate	configuration.php	/^    Configuration.activate=function(i
 Configuration.activateLevels	configuration.php	/^    Configuration.activateLevels=function() {$/;"	j
 Configuration.defaults	configuration.php	/^    Configuration.defaults=function() {$/;"	j
 Configuration.reset	configuration.php	/^    Configuration.reset=function(obj) {$/;"	j
-Countries.Algeria	dataModel/countries.js	/^	"Algeria":{conv_kwh_co2:0.66420926 , prot_con:31.39 , bod_pday:37,},$/;"	p
-Countries.Brazil	dataModel/countries.js	/^	"Brazil":{ $/;"	p
+Countries.Algeria	dataModel/countries.js	/^"Algeria":      {  conv_kwh_co2:0.664209260,  prot_con:31.390,  bod_pday:37, },$/;"	p
 Cts.ct_ch4_eq	dataModel/constants.js	/^	ct_ch4_eq:{$/;"	p
 DQ.hasEstimatedData	dataModel/dataQuality.js	/^DQ.hasEstimatedData = function(field)$/;"	f
 DQ.update	dataModel/dataQuality.js	/^DQ.update=function(field,newValue) {$/;"	f
@@ -63,7 +62,7 @@ Global.Estimations.estm_wwt_mass_slu_land	dataModel/estimations.js	/^	estm_wwt_m
 Global.Estimations.estm_wwt_mass_slu_stock	dataModel/estimations.js	/^	estm_wwt_mass_slu_stock:function(){$/;"	m
 Global.Estimations.estm_wwt_temp_inc	dataModel/estimations.js	/^	estm_wwt_temp_inc:function(){$/;"	m
 Global.General	dataModel/global.js	/^  General : {$/;"	p
-Global.Waste.ww_KPI_GHG	dataModel/global.js	/^Global.Waste.ww_KPI_GHG =function(){return this.wwc_KPI_GHG()+this.wwt_KPI_GHG()+this.wwd_KPI_GHG()};$/;"	f
+Global.Waste.ww_KPI_GHG	dataModel/global.js	/^Global.Waste.ww_KPI_GHG =function(){return this.wwc_KPI_GHG()+this.wwt_KPI_GHG()+this.wwd_KPI_GHG()+this.ww_KPI_GHG_unt()};$/;"	f
 Global.Waste.wwc_KPI_GHG	dataModel/global.js	/^Global.Waste.wwc_KPI_GHG=function(){return Global.Waste.Collection.wwc_KPI_GHG() };$/;"	f
 Global.Waste.wwd_KPI_GHG	dataModel/global.js	/^Global.Waste.wwd_KPI_GHG=function(){return Global.Waste.Discharge.wwd_KPI_GHG()  };$/;"	f
 Global.Waste.wwt_KPI_GHG	dataModel/global.js	/^Global.Waste.wwt_KPI_GHG=function(){return Global.Waste.Treatment.wwt_KPI_GHG()  };$/;"	f
@@ -128,7 +127,7 @@ Graphs.ww_cost.options.legend	graphs.js	/^		legend:{position:'left'},$/;"	p
 Info.ww_KPI_GHG_unt	dataModel/info.js	/^  ww_KPI_GHG_unt:     {magnitude:"Mass",unit:"kg  CO<sub>2<\/sub>e"},$/;"	p
 Language.set	language.php	/^	Language.set=function(lang){$/;"	j
 Level2only.list	dataModel/level2only.js	/^	list: [$/;"	p
-Normalization.Water	dataModel/normalization.js	/^	Water:$/;"	p
+Normalization.Water	dataModel/normalization.js	/^  Water:{$/;"	p
 Object	js/charts/loader.js	/^Z.o.eb=function(a,c){for(var d in c)Object.prototype.hasOwnProperty.call(c,d)&&(a[d]=c[d]);for(var e=0;e<Z.o.bb.length;e++)d=Z.o.bb[e],Object.prototype.hasOwnProperty.call(c,d)&&(a[d]=c[d])};Z.vg=Y();Z.qc="goog_defineClass_legacy_unsealable";Z.debug={};Z.debug.Error=function(a){if(Error.captureStackTrace)Error.captureStackTrace(this,Z.debug.Error);else{var c=Error().stack;c&&(this.stack=c)}a&&(this.message=String(a))};Z.Ja(Z.debug.Error,Error);Z.debug.Error.prototype.name="CustomError";Z.kb={};Z.kb.dc={Tb:1,yd:2,Od:3,zd:4,Jd:5,Id:6,Nd:7,Cd:8,Ed:9,Gd:10,Fd:11,Ld:12};Z.c={};Z.c.Za=!1;Z.c.Vb=!1;Z.c.rc={bc:"\\u00a0"};Z.c.startsWith=function(a,c){return 0==a.lastIndexOf(c,0)};Z.c.endsWith=function(a,c){var d=a.length-c.length;return 0<=d&&a.indexOf(c,d)==d};Z.c.ue=function(a,c){return 0==Z.c.hb(c,a.substr(0,c.length))};Z.c.qe=function(a,c){return 0==Z.c.hb(c,a.substr(a.length-c.length,c.length))};Z.c.re=function(a,c){return a.toLowerCase()==c.toLowerCase()};$/;"	c
 Object.hasOwnProperty	js/charts/loader.js	/^Z.f.Xf=function(a,c,d){function e(a){return Z.ea(a)?"o"+Z.sb(a):(typeof a).charAt(0)+a}c=c||a;d=d||e;for(var f={},g=0,h=0;h<a.length;){var l=a[h++],m=d(l);Object.prototype.hasOwnProperty.call(f,m)||(f[m]=!0,c[g++]=l)}c.length=g};Z.f.fb=function(a,c,d){return Z.f.gb(a,d||Z.f.C,!1,c)};Z.f.je=function(a,c,d){return Z.f.gb(a,c,!0,void 0,d)};Z.f.gb=function(a,c,d,e,f){for(var g=0,h=a.length,l;g<h;){var m=g+h>>1,n;n=d?c.call(f,a[m],m,a):c(e,a[m]);0<n?g=m+1:(h=m,l=!n)}return l?g:~g};$/;"	m
 Object.hasOwnProperty	js/charts/loader.js	/^Z.o.eb=function(a,c){for(var d in c)Object.prototype.hasOwnProperty.call(c,d)&&(a[d]=c[d]);for(var e=0;e<Z.o.bb.length;e++)d=Z.o.bb[e],Object.prototype.hasOwnProperty.call(c,d)&&(a[d]=c[d])};Z.vg=Y();Z.qc="goog_defineClass_legacy_unsealable";Z.debug={};Z.debug.Error=function(a){if(Error.captureStackTrace)Error.captureStackTrace(this,Z.debug.Error);else{var c=Error().stack;c&&(this.stack=c)}a&&(this.message=String(a))};Z.Ja(Z.debug.Error,Error);Z.debug.Error.prototype.name="CustomError";Z.kb={};Z.kb.dc={Tb:1,yd:2,Od:3,zd:4,Jd:5,Id:6,Nd:7,Cd:8,Ed:9,Gd:10,Fd:11,Ld:12};Z.c={};Z.c.Za=!1;Z.c.Vb=!1;Z.c.rc={bc:"\\u00a0"};Z.c.startsWith=function(a,c){return 0==a.lastIndexOf(c,0)};Z.c.endsWith=function(a,c){var d=a.length-c.length;return 0<=d&&a.indexOf(c,d)==d};Z.c.ue=function(a,c){return 0==Z.c.hb(c,a.substr(0,c.length))};Z.c.qe=function(a,c){return 0==Z.c.hb(c,a.substr(a.length-c.length,c.length))};Z.c.re=function(a,c){return a.toLowerCase()==c.toLowerCase()};$/;"	m
@@ -437,7 +436,7 @@ defaultSludge	birds.php	/^    BEV.defaultSludge=function() {$/;"	j
 defaults	configuration.php	/^    Configuration.defaults=function() {$/;"	j
 deleteSubstage	level3.php	/^  level3.deleteSubstage=function(index) {$/;"	j
 displaySubstages	substages.php	/^		function displaySubstages() {$/;"	f
-div	dataModel/normalization.js	/^		var div = loc.sublevel ?  Global[loc.level][loc.sublevel][divisor] : Global[loc.level][divisor];$/;"	v
+div	dataModel/normalization.js	/^    var div = typeof(sta[divisor])=='function' ? sta[divisor]() : sta[divisor];$/;"	v
 document.body.onload	translation_problems.php	/^        document.body.onload=function(){$/;"	j
 document.documentElement.onclick	sidebar.php	/^		document.documentElement.onclick=function(){Sidebar.hide()};$/;"	j
 document.documentElement.onkeydown	sidebar.php	/^		document.documentElement.onkeydown=function(e){if(e.which==27){Sidebar.hide()}};$/;"	j
@@ -597,7 +596,7 @@ listUnitless	problems.php	/^					function listUnitless(obj) {$/;"	f
 listeners	caption.php	/^	Caption.listeners=function() {$/;"	j
 load	js/charts/loader.js	/^google.a.b.Pa=function(){if(google.a.b.T&&google.a.b.loaded&&(google.a.b.Mb||document.readyState===J))for(;0<google.a.b.Da.length;)google.a.b.Da.shift()()};google.a.b.Sa=function(a,c){google.a.b.cd(a,c)};if(Z.Ga(N))throw Error("Google Charts loader.js can only be loaded once.");google.a.load=function(){var a=0;"visualization"===arguments[a]&&a++;var c="current";Z.h(arguments[a])&&(c=arguments[a],a++);var d={};arguments.length>a&&(d=arguments[a],a++);var e=void 0;arguments.length>a&&(e=arguments[a]);google.a.b.load(c,d,e)};google.a.N=function(a){google.a.b.N(a)};google.a.Sa=function(a,c){google.a.b.Sa(a,c)};Z.Ba(N,google.a.load);Z.Ba(Xa,google.a.N);Z.Ba("google.charts.packageLoadedCallback",google.a.Sa); })();$/;"	f
 loadFile	sidebar.php	/^		function loadFile(evt) {$/;"	f
-loc	dataModel/normalization.js	/^		var loc = locateVariable(divisor);$/;"	v
+loc	dataModel/normalization.js	/^    var loc = locateVariable(divisor);$/;"	v
 localization.toString	utils.js	/^  localization.toString=function() {$/;"	f
 locateVariable	utils.js	/^function locateVariable(code) {$/;"	f
 main_treatment_type	treatment_birds.php	/^	function main_treatment_type() {$/;"	f
@@ -605,7 +604,7 @@ newSubstage	level3.php	/^  level3.newSubstage=function(event){$/;"	j
 newSystem	sidebar.php	/^		function newSystem() {$/;"	f
 nextPage	birds.php	/^        function nextPage(event) {$/;"	f
 nextPage	getStarted.php	/^			function nextPage()$/;"	f
-num	dataModel/normalization.js	/^		var num = sta[field]();$/;"	v
+num	dataModel/normalization.js	/^    var num = sta[field]();$/;"	v
 onblur	level2.php	/^    input.onblur=function(){level2.updateField(field,input.value)};$/;"	j
 onblur	level3.php	/^    input.onblur=function(){document.body.removeChild(div)}$/;"	j
 onchange	level3.php	/^    input.onchange=function(){level3.changeName(index,input.value)}$/;"	j
@@ -661,7 +660,7 @@ saveToFile	sidebar.php	/^		function saveToFile() {$/;"	f
 sbd	sidebar.php	/^	$sbd = (isset($_COOKIE['sidebar']) && $_COOKIE['sidebar']==1) ? "on":"off";$/;"	v
 scrollToItem	graphs.js	/^function scrollToItem(id) {$/;"	f
 select.onchange	dataModel/exceptions.js	/^		select.onchange=function() {$/;"	f
-selectCountry	configuration.php	/^        function selectCountry(select)$/;"	f
+selectCountry	configuration.php	/^        function selectCountry(select) {$/;"	f
 selectGWP	gwp.php	/^			function selectGWP(select) {$/;"	f
 selectText	export.php	/^		function selectText(el) {$/;"	f
 sep	edit.php	/^  $sep="<span style=color:black>&rsaquo;<\/span>";$/;"	v
@@ -677,7 +676,8 @@ showSubstageMenu	level3.php	/^  level3.showSubstageMenu=function(index,ev) {$/;"
 showVarName	estimations.php	/^		function showVarName(code){$/;"	f
 sludge_estimation	sludge_birds.php	/^	function sludge_estimation() {$/;"	f
 soil_type	dataModel/global.js	/^        var soil_type=Tables.find('wwt_soil_typ',this.wwt_soil_typ);\/\/<br>$/;"	v
-sta	dataModel/normalization.js	/^		var sta = loc.sublevel ?  Global[loc.level][loc.sublevel] : Global[loc.level];$/;"	v
+sta	dataModel/normalization.js	/^    var sta = loc.sublevel ?  Global[loc.level][loc.sublevel] : Global[loc.level];$/;"	v
+sta	dataModel/normalization.js	/^    var sta = loc.sublevel ? Global[loc.level][loc.sublevel] : Global[loc.level];$/;"	v
 stageName	activeStages.php	/^	aass.stageName=function(stage) {$/;"	j
 sublevel	edit.php	/^          elseif($level=="Waste" && $sublevel=="Collection")   {$alias="wasteCol"; $iwaLink.='stage\/wastewater_collection';}$/;"	v
 sublevel	edit.php	/^          elseif($level=="Waste" && $sublevel=="Discharge")    {$alias="wasteDis"; $iwaLink.='stage\/wastewater_discharge';}$/;"	v
@@ -698,7 +698,6 @@ tags	translation_problems.php	/^      $tags=[];$/;"	v
 td.onmouseout	sources.php	/^			td.onmouseout=function(){document.querySelector('#container_detailed').style.display='none'};$/;"	j
 text	languages/write.php	/^    $text = isset($lang_json[$id]) ? $lang_json[$id] : "['$id' tag missing in '$lang' language]";$/;"	v
 title	edit.php	/^  $title=$sublevel$/;"	v
-titleLevel	edit.php	/^    case "Energy": $titleLevel="Energy summary";break;$/;"	v
 titleLevel	edit.php	/^    case "Waste":  $titleLevel=$lang_json["#$level"];break;$/;"	v
 titleLevel	edit.php	/^    default:       $titleLevel=$level;break;$/;"	v
 titleSublevel	edit.php	/^    $titleSublevel="<span style='font-size:26px'>".$lang_json["#$sublevel"]."<\/span>";$/;"	v
@@ -742,6 +741,7 @@ updateSubstage	substage.php	/^		function updateSubstage() {$/;"	f
 updateSubstagesTable	level3.php	/^  level3.updateSubstagesTable=function() {$/;"	j
 updateTable	export.php	/^		function updateTable(obj,name) {$/;"	f
 updateValorizingBiogas	biogas_birds.php	/^	BEV.updateValorizingBiogas=function(newValue){$/;"	j
+value	edit.php	/^          $value = $level=="Water" ? "Global.Water.ws_serv_pop" : "Global.Waste.ww_serv_pop()";$/;"	v
 var.options.height	graphs.js	/^		height:300,$/;"	p
 var.options.legend	graphs.js	/^		legend:{position:'left'},$/;"	p
 window.onload	js/charts/loader.js	/^google.a.b.N(c.callback);google.a.b.Uc(h,function(){google.a.b.Xc(h,e)})}}};google.a.b.N=function(a){a&&google.a.b.Da.push(a);google.a.b.loaded&&!google.a.b.oa&&google.a.b.Pa()};google.a.b.kd=function(a){if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a);else{var c=window.onload;window.onload=function(d){c&&c(d);a()}}};google.a.b.Mb=document&&document.readyState===J;google.a.b.kd(function(){google.a.b.Mb=!0;google.a.b.Pa()});$/;"	f

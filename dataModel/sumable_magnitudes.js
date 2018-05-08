@@ -10,7 +10,8 @@ var Sumable_magnitudes = [
   "Flow",
   "Energy",
   "Power",
-  "Head",
   "Number",
-  "Pressure",
+
+  "Voltage",
+  "Intensity",
 ];

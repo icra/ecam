@@ -24,6 +24,9 @@
   "#ww_uncl_pop_descr":"Population whose wastewater is not collected",
   "#ww_uncl_pop_expla":"Population whose wastewater is not collected",
 
+  "#c_wwt_dist_dis_descr":"Distance traveled by trucks",
+  "#c_wwt_dist_dis_expla":"Distance traveled by trucks to the different sludge disposal sites. Note that the tool calculates the round trip distance as twice the distance to the disposal site.",
+
   "#About non revenue water":"About non revenue water",
   "#Abstraction":"Abstraction",
   "#Activated Sludge - Minor poorly aerated zones":"Activated Sludge - Minor poorly aerated zones",

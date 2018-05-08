@@ -341,14 +341,17 @@
               if(typeof(currentStage[id])=='function'){
                 return currSubstage[i][id]()/Units.multiplier(id);
               }else{
-                return currSubstage[i][id]/Units.multiplier(id);
+                if(Info[id].magnitude=='Option'){
+                  return Tables.find(id,currSubstage[i][id]);
+                }else{
+                  return currSubstage[i][id]/Units.multiplier(id);
+                }
               }
             })();
             s_newRow.insertCell(-1).innerHTML="<a href=substage.php?level="+level+"&sublevel="+sublevel+"&index="+i+">Substage "+(i+1)+" ("+currSubstage[i].name+")</a>";
-            s_newRow.insertCell(-1).innerHTML=format(value);
+            s_newRow.insertCell(-1).innerHTML=typeof(value)=='number'?format(value):value;
           }
           var s_newRow=t.insertRow(-1);
-
           if(Sumable_magnitudes.indexOf(Info[id].magnitude)+1){
             s_newRow.insertCell(-1).outerHTML="<td class=th>Substage total";
             if(typeof(currentStage[id])=='function')
@@ -427,14 +430,12 @@
 				newCell.className='th'
 				newCell.innerHTML="Benchmarks where is used"
 				newCell=newRow.insertCell(-1)
-				newCell.innerHTML=(function()
-				{
+				newCell.innerHTML=(function() {
 					//find if input is used in benchmark
 					var benchmarks=Utils.usedInBenchmarks(id);
 					if(benchmarks.length==0) return "<span style=color:#999>None</span>";
 					var ret="<table id=bminv>";
-					benchmarks.forEach(function(bm)
-					{
+					benchmarks.forEach(function(bm) {
 						ret+="<tr><td><a caption='"+translate(bm+"_descr")+"' href=variable.php?id="+bm+">"+bm+"</a>";
 					});
 					ret+="</table>";

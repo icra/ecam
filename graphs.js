@@ -262,9 +262,9 @@ Graphs.ghgSources=function(withTable,container) {
 	container=container||"graph";
 
 	/*
-		sources: 
-			elecWS, elecWW, fuel, fuel trucks, sludge wst, 
-			ch4_unt, n2o_unt, ch4_tre, n2o_tre, biogas 
+		sources:
+			elecWS, elecWW, fuel, fuel trucks, sludge wst,
+			ch4_unt, n2o_unt, ch4_tre, n2o_tre, biogas
 	*/
 	var elecWS=(function(){
 		return 0+
@@ -335,8 +335,8 @@ Graphs.ghgSources=function(withTable,container) {
 	]);
 
 	//options
-	var options= 
-	{ 
+	var options=
+	{
 		height:250,
 		legend:{position:'left'},
 		title:translate('ghg_emissions_by_source_detailed')+" ("+format(Global.General.TotalGHG())+" kg CO2e)",
@@ -456,7 +456,7 @@ Graphs.unfccc=function(withTable,container){
 	var data=google.visualization.arrayToDataTable(DATA);
 
 	//options
-	var options={ 
+	var options={
 		height:250,
 		legend:{position:'left'},
 		title:translate('ghg_emissions_by_unfccc')+" ("+format(total_ghg)+" kg CO2e)",
@@ -547,7 +547,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 	var value = getValue(code);
 
 	//data
-	var DATA=[ 
+	var DATA=[
 		['variable','emission'],
 	];
 
@@ -572,7 +572,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 	})();
 
 	//options
-	var options={ 
+	var options={
 		height:250,
 		legend:{position:'left'},
 		title:translate('ghg_emissions_by_l2')+" "+stageName+" ("+format(value)+" kg CO2e)",
@@ -589,7 +589,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 		a.href=chart.getImageURI()
 		a.download="image.png"
 		a.click()
-	}
+	};
 
 	//draw
 	var chart=new google.visualization.PieChart(con);
@@ -952,7 +952,7 @@ Graphs.graph7=function(withTable,container) {
 	}
 
 	var data=google.visualization.arrayToDataTable(DATA);
-	var options= { 
+	var options= {
 		height:300,
 		legend:{position:'left'},
 		pieHole:0.3,
@@ -1032,7 +1032,7 @@ Graphs.graph3a=function(withTable,container) {
 	var WW = Global.Waste;
 	var years = Global.General.Years();
 
-	//total kg 
+	//total kg
 	var ws_el = WS.ws_KPI_GHG_elec();
 	var ws_ne = WS.ws_KPI_GHG_ne();
 	var ww_el = WW.ww_KPI_GHG_elec();
@@ -1054,9 +1054,9 @@ Graphs.graph3a=function(withTable,container) {
 	//data
 	var data=google.visualization.arrayToDataTable
 	([
-		[ 
-			'Emission type', names[0], names[1], names[2], names[3], 
-			{role:'annotation'} 
+		[
+			'Emission type', names[0], names[1], names[2], names[3],
+			{role:'annotation'}
 		],
 		[translate('Water'),slice_1,slice_2,0,0,''],
 		[translate('Waste'),0,0,slice_3,slice_4,''],
@@ -1272,7 +1272,7 @@ Graphs.ws_cost=function(container) {
 	]);
 
 	//options
-	var options={ 
+	var options={
 		height:225,
 		legend:{position:'left'},
 		title:translate('water_supply_costs')+" ("+format(run+nrg)+" "+Global.General.Currency+")",
@@ -1318,7 +1318,7 @@ Graphs.ww_cost=function(container) {
 	]);
 
 	//options
-	var options={ 
+	var options={
 		height:225,
 		legend:{position:'left'},
 		title:translate('waste_supply_costs')+" ("+format(run+nrg)+" "+Global.General.Currency+")",

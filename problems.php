@@ -98,7 +98,7 @@
 			}
 
 			//quick fix to see if fields are used in benchmarks also
-			['Water','Waste','Energy'].forEach(function(level) {
+			['Water','Waste'].forEach(function(level) {
 				var unused=getUnused(Global[level])
 				unused.forEach(function(field) {
 					//is used in benchmark?
@@ -119,7 +119,7 @@
 
 	<!--questions-->
 	<div class=inline style="max-width:20%">
-		<table><tr><th>Inexisting variable codes that appear in questions.js 
+		<table><tr><th>Inexisting variable codes that appear in questions.js
 			<script>
 				for(var q in Questions) {
 					if(typeof(Questions[q])=="function") continue;
