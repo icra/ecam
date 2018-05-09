@@ -26,7 +26,5 @@ var Level2only = {
 		//"wwd_vol_trck",
 		//"wwd_trck_typ",
     "wwt_type_tre", //related to wwt_ch4_efac
-		"wwd_reus_typ", //hidden
-		"wwd_main_len", //hidden
 	],
 };

@@ -1,7 +1,6 @@
 //magnitudes that can be added (+) in substages
 //for inputs and outputs
-
-var Sumable_magnitudes = [
+var Sumable_magnitudes=[
   "Mass",
   "Distance",
   "Time",
@@ -11,7 +10,6 @@ var Sumable_magnitudes = [
   "Energy",
   "Power",
   "Number",
-
   "Voltage",
   "Intensity",
 ];

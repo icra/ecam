@@ -279,17 +279,23 @@
       <table id=inputs style=width:100%>
         <!--WATER-->
         <tr><th colspan=3 style="background:#0aaff1">
-          <img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
-          <!--water population-->
-          <span style=float:right>
-            <img src=img/inhabitants.png width=25 caption="Water supply population" style=vertical-align:middle>
-            <b caption="<?php write('#ws_serv_pop_descr')?>" id=ws_serv_pop onclick=window.location='inhabitants.php'>0</b> /
-            <b caption="<?php write('#ws_resi_pop_descr')?>" id=ws_resi_pop onclick=window.location='inhabitants.php'>0</b>
-            <script>
-              document.querySelector('#ws_serv_pop').innerHTML=format(Global.Water.ws_serv_pop);
-              document.querySelector('#ws_resi_pop').innerHTML=format(Global.Water.ws_resi_pop);
-            </script>
-          </span>
+          <div class=flex style="justify-content:space-between">
+            <div>
+              <img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
+            </div>
+
+            <!--water population-->
+            <div>
+              <img src=img/inhabitants.png width=25 caption="Water supply population" style=vertical-align:middle>
+              <b caption="<?php write('#ws_serv_pop_descr')?>" id=ws_serv_pop onclick=window.location='inhabitants.php'>0</b> /
+              <b caption="<?php write('#ws_resi_pop_descr')?>" id=ws_resi_pop onclick=window.location='inhabitants.php'>0</b>
+              <script>
+                document.querySelector('#ws_serv_pop').innerHTML=format(Global.Water.ws_serv_pop);
+                document.querySelector('#ws_resi_pop').innerHTML=format(Global.Water.ws_resi_pop);
+              </script>
+            </div>
+          </div>
+
           <tr stage=water class=hidden><td style=width:40%><?php write('#nrg_cons')?><td class=output><input id='ws_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
           <tr stage=water class=hidden><td><?php write('#vol_fuel')?>                <td class=output><input id='ws_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
           <tr stage=water class=hidden><td><?php write('#wsd_vol_dist_descr')?><td class=input><input id='wsd_vol_dist' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
@@ -302,19 +308,25 @@
 
         <!--WASTEWATER-->
         <tr><th colspan=3 style=background:#d71d24>
-          <img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
-          <!--wastewater population-->
-          <span style=float:right>
-            <img src=img/inhabitants.png width=25 caption="Wastewater population" style="vertical-align:middle">
-            <b caption="<?php write('#ww_serv_pop_descr')?>" id=ww_serv_pop onclick=window.location='inhabitants.php'>0</b> /
-            <b caption="<?php write('#ww_conn_pop_descr')?>" id=ww_conn_pop onclick=window.location='inhabitants.php'>0</b> /
-            <b caption="<?php write('#ww_resi_pop_descr')?>" id=ww_resi_pop onclick=window.location='inhabitants.php'>0</b>
-            <script>
-              document.querySelector('#ww_serv_pop').innerHTML=format(Global.Waste.ww_serv_pop());
-              document.querySelector('#ww_conn_pop').innerHTML=format(Global.Waste.ww_conn_pop());
-              document.querySelector('#ww_resi_pop').innerHTML=format(Global.Waste.ww_resi_pop);
-            </script>
-          </span>
+          <div class=flex style="justify-content:space-between">
+            <div>
+              <img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
+            </div>
+
+            <!--wastewater population-->
+            <div>
+              <img src=img/inhabitants.png width=25 caption="Wastewater population" style="vertical-align:middle">
+              <b caption="<?php write('#ww_serv_pop_descr')?>" id=ww_serv_pop onclick=window.location='inhabitants.php'>0</b> /
+              <b caption="<?php write('#ww_conn_pop_descr')?>" id=ww_conn_pop onclick=window.location='inhabitants.php'>0</b> /
+              <b caption="<?php write('#ww_resi_pop_descr')?>" id=ww_resi_pop onclick=window.location='inhabitants.php'>0</b>
+              <script>
+                document.querySelector('#ww_serv_pop').innerHTML=format(Global.Waste.ww_serv_pop());
+                document.querySelector('#ww_conn_pop').innerHTML=format(Global.Waste.ww_conn_pop());
+                document.querySelector('#ww_resi_pop').innerHTML=format(Global.Waste.ww_resi_pop);
+              </script>
+            </div>
+          </div>
+
           <tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
           <tr stage=waste class=hidden><td><?php write('#ww_nrg_cons_descr') ?><td class=output><input id='ww_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_nrg_cons'].unit)</script>
           <tr stage=waste class=hidden><td><?php write('#vol_fuel')?>          <td class=output><input id='ww_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_vol_fuel'].unit)</script>

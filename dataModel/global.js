@@ -660,7 +660,6 @@ var Global = {
       "wwd_nrg_cons":0,
       "wwd_n2o_effl":0,
       "wwd_vol_nonp":0,//Volume of water reused
-      "wwd_reus_typ":0,
       wwd_KPI_nrg_per_m3:function(){return this.wwd_nrg_cons/this.wwd_vol_disc||0},
       wwd_SL_ghg_non: function(){return this.wwd_n2o_effl/1000*this.wwd_vol_nonp*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value},
       //fuel engines?
@@ -674,7 +673,6 @@ var Global = {
       "wwd_nrg_pump":0,
       //pumping efficiency?
       "wwd_pmp_head":0,
-      "wwd_main_len":0,
       wwd_KPI_std_nrg_cons:function(){return this.wwd_nrg_pump/(this.wwd_vol_pump*this.wwd_pmp_head/100)},
       //wwd GHG
       wwd_KPI_GHG_elec:function(){return this.wwd_nrg_cons*Global.General.conv_kwh_co2},

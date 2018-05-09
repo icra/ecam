@@ -67,7 +67,7 @@
       //SUM header
       var newTH = document.createElement('th');
       newRow.appendChild(newTH);
-      newTH.innerHTML="<center>Substages total</center>";
+      newTH.innerHTML="<center>Substages sum</center>";
       newTH.rowSpan=2;
       newTH.colSpan=2;
 
@@ -198,6 +198,9 @@
     //is an option?
     var isOption = (Info[code]&&Info[code].magnitude=="Option");
 
+    //isSumable
+    var isSumable = Info[code] && Sumable_magnitudes.indexOf(Info[code].magnitude)+1;
+
     /*new row*/
     var newRow=t.insertRow(-1);
     newRow.setAttribute('field',code);
@@ -232,11 +235,8 @@
           newCell.setAttribute('substage',s);
           (function(){
             var select=document.createElement('select');
-            newCell.appendChild(select)
-            if(substages.length==1)
-              select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);CurrentLevel["'+code+'"]=parseInt(this.value);init()')
-            else
-              select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);init()')
+            newCell.appendChild(select);
+            select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);init()');
             for(var op in Tables[code]){
               var option = document.createElement('option');
               var value = parseInt(Tables[code][op].value);
@@ -313,6 +313,7 @@
       })();
     }
 
+    //stage value
     var sta=CurrentLevel[code]/Units.multiplier(code);
 
     //sum of substages here
@@ -322,50 +323,58 @@
       //sum all values
       var value=level3.sumAll(code)/Units.multiplier(code);
 
-      //update stage level button
-      var onclick = value==sta ? "disabled=true" :"onclick=level2.updateField('"+code+"',"+value+")";
+      var extra_btns="<td style=text-align:center>";
 
-      //if input magnitude is not sumable: create a button to set the input to the average
-      if(!Info[code] || Sumable_magnitudes.indexOf(Info[code].magnitude)==-1){
-        var value_average = value/substages.length;
-        var btn=(function(){
-          var disabled=(format(value_average)==format(sta))? "disabled":"";
-          return "<button onclick=level2.updateField('"+code+"',"+value_average+") "+disabled+">"+
-            "update stage value &rarr;"+
-          "</button>";
+      //btn "update stage level"
+      var btn_overwrite=(function(){
+        var btn_value = isSumable ? value : value/substages.length; //sum or average
+        var onclick   = "onclick=level2.updateField('"+code+"',"+btn_value+")";
+        var disabled  = btn_value==sta ? "disabled":"";
+        return '<button '+onclick+' '+disabled+
+          ' caption="Update the stage value using the sum of substages">'+
+          '&rarr;</button>';
+      })();
+      extra_btns+=btn_overwrite;
+
+      //btn "split among substages"
+      if(substages.length){
+        var btn_copy = (function(){
+          var disabled = value==sta ? "disabled":"";
+          return '<button '+
+            disabled+' '+
+            'caption="Split stage value ('+format(sta)+') among substages" '+
+            'onclick=\"substages.forEach(s=>{s[\''+code+'\']=CurrentLevel[\''+code+'\']/'+(isSumable?substages.length:1)+'});init()\">'+
+            '&larr;'+
+          '</button>';
         })();
-        return "<td style=text-align:center>"+
-          "<code style=font-size:smaller caption=average>avg:</code> "+format(value_average)+
-          "<td>"+btn;
+        extra_btns+=" "+btn_copy;
       }
 
-      //button "overwrite stage value with substage sum"
-      var btn='<button '+onclick+' caption="Current value ('+format(sta)+') will be overwritten with this sum">'+
-        'update stage value &rarr;'+
-      '</button>';
-
-      //button "copy value from stage to substage[0]"
-      if(substages.length==1 && substages[0][code]!=CurrentLevel[code]){
-        btn+=' <button '+
-          'caption="Current value ('+format(sta)+') will be used in this substage" '+
-          'onclick=substages[0]["'+code+'"]=CurrentLevel["'+code+'"];init()>'+
-          '&larr; copy from stage'+
-        '</button>';
-      }
-
-      return "<td style=text-align:center>"+
-        "<code style=font-size:smaller caption=sum>sum:</code>"+format(value)+
-        "<td>"+btn;
+      return "<td style=text-align:center>"+format(isSumable?value:value/substages.length)+extra_btns;
     })();
 
     //stage value of input
-    newRow.insertCell(-1).innerHTML=(function(){
-      if(isOption){
-        return "<center>"+Tables.find(code,sta)+"</center>";
-      }else{
-        return "<center>"+format(sta)+"</center>";
-      }
-    })();
+    var newCell=newRow.insertCell(-1);
+    newCell.classList.add("input");
+    if(isOption){
+      (function(){
+        var select=document.createElement('select');
+        newCell.appendChild(select);
+        newCell.style.textAlign='left';
+        select.setAttribute('onchange','CurrentLevel["'+code+'"]=parseInt(this.value);init()');
+        for(var op in Tables[code]){
+          var option=document.createElement('option');
+          var value=parseInt(Tables[code][op].value);
+          select.appendChild(option);
+          option.value=value;
+          option.innerHTML="("+value+") "+op;
+          if(CurrentLevel[code]==value){option.selected=true;}
+        }
+      })();
+    }else{
+      newCell.setAttribute('onclick','level2.transformField(this)');
+      newCell.innerHTML=format(CurrentLevel[code]/Units.multiplier(code));
+    }
   }
 
   level3.drawOutput=function(t,code,question,showGHGss,showSLss){

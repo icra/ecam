@@ -640,9 +640,10 @@ Graphs.graph4=function(withTable,container) {
 	var slice_4 = Global.Waste.Collection.wwc_KPI_GHG();
 	var slice_5 = Global.Waste.Treatment.wwt_KPI_GHG();
 	var slice_6 = Global.Waste.Discharge.wwd_KPI_GHG();
+  var slice_7 = Global.Waste.ww_KPI_GHG_unt();
 
 	//sum
-	var sum = slice_1+slice_2+slice_3+slice_4+slice_5+slice_6;
+	var sum = slice_1+slice_2+slice_3+slice_4+slice_5+slice_6+slice_7;
 
 	//names
 	var names=[
@@ -652,6 +653,7 @@ Graphs.graph4=function(withTable,container) {
 		"WW Collection",
 		"WW Treatment",
 		"WW Discharge",
+    "Untreated WW",
 	];
 
 	//actual graph data
@@ -663,6 +665,7 @@ Graphs.graph4=function(withTable,container) {
 		[names[3],slice_4],
 		[names[4],slice_5],
 		[names[5],slice_6],
+    [names[6],slice_7],
 	]);
 
 	//options
@@ -671,12 +674,15 @@ Graphs.graph4=function(withTable,container) {
 		legend:{position:'left'},
 		title:translate('ghg_emissions_by_stage')+" ("+format(sum)+" kg CO2e)",
 		slices:{
-			0:{color:ColorsGHG.ws_KPI_GHG_elec      },
-			1:{color:ColorsGHG.ws_KPI_GHG_ne        },
-			2:{color:ColorsGHG.ww_KPI_GHG_elec      },
-			3:{color:ColorsGHG.ww_KPI_GHG_ne_ch4_wwt},
-			4:{color:ColorsGHG.ww_KPI_GHG_ne_n2o_tre},
-			5:{color:ColorsGHG.ww_KPI_GHG_ne_tsludge},
+      /*
+        0:{color:ColorsGHG.ws_KPI_GHG_elec      },
+        1:{color:ColorsGHG.ws_KPI_GHG_ne        },
+        2:{color:ColorsGHG.ww_KPI_GHG_elec      },
+        3:{color:ColorsGHG.ww_KPI_GHG_ne_ch4_wwt},
+        4:{color:ColorsGHG.ww_KPI_GHG_ne_n2o_tre},
+        5:{color:ColorsGHG.ww_KPI_GHG_ne_tsludge},
+        6:{color:ColorsGHG.ww_KPI_GHG_ne_tsludge},
+      */
 		},
 	};
 

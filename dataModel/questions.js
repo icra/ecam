@@ -507,7 +507,6 @@ var Questions={
 				"wwd_vol_pump",
 				"wwd_nrg_pump",
 				"wwd_pmp_head",
-				"wwd_main_len",
 				"wwd_KPI_std_nrg_cons",
 			],
 			advanced:1,

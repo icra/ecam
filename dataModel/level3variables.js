@@ -132,6 +132,4 @@ Level3.list=[
 	"wwd_KPI_GHG_trck_n2o",
 	"wwd_KPI_GHG_trck_ch4",
 	"wwd_KPI_std_nrg_cons",
-	"wwd_reus_typ",//hidden
-	"wwd_main_len",//hidden
 ];

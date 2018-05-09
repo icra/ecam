@@ -115,10 +115,8 @@
         if(isNaN(newValue))newValue=0;
         newValue*=Units.multiplier(field);
         //only update real inputs
-        if(typeof(CurrentLevel[field])!="function")
-        {
+        if(typeof(CurrentLevel[field])!="function") {
           CurrentLevel[field]=newValue;
-          if(substages.length==1) substages[0][field]=newValue;
         }
         //try to draw charts
         drawCharts();
@@ -300,13 +298,11 @@
       }
       else {
         var str="<select onchange=Units.selectUnit('"+field+"',this.value)>";
-        if(Units[Info[field].magnitude]===undefined)
-        {
+        if(Units[Info[field].magnitude]===undefined) {
           return Info[field].unit
         }
         var currentUnit = Global.Configuration.Units[field] || Info[field].unit
-        for(var unit in Units[Info[field].magnitude])
-        {
+        for(var unit in Units[Info[field].magnitude]) {
           if(unit==currentUnit)
             str+="<option selected>"+unit+"</option>";
           else
