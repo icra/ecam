@@ -397,8 +397,8 @@
           }
 
 					currValueF=format(currValue);
-					var pretf = Formulas.prettify(match_stage[output].toString());
-					var color = output.search('ww')==-1 ? "#0aaff1":"#bf5050";
+					var pretf=Formulas.prettify(match_stage[output].toString());
+					var color=output.search('ww')==-1 ? "#0aaff1":"#bf5050";
 					var estimated = DQ.hasEstimatedData(output) ?
             "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span> " : "";
           var ret_newRow=ret.insertRow(-1);

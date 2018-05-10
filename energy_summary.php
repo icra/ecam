@@ -4,14 +4,9 @@
     function init() {
       calculateGHG();
       findCriticGHG();
+      addDetailedListeners();
       Caption.listeners();
       updateResult();
-
-      //onclick listeners for substage counters: link to substages.php
-      var tds=document.querySelectorAll('td.ss');
-      for(var i=0;i<tds.length;i++){
-        tds[i].onclick=function(){window.location='substages.php'}
-      }
     }
 
     function calculateGHG() {
@@ -83,17 +78,52 @@
       if(!critic)return;
       var element=document.querySelector("#sources td[field="+critic+"]");
 
-      //CO2
+      //stage value
+      var cap=translate("This is the highest Energy consumption of your system");
       element.classList.add('critic');
-      element.setAttribute('cap',translate("This is the highest Energy consumption of your system"));
+      element.setAttribute('title',cap);
+    }
 
-      //substages number
-      element.previousSibling.classList.add('critic');
-      element.previousSibling.setAttribute('caption',element.getAttribute('cap'));
+    function addDetailedListeners() {
+      var tds=document.querySelectorAll("td[field][level][sublevel]");
+      for(var i=0;i<tds.length;i++) {
+        tds[i].onmousemove=function(event) {
+          var con=document.querySelector('#container_detailed');
+          con.style.display='';
+          con.style.left=(event.clientX+35)+"px";
+          con.style.top=(event.clientY-50)+"px";
+        }
+      }
+    }
 
-      //name
-      element.previousSibling.previousSibling.classList.add('critic');
-      element.previousSibling.previousSibling.setAttribute('caption',element.getAttribute('cap'));
+    //fill table of emissions per substages
+    function fillSourcesSubstages(td,ev) {
+      //fill table
+      var fie=td.getAttribute('field');
+      var loc=locateVariable(fie);
+      var lvl=loc.level;
+      var sub=loc.sublevel;
+      var obj=Substages[lvl][sub];
+      var t=document.querySelector('table#detailed');
+      document.querySelector('#detailed_title').innerHTML=translate('Substages energy consumption')||"Substages energy consumption";
+      while(t.rows.length>0)t.deleteRow(-1);
+      //go over substages
+      obj.forEach(substage=>{
+        var newRow=t.insertRow(-1);
+        newRow.insertCell(-1).innerHTML=substage.name;
+        var newCell=newRow.insertCell(-1);
+        newCell.style.textAlign='right';
+        newCell.innerHTML=format(substage[fie]);
+      });
+      //total
+      var newRow=t.insertRow(-1);
+      newRow.insertCell(-1).innerHTML="<b>Total</b>";
+      var newCell=newRow.insertCell(-1);
+      newCell.style.textAlign='right';
+      newCell.innerHTML="<b>"+format(substage[fie])+"</b>";
+
+      //hide table
+      td.onmouseout=function(){document.querySelector('#container_detailed').style.display='none'};
     }
   </script>
   <style>
@@ -178,18 +208,16 @@
           </a>
           <br><br><span field=ws_nrg_cons><?php write('#Loading')?>...</span>
         </th>
+
           <!--wsa-->
           <td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'><?php write('#Abstraction')?></a>
-            <td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Water.Abstraction.length)</script>
-            <td field=wsa_nrg_cons level=Water sublevel=Abstraction><?php write('#Loading')?>...
+            <td field=wsa_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Water sublevel=Abstraction><?php write('#Loading')?>...
           <!--wst-->
           <tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'><?php write('#Treatment')?></a>
-            <td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Water.Treatment.length)</script>
-            <td field=wst_nrg_cons level=Water sublevel=Treatment><?php write('#Loading')?>...
+            <td field=wst_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Water sublevel=Treatment><?php write('#Loading')?>...
           <!--wsd-->
           <tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'><?php write('#Distribution')?></a>
-            <td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Water.Distribution.length)</script>
-            <td field=wsd_nrg_cons level=Water sublevel=Distribution><?php write('#Loading')?>...
+            <td field=wsd_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Water sublevel=Distribution><?php write('#Loading')?>...
           </tr>
         <tr>
 
@@ -205,18 +233,15 @@
 
           <!--wwc-->
           <td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'><?php write('#Collection')?></a>
-            <td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Waste.Collection.length)</script>
-            <td field=wwc_nrg_cons level=Waste sublevel=Collection><?php write('#Loading')?>...
+            <td field=wwc_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Waste sublevel=Collection><?php write('#Loading')?>...
 
           <!--wwt-->
           <tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'><?php write('#Treatment')?> </a>
-            <td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Waste.Treatment.length)</script>
-            <td field=wwt_nrg_cons level=Waste sublevel=Treatment><?php write('#Loading')?>...
+            <td field=wwt_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Waste sublevel=Treatment><?php write('#Loading')?>...
 
           <!--wwd-->
           <tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'><?php write('#Discharge')?> </a>
-            <td caption="<?php write('#Number of substages')?>" class=ss><script>document.write(Substages.Waste.Discharge.length)</script>
-            <td field=wwd_nrg_cons level=Waste sublevel=Discharge><?php write('#Loading')?>...
+            <td field=wwd_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Waste sublevel=Discharge><?php write('#Loading')?>...
         </tr>
       </table>
     </div>
@@ -246,9 +271,26 @@
 
   <!--graph: right tab-->
   <div id=graph style=display:none><?php write('#Loading')?>...</div>
-
 </div>
+
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
-<script>
-  google.charts.load('current',{'packages':['corechart','gauge','bar']});
-</script>
+<script>google.charts.load('current',{'packages':['corechart','gauge','bar']});</script>
+
+<!--caption div for substages energy consumption -->
+<div id=container_detailed style=display:nnone>
+  <div><b id=detailed_title></b></div>
+  <table id=detailed></table>
+  <style>
+    div#container_detailed {
+      font-size:11px;
+      font-family:monospace;
+      position:fixed;
+      z-index:1000;
+      background:white;
+      padding:0.3em 0.5em;
+      box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
+      border:1px solid #ccc;
+      text-align:left;
+    }
+  </style>
+</div>

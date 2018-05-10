@@ -1,5 +1,5 @@
 <!--estimation of sludge produced in wwt (birds.php)-->
-<select id=sludge_estimation onchange=sludge_estimation()>
+<select id=sludge_estimation onchange=sludge_estimation() style="font-size:smaller">
 	<option value=0><?php write('#none')?>
 	<option value=comp><?php write('#comp')?>
 	<option value=inc><?php write('#inc')?>

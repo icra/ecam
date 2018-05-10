@@ -49,13 +49,19 @@ function locateVariable(code) {
 //return directly the variable value
 function getVariable(code){
   var loc=locateVariable(code);
+  var pointer=null;
   if(!loc){
     return false;
   }else if(loc.sublevel){
-    return Global[loc.level][loc.sublevel][code];
+    pointer=Global[loc.level][loc.sublevel];
   }else{
-    return Global[loc.level][code];
+    pointer=Global[loc.level];
   }
+  //check pointer to level or sublevel
+  if(!pointer)return false;
+  //return value
+  if     (typeof(pointer[code])=='number')   return pointer[code];
+  else if(typeof(pointer[code])=='function') return pointer[code]();
 }
 
 /*convert number to formated string: i.e. "3.999,4" instead of 3999.4*/
@@ -91,14 +97,11 @@ var ColorsGHG = {
 
 var Utils={};//namespace
 //return array of codes that use "code" in its formula
-Utils.usedInBenchmarks=function(code)
-{
+Utils.usedInBenchmarks=function(code) {
   var benchmarks=[];
-  for(var bm in RefValues)
-  {
+  for(var bm in RefValues) {
     var bm_formula=RefValues[bm];
-    if(bm_formula.toString().indexOf(code)+1)
-    {
+    if(bm_formula.toString().indexOf(code)+1) {
       benchmarks.push(bm);
     }
   }

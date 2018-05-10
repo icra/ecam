@@ -12,4 +12,5 @@ var Sumable_magnitudes=[
   "Number",
   "Voltage",
   "Intensity",
+  "Head",
 ];

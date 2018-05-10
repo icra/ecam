@@ -31,7 +31,7 @@
 
   /** INPUTS redisplay */
   level3.updateSubstagesTable=function() {
-    console.time('updateSubstagesTable');
+    //console.time('updateSubstagesTable');
 
     /*table element*/
     var t=document.getElementById('substages');
@@ -67,7 +67,7 @@
       //SUM header
       var newTH = document.createElement('th');
       newRow.appendChild(newTH);
-      newTH.innerHTML="<center>Substages sum</center>";
+      newTH.innerHTML="<center>Substages total<br>or average</center>";
       newTH.rowSpan=2;
       newTH.colSpan=2;
 
@@ -185,7 +185,7 @@
     document.getElementById('counter').innerHTML=substages.length
 
     //end
-    console.timeEnd('updateSubstagesTable');
+    //console.timeEnd('updateSubstagesTable');
   }
 
   level3.drawInput=function(t,code,question){
@@ -212,7 +212,6 @@
         //1: show code
         var newCell=newRow.insertCell(-1);
         newCell.classList.add('variableCode');
-        newCell.setAttribute('caption',translate(code+'_expla'));
         newCell.innerHTML=(function(){
           return "<div><a href=variable.php?id="+code+">"+code+"</a></div>";
         })();
@@ -235,6 +234,7 @@
           newCell.setAttribute('substage',s);
           (function(){
             var select=document.createElement('select');
+            select.setAttribute('magnitude','Option');
             newCell.appendChild(select);
             select.setAttribute('onchange','substages['+s+']["'+code+'"]=parseInt(this.value);init()');
             for(var op in Tables[code]){
@@ -258,14 +258,14 @@
         newRow.setAttribute('onmouseover','Formulas.hlOutputs("'+code+'",CurrentLevel,1)');
         newRow.setAttribute('onmouseout', 'Formulas.hlOutputs("'+code+'",CurrentLevel,0)');
 
-        /*1st cell: show code*/
+        /*show code*/
         var newCell=newRow.insertCell(-1);
         newCell.classList.add('variableCode');
         newCell.innerHTML=(function() {
-          return "<a caption='"+translate(code+'_expla')+"' href=variable.php?id="+code+">"+code+"</a>";
+          return "<a href=variable.php?id="+code+">"+code+"</a>";
         })();
 
-        /*3rd cell: variable name*/
+        /*variable name*/
         var newCell=newRow.insertCell(-1);
         newCell.style.textAlign="left";
         newCell.setAttribute('caption', translate(code+'_expla'));
@@ -275,11 +275,12 @@
           return "<small>"+translate(code+'_descr')+warning+"</small>";
         })();
 
-        //4th cell and so on: go over substages
+        //go over substages
         var multiplier=Units.multiplier(code);
         for(var s in substages) {
           var newCell=newRow.insertCell(-1);
           newCell.setAttribute('substage',s);
+          newCell.setAttribute('title',"<?php write('#edit_click_to_modify')?>");
           newCell.classList.add("input");
           newCell.setAttribute('onclick','level3.transformField(this)');
           newCell.innerHTML=format(substages[s][code]/multiplier);
@@ -323,7 +324,7 @@
       //sum all values
       var value=level3.sumAll(code)/Units.multiplier(code);
 
-      var extra_btns="<td style=text-align:center>";
+      var extra_btns="<td class=l3_extra_btns>";
 
       //btn "update stage level"
       var btn_overwrite=(function(){
@@ -339,7 +340,8 @@
       //btn "split among substages"
       if(substages.length){
         var btn_copy = (function(){
-          var disabled = value==sta ? "disabled":"";
+          var btn_value = isSumable ? value : value/substages.length; //sum or average
+          var disabled = format(btn_value)==format(sta) ? "disabled":"";
           return '<button '+
             disabled+' '+
             'caption="Split stage value ('+format(sta)+') among substages" '+
@@ -350,15 +352,17 @@
         extra_btns+=" "+btn_copy;
       }
 
-      return "<td style=text-align:center>"+format(isSumable?value:value/substages.length)+extra_btns;
+      return "<td style=text-align:center caption='"+(isSumable?'Sum of substages':'Average value among substages')+"'>"+format(isSumable?value:value/substages.length)+extra_btns;
     })();
 
-    //stage value of input
+    //stage value of input in substages (last column)
     var newCell=newRow.insertCell(-1);
     newCell.classList.add("input");
     if(isOption){
       (function(){
         var select=document.createElement('select');
+        select.setAttribute('magnitude','Option');
+        select.setAttribute('caption','General or most frequent option');
         newCell.appendChild(select);
         newCell.style.textAlign='left';
         select.setAttribute('onchange','CurrentLevel["'+code+'"]=parseInt(this.value);init()');
@@ -373,6 +377,7 @@
       })();
     }else{
       newCell.setAttribute('onclick','level2.transformField(this)');
+      newCell.setAttribute('title',"<?php write('#edit_click_to_modify')?>");
       newCell.innerHTML=format(CurrentLevel[code]/Units.multiplier(code));
     }
   }
@@ -410,7 +415,6 @@
     //1: show code
     var newCell=newRow.insertCell(-1);
     newCell.classList.add('variableCode');
-    newCell.setAttribute('caption', translate(code+'_expla'));
 
     if(isCV) newCell.classList.add('isCV');
     else     newCell.classList.add('output');
@@ -490,13 +494,16 @@
       var rv="<td colspan=2 style='text-align:center'>";
       //sum all values
       if(isSumable){
-        rv+="<span>"+format(sum)+"</span>";
+        rv+="<div caption='Sum of substages'>"+format(sum)+"</div>";
+      }else{
+        rv+="<div caption='Average value among substages'>"+format(sum/substages.length)+"</div>";
       }
       return rv;
     })();
 
     //stage level value of output
-    newRow.insertCell(-1).innerHTML=(function(){
+    var newCell=newRow.insertCell(-1);
+    newCell.innerHTML=(function(){
       var sta=CurrentLevel[code]()/Units.multiplier(code);
       var color=(function(){
         if(isSumable){
@@ -508,7 +515,13 @@
           return "";
         }
       })();
-      return "<center style=color:"+color+">"+format(sta)+"</center>";
+
+      var rv=document.createElement('div');
+      rv.style.color=color;
+      rv.style.textAlign='center';
+      rv.innerHTML=format(sta);
+      rv.setAttribute('caption',prettyFormula);
+      return rv.outerHTML;
     })();
   }
 
@@ -746,6 +759,9 @@
   #substages tr.disabled {
     color:#aaa;
     pointer-events:none;
+  }
+  #substages .l3_extra_btns button {
+    font-size:smaller;
   }
 </style>
 

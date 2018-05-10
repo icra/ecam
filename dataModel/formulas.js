@@ -81,7 +81,7 @@ var Formulas={
 		result = result.replace(/Tables\['Fuel types'\]/g,"");
 		result = result.replace(/Tables.find/g,"");
 		result = result.replace(/}$/g,"")
-		result = result.replace(/^{/g," ")
+		result = result.replace(/^ +{/g," ")
 		result = result.replace(/\*/g," * ")
 		result = result.replace(/\+/g," + ")
 		result = result.replace(/\(\./g,"(")
@@ -89,7 +89,7 @@ var Formulas={
 		result = result.replace(/\"\]\./g,"")
 		result = result.replace(/\'\]\./g,"")
 		result = result.replace(/\[/g,"")
-		result = result.replace(/\]/g,"")
+		result = result.replace(/\]/g,"");
 		return result;
 	},
 

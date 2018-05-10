@@ -1,61 +1,7 @@
 <!doctype html><html><head>
   <?php include'imports.php'?>
-  <style>
-    body {background:#F5ECCE}
-    h1{
-      background:white;
-      border:none;
-      box-shadow:0 1px 2px rgba(0,0,0,.5);
-      line-height:2.1em;
-      text-align:left;
-    }
-    /*
-      legend colors for graphs
-    */
-    span.circle{display:none}
-    span.circle{float:right}
-  </style>
-  <style>
-    table#inputs th, #inputs td {text-align:left;}
-    #inputs th, #inputs td {border-left:none;border-right:none}
-    #inputs input.edited {background:lightgreen;}
-    #inputs td.input, #inputs td.output {
-      width:70px;
-      border:1px solid #aaa;
-      color:#666;
-      background:#eee;
-      padding:0 !important;
-    }
-    #inputs input[id] {
-      background:inherit;
-      border:none;
-      text-align:right;
-      cursor: cell;
-      line-height:1em;
-      width:95%;
-      height:24px;
-      display:block;
-    }
-    #inputs input[type=radio] {
-      display:auto;
-      line-height:1em;
-      width:95%;
-      height:24px;
-      padding:0.2em;
-    }
-    #inputs input:focus {
-      background:white;
-    }
-    #inputs tr.hidden {display:none}
-    /**indication "not active"**/
-    #inputs tr[indic]{text-align:center;color:#999;background:#eee}
-  </style>
-  <style>
-    b[caption]{cursor:default}
-  </style>
-
   <script>
-    function init() {
+    function init(){
       BEV.showActive();
       BEV.updateDefaults();
       BEV.defaultQuestions();
@@ -70,25 +16,30 @@
 
       //first input click
       var first=document.querySelector('#inputs input[id]');
-      if(first.value=="0") first.click()
+      if(first.value=="0") first.click();
     }
 
-    function drawCharts() {
+    function drawCharts(){
+      //   ".graph(withTable,container)"
       Graphs.ghg_by_source(false,'graph1');
       Graphs.graph2(false,'graph2');
+
+      //   ".graph(container)"
       Graphs.ws_cost('graph3');
       Graphs.ww_cost('graph4');
-      Graphs.gauge('graph5', Global.Water.ws_SL_serv_pop()||0, translate("ws_SL_serv_pop_descr"));
-      Graphs.gauge('graph6', Global.Waste.ww_SL_serv_pop()||0, translate("ww_SL_serv_pop_descr"));
+
+      //   ".gauge(container, value, header, unit, lowerLimit, upperLimit)"
+      Graphs.gauge('graph5', Global.Water.ws_SL_serv_pop()||0,               translate("ws_SL_serv_pop_descr"));
+      Graphs.gauge('graph6', Global.Waste.ww_SL_serv_pop()||0,               translate("ww_SL_serv_pop_descr"));
       Graphs.gauge('graph7', Global.Water.Distribution.wsd_SL_nr_water()||0, translate("wsd_SL_nr_water_descr"));
-      Graphs.gauge('graph8', Global.Water.ws_SL_auth_con()||0, translate("ws_SL_auth_con_descr"),Info.ws_SL_auth_con.unit,0,200); //with unit and limits
+      Graphs.gauge('graph8', Global.Water.ws_SL_auth_con()||0,               translate("ws_SL_auth_con_descr"), Info.ws_SL_auth_con.unit, 0, 200); //with unit and limits
     }
 
     var BEV={}; //'Birds Eye View' namespace
 
-    //Generic f for updating internal values
+    //update input values fx
     BEV.update=function(obj,field,newValue) {
-      if(obj[field]===undefined) { alert('field '+field+' undefined'); return; }
+      if(obj[field]===undefined){alert('field '+field+' undefined');return;}
       //newValue may be a string from input.value, it should be a float
       newValue=parseFloat(newValue);
       obj[field]=newValue;
@@ -98,33 +49,24 @@
     BEV.updateField=function(input) {
       //get info from the input element
       var field = input.id;
-      var value = parseFloat(input.value.replace(",","")); //replace commmas for copy paste easyness
+
+      //replace commmas for copy paste easyness
+      var value = parseFloat(input.value);
 
       value*=Units.multiplier(field);
 
       //if value is not a number, set to zero
       if(isNaN(value))value=0;
 
-      //console.log(value);
-
       //get L1 name: "Water" or "Waste"
-      var L1 = field.search("ws")==0 ? "Water" : "Waste";
-      var L2 = false;
-      L2 = field.search("wsa_")==0 ? "Abstraction"  : L2;
-      L2 = field.search("wst_")==0 ? "Treatment"    : L2;
-      L2 = field.search("wsd_")==0 ? "Distribution" : L2;
-      L2 = field.search("wwc_")==0 ? "Collection"   : L2;
-      L2 = field.search("wwt_")==0 ? "Treatment"    : L2;
-      L2 = field.search("wwd_")==0 ? "Discharge"    : L2;
+      var loc = locateVariable(field);
 
       //update
-      if(L2)
-        this.update(Global[L1][L2],field,value);
+      if(loc.sublevel)
+        this.update(Global[loc.level][loc.sublevel],field,value);
       else
-        this.update(Global[L1],field,value);
+        this.update(Global[loc.level],field,value);
 
-      //add a color to the field
-      input.classList.add('edited');
       init();
     }
 
@@ -138,22 +80,9 @@
         //set the longer description in the input <td> element
         input.parentNode.parentNode.childNodes[0].title=translate(field+'_expla');
 
-        var L1 = field.search("ws")==0 ? "Water" : "Waste";
-        var L2 = false;
-        L2 = field.search("wsa_")==0 ? "Abstraction"  : L2;
-        L2 = field.search("wst_")==0 ? "Treatment"    : L2;
-        L2 = field.search("wsd_")==0 ? "Distribution" : L2;
-        L2 = field.search("wwc_")==0 ? "Collection"   : L2;
-        L2 = field.search("wwt_")==0 ? "Treatment"    : L2;
-        L2 = field.search("wwd_")==0 ? "Discharge"    : L2;
-
-        //the value we are going to put in the input
-        var value = L2 ? Global[L1][L2][field] : Global[L1][field];
-        if(typeof(value)=="function"){
-          var value = L2 ? Global[L1][L2][field]() : Global[L1][field]();
-        }
-        if(!value)value=0;
+        var value=getVariable(field);
         value/=Units.multiplier(field);
+
         //set the value
         input.value=format(value);
       }
@@ -238,7 +167,6 @@
         Global.Waste.Treatment [field.replace("ww_","wwt_")]=wwt*value/n;
         Global.Waste.Discharge [field.replace("ww_","wwd_")]=wwd*value/n;
       }
-      input.classList.add('edited');
       init();
     }
   </script>
@@ -251,13 +179,11 @@
 
 <!--TITLE-->
 <h1>
-  <?php write('#quick_assessment')?>
-  &mdash;
+  <?php write('#quick_assessment')?> &mdash;
   <?php write('#initial_estimation_description')?>
   <span style="font-size:13px;color:#666;float:right">
-    <span><a href=variable.php?id=Days>        <?php write('#assessment_period')?></a>
+    <span><a href=variable.php?id=Days><?php write('#assessment_period')?></a>
     <script>document.write(Global.General.Days())</script> <?php write('#days')?></span>
-    ·
     <span><a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a>
       <script>
         (function(){
@@ -271,8 +197,8 @@
 </h1>
 
 <!--content-->
-<div>
-  <div class=inline style=width:35%>
+<div class=flex>
+  <div style="max-width:33%">
     <!--inputs-->
     <div class="card"><?php cardMenu($lang_json['#inputs'].' &mdash; '.$lang_json['#enter_values'])?>
       <!--table-->
@@ -296,8 +222,9 @@
             </div>
           </div>
 
-          <tr stage=water class=hidden><td style=width:40%><?php write('#nrg_cons')?><td class=output><input id='ws_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
-          <tr stage=water class=hidden><td><?php write('#vol_fuel')?>                <td class=output><input id='ws_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
+          <tr stage=water class=hidden><td style=width:40%><?php write('#ws_nrg_cons_descr')?><td class=output><input id='ws_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
+          <tr stage=water class=hidden><td><?php write('#vol_fuel')?>                         <td class=output><input id='ws_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
+          <tr stage=water class=hidden><td><?php write('#wsa_vol_conv_descr')?><td class=input><input id='wsa_vol_conv' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
           <tr stage=water class=hidden><td><?php write('#wsd_vol_dist_descr')?><td class=input><input id='wsd_vol_dist' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
           <tr stage=water class=hidden><td><?php write('#wsd_auth_con_descr')?><td class=input><input id='wsd_auth_con' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
           <tr stage=water class=hidden><td><?php write('#wsd_bill_con_descr')?><td class=input><input id='wsd_bill_con' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
@@ -390,7 +317,7 @@
   </div>
 
   <!--graphs-->
-  <div class="card inline" style="width:63%">
+  <div class=card style="width:63%">
     <?php cardMenu($lang_json['#figures'])?>
     <div id=graphs>
       <style>
@@ -465,8 +392,8 @@
     var inputs=document.querySelectorAll("#inputs input[id]")
     for(var i=0;i<inputs.length;i++) {
       inputs[i].onfocus=function() {
-        this.value=parseFloat(this.value.replace(/,/g,''));
-        this.select()
+        this.value=getVariable(this.id)/Units.multiplier(this.id);
+        this.select();
       }
       inputs[i].onblur=function(){init()}
     }
@@ -474,7 +401,83 @@
 </script>
 
 <script>
-  if(google){
-    google.charts.load('current',{'packages':['corechart','gauge','bar']});
-  }
+  if(google){google.charts.load('current',{'packages':['corechart','gauge','bar']});}
 </script>
+
+<style>
+  body{background:#F5ECCE}
+  h1{
+    background:white;
+    border:none;
+    box-shadow:0 1px 2px rgba(0,0,0,.5);
+    line-height:2.1em;
+    text-align:left;
+  }
+
+  /*
+    legend colors for graphs
+  */
+  span.circle{display:none}
+  span.circle{float:right}
+
+  #inputs th, #inputs td {text-align:left;}
+  #inputs th, #inputs td {border-left:none;border-right:none}
+  #inputs td.input, 
+  #inputs td.output {
+    width:70px;
+    border:1px solid #aaa;
+    color:#666;
+    background:#eee;
+    padding:0 !important;
+  }
+  #inputs input[id] {
+    background:inherit;
+    border:none;
+    text-align:right;
+    cursor: cell;
+    line-height:1em;
+    width:95%;
+    height:24px;
+    display:block;
+  }
+  #inputs input[type=radio] {
+    display:auto;
+    line-height:1em;
+    width:95%;
+    height:24px;
+    padding:0.2em;
+  }
+  #inputs input:focus {
+    background:white;
+  }
+  #inputs tr.hidden {display:none}
+
+  /*indication "level not active"*/
+  #inputs tr[indic]{text-align:center;color:#999;background:#eee}
+
+</style>
+
+<!--locked inputs that are outputs in tier A-->
+<script>
+  //look for td.outputs and add class 'locked'
+  (function(){
+    var tds=document.querySelectorAll('#inputs td.output');
+    tds.forEach(td=>{
+      //continue here
+      td.classList.add('locked');
+    });
+  })();
+</script>
+<style>
+  #inputs td.output.locked {
+    background:#fff;
+    pointer-events:none;
+  }
+  #inputs td.output.locked + td:after {
+    content:"\1f512";
+    float:right;
+  }
+  #inputs td.output.locked input {
+    color:#aaa;
+  }
+</style

@@ -14,7 +14,7 @@
 
   /** Redisplay table id=inputs */
   level2.updateInputs=function() {
-    console.time('updateInputs');
+    //console.time('updateInputs');
 
     var t=document.getElementById('inputs');
 
@@ -61,7 +61,7 @@
       newRow.appendChild(newTh);
     })();
 
-    console.timeEnd('updateInputs');
+    //console.timeEnd('updateInputs');
   }
 
   level2.toggleQuestionVisibility=function(cell,question) {
@@ -183,6 +183,7 @@
       var select=document.createElement('select');
       newCell.appendChild(select)
       select.setAttribute('onchange','level2.updateField("'+code+'",this.value)');
+      select.setAttribute('magnitude','Option');
       for(var op in Tables[code]) {
         var option=document.createElement('option');
         var value=parseInt(Tables[code][op].value);
@@ -425,23 +426,3 @@
     <th><?php write('#edit_unit')?>
   <tr><td colspan=4 style=color:#ccc><i><?php write('#loading')?>...</i>
 </table>
-
-<style>
-  table#inputs .non-editable {
-    text-align:right;
-    cursor:pointer;
-    transition:background 1s;
-  }
-  #inputs .non-editable:hover {
-    background:#eaeeea;
-  }
-  #inputs .non-editable:before {
-    content:' ∑';
-    float:left;
-    color:#999;
-  }
-  #inputs .non-editable:hover:before {
-    color:black;
-    content:' ∑';
-  }
-</style>

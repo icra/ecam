@@ -7,9 +7,14 @@
       addDetailedListeners();
       Caption.listeners();
       updateResult();
+      //check checkboxes for "toggle_display_sum_sta()" (because in firefox remain checked)
+      (function(){
+        var cbs=document.querySelectorAll('#sources input[type=checkbox][name]');
+        cbs.forEach(cb=>{
+          toggle_display_sum_sta(cb);
+        });
+      })();
     }
-
-    function drawCharts(){}
 
     function calculateGHG() {
       //kg, kg per year, or kg per serviced population
@@ -40,6 +45,7 @@
         return ret;
       })();
 
+      //stage value fields
       var fields=document.querySelectorAll('#sources [field], #outside td[field]');
       for(var i=0;i<fields.length;i++){
         var element=fields[i];
@@ -59,6 +65,7 @@
         element.setAttribute('value',value);
       }
 
+      //substage value fields
       var fields=document.querySelectorAll('#sources [substage_sum]');
       for(var i=0;i<fields.length;i++) {
         var element=fields[i];
@@ -67,6 +74,7 @@
         var loc=locateVariable(code);
         var value=Substages[loc.level][loc.sublevel].map(ss=>ss[code]()).reduce((pr,cu)=>(pr+cu),0);
         value/=divisor_value;
+        element.style.fontStyle='italic';
         element.innerHTML=format(value);
         element.setAttribute('value',value);
       }
@@ -75,7 +83,7 @@
     function findCriticGHG() {
       var max=0;
       var critic=false;
-      var fields=document.querySelectorAll('#sources [field], #outside td[field]');
+      var fields=document.querySelectorAll('#sources td[field], #outside td[field]'); //only sublevels, not l1 nor total
       for(var i=0;i<fields.length;i++) {
         var td=fields[i];
         var value=parseFloat(td.getAttribute('value'));
@@ -85,18 +93,18 @@
         }
       }
       if(!critic)return;
+      console.log(critic);
+
       var el=document.querySelector("td[field="+critic+"]");
       var cap=translate("This is the highest GHG emission of your system");
-      console.log(el);
       el.classList.add('critic');
-      el.setAttribute('caption',cap);
+      el.setAttribute('title',cap);
 
       var sibling=el.parentNode.querySelector('td[substage_sum]');
       if(sibling){
         sibling.classList.add('critic');
-        sibling.setAttribute('caption',cap);
+        sibling.setAttribute('title',cap);
       }
-
     }
 
     function addDetailedListeners() {
@@ -163,15 +171,6 @@
       td.onmouseout=function(){document.querySelector('#container_detailed').style.display='none'};
     }
   </script>
-  <style>
-    #sources td.ss {text-align:center;cursor:pointer} /*substages counter*/
-    #sources td[field][level][sublevel]{cursor:help;}
-    #sources td[field][level][sublevel]:hover{background:rgba(64,83,109,0.2);transition:all 0.5s}
-    #sources {
-      box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
-    }
-  </style>
-
   <?php 
     function drawCheckbox($sublevel){ ?> 
       <div style=float:right;text-align:center><small>
@@ -220,15 +219,15 @@
 </h4>
 <h4><?php write("#move_the_mouse")?></h4>
 
-<!--mobile div detailed sources-->
+<!--'title like' div detailed sources-->
 <div id=container_detailed style=display:none>
   <div><b id=detailed_title></b></div>
   <table id=detailed></table>
   <style>
     div#container_detailed {
+      position:fixed;
       font-size:11px;
       font-family:monospace;
-      position:fixed;
       z-index:998;
       background:white;
       padding:0.3em 0.5em;
@@ -313,14 +312,14 @@
             <tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'><?php write('#Treatment')?></a> 
               <?php drawCheckbox('wst_KPI_GHG')?>
               <td field=wst_KPI_GHG level=Water sublevel=Treatment onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
-              <td substage_sum=wst_KPI_GHG style=display:none> <?php write('#Loading')?>...
+              <td substage_sum=wst_KPI_GHG style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...
             </tr>
 
             <!--wsd-->
             <tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'><?php write('#Distribution')?></a> 
               <?php drawCheckbox('wsd_KPI_GHG')?>
               <td field=wsd_KPI_GHG level=Water sublevel=Distribution onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
-              <td substage_sum=wsd_KPI_GHG style=display:none> <?php write('#Loading')?>...
+              <td substage_sum=wsd_KPI_GHG style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...
             <tr>
 
           <!--WASTE-->
@@ -341,23 +340,25 @@
           <td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'><?php write('#Collection')?></a> 
             <?php drawCheckbox('wwc_KPI_GHG')?>
             <td field=wwc_KPI_GHG level=Waste sublevel=Collection onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
-            <td substage_sum=wwc_KPI_GHG style=display:none> <?php write('#Loading')?>...
+            <td substage_sum=wwc_KPI_GHG style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...
           </td>
 
           <!--wwt-->
           <tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'><?php write('#Treatment')?></a> 
             <?php drawCheckbox('wwt_KPI_GHG')?>
             <td field=wwt_KPI_GHG level=Waste sublevel=Treatment onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
-            <td substage_sum=wwt_KPI_GHG style=display:none> <?php write('#Loading')?>...
+            <td substage_sum=wwt_KPI_GHG style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...
           </tr>
 
           <!--wwd-->
           <tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'><?php write('#Discharge')?></a> 
             <?php drawCheckbox('wwd_KPI_GHG')?>
             <td field=wwd_KPI_GHG level=Waste sublevel=Discharge onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
-            <td substage_sum=wwd_KPI_GHG style=display:none> <?php write('#Loading')?>...
+            <td substage_sum=wwd_KPI_GHG style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...
           </tr>
         </table>
+        <style>
+        </style>
       </div>
 
       <style>
@@ -377,13 +378,15 @@
         table#sources{
           margin:10px 0;
           width:95%;
+          box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
         }
-        table#sources td {padding:1.2em 0.5em;}
-        table#sources td[field],
-        table#sources td[substage_sum] {text-align:right}
-        table#sources img {vertical-align:middle;width:30px;margin-right:8px}
-        /* Patch for outside utility critial highlight */
-        table#outside .critic {animation:blink 3s ease 0.5s infinite alternate;}
+        #sources td {padding:1.2em 0.5em;}
+        #sources td[field],
+        #sources td[substage_sum] {text-align:right}
+        #sources img {vertical-align:middle;width:30px;margin-right:8px}
+        #sources td.ss {text-align:center;cursor:pointer} /*substages counter*/
+        #sources td[field][level][sublevel]{cursor:help;}
+        #sources td[field][level][sublevel]:hover{background:rgba(64,83,109,0.2);transition:all 0.5s}
       </style>
     </div>
 
@@ -451,3 +454,5 @@
     });
   });
 </script>
+
+

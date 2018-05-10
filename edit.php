@@ -165,31 +165,27 @@
     ?>
     /** Update all */
     function init() {
-      //performance
-      console.time('init');
-      Caption.hide();
+      //performance measure
+      //console.time('init');
 
+      Caption.hide();
       if(typeof(level2)!="undefined"){ level2.updateInputs() }
       updateOutputs();
       updateNrgOutputs();
-
       if(typeof(level3)!="undefined") { level3.updateSubstagesTable(); }
       Exceptions.apply();
-
       try{drawCharts()}
       catch(e){console.log(e)}
-
       updateResult();
-
       Caption.listeners();
 
-      //performance
-      console.timeEnd('init');
+      //performance end
+      //console.timeEnd('init');
     }
 
     /** Redisplay table id=outputs (level2)*/
     function updateOutputs() {
-      console.time('updateOutputs');
+      //console.time('updateOutputs');
 
       var t=document.getElementById('outputs');
       while(t.rows.length>2){t.deleteRow(-1)}
@@ -278,12 +274,12 @@
       newTh.style.borderBottom='none';
       newTh.style.borderTop='none';
 
-      console.timeEnd('updateOutputs');
+      //console.timeEnd('updateOutputs');
     }
 
     //Redisplay NRG and SL outputs (level2)
     function updateNrgOutputs() {
-      console.time('updateNrgOutputs');
+      //console.time('updateNrgOutputs');
       var t=document.getElementById('nrgOutputs');
       while(t.rows.length>2){t.deleteRow(-1);}
 
@@ -354,23 +350,23 @@
       newRow.appendChild(newTh);
 
       //end
-      console.timeEnd('updateNrgOutputs');
+      //console.timeEnd('updateNrgOutputs');
     }
 
     //depending on stage, draw different charts
     function drawCharts() {
-      console.time('drawcharts');
+      //console.time('drawcharts');
       //draw chart if selected
       var button=document.querySelector("div.buttonsGraph button.active");
       if(!button){
-        console.timeEnd('drawcharts');
+        //console.timeEnd('drawcharts');
         return;
       }
       if(button.classList.contains('active')){
         button.classList.remove('active');
         button.onclick();
       }
-      console.timeEnd('drawcharts');
+      //console.timeEnd('drawcharts');
     }
 
     //function for "View Graphs" buttons
@@ -650,14 +646,11 @@
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
 
 <script>
-  /** If no substages (will happen at the first time. Create one substage with L2 values*/
+  /** If no substages (will happen at the first time. Create one empty substage*/
   (function() {
     if(substages.length==0) {
       substages.push(new level3.Substage()); //create a substage
-      //modify the first substage's inputs
-      level3.getInputs().forEach(code=>{
-        substages[0][code]=CurrentLevel[code];
-      });
+      //do not modify the first substage's inputs
     }
   })();
 </script>
@@ -666,3 +659,9 @@
   //load charts
   google.charts.load('current',{'packages':['corechart','bar']});
 </script>
+
+<style>
+  table td select[magnitude=Option] {
+    font-size:smaller;
+  }
+</style>

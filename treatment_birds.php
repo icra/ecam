@@ -1,4 +1,4 @@
-<select id=main_treatment_type onchange=main_treatment_type()>
+<select id=main_treatment_type onchange=main_treatment_type() style="font-size:smaller">
 	<script>
 		for(var type in Tables.wwt_type_tre) {
 			var value=Tables.wwt_type_tre[type].value;

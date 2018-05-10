@@ -171,9 +171,9 @@ var Questions={
 
     "wsd_water_eff":{
       variables:[
-        "wsd_SL_GHG_nrw",
-        "wst_SL_GHG_nrw",
         "wsa_SL_GHG_nrw",
+        "wst_SL_GHG_nrw",
+        "wsd_SL_GHG_nrw",
         "wsd_SL_ghg_attr"
       ],
       advanced:1,
