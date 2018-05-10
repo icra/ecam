@@ -8,8 +8,8 @@ var Cts =
 
 	ct_n2o_eq:{
 		value:298,
-		descr:"Conversion for N<sub>2</sub> emissions to CO<sub>2</sub> equivalent emissions",
-		unit:"kg CO<sub>2</sub> / kg N<sub>2</sub>",
+		descr:"Conversion for N<sub>2</sub>O emissions to CO<sub>2</sub> equivalent emissions",
+		unit:"kg CO<sub>2</sub> / kg N<sub>2</sub>O",
 	},
 
 	//constants for sludge management proposed by Girum
@@ -27,7 +27,7 @@ var Cts =
 
 	ct_n2o_efp:{
 		value:3.2,
-		descr:"N<sub>2</sub> Emission factor",
+		descr:"N<sub>2</sub>O emission factor",
 		unit:"g N<sub>2</sub>O/person/year",
 	},
 
