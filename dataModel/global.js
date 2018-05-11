@@ -68,8 +68,8 @@ var Global = {
 
     "Abstraction":{
       //no filter
-      wsa_vol_conv:0,
       wsa_nrg_cons:0,
+      wsa_vol_conv:0,
       wsa_nrg_per_pmp_watr:function(){return this.wsa_nrg_cons/this.wsa_vol_conv},
       //fuel engines?
       wsa_fuel_typ:0,
@@ -124,8 +124,8 @@ var Global = {
 
     "Treatment":{
       //no filter
-      "wst_vol_trea":0,
       "wst_nrg_cons":0,
+      "wst_vol_trea":0,
       "wst_mass_slu":0,
       "wst_treatmen":0,
       "wst_tst_carr":0,
@@ -170,10 +170,10 @@ var Global = {
 
     "Distribution":{
       //no filter
+      "wsd_nrg_cons":0,
       "wsd_vol_dist":0,
       "wsd_auth_con":0,
       "wsd_bill_con":0,
-      "wsd_nrg_cons":0,
       wsd_KPI_nrg_per_m3:function(){return this.wsd_nrg_cons/this.wsd_auth_con},
       wsd_KPI_nrg_per_vd:function(){return this.wsd_nrg_cons/this.wsd_vol_dist},
       wsd_SL_nr_water:function(){
@@ -319,9 +319,9 @@ var Global = {
 
     "Collection":{
       //no filter
+        "wwc_nrg_cons":0,
         "wwc_conn_pop":0,
         "wwc_vol_conv":0,
-        "wwc_nrg_cons":0,
         wwc_SL_conn_pop:function(){return 100*this.wwc_conn_pop/Global.Waste.ww_resi_pop},
         wwc_KPI_nrg_per_m3:function(){return this.wwc_nrg_cons/this.wwc_vol_conv},
 
@@ -386,9 +386,9 @@ var Global = {
 
     "Treatment":{
       //no filter
+      "wwt_nrg_cons":0,
       "wwt_serv_pop":0,
       "wwt_vol_trea":0,
-      "wwt_nrg_cons":0,
       "wwt_type_tre":0,
       "wwt_ch4_efac":0,
       "wwt_bod_infl":0,
@@ -642,8 +642,8 @@ var Global = {
 
     "Discharge":{
       //no filter
-      "wwd_vol_disc":0,
       "wwd_nrg_cons":0,
+      "wwd_vol_disc":0,
       "wwd_n2o_effl":0,
       "wwd_vol_nonp":0,//Volume of water reused
       wwd_KPI_nrg_per_m3:function(){return this.wwd_nrg_cons/this.wwd_vol_disc||0},

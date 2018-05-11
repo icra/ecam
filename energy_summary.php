@@ -97,7 +97,7 @@
     }
 
     //fill table of emissions per substages
-    function fillSourcesSubstages(td,ev) {
+    function fillSourcesSubstages(td,ev){
       //fill table
       var fie=td.getAttribute('field');
       var loc=locateVariable(fie);
@@ -115,12 +115,12 @@
         newCell.style.textAlign='right';
         newCell.innerHTML=format(substage[fie]);
       });
-      //total
+      //substages total
       var newRow=t.insertRow(-1);
-      newRow.insertCell(-1).innerHTML="<b>Total</b>";
+      newRow.insertCell(-1).innerHTML="<b>Substages total</b>";
       var newCell=newRow.insertCell(-1);
       newCell.style.textAlign='right';
-      newCell.innerHTML="<b>"+format(substage[fie])+"</b>";
+      newCell.innerHTML="<b>"+format(obj.map(s=>s[fie]).reduce((p,c)=>(p+c)))+"</b>";
 
       //hide table
       td.onmouseout=function(){document.querySelector('#container_detailed').style.display='none'};

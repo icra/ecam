@@ -159,6 +159,7 @@
       var t=document.querySelector('table#detailed');
       document.querySelector('#detailed_title').innerHTML=translate('Substage GHG emissions')||"Substage GHG emissions";
       while(t.rows.length>0)t.deleteRow(-1);
+      //go over substages
       obj.forEach(substage=>{
         var newRow=t.insertRow(-1);
         newRow.insertCell(-1).innerHTML=substage.name;
@@ -166,6 +167,13 @@
         newCell.style.textAlign='right';
         newCell.innerHTML=format(substage[fie]());
       });
+
+      //substages total
+      var newRow=t.insertRow(-1);
+      newRow.insertCell(-1).innerHTML="<b>Substages total</b>";
+      var newCell=newRow.insertCell(-1);
+      newCell.style.textAlign='right';
+      newCell.innerHTML="<b>"+format(obj.map(s=>s[fie]()).reduce((p,c)=>(p+c)))+"</b>";
 
       //hide table
       td.onmouseout=function(){document.querySelector('#container_detailed').style.display='none'};
