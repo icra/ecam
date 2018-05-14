@@ -12,9 +12,7 @@
 <script src="dataModel/global.js"></script>
 <script src="dataModel/substages.js"></script>
 <script src="dataModel/info.js"></script>
-<script src="dataModel/dataQuality.js"></script>
 <script src="dataModel/level3variables.js"></script>
-<script src="dataModel/level2warnings.js"></script>
 <script src="dataModel/level2only.js"></script>
 <script src="dataModel/questions.js"></script>
 <script src="dataModel/formulas.js"></script>
@@ -23,7 +21,6 @@
 <script src="dataModel/refValues.js"></script>
 <script src="dataModel/exceptions.js"></script>
 <script src="dataModel/normalization.js"></script>
-<script src="dataModel/averagedVariables.js"></script>
 <script src="dataModel/constants.js"></script>
 <script src="dataModel/tips.js"></script>
 <script src="dataModel/countries.js"></script>

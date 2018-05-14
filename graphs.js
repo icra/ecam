@@ -527,7 +527,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
   //check if prefix is correct
   if(-1==['wsa','wst','wsd','wwc','wwt','wwd'].indexOf(prefix)) {
     document.getElementById(container).innerHTML="NA";
-    return //if prefix is not in this list, stop
+    return; //if prefix is not in this list, stop
   }
 
   //utils
@@ -602,7 +602,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
     var checked=withTable ? "checked" : "";
     buttons.innerHTML=""+
       "<label>"+
-      "<input type=checkbox "+checked+" onclick=Graphs.ghg_by_stage("+(!withTable).toString()+",'"+container+"')>"+translate('table')+
+      "<input type=checkbox "+checked+" onclick=Graphs.ghg_by_stage("+(!withTable).toString()+",'"+container+"','"+prefix+"')>"+translate('table')+
       "</label>"+
     "";
   })();
@@ -726,6 +726,7 @@ Graphs.graph4=function(withTable,container) {
       "<tr><td>"+names[3]+"<td><a href=variable.php?id=wwc_KPI_GHG>wwc_KPI_GHG</a> <td align=right>"+format(slice_4)+
       "<tr><td>"+names[4]+"<td><a href=variable.php?id=wwt_KPI_GHG>wwt_KPI_GHG</a> <td align=right>"+format(slice_5)+
       "<tr><td>"+names[5]+"<td><a href=variable.php?id=wwd_KPI_GHG>wwd_KPI_GHG</a> <td align=right>"+format(slice_6)+
+      "<tr><td>"+names[6]+"<td><a href=variable.php?id=wwd_KPI_GHG>ww_KPI_GHG_unt</a> <td align=right>"+format(slice_7)+
     "</table>"+
     "";
     //extra options

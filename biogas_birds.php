@@ -39,6 +39,6 @@
 
 	BEV.updateValorizingBiogas=function(newValue){
 		BEV.updateQuestion('wwt_valorizing_biogas',newValue);
-    Global.Waste.Treatment.wwt_biog_val=Global.Estimations.estm_wwt_biot_val();
+    Global.Waste.Treatment.wwt_biog_val=Global.Estimations.estm_wwt_biog_val();
 	}
 </script>

@@ -517,10 +517,10 @@ var Questions={
 Questions.isInside=function(field) {
 	//go over all questions
 	var code;
-	for(var question in this) {
-		for(var i in this[question].variables) {
+	for(var question in this){
+		for(var i in this[question].variables){
 			code=this[question].variables[i];
-      if(field===code) return question;
+      if(field===code)return question;
 		}
 	}
 	return false;

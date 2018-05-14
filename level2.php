@@ -282,12 +282,6 @@
       return value
     })();
 
-    //check if this cv has estimated data
-    var ed=DQ.hasEstimatedData(field) ?
-      " <span title='<?php write('#variable_this_equation_contains_estimated_data')?>' class=estimated>&#9888;</span>"
-      : "";
-    newCell.innerHTML+=ed;
-
     //unit
     newRow.insertCell(-1).innerHTML=(function() {
       if(!Info[field]) return "<span style=color:#ccc>no unit</span>";
@@ -313,30 +307,6 @@
         return str
       }
     })();
-
-    //data quality
-    /*
-    newRow.insertCell(-1).innerHTML=(function() {
-      if(isCV) { return "Calculated" }
-      else
-      {
-        var select=document.createElement('select');
-        select.setAttribute('onchange','DQ.update("'+field+'",this.value)');
-        ['Actual','Estimated'].forEach(function(opt)
-        {
-          var option=document.createElement('option');
-          select.appendChild(option);
-          option.value=opt;
-          option.innerHTML=translate(opt);
-          if(Global.Configuration.DataQuality[field]==opt)
-          {
-            option.setAttribute('selected',true);
-          }
-        });
-        return select.outerHTML;
-      }
-    })();
-    */
   }
 
   //create a question in inputs table

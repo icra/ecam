@@ -633,7 +633,7 @@ var Global = {
       "wwd_n2o_effl":0,
       "wwd_vol_nonp":0,//Volume of water reused
       wwd_KPI_nrg_per_m3:function(){return this.wwd_nrg_cons/this.wwd_vol_disc||0},
-      wwd_SL_ghg_non: function(){return this.wwd_n2o_effl/1000*this.wwd_vol_nonp*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value},
+      wwd_SL_ghg_non:function(){return this.wwd_n2o_effl/1000*this.wwd_vol_nonp*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value},
       //fuel engines?
       "wwd_fuel_typ":0,
       "wwd_vol_fuel":0,
@@ -648,7 +648,6 @@ var Global = {
       wwd_KPI_std_nrg_cons:function(){return this.wwd_nrg_pump/(this.wwd_vol_pump*this.wwd_pmp_head/100)},
       //wwd GHG
       wwd_KPI_GHG_elec:function(){return this.wwd_nrg_cons*Global.General.conv_kwh_co2},
-
       wwd_KPI_GHG_fuel:function(){//<br>
         return this.wwd_KPI_GHG_fuel_co2()+this.wwd_KPI_GHG_fuel_n2o()+this.wwd_KPI_GHG_fuel_ch4();
       },
@@ -664,7 +663,6 @@ var Global = {
         var fuel=Tables['Fuel types'][Tables.find('wwd_fuel_typ',this.wwd_fuel_typ)];//<br>
         return this.wwd_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
       },
-
       wwd_KPI_GHG_trck:function(){
         return this.wwd_KPI_GHG_trck_co2()+this.wwd_KPI_GHG_trck_n2o()+this.wwd_KPI_GHG_trck_ch4()
       },
@@ -680,18 +678,14 @@ var Global = {
         var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)];
         return this.wwd_vol_trck*fuel.FD*fuel.NCV/1000*(Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles)
       },
-
       wwd_KPI_GHG_tre_n2o:function(){//<br>
-        return this.wwd_n2o_effl/1000*this.wwd_vol_disc*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value
+        return this.wwd_n2o_effl/1000*this.wwd_vol_disc*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value;
       },
-
       wwd_KPI_GHG:function(){
-        return 0+
-          this.wwd_KPI_GHG_elec() +
-          this.wwd_KPI_GHG_fuel() +
-          this.wwd_KPI_GHG_trck() +
-          this.wwd_KPI_GHG_tre_n2o()+
-          0;
+        return this.wwd_KPI_GHG_elec()+
+          this.wwd_KPI_GHG_fuel()+
+          this.wwd_KPI_GHG_trck()+
+          this.wwd_KPI_GHG_tre_n2o();
       },
     },
   },
@@ -699,14 +693,8 @@ var Global = {
   /**Configuration: custom user preferences*/
   Configuration:{
     ActiveStages:{
-      "water":0,
-      "waterAbs":0,
-      "waterTre":0,
-      "waterDis":0,
-      "waste":0,
-      "wasteCol":0,
-      "wasteTre":0,
-      "wasteDis":0,
+      "water":0, "waterAbs":0, "waterTre":0, "waterDis":0,
+      "waste":0, "wasteCol":0, "wasteTre":0, "wasteDis":0,
     },
 
     //highlight inputs/outputs
@@ -720,10 +708,6 @@ var Global = {
 
     //see "estimations.js"
     Estimations:{},
-
-    /*Calculated or "estimated" assumptions are stored here
-    (only estimated, if not here, calculated) */
-    DataQuality:{},
 
     //auxiliar object to store user selections
     Selected: {

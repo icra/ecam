@@ -221,13 +221,7 @@
           newCell=newRow.insertCell(-1);
           newCell.setAttribute('caption',prettyFormula);
           newCell.innerHTML=(function() {
-            //"has estimated data" warning
-            //var ed=DQ.hasEstimatedData(field) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
-            var ed="";
-            // level 2 warnings
-            //var l2w = Level2Warnings.hasOwnProperty(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
-            var l2w="";
-            return format(value)+" "+ed+" "+l2w;
+            return format(value);
           })();
 
           /*value per things*/
@@ -317,11 +311,6 @@
           newCell=newRow.insertCell(-1)
           newCell.setAttribute('caption',prettyFormula);
           newCell.innerHTML=(function() {
-            //has estimated data warning
-            //var ed = DQ.hasEstimatedData(field) ? "<span class=estimated caption='<?php write('#variable_this_equation_contains_estimated_data')?>'>&#9888;</span>" : "";
-            // level 2 warnings
-            //var l2w = Level2Warnings.hasOwnProperty(field) ? "<span style=color:#999>("+Level2Warnings[field]+")</span>" : "";
-            //return format(value)+" "+ed+" "+l2w;
             return format(value);
           })();
 

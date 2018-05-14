@@ -324,6 +324,7 @@
       //sum all values
       var value=level3.sumAll(code)/Units.multiplier(code);
 
+      //extra buttons
       var extra_btns="<td class=l3_extra_btns>";
 
       //btn "update stage level"
@@ -332,7 +333,7 @@
         var onclick   = "onclick=level2.updateField('"+code+"',"+btn_value+")";
         var disabled  = btn_value==sta ? "disabled":"";
         return '<button '+onclick+' '+disabled+
-          ' caption="Update the stage value using the sum of substages">'+
+          ' caption="Update the stage value using this '+(isSumable?'total':'average')+' value">'+
           '&rarr;</button>';
       })();
       extra_btns+=btn_overwrite;

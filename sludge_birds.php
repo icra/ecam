@@ -52,7 +52,7 @@
 
     //estimation of kg of dry weight (wwt_dryw_slu)
     Global.Waste.Treatment.wwt_dryw_slu=Global.Estimations.estm_wwt_dryw_slu();
-    console.log('Estimated mass of dry weight sludge (wwt_dryw_slu): '+dry_est+' kg');
+    console.log('Estimated mass of dry weight sludge (wwt_dryw_slu): '+Global.Waste.Treatment.wwt_dryw_slu+' kg');
     Global.Waste.Treatment['wwt_mass_slu_'+method]=Global.Waste.Treatment.wwt_dryw_slu;
 
     //end
