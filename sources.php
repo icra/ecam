@@ -93,7 +93,7 @@
         }
       }
       if(!critic)return;
-      console.log(critic);
+      //console.log(critic);
 
       var el=document.querySelector("td[field="+critic+"]");
       var cap=translate("This is the highest GHG emission of your system");
@@ -179,8 +179,8 @@
       td.onmouseout=function(){document.querySelector('#container_detailed').style.display='none'};
     }
   </script>
-  <?php 
-    function drawCheckbox($sublevel){ ?> 
+  <?php
+    function drawCheckbox($sublevel){ ?>
       <div style=float:right;text-align:center><small>
         <label>
           Substages
@@ -214,8 +214,8 @@
 <!--caption--><?php include'caption.php'?>
 <!--title-->
 <h1>
-  <script>document.write(Global.General.Name)</script> 
-  &mdash; 
+  <script>document.write(Global.General.Name)</script>
+  &mdash;
   <?php write("#GHG Emissions Summary (Overview)")?>
 </h1>
 <h4>
@@ -290,7 +290,7 @@
             </select>
             <!--legend-->
             <span style=float:right>
-              <span class=circle style=background:orange></span> 
+              <span class=circle style=background:orange></span>
               <?php write("#highest emission")?>
             </span>
           <tr><th rowspan=9 style="font-weight:bold;background:#2b6488;color:white">
@@ -310,21 +310,21 @@
           </th>
 
             <!--wsa-->
-            <td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'><?php write('#Abstraction')?></a> 
+            <td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'><?php write('#Abstraction')?></a>
               <?php drawCheckbox('wsa_KPI_GHG')?>
               <td field=wsa_KPI_GHG        level=Water sublevel=Abstraction onmouseenter=fillSources(this,event)> <?php write('#Loading')?>...
               <td substage_sum=wsa_KPI_GHG style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...
             </tr>
 
             <!--wst-->
-            <tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'><?php write('#Treatment')?></a> 
+            <tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'><?php write('#Treatment')?></a>
               <?php drawCheckbox('wst_KPI_GHG')?>
               <td field=wst_KPI_GHG level=Water sublevel=Treatment onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
               <td substage_sum=wst_KPI_GHG style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...
             </tr>
 
             <!--wsd-->
-            <tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'><?php write('#Distribution')?></a> 
+            <tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'><?php write('#Distribution')?></a>
               <?php drawCheckbox('wsd_KPI_GHG')?>
               <td field=wsd_KPI_GHG level=Water sublevel=Distribution onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
               <td substage_sum=wsd_KPI_GHG style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...
@@ -334,7 +334,7 @@
           <th rowspan=3 class=red>
             <a href="edit.php?level=Waste" style=color:white>
               <?php write("#Waste")?>
-              (<script> 
+              (<script>
                 document.write(Global.Waste.ww_serv_pop())
               </script> <?php write("#people")?>)
             </a>
@@ -345,21 +345,21 @@
           </th>
 
           <!--wwc-->
-          <td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'><?php write('#Collection')?></a> 
+          <td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'><?php write('#Collection')?></a>
             <?php drawCheckbox('wwc_KPI_GHG')?>
             <td field=wwc_KPI_GHG level=Waste sublevel=Collection onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
             <td substage_sum=wwc_KPI_GHG style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...
           </td>
 
           <!--wwt-->
-          <tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'><?php write('#Treatment')?></a> 
+          <tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'><?php write('#Treatment')?></a>
             <?php drawCheckbox('wwt_KPI_GHG')?>
             <td field=wwt_KPI_GHG level=Waste sublevel=Treatment onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
             <td substage_sum=wwt_KPI_GHG style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...
           </tr>
 
           <!--wwd-->
-          <tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'><?php write('#Discharge')?></a> 
+          <tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'><?php write('#Discharge')?></a>
             <?php drawCheckbox('wwd_KPI_GHG')?>
             <td field=wwd_KPI_GHG level=Waste sublevel=Discharge onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
             <td substage_sum=wwd_KPI_GHG style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...

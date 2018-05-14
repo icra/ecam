@@ -25,6 +25,7 @@
   "#wwt_serv_pop_expla":"La population desservie designe le nombre d'habitants étant raccordé à un système d'égouts et dont les eaux usées sont traitées dans une UTEUs dans la zone de service gérée par les services de l'entreprise.",
   "#wwc_conn_pop_descr":"Population reliée aux égouts",
   "#wwc_conn_pop_expla":"Nombre de résidents permanents raccordés au réseau d'égouts dans la zone de service gérée par l'entreprise, à la date de référence ",
+  "#Substages":"Étapes intermédiaires",
 
   "#About non revenue water":"A propos de l'eau non rémunérée",
   "#Abstraction":"Prélèvement",
