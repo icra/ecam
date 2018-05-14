@@ -1,4 +1,7 @@
 {
+  "#wwt_vol_tslu_descr":"Volume of fuel consumed (trucks)",
+  "#wwt_vol_tslu_expla":"Volume of fuel consumed (trucks)",
+
   "#ww_KPI_GHG_unt_ch4_descr":"CH<sub>4</sub> from untreated wastewater",
   "#ww_KPI_GHG_unt_ch4_expla":"CH<sub>4</sub> from untreated wastewater",
   "#ww_KPI_GHG_unt_descr":"From untreated wastewater",
@@ -24,8 +27,6 @@
   "#ww_uncl_pop_descr":"Population whose wastewater is not collected",
   "#ww_uncl_pop_expla":"Population whose wastewater is not collected",
 
-  "#c_wwt_dist_dis_descr":"Distance traveled by trucks",
-  "#c_wwt_dist_dis_expla":"Distance traveled by trucks to the different sludge disposal sites. Note that the tool calculates the round trip distance as twice the distance to the disposal site.",
 
   "#About non revenue water":"About non revenue water",
   "#Abstraction":"Abstraction",
@@ -902,8 +903,6 @@
   "#wwt_composting":"<span class='advanced SM'>SM</span> Is sludge sent to composting",
   "#wwt_dige_typ_descr":"Fuel type (for digestor)",
   "#wwt_dige_typ_expla":"Fuel type (for digestor)",
-  "#wwt_dist_dis_descr":"Distance to sludge disposal site",
-  "#wwt_dist_dis_expla":"Distance between the WWTP and the disposal site. If there are more than one disposal sites, use an average value. Note that the tool calculates the round trip distance as twice the distance to the disposal site.",
   "#wwt_dryw_slu_descr":"Dry weight in sludge produced",
   "#wwt_dryw_slu_expla":"Average of dry total weight of sludge produced as dry weight during the assessment period by each wastewater treatment plant managed by the undertaking. If sludge is processed with centrifuges or chemicals, a good estimation is 20% of Sludge produced in WWTP (total weight)",
   "#wwt_engines":"Do you have fuel engines",
@@ -936,8 +935,6 @@
   "#wwt_nrg_cons_expla":"Total energy consumed during the assessment period by all wastewater treatment plants managed by the undertaking",
   "#wwt_nrg_pump_descr":"Energy consumed from the grid (pumping)",
   "#wwt_nrg_pump_expla":"Energy consumed from the grid (pumping)",
-  "#wwt_num_trip_descr":"Number of trips to sludge disposal site",
-  "#wwt_num_trip_expla":"Number of truck trips to dispose sludge from the WWTP to the disposal site during the assessment period. Note that round trips to the disposal site shall be counted as 1 trip ",
   "#wwt_pmp_head_descr":"Pump head",
   "#wwt_pmp_head_expla":"Pump head",
   "#wwt_pmp_type_descr":"Type of pump",

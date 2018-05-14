@@ -274,10 +274,8 @@ var Info = {
 	wwt_mass_slu:{magnitude:"Mass",unit:"kg"},
 	wwt_dryw_slu:{magnitude:"Mass",unit:"kg"},
 	wwt_trea_cap:{magnitude:"Volume",unit:"m3"},
-	wwt_dist_dis:{magnitude:"Distance/Trip",unit:"km/trip"},
-  c_wwt_dist_dis:{magnitude:"Distance",unit:"km"},
+  wwt_vol_tslu:{magnitude:"Volume",unit:"L"},
 
-	wwt_num_trip:{magnitude:"Number",unit:"Trips"},
 	wwt_type_tre:{magnitude:"Option",unit:"Technology"},
 	wwt_vol_pump:{magnitude:"Volume",unit:"m3"},
 	wwt_nrg_pump:{magnitude:"Energy",unit:"kWh"},

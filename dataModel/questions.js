@@ -463,9 +463,7 @@ var Questions={
 		"wwt_trucks":{
 			variables:[
 				"wwt_trck_typ",
-				"wwt_num_trip",
-				"wwt_dist_dis",
-        "c_wwt_dist_dis",
+        "wwt_vol_tslu",
 				"wwt_KPI_ghg_tsludge_co2",
 				"wwt_KPI_ghg_tsludge_n2o",
 				"wwt_KPI_ghg_tsludge_ch4",
