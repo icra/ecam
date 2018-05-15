@@ -224,25 +224,33 @@
   <!--select country-->
   <fieldset>
     <legend><?php write('#select_country')?>
-      <select id=country onchange=selectCountry(this)>
+      <select id=country>
         <option value="false">--select--</option>
-        <script>for(var country in Countries){document.write("<option>"+country)}</script>
       </select>
-      <a href=countries.php>Info</a>
       <script>
-        function selectCountry(select) {
-          var country=select.value
-          if(country=="false") return;
-          Global.General.Country=country;
-          Global.Configuration.Selected.prot_con=country;
-          ['conv_kwh_co2','prot_con','bod_pday'].forEach(function(code) {
-            var input=document.querySelector("table#general_inputs input#"+code)
-            input.value=Countries[country][code];
-            input.onchange();
+        (function(){
+          var select=document.querySelector('select#country');
+          select.addEventListener('change',function(){
+            var country=this.value;
+            if(country=="false") return;
+            Global.General.Country=country;
+            Global.Configuration.Selected.prot_con=country;
+            ['conv_kwh_co2','prot_con','bod_pday'].forEach(function(code) {
+              var input=document.querySelector("table#general_inputs input#"+code)
+              input.value=Countries[country][code];
+              input.onchange();
+            });
+            init();
           });
-          init();
-        }
+          Object.keys(Countries).forEach(country=>{
+            var option=document.createElement('option');
+            option.value=country;
+            option.innerHTML=country;
+            select.appendChild(option);
+          });
+        })();
       </script>
+      <a href=countries.php>Info</a>
     </legend>
 
     <table id=general_inputs>
@@ -259,7 +267,6 @@
         <td><input id=bod_pday onchange="update(Global.General,'bod_pday',this.value)">
         <td>g/<?php write('#person')?>/<?php write('#day')?>
     </table>
-
   </fieldset>
 
   <!--fuel engines in any stage-->
