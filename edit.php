@@ -46,7 +46,8 @@
     div.card .number {
       border-radius:0.3em;
       background:#fff;
-      padding:0.1em 0.5em;
+      padding:0.1em 0.2em;
+      text-align:center;
     }
 
     .variableCode a {color:white}
@@ -129,9 +130,9 @@
     <?php
       function getL1color(){
         global $level;
-        if($level=="Waste") 
+        if($level=="Waste")
           echo "#d71d24";
-        else                
+        else
           echo "#00aff1";
       }
     ?>
@@ -412,12 +413,12 @@
     }
   </script>
 </head><body onload=init()><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--NAVBAR--><?php include'navbar.php'?>
-<!--linear--><?php include'linear.php'?>
-<!--caption--><?php include'caption.php'?>
+<?php include'sidebar.php'?>
+<?php include'navbar.php'?>
+<?php include'linear.php'?>
+<?php include'caption.php'?>
 
-<!--TITLE-->
+<!--title-->
 <?php
   //navigable title
   switch($level) {
@@ -522,45 +523,8 @@
     <!--level 2 menu-->
     <div class=menu onclick=fold(this.parentNode)>
       <button></button>
-      <b>Inputs &amp; Outputs</b> &mdash;
-      <?php write('#assessment_period')?>
-      <b class=number id=Global_General_Days></b>
-      <script>document.querySelector('#Global_General_Days').innerHTML=format(Global.General.Days())</script>
-      <?php write('#days')?>
-      <?php
-        //population
-        if($level!="Energy") {
-          echo " | ";
+      <b>Inputs &amp; Outputs</b>
 
-          //serviced population
-          $serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
-          write("#$serv_pop"."_descr");
-          $value = $level=="Water" ? "Global.Water.ws_serv_pop" : "Global.Waste.ww_serv_pop()";
-          echo "
-            <b class=number id=Global_level_serv_pop></b> |
-            <script>document.querySelector('#Global_level_serv_pop').innerHTML=format($value)</script>
-          ";
-
-          //connected population (only for wastewater)
-          if($level=="Waste"){
-            write('#ww_conn_pop_descr');
-            echo "
-              <b class=number id=Global_level_conn_pop></b> |
-              <script>document.querySelector('#Global_level_conn_pop').innerHTML=format(Global.Waste.ww_conn_pop())</script>
-            ";
-          }
-
-          //resident population
-          $resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
-          write("#$resi_pop"."_descr");
-          echo "
-            <b class=number id=Global_level_resi_pop></b>
-            <script>
-              document.querySelector('#Global_level_resi_pop').innerHTML=format(Global.$level.$resi_pop);
-            </script>
-          ";
-        }
-      ?>
       <!--button toggle outputs/graph display-->
       <button
         class=btn_toggle
@@ -569,6 +533,106 @@
       <?php write('#VIEW GRAPH')?>
       </button>
     </div>
+
+    <!--util info-->
+    <?php
+      if($level=='Water' || $level=='Waste'){
+        ?>
+        <div class="flex" style="padding:0.2em 2em;justify-content:space-between;font-family:monospace;font-size:smaller;background:#fafafa">
+          <!--assessment period-->
+          <div>
+            <a href=getStarted.php><?php write('#assessment_period')?></a>:
+            <b class=number id=Global_General_Days></b>
+            <?php write('#days')?>
+            <script>
+              (function(){
+                var value=Global.General.Days();
+                var el=document.querySelector('#Global_General_Days');
+                el.innerHTML=format(value);
+                el.style.background=value?"":"red";
+              })();
+            </script>
+          </div>
+          <!--resident population-->
+          <?php
+            echo "<div>";
+            $resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
+            echo "<a href=inhabitants.php>";
+            write("#$resi_pop"."_descr");
+            echo "</a>";
+            echo ":
+              <b class=number id=Global_level_resi_pop></b>
+              <script>
+                (function(){
+                  var value=Global.$level.$resi_pop;
+                  var el=document.querySelector('#Global_level_resi_pop');
+                  el.innerHTML=format(value);
+                  el.style.background=value?'':'red';
+                })();
+              </script>
+            ";
+            echo "</div>";
+          ?>
+          <!--connected population only ww-->
+          <?php
+            if($level=="Waste"){
+              echo "<div>";
+              echo "<a href=inhabitants.php>";
+              write('#ww_conn_pop_descr');
+              echo "</a>";
+              echo ":
+                <b class=number id=Global_level_conn_pop></b>
+                <script>
+                  (function(){
+                    var value=Global.Waste.Collection.wwc_conn_pop;
+                    var el=document.querySelector('#Global_level_conn_pop');
+                    el.innerHTML=format(value);
+                    el.style.background=value?'':'red';
+                  })();
+                </script>
+              ";
+              echo "</div>";
+            }
+          ?>
+          <!--serviced population-->
+          <?php
+            echo "<div>";
+            $serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
+            echo "<a href=inhabitants.php>";
+            write("#$serv_pop"."_descr");
+            echo "</a>";
+            $value = $level=="Water" ? "Global.Water.ws_serv_pop" : "Global.Waste.ww_serv_pop()";
+            echo ":
+              <b class=number id=Global_level_serv_pop></b>
+              <script>
+                (function(){
+                  var value=$value;
+                  var el=document.querySelector('#Global_level_serv_pop');
+                  el.innerHTML=format(value);
+                  el.style.background=value?'':'red';
+                })();
+              </script>
+            ";
+            echo "</div>";
+          ?>
+          <!--kwh to co2 conversion-->
+          <div>
+            <a href=configuration.php><?php write('#conv_kwh_co2_descr')?></a>:
+            <b class=number id=Global_General_conv_kwh_co2></b>
+            <script>
+              (function(){
+                var conv_kwh_co2=Global.General.conv_kwh_co2;
+                var el=document.querySelector('#Global_General_conv_kwh_co2');
+                el.innerHTML=format(conv_kwh_co2);
+                el.style.background=conv_kwh_co2?"":"red";
+              })();
+            </script>
+            <script>document.write(Info['conv_kwh_co2'].unit);</script>
+          </div>
+        </div>
+        <?php
+      }
+    ?>
 
     <!--level2-->
     <div style=padding:0.5em>
@@ -628,17 +692,16 @@
   <!--level3-->
   <?php if($sublevel){include'level3.php';} ?>
 </div>
-
 <div style=margin-top:5em></div>
 </html>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
 
 <script>
-  /** If no substages (will happen at the first time. Create one empty substage*/
+  /** if no substages (will happen only the first time): create empty substage*/
   (function() {
     if(substages.length==0) {
-      substages.push(new level3.Substage()); //create a substage
+      substages.push(new level3.Substage());
       //do not modify the first substage's inputs
     }
   })();

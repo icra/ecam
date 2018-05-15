@@ -29,6 +29,14 @@ function copyFieldsFrom(object_from,object_to){
       //only copy fields that match in its type
       if(typeof(object_to[field])==typeof(object_from[field])){
         object_to[field]=object_from[field];
+      }else{
+        //bug fix for user custom cfg
+        if(object_to==Global.Configuration.Units ||      //custom units
+           object_to==Global.Configuration['Yes/No'] ||  //answers to Questions
+           object_to==Global.Configuration.Expanded      //display or not inputs for a particular question
+        ){
+          object_to[field]=object_from[field];
+        }
       }
     }
   });

@@ -166,9 +166,37 @@
 			<tr><th><?php write('#go_to_variable_code')?>
 			<tr><td>
 				<form id=go_to method=GET action="variable.php">
-					<input name=id placeholder="ws_KPI_GHG">
+					<input name=id list=variables placeholder="ws_KPI_GHG" autocomplete=off>
 					<button><?php write('#go')?></button>
 				</form>
+        <datalist id=variables></datalist>
+        <script>
+          (function(){
+            //add all tags to the datalist
+            var dl=document.querySelector('#sidebar #variables');
+            [
+              Global.Water,
+              Global.Water.Abstraction,
+              Global.Water.Treatment,
+              Global.Water.Distribution,
+              Global.Waste,
+              Global.Waste.Collection,
+              Global.Waste.Treatment,
+              Global.Waste.Discharge,
+            ].forEach(stage=>{
+              Object.keys(stage).filter(key=>{
+                return 'object' != typeof stage[key]; //filter only non-objects
+              }).forEach(key=>{
+                dl.appendChild((function(){
+                  var option=document.createElement('option');
+                  option.value=key;
+                  option.innerHTML=translate(key+'_descr');
+                  return option;
+                })());
+              });
+            });
+          })();
+        </script>
 				<style>
 					#go_to{
 						display:flex;

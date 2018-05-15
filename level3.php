@@ -718,23 +718,21 @@
   </div>
 
   <!--substages table container-->
-  <div style=padding:0.5em>
+  <div>
     <!--show ghgs checkbox-->
-    <div style=margin-bottom:0.5em>
-      <input type=checkbox id=showGHGss checked onclick="level3.updateSubstagesTable()">
-      <label for=showGHGss>
-        <?php write('#Show GHG')?>
-      </label>
-
-      <input type=checkbox id=showSLss checked onclick="level3.updateSubstagesTable()">
-      <label for=showSLss>
-        <?php write('#Show SL')?>
-      </label>
-
-      <input type=checkbox id=showHL onclick="Global.Configuration.hl^=true;updateResult();">
-      <label for=showHL>
-        Highlight related inputs/outputs
-      </label>
+    <div class="flex" style="margin-bottom:0.5em;padding:0.2em;font-family:monospace;font-size:smaller;background:#fafafa">
+      <div>
+        <input type=checkbox id=showGHGss checked onclick="level3.updateSubstagesTable()"><!--
+        --><label for=showGHGss><?php write('#Show GHG')?></label>&nbsp;
+      </div>
+      <div>
+        <input type=checkbox id=showSLss checked onclick="level3.updateSubstagesTable()"><!--
+        --><label for=showSLss><?php write('#Show SL')?></label>&nbsp;
+      </div>
+      <div>
+        <input type=checkbox id=showHL onclick="Global.Configuration.hl^=true;updateResult();"><!--
+        --><label for=showHL>Highlight related inputs/outputs</label>&nbsp;
+      </div>
       <script>
         document.getElementById('showHL').checked=Global.Configuration.hl;
       </script>

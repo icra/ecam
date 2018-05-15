@@ -86,7 +86,7 @@ var Global = {
       wsa_pmp_flow:0, //Measured pump flow L/s
       wsa_pmp_volt:0, //Measured pump voltage V
       wsa_pmp_amps:0, //Measured pump current Amp
-      c_wsa_pmp_pw:function(){return this.wsa_pmp_flow*this.wsa_pmp_head*9.81*1000*0.001/1000},
+      c_wsa_pmp_pw:function(){return this.wsa_pmp_flow*this.wsa_pmp_head*Cts.ct_gravit.value/1000;},
       wsa_KPI_std_nrg_cons:function(){return this.wsa_nrg_pump/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
       wsa_KPI_un_head_loss:function(){return 1000*(this.wsa_pmp_head-this.wsa_sta_head)/this.wsa_main_len},
       wsa_KPI_nrg_elec_eff:function(){return this.c_wsa_pmp_pw()/(this.wsa_pmp_volt*this.wsa_pmp_amps*1.64/1000)*100},
@@ -203,9 +203,7 @@ var Global = {
       wsd_pmp_flow:0, //Measured pump flow L/s
       wsd_pmp_volt:0, //Measured pump voltage V
       wsd_pmp_amps:0, //Measured pump current Amp
-      c_wsd_pmp_pw:function(){
-        return this.wsd_pmp_flow*this.wsd_pmp_head*Cts.ct_gravit.value/1000
-      },
+      c_wsd_pmp_pw:function(){return this.wsd_pmp_flow*this.wsd_pmp_head*Cts.ct_gravit.value/1000;},
       //opportunities
       wsd_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
       wsd_KPI_nrg_per_m3:function(){return this.wsd_nrg_cons/this.wsd_auth_con},
@@ -339,7 +337,7 @@ var Global = {
         wwc_pmp_volt:0, //Measured pump voltage V
         wwc_pmp_amps:0, //Measured pump current Amp
         wwc_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
-        c_wwc_pmp_pw:function(){return this.wwc_pmp_flow*this.wwc_pmp_head*9.81*1000*0.001/1000},
+        c_wwc_pmp_pw:function(){return this.wwc_pmp_flow*this.wwc_pmp_head*Cts.ct_gravit.value/1000;},
         wwc_KPI_std_nrg_cons:function(){return this.wwc_nrg_pump/(this.wwc_vol_pump*this.wwc_pmp_head/100)},
         wwc_KPI_std_elec_eff:function(){return 100*0.2725/this.wwc_KPI_std_nrg_cons()},
         wwc_KPI_un_head_loss:function(){return 1000*(this.wwc_pmp_head-this.wwc_sta_head)/this.wwc_coll_len},
@@ -664,28 +662,25 @@ var Global = {
         return this.wwd_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
       },
       wwd_KPI_GHG_trck:function(){
-        return this.wwd_KPI_GHG_trck_co2()+this.wwd_KPI_GHG_trck_n2o()+this.wwd_KPI_GHG_trck_ch4()
+        return this.wwd_KPI_GHG_trck_co2()+this.wwd_KPI_GHG_trck_n2o()+this.wwd_KPI_GHG_trck_ch4();
       },
       wwd_KPI_GHG_trck_co2:function(){
-        var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)];
-        return this.wwd_vol_trck*fuel.FD*fuel.NCV/1000*(fuel.EFCO2)
+        var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)];//<br>
+        return this.wwd_vol_trck*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
       },
       wwd_KPI_GHG_trck_n2o:function(){
-        var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)];
-        return this.wwd_vol_trck*fuel.FD*fuel.NCV/1000*(Cts.ct_n2o_eq.value*fuel.EFN2O.vehicles)
+        var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)];//<br>
+        return this.wwd_vol_trck*fuel.FD*fuel.NCV/1000*Cts.ct_n2o_eq.value*fuel.EFN2O.vehicles;
       },
       wwd_KPI_GHG_trck_ch4:function(){
-        var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)];
-        return this.wwd_vol_trck*fuel.FD*fuel.NCV/1000*(Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles)
+        var fuel=Tables['Fuel types'][Tables.find('wwd_trck_typ',this.wwd_trck_typ)];//<br>
+        return this.wwd_vol_trck*fuel.FD*fuel.NCV/1000*Cts.ct_ch4_eq.value*fuel.EFCH4.vehicles;
       },
       wwd_KPI_GHG_tre_n2o:function(){//<br>
         return this.wwd_n2o_effl/1000*this.wwd_vol_disc*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value;
       },
       wwd_KPI_GHG:function(){
-        return this.wwd_KPI_GHG_elec()+
-          this.wwd_KPI_GHG_fuel()+
-          this.wwd_KPI_GHG_trck()+
-          this.wwd_KPI_GHG_tre_n2o();
+        return this.wwd_KPI_GHG_elec()+this.wwd_KPI_GHG_fuel()+this.wwd_KPI_GHG_trck()+this.wwd_KPI_GHG_tre_n2o();
       },
     },
   },
@@ -706,9 +701,6 @@ var Global = {
     //custom unit selections for variables are stored here
     Units:{},
 
-    //see "estimations.js"
-    Estimations:{},
-
     //auxiliar object to store user selections
     Selected: {
       prot_con:"Albania",//country selected for protein consumption
@@ -718,9 +710,7 @@ var Global = {
 
     //answers for filters ("questions.js")
     "Yes/No": {
-      wsa_pumping:0,
-      wwt_producing_biogas:0,
-      wwt_valorizing_biogas:0,
+      //wsa_pumping:0,
     },
   },
 

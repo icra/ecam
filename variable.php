@@ -309,7 +309,7 @@
 			}
 
       //Values in substages
-      if(typeof(currSubstage)=="object" && currSubstage.length > 1) {
+      if(typeof(currSubstage)=="object" && currSubstage.length > 0) {
         newRow=t.insertRow(-1);
         newCell=newRow.insertCell(-1);
         newCell.className='th';
@@ -421,15 +421,19 @@
 
 			//If input:is used in benchmarking?
 			if(typeof(currentStage[id])=='number') {
-				newRow=t.insertRow(-1)
-				newCell=newRow.insertCell(-1)
-				newCell.className='th'
-				newCell.innerHTML="Benchmarks where is used"
-				newCell=newRow.insertCell(-1)
+				newRow=t.insertRow(-1);
+				newCell=newRow.insertCell(-1);
+				newCell.className='th';
+				newCell.innerHTML="Benchmarks where is used";
+				newCell=newRow.insertCell(-1);
 				newCell.innerHTML=(function() {
 					//find if input is used in benchmark
 					var benchmarks=Utils.usedInBenchmarks(id);
-					if(benchmarks.length==0) return "<span style=color:#999>None</span>";
+					if(benchmarks.length==0) {
+            newRow.style.display='none';
+            return "<span style=color:#999>None</span>";
+          }
+
 					var ret="<table id=bminv>";
 					benchmarks.forEach(function(bm) {
 						ret+="<tr><td><a caption='"+translate(bm+"_descr")+"' href=variable.php?id="+bm+">"+bm+"</a>";
@@ -441,10 +445,10 @@
 
 			//Is "id" benchmarked?
 			if(RefValues.hasOwnProperty(id)) {
-				newRow=t.insertRow(-1)
-				newCell=newRow.insertCell(-1)
-				newCell.className='th'
-				newCell.innerHTML="Is benchmarked?"
+				newRow=t.insertRow(-1);
+				newCell=newRow.insertCell(-1);
+				newCell.className='th';
+				newCell.innerHTML="Is benchmarked?";
 				//evaluate benchmarking and show formula
 				newRow.insertCell(-1).innerHTML=""+
 					"<div style='margin:1em 0'><b>Benchmarking status &rarr;</b> <span style=font-size:16px>\""+RefValues[id](currentStage)+"\"</span></div>"+
