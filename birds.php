@@ -2,9 +2,11 @@
   <?php include'imports.php'?>
   <script>
     function init(){
+      console.log('init');
       BEV.showActive(); //only show active levels (Water/Wastewater)
       BEV.updateDefaults(); //update input values
       BEV.defaultQuestions(); //update question values
+
       //update default treatment type and sludge disposal method
       document.querySelector('#sludge_estimation').value=Global.Configuration.Selected.sludge_estimation_method;
       document.querySelector('#main_treatment_type').value=Global.Waste.Treatment.wwt_type_tre;
@@ -41,7 +43,7 @@
       obj[field]=newValue;
     }
 
-    //Specific behaviour for each formula when user inputs data
+    //update a value
     BEV.updateField=function(input) {
       //get info from the input element
       var field = input.id;
@@ -66,6 +68,7 @@
       for(var i=0; i<inputs.length; i++) {
         var input = inputs[i];
         var field = input.id;
+        if(field=='')continue;
         //set the longer description in the input <td> element
         input.parentNode.parentNode.childNodes[0].title=translate(field+'_expla');
         //get the value stored
@@ -82,14 +85,26 @@
       var val=Global.Configuration["Yes/No"].wwt_valorizing_biogas;
       //producing biogas
       var pro=Global.Configuration["Yes/No"].wwt_producing_biogas;
+
+      //gui elements
+      var input_pro_y=document.querySelector('input[name=wwt_producing_biogas][ans="1"]');
+      var input_pro_n=document.querySelector('input[name=wwt_producing_biogas][ans="0"]');
+      var input_val_y=document.querySelector('input[name=wwt_valorizing_biogas][ans="1"]');
+      var input_val_n=document.querySelector('input[name=wwt_valorizing_biogas][ans="0"]');
+
       if(pro){
-        document.querySelector('input[name=wwt_producing_biogas][ans="1"]').checked=true;
+        input_pro_y.checked=true;   //you are producing biogas
+        input_val_y.disabled=false; //enable val
+        input_val_n.disabled=false; //enable val
       }else{
-        document.querySelector('input[name=wwt_valorizing_biogas][ans="0"]').checked=true;
+        input_pro_n.checked=true;   //you are not producing biogas
+        input_val_n.checked=true;   //you are not valorizing biogas
+        input_val_y.disabled=true;  //disable valorizing
+        input_val_n.disabled=true;  //disable valorizing
         Global.Configuration["Yes/No"].wwt_valorizing_biogas=0;
       }
       if(val && pro){
-        document.querySelector('input[name=wwt_valorizing_biogas][ans="1"]').checked=true;
+        input_val_y.checked=true; //you are valorizing biogas
       }
     }
 
@@ -206,14 +221,14 @@
             </div>
           </div>
 
-          <tr stage=water class=hidden><td style=width:40%><?php write('#ws_nrg_cons_descr')?><td class=output><input id='ws_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
-          <tr stage=water class=hidden><td><?php write('#vol_fuel')?>                         <td class=output><input id='ws_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
-          <tr stage=water class=hidden><td><?php write('#wsa_vol_conv_descr')?><td class=input><input id='wsa_vol_conv' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
-          <tr stage=water class=hidden><td><?php write('#wsd_vol_dist_descr')?><td class=input><input id='wsd_vol_dist' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
-          <tr stage=water class=hidden><td><?php write('#wsd_auth_con_descr')?><td class=input><input id='wsd_auth_con' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
-          <tr stage=water class=hidden><td><?php write('#wsd_bill_con_descr')?><td class=input><input id='wsd_bill_con' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
-          <tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost'  onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
-          <tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost'  onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
+          <tr stage=water class=hidden><td style=width:40%><?php write('#ws_nrg_cons_descr')?><td class=output><input id='ws_nrg_cons'><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
+          <tr stage=water class=hidden><td><?php write('#vol_fuel')?>                         <td class=output><input id='ws_vol_fuel'><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
+          <tr stage=water class=hidden><td><?php write('#wsa_vol_conv_descr')?><td class=input><input id='wsa_vol_conv'> <td>m<sup>3</sup>
+          <tr stage=water class=hidden><td><?php write('#wsd_vol_dist_descr')?><td class=input><input id='wsd_vol_dist'> <td>m<sup>3</sup>
+          <tr stage=water class=hidden><td><?php write('#wsd_auth_con_descr')?><td class=input><input id='wsd_auth_con'> <td>m<sup>3</sup>
+          <tr stage=water class=hidden><td><?php write('#wsd_bill_con_descr')?><td class=input><input id='wsd_bill_con'> <td>m<sup>3</sup>
+          <tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost' > <td><script>document.write(Global.General.Currency)</script>
+          <tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost' > <td><script>document.write(Global.General.Currency)</script>
           <tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
         </tr>
 
@@ -239,13 +254,13 @@
           </div>
 
           <tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
-          <tr stage=waste class=hidden><td><?php write('#ww_nrg_cons_descr') ?><td class=output><input id='ww_nrg_cons' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_nrg_cons'].unit)</script>
-          <tr stage=waste class=hidden><td><?php write('#vol_fuel')?>          <td class=output><input id='ww_vol_fuel' onchange="BEV.updateOutput(this)"><td><script>document.write(Info['ww_vol_fuel'].unit)</script>
-          <tr stage=waste class=hidden><td><?php write('#wwt_vol_trea_descr')?><td class=input><input id='wwt_vol_trea' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
-          <tr stage=waste class=hidden><td><?php write('#wwd_vol_disc_descr')?><td class=input><input id='wwd_vol_disc' onchange="BEV.updateField(this)"> <td>m<sup>3</sup>
-          <tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?> <td class=input><input id='ww_run_cost'  onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
-          <tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?> <td class=input><input id='ww_nrg_cost'  onchange="BEV.updateField(this)"> <td><script>document.write(Global.General.Currency)</script>
-          <tr stage=waste class=hidden><td><?php write('#birds_ww_n2o_effl')?> <td class=input><input id='wwd_n2o_effl' onchange="BEV.updateField(this)"> <td>mg/L
+          <tr stage=waste class=hidden><td><?php write('#ww_nrg_cons_descr') ?><td class=output><input id='ww_nrg_cons'><td><script>document.write(Info['ww_nrg_cons'].unit)</script>
+          <tr stage=waste class=hidden><td><?php write('#vol_fuel')?>          <td class=output><input id='ww_vol_fuel'><td><script>document.write(Info['ww_vol_fuel'].unit)</script>
+          <tr stage=waste class=hidden><td><?php write('#wwt_vol_trea_descr')?><td class=input><input id='wwt_vol_trea'> <td>m<sup>3</sup>
+          <tr stage=waste class=hidden><td><?php write('#wwd_vol_disc_descr')?><td class=input><input id='wwd_vol_disc'> <td>m<sup>3</sup>
+          <tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?> <td class=input><input id='ww_run_cost' > <td><script>document.write(Global.General.Currency)</script>
+          <tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?> <td class=input><input id='ww_nrg_cost' > <td><script>document.write(Global.General.Currency)</script>
+          <tr stage=waste class=hidden><td><?php write('#birds_ww_n2o_effl')?> <td class=input><input id='wwd_n2o_effl'> <td>mg/L
 
           <!--biogas-->
           <?php include'biogas_birds.php'?>
@@ -374,15 +389,19 @@
 </div>
 
 <script>
-  //add onfocus/onblur listener to all input elements
+  //add listeners to all input elements
   (function(){
-    var inputs=document.querySelectorAll("#inputs input[id]")
+    var inputs=document.querySelectorAll("#inputs input[id]:not([type=radio])");
     for(var i=0;i<inputs.length;i++) {
       inputs[i].addEventListener('focus',function(){
         this.value=getVariable(this.id)/Units.multiplier(this.id);
         this.select();
       });
-      inputs[i].addEventListener('blur',init);
+      if(inputs[i].parentNode.classList.contains('input')){
+        inputs[i].addEventListener('change',function(){BEV.updateField(this)});
+      }else if(inputs[i].parentNode.classList.contains('output')){
+        inputs[i].addEventListener('change',function(){BEV.updateOutput(this)});
+      }
     }
   })();
 </script>
@@ -410,7 +429,7 @@
 
   #inputs th, #inputs td {text-align:left;}
   #inputs th, #inputs td {border-left:none;border-right:none}
-  #inputs td.input, 
+  #inputs td.input,
   #inputs td.output {
     width:70px;
     border:1px solid #aaa;

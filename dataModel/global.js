@@ -56,8 +56,8 @@ var Global = {
 
   /**Level 1 - Water Supply*/
   Water:{
-    "ws_resi_pop":0,
-    "ws_serv_pop":0,
+    "ws_resi_pop":10000,
+    "ws_serv_pop":9900,
     "ws_nrg_cost":0,
     "ws_run_cost":0,
     ws_nrg_cons:function(){return this.Abstraction.wsa_nrg_cons+this.Treatment.wst_nrg_cons+this.Distribution.wsd_nrg_cons},
@@ -271,8 +271,8 @@ var Global = {
   /**Level 1 - Wastewater*/
   Waste:{
     //ww population related
-    "ww_resi_pop":0,
-    "ww_onsi_pop":0,
+    "ww_resi_pop":10000,
+    "ww_onsi_pop":10,
     ww_conn_pop:   function(){return this.Collection.wwc_conn_pop},
     ww_serv_pop:   function(){return this.Treatment.wwt_serv_pop},
     ww_SL_serv_pop:function(){return 100*this.ww_serv_pop()/this.ww_resi_pop},
@@ -305,7 +305,7 @@ var Global = {
     "Collection":{
       //no filter
         "wwc_nrg_cons":0,
-        "wwc_conn_pop":0,
+        "wwc_conn_pop":9900,
         "wwc_vol_conv":0,
         wwc_SL_conn_pop:function(){return 100*this.wwc_conn_pop/Global.Waste.ww_resi_pop},
         wwc_KPI_nrg_per_m3:function(){return this.wwc_nrg_cons/this.wwc_vol_conv},
@@ -372,7 +372,7 @@ var Global = {
     "Treatment":{
       //no filter
       "wwt_nrg_cons":0,
-      "wwt_serv_pop":0,
+      "wwt_serv_pop":9800,
       "wwt_vol_trea":0,
       "wwt_type_tre":0,
       "wwt_ch4_efac":0,

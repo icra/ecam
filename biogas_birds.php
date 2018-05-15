@@ -32,13 +32,20 @@
 <script>
 	//apply estimations from "dataModel/estimations.js"
 	BEV.updateProducingBiogas=function(newValue){
-    BEV.updateQuestion('wwt_producing_biogas',newValue);
+    newValue=parseInt(newValue);
+    Global.Configuration['Yes/No'].wwt_producing_biogas=newValue;
     Global.Waste.Treatment.wwt_biog_pro = Global.Estimations.estm_wwt_biog_pro();
     Global.Waste.Treatment.wwt_ch4_biog = Global.Estimations.estm_wwt_ch4_biog();
+    if(!newValue){
+      BEV.updateValorizingBiogas(newValue);
+    }
+    init();
 	}
 
 	BEV.updateValorizingBiogas=function(newValue){
-		BEV.updateQuestion('wwt_valorizing_biogas',newValue);
+    newValue=parseInt(newValue);
+    Global.Configuration['Yes/No'].wwt_valorizing_biogas=newValue;
     Global.Waste.Treatment.wwt_biog_val=Global.Estimations.estm_wwt_biog_val();
+    init();
 	}
 </script>
