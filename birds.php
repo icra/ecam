@@ -3,10 +3,8 @@
   <script>
     function init(){
       console.log('init');
-      BEV.showActive(); //only show active levels (Water/Wastewater)
       BEV.updateDefaults(); //update input values
       BEV.defaultQuestions(); //update question values
-
       //update default treatment type and sludge disposal method
       document.querySelector('#sludge_estimation').value=Global.Configuration.Selected.sludge_estimation_method;
       document.querySelector('#main_treatment_type').value=Global.Waste.Treatment.wwt_type_tre;
@@ -14,16 +12,13 @@
       updateResult();
       Caption.listeners();
     }
-
     function drawCharts(){
       //   ".graph(withTable,container)"
       Graphs.ghg_by_source(false,'graph1');
       Graphs.graph2(false,'graph2');
-
       //   ".graph(container)"
       Graphs.ws_cost('graph3');
       Graphs.ww_cost('graph4');
-
       //   ".gauge(container, value, header, unit, lowerLimit, upperLimit)"
       Graphs.gauge('graph5', Global.Water.ws_SL_serv_pop()||0,               translate("ws_SL_serv_pop_descr"));
       Graphs.gauge('graph6', Global.Waste.ww_SL_serv_pop()||0,               translate("ww_SL_serv_pop_descr"));
@@ -31,7 +26,6 @@
       Graphs.gauge('graph8', Global.Water.ws_SL_auth_con()||0,               translate("ws_SL_auth_con_descr"), Info.ws_SL_auth_con.unit, 0, 200); //with unit and limits
     }
   </script>
-
   <!--BEV namespace (birds eye view old name)-->
   <script>
     var BEV={}; //'Birds Eye View' namespace
@@ -44,7 +38,7 @@
     }
 
     //update a value
-    BEV.updateField=function(input) {
+    BEV.updateField=function(input){
       //get info from the input element
       var field = input.id;
       //replace commmas for copy paste easyness
@@ -55,17 +49,18 @@
       //get location
       var loc=locateVariable(field);
       //update
-      if(loc.sublevel)
+      if(loc.sublevel){
         this.update(Global[loc.level][loc.sublevel],field,value);
-      else
+      }else{
         this.update(Global[loc.level],field,value);
+      }
       init();
     }
 
     //Display default values from the table
-    BEV.updateDefaults=function() {
+    BEV.updateDefaults=function(){
       var inputs = document.querySelectorAll('#inputs input');
-      for(var i=0; i<inputs.length; i++) {
+      for(var i=0;i<inputs.length;i++){
         var input = inputs[i];
         var field = input.id;
         if(field=='')continue;
@@ -76,6 +71,7 @@
         value/=Units.multiplier(field);
         //set the value to the input element
         input.value=format(value);
+        console.log(field,value);
       }
     }
 
@@ -85,13 +81,11 @@
       var val=Global.Configuration["Yes/No"].wwt_valorizing_biogas;
       //producing biogas
       var pro=Global.Configuration["Yes/No"].wwt_producing_biogas;
-
       //gui elements
       var input_pro_y=document.querySelector('input[name=wwt_producing_biogas][ans="1"]');
       var input_pro_n=document.querySelector('input[name=wwt_producing_biogas][ans="0"]');
       var input_val_y=document.querySelector('input[name=wwt_valorizing_biogas][ans="1"]');
       var input_val_n=document.querySelector('input[name=wwt_valorizing_biogas][ans="0"]');
-
       if(pro){
         input_pro_y.checked=true;   //you are producing biogas
         input_val_y.disabled=false; //enable val
@@ -109,30 +103,9 @@
     }
 
     //update the value of the filter
-    BEV.updateQuestion=function(code,newValue) {
+    BEV.updateQuestion=function(code,newValue){
       Global.Configuration['Yes/No'][code]=newValue;
       init();
-    }
-
-    //only show water/wastewater inputs if active
-    BEV.showActive=function() {
-      ['water','waste'].forEach(function(stage) {
-        if(Global.Configuration.ActiveStages[stage]==1) {
-          //show all rows with stage=stage
-          var rows = document.querySelectorAll('#inputs tr[stage='+stage+']');
-          for(var i=0; i<rows.length; rows[i++].classList.remove('hidden')){}
-        }else{
-          //show "Stage not active"
-          document.querySelector('table#inputs tr[indic='+stage+']').classList.remove('hidden');
-        }
-      });
-
-      //hide fuel if its filter is not active
-      if(Global.General.anyFuelEngines==0){
-        ['ws_vol_fuel','ww_vol_fuel'].forEach(function(field) {
-          document.querySelector('#inputs tr[stage] input[id='+field+']').parentNode.parentNode.classList.add('hidden');
-        });
-      }
     }
 
     //"fake" input that updates an output
@@ -168,7 +141,51 @@
       init();
     }
   </script>
-</head><body onload=init()><center>
+  <style>
+    body{background:#F5ECCE}
+    h1{
+      background:white;
+      border:none;
+      box-shadow:0 1px 2px rgba(0,0,0,.5);
+      line-height:2.1em;
+      text-align:left;
+    }
+
+    /*
+      legend colors for graphs
+    */
+    span.circle{display:none}
+    span.circle{float:right}
+
+    #inputs th, #inputs td {text-align:left;}
+    #inputs th, #inputs td {border-left:none;border-right:none}
+    #inputs td.input,
+    #inputs td.output {
+      width:70px;
+      border:1px solid #aaa;
+      color:#666;
+      background:#eee;
+      padding:0 !important;
+    }
+    #inputs input[id] {
+      background:inherit;
+      border:none;
+      text-align:right;
+      cursor: cell;
+      line-height:1em;
+      width:95%;
+      height:24px;
+      display:block;
+    }
+    #inputs input:focus {
+      background:white;
+    }
+    #inputs tr.hidden {display:none}
+
+    /*indication "level not active"*/
+    #inputs tr[indic]{text-align:center;color:#999;background:#eee}
+  </style>
+</head><body onload="init()"><center>
   <?php include'sidebar.php'?>
   <?php include'navbar.php'?>
   <?php include'linear.php'?>
@@ -180,35 +197,47 @@
   <div>
     <?php write('#quick_assessment')?> &mdash;
     <?php write('#initial_estimation_description')?>
-  </div><div style="font-size:13px;color:#666;">
-    <span><a href=variable.php?id=Days><?php write('#assessment_period')?></a>
-    <script>document.write(Global.General.Days())</script> <?php write('#days')?></span>
-    <span><a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a>
+  </div>
+
+  <div style="font-size:13px;color:#666;">
+    <!--assessment period-->
+    <span>
+      <a href=variable.php?id=Days><?php write('#assessment_period')?></a>:
+      <span id=Global_General_Days></span> <?php write('#days')?>
+      <script>
+        document.querySelector("#Global_General_Days").innerHTML=format(Global.General.Days());
+      </script>
+    </span> ·
+
+    <!--conv_co2_kwh-->
+    <span>
+      <a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a>:
+      <span id=conv_kwh_co2></span> kg CO<sub>2</sub>/kWh
       <script>
         (function(){
-          var c = Global.General.conv_kwh_co2;
-          var str = c==0 ? "<span style='padding:0 0.5em 0 0.5em;background:red;cursor:help' caption='<?php write('#birds_warning_conv_factor')?>'>"+format(c)+" &#9888;</span>" : format(c);
-          document.write(str)
+          var val=Global.General.conv_kwh_co2;
+          var str=val==0?"<span style='padding:0 0.5em;background:red;cursor:help' caption='<?php write('#birds_warning_conv_factor')?>'>"+format(val)+" &#9888;</span>":format(val);
+          document.querySelector('#conv_kwh_co2').innerHTML=str;
         })();
-      </script> kg CO<sub>2</sub>/kWh
+      </script>
     </span>
   </div>
 </h1>
 
-<!--content-->
+<!--main container-->
 <div class=flex>
-  <!--inputs-->
-  <div style=width:33%>
+  <!--inputs container (left)-->
+  <div style="width:33%">
+    <!--table container-->
     <div class="card"><?php cardMenu($lang_json['#inputs'].' &mdash; '.$lang_json['#enter_values'])?>
-      <!--table-->
-      <table id=inputs style=width:100%>
-        <!--WATER-->
+      <!--inputs-->
+      <table id=inputs style="width:100%">
+        <!--Water supply-->
         <tr><th colspan=3 style="background:#0aaff1">
           <div class=flex style="justify-content:space-between">
             <div>
               <img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
             </div>
-
             <!--water population-->
             <div>
               <img src=img/inhabitants.png width=25 caption="Water supply population" style=vertical-align:middle>
@@ -220,25 +249,23 @@
               </script>
             </div>
           </div>
-
-          <tr stage=water class=hidden><td style=width:40%><?php write('#ws_nrg_cons_descr')?><td class=output><input id='ws_nrg_cons'><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
-          <tr stage=water class=hidden><td><?php write('#vol_fuel')?>                         <td class=output><input id='ws_vol_fuel'><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
-          <tr stage=water class=hidden><td><?php write('#wsa_vol_conv_descr')?><td class=input><input id='wsa_vol_conv'> <td>m<sup>3</sup>
-          <tr stage=water class=hidden><td><?php write('#wsd_vol_dist_descr')?><td class=input><input id='wsd_vol_dist'> <td>m<sup>3</sup>
-          <tr stage=water class=hidden><td><?php write('#wsd_auth_con_descr')?><td class=input><input id='wsd_auth_con'> <td>m<sup>3</sup>
-          <tr stage=water class=hidden><td><?php write('#wsd_bill_con_descr')?><td class=input><input id='wsd_bill_con'> <td>m<sup>3</sup>
-          <tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost' > <td><script>document.write(Global.General.Currency)</script>
-          <tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost' > <td><script>document.write(Global.General.Currency)</script>
+          <!--water inputs-->
+          <tr stage=water class=hidden><td style=width:40%><?php write('#ws_nrg_cons_descr')?><td class=output><input id='ws_nrg_cons' value=0><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
+          <tr stage=water class=hidden><td><?php write('#vol_fuel')?>                         <td class=output><input id='ws_vol_fuel' value=0><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
+          <tr stage=water class=hidden><td><?php write('#wsa_vol_conv_descr')?><td class=input><input id='wsa_vol_conv' value=0><td>m<sup>3</sup>
+          <tr stage=water class=hidden><td><?php write('#wsd_vol_dist_descr')?><td class=input><input id='wsd_vol_dist' value=0><td>m<sup>3</sup>
+          <tr stage=water class=hidden><td><?php write('#wsd_auth_con_descr')?><td class=input><input id='wsd_auth_con' value=0><td>m<sup>3</sup>
+          <tr stage=water class=hidden><td><?php write('#wsd_bill_con_descr')?><td class=input><input id='wsd_bill_con' value=0><td>m<sup>3</sup>
+          <tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost'  value=0><td><script>document.write(Global.General.Currency)</script>
+          <tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost'  value=0><td><script>document.write(Global.General.Currency)</script>
           <tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
         </tr>
-
-        <!--WASTEWATER-->
+        <!--Wastewater-->
         <tr><th colspan=3 style=background:#d71d24>
           <div class=flex style="justify-content:space-between">
             <div>
               <img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
             </div>
-
             <!--wastewater population-->
             <div>
               <img src=img/inhabitants.png width=25 caption="Wastewater population" style="vertical-align:middle">
@@ -252,19 +279,17 @@
               </script>
             </div>
           </div>
-
+          <!--wastewater inputs-->
           <tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
-          <tr stage=waste class=hidden><td><?php write('#ww_nrg_cons_descr') ?><td class=output><input id='ww_nrg_cons'><td><script>document.write(Info['ww_nrg_cons'].unit)</script>
-          <tr stage=waste class=hidden><td><?php write('#vol_fuel')?>          <td class=output><input id='ww_vol_fuel'><td><script>document.write(Info['ww_vol_fuel'].unit)</script>
-          <tr stage=waste class=hidden><td><?php write('#wwt_vol_trea_descr')?><td class=input><input id='wwt_vol_trea'> <td>m<sup>3</sup>
-          <tr stage=waste class=hidden><td><?php write('#wwd_vol_disc_descr')?><td class=input><input id='wwd_vol_disc'> <td>m<sup>3</sup>
-          <tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?> <td class=input><input id='ww_run_cost' > <td><script>document.write(Global.General.Currency)</script>
-          <tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?> <td class=input><input id='ww_nrg_cost' > <td><script>document.write(Global.General.Currency)</script>
-          <tr stage=waste class=hidden><td><?php write('#birds_ww_n2o_effl')?> <td class=input><input id='wwd_n2o_effl'> <td>mg/L
-
+          <tr stage=waste class=hidden><td><?php write('#ww_nrg_cons_descr') ?><td class=output><input id='ww_nrg_cons' value=0><td><script>document.write(Info['ww_nrg_cons'].unit)</script>
+          <tr stage=waste class=hidden><td><?php write('#vol_fuel')?>          <td class=output><input id='ww_vol_fuel' value=0><td><script>document.write(Info['ww_vol_fuel'].unit)</script>
+          <tr stage=waste class=hidden><td><?php write('#wwt_vol_trea_descr')?><td class=input> <input id='wwt_vol_trea'value=0><td>m<sup>3</sup>
+          <tr stage=waste class=hidden><td><?php write('#wwd_vol_disc_descr')?><td class=input> <input id='wwd_vol_disc'value=0><td>m<sup>3</sup>
+          <tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?> <td class=input> <input id='ww_run_cost' value=0><td><script>document.write(Global.General.Currency)</script>
+          <tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?> <td class=input> <input id='ww_nrg_cost' value=0><td><script>document.write(Global.General.Currency)</script>
+          <tr stage=waste class=hidden><td><?php write('#birds_ww_n2o_effl')?> <td class=input> <input id='wwd_n2o_effl'value=0><td>mg/L
           <!--biogas-->
           <?php include'biogas_birds.php'?>
-
           <!--treatment type-->
           <tr stage=waste class=hidden>
             <td colspan=3>
@@ -273,7 +298,6 @@
               <?php include'treatment_birds.php'?>
             </td>
           </tr>
-
           <!--sludge management-->
           <tr stage=waste class=hidden>
             <td colspan=3>
@@ -282,10 +306,11 @@
               <?php include'sludge_birds.php'?>
             </td>
           </tr>
+        </tr>
       </table>
     </div>
 
-    <!--prev & next buttons-->
+    <!--prev next btns container-->
     <div style="margin:0.5em 1em;text-align:center">
       <script>
         //find first available stage to start entering data
@@ -320,8 +345,9 @@
       --><button class="button next" onclick=nextPage(event)><?php write('#next')?></button>
     </div>
   </div>
-  <!--graphs-->
-  <div class=card style=width:66%>
+
+  <!--graphs container-->
+  <div class=card style="width:66%">
     <?php cardMenu($lang_json['#figures'])?>
     <div id=graphs>
       <style>
@@ -387,76 +413,34 @@
     </div>
   </div>
 </div>
-
-<script>
-  //add listeners to all input elements
-  (function(){
-    var inputs=document.querySelectorAll("#inputs input[id]:not([type=radio])");
-    for(var i=0;i<inputs.length;i++) {
-      inputs[i].addEventListener('focus',function(){
-        this.value=getVariable(this.id)/Units.multiplier(this.id);
-        this.select();
-      });
-      if(inputs[i].parentNode.classList.contains('input')){
-        inputs[i].addEventListener('change',function(){BEV.updateField(this)});
-      }else if(inputs[i].parentNode.classList.contains('output')){
-        inputs[i].addEventListener('change',function(){BEV.updateOutput(this)});
-      }
-    }
-  })();
-</script>
-
 <?php include'currentJSON.php'?>
 <script>
   if(google){google.charts.load('current',{'packages':['corechart','gauge','bar']});}
 </script>
 
-<style>
-  body{background:#F5ECCE}
-  h1{
-    background:white;
-    border:none;
-    box-shadow:0 1px 2px rgba(0,0,0,.5);
-    line-height:2.1em;
-    text-align:left;
-  }
+</html>
 
-  /*
-    legend colors for graphs
-  */
-  span.circle{display:none}
-  span.circle{float:right}
+<!--populate page-->
+<script>
+  //add listeners to all input elements
+  (function(){
+    var inputs=document.querySelectorAll("#inputs input[id]:not([type=radio])");
+    for(var i=0;i<inputs.length;i++) {
+      var input=inputs[i];
+      input.addEventListener('focus',function(){
+        this.value=getVariable(this.id)/Units.multiplier(this.id);
+        this.select();
+      });
+      if(input.parentNode.classList.contains('input')){
+        input.addEventListener('change',function(){BEV.updateField(this)});
+      }else if(input.parentNode.classList.contains('output')){
+        input.addEventListener('change',function(){BEV.updateOutput(this)});
+      }
+    }
+  })();
+</script>
 
-  #inputs th, #inputs td {text-align:left;}
-  #inputs th, #inputs td {border-left:none;border-right:none}
-  #inputs td.input,
-  #inputs td.output {
-    width:70px;
-    border:1px solid #aaa;
-    color:#666;
-    background:#eee;
-    padding:0 !important;
-  }
-  #inputs input[id] {
-    background:inherit;
-    border:none;
-    text-align:right;
-    cursor: cell;
-    line-height:1em;
-    width:95%;
-    height:24px;
-    display:block;
-  }
-  #inputs input:focus {
-    background:white;
-  }
-  #inputs tr.hidden {display:none}
-
-  /*indication "level not active"*/
-  #inputs tr[indic]{text-align:center;color:#999;background:#eee}
-</style>
-
-<!--locked inputs that are outputs in tier A-->
+<!--add lock symbol for inputs that are outputs-->
 <script>
   //look for td.outputs and add class 'locked'
   (function(){
@@ -482,13 +466,30 @@
   })();
 </script>
 <style>
-  #inputs td.output.locked {
-    background:#fff;
-  }
-  #inputs td.output.locked + td:before {
-    content:"\1f512";
-  }
-  #inputs td.output.locked input {
-    cursor:default;
-  }
-</style
+  #inputs td.output.locked { background:#fff; }
+  #inputs td.output.locked + td:before { content:"\1f512"; }
+  #inputs td.output.locked input { cursor:default; }
+</style>
+
+<!--only show active water/wastewater inputs-->
+<script>
+  (function(){
+    ['water','waste'].forEach(function(stage){
+      if(Global.Configuration.ActiveStages[stage]==1) {
+        //show all rows with stage=stage
+        var rows=document.querySelectorAll('#inputs tr[stage='+stage+']');
+        for(var i=0;i<rows.length;rows[i++].classList.remove('hidden')){}
+      }else{
+        //show "Stage not active"
+        document.querySelector('table#inputs tr[indic='+stage+']').classList.remove('hidden');
+      }
+    });
+
+    //hide fuel if its filter is not active
+    if(Global.General.anyFuelEngines==0){
+      ['ws_vol_fuel','ww_vol_fuel'].forEach(function(field){
+        document.querySelector('#inputs tr[stage] input[id='+field+']').parentNode.parentNode.classList.add('hidden');
+      });
+    }
+  })();
+</script>

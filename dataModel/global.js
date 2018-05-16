@@ -70,7 +70,8 @@ var Global = {
       //no filter
       wsa_nrg_cons:0,
       wsa_vol_conv:0,
-      wsa_nrg_per_pmp_watr:function(){return this.wsa_nrg_cons/this.wsa_vol_conv},
+      wsa_nrg_per_abs_watr:function(){return this.wsa_nrg_cons/this.wsa_vol_conv},
+      wsa_nrg_per_pmp_watr:function(){return this.wsa_nrg_pump/this.wsa_vol_pump},
       //fuel engines?
       wsa_fuel_typ:0,
       wsa_vol_fuel:0,

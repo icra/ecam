@@ -2,6 +2,7 @@
 var Level3={};
 Level3.list=[
 	//wsa
+  "wsa_nrg_per_pmp_watr",
 	"wsa_KPI_GHG_fuel_co2",
 	"wsa_KPI_GHG_fuel_n2o",
 	"wsa_KPI_GHG_fuel_ch4",

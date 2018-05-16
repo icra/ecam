@@ -14,7 +14,7 @@
 			</a>
 		</div>
 	</div>
-
+  <?php include'version.php'?>
 	<div class=flex>
 		<!--language selection-->
 		<?php include'language.php'?>

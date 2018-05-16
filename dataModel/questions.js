@@ -44,13 +44,14 @@ var Questions={
 
 		"wsa_pumping":{
 			variables:[
-				"wsa_pmp_type",    // comment for the sake of making it eq.
+				"wsa_pmp_type",
 				"wsa_pmp_size",
 				"wsa_nrg_pump",
 				"wsa_vol_pump",
 				"wsa_pmp_head",
 				"wsa_sta_head",
 				"wsa_main_len",
+        "wsa_nrg_per_pmp_watr",
 				"wsa_KPI_std_nrg_cons",
 				"wsa_KPI_un_head_loss",
 			],
