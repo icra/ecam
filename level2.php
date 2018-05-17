@@ -160,7 +160,7 @@
 
     /*1st cell: show code*/
     var newCell=document.createElement('th');
-    newRow.append(newCell);
+    newRow.appendChild(newCell);
     newCell.classList.add('variableCode');
     newCell.innerHTML=(function() {
       return "<a style=font-size:10px href=variable.php?id="+code+">"+code+"</a>";
@@ -243,7 +243,7 @@
 
     /*code*/
     var newCell=document.createElement('th');
-    newRow.append(newCell);
+    newRow.appendChild(newCell);
     newCell.classList.add('variableCode');
     if(isCV)newCell.classList.add('isCV');
     newCell.innerHTML=(function() {
