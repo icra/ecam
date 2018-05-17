@@ -300,19 +300,20 @@
           </span>
 
           <th rowspan=3 style="background:#00aff1">
-            <a href="edit.php?level=Water" style=color:white>
-              <?php write("#Water")?>
-              (<script>document.write(Global.Water.ws_serv_pop)</script> <?php write("#people")?>)
-            </a>
-            <br><br><span field=ws_KPI_GHG>
-              <?php write("#Loading")?>...
-            </span>
+            <div>
+              <a href="edit.php?level=Water" style=color:white>
+                <?php write("#Water")?>
+                (<span id=ws_serv_pop>0</span> <?php write("#people")?>)
+                <script>document.querySelector('#ws_serv_pop').innerHTML=format(Global.Water.ws_serv_pop)</script>
+              </a>
+            </div>
+            <div field=ws_KPI_GHG>0</div>
           </th>
 
             <!--wsa-->
             <td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'><?php write('#Abstraction')?></a>
               <?php drawCheckbox('wsa_KPI_GHG')?>
-              <td field=wsa_KPI_GHG        level=Water sublevel=Abstraction onmouseenter=fillSources(this,event)> <?php write('#Loading')?>...
+              <td field=wsa_KPI_GHG level=Water sublevel=Abstraction onmouseenter=fillSources(this,event)> <?php write('#Loading')?>...
               <td substage_sum=wsa_KPI_GHG style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...
             </tr>
 
@@ -332,20 +333,31 @@
 
           <!--WASTE-->
           <th rowspan=3 class=red>
-            <a href="edit.php?level=Waste" style=color:white>
-              <?php write("#Waste")?>
-              (<script>
-                document.write(Global.Waste.ww_serv_pop())
-              </script> <?php write("#people")?>)
-            </a>
-            <br><br>
-            <span field=ww_KPI_GHG>
-              <?php write('#Loading')?>...
-            </span>
+            <div>
+              <a href="edit.php?level=Waste" style=color:white>
+                <?php write("#Waste")?>
+                (<span id=ww_serv_pop>0</span> <?php write("#people")?>)
+                <script>document.querySelector('#ww_serv_pop').innerHTML=format(Global.Waste.ww_serv_pop())</script>
+              </a>
+              <div field=ww_KPI_GHG>0</div>
+            </div><br><br>
+
+            <!--untreated ww emissions-->
+            <div style="
+              background:red;
+              font-size:smaller;
+              padding:1em;
+              box-shadow: 0 1px 2px rgba(0,0,0,.1);
+              color:black;
+            ">
+              (<?php write('#ww_KPI_GHG_unt_descr')?>:
+              <span field=ww_KPI_GHG_unt></span>)
+            </div>
           </th>
 
           <!--wwc-->
-          <td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'><?php write('#Collection')?></a>
+          <td><img src=img/wasteCol.png>
+            <a href='edit.php?level=Waste&sublevel=Collection'><?php write('#Collection')?></a>
             <?php drawCheckbox('wwc_KPI_GHG')?>
             <td field=wwc_KPI_GHG level=Waste sublevel=Collection onmouseenter=fillSources(this,event)><?php write('#Loading')?>...
             <td substage_sum=wwc_KPI_GHG style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...
@@ -365,8 +377,6 @@
             <td substage_sum=wwd_KPI_GHG style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...
           </tr>
         </table>
-        <style>
-        </style>
       </div>
 
       <style>

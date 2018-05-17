@@ -26,9 +26,6 @@
   </tr>
 </tbody>
 
-<style>
-</style>
-
 <script>
 	//apply estimations from "dataModel/estimations.js"
 	BEV.updateProducingBiogas=function(newValue){

@@ -71,7 +71,7 @@
         value/=Units.multiplier(field);
         //set the value to the input element
         input.value=format(value);
-        console.log(field,value);
+        //console.log(field,value);
       }
     }
 
@@ -363,6 +363,10 @@
           margin-bottom:-1px;
           border:1px solid #ddd;
           padding:0;
+        }
+        #graphs div.tab_buttons,
+        #graphs div.tab_buttons button {
+          font-size:smaller;
         }
       </style>
 

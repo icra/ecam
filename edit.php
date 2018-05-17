@@ -423,8 +423,8 @@
   //navigable title
   switch($level) {
     case "Water":
-    case "Waste":  $titleLevel=$lang_json["#$level"];break;
-    default:       $titleLevel=$level;break;
+    case "Waste": $titleLevel=$lang_json["#$level"]; break;
+    default:      $titleLevel=$level; break;
   }
   if($sublevel) {
     $titleSublevel="<span style='font-size:26px'>".$lang_json["#$sublevel"]."</span>";
