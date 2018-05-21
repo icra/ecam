@@ -347,8 +347,10 @@
               padding:1em;
               box-shadow: 0 1px 2px rgba(0,0,0,.1);
             ">
-              (<?php write('#ww_KPI_GHG_unt_descr')?>:
-              <span field=ww_KPI_GHG_unt></span>)
+              <div>
+                <?php write('#ww_KPI_GHG_unt_descr')?>
+              </div>
+              <div field=ww_KPI_GHG_unt></div>
             </div>
           </th>
 

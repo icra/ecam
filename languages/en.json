@@ -1,4 +1,31 @@
 {
+  "#wwd_water_reuse":"Do you want to evaluate GHG emissions avoided from reusing water and nutrients",
+  "#wwd_wr_N_rec_descr":"Total Nitrogen recovered",
+  "#wwd_wr_N_rec_expla":"Total Nitrogen recovered from ww treatment and/or water reuse, and displacing fertilizer use",
+  "#wwd_wr_P_rec_descr":"Total Phosphorus recovered",
+  "#wwd_wr_P_rec_expla":"Total Phosphorus recovered from ww treatment and/or water reuse, and displacing fertilizer use",
+  "#wwd_wr_adnrg_descr":"Additional energy consumption",
+  "#wwd_wr_adnrg_expla":"Additional energy consumption for reuse treatment and/or pumping",
+  "#wwd_wr_vol_d_descr":"Volume of reused water displacing potable water",
+  "#wwd_wr_vol_d_expla":"Volume of reused water displacing potable water",
+
+  "#wwd_wr_C_seq_slu_descr":"Carbon sequestration from sludge disposal",
+  "#wwd_wr_C_seq_slu_expla":"Carbon sequestration from sludge disposal",
+  "#wwd_wr_fer_avo_N_descr":"Fertilizer emission avoided by recovered Nitrogen",
+  "#wwd_wr_fer_avo_N_expla":"Fertilizer emission avoided by recovered Nitrogen",
+  "#wwd_wr_fer_avo_P_descr":"Fertilizer emission avoided by recovered Phosphorus",
+  "#wwd_wr_fer_avo_P_expla":"Fertilizer emission avoided by recovered Phosphorus",
+  "#wwd_wr_GHG_avo_N_descr":"GHG emission avoided by recovered Nitrogen from wastewater reuse",
+  "#wwd_wr_GHG_avo_N_expla":"GHG emission avoided by recovered Nitrogen from wastewater reuse",
+  "#wwd_wr_GHG_avo_P_descr":"GHG emission avoided by recovered Phosphorus from wastewater reuse",
+  "#wwd_wr_GHG_avo_P_expla":"GHG emission avoided by recovered Phosphorus from wastewater reuse",
+  "#wwd_wr_GHG_avo_descr"  :"Total GHG emission avoided by wastewater reuse",
+  "#wwd_wr_GHG_avo_expla"  :"Total GHG emission avoided by wastewater reuse",
+  "#wwd_wr_nrg_sav_descr"  :"Electricity savings due to reuse displacing potable water",
+  "#wwd_wr_nrg_sav_expla"  :"Electricity savings due to reuse displacing potable water",
+  "#wwd_wr_GHG_avo_d_descr":"GHG emissions avoided due to reuse displacing potable water",
+  "#wwd_wr_GHG_avo_d_expla":"GHG emissions avoided due to reuse displacing potable water",
+
   "#wsa_pmp_pf_descr":"Power factor",
   "#wsa_pmp_pf_expla":"Power factor",
   "#wsd_pmp_pf_descr":"Power factor",
@@ -8,10 +35,8 @@
 
   "#wsa_nrg_per_abs_watr_descr":"Energy consumption per abstracted water",
   "#wsa_nrg_per_abs_watr_expla":"Energy consumption per abstracted water",
-
   "#wsa_nrg_per_pmp_watr_descr":"Energy consumed per pumped water",
   "#wsa_nrg_per_pmp_watr_expla":"Energy consumed per pumped water",
-
   "#wwt_vol_tslu_descr":"Volume of fuel consumed (trucks)",
   "#wwt_vol_tslu_expla":"Volume of fuel consumed (trucks)",
 

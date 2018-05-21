@@ -522,7 +522,7 @@ var Global = {
         var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
         var ratio_CN=Global.General.content_C(this.wwt_mass_slu_land,sludge_type)/Global.General.content_N(this.wwt_mass_slu_land,sludge_type)||0;//<br>
         if(ratio_CN>30){//<br>
-          return 0;//<br> 
+          return 0;//<br>
         }else{//<br>
           if(sludge_type=="Non-digested"){ //<br>
             return this.wwt_mass_slu_land*0.03*0.015*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
@@ -636,6 +636,44 @@ var Global = {
     },
 
     "Discharge":{
+      //water reuse
+      "wwd_wr_N_rec":0, //N recovered
+      "wwd_wr_P_rec":0, //P recovered
+      "wwd_wr_adnrg":0, //additional energy
+      "wwd_wr_vol_d":0, //volume of reused water displacing potable water
+      wwd_wr_C_seq_slu:function(){//<br>
+        var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
+        var VS = (sludge_type=="Digested")?0.51:0.70;//<br><br>
+        return Global.Waste.Treatment.wwt_mass_slu_comp*0.25 +//<br>
+        Global.Waste.Treatment.wwt_mass_slu_app*0.25 +//<br>
+        Global.Waste.Treatment.wwt_mass_slu_land*(VS)*(0.56)*(0.2)*(44/12);
+      },
+      wwd_wr_fer_avo_N: function(){
+        return Global.Waste.Treatment.wwt_mass_slu_comp*0.04*4  +//<br>
+               Global.Waste.Treatment.wwt_mass_slu_app *0.04*4;  //<br>
+      },
+      wwd_wr_fer_avo_P: function(){
+        return Global.Waste.Treatment.wwt_mass_slu_comp*0.015*2  +//<br>
+               Global.Waste.Treatment.wwt_mass_slu_app *0.015*2;  //<br>
+      },
+      wwd_wr_GHG_avo_N: function(){ return this.wwd_wr_N_rec*4; },
+      wwd_wr_GHG_avo_P: function(){ return this.wwd_wr_P_rec*2; },
+      wwd_wr_GHG_avo:   function(){ return this.wwd_wr_GHG_avo_N() + this.wwd_wr_GHG_avo_P(); },
+      wwd_wr_nrg_sav:   function(){ //<br>
+        return this.wwd_wr_vol_d*( //<br>
+          Global.Water.Abstraction.wsa_nrg_per_abs_watr()+ //<br>
+          Global.Water.Treatment.wst_KPI_nrg_per_m3()+ //<br>
+          Global.Water.Distribution.wsd_KPI_nrg_per_vd() //<br>
+        );
+      },
+      wwd_wr_GHG_avo_d: function(){
+        return this.wwd_wr_vol_d*(
+          Global.Water.Abstraction.wsa_nrg_per_abs_watr() +
+          Global.Water.Treatment.wst_KPI_nrg_per_m3() +
+          Global.Water.Distribution.wsd_KPI_nrg_per_vd()
+        )*Global.General.conv_kwh_co2;
+      },
+
       //no filter
       "wwd_nrg_cons":0,
       "wwd_vol_disc":0,

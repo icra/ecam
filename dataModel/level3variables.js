@@ -123,6 +123,14 @@ Level3.list=[
 	"wwt_type_tre",
 
 	//wwd
+  "wwd_wr_C_seq_slu", //water reuse
+  "wwd_wr_fer_avo_N", //water reuse
+  "wwd_wr_fer_avo_P", //water reuse
+  "wwd_wr_GHG_avo_N", //water reuse
+  "wwd_wr_GHG_avo_P", //water reuse
+  "wwd_wr_GHG_avo",   //water reuse
+  "wwd_wr_nrg_sav",   //water reuse
+  "wwd_wr_GHG_avo_d", //water reuse
 	"wwd_KPI_GHG_fuel_co2",
 	"wwd_KPI_GHG_fuel_n2o",
 	"wwd_KPI_GHG_fuel_ch4",

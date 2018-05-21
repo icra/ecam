@@ -40,9 +40,10 @@ function copyFieldsFrom(object_from,object_to){
       }else if(typeof(object_to[field])=='number' && typeof(object_from[field])=='undefined'){ //fix for new variables
         object_to[field]=0;
       }else if(typeof(object_to[field])=='undefined' && typeof(object_from[field])=='number'){ //fix for old variables
+        console.warn(field,' is an old variable; not loaded');
         //do nothing
       }else{
-        //do nothing
+        console.warn(field,' types do not match');
       }
     }
   });

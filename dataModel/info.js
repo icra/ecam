@@ -9,6 +9,19 @@
 */
 
 var Info = {
+  //wate reuse
+  wwd_wr_N_rec:     {magnitude:"Mass",   unit:"kg"},
+  wwd_wr_P_rec:     {magnitude:"Mass",   unit:"kg"},
+  wwd_wr_adnrg:     {magnitude:"Energy", unit:"kWh"},
+  wwd_wr_vol_d:     {magnitude:"Volume", unit:"m3"},
+  wwd_wr_C_seq_slu: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
+  wwd_wr_fer_avo_N: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
+  wwd_wr_fer_avo_P: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
+  wwd_wr_GHG_avo_N: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
+  wwd_wr_GHG_avo_P: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
+  wwd_wr_GHG_avo:   {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
+  wwd_wr_nrg_sav:   {magnitude:"Energy", unit:"kWh"},
+  wwd_wr_GHG_avo_d: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
 
   //pump edits
   wsa_pmp_pf: {magnitude:"No magnitude",unit:"no unit"},
@@ -16,15 +29,15 @@ var Info = {
   wwc_pmp_pf: {magnitude:"No magnitude",unit:"no unit"},
 
   //untreated, onsite and uncollected
-  ww_KPI_GHG_unt:     {magnitude:"Mass",unit:"kg  CO<sub>2</sub>e"},
-  ww_KPI_GHG_unt_n2o: {magnitude:"Mass",unit:"kg  CO<sub>2</sub>e"},
-  ww_KPI_GHG_unt_ch4: {magnitude:"Mass",unit:"kg  CO<sub>2</sub>e"},
-  ww_SL_ghg_ons:      {magnitude:"Mass",unit:"kg  CO<sub>2</sub>e"},
-  ww_SL_ghg_ons_ch4:  {magnitude:"Mass",unit:"kg  CO<sub>2</sub>e"},
-  ww_SL_ghg_ons_n2o:  {magnitude:"Mass",unit:"kg  CO<sub>2</sub>e"},
-  ww_SL_ghg_unc:      {magnitude:"Mass",unit:"kg  CO<sub>2</sub>e"},
-  ww_SL_ghg_unc_ch4:  {magnitude:"Mass",unit:"kg  CO<sub>2</sub>e"},
-  ww_SL_ghg_unc_n2o:  {magnitude:"Mass",unit:"kg  CO<sub>2</sub>e"},
+  ww_KPI_GHG_unt:     {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  ww_KPI_GHG_unt_n2o: {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  ww_KPI_GHG_unt_ch4: {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  ww_SL_ghg_ons:      {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  ww_SL_ghg_ons_ch4:  {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  ww_SL_ghg_ons_n2o:  {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  ww_SL_ghg_unc:      {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  ww_SL_ghg_unc_ch4:  {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  ww_SL_ghg_unc_n2o:  {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	//GENERAL
 	Days:{magnitude:"Time",unit:"days"},
