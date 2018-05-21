@@ -87,10 +87,14 @@ var Global = {
       wsa_pmp_flow:0, //Measured pump flow L/s
       wsa_pmp_volt:0, //Measured pump voltage V
       wsa_pmp_amps:0, //Measured pump current Amp
+
       c_wsa_pmp_pw:function(){return this.wsa_pmp_flow*this.wsa_pmp_head*Cts.ct_gravit.value/1000;},
       wsa_KPI_std_nrg_cons:function(){return this.wsa_nrg_pump/(this.wsa_vol_pump*this.wsa_pmp_head/100)},
       wsa_KPI_un_head_loss:function(){return 1000*(this.wsa_pmp_head-this.wsa_sta_head)/this.wsa_main_len},
-      wsa_KPI_nrg_elec_eff:function(){return this.c_wsa_pmp_pw()/(this.wsa_pmp_volt*this.wsa_pmp_amps*1.64/1000)*100},
+
+      wsa_pmp_pf:0.9, //power factor (no unit)
+      wsa_KPI_nrg_elec_eff:function(){return 100*this.c_wsa_pmp_pw()/(this.wsa_pmp_volt*this.wsa_pmp_amps*Math.sqrt(3)*this.wsa_pmp_pf/1000)},
+
       //producing energy?
       wsa_nrg_turb:0,
       wsa_KPI_nrg_recovery:function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
@@ -145,7 +149,6 @@ var Global = {
       "wst_nrg_pump":0,
       "wst_pmp_head":0,
       wst_KPI_std_nrg_cons:function(){return this.wst_nrg_pump/(this.wst_vol_pump*this.wst_pmp_head/100)},
-      wst_KPI_std_elec_eff:function(){return 100*0.2725/this.wst_KPI_std_nrg_cons()},
       //wst GHG
       wst_KPI_GHG_elec:function(){return this.wst_nrg_cons*Global.General.conv_kwh_co2},
       wst_KPI_GHG_fuel:function(){return this.wst_KPI_GHG_fuel_co2()+this.wst_KPI_GHG_fuel_n2o()+this.wst_KPI_GHG_fuel_ch4();},
@@ -227,8 +230,12 @@ var Global = {
       wsd_KPI_std_nrg_cons:function(){return this.wsd_nrg_pump/(this.wsd_vol_pump*this.wsd_pmp_head/100)},
       wsd_KPI_un_head_loss:function(){return 1000*(this.wsd_pmp_head-this.wsd_sta_head)/this.wsd_main_len},
       wsd_KPI_water_losses:function(){return Math.max(0,1000*(this.wsd_vol_dist-this.wsd_auth_con)/(this.wsd_main_len))/Global.General.Years()},
-      wsd_KPI_nrg_elec_eff:function(){return this.c_wsd_pmp_pw()/(this.wsd_pmp_volt*this.wsd_pmp_amps*1.64/1000)*100},
+
+      wsd_pmp_pf:0.9, //power factor (no unit)
+      wsd_KPI_nrg_elec_eff:function(){return 100*this.c_wsd_pmp_pw()/(this.wsd_pmp_volt*this.wsd_pmp_amps*Math.sqrt(3)*this.wsd_pmp_pf/1000)},
+
       wsd_KPI_std_nrg_newp:function(){return this.wsd_KPI_nrg_elec_eff()/this.wsd_pmp_exff*this.wsd_KPI_std_nrg_cons()},
+
       wsd_KPI_nrg_cons_new:function(){return this.wsd_KPI_nrg_elec_eff()/this.wsd_pmp_exff*this.wsd_nrg_pump},
       wsd_KPI_nrg_estm_sav:function(){return this.wsd_nrg_cons-this.wsd_KPI_nrg_cons_new()},
       wsd_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wsd_KPI_nrg_estm_sav()},
@@ -341,10 +348,13 @@ var Global = {
         wwc_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
         c_wwc_pmp_pw:function(){return this.wwc_pmp_flow*this.wwc_pmp_head*Cts.ct_gravit.value/1000;},
         wwc_KPI_std_nrg_cons:function(){return this.wwc_nrg_pump/(this.wwc_vol_pump*this.wwc_pmp_head/100)},
-        wwc_KPI_std_elec_eff:function(){return 100*0.2725/this.wwc_KPI_std_nrg_cons()},
         wwc_KPI_un_head_loss:function(){return 1000*(this.wwc_pmp_head-this.wwc_sta_head)/this.wwc_coll_len},
-        wwc_KPI_nrg_elec_eff:function(){return this.c_wwc_pmp_pw()/(this.wwc_pmp_volt*this.wwc_pmp_amps*1.64/1000)*100},
+
+        wwc_pmp_pf:0.9, //power factor (no unit)
+        wwc_KPI_nrg_elec_eff:function(){return 100*this.c_wwc_pmp_pw()/(this.wwc_pmp_volt*this.wwc_pmp_amps*Math.sqrt(3)*this.wwc_pmp_pf/1000)},
+
         wwc_KPI_std_nrg_newp:function(){return this.wwc_KPI_nrg_elec_eff()/this.wwc_pmp_exff*this.wwc_KPI_std_nrg_cons()},
+
         wwc_KPI_nrg_cons_new:function(){return this.wwc_vol_pump*this.wwc_KPI_std_nrg_newp()/100*this.wwc_pmp_head},
         wwc_KPI_nrg_estm_sav:function(){return this.wwc_nrg_cons-this.wwc_KPI_nrg_cons_new()},
         wwc_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wwc_KPI_nrg_estm_sav()},
@@ -401,7 +411,6 @@ var Global = {
       "wwt_pmp_head":0,
       wwt_KPI_nrg_per_pump:function(){return this.wwt_nrg_pump/this.wwt_vol_pump},
       wwt_KPI_std_nrg_cons:function(){return this.wwt_nrg_pump/(this.wwt_vol_pump*this.wwt_pmp_head/100)},
-      wwt_KPI_std_elec_eff:function(){return 100*0.2725/this.wwt_KPI_std_nrg_cons()},
       //biogas?
       "wwt_biog_pro":0,
       "wwt_ch4_biog":59,

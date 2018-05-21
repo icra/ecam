@@ -26,17 +26,23 @@ function copyFieldsFrom(object_from,object_to){
       var newField=field.replace(/ /g,"");
       copyFieldsFrom(object_from[field],object_to[newField]);
     }else{
-      //only copy fields that match in its type
+      //copy always these values
+      if(object_to==Global.Configuration.Units ||      //custom units
+         object_to==Global.Configuration['Yes/No'] ||  //answers to Questions
+         object_to==Global.Configuration.Expanded      //display or not inputs for a particular question
+      ){
+        object_to[field]=object_from[field];
+      }
+
+      //for the rest: copy only values that match in its type
       if(typeof(object_to[field])==typeof(object_from[field])){
         object_to[field]=object_from[field];
+      }else if(typeof(object_to[field])=='number' && typeof(object_from[field])=='undefined'){ //fix for new variables
+        object_to[field]=0;
+      }else if(typeof(object_to[field])=='undefined' && typeof(object_from[field])=='number'){ //fix for old variables
+        //do nothing
       }else{
-        //bug fix for user custom cfg
-        if(object_to==Global.Configuration.Units ||      //custom units
-           object_to==Global.Configuration['Yes/No'] ||  //answers to Questions
-           object_to==Global.Configuration.Expanded      //display or not inputs for a particular question
-        ){
-          object_to[field]=object_from[field];
-        }
+        //do nothing
       }
     }
   });

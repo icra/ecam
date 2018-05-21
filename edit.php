@@ -618,16 +618,19 @@
           <!--kwh to co2 conversion-->
           <div>
             <a href=configuration.php><?php write('#conv_kwh_co2_descr')?></a>:
-            <b class=number id=Global_General_conv_kwh_co2></b>
+            <b class=number id=conv_kwh_co2_value></b>
+            <span class=number id=conv_kwh_co2_unit></span>
             <script>
+              //value
               (function(){
-                var conv_kwh_co2=Global.General.conv_kwh_co2;
-                var el=document.querySelector('#Global_General_conv_kwh_co2');
-                el.innerHTML=format(conv_kwh_co2);
-                el.style.background=conv_kwh_co2?"":"red";
+                var value=Global.General.conv_kwh_co2;
+                var el=document.querySelector('#conv_kwh_co2_value');
+                el.innerHTML=format(value);
+                el.style.background=value?"":"red";
               })();
+              //unit
+              document.querySelector('#conv_kwh_co2_unit').innerHTML=Info['conv_kwh_co2'].unit;
             </script>
-            <script>document.write(Info['conv_kwh_co2'].unit);</script>
           </div>
         </div>
         <?php

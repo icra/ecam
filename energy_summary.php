@@ -120,7 +120,7 @@
       newRow.insertCell(-1).innerHTML="<b>Substages total</b>";
       var newCell=newRow.insertCell(-1);
       newCell.style.textAlign='right';
-      newCell.innerHTML="<b>"+format(obj.map(s=>s[fie]).reduce((p,c)=>(p+c)))+"</b>";
+      newCell.innerHTML="<b>"+format(obj.map(s=>s[fie]).reduce((p,c)=>(p+c),0))+"</b>";
 
       //hide table
       td.onmouseout=function(){document.querySelector('#container_detailed').style.display='none'};

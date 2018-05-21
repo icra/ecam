@@ -9,7 +9,13 @@
 */
 
 var Info = {
-  //TODO untreated, onsite and uncollected
+
+  //pump edits
+  wsa_pmp_pf: {magnitude:"No magnitude",unit:"no unit"},
+  wsd_pmp_pf: {magnitude:"No magnitude",unit:"no unit"},
+  wwc_pmp_pf: {magnitude:"No magnitude",unit:"no unit"},
+
+  //untreated, onsite and uncollected
   ww_KPI_GHG_unt:     {magnitude:"Mass",unit:"kg  CO<sub>2</sub>e"},
   ww_KPI_GHG_unt_n2o: {magnitude:"Mass",unit:"kg  CO<sub>2</sub>e"},
   ww_KPI_GHG_unt_ch4: {magnitude:"Mass",unit:"kg  CO<sub>2</sub>e"},
@@ -154,7 +160,6 @@ var Info = {
 	wst_KPI_slu_per_m3:{magnitude:"Mass/Volume",unit:"kg/m<sup>3</sup>"},
 	wst_KPI_capac_util:{magnitude:"Percentage",unit:"%"},
 	wst_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m"},
-	wst_KPI_std_elec_eff:{magnitude:"Percentage",unit:"%"},
 	wst_KPI_tst_carr:{magnitude:"Percentage",unit:"%"},
 	wst_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wst_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
@@ -256,7 +261,6 @@ var Info = {
 	wwc_KPI_nrg_cons_new:{magnitude:"Energy",unit:"kWh"},
 	wwc_KPI_nrg_estm_sav:{magnitude:"Energy",unit:"kWh"},
 	wwc_KPI_ghg_estm_red:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
-	wwc_KPI_std_elec_eff:{magnitude:"Percentage",unit:"%"},
 
 	//L2 Wastewater Treatment
   wwt_serv_pop:{magnitude:"People",unit:"People"},
@@ -299,7 +303,6 @@ var Info = {
   wwt_SL_vol_pday:{magnitude:"Volume/inhab/time",unit:"L/serv.pop./day"},
 	wwt_KPI_nrg_per_pump:{magnitude:"Energy/Volume",unit:"kWh/m3"},
 	wwt_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m"},
-	wwt_KPI_std_elec_eff:{magnitude:"Percentage",unit:"%"},
 	wwt_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG_tre_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},

@@ -25,7 +25,6 @@ Level3.list=[
 	"wst_tst_carr",
 	"wst_KPI_capac_util",
 	"wst_KPI_slu_per_m3",
-	"wst_KPI_std_elec_eff",
 	"wst_KPI_std_nrg_cons",
 	"wst_KPI_tst_carr",
 
@@ -66,7 +65,6 @@ Level3.list=[
 	"wwc_KPI_nrg_cons_new",
 	"wwc_KPI_nrg_estm_sav",
 	"wwc_SL_GHG_ii",
-	"wwc_KPI_std_elec_eff",
 	"wwc_KPI_un_head_loss",
 	"wwc_KPI_ghg_estm_red",
 
@@ -101,7 +99,6 @@ Level3.list=[
 	"wwt_KPI_nrg_x_biog",
 	"wwt_KPI_capac_util",
 	"wwt_SL_qual_com",
-	"wwt_KPI_std_elec_eff",
 	"wwt_KPI_biog_x_bod",
 	"wwt_KPI_sludg_prod",
 	"wwt_KPI_dry_sludge",

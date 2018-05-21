@@ -1,4 +1,11 @@
 {
+  "#wsa_pmp_pf_descr":"Power factor",
+  "#wsa_pmp_pf_expla":"Power factor",
+  "#wsd_pmp_pf_descr":"Power factor",
+  "#wsd_pmp_pf_expla":"Power factor",
+  "#wwc_pmp_pf_descr":"Power factor",
+  "#wwc_pmp_pf_expla":"Power factor",
+
   "#wsa_nrg_per_abs_watr_descr":"Energy consumption per abstracted water",
   "#wsa_nrg_per_abs_watr_expla":"Energy consumption per abstracted water",
 

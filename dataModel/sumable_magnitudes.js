@@ -2,7 +2,6 @@
 //for inputs and outputs
 var Sumable_magnitudes=[
   "Mass",
-  "Distance",
   "Time",
   "People",
   "Volume",
@@ -10,7 +9,4 @@ var Sumable_magnitudes=[
   "Energy",
   "Power",
   "Number",
-  "Voltage",
-  "Intensity",
-  "Head",
 ];

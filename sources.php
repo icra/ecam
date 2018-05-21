@@ -183,9 +183,7 @@
     function drawCheckbox($sublevel){ ?>
       <div style=float:right;text-align:center><small>
         <label>
-          Substages
-          <br>
-          <input type=checkbox onclick=toggle_display_sum_sta(this) name="<?php echo $sublevel?>">
+          <input type=checkbox onclick=toggle_display_sum_sta(this) name="<?php echo $sublevel?>" caption="View substage values">
         </label>
       </small></div>
       <?php
@@ -348,7 +346,6 @@
               font-size:smaller;
               padding:1em;
               box-shadow: 0 1px 2px rgba(0,0,0,.1);
-              color:black;
             ">
               (<?php write('#ww_KPI_GHG_unt_descr')?>:
               <span field=ww_KPI_GHG_unt></span>)

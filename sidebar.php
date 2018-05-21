@@ -105,8 +105,11 @@
 
 	<div id=sidecontent>
 		<table id=menu>
-			<tr><th style="padding:5px"><?php write("#sidebar_mainMenu")?><span id=Name style="float:right">
-				<script>document.write(Global.General.Name)</script>
+			<tr><th style="padding:5px"><?php write("#sidebar_mainMenu")?>
+        <span id=Name style="float:right"></span>
+				<script>
+          document.querySelector('#Name').innerHTML=Global.General.Name;
+        </script>
 			<tr>
 				<td align=center style="padding:0.7em">
 				<input type="file" id="loadfile" accept=".json" onchange="loadFile(event)" style="display:none">
