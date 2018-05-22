@@ -143,15 +143,22 @@
 ?>
 <!--title-->
 <h1>
-  <script>document.write(Global.General.Name)</script>
+  <span id=Name></span>
+  <script>
+    document.querySelector('h1 span#Name').innerHTML=Global.General.Name;
+  </script>
   &mdash;
   <?php write('#Energy consumption Summary (Overview)')?>
 </h1>
 <h4>
   <?php write('#assessment_period')?>:
   <b>
-    <script>document.write(format(Global.General.Days()))</script> <?php write('#days')?>
-    (<script>document.write(format(Global.General.Years()))</script> <?php write('#years')?>)
+    <span id=Days></span> <?php write("#days")?>
+    (<span id=Years></span> <?php write("#years")?>)
+    <script>
+      document.querySelector('h4 span#Days').innerHTML=format(Global.General.Days());
+      document.querySelector('h4 span#Years').innerHTML=format(Global.General.Years());
+    </script>
   </b>
 </h4>
 
@@ -202,9 +209,8 @@
         <th rowspan=3 style="background:#00aff1">
           <a href="edit.php?level=Water" style=color:white>
             <?php write('#Water')?>
-            (<script>
-            document.write(Global.Water.ws_serv_pop)
-            </script> <?php write('#people')?>)
+            (<span id=ws_serv_pop>0</span> <?php write("#people")?>)
+            <script>document.querySelector('#ws_serv_pop').innerHTML=format(Global.Water.ws_serv_pop)</script>
           </a>
           <br><br><span field=ws_nrg_cons><?php write('#Loading')?>...</span>
         </th>
@@ -224,9 +230,8 @@
         <th rowspan=3 class=red>
           <a href="edit.php?level=Waste" style=color:white>
             <?php write('#Waste')?>
-            (<script>
-            document.write(Global.Waste.ww_serv_pop())
-            </script> <?php write('#people')?>)
+            (<span id=ww_serv_pop>0</span> <?php write("#people")?>)
+            <script>document.querySelector('#ww_serv_pop').innerHTML=format(Global.Waste.ww_serv_pop())</script>
           </a>
           <br><br><span field=ww_nrg_cons><?php write('#Loading')?>...</span>
         </th>

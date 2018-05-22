@@ -142,8 +142,8 @@
 					{ "type" : "ww",
 						"title" : "Biogas Production / Recovery",
 						"ghg_em" : function() {
-							var biog_kpi_ghg = (Global.Waste.Treatment.c_wwt_biog_fla() == (null || 0)) ? 0 : (Global.Waste.Treatment.wwt_KPI_GHG_biog() / Global.Waste.Treatment.c_wwt_biog_fla());
-							opps.g_ww_biogas_opps = Global.Waste.Treatment.c_wwt_biog_fla() * biog_kpi_ghg;
+							var biog_kpi_ghg = (Global.Waste.Treatment.wwt_biog_fla == (null || 0)) ? 0 : (Global.Waste.Treatment.wwt_KPI_GHG_biog() / Global.Waste.Treatment.wwt_biog_fla);
+							opps.g_ww_biogas_opps = Global.Waste.Treatment.wwt_biog_fla * biog_kpi_ghg;
 							var emissions = 0.01 * opps.g_ww_biogas_opps;
 							return emissions;
 						}

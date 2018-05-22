@@ -110,7 +110,7 @@
 
           //look for current unit
           var currentUnit = Global.Configuration.Units[field] || Info[field].unit;
-          
+
           if(typeof substage[field]=='function')return currentUnit;
 
           //create a <select> for unit changing
@@ -169,7 +169,10 @@
 
 <!--TITLE-->
 <h1>
-  <a href=sources.php><script>document.write(Global.General.Name)</script></a>
+  <a href=sources.php>
+    <span id=system_name></span>
+    <script>document.querySelector('h1 a #system_name').innerHTML=(Global.General.Name)</script>
+  </a>
   &rsaquo;
   <?php echo "<a href='edit.php?level=$level'>$level</a>"?>
   &rsaquo;
@@ -177,7 +180,9 @@
   &rsaquo;
   <span style=color:black;font-size:26px>
     Substage <?php echo (1+$index)?>
-    &mdash; <script>document.write(substage.name)</script>
+    &mdash;
+    <span id=substage_name></span>
+    <script>document.querySelector('#substage_name').innerHTML=(substage.name)</script>
   </span>
 </h1>
 </center>
@@ -190,19 +195,12 @@
   </a>
 </div>
 
-<!--subtitle-->
-<h3 style=text-align:center;color:black>
-  <?php write('#Substage')?>
-  "<script>document.write(substage.name)</script>"
-  <?php write('#summary')?>
-</h3>
-
 <!--root container-->
 <div>
   <!--substage table-->
   <table id=substage style="margin:0.5em auto"> <tr>
     <th><?php write('#Variable')?>
-    <th><?php write('#Name')?>
+    <th><?php write('#Description')?>
     <th><?php write('#Current value')?>
     <th><?php write('#Unit')?>
   </table>
