@@ -308,6 +308,21 @@
           </tr>
         </tr>
       </table>
+
+      <!--reset all Treatment estimations-->
+      <div style="padding:0.5em 1em">
+        <button onclick="resetAllEstimations()">Reset all estimations</button>
+        <script>
+          //reset estimations from Waste Treatment
+          function resetAllEstimations(){
+            Object.keys(Global.Estimations).forEach(key=>{
+              var input_code = key.replace(/^estm_/,'');
+              Global.Waste.Treatment[input_code]=0;
+            });
+            init();
+          }
+        </script>
+      </div>
     </div>
 
     <!--prev next btns container-->
@@ -417,11 +432,11 @@
     </div>
   </div>
 </div>
+
 <?php include'currentJSON.php'?>
 <script>
   if(google){google.charts.load('current',{'packages':['corechart','gauge','bar']});}
 </script>
-
 </html>
 
 <!--populate page-->
@@ -511,3 +526,4 @@
     }
   })();
 </script>
+

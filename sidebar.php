@@ -43,13 +43,20 @@
 					else
 						collection[i].classList.remove('inactive');
 				}
+        this.updateMemory(false);
+			},
 
-				//update the memory used in the progress bar
-				var progress = document.querySelector('#sidebar #progress')
-				var length = getCookie('GLOBAL') ? document.cookie.length : 0;
-				progress.value = length;
-				progress.title = format(100*length/8100)+"%";
-			}
+      updateMemory(warning){
+        warning=warning||false;
+
+        var progress = document.querySelector('#sidebar #progress')
+        var length = getCookie('GLOBAL') ? document.cookie.length : 0;
+        progress.value = length;
+        var percent = 100*length/8100;
+        progress.setAttribute('caption',format(percent)+"%");
+        //add warning above 95%
+        if(warning && percent>95){ alert("Warning: memory is "+format(percent)+"% full"); }
+      },
 		}
 
 		function removeAllCookies() {
@@ -128,7 +135,7 @@
 		<!--USED MEMORY-->
 		<div style="padding:0.2em;text-align:center">
 			<?php write('#memory')?><br>
-			<progress id=progress title="<?php write('#memory')?>" value=0 max=8100></progress>
+			<progress id=progress value=0 max=8100></progress>
 			<style>
 				progress {margin:0.5em;cursor:help}
 			</style>

@@ -178,8 +178,8 @@
       try{drawCharts()}
       catch(e){console.log(e)}
       updateResult();
+      Sidebar.updateMemory(true);
       Caption.listeners();
-
       //performance end
       //console.timeEnd('init');
     }
