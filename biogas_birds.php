@@ -35,6 +35,7 @@
         Global.Configuration['Yes/No'].wwt_producing_biogas=newValue;
         Global.Waste.Treatment.wwt_biog_pro = Global.Estimations.estm_wwt_biog_pro();
         Global.Waste.Treatment.wwt_ch4_biog = Global.Estimations.estm_wwt_ch4_biog();
+        Global.Waste.Treatment.wwt_biog_fla = Global.Estimations.estm_wwt_biog_fla();
         if(!newValue){
           Global.Configuration['Yes/No'].wwt_valorizing_biogas=0;
           Global.Waste.Treatment.wwt_biog_val=Global.Estimations.estm_wwt_biog_val();
@@ -47,7 +48,8 @@
       el.addEventListener('click',function(){
         var newValue=parseInt(el.value);
         Global.Configuration['Yes/No'].wwt_valorizing_biogas=newValue;
-        Global.Waste.Treatment.wwt_biog_val=Global.Estimations.estm_wwt_biog_val();
+        Global.Waste.Treatment.wwt_biog_val = Global.Estimations.estm_wwt_biog_val();
+        Global.Waste.Treatment.wwt_biog_fla = Global.Estimations.estm_wwt_biog_fla();
         init();
       });
     });

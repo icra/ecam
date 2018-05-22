@@ -264,17 +264,6 @@ var RefValues = {
       else                                                            return "Out of range";
     },
 
-    wwt_KPI_nrg_per_m3:function(obj) {
-      return "Implementation needs revision";
-      /*
-      TF or aerated lagoons- Good: wtE1 ≤ 0.185 + 1127/TW; Acceptable: 0.185 + 1127/TW < wtE1 < 0.231 + 1409/TW; Unsatisfactory: wtE1 ≥ 0.231 + 1409/TW
-      AS - Good: wtE1 ≤ 0.280 + 1192/TW; Acceptable: 0.280 + 1192/TW < wtE1 < 0.350 + 1490/TW; Unsatisfactory: wtE1 ≥ 0.350 + 1490/TW
-      AS + C/F - Good: wtE1 ≤ 0.325 + 1384/TW; Acceptable: 0.325 + 1384/TW < wtE1 < 0.406 + 1730/TW; Unsatisfactory: wtE1 ≥ 0.406 + 1730/TW
-      AS w/ nitrification + C/F - Good: wtE1 ≤ 0.424 + 1362/TW; Acceptable: 0.424 + 1362/TW < wtE1 < 0.530 + 1703/TW; Unsatisfactory: wtE1 ≥ 0.530 + 1703/TW
-      note: TW = Treated wastewater (m3/d)
-      */
-    },
-
     wwt_KPI_nrg_x_biog:function(obj) {
       //Below 15%= red -  15 to 25% = orange -  Above 25%= green
       var value=obj.wwt_KPI_nrg_x_biog();

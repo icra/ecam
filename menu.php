@@ -31,7 +31,10 @@
       <div>
         <button class="button save" onclick=saveToFile()>
           <?php write('#save_as')?>
-          <script>document.write(" '"+Global.General.Name+".json'")</script>
+          <span id=save_as_filename></span>
+          <script>
+            document.querySelector('#save_as_filename').innerHTML="'"+Global.General.Name+".json'";
+          </script>
         </button>
       </div>
 

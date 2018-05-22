@@ -33,15 +33,6 @@ var Questions={
 			otherQuestions:[],
 		},
 
-    "wsa_producing_energy":{
-      variables:[
-        "wsa_nrg_turb",
-        "wsa_KPI_nrg_recovery",
-      ],
-      advanced:1,
-      otherQuestions:[],
-    },
-
 		"wsa_pumping":{
 			variables:[
 				"wsa_pmp_type",
@@ -113,6 +104,17 @@ var Questions={
 			otherQuestions:[],
 		},
 
+    "wst_treatment_perf":{
+      variables:[
+        "wst_tst_carr",
+        "wst_trea_cap",
+        "wst_KPI_capac_util",
+        "wst_KPI_tst_carr",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
+
 	//wsd
 		"wsd_engines":{
 			variables:[
@@ -172,6 +174,13 @@ var Questions={
 
     "wsd_water_eff":{
       variables:[
+        "wsd_vol_dist",
+        "wsd_auth_con",
+        "wsd_bill_con",
+        "wsd_SL_water_loss",
+        "wsd_SL_nr_water",
+        "wsd_KPI_nrg_per_vd",
+        "wsd_KPI_nrg_per_m3",
         "wsa_SL_GHG_nrw",
         "wst_SL_GHG_nrw",
         "wsd_SL_GHG_nrw",
@@ -315,8 +324,8 @@ var Questions={
     "wwt_producing_biogas":{
       variables:[
         "wwt_biog_pro",
+        "wwt_biog_fla",
         "wwt_ch4_biog",
-        "c_wwt_biog_fla",
         "wwt_dige_typ",
         "wwt_fuel_dig",
         "wwt_KPI_biog_x_bod",
@@ -339,6 +348,7 @@ var Questions={
         "c_wwt_nrg_biog",
         "wwt_KPI_nrg_biogas",
         "wwt_KPI_nrg_x_biog",
+        "wwt_SL_GHG_avoided",
       ],
       advanced:1,
       otherQuestions:[],

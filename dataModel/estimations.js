@@ -17,6 +17,14 @@ Global.Estimations = {
     } //<br>
     else return 0; //<br>
   },
+  estm_wwt_biog_fla:function(){
+    var pro=Global.Configuration['Yes/No'].wwt_producing_biogas;
+    var val=Global.Configuration['Yes/No'].wwt_valorizing_biogas;
+    if(pro && !val) { //<br>
+      return Global.Waste.Treatment.wwt_biog_pro; //<br>
+    } //<br>
+    else return 0; //<br>
+  },
 
   estm_wwt_bod_infl:function(){
     return Global.General.bod_pday/1000*Global.Waste.ww_serv_pop()*Global.General.Days();//<br>

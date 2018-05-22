@@ -9,6 +9,9 @@
 */
 
 var Info = {
+  //after water reuse edits
+  wwt_SL_GHG_avoided: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+
   //wate reuse
   wwd_wr_N_rec:     {magnitude:"Mass",   unit:"kg"},
   wwd_wr_P_rec:     {magnitude:"Mass",   unit:"kg"},
@@ -132,10 +135,8 @@ var Info = {
 	wsa_nrg_cons:{magnitude:"Energy",unit:"kWh"},
 	wsa_nrg_pump:{magnitude:"Energy",unit:"kWh"},
 	wsa_vol_conv:{magnitude:"Volume",unit:"m3"},
-	wsa_nrg_turb:{magnitude:"Energy",unit:"kWh"},
 	wsa_vol_pump:{magnitude:"Volume",unit:"m3"},
 	wsa_vol_fuel:{magnitude:"Volume",unit:"L"},
-	wsa_KPI_nrg_recovery:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
 	wsa_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m<sup>3</sup>/100m"},
 	wsa_pmp_head:{magnitude:"Head",unit:"m"},
 	wsa_sta_head:{magnitude:"Head",unit:"m"},
@@ -303,7 +304,7 @@ var Info = {
 	wwt_ch4_efac:{magnitude:"Mass/Mass",unit:"kgCH<sub>4</sub>/kgBOD"},
 	c_wwt_nrg_biog:{magnitude:"Energy",unit:"kWh"},
 	c_wwt_bod_rmvd:{magnitude:"Mass",unit:"kg"},
-	c_wwt_biog_fla:{magnitude:"Volume",unit:"m3"},
+	wwt_biog_fla:{magnitude:"Volume",unit:"m3"},
 	wwt_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m<sup>3</sup>"},
 	wwt_KPI_nrg_per_kg:{magnitude:"Energy/Mass",unit:"kWh/kg"},
 	wwt_KPI_biog_x_bod:{magnitude:"Volume/Mass",unit:"Nm<sup>3</sup>/kg"},

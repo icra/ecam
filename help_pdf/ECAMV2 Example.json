@@ -31,7 +31,6 @@
         "wsa_pmp_flow": 0,
         "wsa_pmp_volt": 0,
         "wsa_pmp_amps": 0,
-        "wsa_nrg_turb": 0,
         "wsa_pmp_exff": 0
       },
       "Treatment": {
@@ -227,7 +226,6 @@
           "wsa_nrg_cons": 0,
           "wsa_fuel_typ": 0,
           "wsa_vol_fuel": 0,
-          "wsa_nrg_turb": 0,
           "wsa_nrg_pump": 0,
           "wsa_vol_pump": 0,
           "wsa_pmp_head": 0,

@@ -108,7 +108,7 @@
 			<tr><th style="padding:5px"><?php write("#sidebar_mainMenu")?>
         <span id=Name style="float:right"></span>
 				<script>
-          document.querySelector('#Name').innerHTML=Global.General.Name;
+          document.querySelector('#sidebar #sidecontent #Name').innerHTML=Global.General.Name;
         </script>
 			<tr>
 				<td align=center style="padding:0.7em">

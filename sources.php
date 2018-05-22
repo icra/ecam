@@ -206,24 +206,32 @@
   </script>
 
 </head><body onload=init()><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--navbar--> <?php include'navbar.php'?>
-<!--linear--> <?php include'linear.php'?>
-<!--caption--><?php include'caption.php'?>
-<!--title-->
-<h1>
-  <script>document.write(Global.General.Name)</script>
-  &mdash;
-  <?php write("#GHG Emissions Summary (Overview)")?>
-</h1>
-<h4>
-  <?php write("#assessment_period")?>
-  <b>
-     <script>document.write(format(Global.General.Days())) </script> <?php write("#days")?>
-    (<script>document.write(format(Global.General.Years()))</script> <?php write("#years")?>)
-  </b>
-</h4>
-<h4><?php write("#move_the_mouse")?></h4>
+  <?php include'sidebar.php'?>
+  <?php include'navbar.php'?>
+  <?php include'linear.php'?>
+  <?php include'caption.php'?>
+  <!--title-->
+  <h1>
+    <span id=Name></span>
+    <script>
+      document.querySelector('h1 span#Name').innerHTML=Global.General.Name;
+    </script>
+    &mdash;
+    <?php write("#GHG Emissions Summary (Overview)")?>
+  </h1>
+  <h4>
+    <?php write("#assessment_period")?>
+    <b>
+      <span id=Days></span> <?php write("#days")?>
+      (<span id=Years></span> <?php write("#years")?>)
+      <script>
+        document.querySelector('h4 span#Days').innerHTML=format(Global.General.Days());
+        document.querySelector('h4 span#Years').innerHTML=format(Global.General.Years());
+      </script>
+    </b>
+  </h4>
+  <h4><?php write("#move_the_mouse")?></h4>
+</center>
 
 <!--'title like' div detailed sources-->
 <div id=container_detailed style=display:none>
@@ -245,7 +253,7 @@
 </div>
 
 <!--content-->
-<div style=width:66%;>
+<div style="width:66%;margin:auto">
   <!--tab buttons-->
   <div class=tab_buttons id=ghg_summary_tabs>
     <button class=left onclick="tabs_show_tables()" disabled>
@@ -282,7 +290,7 @@
             <?php write("#GHG emissions")?>
             <!--select divisor-->
             <select id=ghg_divisor onchange=init()>
-              <option value=none>Kg CO2 eq
+              <option value=none>Kg CO2 eq / <?php write('#Assessment_period')?>
               <option value=years>Kg CO2 eq / <?php write("#year")?>
               <option value=serv_pop>Kg CO2 eq / <?php write("#year")?> / <?php write("#ws_serv_pop_descr")?>
             </select>
@@ -421,23 +429,19 @@
           <td>
             <?php write("#ww_SL_ghg_unc_descr")?>
           (<a href=variable.php?id=ww_SL_ghg_unc>ww_SL_ghg_unc</a>)
-          <td field=ww_SL_ghg_unc>
-            <script>
-              document.write(format(Global.Waste.ww_SL_ghg_unc()))
-            </script>
-          </td>
+          <td field=ww_SL_ghg_unc></td>
         </tr>
         <tr>
           <td>
             <?php write("#ww_SL_ghg_ons_descr")?>
             (<a href=variable.php?id=ww_SL_ghg_ons>ww_SL_ghg_ons</a>)
-          <td field=ww_SL_ghg_ons>
-            <script>
-              document.write(format(Global.Waste.ww_SL_ghg_ons()))
-            </script>
-          </td>
+          <td field=ww_SL_ghg_ons></td>
         </tr>
       </table>
+      <script>
+        document.querySelector('td[field=ww_SL_ghg_unc]').innerHTML=format(Global.Waste.ww_SL_ghg_unc());
+        document.querySelector('td[field=ww_SL_ghg_ons]').innerHTML=format(Global.Waste.ww_SL_ghg_unc());
+      </script>
       <style>
         table#outside td[field] {text-align:right}
       </style>
@@ -450,6 +454,11 @@
     <div style="border-top:1px solid #ccc"></div>
     <div id=graph_2><?php write('#Loading')?>...</div>
   </div>
+  <style>
+    #graphs_container table {
+      margin:auto;
+    }
+  </style>
 </div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
@@ -471,5 +480,3 @@
     });
   });
 </script>
-
-

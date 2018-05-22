@@ -186,8 +186,8 @@
           <?php write('#Energy consumption')?>
           <!--select divisor-->
           <select id=ghg_divisor onchange=init()>
-            <option value=none>kWh
-            <option value=years>kWh / <?php write('#year')?>
+            <option value=none>    kWh / <?php write('#Assessment_period')?>
+            <option value=years>   kWh / <?php write('#year')?>
             <option value=serv_pop>KWh / <?php write("#ws_serv_pop_descr")?>
           </select>
           <!--legend-->

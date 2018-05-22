@@ -95,9 +95,6 @@ var Global = {
       wsa_pmp_pf:0.9, //power factor (no unit)
       wsa_KPI_nrg_elec_eff:function(){return 100*this.c_wsa_pmp_pw()/(this.wsa_pmp_volt*this.wsa_pmp_amps*Math.sqrt(3)*this.wsa_pmp_pf/1000)},
 
-      //producing energy?
-      wsa_nrg_turb:0,
-      wsa_KPI_nrg_recovery:function(){return this.wsa_nrg_turb/this.wsa_vol_conv},
       //GHG emissions Abstraction
       wsa_KPI_GHG_elec:function(){return this.wsa_nrg_cons*Global.General.conv_kwh_co2},
       wsa_KPI_GHG_fuel:function(){//<br>
@@ -411,12 +408,10 @@ var Global = {
       "wwt_pmp_head":0,
       wwt_KPI_nrg_per_pump:function(){return this.wwt_nrg_pump/this.wwt_vol_pump},
       wwt_KPI_std_nrg_cons:function(){return this.wwt_nrg_pump/(this.wwt_vol_pump*this.wwt_pmp_head/100)},
-      //biogas?
+      //producing biogas?
       "wwt_biog_pro":0,
+      "wwt_biog_fla":0,
       "wwt_ch4_biog":59,
-      c_wwt_biog_fla:function() {
-        return this.wwt_biog_pro - this.wwt_biog_val;
-      },
       wwt_dige_typ:0,//type of fuel dig afegida per mi
       wwt_fuel_dig:0,
       wwt_KPI_biog_x_bod:function(){return this.wwt_biog_pro/this.c_wwt_bod_rmvd()},
@@ -426,6 +421,7 @@ var Global = {
       "wwt_biog_val":0,
       wwt_KPI_nrg_biogas:function(){return this.wwt_nrg_biog/this.wwt_vol_trea},
       wwt_KPI_nrg_x_biog:function(){return 100*this.wwt_nrg_biog/this.c_wwt_nrg_biog()},
+      wwt_SL_GHG_avoided:function(){return this.wwt_nrg_biog*Global.General.conv_kwh_co2},
 
       //sludge (general)
       wwt_mass_slu:0,
@@ -597,7 +593,7 @@ var Global = {
       },
 
       wwt_KPI_GHG_biog:function(){
-        return this.c_wwt_biog_fla()*this.wwt_ch4_biog/100*Cts.ct_ch4_m3.value*Cts.ct_ch4_lo.value/100*Cts.ct_ch4_eq.value;
+        return (this.wwt_biog_pro-this.wwt_biog_val-this.wwt_biog_fla+this.wwt_biog_fla*Cts.ct_ch4_lo.value/100)*this.wwt_ch4_biog/100*Cts.ct_ch4_m3.value*Cts.ct_ch4_eq.value;
       },
       wwt_KPI_GHG_slu:function(){
         return this.wwt_KPI_ghg_sto_co2eq()+ //<br>

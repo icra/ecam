@@ -10,7 +10,6 @@ Level3.list=[
 	"wsa_KPI_nrg_cons_new",
 	"wsa_KPI_nrg_elec_eff",
 	"wsa_KPI_nrg_estm_sav",
-	"wsa_KPI_nrg_recovery",
 	"wsa_KPI_std_nrg_cons",
 	"wsa_KPI_std_nrg_newp",
 	"wsa_KPI_un_head_loss",
@@ -85,6 +84,7 @@ Level3.list=[
   "wwc_SL_inf_emis",
 
 	//wwt
+  "wwt_SL_GHG_avoided",
 	"wwt_KPI_GHG_fuel_co2",
 	"wwt_KPI_GHG_fuel_n2o",
 	"wwt_KPI_GHG_fuel_ch4",

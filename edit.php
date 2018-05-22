@@ -221,15 +221,8 @@
           /*value*/
           newCell=newRow.insertCell(-1);
           newCell.setAttribute('caption',prettyFormula);
-          newCell.innerHTML=(function() {
+          newCell.innerHTML=(function(){
             return format(value);
-          })();
-
-          /*value per things*/
-          newCell=newRow.insertCell(-1)
-          //the first cell will be the value divided by Years
-          newCell.innerHTML=(function() {
-            return format(value/Global.General.Years());
           })();
 
           /*Normalization*/
@@ -239,7 +232,7 @@
             //value per resident population
             //value per serviced population
             //value per water volume
-            ['reside','servic','volume'].forEach(function(category) {
+            ['servic','volume'].forEach(function(category) {
               var newCell=newRow.insertCell(-1);
 
               //determine the field to be highlighted
@@ -654,9 +647,7 @@
             <?php write('#GHG emissions')?>
           <tr>
             <th><?php write('#Origin')?>
-            <th>kg CO<sub>2</sub><br><?php write('#whole period')?>
-            <th>kg CO<sub>2</sub><br>per <?php write('#year')?>
-            <th>kg CO<sub>2</sub><br>per <?php write('#year')?><br>per inhab
+            <th>kg CO<sub>2</sub><br>assessment period
             <th>kg CO<sub>2</sub><br>per <?php write('#year')?><br>per serv.pop
             <th>kg CO<sub>2</sub><br>per m<sup>3</sup>
           <tr><td style=color:#ccc colspan=6>
