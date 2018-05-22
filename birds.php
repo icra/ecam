@@ -24,6 +24,25 @@
       Graphs.gauge('graph6', Global.Waste.ww_SL_serv_pop()||0,               translate("ww_SL_serv_pop_descr"));
       Graphs.gauge('graph7', Global.Water.Distribution.wsd_SL_nr_water()||0, translate("wsd_SL_nr_water_descr"));
       Graphs.gauge('graph8', Global.Water.ws_SL_auth_con()||0,               translate("ws_SL_auth_con_descr"), Info.ws_SL_auth_con.unit, 0, 200); //with unit and limits
+
+      //GHG emissions
+      (function(){
+        var years=Global.General.Years();
+        var ws_serv=Global.Water.ws_serv_pop;
+        Graphs.gauge('graph9',
+          Global.Water.ws_KPI_GHG()/years/ws_serv,
+          translate("ws_KPI_GHG_descr"),
+          "<br>"+Info.ws_KPI_GHG.unit+"/year/serv.pop.",
+          0, 200);
+
+        var ww_serv=Global.Waste.ww_serv_pop();
+        Graphs.gauge('graph10',
+          Global.Waste.ww_KPI_GHG()/years/ww_serv,
+          translate("ww_KPI_GHG_descr"),
+          "<br>"+Info.ww_KPI_GHG.unit+"/year/serv.pop.",
+          0, 200); //with unit and limits
+      })();
+
     }
   </script>
   <!--BEV namespace (birds eye view old name)-->
@@ -396,6 +415,9 @@
         <!---->
         <div graph id=graph7><?php write('#loading')?></div>
         <div graph id=graph8><?php write('#loading')?></div>
+        <!---->
+        <div graph id=graph9> <?php write('#loading')?></div>
+        <div graph id=graph10><?php write('#loading')?></div>
         <!---->
         <div style="width:98%;padding:1em 0;margin-bottom:1em;border:none">
           <?php write('#for_further_details_go_to_detailed')?>
