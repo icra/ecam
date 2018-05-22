@@ -82,10 +82,10 @@
       //producing biogas
       var pro=Global.Configuration["Yes/No"].wwt_producing_biogas;
       //gui elements
-      var input_pro_y=document.querySelector('input[name=wwt_producing_biogas][ans="1"]');
-      var input_pro_n=document.querySelector('input[name=wwt_producing_biogas][ans="0"]');
-      var input_val_y=document.querySelector('input[name=wwt_valorizing_biogas][ans="1"]');
-      var input_val_n=document.querySelector('input[name=wwt_valorizing_biogas][ans="0"]');
+      var input_pro_y=document.querySelector('input[name=wwt_producing_biogas][value="1"]');
+      var input_pro_n=document.querySelector('input[name=wwt_producing_biogas][value="0"]');
+      var input_val_y=document.querySelector('input[name=wwt_valorizing_biogas][value="1"]');
+      var input_val_n=document.querySelector('input[name=wwt_valorizing_biogas][value="0"]');
       if(pro){
         input_pro_y.checked=true;   //you are producing biogas
         input_val_y.disabled=false; //enable val
@@ -250,14 +250,14 @@
             </div>
           </div>
           <!--water inputs-->
-          <tr stage=water class=hidden><td style=width:40%><?php write('#ws_nrg_cons_descr')?><td class=output><input id='ws_nrg_cons' value=0><td><script>document.write(Info['ws_nrg_cons'].unit)</script>
-          <tr stage=water class=hidden><td><?php write('#vol_fuel')?>                         <td class=output><input id='ws_vol_fuel' value=0><td><script>document.write(Info['ws_vol_fuel'].unit)</script>
-          <tr stage=water class=hidden><td><?php write('#wsa_vol_conv_descr')?><td class=input><input id='wsa_vol_conv' value=0><td>m<sup>3</sup>
-          <tr stage=water class=hidden><td><?php write('#wsd_vol_dist_descr')?><td class=input><input id='wsd_vol_dist' value=0><td>m<sup>3</sup>
-          <tr stage=water class=hidden><td><?php write('#wsd_auth_con_descr')?><td class=input><input id='wsd_auth_con' value=0><td>m<sup>3</sup>
-          <tr stage=water class=hidden><td><?php write('#wsd_bill_con_descr')?><td class=input><input id='wsd_bill_con' value=0><td>m<sup>3</sup>
-          <tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost'  value=0><td><script>document.write(Global.General.Currency)</script>
-          <tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost'  value=0><td><script>document.write(Global.General.Currency)</script>
+          <tr stage=water class=hidden><td style=width:40%><?php write('#ws_nrg_cons_descr')?><td class=output><input id='ws_nrg_cons' value=0> <td class=unit>
+          <tr stage=water class=hidden><td><?php write('#vol_fuel')?>                         <td class=output><input id='ws_vol_fuel' value=0> <td class=unit>
+          <tr stage=water class=hidden><td><?php write('#wsa_vol_conv_descr')?><td class=input><input id='wsa_vol_conv' value=0>                <td class=unit>
+          <tr stage=water class=hidden><td><?php write('#wsd_vol_dist_descr')?><td class=input><input id='wsd_vol_dist' value=0>                <td class=unit>
+          <tr stage=water class=hidden><td><?php write('#wsd_auth_con_descr')?><td class=input><input id='wsd_auth_con' value=0>                <td class=unit>
+          <tr stage=water class=hidden><td><?php write('#wsd_bill_con_descr')?><td class=input><input id='wsd_bill_con' value=0>                <td class=unit>
+          <tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost'  value=0>                <td class=unit>
+          <tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost'  value=0>                <td class=unit>
           <tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
         </tr>
         <!--Wastewater-->
@@ -281,13 +281,13 @@
           </div>
           <!--wastewater inputs-->
           <tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
-          <tr stage=waste class=hidden><td><?php write('#ww_nrg_cons_descr') ?><td class=output><input id='ww_nrg_cons' value=0><td><script>document.write(Info['ww_nrg_cons'].unit)</script>
-          <tr stage=waste class=hidden><td><?php write('#vol_fuel')?>          <td class=output><input id='ww_vol_fuel' value=0><td><script>document.write(Info['ww_vol_fuel'].unit)</script>
-          <tr stage=waste class=hidden><td><?php write('#wwt_vol_trea_descr')?><td class=input> <input id='wwt_vol_trea'value=0><td>m<sup>3</sup>
-          <tr stage=waste class=hidden><td><?php write('#wwd_vol_disc_descr')?><td class=input> <input id='wwd_vol_disc'value=0><td>m<sup>3</sup>
-          <tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?> <td class=input> <input id='ww_run_cost' value=0><td><script>document.write(Global.General.Currency)</script>
-          <tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?> <td class=input> <input id='ww_nrg_cost' value=0><td><script>document.write(Global.General.Currency)</script>
-          <tr stage=waste class=hidden><td><?php write('#birds_ww_n2o_effl')?> <td class=input> <input id='wwd_n2o_effl'value=0><td>mg/L
+          <tr stage=waste class=hidden><td><?php write('#ww_nrg_cons_descr') ?><td class=output><input id='ww_nrg_cons' value=0><td class=unit>
+          <tr stage=waste class=hidden><td><?php write('#vol_fuel')?>          <td class=output><input id='ww_vol_fuel' value=0><td class=unit>
+          <tr stage=waste class=hidden><td><?php write('#wwt_vol_trea_descr')?><td class=input> <input id='wwt_vol_trea'value=0><td class=unit>
+          <tr stage=waste class=hidden><td><?php write('#wwd_vol_disc_descr')?><td class=input> <input id='wwd_vol_disc'value=0><td class=unit>
+          <tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?> <td class=input> <input id='ww_run_cost' value=0><td class=unit>
+          <tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?> <td class=input> <input id='ww_nrg_cost' value=0><td class=unit>
+          <tr stage=waste class=hidden><td><?php write('#birds_ww_n2o_effl')?> <td class=input> <input id='wwd_n2o_effl'value=0><td class=unit>
           <!--biogas-->
           <?php include'biogas_birds.php'?>
           <!--treatment type-->
@@ -474,6 +474,20 @@
   #inputs td.output.locked + td:before { content:"\1f512"; }
   #inputs td.output.locked input { cursor:default; }
 </style>
+
+<script>
+  //write units
+  (function(){
+    var inputs=document.querySelectorAll('#inputs tr[stage] td input[id]');
+    inputs.forEach(input=>{
+      var td_unit=input.parentNode.nextSibling;
+      var field=input.id;
+      var currentUnit=Info[field].magnitude=='Currency' ? Global.General.Currency : Info[field].unit;
+      currentUnit=currentUnit.replace('m3','m<sup>3</sup>');
+      td_unit.innerHTML=currentUnit;
+    });
+  })();
+</script>
 
 <!--only show active water/wastewater inputs-->
 <script>

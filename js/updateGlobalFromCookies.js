@@ -28,21 +28,26 @@ function copyFieldsFrom(object_from,object_to){
     }else{
       //copy always these values
       if(object_to==Global.Configuration.Units ||      //custom units
-         object_to==Global.Configuration['Yes/No'] ||  //answers to Questions
+         object_to==Global.Configuration['Yes/No'] ||  //answers to Questions (filters)
          object_to==Global.Configuration.Expanded      //display or not inputs for a particular question
       ){
         object_to[field]=object_from[field];
       }
 
-      //for the rest: copy only values that match in its type
-      if(typeof(object_to[field])==typeof(object_from[field])){
+      var type_from = typeof object_from[field];
+      var type_to   = typeof object_to[field];
+
+      //rest: copy only values that match in its type
+      if(type_from==type_to){
         object_to[field]=object_from[field];
-      }else if(typeof(object_to[field])=='number' && typeof(object_from[field])=='undefined'){ //fix for new variables
+      }else if(type_from!='number' && type_to=='number'){
+        //new variables: set to zero
         object_to[field]=0;
-      }else if(typeof(object_to[field])=='undefined' && typeof(object_from[field])=='number'){ //fix for old variables
+      }else if(type_from=='number' && type_to!='number'){
+        //old variables: do nothing
         console.warn(field,' is an old variable; not loaded');
-        //do nothing
       }else{
+        //do nothing
         console.warn(field,' types do not match');
       }
     }
