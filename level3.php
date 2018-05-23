@@ -108,12 +108,11 @@
 
       //draw unfiltered outputs only
       var showGHGss = document.querySelector('#showGHGss').checked;
-      var showSLss = document.querySelector('#showSLss').checked;
       Object.keys(CurrentLevel)
         .filter(key=>typeof(CurrentLevel[key])=='function')
         .filter(key=>{return !Questions.isInside(key)})
         .forEach(key=>{
-          level3.drawOutput(t,key,false,showGHGss,showSLss);
+          level3.drawOutput(t,key,false,showGHGss);
         });
 
       //go through questions
@@ -175,7 +174,7 @@
             Questions[question].variables
               .filter(code=>typeof(CurrentLevel[code])=='function')
               .forEach(code=>{
-                level3.drawOutput(t,code,question,showGHGss,showSLss);
+                level3.drawOutput(t,code,question,showGHGss);
               });
           });
       })();
@@ -383,7 +382,7 @@
     }
   }
 
-  level3.drawOutput=function(t,code,question,showGHGss,showSLss){
+  level3.drawOutput=function(t,code,question,showGHGss){
     question=question||false;
 
     //exclude the "level2only" variables
@@ -395,10 +394,6 @@
     //exclude _KPI_GHG if checkbox is enabled
     var isGHG=code.search('_KPI_GHG')+1;
     if(isGHG && !showGHGss) return;
-
-    //exclude _SL_ if checkbox is enabled
-    var isSL=code.search('_SL_')+1;
-    if(isSL && !showSLss) return;
 
     //is calculated variable?
     var isCV=code.search(/^c_/)+1;
@@ -724,10 +719,6 @@
       <div>
         <input type=checkbox id=showGHGss checked onclick="level3.updateSubstagesTable()"><!--
         --><label for=showGHGss><?php write('#Show GHG')?></label>&nbsp;
-      </div>
-      <div>
-        <input type=checkbox id=showSLss checked onclick="level3.updateSubstagesTable()"><!--
-        --><label for=showSLss><?php write('#Show SL')?></label>&nbsp;
       </div>
       <div>
         <input type=checkbox id=showHL onclick="Global.Configuration.hl^=true;updateResult();"><!--

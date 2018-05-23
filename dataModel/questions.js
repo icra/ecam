@@ -129,6 +129,22 @@ var Questions={
 			otherQuestions:[],
 		},
 
+    "wsd_water_eff":{
+      variables:[
+        "wsd_auth_con",
+        "wsd_bill_con",
+        "wsd_SL_water_loss",
+        "wsd_SL_nr_water",
+        "wsd_KPI_nrg_per_m3",
+        "wsa_SL_GHG_nrw",
+        "wst_SL_GHG_nrw",
+        "wsd_SL_GHG_nrw",
+        "wsd_SL_ghg_attr"
+      ],
+      advanced:0,
+      otherQuestions:[],
+    },
+
 		"wsd_trucks":{
 			variables:[
 				"wsd_trck_typ",
@@ -171,24 +187,6 @@ var Questions={
 			advanced:1,
 			otherQuestions:[],
 		},
-
-    "wsd_water_eff":{
-      variables:[
-        "wsd_vol_dist",
-        "wsd_auth_con",
-        "wsd_bill_con",
-        "wsd_SL_water_loss",
-        "wsd_SL_nr_water",
-        "wsd_KPI_nrg_per_vd",
-        "wsd_KPI_nrg_per_m3",
-        "wsa_SL_GHG_nrw",
-        "wst_SL_GHG_nrw",
-        "wsd_SL_GHG_nrw",
-        "wsd_SL_ghg_attr"
-      ],
-      advanced:1,
-      otherQuestions:[],
-    },
 
 		"wsd_pumping":{
 			variables:[

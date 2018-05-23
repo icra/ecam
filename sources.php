@@ -350,10 +350,8 @@
 
             <!--untreated ww emissions-->
             <div style="
-              background:red;
               font-size:smaller;
               padding:1em;
-              box-shadow: 0 1px 2px rgba(0,0,0,.1);
             ">
               <div>
                 <?php write('#ww_KPI_GHG_unt_descr')?>
@@ -444,6 +442,45 @@
       </script>
       <style>
         table#outside td[field] {text-align:right}
+      </style>
+    </div>
+
+    <!--emissions avoided-->
+    <div>
+      <table id=avoided style="width:95%;margin:1.5em 0">
+        <tr>
+          <th rowspan=3 style=background:green>
+            <?php write("#GHG emissions")?> avoided
+            <br>
+            (kg CO<sub>2</sub> eq)
+          </th>
+
+          <td>
+            <?php write("#wwt_SL_GHG_avoided_descr")?>
+          (<a href=variable.php?id=wwt_SL_GHG_avoided>wwt_SL_GHG_avoided</a>)
+          <td field=wwt_SL_GHG_avoided></td>
+        </tr>
+        <tr>
+          <td>
+            <?php write("#wwd_wr_GHG_avo_descr")?>
+            (<a href=variable.php?id=wwd_wr_GHG_avo>wwd_wr_GHG_avo</a>)
+          <td field=wwd_wr_GHG_avo></td>
+        </tr>
+        <tr>
+          <td>
+            <?php write("#wwd_wr_GHG_avo_d_descr")?>
+            (<a href=variable.php?id=wwd_wr_GHG_avo_d>wwd_wr_GHG_avo_d</a>)
+          <td field=wwd_wr_GHG_avo_d></td>
+        </tr>
+
+      </table>
+      <script>
+        document.querySelector('td[field=wwt_SL_GHG_avoided]').innerHTML=format(Global.Waste.Treatment.wwt_SL_GHG_avoided());
+        document.querySelector('td[field=wwd_wr_GHG_avo]'    ).innerHTML=format(Global.Waste.Discharge.wwd_wr_GHG_avo());
+        document.querySelector('td[field=wwd_wr_GHG_avo_d]'  ).innerHTML=format(Global.Waste.Discharge.wwd_wr_GHG_avo_d());
+      </script>
+      <style>
+        table#avoided td[field] {text-align:right}
       </style>
     </div>
   </div>

@@ -1282,7 +1282,7 @@ Graphs.ws_cost=function(container) {
   var options={
     height:225,
     legend:{position:'left'},
-    title:translate('water_supply_costs')+" ("+format(run+nrg)+" "+Global.General.Currency+")",
+    title:translate("Water")+" "+translate('ws_run_cost_descr')+" ("+format(run+nrg)+" "+Global.General.Currency+")",
     slices: {
       0:{color:'#0aaff1' },
       1:{color:'#aaa' },
@@ -1328,7 +1328,7 @@ Graphs.ww_cost=function(container) {
   var options={
     height:225,
     legend:{position:'left'},
-    title:translate('waste_supply_costs')+" ("+format(run+nrg)+" "+Global.General.Currency+")",
+    title:translate("Waste")+" "+translate('ww_run_cost_descr')+" ("+format(run+nrg)+" "+Global.General.Currency+")",
     slices:{
       0:{color:'#d71d24'},
       1:{color:'#aaa'},

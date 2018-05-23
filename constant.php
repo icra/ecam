@@ -51,7 +51,7 @@
       newRow.outerHTML="<tr><td>"+(i+1)+".<td><a href=variable.php?id="+equation+">"+equation+"</a>"+
         "<td>"+translate(equation+"_descr");
     });
-    if(outputs.length==1){
+    if(outputs.length==0){
       var newRow=t.insertRow(-1);
       newRow.outerHTML="<tr><td style=color:#666>~Constant not used. Consider removing it";
     }

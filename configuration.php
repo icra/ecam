@@ -89,7 +89,7 @@
       }
     }
 
-    Configuration.defaults=function() {
+    Configuration.defaults=function(){
       //default country
       document.querySelector('#country').value=Global.General.Country;
 
@@ -103,8 +103,9 @@
       }
 
       //default anyFuelEngines
-      if(Global.General.anyFuelEngines)
-        document.querySelector("input[name=anyFuelEngines][ans='1']").checked=true;
+      if(Global.General.anyFuelEngines){
+        document.querySelector("input[name=anyFuelEngines][value='1']").checked=true;
+      }
     }
   </script>
   <script>
@@ -272,9 +273,31 @@
   <!--fuel engines in any stage-->
   <fieldset>
     <legend><?php write('#do_you_have_engines')?></legend>
-    <label> <?php write('#no')?>  <input type=radio name=anyFuelEngines ans=0 onclick=update(Global.General,this.name,0) checked></label> &emsp;
-    <label> <?php write('#yes')?> <input type=radio name=anyFuelEngines ans=1 onclick=update(Global.General,this.name,1)></label>
+    <label> <?php write('#no')?>  <input type=radio name=anyFuelEngines value=0 onclick=answerAnyFuelEngines(this) checked></label> &emsp;
+    <label> <?php write('#yes')?> <input type=radio name=anyFuelEngines value=1 onclick=answerAnyFuelEngines(this)></label>
   </fieldset>
+
+  <script>
+    function answerAnyFuelEngines(el){
+      var value=parseInt(el.value);
+      update(Global.General, el.name, value);
+      Global.Configuration['Yes/No'].wsa_engines=value;
+      Global.Configuration['Yes/No'].wst_engines=value;
+      Global.Configuration['Yes/No'].wsd_engines=value;
+      Global.Configuration['Yes/No'].wwc_engines=value;
+      Global.Configuration['Yes/No'].wwt_engines=value;
+      Global.Configuration['Yes/No'].wwd_engines=value;
+      if(!value){
+        Global.Water.Abstraction.wsa_vol_fuel=0;
+        Global.Water.Treatment.wst_vol_fuel=0;
+        Global.Water.Distribution.wsd_vol_fuel=0;
+        Global.Waste.Collection.wwc_vol_fuel=0;
+        Global.Waste.Treatment.wwt_vol_fuel=0;
+        Global.Waste.Discharge.wwd_vol_fuel=0;
+      }
+      updateResult();
+    }
+  </script>
 
   <!--global warming potential-->
   <?php include'gwp.php'?>

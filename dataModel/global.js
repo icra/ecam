@@ -660,13 +660,13 @@ var Global = {
           Global.Water.Abstraction.wsa_nrg_per_abs_watr()+ //<br>
           Global.Water.Treatment.wst_KPI_nrg_per_m3()+ //<br>
           Global.Water.Distribution.wsd_KPI_nrg_per_vd() //<br>
-        );
+        )-this.wwd_wr_adnrg;
       },
-      wwd_wr_GHG_avo_d: function(){
-        return this.wwd_wr_vol_d*(
-          Global.Water.Abstraction.wsa_nrg_per_abs_watr() +
-          Global.Water.Treatment.wst_KPI_nrg_per_m3() +
-          Global.Water.Distribution.wsd_KPI_nrg_per_vd()
+      wwd_wr_GHG_avo_d: function(){//<br>
+        return this.wwd_wr_vol_d*(//<br>
+          Global.Water.Abstraction.wsa_nrg_per_abs_watr() +//<br>
+          Global.Water.Treatment.wst_KPI_nrg_per_m3() +//<br>
+          Global.Water.Distribution.wsd_KPI_nrg_per_vd()//<br>
         )*Global.General.conv_kwh_co2;
       },
 

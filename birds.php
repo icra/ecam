@@ -19,24 +19,22 @@
       //   ".graph(container)"
       Graphs.ws_cost('graph3');
       Graphs.ww_cost('graph4');
-      //   ".gauge(container, value, header, unit, lowerLimit, upperLimit)"
-      Graphs.gauge('graph5', Global.Water.ws_SL_serv_pop()||0,               translate("ws_SL_serv_pop_descr"));
-      Graphs.gauge('graph6', Global.Waste.ww_SL_serv_pop()||0,               translate("ww_SL_serv_pop_descr"));
-      Graphs.gauge('graph7', Global.Water.Distribution.wsd_SL_nr_water()||0, translate("wsd_SL_nr_water_descr"));
-      Graphs.gauge('graph8', Global.Water.ws_SL_auth_con()||0,               translate("ws_SL_auth_con_descr"), Info.ws_SL_auth_con.unit, 0, 200); //with unit and limits
+      //   ".gauge(container, value,                        header,                            unit,      lowerLimit, upperLimit)"
+      Graphs.gauge('graph5', Global.Water.ws_SL_serv_pop(), translate("ws_SL_serv_pop_descr"), undefined, 0, 100);
+      Graphs.gauge('graph6', Global.Waste.ww_SL_serv_pop(), translate("ww_SL_serv_pop_descr"), undefined, 0, 100);
 
       //GHG emissions
       (function(){
         var years=Global.General.Years();
         var ws_serv=Global.Water.ws_serv_pop;
-        Graphs.gauge('graph9',
+        Graphs.gauge('graph7',
           Global.Water.ws_KPI_GHG()/years/ws_serv,
           translate("ws_KPI_GHG_descr"),
           "<br>"+Info.ws_KPI_GHG.unit+"/year/serv.pop.",
           0, 200);
 
         var ww_serv=Global.Waste.ww_serv_pop();
-        Graphs.gauge('graph10',
+        Graphs.gauge('graph8',
           Global.Waste.ww_KPI_GHG()/years/ww_serv,
           translate("ww_KPI_GHG_descr"),
           "<br>"+Info.ww_KPI_GHG.unit+"/year/serv.pop.",
@@ -212,36 +210,64 @@
 </center>
 
 <!--title-->
-<h1 class=flex style=justify-content:space-between>
+<h1>
   <div>
     <?php write('#quick_assessment')?> &mdash;
     <?php write('#initial_estimation_description')?>
   </div>
-
-  <div style="font-size:13px;color:#666;">
-    <!--assessment period-->
-    <span>
-      <a href=variable.php?id=Days><?php write('#assessment_period')?></a>:
-      <span id=Global_General_Days></span> <?php write('#days')?>
-      <script>
-        document.querySelector("#Global_General_Days").innerHTML=format(Global.General.Days());
-      </script>
-    </span> ·
-
-    <!--conv_co2_kwh-->
-    <span>
-      <a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a>:
-      <span id=conv_kwh_co2></span> kg CO<sub>2</sub>/kWh
-      <script>
-        (function(){
-          var val=Global.General.conv_kwh_co2;
-          var str=val==0?"<span style='padding:0 0.5em;background:red;cursor:help' caption='<?php write('#birds_warning_conv_factor')?>'>"+format(val)+" &#9888;</span>":format(val);
-          document.querySelector('#conv_kwh_co2').innerHTML=str;
-        })();
-      </script>
-    </span>
-  </div>
 </h1>
+
+<!--context variables-->
+<div class=flex
+style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 2em;background:#fafafa;box-shadow: 0 1px 2px rgba(0,0,0,.5);">
+  <!--assessment period-->
+  <div>
+    <a href=variable.php?id=Days><?php write('#assessment_period')?></a>:
+    <span id=Global_General_Days></span> <?php write('#days')?>
+    <script>
+      document.querySelector("#Global_General_Days").innerHTML=format(Global.General.Days());
+    </script>
+  </div>
+
+  <!--conv_co2_kwh-->
+  <div>
+    <a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a>:
+    <span id=conv_kwh_co2></span> kg CO<sub>2</sub>/kWh
+    <script>
+      (function(){
+        var val=Global.General.conv_kwh_co2;
+        var str=val==0?"<span style='padding:0 0.5em;background:red;cursor:help' caption='<?php write('#birds_warning_conv_factor')?>'>"+format(val)+" &#9888;</span>":format(val);
+        document.querySelector('#conv_kwh_co2').innerHTML=str;
+      })();
+    </script>
+  </div>
+
+  <!--prot_cont-->
+  <div>
+    <a href=variable.php?id=prot_con><?php write('#Annual_protein_consumption')?></a>:
+    <span id=prot_con></span> kg/person/year
+    <script>
+      (function(){
+        var val=Global.General.prot_con;
+        var str=val==0?"<span style='padding:0 0.5em;background:red;cursor:help' caption='warning: value is zero'>"+format(val)+" &#9888;</span>":format(val);
+        document.querySelector('#prot_con').innerHTML=str;
+      })();
+    </script>
+  </div>
+
+  <!--bod_pday-->
+  <div>
+    <a href=variable.php?id=bod_pday><?php write('#bod_pday_descr')?></a>:
+    <span id=bod_pday></span> kg/person/day
+    <script>
+      (function(){
+        var val=Global.General.bod_pday;
+        var str=val==0?"<span style='padding:0 0.5em;background:red;cursor:help' caption='warning: value is zero'>"+format(val)+" &#9888;</span>":format(val);
+        document.querySelector('#bod_pday').innerHTML=str;
+      })();
+    </script>
+  </div>
+</div>
 
 <!--main container-->
 <div class=flex>
@@ -271,10 +297,7 @@
           <!--water inputs-->
           <tr stage=water class=hidden><td style=width:40%><?php write('#ws_nrg_cons_descr')?><td class=output><input id='ws_nrg_cons' value=0> <td class=unit>
           <tr stage=water class=hidden><td><?php write('#vol_fuel')?>                         <td class=output><input id='ws_vol_fuel' value=0> <td class=unit>
-          <tr stage=water class=hidden><td><?php write('#wsa_vol_conv_descr')?><td class=input><input id='wsa_vol_conv' value=0>                <td class=unit>
           <tr stage=water class=hidden><td><?php write('#wsd_vol_dist_descr')?><td class=input><input id='wsd_vol_dist' value=0>                <td class=unit>
-          <tr stage=water class=hidden><td><?php write('#wsd_auth_con_descr')?><td class=input><input id='wsd_auth_con' value=0>                <td class=unit>
-          <tr stage=water class=hidden><td><?php write('#wsd_bill_con_descr')?><td class=input><input id='wsd_bill_con' value=0>                <td class=unit>
           <tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost'  value=0>                <td class=unit>
           <tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost'  value=0>                <td class=unit>
           <tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
@@ -304,9 +327,9 @@
           <tr stage=waste class=hidden><td><?php write('#vol_fuel')?>          <td class=output><input id='ww_vol_fuel' value=0><td class=unit>
           <tr stage=waste class=hidden><td><?php write('#wwt_vol_trea_descr')?><td class=input> <input id='wwt_vol_trea'value=0><td class=unit>
           <tr stage=waste class=hidden><td><?php write('#wwd_vol_disc_descr')?><td class=input> <input id='wwd_vol_disc'value=0><td class=unit>
+          <tr stage=waste class=hidden><td><?php write('#birds_ww_n2o_effl')?> <td class=input> <input id='wwd_n2o_effl'value=0><td class=unit>
           <tr stage=waste class=hidden><td><?php write('#birds_ww_run_cost')?> <td class=input> <input id='ww_run_cost' value=0><td class=unit>
           <tr stage=waste class=hidden><td><?php write('#birds_ww_nrg_cost')?> <td class=input> <input id='ww_nrg_cost' value=0><td class=unit>
-          <tr stage=waste class=hidden><td><?php write('#birds_ww_n2o_effl')?> <td class=input> <input id='wwd_n2o_effl'value=0><td class=unit>
           <!--biogas-->
           <?php include'biogas_birds.php'?>
           <!--treatment type-->
@@ -330,13 +353,13 @@
 
       <!--reset all Treatment estimations-->
       <div style="padding:0.5em 1em">
-        <button onclick="resetAllEstimations()">Reset all estimations</button>
+        <button onclick="resetAllEstimations()" disabled>Reset all Tier B values (TBD)</button>
         <script>
           //reset estimations from Waste Treatment
           function resetAllEstimations(){
             Object.keys(Global.Estimations).forEach(key=>{
               var input_code = key.replace(/^estm_/,'');
-              Global.Waste.Treatment[input_code]=0;
+              Global.Waste.Treatment[input_code]=Global.Estimations[key]();
             });
             init();
           }
@@ -416,9 +439,6 @@
         <div graph id=graph7><?php write('#loading')?></div>
         <div graph id=graph8><?php write('#loading')?></div>
         <!---->
-        <div graph id=graph9> <?php write('#loading')?></div>
-        <div graph id=graph10><?php write('#loading')?></div>
-        <!---->
         <div style="width:98%;padding:1em 0;margin-bottom:1em;border:none">
           <?php write('#for_further_details_go_to_detailed')?>
           <b>
@@ -497,7 +517,8 @@
         //count substages
         var n=Substages[level][sublevel].length;
         //console.log("Substages",level,sublevel,n);
-        if(n){
+        var sum=getVariable(input.id);
+        if(n && sum>0){
           td.classList.add('locked');
           input.disabled=true;
           td.parentNode.setAttribute('caption','Since you entered more detailed data in Tier B stages, you cannot modify this input.<br>Now it displays the sum of its related '+translate(level)+' stage\'s inputs.');
