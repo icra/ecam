@@ -158,22 +158,16 @@
       }
     }
 
-    /*1st cell: show code*/
-    var newCell=document.createElement('th');
+    /*1st cell: show code and description*/
+    var newCell=document.createElement('td');
     newRow.appendChild(newCell);
-    newCell.classList.add('variableCode');
-    newCell.innerHTML=(function() {
-      return "<a style=font-size:10px href=variable.php?id="+code+">"+code+"</a>";
-    })();
-
-    /*2nd cell: variable name*/
-    var newCell=newRow.insertCell(-1);
     newCell.style.textAlign="left";
     newCell.setAttribute('title', translate(code+'_expla'));
     newCell.innerHTML=(function() {
+      var link="<a style=font-size:10px href=variable.php?id="+code+">"+code+"</a>";
       var warning=(Formulas.outputsPerInput(code).length==0 && Utils.usedInBenchmarks(code).length==0) ?
         " <span class=not_used_input caption='Input not used for any equation'></span>" : "";
-      return translate(code+"_descr")+warning;
+      return translate(code+"_descr")+warning+"<br>("+link+")";
     })();
 
     //3rd cell: value
@@ -241,24 +235,17 @@
     /*new attribute field=field>*/
     newRow.setAttribute('field',field);
 
-    /*code*/
-    var newCell=document.createElement('th');
+    /*code and description*/
+    var newCell=document.createElement('td');
     newRow.appendChild(newCell);
-    newCell.classList.add('variableCode');
+    newCell.setAttribute('title', translate(field+"_expla"));
     if(isCV)newCell.classList.add('isCV');
     newCell.innerHTML=(function() {
       //warning for variable not used
       var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
-      return code;
-    })();
-
-    /*description*/
-    var newCell=newRow.insertCell(-1);
-    newCell.setAttribute('title', translate(field+"_expla"));
-    newCell.innerHTML=(function(){
       var warning=(Formulas.outputsPerInput(field).length==0 && Utils.usedInBenchmarks(field).length==0) ?
         " <span class=not_used_input caption='Input not used for any equation'></span>" : "";
-      return translate(field+"_descr")+warning;
+      return translate(field+"_descr")+warning+"<br>("+code+")";
     })();
 
     //editable cell if not CV
@@ -382,7 +369,7 @@
   }
 </script>
 
-<table id=inputs style="width:99%">
+<table id=inputs style="width:100%">
   <tr><th colspan=5 class=tableHeader>
     <?php write('#INPUTS')?>
     &mdash;
@@ -390,8 +377,7 @@
     <?php if($sublevel){write("#$sublevel");}else{write("#$level");} ?>
     <?php write('#stages')?>
   <tr>
-    <th><?php write('#Code')?>
-    <th style="width:100% !important"><?php write('#Description')?>
+    <th><?php write('#Description')?>
     <th><?php write('#Current value')?>
     <th><?php write('#edit_unit')?>
   <tr><td colspan=4 style=color:#ccc><i><?php write('#loading')?>...</i>

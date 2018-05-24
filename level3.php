@@ -282,7 +282,14 @@
           newCell.setAttribute('title',"<?php write('#edit_click_to_modify')?>");
           newCell.classList.add("input");
           newCell.setAttribute('onclick','level3.transformField(this)');
-          newCell.innerHTML=format(substages[s][code]/multiplier);
+          var value=(function(){
+            //fix for old variables that are 'undefined'
+            if(!substages[s][code]){
+              substages[s][code]=0;
+            }
+            return substages[s][code]/multiplier;
+          })();
+          newCell.innerHTML=format(value);
         }
 
         //Unit for current variable

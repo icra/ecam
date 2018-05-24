@@ -143,6 +143,7 @@
     }
 
     h1 a:not([id]),
+    #inputs a,#inputs a:visited,
     #outputs a,#outputs a:visited,
     #nrgOutputs a,#nrgOutputs a:visited{
       color:<?php getL1color()?> !important;
@@ -432,36 +433,38 @@
 ?>
 
 <!--navigable title-->
-<h1><a href=sources.php id=Global_General_Name></a>
-  <script>document.querySelector('#Global_General_Name').innerHTML=Global.General.Name</script>
-  <?php echo "$sep $title"?>
-  <!--See description (link to iwa web)-->
-  <?php
-    if($sublevel) {
-      ?>
-      <span style=line-height:10px>
-        <?php
-          $iwaLink='http://www.iwa-network.org/water-climate-energy-solutions/public/catalogue/';
-          if($level=="Water" && $sublevel=="Abstraction")      {$alias="waterAbs"; $iwaLink.='stage/water_abstraction';}
-          elseif($level=="Water" && $sublevel=="Treatment")    {$alias="waterTre"; $iwaLink.='stage/water_treatment';}
-          elseif($level=="Water" && $sublevel=="Distribution") {$alias="waterDis"; $iwaLink.='stage/water_distribution';}
-          elseif($level=="Waste" && $sublevel=="Collection")   {$alias="wasteCol"; $iwaLink.='stage/wastewater_collection';}
-          elseif($level=="Waste" && $sublevel=="Treatment")    {$alias="wasteTre"; $iwaLink.='stage/wastewater_treatment';}
-          elseif($level=="Waste" && $sublevel=="Discharge")    {$alias="wasteDis"; $iwaLink.='stage/wastewater_discharge';}
+<h1 class=flex style=justify-content:space-between>
+  <div>
+    <a href=sources.php id=Global_General_Name></a>
+    <script>document.querySelector('#Global_General_Name').innerHTML=Global.General.Name</script>
+    <?php echo "$sep $title"?>
+    <!--See description (link to iwa web)-->
+    <?php
+      if($sublevel) {
         ?>
-        <a target=_blank href="<?php echo $iwaLink?>">
-          <img style=width:27px;margin-left:10px title="More info" src='img/<?php echo "$alias.png"?>'>
-        </a>
-      </span>
-      <?php
-    }
-  ?>
+        <span style=line-height:10px>
+          <?php
+            $iwaLink='http://www.iwa-network.org/water-climate-energy-solutions/public/catalogue/';
+            if($level=="Water" && $sublevel=="Abstraction")      {$alias="waterAbs"; $iwaLink.='stage/water_abstraction';}
+            elseif($level=="Water" && $sublevel=="Treatment")    {$alias="waterTre"; $iwaLink.='stage/water_treatment';}
+            elseif($level=="Water" && $sublevel=="Distribution") {$alias="waterDis"; $iwaLink.='stage/water_distribution';}
+            elseif($level=="Waste" && $sublevel=="Collection")   {$alias="wasteCol"; $iwaLink.='stage/wastewater_collection';}
+            elseif($level=="Waste" && $sublevel=="Treatment")    {$alias="wasteTre"; $iwaLink.='stage/wastewater_treatment';}
+            elseif($level=="Waste" && $sublevel=="Discharge")    {$alias="wasteDis"; $iwaLink.='stage/wastewater_discharge';}
+          ?>
+          <a target=_blank href="<?php echo $iwaLink?>">
+            <img style=width:27px;margin-left:10px title="More info" src='img/<?php echo "$alias.png"?>'>
+          </a>
+        </span>
+        <?php
+      }
+    ?>
+  </div>
 
   <!--btns fold all div.cards-->
-  <?php if($sublevel)
-    {
+  <?php if($sublevel) {
       ?>
-      <div id=btn_all_container class=inline style="position:absolute;right:40%">
+      <div id=btn_all_container>
         <style>
           #btn_all_container a {
             border:1px solid #bbb;
@@ -498,13 +501,13 @@
   ?>
 
   <!--Tips-->
-  <span style="font-size:12px;color:#666;float:right">
+  <div style="font-size:12px;color:#666;">
     <div style="padding:0.5em;cursor:pointer" onclick="document.querySelector('#tip').innerHTML=Tips.random()">
       <b><?php write('#Tip')?></b> &rarr;
       <i id=tip></i> &emsp; &#9654;
       <script>document.querySelector('#tip').innerHTML=Tips.random()</script>
     </div>
-  </span>
+  </div>
 </h1>
 </center>
 
@@ -631,54 +634,55 @@
     ?>
 
     <!--level2-->
-    <div style=padding:0.5em>
+    <div class=flex style="padding:0 0 0.2em 0.2em">
       <!--inputs level2-->
-      <div class=inline style="width:44%;margin-left:0.2em;">
+      <div style="min-width:40%;margin-right:5px;">
         <?php include'level2.php'?>
       </div>
 
       <!--outputs level2-->
-      <div id=outputs_container class=inline style="width:54%;">
+      <div style="width:50%">
+        <div id=outputs_container>
+          <!--level2 GHG outputs-->
+          <table id=outputs style="width:100%;background:#f6f6f6;">
+            <tr><th colspan=7 class=tableHeader>
+              <?php write('#OUTPUTS')?> &mdash;
+              <?php write('#GHG emissions')?>
+            <tr>
+              <th><?php write('#Origin')?>
+              <th>kg CO<sub>2</sub><br>assessment period
+              <th>kg CO<sub>2</sub><br>per <?php write('#year')?><br>per serv.pop
+              <th>kg CO<sub>2</sub><br>per m<sup>3</sup>
+            <tr><td style=color:#ccc colspan=6>
+              <?php write('#Loading')?>...
+          </table>
 
-        <!--level2 GHG outputs-->
-        <table id=outputs style="width:100%;background:#f6f6f6;">
-          <tr><th colspan=7 class=tableHeader>
-            <?php write('#OUTPUTS')?> &mdash;
-            <?php write('#GHG emissions')?>
-          <tr>
-            <th><?php write('#Origin')?>
-            <th>kg CO<sub>2</sub><br>assessment period
-            <th>kg CO<sub>2</sub><br>per <?php write('#year')?><br>per serv.pop
-            <th>kg CO<sub>2</sub><br>per m<sup>3</sup>
-          <tr><td style=color:#ccc colspan=6>
-            <?php write('#Loading')?>...
-        </table>
+          <!--level2 outputs: NRG and SL-->
+          <table id=nrgOutputs style="width:100%;background:#f6f6f6;">
+            <tr><th colspan=4 class=tableHeader>
+              <?php write('#OUTPUTS')?> &mdash;
+              <?php write('#Energy performance and Service Level indicators')?>
+            <tr>
+              <th><?php write('#edit_description')?>
+              <th><?php write('#edit_current_value')?>
+              <th><?php write('#edit_unit')?>
+            <tr><td style=color:#ccc colspan=3>
+              <?php write('#Loading')?>...
+          </table>
+        </div>
 
-        <!--level2 outputs: NRG and SL-->
-        <table id=nrgOutputs style="width:100%;background:#f6f6f6;">
-          <tr><th colspan=4 class=tableHeader>
-            <?php write('#OUTPUTS')?> &mdash;
-            <?php write('#Energy performance and Service Level indicators')?>
-          <tr>
-            <th><?php write('#edit_description')?>
-            <th><?php write('#edit_current_value')?>
-            <th><?php write('#edit_unit')?>
-          <tr><td style=color:#ccc colspan=3>
-            <?php write('#Loading')?>...
-        </table>
-      </div>
-
-      <!--GRAPHS-->
-      <div id=graph_container class=inline style="width:54%;display:none;border:0px solid #ccc">
-        <!--choose graph type buttons-->
-        <?php include'buttonsGraphType.php'?>
-        <!--actual graph-->
-        <div id=graph>Click a graph to display</div>
-        <style>
-          #graph div.options{padding:1em}
-          #graph {text-align:center}
-          #graph table {margin:auto}
-        </style>
+        <!--GRAPHS-->
+        <div id=graph_container style="display:none;border:0px solid #ccc">
+          <!--choose graph type buttons-->
+          <?php include'buttonsGraphType.php'?>
+          <!--actual graph-->
+          <div id=graph>Click a graph to display</div>
+          <style>
+            #graph div.options{padding:1em}
+            #graph {text-align:center}
+            #graph table {margin:auto}
+          </style>
+        </div>
       </div>
     </div>
   </div>

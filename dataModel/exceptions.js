@@ -17,6 +17,7 @@ var Exceptions = {
 		if(!td)return;
 
 		var select=document.createElement('select');
+    select.style.fontSize='smaller';
 		td.innerHTML+=" ";
 		td.appendChild(select);
 
