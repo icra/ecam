@@ -416,7 +416,9 @@ var Global = {
       wwt_fuel_dig:0,
       wwt_KPI_biog_x_bod:function(){return this.wwt_biog_pro/this.c_wwt_bod_rmvd()},
       "wwt_nrg_biog":0,
-      c_wwt_nrg_biog:function(){return this.wwt_biog_val*this.wwt_ch4_biog/100*10},
+
+      c_wwt_nrg_biog:function(){return this.wwt_biog_val*this.wwt_ch4_biog/100*Cts.ct_ch4_nrg.value},
+
       //valorizing biogas?
       "wwt_biog_val":0,
       wwt_KPI_nrg_biogas:function(){return this.wwt_nrg_biog/this.wwt_vol_trea},

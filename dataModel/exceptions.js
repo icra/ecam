@@ -17,8 +17,10 @@ var Exceptions = {
 		if(!td)return;
 
 		var select=document.createElement('select');
+
     select.style.fontSize='smaller';
-		td.innerHTML+=" ";
+    select.style.display='block';
+
 		td.appendChild(select);
 
 		select.onchange=function() {

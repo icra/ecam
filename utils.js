@@ -69,7 +69,7 @@ function format(number,digits){
   //default digits if not specified
   digits=digits||2;
 
-  if(number>1e6)digits=0;
+  if(number>1e4)digits=0;
 
   //for non applicable
   if(number=="NA"){ return "<span style=color:#ccc>NA</span>"; }

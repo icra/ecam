@@ -1,4 +1,10 @@
 var Cts = {
+  ct_ch4_nrg:{
+    value:10,
+    descr:"Energy content of 1 m3 of CH4",
+    unit:"kWh/m3",
+  },
+
   ct_ch4_eq:{
     value:34,
     descr:"Conversion for CH<sub>4</sub> emissions to CO<sub>2</sub> equivalent emissions",
