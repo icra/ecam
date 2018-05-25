@@ -283,10 +283,6 @@
           newCell.classList.add("input");
           newCell.setAttribute('onclick','level3.transformField(this)');
           var value=(function(){
-            //fix for old variables that are 'undefined'
-            if(!substages[s][code]){
-              substages[s][code]=0;
-            }
             return substages[s][code]/multiplier;
           })();
           newCell.innerHTML=format(value);
@@ -769,6 +765,17 @@
     .forEach(key=>{
       substages.forEach(substage=>{
         substage[key]=CurrentLevel[key];
+      });
+    });
+
+  //fix for new variables loading old json files: if undefined in substages make it 0
+  Object.keys(CurrentLevel)
+    .filter(key=>typeof(CurrentLevel[key])=="number")
+    .forEach(key=>{
+      substages.forEach(substage=>{
+        if(substage[key]==undefined){
+          substage[key]=0;
+        }
       });
     });
 </script>
