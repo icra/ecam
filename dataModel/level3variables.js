@@ -124,8 +124,6 @@ Level3.list=[
 
 	//wwd
   "wwd_wr_C_seq_slu", //water reuse
-  "wwd_wr_fer_avo_N", //water reuse
-  "wwd_wr_fer_avo_P", //water reuse
   "wwd_wr_GHG_avo_N", //water reuse
   "wwd_wr_GHG_avo_P", //water reuse
   "wwd_wr_GHG_avo",   //water reuse

@@ -526,15 +526,13 @@ var Questions={
         "wwd_wr_P_rec",
         "wwd_wr_adnrg",
         "wwd_wr_vol_d",
+        "wwd_SL_ghg_non",   //output
         "wwd_wr_C_seq_slu", //output
-        "wwd_wr_fer_avo_N", //output
-        "wwd_wr_fer_avo_P", //output
-        "wwd_wr_fer_avo",   //output
         "wwd_wr_GHG_avo_N", //output
         "wwd_wr_GHG_avo_P", //output
         "wwd_wr_GHG_avo",   //output
-        "wwd_wr_nrg_sav",   //output
         "wwd_wr_GHG_avo_d", //output
+        "wwd_wr_nrg_sav",   //output
       ],
       advanced:1,
       otherQuestions:[],

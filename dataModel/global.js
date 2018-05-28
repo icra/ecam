@@ -290,7 +290,6 @@ var Global = {
       return this.Treatment.wwt_SL_GHG_avoided()+//<br>
       this.Discharge.wwd_wr_GHG_avo_d()+       //<br>
       this.Discharge.wwd_SL_ghg_non()+         //<br>
-      this.Discharge.wwd_wr_fer_avo()+         //<br>
       this.Discharge.wwd_wr_C_seq_slu();
     },
 
@@ -654,17 +653,6 @@ var Global = {
         Global.Waste.Treatment.wwt_mass_slu_app*0.25 +//<br>
         Global.Waste.Treatment.wwt_mass_slu_land*(VS)*(0.56)*(0.2)*(44/12);
       },
-      wwd_wr_fer_avo_N: function(){
-        return Global.Waste.Treatment.wwt_mass_slu_comp*0.04*4  +//<br>
-               Global.Waste.Treatment.wwt_mass_slu_app *0.04*4;  //<br>
-      },
-      wwd_wr_fer_avo_P: function(){
-        return Global.Waste.Treatment.wwt_mass_slu_comp*0.015*2  +//<br>
-               Global.Waste.Treatment.wwt_mass_slu_app *0.015*2;  //<br>
-      },
-      wwd_wr_fer_avo:function(){
-        return this.wwd_wr_fer_avo_N()+this.wwd_wr_fer_avo_P();
-      },
 
       wwd_wr_GHG_avo_N: function(){ return this.wwd_wr_N_rec*4; },
       wwd_wr_GHG_avo_P: function(){ return this.wwd_wr_P_rec*2; },
@@ -677,11 +665,7 @@ var Global = {
         )-this.wwd_wr_adnrg;
       },
       wwd_wr_GHG_avo_d: function(){//<br>
-        return this.wwd_wr_vol_d*(//<br>
-          Global.Water.Abstraction.wsa_nrg_per_abs_watr() +//<br>
-          Global.Water.Treatment.wst_KPI_nrg_per_m3() +//<br>
-          Global.Water.Distribution.wsd_KPI_nrg_per_vd()//<br>
-        )*Global.General.conv_kwh_co2;
+        return this.wwd_wr_nrg_sav()*Global.General.conv_kwh_co2;
       },
 
       //no filter
