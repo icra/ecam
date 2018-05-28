@@ -477,7 +477,7 @@
           GHG_avoided.forEach(field=>{
             var newRow=t.insertRow(-1);
             var newCell=newRow.insertCell(-1);
-            newCell.innerHTML=translate(field+'_descr')+
+            newCell.innerHTML=translate(field+'_descr').replace(/^GHG emissions avoided/,'')+
               "<br>(<a href='variable.php?id="+field+"'>"+field+"</a>)";
             var newCell=newRow.insertCell(-1);
             newCell.setAttribute('field',field);
