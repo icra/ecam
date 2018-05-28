@@ -436,6 +436,7 @@
           <td field=ww_SL_ghg_ons></td>
         </tr>
       </table>
+      <b>Note: the emissions above have not been added in the totals presented in the GHG emissions summary</b>
       <script>
         document.querySelector('td[field=ww_SL_ghg_unc]').innerHTML=format(Global.Waste.ww_SL_ghg_unc());
         document.querySelector('td[field=ww_SL_ghg_ons]').innerHTML=format(Global.Waste.ww_SL_ghg_unc());
@@ -456,6 +457,7 @@
           </th>
         </tr>
       </table>
+      <b>Note: the emissions above have not been subtracted in the totals presented in the GHG emissions summary</b>
       <style>
         table#avoided td[field] {text-align:right}
       </style>
@@ -467,7 +469,6 @@
             'wwt_SL_GHG_avoided',
             'wwd_wr_GHG_avo_d',
             'wwd_SL_ghg_non',
-            'wwd_wr_fer_avo',
             'wwd_wr_GHG_avo',
             'wwd_wr_C_seq_slu',
             'ww_GHG_avoided',
