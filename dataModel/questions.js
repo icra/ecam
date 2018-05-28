@@ -529,6 +529,7 @@ var Questions={
         "wwd_wr_C_seq_slu", //output
         "wwd_wr_fer_avo_N", //output
         "wwd_wr_fer_avo_P", //output
+        "wwd_wr_fer_avo",   //output
         "wwd_wr_GHG_avo_N", //output
         "wwd_wr_GHG_avo_P", //output
         "wwd_wr_GHG_avo",   //output

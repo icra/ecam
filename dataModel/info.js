@@ -10,6 +10,7 @@
 
 var Info = {
   //after water reuse edits
+  ww_GHG_avoided:     {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   wwt_SL_GHG_avoided: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
 
   //wate reuse
@@ -20,6 +21,7 @@ var Info = {
   wwd_wr_C_seq_slu: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
   wwd_wr_fer_avo_N: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
   wwd_wr_fer_avo_P: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
+  wwd_wr_fer_avo:   {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
   wwd_wr_GHG_avo_N: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
   wwd_wr_GHG_avo_P: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
   wwd_wr_GHG_avo:   {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},

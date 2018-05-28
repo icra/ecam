@@ -286,6 +286,14 @@ var Global = {
     ww_uncl_pop:   function(){return Math.max(0,this.ww_resi_pop-this.ww_conn_pop()-this.ww_onsi_pop)},
     ww_untr_pop:   function(){return Math.max(0,this.ww_conn_pop()-this.ww_serv_pop())},
 
+    ww_GHG_avoided : function(){//<br>
+      return this.Treatment.wwt_SL_GHG_avoided()+//<br>
+      this.Discharge.wwd_wr_GHG_avo_d()+       //<br>
+      this.Discharge.wwd_SL_ghg_non()+         //<br>
+      this.Discharge.wwd_wr_fer_avo()+         //<br>
+      this.Discharge.wwd_wr_C_seq_slu();
+    },
+
     //energy costs related
     "ww_nrg_cost":0,
     "ww_run_cost":0,
@@ -640,7 +648,7 @@ var Global = {
       "wwd_wr_adnrg":0, //additional energy
       "wwd_wr_vol_d":0, //volume of reused water displacing potable water
       wwd_wr_C_seq_slu:function(){//<br>
-        var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
+        var sludge_type=Tables.find('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);//<br>
         var VS = (sludge_type=="Digested")?0.51:0.70;//<br><br>
         return Global.Waste.Treatment.wwt_mass_slu_comp*0.25 +//<br>
         Global.Waste.Treatment.wwt_mass_slu_app*0.25 +//<br>
@@ -654,6 +662,10 @@ var Global = {
         return Global.Waste.Treatment.wwt_mass_slu_comp*0.015*2  +//<br>
                Global.Waste.Treatment.wwt_mass_slu_app *0.015*2;  //<br>
       },
+      wwd_wr_fer_avo:function(){
+        return this.wwd_wr_fer_avo_N()+this.wwd_wr_fer_avo_P();
+      },
+
       wwd_wr_GHG_avo_N: function(){ return this.wwd_wr_N_rec*4; },
       wwd_wr_GHG_avo_P: function(){ return this.wwd_wr_P_rec*2; },
       wwd_wr_GHG_avo:   function(){ return this.wwd_wr_GHG_avo_N() + this.wwd_wr_GHG_avo_P(); },

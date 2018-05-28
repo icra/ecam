@@ -1,4 +1,8 @@
 {
+  
+  "#ww_GHG_avoided_descr":"Total GHG emissions avoided",
+  "#ww_GHG_avoided_expla":"Total GHG emissions avoided",
+
   "#wwt_SL_GHG_avoided_descr":"GHG emissions avoided by energy produced from biogas",
   "#wwt_SL_GHG_avoided_expla":"GHG emissions avoided by energy produced from biogas",
   "#wst_treatment_perf":"Do you want to evaluate treatment performance",
@@ -19,12 +23,15 @@
   "#wwd_wr_fer_avo_N_expla":"Fertilizer emission avoided by recovered Nitrogen",
   "#wwd_wr_fer_avo_P_descr":"Fertilizer emission avoided by recovered Phosphorus",
   "#wwd_wr_fer_avo_P_expla":"Fertilizer emission avoided by recovered Phosphorus",
-  "#wwd_wr_GHG_avo_N_descr":"GHG emission avoided by recovered Nitrogen from wastewater reuse",
-  "#wwd_wr_GHG_avo_N_expla":"GHG emission avoided by recovered Nitrogen from wastewater reuse",
-  "#wwd_wr_GHG_avo_P_descr":"GHG emission avoided by recovered Phosphorus from wastewater reuse",
-  "#wwd_wr_GHG_avo_P_expla":"GHG emission avoided by recovered Phosphorus from wastewater reuse",
-  "#wwd_wr_GHG_avo_descr"  :"Total GHG emission avoided by wastewater reuse",
-  "#wwd_wr_GHG_avo_expla"  :"Total GHG emission avoided by wastewater reuse",
+  "#wwd_wr_fer_avo_descr":"Fertilizer emission avoided by nutrient recovery",
+  "#wwd_wr_fer_avo_expla":"Fertilizer emission avoided by nutrient recovery",
+
+  "#wwd_wr_GHG_avo_N_descr":"GHG emissions avoided by recovered Nitrogen from wastewater reuse",
+  "#wwd_wr_GHG_avo_N_expla":"GHG emissions avoided by recovered Nitrogen from wastewater reuse",
+  "#wwd_wr_GHG_avo_P_descr":"GHG emissions avoided by recovered Phosphorus from wastewater reuse",
+  "#wwd_wr_GHG_avo_P_expla":"GHG emissions avoided by recovered Phosphorus from wastewater reuse",
+  "#wwd_wr_GHG_avo_descr"  :"GHG emissions avoided by nutrient recovery",
+  "#wwd_wr_GHG_avo_expla"  :"GHG emissions avoided by nutrient recovery",
   "#wwd_wr_nrg_sav_descr"  :"Net electricity savings due to reuse displacing potable water",
   "#wwd_wr_nrg_sav_expla"  :"Net electricity savings due to reuse displacing potable water",
   "#wwd_wr_GHG_avo_d_descr":"GHG emissions avoided due to reuse displacing potable water",

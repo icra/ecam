@@ -449,39 +449,41 @@
     <div>
       <table id=avoided style="width:95%;margin:1.5em 0">
         <tr>
-          <th rowspan=3 style=background:green>
+          <th rowspan style=background:green>
             <?php write("#GHG emissions")?> avoided
             <br>
             (kg CO<sub>2</sub> eq)
           </th>
-
-          <td>
-            <?php write("#wwt_SL_GHG_avoided_descr")?>
-          (<a href=variable.php?id=wwt_SL_GHG_avoided>wwt_SL_GHG_avoided</a>)
-          <td field=wwt_SL_GHG_avoided></td>
         </tr>
-        <tr>
-          <td>
-            <?php write("#wwd_wr_GHG_avo_descr")?>
-            (<a href=variable.php?id=wwd_wr_GHG_avo>wwd_wr_GHG_avo</a>)
-          <td field=wwd_wr_GHG_avo></td>
-        </tr>
-        <tr>
-          <td>
-            <?php write("#wwd_wr_GHG_avo_d_descr")?>
-            (<a href=variable.php?id=wwd_wr_GHG_avo_d>wwd_wr_GHG_avo_d</a>)
-          <td field=wwd_wr_GHG_avo_d></td>
-        </tr>
-
       </table>
-      <script>
-        document.querySelector('td[field=wwt_SL_GHG_avoided]').innerHTML=format(Global.Waste.Treatment.wwt_SL_GHG_avoided());
-        document.querySelector('td[field=wwd_wr_GHG_avo]'    ).innerHTML=format(Global.Waste.Discharge.wwd_wr_GHG_avo());
-        document.querySelector('td[field=wwd_wr_GHG_avo_d]'  ).innerHTML=format(Global.Waste.Discharge.wwd_wr_GHG_avo_d());
-      </script>
       <style>
         table#avoided td[field] {text-align:right}
       </style>
+      <script>
+        (function(){
+          //populate table "avoided"
+          var t=document.querySelector('table#avoided');
+          var GHG_avoided=[
+            'wwt_SL_GHG_avoided',
+            'wwd_wr_GHG_avo_d',
+            'wwd_SL_ghg_non',
+            'wwd_wr_fer_avo',
+            'wwd_wr_GHG_avo',
+            'wwd_wr_C_seq_slu',
+            'ww_GHG_avoided',
+          ];
+          t.querySelector('th[rowspan]').rowSpan=GHG_avoided.length+1;
+          GHG_avoided.forEach(field=>{
+            var newRow=t.insertRow(-1);
+            var newCell=newRow.insertCell(-1);
+            newCell.innerHTML=translate(field+'_descr')+
+              "<br>(<a href='variable.php?id="+field+"'>"+field+"</a>)";
+            var newCell=newRow.insertCell(-1);
+            newCell.setAttribute('field',field);
+            newCell.innerHTML=format(getVariable(field));
+          });
+        })();
+      </script>
     </div>
   </div>
 
