@@ -415,6 +415,7 @@ var Questions={
 				"wwt_slu_composting_ch4",
 				"wwt_slu_composting_n2o",
 				"wwt_KPI_ghg_comp_co2eq",
+        "wwt_slu_comp_C_seq",
 			],
 			advanced:1,
 			otherQuestions:[
@@ -440,6 +441,7 @@ var Questions={
 				"wwt_soil_typ",
 				"wwt_slu_landapp_n2o",
 				"wwt_KPI_ghg_app_co2eq",
+        "wwt_slu_app_C_seq",
 			],
 			advanced:1,
 			otherQuestions:[
@@ -453,6 +455,7 @@ var Questions={
 				"wwt_slu_landfill_ch4",
 				"wwt_slu_landfill_n2o",
 				"wwt_KPI_ghg_land_co2eq",
+        "wwt_slu_land_C_seq",
 			],
 			advanced:1,
 			otherQuestions:[

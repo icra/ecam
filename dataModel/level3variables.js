@@ -121,6 +121,9 @@ Level3.list=[
 	"wwt_KPI_ghg_tsludge_n2o",
 	"wwt_KPI_ghg_tsludge_ch4",
 	"wwt_type_tre",
+  "wwt_slu_comp_C_seq",
+  "wwt_slu_app_C_seq",
+  "wwt_slu_land_C_seq",
 
 	//wwd
   "wwd_wr_C_seq_slu", //water reuse

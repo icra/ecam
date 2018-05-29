@@ -12,6 +12,9 @@ var Info = {
   //after water reuse edits
   ww_GHG_avoided:     {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   wwt_SL_GHG_avoided: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  wwt_slu_comp_C_seq: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  wwt_slu_app_C_seq:  {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  wwt_slu_land_C_seq: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
 
   //wate reuse
   wwd_wr_N_rec:     {magnitude:"Mass",   unit:"kg"},

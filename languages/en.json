@@ -1,4 +1,11 @@
 {
+  "#wwt_slu_comp_C_seq_descr": "GHG emissions avoided due to carbon sequestration in sludge composting",
+  "#wwt_slu_comp_C_seq_expla": "GHG emissions avoided due to carbon sequestration in sludge composting",
+  "#wwt_slu_app_C_seq_descr":  "GHG emissions avoided due to carbon sequestration in sludge land application",
+  "#wwt_slu_app_C_seq_expla":  "GHG emissions avoided due to carbon sequestration in sludge land application",
+  "#wwt_slu_land_C_seq_descr": "GHG emissions avoided due to carbon sequestration in sludge landfilling",
+  "#wwt_slu_land_C_seq_expla": "GHG emissions avoided due to carbon sequestration in sludge landfilling",
+
   "#ww_GHG_avoided_descr":"Total GHG emissions avoided",
   "#ww_GHG_avoided_expla":"Total GHG emissions avoided",
 
