@@ -26,10 +26,11 @@
   "#wwd_wr_C_seq_slu_descr":"GHG emissions avoided due to carbon sequestration from biosolids management",
   "#wwd_wr_C_seq_slu_expla":"GHG emissions avoided due to carbon sequestration from biosolids management",
 
-  "#wwd_wr_GHG_avo_N_descr":"GHG emissions avoided by recovered Nitrogen from wastewater reuse",
-  "#wwd_wr_GHG_avo_N_expla":"GHG emissions avoided by recovered Nitrogen from wastewater reuse",
-  "#wwd_wr_GHG_avo_P_descr":"GHG emissions avoided by recovered Phosphorus from wastewater reuse",
-  "#wwd_wr_GHG_avo_P_expla":"GHG emissions avoided by recovered Phosphorus from wastewater reuse",
+  "#wwd_wr_GHG_avo_N_descr":"GHG emissions avoided due to Nitrogen recovery",
+  "#wwd_wr_GHG_avo_N_expla":"GHG emissions avoided due to Nitrogen recovery displacing synthetic fertilizer use",
+  "#wwd_wr_GHG_avo_P_descr":"GHG emissions avoided due to Phosphorus recovery",
+  "#wwd_wr_GHG_avo_P_expla":"GHG emissions avoided due to Phosphorus recovery displacing synthetic fertilizer use",
+
   "#wwd_wr_GHG_avo_descr"  :"GHG emissions avoided due to nutrient recovery displacing synthetic fertilizer use",
   "#wwd_wr_GHG_avo_expla"  :"GHG emissions avoided due to nutrient recovery displacing synthetic fertilizer use",
   "#wwd_wr_nrg_sav_descr"  :"Net electricity savings due to reuse displacing potable water",
