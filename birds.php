@@ -2,7 +2,7 @@
   <?php include'imports.php'?>
   <script>
     function init(){
-      console.log('init');
+      //console.log('init');
       BEV.updateDefaults(); //update input values
       BEV.defaultQuestions(); //update question values
       //update default treatment type and sludge disposal method
@@ -129,7 +129,6 @@
     BEV.updateOutput=function(input) {
       var field=input.id;
       var value=parseFloat(input.value)*Units.multiplier(field);
-
       //spred the value among the stages
       //get L1 name: "Water" or "Waste"
       var L1=locateVariable(field).level;
@@ -139,7 +138,13 @@
         var wst=Global.Configuration.ActiveStages.waterTre;
         var wsd=Global.Configuration.ActiveStages.waterDis;
         var n=wsa+wst+wsd;
-        if(n==0){alert("Error: no Water stages active, go back to Configuration");return}
+        if(n==0){
+          console.warn("Warning: no Water stages active, all goes to Abstraction");
+          //all energy goes to abstraction
+          Global.Water.Abstraction[field.replace("ws_","wsa_")]=value;
+          init();
+          return;
+        }
         Global.Water.Abstraction [field.replace("ws_","wsa_")]=wsa*value/n;
         Global.Water.Treatment   [field.replace("ws_","wst_")]=wst*value/n;
         Global.Water.Distribution[field.replace("ws_","wsd_")]=wsd*value/n;
@@ -149,12 +154,17 @@
         var wwt=Global.Configuration.ActiveStages.wasteTre;
         var wwd=Global.Configuration.ActiveStages.wasteDis;
         var n=wwc+wwt+wwd;
-        if(n==0){alert("Error: no Wastewater stages active, go back to Configuration");return}
+        if(n==0){
+          console.warn("Warning: no Wastewater stages active, all goes to Collection");
+          //all energy goes to collection
+          Global.Waste.Collection[field.replace("ww_","wwc_")]=value;
+          init();
+          return;
+        }
         Global.Waste.Collection[field.replace("ww_","wwc_")]=wwc*value/n;
         Global.Waste.Treatment [field.replace("ww_","wwt_")]=wwt*value/n;
         Global.Waste.Discharge [field.replace("ww_","wwd_")]=wwd*value/n;
       }
-
       init();
     }
   </script>
