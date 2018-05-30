@@ -45,14 +45,32 @@
         return ret;
       })();
 
+      //check if checkboxes for substages are checked
+      var wsa=document.querySelector('#sources input[type=checkbox][name=wsa_KPI_GHG]').checked;
+      var wst=document.querySelector('#sources input[type=checkbox][name=wst_KPI_GHG]').checked;
+      var wsd=document.querySelector('#sources input[type=checkbox][name=wsd_KPI_GHG]').checked;
+      var wwc=document.querySelector('#sources input[type=checkbox][name=wwc_KPI_GHG]').checked;
+      var wwt=document.querySelector('#sources input[type=checkbox][name=wwt_KPI_GHG]').checked;
+      var wwd=document.querySelector('#sources input[type=checkbox][name=wwd_KPI_GHG]').checked;
+
       //stage value fields
       var fields=document.querySelectorAll('#sources [field], #outside td[field]');
       for(var i=0;i<fields.length;i++){
         var element=fields[i];
         var code=element.getAttribute('field');
         var divisor_value = typeof(divisor)=="function" ? divisor(code) : divisor;
-        var loc=locateVariable(code);
-        var value = loc.sublevel ? (Global[loc.level][loc.sublevel][code]()) : (Global[loc.level][code]());
+
+        if(code=='TotalGHG'){
+          var value=calculate_emissions(wsa,wst,wsd,wwc,wwt,wwd);
+        }else if(code=='ws_KPI_GHG'){
+          var value=calculate_emissions_Water(wsa,wst,wsd);
+        }else if(code=='ww_KPI_GHG'){
+          var value=calculate_emissions_Waste(wwc,wwt,wwd);
+        }else{
+          var loc=locateVariable(code);
+          var value = loc.sublevel ? (Global[loc.level][loc.sublevel][code]()) : (Global[loc.level][code]());
+        }
+
         value/=divisor_value;
 
         // ensure only display "NA" at GHG Emissions Summary tab - improv #2
@@ -202,6 +220,8 @@
         td_sta.style.display='';
         td_sum.style.display='none';
       }
+
+      calculateGHG();
     }
   </script>
 

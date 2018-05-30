@@ -12,6 +12,7 @@
       updateResult();
       Caption.listeners();
     }
+
     function drawCharts(){
       //   ".graph(withTable,container)"
       Graphs.ghg_by_source(false,'graph1');
@@ -23,26 +24,27 @@
       Graphs.gauge('graph5', Global.Water.ws_SL_serv_pop(), translate("ws_SL_serv_pop_descr"), undefined, 0, 100);
       Graphs.gauge('graph6', Global.Waste.ww_SL_serv_pop(), translate("ww_SL_serv_pop_descr"), undefined, 0, 100);
 
-      //GHG emissions
+      //GHG emissions per year per person
       (function(){
         var years=Global.General.Years();
+
+        //water
         var ws_serv=Global.Water.ws_serv_pop;
-        Graphs.gauge('graph7',
-          Global.Water.ws_KPI_GHG()/years/ws_serv,
+        Graphs.gauge('graph7', Global.Water.ws_KPI_GHG()/years/ws_serv,
           translate("ws_KPI_GHG_descr"),
           "<br>"+Info.ws_KPI_GHG.unit+"/year/serv.pop.",
-          0, 200);
+          0, 200); //with units and limits (lower limit and upper limit)
 
+        //wastewater
         var ww_serv=Global.Waste.ww_serv_pop();
-        Graphs.gauge('graph8',
-          Global.Waste.ww_KPI_GHG()/years/ww_serv,
+        Graphs.gauge('graph8', Global.Waste.ww_KPI_GHG()/years/ww_serv,
           translate("ww_KPI_GHG_descr"),
           "<br>"+Info.ww_KPI_GHG.unit+"/year/serv.pop.",
-          0, 200); //with unit and limits
+          0, 200); //with unit and limits (lower limit and upper limit)
       })();
-
     }
   </script>
+
   <!--BEV namespace (birds eye view old name)-->
   <script>
     var BEV={}; //'Birds Eye View' namespace

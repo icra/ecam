@@ -1,30 +1,45 @@
 /* variables only in level2, not in level3 */
-//note: only inputs
+//used to hide advanced outputs in level3
 var Level2only = {
 	list: [
-		//wsa
-		//"wsa_vol_fuel",
-		//"wsa_fuel_typ",
-		////wst
-		//"wst_vol_fuel",
-		//"wst_fuel_typ",
-		////wsd
-		//"wsd_vol_fuel",
-		//"wsd_fuel_typ",
-		//"wsd_vol_trck",
-		//"wsd_trck_typ",
-		////wwc
-		//"wwc_vol_fuel",
-		//"wwc_fuel_typ",
-		////wwt
-		//"wwt_vol_fuel",
-		//"wwt_fuel_typ",
-		//"wwt_trck_typ",
-		////wwd
-		//"wwd_vol_fuel",
-		//"wwd_fuel_typ",
-		//"wwd_vol_trck",
-		//"wwd_trck_typ",
     "wwt_type_tre", //related to wwt_ch4_efac
+
+    //fuel engines
+    "wsa_KPI_GHG_fuel_co2", //hidden
+    "wsa_KPI_GHG_fuel_n2o", //hidden
+    "wsa_KPI_GHG_fuel_ch4", //hidden
+    "wst_KPI_GHG_fuel_co2", //hidden
+    "wst_KPI_GHG_fuel_n2o", //hidden
+    "wst_KPI_GHG_fuel_ch4", //hidden
+    "wsd_KPI_GHG_fuel_co2", //hidden
+    "wsd_KPI_GHG_fuel_n2o", //hidden
+    "wsd_KPI_GHG_fuel_ch4", //hidden
+    "wwc_KPI_GHG_fuel_co2", //hidden
+    "wwc_KPI_GHG_fuel_n2o", //hidden
+    "wwc_KPI_GHG_fuel_ch4", //hidden
+    "wwt_KPI_GHG_fuel_co2", //hidden
+    "wwt_KPI_GHG_fuel_n2o", //hidden
+    "wwt_KPI_GHG_fuel_ch4", //hidden
+    "wwd_KPI_GHG_fuel_co2", //hidden
+    "wwd_KPI_GHG_fuel_n2o", //hidden
+    "wwd_KPI_GHG_fuel_ch4", //hidden
+
+    //truck transport
+    "wsd_KPI_GHG_trck_co2", //hidden
+    "wsd_KPI_GHG_trck_n2o", //hidden
+    "wsd_KPI_GHG_trck_ch4", //hidden
+    "wwd_KPI_GHG_trck_co2", //hidden
+    "wwd_KPI_GHG_trck_n2o", //hidden
+    "wwd_KPI_GHG_trck_ch4", //hidden
+
+    //fuel digester
+    "wwt_KPI_GHG_dig_fuel_co2", //hidden
+    "wwt_KPI_GHG_dig_fuel_n2o", //hidden
+    "wwt_KPI_GHG_dig_fuel_ch4", //hidden
+
+    //sludge transport
+    "wwt_KPI_ghg_tsludge_co2", //hidden
+    "wwt_KPI_ghg_tsludge_n2o", //hidden
+    "wwt_KPI_ghg_tsludge_ch4", //hidden
 	],
 };

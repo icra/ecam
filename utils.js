@@ -1,3 +1,48 @@
+//sum ghg of substages or stages combined 2^6=64 options
+function calculate_emissions_Water(wsa,wst,wsd){
+  wsa=wsa||false;
+  wst=wst||false;
+  wsd=wsd||false;
+
+  var rv=0; //return value
+
+  //wsa
+  if(wsa) rv += Substages.Water.Abstraction.map(s=>s.wsa_KPI_GHG()).reduce((pr,cu)=>(pr+cu),0);
+  else    rv +=    Global.Water.Abstraction.wsa_KPI_GHG();
+  //wst
+  if(wst) rv += Substages.Water.Treatment.map(s=>s.wst_KPI_GHG()).reduce((pr,cu)=>(pr+cu),0);
+  else    rv +=    Global.Water.Treatment.wst_KPI_GHG();
+  //wsd
+  if(wsd) rv += Substages.Water.Distribution.map(s=>s.wsd_KPI_GHG()).reduce((pr,cu)=>(pr+cu),0);
+  else    rv +=    Global.Water.Distribution.wsd_KPI_GHG();
+
+  return rv;
+}
+function calculate_emissions_Waste(wwc,wwt,wwd){
+  wwc=wwc||false;
+  wwt=wwt||false;
+  wwd=wwd||false;
+
+  var rv=0; //return value
+
+  rv += Global.Waste.ww_KPI_GHG_unt(); //add untreated ww emissions
+
+  //wwc
+  if(wwc) rv += Substages.Waste.Collection.map(s=>s.wwc_KPI_GHG()).reduce((pr,cu)=>(pr+cu),0);
+  else    rv +=    Global.Waste.Collection.wwc_KPI_GHG();
+  //wwt
+  if(wwt) rv += Substages.Waste.Treatment.map(s=>s.wwt_KPI_GHG()).reduce((pr,cu)=>(pr+cu),0);
+  else    rv +=    Global.Waste.Treatment.wwt_KPI_GHG();
+  //wwd
+  if(wwd) rv += Substages.Waste.Discharge.map(s=>s.wwd_KPI_GHG()).reduce((pr,cu)=>(pr+cu),0);
+  else    rv +=    Global.Waste.Discharge.wwd_KPI_GHG();
+
+  return rv;
+}
+function calculate_emissions(wsa,wst,wsd,wwc,wwt,wwd){
+  return calculate_emissions_Water(wsa,wst,wsd) + calculate_emissions_Waste(wwc,wwt,wwd);
+}
+
 /** Find a variable code inside 'Global'*/
 function locateVariable(code) {
   var localization={};//e.g {"level":"Water","sublevel":"Abstraction"}
