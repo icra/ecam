@@ -364,15 +364,11 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
       </table>
 
       <!--reset all Treatment estimations-->
-      <div style="padding:0.5em 1em">
-        <button onclick="resetAllEstimations()" disabled>Reset all Tier B values (TBD)</button>
+      <div style="padding:0.5em 1em;display:none">
+        <button onclick="resetTierB()" disabled>Reset all Tier B values (TBD)</button>
         <script>
-          //reset estimations from Waste Treatment
-          function resetAllEstimations(){
-            Object.keys(Global.Estimations).forEach(key=>{
-              var input_code = key.replace(/^estm_/,'');
-              Global.Waste.Treatment[input_code]=Global.Estimations[key]();
-            });
+          //TODO issue #94
+          function resetTierB(){
             init();
           }
         </script>

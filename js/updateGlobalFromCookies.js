@@ -46,6 +46,7 @@ function copyFieldsFrom(object_from,object_to){
       }else if(type_from=='number' && type_to!='number'){
         //old variables: do nothing
         console.warn(field,' is an old variable; not loaded');
+        alert("Input '("+field+" = "+format(object_from[field])+")' not loaded. It is an old variable that has been modified or removed in this version. You might need to reenter it.");
       }else{
         //do nothing
         console.warn(field,' types do not match');
@@ -55,9 +56,7 @@ function copyFieldsFrom(object_from,object_to){
 }
 
 /**
-  *
-  * OVERWRITE "Global" AND "Substages" objects with cookie content
-  *
+  * OVERWRITE "Global" AND "Substages" objects with the parsed cookie content
   */
 if(getCookie("GLOBAL")!==null){
   /**
