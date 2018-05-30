@@ -170,16 +170,15 @@
         <th><?php write('#quick_assessment')?>
         <th><?php write('#energy_performance')?>
         <?php
-          function printL1stage($alias,$name)
-          {
+          function printL1stage($alias,$name) {
             echo "<tr><td rowspan=3 style=text-align:center>
               <label>
                 <input type=checkbox id=$alias onchange=Configuration.activate(this.id)>
                 <img src=img/$alias.png> $name
               </label>";
           }
-          function printL2stage($class,$alias,$name,$newRow)
-          {
+
+          function printL2stage($class,$alias,$name,$newRow) {
             if($newRow){echo "<tr>";}
             echo "<td>
               <label>

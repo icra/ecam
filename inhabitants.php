@@ -50,17 +50,17 @@
 		<!--WATER-->
 		<tr><th colspan=3 style=background:#0aaff1>
 			<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
-			<tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?><td class=input><input id='ws_resi_pop'><td><small><?php write('#birds_people')?>
-			<tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?><td class=input><input id='ws_serv_pop'><td><small><?php write('#birds_people')?>
+			<tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?><td class=input><input id='ws_resi_pop'><td><small><?php write('#people')?>
+			<tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?><td class=input><input id='ws_serv_pop'><td><small><?php write('#people')?>
 			<tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
     </tr>
 		<!--WASTEWATER-->
 		<tr><th colspan=3 style=background:#d71d24>
 			<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
-			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?> <td class=input><input id='ww_resi_pop'> <td><small><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td><?php write('#wwc_conn_pop_descr')?><td class=input><input id='wwc_conn_pop'><td><small><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td><?php write('#wwt_serv_pop_descr')?><td class=input><input id='wwt_serv_pop'><td><small><?php write('#birds_people')?>
-			<tr stage=waste class=hidden><td><?php write('#ww_onsi_pop_descr')?> <td class=input><input id='ww_onsi_pop'> <td><small><?php write('#birds_people')?>
+			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?> <td class=input><input id='ww_resi_pop'> <td><small><?php write('#people')?>
+			<tr stage=waste class=hidden><td><?php write('#wwc_conn_pop_descr')?><td class=input><input id='wwc_conn_pop'><td><small><?php write('#people')?>
+			<tr stage=waste class=hidden><td><?php write('#wwt_serv_pop_descr')?><td class=input><input id='wwt_serv_pop'><td><small><?php write('#people')?>
+			<tr stage=waste class=hidden><td><?php write('#ww_onsi_pop_descr')?> <td class=input><input id='ww_onsi_pop'> <td><small><?php write('#people')?>
 			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
     </tr>
 	</table>

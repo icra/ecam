@@ -149,7 +149,7 @@
       while(t.rows.length>0)t.deleteRow(-1);
       if(!obj[fie]()){
         var newRow=t.insertRow(-1);
-        newRow.insertCell(-1).innerHTML="<small>~No emissions</small>";
+        newRow.insertCell(-1).innerHTML="<small>~<?php write('#No emissions') ?></small>";
       }
       for(var field in obj) {
         if(field.search('_KPI_GHG_')+1) {
@@ -188,7 +188,7 @@
 
       //substages total
       var newRow=t.insertRow(-1);
-      newRow.insertCell(-1).innerHTML="<b>Substages total</b>";
+      newRow.insertCell(-1).innerHTML="<b><?php write('#Substages total')?></b>";
       var newCell=newRow.insertCell(-1);
       newCell.style.textAlign='right';
       newCell.innerHTML="<b>"+format(obj.map(s=>s[fie]()).reduce((p,c)=>(p+c),0))+"</b>";
@@ -201,7 +201,7 @@
     function drawCheckbox($sublevel){ ?>
       <div style=float:right;text-align:center><small>
         <label>
-          <input type=checkbox onclick=toggle_display_sum_sta(this) name="<?php echo $sublevel?>" caption="View substage values">
+          <input type=checkbox onclick=toggle_display_sum_sta(this) name="<?php echo $sublevel?>" caption="<?php write('#View substage values')?>">
         </label>
       </small></div>
       <?php
@@ -456,7 +456,7 @@
           <td field=ww_SL_ghg_ons></td>
         </tr>
       </table>
-      <b>Note: the emissions above have not been added in the totals presented in the GHG emissions summary</b>
+      <b><?php write('#Note: the emissions above have not been added in the totals presented in the GHG emissions summary')?></b>
       <script>
         document.querySelector('td[field=ww_SL_ghg_unc]').innerHTML=format(Global.Waste.ww_SL_ghg_unc());
         document.querySelector('td[field=ww_SL_ghg_ons]').innerHTML=format(Global.Waste.ww_SL_ghg_unc());
@@ -477,7 +477,7 @@
           </th>
         </tr>
       </table>
-      <b>Note: the emissions above have not been subtracted in the totals presented in the GHG emissions summary</b>
+      <b><?php write('#Note: the emissions above have not been added in the totals presented in the GHG emissions summary')?></b>
       <style>
         table#avoided td[field] {text-align:right}
       </style>
@@ -540,3 +540,5 @@
     });
   });
 </script>
+
+<div style=margin-bottom:8em></div>

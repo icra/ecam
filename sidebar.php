@@ -164,14 +164,14 @@
 			<tr><td><a href=summary.php?type=input><?php write('#all_inputs')?></a>
 			<tr><td><a href=summary.php?type=output><?php write('#all_outputs')?></a>
 			<tr><td><a href=summary.php?type=ccvv><?php write('#all_ccvv')?></a>
-      <tr><td><a href=questions.php>All questions</a>
+      <tr><td><a href=questions.php><?php write('#All questions')?></a>
 			<tr><td><a href=constants.php><?php write('#all_constants')?></a>
       <tr><td><a href=edit.php?level=Estimations><?php write('#all_estimations_tier_A')?></a>
 			<tr><td><a href=benchmark.php><?php write('#all_benchmarks')?></a>
 			<tr><th><?php write('#other')?>
 			<tr><td><a href=opps.php><?php write("#opportunities")?></a>
 			<tr><td><a href=export.php><?php write('#sidebar_export')?></a>
-      <tr><td><a href=sankey.php>Sankey diagram</a>
+      <tr><td><a href=sankey.php><?php write('#Sankey diagram')?></a>
 			<!--go to variable-->
 			<tr><th><?php write('#go_to_variable_code')?>
 			<tr><td>
@@ -217,15 +217,16 @@
 					}
 				</style>
 			</tr>
-      <tr><th>Cache
-      <tr><td><button onclick="window.location.reload(true)">Reset cache</button>
+      <tr><th><?php write('#Cache')?>
+      <tr><td><button onclick="window.location.reload(true)">
+        <?php write('#Reset cache')?>
+      </button>
 		</table>
 		<ul style="
 			text-align:left;
 			padding:0.5em;
 			">
 			<li><a href=development.php><?php write('#dev')?></a></li>
-			<li><a href="http://www.iwa-network.org/water-climate-energy-solutions/public/">Catalogue of Solutions [External]</a></li>
 		</ul>
 	</div>
 </div>

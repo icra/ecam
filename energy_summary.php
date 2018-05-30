@@ -117,7 +117,7 @@
       });
       //substages total
       var newRow=t.insertRow(-1);
-      newRow.insertCell(-1).innerHTML="<b>Substages total</b>";
+      newRow.insertCell(-1).innerHTML="<b><?php write('#Substages total')?></b>";
       var newCell=newRow.insertCell(-1);
       newCell.style.textAlign='right';
       newCell.innerHTML="<b>"+format(obj.map(s=>s[fie]).reduce((p,c)=>(p+c),0))+"</b>";

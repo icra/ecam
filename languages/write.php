@@ -7,7 +7,7 @@ $lang=isset($_COOKIE['lang']) ? $_COOKIE['lang'] : "en" ;
 $lang_file=$lang=="null" ? file_get_contents("languages/en.json") : file_get_contents("languages/$lang.json");
 $lang_json=json_decode($lang_file,true);
 
-if($lang_json==NULL && $lang!="null") {
+if($lang_json==NULL && $lang!="null"){
   echo "
     <script>
       var $lang=$lang_file;
@@ -17,9 +17,8 @@ if($lang_json==NULL && $lang!="null") {
 
 //use $lang_json to fetch $id inside file "$lang".json
 //TRANSLATE SERVER SIDE
-function write($id) {
-	global $lang;global $lang_json;
-
+function write($id){
+  global $lang;global $lang_json;
   if($lang=="null") { echo "[$id]"; }
   else {
     //find text or display [not found]
@@ -30,23 +29,21 @@ function write($id) {
 ?>
 
 <?php
-	//TRANSLATE (CLIENT SIDE)
-	if($lang!="null") { 
-		?>
-			<script><?php echo "var lang=$lang_file;"?></script>
-			<script>
-				function translate(id){
-					return lang['#'+id] || false;
-				}
-			</script>
-		<?php 
-	} else { 
-		?>
-			<script>
-				function translate(id){
-					return '#'+id
-				}
-			</script>
-		<?php 
-	}
+  //TRANSLATE (CLIENT SIDE)
+  if($lang!="null") { ?>
+    <script><?php echo "var lang=$lang_file;"?></script>
+    <script>
+      function translate(id){
+        return lang['#'+id] || "[#"+id+"]";
+      }
+    </script>
+    <?php
+  }else{ ?>
+    <script>
+      function translate(id){
+        return '[#'+id+']';
+      }
+    </script>
+    <?php
+  }
 ?>

@@ -32,14 +32,14 @@
         var ws_serv=Global.Water.ws_serv_pop;
         Graphs.gauge('graph7', Global.Water.ws_KPI_GHG()/years/ws_serv,
           translate("ws_KPI_GHG_descr"),
-          "<br>"+Info.ws_KPI_GHG.unit+"/year/serv.pop.",
+          "<br>"+Info.ws_KPI_GHG.unit+"/"+translate('year')+"/"+translate('serv.pop.'),
           0, 200); //with units and limits (lower limit and upper limit)
 
         //wastewater
         var ww_serv=Global.Waste.ww_serv_pop();
         Graphs.gauge('graph8', Global.Waste.ww_KPI_GHG()/years/ww_serv,
           translate("ww_KPI_GHG_descr"),
-          "<br>"+Info.ww_KPI_GHG.unit+"/year/serv.pop.",
+          "<br>"+Info.ww_KPI_GHG.unit+"/"+translate('year')+"/"+translate('serv.pop.'),
           0, 200); //with unit and limits (lower limit and upper limit)
       })();
     }
@@ -257,7 +257,7 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
   <!--prot_cont-->
   <div>
     <a href=variable.php?id=prot_con><?php write('#Annual_protein_consumption')?></a>:
-    <span id=prot_con></span> kg/person/year
+    <span id=prot_con></span> kg/<?php write('#person')?>/<?php write('#year')?>
     <script>
       (function(){
         var val=Global.General.prot_con;
@@ -270,7 +270,7 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
   <!--bod_pday-->
   <div>
     <a href=variable.php?id=bod_pday><?php write('#bod_pday_descr')?></a>:
-    <span id=bod_pday></span> kg/person/day
+    <span id=bod_pday></span> kg/<?php write('#person')?>/<?php write('#day')?>
     <script>
       (function(){
         var val=Global.General.bod_pday;
@@ -578,3 +578,4 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
   })();
 </script>
 
+<div style=margin-bottom:8em></div>

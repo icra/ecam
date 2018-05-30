@@ -1,4 +1,24 @@
 {
+  "#No emissions":"No emissions",
+  "#View substage values":"View substage values",
+
+  "#Note: the emissions above have not been added in the totals presented in the GHG emissions summary":"Note: the emissions above have not been added in the totals presented in the GHG emissions summary",
+
+  "#Sum of substages":"Sum of substages",
+  "#Average value among substages":"Average value among substages",
+  "#Highlight related inputs/outputs":"Highlight related inputs/outputs",
+  "#Substages total or average":"Substages total<br>or average",
+  "#Substages total":"Substages total",
+  "#Stage value":"Stage value",
+
+  "#Inputs & Outputs":"Inputs & Outputs",
+  "#day":"day",
+  "#serv.pop.":"serv.pop.",
+
+  "#Sankey diagram":"Sankey diagram",
+  "#Cache":"Cache",
+  "#Reset cache":"Reset cache",
+  "#All questions":"All questions",
   "#wwt_slu_comp_C_seq_descr": "GHG emissions avoided due to carbon sequestration in sludge composting",
   "#wwt_slu_comp_C_seq_expla": "GHG emissions avoided due to carbon sequestration in sludge composting",
   "#wwt_slu_app_C_seq_descr":  "GHG emissions avoided due to carbon sequestration in sludge land application",

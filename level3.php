@@ -67,14 +67,14 @@
       //SUM header
       var newTH = document.createElement('th');
       newRow.appendChild(newTH);
-      newTH.innerHTML="<center>Substages total<br>or average</center>";
+      newTH.innerHTML="<center><?php write('#Substages total or average')?></center>";
       newTH.rowSpan=2;
       newTH.colSpan=2;
 
       //Stage value header
       var newTH = document.createElement('th');
       newRow.appendChild(newTH);
-      newTH.innerHTML="<center>Stage value</center>";
+      newTH.innerHTML="<center><?php write('#Stage value')?></center>";
       newTH.rowSpan=2;
       newTH.colSpan=2;
     /*end headers*/
@@ -355,7 +355,7 @@
         extra_btns+=" "+btn_copy;
       }
 
-      return "<td style=text-align:center caption='"+(isSumable?'Sum of substages':'Average value among substages')+"'>"+format(isSumable?value:value/substages.length)+extra_btns;
+      return "<td style=text-align:center caption='"+(isSumable? translate('Sum of substages'):translate('Average value among substages'))+"'>"+format(isSumable?value:value/substages.length)+extra_btns;
     })();
 
     //stage value of input in substages (last column)
@@ -493,9 +493,9 @@
       var rv="<td colspan=2 style='text-align:center'>";
       //sum all values
       if(isSumable){
-        rv+="<div caption='Sum of substages'>"+format(sum)+"</div>";
+        rv+="<div caption='<?php write('#Sum of substages')?>'>"+format(sum)+"</div>";
       }else{
-        rv+="<div caption='Average value among substages'>"+format(sum/substages.length)+"</div>";
+        rv+="<div caption='<?php write('#Average value among substages')?>'>"+format(sum/substages.length)+"</div>";
       }
       return rv;
     })();
@@ -725,7 +725,7 @@
       </div>
       <div>
         <input type=checkbox id=showHL onclick="Global.Configuration.hl^=true;updateResult();"><!--
-        --><label for=showHL>Highlight related inputs/outputs</label>&nbsp;
+        --><label for=showHL><?php write('#Highlight related inputs/outputs')?></label>&nbsp;
       </div>
       <script>
         document.getElementById('showHL').checked=Global.Configuration.hl;
