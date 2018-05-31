@@ -484,7 +484,7 @@
           </th>
         </tr>
       </table>
-      <b><small><?php write('#Note: the emissions above have not been added in the totals presented in the GHG emissions summary')?></small></b>
+      <b><small><?php write('#Note: the emissions above have not been subtracted in the totals presented in the GHG emissions summary')?></small></b>
       <style>
         table#avoided td[field] {text-align:right}
       </style>

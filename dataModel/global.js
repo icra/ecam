@@ -756,6 +756,7 @@ var Global = {
 
     //auxiliar object to store user selections
     Selected: {
+      wwt_ch4_efac:"",
       prot_con:"Albania",//country selected for protein consumption
       sludge_estimation_method:"0",
       gwp_reports_index:0,

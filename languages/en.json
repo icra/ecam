@@ -1,4 +1,6 @@
 {
+  "#select treatment":"select treatment",
+  
   "#wsa_SL_GHG_nrw_descr":"GHG in Abstraction due to water losses",
   "#wsa_SL_GHG_nrw_expla":"GHG in Abstraction due to water losses",
   "#wsd_SL_GHG_nrw_descr":"GHG in Distribution due to water losses",
@@ -12,6 +14,7 @@
   "#View substage values":"View substage values",
 
   "#Note: the emissions above have not been added in the totals presented in the GHG emissions summary":"Note: the emissions above have not been added in the totals presented in the GHG emissions summary",
+  "#Note: the emissions above have not been subtracted in the totals presented in the GHG emissions summary":"Note: the emissions above have not been subtracted in the totals presented in the GHG emissions summary",
 
   "#Sum of substages":"Sum of substages",
   "#Average value among substages":"Average value among substages",
