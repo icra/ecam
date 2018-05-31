@@ -173,10 +173,13 @@ var Global = {
       wsd_KPI_nrg_per_vd:function(){return this.wsd_nrg_cons/this.wsd_vol_dist},
       wsd_KPI_nrg_per_m3:function(){return this.wsd_nrg_cons/this.wsd_auth_con},
       wsd_SL_nr_water:function(){return 100*(this.wsd_vol_dist-this.wsd_bill_con)/this.wsd_vol_dist;},
-      wsa_SL_GHG_nrw:function(){return (Global.Water.Abstraction.wsa_KPI_GHG() * (this.wsd_vol_dist - this.wsd_bill_con) / Global.Water.Abstraction.wsa_vol_conv)},
-      wst_SL_GHG_nrw:function(){return (Global.Water.Treatment.wst_KPI_GHG() * (this.wsd_vol_dist - this.wsd_bill_con) / Global.Water.Treatment.wst_vol_trea)},
-      wsd_SL_GHG_nrw:function(){return (this.wsd_KPI_GHG() * (this.wsd_vol_dist - this.wsd_bill_con) / this.wsd_vol_dist)},
+
+      wsa_SL_GHG_nrw:function(){return (Global.Water.Abstraction.wsa_KPI_GHG() * (this.wsd_vol_dist - this.wsd_auth_con) / Global.Water.Abstraction.wsa_vol_conv)},
+      wst_SL_GHG_nrw:function(){return (Global.Water.Treatment.wst_KPI_GHG() * (this.wsd_vol_dist - this.wsd_auth_con) / Global.Water.Treatment.wst_vol_trea)},
+
+      wsd_SL_GHG_nrw:function(){return (this.wsd_KPI_GHG() * (this.wsd_vol_dist - this.wsd_auth_con) / this.wsd_vol_dist)},
       wsd_SL_ghg_attr:function(){return this.wsa_SL_GHG_nrw()+this.wst_SL_GHG_nrw()+this.wsd_SL_GHG_nrw()},
+
       wsd_SL_water_loss:function(){return 100*(this.wsd_vol_dist-this.wsd_auth_con)/this.wsd_vol_dist;},
       //fuel engines?
       "wsd_fuel_typ":0,
