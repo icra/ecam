@@ -788,8 +788,6 @@
   "#wwd_vol_pump_expla":"Volume pompé",
   "#wwd_vol_trck_descr":"Volume de carburant consommé (Camions)",
   "#wwd_vol_trck_expla":"Volume de carburant consommé (Camions)",
-  "#wwt_KPI_GHG_biog_descr":"Evaporation des biogaz",
-  "#wwt_KPI_GHG_biog_expla":"GES issus de l'évaporation des biogaz",
   "#wwt_KPI_GHG_descr":"GES totaux issus du traitement des eaux usées",
   "#wwt_KPI_GHG_dig_fuel_ch4_descr":"Carburant utilisé pour le méthaniseur (CH<sub>4</sub>)",
   "#wwt_KPI_GHG_dig_fuel_ch4_expla":"Emissions de CH<sub>4</sub> (CO<sub>2</sub> eq) liées au carburant utilisé par le méthaniseur",

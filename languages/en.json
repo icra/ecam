@@ -1,5 +1,7 @@
 {
   "#select treatment":"select treatment",
+  "#wwt_KPI_GHG_biog_descr":"Biogas emissions",
+  "#wwt_KPI_GHG_biog_expla":"GHG emissions from biogas",
   
   "#wsa_SL_GHG_nrw_descr":"GHG in Abstraction due to water losses",
   "#wsa_SL_GHG_nrw_expla":"GHG in Abstraction due to water losses",
@@ -876,8 +878,6 @@
   "#wwd_vol_pump_expla":"Pumped volume",
   "#wwd_vol_trck_descr":"Volume of fuel consumed (Trucks)",
   "#wwd_vol_trck_expla":"Volume of fuel consumed (Trucks)",
-  "#wwt_KPI_GHG_biog_descr":"Biogas emissions",
-  "#wwt_KPI_GHG_biog_expla":"GHG emissions from biogas",
   "#wwt_KPI_GHG_descr":"Total GHG Wastewater Treatment",
   "#wwt_KPI_GHG_dig_fuel_ch4_descr":"Fuel employed for digester (CH<sub>4</sub>)",
   "#wwt_KPI_GHG_dig_fuel_ch4_expla":"Amount of CH<sub>4</sub> (CO<sub>2</sub> eq) emissions due to fuel employed for digester",

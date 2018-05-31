@@ -797,8 +797,6 @@
   "#wwd_vol_pump_expla":"Volumen bombeado",
   "#wwd_vol_trck_descr":"Volumen de consumo de combustible (camiones)",
   "#wwd_vol_trck_expla":"Volumen de consumo de combustible (camiones)",
-  "#wwt_KPI_GHG_biog_descr":"Biogás quemado",
-  "#wwt_KPI_GHG_biog_expla":"Emisiones GEI de biogás quemado",
   "#wwt_KPI_GHG_descr":"Emisiones totales GEI en etapa de tratamiento de aguas residuales",
   "#wwt_KPI_GHG_dig_fuel_ch4_descr":"Combustible empleado en el digestor(CH<sub>4</sub>)",
   "#wwt_KPI_GHG_dig_fuel_ch4_expla":"Cantidad de emisiones CH<sub>4</sub> (CO<sub>2</sub> eq) debido al combustible empleado en el digestor ",
