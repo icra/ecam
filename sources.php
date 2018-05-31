@@ -477,7 +477,7 @@
               <?php write("#ww_GHG_avoided_descr")?>
             </a>
             <br><br>
-            <span field='ww_GHG_avoided'>0</span> &emsp; kg CO<sub>2</sub> eq
+            <span field='ww_GHG_avoided'>0</span> <small>kg CO<sub>2</sub> eq</small>
             <script>
               document.querySelector('span[field=ww_GHG_avoided]').innerHTML=format(Global.Waste.ww_GHG_avoided());
             </script>
@@ -494,10 +494,10 @@
           var t=document.querySelector('table#avoided');
           var GHG_avoided=[
             'wwt_SL_GHG_avoided',
+            'wwt_wr_C_seq_slu',
             'wwd_wr_GHG_avo_d',
             'wwd_SL_ghg_non',
             'wwd_wr_GHG_avo',
-            'wwd_wr_C_seq_slu',
           ];
           t.querySelector('th[rowspan]').rowSpan=GHG_avoided.length+1;
           GHG_avoided.forEach(field=>{

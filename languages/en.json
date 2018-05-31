@@ -55,8 +55,8 @@
   "#wwd_wr_vol_d_descr":"Volume of reused water displacing potable water",
   "#wwd_wr_vol_d_expla":"Volume of reused water displacing potable water",
 
-  "#wwd_wr_C_seq_slu_descr":"GHG emissions avoided due to carbon sequestration from biosolids management",
-  "#wwd_wr_C_seq_slu_expla":"GHG emissions avoided due to carbon sequestration from biosolids management",
+  "#wwt_wr_C_seq_slu_descr":"GHG emissions avoided due to carbon sequestration from biosolids management",
+  "#wwt_wr_C_seq_slu_expla":"GHG emissions avoided due to carbon sequestration from biosolids management",
 
   "#wwd_wr_GHG_avo_N_descr":"GHG emissions avoided due to Nitrogen recovery",
   "#wwd_wr_GHG_avo_N_expla":"GHG emissions avoided due to Nitrogen recovery displacing synthetic fertilizer use",

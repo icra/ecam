@@ -384,6 +384,7 @@ var Questions={
 				"wwt_KPI_sludg_prod",
 				"wwt_KPI_dry_sludge",
 				"wwt_KPI_GHG_slu",
+        "wwt_wr_C_seq_slu",
 			],
 			advanced:1,
 			otherQuestions:[
@@ -530,7 +531,6 @@ var Questions={
         "wwd_wr_adnrg",
         "wwd_wr_vol_d",
         "wwd_SL_ghg_non",   //output
-        "wwd_wr_C_seq_slu", //output
         "wwd_wr_GHG_avo_N", //output
         "wwd_wr_GHG_avo_P", //output
         "wwd_wr_GHG_avo",   //output

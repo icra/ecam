@@ -124,9 +124,9 @@ Level3.list=[
   "wwt_slu_comp_C_seq",
   "wwt_slu_app_C_seq",
   "wwt_slu_land_C_seq",
+  "wwt_wr_C_seq_slu",
 
 	//wwd
-  "wwd_wr_C_seq_slu", //water reuse
   "wwd_wr_GHG_avo_N", //water reuse
   "wwd_wr_GHG_avo_P", //water reuse
   "wwd_wr_GHG_avo",   //water reuse
