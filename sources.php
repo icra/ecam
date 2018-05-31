@@ -320,7 +320,9 @@
               <?php write("#highest emission")?>
             </span>
           <tr><th rowspan=9 style="font-weight:bold;background:#2b6488;color:white">
-            <?php write('#TOTAL GHG')?>
+            <a href="variable.php?id=TotalGHG" style=color:white>
+              <?php write('#TOTAL GHG')?>
+            </a>
             <br><br><span field=TotalGHG>
             <?php write("#Loading")?>...
           </span>
@@ -374,7 +376,9 @@
               padding:1em;
             ">
               <div>
-                <?php write('#ww_KPI_GHG_unt_descr')?>
+                <a href="variable.php?id=ww_KPI_GHG_unt" style=color:white>
+                  <?php write('#ww_KPI_GHG_unt_descr')?>
+                </a>
               </div>
               <div field=ww_KPI_GHG_unt></div>
             </div>
@@ -445,18 +449,16 @@
             (kg CO<sub>2</sub> eq)
           </th>
           <td>
-            <?php write("#ww_SL_ghg_unc_descr")?>
-          (<a href=variable.php?id=ww_SL_ghg_unc>ww_SL_ghg_unc</a>)
+            <a href=variable.php?id=ww_SL_ghg_unc><?php write("#ww_SL_ghg_unc_descr")?></a>
           <td field=ww_SL_ghg_unc></td>
         </tr>
         <tr>
           <td>
-            <?php write("#ww_SL_ghg_ons_descr")?>
-            (<a href=variable.php?id=ww_SL_ghg_ons>ww_SL_ghg_ons</a>)
+            <a href=variable.php?id=ww_SL_ghg_ons><?php write("#ww_SL_ghg_ons_descr")?></a>
           <td field=ww_SL_ghg_ons></td>
         </tr>
       </table>
-      <b><?php write('#Note: the emissions above have not been added in the totals presented in the GHG emissions summary')?></b>
+      <b><small><?php write('#Note: the emissions above have not been added in the totals presented in the GHG emissions summary')?></small></b>
       <script>
         document.querySelector('td[field=ww_SL_ghg_unc]').innerHTML=format(Global.Waste.ww_SL_ghg_unc());
         document.querySelector('td[field=ww_SL_ghg_ons]').innerHTML=format(Global.Waste.ww_SL_ghg_unc());
@@ -471,13 +473,18 @@
       <table id=avoided style="width:95%;margin:1.5em 0">
         <tr>
           <th rowspan style=background:green>
-            <?php write("#GHG emissions")?> avoided
-            <br>
-            (kg CO<sub>2</sub> eq)
+            <a href="variable.php?id=ww_GHG_avoided" style=color:white>
+              <?php write("#ww_GHG_avoided_descr")?>
+            </a>
+            <br><br>
+            <span field='ww_GHG_avoided'>0</span> &emsp; kg CO<sub>2</sub> eq
+            <script>
+              document.querySelector('span[field=ww_GHG_avoided]').innerHTML=format(Global.Waste.ww_GHG_avoided());
+            </script>
           </th>
         </tr>
       </table>
-      <b><?php write('#Note: the emissions above have not been added in the totals presented in the GHG emissions summary')?></b>
+      <b><small><?php write('#Note: the emissions above have not been added in the totals presented in the GHG emissions summary')?></small></b>
       <style>
         table#avoided td[field] {text-align:right}
       </style>
@@ -491,14 +498,16 @@
             'wwd_SL_ghg_non',
             'wwd_wr_GHG_avo',
             'wwd_wr_C_seq_slu',
-            'ww_GHG_avoided',
           ];
           t.querySelector('th[rowspan]').rowSpan=GHG_avoided.length+1;
           GHG_avoided.forEach(field=>{
             var newRow=t.insertRow(-1);
             var newCell=newRow.insertCell(-1);
-            newCell.innerHTML=translate(field+'_descr').replace(/^GHG emissions avoided/,'')+
-              "<br>(<a href='variable.php?id="+field+"'>"+field+"</a>)";
+            newCell.innerHTML=(function(){
+              var name=translate(field+'_descr').replace(/^GHG emissions avoided/,'');
+              var rv= "<a href='variable.php?id="+field+"'>"+name+"</a>";
+              return rv;
+            })();
             var newCell=newRow.insertCell(-1);
             newCell.setAttribute('field',field);
             newCell.innerHTML=format(getVariable(field));

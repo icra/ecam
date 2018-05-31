@@ -138,15 +138,6 @@
         })();
       }
 
-      //Is "id" level 3 specific?
-      if(Level3.list.indexOf(id)>-1) {
-        newRow=t.insertRow(-1)
-        newCell=newRow.insertCell(-1)
-        newCell.className='th'
-        newCell.innerHTML="<?php write('#variable_advanced')?>"
-        newRow.insertCell(-1).innerHTML="YES";
-      }
-
       //if output: show inputs involved
       if(typeof(currentStage[id])=="function") {
         //add a row with matched variables in formula
@@ -405,6 +396,15 @@
 
         return ret.outerHTML;
       })();
+
+      //Is "id" level 3 specific?
+      if(Level3.list.indexOf(id)>-1) {
+        newRow=t.insertRow(-1)
+        newCell=newRow.insertCell(-1)
+        newCell.className='th'
+        newCell.innerHTML="<?php write('#variable_advanced')?>"
+        newRow.insertCell(-1).innerHTML="YES";
+      }
 
       //If input:is used in benchmarking?
       if(typeof(currentStage[id])=='number') {
