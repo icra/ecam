@@ -15,13 +15,13 @@ var Info = {
   wwt_slu_comp_C_seq: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   wwt_slu_app_C_seq:  {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   wwt_slu_land_C_seq: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  wwt_wr_C_seq_slu:   {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
 
   //wate reuse
   wwd_wr_N_rec:     {magnitude:"Mass",   unit:"kg"},
   wwd_wr_P_rec:     {magnitude:"Mass",   unit:"kg"},
   wwd_wr_adnrg:     {magnitude:"Energy", unit:"kWh"},
   wwd_wr_vol_d:     {magnitude:"Volume", unit:"m3"},
-  wwd_wr_C_seq_slu: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
   wwd_wr_GHG_avo_N: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
   wwd_wr_GHG_avo_P: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
   wwd_wr_GHG_avo:   {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},

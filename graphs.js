@@ -185,11 +185,11 @@ Graphs.ghg_by_source=function(withTable,container) {
 
   //data
   var DATA=[
-    ['variable','emission'],
-    ['Electricity',elec],
-    ['CO2',co2],
-    ['N2O',n2o],
-    ['CH4',ch4],
+    ['variable', 'emission'],
+    [translate('Electricity'), elec],
+    ['CO2', co2],
+    ['N2O', n2o],
+    ['CH4', ch4],
   ];
 
   //array graph data
@@ -210,9 +210,9 @@ Graphs.ghg_by_source=function(withTable,container) {
   con.ondblclick=function(){
     var a=document.createElement('a');
     document.body.appendChild(a);
-    a.href=chart.getImageURI()
-    a.download="image.png"
-    a.click()
+    a.href=chart.getImageURI();
+    a.download="image.png";
+    a.click();
   }
 
   //draw
@@ -253,7 +253,7 @@ Graphs.ghg_by_source=function(withTable,container) {
     div.innerHTML=table;
     document.getElementById(container).appendChild(div);
   }
-  scrollToItem(container)
+  scrollToItem(container);
 }
 
 //GHG 'By source (detailed)'
@@ -647,13 +647,13 @@ Graphs.graph4=function(withTable,container) {
 
   //names
   var names=[
-    "WS Abstraction",
-    "WS Treatment",
-    "WS Distribution",
-    "WW Collection",
-    "WW Treatment",
-    "WW Discharge",
-    "Untreated WW",
+    "WS "+translate("Abstraction"),
+    "WS "+translate("Treatment"),
+    "WS "+translate("Distribution"),
+    "WW "+translate("Collection"),
+    "WW "+translate("Treatment"),
+    "WW "+translate("Discharge"),
+    translate("ww_KPI_GHG_unt_descr"),
   ];
 
   //actual graph data

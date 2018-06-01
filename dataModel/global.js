@@ -173,10 +173,13 @@ var Global = {
       wsd_KPI_nrg_per_vd:function(){return this.wsd_nrg_cons/this.wsd_vol_dist},
       wsd_KPI_nrg_per_m3:function(){return this.wsd_nrg_cons/this.wsd_auth_con},
       wsd_SL_nr_water:function(){return 100*(this.wsd_vol_dist-this.wsd_bill_con)/this.wsd_vol_dist;},
-      wsa_SL_GHG_nrw:function(){return (Global.Water.Abstraction.wsa_KPI_GHG() * (this.wsd_vol_dist - this.wsd_bill_con) / Global.Water.Abstraction.wsa_vol_conv)},
-      wst_SL_GHG_nrw:function(){return (Global.Water.Treatment.wst_KPI_GHG() * (this.wsd_vol_dist - this.wsd_bill_con) / Global.Water.Treatment.wst_vol_trea)},
-      wsd_SL_GHG_nrw:function(){return (this.wsd_KPI_GHG() * (this.wsd_vol_dist - this.wsd_bill_con) / this.wsd_vol_dist)},
+
+      wsa_SL_GHG_nrw:function(){return (Global.Water.Abstraction.wsa_KPI_GHG() * (this.wsd_vol_dist - this.wsd_auth_con) / Global.Water.Abstraction.wsa_vol_conv)},
+      wst_SL_GHG_nrw:function(){return (Global.Water.Treatment.wst_KPI_GHG() * (this.wsd_vol_dist - this.wsd_auth_con) / Global.Water.Treatment.wst_vol_trea)},
+
+      wsd_SL_GHG_nrw:function(){return (this.wsd_KPI_GHG() * (this.wsd_vol_dist - this.wsd_auth_con) / this.wsd_vol_dist)},
       wsd_SL_ghg_attr:function(){return this.wsa_SL_GHG_nrw()+this.wst_SL_GHG_nrw()+this.wsd_SL_GHG_nrw()},
+
       wsd_SL_water_loss:function(){return 100*(this.wsd_vol_dist-this.wsd_auth_con)/this.wsd_vol_dist;},
       //fuel engines?
       "wsd_fuel_typ":0,
@@ -287,10 +290,10 @@ var Global = {
     ww_untr_pop:   function(){return Math.max(0,this.ww_conn_pop()-this.ww_serv_pop())},
 
     ww_GHG_avoided : function(){//<br>
-      return this.Treatment.wwt_SL_GHG_avoided()+//<br>
-      this.Discharge.wwd_wr_GHG_avo_d()+       //<br>
-      this.Discharge.wwd_SL_ghg_non()+         //<br>
-      this.Discharge.wwd_wr_C_seq_slu();
+      return this.Treatment.wwt_SL_GHG_avoided()+ //<br>
+      this.Discharge.wwd_wr_GHG_avo_d()+          //<br>
+      this.Discharge.wwd_SL_ghg_non()+            //<br>
+      this.Treatment.wwt_wr_C_seq_slu();
     },
 
     //energy costs related
@@ -438,6 +441,12 @@ var Global = {
       wwt_slu_disp:0,
       wwt_KPI_sludg_prod:function(){return this.wwt_mass_slu/this.wwt_vol_trea},
       wwt_KPI_dry_sludge:function(){return 100*this.wwt_dryw_slu/this.wwt_mass_slu},
+      wwt_wr_C_seq_slu:function(){//<br>
+        return this.wwt_slu_comp_C_seq()+//<br>
+        this.wwt_slu_app_C_seq()+//<br>
+        this.wwt_slu_land_C_seq();
+      },
+
       //storage
       wwt_mass_slu_sto:0,
       wwt_time_slu_sto:0,
@@ -655,11 +664,6 @@ var Global = {
       "wwd_wr_P_rec":0, //P recovered
       "wwd_wr_adnrg":0, //additional energy
       "wwd_wr_vol_d":0, //volume of reused water displacing potable water
-      wwd_wr_C_seq_slu:function(){//<br>
-        return Global.Waste.Treatment.wwt_slu_comp_C_seq()+//<br>
-        Global.Waste.Treatment.wwt_slu_app_C_seq()+//<br>
-        Global.Waste.Treatment.wwt_slu_land_C_seq();
-      },
 
       wwd_wr_GHG_avo_N: function(){ return this.wwd_wr_N_rec*4; },
       wwd_wr_GHG_avo_P: function(){ return this.wwd_wr_P_rec*2; },
@@ -753,6 +757,7 @@ var Global = {
 
     //auxiliar object to store user selections
     Selected: {
+      wwt_ch4_efac:"",
       prot_con:"Albania",//country selected for protein consumption
       sludge_estimation_method:"0",
       gwp_reports_index:0,
@@ -779,7 +784,6 @@ var Global = {
 };
 
 //this block is a fix for wrapper equations, so they don't appear incorrectly at variable.php
-//problem: the formula does not appear correctly in export.php TODO
 Global.Water.wsa_KPI_GHG=function(){return Global.Water.Abstraction.wsa_KPI_GHG()};
 Global.Water.wst_KPI_GHG=function(){return Global.Water.Treatment.wst_KPI_GHG()};
 Global.Water.wsd_KPI_GHG=function(){return Global.Water.Distribution.wsd_KPI_GHG()};

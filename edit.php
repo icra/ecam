@@ -407,10 +407,10 @@
     }
   </script>
 </head><body onload=init()><center>
-<?php include'sidebar.php'?>
-<?php include'navbar.php'?>
-<?php include'linear.php'?>
-<?php include'caption.php'?>
+<?php include 'sidebar.php'?>
+<?php include 'navbar.php' ?>
+<?php include 'linear.php' ?>
+<?php include 'caption.php'?>
 
 <!--title-->
 <?php
@@ -650,8 +650,9 @@
               <?php write('#GHG emissions')?>
             <tr>
               <th><?php write('#Origin')?>
-              <th>kg CO<sub>2</sub><br>assessment period
-              <th>kg CO<sub>2</sub><br>per <?php write('#year')?><br>per serv.pop
+              <th>kg CO<sub>2</sub><br><?php write('#assessment period')?>
+              <th>kg CO<sub>2</sub><br>per <?php write('#year')?>
+                <br>per <?php write('#serv.pop.')?>
               <th>kg CO<sub>2</sub><br>per m<sup>3</sup>
             <tr><td style=color:#ccc colspan=6>
               <?php write('#Loading')?>...
