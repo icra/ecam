@@ -707,12 +707,13 @@
     &mdash;
     <a href=substages.php><?php write('#Overview')?></a>
 
-    <!--button toggle outputs/graph display-->
+    <!--button toggle outputs/graph display
     <button class=btn_toggle
       onclick="this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#substages','#substageGraphs')"
     >
       <?php write('#VIEW GRAPH')?>
     </button>
+    -->
   </div>
 
   <!--substages table container-->
