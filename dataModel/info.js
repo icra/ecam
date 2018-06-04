@@ -326,6 +326,8 @@ var Info = {
 	wwt_KPI_GHG_tre:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwt_KPI_GHG_biog:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
+  wwt_GHG_tre_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},//input
+
 	//sludge mgmt
 	wwt_fuel_dig:{magnitude:"Volume",unit:"L"},
 	wwt_mass_slu_app:{magnitude:"Mass",unit:"kg"},

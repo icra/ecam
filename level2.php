@@ -150,12 +150,11 @@
     /*new row*/
     var newRow=t.insertRow(-1);
     newRow.setAttribute('field',code);
+
     //question it belongs to
     if(question) {
       newRow.setAttribute('question',question)
-      if(Expanded[question]==0) {
-        newRow.style.display='none';
-      }
+      if(Expanded[question]==0) { newRow.style.display='none'; }
     }
 
     /*1st cell: show code and description*/
@@ -183,7 +182,7 @@
         var value=parseInt(Tables[code][op].value);
         select.appendChild(option);
         option.value=value;
-        option.innerHTML="("+value+") "+op;
+        option.innerHTML="("+value+") "+translate(op);
         if(CurrentLevel[code]==value) { option.selected=true; }
       }
     })();

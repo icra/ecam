@@ -1,19 +1,13 @@
 //Data structure for tabled values or dropdown menus
 var Tables = {
 	//fuel types
-	"Fuel types": //EFxxx: [kg/TJ], NCV: [TJ/Gg], FD: [kg/L].
-	{
+	"Fuel types": {             //EFxxx: [kg/TJ], NCV: [TJ/Gg], FD: [kg/L].
 		"Diesel"          :{value:0,EFCH4:{engines:3,vehicles:3.9},EFN2O:{engines:0.6,vehicles:3.9},EFCO2:74100,FD:0.84,NCV:43.0},
 		"Gasoline/Petrol" :{value:1,EFCH4:{engines:3,vehicles:3.8},EFN2O:{engines:0.6,vehicles:1.9},EFCO2:69300,FD:0.74,NCV:44.3},
 		"Natural Gas"     :{value:2,EFCH4:{engines:10,vehicles:92},EFN2O:{engines:0.1,vehicles:0.2},EFCO2:56100,FD:0.75,NCV:48.0},
 	},
 
 	//wsa
-	"wsa_watr_src":{
-		"Groundwater":{value:0},
-		"Surface":{value:1},
-		"Rainwater":{value:2},
-	},
 	"wsa_pmp_type":{
 		"None":{value:0},
 		"External":{value:1},
@@ -68,21 +62,23 @@ var Tables = {
 
 	//wwt
 	"wwt_type_tre":{
-		"Activated Sludge - Well managed":{value:0,               ch4_efac:0,     bod_rmvd_as_sludge_estm:0.65},
 		"Activated Sludge - Minor poorly aerated zones":{value:1, ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
-		"Activated Sludge - Some aerated zones":{value:2,         ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.65},
 		"Activated Sludge - Not well managed":{value:3,           ch4_efac:0.18,  bod_rmvd_as_sludge_estm:0.65},
+		"Activated Sludge - Some aerated zones":{value:2,         ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.65},
+		"Activated Sludge - Well managed":{value:0,               ch4_efac:0,     bod_rmvd_as_sludge_estm:0.65},
 		"Aerated Lagoon":{value:4,                                ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
 		"Anaerobic Lagoon <2m depth":{value:5,                    ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.30},
 		"Anaerobic Lagoon >2m depth":{value:6,                    ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
 		"Anaerobic Lagoon covered":{value:7,                      ch4_efac:0,     bod_rmvd_as_sludge_estm:0.10},
 		"Trickling Filter":{value:8,                              ch4_efac:0.036, bod_rmvd_as_sludge_estm:0.65},
-		"UASB - CH4 recovery not considered":{value:9,            ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
 		"UASB - CH4 recovery considered":{value:10,               ch4_efac:0.0,   bod_rmvd_as_sludge_estm:0.10},
-		"Wetlands - Surface flow":{value:11,                      ch4_efac:0.24,  bod_rmvd_as_sludge_estm:0.30},
+		"UASB - CH4 recovery not considered":{value:9,            ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
 		"Wetlands - Horizontal subsurface flow":{value:12,        ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
+		"Wetlands - Surface flow":{value:11,                      ch4_efac:0.24,  bod_rmvd_as_sludge_estm:0.30},
 		"Wetlands - Vertical subsurface flow":{value:13,          ch4_efac:0.006, bod_rmvd_as_sludge_estm:0.65},
+    "Imhoff tank":{value:14,                                  ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
 	},
+
 	"wwt_main_tre":{
 		"Activated sludge":{value:0},
 		"Aerated Lagoon":{value:1},
@@ -136,7 +132,7 @@ Tables.wwd_trck_typ=Tables["Fuel types"]; //trucks
 Tables.wwt_dige_typ=Tables["Fuel types"]; //type of fuel dig
 Tables.wwt_appl_typ=Tables["Fuel types"]; //type of fuel app
 
-//find the option (string) by field (string) and value (float)
+//find the option (string) by field (string) and value (float or int)
 Tables.find=function(field,value) {
 	for(var option in Tables[field]) {
 		if(value==Tables[field][option].value) {

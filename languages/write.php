@@ -22,7 +22,7 @@ function write($id){
   if($lang=="null") { echo "[$id]"; }
   else {
     //find text or display [not found]
-    $text = isset($lang_json[$id]) ? $lang_json[$id] : "['$id' tag missing in '$lang' language]";
+    $text = isset($lang_json[$id]) ? $lang_json[$id] : "[$id]";
     echo $text;
   }
 }

@@ -241,7 +241,13 @@
               var value = parseInt(Tables[code][op].value);
               select.appendChild(option);
               option.value=value;
-              option.innerHTML="("+value+") "+op;
+
+              option.innerHTML=(function(){
+                var translated=translate(op);
+                //if(translated=="[#"+op+"]"){ translated=op; } //helps finding not translated tags
+                return "("+value+") "+translated;
+              })();
+
               if(substages[s][code]==value){
                 option.selected=true;
               }
@@ -374,7 +380,7 @@
           var value=parseInt(Tables[code][op].value);
           select.appendChild(option);
           option.value=value;
-          option.innerHTML="("+value+") "+op;
+          option.innerHTML="("+value+") "+translate(op);
           if(CurrentLevel[code]==value){option.selected=true;}
         }
       })();
