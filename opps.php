@@ -324,6 +324,7 @@
             var tmpl = document.getElementById('opps-body-template').content.cloneNode(true);
             var title = tmpl.getElementById('opps-body-title');
             title.style.background = (val.type.toString().substring(0,2) === 'ws') ? "#00adef" : "#d71d24";
+            title.style.color      = (val.type.toString().substring(0,2) === 'ws') ? "" : "white";
             title.innerHTML = val.title;
 
             var ghg = tmpl.getElementById('opps-body-ghg');
@@ -349,6 +350,7 @@
           var title = tmpl.getElementById('stage-body-title');
 
           title.style.background = (val.type.toString().substring(0,2) === 'ws') ? "#00adef" : "#d71d24";
+          title.style.color      = (val.type.toString().substring(0,2) === 'ws') ? "" : "white";
           title.innerText = val.title;
 
           var ghg = tmpl.getElementById('stage-body-ghg');
@@ -384,6 +386,7 @@
 
             var title = tmpl.getElementById('measure-body-title');
             title.style.background = (val.type.toString().substring(0,2) === 'ws') ? "#00adef" : "#d71d24";
+            title.style.color      = (val.type.toString().substring(0,2) === 'ws') ? "" : "white";
             title.innerHTML = val.title;
 
             var input = tmpl.getElementById('measure-body-input');

@@ -35,11 +35,11 @@ var Questions={
 
 		"wsa_pumping":{
 			variables:[
-				"wsa_pmp_type",
-				"wsa_pmp_size",
 				"wsa_nrg_pump",
 				"wsa_vol_pump",
-				"wsa_pmp_head",
+        "wsa_pmp_head",
+        "wsa_pmp_type",
+        "wsa_pmp_size",
 				"wsa_sta_head",
 				"wsa_main_len",
         "wsa_nrg_per_pmp_watr",
@@ -95,8 +95,8 @@ var Questions={
 
 		"wst_pumping_eff":{
 			variables:[
-				"wst_vol_pump",
 				"wst_nrg_pump",
+        "wst_vol_pump",
 				"wst_pmp_head",
 				"wst_KPI_std_nrg_cons",
 			],
@@ -190,10 +190,10 @@ var Questions={
 
 		"wsd_pumping":{
 			variables:[
-				"wsd_pmp_size",
 				"wsd_nrg_pump",
 				"wsd_vol_pump",
 				"wsd_pmp_head",
+        "wsd_pmp_size",
 				"wsd_sta_head",
 				"wsd_main_len",
 				"wsd_KPI_std_nrg_cons",
@@ -366,8 +366,8 @@ var Questions={
 
 		"wwt_pumping_eff":{
 			variables:[
-				"wwt_vol_pump",
 				"wwt_nrg_pump",
+        "wwt_vol_pump",
 				"wwt_pmp_head",
 				"wwt_KPI_nrg_per_pump",
 				"wwt_KPI_std_nrg_cons",
@@ -515,8 +515,8 @@ var Questions={
 
 		"wwd_pumping":{
 			variables:[
-				"wwd_vol_pump",
 				"wwd_nrg_pump",
+        "wwd_vol_pump",
 				"wwd_pmp_head",
 				"wwd_KPI_std_nrg_cons",
 			],
