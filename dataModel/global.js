@@ -291,9 +291,10 @@ var Global = {
 
     ww_GHG_avoided : function(){//<br>
       return this.Treatment.wwt_SL_GHG_avoided()+ //<br>
+      this.Treatment.wwt_wr_C_seq_slu()+          //<br>
       this.Discharge.wwd_wr_GHG_avo_d()+          //<br>
       this.Discharge.wwd_SL_ghg_non()+            //<br>
-      this.Treatment.wwt_wr_C_seq_slu();
+      this.Discharge.wwd_wr_GHG_avo();            //<br>
     },
 
     //energy costs related
