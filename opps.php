@@ -291,7 +291,7 @@
             "title" : "Biogas Production / Recovery (MUST ENTER cubic meters of additional biogas production & recovery desired, not percent)",
             "dper" : function() { return Global.Opps.g_ww_biogas_dper; },
             "ghg_em" : function(percent,i) {
-              opps.g_ww_biogas_opps_em = (Global.Waste.Treatment.wwt_nrg_cons - (percent * 2)) * Global.General.conv_kwh_co2;
+              opps.g_ww_biogas_opps_em = ((percent * 2)) * Global.General.conv_kwh_co2;
               var total_nrw = Global.General.TotalGHG() - opps.g_ww_biogas_opps_em;
               var total_nrw_percent = ((Global.General.TotalGHG() - total_nrw) / Global.General.TotalGHG()) * 100;
               document.querySelector('#measure-body-reduction' + '-'.concat(i)).innerHTML = format(opps.g_ww_biogas_opps_em);
