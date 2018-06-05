@@ -1,7 +1,7 @@
 {
   
   "#wwt_GHG_tre_n2o_descr":"N<sub>2</sub>O emissions from treatment process (correction factor)",
-  "#wwt_GHG_tre_n2o_expla":"N<sub>2</sub>O emissions from treatment process (correction factor: can be positive or negative)",
+  "#wwt_GHG_tre_n2o_expla":"N<sub>2</sub>O emissions from treatment process (correction factor: can be positive or negative). If you have country-specific or site-specific emission factors from actual measurements, you can calculate the emissions based on these factors and then using the correction factor, either add or subtract the difference between your emissions and those calculated by ECAM based on the IPCC generic emission factor. The emissions calculated by ECAM will automatically be updated based on the value you enter to correct the emissions.",
   
   "#Imhoff tank":"Imhoff tank",
   "#Diesel":"Diesel",

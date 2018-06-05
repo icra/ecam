@@ -33,11 +33,6 @@ var Exceptions = {
       wwt_ch4_efac[treatment]=Tables.wwt_type_tre[treatment].ch4_efac;
     }
 
-    //initial option "--select treatment--"
-    var option = document.createElement('option');
-    select.appendChild(option);
-    option.innerHTML="--"+translate("select treatment")+"--";
-
     //go over treatment types
     for(var treatment in wwt_ch4_efac) {
       var option=document.createElement('option');

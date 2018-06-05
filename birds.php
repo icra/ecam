@@ -362,17 +362,6 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
           </tr>
         </tr>
       </table>
-
-      <!--reset all Treatment estimations-->
-      <div style="padding:0.5em 1em;display:none">
-        <button onclick="resetTierB()" disabled>Reset all Tier B values (TBD)</button>
-        <script>
-          //TODO issue #94
-          function resetTierB(){
-            init();
-          }
-        </script>
-      </div>
     </div>
 
     <!--prev next btns container-->
@@ -408,6 +397,79 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
       </script>
       <button class="button prev" onclick="window.location='inhabitants.php'"><?php write('#previous')?></button><!--
       --><button class="button next" onclick=nextPage(event)><?php write('#next')?></button>
+    </div>
+
+    <!--reset tier b-->
+    <div style="padding:0.5em 1em;text-align:center">
+      <button id=resetTierB onclick="resetTierB()">
+         Reset Tier B stage level
+      </button>
+      <script>
+        //TODO issue #94
+        function resetTierB(){
+          var TierA=[
+            //population
+              'wwc_conn_pop',
+              'wwt_serv_pop',
+            //energy consumed
+              'wsa_nrg_cons',
+              'wst_nrg_cons',
+              'wsd_nrg_cons',
+              'wwc_nrg_cons',
+              'wwt_nrg_cons',
+              'wwd_nrg_cons',
+            //fuel from engines consumed
+              'wsa_vol_fuel',
+              'wst_vol_fuel',
+              'wsd_vol_fuel',
+              'wwc_vol_fuel',
+              'wwt_vol_fuel',
+              'wwd_vol_fuel',
+            //water injected to distribution
+              'wsd_vol_dist',
+            //running costs
+              'ws_run_cost',
+              'ws_nrg_cost',
+              'ww_run_cost',
+              'ww_nrg_cost',
+            //volume of treated wastewater
+              'wwt_vol_trea',
+            //volume of discharged wastewater
+              'wwd_vol_disc',
+              'wwd_n2o_effl',
+          ];
+
+          [
+            Global.Water.Abstraction,
+            Global.Water.Treatment,
+            Global.Water.Distribution,
+            Global.Waste.Collection,
+            Global.Waste.Treatment,
+            Global.Waste.Discharge,
+          ].forEach(stage=>{
+            Object.keys(stage)
+              .filter(key=>{return typeof(stage[key])=='number'})
+              .filter(key=>{return TierA.indexOf(key)==-1})
+              .forEach(key=>{
+                //console.log(key);
+                stage[key]=0;
+            });
+          });
+
+          //biogas set to "No"
+          document.querySelector('input[name=wwt_producing_biogas][type=radio][value="0"]').dispatchEvent(new CustomEvent('click'));
+
+          //sludge disposal method set to 'None'
+          Global.Configuration.Selected.sludge_estimation_method="0";
+          document.querySelector('#sludge_estimation').value=0;
+
+          init();
+        }
+      </script>
+      <style>
+        button#resetTierB {
+        }
+      </style>
     </div>
   </div>
 
@@ -529,7 +591,7 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
         if(n && sum>0){
           td.classList.add('locked');
           input.disabled=true;
-          td.parentNode.setAttribute('caption','Since you have entered more detailed data in Tier B stages, you cannot modify this input.<br>Now it displays the sum of its related '+translate(level)+' stage\'s inputs. If you still want to modify it, please set its related inputs to 0');
+          td.parentNode.setAttribute('caption','Since you have entered more detailed data in Tier B stages, you cannot modify this input.<br>Now it displays the sum of its related '+translate(level)+' stage\'s inputs. If you still want to modify it, please set its related inputs to 0 in Tier B');
         }
       });
     });
