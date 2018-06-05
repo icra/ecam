@@ -1,7 +1,7 @@
 {
   
-  "#wwt_GHG_tre_n2o_descr":"N<sub>2</sub>O emissions from treatment process (in kgCO2eq) (leave 0 if unknown)",
-  "#wwt_GHG_tre_n2o_expla":"N<sub>2</sub>O emissions from treatment process (in kgCO2eq) (leave 0 if unknown)",
+  "#wwt_GHG_tre_n2o_descr":"N<sub>2</sub>O emissions from treatment process (correction factor)",
+  "#wwt_GHG_tre_n2o_expla":"N<sub>2</sub>O emissions from treatment process (correction factor: can be positive or negative)",
   
   "#Imhoff tank":"Imhoff tank",
   "#Diesel":"Diesel",
