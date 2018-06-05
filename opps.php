@@ -260,7 +260,7 @@
             }
           },
           { "type" : "ww",
-            "title" : "Sludge disposal reduction*",
+            "title" : "Sludge disposal reduction",
             "dper" : function() { return Global.Opps.g_ww_slu_dper; },
             "ghg_em" : function(percent,i) {
               opps.g_ww_slu_opps_em = ((percent / 100) * opps.g_ww_slu_opps);

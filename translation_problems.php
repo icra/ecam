@@ -53,7 +53,7 @@
           echo "<ul>
             <li>$file1: $f1 lines
             <li>$file2: $f2 lines 
-            &larr; probably has ".abs($f2-$f1)." duplicates. Paste the <a target=_blank href='languages/$lang.json'>$lang.json</a> file <a target=_blank href='https://jsonformatter.curiousconcept.com/'>here</a> to find them.
+            <li> Paste the <a target=_blank href='languages/$lang.json'>$lang.json</a> file <a target=_blank href='https://jsonformatter.curiousconcept.com/'>here</a> to find duplicates.
           </ul>
           ";
         }else{
@@ -73,7 +73,7 @@
 
 <!--problems found-->
 <table style=font-family:monospace>
-  <tr><th>Missing tags in "<?php echo "$lang.json"?>"<th>English Text
+  <tr><th>Missing tags in "<?php echo "$lang.json"?>"<th>English text (currently not translated in "<?php echo "$lang.json"?>")
   <?php
     error_reporting(E_ALL^E_NOTICE);
 
