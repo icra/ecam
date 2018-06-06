@@ -400,76 +400,119 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
     </div>
 
     <!--reset tier b-->
-    <div style="padding:0.5em 1em;text-align:center">
-      <button id=resetTierB onclick="resetTierB()">
-         Reset Tier B stage level
-      </button>
-      <script>
-        //TODO issue #94
-        function resetTierB(){
-          var TierA=[
-            //population
-              'wwc_conn_pop',
-              'wwt_serv_pop',
-            //energy consumed
-              'wsa_nrg_cons',
-              'wst_nrg_cons',
-              'wsd_nrg_cons',
-              'wwc_nrg_cons',
-              'wwt_nrg_cons',
-              'wwd_nrg_cons',
-            //fuel from engines consumed
-              'wsa_vol_fuel',
-              'wst_vol_fuel',
-              'wsd_vol_fuel',
-              'wwc_vol_fuel',
-              'wwt_vol_fuel',
-              'wwd_vol_fuel',
-            //water injected to distribution
-              'wsd_vol_dist',
-            //running costs
-              'ws_run_cost',
-              'ws_nrg_cost',
-              'ww_run_cost',
-              'ww_nrg_cost',
-            //volume of treated wastewater
-              'wwt_vol_trea',
-            //volume of discharged wastewater
-              'wwd_vol_disc',
-              'wwd_n2o_effl',
-          ];
+    <div style="padding:0.5em 1em;">
+      <div class=flex style="justify-content:center">
+        <button id=resetTierB onclick="resetTierB()">
+           Reset Tier A estimations and Tier B stage values
+        </button>
+        <script>
+          //TODO issue #94
+          function resetTierB(){
+            var TierA=[
+              //population
+                'wwc_conn_pop',
+                'wwt_serv_pop',
+              //energy consumed
+                'wsa_nrg_cons',
+                'wst_nrg_cons',
+                'wsd_nrg_cons',
+                'wwc_nrg_cons',
+                'wwt_nrg_cons',
+                'wwd_nrg_cons',
+              //fuel from engines consumed
+                'wsa_vol_fuel',
+                'wst_vol_fuel',
+                'wsd_vol_fuel',
+                'wwc_vol_fuel',
+                'wwt_vol_fuel',
+                'wwd_vol_fuel',
+              //water injected to distribution
+                'wsd_vol_dist',
+              //running costs
+                'ws_run_cost',
+                'ws_nrg_cost',
+                'ww_run_cost',
+                'ww_nrg_cost',
+              //volume of treated wastewater
+                'wwt_vol_trea',
+              //volume of discharged wastewater
+                'wwd_vol_disc',
+                'wwd_n2o_effl',
+            ];
 
-          [
-            Global.Water.Abstraction,
-            Global.Water.Treatment,
-            Global.Water.Distribution,
-            Global.Waste.Collection,
-            Global.Waste.Treatment,
-            Global.Waste.Discharge,
-          ].forEach(stage=>{
-            Object.keys(stage)
-              .filter(key=>{return typeof(stage[key])=='number'})
-              .filter(key=>{return TierA.indexOf(key)==-1})
-              .forEach(key=>{
-                //console.log(key);
-                stage[key]=0;
+            [
+              Global.Water.Abstraction,
+              Global.Water.Treatment,
+              Global.Water.Distribution,
+              Global.Waste.Collection,
+              Global.Waste.Treatment,
+              Global.Waste.Discharge,
+            ].forEach(stage=>{
+              Object.keys(stage)
+                .filter(key=>{return typeof(stage[key])=='number'})
+                .filter(key=>{return TierA.indexOf(key)==-1})
+                .forEach(key=>{
+                  //console.log(key);
+                  stage[key]=0;
+              });
             });
-          });
 
-          //biogas set to "No"
-          document.querySelector('input[name=wwt_producing_biogas][type=radio][value="0"]').dispatchEvent(new CustomEvent('click'));
+            //biogas set to "No"
+            document.querySelector('input[name=wwt_producing_biogas][type=radio][value="0"]').dispatchEvent(new CustomEvent('click'));
 
-          //sludge disposal method set to 'None'
-          Global.Configuration.Selected.sludge_estimation_method="0";
-          document.querySelector('#sludge_estimation').value=0;
+            //sludge disposal method set to 'None'
+            Global.Configuration.Selected.sludge_estimation_method="0";
+            document.querySelector('#sludge_estimation').value=0;
 
-          init();
-        }
-      </script>
-      <style>
-        button#resetTierB {
-        }
-      </style>
+            init();
+          }
+        </script>
+        <style>
+          button#resetTierB {
+            padding:1em 1.6em;
+            border-radius:4px;
+            width:70%;
+          }
+        </style>
+
+        <!--help-->
+        <div class="card folded" style="width:70%">
+          <?php cardMenu("More info on reset button")?>
+          <div style=padding:2px>
+            The reset button does several things:<br>
+
+            <ol>
+              <li>Sets the tier B values to 0, except the tier A ones.
+              <li>Sets "Are you producing biogas?" to "No".
+              <li>Sets "Are you valorizing biogas?" to "No".
+              <li>Sets "Select main treatment tye" to "Activated Sludge - Well managed".
+              <li>Sets "Select sludge disposal method" to "None".
+            </ol>
+
+            All the inputs that have estimations are set to zero:<br>
+            <ul>
+              <li>Biogas produced = 0
+              <li>Percentage of methane in biogas = 0
+              <li>Biogas valorised = 0
+              <li>Biogas flared = 0
+              <li>Influent BOD load = 0
+              <li>Effluent BOD load = 0
+              <li>BOD removed as sludge = 0
+              <li>CH4 emission factor = 0
+              <li>Sludge produced in WWTPs = 0
+              <li>Dry weight in sludge produced = 0
+              <li>Sludge composted = 0
+              <li>Sludge incinerated = 0
+              <li>Sludge sent to land application = 0
+              <li>Sludge sent to landfilling = 0
+              <li>Sludge stockpiled = 0
+              <li>Fluidized Bed Reactor Temperature = 0
+            </ul>
+
+            Then, the estimations can be recalculated clicking again the options for biogas production, treatment type and sludge disposal method.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -520,7 +563,6 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
           <ul>
             <li> <a href='estimations.php'><?php write('#summary_of_estimations_at_this_level')?></a> </li>
             <li> <a href='non_revenue_water.php'><?php write('#about_nrw')?></a> </li>
-            <li> <a href='authorized_consumption.php'><?php write('#about_auc')?></a> </li>
             <li> <a href='fuelInfo.php'><?php write('#about_fuel')?></a> </li>
             <li> <a href=sankey.php><?php write('#sankey_diagram')?></a>
           </ul>
