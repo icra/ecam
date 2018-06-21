@@ -30,6 +30,7 @@
       Global.Configuration['Yes/No'].wwt_land_application=0;
       Global.Configuration['Yes/No'].wwt_landfilling=0;
       Global.Configuration['Yes/No'].wwt_stockpiling=0;
+
       Global.Waste.Treatment.wwt_temp_inc=0; //K Fluidized Bed Reactor Temperature
       //if method==none end
       if(method=="0"){init();return;}

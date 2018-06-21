@@ -42,6 +42,7 @@ Global.Estimations = {
     var type_tre=Tables.find('wwt_type_tre',Global.Waste.Treatment.wwt_type_tre);//<br>
     return Tables.wwt_type_tre[type_tre].ch4_efac;//<br>
   },
+
   estm_wwt_mass_slu:function(){
     var b=1;//<br>
     if(Global.Configuration['Yes/No'].wwt_producing_biogas){//<br>
@@ -64,17 +65,17 @@ Global.Estimations = {
   },
   estm_wwt_mass_slu_app:function(){
     if(Global.Configuration.Selected.sludge_estimation_method=="app")//<br>
-      return this.wwt_dryw_slu();//<br>
+      return this.estm_wwt_dryw_slu();//<br>
     else return 0;
   },
   estm_wwt_mass_slu_land:function(){
     if(Global.Configuration.Selected.sludge_estimation_method=="land")//<br>
-      return this.wwt_dryw_slu();//<br>
+      return this.estm_wwt_dryw_slu();//<br>
     else return 0;
   },
   estm_wwt_mass_slu_stock:function(){
     if(Global.Configuration.Selected.sludge_estimation_method=="stock")//<br>
-      return this.wwt_dryw_slu();//<br>
+      return this.estm_wwt_dryw_slu();//<br>
     else return 0;
   },
   estm_wwt_temp_inc:function(){
