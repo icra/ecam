@@ -1,5 +1,4 @@
 <select id=main_treatment_type style="font-size:smaller"></select>
-
 <script>
   //select treatment type: add options and onchange event listener 
   (function(){
