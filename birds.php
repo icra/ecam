@@ -400,7 +400,7 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
     </div>
 
     <!--reset tier b-->
-    <div style="padding:0.5em 1em;display:none">
+    <div style="padding:0.5em 1em;">
       <div class=flex style="justify-content:center">
         <button id=resetTierB onclick="resetTierB()">
            Reset Tier A estimations and Tier B stage values
@@ -438,8 +438,6 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
               //volume of discharged wastewater
                 'wwd_vol_disc',
                 'wwd_n2o_effl',
-              //treatment type
-                'wwt_type_tre',
             ];
 
             [
@@ -460,18 +458,10 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
             });
 
             //biogas set to "No"
-            //document.querySelector('input[name=wwt_producing_biogas][type=radio][value="0"]').dispatchEvent(new CustomEvent('click'));
+            document.querySelector('input[name=wwt_producing_biogas][type=radio][value="0"]').dispatchEvent(new CustomEvent('click'));
             //sludge disposal method set to 'None'
-            //Global.Configuration.Selected.sludge_estimation_method="0";
-            //document.querySelector('#sludge_estimation').value=0;
-
-            //reapply all estimations
-            Object.keys(Global.Estimations).forEach(key=>{
-              var real_key=key.replace('estm_','');
-              var value=Global.Estimations[key]();
-              console.log(real_key,value);
-              Global.Waste.Treatment[real_key]=value;
-            });
+            Global.Configuration.Selected.sludge_estimation_method="0";
+            document.querySelector('#sludge_estimation').value=0;
 
             init();
           }

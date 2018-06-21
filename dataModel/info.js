@@ -366,6 +366,7 @@ var Info = {
 
 	//L2 Wastewater Discharge
 	wwd_vol_disc:{magnitude:"Volume",unit:"m3"},
+  wwd_total_m3:{magnitude:"Volume",unit:"m3"},
 	wwd_nrg_cons:{magnitude:"Energy",unit:"kWh"},
 	wwd_nrg_pump:{magnitude:"Energy",unit:"kWh"},
 	wwd_vol_pump:{magnitude:"Volume",unit:"m3"},

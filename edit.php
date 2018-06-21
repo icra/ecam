@@ -238,11 +238,32 @@
 
               //determine the field to be highlighted
               var hlfield = (sublevel=='false' || category=='reside' || category=='servic') ? Normalization[level][category] : Normalization[level][sublevel][category];
-              newCell.setAttribute('onmouseover',"Formulas.hlField('"+hlfield+"',1)")
-              newCell.setAttribute('onmouseout',"Formulas.hlField('"+hlfield+"',0)")
-              newCell.innerHTML=(function() {
-                var norm=Normalization.normalize(category,field,level,sublevel);
-                return format(norm);
+
+              //calculate normalized value
+              var norm=Normalization.normalize(category,field,level,sublevel); //value
+
+              /**
+                * EXCEPTION HERE FOR WWD DISCHARGE REUSE (WARNING TODO)
+              */
+              if(field=='wwd_KPI_GHG_tre_n2o' && category=='volume'){
+                hlfield='wwd_vol_disc';
+                norm=value/CurrentLevel[hlfield];
+              }
+              if(field=='wwd_KPI_GHG_trck' && category=='volume'){
+                hlfield='wwd_vol_nonp';
+                norm=value/CurrentLevel[hlfield];
+              }
+
+              //hl related variables
+              newCell.setAttribute('onmouseover',"Formulas.hlField('"+hlfield+"',1)");
+              newCell.setAttribute('onmouseout',"Formulas.hlField('"+hlfield+"',0)");
+              //inner html
+              newCell.innerHTML=(function(){
+                if(category=='volume' && (norm==Infinity || isNaN(norm)) ){
+                  return "N/A";
+                }else{
+                  return format(norm);
+                }
               })();
             });
           })();

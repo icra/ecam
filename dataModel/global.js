@@ -687,6 +687,11 @@ var Global = {
       "wwd_vol_disc":0,
       "wwd_n2o_effl":0,
       "wwd_vol_nonp":0,//Volume of water reused
+
+      "wwd_total_m3":function(){//<br>
+        return this.wwd_vol_disc+this.wwd_vol_nonp;
+      },
+
       wwd_KPI_nrg_per_m3:function(){return this.wwd_nrg_cons/this.wwd_vol_disc||0},
       wwd_SL_ghg_non:function(){return this.wwd_n2o_effl/1000*this.wwd_vol_nonp*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value},
       //fuel engines?

@@ -16,7 +16,7 @@ var Normalization={
     energy:"ww_nrg_cons",
     Collection:{volume:"wwc_vol_conv", energy:"wwc_nrg_cons"},
     Treatment: {volume:"wwt_vol_trea", energy:"wwt_nrg_cons"},
-    Discharge: {volume:"wwd_vol_disc", energy:"wwd_nrg_cons"},
+    Discharge: {volume:"wwd_total_m3", energy:"wwd_nrg_cons"},
   },
 
   /*normalize
