@@ -438,6 +438,8 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
               //volume of discharged wastewater
                 'wwd_vol_disc',
                 'wwd_n2o_effl',
+              //treatment type
+                'wwt_type_tre',
             ];
 
             [
@@ -458,11 +460,11 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
             });
 
             //biogas set to "No"
-            document.querySelector('input[name=wwt_producing_biogas][type=radio][value="0"]').dispatchEvent(new CustomEvent('click'));
+            //document.querySelector('input[name=wwt_producing_biogas][type=radio][value="0"]').dispatchEvent(new CustomEvent('click'));
 
             //sludge disposal method set to 'None'
-            Global.Configuration.Selected.sludge_estimation_method="0";
-            document.querySelector('#sludge_estimation').value=0;
+            //Global.Configuration.Selected.sludge_estimation_method="0";
+            //document.querySelector('#sludge_estimation').value=0;
 
             init();
           }
@@ -485,7 +487,7 @@ style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 
               <li>Sets the tier B values to 0, except the tier A ones.
               <li>Sets "Are you producing biogas?" to "No".
               <li>Sets "Are you valorizing biogas?" to "No".
-              <li>Sets "Select main treatment tye" to "Activated Sludge - Well managed".
+              <li>Sets "Select main treatment tye" to "None".
               <li>Sets "Select sludge disposal method" to "None".
             </ol>
 
