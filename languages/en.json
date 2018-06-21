@@ -1,5 +1,4 @@
 {
-  
   "#wwt_GHG_tre_n2o_descr":"N<sub>2</sub>O emissions from treatment process (correction factor)",
   "#wwt_GHG_tre_n2o_expla":"N<sub>2</sub>O emissions from treatment process (correction factor: can be positive or negative). If you have country-specific or site-specific emission factors from actual measurements, you can calculate the emissions based on these factors and then using the correction factor, either add or subtract the difference between your emissions and those calculated by ECAM based on the IPCC generic emission factor. The emissions calculated by ECAM will automatically be updated based on the value you enter to correct the emissions.",
   
@@ -615,8 +614,8 @@
   "#wsd_KPI_water_losses_expla":"Total water losses (apparent and real), expressed in terms of annual volume lost per mains length",
   "#wsd_SL_cont_sup_descr":"Continuity of supply",
   "#wsd_SL_cont_sup_expla":"Percentage of delivery points (one per service connection) that receive and are likely to receive adequate pressure",
-  "#wsd_SL_ghg_attr_descr":"Total GHG attributable to non revenue water",
-  "#wsd_SL_ghg_attr_expla":"Total GHG attributable to non revenue water",
+  "#wsd_SL_ghg_attr_descr":"Total GHG attributable to water losses",
+  "#wsd_SL_ghg_attr_expla":"Total GHG attributable to water losses",
   "#wsd_SL_nr_water_descr":"Non revenue water",
   "#wsd_SL_nr_water_expla":"Non revenue water includes: water losses + unbilled authorized consumption.<br> See <a href=non_revenue_water.php>non revenue water table</a>",
   "#wsd_SL_pres_ade_descr":"Percentage of supply pressure adequacy",

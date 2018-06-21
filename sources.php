@@ -477,7 +477,7 @@
               <?php write("#ww_GHG_avoided_descr")?>
             </a>
             <br><br>
-            <span field='ww_GHG_avoided'>0</span> <small>kg CO<sub>2</sub> eq</small>
+            <span field='ww_GHG_avoided'>0</span> <small>kg CO<sub>2</sub> eq</small> / <?php write("#assessment period")?>
             <script>
               document.querySelector('span[field=ww_GHG_avoided]').innerHTML=format(Global.Waste.ww_GHG_avoided());
             </script>

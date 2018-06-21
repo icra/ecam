@@ -480,8 +480,6 @@
   "#wsd_KPI_water_losses_expla":"Pérdidas totales de agua (aparentes y reales), expresados en términos de volumen anual perdidas por longitud de red",
   "#wsd_SL_cont_sup_descr":"Continuidad de servicio",
   "#wsd_SL_cont_sup_expla":"Porcentaje de puntos de entrega (uno por conexión de servicio) que reciben y son propensos a recibir la presión adecuada",
-  "#wsd_SL_ghg_attr_descr":"Emisiones GEI atribuibles a Agua No Facturada",
-  "#wsd_SL_ghg_attr_expla":"Emisiones GEI atribuibles a Agua No Fcaturada",
   "#wsd_SL_nr_water_descr":"Agua No Facturada",
   "#wsd_SL_nr_water_expla":"Agua No Facturada incluye: Pérdidas de agua + consumo autorizado no facturado.<br> Ver <a href=non_revenue_water.php> tabla Agua No Facturada </a>",
   "#wsd_SL_pres_ade_descr":"Porcentaje presión adecuada en el suministro",

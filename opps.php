@@ -47,7 +47,7 @@
         "header" : { "title" : "Opportunities", "col1" : "kg CO<sub>2</sub>e reduction <br> per 1% change <br> of current value</th>"},
         "body" : [
           { "type" : "ws",
-            "title" : "Non-revenue water volume",
+            "title" : "Water loss volume",
             "ghg_em" : function() {
               var wsd_kpi_ghg_s = Global.Water.Distribution.wsd_KPI_GHG() / Global.Water.Distribution.wsd_vol_dist;
               var wst_kpi_ghg_s = Global.Water.Treatment.wst_KPI_GHG() / Global.Water.Treatment.wst_vol_trea;
@@ -140,7 +140,7 @@
             }
           },
           { "type" : "ww",
-            "title" : "Biogas Production / Recovery",
+            "title" : "Biogas emissions",
             "ghg_em" : function() {
               var biog_kpi_ghg = (Global.Waste.Treatment.wwt_biog_fla == (null || 0)) ? 0 : (Global.Waste.Treatment.wwt_KPI_GHG_biog() / Global.Waste.Treatment.wwt_biog_fla);
               opps.g_ww_biogas_opps = Global.Waste.Treatment.wwt_biog_fla * biog_kpi_ghg;
@@ -176,7 +176,7 @@
         },
         "body" : [
           { "type" : "ws",
-            "title" : "Non-revenue water reduction",
+            "title" : "Water loss reduction",
             "dper" : function() { return Global.Opps.g_nrw_water_vol_dper; },
             "ghg_em" : function(percent,i) {
               opps.g_nrw_water_vol_opps_em = ((percent / 100) * opps.g_nrw_water_vol_opps);
@@ -451,7 +451,6 @@
     .body-title { text-align: left; }
     .body-ghg { text-align: right; }
   </style>
-
 </head><body onload=init()><center>
 <?php include'sidebar.php'?>
 <?php include'navbar.php'?>
@@ -459,7 +458,6 @@
 
 <div style="textAlign: center">
   <h1>Opportunities to reduce GHG emissions</h1>
-
   <!-- including link to catalogue of solutions -->
   <a href="http://www.iwa-network.org/water-climate-energy-solutions/public/"
     style="font-weight: bold; color: grey;">[Catalogue of Solutions]

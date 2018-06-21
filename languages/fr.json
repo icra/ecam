@@ -476,8 +476,6 @@
   "#wsd_KPI_water_losses_expla":"Pertes d'eau totales (apparentes et réelles), exprimées en termes de volume annuel perdu par longueur de réseau",
   "#wsd_SL_cont_sup_descr":"Continuité d'approvisionnement",
   "#wsd_SL_cont_sup_expla":"Pourcentage de points de livraison (un par raccordement) recevant ou susceptibles de recevoir une pression adéquate",
-  "#wsd_SL_ghg_attr_descr":"Emissions de GES produits par l'eau non rémunérée",
-  "#wsd_SL_ghg_attr_expla":"Emissions de GES produits par l'eau non rémunérée",
   "#wsd_SL_nr_water_descr":"Eau non rémunérée",
   "#wsd_SL_nr_water_expla":"L'eau non rémunérée inclut: les pertes en eau + la consommation authorisée non facturée<br> Voir <a href=non_revenue_water.php>tableau de l'eau non rémunérée</a>",
   "#wsd_SL_pres_ade_descr":"Pourcentage d'adéquation de la pression d'alimentation",
