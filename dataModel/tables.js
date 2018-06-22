@@ -62,7 +62,7 @@ var Tables = {
 
 	//wwt
 	"wwt_type_tre":{
-		"None":{value:0, ch4_efac:0, bod_rmvd_as_sludge_estm:0},
+		"Select":{value:0, ch4_efac:0, bod_rmvd_as_sludge_estm:0},
     "Activated Sludge - Well managed":{value:1,               ch4_efac:0,     bod_rmvd_as_sludge_estm:0.65},
 		"Activated Sludge - Minor poorly aerated zones":{value:2, ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
 		"Activated Sludge - Some aerated zones":{value:3,         ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.65},
