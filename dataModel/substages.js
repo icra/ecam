@@ -12,4 +12,10 @@ var Substages=
 		"Treatment":[],
 		"Discharge":[],
 	},
+  "Faecl":{
+    "Containment":[],
+    "Emptying":[],
+    "Treatment":[],
+    "Reuse":[],
+  },
 }

@@ -148,17 +148,27 @@
 			<tr><td><a href=inhabitants.php>  <?php write('#population')?></a>
 			<tr><td><a href=birds.php>        <?php write('#quick_assessment')?></a>
 			<tr><th><?php write('#energy_performance')?>
-			<tr><td><a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction><?php write('#Abstraction')?></a>
-			<tr><td><a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment><?php write('#Treatment')?></a>
-			<tr><td><a class=water stage=waterDis href=edit.php?level=Water&sublevel=Distribution><?php write('#Distribution')?></a>
-			<tr><td><a class=waste stage=wasteCol href=edit.php?level=Waste&sublevel=Collection><?php write('#Collection')?></a>
-			<tr><td><a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment><?php write('#Treatment')?></a>
-			<tr><td><a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge><?php write('#Discharge')?></a>
+
+      <!--water-->
+			<tr><td><a class=water stage=water    href=edit.php?level=Water><?php write('#Water')?></a>
+			<tr><td><a class=water stage=waterAbs href=edit.php?level=Water&sublevel=Abstraction>  &emsp; <?php write('#Abstraction')?></a>
+			<tr><td><a class=water stage=waterTre href=edit.php?level=Water&sublevel=Treatment>    &emsp; <?php write('#Treatment')?></a>
+			<tr><td><a class=water stage=waterDis href=edit.php?level=Water&sublevel=Distribution> &emsp; <?php write('#Distribution')?></a>
+      <!--waste-->
+			<tr><td><a class=waste stage=waste    href=edit.php?level=Waste><?php write('#Waste')?></a>
+			<tr><td><a class=waste stage=wasteCol href=edit.php?level=Waste&sublevel=Collection> &emsp; <?php write('#Collection')?></a>
+			<tr><td><a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment>  &emsp; <?php write('#Treatment')?></a>
+			<tr><td><a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge>  &emsp; <?php write('#Discharge')?></a>
+      <!--faecl-->
+      <tr><td><a class=faecl stage=faecl    href=edit.php?level=Faecl> Faecal Sludge Management</a>
+      <tr><td><a class=faecl stage=faeclCon href=edit.php?level=Faecl&sublevel=Containment> &emsp; Containment</a>
+      <tr><td><a class=faecl stage=faeclEmp href=edit.php?level=Faecl&sublevel=Emptying>    &emsp; Emptying</a>
+      <tr><td><a class=faecl stage=faeclTre href=edit.php?level=Faecl&sublevel=Treatment>   &emsp; Treatment</a>
+      <tr><td><a class=faecl stage=faeclReu href=edit.php?level=Faecl&sublevel=Reuse>       &emsp; Reuse</a>
+
 			<tr><th><?php write('#summaries')?>
 			<tr><td><a href=sources.php><?php write('#ghg_summary')?></a>
 			<tr><td><a href=energy_summary.php><?php write('#nrg_summary')?></a>
-			<tr><td><a class=water stage=water href=edit.php?level=Water><?php write('#Water')?></a>
-			<tr><td><a class=waste stage=waste href=edit.php?level=Waste><?php write('#Waste')?></a>
 			<tr><td><a href=edit.php?level=UNFCCC><?php write('#unfccc_categories')?></a>
       <tr><td><a href=substages.php><?php write('#all_substages')?></a>
 			<tr><td><a href=summary.php?type=input><?php write('#all_inputs')?></a>

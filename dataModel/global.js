@@ -747,11 +747,36 @@ var Global = {
     },
   },
 
+  //Level 1 FSM structure
+  Faecl:{
+    "fs_input1":0,
+    "fs_input2":0,
+
+    //level 2 stages
+    Containment:{
+      "fsc_input1":1,
+      "fsc_input2":1,
+    },
+    Emptying:{
+      "fse_input1":2,
+      "fse_input2":2,
+    },
+    Treatment:{
+      "fst_input1":3,
+      "fst_input2":3,
+    },
+    Reuse:{
+      "fsr_input1":4,
+      "fsr_input2":4,
+    },
+  },
+
   /**Configuration: custom user preferences*/
   Configuration:{
     ActiveStages:{
       "water":0, "waterAbs":0, "waterTre":0, "waterDis":0,
       "waste":0, "wasteCol":0, "wasteTre":0, "wasteDis":0,
+      "faecl":0, "faeclCon":0, "faeclEmp":0, "faeclTre":0, "faeclReu":0,
     },
 
     //highlight inputs/outputs
@@ -779,15 +804,15 @@ var Global = {
 
   //TODO check what is this? it takes memory!!!
   Opps:{
-    g_nrw_water_vol_dper              :0,
-    g_end_user_consumption_dper       :0,
-    g_water_reuse_dper                :0,
-    g_dw_energy_consumption_dper      :0,
-    g_ww_infl_dper                    :0,
-    g_ww_grid_energy_consumption_dper :0,
-    g_ww_slu_dper                     :0,
-    g_ww_water_reuse_dper             :0,
-    g_ww_biogas_dper                  :0,
+    g_nrw_water_vol_dper              : 0,
+    g_end_user_consumption_dper       : 0,
+    g_water_reuse_dper                : 0,
+    g_dw_energy_consumption_dper      : 0,
+    g_ww_infl_dper                    : 0,
+    g_ww_grid_energy_consumption_dper : 0,
+    g_ww_slu_dper                     : 0,
+    g_ww_water_reuse_dper             : 0,
+    g_ww_biogas_dper                  : 0,
   }
 };
 
