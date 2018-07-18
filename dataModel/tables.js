@@ -72,7 +72,7 @@ var Tables = {
 		"Anaerobic Lagoon >2m depth":{value:7,                    ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
 		"Anaerobic Lagoon covered":{value:8,                      ch4_efac:0,     bod_rmvd_as_sludge_estm:0.10},
 		"Trickling Filter":{value:9,                              ch4_efac:0.036, bod_rmvd_as_sludge_estm:0.65},
-		"UASB - CH4 recovery not considered":{value:10,            ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
+		"UASB - CH4 recovery not considered":{value:10,           ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
     "UASB - CH4 recovery considered":{value:11,               ch4_efac:0.0,   bod_rmvd_as_sludge_estm:0.10},
 		"Wetlands - Surface flow":{value:12,                      ch4_efac:0.24,  bod_rmvd_as_sludge_estm:0.30},
     "Wetlands - Horizontal subsurface flow":{value:13,        ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},

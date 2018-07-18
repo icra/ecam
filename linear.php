@@ -11,7 +11,7 @@
 		box-shadow:0 1px 2px rgba(0,0,0,.5);
 	}
 	#linearDiagram > div {
-		margin:0 5px;
+		margin:0 4px;
 		font-size:12px;
 		vertical-align:middle;
 		padding:0.2em;
@@ -23,13 +23,12 @@
 		color:black;
 	}
 	#linearDiagram img[class=l1]:hover,
-	#linearDiagram img[class=l2]:hover
-	{
+	#linearDiagram img[class=l2]:hover {
 		border:4px solid #89c23f;
 	}
 	#linearDiagram img {position:relative;z-index:2;vertical-align:middle;padding:0;} /*icons inside buttons to navigate to Level2*/
-	#linearDiagram img.l1 {width:42px;} 
-	#linearDiagram img.l2 {width:42px;}
+	#linearDiagram img.l1 {width:41px;} 
+	#linearDiagram img.l2 {width:41px;}
 	#linearDiagram img{border-radius:90%;border:4px solid transparent;}
 	#linearDiagram img.selected{border:4px solid #89c23f;}
 	#linearDiagram img.inactive {pointer-events:none;}
@@ -79,6 +78,12 @@
 		<img class=l2 stage=wasteCol src="" onclick="window.location='edit.php?level=Waste&sublevel=Collection'"   caption="<?php write('#Collection')?>">
 		<img class=l2 stage=wasteTre src="" onclick="window.location='edit.php?level=Waste&sublevel=Treatment'"    caption="<?php write('#Treatment')?>">
 		<img class=l2 stage=wasteDis src="" onclick="window.location='edit.php?level=Waste&sublevel=Discharge'"    caption="<?php write('#Discharge')?>">
+
+    <img class=l2 stage=faeclCon src="" onclick="window.location='edit.php?level=Faecl&sublevel=Containment'"  caption="<?php write('#Containment')?>">
+    <img class=l2 stage=faeclEmp src="" onclick="window.location='edit.php?level=Faecl&sublevel=Emptying'"     caption="<?php write('#Emptying')?>">
+    <img class=l2 stage=faeclTre src="" onclick="window.location='edit.php?level=Faecl&sublevel=Treatment'"    caption="<?php write('#Treatment')?>">
+    <img class=l2 stage=faeclReu src="" onclick="window.location='edit.php?level=Faecl&sublevel=Reuse'"        caption="<?php write('#Reuse')?>">
+
     <script>
       //set the img.l2[stage] src (icon path)
       (function() {
@@ -140,6 +145,15 @@
 							case "Discharge":stage="wasteDis";break;
 						}
 						break;
+
+          case "Faecl":
+            switch(sublevel) {
+              case "Containment":stage="faeclCon";break;
+              case "Emptying":stage="faeclEmp";break;
+              case "Treatment":stage="faeclTre";break;
+              case "Reuse":stage="faeclReu";break;
+            }
+            break;
 				}
 				if(stage) { document.querySelector('img[stage='+stage+']').classList.add('selected') }
 			})();
@@ -164,5 +178,4 @@
 		else if(strpos($_SERVER['PHP_SELF'],"opps.php"))
 		{ ?>document.querySelector('img[stage=opps]').classList.add('selected');<?php }
 	?>
-
 </script>

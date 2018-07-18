@@ -60,6 +60,7 @@ var Global = {
     "ws_serv_pop":0,
     "ws_nrg_cost":0,
     "ws_run_cost":0,
+
     ws_nrg_cons:function(){return this.Abstraction.wsa_nrg_cons+this.Treatment.wst_nrg_cons+this.Distribution.wsd_nrg_cons},
     ws_vol_fuel:function(){return this.Abstraction.wsa_vol_fuel+this.Treatment.wst_vol_fuel+this.Distribution.wsd_vol_fuel},
     ws_SL_serv_pop:function(){return 100*Global.Water.ws_serv_pop/Global.Water.ws_resi_pop},
@@ -751,20 +752,24 @@ var Global = {
   Faecl:{
     "fs_input1":0,
     "fs_input2":0,
+    'fs_output1':function(){return 0},
 
-    //level 2 stages
+    //level 2 stages FSM
     Containment:{
       "fsc_input1":1,
       "fsc_input2":1,
     },
+    //level 2 stages FSM
     Emptying:{
       "fse_input1":2,
       "fse_input2":2,
     },
+    //level 2 stages FSM
     Treatment:{
       "fst_input1":3,
       "fst_input2":3,
     },
+    //level 2 stages FSM
     Reuse:{
       "fsr_input1":4,
       "fsr_input2":4,

@@ -438,7 +438,8 @@
   //navigable title
   switch($level) {
     case "Water":
-    case "Waste": $titleLevel=$lang_json["#$level"]; break;
+    case "Waste": 
+    case "Faecl": $titleLevel=$lang_json["#$level"]; break;
     default:      $titleLevel=$level; break;
   }
   if($sublevel) {
@@ -466,12 +467,16 @@
         <span style=line-height:10px>
           <?php
             $iwaLink='http://www.iwa-network.org/water-climate-energy-solutions/public/catalogue/';
-            if($level=="Water" && $sublevel=="Abstraction")      {$alias="waterAbs"; $iwaLink.='stage/water_abstraction';}
+            if    ($level=="Water" && $sublevel=="Abstraction")  {$alias="waterAbs"; $iwaLink.='stage/water_abstraction';}
             elseif($level=="Water" && $sublevel=="Treatment")    {$alias="waterTre"; $iwaLink.='stage/water_treatment';}
             elseif($level=="Water" && $sublevel=="Distribution") {$alias="waterDis"; $iwaLink.='stage/water_distribution';}
             elseif($level=="Waste" && $sublevel=="Collection")   {$alias="wasteCol"; $iwaLink.='stage/wastewater_collection';}
             elseif($level=="Waste" && $sublevel=="Treatment")    {$alias="wasteTre"; $iwaLink.='stage/wastewater_treatment';}
             elseif($level=="Waste" && $sublevel=="Discharge")    {$alias="wasteDis"; $iwaLink.='stage/wastewater_discharge';}
+            elseif($level=="Faecl" && $sublevel=="Containment")  {$alias="faeclCon"; $iwaLink.='';}
+            elseif($level=="Faecl" && $sublevel=="Emptying")     {$alias="faeclEmp"; $iwaLink.='';}
+            elseif($level=="Faecl" && $sublevel=="Treatment")    {$alias="faeclTre"; $iwaLink.='';}
+            elseif($level=="Faecl" && $sublevel=="Reuse")        {$alias="faeclReu"; $iwaLink.='';}
           ?>
           <a target=_blank href="<?php echo $iwaLink?>">
             <img style=width:27px;margin-left:10px title="More info" src='img/<?php echo "$alias.png"?>'>
