@@ -1,4 +1,16 @@
 {
+  "#fs_KPI_GHG_descr":  "Total GHG Faecal Sludge Management",
+  "#fsc_KPI_GHG_descr": "Total GHG Faecal Sludge Management Containment",
+  "#fse_KPI_GHG_descr": "Total GHG Faecal Sludge Management Emptying",
+  "#fst_KPI_GHG_descr": "Total GHG Faecal Sludge Management Treatment",
+  "#fsr_KPI_GHG_descr": "Total GHG Faecal Sludge Management Reuse",
+
+  "#fs_nrg_cons_descr":  "Energy consumed from the grid",
+  "#fsc_nrg_cons_descr": "Energy consumed from the grid",
+  "#fse_nrg_cons_descr": "Energy consumed from the grid",
+  "#fst_nrg_cons_descr": "Energy consumed from the grid",
+  "#fsr_nrg_cons_descr": "Energy consumed from the grid",
+
   "#Faecl":"Faecal Sludge Management",
   "#Containment":"Containment",
   "#Emptying":"Emptying",

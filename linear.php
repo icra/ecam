@@ -78,7 +78,6 @@
 		<img class=l2 stage=wasteCol src="" onclick="window.location='edit.php?level=Waste&sublevel=Collection'"   caption="<?php write('#Collection')?>">
 		<img class=l2 stage=wasteTre src="" onclick="window.location='edit.php?level=Waste&sublevel=Treatment'"    caption="<?php write('#Treatment')?>">
 		<img class=l2 stage=wasteDis src="" onclick="window.location='edit.php?level=Waste&sublevel=Discharge'"    caption="<?php write('#Discharge')?>">
-
     <img class=l2 stage=faeclCon src="" onclick="window.location='edit.php?level=Faecl&sublevel=Containment'"  caption="<?php write('#Containment')?>">
     <img class=l2 stage=faeclEmp src="" onclick="window.location='edit.php?level=Faecl&sublevel=Emptying'"     caption="<?php write('#Emptying')?>">
     <img class=l2 stage=faeclTre src="" onclick="window.location='edit.php?level=Faecl&sublevel=Treatment'"    caption="<?php write('#Treatment')?>">

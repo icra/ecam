@@ -227,9 +227,12 @@
           })();
 
           /*Normalization*/
-          (function() {
+          (function(){
             var level    = '<?php echo $level?>';
             var sublevel = '<?php if($sublevel) echo $sublevel; else echo 'false' ?>';
+
+            if(level=='Faecl')return;
+
             //value per resident population
             //value per serviced population
             //value per water volume
@@ -677,9 +680,16 @@
             <tr>
               <th><?php write('#Origin')?>
               <th>kg CO<sub>2</sub><br><?php write('#assessment period')?>
-              <th>kg CO<sub>2</sub><br>per <?php write('#year')?>
-                <br>per <?php write('#serv.pop.')?>
-              <th>kg CO<sub>2</sub><br>per m<sup>3</sup>
+
+              <?php
+                if($level=='Water'||$level=='Waste'){
+                  ?>
+                    <th>kg CO<sub>2</sub><br>per <?php write('#year')?>
+                      <br>per <?php write('#serv.pop.')?>
+                    <th>kg CO<sub>2</sub><br>per m<sup>3</sup>
+                  <?php
+                }
+              ?>
             <tr><td style=color:#ccc colspan=6>
               <?php write('#Loading')?>...
           </table>
@@ -716,6 +726,27 @@
 
   <!--level3-->
   <?php if($sublevel){include'level3.php';} ?>
+
+  <!--include links to level2 stages-->
+  <?php
+    if(!$sublevel){ ?>
+      <div class="card" id=links-to-l2>
+        <?php cardMenu('Stages inside this level')?>
+      </div>
+      <script>
+        (function(){
+          var div=document.querySelector('#links-to-l2');
+          var l2stages=Object.keys(CurrentLevel).filter(key=>{return typeof(CurrentLevel[key])=='object'});
+          l2stages.forEach(stage=>{
+            var link=document.createElement('h1');
+            link.style.textAlign='center';
+            div.appendChild(link);
+            link.innerHTML="<a href=edit.php?level=<?php echo $level?>&sublevel="+stage+">"+translate(stage)+"</a>";
+          });
+        })();
+      </script>
+    <?php }
+  ?>
 </div>
 <div style=margin-top:5em></div>
 </html>

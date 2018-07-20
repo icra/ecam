@@ -7,6 +7,7 @@
 <!--libs-->
 <script src="js/lz-string.js"></script>
 <script src="js/charts/loader.js"></script>
+
 <!--translation--><?php include'languages/write.php' ?>
 <!--order is important: dataModel then cookies-->
 <script src="dataModel/global.js"></script>
@@ -27,7 +28,6 @@
 <script src="dataModel/gwp_reports.js"></script>
 <script src="dataModel/estimations.js"></script>
 <script src="dataModel/sumable_magnitudes.js"></script>
-
 <script src="js/cookies.js"></script>
 <script src="js/updateGlobalFromCookies.js"></script>
 <script src="utils.js"></script>

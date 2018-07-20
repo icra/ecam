@@ -9,6 +9,20 @@
 */
 
 var Info = {
+  //fsm emissions
+  fs_KPI_GHG:  {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  fsc_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  fse_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  fst_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  fsr_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+
+  //fsm energy consumed
+  fs_nrg_cons: {magnitude:"Energy", unit:"kWh"},
+  fsc_nrg_cons: {magnitude:"Energy", unit:"kWh"},
+  fse_nrg_cons: {magnitude:"Energy", unit:"kWh"},
+  fst_nrg_cons: {magnitude:"Energy", unit:"kWh"},
+  fsr_nrg_cons: {magnitude:"Energy", unit:"kWh"},
+
   //after water reuse edits
   ww_GHG_avoided:     {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   wwt_SL_GHG_avoided: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},

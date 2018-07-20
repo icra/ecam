@@ -31,11 +31,11 @@ var Global = {
 
     //total GHG emissions
     TotalGHG:function(){
-      return Global.Water.ws_KPI_GHG() + Global.Waste.ww_KPI_GHG();
+      return Global.Water.ws_KPI_GHG()+Global.Waste.ww_KPI_GHG()+Global.Faecl.fs_KPI_GHG();
     },
 
     //total energy consumed
-    TotalNRG:function(){return Global.Water.ws_nrg_cons()+Global.Waste.ww_nrg_cons()},
+    TotalNRG:function(){return Global.Water.ws_nrg_cons()+Global.Waste.ww_nrg_cons()+Global.Faecl.fs_nrg_cons()},
 
     /*carbon and nitrogen content based on sludge type and mass*/
     content_C:function(sludge_mass,sludge_type){//<br>
@@ -750,29 +750,35 @@ var Global = {
 
   //Level 1 FSM structure
   Faecl:{
-    "fs_input1":0,
-    "fs_input2":0,
-    'fs_output1':function(){return 0},
+    fs_nrg_cons:function(){
+      return this.Containment.fsc_nrg_cons+this.Emptying.fse_nrg_cons+this.Treatment.fst_nrg_cons+this.Reuse.fsr_nrg_cons;
+    },
+    fs_KPI_GHG:function(){
+      return this.Containment.fsc_KPI_GHG()+
+             this.Emptying.   fse_KPI_GHG()+
+             this.Treatment.  fst_KPI_GHG()+
+             this.Reuse.      fsr_KPI_GHG();
+    },
 
     //level 2 stages FSM
     Containment:{
-      "fsc_input1":1,
-      "fsc_input2":1,
+      "fsc_nrg_cons":0,
+      fsc_KPI_GHG:function(){return this.fsc_nrg_cons*Global.General.conv_kwh_co2},
     },
     //level 2 stages FSM
     Emptying:{
-      "fse_input1":2,
-      "fse_input2":2,
+      "fse_nrg_cons":0,
+      fse_KPI_GHG:function(){return this.fse_nrg_cons*Global.General.conv_kwh_co2},
     },
     //level 2 stages FSM
     Treatment:{
-      "fst_input1":3,
-      "fst_input2":3,
+      "fst_nrg_cons":0,
+      fst_KPI_GHG:function(){return this.fst_nrg_cons*Global.General.conv_kwh_co2},
     },
     //level 2 stages FSM
     Reuse:{
-      "fsr_input1":4,
-      "fsr_input2":4,
+      "fsr_nrg_cons":0,
+      fsr_KPI_GHG:function(){return this.fsr_nrg_cons*Global.General.conv_kwh_co2},
     },
   },
 

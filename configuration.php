@@ -129,13 +129,14 @@
       Configuration.activateLevels();
       Configuration.defaults();
       //update linear diagram when clicking configuration
-      (function() {
-        ['waterAbs','waterTre','waterDis','wasteCol','wasteTre','wasteDis'].forEach(function(stage) {
+      (function(){
+        Object.keys(Global.Configuration.ActiveStages).forEach(function(stage){
           var img=document.querySelector('#linearDiagram img[stage='+stage+']')
-          if(Global.Configuration.ActiveStages[stage]) {
+          if(!img)return;//for level 1 stages
+          if(Global.Configuration.ActiveStages[stage]){
             img.src="img/"+stage+".png";
             img.classList.remove('inactive');
-          } else {
+          }else{
             img.src="img/"+stage+"-off.png";
             img.classList.add('inactive');
           }
@@ -176,7 +177,7 @@
           box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05);
         }
         #selectStage img{width:40px;vertical-align:middle}
-        #selectStage th{width:220px;}
+        #selectStage th{width:240px;}
         #selectStage td{text-align:left;padding:0}
         #selectStage td[rowspan='3']{text-align:center;}
         #selectStage label{cursor:pointer;display:block;min-height:100%;padding:0.5em}

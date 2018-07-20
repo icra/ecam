@@ -39,8 +39,33 @@ function calculate_emissions_Waste(wwc,wwt,wwd){
 
   return rv;
 }
-function calculate_emissions(wsa,wst,wsd,wwc,wwt,wwd){
-  return calculate_emissions_Water(wsa,wst,wsd) + calculate_emissions_Waste(wwc,wwt,wwd);
+function calculate_emissions_Faecl(fsc,fse,fst,fsr){
+  fsc=fsc||false;
+  fse=fse||false;
+  fst=fst||false;
+  fsr=fsr||false;
+
+  var rv=0; //return value
+
+  //fsc
+  if(fsc) rv += Substages.Faecl.Containment.map(s=>s.fsc_KPI_GHG()).reduce((pr,cu)=>(pr+cu),0);
+  else    rv +=    Global.Faecl.Containment.fsc_KPI_GHG();
+  //fse
+  if(fse) rv += Substages.Faecl.Emptying.map(s=>s.fse_KPI_GHG()).reduce((pr,cu)=>(pr+cu),0);
+  else    rv +=    Global.Faecl.Emptying.fse_KPI_GHG();
+  //fst
+  if(fst) rv += Substages.Faecl.Treatment.map(s=>s.fst_KPI_GHG()).reduce((pr,cu)=>(pr+cu),0);
+  else    rv +=    Global.Faecl.Treatment.fst_KPI_GHG();
+  //fsr
+  if(fsr) rv += Substages.Faecl.Reuse.map(s=>s.fsr_KPI_GHG()).reduce((pr,cu)=>(pr+cu),0);
+  else    rv +=    Global.Faecl.Reuse.fsr_KPI_GHG();
+
+  return rv;
+}
+function calculate_emissions(wsa,wst,wsd,wwc,wwt,wwd,fsc,fse,fst,fsr){
+  return calculate_emissions_Water(wsa,wst,wsd) +
+    calculate_emissions_Waste(wwc,wwt,wwd)      +
+    calculate_emissions_Faecl(fsc,fse,fst,fsr);
 }
 
 /** Find a variable code inside 'Global'*/

@@ -494,6 +494,7 @@
   switch(level) {
     case "Water":levelAlias="<?php write('#Water')?>";break;
     case "Waste":levelAlias="<?php write('#Waste')?>";break;
+    case "Faecl":levelAlias="<?php write('#Faecl')?>";break;
     default:levelAlias=level;break;
   }
 
@@ -505,6 +506,7 @@
       case "Distribution":sublevelAlias="<?php write('#Distribution')?>";break;
       case "Collection":sublevelAlias="<?php write('#Collection')?>";break;
       case "Discharge":sublevelAlias="<?php write('#Discharge')?>";break;
+      default:sublevelAlias=sublevel;break;
     }
   }
 </script>
