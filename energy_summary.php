@@ -202,10 +202,15 @@
             <span class=circle style=background:orange></span>
             <?php write('#highest energy consumption')?>
           </span>
-        <tr><th rowspan=9 style="font-weight:bold;background:#2b6488;">
-          <?php write('#TOTAL ENERGY CONSUMED')?>
-        <br><br><span field=TotalNRG><?php write('#Loading')?>...</span>
+        </tr>
 
+        <!--L0 Total energy consumed-->
+        <tr><th rowspan=10 style="font-weight:bold;background:#2b6488;">
+          <?php write('#TOTAL ENERGY CONSUMED')?> &rarr;<br><br>
+          <span field=TotalNRG><?php write('#Loading')?>...</span>
+        </th>
+
+        <!--L1 Water-->
         <th rowspan=3 style="background:#00aff1">
           <a href="edit.php?level=Water" style=color:white>
             <?php write('#Water')?>
@@ -213,8 +218,7 @@
             <script>document.querySelector('#ws_serv_pop').innerHTML=format(Global.Water.ws_serv_pop)</script>
           </a>
           <br><br><span field=ws_nrg_cons><?php write('#Loading')?>...</span>
-        </th>
-
+          </th>
           <!--wsa-->
           <td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'><?php write('#Abstraction')?></a>
             <td field=wsa_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Water sublevel=Abstraction><?php write('#Loading')?>...
@@ -227,6 +231,7 @@
           </tr>
         <tr>
 
+        <!--L1 Waste-->
         <th rowspan=3 class=red>
           <a href="edit.php?level=Waste" style=color:white>
             <?php write('#Waste')?>
@@ -234,19 +239,42 @@
             <script>document.querySelector('#ww_serv_pop').innerHTML=format(Global.Waste.ww_serv_pop())</script>
           </a>
           <br><br><span field=ww_nrg_cons><?php write('#Loading')?>...</span>
-        </th>
-
+          </th>
           <!--wwc-->
           <td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'><?php write('#Collection')?></a>
             <td field=wwc_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Waste sublevel=Collection><?php write('#Loading')?>...
-
           <!--wwt-->
           <tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'><?php write('#Treatment')?> </a>
             <td field=wwt_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Waste sublevel=Treatment><?php write('#Loading')?>...
-
           <!--wwd-->
           <tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'><?php write('#Discharge')?> </a>
             <td field=wwd_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Waste sublevel=Discharge><?php write('#Loading')?>...
+        </tr>
+
+        <!--L1 Faecl-->
+        <th rowspan=4 style="background:green">
+          <a href="edit.php?level=Faecl" style=color:white>
+            <?php write('#Faecl')?>
+          </a><br><br>
+          <span field=fs_nrg_cons><?php write('#Loading')?>...</span>
+          </th>
+          <?php
+            function drawL2stage($alias, $level, $sublevel, $emission){
+              echo "
+                <td><img src=img/$alias.png> <a href='edit.php?level=$level&sublevel=$sublevel'>
+              ";
+              write("#$sublevel");
+              echo "</a>";
+              echo "
+                <td field=$emission level=$level sublevel=$sublevel onmouseenter=fillSourcesSubstages(this,event)>loading...
+                </tr>
+              ";
+            }
+            drawL2stage('faeclCon', 'Faecl', 'Containment', 'fsc_nrg_cons');
+            drawL2stage('faeclEmp', 'Faecl', 'Emptying',    'fse_nrg_cons');
+            drawL2stage('faeclTre', 'Faecl', 'Treatment',   'fst_nrg_cons');
+            drawL2stage('faeclReu', 'Faecl', 'Reuse',       'fsr_nrg_cons');
+          ?>
         </tr>
       </table>
     </div>

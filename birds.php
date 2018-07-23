@@ -14,8 +14,12 @@
     }
 
     function drawCharts(){
-      //   ".graph(withTable,container)"
-      Graphs.ghg_by_source(false,'graph1');
+      //get current graph selected in graph1
+      (function(){
+        var current_graph=document.querySelector('#graph1').getAttribute('current_graph') || 'ghg_by_source';
+        Graphs[current_graph](false,'graph1');
+      })();
+
       Graphs.graph2(false,'graph2');
       //   ".graph(container)"
       Graphs.ws_cost('graph3');
@@ -231,7 +235,7 @@
 
 <!--context variables-->
 <div class=flex
-style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 2em;background:#fafafa;box-shadow: 0 1px 2px rgba(0,0,0,.5);">
+  style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 2em;background:#fafafa;box-shadow: 0 1px 2px rgba(0,0,0,.5);">
   <!--assessment period-->
   <div>
     <a href=variable.php?id=Days><?php write('#assessment_period')?></a>:

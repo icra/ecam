@@ -35,7 +35,9 @@ var Global = {
     },
 
     //total energy consumed
-    TotalNRG:function(){return Global.Water.ws_nrg_cons()+Global.Waste.ww_nrg_cons()+Global.Faecl.fs_nrg_cons()},
+    TotalNRG:function(){
+      return Global.Water.ws_nrg_cons()+Global.Waste.ww_nrg_cons()+Global.Faecl.fs_nrg_cons()
+    },
 
     /*carbon and nitrogen content based on sludge type and mass*/
     content_C:function(sludge_mass,sludge_type){//<br>
@@ -753,32 +755,42 @@ var Global = {
     fs_nrg_cons:function(){
       return this.Containment.fsc_nrg_cons+this.Emptying.fse_nrg_cons+this.Treatment.fst_nrg_cons+this.Reuse.fsr_nrg_cons;
     },
-    fs_KPI_GHG:function(){
-      return this.Containment.fsc_KPI_GHG()+
-             this.Emptying.   fse_KPI_GHG()+
-             this.Treatment.  fst_KPI_GHG()+
-             this.Reuse.      fsr_KPI_GHG();
+    fs_KPI_GHG:function(){//<br>
+      return this.Containment.fsc_KPI_GHG()+this.Emptying.fse_KPI_GHG()+this.Treatment.fst_KPI_GHG()+this.Reuse.fsr_KPI_GHG();
     },
 
     //level 2 stages FSM
     Containment:{
       "fsc_nrg_cons":0,
-      fsc_KPI_GHG:function(){return this.fsc_nrg_cons*Global.General.conv_kwh_co2},
+      "fsc_type_tre":0, //hidden
+      "fsc_ch4_efac":0,
+      "fsc_onsi_pop":0,
+      "fsc_cont_emp":0,
+
+      fsc_KPI_GHG_elec:function(){return this.fsc_nrg_cons*Global.General.conv_kwh_co2},
+      //total ghg
+      fsc_KPI_GHG:function(){return this.fsc_KPI_GHG_elec()},
     },
     //level 2 stages FSM
     Emptying:{
       "fse_nrg_cons":0,
-      fse_KPI_GHG:function(){return this.fse_nrg_cons*Global.General.conv_kwh_co2},
+      fse_KPI_GHG_elec:function(){return this.fse_nrg_cons*Global.General.conv_kwh_co2},
+      //total ghg
+      fse_KPI_GHG:function(){return this.fse_KPI_GHG_elec()},
     },
     //level 2 stages FSM
     Treatment:{
       "fst_nrg_cons":0,
-      fst_KPI_GHG:function(){return this.fst_nrg_cons*Global.General.conv_kwh_co2},
+      fst_KPI_GHG_elec:function(){return this.fst_nrg_cons*Global.General.conv_kwh_co2},
+      //total ghg
+      fst_KPI_GHG:function(){return this.fst_KPI_GHG_elec()},
     },
     //level 2 stages FSM
     Reuse:{
       "fsr_nrg_cons":0,
-      fsr_KPI_GHG:function(){return this.fsr_nrg_cons*Global.General.conv_kwh_co2},
+      fsr_KPI_GHG_elec:function(){return this.fsr_nrg_cons*Global.General.conv_kwh_co2},
+      //total ghg
+      fsr_KPI_GHG:function(){return this.fsr_KPI_GHG_elec()},
     },
   },
 

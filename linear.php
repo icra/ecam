@@ -19,18 +19,18 @@
 		color:rgba(0,0,0,0.55);
 	}
 	#linearDiagram > div:hover {
-		/*background:#e6e6e6;*/
+		background:#e6e6e6;
 		color:black;
 	}
 	#linearDiagram img[class=l1]:hover,
 	#linearDiagram img[class=l2]:hover {
-		border:4px solid #89c23f;
+		border:3px solid #9fc231;
 	}
 	#linearDiagram img {position:relative;z-index:2;vertical-align:middle;padding:0;} /*icons inside buttons to navigate to Level2*/
-	#linearDiagram img.l1 {width:41px;} 
-	#linearDiagram img.l2 {width:41px;}
-	#linearDiagram img{border-radius:90%;border:4px solid transparent;}
-	#linearDiagram img.selected{border:4px solid #89c23f;}
+	#linearDiagram img.l1 {width:42px;} 
+	#linearDiagram img.l2 {width:42px;}
+	#linearDiagram img{border-radius:90%;border:3px solid transparent;}
+	#linearDiagram img.selected{border:3px solid #9fc231;}
 	#linearDiagram img.inactive {pointer-events:none;}
 	#linearDiagram img:not(.inactive) {cursor:pointer;}
 	#linearDiagram a:hover {text-decoration:none;}

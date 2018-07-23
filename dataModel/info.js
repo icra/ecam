@@ -9,12 +9,23 @@
 */
 
 var Info = {
+
+  //Containment
+  fsc_onsi_pop: {magnitude:"People", unit:"People"},
+  fsc_ch4_efac: {magnitude:"Mass/Mass", unit:"kgCH<sub>4</sub>/kgBOD"},
+  fsc_cont_emp: {magnitude:"Percentage", unit:"%"},
+
   //fsm emissions
-  fs_KPI_GHG:  {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+   fs_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   fsc_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   fse_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   fst_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   fsr_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+   fs_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  fsc_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  fse_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  fst_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  fsr_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
 
   //fsm energy consumed
   fs_nrg_cons: {magnitude:"Energy", unit:"kWh"},

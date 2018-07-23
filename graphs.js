@@ -59,6 +59,7 @@ Graphs.graph1=function(withTable,container) {
 
   //empty the container element
   var con=document.getElementById(container)
+  con.setAttribute('current_graph','graph1')
   con.innerHTML='';
 
   //double click
@@ -122,6 +123,10 @@ Graphs.ghg_by_source=function(withTable,container) {
     Global.Waste.Collection.wwc_KPI_GHG_elec()+
     Global.Waste.Treatment.wwt_KPI_GHG_elec()+
     Global.Waste.Discharge.wwd_KPI_GHG_elec()+
+    Global.Faecl.Containment.fsc_KPI_GHG_elec()+
+    Global.Faecl.Emptying.fse_KPI_GHG_elec()+
+    Global.Faecl.Treatment.fst_KPI_GHG_elec()+
+    Global.Faecl.Reuse.fsr_KPI_GHG_elec()+
   0;
   var co2 = 0+
     Global.Water.Abstraction.wsa_KPI_GHG_fuel_co2()+
@@ -212,6 +217,7 @@ Graphs.ghg_by_source=function(withTable,container) {
 
   //empty the container element
   var con=document.getElementById(container);
+  con.setAttribute('current_graph','ghg_by_source');
   con.innerHTML='';
 
   //double click
@@ -286,6 +292,13 @@ Graphs.ghgSources=function(withTable,container) {
       Global.Waste.Treatment.wwt_KPI_GHG_elec()+
       Global.Waste.Discharge.wwd_KPI_GHG_elec();
   })();
+  var elecFS=(function(){
+    return 0+
+      Global.Faecl.Containment.fsc_KPI_GHG_elec()+
+      Global.Faecl.Emptying.fse_KPI_GHG_elec()+
+      Global.Faecl.Treatment.fst_KPI_GHG_elec()+
+      Global.Faecl.Reuse.fsr_KPI_GHG_elec();
+  })();
   var fuel=(function(){
     return 0+
        Global.Water.Abstraction.wsa_KPI_GHG_fuel()+
@@ -313,6 +326,7 @@ Graphs.ghgSources=function(withTable,container) {
   var names = [
     "Electricity WS",
     "Electricity WW",
+    "Electricity FS",
     "Fuel engines",
     "Truck transport",
     ""+translate('ww_KPI_GHG_unt_ch4_descr'),
@@ -330,26 +344,25 @@ Graphs.ghgSources=function(withTable,container) {
     ["Source",translate('emissions')],
     [replaceTags(names[0] ),elecWS],
     [replaceTags(names[1] ),elecWW],
-    [replaceTags(names[2] ),fuel],
-    [replaceTags(names[3] ),trck],
-    [replaceTags(names[4] ),ch4u],
-    [replaceTags(names[5] ),n2ou],
-    [replaceTags(names[6] ),ch4t],
-    [replaceTags(names[7] ),n2ot],
-    [replaceTags(names[8] ),biog],
-    [replaceTags(names[9] ),slud],
-    [replaceTags(names[10]),digf],
-    [replaceTags(names[11]),n2od],
+    [replaceTags(names[2] ),elecFS],
+    [replaceTags(names[3] ),fuel],
+    [replaceTags(names[4] ),trck],
+    [replaceTags(names[5] ),ch4u],
+    [replaceTags(names[6] ),n2ou],
+    [replaceTags(names[7] ),ch4t],
+    [replaceTags(names[8] ),n2ot],
+    [replaceTags(names[9] ),biog],
+    [replaceTags(names[10]),slud],
+    [replaceTags(names[11]),digf],
+    [replaceTags(names[12]),n2od],
   ]);
 
   //options
-  var options=
-  {
+  var options={
     height:250,
     legend:{position:'left'},
     title:translate('ghg_emissions_by_source_detailed')+" ("+format(Global.General.TotalGHG())+" kg CO2e)",
-    slices:
-    {
+    slices:{
       /*
       0:{color:'#00aff1' },
       1:{color:'#d71d24' },
@@ -358,7 +371,8 @@ Graphs.ghgSources=function(withTable,container) {
   }
 
   //empty the container element
-  var con = document.getElementById(container)
+  var con = document.getElementById(container);
+  con.setAttribute('current_graph','ghgSources');
   con.innerHTML='';
 
   //double click
@@ -401,6 +415,12 @@ Graphs.ghgSources=function(withTable,container) {
     "<a href=variable.php?id=wwt_KPI_GHG_elec>wwt_KPI_GHG_elec</a> + <br>"+
     "<a href=variable.php?id=wwd_KPI_GHG_elec>wwd_KPI_GHG_elec</a>"+
   "";
+  var elecFS_formula = ""+
+    "<a href=variable.php?id=fsc_KPI_GHG_elec>fsc_KPI_GHG_elec</a> + <br>"+
+    "<a href=variable.php?id=fse_KPI_GHG_elec>fse_KPI_GHG_elec</a> + <br>"+
+    "<a href=variable.php?id=fst_KPI_GHG_elec>fst_KPI_GHG_elec</a> + <br>"+
+    "<a href=variable.php?id=fst_KPI_GHG_elec>fsr_KPI_GHG_elec</a> + <br>"+
+  "";
   var fuel_formula = ""+
     "<a href=variable.php?id=wsa_KPI_GHG_fuel>wsa_KPI_GHG_fuel</a> + <br>"+
     "<a href=variable.php?id=wst_KPI_GHG_fuel>wst_KPI_GHG_fuel</a> + <br>"+
@@ -424,16 +444,17 @@ Graphs.ghgSources=function(withTable,container) {
       "<tr><th>"+translate('graphs_slice')+"<th>"+translate('Code')+"<th>"+translate('graphs_value')+" (kg CO2)"+
       "<tr><td align=left>"+names[0]+ "<td align=left>"+elecWS_formula+"<td align=right>"+format(elecWS)+
       "<tr><td align=left>"+names[1]+ "<td align=left>"+elecWW_formula+"<td align=right>"+format(elecWW)+
-      "<tr><td align=left>"+names[2]+ "<td align=left>"+fuel_formula+"<td align=right>"+format(fuel)+
-      "<tr><td align=left>"+names[3]+ "<td align=left>"+trck_formula+"<td align=right>"+format(trck)+
-      "<tr><td align=left>"+names[4]+ "<td align=left><a href=variable.php?id=ww_KPI_GHG_unt_ch4 >ww_KPI_GHG_unt_ch4 </a><td align=right>"+format(ch4u)+
-      "<tr><td align=left>"+names[5]+ "<td align=left><a href=variable.php?id=ww_KPI_GHG_unt_n2o >ww_KPI_GHG_unt_n2o </a><td align=right>"+format(n2ou)+
-      "<tr><td align=left>"+names[6]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_tre_ch4 >wwt_KPI_GHG_tre_ch4 </a><td align=right>"+format(ch4t)+
-      "<tr><td align=left>"+names[7]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_tre_n2o >wwt_KPI_GHG_tre_n2o </a><td align=right>"+format(n2ot)+
-      "<tr><td align=left>"+names[8]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_biog    >wwt_KPI_GHG_biog    </a><td align=right>"+format(biog)+
-      "<tr><td align=left>"+names[9]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_slu     >wwt_KPI_GHG_slu     </a><td align=right>"+format(slud)+
-      "<tr><td align=left>"+names[10]+"<td align=left><a href=variable.php?id=wwt_KPI_GHG_dig_fuel>wwt_KPI_GHG_dig_fuel</a><td align=right>"+format(digf)+
-      "<tr><td align=left>"+names[11]+"<td align=left><a href=variable.php?id=wwd_KPI_GHG_tre_n2o >wwd_KPI_GHG_tre_n2o </a><td align=right>"+format(n2od)+
+      "<tr><td align=left>"+names[2]+ "<td align=left>"+elecFS_formula+"<td align=right>"+format(elecFS)+
+      "<tr><td align=left>"+names[3]+ "<td align=left>"+fuel_formula+"<td align=right>"+format(fuel)+
+      "<tr><td align=left>"+names[4]+ "<td align=left>"+trck_formula+"<td align=right>"+format(trck)+
+      "<tr><td align=left>"+names[5]+ "<td align=left><a href=variable.php?id=ww_KPI_GHG_unt_ch4 >ww_KPI_GHG_unt_ch4 </a><td align=right>"+format(ch4u)+
+      "<tr><td align=left>"+names[6]+ "<td align=left><a href=variable.php?id=ww_KPI_GHG_unt_n2o >ww_KPI_GHG_unt_n2o </a><td align=right>"+format(n2ou)+
+      "<tr><td align=left>"+names[7]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_tre_ch4 >wwt_KPI_GHG_tre_ch4 </a><td align=right>"+format(ch4t)+
+      "<tr><td align=left>"+names[8]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_tre_n2o >wwt_KPI_GHG_tre_n2o </a><td align=right>"+format(n2ot)+
+      "<tr><td align=left>"+names[9]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_biog    >wwt_KPI_GHG_biog    </a><td align=right>"+format(biog)+
+      "<tr><td align=left>"+names[10]+ "<td align=left><a href=variable.php?id=wwt_KPI_GHG_slu     >wwt_KPI_GHG_slu     </a><td align=right>"+format(slud)+
+      "<tr><td align=left>"+names[11]+"<td align=left><a href=variable.php?id=wwt_KPI_GHG_dig_fuel>wwt_KPI_GHG_dig_fuel</a><td align=right>"+format(digf)+
+      "<tr><td align=left>"+names[12]+"<td align=left><a href=variable.php?id=wwd_KPI_GHG_tre_n2o >wwd_KPI_GHG_tre_n2o </a><td align=right>"+format(n2od)+
     "</table>"+
     "";
     var div=document.createElement('div');
@@ -471,7 +492,8 @@ Graphs.unfccc=function(withTable,container){
   }
 
   //empty the container element
-  var con = document.getElementById(container)
+  var con = document.getElementById(container);
+  con.setAttribute('current_graph','unfccc');
   con.innerHTML='';
 
   //double click
@@ -526,14 +548,14 @@ Graphs.unfccc=function(withTable,container){
   scrollToItem(container)
 }
 
-//GHG one stage only: (wsa|wst|wsd|wwc|wwt|wwd)
+//GHG one stage only: (wsa|wst|wsd|wwc|wwt|wwd|fsc|fse|fst|fsr)
 Graphs.ghg_by_stage=function(withTable,container,prefix) {
   withTable=withTable||false;
   container=container||"graph";
   prefix=prefix||"wsa"; //first 3 letters [wsa,wst,wsd,wwc,wwt,wwd]
 
   //check if prefix is correct
-  if(-1==['wsa','wst','wsd','wwc','wwt','wwd'].indexOf(prefix)) {
+  if(-1==['wsa','wst','wsd','wwc','wwt','wwd','fsc','fse','fst','fsr'].indexOf(prefix)) {
     document.getElementById(container).innerHTML="NA";
     return; //if prefix is not in this list, stop
   }
@@ -550,7 +572,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
     return total;
   }
 
-  //complete code of w**_KPI_GHG
+  //complete code of ***_KPI_GHG
   var code = prefix+'_KPI_GHG'
   var value = getValue(code);
 
@@ -576,6 +598,10 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
       "wwc":translate("Collection"),
       "wwt":translate("Treatment"),
       "wwd":translate("Discharge"),
+      "fsc":translate("Containment"),
+      "fse":translate("Emptying"),
+      "fst":translate("Treatment"),
+      "fsr":translate("Reuse"),
     }[prefix];
   })();
 
@@ -588,6 +614,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 
   //empty the container element
   var con=document.getElementById(container);
+  con.setAttribute('current_graph','ghg_by_stage');
   con.innerHTML='';
 
   //double click
@@ -636,7 +663,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
   scrollToItem(container)
 }
 
-//GHG all stages (wsa+wst+wsd+wwc+wwt+wwd)
+//GHG all stages (wsa+wst+wsd+wwc+wwt+wwd+fsc+fse+fst+fsr)
 Graphs.graph4=function(withTable,container) {
   withTable=withTable||false;
   container=container||"graph";
@@ -708,6 +735,7 @@ Graphs.graph4=function(withTable,container) {
 
   //empty the container
   var con = document.getElementById(container);
+  con.setAttribute('current_graph','graph4');
   con.innerHTML='';
 
   //double click
@@ -748,9 +776,9 @@ Graphs.graph4=function(withTable,container) {
       "<tr><td>"+names[5] +"<td><a href=variable.php?id=wwd_KPI_GHG>wwd_KPI_GHG</a> <td align=right>"+format(slice_6)+
       "<tr><td>"+names[6] +"<td><a href=variable.php?id=wwd_KPI_GHG>ww_KPI_GHG_unt</a> <td align=right>"+format(slice_7)+
       "<tr><td>"+names[7] +"<td><a href=variable.php?id=fsc_KPI_GHG>fsc_KPI_GHG</a> <td align=right>"+format(slice_8)+
-      "<tr><td>"+names[8] +"<td><a href=variable.php?id=fse_KPI_GHG>fsc_KPI_GHG</a> <td align=right>"+format(slice_9)+
-      "<tr><td>"+names[9] +"<td><a href=variable.php?id=fst_KPI_GHG>fsc_KPI_GHG</a> <td align=right>"+format(slice_10)+
-      "<tr><td>"+names[10]+"<td><a href=variable.php?id=fsr_KPI_GHG>fsc_KPI_GHG</a> <td align=right>"+format(slice_11)+
+      "<tr><td>"+names[8] +"<td><a href=variable.php?id=fse_KPI_GHG>fse_KPI_GHG</a> <td align=right>"+format(slice_9)+
+      "<tr><td>"+names[9] +"<td><a href=variable.php?id=fst_KPI_GHG>fst_KPI_GHG</a> <td align=right>"+format(slice_10)+
+      "<tr><td>"+names[10]+"<td><a href=variable.php?id=fsr_KPI_GHG>fsr_KPI_GHG</a> <td align=right>"+format(slice_11)+
     "</table>"+
     "";
     //extra options
@@ -770,14 +798,20 @@ Graphs.graph2=function(withTable,container) {
   //values
   var ws=Global.Water.ws_nrg_cons();
   var ww=Global.Waste.ww_nrg_cons();
+  var fs=Global.Faecl.fs_nrg_cons();
 
-  var names=[ ""+translate('Water')+"", ""+translate('Waste')+"" ];
+  var names=[ 
+    translate('Water'), 
+    translate('Waste'),
+    translate('Faecl'),
+  ];
 
   //actual graph data
   var data=google.visualization.arrayToDataTable([
     [translate('stage'),translate('emissions')],
     [names[0], ws],
     [names[1], ww],
+    [names[2], fs],
   ]);
 
   //options
@@ -789,11 +823,13 @@ Graphs.graph2=function(withTable,container) {
     slices:{
       0:{ color: '#0aaeef' },
       1:{ color: '#d71d24' },
+      2:{ color: 'green' },
     },
   };
 
   //empty the container element
   var con=document.getElementById(container);
+  con.setAttribute('current_graph','graph2');
   con.innerHTML='';
 
   //double click
@@ -830,6 +866,7 @@ Graphs.graph2=function(withTable,container) {
       "<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kWh)"+
       "<tr><td>"+names[0]+"<td><a href=variable.php?id=ws_nrg_cons>ws_nrg_cons</a><td>"+format(ws)+
       "<tr><td>"+names[1]+"<td><a href=variable.php?id=ww_nrg_cons>ww_nrg_cons</a><td>"+format(ww)+
+      "<tr><td>"+names[2]+"<td><a href=variable.php?id=fs_nrg_cons>fs_nrg_cons</a><td>"+format(fs)+
     "</table>"+
     "";
     var div=document.createElement('div');
@@ -846,20 +883,28 @@ Graphs.graph5=function(withTable,container) {
   container=container||"graph";
 
   //values
-  var slice_1 = Global.Water.Abstraction.wsa_nrg_cons;
-  var slice_2 = Global.Water.Treatment.wst_nrg_cons;
-  var slice_3 = Global.Water.Distribution.wsd_nrg_cons;
-  var slice_4 = Global.Waste.Collection.wwc_nrg_cons;
-  var slice_5 = Global.Waste.Treatment.wwt_nrg_cons;
-  var slice_6 = Global.Waste.Discharge.wwd_nrg_cons;
+  var slice_1  = Global.Water.Abstraction.wsa_nrg_cons;
+  var slice_2  = Global.Water.Treatment.wst_nrg_cons;
+  var slice_3  = Global.Water.Distribution.wsd_nrg_cons;
+  var slice_4  = Global.Waste.Collection.wwc_nrg_cons;
+  var slice_5  = Global.Waste.Treatment.wwt_nrg_cons;
+  var slice_6  = Global.Waste.Discharge.wwd_nrg_cons;
+  var slice_7  = Global.Faecl.Containment.fsc_nrg_cons;
+  var slice_8  = Global.Faecl.Emptying.fse_nrg_cons;
+  var slice_9  = Global.Faecl.Treatment.fst_nrg_cons;
+  var slice_10 = Global.Faecl.Reuse.fsr_nrg_cons;
 
   var names=[
-    ""+translate('Abstraction')+"",
-    ""+translate('Treatment')+"",
-    ""+translate('Distribution')+"",
-    ""+translate('Collection')+"",
-    ""+translate('Treatment')+"",
-    ""+translate('Discharge')+"",
+    translate('Abstraction'),
+    translate('Treatment'),
+    translate('Distribution'),
+    translate('Collection'),
+    translate('Treatment'),
+    translate('Discharge'),
+    translate('Containment'),
+    translate('Emptying'),
+    translate('Treatment'),
+    translate('Reuse'),
   ]
 
   //actual graph data
@@ -871,6 +916,10 @@ Graphs.graph5=function(withTable,container) {
     [names[3],slice_4],
     [names[4],slice_5],
     [names[5],slice_6],
+    [names[6],slice_7],
+    [names[7],slice_8],
+    [names[8],slice_9],
+    [names[9],slice_10],
   ]);
 
   //options
@@ -923,6 +972,10 @@ Graphs.graph5=function(withTable,container) {
       "<tr><td align=left>"+names[3]+"<td align=left><a href=variable.php?id=wwc_nrg_cons>wwc_nrg_cons</a> <td align=right>"+format(slice_4)+
       "<tr><td align=left>"+names[4]+"<td align=left><a href=variable.php?id=wwt_nrg_cons>wwt_nrg_cons</a> <td align=right>"+format(slice_5)+
       "<tr><td align=left>"+names[5]+"<td align=left><a href=variable.php?id=wwd_nrg_cons>wwd_nrg_cons</a> <td align=right>"+format(slice_6)+
+      "<tr><td align=left>"+names[6]+"<td align=left><a href=variable.php?id=fsc_nrg_cons>fsc_nrg_cons</a> <td align=right>"+format(slice_7)+
+      "<tr><td align=left>"+names[7]+"<td align=left><a href=variable.php?id=fse_nrg_cons>fse_nrg_cons</a> <td align=right>"+format(slice_8)+
+      "<tr><td align=left>"+names[8]+"<td align=left><a href=variable.php?id=fst_nrg_cons>fst_nrg_cons</a> <td align=right>"+format(slice_9)+
+      "<tr><td align=left>"+names[9]+"<td align=left><a href=variable.php?id=fsr_nrg_cons>fsr_nrg_cons</a> <td align=right>"+format(slice_10)+
     "</table>"+
     '<div class=options>'+
     ' <a href="'+chart.getImageURI()+'" download="image.png" class=printable>Save as image</a> '+
@@ -941,15 +994,25 @@ Graphs.graph7=function(withTable,container) {
   container=container||"graph";
 
   //pointers to objects
-  var wsa = Substages.Water.Abstraction
-  var wst = Substages.Water.Treatment
-  var wsd = Substages.Water.Distribution
-  var wwc = Substages.Waste.Collection
-  var wwt = Substages.Waste.Treatment
-  var wwd = Substages.Waste.Discharge
+  var wsa = Substages.Water.Abstraction;
+  var wst = Substages.Water.Treatment;
+  var wsd = Substages.Water.Distribution;
+  var wwc = Substages.Waste.Collection;
+  var wwt = Substages.Waste.Treatment;
+  var wwd = Substages.Waste.Discharge;
+  var fsc = Substages.Faecl.Containment;
+  var fse = Substages.Faecl.Emptying;
+  var fst = Substages.Faecl.Treatment;
+  var fsr = Substages.Faecl.Reuse;
+
   //array of pointers to objects
-  var stages = [ wsa , wst , wsd , wwc , wwt , wwd];
-  var names =  ["wsa_nrg_cons", "wst_nrg_cons", "wsd_nrg_cons", "wwc_nrg_cons", "wwt_nrg_cons", "wwd_nrg_cons" ];
+  var stages = [ wsa , wst , wsd , wwc , wwt , wwd, fsc, fse, fst, fsr];
+  var names =  ["wsa_nrg_cons", "wst_nrg_cons", "wsd_nrg_cons", "wwc_nrg_cons", "wwt_nrg_cons", "wwd_nrg_cons",
+    'fsc_nrg_cons',
+    'fse_nrg_cons',
+    'fst_nrg_cons',
+    'fsr_nrg_cons',
+  ];
   //variable DATA will be inserted into the graph
   var DATA = [
     ['Stage', 'Emissions'],
@@ -960,12 +1023,16 @@ Graphs.graph7=function(withTable,container) {
   for(var s in stages) {
     var title;
     switch(names[s]) {
-      case 'wsa_nrg_cons': title=""+translate('Abstraction')+"";break;
-      case 'wst_nrg_cons': title=""+translate('Treatment')+"";break;
-      case 'wsd_nrg_cons': title=""+translate('Distribution')+"";break;
-      case 'wwc_nrg_cons': title=""+translate('Collection')+"";break;
-      case 'wwt_nrg_cons': title=""+translate('Treatment')+"";break;
-      case 'wwd_nrg_cons': title=""+translate('Discharge')+"";break;
+      case 'wsa_nrg_cons': title=translate('Abstraction');break;
+      case 'wst_nrg_cons': title=translate('Treatment');break;
+      case 'wsd_nrg_cons': title=translate('Distribution');break;
+      case 'wwc_nrg_cons': title=translate('Collection');break;
+      case 'wwt_nrg_cons': title=translate('Treatment');break;
+      case 'wwd_nrg_cons': title=translate('Discharge');break;
+      case 'fsc_nrg_cons': title=translate('Containment');break;
+      case 'fse_nrg_cons': title=translate('Emptying');break;
+      case 'fst_nrg_cons': title=translate('Treatment');break;
+      case 'fsr_nrg_cons': title=translate('Reuse');break;
       default:break;
     }
     //special case: if there are zero substages:
@@ -1028,12 +1095,16 @@ Graphs.graph7=function(withTable,container) {
       for(var s in stages) {
         var title;
         switch(names[s]) {
-          case 'wsa_nrg_cons': title=""+translate('Abstraction')+"";break;
-          case 'wst_nrg_cons': title=""+translate('Treatment')+"";break;
-          case 'wsd_nrg_cons': title=""+translate('Distribution')+"";break;
-          case 'wwc_nrg_cons': title=""+translate('Collection')+"";break;
-          case 'wwt_nrg_cons': title=""+translate('Treatment')+"";break;
-          case 'wwd_nrg_cons': title=""+translate('Discharge')+"";break;
+          case 'wsa_nrg_cons': title=translate('Abstraction');break;
+          case 'wst_nrg_cons': title=translate('Treatment');break;
+          case 'wsd_nrg_cons': title=translate('Distribution');break;
+          case 'wwc_nrg_cons': title=translate('Collection');break;
+          case 'wwt_nrg_cons': title=translate('Treatment');break;
+          case 'wwd_nrg_cons': title=translate('Discharge');break;
+          case 'fsc_nrg_cons': title=translate('Containment');break;
+          case 'fse_nrg_cons': title=translate('Emptying');break;
+          case 'fst_nrg_cons': title=translate('Treatment');break;
+          case 'fsr_nrg_cons': title=translate('Reuse');break;
           default:break;
         }
         table+=""+
@@ -1053,96 +1124,6 @@ Graphs.graph7=function(withTable,container) {
   }
   scrollToItem(container)
 }
-
-//BAR GRAPHS
-//graphs 3{a,b,c,d} not used
-/*
-Graphs.graph3a=function(withTable,container) {
-  //pointers
-  var WS = Global.Water;
-  var WW = Global.Waste;
-  var years = Global.General.Years();
-
-  //total kg
-  var ws_el = WS.ws_KPI_GHG_elec();
-  var ws_ne = WS.ws_KPI_GHG_ne();
-  var ww_el = WW.ww_KPI_GHG_elec();
-  var ww_ne = WW.ww_KPI_GHG_ne();
-
-  //per year
-  var slice_1  = ws_el/years;
-  var slice_2  = ws_ne/years;
-  var slice_3  = ww_el/years;
-  var slice_4  = ww_ne/years;
-
-  var names=[
-    ""+translate('ws_KPI_GHG_elec_descr')+"",
-    ""+translate('ws_KPI_GHG_ne_descr')+"",
-    ""+translate('ww_KPI_GHG_elec_descr')+"",
-    ""+translate('ww_KPI_GHG_ne_descr')+"",
-  ]
-
-  //data
-  var data=google.visualization.arrayToDataTable
-  ([
-    [
-      'Emission type', names[0], names[1], names[2], names[3],
-      {role:'annotation'}
-    ],
-    [translate('Water'),slice_1,slice_2,0,0,''],
-    [translate('Waste'),0,0,slice_3,slice_4,''],
-  ]);
-
-  //options
-  var options=
-  {
-    title:"kg CO2/year",
-    height:300,
-    legend:{position:'top'},
-    isStacked:true,
-    colors: ['#bca613','#453f1c', '#89375c', '#f08080'],
-    bar: { groupWidth: '75' },
-  };
-
-  //empty container element
-  document.getElementById(container).innerHTML='';
-
-  //draw
-  var view=new google.visualization.DataView(data);
-  var chart=new google.visualization.ColumnChart(document.getElementById(container));
-  chart.draw(view, options);
-
-  var yy=translate('years');
-
-  //tables
-  if(withTable) {
-    //create a table string
-    var table=""+
-    "<button onclick=Graphs.graph3a(false,'"+container+"')>"+translate('graphs_hide_table')+"</button>"+
-    "<table title=graph3a>"+
-      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('Water')+"<th>kg CO2/"+translate('year')+"<th>"+translate('Waste')+"<th>kg CO2/"+translate('year')+""+
-      "<tr><th>"+translate('ww_KPI_GHG_ne_descr')+"<td>ws_KPI_GHG_ne/"+yy+"<td>"+format(slice_2)+"<td>ww_KPI_GHG_ne/"+yy+" <td>"+format(slice_4)+
-      "<tr><th>"+translate('ww_KPI_GHG_elec_descr')+"<td>ws_KPI_GHG_elec/"+yy+" <td>"+format(slice_1)+"<td>ww_KPI_GHG_elec/"+yy+" <td>"+format(slice_3)+
-    "</table>"+
-    '<div class=options>'+
-    ' <a href="'+chart.getImageURI()+'" download="image.png" class=printable>'+translate('graphs_printable_version')+'</a> | '+
-    " <a href='graph.php?g=graph3a'>"+translate('graphs_go_to')+"</a>"+
-    '</div>'+
-    "";
-    var div = document.createElement('div');
-    div.style.fontSize="10px";
-    div.innerHTML=table;
-    document.getElementById(container).appendChild(div);
-  }
-  else
-  {
-    //button "show table"
-    var div=document.createElement('div');
-    document.getElementById(container).appendChild(div);
-    div.innerHTML="<button onclick=Graphs.graph3a(true,'"+container+"')>"+translate('graphs_show_table')+"</button>"
-  }
-}
-*/
 
 //Water flows picture
 Graphs.sankey=function(withTable,container) {

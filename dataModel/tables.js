@@ -118,15 +118,27 @@ var Tables = {
 		"For food crop irrigation":{value:5},
 		"For fishfarming":{value:6},
 	},
+
+  //fsc
+  "fsc_type_tre":{
+    "No containment":{value:0,                                             ch4_efac:0.00},
+    "Pit latrine – below groundwater table or prone to flooding":{value:1, ch4_efac:0.42},
+    "Pit latrine without flush water - small family":{value:2,             ch4_efac:0.06}, 
+    "Pit latrine without flush water - communal":{value:3,                 ch4_efac:0.30}, 
+    "Pit latrine with flush water use":{value:4,                           ch4_efac:0.42}, 
+    "UDDT":{value:5,                                                       ch4_efac:0.00}, 
+    "Septic Tank":{value:6,                                                ch4_efac:0.30}, 
+    "Fully lined tank (sealed)":{value:7,                                  ch4_efac:0.30}, 
+  },
 }
 
 //copy fuel options for all stages
-Tables.wsa_fuel_typ=Tables["Fuel types"];
-Tables.wst_fuel_typ=Tables["Fuel types"];
-Tables.wsd_fuel_typ=Tables["Fuel types"];
-Tables.wwc_fuel_typ=Tables["Fuel types"];
-Tables.wwt_fuel_typ=Tables["Fuel types"];
-Tables.wwd_fuel_typ=Tables["Fuel types"];
+Tables.wsa_fuel_typ=Tables["Fuel types"]; //engines
+Tables.wst_fuel_typ=Tables["Fuel types"]; //engines
+Tables.wsd_fuel_typ=Tables["Fuel types"]; //engines
+Tables.wwc_fuel_typ=Tables["Fuel types"]; //engines
+Tables.wwt_fuel_typ=Tables["Fuel types"]; //engines
+Tables.wwd_fuel_typ=Tables["Fuel types"]; //engines
 Tables.wsd_trck_typ=Tables["Fuel types"]; //trucks
 Tables.wwt_trck_typ=Tables["Fuel types"]; //trucks
 Tables.wwd_trck_typ=Tables["Fuel types"]; //trucks

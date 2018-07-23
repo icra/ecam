@@ -1,11 +1,17 @@
 {
-  "#fs_KPI_GHG_descr":  "Total GHG Faecal Sludge Management",
-  "#fsc_KPI_GHG_descr": "Total GHG Faecal Sludge Management Containment",
-  "#fse_KPI_GHG_descr": "Total GHG Faecal Sludge Management Emptying",
-  "#fst_KPI_GHG_descr": "Total GHG Faecal Sludge Management Treatment",
-  "#fsr_KPI_GHG_descr": "Total GHG Faecal Sludge Management Reuse",
+   "#fs_KPI_GHG_descr": "Total GHG Faecal Sludge Management",
+  "#fsc_KPI_GHG_descr": "Total GHG in FSM Containment",
+  "#fse_KPI_GHG_descr": "Total GHG in FSM Emptying",
+  "#fst_KPI_GHG_descr": "Total GHG in FSM Treatment",
+  "#fsr_KPI_GHG_descr": "Total GHG in FSM Reuse",
 
-  "#fs_nrg_cons_descr":  "Energy consumed from the grid",
+   "#fs_KPI_GHG_elec_descr": "Electricity",
+  "#fsc_KPI_GHG_elec_descr": "Electricity",
+  "#fse_KPI_GHG_elec_descr": "Electricity",
+  "#fst_KPI_GHG_elec_descr": "Electricity",
+  "#fsr_KPI_GHG_elec_descr": "Electricity",
+
+  "#fs_nrg_cons_descr":  "Energy consumed from the grid in FSM stages",
   "#fsc_nrg_cons_descr": "Energy consumed from the grid",
   "#fse_nrg_cons_descr": "Energy consumed from the grid",
   "#fst_nrg_cons_descr": "Energy consumed from the grid",

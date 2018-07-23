@@ -29,17 +29,22 @@
 		global $level,$sublevel;
 		if($sublevel) {
 				switch($sublevel){
-					case "Abstraction"  :return "wsa";break;
-					case "Distribution" :return "wsd";break;
-					case "Collection"   :return "wwc";break;
-					case "Discharge"    :return "wwd";break;
-					case "Treatment"    :
+					case "Abstraction" :return "wsa";break;
+					case "Distribution":return "wsd";break;
+					case "Collection"  :return "wwc";break;
+					case "Discharge"   :return "wwd";break;
+          case "Containment" :return "fsc";break;
+          case "Emptying"    :return "fse";break;
+          case "Reuse"       :return "fsr";break;
+					case "Treatment":
 						if($level=="Water") return "wst";
-						if($level=="Waste") return "wwt";break;
+						if($level=="Waste") return "wwt";
+            if($level=="Faecl") return "fst"; break;
 				}
 		}else{
 			if     ($level=="Water") return "ws";
 			else if($level=="Waste") return "ww";
+      else if($level=="Faecl") return "fs";
 		}
 		return "nothing";
 	}

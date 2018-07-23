@@ -463,9 +463,10 @@
     <a href=sources.php id=Global_General_Name></a>
     <script>document.querySelector('#Global_General_Name').innerHTML=Global.General.Name</script>
     <?php echo "$sep $title"?>
+
     <!--See description (link to iwa web)-->
     <?php
-      if($sublevel) {
+      if(false && $sublevel) {
         ?>
         <span style=line-height:10px>
           <?php
@@ -491,41 +492,41 @@
   </div>
 
   <!--btns fold all div.cards-->
-  <?php if($sublevel) {
-      ?>
-      <div id=btn_all_container>
-        <style>
-          #btn_all_container a {
-            border:1px solid #bbb;
-            font-size:11px;
-            font-family:monospace;
-            padding:0.2em 0.5em;
-            border-radius:0.3em;
-            color:rgba(0,0,0,0.55);
-            background:#f5f5f5;
-            box-shadow: 0 1px 2px rgba(0,0,0,.1);
-            text-decoration:none;
-          }
-          #btn_all_container a:hover {
-            color:rgba(0,0,0,0.85);
-          }
-        </style>
-        <a id=btn_all_expand href=# style="margin-right:0.1em;"
-          onclick="
-            var divs=document.querySelectorAll('div.card');
-            for(var i=0;i<divs.length;i++){divs[i].classList.remove('folded')}
-          "
-          ><?php write("#Expand all")?>
-        </a>
-        <a id=btn_all_fold href=# style=""
-          onclick="
-            var divs=document.querySelectorAll('div.card');
-            for(var i=0;i<divs.length;i++){divs[i].classList.add('folded')}
-          "
-          ><?php write("#Fold all")?>
-        </a>
-      </div>
-      <?php
+  <?php if(false && $sublevel) { //disabled
+    ?>
+    <div id=btn_all_container>
+      <style>
+        #btn_all_container a {
+          border:1px solid #bbb;
+          font-size:11px;
+          font-family:monospace;
+          padding:0.2em 0.5em;
+          border-radius:0.3em;
+          color:rgba(0,0,0,0.55);
+          background:#f5f5f5;
+          box-shadow: 0 1px 2px rgba(0,0,0,.1);
+          text-decoration:none;
+        }
+        #btn_all_container a:hover {
+          color:rgba(0,0,0,0.85);
+        }
+      </style>
+      <a id=btn_all_expand href=# style="margin-right:0.1em;"
+        onclick="
+          var divs=document.querySelectorAll('div.card');
+          for(var i=0;i<divs.length;i++){divs[i].classList.remove('folded')}
+        "
+        ><?php write("#Expand all")?>
+      </a>
+      <a id=btn_all_fold href=# style=""
+        onclick="
+          var divs=document.querySelectorAll('div.card');
+          for(var i=0;i<divs.length;i++){divs[i].classList.add('folded')}
+        "
+        ><?php write("#Fold all")?>
+      </a>
+    </div>
+    <?php
     }
   ?>
 
@@ -731,7 +732,7 @@
   <?php
     if(!$sublevel){ ?>
       <div class="card" id=links-to-l2>
-        <?php cardMenu('Stages inside this level')?>
+        <?php cardMenu('Detailed assessment')?>
       </div>
       <script>
         (function(){
