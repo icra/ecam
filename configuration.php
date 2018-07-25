@@ -1,63 +1,42 @@
 <!doctype html><html><head>
   <?php include'imports.php'?>
   <script>
-    var Configuration = {}; //namespace
+    var Configuration={}; //namespace
 
-    /** Enable or disable stage <input type=checkbox id=id> */
-    Configuration.activate=function(id) {
+    /** Enable or disable stage <input type=checkbox id=id>*/
+    Configuration.activate=function(alias){
       //hide warning "all inactive"
       document.querySelector("#inactive_warning").classList.remove('visible');
 
       //checkbox that has been clicked
-      var checkbox=document.getElementById(id);
+      var checkbox=document.getElementById(alias);
 
       //update Active Stages
-      Global.Configuration.ActiveStages[id]=checkbox.checked ? 1 : 0;
+      Global.Configuration.ActiveStages[alias]=checkbox.checked ? 1 : 0;
 
-      //reset all variables to zero if !checked
-      if(!checkbox.checked) {
-        //if(!confirm("WARNING: All the inputs for this stage will be set to 0, and all the substages (if any) will be removed. Continue? This cannot be undone"))
-        if(0) {
-          checkbox.checked=true;
-          return
-        }
-
-        switch(id) {
-          case "water":
-            this.reset(Global.Water);
-            this.reset(Global.Water.Abstraction);  Substages.Water.Abstraction=[];
-            this.reset(Global.Water.Treatment);    Substages.Water.Treatment=[];
-            this.reset(Global.Water.Distribution); Substages.Water.Distribution=[];
-            break;
-          case "waste":
-            this.reset(Global.Waste);
-            this.reset(Global.Waste.Collection);   Substages.Waste.Collection=[];
-            this.reset(Global.Waste.Treatment);    Substages.Waste.Treatment=[];
-            this.reset(Global.Waste.Discharge);    Substages.Waste.Discharge=[];
-            break;
-          case "faecl":
-            this.reset(Global.Faecl);
-            this.reset(Global.Faecl.Containment); Substages.Faecl.Containment=[];
-            this.reset(Global.Faecl.Emptying);    Substages.Faecl.Emptying=[];
-            this.reset(Global.Faecl.Treatment);   Substages.Faecl.Treatment=[];
-            this.reset(Global.Faecl.Reuse);       Substages.Faecl.Reuse=[];
-            break;
-          case "waterAbs": this.reset(Global.Water.Abstraction);  Substages.Water.Abstraction=[];  break;
-          case "waterTre": this.reset(Global.Water.Treatment);    Substages.Water.Treatment=[];    break;
-          case "waterDis": this.reset(Global.Water.Distribution); Substages.Water.Distribution=[]; break;
-          case "wasteCol": this.reset(Global.Waste.Collection);   Substages.Waste.Collection=[];   break;
-          case "wasteTre": this.reset(Global.Waste.Treatment);    Substages.Waste.Treatment=[];    break;
-          case "wasteDis": this.reset(Global.Waste.Discharge);    Substages.Waste.Discharge=[];    break;
-          case "faeclCon": this.reset(Global.Faecl.Containment);  Substages.Faecl.Containment=[]; break;
-          case "faeclEmp": this.reset(Global.Faecl.Emptying);     Substages.Faecl.Emptying=[];    break;
-          case "faeclTre": this.reset(Global.Faecl.Treatment);    Substages.Faecl.Treatment=[];   break;
-          case "faeclReu": this.reset(Global.Faecl.Reuse);        Substages.Faecl.Reuse=[];       break;
+      //reset all variables to zero if not checked
+      if(!checkbox.checked){
+        var stage=Structure.find(s=>s.alias==alias);
+        if(stage.sublevel){
+          this.reset(Global[stage.level][stage.sublevel]);
+          Substages[stage.level][stage.sublevel]=[];
+        }else{
+          this.reset(Global[stage.level]);
+          //reset also level2 for substages
+          Structure.filter(s=>s.sublevel && s.level==stage.level).forEach(s=>{
+            Substages[s.level][s.sublevel]=[];
+          });
         }
       }
 
       //if a level 1 is deactivated, deactivate the corresponding level 2 ones
-      if(["water","waste",'faecl'].indexOf(id)>-1 && !checkbox.checked) {
-        var elements=document.querySelectorAll("table#selectStage input[class="+id+"]")
+      if(
+        Structure
+          .filter(s=>!s.sublevel)
+          .map(s=>s.alias)
+          .indexOf(alias)>-1 && !checkbox.checked
+      ){
+        var elements=document.querySelectorAll("table#selectStage input[class="+alias+"]")
         for(var i=0;i<elements.length;i++) {
           var alias=elements[i].id;
           elements[i].checked=false;
@@ -66,24 +45,24 @@
       }
 
       //if a level 2 stage is activated, activate L1 if not active
-      if([
-        "waterAbs","waterTre","waterDis",
-        "wasteCol","wasteTre","wasteDis",
-        "faeclCon", "faeclEmp", "faeclTre", "faeclReu",
-      ].indexOf(id)>-1 && checkbox.checked) {
-        var l1=checkbox.getAttribute('class');
-        document.getElementById(l1).checked=true;
-        this.activate(l1);
-      }
+      if(
+        Structure
+          .filter(s=>s.sublevel)
+          .map(s=>s.alias)
+          .indexOf(alias) >-1 && checkbox.checked
+        ){
+          var l1=checkbox.getAttribute('class');
+          document.getElementById(l1).checked=true;
+          this.activate(l1);
+        }
 
       init();
     }
 
-    /** Set all inputs inside the object to 0 */
+    /** Set all elements inside an object to 0 */
     Configuration.reset=function(obj) {
       for(var field in obj) {
-        if(typeof(obj[field])=="number")
-          obj[field]=0;
+        if(typeof(obj[field])=="number") obj[field]=0;
       }
       updateResult();
     }
@@ -93,13 +72,13 @@
       for(var stage in Global.Configuration.ActiveStages) {
         if(stage=="")continue;
         if(Global.Configuration.ActiveStages[stage]==1) {
-          /**set checked*/document.getElementById(stage).checked=true;
-          /**set checked*/document.getElementById(stage).parentNode.style.backgroundColor='lightgreen'
-          /**set checked*/document.getElementById(stage).parentNode.parentNode.style.backgroundColor='lightgreen'
+          /**set checked*/document.getElementById(stage).checked=true;;
+          /**set checked*/document.getElementById(stage).parentNode.style.backgroundColor='lightgreen';
+          /**set checked*/document.getElementById(stage).parentNode.parentNode.style.backgroundColor='lightgreen';
         } else if(Global.Configuration.ActiveStages[stage]==0) {
           /**set checked*/document.getElementById(stage).checked=false;
-          /**set checked*/document.getElementById(stage).parentNode.style.backgroundColor=''
-          /**set checked*/document.getElementById(stage).parentNode.parentNode.style.backgroundColor=''
+          /**set checked*/document.getElementById(stage).parentNode.style.backgroundColor='';
+          /**set checked*/document.getElementById(stage).parentNode.parentNode.style.backgroundColor='';
         }
       }
     }
@@ -123,6 +102,7 @@
       }
     }
   </script>
+
   <script>
     function init() {
       Sidebar.update();
@@ -155,12 +135,15 @@
       init();
     }
   </script>
+
   <style> h4{margin-bottom:1em} </style>
 </head><body onload=init()><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--navbar--> <?php include'navbar.php' ?>
-<!--linear--> <?php include'linear.php' ?>
-<!--caption--><?php include'caption.php'?>
+<?php
+  include'sidebar.php';
+  include'navbar.php';
+  include'linear.php';
+  include'caption.php';
+?>
 <!--title--><h1><?php write('#configuration')?></h1>
 <!--subtitle--><h4 style=margin:0;margin-bottom:1em><?php write('#configuration_subtitle')?></h4>
 
@@ -173,9 +156,7 @@
   <div>
     <table id=selectStage>
       <style>
-        #selectStage {
-          box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05);
-        }
+        #selectStage { box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05); }
         #selectStage img{width:40px;vertical-align:middle}
         #selectStage th{width:240px;}
         #selectStage td{text-align:left;padding:0}
@@ -203,22 +184,19 @@
               </label>";
           }
 
-          printL1stage("water",$lang_json['#Water'],3);
-          printL2stage("water","waterAbs",$lang_json["#Abstraction"], false);
-          printL2stage("water","waterTre",$lang_json["#Treatment"],   true);
-          printL2stage("water","waterDis",$lang_json["#Distribution"],true);
-
-          printL1stage("waste",$lang_json['#Waste'],3);
-          printL2stage("waste","wasteCol",$lang_json["#Collection"],false);
-          printL2stage("waste","wasteTre",$lang_json["#Treatment"], true);
-          printL2stage("waste","wasteDis",$lang_json["#Discharge"], true);
-
-          printL1stage("faecl",'Faecal Sludge Management', 4);
-          printL2stage("faecl","faeclCon", 'Containment',  false);
-          printL2stage("faecl","faeclEmp", 'Emptying',     true);
-          printL2stage("faecl","faeclTre", 'Treatment',    true);
-          printL2stage("faecl","faeclReu", 'Reuse',        true);
-
+          printL1stage("water",           translate('#Water'),        3);
+          printL2stage("water","waterAbs",translate("#Abstraction"),  false);
+          printL2stage("water","waterTre",translate("#Treatment"),    true);
+          printL2stage("water","waterDis",translate("#Distribution"), true);
+          printL1stage("waste",           translate('#Waste'),        3);
+          printL2stage("waste","wasteCol",translate("#Collection"),   false);
+          printL2stage("waste","wasteTre",translate("#Treatment"),    true);
+          printL2stage("waste","wasteDis",translate("#Discharge"),    true);
+          printL1stage("faecl",           translate('#Faecl'),        4);
+          printL2stage("faecl","faeclCon",translate('#Containment'),  false);
+          printL2stage("faecl","faeclEmp",translate('#Emptying'),     true);
+          printL2stage("faecl","faeclTre",translate('#Treatment'),    true);
+          printL2stage("faecl","faeclReu",translate('#Reuse'),        true);
         ?>
     </table>
   </div>

@@ -3,6 +3,7 @@
 var Level2only = {
 	list: [
     "wwt_type_tre", //related to wwt_ch4_efac
+    "fsc_type_tre", //hidden
 
     //fuel engines
     "wsa_KPI_GHG_fuel_co2", //hidden

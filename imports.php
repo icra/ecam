@@ -10,6 +10,7 @@
 
 <!--translation--><?php include'languages/write.php' ?>
 <!--order is important: dataModel then cookies-->
+<script src="dataModel/structure.js"></script>
 <script src="dataModel/global.js"></script>
 <script src="dataModel/substages.js"></script>
 <script src="dataModel/info.js"></script>

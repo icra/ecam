@@ -2,8 +2,8 @@
   if(!isset($_GET['level'])){die("ERROR: stage not specified");}
   /**
     * Inputs:
-    *  - $level:     mandatory {"Water","Waste"}
-    *  - $sublevel:  optional. If set, enables level 3 {"Abstraction","Treatment","Distribution",[...]}
+    *  - $level:     mandatory {"Water","Waste","Faecl"}
+    *  - $sublevel:  optional. If set, enables level 3 {"Abstraction","Treatment","Distribution",...}
     */
   $level=$_GET['level'];
   $sublevel=isset($_GET['sublevel']) ? $_GET['sublevel'] : false;
@@ -130,10 +130,11 @@
     <?php
       function getL1color(){
         global $level;
-        if($level=="Waste")
-          echo "#d71d24";
-        else
-          echo "#00aff1";
+        switch($level){
+          case "Water": echo "#00aff1"; break;
+          case "Waste": echo "#d71d24"; break;
+          case "Faecl": echo "green"; break;
+        }
       }
     ?>
     table#inputs th:not(.tableHeader),
@@ -442,11 +443,11 @@
   switch($level) {
     case "Water":
     case "Waste": 
-    case "Faecl": $titleLevel=$lang_json["#$level"]; break;
+    case "Faecl": $titleLevel=translate("#$level"); break;
     default:      $titleLevel=$level; break;
   }
   if($sublevel) {
-    $titleSublevel="<span style='font-size:26px'>".$lang_json["#$sublevel"]."</span>";
+    $titleSublevel="<span style='font-size:26px'>".translate("#$sublevel")."</span>";
   }
   /*separator*/
   $sep="<span style=color:black>&rsaquo;</span>";
@@ -466,21 +467,21 @@
 
     <!--See description (link to iwa web)-->
     <?php
-      if(false && $sublevel) {
+      if(false && $sublevel){
         ?>
         <span style=line-height:10px>
           <?php
             $iwaLink='http://www.iwa-network.org/water-climate-energy-solutions/public/catalogue/';
-            if    ($level=="Water" && $sublevel=="Abstraction")  {$alias="waterAbs"; $iwaLink.='stage/water_abstraction';}
-            elseif($level=="Water" && $sublevel=="Treatment")    {$alias="waterTre"; $iwaLink.='stage/water_treatment';}
-            elseif($level=="Water" && $sublevel=="Distribution") {$alias="waterDis"; $iwaLink.='stage/water_distribution';}
-            elseif($level=="Waste" && $sublevel=="Collection")   {$alias="wasteCol"; $iwaLink.='stage/wastewater_collection';}
-            elseif($level=="Waste" && $sublevel=="Treatment")    {$alias="wasteTre"; $iwaLink.='stage/wastewater_treatment';}
-            elseif($level=="Waste" && $sublevel=="Discharge")    {$alias="wasteDis"; $iwaLink.='stage/wastewater_discharge';}
-            elseif($level=="Faecl" && $sublevel=="Containment")  {$alias="faeclCon"; $iwaLink.='';}
-            elseif($level=="Faecl" && $sublevel=="Emptying")     {$alias="faeclEmp"; $iwaLink.='';}
-            elseif($level=="Faecl" && $sublevel=="Treatment")    {$alias="faeclTre"; $iwaLink.='';}
-            elseif($level=="Faecl" && $sublevel=="Reuse")        {$alias="faeclReu"; $iwaLink.='';}
+            if    ($level=="Water" && $sublevel=="Abstraction"  ){$alias="waterAbs"; $iwaLink.='stage/water_abstraction';}
+            elseif($level=="Water" && $sublevel=="Treatment"    ){$alias="waterTre"; $iwaLink.='stage/water_treatment';}
+            elseif($level=="Water" && $sublevel=="Distribution" ){$alias="waterDis"; $iwaLink.='stage/water_distribution';}
+            elseif($level=="Waste" && $sublevel=="Collection"   ){$alias="wasteCol"; $iwaLink.='stage/wastewater_collection';}
+            elseif($level=="Waste" && $sublevel=="Treatment"    ){$alias="wasteTre"; $iwaLink.='stage/wastewater_treatment';}
+            elseif($level=="Waste" && $sublevel=="Discharge"    ){$alias="wasteDis"; $iwaLink.='stage/wastewater_discharge';}
+            elseif($level=="Faecl" && $sublevel=="Containment"  ){$alias="faeclCon"; $iwaLink.='';}
+            elseif($level=="Faecl" && $sublevel=="Emptying"     ){$alias="faeclEmp"; $iwaLink.='';}
+            elseif($level=="Faecl" && $sublevel=="Treatment"    ){$alias="faeclTre"; $iwaLink.='';}
+            elseif($level=="Faecl" && $sublevel=="Reuse"        ){$alias="faeclReu"; $iwaLink.='';}
           ?>
           <a target=_blank href="<?php echo $iwaLink?>">
             <img style=width:27px;margin-left:10px title="More info" src='img/<?php echo "$alias.png"?>'>

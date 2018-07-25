@@ -11,9 +11,10 @@
 var Info = {
 
   //Containment
-  fsc_onsi_pop: {magnitude:"People", unit:"People"},
-  fsc_ch4_efac: {magnitude:"Mass/Mass", unit:"kgCH<sub>4</sub>/kgBOD"},
+  fsc_onsi_pop: {magnitude:"People",     unit:"People"},
+  fsc_ch4_efac: {magnitude:"Mass/Mass",  unit:"kgCH<sub>4</sub>/kgBOD"},
   fsc_cont_emp: {magnitude:"Percentage", unit:"%"},
+  fsc_type_tre: {magnitude:"Option",     unit:"Treatment type"},
 
   //fsm emissions
    fs_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},

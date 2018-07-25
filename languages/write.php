@@ -17,14 +17,17 @@ if($lang_json==NULL && $lang!="null"){
 
 //use $lang_json to fetch $id inside file "$lang".json
 //TRANSLATE SERVER SIDE
-function write($id){
-  global $lang;global $lang_json;
-  if($lang=="null") { echo "[$id]"; }
-  else {
-    //find text or display [not found]
+function translate($id){
+  global $lang; global $lang_json;
+  if($lang=="null"){return "[$id]";}
+  else{
+    //find text or display [id]
     $text = isset($lang_json[$id]) ? $lang_json[$id] : "[$id]";
-    echo $text;
+    return $text;
   }
+}
+function write($id){
+  echo translate($id);
 }
 ?>
 

@@ -154,6 +154,8 @@
         return document.querySelector('#inputs tr[stage=water] td.input input[id]');
       if(Global.Configuration.ActiveStages.waste)
         return document.querySelector('#inputs tr[stage=waste] td.input input[id]');
+      if(Global.Configuration.ActiveStages.faecl)
+        return document.querySelector('#inputs tr[stage=faecl] td.input input[id]');
     })();
     if(first && getVariable(first.id)==0){
       first.dispatchEvent(new CustomEvent('click'));

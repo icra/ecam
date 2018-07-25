@@ -72,32 +72,27 @@
 	<!--DETAILED-->
 	<div class="detailed_img">
 		<div><span style="color:inherit"><?php write('#tier_B')?></span></div>
-		<img class=l2 stage=waterAbs src="" onclick="window.location='edit.php?level=Water&sublevel=Abstraction'"  caption="<?php write('#Abstraction')?>" >
-		<img class=l2 stage=waterTre src="" onclick="window.location='edit.php?level=Water&sublevel=Treatment'"    caption="<?php write('#Treatment')?>">
-		<img class=l2 stage=waterDis src="" onclick="window.location='edit.php?level=Water&sublevel=Distribution'" caption="<?php write('#Distribution')?>">
-		<img class=l2 stage=wasteCol src="" onclick="window.location='edit.php?level=Waste&sublevel=Collection'"   caption="<?php write('#Collection')?>">
-		<img class=l2 stage=wasteTre src="" onclick="window.location='edit.php?level=Waste&sublevel=Treatment'"    caption="<?php write('#Treatment')?>">
-		<img class=l2 stage=wasteDis src="" onclick="window.location='edit.php?level=Waste&sublevel=Discharge'"    caption="<?php write('#Discharge')?>">
-    <img class=l2 stage=faeclCon src="" onclick="window.location='edit.php?level=Faecl&sublevel=Containment'"  caption="<?php write('#Containment')?>">
-    <img class=l2 stage=faeclEmp src="" onclick="window.location='edit.php?level=Faecl&sublevel=Emptying'"     caption="<?php write('#Emptying')?>">
-    <img class=l2 stage=faeclTre src="" onclick="window.location='edit.php?level=Faecl&sublevel=Treatment'"    caption="<?php write('#Treatment')?>">
-    <img class=l2 stage=faeclReu src="" onclick="window.location='edit.php?level=Faecl&sublevel=Reuse'"        caption="<?php write('#Reuse')?>">
-
     <script>
-      //set the img.l2[stage] src (icon path)
-      (function() {
-        var imgs=document.querySelectorAll("#linearDiagram div.detailed_img img.l2[stage]");
-        for(var i=0;i<imgs.length;i++) {
-          var stage=imgs[i].getAttribute('stage');
-          var isActive=Global.Configuration.ActiveStages[stage];
-          if(isActive) {
-            imgs[i].src="img/"+stage+".png";
+      var div_detailed_img=document.querySelector("#linearDiagram div.detailed_img");
+      Structure.filter(s=>s.sublevel).forEach(s=>{
+        var img=document.createElement('img');
+        div_detailed_img.appendChild(img);
+        img.classList.add('l2');
+        img.setAttribute('stage',s.alias);
+        img.setAttribute('caption',translate(s.sublevel));
+        img.src=(function(){
+          var isActive=Global.Configuration.ActiveStages[s.alias];
+          if(isActive){
+            return "img/"+s.alias+".png";
           }else{
-            imgs[i].src="img/"+stage+"-off.png";
-            imgs[i].classList.add('inactive');
+            img.classList.add('inactive');
+            return "img/"+s.alias+"-off.png";
           }
-        }
-      })();
+        })();
+        img.addEventListener('click',function(){
+          window.location='edit.php?level='+s.level+'&sublevel='+s.sublevel;
+        });
+      });
     </script>
 	</div>
 

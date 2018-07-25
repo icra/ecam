@@ -344,7 +344,6 @@
             </div>
             <div field=ws_KPI_GHG>0</div>
           </th>
-
             <!--wsa-->
             <td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'><?php write('#Abstraction')?></a>
               <?php drawCheckbox('wsa_KPI_GHG')?>
@@ -390,7 +389,6 @@
               <div field=ww_KPI_GHG_unt></div>
             </div>
           </th>
-
             <!--wwc-->
             <td><img src=img/wasteCol.png>
               <a href='edit.php?level=Waste&sublevel=Collection'><?php write('#Collection')?></a>

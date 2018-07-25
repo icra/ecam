@@ -290,10 +290,10 @@
   <!--inputs container (left)-->
   <div style="width:33%">
     <!--table container-->
-    <div class="card"><?php cardMenu($lang_json['#inputs'].' &mdash; '.$lang_json['#enter_values'])?>
+    <div class="card"><?php cardMenu(translate('#inputs').' &mdash; '.translate('#enter_values'))?>
       <!--inputs-->
       <table id=inputs style="width:100%">
-        <!--Water supply-->
+        <!--Water-->
         <tr><th colspan=3 style="background:#0aaff1">
           <div class=flex style="justify-content:space-between">
             <div>
@@ -318,7 +318,7 @@
           <tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost'  value=0>                <td class=unit>
           <tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
         </tr>
-        <!--Wastewater-->
+        <!--Waste-->
         <tr><th colspan=3 style=background:#d71d24>
           <div class=flex style="justify-content:space-between">
             <div>
@@ -364,6 +364,17 @@
               <?php include'sludge_birds.php'?>
             </td>
           </tr>
+        </tr>
+
+        <!--FSM-->
+        <tr><th colspan=3 style=background:green>
+          <div class=flex style="justify-content:space-between">
+            <div>
+              <img src=img/faecl.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Faecl')?>
+            </div>
+          </div>
+          <tr indic=faecl class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
+          <tr stage=faecl class=hidden><td colspan=3>under development
         </tr>
       </table>
     </div>
@@ -521,7 +532,7 @@
 
   <!--graphs container-->
   <div class=card style="width:66%">
-    <?php cardMenu($lang_json['#figures'])?>
+    <?php cardMenu(translate('#figures'))?>
     <div id=graphs>
       <style>
         #graphs table{margin:auto !important;margin-bottom:0.5em !important}
@@ -665,16 +676,18 @@
 <!--only show active water/wastewater inputs-->
 <script>
   (function(){
-    ['water','waste'].forEach(function(stage){
-      if(Global.Configuration.ActiveStages[stage]==1) {
-        //show all rows with stage=stage
-        var rows=document.querySelectorAll('#inputs tr[stage='+stage+']');
-        for(var i=0;i<rows.length;rows[i++].classList.remove('hidden')){}
-      }else{
-        //show "Stage not active"
-        document.querySelector('table#inputs tr[indic='+stage+']').classList.remove('hidden');
-      }
-    });
+    Structure
+      .filter(s=>!s.sublevel).map(s=>s.alias)
+      .forEach(function(stage){
+        if(Global.Configuration.ActiveStages[stage]==1) {
+          //show all rows with stage=stage
+          var rows=document.querySelectorAll('#inputs tr[stage='+stage+']');
+          for(var i=0;i<rows.length;rows[i++].classList.remove('hidden')){}
+        }else{
+          //show "Stage not active"
+          document.querySelector('table#inputs tr[indic='+stage+']').classList.remove('hidden');
+        }
+      });
 
     //hide fuel if its filter is not active
     if(Global.General.anyFuelEngines==0){

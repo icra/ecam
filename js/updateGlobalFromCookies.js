@@ -78,12 +78,9 @@ if(getCookie("GLOBAL")!==null){
   copyFieldsFrom(parsed,Global);
 
   //decompress and parse Substages in one step
-  Substages.Water.Abstraction  = JSON.parse(LZString.decompressFromEncodedURIComponent(getCookie('waterAbs')));
-  Substages.Water.Treatment    = JSON.parse(LZString.decompressFromEncodedURIComponent(getCookie('waterTre')));
-  Substages.Water.Distribution = JSON.parse(LZString.decompressFromEncodedURIComponent(getCookie('waterDis')));
-  Substages.Waste.Collection   = JSON.parse(LZString.decompressFromEncodedURIComponent(getCookie('wasteCol')));
-  Substages.Waste.Treatment    = JSON.parse(LZString.decompressFromEncodedURIComponent(getCookie('wasteTre')));
-  Substages.Waste.Discharge    = JSON.parse(LZString.decompressFromEncodedURIComponent(getCookie('wasteDis')));
+  Structure.filter(s=>s.sublevel).forEach(s=>{
+    Substages[s.level][s.sublevel]=JSON.parse(LZString.decompressFromEncodedURIComponent(getCookie(s.alias)));
+  });
 
   //set the value of the constants ct_ch4_eq and ct_n2o from the Global.Configuration.Selected.gwp_reports_index
   Cts.ct_ch4_eq.value=GWP_reports[Global.Configuration.Selected.gwp_reports_index].ct_ch4_eq;

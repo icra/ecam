@@ -27,13 +27,10 @@ none;">
     //Set cookie GLOBAL as compressed
     setCookie("GLOBAL",compressed);
 
-    //set 6 cookies for Substages
-    setCookie("waterAbs",LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Water.Abstraction))); 
-    setCookie("waterTre",LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Water.Treatment))); 
-    setCookie("waterDis",LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Water.Distribution))); 
-    setCookie("wasteCol",LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Waste.Collection))); 
-    setCookie("wasteTre",LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Waste.Treatment))); 
-    setCookie("wasteDis",LZString.compressToEncodedURIComponent(JSON.stringify(Substages.Waste.Discharge))); 
+    //set cookies for Substages
+    Structure.filter(s=>s.sublevel).forEach(s=>{
+      setCookie(s.alias, LZString.compressToEncodedURIComponent(JSON.stringify(Substages[s.level][s.sublevel]))); 
+    });
 
     //cookieSummary();
     //console.timeEnd('updateResult');
@@ -46,13 +43,10 @@ none;">
         "[*] Cookies chars lengths:\n"+
         " |--* Uncompressed : "+JSON.stringify(Global).length+" \n"+
         " |--* Compressed   : "+getCookie('GLOBAL').length+"\n"+
-        " |--* waterAbs     : "+getCookie('waterAbs').length+"\n"+
-        " |--* waterTre     : "+getCookie('waterTre').length+"\n"+
-        " |--* waterDis     : "+getCookie('waterDis').length+"\n"+
-        " |--* wasteCol     : "+getCookie('wasteCol').length+"\n"+
-        " |--* wasteTre     : "+getCookie('wasteTre').length+"\n"+
-        " |--* wasteDis     : "+getCookie('wasteDis').length+"\n"+
       "");
+      Structure.filter(s=>s.sublevel).forEach(s=>{
+        console.log(" |--* "+alias+": "+getCookie(s.alias).length);
+      });
     }
   }
 </script>
