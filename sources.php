@@ -427,8 +427,8 @@
                 echo "</a>";
                 drawCheckbox("$emission");
                 echo "
-                    <td field=$emission level=$level sublevel=$sublevel onmouseenter=fillSources(this,event)> <?php write('#Loading')?>...
-                    <td substage_sum=$emission style=display:none onmouseenter=fillSourcesSubstages(this,event)> <?php write('#Loading')?>...
+                    <td field=$emission level=$level sublevel=$sublevel onmouseenter=fillSources(this,event)>    Loading...
+                    <td substage_sum=$emission style=display:none onmouseenter=fillSourcesSubstages(this,event)> Loading...
                   </tr>
                 ";
               }
@@ -567,19 +567,22 @@
 
 <script>
   //copy all stage functions inside substages
-  ['Water','Waste'].forEach(level=>{
-    Object.keys(Global[level]).forEach(sublevel=>{
-      var stage=Global[level][sublevel];
-      Object.keys(stage)
-        .filter(key=>typeof(stage[key])=="function")
-        .forEach(key=>{
-          Substages[level][sublevel]
-          .forEach(substage=>{
-            substage[key]=Global[level][sublevel][key];
+  Structure
+    .filter(s=>!s.sublevel)
+    .map(s=>s.level)
+    .forEach(level=>{
+      Object.keys(Global[level]).forEach(sublevel=>{
+        var stage=Global[level][sublevel];
+        Object.keys(stage)
+          .filter(key=>typeof(stage[key])=="function")
+          .forEach(key=>{
+            Substages[level][sublevel]
+            .forEach(substage=>{
+              substage[key]=Global[level][sublevel][key];
+            });
           });
-        });
+      });
     });
-  });
 </script>
 
 <div style=margin-bottom:8em></div>

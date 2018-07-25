@@ -8,10 +8,12 @@
 	</script>
 </head><body onload=init()>
 <center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--navbar--><?php include'navbar.php'?>
-<!--linear--><?php include'linear.php'?>
-<!--caption--><?php include'caption.php'?>
+<?php 
+  include'sidebar.php';
+  include'navbar.php';
+  include'linear.php';
+  include'caption.php';
+?>
 <h1><?php write('#population')?></h1>
 
 <!--main-->
@@ -54,7 +56,7 @@
 			<tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?><td class=input><input id='ws_serv_pop'><td><small><?php write('#people')?>
 			<tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
     </tr>
-		<!--WASTEWATER-->
+		<!--WASTE-->
 		<tr><th colspan=3 style=background:#d71d24>
 			<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
 			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?> <td class=input><input id='ww_resi_pop'> <td><small><?php write('#people')?>
@@ -62,6 +64,12 @@
 			<tr stage=waste class=hidden><td><?php write('#wwt_serv_pop_descr')?><td class=input><input id='wwt_serv_pop'><td><small><?php write('#people')?>
 			<tr stage=waste class=hidden><td><?php write('#ww_onsi_pop_descr')?> <td class=input><input id='ww_onsi_pop'> <td><small><?php write('#people')?>
 			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
+    </tr>
+    <!--FAECL-->
+    <tr><th colspan=3 style=background:green>
+      <img src=img/faecl.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Faecl')?>
+      <tr><td colspan=3>under development
+      <tr indic=faecl class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
     </tr>
 	</table>
 </div>
@@ -104,7 +112,7 @@
   Caption.listeners();
 
   (function showActive() {
-    ['water','waste'].forEach(function(stage) {
+    ['water','waste','faecl'].forEach(function(stage) {
       if(Global.Configuration.ActiveStages[stage]) {
         var trs=document.querySelectorAll('#inputs tr[stage='+stage+']');
         for(var i=0;i<trs.length;i++)
