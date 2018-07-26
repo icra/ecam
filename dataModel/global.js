@@ -752,6 +752,8 @@ var Global = {
 
   //Level 1 FSM structure
   Faecl:{
+    "fs_onsi_pop":0, //onsite population
+
     fs_nrg_cons:function(){
       return this.Containment.fsc_nrg_cons+this.Emptying.fse_nrg_cons+this.Treatment.fst_nrg_cons+this.Reuse.fsr_nrg_cons;
     },
@@ -761,22 +763,47 @@ var Global = {
 
     //level 2 stages FSM
     Containment:{
-      "fsc_nrg_cons":0,
-      "fsc_type_tre":0, //hidden
-      "fsc_ch4_efac":0,
-      "fsc_onsi_pop":0,
-      "fsc_cont_emp":0,
+      "fsc_type_tre":0, //hidden (treatment type)
+      "fsc_nrg_cons":0, //energy consumed
+      "fsc_bod_infl":0, //influent bod load
+      "fsc_bod_rmvd":0, //bod removed as FS
+      "fsc_ch4_efac":0, //ch4 emission factor
+      "fsc_cont_emp":0, //containments emptied
+
+      "fsc_fslu_emp":0, //FS emptied
 
       fsc_KPI_GHG_elec:function(){return this.fsc_nrg_cons*Global.General.conv_kwh_co2},
+      fsc_KPI_GHG_cont:function(){//<br>
+        return (this.fsc_bod_infl-this.fsc_bod_rmvd)*this.fsc_ch4_efac*Cts.ct_ch4_eq.value;
+      },
       //total ghg
-      fsc_KPI_GHG:function(){return this.fsc_KPI_GHG_elec()},
+      fsc_KPI_GHG:function(){return this.fsc_KPI_GHG_elec()+this.fsc_KPI_GHG_cont()},
     },
+
     //level 2 stages FSM
     Emptying:{
-      "fse_nrg_cons":0,
+      //inputs
+      "fse_nrg_cons":0, //energy consumed
+      "fse_vol_fuel":0, //fuel consumed
+      "fse_trck_typ":0, //type of fuel
+      //fse sludge transport components
+      fse_KPI_GHG_trck_co2:function(){//<br>
+        var fuel=Tables['Fuel types'][Tables.find('fse_trck_typ',this.fse_trck_typ)];//<br>
+        return this.fse_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
+      },
+      fse_KPI_GHG_trck_n2o:function(){
+        var fuel=Tables['Fuel types'][Tables.find('fse_trck_typ',this.fse_trck_typ)];//<br>
+        return this.fse_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFN2O.vehicles*Cts.ct_n2o_eq.value;
+      },
+      fse_KPI_GHG_trck_ch4:function(){
+        var fuel=Tables['Fuel types'][Tables.find('fse_trck_typ',this.fse_trck_typ)];//<br>
+        return this.fse_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.vehicles*Cts.ct_ch4_eq.value;
+      },
+      //emissions per type
+      fse_KPI_GHG_trck:function(){return this.fse_KPI_GHG_trck_co2()+this.fse_KPI_GHG_trck_n2o()+this.fse_KPI_GHG_trck_ch4()},
       fse_KPI_GHG_elec:function(){return this.fse_nrg_cons*Global.General.conv_kwh_co2},
-      //total ghg
-      fse_KPI_GHG:function(){return this.fse_KPI_GHG_elec()},
+      //total ghg emissions
+      fse_KPI_GHG:function(){return this.fse_KPI_GHG_elec()+this.fse_KPI_GHG_trck()},
     },
     //level 2 stages FSM
     Treatment:{

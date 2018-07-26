@@ -17,10 +17,16 @@
     #info td.input input {margin:0;padding:0;width:95%;}
     .variableCode { font-family:monospace; }
     <?php
-      if(preg_match("/ww/",$id)) {
+      if(preg_match("/^ww/",$id)) {
         ?>
         #info td.th{background:#d71d24}
         #info a,#info a:visited,h1{color:#bf5050}
+        <?php
+      }
+      else if(preg_match("/^fs/",$id)) {
+        ?>
+        #info td.th{background:green}
+        #info a,#info a:visited,h1{color:green}
         <?php
       }
     ?>

@@ -1,11 +1,11 @@
 <!doctype html><html><head>
-	<?php include'imports.php'?>
-	<script>
-		function init() {
-			updateResult(); //update cookies
+  <?php include'imports.php'?>
+  <script>
+    function init() {
+      updateResult(); //update cookies
       Caption.listeners();
-		}
-	</script>
+    }
+  </script>
 </head><body onload=init()>
 <center>
 <?php 
@@ -18,68 +18,67 @@
 
 <!--main-->
 <div id=main>
-	<!--table-->
-	<style>
-		table#inputs th, #inputs td {text-align:left;}
-		#inputs td.input {
-			width:70px;
-			border:1px solid #aaa;
-			color:#666;
-			background:#eee;
-			padding:0 !important;
-		}
-		#inputs td.input input {
-			background:inherit;
-			border:none;
-			text-align:right;
-			cursor: cell;
-			line-height:1em;
-			width:70px;
-			height:24px;
-			display:block;
-		}
-		#inputs td.input input:focus {
-			background:white;
-		}
-		#inputs tr.hidden {display:none}
-		/**indication "not active"**/
-		#inputs tr[indic]{
+  <!--table-->
+  <style>
+    table#inputs th, #inputs td {text-align:left;}
+    #inputs td.input {
+      width:70px;
+      border:1px solid #aaa;
+      color:#666;
+      background:#eee;
+      padding:0 !important;
+    }
+    #inputs td.input input {
+      background:inherit;
+      border:none;
+      text-align:right;
+      cursor: cell;
+      line-height:1em;
+      width:70px;
+      height:24px;
+      display:block;
+    }
+    #inputs td.input input:focus {
+      background:white;
+    }
+    #inputs tr.hidden {display:none}
+    /**indication "not active"**/
+    #inputs tr[indic]{
       text-align:center;color:#999;background:#eee;
       font-size:smaller;
     }
-	</style>
-	<table id=inputs style="font-size:16px;margin:1em;width:50%">
-		<!--WATER-->
-		<tr><th colspan=3 style=background:#0aaff1>
-			<img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
-			<tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?><td class=input><input id='ws_resi_pop'><td><small><?php write('#people')?>
-			<tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?><td class=input><input id='ws_serv_pop'><td><small><?php write('#people')?>
-			<tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
+  </style>
+  <table id=inputs style="font-size:16px;margin:1em;width:50%">
+    <!--WATER-->
+    <tr><th colspan=3 style=background:#0aaff1>
+      <img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
+      <tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?><td class=input><input id='ws_resi_pop'><td><small><?php write('#people')?>
+      <tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?><td class=input><input id='ws_serv_pop'><td><small><?php write('#people')?>
+      <tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
     </tr>
-		<!--WASTE-->
-		<tr><th colspan=3 style=background:#d71d24>
-			<img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
-			<tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?> <td class=input><input id='ww_resi_pop'> <td><small><?php write('#people')?>
-			<tr stage=waste class=hidden><td><?php write('#wwc_conn_pop_descr')?><td class=input><input id='wwc_conn_pop'><td><small><?php write('#people')?>
-			<tr stage=waste class=hidden><td><?php write('#wwt_serv_pop_descr')?><td class=input><input id='wwt_serv_pop'><td><small><?php write('#people')?>
-			<tr stage=waste class=hidden><td><?php write('#ww_onsi_pop_descr')?> <td class=input><input id='ww_onsi_pop'> <td><small><?php write('#people')?>
-			<tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
+    <!--WASTE-->
+    <tr><th colspan=3 style=background:#d71d24>
+      <img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
+      <tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?> <td class=input><input id='ww_resi_pop'> <td><small><?php write('#people')?>
+      <tr stage=waste class=hidden><td><?php write('#wwc_conn_pop_descr')?><td class=input><input id='wwc_conn_pop'><td><small><?php write('#people')?>
+      <tr stage=waste class=hidden><td><?php write('#wwt_serv_pop_descr')?><td class=input><input id='wwt_serv_pop'><td><small><?php write('#people')?>
+      <tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
     </tr>
     <!--FAECL-->
     <tr><th colspan=3 style=background:green>
       <img src=img/faecl.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Faecl')?>
-      <tr><td colspan=3>under development
+      <tr stage=faecl class=hidden><td><?php write('#fs_onsi_pop_descr')?> <td class=input><input id='fs_onsi_pop'> <td><small><?php write('#people')?>
       <tr indic=faecl class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
     </tr>
-	</table>
+  </table>
 </div>
 
 <!--prev next-->
 <div>
-	<button class="button prev" onclick="event.stopPropagation();window.location='configuration.php'">
+  <button class="button prev" onclick="event.stopPropagation();window.location='configuration.php'">
     <?php write('#previous')?>
   </button>
-	<button class="button next" onclick="event.stopPropagation();window.location='birds.php'">
+  <button class="button next" onclick="event.stopPropagation();window.location='birds.php'">
     <?php write('#next')?>
   </button>
 </div>

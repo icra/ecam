@@ -144,6 +144,7 @@ Tables.wwt_trck_typ=Tables["Fuel types"]; //trucks
 Tables.wwd_trck_typ=Tables["Fuel types"]; //trucks
 Tables.wwt_dige_typ=Tables["Fuel types"]; //type of fuel dig
 Tables.wwt_appl_typ=Tables["Fuel types"]; //type of fuel app
+Tables.fse_trck_typ=Tables["Fuel types"]; //type of fuel fsm emptying
 
 //find the option (string) by field (string) and value (float or int)
 Tables.find=function(field,value) {

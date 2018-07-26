@@ -10,23 +10,30 @@
 
 var Info = {
 
-  //Containment
-  fsc_onsi_pop: {magnitude:"People",     unit:"People"},
-  fsc_ch4_efac: {magnitude:"Mass/Mass",  unit:"kgCH<sub>4</sub>/kgBOD"},
-  fsc_cont_emp: {magnitude:"Percentage", unit:"%"},
-  fsc_type_tre: {magnitude:"Option",     unit:"Treatment type"},
-
-  //fsm emissions
-   fs_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
-  fsc_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   fse_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   fst_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   fsr_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
-   fs_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
-  fsc_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   fse_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   fst_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   fsr_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+
+  fse_vol_fuel:{magnitude:"Volume",unit:"L"},
+
+  //FS Containment
+  fsc_ch4_efac: {magnitude:"Mass/Mass",  unit:"kgCH<sub>4</sub>/kgBOD"},
+  fsc_cont_emp: {magnitude:"Percentage", unit:"%"},
+  fsc_type_tre: {magnitude:"Option",     unit:"Treatment type"},
+  fsc_bod_infl: {magnitude:"Mass",       unit:"kg"}, //influent bod load
+  fsc_fslu_emp: {magnitude:"Volume",     unit:"m3"}, //FS emptied
+  fsc_bod_rmvd: {magnitude:"Mass",       unit:"kg"}, //bod removed as FS
+  fsc_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  fsc_KPI_GHG_cont: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  fsc_KPI_GHG:      {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+
+  //LEVEL1 FSM
+  fs_onsi_pop:     {magnitude:"People",     unit:"People"},
+  fs_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  fs_KPI_GHG:      {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
 
   //fsm energy consumed
   fs_nrg_cons: {magnitude:"Energy", unit:"kWh"},
@@ -94,6 +101,7 @@ var Info = {
 	wwt_trck_typ:{magnitude:"Option",unit:"Fuel type"},
 	wwd_trck_typ:{magnitude:"Option",unit:"Fuel type"},
 	wwt_dige_typ:{magnitude:"Option",unit:"Fuel type"},
+  fse_trck_typ:{magnitude:"Option",unit:"Fuel type"},
 
 	//fuel ghg emissions splitted
 	wsa_KPI_GHG_fuel:    {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
@@ -120,6 +128,10 @@ var Info = {
 	wwd_KPI_GHG_fuel_co2:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwd_KPI_GHG_fuel_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 	wwd_KPI_GHG_fuel_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  fse_KPI_GHG_trck:    {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  fse_KPI_GHG_trck_co2:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  fse_KPI_GHG_trck_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  fse_KPI_GHG_trck_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	/* +================+ */
 	/* | Service levels | */

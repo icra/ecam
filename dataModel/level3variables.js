@@ -142,4 +142,9 @@ Level3.list=[
 
   //fsc
   "fsc_type_tre", //hidden
+
+  //fse
+  "fse_KPI_GHG_trck_co2",
+  "fse_KPI_GHG_trck_n2o",
+  "fse_KPI_GHG_trck_ch4",
 ];
