@@ -19,8 +19,8 @@ var Cts = {
 
   //constants for sludge management proposed by Girum
   ct_oc_vs:{value:0.56,descr:"Organic Carbon content in Volatile Solids",unit:"g OC / g TVS"},
-  ct_vs_dig:{value:0.51,descr:"Volatile Solids content in Digested Sludge",unit:"g TVS / g digested sludge"},
-  ct_vs_slu:{value:0.70,descr:"Volatile Solids content in not Digested Sludge",unit:"g TVS / g digested sludge"},
+  ct_vs_dig:{value:0.51,descr:"Volatile Solids content in Digested Sludge",unit:"g TVS / g sludge"},
+  ct_vs_slu:{value:0.70,descr:"Volatile Solids content in not Digested Sludge",unit:"g TVS / g sludge"},
   ct_ch4_oc:{value:1.3,descr:"C to CH<sub>4</sub> conversion factor",unit:"g CH<sub>4</sub> / g OC"},
   ct_ch4_up:{value:0.025,descr:"Percentage of CH<sub>4</sub> emission for uncoverd pile",unit:"ratio"},
 
@@ -81,13 +81,13 @@ var Cts = {
   ct_ef_eff:{
     value:0.005,
     descr:"EF effluent (tabled value)",
-    unit:"kg N<sub>2</sub>-N / kg N",
+    unit:"kg N<sub>2</sub>O-N / kg N",
   },
 
   ct_n2o_co:{
     value:44/28,
-    descr:"Conversion factor N<sub>2</sub>-N to N<sub>2</sub> (=44/28)",
-    unit:"kg N<sub>2</sub> / kg N<sub>2</sub>-N",
+    descr:"Conversion factor N<sub>2</sub>O-N to N<sub>2</sub> (=44/28)",
+    unit:"kg N<sub>2</sub> / kg N<sub>2</sub>O-N",
   },
 
   ct_ch4_ef:{

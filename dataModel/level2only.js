@@ -4,6 +4,7 @@ var Level2only = {
 	list: [
     "wwt_type_tre", //related to wwt_ch4_efac
     "fsc_type_tre", //hidden
+    "fst_type_tre", //hidden
 
     //fuel engines
     "wsa_KPI_GHG_fuel_co2", //hidden
@@ -24,6 +25,9 @@ var Level2only = {
     "wwd_KPI_GHG_fuel_co2", //hidden
     "wwd_KPI_GHG_fuel_n2o", //hidden
     "wwd_KPI_GHG_fuel_ch4", //hidden
+    "fst_KPI_GHG_fuel_co2", //hidden
+    "fst_KPI_GHG_fuel_n2o", //hidden
+    "fst_KPI_GHG_fuel_ch4", //hidden
 
     //truck transport
     "wsd_KPI_GHG_trck_co2", //hidden

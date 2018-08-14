@@ -800,24 +800,147 @@ var Global = {
         return this.fse_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.vehicles*Cts.ct_ch4_eq.value;
       },
       //emissions per type
-      fse_KPI_GHG_trck:function(){return this.fse_KPI_GHG_trck_co2()+this.fse_KPI_GHG_trck_n2o()+this.fse_KPI_GHG_trck_ch4()},
       fse_KPI_GHG_elec:function(){return this.fse_nrg_cons*Global.General.conv_kwh_co2},
+      fse_KPI_GHG_trck:function(){return this.fse_KPI_GHG_trck_co2()+this.fse_KPI_GHG_trck_n2o()+this.fse_KPI_GHG_trck_ch4()},
       //total ghg emissions
       fse_KPI_GHG:function(){return this.fse_KPI_GHG_elec()+this.fse_KPI_GHG_trck()},
     },
+
     //level 2 stages FSM
     Treatment:{
       "fst_nrg_cons":0,
+      "fst_ch4_efac":0,
+
+      //electricity emissions
       fst_KPI_GHG_elec:function(){return this.fst_nrg_cons*Global.General.conv_kwh_co2},
-      //total ghg
-      fst_KPI_GHG:function(){return this.fst_KPI_GHG_elec()},
+
+      //fuel engines emissions
+      "fst_vol_fuel":0, //fuel consumed
+      "fst_fuel_typ":0, //type of fuel
+      fst_KPI_GHG_fuel_co2:function(){//<br>
+        var fuel=Tables['Fuel types'][Tables.find('fst_fuel_typ',this.fst_fuel_typ)];//<br>
+        return this.fst_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
+      },
+      fst_KPI_GHG_fuel_n2o:function(){
+        var fuel=Tables['Fuel types'][Tables.find('fst_fuel_typ',this.fst_fuel_typ)];//<br>
+        return this.fst_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFN2O.engines*Cts.ct_n2o_eq.value;
+      },
+      fst_KPI_GHG_fuel_ch4:function(){
+        var fuel=Tables['Fuel types'][Tables.find('fst_fuel_typ',this.fst_fuel_typ)];//<br>
+        return this.fst_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
+      },
+      fst_KPI_GHG_fuel:function(){return this.fst_KPI_GHG_fuel_co2()+this.fst_KPI_GHG_fuel_n2o()+this.fst_KPI_GHG_fuel_ch4()},
+
+      //ghg biogas emissions
+      fst_biog_pro:0,
+      fst_biog_val:0,
+      fst_biog_fla:0,
+      fst_ch4_biog:59,
+      fst_KPI_GHG_biog:function(){
+        return (this.fst_biog_pro-this.fst_biog_val-this.fst_biog_fla+this.fst_biog_fla*Cts.ct_ch4_lo.value/100)*this.fst_ch4_biog/100*Cts.ct_ch4_m3.value*Cts.ct_ch4_eq.value;
+      },
+
+      //treatment ch4+n2o emissions
+      "fst_bod_infl":0,
+      "fst_bod_effl":0,
+      "fst_bod_slud":0,
+      "fst_type_tre":0,
+      fst_KPI_GHG_tre_ch4:function(){
+        return (this.fst_bod_infl-this.fst_bod_slud-this.fst_bod_effl)*this.fst_ch4_efac*Cts.ct_ch4_eq.value;
+      },
+      fst_KPI_GHG_tre_n2o:function(){//<br>
+        return 0; //to be defined (TBD) 
+      },
+      fst_KPI_GHG_tre:function(){
+        return this.fst_KPI_GHG_tre_ch4()+this.fst_KPI_GHG_tre_n2o();
+      },
+
+      //total ghg emissions
+      fst_KPI_GHG:function(){
+        return this.fst_KPI_GHG_elec()+this.fst_KPI_GHG_biog()+this.fst_KPI_GHG_fuel()+this.fst_KPI_GHG_tre();
+      },
     },
+
     //level 2 stages FSM
     Reuse:{
+      //elec emissions
       "fsr_nrg_cons":0,
       fsr_KPI_GHG_elec:function(){return this.fsr_nrg_cons*Global.General.conv_kwh_co2},
+
+      //input used for different filters
+      "fsr_vol_disc":0,
+      "fsr_n2o_effl":0,
+      "fsr_fslu_typ":0, //type of faecal sludge disposed
+
+      //land application emissions
+      "fsr_mass_landapp":0, //dry weight sent to land application
+      "fsr_soil_typ":0,     //soil type for land application
+      fsr_KPI_GHG_landapp:function(){//<br>
+        var soil_type=Tables.find('fsr_soil_typ',this.fsr_soil_typ);//<br>
+        var N_transformed_to_N2O=0;//<br>
+        if(soil_type=="Fine-Textured"  ) N_transformed_to_N2O=0.023; //<br>
+        if(soil_type=="Coarse-Textured") N_transformed_to_N2O=0.050; //<br><br>
+
+        var fslu_type=Tables.find('fsr_fslu_typ',this.fsr_fslu_typ);//<br>
+        var N_content=Tables.fsr_fslu_typ[fslu_type].N_content;//<br><br>
+
+        return this.fsr_mass_landapp*N_content*N_transformed_to_N2O*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value; //<br>
+      },
+
+      //landfill emissions
+      "fsr_mass_landfil":0, //dry weight sent to landfilling
+      "fsr_disp_typ":0,     //disposal type for landfilling
+      fsr_KPI_GHG_landfil_n2o:function(){//<br>
+        var disp_type=Tables.find('fsr_disp_typ',this.fsr_disp_typ);//<br>
+        if(disp_type=="Landfill"){//<br>
+          return this.fsr_mass_landfil*this.fsr_n2o_effl*0.015*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
+        }//<br>
+        if(disp_type=="Landfill (flaring)"){//<br>
+          return 0.02*this.fsr_mass_landfil*this.fsr_n2o_effl*0.015*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
+        }//<br>
+        if(disp_type=="Landfill (with gas recovery)")//<br>
+        {return 0}//<br>
+      },
+      fsr_KPI_GHG_landfil_ch4:function(){//<br>
+        var disp_type=Tables.find('fsr_disp_typ',this.fsr_disp_typ);//<br>
+        var fslu_type=Tables.find('fsr_fslu_typ',this.fsr_fslu_typ);//<br>
+        var TVS=Tables.fsr_fslu_typ[fslu_type].TVS;
+        if(disp_type=="Landfill"){//<br>
+          return this.fsr_mass_landfil*TVS*Cts.ct_oc_vs.value*0.80*0.9*(4/3)*0.50*0.699*Cts.ct_ch4_eq.value;//<br>
+        }//<br>
+        if(disp_type=="Landfill (flaring)"){//<br>
+          return 0.02*this.fsr_mass_landfil*TVS*Cts.ct_oc_vs.value*0.80*0.9*(4/3)*0.50*0.699*Cts.ct_ch4_eq.value;//<br>
+        }//<br>
+        if(disp_type=="Landfill (with gas recovery)"){//<br>
+          return 0; //<br>
+        }//<br>
+      },
+      fsr_KPI_GHG_landfil:function(){//<br>
+        return this.fsr_KPI_GHG_landfil_n2o()+this.fsr_KPI_GHG_landfil_ch4();
+      },
+
+      //dumping emissions
+      "fsr_vol_dumping":0,  //volume dumped
+      "fsr_dumping_pth":0,  //dumping pathway
+      fsr_KPI_GHG_dumping_n2o:function(){//<br>
+        return this.fsr_vol_dumping*1000/1000*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      },
+      fsr_KPI_GHG_dumping_ch4:function(){//<br>
+        return this.fsr_vol_dumping*67.8*0.3*Cts.ct_ch4_eq.value;//<br>
+      },
+      fsr_KPI_GHG_dumping:function(){//<br>
+        return this.fsr_KPI_GHG_dumping_n2o()+this.fsr_KPI_GHG_dumping_ch4();
+      },
+
+      //effluent discharge to water body emissions
+      fsr_KPI_GHG_tre_n2o:function(){//<br>
+        return this.fsr_n2o_effl/1000*this.fsr_vol_disc*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value;
+      },
+
       //total ghg
-      fsr_KPI_GHG:function(){return this.fsr_KPI_GHG_elec()},
+      fsr_KPI_GHG:function(){//<br>
+        return this.fsr_KPI_GHG_elec()+this.fsr_KPI_GHG_landapp()+this.fsr_KPI_GHG_landfil()+this.fsr_KPI_GHG_dumping()+this.fsr_KPI_GHG_tre_n2o();
+      },
     },
   },
 
@@ -840,19 +963,21 @@ var Global = {
 
     //auxiliar object to store user selections
     Selected: {
-      wwt_ch4_efac:"",
+      wwt_ch4_efac:"", //string with the treatment selected
+      fsc_ch4_efac:"", //string with the treatment selected
+      fst_ch4_efac:"", //string with the treatment selected
       prot_con:"Albania",//country selected for protein consumption
       sludge_estimation_method:"0",
       gwp_reports_index:0,
     },
 
-    //answers for filters ("questions.js")
+    //answers for filters (see "questions.js")
     "Yes/No": {
       //wsa_pumping:0,
     },
   },
 
-  //TODO check what is this? it takes memory!!!
+  //TODO check what is this (modification from gary)
   Opps:{
     g_nrw_water_vol_dper              : 0,
     g_end_user_consumption_dper       : 0,

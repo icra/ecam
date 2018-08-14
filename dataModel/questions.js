@@ -540,6 +540,56 @@ var Questions={
       advanced:1,
       otherQuestions:[],
     },
+
+  //fst
+    "fst_producing_biogas":{
+      variables:[
+        "fst_biog_pro",
+        "fst_biog_val",
+        "fst_biog_fla",
+        "fst_ch4_biog",
+        "fst_KPI_GHG_biog",
+      ],
+      advanced:0,
+      otherQuestions:[
+      ],
+    },
+
+  //fsr
+  "fsr_landapp":{
+    variables:[
+      "fsr_mass_landapp",
+      "fsr_soil_typ",
+      "fsr_KPI_GHG_landapp",
+    ],
+    advanced:0,
+    otherQuestions:[
+    ],
+  },
+  "fsr_landfil":{
+    variables:[
+      "fsr_mass_landfil",
+      "fsr_disp_typ",
+      "fsr_KPI_GHG_landfil_ch4",
+      "fsr_KPI_GHG_landfil_n2o",
+      "fsr_KPI_GHG_landfil",
+    ],
+    advanced:0,
+    otherQuestions:[
+    ],
+  },
+  "fsr_dumping":{
+    variables:[
+      "fsr_vol_dumping",
+      "fsr_dumping_pth",
+      "fsr_KPI_GHG_dumping_ch4",
+      "fsr_KPI_GHG_dumping_n2o",
+      "fsr_KPI_GHG_dumping",
+    ],
+    advanced:0,
+    otherQuestions:[
+    ],
+  },
 };
 
 //FUNCTIONS for Questions

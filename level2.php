@@ -264,8 +264,8 @@
     newCell.innerHTML=(function() {
       var value = isCV ? CurrentLevel[field]() : CurrentLevel[field];
       value/=Units.multiplier(field);
-      value=format(value);
-      return value
+      var color=value?"":"#ccc";
+      return "<span style=color:"+color+">"+format(value)+"</span>";
     })();
 
     //unit

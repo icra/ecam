@@ -288,10 +288,11 @@
           newCell.setAttribute('title',"<?php write('#edit_click_to_modify')?>");
           newCell.classList.add("input");
           newCell.setAttribute('onclick','level3.transformField(this)');
-          var value=(function(){
-            return substages[s][code]/multiplier;
+          newCell.innerHTML=(function(){
+            var value=substages[s][code]/multiplier;
+            var color=value?"":"#ccc";
+            return "<span style=color:"+color+">"+format(value)+"</span>";
           })();
-          newCell.innerHTML=format(value);
         }
 
         //Unit for current variable
@@ -325,7 +326,7 @@
     //stage value
     var sta=CurrentLevel[code]/Units.multiplier(code);
 
-    //sum of substages here
+    //sum of substages or average
     newRow.insertCell(-1).outerHTML=(function(){
       if(isOption)return "";
 
@@ -339,8 +340,7 @@
       var btn_overwrite=(function(){
         var btn_value = isSumable ? value : value/substages.length; //sum or average
         var onclick   = "onclick=level2.updateField('"+code+"',"+btn_value+")";
-        var disabled  = btn_value==sta ? "disabled":"";
-        return '<button '+onclick+' '+disabled+
+        return '<button '+onclick+' '+
           ' caption="Update the stage value using this '+(isSumable?'total':'average')+' value">'+
           '&rarr;</button>';
       })();
@@ -350,9 +350,7 @@
       if(substages.length){
         var btn_copy = (function(){
           var btn_value = isSumable ? value : value/substages.length; //sum or average
-          var disabled = format(btn_value)==format(sta) ? "disabled":"";
           return '<button '+
-            disabled+' '+
             'caption="Split stage value ('+format(sta)+') among substages" '+
             'onclick=\"substages.forEach(s=>{s[\''+code+'\']=CurrentLevel[\''+code+'\']/'+(isSumable?substages.length:1)+'});init()\">'+
             '&larr;'+
@@ -361,7 +359,8 @@
         extra_btns+=" "+btn_copy;
       }
 
-      return "<td style=text-align:center caption='"+(isSumable? translate('Sum of substages'):translate('Average value among substages'))+"'>"+format(isSumable?value:value/substages.length)+extra_btns;
+      var color=value?"":"#ccc";
+      return "<td style=text-align:center;color:"+color+" caption='"+(isSumable? translate('Sum of substages'):translate('Average value among substages'))+"'>"+format(isSumable?value:value/substages.length)+extra_btns;
     })();
 
     //stage value of input in substages (last column)
@@ -388,6 +387,11 @@
       newCell.setAttribute('onclick','level2.transformField(this)');
       newCell.setAttribute('title',"<?php write('#edit_click_to_modify')?>");
       newCell.innerHTML=format(CurrentLevel[code]/Units.multiplier(code));
+      newCell.innerHTML=(function(){
+        var value=CurrentLevel[code]/Units.multiplier(code);
+        var color=value?"":"#ccc";
+        return "<span style=color:"+color+">"+format(value)+"</span>";
+      })();
     }
   }
 
@@ -480,7 +484,8 @@
         var div_v=document.createElement('div');
         //mouseover show formula
         div_v.setAttribute('caption',prettyFormula);
-        div_v.innerHTML=format(value);
+        var color=value?"":"#ccc";
+        div_v.innerHTML="<span style=color:"+color+">"+format(value)+"</span>";
         return div_v;
       })());
     });
@@ -492,11 +497,12 @@
       return Info[code] ? Info[code].unit : "<span style=color:#ccc>no unit</span>";
     })();
 
-    //sum of substages here
+    //sum of substages or average
     var sum=level3.sumAll(code)/Units.multiplier(code);
     var isSumable = Info[code] && Sumable_magnitudes.indexOf(Info[code].magnitude)+1;
     newRow.insertCell(-1).outerHTML=(function(){
-      var rv="<td colspan=2 style='text-align:center'>";
+      var color=sum?"":"#ccc";
+      var rv="<td colspan=2 style='text-align:center;color:"+color+"'>";
       //sum all values
       if(isSumable){
         rv+="<div caption='<?php write('#Sum of substages')?>'>"+format(sum)+"</div>";

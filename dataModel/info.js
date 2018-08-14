@@ -1,42 +1,73 @@
-/**
-*
+/*
 	Info: one-level-depth object that stores magnitudes and units for all inputs and outputs
 		descriptions in english are inside languages/en.php
 		descriptions in spanish are inside languages/es.php
-
 	Format:
 		"code": { "magnitude": string, "unit": string }
 */
 
 var Info = {
+  //FS Reuse
+  fsr_mass_landapp:         {magnitude:"Mass",        unit:"kg"},
+  fsr_mass_landfil:         {magnitude:"Mass",        unit:"kg"},
+  fsr_soil_typ:             {magnitude:"Option",      unit:"Soil type"},
+  fsr_n2o_effl:             {magnitude:"Mass/Volume", unit:"mg/L"},
+  fsr_vol_disc:             {magnitude:"Volume",      unit:"m3"},
+  fsr_disp_typ:             {magnitude:"Option",      unit:"Disposal type"},
+  fsr_vol_dumping:          {magnitude:"Volume",      unit:"m3"},
+  fsr_dumping_pth:          {magnitude:"Option",      unit:"Dumping pathway"},
+  fsr_fslu_typ:             {magnitude:"Option",      unit:"Type of FS"},
+  fsr_KPI_GHG_elec:         {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+  fsr_KPI_GHG:              {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+  fsr_KPI_GHG_landapp:      {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+  fsr_KPI_GHG_landfil:      {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+  fsr_KPI_GHG_landfil_n2o:  {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+  fsr_KPI_GHG_landfil_ch4:  {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+  fsr_KPI_GHG_dumping:      {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+  fsr_KPI_GHG_dumping_n2o:  {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+  fsr_KPI_GHG_dumping_ch4:  {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+  fsr_KPI_GHG_tre_n2o:      {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
 
-  fse_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
-  fst_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
-  fsr_KPI_GHG: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
-  fse_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
-  fst_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
-  fsr_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  //FS Treatment
+  fst_biog_pro:        {magnitude:"Volume",    unit:"m3" },
+  fst_biog_val:        {magnitude:"Volume",    unit:"m3" },
+  fst_biog_fla:        {magnitude:"Volume",    unit:"m3" },
+  fst_ch4_biog:        {magnitude:"Percent",   unit:"%" },
+  fst_vol_fuel:        {magnitude:"Volume",    unit:"m3" },
+  fst_KPI_GHG_elec:    {magnitude:"Mass",      unit:"kg CO<sub>2</sub>e" },
+  fst_KPI_GHG_biog:    {magnitude:"Mass",      unit:"kg CO<sub>2</sub>e" },
+  fst_KPI_GHG:         {magnitude:"Mass",      unit:"kg CO<sub>2</sub>e" },
+  fst_bod_infl:        {magnitude:"Mass",      unit:"kg" },
+  fst_bod_effl:        {magnitude:"Mass",      unit:"kg" },
+  fst_bod_slud:        {magnitude:"Mass",      unit:"kg" },
+  fst_ch4_efac:        {magnitude:"Mass/Mass", unit:"kgCH<sub>4</sub>/kgBOD" },
+  fst_type_tre:        {magnitude:"Option",    unit:"Treatment type"},
+  fst_KPI_GHG_tre_ch4: {magnitude:"Mass",      unit:"kg CO<sub>2</sub>e"},
+  fst_KPI_GHG_tre_n2o: {magnitude:"Mass",      unit:"kg CO<sub>2</sub>e"},
+  fst_KPI_GHG_tre:     {magnitude:"Mass",      unit:"kg CO<sub>2</sub>e"},
 
-  fse_vol_fuel:{magnitude:"Volume",unit:"L"},
+  //FS Emptying and Transport
+  fse_vol_fuel:     {magnitude:"Volume", unit:"L"},
+  fse_KPI_GHG_elec: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
+  fse_KPI_GHG:      {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
 
   //FS Containment
-  fsc_ch4_efac: {magnitude:"Mass/Mass",  unit:"kgCH<sub>4</sub>/kgBOD"},
-  fsc_cont_emp: {magnitude:"Percentage", unit:"%"},
-  fsc_type_tre: {magnitude:"Option",     unit:"Treatment type"},
-  fsc_bod_infl: {magnitude:"Mass",       unit:"kg"}, //influent bod load
-  fsc_fslu_emp: {magnitude:"Volume",     unit:"m3"}, //FS emptied
-  fsc_bod_rmvd: {magnitude:"Mass",       unit:"kg"}, //bod removed as FS
-  fsc_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
-  fsc_KPI_GHG_cont: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
-  fsc_KPI_GHG:      {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
+  fsc_ch4_efac:     {magnitude:"Mass/Mass",  unit:"kgCH<sub>4</sub>/kgBOD"},
+  fsc_cont_emp:     {magnitude:"Percentage", unit:"%"},
+  fsc_type_tre:     {magnitude:"Option",     unit:"Treatment type"},
+  fsc_bod_infl:     {magnitude:"Mass",       unit:"kg"}, //influent bod load
+  fsc_fslu_emp:     {magnitude:"Volume",     unit:"m3"}, //FS emptied
+  fsc_bod_rmvd:     {magnitude:"Mass",       unit:"kg"}, //bod removed as FS
+  fsc_KPI_GHG_elec: {magnitude:"Mass",       unit:"kg CO<sub>2</sub>e"},
+  fsc_KPI_GHG_cont: {magnitude:"Mass",       unit:"kg CO<sub>2</sub>e"},
+  fsc_KPI_GHG:      {magnitude:"Mass",       unit:"kg CO<sub>2</sub>e"},
 
   //LEVEL1 FSM
   fs_onsi_pop:     {magnitude:"People",     unit:"People"},
-  fs_KPI_GHG_elec: {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
   fs_KPI_GHG:      {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
 
   //fsm energy consumed
-  fs_nrg_cons: {magnitude:"Energy", unit:"kWh"},
+  fs_nrg_cons:  {magnitude:"Energy", unit:"kWh"},
   fsc_nrg_cons: {magnitude:"Energy", unit:"kWh"},
   fse_nrg_cons: {magnitude:"Energy", unit:"kWh"},
   fst_nrg_cons: {magnitude:"Energy", unit:"kWh"},
@@ -102,6 +133,7 @@ var Info = {
 	wwd_trck_typ:{magnitude:"Option",unit:"Fuel type"},
 	wwt_dige_typ:{magnitude:"Option",unit:"Fuel type"},
   fse_trck_typ:{magnitude:"Option",unit:"Fuel type"},
+  fst_fuel_typ:{magnitude:"Option",unit:"Fuel type"},
 
 	//fuel ghg emissions splitted
 	wsa_KPI_GHG_fuel:    {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
@@ -132,6 +164,10 @@ var Info = {
   fse_KPI_GHG_trck_co2:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
   fse_KPI_GHG_trck_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
   fse_KPI_GHG_trck_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  fst_KPI_GHG_fuel:    {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  fst_KPI_GHG_fuel_co2:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  fst_KPI_GHG_fuel_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
+  fst_KPI_GHG_fuel_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},
 
 	/* +================+ */
 	/* | Service levels | */

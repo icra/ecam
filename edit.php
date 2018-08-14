@@ -224,7 +224,8 @@
           newCell=newRow.insertCell(-1);
           newCell.setAttribute('caption',prettyFormula);
           newCell.innerHTML=(function(){
-            return format(value);
+            var color=value?"":"#ccc";
+            return "<span style=color:"+color+">"+format(value)+"</span>";
           })();
 
           /*Normalization*/
@@ -266,7 +267,8 @@
                 if(category=='volume' && (norm==Infinity || isNaN(norm)) ){
                   return "N/A";
                 }else{
-                  return format(norm);
+                  var color=norm?"":"#ccc";
+                  return "<span style=color:"+color+">"+format(norm)+"</span>";
                 }
               })();
             });
@@ -331,7 +333,8 @@
           newCell=newRow.insertCell(-1)
           newCell.setAttribute('caption',prettyFormula);
           newCell.innerHTML=(function() {
-            return format(value);
+            var color=value?"":"#ccc";
+            return "<span style=color:"+color+">"+format(value)+"</span>";
           })();
 
           /*unit*/

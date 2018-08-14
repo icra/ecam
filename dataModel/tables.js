@@ -130,6 +130,49 @@ var Tables = {
     "Septic Tank":{value:6,                                                ch4_efac:0.30}, 
     "Fully lined tank (sealed)":{value:7,                                  ch4_efac:0.30}, 
   },
+
+  //fst
+  "fst_type_tre":{
+    "No treatment":{value:0,                                   ch4_efac:0,     bod_rmvd_as_sludge_estm:0},
+    "Anaerobic Digester":{value:1,                             ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
+    "Imhoff tank":{value:2,                                    ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
+    "UASB - CH4 recovery not considered":{value:3,             ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
+    "UASB - CH4 recovery considered":{value:4,                 ch4_efac:0.0,   bod_rmvd_as_sludge_estm:0.10}, //TBD
+    "Stabilization Ponds":{value:5,                            ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.30},
+    "Sludge Drying Beds":{value:6,                             ch4_efac:0,     bod_rmvd_as_sludge_estm:0.00},
+    "Wetlands - Surface flow":{value:7,                        ch4_efac:0.24,  bod_rmvd_as_sludge_estm:0.30},
+    "Wetlands - Horizontal subsurface flow":{value:8,          ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
+    "Wetlands - Vertical subsurface flow":{value:9,            ch4_efac:0.006, bod_rmvd_as_sludge_estm:0.65},
+    "Composting":{value:10,                                    ch4_efac:0.0,   bod_rmvd_as_sludge_estm:0.00}, //TBD
+    "Activated Sludge - Well managed":{value:11,               ch4_efac:0,     bod_rmvd_as_sludge_estm:0.65},
+    "Activated Sludge - Minor poorly aerated zones":{value:12, ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
+    "Activated Sludge - Some aerated zones":{value:13,         ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.65},
+    "Activated Sludge - Not well managed":{value:14,           ch4_efac:0.18,  bod_rmvd_as_sludge_estm:0.65},
+    "Trickling Filter":{value:15,                              ch4_efac:0.036, bod_rmvd_as_sludge_estm:0.65},
+  },
+
+  //fsr
+  "fsr_fslu_typ":{
+    "Untreated":{value:0,         N_content:0.10, TVS:0.650}, //N content is provisional TODO
+    "Treated":{value:1,           N_content:0.10, TVS:0.344}, //N content is provisional TODO
+    "Pit humus":{value:2,         N_content:0.10, TVS:0.100}, //tvs 10% is provisional TODO //N content is provisional TODO
+    "Dehydrated faeces":{value:3, N_content:0.10, TVS:0.100}, //tvs 10% is provisional TODO //N content is provisional TODO
+    "Compost":{value:4,           N_content:0.10, TVS:0.100}, //tvs 10% is provisional TODO //N content is provisional TODO
+  },
+  "fsr_soil_typ":{
+    "Fine-Textured":{value:0},
+    "Coarse-Textured":{value:1},
+  },
+  "fsr_disp_typ":{
+    "Landfill":{value:0},
+    "Landfill (flaring)":{value:1},
+    "Landfill (with gas recovery)":{value:2},
+  },
+  "fsr_dumping_pth":{
+    "Stagnant sewer or anaerobic water body":{value:0},
+    "Sear or aerobic water bodies":{value:1},
+    "Fast moving well maintained sewers":{value:2},
+  },
 }
 
 //copy fuel options for all stages
@@ -145,6 +188,7 @@ Tables.wwd_trck_typ=Tables["Fuel types"]; //trucks
 Tables.wwt_dige_typ=Tables["Fuel types"]; //type of fuel dig
 Tables.wwt_appl_typ=Tables["Fuel types"]; //type of fuel app
 Tables.fse_trck_typ=Tables["Fuel types"]; //type of fuel fsm emptying
+Tables.fst_fuel_typ=Tables["Fuel types"]; //type of fuel fsm treatment
 
 //find the option (string) by field (string) and value (float or int)
 Tables.find=function(field,value) {
