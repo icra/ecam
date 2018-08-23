@@ -155,4 +155,11 @@ Level3.list=[
   "fst_KPI_GHG_fuel_ch4",
   "fst_KPI_GHG_tre_ch4",
   "fst_KPI_GHG_tre_n2o",
+
+  //fsr
+  "fsr_dumping_pth",
+  "fsr_KPI_GHG_landfil_ch4",
+  "fsr_KPI_GHG_landfil_n2o",
+  "fsr_KPI_GHG_dumping_ch4",
+  "fsr_KPI_GHG_dumping_n2o",
 ];

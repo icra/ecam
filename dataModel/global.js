@@ -767,9 +767,11 @@ var Global = {
       "fsc_nrg_cons":0, //energy consumed
       "fsc_bod_infl":0, //influent bod load
       "fsc_bod_rmvd":0, //bod removed as FS
-      "fsc_ch4_efac":0, //ch4 emission factor
-      "fsc_cont_emp":0, //containments emptied
 
+      "fsc_flooding":0, //yes/no
+      "fsc_ch4_efac":0, //ch4 emission factor
+
+      "fsc_cont_emp":0, //containments emptied
       "fsc_fslu_emp":0, //FS emptied
 
       fsc_KPI_GHG_elec:function(){return this.fsc_nrg_cons*Global.General.conv_kwh_co2},
@@ -904,7 +906,7 @@ var Global = {
       fsr_KPI_GHG_landfil_ch4:function(){//<br>
         var disp_type=Tables.find('fsr_disp_typ',this.fsr_disp_typ);//<br>
         var fslu_type=Tables.find('fsr_fslu_typ',this.fsr_fslu_typ);//<br>
-        var TVS=Tables.fsr_fslu_typ[fslu_type].TVS;
+        var TVS=Tables.fsr_fslu_typ[fslu_type].TVS;//<br>
         if(disp_type=="Landfill"){//<br>
           return this.fsr_mass_landfil*TVS*Cts.ct_oc_vs.value*0.80*0.9*(4/3)*0.50*0.699*Cts.ct_ch4_eq.value;//<br>
         }//<br>
@@ -921,12 +923,14 @@ var Global = {
 
       //dumping emissions
       "fsr_vol_dumping":0,  //volume dumped
+      "fsr_ch4_efac":0,     //emission factor depending on dumping pathway
       "fsr_dumping_pth":0,  //dumping pathway
+      "fsr_bod_conc_fs":0,  //[BOD] in FS
       fsr_KPI_GHG_dumping_n2o:function(){//<br>
-        return this.fsr_vol_dumping*1000/1000*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+        return this.fsr_vol_dumping*this.fsr_n2o_effl*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       },
       fsr_KPI_GHG_dumping_ch4:function(){//<br>
-        return this.fsr_vol_dumping*67.8*0.3*Cts.ct_ch4_eq.value;//<br>
+        return this.fsr_vol_dumping*this.fsr_bod_conc_fs*this.fsr_ch4_efac*Cts.ct_ch4_eq.value;//<br>
       },
       fsr_KPI_GHG_dumping:function(){//<br>
         return this.fsr_KPI_GHG_dumping_n2o()+this.fsr_KPI_GHG_dumping_ch4();

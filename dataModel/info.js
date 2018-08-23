@@ -27,6 +27,10 @@ var Info = {
   fsr_KPI_GHG_dumping_n2o:  {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
   fsr_KPI_GHG_dumping_ch4:  {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
   fsr_KPI_GHG_tre_n2o:      {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+  fsr_ch4_efac:             {magnitude:"Mass/Mass",   unit:"kgCH<sub>4</sub>/kgBOD" },
+  fsr_bod_conc_fs:          {magnitude:"Concentration", unit:"kg/m3" },
+
+  fsc_flooding:             {magnitude:"Option",      unit:"Yes/No"},
 
   //FS Treatment
   fst_biog_pro:        {magnitude:"Volume",    unit:"m3" },

@@ -121,34 +121,61 @@ var Tables = {
 
   //fsc
   "fsc_type_tre":{
-    "No containment":{value:0,                                             ch4_efac:0.00},
-    "Pit latrine – below groundwater table or prone to flooding":{value:1, ch4_efac:0.42},
-    "Pit latrine without flush water - small family":{value:2,             ch4_efac:0.06}, 
-    "Pit latrine without flush water - communal":{value:3,                 ch4_efac:0.30}, 
-    "Pit latrine with flush water use":{value:4,                           ch4_efac:0.42}, 
-    "UDDT":{value:5,                                                       ch4_efac:0.00}, 
-    "Septic Tank":{value:6,                                                ch4_efac:0.30}, 
-    "Fully lined tank (sealed)":{value:7,                                  ch4_efac:0.30}, 
+    "Pit latrine without flush water – household":{
+      value:0, ch4_efac:0.06, ch4_efac_flooding:0.42, BOD_conc_FS:67.8,
+    },
+    "Pit latrine without flush water (lined or unlined) – communal":{
+      value:1, ch4_efac:0.3, ch4_efac_flooding:0.42, BOD_conc_FS:67.8,
+    },
+    "Pit latrine with flush water use (lined or unlined)":{
+      value:2, ch4_efac:0.42, ch4_efac_flooding:0.42, BOD_conc_FS:67.8,
+    },
+    "Septic Tank":{
+      value:3, ch4_efac:0.3, ch4_efac_flooding:0.42, BOD_conc_FS:1.35
+    },
+    "Fully lined tank without flush water use – household":{
+      value:4, ch4_efac:0.06 , ch4_efac_flooding:0.42 , BOD_conc_FS:67.8
+    },
+    "Fully lined tank without flush water use – communal":{
+      value:5, ch4_efac:0.3 , ch4_efac_flooding:0.42 , BOD_conc_FS:67.8
+    },
+    "Fully lined tank with flush water use":{
+      value:6, ch4_efac:0.42 , ch4_efac_flooding:0.42 , BOD_conc_FS:67.8
+    },
+    "Urine Diverting Dry Toilet (UDDT)":{
+      value:7, ch4_efac:0.0, ch4_efac_flooding:0.42, BOD_conc_FS:67.8
+    },
+    "Composting Toilet":{
+      value:8, ch4_efac:0.0013, ch4_efac_flooding:0.42, BOD_conc_FS:67.8
+    },
+    "No containment":{
+      value:9, ch4_efac:0, ch4_efac_flooding:0, BOD_conc_FS:67.8
+    },
+  },
+  "fsc_flooding":{
+    "no":{value:0},
+    "yes":{value:1},
   },
 
   //fst
   "fst_type_tre":{
-    "No treatment":{value:0,                                   ch4_efac:0,     bod_rmvd_as_sludge_estm:0},
-    "Anaerobic Digester":{value:1,                             ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
-    "Imhoff tank":{value:2,                                    ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
-    "UASB - CH4 recovery not considered":{value:3,             ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
-    "UASB - CH4 recovery considered":{value:4,                 ch4_efac:0.0,   bod_rmvd_as_sludge_estm:0.10}, //TBD
-    "Stabilization Ponds":{value:5,                            ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.30},
-    "Sludge Drying Beds":{value:6,                             ch4_efac:0,     bod_rmvd_as_sludge_estm:0.00},
-    "Wetlands - Surface flow":{value:7,                        ch4_efac:0.24,  bod_rmvd_as_sludge_estm:0.30},
-    "Wetlands - Horizontal subsurface flow":{value:8,          ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
-    "Wetlands - Vertical subsurface flow":{value:9,            ch4_efac:0.006, bod_rmvd_as_sludge_estm:0.65},
-    "Composting":{value:10,                                    ch4_efac:0.0,   bod_rmvd_as_sludge_estm:0.00}, //TBD
-    "Activated Sludge - Well managed":{value:11,               ch4_efac:0,     bod_rmvd_as_sludge_estm:0.65},
-    "Activated Sludge - Minor poorly aerated zones":{value:12, ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
-    "Activated Sludge - Some aerated zones":{value:13,         ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.65},
-    "Activated Sludge - Not well managed":{value:14,           ch4_efac:0.18,  bod_rmvd_as_sludge_estm:0.65},
-    "Trickling Filter":{value:15,                              ch4_efac:0.036, bod_rmvd_as_sludge_estm:0.65},
+    "No Treatment":{                                     value: 0, ch4_efac:0.00,   bod_rmvd_as_sludge_estm:0.0,},
+    "Anaerobic Digester":{                               value: 1, ch4_efac:0.48,   bod_rmvd_as_sludge_estm:0.10,},
+    "Imhoff Tanks":{                                     value: 2, ch4_efac:0.48,   bod_rmvd_as_sludge_estm:0.10,},
+    "Anaerobic Reactors – CH4 recovery not considered":{ value: 3, ch4_efac:0.48,   bod_rmvd_as_sludge_estm:0.10,},
+    "Anaerobic Reactors – CH4 recovery considered":{     value: 4, ch4_efac:0.00,   bod_rmvd_as_sludge_estm:0.10,},
+    "Stabilization Ponds (<2 m depth)":{                 value: 5, ch4_efac:0.12,   bod_rmvd_as_sludge_estm:0.30,},
+    "Stabilization Ponds (> 2m depth)":{                 value: 6, ch4_efac:0.48,   bod_rmvd_as_sludge_estm:0.10,},
+    "Sludge Drying Beds":{                               value: 7, ch4_efac:0.00,   bod_rmvd_as_sludge_estm:0.0,},
+    "Wetlands – surface flow":{                          value: 8, ch4_efac:0.24,   bod_rmvd_as_sludge_estm:0.30,},
+    "Wetlands – Horizontal subsurface flow":{            value: 9, ch4_efac:0.06,   bod_rmvd_as_sludge_estm:0.65,},
+    "Wetlands – Vertical subsurface flow":{              value:10, ch4_efac:0.006,  bod_rmvd_as_sludge_estm:0.65,},
+    "Composting":{                                       value:11, ch4_efac:0.0013, bod_rmvd_as_sludge_estm:0.0,},
+    "Activated Sludge (well managed)":{                  value:12, ch4_efac:0.0000, bod_rmvd_as_sludge_estm:0.65,},
+    "Activated Sludge – minor poorly aerated zones":{    value:13, ch4_efac:0.06,   bod_rmvd_as_sludge_estm:0.65,},
+    "Activated Sludge - Some aerated zones":{            value:14, ch4_efac:0.12,   bod_rmvd_as_sludge_estm:0.65,},
+    "Activated Sludge – Not well managed":{              value:15, ch4_efac:0.18,   bod_rmvd_as_sludge_estm:0.65,},
+    "Trickling Filter":{                                 value:16, ch4_efac:0.036,  bod_rmvd_as_sludge_estm:0.65,},
   },
 
   //fsr
@@ -169,9 +196,10 @@ var Tables = {
     "Landfill (with gas recovery)":{value:2},
   },
   "fsr_dumping_pth":{
-    "Stagnant sewer or anaerobic water body":{value:0},
-    "Sear or aerobic water bodies":{value:1},
-    "Fast moving well maintained sewers":{value:2},
+    "Select dumping pathway":{value:0,                 ch4_efac:0},
+    "Stagnant sewer or anaerobic water body":{value:1, ch4_efac:0.3},
+    "Sear or aerobic water bodies":{value:2,           ch4_efac:0.06},
+    "Fast moving well maintained sewers":{value:3,     ch4_efac:0},
   },
 }
 

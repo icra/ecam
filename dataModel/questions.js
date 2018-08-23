@@ -582,6 +582,8 @@ var Questions={
     variables:[
       "fsr_vol_dumping",
       "fsr_dumping_pth",
+      "fsr_ch4_efac",
+      "fsr_bod_conc_fs",
       "fsr_KPI_GHG_dumping_ch4",
       "fsr_KPI_GHG_dumping_n2o",
       "fsr_KPI_GHG_dumping",

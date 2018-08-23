@@ -12,6 +12,8 @@ var Exceptions = {
     this.wwt_ch4_efac();
     this.fsc_ch4_efac();
     this.fst_ch4_efac();
+    this.fsr_ch4_efac();
+    this.fsr_bod_conc_fs();
   },
 
   wwt_ch4_efac:function() {
@@ -64,8 +66,13 @@ var Exceptions = {
     }
 
     var fsc_ch4_efac = {};
+    var is_flooded = Global.Faecl.Containment.fsc_flooding;
     for(var treatment in Tables.fsc_type_tre) {
-      fsc_ch4_efac[treatment]=Tables.fsc_type_tre[treatment].ch4_efac;
+
+      fsc_ch4_efac[treatment]= is_flooded ? 
+        Tables.fsc_type_tre[treatment].ch4_efac_flooding :
+        Tables.fsc_type_tre[treatment].ch4_efac ;
+
     }
 
     //go over treatment types
@@ -111,6 +118,74 @@ var Exceptions = {
       option.setAttribute('treatment',treatment);
       option.innerHTML=translate(treatment)+" ("+cons+")";
       if(treatment==Global.Configuration.Selected.fst_ch4_efac && cons==Global.Faecl.Treatment.fst_ch4_efac) {
+        option.selected='true';
+      }
+    }
+  },
+
+  fsr_ch4_efac:function() {
+    var td=document.querySelector('tr[field=fsr_ch4_efac] td');
+    if(!td)return;
+
+    var select=document.createElement('select');
+    select.style.fontSize='smaller';
+    select.style.display='block';
+    td.appendChild(select);
+
+    select.onchange=function() {
+      Global.Faecl.Reuse.fsr_ch4_efac=parseFloat(select.value);
+      Global.Configuration.Selected.fsr_ch4_efac=select.options[select.options.selectedIndex].getAttribute('treatment');
+      init();
+    }
+
+    var fsr_ch4_efac = {};
+    for(var treatment in Tables.fsr_dumping_pth) {
+      fsr_ch4_efac[treatment]=Tables.fsr_dumping_pth[treatment].ch4_efac;
+    }
+
+    //go over treatment types
+    for(var treatment in fsr_ch4_efac) {
+      var option=document.createElement('option');
+      select.appendChild(option);
+      var cons=fsr_ch4_efac[treatment];
+      option.value=cons;
+      option.setAttribute('treatment',treatment);
+      option.innerHTML=translate(treatment)+" ("+cons+")";
+      if(treatment==Global.Configuration.Selected.fsr_ch4_efac && cons==Global.Faecl.Reuse.fsr_ch4_efac) {
+        option.selected='true';
+      }
+    }
+  },
+
+  fsr_bod_conc_fs:function() {
+    var td=document.querySelector('tr[field=fsr_bod_conc_fs] td');
+    if(!td)return;
+
+    var select=document.createElement('select');
+    select.style.fontSize='smaller';
+    select.style.display='block';
+    td.appendChild(select);
+
+    select.onchange=function() {
+      Global.Faecl.Reuse.fsr_bod_conc_fs=parseFloat(select.value);
+      Global.Configuration.Selected.fsc_bod_conc=select.options[select.options.selectedIndex].getAttribute('treatment');
+      init();
+    }
+
+    var options = {};
+    for(var treatment in Tables.fsc_type_tre) {
+      options[treatment] = Tables.fsc_type_tre[treatment].BOD_conc_FS;
+    }
+
+    //go over treatment types
+    for(var treatment in options) {
+      var option=document.createElement('option');
+      select.appendChild(option);
+      var cons=options[treatment];
+      option.value=cons;
+      option.setAttribute('treatment',treatment);
+      option.innerHTML=translate(treatment)+" ("+cons+")";
+      if(treatment==Global.Configuration.Selected.fsr_bod_conc_fs && cons==Global.Faecl.Reuse.fsr_bod_conc_fs) {
         option.selected='true';
       }
     }
