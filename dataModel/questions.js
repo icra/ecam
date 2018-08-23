@@ -574,8 +574,10 @@ var Questions={
     "fsr_landapp":{
       variables:[
         "fsr_mass_landapp",
+        "fsr_fslu_typ_la",
         "fsr_soil_typ",
         "fsr_KPI_GHG_landapp",
+        "fsr_ghg_avoided_landapp",
       ],
       advanced:0,
       otherQuestions:[
@@ -584,10 +586,12 @@ var Questions={
     "fsr_landfil":{
       variables:[
         "fsr_mass_landfil",
+        "fsr_fslu_typ_lf",
         "fsr_disp_typ",
         "fsr_KPI_GHG_landfil_ch4",
         "fsr_KPI_GHG_landfil_n2o",
         "fsr_KPI_GHG_landfil",
+        "fsr_ghg_avoided_landfil",
       ],
       advanced:0,
       otherQuestions:[
@@ -602,6 +606,27 @@ var Questions={
         "fsr_KPI_GHG_dumping_ch4",
         "fsr_KPI_GHG_dumping_n2o",
         "fsr_KPI_GHG_dumping",
+      ],
+      advanced:0,
+      otherQuestions:[
+      ],
+    },
+    "fsr_urine":{
+      variables:[
+        "fsr_N_urine",
+        "fsr_KPI_GHG_urine",
+      ],
+      advanced:0,
+      otherQuestions:[
+      ],
+    },
+    "fsr_reuse":{
+      variables:[
+        "fsr_reused_N",
+        "fsr_reused_P",
+        "fsr_ghg_avoided_reuse_N",
+        "fsr_ghg_avoided_reuse_P",
+        "fsr_ghg_avoided_reuse",
       ],
       advanced:0,
       otherQuestions:[

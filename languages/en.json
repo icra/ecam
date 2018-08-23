@@ -20,6 +20,21 @@
   "#fsr_bod_conc_fs_descr": "BOD concentration of FS",
   "#fsr_bod_conc_fs_expla": "BOD concentration of FS",
 
+  "#fsr_urine":"Do you want to assess land application of urine",
+  "#fsr_N_urine_descr":"Total Nitrogen in urine applied to land",
+  "#fsr_KPI_GHG_urine_descr": "Urine application",
+
+  "#fsr_reuse":"Do you want to assess GHG avoided from reusing nutrients",
+  "#fsr_ghg_avoided_landapp_descr":"GHG emissions avoided from carbon sequestration of land application",
+  "#fsr_ghg_avoided_landapp_expla":"GHG emissions avoided from carbon sequestration of land application",
+  "#fsr_ghg_avoided_landfil_descr":"GHG emissions avoided from carbon sequestration of landfilling",
+  "#fsr_ghg_avoided_landfil_expla":"GHG emissions avoided from carbon sequestration of landfilling",
+  "#fsr_reused_N_descr":"Total Nitrogen reused that displaces synthetic fertilizer",
+  "#fsr_reused_P_descr":"Total Phosphorus reused that displaces synthetic fertilizer",
+  "#fsr_ghg_avoided_reuse_N_descr":"GHG emissions avoided due to Nitrogen reuse",
+  "#fsr_ghg_avoided_reuse_P_descr":"GHG emissions avoided due to Phosphorus reuse",
+  "#fsr_ghg_avoided_reuse_descr":"GHG emissions avoided due to nutrient reused displacing synthetic fertilizer use",
+
   "#fsr_KPI_GHG_descr": "Total emissions in Reuse",
   "#fsr_KPI_GHG_dumping_ch4_descr":"Dumping (CH4)",
   "#fsr_KPI_GHG_dumping_descr":"Dumping",
@@ -34,7 +49,10 @@
   "#fsr_disp_typ_descr":"Disposal type",
   "#fsr_dumping":"Do you want to assess dumping of faecal sludge",
   "#fsr_dumping_pth_descr":"Dumping pathway",
-  "#fsr_fslu_typ_descr":"Type of faecal sludge disposed",
+
+  "#fsr_fslu_typ_la_descr":"Type of faecal sludge disposed",
+  "#fsr_fslu_typ_lf_descr":"Type of faecal sludge disposed",
+
   "#fsr_landapp":"Do you want to assess land application of faecal sludge",
   "#fsr_landfil":"Do you want to assess landfilling of faecal sludge",
   "#fsr_mass_landapp_descr":"Dry weight sent to land application",

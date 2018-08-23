@@ -179,7 +179,7 @@ var Tables = {
   },
 
   //fsr
-  "fsr_fslu_typ":{
+  "fsr_fslu_typ_la":{
     "Untreated":{value:0,         N_content:0.10, TVS:0.650}, //N content is provisional TODO
     "Treated":{value:1,           N_content:0.10, TVS:0.344}, //N content is provisional TODO
     "Pit humus":{value:2,         N_content:0.10, TVS:0.100}, //tvs 10% is provisional TODO //N content is provisional TODO
@@ -217,6 +217,9 @@ Tables.wwt_dige_typ=Tables["Fuel types"]; //type of fuel dig
 Tables.wwt_appl_typ=Tables["Fuel types"]; //type of fuel app
 Tables.fse_trck_typ=Tables["Fuel types"]; //type of fuel fsm emptying
 Tables.fst_fuel_typ=Tables["Fuel types"]; //type of fuel fsm treatment
+
+//copy options for faecal sludge type in fst for landapp and landfill
+Tables.fsr_fslu_typ_lf=Tables.fsr_fslu_typ_la;
 
 //find the option (string) by field (string) and value (float or int)
 Tables.find=function(field,value) {

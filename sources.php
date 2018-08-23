@@ -530,6 +530,7 @@
             'wwd_wr_GHG_avo_d',
             'wwd_SL_ghg_non',
             'wwd_wr_GHG_avo',
+            'fsr_ghg_avoided_reuse',
           ];
           t.querySelector('th[rowspan]').rowSpan=GHG_avoided.length+1;
           GHG_avoided.forEach(field=>{
@@ -537,6 +538,7 @@
             var newCell=newRow.insertCell(-1);
             newCell.innerHTML=(function(){
               var name=translate(field+'_descr').replace(/^GHG emissions avoided/,'');
+              if(field.search("fsr")==0){name+=" (FSM)"}
               var rv= "<a href='variable.php?id="+field+"'>"+name+"</a>";
               return rv;
             })();

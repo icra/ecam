@@ -8,6 +8,12 @@
 
 var Info = {
   //FS Reuse
+  fsr_N_urine:          {magnitude:"Mass",        unit:"kg"},
+  fsr_reused_N:         {magnitude:"Mass",        unit:"kg"},
+  fsr_reused_P:         {magnitude:"Mass",        unit:"kg"},
+  fsr_ghg_avoided_landapp:  {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+  fsr_ghg_avoided_landfil:  {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+
   fsr_mass_landapp:         {magnitude:"Mass",        unit:"kg"},
   fsr_mass_landfil:         {magnitude:"Mass",        unit:"kg"},
   fsr_soil_typ:             {magnitude:"Option",      unit:"Soil type"},
@@ -16,7 +22,14 @@ var Info = {
   fsr_disp_typ:             {magnitude:"Option",      unit:"Disposal type"},
   fsr_vol_dumping:          {magnitude:"Volume",      unit:"m3"},
   fsr_dumping_pth:          {magnitude:"Option",      unit:"Dumping pathway"},
-  fsr_fslu_typ:             {magnitude:"Option",      unit:"Type of FS"},
+
+  fsr_fslu_typ_la:             {magnitude:"Option",      unit:"Type of FS"},
+  fsr_fslu_typ_lf:             {magnitude:"Option",      unit:"Type of FS"},
+
+  fsr_ghg_avoided_reuse_N:         {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+  fsr_ghg_avoided_reuse_P:         {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+  fsr_ghg_avoided_reuse:         {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
+
   fsr_KPI_GHG_elec:         {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
   fsr_KPI_GHG:              {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
   fsr_KPI_GHG_landapp:      {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},

@@ -295,7 +295,8 @@ var Global = {
       this.Treatment.wwt_wr_C_seq_slu()+          //<br>
       this.Discharge.wwd_wr_GHG_avo_d()+          //<br>
       this.Discharge.wwd_SL_ghg_non()+            //<br>
-      this.Discharge.wwd_wr_GHG_avo();            //<br>
+      this.Discharge.wwd_wr_GHG_avo()+            //<br>
+      Global.Faecl.Reuse.fsr_ghg_avoided_reuse();
     },
 
     //energy costs related
@@ -868,28 +869,29 @@ var Global = {
       fsr_KPI_GHG_elec:function(){return this.fsr_nrg_cons*Global.General.conv_kwh_co2},
 
       //input used for different filters
-      "fsr_vol_disc":0,
       "fsr_n2o_effl":0,
-      "fsr_fslu_typ":0, //type of faecal sludge disposed
 
       //land application emissions
       "fsr_mass_landapp":0, //dry weight sent to land application
       "fsr_soil_typ":0,     //soil type for land application
+      "fsr_fslu_typ_la":0, //type of faecal sludge disposed landapp
       fsr_KPI_GHG_landapp:function(){//<br>
         var soil_type=Tables.find('fsr_soil_typ',this.fsr_soil_typ);//<br>
         var N_transformed_to_N2O=0;//<br>
         if(soil_type=="Fine-Textured"  ) N_transformed_to_N2O=0.023; //<br>
         if(soil_type=="Coarse-Textured") N_transformed_to_N2O=0.050; //<br><br>
 
-        var fslu_type=Tables.find('fsr_fslu_typ',this.fsr_fslu_typ);//<br>
-        var N_content=Tables.fsr_fslu_typ[fslu_type].N_content;//<br><br>
+        var fslu_type=Tables.find('fsr_fslu_typ_la',this.fsr_fslu_typ_la);//<br>
+        var N_content=Tables.fsr_fslu_typ_la[fslu_type].N_content;//<br><br>
 
         return this.fsr_mass_landapp*N_content*N_transformed_to_N2O*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value; //<br>
       },
+      fsr_ghg_avoided_landapp:function(){return this.fsr_mass_landapp*0.25},
 
       //landfill emissions
       "fsr_mass_landfil":0, //dry weight sent to landfilling
       "fsr_disp_typ":0,     //disposal type for landfilling
+      "fsr_fslu_typ_lf":0, //type of faecal sludge disposed landfil
       fsr_KPI_GHG_landfil_n2o:function(){//<br>
         var disp_type=Tables.find('fsr_disp_typ',this.fsr_disp_typ);//<br>
         if(disp_type=="Landfill"){//<br>
@@ -903,8 +905,8 @@ var Global = {
       },
       fsr_KPI_GHG_landfil_ch4:function(){//<br>
         var disp_type=Tables.find('fsr_disp_typ',this.fsr_disp_typ);//<br>
-        var fslu_type=Tables.find('fsr_fslu_typ',this.fsr_fslu_typ);//<br>
-        var TVS=Tables.fsr_fslu_typ[fslu_type].TVS;//<br>
+        var fslu_type=Tables.find('fsr_fslu_typ_lf',this.fsr_fslu_typ_lf);//<br>
+        var TVS=Tables.fsr_fslu_typ_lf[fslu_type].TVS;//<br>
         if(disp_type=="Landfill"){//<br>
           return this.fsr_mass_landfil*TVS*Cts.ct_oc_vs.value*0.80*0.9*(4/3)*0.50*0.699*Cts.ct_ch4_eq.value;//<br>
         }//<br>
@@ -917,6 +919,11 @@ var Global = {
       },
       fsr_KPI_GHG_landfil:function(){//<br>
         return this.fsr_KPI_GHG_landfil_n2o()+this.fsr_KPI_GHG_landfil_ch4();
+      },
+      fsr_ghg_avoided_landfil:function(){
+        var fslu_type=Tables.find('fsr_fslu_typ_lf',this.fsr_fslu_typ_lf);//<br>
+        var TVS=Tables.fsr_fslu_typ_lf[fslu_type].TVS;//<br>
+        return this.fsr_mass_landfil*TVS*0.56*0.2*44/12;
       },
 
       //dumping emissions
@@ -935,13 +942,25 @@ var Global = {
       },
 
       //effluent discharge to water body emissions
+      "fsr_vol_disc":0,
       fsr_KPI_GHG_tre_n2o:function(){//<br>
         return this.fsr_n2o_effl/1000*this.fsr_vol_disc*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value;
       },
 
+      //urine land application
+      "fsr_N_urine":0,
+      fsr_KPI_GHG_urine:function(){return this.fsr_N_urine*Cts.ct_n2o_co.value*0.01},
+
+      //ghg avoided reuse nutrients
+      "fsr_reused_N":0,
+      "fsr_reused_P":0,
+      fsr_ghg_avoided_reuse_N:function(){return this.fsr_reused_N*4},
+      fsr_ghg_avoided_reuse_P:function(){return this.fsr_reused_P*2},
+      fsr_ghg_avoided_reuse:function(){return this.fsr_ghg_avoided_reuse_N()+this.fsr_ghg_avoided_reuse_P();},
+
       //total ghg
       fsr_KPI_GHG:function(){//<br>
-        return this.fsr_KPI_GHG_elec()+this.fsr_KPI_GHG_landapp()+this.fsr_KPI_GHG_landfil()+this.fsr_KPI_GHG_dumping()+this.fsr_KPI_GHG_tre_n2o();
+        return this.fsr_KPI_GHG_elec()+this.fsr_KPI_GHG_landapp()+this.fsr_KPI_GHG_landfil()+this.fsr_KPI_GHG_dumping()+this.fsr_KPI_GHG_tre_n2o()+this.fsr_KPI_GHG_urine();
       },
     },
   },
