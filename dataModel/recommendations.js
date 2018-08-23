@@ -15,8 +15,16 @@ var Recommendations={
     return 0.10*Global.Faecl.Treatment.fst_bod_infl;
   },
 
+  //BOD removed as sludge
+  "fst_bod_slud":function(){
+    var bod_rmvd_as_sludge=Tables.fst_type_tre[Tables.find('fst_type_tre',Global.Faecl.Treatment.fst_type_tre)].bod_rmvd_as_sludge_estm;//<br>
+    return Global.Faecl.Treatment.fst_bod_infl*bod_rmvd_as_sludge;
+  },
+
   //Biogas produced in fst
   "fst_biog_pro":function(){
     return Global.Faecl.Treatment.fst_bod_infl*Cts.ct_bod_kg.value*Cts.ct_biog_g.value;
   },
 };
+
+Global.Recommendations=Recommendations; //enable formula search in Recommendations

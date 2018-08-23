@@ -412,6 +412,17 @@
         newRow.insertCell(-1).innerHTML="YES";
       }
 
+      //It has recommendations?
+      if(Recommendations[id]) {
+        newRow=t.insertRow(-1);
+        newCell=newRow.insertCell(-1);
+        newCell.className='th';
+        newCell.innerHTML="Estimation of the input based on other inputs";
+        var r_value=Recommendations[id]();
+        var currentUnit= (Info[id].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[id]||Info[id].unit);
+        newRow.insertCell(-1).innerHTML=Formulas.prettify(Recommendations[id].toString())+" <br>= "+format(r_value)+" "+currentUnit;
+      }
+
       //If input:is used in benchmarking?
       if(typeof(currentStage[id])=='number') {
         newRow=t.insertRow(-1);
@@ -454,6 +465,7 @@
           "<div style=margin-top:1em><a href=benchmark.php>All variables benchmarked</a></div>"+
           "";
       }
+
     }
 
     /**

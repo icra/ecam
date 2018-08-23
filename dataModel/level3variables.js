@@ -149,7 +149,6 @@ Level3.list=[
   "fse_KPI_GHG_trck_ch4",
 
   //fst
-  "fst_type_tre", //hidden
   "fst_KPI_GHG_fuel_co2",
   "fst_KPI_GHG_fuel_n2o",
   "fst_KPI_GHG_fuel_ch4",

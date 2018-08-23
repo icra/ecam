@@ -844,8 +844,8 @@ var Global = {
       //treatment ch4+n2o emissions
       "fst_bod_infl":0,
       "fst_bod_effl":0,
-      "fst_bod_slud":0,
       "fst_type_tre":0,
+      "fst_bod_slud":0,
       fst_KPI_GHG_tre_ch4:function(){
         return (this.fst_bod_infl-this.fst_bod_slud-this.fst_bod_effl)*this.fst_ch4_efac*Cts.ct_ch4_eq.value;
       },
