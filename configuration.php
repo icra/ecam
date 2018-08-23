@@ -288,6 +288,7 @@
       Global.Configuration['Yes/No'].wwc_engines=value;
       Global.Configuration['Yes/No'].wwt_engines=value;
       Global.Configuration['Yes/No'].wwd_engines=value;
+      Global.Configuration['Yes/No'].fst_engines=value;
       if(!value){
         //reset stage values
         Global.Water.Abstraction.wsa_vol_fuel=0;
@@ -296,6 +297,7 @@
         Global.Waste.Collection.wwc_vol_fuel=0;
         Global.Waste.Treatment.wwt_vol_fuel=0;
         Global.Waste.Discharge.wwd_vol_fuel=0;
+        Global.Faecl.Treatment.fst_vol_fuel=0;
         //reset substage values
         Substages.Water.Abstraction.forEach(s=>{s.wsa_vol_fuel=0;});
         Substages.Water.Treatment.forEach(s=>{s.wst_vol_fuel=0;});
@@ -303,6 +305,7 @@
         Substages.Waste.Collection.forEach(s=>{s.wwc_vol_fuel=0;});
         Substages.Waste.Treatment.forEach(s=>{s.wwt_vol_fuel=0;});
         Substages.Waste.Discharge.forEach(s=>{s.wwd_vol_fuel=0;});
+        Substages.Faecl.Treatment.forEach(s=>{s.fst_vol_fuel=0;});
       }
       updateResult();
     }

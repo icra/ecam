@@ -541,7 +541,22 @@ var Questions={
       otherQuestions:[],
     },
 
+  //fsc
+  //fse
+
   //fst
+    "fst_engines":{
+      variables:[
+        "fst_fuel_typ",
+        "fst_vol_fuel",
+        "fst_KPI_GHG_fuel_co2",
+        "fst_KPI_GHG_fuel_n2o",
+        "fst_KPI_GHG_fuel_ch4",
+        "fst_KPI_GHG_fuel",
+      ],
+      advanced:0,
+      otherQuestions:[],
+    },
     "fst_producing_biogas":{
       variables:[
         "fst_biog_pro",
@@ -556,42 +571,42 @@ var Questions={
     },
 
   //fsr
-  "fsr_landapp":{
-    variables:[
-      "fsr_mass_landapp",
-      "fsr_soil_typ",
-      "fsr_KPI_GHG_landapp",
-    ],
-    advanced:0,
-    otherQuestions:[
-    ],
-  },
-  "fsr_landfil":{
-    variables:[
-      "fsr_mass_landfil",
-      "fsr_disp_typ",
-      "fsr_KPI_GHG_landfil_ch4",
-      "fsr_KPI_GHG_landfil_n2o",
-      "fsr_KPI_GHG_landfil",
-    ],
-    advanced:0,
-    otherQuestions:[
-    ],
-  },
-  "fsr_dumping":{
-    variables:[
-      "fsr_vol_dumping",
-      "fsr_dumping_pth",
-      "fsr_ch4_efac",
-      "fsr_bod_conc_fs",
-      "fsr_KPI_GHG_dumping_ch4",
-      "fsr_KPI_GHG_dumping_n2o",
-      "fsr_KPI_GHG_dumping",
-    ],
-    advanced:0,
-    otherQuestions:[
-    ],
-  },
+    "fsr_landapp":{
+      variables:[
+        "fsr_mass_landapp",
+        "fsr_soil_typ",
+        "fsr_KPI_GHG_landapp",
+      ],
+      advanced:0,
+      otherQuestions:[
+      ],
+    },
+    "fsr_landfil":{
+      variables:[
+        "fsr_mass_landfil",
+        "fsr_disp_typ",
+        "fsr_KPI_GHG_landfil_ch4",
+        "fsr_KPI_GHG_landfil_n2o",
+        "fsr_KPI_GHG_landfil",
+      ],
+      advanced:0,
+      otherQuestions:[
+      ],
+    },
+    "fsr_dumping":{
+      variables:[
+        "fsr_vol_dumping",
+        "fsr_dumping_pth",
+        "fsr_ch4_efac",
+        "fsr_bod_conc_fs",
+        "fsr_KPI_GHG_dumping_ch4",
+        "fsr_KPI_GHG_dumping_n2o",
+        "fsr_KPI_GHG_dumping",
+      ],
+      advanced:0,
+      otherQuestions:[
+      ],
+    },
 };
 
 //FUNCTIONS for Questions
@@ -633,8 +648,8 @@ Questions.getQuestions=function(ubication) {
 		if(typeof(this[question])=="function")continue;
 		//skip fuel engines questions if anyFuelEngines is zero
 		if(Global.General.anyFuelEngines==0) {
-			if(["wsa_engines","wst_engines","wsd_engines","wwc_engines","wwt_engines","wwd_engines"].indexOf(question)+1)
-				continue
+			if(["wsa_engines","wst_engines","wsd_engines","wwc_engines","wwt_engines","wwd_engines",'fst_engines'].indexOf(question)+1)
+				continue;
 		}
 		//check all codes inside ubication
 		for(var i in this[question].variables) {

@@ -11,12 +11,10 @@ var Global = {
     Comments:"",
     Currency:"USD",
 
-    //country related
-    Country:"false",
-    conv_kwh_co2:0, //conversion factor for grid electricity
-    bod_pday: 0, //BOD5 per person per day
-    prot_con: 0, //prot consumption per person per year
-    //country related
+    Country:"false", //string with the name of the country
+    conv_kwh_co2:0,  //conversion factor for grid electricity (kgCO2/kWh)
+    bod_pday: 0,     //BOD5                                      (g/person/day)
+    prot_con: 0,     //prot consumption                          (kg/person/year)
 
     //do you have fuel engines in any stage?
     anyFuelEngines:0,
@@ -36,7 +34,7 @@ var Global = {
 
     //total energy consumed
     TotalNRG:function(){
-      return Global.Water.ws_nrg_cons()+Global.Waste.ww_nrg_cons()+Global.Faecl.fs_nrg_cons()
+      return Global.Water.ws_nrg_cons()+Global.Waste.ww_nrg_cons()+Global.Faecl.fs_nrg_cons();
     },
 
     /*carbon and nitrogen content based on sludge type and mass*/
@@ -995,7 +993,7 @@ var Global = {
   }
 };
 
-//this block is a fix for wrapper equations, so they don't appear incorrectly at variable.php
+//this block is a fix for wrapper equations so they don't appear incorrectly at variable.php
 Global.Water.wsa_KPI_GHG=function(){return Global.Water.Abstraction.wsa_KPI_GHG()};
 Global.Water.wst_KPI_GHG=function(){return Global.Water.Treatment.wst_KPI_GHG()};
 Global.Water.wsd_KPI_GHG=function(){return Global.Water.Distribution.wsd_KPI_GHG()};

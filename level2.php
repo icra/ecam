@@ -239,13 +239,48 @@
     newRow.appendChild(newCell);
     newCell.setAttribute('title', translate(field+"_expla"));
     if(isCV)newCell.classList.add('isCV');
-    newCell.innerHTML=(function() {
-      //warning for variable not used
-      var code = "<a style=font-size:10px href=variable.php?id="+field+">"+field+"</a>";
-      var warning=(Formulas.outputsPerInput(field).length==0 && Utils.usedInBenchmarks(field).length==0) ?
-        " <span class=not_used_input caption='Input not used for any equation'></span>" : "";
-      return translate(field+"_descr")+warning+"<br>("+code+")";
-    })();
+
+    //input description
+    newCell.appendChild((function(){
+      var span=document.createElement('span');
+      span.innerHTML=translate(field+'_descr');
+      return span;
+    })());
+
+    //input recommendations button
+    if(Recommendations[field]){
+      newCell.appendChild((function(){
+        var btn=document.createElement('button');
+        btn.style.fontSize='smaller';
+        btn.style.float='right';
+        var rec_value=Recommendations[field]()/Units.multiplier(field);
+        var currentUnit = Global.Configuration.Units[field] || Info[field].unit
+        btn.innerHTML='Estimation: '+format(rec_value)+' '+currentUnit+' &rarr;';
+        btn.setAttribute('title','Estimation based on other inputs: '+Formulas.prettify(Recommendations[field].toString()));
+        btn.addEventListener('click',function(){
+          CurrentLevel[field]=rec_value;
+          init();
+        });
+        return btn;
+      })());
+    }
+
+    //not used input warning 
+    newCell.appendChild((function(){
+      var span=document.createElement('span');
+      if(Formulas.outputsPerInput(field).length==0 && Utils.usedInBenchmarks(field).length==0){
+        span.classList.add('not_used_input');
+        span.setAttribute('caption','Input not used for any equation');
+      }
+      return span;
+    })());
+
+    //code link
+    newCell.appendChild((function(){
+      var div=document.createElement('div');
+      div.innerHTML="(<a style=font-size:smaller href=variable.php?id="+field+">"+field+"</a>)";
+      return div;
+    })());
 
     //editable cell if not CV
     var newCell=newRow.insertCell(-1);

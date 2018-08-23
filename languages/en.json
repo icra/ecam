@@ -48,6 +48,7 @@
   "#fsr_ch4_efac_descr":"CH<sub>4</sub> emission factor",
   "#fsr_ch4_efac_expla":"Methane emission factor for faecal sludge dumping",
 
+  "#fst_engines":"Do you have fuel engines",
   "#fst_KPI_GHG_biog_descr": "Biogas",
   "#fst_KPI_GHG_biog_expla": "GHG emissions from biogas",
   "#fst_KPI_GHG_descr": "Total GHG in FSM Treatment",
