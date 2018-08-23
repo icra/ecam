@@ -191,3 +191,5 @@ var Exceptions = {
     }
   },
 }
+
+Global.Exceptions=Exceptions;//to search inside formulas
