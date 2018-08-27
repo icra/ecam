@@ -766,12 +766,12 @@ var Global = {
       "fsc_nrg_cons":0, //energy consumed
       "fsc_bod_infl":0, //influent bod load
       "fsc_bod_rmvd":0, //bod removed as FS
-
       "fsc_flooding":0, //yes/no
       "fsc_ch4_efac":0, //ch4 emission factor
 
       "fsc_cont_emp":0, //containments emptied
       "fsc_fslu_emp":0, //FS emptied
+      "fsc_fdensity":0, //density of faecal sludge
 
       fsc_KPI_GHG_elec:function(){return this.fsc_nrg_cons*Global.General.conv_kwh_co2},
       fsc_KPI_GHG_cont:function(){//<br>

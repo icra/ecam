@@ -1,19 +1,47 @@
 /**
-  TO DO:
   variables that not behave like normal ones are treated here
   they are inputs with a list of possible values that set the number
-
   what is different of normal dropdowns is that the user can also enter a number besides selecting an option
- **/
+**/
 
 var Exceptions = {
   //wrapper
   apply:function() {
     this.wwt_ch4_efac();
     this.fsc_ch4_efac();
+    this.fsc_fdensity();
     this.fst_ch4_efac();
     this.fsr_ch4_efac();
     this.fsr_bod_conc_fs();
+  },
+
+  fsc_fdensity:function() {
+    var td=document.querySelector('tr[field=fsc_fdensity] td');
+    if(!td)return;
+
+    var select=document.createElement('select');
+    select.style.fontSize='smaller';
+    select.style.display='block';
+    td.appendChild(select);
+
+    select.onchange=function() {
+      Global.Faecl.Containment.fsc_fdensity=parseFloat(select.value);
+      Global.Configuration.Selected.fsc_fdensity=select.options[select.options.selectedIndex].getAttribute('key');
+      init();
+    }
+
+    //go over options
+    Object.keys(Tables.fsc_fdensity).forEach(key=>{
+      var option=document.createElement('option');
+      select.appendChild(option);
+      var value=Tables.fsc_fdensity[key].fs_density;
+      option.value=value;
+      option.setAttribute('key',key);
+      option.innerHTML=translate(key)+" ("+value+")";
+      if(key==Global.Configuration.Selected.fsc_fdensity && value==Global.Faecl.Containment.fsc_fdensity){
+        option.selected='true';
+      }
+    });
   },
 
   wwt_ch4_efac:function() {

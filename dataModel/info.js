@@ -7,6 +7,8 @@
 */
 
 var Info = {
+  fsc_fdensity:          {magnitude:"Concentration", unit:"kg/m3" },
+
   //FS Reuse
   fsr_N_urine:          {magnitude:"Mass",        unit:"kg"},
   fsr_reused_N:         {magnitude:"Mass",        unit:"kg"},
