@@ -563,20 +563,20 @@
       </style>
 
       <div style=text-align:center>
-        <div graph id=graph1><?php write('#loading')?></div>
-        <div graph id=graph2><?php write('#loading')?></div>
+        <div graph id=graph1><?php write('#loading')?></div> <!--ghg emissions-->
+        <div graph id=graph2><?php write('#loading')?></div> <!--nrg consumption-->
         <!---->
-        <div graph id=graph3><?php write('#loading')?></div>
-        <div graph id=graph4><?php write('#loading')?></div>
+        <div graph id=graph3><?php write('#loading')?></div> <!--ws costs-->
+        <div graph id=graph4><?php write('#loading')?></div> <!--ww costs-->
         <!---->
-        <div graph id=graph5><?php write('#loading')?></div>
-        <div graph id=graph6><?php write('#loading')?></div>
+        <div graph id=graph5><?php write('#loading')?></div> <!--ws serv-->
+        <div graph id=graph6><?php write('#loading')?></div> <!--ws ghg-->
         <!---->
-        <div graph id=graph7><?php write('#loading')?></div>
-        <div graph id=graph8><?php write('#loading')?></div>
+        <div graph id=graph7><?php write('#loading')?></div> <!--ww serv-->
+        <div graph id=graph8><?php write('#loading')?></div> <!--ww ghg-->
         <!---->
-        <div graph id=graph9><?php write('#loading')?></div>
-        <div graph id=graph10><?php write('#loading')?></div>
+        <div graph id=graph9><?php write('#loading')?> </div><!--fs serv-->
+        <div graph id=graph10><?php write('#loading')?></div><!--fs ghg-->
         <div style="width:98%;padding:1em 0;margin-bottom:1em;border:none">
           <?php write('#for_further_details_go_to_detailed')?>
           <b>
@@ -596,14 +596,18 @@
           (function(){
             //hide inactive graphs
             if(Global.Configuration.ActiveStages.water==0) {
-              document.querySelector("#graph3").style.display="none"
-              document.querySelector("#graph5").style.display="none"
-              document.querySelector("#graph7").style.display="none"
-              document.querySelector("#graph8").style.display="none"
+              document.querySelector("#graph3").style.display="none";
+              document.querySelector("#graph5").style.display="none";
+              document.querySelector("#graph6").style.display="none";
             }
             if(Global.Configuration.ActiveStages.waste==0) {
-              document.querySelector("#graph4").style.display="none"
-              document.querySelector("#graph6").style.display="none"
+              document.querySelector("#graph4").style.display="none";
+              document.querySelector("#graph7").style.display="none";
+              document.querySelector("#graph8").style.display="none";
+            }
+            if(Global.Configuration.ActiveStages.faecl==0) {
+              document.querySelector("#graph9").style.display="none";
+              document.querySelector("#graph10").style.display="none";
             }
           })();
         </script>
