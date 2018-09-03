@@ -13,7 +13,6 @@ var UNFCCC = {
 			Global.Waste.Discharge.wwd_KPI_GHG_elec()+
 
       Global.Faecl.Containment.fsc_KPI_GHG_elec()+
-      Global.Faecl.Emptying.fse_KPI_GHG_elec()+
       Global.Faecl.Treatment.fst_KPI_GHG_elec()+
       Global.Faecl.Reuse.fsr_KPI_GHG_elec()+
 

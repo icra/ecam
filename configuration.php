@@ -194,7 +194,6 @@
           printL2stage("waste","wasteDis",translate("#Discharge"),    true);
           printL1stage("faecl",           translate('#Faecl'),        4);
           printL2stage("faecl","faeclCon",translate('#Containment'),  false);
-          printL2stage("faecl","faeclEmp",translate('#Emptying'),     true);
           printL2stage("faecl","faeclTre",translate('#Treatment'),    true);
           printL2stage("faecl","faeclReu",translate('#Reuse'),        true);
         ?>

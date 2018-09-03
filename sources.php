@@ -53,7 +53,6 @@
       var wwt=document.querySelector('#sources input[type=checkbox][name=wwt_KPI_GHG]').checked;
       var wwd=document.querySelector('#sources input[type=checkbox][name=wwd_KPI_GHG]').checked;
       var fsc=document.querySelector('#sources input[type=checkbox][name=fsc_KPI_GHG]').checked;
-      var fse=document.querySelector('#sources input[type=checkbox][name=fse_KPI_GHG]').checked;
       var fst=document.querySelector('#sources input[type=checkbox][name=fst_KPI_GHG]').checked;
       var fsr=document.querySelector('#sources input[type=checkbox][name=fsr_KPI_GHG]').checked;
 
@@ -65,13 +64,13 @@
         var divisor_value = typeof(divisor)=="function" ? divisor(code) : divisor;
 
         if(code=='TotalGHG'){
-          var value=calculate_emissions(wsa,wst,wsd,wwc,wwt,wwd,fsc,fse,fst,fsr);
+          var value=calculate_emissions(wsa,wst,wsd,wwc,wwt,wwd,fsc,fst,fsr);
         }else if(code=='ws_KPI_GHG'){
           var value=calculate_emissions_Water(wsa,wst,wsd);
         }else if(code=='ww_KPI_GHG'){
           var value=calculate_emissions_Waste(wwc,wwt,wwd);
         }else if(code=='fs_KPI_GHG'){
-          var value=calculate_emissions_Faecl(fsc,fse,fst,fsr);
+          var value=calculate_emissions_Faecl(fsc,fst,fsr);
         }else{
           var loc=locateVariable(code);
           var value = loc.sublevel ? (Global[loc.level][loc.sublevel][code]()) : (Global[loc.level][code]());
@@ -433,7 +432,6 @@
                 ";
               }
               drawL2stage('faeclCon', 'Faecl', 'Containment', 'fsc_KPI_GHG');
-              drawL2stage('faeclEmp', 'Faecl', 'Emptying',    'fse_KPI_GHG');
               drawL2stage('faeclTre', 'Faecl', 'Treatment',   'fst_KPI_GHG');
               drawL2stage('faeclReu', 'Faecl', 'Reuse',       'fsr_KPI_GHG');
             ?>

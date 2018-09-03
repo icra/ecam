@@ -69,7 +69,6 @@ var Formulas={
     result = result.replace(/Collection./g,"")
     result = result.replace(/Discharge./g,"")
     result = result.replace(/Containment./g,"")
-    result = result.replace(/Emptying./g,"")
     result = result.replace(/Reuse./g,"")
     result = result.replace(/Configuration./g,"")
     result = result.replace(/Yes\/No./g,"")

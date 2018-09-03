@@ -162,7 +162,6 @@
       <!--faecl-->
       <tr><td><a class=faecl stage=faecl    href=edit.php?level=Faecl> Faecal Sludge Management</a>
       <tr><td><a class=faecl stage=faeclCon href=edit.php?level=Faecl&sublevel=Containment> &emsp; Containment</a>
-      <tr><td><a class=faecl stage=faeclEmp href=edit.php?level=Faecl&sublevel=Emptying>    &emsp; Emptying</a>
       <tr><td><a class=faecl stage=faeclTre href=edit.php?level=Faecl&sublevel=Treatment>   &emsp; Treatment</a>
       <tr><td><a class=faecl stage=faeclReu href=edit.php?level=Faecl&sublevel=Reuse>       &emsp; Reuse</a>
 

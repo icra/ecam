@@ -39,9 +39,8 @@ function calculate_emissions_Waste(wwc,wwt,wwd){
 
   return rv;
 }
-function calculate_emissions_Faecl(fsc,fse,fst,fsr){
+function calculate_emissions_Faecl(fsc,fst,fsr){
   fsc=fsc||false;
-  fse=fse||false;
   fst=fst||false;
   fsr=fsr||false;
 
@@ -50,9 +49,6 @@ function calculate_emissions_Faecl(fsc,fse,fst,fsr){
   //fsc
   if(fsc) rv += Substages.Faecl.Containment.map(s=>s.fsc_KPI_GHG()).reduce((pr,cu)=>(pr+cu),0);
   else    rv +=    Global.Faecl.Containment.fsc_KPI_GHG();
-  //fse
-  if(fse) rv += Substages.Faecl.Emptying.map(s=>s.fse_KPI_GHG()).reduce((pr,cu)=>(pr+cu),0);
-  else    rv +=    Global.Faecl.Emptying.fse_KPI_GHG();
   //fst
   if(fst) rv += Substages.Faecl.Treatment.map(s=>s.fst_KPI_GHG()).reduce((pr,cu)=>(pr+cu),0);
   else    rv +=    Global.Faecl.Treatment.fst_KPI_GHG();
@@ -62,10 +58,10 @@ function calculate_emissions_Faecl(fsc,fse,fst,fsr){
 
   return rv;
 }
-function calculate_emissions(wsa,wst,wsd,wwc,wwt,wwd,fsc,fse,fst,fsr){
+function calculate_emissions(wsa,wst,wsd,wwc,wwt,wwd,fsc,fst,fsr){
   return calculate_emissions_Water(wsa,wst,wsd) +
     calculate_emissions_Waste(wwc,wwt,wwd)      +
-    calculate_emissions_Faecl(fsc,fse,fst,fsr);
+    calculate_emissions_Faecl(fsc,fst,fsr);
 }
 
 /** Find a variable code inside 'Global'*/

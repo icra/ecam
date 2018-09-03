@@ -124,7 +124,6 @@ Graphs.ghg_by_source=function(withTable,container) {
     Global.Waste.Treatment.wwt_KPI_GHG_elec()+
     Global.Waste.Discharge.wwd_KPI_GHG_elec()+
     Global.Faecl.Containment.fsc_KPI_GHG_elec()+
-    Global.Faecl.Emptying.fse_KPI_GHG_elec()+
     Global.Faecl.Treatment.fst_KPI_GHG_elec()+
     Global.Faecl.Reuse.fsr_KPI_GHG_elec()+
   0;
@@ -295,7 +294,6 @@ Graphs.ghgSources=function(withTable,container) {
   var elecFS=(function(){
     return 0+
       Global.Faecl.Containment.fsc_KPI_GHG_elec()+
-      Global.Faecl.Emptying.fse_KPI_GHG_elec()+
       Global.Faecl.Treatment.fst_KPI_GHG_elec()+
       Global.Faecl.Reuse.fsr_KPI_GHG_elec();
   })();
@@ -417,9 +415,8 @@ Graphs.ghgSources=function(withTable,container) {
   "";
   var elecFS_formula = ""+
     "<a href=variable.php?id=fsc_KPI_GHG_elec>fsc_KPI_GHG_elec</a> + <br>"+
-    "<a href=variable.php?id=fse_KPI_GHG_elec>fse_KPI_GHG_elec</a> + <br>"+
     "<a href=variable.php?id=fst_KPI_GHG_elec>fst_KPI_GHG_elec</a> + <br>"+
-    "<a href=variable.php?id=fst_KPI_GHG_elec>fsr_KPI_GHG_elec</a> + <br>"+
+    "<a href=variable.php?id=fsr_KPI_GHG_elec>fsr_KPI_GHG_elec</a> + <br>"+
   "";
   var fuel_formula = ""+
     "<a href=variable.php?id=wsa_KPI_GHG_fuel>wsa_KPI_GHG_fuel</a> + <br>"+
@@ -548,14 +545,14 @@ Graphs.unfccc=function(withTable,container){
   scrollToItem(container)
 }
 
-//GHG one stage only: (wsa|wst|wsd|wwc|wwt|wwd|fsc|fse|fst|fsr)
+//GHG one stage only: (wsa|wst|wsd|wwc|wwt|wwd|fsc|fst|fsr)
 Graphs.ghg_by_stage=function(withTable,container,prefix) {
   withTable=withTable||false;
   container=container||"graph";
   prefix=prefix||"wsa"; //first 3 letters [wsa,wst,wsd,wwc,wwt,wwd]
 
   //check if prefix is correct
-  if(-1==['wsa','wst','wsd','wwc','wwt','wwd','fsc','fse','fst','fsr'].indexOf(prefix)) {
+  if(-1==['wsa','wst','wsd','wwc','wwt','wwd','fsc','fst','fsr'].indexOf(prefix)) {
     document.getElementById(container).innerHTML="NA";
     return; //if prefix is not in this list, stop
   }
@@ -599,7 +596,6 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
       "wwt":translate("Treatment"),
       "wwd":translate("Discharge"),
       "fsc":translate("Containment"),
-      "fse":translate("Emptying"),
       "fst":translate("Treatment"),
       "fsr":translate("Reuse"),
     }[prefix];
@@ -663,7 +659,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
   scrollToItem(container)
 }
 
-//GHG all stages (wsa+wst+wsd+wwc+wwt+wwd+fsc+fse+fst+fsr)
+//GHG all stages (wsa+wst+wsd+wwc+wwt+wwd+fsc+fst+fsr)
 Graphs.graph4=function(withTable,container) {
   withTable=withTable||false;
   container=container||"graph";
@@ -677,7 +673,6 @@ Graphs.graph4=function(withTable,container) {
   var slice_6  = Global.Waste.Discharge.wwd_KPI_GHG();
   var slice_7  = Global.Waste.ww_KPI_GHG_unt();
   var slice_8  = Global.Faecl.Containment.fsc_KPI_GHG();
-  var slice_9  = Global.Faecl.Emptying.fse_KPI_GHG();
   var slice_10 = Global.Faecl.Treatment.fst_KPI_GHG();
   var slice_11 = Global.Faecl.Reuse.fsr_KPI_GHG();
 
@@ -694,7 +689,6 @@ Graphs.graph4=function(withTable,container) {
     "WW "+translate("Discharge"),
     translate("ww_KPI_GHG_unt_descr"),
     "FSM "+translate("Containment"),
-    "FSM "+translate("Emptying"),
     "FSM "+translate("Treatment"),
     "FSM "+translate("Reuse"),
   ];
@@ -776,7 +770,6 @@ Graphs.graph4=function(withTable,container) {
       "<tr><td>"+names[5] +"<td><a href=variable.php?id=wwd_KPI_GHG>wwd_KPI_GHG</a> <td align=right>"+format(slice_6)+
       "<tr><td>"+names[6] +"<td><a href=variable.php?id=wwd_KPI_GHG>ww_KPI_GHG_unt</a> <td align=right>"+format(slice_7)+
       "<tr><td>"+names[7] +"<td><a href=variable.php?id=fsc_KPI_GHG>fsc_KPI_GHG</a> <td align=right>"+format(slice_8)+
-      "<tr><td>"+names[8] +"<td><a href=variable.php?id=fse_KPI_GHG>fse_KPI_GHG</a> <td align=right>"+format(slice_9)+
       "<tr><td>"+names[9] +"<td><a href=variable.php?id=fst_KPI_GHG>fst_KPI_GHG</a> <td align=right>"+format(slice_10)+
       "<tr><td>"+names[10]+"<td><a href=variable.php?id=fsr_KPI_GHG>fsr_KPI_GHG</a> <td align=right>"+format(slice_11)+
     "</table>"+
@@ -890,7 +883,6 @@ Graphs.graph5=function(withTable,container) {
   var slice_5  = Global.Waste.Treatment.wwt_nrg_cons;
   var slice_6  = Global.Waste.Discharge.wwd_nrg_cons;
   var slice_7  = Global.Faecl.Containment.fsc_nrg_cons;
-  var slice_8  = Global.Faecl.Emptying.fse_nrg_cons;
   var slice_9  = Global.Faecl.Treatment.fst_nrg_cons;
   var slice_10 = Global.Faecl.Reuse.fsr_nrg_cons;
 
@@ -902,7 +894,6 @@ Graphs.graph5=function(withTable,container) {
     translate('Treatment'),
     translate('Discharge'),
     translate('Containment'),
-    translate('Emptying'),
     translate('Treatment'),
     translate('Reuse'),
   ]
@@ -973,7 +964,6 @@ Graphs.graph5=function(withTable,container) {
       "<tr><td align=left>"+names[4]+"<td align=left><a href=variable.php?id=wwt_nrg_cons>wwt_nrg_cons</a> <td align=right>"+format(slice_5)+
       "<tr><td align=left>"+names[5]+"<td align=left><a href=variable.php?id=wwd_nrg_cons>wwd_nrg_cons</a> <td align=right>"+format(slice_6)+
       "<tr><td align=left>"+names[6]+"<td align=left><a href=variable.php?id=fsc_nrg_cons>fsc_nrg_cons</a> <td align=right>"+format(slice_7)+
-      "<tr><td align=left>"+names[7]+"<td align=left><a href=variable.php?id=fse_nrg_cons>fse_nrg_cons</a> <td align=right>"+format(slice_8)+
       "<tr><td align=left>"+names[8]+"<td align=left><a href=variable.php?id=fst_nrg_cons>fst_nrg_cons</a> <td align=right>"+format(slice_9)+
       "<tr><td align=left>"+names[9]+"<td align=left><a href=variable.php?id=fsr_nrg_cons>fsr_nrg_cons</a> <td align=right>"+format(slice_10)+
     "</table>"+
@@ -1001,15 +991,13 @@ Graphs.graph7=function(withTable,container) {
   var wwt = Substages.Waste.Treatment;
   var wwd = Substages.Waste.Discharge;
   var fsc = Substages.Faecl.Containment;
-  var fse = Substages.Faecl.Emptying;
   var fst = Substages.Faecl.Treatment;
   var fsr = Substages.Faecl.Reuse;
 
   //array of pointers to objects
-  var stages = [ wsa , wst , wsd , wwc , wwt , wwd, fsc, fse, fst, fsr];
+  var stages = [ wsa , wst , wsd , wwc , wwt , wwd, fsc, fst, fsr];
   var names =  ["wsa_nrg_cons", "wst_nrg_cons", "wsd_nrg_cons", "wwc_nrg_cons", "wwt_nrg_cons", "wwd_nrg_cons",
     'fsc_nrg_cons',
-    'fse_nrg_cons',
     'fst_nrg_cons',
     'fsr_nrg_cons',
   ];
@@ -1030,7 +1018,6 @@ Graphs.graph7=function(withTable,container) {
       case 'wwt_nrg_cons': title=translate('Treatment');break;
       case 'wwd_nrg_cons': title=translate('Discharge');break;
       case 'fsc_nrg_cons': title=translate('Containment');break;
-      case 'fse_nrg_cons': title=translate('Emptying');break;
       case 'fst_nrg_cons': title=translate('Treatment');break;
       case 'fsr_nrg_cons': title=translate('Reuse');break;
       default:break;
@@ -1102,7 +1089,6 @@ Graphs.graph7=function(withTable,container) {
           case 'wwt_nrg_cons': title=translate('Treatment');break;
           case 'wwd_nrg_cons': title=translate('Discharge');break;
           case 'fsc_nrg_cons': title=translate('Containment');break;
-          case 'fse_nrg_cons': title=translate('Emptying');break;
           case 'fst_nrg_cons': title=translate('Treatment');break;
           case 'fsr_nrg_cons': title=translate('Reuse');break;
           default:break;

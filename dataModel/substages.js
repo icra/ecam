@@ -13,7 +13,6 @@ var Substages={
 	},
   "Faecl":{
     "Containment":[],
-    "Emptying":[],
     "Treatment":[],
     "Reuse":[],
   },

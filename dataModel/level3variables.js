@@ -1,6 +1,17 @@
 /* variables hidden in level 2, shown in level3: */
 var Level3={};
 Level3.list=[
+  //new above (to be sorted)
+  "fsc_KPI_GHG_trck_co2", //hidden
+  "fsc_KPI_GHG_trck_n2o", //hidden
+  "fsc_KPI_GHG_trck_ch4", //hidden
+  "fst_KPI_GHG_trck_co2", //hidden
+  "fst_KPI_GHG_trck_n2o", //hidden
+  "fst_KPI_GHG_trck_ch4", //hidden
+  "fsr_KPI_GHG_trck_co2", //hidden
+  "fsr_KPI_GHG_trck_n2o", //hidden
+  "fsr_KPI_GHG_trck_ch4", //hidden
+
 	//wsa
   "wsa_nrg_per_pmp_watr",
 	"wsa_KPI_GHG_fuel_co2",
@@ -142,11 +153,6 @@ Level3.list=[
 
   //fsc
   "fsc_type_tre", //hidden
-
-  //fse
-  "fse_KPI_GHG_trck_co2",
-  "fse_KPI_GHG_trck_n2o",
-  "fse_KPI_GHG_trck_ch4",
 
   //fst
   "fst_KPI_GHG_fuel_co2",

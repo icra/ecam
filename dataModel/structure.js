@@ -11,7 +11,6 @@ var Structure=[
   {prefix:'wwt', alias:'wasteTre', level:'Waste', sublevel:'Treatment'},
   {prefix:'wwd', alias:'wasteDis', level:'Waste', sublevel:'Discharge'},
   {prefix:'fsc', alias:'faeclCon', level:'Faecl', sublevel:'Containment'},
-  {prefix:'fse', alias:'faeclEmp', level:'Faecl', sublevel:'Emptying'},
   {prefix:'fst', alias:'faeclTre', level:'Faecl', sublevel:'Treatment'},
   {prefix:'fsr', alias:'faeclReu', level:'Faecl', sublevel:'Reuse'},
 ];

@@ -542,7 +542,18 @@ var Questions={
     },
 
   //fsc
-  //fse
+    "fsc_transport":{
+      variables:[
+        "fsc_trck_typ",
+        "fsc_vol_trck",
+        "fsc_KPI_GHG_trck_co2",
+        "fsc_KPI_GHG_trck_n2o",
+        "fsc_KPI_GHG_trck_ch4",
+        "fsc_KPI_GHG_trck",
+      ],
+      advanced:0,
+      otherQuestions:[],
+    },
 
   //fst
     "fst_engines":{
@@ -569,8 +580,32 @@ var Questions={
       otherQuestions:[
       ],
     },
+    "fst_transport":{
+      variables:[
+        "fst_trck_typ",
+        "fst_vol_trck",
+        "fst_KPI_GHG_trck_co2",
+        "fst_KPI_GHG_trck_n2o",
+        "fst_KPI_GHG_trck_ch4",
+        "fst_KPI_GHG_trck",
+      ],
+      advanced:0,
+      otherQuestions:[],
+    },
 
   //fsr
+    "fsr_transport":{
+      variables:[
+        "fsr_trck_typ",
+        "fsr_vol_trck",
+        "fsr_KPI_GHG_trck_co2",
+        "fsr_KPI_GHG_trck_n2o",
+        "fsr_KPI_GHG_trck_ch4",
+        "fsr_KPI_GHG_trck",
+      ],
+      advanced:0,
+      otherQuestions:[],
+    },
     "fsr_landapp":{
       variables:[
         "fsr_mass_landapp",

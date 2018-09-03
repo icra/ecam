@@ -37,9 +37,15 @@ var Level2only = {
     "wwd_KPI_GHG_trck_co2", //hidden
     "wwd_KPI_GHG_trck_n2o", //hidden
     "wwd_KPI_GHG_trck_ch4", //hidden
-    "fse_KPI_GHG_trck_co2", //hidden
-    "fse_KPI_GHG_trck_n2o", //hidden
-    "fse_KPI_GHG_trck_ch4", //hidden
+    "fsc_KPI_GHG_trck_co2", //hidden
+    "fsc_KPI_GHG_trck_n2o", //hidden
+    "fsc_KPI_GHG_trck_ch4", //hidden
+    "fst_KPI_GHG_trck_co2", //hidden
+    "fst_KPI_GHG_trck_n2o", //hidden
+    "fst_KPI_GHG_trck_ch4", //hidden
+    "fsr_KPI_GHG_trck_co2", //hidden
+    "fsr_KPI_GHG_trck_n2o", //hidden
+    "fsr_KPI_GHG_trck_ch4", //hidden
 
     //fuel digester
     "wwt_KPI_GHG_dig_fuel_co2", //hidden

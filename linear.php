@@ -143,7 +143,6 @@
           case "Faecl":
             switch(sublevel) {
               case "Containment":stage="faeclCon";break;
-              case "Emptying":stage="faeclEmp";break;
               case "Treatment":stage="faeclTre";break;
               case "Reuse":stage="faeclReu";break;
             }

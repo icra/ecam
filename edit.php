@@ -482,7 +482,6 @@
             elseif($level=="Waste" && $sublevel=="Treatment"    ){$alias="wasteTre"; $iwaLink.='stage/wastewater_treatment';}
             elseif($level=="Waste" && $sublevel=="Discharge"    ){$alias="wasteDis"; $iwaLink.='stage/wastewater_discharge';}
             elseif($level=="Faecl" && $sublevel=="Containment"  ){$alias="faeclCon"; $iwaLink.='';}
-            elseif($level=="Faecl" && $sublevel=="Emptying"     ){$alias="faeclEmp"; $iwaLink.='';}
             elseif($level=="Faecl" && $sublevel=="Treatment"    ){$alias="faeclTre"; $iwaLink.='';}
             elseif($level=="Faecl" && $sublevel=="Reuse"        ){$alias="faeclReu"; $iwaLink.='';}
           ?>
@@ -668,7 +667,7 @@
     ?>
 
     <!--level2-->
-    <div class=flex style="padding:0 0 0.2em 0.2em">
+    <div class=flex style="padding:1px 0 0.2em 0.2em">
       <!--inputs level2-->
       <div style="min-width:40%;margin-right:5px;">
         <?php include'level2.php'?>

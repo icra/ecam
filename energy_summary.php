@@ -271,7 +271,6 @@
               ";
             }
             drawL2stage('faeclCon', 'Faecl', 'Containment', 'fsc_nrg_cons');
-            drawL2stage('faeclEmp', 'Faecl', 'Emptying',    'fse_nrg_cons');
             drawL2stage('faeclTre', 'Faecl', 'Treatment',   'fst_nrg_cons');
             drawL2stage('faeclReu', 'Faecl', 'Reuse',       'fsr_nrg_cons');
           ?>
