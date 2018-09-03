@@ -776,6 +776,7 @@ var Global = {
       "fsc_cont_emp":0, //containments emptied
       "fsc_fslu_emp":0, //FS emptied
       "fsc_fdensity":0, //density of faecal sludge
+      "fsc_bod_conc_fs":0,  //[BOD] in FS
 
       fsc_KPI_GHG_elec:function(){return this.fsc_nrg_cons*Global.General.conv_kwh_co2},
       fsc_KPI_GHG_cont:function(){//<br>
@@ -1022,6 +1023,7 @@ var Global = {
       fsc_ch4_efac:"",    //string with the treatment selected
       fsc_fdensity:"",    //string with the treatment selected
       fst_ch4_efac:"",    //string with the treatment selected
+      fsc_bod_conc_fs:"", //string with the treatment selected
       fsr_bod_conc_fs:"", //string with the treatment selected
       fsr_ch4_efac:"",    //string with the treatment selected
       wwt_ch4_efac:"",    //string with the treatment selected

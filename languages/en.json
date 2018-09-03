@@ -3,6 +3,9 @@
   "#fsc_fdensity_descr":"FS density",
   "#fsc_fdensity_expla":"FS density",
 
+  "#fsc_bod_conc_fs_descr": "BOD concentration of FS",
+  "#fsc_bod_conc_fs_expla": "BOD concentration of FS",
+
   "#fs_SL_serv_pop_descr":"Serviced population in FSM",
   "#fs_SL_serv_pop_expla":"Serviced population",
 

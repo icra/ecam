@@ -356,7 +356,8 @@
         ret.id='utc';
 
         //look for the code "id" inside each output
-        var outputsPerInput=Formulas.outputsPerInput(id);
+        var outputsPerInput=Formulas.outputsPerInput(id)
+          .filter(output=>{return !Exceptions[output]})
         //if is not used to calculate anything, hide row
         if(outputsPerInput.length==0) {
           return "<span style=color:#999><?php write('#variable_nothing')?></span>";
@@ -365,6 +366,7 @@
         outputsPerInput.forEach(function(output) {
           var match_localization = locateVariable(output);
           var match_level = match_localization.level;
+
           var match_sublevel = match_localization.sublevel;
           var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level];
           if(Info[output]) {
@@ -372,15 +374,25 @@
               Global.General.Currency : (Global.Configuration.Units[output]||Info[output].unit);
           }
           else var currentUnit = "no unit";
-          try{
-            var currValue = match_stage[output]()/Units.multiplier(output);
-          }catch(e){
-            var currValue = 0;
+
+          //check if the detected output is an estimation
+          var is_input = typeof match_stage[output]=='number';
+
+          //compute the value
+          if(is_input){
+            var currValue = match_stage[output]/Units.multiplier(output);
+          }else{
+            try{
+              var currValue = match_stage[output]()/Units.multiplier(output);
+            }catch(e){
+              var currValue = 0;
+            }
           }
 
           currValueF=format(currValue);
           var pretf=Formulas.prettify(match_stage[output].toString());
           var color=output.search('ww')==-1 ? "#0aaff1":"#bf5050";
+
           var ret_newRow=ret.insertRow(-1);
 
           //variable code
@@ -389,7 +401,7 @@
             "  <a style='color:"+color+"' "+
             "    href=variable.php?id="+output+
             "    caption='["+match_localization.toString()+"] "+ (translate(output+"_descr")||translate(output))+"'"+
-            "  >"+output+"</a>";
+            "  >"+output+"</a>"+(is_input?" <span caption='"+Formulas.prettify(Recommendations[output].toString())+"'>(estimation)</span>":"");
 
           //variable value and formula
           var ret_newCell=ret_newRow.insertCell(-1);
@@ -417,8 +429,8 @@
         newRow=t.insertRow(-1);
         newCell=newRow.insertCell(-1);
         newCell.className='th';
-        newCell.innerHTML="Estimation of the input based on other inputs";
-        var r_value=Recommendations[id]();
+        newCell.innerHTML="Estimation of this input";
+        var r_value=Recommendations[id]()/Units.multiplier(id);
         var currentUnit= (Info[id].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[id]||Info[id].unit);
         newRow.insertCell(-1).innerHTML=Formulas.prettify(Recommendations[id].toString())+" <br>= "+format(r_value)+" "+currentUnit;
       }

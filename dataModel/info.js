@@ -12,6 +12,7 @@ var Info = {
   fsc_vol_trck: {magnitude:"Volume", unit:"L"},
   fst_vol_trck: {magnitude:"Volume", unit:"L"},
   fsr_vol_trck: {magnitude:"Volume", unit:"L"},
+  fsc_bod_conc_fs: {magnitude:"Concentration", unit:"kg/m3" },
 
   //FS Reuse
   fsr_N_urine:          {magnitude:"Mass",        unit:"kg"},
@@ -56,7 +57,7 @@ var Info = {
   fst_biog_val:        {magnitude:"Volume",    unit:"m3" },
   fst_biog_fla:        {magnitude:"Volume",    unit:"m3" },
   fst_ch4_biog:        {magnitude:"Percent",   unit:"%" },
-  fst_vol_fuel:        {magnitude:"Volume",    unit:"m3" },
+  fst_vol_fuel:        {magnitude:"Volume",    unit:"L" },
   fst_KPI_GHG_elec:    {magnitude:"Mass",      unit:"kg CO<sub>2</sub>e" },
   fst_KPI_GHG_biog:    {magnitude:"Mass",      unit:"kg CO<sub>2</sub>e" },
   fst_KPI_GHG:         {magnitude:"Mass",      unit:"kg CO<sub>2</sub>e" },

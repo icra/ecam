@@ -13,6 +13,7 @@ var Exceptions = {
     this.fsr_ch4_efac();
     this.fsc_fdensity();
     this.fsr_bod_conc_fs();
+    this.fsc_bod_conc_fs();
   },
 
   fsc_fdensity:function() {
@@ -214,6 +215,39 @@ var Exceptions = {
       option.setAttribute('treatment',treatment);
       option.innerHTML=translate(treatment)+" ("+cons+")";
       if(treatment==Global.Configuration.Selected.fsr_bod_conc_fs && cons==Global.Faecl.Reuse.fsr_bod_conc_fs) {
+        option.selected='true';
+      }
+    }
+  },
+  fsc_bod_conc_fs:function() {
+    var td=document.querySelector('tr[field=fsc_bod_conc_fs] td');
+    if(!td)return;
+
+    var select=document.createElement('select');
+    select.style.fontSize='smaller';
+    select.style.display='block';
+    td.appendChild(select);
+
+    select.onchange=function() {
+      Global.Faecl.Containment.fsc_bod_conc_fs=parseFloat(select.value);
+      Global.Configuration.Selected.fsc_bod_conc_fs=select.options[select.options.selectedIndex].getAttribute('treatment');
+      init();
+    }
+
+    var options = {};
+    for(var treatment in Tables.fsc_type_tre) {
+      options[treatment] = Tables.fsc_type_tre[treatment].BOD_conc_FS;
+    }
+
+    //go over treatment types
+    for(var treatment in options) {
+      var option=document.createElement('option');
+      select.appendChild(option);
+      var cons=options[treatment];
+      option.value=cons;
+      option.setAttribute('treatment',treatment);
+      option.innerHTML=translate(treatment)+" ("+cons+")";
+      if(treatment==Global.Configuration.Selected.fsc_bod_conc_fs && cons==Global.Faecl.Containment.fsc_bod_conc_fs) {
         option.selected='true';
       }
     }
