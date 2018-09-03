@@ -673,8 +673,8 @@ Graphs.graph4=function(withTable,container) {
   var slice_6  = Global.Waste.Discharge.wwd_KPI_GHG();
   var slice_7  = Global.Waste.ww_KPI_GHG_unt();
   var slice_8  = Global.Faecl.Containment.fsc_KPI_GHG();
-  var slice_10 = Global.Faecl.Treatment.fst_KPI_GHG();
-  var slice_11 = Global.Faecl.Reuse.fsr_KPI_GHG();
+  var slice_9  = Global.Faecl.Treatment.fst_KPI_GHG();
+  var slice_10 = Global.Faecl.Reuse.fsr_KPI_GHG();
 
   //sum
   var sum = Global.General.TotalGHG();
@@ -706,7 +706,6 @@ Graphs.graph4=function(withTable,container) {
     [names[7],slice_8],
     [names[8],slice_9],
     [names[9],slice_10],
-    [names[10],slice_11],
   ]);
 
   //options
@@ -770,8 +769,8 @@ Graphs.graph4=function(withTable,container) {
       "<tr><td>"+names[5] +"<td><a href=variable.php?id=wwd_KPI_GHG>wwd_KPI_GHG</a> <td align=right>"+format(slice_6)+
       "<tr><td>"+names[6] +"<td><a href=variable.php?id=wwd_KPI_GHG>ww_KPI_GHG_unt</a> <td align=right>"+format(slice_7)+
       "<tr><td>"+names[7] +"<td><a href=variable.php?id=fsc_KPI_GHG>fsc_KPI_GHG</a> <td align=right>"+format(slice_8)+
-      "<tr><td>"+names[9] +"<td><a href=variable.php?id=fst_KPI_GHG>fst_KPI_GHG</a> <td align=right>"+format(slice_10)+
-      "<tr><td>"+names[10]+"<td><a href=variable.php?id=fsr_KPI_GHG>fsr_KPI_GHG</a> <td align=right>"+format(slice_11)+
+      "<tr><td>"+names[8] +"<td><a href=variable.php?id=fst_KPI_GHG>fst_KPI_GHG</a> <td align=right>"+format(slice_9)+
+      "<tr><td>"+names[9] +"<td><a href=variable.php?id=fst_KPI_GHG>fsr_KPI_GHG</a> <td align=right>"+format(slice_10)+
     "</table>"+
     "";
     //extra options
@@ -876,15 +875,15 @@ Graphs.graph5=function(withTable,container) {
   container=container||"graph";
 
   //values
-  var slice_1  = Global.Water.Abstraction.wsa_nrg_cons;
-  var slice_2  = Global.Water.Treatment.wst_nrg_cons;
-  var slice_3  = Global.Water.Distribution.wsd_nrg_cons;
-  var slice_4  = Global.Waste.Collection.wwc_nrg_cons;
-  var slice_5  = Global.Waste.Treatment.wwt_nrg_cons;
-  var slice_6  = Global.Waste.Discharge.wwd_nrg_cons;
-  var slice_7  = Global.Faecl.Containment.fsc_nrg_cons;
-  var slice_9  = Global.Faecl.Treatment.fst_nrg_cons;
-  var slice_10 = Global.Faecl.Reuse.fsr_nrg_cons;
+  var slice_1 = Global.Water.Abstraction.wsa_nrg_cons;
+  var slice_2 = Global.Water.Treatment.wst_nrg_cons;
+  var slice_3 = Global.Water.Distribution.wsd_nrg_cons;
+  var slice_4 = Global.Waste.Collection.wwc_nrg_cons;
+  var slice_5 = Global.Waste.Treatment.wwt_nrg_cons;
+  var slice_6 = Global.Waste.Discharge.wwd_nrg_cons;
+  var slice_7 = Global.Faecl.Containment.fsc_nrg_cons;
+  var slice_8 = Global.Faecl.Treatment.fst_nrg_cons;
+  var slice_9 = Global.Faecl.Reuse.fsr_nrg_cons;
 
   var names=[
     translate('Abstraction'),
@@ -910,7 +909,6 @@ Graphs.graph5=function(withTable,container) {
     [names[6],slice_7],
     [names[7],slice_8],
     [names[8],slice_9],
-    [names[9],slice_10],
   ]);
 
   //options
@@ -965,7 +963,6 @@ Graphs.graph5=function(withTable,container) {
       "<tr><td align=left>"+names[5]+"<td align=left><a href=variable.php?id=wwd_nrg_cons>wwd_nrg_cons</a> <td align=right>"+format(slice_6)+
       "<tr><td align=left>"+names[6]+"<td align=left><a href=variable.php?id=fsc_nrg_cons>fsc_nrg_cons</a> <td align=right>"+format(slice_7)+
       "<tr><td align=left>"+names[8]+"<td align=left><a href=variable.php?id=fst_nrg_cons>fst_nrg_cons</a> <td align=right>"+format(slice_9)+
-      "<tr><td align=left>"+names[9]+"<td align=left><a href=variable.php?id=fsr_nrg_cons>fsr_nrg_cons</a> <td align=right>"+format(slice_10)+
     "</table>"+
     '<div class=options>'+
     ' <a href="'+chart.getImageURI()+'" download="image.png" class=printable>Save as image</a> '+

@@ -324,7 +324,7 @@
               <span class=circle style=background:orange></span>
               <?php write("#highest emission")?>
             </span>
-          <tr><th rowspan=10 style="font-weight:bold;background:#2b6488;color:white">
+          <tr><th rowspan=9 style="font-weight:bold;background:#2b6488;color:white">
             <a href="variable.php?id=TotalGHG" style=color:white>
               <?php write('#TOTAL GHG')?>
             </a>
@@ -409,7 +409,7 @@
             </tr>
 
           <!--FSM-->
-          <th rowspan=4 style="background:green">
+          <th rowspan=3 style="background:green">
             <div>
               <a href="edit.php?level=Faecl" style=color:white>
                 <?php write("#Faecl")?>

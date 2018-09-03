@@ -205,7 +205,7 @@
         </tr>
 
         <!--L0 Total energy consumed-->
-        <tr><th rowspan=10 style="font-weight:bold;background:#2b6488;">
+        <tr><th rowspan=9 style="font-weight:bold;background:#2b6488;">
           <?php write('#TOTAL ENERGY CONSUMED')?> &rarr;<br><br>
           <span field=TotalNRG><?php write('#Loading')?>...</span>
         </th>
@@ -252,7 +252,7 @@
         </tr>
 
         <!--L1 Faecl-->
-        <th rowspan=4 style="background:green">
+        <th rowspan=3 style="background:green">
           <a href="edit.php?level=Faecl" style=color:white>
             <?php write('#Faecl')?>
           </a><br><br>
