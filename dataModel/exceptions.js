@@ -9,9 +9,9 @@ var Exceptions = {
   apply:function() {
     this.wwt_ch4_efac();
     this.fsc_ch4_efac();
-    this.fsc_fdensity();
     this.fst_ch4_efac();
     this.fsr_ch4_efac();
+    this.fsc_fdensity();
     this.fsr_bod_conc_fs();
   },
 
@@ -196,7 +196,7 @@ var Exceptions = {
 
     select.onchange=function() {
       Global.Faecl.Reuse.fsr_bod_conc_fs=parseFloat(select.value);
-      Global.Configuration.Selected.fsc_bod_conc=select.options[select.options.selectedIndex].getAttribute('treatment');
+      Global.Configuration.Selected.fsr_bod_conc_fs=select.options[select.options.selectedIndex].getAttribute('treatment');
       init();
     }
 
@@ -220,4 +220,4 @@ var Exceptions = {
   },
 }
 
-Global.Exceptions=Exceptions;//to search inside formulas
+Global.Exceptions=Exceptions;//for searching inside formulas (some inputs are only used in exceptions)

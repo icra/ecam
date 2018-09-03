@@ -1014,17 +1014,22 @@ var Global = {
 
     //auxiliar object to store user selections
     Selected: {
-      wwt_ch4_efac:"",    //string with the treatment selected
-      fsc_ch4_efac:"",    //string with the treatment selected
-      fst_ch4_efac:"",    //string with the treatment selected
       prot_con:"Albania", //country selected for protein consumption
       sludge_estimation_method:"0",
       gwp_reports_index:0,
+
+      //for exceptions
+      fsc_ch4_efac:"",    //string with the treatment selected
+      fsc_fdensity:"",    //string with the treatment selected
+      fst_ch4_efac:"",    //string with the treatment selected
+      fsr_bod_conc_fs:"", //string with the treatment selected
+      fsr_ch4_efac:"",    //string with the treatment selected
+      wwt_ch4_efac:"",    //string with the treatment selected
     },
 
     //answers for filters (see "questions.js")
     "Yes/No": {
-      //wsa_pumping:0,
+      //example-->wsa_pumping:0,
     },
   },
 };

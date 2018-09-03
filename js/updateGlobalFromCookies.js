@@ -50,6 +50,8 @@ function copyFieldsFrom(object_from,object_to){
       }else{
         //do nothing
         console.warn(field,' types do not match');
+        console.log(object_from[field]);
+        console.log(object_to[field]);
       }
     }
   });
