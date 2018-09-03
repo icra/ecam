@@ -620,7 +620,7 @@
   "#ww_SL_ghg_unc_n2o_expla":"N<sub>2</sub>O de agua residual no recolectada",
   "#ww_SL_nrg_cost_descr":"Porcentaje de costos electricidad ",
   "#ww_SL_nrg_cost_expla":"Proporción de los costos operativos que corresponden a consumo de electricidad",
-  "#ww_SL_serv_pop_descr":"Población servida con tratamiento de aguas residuales (respecto a la población residente)",
+  "#ww_SL_serv_pop_descr":"Población residente servida con tratamiento de aguas residuales",
   "#ww_SL_serv_pop_expla":"Porcentaje de la población residente conectada al Sistema de alcantarillado y cuya agua residual generada es tratada",
   "#ww_SL_treat_m3_descr":"Agua residual recolectada que es tratada ",
   "#ww_SL_treat_m3_expla":"Porcentaje de agua residual recolectada que es dirigida y recibe un tratamiento adecuado en la PTAR",

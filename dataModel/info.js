@@ -7,6 +7,7 @@
 */
 
 var Info = {
+	fs_SL_serv_pop:{magnitude:"Percentage",unit:"%"},
   fsc_fdensity:          {magnitude:"Concentration", unit:"kg/m3" },
   fsc_vol_trck: {magnitude:"Volume", unit:"L"},
   fst_vol_trck: {magnitude:"Volume", unit:"L"},
@@ -80,6 +81,7 @@ var Info = {
   fsc_KPI_GHG:      {magnitude:"Mass",       unit:"kg CO<sub>2</sub>e"},
 
   //LEVEL1 FSM
+  fs_resi_pop:     {magnitude:"People",     unit:"People"},
   fs_onsi_pop:     {magnitude:"People",     unit:"People"},
   fs_KPI_GHG:      {magnitude:"Mass", unit:"kg CO<sub>2</sub>e"},
 

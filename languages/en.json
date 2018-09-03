@@ -1,4 +1,7 @@
 {
+  "#fs_SL_serv_pop_descr":"Serviced population in FSM",
+  "#fs_SL_serv_pop_expla":"Serviced population",
+
   "#fsc_vol_trck_descr":         "Volume of fuel consumed",
   "#fsc_trck_typ_descr":         "Fuel type",
   "#fsc_KPI_GHG_trck_co2_descr": "GHG from CO2 in FS transport",
@@ -174,6 +177,8 @@
   "#fsc_nrg_cons_descr": "Energy consumed from the grid",
   "#fsc_nrg_cons_expla": "Energy consumed from the grid",
 
+  "#fs_resi_pop_descr":"Resident population",
+  "#fs_resi_pop_expla":"Resident population (FSM)",
   "#fs_onsi_pop_descr":"Population with onsite treatment",
   "#fs_onsi_pop_expla":"Population with onsite treatment",
   "#fs_nrg_cons_descr":  "Energy consumed from the grid in FSM stages",
@@ -906,7 +911,7 @@
   "#ww_KPI_GHG_expla":"GHG Emissions from non-electricity and electricity consumption",
   "#ww_SL_nrg_cost_descr":"Energy costs percentage",
   "#ww_SL_nrg_cost_expla":"Proportion of the utility energy costs referred to the total running costs",
-  "#ww_SL_serv_pop_descr":"Serviced population (% of resident population)",
+  "#ww_SL_serv_pop_descr":"Resident population serviced with wastewater treatment",
   "#ww_SL_serv_pop_expla":"Percentage of the resident population that are connected to the sewer systems and which wastewater is treated by the undertaking",
   "#ww_SL_treat_m3_descr":"Collected wastewater treated",
   "#ww_SL_treat_m3_expla":"Percentage of the collected sewage prior to dilution or overflows in the sewer system that are treated in wastewater treatment plants",

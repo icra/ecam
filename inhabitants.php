@@ -67,6 +67,7 @@
     <!--FAECL-->
     <tr><th colspan=3 style=background:green>
       <img src=img/faecl.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Faecl')?>
+      <tr stage=faecl class=hidden><td><?php write('#fs_resi_pop_descr')?> <td class=input><input id='fs_resi_pop'> <td><small><?php write('#people')?>
       <tr stage=faecl class=hidden><td><?php write('#fs_onsi_pop_descr')?> <td class=input><input id='fs_onsi_pop'> <td><small><?php write('#people')?>
       <tr indic=faecl class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
     </tr>

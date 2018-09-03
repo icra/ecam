@@ -25,8 +25,6 @@
       Graphs.ws_cost('graph3');
       Graphs.ww_cost('graph4');
       //   ".gauge(container, value,                        header,                            unit,      lowerLimit, upperLimit)"
-      Graphs.gauge('graph5', Global.Water.ws_SL_serv_pop(), translate("ws_SL_serv_pop_descr"), undefined, 0, 100);
-      Graphs.gauge('graph6', Global.Waste.ww_SL_serv_pop(), translate("ww_SL_serv_pop_descr"), undefined, 0, 100);
 
       //GHG emissions per year per person
       (function(){
@@ -34,16 +32,26 @@
 
         //water
         var ws_serv=Global.Water.ws_serv_pop;
-        Graphs.gauge('graph7', Global.Water.ws_KPI_GHG()/years/ws_serv,
+        Graphs.gauge('graph5', Global.Water.ws_SL_serv_pop(), translate("ws_SL_serv_pop_descr"), undefined, 0, 100);
+        Graphs.gauge('graph6', Global.Water.ws_KPI_GHG()/years/ws_serv,
           translate("ws_KPI_GHG_descr"),
           "<br>"+Info.ws_KPI_GHG.unit+"/"+translate('year')+"/"+translate('serv.pop.'),
           0, 200); //with units and limits (lower limit and upper limit)
 
-        //wastewater
+        //waste
         var ww_serv=Global.Waste.ww_serv_pop();
+        Graphs.gauge('graph7', Global.Waste.ww_SL_serv_pop(), translate("ww_SL_serv_pop_descr"), undefined, 0, 100);
         Graphs.gauge('graph8', Global.Waste.ww_KPI_GHG()/years/ww_serv,
           translate("ww_KPI_GHG_descr"),
           "<br>"+Info.ww_KPI_GHG.unit+"/"+translate('year')+"/"+translate('serv.pop.'),
+          0, 200); //with unit and limits (lower limit and upper limit)
+
+        //faecl
+        var fs_serv=Global.Faecl.fs_onsi_pop;
+        Graphs.gauge('graph9',  Global.Faecl.fs_SL_serv_pop(), translate("fs_SL_serv_pop_descr"), undefined, 0, 100);
+        Graphs.gauge('graph10', Global.Faecl.fs_KPI_GHG()/years/fs_serv,
+          translate("fs_KPI_GHG_descr"),
+          "<br>"+Info.fs_KPI_GHG.unit+"/"+translate('year')+"/"+translate('serv.pop.'),
           0, 200); //with unit and limits (lower limit and upper limit)
       })();
     }
@@ -560,12 +568,15 @@
         <!---->
         <div graph id=graph3><?php write('#loading')?></div>
         <div graph id=graph4><?php write('#loading')?></div>
+        <!---->
         <div graph id=graph5><?php write('#loading')?></div>
         <div graph id=graph6><?php write('#loading')?></div>
         <!---->
         <div graph id=graph7><?php write('#loading')?></div>
         <div graph id=graph8><?php write('#loading')?></div>
         <!---->
+        <div graph id=graph9><?php write('#loading')?></div>
+        <div graph id=graph10><?php write('#loading')?></div>
         <div style="width:98%;padding:1em 0;margin-bottom:1em;border:none">
           <?php write('#for_further_details_go_to_detailed')?>
           <b>

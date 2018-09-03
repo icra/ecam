@@ -751,10 +751,14 @@ var Global = {
 
   //Level 1 FSM structure
   Faecl:{
+    "fs_resi_pop":0, //resident population
     "fs_onsi_pop":0, //onsite population
 
     fs_nrg_cons:function(){
       return this.Containment.fsc_nrg_cons+this.Treatment.fst_nrg_cons+this.Reuse.fsr_nrg_cons;
+    },
+    fs_SL_serv_pop:function(){
+      return 100*this.fs_onsi_pop/this.fs_resi_pop;
     },
     fs_KPI_GHG:function(){//<br>
       return this.Containment.fsc_KPI_GHG()+this.Treatment.fst_KPI_GHG()+this.Reuse.fsr_KPI_GHG();
