@@ -233,9 +233,26 @@
             var level    = '<?php echo $level?>';
             var sublevel = '<?php if($sublevel) echo $sublevel; else echo 'false' ?>';
 
-            if(level=='Faecl')return;
+            //in FSM only divide by year and fs_onsi_pop
+            if(level=='Faecl'){
+              var newCell=newRow.insertCell(-1);
 
-            //value per resident population
+              //calculate normalized value
+              var norm=Normalization.normalize('servic',field,level,sublevel); //value
+              norm/=Global.General.Years();
+
+              //inner html
+              newCell.innerHTML=(function(){
+                if(norm==Infinity || isNaN(norm))
+                  return "N/A";
+                else{
+                  var color=norm?"":"#ccc";
+                  return "<span style=color:"+color+">"+format(norm)+"</span>";
+                }
+              })();
+              return;
+            }
+
             //value per serviced population
             //value per water volume
             ['servic','volume'].forEach(function(category) {
@@ -246,6 +263,9 @@
 
               //calculate normalized value
               var norm=Normalization.normalize(category,field,level,sublevel); //value
+              if(category!='volume'){
+                norm/=Global.General.Years();
+              }
 
               /**
                 * EXCEPTION HERE FOR WWD DISCHARGE REUSE (WARNING TODO)
@@ -262,6 +282,7 @@
               //hl related variables
               newCell.setAttribute('onmouseover',"Formulas.hlField('"+hlfield+"',1)");
               newCell.setAttribute('onmouseout',"Formulas.hlField('"+hlfield+"',0)");
+
               //inner html
               newCell.innerHTML=(function(){
                 if(category=='volume' && (norm==Infinity || isNaN(norm)) ){
@@ -565,7 +586,7 @@
 
     <!--util info-->
     <?php
-      if($level=='Water' || $level=='Waste'){
+      if($level=='Water' || $level=='Waste' || $level=='Faecl'){
         ?>
         <div class="flex" style="padding:0.2em 2em;justify-content:space-between;font-family:monospace;font-size:smaller;background:#fafafa">
           <!--assessment period-->
@@ -585,7 +606,9 @@
           <!--resident population-->
           <?php
             echo "<div>";
-            $resi_pop = $level=="Water" ? "ws_resi_pop" : "ww_resi_pop";
+
+            $resi_pop = ["Water"=>"ws","Waste"=>"ww","Faecl"=>"fs"][$level]."_resi_pop";
+
             echo "<a href=inhabitants.php>";
             write("#$resi_pop"."_descr");
             echo "</a>";
@@ -626,11 +649,12 @@
           <!--serviced population-->
           <?php
             echo "<div>";
-            $serv_pop = $level=="Water" ? "ws_serv_pop" : "ww_serv_pop";
+            $serv_pop = ["Water"=>"ws_serv_pop","Waste"=>"ww_serv_pop","Faecl"=>"fs_onsi_pop"][$level];
+
             echo "<a href=inhabitants.php>";
             write("#$serv_pop"."_descr");
             echo "</a>";
-            $value = $level=="Water" ? "Global.Water.ws_serv_pop" : "Global.Waste.ww_serv_pop()";
+            $value = "Global.$level.".["Water"=>"ws_serv_pop","Waste"=>"ww_serv_pop()","Faecl"=>"fs_onsi_pop"][$level];
             echo ":
               <b class=number id=Global_level_serv_pop></b>
               <script>
@@ -688,9 +712,13 @@
               <?php
                 if($level=='Water'||$level=='Waste'){
                   ?>
-                    <th>kg CO<sub>2</sub><br>per <?php write('#year')?>
-                      <br>per <?php write('#serv.pop.')?>
+                    <th>kg CO<sub>2</sub><br>per <?php write('#year')?> <br>per <?php write('#serv.pop.')?>
                     <th>kg CO<sub>2</sub><br>per m<sup>3</sup>
+                  <?php
+                }
+                if($level=='Faecl'){
+                  ?>
+                    <th>kg CO<sub>2</sub><br>per <?php write('#year')?> <br>per <?php write('#serv.pop.')?>
                   <?php
                 }
               ?>

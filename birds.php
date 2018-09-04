@@ -539,79 +539,72 @@
   </div>
 
   <!--graphs container-->
-  <div class=card style="width:66%">
-    <?php cardMenu(translate('#figures'))?>
+  <div class=card style="width:66%"><?php cardMenu(translate('#figures'))?>
     <div id=graphs>
       <style>
         #graphs table{margin:auto !important;margin-bottom:0.5em !important}
         #graphs div div {text-align:center;position:relative}
         #graphs div.options {text-align:center;padding:1em}
         #graphs div[graph] {
-          display:inline-block;
-          text-align:center;
           vertical-align:top;
           width:50%;
-          margin-left:-5px;
-          margin-bottom:-1px;
-          border:1px solid #ddd;
+          border-bottom:1px solid #ddd;
           padding:0;
+          box-sizing:border-box;
+        }
+        #graphs div[graph][left] {
+          border-right:1px solid #ddd;
         }
         #graphs div.tab_buttons,
         #graphs div.tab_buttons button {
           font-size:smaller;
         }
       </style>
-
-      <div style=text-align:center>
-        <div graph id=graph1><?php write('#loading')?></div> <!--ghg emissions-->
+      <div class=flex>
+        <div graph id=graph1 left><?php write('#loading')?></div> <!--ghg emissions-->
         <div graph id=graph2><?php write('#loading')?></div> <!--nrg consumption-->
-        <!---->
-        <div graph id=graph3><?php write('#loading')?></div> <!--ws costs-->
+        <div graph id=graph3 left><?php write('#loading')?></div> <!--ws costs-->
         <div graph id=graph4><?php write('#loading')?></div> <!--ww costs-->
-        <!---->
-        <div graph id=graph5><?php write('#loading')?></div> <!--ws serv-->
+        <div graph id=graph5 left><?php write('#loading')?></div> <!--ws serv-->
         <div graph id=graph6><?php write('#loading')?></div> <!--ws ghg-->
-        <!---->
-        <div graph id=graph7><?php write('#loading')?></div> <!--ww serv-->
+        <div graph id=graph7 left><?php write('#loading')?></div> <!--ww serv-->
         <div graph id=graph8><?php write('#loading')?></div> <!--ww ghg-->
-        <!---->
-        <div graph id=graph9><?php write('#loading')?> </div><!--fs serv-->
+        <div graph id=graph9 left><?php write('#loading')?> </div><!--fs serv-->
         <div graph id=graph10><?php write('#loading')?></div><!--fs ghg-->
-        <div style="width:98%;padding:1em 0;margin-bottom:1em;border:none">
-          <?php write('#for_further_details_go_to_detailed')?>
-          <b>
-            <?php write('#energy_performance')?>
-          </b> (<a href=#>&uarr;</a>)
-        </div>
-        <div style="text-align:left;padding-left:10px">
-          <?php write('#see_also')?>:
-          <ul>
-            <li> <a href='estimations.php'><?php write('#summary_of_estimations_at_this_level')?></a> </li>
-            <li> <a href='non_revenue_water.php'><?php write('#about_nrw')?></a> </li>
-            <li> <a href='fuelInfo.php'><?php write('#about_fuel')?></a> </li>
-            <li> <a href=sankey.php><?php write('#sankey_diagram')?></a>
-          </ul>
-        </div>
-        <script>
-          (function(){
-            //hide inactive graphs
-            if(Global.Configuration.ActiveStages.water==0) {
-              document.querySelector("#graph3").style.display="none";
-              document.querySelector("#graph5").style.display="none";
-              document.querySelector("#graph6").style.display="none";
-            }
-            if(Global.Configuration.ActiveStages.waste==0) {
-              document.querySelector("#graph4").style.display="none";
-              document.querySelector("#graph7").style.display="none";
-              document.querySelector("#graph8").style.display="none";
-            }
-            if(Global.Configuration.ActiveStages.faecl==0) {
-              document.querySelector("#graph9").style.display="none";
-              document.querySelector("#graph10").style.display="none";
-            }
-          })();
-        </script>
       </div>
+
+      <div style="width:98%;padding:1em 0;margin-bottom:1em;border:none;text-align:center">
+        <?php write('#for_further_details_go_to_detailed')?>
+        <b><?php write('#energy_performance')?></b> (<a href=#>&uarr;</a>)
+      </div>
+      <div style="text-align:left;padding-left:10px">
+        <?php write('#see_also')?>:
+        <ul>
+          <li> <a href='estimations.php'><?php write('#summary_of_estimations_at_this_level')?></a> </li>
+          <li> <a href='non_revenue_water.php'><?php write('#about_nrw')?></a> </li>
+          <li> <a href='fuelInfo.php'><?php write('#about_fuel')?></a> </li>
+          <li> <a href=sankey.php><?php write('#sankey_diagram')?></a>
+        </ul>
+      </div>
+      <script>
+        (function(){
+          //hide inactive graphs
+          if(Global.Configuration.ActiveStages.water==0) {
+            document.querySelector("#graph3").style.display="none";
+            document.querySelector("#graph5").style.display="none";
+            document.querySelector("#graph6").style.display="none";
+          }
+          if(Global.Configuration.ActiveStages.waste==0) {
+            document.querySelector("#graph4").style.display="none";
+            document.querySelector("#graph7").style.display="none";
+            document.querySelector("#graph8").style.display="none";
+          }
+          if(Global.Configuration.ActiveStages.faecl==0) {
+            document.querySelector("#graph9").style.display="none";
+            document.querySelector("#graph10").style.display="none";
+          }
+        })();
+      </script>
     </div>
   </div>
 </div>

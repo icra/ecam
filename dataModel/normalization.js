@@ -18,11 +18,15 @@ var Normalization={
     Treatment: {volume:"wwt_vol_trea", energy:"wwt_nrg_cons"},
     Discharge: {volume:"wwd_total_m3", energy:"wwd_nrg_cons"},
   },
+  Faecl:{
+    reside:"fs_resi_pop",
+    servic:"fs_onsi_pop",
+  },
 
   /*normalize
     category: (string) reside,servic,volume or energy
     field:    (string) numerator
-    level:    (string) Water,Waste
+    level:    (string) Water,Waste,Faecl
     sublevel: (string) Abstraction,Collection,Treatment,Distribution,Discharge
   */
   normalize:function(category,field,level,sublevel) {
