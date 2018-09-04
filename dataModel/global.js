@@ -1043,3 +1043,16 @@ Global.Waste.wwt_KPI_GHG=function(){return Global.Waste.Treatment.wwt_KPI_GHG()}
 Global.Waste.wwd_KPI_GHG=function(){return Global.Waste.Discharge.wwd_KPI_GHG()};
 Global.Water.ws_KPI_GHG =function(){return this.wsa_KPI_GHG()+this.wst_KPI_GHG()+this.wsd_KPI_GHG()};
 Global.Waste.ww_KPI_GHG =function(){return this.wwc_KPI_GHG()+this.wwt_KPI_GHG()+this.wwd_KPI_GHG()+this.ww_KPI_GHG_unt()};
+
+//extra object for opportunities added by Gary
+Global.Opps={
+    g_nrw_water_vol_dper              : 0,
+    g_end_user_consumption_dper       : 0,
+    g_water_reuse_dper                : 0,
+    g_dw_energy_consumption_dper      : 0,
+    g_ww_infl_dper                    : 0,
+    g_ww_grid_energy_consumption_dper : 0,
+    g_ww_slu_dper                     : 0,
+    g_ww_water_reuse_dper             : 0,
+    g_ww_biogas_dper                  : 0,
+};
