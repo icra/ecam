@@ -226,7 +226,6 @@ var Info = {
 	ww_resi_pop:{magnitude:"People",unit:"People"},
 	ww_conn_pop:{magnitude:"People",unit:"People"},
 	ww_serv_pop:{magnitude:"People",unit:"People"},
-	ww_onsi_pop:{magnitude:"People",unit:"People"},
   ww_uncl_pop:{magnitude:"People",unit:"People"},
   ww_untr_pop:{magnitude:"People",unit:"People"},
 

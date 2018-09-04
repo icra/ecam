@@ -282,12 +282,11 @@ var Global = {
   Waste:{
     //ww population related
     "ww_resi_pop":0,
-    "ww_onsi_pop":0,
     ww_conn_pop:   function(){return this.Collection.wwc_conn_pop},
     ww_serv_pop:   function(){return this.Treatment.wwt_serv_pop},
     ww_SL_serv_pop:function(){return 100*this.ww_serv_pop()/this.ww_resi_pop},
     ww_SL_treat_m3:function(){return 100*this.ww_serv_pop()/this.ww_conn_pop()},
-    ww_uncl_pop:   function(){return Math.max(0,this.ww_resi_pop-this.ww_conn_pop()-this.ww_onsi_pop)},
+    ww_uncl_pop:   function(){return Math.max(0,this.ww_resi_pop-this.ww_conn_pop()-Global.Faecl.fs_onsi_pop)},
     ww_untr_pop:   function(){return Math.max(0,this.ww_conn_pop()-this.ww_serv_pop())},
 
     ww_GHG_avoided : function(){//<br>
@@ -317,8 +316,8 @@ var Global = {
       ww_SL_ghg_unc_n2o:function(){return this.ww_uncl_pop()*Global.General.prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;},
       ww_SL_ghg_unc:    function(){return this.ww_SL_ghg_unc_ch4()+this.ww_SL_ghg_unc_n2o();},
     //onsite treatment emissions (outside assessment)
-      ww_SL_ghg_ons_ch4:function(){return this.ww_onsi_pop*Global.General.bod_pday/1000*Global.General.Days()*0.3*Cts.ct_ch4_eq.value},
-      ww_SL_ghg_ons_n2o:function(){return this.ww_onsi_pop*Global.General.prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;},
+      ww_SL_ghg_ons_ch4:function(){return Global.Faecl.fs_onsi_pop*Global.General.bod_pday/1000*Global.General.Days()*0.3*Cts.ct_ch4_eq.value},
+      ww_SL_ghg_ons_n2o:function(){return Global.Faecl.fs_onsi_pop*Global.General.prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;},
       ww_SL_ghg_ons:    function(){return this.ww_SL_ghg_ons_ch4()+this.ww_SL_ghg_ons_n2o();},
 
     "Collection":{
