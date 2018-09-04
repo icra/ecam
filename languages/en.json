@@ -496,7 +496,7 @@
   "#configuration_activate_all":"Activate all",
   "#configuration_active_stages_error":"There are no active stages. Click on the table to activate some.",
   "#configuration_new_currency":"Write new currency (3 letters max)",
-  "#configuration_subtitle":"Select the stages which form your system",
+  "#configuration_subtitle":"Activate the stages which form your system",
   "#constants":"Constants",
   "#contact":"Contact",
   "#content_C_descr":"Sludge Carbon Content",

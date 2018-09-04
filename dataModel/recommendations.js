@@ -9,7 +9,7 @@ var Recommendations={
 
   //BOD removed as FS
   "fsc_bod_rmvd":function(){
-    return Global.Faecl.Containment.fsc_fslu_emp/Global.Faecl.Containment.fsc_fdensity*Global.Faecl.Containment.fsc_bod_conc_fs;
+    return Global.Faecl.Containment.fsc_fslu_emp/Global.Faecl.Containment.fsc_bod_conc_fs;
   },
 
   //Influent BOD load (containment)
@@ -27,7 +27,8 @@ var Recommendations={
 
   //BOD removed as sludge
   "fst_bod_slud":function(){
-    var bod_rmvd_as_sludge=Tables.fst_type_tre[Tables.find('fst_type_tre',Global.Faecl.Treatment.fst_type_tre)].bod_rmvd_as_sludge_estm;//<br>
+    var treatment_type=Tables.find('fst_type_tre',Global.Faecl.Treatment.fst_type_tre);//<br>
+    var bod_rmvd_as_sludge=Tables.fst_type_tre[treatment_type].bod_rmvd_as_sludge_estm;//<br>
     return Global.Faecl.Treatment.fst_bod_infl*bod_rmvd_as_sludge;
   },
 

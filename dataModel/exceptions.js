@@ -112,7 +112,7 @@ var Exceptions = {
       option.value=cons;
       option.setAttribute('treatment',treatment);
       option.innerHTML=translate(treatment)+" ("+cons+")";
-      if(treatment==Global.Configuration.Selected.fsc_ch4_efac && cons==Global.Faecl.Containment.fsc_ch4_efac) {
+      if(treatment==Global.Configuration.Selected.fsc_ch4_efac){
         option.selected='true';
       }
     }

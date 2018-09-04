@@ -14,7 +14,11 @@
   include'linear.php';
   include'caption.php';
 ?>
+<!--title and subtitle-->
 <h1><?php write('#population')?></h1>
+<h4 style=margin:0;margin-bottom:1em>
+  Enter the population living at each level of your system
+</h4>
 
 <!--main-->
 <div id=main>

@@ -401,15 +401,17 @@
             "  <a style='color:"+color+"' "+
             "    href=variable.php?id="+output+
             "    caption='["+match_localization.toString()+"] "+ (translate(output+"_descr")||translate(output))+"'"+
-            "  >"+output+"</a>"+(is_input?" <span caption='"+Formulas.prettify(Recommendations[output].toString())+"'>(estimation)</span>":"");
+            "  >"+output+"</a>"+(is_input?" <span>(estimation)</span>":"");
 
           //variable value and formula
-          var ret_newCell=ret_newRow.insertCell(-1);
-          ret_newCell.innerHTML=currValueF;
-          ret_newCell.setAttribute('caption',pretf);
+          if(!is_input){
+            var ret_newCell=ret_newRow.insertCell(-1);
+            ret_newCell.innerHTML=currValueF;
+            ret_newCell.setAttribute('caption',pretf);
 
-          //unit
-          ret_newRow.insertCell(-1).innerHTML="<span class=unit>"+currentUnit+"</span> ";
+            //unit
+            ret_newRow.insertCell(-1).innerHTML="<span class=unit>"+currentUnit+"</span> ";
+          }
         });
 
         return ret.outerHTML;
@@ -430,9 +432,91 @@
         newCell=newRow.insertCell(-1);
         newCell.className='th';
         newCell.innerHTML="Estimation of this input";
-        var r_value=Recommendations[id]()/Units.multiplier(id);
-        var currentUnit= (Info[id].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[id]||Info[id].unit);
-        newRow.insertCell(-1).innerHTML=Formulas.prettify(Recommendations[id].toString())+" <br>= "+format(r_value)+" "+currentUnit;
+
+        //value of recommendation
+        var newCell=newRow.insertCell(-1);
+        newCell.appendChild((function(){
+          var div=document.createElement('div');
+          var r_value=Recommendations[id]()/Units.multiplier(id);
+          var currentUnit= (Info[id].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[id]||Info[id].unit);
+          div.innerHTML=format(r_value)+" "+currentUnit;
+          return div;
+        })());
+
+        //formula for recommendation
+        newCell.appendChild((function(){
+          var pre=document.createElement('pre');
+          pre.classList.add('prettyprint');
+          pre.innerHTML=Formulas.prettify(Recommendations[id].toString().replace(/  /g,' '));
+          return pre;
+        })());
+
+        //inputs involved in recommendation
+        var inputs_involved_in_rec=document.createElement('div');
+        newCell.appendChild(inputs_involved_in_rec);
+        inputs_involved_in_rec.innerHTML=(function(){
+          var matches=Formulas.idsPerFormula(Recommendations[id].toString());
+          var ret="<table id=ininv>";
+          matches.forEach(function(match) {
+            //means this is a constant
+            if(match.substring(0,3)=="ct_") {
+              ret+="<tr><td class=constant caption='CONSTANT: "+Cts[match].descr+"'><a href=constant.php?id="+match+">"+match+"</a><td caption='"+Cts[match].value+"'>"+format(Cts[match].value)+"<td class=unit>"+Cts[match].unit;
+            }
+            //check if its a fuel type input
+            else if(Tables[match]==Tables["Fuel types"]) {
+              var fuel=Tables.find(match,currentStage[match]);
+              ret+="<tr><td class=fuel><a href=variable.php?id="+match+">"+match+" (fuel type)</a>:<td><b>"+fuel+"</b><td><a href=fuelInfo.php>(more info)</a>";
+              ret+="<tr><td class=fuel caption='Fuel density       '         >&emsp; · FD              <td>"+Tables["Fuel types"][fuel].FD             +"<td class=unit>kg/L";
+              ret+="<tr><td class=fuel caption='Net calorific value'         >&emsp; · NCV             <td>"+Tables["Fuel types"][fuel].NCV            +"<td class=unit>TJ/Gg";
+              ret+="<tr><td class=fuel caption='CO2 emission factor'         >&emsp; · EFCO2          <td>"+Tables["Fuel types"][fuel].EFCO2          +"<td class=unit>kg<sub>CO<sub>2</sub></sub>/TJ";
+              ret+="<tr><td class=fuel caption='CH4 emission factor engines' >&emsp; · EFCH4.engines  <td>"+Tables["Fuel types"][fuel].EFCH4.engines  +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
+              ret+="<tr><td class=fuel caption='CH4 emission factor vehicles'>&emsp; · EFCH4.vehicles <td>"+Tables["Fuel types"][fuel].EFCH4.vehicles +"<td class=unit>kg<sub>CH<sub>4</sub></sub>/TJ";
+              ret+="<tr><td class=fuel caption='N2O emission factor engines' >&emsp; · EFN2O.engines  <td>"+Tables["Fuel types"][fuel].EFN2O.engines  +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
+              ret+="<tr><td class=fuel caption='N2O emission factor vehicles'>&emsp; · EFN2O.vehicles <td>"+Tables["Fuel types"][fuel].EFN2O.vehicles +"<td class=unit>kg<sub>N<sub>2</sub>O</sub>/TJ";
+            }
+            else { //normal inputs
+              var match_localization = locateVariable(match)
+              var match_level = match_localization.level
+              var match_sublevel = match_localization.sublevel
+              var match_stage = match_sublevel ? Global[match_level][match_sublevel] : Global[match_level]
+              if(Info[match]) {
+                var currentUnit= (Info[match].magnitude=="Currency") ? Global.General.Currency : (Global.Configuration.Units[match]||Info[match].unit);
+              }
+              else var currentUnit = "no unit";
+              //matches can be either numbers or other functions
+              var currValue = typeof(match_stage[match])=="function" ? match_stage[match]() : match_stage[match];
+              currValueF=format(currValue);
+
+              //handle dropdowns
+              if(Info[match].magnitude=="Option") {
+                currValueF=Tables.find(match,currValue);
+              }
+
+              var color = match.search('ww')==-1 ? "#0aaff1":"#bf5050";
+
+              //here we have to show the internal value of inputs, not the multiplied by the unit multiplier
+              var multiplier=Units.multiplier(match);
+              if(multiplier!=1) {
+                var magnitude=Info[match].magnitude;
+                for(var unit in Units[magnitude]) {
+                  if(Units[magnitude][unit]===1) {  // believe it meant to be matching multiplier //no: it should be 1, because we want the original unit
+                    currentUnit=unit;
+                    break;
+                  }
+                }
+              }
+
+              ret+="<tr>"+
+                "<td class=variableCode><a style='color:"+color+"' href=variable.php?id="+match+" "+
+                "caption='INPUT: "+(translate(match+"_descr")||translate(match))+"'"+
+                ">"+match+"</a> "+
+                "<td caption='"+currValue+"' style=cursor:help>"+currValueF+"<td><span class=unit>"+currentUnit+"</span> "+
+                "";
+            }
+          });
+          ret+="</table>";
+          return ret;
+        })();
       }
 
       //If input:is used in benchmarking?
@@ -472,7 +556,7 @@
           "<div class=menu onclick=this.parentNode.classList.toggle('folded')>"+
           " <button></button> Benchmarking Formula"+
           "</div>"+
-          "<pre class='prettyprint'>"+RefValues[id].toString().replace(/  /g,'  ')+"</pre>"+
+          "<pre class='prettyprint'>"+RefValues[id].toString().replace(/  /g,' ')+"</pre>"+
           "</div>"+
           "<div style=margin-top:1em><a href=benchmark.php>All variables benchmarked</a></div>"+
           "";
