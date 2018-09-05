@@ -28,6 +28,7 @@ var Units={
 	"Mass":{ 
 		"kg":1,
 		"g":0.001,
+    "t":1e3,
 	},
 	"Time":{ 
 		"sec":1,
