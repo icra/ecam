@@ -253,12 +253,13 @@
         var btn=document.createElement('button');
         btn.style.fontSize='smaller';
         btn.style.float='right';
-        var rec_value=Recommendations[field]()/Units.multiplier(field);
+        var multiplier=Units.multiplier(field);
+        var rec_value=Recommendations[field]()/multiplier;
         var currentUnit = Global.Configuration.Units[field] || Info[field].unit
         btn.innerHTML='Estimation: '+format(rec_value)+' '+currentUnit+' &rarr;';
         btn.setAttribute('title','Estimation based on other inputs: '+Formulas.prettify(Recommendations[field].toString()));
         btn.addEventListener('click',function(){
-          CurrentLevel[field]=rec_value;
+          CurrentLevel[field]=rec_value*multiplier;
           init();
         });
         return btn;
