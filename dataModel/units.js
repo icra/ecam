@@ -39,22 +39,22 @@ var Units={
   },
   //derived magnitudes from mass,distance and time
   "Volume":{ 
-    m3:1,
     L:0.001,
+    m3:1,
     dam3:1000,
     hm3:1000000,
     km3:1000000000,
   },
   "Flow":{ 
-    "m3/s":1,
     "L/s":0.001,
     "m3/day":1/86400,
+    "m3/s":1,
   },
   "Energy":{
+    Joule:1/3600000,
     kWh:1,
     MWh:1000,
     GWh:1000000,
-    Joule:1/3600000,
     TJ:1e7/36,
   },
 };

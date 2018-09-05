@@ -173,4 +173,6 @@ Level3.list=[
   "fsr_KPI_GHG_fuel_co2", //hidden
   "fsr_KPI_GHG_fuel_n2o", //hidden
   "fsr_KPI_GHG_fuel_ch4", //hidden
+  "fsr_type_tre", //hidden
+  "fsr_fslu_typ",
 ];

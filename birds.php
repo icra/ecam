@@ -2,12 +2,14 @@
   <?php include'imports.php'?>
   <script>
     function init(){
-      //console.log('init');
-      BEV.updateDefaults(); //update input values
+      BEV.populateSelects();  //for inputs magnitude Option
+      BEV.updateDefaults();   //update input values
       BEV.defaultQuestions(); //update question values
+
       //update default treatment type and sludge disposal method
       document.querySelector('#sludge_estimation').value=Global.Configuration.Selected.sludge_estimation_method;
       document.querySelector('#main_treatment_type').value=Global.Waste.Treatment.wwt_type_tre;
+
       drawCharts();
       updateResult();
       Caption.listeners();
@@ -90,50 +92,85 @@
 
     //Display default values from the table
     BEV.updateDefaults=function(){
-      var inputs = document.querySelectorAll('#inputs input');
-      for(var i=0;i<inputs.length;i++){
-        var input = inputs[i];
-        var field = input.id;
-        if(field=='')continue;
+      document.querySelectorAll('#inputs input').forEach(input=>{
+        var field=input.id;
+        if(field=='')return;
         //set the longer description in the input <td> element
         input.parentNode.parentNode.childNodes[0].title=translate(field+'_expla');
         //get the value stored
-        var value=getVariable(field);
-        value/=Units.multiplier(field);
-        //set the value to the input element
+        var value=getVariable(field)/Units.multiplier(field);
         input.value=format(value);
-        //console.log(field,value);
-      }
+      });
     }
 
-    //producing biogas and valorizing biogas default values
+    //populate options for Options and Questions
+    BEV.populateSelects=function(){
+      //1. populate inputs magnitude==Option
+      document.querySelectorAll('#inputs td.option select[id]').forEach(select=>{
+        if(select.childNodes.length==0){
+          Object.keys(Tables[select.id]).forEach(key=>{
+            var option=document.createElement('option');
+            select.appendChild(option);
+            option.innerHTML=translate(key);
+            option.value=Tables[select.id][key].value;
+          });
+        }
+        select.value=getVariable(select.id);
+      });
+    }
+
+    //set the default values for filters (biogas)
     BEV.defaultQuestions=function() {
-      //valorizing biogas
-      var val=Global.Configuration["Yes/No"].wwt_valorizing_biogas;
-      //producing biogas
-      var pro=Global.Configuration["Yes/No"].wwt_producing_biogas;
-      //gui elements
-      var input_pro_y=document.querySelector('input[name=wwt_producing_biogas][value="1"]');
-      var input_pro_n=document.querySelector('input[name=wwt_producing_biogas][value="0"]');
-      var input_val_y=document.querySelector('input[name=wwt_valorizing_biogas][value="1"]');
-      var input_val_n=document.querySelector('input[name=wwt_valorizing_biogas][value="0"]');
-      if(pro){
-        input_pro_y.checked=true;   //you are producing biogas
-        input_val_y.disabled=false; //enable val
-        input_val_n.disabled=false; //enable val
-      }else{
-        input_pro_n.checked=true;   //you are not producing biogas
-        input_val_n.checked=true;   //you are not valorizing biogas
-        input_val_y.disabled=true;  //disable valorizing
-        input_val_n.disabled=true;  //disable valorizing
-        Global.Configuration["Yes/No"].wwt_valorizing_biogas=0;
-      }
-      if(val && pro){
-        input_val_y.checked=true; //you are valorizing biogas
-      }
+      //WWT
+        //valorizing biogas
+        var val=Global.Configuration["Yes/No"].wwt_valorizing_biogas;
+        //producing biogas
+        var pro=Global.Configuration["Yes/No"].wwt_producing_biogas;
+        //gui elements
+        var input_pro_y=document.querySelector('input[name=wwt_producing_biogas][value="1"]');
+        var input_pro_n=document.querySelector('input[name=wwt_producing_biogas][value="0"]');
+        var input_val_y=document.querySelector('input[name=wwt_valorizing_biogas][value="1"]');
+        var input_val_n=document.querySelector('input[name=wwt_valorizing_biogas][value="0"]');
+        if(pro){
+          input_pro_y.checked=true;   //you are producing biogas
+          input_val_y.disabled=false; //enable val
+          input_val_n.disabled=false; //enable val
+        }else{
+          input_pro_n.checked=true;   //you are not producing biogas
+          input_val_n.checked=true;   //you are not valorizing biogas
+          input_val_y.disabled=true;  //disable valorizing
+          input_val_n.disabled=true;  //disable valorizing
+          Global.Configuration["Yes/No"].wwt_valorizing_biogas=0;
+        }
+        if(val && pro){
+          input_val_y.checked=true; //you are valorizing biogas
+        }
+      //FST
+        //valorizing biogas
+        var val=Global.Configuration["Yes/No"].fst_valorizing_biogas;
+        //producing biogas
+        var pro=Global.Configuration["Yes/No"].fst_producing_biogas;
+        //gui elements
+        var input_pro_y=document.querySelector('input[name=fst_producing_biogas][value="1"]');
+        var input_pro_n=document.querySelector('input[name=fst_producing_biogas][value="0"]');
+        var input_val_y=document.querySelector('input[name=fst_valorizing_biogas][value="1"]');
+        var input_val_n=document.querySelector('input[name=fst_valorizing_biogas][value="0"]');
+        if(pro){
+          input_pro_y.checked=true;   //you are producing biogas
+          input_val_y.disabled=false; //enable val
+          input_val_n.disabled=false; //enable val
+        }else{
+          input_pro_n.checked=true;  //you are not producing biogas
+          input_val_n.checked=true;  //you are not valorizing biogas
+          input_val_y.disabled=true; //disable valorizing
+          input_val_n.disabled=true; //disable valorizing
+        }
+        if(val && pro){
+          input_val_y.checked=true; //you are valorizing biogas
+        }
     }
 
-    //update the value of the filter
+    //backend update value of a filter
     BEV.updateQuestion=function(code,newValue){
       Global.Configuration['Yes/No'][code]=newValue;
       init();
@@ -225,6 +262,8 @@
 
     /*indication "level not active"*/
     #inputs tr[indic]{text-align:center;color:#999;background:#eee}
+
+    #inputs td.option select[id]{display:block;}
   </style>
 </head><body onload="init()"><center>
   <?php include'sidebar.php'?>
@@ -235,13 +274,11 @@
 
 <!--title-->
 <h1>
-  <div>
-    <?php write('#quick_assessment')?> &mdash;
-    <?php write('#initial_estimation_description')?>
-  </div>
+  <?php write('#quick_assessment')?> &mdash;
+  <?php write('#initial_estimation_description')?>
 </h1>
 
-<!--context variables-->
+<!--context info-->
 <div class=flex
   style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 2em;background:#fafafa;box-shadow: 0 1px 2px rgba(0,0,0,.5);">
   <!--assessment period-->
@@ -252,7 +289,6 @@
       document.querySelector("#Global_General_Days").innerHTML=format(Global.General.Days());
     </script>
   </div>
-
   <!--conv_co2_kwh-->
   <div>
     <a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a>:
@@ -265,7 +301,6 @@
       })();
     </script>
   </div>
-
   <!--prot_cont-->
   <div>
     <a href=variable.php?id=prot_con><?php write('#Annual_protein_consumption')?></a>:
@@ -278,7 +313,6 @@
       })();
     </script>
   </div>
-
   <!--bod_pday-->
   <div>
     <a href=variable.php?id=bod_pday><?php write('#bod_pday_descr')?></a>:
@@ -380,9 +414,84 @@
             <div>
               <img src=img/faecl.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Faecl')?>
             </div>
+            <!--fsm population-->
+            <div>
+              <img src=img/inhabitants.png width=25 caption="FSM population" style="vertical-align:middle">
+              <b caption="<?php write('#fs_onsi_pop_descr')?>" id=fs_onsi_pop onclick=window.location='inhabitants.php'>0</b> /
+              <b caption="<?php write('#fs_resi_pop_descr')?>" id=fs_resi_pop onclick=window.location='inhabitants.php'>0</b>
+              <script>
+                document.querySelector('#fs_onsi_pop').innerHTML=format(Global.Faecl.fs_onsi_pop);
+                document.querySelector('#fs_resi_pop').innerHTML=format(Global.Faecl.fs_resi_pop);
+              </script>
+            </div>
           </div>
           <tr indic=faecl class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
-          <tr stage=faecl class=hidden><td colspan=3>under development
+          <tr stage=faecl class=hidden><td><?php write('#fs_nrg_cons_descr') ?><td class=output><input id='fs_nrg_cons'  value=0><td class=unit>
+          <tr stage=faecl class=hidden><td><?php write('#fs_vol_trck_descr') ?><td class=output><input id='fs_vol_trck'  value=0><td class=unit>
+          <tr stage=faecl class=hidden><td><?php write('#fsc_cont_emp_descr')?><td class=input> <input id='fsc_cont_emp' value=0><td class=unit>
+
+          <!--dropdowns-->
+          <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fsc_flooding_descr')?><select id='fsc_flooding'></select>
+          <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fsc_type_tre_descr')?><select id='fsc_type_tre'></select>
+          <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fst_type_tre_descr')?><select id='fst_type_tre'></select>
+          <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fsr_type_tre_descr')?><select id='fsr_type_tre'></select>
+          <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fsr_fslu_typ_descr')?><select id='fsr_fslu_typ'></select>
+
+          <!--fst biogas-->
+          <tr stage=faecl class=hidden><td><?php write('#fst_producing_biogas')?>? <td class=question colspan=2>
+            <label><?php write('#no')?>
+              <input name=fst_producing_biogas type=radio value=0 checked>
+            </label>
+            <label><?php write('#yes')?>
+              <input name=fst_producing_biogas type=radio value=1>
+            </label>
+          <tr stage=faecl class=hidden><td><?php write('#fst_valorizing_biogas')?>?<td class=question colspan=2>
+            <label><?php write('#no')?>
+              <input name=fst_valorizing_biogas type=radio value=0 checked>
+            </label>
+            <label><?php write('#yes')?>
+              <input name=fst_valorizing_biogas type=radio value=1>
+            </label>
+          </tr>
+          <script>
+            (function(){
+              document.querySelectorAll('input[name=fst_producing_biogas][type=radio]').forEach(el=>{
+                el.addEventListener('click',function(){
+                  var newValue=parseInt(this.value);
+                  Global.Configuration['Yes/No'][this.name]=newValue;
+                  //apply estimations
+                  if(newValue){
+                    Global.Configuration['Yes/No'].fst_valorizing_biogas=0;
+                    Global.Faecl.Treatment.fst_biog_pro = Recommendations.fst_biog_pro();
+                    Global.Faecl.Treatment.fst_biog_val = Recommendations.fst_biog_val();
+                    Global.Faecl.Treatment.fst_biog_fla = Recommendations.fst_biog_fla();
+                    Global.Faecl.Treatment.fst_ch4_biog = Recommendations.fst_ch4_biog();
+                  }else{
+                    Global.Faecl.Treatment.fst_biog_pro = 0;
+                    Global.Faecl.Treatment.fst_biog_val = 0;
+                    Global.Faecl.Treatment.fst_biog_fla = 0;
+                    Global.Faecl.Treatment.fst_ch4_biog = 0;
+                  }
+                  init();
+                });
+              });
+              document.querySelectorAll('input[name=fst_valorizing_biogas][type=radio]').forEach(el=>{
+                el.addEventListener('click',function(){
+                  var newValue=parseInt(this.value);
+                  Global.Configuration['Yes/No'][this.name]=newValue;
+                  //apply estimations
+                  if(newValue){
+                    Global.Faecl.Treatment.fst_biog_val = Recommendations.fst_biog_val();
+                    Global.Faecl.Treatment.fst_biog_fla = Recommendations.fst_biog_fla();
+                  }else{
+                    Global.Faecl.Treatment.fst_biog_val = 0;
+                    Global.Faecl.Treatment.fst_biog_fla = 0;
+                  }
+                  init();
+                });
+              });
+            })();
+          </script>
         </tr>
       </table>
     </div>
@@ -587,37 +696,32 @@
         </ul>
       </div>
       <script>
-        (function(){
-          //hide inactive graphs
-          if(Global.Configuration.ActiveStages.water==0) {
-            document.querySelector("#graph3").style.display="none";
-            document.querySelector("#graph5").style.display="none";
-            document.querySelector("#graph6").style.display="none";
-          }
-          if(Global.Configuration.ActiveStages.waste==0) {
-            document.querySelector("#graph4").style.display="none";
-            document.querySelector("#graph7").style.display="none";
-            document.querySelector("#graph8").style.display="none";
-          }
-          if(Global.Configuration.ActiveStages.faecl==0) {
-            document.querySelector("#graph9").style.display="none";
-            document.querySelector("#graph10").style.display="none";
-          }
-        })();
+        //hide inactive graphs
+        if(Global.Configuration.ActiveStages.water==0) {
+          document.querySelector("#graph3").style.display="none";
+          document.querySelector("#graph5").style.display="none";
+          document.querySelector("#graph6").style.display="none";
+        }
+        if(Global.Configuration.ActiveStages.waste==0) {
+          document.querySelector("#graph4").style.display="none";
+          document.querySelector("#graph7").style.display="none";
+          document.querySelector("#graph8").style.display="none";
+        }
+        if(Global.Configuration.ActiveStages.faecl==0) {
+          document.querySelector("#graph9").style.display="none";
+          document.querySelector("#graph10").style.display="none";
+        }
       </script>
     </div>
   </div>
 </div>
 
 <?php include'currentJSON.php'?>
-<script>
-  if(google){google.charts.load('current',{'packages':['corechart','gauge','bar']});}
-</script>
+<script>if(google){google.charts.load('current',{'packages':['corechart','gauge','bar']});}</script>
 </html>
 
-<!--populate page-->
+<!--add onchange listeners to input elements-->
 <script>
-  //add listeners to all input elements
   (function(){
     var inputs=document.querySelectorAll("#inputs input[id]:not([type=radio])");
     for(var i=0;i<inputs.length;i++) {
@@ -632,6 +736,10 @@
         input.addEventListener('change',function(){BEV.updateOutput(this)});
       }
     }
+    //listeners for inputs magnitude=Option
+    document.querySelectorAll("#inputs td.option select[id]").forEach(select=>{
+      select.addEventListener('change',function(){BEV.updateField(this)});
+    });
   })();
 </script>
 
@@ -645,7 +753,7 @@
       var input=td.querySelector('input[id]')
       if(!input)return;
       //find the level it belongs
-      var level = locateVariable(input.id).level;
+      var level=locateVariable(input.id).level;
       //if substages>1, lock the cell
       Object.keys(Substages[level]).forEach(sublevel=>{
         //count substages
@@ -667,8 +775,8 @@
   #inputs td.output.locked input { cursor:default; }
 </style>
 
+<!--write units-->
 <script>
-  //write units
   (function(){
     var inputs=document.querySelectorAll('#inputs tr[stage] td input[id]');
     inputs.forEach(input=>{
@@ -681,7 +789,7 @@
   })();
 </script>
 
-<!--only show active water/wastewater inputs-->
+<!--only show active stages-->
 <script>
   (function(){
     Structure

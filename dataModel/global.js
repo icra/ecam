@@ -756,6 +756,9 @@ var Global = {
     fs_nrg_cons:function(){
       return this.Containment.fsc_nrg_cons+this.Treatment.fst_nrg_cons+this.Reuse.fsr_nrg_cons;
     },
+    fs_vol_trck:function(){
+      return this.Containment.fsc_vol_trck+this.Treatment.fst_vol_trck+this.Reuse.fsr_vol_trck;
+    },
     fs_SL_serv_pop:function(){
       return 100*this.fs_onsi_pop/this.fs_resi_pop;
     },
@@ -876,6 +879,8 @@ var Global = {
 
     //level 2 stages FSM
     Reuse:{
+      "fsr_type_tre":0, //main type of disposal
+      "fsr_fslu_typ":0, //main type of faecal sludge
       //elec emissions
         "fsr_nrg_cons":0,
         fsr_KPI_GHG_elec:function(){return this.fsr_nrg_cons*Global.General.conv_kwh_co2},
@@ -1047,7 +1052,7 @@ var Global = {
 
     //answers for filters (see "questions.js")
     "Yes/No": {
-      //example-->wsa_pumping:0,
+      "fst_valorizing_biogas":0, //this one is an exception
     },
   },
 };

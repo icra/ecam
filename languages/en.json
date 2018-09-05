@@ -1,5 +1,14 @@
 {
-  
+  "#fs_vol_trck_descr": "Volume of fuel consumed (transport)",
+  "#fs_vol_trck_expla": "Volume of fuel consumed (transport)",
+  "#fsc_type_tre_descr":"Main containment type",
+  "#fsr_type_tre_descr":"Main disposal type",
+  "#fst_valorizing_biogas":"Are you valorizing biogas",
+
+  "#Landfilling":"Landfilling",
+  "#Land application":"Land application",
+  "#Dumping":"Dumping",
+
   "#fsr_engines":"Do you have fuel engines",
   "#fsr_KPI_GHG_fuel_co2_descr":"Fuel engines (CO<sub>2</sub>)",
   "#fsr_KPI_GHG_fuel_co2_expla":"Fuel engines (CO<sub>2</sub>)",
@@ -123,6 +132,7 @@
 
   "#fsr_fslu_typ_la_descr":"Type of faecal sludge disposed",
   "#fsr_fslu_typ_lf_descr":"Type of faecal sludge disposed",
+  "#fsr_fslu_typ_descr":"Type of faecal sludge disposed",
 
   "#fsr_landapp":"Do you want to assess land application of faecal sludge",
   "#fsr_landfil":"Do you want to assess landfilling of faecal sludge",

@@ -8,6 +8,9 @@
 
 var Info = {
 
+  fsr_type_tre:   {magnitude:"Option", unit:"Disposal type"},
+  fs_vol_trck:    {magnitude:"Volume", unit:"L"},
+
 	fs_SL_serv_pop: {magnitude:"Percentage",unit:"%"},
   fsc_fdensity:   {magnitude:"Concentration", unit:"kg/m3" },
   fsc_vol_trck:   {magnitude:"Volume", unit:"L"},
@@ -33,8 +36,9 @@ var Info = {
   fsr_vol_dumping:          {magnitude:"Volume",      unit:"m3"},
   fsr_dumping_pth:          {magnitude:"Option",      unit:"Dumping pathway"},
 
-  fsr_fslu_typ_la:             {magnitude:"Option",      unit:"Type of FS"},
-  fsr_fslu_typ_lf:             {magnitude:"Option",      unit:"Type of FS"},
+  fsr_fslu_typ:             {magnitude:"Option",      unit:"Type of FS"},
+  fsr_fslu_typ_la:          {magnitude:"Option",      unit:"Type of FS"},
+  fsr_fslu_typ_lf:          {magnitude:"Option",      unit:"Type of FS"},
 
   fsr_ghg_avoided_reuse_N:         {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
   fsr_ghg_avoided_reuse_P:         {magnitude:"Mass",        unit:"kg CO<sub>2</sub>e"},
@@ -76,7 +80,7 @@ var Info = {
   //FS Containment
   fsc_ch4_efac:     {magnitude:"Mass/Mass",  unit:"kgCH<sub>4</sub>/kgBOD"},
   fsc_cont_emp:     {magnitude:"Percentage", unit:"%"},
-  fsc_type_tre:     {magnitude:"Option",     unit:"Treatment type"},
+  fsc_type_tre:     {magnitude:"Option",     unit:"Containment type"},
   fsc_bod_infl:     {magnitude:"Mass",       unit:"kg"}, //influent bod load
   fsc_fslu_emp:     {magnitude:"Volume",     unit:"m3"}, //FS emptied
   fsc_bod_rmvd:     {magnitude:"Mass",       unit:"kg"}, //bod removed as FS

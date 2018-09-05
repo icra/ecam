@@ -5,7 +5,9 @@ var Level2only = {
     "wwt_type_tre", //related to wwt_ch4_efac
     "fsc_type_tre", //hidden
     "fst_type_tre", //hidden
+    "fsr_type_tre", //hidden
     "fsr_dumping_pth",
+    "fsr_fslu_typ",
 
     //fuel engines
     "wsa_KPI_GHG_fuel_co2", //hidden

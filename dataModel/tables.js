@@ -165,7 +165,12 @@ var Tables = {
     },
 
   //fsr
-    "fsr_fslu_typ_la":{ //faecal sludge type for land application and landfilling
+    "fsr_type_tre":{
+      "Landfilling":{      value:0, },
+      "Land application":{ value:1, },
+      "Dumping":{          value:2, },
+    },
+    "fsr_fslu_typ":{ //faecal sludge type for land application and landfilling
       "Untreated":{         value:0, N_content:0.10, TVS:0.650}, //N content is provisional TODO
       "Treated":{           value:1, N_content:0.10, TVS:0.344}, //N content is provisional TODO
       "Pit humus":{         value:2, N_content:0.10, TVS:0.100}, //tvs 10% is provisional TODO //N content is provisional TODO
@@ -209,7 +214,8 @@ Tables.wwt_dige_typ=Tables["Fuel types"]; //type of fuel dig
 Tables.wwt_appl_typ=Tables["Fuel types"]; //type of fuel app
 
 //copy options for faecal sludge type in fst for landapp and landfill
-Tables.fsr_fslu_typ_lf=Tables.fsr_fslu_typ_la;
+Tables.fsr_fslu_typ_lf=Tables.fsr_fslu_typ;
+Tables.fsr_fslu_typ_la=Tables.fsr_fslu_typ;
 
 //find the option (string) by field (string) and value (float or int)
 Tables.find=function(field,value) {

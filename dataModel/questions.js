@@ -568,18 +568,6 @@ var Questions={
       advanced:0,
       otherQuestions:[],
     },
-    "fst_producing_biogas":{
-      variables:[
-        "fst_biog_pro",
-        "fst_biog_val",
-        "fst_biog_fla",
-        "fst_ch4_biog",
-        "fst_KPI_GHG_biog",
-      ],
-      advanced:0,
-      otherQuestions:[
-      ],
-    },
     "fst_transport":{
       variables:[
         "fst_trck_typ",
@@ -591,6 +579,18 @@ var Questions={
       ],
       advanced:0,
       otherQuestions:[],
+    },
+    "fst_producing_biogas":{
+      variables:[
+        "fst_biog_pro",
+        "fst_biog_val",
+        "fst_biog_fla",
+        "fst_ch4_biog",
+        "fst_KPI_GHG_biog",
+      ],
+      advanced:0,
+      otherQuestions:[
+      ],
     },
 
   //fsr
