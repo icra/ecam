@@ -513,11 +513,11 @@ var Global = {
         var soil_type=Tables.find('wwt_soil_typ',this.wwt_soil_typ);//<br>
         var ratio_CN=Global.General.content_C(this.wwt_mass_slu_app,sludge_type)/Global.General.content_N(this.wwt_mass_slu_app,sludge_type)||0;//<br>
         if(sludge_type=="Non-digested"){//<br>
-          if(soil_type=="Fine-Textured"   && ratio_CN < 30){return this.wwt_mass_slu_app*0.03*0.023*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value} //<br>
-          if(soil_type=="Coarse-Textured" && ratio_CN < 30){return this.wwt_mass_slu_app*0.03*0.005*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value} //<br>
+          if(soil_type=="Fine-Textured (>30% clay)"   && ratio_CN < 30){return this.wwt_mass_slu_app*0.03*0.023*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value} //<br>
+          if(soil_type=="Coarse-Textured (<30% clay)" && ratio_CN < 30){return this.wwt_mass_slu_app*0.03*0.005*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value} //<br>
         }else if(sludge_type=="Digested"){//<br>
-          if(soil_type=="Fine-Textured"   && ratio_CN < 30){return this.wwt_mass_slu_app*0.04*0.023*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value} //<br>
-          if(soil_type=="Coarse-Textured" && ratio_CN < 30){return this.wwt_mass_slu_app*0.04*0.005*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value} //<br>
+          if(soil_type=="Fine-Textured (>30% clay)"   && ratio_CN < 30){return this.wwt_mass_slu_app*0.04*0.023*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value} //<br>
+          if(soil_type=="Coarse-Textured (<30% clay)" && ratio_CN < 30){return this.wwt_mass_slu_app*0.04*0.005*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value} //<br>
         }else{//<br>
           return 0;//<br>
         }
@@ -907,8 +907,8 @@ var Global = {
         fsr_KPI_GHG_landapp:function(){//<br>
           var soil_type=Tables.find('fsr_soil_typ',this.fsr_soil_typ);//<br>
           var N_transformed_to_N2O=0;//<br>
-          if(soil_type=="Fine-Textured"  ) N_transformed_to_N2O=0.023; //<br>
-          if(soil_type=="Coarse-Textured") N_transformed_to_N2O=0.050; //<br><br>
+          if(soil_type=="Fine-Textured (>30% clay)"  ) N_transformed_to_N2O=0.023; //<br>
+          if(soil_type=="Coarse-Textured (<30% clay)") N_transformed_to_N2O=0.050; //<br><br>
 
           var fslu_type=Tables.find('fsr_fslu_typ_la',this.fsr_fslu_typ_la);//<br>
           var N_content=Tables.fsr_fslu_typ_la[fslu_type].N_content;//<br><br>

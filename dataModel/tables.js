@@ -104,8 +104,8 @@ var Tables = {
       "Landfill (flaring)":{value:2},
     },
     "wwt_soil_typ":{
-      "Fine-Textured":{value:0},
-      "Coarse-Textured":{value:1},
+      "Fine-Textured (>30% clay)":{value:0},
+      "Coarse-Textured (<30% clay)":{value:1},
     },
 
 	//wwd
@@ -174,8 +174,8 @@ var Tables = {
     },
 
     "fsr_soil_typ":{
-      "Fine-Textured":{value:0},
-      "Coarse-Textured":{value:1},
+      "Fine-Textured (>30% clay)":{value:0},
+      "Coarse-Textured (<30% clay)":{value:1},
     },
     "fsr_disp_typ":{
       "Landfill":{value:0},

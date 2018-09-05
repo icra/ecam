@@ -1,4 +1,7 @@
 {
+  "#Fine-Textured (>30% clay)":"Fine-Textured (>30% clay)",
+  "#Coarse-Textured (<30% clay)":"Coarse-Textured (<30% clay)",
+
   "#Select":"เลือก",
   "#wwd_total_m3_descr":"ปริมาณน้ำผ่านการบำบัดรวมที่ปล่อยสู่แหล่งน้ำและนำกลับมาใช้ใหม่",
   "#wwd_total_m3_expla":"ปริมาณน้ำผ่านการบำบัดรวมที่ปล่อยสู่แหล่งน้ำและนำกลับมาใช้ใหม่",
@@ -19,8 +22,6 @@
   "#Landfill":"หลุมฝังกลบ",
   "#Landfill (with gas recovery)":"หลุมฝังกลบ (มีการรวบรวมก๊าซเพื่อใช้ประโยชน์)",
   "#Landfill (flaring)":"หลุมฝังกลบ (เผาก๊าซทิ้ง)",
-  "#Fine-Textured":"ลักษณะละเอียด",
-  "#Coarse-Textured":"ลักษณะหยาบ",
   "#select treatment":"เลือกชนิดระบบบำบัด",
   "#wwt_KPI_GHG_biog_descr":"ก๊าซเรือนกระจกจากก๊าซชีวภาพ",
   "#wwt_KPI_GHG_biog_expla":"ก๊าซเรือนกระจกจากก๊าซชีวภาพ",

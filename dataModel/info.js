@@ -112,9 +112,9 @@ var Info = {
   wwd_wr_GHG_avo_d: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>e"},
 
   //pump edits
-  wsa_pmp_pf: {magnitude:"No magnitude",unit:"no unit"},
-  wsd_pmp_pf: {magnitude:"No magnitude",unit:"no unit"},
-  wwc_pmp_pf: {magnitude:"No magnitude",unit:"no unit"},
+  wsa_pmp_pf: {magnitude:"Power factor",unit:"ratio"},
+  wsd_pmp_pf: {magnitude:"Power factor",unit:"ratio"},
+  wwc_pmp_pf: {magnitude:"Power factor",unit:"ratio"},
 
   //untreated, onsite and uncollected
   ww_KPI_GHG_unt:     {magnitude:"Mass",unit:"kg CO<sub>2</sub>e"},

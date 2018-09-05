@@ -221,8 +221,8 @@
   "#Landfill":"Landfill",
   "#Landfill (with gas recovery)":"Landfill (with gas recovery)",
   "#Landfill (flaring)":"Landfill (flaring)",
-  "#Fine-Textured":"Fine-Textured",
-  "#Coarse-Textured":"Coarse-Textured",
+  "#Fine-Textured (>30% clay)":"Fine-Textured (>30% clay)",
+  "#Coarse-Textured (<30% clay)":"Coarse-Textured (<30% clay)",
 
   "#select treatment":"select treatment",
   "#wwt_KPI_GHG_biog_descr":"Biogas emissions",
