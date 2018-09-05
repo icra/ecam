@@ -8,12 +8,42 @@ var Exceptions = {
   //wrapper
   apply:function() {
     this.wwt_ch4_efac();
-    this.fsc_ch4_efac();
-    this.fst_ch4_efac();
-    this.fsr_ch4_efac();
-    this.fsc_fdensity();
-    this.fsr_bod_conc_fs();
     this.fsc_bod_conc_fs();
+    this.fsc_ch4_efac();
+    this.fsc_fdensity();
+    this.fst_bod_slud();
+    this.fst_ch4_efac();
+    this.fsr_bod_conc_fs();
+    this.fsr_ch4_efac();
+  },
+
+  fst_bod_slud:function(){
+    var td=document.querySelector('tr[field=fst_bod_slud] td');
+    if(!td)return;
+
+    var select=document.createElement('select');
+    td.appendChild(select);
+    select.style.fontSize='smaller';
+    select.style.display='block';
+    select.onchange=function(){
+      Global.Faecl.Treatment.fst_bod_slud=parseFloat(select.value);
+      Global.Configuration.Selected.fst_bod_slud=select.options[select.options.selectedIndex].getAttribute('key');
+      init();
+    }
+
+    //go over options
+    Object.keys(Tables.fst_type_tre).forEach(key=>{
+      var option=document.createElement('option');
+      select.appendChild(option);
+      var value=Global.Faecl.Treatment.fst_bod_infl*Tables.fst_type_tre[key].bod_rmvd_as_sludge_estm;
+      var bod_rmvd_perc = Tables.fst_type_tre[key].bod_rmvd_as_sludge_estm*100;
+      option.value=value;
+      option.setAttribute('key',key);
+      option.innerHTML=translate(key)+" ["+bod_rmvd_perc+"%] &rarr; ("+format(value)+")";
+      if(key==Global.Configuration.Selected.fst_bod_slud){
+        option.selected='true';
+      }
+    });
   },
 
   fsc_fdensity:function() {

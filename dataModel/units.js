@@ -21,13 +21,13 @@ var Units={
 
   /** CONVERSION BETWEEN MAGNITUDES */
   "Distance":{
-    "m":1,
     "cm":0.01,
+    "m":1,
     "km":1000,
   },
   "Mass":{ 
-    "kg":1,
     "g":0.001,
+    "kg":1,
     "t":1e3,
   },
   "Time":{ 

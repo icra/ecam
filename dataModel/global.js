@@ -1017,14 +1017,15 @@ var Global = {
       sludge_estimation_method:"0",
       gwp_reports_index:0,
 
-      //for exceptions
-      fsc_ch4_efac:"",    //string with the treatment selected
-      fsc_fdensity:"",    //string with the treatment selected
-      fst_ch4_efac:"",    //string with the treatment selected
-      fsc_bod_conc_fs:"", //string with the treatment selected
-      fsr_bod_conc_fs:"", //string with the treatment selected
-      fsr_ch4_efac:"",    //string with the treatment selected
-      wwt_ch4_efac:"",    //string with the treatment selected
+      //for exceptions (string with the treatment selected)
+      wwt_ch4_efac:"",
+      fsc_bod_conc_fs:"",
+      fsc_ch4_efac:"",
+      fsc_fdensity:"",
+      fst_bod_slud:"",
+      fst_ch4_efac:"",
+      fsr_bod_conc_fs:"",
+      fsr_ch4_efac:"",
     },
 
     //answers for filters (see "questions.js")

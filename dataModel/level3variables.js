@@ -160,6 +160,7 @@ Level3.list=[
   "fst_KPI_GHG_fuel_ch4",
   "fst_KPI_GHG_tre_ch4",
   "fst_KPI_GHG_tre_n2o",
+  "fst_type_tre",
 
   //fsr
   "fsr_dumping_pth",
