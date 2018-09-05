@@ -9,7 +9,7 @@ var Recommendations={
 
   //BOD removed as FS
   "fsc_bod_rmvd":function(){
-    return Global.Faecl.Containment.fsc_fslu_emp/Global.Faecl.Containment.fsc_bod_conc_fs;
+    return Global.Faecl.Containment.fsc_fslu_emp*Global.Faecl.Containment.fsc_bod_conc_fs;
   },
 
   //Influent BOD load (containment)
