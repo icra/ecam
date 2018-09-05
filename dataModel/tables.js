@@ -197,15 +197,16 @@ Tables.wsd_fuel_typ=Tables["Fuel types"]; //engines
 Tables.wwc_fuel_typ=Tables["Fuel types"]; //engines
 Tables.wwt_fuel_typ=Tables["Fuel types"]; //engines
 Tables.wwd_fuel_typ=Tables["Fuel types"]; //engines
+Tables.fst_fuel_typ=Tables["Fuel types"]; //type of fuel fsm treatment engines
+Tables.fsr_fuel_typ=Tables["Fuel types"]; //type of fuel fsm treatment engines
 Tables.wsd_trck_typ=Tables["Fuel types"]; //trucks
 Tables.wwt_trck_typ=Tables["Fuel types"]; //trucks
 Tables.wwd_trck_typ=Tables["Fuel types"]; //trucks
-Tables.wwt_dige_typ=Tables["Fuel types"]; //type of fuel dig
-Tables.wwt_appl_typ=Tables["Fuel types"]; //type of fuel app
-Tables.fst_fuel_typ=Tables["Fuel types"]; //type of fuel fsm treatment engines
 Tables.fsc_trck_typ=Tables["Fuel types"]; //type of fuel fsm emptying and transport
 Tables.fst_trck_typ=Tables["Fuel types"]; //type of fuel fsm emptying and transport
 Tables.fsr_trck_typ=Tables["Fuel types"]; //type of fuel fsm emptying and transport
+Tables.wwt_dige_typ=Tables["Fuel types"]; //type of fuel dig
+Tables.wwt_appl_typ=Tables["Fuel types"]; //type of fuel app
 
 //copy options for faecal sludge type in fst for landapp and landfill
 Tables.fsr_fslu_typ_lf=Tables.fsr_fslu_typ_la;

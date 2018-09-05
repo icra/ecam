@@ -29,6 +29,9 @@ var Level2only = {
     "fst_KPI_GHG_fuel_co2", //hidden
     "fst_KPI_GHG_fuel_n2o", //hidden
     "fst_KPI_GHG_fuel_ch4", //hidden
+    "fsr_KPI_GHG_fuel_co2", //hidden
+    "fsr_KPI_GHG_fuel_n2o", //hidden
+    "fsr_KPI_GHG_fuel_ch4", //hidden
 
     //truck transport
     "wsd_KPI_GHG_trck_co2", //hidden

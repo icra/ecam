@@ -1,11 +1,23 @@
 {
   
+  "#fsr_engines":"Do you have fuel engines",
+  "#fsr_KPI_GHG_fuel_co2_descr":"Fuel engines (CO<sub>2</sub>)",
+  "#fsr_KPI_GHG_fuel_co2_expla":"Fuel engines (CO<sub>2</sub>)",
+  "#fsr_KPI_GHG_fuel_ch4_descr":"Fuel engines (CH<sub>4</sub>)",
+  "#fsr_KPI_GHG_fuel_ch4_expla":"Fuel engines (CH<sub>4</sub>)",
+  "#fsr_KPI_GHG_fuel_n2o_descr":"Fuel engines (N<sub>2</sub>O)",
+  "#fsr_KPI_GHG_fuel_n2o_expla":"Fuel engines (N<sub>2</sub>O)",
+  "#fsr_KPI_GHG_fuel_descr":"Fuel engines",
+  "#fsr_KPI_GHG_fuel_expla":"Fuel engines emissions",
+  "#fsr_vol_fuel_descr":"Volume of fuel consumed",
+  "#fsr_vol_fuel_expla":"Volume of fuel consumed",
+  "#fsr_fuel_typ_descr":"Fuel type (Engines)",
+  "#fsr_fuel_typ_expla":"Fuel type (Engines)",
+
   "#fsc_fdensity_descr":"FS density",
   "#fsc_fdensity_expla":"FS density",
-
   "#fsc_bod_conc_fs_descr": "BOD concentration of FS",
   "#fsc_bod_conc_fs_expla": "BOD concentration of FS",
-
   "#fs_SL_serv_pop_descr":"Serviced population in FSM",
   "#fs_SL_serv_pop_expla":"Serviced population",
 
@@ -136,8 +148,8 @@
   "#fst_KPI_GHG_fuel_ch4_expla":"Fuel engines (CH<sub>4</sub>)",
   "#fst_KPI_GHG_fuel_co2_descr":"Fuel engines (CO<sub>2</sub>)",
   "#fst_KPI_GHG_fuel_co2_expla":"Fuel engines (CO<sub>2</sub>)",
-  "#fst_KPI_GHG_fuel_descr":"Fuel engines (total emissions)",
-  "#fst_KPI_GHG_fuel_expla":"Fuel engines (total emissions)",
+  "#fst_KPI_GHG_fuel_descr":"Fuel engines",
+  "#fst_KPI_GHG_fuel_expla":"Fuel engines emissions",
   "#fst_KPI_GHG_fuel_n2o_descr":"Fuel engines (N<sub>2</sub>O)",
   "#fst_KPI_GHG_fuel_n2o_expla":"Fuel engines (N<sub>2</sub>O)",
   "#fst_KPI_GHG_tre_ch4_descr":"CH<sub>4</sub> from treatment process",
@@ -153,8 +165,8 @@
   "#fst_bod_effl_expla":"BOD load at the effluent of the treatment",
   "#fst_bod_infl_descr":"Influent BOD load",
   "#fst_bod_infl_expla":"BOD loading entering the treatment",
-  "#fst_bod_slud_descr":"BOD removed as sludge",
-  "#fst_bod_slud_expla":"BOD removed as sludge from the treatment process",
+  "#fst_bod_slud_descr":"BOD removed with excess sludge",
+  "#fst_bod_slud_expla":"BOD removed with excess sludge from the treatment process",
   "#fst_ch4_biog_descr": "Percentage of methane in biogas",
   "#fst_ch4_efac_descr":"CH<sub>4</sub> emission factor",
   "#fst_ch4_efac_expla":"Methane emission factor for the treatment technology of faecal sludge",

@@ -883,6 +883,23 @@ var Global = {
       //N load in effluent
         "fsr_n2o_effl":0,
 
+      //fuel engines
+        "fsr_fuel_typ":0, //type of fuel
+        "fsr_vol_fuel":0, //fuel consumed
+        fsr_KPI_GHG_fuel_co2:function(){//<br>
+          var fuel=Tables['Fuel types'][Tables.find('fsr_fuel_typ',this.fsr_fuel_typ)];//<br>
+          return this.fsr_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
+        },
+        fsr_KPI_GHG_fuel_n2o:function(){
+          var fuel=Tables['Fuel types'][Tables.find('fsr_fuel_typ',this.fsr_fuel_typ)];//<br>
+          return this.fsr_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFN2O.engines*Cts.ct_n2o_eq.value;
+        },
+        fsr_KPI_GHG_fuel_ch4:function(){
+          var fuel=Tables['Fuel types'][Tables.find('fsr_fuel_typ',this.fsr_fuel_typ)];//<br>
+          return this.fsr_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
+        },
+        fsr_KPI_GHG_fuel:function(){return this.fsr_KPI_GHG_fuel_co2()+this.fsr_KPI_GHG_fuel_n2o()+this.fsr_KPI_GHG_fuel_ch4()},
+
       //emptying and transport
         "fsr_trck_typ":0, //type of fuel
         "fsr_vol_trck":0, //fuel consumed
@@ -989,7 +1006,7 @@ var Global = {
 
       //total ghg
         fsr_KPI_GHG:function(){//<br>
-          return this.fsr_KPI_GHG_elec()+this.fsr_KPI_GHG_trck()+this.fsr_KPI_GHG_landapp()+this.fsr_KPI_GHG_landfil()+this.fsr_KPI_GHG_dumping()+this.fsr_KPI_GHG_tre_n2o()+this.fsr_KPI_GHG_urine();
+          return this.fsr_KPI_GHG_elec()+this.fsr_KPI_GHG_fuel()+this.fsr_KPI_GHG_trck()+this.fsr_KPI_GHG_landapp()+this.fsr_KPI_GHG_landfil()+this.fsr_KPI_GHG_dumping()+this.fsr_KPI_GHG_tre_n2o()+this.fsr_KPI_GHG_urine();
         },
     },
   },

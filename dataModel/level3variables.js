@@ -170,4 +170,7 @@ Level3.list=[
   "fsr_KPI_GHG_dumping_n2o",
   "fsr_ghg_avoided_reuse_N",
   "fsr_ghg_avoided_reuse_P",
+  "fsr_KPI_GHG_fuel_co2", //hidden
+  "fsr_KPI_GHG_fuel_n2o", //hidden
+  "fsr_KPI_GHG_fuel_ch4", //hidden
 ];

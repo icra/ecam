@@ -594,6 +594,18 @@ var Questions={
     },
 
   //fsr
+    "fsr_engines":{
+      variables:[
+        "fsr_fuel_typ",
+        "fsr_vol_fuel",
+        "fsr_KPI_GHG_fuel_co2",
+        "fsr_KPI_GHG_fuel_n2o",
+        "fsr_KPI_GHG_fuel_ch4",
+        "fsr_KPI_GHG_fuel",
+      ],
+      advanced:0,
+      otherQuestions:[],
+    },
     "fsr_transport":{
       variables:[
         "fsr_trck_typ",
@@ -708,7 +720,7 @@ Questions.getQuestions=function(ubication) {
 		if(typeof(this[question])=="function")continue;
 		//skip fuel engines questions if anyFuelEngines is zero
 		if(Global.General.anyFuelEngines==0) {
-			if(["wsa_engines","wst_engines","wsd_engines","wwc_engines","wwt_engines","wwd_engines",'fst_engines'].indexOf(question)+1)
+			if(["wsa_engines","wst_engines","wsd_engines","wwc_engines","wwt_engines","wwd_engines",'fst_engines','fsr_engines'].indexOf(question)+1)
 				continue;
 		}
 		//check all codes inside ubication

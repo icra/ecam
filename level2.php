@@ -257,7 +257,7 @@
         var rec_value=Recommendations[field]()/multiplier;
         var currentUnit = Global.Configuration.Units[field] || Info[field].unit
         btn.innerHTML='Estimation: '+format(rec_value)+' '+currentUnit+' &rarr;';
-        btn.setAttribute('title','Estimation based on other inputs: '+Formulas.prettify(Recommendations[field].toString()));
+        btn.setAttribute('caption','Estimation based on other inputs:<br> '+Formulas.prettify(Recommendations[field].toString()));
         btn.addEventListener('click',function(){
           CurrentLevel[field]=rec_value*multiplier;
           init();
