@@ -27,18 +27,23 @@
 </tbody>
 
 <script>
-  //add listeners
+  //add listeners that modify the backend
   (function(){
     document.querySelectorAll('input[name=wwt_producing_biogas][type=radio]').forEach(el=>{
       el.addEventListener('click',function(){
         var newValue=parseInt(this.value);
         Global.Configuration['Yes/No'].wwt_producing_biogas=newValue;
-        Global.Waste.Treatment.wwt_biog_pro = Global.Estimations.estm_wwt_biog_pro();
-        Global.Waste.Treatment.wwt_ch4_biog = Global.Estimations.estm_wwt_ch4_biog();
-        Global.Waste.Treatment.wwt_biog_fla = Global.Estimations.estm_wwt_biog_fla();
-        if(!newValue){
+        if(newValue){
+          Global.Waste.Treatment.wwt_biog_pro = Global.Estimations.estm_wwt_biog_pro();
+          Global.Waste.Treatment.wwt_ch4_biog = Global.Estimations.estm_wwt_ch4_biog();
+          Global.Waste.Treatment.wwt_biog_fla = Global.Estimations.estm_wwt_biog_pro();
+          Global.Waste.Treatment.wwt_biog_val = 0;
+        }else{
+          Global.Waste.Treatment.wwt_biog_pro = 0;
+          Global.Waste.Treatment.wwt_ch4_biog = 0;
+          Global.Waste.Treatment.wwt_biog_fla = 0;
+          Global.Waste.Treatment.wwt_biog_val = 0;
           Global.Configuration['Yes/No'].wwt_valorizing_biogas=0;
-          Global.Waste.Treatment.wwt_biog_val=Global.Estimations.estm_wwt_biog_val();
         }
         init();
       });
@@ -48,8 +53,13 @@
       el.addEventListener('click',function(){
         var newValue=parseInt(el.value);
         Global.Configuration['Yes/No'].wwt_valorizing_biogas=newValue;
-        Global.Waste.Treatment.wwt_biog_val = Global.Estimations.estm_wwt_biog_val();
-        Global.Waste.Treatment.wwt_biog_fla = Global.Estimations.estm_wwt_biog_fla();
+        if(newValue){
+          Global.Waste.Treatment.wwt_biog_val = Global.Estimations.estm_wwt_biog_pro();
+          Global.Waste.Treatment.wwt_biog_fla = 0;
+        }else{
+          Global.Waste.Treatment.wwt_biog_val = 0;
+          Global.Waste.Treatment.wwt_biog_fla = Global.Estimations.estm_wwt_biog_pro();
+        }
         init();
       });
     });

@@ -359,6 +359,10 @@ Graphs.ghgSources=function(withTable,container) {
       "fsmc":{name:translate('Onsite sanitation'),  value:fsmc(), formula:Formulas.prettify(fsmc.toString())},
     };
 
+    Object.keys(emissions).forEach(key=>{
+      emissions[key].formula=emissions[key].formula.replace(/\+/g,'+<br>');
+    });
+
   //format data for the function
   var DATA=[ ["Source", translate('emissions')], ];
   Object.keys(emissions).forEach(key=>{if(emissions[key].value)DATA.push([emissions[key].name,emissions[key].value])});
@@ -375,7 +379,7 @@ Graphs.ghgSources=function(withTable,container) {
   }
 
   //empty the container element
-  var con = document.getElementById(container);
+  var con=document.getElementById(container);
   con.setAttribute('current_graph','ghgSources');
   con.innerHTML='';
 
@@ -389,8 +393,7 @@ Graphs.ghgSources=function(withTable,container) {
   }
 
   //draw
-  var chart=new google.visualization.PieChart(con);
-  chart.draw(data,options);
+  var chart=new google.visualization.PieChart(con);chart.draw(data,options);
 
   //buttons navigate
   (function(){
@@ -419,7 +422,7 @@ Graphs.ghgSources=function(withTable,container) {
     "<table title=ghgSources>"+
       "<tr><th>"+translate('graphs_slice')+"<th>"+translate('Code')+"<th>"+translate('graphs_value')+" (kg CO2eq)";
       Object.keys(emissions).forEach(key=>{
-        if(emissions[key].value)
+        //if(emissions[key].value)
           table+="<tr><td align=left>"+emissions[key].name+
             "<td align=left>"+emissions[key].formula+
             "<td align=right>"+format(emissions[key].value)+
@@ -896,6 +899,9 @@ Graphs.graph5=function(withTable,container) {
       3:{color:'#b67800'},
       4:{color:'#f8c666'},
       5:{color:'#fad999'},
+      6:{color:'lightgreen'},
+      7:{color:'#af0'},
+      8:{color:'green'},
     },
   };
 
@@ -964,12 +970,8 @@ Graphs.graph7=function(withTable,container) {
   var fsr = Substages.Faecl.Reuse;
 
   //array of pointers to objects
-  var stages = [ wsa , wst , wsd , wwc , wwt , wwd, fsc, fst, fsr];
-  var names =  ["wsa_nrg_cons", "wst_nrg_cons", "wsd_nrg_cons", "wwc_nrg_cons", "wwt_nrg_cons", "wwd_nrg_cons",
-    'fsc_nrg_cons',
-    'fst_nrg_cons',
-    'fsr_nrg_cons',
-  ];
+  var stages=[ wsa,           wst,           wsd,           wwc,           wwt,           wwd,           fsc,           fst,           fsr];
+  var names =["wsa_nrg_cons","wst_nrg_cons","wsd_nrg_cons","wwc_nrg_cons","wwt_nrg_cons","wwd_nrg_cons",'fsc_nrg_cons','fst_nrg_cons','fsr_nrg_cons'];
   //variable DATA will be inserted into the graph
   var DATA = [
     ['Stage', 'Emissions'],
@@ -1005,15 +1007,22 @@ Graphs.graph7=function(withTable,container) {
     }
   }
 
+  //calculate total energy consumed in substages
+  var TotalNRG=0;
+  for(var s in stages) {
+    TotalNRG+=stages[s].map(substage=>substage[names[s]]).reduce((p,c)=>p+c,0);
+    console.log(TotalNRG);
+  }
+
   var data=google.visualization.arrayToDataTable(DATA);
   var options= {
     height:300,
     legend:{position:'left'},
     pieHole:0.3,
-    title:translate('Energy consumption by substage')+" ("+format(Global.General.TotalNRG())+" kWh)",
+    title:translate('Energy consumption by substage')+" ("+format(TotalNRG)+" kWh)",
     slices:{},
   };
-  var colors = [ '#66cef5', '#0083b3', '#cceffc', '#b67800', '#f8c666', '#fad999' ];
+  var colors = [ '#66cef5', '#0083b3', '#cceffc', '#b67800', '#f8c666', '#fad999', 'lightgreen', '#af0', 'green' ];
   var current_slice = 0;
   for(var s in stages) {
     if(stages[s].length==0) {
@@ -1043,7 +1052,7 @@ Graphs.graph7=function(withTable,container) {
     "";
   })();
 
-  if(withTable) {
+  if(withTable){
     //create a table (as a string)
     var table=""+
     "<table title=graph7>"+

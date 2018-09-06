@@ -62,10 +62,10 @@ var Exceptions = {
     }
 
     //go over options
-    Object.keys(Tables.fsc_fdensity).forEach(key=>{
+    Object.keys(Tables.fsc_type_tre).forEach(key=>{
       var option=document.createElement('option');
       select.appendChild(option);
-      var value=Tables.fsc_fdensity[key].fs_density;
+      var value=Tables.fsc_type_tre[key].fs_density;
       option.value=value;
       option.setAttribute('key',key);
       option.innerHTML=translate(key)+" ("+value+")";

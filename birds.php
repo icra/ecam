@@ -130,7 +130,7 @@
       });
     }
 
-    //set the default values for filters (biogas) and options (flooding)
+    //set the GUI values for filters (biogas) and options (flooding)
     BEV.defaultQuestions=function() {
       //WWT
         //valorizing biogas
@@ -229,6 +229,22 @@
         Global.Waste.Collection[field.replace("ww_","wwc_")]=wwc*value/n;
         Global.Waste.Treatment [field.replace("ww_","wwt_")]=wwt*value/n;
         Global.Waste.Discharge [field.replace("ww_","wwd_")]=wwd*value/n;
+      }else if(L1=="Faecl"){
+        //count active stages
+        var fsc=Global.Configuration.ActiveStages.faeclCon;
+        var fst=Global.Configuration.ActiveStages.faeclTre;
+        var fsr=Global.Configuration.ActiveStages.faeclReu;
+        var n=fsc+fst+fsr;
+        if(n==0){
+          console.warn("Warning: no FSM stages active, all goes to Containment");
+          //all energy goes to collection
+          Global.Faecl.Containment[field.replace("fs_","fsc_")]=value;
+          init();
+          return;
+        }
+        Global.Faecl.Containment[field.replace("fs_","fsc_")]=fsc*value/n;
+        Global.Faecl.Treatment  [field.replace("fs_","fst_")]=fst*value/n;
+        Global.Faecl.Reuse      [field.replace("fs_","fsr_")]=fsr*value/n;
       }
       init();
     }
@@ -456,6 +472,46 @@
           <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fsr_type_tre_descr')?><select id='fsr_type_tre'></select>
           <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fsr_fslu_typ_descr')?><select id='fsr_fslu_typ'></select>
 
+          <script>
+            //APPLY FSM ESTIMATIONS
+            document.querySelector('#inputs select#fsc_type_tre').addEventListener('change',function(){
+              var type_tre = Tables.find('fsc_type_tre',this.value);
+              //fsc_bod_infl
+              Global.Faecl.Containment.fsc_bod_infl=Recommendations.fsc_bod_infl();
+              //fsc_ch4_efac estimation
+              Global.Faecl.Containment.fsc_ch4_efac=Tables.fsc_type_tre[type_tre][Global.Faecl.Containment.fsc_flooding?'ch4_efac_flooding':'ch4_efac'];
+              Global.Configuration.Selected.fsc_ch4_efac = type_tre;
+              console.log(Global.Faecl.Containment.fsc_ch4_efac);
+              //fsc_fdensity estimation
+              Global.Faecl.Containment.fsc_fdensity=Tables.fsc_type_tre[type_tre].fs_density;
+              Global.Configuration.Selected.fsc_fdensity = type_tre;
+              //fs_fslu_emp
+              Global.Faecl.Containment.fsc_fslu_emp=Recommendations.fsc_fslu_emp();
+              //fsc_bod_conc_fs estimation
+              Global.Faecl.Containment.fsc_bod_conc_fs=Tables.fsc_type_tre[type_tre].BOD_conc_FS;
+              Global.Configuration.Selected.fsc_bod_conc_fs = type_tre;
+              //fsc_bod_rmvd
+              Global.Faecl.Containment.fsc_bod_rmvd=Recommendations.fsc_bod_rmvd();
+            });
+            document.querySelector('#inputs select#fst_type_tre').addEventListener('change',function(){
+              var type_tre=Tables.find('fst_type_tre',this.value);
+              //fst_ch4_efac estimation
+              Global.Faecl.Treatment.fst_ch4_efac=Tables.fst_type_tre[type_tre].ch4_efac;
+              Global.Configuration.Selected.fst_ch4_efac=type_tre;
+              //fst_bod_infl
+              Global.Faecl.Treatment.fst_bod_infl=Recommendations.fst_bod_infl();
+              //fst_bod_effl
+              Global.Faecl.Treatment.fst_bod_effl=Recommendations.fst_bod_effl();
+              //fst_bod_slud estimation
+              Global.Faecl.Treatment.fst_bod_slud=Tables.fst_type_tre[type_tre].bod_rmvd_as_sludge_estm*Global.Faecl.Treatment.fst_bod_infl;
+              Global.Configuration.Selected.fst_bod_slud=type_tre;
+            });
+            document.querySelector('#inputs select#fsr_type_tre').addEventListener('change',function(){
+              var type_tre=Tables.find('fsr_type_tre',this.value);
+              //TBD
+            });
+          </script>
+
           <!--fst biogas-->
           <tr stage=faecl class=hidden><td><?php write('#fst_producing_biogas')?>? <td class=question colspan=2>
             <label><?php write('#no')?> <input name=fst_producing_biogas type=radio value=0 checked> </label>
@@ -474,9 +530,9 @@
                   if(newValue){
                     Global.Configuration['Yes/No'].fst_valorizing_biogas=0;
                     Global.Faecl.Treatment.fst_biog_pro = Recommendations.fst_biog_pro();
-                    Global.Faecl.Treatment.fst_biog_val = Recommendations.fst_biog_val();
-                    Global.Faecl.Treatment.fst_biog_fla = Recommendations.fst_biog_fla();
                     Global.Faecl.Treatment.fst_ch4_biog = Recommendations.fst_ch4_biog();
+                    Global.Faecl.Treatment.fst_biog_val = 0;
+                    Global.Faecl.Treatment.fst_biog_fla = Recommendations.fst_biog_pro();
                   }else{
                     Global.Faecl.Treatment.fst_biog_pro = 0;
                     Global.Faecl.Treatment.fst_biog_val = 0;
@@ -492,11 +548,11 @@
                   Global.Configuration['Yes/No'][this.name]=newValue;
                   //apply estimations
                   if(newValue){
-                    Global.Faecl.Treatment.fst_biog_val = Recommendations.fst_biog_val();
-                    Global.Faecl.Treatment.fst_biog_fla = Recommendations.fst_biog_fla();
+                    Global.Faecl.Treatment.fst_biog_val = Global.Faecl.Treatment.fst_biog_pro; //valorized is produced
+                    Global.Faecl.Treatment.fst_biog_fla = 0;                                   //flared is zero
                   }else{
-                    Global.Faecl.Treatment.fst_biog_val = 0;
-                    Global.Faecl.Treatment.fst_biog_fla = 0;
+                    Global.Faecl.Treatment.fst_biog_val = 0;                                   //valorized is zero
+                    Global.Faecl.Treatment.fst_biog_fla = Global.Faecl.Treatment.fst_biog_pro; //flared is produced
                   }
                   init();
                 });

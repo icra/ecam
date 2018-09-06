@@ -1,30 +1,8 @@
 Global.Estimations = {
-  estm_wwt_biog_pro:function(){//<br>
-    if(Global.Configuration["Yes/No"].wwt_producing_biogas) { //<br>
-      return Global.Waste.ww_serv_pop()*Global.General.bod_pday*Cts.ct_bod_kg.value*Cts.ct_biog_g.value*Global.General.Days()/1000; //<br>
-    } //<br>
-    else return 0; //<br>
+  estm_wwt_biog_pro:function(){
+    return Global.Waste.ww_serv_pop()*Global.General.bod_pday*Cts.ct_bod_kg.value*Cts.ct_biog_g.value*Global.General.Days()/1000; //<br>
   },
-  estm_wwt_ch4_biog:function(){//<br>
-    if(Global.Configuration['Yes/No'].wwt_producing_biogas) { //<br>
-      return 59; //<br>
-    } //<br>
-    else return 0; //<br>
-  },
-  estm_wwt_biog_val:function(){
-    if(Global.Configuration['Yes/No'].wwt_valorizing_biogas) { //<br>
-      return Global.Waste.Treatment.wwt_biog_pro; //<br>
-    } //<br>
-    else return 0; //<br>
-  },
-  estm_wwt_biog_fla:function(){
-    var pro=Global.Configuration['Yes/No'].wwt_producing_biogas;
-    var val=Global.Configuration['Yes/No'].wwt_valorizing_biogas;
-    if(pro && !val) { //<br>
-      return Global.Waste.Treatment.wwt_biog_pro; //<br>
-    } //<br>
-    else return 0; //<br>
-  },
+  estm_wwt_ch4_biog:function(){ return 59; },
 
   estm_wwt_bod_infl:function(){
     return Global.General.bod_pday/1000*Global.Waste.ww_serv_pop()*Global.General.Days();//<br>
