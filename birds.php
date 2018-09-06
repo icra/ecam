@@ -689,10 +689,11 @@
       <div style="text-align:left;padding-left:10px">
         <?php write('#see_also')?>:
         <ul>
-          <li> <a href='estimations.php'><?php write('#summary_of_estimations_at_this_level')?></a> </li>
-          <li> <a href='non_revenue_water.php'><?php write('#about_nrw')?></a> </li>
-          <li> <a href='fuelInfo.php'><?php write('#about_fuel')?></a> </li>
-          <li> <a href=sankey.php><?php write('#sankey_diagram')?></a>
+          <li><a href=estimations.php><?php write('#summary_of_estimations_at_this_level')?></a> </li>
+          <li><a href=non_revenue_water.php><?php write('#about_nrw')?></a> </li>
+          <li><a href=fuelInfo.php><?php write('#about_fuel')?></a> </li>
+          <li><a href=sankey.php><?php write('#sankey_diagram')?></a>
+          <li><a href=abbreviations.php>Abbreviations</a>
         </ul>
       </div>
       <script>
