@@ -249,8 +249,42 @@
       init();
     }
   </script>
+
+  <script>
+    //namespace to remember folding of stages (not saved to cookies)
+    var Expanded=Global.Configuration.Expanded;
+    function toggleStageVisibility(stage) {
+      var btn=document.querySelector('#inputs span[expanded][stage='+stage+']');
+      console.log(btn);
+      if(!btn)return;
+
+      var currentState=Expanded[stage];
+      if(currentState===undefined)currentState=1;//expanded by default
+
+      //toggle html attribute
+      if(currentState){btn.setAttribute('expanded','0')}
+      else            {btn.setAttribute('expanded','1')}
+
+      //modify "Expanded" object
+      if(currentState){Expanded[stage]=0}
+      else            {Expanded[stage]=1}
+
+      //hide or show fields
+      var newDisplay=currentState?'none':'';
+      document.querySelectorAll('#inputs tr[stage='+stage+']').forEach(tr=>{
+        tr.style.display=newDisplay;
+      });
+    }
+  </script>
+  <style>
+    span[expanded]{float:left;transition:transform 0.15s;}
+    span[expanded='0']{transform:rotate(-90deg);}
+  </style>
+
   <style>
     body{background:#F5ECCE}
+
+
     h1{
       background:white;
       border:none;
@@ -371,7 +405,8 @@
         <!--Water-->
         <tr><th colspan=3 style="background:#0aaff1">
           <div class=flex style="justify-content:space-between">
-            <div>
+            <div onclick=toggleStageVisibility('water')>
+              <span expanded=1 stage=water>▼</span>
               <img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
             </div>
             <!--water population-->
@@ -396,7 +431,8 @@
         <!--Waste-->
         <tr><th colspan=3 style=background:#d71d24>
           <div class=flex style="justify-content:space-between">
-            <div>
+            <div onclick=toggleStageVisibility('waste')>
+              <span expanded=1 stage=waste>▼</span>
               <img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
             </div>
             <!--wastewater population-->
@@ -444,7 +480,8 @@
         <!--FSM-->
         <tr><th colspan=3 style=background:green>
           <div class=flex style="justify-content:space-between">
-            <div>
+            <div onclick=toggleStageVisibility('faecl')>
+              <span expanded=1 stage=faecl>▼</span>
               <img src=img/faecl.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Faecl')?>
             </div>
             <!--fsm population-->
