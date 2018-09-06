@@ -35,7 +35,10 @@ var UNFCCC = {
 		return Global.Waste.Treatment.wwt_KPI_ghg_app_co2eq()+
 		       Global.Waste.Treatment.wwt_KPI_ghg_land_co2eq()+
 		       Global.Waste.Treatment.wwt_KPI_ghg_stock_co2eq()+
-		       Global.Waste.Treatment.wwt_KPI_ghg_sto_co2eq();
+		       Global.Waste.Treatment.wwt_KPI_ghg_sto_co2eq()+
+           Global.Faecl.Reuse.fsr_KPI_GHG_landapp()+
+           Global.Faecl.Reuse.fsr_KPI_GHG_dumping()+
+           Global.Faecl.Reuse.fsr_KPI_GHG_landfil();
 	},
 	"unfccc_5B":function(){
 		return Global.Waste.Treatment.wwt_KPI_ghg_comp_co2eq()+
@@ -50,7 +53,8 @@ var UNFCCC = {
 		       Global.Waste.Treatment.wwt_KPI_GHG_tre()+
            Global.Faecl.Treatment.fst_KPI_GHG_tre()+
            Global.Waste.Discharge.wwd_KPI_GHG_tre_n2o()+
-           Global.Faecl.Reuse.fsr_KPI_GHG_tre_n2o();
+           Global.Faecl.Reuse.fsr_KPI_GHG_tre_n2o()+
+           Global.Faecl.Reuse.fsr_KPI_GHG_urine();
 	},
 }
 

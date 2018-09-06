@@ -32,9 +32,7 @@ Graphs.graph1=function(withTable,container) {
 
   //names
   var names = [ 
-    translate('ws_KPI_GHG_descr'),
-    translate('ww_KPI_GHG_descr'),
-    translate('fs_KPI_GHG_descr'),
+    translate('Water'), translate('Waste'), translate('Faecl'),
   ];
 
   //array graph data
@@ -108,10 +106,10 @@ Graphs.graph1=function(withTable,container) {
     div.innerHTML=table;
     document.getElementById(container).appendChild(div);
   }
-  scrollToItem(container)
+  //scrollToItem(container)
 }
 
-//GHG 'By source' (non-detailed: elec,co2,n2o,ch4)
+//GHG By source (non-detailed)
 Graphs.ghg_by_source=function(withTable,container) {
   withTable=withTable||false;
   container=container||"graph";
@@ -294,130 +292,85 @@ Graphs.ghg_by_source=function(withTable,container) {
     div.innerHTML=table;
     document.getElementById(container).appendChild(div);
   }
-  scrollToItem(container);
+  //scrollToItem(container);
 }
 
-//GHG 'By source (detailed)'
+
+//GHG By source (detailed)
 Graphs.ghgSources=function(withTable,container) {
   withTable=withTable||false;
   container=container||"graph";
 
-  /*
-    sources:
-      elecWS, elecWW, fuel, fuel trucks, sludge wst,
-      ch4_unt, n2o_unt, ch4_tre, n2o_tre, biogas
-  */
-  var elecWS=(function(){
-    return 0+
-      Global.Water.Abstraction .wsa_KPI_GHG_elec()+
-      Global.Water.Treatment   .wst_KPI_GHG_elec()+
-      Global.Water.Distribution.wsd_KPI_GHG_elec();
-  })();
-  var elecWW=(function(){
-    return 0+
-      Global.Waste.Collection.wwc_KPI_GHG_elec()+
-      Global.Waste.Treatment .wwt_KPI_GHG_elec()+
-      Global.Waste.Discharge .wwd_KPI_GHG_elec();
-  })();
-  var elecFS=(function(){
-    return 0+
-      Global.Faecl.Containment.fsc_KPI_GHG_elec()+
-      Global.Faecl.Treatment  .fst_KPI_GHG_elec()+
-      Global.Faecl.Reuse      .fsr_KPI_GHG_elec();
-  })();
-  var fuel=(function(){
-    return 0+
-      Global.Water.Abstraction .wsa_KPI_GHG_fuel()+
-      Global.Water.Treatment   .wst_KPI_GHG_fuel()+
+  /*emissions grouped */
+    var elWS=function(){
+      return Global.Water.Abstraction.wsa_KPI_GHG_elec()+Global.Water.Treatment.wst_KPI_GHG_elec()+Global.Water.Distribution.wsd_KPI_GHG_elec()
+    };
+    var elWW=function(){
+      return Global.Waste.Collection.wwc_KPI_GHG_elec()+Global.Waste.Treatment.wwt_KPI_GHG_elec()+Global.Waste.Discharge.wwd_KPI_GHG_elec()
+    };
+    var elFS=function(){
+      return Global.Faecl.Containment.fsc_KPI_GHG_elec()+Global.Faecl.Treatment.fst_KPI_GHG_elec()+Global.Faecl.Reuse.fsr_KPI_GHG_elec()
+    };
+    var fuel=function(){
+      return Global.Water.Abstraction.wsa_KPI_GHG_fuel()+
+      Global.Water.Treatment.wst_KPI_GHG_fuel()+
       Global.Water.Distribution.wsd_KPI_GHG_fuel()+
-      Global.Waste.Collection  .wwc_KPI_GHG_fuel()+
-      Global.Waste.Treatment   .wwt_KPI_GHG_fuel()+
-      Global.Waste.Discharge   .wwd_KPI_GHG_fuel()+
-      Global.Faecl.Treatment   .fst_KPI_GHG_fuel()+
-      Global.Faecl.Reuse       .fsr_KPI_GHG_fuel();
-  })();
-  var trck=(function(){
-    return 0+
-      Global.Water.Distribution.wsd_KPI_GHG_trck()+
-      Global.Waste.Discharge   .wwd_KPI_GHG_trck()+
-      Global.Faecl.Containment .fsc_KPI_GHG_trck()+
-      Global.Faecl.Treatment   .fst_KPI_GHG_trck()+
-      Global.Faecl.Reuse       .fsr_KPI_GHG_trck();
-  })();
+      Global.Waste.Collection.wwc_KPI_GHG_fuel()+
+      Global.Waste.Treatment.wwt_KPI_GHG_fuel()+
+      Global.Waste.Discharge.wwd_KPI_GHG_fuel()+
+      Global.Faecl.Treatment.fst_KPI_GHG_fuel()+
+      Global.Faecl.Reuse.fsr_KPI_GHG_fuel()+
+      Global.Waste.Treatment.wwt_KPI_GHG_dig_fuel()
+    };
+    var trck=function(){
+      return Global.Water.Distribution.wsd_KPI_GHG_trck()+
+        Global.Waste.Discharge.wwd_KPI_GHG_trck()+
+        Global.Faecl.Containment.fsc_KPI_GHG_trck()+
+        Global.Faecl.Treatment.fst_KPI_GHG_trck()+
+        Global.Faecl.Reuse.fsr_KPI_GHG_trck()
+    };
+    var untr=function(){return Global.Waste.ww_KPI_GHG_unt()}
+    var trea=function(){return Global.Waste.Treatment.wwt_KPI_GHG_tre()+Global.Faecl.Treatment.fst_KPI_GHG_tre()}
+    var biog=function(){return Global.Waste.Treatment.wwt_KPI_GHG_biog()+Global.Faecl.Treatment.fst_KPI_GHG_biog()}
+    var slud=function(){
+      return Global.Waste.Treatment.wwt_KPI_GHG_slu()+
+        Global.Faecl.Reuse.fsr_KPI_GHG_landapp()+
+        Global.Faecl.Reuse.fsr_KPI_GHG_landfil_n2o()+
+        Global.Faecl.Reuse.fsr_KPI_GHG_dumping_n2o()+
+        Global.Faecl.Reuse.fsr_KPI_GHG_landfil_ch4()+
+        Global.Faecl.Reuse.fsr_KPI_GHG_dumping_ch4()
+    }
+    //effluent discharge
+    var n2od=function(){return Global.Waste.Discharge.wwd_KPI_GHG_tre_n2o()+Global.Faecl.Reuse.fsr_KPI_GHG_tre_n2o()};
+    //FSM Onsite sanitation
+    var fsmc=function(){return Global.Faecl.Containment.fsc_KPI_GHG_cont()}
+  //emissions grouped structure
+    var emissions={
+      "elWS":{name:translate('Electricity WS'),     value:elWS(), formula:Formulas.prettify(elWS.toString())},
+      "elWW":{name:translate('Electricity WW'),     value:elWW(), formula:Formulas.prettify(elWW.toString())},
+      "elFS":{name:translate('Electricity FS'),     value:elFS(), formula:Formulas.prettify(elFS.toString())},
+      "fuel":{name:translate('Fuel engines'),       value:fuel(), formula:Formulas.prettify(fuel.toString())},
+      "trck":{name:translate('Truck transport'),    value:trck(), formula:Formulas.prettify(trck.toString())},
+      "untr":{name:translate('Untreated WW'),       value:untr(), formula:Formulas.prettify(untr.toString())},
+      "trea":{name:translate('Treatment process'),  value:trea(), formula:Formulas.prettify(trea.toString())},
+      "biog":{name:translate('Biogas'),             value:biog(), formula:Formulas.prettify(biog.toString())},
+      "slud":{name:translate('Sludge disposal'),    value:slud(), formula:Formulas.prettify(slud.toString())},
+      "n2od":{name:translate('Effluent discharge'), value:n2od(), formula:Formulas.prettify(n2od.toString())},
+      "fsmc":{name:translate('Onsite sanitation'),  value:fsmc(), formula:Formulas.prettify(fsmc.toString())},
+    };
 
-  //untreated ww
-  var ch4u=Global.Waste.ww_KPI_GHG_unt_ch4();
-  var n2ou=Global.Waste.ww_KPI_GHG_unt_n2o();
-  //treatment of ww
-  var ch4t=Global.Waste.Treatment.wwt_KPI_GHG_tre_ch4()+
-           Global.Faecl.Treatment.fst_KPI_GHG_tre_ch4();
-  var n2ot=Global.Waste.Treatment.wwt_KPI_GHG_tre_n2o()+
-           Global.Faecl.Treatment.fst_KPI_GHG_tre_n2o();
-  //biogas
-  var biog=Global.Waste.Treatment.wwt_KPI_GHG_biog()+
-           Global.Faecl.Treatment.fst_KPI_GHG_biog();
-  //sludge mgmt
-  var slud=Global.Waste.Treatment.wwt_KPI_GHG_slu()+
-           Global.Faecl.Reuse    .fsr_KPI_GHG_landapp()+
-           Global.Faecl.Reuse    .fsr_KPI_GHG_landfil_n2o()+
-           Global.Faecl.Reuse    .fsr_KPI_GHG_dumping_n2o()+
-           Global.Faecl.Reuse    .fsr_KPI_GHG_landfil_ch4()+
-           Global.Faecl.Reuse    .fsr_KPI_GHG_dumping_ch4();
-  //digester fuel
-  var digf=Global.Waste.Treatment.wwt_KPI_GHG_dig_fuel();
-  //effluent discharge to water body
-  var n2od=Global.Waste.Discharge.wwd_KPI_GHG_tre_n2o()+
-           Global.Faecl.Reuse    .fsr_KPI_GHG_tre_n2o();
-  //FSM containment
-  var fsmc=Global.Faecl.Containment.fsc_KPI_GHG_cont();
+  //format data for the function
+  var DATA=[ ["Source", translate('emissions')], ];
+  Object.keys(emissions).forEach(key=>{if(emissions[key].value)DATA.push([emissions[key].name,emissions[key].value])});
+  var data=google.visualization.arrayToDataTable(DATA);
 
-  //names
-  var names = [
-    "Electricity WS",
-    "Electricity WW",
-    "Electricity FS",
-    "Fuel engines",
-    "Truck transport",
-    ""+translate('ww_KPI_GHG_unt_ch4_descr'),
-    ""+translate('ww_KPI_GHG_unt_n2o_descr'),
-    ""+translate('wwt_KPI_GHG_tre_ch4_descr'),
-    ""+translate('wwt_KPI_GHG_tre_n2o_descr'),
-    ""+translate('wwt_KPI_GHG_biog_descr'),
-    ""+translate('wwt_KPI_GHG_slu_descr'),
-    ""+translate('wwt_KPI_GHG_dig_fuel_descr'),
-    ""+translate('wwd_KPI_GHG_tre_n2o_descr'),
-    ""+translate('fsc_KPI_GHG_cont_descr'),
-  ];
-
-  //array graph data
-  var data=google.visualization.arrayToDataTable([
-    ["Source",translate('emissions')],
-    [replaceTags(names[0] ),elecWS],
-    [replaceTags(names[1] ),elecWW],
-    [replaceTags(names[2] ),elecFS],
-    [replaceTags(names[3] ),fuel],
-    [replaceTags(names[4] ),trck],
-    [replaceTags(names[5] ),ch4u],
-    [replaceTags(names[6] ),n2ou],
-    [replaceTags(names[7] ),ch4t],
-    [replaceTags(names[8] ),n2ot],
-    [replaceTags(names[9] ),biog],
-    [replaceTags(names[10]),slud],
-    [replaceTags(names[11]),digf],
-    [replaceTags(names[12]),n2od],
-    [replaceTags(names[13]),fsmc],
-  ]);
-
-  //options
+  //graph options
   var options={
     height:250,
     legend:{position:'left'},
     title:translate('ghg_emissions_by_source_detailed')+" ("+format(Global.General.TotalGHG())+" kg CO2eq)",
     slices:{
-      /*
-      0:{color:'#00aff1' },
-      1:{color:'#d71d24' },
-      */
+      /* 0:{color:'#00aff1' }, 1:{color:'#d71d24' }, */
     },
   }
 
@@ -439,6 +392,7 @@ Graphs.ghgSources=function(withTable,container) {
   var chart=new google.visualization.PieChart(con);
   chart.draw(data,options);
 
+  //buttons navigate
   (function(){
     var buttons=document.createElement('div');
     buttons.classList.add('tab_buttons');
@@ -456,63 +410,6 @@ Graphs.ghgSources=function(withTable,container) {
     "";
   })();
 
-  var elecWS_formula = ""+
-    "<a href=variable.php?id=wsa_KPI_GHG_elec>wsa_KPI_GHG_elec</a> +<br>"+
-    "<a href=variable.php?id=wst_KPI_GHG_elec>wst_KPI_GHG_elec</a> +<br>"+
-    "<a href=variable.php?id=wsd_KPI_GHG_elec>wsd_KPI_GHG_elec</a>"+
-  "";
-  var elecWW_formula = ""+
-    "<a href=variable.php?id=wwc_KPI_GHG_elec>wwc_KPI_GHG_elec</a> +<br>"+
-    "<a href=variable.php?id=wwt_KPI_GHG_elec>wwt_KPI_GHG_elec</a> +<br>"+
-    "<a href=variable.php?id=wwd_KPI_GHG_elec>wwd_KPI_GHG_elec</a>"+
-  "";
-  var elecFS_formula = ""+
-    "<a href=variable.php?id=fsc_KPI_GHG_elec>fsc_KPI_GHG_elec</a> +<br>"+
-    "<a href=variable.php?id=fst_KPI_GHG_elec>fst_KPI_GHG_elec</a> +<br>"+
-    "<a href=variable.php?id=fsr_KPI_GHG_elec>fsr_KPI_GHG_elec</a> +<br>"+
-  "";
-  var fuel_formula = ""+
-    "<a href=variable.php?id=wsa_KPI_GHG_fuel>wsa_KPI_GHG_fuel</a>+<br>"+
-    "<a href=variable.php?id=wst_KPI_GHG_fuel>wst_KPI_GHG_fuel</a>+<br>"+
-    "<a href=variable.php?id=wsd_KPI_GHG_fuel>wsd_KPI_GHG_fuel</a>+<br>"+
-    "<a href=variable.php?id=wwc_KPI_GHG_fuel>wwc_KPI_GHG_fuel</a>+<br>"+
-    "<a href=variable.php?id=wwt_KPI_GHG_fuel>wwt_KPI_GHG_fuel</a>+<br>"+
-    "<a href=variable.php?id=wwd_KPI_GHG_fuel>wwd_KPI_GHG_fuel</a>+<br>"+
-    "<a href=variable.php?id=fst_KPI_GHG_fuel>fst_KPI_GHG_fuel</a>+<br>"+
-    "<a href=variable.php?id=fsr_KPI_GHG_fuel>fsr_KPI_GHG_fuel</a>"+
-  "";
-  var trck_formula = ""+
-    "<a href=variable.php?id=wsd_KPI_GHG_trck>wsd_KPI_GHG_trck</a>+<br>"+
-    "<a href=variable.php?id=wwd_KPI_GHG_trck>wwd_KPI_GHG_trck</a>+<br>"+
-    "<a href=variable.php?id=fsc_KPI_GHG_trck>fsc_KPI_GHG_trck</a>+<br>"+
-    "<a href=variable.php?id=fst_KPI_GHG_trck>fst_KPI_GHG_trck</a>+<br>"+
-    "<a href=variable.php?id=fsr_KPI_GHG_trck>fsr_KPI_GHG_trck</a>"+
-  "";
-  var ch4t_formula = ""+
-    "<a href=variable.php?id=wwt_KPI_GHG_tre_ch4>wwt_KPI_GHG_tre_ch4</a>+<br>"+
-    "<a href=variable.php?id=fst_KPI_GHG_tre_ch4>fst_KPI_GHG_tre_ch4</a>"+
-  "";
-  var n2ot_formula = ""+
-    "<a href=variable.php?id=wwt_KPI_GHG_tre_n2o>wwt_KPI_GHG_tre_n2o</a>+<br>"+
-    "<a href=variable.php?id=fst_KPI_GHG_tre_n2o>fst_KPI_GHG_tre_n2o</a>"+
-  "";
-  var biog_formula = ""+
-    "<a href=variable.php?id=wwt_KPI_GHG_biog>wwt_KPI_GHG_biog</a>+<br>"+
-    "<a href=variable.php?id=fst_KPI_GHG_biog>fst_KPI_GHG_biog</a>"+
-  "";
-  var slud_formula =""+
-    "<a href=variable.php?id=wwt_KPI_GHG_slu>        wwt_KPI_GHG_slu</a>+<br>"+
-    "<a href=variable.php?id=fsr_KPI_GHG_landapp>    fsr_KPI_GHG_landapp</a>+<br>"+
-    "<a href=variable.php?id=fsr_KPI_GHG_landfil_n2o>fsr_KPI_GHG_landfil_n2o</a>+<br>"+
-    "<a href=variable.php?id=fsr_KPI_GHG_dumping_n2o>fsr_KPI_GHG_dumping_n2o</a>+<br>"+
-    "<a href=variable.php?id=fsr_KPI_GHG_landfil_ch4>fsr_KPI_GHG_landfil_ch4</a>+<br>"+
-    "<a href=variable.php?id=fsr_KPI_GHG_dumping_ch4>fsr_KPI_GHG_dumping_ch4</a>+<br>"+
-  "";
-  var n2od_formula=""+
-    "<a href=variable.php?id=wwd_KPI_GHG_tre_n2o>wwd_KPI_GHG_tre_n2o</a>+<br>"+
-    "<a href=variable.php?id=fsr_KPI_GHG_tre_n2o>fsr_KPI_GHG_tre_n2o</a>"+
-  "";
-
   //create a table string
   if(withTable) {
     var table=""+
@@ -520,29 +417,21 @@ Graphs.ghgSources=function(withTable,container) {
     " table[title=ghgSources] td:nth-child(2){font-family:monospace}"+
     "</style>"+
     "<table title=ghgSources>"+
-      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('Code')+"<th>"+translate('graphs_value')+" (kg CO2eq)"+
-      "<tr><td align=left>"+names[0]+ "<td align=left>"+elecWS_formula+"<td align=right>"+format(elecWS)+
-      "<tr><td align=left>"+names[1]+ "<td align=left>"+elecWW_formula+"<td align=right>"+format(elecWW)+
-      "<tr><td align=left>"+names[2]+ "<td align=left>"+elecFS_formula+"<td align=right>"+format(elecFS)+
-      "<tr><td align=left>"+names[3]+ "<td align=left>"+fuel_formula+"<td align=right>"+format(fuel)+
-      "<tr><td align=left>"+names[4]+ "<td align=left>"+trck_formula+"<td align=right>"+format(trck)+
-      "<tr><td align=left>"+names[5]+ "<td align=left><a href=variable.php?id=ww_KPI_GHG_unt_ch4>ww_KPI_GHG_unt_ch4</a><td align=right>"+format(ch4u)+
-      "<tr><td align=left>"+names[6]+ "<td align=left><a href=variable.php?id=ww_KPI_GHG_unt_n2o>ww_KPI_GHG_unt_n2o</a><td align=right>"+format(n2ou)+
-      "<tr><td align=left>"+names[7]+ "<td align=left>"+ch4t_formula+"<td align=right>"+format(ch4t)+
-      "<tr><td align=left>"+names[8]+ "<td align=left>"+n2ot_formula+"<td align=right>"+format(n2ot)+
-      "<tr><td align=left>"+names[9]+ "<td align=left>"+biog_formula+"<td align=right>"+format(biog)+
-      "<tr><td align=left>"+names[10]+"<td align=left>"+slud_formula+"<td align=right>"+format(slud)+
-      "<tr><td align=left>"+names[11]+"<td align=left><a href=variable.php?id=wwt_KPI_GHG_dig_fuel>wwt_KPI_GHG_dig_fuel</a><td align=right>"+format(digf)+
-      "<tr><td align=left>"+names[12]+"<td align=left>"+n2od_formula+"<td align=right>"+format(n2od)+
-      "<tr><td align=left>"+names[13]+"<td align=left><a href=variable.php?id=fsc_KPI_GHG_cont>fsc_KPI_GHG_cont</a><td align=right>"+format(fsmc)+
-    "</table>"+
-    "";
+      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('Code')+"<th>"+translate('graphs_value')+" (kg CO2eq)";
+      Object.keys(emissions).forEach(key=>{
+        if(emissions[key].value)
+          table+="<tr><td align=left>"+emissions[key].name+
+            "<td align=left>"+emissions[key].formula+
+            "<td align=right>"+format(emissions[key].value)+
+          "";
+      });
+    table+="</table>";
     var div=document.createElement('div');
     div.style.fontSize="10px";
     div.innerHTML=table;
     document.getElementById(container).appendChild(div);
   }
-  scrollToItem(container)
+  //scrollToItem(container)
 }
 
 //GHG UNFCCC categories
@@ -625,7 +514,7 @@ Graphs.unfccc=function(withTable,container){
     div.innerHTML=table;
     document.getElementById(container).appendChild(div);
   }
-  scrollToItem(container)
+  //scrollToItem(container)
 }
 
 //GHG one stage only: (wsa|wst|wsd|wwc|wwt|wwd|fsc|fst|fsr)
@@ -739,7 +628,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
     div.innerHTML=table;
     document.getElementById(container).appendChild(div);
   }
-  scrollToItem(container)
+  //scrollToItem(container)
 }
 
 //GHG all stages (wsa+wst+wsd+wwc+wwt+wwd+fsc+fst+fsr)
@@ -862,7 +751,7 @@ Graphs.graph4=function(withTable,container) {
     div.style.fontSize="10px";
     div.innerHTML=table;
   }
-  scrollToItem(container)
+  //scrollToItem(container)
 }
 
 //NRG global
@@ -949,7 +838,7 @@ Graphs.graph2=function(withTable,container) {
     document.getElementById(container).appendChild(div);
     div.innerHTML=table;
   }
-  scrollToItem(container);
+  //scrollToItem(container);
 }
 
 //NRG by stage
@@ -1055,7 +944,7 @@ Graphs.graph5=function(withTable,container) {
     div.innerHTML=table;
     document.getElementById(container).appendChild(div);
   }
-  scrollToItem(container)
+  //scrollToItem(container)
 }
 
 //NRG by substage
@@ -1188,7 +1077,7 @@ Graphs.graph7=function(withTable,container) {
     div.innerHTML=table;
     document.getElementById(container).appendChild(div);
   }
-  scrollToItem(container)
+  //scrollToItem(container)
 }
 
 //Water flows picture

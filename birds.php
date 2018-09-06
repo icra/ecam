@@ -92,7 +92,7 @@
 
     //Display default values from the table
     BEV.updateDefaults=function(){
-      document.querySelectorAll('#inputs input').forEach(input=>{
+      document.querySelectorAll('#inputs input[id]:not([type=radio])').forEach(input=>{
         var field=input.id;
         if(field=='')return;
         //set the longer description in the input <td> element
@@ -117,9 +117,20 @@
         }
         select.value=getVariable(select.id);
       });
+      document.querySelectorAll('#inputs td.option select[id]').forEach(select=>{
+        if(select.childNodes.length==0){
+          Object.keys(Tables[select.id]).forEach(key=>{
+            var option=document.createElement('option');
+            select.appendChild(option);
+            option.innerHTML=translate(key);
+            option.value=Tables[select.id][key].value;
+          });
+        }
+        select.value=getVariable(select.id);
+      });
     }
 
-    //set the default values for filters (biogas)
+    //set the default values for filters (biogas) and options (flooding)
     BEV.defaultQuestions=function() {
       //WWT
         //valorizing biogas
@@ -168,6 +179,9 @@
         if(val && pro){
           input_val_y.checked=true; //you are valorizing biogas
         }
+      //fsc_flooding
+        var val=Global.Faecl.Containment.fsc_flooding;
+        document.querySelector('input[name=fsc_flooding][value="1"]').checked=val?true:false;
     }
 
     //backend update value of a filter
@@ -245,7 +259,7 @@
       background:#eee;
       padding:0 !important;
     }
-    #inputs input[id] {
+    #inputs input[id]:not([type=radio]) {
       background:inherit;
       border:none;
       text-align:right;
@@ -263,7 +277,10 @@
     /*indication "level not active"*/
     #inputs tr[indic]{text-align:center;color:#999;background:#eee}
 
-    #inputs td.option select[id]{display:block;}
+    #inputs select{
+      display:block;
+      font-size:smaller;
+    }
   </style>
 </head><body onload="init()"><center>
   <?php include'sidebar.php'?>
@@ -431,7 +448,9 @@
           <tr stage=faecl class=hidden><td><?php write('#fsc_cont_emp_descr')?><td class=input> <input id='fsc_cont_emp' value=0><td class=unit>
 
           <!--dropdowns-->
-          <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fsc_flooding_descr')?><select id='fsc_flooding'></select>
+          <tr stage=faecl class=hidden><td><?php write('#fsc_flooding_descr')?><td colspan=2>
+            <label><?php write('#no')?> <input name=fsc_flooding id=fsc_flooding onclick=BEV.updateField(this) type=radio value=0 checked></label>
+            <label><?php write('#yes')?><input name=fsc_flooding id=fsc_flooding onclick=BEV.updateField(this) type=radio value=1></label>
           <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fsc_type_tre_descr')?><select id='fsc_type_tre'></select>
           <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fst_type_tre_descr')?><select id='fst_type_tre'></select>
           <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fsr_type_tre_descr')?><select id='fsr_type_tre'></select>
@@ -439,19 +458,11 @@
 
           <!--fst biogas-->
           <tr stage=faecl class=hidden><td><?php write('#fst_producing_biogas')?>? <td class=question colspan=2>
-            <label><?php write('#no')?>
-              <input name=fst_producing_biogas type=radio value=0 checked>
-            </label>
-            <label><?php write('#yes')?>
-              <input name=fst_producing_biogas type=radio value=1>
-            </label>
+            <label><?php write('#no')?> <input name=fst_producing_biogas type=radio value=0 checked> </label>
+            <label><?php write('#yes')?><input name=fst_producing_biogas type=radio value=1> </label>
           <tr stage=faecl class=hidden><td><?php write('#fst_valorizing_biogas')?>?<td class=question colspan=2>
-            <label><?php write('#no')?>
-              <input name=fst_valorizing_biogas type=radio value=0 checked>
-            </label>
-            <label><?php write('#yes')?>
-              <input name=fst_valorizing_biogas type=radio value=1>
-            </label>
+            <label><?php write('#no')?> <input name=fst_valorizing_biogas type=radio value=0 checked></label>
+            <label><?php write('#yes')?><input name=fst_valorizing_biogas type=radio value=1></label>
           </tr>
           <script>
             (function(){

@@ -1,9 +1,24 @@
 {
+  "#below":"below",
+
+  "#Electricity WS":"Electricity WS",
+  "#Electricity WW":"Electricity WW",
+  "#Electricity FS":"Electricity FS",
+  "#Fuel engines":"Fuel engines",
+  "#Truck transport":"Truck transport",
+  "#Untreated WW":"Untreated WW",
+  "#Treatment process":"Treatment process",
+  "#Biogas":"Biogas",
+  "#Sludge disposal":"Sludge disposal",
+  "#Effluent discharge":"Effluent discharge",
+  "#Onsite sanitation":"Onsite sanitation",
+
   "#fs_vol_trck_descr": "Volume of fuel consumed (transport)",
   "#fs_vol_trck_expla": "Volume of fuel consumed (transport)",
   "#fsc_type_tre_descr":"Main containment type",
   "#fsr_type_tre_descr":"Main disposal type",
   "#fst_valorizing_biogas":"Are you valorizing biogas",
+
 
   "#Landfilling":"Landfilling",
   "#Land application":"Land application",
