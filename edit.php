@@ -707,18 +707,18 @@
               <?php write('#GHG emissions')?>
             <tr>
               <th><?php write('#Origin')?>
-              <th>kg CO<sub>2</sub><br><?php write('#assessment period')?>
+              <th>kg CO<sub>2</sub>eq<br><?php write('#assessment period')?>
 
               <?php
                 if($level=='Water'||$level=='Waste'){
                   ?>
-                    <th>kg CO<sub>2</sub><br>per <?php write('#year')?> <br>per <?php write('#serv.pop.')?>
-                    <th>kg CO<sub>2</sub><br>per m<sup>3</sup>
+                    <th>kg CO<sub>2</sub>eq<br>per <?php write('#year')?> <br>per <?php write('#serv.pop.')?>
+                    <th>kg CO<sub>2</sub>eq<br>per m<sup>3</sup>
                   <?php
                 }
                 if($level=='Faecl'){
                   ?>
-                    <th>kg CO<sub>2</sub><br>per <?php write('#year')?> <br>per <?php write('#serv.pop.')?>
+                    <th>kg CO<sub>2</sub>eq<br>per <?php write('#year')?> <br>per <?php write('#serv.pop.')?>
                   <?php
                 }
               ?>

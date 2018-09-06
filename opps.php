@@ -44,7 +44,7 @@
       },
 
       tbl_opps : {
-        "header" : { "title" : "Opportunities", "col1" : "kg CO<sub>2</sub>e reduction <br> per 1% change <br> of current value</th>"},
+        "header" : { "title" : "Opportunities", "col1" : "kg CO<sub>2</sub>eq reduction <br> per 1% change <br> of current value</th>"},
         "body" : [
           { "type" : "ws",
             "title" : "Water loss volume",
@@ -152,7 +152,7 @@
       },
 
       tbl_stage : {
-        "header" : { "title" : "Stage", "col1" : "Current Total GHG Emission (kg CO<sub>2</sub>e)"},
+        "header" : { "title" : "Stage", "col1" : "Current Total GHG Emission (kg CO<sub>2</sub>eq)"},
         "body" : [
           { "type" : "wsa", "title" : "Drinking Water Abstraction", "ghg_em" : function() { return Global.Water.Abstraction.wsa_KPI_GHG(); } },
           { "type" : "wst", "title" : "Drinking Water Treatment", "ghg_em" : function() { return Global.Water.Treatment.wst_KPI_GHG(); } },
@@ -170,8 +170,8 @@
         "header" : {
           "title" : "Measure",
           "col1" : "Desired Percent Change",
-          "col2" : "GHG Emission Reduction (kg CO<sub>2</sub>e)",
-          "col3" : "New Total System-Wide GHG Emission (kg CO<sub>2</sub>e)",
+          "col2" : "GHG Emission Reduction (kg CO<sub>2</sub>eq)",
+          "col3" : "New Total System-Wide GHG Emission (kg CO<sub>2</sub>eq)",
           "col4" : "Percent GHG Reduction"
         },
         "body" : [
@@ -329,7 +329,7 @@
 
             var ghg = tmpl.getElementById('opps-body-ghg');
             ghg.style.textAlign = 'right';
-            ghg.innerHTML = format(val.ghg_em()) + " kg CO<sub>2</sub>e" ;
+            ghg.innerHTML = format(val.ghg_em()) + " kg CO<sub>2</sub>eq" ;
             document.getElementById('opps-body').appendChild(tmpl);
           });
       }else {
@@ -469,7 +469,7 @@
   <p id=container_TotalGHG>
     System wide GHG emissions:
     <span id=TotalGHG>Loading...</span>
-    kg CO<sub>2</sub>e
+    kg CO<sub>2</sub>eq
   </p>
 
   <!--div for opps & stage (~30% width)-->

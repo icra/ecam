@@ -8,13 +8,13 @@ var Cts = {
   ct_ch4_eq:{
     value:34,
     descr:"Conversion for CH<sub>4</sub> emissions to CO<sub>2</sub> equivalent emissions",
-    unit:"kg CO<sub>2</sub> / kg CH<sub>4</sub>",
+    unit:"kg CO<sub>2</sub>eq / kg CH<sub>4</sub>",
   },
 
   ct_n2o_eq:{
     value:298,
     descr:"Conversion for N<sub>2</sub>O emissions to CO<sub>2</sub> equivalent emissions",
-    unit:"kg CO<sub>2</sub> / kg N<sub>2</sub>O",
+    unit:"kg CO<sub>2</sub>eq / kg N<sub>2</sub>O",
   },
 
   //constants for sludge management proposed by Girum

@@ -49,7 +49,7 @@ Graphs.graph1=function(withTable,container) {
   var options={
     height:250,
     legend:{position:'left'},
-    title:translate("ghg_emissions_by_system")+" ("+format(Global.General.TotalGHG())+" kg CO2e)",
+    title:translate("ghg_emissions_by_system")+" ("+format(Global.General.TotalGHG())+" kg CO2eq)",
     slices:{
       0:{color:'#00aff1'},
       1:{color:'#d71d24'},
@@ -96,7 +96,7 @@ Graphs.graph1=function(withTable,container) {
   if(withTable) {
     var table=""+
     "<table title=graph1>"+
-      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('Code')+"<th>"+translate('graphs_value')+" (kg CO2)"+
+      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('Code')+"<th>"+translate('graphs_value')+" (kg CO2eq)"+
       "<tr><td align=left>"+names[0]+"<td align=left><a href=variable.php?id=ws_KPI_GHG>ws_KPI_GHG</a><td align=right>"+format(ws)+
       "<tr><td align=left>"+names[1]+"<td align=left><a href=variable.php?id=ww_KPI_GHG>ww_KPI_GHG</a><td align=right>"+format(ww)+
       "<tr><td align=left>"+names[2]+"<td align=left><a href=variable.php?id=fs_KPI_GHG>fs_KPI_GHG</a><td align=right>"+format(fs)+
@@ -239,7 +239,7 @@ Graphs.ghg_by_source=function(withTable,container) {
   var options={
     height:250,
     legend:{position:'left'},
-    title:translate("ghg_emissions_by_source")+" ("+format(Global.General.TotalGHG())+" kg CO2e)",
+    title:translate("ghg_emissions_by_source")+" ("+format(Global.General.TotalGHG())+" kg CO2eq)",
   }
 
   //empty the container element
@@ -281,7 +281,7 @@ Graphs.ghg_by_source=function(withTable,container) {
   if(withTable) {
     var table=""+
     "<table title=ghg_by_source>"+
-      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_value')+" (kg CO2)"+
+      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_value')+" (kg CO2eq)"+
       "<tr><td align=left>Electricity   <td align=right>"+format(elec)+
       "<tr><td align=left>CO<sub>2</sub><td align=right>"+format(co2)+
       "<tr><td align=left>N<sub>2</sub>O<td align=right>"+format(n2o)+
@@ -412,7 +412,7 @@ Graphs.ghgSources=function(withTable,container) {
   var options={
     height:250,
     legend:{position:'left'},
-    title:translate('ghg_emissions_by_source_detailed')+" ("+format(Global.General.TotalGHG())+" kg CO2e)",
+    title:translate('ghg_emissions_by_source_detailed')+" ("+format(Global.General.TotalGHG())+" kg CO2eq)",
     slices:{
       /*
       0:{color:'#00aff1' },
@@ -520,7 +520,7 @@ Graphs.ghgSources=function(withTable,container) {
     " table[title=ghgSources] td:nth-child(2){font-family:monospace}"+
     "</style>"+
     "<table title=ghgSources>"+
-      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('Code')+"<th>"+translate('graphs_value')+" (kg CO2)"+
+      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('Code')+"<th>"+translate('graphs_value')+" (kg CO2eq)"+
       "<tr><td align=left>"+names[0]+ "<td align=left>"+elecWS_formula+"<td align=right>"+format(elecWS)+
       "<tr><td align=left>"+names[1]+ "<td align=left>"+elecWW_formula+"<td align=right>"+format(elecWW)+
       "<tr><td align=left>"+names[2]+ "<td align=left>"+elecFS_formula+"<td align=right>"+format(elecFS)+
@@ -568,7 +568,7 @@ Graphs.unfccc=function(withTable,container){
   var options={
     height:250,
     legend:{position:'left'},
-    title:translate('ghg_emissions_by_unfccc')+" ("+format(total_ghg)+" kg CO2e)",
+    title:translate('ghg_emissions_by_unfccc')+" ("+format(total_ghg)+" kg CO2eq)",
   }
 
   //empty the container element
@@ -611,7 +611,7 @@ Graphs.unfccc=function(withTable,container){
   if(withTable){
     var table=""+
     "<table title=unfccc>"+
-      "<tr><th>"+translate('Category')+"<th>"+translate('Code')+"<th>"+translate('Value')+" (kg CO2e)"+
+      "<tr><th>"+translate('Category')+"<th>"+translate('Code')+"<th>"+translate('Value')+" (kg CO2eq)"+
     "";
     for(var func in UNFCCC){
       table+="<tr><td align=left>"+translate(func)+"<td align=left><a href=variable.php?id="+func+">"+func+"</a><td align=right>"+format(UNFCCC[func]());
@@ -688,7 +688,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
   var options={
     height:250,
     legend:{position:'left'},
-    title:translate('ghg_emissions_by_l2')+" "+stageName+" ("+format(value)+" kg CO2e)",
+    title:translate('ghg_emissions_by_l2')+" "+stageName+" ("+format(value)+" kg CO2eq)",
   }
 
   //empty the container element
@@ -725,7 +725,7 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
   if(withTable) {
     var table=""+
     "<table title=ghg_by_stage>"+
-      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('Code')+"<th>"+translate('graphs_value')+" (kg CO2)";
+      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('Code')+"<th>"+translate('graphs_value')+" (kg CO2eq)";
 
     inputs.forEach(input=>{
       table+="<tr><td align=left>"+translate(input+"_descr")+"<td align=left><a href=variable.php?id="+input+">"+input+"</a><td align=right>"+format(getValue(input))
@@ -795,7 +795,7 @@ Graphs.graph4=function(withTable,container) {
   var options={
     height:250,
     legend:{position:'left'},
-    title:translate('ghg_emissions_by_stage')+" ("+format(sum)+" kg CO2e)",
+    title:translate('ghg_emissions_by_stage')+" ("+format(sum)+" kg CO2eq)",
     slices:{
       /*
         0:{color:ColorsGHG.ws_KPI_GHG_elec      },
@@ -843,7 +843,7 @@ Graphs.graph4=function(withTable,container) {
   if(withTable) {
     var table=""+
     "<table title=graph4>"+
-      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kg CO2)"+
+      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kg CO2eq)"+
       "<tr><td>"+names[0] +"<td><a href=variable.php?id=wsa_KPI_GHG>wsa_KPI_GHG</a> <td align=right>"+format(slice_1)+
       "<tr><td>"+names[1] +"<td><a href=variable.php?id=wst_KPI_GHG>wst_KPI_GHG</a> <td align=right>"+format(slice_2)+
       "<tr><td>"+names[2] +"<td><a href=variable.php?id=wsd_KPI_GHG>wsd_KPI_GHG</a> <td align=right>"+format(slice_3)+

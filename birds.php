@@ -292,7 +292,7 @@
   <!--conv_co2_kwh-->
   <div>
     <a href=variable.php?id=conv_kwh_co2><?php write('#conversion_factor')?></a>:
-    <span id=conv_kwh_co2></span> kg CO<sub>2</sub>/kWh
+    <span id=conv_kwh_co2></span> kg CO<sub>2</sub>eq/kWh
     <script>
       (function(){
         var val=Global.General.conv_kwh_co2;
