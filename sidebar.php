@@ -160,10 +160,10 @@
 			<tr><td><a class=waste stage=wasteTre href=edit.php?level=Waste&sublevel=Treatment>  &emsp; <?php write('#Treatment')?></a>
 			<tr><td><a class=waste stage=wasteDis href=edit.php?level=Waste&sublevel=Discharge>  &emsp; <?php write('#Discharge')?></a>
       <!--faecl-->
-      <tr><td><a class=faecl stage=faecl    href=edit.php?level=Faecl> Faecal Sludge Management</a>
-      <tr><td><a class=faecl stage=faeclCon href=edit.php?level=Faecl&sublevel=Containment> &emsp; Containment</a>
-      <tr><td><a class=faecl stage=faeclTre href=edit.php?level=Faecl&sublevel=Treatment>   &emsp; Treatment</a>
-      <tr><td><a class=faecl stage=faeclReu href=edit.php?level=Faecl&sublevel=Reuse>       &emsp; Reuse</a>
+      <tr><td><a class=faecl stage=faecl    href=edit.php?level=Faecl><?php write('#Faecl')?></a>
+      <tr><td><a class=faecl stage=faeclCon href=edit.php?level=Faecl&sublevel=Containment> &emsp; <?php write('#Containment')?></a>
+      <tr><td><a class=faecl stage=faeclTre href=edit.php?level=Faecl&sublevel=Treatment>   &emsp; <?php write('#Treatment')?></a>
+      <tr><td><a class=faecl stage=faeclReu href=edit.php?level=Faecl&sublevel=Reuse>       &emsp; <?php write('#Reuse')?></a>
 
 			<tr><th><?php write('#summaries')?>
 			<tr><td><a href=sources.php><?php write('#ghg_summary')?></a>
