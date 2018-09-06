@@ -402,7 +402,7 @@
       //console.timeEnd('drawcharts');
     }
 
-    //function for "View Graphs" buttons
+    //show and hide divs with "View Graphs" buttons
     function toggleDivs(event,btn,id1,id2) {
       event.stopPropagation();
       var div1=document.querySelector(id1);
@@ -575,10 +575,14 @@
       <button></button>
       <b>Inputs &amp; Outputs</b>
 
-      <!--button toggle outputs/graph display-->
+      <!--button VIEW GRPHS show graphs-->
       <button
         class=btn_toggle
-        onclick="event.stopPropagation();this.parentNode.parentNode.classList.remove('folded');toggleDivs(event,this,'#graph_container','#outputs_container')"
+        onclick="
+          event.stopPropagation();
+          this.parentNode.parentNode.classList.remove('folded');
+          toggleDivs(event,this,'#graph_container','#outputs_container');
+        "
       >
       <?php write('#VIEW GRAPH')?>
       </button>

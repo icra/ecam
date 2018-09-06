@@ -520,7 +520,7 @@ Graphs.unfccc=function(withTable,container){
   //scrollToItem(container)
 }
 
-//GHG one stage only: (wsa|wst|wsd|wwc|wwt|wwd|fsc|fst|fsr)
+//GHG one stage only: by emission (wsa|wst|wsd|wwc|wwt|wwd|fsc|fst|fsr)
 Graphs.ghg_by_stage=function(withTable,container,prefix) {
   withTable=withTable||false;
   container=container||"graph";
@@ -621,6 +621,104 @@ Graphs.ghg_by_stage=function(withTable,container,prefix) {
 
     inputs.forEach(input=>{
       table+="<tr><td align=left>"+translate(input+"_descr")+"<td align=left><a href=variable.php?id="+input+">"+input+"</a><td align=right>"+format(getValue(input))
+    });
+
+    table+="</table>"+
+    "";
+
+    var div=document.createElement('div');
+    div.style.fontSize="10px";
+    div.innerHTML=table;
+    document.getElementById(container).appendChild(div);
+  }
+  //scrollToItem(container)
+}
+
+//GHG one stage only: by substage (wsa|wst|wsd|wwc|wwt|wwd|fsc|fst|fsr)
+Graphs.ghg_by_substage=function(withTable,container,prefix) {
+  withTable=withTable||false;
+  container=container||"graph";
+  prefix=prefix||"wsa";         //first 3 letters [wsa,wst,wsd,wwc,wwt,wwd]
+
+  //check if prefix is correct
+  if(-1==['wsa','wst','wsd','wwc','wwt','wwd','fsc','fst','fsr'].indexOf(prefix)) {
+    document.getElementById(container).innerHTML="NA";
+    return; //if prefix is not in this list, stop
+  }
+
+  //code of emissions: ***_KPI_GHG
+  var code=prefix+'_KPI_GHG';
+
+  //data
+  var DATA=[ ['variable','emission'], ];
+
+  var TotalGHG=0;
+
+  //"substages" variable is defined in 'edit.php'
+  substages.forEach(substage=>{
+    var emission=substage[code]();
+    TotalGHG+=emission;
+    DATA.push( [substage.name, emission] );
+  });
+  //array graph data
+  var data=google.visualization.arrayToDataTable(DATA);
+
+  //get stage name
+  var stageName={
+    "wsa":translate("Abstraction"),
+    "wst":translate("Treatment"),
+    "wsd":translate("Distribution"),
+    "wwc":translate("Collection"),
+    "wwt":translate("Treatment"),
+    "wwd":translate("Discharge"),
+    "fsc":translate("Containment"),
+    "fst":translate("Treatment"),
+    "fsr":translate("Reuse"),
+  }[prefix];
+
+  //options
+  var options={
+    height:250,
+    legend:{position:'left'},
+    title:translate('ghg_emissions_by_l2')+" "+stageName+" ("+format(TotalGHG)+" kg CO2eq)",
+  }
+
+  //empty the container element
+  var con=document.getElementById(container);
+  con.setAttribute('current_graph','ghg_by_stage');
+  con.innerHTML='';
+
+  //double click
+  con.ondblclick=function(){
+    var a=document.createElement('a');
+    document.body.appendChild(a);
+    a.href=chart.getImageURI()
+    a.download="image.png"
+    a.click()
+  };
+
+  /*draw*/var chart=new google.visualization.PieChart(con);chart.draw(data,options);
+
+  (function(){
+    var buttons=document.createElement('div');
+    buttons.classList.add('tab_buttons');
+    document.getElementById(container).appendChild(buttons);
+    var checked=withTable ? "checked" : "";
+    buttons.innerHTML=""+
+      "<label>"+
+      "<input type=checkbox "+checked+" onclick=Graphs.ghg_by_substage("+(!withTable).toString()+",'"+container+"','"+prefix+"')>"+translate('table')+
+      "</label>"+
+    "";
+  })();
+
+  //create a table string
+  if(withTable) {
+    var table=""+
+    "<table title=ghg_by_stage>"+
+      "<tr><th>"+translate('substage')+"<th>"+translate('graphs_value')+" (kg CO2eq)";
+
+    substages.forEach(substage=>{
+      table+="<tr><td align=left>"+substage.name+"<td align=left>"+format(substage[code]())
     });
 
     table+="</table>"+
@@ -1011,7 +1109,6 @@ Graphs.graph7=function(withTable,container) {
   var TotalNRG=0;
   for(var s in stages) {
     TotalNRG+=stages[s].map(substage=>substage[names[s]]).reduce((p,c)=>p+c,0);
-    console.log(TotalNRG);
   }
 
   var data=google.visualization.arrayToDataTable(DATA);
