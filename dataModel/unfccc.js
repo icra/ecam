@@ -54,7 +54,8 @@ var UNFCCC = {
            Global.Faecl.Treatment.fst_KPI_GHG_tre()+
            Global.Waste.Discharge.wwd_KPI_GHG_tre_n2o()+
            Global.Faecl.Reuse.fsr_KPI_GHG_tre_n2o()+
-           Global.Faecl.Reuse.fsr_KPI_GHG_urine();
+           Global.Faecl.Reuse.fsr_KPI_GHG_urine()+
+           Global.Faecl.Containment.fsc_KPI_GHG_cont();
 	},
 }
 
