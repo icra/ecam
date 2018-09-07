@@ -544,6 +544,7 @@ var Questions={
   //fsc
     "fsc_transport":{
       variables:[
+        "fsc_nrg_cons",
         "fsc_trck_typ",
         "fsc_vol_trck",
         "fsc_KPI_GHG_trck_co2",
