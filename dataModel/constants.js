@@ -87,7 +87,7 @@ var Cts = {
   ct_n2o_co:{
     value:44/28,
     descr:"Conversion factor N<sub>2</sub>O-N to N<sub>2</sub> (=44/28)",
-    unit:"kg N<sub>2</sub> / kg N<sub>2</sub>O-N",
+    unit:"kg N<sub>2</sub>O / kg N<sub>2</sub>O-N",
   },
 
   ct_ch4_ef:{
