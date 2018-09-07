@@ -132,7 +132,7 @@
   "#fsr_ghg_avoided_reuse_P_descr":"GHG emissions avoided due to Phosphorus reuse",
   "#fsr_ghg_avoided_reuse_descr":"GHG emissions avoided due to nutrient reused displacing synthetic fertilizer use",
 
-  "#fsr_KPI_GHG_descr": "Total emissions in Reuse",
+  "#fsr_KPI_GHG_descr": "Total emissions in Reuse/Disposal",
   "#fsr_KPI_GHG_dumping_ch4_descr":"Dumping (CH4)",
   "#fsr_KPI_GHG_dumping_descr":"Dumping",
   "#fsr_KPI_GHG_dumping_n2o_descr":"Dumping (N2O)",
