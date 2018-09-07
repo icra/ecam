@@ -255,7 +255,6 @@
       </script>
     </b>
   </h4>
-  <h4><?php write("#move_the_mouse")?></h4>
 </center>
 
 <!--'title like' div detailed sources-->
@@ -278,7 +277,7 @@
 </div>
 
 <!--content-->
-<div style="width:66%;margin:auto">
+<div>
   <!--tab buttons-->
   <div class=tab_buttons id=ghg_summary_tabs>
     <button class=left onclick="tabs_show_tables()" disabled>
@@ -306,7 +305,7 @@
   </div>
 
   <!--tables: left tab-->
-  <div id=tables>
+  <div id=tables style=width:66%;margin:auto>
     <!--sources of ghg-->
     <div>
       <div>
@@ -544,14 +543,16 @@
   </div>
 
   <!--graph 1: right tab-->
-  <div id=graphs_container style=display:none>
+  <div id=graphs_container class=flex style=display:none;margin:auto>
     <div id=graph_1><?php write('#Loading')?>...</div>
-    <div style="border-top:1px solid #ccc"></div>
     <div id=graph_2><?php write('#Loading')?>...</div>
   </div>
   <style>
     #graphs_container table {
       margin:auto;
+    }
+    #graphs_container > div {
+      width:50%;
     }
   </style>
 </div>

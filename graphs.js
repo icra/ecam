@@ -859,7 +859,7 @@ Graphs.graph4=function(withTable,container) {
   //scrollToItem(container)
 }
 
-//GHG by every l2 stage (wsa+wst+wsd+wwc+wwt+wwd+fsc+fst+fsr)
+//GHG by l1 stage (choose l1_alias and see all l2 emissions inside)
 Graphs.ghg_emissions_by_l1=function(withTable,container,l1_alias) {
   withTable=withTable||false;
   container=container||"graph";
@@ -867,8 +867,21 @@ Graphs.ghg_emissions_by_l1=function(withTable,container,l1_alias) {
   //use Structure from "js/structure.js"
   var structure=Structure.filter(stage=>{return stage.level==l1_alias && stage.sublevel});
   structure.forEach(stage=>{
-    stage.emission=Global[stage.level][stage.sublevel][stage.prefix+"_KPI_GHG"]();
+    var code=stage.prefix+"_KPI_GHG";
+    stage.code=code;
+    stage.emission=Global[stage.level][stage.sublevel][code]();
   })
+
+  //EXCEPTION: add untreated wastewater (ww_KPI_GHG_unt) as a pseudo-stage
+  if(l1_alias=='Waste'){
+    structure.push({
+      level:'Waste',
+      code:'ww_KPI_GHG_unt',
+      sublevel:'ww_KPI_GHG_unt_descr',
+      emission:Global.Waste.ww_KPI_GHG_unt(),
+    });
+  }
+
   var total=structure.map(s=>s.emission).reduce((p,c)=>p+c,0);//kgCO2eq
 
   //actual graph data
@@ -880,9 +893,8 @@ Graphs.ghg_emissions_by_l1=function(withTable,container,l1_alias) {
   var options={
     height:250,
     legend:{position:'left'},
-    title:translate('ghg_emissions_by_l1')+" ("+format(total)+" kg CO2eq)",
-    slices:{
-    },
+    title:translate('ghg_emissions_by_l1')+" "+translate(l1_alias)+" ("+format(total)+" kg CO2eq)",
+    slices:{},
   };
 
   //empty the container
@@ -905,7 +917,7 @@ Graphs.ghg_emissions_by_l1=function(withTable,container,l1_alias) {
   (function(){
     var buttons=document.createElement('div');
     buttons.classList.add('tab_buttons');
-    document.getElementById(container).appendChild(buttons);
+    con.appendChild(buttons);
     var checked=withTable ? "checked" : "";
     buttons.innerHTML=""+
       "<label><input type=checkbox "+checked+" onclick=Graphs.ghg_emissions_by_l1("+(!withTable).toString()+",'"+container+"','"+l1_alias+"')>"+translate('table')+
@@ -915,6 +927,12 @@ Graphs.ghg_emissions_by_l1=function(withTable,container,l1_alias) {
       "<button class=middle "+(l1_alias=='Waste'?'disabled':'')+" onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Waste')>"+translate('Waste')+"</button>"+
       "<button class=right  "+(l1_alias=='Faecl'?'disabled':'')+" onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Faecl')>"+translate('Faecl')+"</button>"+
     "";
+    if(l1_alias=='Faecl'){
+      con.innerHTML+="<div style=text-align:center>"+
+        "<button onclick=Graphs.ghg_fsm_with_transport_separate("+withTable.toString()+",'"+container+"')>Transport separate</button>"+
+        "<div style=height:8px></div>"+ //dirty margin
+      "</div>";
+    }
   })();
 
   //create a table (string)
@@ -923,9 +941,92 @@ Graphs.ghg_emissions_by_l1=function(withTable,container,l1_alias) {
     "<table title=graph4>"+
       "<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kg CO2eq)";
     structure.forEach(stage=>{
-      var code=stage.prefix+"_KPI_GHG";
-      table+="<tr><td>"+translate(stage.sublevel)+"<td><a href=variable.php?id="+code+">"+code+"</a><td align=right>"+format(stage.emission);
+      table+="<tr><td>"+translate(stage.sublevel)+"<td><a href=variable.php?id="+stage.code+">"+stage.code+"</a><td align=right>"+format(stage.emission);
     });
+
+    table+="</table>";
+    //extra options
+    var div=document.createElement('div');
+    document.getElementById(container).appendChild(div);
+    div.style.fontSize="10px";
+    div.innerHTML=table;
+  }
+}
+
+//FSM emissions separating transport
+Graphs.ghg_fsm_with_transport_separate=function(withTable,container){
+  withTable=withTable||false;
+  container=container||"graph";
+
+  //shorten pointers to save typing
+  var fsc=Global.Faecl.Containment;
+  var fst=Global.Faecl.Treatment;
+  var fsr=Global.Faecl.Reuse;
+
+  //data
+  var structure=[
+    {sublevel:"Containment", emission:function(){return fsc.fsc_KPI_GHG()-fsc.fsc_KPI_GHG_trck()-fsc.fsc_KPI_GHG_elec()}, },
+    {sublevel:"Treatment",   emission:function(){return fst.fst_KPI_GHG()-fst.fst_KPI_GHG_trck()}, },
+    {sublevel:"Reuse",       emission:function(){return fsr.fsr_KPI_GHG()-fsr.fsr_KPI_GHG_trck()}, },
+    {sublevel:"Emptying and Transport", emission:function(){return fsc.fsc_KPI_GHG_trck()+fsc.fsc_KPI_GHG_elec()+fst.fst_KPI_GHG_trck()+fsr.fsr_KPI_GHG_trck()}, },
+  ];
+  var total=structure.map(s=>s.emission()).reduce((p,c)=>p+c,0);//kgCO2eq
+
+  //fill graph data
+  var DATA=[ ['Stage','Emissions'], ];
+  structure.forEach(stage=>{DATA.push([translate(stage.sublevel),stage.emission()]);});
+  var data=google.visualization.arrayToDataTable(DATA);
+
+  //options
+  var options={
+    height:250,
+    legend:{position:'left'},
+    title:translate('ghg_fsm_with_transport_separate')+" ("+format(total)+" kg CO2eq)",
+    slices:{},
+  };
+  //empty the container
+  var con = document.getElementById(container);
+  con.setAttribute('current_graph','ghg_fsm_with_transport_separate');
+  con.innerHTML='';
+  //double click
+  con.ondblclick=function(){
+    var a=document.createElement('a');
+    document.body.appendChild(a);
+    a.href=chart.getImageURI();
+    a.download="image.png";
+    a.click();
+  };
+  //draw
+  var chart=new google.visualization.PieChart(con);chart.draw(data,options);
+
+  //bottom buttons
+  (function(){
+    var buttons=document.createElement('div');
+    buttons.classList.add('tab_buttons');
+    con.appendChild(buttons);
+    var checked=withTable ? "checked" : "";
+    buttons.innerHTML=""+
+      "<label><input type=checkbox "+checked+" onclick=Graphs.ghg_fsm_with_transport_separate("+(!withTable).toString()+",'"+container+"')>"+translate('table')+
+      "</label>&emsp;"+
+      "<button class=left   onclick=Graphs.graph4("+withTable.toString()+",'"+container+"')>"+translate('All stages')+"</button>"+
+      "<button class=middle onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Water')>"+translate('Water')+"</button>"+
+      "<button class=middle onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Waste')>"+translate('Waste')+"</button>"+
+      "<button class=right  disabled onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Faecl')>"+translate('Faecl')+"</button>"+
+    "";
+    con.innerHTML+="<div style=text-align:center>"+
+      "<button onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Faecl')>Transport integrated</button>"+
+    "</div>";
+  })();
+
+  //create a table (string)
+  if(withTable) {
+    var table=""+
+    "<table title=ghg_fsm_with_transport_separate style=margin-top:5px>"+
+      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_value')+" (kg CO2eq)";
+      structure.forEach(stage=>{
+        table+="<tr><td>"+translate(stage.sublevel)+
+          "<td align=right>"+format(stage.emission());
+      });
 
     table+="</table>";
     //extra options

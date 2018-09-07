@@ -255,7 +255,6 @@
     var Expanded=Global.Configuration.Expanded;
     function toggleStageVisibility(stage) {
       var btn=document.querySelector('#inputs span[expanded][stage='+stage+']');
-      console.log(btn);
       if(!btn)return;
 
       var currentState=Expanded[stage];
@@ -283,7 +282,6 @@
 
   <style>
     body{background:#F5ECCE}
-
 
     h1{
       background:white;
@@ -319,7 +317,7 @@
       height:24px;
       display:block;
     }
-    #inputs input:focus {
+    #inputs input[id]:not([type=radio]):focus {
       background:white;
     }
     #inputs tr.hidden {display:none}
@@ -687,7 +685,6 @@
                 .filter(key=>{return typeof(stage[key])=='number'})
                 .filter(key=>{return TierA.indexOf(key)==-1})
                 .forEach(key=>{
-                  //console.log(key);
                   stage[key]=0;
               });
             });
@@ -862,7 +859,6 @@
       Object.keys(Substages[level]).forEach(sublevel=>{
         //count substages
         var n=Substages[level][sublevel].length;
-        //console.log("Substages",level,sublevel,n);
         var sum=getVariable(input.id);
         if(n && sum>0){
           td.classList.add('locked');
@@ -874,7 +870,7 @@
   })();
 </script>
 <style>
-  #inputs td.output.locked { background:#fff; }
+  #inputs td.output.locked {background:#fff; }
   #inputs td.output.locked + td:before { content:"\1f512"; }
   #inputs td.output.locked input { cursor:default; }
 </style>

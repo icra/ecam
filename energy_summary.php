@@ -150,6 +150,8 @@
   &mdash;
   <?php write('#Energy consumption Summary (Overview)')?>
 </h1>
+
+<!--assessment period-->
 <h4>
   <?php write('#assessment_period')?>:
   <b>
@@ -163,7 +165,7 @@
 </h4>
 
 <!--content-->
-<div style=width:66%;>
+<div>
   <!--tab buttons-->
   <div class=tab_buttons id=tabs>
     <button class=left onclick="tabs_show_tables()" disabled> <?php write('#Tables')?> </button>
@@ -186,7 +188,7 @@
   </div>
 
   <!--tables: left tab-->
-  <div id=tables>
+  <div id=tables style=width:66%>
     <div>
       <table id=sources>
         <tr><td colspan=5 style=text-align:center>
@@ -302,14 +304,16 @@
   </div>
 
   <!--graph: right tab-->
-  <div id=graph style=display:none><?php write('#Loading')?>...</div>
+  <div class=flex style=justify-content:center>
+    <div id=graph style=display:none><?php write('#Loading')?>...</div>
+  </div>
 </div>
 
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
 <script>google.charts.load('current',{'packages':['corechart','gauge','bar']});</script>
 
 <!--caption div for substages energy consumption -->
-<div id=container_detailed style=display:nnone>
+<div id=container_detailed style=display:none>
   <div><b id=detailed_title></b></div>
   <table id=detailed></table>
   <style>

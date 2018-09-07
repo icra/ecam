@@ -1,5 +1,11 @@
 {
   "#below":"below",
+
+  "#ghg_fsm_with_transport_separate":"GHG emissions in FSM (transport separated)",
+  "#Emptying and Transport":"Emptying and Transport",
+
+  "#Substages energy consumption":"Substages energy consumption",
+  "#ghg_emissions_by_l1":"GHG emissions in",
   "#GHG by type":"GHG by type",
   "#GHG by substage":"GHG by substage",
 
@@ -21,7 +27,6 @@
   "#fsr_type_tre_descr":"Main disposal type",
   "#fst_valorizing_biogas":"Are you valorizing biogas",
 
-
   "#Landfilling":"Landfilling",
   "#Land application":"Land application",
   "#Dumping":"Dumping",
@@ -39,7 +44,6 @@
   "#fsr_vol_fuel_expla":"Volume of fuel consumed",
   "#fsr_fuel_typ_descr":"Fuel type (Engines)",
   "#fsr_fuel_typ_expla":"Fuel type (Engines)",
-
   "#fsc_fdensity_descr":"FS density",
   "#fsc_fdensity_expla":"FS density",
   "#fsc_bod_conc_fs_descr": "BOD concentration of FS",
@@ -205,7 +209,6 @@
   "#fst_vol_fuel_descr":"Volume of fuel consumed",
   "#fst_vol_fuel_expla":"Volume of fuel consumed",
 
-
   "#fsc_KPI_GHG_cont_descr": "From CH4",
   "#fsc_KPI_GHG_cont_expla": "GHG emissions from CH4 in FSM Containment",
   "#fsc_KPI_GHG_descr":      "Total GHG in FSM Containment",
@@ -352,14 +355,14 @@
 
   "#ww_KPI_GHG_unt_ch4_descr":"CH<sub>4</sub> from untreated wastewater",
   "#ww_KPI_GHG_unt_ch4_expla":"CH<sub>4</sub> from untreated wastewater",
-  "#ww_KPI_GHG_unt_descr":"From untreated wastewater",
+  "#ww_KPI_GHG_unt_descr":"Untreated wastewater",
   "#ww_KPI_GHG_unt_expla":"GHG emissions in CO<sub>2</sub> eq from untreated wastewater",
   "#ww_KPI_GHG_unt_n2o_descr":"N<sub>2</sub>O from untreated wastewater",
   "#ww_KPI_GHG_unt_n2o_expla":"N<sub>2</sub>O from untreated wastewater",
   "#ww_SL_ghg_unc_ch4_descr":"CH<sub>4</sub> from uncollected wastewater",
   "#ww_SL_ghg_unc_ch4_expla":"CH<sub>4</sub> from uncollected wastewater. 0.3 is kgCH<sub>4</sub>/kgBOD",
-  "#ww_SL_ghg_unc_descr":"CO<sub>2</sub> eq from uncollected wastewater",
-  "#ww_SL_ghg_unc_expla":"CO<sub>2</sub> eq from uncollected wastewater",
+  "#ww_SL_ghg_unc_descr":"Uncollected wastewater",
+  "#ww_SL_ghg_unc_expla":"GHG emissions from uncollected wastewater",
   "#ww_SL_ghg_unc_n2o_descr":"N<sub>2</sub>O from uncollected wastewater",
   "#ww_SL_ghg_unc_n2o_expla":"N<sub>2</sub>O from uncollected wastewater",
   "#ww_untr_pop_descr":"Population whose wastewater is collected but not treated",
