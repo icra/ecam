@@ -732,7 +732,7 @@ Graphs.ghg_by_substage=function(withTable,container,prefix) {
   //scrollToItem(container)
 }
 
-//GHG all stages (wsa+wst+wsd+wwc+wwt+wwd+fsc+fst+fsr)
+//GHG by every l2 stage (wsa+wst+wsd+wwc+wwt+wwd+fsc+fst+fsr)
 Graphs.graph4=function(withTable,container) {
   withTable=withTable||false;
   container=container||"graph";
@@ -814,8 +814,7 @@ Graphs.graph4=function(withTable,container) {
   }
 
   //draw
-  var chart=new google.visualization.PieChart(con);
-  chart.draw(data,options);
+  var chart=new google.visualization.PieChart(con);chart.draw(data,options);
 
   (function(){
     var buttons=document.createElement('div');
@@ -826,6 +825,11 @@ Graphs.graph4=function(withTable,container) {
       "<label>"+
       "<input type=checkbox "+checked+" onclick=Graphs.graph4("+(!withTable).toString()+",'"+container+"')>"+translate('table')+
       "</label>"+
+      "&emsp;"+
+      "<button class=left   onclick=Graphs.graph4("+withTable.toString()+",'"+container+"') disabled>"+translate('All stages')+"</button>"+
+      "<button class=middle onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Water')>"+translate('Water')+"</button>"+
+      "<button class=middle onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Waste')>"+translate('Waste')+"</button>"+
+      "<button class=right  onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Faecl')>"+translate('Faecl')+"</button>"+
     "";
   })();
 
@@ -853,6 +857,83 @@ Graphs.graph4=function(withTable,container) {
     div.innerHTML=table;
   }
   //scrollToItem(container)
+}
+
+//GHG by every l2 stage (wsa+wst+wsd+wwc+wwt+wwd+fsc+fst+fsr)
+Graphs.ghg_emissions_by_l1=function(withTable,container,l1_alias) {
+  withTable=withTable||false;
+  container=container||"graph";
+
+  //use Structure from "js/structure.js"
+  var structure=Structure.filter(stage=>{return stage.level==l1_alias && stage.sublevel});
+  structure.forEach(stage=>{
+    stage.emission=Global[stage.level][stage.sublevel][stage.prefix+"_KPI_GHG"]();
+  })
+  var total=structure.map(s=>s.emission).reduce((p,c)=>p+c,0);//kgCO2eq
+
+  //actual graph data
+  var DATA=[ ['Stage','Emissions'], ];
+  structure.forEach(stage=>{DATA.push([translate(stage.sublevel),stage.emission]);});
+  var data=google.visualization.arrayToDataTable(DATA);
+
+  //options
+  var options={
+    height:250,
+    legend:{position:'left'},
+    title:translate('ghg_emissions_by_l1')+" ("+format(total)+" kg CO2eq)",
+    slices:{
+    },
+  };
+
+  //empty the container
+  var con = document.getElementById(container);
+  con.setAttribute('current_graph','ghg_emissions_by_l1');
+  con.innerHTML='';
+
+  //double click
+  con.ondblclick=function(){
+    var a=document.createElement('a');
+    document.body.appendChild(a);
+    a.href=chart.getImageURI();
+    a.download="image.png";
+    a.click();
+  }
+
+  //draw
+  var chart=new google.visualization.PieChart(con);chart.draw(data,options);
+
+  (function(){
+    var buttons=document.createElement('div');
+    buttons.classList.add('tab_buttons');
+    document.getElementById(container).appendChild(buttons);
+    var checked=withTable ? "checked" : "";
+    buttons.innerHTML=""+
+      "<label><input type=checkbox "+checked+" onclick=Graphs.ghg_emissions_by_l1("+(!withTable).toString()+",'"+container+"','"+l1_alias+"')>"+translate('table')+
+      "</label>&emsp;"+
+      "<button class=left   onclick=Graphs.graph4("+withTable.toString()+",'"+container+"')>"+translate('All stages')+"</button>"+
+      "<button class=middle "+(l1_alias=='Water'?'disabled':'')+" onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Water')>"+translate('Water')+"</button>"+
+      "<button class=middle "+(l1_alias=='Waste'?'disabled':'')+" onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Waste')>"+translate('Waste')+"</button>"+
+      "<button class=right  "+(l1_alias=='Faecl'?'disabled':'')+" onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Faecl')>"+translate('Faecl')+"</button>"+
+    "";
+  })();
+
+  //create a table (string)
+  if(withTable) {
+    var table=""+
+    "<table title=graph4>"+
+      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_formula')+"<th>"+translate('graphs_value')+" (kg CO2eq)";
+    structure.forEach(stage=>{
+      var code=stage.prefix+"_KPI_GHG";
+      table+="<tr><td>"+translate(stage.sublevel)+"<td><a href=variable.php?id="+code+">"+code+"</a><td align=right>"+format(stage.emission);
+    });
+
+    table+="</table>";
+    //extra options
+    var div=document.createElement('div');
+    document.getElementById(container).appendChild(div);
+    div.style.fontSize="10px";
+    div.innerHTML=table;
+  }
 }
 
 //NRG global
@@ -1021,7 +1102,7 @@ Graphs.graph5=function(withTable,container) {
       "</label>"+
       "&emsp;"+
       "<button class=left onclick=Graphs.graph5("+withTable.toString()+",'"+container+"') disabled>"+translate('stage')+"</button>"+
-      "<button class=right  onclick=Graphs.graph7("+withTable.toString()+",'"+container+"')>"+translate('substage')+"</button>"+
+      "<button class=right onclick=Graphs.graph7("+withTable.toString()+",'"+container+"')>"+translate('substage')+"</button>"+
     "";
   })();
 

@@ -518,7 +518,6 @@
               //fsc_ch4_efac estimation
               Global.Faecl.Containment.fsc_ch4_efac=Tables.fsc_type_tre[type_tre][Global.Faecl.Containment.fsc_flooding?'ch4_efac_flooding':'ch4_efac'];
               Global.Configuration.Selected.fsc_ch4_efac = type_tre;
-              console.log(Global.Faecl.Containment.fsc_ch4_efac);
               //fsc_fdensity estimation
               Global.Faecl.Containment.fsc_fdensity=Tables.fsc_type_tre[type_tre].fs_density;
               Global.Configuration.Selected.fsc_fdensity = type_tre;
