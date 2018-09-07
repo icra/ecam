@@ -80,11 +80,8 @@ Level3.list=[
 
 	"ww_SL_ghg_unc_ch4",
 	"ww_SL_ghg_unc_n2o",
-  "ww_SL_ghg_ons_ch4",
-  "ww_SL_ghg_ons_n2o",
 
 	//"ww_SL_ghg_unc",
-  //"ww_SL_ghg_ons",
   "ww_KPI_GHG_unt_n2o",
   "ww_KPI_GHG_unt_ch4",
 

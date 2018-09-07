@@ -482,16 +482,10 @@
             <a href=variable.php?id=ww_SL_ghg_unc><?php write("#ww_SL_ghg_unc_descr")?></a>
           <td field=ww_SL_ghg_unc></td>
         </tr>
-        <tr>
-          <td>
-            <a href=variable.php?id=ww_SL_ghg_ons><?php write("#ww_SL_ghg_ons_descr")?></a>
-          <td field=ww_SL_ghg_ons></td>
-        </tr>
       </table>
       <b><small><?php write('#Note: the emissions above have not been added in the totals presented in the GHG emissions summary')?></small></b>
       <script>
         document.querySelector('td[field=ww_SL_ghg_unc]').innerHTML=format(Global.Waste.ww_SL_ghg_unc());
-        document.querySelector('td[field=ww_SL_ghg_ons]').innerHTML=format(Global.Waste.ww_SL_ghg_unc());
       </script>
       <style>
         table#outside td[field] {text-align:right}

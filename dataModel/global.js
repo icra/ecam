@@ -315,10 +315,6 @@ var Global = {
       ww_SL_ghg_unc_ch4:function(){return this.ww_uncl_pop()*Global.General.bod_pday/1000*Global.General.Days()*0.3*Cts.ct_ch4_eq.value;},
       ww_SL_ghg_unc_n2o:function(){return this.ww_uncl_pop()*Global.General.prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;},
       ww_SL_ghg_unc:    function(){return this.ww_SL_ghg_unc_ch4()+this.ww_SL_ghg_unc_n2o();},
-    //onsite treatment emissions (outside assessment)
-      ww_SL_ghg_ons_ch4:function(){return Global.Faecl.fs_onsi_pop*Global.General.bod_pday/1000*Global.General.Days()*0.3*Cts.ct_ch4_eq.value},
-      ww_SL_ghg_ons_n2o:function(){return Global.Faecl.fs_onsi_pop*Global.General.prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;},
-      ww_SL_ghg_ons:    function(){return this.ww_SL_ghg_ons_ch4()+this.ww_SL_ghg_ons_n2o();},
 
     "Collection":{
       //no filter
