@@ -121,7 +121,7 @@ var Tables = {
 
   //fsc
     "fsc_type_tre":{
-      "Select":{ value:0, ch4_efac:0, ch4_efac_flooding:0, BOD_conc_FS:0, fs_density:0},
+      "Select":{ value:0, ch4_efac:0, ch4_efac_flooding:0, BOD_conc_FS:0, fs_density:1400},
       "Pit latrine without flush water – household":{ value:1, ch4_efac:0.06, ch4_efac_flooding:0.42, BOD_conc_FS:67.8, fs_density:1400},
       "Pit latrine without flush water (lined or unlined) – communal":{ value:2, ch4_efac:0.3, ch4_efac_flooding:0.42, BOD_conc_FS:67.8, fs_density:1400},
       "Pit latrine with flush water use (lined or unlined)":{ value:3, ch4_efac:0.42, ch4_efac_flooding:0.42, BOD_conc_FS:67.8, fs_density:1400},
