@@ -525,12 +525,13 @@ var Global = {
       wwt_slu_landfill_ch4:function(){//<br>
         var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
         if(sludge_type=="Non-digested"){//<br>
-          return this.wwt_mass_slu_land*Cts.ct_oc_vs.value*Cts.ct_vs_slu.value*0.9*Cts.ct_ch4_oc.value*0.5*0.8*0.69*Cts.ct_ch4_eq.value;//<br>
+          var vs_content=Cts.ct_vs_slu.value;//<br>
         }else if(sludge_type=="Digested"){//<br>
-          return this.wwt_mass_slu_land*Cts.ct_oc_vs.value*Cts.ct_vs_dig.value*0.9*Cts.ct_ch4_oc.value*0.5*0.8*Cts.ct_vs_slu.value*Cts.ct_ch4_eq.value;//<br>
+          var vs_content=Cts.ct_vs_dig.value;//<br>
         }else{//<br>
           return 0;//<br>
-        }
+        }//<br><br>
+        return this.wwt_mass_slu_land*Cts.ct_oc_vs.value*vs_content*0.9*Cts.ct_ch4_oc.value*0.5*0.8*0.69*Cts.ct_ch4_eq.value;//<br>
       },
       wwt_slu_landfill_n2o:function(){//<br>
         var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
