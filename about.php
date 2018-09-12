@@ -38,7 +38,7 @@
     2015-<?php echo date("Y")?> <a href='license.txt'><?php write('#about_license')?></a>.
   </p>
 
-	<h3 style=padding-left:0>Special acknowledgements</h3>
+  <h3 style=padding-left:0>Special acknowledgements</h3>
 
   <p>
     ECAM tool is the result of a collaborative effort. WaCCliM project team thanks
@@ -55,23 +55,23 @@
   </p>
 
   <!--<img class="license_img" src="img/cc_icon_white_x2.png" alt="">
-	<img class="license_img" src="img/attribution_icon_white_x2.png" alt="">
-	<img class="license_img" src="img/sa_white_x2.png" alt=""> -->
-	<img class="license_img license_img-big" src="img/CC_license_big.png" alt="">
-	<br><br>
-	ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under
-	a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work
-	at <a target="_blank" href="https://creativecommons.org/choose/www.wacclim.org">www.wacclim.org</a>. Permissions beyond the scope of this license may be available
-	at <a target="_blank" href="https://creativecommons.org/choose/info@wacclim.org">info@wacclim.org</a>.
+  <img class="license_img" src="img/attribution_icon_white_x2.png" alt="">
+  <img class="license_img" src="img/sa_white_x2.png" alt=""> -->
+  <img class="license_img license_img-big" src="img/CC_license_big.png" alt="">
+  <br><br>
+  ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under
+  a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work
+  at <a target="_blank" href="https://creativecommons.org/choose/www.wacclim.org">www.wacclim.org</a>. Permissions beyond the scope of this license may be available
+  at <a target="_blank" href="https://creativecommons.org/choose/info@wacclim.org">info@wacclim.org</a>.
 </div>
 
 </div>
 <div class="footer_wrap">
-	<!--FOOTER--><?php include'footer.php'?>
+  <!--FOOTER--><?php include'footer.php'?>
 </div>
 
 <!--logos--> 
 <div style=background:white;text-align:center;margin-top:50px;> 
-	<img src=img/logos_about.png >
+  <img src=img/logos.png>
 </div>
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
