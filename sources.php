@@ -470,7 +470,7 @@
     <div>
       <table id=outside style="width:95%;margin:1.5em 0">
         <tr>
-          <th rowspan=2 style=background:purple>
+          <th style=background:purple>
             <?php write("#GHG emissions")?>
             <br>
             <?php write("#outside utility boundaries")?>
@@ -544,7 +544,7 @@
 
   <!--graph 1: right tab-->
   <div id=graphs_container class=flex style=display:none;margin:auto>
-    <div id=graph_1><?php write('#Loading')?>...</div>
+    <div id=graph_1 style="border-right:1px solid #ccc;box-sizing:border-box"><?php write('#Loading')?>...</div>
     <div id=graph_2><?php write('#Loading')?>...</div>
   </div>
   <style>

@@ -914,6 +914,7 @@ Graphs.ghg_emissions_by_l1=function(withTable,container,l1_alias) {
   //draw
   var chart=new google.visualization.PieChart(con);chart.draw(data,options);
 
+  //nav buttons
   (function(){
     var buttons=document.createElement('div');
     buttons.classList.add('tab_buttons');
@@ -933,6 +934,12 @@ Graphs.ghg_emissions_by_l1=function(withTable,container,l1_alias) {
         "<div style=height:8px></div>"+ //dirty margin
       "</div>";
     }
+    if(l1_alias=='Waste'){
+      con.innerHTML+="<div style=text-align:center>"+
+        "<button onclick=Graphs.ghg_ww_with_uncollected("+withTable.toString()+",'"+container+"')>With uncollected wastewater</button>"+
+        "<div style=height:8px></div>"+ //dirty margin
+      "</div>";
+    }
   })();
 
   //create a table (string)
@@ -944,6 +951,91 @@ Graphs.ghg_emissions_by_l1=function(withTable,container,l1_alias) {
       table+="<tr><td>"+translate(stage.sublevel)+"<td><a href=variable.php?id="+stage.code+">"+stage.code+"</a><td align=right>"+format(stage.emission);
     });
 
+    table+="</table>";
+    //extra options
+    var div=document.createElement('div');
+    document.getElementById(container).appendChild(div);
+    div.style.fontSize="10px";
+    div.innerHTML=table;
+  }
+}
+
+//WW emissions separating uncollected
+Graphs.ghg_ww_with_uncollected=function(withTable,container){
+  withTable=withTable||false;
+  container=container||"graph";
+
+  //shorten pointers to save typing
+  var ww =Global.Waste;
+  var wwc=ww.Collection;
+  var wwt=ww.Treatment;
+  var wwd=ww.Discharge;
+
+  //data
+  var structure=[
+    {sublevel:"Collection",           emission:function(){return wwc.wwc_KPI_GHG()}   },
+    {sublevel:"Treatment",            emission:function(){return wwt.wwt_KPI_GHG()}   },
+    {sublevel:"Discharge",            emission:function(){return wwd.wwd_KPI_GHG()}   },
+    {sublevel:"ww_KPI_GHG_unt_descr", emission:function(){return ww.ww_KPI_GHG_unt()} },
+    {sublevel:"ww_SL_ghg_unc_descr",  emission:function(){return ww.ww_SL_ghg_unc()}  },
+  ];
+  var total=structure.map(s=>s.emission()).reduce((p,c)=>p+c,0);//kgCO2eq
+
+  //fill graph data
+  var DATA=[ ['Stage','Emissions'], ];
+  structure.forEach(stage=>{DATA.push([translate(stage.sublevel),stage.emission()]);});
+  var data=google.visualization.arrayToDataTable(DATA);
+
+  //options
+  var options={
+    height:250,
+    legend:{position:'left'},
+    title:translate('ghg_ww_with_uncollected')+" ("+format(total)+" kg CO2eq)",
+    slices:{},
+  };
+  //empty the container
+  var con = document.getElementById(container);
+  con.setAttribute('current_graph','ghg_ww_with_uncollected');
+  con.innerHTML='';
+  //double click
+  con.ondblclick=function(){
+    var a=document.createElement('a');
+    document.body.appendChild(a);
+    a.href=chart.getImageURI();
+    a.download="image.png";
+    a.click();
+  };
+  //draw
+  var chart=new google.visualization.PieChart(con);chart.draw(data,options);
+
+  //bottom buttons
+  (function(){
+    var buttons=document.createElement('div');
+    buttons.classList.add('tab_buttons');
+    con.appendChild(buttons);
+    var checked=withTable ? "checked" : "";
+    buttons.innerHTML=""+
+      "<label><input type=checkbox "+checked+" onclick=Graphs.ghg_ww_with_uncollected("+(!withTable).toString()+",'"+container+"')>"+translate('table')+
+      "</label>&emsp;"+
+      "<button class=left   onclick=Graphs.graph4("+withTable.toString()+",'"+container+"')>"+translate('All stages')+"</button>"+
+      "<button class=middle onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Water')>"+translate('Water')+"</button>"+
+      "<button class=middle disabled onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Waste')>"+translate('Waste')+"</button>"+
+      "<button class=right  onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Faecl')>"+translate('Faecl')+"</button>"+
+    "";
+    con.innerHTML+="<div style=text-align:center>"+
+      "<button onclick=Graphs.ghg_emissions_by_l1("+withTable.toString()+",'"+container+"','Waste')>Without uncollected wastewater</button>"+
+    "</div>";
+  })();
+
+  //create a table (string)
+  if(withTable) {
+    var table=""+
+    "<table title=ghg_ww_with_uncollected style=margin-top:5px>"+
+      "<tr><th>"+translate('graphs_slice')+"<th>"+translate('graphs_value')+" (kg CO2eq)";
+      structure.forEach(stage=>{
+        table+="<tr><td>"+translate(stage.sublevel)+
+          "<td align=right>"+format(stage.emission());
+      });
     table+="</table>";
     //extra options
     var div=document.createElement('div');
