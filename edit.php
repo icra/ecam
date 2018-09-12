@@ -783,6 +783,48 @@
       </script>
     <?php }
   ?>
+
+  <!--previous and next buttons-->
+  <?php
+    if($sublevel){?>
+      <div style=text-align:center>
+           <button class="button prev" onclick="nextPage(event,1)"><?php write('#previous')?></button><!--
+        --><button class="button next" onclick="nextPage(event,0)"><?php write('#next')?></button>
+        <script>
+          //find first available stage to start entering data
+          function nextPage(event,reverse){
+            reverse=reverse||false;
+            if(event)event.stopPropagation();
+
+            //find next stages
+            var locs=[];
+            Structure.filter(stage=>{
+              return stage.sublevel && Global.Configuration.ActiveStages[stage.alias];
+            }).forEach(stage=>{
+              locs.push("edit.php?level="+stage.level+"&sublevel="+stage.sublevel);
+            });
+
+            //reverse for previous button
+            if(reverse)locs=locs.reverse();
+
+            //cut the array by this stage
+            locs=locs.slice(1+locs.indexOf("edit.php?level=<?php echo $level?>&sublevel=<?php echo $sublevel?>"));
+
+            //console.log(locs);
+            if(locs.length){ 
+              window.location=locs[0];
+            }else{
+              if(reverse){
+                window.location="birds.php";
+              }else{
+                window.location="sources.php";
+              }
+            }
+          }
+        </script>
+      </div>
+    <?php }
+  ?>
 </div>
 <div style=margin-top:5em></div>
 </html>

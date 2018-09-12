@@ -532,8 +532,6 @@
             newCell.innerHTML=(function(){
               var name=translate(field+'_descr').replace(/^GHG emissions avoided due to /,'');
               name=name[0].toUpperCase()+name.substring(1); //ucfirst
-              console.log(name);
-
               if(field.search("fs")==0){name+=" (FSM)"}
               var rv= "<a href='variable.php?id="+field+"'>"+name+"</a>";
               return rv;
