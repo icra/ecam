@@ -517,6 +517,8 @@
           var t=document.querySelector('table#avoided');
           var GHG_avoided=[
             'wwt_SL_GHG_avoided',
+            'fst_SL_GHG_avoided',
+            'fsr_ghg_avoided_land',
             'wwt_wr_C_seq_slu',
             'wwd_wr_GHG_avo_d',
             'wwd_SL_ghg_non',
@@ -528,8 +530,11 @@
             var newRow=t.insertRow(-1);
             var newCell=newRow.insertCell(-1);
             newCell.innerHTML=(function(){
-              var name=translate(field+'_descr').replace(/^GHG emissions avoided/,'');
-              if(field.search("fsr")==0){name+=" (FSM)"}
+              var name=translate(field+'_descr').replace(/^GHG emissions avoided due to /,'');
+              name=name[0].toUpperCase()+name.substring(1); //ucfirst
+              console.log(name);
+
+              if(field.search("fs")==0){name+=" (FSM)"}
               var rv= "<a href='variable.php?id="+field+"'>"+name+"</a>";
               return rv;
             })();

@@ -295,7 +295,10 @@ var Global = {
       this.Discharge.wwd_wr_GHG_avo_d()+          //<br>
       this.Discharge.wwd_SL_ghg_non()+            //<br>
       this.Discharge.wwd_wr_GHG_avo()+            //<br>
-      Global.Faecl.Reuse.fsr_ghg_avoided_reuse();
+      Global.Faecl.Treatment.fst_SL_GHG_avoided()+ //<br>
+      Global.Faecl.Reuse.fsr_ghg_avoided_reuse()+ //<br>
+      Global.Faecl.Reuse.fsr_ghg_avoided_land()+ //<br>
+      0;
     },
 
     //energy costs related
@@ -853,6 +856,12 @@ var Global = {
           return (this.fst_biog_pro-this.fst_biog_val-this.fst_biog_fla+this.fst_biog_fla*Cts.ct_ch4_lo.value/100)*this.fst_ch4_biog/100*Cts.ct_ch4_m3.value*Cts.ct_ch4_eq.value;
         },
 
+      //biogas valorization
+      "fst_nrg_biog":0,
+      fst_SL_GHG_avoided:function(){
+        return this.fst_nrg_biog*Global.General.conv_kwh_co2;
+      },
+
       //treatment ch4+n2o emissions
         "fst_bod_infl":0,
         "fst_bod_effl":0,
@@ -878,6 +887,7 @@ var Global = {
     Reuse:{
       "fsr_type_tre":0, //main type of disposal
       "fsr_fslu_typ":0, //main type of faecal sludge
+
       //elec emissions
         "fsr_nrg_cons":0,
         fsr_KPI_GHG_elec:function(){return this.fsr_nrg_cons*Global.General.conv_kwh_co2},
@@ -1010,6 +1020,11 @@ var Global = {
         fsr_KPI_GHG:function(){//<br>
           return this.fsr_KPI_GHG_elec()+this.fsr_KPI_GHG_fuel()+this.fsr_KPI_GHG_trck()+this.fsr_KPI_GHG_landapp()+this.fsr_KPI_GHG_landfil()+this.fsr_KPI_GHG_dumping()+this.fsr_KPI_GHG_tre_n2o()+this.fsr_KPI_GHG_urine();
         },
+
+      //ghg avoided for ghg summary only
+      fsr_ghg_avoided_land:function(){
+        return this.fsr_ghg_avoided_landapp()+this.fsr_ghg_avoided_landfil();
+      }
     },
   },
 

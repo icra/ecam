@@ -8,6 +8,11 @@
 
 var Info = {
 
+  fsr_ghg_avoided_land: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>eq"},
+
+  fst_nrg_biog:       {magnitude:"Energy", unit:"kWh"},
+  fst_SL_GHG_avoided: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>eq"},
+
   fsr_type_tre:   {magnitude:"Option", unit:"Disposal type"},
   fs_vol_trck:    {magnitude:"Volume", unit:"L"},
 

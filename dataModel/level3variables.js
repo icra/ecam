@@ -92,7 +92,6 @@ Level3.list=[
   "wwc_SL_inf_emis",
 
 	//wwt
-  "wwt_SL_GHG_avoided",
 	"wwt_KPI_GHG_fuel_co2",
 	"wwt_KPI_GHG_fuel_n2o",
 	"wwt_KPI_GHG_fuel_ch4",
@@ -103,7 +102,6 @@ Level3.list=[
 	"wwt_KPI_GHG_dig_fuel_ch4",
 	"wwt_KPI_nrg_per_pump",
 	"wwt_KPI_std_nrg_cons",
-	"wwt_KPI_nrg_biogas",
 	"wwt_KPI_nrg_x_biog",
 	"wwt_KPI_capac_util",
 	"wwt_SL_qual_com",
@@ -137,9 +135,7 @@ Level3.list=[
 	//wwd
   "wwd_wr_GHG_avo_N", //water reuse
   "wwd_wr_GHG_avo_P", //water reuse
-  "wwd_wr_GHG_avo",   //water reuse
   "wwd_wr_nrg_sav",   //water reuse
-  "wwd_wr_GHG_avo_d", //water reuse
 	"wwd_KPI_GHG_fuel_co2",
 	"wwd_KPI_GHG_fuel_n2o",
 	"wwd_KPI_GHG_fuel_ch4",

@@ -715,7 +715,7 @@
   <div class=menu onclick=fold(this.parentNode)>
     <button></button>
     <b><?php write('#Advanced Assessment: Substages')?></b>
-    <b>(<span id=counter class=number>0</span>)</b>
+    <b>(<span id=counter>0</span>)</b>
     &mdash;
     <a href=substages.php><?php write('#Overview')?></a>
 

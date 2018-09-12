@@ -589,6 +589,8 @@ var Questions={
         "fst_biog_fla",
         "fst_ch4_biog",
         "fst_KPI_GHG_biog",
+        "fst_nrg_biog",
+        "fst_SL_GHG_avoided",
       ],
       advanced:0,
       otherQuestions:[
