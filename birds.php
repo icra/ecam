@@ -605,22 +605,18 @@
           if(event)event.stopPropagation();
           //go to first active substage
           var location;
-          if(Global.Configuration.ActiveStages.waterAbs)
-            location = "edit.php?level=Water&sublevel=Abstraction";
-          else if(Global.Configuration.ActiveStages.waterTre)
-            location = "edit.php?level=Water&sublevel=Treatment";
-          else if(Global.Configuration.ActiveStages.waterDis)
-            location = "edit.php?level=Water&sublevel=Distribution";
-          else if(Global.Configuration.ActiveStages.wasteCol)
-            location = "edit.php?level=Waste&sublevel=Collection";
-          else if(Global.Configuration.ActiveStages.wasteTre)
-            location = "edit.php?level=Waste&sublevel=Treatment";
-          else if(Global.Configuration.ActiveStages.wasteDis)
-            location = "edit.php?level=Waste&sublevel=Discharge";
-          else if(Global.Configuration.ActiveStages.water)
-            location = "edit.php?level=Water";
-          else if(Global.Configuration.ActiveStages.waste)
-            location = "edit.php?level=Waste";
+          if(Global.Configuration.ActiveStages.waterAbs)      location = "edit.php?level=Water&sublevel=Abstraction";
+          else if(Global.Configuration.ActiveStages.waterTre) location = "edit.php?level=Water&sublevel=Treatment";
+          else if(Global.Configuration.ActiveStages.waterDis) location = "edit.php?level=Water&sublevel=Distribution";
+          else if(Global.Configuration.ActiveStages.wasteCol) location = "edit.php?level=Waste&sublevel=Collection";
+          else if(Global.Configuration.ActiveStages.wasteTre) location = "edit.php?level=Waste&sublevel=Treatment";
+          else if(Global.Configuration.ActiveStages.wasteDis) location = "edit.php?level=Waste&sublevel=Discharge";
+          else if(Global.Configuration.ActiveStages.faeclCon) location = "edit.php?level=Faecl&sublevel=Containment";
+          else if(Global.Configuration.ActiveStages.faeclTre) location = "edit.php?level=Faecl&sublevel=Treatment";
+          else if(Global.Configuration.ActiveStages.faeclReu) location = "edit.php?level=Faecl&sublevel=Reuse";
+          else if(Global.Configuration.ActiveStages.water) location = "edit.php?level=Water";
+          else if(Global.Configuration.ActiveStages.waste) location = "edit.php?level=Waste";
+          else if(Global.Configuration.ActiveStages.faecl) location = "edit.php?level=Faecl";
           else {
             alert("<?php write('#configuration_active_stages_error')?>");
             return;
