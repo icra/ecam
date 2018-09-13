@@ -333,7 +333,7 @@ var Questions={
         "wwt_KPI_GHG_dig_fuel",
         "wwt_KPI_GHG_biog",
       ],
-      advanced:1,
+      advanced:0,
       otherQuestions:[
         "wwt_valorizing_biogas",
       ],
@@ -348,7 +348,7 @@ var Questions={
         "wwt_KPI_nrg_x_biog",
         "wwt_SL_GHG_avoided",
       ],
-      advanced:1,
+      advanced:0,
       otherQuestions:[],
     },
 
@@ -386,7 +386,7 @@ var Questions={
 				"wwt_KPI_GHG_slu",
         "wwt_wr_C_seq_slu",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[
 				"wwt_slu_storage",
 				"wwt_composting",
@@ -406,7 +406,7 @@ var Questions={
 				"wwt_slu_storage_ch4",
 				"wwt_KPI_ghg_sto_co2eq",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[],
 		},
 
@@ -418,7 +418,7 @@ var Questions={
 				"wwt_KPI_ghg_comp_co2eq",
         "wwt_slu_comp_C_seq",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[
 			],
 		},
@@ -431,7 +431,7 @@ var Questions={
 				"wwt_slu_inciner_n2o",
 				"wwt_KPI_ghg_inc_co2eq",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[
 			],
 		},
@@ -444,7 +444,7 @@ var Questions={
 				"wwt_KPI_ghg_app_co2eq",
         "wwt_slu_app_C_seq",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[
 			],
 		},
@@ -458,7 +458,7 @@ var Questions={
 				"wwt_KPI_ghg_land_co2eq",
         "wwt_slu_land_C_seq",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[
 			],
 		},
@@ -468,7 +468,7 @@ var Questions={
 				"wwt_mass_slu_stock",
 				"wwt_KPI_ghg_stock_co2eq",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[
 			],
 		},
@@ -482,7 +482,7 @@ var Questions={
 				"wwt_KPI_ghg_tsludge_ch4",
         "wwt_KPI_ghg_tsludge",
 			],
-			advanced:1,
+			advanced:0,
 			otherQuestions:[],
 		},
 

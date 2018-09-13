@@ -62,7 +62,7 @@ var Tables = {
 
 	//wwt
     "wwt_type_tre":{
-      "Select":{value:0, ch4_efac:0, bod_rmvd_as_sludge_estm:0},
+      "Select treatment type":{value:0, ch4_efac:0, bod_rmvd_as_sludge_estm:0},
       "Activated Sludge - Well managed":{value:1,               ch4_efac:0,     bod_rmvd_as_sludge_estm:0.65},
       "Activated Sludge - Minor poorly aerated zones":{value:2, ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
       "Activated Sludge - Some aerated zones":{value:3,         ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.65},
@@ -164,14 +164,14 @@ var Tables = {
       "Landfilling":{                   value:1, },
       "Land application":{              value:2, },
       "Dumping":{                       value:3, },
-      "Septic tank sludge":{            value:4, },
     },
     "fsr_fslu_typ":{ //faecal sludge type for land application and landfilling
-      "Untreated":{         value:0, N_content:0.10, TVS:0.650, dry_weight:0.10}, //provisional numbers TODO
-      "Treated":{           value:1, N_content:0.10, TVS:0.344, dry_weight:0.20}, //provisional numbers TODO
-      "Pit humus":{         value:2, N_content:0.10, TVS:0.100, dry_weight:0.30}, //provisional numbers TODO
-      "Dehydrated faeces":{ value:3, N_content:0.10, TVS:0.100, dry_weight:0.40}, //provisional numbers TODO
-      "Compost":{           value:4, N_content:0.10, TVS:0.100, dry_weight:0.50}, //provisional numbers TODO
+      "Untreated":{          value:0, N_content:0.10, TVS:0.650, dry_weight:0.10}, //provisional numbers TODO
+      "Treated":{            value:1, N_content:0.11, TVS:0.344, dry_weight:0.20}, //provisional numbers TODO
+      "Pit humus":{          value:2, N_content:0.12, TVS:0.110, dry_weight:0.30}, //provisional numbers TODO
+      "Dehydrated faeces":{  value:3, N_content:0.13, TVS:0.120, dry_weight:0.40}, //provisional numbers TODO
+      "Compost":{            value:4, N_content:0.14, TVS:0.130, dry_weight:0.50}, //provisional numbers TODO
+      "Septic tank sludge":{ value:5, N_content:0.15, TVS:0.140, dry_weight:0.60}, //provisional numbers TODO
     },
 
     "fsr_soil_typ":{

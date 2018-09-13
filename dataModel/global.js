@@ -1040,7 +1040,9 @@ var Global = {
     hl:0,
 
     //remember if question 'x' is expanded or not (in edit.php)
-    Expanded:{},
+    Expanded:{
+      'water':1, 'waste':1, 'faecl':1, //l1 for birds.php
+    },
 
     //custom unit selections for variables are stored here
     Units:{},
@@ -1053,6 +1055,7 @@ var Global = {
 
       //for exceptions (string with the treatment selected)
       wwt_ch4_efac:"",
+      wwt_bod_slud:"",
       fsc_bod_conc_fs:"",
       fsc_ch4_efac:"",
       fsc_fdensity:"",
@@ -1064,6 +1067,7 @@ var Global = {
 
     //answers for filters (see "questions.js")
     "Yes/No": {
+      "wwt_valorizing_biogas":0, //this one is an exception
       "fst_valorizing_biogas":0, //this one is an exception
     },
   },

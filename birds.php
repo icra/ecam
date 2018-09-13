@@ -2,9 +2,99 @@
   <?php include'imports.php'?>
   <script>
     function init(){
-      BEV.populateSelects();  //for inputs magnitude Option
-      BEV.updateDefaults();   //update input values
-      BEV.defaultQuestions(); //update question values
+      //populate options for Options and Questions
+      (function(){
+        //1. populate inputs magnitude==Option
+        document.querySelectorAll('#inputs td.option select[id]').forEach(select=>{
+          if(select.childNodes.length==0){
+            Object.keys(Tables[select.id]).forEach(key=>{
+              var option=document.createElement('option');
+              select.appendChild(option);
+              option.innerHTML=translate(key);
+              option.value=Tables[select.id][key].value;
+            });
+          }
+          select.value=getVariable(select.id);
+        });
+        document.querySelectorAll('#inputs td.option select[id]').forEach(select=>{
+          if(select.childNodes.length==0){
+            Object.keys(Tables[select.id]).forEach(key=>{
+              var option=document.createElement('option');
+              select.appendChild(option);
+              option.innerHTML=translate(key);
+              option.value=Tables[select.id][key].value;
+            });
+          }
+          select.value=getVariable(select.id);
+        });
+      })();
+
+      //Display current values in the DOM
+      (function(){
+        document.querySelectorAll('#inputs input[id]:not([type=radio])').forEach(input=>{
+          var field=input.id;
+          if(field=='')return;
+          //set the longer description in the input <td> element
+          input.parentNode.parentNode.childNodes[0].title=translate(field+'_expla');
+          //get the value stored
+          var value=getVariable(field)/Units.multiplier(field);
+          input.value=format(value);
+        });
+      })();
+
+      //set the GUI values for filters (biogas) and options (flooding)
+      (function() {
+        //WWT
+          //valorizing biogas
+          var val=Global.Configuration["Yes/No"].wwt_valorizing_biogas;
+          //producing biogas
+          var pro=Global.Configuration["Yes/No"].wwt_producing_biogas;
+          //gui elements
+          var input_pro_y=document.querySelector('input[name=wwt_producing_biogas][value="1"]');
+          var input_pro_n=document.querySelector('input[name=wwt_producing_biogas][value="0"]');
+          var input_val_y=document.querySelector('input[name=wwt_valorizing_biogas][value="1"]');
+          var input_val_n=document.querySelector('input[name=wwt_valorizing_biogas][value="0"]');
+          if(pro){
+            input_pro_y.checked=true;   //you are producing biogas
+            input_val_y.disabled=false; //enable val
+            input_val_n.disabled=false; //enable val
+          }else{
+            input_pro_n.checked=true;   //you are not producing biogas
+            input_val_n.checked=true;   //you are not valorizing biogas
+            input_val_y.disabled=true;  //disable valorizing
+            input_val_n.disabled=true;  //disable valorizing
+            Global.Configuration["Yes/No"].wwt_valorizing_biogas=0;
+          }
+          if(val && pro){
+            input_val_y.checked=true; //you are valorizing biogas
+          }
+        //FST
+          //valorizing biogas
+          var val=Global.Configuration["Yes/No"].fst_valorizing_biogas;
+          //producing biogas
+          var pro=Global.Configuration["Yes/No"].fst_producing_biogas;
+          //gui elements
+          var input_pro_y=document.querySelector('input[name=fst_producing_biogas][value="1"]');
+          var input_pro_n=document.querySelector('input[name=fst_producing_biogas][value="0"]');
+          var input_val_y=document.querySelector('input[name=fst_valorizing_biogas][value="1"]');
+          var input_val_n=document.querySelector('input[name=fst_valorizing_biogas][value="0"]');
+          if(pro){
+            input_pro_y.checked=true;   //you are producing biogas
+            input_val_y.disabled=false; //enable val
+            input_val_n.disabled=false; //enable val
+          }else{
+            input_pro_n.checked=true;  //you are not producing biogas
+            input_val_n.checked=true;  //you are not valorizing biogas
+            input_val_y.disabled=true; //disable valorizing
+            input_val_n.disabled=true; //disable valorizing
+          }
+          if(val && pro){
+            input_val_y.checked=true; //you are valorizing biogas
+          }
+        //fsc_flooding
+          var val=Global.Faecl.Containment.fsc_flooding;
+          document.querySelector('input[name=fsc_flooding][value="1"]').checked=val?true:false;
+      })();
 
       //update default treatment type and sludge disposal method
       document.querySelector('#sludge_estimation').value=Global.Configuration.Selected.sludge_estimation_method;
@@ -62,135 +152,35 @@
   <!--BEV namespace (birds eye view old name)-->
   <script>
     var BEV={}; //'Birds Eye View' namespace
-    //update input values fx
-    BEV.update=function(obj,field,newValue) {
-      if(obj[field]===undefined){alert('field '+field+' undefined');return;}
-      //newValue may be a string from input.value, it should be a float
-      newValue=parseFloat(newValue);
-      obj[field]=newValue;
-    }
 
-    //update a value
+    //backend update a variable
     BEV.updateField=function(input){
       //get info from the input element
       var field = input.id;
       //replace commmas for copy paste easyness
       var value = parseFloat(input.value);
-      value*=Units.multiplier(field);
       //if value is not a number, set to zero
       if(isNaN(value))value=0;
+      //multiplier
+      value*=Units.multiplier(field);
       //get location
       var loc=locateVariable(field);
       //update
       if(loc.sublevel){
-        this.update(Global[loc.level][loc.sublevel],field,value);
+        Global[loc.level][loc.sublevel][field]=value;
       }else{
-        this.update(Global[loc.level],field,value);
+        Global[loc.level][field]=value;
       }
       init();
     }
 
-    //Display default values from the table
-    BEV.updateDefaults=function(){
-      document.querySelectorAll('#inputs input[id]:not([type=radio])').forEach(input=>{
-        var field=input.id;
-        if(field=='')return;
-        //set the longer description in the input <td> element
-        input.parentNode.parentNode.childNodes[0].title=translate(field+'_expla');
-        //get the value stored
-        var value=getVariable(field)/Units.multiplier(field);
-        input.value=format(value);
-      });
-    }
-
-    //populate options for Options and Questions
-    BEV.populateSelects=function(){
-      //1. populate inputs magnitude==Option
-      document.querySelectorAll('#inputs td.option select[id]').forEach(select=>{
-        if(select.childNodes.length==0){
-          Object.keys(Tables[select.id]).forEach(key=>{
-            var option=document.createElement('option');
-            select.appendChild(option);
-            option.innerHTML=translate(key);
-            option.value=Tables[select.id][key].value;
-          });
-        }
-        select.value=getVariable(select.id);
-      });
-      document.querySelectorAll('#inputs td.option select[id]').forEach(select=>{
-        if(select.childNodes.length==0){
-          Object.keys(Tables[select.id]).forEach(key=>{
-            var option=document.createElement('option');
-            select.appendChild(option);
-            option.innerHTML=translate(key);
-            option.value=Tables[select.id][key].value;
-          });
-        }
-        select.value=getVariable(select.id);
-      });
-    }
-
-    //set the GUI values for filters (biogas) and options (flooding)
-    BEV.defaultQuestions=function() {
-      //WWT
-        //valorizing biogas
-        var val=Global.Configuration["Yes/No"].wwt_valorizing_biogas;
-        //producing biogas
-        var pro=Global.Configuration["Yes/No"].wwt_producing_biogas;
-        //gui elements
-        var input_pro_y=document.querySelector('input[name=wwt_producing_biogas][value="1"]');
-        var input_pro_n=document.querySelector('input[name=wwt_producing_biogas][value="0"]');
-        var input_val_y=document.querySelector('input[name=wwt_valorizing_biogas][value="1"]');
-        var input_val_n=document.querySelector('input[name=wwt_valorizing_biogas][value="0"]');
-        if(pro){
-          input_pro_y.checked=true;   //you are producing biogas
-          input_val_y.disabled=false; //enable val
-          input_val_n.disabled=false; //enable val
-        }else{
-          input_pro_n.checked=true;   //you are not producing biogas
-          input_val_n.checked=true;   //you are not valorizing biogas
-          input_val_y.disabled=true;  //disable valorizing
-          input_val_n.disabled=true;  //disable valorizing
-          Global.Configuration["Yes/No"].wwt_valorizing_biogas=0;
-        }
-        if(val && pro){
-          input_val_y.checked=true; //you are valorizing biogas
-        }
-      //FST
-        //valorizing biogas
-        var val=Global.Configuration["Yes/No"].fst_valorizing_biogas;
-        //producing biogas
-        var pro=Global.Configuration["Yes/No"].fst_producing_biogas;
-        //gui elements
-        var input_pro_y=document.querySelector('input[name=fst_producing_biogas][value="1"]');
-        var input_pro_n=document.querySelector('input[name=fst_producing_biogas][value="0"]');
-        var input_val_y=document.querySelector('input[name=fst_valorizing_biogas][value="1"]');
-        var input_val_n=document.querySelector('input[name=fst_valorizing_biogas][value="0"]');
-        if(pro){
-          input_pro_y.checked=true;   //you are producing biogas
-          input_val_y.disabled=false; //enable val
-          input_val_n.disabled=false; //enable val
-        }else{
-          input_pro_n.checked=true;  //you are not producing biogas
-          input_val_n.checked=true;  //you are not valorizing biogas
-          input_val_y.disabled=true; //disable valorizing
-          input_val_n.disabled=true; //disable valorizing
-        }
-        if(val && pro){
-          input_val_y.checked=true; //you are valorizing biogas
-        }
-      //fsc_flooding
-        var val=Global.Faecl.Containment.fsc_flooding;
-        document.querySelector('input[name=fsc_flooding][value="1"]').checked=val?true:false;
-    }
-
-    //backend update value of a filter
+    //backend update a filter (yes/no)
     BEV.updateQuestion=function(code,newValue){
       Global.Configuration['Yes/No'][code]=newValue;
       init();
     }
 
-    //"fake" input that updates an output
+    //backend split the value entered among the inputs in stages
     BEV.updateOutput=function(input) {
       var field=input.id;
       var value=parseFloat(input.value)*Units.multiplier(field);
@@ -258,7 +248,6 @@
       if(!btn)return;
 
       var currentState=Expanded[stage];
-      if(currentState===undefined)currentState=1;//expanded by default
 
       //toggle html attribute
       if(currentState){btn.setAttribute('expanded','0')}
@@ -267,6 +256,7 @@
       //modify "Expanded" object
       if(currentState){Expanded[stage]=0}
       else            {Expanded[stage]=1}
+      updateResult();//update cookies
 
       //hide or show fields
       var newDisplay=currentState?'none':'';
@@ -815,6 +805,15 @@
 <!--only show active stages-->
 <script>
   (function(){
+    Structure.filter(s=>!s.sublevel).forEach(s=>{
+      if(!Expanded[s.alias]){
+        document.querySelectorAll('#inputs tr[stage='+s.alias+']').forEach(tr=>{
+          tr.style.display='none';
+        });
+        document.querySelector('#inputs span[expanded][stage='+s.alias+']').setAttribute('expanded',0);
+      }
+    });
+
     Structure
       .filter(s=>!s.sublevel).map(s=>s.alias)
       .forEach(function(stage){

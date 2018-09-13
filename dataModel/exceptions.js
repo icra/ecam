@@ -8,6 +8,8 @@ var Exceptions = {
   //wrapper
   apply:function() {
     this.wwt_ch4_efac();
+    this.wwt_bod_slud();
+
     this.fsc_bod_conc_fs();
     this.fsc_ch4_efac();
     this.fsc_fdensity();
@@ -50,6 +52,35 @@ var Exceptions = {
       }
     }
   },
+  wwt_bod_slud:function(){
+    var td=document.querySelector('tr[field=wwt_bod_slud] td');
+    if(!td)return;
+
+    var select=document.createElement('select');
+    td.appendChild(select);
+    select.style.fontSize='smaller';
+    select.style.display='block';
+    select.onchange=function(){
+      Global.Waste.Treatment.wwt_bod_slud=parseFloat(select.value);
+      Global.Configuration.Selected.wwt_bod_slud=select.options[select.options.selectedIndex].getAttribute('key');
+      init();
+    }
+
+    //go over options
+    Object.keys(Tables.wwt_type_tre).forEach(key=>{
+      var option=document.createElement('option');
+      select.appendChild(option);
+      var value=Global.Waste.Treatment.wwt_bod_infl*Tables.wwt_type_tre[key].bod_rmvd_as_sludge_estm;
+      var bod_rmvd_perc=Tables.wwt_type_tre[key].bod_rmvd_as_sludge_estm*100;
+      option.value=value;
+      option.setAttribute('key',key);
+      option.innerHTML=translate(key)+" ["+bod_rmvd_perc+"%] &rarr; ("+format(value)+")";
+      if(key==Global.Configuration.Selected.wwt_bod_slud){
+        option.selected='true';
+      }
+    });
+  },
+
   fsc_ch4_efac:function() {
     var td=document.querySelector('tr[field=fsc_ch4_efac] td');
     if(!td)return;
