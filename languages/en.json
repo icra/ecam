@@ -1,6 +1,9 @@
 {
   "#below":"below",
 
+  "#No disposal (open defecation)":"No disposal (open defecation)",
+  "#Septic tank sludge":"Septic tank sludge",
+
   "#fsr_ghg_avoided_land_descr":"GHG emissions avoided due to carbon sequestration",
 
   "#fst_nrg_biog_descr":"Electrical energy produced from biogas valorization",

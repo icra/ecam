@@ -166,11 +166,13 @@ var Tables = {
       "Dumping":{          value:2, },
     },
     "fsr_fslu_typ":{ //faecal sludge type for land application and landfilling
-      "Untreated":{         value:0, N_content:0.10, TVS:0.650}, //N content is provisional TODO
-      "Treated":{           value:1, N_content:0.10, TVS:0.344}, //N content is provisional TODO
-      "Pit humus":{         value:2, N_content:0.10, TVS:0.100}, //tvs 10% is provisional TODO //N content is provisional TODO
-      "Dehydrated faeces":{ value:3, N_content:0.10, TVS:0.100}, //tvs 10% is provisional TODO //N content is provisional TODO
-      "Compost":{           value:4, N_content:0.10, TVS:0.100}, //tvs 10% is provisional TODO //N content is provisional TODO
+      "Untreated":{                     value:0, N_content:0.10, TVS:0.650}, //provisional numbers, waiting for issue #168 TODO
+      "Treated":{                       value:1, N_content:0.10, TVS:0.344}, //provisional numbers, waiting for issue #168 TODO
+      "Pit humus":{                     value:2, N_content:0.10, TVS:0.100}, //provisional numbers, waiting for issue #168 TODO
+      "Dehydrated faeces":{             value:3, N_content:0.10, TVS:0.100}, //provisional numbers, waiting for issue #168 TODO
+      "Compost":{                       value:4, N_content:0.10, TVS:0.100}, //provisional numbers, waiting for issue #168 TODO
+      "No disposal (open defecation)":{ value:5, N_content:0.10, TVS:0.100}, //provisional numbers, waiting for issue #168 TODO
+      "Septic tank sludge":{            value:6, N_content:0.10, TVS:0.100}, //provisional numbers, waiting for issue #168 TODO
     },
 
     "fsr_soil_typ":{
