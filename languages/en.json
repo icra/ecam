@@ -60,7 +60,7 @@
   "#fs_SL_serv_pop_descr":"Serviced population in Faecal Sludge Management",
   "#fs_SL_serv_pop_expla":"Serviced population",
 
-  "#fsc_vol_trck_descr":         "Volume of fuel consumed",
+  "#fsc_vol_trck_descr":         "Volume of fuel consumed (trucks)",
   "#fsc_trck_typ_descr":         "Fuel type",
   "#fsc_KPI_GHG_trck_co2_descr": "GHG from CO2 in FS transport",
   "#fsc_KPI_GHG_trck_ch4_descr": "GHG from CH4 in FS transport",

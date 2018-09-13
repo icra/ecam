@@ -419,13 +419,14 @@
             </div>
           </div>
           <!--water inputs-->
-          <tr stage=water class=hidden><td style=width:40%><?php write('#ws_nrg_cons_descr')?><td class=output><input id='ws_nrg_cons' value=0> <td class=unit>
-          <tr stage=water class=hidden><td><?php write('#vol_fuel')?>                         <td class=output><input id='ws_vol_fuel' value=0> <td class=unit>
-          <tr stage=water class=hidden><td><?php write('#wsd_vol_dist_descr')?><td class=input><input id='wsd_vol_dist' value=0>                <td class=unit>
-          <tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost'  value=0>                <td class=unit>
-          <tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost'  value=0>                <td class=unit>
+          <tr stage=water class=hidden><td><?php write('#ws_nrg_cons_descr')?> <td class=output><input id='ws_nrg_cons' value=0><td class=unit>
+          <tr stage=water class=hidden><td><?php write('#vol_fuel')?>          <td class=output><input id='ws_vol_fuel' value=0><td class=unit>
+          <tr stage=water class=hidden><td><?php write('#wsd_vol_dist_descr')?><td class=input><input id='wsd_vol_dist' value=0><td class=unit>
+          <tr stage=water class=hidden><td><?php write('#birds_ws_run_cost')?> <td class=input><input id='ws_run_cost'  value=0><td class=unit>
+          <tr stage=water class=hidden><td><?php write('#birds_ws_nrg_cost')?> <td class=input><input id='ws_nrg_cost'  value=0><td class=unit>
           <tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
         </tr>
+
         <!--Waste-->
         <tr><th colspan=3 style=background:#d71d24>
           <div class=flex style="justify-content:space-between">
@@ -494,9 +495,21 @@
             </div>
           </div>
           <tr indic=faecl class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
-          <tr stage=faecl class=hidden><td><?php write('#fs_nrg_cons_descr') ?><td class=output><input id='fs_nrg_cons'  value=0><td class=unit>
-          <tr stage=faecl class=hidden><td><?php write('#fs_vol_trck_descr') ?><td class=output><input id='fs_vol_trck'  value=0><td class=unit>
-          <tr stage=faecl class=hidden><td><?php write('#fsc_cont_emp_descr')?><td class=input> <input id='fsc_cont_emp' value=0><td class=unit>
+          <tr stage=faecl class=hidden><td><?php write('#fs_nrg_cons_descr') ?><td class=output><input id='fs_nrg_cons' value=0><td class=unit>
+          <tr stage=faecl class=hidden><td><?php write('#fsc_vol_trck_descr')?><td class=input><input id='fsc_vol_trck' value=0><td class=unit>
+          <tr stage=faecl class=hidden><td><?php write('#fsc_cont_emp_descr')?><td class=input><input id='fsc_cont_emp' value=0><td class=unit>
+
+          <script>
+            //listener onchange for fsc_ volume of fuel consumed (trucks)
+            document.querySelector('#inputs input#fsc_vol_trck').addEventListener('change',function(){
+              var value=parseFloat((this.value));
+              if(value){
+                Global.Configuration['Yes/No'].fsc_transport=1;
+              }else{
+                Global.Configuration['Yes/No'].fsc_transport=0;
+              }
+            });
+          </script>
 
           <!--dropdowns-->
           <tr stage=faecl class=hidden><td><?php write('#fsc_flooding_descr')?><td colspan=2>
