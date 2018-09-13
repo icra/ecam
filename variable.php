@@ -102,20 +102,6 @@
           return exp;
       })();
 
-      //Is filtered?
-      (function(){
-        var question=Questions.isInside(id);
-        if(question) {
-          newRow=t.insertRow(-1)
-          newCell=newRow.insertCell(-1)
-          newCell.className='th';
-          newCell.innerHTML="<?php write("#Filter that activates it")?>";
-          newCell=newRow.insertCell(-1)
-          var currentAnswer = Global.Configuration['Yes/No'][question] ? "Yes" : "No";
-          newCell.innerHTML=translate(question)+"? ["+currentAnswer+"]";
-        }
-      })();
-
       //Type (input or output)
       newRow=t.insertRow(-1)
       newCell=newRow.insertCell(-1)
@@ -131,18 +117,19 @@
         }
       })();
 
-      //Is estimated somewhere?
-      if(Global.Estimations['estm_'+id]) {
-        newRow=t.insertRow(-1)
-        newCell=newRow.insertCell(-1)
-        newCell.className='th'
-        newCell.innerHTML="Is estimated?"
-        newRow.insertCell(-1).innerHTML=(function(){
-          var code='estm_'+id
-          var str="YES &rarr; <a href=variable.php?id="+code+">"+code+"</a>: "+format(Global.Estimations[code]())
-          return str;
-        })();
-      }
+      //Is filtered?
+      (function(){
+        var question=Questions.isInside(id);
+        if(question) {
+          newRow=t.insertRow(-1)
+          newCell=newRow.insertCell(-1)
+          newCell.className='th';
+          newCell.innerHTML="<?php write("#Filter that activates it")?>";
+          newCell=newRow.insertCell(-1)
+          var currentAnswer = Global.Configuration['Yes/No'][question] ? "Yes" : "No";
+          newCell.innerHTML=translate(question)+"? ["+currentAnswer+"]";
+        }
+      })();
 
       //if output: show inputs involved
       if(typeof(currentStage[id])=="function") {

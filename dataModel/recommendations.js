@@ -35,11 +35,11 @@ var Recommendations={
     /*wwc*/
     /*wwt*/
       "wwt_biog_pro":function(){return Global.Waste.Treatment.wwt_serv_pop*Global.General.bod_pday*Global.General.Days()*Cts.ct_bod_kg.value*Cts.ct_biog_g.value/1000;},
-      "wwt_biog_fla":function(){
-        if(Global.Configuration['Yes/No'].wwt_valorizing_biogas){
-          return 0;
-        }else{
-          return Global.Waste.Treatment.wwt_biog_pro;
+      "wwt_biog_fla":function(){//<br>
+        if(Global.Configuration['Yes/No'].wwt_valorizing_biogas){//<br>
+          return 0;//<br>
+        }else{//<br>
+          return Global.Waste.Treatment.wwt_biog_pro;//<br>
         }
       },
       "wwt_biog_val":function(){return Global.Waste.Treatment.wwt_biog_pro},
