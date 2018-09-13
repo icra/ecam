@@ -19,16 +19,16 @@ var Recommendations={
       //volume dumped
       "fsr_vol_dumping":function(){return Global.Faecl.Containment.fsc_fslu_emp},
       //mass sent to landapp
-      "fsr_mass_landapp":function(){
-        var fslu_typ=Tables.find('fsr_fslu_typ_la',Global.Faecl.Reuse.fsr_fslu_typ_la);
-        var dry_weight=Tables.fsr_fslu_typ_la[fslu_typ].dry_weight;
-        return Global.Faecl.Containment.fsc_fslu_emp*Global.Faecl.Containment.fsc_fdensity*dry_weight;
+      "fsr_mass_landapp":function(){//<br>
+        var fslu_typ_la=Tables.find('fsr_fslu_typ_la',Global.Faecl.Reuse.fsr_fslu_typ_la);//<br>
+        var dry_weight=Tables.fsr_fslu_typ_la[fslu_typ_la].dry_weight;//<br>
+        return Global.Faecl.Containment.fsc_fslu_emp*Global.Faecl.Containment.fsc_fdensity*dry_weight;//<br>
       },
       //mass sent to landfilling
-      "fsr_mass_landfil":function(){
-        var fslu_typ=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);
-        var dry_weight=Tables.fsr_fslu_typ_lf[fslu_typ].dry_weight;
-        return Global.Faecl.Containment.fsc_fslu_emp*Global.Faecl.Containment.fsc_fdensity*dry_weight;
+      "fsr_mass_landfil":function(){//<br>
+        var fslu_typ_lf=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);//<br>
+        var dry_weight=Tables.fsr_fslu_typ_lf[fslu_typ_lf].dry_weight;//<br>
+        return Global.Faecl.Containment.fsc_fslu_emp*Global.Faecl.Containment.fsc_fdensity*dry_weight;//<br>
       },
 
   /*WW*/
@@ -47,12 +47,12 @@ var Recommendations={
       "wwt_bod_infl":function(){return Global.General.bod_pday/1000*Global.Waste.ww_serv_pop()*Global.General.Days()},
       "wwt_bod_effl":function(){return 0.10*Global.Waste.Treatment.wwt_bod_infl},
       //SM
-      "wwt_mass_slu":function(){
-        if(Global.Configuration['Yes/No'].wwt_producing_biogas){
-          var b=0.6;
-        }else{
-          var b=1;
-        }
+      "wwt_mass_slu":function(){//<br>
+        if(Global.Configuration['Yes/No'].wwt_producing_biogas){//<br>
+          var b=0.6;//<br>
+        }else{//<br>
+          var b=1;//<br>
+        }//<br>
         return b*0.55*Global.General.bod_pday*Global.Waste.ww_serv_pop()*0.9*1e-3*1.176*Global.General.Days();//<br>
       },
       "wwt_dryw_slu"      :function(){return 0.04*Global.Waste.Treatment.wwt_mass_slu},
