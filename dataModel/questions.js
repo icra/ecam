@@ -622,18 +622,6 @@ var Questions={
       advanced:0,
       otherQuestions:[],
     },
-    "fsr_landapp":{
-      variables:[
-        "fsr_mass_landapp",
-        "fsr_fslu_typ_la",
-        "fsr_soil_typ",
-        "fsr_KPI_GHG_landapp",
-        "fsr_ghg_avoided_landapp",
-      ],
-      advanced:0,
-      otherQuestions:[
-      ],
-    },
     "fsr_landfil":{
       variables:[
         "fsr_mass_landfil",
@@ -643,6 +631,18 @@ var Questions={
         "fsr_KPI_GHG_landfil_n2o",
         "fsr_KPI_GHG_landfil",
         "fsr_ghg_avoided_landfil",
+      ],
+      advanced:0,
+      otherQuestions:[
+      ],
+    },
+    "fsr_landapp":{
+      variables:[
+        "fsr_mass_landapp",
+        "fsr_fslu_typ_la",
+        "fsr_soil_typ",
+        "fsr_KPI_GHG_landapp",
+        "fsr_ghg_avoided_landapp",
       ],
       advanced:0,
       otherQuestions:[
@@ -699,7 +699,7 @@ Questions.isInside=function(field) {
 	return false;
 }
 
-//check if the "field" is shown or hidden
+//check if the input "field" is shown or hidden
 Questions.isHidden=function(field) {
 	//go over all questions
 	for(var question in this) {

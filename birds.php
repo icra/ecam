@@ -494,125 +494,33 @@
               </script>
             </div>
           </div>
+
+          <!--fsc numeric inputs-->
           <tr indic=faecl class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
           <tr stage=faecl class=hidden><td><?php write('#fs_nrg_cons_descr') ?><td class=output><input id='fs_nrg_cons' value=0><td class=unit>
           <tr stage=faecl class=hidden><td><?php write('#fsc_vol_trck_descr')?><td class=input><input id='fsc_vol_trck' value=0><td class=unit>
           <tr stage=faecl class=hidden><td><?php write('#fsc_cont_emp_descr')?><td class=input><input id='fsc_cont_emp' value=0><td class=unit>
 
-          <script>
-            //listener onchange for fsc_ volume of fuel consumed (trucks)
-            document.querySelector('#inputs input#fsc_vol_trck').addEventListener('change',function(){
-              var value=parseFloat((this.value));
-              if(value){
-                Global.Configuration['Yes/No'].fsc_transport=1; //activate filter for fsc_transport
-              }
-            });
-          </script>
-
-          <!--dropdowns-->
+          <!--fsc,fst,fsr dropdowns-->
           <tr stage=faecl class=hidden><td><?php write('#fsc_flooding_descr')?><td colspan=2>
-            <label><?php write('#no')?> <input name=fsc_flooding id=fsc_flooding onclick=BEV.updateField(this) type=radio value=0 checked></label>
-            <label><?php write('#yes')?><input name=fsc_flooding id=fsc_flooding onclick=BEV.updateField(this) type=radio value=1></label>
+            <label><?php write('#no')?> <input name=fsc_flooding id=fsc_flooding type=radio value=0 checked></label>
+            <label><?php write('#yes')?><input name=fsc_flooding id=fsc_flooding type=radio value=1></label>
           <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fsc_type_tre_descr')?><select id='fsc_type_tre'></select>
           <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fst_type_tre_descr')?><select id='fst_type_tre'></select>
           <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fsr_type_tre_descr')?><select id='fsr_type_tre'></select>
           <tr stage=faecl class=hidden><td class=option colspan=3><?php write('#fsr_fslu_typ_descr')?><select id='fsr_fslu_typ'></select>
 
-          <script>
-            //APPLY FSM ESTIMATIONS
-            document.querySelector('#inputs select#fsc_type_tre').addEventListener('change',function(){
-              var type_tre = Tables.find('fsc_type_tre',this.value);
-              //fsc_bod_infl
-              Global.Faecl.Containment.fsc_bod_infl=Recommendations.fsc_bod_infl();
-              //fsc_ch4_efac estimation
-              Global.Faecl.Containment.fsc_ch4_efac=Tables.fsc_type_tre[type_tre][Global.Faecl.Containment.fsc_flooding?'ch4_efac_flooding':'ch4_efac'];
-              Global.Configuration.Selected.fsc_ch4_efac = type_tre;
-              //fsc_fdensity estimation
-              Global.Faecl.Containment.fsc_fdensity=Tables.fsc_type_tre[type_tre].fs_density;
-              Global.Configuration.Selected.fsc_fdensity = type_tre;
-              //fs_fslu_emp
-              Global.Faecl.Containment.fsc_fslu_emp=Recommendations.fsc_fslu_emp();
-              //fsc_bod_conc_fs estimation
-              Global.Faecl.Containment.fsc_bod_conc_fs=Tables.fsc_type_tre[type_tre].BOD_conc_FS;
-              Global.Configuration.Selected.fsc_bod_conc_fs = type_tre;
-              //fsc_bod_rmvd
-              Global.Faecl.Containment.fsc_bod_rmvd=Recommendations.fsc_bod_rmvd();
-            });
-            document.querySelector('#inputs select#fst_type_tre').addEventListener('change',function(){
-              var type_tre=Tables.find('fst_type_tre',this.value);
-              //fst_ch4_efac estimation
-              Global.Faecl.Treatment.fst_ch4_efac=Tables.fst_type_tre[type_tre].ch4_efac;
-              Global.Configuration.Selected.fst_ch4_efac=type_tre;
-              //fst_bod_infl
-              Global.Faecl.Treatment.fst_bod_infl=Recommendations.fst_bod_infl();
-              //fst_bod_effl
-              Global.Faecl.Treatment.fst_bod_effl=Recommendations.fst_bod_effl();
-              //fst_bod_slud estimation
-              Global.Faecl.Treatment.fst_bod_slud=Tables.fst_type_tre[type_tre].bod_rmvd_as_sludge_estm*Global.Faecl.Treatment.fst_bod_infl;
-              Global.Configuration.Selected.fst_bod_slud=type_tre;
-            });
-            document.querySelector('#inputs select#fsr_type_tre').addEventListener('change',function(){
-              var type_tre=Tables.find('fsr_type_tre',this.value);
-
-              var filter={
-                "Landfilling":      "fsr_landfil",
-                "Land application": "fsr_landapp",
-                "Dumping":          "fsr_dumping",
-              }[type_tre];
-              if(filter){
-                Global.Configuration['Yes/No'][filter]=1;
-              }
-            });
-          </script>
-
           <!--fst biogas-->
-          <tr stage=faecl class=hidden><td><?php write('#fst_producing_biogas')?>? <td class=question colspan=2>
-            <label><?php write('#no')?> <input name=fst_producing_biogas type=radio value=0 checked> </label>
+          <tr stage=faecl class=hidden><td><?php write('#fst_producing_biogas')?>?<td class=question colspan=2>
+            <label><?php write('#no')?> <input name=fst_producing_biogas type=radio value=0 checked></label>
             <label><?php write('#yes')?><input name=fst_producing_biogas type=radio value=1> </label>
           <tr stage=faecl class=hidden><td><?php write('#fst_valorizing_biogas')?>?<td class=question colspan=2>
             <label><?php write('#no')?> <input name=fst_valorizing_biogas type=radio value=0 checked></label>
             <label><?php write('#yes')?><input name=fst_valorizing_biogas type=radio value=1></label>
           </tr>
-          <script>
-            (function(){
-              document.querySelectorAll('input[name=fst_producing_biogas][type=radio]').forEach(el=>{
-                el.addEventListener('click',function(){
-                  var newValue=parseInt(this.value);
-                  Global.Configuration['Yes/No'][this.name]=newValue;
-                  //apply estimations
-                  if(newValue){
-                    Global.Configuration['Yes/No'].fst_valorizing_biogas=0;
-                    Global.Faecl.Treatment.fst_biog_pro = Recommendations.fst_biog_pro();
-                    Global.Faecl.Treatment.fst_ch4_biog = Recommendations.fst_ch4_biog();
-                    Global.Faecl.Treatment.fst_biog_val = 0;
-                    Global.Faecl.Treatment.fst_biog_fla = Recommendations.fst_biog_pro();
-                  }else{
-                    Global.Faecl.Treatment.fst_biog_pro = 0;
-                    Global.Faecl.Treatment.fst_biog_val = 0;
-                    Global.Faecl.Treatment.fst_biog_fla = 0;
-                    Global.Faecl.Treatment.fst_ch4_biog = 0;
-                  }
-                  init();
-                });
-              });
-              document.querySelectorAll('input[name=fst_valorizing_biogas][type=radio]').forEach(el=>{
-                el.addEventListener('click',function(){
-                  var newValue=parseInt(this.value);
-                  Global.Configuration['Yes/No'][this.name]=newValue;
-                  //apply estimations
-                  if(newValue){
-                    Global.Faecl.Treatment.fst_biog_val = Global.Faecl.Treatment.fst_biog_pro; //valorized is produced
-                    Global.Faecl.Treatment.fst_biog_fla = 0;                                   //flared is zero
-                  }else{
-                    Global.Faecl.Treatment.fst_biog_val = 0;                                   //valorized is zero
-                    Global.Faecl.Treatment.fst_biog_fla = Global.Faecl.Treatment.fst_biog_pro; //flared is produced
-                  }
-                  init();
-                });
-              });
-            })();
-          </script>
         </tr>
+        <!--estimations for FSM-->
+        <script src=fsm_tierA.js></script>
       </table>
     </div>
 

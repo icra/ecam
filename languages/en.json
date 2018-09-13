@@ -2,22 +2,18 @@
   "#below":"below",
 
   "#No disposal (open defecation)":"No disposal (open defecation)",
+  "#No containment (open defecation)":"No containment (open defecation)",
   "#Septic tank sludge":"Septic tank sludge",
-
   "#fsr_ghg_avoided_land_descr":"GHG emissions avoided due to carbon sequestration",
-
   "#fst_nrg_biog_descr":"Electrical energy produced from biogas valorization",
   "#fst_SL_GHG_avoided_descr":"GHG emissions avoided due to biogas valorization",
-  
   "#ghg_ww_with_uncollected":"GHG emissions in Wastewater (with uncollected wastewater)",
   "#ghg_fsm_with_transport_separate":"GHG emissions in FSM (transport separated)",
   "#Emptying and Transport":"Emptying and Transport",
-
   "#Substages energy consumption":"Substages energy consumption",
   "#ghg_emissions_by_l1":"GHG emissions in",
   "#GHG by type":"GHG by type",
   "#GHG by substage":"GHG by substage",
-
   "#Electricity WS":"Electricity WS",
   "#Electricity WW":"Electricity WW",
   "#Electricity FS":"Electricity FS",
@@ -156,7 +152,7 @@
   "#fsr_KPI_GHG_landfil_descr":"Landfilling",
   "#fsr_KPI_GHG_landfil_n2o_descr":"Landfilling (N2O)",
   "#fsr_KPI_GHG_tre_n2o_descr":"N2O from effluent discharge to water body",
-  "#fsr_disp_typ_descr":"Disposal type",
+  "#fsr_disp_typ_descr":"Landfill type",
   "#fsr_dumping":"Do you want to assess dumping of faecal sludge",
   "#fsr_dumping_pth_descr":"Dumping pathway",
 
@@ -501,7 +497,7 @@
   "#app":"Land application",
   "#assess_your_utility":"Assess your utility's carbon footprint, energy consumption and service levels",
   "#assessment_period":"Assessment period",
-  "#birds_stage_not_active":"Stage not active. Go to Configuration to activate it.",
+  "#birds_stage_not_active":"Stage not active. Go back to Configuration to activate it.",
   "#birds_warning_conv_factor":"Emission factor is zero",
   "#birds_ws_nrg_cost":"Energy costs",
   "#birds_ws_run_cost":"Running costs",
