@@ -504,9 +504,7 @@
             document.querySelector('#inputs input#fsc_vol_trck').addEventListener('change',function(){
               var value=parseFloat((this.value));
               if(value){
-                Global.Configuration['Yes/No'].fsc_transport=1;
-              }else{
-                Global.Configuration['Yes/No'].fsc_transport=0;
+                Global.Configuration['Yes/No'].fsc_transport=1; //activate filter for fsc_transport
               }
             });
           </script>
@@ -555,7 +553,15 @@
             });
             document.querySelector('#inputs select#fsr_type_tre').addEventListener('change',function(){
               var type_tre=Tables.find('fsr_type_tre',this.value);
-              //TBD
+
+              var filter={
+                "Landfilling":      "fsr_landfil",
+                "Land application": "fsr_landapp",
+                "Dumping":          "fsr_dumping",
+              }[type_tre];
+              if(filter){
+                Global.Configuration['Yes/No'][filter]=1;
+              }
             });
           </script>
 
