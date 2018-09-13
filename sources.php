@@ -517,12 +517,12 @@
           var t=document.querySelector('table#avoided');
           var GHG_avoided=[
             'wwt_SL_GHG_avoided',
-            'fst_SL_GHG_avoided',
-            'fsr_ghg_avoided_land',
             'wwt_wr_C_seq_slu',
             'wwd_wr_GHG_avo_d',
             'wwd_SL_ghg_non',
             'wwd_wr_GHG_avo',
+            'fst_SL_GHG_avoided',
+            'fsr_ghg_avoided_land',
             'fsr_ghg_avoided_reuse',
           ];
           t.querySelector('th[rowspan]').rowSpan=GHG_avoided.length+1;
