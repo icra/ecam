@@ -5,48 +5,61 @@ none;">
     <pre><span id=currentGlobal></span></pre>
   </div>
 </div>
-
 <script>
   /** Stringify Global object and display it */
   /** COOKIE SIZE LIMIT FOR GOOGLE CHROME IS ~ 8170 CHARACTERS */
   function updateResult() {
     //console.time('updateResult');
-
-    document.getElementById('currentGlobal').innerHTML=JSON.stringify(Global,null,"  ");
-    /**
-      *
-      * Compress Global (using LZString library)
-      *
-      */
-    //stringify 'Global'
-    var uncompressed = JSON.stringify(Global);
-
-    //compress the string
-    var compressed = LZString.compressToEncodedURIComponent(uncompressed); 
-
-    //Set cookie GLOBAL as compressed
-    setCookie("GLOBAL",compressed);
-
-    //set cookies for Substages
-    Structure.filter(s=>s.sublevel).forEach(s=>{
-      setCookie(s.alias, LZString.compressToEncodedURIComponent(JSON.stringify(Substages[s.level][s.sublevel]))); 
-    });
-
-    //cookieSummary();
+    //document.getElementById('currentGlobal').innerHTML=JSON.stringify(Global,null,"  ");
+    /*Compress the object "Global" (using LZString library) */
+    setCookie("Global",    LZString.compressToEncodedURIComponent(JSON.stringify(Global))); 
+    setCookie("Substages", LZString.compressToEncodedURIComponent(JSON.stringify(compress_Substages()))); 
+    //cookieSummary(); //debugging info
     //console.timeEnd('updateResult');
   }
 
   /** Display an ascii table in Console to summarize all cookie sizes */
   function cookieSummary(){
-    if(getCookie('GLOBAL')){
+    if(getCookie('Global')){
+      var uG = JSON.stringify(Global).length;
+      var cG = getCookie('Global').length;
+      var uS = JSON.stringify(Substages).length;
+      var cS = getCookie('Substages').length;
       console.log( ""+
         "[*] Cookies chars lengths:\n"+
-        " |--* Uncompressed : "+JSON.stringify(Global).length+" \n"+
-        " |--* Compressed   : "+getCookie('GLOBAL').length+"\n"+
+        " |--* Uncompressed Global:    "+uG+"\n"+
+        " |--* Compressed   Global:    "+cG+"\n"+
+        " |--* Uncompressed Substages: "+uS+" \n"+
+        " |--* Compressed   Substages: "+cS+"\n"+
+        " TOTAL compressed = "+format(100*(cG+cS)/8170)+"%\n"+
       "");
-      Structure.filter(s=>s.sublevel).forEach(s=>{
-        console.log(" |--* "+alias+": "+getCookie(s.alias).length);
-      });
     }
+  }
+
+  //memory improvement
+  function compress_Substages(){
+    var Compacted=JSON.parse(JSON.stringify(Substages)); //clone object
+    Object.keys(Compacted).forEach(l1=>{
+      Object.keys(Compacted[l1]).forEach(l2=>{
+        var substages = Compacted[l1][l2];
+        if(substages.length==0) return;
+        //convert each field of the first substage to an array
+        Object.keys(substages[0]).forEach(key=>{
+          substages[0][key]=[substages[0][key]];
+        });
+        //add each field of the substages to the new arrays
+        substages.forEach((substage,i)=>{
+          if(i==0)return;
+          Object.keys(substage).forEach(key=>{
+            substages[0][key].push(substage[key]);
+          });
+        });
+        //Delete the other substages other than 0
+        substages.splice(1,substages.length);
+      });
+    });
+    //console.log(JSON.stringify(Substages).length);
+    //console.log(JSON.stringify(Compacted).length);
+    return Compacted;
   }
 </script>

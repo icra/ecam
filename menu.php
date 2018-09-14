@@ -26,7 +26,7 @@
   </div>
 
 	<?php
-		if(isset($_COOKIE['GLOBAL'])){ ?>
+		if(isset($_COOKIE['Global'])){ ?>
 			<!--save-->
       <div>
         <button class="button save" onclick=saveToFile()>

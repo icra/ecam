@@ -60,7 +60,7 @@ function copyFieldsFrom(object_from,object_to){
 /**
   * OVERWRITE "Global" AND "Substages" objects with the parsed cookie content
   */
-if(getCookie("GLOBAL")!==null){
+if(getCookie("Global")!==null){
   /**
   *
   * Decompress cookie global
@@ -68,21 +68,42 @@ if(getCookie("GLOBAL")!==null){
   */
 
   //compressed is a string with weird symbols
-  var compressed=getCookie('GLOBAL');
-
   //decompressed is a string with the JSON structure of Global
-  var decompressed=LZString.decompressFromEncodedURIComponent(compressed);
-
   //parsed now is a real object
-  var parsed=JSON.parse(decompressed);
-
   //copy the fields from parsed to Global
+  var compressed=getCookie('Global');
+  var decompressed=LZString.decompressFromEncodedURIComponent(compressed);
+  var parsed=JSON.parse(decompressed);
   copyFieldsFrom(parsed,Global);
 
+  //memory improvement
+  function unpack_Substages(Compacted){
+    var Unpacked={};
+    Object.keys(Compacted).forEach(l1=>{
+      Unpacked[l1]={};
+      Object.keys(Compacted[l1]).forEach(l2=>{
+        var substage_from = Compacted[l1][l2][0]; //object
+        Unpacked[l1][l2]=[];                      //new array
+        if(!substage_from)return;
+        var n = substage_from.name.length; //number of substages to create
+        //console.log(l1,l2,n);
+        for(var i=0;i<n;i++){
+          var new_substage = {};
+          Object.keys(substage_from).forEach(key=>{
+            new_substage[key]=substage_from[key][i];
+          });
+          Unpacked[l1][l2].push(new_substage);
+        }
+      });
+    });
+    return Unpacked;
+  }
+
   //decompress and parse Substages in one step
-  Structure.filter(s=>s.sublevel).forEach(s=>{
-    Substages[s.level][s.sublevel]=JSON.parse(LZString.decompressFromEncodedURIComponent(getCookie(s.alias)));
-  });
+  var compressed=getCookie('Substages');
+  var decompressed=LZString.decompressFromEncodedURIComponent(compressed);
+  var parsed=JSON.parse(decompressed);
+  Substages=unpack_Substages(parsed);
 
   //set the value of the constants ct_ch4_eq and ct_n2o from the Global.Configuration.Selected.gwp_reports_index
   Cts.ct_ch4_eq.value=GWP_reports[Global.Configuration.Selected.gwp_reports_index].ct_ch4_eq;

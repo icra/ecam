@@ -50,7 +50,7 @@
         warning=warning||false;
 
         var progress = document.querySelector('#sidebar #progress')
-        var length = getCookie('GLOBAL') ? document.cookie.length : 0;
+        var length = getCookie('Global') ? document.cookie.length : 0;
         progress.value = length;
         var percent = 100*length/8100;
         progress.setAttribute('caption',format(percent)+"%");
@@ -60,7 +60,8 @@
 		}
 
 		function removeAllCookies() {
-			removeCookie("GLOBAL");
+			removeCookie("Global");
+      removeCookie("Substages");
 		}
 
 		/** New system */

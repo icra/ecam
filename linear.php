@@ -61,7 +61,7 @@
 		<img class=l1 stage=inha src=img/inhabitants.png caption="<?php write('#population')?>">
 	</div>
 
-	<!--GLOBAL-->
+	<!--Global-->
 	<div
 		style=cursor:pointer
 		onclick=window.location="birds.php">
