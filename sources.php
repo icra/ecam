@@ -429,7 +429,7 @@
         table#sources{
           margin:10px 0;
           width:95%;
-          box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
+          /*box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);*/
         }
         #sources td {padding:0.8em 0.5em;}
         #sources td[field],
@@ -457,7 +457,7 @@
           <td field=ww_SL_ghg_unc></td>
         </tr>
       </table>
-      <b><small><?php write('#Note: the emissions above have not been added in the totals presented in the GHG emissions summary')?></small></b>
+      <small><?php write('#Note: the emissions above have not been added in the totals presented in the GHG emissions summary')?></small>
       <script>
         document.querySelector('td[field=ww_SL_ghg_unc]').innerHTML=format(Global.Waste.ww_SL_ghg_unc());
       </script>
@@ -483,7 +483,7 @@
           </th>
         </tr>
       </table>
-      <b><small><?php write('#Note: the emissions above have not been subtracted in the totals presented in the GHG emissions summary')?></small></b>
+      <small><?php write('#Note: the emissions above have not been subtracted in the totals presented in the GHG emissions summary')?></small>
       <style>
         table#avoided td[field] {text-align:right}
       </style>

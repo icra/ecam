@@ -111,14 +111,10 @@
         var current_graph=document.querySelector('#graph1').getAttribute('current_graph') || 'ghg_by_source';
         Graphs[current_graph](false,'graph1');
       })();
-
       Graphs.graph2(false,'graph2');
-      //   ".graph(container)"
       Graphs.ws_cost('graph3');
       Graphs.ww_cost('graph4');
-      //   ".gauge(container, value,                        header,                            unit,      lowerLimit, upperLimit)"
-
-      //GHG emissions per year per person
+      //gauges of GHG emissions per year per person
       (function(){
         var years=Global.General.Years();
 
@@ -241,7 +237,7 @@
   </script>
 
   <script>
-    //namespace to remember folding of stages (not saved to cookies)
+    //Expanded: object for folding stages
     var Expanded=Global.Configuration.Expanded;
     function toggleStageVisibility(stage) {
       var btn=document.querySelector('#inputs span[expanded][stage='+stage+']');
@@ -281,9 +277,7 @@
       text-align:left;
     }
 
-    /*
-      legend colors for graphs
-    */
+    /* legend colors for graphs */
     span.circle{display:none}
     span.circle{float:right}
 
@@ -327,8 +321,7 @@
   <?php include'caption.php'?>
 </center>
 
-<!--title-->
-<h1>
+<!--title--><h1>
   <?php write('#quick_assessment')?> &mdash;
   <?php write('#initial_estimation_description')?>
 </h1>
@@ -399,9 +392,9 @@
             </div>
             <!--water population-->
             <div>
-              <img src=img/inhabitants.png width=25 caption="Water supply population" style=vertical-align:middle>
               <b caption="<?php write('#ws_serv_pop_descr')?>" id=ws_serv_pop onclick=window.location='inhabitants.php'>0</b> /
               <b caption="<?php write('#ws_resi_pop_descr')?>" id=ws_resi_pop onclick=window.location='inhabitants.php'>0</b>
+              <img src=img/inhabitants.png width=25 caption="Water supply population" style=vertical-align:middle>
               <script>
                 document.querySelector('#ws_serv_pop').innerHTML=format(Global.Water.ws_serv_pop);
                 document.querySelector('#ws_resi_pop').innerHTML=format(Global.Water.ws_resi_pop);
@@ -426,10 +419,10 @@
             </div>
             <!--wastewater population-->
             <div>
-              <img src=img/inhabitants.png width=25 caption="Wastewater population" style="vertical-align:middle">
               <b caption="<?php write('#ww_serv_pop_descr')?>" id=ww_serv_pop onclick=window.location='inhabitants.php'>0</b> /
               <b caption="<?php write('#ww_conn_pop_descr')?>" id=ww_conn_pop onclick=window.location='inhabitants.php'>0</b> /
               <b caption="<?php write('#ww_resi_pop_descr')?>" id=ww_resi_pop onclick=window.location='inhabitants.php'>0</b>
+              <img src=img/inhabitants.png width=25 caption="Wastewater population" style="vertical-align:middle">
               <script>
                 document.querySelector('#ww_serv_pop').innerHTML=format(Global.Waste.ww_serv_pop());
                 document.querySelector('#ww_conn_pop').innerHTML=format(Global.Waste.ww_conn_pop());
@@ -475,9 +468,9 @@
             </div>
             <!--fsm population-->
             <div>
-              <img src=img/inhabitants.png width=25 caption="FSM population" style="vertical-align:middle">
               <b caption="<?php write('#fs_onsi_pop_descr')?>" id=fs_onsi_pop onclick=window.location='inhabitants.php'>0</b> /
               <b caption="<?php write('#fs_resi_pop_descr')?>" id=fs_resi_pop onclick=window.location='inhabitants.php'>0</b>
+              <img src=img/inhabitants.png width=25 caption="FSM population" style="vertical-align:middle">
               <script>
                 document.querySelector('#fs_onsi_pop').innerHTML=format(Global.Faecl.fs_onsi_pop);
                 document.querySelector('#fs_resi_pop').innerHTML=format(Global.Faecl.fs_resi_pop);
@@ -734,53 +727,45 @@
 <script>if(google){google.charts.load('current',{'packages':['corechart','gauge','bar']});}</script>
 </html>
 
-<!--add onchange listeners to input elements-->
+<!--onchange listeners for <input> elements-->
 <script>
-  (function(){
-    var inputs=document.querySelectorAll("#inputs input[id]:not([type=radio])");
-    for(var i=0;i<inputs.length;i++) {
-      var input=inputs[i];
-      input.addEventListener('focus',function(){
-        this.value=getVariable(this.id)/Units.multiplier(this.id);
-        this.select();
-      });
-      if(input.parentNode.classList.contains('input')){
-        input.addEventListener('change',function(){BEV.updateField(this)});
-      }else if(input.parentNode.classList.contains('output')){
-        input.addEventListener('change',function(){BEV.updateOutput(this)});
-      }
-    }
-    //listeners for inputs magnitude=Option
-    document.querySelectorAll("#inputs td.option select[id]").forEach(select=>{
-      select.addEventListener('change',function(){BEV.updateField(this)});
+  document.querySelectorAll("#inputs input[id]:not([type=radio])").forEach(input=>{
+    input.addEventListener('focus',function(){
+      this.value=getVariable(this.id)/Units.multiplier(this.id);
+      this.select();
     });
-  })();
+    if(input.parentNode.classList.contains('input')){
+      input.addEventListener('change',function(){BEV.updateField(this)});
+    }else if(input.parentNode.classList.contains('output')){
+      input.addEventListener('change',function(){BEV.updateOutput(this)});
+    }
+  });
+  //listeners for inputs magnitude=Option
+  document.querySelectorAll("#inputs td.option select[id]").forEach(select=>{
+    select.addEventListener('change',function(){BEV.updateField(this)});
+  });
 </script>
 
 <!--add lock symbol for inputs that are outputs-->
 <script>
-  //look for td.outputs and add class 'locked'
-  (function(){
-    var tds=document.querySelectorAll('#inputs td.output');
-    tds.forEach(td=>{
-      //find the input element inside the cell
-      var input=td.querySelector('input[id]')
-      if(!input)return;
-      //find the level it belongs
-      var level=locateVariable(input.id).level;
-      //if substages>1, lock the cell
-      Object.keys(Substages[level]).forEach(sublevel=>{
-        //count substages
-        var n=Substages[level][sublevel].length;
-        var sum=getVariable(input.id);
-        if(n && sum>0){
-          td.classList.add('locked');
-          input.disabled=true;
-          td.parentNode.setAttribute('caption','Since you have entered more detailed data in Tier B stages, you cannot modify this input.<br>Now it displays the sum of its related '+translate(level)+' stage\'s inputs. If you still want to modify it, please set its related inputs to 0 in Tier B');
-        }
-      });
+  document.querySelectorAll('#inputs td.output').forEach(td=>{
+    //find the input element inside the cell
+    var input=td.querySelector('input[id]')
+    if(!input)return;
+    //find the level it belongs
+    var level=locateVariable(input.id).level;
+    //if substages>1, lock the cell
+    Object.keys(Substages[level]).forEach(sublevel=>{
+      //count substages
+      var n=Substages[level][sublevel].length;
+      var sum=getVariable(input.id);
+      if(n && sum>0){
+        td.classList.add('locked');
+        input.disabled=true;
+        td.parentNode.setAttribute('caption','Since you have entered more detailed data in Tier B stages, you cannot modify this input.<br>Now it displays the sum of its related '+translate(level)+' stage\'s inputs. If you still want to modify it, please set its related inputs to 0 in Tier B');
+      }
     });
-  })();
+  });
 </script>
 <style>
   #inputs td.output.locked {background:#fff; }
@@ -790,16 +775,13 @@
 
 <!--write units-->
 <script>
-  (function(){
-    var inputs=document.querySelectorAll('#inputs tr[stage] td input[id]');
-    inputs.forEach(input=>{
-      var td_unit=input.parentNode.nextSibling;
-      var field=input.id;
-      var currentUnit=Info[field].magnitude=='Currency' ? Global.General.Currency : Info[field].unit;
-      currentUnit=currentUnit.replace('m3','m<sup>3</sup>');
-      td_unit.innerHTML=currentUnit;
-    });
-  })();
+  document.querySelectorAll('#inputs tr[stage] td input[id]').forEach(input=>{
+    var td_unit=input.parentNode.nextSibling;
+    var field=input.id;
+    var currentUnit=Info[field].magnitude=='Currency' ? Global.General.Currency : Info[field].unit;
+    currentUnit=currentUnit.replace('m3','m<sup>3</sup>');
+    td_unit.innerHTML=currentUnit;
+  });
 </script>
 
 <!--only show active stages-->
@@ -814,18 +796,16 @@
       }
     });
 
-    Structure
-      .filter(s=>!s.sublevel).map(s=>s.alias)
-      .forEach(function(stage){
-        if(Global.Configuration.ActiveStages[stage]==1) {
-          //show all rows with stage=stage
-          var rows=document.querySelectorAll('#inputs tr[stage='+stage+']');
-          for(var i=0;i<rows.length;rows[i++].classList.remove('hidden')){}
-        }else{
-          //show "Stage not active"
-          document.querySelector('table#inputs tr[indic='+stage+']').classList.remove('hidden');
-        }
-      });
+    Structure.filter(s=>!s.sublevel).map(s=>s.alias).forEach(function(stage){
+      if(Global.Configuration.ActiveStages[stage]==1) {
+        //show all rows with stage=stage
+        var rows=document.querySelectorAll('#inputs tr[stage='+stage+']');
+        for(var i=0;i<rows.length;rows[i++].classList.remove('hidden')){}
+      }else{
+        //show "Stage not active"
+        document.querySelector('table#inputs tr[indic='+stage+']').classList.remove('hidden');
+      }
+    });
 
     //hide fuel if its filter is not active
     if(Global.General.anyFuelEngines==0){
@@ -835,5 +815,4 @@
     }
   })();
 </script>
-
 <div style=margin-bottom:8em></div>

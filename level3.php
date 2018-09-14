@@ -714,8 +714,8 @@
   <!--menu-->
   <div class=menu onclick=fold(this.parentNode)>
     <button></button>
-    <b><?php write('#Advanced Assessment: Substages')?></b>
-    <b>(<span id=counter>0</span>)</b>
+    <?php write('#Advanced Assessment: Substages')?>
+    (<span id=counter>0</span>)
     &mdash;
     <a href=substages.php><?php write('#Overview')?></a>
 
@@ -770,7 +770,6 @@
     font-size:smaller;
   }
 </style>
-
 <script>
   //copy all functions form level2 to each substage
   Object.keys(CurrentLevel)
@@ -781,7 +780,7 @@
       });
     });
 
-  //fix for new variables loading old json files: if undefined in substages make it 0
+  //fix for new variables loading old json files: in substages if undefined make it 0
   Object.keys(CurrentLevel)
     .filter(key=>typeof(CurrentLevel[key])=="number")
     .forEach(key=>{
@@ -792,4 +791,3 @@
       });
     });
 </script>
-
