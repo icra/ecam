@@ -76,7 +76,7 @@ if(getCookie("Global")!==null){
   var parsed=JSON.parse(decompressed);
   copyFieldsFrom(parsed,Global);
 
-  //memory improvement
+  //memory improvement: revert to the non compacted original structure
   function unpack_Substages(Compacted){
     var Unpacked={};
     Object.keys(Compacted).forEach(l1=>{
@@ -85,10 +85,10 @@ if(getCookie("Global")!==null){
         var substage_from = Compacted[l1][l2][0]; //object
         Unpacked[l1][l2]=[];                      //new array
         if(!substage_from)return;
-        var n = substage_from.name.length; //number of substages to create
+        var n=substage_from.name.length; //number of substages to create
         //console.log(l1,l2,n);
         for(var i=0;i<n;i++){
-          var new_substage = {};
+          var new_substage={};//new empty object
           Object.keys(substage_from).forEach(key=>{
             new_substage[key]=substage_from[key][i];
           });

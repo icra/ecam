@@ -1,13 +1,12 @@
 <!--included once in edit.php-->
-<style>
-  span[expanded]{float:left;transition:transform 0.15s;}
-  span[expanded='0']{transform:rotate(-90deg);}
-</style>
-
 <script>
   //namespace to remember folding of questions (not saved to cookies)
   var Expanded=Global.Configuration.Expanded;
 </script>
+<style>
+  span[expanded]{float:left;transition:transform 0.15s;}
+  span[expanded='0']{transform:rotate(-90deg);}
+</style>
 
 <script>
   var level2 = {};//namespace
@@ -406,8 +405,7 @@
 
 <table id=inputs style="width:100%">
   <tr><th colspan=5 class=tableHeader>
-    <?php write('#INPUTS')?>
-    &mdash;
+    <?php write('#INPUTS')?> &mdash;
     <?php write('#Enter values for')?>
     <?php if($sublevel){write("#$sublevel");}else{write("#$level");} ?>
     <?php write('#stages')?>
@@ -415,5 +413,5 @@
     <th><?php write('#Description')?>
     <th><?php write('#Current value')?>
     <th><?php write('#edit_unit')?>
-  <tr><td colspan=4 style=color:#ccc><i><?php write('#loading')?>...</i>
+  <tr><td colspan=3 style=color:#ccc><?php write('#loading')?>...
 </table>

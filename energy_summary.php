@@ -135,34 +135,30 @@
     }
   </style>
 </head><body onload=init()><center>
-<?php
-  include'sidebar.php';
-  include'navbar.php';
-  include'linear.php';
-  include'caption.php';
-?>
-<!--title-->
-<h1>
-  <span id=Name></span>
-  <script>
-    document.querySelector('h1 span#Name').innerHTML=Global.General.Name;
-  </script>
-  &mdash;
-  <?php write('#Energy consumption Summary (Overview)')?>
-</h1>
-
-<!--assessment period-->
-<h4>
-  <?php write('#assessment_period')?>:
-  <b>
-    <span id=Days></span> <?php write("#days")?>
-    (<span id=Years></span> <?php write("#years")?>)
+  <?php
+    include'sidebar.php';
+    include'navbar.php';
+    include'linear.php';
+    include'caption.php';
+  ?>
+  <!--title-->
+  <h1>
+    <span id=Name></span>
     <script>
-      document.querySelector('h4 span#Days').innerHTML=format(Global.General.Days());
-      document.querySelector('h4 span#Years').innerHTML=format(Global.General.Years());
+      document.querySelector('h1 span#Name').innerHTML=Global.General.Name;
     </script>
-  </b>
-</h4>
+    &mdash; <?php write('#Energy consumption Summary (Overview)')?>
+    &mdash; <?php write('#assessment_period')?>:
+    <span>
+      <span id=Days></span> <?php write("#days")?>
+      (<span id=Years></span> <?php write("#years")?>)
+      <script>
+        document.querySelector('h1 span#Days').innerHTML=format(Global.General.Days());
+        document.querySelector('h1 span#Years').innerHTML=format(Global.General.Years());
+      </script>
+    </span>
+  </h1>
+</center>
 
 <!--content-->
 <div>
@@ -188,7 +184,7 @@
   </div>
 
   <!--tables: left tab-->
-  <div id=tables style=width:66%>
+  <div id=tables style="width:66%;margin:auto">
     <div>
       <table id=sources>
         <tr><td colspan=5 style=text-align:center>
@@ -297,7 +293,7 @@
         margin:10px 0;
         width:95%;
       }
-      table#sources td {padding:1.2em 0.5em;}
+      table#sources td {padding:0.8em 0.5em;}
       table#sources td[field] {text-align:right}
       table#sources img {vertical-align:middle;width:30px;margin-right:10px}
     </style>
@@ -309,10 +305,7 @@
   </div>
 </div>
 
-<!--CURRENT JSON--><?php include'currentJSON.php'?>
-<script>google.charts.load('current',{'packages':['corechart','gauge','bar']});</script>
-
-<!--caption div for substages energy consumption -->
+<!--floating div for substages-->
 <div id=container_detailed style=display:none>
   <div><b id=detailed_title></b></div>
   <table id=detailed></table>
@@ -330,3 +323,7 @@
     }
   </style>
 </div>
+
+<div style=margin-bottom:8em></div>
+<!--CURRENT JSON--><?php include'currentJSON.php'?>
+<script>google.charts.load('current',{'packages':['corechart']});</script>

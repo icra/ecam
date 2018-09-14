@@ -36,7 +36,7 @@ none;">
     }
   }
 
-  //memory improvement
+  //memory improvement: this function works with the unpack_Substages at "js/updateGlobalFromCookies.js"
   function compress_Substages(){
     var Compacted=JSON.parse(JSON.stringify(Substages)); //clone object
     Object.keys(Compacted).forEach(l1=>{

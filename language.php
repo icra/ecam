@@ -48,7 +48,6 @@
 
 <!--container for language options-->
 <div id=lang>
-
 	<!--current language-->
 	<?php
 		//$lang is a global variable defined in languages/write.php
@@ -69,7 +68,6 @@
     <div lang="<?php echo $lang?>">
       <a href=translation_problems.php style=color:blue>language debugging tool</a>
     </div>
-
 	</div> 
 </div>
 
@@ -77,7 +75,7 @@
 	//Add an onclick listener to each language
 	(function() {
 		var langs=document.querySelectorAll('#lang #select div[lang]');
-		for(var i=0;i<langs.length;i++) {
+		for(var i=0;i<langs.length;i++){
 			var lang=langs[i].getAttribute('lang');
 			langs[i].setAttribute('onclick',"Language.set('"+lang+"')")
 		}

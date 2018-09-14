@@ -573,7 +573,7 @@
     <!--level 2 menu-->
     <div class=menu onclick=fold(this.parentNode)>
       <button></button>
-      <b>Inputs &amp; Outputs</b>
+      <span><?php write("#Inputs & Outputs")?></span>
 
       <!--button VIEW GRPHS show graphs-->
       <button
@@ -767,7 +767,7 @@
   <?php
     if(!$sublevel){ ?>
       <div class="card" id=links-to-l2>
-        <?php cardMenu('Detailed assessment')?>
+        <?php cardMenu(translate('#Tier B - Detailed assessment'))?>
       </div>
       <script>
         (function(){

@@ -229,7 +229,6 @@
       calculateGHG();
     }
   </script>
-
 </head><body onload=init()><center>
   <?php include'sidebar.php'?>
   <?php include'navbar.php'?>
@@ -237,75 +236,51 @@
   <?php include'caption.php'?>
   <!--title-->
   <h1>
-    <span id=Name></span>
-    <script>
-      document.querySelector('h1 span#Name').innerHTML=Global.General.Name;
-    </script>
-    &mdash;
-    <?php write("#GHG Emissions Summary (Overview)")?>
-  </h1>
-  <h4>
-    <?php write("#assessment_period")?>
-    <b>
-      <span id=Days></span> <?php write("#days")?>
-      (<span id=Years></span> <?php write("#years")?>)
+    <div>
+      <span id=Name></span>
       <script>
-        document.querySelector('h4 span#Days').innerHTML=format(Global.General.Days());
-        document.querySelector('h4 span#Years').innerHTML=format(Global.General.Years());
+        document.querySelector('h1 span#Name').innerHTML=Global.General.Name;
       </script>
-    </b>
-  </h4>
+      &mdash; <?php write("#GHG Emissions Summary (Overview)")?>
+      &mdash; <?php write("#assessment_period")?>:
+      <span>
+        <span id=Days></span> <?php write("#days")?>
+        (<span id=Years></span> <?php write("#years")?>)
+        <script>
+          document.querySelector('h1 span#Days').innerHTML=format(Global.General.Days());
+          document.querySelector('h1 span#Years').innerHTML=format(Global.General.Years());
+        </script>
+      </span>
+    </div>
+  </h1>
 </center>
-
-<!--'title like' div detailed sources-->
-<div id=container_detailed style=display:none>
-  <div><b id=detailed_title></b></div>
-  <table id=detailed></table>
-  <style>
-    div#container_detailed {
-      position:fixed;
-      font-size:11px;
-      font-family:monospace;
-      z-index:998;
-      background:white;
-      padding:0.3em 0.5em;
-      box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
-      border:1px solid #ccc;
-      text-align:left;
-    }
-  </style>
-</div>
 
 <!--content-->
 <div>
   <!--tab buttons-->
   <div class=tab_buttons id=ghg_summary_tabs>
-    <button class=left onclick="tabs_show_tables()" disabled>
-      <?php write("#Tables")?>
-    </button>
-    <button class=right onclick="tabs_show_graphs()">
-      <?php write("#Charts")?>
-    </button>
+    <button class=left  onclick="tabs_show_tables()" disabled> <?php write("#Tables")?> </button>
+    <button class=right onclick="tabs_show_graphs()">          <?php write("#Charts")?> </button>
     <script>
       function tabs_show_graphs(){
-        document.getElementById('tables').style.display='none'
-        document.getElementById('graphs_container').style.display=''
+        document.getElementById('tables').style.display='none';
+        document.getElementById('graphs_container').style.display='';
+        document.querySelector('#ghg_summary_tabs button.right').setAttribute('disabled',true);
+        document.querySelector('#ghg_summary_tabs button.left').removeAttribute('disabled');
         Graphs.graph4(false,'graph_1');
         Graphs.graph1(false,'graph_2');
-        document.querySelector('#ghg_summary_tabs button.right').setAttribute('disabled',true)
-        document.querySelector('#ghg_summary_tabs button.left').removeAttribute('disabled')
       }
       function tabs_show_tables(){
-        document.getElementById('tables').style.display=''
-        document.getElementById('graphs_container').style.display='none'
-        document.querySelector('#ghg_summary_tabs button.right').removeAttribute('disabled')
-        document.querySelector('#ghg_summary_tabs button.left').setAttribute('disabled',true)
+        document.getElementById('tables').style.display='';
+        document.getElementById('graphs_container').style.display='none';
+        document.querySelector('#ghg_summary_tabs button.right').removeAttribute('disabled');
+        document.querySelector('#ghg_summary_tabs button.left').setAttribute('disabled',true);
       }
     </script>
   </div>
 
   <!--tables: left tab-->
-  <div id=tables style=width:66%;margin:auto>
+  <div id=tables style="width:66%;margin:auto">
     <!--sources of ghg-->
     <div>
       <div>
@@ -456,7 +431,7 @@
           width:95%;
           box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
         }
-        #sources td {padding:1.2em 0.5em;}
+        #sources td {padding:0.8em 0.5em;}
         #sources td[field],
         #sources td[substage_sum] {text-align:right}
         #sources img {vertical-align:middle;width:30px;margin-right:8px}
@@ -495,7 +470,7 @@
     <div>
       <table id=avoided style="width:95%;margin:1.5em 0">
         <tr>
-          <th rowspan style=background:green>
+          <th rowspan style=background:#bbb>
             <a href="variable.php?id=ww_GHG_avoided" style=color:white>
               <?php write("#ww_GHG_avoided_descr")?>
             </a>
@@ -561,9 +536,6 @@
   </style>
 </div>
 
-<!--CURRENT JSON--><?php include'currentJSON.php'?>
-<script>google.charts.load('current',{'packages':['corechart','gauge','bar']});</script>
-
 <script>
   //copy all stage functions inside substages
   Structure
@@ -585,3 +557,24 @@
 </script>
 
 <div style=margin-bottom:8em></div>
+<!--CURRENT JSON--><?php include'currentJSON.php'?>
+<script>google.charts.load('current',{'packages':['corechart']});</script>
+
+<!--floating div for detailed sources-->
+<div id=container_detailed style=display:none>
+  <div><b id=detailed_title></b></div>
+  <table id=detailed></table>
+  <style>
+    div#container_detailed {
+      position:fixed;
+      font-size:11px;
+      font-family:monospace;
+      z-index:998;
+      background:white;
+      padding:0.3em 0.5em;
+      box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
+      border:1px solid #ccc;
+      text-align:left;
+    }
+  </style>
+</div>

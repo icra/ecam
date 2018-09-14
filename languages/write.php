@@ -20,11 +20,8 @@ if($lang_json==NULL && $lang!="null"){
 function translate($id){
   global $lang; global $lang_json;
   if($lang=="null"){return "[$id]";}
-  else{
-    //find text or display [id]
-    $text = isset($lang_json[$id]) ? $lang_json[$id] : "[$id]";
-    return $text;
-  }
+  $text=isset($lang_json[$id]) ? $lang_json[$id] : "[$id]";
+  return $text;
 }
 function write($id){
   echo translate($id);
