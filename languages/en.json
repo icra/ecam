@@ -615,7 +615,7 @@
   "#inc":"Incineration",
   "#index_chrome_warning":"Please use Google Chrome. It is not optimized for other browsers.",
   "#index_description":" The Energy Performance and Carbon Emissions Assessment and Monitoring Tool is designed for assessing the carbon emissions of the urban water cycle that are within the operational boundaries of water and wastewater utilities and prepare these utilities for future reporting needs on climate mitigation.  ",
-  "#initial_estimation_description":"Estimation of GHG emissions at system-wide level",
+  "#initial_estimation_description":"Estimation of GHG emissions",
   "#inputs":"Inputs",
   "#land":"Landfilling",
   "#level3_click_to_modify_the_name":"Click here to modify the name",
