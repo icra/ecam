@@ -549,7 +549,7 @@
     <div style="padding:0.5em 1em;">
       <div class=flex style="justify-content:center">
         <button id=resetTierB onclick="resetTierB()">
-           Reset Tier A estimations and Tier B stage values
+           <?php write("#Reset Tier A estimations and Tier B stage values") ?>
         </button>
         <script>
           //TODO issue #94

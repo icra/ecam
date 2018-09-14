@@ -388,7 +388,7 @@
             "  <a style='color:"+color+"' "+
             "    href=variable.php?id="+output+
             "    caption='["+match_localization.toString()+"] "+ (translate(output+"_descr")||translate(output))+"'"+
-            "  >"+output+"</a>"+(is_input?" <span>(estimation)</span>":"");
+            "  >"+output+"</a>"+(is_input?" <span>("+translate('estimation')+")</span>":"");
 
           //variable value and formula
           if(!is_input){
