@@ -386,7 +386,7 @@
         <!--Water-->
         <tr><th colspan=3 style="background:#0aaff1">
           <div class=flex style="justify-content:space-between">
-            <div onclick=toggleStageVisibility('water')>
+            <div onclick=toggleStageVisibility('water') style=width:70%>
               <span expanded=1 stage=water>▼</span>
               <img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
             </div>
@@ -413,7 +413,7 @@
         <!--Waste-->
         <tr><th colspan=3 style=background:#d71d24>
           <div class=flex style="justify-content:space-between">
-            <div onclick=toggleStageVisibility('waste')>
+            <div onclick=toggleStageVisibility('waste') style=width:70%>
               <span expanded=1 stage=waste>▼</span>
               <img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
             </div>
@@ -462,7 +462,7 @@
         <!--FSM-->
         <tr><th colspan=3 style=background:green>
           <div class=flex style="justify-content:space-between">
-            <div onclick=toggleStageVisibility('faecl')>
+            <div onclick=toggleStageVisibility('faecl') style=width:70%>
               <span expanded=1 stage=faecl>▼</span>
               <img src=img/faecl.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Faecl')?>
             </div>
@@ -502,6 +502,7 @@
             <label><?php write('#yes')?><input name=fst_valorizing_biogas type=radio value=1></label>
           </tr>
         </tr>
+
         <!--estimations for FSM-->
         <script src=fsm_tierA.js></script>
       </table>
@@ -540,113 +541,159 @@
 
     <!--reset tier b-->
     <div style="padding:0.5em 1em;">
-      <div class=flex style="justify-content:center">
-        <button id=resetTierB onclick="resetTierB()">
-           <?php write("#Reset Tier A estimations and Tier B stage values") ?>
-        </button>
-        <script>
-          //TODO issue #94
-          function resetTierB(){
-            var TierA=[
-              //population
-                'wwc_conn_pop',
-                'wwt_serv_pop',
-              //energy consumed
-                'wsa_nrg_cons',
-                'wst_nrg_cons',
-                'wsd_nrg_cons',
-                'wwc_nrg_cons',
-                'wwt_nrg_cons',
-                'wwd_nrg_cons',
-              //fuel from engines consumed
-                'wsa_vol_fuel',
-                'wst_vol_fuel',
-                'wsd_vol_fuel',
-                'wwc_vol_fuel',
-                'wwt_vol_fuel',
-                'wwd_vol_fuel',
-              //water injected to distribution
-                'wsd_vol_dist',
-              //running costs
-                'ws_run_cost',
-                'ws_nrg_cost',
-                'ww_run_cost',
-                'ww_nrg_cost',
-              //volume of treated wastewater
-                'wwt_vol_trea',
-              //volume of discharged wastewater
-                'wwd_vol_disc',
-                'wwd_n2o_effl',
-            ];
+      <div class=flex style="justify-content:center;width:70%;margin:auto">
+        <div>
+          <button id=resetTierB onclick="resetTierB()">
+            <?php write("#Reset Tier A estimations and Tier B stage values") ?>
+          </button>
+          <script>
+            //issue #94
+            function resetTierB(){
+              var TierA=[
+                //population
+                  'ws_resi_pop',
+                  'ws_serv_pop',
+                  'ww_resi_pop',
+                  'wwc_conn_pop',
+                  'wwt_serv_pop',
+                  'fs_resi_pop',
+                  'fs_onsi_pop',
+                //nrg_cost
+                  'ws_nrg_cost',
+                  'ws_run_cost',
+                  'ww_nrg_cost',
+                  'ww_run_cost',
+                //energy consumed
+                  'wsa_nrg_cons',
+                  'wst_nrg_cons',
+                  'wsd_nrg_cons',
+                  'wwc_nrg_cons',
+                  'wwt_nrg_cons',
+                  'wwd_nrg_cons',
+                  'fsc_nrg_cons',
+                  'fst_nrg_cons',
+                  'fsr_nrg_cons',
+                //fuel from engines consumed
+                  'wsa_vol_fuel',
+                  'wst_vol_fuel',
+                  'wsd_vol_fuel',
+                  'wwc_vol_fuel',
+                  'wwt_vol_fuel',
+                  'wwd_vol_fuel',
+                  'fst_vol_fuel',
+                  'fsr_vol_fuel',
+                //fuel from trucks
+                  'fsc_vol_trck',
+                  'fst_vol_trck',
+                  'fsr_vol_trck',
+                //water injected to distribution
+                  'wsd_vol_dist',
+                //running costs
+                  'ws_run_cost',
+                  'ws_nrg_cost',
+                  'ww_run_cost',
+                  'ww_nrg_cost',
+                //volume of treated wastewater
+                  'wwt_vol_trea',
+                //volume of discharged wastewater
+                  'wwd_vol_disc',
+                  'wwd_n2o_effl',
+                  'fsc_cont_emp', //fsm containments emptied
+                  'fsc_flooding', //fsc flooding option
+              ];
 
-            [
-              Global.Water.Abstraction,
-              Global.Water.Treatment,
-              Global.Water.Distribution,
-              Global.Waste.Collection,
-              Global.Waste.Treatment,
-              Global.Waste.Discharge,
-            ].forEach(stage=>{
-              Object.keys(stage)
-                .filter(key=>{return typeof(stage[key])=='number'})
-                .filter(key=>{return TierA.indexOf(key)==-1})
-                .forEach(key=>{
-                  stage[key]=0;
-              });
-            });
-
-            //biogas set to "No"
-            document.querySelector('input[name=wwt_producing_biogas][type=radio][value="0"]').dispatchEvent(new CustomEvent('click'));
-            //sludge disposal method set to 'None'
-            Global.Configuration.Selected.sludge_estimation_method="0";
-            document.querySelector('#sludge_estimation').value=0;
-
-            init();
-          }
-        </script>
-        <style>
-          button#resetTierB {
-            padding:1em 1.6em;
-            border-radius:4px;
-            width:70%;
-          }
-        </style>
+              //set to zero the inputs NOT in tier A
+              Structure
+                .map(stage=>{return stage.sublevel ? Global[stage.level][stage.sublevel] : Global[stage.level]})
+                .forEach(stage=>{
+                  Object.keys(stage)
+                    .filter(key=>{return typeof(stage[key])=='number'})
+                    .filter(key=>{return TierA.indexOf(key)==-1}) //only set to zero the ones not in tier A
+                    .forEach(key=>{
+                      stage[key]=0;
+                  });
+                });
+                
+              //wwt biogas set to "No" (includes wwt_valorizing_biogas)
+              document.querySelector('input[name=wwt_producing_biogas][type=radio][value="0"]').dispatchEvent(new CustomEvent('click'));
+              //sludge disposal method set to 'None'
+              Global.Configuration.Selected.sludge_estimation_method="0";
+              document.querySelector('#sludge_estimation').value=0;
+              //fst biogas set to "No" (includes fst_valorizing_biogas)
+              document.querySelector('input[name=fst_producing_biogas][type=radio][value="0"]').dispatchEvent(new CustomEvent('click'));
+              init();
+            }
+          </script>
+          <style>
+            button#resetTierB {
+              padding:1em 1.6em;
+              border-radius:4px;
+              width:100%;
+            }
+          </style>
+        </div>
 
         <!--help-->
-        <div class="card folded" style="width:70%">
+        <div class="card folded">
           <?php cardMenu("More info on reset button")?>
           <div style=padding:2px>
             The reset button does several things:<br>
-
             <ol>
               <li>Sets the tier B values to 0, except the tier A ones.
               <li>Sets "Are you producing biogas?" to "No".
               <li>Sets "Are you valorizing biogas?" to "No".
               <li>Sets "Select main treatment tye" to "None".
               <li>Sets "Select sludge disposal method" to "None".
+              <li>Sets the 4 options for Faecal Sludge Management to default (Containment type, treatment type, disposal type and type of faecal sludge).
             </ol>
 
             All the inputs that have estimations are set to zero:<br>
             <ul>
-              <li>Biogas produced = 0
-              <li>Percentage of methane in biogas = 0
-              <li>Biogas valorised = 0
-              <li>Biogas flared = 0
-              <li>Influent BOD load = 0
-              <li>Effluent BOD load = 0
-              <li>BOD removed as sludge = 0
-              <li>CH4 emission factor = 0
-              <li>Sludge produced in WWTPs = 0
-              <li>Dry weight in sludge produced = 0
-              <li>Sludge composted = 0
-              <li>Sludge incinerated = 0
-              <li>Sludge sent to land application = 0
-              <li>Sludge sent to landfilling = 0
-              <li>Sludge stockpiled = 0
-              <li>Fluidized Bed Reactor Temperature = 0
+              <li>
+                Wastewater estimations set to 0:
+                <ul>
+                  <li>Biogas produced = 0
+                  <li>Percentage of methane in biogas = 0
+                  <li>Biogas valorised = 0
+                  <li>Biogas flared = 0
+                  <li>Influent BOD load = 0
+                  <li>Effluent BOD load = 0
+                  <li>BOD removed as sludge = 0
+                  <li>CH4 emission factor = 0
+                  <li>Sludge produced in WWTPs = 0
+                  <li>Dry weight in sludge produced = 0
+                  <li>Sludge composted = 0
+                  <li>Sludge incinerated = 0
+                  <li>Sludge sent to land application = 0
+                  <li>Sludge sent to landfilling = 0
+                  <li>Sludge stockpiled = 0
+                  <li>Fluidized Bed Reactor Temperature = 0
+                </ul>
+              </li>
+              <li>
+                Faecal sludge management estimations set to 0:
+                <ul>
+                  <li>Influent BOD load = 0
+                  <li>CH4 emission factor = 0
+                  <li>Faecal sludge density = 0
+                  <li>Volume of faecal sludge emptied = 0
+                  <li>BOD concentration of faecal sludge = 0
+                  <li>BOD removed as faecal sludge = 0
+                  <li>Effluent BOD load = 0
+                  <li>BOD removed with excess sludge = 0
+                  <li>Biogas produced = 0
+                  <li>Biogas valorized = 0
+                  <li>Biogas flared = 0
+                  <li>Methane in Biogas = 0
+                  <li>Dry weight sent to landfill = 0
+                  <li>Dry weight sent to land application = 0
+                  <li>Volume of faecal sludge dumped = 0
+                </ul>
+              </li>
             </ul>
 
-            Then, the estimations can be recalculated clicking again the options for biogas production, treatment type and sludge disposal method.
+            Then, the estimations will be recalculated again refilling the input fields and the options.<br>
+            Note that this button does not affect the possible substages that the user may have created previously.
           </div>
         </div>
       </div>
@@ -727,7 +774,7 @@
 <script>if(google){google.charts.load('current',{'packages':['corechart','gauge','bar']});}</script>
 </html>
 
-<!--onchange listeners for <input> elements-->
+<!--add onchange listeners for <inputs> and <selects> magnitude==Option-->
 <script>
   document.querySelectorAll("#inputs input[id]:not([type=radio])").forEach(input=>{
     input.addEventListener('focus',function(){
@@ -740,40 +787,40 @@
       input.addEventListener('change',function(){BEV.updateOutput(this)});
     }
   });
-  //listeners for inputs magnitude=Option
   document.querySelectorAll("#inputs td.option select[id]").forEach(select=>{
     select.addEventListener('change',function(){BEV.updateField(this)});
   });
 </script>
 
 <!--add lock symbol for inputs that are outputs-->
-<script>
-  document.querySelectorAll('#inputs td.output').forEach(td=>{
-    //find the input element inside the cell
-    var input=td.querySelector('input[id]')
-    if(!input)return;
-    //find the level it belongs
-    var level=locateVariable(input.id).level;
-    //if substages>1, lock the cell
-    Object.keys(Substages[level]).forEach(sublevel=>{
-      //count substages
-      var n=Substages[level][sublevel].length;
-      var sum=getVariable(input.id);
-      if(n && sum>0){
-        td.classList.add('locked');
-        input.disabled=true;
-        td.parentNode.setAttribute('caption','Since you have entered more detailed data in Tier B stages, you cannot modify this input.<br>Now it displays the sum of its related '+translate(level)+' stage\'s inputs. If you still want to modify it, please set its related inputs to 0 in Tier B');
-      }
+  <script>
+    document.querySelectorAll('#inputs td.output').forEach(td=>{
+      //find the input element inside the cell
+      var input=td.querySelector('input[id]')
+      if(!input)return;
+      //find the level it belongs
+      var level=locateVariable(input.id).level;
+      //if substages>1, lock the cell
+      Object.keys(Substages[level]).forEach(sublevel=>{
+        //count substages
+        var n=Substages[level][sublevel].length;
+        var sum=getVariable(input.id);
+        if(n && sum>0){
+          td.classList.add('locked');
+          input.disabled=true;
+          td.parentNode.setAttribute('caption','Since you have entered more detailed data in Tier B stages, you cannot modify this input.<br>Now it displays the sum of its related '+translate(level)+' stage\'s inputs. If you still want to modify it, please set its related inputs to 0 in Tier B');
+        }
+      });
     });
-  });
-</script>
-<style>
-  #inputs td.output.locked {background:#fff; }
-  #inputs td.output.locked + td:before { content:"\1f512"; }
-  #inputs td.output.locked input { cursor:default; }
-</style>
+  </script>
+  <style>
+    #inputs td.output.locked {background:#fff; }
+    #inputs td.output.locked + td:before { content:"\1f512"; }
+    #inputs td.output.locked input { cursor:default; }
+  </style>
+<!--/add lock symbol for inputs that are outputs-->
 
-<!--write units-->
+<!--write units next to the inputs-->
 <script>
   document.querySelectorAll('#inputs tr[stage] td input[id]').forEach(input=>{
     var td_unit=input.parentNode.nextSibling;
@@ -784,9 +831,10 @@
   });
 </script>
 
-<!--only show active stages-->
+<!--hide inactive inputs-->
 <script>
   (function(){
+    //Expanded as user clicked
     Structure.filter(s=>!s.sublevel).forEach(s=>{
       if(!Expanded[s.alias]){
         document.querySelectorAll('#inputs tr[stage='+s.alias+']').forEach(tr=>{
@@ -796,18 +844,17 @@
       }
     });
 
+    //Active stages
     Structure.filter(s=>!s.sublevel).map(s=>s.alias).forEach(function(stage){
       if(Global.Configuration.ActiveStages[stage]==1) {
-        //show all rows with stage=stage
         var rows=document.querySelectorAll('#inputs tr[stage='+stage+']');
         for(var i=0;i<rows.length;rows[i++].classList.remove('hidden')){}
       }else{
-        //show "Stage not active"
         document.querySelector('table#inputs tr[indic='+stage+']').classList.remove('hidden');
       }
     });
 
-    //hide fuel if its filter is not active
+    //volume of fuel engines hidden if its filter is not active
     if(Global.General.anyFuelEngines==0){
       ['ws_vol_fuel','ww_vol_fuel'].forEach(function(field){
         document.querySelector('#inputs tr[stage] input[id='+field+']').parentNode.parentNode.classList.add('hidden');
@@ -815,4 +862,5 @@
     }
   })();
 </script>
+
 <div style=margin-bottom:8em></div>
