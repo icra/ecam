@@ -236,12 +236,12 @@
     /*code and description*/
     var newCell=document.createElement('td');
     newRow.appendChild(newCell);
-    newCell.setAttribute('title', translate(field+"_expla"));
     if(isCV)newCell.classList.add('isCV');
 
     //input description
     newCell.appendChild((function(){
       var span=document.createElement('span');
+      span.setAttribute('title', translate(field+"_expla"));
       span.innerHTML=translate(field+'_descr');
       return span;
     })());
