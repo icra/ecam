@@ -40,9 +40,10 @@ var Formulas={
     for(var field in object) {
       if(field==id)continue;
       if(typeof object[field]=="object") {
-        matches=matches.concat(this.outputsPerInput(id,object[field]));
+        //console.log(id,': going inside "'+field+'"');
+        matches=matches.concat(this.outputsPerInput(id,object[field])); //stack overflow potential WARNING
       }
-      if(typeof object[field]=="function" || typeof object[field]=="number") {
+      if(typeof object[field]=="function"){
         match=object[field].toString().search(reg); //will return -1 if not found
         if(match+1){matches.push(field);}
       }

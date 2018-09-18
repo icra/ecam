@@ -36,6 +36,9 @@
 <!--graphs--><script src="graphs.js"></script>
 <!--unfccc--><script src="dataModel/unfccc.js"></script>
 
+<script>
+</script>
+
 <?php /**php utils**/
 	//create a menu for folding the parent div.card element
 	function cardMenu($name){

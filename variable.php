@@ -344,7 +344,7 @@
 
         //look for the code "id" inside each output
         var outputsPerInput=Formulas.outputsPerInput(id)
-          .filter(output=>{return !Exceptions[output]})
+
         //if is not used to calculate anything, hide row
         if(outputsPerInput.length==0) {
           return "<span style=color:#999><?php write('#variable_nothing')?></span>";

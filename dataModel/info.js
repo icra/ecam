@@ -8,6 +8,9 @@
 
 var Info = {
 
+  ww_ch4_efac_unt: {magnitude:"Mass/Mass", unit:"kgCH<sub>4</sub>/kgBOD" },
+  ww_ch4_efac_unc: {magnitude:"Mass/Mass", unit:"kgCH<sub>4</sub>/kgBOD" },
+
   fsr_ghg_avoided_land: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>eq"},
 
   fst_nrg_biog:       {magnitude:"Energy", unit:"kWh"},

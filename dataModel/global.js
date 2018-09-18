@@ -284,11 +284,33 @@ var Global = {
     "ww_resi_pop":0,
     ww_conn_pop:   function(){return this.Collection.wwc_conn_pop},
     ww_serv_pop:   function(){return this.Treatment.wwt_serv_pop},
-    ww_SL_serv_pop:function(){return 100*this.ww_serv_pop()/this.ww_resi_pop},
-    ww_SL_treat_m3:function(){return 100*this.ww_serv_pop()/this.ww_conn_pop()},
     ww_uncl_pop:   function(){return Math.max(0,this.ww_resi_pop-this.ww_conn_pop()-Global.Faecl.fs_onsi_pop)},
     ww_untr_pop:   function(){return Math.max(0,this.ww_conn_pop()-this.ww_serv_pop())},
+    ww_SL_serv_pop:function(){return 100*this.ww_serv_pop()/this.ww_resi_pop},
+    ww_SL_treat_m3:function(){return 100*this.ww_serv_pop()/this.ww_conn_pop()},
 
+    //energy costs related
+    "ww_nrg_cost":0,
+    "ww_run_cost":0,
+    ww_SL_nrg_cost:function(){return 100*this.ww_nrg_cost/this.ww_run_cost},
+
+    //energy and fuel consumed across ww stages
+    ww_nrg_cons:function(){return this.Collection.wwc_nrg_cons+this.Treatment.wwt_nrg_cons+this.Discharge.wwd_nrg_cons},
+    ww_vol_fuel:function(){return this.Collection.wwc_vol_fuel+this.Treatment.wwt_vol_fuel+this.Treatment.wwt_fuel_dig+this.Discharge.wwd_vol_fuel},
+
+    //untreated and uncollected emission factors
+    //untreated emissions
+      "ww_ch4_efac_unt":0, //emission factor for untreated wastewater
+      ww_KPI_GHG_unt_ch4:function(){return this.ww_untr_pop()*Global.General.bod_pday/1000*Global.General.Days()*this.ww_ch4_efac_unt*Cts.ct_ch4_eq.value;},//old c_ww52
+      ww_KPI_GHG_unt_n2o:function(){return this.ww_untr_pop()*Global.General.prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;},
+      ww_KPI_GHG_unt:    function(){return this.ww_KPI_GHG_unt_ch4()+this.ww_KPI_GHG_unt_n2o();},
+    //uncollected emissions (outside assessment)
+      "ww_ch4_efac_unc":0, //emission factor for uncollected wastewater
+      ww_SL_ghg_unc_ch4:function(){return this.ww_uncl_pop()*Global.General.bod_pday/1000*Global.General.Days()*this.ww_ch4_efac_unc*Cts.ct_ch4_eq.value;},
+      ww_SL_ghg_unc_n2o:function(){return this.ww_uncl_pop()*Global.General.prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;},
+      ww_SL_ghg_unc:    function(){return this.ww_SL_ghg_unc_ch4()+this.ww_SL_ghg_unc_n2o();},
+
+    //emissions avoided in inner stages
     ww_GHG_avoided : function(){//<br>
       return this.Treatment.wwt_SL_GHG_avoided()+ //<br>
       this.Treatment.wwt_wr_C_seq_slu()+          //<br>
@@ -301,23 +323,6 @@ var Global = {
       0;
     },
 
-    //energy costs related
-    "ww_nrg_cost":0,
-    "ww_run_cost":0,
-    ww_SL_nrg_cost:function(){return 100*this.ww_nrg_cost/this.ww_run_cost},
-
-    //energy and fuel consumed across ww stages
-    ww_nrg_cons:function(){return this.Collection.wwc_nrg_cons+this.Treatment.wwt_nrg_cons+this.Discharge.wwd_nrg_cons},
-    ww_vol_fuel:function(){return this.Collection.wwc_vol_fuel+this.Treatment.wwt_vol_fuel+this.Treatment.wwt_fuel_dig+this.Discharge.wwd_vol_fuel},
-
-    //untreated emissions
-      ww_KPI_GHG_unt_ch4:function(){return this.ww_untr_pop()*Global.General.bod_pday/1000*Global.General.Days()*Cts.ct_ch4_ef.value*Cts.ct_ch4_eq.value;},//old c_ww52
-      ww_KPI_GHG_unt_n2o:function(){return this.ww_untr_pop()*Global.General.prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;},
-      ww_KPI_GHG_unt:    function(){return this.ww_KPI_GHG_unt_ch4()+this.ww_KPI_GHG_unt_n2o();},
-    //uncollected emissions (outside assessment)
-      ww_SL_ghg_unc_ch4:function(){return this.ww_uncl_pop()*Global.General.bod_pday/1000*Global.General.Days()*0.3*Cts.ct_ch4_eq.value;},
-      ww_SL_ghg_unc_n2o:function(){return this.ww_uncl_pop()*Global.General.prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;},
-      ww_SL_ghg_unc:    function(){return this.ww_SL_ghg_unc_ch4()+this.ww_SL_ghg_unc_n2o();},
 
     "Collection":{
       //no filter
@@ -1052,17 +1057,6 @@ var Global = {
       prot_con:"Albania", //country selected for protein consumption
       sludge_estimation_method:"0",
       gwp_reports_index:0,
-
-      //for exceptions (string with the treatment selected)
-      wwt_ch4_efac:"",
-      wwt_bod_slud:"",
-      fsc_bod_conc_fs:"",
-      fsc_ch4_efac:"",
-      fsc_fdensity:"",
-      fst_bod_slud:"",
-      fst_ch4_efac:"",
-      fsr_bod_conc_fs:"",
-      fsr_ch4_efac:"",
     },
 
     //answers for filters (see "questions.js")
@@ -1082,6 +1076,7 @@ Global.Waste.wwt_KPI_GHG=function(){return Global.Waste.Treatment.wwt_KPI_GHG()}
 Global.Waste.wwd_KPI_GHG=function(){return Global.Waste.Discharge.wwd_KPI_GHG()};
 Global.Water.ws_KPI_GHG =function(){return this.wsa_KPI_GHG()+this.wst_KPI_GHG()+this.wsd_KPI_GHG()};
 Global.Waste.ww_KPI_GHG =function(){return this.wwc_KPI_GHG()+this.wwt_KPI_GHG()+this.wwd_KPI_GHG()+this.ww_KPI_GHG_unt()};
+
 
 //extra object for opportunities added by Gary
 Global.Opps={

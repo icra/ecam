@@ -90,12 +90,6 @@ var Cts = {
     unit:"kg N<sub>2</sub>O / kg N<sub>2</sub>O-N",
   },
 
-  ct_ch4_ef:{
-    value:0.06,
-    descr:"EF. This comes from the multiplication of Bo (kg CH<sub>4</sub>/kg BOD) (=0.6) x MCFj (=0.1, for direct discharge into a river, lake or sea)",
-    unit:"kg CH<sub>4</sub> / kg BOD",
-  },
-
   ct_gravit:{
     value:9810,
     descr:"Specific weight of H<sub>2</sub>O",

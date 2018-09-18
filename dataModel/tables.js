@@ -7,6 +7,7 @@ var Tables = {
       "Natural Gas"     :{value:2,EFCH4:{engines:10,vehicles:92},EFN2O:{engines:0.1,vehicles:0.2},EFCO2:56100,FD:0.75,NCV:48.0},
     },
 
+  //L1 WS
 	//wsa
     "wsa_pmp_type":{
       "None":{value:0},
@@ -45,6 +46,14 @@ var Tables = {
       "15.7 - 38 kW":{value:1},
       "39 - 96 kW":{value:2},
       "> 96 kW":{value:3},
+    },
+
+  //L1 WW
+    "ww_ch4_efac":{
+      "Select":{                                    value:0, ch4_efac:0},
+      "Stagnant sewer and anaerobic water bodies":{ value:1, ch4_efac:0.3},
+      "Sea and aerobic water bodies":{              value:2, ch4_efac:0.06},
+      "Fast flowing and well maintained sewers":{   value:3, ch4_efac:0},
     },
 
 	//wwc
@@ -119,6 +128,7 @@ var Tables = {
       "For fishfarming":{value:6},
     },
 
+  //L1 FS
   //fsc
     "fsc_type_tre":{
       "No containment (open defecation)":{                              value:0,  ch4_efac:0.027045, ch4_efac_flooding:0.027045, BOD_conc_FS:67.8, fs_density:1400},
