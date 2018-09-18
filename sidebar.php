@@ -80,18 +80,19 @@
 
     /* Update Global object with loaded file parsed to JSON */
     function loadFile(evt) {
-        var file = evt.target.files[0];
-        var reader = new FileReader();
-        reader.onload=function() {
-          var SavedFile = JSON.parse(reader.result);
-          copyFieldsFrom(SavedFile.Global,Global);
-          copyFieldsFrom(SavedFile.Substages,Substages); //substages are saved unpacked
-          updateResult();
-          window.location='birds.php';
-        }
-        try{
-          reader.readAsText(file);
-        }catch(e){alert(e)}
+      removeAllCookies();
+      var file = evt.target.files[0];
+      var reader = new FileReader();
+      reader.onload=function() {
+        var SavedFile = JSON.parse(reader.result);
+        copyFieldsFrom(SavedFile.Global,Global);
+        copyFieldsFrom(SavedFile.Substages,Substages); //substages are saved unpacked
+        updateResult(); //write cookies
+        window.location='sources.php'; //go to ghg summary
+      }
+      try{
+        reader.readAsText(file);
+      }catch(e){alert(e)}
     }
 
     /* clear current system */
