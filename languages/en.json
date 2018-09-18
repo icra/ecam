@@ -5,8 +5,8 @@
   "#Sea and aerobic water bodies":"Sea and aerobic water bodies",
   "#Fast flowing and well maintained sewers":"Fast flowing and well maintained sewers",
 
-  "#ww_ch4_efac_unt_descr":"CH<sub>4</sub> emissionf factor (untreated wastewater)",
-  "#ww_ch4_efac_unc_descr":"CH<sub>4</sub> emissionf factor (uncollected wastewater)",
+  "#ww_ch4_efac_unt_descr":"CH<sub>4</sub> emission factor (untreated wastewater)",
+  "#ww_ch4_efac_unc_descr":"CH<sub>4</sub> emission factor (uncollected wastewater)",
 
   "#Inputs & Outputs":"Inputs & Outputs",
   "#Tier B - Detailed assessment":"Tier B - Detailed assessment",
