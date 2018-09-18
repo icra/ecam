@@ -56,6 +56,7 @@ var Recommendations={
         return b*0.55*Global.General.bod_pday*Global.Waste.ww_serv_pop()*0.9*1e-3*1.176*Global.General.Days();//<br>
       },
       "wwt_dryw_slu"      :function(){return 0.04*Global.Waste.Treatment.wwt_mass_slu},
+      "wwt_mass_slu_sto"  :function(){return Global.Waste.Treatment.wwt_dryw_slu},
       "wwt_mass_slu_comp" :function(){return Global.Waste.Treatment.wwt_dryw_slu},
       "wwt_mass_slu_inc"  :function(){return Global.Waste.Treatment.wwt_dryw_slu},
       "wwt_mass_slu_app"  :function(){return Global.Waste.Treatment.wwt_dryw_slu},
