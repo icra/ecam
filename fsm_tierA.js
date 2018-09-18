@@ -43,10 +43,12 @@ function apply_fsm_estimations(){
 
 /*NUMERIC INPUTS LISTENERS*/
   //onchange fsc_vol_trck (volume of fuel consumed)
-  document.querySelector('#inputs input#fsc_vol_trck').addEventListener('change',function(){
+  document.querySelector('#inputs input#fs_vol_trck').addEventListener('change',function(){
     var value=parseFloat((this.value));
     if(value){
       Global.Configuration['Yes/No'].fsc_transport=1; //activate filter for fsc_transport
+      Global.Configuration['Yes/No'].fst_transport=1; //activate filter for fst_transport
+      Global.Configuration['Yes/No'].fsr_transport=1; //activate filter for fsr_transport
     }
   });
   //onchange fsc_cont_emp (% containments emptied)

@@ -183,6 +183,7 @@
       //spred the value among the stages
       //get L1 name: "Water" or "Waste"
       var L1=locateVariable(field).level;
+      //the following code block can be improved using "Structure.filter()"
       if(L1=="Water"){
         //count active stages
         var wsa=Global.Configuration.ActiveStages.waterAbs;
@@ -481,7 +482,7 @@
           <!--fsc numeric inputs-->
           <tr indic=faecl class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
           <tr stage=faecl class=hidden><td><?php write('#fs_nrg_cons_descr') ?><td class=output><input id='fs_nrg_cons' value=0><td class=unit>
-          <tr stage=faecl class=hidden><td><?php write('#fsc_vol_trck_descr')?><td class=input><input id='fsc_vol_trck' value=0><td class=unit>
+          <tr stage=faecl class=hidden><td><?php write('#fs_vol_trck_descr')?> <td class=output><input id='fs_vol_trck' value=0><td class=unit>
           <tr stage=faecl class=hidden><td><?php write('#fsc_cont_emp_descr')?><td class=input><input id='fsc_cont_emp' value=0><td class=unit>
 
           <!--fsc,fst,fsr dropdowns-->

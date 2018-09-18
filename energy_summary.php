@@ -205,7 +205,7 @@
         <!--L0 Total energy consumed-->
         <tr><th rowspan=9 style="font-weight:bold;background:#2b6488;">
           <?php write('#TOTAL ENERGY CONSUMED')?> &rarr;<br><br>
-          <span field=TotalNRG><?php write('#Loading')?>...</span>
+          <span field=TotalNRG>0</span>
         </th>
 
         <!--L1 Water-->
@@ -215,17 +215,23 @@
             (<span id=ws_serv_pop>0</span> <?php write("#people")?>)
             <script>document.querySelector('#ws_serv_pop').innerHTML=format(Global.Water.ws_serv_pop)</script>
           </a>
-          <br><br><span field=ws_nrg_cons><?php write('#Loading')?>...</span>
+          <br><br><span field=ws_nrg_cons>0</span>
           </th>
           <!--wsa-->
-          <td><img src=img/waterAbs.png> <a href='edit.php?level=Water&sublevel=Abstraction'><?php write('#Abstraction')?></a>
-            <td field=wsa_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Water sublevel=Abstraction><?php write('#Loading')?>...
+          <td>
+            <img alias=waterAbs src=img/waterAbs.png>
+            <a href='edit.php?level=Water&sublevel=Abstraction'><?php write('#Abstraction')?></a>
+            <td field=wsa_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Water sublevel=Abstraction>0
           <!--wst-->
-          <tr><td><img src=img/waterTre.png> <a href='edit.php?level=Water&sublevel=Treatment'><?php write('#Treatment')?></a>
-            <td field=wst_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Water sublevel=Treatment><?php write('#Loading')?>...
+          <tr><td>
+            <img alias=waterTre src=img/waterTre.png>
+            <a href='edit.php?level=Water&sublevel=Treatment'><?php write('#Treatment')?></a>
+            <td field=wst_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Water sublevel=Treatment>0
           <!--wsd-->
-          <tr><td><img src=img/waterDis.png> <a href='edit.php?level=Water&sublevel=Distribution'><?php write('#Distribution')?></a>
-            <td field=wsd_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Water sublevel=Distribution><?php write('#Loading')?>...
+          <tr><td>
+            <img alias=waterDis src=img/waterDis.png>
+            <a href='edit.php?level=Water&sublevel=Distribution'><?php write('#Distribution')?></a>
+            <td field=wsd_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Water sublevel=Distribution>0
           </tr>
         <tr>
 
@@ -236,17 +242,23 @@
             (<span id=ww_serv_pop>0</span> <?php write("#people")?>)
             <script>document.querySelector('#ww_serv_pop').innerHTML=format(Global.Waste.ww_serv_pop())</script>
           </a>
-          <br><br><span field=ww_nrg_cons><?php write('#Loading')?>...</span>
+          <br><br><span field=ww_nrg_cons>0
           </th>
           <!--wwc-->
-          <td><img src=img/wasteCol.png> <a href='edit.php?level=Waste&sublevel=Collection'><?php write('#Collection')?></a>
-            <td field=wwc_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Waste sublevel=Collection><?php write('#Loading')?>...
+          <td>
+            <img alias=wasteCol src=img/wasteCol.png>
+            <a href='edit.php?level=Waste&sublevel=Collection'><?php write('#Collection')?></a>
+            <td field=wwc_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Waste sublevel=Collection>0
           <!--wwt-->
-          <tr><td><img src=img/wasteTre.png> <a href='edit.php?level=Waste&sublevel=Treatment'><?php write('#Treatment')?> </a>
-            <td field=wwt_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Waste sublevel=Treatment><?php write('#Loading')?>...
+          <tr><td>
+            <img alias=wasteTre src=img/wasteTre.png>
+            <a href='edit.php?level=Waste&sublevel=Treatment'><?php write('#Treatment')?> </a>
+            <td field=wwt_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Waste sublevel=Treatment>0
           <!--wwd-->
-          <tr><td><img src=img/wasteDis.png> <a href='edit.php?level=Waste&sublevel=Discharge'><?php write('#Discharge')?> </a>
-            <td field=wwd_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Waste sublevel=Discharge><?php write('#Loading')?>...
+          <tr><td>
+            <img alias=wasteDis src=img/wasteDis.png>
+            <a href='edit.php?level=Waste&sublevel=Discharge'><?php write('#Discharge')?> </a>
+            <td field=wwd_nrg_cons onmouseenter=fillSourcesSubstages(this,event) level=Waste sublevel=Discharge>0
         </tr>
 
         <!--L1 Faecl-->
@@ -254,17 +266,19 @@
           <a href="edit.php?level=Faecl" style=color:white>
             <?php write('#Faecl')?>
           </a><br><br>
-          <span field=fs_nrg_cons><?php write('#Loading')?>...</span>
+          <span field=fs_nrg_cons>0</span>
           </th>
           <?php
             function drawL2stage($alias, $level, $sublevel, $emission){
               echo "
-                <td><img src=img/$alias.png> <a href='edit.php?level=$level&sublevel=$sublevel'>
+                <td>
+                  <img alias=$alias src=img/$alias.png>
+                  <a href='edit.php?level=$level&sublevel=$sublevel'>
               ";
               write("#$sublevel");
               echo "</a>";
               echo "
-                <td field=$emission level=$level sublevel=$sublevel onmouseenter=fillSourcesSubstages(this,event)>loading...
+                <td field=$emission level=$level sublevel=$sublevel onmouseenter=fillSourcesSubstages(this,event)>0
                 </tr>
               ";
             }
@@ -274,6 +288,15 @@
           ?>
         </tr>
       </table>
+      <script>
+        //modify the image of each stage according to "ActiveStages"
+        document.querySelectorAll("#sources img[alias]").forEach(img=>{
+          var alias=img.getAttribute('alias');
+          if(0==Global.Configuration.ActiveStages[alias]){
+            img.src="img/"+alias+"-off.png";
+          }
+        });
+      </script>
     </div>
 
     <style>
@@ -283,7 +306,6 @@
         font-weight:bold;
         animation:blink 3s ease 0.5s infinite alternate;
       }
-      #sources a {color:black;font-weight:bold}
       table#sources td[field][value].critic:before {
         content:'\26a0 ';
         float:left;
