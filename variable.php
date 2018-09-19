@@ -84,7 +84,7 @@
       newCell=newRow.insertCell(-1)
       if(sublevel) {
         var url = "edit.php";
-        newCell.innerHTML+="&larr; <a href="+url+"?level="+level+"&sublevel="+sublevel+">"+levelAlias+": "+sublevelAlias+"</a>"
+        newCell.innerHTML+="&larr; <a href="+url+"?level="+level+">"+levelAlias+"</a>/<a href="+url+"?level="+level+"&sublevel="+sublevel+">"+sublevelAlias+"</a>"
       }
       else newCell.innerHTML="<?php write('#variable_go_back_to')?> <a href=edit.php?level="+level+">"+levelAlias+"</a>"
 

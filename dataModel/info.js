@@ -8,6 +8,12 @@
 
 var Info = {
 
+  wwd_bod_effl: {magnitude:"Mass",      unit:"kg" },
+  wwd_ch4_efac: {magnitude:"Mass/Mass", unit:"kgCH<sub>4</sub>/kgBOD" },
+  wwd_KPI_GHG_tre:{magnitude:"Mass",unit:"kg CO<sub>2</sub>eq"},
+  wwd_KPI_GHG_tre_ch4:{magnitude:"Mass",        unit:"kg CO<sub>2</sub>eq"},
+  wwd_KPI_GHG_tre_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>eq"},
+
   ww_ch4_efac_unt: {magnitude:"Mass/Mass", unit:"kgCH<sub>4</sub>/kgBOD" },
   ww_ch4_efac_unc: {magnitude:"Mass/Mass", unit:"kgCH<sub>4</sub>/kgBOD" },
 
@@ -62,8 +68,12 @@ var Info = {
   fsr_KPI_GHG_dumping_n2o:  {magnitude:"Mass",        unit:"kg CO<sub>2</sub>eq"},
   fsr_KPI_GHG_dumping_ch4:  {magnitude:"Mass",        unit:"kg CO<sub>2</sub>eq"},
   fsr_KPI_GHG_tre_n2o:      {magnitude:"Mass",        unit:"kg CO<sub>2</sub>eq"},
+  fsr_KPI_GHG_tre_ch4:      {magnitude:"Mass",        unit:"kg CO<sub>2</sub>eq"},
+  fsr_KPI_GHG_tre:          {magnitude:"Mass",        unit:"kg CO<sub>2</sub>eq"},
   fsr_ch4_efac:             {magnitude:"Mass/Mass",   unit:"kgCH<sub>4</sub>/kgBOD" },
+  fsr_ch4_efac_dumping:     {magnitude:"Mass/Mass",   unit:"kgCH<sub>4</sub>/kgBOD" },
   fsr_bod_conc_fs:          {magnitude:"Concentration", unit:"kg/m3" },
+  fsr_bod_effl:             {magnitude:"Mass",      unit:"kg" },
 
   fsc_flooding:             {magnitude:"Option",      unit:"Yes/No"},
 
@@ -502,7 +512,6 @@ var Info = {
 	wwd_KPI_GHG_trck_co2:{magnitude:"Mass",unit:"kg CO<sub>2</sub>eq"},
 	wwd_KPI_GHG_trck_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>eq"},
 	wwd_KPI_GHG_trck_ch4:{magnitude:"Mass",unit:"kg CO<sub>2</sub>eq"},
-	wwd_KPI_GHG_tre_n2o:{magnitude:"Mass",unit:"kg CO<sub>2</sub>eq"},
 	wwd_KPI_GHG:{magnitude:"Mass",unit:"kg CO<sub>2</sub>eq"},
 
 	//UNFCCC categories

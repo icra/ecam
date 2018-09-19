@@ -610,6 +610,19 @@ var Questions={
       advanced:0,
       otherQuestions:[],
     },
+    "fsr_effluent":{
+      variables:[
+        "fsr_vol_disc",
+        "fsr_n2o_effl",
+        "fsr_bod_effl",
+        "fsr_ch4_efac",
+        "fsr_KPI_GHG_tre_n2o",
+        "fsr_KPI_GHG_tre_ch4",
+        "fsr_KPI_GHG_tre",
+      ],
+      advanced:0,
+      otherQuestions:[],
+    },
     "fsr_transport":{
       variables:[
         "fsr_trck_typ",
@@ -652,7 +665,7 @@ var Questions={
       variables:[
         "fsr_vol_dumping",
         "fsr_dumping_pth",
-        "fsr_ch4_efac",
+        "fsr_ch4_efac_dumping",
         "fsr_bod_conc_fs",
         "fsr_KPI_GHG_dumping_ch4",
         "fsr_KPI_GHG_dumping_n2o",

@@ -55,6 +55,28 @@ var Exceptions = {
         if(key==Global.Configuration.Selected.ww_ch4_efac_unc){ option.selected='true'; }
       });
     },
+    wwd_ch4_efac:function() {
+      var td=document.querySelector('tr[field=wwd_ch4_efac] td');
+      if(!td)return;
+
+      var select=document.createElement('select');select.style.fontSize='smaller';select.style.display='block';td.appendChild(select);
+      select.onchange=function(){
+        Global.Waste.Discharge.wwd_ch4_efac=parseFloat(select.value);
+        Global.Configuration.Selected.wwd_ch4_efac=select.options[select.options.selectedIndex].getAttribute('key');
+        init();
+      };
+
+      //go over options
+      Object.keys(Tables.ww_ch4_efac).forEach(key=>{
+        var option=document.createElement('option');
+        select.appendChild(option);
+        var value=Tables.ww_ch4_efac[key].ch4_efac;
+        option.value=value;
+        option.setAttribute('key',key);
+        option.innerHTML=translate(key)+" ("+format(value)+")";
+        if(key==Global.Configuration.Selected.wwd_ch4_efac){ option.selected='true'; }
+      });
+    },
 
     wwt_ch4_efac:function() {
       var td=document.querySelector('tr[field=wwt_ch4_efac] td');
@@ -288,34 +310,50 @@ var Exceptions = {
       var td=document.querySelector('tr[field=fsr_ch4_efac] td');
       if(!td)return;
 
-      var select=document.createElement('select');
-      select.style.fontSize='smaller';
-      select.style.display='block';
-      td.appendChild(select);
-
+      var select=document.createElement('select');select.style.fontSize='smaller';select.style.display='block';td.appendChild(select);
       select.onchange=function() {
         Global.Faecl.Reuse.fsr_ch4_efac=parseFloat(select.value);
-        Global.Configuration.Selected.fsr_ch4_efac=select.options[select.options.selectedIndex].getAttribute('treatment');
+        Global.Configuration.Selected.fsr_ch4_efac=select.options[select.options.selectedIndex].getAttribute('key');
+        init();
+      };
+
+      //go over options
+      Object.keys(Tables.ww_ch4_efac).forEach(key=>{
+        var option=document.createElement('option');select.appendChild(option);
+        var value=Tables.ww_ch4_efac[key].ch4_efac;
+        option.value=value;
+        option.setAttribute('key',key);
+        option.innerHTML=translate(key)+" ("+format(value)+")";
+        if(key==Global.Configuration.Selected.fsr_ch4_efac){
+          option.selected='true';
+        }
+      });
+    },
+
+    fsr_ch4_efac_dumping:function() {
+      var td=document.querySelector('tr[field=fsr_ch4_efac_dumping] td');
+      if(!td)return;
+
+      var select=document.createElement('select');
+      select.style.fontSize='smaller';select.style.display='block';
+      td.appendChild(select);
+      select.onchange=function() {
+        Global.Faecl.Reuse['fsr_ch4_efac_dumping']=parseFloat(select.value);
+        Global.Configuration.Selected['fsr_ch4_efac_dumping']=select.options[select.options.selectedIndex].getAttribute('key');
         init();
       }
 
-      var fsr_ch4_efac = {};
-      for(var treatment in Tables.fsr_dumping_pth) {
-        fsr_ch4_efac[treatment]=Tables.fsr_dumping_pth[treatment].ch4_efac;
-      }
-
-      //go over treatment types
-      for(var treatment in fsr_ch4_efac) {
-        var option=document.createElement('option');
-        select.appendChild(option);
-        var cons=fsr_ch4_efac[treatment];
-        option.value=cons;
-        option.setAttribute('treatment',treatment);
-        option.innerHTML=translate(treatment)+" ("+cons+")";
-        if(treatment==Global.Configuration.Selected.fsr_ch4_efac && cons==Global.Faecl.Reuse.fsr_ch4_efac) {
+      //go over options
+      Object.keys(Tables.fsr_dumping_pth).forEach(key=>{
+        var option=document.createElement('option');select.appendChild(option);
+        var value=Tables.fsr_dumping_pth[key].ch4_efac;
+        option.value=value;
+        option.setAttribute('key',key);
+        option.innerHTML=translate(key)+" ("+format(value)+")";
+        if(key==Global.Configuration.Selected.fsr_ch4_efac_dumping){
           option.selected='true';
         }
-      }
+      });
     },
 
     fsr_bod_conc_fs:function() {

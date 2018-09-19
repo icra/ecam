@@ -9,6 +9,12 @@ var Level2only = {
     "fsr_dumping_pth",
     "fsr_fslu_typ",
 
+    //effluent emissions
+    "wwd_KPI_GHG_tre_ch4",
+    "wwd_KPI_GHG_tre_n2o",
+    "fsr_KPI_GHG_tre_ch4",
+    "fsr_KPI_GHG_tre_n2o",
+
     //fuel engines
     "wsa_KPI_GHG_fuel_co2", //hidden
     "wsa_KPI_GHG_fuel_n2o", //hidden

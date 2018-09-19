@@ -64,6 +64,7 @@ var Recommendations={
       "wwt_mass_slu_stock":function(){return Global.Waste.Treatment.wwt_dryw_slu},
       "wwt_temp_inc"      :function(){return 1023},
     /*wwd*/
+    "wwd_bod_effl":function(){return Global.Waste.Treatment.wwt_bod_effl},
 
   /*WS*/
     /*wsa*/

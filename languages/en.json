@@ -1,9 +1,20 @@
 {
   "#below":"below",
 
+  "#wwd_KPI_GHG_tre_descr":"Effluent discharge to water body",
+  "#wwd_KPI_GHG_tre_ch4_descr":"CH<sub>4</sub> from effluent discharge to water body",
+  "#wwd_KPI_GHG_tre_n2o_descr":"N<sub>2</sub>O from effluent discharge to water body",
+  "#wwd_KPI_GHG_tre_n2o_expla":"Indirect CO<sub>2</sub> emitted in receiving waters due to nitrogen in wastewater effluent. Based upon nitrogen in the WWTP effluent multiplied by default emission factor",
+  "#wwd_bod_effl_descr":"Effluent BOD load",
+  "#wwd_ch4_efac_descr":"CH<sub>4</sub> emission factor",
+
+  "#fsr_bod_effl_descr":"Effluent BOD load",
+
+  "#fsr_effluent":"Evaluate emissions from effluent discharge",
   "#Stagnant sewer and anaerobic water bodies":"Stagnant sewer and anaerobic water bodies",
   "#Sea and aerobic water bodies":"Sea and aerobic water bodies",
   "#Fast flowing and well maintained sewers":"Fast flowing and well maintained sewers",
+  "#Soil infiltration":"Soil infiltration",
 
   "#ww_ch4_efac_unt_descr":"CH<sub>4</sub> emission factor (untreated wastewater)",
   "#ww_ch4_efac_unc_descr":"CH<sub>4</sub> emission factor (uncollected wastewater)",
@@ -97,7 +108,7 @@
   "#Dehydrated faeces":"Dehydrated faeces",
   "#Compost":"Compost",
   "#Stagnant sewer or anaerobic water body":"Stagnant sewer or anaerobic water body",
-  "#Sear or aerobic water bodies":"Sear or aerobic water bodies",
+  "#Sea or aerobic water bodies":"Sea or aerobic water bodies",
   "#Fast moving well maintained sewers":"Fast moving well maintained sewers",
   "#No treatment":"No treatment",
   "#Anaerobic Digester":"Anaerobic Digester",
@@ -159,7 +170,11 @@
   "#fsr_KPI_GHG_landfil_ch4_descr":"Landfilling (CH4)",
   "#fsr_KPI_GHG_landfil_descr":"Landfilling",
   "#fsr_KPI_GHG_landfil_n2o_descr":"Landfilling (N2O)",
+
   "#fsr_KPI_GHG_tre_n2o_descr":"N2O from effluent discharge to water body",
+  "#fsr_KPI_GHG_tre_ch4_descr":"CH4 from effluent discharge to water body",
+  "#fsr_KPI_GHG_tre_descr":"Effluent discharge to water body",
+
   "#fsr_disp_typ_descr":"Landfill type",
   "#fsr_dumping":"Do you want to assess dumping of faecal sludge",
   "#fsr_dumping_pth_descr":"Dumping pathway",
@@ -178,8 +193,11 @@
   "#fsr_soil_typ_descr":"Soil type",
   "#fsr_vol_disc_descr":"Volume of discharged effluent to water body",
   "#fsr_vol_dumping_descr":"Volume dumped",
+
   "#fsr_ch4_efac_descr":"CH<sub>4</sub> emission factor",
-  "#fsr_ch4_efac_expla":"Methane emission factor for faecal sludge dumping",
+  "#fsr_ch4_efac_expla":"CH<sub>4</sub> emission factor (effluent discharge)",
+  "#fsr_ch4_efac_dumping_descr":"CH<sub>4</sub> emission factor",
+  "#fsr_ch4_efac_dumping_expla":"Methane emission factor for faecal sludge dumping",
 
   "#fst_type_tre_descr":"Main treatment type",
   "#fst_engines":"Do you have fuel engines",
@@ -1086,8 +1104,6 @@
   "#wwd_KPI_GHG_trck_expla":"Truck transport",
   "#wwd_KPI_GHG_trck_n2o_descr":"Truck transport (N<sub>2</sub>O)",
   "#wwd_KPI_GHG_trck_n2o_expla":"Truck transport (N<sub>2</sub>O)",
-  "#wwd_KPI_GHG_tre_n2o_descr":"Indirect GHG emissions from discharge to water body",
-  "#wwd_KPI_GHG_tre_n2o_expla":"Indirect CO<sub>2</sub> emitted in receiving waters due to nitrogen in wastewater effluent. Based upon nitrogen in the WWTP effluent multiplied by default emission factor",
   "#wwd_KPI_nrg_per_m3_descr":"Energy consumption per discharged/reused wastewater",
   "#wwd_KPI_nrg_per_m3_expla":"Unit energy consumption per discharged/reused water",
   "#wwd_KPI_std_nrg_cons_descr":"Standardized energy consumption",

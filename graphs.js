@@ -203,6 +203,7 @@ Graphs.ghg_by_source=function(withTable,container) {
     Global.Waste             .ww_KPI_GHG_unt_ch4()+
     //treated ww
     Global.Waste.Treatment   .wwt_KPI_GHG_tre_ch4()+
+    Global.Waste.Discharge   .wwd_KPI_GHG_tre_ch4()+
     //biogas
     Global.Waste.Treatment   .wwt_KPI_GHG_biog()+
     Global.Faecl.Treatment   .fst_KPI_GHG_biog()+
@@ -218,6 +219,7 @@ Graphs.ghg_by_source=function(withTable,container) {
     Global.Faecl.Treatment   .fst_KPI_GHG_tre_ch4()+
     Global.Faecl.Reuse       .fsr_KPI_GHG_landfil_ch4()+
     Global.Faecl.Reuse       .fsr_KPI_GHG_dumping_ch4()+
+    Global.Faecl.Reuse       .fsr_KPI_GHG_tre_ch4()+
   0;
   //console.log("Total GHG difference:"+(Global.General.TotalGHG()-elec-co2-n2o-ch4));
 
@@ -341,7 +343,7 @@ Graphs.ghgSources=function(withTable,container) {
         Global.Faecl.Reuse.fsr_KPI_GHG_dumping_ch4()
     }
     //effluent discharge
-    var n2od=function(){return Global.Waste.Discharge.wwd_KPI_GHG_tre_n2o()+Global.Faecl.Reuse.fsr_KPI_GHG_tre_n2o()};
+    var n2od=function(){return Global.Waste.Discharge.wwd_KPI_GHG_tre()+Global.Faecl.Reuse.fsr_KPI_GHG_tre()};
     //FSM Onsite sanitation
     var fsmc=function(){return Global.Faecl.Containment.fsc_KPI_GHG_cont()}
   //emissions grouped structure

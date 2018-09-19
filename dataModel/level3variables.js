@@ -2,6 +2,12 @@
 var Level3={};
 Level3.list=[
   //new above (to be sorted)
+
+  "fsr_KPI_GHG_tre_ch4",
+  "fsr_KPI_GHG_tre_n2o",
+  "wwd_KPI_GHG_tre_ch4",
+  "wwd_KPI_GHG_tre_n2o",
+
   "fsc_KPI_GHG_trck_co2", //hidden
   "fsc_KPI_GHG_trck_n2o", //hidden
   "fsc_KPI_GHG_trck_ch4", //hidden

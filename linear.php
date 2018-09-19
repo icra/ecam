@@ -69,6 +69,34 @@
 		<img class=l1 stage=birds src=img/birds.png caption="<?php write('#tier_A')?>">
 	</div>
 
+  <!--L1
+  <div class="l1_img">
+    <div><span style="color:inherit">Level 1 stages</span></div>
+    <script>
+      var div=document.querySelector("#linearDiagram div.l1_img");
+      Structure.filter(s=>!s.sublevel).forEach(s=>{
+        var img=document.createElement('img');
+        div.appendChild(img);
+        img.classList.add('l2');
+        img.setAttribute('stage',s.alias);
+        img.setAttribute('caption',translate(s.level));
+        img.src=(function(){
+          var isActive=Global.Configuration.ActiveStages[s.alias];
+          if(isActive){
+            return "img/"+s.alias+".png";
+          }else{
+            img.classList.add('inactive');
+            return "img/"+s.alias+"-off.png";
+          }
+        })();
+        img.addEventListener('click',function(){
+          window.location='edit.php?level='+s.level;
+        });
+      });
+    </script>
+  </div>
+  -->
+
 	<!--DETAILED-->
 	<div class="detailed_img">
 		<div><span style="color:inherit"><?php write('#tier_B')?></span></div>
