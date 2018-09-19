@@ -1,6 +1,7 @@
 {
   "#below":"below",
 
+  "#Septic System":"Septic System",
   "#wwd_KPI_GHG_tre_descr":"Effluent discharge to water body",
   "#wwd_KPI_GHG_tre_ch4_descr":"CH<sub>4</sub> from effluent discharge to water body",
   "#wwd_KPI_GHG_tre_n2o_descr":"N<sub>2</sub>O from effluent discharge to water body",
@@ -131,7 +132,6 @@
   "#Pit latrine without flush water (lined or unlined) – household":"Pit latrine without flush water (lined or unlined) – household",
   "#Pit latrine without flush water (lined or unlined) – communal": "Pit latrine without flush water (lined or unlined) – communal",
   "#Pit latrine with flush water use (lined or unlined)":"Pit latrine with flush water use (lined or unlined)",
-  "#Septic Tank":"Septic Tank",
   "#Fully lined tank without flush water use – not water tight":"Fully lined tank without flush water use – not water tight",
   "#Fully lined tank without flush water use – water tight":    "Fully lined tank without flush water use – water tight",
   "#Fully lined tank with flush water use - water tight or untight":"Fully lined tank with flush water use - water tight or untight",
