@@ -131,16 +131,16 @@ var Tables = {
   //L1 FS
   //fsc
     "fsc_type_tre":{
-      "No containment (open defecation)":{                              value:0,  ch4_efac:0.027045, ch4_efac_flooding:0.027045, BOD_conc_FS:67.8, fs_density:1400},
-      "Pit latrine without flush water – household":{                   value:1,  ch4_efac:0.06,     ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
-      "Pit latrine without flush water (lined or unlined) – communal":{ value:2,  ch4_efac:0.3,      ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
-      "Pit latrine with flush water use (lined or unlined)":{           value:3,  ch4_efac:0.42,     ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
-      "Septic Tank":{                                                   value:4,  ch4_efac:0.3,      ch4_efac_flooding:0.42,     BOD_conc_FS:1.35, fs_density:1100},
-      "Fully lined tank without flush water use – household":{          value:5,  ch4_efac:0.06 ,    ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
-      "Fully lined tank without flush water use – communal":{           value:6,  ch4_efac:0.3 ,     ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
-      "Fully lined tank with flush water use":{                         value:7,  ch4_efac:0.42 ,    ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
-      "Urine Diverting Dry Toilet (UDDT)":{                             value:8,  ch4_efac:0.0,      ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
-      "Composting Toilet":{                                             value:9,  ch4_efac:0.0013,   ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
+      "No containment (open defecation)":{                               value:0,  ch4_efac:0.027045, ch4_efac_flooding:0.027045, BOD_conc_FS:67.8, fs_density:1400},
+      "Pit latrine without flush water (lined or unlined) – household":{ value:1,  ch4_efac:0.06,     ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
+      "Pit latrine without flush water (lined or unlined) – communal":{  value:2,  ch4_efac:0.3,      ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
+      "Pit latrine with flush water use (lined or unlined)":{            value:3,  ch4_efac:0.42,     ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
+      "Septic Tank":{                                                    value:4,  ch4_efac:0.6,      ch4_efac_flooding:0.6,      BOD_conc_FS:1.35, fs_density:1100},
+      "Fully lined tank without flush water use – not water tight":{     value:5,  ch4_efac:0.3,      ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
+      "Fully lined tank without flush water use – water tight":{         value:6,  ch4_efac:0.42,     ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
+      "Fully lined tank with flush water use - water tight or untight":{ value:7,  ch4_efac:0.42,     ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
+      "Urine Diverting Dry Toilet (UDDT)":{                              value:8,  ch4_efac:0.0,      ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
+      "Composting Toilet":{                                              value:9,  ch4_efac:0.0013,   ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
     },
     "fsc_flooding":{
       "no":{value:0},
