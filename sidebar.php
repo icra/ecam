@@ -85,16 +85,10 @@
       function resetGlobal(obj){
         obj=obj||Global;
         Object.keys(obj).forEach(key=>{
-          if(typeof(obj[key])=="object"){
-            resetGlobal(obj[key]);
-          }else if(typeof(obj[key])=='function'){
-            return; //do nothing
-          }else if(typeof(obj[key])=='number'){
-            obj[key]=0;
-          }else if(typeof(obj[key])=='string'){
-            obj[key]="";
-          }else if(obj[key].constructor===Array){
-            obj[key]=[];
+          if(typeof(obj[key])=="object"){         resetGlobal(obj[key]); //recursive call
+          }else if(typeof(obj[key])=='function'){ return;                //do nothing
+          }else if(typeof(obj[key])=='number'){   obj[key]=0;            //zero
+          }else if(typeof(obj[key])=='string'){   obj[key]="";           //empty string
           }else{
             console.warn('unknown field "'+key+'":')
             console.warn(obj[key]);
@@ -110,7 +104,7 @@
         copyFieldsFrom(SavedFile.Global,Global);
         copyFieldsFrom(SavedFile.Substages,Substages); //substages are saved unpacked
         updateResult(); //write cookies
-        //window.location='configuration.php';
+        window.location='sources.php';
       }
       try{
         reader.readAsText(file);
