@@ -3,6 +3,15 @@
   since JSON.stringify does not stringify object fields that are functions
 **/
 
+var old_codes_conversion={
+  //<old-code>:function(value){<new-location>                       = value;}  //from <old-version-number>
+  ww_conn_pop :function(value){Global.Waste.Collection.wwc_conn_pop = value;}, //from v2.0
+  ww_serv_pop :function(value){Global.Waste.Treatment.wwt_serv_pop  = value;}, //from v2.0
+  ww_onsi_pop :function(value){Global.Faecl.fs_onsi_pop             = value;}, //from v2.0
+  wwc_bod_pday:function(value){Global.General.bod_pday              = value;}, //from v2.0
+  wwc_prot_con:function(value){Global.General.prot_con              = value;}, //from v2.0
+};
+
 function copyFieldsFrom(object_from,object_to){
   //go through object keys
   Object.keys(object_from).forEach(field=>{
@@ -27,9 +36,9 @@ function copyFieldsFrom(object_from,object_to){
       copyFieldsFrom(object_from[field],object_to[newField]);
     }else{
       //copy always these values
-      if(object_to==Global.Configuration.Units ||      //custom units
-         object_to==Global.Configuration['Yes/No'] ||  //answers to Questions (filters)
-         object_to==Global.Configuration.Expanded      //display or not inputs for a particular question
+      if(object_to==Global.Configuration.Units        || //custom units
+         object_to==Global.Configuration['Yes/No']    || //answers to Questions (filters)
+         object_to==Global.Configuration.Expanded        //display or not inputs for a particular question
       ){
         object_to[field]=object_from[field];
       }
@@ -44,9 +53,14 @@ function copyFieldsFrom(object_from,object_to){
         //new variables: set to zero
         object_to[field]=0;
       }else if(type_from=='number' && type_to!='number'){
-        //old variables: do nothing
-        console.warn(field,' is an old variable; not loaded');
-        alert("Input '("+field+" = "+format(object_from[field])+")' not loaded. It is an old variable that has been modified or removed in this version. You might need to reenter it.");
+        //old variable found
+        if(old_codes_conversion[field]){ //conversion considered (see above)
+          old_codes_conversion[field](object_from[field]);
+          console.log(field,' is an old variable; conversion found');
+        }else{
+          console.warn(field,' is an old variable; not loaded');
+          alert("Input '("+field+" = "+format(object_from[field])+")' not loaded. It is an old variable that has been removed in this version. Please save again the file to update the file version to the latest one.");
+        }
       }else{
         //do nothing
         console.warn(field,' types do not match');

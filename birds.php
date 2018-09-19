@@ -387,7 +387,7 @@
         <!--Water-->
         <tr><th colspan=3 style="background:#0aaff1">
           <div class=flex style="justify-content:space-between">
-            <div onclick=toggleStageVisibility('water') style=width:70%>
+            <div onclick=toggleStageVisibility('water') style=width:50%>
               <span expanded=1 stage=water>▼</span>
               <img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
             </div>
@@ -414,7 +414,7 @@
         <!--Waste-->
         <tr><th colspan=3 style=background:#d71d24>
           <div class=flex style="justify-content:space-between">
-            <div onclick=toggleStageVisibility('waste') style=width:70%>
+            <div onclick=toggleStageVisibility('waste') style=width:50%>
               <span expanded=1 stage=waste>▼</span>
               <img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
             </div>
@@ -463,7 +463,7 @@
         <!--FSM-->
         <tr><th colspan=3 style=background:green>
           <div class=flex style="justify-content:space-between">
-            <div onclick=toggleStageVisibility('faecl') style=width:70%>
+            <div onclick=toggleStageVisibility('faecl') style=width:50%>
               <span expanded=1 stage=faecl>▼</span>
               <img src=img/faecl.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Faecl')?>
             </div>

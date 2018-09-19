@@ -80,7 +80,29 @@
 
     /* Update Global object with loaded file parsed to JSON */
     function loadFile(evt) {
-      removeAllCookies();
+
+      //set all variables to 0
+      function resetGlobal(obj){
+        obj=obj||Global;
+        Object.keys(obj).forEach(key=>{
+          if(typeof(obj[key])=="object"){
+            resetGlobal(obj[key]);
+          }else if(typeof(obj[key])=='function'){
+            return; //do nothing
+          }else if(typeof(obj[key])=='number'){
+            obj[key]=0;
+          }else if(typeof(obj[key])=='string'){
+            obj[key]="";
+          }else if(obj[key].constructor===Array){
+            obj[key]=[];
+          }else{
+            console.warn('unknown field "'+key+'":')
+            console.warn(obj[key]);
+          }
+        });
+      };
+      resetGlobal();
+
       var file = evt.target.files[0];
       var reader = new FileReader();
       reader.onload=function() {
@@ -88,7 +110,7 @@
         copyFieldsFrom(SavedFile.Global,Global);
         copyFieldsFrom(SavedFile.Substages,Substages); //substages are saved unpacked
         updateResult(); //write cookies
-        window.location='sources.php'; //go to ghg summary
+        //window.location='configuration.php';
       }
       try{
         reader.readAsText(file);
