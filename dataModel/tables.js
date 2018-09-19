@@ -132,11 +132,11 @@ var Tables = {
   //L1 FS
   //fsc
     "fsc_type_tre":{
-      "No containment (open defecation)":{                               value:0,  ch4_efac:0.027045, ch4_efac_flooding:0.027045, BOD_conc_FS:67.8, fs_density:1400},
+      "No containment (open defecation)":{                               value:0,  ch4_efac:0.027,    ch4_efac_flooding:0.027,    BOD_conc_FS:67.8, fs_density:1400},
       "Pit latrine without flush water (lined or unlined) – household":{ value:1,  ch4_efac:0.06,     ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
       "Pit latrine without flush water (lined or unlined) – communal":{  value:2,  ch4_efac:0.3,      ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
       "Pit latrine with flush water use (lined or unlined)":{            value:3,  ch4_efac:0.42,     ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
-      "Septic Tank":{                                                    value:4,  ch4_efac:0.6,      ch4_efac_flooding:0.6,      BOD_conc_FS:1.35, fs_density:1100},
+      "Septic System":{                                                  value:4,  ch4_efac:0.3,      ch4_efac_flooding:0.42,     BOD_conc_FS:1.35, fs_density:1100},
       "Fully lined tank without flush water use – not water tight":{     value:5,  ch4_efac:0.3,      ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
       "Fully lined tank without flush water use – water tight":{         value:6,  ch4_efac:0.42,     ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
       "Fully lined tank with flush water use - water tight or untight":{ value:7,  ch4_efac:0.42,     ch4_efac_flooding:0.42,     BOD_conc_FS:67.8, fs_density:1400},
