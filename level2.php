@@ -86,7 +86,7 @@
     }
 
     //remember "Expanded"
-    init();
+    updateResult();
   }
 
   /**
