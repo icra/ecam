@@ -47,10 +47,7 @@
     }
     #inputs tr.hidden {display:none}
     /**indication "not active"**/
-    #inputs tr[indic]{
-      text-align:center;color:#999;background:#eee;
-      font-size:smaller;
-    }
+    #inputs tr[indic]{text-align:center;color:#999;background:#eee;font-size:smaller;}
   </style>
   <table id=inputs style="font-size:16px;margin:1em;width:50%">
     <!--WATER-->

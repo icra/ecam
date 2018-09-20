@@ -1,9 +1,10 @@
-/**
+/*
   Main data structure
   This object stores user inputs and has all equations.
-  All inputs are saved to cookies (compressed) (see "js/updateGlobalFromCookies.js")
+  All inputs are saved to cookies as a compressed string (see "js/updateGlobalFromCookies.js")
 */
-var Global = {
+
+var Global={
   General:{
     Name:"Untitled system",
     AssessmentPeriodStart:"2019-01-01",

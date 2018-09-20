@@ -97,16 +97,17 @@
       };
       resetGlobal();
 
-      //solve bug #183 after Global is reseted (related to tier A visibility)
-      Structure.filter(s=>!s.sublevel).forEach(s=>{Global.Configuration.Expanded[s.alias]=1;});
-
       //get json file contents
       var file = evt.target.files[0];
       var reader = new FileReader();
-      reader.onload=function() {
+      reader.onload=function(){
         var SavedFile = JSON.parse(reader.result);
         copyFieldsFrom(SavedFile.Global,Global);
         copyFieldsFrom(SavedFile.Substages,Substages); //substages are saved unpacked
+
+        //solve bug #183 after Global loaded (related to tier A visibility)
+        Structure.filter(s=>!s.sublevel).forEach(s=>{Global.Configuration.Expanded[s.alias]=1;});
+
         updateResult(); //write cookies
         window.location='sources.php';
       }

@@ -308,7 +308,7 @@
     #inputs tr.hidden {display:none}
 
     /*indication "level not active"*/
-    #inputs tr[indic]{text-align:center;color:#999;background:#eee}
+    #inputs tr[indic]{text-align:center;color:#999;background:#eee;font-size:smaller;}
 
     #inputs select{
       display:block;

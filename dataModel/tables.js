@@ -54,7 +54,6 @@ var Tables = {
       "Stagnant sewer and anaerobic water bodies":{ value:1, ch4_efac:0.3},
       "Sea and aerobic water bodies":{              value:2, ch4_efac:0.06},
       "Fast flowing and well maintained sewers":{   value:3, ch4_efac:0},
-      "Soil infiltration":{                         value:4, ch4_efac:0},
     },
 
 	//wwc
@@ -195,10 +194,11 @@ var Tables = {
       "Landfill (with gas recovery)":{value:2},
     },
     "fsr_dumping_pth":{
-      "Select dumping pathway":{value:0,                 ch4_efac:0},
-      "Stagnant sewer or anaerobic water body":{value:1, ch4_efac:0.3},
-      "Sea or aerobic water bodies":{value:2,            ch4_efac:0.06},
-      "Fast moving well maintained sewers":{value:3,     ch4_efac:0},
+      "Select dumping pathway":{value:0,                  ch4_efac:0},
+      "Stagnant sewer or anaerobic water body":{value:1,  ch4_efac:0.3},
+      "Sea or aerobic water bodies":{value:2,             ch4_efac:0.06},
+      "Fast flowing and well maintained sewers":{value:3, ch4_efac:0},
+      "Soil infiltration":{value:4,                       ch4_efac:0},
     },
 }
 

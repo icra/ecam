@@ -2,9 +2,9 @@
   "#below":"below",
 
   "#Septic System":"Septic System",
-  "#wwd_KPI_GHG_tre_descr":"Effluent discharge to water body",
-  "#wwd_KPI_GHG_tre_ch4_descr":"CH<sub>4</sub> from effluent discharge to water body",
-  "#wwd_KPI_GHG_tre_n2o_descr":"N<sub>2</sub>O from effluent discharge to water body",
+  "#wwd_KPI_GHG_tre_descr":"Effluent discharge",
+  "#wwd_KPI_GHG_tre_ch4_descr":"CH<sub>4</sub> from effluent discharge",
+  "#wwd_KPI_GHG_tre_n2o_descr":"N<sub>2</sub>O from effluent discharge",
   "#wwd_KPI_GHG_tre_n2o_expla":"Indirect CO<sub>2</sub> emitted in receiving waters due to nitrogen in wastewater effluent. Based upon nitrogen in the WWTP effluent multiplied by default emission factor",
   "#wwd_bod_effl_descr":"Effluent BOD load",
   "#wwd_ch4_efac_descr":"CH<sub>4</sub> emission factor",
@@ -171,9 +171,9 @@
   "#fsr_KPI_GHG_landfil_descr":"Landfilling",
   "#fsr_KPI_GHG_landfil_n2o_descr":"Landfilling (N2O)",
 
-  "#fsr_KPI_GHG_tre_n2o_descr":"N2O from effluent discharge to water body",
-  "#fsr_KPI_GHG_tre_ch4_descr":"CH4 from effluent discharge to water body",
-  "#fsr_KPI_GHG_tre_descr":"Effluent discharge to water body",
+  "#fsr_KPI_GHG_tre_n2o_descr":"N2O from effluent discharge",
+  "#fsr_KPI_GHG_tre_ch4_descr":"CH4 from effluent discharge",
+  "#fsr_KPI_GHG_tre_descr":"Effluent discharge",
 
   "#fsr_disp_typ_descr":"Landfill type",
   "#fsr_dumping":"Do you want to assess dumping of faecal sludge",
