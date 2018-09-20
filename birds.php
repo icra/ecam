@@ -835,7 +835,7 @@
 <!--hide inactive inputs-->
 <script>
   (function(){
-    //Expanded as user clicked
+    //Expanded is 1 by default, change this 
     Structure.filter(s=>!s.sublevel).forEach(s=>{
       if(!Expanded[s.alias]){
         document.querySelectorAll('#inputs tr[stage='+s.alias+']').forEach(tr=>{
