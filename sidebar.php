@@ -108,7 +108,7 @@
         copyFieldsFrom(SavedFile.Global,Global);
         copyFieldsFrom(SavedFile.Substages,Substages); //substages are saved unpacked
         updateResult(); //write cookies
-        //window.location='sources.php';
+        window.location='sources.php';
       }
       try{
         reader.readAsText(file);
