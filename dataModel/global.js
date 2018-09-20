@@ -299,15 +299,12 @@ var Global={
     ww_nrg_cons:function(){return this.Collection.wwc_nrg_cons+this.Treatment.wwt_nrg_cons+this.Discharge.wwd_nrg_cons},
     ww_vol_fuel:function(){return this.Collection.wwc_vol_fuel+this.Treatment.wwt_vol_fuel+this.Treatment.wwt_fuel_dig+this.Discharge.wwd_vol_fuel},
 
-    //untreated and uncollected emission factors
     //untreated emissions
-      "ww_ch4_efac_unt":0, //emission factor for untreated wastewater
-      ww_KPI_GHG_unt_ch4:function(){return this.ww_untr_pop()*Global.General.bod_pday/1000*Global.General.Days()*this.ww_ch4_efac_unt*Cts.ct_ch4_eq.value;},//old c_ww52
+      ww_KPI_GHG_unt_ch4:function(){return this.ww_untr_pop()*Global.General.bod_pday/1000*Global.General.Days()*this.Collection.ww_ch4_efac_unt*Cts.ct_ch4_eq.value;},//old c_ww52
       ww_KPI_GHG_unt_n2o:function(){return this.ww_untr_pop()*Global.General.prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;},
       ww_KPI_GHG_unt:    function(){return this.ww_KPI_GHG_unt_ch4()+this.ww_KPI_GHG_unt_n2o();},
     //uncollected emissions (outside assessment)
-      "ww_ch4_efac_unc":0, //emission factor for uncollected wastewater
-      ww_SL_ghg_unc_ch4:function(){return this.ww_uncl_pop()*Global.General.bod_pday/1000*Global.General.Days()*this.ww_ch4_efac_unc*Cts.ct_ch4_eq.value;},
+      ww_SL_ghg_unc_ch4:function(){return this.ww_uncl_pop()*Global.General.bod_pday/1000*Global.General.Days()*this.Collection.ww_ch4_efac_unc*Cts.ct_ch4_eq.value;},
       ww_SL_ghg_unc_n2o:function(){return this.ww_uncl_pop()*Global.General.prot_con*Global.General.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;},
       ww_SL_ghg_unc:    function(){return this.ww_SL_ghg_unc_ch4()+this.ww_SL_ghg_unc_n2o();},
 
@@ -324,7 +321,6 @@ var Global={
       0;
     },
 
-
     "Collection":{
       //no filter
         "wwc_nrg_cons":0,
@@ -332,6 +328,10 @@ var Global={
         "wwc_vol_conv":0,
         wwc_SL_conn_pop:function(){return 100*this.wwc_conn_pop/Global.Waste.ww_resi_pop},
         wwc_KPI_nrg_per_m3:function(){return this.wwc_nrg_cons/this.wwc_vol_conv},
+
+      //untreated and uncollected emission factors
+      "ww_ch4_efac_unt":0.06, //emission factor for untreated wastewater
+      "ww_ch4_efac_unc":0.3,  //emission factor for uncollected wastewater
 
       //fuel engines?
         "wwc_fuel_typ":0,

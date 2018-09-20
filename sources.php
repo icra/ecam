@@ -307,14 +307,17 @@
 
           <!--WATER-->
           <th rowspan=3 style="background:#00aff1">
-            <div>
-              <a href="edit.php?level=Water" style=color:white>
-                <?php write("#Water")?>
-                (<span id=ws_serv_pop>0</span> <?php write("#people")?>)
-                <script>document.querySelector('#ws_serv_pop').innerHTML=format(Global.Water.ws_serv_pop)</script>
-              </a>
+            <div class=flex style=justify-content:space-between;padding:0.5em>
+              <div>
+                <img alias=water src=img/water.png>
+                <a href="edit.php?level=Water" style=color:white>
+                  <?php write("#Water")?>
+                  (<span id=ws_serv_pop>0</span> <?php write("#people")?>)
+                  <script>document.querySelector('#ws_serv_pop').innerHTML=format(Global.Water.ws_serv_pop)</script>
+                </a>
+              </div>
+              <div field=ws_KPI_GHG>0</div>
             </div>
-            <div field=ws_KPI_GHG>0</div>
           </th>
             <!--wsa-->
             <td>
@@ -345,26 +348,28 @@
 
           <!--WASTE-->
           <th rowspan=3 class=red>
-            <div>
-              <a href="edit.php?level=Waste" style=color:white>
-                <?php write("#Waste")?>
-                (<span id=ww_serv_pop>0</span> <?php write("#people")?>)
-                <script>document.querySelector('#ww_serv_pop').innerHTML=format(Global.Waste.ww_serv_pop())</script>
-              </a>
-              <div field=ww_KPI_GHG>0</div>
-            </div><br><br>
-
-            <!--untreated ww emissions-->
-            <div style="
-              font-size:smaller;
-              padding:1em;
-            ">
+            <div class=flex style=justify-content:space-between;padding:0.5em>
               <div>
-                <a href="variable.php?id=ww_KPI_GHG_unt" style=color:white>
-                  <?php write('#ww_KPI_GHG_unt_descr')?>
+                <img alias=waste src=img/waste.png>
+                <a href="edit.php?level=Waste" style=color:white>
+                  <?php write("#Waste")?>
+                  (<span id=ww_serv_pop>0</span> <?php write("#people")?>)
+                  <script>document.querySelector('#ww_serv_pop').innerHTML=format(Global.Waste.ww_serv_pop())</script>
                 </a>
               </div>
-              <div field=ww_KPI_GHG_unt></div>
+              <div field=ww_KPI_GHG>0</div>
+            </div>
+
+            <!--untreated ww emissions-->
+            <div style=" font-size:smaller; padding:1em; ">
+              <div class=flex style=justify-content:space-between;padding:0.5em>
+                <div>
+                  <a href="variable.php?id=ww_KPI_GHG_unt" style=color:white>
+                    <?php write('#ww_KPI_GHG_unt_descr')?>
+                  </a>
+                </div>
+                <div field=ww_KPI_GHG_unt></div>
+              </div>
             </div>
           </th>
             <!--wwc-->
@@ -394,12 +399,17 @@
 
           <!--FSM-->
           <th rowspan=3 style="background:green">
-            <div>
-              <a href="edit.php?level=Faecl" style=color:white>
-                <?php write("#Faecl")?>
-              </a>
+            <div class=flex style=justify-content:space-between;padding:0.5em>
+              <div>
+                <img alias=faecl src=img/faecl.png>
+                <a href="edit.php?level=Faecl" style=color:white>
+                  <?php write("#Faecl")?>
+                  (<span id=fs_onsi_pop>0</span> <?php write("#people")?>)
+                  <script>document.querySelector('#fs_onsi_pop').innerHTML=format(Global.Faecl.fs_onsi_pop)</script>
+                </a>
+              </div>
+              <div field=fs_KPI_GHG>0</div>
             </div>
-            <div field=fs_KPI_GHG>0</div>
           </th>
             <?php
               function drawL2stage($alias, $level, $sublevel, $emission){
@@ -424,15 +434,11 @@
         </table>
 
         <script>
-          //modify the image of each stage according to "ActiveStages"
-          document.querySelectorAll("#sources img[alias]").forEach(img=>{
-            var alias=img.getAttribute('alias');
-            if(0==Global.Configuration.ActiveStages[alias]){
-              img.src="img/"+alias+"-off.png";
-            }
+          //modify the image of each stage according to "ActiveStages" (only L2)
+          Structure.filter(s=>s.sublevel).filter(s=>{return 0==Global.Configuration.ActiveStages[s.alias]}).forEach(s=>{
+            document.querySelector("#sources img[alias="+s.alias+"]").src="img/"+s.alias+"-off.png";
           });
         </script>
-
       </div>
 
       <style>

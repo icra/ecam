@@ -1,4 +1,7 @@
 //Data structure for tabled values or dropdown menus
+//used for two kinds of variables: 
+// 1. discrete variables with magnitude==Option
+// 2. numeric variables inside Exceptions
 var Tables = {
 	//fuel types for several filters
     "Fuel types": {             //EFxxx: [kg/TJ], NCV: [TJ/Gg], FD: [kg/L].
