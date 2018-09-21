@@ -277,3 +277,7 @@ Global.Exceptions=Exceptions;
 
 //initialize with empty string inside Configuration.Selected for Exceptions to avoid warning "types do not match"
 Object.keys(Exceptions.list).forEach(key=>{Global.Configuration.Selected[key]=""});
+
+//default values for exceptions
+Global.Configuration.Selected.ww_ch4_efac_unt="Sea and aerobic water bodies";
+Global.Configuration.Selected.ww_ch4_efac_unc="Stagnant sewer and anaerobic water bodies";
