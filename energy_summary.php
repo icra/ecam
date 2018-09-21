@@ -204,7 +204,7 @@
 
         <!--L0 Total energy consumed-->
         <tr><th rowspan=9 style="font-weight:bold;background:#2b6488;">
-          <?php write('#TOTAL ENERGY CONSUMED')?> &rarr;<br><br>
+          <?php write('#TOTAL ENERGY CONSUMED')?><br><br>
           <span field=TotalNRG>0</span>
         </th>
 
@@ -318,6 +318,7 @@
       table#sources td {padding:0.8em 0.5em;}
       table#sources td[field] {text-align:right}
       table#sources img {vertical-align:middle;width:30px;margin-right:10px}
+      #sources span[field]{font-weight:bold}
     </style>
   </div>
 
