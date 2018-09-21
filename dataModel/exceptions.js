@@ -102,7 +102,7 @@ var Exceptions={
           var value = Tables.fsc_type_tre[key][(Global.Faecl.Containment.fsc_flooding?"ch4_efac_flooding":"ch4_efac")];
           option.value=value;
           option.setAttribute('key',key);
-          option.innerHTML=translate(key)+" ("+format(value,3)+")"; //3 decimals for composting toilet
+          option.innerHTML=translate(key)+" ("+format(value)+")";
           if(key==Global.Configuration.Selected.fsc_ch4_efac){option.selected='true';}
         });
       },
@@ -222,7 +222,7 @@ var Exceptions={
           var value=Tables.fsc_type_tre[key].fs_density;
           option.value=value;
           option.setAttribute('key',key);
-          option.innerHTML=translate(key)+" ("+format(value,3)+")"; //3 decimals for composting toilet
+          option.innerHTML=translate(key)+" ("+format(value)+")";
           if(key==Global.Configuration.Selected.fsc_fdensity){option.selected='true';}
         });
       },
@@ -243,7 +243,7 @@ var Exceptions={
           var value=Tables.fsc_type_tre[key].BOD_conc_FS;
           option.value=value;
           option.setAttribute('key',key);
-          option.innerHTML=translate(key)+" ("+format(value,3)+")"; //3 decimals for composting toilet
+          option.innerHTML=translate(key)+" ("+format(value)+")";
           if(key==Global.Configuration.Selected.fsc_bod_conc_fs){option.selected='true';}
         });
       },
@@ -262,7 +262,7 @@ var Exceptions={
           var value = Tables.fsc_type_tre[key].BOD_conc_FS;
           option.value=value;
           option.setAttribute('key',key);
-          option.innerHTML=translate(key)+" ("+format(value,3)+")"; //3 decimals for composting toilet
+          option.innerHTML=translate(key)+" ("+format(value)+")";
           if(key==Global.Configuration.Selected.fsr_bod_conc_fs){option.selected='true';}
         });
       },
