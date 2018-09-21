@@ -135,7 +135,9 @@ function format(number,digits){
   //default digits if not specified
   digits=digits||2;
 
-  if(number>1e4)digits=0;
+  //default digits for values
+  if     (number>1e4)  digits=0;
+  else if(number<0.01) digits=4;
 
   //for non applicable
   if(number=="NA"){ return "<span style=color:#ccc>NA</span>"; }
