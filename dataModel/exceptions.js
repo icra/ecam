@@ -125,7 +125,7 @@ var Exceptions={
           if(key==Global.Configuration.Selected.fst_ch4_efac){option.selected='true';}
         });
       },
-      fsr_ch4_efac:function(){
+      fsr_ch4_efac:function(){ //this is the only one it has 'soil infiltration (0)' as option
         var td=document.querySelector('tr[field=fsr_ch4_efac] td');if(!td)return;
 
         var select=document.createElement('select');select.style.fontSize='smaller';select.style.display='block';td.appendChild(select);
@@ -135,9 +135,9 @@ var Exceptions={
           init();
         };
 
-        Object.keys(Tables.ww_ch4_efac).forEach(key=>{
+        Object.keys(Tables.fsr_ch4_efac).forEach(key=>{
           var option=document.createElement('option');select.appendChild(option);
-          var value=Tables.ww_ch4_efac[key].ch4_efac;
+          var value=Tables.fsr_ch4_efac[key].ch4_efac;
           option.value=value;
           option.setAttribute('key',key);
           option.innerHTML=translate(key)+" ("+format(value)+")";

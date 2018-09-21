@@ -196,12 +196,18 @@ var Tables = {
       "Landfill (flaring)":{value:1},
       "Landfill (with gas recovery)":{value:2},
     },
+    "fsr_ch4_efac":{
+      "Select":{                                    value:0, ch4_efac:0},
+      "Stagnant sewer and anaerobic water bodies":{ value:1, ch4_efac:0.3},
+      "Sea and aerobic water bodies":{              value:2, ch4_efac:0.06},
+      "Fast flowing and well maintained sewers":{   value:3, ch4_efac:0},
+      "Soil infiltration":{                         value:4, ch4_efac:0},
+    },
     "fsr_dumping_pth":{
       "Select dumping pathway":{value:0,                  ch4_efac:0},
       "Stagnant sewer or anaerobic water body":{value:1,  ch4_efac:0.3},
       "Sea or aerobic water bodies":{value:2,             ch4_efac:0.06},
       "Fast flowing and well maintained sewers":{value:3, ch4_efac:0},
-      "Soil infiltration":{value:4,                       ch4_efac:0},
     },
 }
 
