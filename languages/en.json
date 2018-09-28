@@ -1,6 +1,8 @@
 {
   "#below":"below",
 
+  "#wwt_correction_factor":"Do you want to revise the default N2O emissions",
+
   "#Septic System":"Septic System",
   "#wwd_KPI_GHG_tre_descr":"Effluent discharge",
   "#wwd_KPI_GHG_tre_ch4_descr":"CH<sub>4</sub> from effluent discharge",
@@ -274,7 +276,7 @@
   "#wwd_total_m3_expla":"Total volume discharged and reused effluent",
 
   "#wwt_GHG_tre_n2o_descr":"N<sub>2</sub>O emissions from treatment process correction factor",
-  "#wwt_GHG_tre_n2o_expla":"N<sub>2</sub>O emissions from treatment process correction factor: can be positive or negative. If you have country-specific or site-specific emission factors from actual measurements, you can calculate the emissions based on these factors and then using the correction factor, either add or subtract the difference between your emissions and those calculated by ECAM based on the IPCC generic emission factor. The emissions calculated by ECAM will automatically be updated based on the value you enter to correct the emissions.",
+  "#wwt_GHG_tre_n2o_expla":"ECAM uses a generic emissions factor from IPCC to calculate N2O emissions. If you have more accurate values of N2O emissions you can add the positive or negative difference to calculated value to adapt the result.",
   
   "#Imhoff tank":"Imhoff tank",
   "#Diesel":"Diesel",

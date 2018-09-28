@@ -486,6 +486,14 @@ var Questions={
 			otherQuestions:[],
 		},
 
+    "wwt_correction_factor":{
+      variables:[
+        "wwt_GHG_tre_n2o",
+      ],
+      advanced:0,
+      otherQuestions:[],
+    },
+
 	//wwd
 		"wwd_engines":{
 			variables:[
