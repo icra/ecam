@@ -1160,7 +1160,7 @@ Graphs.graph2=function(withTable,container) {
     height:250,
     legend:{position:'left'},
     pieHole:0.4,
-    title:""+translate('graphs_graph2')+" ("+format(ws+ww)+" kWh)",
+    title:""+translate('graphs_graph2')+" ("+format(ws+ww+fs)+" kWh)",
     slices:{
       0:{ color: '#0aaeef' },
       1:{ color: '#d71d24' },
