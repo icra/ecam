@@ -1,4 +1,10 @@
 var Cts = {
+  ct_fs_prod:{
+    value:0.3,
+    descr:"Faecal sludge production per person per day",
+    unit:"kg/person/day",
+  },
+
   ct_ch4_nrg:{
     value:10,
     descr:"Energy content of 1 m3 of CH4",
