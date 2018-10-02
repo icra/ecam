@@ -152,13 +152,13 @@
               }
             }
           }
-          listUnitless(Global.Water);
-          listUnitless(Global.Water.Abstraction);
-          listUnitless(Global.Water.Treatment);
-          listUnitless(Global.Water.Distribution);
-          listUnitless(Global.Waste.Collection);
-          listUnitless(Global.Waste.Treatment);
-          listUnitless(Global.Waste.Discharge);
+          Structure.forEach(s=>{
+            if(s.sublevel){
+              listUnitless(Global[s.level][s.sublevel]);
+            }else{
+              listUnitless(Global[s.level]);
+            }
+          });
         })()
       </script>
     </table>

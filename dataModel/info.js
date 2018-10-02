@@ -18,6 +18,7 @@ var Info = {
   ww_ch4_efac_unc: {magnitude:"Mass/Mass", unit:"kgCH<sub>4</sub>/kgBOD" },
 
   fsr_ghg_avoided_land: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>eq"},
+  fsr_KPI_GHG_urine:    {magnitude:"Mass",   unit:"kg CO<sub>2</sub>eq"},
 
   fst_nrg_biog:       {magnitude:"Energy", unit:"kWh"},
   fst_SL_GHG_avoided: {magnitude:"Mass",   unit:"kg CO<sub>2</sub>eq"},
