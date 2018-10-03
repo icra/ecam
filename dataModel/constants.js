@@ -1,4 +1,15 @@
 var Cts = {
+  ct_cr_forN:{
+    value:4,
+    descr:"Credit for Nitrogen",
+    unit:"kgCO2/kgN",
+  },
+  ct_cr_forP:{
+    value:2,
+    descr:"Credit for Phosphorus",
+    unit:"kgCO2/kgP",
+  },
+
   ct_fs_prod:{
     value:0.3,
     descr:"Faecal sludge production per person per day",

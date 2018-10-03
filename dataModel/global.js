@@ -675,8 +675,8 @@ var Global={
       "wwd_wr_adnrg":0, //additional energy
       "wwd_wr_vol_d":0, //volume of reused water displacing potable water
 
-      wwd_wr_GHG_avo_N: function(){ return this.wwd_wr_N_rec*4; },
-      wwd_wr_GHG_avo_P: function(){ return this.wwd_wr_P_rec*2; },
+      wwd_wr_GHG_avo_N: function(){ return this.wwd_wr_N_rec*Cts.ct_cr_forN.value; },
+      wwd_wr_GHG_avo_P: function(){ return this.wwd_wr_P_rec*Cts.ct_cr_forP.value; },
       wwd_wr_GHG_avo:   function(){ return this.wwd_wr_GHG_avo_N() + this.wwd_wr_GHG_avo_P(); },
       wwd_wr_nrg_sav:   function(){ //<br>
         return this.wwd_wr_vol_d*( //<br>
@@ -1041,8 +1041,8 @@ var Global={
       //ghg avoided reuse nutrients
         "fsr_reused_N":0,
         "fsr_reused_P":0,
-        fsr_ghg_avoided_reuse_N:function(){return this.fsr_reused_N*4},
-        fsr_ghg_avoided_reuse_P:function(){return this.fsr_reused_P*2},
+        fsr_ghg_avoided_reuse_N:function(){return this.fsr_reused_N*Cts.ct_cr_forN.value},
+        fsr_ghg_avoided_reuse_P:function(){return this.fsr_reused_P*Cts.ct_cr_forP.value},
         fsr_ghg_avoided_reuse:function(){return this.fsr_ghg_avoided_reuse_N()+this.fsr_ghg_avoided_reuse_P();},
 
       //total ghg
