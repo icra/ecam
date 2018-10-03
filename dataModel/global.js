@@ -540,7 +540,7 @@ var Global={
         }else{//<br>
           return 0;//<br>
         }//<br><br>
-        return this.wwt_mass_slu_land*Cts.ct_oc_vs.value*vs_content*0.9*Cts.ct_ch4_oc.value*0.5*0.8*0.69*Cts.ct_ch4_eq.value;//<br>
+        return this.wwt_mass_slu_land*Cts.ct_oc_vs.value*vs_content*Cts.ct_lf_unc.value*Cts.ct_ch4_oc.value*Cts.ct_ch4_lf.value/100*Cts.ct_DOCfra.value/100*Cts.ct_d3y_lf.value/100*Cts.ct_ch4_eq.value;//<br>
       },
       wwt_slu_landfill_n2o:function(){//<br>
         var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
@@ -549,9 +549,9 @@ var Global={
           return 0;//<br>
         }else{//<br>
           if(sludge_type=="Non-digested"){ //<br>
-            return this.wwt_mass_slu_land*0.03*0.015*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
+            return this.wwt_mass_slu_land*0.03*Cts.ct_n2o_lf.value/100*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
           }else if(sludge_type=="Digested"){//<br>
-            return this.wwt_mass_slu_land*0.04*0.015*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
+            return this.wwt_mass_slu_land*0.04*Cts.ct_n2o_lf.value/100*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
           }//<br>
         }
       },
@@ -634,8 +634,8 @@ var Global={
       },
 
       //GHG avoided
-      wwt_slu_comp_C_seq:function(){ return this.wwt_mass_slu_comp*0.25; },
-      wwt_slu_app_C_seq:function(){  return this.wwt_mass_slu_app*0.25; },
+      wwt_slu_comp_C_seq:function(){ return this.wwt_mass_slu_comp*Cts.ct_C_seqst.value; },
+      wwt_slu_app_C_seq:function(){  return this.wwt_mass_slu_app*Cts.ct_C_seqst.value; },
       wwt_slu_land_C_seq:function(){
         var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
         var VS = (sludge_type=="Digested")? 0.51:0.70;//<br><br>
@@ -964,32 +964,35 @@ var Global={
 
           return this.fsr_mass_landapp*N_content*N_transformed_to_N2O*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value; //<br>
         },
-        fsr_ghg_avoided_landapp:function(){return this.fsr_mass_landapp*0.25},
+        fsr_ghg_avoided_landapp:function(){return this.fsr_mass_landapp*Cts.ct_C_seqst.value},
 
       //landfill emissions
         "fsr_mass_landfil":0, //dry weight sent to landfilling
         "fsr_disp_typ":0,     //disposal type for landfilling
         "fsr_fslu_typ_lf":0, //type of faecal sludge disposed landfil
         fsr_KPI_GHG_landfil_n2o:function(){//<br>
-          var disp_type=Tables.find('fsr_disp_typ',this.fsr_disp_typ);//<br>
+          var disp_type=Tables.find('fsr_disp_typ',this.fsr_disp_typ);//<br><br>
+          var emission=this.fsr_mass_landfil*this.fsr_n2o_effl*Cts.ct_n2o_lf.value/100*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
           if(disp_type=="Landfill"){//<br>
-            return this.fsr_mass_landfil*this.fsr_n2o_effl*0.015*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
+            return emission;//<br>
           }//<br>
           if(disp_type=="Landfill (flaring)"){//<br>
-            return 0.02*this.fsr_mass_landfil*this.fsr_n2o_effl*0.015*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
+            return 0.02*emission;//<br>
           }//<br>
-          if(disp_type=="Landfill (with gas recovery)")//<br>
-          {return 0}//<br>
+          if(disp_type=="Landfill (with gas recovery)"){//<br>
+            return 0;//<br>
+          }//<br>
         },
         fsr_KPI_GHG_landfil_ch4:function(){//<br>
           var disp_type=Tables.find('fsr_disp_typ',this.fsr_disp_typ);//<br>
           var fslu_type=Tables.find('fsr_fslu_typ_lf',this.fsr_fslu_typ_lf);//<br>
-          var TVS=Tables.fsr_fslu_typ_lf[fslu_type].TVS;//<br>
+          var TVS=Tables.fsr_fslu_typ_lf[fslu_type].TVS;//<br><br>
+          var emission=this.fsr_mass_landfil*TVS*Cts.ct_oc_vs.value*Cts.ct_DOCfra.value/100*Cts.ct_lf_unc.value*Cts.ct_ch4_C.value*Cts.ct_ch4_lf.value/100*Cts.ct_d3y_lf.value/100* Cts.ct_ch4_eq.value;//<br>
           if(disp_type=="Landfill"){//<br>
-            return this.fsr_mass_landfil*TVS*Cts.ct_oc_vs.value*0.80*0.9*(4/3)*0.50*0.699*Cts.ct_ch4_eq.value;//<br>
+            return emission;//<br>
           }//<br>
           if(disp_type=="Landfill (flaring)"){//<br>
-            return 0.02*this.fsr_mass_landfil*TVS*Cts.ct_oc_vs.value*0.80*0.9*(4/3)*0.50*0.699*Cts.ct_ch4_eq.value;//<br>
+            return 0.02*emission;//<br>
           }//<br>
           if(disp_type=="Landfill (with gas recovery)"){//<br>
             return 0; //<br>
@@ -998,10 +1001,10 @@ var Global={
         fsr_KPI_GHG_landfil:function(){//<br>
           return this.fsr_KPI_GHG_landfil_n2o()+this.fsr_KPI_GHG_landfil_ch4();
         },
-        fsr_ghg_avoided_landfil:function(){
-          var fslu_type=Tables.find('fsr_fslu_typ_lf',this.fsr_fslu_typ_lf);//<br>
+        fsr_ghg_avoided_landfil:function(){//<br>
+          var fslu_type=Tables.find('fsr_fslu_typ_lf',this.fsr_fslu_typ_lf);//<br><br>
           var TVS=Tables.fsr_fslu_typ_lf[fslu_type].TVS;//<br>
-          return this.fsr_mass_landfil*TVS*0.56*0.2*44/12;
+          return this.fsr_mass_landfil*TVS*Cts.ct_oc_vs.value*Cts.ct_u_org_f.value*Cts.ct_co2_C.value;
         },
 
       //dumping emissions

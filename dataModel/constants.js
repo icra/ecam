@@ -1,4 +1,17 @@
+/*constants*/
+
 var Cts = {
+
+  ct_ch4_lf:{  value:50,    descr:"CH4 in landfill gas",                                    unit:"%", },
+  ct_DOCfra:{  value:80,    descr:"Decomposable organic fraction of raw wastewater solids", unit:"%",},
+  ct_d3y_lf:{  value:69.9,  descr:"Decomposed % in first 3 years",                          unit:"%"},
+  ct_lf_unc:{  value:0.9,   descr:"Landfill uncertainty factor",                            unit:"adimensional"},
+  ct_ch4_C: {  value:4/3,   descr:"C to CH4 conversion factor (16/12)",                     unit:"kgCH4/kgC"},
+  ct_n2o_lf:{  value:1.5,   descr:"N2O landfill emissions for low C:N ratio",               unit:"%", },
+  ct_co2_C:{   value:44/12, descr:"C to CO2 conversion (44/12)",                            unit:"kgCO2/kgC", },
+  ct_u_org_f:{ value:0.2,   descr:"Undecomposable organic fraction",                        unit:"no unit", },
+  ct_C_seqst:{ value:0.25,  descr:"Carbon sequestration rate",                              unit:"kgCO2eq/kg", },
+
   ct_cr_forN:{
     value:4,
     descr:"Credit for Nitrogen",
@@ -40,12 +53,6 @@ var Cts = {
   ct_vs_slu:{value:0.70,descr:"Volatile Solids content in not Digested Sludge",unit:"g TVS / g sludge"},
   ct_ch4_oc:{value:1.3,descr:"C to CH<sub>4</sub> conversion factor",unit:"g CH<sub>4</sub> / g OC"},
   ct_ch4_up:{value:0.025,descr:"Percentage of CH<sub>4</sub> emission for uncoverd pile",unit:"ratio"},
-
-  /*
-    50:   % of CH<sub>4</sub> in landfill gas (ct_ch4_lf)
-    80:   % DOCf -the decomposable organic fraction of raw wastewater solids (ct_slu_lafl_decp_%)
-    69.9: % decomposed in first 3 years (ct_slu_lafl_decp_3yr)
-  */
 
   ct_n2o_efp:{
     value:3.2,
