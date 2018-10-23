@@ -1,6 +1,17 @@
 {
   "#below": "ด้านล่าง",
 
+  "#Click on the 'untitled' substage header to change its name":"กดเลือกที่นี่เพื่อเปลี่ยนชื่อ",
+  "#Double click a graph to download it":"กดเลือกสองครั้งที่กราฟเพื่อดาวน์โหลดกราฟ",
+  "#Export results to Excel at Main Menu/Other/Export":"ส่งออกผลการประเมินไปยังไฟล์ Excel ที่เมนูหลัก / อื่นๆ / ส่งออก",
+  "#Move the mouse over an output to see its formula":"เลื่อนเคอร์เซอร์เหนือผลลัพธ์ เพื่อแสดงสูตรการคำนวณ",
+  "#Move the mouse over inputs to highlight related outputs":"เลื่อนเมาส์ไปที่อินพุตเพื่อเน้นผลลัพธ์ที่เกี่ยวข้อง",
+  "#Move the mouse over outputs to highlight related inputs":"เลื่อนเคอร์เซอร์เหนือผลลัพธ์ จะแสดงไฮไลท์ค่าที่ใช้ในการคำนวณ",
+  "#Press &uarr; and &darr; when editing inputs to quickly increase/decrease the number":"กดเครื่องหมาย ↑ และ↓ ตอนที่เติมข้อมูลเพื่อเพิ่มหรือลดค่าได้ง่ายขึ้น",
+  "#Use fullscreen mode in your browser to work more comfortably":"กดขยายเต็มหน้าจอในหน้าเบราเซอร์เพื่อให้ใช้งานได้สะดวกขึ้น",
+  "#Use the TAB key to input values faster":"กด TAB เพื่อให้ง่ายต่อการเติมข้อมูล",
+
+
   "#ww_ch4_efac_unc_expla":"ค่าแฟกเตอร์การเกิดก๊าซมีเทน สำหรับน้ำเสียที่ไม่ได้รับการรวบรวม",
   "#ww_ch4_efac_unt_expla":"ค่าแฟกเตอร์การเกิดก๊าซมีเทน สำหรับน้ำเสียที่ไม่ได้รับการบำบัด",
   "#Enter the population living at each level of your system":"เติมจำนวนประชากรที่อาศัยอยู่ในขอบเขตการให้บริการในแต่ละระบบฯ",

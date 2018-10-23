@@ -1,6 +1,16 @@
 {
   "#below":"abajo",
 
+  "#Click on the 'untitled' substage header to change its name":"Haga click en el encabezado de la subetapa “sin título”  para cambiar el nombre",
+  "#Double click a graph to download it":"Haga doble click en un gráfico para descargarlo",
+  "#Export results to Excel at Main Menu/Other/Export":"Exporte los resultados a Excel en el menú principal/Otro/exportar",
+  "#Move the mouse over an output to see its formula":"Mueva el ratón sobre el resultado para ver su ecuación",
+  "#Move the mouse over inputs to highlight related outputs":"Mueva el ratón sobre los resultados para resaltar los valores de entrada relacionados",
+  "#Move the mouse over outputs to highlight related inputs":"Mueva el ratón sobre los valores de entrada para resaltar los resultados relacionados",
+  "#Press &uarr; and &darr; when editing inputs to quickly increase/decrease the number":"Presione ↑ y ↓ para editar, aumentar, disminuir, los valores de entrada rápidamente.",
+  "#Use fullscreen mode in your browser to work more comfortably":"Utilice el modo de pantalla completa en su navegador para trabajar más cómodamente",
+  "#Use the TAB key to input values faster":"Use la tecla TAB (⇥) para introducir los valores de entrada más rápidamente.",
+
   "#ww_ch4_efac_unc_expla":"Factor de emisión del metano de aguas residuales no recolectadas",
   "#ww_ch4_efac_unt_expla":"Factor de emisión del metano de aguas residuales no tratadas",
   "#Enter the population living at each level of your system":"Introduzca la población que vive en cada nivel de su sistema",
