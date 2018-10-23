@@ -1,6 +1,9 @@
 {
 "#below":"below",
 
+"#fsr_lf_TVS_descr":"Total Volatile Solids (% of dry weight)",
+"#fsr_lf_TVS_expla":"Total Volatile Solids (% of dry weight)",
+
 "#fsc_cont_emp_expla":"Fraction of produced faecal sludge that is emptied from containments during the assessment period. If only partial emptying is done it should be reflected in the fraction.",
 "#fsc_fslu_emp_expla":"Volume of faecal sludge emptied from the containment",
 "#fsc_vol_trck_expla":"Volume of fuel consumed (trucks)",

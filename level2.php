@@ -254,7 +254,7 @@
         btn.style.float='right';
         var multiplier=Units.multiplier(field);
         var rec_value=Recommendations[field]()/multiplier;
-        var currentUnit = Global.Configuration.Units[field] || Info[field].unit
+        var currentUnit = Global.Configuration.Units[field] || (Info[field] ? Info[field].unit : undefined);
         btn.innerHTML='Estimation: '+format(rec_value)+' '+currentUnit+' &rarr;';
         btn.setAttribute('caption','Estimation based on other inputs:<br> '+Formulas.prettify(Recommendations[field].toString()));
         btn.addEventListener('click',function(){

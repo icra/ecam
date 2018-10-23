@@ -34,14 +34,17 @@ var Recommendations={
       //N content of FS
       "fsr_la_N_cont":function(){//<br>
         var fslu_typ=Tables.find('fsr_fslu_typ_la',Global.Faecl.Reuse.fsr_fslu_typ_la);//<br>
-        var N_content=Tables.fsr_fslu_typ_la[fslu_typ].N_content;//<br>
-        return N_content;
+        return Tables.fsr_fslu_typ_la[fslu_typ].N_content;//<br>
       },
       //N content of FS
       "fsr_lf_N_cont":function(){//<br>
         var fslu_typ=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);//<br>
-        var N_content=Tables.fsr_fslu_typ_lf[fslu_typ].N_content;//<br>
-        return N_content;
+        return Tables.fsr_fslu_typ_lf[fslu_typ].N_content;//<br>
+      },
+      //TVS content of FS
+      "fsr_lf_TVS":function(){//<br>
+        var fslu_typ=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);//<br>
+        return 100*Tables.fsr_fslu_typ_lf[fslu_typ].TVS;//<br>
       },
 
   /*WW*/

@@ -8,6 +8,7 @@
 
 var Info = {
 
+  fsr_lf_TVS:{magnitude:"Percent", unit:"%"},
   fsr_la_N_cont:{magnitude:"Percent", unit:"%"},
   fsr_lf_N_cont:{magnitude:"Percent", unit:"%"},
 
