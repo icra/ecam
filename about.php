@@ -31,7 +31,7 @@
   </p>
 
   <p>
-    This software is free and <a href=https://github.com/holalluis/ecam>open source</a>.
+    This software is free and <a href=https://github.com/icra/ecam>open source</a>.
   </p>
 
   <p>

@@ -68,7 +68,7 @@
 
 <!--note: issues were moved to github-->
 <p style=text-align:center>
-  Issues were moved to <a href='https://github.com/holalluis/ecam/issues'>github issues</a>
+  Issues were moved to <a href='https://github.com/icra/ecam/issues'>github issues</a>
 </p>
 
 <!--problems-->

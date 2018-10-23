@@ -29,7 +29,7 @@
       <h4 style=font-size:18px;color:#58595b> <?php write("#index_description")?> </h4>
       <h4 style=font-size:18px;color:#58595b>
         <?php write("#ecam_is_a_free_and")?>
-        <a target=_blank href=//github.com/holalluis/ecam>
+        <a target=_blank href=//github.com/icra/ecam>
           <?php write("#open_source")?>
         </a>
         <?php write("#tool_developed_as_part_of_the")?>
