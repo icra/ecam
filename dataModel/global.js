@@ -950,19 +950,18 @@ var Global={
         fsr_KPI_GHG_trck:function(){return this.fsr_KPI_GHG_trck_co2()+this.fsr_KPI_GHG_trck_n2o()+this.fsr_KPI_GHG_trck_ch4()},
 
       //land application emissions
-        "fsr_mass_landapp":0, //dry weight sent to land application
-        "fsr_soil_typ":0,     //soil type for land application
-        "fsr_fslu_typ_la":0,  //type of faecal sludge disposed landapp
+        "fsr_mass_landapp":0,//dry weight sent to land application
+        "fsr_soil_typ":0,    //soil type for land application
+        "fsr_fslu_typ_la":0, //type of faecal sludge disposed landapp
+
+        "fsr_la_N_cont":0, //N content of faecal sludge
+
         fsr_KPI_GHG_landapp:function(){//<br>
-          var soil_type=Tables.find('fsr_soil_typ',this.fsr_soil_typ);//<br>
-          var N_transformed_to_N2O=0;//<br>
+          let soil_type=Tables.find('fsr_soil_typ',this.fsr_soil_typ);//<br>
+          let N_transformed_to_N2O=0;//<br>
           if(soil_type=="Fine-Textured (>30% clay)"  ) N_transformed_to_N2O=0.023; //<br>
           if(soil_type=="Coarse-Textured (<30% clay)") N_transformed_to_N2O=0.050; //<br><br>
-
-          var fslu_type=Tables.find('fsr_fslu_typ_la',this.fsr_fslu_typ_la);//<br>
-          var N_content=Tables.fsr_fslu_typ_la[fslu_type].N_content;//<br><br>
-
-          return this.fsr_mass_landapp*N_content*N_transformed_to_N2O*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value; //<br>
+          return this.fsr_mass_landapp*this.fsr_la_N_cont/100*N_transformed_to_N2O*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value; //<br>
         },
         fsr_ghg_avoided_landapp:function(){return this.fsr_mass_landapp*Cts.ct_C_seqst.value},
 
@@ -970,9 +969,12 @@ var Global={
         "fsr_mass_landfil":0, //dry weight sent to landfilling
         "fsr_disp_typ":0,     //disposal type for landfilling
         "fsr_fslu_typ_lf":0, //type of faecal sludge disposed landfil
+
+        "fsr_lf_N_cont":0, //N content of faecal sludge
+
         fsr_KPI_GHG_landfil_n2o:function(){//<br>
           var disp_type=Tables.find('fsr_disp_typ',this.fsr_disp_typ);//<br><br>
-          var emission=this.fsr_mass_landfil*this.fsr_n2o_effl*Cts.ct_n2o_lf.value/100*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
+          var emission=this.fsr_mass_landfil*this.fsr_lf_N_cont/100*Cts.ct_n2o_lf.value/100*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
           if(disp_type=="Landfill"){//<br>
             return emission;//<br>
           }//<br>

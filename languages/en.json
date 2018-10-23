@@ -1,6 +1,16 @@
 {
   "#below":"below",
 
+  "#Split stage value among substages":"Split stage value among substages",
+  "#Update the stage value using this total value":"Update the stage value using this total value",
+  "#Update the stage value using this average value":"Update the stage value using this average value",
+
+  "#Enter the population living at each level of your system":"Enter the population living at each level of your system",
+  "#Abbreviations":"Abbreviations",
+
+  "#fsr_la_N_cont_descr":"Total Nitrogen (% of dry weight)",
+  "#fsr_lf_N_cont_descr":"Total Nitrogen (% of dry weight)",
+
   "#wwt_correction_factor":"Do you want to revise the default N2O emissions",
 
   "#Septic System":"Septic System",

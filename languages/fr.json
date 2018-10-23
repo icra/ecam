@@ -1,4 +1,13 @@
 {
+
+"#ww_ch4_efac_unc_expla":"Facteur d’émission de méthane pour les eaux usées non-collectées.",
+"#ww_ch4_efac_unt_expla":"Facteur d’émission de méthane pour les eaux usées non traitées.",
+"#Enter the population living at each level of your system":"Entrez la population vivant à chaque niveau de votre système",
+"#Abbreviations":"Abréviations",
+"#Split stage value among substages":"Partager la valeur entre les sous-étapes.",
+"#Update the stage value using this total value":  "Mettre à jour la valeur d’étape en utilisant la valeur totale",
+"#Update the stage value using this average value":"Mettre à jour la valeur d’étape en utilisant la valeur moyenne",
+
 "#About non revenue water":"A propos de l'eau non rémunérée",
 "#Abstraction":"Prélèvement",
 "#Activated Sludge (well managed)":"Boues Activées (bien gérées)",

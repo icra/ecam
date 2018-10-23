@@ -341,7 +341,7 @@
         var btn_value = isSumable ? value : value/substages.length; //sum or average
         var onclick   = "onclick=level2.updateField('"+code+"',"+btn_value+")";
         return '<button '+onclick+' '+
-          ' caption="Update the stage value using this '+(isSumable?'total':'average')+' value">'+
+          ' caption="'+translate('Update the stage value using this '+(isSumable?'total':'average')+' value')+'">'+
           '&rarr;</button>';
       })();
       extra_btns+=btn_overwrite;
@@ -351,7 +351,7 @@
         var btn_copy = (function(){
           var btn_value = isSumable ? value : value/substages.length; //sum or average
           return '<button '+
-            'caption="Split stage value ('+format(sta)+') among substages" '+
+            'caption="'+translate("Split stage value among substages")+'" '+
             'onclick=\"substages.forEach(s=>{s[\''+code+'\']=CurrentLevel[\''+code+'\']/'+(isSumable?substages.length:1)+'});init()\">'+
             '&larr;'+
           '</button>';

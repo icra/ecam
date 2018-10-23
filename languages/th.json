@@ -1,6 +1,14 @@
 {
   "#below": "ด้านล่าง",
 
+  "#ww_ch4_efac_unc_expla":"ค่าแฟกเตอร์การเกิดก๊าซมีเทน สำหรับน้ำเสียที่ไม่ได้รับการรวบรวม",
+  "#ww_ch4_efac_unt_expla":"ค่าแฟกเตอร์การเกิดก๊าซมีเทน สำหรับน้ำเสียที่ไม่ได้รับการบำบัด",
+  "#Enter the population living at each level of your system":"เติมจำนวนประชากรที่อาศัยอยู่ในขอบเขตการให้บริการในแต่ละระบบฯ",
+  "#Abbreviations":"ตัวย่อ",
+  "#Split stage value among substages":"แบ่งค่านี้ตามแต่ละหน่วยย่อย",
+  "#Update the stage value using this total value":  "อัพเดตค่าขั้นโดยใช้มูลค่ารวมนี้",
+  "#Update the stage value using this average value":"อัพเดตค่าขั้นโดยใช้ค่าเฉลี่ยนี้",
+
   "#About non revenue water":"คำอธิบายน้ำสูญเสีย",
   "#Abstraction":"ระบบสูบน้ำดิบ",
   "#Activated Sludge (well managed)": "ระบบตะกอนเร่ง แบบได้รับการดูแลอย่างดี",

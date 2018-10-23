@@ -178,13 +178,14 @@ var Tables = {
       "Land application":{              value:2, },
       "Dumping":{                       value:3, },
     },
+
     "fsr_fslu_typ":{ //faecal sludge type for land application and landfilling
-      "Untreated":{          value:0, N_content:0.10, TVS:0.650, dry_weight:0.10}, //provisional numbers TODO
-      "Treated":{            value:1, N_content:0.11, TVS:0.344, dry_weight:0.20}, //provisional numbers TODO
-      "Pit humus":{          value:2, N_content:0.12, TVS:0.110, dry_weight:0.30}, //provisional numbers TODO
-      "Dehydrated faeces":{  value:3, N_content:0.13, TVS:0.120, dry_weight:0.40}, //provisional numbers TODO
-      "Compost":{            value:4, N_content:0.14, TVS:0.130, dry_weight:0.50}, //provisional numbers TODO
-      "Septic tank sludge":{ value:5, N_content:0.15, TVS:0.140, dry_weight:0.60}, //provisional numbers TODO
+      "Untreated":{          value:0, N_content:0.24, TVS:0.700, dry_weight:0.04},
+      "Treated":{            value:1, N_content:3.00, TVS:0.400, dry_weight:0.22},
+      "Pit humus":{          value:2, N_content:4.00, TVS:0.650, dry_weight:0.07},
+      "Dehydrated faeces":{  value:3, N_content:3.00, TVS:0.700, dry_weight:0.27},
+      "Compost":{            value:4, N_content:3.00, TVS:0.800, dry_weight:0.08},
+      "Septic tank sludge":{ value:5, N_content:0.03, TVS:0.600, dry_weight:0.02},
     },
 
     "fsr_soil_typ":{

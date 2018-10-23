@@ -5,17 +5,13 @@
 <!--NAVBAR--><?php include"navbar.php"?>
 <!--linear--><?php include'linear.php'?>
 <!--TITLE--><h1 style=color:black>
-  Developer tool:
-  translation problems finder
-  &mdash;
+  Developer tool: translation problems finder &mdash;
   Current language: 
-  <span style=color:black;font-weight:bold>
-    <?php echo $lang ?>
-  </span>
+  <span style=color:black;font-weight:bold> <?php echo $lang ?> </span>
 </h1>
 
 <?php
-  //solve problems if "null" is selected
+  //solve "en" problems if "null" is selected
   if($lang=="null")$lang="en";
 ?>
 
@@ -28,10 +24,8 @@
   file (the current selected language by the user)
 </p>
 <ul style=max-width:50%;text-align:left>
-  <li>
-    Language tags: <b><?php echo count($lang_json)?></b>
-  <li>
-    To list not used tags: run the <a href="languages/findNotUsed.sh">findNotUsed.sh</a> bash script from the command line.
+  <li> Language tags: <b><?php echo count($lang_json)?></b>
+  <li> To list not used tags: run the <a href="languages/findNotUsed.sh">findNotUsed.sh</a> bash script from the command line.
   <li> 
     Duplicated tags:
     <?php
@@ -64,88 +58,117 @@
     ?>
   <li>
     <span style="background:red;color:black;">
-      Other problems found:
-      <span id=problems_counter>0</span>
+      More problems: <span id=problems_counter>0</span>
     </span>
 </ul>
 
-  
+<div class=flex style=justify-content:center>
+  <!--problems found-->
+  <table style=font-family:monospace>
+    <tr><th>Missing tags in "<?php echo "$lang.json"?>"<th>English text (currently not translated in "<?php echo "$lang.json"?>")
+    <?php
+      error_reporting(E_ALL^E_NOTICE);
 
-<!--problems found-->
-<table style=font-family:monospace>
-  <tr><th>Missing tags in "<?php echo "$lang.json"?>"<th>English text (currently not translated in "<?php echo "$lang.json"?>")
-  <?php
-    error_reporting(E_ALL^E_NOTICE);
+      function updateCounter($problems){
+        echo "<script>
+          document.body.onload=function(){
+            var pc=document.querySelector('#problems_counter');
+            pc.innerHTML='<b>$problems</b>';
+            if($problems==0){
+              pc.parentNode.style.background='#af0';
+            }
+          }
+        </script>";
+      }
 
-    function updateCounter($problems){
-      echo "<script>
-        document.body.onload=function(){
-          var pc=document.querySelector('#problems_counter');
-          pc.innerHTML='<b>$problems</b>';
-          if($problems==0){
-            pc.parentNode.style.background='#af0';
+      function compareCurrentLanguage(){
+        global $lang_json;
+        $en_lang_file=file_get_contents("languages/en.json");
+        $en_lang_json=json_decode($en_lang_file,true);
+
+        //counter for problems
+        $problems=0;
+
+        //look for missing tags in current language
+        foreach($en_lang_json as $key=>$text){
+          if(!$lang_json[$key]){
+            echo "<tr>
+              <td>$key
+              <td><small>$text</small>
+            </tr>";
+
+            $problems++;
           }
         }
-      </script>";
-    }
 
-    function compareCurrentLanguage(){
-      global $lang_json;
-      $en_lang_file=file_get_contents("languages/en.json");
-      $en_lang_json=json_decode($en_lang_file,true);
 
-      //counter for problems
-      $problems=0;
+        //look for existing tags that are not existing in en.json
+        echo '<tr><th>Not existing tags in "en.json"<th>Translated text (can be removed safely)';
+        foreach($lang_json as $key=>$text){
+          if(!$en_lang_json[$key]){
+            echo "<tr>
+              <td>$key
+              <td><small>$text</small>
+            </tr>";
 
-      //look for missing tags in current language
-      foreach($en_lang_json as $key=>$text){
-        if(!$lang_json[$key]){
-          echo "<tr>
-            <td>$key
-            <td><small>$text</small>
-          </tr>";
-
-          $problems++;
+            $problems++;
+          }
         }
-      }
 
-
-      //look for existing tags that are not existing in en.json
-      echo '<tr><th>Not existing tags in "en.json"<th>Translated text (can be removed safely)';
-      foreach($lang_json as $key=>$text){
-        if(!$en_lang_json[$key]){
-          echo "<tr>
-            <td>$key
-            <td><small>$text</small>
-          </tr>";
-
-          $problems++;
+        //look for duplicated tags (removed)
+        //NOTE: trying to add a duplicate on purpose fails, probably because json_decode already removes duplicates
+        /*
+        echo '<tr><th>Duplicated tags<th>Number of instances';
+        $tags=[];
+        foreach($lang_json as $key=>$text){
+          $tags[]=$key;
         }
-      }
-
-      //look for duplicated tags (removed)
-      //NOTE: trying to add a duplicate on purpose fails, probably because json_decode already removes duplicates
-      /*
-      echo '<tr><th>Duplicated tags<th>Number of instances';
-      $tags=[];
-      foreach($lang_json as $key=>$text){
-        $tags[]=$key;
-      }
-      $duplicated=array_count_values($tags);
-      foreach($duplicated as $tag=>$n){
-        if($n>1){
-          echo "<tr>
-            <td>$tag
-            <td>$n
-          </tr>";
-          $problems++;
+        $duplicated=array_count_values($tags);
+        foreach($duplicated as $tag=>$n){
+          if($n>1){
+            echo "<tr>
+              <td>$tag
+              <td>$n
+            </tr>";
+            $problems++;
+          }
         }
-      }
-      */
+        */
 
-      //update problems counter
-      updateCounter($problems);
-    }
-    compareCurrentLanguage();
-  ?>
-</table>
+        //update problems counter
+        updateCounter($problems);
+      }
+      compareCurrentLanguage();
+    ?>
+  </table>
+
+  <!--variables without explanation-->
+  <div style=margin-left:5px>
+    <table id=no_expla_variables>
+      <tr><th>Variables without long explanation
+    </table>
+    <script>
+      Structure.forEach(stage=>{
+        let obj=null;
+        if(stage.sublevel){
+          obj=Global[stage.level][stage.sublevel];
+        }else{
+          obj=Global[stage.level];
+        }
+        let table=document.querySelector("#no_expla_variables");
+        Object.keys(obj)
+          .filter(key=>{return typeof(obj[key])!='object'})
+          .forEach(key=>{
+            let expla=translate(key+"_expla");
+            if(expla==("[#"+key+"_expla]")){
+              table.insertRow(-1).insertCell(-1).outerHTML="<td style=background:red"+
+              " title='"+translate(key+'_descr')+"'"+
+              ">"+
+              "<a href=variable.php?id="+key+" >"+key+"_expla</a>"+
+              "</td>";
+            }
+          });
+      })
+    </script>
+  </div>
+</div>

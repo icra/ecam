@@ -72,9 +72,9 @@
 </p>
 
 <!--problems-->
-<div style="max-width:50%;border:1px solid #ccc;padding:0.5em;margin:2px auto">
+<div class=flex  style="border:1px solid #ccc;padding:0.5em;margin:2px auto">
   <!--not used inputs-->
-  <div class=inline style="max-width:20%">
+  <div>
     <table><tr><th>Inputs not used in any<br><b>Outputs</b><br> and<br><b>Benchmarks</b>
       <script>
         //get unused inputs
@@ -122,7 +122,7 @@
   </div>
 
   <!--questions-->
-  <div class=inline style="max-width:20%">
+  <div>
     <table id=inex_questions>
       <tr><th>Inexisting variable codes that appear in questions.js
     </table>
@@ -135,7 +135,7 @@
   </div>
 
   <!--rest of data structures-->
-  <div class=inline style="max-width:60%">
+  <div>
     <table id=vawomu><tr><th>Variables without magnitude/unit
       <tr><td class=allok>
       <script>
@@ -196,6 +196,7 @@
       </script>
     </table>
   </div>
+
 </div>
 
 <!--current json--><?php include'currentJSON.php'?>

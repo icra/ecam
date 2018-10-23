@@ -1,5 +1,14 @@
 {
   "#below":"abajo",
+
+  "#ww_ch4_efac_unc_expla":"Factor de emisión del metano de aguas residuales no recolectadas",
+  "#ww_ch4_efac_unt_expla":"Factor de emisión del metano de aguas residuales no tratadas",
+  "#Enter the population living at each level of your system":"Introduzca la población que vive en cada nivel de su sistema",
+  "#Abbreviations":"Abreviaciones",
+  "#Split stage value among substages":"Dividir el valor entre las subetapas",
+  "#Update the stage value using this total value":  "Actualizar el valor de la etapa usando este valor total",
+  "#Update the stage value using this average value":"Actualizar el valor de la etapa usando este valor promedio",
+
   "#About non revenue water":"Acerca de Agua No Facturada",
   "#Abstraction":"Captación",
   "#Activated Sludge (well managed)": "Lodos activados-Bien operado",

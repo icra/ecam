@@ -645,8 +645,10 @@ var Questions={
     },
     "fsr_landfil":{
       variables:[
-        "fsr_mass_landfil",
         "fsr_fslu_typ_lf",
+        "fsr_mass_landfil",
+        "fsr_lf_N_cont",
+
         "fsr_disp_typ",
         "fsr_KPI_GHG_landfil_ch4",
         "fsr_KPI_GHG_landfil_n2o",
@@ -659,8 +661,9 @@ var Questions={
     },
     "fsr_landapp":{
       variables:[
-        "fsr_mass_landapp",
         "fsr_fslu_typ_la",
+        "fsr_mass_landapp",
+        "fsr_la_N_cont",
         "fsr_soil_typ",
         "fsr_KPI_GHG_landapp",
         "fsr_ghg_avoided_landapp",
