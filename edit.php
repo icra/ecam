@@ -170,7 +170,6 @@
     function init() {
       //performance measure
       //console.time('init');
-
       Caption.hide();
       if(typeof(level2)!="undefined"){ level2.updateInputs() }
       updateOutputs();
@@ -179,9 +178,9 @@
       Exceptions.apply();
       try{drawCharts()}
       catch(e){console.log(e)}
-      updateResult();
       Sidebar.updateMemory(true);
       Caption.listeners();
+      updateResult();
       //performance end
       //console.timeEnd('init');
     }
@@ -189,10 +188,8 @@
     /** Redisplay table id=outputs (level2)*/
     function updateOutputs() {
       //console.time('updateOutputs');
-
       var t=document.getElementById('outputs');
       while(t.rows.length>2){t.deleteRow(-1)}
-
       Object.keys(CurrentLevel)
         .filter(key=>{return typeof(CurrentLevel[key])=="function"}) //only outputs
         .filter(key=>{return key.search("_KPI_GHG")+1})              //only GHG

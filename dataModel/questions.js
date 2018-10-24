@@ -710,6 +710,11 @@ var Questions={
     },
 };
 
+//set default values for all questions to 0 (before updating the structure from the cookies)
+Object.keys(Questions).forEach(key=>{
+  Global.Configuration["Yes/No"][key]=0;
+});
+
 //FUNCTIONS for Questions
 //check if the "field" is inside questions
 Questions.isInside=function(field) {

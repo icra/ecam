@@ -1085,8 +1085,9 @@ var Global={
 
     //answers for filters (see "questions.js")
     "Yes/No": {
-      "wwt_valorizing_biogas":0, //this one is an exception
-      "fst_valorizing_biogas":0, //this one is an exception
+      //examples:
+      //wwt_valorizing_biogas: 0,
+      //fst_valorizing_biogas: 0,
     },
   },
 };
@@ -1100,7 +1101,6 @@ Global.Waste.wwt_KPI_GHG=function(){return Global.Waste.Treatment.wwt_KPI_GHG()}
 Global.Waste.wwd_KPI_GHG=function(){return Global.Waste.Discharge.wwd_KPI_GHG()};
 Global.Water.ws_KPI_GHG =function(){return this.wsa_KPI_GHG()+this.wst_KPI_GHG()+this.wsd_KPI_GHG()};
 Global.Waste.ww_KPI_GHG =function(){return this.wwc_KPI_GHG()+this.wwt_KPI_GHG()+this.wwd_KPI_GHG()+this.ww_KPI_GHG_unt()};
-
 
 //extra object for opportunities added by Gary
 Global.Opps={
