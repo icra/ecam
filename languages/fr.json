@@ -1,6 +1,13 @@
 {
 "#below":"ci-dessous",
 
+"#fsr_lf_TVS_descr":"Solides volatils totaux (% poids sec)",
+"#fsr_lf_TVS_expla":"Solides volatils totaux (% poids sec)",
+"#fsr_la_N_cont_descr":"Azote total (% poids sec)",
+"#fsr_la_N_cont_expla":"Azote total (% poids sec)",
+"#fsr_lf_N_cont_descr":"Azote total (% poids sec)",
+"#fsr_lf_N_cont_expla":"Azote total (% poids sec)",
+
 "#fsc_cont_emp_expla": "Fraction des boues de fécales vidangée du confinement durant la période d'évaluation. La fraction doit être adaptée si la vidange n'est que partielle.",
 "#fsc_fslu_emp_expla": "Volume des boues fécales vidangées du confinement",
 "#fsc_vol_trck_expla": "Volume de carburant consommé (Camions)",

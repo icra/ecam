@@ -1,7 +1,12 @@
 {
 "#below":"abajo",
 
-"#Tier":"Nivel",
+"#fsr_lf_TVS_descr":"Sólidos Totales Volátiles (% materia seca)",
+"#fsr_lf_TVS_expla":"Sólidos Totales Volátiles (% materia seca)",
+"#fsr_la_N_cont_descr":"Nitrógeno Total (% materia seca)",
+"#fsr_la_N_cont_expla":"Nitrógeno Total (% materia seca)",
+"#fsr_lf_N_cont_descr":"Nitrógeno Total (% materia seca)",
+"#fsr_lf_N_cont_expla":"Nitrógeno Total (% materia seca)",
 
 "#fsc_cont_emp_expla":"Fracción del lodo fecal producido que es vaciado de los contenedores durante el periodo de evaluación",
 "#fsc_fslu_emp_expla":"Volumen de lodo fecal vaciado de los contenedores",

@@ -3,6 +3,10 @@
 
 "#fsr_lf_TVS_descr":"Total Volatile Solids (% of dry weight)",
 "#fsr_lf_TVS_expla":"Total Volatile Solids (% of dry weight)",
+"#fsr_la_N_cont_descr":"Total Nitrogen (% of dry weight)",
+"#fsr_la_N_cont_expla":"Total Nitrogen (% of dry weight)",
+"#fsr_lf_N_cont_descr":"Total Nitrogen (% of dry weight)",
+"#fsr_lf_N_cont_expla":"Total Nitrogen (% of dry weight)",
 
 "#fsc_cont_emp_expla":"Fraction of produced faecal sludge that is emptied from containments during the assessment period. If only partial emptying is done it should be reflected in the fraction.",
 "#fsc_fslu_emp_expla":"Volume of faecal sludge emptied from the containment",
@@ -58,8 +62,6 @@
 "#ww_ch4_efac_unc_expla":"CH<sub>4</sub> emission factor (uncollected wastewater)",
 "#ww_ch4_efac_unt_expla":"CH<sub>4</sub> emission factor (untreated wastewater)",
 
-"#fsr_la_N_cont_descr":"Total Nitrogen (% of dry weight)",
-"#fsr_lf_N_cont_descr":"Total Nitrogen (% of dry weight)",
 "#wwt_correction_factor":"Do you want to revise the default N2O emissions",
 "#Septic System":"Septic System",
 "#wwd_KPI_GHG_tre_descr":"Effluent discharge",
