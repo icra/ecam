@@ -160,6 +160,7 @@ var Info = {
 	conv_kwh_co2:{magnitude:"Conversion",unit:"kg CO<sub>2</sub>/kWh"},
   prot_con:{magnitude:"Annual per capita consumption",unit:"kg/person/year"},
   bod_pday:{magnitude:"Mass/inhab/time",unit:"g/person/day"},
+  bod_pday_fs:{magnitude:"Mass/inhab/time",unit:"g/person/day"},
 	TotalGHG :{magnitude:"Mass",unit:"kg CO<sub>2</sub>eq"},
   TotalNRG :{magnitude:"Energy", unit:"kWh"},
 	content_C:{magnitude:"Mass",unit:"kg C"},

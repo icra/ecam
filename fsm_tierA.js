@@ -28,11 +28,14 @@ function apply_fsm_estimations(){
     if(Global.Configuration['Yes/No'].fsr_landapp){
       fsr.fsr_fslu_typ_la  = fsr.fsr_fslu_typ;
       fsr.fsr_mass_landapp = Recommendations.fsr_mass_landapp();
+      fsr.fsr_la_N_cont    = Recommendations.fsr_la_N_cont();
     }
     //if landfill
     if(Global.Configuration['Yes/No'].fsr_landfil){
       fsr.fsr_fslu_typ_lf  = fsr.fsr_fslu_typ;
       fsr.fsr_mass_landfil = Recommendations.fsr_mass_landfil();
+      fsr.fsr_lf_N_cont    = Recommendations.fsr_lf_N_cont();
+      fsr.fsr_lf_TVS       = Recommendations.fsr_lf_TVS();
     }
     //dumping
     if(Global.Configuration['Yes/No'].fsr_dumping){

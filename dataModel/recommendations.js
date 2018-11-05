@@ -3,7 +3,7 @@ var Recommendations={
   /*FSM*/
     /*fsc*/
       //influent BOD
-      "fsc_bod_infl":function(){ return Global.General.bod_pday/1000*Global.Faecl.fs_onsi_pop*Global.General.Days(); },
+      "fsc_bod_infl":function(){ return Global.General.bod_pday_fs/1000*Global.Faecl.fs_onsi_pop*Global.General.Days(); },
       //sludge emptied
       "fsc_fslu_emp":function(){ return Cts.ct_fs_prod.value*Global.Faecl.fs_onsi_pop*Global.General.Days()/Global.Faecl.Containment.fsc_fdensity*Global.Faecl.Containment.fsc_cont_emp/100; },
       //BOD removed as FS

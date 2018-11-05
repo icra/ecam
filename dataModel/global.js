@@ -14,8 +14,9 @@ var Global={
 
     Country:"false", //string with the name of the country
     conv_kwh_co2:0,  //conversion factor for grid electricity (kgCO2/kWh)
-    bod_pday: 0,     //BOD5                                      (g/person/day)
-    prot_con: 0,     //prot consumption                          (kg/person/year)
+    prot_con: 0,     //prot consumption                       (kg/person/year)
+    bod_pday: 0,     //BOD5                                   (g/person/day)
+    bod_pday_fs: 0,  //BOD5 in faecal sludge                  (g/person/day)
 
     //do you have fuel engines in any stage?
     anyFuelEngines:0,

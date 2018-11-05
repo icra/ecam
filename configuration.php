@@ -237,8 +237,9 @@
               if(country=="false") return;
               Global.General.Country=country;
               Global.Configuration.Selected.prot_con=country;
-              ['conv_kwh_co2','prot_con','bod_pday'].forEach(function(code) {
+              ['conv_kwh_co2','prot_con','bod_pday','bod_pday_fs'].forEach(function(code) {
                 var input=document.querySelector("table#general_inputs input#"+code)
+                if(code=="bod_pday_fs"){ code="bod_pday"; } //put the same value in faecal sludge as normal bod per day
                 input.value=Countries[country][code];
                 input.onchange();
               });
@@ -258,15 +259,19 @@
       <table id=general_inputs>
         <tr>
           <td><?php write('#conv_kwh_co2_descr')?>
-          <td><input id=conv_kwh_co2 onchange="update(Global.General,'conv_kwh_co2',this.value)">
+          <td><input id=conv_kwh_co2 onchange="update(Global.General,this.id,this.value)">
           <td>kg<sub>CO<sub>2</sub></sub>/kWh
         <tr>
           <td><?php write('#prot_con_descr')?>
-          <td><input id=prot_con onchange="update(Global.General,'prot_con',this.value)">
+          <td><input id=prot_con onchange="update(Global.General,this.id,this.value)">
           <td>kg/<?php write('#person')?>/<?php write('#year')?>
         <tr>
           <td><?php write('#bod_pday_descr')?>
-          <td><input id=bod_pday onchange="update(Global.General,'bod_pday',this.value)">
+          <td><input id=bod_pday onchange="update(Global.General,this.id,this.value)">
+          <td>g/<?php write('#person')?>/<?php write('#day')?>
+        <tr>
+          <td><?php write('#bod_pday_fs_descr')?>
+          <td><input id=bod_pday_fs onchange="update(Global.General,this.id,this.value)">
           <td>g/<?php write('#person')?>/<?php write('#day')?>
       </table>
     </fieldset>

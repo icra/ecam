@@ -664,7 +664,6 @@ var Questions={
         "fsr_fslu_typ_la",
         "fsr_mass_landapp",
         "fsr_la_N_cont",
-        "fsr_la_TVS",
         "fsr_soil_typ",
         "fsr_KPI_GHG_landapp",
         "fsr_ghg_avoided_landapp",
