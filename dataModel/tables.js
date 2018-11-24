@@ -107,8 +107,8 @@ var Tables = {
       "Vane pump":{value:3},
     },
     "wwt_slu_disp":{
-      "Non-digested":{value:0},
-      "Digested":{value:1},
+      "Non-digested":{value:0, la_N_cont:3, TVS:0.70},
+      "Digested":{value:1,     la_N_cont:4, TVS:0.51},
     },
     "wwt_slu_type":{
       "Landfill":{value:0},

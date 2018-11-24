@@ -513,35 +513,24 @@ var Global={
       wwt_KPI_ghg_inc_co2eq:function(){return this.wwt_slu_inciner_ch4()+this.wwt_slu_inciner_n2o()},
       //land application
       wwt_mass_slu_app:0,
-      wwt_soil_typ:0, //Options: ["Fine","Coarse"]
+      wwt_soil_typ:0,      //Option: ["Fine","Coarse"]
+      wwt_slu_la_N_cont:0, //Total Nitrogen (% of dry weight)
       wwt_slu_landapp_n2o:function(){//<br>
-        var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
-        var soil_type=Tables.find('wwt_soil_typ',this.wwt_soil_typ);//<br>
-        var ratio_CN=Global.General.content_C(this.wwt_mass_slu_app,sludge_type)/Global.General.content_N(this.wwt_mass_slu_app,sludge_type)||0;//<br>
-        if(sludge_type=="Non-digested"){//<br>
-          if(soil_type=="Fine-Textured (>30% clay)"   && ratio_CN < 30){return this.wwt_mass_slu_app*0.03*0.023*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value} //<br>
-          if(soil_type=="Coarse-Textured (<30% clay)" && ratio_CN < 30){return this.wwt_mass_slu_app*0.03*0.005*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value} //<br>
-        }else if(sludge_type=="Digested"){//<br>
-          if(soil_type=="Fine-Textured (>30% clay)"   && ratio_CN < 30){return this.wwt_mass_slu_app*0.04*0.023*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value} //<br>
-          if(soil_type=="Coarse-Textured (<30% clay)" && ratio_CN < 30){return this.wwt_mass_slu_app*0.04*0.005*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value} //<br>
-        }else{//<br>
-          return 0;//<br>
-        }
+        let sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
+        let soil_type=Tables.find('wwt_soil_typ',this.wwt_soil_typ);//<br>
+        let ratio_CN=Global.General.content_C(this.wwt_mass_slu_app,sludge_type)/Global.General.content_N(this.wwt_mass_slu_app,sludge_type)||0;//<br>
+        if(ratio_CN>=30){return 0;}//<br>
+        if(soil_type=="Fine-Textured (>30% clay)"  ){return this.wwt_mass_slu_app*this.wwt_slu_la_N_cont/100*0.023*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value} //<br>
+        if(soil_type=="Coarse-Textured (<30% clay)"){return this.wwt_mass_slu_app*this.wwt_slu_la_N_cont/100*0.005*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value} //<br>
       },
       wwt_KPI_ghg_app_co2eq:function(){return this.wwt_slu_landapp_n2o()},
       //landfilling
       wwt_mass_slu_land:0,
+      wwt_slu_lf_N_cont:0,
+      wwt_slu_lf_TVS:0,
       wwt_slu_type:0,
       wwt_slu_landfill_ch4:function(){//<br>
-        var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
-        if(sludge_type=="Non-digested"){//<br>
-          var vs_content=Cts.ct_vs_slu.value;//<br>
-        }else if(sludge_type=="Digested"){//<br>
-          var vs_content=Cts.ct_vs_dig.value;//<br>
-        }else{//<br>
-          return 0;//<br>
-        }//<br><br>
-        return this.wwt_mass_slu_land*Cts.ct_oc_vs.value*vs_content*Cts.ct_lf_unc.value*Cts.ct_ch4_oc.value*Cts.ct_ch4_lf.value/100*Cts.ct_DOCfra.value/100*Cts.ct_d3y_lf.value/100*Cts.ct_ch4_eq.value;//<br>
+        return this.wwt_mass_slu_land*Cts.ct_oc_vs.value*this.wwt_slu_lf_TVS/100*Cts.ct_lf_unc.value*Cts.ct_ch4_oc.value*Cts.ct_ch4_lf.value/100*Cts.ct_DOCfra.value/100*Cts.ct_d3y_lf.value/100*Cts.ct_ch4_eq.value;//<br>
       },
       wwt_slu_landfill_n2o:function(){//<br>
         var sludge_type=Tables.find('wwt_slu_disp',this.wwt_slu_disp);//<br>
@@ -549,14 +538,10 @@ var Global={
         if(ratio_CN>30){//<br>
           return 0;//<br>
         }else{//<br>
-          if(sludge_type=="Non-digested"){ //<br>
-            return this.wwt_mass_slu_land*0.03*Cts.ct_n2o_lf.value/100*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
-          }else if(sludge_type=="Digested"){//<br>
-            return this.wwt_mass_slu_land*0.04*Cts.ct_n2o_lf.value/100*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value //<br>
-          }//<br>
+          return this.wwt_mass_slu_land*this.wwt_slu_lf_N_cont/100*Cts.ct_n2o_lf.value/100*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;//<br>
         }
       },
-      wwt_KPI_ghg_land_co2eq:function(){
+      wwt_KPI_ghg_land_co2eq:function(){//<br>
         var sludge_type=Tables.find('wwt_slu_type',this.wwt_slu_type)//<br>
         if(sludge_type=="Landfill"){//<br>
           return this.wwt_slu_landfill_ch4()+this.wwt_slu_landfill_n2o()//<br>

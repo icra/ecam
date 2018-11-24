@@ -49,6 +49,18 @@ var Recommendations={
   /*WW*/
     /*wwc*/
     /*wwt*/
+      "wwt_slu_lf_TVS":function(){//<br>
+        let slu_disp=Tables.find('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);//<br>
+        return Tables.wwt_slu_disp[slu_disp].TVS;
+      },
+      "wwt_slu_la_N_cont":function(){//<br>
+        let slu_disp=Tables.find('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);//<br>
+        return Tables.wwt_slu_disp[slu_disp].la_N_cont;
+      },
+      "wwt_slu_lf_N_cont":function(){//<br>
+        let slu_disp=Tables.find('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);//<br>
+        return Tables.wwt_slu_disp[slu_disp].la_N_cont;
+      },
       "wwt_biog_pro":function(){return Global.Waste.Treatment.wwt_serv_pop*Global.General.bod_pday*Global.General.Days()*Cts.ct_bod_kg.value*Cts.ct_biog_g.value/1000;},
       "wwt_biog_fla":function(){//<br>
         if(Global.Configuration['Yes/No'].wwt_valorizing_biogas){//<br>

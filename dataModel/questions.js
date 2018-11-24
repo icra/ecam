@@ -439,7 +439,8 @@ var Questions={
 		"wwt_land_application":{
 			variables:[
 				"wwt_mass_slu_app",
-				"wwt_soil_typ",
+        "wwt_slu_la_N_cont",
+        "wwt_soil_typ",
 				"wwt_slu_landapp_n2o",
 				"wwt_KPI_ghg_app_co2eq",
         "wwt_slu_app_C_seq",
@@ -452,6 +453,8 @@ var Questions={
 		"wwt_landfilling":{
 			variables:[
 				"wwt_mass_slu_land",
+        "wwt_slu_lf_N_cont",
+        "wwt_slu_lf_TVS",
 				"wwt_slu_type",
 				"wwt_slu_landfill_ch4",
 				"wwt_slu_landfill_n2o",
