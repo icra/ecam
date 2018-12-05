@@ -56,29 +56,37 @@
 
 	<!--all languages-->
 	<div id=select> 
-		<!--en--><div lang=en><img style=width:20px src="img/flags/en.png"> en</div>
-    <!--es--><div lang=es><img style=width:20px src="img/flags/es.png"> es</div>
-		<!--th--><div lang=fr><img style=width:20px src="img/flags/fr.png"> fr</div>
-    <!--th--><div lang=th><img style=width:20px src="img/flags/th.png"> th</div>
-		<!--null (no lang only language tags)-->
-		<div lang=null>
-			<img src="img/flags/null.png"> null (only tags)	
-		</div>
+    <style>#lang #select div[lang] img {width:20px}</style>
+		<!--en--><div lang=en><img src="img/flags/en.png"> en</div>
+    <!--de--><div lang=de><img src="img/flags/de.png"> de</div>
+    <!--es--><div lang=es><img src="img/flags/es.png"> es</div>
+		<!--fr--><div lang=fr><img src="img/flags/fr.png"> fr</div>
+    <!--th--><div lang=th><img src="img/flags/th.png"> th</div>
+
+    <!--arabic under development-->
+    <!--ar--><div lang=ar><img src="img/flags/ar.png"> ar</div>
+
+    <!--null (only language tags)-->
+		<div lang=null> <img src="img/flags/null.png"> null (only tags)	</div>
     <!--go to problems summary-->
-    <div lang="<?php echo $lang?>">
-      <a href=translation_problems.php style=color:blue>language debugging tool</a>
-    </div>
+    <div lang="<?php echo $lang?>"><a href=translation_problems.php style=color:blue>language debugging tool</a></div>
 	</div> 
 </div>
 
 <script>
 	//Add an onclick listener to each language
 	(function() {
-		var langs=document.querySelectorAll('#lang #select div[lang]');
-		for(var i=0;i<langs.length;i++){
-			var lang=langs[i].getAttribute('lang');
-			langs[i].setAttribute('onclick',"Language.set('"+lang+"')")
-		}
+    document.querySelectorAll('#lang #select div[lang]').forEach(div=>{
+      let lang=div.getAttribute('lang');
+      //div lang click listener
+      div.addEventListener('click',function(){
+        if(lang=='ar'){
+          alert('الترجمة إلى اللغة العربية هي قيد التطوير. شكرا لك على صبرك. The translation to the arabic language it is in development. thank your for your patience.');
+          lang='en';
+        }
+        Language.set(lang)
+      });
+		});
 	})();
 	var Language={};//namespace
 	Language.set=function(lang){
