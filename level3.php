@@ -659,10 +659,9 @@
     element.innerHTML=""
     var input=document.createElement('input')
     element.appendChild(input);
-    input.autocomplete='off'
+    input.autocomplete='off';
     input.setAttribute('onblur',"level3.updateSubstage("+substage+",'"+field+"',this.value)") //now works
     input.onkeydown=function(event) {
-
       function updateChart() {
         var newValue=parseFloat(input.value);
         if(isNaN(newValue))newValue=0;
@@ -671,7 +670,6 @@
         //try to draw charts
         drawCharts();
       }
-
       switch(event.which) {
         case 38: //up key
           if(!event.shiftKey){input.value++;updateChart();}
@@ -691,7 +689,8 @@
           },100);
           break;
       }
-    }
+    };
+    input.addEventListener('keypress',function(e){if(e.key=='Enter')this.blur()});
     //value converted
     var multiplier = Units.multiplier(field);
     input.value=substages[substage][field]/multiplier;
@@ -760,7 +759,7 @@
   </div>
 </div>
 
-<!--disabled questions-->
+<!--css for disabled questions-->
 <style>
   #substages tr.disabled {
     color:#aaa;
@@ -770,8 +769,9 @@
     font-size:smaller;
   }
 </style>
+
 <script>
-  //copy all functions form level2 to each substage
+  //copy L2 equations to each substage
   Object.keys(CurrentLevel)
     .filter(key=>typeof(CurrentLevel[key])=="function")
     .forEach(key=>{
@@ -780,7 +780,7 @@
       });
     });
 
-  //fix for new variables loading old json files: in substages if undefined make it 0
+  //fix loading old json versions: in substages if undefined make it 0
   Object.keys(CurrentLevel)
     .filter(key=>typeof(CurrentLevel[key])=="number")
     .forEach(key=>{

@@ -30,17 +30,15 @@
       })();
 
       //Display current values in the DOM
-      (function(){
-        document.querySelectorAll('#inputs input[id]:not([type=radio])').forEach(input=>{
-          var field=input.id;
-          if(field=='')return;
-          //set the longer description in the input <td> element
-          input.parentNode.parentNode.childNodes[0].title=translate(field+'_expla');
-          //get the value stored
-          var value=getVariable(field)/Units.multiplier(field);
-          input.value=format(value);
-        });
-      })();
+      document.querySelectorAll('#inputs input[id]:not([type=radio])').forEach(input=>{
+        var field=input.id;
+        if(field=='')return;
+        //set the longer description in the input <td> element
+        input.parentNode.parentNode.childNodes[0].title=translate(field+'_expla');
+        //get the value stored
+        var value=getVariable(field)/Units.multiplier(field);
+        input.value=format(value);
+      });
 
       //set the GUI values for filters (biogas) and options (flooding)
       (function() {
@@ -787,6 +785,9 @@
     }else if(input.parentNode.classList.contains('output')){
       input.addEventListener('change',function(){BEV.updateOutput(this)});
     }
+    input.addEventListener('keypress',function(e){
+      if(e.key=='Enter')this.blur();
+    });
   });
   document.querySelectorAll("#inputs td.option select[id]").forEach(select=>{
     select.addEventListener('change',function(){BEV.updateField(this)});

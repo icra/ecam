@@ -125,36 +125,38 @@
   })();
 
   //add event listeners to inputs
-  (function(){
-    var els=document.querySelectorAll('#inputs input[id]');
-    for(var i=0; i<els.length; i++){
-      els[i].addEventListener('change',function(){
-        //get info from the input element
-        var field = this.id;
-        var value = parseFloat(this.value); //convert string to float
-        value*=Units.multiplier(field);
+  document.querySelectorAll('#inputs input[id]').forEach(el=>{
+    el.addEventListener('change',function(){
+      //get info from the input element
+      var field = this.id;
+      var value = parseFloat(this.value); //convert string to float
+      value*=Units.multiplier(field);
 
-        //if value is not a number, set to zero
-        if(isNaN(value))value=0;
+      //if value is not a number, set to zero
+      if(isNaN(value))value=0;
 
-        //locate variable
-        var loc = locateVariable(field);
-        if(loc.sublevel){
-          Global[loc.level][loc.sublevel][field]=value;
-        }else if(loc.level){
-          Global[loc.level][field]=value;
-        }else{
-          alert('field '+field+' undefined');return;
-        }
+      //locate variable
+      var loc = locateVariable(field);
+      if(loc.sublevel){
+        Global[loc.level][loc.sublevel][field]=value;
+      }else if(loc.level){
+        Global[loc.level][field]=value;
+      }else{
+        alert('field '+field+' undefined');return;
+      }
 
-        //end
-        init();
-      });
-      els[i].addEventListener('focus', function(){ this.value=getVariable(this.id); this.select() });
-      els[i].addEventListener('blur',  function(){ this.value=format(getVariable(this.id)) });
-      els[i].addEventListener('click', function(){ this.select() });
-    }
-  })();
+      //end
+      init();
+    });
+    el.addEventListener('focus', function(){ this.value=getVariable(this.id); this.select() });
+    el.addEventListener('blur',  function(){ this.value=format(getVariable(this.id)) });
+    el.addEventListener('click', function(){ this.select() });
+    el.addEventListener('keypress', function(e){ 
+      if(e.key=='Enter'){
+        this.blur();
+      }
+    });
+  });
 
   //first input fake click depending on active stages
   (function(){

@@ -61,7 +61,7 @@
         case "wwg": stage=translate("Waste");break;
       }
 
-      document.write("<div class='card '>"+
+      document.write("<div class='card folded'>"+
         "<div class=menu onclick=this.parentNode.classList.toggle('folded')><button></button> "+
         stage+"</span></div>"+
         "");

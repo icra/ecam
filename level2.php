@@ -14,9 +14,7 @@
   /** Redisplay table id=inputs */
   level2.updateInputs=function() {
     //console.time('updateInputs');
-
     var t=document.getElementById('inputs');
-
     while(t.rows.length>2){t.deleteRow(-1)}
 
     //variables without questions associated
@@ -44,14 +42,14 @@
       }
     });
 
-    //here check if table is empty (==t.rows.length is 2)
+    //check if table is empty (==t.rows.length is 2)
     if(t.rows.length<3) {
       var newCell=t.insertRow(-1).insertCell(-1);
       newCell.colSpan=4;
       newCell.innerHTML="<span style=color:#999>~All inputs inactive</span>";
     }
 
-    //bottom line decoration with the color of W/WW
+    //add bottom decoration with the color of W/WW
     (function(){
       var newRow=t.insertRow(-1);
       var newTh=document.createElement('th');
@@ -59,7 +57,6 @@
       newTh.style.borderBottom='none';
       newRow.appendChild(newTh);
     })();
-
     //console.timeEnd('updateInputs');
   }
 
@@ -135,6 +132,7 @@
           break;
       }
     }
+    input.addEventListener('keypress',function(e){if(e.key=='Enter')this.blur()});
     input.select();
   }
 
@@ -288,8 +286,7 @@
       newCell.classList.add("input");
       newCell.setAttribute('caption',"<?php write('#edit_click_to_modify')?>");
       newCell.setAttribute('onclick','level2.transformField(this)');
-    }
-    else {
+    }else{
       //field is calculated variable, so show formula
       newCell.setAttribute('caption',Formulas.prettify(CurrentLevel[field].toString()));
       newCell.style.textAlign="right";

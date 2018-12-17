@@ -460,6 +460,7 @@
   <h1>Opportunities to reduce GHG emissions</h1>
   <!-- including link to catalogue of solutions -->
   <a href="http://www.iwa-network.org/water-climate-energy-solutions/public/"
+    target=_blank
     style="font-weight: bold; color: grey;">[Catalogue of Solutions]
   </a>
 </div>

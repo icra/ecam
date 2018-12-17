@@ -703,7 +703,7 @@
       <div style="width:50%">
         <div id=outputs_container>
           <!--level2 GHG outputs-->
-          <table id=outputs style="width:100%;background:#f6f6f6;">
+          <table id=outputs style="width:100%;">
             <tr><th colspan=7 class=tableHeader>
               <?php write('#OUTPUTS')?> &mdash;
               <?php write('#GHG emissions')?>
@@ -729,7 +729,7 @@
           </table>
 
           <!--level2 outputs: NRG and SL-->
-          <table id=nrgOutputs style="width:100%;background:#f6f6f6;">
+          <table id=nrgOutputs style="width:100%;">
             <tr><th colspan=4 class=tableHeader>
               <?php write('#OUTPUTS')?> &mdash;
               <?php write('#Energy performance and Service Level indicators')?>

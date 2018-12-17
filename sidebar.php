@@ -197,7 +197,6 @@
       <tr><td><a href=summary.php?type=ccvv><?php write('#all_ccvv')?></a>
       <tr><td><a href=questions.php><?php write('#All questions')?></a>
       <tr><td><a href=constants.php><?php write('#all_constants')?></a>
-      <tr><td><a href=edit.php?level=Estimations><?php write('#all_estimations_tier_A')?></a>
       <tr><td><a href=benchmark.php><?php write('#all_benchmarks')?></a>
       <tr><th><?php write('#other')?>
       <tr><td><a href=opps.php><?php write("#opportunities")?></a>
