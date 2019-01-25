@@ -81,6 +81,7 @@
 <?php include'footer.php'?>
 <div style="background:white;text-align:left;padding:0em 10em;margin-top:50px;">
   <img src=img/logos.png>
+  <br><img src=img/logo-kwb.png>
 </div>
 
 <!--current json--><?php include'currentJSON.php'?>
