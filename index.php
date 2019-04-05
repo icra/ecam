@@ -48,10 +48,6 @@
       <!--MENU BUTTONS-->
       <div style="padding:1em 0"><?php include'menu.php'?></div>
 
-      <!--chrome warning-->
-      <div class="chrome_big">
-        <b><?php write('#index_chrome_warning')?></b>
-      </div>
       <br> <br>
       <div>
         <a class="blue_links" href="http://wacclim.org/" target=_blank>WaCCliM</a> - <a class="blue_links" href=about.php><?php write("#about")?></a> - <a class="blue_links" href=help.php><?php write("#help")?></a> - <a class="blue_links" href=mailto:info@wacclim.org target=_blank><?php write("#contact")?>: info@wacclim.org</a>
