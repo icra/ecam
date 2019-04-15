@@ -41,17 +41,18 @@
   <h3 style=padding-left:0>Special acknowledgements</h3>
 
   <p>
-    ECAM tool is the result of a collaborative effort. WaCCliM project team thanks
+    ECAM tool is the result of a collaborative effort. WaCCliM project team thanks:
     <ul>
       <li>Members of the WaCCliM Taskforce and WaCCliM Expert pool for their voluntary
       contribution, providing scientific input and peer-review of ECAM.</li>
       <li>REaCH project (CTM2015-66892-R (MINECO/FEDER, UE), funded by the Spanish
       Ministry of Economy and Competitiveness and FEDER, for their support to ICRA.</li>
+      <li>Technical support by Komptenzzentrum Wasser Berlin gGmbH.
     </ul>
   </p>
 
   <p>
-    Charts used: <a target=_blank href="https://google-developers.appspot.com/chart/">Google Charts</a>
+    Chart library: <a target=_blank href="https://google-developers.appspot.com/chart/">Google Charts</a>
   </p>
 
   <!--<img class="license_img" src="img/cc_icon_white_x2.png" alt="">
@@ -73,5 +74,7 @@
 <!--logos--> 
 <div style=background:white;text-align:center;margin-top:50px;> 
   <img src=img/logos.png>
+  <br><img src=img/logo-kwb.png>
 </div>
+
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
