@@ -9,25 +9,25 @@
 <!--paragraph-->
 <div style=max-width:40%;text-align:justify;line-height:2em>
   <p>
-    The web interface and new features for the ECAM tool were developed by 
-    <a target=_blank href='http://www.icra.cat/'>ICRA</a>, 
-    <a target=_blank href='http://www.iwa-network.org'>IWA</a>, and 
-    <a target=_blank href='https://www.giz.de/en/html/index.html'>GIZ</a> under the 
+    The web interface and new features for the ECAM tool were developed by
+    <a target=_blank href='http://www.icra.cat/'>ICRA</a>,
+    <a target=_blank href='http://www.iwa-network.org'>IWA</a>, and
+    <a target=_blank href='https://www.giz.de/en/html/index.html'>GIZ</a> under the
     <a target=_blank href='http://www.iwa-network.org/WaCCliM/es/'>WaCCliM project</a>.
   </p>
 
   <p>
-    This tool was first developed within the project in 2015 as an Excel tool by the consortium Urban Water Commons 
-    (<a target=_blank href='http://www.lnec.pt/pt/'>LNEC</a> and 
-    <a target=_blank href='http://www.ita.upv.es/index-es.php'>ITA, Universitat Politècnica de València)</a> in collaboration with 
-    <a target=_blank href='http://www.cobaltwater-global.com/'>Cobalt Water Global</a>. 
-    The Excel tool laid the foundation and basic equations for the web-tool. 
+    This tool was first developed within the project in 2015 as an Excel tool by the consortium Urban Water Commons
+    (<a target=_blank href='http://www.lnec.pt/pt/'>LNEC</a> and
+    <a target=_blank href='http://www.ita.upv.es/index-es.php'>ITA, Universitat Politècnica de València)</a> in collaboration with
+    <a target=_blank href='http://www.cobaltwater-global.com/'>Cobalt Water Global</a>.
+    The Excel tool laid the foundation and basic equations for the web-tool.
   </p>
 
   <p>
-    WaCCliM project is part of the <a target=_blank href="https://www.international-climate-initiative.com/">International Climate Initiative (IKI)</a>. 
-    The German Federal Ministry for the Environment, Nature Conservation, 
-    Building and Nuclear Safety (BMUB) supports this initiative on the basis of a decision adopted by the German Bundestag.
+    WaCCliM project is part of the <a target=_blank href="https://www.international-climate-initiative.com/">International Climate Initiative (IKI)</a>.
+    The German Federal Ministry for the Environment, Nature Conservation,
+    Building and Nuclear Safety (BMU) supports this initiative on the basis of a decision adopted by the German Bundestag.
   </p>
 
   <p>
@@ -71,8 +71,8 @@
   <!--FOOTER--><?php include'footer.php'?>
 </div>
 
-<!--logos--> 
-<div style=background:white;text-align:center;margin-top:50px;> 
+<!--logos-->
+<div style=background:white;text-align:center;margin-top:50px;>
   <img src=img/logos.png>
   <br><img src=img/logo-kwb.png>
 </div>
