@@ -23,24 +23,15 @@
 <h4><b>Screencasts</b></h4>
 <a href="https://vimeopro.com/iwahq/tutorials-ecam-tool">https://vimeopro.com/iwahq/tutorials-ecam-tool</a>
 <div id=screencasts>
-  <style>
-    #screencasts {
-      margin:auto;
-      width:80%;
-      display:grid;
-      grid-template-columns:50% 50%;
-      grid-gap:0;
-    }
-  </style>
-  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724306" width="640" height="480" frameborder="0" allowfullscreen></iframe></div>
-  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724450" width="640" height="480" frameborder="0" allowfullscreen></iframe></div>
-  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724339" width="640" height="480" frameborder="0" allowfullscreen></iframe></div>
-  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724359" width="640" height="480" frameborder="0" allowfullscreen></iframe></div>
-  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724378" width="640" height="480" frameborder="0" allowfullscreen></iframe></div>
-  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724423" width="640" height="480" frameborder="0" allowfullscreen></iframe></div>
-  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724397" width="640" height="480" frameborder="0" allowfullscreen></iframe></div>
-  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724318" width="640" height="480" frameborder="0" allowfullscreen></iframe></div>
-  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724275" width="640" height="480" frameborder="0" allowfullscreen></iframe></div>
+  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724306" width="600" height="400" frameborder="0" allowfullscreen></iframe></div>
+  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724450" width="600" height="400" frameborder="0" allowfullscreen></iframe></div>
+  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724339" width="600" height="400" frameborder="0" allowfullscreen></iframe></div>
+  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724359" width="600" height="400" frameborder="0" allowfullscreen></iframe></div>
+  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724378" width="600" height="400" frameborder="0" allowfullscreen></iframe></div>
+  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724423" width="600" height="400" frameborder="0" allowfullscreen></iframe></div>
+  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724397" width="600" height="400" frameborder="0" allowfullscreen></iframe></div>
+  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724318" width="600" height="400" frameborder="0" allowfullscreen></iframe></div>
+  <div><iframe title="vimeo-player" src="https://player.vimeo.com/video/330724275" width="600" height="400" frameborder="0" allowfullscreen></iframe></div>
 </div>
 
 </div>
