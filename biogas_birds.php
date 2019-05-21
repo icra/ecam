@@ -1,5 +1,4 @@
 <tbody class=biogas_birds>
-
   <!--wwt producing biogas-->
   <tr stage=waste class=hidden>
     <td><?php write('#wwt_producing_biogas')?>?

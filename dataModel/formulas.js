@@ -53,7 +53,7 @@ var Formulas={
   },
 
   prettify:function(formula) {
-    var result = formula.replace(/function/,"");
+    let result = formula.replace(/function/,"");
     result = result.replace(/this./g,"");
     result = result.replace(/var /g,"");
     result = result.replace(/let /g,"");
@@ -102,7 +102,7 @@ var Formulas={
    * @param {string} field - the variable codes we want to highlight e.g. 'c_ww50'
    * @param {object} object - pointer to the DOM object
    * @param {boolean} hl - turn on/off highlighting
-   */
+  */
   hlInputs:function(field,object,hl) {
     if(hl && !Global.Configuration.hl)return;
 

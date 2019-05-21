@@ -29,7 +29,6 @@
       Global.Waste.Treatment.wwt_bod_infl=Global.Recommendations.wwt_bod_infl();
       Global.Waste.Treatment.wwt_bod_effl=Global.Recommendations.wwt_bod_effl();
       Global.Waste.Treatment.wwt_bod_slud=Global.Estimations.estm_wwt_bod_slud();
-
       Global.Waste.Discharge.wwd_bod_effl=Global.Recommendations.wwd_bod_effl();
 
       //log
