@@ -612,7 +612,7 @@
                       stage[key]=0;
                   });
                 });
-                
+
               //wwt biogas set to "No" (includes wwt_valorizing_biogas)
               document.querySelector('input[name=wwt_producing_biogas][type=radio][value="0"]').dispatchEvent(new CustomEvent('click'));
               //sludge disposal method set to 'None'
@@ -840,7 +840,7 @@
 <!--hide inactive inputs-->
 <script>
   (function(){
-    //Expanded is 1 by default, change this 
+    //Expanded is 1 by default, change this
     Structure.filter(s=>!s.sublevel).forEach(s=>{
       if(!Expanded[s.alias]){
         document.querySelectorAll('#inputs tr[stage='+s.alias+']').forEach(tr=>{

@@ -1,5 +1,5 @@
 /* inputs with equations */
-var Recommendations={
+let Recommendations={
   /*FSM*/
     /*fsc*/
       //influent BOD

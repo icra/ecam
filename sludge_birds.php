@@ -7,13 +7,15 @@
   <option value=land> <?php write('#land') ?>
   <option value=stock><?php write('#stock')?>
 </select>
+
 <script>
-  //onchange listener onchange for sludge disposal method
+  //onchange listener: sludge disposal method
+  //apply estimations for sludge disposal method selected
   (function(){
-    var sludge_estimation=document.getElementById('sludge_estimation');
+    let sludge_estimation=document.getElementById('sludge_estimation');
     sludge_estimation.addEventListener('change',function(){
       //method picked
-      var method=this.value;
+      let method=this.value;
       //save selection in Configuration
       Global.Configuration.Selected.sludge_estimation_method=method;
       //reset all filters and mass of sludge for all methods
@@ -30,10 +32,10 @@
       Global.Configuration['Yes/No'].wwt_landfilling     = 0;
       Global.Configuration['Yes/No'].wwt_stockpiling     = 0;
       Global.Waste.Treatment.wwt_temp_inc                = 0; //K Fluidized Bed Reactor Temperature
-      //if method==none end
-      if(method=="0"){init();return;}
-      //activate filters for sludge management
-      Global.Configuration['Yes/No'].wwt_sludge_mgmt=1;
+
+      //configuration sludge management
+      Global.Configuration['Yes/No'].wwt_sludge_mgmt = (method=='0') ? 0 : 1;
+
       switch(method){
         case "comp":   Global.Configuration['Yes/No'].wwt_composting      =1;break;
         case "inc":    Global.Configuration['Yes/No'].wwt_incineration    =1;break;
@@ -42,15 +44,22 @@
         case "stock":  Global.Configuration['Yes/No'].wwt_stockpiling     =1;break;
         default: alert('Error in sludge method');return;break;
       }
+
+      //estimation for wwt_mass_slu and dry weight
+      Global.Waste.Treatment.wwt_mass_slu = Recommendations.wwt_mass_slu();
+      Global.Waste.Treatment.wwt_dryw_slu = Recommendations.wwt_dryw_slu();
+
+      //set sludge for the disposal method selected equal to dry weight
+      Global.Waste.Treatment['wwt_mass_slu_'+method] = Global.Waste.Treatment.wwt_dryw_slu;
+
       //estimation for inicineration
-      Global.Waste.Treatment.wwt_temp_inc=Global.Estimations.estm_wwt_temp_inc();
-      //estimation for wwt_mass_slu
-      Global.Waste.Treatment.wwt_mass_slu=Global.Estimations.estm_wwt_mass_slu();
-      console.log('Estimated mass of sludge (wwt_mass_slu): '+Global.Waste.Treatment.wwt_mass_slu+' kg');
-      //estimation of kg of dry weight (wwt_dryw_slu)
-      Global.Waste.Treatment.wwt_dryw_slu=Global.Estimations.estm_wwt_dryw_slu();
-      console.log('Estimated mass of dry weight sludge (wwt_dryw_slu): '+Global.Waste.Treatment.wwt_dryw_slu+' kg');
-      Global.Waste.Treatment['wwt_mass_slu_'+method]=Global.Waste.Treatment.wwt_dryw_slu;
+      Global.Waste.Treatment.wwt_temp_inc      = method=='inc'  ? Recommendations.wwt_temp_inc() : 0;
+      //estimations for landfilling
+      Global.Waste.Treatment.wwt_slu_lf_N_cont = method=='land' ? Recommendations.wwt_slu_lf_N_cont() : 0;
+      Global.Waste.Treatment.wwt_slu_lf_TVS    = method=='land' ? Recommendations.wwt_slu_lf_TVS()    : 0;
+      //estimations for land application
+      Global.Waste.Treatment.wwt_slu_la_N_cont = method=='app'  ? Recommendations.wwt_slu_la_N_cont() : 0;
+
       //end
       init();
     });
