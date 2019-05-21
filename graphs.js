@@ -657,6 +657,8 @@ Graphs.ghg_by_substage=function(withTable,container,prefix) {
   var TotalGHG=0;
 
   //"substages" variable is defined in 'edit.php'
+  let stage = Structure.find(s=>s.prefix==prefix)
+  let substages = Substages[stage.level][stage.sublevel];
   substages.forEach(substage=>{
     var emission=substage[code]();
     TotalGHG+=emission;

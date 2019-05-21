@@ -269,6 +269,13 @@
         document.querySelector('#ghg_summary_tabs button.left').removeAttribute('disabled');
         Graphs.graph4(false,'graph_1');
         Graphs.graph1(false,'graph_2');
+
+        Graphs.ghg_by_substage(false,'graph_wsa','wsa');
+        Graphs.ghg_by_substage(false,'graph_wst','wst');
+        Graphs.ghg_by_substage(false,'graph_wsd','wsd');
+        Graphs.ghg_by_substage(false,'graph_wwc','wwc');
+        Graphs.ghg_by_substage(false,'graph_wwt','wwt');
+        Graphs.ghg_by_substage(false,'graph_wwd','wwd');
       }
       function tabs_show_tables(){
         document.getElementById('tables').style.display='';
@@ -543,6 +550,16 @@
   <div id=graphs_container class=flex style=display:none;margin:auto>
     <div id=graph_1 style="border-right:1px solid #ccc;box-sizing:border-box"><?php write('#Loading')?>...</div>
     <div id=graph_2><?php write('#Loading')?>...</div>
+
+    <div style="width:100%;margin-top:10px">
+      <div style=text-align:center><h4><b>Substages</b></h4></div>
+      <div id=graph_wsa></div>
+      <div id=graph_wst></div>
+      <div id=graph_wsd></div>
+      <div id=graph_wwc></div>
+      <div id=graph_wwt></div>
+      <div id=graph_wwd></div>
+    </div>
   </div>
   <style>
     #graphs_container table {
