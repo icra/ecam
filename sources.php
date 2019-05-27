@@ -270,12 +270,16 @@
         Graphs.graph4(false,'graph_1');
         Graphs.graph1(false,'graph_2');
 
+        //do this part using a foreach loop TODO
         Graphs.ghg_by_substage(false,'graph_wsa','wsa');
         Graphs.ghg_by_substage(false,'graph_wst','wst');
         Graphs.ghg_by_substage(false,'graph_wsd','wsd');
         Graphs.ghg_by_substage(false,'graph_wwc','wwc');
         Graphs.ghg_by_substage(false,'graph_wwt','wwt');
         Graphs.ghg_by_substage(false,'graph_wwd','wwd');
+        Graphs.ghg_by_substage(false,'graph_fsc','fsc');
+        Graphs.ghg_by_substage(false,'graph_fst','fst');
+        Graphs.ghg_by_substage(false,'graph_fsr','fsr');
       }
       function tabs_show_tables(){
         document.getElementById('tables').style.display='';
@@ -551,14 +555,22 @@
     <div id=graph_1 style="border-right:1px solid #ccc;box-sizing:border-box"><?php write('#Loading')?>...</div>
     <div id=graph_2><?php write('#Loading')?>...</div>
 
-    <div style="width:100%;margin-top:10px">
+    <div style="width:100%;padding-top:10px;border-top:1px solid #ccc">
       <div style=text-align:center><h4><b>Substages</b></h4></div>
+      <h4 style=text-align:center><?php write("#Water")?></h4>
       <div id=graph_wsa></div>
       <div id=graph_wst></div>
       <div id=graph_wsd></div>
+      <div style="border-top:1px solid #ccc"></div>
+      <h4 style=text-align:center><?php write("#Waste")?></h4>
       <div id=graph_wwc></div>
       <div id=graph_wwt></div>
       <div id=graph_wwd></div>
+      <div style="border-top:1px solid #ccc"></div>
+      <h4 style=text-align:center><?php write("#Faecl")?></h4>
+      <div id=graph_fsc></div>
+      <div id=graph_fst></div>
+      <div id=graph_fsr></div>
     </div>
   </div>
   <style>
