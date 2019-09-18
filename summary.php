@@ -3,7 +3,7 @@
   if(!isset($_GET['type'])){
     die('Error. type not specified<br>Try: <a href=summary.php?type=input>Inputs</a> or <a href=summary.php?type=output>Outputs</a> or <a href=summary.php?type=ccvv>calculated variables</a>');
   }
-  
+
   //variable type chosen: input / output / ccvv
   $type=$_GET['type'];
 
@@ -59,7 +59,7 @@
 
     //** Create rows and columns for a table with specified object
     function tableRows(object,name,family,href){
-      //make link or not depending on active 
+      //make link or not depending on active
       if(Global.Configuration.ActiveStages[family]==0){return "";}
 
       //color
@@ -83,7 +83,7 @@
         ?>
         if(typeof(object[variable])!="<?php echo $typeof?>"){continue;}
 
-        <?php 
+        <?php
           //Skip calculated variables depending on $ccvv
           if($type=="output") {
             if($ccvv) echo "if(variable.search('^c_')==-1){continue;}";
@@ -115,7 +115,7 @@
   <style> #main *:not(h4) {text-align:left}</style>
 
   <!--description--><h4>
-    <?php 
+    <?php
       write('#All active');
       echo " ".ucfirst($type."s");
     ?>

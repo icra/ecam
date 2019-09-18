@@ -568,6 +568,48 @@ var Questions={
       otherQuestions:[],
     },
 
+    "fsc_pumping":{
+      variables:[
+        "fsc_nrg_pump",
+        "fsc_vol_pump",
+        "fsc_pmp_head",
+        "fsc_sta_head",
+        "fsc_coll_len",
+        "fsc_KPI_std_nrg_cons",
+        "fsc_KPI_un_head_loss",
+      ],
+      advanced:1,
+      otherQuestions:[
+        "fsc_pumping_eff",
+        "fsc_opportunities",
+      ],
+    },
+
+    "fsc_pumping_eff": {
+      variables:[
+        "fsc_pmp_flow",
+        "fsc_pmp_volt",
+        "fsc_pmp_amps",
+        "fsc_pmp_pf",
+        "c_fsc_pmp_pw",
+        "fsc_KPI_nrg_elec_eff",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
+
+    "fsc_opportunities":{
+      variables:[
+        "fsc_pmp_exff",
+        "fsc_KPI_std_nrg_newp",
+        "fsc_KPI_nrg_cons_new",
+        "fsc_KPI_nrg_estm_sav",
+        "fsc_KPI_ghg_estm_red",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
+
   //fst
     "fst_engines":{
       variables:[
@@ -607,6 +649,49 @@ var Questions={
       otherQuestions:[
       ],
     },
+
+    "fst_pumping":{
+      variables:[
+        "fst_nrg_pump",
+        "fst_vol_pump",
+        "fst_pmp_head",
+        "fst_sta_head",
+        "fst_coll_len",
+        "fst_KPI_std_nrg_cons",
+        "fst_KPI_un_head_loss",
+      ],
+      advanced:1,
+      otherQuestions:[
+        "fst_pumping_eff",
+        "fst_opportunities",
+      ],
+    },
+
+    "fst_pumping_eff": {
+      variables:[
+        "fst_pmp_flow",
+        "fst_pmp_volt",
+        "fst_pmp_amps",
+        "fst_pmp_pf",
+        "c_fst_pmp_pw",
+        "fst_KPI_nrg_elec_eff",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
+
+    "fst_opportunities":{
+      variables:[
+        "fst_pmp_exff",
+        "fst_KPI_std_nrg_newp",
+        "fst_KPI_nrg_cons_new",
+        "fst_KPI_nrg_estm_sav",
+        "fst_KPI_ghg_estm_red",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
+
 
   //fsr
     "fsr_engines":{
@@ -709,6 +794,47 @@ var Questions={
       advanced:0,
       otherQuestions:[
       ],
+    },
+    "fsr_pumping":{
+      variables:[
+        "fsr_nrg_pump",
+        "fsr_vol_pump",
+        "fsr_pmp_head",
+        "fsr_sta_head",
+        "fsr_coll_len",
+        "fsr_KPI_std_nrg_cons",
+        "fsr_KPI_un_head_loss",
+      ],
+      advanced:1,
+      otherQuestions:[
+        "fsr_pumping_eff",
+        "fsr_opportunities",
+      ],
+    },
+
+    "fsr_pumping_eff": {
+      variables:[
+        "fsr_pmp_flow",
+        "fsr_pmp_volt",
+        "fsr_pmp_amps",
+        "fsr_pmp_pf",
+        "c_fsr_pmp_pw",
+        "fsr_KPI_nrg_elec_eff",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
+
+    "fsr_opportunities":{
+      variables:[
+        "fsr_pmp_exff",
+        "fsr_KPI_std_nrg_newp",
+        "fsr_KPI_nrg_cons_new",
+        "fsr_KPI_nrg_estm_sav",
+        "fsr_KPI_ghg_estm_red",
+      ],
+      advanced:1,
+      otherQuestions:[],
     },
 };
 

@@ -810,11 +810,7 @@
         if(n && sum>0){
           td.classList.add('locked');
           input.disabled=true;
-          td.parentNode.setAttribute('caption',
-            'Since you have entered more detailed data in Tier B stages, you cannot modify this input.'+
-            '<br>Now it displays the sum of its related '+translate(level)+' stage\'s inputs.'+
-            '<br>If you still want to modify it, please set its related inputs to 0 in Tier B'
-          );
+          td.parentNode.setAttribute('caption', '<?php write('#tier_A_lock_symbol')?>');
         }
       });
     });

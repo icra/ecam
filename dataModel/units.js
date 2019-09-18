@@ -1,4 +1,4 @@
-var Units={
+let Units={
   /*Modify or add a unit change in Global.Configuration.Units*/
   selectUnit:function(field,newUnit){
     Global.Configuration.Units[field]=newUnit;

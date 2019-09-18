@@ -369,7 +369,6 @@ var Global={
         wwc_KPI_nrg_elec_eff:function(){return 100*this.c_wwc_pmp_pw()/(this.wwc_pmp_volt*this.wwc_pmp_amps*Math.sqrt(3)*this.wwc_pmp_pf/1000)},
 
         wwc_KPI_std_nrg_newp:function(){return this.wwc_KPI_nrg_elec_eff()/this.wwc_pmp_exff*this.wwc_KPI_std_nrg_cons()},
-
         wwc_KPI_nrg_cons_new:function(){return this.wwc_vol_pump*this.wwc_KPI_std_nrg_newp()/100*this.wwc_pmp_head},
         wwc_KPI_nrg_estm_sav:function(){return this.wwc_nrg_cons-this.wwc_KPI_nrg_cons_new()},
         wwc_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.wwc_KPI_nrg_estm_sav()},
@@ -809,6 +808,26 @@ var Global={
         },
         fsc_KPI_GHG_trck:function(){return this.fsc_KPI_GHG_trck_co2()+this.fsc_KPI_GHG_trck_n2o()+this.fsc_KPI_GHG_trck_ch4()},
 
+      //pumping, pumping eff and pumping opps
+        "fsc_nrg_pump":0,
+        "fsc_vol_pump":0,
+        "fsc_pmp_head":0,
+        "fsc_sta_head":0,
+        "fsc_coll_len":0,
+        "fsc_pmp_flow":0,
+        "fsc_pmp_volt":0,
+        "fsc_pmp_amps":0,
+        "fsc_pmp_pf":0.9,
+        "fsc_pmp_exff":0,
+        fsc_KPI_std_nrg_cons:function(){return this.fsc_nrg_pump/(this.fsc_vol_pump*this.fsc_pmp_head/100)},
+        fsc_KPI_un_head_loss:function(){return 1000*(this.fsc_pmp_head-this.fsc_sta_head)/this.fsc_coll_len},
+        c_fsc_pmp_pw:function(){return this.fsc_pmp_flow*this.fsc_pmp_head*Cts.ct_gravit.value/1000;},
+        fsc_KPI_nrg_elec_eff:function(){return 100*this.c_fsc_pmp_pw()/(this.fsc_pmp_volt*this.fsc_pmp_amps*Math.sqrt(3)*this.fsc_pmp_pf/1000)},
+        fsc_KPI_std_nrg_newp:function(){return this.fsc_KPI_nrg_elec_eff()/this.fsc_pmp_exff*this.fsc_KPI_std_nrg_cons()},
+        fsc_KPI_nrg_cons_new:function(){return this.fsc_vol_pump*this.fsc_KPI_std_nrg_newp()/100*this.fsc_pmp_head},
+        fsc_KPI_nrg_estm_sav:function(){return this.fsc_nrg_cons-this.fsc_KPI_nrg_cons_new()},
+        fsc_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.fsc_KPI_nrg_estm_sav()},
+
       //total ghg
       fsc_KPI_GHG:function(){return this.fsc_KPI_GHG_elec()+this.fsc_KPI_GHG_cont()+this.fsc_KPI_GHG_trck()},
     },
@@ -884,6 +903,26 @@ var Global={
         fst_KPI_GHG_tre:function(){
           return this.fst_KPI_GHG_tre_ch4()+this.fst_KPI_GHG_tre_n2o();
         },
+
+      //pumping, pumping eff and pumping opps
+        "fst_nrg_pump":0,
+        "fst_vol_pump":0,
+        "fst_pmp_head":0,
+        "fst_sta_head":0,
+        "fst_coll_len":0,
+        "fst_pmp_flow":0,
+        "fst_pmp_volt":0,
+        "fst_pmp_amps":0,
+        "fst_pmp_pf":0.9,
+        "fst_pmp_exff":0,
+        fst_KPI_std_nrg_cons:function(){return this.fst_nrg_pump/(this.fst_vol_pump*this.fst_pmp_head/100)},
+        fst_KPI_un_head_loss:function(){return 1000*(this.fst_pmp_head-this.fst_sta_head)/this.fst_coll_len},
+        c_fst_pmp_pw:function(){return this.fst_pmp_flow*this.fst_pmp_head*Cts.ct_gravit.value/1000;},
+        fst_KPI_nrg_elec_eff:function(){return 100*this.c_fst_pmp_pw()/(this.fst_pmp_volt*this.fst_pmp_amps*Math.sqrt(3)*this.fst_pmp_pf/1000)},
+        fst_KPI_std_nrg_newp:function(){return this.fst_KPI_nrg_elec_eff()/this.fst_pmp_exff*this.fst_KPI_std_nrg_cons()},
+        fst_KPI_nrg_cons_new:function(){return this.fst_vol_pump*this.fst_KPI_std_nrg_newp()/100*this.fst_pmp_head},
+        fst_KPI_nrg_estm_sav:function(){return this.fst_nrg_cons-this.fst_KPI_nrg_cons_new()},
+        fst_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.fst_KPI_nrg_estm_sav()},
 
       //total ghg emissions
       fst_KPI_GHG:function(){
@@ -1030,6 +1069,26 @@ var Global={
         fsr_ghg_avoided_reuse_N:function(){return this.fsr_reused_N*Cts.ct_cr_forN.value},
         fsr_ghg_avoided_reuse_P:function(){return this.fsr_reused_P*Cts.ct_cr_forP.value},
         fsr_ghg_avoided_reuse:function(){return this.fsr_ghg_avoided_reuse_N()+this.fsr_ghg_avoided_reuse_P();},
+
+      //pumping, pumping eff and pumping opps
+        "fsr_nrg_pump":0,
+        "fsr_vol_pump":0,
+        "fsr_pmp_head":0,
+        "fsr_sta_head":0,
+        "fsr_coll_len":0,
+        "fsr_pmp_flow":0,
+        "fsr_pmp_volt":0,
+        "fsr_pmp_amps":0,
+        "fsr_pmp_pf":0.9,
+        "fsr_pmp_exff":0,
+        fsr_KPI_std_nrg_cons:function(){return this.fsr_nrg_pump/(this.fsr_vol_pump*this.fsr_pmp_head/100)},
+        fsr_KPI_un_head_loss:function(){return 1000*(this.fsr_pmp_head-this.fsr_sta_head)/this.fsr_coll_len},
+        c_fsr_pmp_pw:function(){return this.fsr_pmp_flow*this.fsr_pmp_head*Cts.ct_gravit.value/1000;},
+        fsr_KPI_nrg_elec_eff:function(){return 100*this.c_fsr_pmp_pw()/(this.fsr_pmp_volt*this.fsr_pmp_amps*Math.sqrt(3)*this.fsr_pmp_pf/1000)},
+        fsr_KPI_std_nrg_newp:function(){return this.fsr_KPI_nrg_elec_eff()/this.fsr_pmp_exff*this.fsr_KPI_std_nrg_cons()},
+        fsr_KPI_nrg_cons_new:function(){return this.fsr_vol_pump*this.fsr_KPI_std_nrg_newp()/100*this.fsr_pmp_head},
+        fsr_KPI_nrg_estm_sav:function(){return this.fsr_nrg_cons-this.fsr_KPI_nrg_cons_new()},
+        fsr_KPI_ghg_estm_red:function(){return Global.General.conv_kwh_co2*this.fsr_KPI_nrg_estm_sav()},
 
       //total ghg
         fsr_KPI_GHG:function(){//<br>
