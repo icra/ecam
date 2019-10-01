@@ -93,16 +93,47 @@ var Questions={
 			otherQuestions:[],
 		},
 
-		"wst_pumping_eff":{
-			variables:[
-				"wst_nrg_pump",
+    "wst_pumping":{
+      variables:[
+        "wst_nrg_pump",
         "wst_vol_pump",
-				"wst_pmp_head",
-				"wst_KPI_std_nrg_cons",
-			],
-			advanced:1,
-			otherQuestions:[],
-		},
+        "wst_pmp_head",
+        "wst_sta_head",
+        "wst_coll_len",
+        "wst_KPI_std_nrg_cons",
+        "wst_KPI_un_head_loss",
+      ],
+      advanced:1,
+      otherQuestions:[
+        "wst_pumping_eff",
+        "wst_opportunities",
+      ],
+    },
+
+    "wst_pumping_eff": {
+      variables:[
+        "wst_pmp_flow",
+        "wst_pmp_volt",
+        "wst_pmp_amps",
+        "wst_pmp_pf",
+        "c_wst_pmp_pw",
+        "wst_KPI_nrg_elec_eff",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
+
+    "wst_opportunities":{
+      variables:[
+        "wst_pmp_exff",
+        "wst_KPI_std_nrg_newp",
+        "wst_KPI_nrg_cons_new",
+        "wst_KPI_nrg_estm_sav",
+        "wst_KPI_ghg_estm_red",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
 
     "wst_treatment_perf":{
       variables:[
@@ -364,17 +395,47 @@ var Questions={
 			otherQuestions:[],
 		},
 
-		"wwt_pumping_eff":{
-			variables:[
-				"wwt_nrg_pump",
+    "wwt_pumping":{
+      variables:[
+        "wwt_nrg_pump",
         "wwt_vol_pump",
-				"wwt_pmp_head",
-				"wwt_KPI_nrg_per_pump",
-				"wwt_KPI_std_nrg_cons",
-			],
-			advanced:1,
-			otherQuestions:[],
-		},
+        "wwt_pmp_head",
+        "wwt_sta_head",
+        "wwt_coll_len",
+        "wwt_KPI_std_nrg_cons",
+        "wwt_KPI_un_head_loss",
+      ],
+      advanced:1,
+      otherQuestions:[
+        "wwt_pumping_eff",
+        "wwt_opportunities",
+      ],
+    },
+
+    "wwt_pumping_eff": {
+      variables:[
+        "wwt_pmp_flow",
+        "wwt_pmp_volt",
+        "wwt_pmp_amps",
+        "wwt_pmp_pf",
+        "c_wwt_pmp_pw",
+        "wwt_KPI_nrg_elec_eff",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
+
+    "wwt_opportunities":{
+      variables:[
+        "wwt_pmp_exff",
+        "wwt_KPI_std_nrg_newp",
+        "wwt_KPI_nrg_cons_new",
+        "wwt_KPI_nrg_estm_sav",
+        "wwt_KPI_ghg_estm_red",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
 
 		"wwt_sludge_mgmt":{
 			variables:[
@@ -524,16 +585,47 @@ var Questions={
 			otherQuestions:[],
 		},
 
-		"wwd_pumping":{
-			variables:[
-				"wwd_nrg_pump",
+    "wwd_pumping":{
+      variables:[
+        "wwd_nrg_pump",
         "wwd_vol_pump",
-				"wwd_pmp_head",
-				"wwd_KPI_std_nrg_cons",
-			],
-			advanced:1,
-			otherQuestions:[],
-		},
+        "wwd_pmp_head",
+        "wwd_sta_head",
+        "wwd_coll_len",
+        "wwd_KPI_std_nrg_cons",
+        "wwd_KPI_un_head_loss",
+      ],
+      advanced:1,
+      otherQuestions:[
+        "wwd_pumping_eff",
+        "wwd_opportunities",
+      ],
+    },
+
+    "wwd_pumping_eff": {
+      variables:[
+        "wwd_pmp_flow",
+        "wwd_pmp_volt",
+        "wwd_pmp_amps",
+        "wwd_pmp_pf",
+        "c_wwd_pmp_pw",
+        "wwd_KPI_nrg_elec_eff",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
+
+    "wwd_opportunities":{
+      variables:[
+        "wwd_pmp_exff",
+        "wwd_KPI_std_nrg_newp",
+        "wwd_KPI_nrg_cons_new",
+        "wwd_KPI_nrg_estm_sav",
+        "wwd_KPI_ghg_estm_red",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
 
     "wwd_water_reuse":{
       variables:[
