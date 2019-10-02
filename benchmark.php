@@ -18,7 +18,6 @@
     <?php write('#dev')?></a> &rsaquo;
     <?php write('#Benchmarking summary')?>
 </h1>
-
 <!--root-->
 <div id=root style="text-align:left">
   <div style="margin-top:1em;text-align:center">
@@ -38,29 +37,20 @@
     </script>
   </div>
   <script>
-    var Bm = {};
+    var Bm={};
 
-    Bm.getCodes = function(prefix) {
-      var codes = new Array();
+    Bm.getCodes=function(prefix) {
+      let codes=[];
       for(var f in RefValues)
         if(f.search("^"+prefix)>-1)
           codes.push(f);
-      return codes
+      return codes;
     }
 
     function printDiv(prefix) {
-      var stage;
-      switch(prefix) {
-        case "wsa": stage=translate("Abstraction");break;
-        case "wst": stage=translate("Treatment");break;
-        case "wsd": stage=translate("Distribution");break;
-        case "wwc": stage=translate("Collection");break;
-        case "wwt": stage=translate("Treatment");break;
-        case "wwd": stage=translate("Discharge");break;
-        case "wsg": stage=translate("Water");break;
-        case "wwg": stage=translate("Waste");break;
-      }
+      let stage = translate(Structure.find(s=>s.prefix==prefix).sublevel);
 
+      //refactor this TODO
       document.write("<div class='card folded'>"+
         "<div class=menu onclick=this.parentNode.classList.toggle('folded')><button></button> "+
         stage+"</span></div>"+
@@ -93,9 +83,9 @@
     function printAll() {
       printLevel(['wsa','wst','wsd'],translate("Water"));
       printLevel(['wwc','wwt','wwd'],translate("Waste"));
+      printLevel(['fsc','fst','fsr'],translate("Faecl"));
     }
   </script>
   <script>printAll()</script>
 </div>
-
 <!--CURRENT JSON--><?php include'currentJSON.php'?>
