@@ -1,56 +1,57 @@
-<!--menu bar at the right of the page-->
+<!--side bar top left-->
 <?php
-  //Default class for sidebar depending on cookies
+  //sidebar displayed according to cookies
   $sbd = (isset($_COOKIE['sidebar']) && $_COOKIE['sidebar']==1) ? "on":"off";
 ?>
 
 <div id=sidebar class="<?php echo $sbd ?>" onclick="event.stopPropagation()">
   <script>
-    var Sidebar={
+    let Sidebar={
+      element:document.querySelector('#sidebar'),
+
       toggle:function() {
-        var element=document.querySelector('#sidebar')
+        let element=this.element;
         if(element.className=="on") {
-          setCookie('sidebar',0)
-          element.className="off"
+          setCookie('sidebar',0);
+          element.className="off";
         } else {
-          setCookie('sidebar',1)
-          element.className="on"
+          setCookie('sidebar',1);
+          element.className="on";
         }
       },
 
       hide:function(){
-        var element=document.querySelector('#sidebar')
+        let element=this.element;
         if(element.className=='on') {
           this.toggle();
         }
       },
 
+      //update disabled navigation links
       update: function() {
-        //go over links <a stage> to deactivate the ones inactive according to user
-        var collection=document.querySelectorAll("#sidebar a[stage]");
-        for(var i=0;i<collection.length;i++) {
-          var stage    = collection[i].getAttribute('stage');
-          var isActive = Global.Configuration.ActiveStages[stage];
-          if(!isActive)
-            collection[i].classList.add('inactive');
+        document.querySelectorAll("#sidebar a[stage]").forEach(a=>{
+          let stage    = a.getAttribute('stage');
+          let isActive = Global.Configuration.ActiveStages[stage];
+          if(isActive)
+            a.classList.remove('inactive');
           else
-            collection[i].classList.remove('inactive');
-        }
+            a.classList.add('inactive');
+        });
         this.updateMemory(false);
       },
 
       updateMemory(warning){
         warning=warning||false;
-        var progress = document.querySelector('#sidebar #progress')
-        var length = getCookie('Global') ? document.cookie.length : 0;
+        let progress = document.querySelector('#sidebar #progress')
+        let length = getCookie('Global') ? document.cookie.length : 0;
         progress.value = length;
-        var percent = 100*length/8100;
+        let percent = 100*length/8100;
         progress.setAttribute('caption',format(percent)+"%");
         document.querySelector('#sidebar span#used_memory').innerHTML=format(percent)+"%";
         //add warning above 95%
         if(warning && percent>95){ alert("Warning: memory is "+format(percent)+"% full"); }
       },
-    }
+    };
 
     function removeAllCookies() {
       removeCookie("Global");
@@ -65,27 +66,26 @@
 
     /* Generate a json/text file of the Global object */
     function saveToFile() {
-      var SavedFile={
+      let SavedFile={
         "Global":Global,
         "Substages":Substages,
       };
-      var link=document.createElement('a');
+      let link=document.createElement('a');
       link.href="data:text/json;charset=utf-8,"+JSON.stringify(SavedFile,null,'  '); //with newlines
-      //link.href="data:text/json;charset=utf-8,"+JSON.stringify(SavedFile);         //no newlines (save space)
       link.download=Global.General.Name+".json";
       link.style.display='none';
       document.body.appendChild(link);
       link.click();
     }
 
-    /* Update Global object with loaded file parsed to JSON */
+    /*update Global object with loaded file parsed to JSON*/
     function loadFile(evt) {
 
       //set all variables to 0
       function resetGlobal(obj){
         obj=obj||Global;
         Object.keys(obj).forEach(key=>{
-          if(typeof(obj[key])=="object"){         resetGlobal(obj[key]); //recursive call
+          if(      typeof(obj[key])=="object"){   resetGlobal(obj[key]); //recursive call
           }else if(typeof(obj[key])=='function'){ return;                //do nothing
           }else if(typeof(obj[key])=='number'){   obj[key]=0;            //zero
           }else if(typeof(obj[key])=='string'){   obj[key]="";           //empty string
@@ -98,15 +98,19 @@
       resetGlobal();
 
       //get json file contents
-      var file = evt.target.files[0];
-      var reader = new FileReader();
+      let file = evt.target.files[0];
+      let reader = new FileReader();
       reader.onload=function(){
-        var SavedFile = JSON.parse(reader.result);
+        let SavedFile = JSON.parse(reader.result);
         copyFieldsFrom(SavedFile.Global,Global);
-        copyFieldsFrom(SavedFile.Substages,Substages); //substages are saved unpacked
+
+        //substages are saved unpacked
+        copyFieldsFrom(SavedFile.Substages,Substages);
 
         //solve bug #183 after Global loaded (related to tier A visibility)
-        Structure.filter(s=>!s.sublevel).forEach(s=>{Global.Configuration.Expanded[s.alias]=1;});
+        Structure.filter(s=>!s.sublevel).forEach(s=>{
+          Global.Configuration.Expanded[s.alias]=1;
+        });
 
         updateResult(); //write cookies
         window.location='sources.php';
@@ -126,10 +130,17 @@
 
   <script>
     /*listeners for sidebar*/
-      //if you click anywhere hide the sidebar
-      //if you press escape the sidebar hides
-      document.documentElement.addEventListener('click',  function( ){Sidebar.hide()});
-      document.documentElement.addEventListener('keydown',function(e){if(e.which==27)Sidebar.hide()});
+
+    //click anywhere hides the sidebar
+    document.documentElement.addEventListener('click',function(){
+      Sidebar.hide();
+    });
+    //escape key hides the sidebar
+    document.documentElement.addEventListener('keydown',function(e){
+      if(e.which==27){
+        Sidebar.hide();
+      }
+    });
   </script>
 
   <div id=sidecontent>
@@ -143,10 +154,10 @@
         <td align=center style="padding:0.7em">
         <input type="file" id="loadfile" accept=".json" onchange="loadFile(event)" style="display:none">
         <div class=tab_buttons>
-          <button class=left   onclick=newSystem()><?php write('#new')?></button>
-          <button class=middle onclick=document.getElementById('loadfile').click()><?php write('#open')?></button>
-          <button class=middle onclick=saveToFile()><?php write('#save')?></button>
-          <button class=right  onclick=clearSystem()><?php write('#clear')?></button>
+          <button class=left   onclick="newSystem()"><?php write('#new')?></button>
+          <button class=middle onclick="document.getElementById('loadfile').click()"><?php write('#open')?></button>
+          <button class=middle onclick="saveToFile()"><?php write('#save')?></button>
+          <button class=right  onclick="clearSystem()"><?php write('#clear')?></button>
         </div>
     </table>
 
@@ -213,7 +224,7 @@
         <script>
           (function(){
             //add all tags to the datalist
-            var dl=document.querySelector('#sidebar #variables');
+            let dl=document.querySelector('#sidebar #variables');
             [
               Global.Water,
               Global.Water.Abstraction,
@@ -228,7 +239,7 @@
                 return 'object' != typeof stage[key]; //filter only non-objects
               }).forEach(key=>{
                 dl.appendChild((function(){
-                  var option=document.createElement('option');
+                  let option=document.createElement('option');
                   option.value=key;
                   option.innerHTML=translate(key+'_descr');
                   return option;
@@ -294,9 +305,3 @@
 </style>
 
 <script>Sidebar.update()</script>
-<script>
-  //make the current page on the sidebar be highlighted
-  (function() {
-    //deleted because it was inefficient
-  })();
-</script>

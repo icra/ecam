@@ -1,9 +1,9 @@
 /**
-  Update Global and Substages objects without overwriting functions,
-  since JSON.stringify does not stringify object fields that are functions
+  Update Global and Substages objects without overwriting functions, since
+  JSON.stringify does not stringify functions
 **/
 
-var old_codes_conversion={
+let old_codes_conversion={
   //<old-code>:function(value){<new-location>                       = value;}  //from <old-version-number>
   ww_conn_pop :function(value){Global.Waste.Collection.wwc_conn_pop = value;}, //from v2.0
   ww_serv_pop :function(value){Global.Waste.Treatment.wwt_serv_pop  = value;}, //from v2.0
@@ -32,7 +32,7 @@ function copyFieldsFrom(object_from,object_to){
        * Problem: "field" may have space characters
        * Solution: Remove spaces with String.replace()
        */
-      var newField=field.replace(/ /g,"");
+      let newField=field.replace(/ /g,"");
       copyFieldsFrom(object_from[field],object_to[newField]);
     }else{
       //copy always these values
@@ -43,8 +43,8 @@ function copyFieldsFrom(object_from,object_to){
         object_to[field]=object_from[field];
       }
 
-      var type_from = typeof object_from[field];
-      var type_to   = typeof object_to[field];
+      let type_from = typeof object_from[field];
+      let type_to   = typeof object_to[field];
 
       //rest: copy only values that match in its type
       if(type_from==type_to){
@@ -77,32 +77,34 @@ function copyFieldsFrom(object_from,object_to){
 if(getCookie("Global")!==null){
   /**
   *
-  * Decompress cookie global
+  * Decompress cookie "Global"
   *
   */
 
   //compressed is a string with weird symbols
   //decompressed is a string with the JSON structure of Global
-  //parsed now is a real object
+  //parsed becomes a real object
   //copy the fields from parsed to Global
-  var compressed=getCookie('Global');
-  var decompressed=LZString.decompressFromEncodedURIComponent(compressed);
-  var parsed=JSON.parse(decompressed);
-  copyFieldsFrom(parsed,Global);
+  {
+    let compressed   = getCookie('Global');
+    let decompressed = LZString.decompressFromEncodedURIComponent(compressed);
+    let parsed       = JSON.parse(decompressed);
+    copyFieldsFrom(parsed, Global);
+  }
 
   //memory improvement: revert to the non compacted original structure
   function unpack_Substages(Compacted){
-    var Unpacked={};
+    let Unpacked={};
     Object.keys(Compacted).forEach(l1=>{
       Unpacked[l1]={};
       Object.keys(Compacted[l1]).forEach(l2=>{
-        var substage_from = Compacted[l1][l2][0]; //object
+        let substage_from = Compacted[l1][l2][0]; //object
         Unpacked[l1][l2]=[];                      //new array
         if(!substage_from)return;
-        var n=substage_from.name.length; //number of substages to create
+        let n=substage_from.name.length; //number of substages to create
         //console.log(l1,l2,n);
-        for(var i=0;i<n;i++){
-          var new_substage={};//new empty object
+        for(let i=0;i<n;i++){
+          let new_substage={};//new empty object
           Object.keys(substage_from).forEach(key=>{
             new_substage[key]=substage_from[key][i];
           });
@@ -114,10 +116,12 @@ if(getCookie("Global")!==null){
   }
 
   //decompress and parse Substages in one step
-  var compressed=getCookie('Substages');
-  var decompressed=LZString.decompressFromEncodedURIComponent(compressed);
-  var parsed=JSON.parse(decompressed);
-  Substages=unpack_Substages(parsed);
+  {
+    let compressed   = getCookie('Substages');
+    let decompressed = LZString.decompressFromEncodedURIComponent(compressed);
+    let parsed       = JSON.parse(decompressed);
+    Substages        = unpack_Substages(parsed);
+  }
 
   //set the value of the constants ct_ch4_eq and ct_n2o from the Global.Configuration.Selected.gwp_reports_index
   Cts.ct_ch4_eq.value=GWP_reports[Global.Configuration.Selected.gwp_reports_index].ct_ch4_eq;

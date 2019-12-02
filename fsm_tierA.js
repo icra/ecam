@@ -2,8 +2,8 @@ function apply_fsm_estimations(){
   console.log('applying estimations to FSM');
   //order matters
   //FSC
-    var fsc=Global.Faecl.Containment;
-    var cont_typ=Tables.find('fsc_type_tre',fsc.fsc_type_tre); //containment type (string)
+    let fsc=Global.Faecl.Containment;
+    let cont_typ=Tables.find('fsc_type_tre',fsc.fsc_type_tre); //containment type (string)
     Global.Configuration.Selected.fsc_ch4_efac    = cont_typ;
     Global.Configuration.Selected.fsc_fdensity    = cont_typ;
     Global.Configuration.Selected.fsc_bod_conc_fs = cont_typ;
@@ -14,8 +14,8 @@ function apply_fsm_estimations(){
     fsc.fsc_fslu_emp    = Recommendations.fsc_fslu_emp();
     fsc.fsc_bod_rmvd    = Recommendations.fsc_bod_rmvd();
   //FST
-    var fst=Global.Faecl.Treatment;
-    var type_tre=Tables.find('fst_type_tre',fst.fst_type_tre); //treatment type (string)
+    let fst=Global.Faecl.Treatment;
+    let type_tre=Tables.find('fst_type_tre',fst.fst_type_tre); //treatment type (string)
     Global.Configuration.Selected.fst_ch4_efac = type_tre;
     Global.Configuration.Selected.fst_bod_slud = type_tre;
     fst.fst_ch4_efac = Tables.fst_type_tre[type_tre].ch4_efac;
@@ -23,7 +23,7 @@ function apply_fsm_estimations(){
     fst.fst_bod_effl = Recommendations.fst_bod_effl();
     fst.fst_bod_slud = Tables.fst_type_tre[type_tre].bod_rmvd_as_sludge_estm*fst.fst_bod_infl;
   //FSR
-    var fsr=Global.Faecl.Reuse;
+    let fsr=Global.Faecl.Reuse;
     //if landapp
     if(Global.Configuration['Yes/No'].fsr_landapp){
       fsr.fsr_fslu_typ_la  = fsr.fsr_fslu_typ;
@@ -47,7 +47,7 @@ function apply_fsm_estimations(){
 /*NUMERIC INPUTS LISTENERS*/
   //onchange fsc_vol_trck (volume of fuel consumed)
   document.querySelector('#inputs input#fs_vol_trck').addEventListener('change',function(){
-    var value=parseFloat((this.value));
+    let value=parseFloat((this.value));
     if(value){
       Global.Configuration['Yes/No'].fsc_transport=1; //activate filter for fsc_transport
       Global.Configuration['Yes/No'].fst_transport=1; //activate filter for fst_transport
@@ -82,7 +82,7 @@ function apply_fsm_estimations(){
   //user selects main disposal type
   document.querySelector('#inputs select#fsr_type_tre').addEventListener('change',function(){
     Global.Faecl.Reuse.fsr_type_tre=parseInt(this.value);
-    var fsr=Global.Faecl.Reuse;
+    let fsr=Global.Faecl.Reuse;
     //reset FSR filters and inputs
     Global.Configuration['Yes/No'].fsr_landapp=0;
     Global.Configuration['Yes/No'].fsr_landfil=0;
@@ -93,8 +93,8 @@ function apply_fsm_estimations(){
     fsr.fsr_mass_landfil = 0;
     fsr.fsr_vol_dumping  = 0;
     fsr.fsr_bod_conc_fs  = 0;
-    var type_dis=Tables.find('fsr_type_tre',fsr.fsr_type_tre);
-    var filter={
+    let type_dis=Tables.find('fsr_type_tre',fsr.fsr_type_tre);
+    let filter={
       "Landfilling":      "fsr_landfil",
       "Land application": "fsr_landapp",
       "Dumping":          "fsr_dumping",
@@ -112,7 +112,7 @@ function apply_fsm_estimations(){
 //user selects yes or no for FSM biogas
   document.querySelectorAll('input[name=fst_producing_biogas][type=radio]').forEach(el=>{
     el.addEventListener('click',function(){
-      var newValue=parseInt(this.value);
+      let newValue=parseInt(this.value);
       Global.Configuration['Yes/No'][this.name]=newValue;
       //apply estimations
       if(newValue){
@@ -132,7 +132,7 @@ function apply_fsm_estimations(){
   });
   document.querySelectorAll('input[name=fst_valorizing_biogas][type=radio]').forEach(el=>{
     el.addEventListener('click',function(){
-      var newValue=parseInt(this.value);
+      let newValue=parseInt(this.value);
       Global.Configuration['Yes/No'][this.name]=newValue;
       //apply estimations
       if(newValue){

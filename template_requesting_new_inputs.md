@@ -1,7 +1,8 @@
 ## Template for requesting new inputs / filters / outputs
-New inputs and outputs can be inside new filters. If not, they will show up always.
-This is a minimal example that shows all the information necessary to add a new filter, with 2 new inputs and 1 new output.
-If not specified, the long description of each item will be the same as the name.
+New inputs and outputs can be inside new filters. If not, they will show up
+always. This is a minimal example that shows all the information necessary to
+add a new filter, with 2 new inputs and 1 new output. If not specified, the
+long description of each item will be the same as the name.
 
 ## 1. New filter (yes/no)
 Do you want to evaluate x?
