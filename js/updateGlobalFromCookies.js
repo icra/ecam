@@ -1,7 +1,7 @@
-/**
-  Update Global and Substages objects without overwriting functions, since
-  JSON.stringify does not stringify functions
-**/
+/*
+  * Update Global and Substages objects without overwriting functions, since
+  * JSON.stringify does not stringify functions
+*/
 
 let old_codes_conversion={
   //<old-code>:function(value){<new-location>                       = value;}  //from <old-version-number>
@@ -13,6 +13,18 @@ let old_codes_conversion={
 };
 
 function copyFieldsFrom(object_from,object_to){
+  //special cases (structure variable)
+  if(
+    object_to == Global.Configuration['Yes/No'] ||
+    object_to == Global.Configuration.Selected  ||
+    object_to == Global.Configuration.Units     ||
+    object_to == Global.Configuration.Expanded
+  ){
+    //console.log('using assign...');
+    Object.assign(object_to, object_from);
+    return;
+  }
+
   //go through object keys
   Object.keys(object_from).forEach(field=>{
     //copy substages
