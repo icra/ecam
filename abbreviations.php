@@ -1,7 +1,7 @@
 <!doctype html><html><head>
 <?php include'imports.php'?>
 </head><body><center>
-<?php 
+<?php
  include'sidebar.php';
  include'navbar.php';
 ?>

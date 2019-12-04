@@ -8,18 +8,7 @@
         document.querySelectorAll('#inputs td.option select[id]').forEach(select=>{
           if(select.childNodes.length==0){
             Object.keys(Tables[select.id]).forEach(key=>{
-              var option=document.createElement('option');
-              select.appendChild(option);
-              option.innerHTML=translate(key);
-              option.value=Tables[select.id][key].value;
-            });
-          }
-          select.value=getVariable(select.id);
-        });
-        document.querySelectorAll('#inputs td.option select[id]').forEach(select=>{
-          if(select.childNodes.length==0){
-            Object.keys(Tables[select.id]).forEach(key=>{
-              var option=document.createElement('option');
+              let option=document.createElement('option');
               select.appendChild(option);
               option.innerHTML=translate(key);
               option.value=Tables[select.id][key].value;
@@ -31,27 +20,27 @@
 
       //Display current values in the DOM
       document.querySelectorAll('#inputs input[id]:not([type=radio])').forEach(input=>{
-        var field=input.id;
+        let field=input.id;
         if(field=='')return;
         //set the longer description in the input <td> element
         input.parentNode.parentNode.childNodes[0].title=translate(field+'_expla');
         //get the value stored
-        var value=getVariable(field)/Units.multiplier(field);
+        let value=getVariable(field)/Units.multiplier(field);
         input.value=format(value);
       });
 
       //set the GUI values for filters (biogas) and options (flooding)
       (function() {
-        //WWT
-          //valorizing biogas
-          var val=Global.Configuration["Yes/No"].wwt_valorizing_biogas;
+        /*WWT*/{
           //producing biogas
-          var pro=Global.Configuration["Yes/No"].wwt_producing_biogas;
+          let pro=Global.Configuration["Yes/No"].wwt_producing_biogas;
+          //valorizing biogas
+          let val=Global.Configuration["Yes/No"].wwt_valorizing_biogas;
           //gui elements
-          var input_pro_y=document.querySelector('input[name=wwt_producing_biogas][value="1"]');
-          var input_pro_n=document.querySelector('input[name=wwt_producing_biogas][value="0"]');
-          var input_val_y=document.querySelector('input[name=wwt_valorizing_biogas][value="1"]');
-          var input_val_n=document.querySelector('input[name=wwt_valorizing_biogas][value="0"]');
+          let input_pro_y=document.querySelector('input[name=wwt_producing_biogas][value="1"]');
+          let input_pro_n=document.querySelector('input[name=wwt_producing_biogas][value="0"]');
+          let input_val_y=document.querySelector('input[name=wwt_valorizing_biogas][value="1"]');
+          let input_val_n=document.querySelector('input[name=wwt_valorizing_biogas][value="0"]');
           if(pro){
             input_pro_y.checked=true;   //you are producing biogas
             input_val_y.disabled=false; //enable val
@@ -66,16 +55,18 @@
           if(val && pro){
             input_val_y.checked=true; //you are valorizing biogas
           }
-        //FST
-          //valorizing biogas
-          var val=Global.Configuration["Yes/No"].fst_valorizing_biogas;
-          //producing biogas
-          var pro=Global.Configuration["Yes/No"].fst_producing_biogas;
+        }
+        /*FST*/{
+          //fst producing biogas
+          let pro=Global.Configuration["Yes/No"].fst_producing_biogas;
+          //fst valorizing biogas
+          let val=Global.Configuration["Yes/No"].fst_valorizing_biogas;
           //gui elements
-          var input_pro_y=document.querySelector('input[name=fst_producing_biogas][value="1"]');
-          var input_pro_n=document.querySelector('input[name=fst_producing_biogas][value="0"]');
-          var input_val_y=document.querySelector('input[name=fst_valorizing_biogas][value="1"]');
-          var input_val_n=document.querySelector('input[name=fst_valorizing_biogas][value="0"]');
+          let input_pro_y=document.querySelector('input[name=fst_producing_biogas][value="1"]');
+          let input_pro_n=document.querySelector('input[name=fst_producing_biogas][value="0"]');
+          let input_val_y=document.querySelector('input[name=fst_valorizing_biogas][value="1"]');
+          let input_val_n=document.querySelector('input[name=fst_valorizing_biogas][value="0"]');
+
           if(pro){
             input_pro_y.checked=true;   //you are producing biogas
             input_val_y.disabled=false; //enable val
@@ -85,13 +76,18 @@
             input_val_n.checked=true;  //you are not valorizing biogas
             input_val_y.disabled=true; //disable valorizing
             input_val_n.disabled=true; //disable valorizing
+            Global.Configuration["Yes/No"].fst_valorizing_biogas=0; //not valorizing
           }
+
           if(val && pro){
             input_val_y.checked=true; //you are valorizing biogas
           }
-        //fsc_flooding
-          var val=Global.Faecl.Containment.fsc_flooding;
-          document.querySelector('input[name=fsc_flooding][value="1"]').checked=val?true:false;
+
+          /*fsc_flooding*/{
+            let val=Global.Faecl.Containment.fsc_flooding;
+            document.querySelector('input[name=fsc_flooding][value="1"]').checked=val?true:false;
+          }
+        }
       })();
 
       //update default treatment type and sludge disposal method
@@ -106,7 +102,7 @@
     function drawCharts(){
       //get current graph selected in graph1
       (function(){
-        var current_graph=document.querySelector('#graph1').getAttribute('current_graph') || 'ghg_by_source';
+        let current_graph=document.querySelector('#graph1').getAttribute('current_graph') || 'ghg_by_source';
         Graphs[current_graph](false,'graph1');
       })();
       Graphs.graph2(false,'graph2');
@@ -114,10 +110,10 @@
       Graphs.ww_cost('graph4');
       //gauges of GHG emissions per year per person
       (function(){
-        var years=Global.General.Years();
+        let years=Global.General.Years();
 
         //water
-        var ws_serv=Global.Water.ws_serv_pop;
+        let ws_serv=Global.Water.ws_serv_pop;
         Graphs.gauge('graph5', Global.Water.ws_SL_serv_pop(), translate("ws_SL_serv_pop_descr"), undefined, 0, 100);
         Graphs.gauge('graph6', Global.Water.ws_KPI_GHG()/years/ws_serv,
           translate("ws_KPI_GHG_descr"),
@@ -125,7 +121,7 @@
           0, 200); //with units and limits (lower limit and upper limit)
 
         //waste
-        var ww_serv=Global.Waste.ww_serv_pop();
+        let ww_serv=Global.Waste.ww_serv_pop();
         Graphs.gauge('graph7', Global.Waste.ww_SL_serv_pop(), translate("ww_SL_serv_pop_descr"), undefined, 0, 100);
         Graphs.gauge('graph8', Global.Waste.ww_KPI_GHG()/years/ww_serv,
           translate("ww_KPI_GHG_descr"),
@@ -133,7 +129,7 @@
           0, 200); //with unit and limits (lower limit and upper limit)
 
         //faecl
-        var fs_serv=Global.Faecl.fs_onsi_pop;
+        let fs_serv=Global.Faecl.fs_onsi_pop;
         Graphs.gauge('graph9',  Global.Faecl.fs_SL_serv_pop(), translate("fs_SL_serv_pop_descr"), undefined, 0, 100);
         Graphs.gauge('graph10', Global.Faecl.fs_KPI_GHG()/years/fs_serv,
           translate("fs_KPI_GHG_descr"),
@@ -145,20 +141,20 @@
 
   <!--BEV namespace (birds eye view old name)-->
   <script>
-    var BEV={}; //'Birds Eye View' namespace
+    let BEV={}; //'Birds Eye View' namespace
 
     //backend update a variable
     BEV.updateField=function(input){
       //get info from the input element
-      var field = input.id;
+      let field = input.id;
       //replace commmas for copy paste easyness
-      var value = parseFloat(input.value);
+      let value = parseFloat(input.value);
       //if value is not a number, set to zero
-      if(isNaN(value))value=0;
-      //multiplier
-      value*=Units.multiplier(field);
+      if(isNaN(value)) value=0;
+      //unit multiplier
+      value *= Units.multiplier(field);
       //get location
-      var loc=locateVariable(field);
+      let loc = locateVariable(field);
       //update
       if(loc.sublevel){
         Global[loc.level][loc.sublevel][field]=value;
@@ -176,18 +172,18 @@
 
     //backend split the value entered among the inputs in stages
     BEV.updateOutput=function(input) {
-      var field=input.id;
-      var value=parseFloat(input.value)*Units.multiplier(field);
+      let field=input.id;
+      let value=parseFloat(input.value)*Units.multiplier(field);
       //spred the value among the stages
       //get L1 name: "Water" or "Waste"
-      var L1=locateVariable(field).level;
+      let L1=locateVariable(field).level;
       //the following code block can be improved using "Structure.filter()"
       if(L1=="Water"){
         //count active stages
-        var wsa=Global.Configuration.ActiveStages.waterAbs;
-        var wst=Global.Configuration.ActiveStages.waterTre;
-        var wsd=Global.Configuration.ActiveStages.waterDis;
-        var n=wsa+wst+wsd;
+        let wsa=Global.Configuration.ActiveStages.waterAbs;
+        let wst=Global.Configuration.ActiveStages.waterTre;
+        let wsd=Global.Configuration.ActiveStages.waterDis;
+        let n=wsa+wst+wsd;
         if(n==0){
           console.warn("Warning: no Water stages active, all goes to Abstraction");
           //all energy goes to abstraction
@@ -200,10 +196,10 @@
         Global.Water.Distribution[field.replace("ws_","wsd_")]=wsd*value/n;
       }else if(L1=="Waste"){
         //count active stages
-        var wwc=Global.Configuration.ActiveStages.wasteCol;
-        var wwt=Global.Configuration.ActiveStages.wasteTre;
-        var wwd=Global.Configuration.ActiveStages.wasteDis;
-        var n=wwc+wwt+wwd;
+        let wwc=Global.Configuration.ActiveStages.wasteCol;
+        let wwt=Global.Configuration.ActiveStages.wasteTre;
+        let wwd=Global.Configuration.ActiveStages.wasteDis;
+        let n=wwc+wwt+wwd;
         if(n==0){
           console.warn("Warning: no Wastewater stages active, all goes to Collection");
           //all energy goes to collection
@@ -216,10 +212,10 @@
         Global.Waste.Discharge [field.replace("ww_","wwd_")]=wwd*value/n;
       }else if(L1=="Faecl"){
         //count active stages
-        var fsc=Global.Configuration.ActiveStages.faeclCon;
-        var fst=Global.Configuration.ActiveStages.faeclTre;
-        var fsr=Global.Configuration.ActiveStages.faeclReu;
-        var n=fsc+fst+fsr;
+        let fsc=Global.Configuration.ActiveStages.faeclCon;
+        let fst=Global.Configuration.ActiveStages.faeclTre;
+        let fsr=Global.Configuration.ActiveStages.faeclReu;
+        let n=fsc+fst+fsr;
         if(n==0){
           console.warn("Warning: no FSM stages active, all goes to Containment");
           //all energy goes to collection
@@ -237,12 +233,12 @@
 
   <script>
     //Expanded: object for folding stages
-    var Expanded=Global.Configuration.Expanded;
+    let Expanded=Global.Configuration.Expanded;
     function toggleStageVisibility(stage) {
-      var btn=document.querySelector('#inputs span[expanded][stage='+stage+']');
+      let btn=document.querySelector('#inputs span[expanded][stage='+stage+']');
       if(!btn)return;
 
-      var currentState=Expanded[stage];
+      let currentState=Expanded[stage];
 
       //toggle html attribute
       if(currentState){btn.setAttribute('expanded','0')}
@@ -254,12 +250,13 @@
       updateResult();//update cookies
 
       //hide or show fields
-      var newDisplay=currentState?'none':'';
+      let newDisplay=currentState?'none':'';
       document.querySelectorAll('#inputs tr[stage='+stage+']').forEach(tr=>{
         tr.style.display=newDisplay;
       });
     }
   </script>
+
   <style>
     span[expanded]{float:left;transition:transform 0.15s;}
     span[expanded='0']{transform:rotate(-90deg);}
@@ -320,12 +317,13 @@
   <?php include'caption.php'?>
 </center>
 
-<!--title--><h1>
+<!--tier A title-->
+<h1>
   <?php write('#quick_assessment')?> &mdash;
   <?php write('#initial_estimation_description')?>
 </h1>
 
-<!--context info-->
+<!--context info below tier A title-->
 <div class=flex
   style="font-size:smaller;color:#666;justify-content:space-between;padding:0.5em 2em;background:#fafafa;box-shadow: 0 1px 2px rgba(0,0,0,.5);">
   <!--assessment period-->
@@ -342,8 +340,8 @@
     <span id=conv_kwh_co2></span> kg CO<sub>2</sub>eq/kWh
     <script>
       (function(){
-        var val=Global.General.conv_kwh_co2;
-        var str=val==0?"<span style='padding:0 0.5em;background:red;cursor:help' caption='<?php write('#birds_warning_conv_factor')?>'>"+format(val)+" &#9888;</span>":format(val);
+        let val=Global.General.conv_kwh_co2;
+        let str=val==0?"<span style='padding:0 0.5em;background:red;cursor:help' caption='<?php write('#birds_warning_conv_factor')?>'>"+format(val)+" &#9888;</span>":format(val);
         document.querySelector('#conv_kwh_co2').innerHTML=str;
       })();
     </script>
@@ -354,8 +352,8 @@
     <span id=prot_con></span> kg/<?php write('#person')?>/<?php write('#year')?>
     <script>
       (function(){
-        var val=Global.General.prot_con;
-        var str=val==0?"<span style='padding:0 0.5em;background:red;cursor:help' caption='warning: value is zero'>"+format(val)+" &#9888;</span>":format(val);
+        let val=Global.General.prot_con;
+        let str=val==0?"<span style='padding:0 0.5em;background:red;cursor:help' caption='warning: value is zero'>"+format(val)+" &#9888;</span>":format(val);
         document.querySelector('#prot_con').innerHTML=str;
       })();
     </script>
@@ -366,15 +364,15 @@
     <span id=bod_pday></span> kg/<?php write('#person')?>/<?php write('#day')?>
     <script>
       (function(){
-        var val=Global.General.bod_pday;
-        var str=val==0?"<span style='padding:0 0.5em;background:red;cursor:help' caption='warning: value is zero'>"+format(val)+" &#9888;</span>":format(val);
+        let val=Global.General.bod_pday;
+        let str=val==0?"<span style='padding:0 0.5em;background:red;cursor:help' caption='warning: value is zero'>"+format(val)+" &#9888;</span>":format(val);
         document.querySelector('#bod_pday').innerHTML=str;
       })();
     </script>
   </div>
 </div>
 
-<!--main container-->
+<!--main container tier A-->
 <div class=flex>
   <!--inputs container (left)-->
   <div style="width:33%">
@@ -503,7 +501,7 @@
         </tr>
 
         <!--estimations for FSM-->
-        <script src=fsm_tierA.js></script>
+        <script src="fsm_tierA.js"></script>
       </table>
     </div>
 
@@ -514,7 +512,7 @@
         function nextPage(event) {
           if(event)event.stopPropagation();
           //go to first active substage
-          var location;
+          let location;
           if(Global.Configuration.ActiveStages.waterAbs)      location = "edit.php?level=Water&sublevel=Abstraction";
           else if(Global.Configuration.ActiveStages.waterTre) location = "edit.php?level=Water&sublevel=Treatment";
           else if(Global.Configuration.ActiveStages.waterDis) location = "edit.php?level=Water&sublevel=Distribution";
@@ -524,9 +522,9 @@
           else if(Global.Configuration.ActiveStages.faeclCon) location = "edit.php?level=Faecl&sublevel=Containment";
           else if(Global.Configuration.ActiveStages.faeclTre) location = "edit.php?level=Faecl&sublevel=Treatment";
           else if(Global.Configuration.ActiveStages.faeclReu) location = "edit.php?level=Faecl&sublevel=Reuse";
-          else if(Global.Configuration.ActiveStages.water) location = "edit.php?level=Water";
-          else if(Global.Configuration.ActiveStages.waste) location = "edit.php?level=Waste";
-          else if(Global.Configuration.ActiveStages.faecl) location = "edit.php?level=Faecl";
+          else if(Global.Configuration.ActiveStages.water)    location = "edit.php?level=Water";
+          else if(Global.Configuration.ActiveStages.waste)    location = "edit.php?level=Waste";
+          else if(Global.Configuration.ActiveStages.faecl)    location = "edit.php?level=Faecl";
           else {
             alert("<?php write('#configuration_active_stages_error')?>");
             return;
@@ -548,7 +546,7 @@
           <script>
             //issue #94
             function resetTierB(){
-              var TierA=[
+              let TierA=[
                 //population
                   'ws_resi_pop',
                   'ws_serv_pop',
@@ -770,7 +768,9 @@
 </div>
 
 <?php include'currentJSON.php'?>
+
 <script>if(google){google.charts.load('current',{'packages':['corechart','gauge','bar']});}</script>
+
 </html>
 
 <!--add onchange listeners for <inputs> and <selects> magnitude==Option-->
@@ -789,6 +789,7 @@
       if(e.key=='Enter')this.blur();
     });
   });
+
   document.querySelectorAll("#inputs td.option select[id]").forEach(select=>{
     select.addEventListener('change',function(){BEV.updateField(this)});
   });
@@ -798,15 +799,15 @@
   <script>
     document.querySelectorAll('#inputs td.output').forEach(td=>{
       //find the input element inside the cell
-      var input=td.querySelector('input[id]')
+      let input=td.querySelector('input[id]')
       if(!input)return;
       //find the level it belongs
-      var level=locateVariable(input.id).level;
+      let level=locateVariable(input.id).level;
       //if substages>1, lock the cell
       Object.keys(Substages[level]).forEach(sublevel=>{
         //count substages
-        var n=Substages[level][sublevel].length;
-        var sum=getVariable(input.id);
+        let n=Substages[level][sublevel].length;
+        let sum=getVariable(input.id);
         if(n && sum>0){
           td.classList.add('locked');
           input.disabled=true;
@@ -825,9 +826,9 @@
 <!--write units next to the inputs-->
 <script>
   document.querySelectorAll('#inputs tr[stage] td input[id]').forEach(input=>{
-    var td_unit=input.parentNode.nextSibling;
-    var field=input.id;
-    var currentUnit=Info[field].magnitude=='Currency' ? Global.General.Currency : Info[field].unit;
+    let td_unit=input.parentNode.nextSibling;
+    let field=input.id;
+    let currentUnit=Info[field].magnitude=='Currency' ? Global.General.Currency : Info[field].unit;
     currentUnit=currentUnit.replace('m3','m<sup>3</sup>');
     td_unit.innerHTML=currentUnit;
   });
@@ -849,8 +850,8 @@
     //Active stages
     Structure.filter(s=>!s.sublevel).map(s=>s.alias).forEach(function(stage){
       if(Global.Configuration.ActiveStages[stage]==1) {
-        var rows=document.querySelectorAll('#inputs tr[stage='+stage+']');
-        for(var i=0;i<rows.length;rows[i++].classList.remove('hidden')){}
+        let rows=document.querySelectorAll('#inputs tr[stage='+stage+']');
+        for(let i=0;i<rows.length;rows[i++].classList.remove('hidden')){}
       }else{
         document.querySelector('table#inputs tr[indic='+stage+']').classList.remove('hidden');
       }

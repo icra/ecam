@@ -166,7 +166,7 @@
         echo "var substages = false;";
       }
     ?>
-    /** Update all */
+    /* Update all */
     function init() {
       //performance measure
       //console.time('init');

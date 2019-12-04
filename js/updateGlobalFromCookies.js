@@ -21,28 +21,21 @@ function copyFieldsFrom(object_from,object_to){
       return;
     }
 
-    /**
+    /*
        field is never a function because of JSON.stringify
        if field is object, recursive call.
        if field is number or string, copy it
     */
     if(typeof(object_from[field])=="object") {
+
       /*
        * HOTFIX FOR OLD JSON FILES
        * Problem: "field" may have space characters
        * Solution: Remove spaces with String.replace()
        */
       let newField=field.replace(/ /g,"");
-      copyFieldsFrom(object_from[field],object_to[newField]);
+      copyFieldsFrom(object_from[field], object_to[newField]);
     }else{
-      //copy always these values
-      if(object_to==Global.Configuration.Units        || //custom units
-         object_to==Global.Configuration['Yes/No']    || //answers to Questions (filters)
-         object_to==Global.Configuration.Expanded        //display or not inputs for a particular question
-      ){
-        object_to[field]=object_from[field];
-      }
-
       let type_from = typeof object_from[field];
       let type_to   = typeof object_to[field];
 
@@ -50,7 +43,7 @@ function copyFieldsFrom(object_from,object_to){
       if(type_from==type_to){
         object_to[field]=object_from[field];
       }else if(type_from!='number' && type_to=='number'){
-        //new variables: set to zero
+        //new variable: set to zero
         object_to[field]=0;
       }else if(type_from=='number' && type_to!='number'){
         //old variable found
@@ -59,13 +52,17 @@ function copyFieldsFrom(object_from,object_to){
           console.log(field,' is an old variable; conversion found');
         }else{
           console.warn(field,' is an old variable; not loaded');
-          alert("Input '("+field+" = "+format(object_from[field])+")' not loaded. It is an old variable that has been removed in this version. Please save again the file to update the file version to the latest one.");
+          alert(""+
+            "Input '("+field+" = "+format(object_from[field])+")' not"+
+            "loaded. It is an old variable that has been removed in this version."+
+            "Please save again the file to update the file version to the latest"+
+            "one.");
         }
       }else{
         //do nothing
-        console.warn(field,' types do not match');
-        console.log(object_from[field]);
-        console.log(object_to[field]);
+        console.warn(`"${field}" types do not match`);
+        console.log(typeof object_from[field]);
+        console.log(typeof object_to[field]);
       }
     }
   });

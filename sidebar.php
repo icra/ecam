@@ -73,39 +73,22 @@
       let link=document.createElement('a');
       link.href="data:text/json;charset=utf-8,"+JSON.stringify(SavedFile,null,'  '); //with newlines
       link.download=Global.General.Name+".json";
-      link.style.display='none';
+      link.style.display='';
       document.body.appendChild(link);
       link.click();
     }
 
     /*update Global object with loaded file parsed to JSON*/
     function loadFile(evt) {
-
-      //set all variables to 0
-      function resetGlobal(obj){
-        obj=obj||Global;
-        Object.keys(obj).forEach(key=>{
-          if(      typeof(obj[key])=="object"){   resetGlobal(obj[key]); //recursive call
-          }else if(typeof(obj[key])=='function'){ return;                //do nothing
-          }else if(typeof(obj[key])=='number'){   obj[key]=0;            //zero
-          }else if(typeof(obj[key])=='string'){   obj[key]="";           //empty string
-          }else{
-            console.warn('unknown field "'+key+'":')
-            console.warn(obj[key]);
-          }
-        });
-      };
-      resetGlobal();
-
       //get json file contents
       let file = evt.target.files[0];
       let reader = new FileReader();
       reader.onload=function(){
         let SavedFile = JSON.parse(reader.result);
-        copyFieldsFrom(SavedFile.Global,Global);
 
-        //substages are saved unpacked
-        copyFieldsFrom(SavedFile.Substages,Substages);
+        copyFieldsFrom(SavedFile.Global, Global);
+        copyFieldsFrom(SavedFile.Substages, Substages);
+        //substages are saved unpacked, no need to convert
 
         //solve bug #183 after Global loaded (related to tier A visibility)
         Structure.filter(s=>!s.sublevel).forEach(s=>{

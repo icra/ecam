@@ -1,7 +1,7 @@
 function apply_fsm_estimations(){
   console.log('applying estimations to FSM');
   //order matters
-  //FSC
+  /*FSC*/{
     let fsc=Global.Faecl.Containment;
     let cont_typ=Tables.find('fsc_type_tre',fsc.fsc_type_tre); //containment type (string)
     Global.Configuration.Selected.fsc_ch4_efac    = cont_typ;
@@ -13,7 +13,8 @@ function apply_fsm_estimations(){
     fsc.fsc_bod_infl    = Recommendations.fsc_bod_infl();
     fsc.fsc_fslu_emp    = Recommendations.fsc_fslu_emp();
     fsc.fsc_bod_rmvd    = Recommendations.fsc_bod_rmvd();
-  //FST
+  }
+  /*FST*/{
     let fst=Global.Faecl.Treatment;
     let type_tre=Tables.find('fst_type_tre',fst.fst_type_tre); //treatment type (string)
     Global.Configuration.Selected.fst_ch4_efac = type_tre;
@@ -22,7 +23,8 @@ function apply_fsm_estimations(){
     fst.fst_bod_infl = Recommendations.fst_bod_infl();
     fst.fst_bod_effl = Recommendations.fst_bod_effl();
     fst.fst_bod_slud = Tables.fst_type_tre[type_tre].bod_rmvd_as_sludge_estm*fst.fst_bod_infl;
-  //FSR
+  }
+  /*FSR*/{
     let fsr=Global.Faecl.Reuse;
     //if landapp
     if(Global.Configuration['Yes/No'].fsr_landapp){
@@ -40,8 +42,12 @@ function apply_fsm_estimations(){
     //dumping
     if(Global.Configuration['Yes/No'].fsr_dumping){
       fsr.fsr_vol_dumping = Recommendations.fsr_vol_dumping();
+      let fsc=Global.Faecl.Containment;
+      let cont_typ=Tables.find('fsc_type_tre',fsc.fsc_type_tre); //containment type (string)
       fsr.fsr_bod_conc_fs = Tables.fsc_type_tre[cont_typ].BOD_conc_FS;
     }
+  }
+  init();
 }
 
 /*NUMERIC INPUTS LISTENERS*/
@@ -53,6 +59,7 @@ function apply_fsm_estimations(){
       Global.Configuration['Yes/No'].fst_transport=1; //activate filter for fst_transport
       Global.Configuration['Yes/No'].fsr_transport=1; //activate filter for fsr_transport
     }
+    updateResult(); //write cookies
   });
   //onchange fsc_cont_emp (% containments emptied)
   document.querySelector('#inputs input#fsc_cont_emp').addEventListener('change',function(){
@@ -64,7 +71,6 @@ function apply_fsm_estimations(){
     el.addEventListener('click',function(){
       Global.Faecl.Containment.fsc_flooding=parseInt(this.value);
       apply_fsm_estimations();
-      init();
     });
   });
 
@@ -114,14 +120,15 @@ function apply_fsm_estimations(){
     el.addEventListener('click',function(){
       let newValue=parseInt(this.value);
       Global.Configuration['Yes/No'][this.name]=newValue;
-      //apply estimations
+
+      //apply estimations for fst biogas
       if(newValue){
-        Global.Configuration['Yes/No'].fst_valorizing_biogas=0;
         Global.Faecl.Treatment.fst_biog_pro = Recommendations.fst_biog_pro();
         Global.Faecl.Treatment.fst_ch4_biog = Recommendations.fst_ch4_biog();
         Global.Faecl.Treatment.fst_biog_val = 0;
         Global.Faecl.Treatment.fst_biog_fla = Recommendations.fst_biog_pro();
       }else{
+        Global.Configuration['Yes/No'].fst_valorizing_biogas=0;
         Global.Faecl.Treatment.fst_biog_pro = 0;
         Global.Faecl.Treatment.fst_biog_val = 0;
         Global.Faecl.Treatment.fst_biog_fla = 0;
@@ -130,11 +137,13 @@ function apply_fsm_estimations(){
       init();
     });
   });
+
   document.querySelectorAll('input[name=fst_valorizing_biogas][type=radio]').forEach(el=>{
     el.addEventListener('click',function(){
       let newValue=parseInt(this.value);
       Global.Configuration['Yes/No'][this.name]=newValue;
-      //apply estimations
+
+      //apply estimations for fst biogas valorization
       if(newValue){
         Global.Faecl.Treatment.fst_biog_val = Global.Faecl.Treatment.fst_biog_pro; //valorized is produced
         Global.Faecl.Treatment.fst_biog_fla = 0;                                   //flared is zero
