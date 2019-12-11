@@ -1,22 +1,25 @@
 <!--navbar.php: top bar: logo + lang selection-->
 <div id="navbar">
-	<div class=flex>
-		<!--burger symbol-->
-		<div id=burger onclick="event.stopPropagation();Sidebar.toggle()">
-			&#9776;
-		</div>
+  <!--menu symbol-->
+  <div id=burger onclick="event.stopPropagation();sidebar.visible^=1">
+    &#9776;
+  </div>
 
-		<!--logo-->
-		<div>
-			<a href=index.php class=flex>
-				<div><b id=logo >ECAM</b></div>
-				<div><?php write('#navbar_title')?></div>
-			</a>
-		</div>
-	</div>
-  <?php include'version.php'?>
-	<div class=flex>
-		<!--language selection-->
+  <!--logo-->
+  <div>
+    <a href=index.php class=flex>
+      <div><b id=logo >ECAM</b></div>
+      <div><?php write('#navbar_title')?></div>
+    </a>
+  </div>
+
+  <!--version-->
+  <div>
+    <?php include'version.php'?>
+  </div>
+
+  <!--language-->
+	<div>
 		<?php include'language.php'?>
 	</div>
 </div>
@@ -28,9 +31,8 @@
     padding:0.5em 0.5em 0.5em 0.5em;
     box-shadow:0 1px 2px rgba(0,0,0,.5);
     background:#2b6488;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-between;
+    display:grid;
+    grid-template-columns:5% 85% 5% 5%
   }
   #navbar > div{
     padding:13px 5px 5px 5px;/*values adjusted for the sidebar*/

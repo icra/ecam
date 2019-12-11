@@ -2,8 +2,10 @@
   <?php include'imports.php'?>
   <script>function init(){updateResult()}</script>
 </head><body onload=init() style=background:#fff>
+
 <?php include'sidebar.php'?>
 <?php include'navbar.php'?>
+<?php include'currentJSON.php'?>
 
 <!--main-->
 <div id=main>
@@ -79,5 +81,3 @@
   <img src=img/logos.png>
   <br><img src=img/logo-kwb.png>
 </div>
-
-<!--current json--><?php include'currentJSON.php'?>

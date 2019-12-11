@@ -178,7 +178,6 @@
       Exceptions.apply();
       try{drawCharts()}
       catch(e){console.log(e)}
-      Sidebar.updateMemory(true);
       Caption.listeners();
       updateResult();
       //performance end

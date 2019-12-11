@@ -2,7 +2,6 @@
   <?php include'imports.php'?>
   <script>
     function init() {
-      Sidebar.update();
       Caption.listeners();
     }
   </script>

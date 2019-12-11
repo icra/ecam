@@ -1,85 +1,69 @@
 <!doctype html><html><head>
   <?php include'imports.php'?>
-  <style>
-    table#substages, table#substage {margin:auto}
-    th[waste]{background:rgb(215,29,36)}
-    td[level][sublevel] {vertical-align:top}
-    td[level][sublevel] table {margin:auto}
-    table#substages > tbody > tr > th {width:200px}
-  </style>
-  <script>
-    /** Update all */
-    function init() {
-      displaySubstages();
-      updateResult();
-    }
+</head><body>
 
-    //create table to see all substages
-    function displaySubstages() {
-      var stages = document.querySelectorAll("#substages td[level][sublevel]");
-      for(var i=0;i<stages.length;i++) {
-        var sta=stages[i];
-        var level=sta.getAttribute('level');
-        var sublevel=sta.getAttribute('sublevel');
-        var newTable = document.createElement('table');
-        sta.appendChild(newTable);
+<?php
+  include'sidebar.php';     //sidebar
+  include'navbar.php';      //navbar
+  include'linear.php';      //linear
+  include'caption.php';     //caption
+  include'currentJSON.php'; //current json
+?>
 
-        var pointer = Substages[level][sublevel];
-        if(pointer.length==0) {
-          var newCell=newTable.insertRow(-1).insertCell(-1);
-          newCell.style.border='none';
-          newCell.innerHTML="<i style=color:#666;font-size:12px>~"+translate('No substages')+"</i>"
-        }
-        for(var j=0;j<pointer.length;j++) {
-          newTable.insertRow(-1).insertCell(-1).innerHTML=(function() {
-            var str=""+
-              (j+1)+". "+
-              "<a href='substage.php?level="+level+"&sublevel="+sublevel+"&index="+j+"'>"+
-              pointer[j].name+
-              "</a>";
-            return str;
-          })()
-        }
-      }
-    }
-  </script>
-</head><body onload=init()><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--NAVBAR--><?php include'navbar.php'?>
-<!--linear--><?php include'linear.php'?>
-<!--caption--><?php include'caption.php'?>
+<!--vue template (ecam v3)-->
+<div id=substages_overview>
+  <!--title-->
+  <h1 style=text-align:center>{{translate('Substages overview')}}</h1>
 
-<!--TITLE--><h1><?php write('#Substages overview')?></h1></center>
+  <!--substages-->
+  <table style=margin:auto>
+    <!--name of sublevel-->
+    <tr>
+      <th v-for="l2 in Structure.filter(s=>s.sublevel)"
+        :style="`background:${Structure.find(s=>(s.color&&s.level==l2.level)).color}`"
+      >
+        <a :href="`edit.php?level=${l2.level}&sublevel=${l2.sublevel}`"
+          style="color:white"
+        >
+          {{translate(l2.sublevel)}}
+        </a>
+      </th>
+    </tr>
 
-<!--main-->
-<div>
-  <table id=substages>
-    <style>
-      #substages th a {color:white}
-    </style>
-    <tr headers>
-    <tr body>
+    <!--list of substages-->
+    <tr>
+      <td v-for="l2 in Structure.filter(s=>s.sublevel)" >
+        <table>
+          <tr
+            v-for="substage,i in Substages[l2.level][l2.sublevel]"
+            style="border:1px solid"
+          >
+            <td>
+              <a :href=`substage.php?level=${l2.level}&sublevel=${l2.sublevel}&index=${i}`>
+                {{substage.name}}
+              </a>
+            </td>
+          </tr>
+        </table>
+        <div v-if="Substages[l2.level][l2.sublevel].length==0">
+          <span style=color:#666;font-size:12px>~{{translate('No substages')}}</span>
+        </div>
+      </td>
+    </tr>
   </table>
-  <script>
-    var headers=document.querySelector('#substages tr[headers]');
-    Structure.filter(s=>s.sublevel).forEach(s=>{
-      headers.appendChild((function(){
-        var th=document.createElement('th');
-        th.style.background=Structure.find(st=>st.level==s.level).color;
-        th.innerHTML='<a href="edit.php?level='+s.level+'&sublevel='+s.sublevel+'">'+translate(s.sublevel)+'</a>';
-        return th;
-      })());
-    });
-    var body=document.querySelector('#substages tr[body]');
-    Structure.filter(s=>s.sublevel).forEach(s=>{
-      body.appendChild((function(){
-        var td=document.createElement('td');
-        td.setAttribute('level',s.level);
-        td.setAttribute('sublevel',s.sublevel);
-        return td;
-      })());
-    });
-  </script>
 </div>
 
-<!--CURRENT JSON--><?php include'currentJSON.php'?>
+<!--vue model (ecam v3)-->
+<script>
+  let substages_overview=new Vue({
+    el:'#substages_overview',
+    data:{
+      Global,
+      Substages,
+      Structure,
+    },
+    methods:{
+      translate,
+    }
+  });
+</script>

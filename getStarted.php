@@ -6,7 +6,6 @@
 	<?php include'imports.php'?>
 	<script>
 		function init(){
-			Sidebar.update();
       document.querySelector('#getStarted #Name').select();
 		}
 	</script>
