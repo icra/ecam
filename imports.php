@@ -4,9 +4,23 @@
 <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--libs-->
+
+<!--LIBS-->
+
+<!--lib for string compression-->
 <script src="js/lz-string.js"></script>
+
+<!--lib for google charts-->
 <script src="js/charts/loader.js"></script>
+
+<!--
+  lib vue js
+  development version, includes helpful console warnings
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  production version, optimized for size and speed
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+-->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 <!--translation--><?php include'languages/write.php' ?>
 <!--order is important: dataModel then cookies-->

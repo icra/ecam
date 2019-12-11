@@ -1,4 +1,6 @@
 <!--main menu for navigation at the top-->
+
+<!--css-->
 <style>
 	#linearDiagram {
 		background:#f5f5f5;
@@ -27,7 +29,7 @@
 		border:3px solid #9fc231;
 	}
 	#linearDiagram img {position:relative;z-index:2;vertical-align:middle;padding:0;} /*icons inside buttons to navigate to Level2*/
-	#linearDiagram img.l1 {width:42px;} 
+	#linearDiagram img.l1 {width:42px;}
 	#linearDiagram img.l2 {width:42px;}
 	#linearDiagram img{border-radius:90%;border:3px solid transparent;}
 	#linearDiagram img.selected{border:3px solid #9fc231;}
@@ -38,7 +40,7 @@
 
 <div id=linearDiagram>
 	<!--general info-->
-	<div 
+	<div
 		style=cursor:pointer
 		onclick=window.location="getStarted.php">
 		<div><a href=getStarted.php style="color:inherit"><?php write('#getStarted_general_info')?></a></div>
@@ -46,7 +48,7 @@
 	</div>
 
 	<!--configuration-->
-	<div 
+	<div
 		style=cursor:pointer
 		onclick=window.location="configuration.php">
 		<div><a href=configuration.php style="color:inherit"><?php write('#configuration')?></a></div>
@@ -54,14 +56,14 @@
 	</div>
 
 	<!--population-->
-	<div 
+	<div
 		style=cursor:pointer
 		onclick=window.location="inhabitants.php">
 		<div><a href=inhabitants.php style="color:inherit"><?php write('#population')?></a></div>
 		<img class=l1 stage=inha src=img/inhabitants.png caption="<?php write('#population')?>">
 	</div>
 
-	<!--Global-->
+	<!--tier A-->
 	<div
 		style=cursor:pointer
 		onclick=window.location="birds.php">
@@ -69,66 +71,45 @@
 		<img class=l1 stage=birds src=img/birds.png caption="<?php write('#tier_A')?>">
 	</div>
 
-  <!--L1
-  <div class="l1_img">
-    <div><span style="color:inherit">Level 1 stages</span></div>
-    <script>
-      var div=document.querySelector("#linearDiagram div.l1_img");
-      Structure.filter(s=>!s.sublevel).forEach(s=>{
-        var img=document.createElement('img');
-        div.appendChild(img);
-        img.classList.add('l2');
-        img.setAttribute('stage',s.alias);
-        img.setAttribute('caption',translate(s.level));
-        img.src=(function(){
-          var isActive=Global.Configuration.ActiveStages[s.alias];
-          if(isActive){
-            return "img/"+s.alias+".png";
-          }else{
-            img.classList.add('inactive');
-            return "img/"+s.alias+"-off.png";
-          }
-        })();
-        img.addEventListener('click',function(){
-          window.location='edit.php?level='+s.level;
-        });
-      });
-    </script>
+	<!--tier B ecam v3-->
+  <div id=linear_tierB class="detailed_img">
+    <div>
+      <span style="color:inherit"
+        v-html="translate('tier_B')"
+      ></span>
+    </div>
+    <img v-for="l2 in Structure.filter(s=>s.sublevel)"
+      class=l2
+      :stage="l2.alias"
+      :caption="translate(l2.sublevel)"
+      :src="`img/${l2.alias}${Global.Configuration.ActiveStages[l2.alias]?'':'-off'}.png`"
+      @click="go_to_edit(l2)"
+    >
   </div>
-  -->
 
-	<!--DETAILED-->
-	<div class="detailed_img">
-		<div><span style="color:inherit"><?php write('#tier_B')?></span></div>
-    <script>
-      var div_detailed_img=document.querySelector("#linearDiagram div.detailed_img");
-      Structure.filter(s=>s.sublevel).forEach(s=>{
-        var img=document.createElement('img');
-        div_detailed_img.appendChild(img);
-        img.classList.add('l2');
-        img.setAttribute('stage',s.alias);
-        img.setAttribute('caption',translate(s.sublevel));
-        img.src=(function(){
-          var isActive=Global.Configuration.ActiveStages[s.alias];
-          if(isActive){
-            return "img/"+s.alias+".png";
-          }else{
-            img.classList.add('inactive');
-            return "img/"+s.alias+"-off.png";
+  <script>
+    let linear_tierB=new Vue({
+      el:'#linear_tierB',
+      data:{
+        Global,
+        Structure,
+      },
+      methods:{
+        translate,
+        go_to_edit(l2){
+          if(Global.Configuration.ActiveStages[l2.alias]){
+            window.location=`edit.php?level=${l2.level}&sublevel=${l2.sublevel}`;
           }
-        })();
-        img.addEventListener('click',function(){
-          window.location='edit.php?level='+s.level+'&sublevel='+s.sublevel;
-        });
-      });
-    </script>
-	</div>
+        }
+      },
+    });
+  </script>
 
 	<!--Summaries-->
 	<div>
 		<div><span style="color:inherit"><?php write('#summaries')?></span></div>
 		<img class=l1 stage=sources src=img/sources.png onclick=window.location="sources.php"        caption="<?php write('#ghg_summary')?>">
-		<img class=l1 stage=energy  src=img/energy.png  onclick=window.location="energy_summary.php" caption="<?php write('#nrg_summary')?>"> 
+		<img class=l1 stage=energy  src=img/energy.png  onclick=window.location="energy_summary.php" caption="<?php write('#nrg_summary')?>">
 	</div>
 
   <!--Opportunities-->
@@ -141,8 +122,8 @@
 </div>
 
 <script>
+  //highlight current stage
 	<?php
-		//highlight current stage
 		//only if currently we are in edit.php or level3.php
 		if(strpos($_SERVER['PHP_SELF'],"edit.php") || strpos($_SERVER['PHP_SELF'],"level3.php"))
 		{ ?>
@@ -178,7 +159,7 @@
 				}
 				if(stage) { document.querySelector('img[stage='+stage+']').classList.add('selected') }
 			})();
-			<?php 
+			<?php
 		}
 		//hl birds if we are in birds eye view
 		if(strpos($_SERVER['PHP_SELF'],"birds.php"))

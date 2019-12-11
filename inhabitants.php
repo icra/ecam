@@ -2,174 +2,135 @@
   <?php include'imports.php'?>
   <script>
     function init() {
-      updateResult(); //update cookies
       Caption.listeners();
+      {//focus first input element if its value is zero
+        let first_input=document.querySelector('#population input');
+        if(first_input && first_input.value==0){
+          first_input.focus();
+        }
+      }
     }
   </script>
-</head><body onload=init()>
-<center>
-<?php 
+</head><body onload="init()"><center>
+<?php
   include'sidebar.php';
   include'navbar.php';
   include'linear.php';
   include'caption.php';
+  include'currentJSON.php';
 ?>
-<!--title and subtitle-->
-<h1><?php write('#population')?></h1>
-<h4 style=margin:0;margin-bottom:1em>
-  <?php write("#Enter the population living at each level of your system")?>
-</h4>
 
-<!--main-->
-<div id=main>
-  <!--table-->
-  <style>
-    table#inputs th, #inputs td {text-align:left;}
-    #inputs td.input {
-      width:70px;
-      border:1px solid #aaa;
-      color:#666;
-      background:#eee;
-      padding:0 !important;
-    }
-    #inputs td.input input {
-      background:inherit;
-      border:none;
-      text-align:right;
-      cursor: cell;
-      line-height:1em;
-      width:70px;
-      height:24px;
-      display:block;
-    }
-    #inputs td.input input:focus {
-      background:white;
-    }
-    #inputs tr.hidden {display:none}
-    /**indication "not active"**/
-    #inputs tr[indic]{text-align:center;color:#999;background:#eee;font-size:smaller;}
-  </style>
-  <table id=inputs style="font-size:16px;margin:1em;width:50%">
-    <!--WATER-->
-    <tr><th colspan=3 style=background:#0aaff1>
-      <img src=img/water.png width=25 style="line-height:4em;vertical-align:middle"><?php write('#Water')?>
-      <tr stage=water class=hidden><td><?php write('#ws_resi_pop_descr')?><td class=input><input id='ws_resi_pop'><td><small><?php write('#people')?>
-      <tr stage=water class=hidden><td><?php write('#ws_serv_pop_descr')?><td class=input><input id='ws_serv_pop'><td><small><?php write('#people')?>
-      <tr indic=water class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
-    </tr>
-    <!--WASTE-->
-    <tr><th colspan=3 style=background:#d71d24>
-      <img src=img/waste.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Waste')?>
-      <tr stage=waste class=hidden><td><?php write('#ww_resi_pop_descr')?> <td class=input><input id='ww_resi_pop'> <td><small><?php write('#people')?>
-      <tr stage=waste class=hidden><td><?php write('#wwc_conn_pop_descr')?><td class=input><input id='wwc_conn_pop'><td><small><?php write('#people')?>
-      <tr stage=waste class=hidden><td><?php write('#wwt_serv_pop_descr')?><td class=input><input id='wwt_serv_pop'><td><small><?php write('#people')?>
-      <tr indic=waste class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
-    </tr>
-    <!--FAECL-->
-    <tr><th colspan=3 style=background:green>
-      <img src=img/faecl.png width=25 style="line-height:4em;vertical-align:middle"> <?php write('#Faecl')?>
-      <tr stage=faecl class=hidden><td><?php write('#fs_resi_pop_descr')?> <td class=input><input id='fs_resi_pop'> <td><small><?php write('#people')?>
-      <tr stage=faecl class=hidden><td><?php write('#fs_onsi_pop_descr')?> <td class=input><input id='fs_onsi_pop'> <td><small><?php write('#people')?>
-      <tr indic=faecl class=hidden><td colspan=3><?php write('#birds_stage_not_active')?>
-    </tr>
+<!--vue template ecam v3-->
+<div id=population>
+  <h1>{{translate('population')}}</h1>
+
+  <h4 style=margin:0;margin-bottom:1em>
+    {{translate("Enter the population living at each level of your system")}}
+  </h4>
+
+  <table style="font-size:16px;margin:1em;width:50%">
+    <tbody v-for="l1 in Structure.filter(s=>s.sublevel==false)">
+      <tr>
+        <th colspan=3 :style=`background:${l1.color};text-align:left`>
+        <img :src="`img/${l1.alias}.png`" width=25 style="line-height:4em;vertical-align:middle">
+        {{translate(l1.level)}}
+      </tr>
+      <tr v-if="!Global.Configuration.ActiveStages[l1.alias]">
+        <td colspan=3 inactive>{{translate('birds_stage_not_active')}}
+      </tr>
+      <tr v-else v-for="pop in Population.filter(p=>p.level==l1.level)">
+        <td :caption="translate(pop.code+'_expla')">
+          {{translate(pop.code+'_descr')}}
+        </td>
+        <td class=input_container>
+          <input
+            :value="format(pop.stage[pop.code])"
+            @focus="focus_input(pop, $event)"
+            @blur="blur_input(pop, $event)"
+            :tabindex="Population.indexOf(pop)+1"
+            style="text-align:right"
+          >
+        </td>
+        <td><small>{{translate('people')}}</small></td>
+      </tr>
+    </tbody>
   </table>
+
+  <!--prev next buttons-->
+  <div>
+    <button class="button prev" onclick="event.stopPropagation();window.location='configuration.php'">
+      {{translate('previous')}}
+    </button>
+    <button class="button next" onclick="event.stopPropagation();window.location='birds.php'">
+      {{translate('next')}}
+    </button>
+  </div>
 </div>
 
-<!--prev next-->
-<div>
-  <button class="button prev" onclick="event.stopPropagation();window.location='configuration.php'">
-    <?php write('#previous')?>
-  </button>
-  <button class="button next" onclick="event.stopPropagation();window.location='birds.php'">
-    <?php write('#next')?>
-  </button>
-</div>
-<!--CURRENT JSON--><?php include'currentJSON.php'?>
+<!--css ecam v3-->
+<style>
+  /*indication "stage not active"*/
+  #population td[inactive]{
+    color:#999;
+    background:#eee;
+    font-size:smaller;
+  }
 
+  #population td.input_container {
+    width:70px;
+    border:1px solid #aaa;
+    color:#666;
+    background:#eee;
+    padding:0 !important;
+    text-align:right;
+    cursor:cell;
+  }
+  #population td.input_container input {
+    background:inherit;
+    border:none;
+    text-align:right;
+    line-height:1em;
+    width:70px;
+    height:24px;
+  }
+  #population td.input_container input:focus {
+    background:white;
+  }
+</style>
+
+<!--vue model ecam v3-->
 <script>
-  //populate page onload
-  (function updateDefaults() {
-    var inputs=document.querySelectorAll('#inputs tr[stage] input[id]');
-
-    for(var i=0;i<inputs.length;i++) {
-      var input = inputs[i];
-      var field = input.id;
-
-      //set the longer description in the input <td> element
-      var prnt=input.parentNode.parentNode.childNodes[0];
-      try{
-        prnt.setAttribute('caption',translate(field+'_expla'));
-      } catch(e){ console.log(prnt) }
-
-      //the value we are going to put in the input
-
-      var value = getVariable(field)/Units.multiplier(field);
-
-      //set the value
-      input.value=format(value);
+  let population=new Vue({
+    el:'#population',
+    data:{
+      Global,
+      Structure,
+      Population:[
+        {level:'Water', stage:Global.Water,            code:'ws_resi_pop'},
+        {level:'Water', stage:Global.Water,            code:'ws_serv_pop'},
+        {level:'Waste', stage:Global.Waste,            code:'ww_resi_pop'},
+        {level:'Waste', stage:Global.Waste.Collection, code:'wwc_conn_pop'},
+        {level:'Waste', stage:Global.Waste.Treatment,  code:'wwt_serv_pop'},
+        {level:'Faecl', stage:Global.Faecl,            code:'fs_resi_pop'},
+        {level:'Faecl', stage:Global.Faecl,            code:'fs_onsi_pop'},
+      ],
+    },
+    methods:{
+      translate,
+      format,
+      updateResult,
+      focus_input(pop, event){
+        let input = event.target;
+        input.value = pop.stage[pop.code]
+        input.select();
+      },
+      blur_input(pop, event){
+        let input = event.target;
+        let value = parseFloat(input.value) || 0;
+        pop.stage[pop.code] = value;
+        input.value=format(pop.stage[pop.code]);
+        updateResult();
+      },
     }
-  })();
-
-  Caption.listeners();
-
-  (function showActive() {
-    ['water','waste','faecl'].forEach(function(stage) {
-      if(Global.Configuration.ActiveStages[stage]) {
-        var trs=document.querySelectorAll('#inputs tr[stage='+stage+']');
-        for(var i=0;i<trs.length;i++)
-          trs[i].classList.remove('hidden');
-      }else{
-        document.querySelector('#inputs tr[indic='+stage+']').classList.remove('hidden');
-      }
-    });
-  })();
-
-  //add event listeners to inputs
-  document.querySelectorAll('#inputs input[id]').forEach(el=>{
-    el.addEventListener('change',function(){
-      //get info from the input element
-      var field = this.id;
-      var value = parseFloat(this.value); //convert string to float
-      value*=Units.multiplier(field);
-
-      //if value is not a number, set to zero
-      if(isNaN(value))value=0;
-
-      //locate variable
-      var loc = locateVariable(field);
-      if(loc.sublevel){
-        Global[loc.level][loc.sublevel][field]=value;
-      }else if(loc.level){
-        Global[loc.level][field]=value;
-      }else{
-        alert('field '+field+' undefined');return;
-      }
-
-      //end
-      init();
-    });
-    el.addEventListener('focus', function(){ this.value=getVariable(this.id); this.select() });
-    el.addEventListener('blur',  function(){ this.value=format(getVariable(this.id)) });
-    el.addEventListener('click', function(){ this.select() });
-    el.addEventListener('keypress', function(e){ 
-      if(e.key=='Enter'){
-        this.blur();
-      }
-    });
   });
-
-  //first input fake click depending on active stages
-  (function(){
-    var first=(function(){
-      if(Global.Configuration.ActiveStages.water)
-        return document.querySelector('#inputs tr[stage=water] td.input input[id]');
-      if(Global.Configuration.ActiveStages.waste)
-        return document.querySelector('#inputs tr[stage=waste] td.input input[id]');
-      if(Global.Configuration.ActiveStages.faecl)
-        return document.querySelector('#inputs tr[stage=faecl] td.input input[id]');
-    })();
-    if(first && getVariable(first.id)==0){
-      first.dispatchEvent(new CustomEvent('click'));
-    }
-  })();
 </script>

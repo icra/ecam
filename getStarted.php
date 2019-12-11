@@ -1,96 +1,118 @@
-<?php /* getStarted.php: page for inserting general information about the system */ ?>
+<?php /*
+  first page for inserting general information about the new system
+*/?>
+
 <!doctype html><html><head>
 	<?php include'imports.php'?>
-	<style>
-		th{vertical-align:middle}
-		#form th,#form td{padding:1em}
-		input,textarea{padding:0.5em}
-	</style>
 	<script>
-		/** Modify any field of Global and init() */
-		function updateField(object,field,newValue)
-		{
-			if(typeof(object[field])=="number")
-			{
-				newValue=parseFloat(newValue);
-				if(isNaN(newValue))newValue=0;
-			}
-			object[field]=newValue;
-			init();
-		}
-
-		function init(selectName)
-		{
-			selectName=selectName||false;
-			updateCurrency();
+		function init(){
 			Sidebar.update();
-			updateResult();
-			document.querySelector('#form #Name').value=Global.General.Name;
-			document.querySelector('#form #Start').value=Global.General.AssessmentPeriodStart;
-			document.querySelector('#form #End').value=Global.General.AssessmentPeriodEnd;
-			document.querySelector('#form #Days').innerHTML=Global.General.Days();
-			document.querySelector('#form #Comments').value=Global.General.Comments;
-
-			//only when the page loads select first element of the form, not after
-			if(selectName) document.querySelector('#form #Name').select()
+      document.querySelector('#getStarted #Name').select();
 		}
 	</script>
-</head><body onload=init(true)><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--NAVBAR--><?php include"navbar.php"?>
-<!--TITLE--><h1><?php write('#getStarted_subtitle')?></h1>
+</head><body onload="init()"><center>
 
-<div id=main>
-	<!--form-->
-	<table id=form style="text-align:left;">
-		<tr>
-			<th><?php write('#getStarted_table_name')?>
-			<td><input id=Name onchange=updateField(Global.General,'Name',this.value)>
-		<tr>
-			<th><?php write('#getStarted_table_start')?>
-			<td><input id=Start type=date onchange="updateField(Global.General,'AssessmentPeriodStart',this.value)">
-		<tr>
-			<th><?php write('#getStarted_table_end')?>
-			<td><input id=End type=date onchange="updateField(Global.General,'AssessmentPeriodEnd',this.value)">
-		<tr>
-			<th><?php write('#getStarted_table_period')?>
-			<td><span id=Days>0</span> <?php write('#days')?>
-		<tr>
-			<script>
-				function updateCurrency()
-				{
-					document.getElementById('currency').innerHTML=Global.General.Currency
-				}
-			</script>
-		<tr>
-			<!--currency: 3 letters-->
-			<th><?php write("#currency")?>
-			<td>
-				<span id=currency style="color:black;font-weight:bold"></span><br>
-				<?php write('#configuration_new_currency')?>:
-				<input size=3 maxlength=3 placeholder="ccc" onchange=updateField(Global.General,"Currency",this.value)>
-		<tr>
-			<th><?php write('#getStarted_table_comments')?>
-			<td>
-				<textarea 
-					id=Comments
-					onchange="updateField(Global.General,'Comments',this.value)"
-					placeholder='<?php write('#getStarted_max_200')?>' rows=5 cols=50 maxlength=200></textarea>
-	</table>
+<?php /*includes (to be removed in ecam v3)*/
+  include'sidebar.php';     //sidebar
+  include'navbar.php';      //navbar
+  include'currentJSON.php'; //current json
+?>
 
-	<!--PREV&NEXT-->
-	<div style=margin:1em>
-		<button class="button prev" onclick="event.stopPropagation();window.location='index.php'">
-		<?php write('#previous')?></button><!--
-		--><button class="button next" onclick="event.stopPropagation();nextPage()">
-		<?php write('#next')?></button>
-		<script>
-			function nextPage()
-			{
-				window.location='configuration.php'
-			}
-		</script>
-	</div>
+<!--vue template (ecam v3)-->
+<div id=getStarted>
+  <h1>
+    {{translate('getStarted_subtitle')}}
+  </h1>
+  <table>
+    <tr>
+      <th>{{translate('getStarted_table_name')}}
+      <td><input
+        id=Name
+        v-model="Global.General.Name"
+        @change="updateResult()"
+      >
+    </tr>
+    <tr>
+      <th>{{translate('getStarted_table_start')}}
+      <td><input type=date
+        v-model="Global.General.AssessmentPeriodStart"
+        @change="updateResult()"
+      >
+    </tr>
+    <tr>
+      <th>{{translate('getStarted_table_end')}}
+      <td><input type=date
+        v-model="Global.General.AssessmentPeriodEnd"
+        @change="updateResult()"
+      >
+    </tr>
+    <tr>
+      <th>{{translate('getStarted_table_period')}}
+      <td>{{Global.General.Days()}} {{translate('days')}}
+    </tr>
+    <tr>
+      <th>{{translate('currency')}}
+      <td>
+        <span style="color:black;font-weight:bold">{{Global.General.Currency}}</span><br>
+        <?php write('#configuration_new_currency')?>:
+        <input
+          v-model="Global.General.Currency"
+          size=3 maxlength=3 placeholder="ccc"
+          @change="updateResult()"
+        >
+      </td>
+    </tr>
+    <tr>
+      <th>{{translate('getStarted_table_comments')}}
+      <td>
+        <textarea
+          v-model="Global.General.Comments"
+          :placeholder="translate('getStarted_max_200')"
+          rows=5 cols=50 maxlength=200
+          @change="updateResult()"
+        ></textarea>
+    </tr>
+  </table>
+
+  <!--PREV&NEXT-->
+  <div style=margin:1em>
+    <button class="button prev"
+      onclick="event.stopPropagation();window.location='index.php'">
+      {{translate('previous')}}
+    </button>
+    <button class="button next"
+      onclick="event.stopPropagation();window.location='configuration.php'">
+      {{translate('next')}}
+    </button>
+  </div>
 </div>
 
-<!--CURRENT JSON--><?php include'currentJSON.php'?>
+<!--css (ecam v3)-->
+<style>
+  #getStarted th{
+    text-align:left;
+    vertical-align:middle
+  }
+  #getStarted th,
+  #getStarted td{
+    padding:1em
+  }
+  #getStarted input,
+  #getStarted textarea{
+    padding:0.5em
+  }
+</style>
+
+<!--vue model (ecam v3)-->
+<script>
+  let getStarted = new Vue({
+    el:"#getStarted",
+    data:{
+      Global,
+    },
+    methods:{
+      translate,
+      updateResult,
+    },
+  });
+</script>

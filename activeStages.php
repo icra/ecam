@@ -44,7 +44,7 @@
     })
 
     //level2
-    let newRow=t.insertRow(-1);
+    newRow=t.insertRow(-1);
     Structure.filter(s=>s.sublevel).forEach(s=>{
       aass.printCell(s.alias,1,newRow);
     })

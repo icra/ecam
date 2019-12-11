@@ -4,8 +4,7 @@
 		- Protein consumption
 		- Bod per day (IPCC TABLE 6.4)
 */
-
-var Countries={
+let Countries={
 "Algeria":      {  conv_kwh_co2:0.664209260,  prot_con:31.390,  bod_pday:37, },
 "Angola":       {  conv_kwh_co2:0.037950113,  prot_con:15.695,  bod_pday:37, },
 "Argentina":    {  conv_kwh_co2:0.391932833,  prot_con:34.310,  bod_pday:40, },
@@ -97,7 +96,6 @@ var Countries={
 "Yemen":        {  conv_kwh_co2:0.644106104,  prot_con:19.710,  bod_pday:40, },
 "Zambia":       {  conv_kwh_co2:0.003197305,  prot_con:17.520,  bod_pday:37, },
 "Zimbabwe":     {  conv_kwh_co2:0.600377947,  prot_con:20.075,  bod_pday:37, },
-
 };
 
 /*

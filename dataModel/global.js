@@ -1,13 +1,13 @@
 /*
-  Main data structure
+  Global: main data structure object
 
-  This stores user inputs and has all equations. All inputs are saved to
+  It stores user inputs and has all equations. All inputs are saved to
   cookies as a compressed string (see "js/updateGlobalFromCookies.js")
 */
 
 let Global={
   General:{
-    version:               "2.2.0", //since: 2.2.0
+    version:               "3.0.0", //since: 2.2.0
     Name:                  "Untitled system",
     AssessmentPeriodStart: "2020-01-01",
     AssessmentPeriodEnd:   "2021-01-01",
@@ -25,8 +25,8 @@ let Global={
 
     //calculate days and years
     Days:function(){
-      let startDate=new Date(Global.General.AssessmentPeriodStart);
-      let finalDate=new Date(Global.General.AssessmentPeriodEnd);
+      let startDate=new Date(this.AssessmentPeriodStart);
+      let finalDate=new Date(this.AssessmentPeriodEnd);
       return (finalDate-startDate)/1000/60/60/24;
     },
     Years:function(){return this.Days()/365},
@@ -1160,9 +1160,9 @@ let Global={
   /*Configuration: custom user preferences*/
   Configuration:{
     ActiveStages:{
-      "water":0, "waterAbs":0, "waterTre":0, "waterDis":0,
-      "waste":0, "wasteCol":0, "wasteTre":0, "wasteDis":0,
-      "faecl":0, "faeclCon":0, "faeclTre":0, "faeclReu":0,
+      "water":false, "waterAbs":false, "waterTre":false, "waterDis":false,
+      "waste":false, "wasteCol":false, "wasteTre":false, "wasteDis":false,
+      "faecl":false, "faeclCon":false, "faeclTre":false, "faeclReu":false,
     },
 
     //highlight inputs/outputs
