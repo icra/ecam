@@ -2,11 +2,11 @@
 <?php include'imports.php'?>
 </head><body><center>
 <?php
- include'sidebar.php';
- include'navbar.php';
+  include'sidebar.php';
+  include'navbar.php';
+  include'currentJSON.php';
 ?>
 <h1>Abbreviations</h1>
-<div id=main>
 <table style=margin:auto>
   <tr><th>Abbreviation<th>Name
   <tr><td>WS	  <td>Water supply
@@ -21,4 +21,3 @@
   <tr><td>pop	  <td>population
   <tr><td>serv	<td>serviced
 </table>
-<!--CURRENT JSON--><?php include'currentJSON.php'?>

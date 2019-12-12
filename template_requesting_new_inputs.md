@@ -1,21 +1,23 @@
-## Template for requesting new inputs / filters / outputs
-New inputs and outputs can be inside new filters. If not, they will show up
+## Template for requesting new inputs / outputs and/or filters
+New inputs and outputs can be inside "filters". If not, they will show up
 always. This is a minimal example that shows all the information necessary to
 add a new filter, with 2 new inputs and 1 new output. If not specified, the
 long description of each item will be the same as the name.
 
-## 1. New filter (yes/no)
-Do you want to evaluate x?
+## Example
 
-### 1.1. New inputs
+### 1. New filter
+Do you want to evaluate x? (yes/no)
+
+#### 1.1. New inputs
 <table>
-  <TR><TH>CODE <TH>NAME            <TH>DEFAULT VALUE <TH>UNIT
-  <tr><td>i1   <td>energy consumed <td>0             <td>kWh
-  <tr><td>i2   <td>sludge produced <td>0             <td>kg
+  <TR><TH>CODE  <TH>NAME            <TH>DEFAULT VALUE <TH>UNIT
+  <tr><td>code1 <td>energy consumed <td>0             <td>kWh
+  <tr><td>code2 <td>sludge produced <td>0             <td>kg
 </table>
 
-### 1.2. New outputs
+#### 1.2. New outputs
 <table>
-  <TR><TH>CODE <TH>NAME              <TH>FORMULA <TH>UNIT
-  <tr><td>o1   <td>energy per sludge <td>i1/i2   <td>kWh/kg
+  <TR><TH>CODE  <TH>NAME              <TH>FORMULA      <TH>UNIT
+  <tr><td>code3 <td>energy per sludge <td>code1/code2  <td>kWh/kg
 </table>

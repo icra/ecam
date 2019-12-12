@@ -7,7 +7,7 @@
 
   <!--logo-->
   <div>
-    <a href=index.php class=flex>
+    <a href=index.php class=flex tabindex=-1>
       <div><b id=logo >ECAM</b></div>
       <div><?php write('#navbar_title')?></div>
     </a>

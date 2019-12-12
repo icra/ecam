@@ -18,6 +18,7 @@ function calculate_emissions_Water(wsa,wst,wsd){
 
   return rv;
 }
+
 function calculate_emissions_Waste(wwc,wwt,wwd){
   wwc=wwc||false;
   wwt=wwt||false;
@@ -39,6 +40,7 @@ function calculate_emissions_Waste(wwc,wwt,wwd){
 
   return rv;
 }
+
 function calculate_emissions_Faecl(fsc,fst,fsr){
   fsc=fsc||false;
   fst=fst||false;
@@ -58,6 +60,7 @@ function calculate_emissions_Faecl(fsc,fst,fsr){
 
   return rv;
 }
+
 function calculate_emissions(wsa,wst,wsd,wwc,wwt,wwd,fsc,fst,fsr){
   return calculate_emissions_Water(wsa,wst,wsd) +
     calculate_emissions_Waste(wwc,wwt,wwd)      +
@@ -155,7 +158,7 @@ function format(number,digits){
 }
 
 /** Colors for GHG emissions */
-var ColorsGHG = {
+let ColorsGHG = {
   ws_KPI_GHG_elec      :"#3366CC", //electricity
   ws_KPI_GHG_ne        :"#DC3912", //fuel
   ww_KPI_GHG_elec      :"#FF9900", //electricity
@@ -167,7 +170,7 @@ var ColorsGHG = {
   ww_KPI_GHG_ne_engines:"#B82E2E", //fuel
 }
 
-var Utils={};//namespace
+let Utils={};//namespace
 //return array of codes that use "code" in its formula
 Utils.usedInBenchmarks=function(code) {
   var benchmarks=[];

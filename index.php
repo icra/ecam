@@ -1,27 +1,19 @@
 <!doctype html><html><head>
   <?php include'imports.php'?>
-  <script>function init(){updateResult()}</script>
+  <script>
+    function init(){updateResult()}
+  </script>
 </head><body onload=init() style=background:#fff>
 
-<?php include'sidebar.php'?>
-<?php include'navbar.php'?>
-<?php include'currentJSON.php'?>
+<?php
+  include'sidebar.php';
+  include'navbar.php';
+  include'currentJSON.php';
+?>
 
 <!--main-->
 <div id=main>
   <div id=content>
-    <style>
-      #content *:not(button){margin:0;padding:0;padding-top:0.7em;padding-bottom:0.7em}
-      #content {
-        padding: 0 10em 0 10em;
-        text-align:left;
-      }
-      #content .width_50 .img_resp{
-        width: 100%;
-        padding-top: 9em;
-      }
-    </style>
-
     <!--new title-->
     <div class="width_50">
       <h1 class="blue_h1" style=padding-bottom:0px> <?php write("#a_toolkit_for_utilities")?>
@@ -74,6 +66,18 @@
     </div>
   </div>
 </div>
+
+<style>
+  #content *:not(button){margin:0;padding:0;padding-top:0.7em;padding-bottom:0.7em}
+  #content {
+    padding: 0 10em 0 10em;
+    text-align:left;
+  }
+  #content .width_50 .img_resp{
+    width: 100%;
+    padding-top: 9em;
+  }
+</style>
 
 <!--logos-->
 <?php include'footer.php'?>

@@ -1,5 +1,5 @@
 let Units={
-  /*Modify or add a unit change in Global.Configuration.Units*/
+  /*modify or add a unit change in Global.Configuration.Units*/
   selectUnit:function(field,newUnit){
     Global.Configuration.Units[field]=newUnit;
     //call init if it exists (common function everywhere)
@@ -19,7 +19,7 @@ let Units={
     return Units[Info[field].magnitude][currentUnit] || 1;
   },
 
-  /** CONVERSION BETWEEN MAGNITUDES */
+  /* CONVERSION BETWEEN MAGNITUDES */
   "Distance":{
     "cm":0.01,
     "m":1,
