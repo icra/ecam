@@ -6,7 +6,7 @@
   </div>
 
   <!--logo-->
-  <div>
+  <div id=logo_container>
     <a href=index.php class=flex tabindex=-1>
       <div><b id=logo >ECAM</b></div>
       <div><?php write('#navbar_title')?></div>
@@ -32,7 +32,7 @@
     box-shadow:0 1px 2px rgba(0,0,0,.5);
     background:#2b6488;
     display:grid;
-    grid-template-columns:5% 85% 5% 5%
+    grid-template-columns:35px 85% 5% 5%
   }
   #navbar > div{
     padding:13px 5px 5px 5px;/*values adjusted for the sidebar*/
@@ -45,8 +45,12 @@
     cursor:pointer;
     font-size:30px;
     line-height:28%;
+    text-align:left;
   }
   #navbar #burger:hover{color:#666}
+  #navbar #logo_container {
+    text-align:left;
+  }
   #navbar #logo {
     font-size:30px;
     line-height:9%;
