@@ -1,4 +1,4 @@
-<!--side bar top left-->
+<!--sidebar component-->
 
 <!--new open save clear functions-->
 <script>
@@ -60,10 +60,8 @@
   }
 </script>
 
-<!---------------------------------------------------------------------------------------->
-
 <!--vue template (ecam v3)-->
-<div id=sidebar-v3 v-if="visible">
+<div id=sidebar v-if="visible">
   <div class="header flex" style="padding:5px;justify-content:space-between">
     <div>{{translate("sidebar_mainMenu")}}</div>
     <div>{{Global.General.Name}}          </div>
@@ -160,7 +158,7 @@
 
 <!--css (ecam v3)-->
 <style>
-  #sidebar-v3 {
+  #sidebar{
     position:absolute;
     top:51px;
     left:0;
@@ -174,25 +172,25 @@
     border-top:1px solid #ccc;
     text-align:left;
   }
-  #sidebar-v3 ul{
+  #sidebar ul{
     list-style-type:none;
     padding:0;
     margin:0;
   }
-  #sidebar-v3 li.section {
+  #sidebar li.section{
     padding:0;
   }
-  #sidebar-v3 .header{
+  #sidebar .header{
     color:white;
     background:#2b6488;
     padding:0.35em;
   }
-  #sidebar-v3 li.item {
+  #sidebar li.item{
     padding:0.35em;
     padding-left:0.5em;
     border-bottom:1px solid #aaa;
   }
-  #sidebar-v3 li.item-l2 {
+  #sidebar li.item-l2{
     padding-left:1em;
   }
 </style>
@@ -200,7 +198,7 @@
 <!--vue model (ecam v3)-->
 <script>
   let sidebar=new Vue({
-    el:"#sidebar-v3",
+    el:"#sidebar",
     data:{
       Global,
       Structure,
@@ -218,9 +216,6 @@
 
   //escape key hides the sidebar
   document.documentElement.addEventListener('keydown',function(e){
-    if(e.which==27){
-      sidebar.visible=false;
-    }
+    if(e.which==27){ sidebar.visible=false; }
   });
-
 </script>
