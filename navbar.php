@@ -25,7 +25,7 @@
 </div>
 
 <style>
-  div#navbar {
+  #navbar {
     color:white;
     font-size:15px;
     padding:0.5em 0.5em 0.5em 0.5em;

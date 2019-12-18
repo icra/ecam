@@ -4,5 +4,5 @@ style="font-size:smaller;font-family:monospace;"
 title="'Alpha' means that the testing is done by the developers. 'Beta' means
 that the testing is done by people other than the developers."
 >
-v3.0
+v2.9
 </div>

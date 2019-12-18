@@ -3,22 +3,34 @@
 //default language
 let lang='en';
 
-//all language tags
-//TODO
-let Languages={
-  'en':{},
-  'es':{},
-  'de':{},
-  //ETC TODO
-}
+//languages list
+let langs=[
+  'en',
+  'es',
+  'fr',
+  'th',
+  'de',
+];
 
-//load files async
-//TODO
+//load all language files async
+let Languages={};
+langs.forEach(lang=>{
+  fetch(`languages/${lang}.json`).then(response=>
+    response.json()
+  ).then(jsonResponse => {
+    Languages[lang] = jsonResponse;
+  });
+});
 
+//translate a language tag
 function translate(id){
   if(lang=="null"){
     return `[#${id}]`;
   }else{
-    return Languages[lang][id] || `[#${id}]`;
+    if(Languages[lang]){
+      return Languages[lang][`#${id}`] || `[#${id}]`;
+    }else{
+      return `[#${id}]`;
+    }
   }
 }

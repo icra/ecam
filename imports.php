@@ -4,7 +4,7 @@
 <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ECAM v3</title>
+<title>ECAM v2</title>
 
 <!--libs-->
   <!--string compression lib -->

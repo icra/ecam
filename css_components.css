@@ -1,0 +1,192 @@
+/*ecam logo*/
+  #ecam-logo {
+    color:white;
+    font-size:15px;
+    padding:0.5em 0.5em 0.5em 0.5em;
+    box-shadow:0 1px 2px rgba(0,0,0,.5);
+    background:#2b6488;
+    display:grid;
+    grid-template-columns:35px 85% 5% 5%
+  }
+  #ecam-logo > div{
+    padding:13px 5px 5px 5px;/*values adjusted for the sidebar*/
+  }
+  #ecam-logo a{color:white;}
+  #ecam-logo a:hover{text-decoration:none}
+  #ecam-logo img{vertical-align:middle}
+  #ecam-logo #burger {
+    color:white;
+    cursor:pointer;
+    font-size:30px;
+    line-height:28%;
+    text-align:left;
+  }
+  #ecam-logo #burger:hover{color:#666}
+  #ecam-logo #logo_container {
+    text-align:left;
+  }
+  #ecam-logo #logo {
+    font-size:30px;
+    line-height:9%;
+    margin:5px 8px;
+  }
+  #ecam-logo #lang{
+    cursor:pointer;
+    margin-left:1em;
+  }
+  
+  #ecam-logo #lang > img {
+    display:block;
+  }
+
+  /**select element*/
+  #ecam-logo #lang #select{
+    position:absolute;
+    top:3%;
+    right:1%;
+    visibility:hidden;
+    border:1px solid #ccc;
+    width:200px;
+    background:#eeece4;
+    box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 5px 10px 15px 5px rgba(0,0,0,.1);
+    text-align:left;
+    z-index:999;
+    transition:all 0.4s;
+    font-size:12px;
+  }
+
+  /**show select element*/
+  #ecam-logo #lang:hover #select {
+    visibility:visible;
+    height:auto;
+    transition:all 0s;
+  }
+
+  /**languages*/
+  #ecam-logo #lang #select div[lang] {
+    color:black;
+    display:block;
+    padding:0.5em;
+  }
+
+  /**languages mouse over*/
+  #ecam-logo #lang #select div[lang]:hover {
+    background:orange;
+  }
+  #ecam-logo #lang #select div[lang] img {
+    width:20px;
+  }
+
+/*sidebar*/
+  #sidebar{
+    position:absolute;
+    top:51px;
+    left:0;
+    z-index:998;
+    background:white;
+    padding:0;
+    margin:0;
+    box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
+    overflow:auto;
+    border-right:2px solid #ccc;
+    border-top:1px solid #ccc;
+    text-align:left;
+  }
+  #sidebar ul{
+    list-style-type:none;
+    padding:0;
+    margin:0;
+  }
+  #sidebar li.section{
+    padding:0;
+  }
+  #sidebar .header{
+    color:white;
+    background:#2b6488;
+    padding:0.35em;
+  }
+  #sidebar li.item{
+    padding:0.35em;
+    padding-left:0.5em;
+    border-bottom:1px solid #aaa;
+  }
+  #sidebar li.item-l2{
+    padding-left:1em;
+  }
+
+/*linear menu*/
+  #linear-menu {
+    background:#f5f5f5;
+    background:linear-gradient(#f5f5f5,#ddd);
+    border-bottom:1px solid #e5e5e5;
+    padding:0.4em 0 0.2em 0;
+    box-shadow:0 1px 2px rgba(0,0,0,.5);
+    text-align:center;
+  }
+  #linear-menu > div {
+    margin:0 4px;
+    font-size:12px;
+    vertical-align:middle;
+    padding:0.2em;
+    border-radius:0.5em;
+    color:rgba(0,0,0,0.55);
+  }
+  #linear-menu > div:hover {
+    background:#e6e6e6;
+    color:black;
+  }
+  #linear-menu img[class=l1]:hover,
+  #linear-menu img[class=l2]:hover {
+    border:3px solid #9fc231;
+  }
+  #linear-menu img {position:relative;z-index:2;vertical-align:middle;padding:0;} /*icons inside buttons to navigate to Level2*/
+  #linear-menu img.l1 {width:42px;}
+  #linear-menu img.l2 {width:42px;}
+  #linear-menu img{border-radius:90%;border:3px solid transparent;}
+  #linear-menu img.selected{border:3px solid #9fc231;}
+  #linear-menu a:hover {text-decoration:none;}
+
+/*VIEWS (==pages)*
+
+/*index*/
+  #index #content *:not(button){margin:0;padding:0;padding-top:0.7em;padding-bottom:0.7em}
+  #index #content {
+    padding: 0 10em 0 10em;
+    text-align:left;
+  }
+  #index #content .width_50 .img_resp{
+    width: 100%;
+    padding-top: 9em;
+  }
+  #index #menu_buttons button {
+    display:block;
+    margin-left:0;
+    margin-top:0;
+    margin-bottom:0;
+  }
+  #index #footer{
+    text-align:left;
+    padding:0.5em 10em 0.5em 10em;
+    background:white;
+    line-height:2em;
+    color:white;
+    color:#333;
+    height:6em;
+    bottom:0;
+    margin-top:30px;
+  }
+  #index #footer img#logo-wacclim{
+    display:block;
+    margin:auto;
+    vertical-align:middle;
+    height:120px;
+  }
+
+/*configuration*/
+  #configuration #select_stages { box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05); }
+  #configuration #select_stages img{width:40px;vertical-align:middle}
+  #configuration #select_stages th{width:240px;}
+  #configuration #select_stages td{text-align:left;padding:0}
+  #configuration #select_stages label{cursor:pointer;display:block;height:100%;width:100%;padding:8px}
+  #configuration #select_stages input[type=checkbox]{vertical-align:middle;}
+  #configuration fieldset{margin:0 0 1.4em 0;padding:0.9em;border:1px solid #aaa}
