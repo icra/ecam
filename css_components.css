@@ -122,6 +122,7 @@
     padding:0.4em 0 0.2em 0;
     box-shadow:0 1px 2px rgba(0,0,0,.5);
     text-align:center;
+    justify-content:center;
   }
   #linear-menu > div {
     margin:0 4px;
@@ -182,6 +183,22 @@
     height:120px;
   }
 
+/*get started*/
+  #get-started {
+  }
+  #get-started th{
+    text-align:left;
+    vertical-align:middle
+  }
+  #get-started th,
+  #get-started td{
+    padding:1em
+  }
+  #get-started input,
+  #get-started textarea{
+    padding:0.5em
+  }
+
 /*configuration*/
   #configuration #select_stages { box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05); }
   #configuration #select_stages img{width:40px;vertical-align:middle}
@@ -190,3 +207,31 @@
   #configuration #select_stages label{cursor:pointer;display:block;height:100%;width:100%;padding:8px}
   #configuration #select_stages input[type=checkbox]{vertical-align:middle;}
   #configuration fieldset{margin:0 0 1.4em 0;padding:0.9em;border:1px solid #aaa}
+
+/*population*/
+  #population td[inactive]{
+    color:#999;
+    background:#eee;
+    font-size:smaller;
+  }
+
+  #population td.input_container {
+    width:70px;
+    border:1px solid #aaa;
+    color:#666;
+    background:#eee;
+    padding:0 !important;
+    text-align:right;
+    cursor:cell;
+  }
+  #population td.input_container input {
+    background:inherit;
+    border:none;
+    text-align:right;
+    line-height:1em;
+    width:70px;
+    height:24px;
+  }
+  #population td.input_container input:focus {
+    background:white;
+  }

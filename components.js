@@ -3,8 +3,7 @@ let ecam_logo = new Vue({
   el:'#ecam-logo',
   data:{
     version:"v3.0",
-    langs,
-    lang,
+    Languages,
   },
   methods:{
     translate,
@@ -28,7 +27,7 @@ let linear_menu = new Vue({
   data:{
     Global,
     Structure,
-    visible:false,
+    visible:true,
   },
   methods:{
     translate,
@@ -44,7 +43,18 @@ let linear_menu = new Vue({
 let index = new Vue({
   el:'#index',
   data:{
-    visible:true,
+    visible:false,
+    Global,
+  },
+  methods:{
+    translate,
+  },
+});
+
+let get_started = new Vue({
+  el:"#get-started",
+  data:{
+    visible:false,
     Global,
   },
   methods:{
@@ -64,9 +74,7 @@ let configuration = new Vue({
   },
   methods:{
     translate,
-    updateResult(){
-      return "to be implemented";
-    },
+    updateResult,
 
     //deactivate level2 when level1 is deactivated
     check_l2_from_l1(){
@@ -194,3 +202,72 @@ let configuration = new Vue({
     },
   },
 });
+
+let population=new Vue({
+  el:'#population',
+  data:{
+    visible:false,
+    Global,
+    Structure,
+    Population:[
+      {level:'Water', stage:Global.Water,            code:'ws_resi_pop'},
+      {level:'Water', stage:Global.Water,            code:'ws_serv_pop'},
+      {level:'Waste', stage:Global.Waste,            code:'ww_resi_pop'},
+      {level:'Waste', stage:Global.Waste.Collection, code:'wwc_conn_pop'},
+      {level:'Waste', stage:Global.Waste.Treatment,  code:'wwt_serv_pop'},
+      {level:'Faecl', stage:Global.Faecl,            code:'fs_resi_pop'},
+      {level:'Faecl', stage:Global.Faecl,            code:'fs_onsi_pop'},
+    ],
+  },
+  methods:{
+    translate,
+    format,
+    focus_input(pop, event){
+      let input = event.target;
+      input.value = pop.stage[pop.code]
+      input.select();
+    },
+    blur_input(pop, event){
+      let input = event.target;
+      let value = parseFloat(input.value) || 0;
+      pop.stage[pop.code] = value;
+      input.value=format(pop.stage[pop.code]);
+      updateResult();
+    },
+  }
+});
+
+//--view controller
+let ecam={
+  views:{
+    index,
+    get_started,
+    configuration,
+    population,
+
+    //hide all views
+    hide_all(){
+      Object.entries(this).forEach(([key,view])=>{
+        if(typeof(view)=='object'){
+          if(view.constructor===Vue){
+            if(view.visible){
+              view.visible=false;
+            }
+          }
+        }
+      });
+    },
+
+    //show a view
+    show(view){
+      //TODO: activar linear_menu.visible=true el primer cop que entris a tier B
+
+      if(!this[view]){
+        console.error(`view '${view}' not found`);
+        return;
+      }
+      this.hide_all();
+      this[view].visible=true;
+    },
+  },
+};

@@ -1,11 +1,13 @@
 <!doctype html><html><head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="css.css">
-  <link rel="stylesheet" href="css_components.css">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ECAM v3</title>
+
+  <!--load css-->
+  <link rel="stylesheet" href="css.css">
+  <link rel="stylesheet" href="css_components.css">
 
   <!--libs-->
     <!--string compression lib -->
@@ -47,11 +49,16 @@
     <script src="dataModel/sumable_magnitudes.js"></script>
     <script src="dataModel/recommendations.js"></script>
 
+    <!--cookies-->
+    <script src="js/cookies.js"></script>
+    <script src="js/updateGlobalFromCookies.js"></script>
+
     <script src="utils.js"></script>
     <!--graphs--><script src="graphs.js"></script>
     <!--unfccc--><script src="dataModel/unfccc.js"></script>
 
-    <!--vue components-->
+    <!--new open save clear functions-->
+    <script src=main_menu.js></script>
   <!--/backend-->
 </head><body>
 
@@ -64,7 +71,9 @@
 
   <!--logo-->
   <div id=logo_container>
-    <a href=# class=flex tabindex=-1>
+    <a onclick="ecam.views.show('index')" class=flex tabindex=-1
+      style='outline:none'
+    >
       <div><b id=logo>ECAM</b></div>
       <div>{{translate('navbar_title')}}</div>
     </a>
@@ -72,35 +81,47 @@
 
   <!--version-->
   <div style="font-family:monospace">
-    {{version}}
+    <a href="//github.com/icra/ecam" target=_blank>
+      {{version}}
+    </a>
   </div>
 
   <!--language-->
   <div>
     <div id=lang>
       <!--current language-->
-      <img id=currentLang :src=`img/flags/${lang}.png`>
+      <img :src=`img/flags/${Languages.current}.png`>
 
       <!--all languages-->
       <div id=select> 
-        <div v-for="lang in langs" :lang="lang">
+        <div
+          v-for="lang in Languages.list"
+          :lang="lang"
+          @click="Languages.current=lang"
+        >
           <img :src=`img/flags/${lang}.png`>
           {{lang}}
         </div>
 
-        <!--arabic under development-->
-        <div lang=ar><img src="img/flags/ar.png"> ar</div>
+        <!--arabic
+        <div lang=ar onclick="alert('')">
+          <img src="img/flags/ar.png">
+          ar
+        </div>
+        -->
 
         <!--null (only language tags)-->
-        <div lang=null> <img src="img/flags/null.png"> null (only tags)	</div>
+        <div lang=null @click="Languages.current='null'">
+          <img src="img/flags/null.png">
+          null (tags only)
+        </div>
 
-        <!--go to problems summary-->
-        <div :lang="lang">
+        <!--language problem finder-->
+        <div :lang="Languages.current">
           <a href=translation_problems.php style=color:blue>
             language debugging tool
           </a>
         </div>
-
       </div> 
     </div>
   </div>
@@ -115,16 +136,16 @@
 
   <!--new open save clear-->
   <div class=tab_buttons>
-    <button class=left onclick="newSystem()">
+    <button class=left onclick="">
       {{translate('new')}}
     </button>
-    <button class=middle onclick="document.getElementById('loadfile').click()">
+    <button class=middle onclick="">
       {{translate('open')}}
     </button>
-    <button class=middle onclick="saveToFile()">
+    <button class=middle onclick="">
       {{translate('save')}}
     </button>
-    <button class=right onclick="clearSystem()">
+    <button class=right onclick="">
       {{translate('clear')}}
     </button>
     <input type="file" id="loadfile" accept=".json"
@@ -133,14 +154,14 @@
 
   <!--sections-->
   <ul>
-    <!--tier A-->
+    <!--from start to tier A-->
     <li class=section>
       <div class=header>{{translate('main')}}</div>
       <ul>
-        <li class=item><a href=getStarted.php>   {{translate('getStarted_general_info')}}</a>
-        <li class=item><a href=configuration.php>{{translate('configuration')          }}</a>
-        <li class=item><a href=inhabitants.php>  {{translate('population')             }}</a>
-        <li class=item><a href=birds.php>        {{translate('quick_assessment')       }}</a>
+        <li class=item><a onclick="event.stopPropagation();ecam.views.show('get_started')">{{translate('getStarted_general_info')}}</a>
+        <li class=item><a onclick="event.stopPropagation();ecam.views.show('configuration')">{{translate('configuration')          }}</a>
+        <li class=item><a onclick="event.stopPropagation();ecam.views.show('population')">{{translate('population')             }}</a>
+        <li class=item><a onclick="event.stopPropagation();ecam.views.show('tier_a')">{{translate('quick_assessment')       }}</a>
       </ul>
     </li>
 
@@ -152,7 +173,7 @@
           class=item
           v-for="l1 in Structure.filter(s=>!s.sublevel).filter(s=>Global.Configuration.ActiveStages[s.alias])"
         >
-          <a :href=`edit.php?level=${l1.level}` :style=`color:${l1.color}`>
+          <a onclick :style=`color:${l1.color}`>
             {{translate(l1.level)}}
           </a>
 
@@ -163,7 +184,7 @@
                             .filter(s=>(s.sublevel && s.level==l1.level))
                             .filter(s=>Global.Configuration.ActiveStages[s.alias])"
             >
-              <a :href=`edit.php?level=${l2.level}&sublevel=${l2.sublevel}`
+              <a onclick
                 :style=`color:${l1.color}`
               >
                 {{translate(l2.sublevel)}}
@@ -178,16 +199,16 @@
     <li class=section>
       <div class=header>{{translate('summaries')}}</div>
       <ul>
-        <li class=item><a href=sources.php>            {{translate('ghg_summary')      }}</a>
-        <li class=item><a href=energy_summary.php>     {{translate('nrg_summary')      }}</a>
-        <li class=item><a href=edit.php?level=UNFCCC>  {{translate('unfccc_categories')}}</a>
-        <li class=item><a href=substages.php>          {{translate('all_substages')    }}</a>
-        <li class=item><a href=summary.php?type=input> {{translate('all_inputs')       }}</a>
-        <li class=item><a href=summary.php?type=output>{{translate('all_outputs')      }}</a>
-        <li class=item><a href=summary.php?type=ccvv>  {{translate('all_ccvv')         }}</a>
-        <li class=item><a href=questions.php>          {{translate('All questions')    }}</a>
-        <li class=item><a href=constants.php>          {{translate('all_constants')    }}</a>
-        <li class=item><a href=benchmark.php>          {{translate('all_benchmarks')   }}</a>
+        <li class=item><a onclick="ecam.views.show('sources')">        {{translate('ghg_summary')      }}</a>
+        <li class=item><a onclick="ecam.views.show('energy_summary')"> {{translate('nrg_summary')      }}</a>
+        <li class=item><a onclick="ecam.views.show('unfcc')">          {{translate('unfccc_categories')}}</a>
+        <li class=item><a onclick="ecam.views.show('substages')">      {{translate('all_substages')    }}</a>
+        <li class=item><a onclick="ecam.views.show('summary')">        {{translate('all_inputs')       }}</a>
+        <li class=item><a onclick="ecam.views.show('summary')">        {{translate('all_outputs')      }}</a>
+        <li class=item><a onclick="ecam.views.show('summary')">        {{translate('all_ccvv')         }}</a>
+        <li class=item><a onclick="ecam.views.show('questions')">      {{translate('All questions')    }}</a>
+        <li class=item><a onclick="ecam.views.show('constants')">      {{translate('all_constants')    }}</a>
+        <li class=item><a onclick="ecam.views.show('benchmark')">      {{translate('all_benchmarks')   }}</a>
       </ul>
     </li>
 
@@ -195,10 +216,10 @@
     <li class=section>
       <div class=header>{{translate('other')}}</div>
       <ul>
-        <li class=item><a href=opps.php>  {{translate("opportunities") }}</a>
-        <li class=item><a href=export.php>{{translate('sidebar_export')}}</a>
-        <li class=item><a href=sankey.php>{{translate('Sankey diagram')}}</a>
-        <li class=item><a href=development.php>{{translate('dev')}}</a>
+        <li class=item><a onclick="ecam.views.show('opps')">       {{translate("opportunities") }}</a>
+        <li class=item><a onclick="ecam.views.show('export')">     {{translate('sidebar_export')}}</a>
+        <li class=item><a onclick="ecam.views.show('sankey')">     {{translate('Sankey diagram')}}</a>
+        <li class=item><a onclick="ecam.views.show('development')">{{translate('dev')}}           </a>
       </ul>
     </li>
   </ul>
@@ -209,10 +230,10 @@
   </div>
 </div>
 
-<!--linear menu-->
+<!--linear top menu-->
 <div id=linear-menu v-if="visible" class=flex>
   <!--general info-->
-  <div>
+  <div onclick="ecam.views.show('get_started')">
     <div>
       <a style="color:inherit">
         {{translate('getStarted_general_info')}}
@@ -222,7 +243,7 @@
   </div>
 
   <!--configuration-->
-  <div>
+  <div onclick="ecam.views.show('configuration')">
     <div>
       <a style="color:inherit">
         {{translate('configuration')}}
@@ -232,7 +253,7 @@
   </div>
 
   <!--population-->
-  <div>
+  <div onclick="ecam.views.show('population')">
     <div>
       <a style="color:inherit">
         {{translate('population')}}
@@ -367,7 +388,7 @@
           <!--next-->
           <div>
             <button class="button next"
-              onclick="event.stopPropagation();window.location='getStarted.php'"
+              onclick="event.stopPropagation();ecam.views.show('get_started')"
             >
               {{translate('next')}}
             </button>
@@ -409,31 +430,98 @@
   </div>
 
   <!--logos-->
-  <footer id=footer>
-    <img
-      id=logo-wacclim
-      src="img/logo-wacclim_big.png"
-    >
-  </footer>
-  <div style="background:white;text-align:left;padding:0em 10em;margin-top:50px;">
-    <img src="img/logos.png">
-    <br><img src="img/logo-kwb.png">
+  <div>
+    <footer id=footer>
+      <img
+        id=logo-wacclim
+        src="img/logo-wacclim_big.png"
+      >
+    </footer>
+    <div style="background:white;text-align:left;padding:0em 10em;margin-top:50px;">
+      <img src="img/logos.png">
+      <br><img src="img/logo-kwb.png">
+    </div>
   </div>
 </div>
 
 <!--get started-->
-<div id=get-started v-if="visible"></div>
+<div id=get-started v-if="visible">
+  <h1 style=text-align:center>{{translate('getStarted_subtitle')}}</h1>
+  <table style=margin:auto>
+    <tr>
+      <th>{{translate('getStarted_table_name')}}
+      <td><input
+        id=Name
+        v-model="Global.General.Name"
+        @change="updateResult()"
+      >
+    </tr>
+    <tr>
+      <th>{{translate('getStarted_table_start')}}
+      <td><input type=date
+        v-model="Global.General.AssessmentPeriodStart"
+        @change="updateResult()"
+      >
+    </tr>
+    <tr>
+      <th>{{translate('getStarted_table_end')}}
+      <td><input type=date
+        v-model="Global.General.AssessmentPeriodEnd"
+        @change="updateResult()"
+      >
+    </tr>
+    <tr>
+      <th>{{translate('getStarted_table_period')}}
+      <td>{{Global.General.Days()}} {{translate('days')}}
+    </tr>
+    <tr>
+      <th>{{translate('currency')}}
+      <td>
+        <div style="color:black;font-weight:bold">
+          {{Global.General.Currency}}
+        </div>
+        {{translate('configuration_new_currency')}}:
+        <input
+          v-model="Global.General.Currency"
+          size=3 maxlength=3 placeholder="ccc"
+          @change="updateResult()"
+        >
+      </td>
+    </tr>
+    <tr>
+      <th>{{translate('getStarted_table_comments')}}
+      <td>
+        <textarea
+          v-model="Global.General.Comments"
+          :placeholder="translate('getStarted_max_200')"
+          rows=5 cols=50 maxlength=200
+          @change="updateResult()"
+        ></textarea>
+    </tr>
+  </table>
 
-<!--population-->
-<div id=population v-if="visible"></div>
+  <!--PREV&NEXT-->
+  <div class=flex style="justify-content:center;margin-top:1em">
+    <button class="button prev"
+      onclick="event.stopPropagation();ecam.views.show('index')">
+      {{translate('previous')}}
+    </button>
+    <button class="button next"
+      onclick="event.stopPropagation();ecam.views.show('configuration')">
+      {{translate('next')}}
+    </button>
+  </div>
+</div>
 
 <!--configuration-->
 <div id=configuration v-if="visible">
-  <h1>{{ translate('configuration') }}</h1>
+  <h1 style=text-align:center>
+    {{translate('configuration')}}
+  </h1>
   <div class=flex style=justify-content:center>
     <!--configuration left-->
     <div style="max-width:50%">
-      <h4 style=margin:0;margin-bottom:1em>
+      <h4 style="margin:0;margin-bottom:1em;text-align:center">
         {{translate('configuration_subtitle')}}
       </h4>
       <table id=select_stages>
@@ -473,10 +561,13 @@
           </tr>
         </tbody>
       </table>
-      <button class=button
-        @click="activate_all_stages()">
-          {{translate('configuration_activate_all')}}
-      </button>
+      <div style=text-align:center>
+        <button
+          class=button
+          @click="activate_all_stages()"
+        >{{translate('configuration_activate_all')}}
+        </button>
+      </div>
     </div>
 
     <!--configuration right-->
@@ -597,22 +688,85 @@
   </div>
 
   <!--prev & next buttons-->
-  <div style="margin:1em">
+  <div class=flex style="margin:1em;justify-content:center">
     <button class="button prev"
-      onclick="event.stopPropagation();window.location='getStarted.php'">
+      onclick="event.stopPropagation();ecam.views.show('get_started')">
       {{translate('previous')}}
     </button>
     <button class="button next"
-      onclick="event.stopPropagation();window.location='inhabitants.php'">
+      onclick="event.stopPropagation();ecam.views.show('population')">
       {{translate('next')}}
     </button>
   </div>
 </div>
 
-<!--tier a--> TODO
-<!--tier b--> TODO
-<!--summary ghg--> TODO
-<!--summary nrg--> TODO
-<!--opps--> TODO
+<!--population-->
+<div id=population v-if="visible">
+  <h1 style="text-align:center">{{translate('population')}}</h1>
 
+  <h4 style="text-align:center;margin:0;margin-bottom:1em">
+    {{translate("Enter the population living at each level of your system")}}
+  </h4>
+
+  <table style="font-size:16px;margin:auto;width:50%">
+    <tbody v-for="l1 in Structure.filter(s=>s.sublevel==false)">
+      <tr>
+        <th colspan=3 :style=`background:${l1.color};text-align:left`>
+        <img :src="`img/${l1.alias}.png`" width=25 style="line-height:4em;vertical-align:middle">
+        {{translate(l1.level)}}
+      </tr>
+      <tr v-if="!Global.Configuration.ActiveStages[l1.alias]">
+        <td colspan=3 inactive>{{translate('birds_stage_not_active')}}
+      </tr>
+      <tr v-else v-for="pop in Population.filter(p=>p.level==l1.level)">
+        <td :caption="translate(pop.code+'_expla')">
+          {{translate(pop.code+'_descr')}}
+        </td>
+        <td class=input_container>
+          <input
+            :value="format(pop.stage[pop.code])"
+            @focus="focus_input(pop, $event)"
+            @blur="blur_input(pop, $event)"
+            :tabindex="Population.indexOf(pop)+1"
+            style="text-align:right"
+          >
+        </td>
+        <td><small>{{translate('people')}}</small></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!--prev next buttons-->
+  <div class=flex style="justify-content:center;margin-top:1em">
+    <button class="button prev"
+      onclick="event.stopPropagation();ecam.views.show('configuration')">
+      {{translate('previous')}}
+    </button>
+    <button class="button next"
+      onclick="event.stopPropagation();ecam.views.show('tier_a')">
+      {{translate('next')}}
+    </button>
+  </div>
+</div>
+
+<!--tier a TODO-->
+<!--tier b TODO-->
+<!--summary ghg TODO-->
+<!--summary nrg TODO-->
+<!--opps TODO-->
+
+<!--load vue components-->
 <script src="components.js"></script>
+
+<!--sidebar click listeners-->
+<script>
+  //click anywhere hides the sidebar
+  document.documentElement.addEventListener('click',function(){
+    sidebar.visible=false;
+  });
+
+  //escape key hides the sidebar
+  document.documentElement.addEventListener('keydown',function(e){
+    if(e.which==27){ sidebar.visible=false; }
+  });
+</script>

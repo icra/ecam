@@ -1,8 +1,7 @@
 /*
-  * Update Global and Substages objects without overwriting functions, since
-  * JSON.stringify does not stringify functions
-*/
-
+ * Update Global and Substages objects without overwriting functions, since
+ * JSON.stringify does not stringify functions
+ */
 let old_codes_conversion={
   //<old-code>:function(value){<new-location>                       = value;}  //from <old-version-number>
   ww_conn_pop :function(value){Global.Waste.Collection.wwc_conn_pop = value;}, //from v2.0
@@ -80,15 +79,13 @@ function copyFieldsFrom(object_from,object_to){
   });
 }
 
-/**
-  * OVERWRITE "Global" AND "Substages" objects with the parsed cookie content
-  */
+/*
+ * OVERWRITE "Global" AND "Substages" objects with the parsed cookie content
+ */
 if(getCookie("Global")!==null){
-  /**
-  *
-  * Decompress cookie "Global"
-  *
-  */
+  /*
+   * uncompress cookie "Global"
+   */
 
   //compressed is a string with weird symbols
   //decompressed is a string with the JSON structure of Global
@@ -99,29 +96,6 @@ if(getCookie("Global")!==null){
     let decompressed = LZString.decompressFromEncodedURIComponent(compressed);
     let parsed       = JSON.parse(decompressed);
     copyFieldsFrom(parsed, Global);
-  }
-
-  //memory improvement: revert to the non compacted original structure
-  function unpack_Substages(Compacted){
-    let Unpacked={};
-    Object.keys(Compacted).forEach(l1=>{
-      Unpacked[l1]={};
-      Object.keys(Compacted[l1]).forEach(l2=>{
-        let substage_from = Compacted[l1][l2][0]; //object
-        Unpacked[l1][l2]=[];                      //new array
-        if(!substage_from)return;
-        let n=substage_from.name.length; //number of substages to create
-        //console.log(l1,l2,n);
-        for(let i=0;i<n;i++){
-          let new_substage={};//new empty object
-          Object.keys(substage_from).forEach(key=>{
-            new_substage[key]=substage_from[key][i];
-          });
-          Unpacked[l1][l2].push(new_substage);
-        }
-      });
-    });
-    return Unpacked;
   }
 
   //decompress and parse Substages in one step
