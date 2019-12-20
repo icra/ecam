@@ -1,10 +1,10 @@
 <!--file to import everywhere-->
 <div id=caption style=display:none>#caption</div>
 <script>
-  var Caption={};//namespace
+  let Caption={};//namespace
 
   Caption.show=function(e,element){
-    var caption=document.querySelector("#caption");
+    let caption=document.querySelector("#caption");
     caption.style.display='';
     caption.style.left=(e.clientX-10)+"px";
     caption.style.top=(e.clientY+15)+"px";
@@ -17,8 +17,8 @@
 
   //add mouse listeners, to be called when html loads (<body onload>)
   Caption.listeners=function() {
-    var els=document.querySelectorAll("[caption]");
-    for(var i=0;i<els.length;i++){
+    let els=document.querySelectorAll("[caption]");
+    for(let i=0;i<els.length;i++){
       els[i].addEventListener('mousemove',function(e){Caption.show(e,this)});
       els[i].addEventListener('mouseout',function(){Caption.hide()});
     }

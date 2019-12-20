@@ -1,9 +1,12 @@
 <!doctype html><html><head>
 <?php include'imports.php'?>
 </head><body><center>
+<!--CURRENT JSON--><?php include'currentJSON.php'?>
 <!--sidebar--><?php include'sidebar.php'?>
 <!--NAVBAR--><?php include'navbar.php'?>
+
 <!--TITLE--><h1><?php write('#about')?></h1>
+
 <div id=main>
 
 <!--paragraph-->
@@ -77,4 +80,3 @@
   <br><img src=img/logo-kwb.png>
 </div>
 
-<!--CURRENT JSON--><?php include'currentJSON.php'?>

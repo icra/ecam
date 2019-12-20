@@ -140,14 +140,36 @@
   #linear-menu img[class=l2]:hover {
     border:3px solid #9fc231;
   }
-  #linear-menu img {position:relative;z-index:2;vertical-align:middle;padding:0;} /*icons inside buttons to navigate to Level2*/
+  #linear-menu img {
+    cursor:pointer;
+    position:relative;
+    z-index:2;
+    vertical-align:
+    middle;
+    padding:0;
+  } /*icons inside buttons to navigate to Level2*/
   #linear-menu img.l1 {width:42px;}
   #linear-menu img.l2 {width:42px;}
   #linear-menu img{border-radius:90%;border:3px solid transparent;}
   #linear-menu img.selected{border:3px solid #9fc231;}
   #linear-menu a:hover {text-decoration:none;}
 
-/*VIEWS (==pages)*
+/*caption*/
+  #caption {
+    position:fixed;
+    z-index:999;
+    background:white;
+    padding:0.3em 0.5em;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
+    border:1px solid #ccc;
+    color:#666;
+    text-align:left;
+    max-width:400px;
+  }
+
+/*---------------------------------------------------------------------------*/
+/* VIEWS (==pages)                                                           */
+/*---------------------------------------------------------------------------*/
 
 /*index*/
   #index #content *:not(button){margin:0;padding:0;padding-top:0.7em;padding-bottom:0.7em}
@@ -183,19 +205,24 @@
     height:120px;
   }
 
-/*get started*/
-  #get-started {
+/*help*/
+  #help {
+    text-align:center;
   }
-  #get-started th{
+
+/*get started*/
+  #get_started {
+  }
+  #get_started th{
     text-align:left;
     vertical-align:middle
   }
-  #get-started th,
-  #get-started td{
+  #get_started th,
+  #get_started td{
     padding:1em
   }
-  #get-started input,
-  #get-started textarea{
+  #get_started input,
+  #get_started textarea{
     padding:0.5em
   }
 
@@ -207,6 +234,37 @@
   #configuration #select_stages label{cursor:pointer;display:block;height:100%;width:100%;padding:8px}
   #configuration #select_stages input[type=checkbox]{vertical-align:middle;}
   #configuration fieldset{margin:0 0 1.4em 0;padding:0.9em;border:1px solid #aaa}
+
+/*countries*/
+  #countries a {
+    color:white;
+  }
+  #countries tr.selected {
+    background:yellow;
+  }
+  #countries td.number {
+    text-align:right;
+  }
+  #countries #references {
+    margin-top:10px;
+    margin-bottom:50px;
+  }
+  #countries #references td {
+    border:none;
+    padding:2px;
+    font-size:11px;
+  }
+  #countries #references a {
+    color:blue;
+  }
+
+/*gwp table*/
+  #gwp_table td.number{
+    text-align:right;
+  }
+  #gwp_table tr.selected {
+    background:yellow;
+  }
 
 /*population*/
   #population td[inactive]{

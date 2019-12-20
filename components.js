@@ -1,4 +1,7 @@
-//--components--------------------------------
+// vim: set foldlevel=0 nomodeline:
+//-----------------------------------------------------------------------------
+// COMPONENTS (elements present everywhere)
+//-----------------------------------------------------------------------------
 let ecam_logo = new Vue({
   el:'#ecam-logo',
   data:{
@@ -13,9 +16,9 @@ let ecam_logo = new Vue({
 let sidebar = new Vue({
   el:"#sidebar",
   data:{
+    visible:false,
     Global,
     Structure,
-    visible:false,
   },
   methods:{
     translate,
@@ -25,21 +28,54 @@ let sidebar = new Vue({
 let linear_menu = new Vue({
   el:'#linear-menu',
   data:{
+    visible:false,
     Global,
     Structure,
-    visible:true,
   },
   methods:{
     translate,
-    go_to_edit(l2){
-      if(Global.Configuration.ActiveStages[l2.alias]){
-        window.location=`edit.php?level=${l2.level}&sublevel=${l2.sublevel}`;
-      }
+    go_to(level, sublevel){
+      tier_b.level    = level;
+      tier_b.sublevel = sublevel||false;
+      tier_b.current_stage = sublevel ? Global[level][sublevel] : Global[level];
+      ecam.views.show('tier_b');
     }
   },
 });
 
-//--views---------------------------------
+let caption = new Vue({
+  el:"#caption",
+  data:{
+    visible:false,
+    text:"caption text",
+  },
+  methods:{
+    show(ev, element){
+      this.visible=true;
+      this.text=element.getAttribute('caption');
+      let el=document.querySelector("#caption");
+      el.style.left=(ev.clientX-10)+"px";
+      el.style.top=(ev.clientY+15)+"px";
+    },
+
+    hide(){
+      this.visible=false;
+    },
+
+    //mouse listeners
+    listeners() {
+      //get all elements with 'caption' attribute
+      document.querySelectorAll("[caption]").forEach(el=>{
+        el.addEventListener('mousemove',function(e){caption.show(e,this)});
+        el.addEventListener('mouseout',function(){caption.hide()});
+      });
+    },
+  },
+});
+
+//-----------------------------------------------------------------------------
+// VIEWS (= pages)
+//-----------------------------------------------------------------------------
 let index = new Vue({
   el:'#index',
   data:{
@@ -51,8 +87,28 @@ let index = new Vue({
   },
 });
 
+let about = new Vue({
+  el:"#about",
+  data:{
+    visible:false,
+  },
+  methods:{
+    translate
+  },
+});
+
+let help = new Vue({
+  el:"#help",
+  data:{
+    visible:false,
+  },
+  methods:{
+    translate
+  },
+});
+
 let get_started = new Vue({
-  el:"#get-started",
+  el:"#get_started",
   data:{
     visible:false,
     Global,
@@ -203,7 +259,31 @@ let configuration = new Vue({
   },
 });
 
-let population=new Vue({
+let countries = new Vue({
+  el:"#countries",
+  data:{
+    visible:false,
+    Global,
+    Countries,
+  },
+  methods:{
+    translate,
+  },
+});
+
+let gwp_table = new Vue({
+  el:"#gwp_table",
+  data:{
+    visible:false,
+    Global,
+    GWP_reports,
+  },
+  methods:{
+    translate,
+  }
+});
+
+let population = new Vue({
   el:'#population',
   data:{
     visible:false,
@@ -237,13 +317,43 @@ let population=new Vue({
   }
 });
 
-//--view controller
+//tier a TODO
+
+let tier_b = new Vue({
+  el:"#tier_b",
+  data:{
+    visible:true,
+    level:'Water',
+    sublevel:'Abstraction',
+    current_stage:false,
+
+    Global,
+    Structure,
+  },
+  methods:{
+    translate,
+    format,
+  },
+});
+
+//summary ghg TODO
+//summary nrg TODO
+//opps TODO
+
+//-----------------------------------------------------------------------------
+// ALL VIEWS CONTROLLER
+//-----------------------------------------------------------------------------
 let ecam={
   views:{
     index,
+    about,
+    help,
     get_started,
     configuration,
+    countries,
+    gwp_table,
     population,
+    tier_b,
 
     //hide all views
     hide_all(){
@@ -268,6 +378,8 @@ let ecam={
       }
       this.hide_all();
       this[view].visible=true;
+      window.scrollTo(0,0);
+      setTimeout(caption.listeners,1000); //TODO make it async
     },
   },
 };

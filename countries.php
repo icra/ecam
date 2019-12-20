@@ -69,16 +69,16 @@
   #countries td.number {
     text-align:right;
   }
-  #references {
+  #countries #references {
     margin-top:10px;
     margin-bottom:50px;
   }
-  #references td {
+  #countries #references td {
     border:none;
     padding:2px;
     font-size:11px;
   }
-  #references a {
+  #countries #references a {
     color:blue;
   }
 </style>
