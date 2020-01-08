@@ -28,7 +28,7 @@ let sidebar = new Vue({
 let linear_menu = new Vue({
   el:'#linear-menu',
   data:{
-    visible:false,
+    visible:true,
     Global,
     Structure,
   },
@@ -318,6 +318,19 @@ let population = new Vue({
 });
 
 //tier a TODO
+let tier_a = new Vue({
+  el:"#tier_a",
+  data:{
+    visible:false,
+    Global,
+    Info,
+    Structure,
+  },
+  methods:{
+    translate,
+    format,
+  },
+});
 
 let tier_b = new Vue({
   el:"#tier_b",
@@ -328,11 +341,25 @@ let tier_b = new Vue({
     current_stage:false,
 
     Global,
+    Info,
     Structure,
+    Tips,
   },
   methods:{
     translate,
     format,
+    focus_input(stage, key, event){
+      let input = event.target;
+      input.value = stage[key];
+      input.select();
+    },
+    blur_input(stage, key, event){
+      let input = event.target;
+      let value = parseFloat(input.value) || 0;
+      stage[key] = value;
+      input.value=format(stage[key]);
+      updateResult();
+    },
   },
 });
 
@@ -346,14 +373,16 @@ let tier_b = new Vue({
 let ecam={
   views:{
     index,
-    about,
-    help,
     get_started,
     configuration,
     countries,
-    gwp_table,
     population,
+    tier_a,
     tier_b,
+
+    gwp_table,
+    about,
+    help,
 
     //hide all views
     hide_all(){

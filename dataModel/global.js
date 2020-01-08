@@ -306,6 +306,7 @@ let Global={
     "ww_resi_pop":0,
     ww_conn_pop:   function(){return this.Collection.wwc_conn_pop},
     ww_serv_pop:   function(){return this.Treatment.wwt_serv_pop},
+
     ww_uncl_pop:   function(){return Math.max(0,this.ww_resi_pop-this.ww_conn_pop()-Global.Faecl.fs_onsi_pop)},
     ww_untr_pop:   function(){return Math.max(0,this.ww_conn_pop()-this.ww_serv_pop())},
     ww_SL_serv_pop:function(){return 100*this.ww_serv_pop()/this.ww_resi_pop},

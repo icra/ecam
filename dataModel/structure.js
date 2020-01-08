@@ -4,7 +4,7 @@ let Structure=[
   {prefix:'ww',  alias:'waste',    level:'Waste', sublevel:false, color:'#d71d24'},
   {prefix:'fs',  alias:'faecl',    level:'Faecl', sublevel:false, color:'green'},
 
-  //level2: wsx,wwx,fsx
+  //level2
   {prefix:'wsa', alias:'waterAbs', level:'Water', sublevel:'Abstraction'},
   {prefix:'wst', alias:'waterTre', level:'Water', sublevel:'Treatment'},
   {prefix:'wsd', alias:'waterDis', level:'Water', sublevel:'Distribution'},

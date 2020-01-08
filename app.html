@@ -73,7 +73,7 @@
 
     <!--logo-->
     <div id=logo_container>
-      <a 
+      <a
         onclick="ecam.views.show('index')"
         class=flex
         style='outline:none'
@@ -83,7 +83,7 @@
         <div>{{translate('navbar_title')}}</div>
         <div style=margin-left:1em>
           <button onclick="event.stopPropagation();linear_menu.visible^=true">
-            - - -
+            toggle linear menu
           </button>
         </div>
       </a>
@@ -103,7 +103,7 @@
         <img :src=`img/flags/${Languages.current}.png`>
 
         <!--all languages-->
-        <div id=select> 
+        <div id=select>
           <div
             v-for="lang in Languages.list"
             :lang="lang"
@@ -132,7 +132,7 @@
               language debugging tool
             </a>
           </div>
-        </div> 
+        </div>
       </div>
     </div>
   </div>
@@ -282,7 +282,7 @@
     </div>
 
     <!--linear tier A-->
-    <div>
+    <div onclick="ecam.views.show('tier_a')">
       <div>
         <a style="color:inherit" v-html="translate('tier_A')"></a>
       </div>
@@ -331,8 +331,7 @@
   </div>
 
   <!--caption-->
-  <div id=caption v-html="text" :style="visible?'':'display:none'">
-  </div>
+  <div id=caption v-html="text" :style="visible?'':'display:none'"></div>
 
   <!--index-->
   <div id=index v-if="visible">
@@ -970,129 +969,177 @@
   </div>
 
   <!--tier a TODO-->
-  <div id=tier_a></div>
+  <div id=tier_a v-if="visible">
+    tier A: - do after tier B
+  </div>
 
   <!--tier b-->
   <div id=tier_b v-if="visible">
-    <div>
+    <!--title tier b + tips-->
+    <div class=flex>
       <h1>
-        {{Global.General.Name}}
-        &rsaquo;
-        {{translate(level)}}
+        <a onclick="ecam.views.show('get_started')">{{Global.General.Name}}</a>
+        <span style="color:black">&rsaquo;</span>
+
+        <a @click="sublevel=false" :style="`cursor:pointer;color:${Structure.find(s=>s.level==level).color}`">
+          {{translate(level)}}</a>
+
         <span v-if="sublevel">
-          &rsaquo;
-          {{translate(sublevel)}}
+          <span style="color:black">&rsaquo;</span>
+          <span style="font-size:larger;color:black">
+            {{translate(sublevel)}}</span>
         </span>
       </h1>
-      <div>tips</div>
-    </div><hr>
-    <div>
-      <!--assessment period-->
-      <div>
-        <a href=getStarted.php>{{translate('assessment_period')}}</a>:
-        <b class=number>{{format(Global.General.Days())}}</b>
-        <?php write('#days')?>
-        <script>
-          (function(){
-            var value=Global.General.Days();
-            var el=document.querySelector('#Global_General_Days');
-            el.innerHTML=format(value);
-            el.style.background=value?"":"red";
-          })();
-        </script>
-      </div>
-      <!--resident population-->
-      <?php
-        echo "<div>";
 
-        $resi_pop = ["Water"=>"ws","Waste"=>"ww","Faecl"=>"fs"][$level]."_resi_pop";
-
-        echo "<a href=inhabitants.php>";
-        write("#$resi_pop"."_descr");
-        echo "</a>";
-        echo ":
-          <b class=number id=Global_level_resi_pop></b>
-          <script>
-            (function(){
-              var value=Global.$level.$resi_pop;
-              var el=document.querySelector('#Global_level_resi_pop');
-              el.innerHTML=format(value);
-              el.style.background=value?'':'red';
-            })();
-          </script>
-        ";
-        echo "</div>";
-      ?>
-      <!--connected population only ww-->
-      <?php
-        if($level=="Waste"){
-          echo "<div>";
-          echo "<a href=inhabitants.php>";
-          write('#ww_conn_pop_descr');
-          echo "</a>";
-          echo ":
-            <b class=number id=Global_level_conn_pop></b>
-            <script>
-              (function(){
-                var value=Global.Waste.Collection.wwc_conn_pop;
-                var el=document.querySelector('#Global_level_conn_pop');
-                el.innerHTML=format(value);
-                el.style.background=value?'':'red';
-              })();
-            </script>
-          ";
-          echo "</div>";
-        }
-      ?>
-      <!--serviced population-->
-      <?php
-        echo "<div>";
-        $serv_pop = ["Water"=>"ws_serv_pop","Waste"=>"ww_serv_pop","Faecl"=>"fs_onsi_pop"][$level];
-
-        echo "<a href=inhabitants.php>";
-        write("#$serv_pop"."_descr");
-        echo "</a>";
-        $value = "Global.$level.".["Water"=>"ws_serv_pop","Waste"=>"ww_serv_pop()","Faecl"=>"fs_onsi_pop"][$level];
-        echo ":
-          <b class=number id=Global_level_serv_pop></b>
-          <script>
-            (function(){
-              var value=$value;
-              var el=document.querySelector('#Global_level_serv_pop');
-              el.innerHTML=format(value);
-              el.style.background=value?'':'red';
-            })();
-          </script>
-        ";
-        echo "</div>";
-      ?>
-      <!--kwh to co2 conversion-->
-      <div>
-        <a href=configuration.php><?php write('#conv_kwh_co2_descr')?></a>:
-        <b class=number id=conv_kwh_co2_value></b>
-        <span class=number id=conv_kwh_co2_unit></span>
-        <script>
-          //value
-          (function(){
-            var value=Global.General.conv_kwh_co2;
-            var el=document.querySelector('#conv_kwh_co2_value');
-            el.innerHTML=format(value);
-            el.style.background=value?"":"red";
-          })();
-          //unit
-          document.querySelector('#conv_kwh_co2_unit').innerHTML=Info['conv_kwh_co2'].unit;
-        </script>
+      <!--Tips-->
+      <div @click="Tips.random()"
+        style="
+          font-size:12px;
+          color:#666;
+          cursor:pointer;
+          padding:0.5em;
+          line-height:3em;
+        "
+      >
+        <svg style="vertical-align:text-bottom" viewBox="0 0 12 16" width="12" height="16" aria-hidden="true">
+          <path fill-rule="evenodd"
+            d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"
+          ></path>
+        </svg>
+        <strong>{{translate('Tip')}}!</strong>
+        <span v-html="translate(Tips.current)"></span>
+        &emsp; &#9654;
       </div>
     </div>
-    <div>substages</div><hr>
-    <div>prev/next</div><hr>
+
+    <!--top of main tier b table-->
+    <div class=flex style="justify-content:space-between;background:#fafafa;font-family:monospace;padding:0.2em 2em;font-size:smaller">
+      <!--assessment period-->
+      <div>
+        <a onclick="ecam.views.show('get_started')">
+          {{translate('assessment_period')}}:
+          <b class=number :style="Global.General.Days()==0 ? 'color:red' : ''">
+            {{format(Global.General.Days())}}
+          </b>
+          {{translate('days')}}
+        </a>
+      </div>
+
+      <!--resident population-->
+      <div>
+        <a onclick="ecam.views.show('population')">
+          {{translate('ws_resi_pop_descr')}}:
+          <b v-if="level=='Water'">
+            {{format(Global.Water.ws_resi_pop)}}
+          </b>
+          <b v-if="level=='Waste'">
+            {{format(Global.Waste.ww_resi_pop)}}
+          </b>
+          <b v-if="level=='Faecl'">
+            {{format(Global.Faecl.fs_resi_pop)}}
+          </b>
+        </a>
+      </div>
+
+      <!--connected population only ww-->
+      <div v-if="level=='Waste'">
+        <a onclick="ecam.views.show('population')">
+          {{translate('ww_conn_pop_descr')}}:
+          <b>{{format(Global.Waste.ww_conn_pop())}}</b>
+        </a>
+      </div>
+
+      <!--serviced population-->
+      <div>
+        <div v-if="level=='Water'">
+          <a onclick="ecam.views.show('population')">
+            {{translate('ws_serv_pop_descr')}}:
+            <b>{{format(Global[level].ws_serv_pop)}}</b>
+          </a>
+        </div>
+
+        <div v-if="level=='Waste'">
+          <a onclick="ecam.views.show('population')">
+            {{translate('ww_serv_pop_descr')}}:
+            <b>{{format(Global[level].ww_serv_pop())}}</b>
+          </a>
+        </div>
+
+        <div v-if="level=='Faecl'">
+          <a onclick="ecam.views.show('population')">
+            {{translate('fs_onsi_pop_descr')}}:
+            <b>{{format(Global[level].fs_onsi_pop)}}</b>
+          </a>
+        </div>
+      </div>
+
+      <!--kwh to co2 conversion-->
+      <div>
+        <a onclick="ecam.views.show('configuration')">
+          {{translate('conv_kwh_co2_descr')}}:
+          <b class=number style="Global.General.conv_kwh_co2==0 ? 'color:red':''">
+            {{format(Global.General.conv_kwh_co2)}}
+          </b>
+          <span class=number v-html="Info.conv_kwh_co2.unit"></span>
+        </a>
+      </div>
+    </div>
+
+    <!--tier b inputs-->
+    <span>
+      {{translate('INPUTS') }} &mdash;
+      {{translate('Enter values for') }}
+      {{sublevel ? translate(sublevel) : translate(level) }}
+      {{translate('stages') }}
+    </span>
+    <table>
+      <tr>
+        <th>{{translate('Description')   }}
+        <th>{{translate('Current value') }}
+        <th>{{translate('edit_unit')     }}
+      </tr>
+      <tr v-for="[key,val] in Object.entries(current_stage)"
+        v-if="typeof(val)!='function'">
+        <td :caption="translate(key+'_expla')">
+          {{translate(key+'_descr')}}
+          <br>
+          (<a onclick="alert('TODO')">{{key}}</a>)
+        </td>
+        <td>
+          <input
+            :value="format(current_stage[key])"
+            @focus="focus_input(current_stage, key, $event)"
+            @blur="blur_input(current_stage, key, $event)"
+            style="text-align:right"
+          >
+        </td>
+        <td>unit
+      </tr>
+    </table>
+
+    <!--pending-------------------------------------------------------------->
+    <div>
+      <ul>
+        <li>main table outputs
+          <ul>
+            <li>GHG emissions
+            <li>nrg performance and service level indicators
+            <li>graph level2
+          </ul>
+        </li>
+        <li>substages
+        <li>prev/next buttons
+      </ul>
+    </div>
   </div>
 
   <!--summary ghg TODO-->
   <div id=summary_ghg></div>
+
   <!--summary nrg TODO-->
   <div id=summary_nrg></div>
-  <!--opps TODO-->
+
+  <!--opportunities TODO-->
   <div id=opps></div>
 </div>
 
