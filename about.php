@@ -77,6 +77,4 @@
 <!--logos-->
 <div style=background:white;text-align:center;margin-top:50px;>
   <img src=img/logos.png>
-  <br><img src=img/logo-kwb.png>
 </div>
-
