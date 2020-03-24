@@ -5,7 +5,7 @@
 let ecam_logo = new Vue({
   el:'#ecam-logo',
   data:{
-    version:"v3.0",
+    version:"v3.0 development",
     Languages,
   },
   methods:{
