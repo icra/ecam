@@ -1,35 +1,20 @@
 <!doctype html><html><head>
   <meta charset="utf-8">
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="frontend/img/favicon.ico" type="image/x-icon">
   <title>ECAM v3 (development)</title>
 
-  <!--load css-->
-  <link rel="stylesheet" href="css/css.css">
-  <link rel="stylesheet" href="css/css_components.css">
+  <!--load backend-->
+    <script src="backend/structure.js"></script>
+    <script src="backend/global.js"></script>
+    <script src="backend/info.js"></script>
+    <script src="backend/countries.js"></script>
+    <script src="backend/gwp_reports.js"></script>
+    <script src="backend/constants.js"></script>
 
-  <!--libs-->
-    <!--google charts-->
-    <script src="js/charts/loader.js"></script>
-    <!--vue
-      development version, includes helpful console warnings
-      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-      production version, optimized for size and speed
-      <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <!--/libs-->
-
-  <!--backend-->
-    <!--languages-->
-    <script src="languages/translate.js"></script>
-
-    <!--data model-->
-    <script src="dataModel/structure.js"></script>
-    <script src="dataModel/global.js"></script>
+    <!--v2-->
     <script src="dataModel/substages.js"></script>
-    <script src="dataModel/info.js"></script>
     <script src="dataModel/level3variables.js"></script>
     <script src="dataModel/level2only.js"></script>
     <script src="dataModel/questions.js"></script>
@@ -39,17 +24,9 @@
     <script src="dataModel/refValues.js"></script>
     <script src="dataModel/exceptions.js"></script>
     <script src="dataModel/normalization.js"></script>
-    <script src="dataModel/constants.js"></script>
-    <script src="dataModel/tips.js"></script>
-    <script src="dataModel/countries.js"></script>
-    <script src="dataModel/gwp_reports.js"></script>
     <script src="dataModel/estimations.js"></script>
     <script src="dataModel/sumable_magnitudes.js"></script>
     <script src="dataModel/recommendations.js"></script>
-
-    <!--cookies-->
-    <script src="js/cookies.js"></script>
-    <script src="js/updateGlobalFromCookies.js"></script>
 
     <!--utils--> <script src="utils.js"></script>
     <!--graphs--><script src="graphs.js"></script>
@@ -57,11 +34,42 @@
 
     <!--new open save clear functions-->
     <script src=main_menu.js></script>
-  <!--/backend-->
+  <!--/load backend-->
+
+  <!--load frontend-->
+    <!--load css-->
+    <link rel="stylesheet" href="frontend/css/css.css">
+    <link rel="stylesheet" href="frontend/css/css_components.css">
+
+    <!--libs-->
+      <!--google charts-->
+      <script src="frontend/js/charts/loader.js"></script>
+      <!--vue
+        development version, includes helpful console warnings
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        production version, optimized for size and speed
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+      -->
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!--/libs-->
+
+    <!--load language tags-->
+    <script src="frontend/languages/translate.js"></script>
+
+    <!--load frontend utils-->
+    <script src="frontend/js/tips.js"></script>
+    <script src="frontend/js/format.js"></script>
+  <!--/load frontend-->
 </head><body>
 
 <!--vue templates-->
-<div>
+<div id=loading_container style="text-align:center;font-size:x-large">
+  <div v-if="!ready">
+    loading ecam tool...
+  </div>
+</div>
+
+<div id=ecam>
   <!--ecam logo-->
   <div id="ecam-logo">
     <!--menu symbol-->
@@ -72,7 +80,7 @@
     <!--logo-->
     <div id=logo_container>
       <a
-        onclick="ecam.views.show('index')"
+        onclick="ecam.show('index')"
         class=flex
         style='outline:none'
         tabindex=-1
@@ -98,7 +106,7 @@
     <div>
       <div id=lang>
         <!--current language-->
-        <img :src=`img/flags/${Languages.current}.png`>
+        <img :src=`frontend/img/flags/${Languages.current}.png`>
 
         <!--all languages-->
         <div id=select>
@@ -107,26 +115,19 @@
             :lang="lang"
             @click="Languages.current=lang"
           >
-            <img :src=`img/flags/${lang}.png`>
+            <img :src=`frontend/img/flags/${lang}.png`>
             {{lang}}
           </div>
 
-          <!--arabic
-          <div lang=ar onclick="alert('')">
-            <img src="img/flags/ar.png">
-            ar
-          </div>
-          -->
-
           <!--null (only language tags)-->
           <div lang=null @click="Languages.current='null'">
-            <img src="img/flags/null.png">
+            <img src="frontend/img/flags/null.png">
             null (tags only)
           </div>
 
           <!--language problem finder-->
           <div :lang="Languages.current">
-            <a href=translation_problems.php style=color:blue>
+            <a href="" style=color:blue>
               language debugging tool
             </a>
           </div>
@@ -166,10 +167,10 @@
       <li class=section>
         <div class=header>{{translate('main')}}</div>
         <ul>
-          <li class=item><a onclick="ecam.views.show('get_started')">  {{translate('getStarted_general_info')}}</a>
-          <li class=item><a onclick="ecam.views.show('configuration')">{{translate('configuration')          }}</a>
-          <li class=item><a onclick="ecam.views.show('population')">   {{translate('population')             }}</a>
-          <li class=item><a onclick="ecam.views.show('tier_a')">       {{translate('quick_assessment')       }}</a>
+          <li class=item><a onclick="ecam.show('get_started')">  {{translate('getStarted_general_info')}}</a>
+          <li class=item><a onclick="ecam.show('configuration')">{{translate('configuration')          }}</a>
+          <li class=item><a onclick="ecam.show('population')">   {{translate('population')             }}</a>
+          <li class=item><a onclick="ecam.show('tier_a')">       {{translate('quick_assessment')       }}</a>
         </ul>
       </li>
 
@@ -207,16 +208,16 @@
       <li class=section>
         <div class=header>{{translate('summaries')}}</div>
         <ul>
-          <li class=item><a onclick="ecam.views.show('sources')">        {{translate('ghg_summary')      }}</a>
-          <li class=item><a onclick="ecam.views.show('energy_summary')"> {{translate('nrg_summary')      }}</a>
-          <li class=item><a onclick="ecam.views.show('unfcc')">          {{translate('unfccc_categories')}}</a>
-          <li class=item><a onclick="ecam.views.show('substages')">      {{translate('all_substages')    }}</a>
-          <li class=item><a onclick="ecam.views.show('summary')">        {{translate('all_inputs')       }}</a>
-          <li class=item><a onclick="ecam.views.show('summary')">        {{translate('all_outputs')      }}</a>
-          <li class=item><a onclick="ecam.views.show('summary')">        {{translate('all_ccvv')         }}</a>
-          <li class=item><a onclick="ecam.views.show('questions')">      {{translate('All questions')    }}</a>
-          <li class=item><a onclick="ecam.views.show('constants')">      {{translate('all_constants')    }}</a>
-          <li class=item><a onclick="ecam.views.show('benchmark')">      {{translate('all_benchmarks')   }}</a>
+          <li class=item><a onclick="ecam.show('sources')">        {{translate('ghg_summary')      }}</a>
+          <li class=item><a onclick="ecam.show('energy_summary')"> {{translate('nrg_summary')      }}</a>
+          <li class=item><a onclick="ecam.show('unfcc')">          {{translate('unfccc_categories')}}</a>
+          <li class=item><a onclick="ecam.show('substages')">      {{translate('all_substages')    }}</a>
+          <li class=item><a onclick="ecam.show('summary')">        {{translate('all_inputs')       }}</a>
+          <li class=item><a onclick="ecam.show('summary')">        {{translate('all_outputs')      }}</a>
+          <li class=item><a onclick="ecam.show('summary')">        {{translate('all_ccvv')         }}</a>
+          <li class=item><a onclick="ecam.show('questions')">      {{translate('All questions')    }}</a>
+          <li class=item><a onclick="ecam.show('constants')">      {{translate('all_constants')    }}</a>
+          <li class=item><a onclick="ecam.show('benchmark')">      {{translate('all_benchmarks')   }}</a>
         </ul>
       </li>
 
@@ -224,10 +225,10 @@
       <li class=section>
         <div class=header>{{translate('other')}}</div>
         <ul>
-          <li class=item><a onclick="ecam.views.show('opps')">       {{translate("opportunities") }}</a>
-          <li class=item><a onclick="ecam.views.show('export')">     {{translate('sidebar_export')}}</a>
-          <li class=item><a onclick="ecam.views.show('sankey')">     {{translate('Sankey diagram')}}</a>
-          <li class=item><a onclick="ecam.views.show('development')">{{translate('dev')}}           </a>
+          <li class=item><a onclick="ecam.show('opps')">       {{translate("opportunities") }}</a>
+          <li class=item><a onclick="ecam.show('export')">     {{translate('sidebar_export')}}</a>
+          <li class=item><a onclick="ecam.show('sankey')">     {{translate('Sankey diagram')}}</a>
+          <li class=item><a onclick="ecam.show('development')">{{translate('dev')}}           </a>
         </ul>
       </li>
 
@@ -235,8 +236,8 @@
       <li class=section>
         <div class=header>{{translate('support')}}</div>
         <ul>
-          <li class=item><a onclick="ecam.views.show('help')">{{translate('help')}}</a>
-          <li class=item><a onclick="ecam.views.show('about')">{{translate('about')}}</a>
+          <li class=item><a onclick="ecam.show('help')">{{translate('help')}}</a>
+          <li class=item><a onclick="ecam.show('about')">{{translate('about')}}</a>
         </ul>
       </li>
     </ul>
@@ -250,41 +251,41 @@
   <!--linear top menu-->
   <div id=linear-menu v-if="visible" class=flex>
     <!--linear general info-->
-    <div onclick="ecam.views.show('get_started')">
+    <div onclick="ecam.show('get_started')">
       <div>
         <a style="color:inherit">
           {{translate('getStarted_general_info')}}
         </a>
       </div>
-      <img class=l1 src=img/getStarted.png :caption="translate('getStarted_general_info')">
+      <img class=l1 src=frontend/img/getStarted.png :caption="translate('getStarted_general_info')">
     </div>
 
     <!--linear configuration-->
-    <div onclick="ecam.views.show('configuration')">
+    <div onclick="ecam.show('configuration')">
       <div>
         <a style="color:inherit">
           {{translate('configuration')}}
         </a>
       </div>
-      <img class=l1 src=img/dashboard.png :caption="translate('configuration')">
+      <img class=l1 src=frontend/img/dashboard.png :caption="translate('configuration')">
     </div>
 
     <!--linear population-->
-    <div onclick="ecam.views.show('population')">
+    <div onclick="ecam.show('population')">
       <div>
         <a style="color:inherit">
           {{translate('population')}}
         </a>
       </div>
-      <img class=l1 src=img/inhabitants.png :caption="translate('population')">
+      <img class=l1 src=frontend/img/inhabitants.png :caption="translate('population')">
     </div>
 
     <!--linear tier A-->
-    <div onclick="ecam.views.show('tier_a')">
+    <div onclick="ecam.show('tier_a')">
       <div>
         <a style="color:inherit" v-html="translate('tier_A')"></a>
       </div>
-      <img class=l1 src=img/birds.png :caption="translate('tier_A')">
+      <img class=l1 src=frontend/img/birds.png :caption="translate('tier_A')">
     </div>
 
     <!--linear tier B-->
@@ -298,7 +299,7 @@
         class=l2
         :stage="l2.alias"
         :caption="translate(l2.sublevel)"
-        :src="`img/${l2.alias}${Global.Configuration.ActiveStages[l2.alias]?'':'-off'}.png`"
+        :src="`frontend/img/${l2.alias}${Global.Configuration.ActiveStages[l2.alias]?'':'-off'}.png`"
         @click="go_to(l2.level,l2.sublevel)"
       >
     </div>
@@ -312,8 +313,8 @@
             {{translate('summaries')}}
           </span>
         </div>
-        <img class=l1 src=img/sources.png :caption="translate('ghg_summary')">
-        <img class=l1 src=img/energy.png  :caption="translate('nrg_summary')">
+        <img class=l1 src=frontend/img/sources.png :caption="translate('ghg_summary')">
+        <img class=l1 src=frontend/img/energy.png  :caption="translate('nrg_summary')">
       </div>
 
       <!--Opportunities-->
@@ -323,7 +324,7 @@
             {{translate('opportunities')}}
           </a>
         </div>
-        <img class=l1 src=img/opps.png :caption="translate('opportunities')">
+        <img class=l1 src=frontend/img/opps.png :caption="translate('opportunities')">
       </div>
     </div>
   </div>
@@ -359,7 +360,7 @@
         </h4>
         <h4 style=font-size:18px;color:#58595b>
           {{translate("first_time_using_ecam")}}
-          <a onclick="ecam.views.show('help')">
+          <a onclick="ecam.show('help')">
             {{translate("here")}}.
           </a>
         </h4>
@@ -408,7 +409,7 @@
             <!--next-->
             <div>
               <button class="button next"
-                onclick="event.stopPropagation();ecam.views.show('get_started')"
+                onclick="event.stopPropagation();ecam.show('get_started')"
               >
                 {{translate('next')}}
               </button>
@@ -422,17 +423,17 @@
           <a class="blue_links" href="http://wacclim.org/" target=_blank>
             WaCCliM
           </a> -
-          <a class="blue_links" onclick="ecam.views.show('about')">
+          <a class="blue_links" onclick="ecam.show('about')">
             {{translate("about")}}
           </a> -
-          <a class="blue_links" onclick="ecam.views.show('help')">
+          <a class="blue_links" onclick="ecam.show('help')">
             {{translate("help")}}
           </a> -
           <a class="blue_links" href=mailto:info@wacclim.org target=_blank>
             {{translate("contact")}}: info@wacclim.org
           </a>
         </div>
-        <img class="license_img license_img-big" src="img/CC_license_small.png" alt="">
+        <img class="license_img license_img-big" src="frontend/img/CC_license_small.png" alt="">
         <br>
         {{translate("ecam_by_iwa_giz_icra")}}
         <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
@@ -445,7 +446,7 @@
 
       <!--picture-->
       <div class="width_50" style="padding:0;text-align:center">
-        <img class="img_resp" src="svg/diagram.png">
+        <img class="img_resp" src="frontend/img/diagram.png">
       </div>
     </div>
 
@@ -454,12 +455,12 @@
       <footer id=footer>
         <img
           id=logo-wacclim
-          src="img/logo-wacclim_big.png"
+          src="frontend/img/logo-wacclim_big.png"
           style="height:120px;margin:auto"
         >
       </footer>
       <div style="background:white;text-align:left;padding:0em 10em;margin-top:50px;">
-        <img src="img/logos.png">
+        <img src="frontend/img/logos.png">
       </div>
     </div>
   </div>
@@ -467,7 +468,7 @@
   <!--about-->
   <div id=about v-if="visible">
     <h1 style=text-align:center>
-      <span onclick="ecam.views.show('index')">{{translate('start')}}</span>
+      <span onclick="ecam.show('index')">{{translate('start')}}</span>
       &rsaquo;
       {{translate('about')}}
     </h1>
@@ -521,10 +522,7 @@
         Chart library: <a target=_blank href="https://google-developers.appspot.com/chart/">Google Charts</a>
       </p>
 
-      <!--<img class="license_img" src="img/cc_icon_white_x2.png" alt="">
-      <img class="license_img" src="img/attribution_icon_white_x2.png" alt="">
-      <img class="license_img" src="img/sa_white_x2.png" alt=""> -->
-      <img class="license_img license_img-big" src="img/CC_license_big.png" alt="">
+      <img class="license_img license_img-big" src="frontend/img/CC_license_big.png" alt="">
       <br><br>
       ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under
       a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work
@@ -536,21 +534,21 @@
     <div>
       <img
         id=logo-wacclim
-        src="img/logo-wacclim_big.png"
+        src="frontend/img/logo-wacclim_big.png"
         style="height:120px;margin:1em auto;display:block"
       >
     </div>
 
     <!--logos iwa-->
     <div style=background:white;text-align:center;margin-top:50px;>
-      <img src=img/logos.png>
+      <img src=frontend/img/logos.png>
     </div>
   </div>
 
   <!--help-->
   <div id=help v-if="visible">
     <h1 style=text-align:center>
-      <span onclick="ecam.views.show('index')">{{translate('start')}}</span>
+      <span onclick="ecam.show('index')">{{translate('start')}}</span>
       &rsaquo;
       {{translate('help')}}
     </h1>
@@ -568,7 +566,7 @@
 
     <img
       id=logo-wacclim
-      src="img/logo-wacclim_big.png"
+      src="frontend/img/logo-wacclim_big.png"
       style="display:block;height:120px;margin:1em auto"
     >
   </div>
@@ -582,21 +580,18 @@
         <td><input
           id=Name
           v-model="Global.General.Name"
-          @change="updateResult()"
         >
       </tr>
       <tr>
         <th>{{translate('getStarted_table_start')}}
         <td><input type=date
           v-model="Global.General.AssessmentPeriodStart"
-          @change="updateResult()"
         >
       </tr>
       <tr>
         <th>{{translate('getStarted_table_end')}}
         <td><input type=date
           v-model="Global.General.AssessmentPeriodEnd"
-          @change="updateResult()"
         >
       </tr>
       <tr>
@@ -613,7 +608,6 @@
           <input
             v-model="Global.General.Currency"
             size=3 maxlength=3 placeholder="ccc"
-            @change="updateResult()"
           >
         </td>
       </tr>
@@ -624,7 +618,6 @@
             v-model="Global.General.Comments"
             :placeholder="translate('getStarted_max_200')"
             rows=5 cols=50 maxlength=200
-            @change="updateResult()"
           ></textarea>
       </tr>
     </table>
@@ -632,11 +625,11 @@
     <!--PREV&NEXT-->
     <div class=flex style="justify-content:center;margin-top:1em">
       <button class="button prev"
-        onclick="event.stopPropagation();ecam.views.show('index')">
+        onclick="event.stopPropagation();ecam.show('index')">
         {{translate('previous')}}
       </button>
       <button class="button next"
-        onclick="event.stopPropagation();ecam.views.show('configuration')">
+        onclick="event.stopPropagation();ecam.show('configuration')">
         {{translate('next')}}
       </button>
     </div>
@@ -667,9 +660,9 @@
                 <label>
                   <input type=checkbox
                     v-model="Global.Configuration.ActiveStages[l1.alias]"
-                    @change="check_l2_from_l1();updateResult()"
+                    @change="check_l2_from_l1()"
                   >
-                  <img :src="`img/${l1.alias}.png`">
+                  <img :src="`frontend/img/${l1.alias}.png`">
                   {{translate(l1.level)}}<br>
                 </label>
               </td>
@@ -681,9 +674,9 @@
                 <label>
                   <input type=checkbox
                     v-model="Global.Configuration.ActiveStages[l2.alias]"
-                    @change="check_l1_from_l2();updateResult()"
+                    @change="check_l1_from_l2()"
                   >
-                  <img :src="`img/${l2.alias}.png`">
+                  <img :src="`frontend/img/${l2.alias}.png`">
                   {{translate(l2.sublevel)}}<br>
                 </label>
               </td>
@@ -714,7 +707,7 @@
               </option>
             </select>
 
-            <a onclick="ecam.views.show('countries')">Info</a>
+            <a onclick="ecam.show('countries')">Info</a>
 
           </legend>
 
@@ -722,30 +715,22 @@
             <tr>
               <td v-html="translate('conv_kwh_co2_descr')">
               <td>
-                <input v-model.number="Global.General.conv_kwh_co2"
-                  @change="updateResult"
-                >
+                <input v-model.number="Global.General.conv_kwh_co2">
               <td>kg<sub>CO<sub>2</sub></sub>/kWh
             <tr>
               <td v-html="translate('prot_con_descr')">
               <td>
-                <input v-model.number="Global.General.prot_con"
-                  @change="updateResult"
-                >
+                <input v-model.number="Global.General.prot_con">
               <td>kg/{{translate('person')}}/{{translate('year')}}
             <tr>
               <td v-html="translate('bod_pday_descr')">
               <td>
-                <input v-model.number="Global.General.bod_pday"
-                  @change="updateResult"
-                >
+                <input v-model.number="Global.General.bod_pday">
               <td>g/{{translate('person')}}/{{translate('day')}}
             <tr>
               <td v-html="translate('bod_pday_fs_descr')">
               <td>
-                <input v-model.number="Global.General.bod_pday_fs"
-                  @change="updateResult"
-                >
+                <input v-model.number="Global.General.bod_pday_fs">
               <td>g/{{translate('person')}}/{{translate('day')}}
             </tr>
           </table>
@@ -789,7 +774,7 @@
                   {{report.report}}
                 </option>
               </select>
-              <a onclick="ecam.views.show('gwp_table')">Info</a>
+              <a onclick="ecam.show('gwp_table')">Info</a>
             </legend>
 
             <!--description of gwp values-->
@@ -821,11 +806,11 @@
     <!--prev & next buttons-->
     <div class=flex style="margin:1em;justify-content:center">
       <button class="button prev"
-        onclick="event.stopPropagation();ecam.views.show('get_started')">
+        onclick="event.stopPropagation();ecam.show('get_started')">
         {{translate('previous')}}
       </button>
       <button class="button next"
-        onclick="event.stopPropagation();ecam.views.show('population')">
+        onclick="event.stopPropagation();ecam.show('population')">
         {{translate('next')}}
       </button>
     </div>
@@ -834,7 +819,7 @@
   <!--countries-->
   <div id=countries v-if="visible">
     <h1 style="text-align:center">
-      <span onclick="ecam.views.show('configuration')">{{translate('configuration')}}</span>
+      <span onclick="ecam.show('configuration')">{{translate('configuration')}}</span>
       &rsaquo;
       {{translate('Countries')}}
     </h1>
@@ -889,7 +874,7 @@
   <!--gwp table-->
   <div id=gwp_table v-if="visible">
     <h1 style="text-align:center">
-      <span onclick="ecam.views.show('configuration')">{{translate('configuration')}}</span>
+      <span onclick="ecam.show('configuration')">{{translate('configuration')}}</span>
       &rsaquo;
       {{translate('gwp_title')}}
     </h1>
@@ -927,7 +912,7 @@
       <tbody v-for="l1 in Structure.filter(s=>s.sublevel==false)">
         <tr>
           <th colspan=3 :style=`background:${l1.color};text-align:left`>
-          <img :src="`img/${l1.alias}.png`" width=25 style="line-height:4em;vertical-align:middle">
+          <img :src="`frontend/img/${l1.alias}.png`" width=25 style="line-height:4em;vertical-align:middle">
           {{translate(l1.level)}}
         </tr>
         <tr v-if="!Global.Configuration.ActiveStages[l1.alias]">
@@ -954,11 +939,11 @@
     <!--prev next buttons-->
     <div class=flex style="justify-content:center;margin-top:1em">
       <button class="button prev"
-        onclick="event.stopPropagation();ecam.views.show('configuration')">
+        onclick="event.stopPropagation();ecam.show('configuration')">
         {{translate('previous')}}
       </button>
       <button class="button next"
-        onclick="event.stopPropagation();ecam.views.show('tier_a')">
+        onclick="event.stopPropagation();ecam.show('tier_a')">
         {{translate('next')}}
       </button>
     </div>
@@ -972,9 +957,9 @@
   <!--tier b-->
   <div id=tier_b v-if="visible">
     <!--title tier b + tips-->
-    <div class=flex>
+    <div class=flex style="justify-content:space-between">
       <h1>
-        <a onclick="ecam.views.show('get_started')">{{Global.General.Name}}</a>
+        <a onclick="ecam.show('get_started')">{{Global.General.Name}}</a>
         <span style="color:black">&rsaquo;</span>
 
         <a @click="sublevel=false" :style="`cursor:pointer;color:${Structure.find(s=>s.level==level).color}`">
@@ -1012,7 +997,7 @@
     <div class=flex style="justify-content:space-between;background:#fafafa;font-family:monospace;padding:0.2em 2em;font-size:smaller">
       <!--assessment period-->
       <div>
-        <a onclick="ecam.views.show('get_started')">
+        <a onclick="ecam.show('get_started')">
           {{translate('assessment_period')}}:
           <b class=number :style="Global.General.Days()==0 ? 'color:red' : ''">
             {{format(Global.General.Days())}}
@@ -1023,7 +1008,7 @@
 
       <!--resident population-->
       <div>
-        <a onclick="ecam.views.show('population')">
+        <a onclick="ecam.show('population')">
           {{translate('ws_resi_pop_descr')}}:
           <b v-if="level=='Water'">
             {{format(Global.Water.ws_resi_pop)}}
@@ -1039,7 +1024,7 @@
 
       <!--connected population only ww-->
       <div v-if="level=='Waste'">
-        <a onclick="ecam.views.show('population')">
+        <a onclick="ecam.show('population')">
           {{translate('ww_conn_pop_descr')}}:
           <b>{{format(Global.Waste.ww_conn_pop())}}</b>
         </a>
@@ -1048,21 +1033,21 @@
       <!--serviced population-->
       <div>
         <div v-if="level=='Water'">
-          <a onclick="ecam.views.show('population')">
+          <a onclick="ecam.show('population')">
             {{translate('ws_serv_pop_descr')}}:
             <b>{{format(Global[level].ws_serv_pop)}}</b>
           </a>
         </div>
 
         <div v-if="level=='Waste'">
-          <a onclick="ecam.views.show('population')">
+          <a onclick="ecam.show('population')">
             {{translate('ww_serv_pop_descr')}}:
             <b>{{format(Global[level].ww_serv_pop())}}</b>
           </a>
         </div>
 
         <div v-if="level=='Faecl'">
-          <a onclick="ecam.views.show('population')">
+          <a onclick="ecam.show('population')">
             {{translate('fs_onsi_pop_descr')}}:
             <b>{{format(Global[level].fs_onsi_pop)}}</b>
           </a>
@@ -1071,7 +1056,7 @@
 
       <!--kwh to co2 conversion-->
       <div>
-        <a onclick="ecam.views.show('configuration')">
+        <a onclick="ecam.show('configuration')">
           {{translate('conv_kwh_co2_descr')}}:
           <b class=number style="Global.General.conv_kwh_co2==0 ? 'color:red':''">
             {{format(Global.General.conv_kwh_co2)}}
@@ -1139,8 +1124,8 @@
   <div id=opps></div>
 </div>
 
-<!--vue components-->
-<script src="vue-components/components.js"></script>
+<!--load vue components-->
+<script src="frontend/vue-components.js"></script>
 
 <!--sidebar click listeners-->
 <script>
@@ -1153,4 +1138,6 @@
   document.documentElement.addEventListener('keydown',function(ev){
     if(ev.which==27){ sidebar.visible=false; }
   });
+
+  //afegir listener onclose per no perdre les dades TODO
 </script>
