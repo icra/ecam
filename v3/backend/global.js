@@ -789,7 +789,7 @@ let Global={
           return this.wwd_n2o_effl/1000*this.wwd_vol_disc*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value;
         },
         wwd_KPI_GHG_tre_ch4:function(){//<br>
-          return this.wwd_bod_effl*this.wwd_ch4_efac*Cts.ct_ch4_eq.value; 
+          return this.wwd_bod_effl*this.wwd_ch4_efac*Cts.ct_ch4_eq.value;
         },
         wwd_KPI_GHG_tre:function(){//<br>
           return this.wwd_KPI_GHG_tre_ch4()+this.wwd_KPI_GHG_tre_n2o();
@@ -951,7 +951,7 @@ let Global={
           return (this.fst_bod_infl-this.fst_bod_slud-this.fst_bod_effl)*this.fst_ch4_efac*Cts.ct_ch4_eq.value;
         },
         fst_KPI_GHG_tre_n2o:function(){//<br>
-          return 0; //to be defined (TBD) 
+          return 0; //to be defined (TBD)
         },
         fst_KPI_GHG_tre:function(){
           return this.fst_KPI_GHG_tre_ch4()+this.fst_KPI_GHG_tre_n2o();
@@ -1106,7 +1106,7 @@ let Global={
           return this.fsr_n2o_effl/1000*this.fsr_vol_disc*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value;
         },
         fsr_KPI_GHG_tre_ch4:function(){//<br>
-          return this.fsr_bod_effl*this.fsr_ch4_efac*Cts.ct_ch4_eq.value; 
+          return this.fsr_bod_effl*this.fsr_ch4_efac*Cts.ct_ch4_eq.value;
         },
         fsr_KPI_GHG_tre:function(){//<br>
           return this.fsr_KPI_GHG_tre_ch4()+this.fsr_KPI_GHG_tre_n2o();
@@ -1158,9 +1158,9 @@ let Global={
   /*Configuration: custom user preferences*/
   Configuration:{
     ActiveStages:{
-      "water":false, "waterAbs":false, "waterTre":false, "waterDis":false,
-      "waste":false, "wasteCol":false, "wasteTre":false, "wasteDis":false,
-      "faecl":false, "faeclCon":false, "faeclTre":false, "faeclReu":false,
+      "water":true, "waterAbs":true, "waterTre":true, "waterDis":true,
+      "waste":true, "wasteCol":true, "wasteTre":true, "wasteDis":true,
+      "faecl":true, "faeclCon":true, "faeclTre":true, "faeclReu":true,
     },
 
     //highlight inputs/outputs
@@ -1212,3 +1212,23 @@ Global.Opps={
   g_ww_water_reuse_dper             : 0,
   g_ww_biogas_dper                  : 0,
 };
+
+//default values for testing purposes
+//l1
+Global.Water.ws_resi_pop             = 1000; //people
+Global.Water.ws_serv_pop             =  990; //people
+Global.Waste.ww_resi_pop             = 1000; //people
+Global.Waste.Collection.wwc_conn_pop =  990; //people
+Global.Waste.Treatment.wwt_serv_pop  =  980; //people
+Global.Faecl.fs_resi_pop             =  100; //people
+Global.Faecl.fs_onsi_pop             =   50; //people
+
+//general
+Global.General.conv_kwh_co2 = 0.7; //conversion factor for grid electricity (kgCO2/kWh)
+Global.General.prot_con     = 22;  //prot consumption                       (kg/person/year)
+Global.General.bod_pday     = 37;  //BOD5                                   (g/person/day)
+Global.General.bod_pday_fs  = 37;  //BOD5 in faecal sludge                  (g/person/day)
+
+//wsa
+Global.Water.Abstraction.wsa_nrg_cons = 1000;
+Global.Water.Abstraction.wsa_vol_conv =  500;

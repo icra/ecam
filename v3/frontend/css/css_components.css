@@ -5,8 +5,8 @@
     padding:0.5em 0.5em 0.5em 0.5em;
     box-shadow:0 1px 2px rgba(0,0,0,.5);
     background:#2b6488;
-    display:grid;
-    grid-template-columns:35px 85% 5% 5%
+    display:flex;
+    justify-content:space-between;
   }
   #ecam-logo > div{
     padding:13px 5px 5px 5px;/*values adjusted for the sidebar*/
@@ -15,6 +15,7 @@
   #ecam-logo a:hover{text-decoration:none}
   #ecam-logo img{vertical-align:middle}
   #ecam-logo #burger {
+    width:35px;
     color:white;
     cursor:pointer;
     font-size:30px;
@@ -32,7 +33,7 @@
   }
   #ecam-logo #lang{
     cursor:pointer;
-    margin-left:1em;
+    text-align:right;
   }
   
   #ecam-logo #lang > img {
@@ -113,6 +114,9 @@
   #sidebar li.item-l2{
     padding-left:1em;
   }
+  #sidebar a {
+    cursor:pointer;
+  }
 
 /*linear menu*/
   #linear-menu {
@@ -136,8 +140,8 @@
     background:#e6e6e6;
     color:black;
   }
-  #linear-menu img[class=l1]:hover,
-  #linear-menu img[class=l2]:hover {
+  #linear-menu img.l1:hover,
+  #linear-menu img.l2:hover {
     border:3px solid #9fc231;
   }
   #linear-menu img {
@@ -291,5 +295,36 @@
     height:24px;
   }
   #population td.input_container input:focus {
+    background:white;
+  }
+
+/*tier a TODO*/
+/*tier b TODO*/
+  #tier_b div.table-title {
+    color:#666;
+    font-size:15px;
+    padding:0.7em 0 0.2em 0;
+    font-weight:normal;
+    text-align:left;
+  }
+  #tier_b td.input {
+    background:#eee;
+    text-align:right;
+    color:#666;
+    cursor:cell;
+    max-width:100px;
+    padding:0;
+  }
+  #tier_b td.input input {
+    background:inherit;
+    width:95%;
+    border:none;
+    text-align:right;
+    margin:0;
+    padding:0 0.2em;
+    height:40px;
+    cursor:cell;
+  }
+  #tier_b td.input input:focus {
     background:white;
   }

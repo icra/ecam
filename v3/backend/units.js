@@ -1,13 +1,4 @@
 let Units={
-  /*modify or add a unit change in Global.Configuration.Units*/
-  selectUnit:function(field,newUnit){
-    Global.Configuration.Units[field]=newUnit;
-    //call init if it exists (common function everywhere)
-    if(typeof(init)=='function'){
-      init();
-    }
-  },
-
   /* return a multiplier for a field */
   multiplier:function(field){
     //if magnitude is not inside Units, multiplier is 1
@@ -22,7 +13,7 @@ let Units={
   /* CONVERSION BETWEEN MAGNITUDES */
   "Distance":{
     "cm":0.01,
-    "m":1, //base unit
+    "m" :1, //base unit
     "km":1000,
   },
   "Mass":{
@@ -46,8 +37,8 @@ let Units={
     km3:1000000000,
   },
   "Flow":{
-    "L/s":0.001,
     "m3/day":1/86400,
+    "L/s":0.001,
     "m3/s":1, //base unit
   },
   "Energy":{

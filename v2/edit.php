@@ -184,7 +184,7 @@
       //console.timeEnd('init');
     }
 
-    /** Redisplay table id=outputs (level2)*/
+    /* Redisplay table id=outputs (level2)*/
     function updateOutputs() {
       //console.time('updateOutputs');
       var t=document.getElementById('outputs');

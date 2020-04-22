@@ -1,23 +1,18 @@
 //languages object (v3)
 let Languages={
-  list:[
-    'en',
-    'es',
-    'fr',
-    'th',
-    'de',
-  ],
-
   //default lang
   current:"en",
 
-  //all languages loaded?
+  //all langs
+  list:[ 'en', 'es', 'fr', 'th', 'de', 'ar', ],
+
+  //are all languages loaded?
   ready:false,
 
   //language tags for all languages are loaded here
   tags:{},
 
-  //load all language tags
+  //load all languages
   load(){
     let loaded_languages=[];
     this.list.forEach(lang=>{
@@ -40,21 +35,19 @@ let Languages={
     let lang = this.current;
 
     //null language (for debugging)
-    if(lang=='null'){ return `[#${id}]` }
+    if(lang=='null'){ return `["#${id}"]`; }
 
-    //language not found: return tag id
-    if(!this.tags[lang]){
-      //console.warn(`'#${lang}' language not found`);
-      return `[#${id}]`;
-    }
+    //language not found
+    if(!this.tags[lang]){ return `[#${id}]`; }
 
-    //normal case
-    return this.tags[lang][`#${id}`] || `[#${id}]`;
+    //normal case or tag not found
+    return this.tags[lang][`#${id}`] || `["#${id}"]`;
   },
 };
 
 Languages.load();
 
+//make translate global
 function translate(id){
   return Languages.translate(id);
 }

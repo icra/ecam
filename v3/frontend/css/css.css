@@ -21,8 +21,13 @@ legend{color:#58595b;font-size:16px}
 
 /*tables*/
 table{border-collapse:collapse;}
+th{
+  font-weight:normal;
+  background:#2b6488;
+  color:white;
+  vertical-align:middle;
+}
 th,td{border:1px solid #aaa;padding:0.35em;}
-th{font-weight:normal;background:#2b6488;color:white;vertical-align:middle}
 tr[hl=yes]{background:yellow;color:black}
 tr[hl=no]{background:default}
 tr[hl_output=yes]{background:orange;color:black}
@@ -60,7 +65,7 @@ span.circle {
 }
 
 /*BUTTONS*/
-  .button {        
+  .button {
     display: inline-block;
     white-space: nowrap;
     background-color: #ddd;
@@ -75,7 +80,7 @@ span.circle {
   }
 
   .button:hover {
-    background-color: #eee;        
+    background-color: #eee;
     background-image: linear-gradient(top, #fafafa, #ddd);
   }
 
@@ -87,23 +92,23 @@ span.circle {
   .button:focus {
     outline: 0;
     background: #fafafa;
-  }    
+  }
 
   .button:before {
     background: #ccc;
     background: rgba(0,0,0,.1);
-    float: left;        
+    float: left;
     width: 1em;
     text-align: center;
     font-size: 1.5em;
     margin: 0 1em 0 -1em;
     padding: 0 .2em;
     box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
-    pointer-events: none;		
+    pointer-events: none;
   }
 
   /* Buttons and inputs */
-  button.button { 
+  button.button {
     cursor: pointer;
     overflow: visible; /* removes extra side spacing in IE */
   }
@@ -116,7 +121,7 @@ span.circle {
     cursor: default;
     text-shadow: none;
     position: static;
-    box-shadow: none;		
+    box-shadow: none;
   }
 
   /* Hexadecimal entities for the icons */
@@ -125,15 +130,15 @@ span.circle {
   }
 
   .edit:before {
-    content: "\270E";        
+    content: "\270E";
   }
 
   .delete:before {
-    content: "\2718";        
+    content: "\2718";
   }
 
   .save:before {
-    content: "\2714";        
+    content: "\2714";
   }
 
   .next:before {
@@ -199,7 +204,7 @@ span.circle {
     outline:none;
   }
   .card .menu button.btn_toggle:hover {background:#bce4d3}
-  .card .menu button.btn_toggle.active { 
+  .card .menu button.btn_toggle.active {
     background:#bce4d3;
     box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05);
   }
@@ -224,8 +229,7 @@ span.circle {
 #content::after{
   clear: both;
   content: "";
-    clear: both;
-    display: table;
+  display: table;
 }
 /*end of content*/
 /*header*/

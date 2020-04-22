@@ -34,24 +34,32 @@
     },
     methods:{
       translate,
+      go_to(level, sublevel){
+        tier_b.level    = level;
+        tier_b.sublevel = sublevel||false;
+        tier_b.current_stage = sublevel ? Global[level][sublevel] : Global[level];
+        ecam.show('tier_b');
+      },
     },
   });
 
   let linear_menu = new Vue({
     el:'#linear-menu',
     data:{
-      visible:false,
+      visible:true,
       Global,
       Structure,
+      current_view:null,
     },
     methods:{
       translate,
-      go_to(level, sublevel){
-        tier_b.level    = level;
-        tier_b.sublevel = sublevel||false;
-        tier_b.current_stage = sublevel ? Global[level][sublevel] : Global[level];
-        ecam.show('tier_b');
-      }
+      go_to: sidebar.go_to,
+      is_tier_b_selected(level, sublevel){
+        if(this.current_view!='tier_b') return false;
+        if(level==tier_b.level && sublevel==tier_b.sublevel){
+          return true;
+        }
+      },
     },
   });
 
@@ -88,6 +96,7 @@
 //-----------------------------------------------------------------------------
 // VIEWS (= pages)
 //-----------------------------------------------------------------------------
+  //landing page
   let index = new Vue({
     el:'#index',
     data:{
@@ -204,7 +213,6 @@
         for(let key in obj) {
           if(typeof(obj[key])=="number") obj[key]=0;
         }
-
       },
 
       //set variables from selected country
@@ -227,8 +235,7 @@
       //answer fuel engines question
       answerAnyFuelEngines(){
         let ans=parseInt(Global.General.anyFuelEngines);
-        Global.General.anyFuelEngines = ans;
-        console.log({ans});
+        Global.General.anyFuelEngines=ans;
         Global.Configuration['Yes/No'].wsa_engines=ans;
         Global.Configuration['Yes/No'].wst_engines=ans;
         Global.Configuration['Yes/No'].wsd_engines=ans;
@@ -341,43 +348,94 @@
   let tier_b = new Vue({
     el:"#tier_b",
     data:{
-      visible:false,
+      visible:true,
       level:'Water',
       sublevel:'Abstraction',
-      current_stage:false,
+      current_stage:Global.Water.Abstraction,
 
       Global,
       Info,
       Structure,
       Tips,
+      Units,
+      Tables,
+      Recommendations,
     },
     methods:{
       translate,
       format,
       focus_input(stage, key, event){
         let input = event.target;
-        input.value = stage[key];
+        input.value = stage[key]/Units.multiplier(key);
         input.select();
       },
       blur_input(stage, key, event){
         let input = event.target;
         let value = parseFloat(input.value) || 0;
-        stage[key] = value;
-        input.value=format(stage[key]);
+        stage[key] = value*Units.multiplier(key);
+        input.value=format(stage[key]/Units.multiplier(key));
       },
+
+      /*UNITS*/
+      /*select unit for a specific variable and save it to configuration*/
+      select_unit(key, event){
+        let select = event.target;
+        let newUnit = select.value;
+        this.Global.Configuration.Units[key]=newUnit;
+        this.$forceUpdate();
+      },
+      //get current unit for specific variable
+      get_current_unit(key){
+        if(Info[key].magnitude=='Currency'){
+          return Global.General.Currency;
+        }
+        if(undefined===this.Global.Configuration.Units[key]){
+          this.Global.Configuration.Units[key] = this.Info[key].unit;
+        }
+        return this.Global.Configuration.Units[key];
+      },
+
     },
   });
 
   //summary ghg TODO
+  let summary_ghg = new Vue({
+    el:"#summary_ghg",
+    data:{
+      visible:false,
+    },
+  });
+
   //summary nrg TODO
-  //opps        TODO
+  let summary_nrg = new Vue({
+    el:"#summary_nrg",
+    data:{
+      visible:false,
+    },
+  });
+
+  //opportunities TODO
+  let opportunities = new Vue({
+    el:"#opportunities",
+    data:{
+      visible:false,
+    },
+  });
 
 //-----------------------------------------------------------------------------
 // MAIN CONTROLLER (not a vue component)
 //-----------------------------------------------------------------------------
 let ecam={
-  views:{
+  //componenets == all can be active
+  components:{
     ecam_logo,     //top logo
+    sidebar,       //side bar (left)
+    linear_menu,   //linear menu top
+    caption,       //mouse over notes
+  },
+
+  //views == pages: only one is active
+  views:{
     index,         //landing page
     get_started,   //general info
     configuration, //configuration of stages
@@ -388,6 +446,9 @@ let ecam={
     help,
     tier_a,
     tier_b,
+    summary_ghg,
+    summary_nrg,
+    opportunities,
   },
 
   /*METHODS*/
@@ -404,23 +465,28 @@ let ecam={
 
   //show a view
   show(view){
-    //TODO: activar linear_menu.visible=true el primer cop que entris a tier B
-
     if(!this.views[view]){
       throw new Error(`view '${view}' not found`);
     }
 
+    //activate linear_menu when entering tier_b
+    if(view=='tier_b'){
+      linear_menu.visible=true;
+    }
+
     this.hide_all();
     this.views[view].visible=true;
+    linear_menu.current_view = view;
     window.scrollTo(0,0);
-    setTimeout(caption.listeners,1000); //TODO make it async (promise?)
+    caption.listeners();
   },
 
-  //update views
+  //force render views and components (for language tags)
   force_update(){
-    Object.entries(this.views).forEach(([key,obj])=>{
-      console.log(key);
-      obj.$forceUpdate();
+    Object.entries(this.views)
+      .concat(Object.entries(this.components))
+      .forEach(([key,obj])=>{
+        obj.$forceUpdate();
     });
   },
 };
