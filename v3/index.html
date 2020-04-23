@@ -17,20 +17,21 @@
     <script src="backend/units.js"></script>
     <script src="backend/recommendations.js"></script>
     <script src="backend/exceptions.js"></script>
+    <script src="backend/normalization.js"></script>
 
     <!--v2
-    <script src="dataModel/level3variables.js"></script>
-    <script src="dataModel/level2only.js"></script>
-    <script src="dataModel/questions.js"></script>
-    <script src="dataModel/formulas.js"></script>
-    <script src="dataModel/refValues.js"></script>
-    <script src="dataModel/normalization.js"></script>
-    <script src="dataModel/estimations.js"></script>
-    <script src="dataModel/sumable_magnitudes.js"></script>
-    <script src="utils.js"></script>
-    <script src="graphs.js"></script>
-    <script src="dataModel/unfccc.js"></script>
-    <script src=main_menu.js></script>
+      <script src="dataModel/formulas.js"></script>
+      <script src="dataModel/unfccc.js"></script>
+
+      <script src="dataModel/questions.js"></script>
+      <script src="dataModel/level3variables.js"></script>
+      <script src="dataModel/level2only.js"></script>
+      <script src="dataModel/refValues.js"></script>
+      <script src="dataModel/estimations.js"></script>
+      <script src="dataModel/sumable_magnitudes.js"></script>
+      <script src="utils.js"></script>
+      <script src="graphs.js"></script>
+      <script src=main_menu.js></script>
     -->
 
   <!--/load backend-->
@@ -975,6 +976,7 @@
   <div id=tier_a v-if="visible">
     <div>
       tier A: - do after tier B
+      TODO
     </div>
 
     <button class="button prev"
@@ -1101,7 +1103,7 @@
     </div>
 
     <!--tier b inputs and outputs-->
-    <div style="display:grid;grid-template-columns:50% 50%">
+    <div style="display:grid;grid-template-columns:62% 38%">
       <!--tier b inputs-->
       <div style="padding:0 8px 0 5px">
         <div class="table-title">
@@ -1119,8 +1121,10 @@
               <th style=background:inherit>{{translate('edit_unit')     }}
             </tr>
           </thead>
+          <!--tier b inputs-->
           <tbody>
-            <tr v-for="[key,val],i in Object.entries(current_stage)"
+            <tr
+              v-for="[key,val],i in Object.entries(current_stage)"
               v-if="typeof(val)=='number'"
             >
               <!--input name-->
@@ -1128,7 +1132,7 @@
                 <div class=flex style="justify-content:space-between">
                   <div v-html="translate(key+'_descr')"></div>
                   <div v-if="Recommendations[key]">
-                    <button 
+                    <button
                       @click="current_stage[key] = Recommendations[key]()"
                       style="font-size:smaller;float:right"
                       :caption="'Estimation based on other inputs: FORMULA TODO'"
@@ -1140,12 +1144,32 @@
                     </button>
                   </div>
                 </div>
-                </div>
                 <div>
                   (<a onclick="alert('TODO')">{{key}}</a>)
                 </div>
-                <div>
-                  <!--exceptions TODO-->
+                <div v-if="Exceptions[key]">
+                  <!--case 1: selection is a percent of something else-->
+                  <select v-if="Exceptions[key].percent_of" v-model="current_stage[key]">
+                    <option
+                      v-for="obj,option in Tables[Exceptions[key].table]"
+                      :value="parseFloat(obj[Exceptions[key].table_field()]*Exceptions[key].percent_of())"
+                    >
+                      {{translate(option)}}
+                      [{{        100*obj[Exceptions[key].table_field()] }} %]
+                      ({{ format(    obj[Exceptions[key].table_field()]*Exceptions[key].percent_of()/Units.multiplier(key) )}}
+                       {{get_current_unit(key)}})
+                    </option>
+                  </select>
+                  <!--case 2: selection is a fixed value-->
+                  <select v-else v-model="current_stage[key]">
+                    <option
+                      v-for="obj,option in Tables[Exceptions[key].table]"
+                      :value="parseFloat(obj[Exceptions[key].table_field()])"
+                    >
+                      {{translate(option)}}
+                      ({{ format(obj[Exceptions[key].table_field()]) }})
+                    </option>
+                  </select>
                 </div>
               </td>
 
@@ -1153,7 +1177,7 @@
               <!--dropdowns and numbers-->
               <td v-if="Info[key] && Info[key].magnitude=='Option'" colspan=2>
                 <select v-model="current_stage[key]">
-                  <option 
+                  <option
                     v-for="obj,op in Tables[key]"
                     :value="parseInt(Tables[key][op].value)"
                   >
@@ -1214,10 +1238,10 @@
             <tr>
               <th>{{translate('Origin')}}
               <th>kg CO<sub>2</sub>eq<br>{{translate('assessment period')}}
-              <th>
+              <th v-if="Normalization[level] && Normalization[level].serv_pop">
                 kg CO<sub>2</sub>eq<br>per {{translate('year')}} <br>per {{translate('serv.pop.')}}
               </th>
-              <th v-if="level!='Faecl'">
+              <th v-if="Normalization[level] && Normalization[level].volume">
                 kg CO<sub>2</sub>eq<br>per m<sup>3</sup>
               </th>
             </tr>
@@ -1233,8 +1257,22 @@
                 (<a onclick="alert('TODO')">{{key}}</a>)
               </td>
               <td v-html="format(current_stage[key]())"></td>
-              <td>TODO
-              <td>TODO
+
+              <!--emission per year and serviced population-->
+              <td
+                v-if="Normalization[level] && Normalization[level].serv_pop"
+                v-html="format( Normalization[level].serv_pop(current_stage[key]()))"
+              ></td>
+
+              <!--emission per m3 of water treated-->
+              <td
+                v-if="Normalization[level] && Normalization[level].volume && sublevel"
+                v-html="format( Normalization[level][sublevel].volume(current_stage[key]()))"
+              ></td>
+              <td
+                v-else-if="Normalization[level] && Normalization[level].volume && !sublevel"
+                v-html="format( Normalization[level].volume(current_stage[key]()))"
+              ></td>
             </tr>
           </tbody>
           <!--decoration bottom table-->
@@ -1279,21 +1317,24 @@
     <!--pending-------------------------------------------------------------->
     <div>
       <ul>
-        <li>graph level2
+        <li>NEXT: formulas
+        <li>questions
         <li>substages
-        <li>prev/next buttons
+        <li>graphs
+        <li>reporting tool
+        <li>compabibility module
       </ul>
     </div>
   </div>
 
   <!--summary ghg VIEW TODO-->
-  <div id=summary_ghg v-if="visible">summary ghg</div>
+  <div id=summary_ghg v-if="visible">summary ghg TODO</div>
 
   <!--summary nrg VIEW TODO-->
-  <div id=summary_nrg v-if="visible">summary nrg</div>
+  <div id=summary_nrg v-if="visible">summary nrg TODO</div>
 
   <!--opportunities VIEW TODO-->
-  <div id=opportunities v-if="visible">opportunities</div>
+  <div id=opportunities v-if="visible">opportunities TODO</div>
 </div>
 
 <!--load vue components-->

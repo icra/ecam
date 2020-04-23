@@ -312,7 +312,6 @@
     text-align:right;
     color:#666;
     cursor:cell;
-    max-width:100px;
     padding:0;
   }
   #tier_b td.input input {

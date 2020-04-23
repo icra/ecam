@@ -1,16 +1,12 @@
 /*
-  - 'exceptions' are variables that not behave like normal ones are treated
-    here. They are inputs with a list of possible values that set the number
+  - 'exceptions' are inputs with a list of possible values that set the number
     what is different of normal dropdowns is that the user can also enter a
-    number besides selecting an option
+    number besides selecting an option.
+
   - each selection is stored in Configuration.Selected
 */
 
 let Exceptions={
-  //grouped by similarty rather than stage
-  //all functions are almost equal
-  ////they can be generalised as ~ 
-  //function(code, table, field_name_in_table) TODO
   list_v2:{
     //CH4 emission factors
       ww_ch4_efac_unt:function(){ //done
@@ -257,124 +253,93 @@ let Exceptions={
       },
   },
 
-  //CH4 emission factors
-    ww_ch4_efac_unt:{
-      level:"Waste",
-      sublevel:"Collection",
-      table:"ww_ch4_efac",
-      table_field:"ch4_efac",
+  //CH4 emission factors [OK]
+  ww_ch4_efac_unt:{
+    table:"ww_ch4_efac",
+    table_field:function(){return "ch4_efac"},
+  },
+  ww_ch4_efac_unc:{
+    table:"ww_ch4_efac",
+    table_field:function(){return "ch4_efac"},
+  },
+  wwt_ch4_efac:{
+    table:"wwt_type_tre",
+    table_field:function(){return "ch4_efac"},
+  },
+  wwd_ch4_efac:{
+    table:"ww_ch4_efac",
+    table_field:function(){return "ch4_efac"},
+  },
+  fsc_ch4_efac:{ //depends on ch4_efac_flooding
+    table:"fsc_type_tre",
+    table_field:function(){
+      if(Global.Faecl.Containment.fsc_flooding){
+        return "ch4_efac_flooding";
+      }else{
+        return "ch4_efac";
+      }
     },
-    ww_ch4_efac_unc:{
-      level:"Waste",
-      sublevel:"Collection",
-      table:"ww_ch4_efac",
-      table_field:"ch4_efac",
-    },
-    wwt_ch4_efac:{
-      level:"Waste",
-      sublevel:"Treatment",
-      table:"wwt_type_tre",
-      table_field:"ch4_efac",
-    },
-    wwd_ch4_efac:{
-      level:"Waste",
-      sublevel:"Discharge",
-      table:"ww_ch4_efac",
-      table_field:"ch4_efac",
-    },
-    fsc_ch4_efac:{ //TODO
-      level:"Faecl",
-      sublevel:"Containment",
-      table:"fsc_type_tre",
-      /*
-      var value = Tables.fsc_type_tre[key][(Global.Faecl.Containment.fsc_flooding?"ch4_efac_flooding":"ch4_efac")];
-      */
-    },
-    fst_ch4_efac:{
-      level:"Faecl",
-      sublevel:"Treatment",
-      table:"fst_type_tre",
-      table_field:"ch4_efac",
-    },
-    fsr_ch4_efac:{
-      level:"Faecl",
-      sublevel:"Reuse",
-      table:"fsr_ch4_efac",
-      table_field:"ch4_efac",
-    },
-    fsr_ch4_efac_dumping:{
-      level:"Faecl",
-      sublevel:"Reuse",
-      table:"fsr_dumping_pth",
-      table_field:"ch4_efac",
-    },
+  },
+  fst_ch4_efac:{
+    table:"fst_type_tre",
+    table_field:function(){return "ch4_efac"},
+  },
+  fsr_ch4_efac:{
+    table:"fsr_ch4_efac",
+    table_field:function(){return "ch4_efac"},
+  },
+  fsr_ch4_efac_dumping:{
+    table:"fsr_dumping_pth",
+    table_field:function(){return "ch4_efac"},
+  },
 
   //BOD removed as sludge
-    wwt_bod_slud:{ //TODO
-      level:"Waste",
-      sublevel:"Treatment",
-      table:"wwt_type_tre",
-      table_field:"",
-
-      /*
-      Object.keys(Tables.wwt_type_tre).forEach(key=>{
-        var value=Global.Waste.Treatment.wwt_bod_infl*Tables.wwt_type_tre[key].bod_rmvd_as_sludge_estm;
-        var bod_rmvd_perc=Tables.wwt_type_tre[key].bod_rmvd_as_sludge_estm*100;
-        option.value=value;
-        option.setAttribute('key',key);
-        option.innerHTML=translate(key)+" ["+bod_rmvd_perc+"%] &rarr; ("+format(value)+")";
-        if(key==Global.Configuration.Selected.wwt_bod_slud){ option.selected='true'; }
-      });
-      */
+  wwt_bod_slud:{ //TODO difficult
+    table:"wwt_type_tre",
+    table_field:function(){return "bod_rmvd_as_sludge_estm"},
+    percent_of:function(){
+      return Global.Waste.Treatment.wwt_bod_infl;
     },
 
-    fst_bod_slud:{ //TODO
-      level:"Faecl",
-      sublevel:"Treatment",
-      table:"fst_type_tre",
-      table_field:"",
+    /*
+    Object.keys(Tables.wwt_type_tre).forEach(key=>{
+      option.innerHTML=translate(key)+" ["+bod_rmvd_perc+"%] &rarr; ("+format(value)+")";
+    });
+    */
+  },
+  fst_bod_slud:{ //TODO difficult
+    table:"fst_type_tre",
+    table_field:function(){return "bod_rmvd_as_sludge_estm"},
 
-      /*
-      Object.keys(Tables.fst_type_tre).forEach(key=>{
-        var value=Global.Faecl.Treatment.fst_bod_infl*Tables.fst_type_tre[key].bod_rmvd_as_sludge_estm;
-        var bod_rmvd_perc = Tables.fst_type_tre[key].bod_rmvd_as_sludge_estm*100;
-        option.value=value;
-        option.setAttribute('key',key);
-        option.innerHTML=translate(key)+" ["+bod_rmvd_perc+"%] &rarr; ("+format(value)+")";
-        if(key==Global.Configuration.Selected.fst_bod_slud){ option.selected='true'; }
-      });
-      */
+    percent_of:function(){
+      return Global.Faecl.Treatment.fst_bod_infl;
     },
 
-  //FS density
-    fsc_fdensity:{
-      level:"Faecl",
-      sublevel:"Containment",
-      table:"fsc_type_tre",
-      table_field:"fs_density",
-    },
+    /*
+    Object.keys(Tables.fst_type_tre).forEach(key=>{
+      option.innerHTML=translate(key)+" ["+bod_rmvd_perc+"%] &rarr; ("+format(value)+")";
+    });
+    */
+  },
 
-  //BOD concentration
-    fsc_bod_conc_fs:{
-      level:"Faecl",
-      sublevel:"Containment",
-      table:"fsc_type_tre",
-      table_field:"BOD_conc_FS",
-    },
-    fsr_bod_conc_fs:{
-      level:"Faecl",
-      sublevel:"Reuse",
-      table:"fsc_type_tre",
-      table_field:"BOD_conc_FS",
-    },
+  fsc_fdensity:{
+    table:"fsc_type_tre",
+    table_field:function(){return "fs_density"},
+  },
+  fsc_bod_conc_fs:{
+    table:"fsc_type_tre",
+    table_field:function(){return "BOD_conc_FS"},
+  },
+  fsr_bod_conc_fs:{
+    table:"fsc_type_tre",
+    table_field:function(){return "BOD_conc_FS"},
+  },
 };
 
 //save exceptions inside global to make them searchable for the function 'outputsPerInput' (in 'formulas.js')
 Global.Exceptions=Exceptions;
 
-//initialize with empty string inside Configuration.Selected for Exceptions to avoid warning "types do not match"
-Object.keys(Exceptions.list).forEach(key=>{Global.Configuration.Selected[key]=""});
-
 //default values for exceptions
+Object.keys(Exceptions).forEach(key=>{Global.Configuration.Selected[key]=""});
 Global.Configuration.Selected.ww_ch4_efac_unt="Sea and aerobic water bodies";
 Global.Configuration.Selected.ww_ch4_efac_unc="Stagnant sewer and anaerobic water bodies";

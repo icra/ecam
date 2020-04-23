@@ -46,7 +46,7 @@
   let linear_menu = new Vue({
     el:'#linear-menu',
     data:{
-      visible:true,
+      visible:false,
       Global,
       Structure,
       current_view:null,
@@ -100,7 +100,7 @@
   let index = new Vue({
     el:'#index',
     data:{
-      visible:false,
+      visible:true,
       Global,
     },
     methods:{
@@ -348,7 +348,7 @@
   let tier_b = new Vue({
     el:"#tier_b",
     data:{
-      visible:true,
+      visible:false,
       level:'Water',
       sublevel:'Abstraction',
       current_stage:Global.Water.Abstraction,
@@ -360,6 +360,8 @@
       Units,
       Tables,
       Recommendations,
+      Exceptions,
+      Normalization,
     },
     methods:{
       translate,

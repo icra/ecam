@@ -1232,3 +1232,6 @@ Global.General.bod_pday_fs  = 37;  //BOD5 in faecal sludge                  (g/p
 //wsa
 Global.Water.Abstraction.wsa_nrg_cons = 1000;
 Global.Water.Abstraction.wsa_vol_conv =  500;
+
+//wwt
+Global.Waste.Treatment.wwt_bod_infl = 100; //kg
