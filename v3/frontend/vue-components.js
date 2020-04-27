@@ -362,6 +362,7 @@
       Recommendations,
       Exceptions,
       Normalization,
+      Formulas,
     },
     methods:{
       translate,
@@ -400,7 +401,7 @@
     },
   });
 
-  //summary ghg TODO
+  //TODO
   let summary_ghg = new Vue({
     el:"#summary_ghg",
     data:{
@@ -408,7 +409,7 @@
     },
   });
 
-  //summary nrg TODO
+  //TODO
   let summary_nrg = new Vue({
     el:"#summary_nrg",
     data:{
@@ -416,7 +417,7 @@
     },
   });
 
-  //opportunities TODO
+  //TODO
   let opportunities = new Vue({
     el:"#opportunities",
     data:{
@@ -480,7 +481,10 @@ let ecam={
     this.views[view].visible=true;
     linear_menu.current_view = view;
     window.scrollTo(0,0);
-    caption.listeners();
+
+    //TODO make it async, figure out how to do it
+    //add mouse listeners to every [caption] element
+    setTimeout(caption.listeners, 1000);
   },
 
   //force render views and components (for language tags)
@@ -492,3 +496,8 @@ let ecam={
     });
   },
 };
+
+//defaults (development)
+index.visible      = false;
+linear_menu.visible= true;
+tier_b.visible     = true;

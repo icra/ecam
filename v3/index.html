@@ -1,6 +1,5 @@
 <!doctype html><html><head>
   <meta charset="utf-8">
-  <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="frontend/img/favicon.ico" type="image/x-icon">
   <title>ECAM v3 (development)</title>
@@ -18,22 +17,21 @@
     <script src="backend/recommendations.js"></script>
     <script src="backend/exceptions.js"></script>
     <script src="backend/normalization.js"></script>
+    <script src="backend/formulas.js"></script>
 
     <!--v2
-      <script src="dataModel/formulas.js"></script>
-      <script src="dataModel/unfccc.js"></script>
+    <script src="dataModel/unfccc.js"></script>
 
-      <script src="dataModel/questions.js"></script>
-      <script src="dataModel/level3variables.js"></script>
-      <script src="dataModel/level2only.js"></script>
-      <script src="dataModel/refValues.js"></script>
-      <script src="dataModel/estimations.js"></script>
-      <script src="dataModel/sumable_magnitudes.js"></script>
-      <script src="utils.js"></script>
-      <script src="graphs.js"></script>
-      <script src=main_menu.js></script>
+    <script src="dataModel/questions.js"></script>
+    <script src="dataModel/level3variables.js"></script>
+    <script src="dataModel/level2only.js"></script>
+    <script src="dataModel/refValues.js"></script>
+    <script src="dataModel/estimations.js"></script>
+    <script src="dataModel/sumable_magnitudes.js"></script>
+    <script src="utils.js"></script>
+    <script src="graphs.js"></script>
+    <script src=main_menu.js></script>
     -->
-
   <!--/load backend-->
 
   <!--load frontend-->
@@ -47,10 +45,12 @@
       <!--vue
         development version, includes helpful console warnings
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="frontend/vue-dev.js"></script>
         production version, optimized for size and speed
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="frontend/vue-pro.js"></script>
       -->
-      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+      <script src="frontend/vue-dev.js"></script>
     <!--/libs-->
 
     <!--load language tags-->
@@ -453,8 +453,8 @@
           <a class="blue_links" onclick="ecam.show('help')">
             {{translate("help")}}
           </a> -
-          <a class="blue_links" href=mailto:info@wacclim.org target=_blank>
-            {{translate("contact")}}: info@wacclim.org
+          <a class="blue_links" href=mailto:wacclim@giz.de target=_blank>
+            {{translate("contact")}}: wacclim@giz.de
           </a>
         </div>
 
@@ -552,7 +552,7 @@
       ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under
       a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work
       at <a target="_blank" href="https://creativecommons.org/choose/www.wacclim.org">www.wacclim.org</a>. Permissions beyond the scope of this license may be available
-      at <a target="_blank" href="https://creativecommons.org/choose/info@wacclim.org">info@wacclim.org</a>.
+      at <a target="_blank" href="https://creativecommons.org/choose/wacclim@giz.de">wacclim@giz.de</a>.
     </div>
 
     <!--logo wacclim-->
@@ -1135,7 +1135,7 @@
                     <button
                       @click="current_stage[key] = Recommendations[key]()"
                       style="font-size:smaller;float:right"
-                      :caption="'Estimation based on other inputs: FORMULA TODO'"
+                      :caption="`Estimation formula: <br>${Formulas.prettify(Recommendations[key])}`"
                     >
                       Estimation:
                       <span v-html="format(Recommendations[key]()/Units.multiplier(key))"></span>
@@ -1150,6 +1150,7 @@
                 <div v-if="Exceptions[key]">
                   <!--case 1: selection is a percent of something else-->
                   <select v-if="Exceptions[key].percent_of" v-model="current_stage[key]">
+                    <option>--select--</option>
                     <option
                       v-for="obj,option in Tables[Exceptions[key].table]"
                       :value="parseFloat(obj[Exceptions[key].table_field()]*Exceptions[key].percent_of())"
@@ -1256,7 +1257,10 @@
                 <br>
                 (<a onclick="alert('TODO')">{{key}}</a>)
               </td>
-              <td v-html="format(current_stage[key]())"></td>
+              <td
+                v-html="format(current_stage[key]())"
+                :caption="Formulas.prettify(current_stage[key])"
+              ></td>
 
               <!--emission per year and serviced population-->
               <td
@@ -1302,7 +1306,10 @@
                 <br>
                 (<a onclick="alert('TODO')">{{key}}</a>)
               </td>
-              <td v-html="format(current_stage[key]())"></td>
+              <td
+                v-html="format(current_stage[key]())"
+                :caption="Formulas.prettify(current_stage[key])"
+              ></td>
               <td v-html="Info[key].unit"></td>
             </tr>
           </tbody>
