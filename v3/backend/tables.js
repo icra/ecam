@@ -1,10 +1,10 @@
 //Data structure for tabled values or dropdown menus
-//used for two kinds of variables: 
+//used for two kinds of variables:
 // 1. discrete variables with magnitude==Option
 // 2. numeric variables inside Exceptions
 let Tables = {
 	//fuel types for several filters
-    "Fuel types": {             //EFxxx: [kg/TJ], NCV: [TJ/Gg], FD: [kg/L].
+    "Fuel types": {     //EFxxx: [kg/TJ], NCV: [TJ/Gg], FD: [kg/L].
       "Diesel"          :{value:0,EFCH4:{engines:3,vehicles:3.9},EFN2O:{engines:0.6,vehicles:3.9},EFCO2:74100,FD:0.84,NCV:43.0},
       "Gasoline/Petrol" :{value:1,EFCH4:{engines:3,vehicles:3.8},EFN2O:{engines:0.6,vehicles:1.9},EFCO2:69300,FD:0.74,NCV:44.3},
       "Natural Gas"     :{value:2,EFCH4:{engines:10,vehicles:92},EFN2O:{engines:0.1,vehicles:0.2},EFCO2:56100,FD:0.75,NCV:48.0},
@@ -74,7 +74,7 @@ let Tables = {
 
 	//wwt
     "wwt_type_tre":{
-      "Select treatment type":{value:0, ch4_efac:0, bod_rmvd_as_sludge_estm:0},
+      "Select treatment type":{value:0,                            ch4_efac:0,     bod_rmvd_as_sludge_estm:0},
       "Activated Sludge - Well managed":{value:1,                  ch4_efac:0,     bod_rmvd_as_sludge_estm:0.65},
       "Activated Sludge - Minor poorly aerated zones":{value:2,    ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
       "Activated Sludge - Some aerated zones":{value:3,            ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.65},
@@ -234,9 +234,9 @@ Tables.wwt_appl_typ=Tables["Fuel types"]; //type of fuel app
 Tables.fsr_fslu_typ_lf=Tables.fsr_fslu_typ;
 Tables.fsr_fslu_typ_la=Tables.fsr_fslu_typ;
 
-//find the option (string) by field (string) and value (float or int)
-Tables.find=function(field,value) {
-	for(var option in Tables[field]) {
+//find "option" (string) by "field" (string) and "value" (number)
+Tables.find=function(field, value){
+	for(let option in Tables[field]) {
 		if(value==Tables[field][option].value) {
 			return option;
 		}

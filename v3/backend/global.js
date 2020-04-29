@@ -1182,7 +1182,7 @@ let Global={
     },
 
     //answers for filters (see "questions.js")
-    "Yes/No": {
+    "Questions": {
       //examples:
       //wwt_valorizing_biogas: 0,
       //fst_valorizing_biogas: 0,

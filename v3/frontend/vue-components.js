@@ -1,6 +1,6 @@
 // vim: set foldlevel=0 nomodeline:
 //-----------------------------------------------------------------------------
-// COMMON ELEMENTS
+// COMMON ELEMENTS (visible everywhere)
 //-----------------------------------------------------------------------------
   let loading_container = new Vue({
     el:"#loading_container",
@@ -71,8 +71,11 @@
     },
     methods:{
       show(ev, element){
+        ev.stopPropagation(); //prevent parent elements triggering show() onmousemove
         this.visible=true;
-        this.text=element.getAttribute('caption');
+        if(element.getAttribute('caption')){
+          this.text=element.getAttribute('caption');
+        }
         let el=document.querySelector("#caption");
         el.style.left=(ev.clientX-10)+"px";
         el.style.top=(ev.clientY+15)+"px";
@@ -82,7 +85,7 @@
         this.visible=false;
       },
 
-      //mouse listeners
+      //mouse listeners IMPROVE THIS CODE TODO
       listeners() {
         //get all elements with 'caption' attribute
         document.querySelectorAll("[caption]").forEach(el=>{
@@ -363,6 +366,7 @@
       Exceptions,
       Normalization,
       Formulas,
+      Questions,
     },
     methods:{
       translate,
@@ -397,7 +401,6 @@
         }
         return this.Global.Configuration.Units[key];
       },
-
     },
   });
 
@@ -498,6 +501,9 @@ let ecam={
 };
 
 //defaults (development)
-index.visible      = false;
-linear_menu.visible= true;
-tier_b.visible     = true;
+index.visible        = false;
+linear_menu.visible  = true;
+tier_b.level         = 'Water';
+tier_b.sublevel      = 'Distribution';
+tier_b.current_stage = Global.Water.Distribution;
+tier_b.visible       = true;
