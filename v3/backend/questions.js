@@ -31,6 +31,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
 
     "wsa_pumping":{
@@ -50,6 +51,7 @@ let Questions={
       otherQuestions:[
         "wsa_pumping_eff",
       ],
+      folded:0,
     },
 
     "wsa_pumping_eff":{
@@ -65,6 +67,7 @@ let Questions={
       otherQuestions:[
         "wsa_opportunities",
       ],
+      folded:0,
     },
 
     "wsa_opportunities":{
@@ -77,6 +80,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
   //wst
@@ -91,6 +95,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
 
     "wst_pumping":{
@@ -108,6 +113,7 @@ let Questions={
         "wst_pumping_eff",
         "wst_opportunities",
       ],
+      folded:0,
     },
 
     "wst_pumping_eff": {
@@ -121,6 +127,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "wst_opportunities":{
@@ -133,6 +140,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "wst_treatment_perf":{
@@ -144,6 +152,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
   //wsd
@@ -158,6 +167,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
 
     "wsd_water_eff":{
@@ -174,6 +184,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
 
     "wsd_trucks":{
@@ -187,6 +198,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
 
     "wsd_service_perf":{
@@ -199,6 +211,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "wsd_topographic":{
@@ -217,6 +230,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "wsd_pumping":{
@@ -236,6 +250,7 @@ let Questions={
         "wsd_pumping_eff",
         "wsd_opportunities",
       ],
+      folded:0,
     },
 
     "wsd_pumping_eff":{
@@ -249,6 +264,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "wsd_opportunities":{
@@ -261,6 +277,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
   //wwc
@@ -275,6 +292,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
 
     "wwc_water_eff": {
@@ -292,6 +310,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "wwc_pumping":{
@@ -309,6 +328,7 @@ let Questions={
         "wwc_pumping_eff",
         "wwc_opportunities",
       ],
+      folded:0,
     },
 
     "wwc_pumping_eff": {
@@ -322,6 +342,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "wwc_opportunities":{
@@ -334,6 +355,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
   //wwt
@@ -348,6 +370,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
 
     "wwt_producing_biogas":{
@@ -368,6 +391,7 @@ let Questions={
       otherQuestions:[
         "wwt_valorizing_biogas",
       ],
+      folded:0,
     },
 
     "wwt_valorizing_biogas":{
@@ -381,6 +405,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
 
     "wwt_treatment_perf":{
@@ -393,6 +418,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "wwt_pumping":{
@@ -410,6 +436,7 @@ let Questions={
         "wwt_pumping_eff",
         "wwt_opportunities",
       ],
+      folded:0,
     },
 
     "wwt_pumping_eff": {
@@ -423,6 +450,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "wwt_opportunities":{
@@ -435,6 +463,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "wwt_sludge_mgmt":{
@@ -457,6 +486,7 @@ let Questions={
         "wwt_stockpiling",
         "wwt_trucks",
       ],
+      folded:0,
     },
 
     "wwt_slu_storage":{
@@ -469,6 +499,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
 
     "wwt_composting":{
@@ -480,8 +511,8 @@ let Questions={
         "wwt_slu_comp_C_seq",
       ],
       advanced:0,
-      otherQuestions:[
-      ],
+      otherQuestions:[ ],
+      folded:0,
     },
 
     "wwt_incineration":{
@@ -493,8 +524,8 @@ let Questions={
         "wwt_KPI_ghg_inc_co2eq",
       ],
       advanced:0,
-      otherQuestions:[
-      ],
+      otherQuestions:[ ],
+      folded:0,
     },
 
     "wwt_land_application":{
@@ -507,8 +538,8 @@ let Questions={
         "wwt_slu_app_C_seq",
       ],
       advanced:0,
-      otherQuestions:[
-      ],
+      otherQuestions:[ ],
+      folded:0,
     },
 
     "wwt_landfilling":{
@@ -523,8 +554,8 @@ let Questions={
         "wwt_slu_land_C_seq",
       ],
       advanced:0,
-      otherQuestions:[
-      ],
+      otherQuestions:[ ],
+      folded:0,
     },
 
     "wwt_stockpiling":{
@@ -533,8 +564,8 @@ let Questions={
         "wwt_KPI_ghg_stock_co2eq",
       ],
       advanced:0,
-      otherQuestions:[
-      ],
+      otherQuestions:[ ],
+      folded:0,
     },
 
     "wwt_trucks":{
@@ -548,6 +579,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
 
     "wwt_correction_factor":{
@@ -556,6 +588,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
 
   //wwd
@@ -570,6 +603,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
 
     "wwd_trucks":{
@@ -583,6 +617,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
 
     "wwd_pumping":{
@@ -600,6 +635,7 @@ let Questions={
         "wwd_pumping_eff",
         "wwd_opportunities",
       ],
+      folded:0,
     },
 
     "wwd_pumping_eff": {
@@ -613,6 +649,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "wwd_opportunities":{
@@ -625,6 +662,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "wwd_water_reuse":{
@@ -642,6 +680,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
   //fsc
@@ -658,6 +697,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
 
     "fsc_pumping":{
@@ -675,6 +715,7 @@ let Questions={
         "fsc_pumping_eff",
         "fsc_opportunities",
       ],
+      folded:0,
     },
 
     "fsc_pumping_eff": {
@@ -688,6 +729,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "fsc_opportunities":{
@@ -700,6 +742,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
   //fst
@@ -714,6 +757,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
     "fst_transport":{
       variables:[
@@ -726,6 +770,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
     "fst_producing_biogas":{
       variables:[
@@ -738,8 +783,8 @@ let Questions={
         "fst_SL_GHG_avoided",
       ],
       advanced:0,
-      otherQuestions:[
-      ],
+      otherQuestions:[ ],
+      folded:0,
     },
 
     "fst_pumping":{
@@ -757,6 +802,7 @@ let Questions={
         "fst_pumping_eff",
         "fst_opportunities",
       ],
+      folded:0,
     },
 
     "fst_pumping_eff": {
@@ -770,6 +816,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "fst_opportunities":{
@@ -782,6 +829,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
 
@@ -797,6 +845,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
     "fsr_effluent":{
       variables:[
@@ -810,6 +859,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
     "fsr_transport":{
       variables:[
@@ -822,6 +872,7 @@ let Questions={
       ],
       advanced:0,
       otherQuestions:[],
+      folded:0,
     },
     "fsr_landfil":{
       variables:[
@@ -836,8 +887,8 @@ let Questions={
         "fsr_ghg_avoided_landfil",
       ],
       advanced:0,
-      otherQuestions:[
-      ],
+      otherQuestions:[ ],
+      folded:0,
     },
     "fsr_landapp":{
       variables:[
@@ -849,8 +900,8 @@ let Questions={
         "fsr_ghg_avoided_landapp",
       ],
       advanced:0,
-      otherQuestions:[
-      ],
+      otherQuestions:[ ],
+      folded:0,
     },
     "fsr_dumping":{
       variables:[
@@ -863,8 +914,8 @@ let Questions={
         "fsr_KPI_GHG_dumping",
       ],
       advanced:0,
-      otherQuestions:[
-      ],
+      otherQuestions:[ ],
+      folded:0,
     },
     "fsr_urine":{
       variables:[
@@ -872,8 +923,8 @@ let Questions={
         "fsr_KPI_GHG_urine",
       ],
       advanced:0,
-      otherQuestions:[
-      ],
+      otherQuestions:[ ],
+      folded:0,
     },
     "fsr_reuse":{
       variables:[
@@ -884,8 +935,8 @@ let Questions={
         "fsr_ghg_avoided_reuse",
       ],
       advanced:0,
-      otherQuestions:[
-      ],
+      otherQuestions:[ ],
+      folded:0,
     },
     "fsr_pumping":{
       variables:[
@@ -902,6 +953,7 @@ let Questions={
         "fsr_pumping_eff",
         "fsr_opportunities",
       ],
+      folded:0,
     },
 
     "fsr_pumping_eff": {
@@ -915,6 +967,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 
     "fsr_opportunities":{
@@ -927,6 +980,7 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+      folded:0,
     },
 };
 
@@ -968,6 +1022,11 @@ Questions.get_questions=function(ubication) {
   return questions;
 };
 
+//set default values for all questions to 0
+Object.keys(Questions).forEach(key=>{
+  Global.Configuration.Questions[key]=0;
+});
+
 //is the variable "field" inside a question?
 Questions.is_inside=function(field){
   //go over all questions
@@ -983,36 +1042,33 @@ Questions.is_inside=function(field){
   return false;
 };
 
-//-------------v3 / v2 ---------------------------------------
-
 //check if the input "field" is shown or hidden
-Questions.isHidden=function(field) {
+Questions.is_hidden=function(field) {
   //go over all questions
   for(let question in this) {
     //if answer is yes, next question: all fields inside should be shown
     if(Global.Configuration.Questions[question]==1){continue;}
 
     //if answer is no, look for "field" inside
-    let code;
     for(let i in this[question].variables) {
-      code=this[question].variables[i];
+      let code=this[question].variables[i];
       if(code==field) return true;
     }
   }
   return false;
 };
 
+//-------------v3 / v2 ---------------------------------------
+
+
 //check if the question "field" should be hidden
-Questions.isHiddenQuestion=function(field) {
+Questions.is_question_hidden=function(field) {
   //go over all questions
   for(let question in this) {
-    //if answer is yes, next question: all fields inside should be shown
     if(Global.Configuration.Questions[question]==1){continue;}
-
     //if answer is no, look for "field" inside
-    let code;
     for(let i in this[question].otherQuestions) {
-      code=this[question].otherQuestions[i];
+      let code=this[question].otherQuestions[i];
       if(code==field) return true;
     }
   }
@@ -1063,8 +1119,3 @@ Questions.resetValues=function(question, ubication){
     Questions.resetValues(q,ubication);
   });
 };
-
-//set default values for all questions to 0 (before updating the structure from the cookies)
-Object.keys(Questions).forEach(key=>{
-  Global.Configuration.Questions[key]=0;
-});

@@ -1200,7 +1200,7 @@ Global.Waste.wwd_KPI_GHG=function(){return Global.Waste.Discharge.wwd_KPI_GHG()}
 Global.Water.ws_KPI_GHG =function(){return this.wsa_KPI_GHG()+this.wst_KPI_GHG()+this.wsd_KPI_GHG()};
 Global.Waste.ww_KPI_GHG =function(){return this.wwc_KPI_GHG()+this.wwt_KPI_GHG()+this.wwd_KPI_GHG()+this.ww_KPI_GHG_unt()};
 
-//extra object for opportunities added by Gary
+//extra object for opportunities added by Gary TODO
 Global.Opps={
   g_nrw_water_vol_dper              : 0,
   g_end_user_consumption_dper       : 0,
@@ -1213,15 +1213,17 @@ Global.Opps={
   g_ww_biogas_dper                  : 0,
 };
 
-//default values for testing purposes
+//default values for v3 development
 //l1
 Global.Water.ws_resi_pop             = 1000; //people
-Global.Water.ws_serv_pop             =  990; //people
-Global.Waste.ww_resi_pop             = 1000; //people
-Global.Waste.Collection.wwc_conn_pop =  990; //people
-Global.Waste.Treatment.wwt_serv_pop  =  980; //people
-Global.Faecl.fs_resi_pop             =  100; //people
-Global.Faecl.fs_onsi_pop             =   50; //people
+Global.Water.ws_serv_pop             =  900; //people
+
+Global.Waste.ww_resi_pop             = 2000; //people
+Global.Waste.Collection.wwc_conn_pop = 1900; //people
+Global.Waste.Treatment.wwt_serv_pop  = 1800; //people
+
+Global.Faecl.fs_resi_pop             = 100; //people
+Global.Faecl.fs_onsi_pop             =  90; //people
 
 //general
 Global.General.conv_kwh_co2 = 0.7; //conversion factor for grid electricity (kgCO2/kWh)

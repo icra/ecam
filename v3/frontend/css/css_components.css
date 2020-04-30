@@ -300,6 +300,11 @@
 
 /*tier a TODO*/
 /*tier b TODO*/
+  #tier_b .warning {
+    background:red;
+    padding:2px 4px;
+    border-radius:5px;
+  }
   #tier_b div.table-title {
     color:#666;
     font-size:15px;
@@ -307,14 +312,14 @@
     font-weight:normal;
     text-align:left;
   }
-  #tier_b td.input {
+  #tier_b .input {
     background:#eee;
     text-align:right;
     color:#666;
     cursor:cell;
     padding:0;
   }
-  #tier_b td.input input {
+  #tier_b .input input {
     background:inherit;
     width:95%;
     border:none;
@@ -324,6 +329,9 @@
     height:40px;
     cursor:cell;
   }
-  #tier_b td.input input:focus {
+  #tier_b .input input:focus {
     background:white;
+  }
+  #tier_b .disabled_question {
+    color:#aaa;
   }

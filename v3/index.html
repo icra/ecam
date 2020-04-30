@@ -994,8 +994,14 @@
 
   <!--tier b VIEW-->
   <div id=tier_b v-if="visible">
-    <!--title tier b + tips-->
-    <div class=flex style="justify-content:space-between">
+    <!--tier b title + tips-->
+    <div class=flex
+      style="
+        justify-content:space-between;
+        border-bottom:1px solid #ccc;
+        margin-bottom:20px;
+      "
+    >
       <h1>
         <a onclick="ecam.show('get_started')">{{Global.General.Name}}</a>
         <span style="color:black">&rsaquo;</span>
@@ -1032,16 +1038,21 @@
       </div>
     </div>
 
-    <!--info on top of tier b, under the title-->
+    <!--tier b context info-->
     <div class=flex style="justify-content:space-between;background:#fafafa;font-family:monospace;padding:0.2em 2em;font-size:smaller">
       <!--assessment period-->
       <div>
         <a onclick="ecam.show('get_started')">
           {{translate('assessment_period')}}:
-          <b class=number :style="Global.General.Days()==0 ? 'color:red' : ''">
-            {{format(Global.General.Days())}}
+          <b style=color:black>
+            <span :class="Global.General.Days()==0 ? 'warning' : ''">
+              {{format(Global.General.Days())}}
+            </span>
           </b>
-          {{translate('days')}}
+          &emsp;
+          <span>
+            {{translate('days')}}
+          </span>
         </a>
       </div>
 
@@ -1049,14 +1060,20 @@
       <div>
         <a onclick="ecam.show('population')">
           {{translate('ws_resi_pop_descr')}}:
-          <b v-if="level=='Water'">
-            {{format(Global.Water.ws_resi_pop)}}
+          <b v-if="level=='Water'" style=color:black>
+            <span :class="Global.Water.ws_resi_pop==0 ? 'warning' : ''">
+              {{format(Global.Water.ws_resi_pop)}}
+            </span>
           </b>
-          <b v-if="level=='Waste'">
-            {{format(Global.Waste.ww_resi_pop)}}
+          <b v-if="level=='Waste'" style=color:black>
+            <span :class="Global.Waste.ww_resi_pop==0 ? 'warning' : ''">
+              {{format(Global.Waste.ww_resi_pop)}}
+            </span>
           </b>
-          <b v-if="level=='Faecl'">
-            {{format(Global.Faecl.fs_resi_pop)}}
+          <b v-if="level=='Faecl'" style=color:black>
+            <span :class="Global.Faecl.fs_resi_pop==0 ? 'warning' : ''">
+              {{format(Global.Faecl.fs_resi_pop)}}
+            </span>
           </b>
         </a>
       </div>
@@ -1065,7 +1082,11 @@
       <div v-if="level=='Waste'">
         <a onclick="ecam.show('population')">
           {{translate('ww_conn_pop_descr')}}:
-          <b>{{format(Global.Waste.ww_conn_pop())}}</b>
+          <b style=color:black>
+            <span :class="Global.Waste.ww_conn_pop()==0 ? 'warning' : ''">
+              {{format(Global.Waste.ww_conn_pop())}}
+            </span>
+          </b>
         </a>
       </div>
 
@@ -1074,21 +1095,33 @@
         <div v-if="level=='Water'">
           <a onclick="ecam.show('population')">
             {{translate('ws_serv_pop_descr')}}:
-            <b>{{format(Global[level].ws_serv_pop)}}</b>
+            <b style=color:black>
+              <span :class="Global.Water.ws_serv_pop==0 ? 'warning' : ''">
+                {{format(Global.Water.ws_serv_pop)}}
+              </span>
+            </b>
           </a>
         </div>
 
         <div v-if="level=='Waste'">
           <a onclick="ecam.show('population')">
             {{translate('ww_serv_pop_descr')}}:
-            <b>{{format(Global[level].ww_serv_pop())}}</b>
+            <b style=color:black>
+              <span :class="Global.Waste.ww_serv_pop()==0 ? 'warning' : ''">
+                {{format(Global.Waste.ww_serv_pop())}}
+              </span>
+            </b>
           </a>
         </div>
 
         <div v-if="level=='Faecl'">
           <a onclick="ecam.show('population')">
             {{translate('fs_onsi_pop_descr')}}:
-            <b>{{format(Global[level].fs_onsi_pop)}}</b>
+            <b style=color:black>
+              <span :class="Global[level].fs_onsi_pop==0 ? 'warning' : ''">
+                {{format(Global[level].fs_onsi_pop)}}
+              </span>
+            </b>
           </a>
         </div>
       </div>
@@ -1097,8 +1130,10 @@
       <div>
         <a onclick="ecam.show('configuration')">
           {{translate('conv_kwh_co2_descr')}}:
-          <b class=number style="Global.General.conv_kwh_co2==0 ? 'color:red':''">
-            {{format(Global.General.conv_kwh_co2)}}
+          <b style=color:black>
+            <span :class="Global.General.conv_kwh_co2==0 ? 'warning' : ''">
+              {{format(Global.General.conv_kwh_co2)}}
+            </span>
           </b>
           <span class=number v-html="Info.conv_kwh_co2.unit"></span>
         </a>
@@ -1106,7 +1141,7 @@
     </div>
 
     <!--tier b inputs and outputs-->
-    <div style="display:grid;grid-template-columns:62% 38%">
+    <div style="display:grid;grid-template-columns:60% 40%;padding-right:5px">
       <!--tier b inputs-->
       <div style="padding:0 8px 0 5px">
         <div class="table-title">
@@ -1115,140 +1150,86 @@
           {{sublevel ? translate(sublevel) : translate(level) }}
           {{translate('stages') }}
         </div>
+
         <!--tier b input table-->
         <table style="width:100%">
+          <!--tier b inputs header-->
           <thead>
             <tr :style="`background:${Structure.find(s=>s.level==level).color}`">
-              <th style=background:inherit>{{translate('Description')   }}
-              <th style=background:inherit>{{translate('Current value') }}
-              <th style=background:inherit>{{translate('edit_unit')     }}
+              <td>
+                <div style="display:grid;grid-template-columns:60% 30% 10%">
+                  <div style="background:inherit;color:white;text-align:center">{{translate('Description')   }}</div>
+                  <div style="background:inherit;color:white;text-align:center">{{translate('Current value') }}</div>
+                  <div style="background:inherit;color:white;text-align:center">{{translate('edit_unit')     }}</div>
+                </div>
+              </td>
             </tr>
           </thead>
+
           <!--tier b inputs-->
           <tbody>
             <tr
-              v-for="[key,val],i in Object.entries(current_stage).filter(([key,val])=>{return Questions.is_inside(key)==false})"
-              v-if="typeof(val)=='number'"
-            >
-              <!--input name-->
-              <td :caption="translate(key+'_expla')">
-                <div class=flex style="justify-content:space-between">
-                  <div v-html="translate(key+'_descr')"></div>
-                  <div v-if="Recommendations[key]">
-                    <button
-                      @click="current_stage[key] = Recommendations[key]()"
-                      style="font-size:smaller;float:right"
-                      :caption="`Estimation formula: <br>${Formulas.prettify(Recommendations[key])}`"
-                    >
-                      Estimation:
-                      <span v-html="format(Recommendations[key]()/Units.multiplier(key))"></span>
-                      <span v-html="get_current_unit(key)"></span>
-                      &rarr;
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  (<a onclick="alert('TODO')">{{key}}</a>)
-                </div>
-                <div v-if="Exceptions[key]">
-                  <!--case 1: selection is a percent of something else-->
-                  <select v-if="Exceptions[key].percent_of" v-model="current_stage[key]">
-                    <option
-                      v-for="obj,option in Tables[Exceptions[key].table]"
-                      :value="parseFloat(obj[Exceptions[key].table_field()]*Exceptions[key].percent_of())"
-                    >
-                      {{translate(option)}}
-                      [{{        100*obj[Exceptions[key].table_field()] }} %]
-                      ({{ format(    obj[Exceptions[key].table_field()]*Exceptions[key].percent_of()/Units.multiplier(key) )}}
-                       {{get_current_unit(key)}})
-                    </option>
-                  </select>
-                  <!--case 2: selection is a fixed value-->
-                  <select v-else v-model="current_stage[key]">
-                    <option
-                      v-for="obj,option in Tables[Exceptions[key].table]"
-                      :value="parseFloat(obj[Exceptions[key].table_field()])"
-                    >
-                      {{translate(option)}}
-                      ({{ format(obj[Exceptions[key].table_field()]) }})
-                    </option>
-                  </select>
-                </div>
-              </td>
-
-              <!--input value-->
-              <!--dropdowns and numbers-->
-              <td v-if="Info[key] && Info[key].magnitude=='Option'" colspan=2>
-                <select v-model="current_stage[key]">
-                  <option
-                    v-for="obj,op in Tables[key]"
-                    :value="parseInt(Tables[key][op].value)"
-                  >
-                    ({{Tables[key][op].value}})
-                    {{translate(op)}}
-                  </option>
-                </select>
-              </td>
-              <td v-else
-                class=input
-                :caption="translate('edit_click_to_modify')"
-                style="text-align:right"
-              >
-                <input
-                  :value="format(current_stage[key]/Units.multiplier(key))"
-                  @focus="focus_input(current_stage, key, $event)"
-                  @blur="blur_input(current_stage, key, $event)"
-                  :tabindex="i+1"
-                >
-              </td>
-
-              <!--input unit select-->
-              <td v-if="Info[key] && Info[key].magnitude!='Option'">
-                <!--select unit-->
-                <div v-if="Units[Info[key].magnitude]">
-                  <select @change="select_unit(key, $event)">
-                    <option
-                      v-for="mul,unit in Units[Info[key].magnitude]"
-                      :selected="get_current_unit(key) == unit"
-                      v-html="unit"
-                    ></option>
-                  </select>
-                </div>
-                <div v-else>
-                  <span v-html="Info[key].unit"></span>
-                </div>
-              </td>
+              v-for="key in Object.keys(current_stage).filter(key=>{return Questions.is_inside(key)==false})"
+              v-if="typeof(current_stage[key])=='number'"
+            ><td>
+              <input_ecam
+                :code="key"
+                :current_stage="current_stage"
+              ></input_ecam>
             </tr>
           </tbody>
+
           <!--tier b questions-->
           <tbody
             v-for="question in Questions.get_questions(current_stage)"
-            v-if="!Questions[question].advanced"
           >
-            <tr>
-              <td colspan=2 v-html="translate(question)+'?'">
-              <td>
-                <label>{{translate('no')}}
-                  <input type=radio :name='question' v-model.number="Global.Configuration.Questions[question]" value=0>
-                </label>
-                <label>{{translate('yes')}}
-                  <input type=radio :name='question' v-model.number="Global.Configuration.Questions[question]" value=1>
-                </label>
-              </td>
-            </tr>
             <tr
+              :style="`background:${Global.Configuration.Questions[question]?'lightgreen':'#eee'}`"
+            ><td
+              :class="Questions.is_question_hidden(question) ? 'disabled_question' : ''"
+            >
+              <div style="display:grid;grid-template-columns:50% 50%">
+
+                <!--question text-->
+                <div v-if="Global.Configuration.Questions[question]" style=cursor:pointer @click="Questions[question].folded^=1">
+                  <span v-html="translate(question)+'?'">
+                  </span>
+                </div>
+                <div v-else>
+                  <span v-html="translate(question)+'?'">
+                  </span>
+                </div>
+
+                <!--question yes no buttons-->
+                <div>
+                  <label>{{translate('no')}}
+                    <input type=radio :name='question' v-model.number="Global.Configuration.Questions[question]" value=0
+                      :disabled="Questions.is_question_hidden(question)"
+                    >
+                  </label>
+                  <label>{{translate('yes')}}
+                    <input type=radio :name='question' v-model.number="Global.Configuration.Questions[question]" value=1
+                      :disabled="Questions.is_question_hidden(question)"
+                    >
+                  </label>
+                </div>
+              </div>
+            </td></tr>
+            <tr
+              v-for="key in Questions[question].variables"
               v-if="
                 Global.Configuration.Questions[question]
                 &&
                 typeof(current_stage[key])=='number'
+                &&
+                (!Questions[question].folded)
               "
-              v-for="key in Questions[question].variables"
-              :code="key"
-            >
-              <td colspan=4 style="padding:0">
-                <input-ecam :code="key" :current_stage="current_stage">
-                </input-ecam>
-              </td>
+            ><td>
+              <input_ecam
+                :code="key"
+                :question="question"
+                :current_stage="current_stage"
+              ></input_ecam>
             </tr>
           </tbody>
 
@@ -1263,11 +1244,13 @@
 
       <!--tier b outputs-->
       <div>
-        <!--level2 outputs: GHG-->
+        <!--level2 outputs: GHG header-->
         <div class="table-title">
           {{translate('OUTPUTS') }} &mdash;
           {{translate('GHG emissions') }}
         </div>
+
+        <!--level2 outputs: GHG content-->
         <table style=width:100%>
           <thead>
             <tr>
@@ -1283,8 +1266,12 @@
           </thead>
           <tbody>
             <tr
-              v-for="[key,val] in Object.entries(current_stage)"
-              v-if="typeof(val)=='function' && (1+key.search('_KPI_GHG'))"
+              v-for="key in Object.keys(current_stage)"
+              v-if="
+                typeof(current_stage[key])=='function'
+                && (1+key.search('_KPI_GHG'))
+                && Questions.is_hidden(key)==false
+              "
             >
               <td :caption="translate(key+'_expla')">
                 <span v-html="translate(key+'_descr')">hola</span>
@@ -1332,8 +1319,12 @@
           </tr>
           <tbody>
             <tr
-              v-for="[key,val] in Object.entries(current_stage)"
-              v-if="typeof(val)=='function' && -1==key.search('_KPI_GHG')"
+              v-for="key in Object.keys(current_stage)"
+              v-if="
+                typeof(current_stage[key])=='function' && 
+                -1==key.search('_KPI_GHG') &&
+                Questions.is_hidden(key)==false
+              "
             >
               <td :caption="translate(key+'_expla')">
                 <span v-html="translate(key+'_descr')">hola</span>
@@ -1359,10 +1350,11 @@
     <div>
       <ul>
         <li>NOW: questions
+        <li>NEXT: caption
         <li>substages
         <li>graphs
         <li>reporting tool
-        <li>compabibility module
+        <li>compabibility module ['Yes/No':'Questions']
       </ul>
     </div>
   </div>

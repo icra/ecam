@@ -63,7 +63,7 @@ let Recommendations={
       },
       "wwt_biog_pro":function(){return Global.Waste.Treatment.wwt_serv_pop*Global.General.bod_pday*Global.General.Days()*Cts.ct_bod_kg.value*Cts.ct_biog_g.value/1000;},
       "wwt_biog_fla":function(){//<br>
-        if(Global.Configuration['Yes/No'].wwt_valorizing_biogas){//<br>
+        if(Global.Configuration.Questions.wwt_valorizing_biogas){//<br>
           return 0;//<br>
         }else{//<br>
           return Global.Waste.Treatment.wwt_biog_pro;//<br>
@@ -75,7 +75,7 @@ let Recommendations={
       "wwt_bod_effl":function(){return 0.10*Global.Waste.Treatment.wwt_bod_infl},
       //SM
       "wwt_mass_slu":function(){//<br>
-        if(Global.Configuration['Yes/No'].wwt_producing_biogas){//<br>
+        if(Global.Configuration.Questions.wwt_producing_biogas){//<br>
           var b=0.6;//<br>
         }else{//<br>
           var b=1;//<br>
@@ -98,4 +98,5 @@ let Recommendations={
     /*wst*/
     /*wsd*/
 };
+
 Global.Recommendations=Recommendations;//enable formula search in Recommendations

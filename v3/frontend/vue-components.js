@@ -239,13 +239,13 @@
       answerAnyFuelEngines(){
         let ans=parseInt(Global.General.anyFuelEngines);
         Global.General.anyFuelEngines=ans;
-        Global.Configuration['Yes/No'].wsa_engines=ans;
-        Global.Configuration['Yes/No'].wst_engines=ans;
-        Global.Configuration['Yes/No'].wsd_engines=ans;
-        Global.Configuration['Yes/No'].wwc_engines=ans;
-        Global.Configuration['Yes/No'].wwt_engines=ans;
-        Global.Configuration['Yes/No'].wwd_engines=ans;
-        Global.Configuration['Yes/No'].fst_engines=ans;
+        Global.Configuration.Questions.wsa_engines=ans;
+        Global.Configuration.Questions.wst_engines=ans;
+        Global.Configuration.Questions.wsd_engines=ans;
+        Global.Configuration.Questions.wwc_engines=ans;
+        Global.Configuration.Questions.wwt_engines=ans;
+        Global.Configuration.Questions.wwd_engines=ans;
+        Global.Configuration.Questions.fst_engines=ans;
         if(!ans){
           //reset stage values
           Global.Water.Abstraction .wsa_vol_fuel=0;
