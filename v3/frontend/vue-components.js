@@ -501,9 +501,9 @@ let ecam={
 };
 
 //defaults (development)
-index.visible        = false;
-linear_menu.visible  = true;
+index.visible        = true;
+linear_menu.visible  = false;
 tier_b.level         = 'Water';
-tier_b.sublevel      = 'Distribution';
-tier_b.current_stage = Global.Water.Distribution;
-tier_b.visible       = true;
+tier_b.sublevel      = 'Abstraction';
+tier_b.current_stage = Global.Water.Abstraction;
+tier_b.visible       = false;
