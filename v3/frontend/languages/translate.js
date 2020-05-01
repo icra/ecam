@@ -35,13 +35,17 @@ let Languages={
     let lang = this.current;
 
     //null language (for debugging)
-    if(lang=='null'){ return `["#${id}"]`; }
+    if(lang=='null'){ 
+      return `["#${id}"]`; 
+    }
 
     //language not found
-    if(!this.tags[lang]){ return `[#${id}]`; }
+    if(!this.tags[lang]){
+      return `["#${id}" - language not found]`; 
+    }
 
     //normal case or tag not found
-    return this.tags[lang][`#${id}`] || `["#${id}"]`;
+    return this.tags[lang][`#${id}`] || `["#${id}" - tag not found]`;
   },
 };
 

@@ -6,14 +6,19 @@ Vue.component('input_ecam',{
     style="display:grid;grid-template-columns:60% 30% 10%"
   >
     <!--input name-->
-    <div :caption="translate(code+'_expla')">
+    <div 
+      @mousemove="caption.show($event, translate(code+'_expla'))"
+      @mouseout="caption.hide()"
+    >
       <div class=flex style="justify-content:space-between;padding-right:5px">
-        <div v-html="translate(code+'_descr')"></div>
+        <div v-html="translate(code+'_descr').prettify()"></div>
         <div v-if="Recommendations[code]">
           <button
             @click="current_stage[code] = Recommendations[code]()"
             style="float:right"
-            :caption="'Estimation formula:<br>\$\{Formulas.prettify(Recommendations[code])\}'"
+            @mousemove="caption.show($event, \`Estimation formula:<br>\$\{Formulas.prettify(Recommendations[code])\}\`)"
+            @mouseout="caption.hide()"
+            :disabled="isNaN(Recommendations[code]())"
           >
             Estimation:
             <span v-html="format(Recommendations[code]()/Units.multiplier(code))"></span>
@@ -65,7 +70,8 @@ Vue.component('input_ecam',{
     </div>
     <div v-else
       class=input
-      :caption="translate('edit_click_to_modify')"
+      @mousemove="caption.show($event, translate('edit_click_to_modify'))"
+      @mouseout="caption.hide()"
       style="text-align:right;padding:0"
     >
       <input
@@ -91,7 +97,7 @@ Vue.component('input_ecam',{
         ></option>
       </select>
       <div v-else>
-        <span v-html="Info[code].unit"></span>
+        <span v-html="Info[code].unit.prettify()"></span>
       </div>
     </div>
   </div>`,
@@ -105,6 +111,8 @@ Vue.component('input_ecam',{
   data:function(){
     return{
       ecam,
+      caption,
+
       Global,
       Info,
       Units,

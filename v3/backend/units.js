@@ -5,7 +5,7 @@ let Units={
     if(Info[field]===undefined){return 1}
     if(Units[Info[field].magnitude]===undefined){return 1}
     //look for current unit: first inside configuration, if not, in Info[field]
-    var currentUnit = Global.Configuration.Units[field] || Info[field].unit;
+    let currentUnit = Global.Configuration.Units[field] || Info[field].unit;
     //multiplier is in Units[magnitude][unit]
     return Units[Info[field].magnitude][currentUnit] || 1;
   },

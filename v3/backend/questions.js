@@ -1058,9 +1058,6 @@ Questions.is_hidden=function(field) {
   return false;
 };
 
-//-------------v3 / v2 ---------------------------------------
-
-
 //check if the question "field" should be hidden
 Questions.is_question_hidden=function(field) {
   //go over all questions
@@ -1073,6 +1070,25 @@ Questions.is_question_hidden=function(field) {
     }
   }
   return false;
+};
+
+//-------------v3 / v2 ---------------------------------------
+
+//reset the values and the otherQuestions
+Questions.reset_values=function(question, ubication){
+  //reset inputs
+  Questions[question].variables.forEach(code=>{
+    if(typeof(ubication[code])=="number"){
+      ubication[code]=0;
+      //also reset substages
+      substages.forEach(substage=>{substage[code]=0});
+    }
+  });
+  //reset related questions RECURSIVELY
+  Questions[question].otherQuestions.forEach(q=>{
+    Global.Configuration.Questions[q]=0;
+    Questions.resetValues(q,ubication);
+  });
 };
 
 //Automatic find repeated variables in Questions
@@ -1101,21 +1117,4 @@ Questions.findRepeated=function() {
   }
   //remove duplicates
   return repeated.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
-};
-
-//reset the values and the otherQuestions
-Questions.resetValues=function(question, ubication){
-  //reset inputs
-  Questions[question].variables.forEach(code=>{
-    if(typeof(ubication[code])=="number"){
-      ubication[code]=0;
-      //also reset substages
-      substages.forEach(substage=>{substage[code]=0});
-    }
-  });
-  //reset related questions RECURSIVELY
-  Questions[question].otherQuestions.forEach(q=>{
-    Global.Configuration.Questions[q]=0;
-    Questions.resetValues(q,ubication);
-  });
 };

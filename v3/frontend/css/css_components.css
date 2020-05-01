@@ -332,6 +332,20 @@
   #tier_b .input input:focus {
     background:white;
   }
+
+  /*tier b questions*/
   #tier_b .disabled_question {
     color:#aaa;
+  }
+  #tier_b .question_container {
+    cursor:pointer;
+  }
+  #tier_b .question_container:hover .question_text {
+    text-decoration:underline;
+  }
+  #tier_b .question_fold_marker {
+    transition: all 0.2s;
+  }
+  #tier_b .question_fold_marker.folded {
+    transform: rotate(-90deg);
   }

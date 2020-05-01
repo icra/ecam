@@ -14,6 +14,28 @@
     },
   });
 
+  let caption = new Vue({
+    el:"#caption",
+    data:{
+      visible:false,
+      text:"caption text",
+    },
+    methods:{
+      show(ev, new_text){
+        ev.stopPropagation(); //prevent parent elements triggering show()
+        this.text = new_text;
+        this.visible=true;
+        let el=document.querySelector("#caption");
+        el.style.left=(ev.clientX-10)+"px";
+        el.style.top=(ev.clientY+15)+"px";
+      },
+
+      hide(){
+        this.visible=false;
+      },
+    },
+  });
+
   let ecam_logo = new Vue({
     el:'#ecam-logo',
     data:{
@@ -49,6 +71,7 @@
       visible:false,
       Global,
       Structure,
+      caption,
       current_view:null,
     },
     methods:{
@@ -59,39 +82,6 @@
         if(level==tier_b.level && sublevel==tier_b.sublevel){
           return true;
         }
-      },
-    },
-  });
-
-  let caption = new Vue({
-    el:"#caption",
-    data:{
-      visible:false,
-      text:"caption text",
-    },
-    methods:{
-      show(ev, element){
-        ev.stopPropagation(); //prevent parent elements triggering show() onmousemove
-        this.visible=true;
-        if(element.getAttribute('caption')){
-          this.text=element.getAttribute('caption');
-        }
-        let el=document.querySelector("#caption");
-        el.style.left=(ev.clientX-10)+"px";
-        el.style.top=(ev.clientY+15)+"px";
-      },
-
-      hide(){
-        this.visible=false;
-      },
-
-      //mouse listeners IMPROVE THIS CODE TODO
-      listeners() {
-        //get all elements with 'caption' attribute
-        document.querySelectorAll("[caption]").forEach(el=>{
-          el.addEventListener('mousemove',function(e){caption.show(e,this)});
-          el.addEventListener('mouseout',function(){caption.hide()});
-        });
       },
     },
   });
@@ -314,6 +304,7 @@
         {level:'Faecl', stage:Global.Faecl,            code:'fs_resi_pop'},
         {level:'Faecl', stage:Global.Faecl,            code:'fs_onsi_pop'},
       ],
+      caption,
     },
     methods:{
       translate,
@@ -367,40 +358,11 @@
       Normalization,
       Formulas,
       Questions,
+      caption,
     },
     methods:{
       translate,
       format,
-      focus_input(stage, key, event){
-        let input = event.target;
-        input.value = stage[key]/Units.multiplier(key);
-        input.select();
-      },
-      blur_input(stage, key, event){
-        let input = event.target;
-        let value = parseFloat(input.value) || 0;
-        stage[key] = value*Units.multiplier(key);
-        input.value=format(stage[key]/Units.multiplier(key));
-      },
-
-      /*UNITS*/
-      /*select unit for a specific variable and save it to configuration*/
-      select_unit(key, event){
-        let select = event.target;
-        let newUnit = select.value;
-        this.Global.Configuration.Units[key]=newUnit;
-        this.$forceUpdate();
-      },
-      //get current unit for specific variable
-      get_current_unit(key){
-        if(Info[key].magnitude=='Currency'){
-          return Global.General.Currency;
-        }
-        if(undefined===this.Global.Configuration.Units[key]){
-          this.Global.Configuration.Units[key] = this.Info[key].unit;
-        }
-        return this.Global.Configuration.Units[key];
-      },
     },
   });
 
@@ -461,6 +423,7 @@ let ecam={
   //hide all views
   hide_all(){
     Object.entries(this.views).forEach(([key,view])=>{
+      //console.log(key);
       if(view.constructor===Vue){
         if(view.visible){
           view.visible=false;
@@ -484,10 +447,6 @@ let ecam={
     this.views[view].visible=true;
     linear_menu.current_view = view;
     window.scrollTo(0,0);
-
-    //TODO make it async, figure out how to do it
-    //add mouse listeners to every [caption] element
-    setTimeout(caption.listeners, 1000);
   },
 
   //force render views and components (for language tags)
@@ -499,11 +458,3 @@ let ecam={
     });
   },
 };
-
-//defaults (development)
-index.visible        = true;
-linear_menu.visible  = false;
-tier_b.level         = 'Water';
-tier_b.sublevel      = 'Abstraction';
-tier_b.current_stage = Global.Water.Abstraction;
-tier_b.visible       = false;

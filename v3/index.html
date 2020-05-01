@@ -41,6 +41,9 @@
     <link rel="stylesheet" href="frontend/css/css.css">
     <link rel="stylesheet" href="frontend/css/css_components.css">
 
+    <!--string prettify for descriptions (mainly for CO2, N2O, CH4 subindexes)-->
+    <script src="frontend/js/prettify.js"></script>
+
     <!--libs-->
       <!--google charts-->
       <script src="frontend/js/charts/loader.js"></script>
@@ -262,7 +265,8 @@
       <img
         :class="`l1 ${current_view=='get_started'?'selected':''}`"
         src=frontend/img/getStarted.png
-        :caption="translate('getStarted_general_info')"
+        @mousemove="caption.show($event, translate('getStarted_general_info'))"
+        @mouseout="caption.hide()"
       >
     </div>
 
@@ -276,7 +280,8 @@
       <img
         :class="`l1 ${current_view=='configuration'?'selected':''}`"
         src=frontend/img/dashboard.png
-        :caption="translate('configuration')"
+        @mousemove="caption.show($event, translate('configuration'))"
+        @mouseout="caption.hide()"
       >
     </div>
 
@@ -290,7 +295,8 @@
       <img
         :class="`l1 ${current_view=='population'?'selected':''}`"
         src=frontend/img/inhabitants.png
-        :caption="translate('population')"
+        @mousemove="caption.show($event, translate('population'))"
+        @mouseout="caption.hide()"
       >
     </div>
 
@@ -302,7 +308,8 @@
       <img
         :class="`l1 ${current_view=='tier_a'?'selected':''}`"
         src=frontend/img/birds.png
-        :caption="translate('tier_A')"
+        @mousemove="caption.show($event, translate('tier_A'))"
+        @mouseout="caption.hide()"
       >
     </div>
 
@@ -316,7 +323,8 @@
       <img v-for="l2 in Structure.filter(s=>s.sublevel)"
         :class="`l2 ${is_tier_b_selected(l2.level,l2.sublevel)?'selected':''}`"
         :stage="l2.alias"
-        :caption="translate(l2.sublevel)"
+        @mousemove="caption.show($event, translate(l2.sublevel))"
+        @mouseout="caption.hide()"
         :src="`frontend/img/${l2.alias}${Global.Configuration.ActiveStages[l2.alias]?'':'-off'}.png`"
         @click="go_to(l2.level,l2.sublevel)"
       >
@@ -335,13 +343,15 @@
           :class="`l1 ${current_view=='summary_ghg'?'selected':''}`"
           src=frontend/img/sources.png
           onclick="ecam.show('summary_ghg')"
-          :caption="translate('ghg_summary')"
+          @mousemove="caption.show($event, translate('ghg_summary'))"
+          @mouseout="caption.hide()"
         >
         <img
           :class="`l1 ${current_view=='summary_nrg'?'selected':''}`"
           src=frontend/img/energy.png
           onclick="ecam.show('summary_nrg')"
-          :caption="translate('nrg_summary')"
+          @mousemove="caption.show($event, translate('nrg_summary'))"
+          @mouseout="caption.hide()"
         >
       </div>
 
@@ -356,15 +366,15 @@
           :class="`l1 ${current_view=='opportunities'?'selected':''}`"
           src=frontend/img/opps.png
           onclick="ecam.show('opportunities')"
-          :caption="translate('opportunities')"
+          @mousemove="caption.show($event, translate('opportunities'))"
+          @mouseout="caption.hide()"
         >
       </div>
     </div>
   </div>
 
   <!--caption COMPONENT-->
-  <div id=caption v-html="text" :style="visible?'':'display:none'">
-  </div>
+  <div id=caption v-html="text" :style="visible?'':'display:none'"></div>
 
   <!--index VIEW-->
   <div id=index v-if="visible">
@@ -945,7 +955,10 @@
           <td colspan=3 inactive>{{translate('birds_stage_not_active')}}
         </tr>
         <tr v-else v-for="pop in Population.filter(p=>p.level==l1.level)">
-          <td :caption="translate(pop.code+'_expla')">
+          <td 
+            @mousemove="caption.show($event, translate(pop.code+'_expla'))"
+            @mouseout="caption.hide()"
+          >
             {{translate(pop.code+'_descr')}}
           </td>
           <td class=input_container>
@@ -998,8 +1011,6 @@
     <div class=flex
       style="
         justify-content:space-between;
-        border-bottom:1px solid #ccc;
-        margin-bottom:20px;
       "
     >
       <h1>
@@ -1141,9 +1152,9 @@
     </div>
 
     <!--tier b inputs and outputs-->
-    <div style="display:grid;grid-template-columns:60% 40%;padding-right:5px">
+    <div style="display:grid;grid-template-columns:62% 38%;padding-right:3px">
       <!--tier b inputs-->
-      <div style="padding:0 8px 0 5px">
+      <div style="padding:0 3px">
         <div class="table-title">
           {{translate('INPUTS') }} &mdash;
           {{translate('Enter values for') }}
@@ -1180,20 +1191,28 @@
           </tbody>
 
           <!--tier b questions-->
-          <tbody
-            v-for="question in Questions.get_questions(current_stage)"
-          >
+          <tbody v-for="question in Questions.get_questions(current_stage)">
             <tr
               :style="`background:${Global.Configuration.Questions[question]?'lightgreen':'#eee'}`"
             ><td
               :class="Questions.is_question_hidden(question) ? 'disabled_question' : ''"
             >
               <div style="display:grid;grid-template-columns:50% 50%">
-
                 <!--question text-->
-                <div v-if="Global.Configuration.Questions[question]" style=cursor:pointer @click="Questions[question].folded^=1">
-                  <span v-html="translate(question)+'?'">
-                  </span>
+                <div
+                  v-if="Global.Configuration.Questions[question]"
+                  @click="Questions[question].folded^=1"
+                  class="question_container flex"
+                  >
+                  <!--question folded marker-->
+                  <div :class="`question_fold_marker ${Questions[question].folded?'folded':''}`">
+                    ▼ 
+                  </div>
+                  <div v-html="translate(question)+'?'"
+                    class=question_text
+                    style="margin-left:5px"
+                  >
+                  </div>
                 </div>
                 <div v-else>
                   <span v-html="translate(question)+'?'">
@@ -1201,16 +1220,14 @@
                 </div>
 
                 <!--question yes no buttons-->
-                <div>
-                  <label>{{translate('no')}}
-                    <input type=radio :name='question' v-model.number="Global.Configuration.Questions[question]" value=0
+                <div :title="question">
+                  <label>
+                    <input type=checkbox
+                      v-model.number="Global.Configuration.Questions[question]"
                       :disabled="Questions.is_question_hidden(question)"
                     >
-                  </label>
-                  <label>{{translate('yes')}}
-                    <input type=radio :name='question' v-model.number="Global.Configuration.Questions[question]" value=1
-                      :disabled="Questions.is_question_hidden(question)"
-                    >
+                    <span v-if="Global.Configuration.Questions[question]" v-html="translate('yes')"></span>
+                    <span v-else v-html="translate('no')"></span>
                   </label>
                 </div>
               </div>
@@ -1273,14 +1290,18 @@
                 && Questions.is_hidden(key)==false
               "
             >
-              <td :caption="translate(key+'_expla')">
-                <span v-html="translate(key+'_descr')">hola</span>
+              <td
+                @mousemove="caption.show($event, translate(key+'_expla'))"
+                @mouseout="caption.hide()"
+              >
+                <span v-html="translate(key+'_descr').prettify()"></span>
                 <br>
                 (<a onclick="alert('TODO')">{{key}}</a>)
               </td>
               <td
                 v-html="format(current_stage[key]())"
-                :caption="Formulas.prettify(current_stage[key])"
+                @mousemove="caption.show($event, Formulas.prettify(current_stage[key]))"
+                @mouseout="caption.hide()"
               ></td>
 
               <!--emission per year and serviced population-->
@@ -1321,19 +1342,23 @@
             <tr
               v-for="key in Object.keys(current_stage)"
               v-if="
-                typeof(current_stage[key])=='function' && 
+                typeof(current_stage[key])=='function' &&
                 -1==key.search('_KPI_GHG') &&
                 Questions.is_hidden(key)==false
               "
             >
-              <td :caption="translate(key+'_expla')">
-                <span v-html="translate(key+'_descr')">hola</span>
+              <td
+                @mousemove="caption.show($event, translate(key+'_expla'))"
+                @mouseout="caption.hide()"
+              >
+                <span v-html="translate(key+'_descr').prettify()"></span>
                 <br>
                 (<a onclick="alert('TODO')">{{key}}</a>)
               </td>
               <td
                 v-html="format(current_stage[key]())"
-                :caption="Formulas.prettify(current_stage[key])"
+                @mousemove="caption.show($event, Formulas.prettify(current_stage[key]))"
+                @mouseout="caption.hide()"
               ></td>
               <td v-html="Info[key].unit"></td>
             </tr>
@@ -1348,13 +1373,13 @@
 
     <!--pending-------------------------------------------------------------->
     <div>
-      <h3>&emsp; v3 development tasks</h3>
+      <h3>&emsp; lluis bosch's v3 development tasks</h3>
       <ul>
-        <li>NOW: questions
-        <li>NEXT: caption
+        <li>NOW: questions (default value bug)
         <li>substages
+        <li>benchmarks
         <li>graphs
-        <li>reporting tool
+        <li>reporting tool (new feature)
         <li>compabibility module ['Yes/No':'Questions']
       </ul>
     </div>
@@ -1371,8 +1396,9 @@
 </div>
 
 <!--load vue components-->
-<script src="frontend/vue-components.js"></script>
 <script src="frontend/input-ecam.js"></script>
+<script src="frontend/vue-components.js"></script>
+<script src="frontend/defaults.js"></script>
 
 <!--add sidebar onclick listeners to hide the sidebar-->
 <script>
