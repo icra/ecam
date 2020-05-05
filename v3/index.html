@@ -955,7 +955,7 @@
           <td colspan=3 inactive>{{translate('birds_stage_not_active')}}
         </tr>
         <tr v-else v-for="pop in Population.filter(p=>p.level==l1.level)">
-          <td 
+          <td
             @mousemove="caption.show($event, translate(pop.code+'_expla'))"
             @mouseout="caption.hide()"
           >
@@ -1200,23 +1200,22 @@
               <div style="display:grid;grid-template-columns:50% 50%">
                 <!--question text-->
                 <div
-                  v-if="Global.Configuration.Questions[question]"
-                  @click="Questions[question].folded^=1"
+                  @click="Questions[question].folded^= Global.Configuration.Questions[question]"
                   class="question_container flex"
+                  :style="(Global.Configuration.Questions[question]?'cursor:pointer':'')"
+                >
+                  <div
+                    v-if="Global.Configuration.Questions[question]"
                   >
-                  <!--question folded marker-->
-                  <div :class="`question_fold_marker ${Questions[question].folded?'folded':''}`">
-                    ▼ 
+                    <!--question folded marker-->
+                    <div :class="`question_fold_marker ${Questions[question].folded?'folded':''}`">
+                      ▼
+                    </div>
                   </div>
                   <div v-html="translate(question)+'?'"
-                    class=question_text
+                    :class="Global.Configuration.Questions[question] ? 'question_text':''"
                     style="margin-left:5px"
-                  >
-                  </div>
-                </div>
-                <div v-else>
-                  <span v-html="translate(question)+'?'">
-                  </span>
+                  ></div>
                 </div>
 
                 <!--question yes no buttons-->
@@ -1226,8 +1225,7 @@
                       v-model.number="Global.Configuration.Questions[question]"
                       :disabled="Questions.is_question_hidden(question)"
                     >
-                    <span v-if="Global.Configuration.Questions[question]" v-html="translate('yes')"></span>
-                    <span v-else v-html="translate('no')"></span>
+                    <span v-html="translate('yes')"></span>
                   </label>
                 </div>
               </div>
@@ -1375,9 +1373,9 @@
     <div>
       <h3>&emsp; lluis bosch's v3 development tasks</h3>
       <ul>
-        <li>NOW: questions (default value bug)
-        <li>substages
-        <li>benchmarks
+        <li>NOW: questions (disable related questions)
+        <li>substages (discussion with viti needed)
+        <li>benchmarks (inside substages)
         <li>graphs
         <li>reporting tool (new feature)
         <li>compabibility module ['Yes/No':'Questions']

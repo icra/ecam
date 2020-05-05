@@ -338,7 +338,7 @@
     color:#aaa;
   }
   #tier_b .question_container {
-    cursor:pointer;
+    /**/
   }
   #tier_b .question_container:hover .question_text {
     text-decoration:underline;
