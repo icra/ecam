@@ -1075,19 +1075,18 @@ Questions.is_question_hidden=function(field) {
 //-------------v3 / v2 ---------------------------------------
 
 //reset the values and the otherQuestions
-Questions.reset_values=function(question, ubication){
+Questions.reset_values=function(question, stage){
   //reset inputs
   Questions[question].variables.forEach(code=>{
-    if(typeof(ubication[code])=="number"){
-      ubication[code]=0;
-      //also reset substages
-      substages.forEach(substage=>{substage[code]=0});
+    if(typeof(stage[code])=="number"){
+      stage[code]=0;
+      //also reset substages TODO v3
+      //substages.forEach(substage=>{substage[code]=0});
     }
   });
   //reset related questions RECURSIVELY
-  Questions[question].otherQuestions.forEach(q=>{
-    Global.Configuration.Questions[q]=0;
-    Questions.resetValues(q,ubication);
+  Questions[question].otherQuestions.forEach(key=>{
+    Questions.reset_values(key, stage);
   });
 };
 

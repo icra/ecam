@@ -1218,12 +1218,13 @@
                   ></div>
                 </div>
 
-                <!--question yes no buttons-->
+                <!--question set value button-->
                 <div :title="question">
                   <label>
                     <input type=checkbox
-                      v-model.number="Global.Configuration.Questions[question]"
                       :disabled="Questions.is_question_hidden(question)"
+                      @change="set_question(question, $event.target.checked)"
+                      :checked="Global.Configuration.Questions[question]"
                     >
                     <span v-html="translate('yes')"></span>
                   </label>

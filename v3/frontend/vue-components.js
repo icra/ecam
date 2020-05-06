@@ -363,6 +363,27 @@
     methods:{
       translate,
       format,
+      set_question(question, new_value){
+        //set new question answer
+        this.Global.Configuration.Questions[question] = new_value;
+
+        //if answer is no:
+        if(!new_value){
+          //disable related questions recursively
+          Questions[question].otherQuestions.forEach(key=>{
+            this.set_question(key, false);
+          });
+
+          //reset values
+          Questions.reset_values(question, this.current_stage);
+
+          //reset folding
+          Questions[question].folded = 0;
+          Questions[question].otherQuestions.forEach(key=>{
+            Questions[key].folded = 0;
+          });
+        }
+      },
     },
   });
 

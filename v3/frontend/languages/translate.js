@@ -23,7 +23,9 @@ let Languages={
         loaded_languages.push(lang);
         if(loaded_languages.length == this.list.length){
           this.ready = true;
-          ecam.force_update();
+          if(typeof ecam == 'object'){
+            ecam.force_update();
+          }
         }
       });
     });
