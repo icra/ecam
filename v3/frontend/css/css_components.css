@@ -299,6 +299,17 @@
   }
 
 /*tier a TODO*/
+  #tier_a input[type=number]{
+    text-align:right;
+    border:none;
+    background:#eee;
+    line-height:2.4em;
+    cursor:cross;
+  }
+  #tier_a input[type=number]:focus{
+    background:white;
+  }
+
 /*tier b TODO*/
   #tier_b .warning {
     background:red;

@@ -23,6 +23,10 @@ table{border-collapse:collapse;}
 #sidebar{z-index:99}
 [onclick]{cursor:pointer}
 
+input[type=number]{
+  text-align:right;
+}
+
 /*default cells*/
 th,td{border:1px solid #aaa;padding:0.35em;}
 th{font-weight:normal;background:#2b6488;color:white;vertical-align:middle}

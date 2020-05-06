@@ -146,15 +146,6 @@ Vue.component('input_ecam',{
       this.Global.Configuration.Units[key]=newUnit;
       this.$forceUpdate();
     },
-    //get current unit for specific variable
-    get_current_unit(key){
-      if(Info[key].magnitude=='Currency'){
-        return Global.General.Currency;
-      }
-      if(undefined===this.Global.Configuration.Units[key]){
-        this.Global.Configuration.Units[key] = this.Info[key].unit;
-      }
-      return this.Global.Configuration.Units[key];
-    },
+    get_current_unit: tier_a.get_current_unit,
   },
 });

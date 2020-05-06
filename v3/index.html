@@ -19,6 +19,7 @@
     <script src="backend/normalization.js"></script>
     <script src="backend/formulas.js"></script>
     <script src="backend/questions.js"></script>
+    <script src="backend/tier_A.js"></script>
 
     <!--v2
     <script src="dataModel/unfccc.js"></script>
@@ -990,9 +991,127 @@
 
   <!--tier a VIEW TODO-->
   <div id=tier_a v-if="visible">
-    <div>
-      tier A: - do after tier B
-      TODO
+    <h1>
+      {{translate('quick_assessment')}} &mdash;
+      {{translate('initial_estimation_description')}}
+    </h1>
+
+    <!--context info below tier A title-->
+    <div class=flex
+      style="
+        background:#fafafa;
+        box-shadow: 0 1px 2px rgba(0,0,0,.5);
+        color:#666;
+        font-size:smaller;
+        justify-content:space-between;
+        padding:0.5em 2em;
+      ">
+      <!--assessment period-->
+      <div>
+        <a onclick="ecam.show('get_started')">
+          {{translate('assessment_period')}}
+        </a>:
+        <span>
+          {{ format(Global.General.Days()) }}
+        </span>
+        <span>
+          {{ translate('days') }}
+        </span>
+      </div>
+
+      <!--conv_co2_kwh-->
+      <div>
+        <a onclick="ecam.show('configuration')">
+          {{translate('conversion_factor')}}
+        </a>:
+        <span>
+          {{format(Global.General.conv_kwh_co2)}}
+        </span>
+        <span>
+          kg CO<sub>2</sub>eq/kWh
+        </span>
+      </div>
+
+      <!--prot_cont-->
+      <div>
+        <a onclick="ecam.show('configuration')">
+          {{translate('Annual_protein_consumption')}}
+        </a>:
+        <span>
+          {{format(Global.General.prot_con)}}
+        </span>
+        <span>
+          kg/{{ translate('person') }}/{{ translate('year') }}
+        </span>
+      </div>
+
+      <!--bod_pday-->
+      <div>
+        <a onclick="ecam.show('configuration')">
+          {{translate('bod_pday_descr')}}
+        </a>:
+        <span>
+          {{format(Global.General.bod_pday)}}
+        </span>
+        <span>
+          kg/{{ translate('person') }}/{{ translate('day') }}
+        </span>
+      </div>
+    </div>
+
+    <!--tier a main container-->
+    <div class=flex style="padding:10px 2px">
+      <!--tier a inputs-->
+      <div>
+        <table>
+          <tbody v-for="level,key in Global.Tier_A">
+            <tr
+              :style="`color:white;background:${Structure.find(s=>s.level==key).color}`"
+            >
+              <td colspan=3>
+                {{translate(key)}}
+              </td>
+            </tr>
+            <tr v-if="!Global.Configuration.ActiveStages[Structure.find(s=>s.level==key).alias]">
+              <td colspan=3
+                style="color:#999;background:#eee;font-size:smaller"
+              >
+                {{translate('birds_stage_not_active')}}
+              </td>
+            </tr>
+            <tr
+              v-if="Global.Configuration.ActiveStages[Structure.find(s=>s.level==key).alias]"
+              v-for="val,code in level"
+            >
+              <td>{{ translate(code+'_descr') }}
+              <td style="padding:0">
+                <input type=number v-model.number="level[code]">
+              </td>
+              <td>
+                <span v-html="get_current_unit(code).prettify()">
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!--tier a figures charts graphs-->
+      <div style="margin-left:2px">
+        figures here TODO
+        <ul>
+          <li>ghg emissions by source
+          <li>energy consumption
+          <li>water supply total running costs
+          <li>wastewater total running costs
+          <li>serviced population in water supply
+          <li>total ghg water supply
+          <li>serviced population in wastewater
+          <li>total ghg wastewater
+          <li>serviced population in fsm
+          <li>total ghg fsm
+        </ul>
+      </div>
     </div>
 
     <button class="button prev"
@@ -1293,30 +1412,35 @@
                 @mousemove="caption.show($event, translate(key+'_expla'))"
                 @mouseout="caption.hide()"
               >
-                <span v-html="translate(key+'_descr').prettify()"></span>
-                <br>
+                <div v-html="translate(key+'_descr').prettify()"></div>
                 (<a onclick="alert('TODO')">{{key}}</a>)
               </td>
+
+              <!--output value-->
               <td
                 v-html="format(current_stage[key]())"
                 @mousemove="caption.show($event, Formulas.prettify(current_stage[key]))"
                 @mouseout="caption.hide()"
+                style="text-align:right"
               ></td>
 
               <!--emission per year and serviced population-->
               <td
                 v-if="Normalization[level] && Normalization[level].serv_pop"
                 v-html="format( Normalization[level].serv_pop(current_stage[key]()))"
+                style="text-align:right"
               ></td>
 
               <!--emission per m3 of water treated-->
               <td
                 v-if="Normalization[level] && Normalization[level].volume && sublevel"
                 v-html="format( Normalization[level][sublevel].volume(current_stage[key]()))"
+                style="text-align:right"
               ></td>
               <td
                 v-else-if="Normalization[level] && Normalization[level].volume && !sublevel"
                 v-html="format( Normalization[level].volume(current_stage[key]()))"
+                style="text-align:right"
               ></td>
             </tr>
           </tbody>
@@ -1350,14 +1474,16 @@
                 @mousemove="caption.show($event, translate(key+'_expla'))"
                 @mouseout="caption.hide()"
               >
-                <span v-html="translate(key+'_descr').prettify()"></span>
-                <br>
+                <div v-html="translate(key+'_descr').prettify()"></div>
                 (<a onclick="alert('TODO')">{{key}}</a>)
               </td>
+
+              <!--output value-->
               <td
                 v-html="format(current_stage[key]())"
                 @mousemove="caption.show($event, Formulas.prettify(current_stage[key]))"
                 @mouseout="caption.hide()"
+                style="text-align:right"
               ></td>
               <td v-html="Info[key].unit"></td>
             </tr>
@@ -1369,19 +1495,6 @@
         </table>
       </div>
     </div>
-
-    <!--pending-------------------------------------------------------------->
-    <div>
-      <h3>&emsp; lluis bosch's v3 development tasks</h3>
-      <ul>
-        <li>NOW: questions (disable related questions)
-        <li>substages (discussion with viti needed)
-        <li>benchmarks (inside substages)
-        <li>graphs
-        <li>reporting tool (new feature)
-        <li>compabibility module ['Yes/No':'Questions']
-      </ul>
-    </div>
   </div>
 
   <!--summary ghg VIEW TODO-->
@@ -1392,11 +1505,28 @@
 
   <!--opportunities VIEW TODO-->
   <div id=opportunities v-if="visible">opportunities TODO</div>
+
+  <!--pending-------------------------------------------------------------->
+  <div style="border-top:1px solid;margin-top:10px">
+    <h3>&emsp; lluis bosch's v3 development tasks</h3>
+    <ul>
+      <li>DOING NOW: tier A
+      <li>"new", "open", and "save as" buttons
+      <li>substages (discussion with viti needed)
+        <ul>
+          <li>benchmarks (inside substages)
+        </ul>
+      </li>
+      <li>graphs
+      <li>reporting tool (new feature)
+      <li>compabibility module ['Yes/No':'Questions']
+    </ul>
+  </div>
 </div>
 
 <!--load vue components-->
-<script src="frontend/input-ecam.js"></script>
 <script src="frontend/vue-components.js"></script>
+<script src="frontend/input-ecam.js"></script>
 <script src="frontend/defaults.js"></script>
 
 <!--add sidebar onclick listeners to hide the sidebar-->

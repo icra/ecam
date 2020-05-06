@@ -335,6 +335,19 @@
     methods:{
       translate,
       format,
+      //get current unit for specific variable
+      get_current_unit(key){
+        if(!Info[key]){
+          return `["${key}" unit not found]`;
+        }
+        if(Info[key].magnitude=='Currency'){
+          return this.Global.General.Currency;
+        }
+        if(undefined===this.Global.Configuration.Units[key]){
+          this.Global.Configuration.Units[key] = this.Info[key].unit;
+        }
+        return this.Global.Configuration.Units[key];
+      },
     },
   });
 

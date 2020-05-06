@@ -4,7 +4,7 @@ let Languages={
   current:"en",
 
   //all langs
-  list:[ 'en', 'es', 'fr', 'th', 'de', 'ar', ],
+  list:['en','es','fr','th','de','ar',],
 
   //are all languages loaded?
   ready:false,
@@ -23,7 +23,9 @@ let Languages={
         loaded_languages.push(lang);
         if(loaded_languages.length == this.list.length){
           this.ready = true;
-          if(typeof ecam == 'object'){
+
+          //improve this part TODO
+          if(typeof(ecam)=='object'){
             ecam.force_update();
           }
         }
@@ -37,13 +39,13 @@ let Languages={
     let lang = this.current;
 
     //null language (for debugging)
-    if(lang=='null'){ 
-      return `["#${id}"]`; 
+    if(lang=='null'){
+      return `["#${id}"]`;
     }
 
     //language not found
     if(!this.tags[lang]){
-      return `["#${id}" - language not found]`; 
+      return `["#${id}" - language not found]`;
     }
 
     //normal case or tag not found
