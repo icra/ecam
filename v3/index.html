@@ -169,7 +169,7 @@
 
     <!--sections-->
     <ul>
-      <!--from start to tier A-->
+      <!--general info to tier A section-->
       <li class=section>
         <div class=header>{{translate('main')}}</div>
         <ul>
@@ -180,7 +180,7 @@
         </ul>
       </li>
 
-      <!--tier B-->
+      <!--tier B section-->
       <li class=section>
         <div class=header>{{translate('energy_performance')}}</div>
         <ul>
@@ -210,7 +210,7 @@
         </ul>
       </li>
 
-      <!--summaries-->
+      <!--summaries ghg and energy section-->
       <li class=section>
         <div class=header>{{translate('summaries')}}</div>
         <ul>
@@ -227,7 +227,7 @@
         </ul>
       </li>
 
-      <!--other-->
+      <!--other section-->
       <li class=section>
         <div class=header>{{translate('other')}}</div>
         <ul>
@@ -238,7 +238,7 @@
         </ul>
       </li>
 
-      <!--support-->
+      <!--support section-->
       <li class=section>
         <div class=header>{{translate('support')}}</div>
         <ul>
@@ -989,7 +989,7 @@
     </div>
   </div>
 
-  <!--tier a VIEW TODO-->
+  <!--tier a VIEW-->
   <div id=tier_a v-if="visible">
     <h1>
       {{translate('quick_assessment')}} &mdash;
@@ -1061,35 +1061,65 @@
 
     <!--tier a main container-->
     <div class=flex style="padding:10px 2px">
-      <!--tier a inputs-->
+      <!--tier a inputs container-->
       <div>
         <table>
           <tbody v-for="level,key in Global.Tier_A">
-            <tr
-              :style="`color:white;background:${Structure.find(s=>s.level==key).color}`"
-            >
+            <tr :style="`color:white;background:${Structure.find(s=>s.level==key).color}`">
               <td colspan=3>
+                <img :src="`frontend/img/${Structure.find(s=>s.level==key).alias}.png`"
+                  style="width:25px;line-height:4em;vertical-align:middle"
+                >
                 {{translate(key)}}
               </td>
             </tr>
+            <!--stage not active indicator-->
             <tr v-if="!Global.Configuration.ActiveStages[Structure.find(s=>s.level==key).alias]">
-              <td colspan=3
-                style="color:#999;background:#eee;font-size:smaller"
-              >
+              <td colspan=3 style="color:#999;background:#eee;font-size:smaller">
                 {{translate('birds_stage_not_active')}}
               </td>
             </tr>
+            <!--tier a inputs-->
             <tr
               v-if="Global.Configuration.ActiveStages[Structure.find(s=>s.level==key).alias]"
               v-for="val,code in level"
             >
-              <td>{{ translate(code+'_descr') }}
-              <td style="padding:0">
-                <input type=number v-model.number="level[code]">
-              </td>
+              <!--tier a input description-->
               <td>
-                <span v-html="get_current_unit(code).prettify()">
-                </span>
+                <div v-if="Questions[code]">
+                  {{ translate(code) }}?
+                </div>
+                <div v-else>
+                  {{ translate(code+'_descr') }}
+                </div>
+              </td>
+
+              <!--tier a input value-->
+              <td style="padding:0" :colspan="(Questions[code] || (Info[code] && Info[code].magnitude=='Option')) ? 2 : 1">
+                <div v-if="Questions[code]">
+                  <label>
+                    <input type=checkbox v-model="level[code]">
+                    {{translate('yes')}}
+                  </label>
+                </div>
+                <div v-else-if="Info[code] && Info[code].magnitude=='Option'">
+                  <select v-model="level[code]">
+                    <option v-for="obj,key in Tables[code]" :value="obj.value">
+                      {{translate(key)}}
+                    </option>
+                  </select>
+                </div>
+                <div v-else-if="typeof(level[code])=='number'">
+                  <input type=number v-model.number="level[code]">
+                </div>
+                <div v-else>
+                  error: please inform developers
+                </div>
+              </td>
+
+              <!--tier a input unit-->
+              <td v-if="!Questions[code] && !(Info[code] && Info[code].magnitude=='Option')">
+                <span v-html="get_current_unit(code).prettify()"></span>
               </td>
             </tr>
           </tbody>
@@ -1114,14 +1144,17 @@
       </div>
     </div>
 
-    <button class="button prev"
-      onclick="event.stopPropagation();ecam.show('population')">
-      {{translate('previous')}}
-    </button>
-    <button class="button next"
-      onclick="event.stopPropagation();ecam.show('tier_b')">
-      {{translate('next')}}
-    </button>
+    <!--tier a prev next buttons-->
+    <div>
+      <button class="button prev"
+        onclick="event.stopPropagation();ecam.show('population')">
+        {{translate('previous')}}
+      </button>
+      <button class="button next"
+        onclick="event.stopPropagation();ecam.show('tier_b')">
+        {{translate('next')}}
+      </button>
+    </div>
   </div>
 
   <!--tier b VIEW-->
@@ -1485,7 +1518,7 @@
                 @mouseout="caption.hide()"
                 style="text-align:right"
               ></td>
-              <td v-html="Info[key].unit"></td>
+              <td v-html="Info[key].unit.prettify()"></td>
             </tr>
           </tbody>
           <!--decoration bottom table-->
@@ -1498,7 +1531,11 @@
   </div>
 
   <!--summary ghg VIEW TODO-->
-  <div id=summary_ghg v-if="visible">summary ghg TODO</div>
+  <div id=summary_ghg v-if="visible">
+    summary ghg TODO
+    <div>
+    </div>
+  </div>
 
   <!--summary nrg VIEW TODO-->
   <div id=summary_nrg v-if="visible">summary nrg TODO</div>
@@ -1511,13 +1548,17 @@
     <h3>&emsp; lluis bosch's v3 development tasks</h3>
     <ul>
       <li>DOING NOW: tier A
-      <li>"new", "open", and "save as" buttons
-      <li>substages (discussion with viti needed)
         <ul>
-          <li>benchmarks (inside substages)
+          <li>find a better + offline + open source + memory efficient + fast chart library
         </ul>
       </li>
-      <li>graphs
+      <li>NEXT: summaries (ghg and energy)
+      <li>"new", "open", and "save as" buttons
+      <li>tier b substages (discussion with viti needed)
+        <ul>
+          <li>benchmarks
+        </ul>
+      </li>
       <li>reporting tool (new feature)
       <li>compabibility module ['Yes/No':'Questions']
     </ul>

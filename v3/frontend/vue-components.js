@@ -331,6 +331,8 @@
       Global,
       Info,
       Structure,
+      Questions,
+      Tables,
     },
     methods:{
       translate,
