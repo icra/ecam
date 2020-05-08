@@ -407,6 +407,12 @@
     el:"#summary_ghg",
     data:{
       visible:false,
+      Global,
+      Structure,
+    },
+    methods:{
+      translate,
+      format,
     },
   });
 
