@@ -1085,35 +1085,42 @@
               v-for="val,code in level"
             >
               <!--tier a input description-->
-              <td>
-                <div v-if="Questions[code]">
-                  {{ translate(code) }}?
-                </div>
-                <div v-else>
-                  {{ translate(code+'_descr') }}
+              <td :colspan="(Info[code] && Info[code].magnitude=='Option') ? 3 : 1">
+                <div>
+                  <!--tier a input description-->
+                  <div>
+                    <div v-if="Questions[code]">
+                      {{ translate(code) }}?
+                    </div>
+                    <div v-else>
+                      {{ translate(code+'_descr') }}
+                    </div>
+                  </div>
+                  <!--options select element-->
+                  <div v-if="Info[code] && Info[code].magnitude=='Option'">
+                    <select v-model="level[code]">
+                      <option v-for="obj,key in Tables[code]" :value="obj.value">
+                        {{translate(key)}}
+                      </option>
+                    </select>
+                  </div>
                 </div>
               </td>
 
-              <!--tier a input value-->
-              <td style="padding:0" :colspan="(Questions[code] || (Info[code] && Info[code].magnitude=='Option')) ? 2 : 1">
+              <!--tier a input value: only questions and non-options-->
+              <td
+                v-if="Questions[code] || (Info[code] && Info[code].magnitude!='Option')"
+                :colspan="Questions[code] ? 2 :1"
+                style="padding:0"
+              >
                 <div v-if="Questions[code]">
                   <label>
                     <input type=checkbox v-model="level[code]">
                     {{translate('yes')}}
                   </label>
                 </div>
-                <div v-else-if="Info[code] && Info[code].magnitude=='Option'">
-                  <select v-model="level[code]">
-                    <option v-for="obj,key in Tables[code]" :value="obj.value">
-                      {{translate(key)}}
-                    </option>
-                  </select>
-                </div>
-                <div v-else-if="typeof(level[code])=='number'">
-                  <input type=number v-model.number="level[code]">
-                </div>
                 <div v-else>
-                  error: please inform developers
+                  <input type=number v-model.number="level[code]">
                 </div>
               </td>
 
@@ -1547,12 +1554,13 @@
   <div style="border-top:1px solid;margin-top:10px">
     <h3>&emsp; lluis bosch's v3 development tasks</h3>
     <ul>
-      <li>DOING NOW: tier A
+      <li><b>DOING NOW</b>: tier A / refactoring backend and redoing user interface
         <ul>
+          <li>outputs
           <li>find a better + offline + open source + memory efficient + fast chart library
         </ul>
       </li>
-      <li>NEXT: summaries (ghg and energy)
+      <li><b>DOING NEXT</b>: summaries (ghg and energy)
       <li>"new", "open", and "save as" buttons
       <li>tier b substages (discussion with viti needed)
         <ul>
@@ -1561,6 +1569,68 @@
       </li>
       <li>reporting tool (new feature)
       <li>compabibility module ['Yes/No':'Questions']
+      <li>
+        Landing Page
+        <ul>
+          <li>Design should be improved
+          <li>Links don’t look appealing
+          <li>Should include information about income
+          <li>“Help” button is not easy to find
+          <li>Support docs are missing (esp. Spanish)
+        </ul>
+      </li>
+      <li>
+        General Info
+        <ul>
+          <li>It should be obvious which data is relevant and why (Colours, symbol etc)
+        </ul>
+      </li>
+      <li>
+        Population
+        <ul>
+          <li>Names of input fields could be clearer
+          <li>It’s not clear that the definitions appear if you hover over the fields. A simple (?) could help
+          <li>Definitions should be shorter and more concrete (see FSM, missing definitions)
+        </ul>
+      </li>
+      <li>
+        Configuration
+        <ul>
+          <li>Difference between Tier A and B is not clear
+          <li>They are two different assessments, but it looks like you have to do both + the costs can only be inserted in Tier A. If in ECAM 3.0 both tiers are completely separated, costs should also be inserted in Tier B.
+        </ul>
+      </li>
+      <li>
+        Tier A:
+        <ul>
+          <li>There should be an explanatory sentence on what Tier A (and B), also highlighting the importance of data
+          <li>Results of Tier A are confusing because there are shown as “Outputs” and not as assumed under “Summaries”.
+          <li>Sankey Graphic is not easy to find, it should be under graphics /summary
+        </ul>
+      </li>
+      <li>
+        Tier B:
+        <ul>
+          <li>The tips in the top right corner get lost
+          <li>Advance assessment is easily overseen (+)
+          <li>Advance assessment is not clear. When should this be used and how? For example, it should be used if there are different treatment technologies
+        </ul>
+      </li>
+      <li>
+        Summaries page:
+        <ul>
+          <li>Difference between Tier A and B results should be clearer
+          <li>Units of results could be more obvious
+          <li>Results of sub-stages are only shown when the box is ticked. This is not clear
+        </ul>
+      </li>
+      <li>
+        Opportunities page:
+        <ul>
+          <li>It is not clear how to use it or how results are to be interpreted.
+          <li>Spanish translations are needed
+        </ul>
+      </li>
     </ul>
   </div>
 </div>

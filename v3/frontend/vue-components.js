@@ -475,7 +475,7 @@ let ecam={
     }
 
     //activate linear_menu when entering tier_b
-    if(view=='tier_b'){
+    if(['tier_a','tier_b'].indexOf(view)+1){
       linear_menu.visible=true;
     }
 

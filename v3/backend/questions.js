@@ -19,6 +19,14 @@
 */
 
 let Questions={
+  //fst valorizing biogas hotfix
+  "fst_valorizing_biogas":{
+    variables:[],
+    advanced:0,
+    otherQuestions:[],
+    folded:0,
+  },
+
   //wsa
     "wsa_engines":{
       variables:[
