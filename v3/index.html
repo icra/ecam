@@ -70,37 +70,24 @@
 
 <!--loading indicator-->
 <div id=loading_container style="text-align:center;font-size:x-large">
-  <div v-if="!ready">
-    loading ecam tool...
-  </div>
+  <div v-if="!ready">loading ecam tool...</div>
 </div>
 
 <!--ecam all views-->
 <div id=ecam>
+
   <!--ecam logo COMPONENT-->
   <div id="ecam-logo">
-    <div class=flex>
-      <!--menu symbol-->
-      <div id=burger onclick="event.stopPropagation();sidebar.visible^=1">
-        &#9776;
-      </div>
+    <!--3 lines menu symbol "burger"-->
+    <div id=burger onclick="event.stopPropagation();sidebar.visible^=1">
+      &#9776;
+    </div>
 
-      <!--logo-->
-      <div id=logo_container>
-        <a
-          onclick="ecam.show('index')"
-          class=flex
-          style='outline:none'
-          tabindex=-1
-        >
-          <div><b id=logo>ECAM</b></div>
-          <div>{{translate('navbar_title')}}</div>
-          <div style=margin-left:1em>
-            <button onclick="event.stopPropagation();linear_menu.visible^=true">
-              toggle linear menu (development only)
-            </button>
-          </div>
-        </a>
+    <!--logo-->
+    <div id=logo_container onclick="ecam.show('index')">
+      <div id=logo>ECAM</div>
+      <div>
+        {{translate('navbar_title')}}
       </div>
     </div>
 
@@ -111,35 +98,40 @@
       </a>
     </div>
 
-    <!--language-->
+    <!--temporal button-->
     <div>
-      <div id=lang>
-        <!--current language-->
-        <img :src=`frontend/img/flags/${Languages.current}.png`>
+      <button onclick="linear_menu.visible^=true">
+        view/hide<br>linear menu
+      </button>
+    </div>
 
-        <!--all languages-->
-        <div id=select>
-          <div
-            v-for="lang in Languages.list"
-            :lang="lang"
-            @click="Languages.current=lang"
-          >
-            <img :src=`frontend/img/flags/${lang}.png`>
-            {{lang}}
-          </div>
+    <!--language-->
+    <div id=lang>
+      <!--current language-->
+      <img :src=`frontend/img/flags/${Languages.current}.png`>
 
-          <!--null (only language tags)-->
-          <div lang=null @click="Languages.current='null'">
-            <img src="frontend/img/flags/null.png">
-            null (tags only)
-          </div>
+      <!--all languages-->
+      <div id=select>
+        <div
+          v-for="lang in Languages.list"
+          :lang="lang"
+          @click="Languages.current=lang"
+        >
+          <img :src=`frontend/img/flags/${lang}.png`>
+          {{lang}}
+        </div>
 
-          <!--language problem finder-->
-          <div :lang="Languages.current">
-            <a href="" style=color:blue>
-              language debugging tool
-            </a>
-          </div>
+        <!--null (only language tags)-->
+        <div lang=null @click="Languages.current='null'">
+          <img src="frontend/img/flags/null.png">
+          null (tags only)
+        </div>
+
+        <!--language problem finder-->
+        <div :lang="Languages.current">
+          <a href="" style=color:blue>
+            language debugging tool
+          </a>
         </div>
       </div>
     </div>
@@ -1600,28 +1592,135 @@
         </tr>
       </table>
 
-      <table style="margin:5px 0">
-        <tr>
-          <td>
-            ghg emissions outside utility boundaries
-            TODO
-          </td>
-        </tr>
-      </table>
+      <!--emissions outside boundaries-->
+      <div style="margin:10px 0">
+        <table>
+          <tr>
+            <th style=background:purple>
+              {{translate("GHG emissions")}}
+              <br>
+              {{translate("outside utility boundaries")}}
+              <br>
+              (kg CO<sub>2</sub> eq)
+            </th>
+            <td>
+              <a href="">
+                {{translate("ww_SL_ghg_unc_descr")}}
+              </a>
+            </td>
+            <td>
+              {{format(Global.Waste.ww_SL_ghg_unc())}}
+            </td>
+          </tr>
+        </table>
+        <small>
+          {{translate('Note: the emissions above have not been added in the totals presented in the GHG emissions summary')}}
+        </small>
+      </div>
 
-      <table style="margin:5px 0">
-        <tr>
-          <td>
-            ghg emissions avoided TODO
-          </td>
-        </tr>
-      </table>
+      <!--emissions avoided-->
+      <div style="margin:10px 0">
+        <table>
+          <tr>
+            <th style=background:#bbb :rowspan="ghg_avoided.length+1">
+              <a href="" style=color:white>
+                {{ translate("ww_GHG_avoided_descr") }}
+              </a>
+              <div>
+                <span v-html="format( Global.Waste.ww_GHG_avoided() )">
+                </span>
+              </div>
+              <small>
+                kg CO<sub>2</sub> eq / {{translate("assessment period")}}
+              </small>
+            </th>
+          </tr>
+          <tr v-for="obj in ghg_avoided">
+            <td>
+              {{ translate(obj.code+'_descr') }}
+              <span v-if="obj.code.search('fs')==0">
+                (FSM)
+              </span>
+            </td>
+            <td>
+              <span v-html="format( Global[obj.level][obj.sublevel][obj.code]() )">
+              </span>
+            </td>
+          </tr>
+        </table>
+        <small>
+          {{ translate('Note: the emissions above have not been subtracted in the totals presented in the GHG emissions summary')}}
+        </small>
 
+      </div>
     </div>
   </div>
 
   <!--summary nrg VIEW TODO-->
-  <div id=summary_nrg v-if="visible">summary nrg TODO</div>
+  <div id=summary_nrg v-if="visible">
+    <!--summary nrg title-->
+    <h1>
+      <div>
+        <span>{{ Global.General.Name }}</span> &mdash;
+        <span>{{ translate("Energy consumption Summary (Overview)") }}</span> &mdash;
+        <span>{{ translate("assessment_period") }}:</span>
+        <span>
+           <span>{{format(Global.General.Days( )) }}</span> {{ translate("days")  }}
+          (<span>{{format(Global.General.Years()) }}</span> {{ translate("years") }})
+        </span>
+      </div>
+    </h1>
+
+    <!--summary nrg table-->
+    <div style="padding:0 2px">
+      <table border=1>
+        <!--total nrg-->
+        <tr>
+          <td colspan=3 style=text-align:center>
+            TOTAL GHG:
+            {{ format(Global.General.TotalNRG()) }}
+            <span>
+              kWh
+            </span>
+          </td>
+        </tr>
+
+        <tr>
+          <td v-for="stage in Structure.filter(s=>s.sublevel==false)" style="padding:0;vertical-align:top">
+            <!--level 1 nrg-->
+            <div>
+              <div style=line-height:3em;vertical-align:middle>
+                <img :src="`frontend/img/${stage.alias}.png`" style="width:25px">
+                <a @click="">
+                  {{translate(stage.level)}}
+                </a>:
+                {{ format(Global[stage.level][`${stage.prefix}_nrg_cons`]()) }}
+                <span>
+                  kWh
+                </span>
+              </div>
+            </div>
+
+            <!--level2 nrg-->
+            <table border=1 style=margin:5px>
+              <tr v-for="stage2 in Structure.filter(s=>(s.sublevel && s.level==stage.level))">
+                <td>
+                  <img :src="`frontend/img/${stage2.alias}.png`" style="width:20px">
+                  {{translate(stage2.sublevel)}}:
+                </td>
+                <td>
+                  {{ format(Global[stage2.level][stage2.sublevel][`${stage2.prefix}_nrg_cons`]) }}
+                  <span>
+                    kWh
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
   <!--opportunities VIEW TODO-->
   <div id=opportunities v-if="visible">opportunities TODO</div>

@@ -1,46 +1,58 @@
-/*ecam logo*/
+/*
+  CSS VUE COMPONENTS
+*/
+
+/* ecam logo */
   #ecam-logo {
-    color:white;
-    font-size:15px;
-    padding:0.5em 0.5em 0.5em 0.5em;
-    box-shadow:0 1px 2px rgba(0,0,0,.5);
     background:#2b6488;
-    display:flex;
-    justify-content:space-between;
-  }
-  #ecam-logo > div{
-    padding:13px 5px 5px 5px;/*values adjusted for the sidebar*/
+    box-shadow:0 1px 2px rgba(0,0,0,.5);
+    color:white;
+    height:50px;
+    padding:5px;
+    align-items:center;
+
+    /*css grid*/
+    display:grid;
+    grid-template-columns:5% 70% 10% 10% 5%; /*sum: 85%*/
+    /*                    b   l   v   b  l
+                          u   o   e   t  a
+                          r   g   r   n  n
+                          g   o   s      g
+                          e       i   m  u
+                          r       o   e  a
+                                  n   n  g
+                                      u  e
+    */
   }
   #ecam-logo a{color:white;}
   #ecam-logo a:hover{text-decoration:none}
   #ecam-logo img{vertical-align:middle}
   #ecam-logo #burger {
-    width:35px;
-    color:white;
+    align-items:center;
     cursor:pointer;
     font-size:30px;
-    line-height:28%;
-    text-align:left;
   }
   #ecam-logo #burger:hover{color:#666}
   #ecam-logo #logo_container {
-    text-align:left;
+    display: flex;
+    flex-wrap:wrap;
+    align-items:center;
   }
   #ecam-logo #logo {
+    font-weight:bold;
     font-size:30px;
-    line-height:9%;
-    margin:5px 8px;
+    padding-right:20px;
   }
   #ecam-logo #lang{
     cursor:pointer;
-    text-align:right;
   }
   
   #ecam-logo #lang > img {
     display:block;
+    margin:auto;
   }
 
-  /**select element*/
+  /* select element */
   #ecam-logo #lang #select{
     position:absolute;
     top:3%;
@@ -56,21 +68,21 @@
     font-size:12px;
   }
 
-  /**show select element*/
+  /* show select element */
   #ecam-logo #lang:hover #select {
     visibility:visible;
     height:auto;
     transition:all 0s;
   }
 
-  /**languages*/
+  /* languages */
   #ecam-logo #lang #select div[lang] {
     color:black;
     display:block;
     padding:0.5em;
   }
 
-  /**languages mouse over*/
+  /* languages mouse over */
   #ecam-logo #lang #select div[lang]:hover {
     background:orange;
   }
@@ -81,7 +93,7 @@
 /*sidebar*/
   #sidebar{
     position:absolute;
-    top:51px;
+    top:60px;
     left:0;
     z-index:998;
     background:white;

@@ -409,6 +409,16 @@
       visible:false,
       Global,
       Structure,
+      ghg_avoided:[
+        {level:'Waste', sublevel:'Treatment', code:'wwt_SL_GHG_avoided'},
+        {level:'Waste', sublevel:'Treatment', code:'wwt_wr_C_seq_slu'},
+        {level:'Waste', sublevel:'Discharge', code:'wwd_wr_GHG_avo_d'},
+        {level:'Waste', sublevel:'Discharge', code:'wwd_SL_ghg_non'},
+        {level:'Waste', sublevel:'Discharge', code:'wwd_wr_GHG_avo'},
+        {level:'Faecl', sublevel:'Treatment', code:'fst_SL_GHG_avoided'},
+        {level:'Faecl', sublevel:'Reuse',     code:'fsr_ghg_avoided_land'},
+        {level:'Faecl', sublevel:'Reuse',     code:'fsr_ghg_avoided_reuse'},
+      ],
     },
     methods:{
       translate,
@@ -421,6 +431,12 @@
     el:"#summary_nrg",
     data:{
       visible:false,
+      Global,
+      Structure,
+    },
+    methods:{
+      translate,
+      format,
     },
   });
 
