@@ -1,5 +1,9 @@
 /*
   Main data structure object. Stores user inputs and has all equations.
+
+  - idea TODO: pensar en poder seleccionar models/equacions
+  - idea TODO: sempre tenir el model original disponible (congelat) i que
+    l'usuari el pugui modificar
 */
 
 let Global={
@@ -11,7 +15,7 @@ let Global={
     Comments:              "",
     Currency:              "USD",
 
-    Country:"false", //string, selected country name
+    Country:null,    //string, selected country name
     conv_kwh_co2:0,  //conversion factor for grid electricity (kgCO2/kWh)
     prot_con:0,      //prot consumption                       (kg/person/year)
     bod_pday:0,      //BOD5                                   (g/person/day)
@@ -28,14 +32,18 @@ let Global={
     },
     Years:function(){return this.Days()/365},
 
-    //total GHG emissions
+    //calculate total GHG emissions
     TotalGHG:function(){
-      return Global.Water.ws_KPI_GHG()+Global.Waste.ww_KPI_GHG()+Global.Faecl.fs_KPI_GHG();
+      return Global.Water.ws_KPI_GHG()
+        + Global.Waste.ww_KPI_GHG()
+        + Global.Faecl.fs_KPI_GHG();
     },
 
-    //total energy consumed
+    //calculate total energy consumed
     TotalNRG:function(){
-      return Global.Water.ws_nrg_cons()+Global.Waste.ww_nrg_cons()+Global.Faecl.fs_nrg_cons();
+      return Global.Water.ws_nrg_cons()
+        + Global.Waste.ww_nrg_cons()
+        + Global.Faecl.fs_nrg_cons();
     },
 
     /*carbon and nitrogen content based on sludge type and mass*/
@@ -1213,27 +1221,26 @@ Global.Opps={
   g_ww_biogas_dper                  : 0,
 };
 
-//default values for v3 development
-//l1
+/*DEFAULT VALUES FOR V3 DEVELOPMENT*/
+
+//level 1
 Global.Water.ws_resi_pop             = 1000; //people
 Global.Water.ws_serv_pop             =  900; //people
-
 Global.Waste.ww_resi_pop             = 2000; //people
 Global.Waste.Collection.wwc_conn_pop = 1900; //people
 Global.Waste.Treatment.wwt_serv_pop  = 1800; //people
-
 Global.Faecl.fs_resi_pop             = 100; //people
 Global.Faecl.fs_onsi_pop             =  90; //people
 
-//general
+//general info
 Global.General.conv_kwh_co2 = 0.7; //conversion factor for grid electricity (kgCO2/kWh)
 Global.General.prot_con     = 22;  //prot consumption                       (kg/person/year)
 Global.General.bod_pday     = 37;  //BOD5                                   (g/person/day)
 Global.General.bod_pday_fs  = 37;  //BOD5 in faecal sludge                  (g/person/day)
 
-//wsa
-Global.Water.Abstraction.wsa_nrg_cons = 1000;
-Global.Water.Abstraction.wsa_vol_conv =  500;
+//level 2 Water Abstraction
+Global.Water.Abstraction.wsa_nrg_cons = 1000; //kWh
+Global.Water.Abstraction.wsa_vol_conv =  500; //m3
 
-//wwt
+//level 2 Wastewater Treatment
 Global.Waste.Treatment.wwt_bod_infl = 100; //kg
