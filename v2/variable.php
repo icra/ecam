@@ -22,7 +22,8 @@
 
 <!--model ecam v2-->
 <script>
-  let id='<?php echo $id?>'; //$id variable live in javascript scope
+  //make $id visible in javascript scope
+  let id='<?php echo $id?>';
 
   function init() {
     updateInfoTable();
@@ -45,31 +46,30 @@
     init();
   }
 
-  /** Refresh table id=info */
+  /* Refresh table id=info */
   function updateInfoTable() {
     let t=document.getElementById('info');
     while(t.rows.length>0)t.deleteRow(-1);
-    let newRow,newCell;
+    let newRow, newCell;
 
     //Stage
     newRow=t.insertRow(-1)
     newCell=newRow.insertCell(-1)
     newCell.className='th'
-    newCell.innerHTML="<?php write('#variable_stage')?>"
+    newCell.innerHTML="{{ translate('variable_stage') }}"
     newCell=newRow.insertCell(-1)
     if(sublevel) {
       let url = "edit.php";
       newCell.innerHTML+="&larr; <a href="+url+"?level="+level+">"+levelAlias+"</a>/<a href="+url+"?level="+level+"&sublevel="+sublevel+">"+sublevelAlias+"</a>"
     }
-    else newCell.innerHTML="<?php write('#variable_go_back_to')?> <a href=edit.php?level="+level+">"+levelAlias+"</a>"
+    else newCell.innerHTML="{{ translate('variable_go_back_to') }} <a href=edit.php?level="+level+">"+levelAlias+"</a>"
 
     //Explanation
     newRow=t.insertRow(-1)
     newCell=newRow.insertCell(-1)
     newCell.className='th'
-    newCell.innerHTML="<?php write('#variable_explanation')?>"
+    newCell.innerHTML="{{ translate('variable_explanation') }}"
     newRow.insertCell(-1).innerHTML=(function() {
-      //let exp = Info[id].explanation
       let exp = translate(id+"_expla") || translate(id);
       if(exp=="")
         return "<span style=color:#999>No explanation</span>";
@@ -81,11 +81,11 @@
     newRow=t.insertRow(-1)
     newCell=newRow.insertCell(-1)
     newCell.className='th'
-    newCell.innerHTML="<?php write('#variable_type')?>"
+    newCell.innerHTML="{{ translate('variable_type') }}"
     newRow.insertCell(-1).innerHTML=(function(){
       if(typeof(currentStage[id])=="function"){
         let pretf = Formulas.prettify(currentStage[id].toString());
-        let ret = "Output <div><pre class=prettyprint style='padding:1em;background:#eee'><b><?php write('#variable_formula')?>:</b>"+pretf+"<pre></div>";
+        let ret = "Output <div><pre class=prettyprint style='padding:1em;background:#eee'><b>{{ translate('variable_formula') }}:</b>"+pretf+"<pre></div>";
         return ret;
       }else{
         return "Input";
@@ -99,7 +99,7 @@
         newRow=t.insertRow(-1)
         newCell=newRow.insertCell(-1)
         newCell.className='th';
-        newCell.innerHTML="<?php write("#Filter that activates it")?>";
+        newCell.innerHTML="{{ translate("Filter that activates it") }}";
         newCell=newRow.insertCell(-1)
         let currentAnswer = Global.Configuration['Yes/No'][question] ? "Yes" : "No";
         newCell.innerHTML=translate(question)+"? ["+currentAnswer+"]";
@@ -112,7 +112,7 @@
       newRow=t.insertRow(-1)
       newCell=newRow.insertCell(-1)
       newCell.className='th'
-      newCell.innerHTML="<?php write('#variable_inputs_involved')?>"
+      newCell.innerHTML="{{ translate('variable_inputs_involved') }}"
       newCell=newRow.insertCell(-1)
       newCell.innerHTML=(function(){
         let matches=Formulas.idsPerFormula(currentStage[id].toString())
@@ -186,7 +186,7 @@
     newRow=t.insertRow(-1);
     newCell=newRow.insertCell(-1);
     newCell.className='th';
-    newCell.innerHTML="<?php write("#Current value")?>";
+    newCell.innerHTML="{{ translate("Current value") }}";
     newCell=newRow.insertCell(-1);
     newCell.style.fontSize="18px";
 
@@ -228,7 +228,7 @@
     newRow=t.insertRow(-1)
     newCell=newRow.insertCell(-1)
     newCell.className='th'
-    newCell.innerHTML="<?php write('#variable_magnitude')?>"
+    newCell.innerHTML="{{ translate('variable_magnitude') }}"
     newRow.insertCell(-1).innerHTML=Info[id].magnitude
 
     //Select units -- only inputs!
@@ -236,7 +236,7 @@
       newRow=t.insertRow(-1)
       newCell=newRow.insertCell(-1)
       newCell.className='th'
-      newCell.innerHTML="<?php write('#variable_unit')?>"
+      newCell.innerHTML="{{ translate('variable_unit') }}"
       newRow.insertCell(-1).innerHTML=(function() {
         if(Info[id].magnitude=="Currency") {
           return Global.General.Currency;
@@ -262,7 +262,7 @@
       newRow=t.insertRow(-1);
       newCell=newRow.insertCell(-1);
       newCell.className='th';
-      newCell.innerHTML="<?php write('#Substages')?>";
+      newCell.innerHTML="{{ translate('Substages') }}";
       newCell=newRow.insertCell(-1);
 
       //copy all functions inside substages
@@ -313,7 +313,7 @@
     newRow=t.insertRow(-1);
     newCell=newRow.insertCell(-1);
     newCell.className='th';
-    newCell.innerHTML="<?php write("#Outputs that use this value")?>";
+    newCell.innerHTML="{{ translate("Outputs that use this value") }}";
 
     newCell=newRow.insertCell(-1);
     newCell.innerHTML=(function() {
@@ -325,7 +325,7 @@
 
       //if is not used to calculate anything, hide row
       if(outputsPerInput.length==0) {
-        return "<span style=color:#999><?php write('#variable_nothing')?></span>";
+        return "<span style=color:#999>{{ translate('variable_nothing') }}</span>";
       }
 
       outputsPerInput.forEach(function(output) {
@@ -388,7 +388,7 @@
       newRow=t.insertRow(-1)
       newCell=newRow.insertCell(-1)
       newCell.className='th'
-      newCell.innerHTML="<?php write('#variable_advanced')?>"
+      newCell.innerHTML="{{ translate('variable_advanced') }}"
       newRow.insertCell(-1).innerHTML="YES";
     }
 
@@ -528,7 +528,6 @@
         "<div style=margin-top:1em><a href=benchmark.php>All variables benchmarked</a></div>"+
         "";
     }
-
   }
 
   /**
@@ -551,13 +550,14 @@
   }
 </script>
 
+<!--init page and define globals-->
 <script>
   if(!Info[id]) {
     document.body.innerHTML="<div class=error>ERROR: Variable '"+id+"' not defined in dataModel/Info.js</div>";
     window.stop()
   }
 
-  //Define some necessary global variables
+  //define necessary global variables
   let localization = locateVariable(id);
   if(!localization) {
     document.body.innerHTML="<div class=error>ERROR: Variable '"+id+"' not found in dataModel/Global.js</div>";
@@ -572,42 +572,26 @@
   //make the user see "Water Supply" instead of "Water"
   let levelAlias;
   switch(level) {
-    case "Water":levelAlias="<?php write('#Water')?>";break;
-    case "Waste":levelAlias="<?php write('#Waste')?>";break;
-    case "Faecl":levelAlias="<?php write('#Faecl')?>";break;
+    case "Water":levelAlias="{{ translate('Water') }}";break;
+    case "Waste":levelAlias="{{ translate('Waste') }}";break;
+    case "Faecl":levelAlias="{{ translate('Faecl') }}";break;
     default:levelAlias=level;break;
   }
 
   let sublevelAlias = false;
   if(sublevel) {
     switch(sublevel) {
-      case "Abstraction":  sublevelAlias="<?php write('#Abstraction')?>"; break;
-      case "Treatment":    sublevelAlias="<?php write('#Treatment')?>";   break;
-      case "Distribution": sublevelAlias="<?php write('#Distribution')?>";break;
-      case "Collection":   sublevelAlias="<?php write('#Collection')?>";  break;
-      case "Discharge":    sublevelAlias="<?php write('#Discharge')?>";   break;
+      case "Abstraction":  sublevelAlias="{{ translate('Abstraction') }}"; break;
+      case "Treatment":    sublevelAlias="{{ translate('Treatment') }}";   break;
+      case "Distribution": sublevelAlias="{{ translate('Distribution') }}";break;
+      case "Collection":   sublevelAlias="{{ translate('Collection') }}";  break;
+      case "Discharge":    sublevelAlias="{{ translate('Discharge') }}";   break;
       default:             sublevelAlias=sublevel;                        break;
     }
   }
 </script>
 
 <!--template ecam v2-->
-<h1>
-  <span style=color:#999>
-    <?php write('#variable_detailed_info')?>
-    &rarr;
-  </span>
-  <code id=variable_id></code>
-  <code id=variable_descr></code>
-  <script>
-    (function(){
-      let description=translate(id+'_descr')||translate(id);
-      document.querySelector('#variable_id').innerHTML="<code>"+id+"</code>";
-      document.querySelector('#variable_descr').innerHTML="<p style=margin-bottom:0>"+description+"</p>";
-    })();
-  </script>
-</h1>
-
 <div id=main>
   <table
     id=info
@@ -649,13 +633,3 @@
     padding:10px;
   }
 </style>
-
-<!--template ecam v3-->
-<table id=variable></table>
-
-<!--model ecam v3-->
-<script>
-  let variable=new Vue({
-    //TODO
-  });
-</script>

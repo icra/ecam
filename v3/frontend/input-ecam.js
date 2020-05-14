@@ -28,7 +28,7 @@ Vue.component('input_ecam',{
         </div>
       </div>
       <div>
-        (<a onclick="alert('TODO')">{{code}}</a>)
+        (<a @click="variable.view(code)">{{code}}</a>)
       </div>
       <div v-if="Exceptions[code]">
         <!--case 1: selection is a percent of something else-->
@@ -112,6 +112,7 @@ Vue.component('input_ecam',{
     return{
       ecam,
       caption,
+      variable,
 
       Global,
       Info,

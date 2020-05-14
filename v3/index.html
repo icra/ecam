@@ -138,7 +138,7 @@
   </div>
 
   <!--sidebar COMPONENT-->
-  <div id=sidebar v-if="visible">
+  <div id=sidebar v-if="visible" :style="`top:${get_height()}px`">
     <div class="header flex" style="padding:5px;justify-content:space-between">
       <div>{{translate("sidebar_mainMenu")}}</div>
       <div>{{Global.General.Name}}          </div>
@@ -1445,7 +1445,7 @@
                 @mouseout="caption.hide()"
               >
                 <div v-html="translate(key+'_descr').prettify()"></div>
-                (<a onclick="alert('TODO')">{{key}}</a>)
+                (<a @click="variable.view(key)">{{key}}</a>)
               </td>
 
               <!--output value-->
@@ -1507,7 +1507,7 @@
                 @mouseout="caption.hide()"
               >
                 <div v-html="translate(key+'_descr').prettify()"></div>
-                (<a onclick="alert('TODO')">{{key}}</a>)
+                (<a @click="variable.view(key)">{{key}}</a>)
               </td>
 
               <!--output value-->
@@ -1549,34 +1549,54 @@
       <table border=1>
         <!--total ghg-->
         <tr>
-          <td colspan=3 style=text-align:center>
-            TOTAL GHG:
+          <td colspan=3 style="text-align:center">
+            {{ translate("TOTAL GHG")            }}:
             {{ format(Global.General.TotalGHG()) }}
+            <span class=unit>
+              kgCO<sub>2</sub>eq
+            </span>
           </td>
         </tr>
-
         <tr>
-          <td v-for="stage in Structure.filter(s=>s.sublevel==false)" style="padding:0;vertical-align:top">
-            <!--level 1 ghg-->
-            <div>
-              <div style=line-height:3em;vertical-align:middle>
+          <td v-for="stage in Structure.filter(s=>s.sublevel==false)" style="padding:5px;vertical-align:top">
+            <!--level1 ghg-->
+            <div class=flex style="align-items:center">
+              <div>
                 <img :src="`frontend/img/${stage.alias}.png`" style="width:25px">
-                <a @click="">
+              </div>
+              <div style="margin-left:5px">
+                <a @click="go_to(stage.level)" style="cursor:pointer">
                   {{translate(stage.level)}}
                 </a>:
                 {{format(Global[stage.level][`${stage.prefix}_KPI_GHG`]())}}
+                <span class=unit>
+                  kgCO<sub>2</sub>eq
+                </span>
               </div>
             </div>
 
             <!--level2 ghg-->
-            <table border=1 style=margin:5px>
+            <table border=1 style="margin:5px">
               <tr v-for="stage2 in Structure.filter(s=>(s.sublevel && s.level==stage.level))">
                 <td>
-                  <img :src="`frontend/img/${stage2.alias}.png`" style="width:20px">
-                  {{translate(stage2.sublevel)}}:
+                  <div class=flex style="align-items:center">
+                    <div>
+                      <img :src="`frontend/img/${stage2.alias}.png`" style="width:20px">
+                    </div>
+                    <div style="margin-left:5px">
+                      <a @click="go_to(stage2.level, stage2.sublevel)" style="cursor:pointer">
+                        {{translate(stage2.sublevel)}}
+                      </a>
+                    </div>
+                  </div>
                 </td>
                 <td>
                   {{ format(Global[stage2.level][stage2.sublevel][`${stage2.prefix}_KPI_GHG`]()) }}
+                </td>
+                <td>
+                  <span class=unit>
+                    kgCO<sub>2</sub>eq
+                  </span>
                 </td>
               </tr>
               <tr v-if="stage.level=='Waste'">
@@ -1585,6 +1605,9 @@
                 </td>
                 <td>
                   {{ format(Global.Waste.ww_KPI_GHG_unt()) }}
+                </td>
+                <td>
+                  <span class=unit>kgCO<sub>2</sub>eq</span>
                 </td>
               </tr>
             </table>
@@ -1610,6 +1633,9 @@
             </td>
             <td>
               {{format(Global.Waste.ww_SL_ghg_unc())}}
+            </td>
+            <td>
+              <span class=unit>kgCO<sub>2</sub>eq</span>
             </td>
           </tr>
         </table>
@@ -1651,7 +1677,6 @@
         <small>
           {{ translate('Note: the emissions above have not been subtracted in the totals presented in the GHG emissions summary')}}
         </small>
-
       </div>
     </div>
   </div>
@@ -1661,9 +1686,9 @@
     <!--summary nrg title-->
     <h1>
       <div>
-        <span>{{ Global.General.Name }}</span> &mdash;
+        <span>{{ Global.General.Name }}                               </span> &mdash;
         <span>{{ translate("Energy consumption Summary (Overview)") }}</span> &mdash;
-        <span>{{ translate("assessment_period") }}:</span>
+        <span>{{ translate("assessment_period") }}:                   </span>
         <span>
            <span>{{format(Global.General.Days( )) }}</span> {{ translate("days")  }}
           (<span>{{format(Global.General.Years()) }}</span> {{ translate("years") }})
@@ -1677,42 +1702,49 @@
         <!--total nrg-->
         <tr>
           <td colspan=3 style=text-align:center>
-            TOTAL GHG:
+            {{ translate("TOTAL ENERGY CONSUMED") }}:
             {{ format(Global.General.TotalNRG()) }}
-            <span>
-              kWh
-            </span>
+            <span class=unit>kWh</span>
           </td>
         </tr>
 
+        <!--nrg level1 and level2-->
         <tr>
-          <td v-for="stage in Structure.filter(s=>s.sublevel==false)" style="padding:0;vertical-align:top">
+          <td v-for="stage in Structure.filter(s=>s.sublevel==false)" style="padding:5px;vertical-align:top">
             <!--level 1 nrg-->
-            <div>
-              <div style=line-height:3em;vertical-align:middle>
+            <div class=flex style="align-items:center">
+              <div>
                 <img :src="`frontend/img/${stage.alias}.png`" style="width:25px">
-                <a @click="">
+              </div>
+              <div style="margin-left:5px">
+                <a @click="go_to(stage.level)" style="cursor:pointer">
                   {{translate(stage.level)}}
                 </a>:
                 {{ format(Global[stage.level][`${stage.prefix}_nrg_cons`]()) }}
-                <span>
-                  kWh
-                </span>
+                <span class=unit>kWh</span>
               </div>
             </div>
 
             <!--level2 nrg-->
-            <table border=1 style=margin:5px>
+            <table border=1 style="margin:5px;">
               <tr v-for="stage2 in Structure.filter(s=>(s.sublevel && s.level==stage.level))">
                 <td>
-                  <img :src="`frontend/img/${stage2.alias}.png`" style="width:20px">
-                  {{translate(stage2.sublevel)}}:
+                  <div class=flex style="align-items:center">
+                    <div>
+                      <img :src="`frontend/img/${stage2.alias}.png`" style="width:20px">
+                    </div>
+                    <div style="margin-left:5px">
+                      <a @click="go_to(stage2.level, stage2.sublevel)" style="cursor:pointer">
+                        {{translate(stage2.sublevel)}}:
+                      </a>
+                    </div>
+                  </div>
                 </td>
                 <td>
                   {{ format(Global[stage2.level][stage2.sublevel][`${stage2.prefix}_nrg_cons`]) }}
-                  <span>
-                    kWh
-                  </span>
+                </td>
+                <td>
+                  <span class=unit>kWh</span>
                 </td>
               </tr>
             </table>
@@ -1724,6 +1756,169 @@
 
   <!--opportunities VIEW TODO-->
   <div id=opportunities v-if="visible">opportunities TODO</div>
+  
+  <!--variable VIEW TODO-->
+  <div id=variable v-if="visible">
+    <!--variable title-->
+    <h1>
+      <span style=color:#999>
+        {{ translate('variable_detailed_info') }}
+        &rarr;
+      </span>
+      <code>{{id}}</code>
+      <p v-if="Info[id]">
+        <code>{{ translate(id+'_descr') }}</code>
+      </p>
+      <div v-else class=error>
+        ERROR: Variable {{id}} not defined in backend/info.js
+      </div>
+    </h1>
+
+    <!--variable table-->
+    <table v-if="Info[id]" style="text-align:left;width:50%;margin:auto">
+      <!--variable stage-->
+      <tr>
+        <th>
+          {{ translate('variable_stage') }}
+        </th>
+        <td>
+          <div v-if="localization">
+            &larr;
+            <a @click="go_to(localization.level)">
+              {{ translate(localization.level) }}
+            </a>
+            <span v-if="localization.sublevel">
+              /
+              <a @click="go_to(localization.level, localization.sublevel)">
+                {{ translate(localization.sublevel) }}
+              </a>
+            </span>
+          </div>
+        </td>
+      </tr>
+
+      <!--variable explanation-->
+      <tr>
+        <th>
+          {{ translate('variable_explanation') }}
+        </th>
+        <td>
+          {{ translate(id+'_expla') }}
+        </td>
+      </tr>
+
+      <!--variable is inside a question?-->
+      <tr v-if="question">
+        <th>
+          {{ translate("Filter that activates it") }}
+        </th>
+        <td>
+          <div v-if="question">
+            {{ translate(question) }}?
+            [{{ translate( (Global.Configuration.Questions[question])?'yes':'no' )}}]
+          </div>
+        </td>
+      </tr>
+
+      <!--variable type-->
+      <tr>
+        <th>
+          {{ translate('variable_type') }}
+        </th>
+        <td>
+          <div>
+            {{
+              get_variable_type()
+            }}
+            <div v-if="get_variable_type()=='output'" style="border:1px solid #ccc">
+              Formula:
+              <div v-html="Formulas.prettify(get_current_stage()[id].toString())">
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <!--if output: show inputs involved TODO-->
+      <tr v-if="get_variable_type()=='output'">
+        <th>
+          {{ translate('variable_inputs_involved') }}
+        </th>
+        <td>
+          <table>
+            <tr v-for="match in Formulas.ids_per_formula(get_current_stage()[id].toString())">
+              <td>
+                <a @click="view(match)">
+                  {{match}}
+                </a>
+              </td>
+              <td>TODO
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <!--variable current value TODO-->
+      <tr>
+        <th>
+          {{ translate("Current value") }}
+        </th>
+        <td>
+          <div v-if="get_variable_type()=='input'">
+            input element TODO
+          </div>
+          <div v-if="get_variable_type()=='output'">
+            {{
+              format(
+                get_current_stage()[id]()/Units.multiplier(id)
+              )
+            }}
+            <span class=unit>
+              {{ Info[id].unit }}
+            </span>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <th>
+          {{ translate('variable_magnitude') }}
+        </th>
+        <td>
+          {{ Info[id].magnitude }}
+        </td>
+      </tr>
+
+      <tr>
+        <th>Select units -- only inputs!
+        <td>select unit
+      </tr>
+      <tr>
+        <th>values in substages
+        <td>values in substages
+      </tr>
+      <tr>
+        <th>Is used to calculate "utc"
+        <td>is used to calculate
+      </tr>
+      <tr>
+        <th>Is "id" level 3 specific?
+        <td>is "id" level 3 specific?
+      </tr>
+      <tr>
+        <th>It has recommendations?
+        <td>it has recommendations?
+      </tr>
+      <tr>
+        <th>If input:is used in benchmarking?
+        <td>if input:is used in benchmarking?
+      </tr>
+      <tr>
+        <th>Is "id" benchmarked?
+        <td>is "id" benchmarked?
+      </tr>
+    </table>
+  </div>
 
   <!--pending-------------------------------------------------------------->
   <div style="border-top:1px solid;margin-top:10px">

@@ -10,6 +10,9 @@ body{
 a{font-weight:bold;text-decoration:none}
 a,a:hover,a:active{color:#2b6488;font-weight:normal}
 a:hover{text-decoration:underline}
+a{
+  cursor:pointer;
+}
 
 /*headers*/
 h1{margin:0;font-size:18px;}
@@ -34,6 +37,10 @@ tr[hl_output=yes]{background:orange;color:black}
 tr[hl_output=no]{background:default}
 tr[hl], tr[hl_output]{
   transition:background 0.8s,color 0.8s;
+}
+.unit {
+  font-size:smaller;
+  color:#666;
 }
 
 /*horizontal separator*/

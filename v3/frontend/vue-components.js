@@ -39,7 +39,7 @@
   let ecam_logo = new Vue({
     el:'#ecam-logo',
     data:{
-      version:"v3.0 development",
+      version:"v3.0",
       Languages,
     },
     methods:{
@@ -62,6 +62,9 @@
         tier_b.current_stage = sublevel ? Global[level][sublevel] : Global[level];
         ecam.show('tier_b');
       },
+      get_height(){
+        return document.querySelector("#ecam-logo").offsetHeight;
+      },
     },
   });
 
@@ -81,6 +84,123 @@
         if(this.current_view!='tier_b') return false;
         if(level==tier_b.level && sublevel==tier_b.sublevel){
           return true;
+        }
+      },
+    },
+  });
+
+  //TODO view or component?
+  let variable = new Vue({
+    el:"#variable",
+    data:{
+      visible:false,
+      id:"wsa_nrg_cons",  //variable code
+      question:false,     //question where id is inside
+
+      //stage where id belongs to
+      localization:{
+        level:'Water',
+        sublevel:'Abstraction',
+      },
+
+      //backend
+      Global,
+      Info,
+      Units,
+      Tables,
+      Recommendations,
+      Exceptions,
+      Formulas,
+      Questions,
+    },
+    methods:{
+      translate,
+      format,
+      go_to: sidebar.go_to,
+
+      /* get current stage */
+      get_current_stage(){
+        let level    = this.localization.level;
+        let sublevel = this.localization.sublevel;
+        if(sublevel){
+          return this.Global[level][sublevel];
+        }else if(level){
+          return this.Global[level];
+        }else{
+          return false;
+        }
+      },
+
+      //get variable type
+      get_variable_type(){
+        let type = typeof(this.get_current_stage()[this.id]);
+        switch(type){
+          case 'number':   return 'input'; break;
+          case 'function': return 'output';break;
+          default: throw new Error("variable type error");
+        }
+      },
+
+      is_input(){
+        return typeof(this.get_current_stage()[this.id])=='number';
+      },
+      is_output(){
+        return typeof(this.get_current_stage()[this.id])=='function';
+      },
+
+      /* open variable VIEW */
+      view(id){
+        if(Info[id]){
+          this.id           = id;
+          this.question     = this.Questions.is_inside(this.id);
+          this.localization = this.locate_variable(id);
+          //TODO
+
+        }else{
+          throw new Error(`Variable "${id}" does not exist`); 
+          return;
+        }
+        if(typeof(ecam)=='object'){
+          ecam.show('variable');
+          caption.hide();
+        }
+      },
+
+      /* find a variable inside 'Global' */
+      locate_variable(code) {
+        let level    = false; //level 1
+        let sublevel = false; //level 2
+
+        let levels1 = Structure.filter(s=>!s.sublevel).map(s=>s.level); //array of l1 names
+        levels1.push('General');
+
+        for(let l1 in Global){
+
+          if(levels1.indexOf(l1)  == -1){
+            continue;
+          }
+
+          for(let field in Global[l1]){
+            if(typeof(Global[l1][field])=='object'){
+              for(let subfield in Global[l1][field]){
+                if(code==subfield){
+                  level    = l1;
+                  sublevel = field;
+                  break;
+                }
+              }
+            }else{
+              if(code==field){
+                level = l1;
+                break;
+              }
+            }
+          }
+        }
+        if(!level && !sublevel){
+          return false;
+        }else{
+          return {level, sublevel};
         }
       },
     },
@@ -374,6 +494,7 @@
       Formulas,
       Questions,
       caption,
+      variable,
     },
     methods:{
       translate,
@@ -407,8 +528,16 @@
     el:"#summary_ghg",
     data:{
       visible:false,
-      Global,
-      Structure,
+
+      //select summary unit TODO
+      current_unit:"kgCO2eq",
+      units: [
+        "kgCO2eq",
+        "kgCO2eq/assessment_period",
+        "kgCO2eq/year/serviced_population",
+      ],
+
+      //avoided ghg - list of variables
       ghg_avoided:[
         {level:'Waste', sublevel:'Treatment', code:'wwt_SL_GHG_avoided'},
         {level:'Waste', sublevel:'Treatment', code:'wwt_wr_C_seq_slu'},
@@ -419,10 +548,15 @@
         {level:'Faecl', sublevel:'Reuse',     code:'fsr_ghg_avoided_land'},
         {level:'Faecl', sublevel:'Reuse',     code:'fsr_ghg_avoided_reuse'},
       ],
+
+      //backend
+      Global,
+      Structure,
     },
     methods:{
       translate,
       format,
+      go_to: sidebar.go_to,
     },
   });
 
@@ -437,6 +571,7 @@
     methods:{
       translate,
       format,
+      go_to: sidebar.go_to,
     },
   });
 
@@ -447,6 +582,7 @@
       visible:false,
     },
   });
+
 
 //-----------------------------------------------------------------------------
 // MAIN CONTROLLER (not a vue component)
@@ -475,6 +611,7 @@ let ecam={
     summary_ghg,
     summary_nrg,
     opportunities,
+    variable,
   },
 
   /*METHODS*/
