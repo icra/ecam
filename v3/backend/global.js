@@ -1171,14 +1171,6 @@ let Global={
       "faecl":true, "faeclCon":true, "faeclTre":true, "faeclReu":true,
     },
 
-    //highlight inputs/outputs
-    hl:0,
-
-    //remember if question 'x' is expanded or not (in edit.php)
-    Expanded:{
-      'water':1, 'waste':1, 'faecl':1, //l1 for birds.php
-    },
-
     //custom unit selections for variables are stored here
     Units:{},
 

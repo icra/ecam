@@ -1771,7 +1771,7 @@
         &rarr;
       </span>
       <code>{{id}}</code>
-      <p v-if="Info[id]">
+      <p v-if="Info[id]" style="margin-bottom:0">
         <code>{{ translate(id+'_descr') }}</code>
       </p>
       <div v-else class=error>
@@ -1832,7 +1832,7 @@
         </th>
         <td>
           <div v-if="question">
-            {{ translate(question) }}?
+            <span v-html="translate(question)+'?'"></span>
             [{{ translate( (Global.Configuration.Questions[question])?'yes':'no' )}}]
           </div>
         </td>

@@ -28,9 +28,9 @@
   #ecam-logo a:hover{text-decoration:none}
   #ecam-logo img{vertical-align:middle}
   #ecam-logo #burger {
-    align-items:center;
     cursor:pointer;
     font-size:30px;
+    line-height:0px;
   }
   #ecam-logo #burger:hover{color:#666}
   #ecam-logo #logo_container {
