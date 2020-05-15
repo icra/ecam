@@ -377,3 +377,16 @@
     text-align:center;
   }
 
+  #variable td {
+    padding:1em;
+    background:white;
+  }
+  #variable th {
+    padding:1em;
+    background:inherit;
+  }
+
+  #variable input[type=number] {
+    text-align:right;
+  }
+

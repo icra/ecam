@@ -15,7 +15,7 @@ let Global={
     Comments:              "",
     Currency:              "USD",
 
-    Country:null,    //string, selected country name
+    Country:false,   //string, selected country name
     conv_kwh_co2:0,  //conversion factor for grid electricity (kgCO2/kWh)
     prot_con:0,      //prot consumption                       (kg/person/year)
     bod_pday:0,      //BOD5                                   (g/person/day)

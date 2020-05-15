@@ -57,9 +57,16 @@
     methods:{
       translate,
       go_to(level, sublevel){
+        let possible_levels = this.Structure.filter(s=>!s.sublevel).map(s=>s.level);
+
+        if(possible_levels.indexOf(level)==-1){
+          throw new Error(`cannot go to level '${level}'`);
+        }
+
         tier_b.level    = level;
         tier_b.sublevel = sublevel||false;
         tier_b.current_stage = sublevel ? Global[level][sublevel] : Global[level];
+
         ecam.show('tier_b');
       },
       get_height(){
@@ -89,12 +96,12 @@
     },
   });
 
-  //TODO view or component?
+  //TODO
   let variable = new Vue({
     el:"#variable",
     data:{
       visible:false,
-      id:"wsa_nrg_cons",  //variable code
+      id:"wsa_nrg_cons",  //default variable code
       question:false,     //question where id is inside
 
       //stage where id belongs to
@@ -106,6 +113,7 @@
       //backend
       Global,
       Info,
+      Structure,
       Units,
       Tables,
       Recommendations,
@@ -119,6 +127,7 @@
       go_to: sidebar.go_to,
 
       /* get current stage */
+      //TODO refactor
       get_current_stage(){
         let level    = this.localization.level;
         let sublevel = this.localization.sublevel;
@@ -132,6 +141,7 @@
       },
 
       //get variable type
+      //TODO refactor
       get_variable_type(){
         let type = typeof(this.get_current_stage()[this.id]);
         switch(type){
@@ -141,11 +151,14 @@
         }
       },
 
-      is_input(){
-        return typeof(this.get_current_stage()[this.id])=='number';
-      },
-      is_output(){
-        return typeof(this.get_current_stage()[this.id])=='function';
+      //TODO refactor
+      get_level_color(){
+        let stage = this.Structure.find(s=>s.level==this.localization.level);
+        if(stage){
+          return stage.color;
+        }else{
+          return "#2b6488";
+        }
       },
 
       /* open variable VIEW */
@@ -154,10 +167,8 @@
           this.id           = id;
           this.question     = this.Questions.is_inside(this.id);
           this.localization = this.locate_variable(id);
-          //TODO
-
         }else{
-          throw new Error(`Variable "${id}" does not exist`); 
+          throw new Error(`Variable "${id}" does not exist`);
           return;
         }
         if(typeof(ecam)=='object'){
@@ -171,15 +182,13 @@
         let level    = false; //level 1
         let sublevel = false; //level 2
 
-        let levels1 = Structure.filter(s=>!s.sublevel).map(s=>s.level); //array of l1 names
-        levels1.push('General');
+        //array of possible level1 names
+        let possible_levels = this.Structure.filter(s=>!s.sublevel).map(s=>s.level);
+        possible_levels.push('General');
 
+        //search inside Global
         for(let l1 in Global){
-
-          if(levels1.indexOf(l1)  == -1){
-            continue;
-          }
-
+          if(possible_levels.indexOf(l1) == -1){ continue; }
           for(let field in Global[l1]){
             if(typeof(Global[l1][field])=='object'){
               for(let subfield in Global[l1][field]){
@@ -197,11 +206,50 @@
             }
           }
         }
+
+        //return value
         if(!level && !sublevel){
           return false;
         }else{
           return {level, sublevel};
         }
+      },
+
+      //find value of variable "code"
+      get_variable_value(code){
+        let loc = this.locate_variable(code);
+        if(!loc){
+          throw new Error(`variable "${code}" not found`);
+        }
+
+        let current_stage = null;
+
+        if(loc.sublevel){
+          current_stage = this.Global[loc.level][loc.sublevel];
+        }else{
+          current_stage = this.Global[loc.level];
+        }
+
+        switch(typeof(current_stage[code])){
+          case 'number':   return current_stage[code];   break;
+          case 'function': return current_stage[code](); break;
+          default:
+            throw new Error('type error');
+            break;
+        }
+      },
+
+      get_current_unit(key){
+        if(!Info[key]){
+          return `["${key}" unit not found]`;
+        }
+        if(Info[key].magnitude=='Currency'){
+          return this.Global.General.Currency;
+        }
+        if(undefined===this.Global.Configuration.Units[key]){
+          this.Global.Configuration.Units[key] = this.Info[key].unit;
+        }
+        return this.Global.Configuration.Units[key];
       },
     },
   });
@@ -209,7 +257,6 @@
 //-----------------------------------------------------------------------------
 // VIEWS (= pages)
 //-----------------------------------------------------------------------------
-  //landing page
   let index = new Vue({
     el:'#index',
     data:{
@@ -443,7 +490,6 @@
     }
   });
 
-  //TODO
   let tier_a = new Vue({
     el:"#tier_a",
     data:{
@@ -458,22 +504,11 @@
       translate,
       format,
       //get current unit for specific variable
-      get_current_unit(key){
-        if(!Info[key]){
-          return `["${key}" unit not found]`;
-        }
-        if(Info[key].magnitude=='Currency'){
-          return this.Global.General.Currency;
-        }
-        if(undefined===this.Global.Configuration.Units[key]){
-          this.Global.Configuration.Units[key] = this.Info[key].unit;
-        }
-        return this.Global.Configuration.Units[key];
-      },
+      get_current_unit: variable.get_current_unit,
+
     },
   });
 
-  //TODO
   let tier_b = new Vue({
     el:"#tier_b",
     data:{
@@ -523,7 +558,6 @@
     },
   });
 
-  //TODO
   let summary_ghg = new Vue({
     el:"#summary_ghg",
     data:{
@@ -552,6 +586,7 @@
       //backend
       Global,
       Structure,
+      variable,
     },
     methods:{
       translate,
@@ -560,7 +595,6 @@
     },
   });
 
-  //TODO
   let summary_nrg = new Vue({
     el:"#summary_nrg",
     data:{
@@ -575,14 +609,12 @@
     },
   });
 
-  //TODO
   let opportunities = new Vue({
     el:"#opportunities",
     data:{
       visible:false,
     },
   });
-
 
 //-----------------------------------------------------------------------------
 // MAIN CONTROLLER (not a vue component)
@@ -611,7 +643,7 @@ let ecam={
     summary_ghg,
     summary_nrg,
     opportunities,
-    variable,
+    variable, //temporal
   },
 
   /*METHODS*/

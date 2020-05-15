@@ -36,18 +36,20 @@ let Formulas={
   outputs_per_input(id, object){
     object=object||Global;
     let matches=[];
-    let match;
     let reg=new RegExp('\\W'+id+"\\W");
 
-    for(var field in object) {
+    for(let field in object) {
       if(field==id)continue;
-      if(typeof object[field]=="object") {
+      if(typeof(object[field])=="object") {
         //console.log(id,': going inside "'+field+'"');
-        matches=matches.concat(this.outputsPerInput(id, object[field])); //stack overflow potential WARNING
+        //warning: max call stack size exceeded potential
+        matches = matches.concat(this.outputs_per_input(id, object[field]));
       }
-      if(typeof object[field]=="function"){
-        match=object[field].toString().search(reg); //will return -1 if not found
-        if(match+1){matches.push(field);}
+      if(typeof(object[field])=="function"){
+        let match=object[field].toString().search(reg); //will return -1 if not found
+        if(match+1){
+          matches.push(field);
+        }
       }
     }
 

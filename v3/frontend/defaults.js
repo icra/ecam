@@ -4,17 +4,9 @@
 linear_menu.visible  = true;
 
 /* VIEWS */
-index.visible        = false;
-
-tier_a.visible       = false;
-
-tier_b.visible       = false;
-tier_b.level         = 'Water';
-tier_b.sublevel      = 'Abstraction';
-tier_b.current_stage = Global.Water.Abstraction;
-
-variable.visible     = true;
-
-summary_ghg.visible  = false;
-
-summary_nrg.visible  = false;
+index.visible        = 0; //landing
+tier_a.visible       = 0; //tier A
+tier_b.visible       = 0; //tier B
+variable.visible     = true; //variable
+summary_ghg.visible  = 0; //summary GHG
+summary_nrg.visible  = 0; //summary NRG

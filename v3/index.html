@@ -45,6 +45,9 @@
     <!--string prettify for descriptions (mainly for CO2, N2O, CH4 subindexes)-->
     <script src="frontend/js/prettify.js"></script>
 
+    <!--capitalize first letter of a string-->
+    <script src="frontend/js/ucfirst.js"></script>
+
     <!--libs-->
       <!--google charts-->
       <script src="frontend/js/charts/loader.js"></script>
@@ -1529,10 +1532,10 @@
     </div>
   </div>
 
-  <!--summary ghg VIEW TODO-->
+  <!--summary ghg VIEW-->
   <div id=summary_ghg v-if="visible">
     <!--summary ghg title-->
-    <h1>
+    <h1 style="text-align:center">
       <div>
         <span>{{ Global.General.Name }}</span> &mdash;
         <span>{{ translate("GHG Emissions Summary (Overview)") }}</span> &mdash;
@@ -1546,7 +1549,7 @@
 
     <!--summary ghg table-->
     <div style="padding:0 2px">
-      <table border=1>
+      <table border=1 style="margin:auto">
         <!--total ghg-->
         <tr>
           <td colspan=3 style="text-align:center">
@@ -1617,7 +1620,7 @@
 
       <!--emissions outside boundaries-->
       <div style="margin:10px 0">
-        <table>
+        <table border=1 style="margin:auto">
           <tr>
             <th style=background:purple>
               {{translate("GHG emissions")}}
@@ -1627,7 +1630,7 @@
               (kg CO<sub>2</sub> eq)
             </th>
             <td>
-              <a href="">
+              <a @click="variable.view('ww_SL_ghg_unc')" title="ww_SL_ghg_unc">
                 {{translate("ww_SL_ghg_unc_descr")}}
               </a>
             </td>
@@ -1639,17 +1642,17 @@
             </td>
           </tr>
         </table>
-        <small>
+        <div style="font-size:smaller;text-align:center">
           {{translate('Note: the emissions above have not been added in the totals presented in the GHG emissions summary')}}
-        </small>
+        </div>
       </div>
 
       <!--emissions avoided-->
       <div style="margin:10px 0">
-        <table>
+        <table border=1 style="margin:auto">
           <tr>
             <th style=background:#bbb :rowspan="ghg_avoided.length+1">
-              <a href="" style=color:white>
+              <a @click="variable.view('ww_GHG_avoided')" style="color:white" title="ww_GHG_avoided">
                 {{ translate("ww_GHG_avoided_descr") }}
               </a>
               <div>
@@ -1663,10 +1666,12 @@
           </tr>
           <tr v-for="obj in ghg_avoided">
             <td>
-              {{ translate(obj.code+'_descr') }}
-              <span v-if="obj.code.search('fs')==0">
-                (FSM)
-              </span>
+              <a @click="variable.view(obj.code)" :title="obj.code">
+                {{ translate(obj.code+'_descr') }}
+                <span v-if="obj.code.search('fs')==0">
+                  (FSM)
+                </span>
+              </a>
             </td>
             <td>
               <span v-html="format( Global[obj.level][obj.sublevel][obj.code]() )">
@@ -1674,9 +1679,9 @@
             </td>
           </tr>
         </table>
-        <small>
+        <div style="font-size:smaller;text-align:center">
           {{ translate('Note: the emissions above have not been subtracted in the totals presented in the GHG emissions summary')}}
-        </small>
+        </div>
       </div>
     </div>
   </div>
@@ -1684,7 +1689,7 @@
   <!--summary nrg VIEW TODO-->
   <div id=summary_nrg v-if="visible">
     <!--summary nrg title-->
-    <h1>
+    <h1 style="text-align:center">
       <div>
         <span>{{ Global.General.Name }}                               </span> &mdash;
         <span>{{ translate("Energy consumption Summary (Overview)") }}</span> &mdash;
@@ -1698,7 +1703,7 @@
 
     <!--summary nrg table-->
     <div style="padding:0 2px">
-      <table border=1>
+      <table border=1 style="margin:auto">
         <!--total nrg-->
         <tr>
           <td colspan=3 style=text-align:center>
@@ -1756,7 +1761,7 @@
 
   <!--opportunities VIEW TODO-->
   <div id=opportunities v-if="visible">opportunities TODO</div>
-  
+
   <!--variable VIEW TODO-->
   <div id=variable v-if="visible">
     <!--variable title-->
@@ -1775,7 +1780,12 @@
     </h1>
 
     <!--variable table-->
-    <table v-if="Info[id]" style="text-align:left;width:50%;margin:auto">
+    <table v-if="Info[id]"
+      :style="
+        'text-align:left;width:70%;margin:auto;'+
+        `background:${get_level_color()}`
+      "
+    >
       <!--variable stage-->
       <tr>
         <th>
@@ -1784,14 +1794,20 @@
         <td>
           <div v-if="localization">
             &larr;
-            <a @click="go_to(localization.level)">
-              {{ translate(localization.level) }}
+
+            <a v-if="localization.level=='General'" onclick="ecam.show('configuration')">
+              {{translate('getStarted_general_info')}}
             </a>
-            <span v-if="localization.sublevel">
-              /
-              <a @click="go_to(localization.level, localization.sublevel)">
-                {{ translate(localization.sublevel) }}
+            <span v-else>
+              <a @click="go_to(localization.level)">
+                {{ translate(localization.level) }}
               </a>
+              <span v-if="localization.sublevel">
+                /
+                <a @click="go_to(localization.level, localization.sublevel)">
+                  {{ translate(localization.sublevel) }}
+                </a>
+              </span>
             </span>
           </div>
         </td>
@@ -1803,7 +1819,9 @@
           {{ translate('variable_explanation') }}
         </th>
         <td>
-          {{ translate(id+'_expla') }}
+          <code>
+            {{ translate(id+'_expla') }}
+          </code>
         </td>
       </tr>
 
@@ -1827,59 +1845,72 @@
         </th>
         <td>
           <div>
-            {{
-              get_variable_type()
-            }}
-            <div v-if="get_variable_type()=='output'" style="border:1px solid #ccc">
-              Formula:
-              <div v-html="Formulas.prettify(get_current_stage()[id].toString())">
+            <div style="font-size:large">
+              {{ get_variable_type().ucfirst() }}
+            </div>
+
+            <!--show formula-->
+            <div v-if="get_variable_type()=='output'">
+              <div style="border:1px solid #ccc;padding:1em">
+                <div>
+                  {{ translate('variable_formula') }}:
+                </div>
+                <div
+                  v-html="Formulas.prettify(get_current_stage()[id].toString())"
+                  style="font-family:monospace"
+                ></div>
               </div>
+
+              <!--show inputs involved-->
+              <div style="margin-top:10px">
+                <b>
+                  {{ translate('variable_inputs_involved') }}
+                </b>
+              </div>
+
+              <table>
+                <tr v-for="match in Formulas.ids_per_formula(get_current_stage()[id].toString())">
+                  <td>
+                    <a @click="view(match)">
+                      {{match}}
+                    </a>
+                  </td>
+                  <td>
+                    <div v-html="format(get_variable_value(match))">
+                    </div>
+                  </td>
+                  <td>
+                    <div class=unit v-html="Info[match].unit.prettify()">
+                    </div>
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
         </td>
       </tr>
 
-      <!--if output: show inputs involved TODO-->
-      <tr v-if="get_variable_type()=='output'">
-        <th>
-          {{ translate('variable_inputs_involved') }}
-        </th>
-        <td>
-          <table>
-            <tr v-for="match in Formulas.ids_per_formula(get_current_stage()[id].toString())">
-              <td>
-                <a @click="view(match)">
-                  {{match}}
-                </a>
-              </td>
-              <td>TODO
-            </tr>
-          </table>
-        </td>
-      </tr>
-
-      <!--variable current value TODO-->
+      <!--variable current value-->
       <tr>
         <th>
           {{ translate("Current value") }}
         </th>
         <td>
           <div v-if="get_variable_type()=='input'">
-            input element TODO
+            <input type=number v-model.number="get_current_stage()[id]">
+            <span class=unit v-html="Info[id].unit.prettify()"></span>
           </div>
           <div v-if="get_variable_type()=='output'">
-            {{
-              format(
-                get_current_stage()[id]()/Units.multiplier(id)
-              )
-            }}
+            <span v-html="format( get_current_stage()[id]()/Units.multiplier(id) )">
+            </span>
             <span class=unit>
-              {{ Info[id].unit }}
+              <span v-html="get_current_unit(id).prettify()"></span>
             </span>
           </div>
         </td>
       </tr>
 
+      <!--variable magnitude-->
       <tr>
         <th>
           {{ translate('variable_magnitude') }}
@@ -1889,34 +1920,57 @@
         </td>
       </tr>
 
+      <!--outputs that use this variable-->
       <tr>
-        <th>Select units -- only inputs!
-        <td>select unit
+        <th>
+          {{ translate("Outputs that use this value") }}
+        </th>
+        <td>
+          <table>
+            <tr v-for="output in Formulas.outputs_per_input(id)">
+              <td>
+                <a @click="view(output)">
+                  {{ output }}
+                </a>
+              </td>
+              <td>
+                <div v-html="format(get_variable_value(output))">
+                </div>
+              </td>
+              <td>
+                <span class=unit v-html="get_current_unit(output).prettify()">
+                </span>
+              </td>
+            </tr>
+            <tr v-if="Formulas.outputs_per_input(id).length==0">
+              <td>
+                <span style=color:#999>{{ translate('variable_nothing') }}</span>
+              </td>
+            </tr>
+          </table>
+        </td>
       </tr>
+
       <tr>
         <th>values in substages
-        <td>values in substages
+        <td>values in substages TODO
       </tr>
-      <tr>
-        <th>Is used to calculate "utc"
-        <td>is used to calculate
-      </tr>
-      <tr>
-        <th>Is "id" level 3 specific?
-        <td>is "id" level 3 specific?
-      </tr>
+
       <tr>
         <th>It has recommendations?
-        <td>it has recommendations?
+        <td>it has recommendations? TODO
       </tr>
+
       <tr>
         <th>If input:is used in benchmarking?
-        <td>if input:is used in benchmarking?
+        <td>if input:is used in benchmarking? TODO
       </tr>
+
       <tr>
         <th>Is "id" benchmarked?
-        <td>is "id" benchmarked?
+        <td>is "id" benchmarked? TODO
       </tr>
+
     </table>
   </div>
 

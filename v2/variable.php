@@ -1,14 +1,11 @@
 <?php
-  /* variable.php
-  *  view info of a single variable
-  */
+  /* 
+   * variable.php
+   * view info of a single variable
+   *
+   */
 ?>
 
-<?php
-  //input: variable id
-  if(!isset($_GET['id'])){die('no input specified');}
-  $id = $_GET['id'];
-?>
 <!doctype html><html><head>
   <?php include'imports.php'?>
   <!--prettify benchmark code-->
