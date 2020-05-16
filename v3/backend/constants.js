@@ -1,7 +1,5 @@
 /*constants*/
-
-let Cts = {
-
+let Cts={
   ct_ch4_lf:{  value:50,    descr:"CH4 in landfill gas",                                    unit:"%", },
   ct_DOCfra:{  value:80,    descr:"Decomposable organic fraction of raw wastewater solids", unit:"%",},
   ct_d3y_lf:{  value:69.9,  descr:"Decomposed % in first 3 years",                          unit:"%"},
@@ -37,27 +35,27 @@ let Cts = {
 
   ct_ch4_eq:{
     value:34,
-    descr:"Conversion for CH<sub>4</sub> emissions to CO<sub>2</sub> equivalent emissions",
-    unit:"kg CO<sub>2</sub>eq / kg CH<sub>4</sub>",
+    descr:"Conversion for CH4 emissions to CO2 equivalent emissions",
+    unit:"kg CO2eq / kg CH4",
   },
 
   ct_n2o_eq:{
     value:298,
-    descr:"Conversion for N<sub>2</sub>O emissions to CO<sub>2</sub> equivalent emissions",
-    unit:"kg CO<sub>2</sub>eq / kg N<sub>2</sub>O",
+    descr:"Conversion for N2O emissions to CO2 equivalent emissions",
+    unit:"kg CO2eq / kg N2O",
   },
 
   //constants for sludge management proposed by Girum
   ct_oc_vs:{value:0.56,descr:"Organic Carbon content in Volatile Solids",unit:"g OC / g TVS"},
   ct_vs_dig:{value:0.51,descr:"Volatile Solids content in Digested Sludge",unit:"g TVS / g sludge"},
   ct_vs_slu:{value:0.70,descr:"Volatile Solids content in not Digested Sludge",unit:"g TVS / g sludge"},
-  ct_ch4_oc:{value:1.3,descr:"C to CH<sub>4</sub> conversion factor",unit:"g CH<sub>4</sub> / g OC"},
-  ct_ch4_up:{value:0.025,descr:"Percentage of CH<sub>4</sub> emission for uncoverd pile",unit:"ratio"},
+  ct_ch4_oc:{value:1.3,descr:"C to CH4 conversion factor",unit:"g CH4 / g OC"},
+  ct_ch4_up:{value:0.025,descr:"Percentage of CH4 emission for uncoverd pile",unit:"ratio"},
 
   ct_n2o_efp:{
     value:3.2,
-    descr:"N<sub>2</sub>O emission factor",
-    unit:"g N<sub>2</sub>O/person/year",
+    descr:"N2O emission factor",
+    unit:"g N2O/person/year",
   },
 
   ct_bod_kg:{
@@ -80,8 +78,8 @@ let Cts = {
 
   ct_ch4_m3:{
     value:0.66,
-    descr:"Kg CH<sub>4</sub>/m3",
-    unit:"kg CH<sub>4</sub>/m3",
+    descr:"Kg CH4/m3",
+    unit:"kg CH4/m3",
   },
 
   ct_fra_np:{
@@ -105,18 +103,18 @@ let Cts = {
   ct_ef_eff:{
     value:0.005,
     descr:"EF effluent (tabled value)",
-    unit:"kg N<sub>2</sub>O-N / kg N",
+    unit:"kg N2O-N / kg N",
   },
 
   ct_n2o_co:{
     value:44/28,
-    descr:"Conversion factor N<sub>2</sub>O-N to N<sub>2</sub> (=44/28)",
-    unit:"kg N<sub>2</sub>O / kg N<sub>2</sub>O-N",
+    descr:"Conversion factor N2O-N to N2 (=44/28)",
+    unit:"kg N2O / kg N2O-N",
   },
 
   ct_gravit:{
     value:9810,
-    descr:"Specific weight of H<sub>2</sub>O",
+    descr:"Specific weight of H2O",
     unit:"kg/(s2*m2)",
   },
-}
+};

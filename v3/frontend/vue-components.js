@@ -58,6 +58,9 @@
       translate,
       go_to(level, sublevel){
         let possible_levels = this.Structure.filter(s=>!s.sublevel).map(s=>s.level);
+        
+        possible_levels.push('General');
+        possible_levels.push('UNFCCC');
 
         if(possible_levels.indexOf(level)==-1){
           throw new Error(`cannot go to level '${level}'`);
@@ -96,7 +99,6 @@
     },
   });
 
-  //TODO
   let variable = new Vue({
     el:"#variable",
     data:{
@@ -120,6 +122,7 @@
       Exceptions,
       Formulas,
       Questions,
+      Cts,
     },
     methods:{
       translate,
@@ -152,8 +155,9 @@
       },
 
       //TODO refactor
-      get_level_color(){
-        let stage = this.Structure.find(s=>s.level==this.localization.level);
+      get_level_color(level){
+        level = level || this.localization.level;
+        let stage = this.Structure.find(s=>s.level==level);
         if(stage){
           return stage.color;
         }else{
@@ -195,12 +199,14 @@
                 if(code==subfield){
                   level    = l1;
                   sublevel = field;
+                  return {level, sublevel};
                   break;
                 }
               }
             }else{
               if(code==field){
                 level = l1;
+                return {level, sublevel}
                 break;
               }
             }
@@ -219,6 +225,7 @@
       get_variable_value(code){
         let loc = this.locate_variable(code);
         if(!loc){
+          console.log(loc);
           throw new Error(`variable "${code}" not found`);
         }
 
@@ -534,6 +541,7 @@
     methods:{
       translate,
       format,
+      get_level_color: variable.get_level_color,
       set_question(question, new_value){
         //set new question answer
         this.Global.Configuration.Questions[question] = new_value;
@@ -616,6 +624,51 @@
     },
   });
 
+  let constant = new Vue({
+    el:"#constant",
+    data:{
+      visible: false,
+      code:"ct_ch4_lf",
+
+      Cts,
+      Formulas,
+
+      variable,
+    },
+    methods:{
+      translate,
+      format,
+
+      /* open constant VIEW */
+      view(code){
+        if(this.Cts[code]){
+          this.code = code;
+        }else{
+          throw new Error(`Constant "${code}" does not exist`);
+          return;
+        }
+        if(typeof(ecam)=='object'){
+          ecam.show('constant');
+          caption.hide();
+        }
+      },
+    }
+  });
+
+  let constants = new Vue({
+    el:"#constants",
+    data:{
+      visible: false,
+      Cts,
+
+      constant,
+    },
+    methods:{
+      translate,
+      format,
+    }
+  });
+
 //-----------------------------------------------------------------------------
 // MAIN CONTROLLER (not a vue component)
 //-----------------------------------------------------------------------------
@@ -643,7 +696,9 @@ let ecam={
     summary_ghg,
     summary_nrg,
     opportunities,
-    variable, //temporal
+    variable,
+    constants,
+    constant,
   },
 
   /*METHODS*/

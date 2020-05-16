@@ -387,6 +387,23 @@
   }
 
   #variable input[type=number] {
+    background:#eee;
+    border: none;
+    cursor: cell;
+    height: 40px;
+    padding: 0 0.2em;
     text-align:right;
+  }
+  #variable input[type=number]:focus {
+    background:white;
+  }
+
+  #variable table.inputs_involved td {
+    padding: 5px;
+    border:none;
+  }
+  #variable table.outputs_affected td {
+    padding: 5px;
+    border:none;
   }
 

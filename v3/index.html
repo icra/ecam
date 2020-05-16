@@ -78,7 +78,6 @@
 
 <!--ecam all views-->
 <div id=ecam>
-
   <!--ecam logo COMPONENT-->
   <div id="ecam-logo">
     <!--3 lines menu symbol "burger"-->
@@ -217,7 +216,7 @@
           <li class=item><a onclick="TODO">   {{translate('all_outputs')      }} TODO </a>
           <li class=item><a onclick="TODO">   {{translate('all_ccvv')         }} TODO </a>
           <li class=item><a onclick="TODO">   {{translate('All questions')    }} TODO </a>
-          <li class=item><a onclick="TODO">   {{translate('all_constants')    }} TODO </a>
+          <li class=item><a onclick="ecam.show('constants')"  > {{translate('all_constants') }}</a>
           <li class=item><a onclick="TODO">   {{translate('all_benchmarks')   }} TODO </a>
         </ul>
       </li>
@@ -587,12 +586,14 @@
       <span style=color:black>{{translate('help')}}</span>
     </h1>
 
-    <h4><b>ECAM v2</b></h4>
+    <h4><b>ECAM v3 docs</b></h4>
+
+    <h4><b>ECAM v2 docs</b></h4>
     <table style=margin:auto>
-      <tr><td><a target=_blank href="help_pdf/ECAM V2 FAQ_Aug2017.pdf">Frequently Asked Questions (pdf)</a></h4>
-      <tr><td><a target=_blank href="help_pdf/ECAM-Methodology-Guide-Jan-2019.pdf">Methodology (pdf)</a></h4>
-      <tr><td><a target=_blank href="help_pdf/ECAM_2.0_Manual_170822.pdf">Manual (pdf)</a></h4>
-      <tr><td><a target=_blank href="help_pdf/ECAMV2 Example.json" download>Example json file (json)</a></h4>
+      <tr><td><a target=_blank href="help_pdf/ECAM V2 FAQ_Aug2017.pdf">Frequently Asked Questions (pdf)</a>
+      <tr><td><a target=_blank href="help_pdf/ECAM-Methodology-Guide-Jan-2019.pdf">Methodology (pdf)</a>
+      <tr><td><a target=_blank href="help_pdf/ECAM_2.0_Manual_170822.pdf">Manual (pdf)</a>
+      <tr><td><a target=_blank href="help_pdf/ECAMV2 Example.json" download>Example json file (json)</a>
     </table>
 
     <h4><b>Screencasts</b></h4>
@@ -1171,7 +1172,7 @@
         <a onclick="ecam.show('get_started')">{{Global.General.Name}}</a>
         <span style="color:black">&rsaquo;</span>
         <a onclick="linear_menu.go_to(tier_b.level)"
-          :style="`cursor:pointer;color:${Structure.find(s=>s.level==level).color}`"
+          :style="`cursor:pointer;color:${get_level_color(level)}`"
         >
           {{translate(level)}}
         </a>
@@ -1204,7 +1205,16 @@
     </div>
 
     <!--tier b context info-->
-    <div class=flex style="justify-content:space-between;background:#fafafa;font-family:monospace;padding:0.2em 2em;font-size:smaller">
+    <div class=flex
+      style="
+        background:#fafafa;
+        font-family:monospace;
+        font-size:smaller;
+        justify-content:space-between;
+        padding:0.2em 2em;
+        margin-bottom:10px;
+      "
+    >
       <!--assessment period-->
       <div>
         <a onclick="ecam.show('get_started')">
@@ -1320,7 +1330,7 @@
         <table style="width:100%">
           <!--tier b inputs header-->
           <thead>
-            <tr :style="`background:${Structure.find(s=>s.level==level).color}`">
+            <tr :style="`background:${get_level_color(level)}`">
               <td>
                 <div style="display:grid;grid-template-columns:60% 30% 10%">
                   <div style="background:inherit;color:white;text-align:center">{{translate('Description')   }}</div>
@@ -1405,7 +1415,7 @@
 
           <!--decoration bottom table-->
           <tfoot>
-            <tr :style="`background:${Structure.find(s=>s.level==level).color}`">
+            <tr :style="`background:${get_level_color(level)}`">
               <th style="background:inherit;border-bottom:none" colspan=4>
             </tr>
           </tfoot>
@@ -1444,7 +1454,7 @@
               "
             >
               <td
-                @mousemove="caption.show($event, translate(key+'_expla'))"
+                @mousemove="caption.show($event, translate(key+'_expla').prettify())"
                 @mouseout="caption.hide()"
               >
                 <div v-html="translate(key+'_descr').prettify()"></div>
@@ -1506,7 +1516,7 @@
               "
             >
               <td
-                @mousemove="caption.show($event, translate(key+'_expla'))"
+                @mousemove="caption.show($event, translate(key+'_expla').prettify())"
                 @mouseout="caption.hide()"
               >
                 <div v-html="translate(key+'_descr').prettify()"></div>
@@ -1760,9 +1770,11 @@
   </div>
 
   <!--opportunities VIEW TODO-->
-  <div id=opportunities v-if="visible">opportunities TODO</div>
+  <div id=opportunities v-if="visible">
+    opportunities TODO
+  </div>
 
-  <!--variable VIEW TODO-->
+  <!--variable VIEW-->
   <div id=variable v-if="visible">
     <!--variable title-->
     <h1>
@@ -1772,7 +1784,10 @@
       </span>
       <code>{{id}}</code>
       <p v-if="Info[id]" style="margin-bottom:0">
-        <code>{{ translate(id+'_descr') }}</code>
+        <code
+          style="font-weight:bold"
+          v-html="translate(id+'_descr').prettify()">
+        </code>
       </p>
       <div v-else class=error>
         ERROR: Variable {{id}} not defined in backend/info.js
@@ -1782,7 +1797,7 @@
     <!--variable table-->
     <table v-if="Info[id]"
       :style="
-        'text-align:left;width:70%;margin:auto;'+
+        'text-align:left; width:70%; margin:auto;'+
         `background:${get_level_color()}`
       "
     >
@@ -1795,7 +1810,7 @@
           <div v-if="localization">
             &larr;
 
-            <a v-if="localization.level=='General'" onclick="ecam.show('configuration')">
+            <a v-if="localization.level=='General'" @click="go_to('General')">
               {{translate('getStarted_general_info')}}
             </a>
             <span v-else>
@@ -1819,9 +1834,10 @@
           {{ translate('variable_explanation') }}
         </th>
         <td>
-          <code>
-            {{ translate(id+'_expla') }}
-          </code>
+          <code v-html="translate(id+'_expla').prettify()"></code>
+          <span v-if="translate(id+'_expla')==''" style=color:#999>
+            {{ translate('variable_nothing') }}
+          </span>
         </td>
       </tr>
 
@@ -1833,7 +1849,7 @@
         <td>
           <div v-if="question">
             <span v-html="translate(question)+'?'"></span>
-            [{{ translate( (Global.Configuration.Questions[question])?'yes':'no' )}}]
+            [{{ translate( (Global.Configuration.Questions[question]) ? 'yes':'no' ) }}]
           </div>
         </td>
       </tr>
@@ -1844,48 +1860,32 @@
           {{ translate('variable_type') }}
         </th>
         <td>
-          <div>
-            <div style="font-size:large">
-              {{ get_variable_type().ucfirst() }}
+          <div style="font-size:large">
+            {{ get_variable_type().ucfirst() }}
+          </div>
+
+          <!--variable show formula and inputs involved-->
+          <div v-if="get_variable_type()=='output'">
+            <div style="border:1px solid #ccc;padding:1em">
+              <div>
+                {{ translate('variable_formula') }}:
+              </div>
+              <div
+                v-html="Formulas.prettify(get_current_stage()[id].toString())"
+                style="font-family:monospace"
+              ></div>
             </div>
 
-            <!--show formula-->
-            <div v-if="get_variable_type()=='output'">
-              <div style="border:1px solid #ccc;padding:1em">
-                <div>
-                  {{ translate('variable_formula') }}:
-                </div>
-                <div
-                  v-html="Formulas.prettify(get_current_stage()[id].toString())"
-                  style="font-family:monospace"
-                ></div>
-              </div>
-
-              <!--show inputs involved-->
-              <div style="margin-top:10px">
-                <b>
-                  {{ translate('variable_inputs_involved') }}
-                </b>
-              </div>
-
-              <table>
-                <tr v-for="match in Formulas.ids_per_formula(get_current_stage()[id].toString())">
-                  <td>
-                    <a @click="view(match)">
-                      {{match}}
-                    </a>
-                  </td>
-                  <td>
-                    <div v-html="format(get_variable_value(match))">
-                    </div>
-                  </td>
-                  <td>
-                    <div class=unit v-html="Info[match].unit.prettify()">
-                    </div>
-                  </td>
-                </tr>
-              </table>
+            <!--variable show inputs involved-->
+            <div style="margin-top:10px">
+              <b>{{ translate('variable_inputs_involved') }}</b>
             </div>
+
+            <!--variable list inputs involved in the formula-->
+            <inputs_involved_table
+              :code="id"
+              :current_stage="get_current_stage()"
+            ></inputs_involved_table>
           </div>
         </td>
       </tr>
@@ -1896,11 +1896,24 @@
           {{ translate("Current value") }}
         </th>
         <td>
+          <!--variable current value input element-->
           <div v-if="get_variable_type()=='input'">
-            <input type=number v-model.number="get_current_stage()[id]">
-            <span class=unit v-html="Info[id].unit.prettify()"></span>
+            <!--input is an Option-->
+            <div v-if="Info[id].magnitude=='Option'">
+              <select v-model.number="get_current_stage()[id]">
+                <option v-for="obj,key in Tables[id]" :value="obj.value">
+                  {{key}}
+                </option>
+              </select>
+            </div>
+            <!--input is an number-->
+            <div v-else>
+              <input type=number v-model.number="get_current_stage()[id]">
+              <span class=unit v-html="Info[id].unit.prettify()"></span>
+            </div>
           </div>
-          <div v-if="get_variable_type()=='output'">
+          <!--variable current value if output-->
+          <div v-if="get_variable_type()=='output'" style="font-size:x-large">
             <span v-html="format( get_current_stage()[id]()/Units.multiplier(id) )">
             </span>
             <span class=unit>
@@ -1912,12 +1925,8 @@
 
       <!--variable magnitude-->
       <tr>
-        <th>
-          {{ translate('variable_magnitude') }}
-        </th>
-        <td>
-          {{ Info[id].magnitude }}
-        </td>
+        <th>{{ translate('variable_magnitude') }}</th>
+        <td>{{ Info[id].magnitude }}</td>
       </tr>
 
       <!--outputs that use this variable-->
@@ -1926,22 +1935,41 @@
           {{ translate("Outputs that use this value") }}
         </th>
         <td>
-          <table>
-            <tr v-for="output in Formulas.outputs_per_input(id)">
-              <td>
-                <a @click="view(output)">
-                  {{ output }}
-                </a>
-              </td>
-              <td>
-                <div v-html="format(get_variable_value(output))">
-                </div>
-              </td>
-              <td>
-                <span class=unit v-html="get_current_unit(output).prettify()">
-                </span>
-              </td>
-            </tr>
+          <table class=outputs_affected>
+            <tbody v-for="output in Formulas.outputs_per_input(id)">
+              <!--output that uses the input is an estimation-->
+              <tr v-if="Recommendations[output]">
+                <td :title="translate(output+'_descr')">
+                  <a @click="view(output)">
+                    {{ output }} (estimation)
+                  </a>
+                </td>
+                <td>
+                  <div v-html="format(Recommendations[output]())">
+                  </div>
+                </td>
+                <td>
+                  <span class=unit v-html="Info[output].unit.prettify()">
+                  </span>
+                </td>
+              </tr>
+              <!--output that uses the input is normal-->
+              <tr v-else>
+                <td :title="translate(output+'_descr')">
+                  <a @click="view(output)">
+                    {{ output }}
+                  </a>
+                </td>
+                <td>
+                  <div v-html="format(get_variable_value(output))">
+                  </div>
+                </td>
+                <td>
+                  <span class=unit v-html="get_current_unit(output).prettify()">
+                  </span>
+                </td>
+              </tr>
+            </tbody>
             <tr v-if="Formulas.outputs_per_input(id).length==0">
               <td>
                 <span style=color:#999>{{ translate('variable_nothing') }}</span>
@@ -1951,27 +1979,108 @@
         </td>
       </tr>
 
-      <tr>
-        <th>values in substages
-        <td>values in substages TODO
-      </tr>
+      <!--the input has an estimation formula-->
+      <tr v-if="Recommendations[id]">
+        <th>
+          Estimation of this input based on other inputs
+        </th>
+        <td>
+          <div>
+            <span v-html="format( Recommendations[id]() )">
+            </span>
+            <span v-html="Info[id].unit.prettify()" class=unit>
+            </span>
+          </div>
 
-      <tr>
-        <th>It has recommendations?
-        <td>it has recommendations? TODO
-      </tr>
+          <!--formula for recommendation-->
+          <div style="border:1px solid #ccc;padding:1em">
+            {{
+              Formulas.prettify( Recommendations[id].toString() )
+            }}
+          </div>
 
-      <tr>
-        <th>If input:is used in benchmarking?
-        <td>if input:is used in benchmarking? TODO
+          <!--inputs involved in the recommendations equation-->
+          <inputs_involved_table
+            :code="id"
+            :current_stage="Recommendations"
+          ></inputs_involved_table>
+        </td>
       </tr>
-
-      <tr>
-        <th>Is "id" benchmarked?
-        <td>is "id" benchmarked? TODO
-      </tr>
-
     </table>
+  </div>
+
+  <!--constant VIEW-->
+  <div id=constant v-if="visible">
+    <h1 style="text-align:center">
+      <a onclick="ecam.show('constants')">
+        All constants
+      </a> &rsaquo;
+      <span style=color:black>
+        Constant <b>{{code}}</b>
+      </span>
+    </h1>
+
+    <!--constant description-->
+    <div v-html="Cts[code].descr.prettify()"
+      style="text-align:center"
+    >
+    </div>
+
+    <!--constant value and unit-->
+    <div
+      style="
+        padding:2em 0;
+        text-align:center;
+      "
+    >
+      <span v-html="format(Cts[code].value)"
+        style="font-size:42px"
+      ></span>
+      <span v-html="Cts[code].unit.prettify()"></span>
+    </div>
+
+    <!--constant used in-->
+    <div style="margin-bottom:1em;text-align:center">
+      This constant is used in the following equations:
+    </div>
+    <table style=margin:auto>
+      <tr v-for="output in Formulas.outputs_per_input(code)">
+        <td>
+          <a @click="variable.view(output)">
+            {{output}}
+          </a>
+        </td>
+        <td v-html="translate(output+'_descr').prettify()">
+        </td>
+      </tr>
+      <tr v-if="Formulas.outputs_per_input(code).length==0">
+        <td style=color:#666>~Constant not used. Consider removing it
+      </tr>
+    </table>
+  </div>
+
+  <!--constants VIEW-->
+  <div id=constants v-if="visible">
+    <!--constants title-->
+    <h1 style="text-align:center">{{ translate('constants') }}</h1>
+
+    <!--constants table-->
+    <div style="font-family:monospace">
+      <table style="margin:auto"><tr> 
+        <th>{{translate('Code')       }}
+        <th>{{translate('Value')      }}
+        <th>{{translate('Description')}}
+        <th>{{translate('Unit')       }}
+        <tr v-for="obj,key in Cts">
+          <td><a @click="constant.view(key)">{{ key }}</a>
+          <td align=right :title="obj.value">
+            {{ format(obj.value) }}
+          </td>
+          <td style=font-size:smaller v-html="obj.descr.prettify()">
+          <td                         v-html="obj.unit.prettify()">
+        </tr>
+      </table>
+    </div>
   </div>
 
   <!--pending-------------------------------------------------------------->
@@ -2062,6 +2171,8 @@
 <!--load vue components-->
 <script src="frontend/vue-components.js"></script>
 <script src="frontend/input-ecam.js"></script>
+<script src="frontend/inputs-involved-table.js"></script>
+
 <script src="frontend/defaults.js"></script>
 
 <!--add sidebar onclick listeners to hide the sidebar-->

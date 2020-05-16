@@ -1,13 +1,14 @@
 //-----------------------------------------------------------------------------
-//COMPONENTS (= reusable code)
+// input field for inputs in tier B
 //-----------------------------------------------------------------------------
+
 Vue.component('input_ecam',{
   template:`<div
     style="display:grid;grid-template-columns:60% 30% 10%"
   >
     <!--input name-->
-    <div 
-      @mousemove="caption.show($event, translate(code+'_expla'))"
+    <div
+      @mousemove="caption.show($event, translate(code+'_expla').prettify())"
       @mouseout="caption.hide()"
     >
       <div class=flex style="justify-content:space-between;padding-right:5px">

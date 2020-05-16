@@ -49,7 +49,7 @@ let Languages={
     }
 
     //normal case or tag not found
-    return this.tags[lang][`#${id}`] || `["#${id}" - tag not found]`;
+    return this.tags[lang][`#${id}`] || `["#${id}" - translation not found, please report]`;
   },
 };
 

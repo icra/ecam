@@ -1,10 +1,3 @@
-<?php /*constants.php: information about constants*/?>
-<!doctype html><html><head>
-  <?php include'imports.php'?>
-</head><body><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--NAVBAR--><?php include"navbar.php"?>
-<!--linear--><?php include"linear.php"?>
 <!--TITLE--><h1><?php write('#constants')?></h1>
 
 <!--constants-->
@@ -28,4 +21,3 @@
     })();
   </script>
 </div>
-<!--CURRENT JSON--><?php include'currentJSON.php'?>
