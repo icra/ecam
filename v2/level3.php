@@ -743,6 +743,7 @@
         document.getElementById('showHL').checked=Global.Configuration.hl;
       </script>
     </div>
+
     <!--SUBSTAGES TABLE-->
     <table id=substages></table>
   </div>

@@ -2,6 +2,14 @@
   CSS VUE COMPONENTS
 */
 
+/*general colors*/
+body {
+  --color-level-generic: #2b6488;
+  --color-level-Water:   #00aff1;
+  --color-level-Waste:   #d71d24;
+  --color-level-Faecl:   green;
+}
+
 /* ecam logo */
   #ecam-logo {
     background:#2b6488;
@@ -372,6 +380,12 @@
     transform: rotate(-90deg);
   }
 
+  /*colors of links*/
+  #tier_b table[level=Water] a { color: var(--color-level-Water) }
+  #tier_b table[level=Waste] a { color: var(--color-level-Waste) }
+  #tier_b table[level=Faecl] a { color: var(--color-level-Faecl) }
+
+
 /*variable*/
   #variable h1 {
     text-align:center;
@@ -407,3 +421,7 @@
     border:none;
   }
 
+  /*colors of links*/
+  #variable table[level=Water] a { color: var(--color-level-Water) }
+  #variable table[level=Waste] a { color: var(--color-level-Waste) }
+  #variable table[level=Faecl] a { color: var(--color-level-Faecl) }

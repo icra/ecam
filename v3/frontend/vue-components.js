@@ -58,7 +58,7 @@
       translate,
       go_to(level, sublevel){
         let possible_levels = this.Structure.filter(s=>!s.sublevel).map(s=>s.level);
-        
+
         possible_levels.push('General');
         possible_levels.push('UNFCCC');
 
@@ -701,7 +701,10 @@ let ecam={
     constant,
   },
 
-  /*METHODS*/
+  /*=========================================================================*/
+  /* METHODS                                                                 */
+  /*=========================================================================*/
+
   //hide all views
   hide_all(){
     Object.entries(this.views).forEach(([key,view])=>{
@@ -720,7 +723,8 @@ let ecam={
       throw new Error(`view '${view}' not found`);
     }
 
-    //activate linear_menu when entering tier_b
+    //activate linear_menu when entering tier_b TODO TBD
+    /* */
     if(['tier_a','tier_b'].indexOf(view)+1){
       linear_menu.visible=true;
     }

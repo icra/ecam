@@ -8,17 +8,8 @@ linear_menu.visible  = true;
 /* VIEWS */
 index.visible        = 0; //landing
 tier_a.visible       = 0; //tier A
-tier_b.visible       = 0; //tier B
-
-variable.visible      = 0; //variable
-variable.id           = "wsa_KPI_GHG_fuel_ch4";
-variable.localization = {
-  level:'Water',
-  sublevel:'Abstraction',
-};
-variable.question     = false;
-
+tier_b.visible       = 1; //tier B
+variable.visible     = 0; //variable
 summary_ghg.visible  = 0; //summary GHG
 summary_nrg.visible  = 0; //summary NRG
-
-constants.visible = true;
+constants.visible    = 0; //all constants

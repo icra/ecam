@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="frontend/css/css.css">
     <link rel="stylesheet" href="frontend/css/css_components.css">
 
-    <!--string prettify for descriptions (mainly for CO2, N2O, CH4 subindexes)-->
+    <!--string prettify for descriptions (subindexes and superindexes)-->
     <script src="frontend/js/prettify.js"></script>
 
     <!--capitalize first letter of a string-->
@@ -76,7 +76,7 @@
   <div v-if="!ready">loading ecam tool...</div>
 </div>
 
-<!--ecam all views-->
+<!--ecam all components and views-->
 <div id=ecam>
   <!--ecam logo COMPONENT-->
   <div id="ecam-logo">
@@ -103,7 +103,7 @@
     <!--temporal button-->
     <div>
       <button onclick="linear_menu.visible^=true">
-        view/hide<br>linear menu
+        o-o-o-o
       </button>
     </div>
 
@@ -141,12 +141,13 @@
 
   <!--sidebar COMPONENT-->
   <div id=sidebar v-if="visible" :style="`top:${get_height()}px`">
+    <!--sidebar system name-->
     <div class="header flex" style="padding:5px;justify-content:space-between">
       <div>{{translate("sidebar_mainMenu")}}</div>
       <div>{{Global.General.Name}}          </div>
     </div>
 
-    <!--new open save clear-->
+    <!--sidebar new open save clear buttons-->
     <div class=tab_buttons>
       <button class=left onclick="" disabled>
         {{translate('new')}}
@@ -161,9 +162,9 @@
         onchange="loadFile(event)" style="display:none">
     </div>
 
-    <!--sections-->
+    <!--sidebar sections-->
     <ul>
-      <!--general info to tier A section-->
+      <!--sidebar general info to tier A section-->
       <li class=section>
         <div class=header>{{translate('main')}}</div>
         <ul>
@@ -174,13 +175,15 @@
         </ul>
       </li>
 
-      <!--tier B section-->
+      <!--sidebar tier B section-->
       <li class=section>
         <div class=header>{{translate('energy_performance')}}</div>
         <ul>
           <li
             class=item
-            v-for="l1 in Structure.filter(s=>!s.sublevel).filter(s=>Global.Configuration.ActiveStages[s.alias])"
+            v-for="l1 in Structure.filter(s=>(
+              !s.sublevel && Global.Configuration.ActiveStages[s.alias])
+            )"
           >
             <a @click="go_to(l1.level)" :style=`color:${l1.color}`>
               {{translate(l1.level)}}
@@ -189,9 +192,12 @@
             <ul>
               <li
                 class=item-l2
-                v-for="l2 in Structure
-                              .filter(s=>(s.sublevel && s.level==l1.level))
-                              .filter(s=>Global.Configuration.ActiveStages[s.alias])"
+                v-for="l2 in Structure.filter(s=>(
+                    s.sublevel && s.level==l1.level
+                    &&
+                    Global.Configuration.ActiveStages[s.alias]
+                  ))
+                "
               >
                 <a @click="go_to(l2.level, l2.sublevel)"
                   :style=`color:${l1.color}`
@@ -204,45 +210,45 @@
         </ul>
       </li>
 
-      <!--summaries ghg and energy section-->
+      <!--sidebar summaries section-->
       <li class=section>
         <div class=header>{{translate('summaries')}}</div>
         <ul>
-          <li class=item><a onclick="ecam.show('summary_ghg')"> {{translate('ghg_summary')      }}</a>
-          <li class=item><a onclick="ecam.show('summary_nrg')"> {{translate('nrg_summary')      }}</a>
-          <li class=item><a onclick="TODO">   {{translate('unfccc_categories')}} TODO</a>
-          <li class=item><a onclick="TODO">   {{translate('all_substages')    }} TODO </a>
-          <li class=item><a onclick="TODO">   {{translate('all_inputs')       }} TODO </a>
-          <li class=item><a onclick="TODO">   {{translate('all_outputs')      }} TODO </a>
-          <li class=item><a onclick="TODO">   {{translate('all_ccvv')         }} TODO </a>
-          <li class=item><a onclick="TODO">   {{translate('All questions')    }} TODO </a>
-          <li class=item><a onclick="ecam.show('constants')"  > {{translate('all_constants') }}</a>
-          <li class=item><a onclick="TODO">   {{translate('all_benchmarks')   }} TODO </a>
+          <li class=item><a onclick="ecam.show('summary_ghg')">{{translate('ghg_summary')      }}       </a>
+          <li class=item><a onclick="ecam.show('summary_nrg')">{{translate('nrg_summary')      }}       </a>
+          <li class=item><a onclick="ecam.show('constants')"  >{{translate('all_constants')    }}       </a>
+          <li class=item><a onclick="alert('TODO')">           {{translate('unfccc_categories')}} [TODO]</a>
+          <li class=item><a onclick="alert('TODO')">           {{translate('all_substages')    }} [TODO]</a>
+          <li class=item><a onclick="alert('TODO')">           {{translate('all_inputs')       }} [TODO]</a>
+          <li class=item><a onclick="alert('TODO')">           {{translate('all_outputs')      }} [TODO]</a>
+          <li class=item><a onclick="alert('TODO')">           {{translate('all_ccvv')         }} [TODO]</a>
+          <li class=item><a onclick="alert('TODO')">           {{translate('All questions')    }} [TODO]</a>
+          <li class=item><a onclick="alert('TODO')">           {{translate('all_benchmarks')   }} [TODO]</a>
         </ul>
       </li>
 
-      <!--other section-->
+      <!--sidebar other section-->
       <li class=section>
         <div class=header>{{translate('other')}}</div>
         <ul>
-          <li class=item><a onclick="ecam.show('opportunities')"> {{translate("opportunities") }}</a>
-          <li class=item><a onclick="ecam.show('')">              {{translate('sidebar_export')}} TODO</a>
-          <li class=item><a onclick="ecam.show('')">              {{translate('Sankey diagram')}} TODO</a>
-          <li class=item><a onclick="ecam.show('')">              {{translate('dev')}}            TODO</a>
+          <li class=item><a onclick="ecam.show('opportunities')"> {{translate("opportunities")  }}       </a>
+          <li class=item><a onclick="ecam.show('')">              {{translate('sidebar_export') }} [TODO]</a>
+          <li class=item><a onclick="ecam.show('')">              {{translate('Sankey diagram') }} [TODO]</a>
+          <li class=item><a onclick="ecam.show('')">              {{translate('dev')            }} [TODO]</a>
         </ul>
       </li>
 
-      <!--support section-->
+      <!--sidebar support section-->
       <li class=section>
         <div class=header>{{translate('support')}}</div>
         <ul>
-          <li class=item><a onclick="ecam.show('help')">{{translate('help')}}</a>
+          <li class=item><a onclick="ecam.show('help')"> {{translate('help')}} </a>
           <li class=item><a onclick="ecam.show('about')">{{translate('about')}}</a>
         </ul>
       </li>
     </ul>
 
-    <!--for development-->
+    <!--sidebar for development-->
     <div>
       <button @click=visible^=1>close</button>
     </div>
@@ -371,6 +377,8 @@
   <!--caption COMPONENT-->
   <div id=caption v-html="text" :style="visible?'':'display:none'"></div>
 
+  <!--VIEWS------------------------------------------------------------------>
+
   <!--index VIEW-->
   <div id=index v-if="visible">
     <div id=content>
@@ -409,7 +417,12 @@
           <div class=flex id=menu_buttons>
             <!--new-->
             <div>
-              <button class="button add" onclick="newSystem()" style=margin-left:0 disabled>
+              <button
+                class="button add"
+                onclick="newSystem()"
+                style=margin-left:0
+                disabled
+              >
                 {{translate('new')}}
               </button>
             </div>
@@ -466,7 +479,8 @@
           </a>
         </div>
 
-        <img class="license_img license_img-big" src="frontend/img/CC_license_small.png" alt=""><br>
+        <img class="license_img license_img-big"
+          src="frontend/img/CC_license_small.png" alt=""><br>
 
         {{translate("ecam_by_iwa_giz_icra")}}
         <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
@@ -492,7 +506,13 @@
           style="height:120px;margin:auto"
         >
       </footer>
-      <div style="background:white;text-align:left;padding:0em 10em;margin-top:50px;">
+      <div style="
+          background:white;
+          margin-top:50px;
+          padding:0em 10em;
+          text-align:left;
+        "
+      >
         <img src="frontend/img/logos.png">
       </div>
     </div>
@@ -891,12 +911,12 @@
       <tr><td colspan=2>{{translate('References')}}
       <tr><td>1<td>BRANDER, M. SOOD A. WYLIE, C. HAUGHTON, A. LOVELL, J., 2011,Technical Paper Electricity-specific emission factors for grid electricity, Ecometrica,
       <tr><td>2<td>
-        <a href="docs/FAO.xls" target=_blank>
+        <a href="frontend/docs/FAO.xls" target=_blank>
           FAO Statistics Division, 2010, Food Balance Sheets
         </a>
       <tr>
       <tr><td>3<td>
-        <a href="docs/IPCC_V5_6_Ch6_Wastewater.pdf" target=_blank>
+        <a href="frontend/docs/IPCC_V5_6_Ch6_Wastewater.pdf" target=_blank>
           IPCC, 2006, Guidelines for National Greenhouse Gas Inventories
           Volume 5 Waste, Chapter 6
         </a>
@@ -1327,7 +1347,10 @@
         </div>
 
         <!--tier b input table-->
-        <table style="width:100%">
+        <table
+          :level="level"
+          style="width:100%"
+        >
           <!--tier b inputs header-->
           <thead>
             <tr :style="`background:${get_level_color(level)}`">
@@ -1431,7 +1454,10 @@
         </div>
 
         <!--level2 outputs: GHG content-->
-        <table style=width:100%>
+        <table
+          :level="level"
+          style=width:100%
+        >
           <thead>
             <tr>
               <th>{{translate('Origin')}}
@@ -1500,7 +1526,10 @@
           {{translate('OUTPUTS')}} &mdash;
           {{translate('Energy performance and Service Level indicators')}}
         </div>
-        <table style=width:100%>
+        <table
+          :level="level"
+          style=width:100%
+        >
           <tr>
             <th>{{translate('edit_description')}}
             <th>{{translate('edit_current_value')}}
@@ -1540,6 +1569,43 @@
         </table>
       </div>
     </div>
+
+    <!--tier b substages "level 3"-->
+    <div
+      v-if="sublevel"
+      style="
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid;
+      "
+    >
+      <details>
+        <summary
+          style="
+            cursor:pointer;
+            font-weight:bold;
+            outline:none;
+          "
+        >
+          {{ translate('Advanced Assessment: Substages') }}
+        </summary>
+
+        <div style="margin-top:10px">
+          substages interface goes here
+          <ul>
+            <li>
+              waiting for redesign/rework with VITI
+            </li>
+            <li>
+              data structure:
+              {{
+                Global.Substages[level][sublevel]
+              }}
+            </li>
+          </ul>
+        </div>
+      </details>
+    </div>
   </div>
 
   <!--summary ghg VIEW-->
@@ -1562,7 +1628,7 @@
       <table border=1 style="margin:auto">
         <!--total ghg-->
         <tr>
-          <td colspan=3 style="text-align:center">
+          <td colspan=3 style="text-align:center;font-size:large;background:var(--color-level-generic)">
             {{ translate("TOTAL GHG")            }}:
             {{ format(Global.General.TotalGHG()) }}
             <span class=unit>
@@ -1795,7 +1861,9 @@
     </h1>
 
     <!--variable table-->
-    <table v-if="Info[id]"
+    <table
+      v-if="Info[id]"
+      :level="localization.level"
       :style="
         'text-align:left; width:70%; margin:auto;'+
         `background:${get_level_color()}`
@@ -1867,12 +1935,17 @@
           <!--variable show formula and inputs involved-->
           <div v-if="get_variable_type()=='output'">
             <div style="border:1px solid #ccc;padding:1em">
-              <div>
-                {{ translate('variable_formula') }}:
+              <div style="font-weight:bold">
+                <span style="color:#606">{{ translate('variable_formula') }}</span>:
               </div>
               <div
                 v-html="Formulas.prettify(get_current_stage()[id].toString())"
-                style="font-family:monospace"
+                style="
+                  padding:5px 10px;
+                  background:rgb(238,238,238);
+                  color:black;
+                  font-family:monospace;
+                "
               ></div>
             </div>
 
@@ -2066,7 +2139,7 @@
 
     <!--constants table-->
     <div style="font-family:monospace">
-      <table style="margin:auto"><tr> 
+      <table style="margin:auto"><tr>
         <th>{{translate('Code')       }}
         <th>{{translate('Value')      }}
         <th>{{translate('Description')}}
@@ -2173,9 +2246,10 @@
 <script src="frontend/input-ecam.js"></script>
 <script src="frontend/inputs-involved-table.js"></script>
 
+<!--set default view on reload (development only)-->
 <script src="frontend/defaults.js"></script>
 
-<!--add sidebar onclick listeners to hide the sidebar-->
+<!--sidebar onclick listeners that hide the sidebar-->
 <script>
   //clicking anywhere hides sidebar
   document.documentElement.addEventListener('click',function(){

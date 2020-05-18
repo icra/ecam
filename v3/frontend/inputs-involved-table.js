@@ -12,7 +12,7 @@ Vue.component('inputs_involved_table',{
           <td>
             <a
               style="color:grey;font-weight:bold"
-              @click="alert('TODO open constants view')"
+              @click="constant.view(match)"
             >
               {{ match }}
             </a>
@@ -64,6 +64,7 @@ Vue.component('inputs_involved_table',{
   data:function(){
     return{
       variable,
+      constant,
       caption,
 
       Global,
