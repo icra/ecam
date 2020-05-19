@@ -72,12 +72,15 @@
 </head><body>
 
 <!--loading indicator-->
-<div id=loading_container style="text-align:center;font-size:x-large">
+<div id=loading_container
+  style="text-align:center;font-size:x-large">
   <div v-if="!ready">loading ecam tool...</div>
 </div>
 
 <!--ecam all components and views-->
 <div id=ecam>
+  <!--COMPONENTS-------------------------------------------------------------->
+
   <!--ecam logo COMPONENT-->
   <div id="ecam-logo">
     <!--3 lines menu symbol "burger"-->
@@ -1348,9 +1351,9 @@
     </div>
 
     <!--tier b inputs and outputs-->
-    <div style="display:grid;grid-template-columns:62% 38%;padding-right:3px">
+    <div style="display:grid;grid-template-columns:62% 38%;padding:0 5px 0 8px">
       <!--tier b inputs-->
-      <div style="padding:0 3px">
+      <div style="padding-right:5px">
         <div class="table-title">
           {{translate('INPUTS') }} &mdash;
           {{translate('Enter values for') }}
@@ -1664,10 +1667,10 @@
           <td style="padding:0">
             <table border=1 style=margin:-1px>
               <tr>
-                <th>stage
-                <th>kg CO2
-                <th>kg CO2 / year
-                <th>kg CO2 / year / serv. pop.
+                <th>{{ translate('stage') }}
+                <th>kgCO<sub>2</sub>eq
+                <th>kgCO<sub>2</sub>eq/{{translate('year')}}
+                <th>kgCO<sub>2</sub>eq/{{translate('year')}}/{{translate('serv.pop.')}}
               </tr>
               <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)">
                 <!--level 1-->
@@ -1866,10 +1869,10 @@
           <td style="padding:0">
             <table border=1 style=margin:-1px>
               <tr>
-                <th>stage
+                <th>{{translate('stage')}}
                 <th>kWh
-                <th>kWh / year
-                <th>kWh / year / serv. pop.
+                <th>kWh/{{translate('year')}}
+                <th>kWh/{{translate('year')}}/{{translate('serv.pop.')}}
               </tr>
               <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)">
                 <!--level 1-->
@@ -1939,7 +1942,14 @@
 
   <!--opportunities VIEW TODO-->
   <div id=opportunities v-if="visible">
-    opportunities TODO
+    <ul>
+      <li>
+        opportunities
+      </li>
+      <li>
+        measures
+      </li>
+    </ul>
   </div>
 
   <!--variable VIEW-->
@@ -2272,6 +2282,9 @@
           </li>
           <li>save as
         </ul>
+      </li>
+      <li>
+        fetch language files asyncronously does not work for offline use (CORS is not compatible with file protocol)
       </li>
       <li>tier A / refactoring backend and redoing user interface
         <ul>
