@@ -43,6 +43,10 @@ tr[hl], tr[hl_output]{
   color:#aaa;
 }
 
+.number {
+  text-align:right;
+}
+
 details summary:hover {
   text-decoration:underline;
 }

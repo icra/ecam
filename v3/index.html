@@ -321,14 +321,26 @@
           v-html="translate('tier_B')"
         ></span>
       </div>
-      <img v-for="l2 in Structure.filter(s=>s.sublevel)"
-        :class="`l2 ${is_tier_b_selected(l2.level,l2.sublevel)?'selected':''}`"
-        :stage="l2.alias"
-        @mousemove="caption.show($event, translate(l2.sublevel))"
-        @mouseout="caption.hide()"
-        :src="`frontend/img/${l2.alias}${Global.Configuration.ActiveStages[l2.alias]?'':'-off'}.png`"
-        @click="go_to(l2.level,l2.sublevel)"
-      >
+
+      <div class=flex>
+        <div v-for="l1 in Structure.filter(s=>!s.sublevel)">
+          <img @click="go_to(l1.level)"
+            @mousemove="caption.show($event, translate(l1.level))"
+            @mouseout="caption.hide()"
+            :src="`frontend/img/${l1.alias}${Global.Configuration.ActiveStages[l1.alias]?'':'-off'}.png`"
+            :class="`l2 ${is_tier_b_selected(l1.level, false)?'selected':''}`"
+            :stage="l1.alias"
+          >
+          <img v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))"
+            :class="`l2 ${is_tier_b_selected(l2.level,l2.sublevel)?'selected':''}`"
+            :stage="l2.alias"
+            @mousemove="caption.show($event, translate(l2.sublevel))"
+            @mouseout="caption.hide()"
+            :src="`frontend/img/${l2.alias}${Global.Configuration.ActiveStages[l2.alias]?'':'-off'}.png`"
+            @click="go_to(l2.level,l2.sublevel)"
+          >
+        </div>
+      </div>
     </div>
 
     <!--linear summaries and opps-->
@@ -1623,72 +1635,120 @@
       </div>
     </h1>
 
-    <!--summary ghg table-->
+    <!--summary ghg 3 tables-->
     <div style="padding:0 2px">
       <table border=1 style="margin:auto">
         <!--total ghg-->
         <tr>
-          <td colspan=3 style="text-align:center;font-size:large;background:var(--color-level-generic)">
-            {{ translate("TOTAL GHG")            }}:
-            {{ format(Global.General.TotalGHG()) }}
-            <span class=unit>
-              kgCO<sub>2</sub>eq
-            </span>
+          <td
+            style="
+              background:var(--color-level-generic);
+              color:white;
+              font-size:large;
+            "
+          >
+            {{ translate("TOTAL GHG") }}
+            <ul>
+              <!--summary ghg total kg CO2-->
+              <li>
+                {{format( Global.General.TotalGHG()) }}
+                <span class=unit>kgCO<sub>2</sub>eq</span>
+              </li>
+              <!--summary ghg kg CO2 per year-->
+              <li>
+                {{format( Global.General.TotalGHG()/Global.General.Years() )}}
+                <span class=unit>kgCO<sub>2</sub>eq/{{translate('year')}}</span>
+              </li>
+            </ul>
           </td>
-        </tr>
-        <tr>
-          <td v-for="stage in Structure.filter(s=>s.sublevel==false)" style="padding:5px;vertical-align:top">
-            <!--level1 ghg-->
-            <div class=flex style="align-items:center">
-              <div>
-                <img :src="`frontend/img/${stage.alias}.png`" style="width:25px">
-              </div>
-              <div style="margin-left:5px">
-                <a @click="go_to(stage.level)" style="cursor:pointer">
-                  {{translate(stage.level)}}
-                </a>:
-                {{format(Global[stage.level][`${stage.prefix}_KPI_GHG`]())}}
-                <span class=unit>
-                  kgCO<sub>2</sub>eq
-                </span>
-              </div>
-            </div>
+          <td style="padding:0">
+            <table border=1 style=margin:-1px>
+              <tr>
+                <th>stage
+                <th>kg CO2
+                <th>kg CO2 / year
+                <th>kg CO2 / year / serv. pop.
+              </tr>
+              <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)">
+                <!--level 1-->
+                <tr :style="`background:${l1.color};color:white`">
+                  <td>
+                    <div class=flex style="align-items:center">
+                      <div>
+                        <img :src="`frontend/img/${l1.alias}.png`" style="width:25px">
+                      </div>
+                      <div style="margin-left:5px">
+                        <a @click="go_to(l1.level)" style="color:white;font-weight:bold">
+                          {{ translate(l1.level) }}
+                        </a>
+                      </div>
+                    </div>
+                  </td>
+                  <td class=number v-html="format(
+                      Global[l1.level][`${l1.prefix}_KPI_GHG`]()
+                    )
+                  ">
+                  <td class=number v-html="format(
+                      Global[l1.level][`${l1.prefix}_KPI_GHG`]() / Global.General.Years()
+                    )
+                  ">
+                  <td class=number v-html="format(
+                      Global[l1.level][`${l1.prefix}_KPI_GHG`]() / Global.General.Years() / variable.get_variable_value(`${l1.prefix}_serv_pop`)
+                    )
+                  ">
+                </tr>
 
-            <!--level2 ghg-->
-            <table border=1 style="margin:5px">
-              <tr v-for="stage2 in Structure.filter(s=>(s.sublevel && s.level==stage.level))">
-                <td>
-                  <div class=flex style="align-items:center">
-                    <div>
-                      <img :src="`frontend/img/${stage2.alias}.png`" style="width:20px">
+                <!--level 2-->
+                <tr v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))"
+                  v-if="Global.Configuration.ActiveStages[l2.alias]"
+                >
+                  <td>
+                    <div class=flex style="align-items:center;">
+                      <div>
+                        <img :src="`frontend/img/${l2.alias}.png`" style="width:20px">
+                      </div>
+                      <div style="margin-left:20px">
+                        <a @click="go_to(l2.level, l2.sublevel)" style="cursor:pointer">
+                          {{translate(l2.sublevel)}}
+                        </a>
+                      </div>
                     </div>
-                    <div style="margin-left:5px">
-                      <a @click="go_to(stage2.level, stage2.sublevel)" style="cursor:pointer">
-                        {{translate(stage2.sublevel)}}
-                      </a>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  {{ format(Global[stage2.level][stage2.sublevel][`${stage2.prefix}_KPI_GHG`]()) }}
-                </td>
-                <td>
-                  <span class=unit>
-                    kgCO<sub>2</sub>eq
-                  </span>
-                </td>
-              </tr>
-              <tr v-if="stage.level=='Waste'">
-                <td>
-                  {{translate("ww_KPI_GHG_unt_descr")}}:
-                </td>
-                <td>
-                  {{ format(Global.Waste.ww_KPI_GHG_unt()) }}
-                </td>
-                <td>
-                  <span class=unit>kgCO<sub>2</sub>eq</span>
-                </td>
-              </tr>
+                  </td>
+                  <td class=number v-html="format(
+                      Global[l2.level][l2.sublevel][`${l2.prefix}_KPI_GHG`]() 
+                    )
+                  ">
+                  <td class=number v-html="format(
+                      Global[l2.level][l2.sublevel][`${l2.prefix}_KPI_GHG`]() / Global.General.Years()
+                    )
+                  ">
+                  <td class=number v-html="format(
+                      Global[l2.level][l2.sublevel][`${l2.prefix}_KPI_GHG`]() / Global.General.Years() / variable.get_variable_value(`${l1.prefix}_serv_pop`)
+                    )
+                  ">
+                </tr>
+
+                <!--untreated wastewater-->
+                <tr v-if="l1.level=='Waste'">
+                  <td>
+                    <a @click="variable.view('ww_KPI_GHG_unt')">
+                      {{translate("ww_KPI_GHG_unt_descr")}}
+                    </a>
+                  </td>
+                  <td class=number v-html="format(
+                      Global.Waste.ww_KPI_GHG_unt()
+                    )
+                  ">
+                  <td class=number v-html="format(
+                      Global.Waste.ww_KPI_GHG_unt() / Global.General.Years()
+                    )
+                  ">
+                  <td class=number v-html="format(
+                      Global.Waste.ww_KPI_GHG_unt() / Global.General.Years() / Global.Waste.ww_serv_pop()
+                    )
+                  ">
+                </tr>
+              </tbody>
             </table>
           </td>
         </tr>
@@ -1762,7 +1822,7 @@
     </div>
   </div>
 
-  <!--summary nrg VIEW TODO-->
+  <!--summary nrg VIEW-->
   <div id=summary_nrg v-if="visible">
     <!--summary nrg title-->
     <h1 style="text-align:center">
@@ -1782,52 +1842,94 @@
       <table border=1 style="margin:auto">
         <!--total nrg-->
         <tr>
-          <td colspan=3 style=text-align:center>
-            {{ translate("TOTAL ENERGY CONSUMED") }}:
-            {{ format(Global.General.TotalNRG()) }}
-            <span class=unit>kWh</span>
-          </td>
-        </tr>
-
-        <!--nrg level1 and level2-->
-        <tr>
-          <td v-for="stage in Structure.filter(s=>s.sublevel==false)" style="padding:5px;vertical-align:top">
-            <!--level 1 nrg-->
-            <div class=flex style="align-items:center">
-              <div>
-                <img :src="`frontend/img/${stage.alias}.png`" style="width:25px">
-              </div>
-              <div style="margin-left:5px">
-                <a @click="go_to(stage.level)" style="cursor:pointer">
-                  {{translate(stage.level)}}
-                </a>:
-                {{ format(Global[stage.level][`${stage.prefix}_nrg_cons`]()) }}
+          <td
+            style="
+              background:var(--color-level-generic);
+              color:white;
+              font-size:large;
+            "
+          >
+            {{ translate("TOTAL ENERGY CONSUMED") }}
+            <ul>
+              <!--summary nrg total-->
+              <li>
+                {{format( Global.General.TotalNRG()) }}
                 <span class=unit>kWh</span>
-              </div>
-            </div>
-
-            <!--level2 nrg-->
-            <table border=1 style="margin:5px;">
-              <tr v-for="stage2 in Structure.filter(s=>(s.sublevel && s.level==stage.level))">
-                <td>
-                  <div class=flex style="align-items:center">
-                    <div>
-                      <img :src="`frontend/img/${stage2.alias}.png`" style="width:20px">
-                    </div>
-                    <div style="margin-left:5px">
-                      <a @click="go_to(stage2.level, stage2.sublevel)" style="cursor:pointer">
-                        {{translate(stage2.sublevel)}}:
-                      </a>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  {{ format(Global[stage2.level][stage2.sublevel][`${stage2.prefix}_nrg_cons`]) }}
-                </td>
-                <td>
-                  <span class=unit>kWh</span>
-                </td>
+              </li>
+              <!--summary nrg total per year-->
+              <li>
+                {{format( Global.General.TotalNRG()/Global.General.Years() )}}
+                <span class=unit>kWh/{{translate('year')}}</span>
+              </li>
+            </ul>
+          </td>
+          <td style="padding:0">
+            <table border=1 style=margin:-1px>
+              <tr>
+                <th>stage
+                <th>kWh
+                <th>kWh / year
+                <th>kWh / year / serv. pop.
               </tr>
+              <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)">
+                <!--level 1-->
+                <tr :style="`background:${l1.color};color:white`">
+                  <td>
+                    <div class=flex style="align-items:center">
+                      <div>
+                        <img :src="`frontend/img/${l1.alias}.png`" style="width:25px">
+                      </div>
+                      <div style="margin-left:5px">
+                        <a @click="go_to(l1.level)" style="color:white;font-weight:bold">
+                          {{ translate(l1.level) }}
+                        </a>
+                      </div>
+                    </div>
+                  </td>
+                  <td class=number v-html="format(
+                      Global[l1.level][`${l1.prefix}_nrg_cons`]()
+                    )
+                  ">
+                  <td class=number v-html="format(
+                      Global[l1.level][`${l1.prefix}_nrg_cons`]() / Global.General.Years()
+                    )
+                  ">
+                  <td class=number v-html="format(
+                      Global[l1.level][`${l1.prefix}_nrg_cons`]() / Global.General.Years() / variable.get_variable_value(`${l1.prefix}_serv_pop`)
+                    )
+                  ">
+                </tr>
+
+                <!--level 2-->
+                <tr v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))"
+                  v-if="Global.Configuration.ActiveStages[l2.alias]"
+                >
+                  <td>
+                    <div class=flex style="align-items:center;">
+                      <div>
+                        <img :src="`frontend/img/${l2.alias}.png`" style="width:20px">
+                      </div>
+                      <div style="margin-left:20px">
+                        <a @click="go_to(l2.level, l2.sublevel)" style="cursor:pointer">
+                          {{translate(l2.sublevel)}}
+                        </a>
+                      </div>
+                    </div>
+                  </td>
+                  <td class=number v-html="format(
+                      Global[l2.level][l2.sublevel][`${l2.prefix}_nrg_cons`]
+                    )
+                  ">
+                  <td class=number v-html="format(
+                      Global[l2.level][l2.sublevel][`${l2.prefix}_nrg_cons`] / Global.General.Years()
+                    )
+                  ">
+                  <td class=number v-html="format(
+                      Global[l2.level][l2.sublevel][`${l2.prefix}_nrg_cons`] / Global.General.Years() / variable.get_variable_value(`${l1.prefix}_serv_pop`)
+                    )
+                  ">
+                </tr>
+              </tbody>
             </table>
           </td>
         </tr>
@@ -2160,58 +2262,78 @@
   <div style="border-top:1px solid;margin-top:10px">
     <h3>&emsp; v3 development tasks</h3>
     <ul>
-      <li><b>DOING NOW</b>: tier A / refactoring backend and redoing user interface
+      <li><b>DOING NOW</b> main menu buttons
+        <ul>
+          <li>new
+          <li>open
+            <ul>
+              <li>compabibility module ['Yes/No':'Questions']
+            </ul>
+          </li>
+          <li>save as
+        </ul>
+      </li>
+      <li>tier A / refactoring backend and redoing user interface
         <ul>
           <li>outputs
           <li>find a better + offline + open source + memory efficient + fast chart library
         </ul>
       </li>
-      <li><b>DOING NEXT</b>: summaries (ghg and energy)
-      <li>"new", "open", and "save as" buttons
-      <li>tier b substages (discussion with viti needed)
+      <li> tier b substages (discussion with viti needed)
         <ul>
-          <li>benchmarks
+          <li>new design
+          <li>reimplement benchmarks
         </ul>
       </li>
-      <li>reporting tool (new feature)
-      <li>compabibility module ['Yes/No':'Questions']
       <li>
-        Landing Page
+        reporting tool (new feature)
+      </li>
+      <li>
+        Landing Page (TBD with VITI)
         <ul>
           <li>Design should be improved
           <li>Links don’t look appealing
           <li>Should include information about income
-          <li>“Help” button is not easy to find
+          <li>'Help' button is not easy to find
           <li>Support docs are missing (esp. Spanish)
         </ul>
       </li>
       <li>
-        General Info
+        General Info (TBD with VITI)
         <ul>
-          <li>It should be obvious which data is relevant and why (Colours, symbol etc)
+          <li>It should be obvious which data is relevant and why (Colours,
+          symbol etc)
         </ul>
       </li>
       <li>
-        Population
+        Population (TBD with VITI)
         <ul>
           <li>Names of input fields could be clearer
-          <li>It’s not clear that the definitions appear if you hover over the fields. A simple (?) could help
-          <li>Definitions should be shorter and more concrete (see FSM, missing definitions)
+          <li>It’s not clear that the definitions appear if you hover over the
+          fields. A simple (?) could help
+          <li>Definitions should be shorter and more concrete (see FSM, missing
+          definitions)
         </ul>
       </li>
       <li>
         Configuration
         <ul>
           <li>Difference between Tier A and B is not clear
-          <li>They are two different assessments, but it looks like you have to do both + the costs can only be inserted in Tier A. If in ECAM 3.0 both tiers are completely separated, costs should also be inserted in Tier B.
+          <li>They are two different assessments, but it looks like you have to
+          do both + the costs can only be inserted in Tier A. If in ECAM 3.0
+          both tiers are completely separated, costs should also be inserted in
+          Tier B.
         </ul>
       </li>
       <li>
         Tier A:
         <ul>
-          <li>There should be an explanatory sentence on what Tier A (and B), also highlighting the importance of data
-          <li>Results of Tier A are confusing because there are shown as “Outputs” and not as assumed under “Summaries”.
-          <li>Sankey Graphic is not easy to find, it should be under graphics /summary
+          <li>There should be an explanatory sentence on what Tier A (and B),
+          also highlighting the importance of data
+          <li>Results of Tier A are confusing because there are shown as
+          “Outputs” and not as assumed under “Summaries”.
+          <li>Sankey Graphic is not easy to find, it should be under graphics
+          /summary
         </ul>
       </li>
       <li>
@@ -2219,7 +2341,9 @@
         <ul>
           <li>The tips in the top right corner get lost
           <li>Advance assessment is easily overseen (+)
-          <li>Advance assessment is not clear. When should this be used and how? For example, it should be used if there are different treatment technologies
+          <li>Advance assessment is not clear. When should this be used and
+          how? For example, it should be used if there are different treatment
+          technologies
         </ul>
       </li>
       <li>
@@ -2227,7 +2351,8 @@
         <ul>
           <li>Difference between Tier A and B results should be clearer
           <li>Units of results could be more obvious
-          <li>Results of sub-stages are only shown when the box is ticked. This is not clear
+          <li>Results of sub-stages are only shown when the box is ticked. This
+          is not clear
         </ul>
       </li>
       <li>
@@ -2261,5 +2386,5 @@
     if(ev.which==27){ sidebar.visible=false; }
   });
 
-  //afegir listener onclose per no perdre les dades TODO
+  //add onclise listener to avoid data loss if page is accidentally closed
 </script>

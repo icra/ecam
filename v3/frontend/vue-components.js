@@ -607,8 +607,11 @@
     el:"#summary_nrg",
     data:{
       visible:false,
+
       Global,
       Structure,
+
+      variable,
     },
     methods:{
       translate,

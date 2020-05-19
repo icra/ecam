@@ -7,6 +7,8 @@
 */
 
 let Info={
+  fs_serv_pop:{magnitude:"People",unit:"people"},
+
   //wst pump efficiency
   wst_nrg_pump:{magnitude:"Energy",unit:"kWh"},
   wst_vol_pump:{magnitude:"Volume",unit:"m3"},

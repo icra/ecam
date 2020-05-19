@@ -820,6 +820,9 @@ let Global={
   Faecl:{
     "fs_resi_pop":0, //resident population
     "fs_onsi_pop":0, //onsite population
+    fs_serv_pop:function(){
+      return this.fs_onsi_pop;
+    },
 
     fs_nrg_cons:function(){
       return this.Containment.fsc_nrg_cons+this.Treatment.fst_nrg_cons+this.Reuse.fsr_nrg_cons;
