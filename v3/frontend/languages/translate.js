@@ -1,5 +1,6 @@
 //languages object (v3)
 let Languages={
+
   //default lang
   current:"en",
 
@@ -23,11 +24,6 @@ let Languages={
         loaded_languages.push(lang);
         if(loaded_languages.length == this.list.length){
           this.ready = true;
-
-          //improve this part TODO
-          if(typeof(ecam)=='object'){
-            ecam.force_update();
-          }
         }
       });
     });

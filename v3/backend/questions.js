@@ -1,5 +1,6 @@
 /*
-  A Question is a list of variables that are hidden if the answer to the question is NO
+  A Question is a list of variables that are hidden if the answer to the
+  question is NO
 
   Question object structure:
     1. "variables" (array)      variables hidden if answer is no

@@ -1,6 +1,8 @@
 /*
   Main data structure object. Stores user inputs and has all equations.
 
+  les unitats/magnituds estàn definides a l'arxiu info.js
+
   - idea TODO: pensar en poder seleccionar models/equacions
   - idea TODO: sempre tenir el model original disponible (congelat) i que
     l'usuari el pugui modificar

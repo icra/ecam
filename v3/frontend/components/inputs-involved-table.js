@@ -1,7 +1,6 @@
 //-----------------------------------------------------------------------------
 // table that lists inputs involved in a formula
 //-----------------------------------------------------------------------------
-
 Vue.component('inputs_involved_table',{
   template:`<div>
     <table class=inputs_involved>
@@ -75,9 +74,10 @@ Vue.component('inputs_involved_table',{
       Cts,
     };
   },
+
   methods:{
     translate,
     format,
-    get_variable_value: variable.get_variable_value,
+    get_variable_value,
   },
 });

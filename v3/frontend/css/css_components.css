@@ -11,7 +11,7 @@ body {
 }
 
 /* ecam logo */
-  #ecam-logo {
+  #ecam_logo {
     background:#2b6488;
     box-shadow:0 1px 2px rgba(0,0,0,.5);
     color:white;
@@ -32,36 +32,36 @@ body {
                                       u  e
     */
   }
-  #ecam-logo a{color:white;}
-  #ecam-logo a:hover{text-decoration:none}
-  #ecam-logo img{vertical-align:middle}
-  #ecam-logo #burger {
+  #ecam_logo a{color:white;}
+  #ecam_logo a:hover{text-decoration:none}
+  #ecam_logo img{vertical-align:middle}
+  #ecam_logo #burger {
     cursor:pointer;
     font-size:30px;
     line-height:0px;
   }
-  #ecam-logo #burger:hover{color:#666}
-  #ecam-logo #logo_container {
+  #ecam_logo #burger:hover{color:#666}
+  #ecam_logo #logo_container {
     display: flex;
     flex-wrap:wrap;
     align-items:center;
   }
-  #ecam-logo #logo {
+  #ecam_logo #logo {
     font-weight:bold;
     font-size:30px;
     padding-right:20px;
   }
-  #ecam-logo #lang{
+  #ecam_logo #lang{
     cursor:pointer;
   }
   
-  #ecam-logo #lang > img {
+  #ecam_logo #lang > img {
     display:block;
     margin:auto;
   }
 
   /* select element */
-  #ecam-logo #lang #select{
+  #ecam_logo #lang #select{
     position:absolute;
     top:3%;
     right:1%;
@@ -77,24 +77,24 @@ body {
   }
 
   /* show select element */
-  #ecam-logo #lang:hover #select {
+  #ecam_logo #lang:hover #select {
     visibility:visible;
     height:auto;
     transition:all 0s;
   }
 
   /* languages */
-  #ecam-logo #lang #select div[lang] {
+  #ecam_logo #lang #select div[lang] {
     color:black;
     display:block;
     padding:0.5em;
   }
 
   /* languages mouse over */
-  #ecam-logo #lang #select div[lang]:hover {
+  #ecam_logo #lang #select div[lang]:hover {
     background:orange;
   }
-  #ecam-logo #lang #select div[lang] img {
+  #ecam_logo #lang #select div[lang] img {
     width:20px;
   }
 
@@ -138,7 +138,7 @@ body {
   }
 
 /*linear menu*/
-  #linear-menu {
+  #linear_menu {
     background:#f5f5f5;
     background:linear-gradient(#f5f5f5,#ddd);
     border-bottom:1px solid #e5e5e5;
@@ -147,7 +147,7 @@ body {
     text-align:center;
     justify-content:center;
   }
-  #linear-menu > div {
+  #linear_menu > div {
     margin:0 4px;
     font-size:12px;
     vertical-align:middle;
@@ -155,15 +155,15 @@ body {
     border-radius:0.5em;
     color:rgba(0,0,0,0.55);
   }
-  #linear-menu > div:hover {
+  #linear_menu > div:hover {
     background:#e6e6e6;
     color:black;
   }
-  #linear-menu img.l1:hover,
-  #linear-menu img.l2:hover {
+  #linear_menu img.l1:hover,
+  #linear_menu img.l2:hover {
     border:3px solid #9fc231;
   }
-  #linear-menu img {
+  #linear_menu img {
     cursor:pointer;
     position:relative;
     z-index:2;
@@ -171,11 +171,11 @@ body {
     middle;
     padding:0;
   } /*icons inside buttons to navigate to Level2*/
-  #linear-menu img.l1 {width:42px;}
-  #linear-menu img.l2 {width:42px;}
-  #linear-menu img{border-radius:90%;border:3px solid transparent;}
-  #linear-menu img.selected{border:3px solid #9fc231;}
-  #linear-menu a:hover {text-decoration:none;}
+  #linear_menu img.l1 {width:42px;}
+  #linear_menu img.l2 {width:42px;}
+  #linear_menu img{border-radius:90%;border:3px solid transparent;}
+  #linear_menu img.selected{border:3px solid #9fc231;}
+  #linear_menu a:hover {text-decoration:none;}
 
 /*caption*/
   #caption {

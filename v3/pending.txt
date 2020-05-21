@@ -1,0 +1,59 @@
+PENDING TASKS
+
+* DOING NOW: rewiring ecam tool for edge compatibility
+
+* main menu buttons
+  - new
+  - save as
+  - open
+    - compabibility module ['Yes/No':'Questions']
+
+* fetch language files asyncronously does not work for offline use (CORS is not compatible with file protocol)
+
+* tier A / refactoring backend and redoing user interface
+  -outputs
+  -find a better + offline + open source + memory efficient + fast chart library
+
+* tier b substages (discussion with viti needed)
+  -new design
+  -reimplement benchmarks
+
+* reporting tool (new feature)
+
+* Landing Page (TBD with VITI)
+  -Design should be improved
+  -Links don’t look appealing
+  -Should include information about income
+  -'Help' button is not easy to find
+  -Support docs are missing (esp. Spanish)
+
+* General Info (TBD with VITI)
+  -It should be obvious which data is relevant and why (Colours, symbol etc)
+
+* Population (TBD with VITI)
+  -Names of input fields could be clearer
+  -It’s not clear that the definitions appear if you hover over the fields. A simple (?) could help
+  -Definitions should be shorter and more concrete (see FSM, missing definitions)
+
+* Configuration
+  -Difference between Tier A and B is not clear
+  -They are two different assessments, but it looks like you have to do both + the costs can only be inserted in Tier A. If in ECAM 3.0 both tiers are completely separated, costs should also be inserted in Tier B.
+
+* Tier A:
+  -There should be an explanatory sentence on what Tier A (and B), also highlighting the importance of data
+  -Results of Tier A are confusing because there are shown as “Outputs” and not as assumed under “Summaries”.
+  -Sankey Graphic is not easy to find, it should be under graphics /summary
+
+* Tier B:
+  -The tips in the top right corner get lost
+  -Advance assessment is easily overseen (+)
+  -Advance assessment is not clear. When should this be used and how? For example, it should be used if there are different treatment technologies
+
+* Summaries page:
+  -Difference between Tier A and B results should be clearer
+  -Units of results could be more obvious
+  -Results of sub-stages are only shown when the box is ticked. This is not clear
+
+* Opportunities page:
+  -It is not clear how to use it or how results are to be interpreted.
+  -Spanish translations are needed
