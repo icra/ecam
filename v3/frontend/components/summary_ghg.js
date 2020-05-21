@@ -18,6 +18,7 @@ let summary_ghg = new Vue({
 
     //frontend
     variable,
+    caption,
 
     //backend
     Global,
@@ -30,6 +31,49 @@ let summary_ghg = new Vue({
     format,
     go_to,
     get_variable_value,
+
+    put_detailed_ghg_sources_on_caption(level, sublevel){
+
+      //get #caption element
+      let cap = document.querySelector('#caption');
+      cap.innerHTML ="";
+
+      //create new div
+      let div = document.createElement('div');
+      cap.appendChild(div);
+      div.innerHTML += `<div><b>${translate(level)} ${translate(sublevel)}</b></div>`;
+
+      //get emission code
+      let code = this.Structure.find(s=>(s.level==level && s.sublevel==sublevel)).prefix + '_KPI_GHG';
+
+      //get stage of emission
+      let stage = this.Global[level][sublevel];
+
+      //if no emission, end
+      if(!stage[code]()){
+        div.innerHTML += "<div><small>~"+translate('No emissions')+"</small></div>";
+        return;
+      }
+
+      div.innerHTML += "<code>"+translate('Detailed GHG sources')+"<code>";
+
+      //create new table
+      let table = document.createElement('table');
+      table.style.width = "100%";
+      div.appendChild(table);
+
+      for(var field in stage){
+        if(field.search('_KPI_GHG_')+1) {
+          let value = stage[field](); //kgCO2
+          if(!value){continue}
+          let newRow = table.insertRow(-1);
+          newRow.insertCell(-1).innerHTML = translate(field+"_descr").prettify();
+          newRow.insertCell(-1).innerHTML = format(value);
+        }
+      }
+
+    },
+
   },
 
   template:`
@@ -49,7 +93,7 @@ let summary_ghg = new Vue({
 
       <!--summary ghg 3 tables-->
       <div style="padding:0 2px">
-        <table border=1 style="margin:auto">
+        <table border=1 style="width:70%;margin:auto">
           <!--total ghg-->
           <tr>
             <td
@@ -77,15 +121,17 @@ let summary_ghg = new Vue({
                 </li>
               </ul>
             </td>
-            <td style="padding:0">
-              <table border=1 style=margin:-1px>
+            <td style="padding:0;vertical-align:top">
+              <table border=1 style="width:100%;">
                 <tr>
                   <th>{{translate('stage')}}</th>
-                  <th>kgCO<sub>2</sub>eq</th>
-                  <th>kgCO<sub>2</sub>eq/{{translate('year')}}</th>
-                  <th>kgCO<sub>2</sub>eq/{{translate('year')}}/{{translate('serv.pop.')}}</th>
+                  <th style="text-align:right">kgCO<sub>2</sub>eq</th>
+                  <th style="text-align:right">kgCO<sub>2</sub>eq/{{translate('year')}}</th>
+                  <th style="text-align:right">kgCO<sub>2</sub>eq/{{translate('year')}}/{{translate('serv.pop.')}}</th>
                 </tr>
-                <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)">
+                <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)"
+                  v-if="Global.Configuration.ActiveStages[l1.alias]"
+                >
                   <!--level 1-->
                   <tr :style="'background:'+l1.color+';color:white'">
                     <td>
@@ -117,6 +163,9 @@ let summary_ghg = new Vue({
                   <!--level 2-->
                   <tr v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))"
                     v-if="Global.Configuration.ActiveStages[l2.alias]"
+                    @mouseenter="put_detailed_ghg_sources_on_caption(l2.level, l2.sublevel)"
+                    @mousemove="caption.show($event)"
+                    @mouseout="caption.hide()"
                   >
                     <td>
                       <div class=flex style="align-items:center;">
@@ -172,25 +221,35 @@ let summary_ghg = new Vue({
 
         <!--emissions outside boundaries-->
         <div style="margin:10px 0">
-          <table border=1 style="margin:auto">
+          <table border=1 style="width:70%;margin:auto">
             <tr>
-              <th style=background:purple>
+              <th style="background:purple">
                 {{translate("GHG emissions")}}
                 <br>
                 {{translate("outside utility boundaries")}}
-                <br>
-                (kg CO<sub>2</sub> eq)
               </th>
-              <td>
+              <th style="background:purple;text-align:right">kgCO<sub>2</sub>eq</th>
+              <th style="background:purple;text-align:right">kgCO<sub>2</sub>eq/{{translate('year')}}</th>
+              <th style="background:purple;text-align:right">kgCO<sub>2</sub>eq/{{translate('year')}}/{{translate('serv.pop.')}}</th>
+            </tr>
+            <tr>
+              <td style="text-align:center">
                 <a @click="variable.view('ww_SL_ghg_unc')" title="ww_SL_ghg_unc">
                   {{translate("ww_SL_ghg_unc_descr")}}
                 </a>
               </td>
-              <td>
-                {{format(Global.Waste.ww_SL_ghg_unc())}}
+              <td class=number>
+                <span v-html="format(Global.Waste.ww_SL_ghg_unc())"></span>
               </td>
-              <td>
-                <span class=unit>kgCO<sub>2</sub>eq</span>
+              <td class=number>
+                <span v-html="format(
+                  Global.Waste.ww_SL_ghg_unc() / Global.General.Years()
+                )"></span>
+              </td>
+              <td class=number>
+                <span v-html="format(
+                  Global.Waste.ww_SL_ghg_unc() / Global.General.Years() / Global.Waste.ww_serv_pop()
+                )"></span>
               </td>
             </tr>
           </table>
@@ -201,7 +260,7 @@ let summary_ghg = new Vue({
 
         <!--emissions avoided-->
         <div style="margin:10px 0">
-          <table border=1 style="margin:auto">
+          <table border=1 style="width:70%;margin:auto">
             <tr>
               <th style=background:#bbb :rowspan="ghg_avoided.length+1">
                 <a @click="variable.view('ww_GHG_avoided')" style="color:white" title="ww_GHG_avoided">
@@ -212,7 +271,7 @@ let summary_ghg = new Vue({
                   </span>
                 </div>
                 <small>
-                  kg CO<sub>2</sub> eq / {{translate("assessment period")}}
+                  kgCO<sub>2</sub>eq
                 </small>
               </th>
             </tr>

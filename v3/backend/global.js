@@ -124,7 +124,6 @@ let Global={
         let fuel=Tables['Fuel types'][Tables.find('wsa_fuel_typ',this.wsa_fuel_typ)];//<br>
         return this.wsa_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
       },
-
       wsa_KPI_GHG:function(){//<br>
         return this.wsa_KPI_GHG_elec()+this.wsa_KPI_GHG_fuel();
       },

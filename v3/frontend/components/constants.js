@@ -1,8 +1,21 @@
 let constants = new Vue({
   el:"#constants",
 
+  data:{
+    visible:false,
+    constant,
+
+    Cts,
+    Languages,
+  },
+
+  methods:{
+    translate,
+    format,
+  },
+
   template:`
-    <div id=constants v-if="visible">
+    <div id=constants v-if="visible && Languages.ready">
       <!--constants title-->
       <h1 style="text-align:center">{{ translate('constants') }}</h1>
 
@@ -17,7 +30,7 @@ let constants = new Vue({
           </tr>
           <tr v-for="obj,key in Cts">
             <td>
-              <a @click="constant.view(key)">{{ key }}</a>
+              <a @click="constant.view(key)" style="font-weight:bold">{{ key }}</a>
             </td>
             <td align=right :title="obj.value">
               {{ format(obj.value) }}
@@ -29,16 +42,4 @@ let constants = new Vue({
       </div>
     </div>
   `,
-
-  data(){
-    return{
-      visible: false,
-      Cts,
-    };
-  },
-
-  methods:{
-    translate,
-    format,
-  },
 });

@@ -18,7 +18,9 @@ let caption = new Vue({
   methods:{
     show(ev, new_text){
       ev.stopPropagation(); //prevent parent elements triggering show()
-      this.text=new_text;
+      if(new_text){
+        this.text=new_text;
+      }
       this.visible=true;
       let el=document.querySelector("#caption");
       el.style.left=(ev.clientX-10)+"px";

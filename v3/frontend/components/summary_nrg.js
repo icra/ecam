@@ -68,7 +68,9 @@ let summary_nrg = new Vue({
                   <th>kWh/{{translate('year')}}</th>
                   <th>kWh/{{translate('year')}}/{{translate('serv.pop.')}}</th>
                 </tr>
-                <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)">
+                <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)"
+                  v-if="Global.Configuration.ActiveStages[l1.alias]"
+                >
                   <!--level 1-->
                   <tr :style="'background:'+l1.color+';color:white'">
                     <td>

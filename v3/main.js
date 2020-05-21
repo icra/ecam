@@ -1,6 +1,7 @@
+//main view controller
 let ecam = {
 
-  //views == pages
+  //views (==pages)
   views:{
     landing,
     get_started,
@@ -17,18 +18,13 @@ let ecam = {
     variable,
     constants,
     constant,
-  },
-
-  //hide all views
-  hide_all(){
-    Object.entries(this.views).forEach(([key,view])=>{
-      //console.log(key);
-      if(view.constructor===Vue){
-        if(view.visible){
-          view.visible=false;
-        }
-      }
-    });
+    development,
+    problems,
+    translation_problems,
+    validate_json,
+    data_structure_viewer,
+    benchmarks,
+    graphs,
   },
 
   //show a view
@@ -45,15 +41,19 @@ let ecam = {
     this.hide_all();
     this.views[view].visible=true;
     linear_menu.current_view = view;
+    caption.hide();
     window.scrollTo(0,0);
   },
 
-  //force render views and components (for language tags)
-  force_update(){
-    Object.entries(this.views)
-      .concat(Object.entries(this.components))
-      .forEach(([key,obj])=>{
-        obj.$forceUpdate();
+  //hide all views
+  hide_all(){
+    Object.entries(this.views).forEach(([key,view])=>{
+      //console.log(key);
+      if(view.constructor===Vue){
+        if(view.visible){
+          view.visible=false;
+        }
+      }
     });
   },
 };

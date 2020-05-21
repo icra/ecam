@@ -1,7 +1,6 @@
 //-----------------------------------------------------------------------------
 // input field for inputs in tier B
 //-----------------------------------------------------------------------------
-
 Vue.component('input_ecam',{
   template:`
     <div style="display:grid;grid-template-columns:60% 30% 10%">

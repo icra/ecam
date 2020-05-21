@@ -8,6 +8,7 @@ let tier_a = new Vue({
     Structure,
     Questions,
     Tables,
+    Languages,
   },
 
   methods:{
@@ -17,8 +18,7 @@ let tier_a = new Vue({
   },
 
   template:`
-
-    <div id=tier_a v-if="visible">
+    <div id=tier_a v-if="visible && Languages.ready">
       <h1>
         {{translate('quick_assessment')}} &mdash;
         {{translate('initial_estimation_description')}}
@@ -101,15 +101,17 @@ let tier_a = new Vue({
                   {{translate(key)}}
                 </td>
               </tr>
+
               <!--stage not active indicator-->
               <tr v-if="!Global.Configuration.ActiveStages[Structure.find(s=>s.level==key).alias]">
                 <td colspan=3 style="color:#999;background:#eee;font-size:smaller">
                   {{translate('birds_stage_not_active')}}
                 </td>
               </tr>
+
               <!--tier a inputs-->
               <tr
-                v-if="Global.Configuration.ActiveStages[Structure.find(s=>s.level==key).alias]"
+                v-if="typeof(val)=='number' && Global.Configuration.ActiveStages[Structure.find(s=>s.level==key).alias]"
                 v-for="val,code in level"
               >
                 <!--tier a input description-->
@@ -165,16 +167,24 @@ let tier_a = new Vue({
         <div style="margin-left:2px">
           figures here TODO
           <ul>
+            <li>ghg emissions by system</li>
             <li>ghg emissions by source</li>
-            <li>energy consumption</li>
+            <li>ghg emissions by source (detailed)</li>
+            <li>ghg emissions by UNFCCC categories</li>
+
+            <li>energy consumption by system</li>
+
             <li>water supply total running costs</li>
             <li>wastewater total running costs</li>
-            <li>serviced population in water supply</li>
-            <li>total ghg water supply</li>
-            <li>serviced population in wastewater</li>
-            <li>total ghg wastewater</li>
-            <li>serviced population in fsm</li>
-            <li>total ghg fsm</li>
+
+            <li>serviced population in water supply (%)</li>
+            <li>total ghg water supply (kg/year/serv.pop)</li>
+
+            <li>serviced population in wastewater (%)</li>
+            <li>total ghg wastewater (kg/year/serv.pop)</li>
+
+            <li>serviced population in fsm (%)</li>
+            <li>total ghg fsm (kg/year/serv.pop)</li>
           </ul>
         </div>
       </div>

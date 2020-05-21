@@ -8,6 +8,7 @@ let linear_menu = new Vue({
 
     Global,
     Structure,
+    Languages,
   },
 
   methods:{
@@ -23,7 +24,7 @@ let linear_menu = new Vue({
 
   template:`
     <!--linear menu COMPONENT-->
-    <div id=linear_menu v-if="visible" class=flex>
+    <div id=linear_menu v-if="visible && Languages.ready" class=flex>
       <!--linear general info-->
       <div onclick="ecam.show('get_started')">
         <div>

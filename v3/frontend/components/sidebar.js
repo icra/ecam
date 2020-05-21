@@ -95,10 +95,6 @@ let sidebar = new Vue({
             <li class=item><a onclick="ecam.show('constants')"  >{{translate('all_constants')    }}       </a></li>
             <li class=item><a onclick="alert('TODO')">           {{translate('unfccc_categories')}} [TODO]</a></li>
             <li class=item><a onclick="alert('TODO')">           {{translate('all_substages')    }} [TODO]</a></li>
-            <li class=item><a onclick="alert('TODO')">           {{translate('all_inputs')       }} [TODO]</a></li>
-            <li class=item><a onclick="alert('TODO')">           {{translate('all_outputs')      }} [TODO]</a></li>
-            <li class=item><a onclick="alert('TODO')">           {{translate('all_ccvv')         }} [TODO]</a></li>
-            <li class=item><a onclick="alert('TODO')">           {{translate('All questions')    }} [TODO]</a></li>
             <li class=item><a onclick="alert('TODO')">           {{translate('all_benchmarks')   }} [TODO]</a></li>
           </ul>
         </li>
@@ -107,10 +103,9 @@ let sidebar = new Vue({
         <li class=section>
           <div class=header>{{translate('other')}}</div>
           <ul>
-            <li class=item><a onclick="ecam.show('opportunities')"> {{translate("opportunities")  }}       </a></li>
-            <li class=item><a onclick="ecam.show('')">              {{translate('sidebar_export') }} [TODO]</a></li>
-            <li class=item><a onclick="ecam.show('')">              {{translate('Sankey diagram') }} [TODO]</a></li>
-            <li class=item><a onclick="ecam.show('')">              {{translate('dev')            }} [TODO]</a></li>
+            <li class=item><a onclick="alert('TODO')">              {{translate('sidebar_export') }} [TODO]</a></li>
+            <li class=item><a onclick="alert('TODO')">              {{translate('Sankey diagram') }} [TODO]</a></li>
+            <li class=item><a onclick="ecam.show('development')">   {{translate('dev')            }} [TODO]</a></li>
           </ul>
         </li>
 

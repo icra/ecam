@@ -91,26 +91,35 @@
 </script>
 
 <div>
-  <div id=ecam_logo    ></div> <!--ecam logo-->
-  <div id=caption      ></div> <!--caption-->
-  <div id=linear_menu  ></div> <!--linear menu-->
-  <div id=sidebar      ></div> <!--sidebar-->
-  <div id=landing      ></div> <!--landing       VIEW-->
-  <div id=about        ></div> <!--about         VIEW-->
-  <div id=help         ></div> <!--help          VIEW-->
-  <div id=get_started  ></div> <!--get started   VIEW-->
-  <div id=configuration></div> <!--configuration VIEW-->
-  <div id=countries    ></div> <!--countries     VIEW-->
-  <div id=gwp_table    ></div> <!--gwp table     VIEW-->
-  <div id=population   ></div> <!--population    VIEW-->
-  <div id=tier_a       ></div> <!--tier a        VIEW-->
-  <div id=tier_b       ></div> <!--tier b        VIEW-->
-  <div id=summary_ghg  ></div> <!--summary ghg   VIEW-->
-  <div id=summary_nrg  ></div> <!--summary nrg   VIEW-->
-  <div id=opportunities></div> <!--opportunities VIEW-->
-  <div id=variable     ></div> <!--variable      VIEW-->
-  <div id=constant     ></div> <!--constant      VIEW-->
-  <div id=constants    ></div> <!--constants     VIEW-->
+  <div id=ecam_logo            ></div> <!--ecam logo          ELEMENT-->
+  <div id=caption              ></div> <!--caption            ELEMENT-->
+  <div id=linear_menu          ></div> <!--linear menu        ELEMENT-->
+  <div id=sidebar              ></div> <!--sidebar            ELEMENT-->
+  <div id=landing              ></div> <!--landing               VIEW-->
+  <div id=about                ></div> <!--about                 VIEW-->
+  <div id=help                 ></div> <!--help                  VIEW-->
+  <div id=get_started          ></div> <!--get started           VIEW-->
+  <div id=configuration        ></div> <!--configuration         VIEW-->
+  <div id=countries            ></div> <!--countries             VIEW-->
+  <div id=gwp_table            ></div> <!--gwp table             VIEW-->
+  <div id=population           ></div> <!--population            VIEW-->
+  <div id=tier_a               ></div> <!--tier a                VIEW-->
+  <div id=tier_b               ></div> <!--tier b                VIEW-->
+  <div id=summary_ghg          ></div> <!--summary ghg           VIEW-->
+  <div id=summary_nrg          ></div> <!--summary nrg           VIEW-->
+  <div id=opportunities        ></div> <!--opportunities         VIEW-->
+  <div id=variable             ></div> <!--variable              VIEW-->
+  <div id=constant             ></div> <!--constant              VIEW-->
+  <div id=constants            ></div> <!--constants             VIEW-->
+  <div id=development          ></div> <!--development           VIEW-->
+
+  <!--TODO-->
+  <div id=problems             ></div> <!--problems              VIEW-->
+  <div id=translation_problems ></div> <!--translation problems  VIEW-->
+  <div id=validate_json        ></div> <!--validate_json         VIEW-->
+  <div id=data_structure_viewer></div> <!--data_structure_viewer VIEW-->
+  <div id=benchmarks           ></div> <!--benchmarks            VIEW-->
+  <div id=graphs               ></div> <!--graphs                VIEW-->
 </div>
 
 <!--temporal: utils-->
@@ -140,9 +149,11 @@
 <script src="frontend/components/summary_nrg.js"></script>
 <script src="frontend/components/constant.js"></script>
 <script src="frontend/components/constants.js"></script>
+<script src="frontend/components/development.js"></script>
 
 <!--set default views on reload (development only)-->
 <script src="frontend/defaults.js"></script>
+
 <script src="main.js"></script>
 
 <!--sidebar onclick listeners that hide the sidebar-->
