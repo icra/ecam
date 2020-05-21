@@ -46,10 +46,15 @@ Vue.component('inputs_involved_table',{
           <td :title="translate(match+'_descr')">
             <a @click="variable.view(match)">{{match}}</a>
           </td>
-          <td v-html="format(get_variable_value(match))">
-          </td>
-          <td class=unit v-html="Info[match].unit.prettify()">
-          </td>
+          <td v-html="format(get_variable_value(match))"></td>
+
+          <div v-if="get_variable_type(match)=='input'">
+            <td class=unit v-html="get_base_unit(match).prettify()"></td>
+          </div>
+          <div v-else>
+            <td class=unit v-html="Info[match].unit.prettify()"></td>
+          </div>
+
         </tr>
       </tbody>
     </table>
@@ -79,5 +84,7 @@ Vue.component('inputs_involved_table',{
     translate,
     format,
     get_variable_value,
+    get_variable_type,
+    get_base_unit,
   },
 });

@@ -32,6 +32,7 @@ let variable = new Vue({
     locate_variable,
     get_current_stage,
     get_current_unit,
+    get_base_unit,
     get_variable_value,
     get_level_color,
     get_variable_type,
@@ -196,7 +197,7 @@ let variable = new Vue({
               <!--input is a number-->
               <div v-else>
                 <input type=number v-model.number="get_current_stage(id)[id]">
-                <span class=unit v-html="Info[id].unit.prettify()"></span>
+                <span class=unit v-html="get_base_unit(id).prettify()"></span>
               </div>
             </div>
             <!--variable current value if output-->
@@ -236,7 +237,7 @@ let variable = new Vue({
                     </div>
                   </td>
                   <td>
-                    <span class=unit v-html="Info[output].unit.prettify()">
+                    <span class=unit v-html="get_base_unit(id).prettify()">
                     </span>
                   </td>
                 </tr>

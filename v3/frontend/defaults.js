@@ -8,8 +8,8 @@ sidebar.visible      = 0;
 linear_menu.visible  = 0;
 
 /* VIEWS */
-landing.visible      = 1; //landing
-summary_ghg.visible  = 0; //summary GHG
+landing.visible      = 0; //landing
+summary_ghg.visible  = 1; //summary GHG
 tier_a.visible       = 0; //tier A
 tier_b.visible       = 0; //tier B
 variable.visible     = 0; //variable

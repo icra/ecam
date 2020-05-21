@@ -1,6 +1,18 @@
 let countries = new Vue({
   el:"#countries",
 
+  data:{
+    visible:false,
+    Global,
+    Countries,
+
+    variable,
+  },
+
+  methods:{
+    translate,
+  },
+
   template:`
     <!--countries VIEW-->
     <div id=countries v-if="visible">
@@ -73,16 +85,4 @@ let countries = new Vue({
       </table>
     </div>
   `,
-
-  data:{
-    visible:false,
-    Global,
-    Countries,
-
-    variable,
-  },
-
-  methods:{
-    translate,
-  },
 });

@@ -22,16 +22,16 @@ let help = new Vue({
       <h4><b>ECAM v2 docs</b></h4>
       <table style=margin:auto>
         <tr>
-          <td><a target=_blank href="help_pdf/ECAM V2 FAQ_Aug2017.pdf">Frequently Asked Questions (pdf)</a></td>
+          <td><a target=_blank href="frontend/docs/help_pdf/ECAM V2 FAQ_Aug2017.pdf">Frequently Asked Questions (pdf)</a></td>
         </tr>
         <tr>
-          <td><a target=_blank href="help_pdf/ECAM-Methodology-Guide-Jan-2019.pdf">Methodology (pdf)</a></td>
+          <td><a target=_blank href="frontend/docs/help_pdf/ECAM-Methodology-Guide-Jan-2019.pdf">Methodology (pdf)</a></td>
         </tr>
         <tr>
-          <td><a target=_blank href="help_pdf/ECAM_2.0_Manual_170822.pdf">Manual (pdf)</a></td>
+          <td><a target=_blank href="frontend/docs/help_pdf/ECAM_2.0_Manual_170822.pdf">Manual (pdf)</a></td>
         </tr>
         <tr>
-          <td><a target=_blank href="help_pdf/ECAMV2 Example.json" download>Example json file (json)</a></td>
+          <td><a target=_blank href="frontend/docs/help_pdf/ECAMV2 Example.json" download>Example json file (json)</a></td>
         </tr>
       </table>
 

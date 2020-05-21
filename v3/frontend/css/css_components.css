@@ -54,7 +54,7 @@ body {
   #ecam_logo #lang{
     cursor:pointer;
   }
-  
+
   #ecam_logo #lang > img {
     display:block;
     margin:auto;
@@ -194,23 +194,23 @@ body {
 /* VIEWS (==pages)                                                           */
 /*---------------------------------------------------------------------------*/
 
-/*index*/
-  #index #content *:not(button){margin:0;padding:0;padding-top:0.7em;padding-bottom:0.7em}
-  #index #content {
+/*landing*/
+  #landing #content *:not(button){margin:0;padding:0;padding-top:0.7em;padding-bottom:0.7em}
+  #landing #content {
     padding: 0 10em 0 10em;
     text-align:left;
   }
-  #index #content .width_50 .img_resp{
+  #landing #content .width_50 .img_resp{
     width: 100%;
     padding-top: 9em;
   }
-  #index #menu_buttons button {
+  #landing #menu_buttons button {
     display:block;
     margin-left:0;
     margin-top:0;
     margin-bottom:0;
   }
-  #index #footer{
+  #landing #footer{
     text-align:left;
     padding:0.5em 10em 0.5em 10em;
     background:white;
@@ -221,7 +221,7 @@ body {
     bottom:0;
     margin-top:30px;
   }
-  #index #footer img#logo-wacclim{
+  #landing #footer img#logo-wacclim{
     display:block;
     margin:auto;
     vertical-align:middle;

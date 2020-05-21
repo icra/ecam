@@ -1,8 +1,39 @@
 let summary_ghg = new Vue({
   el:"#summary_ghg",
 
+  data:{
+    visible:false,
+
+    //avoided ghg - list of variables
+    ghg_avoided:[
+      {level:'Waste', sublevel:'Treatment', code:'wwt_SL_GHG_avoided'},
+      {level:'Waste', sublevel:'Treatment', code:'wwt_wr_C_seq_slu'},
+      {level:'Waste', sublevel:'Discharge', code:'wwd_wr_GHG_avo_d'},
+      {level:'Waste', sublevel:'Discharge', code:'wwd_SL_ghg_non'},
+      {level:'Waste', sublevel:'Discharge', code:'wwd_wr_GHG_avo'},
+      {level:'Faecl', sublevel:'Treatment', code:'fst_SL_GHG_avoided'},
+      {level:'Faecl', sublevel:'Reuse',     code:'fsr_ghg_avoided_land'},
+      {level:'Faecl', sublevel:'Reuse',     code:'fsr_ghg_avoided_reuse'},
+    ],
+
+    //frontend
+    variable,
+
+    //backend
+    Global,
+    Structure,
+    Languages,
+  },
+
+  methods:{
+    translate,
+    format,
+    go_to,
+    get_variable_value,
+  },
+
   template:`
-    <div id=summary_ghg v-if="visible">
+    <div id=summary_ghg v-if="visible && Languages.ready">
       <!--summary ghg title-->
       <h1 style="text-align:center">
         <div>
@@ -56,7 +87,7 @@ let summary_ghg = new Vue({
                 </tr>
                 <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)">
                   <!--level 1-->
-                  <tr :style="'background:'+l1.color+'color:white'">
+                  <tr :style="'background:'+l1.color+';color:white'">
                     <td>
                       <div class=flex style="align-items:center">
                         <div>
@@ -207,30 +238,4 @@ let summary_ghg = new Vue({
       </div>
     </div>
   `,
-
-  data:{
-    visible:false,
-
-    //avoided ghg - list of variables
-    ghg_avoided:[
-      {level:'Waste', sublevel:'Treatment', code:'wwt_SL_GHG_avoided'},
-      {level:'Waste', sublevel:'Treatment', code:'wwt_wr_C_seq_slu'},
-      {level:'Waste', sublevel:'Discharge', code:'wwd_wr_GHG_avo_d'},
-      {level:'Waste', sublevel:'Discharge', code:'wwd_SL_ghg_non'},
-      {level:'Waste', sublevel:'Discharge', code:'wwd_wr_GHG_avo'},
-      {level:'Faecl', sublevel:'Treatment', code:'fst_SL_GHG_avoided'},
-      {level:'Faecl', sublevel:'Reuse',     code:'fsr_ghg_avoided_land'},
-      {level:'Faecl', sublevel:'Reuse',     code:'fsr_ghg_avoided_reuse'},
-    ],
-
-    //backend
-    Global,
-    Structure,
-  },
-
-  methods:{
-    translate,
-    format,
-    go_to,
-  },
 });

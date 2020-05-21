@@ -32,6 +32,25 @@ function get_current_unit(code){
   return Global.Configuration.Units[code];
 }
 
+//get base unit (without unit conversion)
+function get_base_unit(code){
+  if(!code) return false;
+
+  let info = Info[code];
+  if(!info) throw new Error(`no unit for variable "${code}"`);
+
+  if(Units[info.magnitude]){
+    for(let unit in Units[info.magnitude]){
+      if(Units[info.magnitude][unit]==1){
+        return unit;
+        break;
+      }
+    }
+  }else{
+    return info.unit;
+  }
+}
+
 function locate_variable(code){
   let level    = false; //level 1
   let sublevel = false; //level 2
