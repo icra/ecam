@@ -1,4 +1,7 @@
-let Tier_A={
+//not finished TODO
+
+let Tier_A = {
+
   //water supply
   Water:{
     //inputs
@@ -31,6 +34,7 @@ let Tier_A={
       return this.ws_KPI_GHG_elec()+this.ws_KPI_GHG_fuel();
     },
   },
+
   Waste:{
     //wastewater
     ww_nrg_cons:  0, //
@@ -56,6 +60,7 @@ let Tier_A={
       return this.ws_nrg_cons*Global.General.conv_co2_kwh;
     },
   },
+
   Faecl:{
     //numeric inputs
     fs_nrg_cons:  0, //

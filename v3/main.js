@@ -27,10 +27,12 @@ let ecam = {
     graphs,
   },
 
-  //show a view
+  //show a view (==open a page)
   show(view){
     if(!this.views[view]){
-      throw new Error(`view '${view}' not found`);
+      let e = new Error(`view '${view}' not found`);
+      alert(e);
+      throw e;
     }
 
     //activate linear_menu when entering tier_b

@@ -294,6 +294,13 @@ let variable = new Vue({
             ></inputs_involved_table>
           </td>
         </tr>
+
+        <!--the input is used in benchmarks?-->
+        <tr>
+          <th>Input is used in benchmarks?</th>
+          <td>TODO</td>
+        </tr>
+
       </table>
     </div>
   `,

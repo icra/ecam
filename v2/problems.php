@@ -41,38 +41,12 @@
       });
     }
   </script>
-  <style>
-    div#main table {
-      display:inline-block;
-      vertical-align:top;
-      margin:2px 1px;
-    }
-    td.allok {
-      background:lightgreen;
-      font-style:italic;
-    }
-    td.allok:before {content:"All OK"}
-  </style>
-  <script>
-    function init() {
-      Caption.listeners();
-    }
-  </script>
-</head><body onload=init()><center>
-  <?php include'sidebar.php'?>
-  <?php include'navbar.php'?>
-  <?php include'linear.php'?>
-  <?php include'caption.php'?>
-  <!--title--><h1><a href=development.php>Development</a> &rsaquo; Debugging utility</h1>
-</center>
 
-<!--note: issues were moved to github-->
-<p style=text-align:center>
-  Issues were moved to <a href='https://github.com/icra/ecam/issues'>github issues</a>
-</p>
+
+</head><body>
 
 <!--problems-->
-<div class=flex  style="border:1px solid #ccc;padding:0.5em;margin:2px auto">
+<div>
   <!--not used inputs-->
   <div>
     <table><tr><th>Inputs not used in any<br><b>Outputs</b><br> and<br><b>Benchmarks</b>
@@ -162,6 +136,7 @@
         })()
       </script>
     </table>
+
     <table id=inex_info><tr><th>Inexisting that appear in info.js           </table>
     <table id=inex_refV><tr><th>Inexisting that appear in refValues.js      </table>
     <table id=inex_lvl2><tr><th>Inexisting that appear in level2only.js     </table>
@@ -182,6 +157,7 @@
         if(repeated.length==0)document.write("<tr><td class=allok>")
       </script>
     </table>
+
     <table><tr><th>Not used constants
       <script>
         var j=0;
@@ -196,7 +172,17 @@
       </script>
     </table>
   </div>
-
 </div>
 
-<!--current json--><?php include'currentJSON.php'?>
+<style>
+  div#main table {
+    display:inline-block;
+    vertical-align:top;
+    margin:2px 1px;
+  }
+  td.allok {
+    background:lightgreen;
+    font-style:italic;
+  }
+  td.allok:before {content:"All OK"}
+</style>

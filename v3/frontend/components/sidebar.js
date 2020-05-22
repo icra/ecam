@@ -105,7 +105,7 @@ let sidebar = new Vue({
           <ul>
             <li class=item><a onclick="alert('TODO')">              {{translate('sidebar_export') }} [TODO]</a></li>
             <li class=item><a onclick="alert('TODO')">              {{translate('Sankey diagram') }} [TODO]</a></li>
-            <li class=item><a onclick="ecam.show('development')">   {{translate('dev')            }} [TODO]</a></li>
+            <li class=item><a onclick="ecam.show('development')">   {{translate('dev')            }}</a></li>
           </ul>
         </li>
 
@@ -119,7 +119,7 @@ let sidebar = new Vue({
         </li>
       </ul>
 
-      <!--sidebar for development-->
+      <!--sidebar close button-->
       <div>
         <button @click="visible^=1">close</button>
       </div>

@@ -207,7 +207,7 @@ let tier_b = new Vue({
       </div>
 
       <!--tier b inputs and outputs-->
-      <div style="display:grid;grid-template-columns:62% 38%;padding:0 5px 0 8px">
+      <div style="display:grid;grid-template-columns:66% 34%;padding:0 5px 0 8px">
         <!--tier b inputs-->
         <div style="padding-right:5px">
           <div class="table-title">
