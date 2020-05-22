@@ -24,7 +24,7 @@ let tier_a = new Vue({
         {{translate('initial_estimation_description')}}
       </h1>
 
-      <!--context info below tier A title-->
+      <!--context info below tier a title-->
       <div class=flex
         style="
           background:#fafafa;
@@ -87,9 +87,9 @@ let tier_a = new Vue({
         </div>
       </div>
 
-      <!--tier a main container-->
+      <!--tier a inputs and outputs-->
       <div class=flex style="padding:10px 2px">
-        <!--tier a inputs container-->
+        <!--tier a inputs-->
         <div>
           <table>
             <tbody v-for="level,key in Global.Tier_A">
@@ -163,8 +163,13 @@ let tier_a = new Vue({
           </table>
         </div>
 
-        <!--tier a figures charts graphs-->
+        <!--tier a outputs-->
         <div style="margin-left:2px">
+          <div>
+            ws_KPI_GHG:
+            {{ Global.Tier_A.Water.ws_KPI_GHG() }}
+            kgCO2eq
+          </div>
           figures here TODO
           <ul>
             <li>ghg emissions by system</li>

@@ -1195,6 +1195,8 @@ let Global={
 };
 
 //hotfix for wrapper equations so they don't appear incorrectly at variable.php
+/*
+*/
 Global.Water.wsa_KPI_GHG=function(){return Global.Water.Abstraction.wsa_KPI_GHG()};
 Global.Water.wst_KPI_GHG=function(){return Global.Water.Treatment.wst_KPI_GHG()};
 Global.Water.wsd_KPI_GHG=function(){return Global.Water.Distribution.wsd_KPI_GHG()};
@@ -1205,6 +1207,7 @@ Global.Water.ws_KPI_GHG =function(){return this.wsa_KPI_GHG()+this.wst_KPI_GHG()
 Global.Waste.ww_KPI_GHG =function(){return this.wwc_KPI_GHG()+this.wwt_KPI_GHG()+this.wwd_KPI_GHG()+this.ww_KPI_GHG_unt()};
 
 //extra object for opportunities added by Gary TODO
+/*
 Global.Opps={
   g_nrw_water_vol_dper              : 0,
   g_end_user_consumption_dper       : 0,
@@ -1216,27 +1219,4 @@ Global.Opps={
   g_ww_water_reuse_dper             : 0,
   g_ww_biogas_dper                  : 0,
 };
-
-/*DEFAULT VALUES FOR V3 DEVELOPMENT*/
-
-//level 1
-Global.Water.ws_resi_pop             = 1000; //people
-Global.Water.ws_serv_pop             =  900; //people
-Global.Waste.ww_resi_pop             = 2000; //people
-Global.Waste.Collection.wwc_conn_pop = 1900; //people
-Global.Waste.Treatment.wwt_serv_pop  = 1800; //people
-Global.Faecl.fs_resi_pop             = 100; //people
-Global.Faecl.fs_onsi_pop             =  90; //people
-
-//general info
-Global.General.conv_kwh_co2 = 0.7; //conversion factor for grid electricity (kgCO2/kWh)
-Global.General.prot_con     = 22;  //prot consumption                       (kg/person/year)
-Global.General.bod_pday     = 37;  //BOD5                                   (g/person/day)
-Global.General.bod_pday_fs  = 37;  //BOD5 in faecal sludge                  (g/person/day)
-
-//level 2 Water Abstraction
-Global.Water.Abstraction.wsa_nrg_cons = 1000; //kWh
-Global.Water.Abstraction.wsa_vol_conv =  500; //m3
-
-//level 2 Wastewater Treatment
-Global.Waste.Treatment.wwt_bod_infl = 100; //kg
+*/
