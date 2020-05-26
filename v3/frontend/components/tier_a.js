@@ -92,7 +92,8 @@ let tier_a = new Vue({
         <!--tier a inputs-->
         <div>
           <table>
-            <tbody v-for="level,key in Global.Tier_A">
+            <tbody v-for="level,key in Global.Tier_A"
+            >
               <tr :style="'color:white;background:'+Structure.find(s=>s.level==key).color">
                 <td colspan=3>
                   <img :src="'frontend/img/'+Structure.find(s=>s.level==key).alias+'.png'"
@@ -111,7 +112,7 @@ let tier_a = new Vue({
 
               <!--tier a inputs-->
               <tr
-                v-if="typeof(val)=='number' && Global.Configuration.ActiveStages[Structure.find(s=>s.level==key).alias]"
+                v-if="(typeof(val)=='number' || typeof(val)=='boolean') && Global.Configuration.ActiveStages[Structure.find(s=>s.level==key).alias]"
                 v-for="val,code in level"
               >
                 <!--tier a input description-->
@@ -165,11 +166,31 @@ let tier_a = new Vue({
 
         <!--tier a outputs-->
         <div style="margin-left:2px">
-          <div>
-            ws_KPI_GHG:
-            {{ Global.Tier_A.Water.ws_KPI_GHG() }}
-            kgCO2eq
-          </div>
+          <b>Tier A outputs (for drawing charts TODO)</b>:
+
+          <table>
+            <tbody v-for="obj,level in Global.Tier_A"
+              v-if="Global.Configuration.ActiveStages[Structure.find(s=>s.level==level).alias]"
+            >
+              <tr>
+                <th colspan=3>{{ translate(level) }}</th>
+              </tr>
+              <tr v-for="fx,key in Global.Tier_A[level]" v-if="typeof(fx)=='function'">
+                <td>
+                  <b>
+                    {{key}}:
+                  </b>
+                </td>
+                <td>
+                  <span v-html="format(Global.Tier_A[level][key]())"></span>
+                </td>
+                <td>
+                  <span v-html="Info[key] ? Info[key].unit.prettify() : 'no unit'"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
           figures here TODO
           <ul>
             <li>ghg emissions by system</li>

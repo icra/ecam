@@ -7,6 +7,7 @@
 */
 
 let Info={
+  ww_sludge_disposal_method:{magnitude:"Option",unit:"disposal method"},
   fs_serv_pop:{magnitude:"People",unit:"people"},
 
   //wst pump efficiency

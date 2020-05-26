@@ -10,6 +10,16 @@ let Tables = {
       "Natural Gas"     :{value:2,EFCH4:{engines:10,vehicles:92},EFN2O:{engines:0.1,vehicles:0.2},EFCO2:56100,FD:0.75,NCV:48.0},
     },
 
+  //tier a select sludge disposal method
+  "ww_sludge_disposal_method":{
+    "None":{value:0},
+    "comp":{value:1},
+    "inc":{value:2},
+    "app":{value:3},
+    "land":{value:4},
+    "stock":{value:5},
+  },
+
   //L1 WS
 	//wsa
     "wsa_pmp_type":{
@@ -74,7 +84,7 @@ let Tables = {
 
 	//wwt
     "wwt_type_tre":{
-      "Select treatment type":{value:0,                            ch4_efac:0,     bod_rmvd_as_sludge_estm:0},
+      "Select treatment type":{value:0,                            ch4_efac:0,     bod_rmvd_as_sludge_estm:0   },
       "Activated Sludge - Well managed":{value:1,                  ch4_efac:0,     bod_rmvd_as_sludge_estm:0.65},
       "Activated Sludge - Minor poorly aerated zones":{value:2,    ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
       "Activated Sludge - Some aerated zones":{value:3,            ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.65},

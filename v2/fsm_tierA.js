@@ -1,5 +1,6 @@
 function apply_fsm_estimations(){
   console.log('applying estimations to FSM');
+
   //order matters
   /*FSC*/{
     let fsc=Global.Faecl.Containment;

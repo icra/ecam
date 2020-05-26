@@ -4,7 +4,7 @@
 
 //components
 ecam_logo.visible    = 1;
-linear_menu.visible  = 0;
+linear_menu.visible  = 1;
 sidebar.visible      = 0;
 
 //views

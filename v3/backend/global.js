@@ -1095,10 +1095,10 @@ let Global={
         },
 
       //dumping emissions
-        "fsr_vol_dumping":0,  //volume dumped
-        "fsr_ch4_efac_dumping":0,     //emission factor depending on dumping pathway
-        "fsr_dumping_pth":0,  //dumping pathway
-        "fsr_bod_conc_fs":0,  //[BOD] in FS
+        "fsr_vol_dumping":0,      //volume dumped
+        "fsr_ch4_efac_dumping":0, //emission factor depending on dumping pathway
+        "fsr_dumping_pth":0,      //dumping pathway
+        "fsr_bod_conc_fs":0,      //[BOD] in FS
         fsr_KPI_GHG_dumping_n2o:function(){//<br>
           return this.fsr_vol_dumping*this.fsr_n2o_effl*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
         },
