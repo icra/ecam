@@ -285,7 +285,7 @@ let Tier_A = {
           return (this.fst_bod_infl()-this.fst_bod_slud()-this.fst_bod_effl())*this.fst_ch4_efac()*Cts.ct_ch4_eq.value;
         },
         fst_KPI_GHG_tre_n2o(){
-          return 0; //to be defined (TBD)
+          return 0; //to be defined (TBD TODO)
         },
 
       //fst ghg biogas
