@@ -1,7 +1,7 @@
 //main view controller
-let ecam = {
+let ecam={
 
-  //views (==pages)
+  //views (==pages, Vue objects)
   views:{
     landing,
     get_started,
@@ -18,6 +18,8 @@ let ecam = {
     variable,
     constants,
     constant,
+    emission_tree,
+
     development,
     problems,
     translation_problems,
@@ -51,11 +53,12 @@ let ecam = {
   hide_all(){
     Object.entries(this.views).forEach(([key,view])=>{
       //console.log(key);
-      if(view.constructor===Vue){
-        if(view.visible){
-          view.visible=false;
-        }
+      if(view.constructor===Vue && view.visible){
+        view.visible=false;
       }
     });
   },
 };
+
+//add onclick listener to avoid data loss if page is accidentally closed
+//TODO

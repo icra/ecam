@@ -3,19 +3,19 @@
 /*FRONTEND*/
 
 //components
-ecam_logo.visible    = 1;
-linear_menu.visible  = 1;
-sidebar.visible      = 0;
+ecam_logo.visible     = 1;
+linear_menu.visible   = 1;
+sidebar.visible       = 0;
 
-//views
-tier_a.visible       = 1;
-constants.visible    = 0;
-landing.visible      = 0;
-summary_ghg.visible  = 0;
-summary_nrg.visible  = 0;
-tier_b.visible       = 0;
-variable.visible     = 0;
-development.visible  = 0;
+emission_tree.visible = 1;
+tier_a.visible        = 0;
+constants.visible     = 0;
+landing.visible       = 0;
+summary_ghg.visible   = 0;
+summary_nrg.visible   = 0;
+tier_b.visible        = 0;
+variable.visible      = 0;
+development.visible   = 0;
 
 /*BACKEND*/
 Global.General.anyFuelEngines= 1;

@@ -1,3 +1,4 @@
+//helper functions for vue objects
 
 function go_to(level, sublevel){
   let possible_levels = Structure.filter(s=>!s.sublevel).map(s=>s.level);
@@ -107,7 +108,6 @@ function get_current_stage(code){
 }
 
 function get_variable_value(code){
-
   let current_stage = get_current_stage(code);
   if(!current_stage) return false;
 
@@ -139,4 +139,3 @@ function get_variable_type(code){
     default: throw new Error("variable type error");
   }
 }
-

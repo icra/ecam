@@ -108,7 +108,7 @@ Vue.component('input_ecam',{
     'current_stage',
   ],
 
-  data:function(){
+  data(){
     return{
       caption,
       variable,
@@ -123,6 +123,7 @@ Vue.component('input_ecam',{
       Questions,
     };
   },
+
   methods:{
     translate,
     format,

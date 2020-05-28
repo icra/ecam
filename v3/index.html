@@ -59,7 +59,7 @@
       <script src="frontend/vue/vue-dev.js"></script>
     <!--/libs-->
 
-    <!--load language tags-->
+    <!--load languages-->
     <script src="frontend/languages/translate.js"></script>
 
     <!--load frontend utils-->
@@ -75,7 +75,6 @@
     </div>
   </div>
 </div>
-
 <script>
   new Vue({
     el:"#loading",
@@ -112,6 +111,7 @@
   <div id=constant             ></div> <!--constant              VIEW-->
   <div id=constants            ></div> <!--constants             VIEW-->
   <div id=development          ></div> <!--development           VIEW-->
+  <div id=emission_tree        ></div> <!--emission tree         VIEW-->
 
   <!--TODO-->
   <div id=problems             ></div> <!--problems              VIEW-->
@@ -122,45 +122,54 @@
   <div id=graphs               ></div> <!--graphs                VIEW-->
 </div>
 
-<!--temporal: utils-->
-<script src="frontend/js/utils.js"></script>
+<!--load vue objects-->
+  <!--utils: helper functions-->
+  <script src="frontend/js/utils.js"></script>
 
-<!--components-->
-<script src="frontend/components/ecam_logo.js"></script>
-<script src="frontend/components/sidebar.js"></script>
-<script src="frontend/components/caption.js"></script>
-<script src="frontend/components/linear_menu.js"></script>
-<script src="frontend/components/input-ecam.js"></script>
-<script src="frontend/components/inputs-involved-table.js"></script>
+  <!--elements (Vue objects)-->
+  <script src="frontend/components/ecam_logo.js"></script>
+  <script src="frontend/components/sidebar.js"></script>
+  <script src="frontend/components/caption.js"></script>
+  <script src="frontend/components/linear_menu.js"></script>
+  <script src="frontend/components/input-ecam.js"></script>
+  <script src="frontend/components/inputs-involved-table.js"></script>
 
-<!--views-->
-<script src="frontend/components/variable.js"></script>
-<script src="frontend/components/landing.js"></script>
-<script src="frontend/components/about.js"></script>
-<script src="frontend/components/help.js"></script>
-<script src="frontend/components/get_started.js"></script>
-<script src="frontend/components/configuration.js"></script>
-<script src="frontend/components/countries.js"></script>
-<script src="frontend/components/gwp_table.js"></script>
-<script src="frontend/components/population.js"></script>
-<script src="frontend/components/tier_a.js"></script>
-<script src="frontend/components/tier_b.js"></script>
-<script src="frontend/components/summary_ghg.js"></script>
-<script src="frontend/components/summary_nrg.js"></script>
-<script src="frontend/components/constant.js"></script>
-<script src="frontend/components/constants.js"></script>
+  <!--views (Vue objects)-->
+  <script src="frontend/components/variable.js"></script>
+  <script src="frontend/components/landing.js"></script>
+  <script src="frontend/components/about.js"></script>
+  <script src="frontend/components/help.js"></script>
+  <script src="frontend/components/get_started.js"></script>
+  <script src="frontend/components/configuration.js"></script>
+  <script src="frontend/components/countries.js"></script>
+  <script src="frontend/components/gwp_table.js"></script>
+  <script src="frontend/components/population.js"></script>
+  <script src="frontend/components/tier_a.js"></script>
+  <script src="frontend/components/tier_b.js"></script>
+  <script src="frontend/components/summary_ghg.js"></script>
+  <script src="frontend/components/summary_nrg.js"></script>
+  <script src="frontend/components/constant.js"></script>
+  <script src="frontend/components/constants.js"></script>
+  <script src="frontend/components/emission_tree.js"></script>
 
-<!--development TODO-->
-<script src="frontend/components/development.js"></script>
+  <!--development views TODO-->
+  <script src="frontend/components/development.js"></script>
 
-<!--default setting on reload-->
-<script src="frontend/defaults.js"></script>
+  <!--default settings on reload-->
+  <script src="frontend/defaults.js"></script>
 
-<script src="main.js"></script>
+  <!--main ecam view controller-->
+  <script src="main.js"></script>
+<!--/load vue objects-->
 
-<!--sidebar onclick listeners that hide the sidebar-->
-<script>
-
-  //add onclise listener to avoid data loss if page is accidentally closed
-  //TODO
-</script>
+<style>
+  #emission_tree {
+    padding:1em;
+  }
+  #emission_tree details {
+    padding-left:10px;
+  }
+  #emission_tree details summary {
+    cursor:pointer;
+  }
+</style>
