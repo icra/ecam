@@ -130,6 +130,14 @@ let linear_menu = new Vue({
           @mouseout="caption.hide()"
         >
         <img
+          :class="'l1 '+(current_view=='emission_tree'?'selected':'')"
+          src=frontend/img/all-emissions.png
+          onclick="ecam.show('emission_tree')"
+          @mousemove="caption.show($event, translate('All GHG emissions'))"
+          @mouseout="caption.hide()"
+          style="transform: rotate(-90deg)"
+        >
+        <img
           :class="'l1 '+(current_view=='summary_nrg'?'selected':'')"
           src=frontend/img/energy.png
           onclick="ecam.show('summary_nrg')"

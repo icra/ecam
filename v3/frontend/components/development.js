@@ -106,7 +106,7 @@ let translation_problems=new Vue({
   },
 
   template:`
-    <div id=translation_problems>
+    <div id=translation_problems v-if="visible">
       translation problem finder
     </div>
   `,
@@ -121,7 +121,7 @@ let validate_json=new Vue({
   },
 
   template:`
-    <div id=validate_json>
+    <div id=validate_json v-if="visible">
       validate json
       <!--current json-->include'currentJSON.php'
     </div>
@@ -136,7 +136,7 @@ let data_structure_viewer=new Vue({
   },
 
   template:`
-    <div id=data_structure_viewer>
+    <div id=data_structure_viewer v-if="visible">
       data_structure_viewer
     </div>
   `,
@@ -150,7 +150,7 @@ let benchmarks=new Vue({
   },
 
   template:`
-    <div id=benchmarks>
+    <div id=benchmarks v-if="visible">
       benchmarks
     </div>
   `,
@@ -164,11 +164,8 @@ let graphs=new Vue({
   },
 
   template:`
-    <div id=graphs>
+    <div id=graphs v-if="visible">
       graphs
     </div>
   `,
 });
-
-/*
-*/
