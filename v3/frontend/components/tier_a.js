@@ -40,7 +40,7 @@ let tier_a = new Vue({
             {{translate('assessment_period')}}
           </a>:
           <span>
-            {{ format(Global.General.Days()) }}
+            {{ format(Global.Days()) }}
           </span>
           <span>
             {{ translate('days') }}
@@ -53,7 +53,7 @@ let tier_a = new Vue({
             {{translate('conversion_factor')}}
           </a>:
           <span>
-            {{format(Global.General.conv_kwh_co2)}}
+            {{format(Global.conv_kwh_co2)}}
           </span>
           <span>
             kg CO<sub>2</sub>eq/kWh
@@ -66,7 +66,7 @@ let tier_a = new Vue({
             {{translate('Annual_protein_consumption')}}
           </a>:
           <span>
-            {{format(Global.General.prot_con)}}
+            {{format(Global.prot_con)}}
           </span>
           <span>
             kg/{{ translate('person') }}/{{ translate('year') }}
@@ -79,7 +79,7 @@ let tier_a = new Vue({
             {{translate('bod_pday_descr')}}
           </a>:
           <span>
-            {{format(Global.General.bod_pday)}}
+            {{format(Global.bod_pday)}}
           </span>
           <span>
             kg/{{ translate('person') }}/{{ translate('day') }}

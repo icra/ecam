@@ -58,7 +58,34 @@ let ecam={
       }
     });
   },
+
+  //automated test
+  test(){
+    //visit every page
+    //test every equation TODO
+
+    //all questions to "yes"
+    Object.keys(Questions).forEach(key=>{
+      Global.Configuration.Questions[key] = 1;
+    });
+
+    this.show('landing');
+    this.show('get_started');
+    this.show('configuration');
+    this.show('countries');
+    this.show('population');
+    this.show('gwp_table');
+    this.show('about');
+    this.show('help');
+    this.show('tier_a');
+    Structure.forEach(s=>{
+      go_to(s.level, s.sublevel);
+    });
+    //TODO
+
+    return true;
+  },
 };
 
-//add onclick listener to avoid data loss if page is accidentally closed
+//onclose listener: avoid data loss if page is accidentally closed
 //TODO

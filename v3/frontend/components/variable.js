@@ -93,10 +93,7 @@ let variable = new Vue({
             <div v-if="localization">
               &larr;
 
-              <a v-if="localization.level=='General'" @click="go_to('General')">
-                {{translate('getStarted_general_info')}}
-              </a>
-              <span v-else>
+              <span>
                 <a @click="go_to(localization.level)">
                   {{ translate(localization.level) }}
                 </a>
@@ -144,7 +141,7 @@ let variable = new Vue({
           </th>
           <td>
             <div style="font-size:large">
-              {{ get_variable_type(id).ucfirst() }}
+              {{ get_variable_type(id) ? get_variable_type(id).ucfirst() : 'Error' }}
             </div>
 
             <!--variable show formula and inputs involved-->
@@ -154,7 +151,7 @@ let variable = new Vue({
                   <span style="color:#606">{{ translate('variable_formula') }}</span>:
                 </div>
                 <div
-                  v-html="Formulas.prettify(get_current_stage(id)[id].toString())"
+                  v-html="Formulas.prettify(Global[id].toString())"
                   style="
                     padding:5px 10px;
                     background:rgb(238,238,238);

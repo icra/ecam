@@ -50,7 +50,7 @@ let summary_ghg = new Vue({
       let stage = this.Global[level][sublevel];
 
       //if no emission, end
-      if(!stage[code]()){
+      if(!this.Global[code]()){
         div.innerHTML += "<div><small>~"+translate('No emissions')+"</small></div>";
         return;
       }
@@ -62,9 +62,9 @@ let summary_ghg = new Vue({
       table.style.width = "100%";
       div.appendChild(table);
 
-      for(var field in stage){
+      for(let field in stage.equations){
         if(field.search('_KPI_GHG_')+1) {
-          let value = stage[field](); //kgCO2
+          let value = this.Global[field](); //kgCO2
           if(!value){continue}
           let newRow = table.insertRow(-1);
           newRow.insertCell(-1).innerHTML = translate(field+"_descr").prettify();
@@ -81,12 +81,12 @@ let summary_ghg = new Vue({
       <!--summary ghg title-->
       <h1 style="text-align:center">
         <div>
-          <span>{{ Global.General.Name }}</span> &mdash;
+          <span>{{ Global.Name }}</span> &mdash;
           <span>{{ translate("GHG Emissions Summary (Overview)") }}</span> &mdash;
           <span>{{ translate("assessment_period") }}:</span>
           <span>
-             <span>{{format(Global.General.Days( )) }}</span> {{ translate("days")  }}
-            (<span>{{format(Global.General.Years()) }}</span> {{ translate("years") }})
+             <span>{{format(Global.Days( )) }}</span> {{ translate("days")  }}
+            (<span>{{format(Global.Years()) }}</span> {{ translate("years") }})
           </span>
         </div>
       </h1>
@@ -111,12 +111,12 @@ let summary_ghg = new Vue({
               <ul>
                 <!--summary ghg total kg CO2-->
                 <li>
-                  {{format( Global.General.TotalGHG()) }}
+                  {{format( Global.TotalGHG()) }}
                   <span class=unit>kgCO<sub>2</sub>eq</span>
                 </li>
                 <!--summary ghg kg CO2 per year-->
                 <li>
-                  {{format( Global.General.TotalGHG()/Global.General.Years() )}}
+                  {{format( Global.TotalGHG()/Global.Years() )}}
                   <span class=unit>kgCO<sub>2</sub>eq/{{translate('year')}}</span>
                 </li>
               </ul>
@@ -147,15 +147,15 @@ let summary_ghg = new Vue({
                       </div>
                     </td>
                     <td class=number v-html="format(
-                        Global[l1.level][l1.prefix+'_KPI_GHG']()
+                        Global[l1.prefix+'_KPI_GHG']()
                       )
                     "></td>
                     <td class=number v-html="format(
-                        Global[l1.level][l1.prefix+'_KPI_GHG']() / Global.General.Years()
+                        Global[l1.prefix+'_KPI_GHG']() / Global.Years()
                       )
                     "></td>
                     <td class=number v-html="format(
-                        Global[l1.level][l1.prefix+'_KPI_GHG']() / Global.General.Years() / get_variable_value(l1.prefix+'_serv_pop')
+                        Global[l1.prefix+'_KPI_GHG']() / Global.Years() / get_variable_value(l1.prefix+'_serv_pop')
                       )
                     "></td>
                   </tr>
@@ -180,15 +180,15 @@ let summary_ghg = new Vue({
                       </div>
                     </td>
                     <td class=number v-html="format(
-                        Global[l2.level][l2.sublevel][l2.prefix+'_KPI_GHG']()
+                        Global[l2.prefix+'_KPI_GHG']()
                       )
                     "></td>
                     <td class=number v-html="format(
-                        Global[l2.level][l2.sublevel][l2.prefix+'_KPI_GHG']() / Global.General.Years()
+                        Global[l2.prefix+'_KPI_GHG']() / Global.Years()
                       )
                     "></td>
                     <td class=number v-html="format(
-                        Global[l2.level][l2.sublevel][l2.prefix+'_KPI_GHG']() / Global.General.Years() / get_variable_value(l1.prefix+'_serv_pop')
+                        Global[l2.prefix+'_KPI_GHG']() / Global.Years() / get_variable_value(l1.prefix+'_serv_pop')
                       )
                     "></td>
                   </tr>
@@ -201,15 +201,15 @@ let summary_ghg = new Vue({
                       </a>
                     </td>
                     <td class=number v-html="format(
-                        Global.Waste.ww_KPI_GHG_unt()
+                        Global.ww_KPI_GHG_unt()
                       )
                     "></td>
                     <td class=number v-html="format(
-                        Global.Waste.ww_KPI_GHG_unt() / Global.General.Years()
+                        Global.ww_KPI_GHG_unt() / Global.Years()
                       )
                     "></td>
                     <td class=number v-html="format(
-                        Global.Waste.ww_KPI_GHG_unt() / Global.General.Years() / Global.Waste.ww_serv_pop()
+                        Global.ww_KPI_GHG_unt() / Global.Years() / Global.ww_serv_pop()
                       )
                     "></td>
                   </tr>
@@ -239,16 +239,16 @@ let summary_ghg = new Vue({
                 </a>
               </td>
               <td class=number>
-                <span v-html="format(Global.Waste.ww_SL_ghg_unc())"></span>
+                <span v-html="format(Global.ww_SL_ghg_unc())"></span>
               </td>
               <td class=number>
                 <span v-html="format(
-                  Global.Waste.ww_SL_ghg_unc() / Global.General.Years()
+                  Global.ww_SL_ghg_unc() / Global.Years()
                 )"></span>
               </td>
               <td class=number>
                 <span v-html="format(
-                  Global.Waste.ww_SL_ghg_unc() / Global.General.Years() / Global.Waste.ww_serv_pop()
+                  Global.ww_SL_ghg_unc() / Global.Years() / Global.ww_serv_pop()
                 )"></span>
               </td>
             </tr>
@@ -267,7 +267,7 @@ let summary_ghg = new Vue({
                   {{ translate("ww_GHG_avoided_descr") }}
                 </a>
                 <div>
-                  <span v-html="format( Global.Waste.ww_GHG_avoided() )">
+                  <span v-html="format( Global.ww_GHG_avoided() )">
                   </span>
                 </div>
                 <small>
@@ -285,7 +285,7 @@ let summary_ghg = new Vue({
                 </a>
               </td>
               <td>
-                <span v-html="format( Global[obj.level][obj.sublevel][obj.code]() )">
+                <span v-html="format( Global[obj.code]() )">
                 </span>
               </td>
             </tr>

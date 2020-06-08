@@ -20,7 +20,7 @@ let get_started = new Vue({
             {{translate('getStarted_table_name')}}
           </th>
           <td>
-            <input v-model="Global.General.Name">
+            <input v-model="Global.Name">
           </td>
         </tr>
         <tr>
@@ -28,7 +28,7 @@ let get_started = new Vue({
             {{translate('getStarted_table_start')}}
           </th>
           <td>
-            <input type=date v-model="Global.General.AssessmentPeriodStart">
+            <input type=date v-model="Global.AssessmentPeriodStart">
           </td>
         </tr>
         <tr>
@@ -36,22 +36,22 @@ let get_started = new Vue({
             {{translate('getStarted_table_end')}}
           </th>
           <td>
-            <input type=date v-model="Global.General.AssessmentPeriodEnd">
+            <input type=date v-model="Global.AssessmentPeriodEnd">
           </td>
         </tr>
         <tr>
           <th>{{translate('getStarted_table_period')}}</th>
-          <td>{{Global.General.Days()}} {{translate('days')}}</td>
+          <td>{{Global.Days()}} {{translate('days')}}</td>
         </tr>
         <tr>
           <th>{{translate('currency')}}</th>
           <td>
             <div style="color:black;font-weight:bold">
-              {{Global.General.Currency}}
+              {{Global.Currency}}
             </div>
             {{translate('configuration_new_currency')}}:
             <input
-              v-model="Global.General.Currency"
+              v-model="Global.Currency"
               size=3 maxlength=3 placeholder="ccc"
             >
           </td>
@@ -60,7 +60,7 @@ let get_started = new Vue({
           <th>{{translate('getStarted_table_comments')}}</th>
           <td>
             <textarea
-              v-model="Global.General.Comments"
+              v-model="Global.Comments"
               :placeholder="translate('getStarted_max_200')"
               rows=5 cols=50 maxlength=200
             ></textarea>

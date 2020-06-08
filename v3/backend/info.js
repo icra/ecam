@@ -7,6 +7,14 @@
 */
 
 let Info={
+  //tier A: new in v3
+  ws_KPI_GHG_elec:{magnitude:"Mass",unit:"kgCO2eq"},
+  ws_KPI_GHG_fuel:{magnitude:"Mass",unit:"kgCO2eq"},
+  ws_KPI_GHG_fuel_co2:{magnitude:"Mass",unit:"kgCO2eq"},
+  ws_KPI_GHG_fuel_n2o:{magnitude:"Mass",unit:"kgCO2eq"},
+  ws_KPI_GHG_fuel_ch4:{magnitude:"Mass",unit:"kgCO2eq"},
+
+
   ww_sludge_disposal_method:{magnitude:"Option",unit:"disposal method"},
   fs_serv_pop:{magnitude:"People",unit:"people"},
 

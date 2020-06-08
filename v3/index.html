@@ -68,27 +68,29 @@
   <!--/load frontend-->
 </head><body>
 
-<div id=loading>
-  <div v-if="ready()==false">
-    <div style="font-size:x-large">
-      loading ecam tool...
+<!--loading indicator-->
+  <div id=loading>
+    <div v-if="ready()==false">
+      <div style="font-size:x-large">
+        loading ecam tool...
+      </div>
     </div>
   </div>
-</div>
-<script>
-  new Vue({
-    el:"#loading",
-    data:{
-      Languages,
-    },
-    methods:{
-      ready(){
-        return this.Languages.ready;
+  <script>
+    new Vue({
+      el:"#loading",
+      data:{
+        Languages,
       },
-    },
-  });
-</script>
+      methods:{
+        ready(){
+          return this.Languages.ready;
+        },
+      },
+    });
+  </script>
 
+<!--ecam all elements/views/components-->
 <div>
   <div id=ecam_logo            ></div> <!--ecam logo          ELEMENT-->
   <div id=caption              ></div> <!--caption            ELEMENT-->
@@ -123,7 +125,7 @@
 </div>
 
 <!--load vue objects-->
-  <!--utils: helper functions-->
+  <!-- helper functions-->
   <script src="frontend/js/utils.js"></script>
 
   <!--elements (Vue objects)-->
@@ -152,24 +154,12 @@
   <script src="frontend/components/constants.js"></script>
   <script src="frontend/components/emission_tree.js"></script>
 
-  <!--development views TODO-->
+  <!--TODO-->
   <script src="frontend/components/development.js"></script>
 
-  <!--default settings on reload-->
-  <script src="frontend/defaults.js"></script>
+  <!--default settings on reload (for development)-->
+  <script src="defaults.js"></script>
 
   <!--main ecam view controller-->
-  <script src="main.js"></script>
+  <script src="frontend/main.js"></script>
 <!--/load vue objects-->
-
-<style>
-  #emission_tree {
-    padding:1em;
-  }
-  #emission_tree details {
-    padding-left:10px;
-  }
-  #emission_tree details summary {
-    cursor:pointer;
-  }
-</style>

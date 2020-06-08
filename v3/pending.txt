@@ -18,6 +18,7 @@ PENDING TASKS
   - reimplement benchmarks
 
 * reporting tool (new feature)
+* history, back button (new feature)
 
 - Fetching language files asyncronously does not work for offline use (CORS is
   not compatible with file protocol, find alternative way to loading files

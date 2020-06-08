@@ -72,7 +72,6 @@ let Formulas={
     result = result.replace(/Water./g,"");
     result = result.replace(/Waste./g,"");
     result = result.replace(/Faecl./g,"");
-    result = result.replace(/General./g,"");
     result = result.replace(/Abstraction./g,"");
     result = result.replace(/Treatment./g,"");
     result = result.replace(/Distribution./g,"");

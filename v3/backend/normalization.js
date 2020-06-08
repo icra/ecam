@@ -3,8 +3,8 @@
 //variables normalized are in the first output table in tier b
 let Normalization={
   Water:{
-    resi_pop: function(emission){ return emission/Global.Water.ws_resi_pop/Global.General.Years()||0},
-    serv_pop: function(emission){ return emission/Global.Water.ws_serv_pop/Global.General.Years()||0},
+    resi_pop: function(emission){ return emission/Global.Water.ws_resi_pop/Global.Years()||0},
+    serv_pop: function(emission){ return emission/Global.Water.ws_serv_pop/Global.Years()||0},
     volume:   function(emission){ return emission/Global.Water.Distribution.wsd_auth_con||0},
     energy:   function(emission){ return emission/Global.Water.ws_nrg_cons()||0},
 
@@ -25,8 +25,8 @@ let Normalization={
   },
 
   Waste:{
-    resi_pop: function(emission){ return emission/Global.Waste.ww_resi_pop/Global.General.Years()||0},
-    serv_pop: function(emission){ return emission/Global.Waste.ww_serv_pop()/Global.General.Years()||0},
+    resi_pop: function(emission){ return emission/Global.Waste.ww_resi_pop/Global.Years()||0},
+    serv_pop: function(emission){ return emission/Global.ww_serv_pop()/Global.Years()||0},
     volume:   function(emission){ return emission/Global.Waste.Treatment.wwt_vol_trea||0},
     energy:   function(emission){ return emission/Global.Waste.ww_nrg_cons()||0},
 
@@ -47,7 +47,7 @@ let Normalization={
   },
 
   Faecl:{
-    resi_pop: function(emission){return emission/Global.Faecl.fs_resi_pop/Global.General.Years()||0},
-    serv_pop: function(emission){return emission/Global.Faecl.fs_onsi_pop/Global.General.Years()||0},
+    resi_pop: function(emission){return emission/Global.Faecl.fs_resi_pop/Global.Years()||0},
+    serv_pop: function(emission){return emission/Global.Faecl.fs_onsi_pop/Global.Years()||0},
   },
 };

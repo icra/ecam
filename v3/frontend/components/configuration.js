@@ -65,7 +65,7 @@ let configuration = new Vue({
           <fieldset>
             <legend>{{translate('select_country')}}
               <select
-                v-model="Global.General.Country"
+                v-model="Global.Country"
                 @change="set_variables_from_selected_country()"
               >
                 <option value="false">--select--</option>
@@ -80,7 +80,7 @@ let configuration = new Vue({
               <tr>
                 <td v-html="translate('conv_kwh_co2_descr')">
                 <td>
-                  <input v-model.number="Global.General.conv_kwh_co2">
+                  <input v-model.number="Global.conv_kwh_co2">
                 </td>
                 <td>
                   kg<sub>CO<sub>2</sub></sub>/kWh
@@ -89,7 +89,7 @@ let configuration = new Vue({
               <tr>
                 <td v-html="translate('prot_con_descr')">
                 <td>
-                  <input v-model.number="Global.General.prot_con">
+                  <input v-model.number="Global.prot_con">
                 </td>
                 <td>
                   kg/{{translate('person')}}/{{translate('year')}}
@@ -98,7 +98,7 @@ let configuration = new Vue({
               <tr>
                 <td v-html="translate('bod_pday_descr')">
                 <td>
-                  <input v-model.number="Global.General.bod_pday">
+                  <input v-model.number="Global.bod_pday">
                 </td>
                 <td>
                   g/{{translate('person')}}/{{translate('day')}}
@@ -107,7 +107,7 @@ let configuration = new Vue({
               <tr>
                 <td v-html="translate('bod_pday_fs_descr')">
                 <td>
-                  <input v-model.number="Global.General.bod_pday_fs">
+                  <input v-model.number="Global.bod_pday_fs">
                 </td>
                 <td>
                   g/{{translate('person')}}/{{translate('day')}}
@@ -124,7 +124,7 @@ let configuration = new Vue({
               {{translate('no')}}
               <input type=radio
                 name=anyFuelEngines
-                v-model.number="Global.General.anyFuelEngines"
+                v-model.number="Global.anyFuelEngines"
                 value=0
                 @change=answerAnyFuelEngines()
               >
@@ -133,7 +133,7 @@ let configuration = new Vue({
               {{translate('yes')}}
               <input type=radio
                 name=anyFuelEngines
-                v-model.number="Global.General.anyFuelEngines"
+                v-model.number="Global.anyFuelEngines"
                 value=1
                 @change=answerAnyFuelEngines()
               >
@@ -291,9 +291,9 @@ let configuration = new Vue({
 
     //set variables from selected country
     set_variables_from_selected_country(){
-      let country = Global.General.Country;
-      Global.Configuration.Selected.prot_con=country;
-      //variables in Global.General to be changed:
+      let country = Global.Country;
+
+      //variables in Global.to be changed:
       [ 'conv_kwh_co2',
         'prot_con',
         'bod_pday',
@@ -302,14 +302,14 @@ let configuration = new Vue({
         //put bod_pday value in faecal sludge as well
         let key2 = key;
         if(key=="bod_pday_fs"){ key2="bod_pday"; }
-        Global.General[key]=Countries[country][key2];
+        Global[key]=Countries[country][key2];
       });
     },
 
     //answer fuel engines question TODO refactor using Structure
     answerAnyFuelEngines(){
-      let ans=parseInt(Global.General.anyFuelEngines);
-      Global.General.anyFuelEngines=ans;
+      let ans=parseInt(Global.anyFuelEngines);
+      Global.anyFuelEngines=ans;
       Global.Configuration.Questions.wsa_engines=ans;
       Global.Configuration.Questions.wst_engines=ans;
       Global.Configuration.Questions.wsd_engines=ans;

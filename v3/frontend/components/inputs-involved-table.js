@@ -4,7 +4,7 @@
 Vue.component('inputs_involved_table',{
   template:`<div>
     <table class=inputs_involved>
-      <tbody v-for="match in Formulas.ids_per_formula(current_stage[code].toString())">
+      <tbody v-for="match in Formulas.ids_per_formula(Global[code].toString())">
         <!--input involved is a constant-->
         <tr v-if="Cts[match]" :title="'CONSTANT: '+Cts[match].descr">
           <!--involved constant code-->
@@ -62,7 +62,6 @@ Vue.component('inputs_involved_table',{
 
   props:[
     'code',
-    'current_stage',
   ],
 
   data:function(){

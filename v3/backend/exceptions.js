@@ -2,8 +2,6 @@
   - 'exceptions' are inputs with a list of possible values that set the number
     what is different of normal dropdowns is that the user can also enter a
     number besides selecting an option.
-
-  - each selection is stored in Configuration.Selected
 */
 
 let Exceptions={
@@ -78,8 +76,3 @@ let Exceptions={
     table_field:function(){return "BOD_conc_FS"},
   },
 };
-
-//default values for exceptions
-Object.keys(Exceptions).forEach(key=>{Global.Configuration.Selected[key]=""});
-Global.Configuration.Selected.ww_ch4_efac_unt="Sea and aerobic water bodies";
-Global.Configuration.Selected.ww_ch4_efac_unc="Stagnant sewer and anaerobic water bodies";

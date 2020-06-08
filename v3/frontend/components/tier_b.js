@@ -60,7 +60,7 @@ let tier_b = new Vue({
         "
       >
         <h1>
-          <a onclick="ecam.show('get_started')">{{Global.General.Name}}</a>
+          <a onclick="ecam.show('get_started')">{{Global.Name}}</a>
           <span style="color:black">&rsaquo;</span>
           <a onclick="linear_menu.go_to(tier_b.level)"
             :style="'cursor:pointer;color:'+get_level_color(level)"
@@ -111,8 +111,8 @@ let tier_b = new Vue({
           <a onclick="ecam.show('get_started')">
             {{translate('assessment_period')}}:
             <b style=color:black>
-              <span :class="Global.General.Days()==0 ? 'warning' : ''">
-                {{format(Global.General.Days())}}
+              <span :class="Global.Days()==0 ? 'warning' : ''">
+                {{format(Global.Days())}}
               </span>
             </b>
             &emsp;
@@ -149,8 +149,8 @@ let tier_b = new Vue({
           <a onclick="ecam.show('population')">
             {{translate('ww_conn_pop_descr')}}:
             <b style=color:black>
-              <span :class="Global.Waste.ww_conn_pop()==0 ? 'warning' : ''">
-                {{format(Global.Waste.ww_conn_pop())}}
+              <span :class="Global.ww_conn_pop()==0 ? 'warning' : ''">
+                {{format(Global.ww_conn_pop())}}
               </span>
             </b>
           </a>
@@ -173,8 +173,8 @@ let tier_b = new Vue({
             <a onclick="ecam.show('population')">
               {{translate('ww_serv_pop_descr')}}:
               <b style=color:black>
-                <span :class="Global.Waste.ww_serv_pop()==0 ? 'warning' : ''">
-                  {{format(Global.Waste.ww_serv_pop())}}
+                <span :class="Global.ww_serv_pop()==0 ? 'warning' : ''">
+                  {{format(Global.ww_serv_pop())}}
                 </span>
               </b>
             </a>
@@ -197,8 +197,8 @@ let tier_b = new Vue({
           <a onclick="ecam.show('configuration')">
             {{translate('conv_kwh_co2_descr')}}:
             <b style=color:black>
-              <span :class="Global.General.conv_kwh_co2==0 ? 'warning' : ''">
-                {{format(Global.General.conv_kwh_co2)}}
+              <span :class="Global.conv_kwh_co2==0 ? 'warning' : ''">
+                {{format(Global.conv_kwh_co2)}}
               </span>
             </b>
             <span class=number v-html="Info.conv_kwh_co2.unit"></span>
@@ -346,11 +346,11 @@ let tier_b = new Vue({
             </thead>
             <tbody>
               <tr
-                v-for="key in Object.keys(current_stage)"
+                v-for="key in current_stage.equations"
                 v-if="
-                  typeof(current_stage[key])=='function'
-                  && (1+key.search('_KPI_GHG'))
-                  && Questions.is_hidden(key)==false
+                  (key.search('_KPI_GHG')+1)
+                  &&
+                  Questions.is_hidden(key)==false
                 "
               >
                 <td
@@ -363,8 +363,8 @@ let tier_b = new Vue({
 
                 <!--output value-->
                 <td
-                  v-html="format(current_stage[key]())"
-                  @mousemove="caption.show($event, Formulas.prettify(current_stage[key]))"
+                  v-html="format(Global[key]())"
+                  @mousemove="caption.show($event, Formulas.prettify(Global[key]))"
                   @mouseout="caption.hide()"
                   style="text-align:right"
                 ></td>
@@ -372,19 +372,19 @@ let tier_b = new Vue({
                 <!--emission per year and serviced population-->
                 <td
                   v-if="Normalization[level] && Normalization[level].serv_pop"
-                  v-html="format( Normalization[level].serv_pop(current_stage[key]()))"
+                  v-html="format( Normalization[level].serv_pop(Global[key]()))"
                   style="text-align:right"
                 ></td>
 
                 <!--emission per m3 of water treated-->
                 <td
                   v-if="Normalization[level] && Normalization[level].volume && sublevel"
-                  v-html="format( Normalization[level][sublevel].volume(current_stage[key]()))"
+                  v-html="format( Normalization[level][sublevel].volume(Global[key]()))"
                   style="text-align:right"
                 ></td>
                 <td
                   v-else-if="Normalization[level] && Normalization[level].volume && !sublevel"
-                  v-html="format( Normalization[level].volume(current_stage[key]()))"
+                  v-html="format( Normalization[level].volume(Global[key]()))"
                   style="text-align:right"
                 ></td>
               </tr>
@@ -413,10 +413,10 @@ let tier_b = new Vue({
             </tr>
             <tbody>
               <tr
-                v-for="key in Object.keys(current_stage)"
+                v-for="key in current_stage.equations"
                 v-if="
-                  typeof(current_stage[key])=='function' &&
-                  -1==key.search('_KPI_GHG') &&
+                  key.search('_KPI_GHG')==-1
+                  &&
                   Questions.is_hidden(key)==false
                 "
               >
@@ -430,8 +430,8 @@ let tier_b = new Vue({
 
                 <!--output value-->
                 <td
-                  v-html="format(current_stage[key]())"
-                  @mousemove="caption.show($event, Formulas.prettify(current_stage[key]))"
+                  v-html="format(Global[key]())"
+                  @mousemove="caption.show($event, Formulas.prettify(Global[key]))"
                   @mouseout="caption.hide()"
                   style="text-align:right"
                 ></td>

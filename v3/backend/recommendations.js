@@ -3,9 +3,9 @@ let Recommendations={
   /*FSM*/
     /*fsc*/
       //influent BOD
-      "fsc_bod_infl":function(){ return Global.General.bod_pday_fs/1000*Global.Faecl.fs_onsi_pop*Global.General.Days(); },
+      "fsc_bod_infl":function(){ return Global.bod_pday_fs/1000*Global.Faecl.fs_onsi_pop*Global.Days(); },
       //sludge emptied
-      "fsc_fslu_emp":function(){ return Cts.ct_fs_prod.value*Global.Faecl.fs_onsi_pop*Global.General.Days()/Global.Faecl.Containment.fsc_fdensity*Global.Faecl.Containment.fsc_cont_emp/100; },
+      "fsc_fslu_emp":function(){ return Cts.ct_fs_prod.value*Global.Faecl.fs_onsi_pop*Global.Days()/Global.Faecl.Containment.fsc_fdensity*Global.Faecl.Containment.fsc_cont_emp/100; },
       //BOD removed as FS
       "fsc_bod_rmvd":function(){ return Global.Faecl.Containment.fsc_fslu_emp*Global.Faecl.Containment.fsc_bod_conc_fs; },
     /*fst*/
@@ -20,29 +20,29 @@ let Recommendations={
       "fsr_vol_dumping":function(){return Global.Faecl.Containment.fsc_fslu_emp},
       //mass sent to landapp
       "fsr_mass_landapp":function(){//<br>
-        var fslu_typ_la=Tables.find('fsr_fslu_typ_la',Global.Faecl.Reuse.fsr_fslu_typ_la);//<br>
-        var total_solids=Tables.fsr_fslu_typ_la[fslu_typ_la].total_solids;//<br>
+        let fslu_typ_la=Tables.find('fsr_fslu_typ_la',Global.Faecl.Reuse.fsr_fslu_typ_la);//<br>
+        let total_solids=Tables.fsr_fslu_typ_la[fslu_typ_la].total_solids;//<br>
         return Global.Faecl.Containment.fsc_fslu_emp*Global.Faecl.Containment.fsc_fdensity*total_solids;//<br>
       },
       //mass sent to landfilling
       "fsr_mass_landfil":function(){//<br>
-        var fslu_typ_lf=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);//<br>
-        var total_solids=Tables.fsr_fslu_typ_lf[fslu_typ_lf].total_solids;//<br>
+        let fslu_typ_lf=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);//<br>
+        let total_solids=Tables.fsr_fslu_typ_lf[fslu_typ_lf].total_solids;//<br>
         return Global.Faecl.Containment.fsc_fslu_emp*Global.Faecl.Containment.fsc_fdensity*total_solids;//<br>
       },
       //N content of FS
       "fsr_la_N_cont":function(){//<br>
-        var fslu_typ=Tables.find('fsr_fslu_typ_la',Global.Faecl.Reuse.fsr_fslu_typ_la);//<br>
+        let fslu_typ=Tables.find('fsr_fslu_typ_la',Global.Faecl.Reuse.fsr_fslu_typ_la);//<br>
         return Tables.fsr_fslu_typ_la[fslu_typ].N_content;//<br>
       },
       //N content of FS
       "fsr_lf_N_cont":function(){//<br>
-        var fslu_typ=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);//<br>
+        let fslu_typ=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);//<br>
         return Tables.fsr_fslu_typ_lf[fslu_typ].N_content;//<br>
       },
       //TVS content of FS
       "fsr_lf_TVS":function(){//<br>
-        var fslu_typ=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);//<br>
+        let fslu_typ=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);//<br>
         return 100*Tables.fsr_fslu_typ_lf[fslu_typ].TVS;//<br>
       },
 
@@ -61,7 +61,7 @@ let Recommendations={
         let slu_disp=Tables.find('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);//<br>
         return Tables.wwt_slu_disp[slu_disp].la_N_cont;
       },
-      "wwt_biog_pro":function(){return Global.Waste.Treatment.wwt_serv_pop*Global.General.bod_pday*Global.General.Days()*Cts.ct_bod_kg.value*Cts.ct_biog_g.value/1000;},
+      "wwt_biog_pro":function(){return Global.Waste.Treatment.wwt_serv_pop*Global.bod_pday*Global.Days()*Cts.ct_bod_kg.value*Cts.ct_biog_g.value/1000;},
       "wwt_biog_fla":function(){//<br>
         if(Global.Configuration.Questions.wwt_valorizing_biogas){//<br>
           return 0;//<br>
@@ -71,16 +71,15 @@ let Recommendations={
       },
       "wwt_biog_val":function(){return Global.Waste.Treatment.wwt_biog_pro},
       "wwt_ch4_biog":function(){return 59},
-      "wwt_bod_infl":function(){return Global.General.bod_pday/1000*Global.Waste.ww_serv_pop()*Global.General.Days()},
+      "wwt_bod_infl":function(){return Global.bod_pday/1000*Global.ww_serv_pop()*Global.Days()},
       "wwt_bod_effl":function(){return 0.10*Global.Waste.Treatment.wwt_bod_infl},
       //SM
-      "wwt_mass_slu":function(){//<br>
-        if(Global.Configuration.Questions.wwt_producing_biogas){//<br>
-          var b=0.6;//<br>
-        }else{//<br>
-          var b=1;//<br>
-        }//<br>
-        return b*0.55*Global.General.bod_pday*Global.Waste.ww_serv_pop()*0.9*1e-3*1.176*Global.General.Days();//<br>
+      "wwt_mass_slu":function(){
+        let b=1;
+        if(Global.Configuration.Questions.wwt_producing_biogas){
+          b=0.6;
+        }
+        return b*0.55*Global.bod_pday*Global.ww_serv_pop()*0.9*1e-3*1.176*Global.Days();//<br>
       },
       "wwt_dryw_slu"      :function(){return 0.04*Global.Waste.Treatment.wwt_mass_slu},
       "wwt_mass_slu_sto"  :function(){return Global.Waste.Treatment.wwt_dryw_slu},

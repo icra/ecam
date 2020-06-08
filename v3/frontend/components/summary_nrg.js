@@ -20,12 +20,12 @@ let summary_nrg = new Vue({
       <!--summary nrg title-->
       <h1 style="text-align:center">
         <div>
-          <span>{{ Global.General.Name }}                               </span> &mdash;
+          <span>{{ Global.Name }}                               </span> &mdash;
           <span>{{ translate("Energy consumption Summary (Overview)") }}</span> &mdash;
           <span>{{ translate("assessment_period") }}:                   </span>
           <span>
-             <span>{{format(Global.General.Days( )) }}</span> {{ translate("days")  }}
-            (<span>{{format(Global.General.Years()) }}</span> {{ translate("years") }})
+             <span>{{format(Global.Days( )) }}</span> {{ translate("days")  }}
+            (<span>{{format(Global.Years()) }}</span> {{ translate("years") }})
           </span>
         </div>
       </h1>
@@ -50,12 +50,12 @@ let summary_nrg = new Vue({
               <ul>
                 <!--summary nrg total-->
                 <li>
-                  {{format( Global.General.TotalNRG()) }}
+                  {{format( Global.TotalNRG()) }}
                   <span class=unit>kWh</span>
                 </li>
                 <!--summary nrg total per year-->
                 <li>
-                  {{format( Global.General.TotalNRG()/Global.General.Years() )}}
+                  {{format( Global.TotalNRG()/Global.Years() )}}
                   <span class=unit>kWh/{{translate('year')}}</span>
                 </li>
               </ul>
@@ -86,15 +86,15 @@ let summary_nrg = new Vue({
                       </div>
                     </td>
                     <td class=number v-html="format(
-                        Global[l1.level][l1.prefix+'_nrg_cons']()
+                        Global[l1.prefix+'_nrg_cons']()
                       )
                     "></td>
                     <td class=number v-html="format(
-                        Global[l1.level][l1.prefix+'_nrg_cons']() / Global.General.Years()
+                        Global[l1.prefix+'_nrg_cons']() / Global.Years()
                       )
                     "></td>
                     <td class=number v-html="format(
-                        Global[l1.level][l1.prefix+'_nrg_cons']() / Global.General.Years() / get_variable_value(l1.prefix+'_serv_pop')
+                        Global[l1.prefix+'_nrg_cons']() / Global.Years() / get_variable_value(l1.prefix+'_serv_pop')
                       )
                     "></td>
                   </tr>
@@ -120,11 +120,11 @@ let summary_nrg = new Vue({
                       )
                     "></td>
                     <td class=number v-html="format(
-                        Global[l2.level][l2.sublevel][l2.prefix+'_nrg_cons'] / Global.General.Years()
+                        Global[l2.level][l2.sublevel][l2.prefix+'_nrg_cons'] / Global.Years()
                       )
                     "></td>
                     <td class=number v-html="format(
-                        Global[l2.level][l2.sublevel][l2.prefix+'_nrg_cons'] / Global.General.Years() / get_variable_value(l1.prefix+'_serv_pop')
+                        Global[l2.level][l2.sublevel][l2.prefix+'_nrg_cons'] / Global.Years() / get_variable_value(l1.prefix+'_serv_pop')
                       )
                     "></td>
                   </tr>

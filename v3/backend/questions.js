@@ -841,7 +841,6 @@ let Questions={
       folded:0,
     },
 
-
   //fsr
     "fsr_engines":{
       variables:[
@@ -1004,7 +1003,7 @@ Questions.get_questions=function(ubication) {
     if(typeof(this[question])=="function")continue;
 
     //skip fuel engines questions if anyFuelEngines is zero
-    if(Global.General.anyFuelEngines==0) {
+    if(Global.anyFuelEngines==0) {
       if(["wsa_engines",
         "wst_engines",
         "wsd_engines",
@@ -1021,7 +1020,7 @@ Questions.get_questions=function(ubication) {
     for(let i in this[question].variables){
       let code=this[question].variables[i];
       //check if code exists inside ubication
-      if(ubication[code]){
+      if(ubication[code]!=undefined){
         questions.push(question);
         break;
       }
