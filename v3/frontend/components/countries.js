@@ -44,7 +44,7 @@ let countries = new Vue({
         </tr>
         <tr
           v-for="country,name in Countries"
-          :class="Global.Country==name?'selected':''"
+          :class="Global.General.Country==name?'selected':''"
         >
           <td><b>{{name}}</b></td>
           <td class=number>{{country.conv_kwh_co2}}</td>

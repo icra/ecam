@@ -81,7 +81,7 @@ let summary_ghg = new Vue({
       <!--summary ghg title-->
       <h1 style="text-align:center">
         <div>
-          <span>{{ Global.Name }}</span> &mdash;
+          <span>{{ Global.General.Name }}</span> &mdash;
           <span>{{ translate("GHG Emissions Summary (Overview)") }}</span> &mdash;
           <span>{{ translate("assessment_period") }}:</span>
           <span>

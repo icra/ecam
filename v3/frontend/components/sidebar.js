@@ -20,7 +20,7 @@ let sidebar = new Vue({
       <!--sidebar system name-->
       <div class="header flex" style="padding:5px;justify-content:space-between">
         <div>{{translate("sidebar_mainMenu")}}</div>
-        <div>{{Global.Name}}          </div>
+        <div>{{Global.General.Name}}          </div>
       </div>
 
       <!--sidebar new open save clear buttons-->

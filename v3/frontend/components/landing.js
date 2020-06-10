@@ -78,7 +78,7 @@ let landing = new Vue({
                 <button class="button save" onclick=saveToFile() disabled>
                   {{translate('save_as')}}
                   <span id=save_as_filename>
-                    "{{Global.Name}}.json"
+                    "{{Global.General.Name}}.json"
                   </span>
                 </button>
               </div>

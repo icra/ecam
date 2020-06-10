@@ -17,7 +17,7 @@ let Tier_A = {
         return this.ws_KPI_GHG_elec()+this.ws_KPI_GHG_fuel();
       },
       ws_KPI_GHG_elec(){ //ws ghg from electricity
-        return this.ws_nrg_cons*Global.conv_kwh_co2;
+        return this.ws_nrg_cons*Global.General.conv_kwh_co2;
       },
       ws_KPI_GHG_fuel(){ //ws ghg from fuel engines (CO2 + N2O + CH4)
         return this.ws_KPI_GHG_fuel_co2()+this.ws_KPI_GHG_fuel_n2o()+this.ws_KPI_GHG_fuel_ch4();
@@ -60,7 +60,7 @@ let Tier_A = {
           this.ww_KPI_GHG_slu();
       },
       ww_KPI_GHG_elec(){ //ww ghg from electricity
-        return this.ww_nrg_cons*Global.conv_kwh_co2;
+        return this.ww_nrg_cons*Global.General.conv_kwh_co2;
       },
       ww_KPI_GHG_fuel(){ //ww ghg from fuel engines (CO2 + N2O + CH4)
         return this.ww_KPI_GHG_fuel_co2()+this.ww_KPI_GHG_fuel_n2o()+this.ww_KPI_GHG_fuel_ch4();
@@ -78,7 +78,7 @@ let Tier_A = {
         return this.ww_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCH4.engines*Cts.ct_ch4_eq.value;
       },
       ww_KPI_GHG_biog(){ //ww ghg from biogas
-        let ww_biog_pro = this.wwt_producing_biogas  ? Global.Waste.Treatment.wwt_serv_pop*Global.bod_pday*Global.Days()*Cts.ct_bod_kg.value*Cts.ct_biog_g.value/1000 : 0;
+        let ww_biog_pro = this.wwt_producing_biogas  ? Global.Waste.Treatment.wwt_serv_pop*Global.General.bod_pday*Global.Days()*Cts.ct_bod_kg.value*Cts.ct_biog_g.value/1000 : 0;
         let ww_biog_val = this.wwt_valorizing_biogas ? ww_biog_pro : 0;
         let ww_biog_fla = this.wwt_valorizing_biogas ? 0           : ww_biog_pro;
         let ww_ch4_biog = 59;
@@ -200,7 +200,7 @@ let Tier_A = {
 
     //ww estimations
       wwt_bod_infl(){ //ww estimation: influent BOD based on population
-        return Global.bod_pday/1000*Global.ww_serv_pop()*Global.Days(); //number
+        return Global.General.bod_pday/1000*Global.ww_serv_pop()*Global.Days(); //number
       },
       wwt_bod_effl(){ //ww estimation: effluent BOD (10%)
         return 0.1 * this.wwt_bod_infl();
@@ -216,7 +216,7 @@ let Tier_A = {
       },
       wwt_dryw_slu(){ //ww estimation: mass of dry sludge produced (4% of wet sludge produced)
         let b = this.wwt_producing_biogas ? 0.6 : 1;
-        let wwt_mass_slu = b*0.55*Global.bod_pday*Global.ww_serv_pop()*0.9*1e-3*1.176*Global.Days();
+        let wwt_mass_slu = b*0.55*Global.General.bod_pday*Global.ww_serv_pop()*0.9*1e-3*1.176*Global.Days();
         return 0.04*wwt_mass_slu;
       },
   },
@@ -251,7 +251,7 @@ let Tier_A = {
       },
 
       //fs ghg elec
-      fs_KPI_GHG_elec(){return this.fs_nrg_cons*Global.conv_kwh_co2;},
+      fs_KPI_GHG_elec(){return this.fs_nrg_cons*Global.General.conv_kwh_co2;},
 
       //fs ghg trck
         fs_KPI_GHG_trck(){
@@ -340,7 +340,7 @@ let Tier_A = {
         },
 
       //fsm estimations
-        fsc_bod_infl(){ return Global.bod_pday_fs/1000*Global.Faecl.fs_onsi_pop*Global.Days(); },
+        fsc_bod_infl(){ return Global.General.bod_pday_fs/1000*Global.Faecl.fs_onsi_pop*Global.Days(); },
         fsc_bod_rmvd(){ return this.fsc_fslu_emp()*this.fsc_bod_conc_fs(); },
         fsc_bod_conc_fs(){
           let cont_typ=Tables.find('fsc_type_tre',this.fsc_type_tre); //containment type (string)

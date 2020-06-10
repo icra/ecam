@@ -1003,7 +1003,7 @@ Questions.get_questions=function(ubication) {
     if(typeof(this[question])=="function")continue;
 
     //skip fuel engines questions if anyFuelEngines is zero
-    if(Global.anyFuelEngines==0) {
+    if(Global.General.anyFuelEngines==0) {
       if(["wsa_engines",
         "wst_engines",
         "wsd_engines",

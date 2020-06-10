@@ -5,18 +5,28 @@
 //A "scenario" is an object of class Ecam
 class Ecam {
   constructor(){
-    this.version               = "3.0.0";
-    this.Name                  = "New system name";
-    this.AssessmentPeriodStart = "2020-01-01";
-    this.AssessmentPeriodEnd   = "2020-12-31";
-    this.Comments              = "";
-    this.Currency              = "USD"; //default currency
-    this.Country               = false; //selected country name (string)
-    this.conv_kwh_co2          = 0;     //electricity conversion (kgCO2/kWh)
-    this.prot_con              = 0;     //prot consumption (kg/person/year)
-    this.bod_pday              = 0;     //BOD5 (g/person/day)
-    this.bod_pday_fs           = 0;     //BOD5 in faecal sludge (g/person/day)
-    this.anyFuelEngines        = 0;     //do you have fuel engines in any stage?
+    this.General={
+      version              : "3.0.0",
+      Name                 : "New system name",
+      AssessmentPeriodStart: "2020-01-01",
+      AssessmentPeriodEnd  : "2020-12-31",
+      Comments             : "",
+      Currency             : "USD", //default currency
+      Country              : false, //selected country name (string)
+      conv_kwh_co2         : 0,     //electricity conversion (kgCO2/kWh)
+      prot_con             : 0,     //prot consumption (kg/person/year)
+      bod_pday             : 0,     //BOD5 (g/person/day)
+      bod_pday_fs          : 0,     //BOD5 in faecal sludge (g/person/day)
+      anyFuelEngines       : 0,     //do you have fuel engines in any stage?
+      equations:[
+        "Days",
+        "Years",
+        "TotalGHG",
+        "TotalNRG",
+        "content_C",
+        "content_N",
+      ],
+    },
 
     /*Level 1 - Water Supply*/
     this.Water={
@@ -681,8 +691,8 @@ class Ecam {
   //GENERAL FUNCTIONS
     //get assesment period duration (in days)
     Days(){
-      let startDate=new Date(this.AssessmentPeriodStart);
-      let finalDate=new Date(this.AssessmentPeriodEnd);
+      let startDate=new Date(this.General.AssessmentPeriodStart);
+      let finalDate=new Date(this.General.AssessmentPeriodEnd);
       //add 1 day to include the whole final date
       //for example: from january 1st to december 31th is 365 days
       return 1+(finalDate-startDate)/1000/60/60/24;
@@ -781,7 +791,7 @@ class Ecam {
       );
     }
     wsa_KPI_GHG_elec(){
-      return this.wsa.wsa_nrg_cons*this.conv_kwh_co2;
+      return this.wsa.wsa_nrg_cons*this.General.conv_kwh_co2;
     }
     wsa_KPI_GHG_fuel(){
       return this.wsa_KPI_GHG_fuel_co2()
@@ -804,7 +814,7 @@ class Ecam {
       return this.wsa_KPI_GHG_elec()+this.wsa_KPI_GHG_fuel();
     }
     wsa_KPI_ghg_estm_red(){
-      return this.conv_kwh_co2*this.wsa_KPI_nrg_estm_sav();
+      return this.General.conv_kwh_co2*this.wsa_KPI_nrg_estm_sav();
     }
     wsa_KPI_std_nrg_newp(){
       return this.wsa_KPI_nrg_elec_eff()/
@@ -832,10 +842,10 @@ class Ecam {
     wst_KPI_std_nrg_newp(){return this.wst_KPI_nrg_elec_eff()/this.wst.wst_pmp_exff*this.wst_KPI_std_nrg_cons()}
     wst_KPI_nrg_cons_new(){return this.wst.wst_vol_pump*this.wst_KPI_std_nrg_newp()/100*this.wst.wst_pmp_head}
     wst_KPI_nrg_estm_sav(){return this.wst.wst_nrg_cons-this.wst_KPI_nrg_cons_new()}
-    wst_KPI_ghg_estm_red(){return this.conv_kwh_co2*this.wst_KPI_nrg_estm_sav()}
+    wst_KPI_ghg_estm_red(){return this.General.conv_kwh_co2*this.wst_KPI_nrg_estm_sav()}
 
     wst_KPI_GHG(){return this.wst_KPI_GHG_elec()+this.wst_KPI_GHG_fuel();}
-    wst_KPI_GHG_elec(){return this.wst.wst_nrg_cons*this.conv_kwh_co2}
+    wst_KPI_GHG_elec(){return this.wst.wst_nrg_cons*this.General.conv_kwh_co2}
     wst_KPI_GHG_fuel(){return this.wst_KPI_GHG_fuel_co2()+this.wst_KPI_GHG_fuel_n2o()+this.wst_KPI_GHG_fuel_ch4();}
     wst_KPI_GHG_fuel_co2(){
       let fuel=Tables['Fuel types'][Tables.find('wst_fuel_typ',this.wst.wst_fuel_typ)];
@@ -885,10 +895,10 @@ class Ecam {
 
     wsd_KPI_nrg_cons_new(){return this.wsd_KPI_nrg_elec_eff()/this.wsd.wsd_pmp_exff*this.wsd.wsd_nrg_pump}
     wsd_KPI_nrg_estm_sav(){return this.wsd.wsd_nrg_cons-this.wsd_KPI_nrg_cons_new()}
-    wsd_KPI_ghg_estm_red(){return this.conv_kwh_co2*this.wsd_KPI_nrg_estm_sav()}
+    wsd_KPI_ghg_estm_red(){return this.General.conv_kwh_co2*this.wsd_KPI_nrg_estm_sav()}
 
     //wsd GHG
-    wsd_KPI_GHG_elec(){return this.wsd.wsd_nrg_cons*this.conv_kwh_co2}
+    wsd_KPI_GHG_elec(){return this.wsd.wsd_nrg_cons*this.General.conv_kwh_co2}
     wsd_KPI_GHG_fuel(){
       return this.wsd_KPI_GHG_fuel_co2()+this.wsd_KPI_GHG_fuel_n2o()+this.wsd_KPI_GHG_fuel_ch4();
     }
@@ -958,7 +968,7 @@ class Ecam {
     wwc_SL_conn_pop(){return 100*this.wwc.wwc_conn_pop/this.Waste.ww_resi_pop}
     wwc_KPI_nrg_per_m3(){return this.wwc.wwc_nrg_cons/this.wwc.wwc_vol_conv}
     c_wwc_vol_infl(){return this.wwc.wwc_rain_day/86400*(this.wwc.wwc_wet_flow-this.wwc.wwc_dry_flow)}
-    wwc_SL_GHG_ii(){return this.wwc_KPI_nrg_per_m3()*this.c_wwc_vol_infl()*this.conv_kwh_co2}
+    wwc_SL_GHG_ii(){return this.wwc_KPI_nrg_per_m3()*this.c_wwc_vol_infl()*this.General.conv_kwh_co2}
     wwc_SL_fratio(){return this.wwc.wwc_wet_flow/this.wwc.wwc_dry_flow}
     wwc_SL_GHG_inf(){return this.wwc_KPI_GHG_elec() * this.c_wwc_vol_infl() / this.wwc.wwc_vol_conv}
     wwt_SL_GHG_inf(){return this.wwt_KPI_GHG_elec() * this.c_wwc_vol_infl() / this.wwc.wwc_vol_conv}
@@ -971,12 +981,12 @@ class Ecam {
     wwc_KPI_std_nrg_newp(){return this.wwc_KPI_nrg_elec_eff()/this.wwc.wwc_pmp_exff*this.wwc_KPI_std_nrg_cons()}
     wwc_KPI_nrg_cons_new(){return this.wwc.wwc_vol_pump*this.wwc_KPI_std_nrg_newp()/100*this.wwc.wwc_pmp_head}
     wwc_KPI_nrg_estm_sav(){return this.wwc.wwc_nrg_cons-this.wwc_KPI_nrg_cons_new()}
-    wwc_KPI_ghg_estm_red(){return this.conv_kwh_co2*this.wwc_KPI_nrg_estm_sav()}
+    wwc_KPI_ghg_estm_red(){return this.General.conv_kwh_co2*this.wwc_KPI_nrg_estm_sav()}
 
     //wwc Collection GHG emissions
     wwc_KPI_GHG(){return this.wwc_KPI_GHG_elec()+this.wwc_KPI_GHG_fuel()}
     wwc_KPI_GHG_elec(){
-      return this.wwc.wwc_nrg_cons*this.conv_kwh_co2;
+      return this.wwc.wwc_nrg_cons*this.General.conv_kwh_co2;
     }
     wwc_KPI_GHG_fuel(){
       return this.wwc_KPI_GHG_fuel_co2()
@@ -1011,12 +1021,12 @@ class Ecam {
     wwt_KPI_std_nrg_newp(){return this.wwt_KPI_nrg_elec_eff()/this.wwt.wwt_pmp_exff*this.wwt_KPI_std_nrg_cons()}
     wwt_KPI_nrg_cons_new(){return this.wwt.wwt_vol_pump*this.wwt_KPI_std_nrg_newp()/100*this.wwt.wwt_pmp_head}
     wwt_KPI_nrg_estm_sav(){return this.wwt.wwt_nrg_cons-this.wwt_KPI_nrg_cons_new()}
-    wwt_KPI_ghg_estm_red(){return this.conv_kwh_co2*this.wwt_KPI_nrg_estm_sav()}
+    wwt_KPI_ghg_estm_red(){return this.General.conv_kwh_co2*this.wwt_KPI_nrg_estm_sav()}
     wwt_KPI_biog_x_bod(){return this.wwt.wwt_biog_pro/this.c_wwt_bod_rmvd()}
     c_wwt_nrg_biog(){return this.wwt.wwt_biog_val*this.wwt.wwt_ch4_biog/100*Cts.ct_ch4_nrg.value}
     wwt_KPI_nrg_biogas(){return this.wwt.wwt_nrg_biog/this.wwt.wwt_vol_trea}
     wwt_KPI_nrg_x_biog(){return 100*this.wwt.wwt_nrg_biog/this.c_wwt_nrg_biog()}
-    wwt_SL_GHG_avoided(){return this.wwt.wwt_nrg_biog*this.conv_kwh_co2}
+    wwt_SL_GHG_avoided(){return this.wwt.wwt_nrg_biog*this.General.conv_kwh_co2}
 
     //sludge
     wwt_KPI_sludg_prod(){return this.wwt.wwt_mass_slu/this.wwt.wwt_vol_trea}
@@ -1102,7 +1112,7 @@ class Ecam {
     wwt_KPI_ghg_stock_co2eq(){return this.wwt.wwt_mass_slu_stock*90.3/1000}
 
     //wwt ghg emissions
-    wwt_KPI_GHG_elec(){return this.wwt.wwt_nrg_cons*this.conv_kwh_co2}
+    wwt_KPI_GHG_elec(){return this.wwt.wwt_nrg_cons*this.General.conv_kwh_co2}
 
     wwt_KPI_GHG_fuel(){
       return this.wwt_KPI_GHG_fuel_co2()+this.wwt_KPI_GHG_fuel_n2o()+this.wwt_KPI_GHG_fuel_ch4();
@@ -1221,7 +1231,6 @@ class Ecam {
     }
 
   //  L2 WWD WASTE DISCHARGE EQUATIONS
-    //TODO
     wwd_wr_GHG_avo_N(){ return this.wwd.wwd_wr_N_rec*Cts.ct_cr_forN.value; }
     wwd_wr_GHG_avo_P(){ return this.wwd.wwd_wr_P_rec*Cts.ct_cr_forP.value; }
     wwd_wr_GHG_avo(){ return this.wwd_wr_GHG_avo_N() + this.wwd_wr_GHG_avo_P(); }
@@ -1233,7 +1242,7 @@ class Ecam {
       ) - this.wwd.wwd_wr_adnrg;
     }
     wwd_wr_GHG_avo_d(){
-      return this.wwd_wr_nrg_sav()*this.conv_kwh_co2;
+      return this.wwd_wr_nrg_sav()*this.General.conv_kwh_co2;
     }
     wwd_KPI_nrg_per_m3(){return this.wwd.wwd_nrg_cons/this.wwd.wwd_vol_disc||0}
     wwd_SL_ghg_non(){return this.wwd.wwd_n2o_effl/1000*this.wwd.wwd_vol_nonp*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value}
@@ -1244,9 +1253,9 @@ class Ecam {
     wwd_KPI_std_nrg_newp(){return this.wwd_KPI_nrg_elec_eff()/this.wwd.wwd_pmp_exff*this.wwd_KPI_std_nrg_cons()}
     wwd_KPI_nrg_cons_new(){return this.wwd.wwd_vol_pump*this.wwd_KPI_std_nrg_newp()/100*this.wwd.wwd_pmp_head}
     wwd_KPI_nrg_estm_sav(){return this.wwd.wwd_nrg_cons-this.wwd_KPI_nrg_cons_new()}
-    wwd_KPI_ghg_estm_red(){return this.conv_kwh_co2*this.wwd_KPI_nrg_estm_sav()}
+    wwd_KPI_ghg_estm_red(){return this.General.conv_kwh_co2*this.wwd_KPI_nrg_estm_sav()}
 
-    wwd_KPI_GHG_elec(){return this.wwd.wwd_nrg_cons*this.conv_kwh_co2}
+    wwd_KPI_GHG_elec(){return this.wwd.wwd_nrg_cons*this.General.conv_kwh_co2}
     wwd_KPI_GHG_fuel(){
       return this.wwd_KPI_GHG_fuel_co2()+this.wwd_KPI_GHG_fuel_n2o()+this.wwd_KPI_GHG_fuel_ch4();
     }
@@ -1320,7 +1329,7 @@ class Ecam {
             +this.fsc_KPI_GHG_trck();
     }
     fsc_KPI_GHG_elec(){
-      return this.fsc.fsc_nrg_cons*this.conv_kwh_co2;
+      return this.fsc.fsc_nrg_cons*this.General.conv_kwh_co2;
     }
     fsc_KPI_GHG_cont(){
       return (this.fsc.fsc_bod_infl-this.fsc.fsc_bod_rmvd)*this.fsc.fsc_ch4_efac*Cts.ct_ch4_eq.value;
@@ -1345,10 +1354,10 @@ class Ecam {
     fsc_KPI_std_nrg_newp(){return this.fsc_KPI_nrg_elec_eff()/this.fsc.fsc_pmp_exff*this.fsc_KPI_std_nrg_cons()}
     fsc_KPI_nrg_cons_new(){return this.fsc.fsc_vol_pump*this.fsc_KPI_std_nrg_newp()/100*this.fsc.fsc_pmp_head}
     fsc_KPI_nrg_estm_sav(){return this.fsc.fsc_nrg_cons-this.fsc_KPI_nrg_cons_new()}
-    fsc_KPI_ghg_estm_red(){return this.conv_kwh_co2*this.fsc_KPI_nrg_estm_sav()}
+    fsc_KPI_ghg_estm_red(){return this.General.conv_kwh_co2*this.fsc_KPI_nrg_estm_sav()}
 
   //  L2 FST FAECL TREATMENT EQUATIONS
-    fst_KPI_GHG_elec(){return this.fst.fst_nrg_cons*this.conv_kwh_co2}
+    fst_KPI_GHG_elec(){return this.fst.fst_nrg_cons*this.General.conv_kwh_co2}
     fst_KPI_GHG_fuel_co2(){
       let fuel=Tables['Fuel types'][Tables.find('fst_fuel_typ',this.fst.fst_fuel_typ)];
       return this.fst.fst_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
@@ -1379,7 +1388,7 @@ class Ecam {
       return (this.fst.fst_biog_pro-this.fst.fst_biog_val-this.fst.fst_biog_fla+this.fst.fst_biog_fla*Cts.ct_ch4_lo.value/100)*this.fst.fst_ch4_biog/100*Cts.ct_ch4_m3.value*Cts.ct_ch4_eq.value;
     }
     fst_SL_GHG_avoided(){
-      return this.fst.fst_nrg_biog*this.conv_kwh_co2;
+      return this.fst.fst_nrg_biog*this.General.conv_kwh_co2;
     }
     fst_KPI_GHG_tre_ch4(){
       return (this.fst.fst_bod_infl-this.fst.fst_bod_slud-this.fst.fst_bod_effl)*this.fst.fst_ch4_efac*Cts.ct_ch4_eq.value;
@@ -1397,7 +1406,7 @@ class Ecam {
     fst_KPI_std_nrg_newp(){return this.fst_KPI_nrg_elec_eff()/this.fst.fst_pmp_exff*this.fst_KPI_std_nrg_cons()}
     fst_KPI_nrg_cons_new(){return this.fst.fst_vol_pump*this.fst_KPI_std_nrg_newp()/100*this.fst.fst_pmp_head}
     fst_KPI_nrg_estm_sav(){return this.fst.fst_nrg_cons-this.fst_KPI_nrg_cons_new()}
-    fst_KPI_ghg_estm_red(){return this.conv_kwh_co2*this.fst_KPI_nrg_estm_sav()}
+    fst_KPI_ghg_estm_red(){return this.General.conv_kwh_co2*this.fst_KPI_nrg_estm_sav()}
     fst_KPI_GHG(){
       return this.fst_KPI_GHG_elec()
             +this.fst_KPI_GHG_trck()
@@ -1417,7 +1426,7 @@ class Ecam {
             +this.fsr_KPI_GHG_tre()
             +this.fsr_KPI_GHG_urine();
     }
-    fsr_KPI_GHG_elec(){return this.fsr.fsr_nrg_cons*this.conv_kwh_co2}
+    fsr_KPI_GHG_elec(){return this.fsr.fsr_nrg_cons*this.General.conv_kwh_co2}
     fsr_KPI_GHG_fuel_co2(){
       let fuel=Tables['Fuel types'][Tables.find('fsr_fuel_typ',this.fsr.fsr_fuel_typ)];
       return this.fsr.fsr_vol_fuel*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
@@ -1516,7 +1525,7 @@ class Ecam {
     fsr_KPI_std_nrg_newp(){return this.fsr_KPI_nrg_elec_eff()/this.fsr.fsr_pmp_exff*this.fsr_KPI_std_nrg_cons()}
     fsr_KPI_nrg_cons_new(){return this.fsr.fsr_vol_pump*this.fsr_KPI_std_nrg_newp()/100*this.fsr.fsr_pmp_head}
     fsr_KPI_nrg_estm_sav(){return this.fsr.fsr_nrg_cons-this.fsr_KPI_nrg_cons_new()}
-    fsr_KPI_ghg_estm_red(){return this.conv_kwh_co2*this.fsr_KPI_nrg_estm_sav()}
+    fsr_KPI_ghg_estm_red(){return this.General.conv_kwh_co2*this.fsr_KPI_nrg_estm_sav()}
     fsr_ghg_avoided_land(){
       return this.fsr_ghg_avoided_landapp()
             +this.fsr_ghg_avoided_landfil();

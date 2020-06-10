@@ -3,7 +3,9 @@
 //navigate tier b levels
 function go_to(level, sublevel){
   let possible_levels = Structure.filter(s=>!s.sublevel).map(s=>s.level);
+  possible_levels.push('General');
   possible_levels.push('UNFCCC');
+
   if(possible_levels.indexOf(level)==-1){
     throw new Error(`level '${level}' does not exist`);
   }
@@ -27,7 +29,7 @@ function get_current_unit(code){
     return `["${code}" unit not found]`;
   }
   if(Info[code].magnitude=='Currency'){
-    return Global.Currency;
+    return Global.General.Currency;
   }
   if(undefined===Global.Configuration.Units[code]){
     Global.Configuration.Units[code] = Info[code].unit;

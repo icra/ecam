@@ -14,6 +14,7 @@ let variable = new Vue({
 
     //backend
     Global,
+    Languages,
     Info,
     Structure,
     Units,
@@ -56,7 +57,7 @@ let variable = new Vue({
 
   template:`
     <!--variable VIEW-->
-    <div id=variable v-if="visible">
+    <div id=variable v-if="visible && Languages.ready">
       <!--variable title-->
       <h1>
         <span style=color:#999>
@@ -169,7 +170,7 @@ let variable = new Vue({
               <!--variable list inputs involved in the formula-->
               <inputs_involved_table
                 :code="id"
-                :current_stage="get_current_stage(id)"
+                :obj="Global"
               ></inputs_involved_table>
             </div>
           </td>
@@ -271,23 +272,19 @@ let variable = new Vue({
           </th>
           <td>
             <div>
-              <span v-html="format( Recommendations[id]() )">
-              </span>
-              <span v-html="Info[id].unit.prettify()" class=unit>
-              </span>
+              <span v-html="format( Recommendations[id]() )"></span>
+              <span v-html="Info[id].unit.prettify()" class=unit></span>
             </div>
 
             <!--formula for recommendation-->
-            <div style="border:1px solid #ccc;padding:1em">
-              {{
-                Formulas.prettify( Recommendations[id].toString() )
-              }}
-            </div>
+            <div style="border:1px solid #ccc;padding:1em"
+              v-html="Formulas.prettify( Recommendations[id].toString() )"
+            ></div>
 
             <!--inputs involved in the recommendations equation-->
             <inputs_involved_table
               :code="id"
-              :current_stage="Recommendations"
+              :obj="Recommendations"
             ></inputs_involved_table>
           </td>
         </tr>

@@ -26,6 +26,8 @@ let constant = new Vue({
           text-align:center;
         "
       >
+        <span v-html="code"></span>
+        =
         <span v-html="format(Cts[code].value)"
           style="font-size:42px"
         ></span>

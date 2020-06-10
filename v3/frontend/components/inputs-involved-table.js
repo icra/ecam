@@ -4,7 +4,7 @@
 Vue.component('inputs_involved_table',{
   template:`<div>
     <table class=inputs_involved>
-      <tbody v-for="match in Formulas.ids_per_formula(Global[code].toString())">
+      <tbody v-for="match in Formulas.ids_per_formula(obj[code].toString())">
         <!--input involved is a constant-->
         <tr v-if="Cts[match]" :title="'CONSTANT: '+Cts[match].descr">
           <!--involved constant code-->
@@ -12,9 +12,8 @@ Vue.component('inputs_involved_table',{
             <a
               style="color:grey;font-weight:bold"
               @click="constant.view(match)"
-            >
-              {{ match }}
-            </a>
+              v-html="match"
+            ></a>
           </td>
 
           <!--involved constant value-->
@@ -54,7 +53,6 @@ Vue.component('inputs_involved_table',{
           <div v-else>
             <td class=unit v-html="Info[match].unit.prettify()"></td>
           </div>
-
         </tr>
       </tbody>
     </table>
@@ -62,18 +60,16 @@ Vue.component('inputs_involved_table',{
 
   props:[
     'code',
+    'obj'
   ],
 
   data:function(){
     return{
       variable,
       constant,
-      caption,
 
-      Global,
       Info,
       Tables,
-      Recommendations,
       Formulas,
       Cts,
     };

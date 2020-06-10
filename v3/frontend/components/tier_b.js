@@ -60,7 +60,7 @@ let tier_b = new Vue({
         "
       >
         <h1>
-          <a onclick="ecam.show('get_started')">{{Global.Name}}</a>
+          <a onclick="ecam.show('get_started')">{{Global.General.Name}}</a>
           <span style="color:black">&rsaquo;</span>
           <a onclick="linear_menu.go_to(tier_b.level)"
             :style="'cursor:pointer;color:'+get_level_color(level)"
@@ -197,8 +197,8 @@ let tier_b = new Vue({
           <a onclick="ecam.show('configuration')">
             {{translate('conv_kwh_co2_descr')}}:
             <b style=color:black>
-              <span :class="Global.conv_kwh_co2==0 ? 'warning' : ''">
-                {{format(Global.conv_kwh_co2)}}
+              <span :class="Global.General.conv_kwh_co2==0 ? 'warning' : ''">
+                {{format(Global.General.conv_kwh_co2)}}
               </span>
             </b>
             <span class=number v-html="Info.conv_kwh_co2.unit"></span>
