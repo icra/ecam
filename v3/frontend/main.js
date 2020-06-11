@@ -61,29 +61,43 @@ let ecam={
 
   //automated test
   test(){
-    //visit every page
-    //test every equation TODO
-
     //all questions to "yes"
     Object.keys(Questions).forEach(key=>{
       Global.Configuration.Questions[key] = 1;
     });
 
-    this.show('landing');
-    this.show('get_started');
-    this.show('configuration');
-    this.show('countries');
-    this.show('population');
-    this.show('gwp_table');
-    this.show('about');
-    this.show('help');
-    this.show('tier_a');
-    Structure.forEach(s=>{
-      go_to(s.level, s.sublevel);
-    });
-    //TODO
+    //prepare clicking everywhere
+    let _this    = this;
+    let timer    = 1;   //seconds
+    let interval = 100; //millisecons
 
-    return true;
+    //toggle sidebar
+    setTimeout( ()=>{sidebar.visible=1}, interval*timer++);
+    setTimeout( ()=>{sidebar.visible=0}, interval*timer++);
+
+    //visit every page (=view)
+    Object.keys(this.views).forEach(key=>{
+      setTimeout( ()=>{_this.show(key)}, interval*timer++);
+    });
+
+    //visit every tier b stage
+    Structure.forEach(s=>{
+      setTimeout(()=>{go_to(s.level, s.sublevel)}, interval*timer++);
+    });
+
+    //visit every variable
+    Structure.forEach(s=>{
+      get_input_codes(s.level, s.sublevel).concat(
+        get_equation_codes(s.level, s.sublevel)
+      ).forEach(code=>{
+        setTimeout(function(){variable.view(code)}, interval*timer++);
+      });
+    });
+
+    //visit every constant
+    Object.keys(Cts).forEach(code=>{
+      setTimeout(()=>{constant.view(code)}, interval*timer++);
+    });
   },
 };
 

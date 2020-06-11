@@ -33,7 +33,7 @@ let ecam_logo=new Vue({
         </a>
       </div>
 
-      <!--temporal button-->
+      <!--temp TODO-->
       <div>
         <button onclick="linear_menu.visible^=true">
           o-o-o-o

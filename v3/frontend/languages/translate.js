@@ -1,6 +1,5 @@
 //languages object (v3)
 let Languages={
-
   //default lang
   current:"en",
 
@@ -34,24 +33,36 @@ let Languages={
     //current language
     let lang = this.current;
 
-    //null language (for debugging)
+    //null language (show tag instead of translation)
     if(lang=='null'){
       return `["#${id}"]`;
     }
 
+    let current_view = linear_menu.current_view;
+
     //language not found
     if(!this.tags[lang]){
-      return `["#${id}" - language not found]`;
+      let warn=`"#${id}" - language not found]`;
+      console.warn(`${warn} - current view: ${current_view}`);
+      return `["#${id}"]`;
     }
 
-    //normal case or tag not found
-    return this.tags[lang][`#${id}`] || `["#${id}" - translation not found, please report]`;
+    //translation not found
+    if(!this.tags[lang][`#${id}`]){
+      let warn=`"#${id}" - translation not found]`;
+      console.warn(`${warn} - current view: ${current_view}`);
+      return `["#${id}"]`;
+    }
+
+    //translation found
+    return this.tags[lang][`#${id}`];
   },
 };
 
+//start loading language tags
 Languages.load();
 
-//make translate global
+//make "translate" a global function
 function translate(id){
   return Languages.translate(id);
 }

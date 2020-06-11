@@ -106,6 +106,18 @@ function get_equation_codes(level, sublevel){
 function locate_variable(code){
   if(!code) return false;
 
+  //search inside General
+  {
+    let level="General";
+    if(
+      get_input_codes   (level).indexOf(code)+1
+      ||
+      get_equation_codes(level).indexOf(code)+1
+    ){
+      return {level, sublevel:false};
+    }
+  }
+
   //search inside Global
   for(let i in Structure){
     let s        = Structure[i];
@@ -157,6 +169,17 @@ function get_variable_value(code){
 //get variable type
 function get_variable_type(code){
   if(!code) return false;
+
+  //search in General
+  {
+    let level="General";
+    if(get_input_codes(   level).indexOf(code)+1){
+      return 'input';
+    }
+    if(get_equation_codes(level).indexOf(code)+1){
+      return 'output';
+    }
+  }
 
   //search inside Global
   for(let i in Structure){

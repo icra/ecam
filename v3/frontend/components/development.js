@@ -9,6 +9,7 @@ let development=new Vue({
     <div id=development v-if="visible">
       <!--title--><h1 style=color:black>Development/debugging utilities for development</h1>
       <ul style="font-size:18px;">
+        <li><button onclick="ecam.test()">automated test</button></li>
         <li><a onclick="ecam.show('problems')">Problem finder</a></li>
         <li><a onclick="ecam.show('translation_problems')">Translation problems finder</a></li>
         <li><a onclick="ecam.show('validate_json')">Current JSON file validator</a></li>

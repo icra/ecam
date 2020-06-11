@@ -348,7 +348,7 @@ let tier_b = new Vue({
               <tr
                 v-for="key in current_stage.equations"
                 v-if="
-                  (key.search('_KPI_GHG')+1)
+                  (key=='TotalGHG' || key.search('_KPI_GHG')+1)
                   &&
                   Questions.is_hidden(key)==false
                 "
@@ -415,7 +415,7 @@ let tier_b = new Vue({
               <tr
                 v-for="key in current_stage.equations"
                 v-if="
-                  key.search('_KPI_GHG')==-1
+                  (key!='TotalGHG' && key.search('_KPI_GHG')==-1)
                   &&
                   Questions.is_hidden(key)==false
                 "
