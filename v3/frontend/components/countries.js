@@ -3,10 +3,10 @@ let countries = new Vue({
 
   data:{
     visible:false,
+    variable,
+
     Global,
     Countries,
-
-    variable,
   },
 
   methods:{

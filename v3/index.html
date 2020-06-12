@@ -11,7 +11,6 @@
     <script src="backend/countries.js"></script>
     <script src="backend/gwp_reports.js"></script>
     <script src="backend/constants.js"></script>
-    <script src="backend/substages.js"></script>
     <script src="backend/tables.js"></script>
     <script src="backend/units.js"></script>
     <script src="backend/recommendations.js"></script>
@@ -19,7 +18,6 @@
     <script src="backend/normalization.js"></script>
     <script src="backend/formulas.js"></script>
     <script src="backend/questions.js"></script>
-    <script src="backend/tier_a.js"></script>
 
     <!--v2
       <script src="dataModel/unfccc.js"></script>
@@ -122,6 +120,8 @@
   <div id=data_structure_viewer></div> <!--data_structure_viewer VIEW-->
   <div id=benchmarks           ></div> <!--benchmarks            VIEW-->
   <div id=graphs               ></div> <!--graphs                VIEW-->
+
+  <div id=select_scenario      ></div> <!--select scenario       VIEW-->
 </div>
 
 <!--load vue objects-->
@@ -156,6 +156,7 @@
 
   <!--TODO-->
   <script src="frontend/components/development.js"></script>
+  <script src="frontend/components/select_scenario.js"></script>
 
   <!--default settings on reload (for development)-->
   <script src="defaults.js"></script>
@@ -163,3 +164,4 @@
   <!--main ecam view controller-->
   <script src="frontend/main.js"></script>
 <!--/load vue objects-->
+

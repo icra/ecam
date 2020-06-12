@@ -1,6 +1,14 @@
 //main view controller
 let ecam={
 
+  //elements of the user interface: ecam_logo, sidebar, etc (Vue objects)
+  elements:{
+    ecam_logo,
+    caption,
+    linear_menu,
+    sidebar,
+  },
+
   //views (==pages, Vue objects)
   views:{
     landing,
@@ -27,6 +35,7 @@ let ecam={
     data_structure_viewer,
     benchmarks,
     graphs,
+    select_scenario,
   },
 
   //show a view (==open a page)
@@ -98,6 +107,40 @@ let ecam={
     Object.keys(Cts).forEach(code=>{
       setTimeout(()=>{constant.view(code)}, interval*timer++);
     });
+  },
+
+  //set current scenario for the frontend
+  //==update Global object in the frontend
+  set_current_scenario(ecam_object){
+    if(!ecam_object){
+      return;
+    }
+    if(ecam_object.constructor!==Ecam){
+      throw new Error('ecam_object is not an Ecam object');
+      return;
+    }
+
+    //update Global variable
+    Global = ecam_object;
+
+    //update property "Global" in every view and element
+    ['elements','views'].forEach(key=>{
+      Object.values(ecam[key]).forEach(vue_object=>{
+        if(vue_object.constructor!==Vue){
+          throw new Error('object is not a Vue object');
+        }
+        if(vue_object.Global){
+          vue_object.Global = ecam_object;
+        }
+      });
+    });
+  },
+
+  //add new scenario
+  new_scenario(){
+    let scenario = new Ecam();
+    Scenarios.push(scenario);
+    this.set_current_scenario(scenario);
   },
 };
 

@@ -3,6 +3,7 @@ let get_started = new Vue({
 
   data:{
     visible:false,
+
     Global,
   },
 

@@ -1002,20 +1002,6 @@ Questions.get_questions=function(ubication) {
   for(let question in this) {
     if(typeof(this[question])=="function")continue;
 
-    //skip fuel engines questions if anyFuelEngines is zero
-    if(Global.General.anyFuelEngines==0) {
-      if(["wsa_engines",
-        "wst_engines",
-        "wsd_engines",
-        "wwc_engines",
-        "wwt_engines",
-        "wwd_engines",
-        'fst_engines',
-        'fsr_engines',
-      ].indexOf(question)+1)
-        continue;
-    }
-
     //check all codes inside ubication
     for(let i in this[question].variables){
       let code=this[question].variables[i];
@@ -1080,8 +1066,6 @@ Questions.is_question_hidden=function(field) {
   return false;
 };
 
-//-------------v3 / v2 ---------------------------------------
-
 //reset the values and the otherQuestions
 Questions.reset_values=function(question, stage){
   //reset inputs
@@ -1098,7 +1082,8 @@ Questions.reset_values=function(question, stage){
   });
 };
 
-//Automatic find repeated variables in Questions
+//v2
+//TODO Automatic find repeated variables in Questions
 Questions.findRepeated=function() {
   //count how many times appears field in Questions
   function countField(field) {

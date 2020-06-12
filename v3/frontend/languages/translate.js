@@ -38,19 +38,17 @@ let Languages={
       return `["#${id}"]`;
     }
 
-    let current_view = linear_menu.current_view;
-
     //language not found
     if(!this.tags[lang]){
       let warn=`"#${id}" - language not found]`;
-      console.warn(`${warn} - current view: ${current_view}`);
+      console.warn(warn);
       return `["#${id}"]`;
     }
 
     //translation not found
     if(!this.tags[lang][`#${id}`]){
       let warn=`"#${id}" - translation not found]`;
-      console.warn(`${warn} - current view: ${current_view}`);
+      console.warn(warn);
       return `["#${id}"]`;
     }
 

@@ -3,7 +3,8 @@ let ecam_logo=new Vue({
 
   data:{
     visible:false,
-    version:Global.General.version,
+
+    Global,
     Languages,
   },
 
@@ -29,7 +30,7 @@ let ecam_logo=new Vue({
       <!--version-->
       <div style="font-family:monospace">
         <a href="//github.com/icra/ecam" target=_blank>
-          v{{version}}
+          v{{Global.General.version}}
         </a>
       </div>
 

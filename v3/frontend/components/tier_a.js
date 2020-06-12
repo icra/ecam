@@ -3,6 +3,7 @@ let tier_a = new Vue({
 
   data:{
     visible:false,
+
     Global,
     Info,
     Structure,

@@ -3,6 +3,7 @@ let sidebar = new Vue({
 
   data:{
     visible:false,
+
     Global,
     Structure,
   },
@@ -111,7 +112,7 @@ let sidebar = new Vue({
 
         <!--sidebar support section-->
         <li class=section>
-          <div class=header>{{translate('support')}}</div>
+          <div class=header>Support</div>
           <ul>
             <li class=item><a onclick="ecam.show('help')"> {{translate('help')}} </a></li>
             <li class=item><a onclick="ecam.show('about')">{{translate('about')}}</a></li>

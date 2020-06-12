@@ -104,7 +104,6 @@ Vue.component('input_ecam',{
 
   props:[
     'code',
-    'question',
     'current_stage',
   ],
 

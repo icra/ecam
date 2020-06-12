@@ -1,6 +1,16 @@
 let configuration = new Vue({
   el:"#configuration",
 
+  data:{
+    visible:false,
+
+    Global,
+    Structure,
+    Countries,
+    GWP_reports,
+    Cts,
+  },
+
   template:`
     <!--configuration VIEW-->
     <div id=configuration v-if="visible">
@@ -116,30 +126,6 @@ let configuration = new Vue({
             </table>
           </fieldset>
 
-          <!--fuel engines in any stage-->
-          <fieldset>
-            <legend>{{translate('do_you_have_engines')}}
-            </legend>
-            <label>
-              {{translate('no')}}
-              <input type=radio
-                name=anyFuelEngines
-                v-model.number="Global.General.anyFuelEngines"
-                value=0
-                @change=answerAnyFuelEngines()
-              >
-            </label> &emsp;
-            <label>
-              {{translate('yes')}}
-              <input type=radio
-                name=anyFuelEngines
-                v-model.number="Global.General.anyFuelEngines"
-                value=1
-                @change=answerAnyFuelEngines()
-              >
-            </label>
-          </fieldset>
-
           <div>
             <!--select assessment report-->
             <fieldset>
@@ -213,16 +199,6 @@ let configuration = new Vue({
     </div>
   `,
 
-  data:{
-    visible:false,
-
-    Global,
-    Structure,
-    Countries,
-    GWP_reports,
-    Cts,
-  },
-
   methods:{
     translate,
 
@@ -230,13 +206,13 @@ let configuration = new Vue({
     check_l2_from_l1(){
       //if level1 is inactive, set related level2 inactive
       Structure.filter(l=>l.sublevel==false).forEach(l1=>{
-        if(!Global.Configuration.ActiveStages[l1.alias]){
+        if(!this.Global.Configuration.ActiveStages[l1.alias]){
           //reset l1 values
           this.reset_stage(l1.alias);
           //reset l2 values
           Structure.filter(l=>(l.sublevel && l.level==l1.level))
             .forEach(l=>{
-              Global.Configuration.ActiveStages[l.alias]=false;
+              this.Global.Configuration.ActiveStages[l.alias]=false;
               this.reset_stage(l.alias);
             });
         }
@@ -247,7 +223,7 @@ let configuration = new Vue({
     check_l1_from_l2(){
       //if level2 is active, set related level1 active
       Structure.filter(l=>l.sublevel).forEach(l2=>{
-        if(Global.Configuration.ActiveStages[l2.alias]){
+        if(this.Global.Configuration.ActiveStages[l2.alias]){
           Structure.filter(l=>(l.sublevel==false && l.level==l2.level))
             .forEach(l=>{
               Global.Configuration.ActiveStages[l.alias]=true;
@@ -261,7 +237,7 @@ let configuration = new Vue({
     //activate all stages
     activate_all_stages(){
       Structure.forEach(l=>{
-        Global.Configuration.ActiveStages[l.alias]=true;
+        this.Global.Configuration.ActiveStages[l.alias]=true;
       })
     },
 
@@ -276,10 +252,10 @@ let configuration = new Vue({
 
       if(stage.sublevel==false){
         //l1
-        obj = Global[stage.level];
+        obj = this.Global[stage.level];
       }else{
         //l2
-        obj = Global[stage.level][stage.sublevel];
+        obj = this.Global[stage.level][stage.sublevel];
         Substages[stage.level][stage.sublevel]=[]; //reset substages
       }
 
@@ -291,7 +267,7 @@ let configuration = new Vue({
 
     //set variables from selected country
     set_variables_from_selected_country(){
-      let country = Global.General.Country;
+      let country = this.Global.General.Country;
 
       //variables in Global.to be changed:
       [ 'conv_kwh_co2',
@@ -302,40 +278,8 @@ let configuration = new Vue({
         //put bod_pday value in faecal sludge as well
         let key2 = key;
         if(key=="bod_pday_fs"){ key2="bod_pday"; }
-        Global.General[key]=Countries[country][key2];
+        this.Global.General[key]=Countries[country][key2];
       });
-    },
-
-    //answer fuel engines question TODO refactor using Structure
-    answerAnyFuelEngines(){
-      let ans=parseInt(Global.General.anyFuelEngines);
-      Global.General.anyFuelEngines=ans;
-      Global.Configuration.Questions.wsa_engines=ans;
-      Global.Configuration.Questions.wst_engines=ans;
-      Global.Configuration.Questions.wsd_engines=ans;
-      Global.Configuration.Questions.wwc_engines=ans;
-      Global.Configuration.Questions.wwt_engines=ans;
-      Global.Configuration.Questions.wwd_engines=ans;
-      Global.Configuration.Questions.fst_engines=ans;
-
-      if(!ans){
-        //reset stage values
-        Global.Water.Abstraction .wsa_vol_fuel=0;
-        Global.Water.Treatment   .wst_vol_fuel=0;
-        Global.Water.Distribution.wsd_vol_fuel=0;
-        Global.Waste.Collection  .wwc_vol_fuel=0;
-        Global.Waste.Treatment   .wwt_vol_fuel=0;
-        Global.Waste.Discharge   .wwd_vol_fuel=0;
-        Global.Faecl.Treatment   .fst_vol_fuel=0;
-        //reset substage values
-        Substages.Water.Abstraction .forEach(s=>{s.wsa_vol_fuel=0});
-        Substages.Water.Treatment   .forEach(s=>{s.wst_vol_fuel=0});
-        Substages.Water.Distribution.forEach(s=>{s.wsd_vol_fuel=0});
-        Substages.Waste.Collection  .forEach(s=>{s.wwc_vol_fuel=0});
-        Substages.Waste.Treatment   .forEach(s=>{s.wwt_vol_fuel=0});
-        Substages.Waste.Discharge   .forEach(s=>{s.wwd_vol_fuel=0});
-        Substages.Faecl.Treatment   .forEach(s=>{s.fst_vol_fuel=0});
-      }
     },
 
     //set constants from selected gwp report

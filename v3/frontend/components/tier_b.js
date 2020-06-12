@@ -5,7 +5,6 @@ let tier_b = new Vue({
     visible:false,
     level:'Water',
     sublevel:'Abstraction',
-    current_stage:Global.Water.Abstraction,
     caption,
     variable,
 
@@ -39,13 +38,21 @@ let tier_b = new Vue({
         });
 
         //reset values
-        Questions.reset_values(question, this.current_stage);
+        Questions.reset_values(question, this.get_current_stage());
 
         //reset folding
         Questions[question].folded = 0;
         Questions[question].otherQuestions.forEach(key=>{
           Questions[key].folded = 0;
         });
+      }
+    },
+
+    get_current_stage(){
+      if(this.sublevel){
+        return this.Global[this.level][this.sublevel];
+      }else{
+        return this.Global[this.level];
       }
     },
   },
@@ -218,10 +225,7 @@ let tier_b = new Vue({
           </div>
 
           <!--tier b input table-->
-          <table
-            :level="level"
-            style="width:100%"
-          >
+          <table :level="level" style="width:100%">
             <!--tier b inputs header-->
             <thead>
               <tr :style="'background:'+get_level_color(level)">
@@ -238,18 +242,20 @@ let tier_b = new Vue({
             <!--tier b inputs-->
             <tbody>
               <tr
-                v-for="key in Object.keys(current_stage).filter(key=>{return Questions.is_inside(key)==false})"
-                v-if="typeof(current_stage[key])=='number'"
+                v-for="key in Object.keys(get_current_stage()).filter(key=>{return Questions.is_inside(key)==false})"
+                v-if="typeof(get_current_stage()[key])=='number'"
               >
                 <td>
-                  <input_ecam :code="key" :current_stage="current_stage">
-                  </input_ecam>
+                  <input_ecam
+                    :code="key"
+                    :current_stage="get_current_stage()"
+                  ></input_ecam>
                 </td>
               </tr>
             </tbody>
 
             <!--tier b questions-->
-            <tbody v-for="question in Questions.get_questions(current_stage)">
+            <tbody v-for="question in Questions.get_questions(get_current_stage())">
               <tr
                 :style="'background:'+(Global.Configuration.Questions[question]?'lightgreen':'#eee')"
               ><td
@@ -258,13 +264,11 @@ let tier_b = new Vue({
                 <div style="display:grid;grid-template-columns:50% 50%">
                   <!--question text-->
                   <div
-                    @click="Questions[question].folded^= Global.Configuration.Questions[question]"
+                    @click="Questions[question].folded ^= Global.Configuration.Questions[question]"
                     class="question_container flex"
                     :style="(Global.Configuration.Questions[question]?'cursor:pointer':'')"
                   >
-                    <div
-                      v-if="Global.Configuration.Questions[question]"
-                    >
+                    <div v-if="Global.Configuration.Questions[question]">
                       <!--question folded marker-->
                       <div :class="'question_fold_marker '+(Questions[question].folded?'folded':'')">
                         ▼
@@ -289,12 +293,11 @@ let tier_b = new Vue({
                   </div>
                 </div>
               </td></tr>
-              <tr
-                v-for="key in Questions[question].variables"
+              <tr v-for="key in Questions[question].variables"
                 v-if="
                   Global.Configuration.Questions[question]
                   &&
-                  typeof(current_stage[key])=='number'
+                  typeof(get_current_stage()[key])=='number'
                   &&
                   (!Questions[question].folded)
                 "
@@ -302,10 +305,8 @@ let tier_b = new Vue({
                 <td>
                   <input_ecam
                     :code="key"
-                    :question="question"
-                    :current_stage="current_stage"
-                  >
-                  </input_ecam>
+                    :current_stage="get_current_stage()"
+                  ></input_ecam>
                 </td>
               </tr>
             </tbody>
@@ -328,10 +329,7 @@ let tier_b = new Vue({
           </div>
 
           <!--level2 outputs: GHG content-->
-          <table
-            :level="level"
-            style=width:100%
-          >
+          <table :level="level" style="width:100%">
             <thead>
               <tr>
                 <th>{{translate('Origin')}}
@@ -345,8 +343,7 @@ let tier_b = new Vue({
               </tr>
             </thead>
             <tbody>
-              <tr
-                v-for="key in current_stage.equations"
+              <tr v-for="key in get_current_stage().equations"
                 v-if="
                   (key=='TotalGHG' || key.search('_KPI_GHG')+1)
                   &&
@@ -389,11 +386,10 @@ let tier_b = new Vue({
                 ></td>
               </tr>
             </tbody>
+
             <!--decoration bottom table-->
             <tfoot>
-              <tr>
-                <th style="border-bottom:none" colspan=4></th>
-              </tr>
+              <tr><th style="border-bottom:none" colspan=4></th></tr>
             </tfoot>
           </table>
 
@@ -402,18 +398,14 @@ let tier_b = new Vue({
             {{translate('OUTPUTS')}} &mdash;
             {{translate('Energy performance and Service Level indicators')}}
           </div>
-          <table
-            :level="level"
-            style=width:100%
-          >
+          <table :level="level" style="width:100%">
             <tr>
               <th>{{translate('edit_description')}}</th>
               <th>{{translate('edit_current_value')}}</th>
               <th>{{translate('edit_unit')}}</th>
             </tr>
             <tbody>
-              <tr
-                v-for="key in current_stage.equations"
+              <tr v-for="key in get_current_stage().equations"
                 v-if="
                   (key!='TotalGHG' && key.search('_KPI_GHG')==-1)
                   &&
@@ -440,9 +432,7 @@ let tier_b = new Vue({
             </tbody>
             <!--decoration bottom table-->
             <tfoot>
-              <tr>
-                <th style="border-bottom:none" colspan=4></th>
-              </tr>
+              <tr><th style="border-bottom:none" colspan=4></th></tr>
             </tfoot>
           </table>
         </div>

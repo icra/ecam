@@ -8,16 +8,17 @@ linear_menu.visible   = 1;
 sidebar.visible       = 0;
 
 //page views
-landing.visible       = 0;
-tier_a.visible        = 0;
-emission_tree.visible = 0;
-constants.visible     = 0;
-summary_ghg.visible   = 0;
-summary_nrg.visible   = 0;
-tier_b.visible        = 0;
+select_scenario.visible = 1;
+landing.visible         = 0;
+tier_a.visible          = 0;
+emission_tree.visible   = 0;
+constants.visible       = 0;
+summary_ghg.visible     = 0;
+summary_nrg.visible     = 0;
+tier_b.visible          = 0;
 
 //variable viewer
-variable.visible      = 0;
+variable.visible = 0;
 //variable.id="fsc_bod_infl";
 let loc = locate_variable(variable.id);
 variable.localization.level=loc.level;
@@ -28,11 +29,15 @@ development.visible   = 0;
 /*BACKEND*/
 
 //general variables
-Global.General.anyFuelEngines = true; //do you have any fuel engines in any stage?
 Global.General.conv_kwh_co2   = 0.7;  //conversion factor for grid electricity (kgCO2/kWh)
 Global.General.prot_con       = 22;   //prot consumption                       (kg/person/year)
 Global.General.bod_pday       = 37;   //BOD5                                   (g/person/day)
 Global.General.bod_pday_fs    = 37;   //BOD5 in faecal sludge                  (g/person/day)
+
+//configuration
+Structure.forEach(s=>{
+  Global.Configuration.ActiveStages[s.alias]=true;
+});
 
 //level 1 (ws, ww, fs)
 Global.Water.ws_resi_pop             = 1000; //people

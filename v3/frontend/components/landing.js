@@ -3,6 +3,7 @@ let landing = new Vue({
 
   data:{
     visible:false,
+
     Global,
     Languages,
   },

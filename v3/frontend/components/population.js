@@ -4,15 +4,6 @@ let population = new Vue({
   data:{
     visible:false,
     caption,
-    Population:[
-      {level:'Water', stage:Global.Water,            code:'ws_resi_pop'},
-      {level:'Water', stage:Global.Water,            code:'ws_serv_pop'},
-      {level:'Waste', stage:Global.Waste,            code:'ww_resi_pop'},
-      {level:'Waste', stage:Global.Waste.Collection, code:'wwc_conn_pop'},
-      {level:'Waste', stage:Global.Waste.Treatment,  code:'wwt_serv_pop'},
-      {level:'Faecl', stage:Global.Faecl,            code:'fs_resi_pop'},
-      {level:'Faecl', stage:Global.Faecl,            code:'fs_onsi_pop'},
-    ],
 
     Global,
     Structure,
@@ -21,6 +12,17 @@ let population = new Vue({
   methods:{
     translate,
     format,
+    get_population(){ //get population structure
+      return [
+        {level:'Water', stage:this.Global.Water,            code:'ws_resi_pop'},
+        {level:'Water', stage:this.Global.Water,            code:'ws_serv_pop'},
+        {level:'Waste', stage:this.Global.Waste,            code:'ww_resi_pop'},
+        {level:'Waste', stage:this.Global.Waste.Collection, code:'wwc_conn_pop'},
+        {level:'Waste', stage:this.Global.Waste.Treatment,  code:'wwt_serv_pop'},
+        {level:'Faecl', stage:this.Global.Faecl,            code:'fs_resi_pop'},
+        {level:'Faecl', stage:this.Global.Faecl,            code:'fs_onsi_pop'},
+      ];
+    },
     focus_input(pop, event){
       let input = event.target;
       input.value = pop.stage[pop.code]
@@ -53,7 +55,7 @@ let population = new Vue({
           <tr v-if="!Global.Configuration.ActiveStages[l1.alias]">
             <td colspan=3 inactive>{{translate('birds_stage_not_active')}}</td>
           </tr>
-          <tr v-else v-for="pop in Population.filter(p=>p.level==l1.level)">
+          <tr v-else v-for="pop in get_population().filter(p=>p.level==l1.level)">
             <td
               @mousemove="caption.show($event, translate(pop.code+'_expla'))"
               @mouseout="caption.hide()"
@@ -65,7 +67,7 @@ let population = new Vue({
                 :value="format(pop.stage[pop.code])"
                 @focus="focus_input(pop, $event)"
                 @blur="blur_input(pop, $event)"
-                :tabindex="Population.indexOf(pop)+1"
+                :tabindex="get_population().indexOf(pop)+1"
                 style="text-align:right"
               >
             </td>

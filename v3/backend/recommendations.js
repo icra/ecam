@@ -99,5 +99,3 @@ let Recommendations={
     /*wst*/
     /*wsd*/
 };
-
-Global.Recommendations=Recommendations;//enable formula search in Recommendations
