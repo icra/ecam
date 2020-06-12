@@ -39,12 +39,6 @@ let tier_b = new Vue({
 
         //reset values
         Questions.reset_values(question, this.get_current_stage());
-
-        //reset folding
-        Questions[question].folded = 0;
-        Questions[question].otherQuestions.forEach(key=>{
-          Questions[key].folded = 0;
-        });
       }
     },
 
@@ -55,17 +49,25 @@ let tier_b = new Vue({
         return this.Global[this.level];
       }
     },
+
+    fold_question(key){
+      if(!this.Global.Configuration.Questions[key]){
+        return;
+      }
+      let index = this.Global.Configuration.FoldedQuestions.indexOf(key);
+      if(index == -1){
+        this.Global.Configuration.FoldedQuestions.push(key);
+      }else{
+        this.Global.Configuration.FoldedQuestions.splice(index,1);
+      }
+    },
   },
 
   template:`
     <!--tier b VIEW-->
     <div id=tier_b v-if="visible">
       <!--tier b title + tips-->
-      <div class=flex
-        style="
-          justify-content:space-between;
-        "
-      >
+      <div class=flex style="justify-content:space-between;">
         <h1>
           <a onclick="ecam.show('get_started')">{{Global.General.Name}}</a>
           <span style="color:black">&rsaquo;</span>
@@ -264,15 +266,16 @@ let tier_b = new Vue({
                 <div style="display:grid;grid-template-columns:50% 50%">
                   <!--question text-->
                   <div
-                    @click="Questions[question].folded ^= Global.Configuration.Questions[question]"
+                    @click="fold_question(question)"
                     class="question_container flex"
                     :style="(Global.Configuration.Questions[question]?'cursor:pointer':'')"
                   >
                     <div v-if="Global.Configuration.Questions[question]">
                       <!--question folded marker-->
-                      <div :class="'question_fold_marker '+(Questions[question].folded?'folded':'')">
+                      <div :class="'question_fold_marker '+(Global.Configuration.FoldedQuestions.indexOf(question)+1 ? 'folded':'')">
                         ▼
                       </div>
+
                     </div>
                     <div v-html="translate(question)+'?'"
                       :class="Global.Configuration.Questions[question] ? 'question_text':''"
@@ -299,7 +302,7 @@ let tier_b = new Vue({
                   &&
                   typeof(get_current_stage()[key])=='number'
                   &&
-                  (!Questions[question].folded)
+                  Global.Configuration.FoldedQuestions.indexOf(question)==-1
                 "
               >
                 <td>
@@ -439,8 +442,7 @@ let tier_b = new Vue({
       </div>
 
       <!--tier b substages "level 3"-->
-      <div
-        v-if="sublevel"
+      <div v-if="sublevel"
         style="
           margin-top: 10px;
           padding: 10px;
@@ -476,5 +478,4 @@ let tier_b = new Vue({
       </div>
     </div>
   `,
-
 });

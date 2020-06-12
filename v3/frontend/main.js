@@ -140,7 +140,15 @@ let ecam={
   new_scenario(){
     let scenario = new Ecam();
     Scenarios.push(scenario);
-    this.set_current_scenario(scenario);
+    //this.set_current_scenario(scenario);
+  },
+
+  //delete scenario
+  delete_scenario(scenario){
+    if(scenario==Global) return;
+    let index = Scenarios.indexOf(scenario);
+    if(index==-1) return;
+    Scenarios.splice(index,1);
   },
 };
 

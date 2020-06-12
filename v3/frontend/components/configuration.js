@@ -256,7 +256,7 @@ let configuration = new Vue({
       }else{
         //l2
         obj = this.Global[stage.level][stage.sublevel];
-        Substages[stage.level][stage.sublevel]=[]; //reset substages
+        Global.Substages[stage.level][stage.sublevel]=[]; //reset substages
       }
 
       //reset obj values

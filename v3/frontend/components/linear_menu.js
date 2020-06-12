@@ -145,6 +145,21 @@ let linear_menu = new Vue({
           @mouseout="caption.hide()"
         >
       </div>
+
+      <!--linear select scenario button-->
+      <div>
+        <div>
+          <span style="color:inherit">
+            Select Scenario
+          </span>
+        </div>
+        <button
+          onclick="ecam.show('select_scenario')"
+          @mousemove="caption.show($event, 'Select Scenario')"
+          @mouseout="caption.hide()"
+          v-html="'Select Scenario'"
+        ></button>
+      </div>
     </div>
   `,
 });

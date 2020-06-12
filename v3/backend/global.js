@@ -7,7 +7,7 @@ class Ecam{
   constructor(){
     this.General={
       version              : "3.0.0",
-      Name                 : "New system name",
+      Name                 : `System ${1+Scenarios.length}`,
       AssessmentPeriodStart: "2020-01-01",
       AssessmentPeriodEnd  : "2020-12-31",
       Comments             : "",
@@ -680,7 +680,18 @@ class Ecam{
         //wwt_valorizing_biogas: 0,
         //fst_valorizing_biogas: 0,
       },
+
+      FoldedQuestions:[
+        //keys of folded questions
+      ],
     };
+
+    //set default values for all questions to 0
+    Object.keys(Questions).filter(key=>{
+      return typeof(Questions[key])=='object'
+    }).forEach(key=>{
+      this.Configuration.Questions[key]=0;
+    });
 
     /*Tier A backend (inputs and outputs only)*/
     this.Tier_A={
@@ -1961,8 +1972,9 @@ class Ecam{
     }
 };
 
-//create default scenario
-let Global=new Ecam();
-
 //create array of scenarios
-let Scenarios=[Global];
+let Scenarios=[];
+
+//default scenario
+let Global=new Ecam();
+Scenarios.push(Global);

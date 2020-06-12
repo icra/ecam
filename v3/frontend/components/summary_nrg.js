@@ -60,7 +60,7 @@ let summary_nrg = new Vue({
                 </li>
               </ul>
             </td>
-            <td style="padding:0">
+            <td style="padding:0;vertical-align:top">
               <table border=1 style=margin:-1px>
                 <tr>
                   <th>{{translate('stage')}}</th>

@@ -435,3 +435,7 @@ body {
   #emission_tree details summary {
     cursor:pointer;
   }
+
+/*select scenario*/
+  #select_scenario {
+  }
