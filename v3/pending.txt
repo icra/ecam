@@ -5,7 +5,6 @@ PENDING TASKS
   - tier A 100% decoupled from tier B
     - outputs
     - discuss with viti charts
-  - rewiring ecam tool for edge compatibility
 
 * main menu buttons
   - new
