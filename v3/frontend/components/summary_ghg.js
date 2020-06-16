@@ -41,7 +41,7 @@ let summary_ghg = new Vue({
       //create new div
       let div = document.createElement('div');
       cap.appendChild(div);
-      div.innerHTML += `<div><b>${translate(level)} ${translate(sublevel)}</b></div>`;
+      div.innerHTML=`<div><b>${translate(level)} ${translate(sublevel)}</b></div>`;
 
       //get emission code
       let code = this.Structure.find(s=>(s.level==level && s.sublevel==sublevel)).prefix + '_KPI_GHG';
@@ -62,15 +62,18 @@ let summary_ghg = new Vue({
       table.style.width = "100%";
       div.appendChild(table);
 
-      for(let field in stage.equations){
-        if(field.search('_KPI_GHG_')+1) {
-          let value = this.Global[field](); //kgCO2
-          if(!value){continue}
-          let newRow = table.insertRow(-1);
-          newRow.insertCell(-1).innerHTML = translate(field+"_descr").prettify();
-          newRow.insertCell(-1).innerHTML = format(value);
-        }
-      }
+      stage.equations.forEach(field=>{
+        if(field.search('_KPI_GHG_')==-1) return;
+
+        //get value
+        let value = this.Global[field](); //kgCO2eq
+        if(!value) return;
+
+        //create new row
+        let newRow = table.insertRow(-1);
+        newRow.insertCell(-1).innerHTML = translate(field+"_descr").prettify();
+        newRow.insertCell(-1).innerHTML = format(value);
+      })
 
     },
 

@@ -28,6 +28,7 @@ let select_scenario = new Vue({
           margin:auto;
         "
         v-html="'add new scenario'"
+        :title="'create new blank scenario'"
       ></button>
 
       <!--select scnario table-->

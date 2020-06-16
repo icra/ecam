@@ -89,12 +89,11 @@ let tier_a = new Vue({
       </div>
 
       <!--tier a inputs and outputs-->
-      <div class=flex style="padding:10px 2px">
+      <div class=flex style="padding:10px 2px;justify-content:space-between;">
         <!--tier a inputs-->
         <div>
           <table>
-            <tbody v-for="level,key in Global.Tier_A"
-            >
+            <tbody v-for="level,key in Global.Tier_A">
               <tr :style="'color:white;background:'+Structure.find(s=>s.level==key).color">
                 <td colspan=3>
                   <img :src="'frontend/img/'+Structure.find(s=>s.level==key).alias+'.png'"
@@ -166,7 +165,7 @@ let tier_a = new Vue({
         </div>
 
         <!--tier a outputs-->
-        <div style="margin-left:2px">
+        <div>
           <b>Tier A outputs (for drawing charts TODO)</b>:
 
           <table>

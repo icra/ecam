@@ -1,4 +1,4 @@
-let tier_b = new Vue({
+let tier_b=new Vue({
   el:"#tier_b",
 
   data:{
@@ -19,48 +19,6 @@ let tier_b = new Vue({
     Normalization,
     Formulas,
     Questions,
-  },
-
-  methods:{
-    translate,
-    format,
-    get_level_color,
-
-    set_question(question, new_value){
-      //set new question answer
-      this.Global.Configuration.Questions[question] = new_value;
-
-      //if answer is no:
-      if(!new_value){
-        //disable related questions recursively
-        Questions[question].otherQuestions.forEach(key=>{
-          this.set_question(key, false);
-        });
-
-        //reset values
-        Questions.reset_values(question, this.get_current_stage());
-      }
-    },
-
-    get_current_stage(){
-      if(this.sublevel){
-        return this.Global[this.level][this.sublevel];
-      }else{
-        return this.Global[this.level];
-      }
-    },
-
-    fold_question(key){
-      if(!this.Global.Configuration.Questions[key]){
-        return;
-      }
-      let index = this.Global.Configuration.FoldedQuestions.indexOf(key);
-      if(index == -1){
-        this.Global.Configuration.FoldedQuestions.push(key);
-      }else{
-        this.Global.Configuration.FoldedQuestions.splice(index,1);
-      }
-    },
   },
 
   template:`
@@ -478,4 +436,46 @@ let tier_b = new Vue({
       </div>
     </div>
   `,
+
+  methods:{
+    translate,
+    format,
+    get_level_color,
+
+    set_question(question, new_value){
+      //set new question answer
+      this.Global.Configuration.Questions[question] = new_value;
+
+      //if answer is no:
+      if(!new_value){
+        //disable related questions recursively
+        Questions[question].otherQuestions.forEach(key=>{
+          this.set_question(key, false);
+        });
+
+        //reset values
+        Questions.reset_values(question, this.get_current_stage());
+      }
+    },
+
+    get_current_stage(){
+      if(this.sublevel){
+        return this.Global[this.level][this.sublevel];
+      }else{
+        return this.Global[this.level];
+      }
+    },
+
+    fold_question(key){
+      if(!this.Global.Configuration.Questions[key]){
+        return;
+      }
+      let index = this.Global.Configuration.FoldedQuestions.indexOf(key);
+      if(index == -1){
+        this.Global.Configuration.FoldedQuestions.push(key);
+      }else{
+        this.Global.Configuration.FoldedQuestions.splice(index,1);
+      }
+    },
+  },
 });

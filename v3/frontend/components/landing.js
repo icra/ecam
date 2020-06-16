@@ -55,9 +55,8 @@ let landing = new Vue({
                   onclick="newSystem()"
                   style=margin-left:0
                   disabled
-                >
-                  {{translate('new')}}
-                </button>
+                  v-html="translate('new')"
+                ></button>
               </div>
 
               <!--load/open-->
@@ -68,19 +67,23 @@ let landing = new Vue({
                   onchange="loadFile(event)"
                   style=display:none
                 >
-                <button class="button edit" disabled
-                  onclick="document.getElementById('loadfile').click()">
-                  {{translate('open')}}
-                </button>
+                <button
+                  class="button edit"
+                  onclick="document.getElementById('loadfile').click()"
+                  disabled
+                  v-html="translate('open')"
+                ></button>
               </div>
 
               <!--save-->
               <div>
-                <button class="button save" onclick=saveToFile() disabled>
+                <button
+                  class="button save"
+                  onclick=saveToFile()
+                  disabled
+                >
                   {{translate('save_as')}}
-                  <span id=save_as_filename>
-                    "{{Global.General.Name}}.json"
-                  </span>
+                  "{{Global.General.Name}}.json"
                 </button>
               </div>
 
@@ -88,9 +91,8 @@ let landing = new Vue({
               <div>
                 <button class="button next"
                   onclick="event.stopPropagation();ecam.show('get_started')"
-                >
-                  {{translate('next')}}
-                </button>
+                  v-html="translate('next')"
+                ></button>
               </div>
             </div>
           </div>
@@ -111,19 +113,26 @@ let landing = new Vue({
             </a>
           </div>
 
-          <img class="license_img license_img-big"
-            src="frontend/img/CC_license_small.png" alt=""><br>
+          <img
+            class="license_img license_img-big"
+            src="frontend/img/CC_license_small.png"
+            alt=""
+          >
+          <br>
 
           {{translate("ecam_by_iwa_giz_icra")}}
+
           <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
             {{translate("creative_commons_attr")}}
           </a>.
+
           <div style=font-size:smaller>
             {{translate("wacclim_is_part_of_IKI")}}
           </div>
+
         </div>
 
-        <!--picture-->
+        <!--urban water cycle picture-->
         <div class="width_50" style="padding:0;text-align:center">
           <img class="img_resp" src="frontend/img/diagram.png">
         </div>

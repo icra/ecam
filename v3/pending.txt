@@ -1,62 +1,49 @@
 PENDING TASKS
--------------
 
-* DOING NOW:
-  - tier A 100% decoupled from tier B
-    - outputs
-    - discuss with viti charts
+-------------------------------------------------------------------------------
+new features requested for v3
+-------------------------------------------------------------------------------
 
-* main menu buttons
-  - new
-  - save as
-  - open
-    - compabibility module ['Yes/No':'Questions']
+* Implement History
+  - modify behaviour of back button
 
-* tier b substages
+* Reporting function
+  - "print report" button enables the user to create a pdf of the results.
+
+* Compare scenarios
+  - instructions to be received on how this page should look
+
+* Enhancement of ghg models (instructions to be received)
+
+-------------------------------------------------------------------------------
+improvements
+-------------------------------------------------------------------------------
+
+* Landing
+  - main menu buttons
+    - open button (load files)
+      - implement compabibility module
+        - v2 to v3 structure
+        - ['Yes/No':'Questions']
+    - save button
+      - save inputs and outputs
+
+* Tier A
+  - discuss with viti tier A charts
+  - discuss value and remove it
+
+* Tier B substages
   - new design (viti)
   - reimplement benchmarks
 
-* reporting tool (new feature)
-* history, back button (new feature)
-
-- Fetching language files asyncronously does not work for offline use (CORS is
+* Fetching language files asyncronously does not work for offline use (CORS is
   not compatible with file protocol, find alternative way to loading files
   offline.)
 
-* Landing Page (TBD with VITI)
-  - Design should be improved
-  - Links don’t look appealing
-  - Should include information about income
-  - 'Help' button is not easy to find
-  - Support docs are missing (esp. Spanish)
+* reimplement editing inputs with the arrow keys
 
-* General Info (TBD with VITI)
-  - It should be obvious which data is relevant and why (Colours, symbol etc)
+* change the input_ecam component layot from grid to table-cell
 
-* Population (TBD with VITI)
-  - Names of input fields could be clearer
-  - It’s not clear that the definitions appear if you hover over the fields. A simple (?) could help
-  - Definitions should be shorter and more concrete (see FSM, missing definitions)
+* translations of new pieces of text
 
-* Configuration
-  - Difference between Tier A and B is not clear
-  - They are two different assessments, but it looks like you have to do both + the costs can only be inserted in Tier A. If in ECAM 3.0 both tiers are completely separated, costs should also be inserted in Tier B.
-
-* Tier A:
-  - There should be an explanatory sentence on what Tier A (and B), also highlighting the importance of data
-  - Results of Tier A are confusing because there are shown as “Outputs” and not as assumed under “Summaries”.
-  - Sankey Graphic is not easy to find, it should be under graphics /summary
-
-* Tier B:
-  - The tips in the top right corner get lost
-  - Advance assessment is easily overseen (+)
-  - Advance assessment is not clear. When should this be used and how? For example, it should be used if there are different treatment technologies
-
-* Summaries page:
-  - Difference between Tier A and B results should be clearer
-  - Units of results could be more obvious
-  - Results of sub-stages are only shown when the box is ticked. This is not clear
-
-* Opportunities page:
-  - It is not clear how to use it or how results are to be interpreted.
-  - Spanish translations are needed
+* rebuild Sankey Graphic for v3

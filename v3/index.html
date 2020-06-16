@@ -94,6 +94,7 @@
   <div id=caption              ></div> <!--caption            ELEMENT-->
   <div id=linear_menu          ></div> <!--linear menu        ELEMENT-->
   <div id=sidebar              ></div> <!--sidebar            ELEMENT-->
+
   <div id=landing              ></div> <!--landing               VIEW-->
   <div id=about                ></div> <!--about                 VIEW-->
   <div id=help                 ></div> <!--help                  VIEW-->
@@ -112,6 +113,7 @@
   <div id=constants            ></div> <!--constants             VIEW-->
   <div id=development          ></div> <!--development           VIEW-->
   <div id=emission_tree        ></div> <!--emission tree         VIEW-->
+  <div id=select_scenario      ></div> <!--select scenario       VIEW-->
 
   <!--TODO-->
   <div id=problems             ></div> <!--problems              VIEW-->
@@ -120,8 +122,6 @@
   <div id=data_structure_viewer></div> <!--data_structure_viewer VIEW-->
   <div id=benchmarks           ></div> <!--benchmarks            VIEW-->
   <div id=graphs               ></div> <!--graphs                VIEW-->
-
-  <div id=select_scenario      ></div> <!--select scenario       VIEW-->
 </div>
 
 <!--load vue objects-->
@@ -153,15 +153,14 @@
   <script src="frontend/components/constant.js"></script>
   <script src="frontend/components/constants.js"></script>
   <script src="frontend/components/emission_tree.js"></script>
-
-  <!--TODO-->
-  <script src="frontend/components/development.js"></script>
   <script src="frontend/components/select_scenario.js"></script>
+
+  <!--TODO VIEWS list-->
+  <script src="frontend/components/development.js"></script>
 
   <!--default settings on reload (for development)-->
   <script src="defaults.js"></script>
 
-  <!--main ecam view controller-->
+  <!--main ecam controller for views-->
   <script src="frontend/main.js"></script>
 <!--/load vue objects-->
-
