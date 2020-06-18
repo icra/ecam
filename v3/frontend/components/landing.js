@@ -14,9 +14,9 @@ let landing = new Vue({
 
   template:`
     <div id=landing v-if="visible && Languages.ready">
-      <div id=content>
-        <!--index title-->
-        <div class="width_50">
+      <main>
+        <!--title and introduction-->
+        <div>
           <h1 class="blue_h1" style=padding-bottom:0px>
             {{translate("a_toolkit_for_utilities")}}
           </h1>
@@ -25,10 +25,10 @@ let landing = new Vue({
           </h1>
 
           <!--index text-->
-          <h4 style=font-size:18px;color:#58595b>
+          <h4 style="font-size:18px;color:#58595b;margin-left:0">
             {{translate("index_description")}}
           </h4>
-          <h4 style=font-size:18px;color:#58595b>
+          <h4 style="font-size:18px;color:#58595b;margin-left:0">
             {{translate("ecam_is_a_free_and")}}
             <a target=_blank href=//github.com/icra/ecam>
               {{translate("open_source")}}
@@ -40,7 +40,7 @@ let landing = new Vue({
           </h4>
 
           <!--MENU BUTTONS-->
-          <div style="padding:1em 0em">
+          <div style="padding:1em 0">
             <div class=flex id=menu_buttons>
               <!--load/open-->
               <div>
@@ -68,22 +68,22 @@ let landing = new Vue({
             </div>
           </div>
 
-          <div style="
-            font-size:x-large;
-          ">
+          <div class=links_under_buttons>
             <div>
-              <a href="mailto:wacclim@giz.de" target=_blank>
-                {{translate("contact")}}: wacclim@giz.de
+              <a onclick="ecam.show('about')">
+                {{translate("about")}}
               </a>
             </div>
+            <div class=separator>|</div>
             <div>
               <a onclick="ecam.show('help')">
                 {{translate("help")}}
               </a>
             </div>
+            <div class=separator>|</div>
             <div>
-              <a onclick="ecam.show('about')">
-                {{translate("about")}}
+              <a href="mailto:wacclim@giz.de" target=_blank>
+                {{translate('contact')}}: wacclim@giz.de
               </a>
             </div>
           </div>
@@ -92,10 +92,12 @@ let landing = new Vue({
             class="license_img license_img-big"
             src="frontend/img/CC_license_small.png"
             alt=""
+            style="margin-bottom:5px"
           >
-          <br>
 
-          {{translate("ecam_by_iwa_giz_icra")}}
+          <div>
+            {{translate("ecam_by_iwa_giz_icra")}}
+          </div>
 
           <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
             {{translate("creative_commons_attr")}}
@@ -104,14 +106,13 @@ let landing = new Vue({
           <div style=font-size:smaller>
             {{translate("wacclim_is_part_of_IKI")}}
           </div>
-
         </div>
 
         <!--urban water cycle picture-->
-        <div class="width_50" style="padding:0;text-align:center">
+        <div style="padding:0;text-align:center">
           <img class="img_resp" src="frontend/img/diagram.png">
         </div>
-      </div>
+      </main>
 
       <!--logos-->
       <div>
@@ -119,7 +120,7 @@ let landing = new Vue({
           <img
             id=logo-wacclim
             src="frontend/img/logo-wacclim_big.png"
-            style="height:120px;margin:auto"
+            style="height:100px;margin:auto"
           >
         </footer>
         <div style="

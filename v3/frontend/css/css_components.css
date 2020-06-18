@@ -195,14 +195,43 @@ body {
 /*---------------------------------------------------------------------------*/
 
 /*landing*/
-  #landing #content *:not(button){margin:0;padding:0;padding-top:0.7em;padding-bottom:0.7em}
-  #landing #content {
-    padding: 0 10em 0 10em;
-    text-align:left;
+  #landing main {
+    padding:0 10em;
+    display:grid;
+    grid-template-columns:50% 50%;
   }
-  #landing #content .width_50 .img_resp{
+  #landing .img_resp{
     width: 100%;
-    padding-top: 9em;
+    padding-top: 1em;
+  }
+  #landing .green_h1{
+    color: #9fc231;
+    padding-left:0;
+  }
+  #landing .blue_h1{
+    font-size: 42px;
+    font-weight: 700;
+    color: #2b6488;
+    padding-left:0;
+  }
+  #landing .links_under_buttons {
+    padding:0.5em 0 1em 0;
+    display:flex;
+    flex-wrap:wrap;
+    font-size:large;
+  }
+  #landing .links_under_buttons > div.separator {
+    color:#ccc;
+    margin:0 20px;
+  }
+
+  /*footer*/
+  #landing .license_img{
+    width: 20px;
+    height: auto;
+  }
+  #landing .license_img-big{
+    width: 90px;
   }
   #landing #menu_buttons button {
     display:block;
@@ -211,15 +240,14 @@ body {
     margin-bottom:0;
   }
   #landing #footer{
-    text-align:left;
-    padding:0.5em 10em 0.5em 10em;
     background:white;
-    line-height:2em;
-    color:white;
+    bottom:0;
     color:#333;
     height:6em;
-    bottom:0;
+    line-height:2em;
     margin-top:30px;
+    padding:0.5em 10em 0.5em 10em;
+    text-align:left;
   }
   #landing #footer img#logo-wacclim{
     display:block;

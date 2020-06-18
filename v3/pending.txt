@@ -4,6 +4,8 @@ PENDING TASKS
 new features requested for v3
 -------------------------------------------------------------------------------
 
+* Implement changes requested by Corinne on June 19th 2020.
+
 * Implement History
   - modify behaviour of back button
 
@@ -19,7 +21,9 @@ new features requested for v3
 improvements
 -------------------------------------------------------------------------------
 
-* move content_C and content_N functions from Global.General
+* Redesign sidebar with viti
+
+* Move content_C and content_N functions from Global.General
 
 * Landing
   - main menu buttons
@@ -27,10 +31,10 @@ improvements
       - implement compabibility module
         - v2 to v3 structure
         - ['Yes/No':'Questions']
-    - save button
-      - save inputs and outputs
+    - save button: reimplement
 
 * Tier A
+  - redesign tier A with viti
   - discuss with viti tier A charts
   - discuss value and remove it
 
@@ -42,10 +46,8 @@ improvements
   not compatible with file protocol, find alternative way to loading files
   offline.)
 
-* reimplement editing inputs with the arrow keys
+* Reimplement editing inputs with the arrow keys
 
-* change the input_ecam component layot from grid to table-cell
+* Translations of new pieces of text
 
-* translations of new pieces of text
-
-* rebuild Sankey Graphic for v3
+* Rebuild Sankey Graphic for v3
