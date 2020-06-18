@@ -8,10 +8,10 @@ linear_menu.visible   = 1;
 sidebar.visible       = 0;
 
 //page views
-select_scenario.visible = 1;
+landing.visible         = 1;
+select_scenario.visible = 0;
 constants.visible       = 0;
 emission_tree.visible   = 0;
-landing.visible         = 0;
 summary_ghg.visible     = 0;
 summary_nrg.visible     = 0;
 tier_a.visible          = 0;

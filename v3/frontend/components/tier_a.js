@@ -21,7 +21,10 @@ let tier_a = new Vue({
   template:`
     <div id=tier_a v-if="visible && Languages.ready">
       <h1>
-        {{translate('quick_assessment')}} &mdash;
+        {{Global.General.Name}}
+        &mdash;
+        {{translate('quick_assessment')}}
+        &mdash;
         {{translate('initial_estimation_description')}}
       </h1>
 
@@ -37,7 +40,7 @@ let tier_a = new Vue({
         ">
         <!--assessment period-->
         <div>
-          <a onclick="ecam.show('get_started')">
+          <a onclick="ecam.show('select_scenario')">
             {{translate('assessment_period')}}
           </a>:
           <span>

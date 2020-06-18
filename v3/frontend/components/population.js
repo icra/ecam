@@ -38,7 +38,11 @@ let population = new Vue({
 
   template:`
     <div id=population v-if="visible">
-      <h1 style="text-align:center">{{translate('population')}}</h1>
+      <h1 style="text-align:center">
+        {{Global.General.Name}}
+        &mdash;
+        {{translate('population')}}
+      </h1>
 
       <h4 style="text-align:center;margin:0;margin-bottom:1em">
         {{translate("Enter the population living at each level of your system")}}

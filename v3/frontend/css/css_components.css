@@ -21,15 +21,15 @@ body {
 
     /*css grid*/
     display:grid;
-    grid-template-columns:5% 70% 10% 10% 5%; /*sum: 85%*/
-    /*                    b   l   v   b  l
-                          u   o   e   t  a
-                          r   g   r   n  n
-                          g   o   s      g
-                          e       i   m  u
-                          r       o   e  a
-                                  n   n  g
-                                      u  e
+    grid-template-columns:5% 50% 20% 10% 10% 5%; /*sum: 85%*/
+    /*                    b   l   s   v   b  l
+                          u   o   y   e   t  a
+                          r   g   s   r   n  n
+                          g   o   t   s      g
+                          e       e   i   m  u
+                          r       m   o   e  a
+                                      n   n  g
+                                          u  e
     */
   }
   #ecam_logo a{color:white;}
@@ -231,22 +231,6 @@ body {
 /*help*/
   #help {
     text-align:center;
-  }
-
-/*get started*/
-  #get_started {
-  }
-  #get_started th{
-    text-align:left;
-    vertical-align:middle
-  }
-  #get_started th,
-  #get_started td{
-    padding:1em
-  }
-  #get_started input,
-  #get_started textarea{
-    padding:0.5em
   }
 
 /*configuration*/

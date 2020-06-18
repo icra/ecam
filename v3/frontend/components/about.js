@@ -74,8 +74,8 @@ let about = new Vue({
         <br><br>
         ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under
         a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work
-        at <a target="_blank" href="https://creativecommons.org/choose/www.wacclim.org">www.wacclim.org</a>. Permissions beyond the scope of this license may be available
-        at <a target="_blank" href="https://creativecommons.org/choose/wacclim@giz.de">wacclim@giz.de</a>.
+        at <a target="_blank" href="www.wacclim.org">www.wacclim.org</a>. Permissions beyond the scope of this license may be available
+        at <a target="_blank" href="mailto:wacclim@giz.de">wacclim@giz.de</a>.
       </div>
 
       <!--logo wacclim-->

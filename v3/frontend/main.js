@@ -1,6 +1,5 @@
 //main view controller
 let ecam={
-
   //elements of the user interface: ecam_logo, sidebar, etc (Vue objects)
   elements:{
     ecam_logo,
@@ -12,7 +11,7 @@ let ecam={
   //views (==pages, Vue objects)
   views:{
     landing,
-    get_started,
+    select_scenario,
     configuration,
     countries,
     population,
@@ -35,7 +34,6 @@ let ecam={
     data_structure_viewer,
     benchmarks,
     graphs,
-    select_scenario,
   },
 
   //show a view (==open a page)

@@ -25,10 +25,11 @@ let tier_b=new Vue({
   template:`
     <!--tier b VIEW-->
     <div id=tier_b v-if="visible && Languages.ready">
+
       <!--tier b title + tips-->
       <div class=flex style="justify-content:space-between;">
         <h1>
-          <a onclick="ecam.show('get_started')">{{Global.General.Name}}</a>
+          <a onclick="ecam.show('select_scenario')">{{Global.General.Name}}</a>
           <span style="color:black">&rsaquo;</span>
           <a onclick="linear_menu.go_to(tier_b.level)"
             :style="'cursor:pointer;color:'+get_level_color(level)"
@@ -36,9 +37,10 @@ let tier_b=new Vue({
             {{translate(level)}}
           </a>
           <span v-if="sublevel">
-            <span style="color:black">&rsaquo;</span>
-            <span style="font-size:larger;color:black">
-              {{translate(sublevel)}}</span>
+            <span style="color:black">
+              &rsaquo;
+              {{translate(sublevel)}}
+            </span>
           </span>
         </h1>
 
@@ -76,7 +78,7 @@ let tier_b=new Vue({
       >
         <!--assessment period-->
         <div>
-          <a onclick="ecam.show('get_started')">
+          <a onclick="ecam.show('select_scenario')">
             {{translate('assessment_period')}}:
             <b style=color:black>
               <span :class="Global.Days()==0 ? 'warning' : ''">

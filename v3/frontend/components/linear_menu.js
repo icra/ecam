@@ -2,7 +2,7 @@ let linear_menu = new Vue({
   el:"#linear_menu",
 
   data:{
-    visible: true,
+    visible:true,
     current_view: null,
     caption,
 
@@ -25,17 +25,17 @@ let linear_menu = new Vue({
   template:`
     <!--linear menu COMPONENT-->
     <div id=linear_menu v-if="visible && Languages.ready" class=flex>
-      <!--linear general info-->
-      <div onclick="ecam.show('get_started')">
+      <!--linear select scenario button-->
+      <div onclick="ecam.show('select_scenario')">
         <div>
-          <a style="color:inherit">
-            {{translate('getStarted_general_info')}}
-          </a>
+          <span style="color:inherit">
+            Systems
+          </span>
         </div>
         <img
-          :class="'l1 '+(current_view=='get_started'?'selected':'')"
+          :class="'l1 '+(current_view=='select_scenario'?'selected':'')"
           src=frontend/img/getStarted.png
-          @mousemove="caption.show($event, translate('getStarted_general_info'))"
+          @mousemove="caption.show($event, 'Systems')"
           @mouseout="caption.hide()"
         >
       </div>
@@ -145,22 +145,6 @@ let linear_menu = new Vue({
           @mouseout="caption.hide()"
         >
       </div>
-
-      <!--linear select scenario button-->
-      <div>
-        <div>
-          <span style="color:inherit">
-            Scenarios
-          </span>
-        </div>
-        <button
-          onclick="ecam.show('select_scenario')"
-          @mousemove="caption.show($event, 'Select Scenario')"
-          @mouseout="caption.hide()"
-          v-html="'Select Scenario'"
-        ></button>
-      </div>
-
     </div>
   `,
 });

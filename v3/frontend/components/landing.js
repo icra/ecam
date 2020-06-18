@@ -38,27 +38,10 @@ let landing = new Vue({
               {{translate("wacclim_project")}}
             </a>
           </h4>
-          <h4 style=font-size:18px;color:#58595b>
-            {{translate("first_time_using_ecam")}}
-            <a onclick="ecam.show('help')">
-              {{translate("here")}}.
-            </a>
-          </h4>
 
           <!--MENU BUTTONS-->
-          <div style="padding:1em 0">
+          <div style="padding:1em 0em">
             <div class=flex id=menu_buttons>
-              <!--new-->
-              <div>
-                <button
-                  class="button add"
-                  onclick="newSystem()"
-                  style=margin-left:0
-                  disabled
-                  v-html="translate('new')"
-                ></button>
-              </div>
-
               <!--load/open-->
               <div>
                 <input type=file
@@ -75,42 +58,34 @@ let landing = new Vue({
                 ></button>
               </div>
 
-              <!--save-->
-              <div>
-                <button
-                  class="button save"
-                  onclick=saveToFile()
-                  disabled
-                >
-                  {{translate('save_as')}}
-                  "{{Global.General.Name}}.json"
-                </button>
-              </div>
-
               <!--next-->
               <div>
                 <button class="button next"
-                  onclick="event.stopPropagation();ecam.show('get_started')"
+                  onclick="event.stopPropagation();ecam.show('select_scenario')"
                   v-html="translate('next')"
                 ></button>
               </div>
             </div>
           </div>
-          <br><br>
 
-          <div>
-            <a class="blue_links" href="http://wacclim.org/" target=_blank>
-              WaCCliM
-            </a> -
-            <a class="blue_links" onclick="ecam.show('about')">
-              {{translate("about")}}
-            </a> -
-            <a class="blue_links" onclick="ecam.show('help')">
-              {{translate("help")}}
-            </a> -
-            <a class="blue_links" href=mailto:wacclim@giz.de target=_blank>
-              {{translate("contact")}}: wacclim@giz.de
-            </a>
+          <div style="
+            font-size:x-large;
+          ">
+            <div>
+              <a href="mailto:wacclim@giz.de" target=_blank>
+                {{translate("contact")}}: wacclim@giz.de
+              </a>
+            </div>
+            <div>
+              <a onclick="ecam.show('help')">
+                {{translate("help")}}
+              </a>
+            </div>
+            <div>
+              <a onclick="ecam.show('about')">
+                {{translate("about")}}
+              </a>
+            </div>
           </div>
 
           <img

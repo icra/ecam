@@ -27,6 +27,11 @@ let ecam_logo=new Vue({
         </div>
       </div>
 
+      <!--current system name-->
+      <div style="font-size:larger" onclick="ecam.show('select_scenario')">
+        {{Global.General.Name}}
+      </div>
+
       <!--version-->
       <div style="font-family:monospace">
         <a href="//github.com/icra/ecam" target=_blank>

@@ -15,8 +15,11 @@ let configuration = new Vue({
     <!--configuration VIEW-->
     <div id=configuration v-if="visible">
       <h1 style=text-align:center>
+        {{Global.General.Name}}
+        &mdash;
         {{translate('configuration')}}
       </h1>
+
       <div class=flex style=justify-content:center>
         <!--configuration left-->
         <div style="max-width:50%">
@@ -126,6 +129,20 @@ let configuration = new Vue({
             </table>
           </fieldset>
 
+          <fieldset>
+            <legend>
+              <span v-html="translate('currency')"></span>:
+              <span style="color:black;font-weight:bold">
+                {{Global.General.Currency}}
+              </span>
+            </legend>
+            {{translate('configuration_new_currency')}}:
+            <input
+              v-model="Global.General.Currency"
+              size=3 maxlength=3 placeholder="ccc"
+            >
+          </fieldset>
+
           <div>
             <!--select assessment report-->
             <fieldset>
@@ -188,7 +205,7 @@ let configuration = new Vue({
       <!--prev & next buttons-->
       <div class=flex style="margin:1em;justify-content:center">
         <button class="button prev"
-          onclick="event.stopPropagation();ecam.show('get_started')">
+          onclick="event.stopPropagation();ecam.show('select_scenario')">
           {{translate('previous')}}
         </button>
         <button class="button next"

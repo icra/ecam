@@ -2,15 +2,7 @@ let select_scenario = new Vue({
   el:"#select_scenario",
   data:{
     visible:false,
-    format,
-    translate,
-
     scenarios_compared:[],
-    compared_variables:[
-      'Name',
-      'AssessmentPeriodStart',
-      'AssessmentPeriodEnd',
-    ],
 
     Global,
     Scenarios,
@@ -78,6 +70,8 @@ let select_scenario = new Vue({
     get_variable_type,
     get_level_color,
     get_base_unit,
+    format,
+    translate,
   },
 
   template:`
@@ -85,7 +79,7 @@ let select_scenario = new Vue({
       <!--select scenario-->
       <div>
         <h1 style="text-align:center">
-          Scenarios
+          Systems
         </h1>
 
         <button onclick="ecam.new_scenario()"
@@ -95,48 +89,91 @@ let select_scenario = new Vue({
             margin:auto;
           "
           class="button add"
-          v-html="'create new scenario'"
-          :title="'create new blank scenario'"
+          v-html="'create new system'"
+          :title="'create new blank system'"
         ></button>
 
         <!--select scenario table-->
         <table style="margin:10px auto">
           <tr>
-            <th>scenario name</th>
-            <th>assessment period start</th>
-            <th>assessment period end</th>
-            <th>days</th>
-            <th>GHG (kgCO<sub>2</sub>eq)</th>
-            <th>energy (kWh)</th>
-            <th>select current scenario</th>
+            <th>
+              System {{translate('getStarted_table_name')}}
+            </th>
+            <th>
+              {{translate('getStarted_table_start')}}
+            </th>
+            <th>
+              {{translate('getStarted_table_end')}}
+            </th>
+            <th>
+              {{translate('getStarted_table_period')}}
+            </th>
+            <th>
+              {{translate('getStarted_table_comments')}}
+            </th>
+            <th title="energy consumed and GHG emissions">summary</th>
+            <th>select current system</th>
             <th>options</th>
-            <th>compare scenarios</th>
+            <th>compare systems</th>
           </tr>
           <tr v-for="scenario in Scenarios"
             :style="(scenario==Global)?'background:yellow':''"
           >
-            <td><span v-html="scenario.General.Name"></span></td>
-            <td class=number><span v-html="scenario.General.AssessmentPeriodStart"></span></td>
-            <td class=number><span v-html="scenario.General.AssessmentPeriodEnd"></span></td>
-            <td class=number><span v-html="format(scenario.Days())"></span></td>
-            <td class=number><span v-html="format(scenario.TotalGHG())"></span></td>
-            <td class=number><span v-html="format(scenario.TotalNRG())"></span></td>
             <td>
+              <input v-model="scenario.General.Name">
+            </td>
+            <td class=number>
+              <input type=date v-model="scenario.General.AssessmentPeriodStart">
+            </td>
+            <td class=number>
+              <input type=date v-model="scenario.General.AssessmentPeriodEnd">
+            </td>
+            <td class=number>
+              <span v-html="format(scenario.Days())"></span>
+              <span class=unit>{{translate('days')}}</span>
+            </td>
+            <td>
+              <details>
+                <summary>
+                  add comments
+                </summary>
+                <div>
+                  <textarea
+                    v-model="scenario.General.Comments"
+                    :placeholder="translate('getStarted_max_200')"
+                    rows=5 cols=50 maxlength=200
+                  ></textarea>
+                </div>
+              </details>
+            </td>
+            <td>
+              <div>
+                <span v-html="format(scenario.TotalNRG())"></span>
+                <span class=unit>kWh</span>
+              </div>
+              <div>
+                <span v-html="format(scenario.TotalGHG())"></span>
+                <span class=unit v-html="Info.TotalGHG.unit.prettify()"></span>
+              </div>
+            </td>
+            <td style="text-align:center">
               <button
                 @click="set_current_scenario(scenario)"
-                v-if="scenario != Global"
                 v-html="'select'"
+                v-if="scenario != Global"
+                style="font-weight:bold"
               ></button>
-
               <span v-if="scenario==Global"
-                style="
-                  font-size:smaller;
-                  font-style:italic;
-                "
-                v-html="'current scenario'"
+                style="font-size:smaller;font-style:italic;"
+                v-html="'~this is the current system'"
               ></span>
             </td>
             <td>
+              <button
+                onclick="ecam.show('configuration')"
+                :disabled="scenario != Global"
+                v-html="'edit'"
+              ></button>
               <button onclick="alert('TODO')">
                 duplicate
               </button>
@@ -144,17 +181,22 @@ let select_scenario = new Vue({
                 load from json file
               </button>
               <button
+                onclick="alert('TODO: see reports of ecam v2.2 tier A')"
+                v-html="'see report'"
+              ></button>
+              <button
                 @click="delete_scenario(scenario)"
                 :disabled="scenario == Global"
                 v-html="'delete'"
+                style="color:red"
               ></button>
             </td>
-            <td>
+            <td style="text-align:center">
               <button @click="add_scenario_to_compared(scenario)">
-                <span v-if="scenarios_compared.indexOf(scenario)==-1">
+                <span v-if="scenarios_compared.indexOf(scenario)==-1" style="color:green">
                   include
                 </span>
-                <span v-else>
+                <span v-else style="color:red">
                   remove
                 </span>
               </button>
@@ -163,9 +205,14 @@ let select_scenario = new Vue({
         </table>
       </div>
 
+      <div><hr></div>
+
       <!--compare scenarios-->
       <div>
-        <h1 style="text-align:center">Compare scenarios</h1>
+        <h1 style="text-align:center">
+          Compare systems
+          (TBD: I would move this part to its own page)
+        </h1>
 
         <!--compare scenarios table-->
         <table style="margin:10px auto" v-if="scenarios_compared.length">

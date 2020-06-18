@@ -199,14 +199,8 @@ span.circle {
   font-weight: 700;
   color: #2b6488;
 }
-.blue_links{
-  color: #2b6488;
-  font-size: 16px;
-}
-.blue_links:visited{
-  color: #2b6488;
-}
 /*end of header*/
+
 /*footer*/
 .license_img{
   width: 20px;

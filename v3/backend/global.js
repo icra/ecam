@@ -7,7 +7,7 @@ class Ecam{
   constructor(){
     this.General={
       version              : "3.0.0",
-      Name                 : `Scenario ${1+Scenarios.length}`,
+      Name                 : `New system ${1+Scenarios.length}`,
       AssessmentPeriodStart: "2020-01-01",
       AssessmentPeriodEnd  : "2020-12-31",
       Comments             : "",
@@ -1972,9 +1972,9 @@ class Ecam{
     }
 };
 
-//create array of scenarios
+//create array of systems (TODO: rename Scenarios to Systems)
 let Scenarios=[];
 
-//default scenario
+//default system
 let Global=new Ecam();
 Scenarios.push(Global);

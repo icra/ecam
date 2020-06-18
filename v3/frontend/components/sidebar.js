@@ -45,10 +45,10 @@ let sidebar = new Vue({
         <li class=section>
           <div class=header>{{translate('main')}}</div>
           <ul>
-            <li class=item><a onclick="ecam.show('get_started')">  {{translate('getStarted_general_info')}}</a></li>
-            <li class=item><a onclick="ecam.show('configuration')">{{translate('configuration')          }}</a></li>
-            <li class=item><a onclick="ecam.show('population')">   {{translate('population')             }}</a></li>
-            <li class=item><a onclick="ecam.show('tier_a')">       {{translate('quick_assessment')       }}</a></li>
+            <li class=item><a onclick="ecam.show('select_scenario')">  Systems                        </a></li>
+            <li class=item><a onclick="ecam.show('configuration')">  {{translate('configuration')   }}</a></li>
+            <li class=item><a onclick="ecam.show('population')">     {{translate('population')      }}</a></li>
+            <li class=item><a onclick="ecam.show('tier_a')">         {{translate('quick_assessment')}}</a></li>
           </ul>
         </li>
 
