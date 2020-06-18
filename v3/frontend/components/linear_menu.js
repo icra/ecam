@@ -150,7 +150,7 @@ let linear_menu = new Vue({
       <div>
         <div>
           <span style="color:inherit">
-            Select Scenario
+            Scenarios
           </span>
         </div>
         <button
@@ -160,6 +160,7 @@ let linear_menu = new Vue({
           v-html="'Select Scenario'"
         ></button>
       </div>
+
     </div>
   `,
 });

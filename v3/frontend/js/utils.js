@@ -38,22 +38,18 @@ function get_current_unit(code){
 }
 
 //get base unit (without unit conversion)
-function get_base_unit(code){
+function get_base_unit(code, scenario){
   if(!code) return false;
+  if(!scenario) scenario = Global;
 
   let info = Info[code];
-  if(!info) throw new Error(`no unit for variable "${code}"`);
+  if(!info) return "";
 
-  if(Units[info.magnitude]){
-    for(let unit in Units[info.magnitude]){
-      if(Units[info.magnitude][unit]==1){
-        return unit;
-        break;
-      }
-    }
-  }else{
-    return info.unit;
+  if(Info[code].magnitude=="Currency"){
+    return scenario.General.Currency;
   }
+
+  return info.unit;
 }
 
 //get level color

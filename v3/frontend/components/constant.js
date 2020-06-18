@@ -14,9 +14,8 @@ let constant = new Vue({
       </h1>
 
       <!--constant description-->
-      <div v-html="Cts[code].descr.prettify()"
-        style="text-align:center"
-      >
+      <div style="text-align:center;font-size:large">
+        <b v-html="Cts[code].descr.prettify()"></b>
       </div>
 
       <!--constant value and unit-->

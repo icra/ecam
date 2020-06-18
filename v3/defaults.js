@@ -9,12 +9,12 @@ sidebar.visible       = 0;
 
 //page views
 select_scenario.visible = 1;
-landing.visible         = 0;
-tier_a.visible          = 0;
-emission_tree.visible   = 0;
 constants.visible       = 0;
+emission_tree.visible   = 0;
+landing.visible         = 0;
 summary_ghg.visible     = 0;
 summary_nrg.visible     = 0;
+tier_a.visible          = 0;
 tier_b.visible          = 0;
 
 //variable viewer

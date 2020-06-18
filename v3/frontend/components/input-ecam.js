@@ -3,9 +3,9 @@
 //-----------------------------------------------------------------------------
 Vue.component('input_ecam',{
   template:`
-    <div style="display:grid;grid-template-columns:60% 30% 10%">
+    <tr>
       <!--input name-->
-      <div
+      <td
         @mousemove="caption.show($event, translate(code+'_expla').prettify())"
         @mouseout="caption.hide()"
       >
@@ -53,53 +53,57 @@ Vue.component('input_ecam',{
             </option>
           </select>
         </div>
-      </div>
+      </td>
 
       <!--input value: numbers and dropdowns-->
-      <div v-if="Info[code] && Info[code].magnitude=='Option'" style="line-height:3em">
-        <select v-model="current_stage[code]">
-          <option
-            v-for="obj,op in Tables[code]"
-            :value="parseInt(Tables[code][op].value)"
-          >
-            ({{Tables[code][op].value}})
-            {{translate(op)}}
-          </option>
-        </select>
-      </div>
-      <div v-else
-        class=input
-        @mousemove="caption.show($event, translate('edit_click_to_modify'))"
-        @mouseout="caption.hide()"
-        style="text-align:right;padding:0"
-      >
-        <input
-          :value="format(current_stage[code]/Units.multiplier(code))"
-          @focus="focus_input(current_stage, code, $event)"
-          @blur="blur_input(current_stage, code, $event)"
+      <td>
+        <div v-if="Info[code] && Info[code].magnitude=='Option'" style="line-height:3em">
+          <select v-model="current_stage[code]">
+            <option
+              v-for="obj,op in Tables[code]"
+              :value="parseInt(Tables[code][op].value)"
+            >
+              ({{Tables[code][op].value}})
+              {{translate(op)}}
+            </option>
+          </select>
+        </div>
+        <div v-else
+          class=input
+          @mousemove="caption.show($event, translate('edit_click_to_modify'))"
+          @mouseout="caption.hide()"
+          style="text-align:right;padding:0"
         >
-      </div>
+          <input
+            :value="format(current_stage[code]/Units.multiplier(code))"
+            @focus="focus_input(current_stage, code, $event)"
+            @blur="blur_input(current_stage, code, $event)"
+          >
+        </div>
+      </td>
 
       <!--input unit select-->
-      <div v-if="Info[code] && Info[code].magnitude!='Option'"
-        style="text-align:left;padding-left:5px;line-height:3em"
-      >
-        <!--select unit-->
-        <select
-          v-if="Units[Info[code].magnitude]"
-          @change="select_unit(code, $event)"
+      <td>
+        <div v-if="Info[code] && Info[code].magnitude!='Option'"
+          style="text-align:left;padding-left:5px;line-height:3em"
         >
-          <option
-            v-for="mul,unit in Units[Info[code].magnitude]"
-            :selected="get_current_unit(code) == unit"
-            v-html="unit"
-          ></option>
-        </select>
-        <div v-else>
-          <span v-html="Info[code].unit.prettify()"></span>
+          <!--select unit-->
+          <select
+            v-if="Units[Info[code].magnitude]"
+            @change="select_unit(code, $event)"
+          >
+            <option
+              v-for="mul,unit in Units[Info[code].magnitude]"
+              :selected="get_current_unit(code) == unit"
+              v-html="unit"
+            ></option>
+          </select>
+          <div v-else>
+            <span v-html="Info[code].unit.prettify()"></span>
+          </div>
         </div>
-      </div>
-    </div>
+      </td>
+    </tr>
   `,
 
   props:[

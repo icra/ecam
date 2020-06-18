@@ -19,6 +19,8 @@ new features requested for v3
 improvements
 -------------------------------------------------------------------------------
 
+* move content_C and content_N functions from Global.General
+
 * Landing
   - main menu buttons
     - open button (load files)

@@ -19,11 +19,12 @@ let tier_b=new Vue({
     Normalization,
     Formulas,
     Questions,
+    Languages,
   },
 
   template:`
     <!--tier b VIEW-->
-    <div id=tier_b v-if="visible">
+    <div id=tier_b v-if="visible && Languages.ready">
       <!--tier b title + tips-->
       <div class=flex style="justify-content:space-between;">
         <h1>
@@ -174,9 +175,9 @@ let tier_b=new Vue({
       </div>
 
       <!--tier b inputs and outputs-->
-      <div style="display:grid;grid-template-columns:66% 34%;padding:0 5px 0 8px">
+      <div style="display:flex;flex-wrap:wrap;padding:0 5px 0 8px;">
         <!--tier b inputs-->
-        <div style="padding-right:5px">
+        <div style="min-width:50%;margin-right:5px">
           <div class="table-title">
             {{translate('INPUTS') }} &mdash;
             {{translate('Enter values for') }}
@@ -189,87 +190,76 @@ let tier_b=new Vue({
             <!--tier b inputs header-->
             <thead>
               <tr :style="'background:'+get_level_color(level)">
-                <td>
-                  <div style="display:grid;grid-template-columns:60% 30% 10%">
-                    <div style="background:inherit;color:white;text-align:center">{{translate('Description')   }}</div>
-                    <div style="background:inherit;color:white;text-align:center">{{translate('Current value') }}</div>
-                    <div style="background:inherit;color:white;text-align:center">{{translate('edit_unit')     }}</div>
-                  </div>
-                </td>
+                <td style="background:inherit;color:white;text-align:center">{{translate('Description')   }}</td>
+                <td style="background:inherit;color:white;text-align:center">{{translate('Current value') }}</td>
+                <td style="background:inherit;color:white;text-align:center">{{translate('edit_unit')     }}</td>
               </tr>
             </thead>
 
             <!--tier b inputs-->
-            <tbody>
-              <tr
-                v-for="key in Object.keys(get_current_stage()).filter(key=>{return Questions.is_inside(key)==false})"
-                v-if="typeof(get_current_stage()[key])=='number'"
-              >
-                <td>
-                  <input_ecam
-                    :code="key"
-                    :current_stage="get_current_stage()"
-                  ></input_ecam>
-                </td>
-              </tr>
+            <tbody
+              v-for="key in Object.keys(get_current_stage()).filter(key=>{return Questions.is_inside(key)==false})"
+              v-if="typeof(get_current_stage()[key])=='number'"
+            >
+              <input_ecam
+                :code="key"
+                :current_stage="get_current_stage()"
+              ></input_ecam>
             </tbody>
 
             <!--tier b questions-->
             <tbody v-for="question in Questions.get_questions(get_current_stage())">
-              <tr
-                :style="'background:'+(Global.Configuration.Questions[question]?'lightgreen':'#eee')"
-              ><td
-                :class="Questions.is_question_hidden(question) ? 'disabled_question' : ''"
-              >
-                <div style="display:grid;grid-template-columns:50% 50%">
-                  <!--question text-->
-                  <div
-                    @click="fold_question(question)"
-                    class="question_container flex"
-                    :style="(Global.Configuration.Questions[question]?'cursor:pointer':'')"
-                  >
-                    <div v-if="Global.Configuration.Questions[question]">
-                      <!--question folded marker-->
-                      <div :class="'question_fold_marker '+(Global.Configuration.FoldedQuestions.indexOf(question)+1 ? 'folded':'')">
-                        ▼
+              <tr :style="'background:'+(Global.Configuration.Questions[question]?'lightgreen':'#eee')">
+                <td colspan=3 :class="Questions.is_question_hidden(question) ? 'disabled_question' : ''">
+                  <div style="display:grid;grid-template-columns:50% 50%">
+                    <!--question text-->
+                    <div
+                      @click="fold_question(question)"
+                      class="question_container flex"
+                      :style="(Global.Configuration.Questions[question]?'cursor:pointer':'')"
+                    >
+                      <div v-if="Global.Configuration.Questions[question]">
+                        <!--question folded marker-->
+                        <div :class="'question_fold_marker '+(Global.Configuration.FoldedQuestions.indexOf(question)+1 ? 'folded':'')">
+                          ▼
+                        </div>
+
                       </div>
-
+                      <div v-html="translate(question)+'?'"
+                        :class="Global.Configuration.Questions[question] ? 'question_text':''"
+                        style="margin-left:5px"
+                      ></div>
                     </div>
-                    <div v-html="translate(question)+'?'"
-                      :class="Global.Configuration.Questions[question] ? 'question_text':''"
-                      style="margin-left:5px"
-                    ></div>
-                  </div>
 
-                  <!--question set value button-->
-                  <div :title="question">
-                    <label>
-                      <input type=checkbox
-                        :disabled="Questions.is_question_hidden(question)"
-                        @change="set_question(question, $event.target.checked)"
-                        :checked="Global.Configuration.Questions[question]"
-                      >
-                      <span v-html="translate('yes')"></span>
-                    </label>
+                    <!--question set value button-->
+                    <div :title="question">
+                      <label>
+                        <input type=checkbox
+                          :disabled="Questions.is_question_hidden(question)"
+                          @change="set_question(question, $event.target.checked)"
+                          :checked="Global.Configuration.Questions[question]"
+                        >
+                        <span v-html="translate('yes')"></span>
+                      </label>
+                    </div>
                   </div>
-                </div>
-              </td></tr>
-              <tr v-for="key in Questions[question].variables"
+                </td>
+              </tr>
+
+              <!--variables inside question-->
+              <input_ecam
+                v-for="key in Questions[question].variables"
                 v-if="
                   Global.Configuration.Questions[question]
                   &&
-                  typeof(get_current_stage()[key])=='number'
-                  &&
                   Global.Configuration.FoldedQuestions.indexOf(question)==-1
+                  &&
+                  typeof(get_current_stage()[key])=='number'
                 "
-              >
-                <td>
-                  <input_ecam
-                    :code="key"
-                    :current_stage="get_current_stage()"
-                  ></input_ecam>
-                </td>
-              </tr>
+                :key="key"
+                :code="key"
+                :current_stage="get_current_stage()"
+              ></input_ecam>
             </tbody>
 
             <!--decoration bottom table-->
