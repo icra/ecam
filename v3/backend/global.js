@@ -22,8 +22,6 @@ class Ecam{
         "Years",
         "TotalGHG",
         "TotalNRG",
-        "content_C",
-        "content_N",
       ],
     },
 

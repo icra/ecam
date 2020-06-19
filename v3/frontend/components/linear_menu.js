@@ -88,13 +88,12 @@ let linear_menu = new Vue({
       <!--linear tier B-->
       <div>
         <div>
-          <span style="color:inherit"
-            v-html="translate('tier_B')"
-          ></span>
-          <small>
-            (<span v-html="format(Global.TotalGHG())"></span>
-             <span v-html="Info.TotalGHG.unit.prettify()"></span>)
-          </small>
+          <span style="color:inherit" v-html="translate('tier_B')">
+          </span>:
+          <span>
+            <span v-html="format(Global.TotalGHG())"></span>
+            <span v-html="Info.TotalGHG.unit.prettify()"></span>
+          </span>
         </div>
 
         <div class=flex>
@@ -162,6 +161,12 @@ let linear_menu = new Vue({
           @mousemove="caption.show($event, translate('nrg_summary'))"
           @mouseout="caption.hide()"
         >
+        <button
+          onclick="ecam.show('report')"
+          @mousemove="caption.show($event, 'Report')"
+          @mouseout="caption.hide()"
+          v-html="'Report (icon)'"
+        ></button>
       </div>
     </div>
   `,

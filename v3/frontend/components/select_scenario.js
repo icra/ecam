@@ -82,16 +82,24 @@ let select_scenario = new Vue({
           All systems ({{Scenarios.length}})
         </h1>
 
-        <button onclick="ecam.new_scenario()"
-          style="
-            font-size:large;
-            display:block;
-            margin:auto;
-          "
-          class="button add"
-          v-html="'create new system'"
-          :title="'create new blank system'"
-        ></button>
+        <!-- buttons-->
+        <div style="text-align:center">
+          <button onclick="ecam.new_scenario()"
+            style="
+              font-size:large;
+            "
+            class="button add"
+            v-html="'create new system'"
+            :title="'create new blank system'"
+          ></button>
+          <button onclick="alert('TODO')"
+            style="
+              font-size:large;
+            "
+            class="button save"
+            v-html="'save to JSON file'"
+          ></button>
+        </div>
 
         <!--select scenario table-->
         <table style="margin:10px auto">
@@ -187,7 +195,7 @@ let select_scenario = new Vue({
                 style="color:red"
               ></button>
               <button
-                onclick="alert('TODO: see reports of ecam v2.2 tier A')"
+                onclick="ecam.show('report')"
                 v-html="'see report'"
               ></button>
             </td>

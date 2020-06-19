@@ -26,6 +26,7 @@ let ecam={
     constants,
     constant,
     emission_tree,
+    report,
 
     development,
     problems,

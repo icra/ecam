@@ -95,7 +95,7 @@ let tier_a = new Vue({
       </div>
 
       <!--tier a inputs and outputs-->
-      <div class=flex style="padding:10px 2px;justify-content:space-between;">
+      <div class=flex style="padding:10px 2px;">
         <!--tier a inputs-->
         <div>
           <table>
@@ -196,28 +196,6 @@ let tier_a = new Vue({
               </tr>
             </tbody>
           </table>
-
-          figures here TODO
-          <ul>
-            <li>ghg emissions by system</li>
-            <li>ghg emissions by source</li>
-            <li>ghg emissions by source (detailed)</li>
-            <li>ghg emissions by UNFCCC categories</li>
-
-            <li>energy consumption by system</li>
-
-            <li>water supply total running costs</li>
-            <li>wastewater total running costs</li>
-
-            <li>serviced population in water supply (%)</li>
-            <li>total ghg water supply (kg/year/serv.pop)</li>
-
-            <li>serviced population in wastewater (%)</li>
-            <li>total ghg wastewater (kg/year/serv.pop)</li>
-
-            <li>serviced population in fsm (%)</li>
-            <li>total ghg fsm (kg/year/serv.pop)</li>
-          </ul>
         </div>
       </div>
 

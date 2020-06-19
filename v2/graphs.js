@@ -14,6 +14,7 @@ function scrollToItem(id) {
     element.scrollIntoView()
   }
 }
+
 //delete html subscript tag
 function replaceTags(str){
   str=str.replace(/<\/{0,1}sub>/g,'')
@@ -296,7 +297,6 @@ Graphs.ghg_by_source=function(withTable,container) {
   }
   //scrollToItem(container);
 }
-
 
 //GHG By source (detailed)
 Graphs.ghgSources=function(withTable,container) {

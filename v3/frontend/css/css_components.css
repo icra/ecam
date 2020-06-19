@@ -242,6 +242,10 @@ body {
     padding:0.5em 10em 0.5em 10em;
   }
 
+/*select scenario*/
+  #select_scenario details summary {
+    cursor:pointer;
+  }
 /*help*/
   #help {
     text-align:center;

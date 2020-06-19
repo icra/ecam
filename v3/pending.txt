@@ -1,29 +1,21 @@
-PENDING TASKS
+
+                            PENDING TASKS
 
 -------------------------------------------------------------------------------
-new features requested for v3
+                    new features requested for v3
 -------------------------------------------------------------------------------
 
 * Implement changes requested by Corinne on June 19th 2020.
 
-* Implement History
-  - modify behaviour of back button
+* Implement History (modify behaviour of back button)
 
-* Reporting function
-  - "print report" button enables the user to create a pdf of the results.
+* Report: create a pdf of the results. Copy from v2.2 tier A.
 
-* Compare scenarios
-  - instructions to be received on how this page should look
-
-* Enhancement of ghg models (instructions to be received)
+* Enhancement of ghg models (instructions to be received with Maite and Rafa)
 
 -------------------------------------------------------------------------------
-improvements
+                           improvements
 -------------------------------------------------------------------------------
-
-* Redesign sidebar with viti
-
-* Move content_C and content_N functions from Global.General
 
 * Landing
   - main menu buttons
@@ -32,6 +24,8 @@ improvements
         - v2 to v3 structure
         - ['Yes/No':'Questions']
     - save button: reimplement
+
+* Redesign sidebar with viti
 
 * Tier A
   - redesign tier A with viti

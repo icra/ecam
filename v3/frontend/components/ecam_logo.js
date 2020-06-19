@@ -30,11 +30,6 @@ let ecam_logo=new Vue({
         </div>
       </div>
 
-      <!--current system name-->
-      <div style="font-size:larger" onclick="ecam.show('select_scenario')">
-        {{Global.General.Name}}
-      </div>
-
       <!--version-->
       <div style="font-family:monospace">
         <a href="//github.com/icra/ecam" target=_blank>
@@ -42,7 +37,12 @@ let ecam_logo=new Vue({
         </a>
       </div>
 
-      <!--temp TODO-->
+      <!--current system name-->
+      <div style="font-size:larger" onclick="ecam.show('select_scenario')">
+        {{Global.General.Name}}
+      </div>
+
+      <!--show linear menu button-->
       <div>
         <button onclick="linear_menu.visible^=true"
           style="padding:0.1em 5em">
