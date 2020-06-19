@@ -20,6 +20,9 @@ let tier_a = new Vue({
 
   template:`
     <div id=tier_a v-if="visible && Languages.ready">
+      <div>
+        dev. note: discuss if we remove tier A from ecam in v3
+      </div>
       <h1>
         {{Global.General.Name}}
         &mdash;

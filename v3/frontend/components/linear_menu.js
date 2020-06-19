@@ -7,11 +7,13 @@ let linear_menu = new Vue({
     caption,
 
     Global,
+    Info,
     Structure,
     Languages,
   },
 
   methods:{
+    format,
     translate,
     go_to,
     is_tier_b_selected(level, sublevel){
@@ -89,6 +91,10 @@ let linear_menu = new Vue({
           <span style="color:inherit"
             v-html="translate('tier_B')"
           ></span>
+          <small>
+            (<span v-html="format(Global.TotalGHG())"></span>
+             <span v-html="Info.TotalGHG.unit.prettify()"></span>)
+          </small>
         </div>
 
         <div class=flex>
@@ -102,15 +108,27 @@ let linear_menu = new Vue({
                 :class="'l2 '+(is_tier_b_selected(l1.level, false)?'selected':'')"
                 :stage="l1.alias"
               >
+              <div style="font-size:smaller">
+                <span v-html="format(Global[l1.prefix+'_KPI_GHG']())"></span>
+              </div>
             </div>
-            <img v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))"
-              :class="'l2 '+(is_tier_b_selected(l2.level,l2.sublevel)?'selected':'')"
-              :stage="l2.alias"
-              @mousemove="caption.show($event, translate(l2.sublevel))"
-              @mouseout="caption.hide()"
-              :src="'frontend/img/'+(l2.alias)+(Global.Configuration.ActiveStages[l2.alias]?'':'-off')+'.png'"
-              @click="go_to(l2.level,l2.sublevel)"
-            >
+            <div class="flex">
+              <div v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))">
+                <img
+                  :class="'l2 '+(is_tier_b_selected(l2.level,l2.sublevel)?'selected':'')"
+                  :stage="l2.alias"
+                  @mousemove="caption.show($event, translate(l2.sublevel))"
+                  @mouseout="caption.hide()"
+                  :src="'frontend/img/'+(l2.alias)+(Global.Configuration.ActiveStages[l2.alias]?'':'-off')+'.png'"
+                  @click="go_to(l2.level,l2.sublevel)"
+                >
+                <div>
+                  <small
+                    v-html="format(Global[l2.prefix+'_KPI_GHG']())"
+                  ></small>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

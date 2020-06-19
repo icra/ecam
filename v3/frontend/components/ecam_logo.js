@@ -10,6 +10,9 @@ let ecam_logo=new Vue({
 
   methods:{
     translate,
+    is_linear_menu_visible(){
+      return linear_menu.visible;
+    },
   },
 
   template:`
@@ -41,8 +44,10 @@ let ecam_logo=new Vue({
 
       <!--temp TODO-->
       <div>
-        <button onclick="linear_menu.visible^=true">
-          o-o-o-o
+        <button onclick="linear_menu.visible^=true"
+          style="padding:0.1em 5em">
+          <span v-if="is_linear_menu_visible()">&#9206;&#9206;&#9206;</span>
+          <span v-else>&#9207;&#9207;&#9207;</span>
         </button>
       </div>
 

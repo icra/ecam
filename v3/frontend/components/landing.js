@@ -54,7 +54,7 @@ let landing = new Vue({
                   class="button edit"
                   onclick="document.getElementById('loadfile').click()"
                   disabled
-                  v-html="translate('open')"
+                  v-html="'Load JSON file'"
                 ></button>
               </div>
 
@@ -62,7 +62,7 @@ let landing = new Vue({
               <div>
                 <button class="button next"
                   onclick="event.stopPropagation();ecam.show('select_scenario')"
-                  v-html="translate('next')"
+                  v-html="'Start'"
                 ></button>
               </div>
             </div>

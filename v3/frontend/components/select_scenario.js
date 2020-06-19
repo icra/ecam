@@ -79,7 +79,7 @@ let select_scenario = new Vue({
       <!--select scenario-->
       <div>
         <h1 style="text-align:center">
-          Systems
+          All systems ({{Scenarios.length}})
         </h1>
 
         <button onclick="ecam.new_scenario()"
@@ -114,7 +114,7 @@ let select_scenario = new Vue({
             <th title="energy consumed and GHG emissions">summary</th>
             <th>select current system</th>
             <th>options</th>
-            <th>compare systems</th>
+            <th v-if="Scenarios.length>1">compare systems</th>
           </tr>
           <tr v-for="scenario in Scenarios"
             :style="(scenario==Global)?'background:yellow':''"
@@ -178,26 +178,26 @@ let select_scenario = new Vue({
                 duplicate
               </button>
               <button onclick="alert('TODO')">
-                load from json file
+                load from file...
               </button>
-              <button
-                onclick="alert('TODO: see reports of ecam v2.2 tier A')"
-                v-html="'see report'"
-              ></button>
               <button
                 @click="delete_scenario(scenario)"
                 :disabled="scenario == Global"
                 v-html="'delete'"
                 style="color:red"
               ></button>
+              <button
+                onclick="alert('TODO: see reports of ecam v2.2 tier A')"
+                v-html="'see report'"
+              ></button>
             </td>
-            <td style="text-align:center">
+            <td style="text-align:center" v-if="Scenarios.length>1">
               <button @click="add_scenario_to_compared(scenario)">
                 <span v-if="scenarios_compared.indexOf(scenario)==-1" style="color:green">
-                  include
+                  include to comparison
                 </span>
                 <span v-else style="color:red">
-                  remove
+                  remove from comparison
                 </span>
               </button>
             </td>
@@ -205,10 +205,20 @@ let select_scenario = new Vue({
         </table>
       </div>
 
-      <div><hr></div>
+      <!--prev next buttons-->
+      <div class=flex style="margin:1em;justify-content:center">
+        <button class="button prev"
+          onclick="event.stopPropagation();ecam.show('landing')">
+          {{translate('previous')}}
+        </button>
+        <button class="button next"
+          onclick="event.stopPropagation();ecam.show('configuration')">
+          {{translate('next')}}
+        </button>
+      </div>
 
       <!--compare scenarios-->
-      <div>
+      <div v-if="Scenarios.length>1">
         <h1 style="text-align:center">
           Compare systems
           (TBD: I would move this part to a new page)
@@ -275,18 +285,6 @@ let select_scenario = new Vue({
           style="text-align:center;font-style:italic"
           v-html="'~No scenarios included to comparison'"
         ></div>
-      </div>
-
-      <!--prev & next buttons-->
-      <div class=flex style="margin:1em;justify-content:center">
-        <button class="button prev"
-          onclick="event.stopPropagation();ecam.show('landing')">
-          {{translate('previous')}}
-        </button>
-        <button class="button next"
-          onclick="event.stopPropagation();ecam.show('configuration')">
-          {{translate('next')}}
-        </button>
       </div>
     </div>
   `,

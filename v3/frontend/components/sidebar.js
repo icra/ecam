@@ -24,12 +24,9 @@ let sidebar = new Vue({
         <div>{{Global.General.Name}}          </div>
       </div>
 
-      <!--sidebar new open save clear buttons-->
+      <!--sidebar open save buttons-->
       <div class=tab_buttons>
         <button class=left onclick="" disabled>
-          {{translate('new')}}
-        </button>
-        <button class=middle onclick="" disabled>
           {{translate('open')}}
         </button>
         <button class=right onclick="" disabled>
