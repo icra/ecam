@@ -4,7 +4,7 @@ let variable = new Vue({
   data:{
     visible:false,
     id:"wsa_nrg_cons",  //default variable code
-    question:false,     //question where id is inside
+    question:false,     //question where id belongs
 
     //stage where id belongs to
     localization:{

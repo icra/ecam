@@ -211,7 +211,7 @@ let select_scenario = new Vue({
       <div>
         <h1 style="text-align:center">
           Compare systems
-          (TBD: I would move this part to its own page)
+          (TBD: I would move this part to a new page)
         </h1>
 
         <!--compare scenarios table-->
@@ -275,6 +275,18 @@ let select_scenario = new Vue({
           style="text-align:center;font-style:italic"
           v-html="'~No scenarios included to comparison'"
         ></div>
+      </div>
+
+      <!--prev & next buttons-->
+      <div class=flex style="margin:1em;justify-content:center">
+        <button class="button prev"
+          onclick="event.stopPropagation();ecam.show('landing')">
+          {{translate('previous')}}
+        </button>
+        <button class="button next"
+          onclick="event.stopPropagation();ecam.show('configuration')">
+          {{translate('next')}}
+        </button>
       </div>
     </div>
   `,

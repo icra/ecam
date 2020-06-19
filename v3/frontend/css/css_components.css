@@ -224,8 +224,6 @@ body {
     color:#ccc;
     margin:0 20px;
   }
-
-  /*footer*/
   #landing .license_img{
     width: 20px;
     height: auto;
@@ -239,21 +237,9 @@ body {
     margin-top:0;
     margin-bottom:0;
   }
-  #landing #footer{
-    background:white;
-    bottom:0;
-    color:#333;
-    height:6em;
-    line-height:2em;
+  #landing footer{
     margin-top:30px;
     padding:0.5em 10em 0.5em 10em;
-    text-align:left;
-  }
-  #landing #footer img#logo-wacclim{
-    display:block;
-    margin:auto;
-    vertical-align:middle;
-    height:120px;
   }
 
 /*help*/

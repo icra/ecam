@@ -68,6 +68,7 @@ let landing = new Vue({
             </div>
           </div>
 
+          <!--links: about help contact-->
           <div class=links_under_buttons>
             <div>
               <a onclick="ecam.show('about')">
@@ -88,23 +89,23 @@ let landing = new Vue({
             </div>
           </div>
 
-          <img
-            class="license_img license_img-big"
-            src="frontend/img/CC_license_small.png"
-            alt=""
-            style="margin-bottom:5px"
-          >
-
+          <!--creative commons image and text-->
           <div>
-            {{translate("ecam_by_iwa_giz_icra")}}
-          </div>
-
-          <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
-            {{translate("creative_commons_attr")}}
-          </a>.
-
-          <div style=font-size:smaller>
-            {{translate("wacclim_is_part_of_IKI")}}
+            <img
+              class="license_img license_img-big"
+              src="frontend/img/CC_license_small.png"
+              alt=""
+              style="margin-bottom:5px"
+            >
+            <div>
+              {{translate("ecam_by_iwa_giz_icra")}}
+            </div>
+            <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
+              {{translate("creative_commons_attr")}}
+            </a>.
+            <div style=font-size:smaller>
+              {{translate("wacclim_is_part_of_IKI")}}
+            </div>
           </div>
         </div>
 
@@ -115,24 +116,16 @@ let landing = new Vue({
       </main>
 
       <!--logos-->
-      <div>
-        <footer id=footer>
-          <img
-            id=logo-wacclim
-            src="frontend/img/logo-wacclim_big.png"
-            style="height:100px;margin:auto"
-          >
-        </footer>
-        <div style="
-            background:white;
-            margin-top:50px;
-            padding:0em 10em;
-            text-align:left;
-          "
+      <footer>
+        <img
+          src="frontend/img/logo-wacclim_big.png"
+          style="height:120px"
         >
-          <img src="frontend/img/logos.png">
-        </div>
-      </div>
+        <img
+          src="frontend/img/logos.png"
+          style="height:140px"
+        >
+      </footer>
     </div>
   `,
 });

@@ -68,7 +68,7 @@
 
 <!--loading indicator-->
   <div id=loading>
-    <div v-if="ready()==false">
+    <div v-if="Languages.ready==false">
       <div style="font-size:x-large">
         loading ecam tool...
       </div>
@@ -80,47 +80,43 @@
       data:{
         Languages,
       },
-      methods:{
-        ready(){
-          return this.Languages.ready;
-        },
-      },
     });
   </script>
+<!--/loading indicator-->
 
-<!--ecam all elements/views/components-->
+<!--all elements and views-->
 <div>
-  <div id=ecam_logo            ></div> <!--ecam logo          ELEMENT-->
-  <div id=caption              ></div> <!--caption            ELEMENT-->
-  <div id=linear_menu          ></div> <!--linear menu        ELEMENT-->
-  <div id=sidebar              ></div> <!--sidebar            ELEMENT-->
+  <div id=ecam_logo            ></div><!--ecam logo          ELEMENT-->
+  <div id=caption              ></div><!--caption            ELEMENT-->
+  <div id=linear_menu          ></div><!--linear menu        ELEMENT-->
+  <div id=sidebar              ></div><!--sidebar            ELEMENT-->
 
-  <div id=landing              ></div> <!--landing               VIEW-->
-  <div id=about                ></div> <!--about                 VIEW-->
-  <div id=help                 ></div> <!--help                  VIEW-->
-  <div id=configuration        ></div> <!--configuration         VIEW-->
-  <div id=countries            ></div> <!--countries             VIEW-->
-  <div id=gwp_table            ></div> <!--gwp table             VIEW-->
-  <div id=population           ></div> <!--population            VIEW-->
-  <div id=tier_a               ></div> <!--tier a                VIEW-->
-  <div id=tier_b               ></div> <!--tier b                VIEW-->
-  <div id=summary_ghg          ></div> <!--summary ghg           VIEW-->
-  <div id=summary_nrg          ></div> <!--summary nrg           VIEW-->
-  <div id=opportunities        ></div> <!--opportunities         VIEW-->
-  <div id=variable             ></div> <!--variable              VIEW-->
-  <div id=constant             ></div> <!--constant              VIEW-->
-  <div id=constants            ></div> <!--constants             VIEW-->
-  <div id=development          ></div> <!--development           VIEW-->
-  <div id=emission_tree        ></div> <!--emission tree         VIEW-->
-  <div id=select_scenario      ></div> <!--select scenario       VIEW-->
+  <div id=landing              ></div><!--landing               VIEW-->
+  <div id=about                ></div><!--about                 VIEW-->
+  <div id=help                 ></div><!--help                  VIEW-->
+  <div id=configuration        ></div><!--configuration         VIEW-->
+  <div id=countries            ></div><!--countries             VIEW-->
+  <div id=gwp_table            ></div><!--gwp table             VIEW-->
+  <div id=population           ></div><!--population            VIEW-->
+  <div id=tier_a               ></div><!--tier a                VIEW-->
+  <div id=tier_b               ></div><!--tier b                VIEW-->
+  <div id=summary_ghg          ></div><!--summary ghg           VIEW-->
+  <div id=summary_nrg          ></div><!--summary nrg           VIEW-->
+  <div id=opportunities        ></div><!--opportunities         VIEW-->
+  <div id=variable             ></div><!--variable              VIEW-->
+  <div id=constant             ></div><!--constant              VIEW-->
+  <div id=constants            ></div><!--constants             VIEW-->
+  <div id=development          ></div><!--development           VIEW-->
+  <div id=emission_tree        ></div><!--emission tree         VIEW-->
+  <div id=select_scenario      ></div><!--select scenario       VIEW-->
 
   <!--TODO-->
-  <div id=problems             ></div> <!--problems              VIEW-->
-  <div id=translation_problems ></div> <!--translation problems  VIEW-->
-  <div id=validate_json        ></div> <!--validate_json         VIEW-->
-  <div id=data_structure_viewer></div> <!--data_structure_viewer VIEW-->
-  <div id=benchmarks           ></div> <!--benchmarks            VIEW-->
-  <div id=graphs               ></div> <!--graphs                VIEW-->
+  <div id=problems             ></div><!--problems              VIEW-->
+  <div id=translation_problems ></div><!--translation problems  VIEW-->
+  <div id=validate_json        ></div><!--validate_json         VIEW-->
+  <div id=data_structure_viewer></div><!--data_structure_viewer VIEW-->
+  <div id=benchmarks           ></div><!--benchmarks            VIEW-->
+  <div id=graphs               ></div><!--graphs                VIEW-->
 </div>
 
 <!--load vue objects-->
@@ -135,11 +131,12 @@
   <script src="frontend/components/input-ecam.js"></script>
   <script src="frontend/components/inputs-involved-table.js"></script>
 
-  <!--views (Vue objects)-->
+  <!--views (Vue objects) order is important-->
   <script src="frontend/components/variable.js"></script>
   <script src="frontend/components/landing.js"></script>
   <script src="frontend/components/about.js"></script>
   <script src="frontend/components/help.js"></script>
+  <script src="frontend/components/select_scenario.js"></script>
   <script src="frontend/components/configuration.js"></script>
   <script src="frontend/components/countries.js"></script>
   <script src="frontend/components/gwp_table.js"></script>
@@ -151,14 +148,13 @@
   <script src="frontend/components/constant.js"></script>
   <script src="frontend/components/constants.js"></script>
   <script src="frontend/components/emission_tree.js"></script>
-  <script src="frontend/components/select_scenario.js"></script>
 
-  <!--TODO VIEWS list-->
+  <!--TODO-->
   <script src="frontend/components/development.js"></script>
 
   <!--default settings on reload (for development)-->
   <script src="defaults.js"></script>
 
-  <!--main ecam controller for views-->
+  <!--main ecam view controller-->
   <script src="frontend/main.js"></script>
 <!--/load vue objects-->
