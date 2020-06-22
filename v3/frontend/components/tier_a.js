@@ -212,4 +212,19 @@ let tier_a = new Vue({
       </div>
     </div>
   `,
+
+  style:`
+    <style>
+      #tier_a input[type=number]{
+        text-align:right;
+        border:none;
+        background:#eee;
+        line-height:2.4em;
+        cursor:cross;
+      }
+      #tier_a input[type=number]:focus{
+        background:white;
+      }
+    </style>
+  `,
 });

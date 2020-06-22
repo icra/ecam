@@ -216,6 +216,18 @@ let configuration = new Vue({
     </div>
   `,
 
+  style:`
+    <style>
+      #configuration #select_stages { box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05); }
+      #configuration #select_stages img{width:40px;vertical-align:middle}
+      #configuration #select_stages th{width:240px;}
+      #configuration #select_stages td{text-align:left;padding:0}
+      #configuration #select_stages label{cursor:pointer;display:block;height:100%;width:100%;padding:8px}
+      #configuration #select_stages input[type=checkbox]{vertical-align:middle;}
+      #configuration fieldset{margin:0 0 1.4em 0;padding:0.9em;border:1px solid #aaa}
+    </style>
+  `,
+
   methods:{
     translate,
 

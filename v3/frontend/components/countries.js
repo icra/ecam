@@ -14,7 +14,6 @@ let countries = new Vue({
   },
 
   template:`
-    <!--countries VIEW-->
     <div id=countries v-if="visible">
       <h1 style="text-align:center">
         <span onclick="ecam.show('configuration')">{{translate('configuration')}}</span>
@@ -84,5 +83,31 @@ let countries = new Vue({
         </tr>
       </table>
     </div>
+  `,
+
+  style:`
+    <style>
+      #countries a {
+        color:white;
+      }
+      #countries tr.selected {
+        background:yellow;
+      }
+      #countries td.number {
+        text-align:right;
+      }
+      #countries #references {
+        margin-top:10px;
+        margin-bottom:50px;
+      }
+      #countries #references td {
+        border:none;
+        padding:2px;
+        font-size:11px;
+      }
+      #countries #references a {
+        color:blue;
+      }
+    </style>
   `,
 });

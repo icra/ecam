@@ -22,10 +22,51 @@ let tier_b=new Vue({
     Languages,
   },
 
+  methods:{
+    translate,
+    format,
+    get_level_color,
+
+    set_question(question, new_value){
+      //set new question answer
+      this.Global.Configuration.Questions[question] = new_value;
+
+      //if answer is no:
+      if(!new_value){
+        //disable related questions recursively
+        Questions[question].otherQuestions.forEach(key=>{
+          this.set_question(key, false);
+        });
+
+        //reset values
+        Questions.reset_values(question, this.get_current_stage());
+      }
+    },
+
+    get_current_stage(){
+      if(this.sublevel){
+        return this.Global[this.level][this.sublevel];
+      }else{
+        return this.Global[this.level];
+      }
+    },
+
+    fold_question(key){
+      if(!this.Global.Configuration.Questions[key]){
+        return;
+      }
+      let index = this.Global.Configuration.FoldedQuestions.indexOf(key);
+      if(index == -1){
+        this.Global.Configuration.FoldedQuestions.push(key);
+      }else{
+        this.Global.Configuration.FoldedQuestions.splice(index,1);
+      }
+    },
+  },
+
   template:`
     <!--tier b VIEW-->
     <div id=tier_b v-if="visible && Languages.ready">
-
       <!--tier b title + tips-->
       <div class=flex style="justify-content:space-between;">
         <h1>
@@ -429,45 +470,62 @@ let tier_b=new Vue({
     </div>
   `,
 
-  methods:{
-    translate,
-    format,
-    get_level_color,
-
-    set_question(question, new_value){
-      //set new question answer
-      this.Global.Configuration.Questions[question] = new_value;
-
-      //if answer is no:
-      if(!new_value){
-        //disable related questions recursively
-        Questions[question].otherQuestions.forEach(key=>{
-          this.set_question(key, false);
-        });
-
-        //reset values
-        Questions.reset_values(question, this.get_current_stage());
+  style:`
+    <style>
+      #tier_b .warning {
+        background:red;
+        padding:2px 4px;
+        border-radius:5px;
       }
-    },
+      #tier_b div.table-title {
+        color:#666;
+        font-size:15px;
+        padding:0.7em 0 0.2em 0;
+        font-weight:normal;
+        text-align:left;
+      }
+      #tier_b .input {
+        background:#eee;
+        text-align:right;
+        color:#666;
+        cursor:cell;
+        padding:0;
+      }
+      #tier_b .input input {
+        background:inherit;
+        width:95%;
+        border:none;
+        text-align:right;
+        margin:0;
+        padding:0 0.2em;
+        height:40px;
+        cursor:cell;
+      }
+      #tier_b .input input:focus {
+        background:white;
+      }
 
-    get_current_stage(){
-      if(this.sublevel){
-        return this.Global[this.level][this.sublevel];
-      }else{
-        return this.Global[this.level];
+      /*tier b questions*/
+      #tier_b .disabled_question {
+        color:#aaa;
       }
-    },
+      #tier_b .question_container {
+        /**/
+      }
+      #tier_b .question_container:hover .question_text {
+        text-decoration:underline;
+      }
+      #tier_b .question_fold_marker {
+        transition: all 0.2s;
+      }
+      #tier_b .question_fold_marker.folded {
+        transform: rotate(-90deg);
+      }
 
-    fold_question(key){
-      if(!this.Global.Configuration.Questions[key]){
-        return;
-      }
-      let index = this.Global.Configuration.FoldedQuestions.indexOf(key);
-      if(index == -1){
-        this.Global.Configuration.FoldedQuestions.push(key);
-      }else{
-        this.Global.Configuration.FoldedQuestions.splice(index,1);
-      }
-    },
-  },
+      /*colors of links*/
+      #tier_b table[level=Water] a { color: var(--color-level-Water) }
+      #tier_b table[level=Waste] a { color: var(--color-level-Waste) }
+      #tier_b table[level=Faecl] a { color: var(--color-level-Faecl) }
+    </style>
+  `,
 });

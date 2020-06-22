@@ -123,6 +123,48 @@ let sidebar = new Vue({
       </div>
     </div>
   `,
+
+  style:`
+    <style>
+      #sidebar{
+        position:absolute;
+        left:0;
+        z-index:998;
+        background:white;
+        padding:0;
+        margin:0;
+        box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
+        overflow:auto;
+        border-right:2px solid #ccc;
+        border-top:1px solid #ccc;
+        text-align:left;
+      }
+      #sidebar ul{
+        list-style-type:none;
+        padding:0;
+        margin:0;
+      }
+      #sidebar li.section{
+        padding:0;
+      }
+      #sidebar .header{
+        color:white;
+        background:var(--color-level-generic);
+        padding:0.35em;
+      }
+      #sidebar li.item{
+        padding:0.35em;
+        padding-left:0.5em;
+        border-bottom:1px solid #aaa;
+      }
+      #sidebar li.item-l2{
+        padding-left:1em;
+      }
+      #sidebar a {
+        cursor:pointer;
+      }
+    </style>
+  `,
 });
 
 //clicking anywhere hides sidebar

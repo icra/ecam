@@ -298,4 +298,47 @@ let variable = new Vue({
       </table>
     </div>
   `,
+
+  style:`
+    <style>
+      #variable h1 {
+        text-align:center;
+      }
+
+      #variable td {
+        padding:1em;
+        background:white;
+      }
+      #variable th {
+        padding:1em;
+        background:inherit;
+      }
+
+      #variable input[type=number] {
+        background:#eee;
+        border: none;
+        cursor: cell;
+        height: 40px;
+        padding: 0 0.2em;
+        text-align:right;
+      }
+      #variable input[type=number]:focus {
+        background:white;
+      }
+
+      #variable table.inputs_involved td {
+        padding: 5px;
+        border:none;
+      }
+      #variable table.outputs_affected td {
+        padding: 5px;
+        border:none;
+      }
+
+      /*colors of links*/
+      #variable table[level=Water] a { color: var(--color-level-Water) }
+      #variable table[level=Waste] a { color: var(--color-level-Waste) }
+      #variable table[level=Faecl] a { color: var(--color-level-Faecl) }
+    </style>
+  `,
 });

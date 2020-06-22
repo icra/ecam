@@ -45,4 +45,12 @@ let help = new Vue({
       >
     </div>
   `,
+
+  style:`
+    <style>
+      #help {
+        text-align:center;
+      }
+    </style>
+  `,
 });

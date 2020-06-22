@@ -30,7 +30,7 @@ Global.General.prot_con     = 22;  //prot consumption                       (kg/
 Global.General.bod_pday     = 37;  //BOD5                                   (g/person/day)
 Global.General.bod_pday_fs  = 37;  //BOD5 in faecal sludge                  (g/person/day)
 
-//configuration
+//activate all stages
 Structure.forEach(s=>{
   Global.Configuration.ActiveStages[s.alias]=true;
 });

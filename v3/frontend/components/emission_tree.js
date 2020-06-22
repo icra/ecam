@@ -242,4 +242,18 @@ let emission_tree = new Vue({
 
     </div>
   `,
+
+  style:`
+    <style>
+      #emission_tree {
+        padding:1em;
+      }
+      #emission_tree details {
+        padding-left:10px;
+      }
+      #emission_tree details summary {
+        cursor:pointer;
+      }
+    </style>
+  `,
 });

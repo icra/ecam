@@ -161,13 +161,57 @@ let linear_menu = new Vue({
           @mousemove="caption.show($event, translate('nrg_summary'))"
           @mouseout="caption.hide()"
         >
-        <button
+        <img
+          :class="'l1 '+(current_view=='report'?'selected':'')"
+          src=frontend/img/report.png
           onclick="ecam.show('report')"
           @mousemove="caption.show($event, 'Report')"
           @mouseout="caption.hide()"
-          v-html="'Report (icon)'"
-        ></button>
+        >
       </div>
     </div>
+  `,
+
+  style:`
+    <style>
+      #linear_menu {
+        background:#f5f5f5;
+        background:linear-gradient(#f5f5f5,#ddd);
+        border-bottom:1px solid #e5e5e5;
+        padding:0.4em 0 0.2em 0;
+        box-shadow:0 1px 2px rgba(0,0,0,.5);
+        text-align:center;
+        justify-content:center;
+      }
+      #linear_menu > div {
+        margin:0 4px;
+        font-size:12px;
+        vertical-align:middle;
+        padding:0.2em;
+        border-radius:0.5em;
+        color:rgba(0,0,0,0.55);
+      }
+      #linear_menu > div:hover {
+        background:#e6e6e6;
+        color:black;
+      }
+      #linear_menu img.l1:hover,
+      #linear_menu img.l2:hover {
+        border:3px solid #9fc231;
+      }
+      #linear_menu img {
+        cursor:pointer;
+        position:relative;
+        z-index:2;
+        vertical-align:
+        middle;
+        padding:0;
+      } /*icons inside buttons to navigate to Level2*/
+      #linear_menu img.l1 {width:42px;}
+      #linear_menu img.l2 {width:42px;}
+      #linear_menu img{border-radius:90%;border:3px solid transparent;}
+      #linear_menu img.selected{border:3px solid #9fc231;}
+      #linear_menu a:hover {text-decoration:none;}
+    </style>
   `,
 });

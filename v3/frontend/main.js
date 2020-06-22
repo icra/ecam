@@ -55,6 +55,23 @@ let ecam={
     linear_menu.current_view = view;
     caption.hide();
     window.scrollTo(0,0);
+
+    //history manipulation
+    {
+      let state_obj={view};
+      let url   = window.location.pathname+"?view="+view;
+      if(view=='tier_b'){
+        let level       = tier_b.level;
+        let sublevel    = tier_b.sublevel;
+        state_obj.level = level;
+        url += `&level=${level}`
+        if(sublevel){
+          state_obj.sublevel = sublevel;
+          url += `&sublevel=${sublevel}`
+        }
+      }
+      history.pushState(state_obj,'', url);
+    }
   },
 
   //hide all views
@@ -108,6 +125,19 @@ let ecam={
     });
   },
 
+  //append <style> elements to body foreach vue object that has styles in it
+  //this function overwrites css_components.css file
+  add_styles(){
+    Object.values(this.elements).concat(
+    Object.values(this.views)).forEach(vue_obj=>{
+      if(vue_obj.$options.style){
+        let el = document.createElement('style');
+        document.body.appendChild(el);
+        el.outerHTML = vue_obj.$options.style;
+      }
+    });
+  },
+
   //set current scenario for the frontend
   //==update Global object in the frontend
   set_current_scenario(ecam_object){
@@ -151,5 +181,24 @@ let ecam={
   },
 };
 
-//onclose listener: avoid data loss if page is accidentally closed
-//TODO
+ecam.add_styles();
+
+/*history*/
+window.onpopstate=function(event){
+  let view = event.state.view;
+
+  console.log(`
+    location: ${document.location          },
+    state:    ${JSON.stringify(event.state)}`
+  );
+
+  if(view=='tier_b'){
+    let level    = event.state.level;
+    let sublevel = event.state.sublevel;
+    go_to(level, sublevel);
+  }else{
+    ecam.show(view);
+  }
+}
+
+

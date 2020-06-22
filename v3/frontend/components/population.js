@@ -93,4 +93,34 @@ let population = new Vue({
       </div>
     </div>
   `,
+
+  style:`
+    <style>
+      #population td[inactive]{
+        color:#999;
+        background:#eee;
+        font-size:smaller;
+      }
+      #population td.input_container {
+        width:70px;
+        border:1px solid #aaa;
+        color:#666;
+        background:#eee;
+        padding:0 !important;
+        text-align:right;
+        cursor:cell;
+      }
+      #population td.input_container input {
+        background:inherit;
+        border:none;
+        text-align:right;
+        line-height:1em;
+        width:70px;
+        height:24px;
+      }
+      #population td.input_container input:focus {
+        background:white;
+      }
+    </style>
+  `,
 });

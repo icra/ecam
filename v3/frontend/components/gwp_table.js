@@ -3,6 +3,7 @@ let gwp_table = new Vue({
 
   data:{
     visible:false,
+
     Global,
     GWP_reports,
   },
@@ -41,6 +42,17 @@ let gwp_table = new Vue({
         </tr>
       </table>
     </div>
+  `,
+
+  style:`
+    <style>
+      #gwp_table td.number{
+        text-align:right;
+      }
+      #gwp_table tr.selected {
+        background:yellow;
+      }
+    </style>
   `,
 
 });

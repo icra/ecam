@@ -1,6 +1,6 @@
 //helper functions
 
-//navigate tier b levels
+//navigate tier b levels TODO refactor inside tier_b component
 function go_to(level, sublevel){
   let possible_levels = Structure.filter(s=>!s.sublevel).map(s=>s.level);
   possible_levels.push('General');
@@ -54,11 +54,11 @@ function get_base_unit(code, scenario){
 
 //get level color
 function get_level_color(level){
-  let stage = this.Structure.find(s=>s.level==level);
+  let stage = Structure.find(s=>s.level==level);
   if(stage){
     return stage.color;
   }else{
-    return "#2b6488";
+    return "var(--color-level-generic)";
   }
 }
 
@@ -133,7 +133,7 @@ function locate_variable(code){
   return false
 }
 
-//get current stage
+//get stage of code "code"
 function get_current_stage(code){
   if(!code) return false;
 

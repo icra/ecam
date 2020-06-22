@@ -10,6 +10,7 @@ let select_scenario = new Vue({
     Info,
     Structure,
   },
+
   methods:{
     set_current_scenario(obj){
       ecam.set_current_scenario(obj);
@@ -81,25 +82,6 @@ let select_scenario = new Vue({
         <h1 style="text-align:center">
           All systems ({{Scenarios.length}})
         </h1>
-
-        <!-- buttons-->
-        <div style="text-align:center">
-          <button onclick="ecam.new_scenario()"
-            style="
-              font-size:large;
-            "
-            class="button add"
-            v-html="'create new system'"
-            :title="'create new blank system'"
-          ></button>
-          <button onclick="alert('TODO')"
-            style="
-              font-size:large;
-            "
-            class="button save"
-            v-html="'save to JSON file'"
-          ></button>
-        </div>
 
         <!--select scenario table-->
         <table style="margin:10px auto">
@@ -180,7 +162,7 @@ let select_scenario = new Vue({
               <button
                 onclick="ecam.show('configuration')"
                 :disabled="scenario != Global"
-                v-html="'edit'"
+                v-html="'configuration'"
               ></button>
               <button onclick="alert('TODO')">
                 duplicate
@@ -196,6 +178,7 @@ let select_scenario = new Vue({
               ></button>
               <button
                 onclick="ecam.show('report')"
+                :disabled="scenario != Global"
                 v-html="'see report'"
               ></button>
             </td>
@@ -211,6 +194,26 @@ let select_scenario = new Vue({
             </td>
           </tr>
         </table>
+
+        <!--new system and save buttons-->
+        <div style="text-align:center">
+          <button onclick="ecam.new_scenario()"
+            style="
+              font-size:large;
+            "
+            class="button add"
+            v-html="'create new system'"
+            :title="'create new blank system'"
+          ></button>
+          <button onclick="alert('TODO')"
+            style="
+              font-size:large;
+            "
+            class="button save"
+            v-html="'save to JSON file'"
+            title="save all systems to a JSON file"
+          ></button>
+        </div>
       </div>
 
       <!--prev next buttons-->
@@ -295,5 +298,13 @@ let select_scenario = new Vue({
         ></div>
       </div>
     </div>
+  `,
+
+  style:`
+    <style>
+      #select_scenario details summary {
+        cursor:pointer;
+      }
+    </style>
   `,
 });

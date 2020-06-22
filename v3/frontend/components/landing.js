@@ -128,4 +128,55 @@ let landing = new Vue({
       </footer>
     </div>
   `,
+
+  style:`
+    <style>
+      #landing main {
+        padding:0 10em;
+        display:grid;
+        grid-template-columns:50% 50%;
+      }
+      #landing .img_resp{
+        width: 100%;
+        padding-top: 1em;
+      }
+      #landing .green_h1{
+        color: #9fc231;
+        padding-left:0;
+      }
+      #landing .blue_h1{
+        font-size: 42px;
+        font-weight: 700;
+        color: var(--color-level-generic);
+        padding-left:0;
+      }
+      #landing .links_under_buttons {
+        padding:0.5em 0 1em 0;
+        display:flex;
+        flex-wrap:wrap;
+        font-size:large;
+      }
+      #landing .links_under_buttons > div.separator {
+        color:#ccc;
+        margin:0 20px;
+      }
+      #landing .license_img{
+        width: 20px;
+        height: auto;
+      }
+      #landing .license_img-big{
+        width: 90px;
+      }
+      #landing #menu_buttons button {
+        display:block;
+        margin-left:0;
+        margin-top:0;
+        margin-bottom:0;
+      }
+      #landing footer{
+        margin-top:30px;
+        padding:0.5em 10em 0.5em 10em;
+      }
+    </style>
+  `,
 });

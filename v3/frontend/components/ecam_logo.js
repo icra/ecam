@@ -83,4 +83,95 @@ let ecam_logo=new Vue({
       </div>
     </div>
   `,
+
+  style:`
+    <style>
+      #ecam_logo {
+        background:var(--color-level-generic);
+        box-shadow:0 1px 2px rgba(0,0,0,.5);
+        color:white;
+        min-height:50px;
+        padding:5px;
+        align-items:center;
+
+        /*css grid*/
+        display:grid;
+        grid-template-columns:5% 50% 20% 10% 10% 5%; /*sum: 85%*/
+        /*                    b   l   s   v   b  l
+                              u   o   y   e   t  a
+                              r   g   s   r   n  n
+                              g   o   t   s      g
+                              e       e   i   m  u
+                              r       m   o   e  a
+                                          n   n  g
+                                              u  e
+        */
+      }
+      #ecam_logo a{color:white;}
+      #ecam_logo a:hover{text-decoration:none}
+      #ecam_logo img{vertical-align:middle}
+      #ecam_logo #burger {
+        cursor:pointer;
+        font-size:30px;
+        line-height:0px;
+      }
+      #ecam_logo #burger:hover{color:#666}
+      #ecam_logo #logo_container {
+        display: flex;
+        flex-wrap:wrap;
+        align-items:center;
+      }
+      #ecam_logo #logo {
+        font-weight:bold;
+        font-size:30px;
+        padding-right:20px;
+      }
+      #ecam_logo #lang{
+        cursor:pointer;
+      }
+
+      #ecam_logo #lang > img {
+        display:block;
+        margin:auto;
+      }
+
+      /* select element */
+      #ecam_logo #lang #select{
+        position:absolute;
+        top:3%;
+        right:1%;
+        visibility:hidden;
+        border:1px solid #ccc;
+        width:200px;
+        background:#eeece4;
+        box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 5px 10px 15px 5px rgba(0,0,0,.1);
+        text-align:left;
+        z-index:999;
+        transition:all 0.4s;
+        font-size:12px;
+      }
+
+      /* show select element */
+      #ecam_logo #lang:hover #select {
+        visibility:visible;
+        height:auto;
+        transition:all 0s;
+      }
+
+      /* languages */
+      #ecam_logo #lang #select div[lang] {
+        color:black;
+        display:block;
+        padding:0.5em;
+      }
+
+      /* languages mouse over */
+      #ecam_logo #lang #select div[lang]:hover {
+        background:orange;
+      }
+      #ecam_logo #lang #select div[lang] img {
+        width:20px;
+      }
+    </style>
+  `,
 });

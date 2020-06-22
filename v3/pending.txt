@@ -1,47 +1,33 @@
 
-                            PENDING TASKS
+                        ECAM V3 LLUIS BOSCH TASKS
 
 -------------------------------------------------------------------------------
-                    new features requested for v3
+              to be done with viti help (frontend and UX)
 -------------------------------------------------------------------------------
-
-* Implement changes requested by Corinne on June 19th 2020.
-
-* Implement History (modify behaviour of back button)
-
-* Report: create a pdf of the results. Copy from v2.2 tier A.
-
-* Enhancement of ghg models (instructions to be received with Maite and Rafa)
-
--------------------------------------------------------------------------------
-                           improvements
--------------------------------------------------------------------------------
-
-* Landing
-  - main menu buttons
-    - open button (load files)
-      - implement compabibility module
-        - v2 to v3 structure
-        - ['Yes/No':'Questions']
-    - save button: reimplement
-
-* Redesign sidebar with viti
-
-* Tier A
-  - redesign tier A with viti
-  - discuss with viti tier A charts
-  - discuss value and remove it
-
+* Redesign sidebar
+* Report page: create a pdf of the results. Copy from v2.2 tier A.
+* Redesign Tier A
+  - possibly remove it
+  - if not removed, charts
 * Tier B substages
   - new design (viti)
-  - reimplement benchmarks
 
-* Fetching language files asyncronously does not work for offline use (CORS is
+-------------------------------------------------------------------------------
+          tasks not related with viti (backend + frontend link)
+-------------------------------------------------------------------------------
+* [backend] Enhancement of ghg models (instructions to be received with Maite and Rafa)
+* [backend] Implement changes requested by Corinne on June 19th 2020.
+* [backend] Implement benchmarks with new v3 backend
+
+* [frontend] History API (modify behaviour of back button)
+* [frontend] onclose listener: trigger warning if ecam is accidentally closed
+* [frontend] redo load files function ("open" button)
+  - implement compabibility module (v2 to v3)
+    - ['Yes/No':'Questions']
+* [frontend] redo save button function
+* [frontend] Fetching language files asyncronously does not work for offline use (CORS is
   not compatible with file protocol, find alternative way to loading files
   offline.)
-
-* Reimplement editing inputs with the arrow keys
-
-* Translations of new pieces of text
-
-* Rebuild Sankey Graphic for v3
+* [frontend] Reimplement editing inputs with the arrow keys
+* [frontend] Translations of new pieces of text added for v3
+* [frontend] Rebuild Sankey Graphic for v3

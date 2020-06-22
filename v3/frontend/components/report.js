@@ -145,6 +145,10 @@ let report = new Vue({
         ['CH4',                    ch4       ],
       ];
     },
+
+    get_ghg_emissions_by_source_detailed(){
+      //v2
+    }
   },
 
 
@@ -203,10 +207,3 @@ let report = new Vue({
     </style>
   `,
 });
-
-//
-{
-  let style       = document.createElement('style');
-  document.body.appendChild(style);
-  style.outerHTML = report.$options.style;
-}

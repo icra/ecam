@@ -10,6 +10,22 @@ let caption = new Vue({
     </div>
   `,
 
+  style:`
+    <style>
+      #caption {
+        position:fixed;
+        z-index:999;
+        background:white;
+        padding:0.3em 0.5em;
+        box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
+        border:1px solid #ccc;
+        color:#666;
+        text-align:left;
+        max-width:400px;
+      }
+    </style>
+  `,
+
   data:{
     visible:false,
     text:"caption text",
