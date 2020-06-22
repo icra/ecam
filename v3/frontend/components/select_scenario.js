@@ -179,7 +179,7 @@ let select_scenario = new Vue({
               <button
                 onclick="ecam.show('report')"
                 :disabled="scenario != Global"
-                v-html="'see report'"
+                v-html="'report'"
               ></button>
             </td>
             <td style="text-align:center" v-if="Scenarios.length>1">

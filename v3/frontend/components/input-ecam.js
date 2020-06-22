@@ -4,13 +4,14 @@
 Vue.component('input_ecam',{
   template:`
     <tr>
-      <!--input name-->
+      <!--description and link-->
       <td
         @mousemove="caption.show($event, translate(code+'_expla').prettify())"
         @mouseout="caption.hide()"
       >
         <div class=flex style="justify-content:space-between;padding-right:5px">
           <div v-html="translate(code+'_descr').prettify()"></div>
+          <!--recommendation button-->
           <div v-if="Recommendations[code]">
             <button
               @click="current_stage[code] = Recommendations[code]()"
@@ -26,9 +27,11 @@ Vue.component('input_ecam',{
             </button>
           </div>
         </div>
-        <div>
-          (<a @click="variable.view(code)">{{code}}</a>)
-        </div>
+
+        <!--link to variable description-->
+        <div>(<a @click="variable.view(code)">{{code}}</a>)</div>
+
+        <!--<select> element for exceptions-->
         <div v-if="Exceptions[code]">
           <!--case 1: selection is a percent of something else-->
           <select v-if="Exceptions[code].percent_of" v-model="current_stage[code]">
@@ -57,6 +60,7 @@ Vue.component('input_ecam',{
 
       <!--input value: numbers and dropdowns-->
       <td>
+        <!--inputs whose magnitude is "Option"-->
         <div v-if="Info[code] && Info[code].magnitude=='Option'" style="line-height:3em">
           <select v-model="current_stage[code]">
             <option
@@ -85,8 +89,7 @@ Vue.component('input_ecam',{
       <!--input unit select-->
       <td>
         <div v-if="Info[code] && Info[code].magnitude!='Option'"
-          style="text-align:left;padding-left:5px;line-height:3em"
-        >
+          style="text-align:left;padding-left:5px;line-height:3em">
           <!--select unit-->
           <select
             v-if="Units[Info[code].magnitude]"
@@ -134,12 +137,14 @@ Vue.component('input_ecam',{
 
     focus_input(stage, key, event){
       let input = event.target;
+      input.setAttribute('type','number');
       input.value = stage[key]/Units.multiplier(key);
       input.select();
     },
 
     blur_input(stage, key, event){
       let input = event.target;
+      input.setAttribute('type','');
       let value = parseFloat(input.value) || 0;
       stage[key] = value*Units.multiplier(key);
       input.value=format(stage[key]/Units.multiplier(key));

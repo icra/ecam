@@ -1,10 +1,9 @@
 //helper functions
 
 //navigate tier b levels TODO refactor inside tier_b component
-function go_to(level, sublevel){
+function go_to(level, sublevel, no_history_entry){
   let possible_levels = Structure.filter(s=>!s.sublevel).map(s=>s.level);
   possible_levels.push('General');
-  possible_levels.push('UNFCCC');
 
   if(possible_levels.indexOf(level)==-1){
     throw new Error(`level '${level}' does not exist`);
@@ -18,7 +17,7 @@ function go_to(level, sublevel){
   tier_b.level         = level;
   tier_b.sublevel      = sublevel || false;
   tier_b.current_stage = sublevel ? Global[level][sublevel] : Global[level];
-  ecam.show('tier_b');
+  ecam.show('tier_b', no_history_entry);
 }
 
 //get unit

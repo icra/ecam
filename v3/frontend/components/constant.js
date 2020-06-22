@@ -1,6 +1,39 @@
 let constant = new Vue({
   el:"#constant",
 
+  data:{
+    visible: false,
+    code:"ct_ch4_lf",
+
+    Cts,
+    Formulas,
+
+    variable,
+  },
+
+  methods:{
+    format,
+    translate,
+
+    /* open constant VIEW */
+    view(code, no_history_entry){
+      if(!code){
+        let err = "constant code not specified"
+        throw new Error(err);
+        return false;
+      }
+
+      if(this.Cts[code]){
+        this.code = code;
+      }else{
+        throw new Error(`constant "${code}" does not exist`);
+        return;
+      }
+
+      ecam.show('constant', no_history_entry);
+    },
+  },
+
   template:`
     <!--constant VIEW-->
     <div id=constant v-if="visible">
@@ -54,31 +87,4 @@ let constant = new Vue({
     </div>
   `,
 
-  data:{
-    visible: false,
-    code:"ct_ch4_lf",
-    variable,
-
-    Cts,
-    Formulas,
-  },
-
-  methods:{
-    translate,
-    format,
-
-    /* open constant VIEW */
-    view(code){
-      if(this.Cts[code]){
-        this.code = code;
-      }else{
-        throw new Error(`Constant "${code}" does not exist`);
-        return;
-      }
-      if(typeof(ecam)=='object'){
-        ecam.show('constant');
-        caption.hide();
-      }
-    },
-  },
 });

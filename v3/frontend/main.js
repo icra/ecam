@@ -38,7 +38,10 @@ let ecam={
   },
 
   //show a view (==open a page)
-  show(view){
+  show(view, no_history_entry){
+    no_history_entry = no_history_entry || false;
+    //view is a STRING
+
     if(!this.views[view]){
       let e = new Error(`view '${view}' not found`);
       alert(e);
@@ -51,13 +54,15 @@ let ecam={
     }
 
     this.hide_all();
-    this.views[view].visible=true;
+    this.views[view].visible=true; //make "view" visible
+
+    //other settings
     linear_menu.current_view = view;
     caption.hide();
     window.scrollTo(0,0);
 
     //history manipulation
-    {
+    if(!no_history_entry){
       let state_obj={view};
       let url   = window.location.pathname+"?view="+view;
       if(view=='tier_b'){
@@ -69,8 +74,14 @@ let ecam={
           state_obj.sublevel = sublevel;
           url += `&sublevel=${sublevel}`
         }
+      }else if(view=='variable'){
+        state_obj.id = variable.id;
+        url += `&id=${variable.id}`
+      }else if(view=='constant'){
+        state_obj.code = constant.code;
+        url += `&code=${constant.code}`
       }
-      history.pushState(state_obj,'', url);
+      history.pushState(state_obj, 'title', "");
     }
   },
 
@@ -185,20 +196,28 @@ ecam.add_styles();
 
 /*history*/
 window.onpopstate=function(event){
-  let view = event.state.view;
+  if(!event){ return }
+  if(!event.state){ return }
+  if(!event.state.view){ return }
 
   console.log(`
     location: ${document.location          },
     state:    ${JSON.stringify(event.state)}`
   );
 
+  let view = event.state.view;
+
+  //pressing "back" does not push a new historystate object, otherwise an
+  //infinite loop is generated with "ecam.show"
+  let no_history_entry = true;
+
   if(view=='tier_b'){
-    let level    = event.state.level;
-    let sublevel = event.state.sublevel;
-    go_to(level, sublevel);
+    go_to(event.state.level, event.state.sublevel, no_history_entry);
+  }else if(view=='variable'){
+    variable.view(event.state.id, no_history_entry);
+  }else if(view=='constant'){
+    constant.view(event.state.code, no_history_entry);
   }else{
-    ecam.show(view);
+    ecam.show(view, no_history_entry);
   }
 }
-
-

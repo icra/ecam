@@ -39,19 +39,23 @@ let variable = new Vue({
     get_variable_type,
 
     /* open variable VIEW */
-    view(id){
+    view(id, no_history_entry){
+      if(!id){
+        let err = "variable id not specified"
+        throw new Error(err);
+        return false;
+      }
+
       if(Info[id]){
         this.id           = id;
         this.question     = this.Questions.is_inside(this.id);
         this.localization = this.locate_variable(id);
       }else{
-        throw new Error(`Variable "${id}" does not exist`);
+        throw new Error(`variable "${id}" does not exist`);
         return;
       }
-      if(typeof(ecam)=='object'){
-        ecam.show('variable');
-        caption.hide();
-      }
+
+      ecam.show('variable', no_history_entry);
     },
   },
 
