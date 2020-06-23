@@ -169,7 +169,7 @@ let configuration = new Vue({
         <div style="max-width:45%;padding:0em 1em 1em 1em">
           <!--system name-->
           <fieldset><legend>System name</legend>
-            <input v-model="Global.General.Name">
+            <input v-model="Global.General.Name" maxlength=50>
           </fieldset>
 
           <!--assessment period-->
