@@ -10,8 +10,9 @@ linear_menu.visible = 1;
 sidebar.visible     = 0;
 
 //page views
-report.visible          = 1;
-select_scenario.visible = 0;
+configuration.visible   = 0;
+report.visible          = 0;
+select_scenario.visible = 1;
 landing.visible         = 0;
 constants.visible       = 0;
 emission_tree.visible   = 0;

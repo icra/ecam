@@ -5,15 +5,108 @@ let configuration = new Vue({
     visible:false,
 
     Global,
+    Languages,
     Structure,
     Countries,
     GWP_reports,
     Cts,
   },
 
+  methods:{
+    translate,
+    format,
+
+    //deactivate level2 when level1 is deactivated
+    check_l2_from_l1(){
+      //if level1 is inactive, set related level2 inactive
+      Structure.filter(l=>l.sublevel==false).forEach(l1=>{
+        if(!this.Global.Configuration.ActiveStages[l1.alias]){
+          //reset l1 values
+          this.reset_stage(l1.alias);
+          //reset l2 values
+          Structure.filter(l=>(l.sublevel && l.level==l1.level))
+            .forEach(l=>{
+              this.Global.Configuration.ActiveStages[l.alias]=false;
+              this.reset_stage(l.alias);
+            });
+        }
+      });
+    },
+
+    //activate level1 when level2 is activated
+    check_l1_from_l2(){
+      //if level2 is active, set related level1 active
+      Structure.filter(l=>l.sublevel).forEach(l2=>{
+        if(this.Global.Configuration.ActiveStages[l2.alias]){
+          Structure.filter(l=>(l.sublevel==false && l.level==l2.level))
+            .forEach(l=>{
+              Global.Configuration.ActiveStages[l.alias]=true;
+            });
+        }else{
+          this.reset_stage(l2.alias);
+        }
+      });
+    },
+
+    //activate all stages
+    activate_all_stages(){
+      Structure.forEach(l=>{
+        this.Global.Configuration.ActiveStages[l.alias]=true;
+      })
+    },
+
+    //reset a stage:
+    //1) set all variables to zero
+    //2) reset substages (only level2)
+    reset_stage(alias){
+      let stage=Structure.find(s=>s.alias==alias);
+      if(!stage) throw `stage '${alias}' not found`
+
+      let obj = null; //stage object inside Global
+
+      if(stage.sublevel==false){
+        //l1
+        obj = this.Global[stage.level];
+      }else{
+        //l2
+        obj = this.Global[stage.level][stage.sublevel];
+        Global.Substages[stage.level][stage.sublevel]=[]; //reset substages
+      }
+
+      //reset obj values
+      for(let key in obj) {
+        if(typeof(obj[key])=="number") obj[key]=0;
+      }
+    },
+
+    //set variables from selected country
+    set_variables_from_selected_country(){
+      let country = this.Global.General.Country;
+
+      //variables in Global.to be changed:
+      [ 'conv_kwh_co2',
+        'prot_con',
+        'bod_pday',
+        'bod_pday_fs'
+      ].forEach(key=>{
+        //put bod_pday value in faecal sludge as well
+        let key2 = key;
+        if(key=="bod_pday_fs"){ key2="bod_pday"; }
+        this.Global.General[key]=Countries[country][key2];
+      });
+    },
+
+    //set constants from selected gwp report
+    set_constants_from_gwp_report(){
+      let index = this.Global.Configuration.Selected.gwp_reports_index;
+      this.Cts.ct_ch4_eq.value = this.GWP_reports[index].ct_ch4_eq;
+      this.Cts.ct_n2o_eq.value = this.GWP_reports[index].ct_n2o_eq;
+    },
+  },
+
   template:`
     <!--configuration VIEW-->
-    <div id=configuration v-if="visible">
+    <div id=configuration v-if="visible && Languages.ready">
       <h1 style=text-align:center>
         {{Global.General.Name}}
         &mdash;
@@ -74,6 +167,22 @@ let configuration = new Vue({
 
         <!--configuration right-->
         <div style="max-width:45%;padding:0em 1em 1em 1em">
+          <!--system name-->
+          <fieldset><legend>System name</legend>
+            <input v-model="Global.General.Name">
+          </fieldset>
+
+          <!--assessment period-->
+          <fieldset>
+            <legend>Assessment period</legend>
+            From:
+            <input type=date v-model="Global.General.AssessmentPeriodStart">
+            To:
+            <input type=date v-model="Global.General.AssessmentPeriodEnd">
+            (<span v-html="format(Global.Days())"></span>
+            <span class=unit>{{translate('days')}}</span>)
+          </fieldset>
+
           <!--select country-->
           <fieldset>
             <legend>{{translate('select_country')}}
@@ -209,7 +318,7 @@ let configuration = new Vue({
           {{translate('previous')}}
         </button>
         <button class="button next"
-          onclick="event.stopPropagation();ecam.show('population')">
+          onclick="event.stopPropagation();ecam.show('tier_b')">
           {{translate('next')}}
         </button>
       </div>
@@ -228,94 +337,4 @@ let configuration = new Vue({
     </style>
   `,
 
-  methods:{
-    translate,
-
-    //deactivate level2 when level1 is deactivated
-    check_l2_from_l1(){
-      //if level1 is inactive, set related level2 inactive
-      Structure.filter(l=>l.sublevel==false).forEach(l1=>{
-        if(!this.Global.Configuration.ActiveStages[l1.alias]){
-          //reset l1 values
-          this.reset_stage(l1.alias);
-          //reset l2 values
-          Structure.filter(l=>(l.sublevel && l.level==l1.level))
-            .forEach(l=>{
-              this.Global.Configuration.ActiveStages[l.alias]=false;
-              this.reset_stage(l.alias);
-            });
-        }
-      });
-    },
-
-    //activate level1 when level2 is activated
-    check_l1_from_l2(){
-      //if level2 is active, set related level1 active
-      Structure.filter(l=>l.sublevel).forEach(l2=>{
-        if(this.Global.Configuration.ActiveStages[l2.alias]){
-          Structure.filter(l=>(l.sublevel==false && l.level==l2.level))
-            .forEach(l=>{
-              Global.Configuration.ActiveStages[l.alias]=true;
-            });
-        }else{
-          this.reset_stage(l2.alias);
-        }
-      });
-    },
-
-    //activate all stages
-    activate_all_stages(){
-      Structure.forEach(l=>{
-        this.Global.Configuration.ActiveStages[l.alias]=true;
-      })
-    },
-
-    //reset a stage:
-    //1) set all variables to zero
-    //2) reset substages (only level2)
-    reset_stage(alias){
-      let stage=Structure.find(s=>s.alias==alias);
-      if(!stage) throw `stage '${alias}' not found`
-
-      let obj = null; //stage object inside Global
-
-      if(stage.sublevel==false){
-        //l1
-        obj = this.Global[stage.level];
-      }else{
-        //l2
-        obj = this.Global[stage.level][stage.sublevel];
-        Global.Substages[stage.level][stage.sublevel]=[]; //reset substages
-      }
-
-      //reset obj values
-      for(let key in obj) {
-        if(typeof(obj[key])=="number") obj[key]=0;
-      }
-    },
-
-    //set variables from selected country
-    set_variables_from_selected_country(){
-      let country = this.Global.General.Country;
-
-      //variables in Global.to be changed:
-      [ 'conv_kwh_co2',
-        'prot_con',
-        'bod_pday',
-        'bod_pday_fs'
-      ].forEach(key=>{
-        //put bod_pday value in faecal sludge as well
-        let key2 = key;
-        if(key=="bod_pday_fs"){ key2="bod_pday"; }
-        this.Global.General[key]=Countries[country][key2];
-      });
-    },
-
-    //set constants from selected gwp report
-    set_constants_from_gwp_report(){
-      let index = this.Global.Configuration.Selected.gwp_reports_index;
-      this.Cts.ct_ch4_eq.value = this.GWP_reports[index].ct_ch4_eq;
-      this.Cts.ct_n2o_eq.value = this.GWP_reports[index].ct_n2o_eq;
-    },
-  },
 });

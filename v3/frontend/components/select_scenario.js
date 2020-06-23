@@ -90,19 +90,13 @@ let select_scenario = new Vue({
               System {{translate('getStarted_table_name')}}
             </th>
             <th>
-              {{translate('getStarted_table_start')}}
-            </th>
-            <th>
-              {{translate('getStarted_table_end')}}
-            </th>
-            <th>
-              {{translate('getStarted_table_period')}}
+              Assessment period
             </th>
             <th>
               {{translate('getStarted_table_comments')}}
             </th>
             <th title="energy consumed and GHG emissions">summary</th>
-            <th>select current system</th>
+            <th>current system</th>
             <th>options</th>
             <th v-if="Scenarios.length>1">compare systems</th>
           </tr>
@@ -110,22 +104,28 @@ let select_scenario = new Vue({
             :style="(scenario==Global)?'background:yellow':''"
           >
             <td>
-              <input v-model="scenario.General.Name">
+              <span v-html="scenario.General.Name"></span>
             </td>
             <td class=number>
-              <input type=date v-model="scenario.General.AssessmentPeriodStart">
-            </td>
-            <td class=number>
-              <input type=date v-model="scenario.General.AssessmentPeriodEnd">
-            </td>
-            <td class=number>
-              <span v-html="format(scenario.Days())"></span>
-              <span class=unit>{{translate('days')}}</span>
+              <div>
+                <div>
+                  From:
+                  <span v-html="scenario.General.AssessmentPeriodStart"></span>
+                </div>
+                <div>
+                  To:
+                  <span v-html="scenario.General.AssessmentPeriodEnd"></span>
+                </div>
+              </div>
+              <div>
+                (<span v-html="format(scenario.Days())"></span>
+                <span class=unit>{{translate('days')}}</span>)
+              </div>
             </td>
             <td>
               <details>
                 <summary>
-                  add comments
+                  (comments icon)
                 </summary>
                 <div>
                   <textarea

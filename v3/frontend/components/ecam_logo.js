@@ -42,15 +42,6 @@ let ecam_logo=new Vue({
         {{Global.General.Name}}
       </div>
 
-      <!--show linear menu button-->
-      <div>
-        <button onclick="linear_menu.visible^=true"
-          style="width:100%">
-          <span v-if="is_linear_menu_visible()">&#9206;&#9206;&#9206;</span>
-          <span v-else>&#9207;&#9207;&#9207;</span>
-        </button>
-      </div>
-
       <!--language-->
       <div id=lang>
         <!--current language-->
@@ -96,15 +87,15 @@ let ecam_logo=new Vue({
 
         /*css grid*/
         display:grid;
-        grid-template-columns:5% 50% 10% 20% 10% 5%; /*sum: 85%*/
-        /*                    b   l   v   s   b  l
-                              u   o   e   y   t  a
-                              r   g   r   s   n  n
-                              g   o   s   t      g
-                              e       i   e   m  u
-                              r       o   m   e  a
-                                      n       n  g
-                                              u  e
+        grid-template-columns:5% 50% 10% 20% 15%;
+        /*                    b   l   v   s   l
+                              u   o   e   y   a
+                              r   g   r   s   n
+                              g   o   s   t   g
+                              e       i   e   u
+                              r       o   m   a
+                                      n       g
+                                              e
         */
       }
       #ecam_logo a{color:white;}

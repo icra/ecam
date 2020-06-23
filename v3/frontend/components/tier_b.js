@@ -4,7 +4,7 @@ let tier_b=new Vue({
   data:{
     visible:false,
     level:'Water',
-    sublevel:'Abstraction',
+    sublevel:false,
     caption,
     variable,
 

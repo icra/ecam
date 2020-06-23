@@ -45,9 +45,9 @@ let linear_menu = new Vue({
       <!--linear configuration-->
       <div onclick="ecam.show('configuration')">
         <div>
-          <a style="color:inherit">
+          <span style="color:inherit">
             {{translate('configuration')}}
-          </a>
+          </span>
         </div>
         <img
           :class="'l1 '+(current_view=='configuration'?'selected':'')"
@@ -57,12 +57,12 @@ let linear_menu = new Vue({
         >
       </div>
 
-      <!--linear population-->
+      <!--linear population
       <div onclick="ecam.show('population')">
         <div>
-          <a style="color:inherit">
+          <span style="color:inherit">
             {{translate('population')}}
-          </a>
+          </span>
         </div>
         <img
           :class="'l1 '+(current_view=='population'?'selected':'')"
@@ -71,6 +71,7 @@ let linear_menu = new Vue({
           @mouseout="caption.hide()"
         >
       </div>
+      -->
 
       <!--linear tier B-->
       <div>

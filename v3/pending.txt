@@ -9,7 +9,7 @@
 * Remove Tier A
   - if not removed, charts
 * Tier B substages
-  - new design (viti)
+  - new design
 
 -------------------------------------------------------------------------------
           tasks not related with viti (backend + frontend link)
