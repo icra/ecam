@@ -45,7 +45,7 @@ let ecam_logo=new Vue({
       <!--show linear menu button-->
       <div>
         <button onclick="linear_menu.visible^=true"
-          style="padding:0.1em 5em">
+          style="width:100%">
           <span v-if="is_linear_menu_visible()">&#9206;&#9206;&#9206;</span>
           <span v-else>&#9207;&#9207;&#9207;</span>
         </button>
@@ -96,14 +96,14 @@ let ecam_logo=new Vue({
 
         /*css grid*/
         display:grid;
-        grid-template-columns:5% 50% 20% 10% 10% 5%; /*sum: 85%*/
-        /*                    b   l   s   v   b  l
-                              u   o   y   e   t  a
-                              r   g   s   r   n  n
-                              g   o   t   s      g
-                              e       e   i   m  u
-                              r       m   o   e  a
-                                          n   n  g
+        grid-template-columns:5% 50% 10% 20% 10% 5%; /*sum: 85%*/
+        /*                    b   l   v   s   b  l
+                              u   o   e   y   t  a
+                              r   g   r   s   n  n
+                              g   o   s   t      g
+                              e       i   e   m  u
+                              r       o   m   e  a
+                                      n       n  g
                                               u  e
         */
       }

@@ -72,19 +72,6 @@ let linear_menu = new Vue({
         >
       </div>
 
-      <!--linear tier A-->
-      <div onclick="ecam.show('tier_a')">
-        <div>
-          <a style="color:inherit" v-html="translate('tier_A')"></a>
-        </div>
-        <img
-          :class="'l1 '+(current_view=='tier_a'?'selected':'')"
-          src=frontend/img/birds.png
-          @mousemove="caption.show($event, translate('tier_A'))"
-          @mouseout="caption.hide()"
-        >
-      </div>
-
       <!--linear tier B-->
       <div>
         <div>

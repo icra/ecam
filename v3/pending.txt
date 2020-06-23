@@ -6,8 +6,7 @@
 -------------------------------------------------------------------------------
 * Redesign sidebar
 * Report page: create a pdf of the results. Copy from v2.2 tier A.
-* Redesign Tier A
-  - possibly remove it
+* Remove Tier A
   - if not removed, charts
 * Tier B substages
   - new design (viti)
