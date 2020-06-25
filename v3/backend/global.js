@@ -974,7 +974,7 @@ class Ecam{
               return (this.fst_bod_infl()-this.fst_bod_slud()-this.fst_bod_effl())*this.fst_ch4_efac()*Cts.ct_ch4_eq.value;
             },
             fst_KPI_GHG_tre_n2o(){
-              return 0; //to be defined (TBD TODO)
+              return 0; //TBD
             },
 
           //fst ghg biogas
@@ -1832,7 +1832,16 @@ class Ecam{
       return (this.fst.fst_bod_infl-this.fst.fst_bod_slud-this.fst.fst_bod_effl)*this.fst.fst_ch4_efac*Cts.ct_ch4_eq.value;
     }
     fst_KPI_GHG_tre_n2o(){
-      return 0; //to be defined (TBD)
+      if(this.Configuration.ActiveStages.faeclTre){
+        return this.Faecl.fs_resi_pop
+          *Cts.ct_fac_ic.value
+          *Cts.ct_n2o_efp.value
+          *this.Years()
+          *1e-3
+          *Cts.ct_n2o_eq.value;
+      }else{
+        return 0;
+      }
     }
     fst_KPI_GHG_tre(){
       return this.fst_KPI_GHG_tre_ch4()+this.fst_KPI_GHG_tre_n2o();
