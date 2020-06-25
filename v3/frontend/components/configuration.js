@@ -102,7 +102,10 @@ let configuration = new Vue({
       let alias = Object.entries(Global.Configuration.ActiveStages).find(([key,val])=>{
         return val==true;
       });
-      if(!alias) return false;
+      if(!alias){
+        alert('All water cycle stages are inactive. Activate at least one stage');
+        return false;
+      }
       alias = alias[0]; //only the string not the value
       let stage = Structure.find(s=>s.alias == alias);
       go_to(stage.level, stage.sublevel);
@@ -147,7 +150,7 @@ let configuration = new Vue({
                 <input type=date v-model="Global.General.AssessmentPeriodEnd">
               </span>
               <span>
-                (<span v-html="format(Global.Days())"></span>
+                (<span :class="Global.Days()<=0 ? 'warning':''" v-html="format(Global.Days())"></span>
                 <span class=unit>{{translate('days')}}</span>)
               </span>
             </div>
@@ -169,37 +172,37 @@ let configuration = new Vue({
             </legend>
 
             <table style="width:100%">
-              <tr>
+              <tr :class="Global.General.conv_kwh_co2<=0?'warning':''">
                 <td v-html="translate('conv_kwh_co2_descr')">
                 <td>
-                  <input type=number class=number v-model.number="Global.General.conv_kwh_co2" style="width:95%">
+                  <input type=number class=number v-model.number="Global.General.conv_kwh_co2" style="width:95%" min=0>
                 </td>
                 <td>
                   kg<sub>CO<sub>2</sub></sub>/kWh
                 </td>
               </tr>
-              <tr>
+              <tr :class="Global.General.prot_con<=0?'warning':''">
                 <td v-html="translate('prot_con_descr')">
                 <td>
-                  <input type=number class=number v-model.number="Global.General.prot_con" style="width:95%">
+                  <input type=number class=number v-model.number="Global.General.prot_con" style="width:95%" min=0>
                 </td>
                 <td>
                   kg/{{translate('person')}}/{{translate('year')}}
                 </td>
               </tr>
-              <tr>
+              <tr :class="Global.General.bod_pday<=0?'warning':''">
                 <td v-html="translate('bod_pday_descr')">
                 <td>
-                  <input type=number class=number v-model.number="Global.General.bod_pday" style="width:95%">
+                  <input type=number class=number v-model.number="Global.General.bod_pday" style="width:95%" min=0>
                 </td>
                 <td>
                   g/{{translate('person')}}/{{translate('day')}}
                 </td>
               </tr>
-              <tr>
+              <tr :class="Global.General.bod_pday_fs<=0?'warning':''">
                 <td v-html="translate('bod_pday_fs_descr')">
                 <td>
-                  <input type=number class=number v-model.number="Global.General.bod_pday_fs" style="width:95%">
+                  <input type=number class=number v-model.number="Global.General.bod_pday_fs" style="width:95%" min=0>
                 </td>
                 <td>
                   g/{{translate('person')}}/{{translate('day')}}
@@ -354,6 +357,14 @@ let configuration = new Vue({
       #configuration #select_stages label{cursor:pointer;display:block;height:100%;width:100%;padding:8px}
       #configuration #select_stages input[type=checkbox]{vertical-align:middle;}
       #configuration fieldset{margin:0 0 1.4em 0;padding:0.9em;border:1px solid #aaa}
+
+      #configuration .warning {
+        font-weight:bold;
+        color:red;
+      }
+      #configuration .warning:after {
+        content:" [!]";
+      }
     </style>
   `,
 

@@ -124,7 +124,7 @@ let tier_b=new Vue({
           <a onclick="ecam.show('configuration')">
             {{translate('assessment_period')}}:
             <b style=color:black>
-              <span :class="Global.Days()==0 ? 'warning' : ''">
+              <span :class="Global.Days()<=0 ? 'warning' : ''">
                 {{format(Global.Days())}}
               </span>
             </b>
@@ -140,17 +140,17 @@ let tier_b=new Vue({
           <a onclick="ecam.show('population')">
             {{translate('ws_resi_pop_descr')}}:
             <b v-if="level=='Water'" style=color:black>
-              <span :class="Global.Water.ws_resi_pop==0 ? 'warning' : ''">
+              <span :class="Global.Water.ws_resi_pop<=0 ? 'warning' : ''">
                 {{format(Global.Water.ws_resi_pop)}}
               </span>
             </b>
             <b v-if="level=='Waste'" style=color:black>
-              <span :class="Global.Waste.ww_resi_pop==0 ? 'warning' : ''">
+              <span :class="Global.Waste.ww_resi_pop<=0 ? 'warning' : ''">
                 {{format(Global.Waste.ww_resi_pop)}}
               </span>
             </b>
             <b v-if="level=='Faecl'" style=color:black>
-              <span :class="Global.Faecl.fs_resi_pop==0 ? 'warning' : ''">
+              <span :class="Global.Faecl.fs_resi_pop<=0 ? 'warning' : ''">
                 {{format(Global.Faecl.fs_resi_pop)}}
               </span>
             </b>
@@ -162,7 +162,7 @@ let tier_b=new Vue({
           <a onclick="ecam.show('population')">
             {{translate('ww_conn_pop_descr')}}:
             <b style=color:black>
-              <span :class="Global.ww_conn_pop()==0 ? 'warning' : ''">
+              <span :class="Global.ww_conn_pop()<=0 ? 'warning' : ''">
                 {{format(Global.ww_conn_pop())}}
               </span>
             </b>
@@ -175,7 +175,7 @@ let tier_b=new Vue({
             <a onclick="ecam.show('population')">
               {{translate('ws_serv_pop_descr')}}:
               <b style=color:black>
-                <span :class="Global.Water.ws_serv_pop==0 ? 'warning' : ''">
+                <span :class="Global.Water.ws_serv_pop<=0 ? 'warning' : ''">
                   {{format(Global.Water.ws_serv_pop)}}
                 </span>
               </b>
@@ -186,7 +186,7 @@ let tier_b=new Vue({
             <a onclick="ecam.show('population')">
               {{translate('ww_serv_pop_descr')}}:
               <b style=color:black>
-                <span :class="Global.ww_serv_pop()==0 ? 'warning' : ''">
+                <span :class="Global.ww_serv_pop()<=0 ? 'warning' : ''">
                   {{format(Global.ww_serv_pop())}}
                 </span>
               </b>
@@ -197,7 +197,7 @@ let tier_b=new Vue({
             <a onclick="ecam.show('population')">
               {{translate('fs_onsi_pop_descr')}}:
               <b style=color:black>
-                <span :class="Global[level].fs_onsi_pop==0 ? 'warning' : ''">
+                <span :class="Global[level].fs_onsi_pop<=0 ? 'warning' : ''">
                   {{format(Global[level].fs_onsi_pop)}}
                 </span>
               </b>
@@ -210,7 +210,7 @@ let tier_b=new Vue({
           <a onclick="ecam.show('configuration')">
             {{translate('conv_kwh_co2_descr')}}:
             <b style=color:black>
-              <span :class="Global.General.conv_kwh_co2==0 ? 'warning' : ''">
+              <span :class="Global.General.conv_kwh_co2<=0 ? 'warning' : ''">
                 {{format(Global.General.conv_kwh_co2)}}
               </span>
             </b>

@@ -48,8 +48,10 @@ function get_base_unit(code, scenario){
     return scenario.General.Currency;
   }
 
-  let info_unit = info.unit; //default unit at info (may not be the base unit)
+  if(Units[info.magnitude]==undefined) return info.unit;
+
   let base_unit = Object.entries(Units[info.magnitude]).find(([key,val])=>val==1)[0];
+  let info_unit = info.unit; //default unit at info (may not be the base unit)
   //console.log({info_unit, base_unit});
 
   return base_unit;
