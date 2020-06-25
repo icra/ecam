@@ -7,7 +7,7 @@ class Ecam{
   constructor(){
     this.General={
       version              : "3.0.0",
-      Name                 : `New system ${1+Scenarios.length}`,
+      Name                 : `New system${Scenarios.length ? (' '+(1+Scenarios.length)):''}`,
       AssessmentPeriodStart: "2020-01-01",
       AssessmentPeriodEnd  : "2020-12-31",
       Comments             : "",

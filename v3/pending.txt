@@ -4,29 +4,34 @@
 -------------------------------------------------------------------------------
               to be done with viti help (frontend and UX)
 -------------------------------------------------------------------------------
-* Redesign sidebar
+* Design for select system page (Laia)
+
+* Redesign sidebar with viti
+
 * Report page: create a pdf of the results. Copy from v2.2 tier A.
-* Remove Tier A
-  - if not removed, charts
+
 * Tier B substages
   - new design
 
 -------------------------------------------------------------------------------
           tasks not related with viti (backend + frontend link)
 -------------------------------------------------------------------------------
-* [backend] Enhancement of ghg models (instructions to be received with Maite and Rafa)
-* [backend] Implement changes requested by Corinne on June 19th 2020.
-* [backend] Implement benchmarks with new v3 backend
+[CAN BE DONE]
+  * [backend] backend for substages
+  * [frontend] Fetching language files asyncronously does not work for offline use (CORS is not compatible with file protocol, find alternative way to loading files offline.)
+  * [frontend] variable page / fuel type related constants show in involved inputs table
+  * [frontend] redo save button function
+  * [frontend] onclose listener: trigger warning if ecam is accidentally closed
 
-* [frontend] History API (modify behaviour of back button)
-* [frontend] onclose listener: trigger warning if ecam is accidentally closed
+[STILL CANNOT BE DONE (i.e. missing info)]
+  * [backend] reimplement benchmarks with new v3 backend
+  * [backend] Implement changes requested by Corinne on June 19th 2020.
+  * [backend] Enhancement of ghg models (instructions to be received with Maite and Rafa)
+  * [frontend] redo load files function ("open" button)
+    - implement compabibility module (v2 to v3)
+      - ['Yes/No':'Questions']
 
-* [frontend] redo load files function ("open" button)
-  - implement compabibility module (v2 to v3)
-    - ['Yes/No':'Questions']
-
-* [frontend] redo save button function
-* [frontend] Fetching language files asyncronously does not work for offline use (CORS is not compatible with file protocol, find alternative way to loading files offline.)
-* [frontend] variable page / fuel type related constants show in involved inputs table
-* [frontend] Translations of new pieces of text added for v3
-* [frontend] Rebuild Sankey Graphic for v3
+[WILL BE DONE AT THE END]
+  * [frontend] graphs v3 (also Sankey)
+  * [frontend] Translations of new pieces of text added for v3
+  * [frontend] help/about and docs for v3

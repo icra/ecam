@@ -79,18 +79,6 @@ let population = new Vue({
           </tr>
         </tbody>
       </table>
-
-      <!--prev next buttons-->
-      <div class=flex style="justify-content:center;margin-top:1em">
-        <button class="button prev"
-          onclick="event.stopPropagation();ecam.show('configuration')">
-          {{translate('previous')}}
-        </button>
-        <button class="button next"
-          onclick="event.stopPropagation();ecam.show('tier_a')">
-          {{translate('next')}}
-        </button>
-      </div>
     </div>
   `,
 

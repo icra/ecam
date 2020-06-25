@@ -42,23 +42,20 @@ let sidebar = new Vue({
         <li class=section>
           <div class=header>sidebar section title</div>
           <ul>
-            <li class=item><a onclick="ecam.show('constants')">   {{translate('all_constants')    }}       </a></li>
-            <li class=item><a onclick="alert('TODO')">            {{translate('unfccc_categories')}} [TODO]</a></li>
-            <li class=item><a onclick="alert('TODO')">            {{translate('all_substages')    }} [TODO]</a></li>
-            <li class=item><a onclick="alert('TODO')">            {{translate('all_benchmarks')   }} [TODO]</a></li>
-            <li class=item><a onclick="alert('TODO')">            {{translate('sidebar_export')   }} [TODO]</a></li>
-            <li class=item><a onclick="alert('TODO')">            {{translate('Sankey diagram')   }} [TODO]</a></li>
-            <li class=item><a onclick="ecam.show('development')"> {{translate('dev')              }}       </a></li>
-            <li class=item><a onclick="ecam.show('help')">        {{translate('help')             }}       </a></li>
             <li class=item><a onclick="ecam.show('about')">       {{translate('about')            }}       </a></li>
+            <li class=item><a onclick="ecam.show('help')">        {{translate('help')             }}       </a></li>
+            <li class=item><a onclick="ecam.show('population')">  {{translate('population')       }}       </a></li>
+            <li class=item><a onclick="ecam.show('constants')">   {{translate('all_constants')    }}       </a></li>
+            <li class=item><a onclick="ecam.show('development')"> {{translate('dev')              }}       </a></li>
+
+            <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('unfccc_categories')}}</a></li>
+            <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('all_substages')    }}</a></li>
+            <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('all_benchmarks')   }}</a></li>
+            <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('sidebar_export')   }}</a></li>
+            <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('Sankey diagram')   }}</a></li>
           </ul>
         </li>
       </ul>
-
-      <!--sidebar close button-->
-      <div>
-        <button @click="visible^=1">close</button>
-      </div>
     </div>
   `,
 
@@ -76,6 +73,7 @@ let sidebar = new Vue({
         border-right:2px solid #ccc;
         border-top:1px solid #ccc;
         text-align:left;
+        height:100%;
       }
       #sidebar ul{
         list-style-type:none;

@@ -52,7 +52,7 @@ let linear_menu = new Vue({
         <img
           :class="'l1 '+(current_view=='configuration'?'selected':'')"
           src=frontend/img/dashboard.png
-          @mousemove="caption.show($event, translate('configuration'))"
+          @mousemove="caption.show($event, 'Configuration of current system' )"
           @mouseout="caption.hide()"
         >
       </div>
@@ -76,8 +76,9 @@ let linear_menu = new Vue({
       <!--linear tier B-->
       <div>
         <div>
-          <span style="color:inherit" v-html="translate('tier_B')">
-          </span>:
+          <span>
+            GHG emissions:
+          </span>
           <span>
             <span v-html="format(Global.TotalGHG())"></span>
             <span v-html="Info.TotalGHG.unit.prettify()"></span>

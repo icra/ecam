@@ -157,7 +157,7 @@ let report = new Vue({
       <h1>
         {{Global.General.Name}}
         &mdash;
-        Report (under development)
+        Report (under development: placeholder code for graphs, replacement for tier A in v2.2)
       </h1>
 
       <ul>

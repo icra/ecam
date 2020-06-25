@@ -17,7 +17,7 @@ Vue.component('emission',{
   },
 
   template:`
-    <details open>
+    <details>
       <summary>
         <b v-html="code"></b>
         (<span v-html="format(get_variable_value(code))"></span>)

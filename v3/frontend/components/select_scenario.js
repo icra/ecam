@@ -138,12 +138,12 @@ let select_scenario = new Vue({
             </td>
             <td>
               <div>
-                <span v-html="format(scenario.TotalNRG())"></span>
-                <span class=unit>kWh</span>
-              </div>
-              <div>
                 <span v-html="format(scenario.TotalGHG())"></span>
                 <span class=unit v-html="Info.TotalGHG.unit.prettify()"></span>
+              </div>
+              <div>
+                <span v-html="format(scenario.TotalNRG())"></span>
+                <span class=unit>kWh</span>
               </div>
             </td>
             <td style="text-align:center">
@@ -151,7 +151,7 @@ let select_scenario = new Vue({
                 @click="set_current_scenario(scenario)"
                 v-html="'select'"
                 v-if="scenario != Global"
-                style="font-weight:bold"
+                style="font-weight:bold;width:100%;padding:1em 2em"
               ></button>
               <span v-if="scenario==Global"
                 style="font-size:smaller;font-style:italic;"
@@ -162,7 +162,7 @@ let select_scenario = new Vue({
               <button
                 onclick="ecam.show('configuration')"
                 :disabled="scenario != Global"
-                v-html="'configuration'"
+                v-html="'edit'"
               ></button>
               <button onclick="alert('TODO')">
                 duplicate

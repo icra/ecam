@@ -14,7 +14,9 @@ let about = new Vue({
       <h1 style=text-align:center>
         <span onclick="ecam.show('landing')">Start</span>
         &rsaquo;
-        {{translate('about')}}
+        <span style=color:black>
+          {{translate('about')}}
+        </span>
       </h1>
 
       <!--paragraph-->
@@ -66,12 +68,10 @@ let about = new Vue({
           </ul>
         </p>
 
-        <p>
-          Chart library: <a target=_blank href="https://google-developers.appspot.com/chart/">Google Charts</a>
-        </p>
-
         <img class="license_img license_img-big" src="frontend/img/CC_license_big.png" alt="">
+
         <br><br>
+
         ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under
         a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work
         at <a target="_blank" href="www.wacclim.org">www.wacclim.org</a>. Permissions beyond the scope of this license may be available

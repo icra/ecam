@@ -67,23 +67,29 @@ let ecam={
     if(!no_history_entry){
       let state_obj={view};
       let url   = window.location.pathname+"?view="+view;
+      let title = view;
       if(view=='tier_b'){
         let level       = tier_b.level;
         let sublevel    = tier_b.sublevel;
         state_obj.level = level;
-        url += `&level=${level}`
+        url            += `&level=${level}`
+        title           = translate(level);
         if(sublevel){
-          state_obj.sublevel = sublevel;
-          url += `&sublevel=${sublevel}`
+          state_obj.sublevel  = sublevel;
+          url                += `&sublevel=${sublevel}`
+          title              += ' '+translate(sublevel);
         }
       }else if(view=='variable'){
-        state_obj.id = variable.id;
-        url += `&id=${variable.id}`
+        state_obj.id  = variable.id;
+        url          += `&id=${variable.id}`
+        title        += ' '+variable.id;
       }else if(view=='constant'){
         state_obj.code = constant.code;
-        url += `&code=${constant.code}`
+        url           += `&code=${constant.code}`
+        title         += ' '+constant.code;
       }
-      history.pushState(state_obj, 'title', "");
+      history.pushState(state_obj,'title',"");
+      document.title = title;
     }
   },
 

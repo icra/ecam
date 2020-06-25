@@ -96,6 +96,19 @@ let configuration = new Vue({
       });
     },
 
+    go_to_first_stage_active(){
+      let level    = false;
+      let sublevel = false;
+      let alias = Object.entries(Global.Configuration.ActiveStages).find(([key,val])=>{
+        return val==true;
+      });
+      if(!alias) return false;
+      alias = alias[0]; //only the string not the value
+      let stage = Structure.find(s=>s.alias == alias);
+      go_to(stage.level, stage.sublevel);
+      return true;
+    },
+
     //set constants from selected gwp report
     set_constants_from_gwp_report(){
       let index = this.Global.Configuration.Selected.gwp_reports_index;
@@ -115,14 +128,166 @@ let configuration = new Vue({
 
       <div class=flex style=justify-content:center>
         <!--configuration left-->
+        <div style="max-width:45%;padding:0em 1em 1em 1em">
+          <!--system name-->
+          <fieldset><legend>System name</legend>
+            <input v-model="Global.General.Name" maxlength=50 style="width:95%">
+          </fieldset>
+
+          <!--assessment period-->
+          <fieldset>
+            <legend>Assessment period</legend>
+            <div>
+              <span>
+                From:
+                <input type=date v-model="Global.General.AssessmentPeriodStart">
+              </span>
+              <span>
+                To:
+                <input type=date v-model="Global.General.AssessmentPeriodEnd">
+              </span>
+              <span>
+                (<span v-html="format(Global.Days())"></span>
+                <span class=unit>{{translate('days')}}</span>)
+              </span>
+            </div>
+          </fieldset>
+
+          <!--select country-->
+          <fieldset>
+            <legend>{{translate('select_country')}}
+              <select
+                v-model="Global.General.Country"
+                @change="set_variables_from_selected_country()"
+              >
+                <option value="false">--select--</option>
+                <option v-for="country in Object.keys(Countries)">
+                  {{country}}
+                </option>
+              </select>
+              <a onclick="ecam.show('countries')">Info</a>
+            </legend>
+
+            <table style="width:100%">
+              <tr>
+                <td v-html="translate('conv_kwh_co2_descr')">
+                <td>
+                  <input type=number class=number v-model.number="Global.General.conv_kwh_co2" style="width:95%">
+                </td>
+                <td>
+                  kg<sub>CO<sub>2</sub></sub>/kWh
+                </td>
+              </tr>
+              <tr>
+                <td v-html="translate('prot_con_descr')">
+                <td>
+                  <input type=number class=number v-model.number="Global.General.prot_con" style="width:95%">
+                </td>
+                <td>
+                  kg/{{translate('person')}}/{{translate('year')}}
+                </td>
+              </tr>
+              <tr>
+                <td v-html="translate('bod_pday_descr')">
+                <td>
+                  <input type=number class=number v-model.number="Global.General.bod_pday" style="width:95%">
+                </td>
+                <td>
+                  g/{{translate('person')}}/{{translate('day')}}
+                </td>
+              </tr>
+              <tr>
+                <td v-html="translate('bod_pday_fs_descr')">
+                <td>
+                  <input type=number class=number v-model.number="Global.General.bod_pday_fs" style="width:95%">
+                </td>
+                <td>
+                  g/{{translate('person')}}/{{translate('day')}}
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+
+          <!--select currency-->
+          <fieldset>
+            <legend>
+              <span v-html="translate('currency')"></span>:
+              <span style="color:black;font-weight:bold">
+                {{Global.General.Currency}}
+              </span>
+            </legend>
+            {{translate('configuration_new_currency')}}:
+            <input
+              v-model="Global.General.Currency"
+              size=3 maxlength=3 placeholder="ccc"
+            >
+          </fieldset>
+
+          <!--select assessment report-->
+          <fieldset>
+            <legend>
+              {{translate('select_gwp_source')}}
+              <!--select gwp report which defines gwp values-->
+              <select
+                v-model="Global.Configuration.Selected.gwp_reports_index"
+                @change="set_constants_from_gwp_report()"
+              >
+                <option v-for="report,i in GWP_reports" :value="i">
+                  {{report.report}}
+                </option>
+              </select>
+              <a onclick="ecam.show('gwp_table')">Info</a>
+            </legend>
+
+            <!--description of gwp values-->
+            <div style="padding:0.5em 0"
+              v-html="translate('gwp_values_relative_to')"
+            ></div>
+
+            <!--actual gwp values-->
+            <table>
+              <tr>
+                <td>
+                  {{translate('carbon_dioxide')}} (CO<sub>2</sub>)
+                </td>
+                <td align=right>1</td>
+                <td>
+                  CO<sub>2</sub> {{translate('equivalents')}}
+                </td>
+              <tr>
+                <td>
+                  {{translate('methane')}} (CH<sub>4</sub>)
+                </td>
+                <td align=right>
+                  {{Cts.ct_ch4_eq.value}}
+                </td>
+                <td>
+                  CO<sub>2</sub> {{translate('equivalents')}}
+                </td>
+              <tr>
+                <td>
+                  {{translate('nitrouns_oxide')}} (N<sub>2</sub>O)
+                </td>
+                <td align=right>
+                  {{Cts.ct_n2o_eq.value}}
+                </td>
+                <td>
+                  CO<sub>2</sub> {{translate('equivalents')}}
+                </td>
+              </tr>
+            </table>
+          </fieldset>
+        </div>
+
+        <!--configuration right-->
         <div style="max-width:50%">
           <h4 style="margin:0;margin-bottom:1em;text-align:center">
             {{translate('configuration_subtitle')}}
           </h4>
           <table id=select_stages>
             <tr>
-              <th>{{translate('quick_assessment')}}</th>
-              <th>{{translate('energy_performance')}}</th>
+              <th>Level</th>
+              <th>stage</th>
             </tr>
             <tbody v-for="l1 in Structure.filter(l=>l.sublevel==false)">
               <tr>
@@ -164,151 +329,6 @@ let configuration = new Vue({
             </button>
           </div>
         </div>
-
-        <!--configuration right-->
-        <div style="max-width:45%;padding:0em 1em 1em 1em">
-          <!--system name-->
-          <fieldset><legend>System name</legend>
-            <input v-model="Global.General.Name" maxlength=50>
-          </fieldset>
-
-          <!--assessment period-->
-          <fieldset>
-            <legend>Assessment period</legend>
-            From:
-            <input type=date v-model="Global.General.AssessmentPeriodStart">
-            To:
-            <input type=date v-model="Global.General.AssessmentPeriodEnd">
-            (<span v-html="format(Global.Days())"></span>
-            <span class=unit>{{translate('days')}}</span>)
-          </fieldset>
-
-          <!--select country-->
-          <fieldset>
-            <legend>{{translate('select_country')}}
-              <select
-                v-model="Global.General.Country"
-                @change="set_variables_from_selected_country()"
-              >
-                <option value="false">--select--</option>
-                <option v-for="country in Object.keys(Countries)">
-                  {{country}}
-                </option>
-              </select>
-              <a onclick="ecam.show('countries')">Info</a>
-            </legend>
-
-            <table>
-              <tr>
-                <td v-html="translate('conv_kwh_co2_descr')">
-                <td>
-                  <input v-model.number="Global.General.conv_kwh_co2">
-                </td>
-                <td>
-                  kg<sub>CO<sub>2</sub></sub>/kWh
-                </td>
-              </tr>
-              <tr>
-                <td v-html="translate('prot_con_descr')">
-                <td>
-                  <input v-model.number="Global.General.prot_con">
-                </td>
-                <td>
-                  kg/{{translate('person')}}/{{translate('year')}}
-                </td>
-              </tr>
-              <tr>
-                <td v-html="translate('bod_pday_descr')">
-                <td>
-                  <input v-model.number="Global.General.bod_pday">
-                </td>
-                <td>
-                  g/{{translate('person')}}/{{translate('day')}}
-                </td>
-              </tr>
-              <tr>
-                <td v-html="translate('bod_pday_fs_descr')">
-                <td>
-                  <input v-model.number="Global.General.bod_pday_fs">
-                </td>
-                <td>
-                  g/{{translate('person')}}/{{translate('day')}}
-                </td>
-              </tr>
-            </table>
-          </fieldset>
-
-          <fieldset>
-            <legend>
-              <span v-html="translate('currency')"></span>:
-              <span style="color:black;font-weight:bold">
-                {{Global.General.Currency}}
-              </span>
-            </legend>
-            {{translate('configuration_new_currency')}}:
-            <input
-              v-model="Global.General.Currency"
-              size=3 maxlength=3 placeholder="ccc"
-            >
-          </fieldset>
-
-          <div>
-            <!--select assessment report-->
-            <fieldset>
-              <legend>
-                {{translate('select_gwp_source')}}
-                <!--select gwp report which defines gwp values-->
-                <select
-                  v-model="Global.Configuration.Selected.gwp_reports_index"
-                  @change="set_constants_from_gwp_report()"
-                >
-                  <option v-for="report,i in GWP_reports" :value="i">
-                    {{report.report}}
-                  </option>
-                </select>
-                <a onclick="ecam.show('gwp_table')">Info</a>
-              </legend>
-
-              <!--description of gwp values-->
-              <div style="padding:0.5em 0"
-                v-html="translate('gwp_values_relative_to')"
-              ></div>
-
-              <!--actual gwp values-->
-              <table>
-                <tr>
-                  <td>
-                    {{translate('carbon_dioxide')}} (CO<sub>2</sub>)
-                  </td>
-                  <td align=right>1</td>
-                  <td>
-                    CO<sub>2</sub> {{translate('equivalents')}}
-                  </td>
-                <tr>
-                  <td>
-                    {{translate('methane')}} (CH<sub>4</sub>)
-                  </td>
-                  <td align=right>
-                    {{Cts.ct_ch4_eq.value}}
-                  </td>
-                  <td>
-                    CO<sub>2</sub> {{translate('equivalents')}}
-                  </td>
-                <tr>
-                  <td>
-                    {{translate('nitrouns_oxide')}} (N<sub>2</sub>O)
-                  </td>
-                  <td align=right>
-                    {{Cts.ct_n2o_eq.value}}
-                  </td>
-                  <td>
-                    CO<sub>2</sub> {{translate('equivalents')}}
-                  </td>
-                </tr>
-              </table>
-            </fieldset>
-          </div>
-        </div>
       </div>
 
       <!--prev & next buttons-->
@@ -318,7 +338,7 @@ let configuration = new Vue({
           {{translate('previous')}}
         </button>
         <button class="button next"
-          onclick="event.stopPropagation();ecam.show('tier_b')">
+          @click="go_to_first_stage_active()">
           {{translate('next')}}
         </button>
       </div>

@@ -5,6 +5,7 @@ let tier_b=new Vue({
     visible:false,
     level:'Water',
     sublevel:false,
+
     caption,
     variable,
 
@@ -26,6 +27,7 @@ let tier_b=new Vue({
     translate,
     format,
     get_level_color,
+    go_to,
 
     set_question(question, new_value){
       //set new question answer
@@ -119,7 +121,7 @@ let tier_b=new Vue({
       >
         <!--assessment period-->
         <div>
-          <a onclick="ecam.show('select_scenario')">
+          <a onclick="ecam.show('configuration')">
             {{translate('assessment_period')}}:
             <b style=color:black>
               <span :class="Global.Days()==0 ? 'warning' : ''">
@@ -312,6 +314,26 @@ let tier_b=new Vue({
               </tr>
             </tfoot>
           </table>
+
+          <div v-if="!sublevel">
+            <h3 style=text-align:center>
+              {{translate(level)}} stages
+            </h3>
+            <div style="display:grid;grid-template-columns:33% 33% 33%">
+              <div v-for="stage in Structure.filter(s=>s.level==level && s.sublevel)" style="text-align:center;cursor:pointer">
+                <img
+                  @mousemove="caption.show($event, translate(stage.sublevel))"
+                  @mouseout="caption.hide()"
+                  :src="'frontend/img/'+(stage.alias)+(Global.Configuration.ActiveStages[stage.alias]?'':'-off')+'.png'"
+                  @click="go_to(stage.level,stage.sublevel)"
+                  style="width:42px"
+                >
+                <div>
+                  {{translate(stage.sublevel)}}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!--tier b outputs-->
@@ -451,7 +473,7 @@ let tier_b=new Vue({
             {{ translate('Advanced Assessment: Substages') }}
           </summary>
 
-          <div style="margin-top:10px">
+          <div style="margin:10px">
             substages interface goes here
             <ul>
               <li>

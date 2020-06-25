@@ -1,6 +1,11 @@
 {
 "#below":"below",
 
+"#5.6 - 15.7 kW" : "5.6 - 15.7 kW",
+"#15.7 - 38 kW"  : "15.7 - 38 kW",
+"#39 - 96 kW"    : "39 - 96 kW",
+"#> 96 kW"       : "> 96 kW",
+
 "#Abbreviations":"Abbreviations",
 "#About non revenue water":"About non revenue water",
 "#Abstraction":"Abstraction",

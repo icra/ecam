@@ -23,18 +23,20 @@ let ecam_logo=new Vue({
       </div>
 
       <!--logo-->
-      <div id=logo_container onclick="ecam.show('landing')">
-        <div id=logo>ECAM</div>
+      <div id=logo_container>
+        <div id=logo onclick="ecam.show('landing')">ECAM</div>
         <div>
-          {{translate('navbar_title')}}
+          <span onclick="ecam.show('landing')">
+            {{translate('navbar_title')}}
+          </span>
+          &mdash;
+          <!--version-->
+          <span style="font-family:monospace" title="version">
+            <a href="//github.com/icra/ecam" target=_blank>
+              v{{Global.General.version}}
+            </a>
+          </span>
         </div>
-      </div>
-
-      <!--version-->
-      <div style="font-family:monospace">
-        <a href="//github.com/icra/ecam" target=_blank>
-          v{{Global.General.version}}
-        </a>
       </div>
 
       <!--current system name-->
@@ -87,15 +89,15 @@ let ecam_logo=new Vue({
 
         /*css grid*/
         display:grid;
-        grid-template-columns:5% 50% 10% 20% 15%;
-        /*                    b   l   v   s   l
-                              u   o   e   y   a
-                              r   g   r   s   n
-                              g   o   s   t   g
-                              e       i   e   u
-                              r       o   m   a
-                                      n       g
-                                              e
+        grid-template-columns:35px 60% 20% 15%;
+        /*                    b    l   s   l
+                              u    o   y   a
+                              r    g   s   n
+                              g    o   t   g
+                              e        e   u
+                              r        m   a
+                                           g
+                                           e
         */
       }
       #ecam_logo a{color:white;}
@@ -119,11 +121,11 @@ let ecam_logo=new Vue({
       }
       #ecam_logo #lang{
         cursor:pointer;
+        text-align:right;
       }
 
       #ecam_logo #lang > img {
-        display:block;
-        margin:auto;
+        display:inline;
       }
 
       /* select element */
