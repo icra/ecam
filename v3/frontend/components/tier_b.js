@@ -438,7 +438,7 @@ let tier_b=new Vue({
 
                 <!--output value-->
                 <td
-                  v-html="format(Global[key]())"
+                  v-html="format(Global[key]()/Units.multiplier(key))"
                   @mousemove="caption.show($event, Formulas.prettify(Global[key]))"
                   @mouseout="caption.hide()"
                   style="text-align:right"

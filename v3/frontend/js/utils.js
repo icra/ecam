@@ -48,7 +48,11 @@ function get_base_unit(code, scenario){
     return scenario.General.Currency;
   }
 
-  return info.unit;
+  let info_unit = info.unit; //default unit at info (may not be the base unit)
+  let base_unit = Object.entries(Units[info.magnitude]).find(([key,val])=>val==1)[0];
+  //console.log({info_unit, base_unit});
+
+  return base_unit;
 }
 
 //get level color
@@ -151,7 +155,7 @@ function get_current_stage(code){
   }
 }
 
-//get variable value
+//get internal variable value (not affected by units)
 function get_variable_value(code){
   if(!code) return false;
   let type = get_variable_type(code);

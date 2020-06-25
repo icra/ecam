@@ -243,6 +243,7 @@ let variable = new Vue({
                     </span>
                   </td>
                 </tr>
+
                 <!--output that uses the input is normal-->
                 <tr v-else>
                   <td :title="translate(output+'_descr')">
@@ -251,7 +252,7 @@ let variable = new Vue({
                     </a>
                   </td>
                   <td>
-                    <div v-html="format(get_variable_value(output))">
+                    <div v-html="format(get_variable_value(output)/Units.multiplier(output))">
                     </div>
                   </td>
                   <td>
