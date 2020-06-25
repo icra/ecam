@@ -164,23 +164,32 @@ let select_scenario = new Vue({
                 :disabled="scenario != Global"
                 v-html="'edit'"
               ></button>
-              <button onclick="alert('TODO')">
-                duplicate
-              </button>
-              <button onclick="alert('TODO')">
-                load from file...
-              </button>
+
+              <button
+                disabled
+                onclick="alert('TODO')"
+                v-html="'duplicate'"
+              ></button>
+
+              <button
+                disabled
+                onclick="alert('TODO')"
+                v-html="'load from file...'"
+              ></button>
+
               <button
                 @click="delete_scenario(scenario)"
                 :disabled="scenario == Global"
                 v-html="'delete'"
                 style="color:red"
               ></button>
+
               <button
                 onclick="ecam.show('report')"
                 :disabled="scenario != Global"
                 v-html="'report'"
               ></button>
+
             </td>
             <td style="text-align:center" v-if="Scenarios.length>1">
               <button @click="add_scenario_to_compared(scenario)">
@@ -212,6 +221,7 @@ let select_scenario = new Vue({
             class="button save"
             v-html="'save to JSON file'"
             title="save all systems to a JSON file"
+            disabled
           ></button>
         </div>
       </div>

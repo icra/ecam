@@ -10,18 +10,18 @@ linear_menu.visible = 1;
 sidebar.visible     = 0;
 
 //page views
-landing.visible         = 1;
-configuration.visible   = 0;
-report.visible          = 0;
-select_scenario.visible = 0;
-constants.visible       = 0;
-emission_tree.visible   = 0;
-summary_ghg.visible     = 0;
-summary_nrg.visible     = 0;
-tier_a.visible          = 0;
-tier_b.visible          = 0;
-variable.visible        = 0;
-development.visible     = 0;
+landing.visible         = false;
+configuration.visible   = false;
+report.visible          = false;
+select_scenario.visible = true;
+constants.visible       = false;
+emission_tree.visible   = false;
+summary_ghg.visible     = false;
+summary_nrg.visible     = false;
+tier_a.visible          = false;
+tier_b.visible          = false;
+variable.visible        = false;
+development.visible     = false;
 
 /*BACKEND*/
 
