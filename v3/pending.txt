@@ -23,9 +23,61 @@
   * [frontend] redo save button function
   * [frontend] onclose listener: trigger warning if ecam is accidentally closed
 
-[STILL CANNOT BE DONE (i.e. missing info)]
+[STILL CANNOT BE DONE]: (missing info OR not clear OR not read)
   * [backend] reimplement benchmarks with new v3 backend
   * [backend] Implement changes requested by Corinne on June 19th 2020.
+    ``` mail from Corinne:
+      Enable to account for different ways of valorising biogas (flare, heat
+      and Power for auto-consumption or electricity sales, biomethane injection
+      in city grid, or a combination of all in varying %). Enable to enter a
+      specific % of leak of CH4 to atmosphere with default value being 2%.
+
+      Enable to account for heat and cold recovery in water supply, sewer
+      networks or WWTP. In ECAM, it can just be a value of CO2eq calculated for
+      the specific project.
+
+      Enable to enter the following values that add to the total  carbon
+      footprint for:
+      - Transport of waste products (screenings, grit, grease, sludge, ashes…)
+        Note: one angle of C02 footprint reduction is reducing waste volumes
+        and transport distance, but each can make their own calculation for
+        that
+      - Transport and footprint of purchases (fuel, chemicals, disposable equipment, …)
+      - Maintenance staff vehicle fleet.  Note: some utilities change their
+        fleet to biofuels to reduce their CO2 footprint
+      - Building heating, AC and ventilation as electricity, or fuel, or city
+        heat values that compute a CO2eq value. Note: Some utilities might be
+        connected to the urban heat grid to support their heating requirements.
+        This will remain exceptional, so I would recommend to just have a line
+        for people to enter the CO2eq of this heat energy (they will know it
+        from the city grid supplier).
+      - Miscelleaneous improvements to emissions (i.e.: carbon sequestration of
+        the fumes from on-site incinerator) as a negative value to correct
+        default calculations in the tool.
+
+      For N2O:
+        Enable to account for the N2O emissions using the NTK delta between
+        influent and effluent and the IPCC 2019 emissions factor or a country/
+        plant  specific emissions factor
+        Maintain the possibility to make a correction (as you currently have) for
+        those who actually measure their N2O.
+        Enable to enter a CO2eq value for assets and their replacement using an
+        LCA approach. Point people towards LCA tools to develop it.
+        The tool was initially developed to drive carbon emissions reduction in
+        emerging countries, not to provide a full footprint. However, developed
+        utilities need to report on their full footprint. If we want the tool to
+        pick up, it would be great that developed utilities use it for their
+        reporting (or integrate the code in their systems 😊). With that in
+        mind, and realizing that there is a growing ambition amongst urban water
+        operators to transition to carbon neutrality, we need to enable a more
+        flexible approach through the above listed points, as the footprint
+        reduction can happen on many different fronts.
+
+      I can support the approach on biogas valorisation if you have questions
+      on how to calculate.
+
+      Best / Cordialement,
+    ```
   * [backend] Enhancement of ghg models (instructions to be received with Maite and Rafa)
   * [frontend] redo load files function ("open" button)
     - implement compabibility module (v2 to v3)
