@@ -28,7 +28,6 @@ let linear_menu = new Vue({
   template:`
     <!--linear menu COMPONENT-->
     <div id=linear_menu v-if="visible && Languages.ready" class=flex>
-
       <!--landing / home-->
       <div
         onclick="ecam.show('landing')"
@@ -138,12 +137,11 @@ let linear_menu = new Vue({
       <!--energy summary-->
       <div
         :selected="current_view=='summary_nrg'"
+        onclick="ecam.show('summary_nrg')"
+        @mousemove="caption.show($event, translate('nrg_summary'))"
+        @mouseout="caption.hide()"
       >
-        <div
-          onclick="ecam.show('summary_nrg')"
-          @mousemove="caption.show($event, translate('nrg_summary'))"
-          @mouseout="caption.hide()"
-        >
+        <div>
           <span style="color:inherit">
             Energy efficiency
           </span>
@@ -151,11 +149,11 @@ let linear_menu = new Vue({
       </div>
 
       <!--summaries-->
-      <div>
-        <div
-          @click="summaries_visible^=1"
-          style="cursor:pointer"
-        >
+      <div
+        @click="summaries_visible^=1"
+        style="cursor:pointer"
+      >
+        <div>
           <span style="color:inherit">
             {{translate('summaries')}}
           </span>
