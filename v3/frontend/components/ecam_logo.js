@@ -17,19 +17,14 @@ let ecam_logo=new Vue({
 
   template:`
     <div id=ecam_logo v-if="visible && Languages.ready">
-      <!--3 lines menu symbol "burger"-->
-      <div id=burger onclick="event.stopPropagation();sidebar.visible^=1">
-        &#9776;
-      </div>
-
       <!--logo-->
-      <div id=logo_container>
-        <div id=logo onclick="ecam.show('landing')">ECAM</div>
+      <div id=logo_container onclick="event.stopPropagation();sidebar.visible^=1">
+        <div id=logo>ECAM</div>
         <div>
-          <span onclick="ecam.show('landing')">
+          <span>
             {{translate('navbar_title')}}
-          </span>
-          &mdash;
+          </span>&mdash;
+
           <!--version-->
           <span style="font-family:monospace" title="version">
             <a href="//github.com/icra/ecam" target=_blank>
@@ -39,15 +34,17 @@ let ecam_logo=new Vue({
         </div>
       </div>
 
-      <!--current system name-->
+      <!--current system-->
       <div style="font-size:larger" onclick="ecam.show('select_scenario')">
+        <div style=text-align:center>
         {{Global.General.Name}}
+        </div>
       </div>
 
       <!--language-->
       <div id=lang>
         <!--current language-->
-        <img :src="'frontend/img/flags/'+Languages.current+'.png'">
+        <div>{{Languages.current}}</div>
 
         <!--all languages-->
         <div id=select>
@@ -55,14 +52,11 @@ let ecam_logo=new Vue({
             v-for="lang in Languages.list"
             :lang="lang"
             @click="Languages.current=lang"
-          >
-            <img :src="'frontend/img/flags/'+lang+'.png'">
-            {{lang}}
-          </div>
+            v-html="lang"
+          ></div>
 
           <!--null (only language tags)-->
           <div lang=null @click="Languages.current='null'">
-            <img src="frontend/img/flags/null.png">
             null (tags only)
           </div>
 
@@ -85,19 +79,20 @@ let ecam_logo=new Vue({
         color:white;
         min-height:50px;
         padding:5px;
+        padding-left:3em;
         align-items:center;
 
         /*css grid*/
         display:grid;
-        grid-template-columns:35px 60% 20% 15%;
-        /*                    b    l   s   l
-                              u    o   y   a
-                              r    g   s   n
-                              g    o   t   g
-                              e        e   u
-                              r        m   a
-                                           g
-                                           e
+        grid-template-columns:70% 10% 10%;
+        /*                    l   s   l
+                              o   y   a
+                              g   s   n
+                              o   t   g
+                                  e   u
+                                  m   a
+                                      g
+                                      e
         */
       }
       #ecam_logo a{color:white;}
@@ -136,7 +131,7 @@ let ecam_logo=new Vue({
         visibility:hidden;
         border:1px solid #ccc;
         width:200px;
-        background:#eeece4;
+        background:white;
         box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 5px 10px 15px 5px rgba(0,0,0,.1);
         text-align:left;
         z-index:999;

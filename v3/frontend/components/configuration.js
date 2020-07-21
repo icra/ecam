@@ -1,8 +1,9 @@
-let configuration = new Vue({
+let configuration=new Vue({
   el:"#configuration",
-
   data:{
     visible:false,
+
+    are_you_editing_name:false,
 
     Global,
     Languages,
@@ -11,7 +12,6 @@ let configuration = new Vue({
     GWP_reports,
     Cts,
   },
-
   methods:{
     translate,
     format,
@@ -119,46 +119,139 @@ let configuration = new Vue({
       this.Cts.ct_n2o_eq.value = this.GWP_reports[index].ct_n2o_eq;
     },
   },
-
   template:`
     <!--configuration VIEW-->
     <div id=configuration v-if="visible && Languages.ready">
+      <!--system name-->
       <h1 style=text-align:center>
-        {{Global.General.Name}}
-        &mdash;
-        {{translate('configuration')}}
+        <div v-if="are_you_editing_name">
+          <input
+            @blur="are_you_editing_name=false"
+            v-model="Global.General.Name"
+            maxlength=50
+            placeholder="System name"
+            style="border:1px solid #ccc"
+          >
+        </div>
+        <div v-else>
+          <b style="font-size:x-large">{{Global.General.Name}}</b>
+          <button @click="are_you_editing_name=true">
+            Change name
+          </button>
+        </div>
       </h1>
 
-      <div class=flex style=justify-content:center>
-        <!--configuration left-->
-        <div style="max-width:45%;padding:0em 1em 1em 1em">
-          <!--system name-->
-          <fieldset><legend>System name</legend>
-            <input v-model="Global.General.Name" maxlength=50 style="width:95%">
-          </fieldset>
+      <!--activate the stages which form your system-->
+      <div style="text-align:center;color:#666;font-weight:bold">
+        Activate the stages which form your system
+      </div>
 
-          <!--assessment period-->
-          <fieldset>
-            <legend>Assessment period</legend>
-            <div>
-              <span>
-                From:
-                <input type=date v-model="Global.General.AssessmentPeriodStart">
-              </span>
-              <span>
-                To:
-                <input type=date v-model="Global.General.AssessmentPeriodEnd">
-              </span>
-              <span>
-                (<span :class="Global.Days()<=0 ? 'warning':''" v-html="format(Global.Days())"></span>
-                <span class=unit>{{translate('days')}}</span>)
-              </span>
+      <!--picture TODO-->
+      <div>
+        <hr>
+        <center>
+          picture
+        </center>
+        <hr>
+      </div>
+
+      <!--icons-->
+      <div>
+        <div id=select_stages
+          style="
+            display:grid;
+            grid-template-columns:30% 30% 30%;
+            grid-gap:5%;
+            text-align:center;
+          "
+        >
+          <div
+            v-for="l1 in Structure.filter(l=>l.sublevel==false)"
+          >
+            <!--sublevels-->
+            <div
+              style="
+                display:grid;
+                grid-template-columns:33% 33% 33%;
+              "
+            >
+              <div v-for="l2 in Structure.filter(l=>(l.sublevel && l.level==l1.level))"
+                @click="Global.Configuration.ActiveStages[l2.alias]^=1"
+              >
+                <div>
+                  <img :src="'frontend/img/'+l2.alias+(Global.Configuration.ActiveStages[l2.alias]?'':'-off')+'.png'">
+                </div>
+                <div :style="'color:'+(Global.Configuration.ActiveStages[l2.alias] ? l1.color : '#ccc')">
+                  <b><small>{{translate(l2.sublevel)}}</small></b>
+                </div>
+              </div>
             </div>
-          </fieldset>
 
-          <!--select country-->
-          <fieldset>
-            <legend>{{translate('select_country')}}
+            <!--level-->
+            <div
+              @click="Global.Configuration.ActiveStages[l1.alias]^=1"
+              style="margin-top:1em"
+            >
+              <div :style="'padding:1em;color:white;background:'+(Global.Configuration.ActiveStages[l1.alias] ? l1.color : '#ccc')">
+                <b>{{translate(l1.level)}}</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--rest of parameters-->
+      <div
+        style="
+          margin-top:5em;
+          display:grid;
+          grid-template-columns:49% 49%;
+          grid-gap:2%;
+          grid-row-gap:2em;
+        "
+      >
+        <!--assessment period-->
+        <fieldset>
+          <legend>Assessment period</legend>
+          <div>
+            <b>
+              From:
+              <input type=date v-model="Global.General.AssessmentPeriodStart">
+            </b>
+            <b>
+              To:
+              <input type=date v-model="Global.General.AssessmentPeriodEnd">
+            </b>
+            <span>
+              (<span :class="Global.Days()<=0 ? 'warning':''" v-html="format(Global.Days())"></span>
+              <span class=unit>{{translate('days')}}</span>)
+            </span>
+          </div>
+        </fieldset>
+
+        <!--select currency-->
+        <fieldset>
+          <legend>
+            <span v-html="translate('currency')"></span>
+          </legend>
+          <div>
+            <b>
+              {{translate('configuration_new_currency')}}
+            </b>
+            <input
+              v-model="Global.General.Currency"
+              size=3 maxlength=3 placeholder="ccc"
+            >
+          </div>
+        </fieldset>
+
+        <!--select country-->
+        <fieldset>
+          <legend> Country </legend>
+          <div>
+            <div>
+              <b>Select</b>
+              &emsp;
               <select
                 v-model="Global.General.Country"
                 @change="set_variables_from_selected_country()"
@@ -168,8 +261,11 @@ let configuration = new Vue({
                   {{country}}
                 </option>
               </select>
-              <a onclick="ecam.show('countries')">Info</a>
-            </legend>
+              &emsp;
+              <button onclick="ecam.show('countries')">
+                More info
+              </button>
+            </div><hr>
 
             <table style="width:100%">
               <tr :class="Global.General.conv_kwh_co2<=0?'warning':''">
@@ -209,28 +305,19 @@ let configuration = new Vue({
                 </td>
               </tr>
             </table>
-          </fieldset>
+          </div>
+        </fieldset>
 
-          <!--select currency-->
-          <fieldset>
-            <legend>
-              <span v-html="translate('currency')"></span>:
-              <span style="color:black;font-weight:bold">
-                {{Global.General.Currency}}
-              </span>
-            </legend>
-            {{translate('configuration_new_currency')}}:
-            <input
-              v-model="Global.General.Currency"
-              size=3 maxlength=3 placeholder="ccc"
-            >
-          </fieldset>
-
-          <!--select assessment report-->
-          <fieldset>
-            <legend>
-              {{translate('select_gwp_source')}}
+        <!--select assessment report-->
+        <fieldset>
+          <legend>
+            Select Global Warming Potential Source
+          </legend>
+          <div>
+            <div>
               <!--select gwp report which defines gwp values-->
+              <b>Select</b>
+              &emsp;
               <select
                 v-model="Global.Configuration.Selected.gwp_reports_index"
                 @change="set_constants_from_gwp_report()"
@@ -239,13 +326,18 @@ let configuration = new Vue({
                   {{report.report}}
                 </option>
               </select>
-              <a onclick="ecam.show('gwp_table')">Info</a>
-            </legend>
+              &emsp;
+              <button onclick="ecam.show('gwp_table')">
+                More info
+              </button>
+            </div><hr>
 
             <!--description of gwp values-->
-            <div style="padding:0.5em 0"
-              v-html="translate('gwp_values_relative_to')"
-            ></div>
+            <p>
+              <b style="padding:0.5em 0"
+                v-html="translate('gwp_values_relative_to').prettify()"
+              ></b>
+            </p>
 
             <!--actual gwp values-->
             <table>
@@ -279,84 +371,39 @@ let configuration = new Vue({
                 </td>
               </tr>
             </table>
-          </fieldset>
-        </div>
-
-        <!--configuration right-->
-        <div style="max-width:50%">
-          <h4 style="margin:0;margin-bottom:1em;text-align:center">
-            {{translate('configuration_subtitle')}}
-          </h4>
-          <table id=select_stages>
-            <tr>
-              <th>Level</th>
-              <th>stage</th>
-            </tr>
-            <tbody v-for="l1 in Structure.filter(l=>l.sublevel==false)">
-              <tr>
-                <td
-                  rowspan=4
-                  :style="Global.Configuration.ActiveStages[l1.alias]?'background:lightgreen':''"
-                >
-                  <label>
-                    <input type=checkbox
-                      v-model="Global.Configuration.ActiveStages[l1.alias]"
-                      @change="check_l2_from_l1()"
-                    >
-                    <img :src="'frontend/img/'+l1.alias+'.png'">
-                    {{translate(l1.level)}}<br>
-                  </label>
-                </td>
-              </tr>
-              <tr v-for="l2 in Structure.filter(l=>(l.sublevel && l.level==l1.level))">
-                <td
-                  :style="Global.Configuration.ActiveStages[l2.alias]?'background:lightgreen':''"
-                >
-                  <label>
-                    <input type=checkbox
-                      v-model="Global.Configuration.ActiveStages[l2.alias]"
-                      @change="check_l1_from_l2()"
-                    >
-                    <img :src="'frontend/img/'+l2.alias+'.png'">
-                    {{translate(l2.sublevel)}}<br>
-                  </label>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div style=text-align:center>
-            <button
-              class=button
-              @click="activate_all_stages()"
-            >{{translate('configuration_activate_all')}}
-            </button>
           </div>
-        </div>
-      </div>
-
-      <!--prev & next buttons-->
-      <div class=flex style="margin:1em;justify-content:center">
-        <button class="button prev"
-          onclick="event.stopPropagation();ecam.show('select_scenario')">
-          {{translate('previous')}}
-        </button>
-        <button class="button next"
-          @click="go_to_first_stage_active()">
-          {{translate('next')}}
-        </button>
+        </fieldset>
       </div>
     </div>
   `,
 
   style:`
     <style>
-      #configuration #select_stages { box-shadow:inset 0 2px 4px rgba(0,0,0,.15),0 1px 2px rgba(0,0,0,.05); }
-      #configuration #select_stages img{width:40px;vertical-align:middle}
-      #configuration #select_stages th{width:240px;}
-      #configuration #select_stages td{text-align:left;padding:0}
-      #configuration #select_stages label{cursor:pointer;display:block;height:100%;width:100%;padding:8px}
-      #configuration #select_stages input[type=checkbox]{vertical-align:middle;}
-      #configuration fieldset{margin:0 0 1.4em 0;padding:0.9em;border:1px solid #aaa}
+      #configuration {
+        padding:3em;
+      }
+      #configuration select,
+      #configuration input {
+        border:none;
+        padding:0.5em 0.2em;
+      }
+      #configuration #select_stages img{width:70px;vertical-align:middle}
+      #configuration fieldset{
+        padding:0;
+        border:none;
+        background:#f6f6f6;
+        display:block;
+      }
+      #configuration fieldset > legend {
+        background:white;
+        color:var(--color-level-generic);
+        font-weight:bold;
+        padding-bottom:0.5em;
+        width:100%;
+      }
+      #configuration fieldset > div {
+        padding:2em;
+      }
 
       #configuration .warning {
         font-weight:bold;
@@ -367,5 +414,4 @@ let configuration = new Vue({
       }
     </style>
   `,
-
 });

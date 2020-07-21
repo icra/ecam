@@ -1,9 +1,12 @@
 let linear_menu = new Vue({
   el:"#linear_menu",
-
   data:{
     visible:true,
-    current_view: null,
+    current_view:'landing',
+
+    ghg_emissions_visible:false,
+    summaries_visible:false,
+
     caption,
 
     Global,
@@ -11,7 +14,6 @@ let linear_menu = new Vue({
     Structure,
     Languages,
   },
-
   methods:{
     format,
     translate,
@@ -23,140 +25,172 @@ let linear_menu = new Vue({
       }
     },
   },
-
   template:`
     <!--linear menu COMPONENT-->
     <div id=linear_menu v-if="visible && Languages.ready" class=flex>
-      <!--linear select scenario button-->
-      <div onclick="ecam.show('select_scenario')">
+
+      <!--landing / home-->
+      <div
+        onclick="ecam.show('landing')"
+        :selected="current_view=='landing'"
+      >
+        <div>
+          <span style="color:inherit">
+            Home
+          </span>
+        </div>
+      </div>
+
+      <!--systems-->
+      <div
+        onclick="ecam.show('select_scenario')"
+        :selected="current_view=='select_scenario'"
+      >
         <div>
           <span style="color:inherit">
             Systems
           </span>
         </div>
-        <img
-          :class="'l1 '+(current_view=='select_scenario'?'selected':'')"
-          src=frontend/img/getStarted.png
-          @mousemove="caption.show($event, 'Systems')"
-          @mouseout="caption.hide()"
-        >
       </div>
 
-      <!--linear configuration-->
-      <div onclick="ecam.show('configuration')">
+      <!--general settings-->
+      <div
+        onclick="ecam.show('configuration')"
+        :selected="current_view=='configuration'"
+      >
         <div>
           <span style="color:inherit">
-            {{translate('configuration')}}
+            General settings
           </span>
         </div>
-        <img
-          :class="'l1 '+(current_view=='configuration'?'selected':'')"
-          src=frontend/img/dashboard.png
-          @mousemove="caption.show($event, 'Configuration of current system' )"
-          @mouseout="caption.hide()"
-        >
       </div>
 
-      <!--linear population
-      <div onclick="ecam.show('population')">
-        <div>
-          <span style="color:inherit">
-            {{translate('population')}}
-          </span>
+      <!--ghg emissions-->
+      <div
+        :selected="current_view=='tier_b'"
+      >
+        <div @click="ghg_emissions_visible^=true" style="cursor:pointer">
+          <span>GHG emissions</span>
         </div>
-        <img
-          :class="'l1 '+(current_view=='population'?'selected':'')"
-          src=frontend/img/inhabitants.png
-          @mousemove="caption.show($event, translate('population'))"
-          @mouseout="caption.hide()"
-        >
-      </div>
-      -->
 
-      <!--linear tier B-->
-      <div>
-        <div>
-          <span>
-            GHG emissions:
-          </span>
-          <span>
+        <div
+          v-if="ghg_emissions_visible"
+          style="
+            position:absolute;
+            padding:1em;
+            margin:0;
+            border:1px solid #ccc;
+            background:#eee;
+            padding:0.5em;
+            box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
+          "
+        >
+          <div style="font-size:large;text-align:center">
             <span v-html="format(Global.TotalGHG())"></span>
             <span v-html="Info.TotalGHG.unit.prettify()"></span>
-          </span>
-        </div>
-
-        <div class=flex>
-          <div v-for="l1 in Structure.filter(s=>!s.sublevel)">
-            <div style="text-align:center">
-              <img
-                @click="go_to(l1.level)"
-                @mousemove="caption.show($event, translate(l1.level))"
-                @mouseout="caption.hide()"
-                :src="'frontend/img/'+(l1.alias)+(Global.Configuration.ActiveStages[l1.alias]?'':'-off')+'.png'"
-                :class="'l2 '+(is_tier_b_selected(l1.level, false)?'selected':'')"
-                :stage="l1.alias"
-              >
-              <div style="font-size:smaller">
-                <span v-html="format(Global[l1.prefix+'_KPI_GHG']())"></span>
-              </div>
-            </div>
-            <div class="flex">
-              <div v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))">
+          </div>
+          <div class=flex>
+            <div v-for="l1 in Structure.filter(s=>!s.sublevel)">
+              <div style="text-align:center">
                 <img
-                  :class="'l2 '+(is_tier_b_selected(l2.level,l2.sublevel)?'selected':'')"
-                  :stage="l2.alias"
-                  @mousemove="caption.show($event, translate(l2.sublevel))"
+                  @click="go_to(l1.level); ghg_emissions_visible=false"
+                  @mousemove="caption.show($event, translate(l1.level))"
                   @mouseout="caption.hide()"
-                  :src="'frontend/img/'+(l2.alias)+(Global.Configuration.ActiveStages[l2.alias]?'':'-off')+'.png'"
-                  @click="go_to(l2.level,l2.sublevel)"
+                  :src="'frontend/img/'+(l1.alias)+(Global.Configuration.ActiveStages[l1.alias]?'':'-off')+'.png'"
+                  :class="'l2 '+(is_tier_b_selected(l1.level, false)?'selected':'')"
+                  :stage="l1.alias"
                 >
-                <div>
-                  <small
-                    v-html="format(Global[l2.prefix+'_KPI_GHG']())"
-                  ></small>
+                <div style="font-size:smaller">
+                  <span v-html="format(Global[l1.prefix+'_KPI_GHG']())"></span>
+                </div>
+              </div>
+              <div class="flex">
+                <div v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))">
+                  <img
+                    :class="'l2 '+(is_tier_b_selected(l2.level,l2.sublevel)?'selected':'')"
+                    :stage="l2.alias"
+                    @mousemove="caption.show($event, translate(l2.sublevel))"
+                    @mouseout="caption.hide()"
+                    :src="'frontend/img/'+(l2.alias)+(Global.Configuration.ActiveStages[l2.alias]?'':'-off')+'.png'"
+                    @click="go_to(l2.level,l2.sublevel); ghg_emissions_visible=false"
+                  >
+                  <div style=text-align:center>
+                    <small
+                      v-html="format(Global[l2.prefix+'_KPI_GHG']())"
+                    ></small>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <div style="text-align:center">
+            <button
+              style="width:100%"
+              @click="ghg_emissions_visible=false">
+              close
+            </button>
+          </div>
         </div>
       </div>
 
-      <!--linear summaries button-->
-      <div>
-        <div>
-          <span style="color:inherit">
-            {{translate('summaries')}}
-          </span>
-        </div>
-        <img
-          :class="'l1 '+(current_view=='summary_ghg'?'selected':'')"
-          src=frontend/img/sources.png
-          onclick="ecam.show('summary_ghg')"
-          @mousemove="caption.show($event, translate('ghg_summary'))"
-          @mouseout="caption.hide()"
-        >
-        <img
-          :class="'l1 '+(current_view=='emission_tree'?'selected':'')"
-          src=frontend/img/all-emissions.png
-          onclick="ecam.show('emission_tree')"
-          @mousemove="caption.show($event, 'All GHG emissions')"
-          @mouseout="caption.hide()"
-          style="transform: rotate(-90deg)"
-        >
-        <img
-          :class="'l1 '+(current_view=='summary_nrg'?'selected':'')"
-          src=frontend/img/energy.png
+      <!--energy summary-->
+      <div
+        :selected="current_view=='summary_nrg'"
+      >
+        <div
           onclick="ecam.show('summary_nrg')"
           @mousemove="caption.show($event, translate('nrg_summary'))"
           @mouseout="caption.hide()"
         >
-        <img
-          :class="'l1 '+(current_view=='report'?'selected':'')"
-          src=frontend/img/report.png
-          onclick="ecam.show('report')"
-          @mousemove="caption.show($event, 'Report')"
-          @mouseout="caption.hide()"
+          <span style="color:inherit">
+            Energy efficiency
+          </span>
+        </div>
+      </div>
+
+      <!--summaries-->
+      <div>
+        <div
+          @click="summaries_visible^=1"
+          style="cursor:pointer"
         >
+          <span style="color:inherit">
+            {{translate('summaries')}}
+          </span>
+        </div>
+        <ul
+          v-if="summaries_visible"
+          style="
+            list-style:none;
+            font-size:large;
+            position:absolute;
+            padding:1em;
+            margin:0;
+            border:1px solid #ccc;
+            background:#eee;
+            padding:0.5em;
+            box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
+          "
+        >
+          <li>
+            <a href=# onclick="ecam.show('summary_ghg')">
+              GHG summary
+            </a>
+          </li>
+          <li>
+            <a href=# onclick="ecam.show('emission_tree')">
+              All GHG emissions
+            </a>
+          </li>
+          <li>
+            <a href=# onclick="ecam.show('report')">
+              Report
+            </a>
+          </li>
+          <li>
+            <button style="width:100%;" @click="summaries_visible=false">close</button>
+          </li>
+        </ul>
       </div>
     </div>
   `,
@@ -164,26 +198,23 @@ let linear_menu = new Vue({
   style:`
     <style>
       #linear_menu {
-        background:#f5f5f5;
-        background:linear-gradient(#f5f5f5,#ddd);
-        border-bottom:1px solid #e5e5e5;
-        padding:0.4em 0 0.2em 0;
-        box-shadow:0 1px 2px rgba(0,0,0,.5);
-        text-align:center;
-        justify-content:center;
+        background:white;
+        border-bottom:1px solid #ccc;
+        padding:2em 0 0 2em;
       }
       #linear_menu > div {
-        margin:0 4px;
+        margin:0 1em;
         font-size:12px;
-        vertical-align:middle;
+        font-weight:bold;
         padding:0.2em;
-        border-radius:0.5em;
-        color:rgba(0,0,0,0.55);
+        border-bottom:4px solid transparent;
       }
+      #linear_menu > div[selected],
       #linear_menu > div:hover {
-        background:#e6e6e6;
         color:black;
+        border-color:var(--color-level-generic);
       }
+
       #linear_menu img.l1:hover,
       #linear_menu img.l2:hover {
         border:3px solid #9fc231;

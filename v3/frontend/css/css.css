@@ -5,10 +5,25 @@ body{
   overflow-y:scroll;
   font-size:13px;
 
-  --color-level-generic: #2b6488;
-  --color-level-Water:   #00aff1;
-  --color-level-Waste:   #d71d24;
-  --color-level-Faecl:   green;
+  --color-level-generic: #016f9a;  /*current color in wacclim site*/
+  --color-level-generic: #2b6488;  /*previous color in wacclim site*/
+  --color-secondary-green:#8DC73F; /*secondary color from wacclim site*/
+
+  --color-level-Water:   #00aff1; /*water supply*/
+  --color-level-Waste:   #d71d24; /*wastewater*/
+  --color-level-Faecl:   green;   /*faecal sludge management*/
+}
+
+button {
+  border-radius:1em;
+  padding:0.2em 1.2em;
+  border:1px solid #666;
+  background:transparent;
+}
+
+hr{
+  border:none;
+  border-bottom:1px solid #ccc;
 }
 
 /*links*/
