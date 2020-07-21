@@ -135,6 +135,7 @@ let configuration=new Vue({
         </div>
         <div v-else>
           <b style="font-size:x-large">{{Global.General.Name}}</b>
+          &emsp;
           <button @click="are_you_editing_name=true">
             Change name
           </button>
@@ -142,17 +143,29 @@ let configuration=new Vue({
       </h1>
 
       <!--activate the stages which form your system-->
-      <div style="text-align:center;color:#666;font-weight:bold">
+      <div
+        style="
+          margin-top:1em;
+          text-align:center;
+          color:#666;
+          font-weight:bold;
+        "
+      >
         Activate the stages which form your system
       </div>
 
       <!--picture TODO-->
-      <div>
-        <hr>
+      <div
+        style="
+          height:200px;
+          margin-bottom:-2em;
+          border:1px solid #ccc;
+          background:#ccc;
+        "
+      >
         <center>
           picture
         </center>
-        <hr>
       </div>
 
       <!--icons-->

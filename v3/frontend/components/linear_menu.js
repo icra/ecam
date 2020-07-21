@@ -68,8 +68,10 @@ let linear_menu = new Vue({
       <!--ghg emissions-->
       <div
         :selected="current_view=='tier_b'"
+        @click="ghg_emissions_visible^=true"
+        style="cursor:pointer"
       >
-        <div @click="ghg_emissions_visible^=true" style="cursor:pointer">
+        <div>
           <span>GHG emissions</span>
         </div>
 
@@ -93,7 +95,7 @@ let linear_menu = new Vue({
             <div v-for="l1 in Structure.filter(s=>!s.sublevel)">
               <div style="text-align:center">
                 <img
-                  @click="go_to(l1.level); ghg_emissions_visible=false"
+                  @click="go_to(l1.level)"
                   @mousemove="caption.show($event, translate(l1.level))"
                   @mouseout="caption.hide()"
                   :src="'frontend/img/'+(l1.alias)+(Global.Configuration.ActiveStages[l1.alias]?'':'-off')+'.png'"
@@ -107,12 +109,12 @@ let linear_menu = new Vue({
               <div class="flex">
                 <div v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))">
                   <img
+                    @click="go_to(l2.level,l2.sublevel)"
                     :class="'l2 '+(is_tier_b_selected(l2.level,l2.sublevel)?'selected':'')"
                     :stage="l2.alias"
                     @mousemove="caption.show($event, translate(l2.sublevel))"
                     @mouseout="caption.hide()"
                     :src="'frontend/img/'+(l2.alias)+(Global.Configuration.ActiveStages[l2.alias]?'':'-off')+'.png'"
-                    @click="go_to(l2.level,l2.sublevel); ghg_emissions_visible=false"
                   >
                   <div style=text-align:center>
                     <small
@@ -173,17 +175,17 @@ let linear_menu = new Vue({
           "
         >
           <li>
-            <a href=# onclick="ecam.show('summary_ghg')">
+            <a href=# onclick="ecam.show('summary_ghg');linear_menu.summaries_visible=false">
               GHG summary
             </a>
           </li>
           <li>
-            <a href=# onclick="ecam.show('emission_tree')">
+            <a href=# onclick="ecam.show('emission_tree');linear_menu.summaries_visible=false">
               All GHG emissions
             </a>
           </li>
           <li>
-            <a href=# onclick="ecam.show('report')">
+            <a href=# onclick="ecam.show('report');linear_menu.summaries_visible=false">
               Report
             </a>
           </li>
@@ -200,14 +202,16 @@ let linear_menu = new Vue({
       #linear_menu {
         background:white;
         border-bottom:1px solid #ccc;
-        padding:2em 0 0 2em;
+        padding:0 0 0 2em;
       }
       #linear_menu > div {
         margin:0 1em;
         font-size:12px;
         font-weight:bold;
         padding:0.2em;
+        padding-top:2em;
         border-bottom:4px solid transparent;
+        box-sizing:border-box;
       }
       #linear_menu > div[selected],
       #linear_menu > div:hover {
