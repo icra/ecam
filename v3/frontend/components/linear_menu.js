@@ -125,11 +125,7 @@ let linear_menu = new Vue({
             </div>
           </div>
           <div style="text-align:center">
-            <button
-              style="width:100%"
-              @click="ghg_emissions_visible=false">
-              close
-            </button>
+            <button style="width:100%">close</button>
           </div>
         </div>
       </div>
@@ -173,22 +169,22 @@ let linear_menu = new Vue({
           "
         >
           <li>
-            <a href=# onclick="ecam.show('summary_ghg');linear_menu.summaries_visible=false">
+            <a href=# onclick="ecam.show('summary_ghg');">
               GHG summary
             </a>
           </li>
           <li>
-            <a href=# onclick="ecam.show('emission_tree');linear_menu.summaries_visible=false">
+            <a href=# onclick="ecam.show('emission_tree');">
               All GHG emissions
             </a>
           </li>
           <li>
-            <a href=# onclick="ecam.show('report');linear_menu.summaries_visible=false">
+            <a href=# onclick="ecam.show('report');">
               Report
             </a>
           </li>
-          <li>
-            <button style="width:100%;" @click="summaries_visible=false">close</button>
+          <li style="text-align:center">
+            <button style="width:100%;">close</button>
           </li>
         </ul>
       </div>
