@@ -2,8 +2,9 @@ let linear_menu = new Vue({
   el:"#linear_menu",
   data:{
     visible:true,
-    current_view:'landing',
+    current_view:null,
 
+    //floating windows
     ghg_emissions_visible:false,
     summaries_visible:false,
 
@@ -113,7 +114,7 @@ let linear_menu = new Vue({
                     :stage="l2.alias"
                     @mousemove="caption.show($event, translate(l2.sublevel))"
                     @mouseout="caption.hide()"
-                    :src="'frontend/img/'+(l2.alias)+(Global.Configuration.ActiveStages[l2.alias]?'':'-off')+'.png'"
+                    :src="'frontend/img/'+(l2.alias)+(Global.Configuration.ActiveStages[l2.alias]?'':'-off')+'.svg'"
                   >
                   <div style=text-align:center>
                     <small
@@ -196,9 +197,10 @@ let linear_menu = new Vue({
       #linear_menu {
         background:white;
         border-bottom:1px solid #ccc;
-        padding:0 0 0 2em;
+        padding:0 0 0 5em;
       }
       #linear_menu > div {
+        color:#3c3c3b;
         margin:0 1em;
         font-size:12px;
         font-weight:bold;

@@ -106,7 +106,7 @@ let summary_nrg = new Vue({
                     <td>
                       <div class=flex style="align-items:center;">
                         <div>
-                          <img :src="'frontend/img/'+l2.alias+'.png'" style="width:20px">
+                          <img :src="'frontend/img/'+l2.alias+'.svg'" style="width:20px">
                         </div>
                         <div style="margin-left:20px">
                           <a @click="go_to(l2.level, l2.sublevel)" style="cursor:pointer">

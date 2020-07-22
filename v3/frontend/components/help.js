@@ -42,12 +42,6 @@ let help = new Vue({
 
       <h4><b>Screencasts (v2)</b></h4>
       <a href="https://vimeopro.com/iwahq/tutorials-ecam-tool" target=_blank>https://vimeopro.com/iwahq/tutorials-ecam-tool</a>
-
-      <img
-        id=logo-wacclim
-        src="frontend/img/logo-wacclim_big.png"
-        style="display:block;height:120px;margin:1em auto"
-      >
     </div>
   `,
 

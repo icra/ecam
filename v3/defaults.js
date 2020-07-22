@@ -10,10 +10,10 @@ linear_menu.visible = 1;
 sidebar.visible     = 0;
 
 //page views
-landing.visible         = true;
+select_scenario.visible = true;
 configuration.visible   = false;
+landing.visible         = false;
 report.visible          = false;
-select_scenario.visible = false;
 constants.visible       = false;
 emission_tree.visible   = false;
 summary_ghg.visible     = false;

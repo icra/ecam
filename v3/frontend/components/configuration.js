@@ -2,9 +2,7 @@ let configuration=new Vue({
   el:"#configuration",
   data:{
     visible:false,
-
     are_you_editing_name:false,
-
     Global,
     Languages,
     Structure,
@@ -146,6 +144,7 @@ let configuration=new Vue({
       <div
         style="
           margin-top:1em;
+          margin-bottom:1em;
           text-align:center;
           color:#666;
           font-weight:bold;
@@ -158,18 +157,23 @@ let configuration=new Vue({
       <div
         style="
           height:200px;
-          margin-bottom:-2em;
+          line-height:200px;
+          margin-bottom:-3em;
           border:1px solid #ccc;
-          background:#ccc;
+          background:#eee;
         "
       >
         <center>
-          picture
+          picture general settings svg
         </center>
       </div>
 
       <!--icons-->
-      <div>
+      <div
+        style="
+          padding:0 6em;
+        "
+      >
         <div id=select_stages
           style="
             display:grid;
@@ -192,7 +196,7 @@ let configuration=new Vue({
                 @click="Global.Configuration.ActiveStages[l2.alias]^=1"
               >
                 <div>
-                  <img :src="'frontend/img/'+l2.alias+(Global.Configuration.ActiveStages[l2.alias]?'':'-off')+'.png'">
+                  <img :src="'frontend/img/'+l2.alias+(Global.Configuration.ActiveStages[l2.alias]?'':'-off')+'.svg'">
                 </div>
                 <div :style="'color:'+(Global.Configuration.ActiveStages[l2.alias] ? l1.color : '#ccc')">
                   <b><small>{{translate(l2.sublevel)}}</small></b>
@@ -203,7 +207,10 @@ let configuration=new Vue({
             <!--level-->
             <div
               @click="Global.Configuration.ActiveStages[l1.alias]^=1"
-              style="margin-top:1em"
+              style="
+                margin-top:1em;
+                cursor:pointer;
+              "
             >
               <div :style="'padding:1em;color:white;background:'+(Global.Configuration.ActiveStages[l1.alias] ? l1.color : '#ccc')">
                 <b>{{translate(l1.level)}}</b>
@@ -217,6 +224,8 @@ let configuration=new Vue({
       <div
         style="
           margin-top:5em;
+          padding:0 6em;
+
           display:grid;
           grid-template-columns:49% 49%;
           grid-gap:2%;
@@ -393,14 +402,21 @@ let configuration=new Vue({
   style:`
     <style>
       #configuration {
-        padding:3em;
+        padding:3em 6em;
       }
       #configuration select,
       #configuration input {
         border:none;
         padding:0.5em 0.2em;
       }
-      #configuration #select_stages img{width:70px;vertical-align:middle}
+      #configuration #select_stages img{
+        width:120px;
+        vertical-align:middle;
+        cursor:pointer;
+      }
+      #configuration #select_stages img:hover{
+        opacity:40%;
+      }
       #configuration fieldset{
         padding:0;
         border:none;

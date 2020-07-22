@@ -1,17 +1,13 @@
 let landing = new Vue({
   el:'#landing',
-
   data:{
     visible:false,
-
     Global,
     Languages,
   },
-
   methods:{
     translate,
   },
-
   template:`
     <div id=landing v-if="visible && Languages.ready">
       <div id=first_container>
@@ -25,7 +21,7 @@ let landing = new Vue({
           </h1>
 
           <!--ecam is designed for blablabla-->
-          <div style="color:#58595b;">
+          <div style="color:#58595b;font-size:large">
             The <b>ECAM tool</b> is designed for assessing the carbon emissions and
             energy consumption of the urban water cycle that are within the
             operational boundaries of water and wastewater utilities and prepare
@@ -35,7 +31,7 @@ let landing = new Vue({
 
         <!--urban water cycle picture-->
         <div style=padding:2em>
-          <img src="frontend/img/diagram.png" style="width:50%">
+          <img src="frontend/img/viti/home/home-provisional.svg" style="width:60%">
         </div>
       </div>
 
@@ -44,7 +40,7 @@ let landing = new Vue({
         <!--start-->
         <div class=button_container>
           <div>
-            users icon
+            <img src="frontend/img/viti/home/home-icon-newuser.svg" style="width:50%">
           </div>
           <h1 style="color:var(--color-level-generic);">
             Are you a new user?
@@ -64,7 +60,7 @@ let landing = new Vue({
         <!--load/open-->
         <div class=button_container>
           <div>
-            folder icon
+            <img src="frontend/img/viti/home/home-icon-alreadyworked.svg" style="width:50%">
           </div>
           <h1 style="color:var(--color-level-generic);">
             Have you already worked with ECAM?
@@ -99,7 +95,7 @@ let landing = new Vue({
         <!--grid 3-->
         <div style="display:grid;grid-template-columns:30% 30% 30%;grid-gap:5%">
           <div>
-            <p>computer icon</p>
+            <img src="frontend/img/viti/home/home-icon-opensource.svg" style="width:50%">
             <p><b>Open source</b></p>
             <div>
               The <b>ECAM tool</b> is a free and open source tool.
@@ -111,7 +107,7 @@ let landing = new Vue({
           </div>
 
           <div>
-            <p>hello icon</p>
+            <img src="frontend/img/viti/home/home-icon-aboutus.svg" style="width:50%">
             <p><b>About us</b></p>
 
             <div>
@@ -122,7 +118,7 @@ let landing = new Vue({
           </div>
 
           <div>
-            <p>wacclim icon</p>
+            <img src="frontend/img/viti/home/home-icon-wacclim.svg" style="width:50%">
             <p><b>WaCCliM</b></p>
             <div>
               The tool is developed as part of the
@@ -149,7 +145,7 @@ let landing = new Vue({
             box-shadow:0px 0px 12px #ccc;
           "
           >
-            video
+            <img src="frontend/img/viti/home/home-screenshot.svg">
           </div>
         </div>
         <div>
@@ -203,11 +199,11 @@ let landing = new Vue({
         </div>
 
         <p id=logos>
-          <div> logo wacclim </div>
-          <div> logo bmub </div>
-          <div> logo giz </div>
-          <div> logo iwa </div>
-          <div> logo icra </div>
+          <img src="frontend/img/viti/footer-logos/footer-logo-wacclim.svg">
+          <img src="frontend/img/viti/footer-logos/footer-logo-federal.svg">
+          <img src="frontend/img/viti/footer-logos/footer-logo-implemented-giz.svg">
+          <img src="frontend/img/viti/footer-logos/footer-logo-iwa.svg">
+          <img src="frontend/img/viti/footer-logos/footer-logo-icra.svg">
         </p>
       </footer>
     </div>
@@ -219,7 +215,7 @@ let landing = new Vue({
         background:#eff5fb;
       }
       #landing #first_container {
-        padding:3em;
+        padding:6em;
 
         display:grid;
         grid-template-columns:40% 58%;
@@ -235,7 +231,7 @@ let landing = new Vue({
       }
 
       #landing #second_container {
-        padding:3em;
+        padding:6em;
         padding-top:1em;
         text-align:center;
 
@@ -279,6 +275,11 @@ let landing = new Vue({
       #landing footer a {
         color:white;
         font-weight:bold;
+      }
+      #landing #logos {
+        padding:0 20em;
+        display:grid;
+        grid-template-columns:20% 20% 20% 20% 20%;
       }
     </style>
   `,

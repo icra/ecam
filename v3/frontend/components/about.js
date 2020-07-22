@@ -77,20 +77,6 @@ let about = new Vue({
         at <a target="_blank" href="www.wacclim.org">www.wacclim.org</a>. Permissions beyond the scope of this license may be available
         at <a target="_blank" href="mailto:wacclim@giz.de">wacclim@giz.de</a>.
       </div>
-
-      <!--logo wacclim-->
-      <div>
-        <img
-          id=logo-wacclim
-          src="frontend/img/logo-wacclim_big.png"
-          style="height:120px;margin:1em auto;display:block"
-        >
-      </div>
-
-      <!--logos iwa-->
-      <div style=background:white;text-align:center;margin-top:50px;>
-        <img src=frontend/img/logos.png>
-      </div>
     </div>
   `,
 });

@@ -1,16 +1,14 @@
-let select_scenario = new Vue({
+let select_scenario=new Vue({
   el:"#select_scenario",
   data:{
     visible:false,
     scenarios_compared:[],
-
     Global,
     Scenarios,
     Languages,
     Info,
     Structure,
   },
-
   methods:{
     set_current_scenario(obj){
       ecam.set_current_scenario(obj);
@@ -77,87 +75,97 @@ let select_scenario = new Vue({
 
   template:`
     <div id=select_scenario v-if="visible && Languages.ready">
-      <!--select scenario-->
+      <!--title-->
       <div>
         <h1 style="text-align:center">
-          All systems ({{Scenarios.length}})
+          <b>All systems ({{Scenarios.length}})</b>
         </h1>
+        <p style="text-align:center">
+          Here you can create, edit, delete and compare systems
+        </p>
+      </div>
 
+      <!--table select scenario-->
+      <div>
         <!--select scenario table-->
-        <table style="margin:10px auto">
-          <tr>
-            <th>
-              System {{translate('getStarted_table_name')}}
-            </th>
-            <th>
-              Assessment period
-            </th>
-            <th>
-              {{translate('getStarted_table_comments')}}
-            </th>
-            <th title="energy consumed and GHG emissions">summary</th>
-            <th>current system</th>
-            <th>options</th>
-            <th v-if="Scenarios.length>1">compare systems</th>
-          </tr>
-          <tr v-for="scenario in Scenarios"
-            :style="(scenario==Global)?'background:yellow':''"
-          >
-            <td>
-              <span v-html="scenario.General.Name"></span>
+        <table style="margin:20px auto" id=main_table>
+          <thead>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>Assessment period</td>
+              <td>Days</td>
+              <td>GHG (kgCO<sub>2</sub>eq)</td>
+              <td>Energy (kWh)</td>
+              <td>Compare</td>
+              <td>Options</td>
+              <td></td>
+            </tr>
+          </thead>
+
+          <tr v-for="scenario in Scenarios">
+            <!--select current system-->
+            <td style="background:white">
+              <img
+                @click="set_current_scenario(scenario)"
+                class=icon
+                :src="'frontend/img/viti/select_scenario/icon-edit-system'+(scenario==Global?'':'-grey')+'.svg'"
+                style="cursor:pointer"
+              >
             </td>
-            <td class=number>
-              <div>
+
+            <!--system name and comments-->
+            <td style="padding:0;background:white">
+              <div class=scenario_name
+                :current_scenario="scenario==Global"
+              >
                 <div>
-                  From:
-                  <span v-html="scenario.General.AssessmentPeriodStart"></span>
+                  <b v-html="scenario.General.Name"></b>
                 </div>
-                <div>
-                  To:
-                  <span v-html="scenario.General.AssessmentPeriodEnd"></span>
+                <div style="background:#c6c6c6">
+                  <img
+                    class=icon
+                    src="frontend/img/viti/select_scenario/icon-comment.svg"
+                  >
                 </div>
               </div>
+            </td>
+
+            <!--assessment period-->
+            <td>
               <div>
-                (<span v-html="format(scenario.Days())"></span>
-                <span class=unit>{{translate('days')}}</span>)
+                <span v-html="scenario.General.AssessmentPeriodStart"></span>
+              </div>
+              <div>
+                <span v-html="scenario.General.AssessmentPeriodEnd"></span>
               </div>
             </td>
+
+            <!--days-->
             <td>
-              <details>
-                <summary>
-                  (comments icon)
-                </summary>
-                <div>
-                  <textarea
-                    v-model="scenario.General.Comments"
-                    :placeholder="translate('getStarted_max_200')"
-                    rows=5 cols=50 maxlength=200
-                  ></textarea>
-                </div>
-              </details>
+              <span v-html="format(scenario.Days())"></span>
             </td>
-            <td>
+
+            <!--ghg-->
+            <td class=ghg>
               <div>
                 <span v-html="format(scenario.TotalGHG())"></span>
-                <span class=unit v-html="Info.TotalGHG.unit.prettify()"></span>
               </div>
+            </td>
+
+            <!--energy-->
+            <td class=nrg>
               <div>
                 <span v-html="format(scenario.TotalNRG())"></span>
-                <span class=unit>kWh</span>
               </div>
             </td>
-            <td style="text-align:center">
-              <button
-                @click="set_current_scenario(scenario)"
-                v-html="'select'"
-                v-if="scenario != Global"
-                style="font-weight:bold;width:100%;padding:1em 2em"
-              ></button>
-              <span v-if="scenario==Global"
-                style="font-size:smaller;font-style:italic;"
-                v-html="'~this is the current system'"
-              ></span>
+
+            <!--compare-->
+            <td class=compare>
+              <input type=checkbox @click="add_scenario_to_compared(scenario)">
             </td>
+
+            <!--options-->
             <td>
               <button
                 onclick="ecam.show('configuration')"
@@ -189,56 +197,45 @@ let select_scenario = new Vue({
                 :disabled="scenario != Global"
                 v-html="'report'"
               ></button>
-
             </td>
-            <td style="text-align:center" v-if="Scenarios.length>1">
-              <button @click="add_scenario_to_compared(scenario)">
-                <span v-if="scenarios_compared.indexOf(scenario)==-1" style="color:green">
-                  include to comparison
-                </span>
-                <span v-else style="color:red">
-                  remove from comparison
-                </span>
-              </button>
+          </tr>
+
+          <tr>
+            <td style=background:white></td>
+            <td style="background:white;text-align:left" colspan=7>
+              <button onclick="ecam.new_scenario()"
+                style="
+                  font-size:large;
+                "
+                v-html="'+ create new system'"
+              ></button>
             </td>
           </tr>
         </table>
 
-        <!--new system and save buttons-->
+        <!--save button-->
         <div style="text-align:center">
-          <button onclick="ecam.new_scenario()"
-            style="
-              font-size:large;
-            "
-            class="button add"
-            v-html="'create new system'"
-            :title="'create new blank system'"
-          ></button>
-          <button onclick="alert('TODO')"
-            style="
-              font-size:large;
-            "
-            class="button save"
-            v-html="'save to JSON file'"
+          <button
+            onclick="alert('TODO')"
             title="save all systems to a JSON file"
-            disabled
-          ></button>
+          >
+            <div
+              style="
+                display:flex;
+                align-items:center;
+              "
+            >
+              <img
+                class=icon
+                src="frontend/img/viti/select_scenario/icon-save.svg"
+              >
+              <span>Save your systems</span>
+            </div>
+          </button>
         </div>
       </div>
 
-      <!--prev next buttons-->
-      <div class=flex style="margin:1em;justify-content:center">
-        <button class="button prev"
-          onclick="event.stopPropagation();ecam.show('landing')">
-          {{translate('previous')}}
-        </button>
-        <button class="button next"
-          onclick="event.stopPropagation();ecam.show('configuration')">
-          {{translate('next')}}
-        </button>
-      </div>
-
-      <!--compare scenarios-->
+      <!--table compare scenarios-->
       <div v-if="Scenarios.length>1">
         <h1 style="text-align:center">
           Compare systems
@@ -312,8 +309,55 @@ let select_scenario = new Vue({
 
   style:`
     <style>
+      #select_scenario {
+        padding:0 6em;
+      }
       #select_scenario details summary {
         cursor:pointer;
+      }
+      #select_scenario #main_table thead td {
+        background:white;
+        font-size:smaller;
+      }
+      #select_scenario #main_table td {
+        border-width:5px;
+        border-color:white;
+        background:#f6f6f6;
+        padding:0 0.35em;
+        text-align:center;
+      }
+      #select_scenario img.icon{
+        width:40px;
+      }
+      #select_scenario #main_table td.ghg {
+        background:#35cb99;
+        color:white;
+        text-align:center;
+      }
+      #select_scenario #main_table td.nrg {
+        background:#ffbe54;
+        color:white;
+        text-align:center;
+        font-weight:bold;
+      }
+      #select_scenario #main_table td.compare {
+        background:#98bde5;
+        color:white;
+        text-align:center;
+        font-weight:bold;
+      }
+      #select_scenario #main_table div.scenario_name{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        max-width:300px;
+        min-width:200px;
+        padding-left:10px;
+        border-left:4px solid #c6c6c6;
+        background:#f6f6f6;
+      }
+      #select_scenario #main_table div.scenario_name[current_scenario] {
+        border-color:var(--color-level-generic);
       }
     </style>
   `,
