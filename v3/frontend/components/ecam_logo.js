@@ -1,30 +1,23 @@
 let ecam_logo=new Vue({
   el:"#ecam_logo",
-
   data:{
     visible:false,
-
     Global,
     Languages,
   },
-
   methods:{
     translate,
     is_linear_menu_visible(){
       return linear_menu.visible;
     },
   },
-
   template:`
     <div id=ecam_logo v-if="visible && Languages.ready">
       <!--logo-->
       <div id=logo_container onclick="event.stopPropagation();sidebar.visible^=1">
         <div id=logo>ECAM</div>
         <div>
-          <span>
-            {{translate('navbar_title')}}
-          </span>&mdash;
-
+          <span>{{translate('navbar_title')}}</span>&mdash;
           <!--version-->
           <span style="font-family:monospace" title="version">
             <a href="//github.com/icra/ecam" target=_blank>
@@ -97,7 +90,6 @@ let ecam_logo=new Vue({
       }
       #ecam_logo a{color:white;}
       #ecam_logo a:hover{text-decoration:none}
-      #ecam_logo img{vertical-align:middle}
       #ecam_logo #burger {
         cursor:pointer;
         font-size:30px;
@@ -117,10 +109,6 @@ let ecam_logo=new Vue({
       #ecam_logo #lang{
         cursor:pointer;
         text-align:right;
-      }
-
-      #ecam_logo #lang > img {
-        display:inline;
       }
 
       /* select element */
@@ -156,9 +144,6 @@ let ecam_logo=new Vue({
       /* languages mouse over */
       #ecam_logo #lang #select div[lang]:hover {
         background:orange;
-      }
-      #ecam_logo #lang #select div[lang] img {
-        width:20px;
       }
     </style>
   `,

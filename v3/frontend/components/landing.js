@@ -216,7 +216,7 @@ let landing = new Vue({
       }
       #landing #first_container {
         padding:6em;
-
+        padding-bottom:0;
         display:grid;
         grid-template-columns:40% 58%;
         grid-gap:2%;
@@ -243,6 +243,7 @@ let landing = new Vue({
         background:white;
         box-shadow:0px 0px 10px #ccc;
         padding:2em;
+        padding-top:0;
       }
 
       #landing #third_container {

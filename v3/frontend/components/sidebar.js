@@ -103,12 +103,12 @@ let sidebar = new Vue({
   `,
 });
 
-//clicking anywhere hides sidebar
+//clicking anywhere hides floating windows
 document.documentElement.addEventListener('click',function(){
   sidebar.visible=false;
 });
 
-//ESC key hides the sidebar
+//ESC key hides floating windows
 document.documentElement.addEventListener('keydown',function(ev){
   if(ev.which==27){
     sidebar.visible=false;

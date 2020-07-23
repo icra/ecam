@@ -72,7 +72,7 @@ let tier_b=new Vue({
       <!--tier b title + tips-->
       <div class=flex style="justify-content:space-between;">
         <h1>
-          <a onclick="ecam.show('select_scenario')">{{Global.General.Name}}</a>
+          <a onclick="ecam.show('configuration')">{{Global.General.Name}}</a>
           <span style="color:black">&rsaquo;</span>
           <a onclick="linear_menu.go_to(tier_b.level)"
             :style="'cursor:pointer;color:'+get_level_color(level)"
@@ -316,17 +316,19 @@ let tier_b=new Vue({
           </table>
 
           <div v-if="!sublevel">
-            <h3 style=text-align:center>
-              {{translate(level)}} stages
+            <h3 style=text-align:center;>
+              <span :style="{color:get_level_color(level)}">
+                {{translate(level)}} stages
+              </span>
             </h3>
             <div style="display:grid;grid-template-columns:33% 33% 33%">
               <div v-for="stage in Structure.filter(s=>s.level==level && s.sublevel)" style="text-align:center;cursor:pointer">
                 <img
                   @mousemove="caption.show($event, translate(stage.sublevel))"
                   @mouseout="caption.hide()"
-                  :src="'frontend/img/'+(stage.alias)+(Global.Configuration.ActiveStages[stage.alias]?'':'-off')+'.png'"
+                  :src="'frontend/img/'+(stage.alias)+(Global.Configuration.ActiveStages[stage.alias]?'':'-off')+'.svg'"
                   @click="go_to(stage.level,stage.sublevel)"
-                  style="width:42px"
+                  style="width:120px"
                 >
                 <div>
                   {{translate(stage.sublevel)}}
@@ -334,6 +336,7 @@ let tier_b=new Vue({
               </div>
             </div>
           </div>
+
         </div>
 
         <!--tier b outputs-->

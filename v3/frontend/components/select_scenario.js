@@ -80,8 +80,10 @@ let select_scenario=new Vue({
         <h1 style="text-align:center">
           <b>All systems ({{Scenarios.length}})</b>
         </h1>
-        <p style="text-align:center">
-          Here you can create, edit, delete and compare systems
+        <p style="text-align:center;color:#666">
+          <b>
+            Here you can create, edit, delete and compare systems
+          </b>
         </p>
       </div>
 
@@ -169,7 +171,7 @@ let select_scenario=new Vue({
             <td>
               <button
                 onclick="ecam.show('configuration')"
-                :disabled="scenario != Global"
+                v-if="scenario==Global"
                 v-html="'edit'"
               ></button>
 
@@ -187,14 +189,14 @@ let select_scenario=new Vue({
 
               <button
                 @click="delete_scenario(scenario)"
-                :disabled="scenario == Global"
+                v-if="scenario != Global"
                 v-html="'delete'"
                 style="color:red"
               ></button>
 
               <button
                 onclick="ecam.show('report')"
-                :disabled="scenario != Global"
+                v-if="scenario == Global"
                 v-html="'report'"
               ></button>
             </td>
@@ -236,11 +238,17 @@ let select_scenario=new Vue({
       </div>
 
       <!--table compare scenarios-->
-      <div v-if="Scenarios.length>1">
+      <div v-if="Scenarios.length>1" style="margin-top:2em">
         <h1 style="text-align:center">
           Compare systems
-          (TBD: I would move this part to a new page)
         </h1>
+        
+        <p style="text-align:center;color:#666">
+          <b>
+            Select 'compare' on your system and it will appear in the following
+            table.  The darker column is the current system you are editing.
+          </b>
+        </p>
 
         <!--compare scenarios table-->
         <table style="margin:10px auto" v-if="scenarios_compared.length">
@@ -279,7 +287,7 @@ let select_scenario=new Vue({
 
               <!--variable value-->
               <td v-for="value,i in v.scenario_values"
-                :style="scenarios_compared[i]==Global ? 'background:yellow':''"
+                :style="scenarios_compared[i]==Global ? 'background:#f6f6f6':''"
               >
                 <!--value and unit-->
                 <div>

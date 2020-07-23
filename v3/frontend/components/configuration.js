@@ -10,6 +10,7 @@ let configuration=new Vue({
     GWP_reports,
     Cts,
   },
+
   methods:{
     translate,
     format,
@@ -117,6 +118,7 @@ let configuration=new Vue({
       this.Cts.ct_n2o_eq.value = this.GWP_reports[index].ct_n2o_eq;
     },
   },
+
   template:`
     <!--configuration VIEW-->
     <div id=configuration v-if="visible && Languages.ready">
@@ -131,12 +133,19 @@ let configuration=new Vue({
             style="border:1px solid #ccc"
           >
         </div>
-        <div v-else>
-          <b style="font-size:x-large">{{Global.General.Name}}</b>
-          &emsp;
-          <button @click="are_you_editing_name=true">
-            Change name
-          </button>
+        <div v-else
+          style="
+            display:flex;
+            align-items:center;
+            justify-content:center;
+          "
+        >
+          <div style="font-size:x-large;padding-right:1em">{{Global.General.Name}}</div>
+          <div>
+            <button @click="are_you_editing_name=true">
+              Change name
+            </button>
+          </div>
         </div>
       </h1>
 
@@ -144,28 +153,22 @@ let configuration=new Vue({
       <div
         style="
           margin-top:1em;
-          margin-bottom:1em;
           text-align:center;
           color:#666;
-          font-weight:bold;
         "
       >
-        Activate the stages which form your system
+        <b>
+          Activate the stages which form your system
+        </b>
       </div>
 
       <!--picture TODO-->
       <div
         style="
-          height:200px;
-          line-height:200px;
-          margin-bottom:-3em;
-          border:1px solid #ccc;
-          background:#eee;
+          margin-bottom:-4em;
         "
       >
-        <center>
-          picture general settings svg
-        </center>
+        <img src="frontend/img/viti/configuration/infogr-provisional.svg">
       </div>
 
       <!--icons-->
@@ -193,7 +196,10 @@ let configuration=new Vue({
               "
             >
               <div v-for="l2 in Structure.filter(l=>(l.sublevel && l.level==l1.level))"
-                @click="Global.Configuration.ActiveStages[l2.alias]^=1"
+                @click="
+                  Global.Configuration.ActiveStages[l2.alias]^=1;
+                  check_l1_from_l2();
+                "
               >
                 <div>
                   <img :src="'frontend/img/'+l2.alias+(Global.Configuration.ActiveStages[l2.alias]?'':'-off')+'.svg'">
@@ -206,7 +212,10 @@ let configuration=new Vue({
 
             <!--level-->
             <div
-              @click="Global.Configuration.ActiveStages[l1.alias]^=1"
+              @click="
+                Global.Configuration.ActiveStages[l1.alias]^=1;
+                check_l2_from_l1();
+              "
               style="
                 margin-top:1em;
                 cursor:pointer;
@@ -245,8 +254,8 @@ let configuration=new Vue({
               <input type=date v-model="Global.General.AssessmentPeriodEnd">
             </b>
             <span>
-              (<span :class="Global.Days()<=0 ? 'warning':''" v-html="format(Global.Days())"></span>
-              <span class=unit>{{translate('days')}}</span>)
+              <span :class="Global.Days()<=0 ? 'warning':''" v-html="format(Global.Days())"></span>
+              <span>{{translate('days')}}</span>
             </span>
           </div>
         </fieldset>
@@ -272,8 +281,7 @@ let configuration=new Vue({
           <legend> Country </legend>
           <div>
             <div>
-              <b>Select</b>
-              &emsp;
+              <b>Select</b>&emsp;
               <select
                 v-model="Global.General.Country"
                 @change="set_variables_from_selected_country()"
@@ -333,13 +341,12 @@ let configuration=new Vue({
         <!--select assessment report-->
         <fieldset>
           <legend>
-            Select Global Warming Potential Source
+            Global Warming Potential Source
           </legend>
           <div>
             <div>
               <!--select gwp report which defines gwp values-->
-              <b>Select</b>
-              &emsp;
+              <b>Select</b>&emsp;
               <select
                 v-model="Global.Configuration.Selected.gwp_reports_index"
                 @change="set_constants_from_gwp_report()"
@@ -415,7 +422,8 @@ let configuration=new Vue({
         cursor:pointer;
       }
       #configuration #select_stages img:hover{
-        opacity:40%;
+        border:1px solid var(--color-level-generic);
+        box-sizing:border-box;
       }
       #configuration fieldset{
         padding:0;
@@ -434,12 +442,8 @@ let configuration=new Vue({
         padding:2em;
       }
 
-      #configuration .warning {
-        font-weight:bold;
-        color:red;
-      }
-      #configuration .warning:after {
-        content:" [!]";
+      #configuration .warning input {
+        color:#aaa;
       }
     </style>
   `,
