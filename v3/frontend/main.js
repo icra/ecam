@@ -6,6 +6,7 @@ let ecam={
     caption,
     linear_menu,
     sidebar,
+    stages_menu,
   },
 
   //views (==pages, Vue objects)
@@ -59,6 +60,7 @@ let ecam={
     this.views[view].visible=true; //make "view" visible
 
     //other settings
+    stages_menu.current_view = view;
     linear_menu.current_view = view;
     caption.hide();
     window.scrollTo(0,0);

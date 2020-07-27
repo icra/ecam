@@ -8,9 +8,16 @@ Vue.component('input_ecam',{
       <td
         @mousemove="caption.show($event, translate(code+'_expla').prettify())"
         @mouseout="caption.hide()"
+        style="
+          background:#e1eef1;
+          padding:0.5em 1em;
+        "
       >
         <div class=flex style="justify-content:space-between;padding-right:5px">
-          <div v-html="translate(code+'_descr').prettify()"></div>
+          <div>
+            <b v-html="translate(code+'_descr').prettify()"></b>
+          </div>
+
           <!--recommendation button-->
           <div v-if="Recommendations[code]">
             <button
@@ -29,10 +36,15 @@ Vue.component('input_ecam',{
         </div>
 
         <!--link to variable description-->
-        <div>(<a @click="variable.view(code)">{{code}}</a>)</div>
+        <div><a @click="variable.view(code)">{{code}}</a></div>
 
         <!--<select> element for exceptions-->
-        <div v-if="Exceptions[code]">
+        <div v-if="Exceptions[code]"
+          style="
+            text-align:left;
+            margin-top:1em;
+          "
+        >
           <!--case 1: selection is a percent of something else-->
           <select v-if="Exceptions[code].percent_of" v-model="current_stage[code]">
             <option
@@ -59,10 +71,15 @@ Vue.component('input_ecam',{
       </td>
 
       <!--input value: numbers and dropdowns-->
-      <td>
+      <td style="padding:0;background:white">
         <!--inputs whose magnitude is "Option"-->
         <div v-if="Info[code] && Info[code].magnitude=='Option'" style="line-height:3em">
-          <select v-model="current_stage[code]">
+          <select v-model="current_stage[code]"
+            style="
+              display:block;
+              margin:auto;
+            "
+          >
             <option
               v-for="obj,op in Tables[code]"
               :value="parseInt(Tables[code][op].value)"
@@ -86,8 +103,12 @@ Vue.component('input_ecam',{
         </div>
       </td>
 
-      <!--input unit select-->
-      <td>
+      <!--unit-->
+      <td
+        style="
+          background:#e1eef1;
+        "
+      >
         <div v-if="Info[code] && Info[code].magnitude!='Option'"
           style="text-align:left;padding-left:5px;line-height:3em">
           <!--select unit-->

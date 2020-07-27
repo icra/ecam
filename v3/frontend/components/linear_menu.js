@@ -2,11 +2,10 @@ let linear_menu = new Vue({
   el:"#linear_menu",
   data:{
     visible:true,
-    current_view:null,
+    current_view:'landing',
 
     //floating windows
-    stages_visible:false,
-    summaries_visible:false,
+    summaries_menu_visible:false,
 
     caption,
 
@@ -16,20 +15,7 @@ let linear_menu = new Vue({
     Languages,
   },
   methods:{
-    format,
     translate,
-    go_to,
-    is_tier_b_selected(level, sublevel){
-      if(this.current_view!='tier_b') return false;
-      if(level==tier_b.level && sublevel==tier_b.sublevel){
-        return true;
-      }
-    },
-    get_height(){
-      let logo   = document.querySelector("#ecam_logo").offsetHeight;
-      let linear = document.querySelector("#linear_menu").offsetHeight;
-      return logo + linear;
-    },
   },
   template:`
     <!--linear menu COMPONENT-->
@@ -60,92 +46,24 @@ let linear_menu = new Vue({
 
       <!--stages-->
       <div
-        @click="stages_visible^=1"
-        style="cursor:pointer"
+        onclick="stages_menu.visible^=1;"
         :selected="current_view=='tier_b'"
       >
         <div>Stages</div>
-        <div
-          id=stages_menu
-          @mouseenter="stages_visible=1"
-          @mouseleave="stages_visible=0"
-          v-if="stages_visible"
-          :style="'top:'+get_height()+'px'"
-        >
-          <div style="font-size:large;">
-            Emissions:
-            <span v-html="format(Global.TotalGHG())"></span>
-            <span v-html="Info.TotalGHG.unit.prettify()"></span>
-            &emsp;
-            in
-            &emsp;
-            <span v-html="format(Global.Days())"></span>
-            <span class=unit>{{translate('days')}}</span>
-          </div>
-          <div class=flex>
-            <div v-for="l1 in Structure.filter(s=>!s.sublevel)">
-              <div class="flex">
-                <!--level-->
-                <div style="text-align:center">
-                  <img
-                    @click="go_to(l1.level)"
-                    @mousemove="caption.show($event, translate(l1.level))"
-                    @mouseout="caption.hide()"
-                    :src="'frontend/img/'+(l1.alias)+(Global.Configuration.ActiveStages[l1.alias]?'':'-off')+'.png'"
-                    :class="'l2 '+(is_tier_b_selected(l1.level, false)?'selected':'')"
-                    :stage="l1.alias"
-                  >
-                  <div style="font-size:smaller">
-                    <span v-html="format(Global[l1.prefix+'_KPI_GHG']())"></span>
-                  </div>
-                </div>
-                <!--sublevels-->
-                <div v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))">
-                  <img
-                    @click="go_to(l2.level,l2.sublevel)"
-                    :class="'l2 '+(is_tier_b_selected(l2.level,l2.sublevel)?'selected':'')"
-                    :stage="l2.alias"
-                    @mousemove="caption.show($event, translate(l2.sublevel))"
-                    @mouseout="caption.hide()"
-                    :src="'frontend/img/'+(l2.alias)+(Global.Configuration.ActiveStages[l2.alias]?'':'-off')+'.svg'"
-                  >
-                  <div style=text-align:center>
-                    <small
-                      v-html="format(Global[l2.prefix+'_KPI_GHG']())"
-                    ></small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       <!--summaries-->
       <div
-        @click="summaries_visible^=1"
+        @click="summaries_menu_visible^=1"
         style="cursor:pointer"
+        :selected="['summary_ghg','summary_nrg','emission_tree','report'].indexOf(current_view)>=0"
       >
-        <div>
-          <span style="color:inherit">
-            {{translate('summaries')}}
-          </span>
-        </div>
+        <div>{{translate('summaries')}}</div>
         <ul
-          v-if="summaries_visible"
-          @mouseenter="summaries_visible=1"
-          @mouseleave="summaries_visible=0"
-          style="
-            list-style:none;
-            font-size:large;
-            position:absolute;
-            padding:1em;
-            margin:0;
-            border:1px solid #ccc;
-            background:#eee;
-            padding:0.5em;
-            box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
-          "
+          id=summaries_menu
+          v-if="summaries_menu_visible"
+          @mouseenter="summaries_menu_visible=1"
+          @mouseleave="summaries_menu_visible=0"
         >
           <li>
             <a href=# onclick="ecam.show('summary_ghg');">
@@ -194,35 +112,24 @@ let linear_menu = new Vue({
         color:black;
         border-color:var(--color-level-generic);
       }
-      #linear_menu #stages_menu {
+      #linear_menu a:hover {
+        text-decoration:none;
+      }
+      #linear_menu #summaries_menu {
+        z-index:99;
+        list-style:none;
+        font-size:large;
         position:absolute;
-        left:0;
-        width:100%;
-
-        background:#f0f5fc;
-        border:none;
-        box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
-        padding:0.5em;
         padding:1em;
+        margin:0;
+        border:1px solid #ccc;
+        background:#eee;
+        padding:0.5em;
+        box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
       }
-
-      #linear_menu img.l1:hover,
-      #linear_menu img.l2:hover {
-        border:3px solid var(--color-level-generic);
+      #linear_menu #summaries_menu a:hover{
+        text-decoration:underline;
       }
-      #linear_menu img {
-        cursor:pointer;
-        position:relative;
-        z-index:2;
-        vertical-align:
-        middle;
-        padding:0;
-      } /*icons inside buttons to navigate to Level2*/
-      #linear_menu img.l1 {width:42px;}
-      #linear_menu img.l2 {width:42px;}
-      #linear_menu img{border-radius:90%;border:3px solid transparent;}
-      #linear_menu img.selected{border:3px solid #9fc231;}
-      #linear_menu a:hover {text-decoration:none;}
     </style>
   `,
 });

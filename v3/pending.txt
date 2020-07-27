@@ -4,11 +4,8 @@
               to be done with viti help (frontend and UX)
 -------------------------------------------------------------------------------
 * Design for select system page (Laia)
-
 * Redesign sidebar with viti
-
 * Report page: create a pdf of the results. Copy from v2.2 tier A.
-
 * Tier B substages
   - new design
 

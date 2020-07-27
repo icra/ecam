@@ -8,18 +8,19 @@
 ecam_logo.visible   = 1;
 linear_menu.visible = 1;
 sidebar.visible     = 0;
+stages_menu.visible = 0;
 
 //page views
-select_scenario.visible = true;
+landing.visible         = true;
+tier_b.visible          = false;
+select_scenario.visible = false;
 configuration.visible   = false;
-landing.visible         = false;
 report.visible          = false;
 constants.visible       = false;
 emission_tree.visible   = false;
 summary_ghg.visible     = false;
 summary_nrg.visible     = false;
 tier_a.visible          = false;
-tier_b.visible          = false;
 variable.visible        = false;
 development.visible     = false;
 
