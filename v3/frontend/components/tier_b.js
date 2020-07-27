@@ -263,7 +263,11 @@ let tier_b=new Vue({
                 <td></td>
                 <td>Substage 1
                   &emsp;
-                  ull, editar, paperera
+                  (
+                    eye icon,
+                    edit icon,
+                    delete icon
+                  )
                 </td>
                 <td>Unit</td>
                 <td>Stage value</td>
