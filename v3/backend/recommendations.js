@@ -4,10 +4,10 @@ let Recommendations={
     /*fsc*/
       //influent BOD
       fsc_bod_infl(){
-        return Global.General.bod_pday_fs/1000*Global.Faecl.fs_onsi_pop*Global.Days();
+        return Global.General.bod_pday_fs/1000*Global.Faecl.Containment.fsc_onsi_pop*Global.Days();
       },
       //sludge emptied
-      fsc_fslu_emp(){ return Cts.ct_fs_prod.value*Global.Faecl.fs_onsi_pop*Global.Days()/Global.Faecl.Containment.fsc_fdensity*Global.Faecl.Containment.fsc_cont_emp/100; },
+      fsc_fslu_emp(){ return Cts.ct_fs_prod.value*Global.Faecl.Containment.fsc_onsi_pop*Global.Days()/Global.Faecl.Containment.fsc_fdensity*Global.Faecl.Containment.fsc_cont_emp/100; },
       //BOD removed as FS
       fsc_bod_rmvd(){ return Global.Faecl.Containment.fsc_fslu_emp*Global.Faecl.Containment.fsc_bod_conc_fs; },
     /*fst*/

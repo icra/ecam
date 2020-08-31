@@ -187,14 +187,14 @@ let landing = new Vue({
         <!--creative commons image and text-->
         <div>
           <div>
-            {{translate("ecam_by_iwa_giz_icra")}}
+            ECAM is a tool developed by ICRA for the WaCCliM Project* and holds a Creative Commons Attribution-ShareAlike 4.0 International License.
           </div>
-          <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">
-            {{translate("creative_commons_attr")}}
-          </a>.
-
-          <div style=font-size:smaller>
-            {{translate("wacclim_is_part_of_IKI")}}
+          <div style="font-size:smaller;margin-top:10px">
+            *WaCCliM is a joint initiative between GIZ and IWA. This project
+            is part of the International Climate Initiative (IKI). The German
+            Federal Ministry for the Environment, Nature Conservation and
+            Nuclear Safety (BMU) supports this initiative on the basis of a
+            decision adopted by the German Bundestag.
           </div>
         </div>
 
@@ -278,9 +278,8 @@ let landing = new Vue({
         font-weight:bold;
       }
       #landing #logos {
-        padding:0 20em;
         display:grid;
-        grid-template-columns:20% 20% 20% 20% 20%;
+        grid-template-columns:20% 22% 20% 10% 12%;
       }
     </style>
   `,

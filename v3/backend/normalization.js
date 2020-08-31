@@ -4,7 +4,7 @@
 let Normalization={
   Water:{
     resi_pop: function(emission){ return emission/Global.Water.ws_resi_pop/Global.Years()||0},
-    serv_pop: function(emission){ return emission/Global.Water.ws_serv_pop/Global.Years()||0},
+    serv_pop: function(emission){ return emission/Global.Water.Distribution.wsd_serv_pop/Global.Years()||0},
     volume:   function(emission){ return emission/Global.Water.Distribution.wsd_auth_con||0},
     energy:   function(emission){ return emission/Global.Water.ws_nrg_cons()||0},
 
@@ -48,6 +48,6 @@ let Normalization={
 
   Faecl:{
     resi_pop: function(emission){return emission/Global.Faecl.fs_resi_pop/Global.Years()||0},
-    serv_pop: function(emission){return emission/Global.Faecl.fs_onsi_pop/Global.Years()||0},
+    serv_pop: function(emission){return emission/Global.Faecl.Containment.fsc_onsi_pop/Global.Years()||0},
   },
 };

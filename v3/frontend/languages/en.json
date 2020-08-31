@@ -1,6 +1,9 @@
 {
 "#below":"below",
 
+"#fsc_open_pop_descr":"Population with open defecation",
+"#fsc_open_pop_expla":"Population with open defecation",
+
 "#5.6 - 15.7 kW" : "5.6 - 15.7 kW",
 "#15.7 - 38 kW"  : "15.7 - 38 kW",
 "#39 - 96 kW"    : "39 - 96 kW",
@@ -345,8 +348,8 @@
 "#fs_SL_serv_pop_expla":"Serviced population",
 "#fs_nrg_cons_descr": "Energy consumed from the grid in FSM stages",
 "#fs_nrg_cons_expla" : "Energy consumed from the grid in FSM stages",
-"#fs_onsi_pop_descr":"Population with onsite treatment",
-"#fs_onsi_pop_expla":"Population with onsite treatment",
+"#fsc_onsi_pop_descr":"Population with onsite treatment",
+"#fsc_onsi_pop_expla":"Population with onsite treatment",
 "#fs_resi_pop_descr":"Resident population",
 "#fs_resi_pop_expla":"Resident population (FSM)",
 "#fs_serv_pop_descr":"Population with onsite treatment",
@@ -837,8 +840,8 @@
 "#ws_resi_pop_expla":"Number of permanent residents within the water utility area of service",
 "#ws_run_cost_descr":"Total running costs ",
 "#ws_run_cost_expla":"Total operations and maintenance net costs and internal manpower net costs (i.e. not including the capitalised cost of self constructed assets) related to water supply within the service area managed by the undertaking during the entire assessment period",
-"#ws_serv_pop_descr":"Serviced population",
-"#ws_serv_pop_expla":"Serviced population is referred to the number of inhabitants, within the area of service managed by the utility, which are connected to the distribution system and are receiving the service",
+"#wsd_serv_pop_descr":"Serviced population",
+"#wsd_serv_pop_expla":"Serviced population is referred to the number of inhabitants, within the area of service managed by the utility, which are connected to the distribution system and are receiving the service",
 "#ws_vol_fuel_descr" :"Volume of fuel consumed (engines)",
 "#ws_vol_fuel_expla" :"Volume of fuel consumed (engines)",
 "#wsa_KPI_GHG_descr":"Total GHG Water Abstraction",

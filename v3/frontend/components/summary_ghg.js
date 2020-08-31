@@ -106,10 +106,6 @@ let summary_ghg = new Vue({
                 font-size:large;
               "
             >
-              <!--summary ghg co2 icon-->
-              <div style="text-align:center">
-                <img src="frontend/img/sources.png" style="width:100px">
-              </div>
               {{ translate("TOTAL GHG") }}
               <ul>
                 <!--summary ghg total kg CO2-->

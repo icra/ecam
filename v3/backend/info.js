@@ -245,7 +245,8 @@ let Info={
 
   //LEVEL1 FSM
   fs_resi_pop:     {magnitude:"People",     unit:"people"},
-  fs_onsi_pop:     {magnitude:"People",     unit:"people"},
+  fsc_onsi_pop:    {magnitude:"People",     unit:"people"},
+  fsc_open_pop:    {magnitude:"People",     unit:"people"},
   fs_KPI_GHG:      {magnitude:"Mass", unit:"kg CO2eq"},
 
   //fsm energy consumed
@@ -380,7 +381,7 @@ let Info={
 
 	//L1 Water Supply
 	ws_resi_pop:{magnitude:"People", unit:"people"},
-	ws_serv_pop:{magnitude:"People", unit:"people"},
+	wsd_serv_pop:{magnitude:"People", unit:"people"},
 	ws_nrg_cons:{magnitude:"Energy",unit:"kWh"},
 	ws_vol_fuel:{magnitude:"Volume",unit:"L"},
 	ws_nrg_cost:{magnitude:"Currency",unit:"USD"},

@@ -317,6 +317,7 @@ let variable = new Vue({
       #variable th {
         padding:1em;
         background:inherit;
+        color:white;
       }
 
       #variable input[type=number] {

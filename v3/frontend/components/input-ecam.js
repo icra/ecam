@@ -8,10 +8,10 @@ Vue.component('input_ecam',{
       <td
         @mousemove="caption.show($event, translate(code+'_expla').prettify())"
         @mouseout="caption.hide()"
-        style="
-          background:#e1eef1;
-          padding:0.5em 1em;
-        "
+        :style="{
+          background:'var(--color-level-'+level+'-secondary)',
+          padding:'0.5em 1em',
+        }"
       >
         <div class=flex style="justify-content:space-between;padding-right:5px">
           <div>
@@ -105,9 +105,9 @@ Vue.component('input_ecam',{
 
       <!--unit-->
       <td
-        style="
-          background:#e1eef1;
-        "
+        :style="{
+          background:'var(--color-level-'+level+'-secondary)',
+        }"
       >
         <div v-if="Info[code] && Info[code].magnitude!='Option'"
           style="text-align:left;padding-left:5px;line-height:3em">
@@ -133,6 +133,7 @@ Vue.component('input_ecam',{
   props:[
     'code',
     'current_stage',
+    'level',
   ],
 
   data(){

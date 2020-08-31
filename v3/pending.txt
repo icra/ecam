@@ -3,23 +3,22 @@
 -------------------------------------------------------------------------------
               to be done with viti help (frontend and UX)
 -------------------------------------------------------------------------------
-* Design for select system page (Laia)
-* Redesign sidebar with viti
-* Report page: create a pdf of the results. Copy from v2.2 tier A.
-* Tier B substages
-  - new design
 
 -------------------------------------------------------------------------------
           tasks not related with viti (backend + frontend link)
 -------------------------------------------------------------------------------
 [CAN BE DONE]
   * [backend] backend for substages
-  * [frontend] Fetching language files asyncronously does not work for offline use (CORS is not compatible with file protocol, find alternative way to loading files offline.)
+
+  * [frontend] Fetching language files asyncronously does not work for offline
+    use (CORS is not compatible with file protocol, find alternative way to
+    loading files offline.)
+
   * [frontend] variable page / fuel type related constants show in involved inputs table
   * [frontend] redo save button function
   * [frontend] onclose listener: trigger warning if ecam is accidentally closed
 
-[STILL CANNOT BE DONE]: (missing info OR not clear OR not read)
+[CANNOT BE DONE]: (missing info OR not clear how to implement)
   * [backend] reimplement benchmarks with new v3 backend
   * [backend] Implement changes requested by Corinne on June 19th 2020.
     ``` mail from Corinne:
@@ -78,6 +77,8 @@
   * [frontend] redo load files function ("open" button)
     - implement compabibility module (v2 to v3)
       - ['Yes/No':'Questions']
+      - ws_serv_pop -> wsd_serv_pop
+      - fs_onsi_pop -> fsc_onsi_pop
 
 [WILL BE DONE AT THE END]
   * [frontend] graphs v3 (also Sankey)

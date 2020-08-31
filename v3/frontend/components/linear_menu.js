@@ -4,88 +4,65 @@ let linear_menu = new Vue({
     visible:true,
     current_view:'landing',
 
-    //floating windows
-    summaries_menu_visible:false,
-
-    caption,
-
     Global,
-    Info,
-    Structure,
     Languages,
   },
   methods:{
     translate,
+    format,
   },
   template:`
     <!--linear menu COMPONENT-->
-    <div id=linear_menu v-if="visible && Languages.ready" class=flex>
-      <!--landing / home-->
-      <div
-        onclick="ecam.show('landing')"
-        :selected="current_view=='landing'"
-      >
-        <div>Home</div>
-      </div>
-
-      <!--systems-->
-      <div
-        onclick="ecam.show('select_scenario')"
-        :selected="current_view=='select_scenario'"
-      >
-        <div>Systems</div>
-      </div>
-
-      <!--general settings-->
-      <div
-        onclick="ecam.show('configuration')"
-        :selected="current_view=='configuration'"
-      >
-        <div>Configuration</div>
-      </div>
-
-      <!--stages-->
-      <div
-        onclick="stages_menu.visible^=1;"
-        :selected="current_view=='tier_b'"
-      >
-        <div>Stages</div>
-      </div>
-
-      <!--summaries-->
-      <div
-        @click="summaries_menu_visible^=1"
-        style="cursor:pointer"
-        :selected="['summary_ghg','summary_nrg','emission_tree','report'].indexOf(current_view)>=0"
-      >
-        <div>{{translate('summaries')}}</div>
-        <ul
-          id=summaries_menu
-          v-if="summaries_menu_visible"
-          @mouseenter="summaries_menu_visible=1"
-          @mouseleave="summaries_menu_visible=0"
+    <div id=linear_menu v-if="visible && Languages.ready">
+      <div id=select_view class=flex>
+        <!--landing / home-->
+        <div
+          onclick="ecam.show('landing')"
+          :selected="current_view=='landing'"
         >
-          <li>
-            <a href=# onclick="ecam.show('summary_ghg');">
-              GHG summary
-            </a>
-          </li>
-          <li>
-            <a href=# onclick="ecam.show('summary_nrg');">
-              Energy summary
-            </a>
-          </li>
-          <li>
-            <a href=# onclick="ecam.show('emission_tree');">
-              All GHG emissions
-            </a>
-          </li>
-          <li>
-            <a href=# onclick="ecam.show('report');">
-              Report
-            </a>
-          </li>
-        </ul>
+          <div>Home</div>
+        </div>
+
+        <!--systems-->
+        <div
+          onclick="ecam.show('select_scenario')"
+          :selected="current_view=='select_scenario'"
+        >
+          <div>Systems</div>
+        </div>
+
+        <!--general settings-->
+        <div
+          onclick="ecam.show('configuration')"
+          :selected="current_view=='configuration'"
+        >
+          <div>Configuration</div>
+        </div>
+
+        <!--stages-->
+        <div
+          onclick="ecam.show('tier_b')"
+          :selected="current_view=='tier_b'"
+        >
+          <div>Stages</div>
+        </div>
+
+        <!--summaries-->
+        <div
+          onclick="ecam.show('summaries')"
+          :selected="['summaries','summary_ghg','summary_nrg','emission_tree','report'].indexOf(current_view)!=-1"
+        >
+          <div>{{translate('summaries')}}</div>
+        </div>
+      </div>
+
+      <!--current system-->
+      <div id=current_system>
+        <b style="color:#aaa">You are in</b>
+        <b>{{Global.General.Name}}</b>
+        <b :style="{color:'var(--color-level-generic)'}">
+          ({{format(Global.TotalGHG())}} kgCO<sub>2</sub>eq)
+        </b>
       </div>
     </div>
   `,
@@ -95,9 +72,15 @@ let linear_menu = new Vue({
       #linear_menu {
         background:white;
         border-bottom:1px solid #ccc;
-        padding:0 0 0 5em;
+        padding:0 5em 0 5em;
+        display:flex;
+        justify-content:space-between;
+        align-items:flex-end; /*align to bottom*/
       }
-      #linear_menu > div {
+      #linear_menu {
+        display:flex;
+      }
+      #linear_menu #select_view > div {
         color:#3c3c3b;
         margin:0 1em;
         font-size:12px;
@@ -107,28 +90,15 @@ let linear_menu = new Vue({
         border-bottom:4px solid transparent;
         box-sizing:border-box;
       }
-      #linear_menu > div[selected],
-      #linear_menu > div:hover {
+      #linear_menu #select_view > div[selected],
+      #linear_menu #select_view > div:hover {
         color:black;
         border-color:var(--color-level-generic);
       }
-      #linear_menu a:hover {
+      #linear_menu #select_view a:hover {
         text-decoration:none;
       }
-      #linear_menu #summaries_menu {
-        z-index:99;
-        list-style:none;
-        font-size:large;
-        position:absolute;
-        padding:1em;
-        margin:0;
-        border:1px solid #ccc;
-        background:#eee;
-        padding:0.5em;
-        box-shadow: 5px 10px 15px 5px rgba(0,0,0,.1);
-      }
-      #linear_menu #summaries_menu a:hover{
-        text-decoration:underline;
+      #linear_menu #current_system{
       }
     </style>
   `,

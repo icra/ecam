@@ -82,8 +82,8 @@ let stages_menu  = new Vue({
     <style>
       #stages_menu {
         background:#f0f5fc;
-        border:none;
         padding:1em 6em;
+        border-bottom:1px solid #ccc;
       }
       #stages_menu img {
         cursor:pointer;

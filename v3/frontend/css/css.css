@@ -7,15 +7,19 @@ body{
 
   --color-level-generic: #016f9a;  /*current color in wacclim site*/
   --color-level-generic: #2b6488;  /*previous color in wacclim site*/
-
   --color-level-generic: #327ccb;  /*viti new blue*/
+
   --color-level-generic-secondary: #73c1d9; /*viti new blue 40% opacity*/
 
   --color-secondary-green:#8DC73F; /*secondary color from wacclim site*/
 
-  --color-level-Water:   #00aff1; /*water supply*/
-  --color-level-Waste:   #d71d24; /*wastewater*/
-  --color-level-Faecl:   #95c11f; /*faecal sludge management*/
+  --color-level-Water:          #58c1db; /*water supply*/
+  --color-level-Water-secondary:#e1eef1;
+  --color-level-Waste:          #ed6d57; /*wastewater*/
+  --color-level-Waste-secondary:#F4AEA8;
+  --color-level-Faecl:          #95c11f; /*faecal sludge management*/
+  --color-level-Faecl-secondary:#D2E19D;
+
 }
 
 button {
@@ -72,8 +76,6 @@ table{
 }
 th{
   font-weight:normal;
-  background:var(--color-level-generic);
-  color:white;
   vertical-align:middle;
 }
 th,td{

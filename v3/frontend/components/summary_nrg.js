@@ -42,10 +42,6 @@ let summary_nrg = new Vue({
                 font-size:large;
               "
             >
-              <!--summary nrg icon-->
-              <div style="text-align:center">
-                <img src="frontend/img/energy.png" style="width:100px">
-              </div>
               {{ translate("TOTAL ENERGY CONSUMED") }}
               <ul>
                 <!--summary nrg total-->

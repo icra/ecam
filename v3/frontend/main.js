@@ -23,6 +23,7 @@ let ecam={
     tier_b,
     summary_ghg,
     summary_nrg,
+    summaries,
     variable,
     constants,
     constant,
@@ -49,20 +50,15 @@ let ecam={
       throw e;
     }
 
-    //activate linear_menu when entering tier_b
-    /*
-      if(['tier_a','tier_b'].indexOf(view)+1){
-        linear_menu.visible=true;
-      }
-    */
-
     this.hide_all();
     this.views[view].visible=true; //make "view" visible
 
     //other settings
+    stages_menu.visible = view=='tier_b';
     stages_menu.current_view = view;
     linear_menu.current_view = view;
     caption.hide();
+
     window.scrollTo(0,0);
 
     //history manipulation
@@ -210,10 +206,12 @@ window.onpopstate=function(event){
   if(!event.state){ return }
   if(!event.state.view){ return }
 
+  /*
   console.log(`
     location: ${document.location          },
     state:    ${JSON.stringify(event.state)}`
   );
+  */
 
   let view = event.state.view;
 

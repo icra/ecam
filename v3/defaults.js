@@ -7,12 +7,12 @@
 //page elements
 ecam_logo.visible   = 1;
 linear_menu.visible = 1;
-sidebar.visible     = 0;
 stages_menu.visible = 0;
+sidebar.visible     = 0;
 
 //page views
-landing.visible         = true;
-tier_b.visible          = false;
+landing.visible         = false;
+tier_b.visible          = 1;
 select_scenario.visible = false;
 configuration.visible   = false;
 report.visible          = false;
@@ -38,13 +38,13 @@ Structure.forEach(s=>{
 });
 
 //level 1 (ws, ww, fs)
-Global.Water.ws_resi_pop             = 1000; //people
-Global.Water.ws_serv_pop             =  900; //people
-Global.Waste.ww_resi_pop             = 2000; //people
-Global.Waste.Collection.wwc_conn_pop = 1900; //people
-Global.Waste.Treatment.wwt_serv_pop  = 1800; //people
-Global.Faecl.fs_resi_pop             =  100; //people
-Global.Faecl.fs_onsi_pop             =   90; //people
+Global.Water.ws_resi_pop               = 1000; //resident population
+Global.Water.Distribution.wsd_serv_pop =  900; //serviced population
+Global.Waste.ww_resi_pop               = 2000; //resident population
+Global.Waste.Collection.wwc_conn_pop   = 1900; //connected population
+Global.Waste.Treatment.wwt_serv_pop    = 1800; //serviced population
+Global.Faecl.fs_resi_pop               =  100; //resident population
+Global.Faecl.Containment.fsc_onsi_pop  =   90; //people with onsite containment
 
 //Water Abstraction
 Global.Water.Abstraction.wsa_nrg_cons = 1000; //kWh

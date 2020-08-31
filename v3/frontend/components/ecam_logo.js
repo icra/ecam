@@ -27,13 +27,6 @@ let ecam_logo=new Vue({
         </div>
       </div>
 
-      <!--current system-->
-      <div style="font-size:larger" onclick="ecam.show('select_scenario')">
-        <div style=text-align:center>
-        {{Global.General.Name}}
-        </div>
-      </div>
-
       <!--language-->
       <div id=lang>
         <!--current language-->
@@ -77,15 +70,15 @@ let ecam_logo=new Vue({
 
         /*css grid*/
         display:grid;
-        grid-template-columns:70% 10% 10%;
-        /*                    l   s   l
-                              o   y   a
-                              g   s   n
-                              o   t   g
-                                  e   u
-                                  m   a
-                                      g
-                                      e
+        grid-template-columns:80% 10%;
+        /*                    l   l
+                              o   a
+                              g   n
+                              o   g
+                                  u
+                                  a
+                                  g
+                                  e
         */
       }
       #ecam_logo a{color:white;}

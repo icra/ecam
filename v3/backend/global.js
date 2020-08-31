@@ -28,7 +28,6 @@ class Ecam{
     /*Level 1 - Water Supply*/
     this.Water={
       ws_resi_pop:0,
-      ws_serv_pop:0,
       ws_nrg_cost:0,
       ws_run_cost:0,
 
@@ -127,6 +126,7 @@ class Ecam{
       },
 
       Distribution:{
+        wsd_serv_pop:0,
         wsd_nrg_cons:0,
         wsd_vol_dist:0,
         wsd_auth_con:0,
@@ -458,7 +458,6 @@ class Ecam{
     /*Level 1 - Faecal Sludge Management*/
     this.Faecl={
       fs_resi_pop:0, //resident population
-      fs_onsi_pop:0, //onsite population
       equations:[
         "fsc_KPI_GHG",
         "fst_KPI_GHG",
@@ -472,6 +471,8 @@ class Ecam{
       ],
 
       Containment:{
+        fsc_onsi_pop:0,    //population with onsite containment
+        fsc_open_pop:0,    //population with open defecation
         fsc_type_tre:0,    //hidden (treatment type)
         fsc_nrg_cons:0,    //energy consumed
         fsc_bod_infl:0,    //influent bod load
@@ -1029,13 +1030,13 @@ class Ecam{
             },
 
           //fsm estimations
-            fsc_bod_infl(){ return Global.General.bod_pday_fs/1000*Global.Faecl.fs_onsi_pop*Global.Days(); },
+            fsc_bod_infl(){ return Global.General.bod_pday_fs/1000*Global.Faecl.Containment.fsc_onsi_pop*Global.Days(); },
             fsc_bod_rmvd(){ return this.fsc_fslu_emp()*this.fsc_bod_conc_fs(); },
             fsc_bod_conc_fs(){
               let cont_typ=Tables.find('fsc_type_tre',this.fsc_type_tre); //containment type (string)
               return Tables.fsc_type_tre[cont_typ].BOD_conc_FS;
             },
-            fsc_fslu_emp(){ return Cts.ct_fs_prod.value*Global.Faecl.fs_onsi_pop*Global.Days()/this.fsc_fdensity()*this.fsc_cont_emp/100; },
+            fsc_fslu_emp(){ return Cts.ct_fs_prod.value*Global.Faecl.Containment.fsc_onsi_pop*Global.Days()/this.fsc_fdensity()*this.fsc_cont_emp/100; },
             fsc_fdensity(){
               let cont_typ=Tables.find('fsc_type_tre',this.fsc_type_tre); //string
               return Tables.fsc_type_tre[cont_typ].fs_density;
@@ -1184,14 +1185,14 @@ class Ecam{
             +this.wsd.wsd_vol_fuel;
     }
     ws_SL_serv_pop(){
-      return 100*this.Water.ws_serv_pop/this.Water.ws_resi_pop;
+      return 100*this.Water.Distribution.wsd_serv_pop/this.Water.ws_resi_pop;
     }
     ws_SL_nrg_cost(){
       return 100*this.Water.ws_nrg_cost/this.Water.ws_run_cost;
     }
     ws_SL_auth_con(){
       return 1e3*this.wsd.wsd_auth_con/
-        this.Water.ws_serv_pop/
+        this.Water.Distribution.wsd_serv_pop/
         this.Days();
     }
 
@@ -1374,7 +1375,7 @@ class Ecam{
   //L1 WW WASTE EQUATIONS
     ww_conn_pop(){return this.wwc.wwc_conn_pop}
     ww_serv_pop(){return this.wwt.wwt_serv_pop}
-    ww_uncl_pop(){return Math.max(0,this.Waste.ww_resi_pop-this.ww_conn_pop()-this.Faecl.fs_onsi_pop)}
+    ww_uncl_pop(){return Math.max(0,this.Waste.ww_resi_pop-this.ww_conn_pop()-this.Faecl.Containment.fsc_onsi_pop)}
     ww_untr_pop(){return Math.max(0,this.ww_conn_pop()-this.ww_serv_pop())}
     ww_SL_serv_pop(){return 100*this.ww_serv_pop()/this.Waste.ww_resi_pop}
     ww_SL_treat_m3(){return 100*this.ww_serv_pop()/this.ww_conn_pop()}
@@ -1745,7 +1746,7 @@ class Ecam{
 
   //L1 FS FAECL EQUATIONS
     fs_serv_pop(){
-      return this.Faecl.fs_onsi_pop;
+      return this.fsc.fsc_onsi_pop;
     }
     fs_nrg_cons(){
       return this.fsc.fsc_nrg_cons+this.fst.fst_nrg_cons+this.fsr.fsr_nrg_cons;
@@ -1753,7 +1754,7 @@ class Ecam{
     fs_vol_trck(){
       return this.fsc.fsc_vol_trck+this.fst.fst_vol_trck+this.fsr.fsr_vol_trck;
     }
-    fs_SL_serv_pop(){return 100*this.Faecl.fs_onsi_pop/this.Faecl.fs_resi_pop}
+    fs_SL_serv_pop(){return 100*this.fsc.fsc_onsi_pop/this.Faecl.fs_resi_pop}
     fs_KPI_GHG(){
       return this.fsc_KPI_GHG()
             +this.fst_KPI_GHG()

@@ -2,8 +2,8 @@
 
 let Structure=[
   //level1
-  {prefix:'ws',  alias:'water',    level:'Water', sublevel:false, color:'#00aff1'},
-  {prefix:'ww',  alias:'waste',    level:'Waste', sublevel:false, color:'#d71d24'},
+  {prefix:'ws',  alias:'water',    level:'Water', sublevel:false, color:'#58c1db'},
+  {prefix:'ww',  alias:'waste',    level:'Waste', sublevel:false, color:'#ed6d57'},
   {prefix:'fs',  alias:'faecl',    level:'Faecl', sublevel:false, color:'#95c11f'},
 
   //level2

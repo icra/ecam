@@ -14,13 +14,13 @@ let population = new Vue({
     format,
     get_population(){ //get population structure
       return [
-        {level:'Water', stage:this.Global.Water,            code:'ws_resi_pop'},
-        {level:'Water', stage:this.Global.Water,            code:'ws_serv_pop'},
-        {level:'Waste', stage:this.Global.Waste,            code:'ww_resi_pop'},
-        {level:'Waste', stage:this.Global.Waste.Collection, code:'wwc_conn_pop'},
-        {level:'Waste', stage:this.Global.Waste.Treatment,  code:'wwt_serv_pop'},
-        {level:'Faecl', stage:this.Global.Faecl,            code:'fs_resi_pop'},
-        {level:'Faecl', stage:this.Global.Faecl,            code:'fs_onsi_pop'},
+        {level:'Water', stage:this.Global.Water,              code:'ws_resi_pop'},
+        {level:'Water', stage:this.Global.Water.Distribution, code:'wsd_serv_pop'},
+        {level:'Waste', stage:this.Global.Waste,              code:'ww_resi_pop'},
+        {level:'Waste', stage:this.Global.Waste.Collection,   code:'wwc_conn_pop'},
+        {level:'Waste', stage:this.Global.Waste.Treatment,    code:'wwt_serv_pop'},
+        {level:'Faecl', stage:this.Global.Faecl,              code:'fs_resi_pop'},
+        {level:'Faecl', stage:this.Global.Faecl.Containment,  code:'fsc_onsi_pop'},
       ];
     },
     focus_input(pop, event){
