@@ -11,14 +11,14 @@ stages_menu.visible = 0;
 sidebar.visible     = 0;
 
 //page views
+summary_ghg.visible     = 1;
 landing.visible         = false;
-tier_b.visible          = 1;
+tier_b.visible          = false;
 select_scenario.visible = false;
 configuration.visible   = false;
 report.visible          = false;
 constants.visible       = false;
 emission_tree.visible   = false;
-summary_ghg.visible     = false;
 summary_nrg.visible     = false;
 tier_a.visible          = false;
 variable.visible        = false;

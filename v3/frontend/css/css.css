@@ -16,9 +16,10 @@ body{
   --color-level-Water:          #58c1db; /*water supply*/
   --color-level-Water-secondary:#e1eef1;
   --color-level-Waste:          #ed6d57; /*wastewater*/
-  --color-level-Waste-secondary:#F4AEA8;
+  --color-level-Waste-secondary:#F2BFB6;
   --color-level-Faecl:          #95c11f; /*faecal sludge management*/
-  --color-level-Faecl-secondary:#D2E19D;
+  --color-level-Faecl-secondary:#CFE1A0;
+
 
 }
 

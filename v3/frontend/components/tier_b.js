@@ -74,9 +74,7 @@ let tier_b=new Vue({
         <h1 style=color:white>
           <a onclick="ecam.show('configuration')">{{Global.General.Name}}</a>
           <span>&rsaquo;</span>
-          <a onclick="go_to(tier_b.level)">
-            {{translate(level)}}
-          </a>
+          <a onclick="go_to(tier_b.level)">{{translate(level)}}</a>
           <span v-if="sublevel">
             <span>
               &rsaquo;
@@ -89,7 +87,6 @@ let tier_b=new Vue({
         <div class=flex
           style="
             font-family:monospace;
-            font-size:smaller;
             padding:0.2em 2em;
           "
           id=context_info
@@ -97,55 +94,43 @@ let tier_b=new Vue({
           <!--assessment period-->
           <div>
             <a onclick="ecam.show('configuration')">
-              <span>
-                {{translate('assessment_period')}}:
+              <b>{{translate('assessment_period')}}:</b>
+              <span :class="Global.Days()<=0 ? 'warning' : ''">
+                {{format(Global.Days())}}
               </span>
-              <b>
-                <span :class="Global.Days()<=0 ? 'warning' : ''">
-                  {{format(Global.Days())}}
-                </span>
-              </b>
-              <span>
-                {{translate('days')}}
-              </span>
+              <span v-html="translate('days')"></span>
             </a>
           </div>
 
           <!--resident population-->
           <div>
             <a onclick="ecam.show('population')">
-              <span>
-                {{translate('ws_resi_pop_descr')}}:
-              </span>
-              <b v-if="level=='Water'">
+              <b>{{translate('ws_resi_pop_descr')}}:</b>
+              <span v-if="level=='Water'">
                 <span :class="Global.Water.ws_resi_pop<=0 ? 'warning' : ''">
                   {{format(Global.Water.ws_resi_pop)}}
                 </span>
-              </b>
-              <b v-if="level=='Waste'">
+              </span>
+              <span v-if="level=='Waste'">
                 <span :class="Global.Waste.ww_resi_pop<=0 ? 'warning' : ''">
                   {{format(Global.Waste.ww_resi_pop)}}
                 </span>
-              </b>
-              <b v-if="level=='Faecl'">
+              </span>
+              <span v-if="level=='Faecl'">
                 <span :class="Global.Faecl.fs_resi_pop<=0 ? 'warning' : ''">
                   {{format(Global.Faecl.fs_resi_pop)}}
                 </span>
-              </b>
+              </span>
             </a>
           </div>
 
           <!--only ww: connected population-->
           <div v-if="level=='Waste'">
             <a onclick="ecam.show('population')">
-              <span>
-                {{translate('ww_conn_pop_descr')}}:
+              <b>{{translate('ww_conn_pop_descr')}}:</b>
+              <span :class="Global.ww_conn_pop()<=0 ? 'warning' : ''">
+                {{format(Global.ww_conn_pop())}}
               </span>
-              <b>
-                <span :class="Global.ww_conn_pop()<=0 ? 'warning' : ''">
-                  {{format(Global.ww_conn_pop())}}
-                </span>
-              </b>
             </a>
           </div>
 
@@ -153,38 +138,26 @@ let tier_b=new Vue({
           <div>
             <div v-if="level=='Water'">
               <a onclick="ecam.show('population')">
-                <span>
-                  {{translate('wsd_serv_pop_descr')}}:
+                <b>{{translate('wsd_serv_pop_descr')}}:</b>
+                <span :class="Global.Water.Distribution.wsd_serv_pop<=0 ? 'warning' : ''">
+                  {{format(Global.Water.Distribution.wsd_serv_pop)}}
                 </span>
-                <b>
-                  <span :class="Global.Water.Distribution.wsd_serv_pop<=0 ? 'warning' : ''">
-                    {{format(Global.Water.Distribution.wsd_serv_pop)}}
-                  </span>
-                </b>
               </a>
             </div>
             <div v-if="level=='Waste'">
               <a onclick="ecam.show('population')">
-                <span>
-                  {{translate('ww_serv_pop_descr')}}:
+                <b>{{translate('ww_serv_pop_descr')}}:</b>
+                <span :class="Global.ww_serv_pop()<=0 ? 'warning' : ''">
+                  {{format(Global.ww_serv_pop())}}
                 </span>
-                <b>
-                  <span :class="Global.ww_serv_pop()<=0 ? 'warning' : ''">
-                    {{format(Global.ww_serv_pop())}}
-                  </span>
-                </b>
               </a>
             </div>
             <div v-if="level=='Faecl'">
               <a onclick="ecam.show('population')">
-                <span>
-                  {{translate('fsc_onsi_pop_descr')}}:
+                <b>{{translate('fsc_onsi_pop_descr')}}:</b>
+                <span :class="Global.Faecl.Containment.fsc_onsi_pop<=0 ? 'warning' : ''">
+                  {{format(Global.Faecl.Containment.fsc_onsi_pop)}}
                 </span>
-                <b>
-                  <span :class="Global.Faecl.Containment.fsc_onsi_pop<=0 ? 'warning' : ''">
-                    {{format(Global.Faecl.Containment.fsc_onsi_pop)}}
-                  </span>
-                </b>
               </a>
             </div>
           </div>
@@ -192,24 +165,26 @@ let tier_b=new Vue({
           <!--conversion kwh to co2-->
           <div>
             <a onclick="ecam.show('configuration')">
-              <span>
-                {{translate('conv_kwh_co2_descr')}}:
+              <b>{{translate('conv_kwh_co2_descr')}}:</b>
+              <span :class="Global.General.conv_kwh_co2<=0 ? 'warning' : ''">
+                {{format(Global.General.conv_kwh_co2)}}
               </span>
-              <b>
-                <span :class="Global.General.conv_kwh_co2<=0 ? 'warning' : ''">
-                  {{format(Global.General.conv_kwh_co2)}}
-                </span>
-              </b>
               <span class=number v-html="Info.conv_kwh_co2.unit"></span>
             </a>
           </div>
         </div>
       </div>
 
+      <!--category tags-->
+      <div id=category_tags>
+        <div>Indirect emissions</div>
+        <div>Direct emissions</div>
+        <div>Energy performance</div>
+      </div>
+
       <!--tier b inputs and outputs-->
       <div
         style="
-          margin-top:10px;
           display:grid;
           grid-template-columns:64.5% 35%;
           grid-gap:0.5%;
@@ -227,11 +202,11 @@ let tier_b=new Vue({
             <div>
               <b>{{translate('INPUTS') }}</b>
             </div>
-            <p>
+            <div style="margin-top:5px">
               {{translate('Enter values for') }}
               {{sublevel ? translate(sublevel) : translate(level) }}
               {{translate('stages') }}
-            </p>
+            </div>
           </div>
 
           <!--tier b input table-->
@@ -269,7 +244,7 @@ let tier_b=new Vue({
               <tr
                 :style="{
                   color:'white',
-                  background:'var(--color-level-'+level+')',
+                  background:'var(--color-level-'+level+(Questions.is_question_hidden(question)?'-secondary':'')+')',
                 }"
               >
                 <td colspan=3 :class="Questions.is_question_hidden(question) ? 'disabled_question' : ''">
@@ -336,22 +311,22 @@ let tier_b=new Vue({
             <div>
               <b>{{translate('OUTPUTS') }}</b>
             </div>
-            <p>
+            <div style="margin-top:5px">
               {{translate('GHG emissions') }}
-            </p>
+            </div>
           </div>
 
           <!--level2 outputs: GHG content-->
           <table :level="level" style="width:100%">
-            <thead :style="{background:'var(--color-level-'+level+')'}">
+            <thead :style="{background:'transparent'}">
               <tr>
-                <th>{{translate('Origin')}}
-                <th>kg CO<sub>2</sub>eq<br>{{translate('assessment period')}}
+                <th></th>
+                <th>kg CO<sub>2</sub>eq<br>{{translate('assessment period')}}</th>
                 <th v-if="Normalization[level] && Normalization[level].serv_pop">
-                  kg CO<sub>2</sub>eq<br>per {{translate('year')}} <br>per {{translate('serv.pop.')}}
+                  kg CO<sub>2</sub>eq / {{translate('year')}} / {{translate('serv.pop.')}}
                 </th>
                 <th v-if="Normalization[level] && Normalization[level].volume">
-                  kg CO<sub>2</sub>eq<br>per m<sup>3</sup>
+                  kg CO<sub>2</sub>eq / m<sup>3</sup>
                 </th>
               </tr>
             </thead>
@@ -413,13 +388,6 @@ let tier_b=new Vue({
             </p>
           </div>
           <table :level="level" style="width:100%">
-            <thead :style="{background:'var(--color-level-'+level+')'}">
-              <tr>
-                <th>{{translate('edit_description')}}</th>
-                <th>{{translate('edit_current_value')}}</th>
-                <th>{{translate('edit_unit')}}</th>
-              </tr>
-            </thead>
             <tbody>
               <tr v-for="key in get_current_stage().equations"
                 v-if="
@@ -459,7 +427,7 @@ let tier_b=new Vue({
   style:`
     <style>
       #tier_b {
-        margin:2em 4em;
+        margin:1em 4em;
       }
 
       #tier_b #title {
@@ -474,11 +442,15 @@ let tier_b=new Vue({
 
       #tier_b #context_info > div {
         padding:0 1em;
+      }
+
+      #tier_b #context_info > div:not(:first-child) {
         border-left:1px solid white;
       }
-      #tier_b #inputs table {
+      #tier_b table {
         border-collapse:separate;
-        border-spacing:8px;
+        border-spacing:3px 2px;
+        border-left:none;
       }
       #tier_b #inputs table td {
         /*
@@ -486,13 +458,17 @@ let tier_b=new Vue({
         border:none;
       }
       #tier_b #outputs {
-        background:#fef7dc; /*yellow*/
+        background:#fffae8; /*yellow*/
         padding:1em 2em;
       }
-      #tier_b #outputs table th {
-        color:white;
-      }
 
+      #tier_b #outputs table td {
+        background:#FFF1BE;
+      }
+      #tier_b #outputs table th,
+      #tier_b #outputs table td {
+        border:none;
+      }
 
       /*old*/
       #tier_b .warning {
@@ -529,7 +505,7 @@ let tier_b=new Vue({
 
       /*tier b questions*/
       #tier_b .disabled_question {
-        /*TODO*/
+        color:#bbb;
       }
       #tier_b .question_container {
         /**/
@@ -548,6 +524,20 @@ let tier_b=new Vue({
       #tier_b table[level=Water] a { color: var(--color-level-Water) }
       #tier_b table[level=Waste] a { color: var(--color-level-Waste) }
       #tier_b table[level=Faecl] a { color: var(--color-level-Faecl) }
+
+      #tier_b #category_tags {
+        display:flex;
+        font-size:large;
+      }
+      #tier_b #category_tags div {
+        margin:0.5em 1em 0 1em;
+        border-bottom: 4px solid transparent;
+        box-sizing: border-box;
+        cursor:pointer;
+      }
+      #tier_b #category_tags div:hover {
+        border-color: var(--color-level-generic);
+      }
 
     </style>
   `,
