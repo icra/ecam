@@ -46,11 +46,15 @@ let gwp_table = new Vue({
 
   style:`
     <style>
-      #gwp_table td.number{
-        text-align:right;
-      }
       #gwp_table tr.selected {
         background:yellow;
+      }
+      #gwp_table th {
+        color:white;
+        background:var(--color-level-generic);
+      }
+      #gwp_table td.number{
+        text-align:right;
       }
     </style>
   `,

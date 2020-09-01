@@ -87,6 +87,10 @@ let countries = new Vue({
 
   style:`
     <style>
+      #countries th {
+        color:white;
+        background:var(--color-level-generic);
+      }
       #countries a {
         color:white;
       }
