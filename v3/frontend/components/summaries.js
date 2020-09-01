@@ -1,51 +1,52 @@
-let summaries= new Vue({
-  el:"#summaries",
-
-  data:{
-    visible:false,
-
-    //frontend
-    variable,
-    caption,
-
-    //backend
-    Global,
-    Structure,
-    Languages,
-  },
-
-  methods:{
-    translate,
-    format,
-    go_to,
-    get_variable_value,
-
-  },
-
+Vue.component('summaries',{
   template:`
-    <div id=summaries v-if="visible && Languages.ready">
-      <ul>
-        <li>
-          <a href=# onclick="ecam.show('summary_ghg');">
-            GHG summary
+    <div id=summaries>
+      <div
+        style="
+          background:white;
+          border-bottom:1px solid #ccc;
+          display:flex;
+          font-weight:bold;
+          padding-bottom:4px;
+          padding-left:4em;
+          padding-top:2em;
+          text-align:center;
+        "
+      >
+        <div :style=summary_item :selected="current_view=='summary_ghg'">
+          <a href=# onclick="ecam.show('summary_ghg')">
+            GHG emmissions
           </a>
-        </li>
-        <li>
-          <a href=# onclick="ecam.show('summary_nrg');">
-            Energy summary
+        </div>
+        <div :style=summary_item :selected="current_view=='summary_nrg'">
+          <a href=# onclick="ecam.show('summary_nrg')">
+            Energy consumption
           </a>
-        </li>
-        <li>
-          <a href=# onclick="ecam.show('emission_tree');">
+        </div>
+        <div :style=summary_item :selected="current_view=='emission_tree'">
+          <a href=# onclick="ecam.show('emission_tree')">
             All GHG emissions
           </a>
-        </li>
-        <li>
-          <a href=# onclick="ecam.show('report');">
+        </div>
+        <div :style=summary_item :selected="current_view=='report'">
+          <a href=# onclick="ecam.show('report')">
             Report
           </a>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   `,
+
+  data(){
+    return{
+      //css summaries item
+      summary_item:{
+        padding:"0 1em",
+      },
+    };
+  },
+
+  props:[
+    'current_view',
+  ],
 });

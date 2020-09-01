@@ -49,8 +49,8 @@ let linear_menu = new Vue({
 
         <!--summaries-->
         <div
-          onclick="ecam.show('summaries')"
-          :selected="['summaries','summary_ghg','summary_nrg','emission_tree','report'].indexOf(current_view)!=-1"
+          onclick="ecam.show('summary_ghg')"
+          :selected="['summary_ghg','summary_nrg','emission_tree','report'].indexOf(current_view)!=-1"
         >
           <div>{{translate('summaries')}}</div>
         </div>

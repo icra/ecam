@@ -226,27 +226,29 @@ let emission_tree = new Vue({
 
   template:`
     <div id=emission_tree v-if="visible && Languages.ready">
+      <summaries current_view=emission_tree></summaries>
+
       <h1>All GHG emissions (kgCO<sub>2</sub> eq)</h1>
-      <p>
-        This tree contains all GHG emissions grouped by origin. Click on each
-        emission see the other emissions that form it. Click on "view" to see all the other details.
-      </p>
-      <p>
-        <button @click="expand_all_nodes">expand all nodes</button>
-        <button @click="collapse_all_nodes">collapse all nodes</button>
-      </p>
+      <div style=margin-left:8px>
+        <p>
+          This tree contains all GHG emissions grouped by origin. Click on each
+          emission see the other emissions that form it. Click on "view" to see all the other details.
+        </p>
+        <p>
+          <button @click="expand_all_nodes">expand all nodes</button>
+          <button @click="collapse_all_nodes">collapse all nodes</button>
+        </p>
 
-      <div>
-        <emission :key="'TotalGHG'" :code="'TotalGHG'" :obj="emission_tree" ></emission>
+        <div>
+          <emission :key="'TotalGHG'" :code="'TotalGHG'" :obj="emission_tree" ></emission>
+        </div>
       </div>
-
     </div>
   `,
 
   style:`
     <style>
       #emission_tree {
-        padding:1em;
       }
       #emission_tree details {
         padding-left:10px;

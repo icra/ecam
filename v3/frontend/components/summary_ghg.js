@@ -33,7 +33,6 @@ let summary_ghg = new Vue({
     get_variable_value,
 
     put_detailed_ghg_sources_on_caption(level, sublevel){
-
       //get #caption element
       let cap = document.querySelector('#caption');
       cap.innerHTML ="";
@@ -74,17 +73,15 @@ let summary_ghg = new Vue({
         newRow.insertCell(-1).innerHTML = translate(field+"_descr").prettify();
         newRow.insertCell(-1).innerHTML = format(value);
       })
-
     },
-
   },
 
   template:`
     <div id=summary_ghg v-if="visible && Languages.ready">
+      <summaries current_view=summary_ghg></summaries>
+
       <!--summary ghg title-->
-      <h1 style="text-align:center">
-        {{ translate("GHG Emissions Summary (Overview)") }}
-      </h1>
+      <h1 style="color:black;text-align:center">GHG emissions</h1>
 
       <!--summary ghg 3 tables-->
       <div>
@@ -96,7 +93,7 @@ let summary_ghg = new Vue({
                 <div style="display:flex;justify-content:center;align-items:center;font-size:large;">
                   <div style="margin-right:2em">
                     <a @click="go_to(l1.level)" style="color:white;">
-                      Total GHG {{ translate(l1.level) }}
+                      {{ translate(l1.level) }}
                     </a>
                   </div>
                   <div style="
@@ -110,19 +107,19 @@ let summary_ghg = new Vue({
                     <div style="font-size:small;">kgCO<sub>2</sub>eq/{{translate('year')}}</div>
                     <div style="font-size:small;">kgCO<sub>2</sub>eq/{{translate('year')}}/serv.pop.</div>
                     <div
-                      class=l1_number_placeholder :style="{color:l1.color}" 
+                      class=l1_number_placeholder :style="{color:l1.color}"
                       v-html="format(
                         Global[l1.prefix+'_KPI_GHG']()
                       )
                     "></div>
-                    <div 
-                      class=l1_number_placeholder :style="{color:l1.color}" 
+                    <div
+                      class=l1_number_placeholder :style="{color:l1.color}"
                       v-html="format(
                         Global[l1.prefix+'_KPI_GHG']() / Global.Years()
                       )
                     "></div>
                     <div
-                      class=l1_number_placeholder :style="{color:l1.color}" 
+                      class=l1_number_placeholder :style="{color:l1.color}"
                       v-html="format(
                         Global[l1.prefix+'_KPI_GHG']() / Global.Years() / get_variable_value(l1.prefix+'_serv_pop')
                       )
@@ -145,9 +142,9 @@ let summary_ghg = new Vue({
               <td>
                 <div style="display:flex;align-items:center;font-size:large;">
                   <div :style="{color:l1.color, marginRight:'1em', width:'20%'}">
-                    Total {{translate(l2.sublevel)}}
+                    {{translate(l2.sublevel)}}
                   </div>
-                  <div 
+                  <div
                     style="
                       display:grid;
                       grid-template-columns:30% 30% 30%;

@@ -23,7 +23,6 @@ let ecam={
     tier_b,
     summary_ghg,
     summary_nrg,
-    summaries,
     variable,
     constants,
     constant,

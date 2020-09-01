@@ -17,119 +17,109 @@ let summary_nrg = new Vue({
   template:`
     <!--summary nrg VIEW-->
     <div id=summary_nrg v-if="visible">
+      <summaries current_view=summary_nrg></summaries>
+
       <!--summary nrg title-->
-      <h1 style="text-align:center">
-        <div>
-          <span>{{ Global.General.Name }}                               </span> &mdash;
-          <span>{{ translate("Energy consumption Summary (Overview)") }}</span> &mdash;
-          <span>{{ translate("assessment_period") }}:                   </span>
-          <span>
-             <span>{{format(Global.Days( )) }}</span> {{ translate("days")  }}
-            (<span>{{format(Global.Years()) }}</span> {{ translate("years") }})
-          </span>
-        </div>
-      </h1>
+      <h1 style="text-align:center;color:black">Energy consumption</h1>
 
       <!--summary nrg table-->
-      <div style="padding:0 2px">
-        <table border=1 style="margin:auto">
-          <!--total nrg-->
+      <table style="margin:auto;width:80rem">
+        <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)">
+          <!--level 1-->
           <tr>
-            <td
-              style="
-                background:var(--color-level-generic);
-                color:white;
-                font-size:large;
-              "
-            >
-              {{ translate("TOTAL ENERGY CONSUMED") }}
-              <ul>
-                <!--summary nrg total-->
-                <li>
-                  {{format( Global.TotalNRG()) }}
-                  <span class=unit>kWh</span>
-                </li>
-                <!--summary nrg total per year-->
-                <li>
-                  {{format( Global.TotalNRG()/Global.Years() )}}
-                  <span class=unit>kWh/{{translate('year')}}</span>
-                </li>
-              </ul>
-            </td>
-            <td style="padding:0;vertical-align:top">
-              <table border=1 style=margin:-1px>
-                <tr>
-                  <th>{{translate('stage')}}</th>
-                  <th>kWh</th>
-                  <th>kWh/{{translate('year')}}</th>
-                  <th>kWh/{{translate('year')}}/{{translate('serv.pop.')}}</th>
-                </tr>
-                <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)"
-                  v-if="Global.Configuration.ActiveStages[l1.alias]"
-                >
-                  <!--level 1-->
-                  <tr :style="'background:'+l1.color+';color:white'">
-                    <td>
-                      <div class=flex style="align-items:center">
-                        <div>
-                          <img :src="'frontend/img/'+l1.alias+'.png'" style="width:25px">
-                        </div>
-                        <div style="margin-left:5px">
-                          <a @click="go_to(l1.level)" style="color:white;">
-                            {{ translate(l1.level) }}
-                          </a>
-                        </div>
-                      </div>
-                    </td>
-                    <td class=number v-html="format(
-                        Global[l1.prefix+'_nrg_cons']()
-                      )
-                    "></td>
-                    <td class=number v-html="format(
-                        Global[l1.prefix+'_nrg_cons']() / Global.Years()
-                      )
-                    "></td>
-                    <td class=number v-html="format(
-                        Global[l1.prefix+'_nrg_cons']() / Global.Years() / get_variable_value(l1.prefix+'_serv_pop')
-                      )
-                    "></td>
-                  </tr>
-
-                  <!--level 2-->
-                  <tr v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))"
-                    v-if="Global.Configuration.ActiveStages[l2.alias]"
-                  >
-                    <td>
-                      <div class=flex style="align-items:center;">
-                        <div>
-                          <img :src="'frontend/img/'+l2.alias+'.svg'" style="width:20px">
-                        </div>
-                        <div style="margin-left:20px">
-                          <a @click="go_to(l2.level, l2.sublevel)" style="cursor:pointer">
-                            {{translate(l2.sublevel)}}
-                          </a>
-                        </div>
-                      </div>
-                    </td>
-                    <td class=number v-html="format(
-                        Global[l2.level][l2.sublevel][l2.prefix+'_nrg_cons']
-                      )
-                    "></td>
-                    <td class=number v-html="format(
-                        Global[l2.level][l2.sublevel][l2.prefix+'_nrg_cons'] / Global.Years()
-                      )
-                    "></td>
-                    <td class=number v-html="format(
-                        Global[l2.level][l2.sublevel][l2.prefix+'_nrg_cons'] / Global.Years() / get_variable_value(l1.prefix+'_serv_pop')
-                      )
-                    "></td>
-                  </tr>
-                </tbody>
-              </table>
+            <td colspan=2 :style="{background:l1.color,color:'white',padding:'2em 0'}">
+              <div style="display:flex;justify-content:center;align-items:center;font-size:large;">
+                <div style="margin-right:2em">
+                  <a @click="go_to(l1.level)" style="color:white;">
+                    {{ translate(l1.level) }}
+                  </a>
+                </div>
+                <div style="
+                  display:grid;
+                  grid-template-columns:30% 30% 30%;
+                  grid-gap:5px;
+                  text-align:center;
+                  min-width:50%;
+                ">
+                  <div style="font-size:small;">kWh</div>
+                  <div style="font-size:small;">kWh/{{translate('year')}}</div>
+                  <div style="font-size:small;">kWh/{{translate('year')}}/serv.pop.</div>
+                  <div
+                    class=l1_number_placeholder :style="{color:l1.color}"
+                    v-html="format(Global[l1.prefix+'_nrg_cons']())">
+                  </div>
+                  <div
+                    class=l1_number_placeholder :style="{color:l1.color}"
+                    v-html="format(Global[l1.prefix+'_nrg_cons']() / Global.Years())">
+                  </div>
+                  <div
+                    class=l1_number_placeholder :style="{color:l1.color}"
+                    v-html="format(Global[l1.prefix+'_nrg_cons']() / Global.Years() / get_variable_value(l1.prefix+'_serv_pop'))">
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
-        </table>
-      </div>
+
+          <!--level 2-->
+          <tr v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))"
+            v-if="Global.Configuration.ActiveStages[l2.alias]"
+          >
+            <td :style="{background:'var(--color-level-'+l1.level+'-secondary)'}">
+              <img :src="'frontend/img/'+l2.alias+'.svg'" style="width:100px;display:block;margin:auto">
+            </td>
+            <td>
+              <div style="display:flex;align-items:center;font-size:large;">
+                <div :style="{color:l1.color, marginRight:'1em', width:'20%'}">
+                  {{translate(l2.sublevel)}}
+                </div>
+                <div
+                  style="
+                    display:grid;
+                    grid-template-columns:30% 30% 30%;
+                    grid-gap:5px;
+                    min-width:50%;
+                    text-align:center;
+                  "
+                >
+                  <div style="font-size:x-small;">kWh</div>
+                  <div style="font-size:x-small;">kWh/{{translate('year')}}</div>
+                  <div style="font-size:x-small;">kWh/{{translate('year')}}/serv.pop.</div>
+                  <div class=l2_number_placeholder :style="{color:l1.color, border:'1px solid '+l1.color}" v-html="format(Global[l2.level][l2.sublevel][l2.prefix+'_nrg_cons'])"></div>
+                  <div class=l2_number_placeholder :style="{color:l1.color, border:'1px solid '+l1.color}" v-html="format(Global[l2.level][l2.sublevel][l2.prefix+'_nrg_cons'] / Global.Years())"></div>
+                  <div class=l2_number_placeholder :style="{color:l1.color, border:'1px solid '+l1.color}" v-html="format(Global[l2.level][l2.sublevel][l2.prefix+'_nrg_cons'] / Global.Years() / get_variable_value(l1.prefix+'_serv_pop'))"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   `,
+
+  style:`
+    <style>
+      #summary_nrg {
+        background:#f6f6f6;
+      }
+      #summary_nrg table {
+        border-collapse:separate;
+        border-spacing:3px;
+      }
+      #summary_nrg table th,
+      #summary_nrg table td {
+        border:none;
+        background:white;
+      }
+      #summary_nrg div.l1_number_placeholder {
+        font-weight:bold;
+        background:white;
+        padding:0.5em 0;
+      }
+      #summary_nrg div.l2_number_placeholder {
+        font-weight:bold;
+        padding:0.5em 0;
+      }
+    </style>
+  `
 });

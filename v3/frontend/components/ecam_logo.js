@@ -17,7 +17,8 @@ let ecam_logo=new Vue({
       <div id=logo_container onclick="event.stopPropagation();sidebar.visible^=1">
         <div id=logo>ECAM</div>
         <div>
-          <span>{{translate('navbar_title')}}</span>&mdash;
+          <span>{{translate('navbar_title')}}</span>
+          <span>&mdash;</span>
           <!--version-->
           <span style="font-family:monospace" title="version">
             <a href="//github.com/icra/ecam" target=_blank>

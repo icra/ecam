@@ -154,6 +154,8 @@ let report = new Vue({
 
   template:`
     <div id=report v-if="visible && Languages.ready">
+      <summaries current_view=report></summaries>
+
       <h1>
         {{Global.General.Name}}
         &mdash;
