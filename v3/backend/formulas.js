@@ -15,12 +15,11 @@ let Formulas={
     //return value
     let matches=[];
 
-    // \W matches any non-word characters (short for [^a-zA-Z0-9_]).
-    // \D matches any non-digit (short for [^0-9]).
-
     //concatenate constants and variables and iterate keys
     Object.keys(Cts).concat(Object.keys(Info)).forEach(field=>{
       let reg=new RegExp("\\W"+field+"(\\W|$)");
+      // \W matches any non-word characters (short for [^a-zA-Z0-9_]).
+      // \D matches any non-digit (short for [^0-9]).
       if(formula.search(reg)+1){
         matches.push(field);
       }
@@ -37,19 +36,10 @@ let Formulas={
     let matches=[];
     let reg=new RegExp('\\W'+id+"\\W");
 
-    Global.General.equations.forEach(code=>{
+    Object.getOwnPropertyNames(Ecam.prototype).forEach(code=>{
+      if(code=='constructor') return;
       let match = Global[code].toString().search(reg); //will return -1 if not found
       if(match+1) matches.push(code);
-    });
-
-    Structure.forEach(s=>{
-      let level    = s.level;
-      let sublevel = s.sublevel;
-      //console.log({level, sublevel:s.sublevel});
-      get_equation_codes(level, sublevel).forEach(code=>{
-        let match = Global[code].toString().search(reg); //will return -1 if not found
-        if(match+1) matches.push(code);
-      });
     });
 
     return Array.from(new Set(matches));

@@ -3,7 +3,6 @@ let linear_menu = new Vue({
   data:{
     visible:true,
     current_view:'landing',
-
     Global,
     Languages,
   },
@@ -11,6 +10,7 @@ let linear_menu = new Vue({
     translate,
     format,
   },
+
   template:`
     <!--linear menu COMPONENT-->
     <div id=linear_menu v-if="visible && Languages.ready">
@@ -80,7 +80,7 @@ let linear_menu = new Vue({
       #linear_menu {
         background:white;
         border-bottom:1px solid #ccc;
-        padding:0 5em 0 5em;
+        padding:0 2em 0 5em;
         display:flex;
         justify-content:space-between;
         align-items:flex-end; /*align to bottom*/

@@ -99,26 +99,27 @@ Vue.component('input_ecam',{
       </td>
 
       <!--unit-->
-      <td
-        :style="{
-          background:'var(--color-level-'+level+'-secondary)',
-        }"
-      >
-        <div v-if="Info[code] && Info[code].magnitude!='Option'"
-          style="text-align:left;padding-left:5px;line-height:3em">
-          <!--select unit-->
-          <select
-            v-if="Units[Info[code].magnitude]"
-            @change="select_unit(code, $event)"
-          >
-            <option
-              v-for="mul,unit in Units[Info[code].magnitude]"
-              :selected="get_current_unit(code) == unit"
-              v-html="unit"
-            ></option>
-          </select>
-          <div v-else>
-            <span v-html="Info[code].unit.prettify()"></span>
+      <td :style="{background:'var(--color-level-'+level+'-secondary)'}">
+        <div v-if="Info[code]">
+          <div v-if="Info[code].magnitude=='Currency'">
+            <span v-html="Global.General.Currency"></span>
+          </div>
+          <div v-else-if="Info[code].magnitude!='Option'"
+            style="text-align:left;padding-left:5px;line-height:3em">
+            <!--select unit-->
+            <select
+              v-if="Units[Info[code].magnitude]"
+              @change="select_unit(code, $event)"
+            >
+              <option
+                v-for="mul,unit in Units[Info[code].magnitude]"
+                :selected="get_current_unit(code) == unit"
+                v-html="unit"
+              ></option>
+            </select>
+            <div v-else>
+              <span v-html="Info[code].unit.prettify()"></span>
+            </div>
           </div>
         </div>
       </td>

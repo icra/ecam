@@ -70,7 +70,7 @@ let tier_b=new Vue({
     <div id=tier_b v-if="visible && Languages.ready">
 
       <!--tier b title + tips-->
-      <div id=title :style="{background:'var(--color-level-'+level+')'}">
+      <div id=title :style="{background:get_level_color(level)}">
         <h1 style="font-size:x-large;color:white">
           <a onclick="ecam.show('configuration')">{{Global.General.Name}}</a>
           <span>&rsaquo;</span>
@@ -129,9 +129,9 @@ let tier_b=new Vue({
           <!--only ww: connected population-->
           <div v-if="level=='Waste'">
             <a onclick="ecam.show('population')">
-              <b>{{translate('ww_conn_pop_descr')}}:</b>
-              <span :class="Global.ww_conn_pop()<=0 ? 'warning' : ''">
-                {{format(Global.ww_conn_pop())}}
+              <b>{{translate('wwc_conn_pop_descr')}}:</b>
+              <span :class="Global.wwc.wwc_conn_pop<=0 ? 'warning' : ''">
+                {{format(Global.wwc.wwc_conn_pop)}}
               </span>
             </a>
           </div>
@@ -148,9 +148,9 @@ let tier_b=new Vue({
             </div>
             <div v-if="level=='Waste'">
               <a onclick="ecam.show('population')">
-                <b>{{translate('ww_serv_pop_descr')}}:</b>
-                <span :class="Global.ww_serv_pop()<=0 ? 'warning' : ''">
-                  {{format(Global.ww_serv_pop())}}
+                <b>{{translate('wwt_serv_pop_descr')}}:</b>
+                <span :class="Global.wwt.wwt_serv_pop<=0 ? 'warning' : ''">
+                  {{format(Global.wwt.wwt_serv_pop)}}
                 </span>
               </a>
             </div>
@@ -179,11 +179,12 @@ let tier_b=new Vue({
 
       <!--category tags-->
       <div id=category_tags>
-        <div>(to be implemented)</div>
-        <div>View &rarr;</div>
+        <div>View</div>
+        <div>&rarr;</div>
         <div><label><input type=checkbox checked=true> Indirect emissions</label></div>
         <div><label><input type=checkbox checked=true> Direct emissions  </label></div>
         <div><label><input type=checkbox checked=true> Energy performance</label></div>
+        <div>(to be implemented)</div>
       </div>
 
       <!--tier b inputs and outputs-->
@@ -219,13 +220,16 @@ let tier_b=new Vue({
             <thead>
               <tr>
                 <td></td>
-                <td>Substage 1
-                  &emsp;
-                  (
-                    eye icon,
-                    edit icon,
-                    delete icon
-                  )
+                <td>
+                  <div v-if="sublevel">
+                    Substage 1
+                    &emsp;
+                    (
+                      eye icon,
+                      edit icon,
+                      delete icon
+                    )
+                  </div>
                 </td>
                 <td style="text-align:center">Unit</td>
               </tr>
@@ -495,6 +499,7 @@ let tier_b=new Vue({
         font-size:15px;
         font-weight:normal;
         text-align:left;
+        padding-left:3px;
       }
       #tier_b .input {
         text-align:right;
@@ -538,8 +543,8 @@ let tier_b=new Vue({
       #tier_b table[level=Faecl] a { color: var(--color-level-Faecl) }
 
       #tier_b #category_tags {
+        user-select:none;
         display:flex;
-        justify-content:center;
         align-items:center;
         border-bottom:1px solid #ccc;
       }

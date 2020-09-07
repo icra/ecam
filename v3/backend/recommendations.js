@@ -52,9 +52,8 @@ let Recommendations={
     /*wwc*/
     /*wwt*/
       //200-300L per person per day to m3
-      wwt_vol_trea(){
-        return 0.2*Global.Waste.Treatment.wwt_serv_pop*Global.Days();
-      },
+      wwc_vol_coll(){return 0.2*Global.Waste.Collection.wwc_conn_pop*Global.Days();},
+      wwc_vol_conv(){return Global.Waste.Collection.wwc_vol_coll;},
       wwt_n2o_efac(){return 3.2},
       wwt_slu_lf_TVS(){
         let slu_disp=Tables.find('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);
@@ -78,7 +77,7 @@ let Recommendations={
       },
       wwt_biog_val(){return Global.Waste.Treatment.wwt_biog_pro},
       wwt_ch4_biog(){return 59},
-      wwt_bod_infl(){return Global.General.bod_pday/1000*Global.ww_serv_pop()*Global.Days()},
+      wwt_bod_infl(){return Global.General.bod_pday/1000*Global.wwt.wwt_serv_pop*Global.Days()},
       wwt_bod_effl(){return 0.10*Global.Waste.Treatment.wwt_bod_infl},
       //SM
       wwt_mass_slu(){
@@ -86,7 +85,7 @@ let Recommendations={
         if(Global.Configuration.Questions.wwt_producing_biogas){
           b=0.6;
         }
-        return b*0.55*Global.General.bod_pday*Global.ww_serv_pop()*0.9*1e-3*1.176*Global.Days();
+        return b*0.55*Global.General.bod_pday*Global.wwt.wwt_serv_pop*0.9*1e-3*1.176*Global.Days();
       },
       wwt_dryw_slu(){ return 0.04*Global.Waste.Treatment.wwt_mass_slu},
       wwt_temp_inc(){ return 1023},

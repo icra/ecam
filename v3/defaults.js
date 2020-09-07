@@ -10,7 +10,8 @@ linear_menu.visible = 1;
 stages_menu.visible = 1;
 
 //page views
-tier_b.visible          = 1;
+fuel_table.visible      = 1
+tier_b.visible          = 0;
 summary_ghg.visible     = 0;
 landing.visible         = false;
 select_scenario.visible = false;
@@ -38,9 +39,7 @@ Structure.forEach(s=>{
 });
 
 //yes to all yes/no questions
-Object.keys(Questions).forEach(key=>{
-  Global.Configuration.Questions[key] = 1;
-});
+//Object.keys(Questions).forEach(key=>{Global.Configuration.Questions[key] = 1;});
 
 //level 1 (ws, ww, fs)
 Global.Water.ws_resi_pop               = 1000; //resident population

@@ -1,15 +1,12 @@
 let fuel_table = new Vue({
   el:"#fuel_table",
-
   data:{
     visible:false,
-
     Global,
     GWP_reports,
     Languages,
     Tables,
   },
-
   methods:{
     translate,
   },
@@ -18,14 +15,14 @@ let fuel_table = new Vue({
     <!--fuel table VIEW-->
     <div id=fuel_table v-if="visible && Languages.ready">
       <!--title-->
-      <div>
+      <div style="text-align:center">
         <h1> {{translate('Fuel types')}}</h1>
-        <img src=img/fuel.png>
+        <img src="frontend/img/fuel.png">
         <h4>{{translate('fuelInfo_description')}}</h4>
       </div>
 
       <!--table-->
-      <table style="font-size:16px;margin-bottom:3em"> 
+      <table style="font-size:16px;margin:auto;margin-bottom:3em;max-width:80%"> 
         <thead>
           <tr><th colspan=8 style=text-align:center>{{translate('fuelInfo_eeff')}}</th></tr>
           <tr>
@@ -37,15 +34,15 @@ let fuel_table = new Vue({
             <th rowspan=2 style=cursor:help :title="translate('fuelInfo_ncv')">NCV (TJ/Gg)</th>
           </tr>
           <tr>
-            <th>{{translate('#fuelInfo_engines')}}</th>
-            <th>{{translate('#fuelInfo_vehicles')}}</th>
-            <th>{{translate('#fuelInfo_engines')}}</th>
-            <th>{{translate('#fuelInfo_vehicles')}}</th>
+            <th>{{translate('fuelInfo_engines')}}</th>
+            <th>{{translate('fuelInfo_vehicles')}}</th>
+            <th>{{translate('fuelInfo_engines')}}</th>
+            <th>{{translate('fuelInfo_vehicles')}}</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="fuel in Tables['Fuel types']">
-            <td>{{fuel}}</td>
+          <tr v-for="fuel,name in Tables['Fuel types']">
+            <td>{{translate(name)}}</td>
             <td>{{fuel.EFCH4.engines}}</td>
             <td>{{fuel.EFCH4.vehicles}}</td>
             <td>{{fuel.EFN2O.engines}}</td>

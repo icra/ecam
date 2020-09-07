@@ -166,45 +166,6 @@ let summary_ghg = new Vue({
           </tbody>
         </table>
 
-        <!--emissions outside boundaries-->
-        <div style="margin:10px 0">
-          <table border=1 style="width:70%;margin:auto">
-            <tr>
-              <th style="background:purple">
-                {{translate("GHG emissions")}}
-                <br>
-                {{translate("outside utility boundaries")}}
-              </th>
-              <th style="background:purple;text-align:right">kgCO<sub>2</sub>eq</th>
-              <th style="background:purple;text-align:right">kgCO<sub>2</sub>eq/{{translate('year')}}</th>
-              <th style="background:purple;text-align:right">kgCO<sub>2</sub>eq/{{translate('year')}}/{{translate('serv.pop.')}}</th>
-            </tr>
-            <tr>
-              <td style="text-align:center">
-                <a @click="variable.view('ww_SL_ghg_unc')" title="ww_SL_ghg_unc">
-                  {{translate("ww_SL_ghg_unc_descr")}}
-                </a>
-              </td>
-              <td class=number>
-                <span v-html="format(Global.ww_SL_ghg_unc())"></span>
-              </td>
-              <td class=number>
-                <span v-html="format(
-                  Global.ww_SL_ghg_unc() / Global.Years()
-                )"></span>
-              </td>
-              <td class=number>
-                <span v-html="format(
-                  Global.ww_SL_ghg_unc() / Global.Years() / Global.ww_serv_pop()
-                )"></span>
-              </td>
-            </tr>
-          </table>
-          <div style="font-size:smaller;text-align:center">
-            {{translate('Note: the emissions above have not been added in the totals presented in the GHG emissions summary')}}
-          </div>
-        </div>
-
         <!--emissions avoided-->
         <div style="margin:10px 0">
           <table border=1 style="width:70%;margin:auto">

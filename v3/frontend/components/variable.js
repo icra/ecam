@@ -95,19 +95,14 @@ let variable = new Vue({
             {{ translate('variable_stage') }}
           </th>
           <td>
-            <div v-if="localization">
-              &larr;
-
-              <span>
-                <a @click="go_to(localization.level)">
-                  {{ translate(localization.level) }}
+            <div v-if="localization"> &larr;
+              <a @click="go_to(localization.level)">
+                {{ translate(localization.level) }}
+              </a>
+              <span v-if="localization.sublevel"> /
+                <a @click="go_to(localization.level, localization.sublevel)">
+                  {{ translate(localization.sublevel) }}
                 </a>
-                <span v-if="localization.sublevel">
-                  /
-                  <a @click="go_to(localization.level, localization.sublevel)">
-                    {{ translate(localization.sublevel) }}
-                  </a>
-                </span>
               </span>
             </div>
           </td>

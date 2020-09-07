@@ -26,7 +26,7 @@ let Normalization={
 
   Waste:{
     resi_pop: function(emission){ return emission/Global.Waste.ww_resi_pop/Global.Years()||0},
-    serv_pop: function(emission){ return emission/Global.ww_serv_pop()/Global.Years()||0},
+    serv_pop: function(emission){ return emission/Global.Waste.Treatment.wwt_serv_pop/Global.Years()||0},
     volume:   function(emission){ return emission/Global.Waste.Treatment.wwt_vol_trea||0},
     energy:   function(emission){ return emission/Global.Waste.ww_nrg_cons()||0},
 

@@ -1,4 +1,6 @@
-//helper functions
+/*
+  HELPER FUNCTIONS
+*/
 
 //navigate tier b levels TODO refactor inside tier_b component
 function go_to(level, sublevel, no_history_entry){
@@ -135,7 +137,20 @@ function locate_variable(code){
     }
   }
 
-  return false
+  //if location is still not found, we can use stage prefix as last option
+  //useful for outputs not listed in main stage, such as "wsa_KPI_GHG_fuel_co2"
+  for(let i in Structure){
+    let s        = Structure[i];
+    let level    = s.level;
+    let sublevel = s.sublevel;
+    let prefix   = s.prefix+'_';
+    if(code.search(prefix)==0){
+      return {level, sublevel};
+      break;
+    }
+  }
+
+  return false;
 }
 
 //get stage of code "code"
@@ -171,14 +186,19 @@ function get_variable_value(code){
 function get_variable_type(code){
   if(!code) return false;
 
-  //search in General
+  //search equations in Global
+  if(Global[code] && typeof(Global[code])=='function'){
+    return 'output';
+  }
+
+  //search recommendations TODO
+  //search exceptions TODO
+  
+  //search inputs in General
   {
     let level="General";
-    if(get_input_codes(   level).indexOf(code)+1){
+    if(get_input_codes(level).indexOf(code)+1){
       return 'input';
-    }
-    if(get_equation_codes(level).indexOf(code)+1){
-      return 'output';
     }
   }
 
@@ -187,12 +207,8 @@ function get_variable_type(code){
     let s        = Structure[i];
     let level    = s.level;
     let sublevel = s.sublevel;
-
-    if(get_input_codes(   level, sublevel).indexOf(code)+1){
+    if(get_input_codes(level, sublevel).indexOf(code)+1){
       return 'input';
-    }
-    if(get_equation_codes(level, sublevel).indexOf(code)+1){
-      return 'output';
     }
   }
 
