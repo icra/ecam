@@ -1,6 +1,14 @@
 {
 "#below":"below",
 
+"#wwc_vol_coll_descr":"Volume of collected wastewater",
+"#wwc_vol_coll_expla":"Volume of collected wastewater that is responsibility of the undertaking, during the assessment period",
+
+"#wwt_n2o_efac_descr":"N2O emission factor",
+"#wwt_n2o_efac_expla":"N2O emission factor for wastewater treatment plants (default value: 3.2 gN2O/person/year)",
+"#fst_n2o_efac_descr":"N2O emission factor",
+"#fst_n2o_efac_expla":"N2O emission factor for faecal sludge treatment systems",
+
 "#fsc_open_pop_descr":"Population with open defecation",
 "#fsc_open_pop_expla":"Population with open defecation",
 
@@ -1115,12 +1123,12 @@
 "#ww_KPI_GHG_elec_descr" :"Electricity",
 "#ww_KPI_GHG_elec_expla" :"GHG Emissions from electricity consumption in all stages of wastewater system",
 "#ww_KPI_GHG_expla":"GHG Emissions from non-electricity and electricity consumption",
-"#ww_KPI_GHG_unt_ch4_descr":"CH4 from untreated wastewater",
-"#ww_KPI_GHG_unt_ch4_expla":"CH4 from untreated wastewater",
-"#ww_KPI_GHG_unt_descr":"Untreated wastewater",
-"#ww_KPI_GHG_unt_expla":"GHG emissions in CO2 eq from untreated wastewater",
-"#ww_KPI_GHG_unt_n2o_descr":"N2O from untreated wastewater",
-"#ww_KPI_GHG_unt_n2o_expla":"N2O from untreated wastewater",
+"#wwc_KPI_GHG_unt_ch4_descr":"CH4 from untreated wastewater",
+"#wwc_KPI_GHG_unt_ch4_expla":"CH4 from untreated wastewater",
+"#wwc_KPI_GHG_unt_descr":"Untreated wastewater",
+"#wwc_KPI_GHG_unt_expla":"GHG emissions in CO2 eq from untreated wastewater",
+"#wwc_KPI_GHG_unt_n2o_descr":"N2O from untreated wastewater",
+"#wwc_KPI_GHG_unt_n2o_expla":"N2O from untreated wastewater",
 "#ww_SL_ghg_unc_ch4_descr":"CH4 from uncollected wastewater",
 "#ww_SL_ghg_unc_ch4_expla":"CH4 from uncollected wastewater. 0.3 is kgCH4/kgBOD",
 "#ww_SL_ghg_unc_descr":"Uncollected wastewater",
@@ -1464,7 +1472,7 @@
 "#wwt_ch4_biog_descr":"Percentage of methane in biogas",
 "#wwt_ch4_biog_expla":"Percent of the methane content in the produced biogas",
 "#wwt_ch4_efac_descr":"CH4 emission factor",
-"#wwt_ch4_efac_expla":"Methane emission factor of selected biological wastewater aerobic treatment processes.<br>Activated Sludge - Well managed:0 <br>Activated Sludge - Minor poorly aerated zones:0.06 <br>Activated Sludge - Some aerated zones:0.12 <br>Activated Sludge - Not well managed:0.18 <br>Aerated Lagoon: 0.18 <br>Anaerobic Lagoon <2m depth: 0.12 <br>Anaerobic Lagoon >2m depth: 0.48 <br>Anaerobic Lagoon covered: 0.00 //MISSING VALUE <br>Trickling Filter: 0.036 <br>Anaerobic Reactor - CH4 recovery not considered: 0.48 <br>Anaerobic Reactor - CH4 recovery considered: 0.0 <br>Wetlands - Surface flow:0.24 <br>Wetlands - Horizontal subsurface flow:0.06 <br>Wetlands - Vertical subsurface flow:0.006",
+"#wwt_ch4_efac_expla":"Methane emission factor of selected biological wastewater aerobic treatment processes",
 "#wwt_coll_len_descr":"Collector length",
 "#wwt_coll_len_expla":"Collector length",
 "#wwt_composting":"<span class='advanced SM'>SM</span> Is sludge sent to composting",

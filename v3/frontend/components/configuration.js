@@ -232,7 +232,7 @@ let configuration=new Vue({
       <!--rest of parameters-->
       <div
         style="
-          margin-top:5em;
+          margin-top:1em;
           padding:0 6em;
 
           display:grid;
@@ -409,7 +409,7 @@ let configuration=new Vue({
   style:`
     <style>
       #configuration {
-        padding:3em 6em;
+        padding:0 6em;
       }
       #configuration select,
       #configuration input {

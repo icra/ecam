@@ -1,5 +1,9 @@
 {
 "#below":"ci-dessous",
+
+"#wwc_vol_coll_descr":"Volume of collected wastewater",
+"#wwc_vol_coll_expla":"Volume of collected wastewater that is responsibility of the undertaking, during the assessment period",
+
 "#fsc_open_pop_descr":"Population with open defecation",
 "#fsc_open_pop_expla":"Population with open defecation",
 
@@ -1114,12 +1118,12 @@
 "#ww_KPI_GHG_elec_descr":"Electricité",
 "#ww_KPI_GHG_elec_expla":"Emissions de GES provenant de la consommation électrique des étapes du système de traitement des eaux usées",
 "#ww_KPI_GHG_expla":"Emissions de GES provenant des consommations électriques et non-électriques",
-"#ww_KPI_GHG_unt_ch4_descr":"CH4 provenant des eaux usées non traitées",
-"#ww_KPI_GHG_unt_ch4_expla":"CH4 provenant des eaux usées non traitées",
-"#ww_KPI_GHG_unt_descr":"Provenant des eaux usées non traitées",
-"#ww_KPI_GHG_unt_expla":"GES exprimés en CO2 eq provenant des eaux usées non traitées",
-"#ww_KPI_GHG_unt_n2o_descr":"N2O provenant des eaux usées non traitées",
-"#ww_KPI_GHG_unt_n2o_expla":"N2O provenant des eaux usées non traitées",
+"#wwc_KPI_GHG_unt_ch4_descr":"CH4 provenant des eaux usées non traitées",
+"#wwc_KPI_GHG_unt_ch4_expla":"CH4 provenant des eaux usées non traitées",
+"#wwc_KPI_GHG_unt_descr":"Provenant des eaux usées non traitées",
+"#wwc_KPI_GHG_unt_expla":"GES exprimés en CO2 eq provenant des eaux usées non traitées",
+"#wwc_KPI_GHG_unt_n2o_descr":"N2O provenant des eaux usées non traitées",
+"#wwc_KPI_GHG_unt_n2o_expla":"N2O provenant des eaux usées non traitées",
 "#ww_SL_ghg_unc_ch4_descr":"CH4 des eaux usées non collectées",
 "#ww_SL_ghg_unc_ch4_expla":"CH4 des eaux usées non collectées. 0.3 représente kgCH4/kgDBO",
 "#ww_SL_ghg_unc_descr":"CO2 des eaux usées non collectées",
@@ -1463,7 +1467,7 @@
 "#wwt_ch4_biog_descr":"Pourcentage de méthane dans les biogaz",
 "#wwt_ch4_biog_expla":"Pourcentage de la teneur en méthane dans les biogaz produits",
 "#wwt_ch4_efac_descr":"CH4 facteur d'émission",
-"#wwt_ch4_efac_expla":"Facteur d'émission de méthane des procédés de traitement aérobie biologique des eaux usées sélectionés. <br> Boues activées - Bien gérées: 0 <br> Boue activée - Zones faiblement aérées mineures: 0,06 <br> Boue activée - Certaines zones aérées: 0,12 <br> Boue activée - Pas bien gérées: 0.18 <br> Lagune aérée: 0.18 <br> Lagune anaérobie <2m profondeur: 0.12 <br> Lagune anaérobie> 2m profondeur: 0.48 <br> Lagune anaérobie couverte: 0.00 // VALEUR MANQUANTE <br> Lit bactérien: 0.036 <br> Réacteur à flux ascendant - Récupération de CH  ub> non prise en compte: 0.48 <br> Réacteur à flux ascendant - Récupération de CH  ub> considérée: 0.3 <br> Zones Humides - Ecoulement de surface: 0.24 <br> Zones humides - Ecoulement souterrain horizontal: 0.06 <br> Zones humides - Ecoulement souterrain vertical: 0.006",
+"#wwt_ch4_efac_expla":"Facteur d'émission de méthane des procédés de traitement aérobie biologique des eaux usées sélectionés",
 "#wwt_coll_len_descr":"Longueur du collecteur",
 "#wwt_coll_len_expla":"Longueur du collecteur",
 "#wwt_composting":"<span class='GB avancée'>GB</span> Les boues d'épuration sont-elles compostées",

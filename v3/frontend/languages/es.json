@@ -1,5 +1,9 @@
 {
 "#below":"abajo",
+
+"#wwc_vol_coll_descr":"Volume of collected wastewater",
+"#wwc_vol_coll_expla":"Volume of collected wastewater that is responsibility of the undertaking, during the assessment period",
+
 "#fsc_open_pop_descr":"Population with open defecation",
 "#fsc_open_pop_expla":"Population with open defecation",
 
@@ -1114,12 +1118,12 @@
 "#ww_KPI_GHG_elec_descr":"Electricidad",
 "#ww_KPI_GHG_elec_expla":"Emisiones GEI de consume de electricidad en todas las etapas de sistema de saneamiento de aguas residuales",
 "#ww_KPI_GHG_expla":"Emisiones GEI indirectas (electricidad) y directas",
-"#ww_KPI_GHG_unt_ch4_descr":"CH4 de agua residual no tratada ",
-"#ww_KPI_GHG_unt_ch4_expla":"CH4 de agua residual no tratada",
-"#ww_KPI_GHG_unt_descr":"De agua residual no tratada ",
-"#ww_KPI_GHG_unt_expla":"Emisiones GEI en CO2 eq de agua residual no tratada",
-"#ww_KPI_GHG_unt_n2o_descr":"N2O de agua residual no tratada",
-"#ww_KPI_GHG_unt_n2o_expla":"N2O de agua residual no tratada ", 
+"#wwc_KPI_GHG_unt_ch4_descr":"CH4 de agua residual no tratada ",
+"#wwc_KPI_GHG_unt_ch4_expla":"CH4 de agua residual no tratada",
+"#wwc_KPI_GHG_unt_descr":"De agua residual no tratada ",
+"#wwc_KPI_GHG_unt_expla":"Emisiones GEI en CO2 eq de agua residual no tratada",
+"#wwc_KPI_GHG_unt_n2o_descr":"N2O de agua residual no tratada",
+"#wwc_KPI_GHG_unt_n2o_expla":"N2O de agua residual no tratada ", 
 "#ww_SL_ghg_unc_ch4_descr":"CH4 de agua residual no recolectada",
 "#ww_SL_ghg_unc_ch4_expla":"CH4 de agua residual no conectada. 0.3 es kgCH4/kgBOD",
 "#ww_SL_ghg_unc_descr":"CO2 eq de agua residual no recolectada ",
@@ -1463,7 +1467,7 @@
 "#wwt_ch4_biog_descr":"Porcentaje de metano en el biogás",
 "#wwt_ch4_biog_expla":"Porcentaje del contenido de metano en el biogás producido ",
 "#wwt_ch4_efac_descr":"Factor de emisión del CH4",
-"#wwt_ch4_efac_expla":"Factor de emisión del metano de procesos seleccionados de tratamiento biológico de aguas residuales.<br>lodos Activados – Bien operado:0 <br>Lodos Activados - Menores zonas aireadas deficientemente:0.06 <br>Lodos Activados – Algunas zonas aireadas:0.12 <br>Lodos Activados – No bien operado:0.18 <br>Laguna Aireada: 0.18 <br>Laguna Anaeróbica <2m profundidad: 0.12 <br>Laguna Anaeróbica >2m profundidad: 0.48 <br>Laguna Anaeróbica Cubierta: 0.00 //VALOR FALTANTE <br>Filtro Percolador: 0.036 <br>Anaerobic Reactor/RAFA – recuperación de CH4 no considerada: 0.48 <br>Anaerobic Reactor/RAFA – recuperación de CH4 considerada: 0.3 <br>Wetlands – Flujo superficial:0.24 <br>Wetlands – Flujo horizontal sub-superficial:0.06 <br>Wetlands – Flujo vertical sub-superficial:0.006",
+"#wwt_ch4_efac_expla":"Factor de emisión del metano de procesos seleccionados de tratamiento biológico de aguas residuales",
 "#wwt_coll_len_descr":"Longitud del colector",
 "#wwt_coll_len_expla":"Longitud del colector",
 "#wwt_composting": "<span class='advanced SM'>SM</span> Is lodos enviados a compostaje",

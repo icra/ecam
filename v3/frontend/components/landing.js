@@ -215,7 +215,7 @@ let landing = new Vue({
         background:#eff5fb;
       }
       #landing #first_container {
-        padding:6em;
+        padding:1em 6em 6em 6em;
         padding-bottom:0;
         display:grid;
         grid-template-columns:40% 58%;
@@ -278,8 +278,8 @@ let landing = new Vue({
         font-weight:bold;
       }
       #landing #logos {
-        display:grid;
-        grid-template-columns:20% 22% 20% 10% 12%;
+        display:flex;
+        justify-content:center;
       }
     </style>
   `,

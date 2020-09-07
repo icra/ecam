@@ -1,27 +1,28 @@
-                        ECAM V3 LLUIS BOSCH TASKS
+ECAM V3 LLUIS BOSCH TASKS
 
 -------------------------------------------------------------------------------
-              to be done with viti help (frontend and UX)
+to be done with viti help (frontend and UX)
 -------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------
-          tasks not related with viti (backend + frontend link)
+tasks not related with viti (backend + frontend link)
 -------------------------------------------------------------------------------
 [CAN BE DONE]
-  * [backend] backend for substages
 
-  * [frontend] Fetching language files asyncronously does not work for offline
-    use (CORS is not compatible with file protocol, find alternative way to
-    loading files offline.)
+  ---------
+  * [NOW] [BACKEND] ENHANCEMENT OF GHG MODELS TO IPCC 2019
+  ---------
 
+  * [backend] substages backend connection to frontend
+  * [frontend] Fetching language files asyncronously does not work for offline use (CORS is not compatible with file protocol, find alternative way to loading files offline.)
   * [frontend] variable page / fuel type related constants show in involved inputs table
   * [frontend] redo save button function
   * [frontend] onclose listener: trigger warning if ecam is accidentally closed
 
 [CANNOT BE DONE]: (missing info OR not clear how to implement)
   * [backend] reimplement benchmarks with new v3 backend
-  * [backend] Implement changes requested by Corinne on June 19th 2020.
-    ``` mail from Corinne:
+  * [backend] Mail from Corinne on June 19th 2020.
+    ```
       Enable to account for different ways of valorising biogas (flare, heat
       and Power for auto-consumption or electricity sales, biomethane injection
       in city grid, or a combination of all in varying %). Enable to enter a
@@ -73,7 +74,6 @@
 
       Best / Cordialement,
     ```
-  * [backend] Enhancement of ghg models (instructions to be received with Maite and Rafa)
   * [frontend] redo load files function ("open" button)
     - implement compabibility module (v2 to v3)
       - ['Yes/No':'Questions']

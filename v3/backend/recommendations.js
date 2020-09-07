@@ -1,4 +1,4 @@
-/* inputs with equations */
+/* estimations: inputs with equations */
 let Recommendations={
   /*FSM*/
     /*fsc*/
@@ -51,6 +51,11 @@ let Recommendations={
   /*WW*/
     /*wwc*/
     /*wwt*/
+      //200-300L per person per day to m3
+      wwt_vol_trea(){
+        return 0.2*Global.Waste.Treatment.wwt_serv_pop*Global.Days();
+      },
+      wwt_n2o_efac(){return 3.2},
       wwt_slu_lf_TVS(){
         let slu_disp=Tables.find('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);
         return Tables.wwt_slu_disp[slu_disp].TVS;
@@ -83,14 +88,8 @@ let Recommendations={
         }
         return b*0.55*Global.General.bod_pday*Global.ww_serv_pop()*0.9*1e-3*1.176*Global.Days();
       },
-      wwt_dryw_slu(){       return 0.04*Global.Waste.Treatment.wwt_mass_slu},
-      wwt_mass_slu_sto(){   return Global.Waste.Treatment.wwt_dryw_slu},
-      wwt_mass_slu_comp(){  return Global.Waste.Treatment.wwt_dryw_slu},
-      wwt_mass_slu_inc(){   return Global.Waste.Treatment.wwt_dryw_slu},
-      wwt_mass_slu_app(){   return Global.Waste.Treatment.wwt_dryw_slu},
-      wwt_mass_slu_land(){  return Global.Waste.Treatment.wwt_dryw_slu},
-      wwt_mass_slu_stock(){ return Global.Waste.Treatment.wwt_dryw_slu},
-      wwt_temp_inc(){         return 1023},
+      wwt_dryw_slu(){ return 0.04*Global.Waste.Treatment.wwt_mass_slu},
+      wwt_temp_inc(){ return 1023},
     /*wwd*/
     wwd_bod_effl(){return Global.Waste.Treatment.wwt_bod_effl},
 

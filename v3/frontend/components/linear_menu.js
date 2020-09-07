@@ -54,6 +54,14 @@ let linear_menu = new Vue({
         >
           <div>{{translate('summaries')}}</div>
         </div>
+
+        <!--more (old sidebar)-->
+        <div
+          onclick="ecam.show('more')"
+          :selected="current_view=='more'"
+        >
+          <div>More</div>
+        </div>
       </div>
 
       <!--current system-->

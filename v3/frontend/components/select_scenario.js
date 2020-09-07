@@ -82,7 +82,7 @@ let select_scenario=new Vue({
         </h1>
         <p style="text-align:center;color:#666">
           <b>
-            Here you can create, edit, delete and compare systems
+            Here you can create, edit and compare systems
           </b>
         </p>
       </div>

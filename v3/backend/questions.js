@@ -168,6 +168,19 @@ let Questions={
       otherQuestions:[],
     },
 
+    "wsd_trucks":{
+      variables:[
+        "wsd_trck_typ",
+        "wsd_vol_trck",
+        "wsd_KPI_GHG_trck_co2",
+        "wsd_KPI_GHG_trck_n2o",
+        "wsd_KPI_GHG_trck_ch4",
+        "wsd_KPI_GHG_trck",
+      ],
+      advanced:0,
+      otherQuestions:[],
+    },
+
     "wsd_water_eff":{
       variables:[
         "wsd_auth_con",
@@ -179,19 +192,6 @@ let Questions={
         "wst_SL_GHG_nrw",
         "wsd_SL_GHG_nrw",
         "wsd_SL_ghg_attr"
-      ],
-      advanced:0,
-      otherQuestions:[],
-    },
-
-    "wsd_trucks":{
-      variables:[
-        "wsd_trck_typ",
-        "wsd_vol_trck",
-        "wsd_KPI_GHG_trck_co2",
-        "wsd_KPI_GHG_trck_n2o",
-        "wsd_KPI_GHG_trck_ch4",
-        "wsd_KPI_GHG_trck",
       ],
       advanced:0,
       otherQuestions:[],
@@ -548,14 +548,6 @@ let Questions={
         "wwt_KPI_ghg_tsludge_n2o",
         "wwt_KPI_ghg_tsludge_ch4",
         "wwt_KPI_ghg_tsludge",
-      ],
-      advanced:0,
-      otherQuestions:[],
-    },
-
-    "wwt_correction_factor":{
-      variables:[
-        "wwt_GHG_tre_n2o",
       ],
       advanced:0,
       otherQuestions:[],

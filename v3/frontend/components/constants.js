@@ -42,4 +42,13 @@ let constants = new Vue({
       </div>
     </div>
   `,
+
+  style:`
+    <style>
+      #constants table th{
+        color:white;
+        background:var(--color-level-generic);
+      }
+    </style>
+  `,
 });

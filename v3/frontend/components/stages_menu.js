@@ -36,7 +36,7 @@ let stages_menu  = new Vue({
     <div id=stages_menu v-if="visible && Languages.ready">
       <div>
         <div style="font-size:large;">
-          Stages
+          Stages of the Urban Water Cycle
         </div>
         <div class=flex>
           <div v-for="l1 in Structure.filter(s=>!s.sublevel)">
@@ -82,7 +82,7 @@ let stages_menu  = new Vue({
     <style>
       #stages_menu {
         background:#f0f5fc;
-        padding:1em 6em;
+        padding:1em;
         border-bottom:1px solid #ccc;
       }
       #stages_menu img {

@@ -96,6 +96,10 @@ let emission_tree = new Vue({
             wwc_KPI_GHG_fuel_n2o:{/*end*/},
             wwc_KPI_GHG_fuel_ch4:{/*end*/},
           },
+          wwc_KPI_GHG_unt:{
+            wwc_KPI_GHG_unt_n2o:{}, //end
+            wwc_KPI_GHG_unt_ch4:{}, //end
+          },
         },
         wwt_KPI_GHG:{
           wwt_KPI_GHG_elec:{/*end*/},
@@ -157,10 +161,6 @@ let emission_tree = new Vue({
             wwd_KPI_GHG_tre_n2o:{}, //end
             wwd_KPI_GHG_tre_ch4:{}, //end
           }
-        },
-        ww_KPI_GHG_unt:{
-          ww_KPI_GHG_unt_n2o:{}, //end
-          ww_KPI_GHG_unt_ch4:{}, //end
         },
       },
       fs_KPI_GHG:{

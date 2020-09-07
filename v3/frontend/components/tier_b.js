@@ -70,27 +70,29 @@ let tier_b=new Vue({
     <div id=tier_b v-if="visible && Languages.ready">
 
       <!--tier b title + tips-->
-      <div id=title class=flex :style="{background:'var(--color-level-'+level+')'}">
-        <h1 style=color:white>
+      <div id=title :style="{background:'var(--color-level-'+level+')'}">
+        <h1 style="font-size:x-large;color:white">
           <a onclick="ecam.show('configuration')">{{Global.General.Name}}</a>
           <span>&rsaquo;</span>
-          <a onclick="go_to(tier_b.level)">{{translate(level)}}</a>
+
+          <span v-if="sublevel">
+            <a onclick="go_to(tier_b.level)">{{translate(level)}}</a>
+          </span>
+          <span v-else>
+            <b style="color:black">{{translate(level)}}</b>
+          </span>
+
+
           <span v-if="sublevel">
             <span>
-              &rsaquo;
-              {{translate(sublevel)}}
+              <span>&rsaquo;</span>
+              <b style="color:black">{{translate(sublevel)}}</b>
             </span>
           </span>
         </h1>
 
         <!--tier b context info-->
-        <div class=flex
-          style="
-            font-family:monospace;
-            padding:0.2em 2em;
-          "
-          id=context_info
-        >
+        <div id=context_info>
           <!--assessment period-->
           <div>
             <a onclick="ecam.show('configuration')">
@@ -177,9 +179,11 @@ let tier_b=new Vue({
 
       <!--category tags-->
       <div id=category_tags>
-        <div>Indirect emissions</div>
-        <div>Direct emissions</div>
-        <div>Energy performance</div>
+        <div>(to be implemented)</div>
+        <div>View &rarr;</div>
+        <div><label><input type=checkbox checked=true> Indirect emissions</label></div>
+        <div><label><input type=checkbox checked=true> Direct emissions  </label></div>
+        <div><label><input type=checkbox checked=true> Energy performance</label></div>
       </div>
 
       <!--tier b inputs and outputs-->
@@ -187,15 +191,15 @@ let tier_b=new Vue({
         style="
           display:grid;
           grid-template-columns:64.5% 35%;
-          grid-gap:0.5%;
+          grid-gap:1px;
         "
       >
         <!--tier b inputs-->
         <div id=inputs
           style="
-            background:#f6f6f6;
             min-width:50%;
-            padding:1em 2em;
+            padding-top:1em;
+            padding-left:8px;
           "
         >
           <div class="table-title">
@@ -223,7 +227,7 @@ let tier_b=new Vue({
                     delete icon
                   )
                 </td>
-                <td>Unit</td>
+                <td style="text-align:center">Unit</td>
               </tr>
             </thead>
 
@@ -278,7 +282,8 @@ let tier_b=new Vue({
                           @change="set_question(question, $event.target.checked)"
                           :checked="Global.Configuration.Questions[question]"
                         >
-                        <span v-html="translate('yes')"></span>
+                        <span v-if="Global.Configuration.Questions[question]" v-html="translate('yes')"></span>
+                        <span v-else v-html="translate('no')"></span>
                       </label>
                     </div>
                   </div>
@@ -346,7 +351,7 @@ let tier_b=new Vue({
                     <b v-html="translate(key+'_descr').prettify()"></b>
                   </div>
                   <div>
-                    <a @click="variable.view(key)">{{key}}</a>
+                    <small><a @click="variable.view(key)">{{key}}</a></small>
                   </div>
                 </td>
 
@@ -415,7 +420,8 @@ let tier_b=new Vue({
                   @mouseout="caption.hide()"
                   style="text-align:right"
                 ></td>
-                <td v-html="Info[key].unit.prettify()"></td>
+                <td v-if="Info[key]" v-html="Info[key].unit.prettify()"></td>
+                <td v-else style="color:#bbb"><b>no unit</b></td>
               </tr>
             </tbody>
           </table>
@@ -427,19 +433,27 @@ let tier_b=new Vue({
   style:`
     <style>
       #tier_b {
-        margin:1em 4em;
       }
 
       #tier_b #title {
-        justify-content:space-between;
         color:white;
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:space-between;
         align-items:center;
+        padding-bottom:5px;
       }
       #tier_b #title a {
         color:white;
         cursor:pointer;
       }
 
+      #tier_b #context_info {
+        display:flex;
+        flex-wrap:wrap;
+        font-family:monospace;
+        font-size:smaller;
+      }
       #tier_b #context_info > div {
         padding:0 1em;
       }
@@ -459,7 +473,7 @@ let tier_b=new Vue({
       }
       #tier_b #outputs {
         background:#fffae8; /*yellow*/
-        padding:1em 2em;
+        padding:1em 5px;
       }
 
       #tier_b #outputs table td {
@@ -479,19 +493,17 @@ let tier_b=new Vue({
       #tier_b div.table-title {
         color:#666;
         font-size:15px;
-        padding:0.7em 0 0.2em 0;
         font-weight:normal;
         text-align:left;
       }
       #tier_b .input {
         text-align:right;
-        background:white;
         cursor:cell;
         padding:0;
       }
       #tier_b .input input {
-        width:95%;
-        background:white;
+        width:98%;
+        background:transparent;
         border:none;
         text-align:right;
         margin:0;
@@ -499,9 +511,9 @@ let tier_b=new Vue({
         height:45px;
         cursor:cell;
       }
-      #tier_b .input input:focus {
-        background:white;
-      }
+      #tier_b .input input:focus {background:white;}
+      #tier_b .input input[equal_to_zero]{color:#aaa;}
+      #tier_b .input input[equal_to_zero]:focus{color:black;}
 
       /*tier b questions*/
       #tier_b .disabled_question {
@@ -527,18 +539,15 @@ let tier_b=new Vue({
 
       #tier_b #category_tags {
         display:flex;
-        font-size:large;
+        justify-content:center;
+        align-items:center;
+        border-bottom:1px solid #ccc;
       }
       #tier_b #category_tags div {
         margin:0.5em 1em 0 1em;
         border-bottom: 4px solid transparent;
         box-sizing: border-box;
-        cursor:pointer;
       }
-      #tier_b #category_tags div:hover {
-        border-color: var(--color-level-generic);
-      }
-
     </style>
   `,
 });

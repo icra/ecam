@@ -12,11 +12,7 @@ let about = new Vue({
   template:`
     <div id=about v-if="visible">
       <h1 style=text-align:center>
-        <span onclick="ecam.show('landing')">Start</span>
-        &rsaquo;
-        <span style=color:black>
-          {{translate('about')}}
-        </span>
+        <span style=color:black>{{translate('about')}}</span>
       </h1>
 
       <!--paragraph-->

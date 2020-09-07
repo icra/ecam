@@ -1,11 +1,10 @@
 //main view controller
 let ecam={
-  //elements of the user interface: ecam_logo, sidebar, etc (Vue objects)
+  //elements of the user interface: ecam_logo, etc (Vue objects)
   elements:{
     ecam_logo,
     caption,
     linear_menu,
-    sidebar,
     stages_menu,
   },
 
@@ -17,6 +16,8 @@ let ecam={
     countries,
     population,
     gwp_table,
+    fuel_table,
+    more,
     about,
     help,
     tier_a,
@@ -111,10 +112,6 @@ let ecam={
     let _this    = this;
     let timer    = 1;   //seconds
     let interval = 100; //millisecons
-
-    //toggle sidebar
-    setTimeout( ()=>{sidebar.visible=1}, interval*timer++);
-    setTimeout( ()=>{sidebar.visible=0}, interval*timer++);
 
     //visit every page (=view)
     Object.keys(this.views).forEach(key=>{

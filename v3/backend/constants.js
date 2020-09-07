@@ -52,12 +52,6 @@ let Cts={
   ct_ch4_oc:{value:1.3,descr:"C to CH4 conversion factor",unit:"g CH4 / g OC"},
   ct_ch4_up:{value:0.025,descr:"Percentage of CH4 emission for uncoverd pile",unit:"ratio"},
 
-  ct_n2o_efp:{
-    value:3.2,
-    descr:"N2O emission factor",
-    unit:"g N2O/person/year",
-  },
-
   ct_bod_kg:{
     value:0.8,
     descr:"Ratio BOD entering the plant / dry weight of organic matter in the sludge collected",

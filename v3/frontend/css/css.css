@@ -81,7 +81,7 @@ th{
 }
 th,td{
   border:1px solid #aaa;
-  padding:0.35em;
+  padding:0.3em;
 }
 
 .unit {
@@ -104,8 +104,6 @@ details summary:hover {
   display:flex;
   flex-wrap:wrap;
 }
-
-#sidebar{z-index:99}
 
 /*highlight inputs when mouse goes over a row that has a formula*/
 span.estimated{

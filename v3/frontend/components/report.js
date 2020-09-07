@@ -77,7 +77,7 @@ let report = new Vue({
         Global.fst_KPI_GHG_trck_n2o()+
         Global.fsr_KPI_GHG_trck_n2o()+
         //untreated ww
-        Global.ww_KPI_GHG_unt_n2o()+
+        Global.wwc_KPI_GHG_unt_n2o()+
         //treated ww
         Global.wwt_KPI_GHG_tre_n2o()+
         //digester fuel
@@ -115,7 +115,7 @@ let report = new Vue({
         Global.fst_KPI_GHG_trck_ch4()+
         Global.fsr_KPI_GHG_trck_ch4()+
         //untreated ww
-        Global.ww_KPI_GHG_unt_ch4()+
+        Global.wwc_KPI_GHG_unt_ch4()+
         //treated ww
         Global.wwt_KPI_GHG_tre_ch4()+
         Global.wwd_KPI_GHG_tre_ch4()+

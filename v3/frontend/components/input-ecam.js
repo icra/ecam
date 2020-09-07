@@ -10,40 +10,35 @@ Vue.component('input_ecam',{
         @mouseout="caption.hide()"
         :style="{
           background:'var(--color-level-'+level+'-secondary)',
-          padding:'0.5em 1em',
         }"
       >
-        <div class=flex style="justify-content:space-between;padding-right:5px">
+        <div class=flex style="justify-content:space-between">
           <div>
-            <b v-html="translate(code+'_descr').prettify()"></b>
+            <span v-html="translate(code+'_descr').prettify()"></span>
           </div>
 
           <!--recommendation button-->
           <div v-if="Recommendations[code]">
             <button
               @click="current_stage[code] = Recommendations[code]()"
-              style="float:right"
               @mousemove="caption.show($event, \`Estimation formula:<br>\$\{Formulas.prettify(Recommendations[code])\}\`)"
               @mouseout="caption.hide()"
               :disabled="isNaN(Recommendations[code]())"
+              style="font-size:smaller"
             >
               Estimation:
               <span v-html="format(Recommendations[code]()/Units.multiplier(code))"></span>
-              <span v-html="get_current_unit(code)"></span>
-              &rarr;
+              <span v-html="get_current_unit(code).prettify()"></span>
             </button>
           </div>
         </div>
 
         <!--link to variable description-->
-        <div><a @click="variable.view(code)">{{code}}</a></div>
+        <div><a @click="variable.view(code)"><small>{{code}}</small></a></div>
 
         <!--<select> element for exceptions-->
         <div v-if="Exceptions[code]"
-          style="
-            text-align:left;
-            margin-top:1em;
-          "
+          style="text-align:left;margin-top:5px;"
         >
           <!--case 1: selection is a percent of something else-->
           <select v-if="Exceptions[code].percent_of" v-model="current_stage[code]">
@@ -71,7 +66,7 @@ Vue.component('input_ecam',{
       </td>
 
       <!--input value: numbers and dropdowns-->
-      <td style="padding:0;background:white">
+      <td style="padding:0;background:#eee">
         <!--inputs whose magnitude is "Option"-->
         <div v-if="Info[code] && Info[code].magnitude=='Option'" style="line-height:3em">
           <select v-model="current_stage[code]"
@@ -91,14 +86,14 @@ Vue.component('input_ecam',{
         </div>
         <div v-else
           class=input
-          @mousemove="caption.show($event, translate('edit_click_to_modify'))"
-          @mouseout="caption.hide()"
+          :title="translate('edit_click_to_modify')"
           style="text-align:right;padding:0"
         >
           <input
             :value="format(current_stage[code]/Units.multiplier(code))"
             @focus="focus_input(current_stage, code, $event)"
             @blur="blur_input(current_stage, code, $event)"
+            :equal_to_zero="current_stage[code]==0"
           >
         </div>
       </td>

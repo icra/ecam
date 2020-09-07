@@ -14,7 +14,7 @@ let ecam_logo=new Vue({
   template:`
     <div id=ecam_logo v-if="visible && Languages.ready">
       <!--logo-->
-      <div id=logo_container onclick="event.stopPropagation();sidebar.visible^=1">
+      <div id=logo_container onclick="ecam.show('landing')">
         <div id=logo>ECAM</div>
         <div>
           <span>{{translate('navbar_title')}}</span>
@@ -40,6 +40,7 @@ let ecam_logo=new Vue({
             :lang="lang"
             @click="Languages.current=lang"
             v-html="lang"
+            :current="Languages.current==lang"
           ></div>
 
           <!--null (only language tags)-->
@@ -133,6 +134,11 @@ let ecam_logo=new Vue({
         color:black;
         display:block;
         padding:0.5em;
+      }
+
+      #ecam_logo #lang #select div[lang][current] {
+        font-weight:bold;
+        background:yellow;
       }
 
       /* languages mouse over */

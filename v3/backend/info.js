@@ -7,13 +7,9 @@
 */
 
 let Info={
-  //tier A: new in v3
-  ws_KPI_GHG_elec:{magnitude:"Mass",unit:"kgCO2eq"},
-  ws_KPI_GHG_fuel:{magnitude:"Mass",unit:"kgCO2eq"},
-  ws_KPI_GHG_fuel_co2:{magnitude:"Mass",unit:"kgCO2eq"},
-  ws_KPI_GHG_fuel_n2o:{magnitude:"Mass",unit:"kgCO2eq"},
-  ws_KPI_GHG_fuel_ch4:{magnitude:"Mass",unit:"kgCO2eq"},
-
+  //IPCC 2019
+  wwt_n2o_efac:{magnitude:"Mass/People/Time", unit:"gN2O/person/year"},
+  fst_n2o_efac:{magnitude:"Mass/People/Time", unit:"gN2O/person/year"},
 
   ww_sludge_disposal_method:{magnitude:"Option",unit:"disposal method"},
   fs_serv_pop:{magnitude:"People",unit:"people"},
@@ -280,12 +276,12 @@ let Info={
   wwc_pmp_pf: {magnitude:"Power factor",unit:"ratio"},
 
   //untreated, onsite and uncollected
-  ww_KPI_GHG_unt:     {magnitude:"Mass",unit:"kg CO2eq"},
-  ww_KPI_GHG_unt_n2o: {magnitude:"Mass",unit:"kg CO2eq"},
-  ww_KPI_GHG_unt_ch4: {magnitude:"Mass",unit:"kg CO2eq"},
-  ww_SL_ghg_unc:      {magnitude:"Mass",unit:"kg CO2eq"},
-  ww_SL_ghg_unc_ch4:  {magnitude:"Mass",unit:"kg CO2eq"},
-  ww_SL_ghg_unc_n2o:  {magnitude:"Mass",unit:"kg CO2eq"},
+  wwc_KPI_GHG_unt:     {magnitude:"Mass",unit:"kg CO2eq"},
+  wwc_KPI_GHG_unt_n2o: {magnitude:"Mass",unit:"kg CO2eq"},
+  wwc_KPI_GHG_unt_ch4: {magnitude:"Mass",unit:"kg CO2eq"},
+  ww_SL_ghg_unc:       {magnitude:"Mass",unit:"kg CO2eq"},
+  ww_SL_ghg_unc_ch4:   {magnitude:"Mass",unit:"kg CO2eq"},
+  ww_SL_ghg_unc_n2o:   {magnitude:"Mass",unit:"kg CO2eq"},
 
 	//GENERAL
 	Days:{magnitude:"Time",unit:"days"},
@@ -505,7 +501,8 @@ let Info={
   wsd_KPI_ghg_estm_red: {magnitude:"Mass",               unit:"kg CO2eq"},
 
 	//L2 Wastewater Collection
-	wwc_vol_conv:{magnitude:"Volume",unit:"m3"},
+	wwc_vol_coll:{magnitude:"Volume",unit:"m3"},
+  wwc_vol_conv:{magnitude:"Volume",unit:"m3"},
 	wwc_nrg_cons:{magnitude:"Energy",unit:"kWh"},
   wwc_conn_pop:{magnitude:"People",unit:"people"},
 	wwc_vol_pump:{magnitude:"Volume",unit:"m3"},
