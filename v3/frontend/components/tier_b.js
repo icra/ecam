@@ -1,14 +1,11 @@
 let tier_b=new Vue({
   el:"#tier_b",
-
   data:{
     visible:false,
     level:'Water',
     sublevel:'Abstraction',
-
-    caption,
-    variable,
-
+    caption, //vue object
+    variable, //vue object
     Global,
     Info,
     Structure,
@@ -68,7 +65,6 @@ let tier_b=new Vue({
   template:`
     <!--tier b VIEW-->
     <div id=tier_b v-if="visible && Languages.ready">
-
       <!--tier b title + tips-->
       <div id=title :style="{background:get_level_color(level)}">
         <h1 style="font-size:x-large;color:white">
@@ -224,11 +220,7 @@ let tier_b=new Vue({
                   <div v-if="sublevel">
                     Substage 1
                     &emsp;
-                    (
-                      eye icon,
-                      edit icon,
-                      delete icon
-                    )
+                    (eye icon, edit icon, delete icon)
                   </div>
                 </td>
                 <td style="text-align:center">Unit</td>
@@ -315,120 +307,123 @@ let tier_b=new Vue({
 
         <!--tier b outputs-->
         <div id=outputs>
-          <!--level2 outputs: GHG header-->
-          <div class="table-title">
-            <div>
-              <b>{{translate('OUTPUTS') }}</b>
+          <!--level2 outputs: GHG emissions-->
+          <div>
+            <div class="table-title">
+              <div>
+                <b>{{translate('OUTPUTS') }}</b>
+              </div>
+              <div style="margin-top:5px">
+                {{translate('GHG emissions') }}
+              </div>
             </div>
-            <div style="margin-top:5px">
-              {{translate('GHG emissions') }}
-            </div>
-          </div>
 
-          <!--level2 outputs: GHG content-->
-          <table :level="level" style="width:100%">
-            <thead :style="{background:'transparent'}">
-              <tr>
-                <th></th>
-                <th>kg CO<sub>2</sub>eq<br>{{translate('assessment period')}}</th>
-                <th v-if="Normalization[level] && Normalization[level].serv_pop">
-                  kg CO<sub>2</sub>eq / {{translate('year')}} / {{translate('serv.pop.')}}
-                </th>
-                <th v-if="Normalization[level] && Normalization[level].volume">
-                  kg CO<sub>2</sub>eq / m<sup>3</sup>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="key in get_current_stage().equations"
-                v-if="
-                  (key=='TotalGHG' || key.search('_KPI_GHG')+1)
-                  &&
-                  Questions.is_hidden(key)==false
-                "
-              >
-                <td
-                  @mousemove="caption.show($event, translate(key+'_expla').prettify())"
-                  @mouseout="caption.hide()"
+            <!--level2 outputs: GHG content-->
+            <table :level="level" style="width:100%">
+              <thead :style="{background:'transparent'}">
+                <tr>
+                  <th></th>
+                  <th>kg CO<sub>2</sub>eq<br>{{translate('assessment period')}}</th>
+                  <th v-if="Normalization[level] && Normalization[level].serv_pop">
+                    kg CO<sub>2</sub>eq / {{translate('year')}} / {{translate('serv.pop.')}}
+                  </th>
+                  <th v-if="Normalization[level] && Normalization[level].volume">
+                    kg CO<sub>2</sub>eq / m<sup>3</sup>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="key in get_current_stage().equations"
+                  v-if="
+                    (key=='TotalGHG' || key.search('_KPI_GHG')+1)
+                    &&
+                    Questions.is_hidden(key)==false
+                  "
                 >
-                  <div>
-                    <b v-html="translate(key+'_descr').prettify()"></b>
-                  </div>
-                  <div>
-                    <small><a @click="variable.view(key)">{{key}}</a></small>
-                  </div>
-                </td>
+                  <td
+                    @mousemove="caption.show($event, translate(key+'_expla').prettify())"
+                    @mouseout="caption.hide()"
+                  >
+                    <div>
+                      <b v-html="translate(key+'_descr').prettify()"></b>
+                    </div>
+                    <div>
+                      <small><a @click="variable.view(key)">{{key}}</a></small>
+                    </div>
+                  </td>
 
-                <!--output value-->
-                <td
-                  v-html="format(Global[key]())"
-                  @mousemove="caption.show($event, Formulas.prettify(Global[key]))"
-                  @mouseout="caption.hide()"
-                  style="text-align:right"
-                ></td>
+                  <!--ghg output values-->
+                  <td
+                    @mousemove="caption.show($event, Formulas.prettify(Global[key]))"
+                    @mouseout="caption.hide()"
+                    v-html="format(Global[key]())"
+                    style="text-align:right"
+                  ></td>
 
-                <!--emission per year and serviced population-->
-                <td
-                  v-if="Normalization[level] && Normalization[level].serv_pop"
-                  v-html="format( Normalization[level].serv_pop(Global[key]()))"
-                  style="text-align:right"
-                ></td>
+                  <!--emission per year and serviced population-->
+                  <td
+                    v-if="Normalization[level] && Normalization[level].serv_pop"
+                    v-html="format( Normalization[level].serv_pop(Global[key]()))"
+                    style="text-align:right"
+                  ></td>
 
-                <!--emission per m3 of water treated-->
-                <td
-                  v-if="Normalization[level] && Normalization[level].volume && sublevel"
-                  v-html="format( Normalization[level][sublevel].volume(Global[key]()))"
-                  style="text-align:right"
-                ></td>
-                <td
-                  v-else-if="Normalization[level] && Normalization[level].volume && !sublevel"
-                  v-html="format( Normalization[level].volume(Global[key]()))"
-                  style="text-align:right"
-                ></td>
-              </tr>
-            </tbody>
-
-          </table>
+                  <!--emission per m3 of water treated-->
+                  <td
+                    v-if="Normalization[level] && Normalization[level].volume && sublevel"
+                    v-html="format( Normalization[level][sublevel].volume(Global[key]()))"
+                    style="text-align:right"
+                  ></td>
+                  <td
+                    v-else-if="Normalization[level] && Normalization[level].volume && !sublevel"
+                    v-html="format( Normalization[level].volume(Global[key]()))"
+                    style="text-align:right"
+                  ></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <!--level2 outputs: NRG and SL-->
-          <div class="table-title">
-            <p>
-              {{translate('Energy performance and Service Level indicators')}}
-            </p>
-          </div>
-          <table :level="level" style="width:100%">
-            <tbody>
-              <tr v-for="key in get_current_stage().equations"
-                v-if="
-                  (key!='TotalGHG' && key.search('_KPI_GHG')==-1)
-                  &&
-                  Questions.is_hidden(key)==false
-                "
-              >
-                <td
-                  @mousemove="caption.show($event, translate(key+'_expla').prettify())"
-                  @mouseout="caption.hide()"
+          <div>
+            <div class="table-title">
+              <p>
+                {{translate('Energy performance and Service Level indicators')}}
+              </p>
+            </div>
+            <table :level="level" style="width:100%">
+              <tbody>
+                <tr v-for="key in get_current_stage().equations"
+                  v-if="
+                    (key!='TotalGHG' && key.search('_KPI_GHG')==-1)
+                    &&
+                    Questions.is_hidden(key)==false
+                  "
                 >
-                  <div>
-                    <b v-html="translate(key+'_descr').prettify()"></b>
-                  </div>
-                  <div>
-                    <a @click="variable.view(key)">{{key}}</a>
-                  </div>
-                </td>
+                  <td
+                    @mousemove="caption.show($event, translate(key+'_expla').prettify())"
+                    @mouseout="caption.hide()"
+                  >
+                    <div>
+                      <b v-html="translate(key+'_descr').prettify()"></b>
+                    </div>
+                    <div>
+                      <small><a @click="variable.view(key)">{{key}}</a></small>
+                    </div>
+                  </td>
 
-                <!--output value-->
-                <td
-                  v-html="format(Global[key]()/Units.multiplier(key))"
-                  @mousemove="caption.show($event, Formulas.prettify(Global[key]))"
-                  @mouseout="caption.hide()"
-                  style="text-align:right"
-                ></td>
-                <td v-if="Info[key]" v-html="Info[key].unit.prettify()"></td>
-                <td v-else style="color:#bbb"><b>no unit</b></td>
-              </tr>
-            </tbody>
-          </table>
+                  <!--output value-->
+                  <td
+                    v-html="format(Global[key]()/Units.multiplier(key))"
+                    @mousemove="caption.show($event, Formulas.prettify(Global[key]))"
+                    @mouseout="caption.hide()"
+                    style="text-align:right"
+                  ></td>
+                  <td v-if="Info[key]" v-html="Info[key].unit.prettify()"></td>
+                  <td v-else style="color:#bbb"><b>no unit</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

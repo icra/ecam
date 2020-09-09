@@ -7,10 +7,11 @@
 //page elements
 ecam_logo.visible   = 1;
 linear_menu.visible = 1;
-stages_menu.visible = 1;
+stages_menu.visible = 0;
 
 //page views
-fuel_table.visible      = 1
+more.visible            = 1;
+fuel_table.visible      = 0;
 tier_b.visible          = 0;
 summary_ghg.visible     = 0;
 landing.visible         = false;
@@ -23,7 +24,6 @@ summary_nrg.visible     = false;
 tier_a.visible          = false;
 variable.visible        = false;
 development.visible     = false;
-more.visible            = false;
 
 /*BACKEND*/
 
