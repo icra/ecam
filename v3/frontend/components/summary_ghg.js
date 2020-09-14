@@ -1,6 +1,5 @@
 let summary_ghg = new Vue({
   el:"#summary_ghg",
-
   data:{
     visible:false,
 
@@ -15,6 +14,9 @@ let summary_ghg = new Vue({
       {level:'Faecl', sublevel:'Reuse',     code:'fsr_ghg_avoided_land'},
       {level:'Faecl', sublevel:'Reuse',     code:'fsr_ghg_avoided_reuse'},
     ],
+
+    //folded sections
+    unfolded_levels:[],
 
     //frontend
     variable,
@@ -31,6 +33,15 @@ let summary_ghg = new Vue({
     format,
     go_to,
     get_variable_value,
+
+    toggle_folded_level(level){
+      let index = this.unfolded_levels.indexOf(level);
+      if(index==-1){
+        this.unfolded_levels.push(level);
+      }else{
+        this.unfolded_levels.splice(index,1);
+      }
+    },
 
     put_detailed_ghg_sources_on_caption(level, sublevel){
       //get #caption element
@@ -80,86 +91,181 @@ let summary_ghg = new Vue({
     <div id=summary_ghg v-if="visible && Languages.ready">
       <summaries current_view=summary_ghg></summaries>
 
-      <!--summary ghg title-->
-      <h1 style="color:black;text-align:center">GHG emissions</h1>
-
-      <!--summary ghg 3 tables-->
       <div>
-        <table style="margin:auto;width:80rem">
+        Values / Charts selector here
+      </div>
+
+      <!--title-->
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:flex-end;
+        padding:2em 4em;
+      ">
+        <div>
+          <b style=font-size:large>Summaries</b>
+          <p>
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+            nonummy nibh euismod tincidunt ut laoreet dolore.
+          </p>
+        </div>
+        <div>
+          <button>AP</button>
+          <button>AP/year</button>
+          <button>AP/year/serv.pop.</button>
+        </div>
+      </div>
+
+      <!--summary table-->
+      <div>
+        <table style="margin:auto;width:70rem;border-spacing:1px">
           <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)">
             <!--level 1-->
-            <tr>
-              <td colspan=2 :style="{background:l1.color,color:'white',padding:'2em 0'}">
-                <div style="display:flex;justify-content:center;align-items:center;font-size:large;">
-                  <div style="margin-right:2em">
-                    <a @click="go_to(l1.level)" style="color:white;">
-                      {{ translate(l1.level) }}
-                    </a>
+            <tr :style="{background:l1.color,color:'white'}">
+              <td style="background:inherit;text-align:center">
+                <button @click="toggle_folded_level(l1.level)">&darr;</button>
+              </td>
+
+              <!--level 1 name and icon-->
+              <td style="background:inherit;text-align:center">
+                <div style="font-size:large">
+                  <a @click="go_to(l1.level)" style="color:white;">
+                    {{ translate(l1.level) }}
+                  </a>
+                </div>
+                <div>
+                  <img :src="'frontend/img/'+l1.alias+'.png'" style="width:65px">
+                </div>
+              </td>
+
+              <!--level 1 emissions-->
+              <td style="background:inherit;">
+                <div style="
+                  display:flex;
+                  justify-content:center;
+                  text-align:center;
+                  padding-left:1em;
+                  padding-right:1em;
+                ">
+                  <div>
+                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
+                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="format(Global[l1.prefix+'_KPI_GHG']())"></div>
                   </div>
-                  <div style="
-                    display:grid;
-                    grid-template-columns:30% 30% 30%;
-                    grid-gap:5px;
-                    text-align:center;
-                    min-width:50%;
-                  ">
-                    <div style="font-size:small;">kgCO<sub>2</sub>eq</div>
-                    <div style="font-size:small;">kgCO<sub>2</sub>eq/{{translate('year')}}</div>
-                    <div style="font-size:small;">kgCO<sub>2</sub>eq/{{translate('year')}}/serv.pop.</div>
-                    <div
-                      class=l1_number_placeholder :style="{color:l1.color}"
-                      v-html="format(
-                        Global[l1.prefix+'_KPI_GHG']()
-                      )
-                    "></div>
-                    <div
-                      class=l1_number_placeholder :style="{color:l1.color}"
-                      v-html="format(
-                        Global[l1.prefix+'_KPI_GHG']() / Global.Years()
-                      )
-                    "></div>
-                    <div
-                      class=l1_number_placeholder :style="{color:l1.color}"
-                      v-html="format(
-                        Global[l1.prefix+'_KPI_GHG']() / Global.Years() / get_variable_value(l1.prefix+'_serv_pop')
-                      )
-                    "></div>
+                  <div>
+                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq Indirect</div>
+                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="0"></div>
                   </div>
+                  <div>
+                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq Direct</div>
+                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="0"></div>
+                  </div>
+                </div>
+              </td>
+
+              <!--level 1 energy consumption-->
+              <td :style="{background:'inherit',textAlign:'center'}">
+                <div style="color:white">kWh</div>
+                <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color, margin:'auto'}">
+                  {{format(Global[l1.prefix+'_nrg_cons']())}}
                 </div>
               </td>
             </tr>
 
             <!--level 2-->
             <tr v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))"
-              v-if="Global.Configuration.ActiveStages[l2.alias]"
+              v-if="unfolded_levels.indexOf(l1.level)>-1"
               @mouseenter="put_detailed_ghg_sources_on_caption(l2.level, l2.sublevel)"
               @mousemove="caption.show($event)"
               @mouseout="caption.hide()"
             >
-              <td :style="{background:'var(--color-level-'+l1.level+'-secondary)'}">
-                <img :src="'frontend/img/'+l2.alias+'.svg'" style="width:100px;display:block;margin:auto">
-              </td>
-              <td>
-                <div style="display:flex;align-items:center;font-size:large;">
-                  <div :style="{color:l1.color, marginRight:'1em', width:'20%'}">
+              <!--level 2 name and icon-->
+              <td colspan=2 :style="{textAlign:'center',background:'var(--color-level-'+l1.level+'-secondary)'}">
+                <div style="font-size:large">
+                  <a @click="go_to(l2.level,l2.sublevel)" :style="{color:l1.color}">
                     {{translate(l2.sublevel)}}
-                  </div>
-                  <div
-                    style="
-                      display:grid;
-                      grid-template-columns:30% 30% 30%;
-                      grid-gap:5px;
-                      min-width:50%;
-                      text-align:center;
-                    "
-                  >
+                  </a>
+                </div>
+                <div>
+                  <img :src="'frontend/img/'+l2.alias+'.svg'" style="width:75px;">
+                </div>
+              </td>
+
+              <!--level 2 emissions-->
+              <td style=background:white>
+                <div
+                  style="
+                    display:flex;
+                    justify-content:center;
+                    text-align:center;
+                    padding-left:1em;
+                    padding-right:1em;
+                  "
+                >
+                  <div> 
                     <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
-                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq/{{translate('year')}}</div>
-                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq/{{translate('year')}}/serv.pop.</div>
-                    <div class=l2_number_placeholder :style="{color:l1.color, border:'1px solid '+l1.color}" v-html="format(Global[l2.prefix+'_KPI_GHG']())"></div>
-                    <div class=l2_number_placeholder :style="{color:l1.color, border:'1px solid '+l1.color}" v-html="format(Global[l2.prefix+'_KPI_GHG']() / Global.Years())"></div>
-                    <div class=l2_number_placeholder :style="{color:l1.color, border:'1px solid '+l1.color}" v-html="format(Global[l2.prefix+'_KPI_GHG']() / Global.Years() / get_variable_value(l1.prefix+'_serv_pop'))"></div>
+                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="format(Global[l2.prefix+'_KPI_GHG']())"></div>
                   </div>
+                  <div>
+                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq Indirect</div>
+                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="0"></div>
+                  </div>
+                  <div>
+                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq Direct</div>
+                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="0"></div>
+                  </div>
+                </div>
+              </td>
+
+              <!--level 2 energy consumption-->
+              <td :style="{background:'white', color:l1.color, textAlign:'center'}">
+                <div style="color:black">kWh</div>
+                <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color, margin:'auto'}">
+                  {{format(Global[l2.level][l2.sublevel][l2.prefix+'_nrg_cons'])}}
+                </div>
+              </td>
+            </tr>
+          </tbody>
+
+          <!--total ghg and nrg-->
+          <tbody style="background:var(--color-level-generic);color:white">
+            <tr>
+              <td></td>
+              <td style="font-size:large;text-align:center">
+                <div>Total</div>
+                <div>
+                  <img src="frontend/img/sources1.png" style="width:65px">
+                  <img src="frontend/img/energy.png" style="width:65px">
+                </div>
+              </td>
+              <!--total emissions-->
+              <td style="background:inherit;">
+                <div style="
+                  display:flex;
+                  justify-content:center;
+                  text-align:center;
+                  padding-left:1em;
+                  padding-right:1em;
+                ">
+                  <div>
+                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
+                    <div class=number_placeholder v-html="format(Global.TotalGHG())"></div>
+                  </div>
+                  <div>
+                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq Indirect</div>
+                    <div class=number_placeholder v-html="0"></div>
+                  </div>
+                  <div>
+                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq Direct</div>
+                    <div class=number_placeholder v-html="0"></div>
+                  </div>
+                </div>
+              </td>
+
+              <!--total energy consumption-->
+              <td style="text-align:center">
+                <div style="color:white">kWh</div>
+                <div class=number_placeholder style="margin:auto">
+                  {{format(Global.TotalNRG())}}
                 </div>
               </td>
             </tr>
@@ -218,16 +324,18 @@ let summary_ghg = new Vue({
       #summary_ghg table th,
       #summary_ghg table td {
         border:none;
-        background:white;
+        background:inherit;
       }
-      #summary_ghg div.l1_number_placeholder {
-        font-weight:bold;
-        background:white;
-        padding:0.5em 0;
-      }
-      #summary_ghg div.l2_number_placeholder {
+      #summary_ghg div.number_placeholder {
+        width:150px;
+        font-size:large;
         font-weight:bold;
         padding:0.5em 0;
+        background:white;
+
+        border:1px solid var(--color-level-generic);
+        color:var(--color-level-generic);
+        margin:0 1px;
       }
     </style>
   `
