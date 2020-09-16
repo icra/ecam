@@ -1,0 +1,203 @@
+<!doctype html><html><head>
+  <meta charset="utf-8">
+  <style>
+    /*
+    */
+    body{
+      background:#f5f5f5;
+      overflow-y:scroll;
+    }
+    table{
+      border-collapse:collapse;
+    }
+    input[type=number]{
+      text-align:right;
+    }
+    details summary:hover{
+      cursor:pointer;
+      background:lightblue;
+    }
+  </style>
+
+  <!--vue-->
+  <script src="frontend/vue/vue-dev.js"></script>
+
+  <!--backend-->
+  <script>
+    class Scenario{
+      constructor(){
+        this.Waste={
+          ww_resi_pop:100, //resident population
+          ww_vol_gene:0,   //volume of total generated wastewater by resident population
+
+          Uncollected:{
+            wwu_vol_unco:0, //volume of uncolleted wastewater
+            wwu_vol_conv:0, //volume of uncollected wastewater conveyed to decentralised treatment
+            wwu_vol_untr:0, //volume of untreated uncollected wastewater
+          },
+
+          Collected:{
+            wwc_vol_coll:0, //volume of collected wastewater
+            wwc_vol_conv:0, //volume of collected wastewater conveyed to treatment
+            wwc_vol_untr:0, //volume of untreated collected wastewater
+          },
+
+          Untreated:{
+            wwut_vol_untr:0, //volume of untreated wastewater (collected + uncollected)
+          },
+
+          Decentralised_treatment:{
+            wwdt_vol_untr:0, //volume of untreated wastewater
+          },
+
+          Treatment_plant:{
+            wwt_vol_trea:0, //volume of treated wastewater
+          },
+        };
+        this.Discharge={};
+        this.Sludge={};
+      }
+
+      /*EQUATIONS*/
+      Days(){return 1} //assessment period
+
+      //Wastewater (generic)
+
+      //200L per person per day (in m3)
+      ww_vol_gene(){return 0.2*this.Waste.ww_resi_pop*this.Days()}
+
+      //Wastewater/Uncollected
+      wwu_vol_unco(){return Math.max(0, this.Waste.ww_vol_gene              - this.Waste.Collected.wwc_vol_coll  )}
+      wwu_vol_conv(){return Math.max(0, this.Waste.Uncollected.wwu_vol_unco - this.Waste.Uncollected.wwu_vol_untr)}
+      wwu_vol_untr(){return Math.max(0, this.Waste.Uncollected.wwu_vol_unco - this.Waste.Uncollected.wwu_vol_conv)}
+
+      //Wastewater/Collected
+      wwc_vol_coll(){return Math.max(0, this.Waste.ww_vol_gene            - this.Waste.Uncollected.wwu_vol_unco)}
+      wwc_vol_conv(){return Math.max(0, this.Waste.Collected.wwc_vol_coll - this.Waste.Collected.wwc_vol_untr  )}
+      wwc_vol_untr(){return Math.max(0, this.Waste.Collected.wwc_vol_coll - this.Waste.Collected.wwc_vol_conv  )}
+
+      //Wastewater/Untreated
+      wwut_vol_untr(){return this.Waste.Collected.wwc_vol_untr + this.Waste.Uncollected.wwu_vol_untr} //volume of untreated wastewater (collected + uncollected)
+
+    };
+
+    let Info={
+      ww_resi_pop:  "Resident population",
+      ww_vol_gene:  "Volume of generated  wastewater (m3)",
+      wwc_vol_coll:  "Volume of collected  wastewater (m3)",
+      wwu_vol_unco:  "Volume of uncolleted wastewater (m3)",
+      wwu_vol_untr: "Volume of untreated uncollected wastewater (m3)",
+      wwu_vol_conv: "Volume of uncollected wastewater conveyed to decentralised treatment (m3)",
+      wwc_vol_untr: "Volume of untreated collected wastewater (m3)",
+      wwc_vol_conv: "Volume of collected wastewater conveyed to treatment (m3)",
+      wwdt_vol_untr:"Volume of untreated wastewater (m3)",
+    };
+  </script>
+</head><body>
+
+<h1>ecam v3 - ipcc 2019 stages rework</h1>
+
+<div id=app>
+  <!--main container-->
+  <div>
+    <!--diagram-->
+    <div style="margin-bottom:10px">
+      <details open style="border:1px solid #ccc">
+        <summary><b>Diagram</b></summary>
+        <div>
+          <img src="frontend/diagram/map.gv.png" style="width:100%">
+        </div>
+      </details>
+    </div>
+
+    <!--stages-->
+    <div style="font-size:large;margin:1em 0">
+      <div>
+        Inputs
+        <button onclick="document.querySelectorAll('#stages details').forEach(el=>el.setAttribute('open',''))">open all stages</button>
+        <button onclick="document.querySelectorAll('#stages details').forEach(el=>el.removeAttribute('open'))">collapse all stages</button>
+      </div>
+    </div>
+    <div id=stages>
+      <stage :scenario="scenario" :stage="scenario.Waste"                           :name="'Wastewater'">                            </stage>
+      <stage :scenario="scenario" :stage="scenario.Waste.Collected"                 :name="'Wastewater / Collected'">                </stage>
+      <stage :scenario="scenario" :stage="scenario.Waste.Uncollected"               :name="'Wastewater / Uncollected'">              </stage>
+      <stage :scenario="scenario" :stage="scenario.Waste.Untreated"                 :name="'Wastewater / Untreated'">                </stage>
+      <stage :scenario="scenario" :stage="scenario.Waste.Treatment_plant"           :name="'Wastewater / Treatment plant'">          </stage>
+      <stage :scenario="scenario" :stage="scenario.Waste.Decentralised_treatment"   :name="'Wastewater / Decentralised treatment'">  </stage>
+      <stage :scenario="scenario" :stage="scenario.Discharge"                       :name="'Discharge'">                             </stage>
+      <stage :scenario="scenario" :stage="scenario.Sludge"                          :name="'Sludge management'">                     </stage>
+    </div>
+  </div>
+</div>
+
+<script>
+  Vue.component('stage',{
+    props:[
+      'stage',
+      'scenario',
+      'name',
+    ],
+    data:function(){
+      return {
+        Info,
+      };
+    },
+    methods:{
+      has_estimation(key){
+        return Object.getOwnPropertyNames(Scenario.prototype).indexOf(key)>-1;
+      },
+      get_inputs(){
+        return Object.keys(this.stage).filter(key=>{
+          return typeof(this.stage[key])!='object';
+        });
+      },
+    },
+    template:`
+      <div>
+        <details v-if="scenario && stage && name" style="margin-bottom:10px">
+          <summary><b>{{name}}</b></summary>
+          <div>
+            <table border=1>
+              <tr v-for="key in get_inputs()">
+                <td>
+                  <div>
+                    {{Info[key]}}
+                  </div>
+                  <div>
+                    <code style="background:#ccc">{{key}}</code>
+                  </div>
+                </td>
+                <td>
+                  <input type=number v-model.number="stage[key]">
+                </td>
+                <td>
+                  <div v-if="has_estimation(key)">
+                    <button @click="stage[key]=scenario[key]()">
+                      estimation: {{scenario[key]()}}
+                    </button>
+                  </div>
+                  <div v-else>
+                    <small>~no estimation</small>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </details>
+        <div v-if="!scenario">no scenario</div>
+        <div v-if="!stage">no stage</div>
+        <div v-if="!name">no name</div>
+      </div>
+    `,
+  });
+  let app=new Vue({
+    el:"#app",
+    data:{
+      scenario:new Scenario(),
+      Info,
+    },
+    methods:{
+    },
+  });
+</script>

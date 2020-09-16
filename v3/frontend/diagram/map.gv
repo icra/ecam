@@ -1,5 +1,5 @@
 digraph MyGraph {
-  label="ecam v3 stages rework"
+  rankdir=LR
 
   wsa [label="Abstraction"]
   wst [label="Treatment"]
@@ -19,14 +19,11 @@ digraph MyGraph {
   laf [label="Landfilling"]
   lap [label="Land application"]
   com [label="Composting"]
-
   pop [label="Population"]
 
   subgraph cluster_ws {
     label="Water supply"
-
-    wsa -> wst [color="blue"]
-    wst -> wsd [color="blue"]
+    wsa -> wst -> wsd [color="blue"]
   }
 
   wsd -> pop [color="blue"]
@@ -35,33 +32,23 @@ digraph MyGraph {
   subgraph cluster_ww{
     label="Wastewater"
 
-    ww  -> unc [color="blue:brown"]
-    ww  -> col [color="blue:brown"]
-    unc -> unt [color="blue:brown"]
-    col -> unt [color="blue:brown"]
-    col -> wwt [color="blue:brown"]
-    unc -> dct [color="blue:brown"]
+    ww  -> {unc col} [color="blue:brown"]
+    unc -> {dct unt} [color="blue:brown"]
+    col -> {unt wwt} [color="blue:brown"]
   }
 
   subgraph cluster_dis {
     label="Discharge"
 
-    unt -> dis [color="blue:brown"]
-    wwt -> dis [color="blue"]
-    dct -> dis [color="blue"]
-    dis -> fsh [color="blue"]
-    dis -> agr [color="blue"]
-    dis -> ldw [color="blue"]
+    unt       -> dis           [color="blue:brown"]
+    {wwt dct} -> dis           [color="blue"]
+    dis       -> {fsh agr ldw} [color="blue"]
   }
 
   subgraph cluster_sm{
     label="Sludge management"
 
-    wwt -> slu [color="brown"]
-    dct -> slu [color="brown"]
-    slu -> inc [color="brown"]
-    slu -> laf [color="brown"]
-    slu -> lap [color="brown"]
-    slu -> com [color="brown"]
+    {wwt dct} -> slu               [color="brown"]
+    slu       -> {inc laf lap com} [color="brown"]
   }
 }

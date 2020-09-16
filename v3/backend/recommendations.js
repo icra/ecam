@@ -91,9 +91,4 @@ let Recommendations={
       wwt_temp_inc(){ return 1023},
     /*wwd*/
     wwd_bod_effl(){return Global.Waste.Treatment.wwt_bod_effl},
-
-  /*WS*/
-    /*wsa*/
-    /*wst*/
-    /*wsd*/
 };

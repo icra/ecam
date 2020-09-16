@@ -50,9 +50,7 @@ let tier_b=new Vue({
     },
 
     fold_question(key){
-      if(!this.Global.Configuration.Questions[key]){
-        return;
-      }
+      if(!this.Global.Configuration.Questions[key]){return;}
       let index = this.Global.Configuration.FoldedQuestions.indexOf(key);
       if(index == -1){
         this.Global.Configuration.FoldedQuestions.push(key);
