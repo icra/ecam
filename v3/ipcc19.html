@@ -1,5 +1,6 @@
 <!doctype html><html><head>
   <meta charset="utf-8">
+  <title>ipcc 2019 rework</title>
   <style>
     /*
     */
@@ -13,9 +14,9 @@
     input[type=number]{
       text-align:right;
     }
-    details summary:hover{
-      cursor:pointer;
+    details summary{
       background:lightblue;
+      cursor:pointer;
     }
   </style>
 
@@ -26,71 +27,135 @@
   <script>
     class Scenario{
       constructor(){
+        //Wastewater
         this.Waste={
           ww_resi_pop:100, //resident population
           ww_vol_gene:0,   //volume of total generated wastewater by resident population
 
+          //Uncollected Wastewater
           Uncollected:{
             wwu_vol_unco:0, //volume of uncolleted wastewater
             wwu_vol_conv:0, //volume of uncollected wastewater conveyed to decentralised treatment
             wwu_vol_untr:0, //volume of untreated uncollected wastewater
           },
 
+          //Collected Wastewater
           Collected:{
             wwc_vol_coll:0, //volume of collected wastewater
             wwc_vol_conv:0, //volume of collected wastewater conveyed to treatment
             wwc_vol_untr:0, //volume of untreated collected wastewater
           },
 
+          //Untreated Wastewater
           Untreated:{
             wwut_vol_untr:0, //volume of untreated wastewater (collected + uncollected)
           },
 
-          Decentralised_treatment:{
-            wwdt_vol_untr:0, //volume of untreated wastewater
-          },
-
           Treatment_plant:{
             wwt_vol_trea:0, //volume of treated wastewater
+            wwt_vol_disc:0, //volume of treated wastewater discharged
+            wwt_slu_gene:0, //total sludge generated
+          },
+
+          Decentralised_treatment:{
+            wwdt_vol_trea:0, //volume of treated wastewater
+            wwdt_vol_disc:0, //volume of treated wastewater discharged
+            wwdt_slu_gene:0, //total sludge generated
           },
         };
-        this.Discharge={};
-        this.Sludge={};
+        this.Discharge={
+          dis_vol_recv:0,
+          dis_sent_to_agr:0,
+          dis_sent_to_fsh:0,
+          dis_sent_to_ldi:0,
+        };
+        this.Sludge={
+          slu_total_recv:0,
+          slu_sent_to_laf:0,
+          slu_sent_to_inc:0,
+          slu_sent_to_com:0,
+          slu_sent_to_lap:0,
+        };
       }
 
-      /*EQUATIONS*/
+      /*ESTIMATIONS*/
       Days(){return 1} //assessment period
 
       //Wastewater (generic)
-
       //200L per person per day (in m3)
       ww_vol_gene(){return 0.2*this.Waste.ww_resi_pop*this.Days()}
-
       //Wastewater/Uncollected
-      wwu_vol_unco(){return Math.max(0, this.Waste.ww_vol_gene              - this.Waste.Collected.wwc_vol_coll  )}
       wwu_vol_conv(){return Math.max(0, this.Waste.Uncollected.wwu_vol_unco - this.Waste.Uncollected.wwu_vol_untr)}
       wwu_vol_untr(){return Math.max(0, this.Waste.Uncollected.wwu_vol_unco - this.Waste.Uncollected.wwu_vol_conv)}
-
       //Wastewater/Collected
-      wwc_vol_coll(){return Math.max(0, this.Waste.ww_vol_gene            - this.Waste.Uncollected.wwu_vol_unco)}
       wwc_vol_conv(){return Math.max(0, this.Waste.Collected.wwc_vol_coll - this.Waste.Collected.wwc_vol_untr  )}
       wwc_vol_untr(){return Math.max(0, this.Waste.Collected.wwc_vol_coll - this.Waste.Collected.wwc_vol_conv  )}
-
       //Wastewater/Untreated
       wwut_vol_untr(){return this.Waste.Collected.wwc_vol_untr + this.Waste.Uncollected.wwu_vol_untr} //volume of untreated wastewater (collected + uncollected)
+      //Wastewater/Treatment_plant
+      wwt_vol_trea(){return this.Waste.Collected.wwc_vol_conv}
+      wwt_vol_disc(){return this.Waste.Treatment_plant.wwt_vol_trea}
+      //Wastewater/Decentralised_treatment
+      wwdt_vol_trea(){return this.Waste.Uncollected.wwu_vol_conv}
+      wwdt_vol_disc(){return this.Waste.Decentralised_treatment.wwdt_vol_trea}
 
+      //Discharge
+      dis_vol_recv(){
+        return (
+          this.Waste.Treatment_plant        .wwt_vol_disc +
+          this.Waste.Untreated              .wwut_vol_untr +
+          this.Waste.Decentralised_treatment.wwdt_vol_disc
+        )
+      }
+
+      //Sludge
+      slu_total_recv(){
+        return (
+          this.Waste.Treatment_plant        .wwt_slu_gene +
+          this.Waste.Decentralised_treatment.wwdt_slu_gene
+        )
+      }
     };
 
     let Info={
       ww_resi_pop:  "Resident population",
       ww_vol_gene:  "Volume of generated  wastewater (m3)",
-      wwc_vol_coll:  "Volume of collected  wastewater (m3)",
-      wwu_vol_unco:  "Volume of uncolleted wastewater (m3)",
-      wwu_vol_untr: "Volume of untreated uncollected wastewater (m3)",
-      wwu_vol_conv: "Volume of uncollected wastewater conveyed to decentralised treatment (m3)",
+
+      //Collected
+      wwc_vol_coll: "Volume of collected  wastewater (m3)",
       wwc_vol_untr: "Volume of untreated collected wastewater (m3)",
       wwc_vol_conv: "Volume of collected wastewater conveyed to treatment (m3)",
-      wwdt_vol_untr:"Volume of untreated wastewater (m3)",
+
+      //Uncollected
+      wwu_vol_unco: "Volume of uncolleted wastewater (m3)",
+      wwu_vol_untr: "Volume of untreated uncollected wastewater (m3)",
+      wwu_vol_conv: "Volume of uncollected wastewater conveyed to decentralised treatment (m3)",
+
+      //Untreated
+      wwut_vol_untr:"Volume of untreated wastewater discharged (m3)",
+
+      //Treatment plant
+      wwt_vol_trea:"Volume of treated wastewater (m3)",
+      wwt_vol_disc:"Volume of treated wastewater discharged (m3)",
+      wwt_slu_gene:"Total dry sludge generated (kg)",
+
+      //Decentralised_treatment
+      wwdt_vol_trea:"Volume of treated wastewater (m3)",
+      wwdt_vol_disc:"Volume of treated wastewater discharged (m3)",
+      wwdt_slu_gene:"Total dry sludge generated (kg)",
+
+      //Discharge
+      dis_vol_recv:"Total wastewater discharged (treated + untreated) (m3)",
+      dis_sent_to_agr:"Discharged water sent to agricultural soils (m3)",
+      dis_sent_to_fsh:"Discharged water sent to freshwater, estuarine, marine environments (m3)",
+      dis_sent_to_ldi:"Discharged water sent to land disposal of wastewater (m3)",
+
+      //Sludge
+      slu_total_recv:"Total dry sludge (from centralised and decentralised treatment) (kg)",
+      slu_sent_to_laf:"Sludge sent to landfilling",
+      slu_sent_to_inc:"Sludge sent to incineration",
+      slu_sent_to_com:"Sludge sent to composting",
+      slu_sent_to_lap:"Sludge sent to land application",
     };
   </script>
 </head><body>
@@ -162,10 +227,12 @@
               <tr v-for="key in get_inputs()">
                 <td>
                   <div>
-                    {{Info[key]}}
-                  </div>
-                  <div>
                     <code style="background:#ccc">{{key}}</code>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    {{Info[key]}}
                   </div>
                 </td>
                 <td>
@@ -198,6 +265,9 @@
       Info,
     },
     methods:{
+    },
+    mounted(){
+      document.querySelectorAll('#stages details').forEach(el=>el.setAttribute('open',''));
     },
   });
 </script>
