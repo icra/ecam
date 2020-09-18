@@ -4,22 +4,22 @@ digraph MyGraph {
   wsa [label="Abstraction"]
   wst [label="Treatment"]
   wsd [label="Distribution"]
+  pop [label="Population"]
   ww  [label="Wastewater"]
   unc [label="Uncollected"]
   col [label="Collected"]
-  unt [label="Untreated"]
-  dct [label="Decentralised treatment"]
+  unt [label="Untreated wastewater"]
+  wwt [label="Wastewater treatment plant"]
+  ons [label="Onsite sanitation"]
+  dis [label="Discharge"]
   fsh [label="Freshwater, estuarine, marine environments"]
   agr [label="Agricultural soils"]
   ldw [label="Land disposal of wastewater"]
-  wwt [label="Wastewater treatment plant"]
-  dis [label="Discharge"]
-  slu [label="Sludge"]
+  slu [label="Dry sludge"]
   inc [label="Incineration"]
   laf [label="Landfilling"]
   lap [label="Land application"]
   com [label="Composting"]
-  pop [label="Population"]
 
   subgraph cluster_ws {
     label="Water supply"
@@ -31,24 +31,23 @@ digraph MyGraph {
 
   subgraph cluster_ww{
     label="Wastewater"
-
-    ww  -> {unc col} [color="blue:brown"]
-    unc -> {dct unt} [color="blue:brown"]
+    ww  -> {col unc} [color="blue:brown"]
     col -> {unt wwt} [color="blue:brown"]
-  }
+    unc -> {unt ons} [color="blue:brown"]
 
-  subgraph cluster_dis {
-    label="Discharge"
+    unt -> {fsh agr} [color="blue:brown"]
+    wwt -> dis [color="blue"]
+    ons -> dis [color="blue"]
+    {wwt ons} -> slu [color="brown"]
 
-    unt       -> dis           [color="blue:brown"]
-    {wwt dct} -> dis           [color="blue"]
-    dis       -> {fsh agr ldw} [color="blue"]
-  }
+    subgraph cluster_dis {
+      label="Discharge"
+      dis -> {fsh agr ldw} [color="blue"]
+    }
 
-  subgraph cluster_sm{
-    label="Sludge management"
-
-    {wwt dct} -> slu               [color="brown"]
-    slu       -> {inc laf lap com} [color="brown"]
+    subgraph cluster_sm{
+      label="Sludge management"
+      slu -> {inc laf lap com} [color="brown"]
+    }
   }
 }

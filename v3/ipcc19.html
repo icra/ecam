@@ -32,37 +32,31 @@
           ww_resi_pop:100, //resident population
           ww_vol_gene:0,   //volume of total generated wastewater by resident population
 
-          //Uncollected Wastewater
-          Uncollected:{
-            wwu_vol_unco:0, //volume of uncolleted wastewater
-            wwu_vol_conv:0, //volume of uncollected wastewater conveyed to decentralised treatment
-            wwu_vol_untr:0, //volume of untreated uncollected wastewater
-          },
-
-          //Collected Wastewater
-          Collected:{
-            wwc_vol_coll:0, //volume of collected wastewater
-            wwc_vol_conv:0, //volume of collected wastewater conveyed to treatment
-            wwc_vol_untr:0, //volume of untreated collected wastewater
-          },
-
           //Untreated Wastewater
           Untreated:{
-            wwut_vol_untr:0, //volume of untreated wastewater (collected + uncollected)
+            wwu_vol_coll:0, //volume of untreated wastewater (from collectors)
+            wwu_vol_unco:0, //volume of untreated wastewater (from uncollected)
           },
 
+          //Treatment plant
           Treatment_plant:{
+            wwt_vol_coll:0, //volume of collected wastewater
+            wwt_vol_conv:0, //volume of collected wastewater conveyed to treatment
             wwt_vol_trea:0, //volume of treated wastewater
             wwt_vol_disc:0, //volume of treated wastewater discharged
             wwt_slu_gene:0, //total sludge generated
           },
 
-          Decentralised_treatment:{
-            wwdt_vol_trea:0, //volume of treated wastewater
-            wwdt_vol_disc:0, //volume of treated wastewater discharged
-            wwdt_slu_gene:0, //total sludge generated
+          //Onsite sanitation
+          Onsite_treatment:{
+            wwo_vol_unco:0, //volume of uncollected wastewater
+            wwo_vol_conv:0, //volume of uncollected wastewater conveyed to onsite sanitation
+            wwo_vol_trea:0, //volume of treated wastewater
+            wwo_vol_disc:0, //volume of treated wastewater discharged
+            wwo_slu_gene:0, //total sludge generated
           },
         };
+
         this.Discharge={
           dis_vol_recv:0,
           dis_sent_to_agr:0,
@@ -80,46 +74,36 @@
 
       /*ESTIMATIONS*/
       Days(){return 1} //assessment period
-
       //Wastewater (generic)
       //200L per person per day (in m3)
       ww_vol_gene(){return 0.2*this.Waste.ww_resi_pop*this.Days()}
-      //Wastewater/Uncollected
-      wwu_vol_conv(){return Math.max(0, this.Waste.Uncollected.wwu_vol_unco - this.Waste.Uncollected.wwu_vol_untr)}
-      wwu_vol_untr(){return Math.max(0, this.Waste.Uncollected.wwu_vol_unco - this.Waste.Uncollected.wwu_vol_conv)}
-      //Wastewater/Collected
-      wwc_vol_conv(){return Math.max(0, this.Waste.Collected.wwc_vol_coll - this.Waste.Collected.wwc_vol_untr  )}
-      wwc_vol_untr(){return Math.max(0, this.Waste.Collected.wwc_vol_coll - this.Waste.Collected.wwc_vol_conv  )}
       //Wastewater/Untreated
-      wwut_vol_untr(){return this.Waste.Collected.wwc_vol_untr + this.Waste.Uncollected.wwu_vol_untr} //volume of untreated wastewater (collected + uncollected)
       //Wastewater/Treatment_plant
-      wwt_vol_trea(){return this.Waste.Collected.wwc_vol_conv}
-      wwt_vol_disc(){return this.Waste.Treatment_plant.wwt_vol_trea}
-      //Wastewater/Decentralised_treatment
-      wwdt_vol_trea(){return this.Waste.Uncollected.wwu_vol_conv}
-      wwdt_vol_disc(){return this.Waste.Decentralised_treatment.wwdt_vol_trea}
-
-      //Discharge
-      dis_vol_recv(){
-        return (
-          this.Waste.Treatment_plant        .wwt_vol_disc +
-          this.Waste.Untreated              .wwut_vol_untr +
-          this.Waste.Decentralised_treatment.wwdt_vol_disc
-        )
-      }
-
-      //Sludge
-      slu_total_recv(){
-        return (
-          this.Waste.Treatment_plant        .wwt_slu_gene +
-          this.Waste.Decentralised_treatment.wwdt_slu_gene
-        )
-      }
+      //Wastewater/Onsite_treatment
+      //Wastewater/Collected
     };
 
     let Info={
       ww_resi_pop:  "Resident population",
       ww_vol_gene:  "Volume of generated  wastewater (m3)",
+
+      //Untreated
+      wwu_vol_coll: "Volume of untreated wastewater from colleted wastewater (m3)",
+      wwu_vol_unco: "Volume of untreated wastewater from uncollected wastewater (m3)",
+
+      //Treatment plant
+      wwt_vol_coll:"Volume of collected wastewater (m3)",
+      wwt_vol_conv:"Volume of collected wastewater conveyed to treatment (m3)",
+      wwt_vol_trea:"Volume of treated wastewater (m3)",
+      wwt_vol_disc:"Volume of treated wastewater discharged (m3)",
+      wwt_slu_gene:"Total dry sludge generated (kg)",
+
+      //Onsite treatment
+      wwo_vol_unco:"Volume of uncollected wastewater (m3)",
+      wwo_vol_conv:"Volume of uncollected wastewater conveyed to onsite treatment (m3)",
+      wwo_vol_trea:"Volume of treated wastewater (m3)",
+      wwo_vol_disc:"Volume of treated wastewater discharged (m3)",
+      wwo_slu_gene:"Total dry sludge generated (kg)",
 
       //Collected
       wwc_vol_coll: "Volume of collected  wastewater (m3)",
@@ -127,19 +111,7 @@
       wwc_vol_conv: "Volume of collected wastewater conveyed to treatment (m3)",
 
       //Uncollected
-      wwu_vol_unco: "Volume of uncolleted wastewater (m3)",
-      wwu_vol_untr: "Volume of untreated uncollected wastewater (m3)",
-      wwu_vol_conv: "Volume of uncollected wastewater conveyed to decentralised treatment (m3)",
 
-      //Untreated
-      wwut_vol_untr:"Volume of untreated wastewater discharged (m3)",
-
-      //Treatment plant
-      wwt_vol_trea:"Volume of treated wastewater (m3)",
-      wwt_vol_disc:"Volume of treated wastewater discharged (m3)",
-      wwt_slu_gene:"Total dry sludge generated (kg)",
-
-      //Decentralised_treatment
       wwdt_vol_trea:"Volume of treated wastewater (m3)",
       wwdt_vol_disc:"Volume of treated wastewater discharged (m3)",
       wwdt_slu_gene:"Total dry sludge generated (kg)",
@@ -184,14 +156,12 @@
       </div>
     </div>
     <div id=stages>
-      <stage :scenario="scenario" :stage="scenario.Waste"                           :name="'Wastewater'">                            </stage>
-      <stage :scenario="scenario" :stage="scenario.Waste.Collected"                 :name="'Wastewater / Collected'">                </stage>
-      <stage :scenario="scenario" :stage="scenario.Waste.Uncollected"               :name="'Wastewater / Uncollected'">              </stage>
-      <stage :scenario="scenario" :stage="scenario.Waste.Untreated"                 :name="'Wastewater / Untreated'">                </stage>
-      <stage :scenario="scenario" :stage="scenario.Waste.Treatment_plant"           :name="'Wastewater / Treatment plant'">          </stage>
-      <stage :scenario="scenario" :stage="scenario.Waste.Decentralised_treatment"   :name="'Wastewater / Decentralised treatment'">  </stage>
-      <stage :scenario="scenario" :stage="scenario.Discharge"                       :name="'Discharge'">                             </stage>
-      <stage :scenario="scenario" :stage="scenario.Sludge"                          :name="'Sludge management'">                     </stage>
+      <stage :scenario="scenario" :stage="scenario.Waste"                    :name="'Wastewater'">                            </stage>
+      <stage :scenario="scenario" :stage="scenario.Waste.Untreated"          :name="'Wastewater / Untreated'">                </stage>
+      <stage :scenario="scenario" :stage="scenario.Waste.Treatment_plant"    :name="'Wastewater / Treatment plant'">          </stage>
+      <stage :scenario="scenario" :stage="scenario.Waste.Onsite_treatment"   :name="'Wastewater / Decentralised treatment'">  </stage>
+      <stage :scenario="scenario" :stage="scenario.Discharge"                :name="'Discharge'">                             </stage>
+      <stage :scenario="scenario" :stage="scenario.Sludge"                   :name="'Sludge management'">                     </stage>
     </div>
   </div>
 </div>
