@@ -2,8 +2,6 @@
   <meta charset="utf-8">
   <title>ipcc 2019 rework</title>
   <style>
-    /*
-    */
     body{
       background:#f5f5f5;
       overflow-y:scroll;
@@ -17,11 +15,11 @@
     details summary{
       background:lightblue;
       cursor:pointer;
+      outline:none;
+      user-select:none;
     }
   </style>
-
-  <!--vue-->
-  <script src="frontend/vue/vue-dev.js"></script>
+  <!--vue--><script src="frontend/vue/vue-dev.js"></script>
 
   <!--backend-->
   <script>
@@ -36,6 +34,12 @@
           Untreated:{
             wwu_vol_coll:0, //volume of untreated wastewater (from collectors)
             wwu_vol_unco:0, //volume of untreated wastewater (from uncollected)
+
+            //untreated wastewater discharge
+            wwu_vol_disc:0,
+            wwu_vol_disc_fsh:0,
+            wwu_vol_disc_agr:0,
+            wwu_vol_disc_ldi:0,
           },
 
           //Treatment plant
@@ -43,201 +47,253 @@
             wwt_vol_coll:0, //volume of collected wastewater
             wwt_vol_conv:0, //volume of collected wastewater conveyed to treatment
             wwt_vol_trea:0, //volume of treated wastewater
-            wwt_vol_disc:0, //volume of treated wastewater discharged
             wwt_slu_gene:0, //total sludge generated
+
+            //treated wastewater discharged
+            wwt_vol_disc:0,
+            wwt_vol_disc_fsh:0,
+            wwt_vol_disc_agr:0,
+            wwt_vol_disc_ldi:0,
           },
 
           //Onsite sanitation
-          Onsite_treatment:{
+          Onsite_sanitation:{
             wwo_vol_unco:0, //volume of uncollected wastewater
             wwo_vol_conv:0, //volume of uncollected wastewater conveyed to onsite sanitation
             wwo_vol_trea:0, //volume of treated wastewater
-            wwo_vol_disc:0, //volume of treated wastewater discharged
             wwo_slu_gene:0, //total sludge generated
+
+            //treated wastewater discharged
+            wwo_vol_disc:0,
+            wwo_vol_disc_fsh:0,
+            wwo_vol_disc_agr:0,
+            wwo_vol_disc_ldi:0,
           },
         };
 
-        this.Discharge={
-          dis_vol_recv:0,
-          dis_sent_to_agr:0,
-          dis_sent_to_fsh:0,
-          dis_sent_to_ldi:0,
-        };
+        //Sludge management
         this.Sludge={
-          slu_total_recv:0,
-          slu_sent_to_laf:0,
-          slu_sent_to_inc:0,
-          slu_sent_to_com:0,
-          slu_sent_to_lap:0,
+          sm_total_recv:0,
+
+          Storage:{
+            sms_slu_stor:0,
+            sms_sto_time:0,
+          },
+          Transport:{
+            smt_fuel_typ:0,
+            smt_vol_fuel:0,
+          },
+          Disposal:{
+            smd_sent_to_laf:0,
+            smd_sent_to_inc:0,
+            smd_sent_to_com:0,
+            smd_sent_to_lap:0,
+          },
         };
       }
 
       /*ESTIMATIONS*/
       Days(){return 1} //assessment period
-      //Wastewater (generic)
-      //200L per person per day (in m3)
       ww_vol_gene(){return 0.2*this.Waste.ww_resi_pop*this.Days()}
-      //Wastewater/Untreated
-      //Wastewater/Treatment_plant
-      //Wastewater/Onsite_treatment
-      //Wastewater/Collected
     };
 
     let Info={
-      ww_resi_pop:  "Resident population",
-      ww_vol_gene:  "Volume of generated  wastewater (m3)",
+      ww_resi_pop:"Resident population",
+      ww_vol_gene:"Volume of generated wastewater (m3)",
 
       //Untreated
-      wwu_vol_coll: "Volume of untreated wastewater from colleted wastewater (m3)",
-      wwu_vol_unco: "Volume of untreated wastewater from uncollected wastewater (m3)",
+      wwu_vol_coll:"Volume of untreated wastewater from collected wastewater (m3)",
+      wwu_vol_unco:"Volume of untreated wastewater from uncollected wastewater (m3)",
+      wwu_vol_disc:"Volume of untreated wastewater discharged (m3)",
+      wwu_vol_disc_fsh:"Volume of untreated wastewater discharged sent to freshwater (m3)",
+      wwu_vol_disc_agr:"Volume of untreated wastewater discharged sent to agricultural soils (m3)",
+      wwu_vol_disc_ldi:"Volume of untreated wastewater discharged sent to land disposal of wastewater (m3)",
 
       //Treatment plant
       wwt_vol_coll:"Volume of collected wastewater (m3)",
       wwt_vol_conv:"Volume of collected wastewater conveyed to treatment (m3)",
       wwt_vol_trea:"Volume of treated wastewater (m3)",
-      wwt_vol_disc:"Volume of treated wastewater discharged (m3)",
       wwt_slu_gene:"Total dry sludge generated (kg)",
+
+      wwt_vol_disc:"Volume of treated wastewater discharged (m3)",
+      wwt_vol_disc_fsh:"Volume of treated wastewater discharged sent to freshwater (m3)",
+      wwt_vol_disc_agr:"Volume of treated wastewater discharged sent to agricultural soils (m3)",
+      wwt_vol_disc_ldi:"Volume of treated wastewater discharged sent to land disposal of wastewater (m3)",
 
       //Onsite treatment
       wwo_vol_unco:"Volume of uncollected wastewater (m3)",
-      wwo_vol_conv:"Volume of uncollected wastewater conveyed to onsite treatment (m3)",
+      wwo_vol_conv:"Volume of uncollected wastewater conveyed to onsite sanitation (m3)",
       wwo_vol_trea:"Volume of treated wastewater (m3)",
-      wwo_vol_disc:"Volume of treated wastewater discharged (m3)",
       wwo_slu_gene:"Total dry sludge generated (kg)",
 
-      //Collected
-      wwc_vol_coll: "Volume of collected  wastewater (m3)",
-      wwc_vol_untr: "Volume of untreated collected wastewater (m3)",
-      wwc_vol_conv: "Volume of collected wastewater conveyed to treatment (m3)",
-
-      //Uncollected
-
-      wwdt_vol_trea:"Volume of treated wastewater (m3)",
-      wwdt_vol_disc:"Volume of treated wastewater discharged (m3)",
-      wwdt_slu_gene:"Total dry sludge generated (kg)",
-
-      //Discharge
-      dis_vol_recv:"Total wastewater discharged (treated + untreated) (m3)",
-      dis_sent_to_agr:"Discharged water sent to agricultural soils (m3)",
-      dis_sent_to_fsh:"Discharged water sent to freshwater, estuarine, marine environments (m3)",
-      dis_sent_to_ldi:"Discharged water sent to land disposal of wastewater (m3)",
+      wwo_vol_disc:"Volume of treated wastewater discharged (m3)",
+      wwo_vol_disc_fsh:"Volume of treated wastewater discharged sent to freshwater (m3)",
+      wwo_vol_disc_agr:"Volume of treated wastewater discharged sent to agricultural soils (m3)",
+      wwo_vol_disc_ldi:"Volume of treated wastewater discharged sent to land disposal of wastewater (m3)",
 
       //Sludge
-      slu_total_recv:"Total dry sludge (from centralised and decentralised treatment) (kg)",
-      slu_sent_to_laf:"Sludge sent to landfilling",
-      slu_sent_to_inc:"Sludge sent to incineration",
-      slu_sent_to_com:"Sludge sent to composting",
-      slu_sent_to_lap:"Sludge sent to land application",
+      sm_total_recv:"Total dry sludge (from plants and onsite sanitation) (kg)",
+      smd_sent_to_laf:"Sludge sent to landfilling",
+      smd_sent_to_inc:"Sludge sent to incineration",
+      smd_sent_to_com:"Sludge sent to composting",
+      smd_sent_to_lap:"Sludge sent to land application",
     };
   </script>
 </head><body>
 
 <h1>ecam v3 - ipcc 2019 stages rework</h1>
 
-<div id=app>
-  <!--main container-->
-  <div>
-    <!--diagram-->
-    <div style="margin-bottom:10px">
-      <details open style="border:1px solid #ccc">
-        <summary><b>Diagram</b></summary>
-        <div>
-          <img src="frontend/diagram/map.gv.png" style="width:100%">
-        </div>
-      </details>
+<!--diagram-->
+<div style="margin-bottom:10px">
+  <details open style="border:1px solid #ccc">
+    <summary><b>Diagram</b></summary>
+    <div>
+      <img src="frontend/diagram/map.dot.svg" style="display:block;width:100%">
     </div>
-
-    <!--stages-->
-    <div style="font-size:large;margin:1em 0">
-      <div>
-        Inputs
-        <button onclick="document.querySelectorAll('#stages details').forEach(el=>el.setAttribute('open',''))">open all stages</button>
-        <button onclick="document.querySelectorAll('#stages details').forEach(el=>el.removeAttribute('open'))">collapse all stages</button>
-      </div>
-    </div>
-    <div id=stages>
-      <stage :scenario="scenario" :stage="scenario.Waste"                    :name="'Wastewater'">                            </stage>
-      <stage :scenario="scenario" :stage="scenario.Waste.Untreated"          :name="'Wastewater / Untreated'">                </stage>
-      <stage :scenario="scenario" :stage="scenario.Waste.Treatment_plant"    :name="'Wastewater / Treatment plant'">          </stage>
-      <stage :scenario="scenario" :stage="scenario.Waste.Onsite_treatment"   :name="'Wastewater / Decentralised treatment'">  </stage>
-      <stage :scenario="scenario" :stage="scenario.Discharge"                :name="'Discharge'">                             </stage>
-      <stage :scenario="scenario" :stage="scenario.Sludge"                   :name="'Sludge management'">                     </stage>
-    </div>
-  </div>
+  </details>
 </div>
 
-<script>
-  Vue.component('stage',{
-    props:[
-      'stage',
-      'scenario',
-      'name',
-    ],
-    data:function(){
-      return {
-        Info,
-      };
-    },
-    methods:{
-      has_estimation(key){
-        return Object.getOwnPropertyNames(Scenario.prototype).indexOf(key)>-1;
+<!--new structure proposed-->
+<div style="margin-bottom:10px">
+  <details open>
+    <summary><b>New structure proposed to make ecam v3 ipcc 2019 compliant</b></summary>
+    <div id=new_structure>
+      <table border=1 cellpadding="10">
+        <tr>
+          <th v-for="l1 in Object.keys(structure)" :colspan="structure[l1].length">
+            {{l1}}
+          </th>
+        </tr>
+        <tr>
+          <td v-for="l2 in all_stages()">{{l2}}</td>
+        </tr>
+      </table>
+    </div>
+  </details>
+  <script>
+    let new_structure=new Vue({
+      el:"#new_structure",
+      data:{
+        structure:{
+          Water_supply:['Abstraction','Treatment','Distribution'],
+          Wastewater:['Untreated','Treatment_plant','Onsite sanitation'],
+          Sludge_management:['Storage','Transport','Disposal'],
+        },
       },
-      get_inputs(){
-        return Object.keys(this.stage).filter(key=>{
-          return typeof(this.stage[key])!='object';
-        });
+      methods:{
+        all_stages(){
+          let str=this.structure;
+          return Object.keys(str).map(l1=>str[l1]).reduce((p,c)=>p.concat(c),[])
+        }
       },
-    },
-    template:`
-      <div>
-        <details v-if="scenario && stage && name" style="margin-bottom:10px">
-          <summary><b>{{name}}</b></summary>
+    });
+  </script>
+</div>
+
+<div style="margin-bottom:10px">
+  <div id=app>
+    <!--main container-->
+    <details open>
+      <summary><b>Stages (inputs only) (~demo)</b></summary>
+      <div style="padding-left:10px">
+        <!--stages-->
+        <div style="font-size:large;margin:1em 0">
           <div>
-            <table border=1>
-              <tr v-for="key in get_inputs()">
-                <td>
-                  <div>
-                    <code style="background:#ccc">{{key}}</code>
-                  </div>
-                </td>
-                <td>
-                  <div>
-                    {{Info[key]}}
-                  </div>
-                </td>
-                <td>
-                  <input type=number v-model.number="stage[key]">
-                </td>
-                <td>
-                  <div v-if="has_estimation(key)">
-                    <button @click="stage[key]=scenario[key]()">
-                      estimation: {{scenario[key]()}}
-                    </button>
-                  </div>
-                  <div v-else>
-                    <small>~no estimation</small>
-                  </div>
-                </td>
-              </tr>
-            </table>
+            <button onclick="document.querySelectorAll('#stages details').forEach(el=>el.setAttribute('open',''))">open all stages</button>
+            <button onclick="document.querySelectorAll('#stages details').forEach(el=>el.removeAttribute('open'))">collapse all stages</button>
           </div>
-        </details>
-        <div v-if="!scenario">no scenario</div>
-        <div v-if="!stage">no stage</div>
-        <div v-if="!name">no name</div>
+        </div>
+        <div id=stages>
+          <!--Wastewater-->
+          <stage :scenario="scenario" :stage="scenario.Waste" :name="'Wastewater'" :level2="['Untreated','Treatment_plant','Onsite_sanitation']"></stage>
+          <!--Sludge-->
+          <stage :scenario="scenario" :stage="scenario.Sludge" :name="'Sludge management'" :level2="['Storage','Transport','Disposal']"></stage>
+        </div>
       </div>
-    `,
-  });
-  let app=new Vue({
-    el:"#app",
-    data:{
-      scenario:new Scenario(),
-      Info,
-    },
-    methods:{
-    },
-    mounted(){
-      document.querySelectorAll('#stages details').forEach(el=>el.setAttribute('open',''));
-    },
-  });
-</script>
+    </details>
+  </div>
+  <script>
+    Vue.component('stage',{
+      props:[
+        'stage',
+        'scenario',
+        'name',
+        'level2',
+      ],
+      data:function(){
+        return {
+          Info,
+        };
+      },
+      methods:{
+        has_estimation(key){
+          return Object.getOwnPropertyNames(Scenario.prototype).indexOf(key)>-1;
+        },
+        get_inputs(){
+          return Object.keys(this.stage).filter(key=>{
+            return typeof(this.stage[key])!='object';
+          });
+        },
+      },
+      template:`
+        <div>
+          <details v-if="scenario && stage && name" style="margin-bottom:10px">
+            <summary><b>{{name}}</b></summary>
+            <div>
+              <table border=1>
+                <tr v-for="key in get_inputs()">
+                  <td>
+                    <div>
+                      <code style="background:#ccc">{{key}}</code>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      {{Info[key]}}
+                    </div>
+                  </td>
+                  <td>
+                    <div v-if="has_estimation(key)">
+                      <button @click="stage[key]=scenario[key]()">
+                        estimation: {{scenario[key]()}}
+                      </button>
+                    </div>
+                    <div v-else>
+                      <small>~no estimation</small>
+                    </div>
+                  </td>
+                  <td>
+                    <input type=number v-model.number="stage[key]">
+                  </td>
+                </tr>
+              </table>
+
+              <!--level 2-->
+              <div v-if="level2" style="padding-left:10px;margin-top:10px">
+                <div v-for="l2 in level2">
+                  <stage :scenario="scenario" :stage="stage[l2]" :name="name+' / '+l2"></stage>
+                </div>
+              </div>
+            </div>
+          </details>
+          <div v-if="!scenario">no scenario</div>
+          <div v-if="!stage">no stage</div>
+          <div v-if="!name">no name</div>
+        </div>
+      `,
+    });
+    let app=new Vue({
+      el:"#app",
+      data:{
+        scenario:new Scenario(),
+        Info,
+      },
+      methods:{
+      },
+      mounted(){
+        //open all stages
+        //document.querySelectorAll('#stages details').forEach(el=>el.setAttribute('open',''));
+      },
+    });
+  </script>
+</div>

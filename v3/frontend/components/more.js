@@ -82,7 +82,7 @@ let more = new Vue({
       <!--diagram of stages rework for v3-->
       <div>
         <img
-          src="frontend/diagram/map.gv.png"
+          src="frontend/diagram/map.dot.svg"
           style="display:block;margin:auto;width:80%;border:1px solid #ccc"
         >
       </div>

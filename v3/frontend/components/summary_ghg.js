@@ -91,9 +91,7 @@ let summary_ghg = new Vue({
     <div id=summary_ghg v-if="visible && Languages.ready">
       <summaries current_view=summary_ghg></summaries>
 
-      <div>
-        Values / Charts selector here
-      </div>
+      <div style="padding:1em"> Values / Charts selector here </div>
 
       <!--title-->
       <div style="

@@ -1,2 +1,2 @@
 default:
-	dot -Tpng map.gv > map.gv.png
+	dot -Tsvg map.dot > map.dot.svg
