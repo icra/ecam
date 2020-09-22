@@ -1,5 +1,5 @@
 digraph MyGraph {
-  rankdir=LR
+  rankdir="LR";
 
   wsa [label="Abstraction"]
   wst [label="Treatment"]
@@ -8,22 +8,20 @@ digraph MyGraph {
   ww  [label="Wastewater"]
   unc [label="Uncollected"]
   col [label="Collected"]
-  unt [label="Untreated wastewater"]
-  wwt [label="Wastewater treatment plant"]
-  ons [label="Onsite sanitation"]
-
+  unt [label="Untreated Wastewater"]
+  wwt [label="Treatment Plant"]
+  ons [label="Onsite Sanitation"]
   dis [label="Discharge"]
-  riv [label="Freshwater, estuarine,\nmarine environments, agricultural soils"]
-  reu [label="Reuse/Nutrient recovery"]
-
-  slu [label="Dry sludge"]
+  riv [label="Freshwater, estuarine,\nmarine environments"]
+  reu [label="Reuse/recovery (agriculture, soils)"]
+  slu [label="Dry Sludge"]
   inc [label="Incineration"]
   laf [label="Landfilling"]
-  lap [label="Land application"]
+  lap [label="Land Application"]
   com [label="Composting"]
 
   subgraph cluster_ws {
-    label="Water supply"
+    label="Water Supply"
     wsa -> wst -> wsd [color="blue"]
   }
 
@@ -47,8 +45,27 @@ digraph MyGraph {
   }
 
   subgraph cluster_sm{
-    label="Sludge management"
+    label="Sludge Management"
     {ons wwt} -> slu               [color="brown"]
     slu       -> {inc laf lap com} [color="brown"]
   }
+
+  subgraph cluster_legend {
+    rankdi="LR"
+    label="Legend"
+    legend_a[label="",shape="none"]
+    legend_b[label="",shape="none"]
+    legend_c[label="",shape="none"]
+    legend_d[label="",shape="none"]
+    legend_e[label="",shape="none"]
+    legend_f[label="",shape="none"]
+    legend_g[label="",shape="none"]
+    legend_h[label="",shape="none"]
+    legend_a -> legend_b [color="blue",       label="water"]
+    legend_c -> legend_d [color="brown",      label="sludge"]
+    legend_e -> legend_f [color="blue:brown", label="wastewater"]
+    legend_g -> legend_h [color="grey",       label="ghg emission"]
+  }
+
+  {unt wwt ons riv reu inc laf lap com} -> Atmosphere [color="grey"]
 }

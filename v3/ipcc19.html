@@ -160,12 +160,30 @@
     <div id=new_structure>
       <table border=1 cellpadding="10">
         <tr>
-          <th v-for="l1 in Object.keys(structure)" :colspan="structure[l1].length">
-            {{l1}}
+          <th v-for="l1 in structure.filter(s=>!s.sublevel)" :colspan="3">
+            <img :src="l1.icon" style="width:50px">
+            <div>{{l1.level}}</div>
           </th>
         </tr>
         <tr>
-          <td v-for="l2 in all_stages()">{{l2}}</td>
+          <td v-for="l2 in structure.filter(s=>s.sublevel)" style="text-align:center">
+            <img :src="l2.icon" style="width:100px">
+            <div>{{l2.sublevel}}</div>
+          </td>
+        </tr>
+        <tr>
+          <td v-for="l2 in structure.filter(s=>s.sublevel)" style="text-align:center">
+            <div v-if="l2.discharge">
+              Discharge
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td v-for="l2 in structure.filter(s=>s.sublevel)" style="text-align:center">
+            <div v-if="l2.sludge">
+              Sludge
+            </div>
+          </td>
         </tr>
       </table>
     </div>
@@ -174,17 +192,20 @@
     let new_structure=new Vue({
       el:"#new_structure",
       data:{
-        structure:{
-          Water_supply:['Abstraction','Treatment','Distribution'],
-          Wastewater:['Untreated','Treatment_plant','Onsite sanitation'],
-          Sludge_management:['Storage','Transport','Disposal'],
-        },
-      },
-      methods:{
-        all_stages(){
-          let str=this.structure;
-          return Object.keys(str).map(l1=>str[l1]).reduce((p,c)=>p.concat(c),[])
-        }
+        structure:[
+          {prefix:'ws', alias:'water',    level:'Water', sublevel:false,          icon:"frontend/img/water.png",    color:'#58c1db'      },
+          {prefix:'ww', alias:'waste',    level:'Waste', sublevel:false,          icon:"frontend/img/waste.png",    color:'#ed6d57'      },
+          {prefix:'wsa',alias:'waterAbs', level:'Water', sublevel:'Abstraction',  icon:"frontend/img/waterAbs.svg", discharge:0, sludge:0},
+          {prefix:'wst',alias:'waterTre', level:'Water', sublevel:'Treatment',    icon:"frontend/img/waterTre.svg", discharge:0, sludge:1},
+          {prefix:'wsd',alias:'waterDis', level:'Water', sublevel:'Distribution', icon:"frontend/img/waterDis.svg", discharge:0, sludge:0},
+          {prefix:'wwu',alias:'wasteUnt', level:'Waste', sublevel:'Untreated',    icon:"frontend/img/wasteUnt.png", discharge:1, sludge:0},
+          {prefix:'wwt',alias:'wasteTre', level:'Waste', sublevel:'Treatment 1',  icon:"frontend/img/wasteTre.svg", discharge:1, sludge:1},
+          {prefix:'wwo',alias:'wasteOns', level:'Waste', sublevel:'Onsite',       icon:"frontend/img/faeclCon.svg", discharge:1, sludge:1},
+          //{prefix:'sm', alias:'sludge',   level:'Sludge management',sublevel:false,                    icon:"frontend/img/faecl.png", color:'#95c11f'},
+          //{prefix:'sms',alias:'sludgeSto',level:'Sludge management',sublevel:'Water supply treatment', icon:"frontend/img/faeclTre.svg",             },
+          //{prefix:'smt',alias:'sludgeTra',level:'Sludge management',sublevel:'Wastewater treatment ',  icon:"frontend/img/faeclTre.svg",             },
+          //{prefix:'smd',alias:'sludgeDis',level:'Sludge management',sublevel:'Onsite sanitation',      icon:"frontend/img/faeclTre.svg",             },
+        ],
       },
     });
   </script>
