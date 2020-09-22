@@ -10,7 +10,9 @@
   stages_menu.visible = 0;
 
   //default page to show
-  ecam.show('summary_ghg');
+  tier_b.level="Waste";
+  tier_b.sublevel="Transport";
+  ecam.show('tier_b');
 
 /* BACKEND */
 
@@ -20,7 +22,7 @@
   });
 
   //yes to all yes/no questions
-  //Object.keys(Questions).forEach(key=>{Global.Configuration.Questions[key] = 1;});
+  Object.keys(Questions).forEach(key=>{Global.Configuration.Questions[key] = 1;});
 
   //general variables
   Global.General.conv_kwh_co2 = 0.7; //conversion factor for grid electricity (kgCO2/kWh)
@@ -35,11 +37,13 @@
   Global.Water.Distribution.wsd_serv_pop =  900; //serviced population
 
   //Wastewater
-  Global.Waste.ww_resi_pop               = 2000; //resident population
-  Global.Waste.Collection.wwc_conn_pop   = 1900; //connected population
-  Global.Waste.Treatment.wwt_serv_pop    = 1800; //serviced population
-  Global.Waste.Treatment.wwt_bod_infl    =  100; //kg
+  Global.Waste.ww_resi_pop =   2000; //resident population
+  Global.Waste.ww_vol_gene = 150000; //wastewater generated
 
-  //Faecal Sludge Management
-  Global.Faecl.fs_resi_pop               =  100; //resident population
-  Global.Faecl.Containment.fsc_onsi_pop  =   90; //people with onsite containment
+  Global.Waste.Transport.wwc_conn_pop     = 1900; //connected population
+  Global.Waste.Transport.fsc_onsi_pop     =   90; //people with onsite containment
+  Global.Waste.Transport.wwc_vol_coll_tre =  1e5; //volume of ww conveyed to treatment plant
+  Global.Waste.Transport.wwc_vol_unco_ons =  1e4; //volume of ww conveyed to onsite treatment
+
+  Global.Waste.Treatment.wwt_serv_pop  = 1800; //serviced population
+  Global.Waste.Treatment.wwt_bod_infl  =  100; //kg

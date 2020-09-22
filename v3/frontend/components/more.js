@@ -42,9 +42,20 @@ let more = new Vue({
 
   template:`
     <div id=more v-if="visible && Languages.ready">
-      <p style="text-align:center">
+      <h3 style="text-align:center">
         Placeholder for ecam v3 development
-      </p>
+      </h3>
+
+      <!--diagram of stages rework for v3-->
+      <div style=text-align:center>
+        <b>
+          Stages' rework diagram for making ecam v3 ipcc 2019 compliant
+        </b>
+        <img
+          src="frontend/diagram/map.dot.svg"
+          style="display:block;margin:auto;width:100%;border:1px solid #ccc"
+        >
+      </div>
 
       <!--open save buttons-->
       <div class=tab_buttons>
@@ -78,14 +89,6 @@ let more = new Vue({
           </ul>
         </li>
       </ul>
-
-      <!--diagram of stages rework for v3-->
-      <div>
-        <img
-          src="frontend/diagram/map.dot.svg"
-          style="display:block;margin:auto;width:80%;border:1px solid #ccc"
-        >
-      </div>
     </div>
   `,
 });

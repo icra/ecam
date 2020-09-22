@@ -214,3 +214,9 @@ function get_variable_type(code){
 
   return false;
 }
+
+//detect if the string "code" is inside any filter
+function is_code_in_any_filter(code){
+  if(Questions.is_inside(code)) return true;
+  return Object.values(Filters).reduce((p,c)=>c.concat(p),[]).indexOf(code)>-1;
+}

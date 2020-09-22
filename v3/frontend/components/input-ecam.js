@@ -63,6 +63,11 @@ Vue.component('input_ecam',{
             </option>
           </select>
         </div>
+
+        <!--indicator of "variable not filtered"-->
+        <div v-if="!is_code_in_any_filter(code)">
+          <code style=background:yellow>[warning:no-filter]</code>
+        </div>
       </td>
 
       <!--input value: numbers and dropdowns-->
@@ -100,12 +105,13 @@ Vue.component('input_ecam',{
 
       <!--unit-->
       <td :style="{background:'var(--color-level-'+level+'-secondary)'}">
-        <div v-if="Info[code]">
+        <div v-if="Info[code]"
+          style="text-align:left;padding-left:5px;"
+        >
           <div v-if="Info[code].magnitude=='Currency'">
             <span v-html="Global.General.Currency"></span>
           </div>
-          <div v-else-if="Info[code].magnitude!='Option'"
-            style="text-align:left;padding-left:5px;line-height:3em">
+          <div v-else-if="Info[code].magnitude!='Option'">
             <!--select unit-->
             <select
               v-if="Units[Info[code].magnitude]"
@@ -122,6 +128,7 @@ Vue.component('input_ecam',{
             </div>
           </div>
         </div>
+        <div v-else>no unit</div>
       </td>
     </tr>
   `,
@@ -145,6 +152,7 @@ Vue.component('input_ecam',{
       Exceptions,
       Formulas,
       Questions,
+      Filters,
     };
   },
 
@@ -152,6 +160,7 @@ Vue.component('input_ecam',{
     translate,
     format,
     get_current_unit,
+    is_code_in_any_filter,
 
     focus_input(stage, key, event){
       let input = event.target;
@@ -167,6 +176,7 @@ Vue.component('input_ecam',{
       stage[key] = value*Units.multiplier(key);
       input.value=format(stage[key]/Units.multiplier(key));
     },
+
 
     /*UNITS*/
     /*select unit for a specific variable and save it to configuration*/

@@ -927,7 +927,6 @@ Questions.get_questions=function(ubication) {
 
   for(let question in this) {
     if(typeof(this[question])=="function")continue;
-
     //check all codes inside ubication
     for(let i in this[question].variables){
       let code=this[question].variables[i];

@@ -3,9 +3,18 @@ let tier_b=new Vue({
   data:{
     visible:false,
     level:'Water',
-    sublevel:'Abstraction',
+    sublevel:false,
     caption, //vue object
     variable, //vue object
+
+    //FILTERS
+    Filters,//definition (list of variables for each filter)
+    filters_on:false,
+    filters_active:{
+      "Population":true,
+      "Water volumes":true,
+    }, //on/off
+
     Global,
     Info,
     Structure,
@@ -24,6 +33,7 @@ let tier_b=new Vue({
     translate,
     format,
     get_level_color,
+    is_code_in_any_filter,
 
     set_question(question, new_value){
       //set new question answer
@@ -58,6 +68,18 @@ let tier_b=new Vue({
         this.Global.Configuration.FoldedQuestions.splice(index,1);
       }
     },
+
+    is_variable_visible(code){
+      if(!this.filters_on) return true;
+      let filters = Object.keys(this.Filters);
+      for(let i=0;i<filters.length;i++){
+        let key=filters[i];
+        if(this.filters_active[key] && this.Filters[key].indexOf(code)>-1){
+          return true;
+        }
+      }
+      return false;
+    },
   },
 
   template:`
@@ -68,15 +90,12 @@ let tier_b=new Vue({
         <h1 style="font-size:x-large;color:white">
           <a onclick="ecam.show('configuration')">{{Global.General.Name}}</a>
           <span>&rsaquo;</span>
-
           <span v-if="sublevel">
             <a onclick="go_to(tier_b.level)">{{translate(level)}}</a>
           </span>
           <span v-else>
             <b style="color:black">{{translate(level)}}</b>
           </span>
-
-
           <span v-if="sublevel">
             <span>
               <span>&rsaquo;</span>
@@ -112,11 +131,6 @@ let tier_b=new Vue({
                   {{format(Global.Waste.ww_resi_pop)}}
                 </span>
               </span>
-              <span v-if="level=='Faecl'">
-                <span :class="Global.Faecl.fs_resi_pop<=0 ? 'warning' : ''">
-                  {{format(Global.Faecl.fs_resi_pop)}}
-                </span>
-              </span>
             </a>
           </div>
 
@@ -124,8 +138,8 @@ let tier_b=new Vue({
           <div v-if="level=='Waste'">
             <a onclick="ecam.show('population')">
               <b>{{translate('wwc_conn_pop_descr')}}:</b>
-              <span :class="Global.wwc.wwc_conn_pop<=0 ? 'warning' : ''">
-                {{format(Global.wwc.wwc_conn_pop)}}
+              <span :class="Global.Waste.Transport.wwc_conn_pop<=0 ? 'warning' : ''">
+                {{format(Global.Waste.Transport.wwc_conn_pop)}}
               </span>
             </a>
           </div>
@@ -143,16 +157,8 @@ let tier_b=new Vue({
             <div v-if="level=='Waste'">
               <a onclick="ecam.show('population')">
                 <b>{{translate('wwt_serv_pop_descr')}}:</b>
-                <span :class="Global.wwt.wwt_serv_pop<=0 ? 'warning' : ''">
-                  {{format(Global.wwt.wwt_serv_pop)}}
-                </span>
-              </a>
-            </div>
-            <div v-if="level=='Faecl'">
-              <a onclick="ecam.show('population')">
-                <b>{{translate('fsc_onsi_pop_descr')}}:</b>
-                <span :class="Global.Faecl.Containment.fsc_onsi_pop<=0 ? 'warning' : ''">
-                  {{format(Global.Faecl.Containment.fsc_onsi_pop)}}
+                <span :class="Global.Waste.Treatment.wwt_serv_pop<=0 ? 'warning' : ''">
+                  {{format(Global.Waste.Treatment.wwt_serv_pop)}}
                 </span>
               </a>
             </div>
@@ -173,12 +179,19 @@ let tier_b=new Vue({
 
       <!--category tags-->
       <div id=category_tags>
-        <div>View</div>
-        <div>&rarr;</div>
-        <div><label><input type=checkbox checked=true> Indirect emissions</label></div>
-        <div><label><input type=checkbox checked=true> Direct emissions  </label></div>
-        <div><label><input type=checkbox checked=true> Energy performance</label></div>
-        <div>(to be implemented)</div>
+        <div>
+          <label>
+            <input type=checkbox v-model="filters_on">
+            <b><code>Filters ({{filters_on?'ON':'OFF'}})</code></b>
+          </label>
+        </div>
+        <div v-if="filters_on">&rarr;</div>
+        <div v-if="filters_on" v-for="key in Object.keys(Filters)" class=filter>
+          <label>
+            <input type=checkbox v-model="filters_active[key]">
+            {{key}}
+          </label>
+        </div>
       </div>
 
       <!--tier b inputs and outputs-->
@@ -228,7 +241,7 @@ let tier_b=new Vue({
             <!--tier b inputs-->
             <tbody
               v-for="key in Object.keys(get_current_stage()).filter(key=>{return Questions.is_inside(key)==false})"
-              v-if="typeof(get_current_stage()[key])=='number'"
+              v-if="is_variable_visible(key) && typeof(get_current_stage()[key])=='number'"
             >
               <input_ecam
                 :code="key"
@@ -238,7 +251,10 @@ let tier_b=new Vue({
             </tbody>
 
             <!--tier b questions-->
-            <tbody v-for="question in Questions.get_questions(get_current_stage())">
+            <tbody
+              v-for="question in Questions.get_questions(get_current_stage())"
+              v-if="is_variable_visible(question)"
+            >
               <tr
                 :style="{
                   color:'white',
@@ -279,6 +295,11 @@ let tier_b=new Vue({
                         <span v-if="Global.Configuration.Questions[question]" v-html="translate('yes')"></span>
                         <span v-else v-html="translate('no')"></span>
                       </label>
+                      
+                      <!--indicator of "variable not filtered"-->
+                      <span v-if="!is_code_in_any_filter(question)" style="float:right">
+                        <code style="background:yellow;color:black">[warning:no-filter: {{question}}]</code>
+                      </span>
                     </div>
                   </div>
                 </td>
@@ -542,9 +563,13 @@ let tier_b=new Vue({
         border-bottom:1px solid #ccc;
       }
       #tier_b #category_tags div {
-        margin:0.5em 1em 0 1em;
+        padding:10px 5px;
         border-bottom: 4px solid transparent;
-        box-sizing: border-box;
+        box-sizing:border-box;
+      }
+      #tier_b #category_tags > div.filter:hover {
+        background:var(--color-level-generic);
+        color:white;
       }
     </style>
   `,

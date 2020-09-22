@@ -8,9 +8,18 @@
 
 let Info={
   //IPCC 2019
+  wwc_vol_coll    :{magnitude:"Volume",unit:"m3"},
+  wwc_vol_coll_unt:{magnitude:"Volume",unit:"m3"},
+  wwc_vol_coll_tre:{magnitude:"Volume",unit:"m3"},
+  wwc_vol_unco    :{magnitude:"Volume",unit:"m3"},
+  wwc_vol_unco_unt:{magnitude:"Volume",unit:"m3"},
+  wwc_vol_unco_ons:{magnitude:"Volume",unit:"m3"},
+
+  ww_vol_gene:{magnitude:"Volume",unit:"m3"},
   wwt_n2o_efac:{magnitude:"Mass/People/Time", unit:"gN2O/person/year"},
   fst_n2o_efac:{magnitude:"Mass/People/Time", unit:"gN2O/person/year"},
 
+  //bug fixes
   ww_sludge_disposal_method:{magnitude:"Option",unit:"disposal method"},
   fs_serv_pop:{magnitude:"People",unit:"people"},
 

@@ -35,45 +35,46 @@ let stages_menu  = new Vue({
     <!--linear menu COMPONENT-->
     <div id=stages_menu v-if="visible && Languages.ready">
       <div>
-        <div style="font-size:large;">
+        <div style="font-size:large;text-align:center">
           Stages of the Urban Water Cycle
         </div>
-        <div class=flex>
-          <div v-for="l1 in Structure.filter(s=>!s.sublevel)">
-            <div class="flex">
-              <!--level-->
+        <table border=1 style="margin:auto">
+          <!--level 1 and level2-->
+          <tr>
+            <td v-for="s in Structure">
+              <div style="text-align:center">{{translate(s.sublevel?s.sublevel:s.level)}}</div>
               <div style="text-align:center">
                 <img
-                  @click="go_to(l1.level)"
-                  @mousemove="caption.show($event, translate(l1.level))"
+                  @click="go_to(s.level,s.sublevel)"
+                  @mousemove="caption.show($event, translate(s.sublevel?s.sublevel:s.level))"
                   @mouseout="caption.hide()"
-                  :src="'frontend/img/'+(l1.alias)+(Global.Configuration.ActiveStages[l1.alias]?'':'-off')+'.png'"
-                  :class="'l1 '+(is_tier_b_selected(l1.level, false)?'selected':'')"
-                  :stage="l1.alias"
+                  :src="'frontend/img/'+s.icon"
+                  :class="'s '+(is_tier_b_selected(s.level, s.sublevel)?'selected':'')"
+                  :stage="s.alias"
                 >
                 <div style="font-size:smaller">
-                  <span v-html="format(Global[l1.prefix+'_KPI_GHG']())"></span>
+                  <span v-html="format(Global[s.prefix+'_KPI_GHG']())"></span>
                 </div>
               </div>
-              <!--sublevels-->
-              <div v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))">
-                <img
-                  @click="go_to(l2.level,l2.sublevel)"
-                  :class="'l2 '+(is_tier_b_selected(l2.level,l2.sublevel)?'selected':'')"
-                  :stage="l2.alias"
-                  @mousemove="caption.show($event, translate(l2.sublevel))"
-                  @mouseout="caption.hide()"
-                  :src="'frontend/img/'+(l2.alias)+(Global.Configuration.ActiveStages[l2.alias]?'':'-off')+'.svg'"
-                >
-                <div style=text-align:center>
-                  <small
-                    v-html="format(Global[l2.prefix+'_KPI_GHG']())"
-                  ></small>
-                </div>
+            </td>
+          </tr>
+          <!--discharge-->
+          <tr>
+            <td v-for="l2 in Structure">
+              <div v-if="l2.discharge" style=text-align:center>
+                Discharge
               </div>
-            </div>
-          </div>
-        </div>
+            </td>
+          </tr>
+          <!--sludge-->
+          <tr>
+            <td v-for="l2 in Structure">
+              <div v-if="l2.sludge" style=text-align:center>
+                Sludge
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   `,

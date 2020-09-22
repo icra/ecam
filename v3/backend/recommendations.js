@@ -1,23 +1,23 @@
 /* estimations: inputs with equations */
 let Recommendations={
-  /*FSM*/
-    /*fsc*/
+  /*FSM
+    //fsc
       //influent BOD
       fsc_bod_infl(){
-        return Global.General.bod_pday_fs/1000*Global.Faecl.Containment.fsc_onsi_pop*Global.Days();
+        return Global.General.bod_pday_fs/1000*Global.Waste.Transport.fsc_onsi_pop*Global.Days();
       },
       //sludge emptied
-      fsc_fslu_emp(){ return Cts.ct_fs_prod.value*Global.Faecl.Containment.fsc_onsi_pop*Global.Days()/Global.Faecl.Containment.fsc_fdensity*Global.Faecl.Containment.fsc_cont_emp/100; },
+      fsc_fslu_emp(){ return Cts.ct_fs_prod.value*Global.Waste.Transport.fsc_onsi_pop*Global.Days()/Global.Waste.Transport.fsc_fdensity*Global.Faecl.Containment.fsc_cont_emp/100; },
       //BOD removed as FS
       fsc_bod_rmvd(){ return Global.Faecl.Containment.fsc_fslu_emp*Global.Faecl.Containment.fsc_bod_conc_fs; },
-    /*fst*/
+    //fst
       //influent and effluent BOD
       fst_bod_infl(){ return Global.Faecl.Containment.fsc_bod_rmvd; },
       fst_bod_effl(){ return 0.10*Global.Faecl.Treatment.fst_bod_infl; },
       //biogas
       fst_biog_pro(){return Global.Faecl.Treatment.fst_bod_infl*Cts.ct_bod_kg.value*Cts.ct_biog_g.value;},
       fst_ch4_biog(){return 59; },
-    /*fsr*/
+    //fsr
       //volume dumped
       fsr_vol_dumping(){return Global.Faecl.Containment.fsc_fslu_emp},
       //mass sent to landapp
@@ -47,13 +47,21 @@ let Recommendations={
         let fslu_typ=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);
         return 100*Tables.fsr_fslu_typ_lf[fslu_typ].TVS;
       },
+      */
 
   /*WW*/
+    //200-300L of generated wastewater per person per day to m3
+    ww_vol_gene(){return 0.2*Global.Waste.ww_resi_pop*Global.Days();},
+
     /*wwc*/
+      wwc_vol_coll(){return 0.2*Global.Waste.Transport.wwc_conn_pop*Global.Days();},
+      wwc_vol_coll_unt(){return Global.Waste.Transport.wwc_vol_coll - Global.Waste.Transport.wwc_vol_coll_tre;},
+      wwc_vol_unco(){return Global.Waste.ww_vol_gene - Global.Waste.Transport.wwc_vol_coll;},
+      wwc_vol_unco_unt(){return Global.Waste.Transport.wwc_vol_unco - Global.Waste.Transport.wwc_vol_unco_ons;},
+      fsc_open_pop(){return Global.Waste.ww_resi_pop - Global.Waste.Transport.wwc_conn_pop - Global.Waste.Transport.fsc_onsi_pop;},
+
     /*wwt*/
-      //200-300L per person per day to m3
-      wwc_vol_coll(){return 0.2*Global.Waste.Collection.wwc_conn_pop*Global.Days();},
-      wwc_vol_conv(){return Global.Waste.Collection.wwc_vol_coll;},
+      wwc_vol_conv(){return Global.Waste.Transport.wwc_vol_coll;},
       wwt_n2o_efac(){return 3.2},
       wwt_slu_lf_TVS(){
         let slu_disp=Tables.find('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);

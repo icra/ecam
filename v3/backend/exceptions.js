@@ -24,7 +24,7 @@ let Exceptions={
   fsc_ch4_efac:{ //depends on ch4_efac_flooding
     table:"fsc_type_tre",
     table_field:function(){
-      if(Global.Faecl.Containment.fsc_flooding){
+      if(Global.Waste.Transport.fsc_flooding){
         return "ch4_efac_flooding";
       }else{
         return "ch4_efac";
@@ -57,7 +57,7 @@ let Exceptions={
     table:"fst_type_tre",
     table_field:function(){return "bod_rmvd_as_sludge_estm"},
     percent_of:function(){
-      return Global.Faecl.Treatment.fst_bod_infl;
+      return Global.Waste.Onsite.fst_bod_infl;
     },
   },
 

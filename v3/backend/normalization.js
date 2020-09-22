@@ -30,9 +30,9 @@ let Normalization={
     volume:   function(emission){ return emission/Global.Waste.Treatment.wwt_vol_trea||0},
     energy:   function(emission){ return emission/Global.Waste.ww_nrg_cons()||0},
 
-    Collection:{
-      volume: function(emission){ return emission/Global.Waste.Collection.wwc_vol_conv||0},
-      energy: function(emission){ return emission/Global.Waste.Collection.wwc_nrg_cons||0},
+    Transport:{
+      volume: function(emission){ return emission/Global.Waste.Transport.wwc_vol_conv||0},
+      energy: function(emission){ return emission/Global.Waste.Transport.wwc_nrg_cons||0},
     },
 
     Treatment:{
@@ -40,14 +40,9 @@ let Normalization={
       energy: function(emission){ return emission/Global.Waste.Treatment.wwt_nrg_cons||0},
     },
 
-    Discharge:{
-      volume: function(emission){ return emission/Global.Waste.Discharge.wwd_total_m3||0},
-      energy: function(emission){ return emission/Global.Waste.Discharge.wwd_nrg_cons||0},
+    Onsite:{
+      volume: function(emission){ return emission/Global.Waste.Onsite.wwd_total_m3||0},
+      energy: function(emission){ return emission/Global.Waste.Onsite.wwd_nrg_cons||0},
     },
-  },
-
-  Faecl:{
-    resi_pop: function(emission){return emission/Global.Faecl.fs_resi_pop/Global.Years()||0},
-    serv_pop: function(emission){return emission/Global.Faecl.Containment.fsc_onsi_pop/Global.Years()||0},
   },
 };

@@ -91,8 +91,6 @@ let summary_ghg = new Vue({
     <div id=summary_ghg v-if="visible && Languages.ready">
       <summaries current_view=summary_ghg></summaries>
 
-      <div style="padding:1em"> Values / Charts selector here </div>
-
       <!--title-->
       <div style="
         display:flex;
@@ -132,7 +130,7 @@ let summary_ghg = new Vue({
                   </a>
                 </div>
                 <div>
-                  <img :src="'frontend/img/'+l1.alias+'.png'" style="width:65px">
+                  <img :src="'frontend/img/'+l1.icon" style="width:65px">
                 </div>
               </td>
 
@@ -184,7 +182,7 @@ let summary_ghg = new Vue({
                   </a>
                 </div>
                 <div>
-                  <img :src="'frontend/img/'+l2.alias+'.svg'" style="width:75px;">
+                  <img :src="'frontend/img/'+l2.icon" style="width:75px;">
                 </div>
               </td>
 
@@ -199,7 +197,7 @@ let summary_ghg = new Vue({
                     padding-right:1em;
                   "
                 >
-                  <div> 
+                  <div>
                     <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
                     <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="format(Global[l2.prefix+'_KPI_GHG']())"></div>
                   </div>
@@ -218,7 +216,7 @@ let summary_ghg = new Vue({
               <td :style="{background:'white', color:l1.color, textAlign:'center'}">
                 <div style="color:black">kWh</div>
                 <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color, margin:'auto'}">
-                  {{format(Global[l2.level][l2.sublevel][l2.prefix+'_nrg_cons'])}}
+                  <div v-html="format(Global[l2.level][l2.sublevel][l2.prefix+'_nrg_cons'])"></div>
                 </div>
               </td>
             </tr>

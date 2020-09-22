@@ -1,8 +1,19 @@
 {
 "#below":"below",
 
-"#wwc_vol_coll_descr":"Volume of collected wastewater",
-"#wwc_vol_coll_expla":"Volume of collected wastewater that is responsibility of the undertaking, during the assessment period",
+"#Transport":"Transport",
+"#Onsite":"Onsite sanitation",
+
+"#wwc_vol_coll_descr":    "Volume of collected wastewater",
+"#wwc_vol_coll_expla":    "Volume of collected wastewater that is responsibility of the undertaking, during the assessment period",
+"#wwc_vol_coll_unt_descr":"Volume of collected wastewater untreated (CSO)",
+"#wwc_vol_coll_tre_descr":"Volume of collected wastewater conveyed to treatment",
+"#wwc_vol_unco_descr"    :"Volume of uncollected wastewater",
+"#wwc_vol_unco_unt_descr":"Volume of uncollected wastewater untreated (direct discharge)",
+"#wwc_vol_unco_ons_descr":"Volume of uncollected wastewater conveyed to onsite treatment",
+
+"#ww_vol_gene_descr":"Volume of generated wastewater",
+"#ww_vol_gene_expla":"Volume of generated wastewater",
 
 "#wwt_n2o_efac_descr":"N2O emission factor",
 "#wwt_n2o_efac_expla":"N2O emission factor for wastewater treatment plants (default value: 3.2 gN2O/person/year)",

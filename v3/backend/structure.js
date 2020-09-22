@@ -1,20 +1,18 @@
 //structure of stages (in a array form)
 let Structure=[
-  //Water Supply
-  {prefix:'ws',  alias:'water',    level:'Water', sublevel:false, color:'#58c1db'},
-  {prefix:'wsa', alias:'waterAbs', level:'Water', sublevel:'Abstraction'         },
-  {prefix:'wst', alias:'waterTre', level:'Water', sublevel:'Treatment'           },
-  {prefix:'wsd', alias:'waterDis', level:'Water', sublevel:'Distribution'        },
+  {prefix:'ws',  alias:'water',    icon:"water.png",    level:'Water', sublevel:false, color:'#58c1db'},
+  {prefix:'wsa', alias:'waterAbs', icon:"waterAbs.svg", level:'Water', sublevel:'Abstraction',  discharge:0, sludge:0},
+  {prefix:'wst', alias:'waterTre', icon:"waterTre.svg", level:'Water', sublevel:'Treatment',    discharge:0, sludge:1},
+  {prefix:'wsd', alias:'waterDis', icon:"waterDis.svg", level:'Water', sublevel:'Distribution', discharge:0, sludge:0},
+  {prefix:'ww',  alias:'waste',    icon:"waste.png",    level:'Waste', sublevel:false, color:'#ed6d57'},
+  {prefix:'wwc', alias:'wasteTra', icon:"wasteCol.svg", level:'Waste', sublevel:'Transport',    discharge:1, sludge:0},
+  {prefix:'wwt', alias:'wasteTre', icon:"wasteTre.svg", level:'Waste', sublevel:'Treatment',    discharge:1, sludge:1},
+  {prefix:'wwo', alias:'wasteOns', icon:"wasteOns.svg", level:'Waste', sublevel:'Onsite',       discharge:1, sludge:1},
 
-  //Wastewater
-  {prefix:'ww',  alias:'waste',    level:'Waste', sublevel:false, color:'#ed6d57'},
-  {prefix:'wwc', alias:'wasteCol', level:'Waste', sublevel:'Collection'          },
-  {prefix:'wwt', alias:'wasteTre', level:'Waste', sublevel:'Treatment'           },
-  {prefix:'wwd', alias:'wasteDis', level:'Waste', sublevel:'Discharge'           },
-
-  //Faecal Sludge Management
-  {prefix:'fs',  alias:'faecl',    level:'Faecl', sublevel:false, color:'#95c11f'},
-  {prefix:'fsc', alias:'faeclCon', level:'Faecl', sublevel:'Containment'         },
-  {prefix:'fst', alias:'faeclTre', level:'Faecl', sublevel:'Treatment'           },
-  {prefix:'fsr', alias:'faeclReu', level:'Faecl', sublevel:'Reuse'               },
+  //{prefix:'wwc', alias:'wasteCol', level:'Waste', sublevel:'Collection'          },
+  //{prefix:'wwd', alias:'wasteDis', level:'Waste', sublevel:'Discharge'           },
+  //{prefix:'fs',  alias:'faecl',    level:'Faecl', sublevel:false, color:'#95c11f'},
+  //{prefix:'fsc', alias:'faeclCon', level:'Faecl', sublevel:'Containment'         },
+  //{prefix:'fst', alias:'faeclTre', level:'Faecl', sublevel:'Treatment'           },
+  //{prefix:'fsr', alias:'faeclReu', level:'Faecl', sublevel:'Reuse'               },
 ];

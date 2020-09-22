@@ -6,11 +6,11 @@ digraph MyGraph {
   wsd [label="Distribution"]
   pop [label="Population"]
   ww  [label="Wastewater"]
-  unc [label="Uncollected"]
-  col [label="Collected"]
-  unt [label="Untreated Wastewater"]
+  tra [label="Transport"]
+
   wwt [label="Treatment Plant"]
   ons [label="Onsite Sanitation"]
+
   dis [label="Discharge"]
   riv [label="Freshwater, estuarine,\nmarine environments"]
   reu [label="Reuse/recovery (agriculture, soils)"]
@@ -30,14 +30,13 @@ digraph MyGraph {
 
   subgraph cluster_ww{
     label="Wastewater"
-    ww  -> {unc col} [color="blue:brown"]
-    unc -> {unt ons} [color="blue:brown"]
-    col -> {unt wwt} [color="blue:brown"]
+    ww  -> tra [color="blue:brown"]
+    tra -> {wwt ons} [color="blue:brown"]
   }
 
   subgraph cluster_dis {
     label="Discharge"
-    unt -> riv [color="blue:brown"]
+    tra -> riv [color="blue:brown"]
     ons -> dis [color="blue"]
     wwt -> dis [color="blue"]
     dis -> riv [color="blue"]
@@ -64,8 +63,8 @@ digraph MyGraph {
     legend_a -> legend_b [color="blue",       label="water"]
     legend_c -> legend_d [color="brown",      label="sludge"]
     legend_e -> legend_f [color="blue:brown", label="wastewater"]
-    legend_g -> legend_h [color="grey",       label="ghg emission"]
+    legend_g -> legend_h [color="grey",       label="direct ghg emission"]
   }
 
-  {unt wwt ons riv reu inc laf lap com} -> Atmosphere [color="grey"]
+  {tra wwt ons riv reu inc laf lap com} -> Atmosphere [color="grey"]
 }

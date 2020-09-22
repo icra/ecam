@@ -164,6 +164,7 @@ let configuration=new Vue({
 
       <!--picture TODO-->
       <div
+        v-if="false"
         style="
           margin-bottom:-4em;
         "
@@ -180,8 +181,8 @@ let configuration=new Vue({
         <div id=select_stages
           style="
             display:grid;
-            grid-template-columns:30% 30% 30%;
-            grid-gap:5%;
+            grid-template-columns:48% 48%;
+            grid-gap:4%;
             text-align:center;
           "
         >
@@ -202,7 +203,7 @@ let configuration=new Vue({
                 "
               >
                 <div>
-                  <img :src="'frontend/img/'+l2.alias+(Global.Configuration.ActiveStages[l2.alias]?'':'-off')+'.svg'">
+                  <img :src="'frontend/img/'+l2.icon">
                 </div>
                 <div :style="'color:'+(Global.Configuration.ActiveStages[l2.alias] ? l1.color : '#ccc')">
                   <b><small>{{translate(l2.sublevel)}}</small></b>
