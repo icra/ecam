@@ -188,8 +188,7 @@ let tier_b=new Vue({
         <div v-if="filters_on">&rarr;</div>
         <div v-if="filters_on" v-for="key in Object.keys(Filters)" class=filter>
           <label>
-            <input type=checkbox v-model="filters_active[key]">
-            {{key}}
+            <input type=checkbox v-model="filters_active[key]"> {{key}}
           </label>
         </div>
       </div>
@@ -481,7 +480,7 @@ let tier_b=new Vue({
       }
       #tier_b table {
         border-collapse:separate;
-        border-spacing:3px 2px;
+        border-spacing:1px 1px;
         border-left:none;
       }
       #tier_b #inputs table td {

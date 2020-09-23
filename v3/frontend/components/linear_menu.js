@@ -47,6 +47,14 @@ let linear_menu = new Vue({
           <div>Stages</div>
         </div>
 
+        <!--overview-->
+        <div
+          onclick="ecam.show('overview')"
+          :selected="current_view=='overview'"
+        >
+          <div>Overview</div>
+        </div>
+
         <!--summaries-->
         <div
           onclick="ecam.show('summary_ghg')"
@@ -90,11 +98,9 @@ let linear_menu = new Vue({
       }
       #linear_menu #select_view > div {
         color:#3c3c3b;
-        margin:0 1em;
         font-size:12px;
         font-weight:bold;
-        padding:0.2em;
-        padding-top:2em;
+        padding:2em 1em 0.2em 1em;
         border-bottom:4px solid transparent;
         box-sizing:border-box;
       }

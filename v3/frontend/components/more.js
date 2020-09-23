@@ -46,17 +46,6 @@ let more = new Vue({
         Placeholder for ecam v3 development
       </h3>
 
-      <!--diagram of stages rework for v3-->
-      <div style=text-align:center>
-        <b>
-          Stages' rework diagram for making ecam v3 ipcc 2019 compliant
-        </b>
-        <img
-          src="frontend/diagram/map.dot.svg"
-          style="display:block;margin:auto;width:100%;border:1px solid #ccc"
-        >
-      </div>
-
       <!--open save buttons-->
       <div class=tab_buttons>
         <button class=left onclick="" disabled>
@@ -82,7 +71,6 @@ let more = new Vue({
             <li class=item><a onclick="ecam.show('development')"> {{translate('dev')              }}       </a></li>
 
             <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('unfccc_categories')}}</a></li>
-            <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('all_substages')    }}</a></li>
             <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('all_benchmarks')   }}</a></li>
             <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('sidebar_export')   }}</a></li>
             <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('Sankey diagram')   }}</a></li>

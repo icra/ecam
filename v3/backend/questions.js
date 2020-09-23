@@ -68,15 +68,6 @@ let Questions={
         "wsa_pmp_pf",
         "wsa_pmp_pw",
         "wsa_KPI_nrg_elec_eff",
-      ],
-      advanced:1,
-      otherQuestions:[
-        "wsa_opportunities",
-      ],
-    },
-
-    "wsa_opportunities":{
-      variables:[
         "wsa_pmp_exff",
         "wsa_KPI_std_nrg_newp",
         "wsa_KPI_nrg_cons_new",
@@ -84,7 +75,7 @@ let Questions={
         "wsa_KPI_ghg_estm_red",
       ],
       advanced:1,
-      otherQuestions:[],
+      otherQuestions:[ ],
     },
 
   //wst
@@ -114,7 +105,6 @@ let Questions={
       advanced:1,
       otherQuestions:[
         "wst_pumping_eff",
-        "wst_opportunities",
       ],
     },
 
@@ -126,13 +116,6 @@ let Questions={
         "wst_pmp_pf",
         "wst_pmp_pw",
         "wst_KPI_nrg_elec_eff",
-      ],
-      advanced:1,
-      otherQuestions:[],
-    },
-
-    "wst_opportunities":{
-      variables:[
         "wst_pmp_exff",
         "wst_KPI_std_nrg_newp",
         "wst_KPI_nrg_cons_new",
@@ -242,7 +225,6 @@ let Questions={
       advanced:1,
       otherQuestions:[
         "wsd_pumping_eff",
-        "wsd_opportunities",
       ],
     },
 
@@ -254,13 +236,6 @@ let Questions={
         "wsd_pmp_pf",
         "wsd_pmp_pw",
         "wsd_KPI_nrg_elec_eff",
-      ],
-      advanced:1,
-      otherQuestions:[],
-    },
-
-    "wsd_opportunities":{
-      variables:[
         "wsd_pmp_exff",
         "wsd_KPI_std_nrg_newp",
         "wsd_KPI_nrg_cons_new",
@@ -315,7 +290,6 @@ let Questions={
       advanced:1,
       otherQuestions:[
         "wwc_pumping_eff",
-        "wwc_opportunities",
       ],
     },
 
@@ -327,13 +301,6 @@ let Questions={
         "wwc_pmp_pf",
         "wwc_pmp_pw",
         "wwc_KPI_nrg_elec_eff",
-      ],
-      advanced:1,
-      otherQuestions:[],
-    },
-
-    "wwc_opportunities":{
-      variables:[
         "wwc_pmp_exff",
         "wwc_KPI_std_nrg_newp",
         "wwc_KPI_nrg_cons_new",
@@ -416,7 +383,6 @@ let Questions={
       advanced:1,
       otherQuestions:[
         "wwt_pumping_eff",
-        "wwt_opportunities",
       ],
     },
 
@@ -428,13 +394,6 @@ let Questions={
         "wwt_pmp_pf",
         "wwt_pmp_pw",
         "wwt_KPI_nrg_elec_eff",
-      ],
-      advanced:1,
-      otherQuestions:[],
-    },
-
-    "wwt_opportunities":{
-      variables:[
         "wwt_pmp_exff",
         "wwt_KPI_std_nrg_newp",
         "wwt_KPI_nrg_cons_new",
@@ -593,7 +552,6 @@ let Questions={
       advanced:1,
       otherQuestions:[
         "wwd_pumping_eff",
-        "wwd_opportunities",
       ],
     },
 
@@ -605,13 +563,6 @@ let Questions={
         "wwd_pmp_pf",
         "wwd_pmp_pw",
         "wwd_KPI_nrg_elec_eff",
-      ],
-      advanced:1,
-      otherQuestions:[],
-    },
-
-    "wwd_opportunities":{
-      variables:[
         "wwd_pmp_exff",
         "wwd_KPI_std_nrg_newp",
         "wwd_KPI_nrg_cons_new",
@@ -668,7 +619,6 @@ let Questions={
       advanced:1,
       otherQuestions:[
         "fsc_pumping_eff",
-        "fsc_opportunities",
       ],
     },
 
@@ -680,13 +630,6 @@ let Questions={
         "fsc_pmp_pf",
         "fsc_pmp_pw",
         "fsc_KPI_nrg_elec_eff",
-      ],
-      advanced:1,
-      otherQuestions:[],
-    },
-
-    "fsc_opportunities":{
-      variables:[
         "fsc_pmp_exff",
         "fsc_KPI_std_nrg_newp",
         "fsc_KPI_nrg_cons_new",
@@ -749,7 +692,6 @@ let Questions={
       advanced:1,
       otherQuestions:[
         "fst_pumping_eff",
-        "fst_opportunities",
       ],
     },
 
@@ -761,13 +703,6 @@ let Questions={
         "fst_pmp_pf",
         "fst_pmp_pw",
         "fst_KPI_nrg_elec_eff",
-      ],
-      advanced:1,
-      otherQuestions:[],
-    },
-
-    "fst_opportunities":{
-      variables:[
         "fst_pmp_exff",
         "fst_KPI_std_nrg_newp",
         "fst_KPI_nrg_cons_new",
@@ -888,7 +823,6 @@ let Questions={
       advanced:1,
       otherQuestions:[
         "fsr_pumping_eff",
-        "fsr_opportunities",
       ],
     },
 
@@ -900,13 +834,6 @@ let Questions={
         "fsr_pmp_pf",
         "fsr_pmp_pw",
         "fsr_KPI_nrg_elec_eff",
-      ],
-      advanced:1,
-      otherQuestions:[],
-    },
-
-    "fsr_opportunities":{
-      variables:[
         "fsr_pmp_exff",
         "fsr_KPI_std_nrg_newp",
         "fsr_KPI_nrg_cons_new",

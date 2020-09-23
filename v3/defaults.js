@@ -10,8 +10,6 @@
   stages_menu.visible = 0;
 
   //default page to show
-  tier_b.level="Waste";
-  tier_b.sublevel="Transport";
   ecam.show('tier_b');
 
 /* BACKEND */

@@ -66,7 +66,7 @@ Vue.component('input_ecam',{
 
         <!--indicator of "variable not filtered"-->
         <div v-if="!is_code_in_any_filter(code)">
-          <code style=background:yellow>[warning:no-filter]</code>
+          <code style=background:yellow>[warning:no-filter {{code}}]</code>
         </div>
       </td>
 

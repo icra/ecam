@@ -101,8 +101,7 @@ let summary_ghg = new Vue({
         <div>
           <b style=font-size:large>Summaries</b>
           <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-            nonummy nibh euismod tincidunt ut laoreet dolore.
+            All GHG emissions and energy consumed are summarized in this page.
           </p>
         </div>
         <div>
