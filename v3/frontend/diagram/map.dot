@@ -60,10 +60,10 @@ digraph MyGraph {
     legend_f[label="",shape="none"]
     legend_g[label="",shape="none"]
     legend_h[label="",shape="none"]
-    legend_a -> legend_b [color="blue",       label="water"]
-    legend_c -> legend_d [color="brown",      label="sludge"]
-    legend_e -> legend_f [color="blue:brown", label="wastewater"]
-    legend_g -> legend_h [color="grey",       label="direct ghg emission"]
+    legend_a->legend_b [color="blue",       label="water"]
+    legend_c->legend_d [color="blue:brown", label="wastewater"]
+    legend_e->legend_f [color="brown",      label="sludge"]
+    legend_g->legend_h [color="grey",       label="direct ghg emission"]
   }
 
   {tra wwt ons riv reu inc laf lap com} -> Atmosphere [color="grey"]

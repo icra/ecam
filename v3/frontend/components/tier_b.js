@@ -4,16 +4,22 @@ let tier_b=new Vue({
     visible:false,
     level:'Water',
     sublevel:false,
-    caption, //vue object
+    caption,  //vue object
     variable, //vue object
 
-    //FILTERS
-    Filters,//definition (list of variables for each filter)
-    filters_on:false,
-    filters_active:{
+    //FILTERS (see "backend/filters.js")
+    Filters,          //definition (list of variables for each filter)
+    filters_active:{  //each filter on/off
+      //default active filters
       "Population":true,
       "Water volumes":true,
-    }, //on/off
+      "Operational parameters":true,
+      "Emission factors":true,
+      "Fuel consumption":true,
+      "Energy performance":true,
+      "Discharge":true,
+      "Sludge management":true,
+    }, 
 
     Global,
     Info,
@@ -69,8 +75,19 @@ let tier_b=new Vue({
       }
     },
 
+    enable_all_filters(){
+      Object.keys(this.Filters).forEach(key=>{
+        this.filters_active[key]=true;
+      });
+    },
+
+    disable_all_filters(){
+      Object.keys(this.Filters).forEach(key=>{
+        this.filters_active[key]=false;
+      });
+    },
+
     is_variable_visible(code){
-      if(!this.filters_on) return true;
       let filters = Object.keys(this.Filters);
       for(let i=0;i<filters.length;i++){
         let key=filters[i];
@@ -177,19 +194,25 @@ let tier_b=new Vue({
         </div>
       </div>
 
-      <!--category tags-->
-      <div id=category_tags>
-        <div>
-          <label>
-            <input type=checkbox v-model="filters_on">
-            <b><code>Filters ({{filters_on?'ON':'OFF'}})</code></b>
-          </label>
+      <!--filters-->
+      <div id=filters>
+        <div
+          class=filter
+          @click="enable_all_filters()" 
+          title="Enable all filters"
+        ><b><code>Filters</code></b>
         </div>
-        <div v-if="filters_on">&rarr;</div>
-        <div v-if="filters_on" v-for="key in Object.keys(Filters)" class=filter>
-          <label>
-            <input type=checkbox v-model="filters_active[key]"> {{key}}
-          </label>
+        <div>&rarr;</div>
+        <div
+          v-for="key in Object.keys(Filters)"
+          class=filter
+          @click="disable_all_filters();filters_active[key]=true;"
+        >
+          <input type=checkbox
+            :checked="filters_active[key]"
+            @click.stop="filters_active[key]=$event.target.checked"
+          >
+          <span>{{key}}</span>
         </div>
       </div>
 
@@ -555,20 +578,19 @@ let tier_b=new Vue({
       #tier_b table[level=Waste] a { color: var(--color-level-Waste) }
       #tier_b table[level=Faecl] a { color: var(--color-level-Faecl) }
 
-      #tier_b #category_tags {
-        user-select:none;
+      #tier_b #filters {
         display:flex;
         align-items:center;
+        user-select:none;
         border-bottom:1px solid #ccc;
       }
-      #tier_b #category_tags div {
+      #tier_b #filters > div.filter{
         padding:10px 5px;
-        border-bottom: 4px solid transparent;
-        box-sizing:border-box;
       }
-      #tier_b #category_tags > div.filter:hover {
+      #tier_b #filters > div.filter:hover {
         background:var(--color-level-generic);
         color:white;
+        cursor:pointer;
       }
     </style>
   `,

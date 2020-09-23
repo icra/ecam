@@ -3,13 +3,14 @@
 */
 
 /* FRONTEND */
-
   //page elements
   ecam_logo.visible   = 1;
   linear_menu.visible = 1;
   stages_menu.visible = 0;
 
   //default page to show
+  tier_b.level="Waste";
+  tier_b.sublevel="Treatment";
   ecam.show('tier_b');
 
 /* BACKEND */

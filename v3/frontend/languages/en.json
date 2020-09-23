@@ -1,6 +1,14 @@
 {
 "#below":"below",
 
+"#wwo_vol_trea_descr":"Volume of treated wastewater",
+"#wwo_vol_trea_expla":"Volume of treated wastewater by onsite sanitation systems",
+
+"#wwo_serv_pop_descr":"Serviced population",
+"#wwo_serv_pop_expla":"Serviced population by onsite sanitation systems",
+
+"#ww_ch4_efac_col_descr":"CH4 emission factor (collected wastewater)",
+
 "#Transport":"Transport",
 "#Onsite":"Onsite sanitation",
 
@@ -1297,9 +1305,9 @@
 "#wwd_SL_ghg_non_descr":"GHG emissions avoided due to water reuse eliminating discharge to receiving waters",
 "#wwd_SL_ghg_non_expla":"GHG emissions avoided due to water reuse eliminating discharge to water body",
 "#wwd_bod_effl_descr":"Effluent BOD load",
-"#wwd_bod_effl_expla" : "Effluent BOD load",
-"#wwd_ch4_efac_descr":"CH4 emission factor",
-"#wwd_ch4_efac_expla" : "CH4 emission factor",
+"#wwd_bod_effl_expla":"Effluent BOD load",
+"#wwd_ch4_efac_descr":"CH4 emission factor (discharge)",
+"#wwd_ch4_efac_expla":"CH4 emission factor (discharge)",
 "#wwd_coll_len_descr":"Collector length",
 "#wwd_coll_len_expla":"Collector length",
 "#wwd_engines":"Do you have fuel engines",
@@ -1396,7 +1404,7 @@
 "#wwt_KPI_biog_x_bod_descr":"Biogas produced per mass removed",
 "#wwt_KPI_biog_x_bod_expla":"Unit energy production per treated wastewater in wastewater treatment plants",
 "#wwt_KPI_capac_util_descr":"Capacity utilization",
-"#wwt_KPI_capac_util_expla":"Percentage of dry weight of sludge that comes out from the WWTP to disposal",
+"#wwt_KPI_capac_util_expla":"Percentage of treatment capacity utilized",
 "#wwt_KPI_dry_sludge_descr":"Dry weight in sludge production",
 "#wwt_KPI_dry_sludge_expla":"Dry sludge production per treated wastewater in wastewater treatment plants",
 "#wwt_KPI_ghg_app_co2eq_descr":"Total CO2,eq emissions due to land application of sludge",
@@ -1469,7 +1477,7 @@
 "#wwt_bod_slud_expla":"BOD removed from the wastewater though the process of removing primary or secondary sludge from the aerobic treatment process. This value is used to estimate the Methane emissions from poorly aerated biological treatment of wastewater",
 "#wwt_ch4_biog_descr":"Percentage of methane in biogas",
 "#wwt_ch4_biog_expla":"Percent of the methane content in the produced biogas",
-"#wwt_ch4_efac_descr":"CH4 emission factor",
+"#wwt_ch4_efac_descr":"CH4 emission factor (treatment)",
 "#wwt_ch4_efac_expla":"Methane emission factor of selected biological wastewater aerobic treatment processes",
 "#wwt_coll_len_descr":"Collector length",
 "#wwt_coll_len_expla":"Collector length",

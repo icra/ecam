@@ -260,23 +260,6 @@ let Questions={
       otherQuestions:[],
     },
 
-    "wwc_water_eff": {
-      variables:[
-        "wwc_wet_flow",
-        "wwc_dry_flow",
-        "wwc_rain_day",
-        "c_wwc_vol_infl",
-        "wwc_SL_GHG_ii",
-        "wwc_SL_fratio",
-        "wwc_SL_GHG_inf",
-        "wwt_SL_GHG_inf",
-        "wwd_SL_GHG_inf",
-        "wwc_SL_inf_emis"
-      ],
-      advanced:1,
-      otherQuestions:[],
-    },
-
     "wwc_pumping":{
       variables:[
         "wwc_nrg_pump",
@@ -722,19 +705,6 @@ let Questions={
         "fsr_KPI_GHG_fuel_n2o",
         "fsr_KPI_GHG_fuel_ch4",
         "fsr_KPI_GHG_fuel",
-      ],
-      advanced:0,
-      otherQuestions:[],
-    },
-    "fsr_effluent":{
-      variables:[
-        "fsr_vol_disc",
-        "fsr_n2o_effl",
-        "fsr_bod_effl",
-        "fsr_ch4_efac",
-        "fsr_KPI_GHG_tre_n2o",
-        "fsr_KPI_GHG_tre_ch4",
-        "fsr_KPI_GHG_tre",
       ],
       advanced:0,
       otherQuestions:[],

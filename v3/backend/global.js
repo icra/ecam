@@ -221,13 +221,12 @@ class Ecam{
         wwc_vol_unco_unt:0, //volume of uncollected wastewater untreated
 
         wwc_nrg_cons:0,
+        ww_ch4_efac_col:0,    //emission factor for collected wastewater
         ww_ch4_efac_unc:0.3,  //emission factor for uncollected wastewater
         ww_ch4_efac_unt:0.06, //emission factor for untreated wastewater
         wwc_fuel_typ:0,
         wwc_vol_fuel:0,
-        wwc_wet_flow:0,
-        wwc_dry_flow:0,
-        wwc_rain_day:0,
+
         wwc_vol_pump:0,
         wwc_nrg_pump:0,
         wwc_pmp_head:0,
@@ -239,29 +238,6 @@ class Ecam{
         wwc_pmp_exff:0, //Expected electromechanical efficiency of new pump % C
         wwc_pmp_pf:0.9, //power factor (no unit)
 
-        fsc_type_tre:0,    //hidden (treatment type)
-        fsc_nrg_cons:0,    //energy consumed
-        fsc_bod_infl:0,    //influent bod load
-        fsc_flooding:0,    //yes/no
-        fsc_ch4_efac:0,    //ch4 emission factor
-        fsc_cont_emp:0,    //containments emptied
-        fsc_fdensity:0,    //density of faecal sludge
-        fsc_fslu_emp:0,    //FS emptied
-        fsc_bod_conc_fs:0, //[BOD] in FS
-        fsc_bod_rmvd:0,    //bod removed as FS
-        fsc_trck_typ:0,    //type of fuel
-        fsc_vol_trck:0,    //fuel consumed
-        fsc_nrg_pump:0,
-        fsc_vol_pump:0,
-        fsc_pmp_head:0,
-        fsc_sta_head:0,
-        fsc_coll_len:0,
-        fsc_pmp_flow:0,
-        fsc_pmp_volt:0,
-        fsc_pmp_amps:0,
-        fsc_pmp_pf:0.9,
-        fsc_pmp_exff:0,
-
         equations:[
           /*
           "wwc_KPI_GHG_elec",
@@ -272,13 +248,6 @@ class Ecam{
           "wwc_SL_conn_pop",
           "wwc_uncl_pop",
           "wwc_KPI_nrg_per_m3",
-          "c_wwc_vol_infl",
-          "wwc_SL_GHG_ii",
-          "wwc_SL_fratio",
-          "wwc_SL_GHG_inf",
-          "wwt_SL_GHG_inf",
-          "wwd_SL_GHG_inf",
-          "wwc_SL_inf_emis",
           "wwc_pmp_pw",
           "wwc_KPI_std_nrg_cons",
           "wwc_KPI_un_head_loss",
@@ -466,6 +435,34 @@ class Ecam{
 
       //TODO ipcc 2019
       Onsite:{
+        wwo_serv_pop:0, //serviced population
+        wwo_vol_trea:0, //treated wastewater
+
+        //fsm containment
+        fsc_type_tre:0,    //hidden (treatment type)
+        fsc_nrg_cons:0,    //energy consumed
+        fsc_bod_infl:0,    //influent bod load
+        fsc_flooding:0,    //yes/no
+        fsc_ch4_efac:0,    //ch4 emission factor
+        fsc_cont_emp:0,    //containments emptied
+        fsc_fdensity:0,    //density of faecal sludge
+        fsc_fslu_emp:0,    //FS emptied
+        fsc_bod_conc_fs:0, //[BOD] in FS
+        fsc_bod_rmvd:0,    //bod removed as FS
+        fsc_trck_typ:0,    //type of fuel
+        fsc_vol_trck:0,    //fuel consumed
+        fsc_nrg_pump:0,
+        fsc_vol_pump:0,
+        fsc_pmp_head:0,
+        fsc_sta_head:0,
+        fsc_coll_len:0,
+        fsc_pmp_flow:0,
+        fsc_pmp_volt:0,
+        fsc_pmp_amps:0,
+        fsc_pmp_pf:0.9,
+        fsc_pmp_exff:0,
+
+        //fsm treatment
         fst_nrg_cons:0,
         fst_n2o_efac:0,
         fst_ch4_efac:0,
@@ -493,6 +490,7 @@ class Ecam{
         fst_pmp_pf:0.9,
         fst_pmp_exff:0,
 
+        //fsm reuse/disposal
         fsr_type_tre:0,         //main type of disposal
         fsr_fslu_typ:0,         //main type of faecal sludge
         fsr_nrg_cons:0,
@@ -871,13 +869,6 @@ class Ecam{
     wwc_uncl_pop(){return Math.max(0,this.Waste.ww_resi_pop-this.wwc.wwc_conn_pop-this.wwc.fsc_onsi_pop)}
     wwc_SL_conn_pop(){return 100*this.wwc.wwc_conn_pop/this.Waste.ww_resi_pop}
     wwc_KPI_nrg_per_m3(){return this.wwc.wwc_nrg_cons/this.wwc.wwc_vol_conv}
-    c_wwc_vol_infl(){return this.wwc.wwc_rain_day/86400*(this.wwc.wwc_wet_flow-this.wwc.wwc_dry_flow)}
-    wwc_SL_GHG_ii(){return this.wwc_KPI_nrg_per_m3()*this.c_wwc_vol_infl()*this.General.conv_kwh_co2}
-    wwc_SL_fratio(){return this.wwc.wwc_wet_flow/this.wwc.wwc_dry_flow}
-    wwc_SL_GHG_inf(){return this.wwc_KPI_GHG_elec() * this.c_wwc_vol_infl() / this.wwc.wwc_vol_conv}
-    wwt_SL_GHG_inf(){return this.wwt_KPI_GHG_elec() * this.c_wwc_vol_infl() / this.wwc.wwc_vol_conv}
-    wwd_SL_GHG_inf(){return this.wwt_KPI_GHG_elec() * this.c_wwc_vol_infl() / this.wwc.wwc_vol_conv}
-    wwc_SL_inf_emis(){return this.wwc_SL_GHG_inf() + this.wwt_SL_GHG_inf() + this.wwt_SL_GHG_inf()}
     wwc_pmp_pw(){return this.wwc.wwc_pmp_flow*this.wwc.wwc_pmp_head*Cts.ct_gravit.value/1000;}
     wwc_KPI_std_nrg_cons(){return this.wwc.wwc_nrg_pump/(this.wwc.wwc_vol_pump*this.wwc.wwc_pmp_head/100)}
     wwc_KPI_un_head_loss(){return 1000*(this.wwc.wwc_pmp_head-this.wwc.wwc_sta_head)/this.wwc.wwc_coll_len}

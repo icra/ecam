@@ -8,6 +8,9 @@
 
 let Info={
   //IPCC 2019
+  wwo_serv_pop    :{magnitude:"People",unit:"people"},
+  wwo_vol_trea    :{magnitude:"Volume",unit:"m3"},
+
   wwc_vol_coll    :{magnitude:"Volume",unit:"m3"},
   wwc_vol_coll_unt:{magnitude:"Volume",unit:"m3"},
   wwc_vol_coll_tre:{magnitude:"Volume",unit:"m3"},
@@ -99,6 +102,7 @@ let Info={
 
   ww_ch4_efac_unt: {magnitude:"Mass/Mass", unit:"kgCH4/kgBOD" },
   ww_ch4_efac_unc: {magnitude:"Mass/Mass", unit:"kgCH4/kgBOD" },
+  ww_ch4_efac_col: {magnitude:"Mass/Mass", unit:"kgCH4/kgBOD" },
 
   fsr_ghg_avoided_land: {magnitude:"Mass",   unit:"kg CO2eq"},
   fsr_KPI_GHG_urine:    {magnitude:"Mass",   unit:"kg CO2eq"},
