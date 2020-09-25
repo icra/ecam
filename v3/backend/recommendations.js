@@ -86,7 +86,11 @@ let Recommendations={
       },
       wwt_biog_val(){return Global.Waste.Treatment.wwt_biog_pro},
       wwt_ch4_biog(){return 59},
-      wwt_bod_infl(){return Global.General.bod_pday/1000*Global.wwt.wwt_serv_pop*Global.Days()},
+      wwt_bod_infl(){
+        let P   = Global.wwt.wwt_serv_pop;
+        let BOD = Global.General.bod_pday;
+        return P * BOD * 0.001 * Global.Days();
+      },
       //SM
       wwt_mass_slu(){
         let b=1;

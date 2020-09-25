@@ -47,31 +47,43 @@ let Tables = {
   ],
 
   //types of water bodies
+  //ipcc 2019, table 6.3 (updated) EF (kgCH4/kgBOD)
   "ww_ch4_efac":[
-    {name:"Select",                                  ch4_efac:0},
-    {name:"Stagnant sewer or anaerobic water body",  ch4_efac:0.3},
-    {name:"Sea and aerobic water bodies",            ch4_efac:0.06},
-    {name:"Fast flowing and well maintained sewers", ch4_efac:0},
-    {name:"Soil infiltration",                       ch4_efac:0},
+    {name:"Select",                                                                                 ch4_efac:0},
+    {name:"Discharge to aquatic environments (Tier 1)",                                             ch4_efac:0.068},
+    {name:"Discharge to aquatic environments other than reservoirs, lakes, and estuaries (Tier 2)", ch4_efac:0.021},
+    {name:"Discharge to reservoirs, lakes, and estuaries (Tier 2)",                                 ch4_efac:0.114},
+    {name:"Stagnant sewer or anaerobic water body",                                                 ch4_efac:0.3},
+    {name:"Flowing sewer (open or closed)",                                                         ch4_efac:0},
+    {name:"Soil infiltration",                                                                      ch4_efac:0},
+
   ],
 
 	//types of treatment
+  //ipcc 2019, table 6.3 (updated) EF (kgCH4/kgBOD)
   "wwt_type_tre":[
     {name:"Select treatment type",                           ch4_efac:0,     bod_rmvd_as_sludge_estm:0   },
+    {name:"Centralised, aerobic, treatment plant",           ch4_efac:0.018, bod_rmvd_as_sludge_estm:0.65},
+    {name:"Anaerobic Reactor - CH4 recovery not considered", ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
+    {name:"Anaerobic Reactor - CH4 recovery considered",     ch4_efac:0.14,  bod_rmvd_as_sludge_estm:0.10},
+    {name:"Anaerobic Lagoon <2m depth",                      ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.30},
+    {name:"Anaerobic Lagoon >2m depth",                      ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
+    {name:"Anaerobic Lagoon covered",                        ch4_efac:0,     bod_rmvd_as_sludge_estm:0.10},
+    {name:"Wetlands - Surface flow",                         ch4_efac:0.24,  bod_rmvd_as_sludge_estm:0.30},
+    {name:"Wetlands - Horizontal subsurface flow",           ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
+    {name:"Wetlands - Vertical subsurface flow",             ch4_efac:0.006, bod_rmvd_as_sludge_estm:0.65},
+    {name:"Septic tank",                                     ch4_efac:0.3,   bod_rmvd_as_sludge_estm:0.65},
+    {name:"Septic tank + land dispersal field",              ch4_efac:0.3,   bod_rmvd_as_sludge_estm:0.65},
+    {name:"Pit latrine without flush water (lined or unlined) – household", ch4_efac:0.06,   ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
+    {name:"Pit latrine without flush water (lined or unlined) – communal",  ch4_efac:0.3,    ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
+    {name:"Pit latrine with flush water use (lined or unlined)",            ch4_efac:0.42,   ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
+
     {name:"Activated Sludge - Well managed",                 ch4_efac:0,     bod_rmvd_as_sludge_estm:0.65},
     {name:"Activated Sludge - Minor poorly aerated zones",   ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
     {name:"Activated Sludge - Some aerated zones",           ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.65},
     {name:"Activated Sludge - Not well managed",             ch4_efac:0.18,  bod_rmvd_as_sludge_estm:0.65},
     {name:"Aerated Lagoon",                                  ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
-    {name:"Anaerobic Lagoon <2m depth",                      ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.30},
-    {name:"Anaerobic Lagoon >2m depth",                      ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
-    {name:"Anaerobic Lagoon covered",                        ch4_efac:0,     bod_rmvd_as_sludge_estm:0.10},
     {name:"Trickling Filter",                                ch4_efac:0.036, bod_rmvd_as_sludge_estm:0.65},
-    {name:"Anaerobic Reactor - CH4 recovery not considered", ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
-    {name:"Anaerobic Reactor - CH4 recovery considered",     ch4_efac:0.14,  bod_rmvd_as_sludge_estm:0.10},
-    {name:"Wetlands - Surface flow",                         ch4_efac:0.24,  bod_rmvd_as_sludge_estm:0.30},
-    {name:"Wetlands - Horizontal subsurface flow",           ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
-    {name:"Wetlands - Vertical subsurface flow",             ch4_efac:0.006, bod_rmvd_as_sludge_estm:0.65},
     {name:"Imhoff tank",                                     ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
   ],
 
