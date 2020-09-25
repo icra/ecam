@@ -20,7 +20,6 @@ let ecam={
     more,
     about,
     help,
-    tier_a,
     tier_b,
     overview,
     summary_ghg,

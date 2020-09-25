@@ -15,69 +15,6 @@ let configuration=new Vue({
     translate,
     format,
 
-    //deactivate level2 when level1 is deactivated
-    check_l2_from_l1(){
-      //if level1 is inactive, set related level2 inactive
-      Structure.filter(l=>l.sublevel==false).forEach(l1=>{
-        if(!this.Global.Configuration.ActiveStages[l1.alias]){
-          //reset l1 values
-          this.reset_stage(l1.alias);
-          //reset l2 values
-          Structure.filter(l=>(l.sublevel && l.level==l1.level))
-            .forEach(l=>{
-              this.Global.Configuration.ActiveStages[l.alias]=false;
-              this.reset_stage(l.alias);
-            });
-        }
-      });
-    },
-
-    //activate level1 when level2 is activated
-    check_l1_from_l2(){
-      //if level2 is active, set related level1 active
-      Structure.filter(l=>l.sublevel).forEach(l2=>{
-        if(this.Global.Configuration.ActiveStages[l2.alias]){
-          Structure.filter(l=>(l.sublevel==false && l.level==l2.level))
-            .forEach(l=>{
-              Global.Configuration.ActiveStages[l.alias]=true;
-            });
-        }else{
-          this.reset_stage(l2.alias);
-        }
-      });
-    },
-
-    //activate all stages
-    activate_all_stages(){
-      Structure.forEach(l=>{
-        this.Global.Configuration.ActiveStages[l.alias]=true;
-      })
-    },
-
-    //reset a stage:
-    //1) set all variables to zero
-    //2) reset substages (only level2)
-    reset_stage(alias){
-      let stage=Structure.find(s=>s.alias==alias);
-      if(!stage) throw `stage '${alias}' not found`
-
-      let obj = null; //stage object inside Global
-
-      if(stage.sublevel==false){
-        //l1
-        obj = this.Global[stage.level];
-      }else{
-        //l2
-        obj = this.Global[stage.level][stage.sublevel];
-        Global.Substages[stage.level][stage.sublevel]=[]; //reset substages
-      }
-
-      //reset obj values
-      for(let key in obj) {
-        if(typeof(obj[key])=="number") obj[key]=0;
-      }
-    },
-
     //set variables from selected country
     set_variables_from_selected_country(){
       let country = this.Global.General.Country;
@@ -93,22 +30,6 @@ let configuration=new Vue({
         if(key=="bod_pday_fs"){ key2="bod_pday"; }
         this.Global.General[key]=Countries[country][key2];
       });
-    },
-
-    go_to_first_stage_active(){
-      let level    = false;
-      let sublevel = false;
-      let alias = Object.entries(Global.Configuration.ActiveStages).find(([key,val])=>{
-        return val==true;
-      });
-      if(!alias){
-        alert('All water cycle stages are inactive. Activate at least one stage');
-        return false;
-      }
-      alias = alias[0]; //only the string not the value
-      let stage = Structure.find(s=>s.alias == alias);
-      go_to(stage.level, stage.sublevel);
-      return true;
     },
 
     //set constants from selected gwp report
@@ -153,31 +74,20 @@ let configuration=new Vue({
       <div
         style="
           margin-top:1em;
+          margin-bottom:1em;
           text-align:center;
           color:#666;
         "
-      >
-        <b>
-          Activate the stages which form your system
-        </b>
+      ><b>Information about your system</b>
       </div>
 
       <!--picture TODO-->
-      <div
-        v-if="false"
-        style="
-          margin-bottom:-4em;
-        "
-      >
+      <div v-if="false" style="margin-bottom:-4em;">
         <img src="frontend/img/viti/configuration/infogr-provisional.svg">
       </div>
 
       <!--icons-->
-      <div
-        style="
-          padding:0 6em;
-        "
-      >
+      <div v-if="false" style="padding:0 6em">
         <div id=select_stages
           style="
             display:grid;
@@ -196,33 +106,19 @@ let configuration=new Vue({
                 grid-template-columns:33% 33% 33%;
               "
             >
-              <div v-for="l2 in Structure.filter(l=>(l.sublevel && l.level==l1.level))"
-                @click="
-                  Global.Configuration.ActiveStages[l2.alias]^=1;
-                  check_l1_from_l2();
-                "
-              >
+              <div v-for="l2 in Structure.filter(l=>(l.sublevel && l.level==l1.level))">
                 <div>
                   <img :src="'frontend/img/'+l2.icon">
                 </div>
-                <div :style="'color:'+(Global.Configuration.ActiveStages[l2.alias] ? l1.color : '#ccc')">
+                <div :style="{color:l1.color}">
                   <b><small>{{translate(l2.sublevel)}}</small></b>
                 </div>
               </div>
             </div>
 
             <!--level-->
-            <div
-              @click="
-                Global.Configuration.ActiveStages[l1.alias]^=1;
-                check_l2_from_l1();
-              "
-              style="
-                margin-top:1em;
-                cursor:pointer;
-              "
-            >
-              <div :style="'padding:1em;color:white;background:'+(Global.Configuration.ActiveStages[l1.alias] ? l1.color : '#ccc')">
+            <div style="margin-top:1em">
+              <div :style="{padding:'1em',color:'white',background:l1.color}">
                 <b>{{translate(l1.level)}}</b>
               </div>
             </div>
@@ -233,9 +129,8 @@ let configuration=new Vue({
       <!--rest of parameters-->
       <div
         style="
-          margin-top:1em;
+          margin-top:2em;
           padding:0 6em;
-
           display:grid;
           grid-template-columns:49% 49%;
           grid-gap:2%;
@@ -420,11 +315,6 @@ let configuration=new Vue({
       #configuration #select_stages img{
         width:120px;
         vertical-align:middle;
-        cursor:pointer;
-      }
-      #configuration #select_stages img:hover{
-        border:1px solid var(--color-level-generic);
-        box-sizing:border-box;
       }
       #configuration fieldset{
         padding:0;

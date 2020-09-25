@@ -22,7 +22,7 @@ let fuel_table = new Vue({
       </div>
 
       <!--table-->
-      <table style="font-size:16px;margin:auto;margin-bottom:3em;max-width:80%"> 
+      <table style="font-size:16px;margin:auto;margin-bottom:3em;max-width:80%">
         <thead>
           <tr><th colspan=8 style=text-align:center>{{translate('fuelInfo_eeff')}}</th></tr>
           <tr>
@@ -41,8 +41,8 @@ let fuel_table = new Vue({
           </tr>
         </thead>
         <tbody>
-          <tr v-for="fuel,name in Tables['Fuel types']">
-            <td>{{translate(name)}}</td>
+          <tr v-for="fuel in Tables['Fuel type']">
+            <td>{{translate(fuel.name)}}</td>
             <td>{{fuel.EFCH4.engines}}</td>
             <td>{{fuel.EFCH4.vehicles}}</td>
             <td>{{fuel.EFN2O.engines}}</td>
@@ -53,24 +53,6 @@ let fuel_table = new Vue({
           </tr>
         </tbody>
       </table>
-      <!--
-        <script>
-          (function()
-          {
-            for(var fuel in Tables['Fuel types']) {
-              var newRow=table.insertRow(-1);
-              newRow.insertCell(-1).innerHTML="<b>"+fuel+"</b>";
-              newRow.insertCell(-1).innerHTML=Tables['Fuel types'][fuel].EFCH4.engines;
-              newRow.insertCell(-1).innerHTML=Tables['Fuel types'][fuel].EFCH4.vehicles;
-              newRow.insertCell(-1).innerHTML=Tables['Fuel types'][fuel].EFN2O.engines;
-              newRow.insertCell(-1).innerHTML=Tables['Fuel types'][fuel].EFN2O.vehicles;
-              newRow.insertCell(-1).innerHTML=Tables['Fuel types'][fuel].EFCO2;
-              newRow.insertCell(-1).innerHTML=Tables['Fuel types'][fuel].FD;
-              newRow.insertCell(-1).innerHTML=Tables['Fuel types'][fuel].NCV;
-            }
-          })();
-        </script>
-      -->
     </div>
   `,
 

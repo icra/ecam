@@ -510,7 +510,7 @@ let Info={
   wsd_KPI_nrg_estm_sav: {magnitude:"Energy",             unit:"kWh"},
   wsd_KPI_ghg_estm_red: {magnitude:"Mass",               unit:"kg CO2eq"},
 
-	//L2 Wastewater Collection
+	//L2 Wastewater Transport
 	wwc_vol_coll:{magnitude:"Volume",unit:"m3"},
   wwc_vol_conv:{magnitude:"Volume",unit:"m3"},
 	wwc_nrg_cons:{magnitude:"Energy",unit:"kWh"},
@@ -604,7 +604,7 @@ let Info={
 	wwt_mass_slu_sto:{magnitude:"Mass",unit:"kg"},
 	wwt_mass_slu_stock:{magnitude:"Mass",unit:"kg"},
 	wwt_temp_inc:{magnitude:"Temperature",unit:"K"},
-	wwt_time_slu_sto:{magnitude:"Storage time",unit:"day"},
+	wwt_time_slu_sto:{magnitude:"Storage time",unit:"days"},
 	wwt_soil_typ:{magnitude:"Option",unit:"Soil type"},
 	c_wwt_ch4_pot:{magnitude:"Mass",unit:"kg CH4"},
   wwt_KPI_GHG_dig_fuel:{magnitude:"Mass",      unit:"kg CO2eq"},

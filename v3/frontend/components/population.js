@@ -55,10 +55,7 @@ let population = new Vue({
               {{translate(l1.level)}}
             </th>
           </tr>
-          <tr v-if="!Global.Configuration.ActiveStages[l1.alias]">
-            <td colspan=3 inactive>{{translate('birds_stage_not_active')}}</td>
-          </tr>
-          <tr v-else v-for="pop in get_population().filter(p=>p.level==l1.level)">
+          <tr v-for="pop in get_population().filter(p=>p.level==l1.level)">
             <td
               @mousemove="caption.show($event, translate(pop.code+'_expla'))"
               @mouseout="caption.hide()"

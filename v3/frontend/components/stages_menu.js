@@ -13,22 +13,27 @@ let stages_menu  = new Vue({
     format,
     translate,
     go_to,
+
+    //frontend effect: remark selected stage
     is_tier_b_selected(level, sublevel){
       if(this.current_view!='tier_b') return false;
-
       if(level==tier_b.level && sublevel==tier_b.sublevel){
         return true;
       }
-
     },
-    get_offset_height(){
-      if(this.current_view=='tier_b'){
-        return 0;
-      }else{
-        let logo   = document.querySelector("#ecam_logo").offsetHeight;
-        let linear = document.querySelector("#linear_menu").offsetHeight;
-        return logo + linear;
-      }
+
+    //quick filter buttons (discharge and sludge)
+    go_to_discharge(level,sublevel){
+      this.go_to(level,sublevel);
+      tier_b.filters_on=true;
+      tier_b.disable_all_filters();
+      tier_b.filters_active['Discharge']=true;
+    },
+    go_to_sludge(level,sublevel){
+      this.go_to(level,sublevel);
+      tier_b.filters_on=true;
+      tier_b.disable_all_filters();
+      tier_b.filters_active['Sludge management']=true;
     },
   },
   template:`
@@ -38,7 +43,7 @@ let stages_menu  = new Vue({
         <div style="font-size:large;text-align:center">
           Stages of the Urban Water Cycle
         </div>
-        <table border=1 style="margin:auto">
+        <table style="margin:auto">
           <!--level 1 and level2-->
           <tr>
             <td v-for="s in Structure">
@@ -62,7 +67,9 @@ let stages_menu  = new Vue({
           <tr>
             <td v-for="l2 in Structure">
               <div v-if="l2.discharge" style=text-align:center>
-                Discharge
+                <button @click="go_to_discharge(l2.level,l2.sublevel)">
+                  Discharge
+                </button>
               </div>
             </td>
           </tr>
@@ -70,7 +77,9 @@ let stages_menu  = new Vue({
           <tr>
             <td v-for="l2 in Structure">
               <div v-if="l2.sludge" style=text-align:center>
-                Sludge
+                <button @click="go_to_sludge(l2.level,l2.sublevel)">
+                  Sludge
+                </button>
               </div>
             </td>
           </tr>

@@ -31,6 +31,17 @@ let Filters = {
   "wwd_vol_nonp",      //variable
   "fsr_vol_disc",      //variable
 ],
+"Emission factors":[
+  "ww_ch4_efac_unt",
+  "ww_ch4_efac_unc",
+  "ww_ch4_efac_col",
+  "fsc_ch4_efac",
+  "wwt_n2o_efac",
+  "wwt_ch4_efac",
+  "wwd_ch4_efac",
+  "fst_ch4_efac",
+  "fst_n2o_efac",
+],
 "Operational parameters":[
   "ws_nrg_cost", //variable
   "ws_run_cost", //variable
@@ -67,17 +78,6 @@ let Filters = {
   "fst_bod_slud",    //variable
   "fsr_type_tre",    //variable
   "fsr_fslu_typ",    //variable
-],
-"Emission factors":[
-  "ww_ch4_efac_unt",
-  "ww_ch4_efac_unc",
-  "ww_ch4_efac_col",
-  "fsc_ch4_efac",
-  "wwt_n2o_efac",
-  "wwt_ch4_efac",
-  "wwd_ch4_efac",
-  "fst_ch4_efac",
-  "fst_n2o_efac",
 ],
 "Fuel consumption":[
   "wsa_engines", //question
@@ -130,14 +130,20 @@ let Filters = {
   "fsc_transport",      //question
 ],
 "Discharge":[
-  "wwd_vol_disc",    //variable
-  "wwd_vol_nonp",    //variable
-  "wwd_ch4_efac",    //variable
-  "wwt_bod_effl",    //variable
-  "wwd_bod_effl",    //variable
-  "wwd_n2o_effl",    //variable
-  "wwd_water_reuse", //question
-  "fsr_vol_disc",    //variable
+  "fsc_open_pop",     //variable (Transport)
+  "wwc_vol_unco_unt", //variable (Transport)
+  "wwc_vol_coll_unt", //variable (Transport)
+  "ww_ch4_efac_unt",  //variable (Transport)
+
+  "wwd_vol_disc",     //variable (Treatment)
+  "wwd_vol_nonp",     //variable (Treatment)
+  "wwd_ch4_efac",     //variable (Treatment)
+  "wwt_bod_effl",     //variable (Treatment)
+  "wwd_bod_effl",     //variable (Treatment)
+  "wwd_n2o_effl",     //variable (Treatment)
+  "wwd_water_reuse",  //question (Treatment)
+  "wwd_trucks",       //question (Treatment)
+  "fsr_vol_disc",     //variable (Onsite)
 ],
 "Sludge management":[
   "wst_mass_slu",         //variable

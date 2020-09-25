@@ -77,7 +77,7 @@ let linear_menu = new Vue({
         <b style="color:#aaa">You are in</b>
         <b>{{Global.General.Name}}</b>
         <b :style="{color:'var(--color-level-generic)'}">
-          ({{format(Global.TotalGHG())}} kgCO<sub>2</sub>eq)
+          (<span v-html="format(Global.TotalGHG())"></span> kgCO<sub>2</sub>eq)
         </b>
       </div>
     </div>

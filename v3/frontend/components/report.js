@@ -13,8 +13,8 @@ let report = new Vue({
     format,
     translate,
 
-    get_ghg_emissions_by_level(){ //Water, Waste, Faecl
-      return Structure.filter(s=>s.sublevel==false).map(s=>{
+    get_ghg_emissions_by_level(){ //Water, Waste
+      return Structure.filter(s=>!s.sublevel).map(s=>{
         let level = translate(s.level);
         let code  = s.prefix+'_KPI_GHG';
         let descr = translate(code+'_descr');

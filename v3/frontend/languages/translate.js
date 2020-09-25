@@ -41,14 +41,14 @@ let Languages={
     //language not found
     if(!this.tags[lang]){
       let warn=`"#${id}" - language not found]`;
-      console.warn(warn);
+      //console.warn(warn);
       return `["#${id}"]`;
     }
 
     //translation not found
     if(!this.tags[lang][`#${id}`]){
       let warn=`"#${id}" - translation not found]`;
-      console.warn(warn);
+      //console.warn(warn);
       return `["#${id}"]`;
     }
 

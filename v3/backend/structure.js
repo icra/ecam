@@ -8,11 +8,4 @@ let Structure=[
   {prefix:'wwc', alias:'wasteTra', icon:"wasteCol.svg", level:'Waste', sublevel:'Transport',    discharge:1, sludge:0},
   {prefix:'wwt', alias:'wasteTre', icon:"wasteTre.svg", level:'Waste', sublevel:'Treatment',    discharge:1, sludge:1},
   {prefix:'wwo', alias:'wasteOns', icon:"wasteOns.svg", level:'Waste', sublevel:'Onsite',       discharge:1, sludge:1},
-
-  //{prefix:'wwc', alias:'wasteCol', level:'Waste', sublevel:'Collection'          },
-  //{prefix:'wwd', alias:'wasteDis', level:'Waste', sublevel:'Discharge'           },
-  //{prefix:'fs',  alias:'faecl',    level:'Faecl', sublevel:false, color:'#95c11f'},
-  //{prefix:'fsc', alias:'faeclCon', level:'Faecl', sublevel:'Containment'         },
-  //{prefix:'fst', alias:'faeclTre', level:'Faecl', sublevel:'Treatment'           },
-  //{prefix:'fsr', alias:'faeclReu', level:'Faecl', sublevel:'Reuse'               },
 ];

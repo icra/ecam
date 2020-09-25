@@ -20,9 +20,8 @@ let overview = new Vue({
 
   template:`
     <div id=overview v-if="visible && Languages.ready">
-
       <h2 style="text-align:center">
-        Substages overview
+        Stages overview
       </h2>
 
       <p style="text-align:center">
@@ -42,7 +41,7 @@ let overview = new Vue({
         </tr>
         <tr>
           <td v-for="l2 in Structure.filter(s=>s.sublevel)">
-            <div v-if="Global.Substages[l2.level][l2.sublevel].length==0">
+            <div v-if="Global.Substages[l2.level][l2.sublevel].length==0" style="text-align:center">
               <small style=color:#666>~no substages</small>
             </div>
             <div v-for="substage in Global.Substages[l2.level][l2.sublevel]">

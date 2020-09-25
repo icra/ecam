@@ -177,7 +177,10 @@ function get_variable_value(code){
   if(!code) return false;
   let type = get_variable_type(code);
   if(!type) return false;
-  if(type=='output') return Global[code]();
+  if(type=='output'){
+    let output = Global[code](); //can be a number or an object
+    return (typeof(output)=='number'?output:output.total);
+  }
   if(type=='input') return get_current_stage(code)[code];
   return false;
 }

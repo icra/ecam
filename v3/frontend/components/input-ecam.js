@@ -43,10 +43,10 @@ Vue.component('input_ecam',{
           <!--case 1: selection is a percent of something else-->
           <select v-if="Exceptions[code].percent_of" v-model="current_stage[code]">
             <option
-              v-for="obj,option in Tables[Exceptions[code].table]"
+              v-for="obj in Tables[Exceptions[code].table]"
               :value="parseFloat(obj[Exceptions[code].table_field()]*Exceptions[code].percent_of())"
             >
-              {{translate(option)}}
+              {{translate(obj.name)}}
               [{{        100*obj[Exceptions[code].table_field()] }} %]
               ({{ format(    obj[Exceptions[code].table_field()]*Exceptions[code].percent_of()/Units.multiplier(code) )}}
               {{get_current_unit(code)}})
@@ -55,10 +55,10 @@ Vue.component('input_ecam',{
           <!--case 2: selection is a fixed value-->
           <select v-else v-model="current_stage[code]">
             <option
-              v-for="obj,option in Tables[Exceptions[code].table]"
+              v-for="obj in Tables[Exceptions[code].table]"
               :value="parseFloat(obj[Exceptions[code].table_field()])"
             >
-              {{translate(option)}}
+              {{translate(obj.name)}}
               ({{ format(obj[Exceptions[code].table_field()]) }})
             </option>
           </select>
@@ -81,11 +81,11 @@ Vue.component('input_ecam',{
             "
           >
             <option
-              v-for="obj,op in Tables[code]"
-              :value="parseInt(Tables[code][op].value)"
+              v-for="obj,i in Tables[code]"
+              :value="parseInt(i)"
             >
-              ({{Tables[code][op].value}})
-              {{translate(op)}}
+              ({{i}})
+              {{translate(obj.name)}}
             </option>
           </select>
         </div>

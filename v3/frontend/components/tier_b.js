@@ -8,9 +8,9 @@ let tier_b=new Vue({
     variable, //vue object
 
     //FILTERS (see "backend/filters.js")
-    Filters,          //definition (list of variables for each filter)
+    Filters,          //filters definition (list of variables for each filter)
+    filters_on:false,  //all filters on
     filters_active:{  //each filter on/off
-      //default active filters
       "Population":true,
       "Water volumes":true,
       "Operational parameters":true,
@@ -19,7 +19,7 @@ let tier_b=new Vue({
       "Energy performance":true,
       "Discharge":true,
       "Sludge management":true,
-    }, 
+    },
 
     Global,
     Info,
@@ -39,6 +39,7 @@ let tier_b=new Vue({
     translate,
     format,
     get_level_color,
+    get_variable_value,
     is_code_in_any_filter,
 
     set_question(question, new_value){
@@ -88,6 +89,8 @@ let tier_b=new Vue({
     },
 
     is_variable_visible(code){
+      if(!this.filters_on) return true;
+      //return true;
       let filters = Object.keys(this.Filters);
       for(let i=0;i<filters.length;i++){
         let key=filters[i];
@@ -198,12 +201,19 @@ let tier_b=new Vue({
       <div id=filters>
         <div
           class=filter
-          @click="enable_all_filters()" 
+          @click="enable_all_filters()"
           title="Enable all filters"
-        ><b><code>Filters</code></b>
+        >
+          <b><code>Filters</code></b>
         </div>
-        <div>&rarr;</div>
+        <div>
+          <button @click="filters_on^=1">
+            <span :style="{fontWeight:filters_on?'bold':''}">ON</span>/<span :style="{fontWeight:filters_on?'':'bold'}">OFF</span>
+          </button>
+        </div>
+        <div v-if="filters_on" style="padding:0 1em">&rarr;</div>
         <div
+          v-if="filters_on"
           v-for="key in Object.keys(Filters)"
           class=filter
           @click="disable_all_filters();filters_active[key]=true;"
@@ -249,13 +259,7 @@ let tier_b=new Vue({
             <thead>
               <tr>
                 <td></td>
-                <td>
-                  <div v-if="sublevel">
-                    Substage 1
-                    &emsp;
-                    (eye icon, edit icon, delete icon)
-                  </div>
-                </td>
+                <td style="text-align:center">Value</td>
                 <td style="text-align:center">Unit</td>
               </tr>
             </thead>
@@ -317,7 +321,7 @@ let tier_b=new Vue({
                         <span v-if="Global.Configuration.Questions[question]" v-html="translate('yes')"></span>
                         <span v-else v-html="translate('no')"></span>
                       </label>
-                      
+
                       <!--indicator of "variable not filtered"-->
                       <span v-if="!is_code_in_any_filter(question)" style="float:right">
                         <code style="background:yellow;color:black">[warning:no-filter: {{question}}]</code>
@@ -397,26 +401,26 @@ let tier_b=new Vue({
                   <td
                     @mousemove="caption.show($event, Formulas.prettify(Global[key]))"
                     @mouseout="caption.hide()"
-                    v-html="format(Global[key]())"
+                    v-html="format(get_variable_value(key))"
                     style="text-align:right"
                   ></td>
 
                   <!--emission per year and serviced population-->
                   <td
                     v-if="Normalization[level] && Normalization[level].serv_pop"
-                    v-html="format( Normalization[level].serv_pop(Global[key]()))"
+                    v-html="format( Normalization[level].serv_pop( get_variable_value(key) ))"
                     style="text-align:right"
                   ></td>
 
                   <!--emission per m3 of water treated-->
                   <td
                     v-if="Normalization[level] && Normalization[level].volume && sublevel"
-                    v-html="format( Normalization[level][sublevel].volume(Global[key]()))"
+                    v-html="format( Normalization[level][sublevel].volume( get_variable_value(key) ))"
                     style="text-align:right"
                   ></td>
                   <td
                     v-else-if="Normalization[level] && Normalization[level].volume && !sublevel"
-                    v-html="format( Normalization[level].volume(Global[key]()))"
+                    v-html="format( Normalization[level].volume( get_variable_value(key) ))"
                     style="text-align:right"
                   ></td>
                 </tr>
@@ -576,7 +580,6 @@ let tier_b=new Vue({
       /*colors of links*/
       #tier_b table[level=Water] a { color: var(--color-level-Water) }
       #tier_b table[level=Waste] a { color: var(--color-level-Waste) }
-      #tier_b table[level=Faecl] a { color: var(--color-level-Faecl) }
 
       #tier_b #filters {
         display:flex;

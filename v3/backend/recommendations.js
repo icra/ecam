@@ -1,4 +1,5 @@
 /* estimations: inputs with equations */
+//they should be moved inside the Ecam global class for consistency
 let Recommendations={
   /*FSM
     //fsc
@@ -64,16 +65,16 @@ let Recommendations={
       wwc_vol_conv(){return Global.Waste.Transport.wwc_vol_coll;},
       wwt_n2o_efac(){return 3.2},
       wwt_slu_lf_TVS(){
-        let slu_disp=Tables.find('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);
-        return Tables.wwt_slu_disp[slu_disp].TVS;
+        let slu_disp=Tables.get_row('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);
+        return slu_disp.TVS;
       },
       wwt_slu_la_N_cont(){
-        let slu_disp=Tables.find('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);
-        return Tables.wwt_slu_disp[slu_disp].la_N_cont;
+        let slu_disp=Tables.get_row('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);
+        return slu_disp.la_N_cont;
       },
       wwt_slu_lf_N_cont(){
-        let slu_disp=Tables.find('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);
-        return Tables.wwt_slu_disp[slu_disp].la_N_cont;
+        let slu_disp=Tables.get_row('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);
+        return slu_disp.la_N_cont;
       },
       wwt_biog_pro(){return Global.Waste.Treatment.wwt_serv_pop*Global.General.bod_pday*Global.Days()*Cts.ct_bod_kg.value*Cts.ct_biog_g.value/1000;},
       wwt_biog_fla(){
@@ -86,7 +87,6 @@ let Recommendations={
       wwt_biog_val(){return Global.Waste.Treatment.wwt_biog_pro},
       wwt_ch4_biog(){return 59},
       wwt_bod_infl(){return Global.General.bod_pday/1000*Global.wwt.wwt_serv_pop*Global.Days()},
-      wwt_bod_effl(){return 0.10*Global.Waste.Treatment.wwt_bod_infl},
       //SM
       wwt_mass_slu(){
         let b=1;

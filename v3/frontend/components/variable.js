@@ -46,7 +46,7 @@ let variable = new Vue({
         return false;
       }
 
-      if(Info[id]){
+      if(Info[id] || this.Global[id]){
         this.id           = id;
         this.question     = this.Questions.is_inside(this.id);
         this.localization = this.locate_variable(id);
@@ -69,20 +69,21 @@ let variable = new Vue({
           &rarr;
         </span>
         <code>{{id}}</code>
-        <p v-if="Info[id]" style="margin-bottom:0">
+
+        <p v-if="Info[id] || Global[id]" style="margin-bottom:0">
           <code
             style="font-weight:bold"
             v-html="translate(id+'_descr').prettify()">
           </code>
         </p>
         <div v-else class=error>
-          ERROR: Variable {{id}} not defined in backend/info.js
+          ERROR: Variable {{id}} not defined
         </div>
       </h1>
 
       <!--variable table-->
       <table
-        v-if="Info[id]"
+        v-if="Info[id] || Global[id]"
         :level="localization.level"
         :style="
           'text-align:left; width:70%; margin:auto;'+
@@ -150,7 +151,8 @@ let variable = new Vue({
                 <div style="font-weight:bold">
                   <span style="color:#606">{{ translate('variable_formula') }}</span>:
                 </div>
-                <div
+                <code>
+                <pre
                   v-html="Formulas.prettify(Global[id].toString())"
                   style="
                     padding:5px 10px;
@@ -158,7 +160,8 @@ let variable = new Vue({
                     color:black;
                     font-family:monospace;
                   "
-                ></div>
+                ></pre>
+                </code>
               </div>
 
               <!--variable show inputs involved-->
@@ -184,10 +187,10 @@ let variable = new Vue({
             <!--variable current value input element-->
             <div v-if="get_variable_type(id)=='input'">
               <!--input is an Option-->
-              <div v-if="Info[id].magnitude=='Option'">
+              <div v-if="Info[id] && Info[id].magnitude=='Option'">
                 <select v-model.number="get_current_stage(id)[id]">
-                  <option v-for="obj,key in Tables[id]" :value="obj.value">
-                    {{key}}
+                  <option v-for="obj,i in Tables[id]" :value="i">
+                    {{obj.name}}
                   </option>
                 </select>
               </div>
@@ -211,7 +214,7 @@ let variable = new Vue({
         <!--variable magnitude-->
         <tr>
           <th>{{ translate('variable_magnitude') }}</th>
-          <td>{{ Info[id].magnitude }}</td>
+          <td>{{ Info[id] ? Info[id].magnitude : "magnitude not defined"}}</td>
         </tr>
 
         <!--outputs that use this variable-->
@@ -339,7 +342,6 @@ let variable = new Vue({
       /*colors of links*/
       #variable table[level=Water] a { color: var(--color-level-Water) }
       #variable table[level=Waste] a { color: var(--color-level-Waste) }
-      #variable table[level=Faecl] a { color: var(--color-level-Faecl) }
     </style>
   `,
 });

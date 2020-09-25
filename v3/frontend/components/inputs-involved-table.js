@@ -22,7 +22,7 @@ Vue.component('inputs_involved_table',{
           </td>
 
           <!--involved constant unit-->
-          <td class=unit v-html="Cts[match].unit"></td>
+          <td class=unit v-html="Cts[match].unit.prettify()"></td>
         </tr>
 
         <!--input involved is an Option-->
@@ -35,7 +35,7 @@ Vue.component('inputs_involved_table',{
           <!--input involved value-->
           <td colspan=2>
             {{
-              Tables.find(match, get_variable_value(match))
+              Tables.get_row(match, get_variable_value(match)).name
             }}
           </td>
         </tr>
@@ -51,7 +51,7 @@ Vue.component('inputs_involved_table',{
             <td class=unit v-html="get_base_unit(match).prettify()"></td>
           </div>
           <div v-else>
-            <td class=unit v-html="Info[match].unit.prettify()"></td>
+            <td class=unit v-html="Info[match] ? Info[match].unit.prettify() : 'unit not defined'"></td>
           </div>
         </tr>
       </tbody>

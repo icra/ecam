@@ -10,9 +10,9 @@ let summary_ghg = new Vue({
       {level:'Waste', sublevel:'Discharge', code:'wwd_wr_GHG_avo_d'},
       {level:'Waste', sublevel:'Discharge', code:'wwd_SL_ghg_non'},
       {level:'Waste', sublevel:'Discharge', code:'wwd_wr_GHG_avo'},
-      {level:'Faecl', sublevel:'Treatment', code:'fst_SL_GHG_avoided'},
-      {level:'Faecl', sublevel:'Reuse',     code:'fsr_ghg_avoided_land'},
-      {level:'Faecl', sublevel:'Reuse',     code:'fsr_ghg_avoided_reuse'},
+      {level:'Waste', sublevel:'Onsite',    code:'fst_SL_GHG_avoided'},
+      {level:'Waste', sublevel:'Onsite',    code:'fsr_ghg_avoided_land'},
+      {level:'Waste', sublevel:'Onsite',    code:'fsr_ghg_avoided_reuse'},
     ],
 
     //folded sections

@@ -47,8 +47,12 @@ let Cts={
 
   //constants for sludge management proposed by Girum
   ct_oc_vs:{value:0.56,descr:"Organic Carbon content in Volatile Solids",unit:"g OC / g TVS"},
+
+  //TODO they are already in the table "wwt_slu_disp"
   ct_vs_dig:{value:0.51,descr:"Volatile Solids content in Digested Sludge",unit:"g TVS / g sludge"},
   ct_vs_slu:{value:0.70,descr:"Volatile Solids content in not Digested Sludge",unit:"g TVS / g sludge"},
+  //TODO
+
   ct_ch4_oc:{value:1.3,descr:"C to CH4 conversion factor",unit:"g CH4 / g OC"},
   ct_ch4_up:{value:0.025,descr:"Percentage of CH4 emission for uncoverd pile",unit:"ratio"},
 
