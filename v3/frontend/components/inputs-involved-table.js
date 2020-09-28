@@ -5,6 +5,7 @@ Vue.component('inputs_involved_table',{
   template:`<div>
     <table class=inputs_involved>
       <tbody v-for="match in Formulas.ids_per_formula(obj[code].toString())">
+
         <!--input involved is a constant-->
         <tr v-if="Cts[match]" :title="'CONSTANT: '+Cts[match].descr">
           <!--involved constant code-->
@@ -26,7 +27,7 @@ Vue.component('inputs_involved_table',{
         </tr>
 
         <!--input involved is an Option-->
-        <tr v-else-if="Tables[match]">
+        <tr v-else-if="Info[match] && Info[match].magnitude=='Option'">
           <!--input involved code-->
           <td :title="translate(match+'_descr')">
             <a @click="variable.view(match)">{{match}}</a>

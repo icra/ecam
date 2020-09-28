@@ -19,7 +19,7 @@ let variable = new Vue({
     Structure,
     Units,
     Tables,
-    Recommendations,
+    Estimations,
     Exceptions,
     Formulas,
     Questions,
@@ -226,14 +226,14 @@ let variable = new Vue({
             <table class=outputs_affected>
               <tbody v-for="output in Formulas.outputs_per_input(id)">
                 <!--output that uses the input is an estimation-->
-                <tr v-if="Recommendations[output]">
+                <tr v-if="Estimations[output]">
                   <td :title="translate(output+'_descr')">
                     <a @click="view(output)">
                       {{ output }} (estimation)
                     </a>
                   </td>
                   <td>
-                    <div v-html="format(Recommendations[output]())">
+                    <div v-html="format(Estimations[output]())">
                     </div>
                   </td>
                   <td>
@@ -269,25 +269,25 @@ let variable = new Vue({
         </tr>
 
         <!--the input has an estimation formula-->
-        <tr v-if="Recommendations[id]">
+        <tr v-if="Estimations[id]">
           <th>
             Estimation of this input based on other inputs
           </th>
           <td>
             <div>
-              <span v-html="format( Recommendations[id]() )"></span>
+              <span v-html="format( Estimations[id]() )"></span>
               <span v-html="Info[id].unit.prettify()" class=unit></span>
             </div>
 
-            <!--formula for recommendation-->
+            <!--formula for estimations-->
             <div style="border:1px solid #ccc;padding:1em"
-              v-html="Formulas.prettify( Recommendations[id].toString() )"
+              v-html="Formulas.prettify( Estimations[id].toString() )"
             ></div>
 
-            <!--inputs involved in the recommendations equation-->
+            <!--inputs involved in the estimations equation-->
             <inputs_involved_table
               :code="id"
-              :obj="Recommendations"
+              :obj="Estimations"
             ></inputs_involved_table>
           </td>
         </tr>

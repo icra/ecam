@@ -9,7 +9,7 @@ let tier_b=new Vue({
 
     //FILTERS (see "backend/filters.js")
     Filters,          //filters definition (list of variables for each filter)
-    filters_on:false,  //all filters on
+    filters_on:true,  //all filters on
     filters_active:{  //each filter on/off
       "Population":true,
       "Water volumes":true,
@@ -27,7 +27,7 @@ let tier_b=new Vue({
     Tips,
     Units,
     Tables,
-    Recommendations,
+    Estimations,
     Exceptions,
     Normalization,
     Formulas,
@@ -158,8 +158,8 @@ let tier_b=new Vue({
           <div v-if="level=='Waste'">
             <a onclick="ecam.show('population')">
               <b>{{translate('wwc_conn_pop_descr')}}:</b>
-              <span :class="Global.Waste.Transport.wwc_conn_pop<=0 ? 'warning' : ''">
-                {{format(Global.Waste.Transport.wwc_conn_pop)}}
+              <span :class="Global.Waste.Collection.wwc_conn_pop<=0 ? 'warning' : ''">
+                {{format(Global.Waste.Collection.wwc_conn_pop)}}
               </span>
             </a>
           </div>
@@ -255,15 +255,6 @@ let tier_b=new Vue({
 
           <!--tier b input table-->
           <table :level="level" style="width:100%">
-            <!--tier b inputs header-->
-            <thead>
-              <tr>
-                <td></td>
-                <td style="text-align:center">Value</td>
-                <td style="text-align:center">Unit</td>
-              </tr>
-            </thead>
-
             <!--tier b inputs-->
             <tbody
               v-for="key in Object.keys(get_current_stage()).filter(key=>{return Questions.is_inside(key)==false})"
@@ -578,8 +569,8 @@ let tier_b=new Vue({
       }
 
       /*colors of links*/
-      #tier_b table[level=Water] a { color: var(--color-level-Water) }
-      #tier_b table[level=Waste] a { color: var(--color-level-Waste) }
+      #tier_b table[level=Water] a { color:var(--color-level-generic)}
+      #tier_b table[level=Waste] a { color:var(--color-level-generic)}
 
       #tier_b #filters {
         display:flex;

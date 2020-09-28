@@ -7,8 +7,7 @@ digraph MyGraph {
   pop [label="Population"]
   ww  [label="Wastewater"]
 
-  tra [label="Transport",         style="filled",color="#ed6d57",fontcolor="white",shape="box"]
-  col [label="Collected"]
+  col [label="Collected", style="filled",color="#ed6d57",fontcolor="white"]
   unc [label="Uncollected"]
 
   wwt [label="Treatment",         style="filled",color="#ed6d57",fontcolor="white",shape="box"]
@@ -36,7 +35,7 @@ digraph MyGraph {
 
   subgraph cluster_ww{
     label="Wastewater"
-    ww  -> tra -> {col unc} [color="blue:brown"]
+    ww  -> {col unc} [color="blue:brown"]
     unc -> ons              [color="blue:brown"]
     col -> wwt              [color="blue:brown"]
   }

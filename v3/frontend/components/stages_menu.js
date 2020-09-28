@@ -3,6 +3,9 @@ let stages_menu  = new Vue({
   data:{
     visible:false,
     current_view:null,
+
+    show_substages_summary:true,
+
     caption,
     Global,
     Info,
@@ -21,69 +24,67 @@ let stages_menu  = new Vue({
         return true;
       }
     },
-
-    //quick filter buttons (discharge and sludge)
-    go_to_discharge(level,sublevel){
-      this.go_to(level,sublevel);
-      tier_b.filters_on=true;
-      tier_b.disable_all_filters();
-      tier_b.filters_active['Discharge']=true;
-    },
-    go_to_sludge(level,sublevel){
-      this.go_to(level,sublevel);
-      tier_b.filters_on=true;
-      tier_b.disable_all_filters();
-      tier_b.filters_active['Sludge management']=true;
-    },
   },
   template:`
     <!--linear menu COMPONENT-->
     <div id=stages_menu v-if="visible && Languages.ready">
-      <div>
-        <div style="font-size:large;text-align:center">
-          Stages of the Urban Water Cycle
-        </div>
-        <table style="margin:auto">
-          <!--level 1 and level2-->
-          <tr>
-            <td v-for="s in Structure">
-              <div style="text-align:center">{{translate(s.sublevel?s.sublevel:s.level)}}</div>
-              <div style="text-align:center">
-                <img
-                  @click="go_to(s.level,s.sublevel)"
-                  @mousemove="caption.show($event, translate(s.sublevel?s.sublevel:s.level))"
-                  @mouseout="caption.hide()"
-                  :src="'frontend/img/'+s.icon"
-                  :class="'s '+(is_tier_b_selected(s.level, s.sublevel)?'selected':'')"
-                  :stage="s.alias"
-                >
-                <div style="font-size:smaller">
+      <div class=flex style="justify-content:center">
+        <div>
+          <table style="margin:auto">
+            <!--level 1 and level2-->
+            <tr>
+              <td v-for="l1 in Structure.filter(s=>!s.sublevel)" :colspan="Structure.filter(s=>s.level==l1.level).length-1"
+                :style="{background:l1.color, color:'white', cursor:'pointer'}"
+                @click="go_to(l1.level)"
+              >
+                <div style="text-align:center">{{translate(l1.level)}}</div>
+              </td>
+            </tr>
+            <tr>
+              <td v-for="s in Structure" v-if="s.sublevel" style="width:100px">
+                <div style="text-align:center">
+                  <img
+                    @click="go_to(s.level,s.sublevel)"
+                    @mousemove="caption.show($event, translate(s.sublevel?s.sublevel:s.level))"
+                    @mouseout="caption.hide()"
+                    :src="'frontend/img/'+s.icon"
+                    :class="'s '+(is_tier_b_selected(s.level, s.sublevel)?'selected':'')"
+                    :stage="s.alias"
+                  >
+                </div>
+              </td>
+            </tr>
+
+            <tr v-if="show_substages_summary">
+              <td v-for="s in Structure.filter(s=>s.sublevel)">
+                <div v-if="s.sublevel" v-for="ss,i in [{},{}]" style="font-size:smaller;border-bottom:1px solid #ccc">
+                  <div class=flex style="justify-content:space-between">
+                    <div>
+                      Substage {{i}}
+                    </div>
+                    <div>
+                      0
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr v-if="show_substages_summary">
+              <td v-for="s in Structure.filter(s=>s.sublevel)">
+                <div style="font-size:smaller;text-align:right">
                   <span v-html="format(Global[s.prefix+'_KPI_GHG']())"></span>
                 </div>
-              </div>
-            </td>
-          </tr>
-          <!--discharge-->
-          <tr>
-            <td v-for="l2 in Structure">
-              <div v-if="l2.discharge" style=text-align:center>
-                <button @click="go_to_discharge(l2.level,l2.sublevel)">
-                  Discharge
-                </button>
-              </div>
-            </td>
-          </tr>
-          <!--sludge-->
-          <tr>
-            <td v-for="l2 in Structure">
-              <div v-if="l2.sludge" style=text-align:center>
-                <button @click="go_to_sludge(l2.level,l2.sublevel)">
-                  Sludge
-                </button>
-              </div>
-            </td>
-          </tr>
-        </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div>
+          <label style="user-select:none">
+            <input type=checkbox v-model="show_substages_summary">
+            substages summary
+          </label>
+        </div>
       </div>
     </div>
   `,
@@ -92,19 +93,14 @@ let stages_menu  = new Vue({
     <style>
       #stages_menu {
         background:#f0f5fc;
-        padding:1em;
+        padding:5px;
         border-bottom:1px solid #ccc;
       }
       #stages_menu img {
         cursor:pointer;
-        position:relative;
-        vertical-align:middle;
         padding:0;
         width:70px;
-        border-radius:90%;
-        border:3px solid transparent;
       }
-      #stages_menu img:hover,
       #stages_menu img.selected {
         border:3px solid var(--color-level-generic);
       }

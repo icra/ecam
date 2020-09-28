@@ -18,12 +18,12 @@ let population = new Vue({
         {level:'Water', stage:this.Global.Water.Distribution, code:'wsd_serv_pop'},
 
         {level:'Waste', stage:this.Global.Waste,              code:'ww_resi_pop'},
-        {level:'Waste', stage:this.Global.Waste.Transport,    code:'wwc_conn_pop'},
-        {level:'Waste', stage:this.Global.Waste.Transport,    code:'fsc_onsi_pop'},
-        {level:'Waste', stage:this.Global.Waste.Transport,    code:'fsc_open_pop'},
-
+        {level:'Waste', stage:this.Global.Waste.Collection,   code:'wwc_conn_pop'},
         {level:'Waste', stage:this.Global.Waste.Treatment,    code:'wwt_serv_pop'},
+
         {level:'Waste', stage:this.Global.Waste.Onsite,       code:'wwo_serv_pop'},
+        {level:'Waste', stage:this.Global.Waste.Onsite,       code:'fsc_onsi_pop'},
+        {level:'Waste', stage:this.Global.Waste.Onsite,       code:'fsc_open_pop'},
       ];
     },
     focus_input(pop, event){

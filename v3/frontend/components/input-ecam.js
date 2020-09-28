@@ -18,16 +18,16 @@ Vue.component('input_ecam',{
           </div>
 
           <!--recommendation button-->
-          <div v-if="Recommendations[code]">
+          <div v-if="Estimations[code]">
             <button
-              @click="current_stage[code] = Recommendations[code]()"
-              @mousemove="caption.show($event, \`Estimation formula:<br>\$\{Formulas.prettify(Recommendations[code])\}\`)"
+              @click="current_stage[code] = Estimations[code]()"
+              @mousemove="caption.show($event, \`Estimation formula:<br>\$\{Formulas.prettify(Estimations[code])\}\`)"
               @mouseout="caption.hide()"
-              :disabled="isNaN(Recommendations[code]())"
+              :disabled="isNaN(Estimations[code]())"
               style="font-size:smaller"
             >
               Estimation:
-              <span v-html="format(Recommendations[code]()/Units.multiplier(code))"></span>
+              <span v-html="format(Estimations[code]()/Units.multiplier(code))"></span>
               <span v-html="get_current_unit(code).prettify()"></span>
             </button>
           </div>
@@ -148,7 +148,7 @@ Vue.component('input_ecam',{
       Info,
       Units,
       Tables,
-      Recommendations,
+      Estimations,
       Exceptions,
       Formulas,
       Questions,

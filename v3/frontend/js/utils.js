@@ -194,9 +194,8 @@ function get_variable_type(code){
     return 'output';
   }
 
-  //search recommendations TODO
+  //search estimations TODO
   //search exceptions TODO
-  
   //search inputs in General
   {
     let level="General";

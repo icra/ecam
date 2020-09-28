@@ -1,14 +1,14 @@
 /* estimations: inputs with equations */
 //they should be moved inside the Ecam global class for consistency
-let Recommendations={
+let Estimations={
   /*FSM
     //fsc
       //influent BOD
       fsc_bod_infl(){
-        return Global.General.bod_pday_fs/1000*Global.Waste.Transport.fsc_onsi_pop*Global.Days();
+        return Global.General.bod_pday_fs/1000*Global.Waste.Collection.fsc_onsi_pop*Global.Days();
       },
       //sludge emptied
-      fsc_fslu_emp(){ return Cts.ct_fs_prod.value*Global.Waste.Transport.fsc_onsi_pop*Global.Days()/Global.Waste.Transport.fsc_fdensity*Global.Faecl.Containment.fsc_cont_emp/100; },
+      fsc_fslu_emp(){ return Cts.ct_fs_prod.value*Global.Waste.Collection.fsc_onsi_pop*Global.Days()/Global.Waste.Collection.fsc_fdensity*Global.Faecl.Containment.fsc_cont_emp/100; },
       //BOD removed as FS
       fsc_bod_rmvd(){ return Global.Faecl.Containment.fsc_fslu_emp*Global.Faecl.Containment.fsc_bod_conc_fs; },
     //fst
@@ -55,14 +55,14 @@ let Recommendations={
     ww_vol_gene(){return 0.2*Global.Waste.ww_resi_pop*Global.Days();},
 
     /*wwc*/
-      wwc_vol_coll(){return 0.2*Global.Waste.Transport.wwc_conn_pop*Global.Days();},
-      wwc_vol_coll_unt(){return Global.Waste.Transport.wwc_vol_coll - Global.Waste.Transport.wwc_vol_coll_tre;},
-      wwc_vol_unco(){return Global.Waste.ww_vol_gene - Global.Waste.Transport.wwc_vol_coll;},
-      wwc_vol_unco_unt(){return Global.Waste.Transport.wwc_vol_unco - Global.Waste.Transport.wwc_vol_unco_ons;},
-      fsc_open_pop(){return Global.Waste.ww_resi_pop - Global.Waste.Transport.wwc_conn_pop - Global.Waste.Transport.fsc_onsi_pop;},
+      wwc_vol_coll(){return 0.2*Global.Waste.Collection.wwc_conn_pop*Global.Days();},
+      wwc_vol_coll_unt(){return Global.Waste.Collection.wwc_vol_coll - Global.Waste.Collection.wwc_vol_coll_tre;},
+      wwc_vol_unco(){return Global.Waste.ww_vol_gene - Global.Waste.Collection.wwc_vol_coll;},
+      wwc_vol_unco_unt(){return Global.Waste.Collection.wwc_vol_unco - Global.Waste.Collection.wwc_vol_unco_ons;},
+      fsc_open_pop(){return Global.Waste.ww_resi_pop - Global.Waste.Collection.wwc_conn_pop - Global.Waste.Collection.fsc_onsi_pop;},
 
     /*wwt*/
-      wwc_vol_conv(){return Global.Waste.Transport.wwc_vol_coll;},
+      wwc_vol_conv(){return Global.Waste.Collection.wwc_vol_coll;},
       wwt_n2o_efac(){return 3.2},
       wwt_slu_lf_TVS(){
         let slu_disp=Tables.get_row('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);
@@ -101,6 +101,4 @@ let Recommendations={
       },
       wwt_dryw_slu(){ return 0.04*Global.Waste.Treatment.wwt_mass_slu},
       wwt_temp_inc(){ return 1023},
-    /*wwd*/
-    wwd_bod_effl(){return Global.Waste.Treatment.wwt_bod_effl},
 };

@@ -1,6 +1,16 @@
 {
 "#below":"below",
 
+"#wwc_KPI_GHG_col_descr":"From non-overflowing sewers",
+"#wwc_KPI_GHG_cso_descr":"From overflowing sewers",
+
+"#Centralised, aerobic, treatment plant":"Centralised, aerobic, treatment plant",
+"#Septic tank (with or without dispersal field)":"Septic tank (with or without dispersal field)",
+"#Discharge to aquatic environments (Tier 1)":"Discharge to aquatic environments (Tier 1)",
+"#Discharge to aquatic environments other than reservoirs, lakes, and estuaries (Tier 2)":"Discharge to aquatic environments other than reservoirs, lakes, and estuaries (Tier 2)",
+"#Discharge to reservoirs, lakes, and estuaries (Tier 2)":"Discharge to reservoirs, lakes, and estuaries (Tier 2)",
+"#Flowing sewer (open or closed)":"Flowing sewer (open or closed)",
+
 "#wwo_vol_trea_descr":"Volume of treated wastewater",
 "#wwo_vol_trea_expla":"Volume of treated wastewater by onsite sanitation systems",
 
@@ -23,8 +33,11 @@
 "#ww_vol_gene_descr":"Volume of generated wastewater",
 "#ww_vol_gene_expla":"Volume of generated wastewater",
 
-"#wwt_n2o_efac_descr":"N2O emission factor",
-"#wwt_n2o_efac_expla":"N2O emission factor for wastewater treatment plants (default value: 3.2 gN2O/person/year)",
+"#wwt_n2o_efac_descr":"N2O emission factor (treatment)",
+"#wwt_n2o_efac_expla":"N2O emission factor for treatment (default value: 3.2 gN2O/person/year)",
+"#wwd_n2o_efac_descr":"N2O emission factor (discharge)",
+"#wwd_n2o_efac_expla":"N2O emission factor for discharge (default value: 3.2 gN2O/person/year)",
+
 "#fst_n2o_efac_descr":"N2O emission factor",
 "#fst_n2o_efac_expla":"N2O emission factor for faecal sludge treatment systems",
 
@@ -1152,8 +1165,8 @@
 "#ww_SL_serv_pop_expla":"Percentage of the resident population that are connected to the sewer systems and which wastewater is treated by the undertaking",
 "#ww_SL_treat_m3_descr":"Collected wastewater treated",
 "#ww_SL_treat_m3_expla":"Percentage of the collected sewage prior to dilution or overflows in the sewer system that are treated in wastewater treatment plants",
-"#ww_ch4_efac_unc_descr":"CH4 emission factor (uncollected wastewater)",
-"#ww_ch4_efac_unc_expla":"CH4 emission factor (uncollected wastewater)",
+"#ww_ch4_efac_cso_descr":"CH4 emission factor (untreated collected wastewater)",
+"#ww_ch4_efac_cso_expla":"CH4 emission factor (untreated collected wastewater)",
 "#ww_ch4_efac_unt_descr":"CH4 emission factor (untreated wastewater)",
 "#ww_ch4_efac_unt_expla":"CH4 emission factor (untreated wastewater)",
 "#ww_n2o_effl_descr":"Total Nitrogen load in the effluent",

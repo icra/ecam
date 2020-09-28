@@ -14,7 +14,7 @@
     <script src="backend/constants.js"></script>
     <script src="backend/tables.js"></script>
     <script src="backend/units.js"></script>
-    <script src="backend/recommendations.js"></script>
+    <script src="backend/estimations.js"></script>
     <script src="backend/exceptions.js"></script>
     <script src="backend/normalization.js"></script>
     <script src="backend/formulas.js"></script>
@@ -69,7 +69,7 @@
 <!--loading indicator-->
   <div id=loading>
     <div v-if="Languages.ready==false">
-      <div style="font-size:x-large">
+      <div style="font-size:x-large;padding:2em;text-align:center">
         loading ecam tool...
       </div>
     </div>
@@ -82,6 +82,20 @@
       },
     });
   </script>
+  <style>
+    /*loading ecam tool animation */
+    @keyframes loading_animation {
+      from {color: black;}
+      to {color: #eee;}
+    }
+    div#loading {
+      animation-name:loading_animation;
+      animation-duration:1s;
+      animation-iteration-count:infinite;
+      animation-direction:alternate;
+      animation-timing-function:ease-in;
+    }
+  </style>
 <!--/loading indicator-->
 
 <!--all elements and views-->

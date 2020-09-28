@@ -5,11 +5,15 @@
 */
 
 let Exceptions={
+  ww_ch4_efac_col:{
+    table:"ww_ch4_efac_col",
+    table_field:function(){return "ch4_efac"},
+  },
   ww_ch4_efac_unt:{
     table:"ww_ch4_efac",
     table_field:function(){return "ch4_efac"},
   },
-  ww_ch4_efac_unc:{
+  ww_ch4_efac_cso:{
     table:"ww_ch4_efac",
     table_field:function(){return "ch4_efac"},
   },
@@ -24,7 +28,7 @@ let Exceptions={
   fsc_ch4_efac:{ //depends on ch4_efac_flooding
     table:"fsc_type_tre",
     table_field:function(){
-      if(Global.Waste.Transport.fsc_flooding){
+      if(Global.Waste.Collection.fsc_flooding){
         return "ch4_efac_flooding";
       }else{
         return "ch4_efac";

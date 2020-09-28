@@ -9,8 +9,8 @@ let Normalization={
     energy:   function(emission){ return emission/Global.Water.ws_nrg_cons()||0},
 
     Abstraction:{
-      volume: function(emission){return emission/Global.Water.Abstraction.wsa_vol_conv || 0},
-      energy: function(emission){return emission/Global.Water.Abstraction.wsa_nrg_cons || 0},
+      volume: function(emission){return emission/Global.Water.Abstraction.wsa_vol_conv||0},
+      energy: function(emission){return emission/Global.Water.Abstraction.wsa_nrg_cons||0},
     },
 
     Treatment:{
@@ -30,9 +30,9 @@ let Normalization={
     volume:   function(emission){ return emission/Global.Waste.Treatment.wwt_vol_trea||0},
     energy:   function(emission){ return emission/Global.Waste.ww_nrg_cons()||0},
 
-    Transport:{
-      volume: function(emission){ return emission/Global.Waste.Transport.wwc_vol_conv||0},
-      energy: function(emission){ return emission/Global.Waste.Transport.wwc_nrg_cons||0},
+    Collection:{
+      volume: function(emission){ return emission/Global.Waste.Collection.wwc_vol_coll||0},
+      energy: function(emission){ return emission/Global.Waste.Collection.wwc_nrg_cons||0},
     },
 
     Treatment:{
@@ -41,7 +41,7 @@ let Normalization={
     },
 
     Onsite:{
-      volume: function(emission){ return emission/Global.Waste.Onsite.wwd_total_m3||0},
+      volume: function(emission){ return emission/Global.Waste.Onsite.wwd_total_m3||0}, //TODO
       energy: function(emission){ return emission/Global.Waste.Onsite.wwd_nrg_cons||0},
     },
   },

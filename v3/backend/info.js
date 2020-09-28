@@ -101,7 +101,7 @@ let Info={
   wwd_KPI_GHG_tre_n2o:{magnitude:"Mass",unit:"kg CO2eq"},
 
   ww_ch4_efac_unt: {magnitude:"Mass/Mass", unit:"kgCH4/kgBOD" },
-  ww_ch4_efac_unc: {magnitude:"Mass/Mass", unit:"kgCH4/kgBOD" },
+  ww_ch4_efac_cso: {magnitude:"Mass/Mass", unit:"kgCH4/kgBOD" },
   ww_ch4_efac_col: {magnitude:"Mass/Mass", unit:"kgCH4/kgBOD" },
 
   fsr_ghg_avoided_land: {magnitude:"Mass",   unit:"kg CO2eq"},
@@ -510,7 +510,7 @@ let Info={
   wsd_KPI_nrg_estm_sav: {magnitude:"Energy",             unit:"kWh"},
   wsd_KPI_ghg_estm_red: {magnitude:"Mass",               unit:"kg CO2eq"},
 
-	//L2 Wastewater Transport
+	//L2 Wastewater Collection
 	wwc_vol_coll:{magnitude:"Volume",unit:"m3"},
   wwc_vol_conv:{magnitude:"Volume",unit:"m3"},
 	wwc_nrg_cons:{magnitude:"Energy",unit:"kWh"},

@@ -10,7 +10,7 @@ body{
   --color-level-Water:             #58c1db; /*water supply*/
   --color-level-Water-secondary:   #e1eef1;
   --color-level-Waste:             #ed6d57; /*wastewater*/
-  --color-level-Waste-secondary:   #F2BFB6;
+  --color-level-Waste-secondary:   #f5ddd8;
 }
 
 button {

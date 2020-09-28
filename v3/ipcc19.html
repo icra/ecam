@@ -153,65 +153,6 @@
   </details>
 </div>
 
-<!--new structure proposed-->
-<div style="margin-bottom:10px">
-  <details open>
-    <summary><b>New structure proposed to make ecam v3 ipcc 2019 compliant</b></summary>
-    <div id=new_structure>
-      <table border=1 cellpadding="10">
-        <tr>
-          <th v-for="l1 in structure.filter(s=>!s.sublevel)" :colspan="3">
-            <img :src="l1.icon" style="width:50px">
-            <div>{{l1.level}}</div>
-          </th>
-        </tr>
-        <tr>
-          <td v-for="l2 in structure.filter(s=>s.sublevel)" style="text-align:center">
-            <img :src="l2.icon" style="width:100px">
-            <div>{{l2.sublevel}}</div>
-          </td>
-        </tr>
-        <tr>
-          <td v-for="l2 in structure.filter(s=>s.sublevel)" style="text-align:center">
-            <div v-if="l2.discharge">
-              Discharge
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td v-for="l2 in structure.filter(s=>s.sublevel)" style="text-align:center">
-            <div v-if="l2.sludge">
-              Sludge
-            </div>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </details>
-  <script>
-    let new_structure=new Vue({
-      el:"#new_structure",
-      data:{
-        structure:[
-          {prefix:'ws', alias:'water',    level:'Water', sublevel:false,          icon:"frontend/img/water.png",    color:'#58c1db'      },
-          {prefix:'ww', alias:'waste',    level:'Waste', sublevel:false,          icon:"frontend/img/waste.png",    color:'#ed6d57'      },
-          {prefix:'wsa',alias:'waterAbs', level:'Water', sublevel:'Abstraction',  icon:"frontend/img/waterAbs.svg", discharge:0, sludge:0},
-          {prefix:'wst',alias:'waterTre', level:'Water', sublevel:'Treatment',    icon:"frontend/img/waterTre.svg", discharge:0, sludge:1},
-          {prefix:'wsd',alias:'waterDis', level:'Water', sublevel:'Distribution', icon:"frontend/img/waterDis.svg", discharge:0, sludge:0},
-
-          {prefix:'wwu',alias:'wasteUnt', level:'Waste', sublevel:'Transport',    icon:"frontend/img/wasteCol.svg", discharge:1, sludge:0},
-          {prefix:'wwt',alias:'wasteTre', level:'Waste', sublevel:'Treatment',    icon:"frontend/img/wasteTre.svg", discharge:1, sludge:1},
-          {prefix:'wwo',alias:'wasteOns', level:'Waste', sublevel:'Onsite',       icon:"frontend/img/wasteOns.svg", discharge:1, sludge:1},
-          //{prefix:'sm', alias:'sludge',   level:'Sludge management',sublevel:false,                    icon:"frontend/img/faecl.png", color:'#95c11f'},
-          //{prefix:'sms',alias:'sludgeSto',level:'Sludge management',sublevel:'Water supply treatment', icon:"frontend/img/faeclTre.svg",             },
-          //{prefix:'smt',alias:'sludgeTra',level:'Sludge management',sublevel:'Wastewater treatment ',  icon:"frontend/img/faeclTre.svg",             },
-          //{prefix:'smd',alias:'sludgeDis',level:'Sludge management',sublevel:'Onsite sanitation',      icon:"frontend/img/faeclTre.svg",             },
-        ],
-      },
-    });
-  </script>
-</div>
-
 <div style="margin-bottom:10px">
   <div id=app>
     <!--main container-->

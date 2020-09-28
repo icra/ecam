@@ -8,6 +8,7 @@ let landing = new Vue({
   methods:{
     translate,
   },
+
   template:`
     <div id=landing v-if="visible && Languages.ready">
       <div id=first_container>
@@ -30,7 +31,7 @@ let landing = new Vue({
         </div>
 
         <!--urban water cycle picture-->
-        <div style=padding:2em>
+        <div v-if="false" style=padding:2em>
           <img src="frontend/img/viti/home/home-provisional.svg" style="width:60%">
         </div>
       </div>
