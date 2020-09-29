@@ -188,9 +188,7 @@ let tier_b=new Vue({
           <div>
             <a onclick="ecam.show('configuration')">
               <b>{{translate('conv_kwh_co2_descr')}}:</b>
-              <span :class="Global.General.conv_kwh_co2<=0 ? 'warning' : ''">
-                {{format(Global.General.conv_kwh_co2)}}
-              </span>
+              <span :class="Global.General.conv_kwh_co2<=0 ? 'warning' : ''">{{format(Global.General.conv_kwh_co2)}}</span>
               <span class=number v-html="Info.conv_kwh_co2.unit"></span>
             </a>
           </div>
@@ -207,7 +205,8 @@ let tier_b=new Vue({
           <b><code>Filters</code></b>
         </div>
         <div>
-          <button @click="filters_on^=1">
+          <button @click="filters_on^=1"
+            :style="{background:filters_on?'var(--color-secondary-green)':''}">
             <span :style="{fontWeight:filters_on?'bold':''}">ON</span>/<span :style="{fontWeight:filters_on?'':'bold'}">OFF</span>
           </button>
         </div>
@@ -521,7 +520,8 @@ let tier_b=new Vue({
 
       /*old*/
       #tier_b .warning {
-        background:red;
+        background:yellow;
+        color:black;
         padding:2px 4px;
         border-radius:5px;
       }

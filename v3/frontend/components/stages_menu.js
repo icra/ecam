@@ -4,7 +4,7 @@ let stages_menu  = new Vue({
     visible:false,
     current_view:null,
 
-    show_substages_summary:true,
+    show_substages_summary:false,
 
     caption,
     Global,
@@ -34,12 +34,14 @@ let stages_menu  = new Vue({
             <!--level 1 and level2-->
             <tr>
               <td v-for="l1 in Structure.filter(s=>!s.sublevel)" :colspan="Structure.filter(s=>s.level==l1.level).length-1"
-                :style="{background:l1.color, color:'white', cursor:'pointer'}"
+                class=l1
+                :style="{background:l1.color}"
                 @click="go_to(l1.level)"
-              >
-                <div style="text-align:center">{{translate(l1.level)}}</div>
-              </td>
+                v-html="translate(l1.level)"
+                :selected="is_tier_b_selected(l1.level,false)"
+              ></td>
             </tr>
+
             <tr>
               <td v-for="s in Structure" v-if="s.sublevel" style="width:100px">
                 <div style="text-align:center">
@@ -69,6 +71,7 @@ let stages_menu  = new Vue({
                 </div>
               </td>
             </tr>
+
             <tr v-if="show_substages_summary">
               <td v-for="s in Structure.filter(s=>s.sublevel)">
                 <div style="font-size:smaller;text-align:right">
@@ -93,16 +96,31 @@ let stages_menu  = new Vue({
     <style>
       #stages_menu {
         background:#f0f5fc;
-        padding:5px;
+        padding-top:1px;
         border-bottom:1px solid #ccc;
       }
       #stages_menu img {
         cursor:pointer;
         padding:0;
         width:70px;
+        border:3px solid transparent;
       }
       #stages_menu img.selected {
         border:3px solid var(--color-level-generic);
+      }
+      #stages_menu td {
+        /*
+        border:none;
+        */
+      }
+      #stages_menu td.l1{
+        color:white;
+        cursor:pointer;
+        text-align:center;
+      }
+      #stages_menu td.l1[selected],
+      #stages_menu td.l1:hover{
+        text-decoration:underline;
       }
     </style>
   `,

@@ -387,6 +387,36 @@ let Questions={
       otherQuestions:[],
     },
 
+    "wwd_trucks":{
+      variables:[
+        "wwd_trck_typ",
+        "wwd_vol_trck",
+        "wwd_KPI_GHG_trck_co2",
+        "wwd_KPI_GHG_trck_n2o",
+        "wwd_KPI_GHG_trck_ch4",
+        "wwd_KPI_GHG_trck",
+      ],
+      advanced:0,
+      otherQuestions:[],
+    },
+
+    "wwd_water_reuse":{
+      variables:[
+        "wwd_wr_N_rec",
+        "wwd_wr_P_rec",
+        "wwd_wr_adnrg",
+        "wwd_wr_vol_d",
+        "wwd_SL_ghg_non",   //output
+        "wwd_wr_GHG_avo_N", //output
+        "wwd_wr_GHG_avo_P", //output
+        "wwd_wr_GHG_avo",   //output
+        "wwd_wr_GHG_avo_d", //output
+        "wwd_wr_nrg_sav",   //output
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
+
     "wwt_sludge_mgmt":{
       variables:[
         "wwt_mass_slu",
@@ -495,85 +525,7 @@ let Questions={
       otherQuestions:[],
     },
 
-  //wwd
-    "wwd_engines":{
-      variables:[
-        "wwd_fuel_typ",
-        "wwd_vol_fuel",
-        "wwd_KPI_GHG_fuel_co2",
-        "wwd_KPI_GHG_fuel_n2o",
-        "wwd_KPI_GHG_fuel_ch4",
-        "wwd_KPI_GHG_fuel",
-      ],
-      advanced:0,
-      otherQuestions:[],
-    },
-
-    "wwd_trucks":{
-      variables:[
-        "wwd_trck_typ",
-        "wwd_vol_trck",
-        "wwd_KPI_GHG_trck_co2",
-        "wwd_KPI_GHG_trck_n2o",
-        "wwd_KPI_GHG_trck_ch4",
-        "wwd_KPI_GHG_trck",
-      ],
-      advanced:0,
-      otherQuestions:[],
-    },
-
-    "wwd_pumping":{
-      variables:[
-        "wwd_nrg_pump",
-        "wwd_vol_pump",
-        "wwd_pmp_head",
-        "wwd_sta_head",
-        "wwd_coll_len",
-        "wwd_KPI_std_nrg_cons",
-        "wwd_KPI_un_head_loss",
-      ],
-      advanced:1,
-      otherQuestions:[
-        "wwd_pumping_eff",
-      ],
-    },
-
-    "wwd_pumping_eff": {
-      variables:[
-        "wwd_pmp_flow",
-        "wwd_pmp_volt",
-        "wwd_pmp_amps",
-        "wwd_pmp_pf",
-        "wwd_pmp_pw",
-        "wwd_KPI_nrg_elec_eff",
-        "wwd_pmp_exff",
-        "wwd_KPI_std_nrg_newp",
-        "wwd_KPI_nrg_cons_new",
-        "wwd_KPI_nrg_estm_sav",
-        "wwd_KPI_ghg_estm_red",
-      ],
-      advanced:1,
-      otherQuestions:[],
-    },
-
-    "wwd_water_reuse":{
-      variables:[
-        "wwd_wr_N_rec",
-        "wwd_wr_P_rec",
-        "wwd_wr_adnrg",
-        "wwd_wr_vol_d",
-        "wwd_SL_ghg_non",   //output
-        "wwd_wr_GHG_avo_N", //output
-        "wwd_wr_GHG_avo_P", //output
-        "wwd_wr_GHG_avo",   //output
-        "wwd_wr_GHG_avo_d", //output
-        "wwd_wr_nrg_sav",   //output
-      ],
-      advanced:1,
-      otherQuestions:[],
-    },
-
-  //fsc
+  //Onsite
     "fsc_transport":{
       variables:[
         "fsc_nrg_cons",

@@ -157,6 +157,7 @@ let Tables = {
     {name:"no"},
     {name:"yes"},
   ],
+
   //type of onsite treatment
   "fst_type_tre":[
     {name:"No Treatment",                                     ch4_efac:0.00,   bod_rmvd_as_sludge_estm:0.0,},
@@ -177,6 +178,7 @@ let Tables = {
     {name:"Activated Sludge - Not well managed",              ch4_efac:0.18,   bod_rmvd_as_sludge_estm:0.65,},
     {name:"Trickling Filter",                                 ch4_efac:0.036,  bod_rmvd_as_sludge_estm:0.65,},
   ],
+
   //type of disposal
   "fsr_type_tre":[
     {name:"No disposal (open defecation)"},

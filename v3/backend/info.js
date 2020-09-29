@@ -20,6 +20,7 @@ let Info={
 
   ww_vol_gene:{magnitude:"Volume",unit:"m3"},
   wwt_n2o_efac:{magnitude:"Mass/People/Time", unit:"gN2O/person/year"},
+  wwd_n2o_efac:{magnitude:"Mass/People/Time", unit:"gN2O/person/year"},
   fst_n2o_efac:{magnitude:"Mass/People/Time", unit:"gN2O/person/year"},
 
   //bug fixes
@@ -576,8 +577,8 @@ let Info={
 	wwt_bod_rmvd:{magnitude:"Mass",unit:"kg"},
 	wwt_biog_fla:{magnitude:"Volume",unit:"m3"},
 	wwt_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m3"},
-	wwt_KPI_nrg_per_kg:{magnitude:"Energy/Mass",unit:"kWh/kg"},
-	wwt_KPI_biog_x_bod:{magnitude:"Volume/Mass",unit:"Nm3/kg"},
+	wwt_KPI_nrg_per_kg:{magnitude:"Energy/Mass",unit:"kWh/kgBOD"},
+	wwt_KPI_biog_x_bod:{magnitude:"Volume/Mass",unit:"Nm3/kgBOD"},
 	wwt_KPI_nrg_biogas:{magnitude:"Energy/Volume",unit:"kWh/m3"},
 	wwt_KPI_nrg_x_biog:{magnitude:"Percent",unit:"%"},
 	wwt_KPI_sludg_prod:{magnitude:"Mass/Volume",unit:"kg/m3"},

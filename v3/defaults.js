@@ -9,13 +9,13 @@ stages_menu.visible = 0;
 
 //default page to show
 tier_b.level="Waste";
-tier_b.sublevel="Treatment";
+tier_b.sublevel="Onsite";
 ecam.show('tier_b');
 
 /* BACKEND */
 
 //yes to all yes/no questions
-//Object.keys(Questions).forEach(key=>{Global.Configuration.Questions[key]=1});
+Object.keys(Questions).forEach(key=>{Global.Configuration.Questions[key]=1});
 
 //general variables
 Global.General.conv_kwh_co2 = 0.7; //conversion factor for grid electricity (kgCO2/kWh)
@@ -40,3 +40,6 @@ Global.Waste.Treatment.wwt_serv_pop      =   1800;
 Global.Waste.Treatment.wwt_vol_trea      =    1e5;
 Global.Waste.Treatment.wwd_vol_disc      =    9e4;
 Global.Waste.Treatment.wwd_vol_nonp      =    1e3;
+
+Global.Waste.Treatment.wwt_nrg_cons      =    1e3;
+Global.Waste.Treatment.wwt_bod_infl      =    1e3;

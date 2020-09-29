@@ -14,6 +14,7 @@ let Filters = {
   "wsa_vol_conv",      //variable
   "wst_vol_trea",      //variable
   "wsd_vol_dist",      //variable
+  "wsd_water_eff",     //question
 
   "ww_vol_gene",       //variable
 
@@ -93,7 +94,9 @@ let Filters = {
   "wwt_producing_biogas", //question
 
   "wsd_trucks",    //question
+  "wwt_trucks",    //question
   "wwd_trucks",    //question
+
   "fst_transport", //question
   "fsr_transport", //question
 ],

@@ -234,6 +234,7 @@ let landing = new Vue({
       #landing #second_container {
         padding:6em;
         padding-top:1em;
+        padding-bottom:1em;
         text-align:center;
 
         display:grid;
