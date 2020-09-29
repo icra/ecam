@@ -5,24 +5,20 @@
 */
 
 let Exceptions={
-  ww_ch4_efac_col:{
-    table:"ww_ch4_efac_col",
+  wwc_ch4_efac_col:{
+    table:"type_of_sewer",
     table_field:function(){return "ch4_efac"},
   },
-  ww_ch4_efac_unt:{
-    table:"ww_ch4_efac",
-    table_field:function(){return "ch4_efac"},
-  },
-  ww_ch4_efac_cso:{
-    table:"ww_ch4_efac",
+  wwc_ch4_efac_cso:{
+    table:"type_of_water_body",
     table_field:function(){return "ch4_efac"},
   },
   wwt_ch4_efac:{
-    table:"wwt_type_tre",
+    table:"type_of_treatment",
     table_field:function(){return "ch4_efac"},
   },
   wwd_ch4_efac:{
-    table:"ww_ch4_efac",
+    table:"type_of_water_body",
     table_field:function(){return "ch4_efac"},
   },
   fsc_ch4_efac:{ //depends on ch4_efac_flooding
@@ -50,7 +46,7 @@ let Exceptions={
 
   //BOD removed as sludge
   wwt_bod_slud:{
-    table:"wwt_type_tre",
+    table:"type_of_treatment",
     table_field:function(){return "bod_rmvd_as_sludge_estm"},
     percent_of:function(){
       return Global.Waste.Treatment.wwt_bod_infl;

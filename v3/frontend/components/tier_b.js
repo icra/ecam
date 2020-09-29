@@ -9,7 +9,7 @@ let tier_b=new Vue({
 
     //FILTERS (see "backend/filters.js")
     Filters,          //filters definition (list of variables for each filter)
-    filters_on:true,  //all filters on
+    filters_on:false,  //all filters on
     filters_active:{  //each filter on/off
       "Population":true,
       "Water volumes":true,
@@ -154,16 +154,6 @@ let tier_b=new Vue({
             </a>
           </div>
 
-          <!--only ww: connected population-->
-          <div v-if="level=='Waste'">
-            <a onclick="ecam.show('population')">
-              <b>{{translate('wwc_conn_pop_descr')}}:</b>
-              <span :class="Global.Waste.Collection.wwc_conn_pop<=0 ? 'warning' : ''">
-                {{format(Global.Waste.Collection.wwc_conn_pop)}}
-              </span>
-            </a>
-          </div>
-
           <!--serviced population-->
           <div>
             <div v-if="level=='Water'">
@@ -179,6 +169,22 @@ let tier_b=new Vue({
                 <b>{{translate('wwt_serv_pop_descr')}}:</b>
                 <span :class="Global.Waste.Treatment.wwt_serv_pop<=0 ? 'warning' : ''">
                   {{format(Global.Waste.Treatment.wwt_serv_pop)}}
+                </span>
+              </a>
+            </div>
+            <div v-if="level=='Waste'">
+              <a onclick="ecam.show('population')">
+                <b>{{translate('wwo_onsi_pop_descr')}}:</b>
+                <span :class="Global.Waste.Onsite.wwo_onsi_pop<=0 ? 'warning' : ''">
+                  {{format(Global.Waste.Onsite.wwo_onsi_pop)}}
+                </span>
+              </a>
+            </div>
+            <div v-if="level=='Waste'">
+              <a onclick="ecam.show('population')">
+                <b>{{translate('wwo_open_pop_descr')}}:</b>
+                <span :class="Global.Waste.Onsite.wwo_open_pop<=0 ? 'warning' : ''">
+                  {{format(Global.Waste.Onsite.wwo_open_pop)}}
                 </span>
               </a>
             </div>

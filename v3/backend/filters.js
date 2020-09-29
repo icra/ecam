@@ -3,12 +3,13 @@ let Filters = {
 "Population":[
   "ws_resi_pop",  //variable
   "wsd_serv_pop", //variable
+
   "ww_resi_pop",  //variable
   "wwc_conn_pop", //variable
-  "fsc_onsi_pop", //variable
-  "fsc_open_pop", //variable
   "wwt_serv_pop", //variable
-  "wwo_serv_pop", //variable
+
+  "wwo_onsi_pop", //variable
+  "wwo_open_pop", //variable
 ],
 "Water volumes":[
   "wsa_vol_conv",      //variable
@@ -17,20 +18,35 @@ let Filters = {
   "wsd_water_eff",     //question
 
   "ww_vol_gene",       //variable
-
   "wwc_vol_coll",      //variable
   "wwc_vol_coll_tre",  //variable
   "wwc_vol_coll_unt",  //variable
-  "wwc_vol_unco",      //variable
-  "wwc_vol_unco_ons",  //variable
-  "wwc_vol_unco_unt",  //variable
 
   "wwt_vol_trea",      //variable
-  "wwo_vol_trea",      //variable
-
   "wwd_vol_disc",      //variable
   "wwd_vol_nonp",      //variable
-  "fsr_vol_disc",      //variable
+
+  "wwo_vol_unco",      //variable
+  "wwo_vol_unco_ons",  //variable
+  "wwo_vol_unco_unt",  //variable
+  "wwo_vol_unco_tre",  //variable
+  "wwo_vol_disc",      //variable
+],
+"Emission factors":[
+  "wwc_ch4_efac_col",
+  "wwc_ch4_efac_cso",
+
+  "wwt_ch4_efac",
+  "wwd_ch4_efac",
+  "wwt_n2o_efac",
+  "wwd_n2o_efac",
+
+  "wwo_ch4_efac_unt",
+  "wwo_ch4_efac_con",
+  "wwo_ch4_efac_tre",
+  "wwo_n2o_efac_tre",
+  "wwo_ch4_efac_dis",
+  "wwo_n2o_efac_dis",
 ],
 "Operational parameters":[
   "ws_nrg_cost", //variable
@@ -51,35 +67,21 @@ let Filters = {
   "wwt_bod_slud", //variable
   "wwd_n2o_effl", //variable
 
-  "fst_producing_biogas", //question
+  "wwo_producing_biogas", //question
 
-  "fsc_type_tre",    //variable
-  "fsc_bod_infl",    //variable
-  "fsc_flooding",    //variable
-  "fsc_cont_emp",    //variable
-  "fsc_fdensity",    //variable
-  "fsc_fslu_emp",    //variable
-  "fsc_bod_conc_fs", //variable
-  "fsc_bod_rmvd",    //variable
-  "fst_bod_infl",    //variable
-  "fst_bod_effl",    //variable
-  "fst_type_tre",    //variable
-  "fst_bod_slud",    //variable
-  "fsr_type_tre",    //variable
-  "fsr_fslu_typ",    //variable
-],
-"Emission factors":[
-  "ww_ch4_efac_unt",
-  "ww_ch4_efac_cso",
-  "ww_ch4_efac_col",
-  "fsc_ch4_efac",
-  "wwt_ch4_efac",
-  "wwd_ch4_efac",
-  "wwt_n2o_efac",
-  "wwd_n2o_efac",
-
-  "fst_ch4_efac",
-  "fst_n2o_efac",
+  "wwo_type_con",    //variable
+  "wwo_flooding",    //variable
+  "wwo_cont_emp",
+  "wwo_fdensity",
+  "wwo_fslu_emp",
+  "wwo_type_tre",
+  "wwo_bod_infl",
+  "wwo_bod_rmvd",
+  "wwo_bod_slud",
+  "wwo_bod_effl",
+  "wwo_n2o_effl",
+  "wwo_type_dis",
+  "wwo_fslu_typ",
 ],
 "Fuel consumption":[
   "wsa_engines", //question
@@ -88,8 +90,7 @@ let Filters = {
   "wwc_engines", //question
   "wwt_engines", //question
   "wwd_engines", //question
-  "fst_engines", //question
-  "fsr_engines", //question
+  "wwo_engines", //question
 
   "wwt_producing_biogas", //question
 
@@ -97,8 +98,7 @@ let Filters = {
   "wwt_trucks",    //question
   "wwd_trucks",    //question
 
-  "fst_transport", //question
-  "fsr_transport", //question
+  "wwo_transport", //question
 ],
 "Energy performance":[
   "wsa_nrg_cons",       //variable
@@ -111,30 +111,24 @@ let Filters = {
   "fst_nrg_cons",       //variable
   "fsr_nrg_cons",       //variable
 
-  "wsa_pumping",        //question
-  "wst_pumping",        //question
-  "wsd_pumping",        //question
-  "wwc_pumping",        //question
-  "wwt_pumping",        //question
-  "wwd_pumping",        //question
-  "fsc_pumping",        //question
-  "fst_pumping",        //question
-  "fsr_pumping",        //question
+  "wsa_pumping", //question
+  "wst_pumping", //question
+  "wsd_pumping", //question
+  "wwc_pumping", //question
+  "wwt_pumping", //question
+  "wwd_pumping", //question
+  "wwo_pumping", //question
 
-  "wsa_pumping_eff",    //question
-  "wst_pumping_eff",    //question
-  "wsd_pumping_eff",    //question
-  "wwc_pumping_eff",    //question
-  "wwt_pumping_eff",    //question
-  "wwd_pumping_eff",    //question
-  "fsc_pumping_eff",    //question
-  "fst_pumping_eff",    //question
-  "fsr_pumping_eff",    //question
-
-  "fsc_transport",      //question
+  "wsa_pumping_eff", //question
+  "wst_pumping_eff", //question
+  "wsd_pumping_eff", //question
+  "wwc_pumping_eff", //question
+  "wwt_pumping_eff", //question
+  "wwd_pumping_eff", //question
+  "wwo_pumping_eff", //question
 ],
 "Discharge":[
-  "ww_ch4_efac_cso",  //variable
+  "wwc_ch4_efac_cso", //variable
   "wwc_vol_coll_unt", //variable
   "wwd_vol_disc",     //variable
   "wwd_vol_nonp",     //variable
@@ -146,10 +140,12 @@ let Filters = {
   "wwd_water_reuse",  //question
   "wwd_trucks",       //question
 
-  "fsr_vol_disc",     //variable
-  "ww_ch4_efac_unt",  //variable
-  "wwc_vol_unco_unt", //variable
-  "fsc_open_pop",     //variable
+  "wwo_vol_unco_unt", //variable
+  "wwo_vol_disc",     //variable
+  "wwo_ch4_efac_dis", //variable
+  "wwo_n2o_efac_dis", //variable
+  "wwo_bod_effl",     //variable
+  "wwo_n2o_effl",     //variable
 ],
 "Sludge management":[
   "wst_mass_slu",         //variable
@@ -161,10 +157,10 @@ let Filters = {
   "wwt_landfilling",      //question
   "wwt_stockpiling",      //question
   "wwt_trucks",           //question
-  "fsr_landfil",          //question
-  "fsr_landapp",          //question
-  "fsr_dumping",          //question
-  "fsr_urine",            //question
-  "fsr_reuse",            //question
+  "wwo_landfil",          //question
+  "wwo_landapp",          //question
+  "wwo_dumping",          //question
+  "wwo_urine",            //question
+  "wwo_reuse",            //question
 ],
 };

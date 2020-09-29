@@ -152,34 +152,31 @@ class Ecam{
           "wsd_KPI_GHG",
 
           "wsd_KPI_nrg_per_vd",
-          "wsd_KPI_nrg_per_m3",
-          "wsd_SL_nr_water",
+
           "wsa_SL_GHG_nrw",
-          "wst_SL_GHG_nrw",
-          "wsd_SL_GHG_nrw",
-          "wsd_SL_ghg_attr",
-          "wsd_SL_water_loss",
-          "wsd_pmp_pw",
-          "wsd_KPI_nrg_per_m3",
-          "wsd_KPI_nrg_per_vd",
-          "wsd_SL_nr_water",
-          "wsd_SL_water_loss",
-          "wsd_SL_pres_ade",
-          "wsd_SL_cont_sup",
-          "c_wsd_nrg_topo",
-          "c_wsd_nrg_natu",
-          "c_wsd_nrg_mini",
-          "c_wsd_nrg_supp",
+          "wsd_KPI_ghg_estm_red",
+          "wsd_KPI_nrg_cons_new",
           "wsd_KPI_nrg_efficien",
+          "wsd_KPI_nrg_elec_eff",
+          "wsd_KPI_nrg_estm_sav",
+          "wsd_KPI_nrg_per_m3",
           "wsd_KPI_nrg_topgraph",
           "wsd_KPI_std_nrg_cons",
+          "wsd_KPI_std_nrg_newp",
           "wsd_KPI_un_head_loss",
           "wsd_KPI_water_losses",
-          "wsd_KPI_nrg_elec_eff",
-          "wsd_KPI_std_nrg_newp",
-          "wsd_KPI_nrg_cons_new",
-          "wsd_KPI_nrg_estm_sav",
-          "wsd_KPI_ghg_estm_red",
+          "wsd_SL_GHG_nrw",
+          "wsd_SL_cont_sup",
+          "wsd_SL_ghg_attr",
+          "wsd_SL_nr_water",
+          "wsd_SL_pres_ade",
+          "wsd_SL_water_loss",
+          "wsd_nrg_mini",
+          "wsd_nrg_natu",
+          "wsd_nrg_supp",
+          "wsd_nrg_topo",
+          "wsd_pmp_pw",
+          "wst_SL_GHG_nrw",
         ],
       },
     };
@@ -197,23 +194,22 @@ class Ecam{
         "ww_KPI_GHG",  //GHG from Wastewater
         "ww_SL_nrg_cost", //SL energy cost percentage
         "ww_nrg_cons",    //energy consumed from the grid
-
         /*
-        "ww_GHG_avoided", //GHG avoided
-        "ww_vol_fuel",    //fuel consumed by engines
+        "ww_vol_fuel",    //fuel consumed by engines TODO
+        "ww_GHG_avoided", //GHG avoided TODO
         */
       ],
 
       Collection:{
         //population and volumes of wastewater
-        wwc_conn_pop:0,       //population connected to sewers
-        wwc_vol_coll:0,       //volume of collected wastewater
-        wwc_vol_coll_tre:0,   //volume of collected wastewater conveyed to treatment
-        wwc_vol_coll_unt:0,   //volume of collected wastewater untreated (CSO)
+        wwc_conn_pop:0,     //population connected to sewers
+        wwc_vol_coll:0,     //volume of collected wastewater
+        wwc_vol_coll_tre:0, //volume of collected wastewater conveyed to treatment
+        wwc_vol_coll_unt:0, //volume of collected wastewater untreated (CSO)
 
         //emission factors
-        ww_ch4_efac_col:0,    //emission factor for collected wastewater
-        ww_ch4_efac_cso:0.3,  //emission factor for collected untreated wastewater
+        wwc_ch4_efac_col:0,   //emission factor for collected wastewater
+        wwc_ch4_efac_cso:0.3, //emission factor for collected untreated wastewater
 
         //fuel engines
         wwc_fuel_typ:0,
@@ -250,6 +246,7 @@ class Ecam{
         ],
       },
 
+      //TODO: codes start with wwc
       Treatment:{
         //population and volumes
         wwt_serv_pop:0, //population serviced
@@ -358,7 +355,7 @@ class Ecam{
           "wwt_KPI_ghg_estm_red",
 
           "wwt_KPI_biog_x_bod",
-          "c_wwt_nrg_biog",
+          "wwt_nrg_biog_val",
           "wwt_KPI_nrg_biogas",
           "wwt_KPI_nrg_x_biog",
           "wwt_SL_GHG_avoided",
@@ -378,104 +375,87 @@ class Ecam{
 
       //TODO ipcc 2019
       Onsite:{
-        fsc_onsi_pop:0, //population with onsite treatment
-        fsc_open_pop:0, //population open defecation
+        //population
+        wwo_onsi_pop:0,     //population with onsite treatment
+        wwo_open_pop:0,     //population open defecation
 
-        wwc_vol_unco:0,     //volume of uncollected wastewater
-        wwc_vol_unco_ons:0, //volume of uncollected wastewater conveyed to onsite treatment
-        wwc_vol_unco_unt:0, //volume of uncollected wastewater untreated
-        wwo_vol_trea:0,     //treated wastewater
+        //water volumes
+        wwo_vol_unco:0,     //volume of uncollected wastewater
+        wwo_vol_unco_ons:0, //volume of uncollected wastewater conveyed to onsite treatment
+        wwo_vol_unco_unt:0, //volume of uncollected untreated wastewater
+        wwo_vol_unco_tre:0, //treated wastewater
+        wwo_vol_disc:0,     //water discharged
+
+        //emission factors
+        wwo_ch4_efac_unt:0,
+        wwo_ch4_efac_con:0,
+        wwo_ch4_efac_tre:0,
+        wwo_n2o_efac_tre:0,
+        wwo_ch4_efac_dis:0,
+        wwo_n2o_efac_dis:0,
+
+        //energy performance
+        wwo_nrg_cons:0, //energy consumed
+        wwo_nrg_pump:0,
+        wwo_vol_pump:0,
+        wwo_pmp_head:0,
+        wwo_sta_head:0,
+        wwo_coll_len:0,
+        wwo_pmp_flow:0,
+        wwo_pmp_volt:0,
+        wwo_pmp_amps:0,
+        wwo_pmp_pf:0.9,
+        wwo_pmp_exff:0,
+
+        //engines
+        wwo_vol_fuel:0,    //fuel consumed
+        wwo_fuel_typ:0,    //type of fuel
+
+        //trucks
+        wwo_trck_typ:0,    //type of fuel
+        wwo_vol_trck:0,    //fuel consumed
 
         //fsm containment
-        fsc_type_tre:0,    //hidden (treatment type)
-        fsc_nrg_cons:0,    //energy consumed
-        fsc_bod_infl:0,    //influent bod load
-        fsc_flooding:0,    //yes/no
-        fsc_ch4_efac:0,    //ch4 emission factor
-        fsc_cont_emp:0,    //containments emptied
-        fsc_fdensity:0,    //density of faecal sludge
-        fsc_fslu_emp:0,    //FS emptied
-        fsc_bod_conc_fs:0, //[BOD] in FS
-        fsc_bod_rmvd:0,    //bod removed as FS
-        fsc_trck_typ:0,    //type of fuel
-        fsc_vol_trck:0,    //fuel consumed
-        fsc_nrg_pump:0,
-        fsc_vol_pump:0,
-        fsc_pmp_head:0,
-        fsc_sta_head:0,
-        fsc_coll_len:0,
-        fsc_pmp_flow:0,
-        fsc_pmp_volt:0,
-        fsc_pmp_amps:0,
-        fsc_pmp_pf:0.9,
-        fsc_pmp_exff:0,
+        wwo_type_con:0,    //type of containment
+        wwo_flooding:0,    //yes/no
+        wwo_cont_emp:0,    //containments emptied
+        wwo_fdensity:0,    //density of faecal sludge
+        wwo_fslu_emp:0,    //FS emptied
 
         //fsm treatment
-        fst_nrg_cons:0,
-        fst_n2o_efac:0,
-        fst_ch4_efac:0,
-        fst_vol_fuel:0, //fuel consumed (engines)
-        fst_fuel_typ:0, //type of fuel (engines)
-        fst_trck_typ:0, //type of fuel (trucks)
-        fst_vol_trck:0, //fuel consumed (trucks)
-        fst_biog_pro:0,
-        fst_biog_val:0,
-        fst_biog_fla:0,
-        fst_ch4_biog:59,
-        fst_nrg_biog:0,
-        fst_bod_infl:0,
-        fst_bod_effl:0,
-        fst_type_tre:0,
-        fst_bod_slud:0,
-        fst_nrg_pump:0,
-        fst_vol_pump:0,
-        fst_pmp_head:0,
-        fst_sta_head:0,
-        fst_coll_len:0,
-        fst_pmp_flow:0,
-        fst_pmp_volt:0,
-        fst_pmp_amps:0,
-        fst_pmp_pf:0.9,
-        fst_pmp_exff:0,
+        wwo_type_tre:0,    //type of treatment
+        wwo_bod_infl:0,    //influent bod load
+        wwo_bod_conc_fs:0, //[BOD] in FS
+        wwo_bod_rmvd:0,    //bod removed as FS
+        wwo_bod_slud:0,    //?
+        wwo_bod_effl:0,    //effluent BOD
+        wwo_n2o_effl:0,    //TN effluent
+
+        //biogas
+        wwo_biog_pro:0,
+        wwo_biog_val:0,
+        wwo_biog_fla:0,
+        wwo_ch4_biog:59,
+        wwo_nrg_biog:0,
 
         //fsm reuse/disposal
-        fsr_type_tre:0,         //main type of disposal
-        fsr_fslu_typ:0,         //main type of faecal sludge
-        fsr_nrg_cons:0,
-        fsr_fuel_typ:0,         //type of fuel
-        fsr_vol_fuel:0,         //fuel consumed
-        fsr_trck_typ:0,         //type of fuel
-        fsr_vol_trck:0,         //fuel consumed
-        fsr_mass_landapp:0,     //dry weight sent to land application
-        fsr_soil_typ:0,         //soil type for land application
-        fsr_fslu_typ_la:0,      //type of faecal sludge disposed landapp
-        fsr_la_N_cont:0,        //N content of faecal sludge
-        fsr_mass_landfil:0,     //dry weight sent to landfilling
-        fsr_disp_typ:0,         //disposal type for landfilling
-        fsr_fslu_typ_lf:0,      //type of faecal sludge disposed landfil
-        fsr_lf_N_cont:0,        //N content of faecal sludge
-        fsr_lf_TVS:0,           //TVS content of faecal sludge
-        fsr_vol_dumping:0,      //volume dumped
-        fsr_ch4_efac_dumping:0, //emission factor depending on dumping pathway
-        fsr_dumping_pth:0,      //dumping pathway
-        fsr_bod_conc_fs:0,      //[BOD] in FS
-        fsr_vol_disc:0,
-        fsr_bod_effl:0,
-        fsr_ch4_efac:0,
-        fsr_n2o_effl:0,
-        fsr_N_urine:0,
-        fsr_reused_N:0,
-        fsr_reused_P:0,
-        fsr_nrg_pump:0,
-        fsr_vol_pump:0,
-        fsr_pmp_head:0,
-        fsr_sta_head:0,
-        fsr_coll_len:0,
-        fsr_pmp_flow:0,
-        fsr_pmp_volt:0,
-        fsr_pmp_amps:0,
-        fsr_pmp_pf:0.9,
-        fsr_pmp_exff:0,
+        wwo_type_dis:0,         //main type of disposal
+        wwo_fslu_typ:0,         //main type of faecal sludge
+        wwo_mass_landapp:0,     //dry weight sent to land application
+        wwo_soil_typ:0,         //soil type for land application
+        wwo_fslu_typ_la:0,      //type of faecal sludge disposed landapp
+        wwo_la_N_cont:0,        //N content of faecal sludge
+        wwo_mass_landfil:0,     //dry weight sent to landfilling
+        wwo_lf_type:0,         //disposal type for landfilling
+        wwo_fslu_typ_lf:0,      //type of faecal sludge disposed landfil
+        wwo_lf_N_cont:0,        //N content of faecal sludge
+        wwo_lf_TVS:0,           //TVS content of faecal sludge
+        wwo_vol_dumping:0,      //volume dumped
+        wwo_ch4_efac_dumping:0, //emission factor depending on dumping pathway
+        wwo_dumping_pth:0,      //dumping pathway
+        wwo_N_urine:0,
+        wwo_reused_N:0,
+        wwo_reused_P:0,
 
         equations:[
           "wwo_KPI_GHG", //GHG from Wastewater Onsite Treatment
@@ -540,20 +520,16 @@ class Ecam{
         //code:unit
       },
 
-      //auxiliar object to store user selections
+      //store user selections in configuration
       Selected:{
         gwp_reports_index:0,
       },
 
       //answers for filters (see "questions.js")
-      Questions:{
-        //wwt_valorizing_biogas: 0,
-        //fst_valorizing_biogas: 0,
-      },
+      Questions:{},
 
       //keys of folded Questions (TODO move to frontend)
-      FoldedQuestions:[
-      ],
+      FoldedQuestions:[],
     };
 
     //set default values for all questions to 0
@@ -573,8 +549,8 @@ class Ecam{
       },
       "Waste":{
         "Collection":[], //wwc
-        "Treatment":[], //wwt
-        "Onsite":   [], //wwd
+        "Treatment": [], //wwt
+        "Onsite":    [], //wwo
       },
     };
   }
@@ -582,18 +558,16 @@ class Ecam{
   //===========================================================================
   // ALL EQUATIONS
   //===========================================================================
-  //General functions
-    //assesment period duration (in days)
-    Days(){
-      let startDate=new Date(this.General.AssessmentPeriodStart);
-      let finalDate=new Date(this.General.AssessmentPeriodEnd);
-      //add 1 day to include the whole final date
-      //for example: from january 1st to december 31th is 365 days
-      return 1+(finalDate-startDate)/1000/60/60/24; //days
-    }
-    //assesment period duration (in years)
-    Years(){return this.Days()/365}
-  //</>
+  //assesment period duration (in days)
+  Days(){
+    let startDate=new Date(this.General.AssessmentPeriodStart);
+    let finalDate=new Date(this.General.AssessmentPeriodEnd);
+    //add 1 day to include the whole final date
+    //for example: from january 1st to december 31th is 365 days
+    return 1+(finalDate-startDate)/1000/60/60/24; //days
+  }
+  //assesment period duration (in years)
+  Years(){return this.Days()/365}
 
   //All emissions
     TotalGHG(){return this.ws_KPI_GHG()+this.ww_KPI_GHG()}
@@ -664,12 +638,12 @@ class Ecam{
       }
       wwc_KPI_GHG_cso(){
         let pop = this.Waste.Collection.wwc_conn_pop*(this.Waste.Collection.wwc_vol_coll_unt/this.Waste.Collection.wwc_vol_coll||0);
-        let ch4 = pop*this.General.bod_pday/1000*this.Days()*this.wwc.ww_ch4_efac_cso*Cts.ct_ch4_eq.value;
+        let ch4 = pop*this.General.bod_pday/1000*this.Days()*this.wwc.wwc_ch4_efac_cso*Cts.ct_ch4_eq.value;
         return ch4;
       }
       wwc_KPI_GHG_col(){
         let pop = this.Waste.Collection.wwc_conn_pop*(this.Waste.Collection.wwc_vol_coll_tre/this.Waste.Collection.wwc_vol_coll||0);
-        let ch4 = pop*this.General.bod_pday/1000*this.Days()*this.wwc.ww_ch4_efac_col*Cts.ct_ch4_eq.value;
+        let ch4 = pop*this.General.bod_pday/1000*this.Days()*this.wwc.wwc_ch4_efac_col*Cts.ct_ch4_eq.value;
         return ch4;
       }
     //GHG wwt
@@ -869,51 +843,48 @@ class Ecam{
         return {total,ch4,n2o};
       }
 
-    //GHG wwo HERE TODO
+    //GHG wwo HERE TODO----------------------------------------------------------------------------------------------------------
       wwo_KPI_GHG(){
-        return 0;
-        //fsc containment
+        //uncollected untreated (ch4)
+        //open defecation (ch4)
+        //containment (ch4)
+        //electricity
+        //transport of fecal sludge (trucks)
+
         //fst treatment
         //fsr reuse
+        return 0;
       }
 
       wwo_KPI_GHG_unt_opd(){
-        let pop   = this.Waste.Collection.fsc_open_pop;
-        let ch4   = pop*this.General.bod_pday/1000*this.Days()*this.wwc.ww_ch4_efac_unt*Cts.ct_ch4_eq.value;
-        let n2o   = pop*this.General.prot_con*this.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
-        let total = ch4+n2o;
-        return {total,ch4,n2o};
+        let pop = this.Waste.Onsite.fsc_open_pop;
+        let ch4 = pop*this.General.bod_pday/1000*this.Days()*this.wwo.wwo_ch4_efac_unt*Cts.ct_ch4_eq.value;
+        return ch4;
       }
 
       wwo_KPI_GHG_unt_ons(){
-        let pop   = this.Waste.Collection.fsc_onsi_pop*(this.Waste.Collection.wwc_vol_unco_unt/this.Waste.Collection.wwc_vol_unco||0);
-        let ch4   = pop*this.General.bod_pday/1000*this.Days()*this.wwc.ww_ch4_efac_unt*Cts.ct_ch4_eq.value;
-        let n2o   = pop*this.General.prot_con*this.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
-        let total = ch4+n2o;
-        return {total,ch4,n2o};
+        let pop = this.Waste.Collection.fsc_onsi_pop*(this.Waste.Collection.wwc_vol_unco_unt/this.Waste.Collection.wwc_vol_unco||0);
+        let ch4 = pop*this.General.bod_pday/1000*this.Days()*this.wwc.wwo_ch4_efac_unt*Cts.ct_ch4_eq.value;
+        return ch4;
       }
 
       fsc_KPI_GHG(){
         return 0;
-        function fsc_KPI_GHG_elec(){
-          return this.wwc.fsc_nrg_cons*this.General.conv_kwh_co2;
-        }
         function fsc_KPI_GHG_cont(){
           return (this.wwc.fsc_bod_infl-this.wwc.fsc_bod_rmvd)*this.wwc.fsc_ch4_efac*Cts.ct_ch4_eq.value;
         }
-        function fsc_KPI_GHG_trck_co2(){
-          let fuel=Tables['Fuel type'][Tables.find('fsc_trck_typ',this.wwc.fsc_trck_typ)];
-          return this.wwc.fsc_vol_trck*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
+        function fsc_KPI_GHG_elec(){
+          return this.wwc.fsc_nrg_cons*this.General.conv_kwh_co2;
         }
-        function fsc_KPI_GHG_trck_n2o(){
-          let fuel=Tables['Fuel type'][Tables.find('fsc_trck_typ',this.wwc.fsc_trck_typ)];
-          return this.wwc.fsc_vol_trck*fuel.FD*fuel.NCV/1000*fuel.EFN2O.vehicles*Cts.ct_n2o_eq.value;
+        function fsc_KPI_GHG_trck(){
+          let vol   = this.wwo
+          let fuel  = Tables.get_row('Fuel type',this.wwc.fsc_trck_typ);
+          let co2   = this.wwc.fsc_vol_trck*fuel.FD*fuel.NCV/1000*fuel.EFCO2;
+          let n2o   = this.wwc.fsc_vol_trck*fuel.FD*fuel.NCV/1000*fuel.EFN2O.vehicles*Cts.ct_n2o_eq.value;
+          let ch4   = this.wwc.fsc_vol_trck*fuel.FD*fuel.NCV/1000*fuel.EFCH4.vehicles*Cts.ct_ch4_eq.value;
+          let total = co2+n2o+ch4;
+          return {total,co2,n2o,ch4};
         }
-        function fsc_KPI_GHG_trck_ch4(){
-          let fuel=Tables['Fuel type'][Tables.find('fsc_trck_typ',this.wwc.fsc_trck_typ)];
-          return this.wwc.fsc_vol_trck*fuel.FD*fuel.NCV/1000*fuel.EFCH4.vehicles*Cts.ct_ch4_eq.value;
-        }
-        function fsc_KPI_GHG_trck(){return this.fsc_KPI_GHG_trck_co2()+this.fsc_KPI_GHG_trck_n2o()+this.fsc_KPI_GHG_trck_ch4()}
       }
 
       fs_KPI_GHG(){
@@ -1019,7 +990,7 @@ class Ecam{
       }
       fsr_ghg_avoided_landapp(){return this.wwo.fsr_mass_landapp*Cts.ct_C_seqst.value}
       fsr_KPI_GHG_landfil_n2o(){
-        let disp_type=Tables.find('fsr_disp_typ',this.wwo.fsr_disp_typ);
+        let disp_type=Tables.get_row('wwo_lf_type',this.wwo.wwo_lf_type);
         let emission=this.wwo.fsr_mass_landfil*this.wwo.fsr_lf_N_cont/100*Cts.ct_n2o_lf.value/100*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value
         if(disp_type=="Landfill"){
           return emission;
@@ -1149,12 +1120,12 @@ class Ecam{
       }
       wsd_SL_pres_ade(){return 100*this.wsd.wsd_deli_pts/this.wsd.wsd_ser_cons}
       wsd_SL_cont_sup(){return 100*this.wsd.wsd_time_pre/24}
-      c_wsd_nrg_topo(){return Cts.ct_gravit.value*this.wsd.wsd_vol_dist*(this.wsd.wsd_hi_no_el-this.wsd.wsd_av_no_el)/3600000}
-      c_wsd_nrg_natu(){return Cts.ct_gravit.value*this.wsd.wsd_vol_dist*(this.wsd.wsd_wt_el_no-this.wsd.wsd_lo_no_el)/3600000}
-      c_wsd_nrg_mini(){return Cts.ct_gravit.value*this.wsd.wsd_auth_con*(this.wsd.wsd_min_pres+this.wsd.wsd_av_no_el-this.wsd.wsd_lo_no_el)/3600000}
-      c_wsd_nrg_supp(){return this.wsd.wsd_nrg_cons+this.c_wsd_nrg_natu()}
-      wsd_KPI_nrg_efficien(){return 100*this.c_wsd_nrg_mini()/this.c_wsd_nrg_supp()}
-      wsd_KPI_nrg_topgraph(){return 100*this.c_wsd_nrg_topo()/this.c_wsd_nrg_supp()}
+      wsd_nrg_topo(){return Cts.ct_gravit.value*this.wsd.wsd_vol_dist*(this.wsd.wsd_hi_no_el-this.wsd.wsd_av_no_el)/3600000}
+      wsd_nrg_natu(){return Cts.ct_gravit.value*this.wsd.wsd_vol_dist*(this.wsd.wsd_wt_el_no-this.wsd.wsd_lo_no_el)/3600000}
+      wsd_nrg_mini(){return Cts.ct_gravit.value*this.wsd.wsd_auth_con*(this.wsd.wsd_min_pres+this.wsd.wsd_av_no_el-this.wsd.wsd_lo_no_el)/3600000}
+      wsd_nrg_supp(){return this.wsd.wsd_nrg_cons+this.wsd_nrg_natu()}
+      wsd_KPI_nrg_efficien(){return 100*this.wsd_nrg_mini()/this.wsd_nrg_supp()}
+      wsd_KPI_nrg_topgraph(){return 100*this.wsd_nrg_topo()/this.wsd_nrg_supp()}
       wsd_KPI_std_nrg_cons(){return this.wsd.wsd_nrg_pump/(this.wsd.wsd_vol_pump*this.wsd.wsd_pmp_head/100)}
       wsd_KPI_un_head_loss(){return 1000*(this.wsd.wsd_pmp_head-this.wsd.wsd_sta_head)/this.wsd.wsd_main_len}
       wsd_KPI_water_losses(){return Math.max(0,1000*(this.wsd.wsd_vol_dist-this.wsd.wsd_auth_con)/(this.wsd.wsd_main_len))/this.Years()}
@@ -1165,7 +1136,14 @@ class Ecam{
       wsd_KPI_ghg_estm_red(){return this.General.conv_kwh_co2*this.wsd_KPI_nrg_estm_sav()}
     //SL ww
       ww_nrg_cons(){return this.wwc.wwc_nrg_cons+this.wwt.wwt_nrg_cons+this.wwo.wwo_nrg_cons}
-      ww_vol_fuel(){return this.wwc.wwc_vol_fuel+this.wwt.wwt_vol_fuel+this.wwt.wwt_fuel_dig+this.wwt.wwd_vol_fuel}
+      ww_vol_fuel(){
+        return
+           this.wwc.wwc_vol_fuel
+          +this.wwt.wwt_vol_fuel
+          +this.wwt.wwt_fuel_dig
+          +this.wwo.wwo_vol_fuel
+          //TO BE REVISED (some variables missing) TODO
+      }
       ww_SL_nrg_cost(){return 100*this.Waste.ww_nrg_cost/this.Waste.ww_run_cost}
       ww_GHG_avoided(){
         return this.wwt_SL_GHG_avoided()+
@@ -1205,9 +1183,9 @@ class Ecam{
       wwt_KPI_nrg_estm_sav(){return this.wwt.wwt_nrg_cons-this.wwt_KPI_nrg_cons_new()}
       wwt_KPI_ghg_estm_red(){return this.General.conv_kwh_co2*this.wwt_KPI_nrg_estm_sav()}
       wwt_KPI_biog_x_bod(){return this.wwt.wwt_biog_pro/this.wwt_bod_rmvd()}
-      c_wwt_nrg_biog(){return this.wwt.wwt_biog_val*this.wwt.wwt_ch4_biog/100*Cts.ct_ch4_nrg.value}
+      wwt_nrg_biog_val(){return this.wwt.wwt_biog_val*this.wwt.wwt_ch4_biog/100*Cts.ct_ch4_nrg.value}
       wwt_KPI_nrg_biogas(){return this.wwt.wwt_nrg_biog/this.wwt.wwt_vol_trea}
-      wwt_KPI_nrg_x_biog(){return 100*this.wwt.wwt_nrg_biog/this.c_wwt_nrg_biog()}
+      wwt_KPI_nrg_x_biog(){return 100*this.wwt.wwt_nrg_biog/this.wwt_nrg_biog_val()}
       wwt_SL_GHG_avoided(){return this.wwt.wwt_nrg_biog*this.General.conv_kwh_co2}
       wwd_wr_GHG_avo_N(){ return this.wwt.wwd_wr_N_rec*Cts.ct_cr_forN.value; }
       wwd_wr_GHG_avo_P(){ return this.wwt.wwd_wr_P_rec*Cts.ct_cr_forP.value; }
@@ -1285,7 +1263,7 @@ class Ecam{
   //</>
 };
 
-//TODO create classes for every stage so its easier to do substages
+//TODO create classes for every stage to make easier for substages coding
 class Water_Abstraction{}
 class Water_Treatment{}
 class Water_Distribution{}
@@ -1293,9 +1271,9 @@ class Waste_Collection{}
 class Waste_Treatment{}
 class Waste_Onsite{}
 
-//array of systems (TODO: rename Scenarios to Systems)
-let Scenarios=[]
+//array of systems (system == Ecam object)
+let Scenarios=[];
 
-//the default system is called Global since ecam v1.0
+//default system (called Global since ecam v1.0)
 let Global=new Ecam();
 Scenarios.push(Global);

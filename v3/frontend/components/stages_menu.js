@@ -85,7 +85,7 @@ let stages_menu  = new Vue({
         <div>
           <label style="user-select:none">
             <input type=checkbox v-model="show_substages_summary">
-            substages summary
+            substages
           </label>
         </div>
       </div>

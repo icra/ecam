@@ -27,116 +27,49 @@
       constructor(){
         //Wastewater
         this.Waste={
-          ww_resi_pop:100, //resident population
-          ww_vol_gene:0,   //volume of total generated wastewater by resident population
-
-          //Untreated Wastewater
-          Untreated:{
-            wwu_vol_coll:0, //volume of untreated wastewater (from collectors)
-            wwu_vol_unco:0, //volume of untreated wastewater (from uncollected)
-
+          //Collection Wastewater
+          Collection:{
             //untreated wastewater discharge
-            wwu_vol_disc:0,
             wwu_vol_disc_fsh:0,
             wwu_vol_disc_agr:0,
             wwu_vol_disc_ldi:0,
           },
 
           //Treatment plant
-          Treatment_plant:{
-            wwt_vol_coll:0, //volume of collected wastewater
-            wwt_vol_conv:0, //volume of collected wastewater conveyed to treatment
-            wwt_vol_trea:0, //volume of treated wastewater
-            wwt_slu_gene:0, //total sludge generated
-
-            //treated wastewater discharged
-            wwt_vol_disc:0,
+          Treatment:{
             wwt_vol_disc_fsh:0,
             wwt_vol_disc_agr:0,
             wwt_vol_disc_ldi:0,
           },
 
           //Onsite sanitation
-          Onsite_sanitation:{
-            wwo_vol_unco:0, //volume of uncollected wastewater
-            wwo_vol_conv:0, //volume of uncollected wastewater conveyed to onsite sanitation
-            wwo_vol_trea:0, //volume of treated wastewater
-            wwo_slu_gene:0, //total sludge generated
-
-            //treated wastewater discharged
-            wwo_vol_disc:0,
+          Onsite:{
             wwo_vol_disc_fsh:0,
             wwo_vol_disc_agr:0,
             wwo_vol_disc_ldi:0,
-          },
-        };
-
-        //Sludge management
-        this.Sludge={
-          sm_total_recv:0,
-
-          Storage:{
-            sms_slu_stor:0,
-            sms_sto_time:0,
-          },
-          Transport:{
-            smt_fuel_typ:0,
-            smt_vol_fuel:0,
-          },
-          Disposal:{
-            smd_sent_to_laf:0,
-            smd_sent_to_inc:0,
-            smd_sent_to_com:0,
-            smd_sent_to_lap:0,
           },
         };
       }
 
       /*ESTIMATIONS*/
       Days(){return 1} //assessment period
-      ww_vol_gene(){return 0.2*this.Waste.ww_resi_pop*this.Days()}
     };
 
     let Info={
-      ww_resi_pop:"Resident population",
-      ww_vol_gene:"Volume of generated wastewater (m3)",
-
-      //Untreated
-      wwu_vol_coll:"Volume of untreated wastewater from collected wastewater (m3)",
-      wwu_vol_unco:"Volume of untreated wastewater from uncollected wastewater (m3)",
-      wwu_vol_disc:"Volume of untreated wastewater discharged (m3)",
+      //Collection
       wwu_vol_disc_fsh:"Volume of untreated wastewater discharged sent to freshwater (m3)",
       wwu_vol_disc_agr:"Volume of untreated wastewater discharged sent to agricultural soils (m3)",
       wwu_vol_disc_ldi:"Volume of untreated wastewater discharged sent to land disposal of wastewater (m3)",
 
       //Treatment plant
-      wwt_vol_coll:"Volume of collected wastewater (m3)",
-      wwt_vol_conv:"Volume of collected wastewater conveyed to treatment (m3)",
-      wwt_vol_trea:"Volume of treated wastewater (m3)",
-      wwt_slu_gene:"Total dry sludge generated (kg)",
-
-      wwt_vol_disc:"Volume of treated wastewater discharged (m3)",
       wwt_vol_disc_fsh:"Volume of treated wastewater discharged sent to freshwater (m3)",
       wwt_vol_disc_agr:"Volume of treated wastewater discharged sent to agricultural soils (m3)",
       wwt_vol_disc_ldi:"Volume of treated wastewater discharged sent to land disposal of wastewater (m3)",
 
       //Onsite treatment
-      wwo_vol_unco:"Volume of uncollected wastewater (m3)",
-      wwo_vol_conv:"Volume of uncollected wastewater conveyed to onsite sanitation (m3)",
-      wwo_vol_trea:"Volume of treated wastewater (m3)",
-      wwo_slu_gene:"Total dry sludge generated (kg)",
-
-      wwo_vol_disc:"Volume of treated wastewater discharged (m3)",
       wwo_vol_disc_fsh:"Volume of treated wastewater discharged sent to freshwater (m3)",
       wwo_vol_disc_agr:"Volume of treated wastewater discharged sent to agricultural soils (m3)",
       wwo_vol_disc_ldi:"Volume of treated wastewater discharged sent to land disposal of wastewater (m3)",
-
-      //Sludge
-      sm_total_recv:"Total dry sludge (from plants and onsite sanitation) (kg)",
-      smd_sent_to_laf:"Sludge sent to landfilling",
-      smd_sent_to_inc:"Sludge sent to incineration",
-      smd_sent_to_com:"Sludge sent to composting",
-      smd_sent_to_lap:"Sludge sent to land application",
     };
   </script>
 </head><body>
@@ -168,9 +101,7 @@
         </div>
         <div id=stages>
           <!--Wastewater-->
-          <stage :scenario="scenario" :stage="scenario.Waste" :name="'Wastewater'" :level2="['Untreated','Treatment_plant','Onsite_sanitation']"></stage>
-          <!--Sludge-->
-          <stage :scenario="scenario" :stage="scenario.Sludge" :name="'Sludge management'" :level2="['Storage','Transport','Disposal']"></stage>
+          <stage :scenario="scenario" :stage="scenario.Waste" :name="'Wastewater'" :level2="['Collection','Treatment','Onsite']"></stage>
         </div>
       </div>
     </details>
@@ -189,9 +120,6 @@
         };
       },
       methods:{
-        has_estimation(key){
-          return Object.getOwnPropertyNames(Scenario.prototype).indexOf(key)>-1;
-        },
         get_inputs(){
           return Object.keys(this.stage).filter(key=>{
             return typeof(this.stage[key])!='object';
@@ -200,7 +128,7 @@
       },
       template:`
         <div>
-          <details v-if="scenario && stage && name" style="margin-bottom:10px">
+          <details open v-if="scenario && stage && name" style="margin-bottom:10px">
             <summary><b>{{name}}</b></summary>
             <div>
               <table border=1>
@@ -213,16 +141,6 @@
                   <td>
                     <div>
                       {{Info[key]}}
-                    </div>
-                  </td>
-                  <td>
-                    <div v-if="has_estimation(key)">
-                      <button @click="stage[key]=scenario[key]()">
-                        estimation: {{scenario[key]()}}
-                      </button>
-                    </div>
-                    <div v-else>
-                      <small>~no estimation</small>
                     </div>
                   </td>
                   <td>

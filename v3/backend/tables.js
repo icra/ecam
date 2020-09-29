@@ -25,7 +25,7 @@ let Tables = {
     {name:"> 96 kW"      },
   ],
 
-  //type of disinfectio
+  //type of water disinfection
   "wst_disnfctn":[
     {name:"None"},
     {name:"Chlorination"},
@@ -48,7 +48,7 @@ let Tables = {
 
   //types of water bodies
   //ipcc 2019, table 6.3 (updated) EF (kgCH4/kgBOD)
-  "ww_ch4_efac":[
+  "type_of_water_body":[
     {name:"Select",                                                                                 ch4_efac:0},
     {name:"Discharge to aquatic environments (Tier 1)",                                             ch4_efac:0.068},
     {name:"Discharge to aquatic environments other than reservoirs, lakes, and estuaries (Tier 2)", ch4_efac:0.021},
@@ -59,7 +59,7 @@ let Tables = {
 
   ],
 
-  "ww_ch4_efac_col":[
+  "type_of_sewer":[
     {name:"Select",                                 ch4_efac:0},
     {name:"Stagnant sewer or anaerobic water body", ch4_efac:0.3},
     {name:"Flowing sewer (open or closed)",         ch4_efac:0},
@@ -67,7 +67,7 @@ let Tables = {
 
 	//types of treatment
   //ipcc 2019, table 6.3 (updated) EF (kgCH4/kgBOD)
-  "wwt_type_tre":[
+  "type_of_treatment":[
     {name:"Select treatment type",                                          ch4_efac:0,     bod_rmvd_as_sludge_estm:0   },
     {name:"Centralised, aerobic, treatment plant",                          ch4_efac:0.018, bod_rmvd_as_sludge_estm:0.65},
     {name:"Anaerobic Reactor - CH4 recovery not considered",                ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
@@ -140,7 +140,7 @@ let Tables = {
   ],
 
   //type of containment
-  "fsc_type_tre":[
+  "wwo_type_con":[
     {name:"No containment (open defecation)",                               ch4_efac:0.027,  ch4_efac_flooding:0.027, BOD_conc_FS:67.8, fs_density:1400},
     {name:"Pit latrine without flush water (lined or unlined) – household", ch4_efac:0.06,   ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
     {name:"Pit latrine without flush water (lined or unlined) – communal",  ch4_efac:0.3,    ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
@@ -152,14 +152,15 @@ let Tables = {
     {name:"Urine Diverting Dry Toilet (UDDT)",                              ch4_efac:0.0,    ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
     {name:"Composting Toilet",                                              ch4_efac:0.0013, ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
   ],
+
   //containment is flooding?
-  "fsc_flooding":[
+  "wwo_flooding":[
     {name:"no"},
     {name:"yes"},
   ],
 
   //type of onsite treatment
-  "fst_type_tre":[
+  "wwo_type_tre":[
     {name:"No Treatment",                                     ch4_efac:0.00,   bod_rmvd_as_sludge_estm:0.0,},
     {name:"Anaerobic Digester",                               ch4_efac:0.48,   bod_rmvd_as_sludge_estm:0.10,},
     {name:"Imhoff Tanks",                                     ch4_efac:0.48,   bod_rmvd_as_sludge_estm:0.10,},
@@ -180,14 +181,15 @@ let Tables = {
   ],
 
   //type of disposal
-  "fsr_type_tre":[
+  "wwo_type_dis":[
     {name:"No disposal (open defecation)"},
     {name:"Landfilling"},
     {name:"Land application"},
     {name:"Dumping"},
   ],
+
   //type of faecal sludge for land application and landfilling
-  "fsr_fslu_typ":[
+  "wwo_fslu_typ":[
     {name:"Untreated",          N_content:0.24, TVS:0.700, total_solids:0.04},
     {name:"Treated",            N_content:3.00, TVS:0.400, total_solids:0.22},
     {name:"Pit humus",          N_content:4.00, TVS:0.650, total_solids:0.07},
@@ -203,23 +205,21 @@ Tables.wst_fuel_typ=Tables["Fuel type"]; //engines
 Tables.wsd_fuel_typ=Tables["Fuel type"]; //engines
 Tables.wwc_fuel_typ=Tables["Fuel type"]; //engines
 Tables.wwt_fuel_typ=Tables["Fuel type"]; //engines
-Tables.wwd_fuel_typ=Tables["Fuel type"]; //engines
-Tables.fst_fuel_typ=Tables["Fuel type"]; //type of fuel fsm treatment engines
-Tables.fsr_fuel_typ=Tables["Fuel type"]; //type of fuel fsm treatment engines
+Tables.wwo_fuel_typ=Tables["Fuel type"]; //engines
+
 Tables.wsd_trck_typ=Tables["Fuel type"]; //trucks
 Tables.wwt_trck_typ=Tables["Fuel type"]; //trucks
 Tables.wwd_trck_typ=Tables["Fuel type"]; //trucks
-Tables.fsc_trck_typ=Tables["Fuel type"]; //type of fuel fsm emptying and transport
-Tables.fst_trck_typ=Tables["Fuel type"]; //type of fuel fsm emptying and transport
-Tables.fsr_trck_typ=Tables["Fuel type"]; //type of fuel fsm emptying and transport
+Tables.wwo_trck_typ=Tables["Fuel type"]; //type of fuel fsm emptying and transport
 Tables.wwt_dige_typ=Tables["Fuel type"]; //type of fuel dig
 Tables.wwt_appl_typ=Tables["Fuel type"]; //type of fuel app
-Tables.fsr_fslu_typ_lf=Tables.fsr_fslu_typ;
-Tables.fsr_fslu_typ_la=Tables.fsr_fslu_typ;
+
+Tables.wwo_fslu_typ_lf=Tables.wwo_fslu_typ;
+Tables.wwo_fslu_typ_la=Tables.wwo_fslu_typ;
+Tables.wwo_lf_type=Tables.wwt_slu_type;
+
 Tables.fsr_soil_typ=Tables.wwt_soil_typ;
-Tables.fsr_ch4_efac=Tables.ww_ch4_efac;
-Tables.fsr_dumping_pth=Tables.ww_ch4_efac;
-Tables.fsr_disp_typ=Tables.wwt_slu_type;
+Tables.fsr_dumping_pth=Tables.type_of_water_body;
 
 //get object by "table" (string) and "index" (integer)
 Tables.get_row=function(table, index){
