@@ -77,9 +77,11 @@ let tier_b=new Vue({
     },
 
     enable_all_filters(){
-      Object.keys(this.Filters).forEach(key=>{
-        this.filters_active[key]=true;
-      });
+      if(this.filters_on){
+        Object.keys(this.Filters).forEach(key=>{
+          this.filters_active[key]=true;
+        });
+      }
     },
 
     disable_all_filters(){
@@ -99,6 +101,50 @@ let tier_b=new Vue({
         }
       }
       return false;
+    },
+
+    get_number_of_variables_shown_by_filter(filter){
+      let n=0; //rv
+      let level     = this.level;
+      let sublevel  = this.sublevel;
+
+      let inputs_and_questions = [];
+
+      //count inputs
+      let inputs = get_input_codes(level,sublevel);
+      inputs.forEach(code=>{
+        let count = 1;
+        inputs_and_questions.push({code,count});
+      });
+
+      //count question variables that are inputs
+      Questions.get_questions(this.get_current_stage()).forEach(code=>{
+        let count = 0;
+        Questions[code].variables.forEach(key=>{
+          if(inputs.indexOf(key)+1){
+            count++;
+          }
+        });
+        inputs_and_questions.push({code,count});
+      });
+
+      let filters = Filters[filter];
+      inputs_and_questions.forEach(obj=>{
+        let code = obj.code;
+        if(filters.indexOf(code)+1){
+          n += obj.count;
+        }
+      });
+      return n;
+    },
+
+    get_number_of_variables_shown_by_active_filters(){
+      let active_filters = Object.keys(this.filters_active).filter(key=>this.filters_active[key]);
+      let n=0;
+      active_filters.forEach(key=>{
+        n += this.get_number_of_variables_shown_by_filter(key);
+      });
+      return n;
     },
   },
 
@@ -218,7 +264,7 @@ let tier_b=new Vue({
         </div>
         <div v-if="filters_on" style="padding:0 1em">&rarr;</div>
         <div
-          v-if="filters_on"
+          v-if="filters_on && (get_number_of_variables_shown_by_filter(key) || filters_active[key])"
           v-for="key in Object.keys(Filters)"
           class=filter
           @click="disable_all_filters();filters_active[key]=true;"
@@ -227,7 +273,7 @@ let tier_b=new Vue({
             :checked="filters_active[key]"
             @click.stop="filters_active[key]=$event.target.checked"
           >
-          <span>{{key}}</span>
+          <span>{{key}} ({{get_number_of_variables_shown_by_filter(key)}})</span>
         </div>
       </div>
 
@@ -342,6 +388,14 @@ let tier_b=new Vue({
                 :current_stage="get_current_stage()"
                 :level="level"
               ></input_ecam>
+            </tbody>
+
+            <tbody v-if="filters_on && get_number_of_variables_shown_by_active_filters()==0">
+              <tr>
+                <td style="padding-top:2em">
+                  <i>~No inputs available for current filter</i>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -584,7 +638,7 @@ let tier_b=new Vue({
         user-select:none;
         border-bottom:1px solid #ccc;
       }
-      #tier_b #filters > div.filter{
+      #tier_b #filters > div{
         padding:10px 5px;
       }
       #tier_b #filters > div.filter:hover {

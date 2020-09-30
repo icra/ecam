@@ -845,14 +845,14 @@ class Ecam{
 
     //GHG wwo HERE TODO----------------------------------------------------------------------------------------------------------
       wwo_KPI_GHG(){
+        //electricity
+        //fuel engines
         //uncollected untreated (ch4)
         //open defecation (ch4)
         //containment (ch4)
-        //electricity
         //transport of fecal sludge (trucks)
-
         //fst treatment
-        //fsr reuse
+        //fsr discharge/reuse
         return 0;
       }
 

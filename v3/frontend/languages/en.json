@@ -1,6 +1,8 @@
 {
 "#below":"below",
 
+"#wwo_KPI_GHG_descr":"Total GHG Wastewater Onsite sanitation",
+
 "#wwo_bod_effl_descr":"Effluent BOD load",
 
 "#wwo_onsi_pop_descr"      :"Population with onsite treatment",

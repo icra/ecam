@@ -32,9 +32,6 @@ let Questions={
       variables:[
         "wsa_fuel_typ",
         "wsa_vol_fuel",
-        "wsa_KPI_GHG_fuel_co2",
-        "wsa_KPI_GHG_fuel_n2o",
-        "wsa_KPI_GHG_fuel_ch4",
         "wsa_KPI_GHG_fuel",
       ],
       advanced:0,
