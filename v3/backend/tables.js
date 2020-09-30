@@ -218,8 +218,8 @@ Tables.wwo_fslu_typ_lf=Tables.wwo_fslu_typ;
 Tables.wwo_fslu_typ_la=Tables.wwo_fslu_typ;
 Tables.wwo_lf_type=Tables.wwt_slu_type;
 
-Tables.fsr_soil_typ=Tables.wwt_soil_typ;
-Tables.fsr_dumping_pth=Tables.type_of_water_body;
+Tables.wwo_soil_typ=Tables.wwt_soil_typ;
+Tables.wwo_dumping_pth=Tables.type_of_water_body;
 
 //get object by "table" (string) and "index" (integer)
 Tables.get_row=function(table, index){

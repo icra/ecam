@@ -52,19 +52,19 @@ let Estimations={
   //wwo
   wwc_vol_unco(){return Global.Waste.ww_vol_gene - Global.Waste.Collection.wwc_vol_coll;},
   wwc_vol_unco_unt(){return Global.Waste.Onsite.wwc_vol_unco - Global.Waste.Onsite.wwc_vol_unco_ons;},
-  fsc_open_pop(){return Global.Waste.ww_resi_pop - Global.Waste.Collection.wwc_conn_pop - Global.Waste.Onsite.fsc_onsi_pop;},
+  wwo_open_pop(){return Global.Waste.ww_resi_pop - Global.Waste.Collection.wwc_conn_pop - Global.Waste.Onsite.wwo_onsi_pop;},
 
-  //fsc
+  //wwo
   /*
-  fsc_bod_infl(){
-    return Global.General.bod_pday_fs/1000*Global.Waste.Collection.fsc_onsi_pop*Global.Days();
+  wwo_bod_infl(){
+    return Global.General.bod_pday_fs/1000*Global.Waste.Collection.wwo_onsi_pop*Global.Days();
   },
-  fsc_fslu_emp(){ return Cts.ct_fs_prod.value*Global.Waste.Collection.fsc_onsi_pop*Global.Days()/Global.Waste.Collection.fsc_fdensity*Global.Faecl.Containment.fsc_cont_emp/100; },
-  fsc_bod_rmvd(){ return Global.Faecl.Containment.fsc_fslu_emp*Global.Faecl.Containment.fsc_bod_conc_fs; },
+  wwo_fslu_emp(){ return Cts.ct_fs_prod.value*Global.Waste.Collection.wwo_onsi_pop*Global.Days()/Global.Waste.Collection.wwo_fdensity*Global.Faecl.Containment.wwo_cont_emp/100; },
+  wwo_bod_rmvd(){ return Global.Faecl.Containment.wwo_fslu_emp*Global.Faecl.Containment.wwo_bod_conc_fs; },
 
   //fst
   //influent and effluent BOD
-  fst_bod_infl(){ return Global.Faecl.Containment.fsc_bod_rmvd; },
+  fst_bod_infl(){ return Global.Faecl.Containment.wwo_bod_rmvd; },
   fst_bod_effl(){ return 0.10*Global.Faecl.Treatment.fst_bod_infl; },
   //biogas
   fst_biog_pro(){return Global.Faecl.Treatment.fst_bod_infl*Cts.ct_bod_kg.value*Cts.ct_biog_g.value;},
@@ -72,18 +72,18 @@ let Estimations={
 
   //fsr
   //volume dumped
-  fsr_vol_dumping(){return Global.Faecl.Containment.fsc_fslu_emp},
+  fsr_vol_dumping(){return Global.Faecl.Containment.wwo_fslu_emp},
   //mass sent to landapp
   fsr_mass_landapp(){
     let fslu_typ_la=Tables.find('fsr_fslu_typ_la',Global.Faecl.Reuse.fsr_fslu_typ_la);
     let total_solids=Tables.fsr_fslu_typ_la[fslu_typ_la].total_solids;
-    return Global.Faecl.Containment.fsc_fslu_emp*Global.Faecl.Containment.fsc_fdensity*total_solids;
+    return Global.Faecl.Containment.wwo_fslu_emp*Global.Faecl.Containment.wwo_fdensity*total_solids;
   },
   //mass sent to landfilling
   fsr_mass_landfil(){
     let fslu_typ_lf=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);
     let total_solids=Tables.fsr_fslu_typ_lf[fslu_typ_lf].total_solids;
-    return Global.Faecl.Containment.fsc_fslu_emp*Global.Faecl.Containment.fsc_fdensity*total_solids;
+    return Global.Faecl.Containment.wwo_fslu_emp*Global.Faecl.Containment.wwo_fdensity*total_solids;
   },
   //N content of FS
   fsr_la_N_cont(){

@@ -179,7 +179,8 @@ function get_variable_value(code){
   if(!type) return false;
   if(type=='output'){
     let output = Global[code](); //can be a number or an object
-    return (typeof(output)=='number'?output:output.total);
+    if(output==undefined) return 0;
+    return (typeof(output.total)=='number'?output.total:output);
   }
   if(type=='input') return get_current_stage(code)[code];
   return false;

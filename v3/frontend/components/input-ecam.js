@@ -78,6 +78,7 @@ Vue.component('input_ecam',{
             style="
               display:block;
               margin:auto;
+              max-width:300px;
             "
           >
             <option

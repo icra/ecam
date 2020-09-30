@@ -21,10 +21,10 @@ let Exceptions={
     table:"type_of_water_body",
     table_field:function(){return "ch4_efac"},
   },
-  fsc_ch4_efac:{ //depends on ch4_efac_flooding
-    table:"fsc_type_tre",
+  wwo_ch4_efac_con:{ //depends on ch4_efac_flooding
+    table:"wwo_type_con",
     table_field:function(){
-      if(Global.Waste.Collection.fsc_flooding){
+      if(Global.Waste.Onsite.wwo_flooding){
         return "ch4_efac_flooding";
       }else{
         return "ch4_efac";
@@ -61,18 +61,13 @@ let Exceptions={
     },
   },
 
-  fsc_fdensity:{
-    table:"fsc_type_tre",
+  wwo_fdensity:{
+    table:"wwo_type_con",
     table_field:function(){return "fs_density"},
   },
 
-  fsc_bod_conc_fs:{
-    table:"fsc_type_tre",
-    table_field:function(){return "BOD_conc_FS"},
-  },
-
-  fsr_bod_conc_fs:{
-    table:"fsc_type_tre",
+  wwo_bod_conc_fs:{
+    table:"wwo_type_con",
     table_field:function(){return "BOD_conc_FS"},
   },
 };

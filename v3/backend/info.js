@@ -159,15 +159,6 @@ let Info={
 
   fst_SL_GHG_avoided: {magnitude:"Mass",   unit:"kg CO2eq"},
 
-  fs_vol_trck:    {magnitude:"Volume", unit:"L"},
-
-	fs_SL_serv_pop: {magnitude:"Percentage",unit:"%"},
-  fsc_vol_trck:   {magnitude:"Volume", unit:"L"},
-  fst_vol_trck:   {magnitude:"Volume", unit:"L"},
-  fsr_vol_trck:   {magnitude:"Volume", unit:"L"},
-
-  fsr_vol_fuel:        {magnitude:"Volume",    unit:"L" },
-
   //FS Reuse
 
 
@@ -191,8 +182,7 @@ let Info={
   fsr_ch4_efac_dumping:     {magnitude:"Mass/Mass",   unit:"kgCH4/kgBOD" },
   fsr_bod_conc_fs:          {magnitude:"Concentration", unit:"kg/m3" },
 
-  wwo_flooding:             {magnitude:"Option",      unit:"Yes/No"},
-
+  wwo_flooding:{magnitude:"Option",unit:"Yes/No"},
 
   fst_vol_fuel:        {magnitude:"Volume",    unit:"L" },
   fst_KPI_GHG_elec:    {magnitude:"Mass",      unit:"kg CO2eq" },
@@ -204,27 +194,6 @@ let Info={
   fst_KPI_GHG_tre_ch4: {magnitude:"Mass",      unit:"kg CO2eq"},
   fst_KPI_GHG_tre_n2o: {magnitude:"Mass",      unit:"kg CO2eq"},
   fst_KPI_GHG_tre:     {magnitude:"Mass",      unit:"kg CO2eq"},
-
-
-  //pump efficiency FSM
-  fsc_nrg_pump:{magnitude:"Energy",unit:"kWh"},
-  fsc_vol_pump:{magnitude:"Volume",unit:"m3"},
-  fsc_pmp_head:{magnitude:"Head",unit:"m"},
-  fsc_sta_head:{magnitude:"Head",unit:"m"},
-  fsc_coll_len:{magnitude:"Distance",unit:"km"},
-  fsc_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m"},
-  fsc_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km"},
-  fsc_pmp_flow:{magnitude:"Flow",unit:"L/s"},
-  fsc_pmp_volt:{magnitude:"Voltage",unit:"V"},
-  fsc_pmp_amps:{magnitude:"Intensity",unit:"A"},
-  fsc_pmp_exff:{magnitude:"Efficiency",unit:"%"},
-  fsc_pmp_pf:  {magnitude:"Power factor",unit:"ratio"},
-  fsc_pmp_pw:{magnitude:"Power",unit:"kW"},
-  fsc_KPI_nrg_elec_eff:{magnitude:"Efficiency",unit:"%"},
-  fsc_KPI_std_nrg_newp:{magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m"},
-  fsc_KPI_nrg_cons_new:{magnitude:"Energy",unit:"kWh"},
-  fsc_KPI_nrg_estm_sav:{magnitude:"Energy",unit:"kWh"},
-  fsc_KPI_ghg_estm_red:{magnitude:"Mass",unit:"kg CO2eq"},
 
   fst_nrg_pump:{magnitude:"Energy",unit:"kWh"},
   fst_vol_pump:{magnitude:"Volume",unit:"m3"},
