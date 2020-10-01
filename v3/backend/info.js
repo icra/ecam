@@ -15,6 +15,9 @@ let Info={
   ww_KPI_GHG_tre:{magnitude:"Mass",unit:"kg CO2eq"},
   ww_KPI_GHG_ons:{magnitude:"Mass",unit:"kg CO2eq"},
 
+  wwc_KPI_GHG_col:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwc_KPI_GHG_cso:{magnitude:"Mass",unit:"kg CO2eq"},
+
   wwo_mass_landapp:{magnitude:"Mass",    unit:"kg"},
   wwo_la_N_cont:   {magnitude:"Percent", unit:"%"},
   wwo_soil_typ:    {magnitude:"Option",  unit:"Soil type"},

@@ -22,6 +22,11 @@ let stages_menu=new Vue({
         return true;
       }
     },
+
+    add_substage(level,sublevel){
+      let ss = {};
+      this.Global.Substages[level][sublevel].push(ss);
+    }
   },
   template:`
     <!--linear menu COMPONENT-->
@@ -61,16 +66,30 @@ let stages_menu=new Vue({
             </tr>
 
             <tr v-if="show_substages_summary">
-              <td v-for="s in Structure.filter(s=>s.sublevel)">
-                <div v-if="s.sublevel" v-for="ss,i in [{},{}]" style="font-size:smaller;border-bottom:1px solid #ccc">
+              <td v-for="s in Structure.filter(s=>s.sublevel)" style="vertical-align:top">
+                <div v-if="Global.Substages[s.level][s.sublevel].length==0" style="text-align:center">
+                  <small style="color:#666">~no substages</small>
+                </div>
+                <div
+                  v-if="s.sublevel"
+                  v-for="ss,i in Global.Substages[s.level][s.sublevel]"
+                  style="font-size:smaller;border-bottom:1px solid #ccc"
+                >
                   <div class=flex style="justify-content:space-between">
                     <div>
-                      Substage {{i}}
+                      Substage {{i+1}}
                     </div>
                     <div>
                       0
                     </div>
                   </div>
+                </div>
+                <div>
+                  <button
+                    style="font-size:smaller;display:block;margin:auto;"
+                    @click="add_substage(s.level,s.sublevel)"
+                  >add
+                  </button>
                 </div>
               </td>
             </tr>
