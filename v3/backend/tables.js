@@ -141,6 +141,7 @@ let Tables = {
 
   //type of containment
   "wwo_type_con":[
+    {name:"Select",                                                         ch4_efac:0,      ch4_efac_flooding:0,     BOD_conc_FS:0,    fs_density:0   },
     {name:"No containment (open defecation)",                               ch4_efac:0.027,  ch4_efac_flooding:0.027, BOD_conc_FS:67.8, fs_density:1400},
     {name:"Pit latrine without flush water (lined or unlined) – household", ch4_efac:0.06,   ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
     {name:"Pit latrine without flush water (lined or unlined) – communal",  ch4_efac:0.3,    ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
@@ -213,6 +214,11 @@ Tables.wwd_trck_typ=Tables["Fuel type"]; //trucks
 Tables.wwo_trck_typ=Tables["Fuel type"]; //type of fuel fsm emptying and transport
 Tables.wwt_dige_typ=Tables["Fuel type"]; //type of fuel dig
 Tables.wwt_appl_typ=Tables["Fuel type"]; //type of fuel app
+
+//wsa
+Tables.wsa_pmp_type=Tables["Pump type"];
+Tables.wsa_pmp_size=Tables["Pump size"];
+Tables.wsd_pmp_size=Tables["Pump size"];
 
 Tables.wwo_fslu_typ_lf=Tables.wwo_fslu_typ;
 Tables.wwo_fslu_typ_la=Tables.wwo_fslu_typ;

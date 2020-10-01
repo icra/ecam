@@ -8,18 +8,25 @@
 
 let Info={
   //IPCC 2019
-  wwo_mass_landapp:         {magnitude:"Mass",        unit:"kg"},
-  wwo_la_N_cont:{magnitude:"Percent", unit:"%"},
-  wwo_soil_typ:             {magnitude:"Option",      unit:"Soil type"},
+  ws_KPI_GHG_abs:{magnitude:"Mass",unit:"kg CO2eq"},
+  ws_KPI_GHG_tre:{magnitude:"Mass",unit:"kg CO2eq"},
+  ws_KPI_GHG_dis:{magnitude:"Mass",unit:"kg CO2eq"},
+  ww_KPI_GHG_col:{magnitude:"Mass",unit:"kg CO2eq"},
+  ww_KPI_GHG_tre:{magnitude:"Mass",unit:"kg CO2eq"},
+  ww_KPI_GHG_ons:{magnitude:"Mass",unit:"kg CO2eq"},
+
+  wwo_mass_landapp:{magnitude:"Mass",    unit:"kg"},
+  wwo_la_N_cont:   {magnitude:"Percent", unit:"%"},
+  wwo_soil_typ:    {magnitude:"Option",  unit:"Soil type"},
 
   wwo_vol_dumping:{magnitude:"Volume",unit:"m3"},
   wwo_dumping_pth:{magnitude:"Option",unit:"Dumping pathway"},
   wwo_ch4_efac_dumping:{magnitude:"Mass/Mass",unit:"kgCH4/kgBOD"},
   wwo_bod_conc_fs:{magnitude:"Concentration", unit:"kg/m3" },
 
-  wwo_N_urine: {magnitude:"Mass",        unit:"kg"},
-  wwo_reused_N:{magnitude:"Mass",        unit:"kg"},
-  wwo_reused_P:{magnitude:"Mass",        unit:"kg"},
+  wwo_N_urine: {magnitude:"Mass",unit:"kg"},
+  wwo_reused_N:{magnitude:"Mass",unit:"kg"},
+  wwo_reused_P:{magnitude:"Mass",unit:"kg"},
 
   wwo_mass_landfil:{magnitude:"Mass",unit:"kg"},
   wwo_lf_TVS:{magnitude:"Percent",unit:"%"},

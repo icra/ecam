@@ -41,7 +41,11 @@ Vue.component('input_ecam',{
           style="text-align:left;margin-top:5px;"
         >
           <!--case 1: selection is a percent of something else-->
-          <select v-if="Exceptions[code].percent_of" v-model="current_stage[code]">
+          <select v-if="Exceptions[code].percent_of" v-model="current_stage[code]"
+            style="
+              max-width:250px;
+            "
+          >
             <option
               v-for="obj in Tables[Exceptions[code].table]"
               :value="parseFloat(obj[Exceptions[code].table_field()]*Exceptions[code].percent_of())"
@@ -52,8 +56,13 @@ Vue.component('input_ecam',{
               {{get_current_unit(code)}})
             </option>
           </select>
+
           <!--case 2: selection is a fixed value-->
-          <select v-else v-model="current_stage[code]">
+          <select v-else v-model="current_stage[code]"
+            style="
+              max-width:250px;
+            "
+          >
             <option
               v-for="obj in Tables[Exceptions[code].table]"
               :value="parseFloat(obj[Exceptions[code].table_field()])"
@@ -78,7 +87,7 @@ Vue.component('input_ecam',{
             style="
               display:block;
               margin:auto;
-              max-width:300px;
+              max-width:250px;
             "
           >
             <option

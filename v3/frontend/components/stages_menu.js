@@ -1,11 +1,9 @@
-let stages_menu  = new Vue({
-  el:"#stages_menu ",
+let stages_menu=new Vue({
+  el:"#stages_menu",
   data:{
     visible:false,
     current_view:null,
-
-    show_substages_summary:false,
-
+    show_substages_summary:true,
     caption,
     Global,
     Info,
@@ -36,23 +34,28 @@ let stages_menu  = new Vue({
               <td v-for="l1 in Structure.filter(s=>!s.sublevel)" :colspan="Structure.filter(s=>s.level==l1.level).length-1"
                 class=l1
                 :style="{background:l1.color}"
-                @click="go_to(l1.level)"
-                v-html="translate(l1.level)"
                 :selected="is_tier_b_selected(l1.level,false)"
-              ></td>
+              >
+                <a
+                  style="color:white"
+                  v-html="translate(l1.level)"
+                  @click="go_to(l1.level)"
+                ></a>
+              </td>
             </tr>
 
             <tr>
               <td v-for="s in Structure" v-if="s.sublevel" style="width:100px">
                 <div style="text-align:center">
-                  <img
-                    @click="go_to(s.level,s.sublevel)"
-                    @mousemove="caption.show($event, translate(s.sublevel?s.sublevel:s.level))"
-                    @mouseout="caption.hide()"
-                    :src="'frontend/img/'+s.icon"
-                    :class="'s '+(is_tier_b_selected(s.level, s.sublevel)?'selected':'')"
-                    :stage="s.alias"
-                  >
+                  <a @click="go_to(s.level,s.sublevel)">
+                    <img
+                      @mousemove="caption.show($event, translate(s.sublevel?s.sublevel:s.level))"
+                      @mouseout="caption.hide()"
+                      :src="'frontend/img/'+s.icon"
+                      :class="'s '+(is_tier_b_selected(s.level, s.sublevel)?'selected':'')"
+                      :stage="s.alias"
+                    >
+                  </a>
                 </div>
               </td>
             </tr>
@@ -108,18 +111,10 @@ let stages_menu  = new Vue({
       #stages_menu img.selected {
         border:3px solid var(--color-level-generic);
       }
-      #stages_menu td {
-        /*
-        border:none;
-        */
-      }
       #stages_menu td.l1{
-        color:white;
-        cursor:pointer;
         text-align:center;
       }
-      #stages_menu td.l1[selected],
-      #stages_menu td.l1:hover{
+      #stages_menu td.l1[selected]{
         text-decoration:underline;
       }
     </style>

@@ -186,17 +186,18 @@ let tier_b=new Vue({
           <!--resident population-->
           <div>
             <a onclick="ecam.show('population')">
-              <b>{{translate('ws_resi_pop_descr')}}:</b>
-              <span v-if="level=='Water'">
+              <div v-if="level=='Water' || level=='General'">
+                <b>{{translate('ws_resi_pop_descr')}}:</b>
                 <span :class="Global.Water.ws_resi_pop<=0 ? 'warning' : ''">
                   {{format(Global.Water.ws_resi_pop)}}
                 </span>
-              </span>
-              <span v-if="level=='Waste'">
+              </div>
+              <div v-if="level=='Waste' || level=='General'">
+                <b>{{translate('ww_resi_pop_descr')}}:</b>
                 <span :class="Global.Waste.ww_resi_pop<=0 ? 'warning' : ''">
                   {{format(Global.Waste.ww_resi_pop)}}
                 </span>
-              </span>
+              </div>
             </a>
           </div>
 
@@ -332,24 +333,25 @@ let tier_b=new Vue({
                 <td colspan=3 :class="Questions.is_question_hidden(question) ? 'disabled_question' : ''">
                   <div style="display:grid;grid-template-columns:50% 50%">
                     <!--question text-->
-                    <div
-                      @click="fold_question(question)"
-                      class="question_container flex"
-                      :style="(Global.Configuration.Questions[question]?'cursor:pointer':'')"
-                    >
-                      <div v-if="Global.Configuration.Questions[question]">
-                        <!--question folded marker-->
-                        <div :class="'question_fold_marker '+(Global.Configuration.FoldedQuestions.indexOf(question)+1 ? 'folded':'')">
-                          ▼
+                    <div>
+                      <a
+                        class="question_container flex"
+                        @click="fold_question(question)"
+                        :style="{cursor:Global.Configuration.Questions[question]?'pointer':'',color:'white'}"
+                      >
+                        <div v-if="Global.Configuration.Questions[question]">
+                          <!--question folded marker-->
+                          <div :class="'question_fold_marker '+(Global.Configuration.FoldedQuestions.indexOf(question)+1 ? 'folded':'')">
+                            ▼
+                          </div>
                         </div>
-
-                      </div>
-                      <div>
-                        <b v-html="translate(question)+'?'"
-                          :class="Global.Configuration.Questions[question] ? 'question_text':''"
-                          style="margin-left:5px"
-                        ></b>
-                      </div>
+                        <div>
+                          <b v-html="translate(question)+'?'"
+                            :class="Global.Configuration.Questions[question] ? 'question_text':''"
+                            style="margin-left:5px"
+                          ></b>
+                        </div>
+                      </a>
                     </div>
 
                     <!--question set value button-->
@@ -616,7 +618,9 @@ let tier_b=new Vue({
         color:#bbb;
       }
       #tier_b .question_container {
-        /**/
+        display:flex;
+        flex-wrap:nowrap;
+        text-decoration:none;
       }
       #tier_b .question_container:hover .question_text {
         text-decoration:underline;

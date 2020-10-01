@@ -83,8 +83,12 @@ class Ecam{
         wst_vol_trea:0,
         wst_nrg_cons:0,
         wst_mass_slu:0,
+        wst_treatmen:0,
         wst_fuel_typ:0,
         wst_vol_fuel:0,
+        wst_tst_carr:0,
+        wst_trea_cap:0,
+
         wst_nrg_pump:0,
         wst_vol_pump:0,
         wst_pmp_head:0,
@@ -95,8 +99,6 @@ class Ecam{
         wst_pmp_amps:0,
         wst_pmp_pf:0.9,
         wst_pmp_exff:0,
-        wst_tst_carr:0,
-        wst_trea_cap:0,
         equations:[
           "wst_KPI_GHG_elec",
           "wst_KPI_GHG_fuel",
@@ -190,7 +192,7 @@ class Ecam{
       equations:[
         "ww_KPI_GHG_col", //GHG from Wastewater Collection
         "ww_KPI_GHG_tre", //GHG from Wastewater Treatment
-        "ww_KPI_GHG_dis", //GHG from Wastewater Discharge
+        "ww_KPI_GHG_ons", //GHG from Wastewater Discharge
         "ww_KPI_GHG",  //GHG from Wastewater
         "ww_SL_nrg_cost", //SL energy cost percentage
         "ww_nrg_cons",    //energy consumed from the grid
@@ -415,17 +417,15 @@ class Ecam{
         wwo_trck_typ:0,    //type of fuel
         wwo_vol_trck:0,    //fuel consumed
 
-        //fsm containment
+        //operational
+        wwo_bod_infl:0,    //influent bod load
         wwo_type_con:0,    //type of containment
         wwo_flooding:0,    //yes/no
         wwo_cont_emp:0,    //containments emptied
         wwo_fdensity:0,    //density of faecal sludge
-        wwo_fslu_emp:0,    //FS emptied
-
-        //fsm treatment
-        wwo_type_tre:0,    //type of treatment
-        wwo_bod_infl:0,    //influent bod load
         wwo_bod_conc_fs:0, //[BOD] in FS
+        wwo_fslu_emp:0,    //FS emptied
+        wwo_type_tre:0,    //type of treatment
         wwo_bod_rmvd:0,    //bod removed as FS
         wwo_bod_slud:0,    //?
         wwo_bod_effl:0,    //effluent BOD
@@ -478,6 +478,15 @@ class Ecam{
           "wwo_SL_GHG_avoided",
           "wwo_ghg_avoided_land",
           "wwo_ghg_avoided_reuse",
+
+          "wwo_pmp_pw",
+          "wwo_KPI_std_nrg_cons",
+          "wwo_KPI_un_head_loss",
+          "wwo_KPI_nrg_elec_eff",
+          "wwo_KPI_ghg_estm_red",
+          "wwo_KPI_std_nrg_newp",
+          "wwo_KPI_nrg_cons_new",
+          "wwo_KPI_nrg_estm_sav",
         ],
       },
     };
@@ -1148,6 +1157,39 @@ class Ecam{
       }
       wwo_ghg_avoided_reuse_P(){
         return this.wwo.wwo_reused_P*Cts.ct_cr_forP.value;
+      }
+
+      //energy eff
+      wwo_pmp_pw(){return this.wwo.wwo_pmp_flow*this.wwo.wwo_pmp_head*Cts.ct_gravit.value/1000;}
+      wwo_KPI_std_nrg_cons(){return this.wwo.wwo_nrg_pump/(this.wwo.wwo_vol_pump*this.wwo.wwo_pmp_head/100);}
+      wwo_KPI_un_head_loss(){
+        return 1e3*(
+          this.wwo.wwo_pmp_head
+          -this.wwo.wwo_sta_head
+        )/this.wwo.wwo_coll_len;
+      }
+      wwo_KPI_nrg_elec_eff(){
+        return 100*this.wwo_pmp_pw()/(
+          this.wwo.wwo_pmp_volt
+          *this.wwo.wwo_pmp_amps
+          *Math.sqrt(3)*this.wwo.wwo_pmp_pf/1000
+        );
+      }
+      wwo_KPI_ghg_estm_red(){
+        return this.General.conv_kwh_co2*this.wwo_KPI_nrg_estm_sav();
+      }
+      wwo_KPI_std_nrg_newp(){
+        return this.wwo_KPI_nrg_elec_eff()/
+          this.wwo.wwo_pmp_exff*
+          this.wwo_KPI_std_nrg_cons();
+      }
+      wwo_KPI_nrg_cons_new(){
+        return this.wwo_KPI_nrg_elec_eff()/
+          this.wwo.wwo_pmp_exff*
+          this.wwo.wwo_nrg_pump;
+      }
+      wwo_KPI_nrg_estm_sav(){
+        return this.wwo.wwo_nrg_cons - this.wwo_KPI_nrg_cons_new();
       }
   //</>
 };

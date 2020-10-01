@@ -31,20 +31,14 @@ let Exceptions={
       }
     },
   },
-  fst_ch4_efac:{
-    table:"fst_type_tre",
+  wwo_ch4_efac_unt:{
+    table:"type_of_water_body",
     table_field:function(){return "ch4_efac"},
   },
-  fsr_ch4_efac:{
-    table:"fsr_ch4_efac",
+  wwo_ch4_efac_dis:{
+    table:"type_of_water_body",
     table_field:function(){return "ch4_efac"},
   },
-  fsr_ch4_efac_dumping:{
-    table:"fsr_dumping_pth",
-    table_field:function(){return "ch4_efac"},
-  },
-
-  //BOD removed as sludge
   wwt_bod_slud:{
     table:"type_of_treatment",
     table_field:function(){return "bod_rmvd_as_sludge_estm"},
@@ -52,20 +46,10 @@ let Exceptions={
       return Global.Waste.Treatment.wwt_bod_infl;
     },
   },
-
-  fst_bod_slud:{
-    table:"fst_type_tre",
-    table_field:function(){return "bod_rmvd_as_sludge_estm"},
-    percent_of:function(){
-      return Global.Waste.Onsite.fst_bod_infl;
-    },
-  },
-
   wwo_fdensity:{
     table:"wwo_type_con",
     table_field:function(){return "fs_density"},
   },
-
   wwo_bod_conc_fs:{
     table:"wwo_type_con",
     table_field:function(){return "BOD_conc_FS"},

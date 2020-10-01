@@ -50,8 +50,8 @@ let Estimations={
   wwt_temp_inc(){ return 1023},
 
   //wwo
-  wwc_vol_unco(){return Global.Waste.ww_vol_gene - Global.Waste.Collection.wwc_vol_coll;},
-  wwc_vol_unco_unt(){return Global.Waste.Onsite.wwc_vol_unco - Global.Waste.Onsite.wwc_vol_unco_ons;},
+  wwo_vol_unco(){return 0.2*Global.Waste.Onsite.wwo_onsi_pop*Global.Days()},
+  wwo_vol_unco_unt(){return Global.Waste.Onsite.wwo_vol_unco - Global.Waste.Onsite.wwo_vol_unco_ons;},
   wwo_open_pop(){return Global.Waste.ww_resi_pop - Global.Waste.Collection.wwc_conn_pop - Global.Waste.Onsite.wwo_onsi_pop;},
 
   //wwo

@@ -20,13 +20,6 @@
 */
 
 let Questions={
-  //fst valorizing biogas hotfix
-    "fst_valorizing_biogas":{
-      variables:[],
-      advanced:0,
-      otherQuestions:[],
-    },
-
   //wsa
     "wsa_engines":{
       variables:[
@@ -37,7 +30,6 @@ let Questions={
       advanced:0,
       otherQuestions:[],
     },
-
     "wsa_pumping":{
       variables:[
         "wsa_nrg_pump",
@@ -56,7 +48,6 @@ let Questions={
         "wsa_pumping_eff",
       ],
     },
-
     "wsa_pumping_eff":{
       variables:[
         "wsa_pmp_flow",
@@ -74,7 +65,6 @@ let Questions={
       advanced:1,
       otherQuestions:[ ],
     },
-
   //wst
     "wst_engines":{
       variables:[
@@ -88,7 +78,16 @@ let Questions={
       advanced:0,
       otherQuestions:[],
     },
-
+    "wst_treatment_perf":{
+      variables:[
+        "wst_tst_carr",
+        "wst_trea_cap",
+        "wst_KPI_capac_util",
+        "wst_KPI_tst_carr",
+      ],
+      advanced:1,
+      otherQuestions:[],
+    },
     "wst_pumping":{
       variables:[
         "wst_nrg_pump",
@@ -104,7 +103,6 @@ let Questions={
         "wst_pumping_eff",
       ],
     },
-
     "wst_pumping_eff": {
       variables:[
         "wst_pmp_flow",
@@ -122,18 +120,6 @@ let Questions={
       advanced:1,
       otherQuestions:[],
     },
-
-    "wst_treatment_perf":{
-      variables:[
-        "wst_tst_carr",
-        "wst_trea_cap",
-        "wst_KPI_capac_util",
-        "wst_KPI_tst_carr",
-      ],
-      advanced:1,
-      otherQuestions:[],
-    },
-
   //wsd
     "wsd_engines":{
       variables:[
@@ -623,7 +609,6 @@ let Questions={
         "wwo_vol_dumping",
         "wwo_dumping_pth",
         "wwo_ch4_efac_dumping",
-        "wwo_bod_conc_fs",
         "wwo_KPI_GHG_dumping",
       ],
       advanced:0,

@@ -54,6 +54,7 @@ let Filters = {
   "ww_nrg_cost", //variable
   "ww_run_cost", //variable
 
+  "wst_treatmen", //variable
   "wst_treatment_perf",    //question
   "wsd_water_eff",         //question
   "wsd_service_perf",      //question
@@ -77,6 +78,7 @@ let Filters = {
   "wwo_type_tre",
   "wwo_bod_infl",
   "wwo_bod_rmvd",
+  "wwo_bod_conc_fs",
   "wwo_bod_slud",
   "wwo_bod_effl",
   "wwo_n2o_effl",
