@@ -5,7 +5,6 @@ Vue.component('inputs_involved_table',{
   template:`<div>
     <table class=inputs_involved>
       <tbody v-for="match in Formulas.ids_per_formula(obj[code].toString())">
-
         <!--input involved is a constant-->
         <tr v-if="Cts[match]" :title="'CONSTANT: '+Cts[match].descr">
           <!--involved constant code-->
@@ -30,7 +29,7 @@ Vue.component('inputs_involved_table',{
         <tr v-else-if="Info[match] && Info[match].magnitude=='Option'">
           <!--input involved code-->
           <td :title="translate(match+'_descr')">
-            <a @click="variable.view(match)">{{match}}</a>
+            <a @click="variable.view(match)" :style="{color:get_level_color(locate_variable(match).level)}">{{match}}</a>
           </td>
 
           <!--input involved value-->
@@ -44,7 +43,7 @@ Vue.component('inputs_involved_table',{
         <!--input involved is a normal one (input or output)-->
         <tr v-else>
           <td :title="translate(match+'_descr')">
-            <a @click="variable.view(match)">{{match}}</a>
+            <a @click="variable.view(match)" :style="{color:get_level_color(locate_variable(match).level)}">{{match}}</a>
           </td>
           <td v-html="format(get_variable_value(match))"></td>
 
@@ -79,6 +78,8 @@ Vue.component('inputs_involved_table',{
   methods:{
     translate,
     format,
+    get_level_color,
+    locate_variable,
     get_variable_value,
     get_variable_type,
     get_base_unit,

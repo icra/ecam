@@ -2,7 +2,7 @@
   HELPER FUNCTIONS
 */
 
-//navigate tier b levels TODO refactor inside tier_b component
+//navigate to a tier b stage
 function go_to(level, sublevel, no_history_entry){
   let possible_levels = Structure.filter(s=>!s.sublevel).map(s=>s.level);
   possible_levels.push('General');
@@ -16,48 +16,49 @@ function go_to(level, sublevel, no_history_entry){
     throw new Error(`sublevel '${level}' does not exist`);
   }
 
-  tier_b.level         = level;
-  tier_b.sublevel      = sublevel || false;
-  tier_b.current_stage = sublevel ? Global[level][sublevel] : Global[level];
+  tier_b.level    = level;
+  tier_b.sublevel = sublevel || false;
   ecam.show('tier_b', no_history_entry);
 }
 
-//get unit
-function get_current_unit(code){
-  if(!code) return false;
+/*units*/
+  //get unit
+  function get_current_unit(code){
+    if(!code) return false;
 
-  if(!Info[code]){
-    return `["${code}" unit not found]`;
-  }
-  if(Info[code].magnitude=='Currency'){
-    return Global.General.Currency;
-  }
-  if(undefined===Global.Configuration.Units[code]){
-    Global.Configuration.Units[code] = Info[code].unit;
-  }
-  return Global.Configuration.Units[code];
-}
-
-//get base unit (without unit conversion)
-function get_base_unit(code, scenario){
-  if(!code) return false;
-  if(!scenario) scenario = Global;
-
-  let info = Info[code];
-  if(!info) return "";
-
-  if(Info[code].magnitude=="Currency"){
-    return scenario.General.Currency;
+    if(!Info[code]){
+      return `["${code}" unit not found]`;
+    }
+    if(Info[code].magnitude=='Currency'){
+      return Global.General.Currency;
+    }
+    if(undefined===Global.Configuration.Units[code]){
+      Global.Configuration.Units[code] = Info[code].unit;
+    }
+    return Global.Configuration.Units[code];
   }
 
-  if(Units[info.magnitude]==undefined) return info.unit;
+  //get base unit (without unit conversion)
+  function get_base_unit(code, scenario){
+    if(!code) return false;
+    if(!scenario) scenario = Global;
 
-  let base_unit = Object.entries(Units[info.magnitude]).find(([key,val])=>val==1)[0];
-  let info_unit = info.unit; //default unit at info (may not be the base unit)
-  //console.log({info_unit, base_unit});
+    let info = Info[code];
+    if(!info) return "";
 
-  return base_unit;
-}
+    if(Info[code].magnitude=="Currency"){
+      return scenario.General.Currency;
+    }
+
+    if(Units[info.magnitude]==undefined) return info.unit;
+
+    let base_unit = Object.entries(Units[info.magnitude]).find(([key,val])=>val==1)[0];
+    let info_unit = info.unit; //default unit at info (may not be the base unit)
+    //console.log({info_unit, base_unit});
+
+    return base_unit;
+  }
+//units
 
 //get level color
 function get_level_color(level){
@@ -186,7 +187,7 @@ function get_variable_value(code){
   return false;
 }
 
-//get variable type
+//get variable type ("input" or "output")
 function get_variable_type(code){
   if(!code) return false;
 
@@ -195,9 +196,7 @@ function get_variable_type(code){
     return 'output';
   }
 
-  //search estimations TODO
-  //search exceptions TODO
-  //search inputs in General
+  //search in "Global.General"
   {
     let level="General";
     if(get_input_codes(level).indexOf(code)+1){
@@ -205,7 +204,7 @@ function get_variable_type(code){
     }
   }
 
-  //search inside Global
+  //search inside Global[{Water,Waste}]
   for(let i in Structure){
     let s        = Structure[i];
     let level    = s.level;

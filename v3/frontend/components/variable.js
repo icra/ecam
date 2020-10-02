@@ -24,6 +24,7 @@ let variable = new Vue({
     Formulas,
     Questions,
     Cts,
+    Benchmarks,
   },
 
   methods:{
@@ -228,7 +229,7 @@ let variable = new Vue({
                 <!--output that uses the input is an estimation-->
                 <tr v-if="Estimations[output]">
                   <td :title="translate(output+'_descr')">
-                    <a @click="view(output)">
+                    <a @click="view(output)" :style="{color:get_level_color(locate_variable(output).level)}">
                       {{ output }} (estimation)
                     </a>
                   </td>
@@ -237,15 +238,30 @@ let variable = new Vue({
                     </div>
                   </td>
                   <td>
-                    <span class=unit v-html="get_base_unit(id).prettify()">
+                    <span class=unit v-html="get_base_unit(output).prettify()">
                     </span>
+                  </td>
+                </tr>
+
+                <!--output that uses the input is an estimation-->
+                <tr v-if="Benchmarks[output]">
+                  <td :title="translate(output+'_descr')">
+                    <a @click="view(output)" :style="{color:get_level_color(locate_variable(output).level)}">
+                      {{ output }} (benchmark)
+                    </a>
+                  </td>
+                  <td>
+                    <div v-html="Benchmarks[output](get_current_stage(output),Global[output]())"></div>
+                  </td>
+                  <td>
+                    <span class=unit v-html="get_base_unit(output).prettify()"></span>
                   </td>
                 </tr>
 
                 <!--output that uses the input is normal-->
                 <tr v-else>
                   <td :title="translate(output+'_descr')">
-                    <a @click="view(output)">
+                    <a @click="view(output)" :style="{color:get_level_color(locate_variable(output).level)}">
                       {{ output }}
                     </a>
                   </td>
@@ -259,12 +275,10 @@ let variable = new Vue({
                   </td>
                 </tr>
               </tbody>
-              <tr v-if="Formulas.outputs_per_input(id).length==0">
-                <td>
-                  <span style=color:#999>{{ translate('variable_nothing') }}</span>
-                </td>
-              </tr>
             </table>
+            <div v-if="Formulas.outputs_per_input(id).length==0">
+              <span style=color:#999>{{ translate('variable_nothing') }}</span>
+            </div>
           </td>
         </tr>
 
@@ -294,10 +308,26 @@ let variable = new Vue({
 
         <!--the input is used in benchmarks?-->
         <tr>
-          <th>Input is used in benchmarks?</th>
-          <td>TODO</td>
+          <th>
+            Is this variable in
+            <a 
+              v-html="'benchmarks'"
+              style="text-decoration:underline;color:white"
+              onclick="ecam.show('benchmarks')">
+            </a>
+            ?
+          </th>
+          <td v-if="Benchmarks[id]">
+            Yes
+            <details>
+              <summary>formula</summary>
+              <div>
+                <code><pre v-html="Formulas.prettify(Benchmarks[id])"></pre></code>
+              </div>
+            </details>
+          </td>
+          <td v-else style=color:#999>{{translate('no')}}</td>
         </tr>
-
       </table>
     </div>
   `,

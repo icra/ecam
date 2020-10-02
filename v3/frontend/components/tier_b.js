@@ -21,6 +21,15 @@ let tier_b=new Vue({
       "Sludge management":true,
     },
 
+    //benchmark ui colors
+    benchmark_colors:{
+      "Good":           "green",
+      "Acceptable":     "orange",
+      "Unsatisfactory": "red",
+      "Bad":            "red",
+      "Out of range":   "red",
+    },
+
     Global,
     Info,
     Structure,
@@ -33,6 +42,7 @@ let tier_b=new Vue({
     Formulas,
     Questions,
     Languages,
+    Benchmarks,
   },
 
   methods:{
@@ -146,6 +156,14 @@ let tier_b=new Vue({
       });
       return n;
     },
+
+    //Benchmark return string and color
+    get_benchmark(key){
+      if(!this.Benchmarks[key]) return false;
+      let string = this.Benchmarks[key](this.get_current_stage(), this.Global[key]());
+      let color = this.benchmark_colors[string];
+      return {string, color};
+    }
   },
 
   template:`
@@ -510,11 +528,23 @@ let tier_b=new Vue({
 
                   <!--output value-->
                   <td
-                    v-html="format(Global[key]()/Units.multiplier(key))"
                     @mousemove="caption.show($event, Formulas.prettify(Global[key]))"
                     @mouseout="caption.hide()"
                     style="text-align:right"
-                  ></td>
+                  >
+                    <div v-html="format(Global[key]()/Units.multiplier(key))"></div>
+
+                    <!--benchmark if any-->
+                    <div v-if="Benchmarks[key]">
+                      <div :style="{color:get_benchmark(key).color}">
+                        {{
+                          get_benchmark(key).string
+                        }}
+                      </div>
+                    </div>
+                  </td>
+
+                  <!--unit-->
                   <td v-if="Info[key]" v-html="Info[key].unit.prettify()"></td>
                   <td v-else style="color:#bbb"><b>no unit</b></td>
                 </tr>

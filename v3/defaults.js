@@ -8,7 +8,7 @@ linear_menu.visible = 1;
 stages_menu.visible = 0;
 tier_b.level="Waste";
 tier_b.sublevel="Onsite";
-ecam.show('tier_b');
+ecam.show('variable');
 
 //BACKEND ELEMENTS
 
@@ -83,12 +83,11 @@ Object.keys(Questions).forEach(key=>{Global.Configuration.Questions[key]=1});
   Global.Water.Distribution.wsd_pmp_amps =     12;
   Global.Water.Distribution.wsd_pmp_pf   =    0.9;
   Global.Water.Distribution.wsd_pmp_exff =     99;
-  //---
 //ww
   Global.Waste.ww_resi_pop =   2000;
   Global.Waste.ww_vol_gene = 150000;
-  Global.Waste.ww_nrg_cons =      1;
-  Global.Waste.ww_run_cons =      5;
+  Global.Waste.ww_nrg_cost =      1;
+  Global.Waste.ww_run_cost =      5;
 //wwc
   Global.Waste.Collection.wwc_conn_pop     =   1900;
   Global.Waste.Collection.wwc_vol_coll     =    2e5;
@@ -209,11 +208,4 @@ Object.keys(Questions).forEach(key=>{Global.Configuration.Questions[key]=1});
   Global.Waste.Onsite.wwo_N_urine       =  40;
   Global.Waste.Onsite.wwo_reused_N      =  10;
   Global.Waste.Onsite.wwo_reused_P      =  20;
-  //-------------------------------------------
-
-
-
-
-
-
-
+//----------------

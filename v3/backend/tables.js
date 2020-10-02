@@ -12,7 +12,6 @@ let Tables = {
 
   //pump types
   "Pump type":[
-    {name:"None"       },
     {name:"External"   },
     {name:"Submersible"},
   ],

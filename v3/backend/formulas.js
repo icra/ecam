@@ -48,9 +48,24 @@ let Formulas={
     let matches=[];
     let reg=new RegExp('\\W'+id+"\\W");
 
-    Object.getOwnPropertyNames(Ecam.prototype).forEach(code=>{
+    //get arrays of strings corresponding to codes of outputs
+    let all_outputs     = Object.getOwnPropertyNames(Ecam.prototype);
+    let all_estimations = Object.keys(Estimations);
+    let all_benchmarks  = Object.keys(Benchmarks);
+
+    all_outputs.forEach(code=>{
       if(code=='constructor') return;
       let match = Global[code].toString().search(reg); //will return -1 if not found
+      if(match+1) matches.push(code);
+    });
+
+    all_estimations.forEach(code=>{
+      let match = Estimations[code].toString().search(reg); //will return -1 if not found
+      if(match+1) matches.push(code);
+    });
+
+    all_benchmarks.forEach(code=>{
+      let match = Benchmarks[code].toString().search(reg); //will return -1 if not found
       if(match+1) matches.push(code);
     });
 
@@ -81,8 +96,7 @@ let Formulas={
     result = result.replace(/\+/g," + ");
     result = result.replace(/\-/g," - ");
     result = result.replace(/\*/g," * ");
-    result = result.replace(/Cts./g,"");
-    result = result.replace(/().value/g,"$1");
+    result = result.replace(/Cts\.(.*)\.value/g,"$1");
     result = result.replace(/Global./g,"");
     result = result.replace(/General./g,"");
     return result;

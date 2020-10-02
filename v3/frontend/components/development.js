@@ -143,20 +143,6 @@ let data_structure_viewer=new Vue({
   `,
 });
 
-let benchmarks=new Vue({
-  el:"#benchmarks",
-
-  data:{
-    visible:false,
-  },
-
-  template:`
-    <div id=benchmarks v-if="visible">
-      benchmarks
-    </div>
-  `,
-});
-
 let graphs=new Vue({
   el:"#graphs",
 
