@@ -193,13 +193,12 @@ class Ecam{
         "ww_KPI_GHG_col", //GHG from Wastewater Collection
         "ww_KPI_GHG_tre", //GHG from Wastewater Treatment
         "ww_KPI_GHG_ons", //GHG from Wastewater Discharge
-        "ww_KPI_GHG",  //GHG from Wastewater
+        "ww_KPI_GHG",     //GHG from Wastewater
+
+        "ww_serv_pop",    //SL serviced population
+        "ww_nrg_cons",    //SL energy consumed from the grid
+        "ww_GHG_avoided", //SL GHG avoided
         "ww_SL_nrg_cost", //SL energy cost percentage
-        "ww_nrg_cons",    //energy consumed from the grid
-        /*
-        "ww_vol_fuel",    //fuel consumed by engines TODO
-        "ww_GHG_avoided", //GHG avoided TODO
-        */
       ],
 
       Collection:{
@@ -210,8 +209,8 @@ class Ecam{
         wwc_vol_coll_unt:0, //volume of collected wastewater untreated (CSO)
 
         //emission factors
-        wwc_ch4_efac_col:0,   //emission factor for collected wastewater
         wwc_ch4_efac_cso:0.3, //emission factor for collected untreated wastewater
+        wwc_ch4_efac_col:0,   //emission factor for collected wastewater
 
         //fuel engines
         wwc_fuel_typ:0,
@@ -1048,6 +1047,9 @@ class Ecam{
       wsd_KPI_nrg_estm_sav(){return this.wsd.wsd_nrg_cons-this.wsd_KPI_nrg_cons_new()}
       wsd_KPI_ghg_estm_red(){return this.General.conv_kwh_co2*this.wsd_KPI_nrg_estm_sav()}
     //SL ww
+      ww_serv_pop(){
+        return this.wwt.wwt_serv_pop + this.wwo.wwo_onsi_pop;
+      }
       ww_nrg_cons(){return this.wwc.wwc_nrg_cons+this.wwt.wwt_nrg_cons+this.wwo.wwo_nrg_cons}
       ww_vol_fuel(){
         return
@@ -1113,7 +1115,9 @@ class Ecam{
       wwd_wr_GHG_avo_d(){
         return this.wwd_wr_nrg_sav()*this.General.conv_kwh_co2;
       }
-      wwd_SL_ghg_non(){return this.wwt.wwd_n2o_effl/1000*this.wwt.wwd_vol_nonp*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value}
+      wwd_SL_ghg_non(){
+        return this.wwt.wwd_vol_nonp*this.wwt.wwd_n2o_effl/1000*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      }
       wwd_total_m3(){
         return this.wwt.wwd_vol_disc+this.wwt.wwd_vol_nonp;
       }

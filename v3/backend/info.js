@@ -8,6 +8,36 @@
 
 let Info={
   //IPCC 2019
+  ww_serv_pop:{magnitude:"People",unit:"people"},
+
+  wwd_KPI_GHG_disc:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwt_KPI_GHG_slu_storage:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwt_KPI_GHG_slu_composting:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwt_KPI_GHG_slu_incineration:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwt_KPI_GHG_slu_land_application:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwt_KPI_GHG_slu_landfilling:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwt_KPI_GHG_slu_stockpilling:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwt_KPI_GHG_slu_transport:{magnitude:"Mass",unit:"kg CO2eq"},
+
+  wwo_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_KPI_GHG_fuel:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_KPI_GHG_unt_opd:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_KPI_GHG_unt_ons:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_KPI_GHG_cont:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_KPI_GHG_trck:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_KPI_GHG_biog:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_KPI_GHG_tre:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_KPI_GHG_dis:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_KPI_GHG_landapp:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_KPI_GHG_landfil:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_KPI_GHG_dumping:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_KPI_GHG_urine:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_KPI_GHG:{magnitude:"Mass",unit:"kg CO2eq"},
+
+  wwo_SL_GHG_avoided:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_ghg_avoided_land:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_ghg_avoided_reuse:{magnitude:"Mass",unit:"kg CO2eq"},
+
   ws_KPI_GHG_abs:{magnitude:"Mass",unit:"kg CO2eq"},
   ws_KPI_GHG_tre:{magnitude:"Mass",unit:"kg CO2eq"},
   ws_KPI_GHG_dis:{magnitude:"Mass",unit:"kg CO2eq"},

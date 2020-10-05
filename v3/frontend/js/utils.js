@@ -32,7 +32,7 @@ function go_to(level, sublevel, no_history_entry){
     if(Info[code].magnitude=='Currency'){
       return Global.General.Currency;
     }
-    if(undefined===Global.Configuration.Units[code]){
+    if(Global.Configuration.Units[code]==undefined){
       Global.Configuration.Units[code] = Info[code].unit;
     }
     return Global.Configuration.Units[code];
@@ -221,4 +221,14 @@ function get_variable_type(code){
 function is_code_in_any_filter(code){
   if(Questions.is_inside(code)) return true;
   return Object.values(Filters).reduce((p,c)=>c.concat(p),[]).indexOf(code)>-1;
+}
+
+//get filter of variable "code"
+function get_filter_by_code(code){
+  for(let key in Filters){
+    if(Filters[key].indexOf(code)+1){
+      return key;
+    }
+  }
+  return false;
 }

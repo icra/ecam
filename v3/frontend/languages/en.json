@@ -1,6 +1,8 @@
 {
 "#below":"below",
 
+"#ww_serv_pop_descr":"Serviced population (WWTP + Onsite)",
+
 "#ws_KPI_GHG_abs_descr":"Abstraction",
 "#ws_KPI_GHG_tre_descr":"Treatment",
 "#ws_KPI_GHG_dis_descr":"Distribution",

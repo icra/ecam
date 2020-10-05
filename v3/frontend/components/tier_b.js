@@ -30,6 +30,15 @@ let tier_b=new Vue({
       "Out of range":   "red",
     },
 
+    //selected unit in normalization
+    normalization:{
+      selected:"kgCO2eq",
+      options:[
+        "kgCO2eq","kgCO2eq/year","kgCO2eq/year/serv.pop.",
+      ],
+    },
+
+
     Global,
     Info,
     Structure,
@@ -300,8 +309,8 @@ let tier_b=new Vue({
       <div
         style="
           display:grid;
-          grid-template-columns:64.5% 35%;
-          grid-gap:1px;
+          grid-template-columns:55% 44%;
+          grid-gap:1%;
         "
       >
         <!--tier b inputs-->
@@ -431,6 +440,15 @@ let tier_b=new Vue({
               <div style="margin-top:5px">
                 {{translate('GHG emissions') }}
               </div>
+              <div style="text-align:center">
+                <button
+                  v-for="key in normalization.options"
+                  @click="normalization.selected=key"
+                  v-html="key.prettify()"
+                  class=norm_btn
+                  :selected="normalization.selected==key"
+                ></button>
+              </div>
             </div>
 
             <!--level2 outputs: GHG content-->
@@ -438,13 +456,11 @@ let tier_b=new Vue({
               <thead :style="{background:'transparent'}">
                 <tr>
                   <th></th>
-                  <th>kg CO<sub>2</sub>eq<br>{{translate('assessment period')}}</th>
-                  <th v-if="Normalization[level] && Normalization[level].serv_pop">
-                    kg CO<sub>2</sub>eq / {{translate('year')}} / {{translate('serv.pop.')}}
+                  <th>
+                    <div v-html="normalization.selected.prettify()"></div>
                   </th>
-                  <th v-if="Normalization[level] && Normalization[level].volume">
-                    kg CO<sub>2</sub>eq / m<sup>3</sup>
-                  </th>
+                  <th v-if="sublevel">&Sigma;</th>
+                  <th>Unit</th>
                 </tr>
               </thead>
               <tbody>
@@ -462,37 +478,46 @@ let tier_b=new Vue({
                     <div>
                       <b v-html="translate(key+'_descr').prettify()"></b>
                     </div>
+
                     <div>
                       <small><a @click="variable.view(key)">{{key}}</a></small>
                     </div>
                   </td>
 
-                  <!--ghg output values-->
+                  <!--ghg output value-->
                   <td
                     @mousemove="caption.show($event, Formulas.prettify(Global[key]))"
                     @mouseout="caption.hide()"
-                    v-html="format(get_variable_value(key))"
                     style="text-align:right"
-                  ></td>
+                  >
+                    <div
+                      v-if="normalization.selected=='kgCO2eq'"
+                      v-html="format(get_variable_value(key))"
+                    ></div>
+                    <div
+                      v-if="normalization.selected=='kgCO2eq/year'"
+                      v-html="format(get_variable_value(key)/Global.Years())"
+                    ></div>
+                    <div v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
+                      <div 
+                        v-if="sublevel"
+                        v-html="format(Normalization[level][sublevel][normalization.selected](get_variable_value(key)))"
+                      ></div>
+                      <div 
+                        v-else
+                        v-html="format(Normalization[level][normalization.selected](get_variable_value(key)))"
+                      ></div>
+                    </div>
+                  </td>
 
-                  <!--emission per year and serviced population-->
-                  <td
-                    v-if="Normalization[level] && Normalization[level].serv_pop"
-                    v-html="format( Normalization[level].serv_pop( get_variable_value(key) ))"
-                    style="text-align:right"
-                  ></td>
+                  <!--sum of substges-->
+                  <td v-if="sublevel">
+                    <small>[TODO]</small>
+                  </td>
 
-                  <!--emission per m3 of water treated-->
-                  <td
-                    v-if="Normalization[level] && Normalization[level].volume && sublevel"
-                    v-html="format( Normalization[level][sublevel].volume( get_variable_value(key) ))"
-                    style="text-align:right"
-                  ></td>
-                  <td
-                    v-else-if="Normalization[level] && Normalization[level].volume && !sublevel"
-                    v-html="format( Normalization[level].volume( get_variable_value(key) ))"
-                    style="text-align:right"
-                  ></td>
+                  <!--unit-->
+                  <td v-if="Info[key]" v-html="Info[key].unit.prettify()"></td>
+                  <td v-else style="color:#bbb"><b>no unit</b></td>
                 </tr>
               </tbody>
             </table>
@@ -679,6 +704,15 @@ let tier_b=new Vue({
         background:var(--color-level-generic);
         color:white;
         cursor:pointer;
+      }
+      #tier_b #outputs button.norm_btn {
+        font-size:smaller;
+        color:#666;
+        border-color:#666;
+      }
+      #tier_b #outputs button.norm_btn[selected] {
+        background:#666;
+        color:white;
       }
     </style>
   `,

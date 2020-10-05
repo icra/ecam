@@ -8,7 +8,7 @@ linear_menu.visible = 1;
 stages_menu.visible = 0;
 tier_b.level="Waste";
 tier_b.sublevel="Onsite";
-ecam.show('variable');
+ecam.show('tier_b');
 
 //BACKEND ELEMENTS
 

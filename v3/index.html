@@ -47,6 +47,7 @@
     <!--libs-->
       <!--google charts-->
       <script src="frontend/js/charts/loader.js"></script>
+
       <!--vue
         development version, includes helpful console warnings
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -56,8 +57,6 @@
         <script src="frontend/vue/vue-pro.js"></script>
       -->
       <script src="frontend/vue/vue-dev.js"></script>
-      <!--googlearchive/code-prettify-->
-      <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     <!--/libs-->
 
     <!--load languages-->
@@ -67,9 +66,13 @@
     <script src="frontend/js/tips.js"></script>
     <script src="frontend/js/format.js"></script>
   <!--/load frontend-->
+
+  <!--googlearchive/code-prettify-->
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
 </head><body>
 
 <!--loading indicator-->
+<div>
   <div id=loading>
     <div v-if="Languages.ready==false">
       <div style="font-size:x-large;padding:2em;text-align:center">
@@ -77,14 +80,7 @@
       </div>
     </div>
   </div>
-  <script>
-    new Vue({
-      el:"#loading",
-      data:{
-        Languages,
-      },
-    });
-  </script>
+  <script>new Vue({el:"#loading",data:{Languages}});</script>
   <style>
     /*loading ecam tool animation */
     @keyframes loading_animation {
@@ -99,7 +95,7 @@
       animation-timing-function:ease-in;
     }
   </style>
-<!--/loading indicator-->
+</div>
 
 <!--all elements and views-->
 <div>

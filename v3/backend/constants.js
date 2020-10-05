@@ -106,7 +106,7 @@ let Cts={
 
   ct_n2o_co:{
     value:44/28,
-    descr:"Conversion factor N2O-N to N2 (=44/28)",
+    descr:"Conversion from N2O-N to N2O (=44/28)",
     unit:"kg N2O / kg N2O-N",
   },
 

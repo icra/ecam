@@ -96,9 +96,14 @@ let Formulas={
     result = result.replace(/\+/g," + ");
     result = result.replace(/\-/g," - ");
     result = result.replace(/\*/g," * ");
-    result = result.replace(/Cts\.(.*)\.value/g,"$1");
     result = result.replace(/Global./g,"");
     result = result.replace(/General./g,"");
+
+    Object.keys(Cts).forEach(key=>{
+      let reg = new RegExp(`Cts\.${key}\.value`,'g');
+      result = result.replace(reg,key);
+    });
+
     return result;
   },
 };

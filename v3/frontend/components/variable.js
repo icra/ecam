@@ -47,6 +47,7 @@ let variable = new Vue({
     get_variable_value,
     get_level_color,
     get_variable_type,
+    get_filter_by_code,
 
     /* open variable VIEW */
     view(id, no_history_entry){
@@ -134,13 +135,23 @@ let variable = new Vue({
         <!--variable is inside a question?-->
         <tr v-if="question">
           <th>
-            {{ translate("Filter that activates it") }}
+            Question (yes/no)
           </th>
           <td>
             <div v-if="question">
               <span v-html="translate(question)+'?'"></span>
               [{{ translate( (Global.Configuration.Questions[question]) ? 'yes':'no' ) }}]
             </div>
+          </td>
+        </tr>
+
+        <!--variable is inside a filter?-->
+        <tr v-if="get_filter_by_code(id)">
+          <th>
+            Filter
+          </th>
+          <td>
+            {{get_filter_by_code(id)}}
           </td>
         </tr>
 
