@@ -440,7 +440,7 @@ let tier_b=new Vue({
               <div style="margin-top:5px">
                 {{translate('GHG emissions') }}
               </div>
-              <div style="text-align:center">
+              <div style="text-align:left">
                 <button
                   v-for="key in normalization.options"
                   @click="normalization.selected=key"
