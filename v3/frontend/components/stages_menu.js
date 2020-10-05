@@ -86,7 +86,7 @@ let stages_menu=new Vue({
                 </div>
                 <div>
                   <button
-                    style="font-size:smaller;display:block;margin:auto;"
+                    style="width:100%;font-size:smaller;"
                     @click="add_substage(s.level,s.sublevel)"
                   >add
                   </button>
