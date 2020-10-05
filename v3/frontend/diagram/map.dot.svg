@@ -87,15 +87,15 @@
 <!-- col -->
 <g id="node6" class="node">
 <title>col</title>
-<ellipse fill="#ed6d57" stroke="#ed6d57" cx="806.52" cy="-271" rx="53.89" ry="18"/>
+<polygon fill="#ed6d57" stroke="#ed6d57" points="848.02,-289 765.02,-289 765.02,-253 848.02,-253 848.02,-289"/>
 <text text-anchor="middle" x="806.52" y="-267.3" font-family="Times,serif" font-size="14.00" fill="white">Collected</text>
 </g>
 <!-- ww&#45;&gt;col -->
 <g id="edge5" class="edge">
 <title>ww&#45;&gt;col</title>
-<path fill="none" stroke="blue" d="M696.35,-252.15C712.87,-254.85 730.99,-257.81 747.64,-260.53"/>
-<path fill="none" stroke="brown" d="M696.03,-254.13C712.55,-256.83 730.66,-259.79 747.31,-262.5"/>
-<polygon fill="blue" stroke="blue" points="747.19,-265.02 757.62,-263.18 748.32,-258.11 747.19,-265.02"/>
+<path fill="none" stroke="blue" d="M696.35,-252.15C715.32,-255.25 736.38,-258.69 754.92,-261.72"/>
+<path fill="none" stroke="brown" d="M696.03,-254.13C715,-257.23 736.06,-260.67 754.6,-263.7"/>
+<polygon fill="blue" stroke="blue" points="754.34,-266.19 764.77,-264.34 755.47,-259.28 754.34,-266.19"/>
 </g>
 <!-- unc -->
 <g id="node7" class="node">
@@ -119,9 +119,9 @@
 <!-- col&#45;&gt;wwt -->
 <g id="edge8" class="edge">
 <title>col&#45;&gt;wwt</title>
-<path fill="none" stroke="blue" d="M860.89,-270C880.48,-270 902.68,-270 922.42,-270"/>
-<path fill="none" stroke="brown" d="M860.89,-272C880.48,-272 902.68,-272 922.42,-272"/>
-<polygon fill="blue" stroke="blue" points="922.5,-274.5 932.5,-271 922.5,-267.5 922.5,-274.5"/>
+<path fill="none" stroke="blue" d="M848.28,-270C870.47,-270 898.25,-270 922.37,-270"/>
+<path fill="none" stroke="brown" d="M848.28,-272C870.47,-272 898.25,-272 922.37,-272"/>
+<polygon fill="blue" stroke="blue" points="922.46,-274.5 932.46,-271 922.46,-267.5 922.46,-274.5"/>
 </g>
 <!-- unt -->
 <g id="node10" class="node">
@@ -132,8 +132,8 @@
 <!-- col&#45;&gt;unt -->
 <g id="edge9" class="edge">
 <title>col&#45;&gt;unt</title>
-<path fill="none" stroke="blue" d="M829.03,-286.9C848.38,-301.29 878.7,-321.17 908.45,-330.04 965.14,-347.05 1031.08,-351.21 1085.78,-350.71"/>
-<path fill="none" stroke="brown" d="M827.83,-288.51C847.28,-302.96 877.61,-322.85 907.88,-331.96 965.02,-349.05 1030.96,-353.21 1085.8,-352.71"/>
+<path fill="none" stroke="blue" d="M830.95,-288.32C850.34,-302.56 879.67,-321.46 908.45,-330.04 965.14,-347.05 1031.08,-351.21 1085.78,-350.71"/>
+<path fill="none" stroke="brown" d="M829.76,-289.93C849.26,-304.24 878.59,-323.14 907.88,-331.96 965.02,-349.05 1030.96,-353.21 1085.8,-352.71"/>
 <polygon fill="blue" stroke="blue" points="1085.94,-355.21 1095.89,-351.57 1085.84,-348.21 1085.94,-355.21"/>
 </g>
 <!-- ons -->

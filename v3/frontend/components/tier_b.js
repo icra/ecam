@@ -309,8 +309,7 @@ let tier_b=new Vue({
       <div
         style="
           display:grid;
-          grid-template-columns:55% 44%;
-          grid-gap:1%;
+          grid-template-columns:45% 55%;
         "
       >
         <!--tier b inputs-->
@@ -333,7 +332,7 @@ let tier_b=new Vue({
           </div>
 
           <!--tier b input table-->
-          <table :level="level" style="width:100%">
+          <table style="width:100%">
             <!--tier b inputs-->
             <tbody
               v-for="key in Object.keys(get_current_stage()).filter(key=>{return Questions.is_inside(key)==false})"
@@ -440,7 +439,7 @@ let tier_b=new Vue({
               <div style="margin-top:5px">
                 {{translate('GHG emissions') }}
               </div>
-              <div style="text-align:left">
+              <div style="text-align:left;margin-top:5px">
                 <button
                   v-for="key in normalization.options"
                   @click="normalization.selected=key"
@@ -452,7 +451,7 @@ let tier_b=new Vue({
             </div>
 
             <!--level2 outputs: GHG content-->
-            <table :level="level" style="width:100%">
+            <table style="width:100%">
               <thead :style="{background:'transparent'}">
                 <tr>
                   <th></th>
@@ -516,7 +515,7 @@ let tier_b=new Vue({
                   </td>
 
                   <!--unit-->
-                  <td v-if="Info[key]" v-html="Info[key].unit.prettify()"></td>
+                  <td v-if="Info[key]" v-html="Info[key].unit.prettify()" style="font-size:smaller"></td>
                   <td v-else style="color:#bbb"><b>no unit</b></td>
                 </tr>
               </tbody>
@@ -530,7 +529,7 @@ let tier_b=new Vue({
                 {{translate('Energy performance and Service Level indicators')}}
               </p>
             </div>
-            <table :level="level" style="width:100%">
+            <table style="width:100%">
               <tbody>
                 <tr v-for="key in get_current_stage().equations"
                   v-if="
@@ -570,7 +569,7 @@ let tier_b=new Vue({
                   </td>
 
                   <!--unit-->
-                  <td v-if="Info[key]" v-html="Info[key].unit.prettify()"></td>
+                  <td v-if="Info[key]" v-html="Info[key].unit.prettify()" style="font-size:smaller"></td>
                   <td v-else style="color:#bbb"><b>no unit</b></td>
                 </tr>
               </tbody>
@@ -618,8 +617,6 @@ let tier_b=new Vue({
         border-left:none;
       }
       #tier_b #inputs table td {
-        /*
-        */
         border:none;
       }
       #tier_b #outputs {
@@ -631,7 +628,7 @@ let tier_b=new Vue({
         background:#FFF1BE;
       }
       #tier_b #outputs table th,
-      #tier_b #outputs table td {
+      #tier_b #outputs table td{
         border:none;
       }
 
@@ -688,8 +685,9 @@ let tier_b=new Vue({
       }
 
       /*colors of links*/
-      #tier_b table[level=Water] a { color:var(--color-level-generic)}
-      #tier_b table[level=Waste] a { color:var(--color-level-generic)}
+      #tier_b table a {
+        color:var(--color-level-generic);
+      }
 
       #tier_b #filters {
         display:flex;

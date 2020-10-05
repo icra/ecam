@@ -7,7 +7,7 @@ digraph MyGraph {
   pop [label="Population"]
   ww  [label="Wastewater"]
 
-  col [label="Collected", style="filled",color="#ed6d57",fontcolor="white"]
+  col [label="Collected", style="filled",color="#ed6d57",fontcolor="white",shape="box"]
   unc [label="Uncollected"]
 
   wwt [label="Treatment",         style="filled",color="#ed6d57",fontcolor="white",shape="box"]
