@@ -10,9 +10,9 @@ ECAM V3 LLUIS BOSCH TASKS
 -------------------------------------------------------------------------------
 [CAN BE DONE NOW]
   ---------
-  * [NOW] [BACKEND] ENHANCEMENT OF GHG MODELS TO IPCC 2019
+  * [NOW] [BACKEND] enhancement of ghg models to ipcc 2019
+          [BACKEND] substages backend connection to frontend
   ---------
-  * [backend]  substages backend connection to frontend
   * [frontend] highlight inputs and outputs on mouse hover
   * [frontend] Fetching language files asyncronously does not work for offline use (CORS is not compatible with file protocol, find alternative way to loading files offline.)
   * [frontend] variable page / fuel type related constants show in involved inputs table
@@ -75,11 +75,11 @@ ECAM V3 LLUIS BOSCH TASKS
       Best / Cordialement,
     ```
   * [frontend] redo load files function ("open" button)
-    - implement compabibility module (v2 to v3)
-      - ['Yes/No':'Questions']
-      - ws_serv_pop -> wsd_serv_pop
-      - fs_onsi_pop -> fsc_onsi_pop
-[WILL BE DONE AT THE END]
+
+[TO BE DONE AT THE END]
   * [frontend] graphs with viti (also Sankey)
   * [frontend] help/about and docs for v3
   * [frontend] Translations of new pieces of text added for v3
+
+[WILL NOT BE DONE]
+  * compabibility module (v2 to v3)
