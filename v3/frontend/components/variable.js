@@ -27,6 +27,15 @@ let variable = new Vue({
     Benchmarks,
   },
 
+  updated(){
+    document.querySelectorAll(".prettyprinted").forEach(el=>{
+      el.classList.remove('prettyprinted');
+    });
+    this.$nextTick(function() {
+      PR.prettyPrint();
+    });
+  },
+
   methods:{
     translate,
     format,
@@ -85,7 +94,6 @@ let variable = new Vue({
       <!--variable table-->
       <table
         v-if="Info[id] || Global[id]"
-        :level="localization.level"
         :style="
           'text-align:left; width:70%; margin:auto;'+
           'background:'+get_level_color(localization.level)
@@ -155,12 +163,7 @@ let variable = new Vue({
                 <code>
                 <pre
                   v-html="Formulas.prettify(Global[id].toString())"
-                  style="
-                    padding:5px 10px;
-                    background:rgb(238,238,238);
-                    color:black;
-                    font-family:monospace;
-                  "
+                  class="prettyprint"
                 ></pre>
                 </code>
               </div>
@@ -243,21 +246,6 @@ let variable = new Vue({
                   </td>
                 </tr>
 
-                <!--output that uses the input is an estimation-->
-                <tr v-if="Benchmarks[output]">
-                  <td :title="translate(output+'_descr')">
-                    <a @click="view(output)" :style="{color:get_level_color(locate_variable(output).level)}">
-                      {{ output }} (benchmark)
-                    </a>
-                  </td>
-                  <td>
-                    <div v-html="Benchmarks[output](get_current_stage(output),Global[output]())"></div>
-                  </td>
-                  <td>
-                    <span class=unit v-html="get_base_unit(output).prettify()"></span>
-                  </td>
-                </tr>
-
                 <!--output that uses the input is normal-->
                 <tr v-else>
                   <td :title="translate(output+'_descr')">
@@ -272,6 +260,21 @@ let variable = new Vue({
                   <td>
                     <span class=unit v-html="get_current_unit(output).prettify()">
                     </span>
+                  </td>
+                </tr>
+
+                <!--output that uses the input has a benchmark-->
+                <tr v-if="Benchmarks[output]">
+                  <td :title="translate(output+'_descr')">
+                    <a @click="view(output)" :style="{color:get_level_color(locate_variable(output).level)}">
+                      {{ output }} (benchmark)
+                    </a>
+                  </td>
+                  <td>
+                    <div v-html="Benchmarks[output](get_current_stage(output),Global[output]())"></div>
+                  </td>
+                  <td>
+                    <span class=unit v-html="get_base_unit(output).prettify()"></span>
                   </td>
                 </tr>
               </tbody>
@@ -294,9 +297,12 @@ let variable = new Vue({
             </div>
 
             <!--formula for estimations-->
-            <div style="border:1px solid #ccc;padding:1em"
-              v-html="Formulas.prettify( Estimations[id].toString() )"
-            ></div>
+            <div style="border:1px solid #ccc;padding:1em">
+              <pre
+                class=prettyprint
+                v-html="Formulas.prettify( Estimations[id].toString() )"
+              ></pre>
+            </div>
 
             <!--inputs involved in the estimations equation-->
             <inputs_involved_table
@@ -310,7 +316,7 @@ let variable = new Vue({
         <tr>
           <th>
             Is this variable in
-            <a 
+            <a
               v-html="'benchmarks'"
               style="text-decoration:underline;color:white"
               onclick="ecam.show('benchmarks')">
@@ -319,10 +325,10 @@ let variable = new Vue({
           </th>
           <td v-if="Benchmarks[id]">
             Yes
-            <details>
+            <details open>
               <summary>formula</summary>
               <div>
-                <code><pre v-html="Formulas.prettify(Benchmarks[id])"></pre></code>
+                <code><pre class=prettyprint v-html="Formulas.prettify(Benchmarks[id])"></pre></code>
               </div>
             </details>
           </td>
@@ -346,6 +352,7 @@ let variable = new Vue({
         padding:1em;
         background:inherit;
         color:white;
+        vertical-align:top;
       }
 
       #variable input[type=number] {
@@ -368,10 +375,9 @@ let variable = new Vue({
         padding: 5px;
         border:none;
       }
-
-      /*colors of links*/
-      #variable table[level=Water] a { color: var(--color-level-Water) }
-      #variable table[level=Waste] a { color: var(--color-level-Waste) }
+      #variable summary {
+        cursor:pointer;
+      }
     </style>
   `,
 });

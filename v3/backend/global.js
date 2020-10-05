@@ -966,7 +966,9 @@ class Ecam{
       wsa_nrg_per_abs_watr(){return this.wsa.wsa_nrg_cons/this.wsa.wsa_vol_conv;}
       wsa_nrg_per_pmp_watr(){return this.wsa.wsa_nrg_pump/this.wsa.wsa_vol_pump;}
       wsa_pmp_pw(){return this.wsa.wsa_pmp_flow*this.wsa.wsa_pmp_head*Cts.ct_gravit.value/1000;}
-      wsa_KPI_std_nrg_cons(){return this.wsa.wsa_nrg_pump/(this.wsa.wsa_vol_pump*this.wsa.wsa_pmp_head/100);}
+      wsa_KPI_std_nrg_cons(){
+        return this.wsa.wsa_nrg_pump/(this.wsa.wsa_vol_pump*this.wsa.wsa_pmp_head/100);
+      }
       wsa_KPI_un_head_loss(){
         return 1e3*(
           this.wsa.wsa_pmp_head
@@ -1035,7 +1037,9 @@ class Ecam{
       wsd_nrg_supp(){return this.wsd.wsd_nrg_cons+this.wsd_nrg_natu()}
       wsd_KPI_nrg_efficien(){return 100*this.wsd_nrg_mini()/this.wsd_nrg_supp()}
       wsd_KPI_nrg_topgraph(){return 100*this.wsd_nrg_topo()/this.wsd_nrg_supp()}
-      wsd_KPI_std_nrg_cons(){return this.wsd.wsd_nrg_pump/(this.wsd.wsd_vol_pump*this.wsd.wsd_pmp_head/100)}
+      wsd_KPI_std_nrg_cons(){
+        return this.wsd.wsd_nrg_pump/(this.wsd.wsd_vol_pump*this.wsd.wsd_pmp_head/100)
+      }
       wsd_KPI_un_head_loss(){return 1000*(this.wsd.wsd_pmp_head-this.wsd.wsd_sta_head)/this.wsd.wsd_main_len}
       wsd_KPI_water_losses(){return Math.max(0,1000*(this.wsd.wsd_vol_dist-this.wsd.wsd_auth_con)/(this.wsd.wsd_main_len))/this.Years()}
       wsd_KPI_nrg_elec_eff(){return 100*this.wsd_pmp_pw()/(this.wsd.wsd_pmp_volt*this.wsd.wsd_pmp_amps*Math.sqrt(3)*this.wsd.wsd_pmp_pf/1000)}
