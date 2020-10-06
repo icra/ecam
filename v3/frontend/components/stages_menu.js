@@ -1,8 +1,8 @@
 let stages_menu=new Vue({
   el:"#stages_menu",
   data:{
-    visible:false,
-    current_view:null,
+    visible      : false,
+    current_view : null,
     show_substages_summary:true,
     caption,
     Global,
@@ -24,7 +24,7 @@ let stages_menu=new Vue({
     },
 
     add_substage(level,sublevel){
-      //continue here TODO design backend for substages
+      //continue here design backend for substages TODO
       let ss = {};
       this.Global.Substages[level][sublevel].push(ss);
     }
