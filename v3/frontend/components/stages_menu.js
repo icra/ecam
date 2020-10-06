@@ -24,6 +24,30 @@ let stages_menu=new Vue({
     },
 
     add_substage(level,sublevel){
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
+      //continue here TODO design backend for substages
       let ss = {};
       this.Global.Substages[level][sublevel].push(ss);
     }
