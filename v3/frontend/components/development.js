@@ -2,7 +2,7 @@ let development=new Vue({
   el:"#development",
 
   data:{
-    visible: true,
+    visible: false,
   },
 
   template:`

@@ -103,6 +103,8 @@ let ecam={
 
   //automated test
   test(){
+    //TODO test all languages also
+
     //all questions to "yes"
     Object.keys(Questions).forEach(key=>{
       Global.Configuration.Questions[key] = 1;
@@ -154,9 +156,7 @@ let ecam={
   //set current scenario for the frontend
   //==update Global object in the frontend
   set_current_scenario(ecam_object){
-    if(!ecam_object){
-      return;
-    }
+    if(!ecam_object){return;}
     if(ecam_object.constructor!==Ecam){
       throw new Error('ecam_object is not an Ecam object');
       return;
@@ -182,7 +182,6 @@ let ecam={
   new_scenario(){
     let scenario = new Ecam();
     Scenarios.push(scenario);
-    //this.set_current_scenario(scenario);
   },
 
   //delete scenario

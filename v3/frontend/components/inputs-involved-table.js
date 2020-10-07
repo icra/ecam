@@ -35,7 +35,7 @@ Vue.component('inputs_involved_table',{
           <!--input involved value-->
           <td colspan=2>
             {{
-              Tables.get_row(match, get_variable_value(match)).name
+              Tables.get_row(match, get_current_stage(match,Global)[match]).name
             }}
           </td>
         </tr>
@@ -45,7 +45,15 @@ Vue.component('inputs_involved_table',{
           <td :title="translate(match+'_descr')">
             <a @click="variable.view(match)" :style="{color:get_level_color(locate_variable(match).level)}">{{match}}</a>
           </td>
-          <td v-html="format(get_variable_value(match))"></td>
+
+          <td 
+            v-if="get_variable_type(match)=='input'" 
+            v-html="format(get_current_stage(match,Global)[match])">
+          </td>
+          <td 
+            v-if="get_variable_type(match)=='output'" 
+            v-html="format(get_output_value(match,Global))">
+          </td>
 
           <div v-if="get_variable_type(match)=='input'">
             <td class=unit v-html="get_base_unit(match).prettify()"></td>
@@ -68,6 +76,7 @@ Vue.component('inputs_involved_table',{
       variable,
       constant,
 
+      Global,
       Info,
       Tables,
       Formulas,
@@ -80,8 +89,9 @@ Vue.component('inputs_involved_table',{
     format,
     get_level_color,
     locate_variable,
-    get_variable_value,
+    get_current_stage,
     get_variable_type,
+    get_output_value,
     get_base_unit,
   },
 });

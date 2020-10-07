@@ -2,11 +2,102 @@
   HELPER FUNCTIONS
 */
 
+//sum of substages, sum emissions
+function get_sum_of_substages(output_code){
+  return get_current_stage(output_code).substages.map(ss=>{
+    let output = ss[output_code]();
+    if(typeof(output.total)=='number'){
+      return output.total;
+    }else{
+      return output;
+    }
+  }).reduce((p,c)=>(p+c),0);
+}
+
+//get unit stablished by the user at a concrete scenario (system or substage)
+function get_current_unit(code, scenario){
+  if(!code) return false;
+  scenario = scenario || Global;
+
+  if(!Info[code]){
+    return `["${code}" unit not found]`;
+  }
+  if(Info[code].magnitude=='Currency'){
+    return scenario.General.Currency;
+  }
+  if(scenario.Configuration.Units[code]==undefined){
+    scenario.Configuration.Units[code] = Info[code].unit;
+  }
+  return scenario.Configuration.Units[code];
+}
+
+//get base unit (regardless of default unit or user stablished)
+function get_base_unit(code, scenario){
+  if(!code) return false;
+  scenario = scenario || Global;
+
+  let info = Info[code];
+  if(!info) return "";
+
+  if(Info[code].magnitude=="Currency"){
+    return scenario.General.Currency;
+  }
+
+  if(Units[info.magnitude]==undefined) return info.unit;
+
+  let base_unit = Object.entries(Units[info.magnitude]).find(([key,val])=>val==1)[0];
+  //let info_unit = info.unit; //default unit at info (may not be the base unit)
+  //console.log({info_unit, base_unit});
+
+  return base_unit;
+}
+
+//get the memory location of code "code" at a concrete scenario (system or
+//substage)
+function get_current_stage(code, scenario){
+  if(!code) return false;
+  scenario = scenario || Global;
+
+  let loc = locate_variable(code);
+  if(!loc) return false;
+
+  let level    = loc.level;
+  let sublevel = loc.sublevel;
+
+  if(sublevel){
+    return scenario[level][sublevel];
+  }else if(level){
+    return scenario[level];
+  }else{
+    return false;
+  }
+}
+
+//get value of variable (not affected by units)
+function get_variable_value(code, scenario){
+  if(!code) return false;
+  let type = get_variable_type(code);
+  if(!type) return false;
+  if(type=='output'){
+    let output = Global[code](); //can be a number or an object
+    if(output==undefined) return 0;
+    return (typeof(output.total)=='number'?output.total:output);
+  }
+  if(type=='input') return get_current_stage(code)[code];
+  return false;
+}
+
+function get_output_value(code, scenario){
+  scenario = scenario || Global;
+  let output = scenario[code](); //can be a number or an object
+  if(output==undefined) return 0;
+  return (typeof(output.total)=='number'?output.total:output);
+}
+
 //navigate to a tier b stage
 function go_to(level, sublevel, no_history_entry){
   let possible_levels = Structure.filter(s=>!s.sublevel).map(s=>s.level);
   possible_levels.push('General');
-
   if(possible_levels.indexOf(level)==-1){
     throw new Error(`level '${level}' does not exist`);
   }
@@ -16,49 +107,34 @@ function go_to(level, sublevel, no_history_entry){
     throw new Error(`sublevel '${level}' does not exist`);
   }
 
-  tier_b.level    = level;
-  tier_b.sublevel = sublevel || false;
-  ecam.show('tier_b', no_history_entry);
+  if(sublevel){
+    if(Global[level][sublevel].substages.length==0){
+      stages_menu.add_substage(level, sublevel);
+    }
+
+    let ss = Global[level][sublevel].substages[0];
+    go_to_substage(ss);
+    return;
+  }else{
+    tier_b.Global   = Global;
+    tier_b.level    = level;
+    tier_b.sublevel = false;
+    ecam.show('tier_b', no_history_entry);
+  }
 }
 
-/*units*/
-  //get unit
-  function get_current_unit(code){
-    if(!code) return false;
+function go_to_substage(substage, no_history_entry){
+  if(!substage) return;
+  if(substage.constructor!=Substage){ throw new Error('substage is not a Substage'); }
 
-    if(!Info[code]){
-      return `["${code}" unit not found]`;
-    }
-    if(Info[code].magnitude=='Currency'){
-      return Global.General.Currency;
-    }
-    if(Global.Configuration.Units[code]==undefined){
-      Global.Configuration.Units[code] = Info[code].unit;
-    }
-    return Global.Configuration.Units[code];
-  }
+  let level    = substage.type.level;
+  let sublevel = substage.type.sublevel;
 
-  //get base unit (without unit conversion)
-  function get_base_unit(code, scenario){
-    if(!code) return false;
-    if(!scenario) scenario = Global;
-
-    let info = Info[code];
-    if(!info) return "";
-
-    if(Info[code].magnitude=="Currency"){
-      return scenario.General.Currency;
-    }
-
-    if(Units[info.magnitude]==undefined) return info.unit;
-
-    let base_unit = Object.entries(Units[info.magnitude]).find(([key,val])=>val==1)[0];
-    let info_unit = info.unit; //default unit at info (may not be the base unit)
-    //console.log({info_unit, base_unit});
-
-    return base_unit;
-  }
-//units
+  tier_b.Global   = substage;
+  tier_b.level    = level;
+  tier_b.sublevel = sublevel;
+  ecam.show('tier_b', no_history_entry);
+}
 
 //get level color
 function get_level_color(level){
@@ -70,7 +146,7 @@ function get_level_color(level){
   }
 }
 
-//get stage input codes
+//get stage input codes (variables)
 function get_input_codes(level, sublevel){
   level    = level    || false;
   sublevel = sublevel || false;
@@ -91,7 +167,7 @@ function get_input_codes(level, sublevel){
   });
 }
 
-//get stage equation codes
+//get stage equation codes (variables)
 function get_equation_codes(level, sublevel){
   level    = level    || false;
   sublevel = sublevel || false;
@@ -138,8 +214,9 @@ function locate_variable(code){
     }
   }
 
-  //if location is still not found, we can use stage prefix as last option
-  //useful for outputs not listed in main stage, such as "wsa_KPI_GHG_fuel_co2"
+  //if code reaches here and location is still not found, we can use stage
+  //prefix as last option useful for outputs not listed in main stage, such as
+  //"wsa_KPI_GHG_fuel_co2"
   for(let i in Structure){
     let s        = Structure[i];
     let level    = s.level;
@@ -154,38 +231,6 @@ function locate_variable(code){
   return false;
 }
 
-//get stage of code "code"
-function get_current_stage(code){
-  if(!code) return false;
-
-  let loc = locate_variable(code);
-  if(!loc) return false;
-
-  let level    = loc.level;
-  let sublevel = loc.sublevel;
-
-  if(sublevel){
-    return Global[level][sublevel];
-  }else if(level){
-    return Global[level];
-  }else{
-    return false;
-  }
-}
-
-//get internal variable value (not affected by units)
-function get_variable_value(code){
-  if(!code) return false;
-  let type = get_variable_type(code);
-  if(!type) return false;
-  if(type=='output'){
-    let output = Global[code](); //can be a number or an object
-    if(output==undefined) return 0;
-    return (typeof(output.total)=='number'?output.total:output);
-  }
-  if(type=='input') return get_current_stage(code)[code];
-  return false;
-}
 
 //get variable type ("input" or "output")
 function get_variable_type(code){

@@ -32,7 +32,6 @@ let summary_ghg = new Vue({
     translate,
     format,
     go_to,
-    get_variable_value,
 
     toggle_folded_level(level){
       let index = this.unfolded_levels.indexOf(level);

@@ -11,7 +11,6 @@ let summary_nrg = new Vue({
     translate,
     format,
     go_to,
-    get_variable_value,
   },
 
   template:`

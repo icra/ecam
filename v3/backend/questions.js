@@ -676,11 +676,12 @@ Questions.is_inside=function(field){
 };
 
 //check if the input "field" is shown or hidden
-Questions.is_hidden=function(field){
+Questions.is_hidden=function(field, scenario){
+  scenario = scenario || Global;
   //go over all questions
   for(let question in this) {
     //if answer is yes, next question: all fields inside should be shown
-    if(Global.Configuration.Questions[question]==1){continue;}
+    if(scenario.Configuration.Questions[question]==1){continue;}
 
     //if answer is no, look for "field" inside
     for(let i in this[question].variables) {
@@ -692,10 +693,11 @@ Questions.is_hidden=function(field){
 };
 
 //check if the question "field" should be hidden
-Questions.is_question_hidden=function(field){
+Questions.is_question_hidden=function(field, scenario){
+  scenario = scenario || Global;
   //go over all questions
   for(let question in this) {
-    if(Global.Configuration.Questions[question]==1){continue;}
+    if(scenario.Configuration.Questions[question]==1){continue;}
     //if answer is no, look for "field" inside
     for(let i in this[question].otherQuestions) {
       let code=this[question].otherQuestions[i];

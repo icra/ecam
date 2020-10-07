@@ -39,14 +39,14 @@ let report = new Vue({
 
       let co2=0+
         //fuel engines
-        Global.wsa_KPI_GHG_fuel_co2()+
-        Global.wst_KPI_GHG_fuel_co2()+
-        Global.wsd_KPI_GHG_fuel_co2()+
-        Global.wwc_KPI_GHG_fuel_co2()+
-        Global.wwt_KPI_GHG_fuel_co2()+
-        Global.wwd_KPI_GHG_fuel_co2()+
-        Global.fst_KPI_GHG_fuel_co2()+
-        Global.fsr_KPI_GHG_fuel_co2()+
+        Global.wsa_KPI_GHG_fuel().co2+
+        Global.wst_KPI_GHG_fuel().co2+
+        Global.wsd_KPI_GHG_fuel().co2+
+        Global.wwc_KPI_GHG_fuel().co2+
+        Global.wwt_KPI_GHG_fuel().co2+
+        Global.wwd_KPI_GHG_fuel().co2+
+        Global.fst_KPI_GHG_fuel().co2+
+        Global.fsr_KPI_GHG_fuel().co2+
         //fuel trucks
         Global.wsd_KPI_GHG_trck_co2()+
         Global.wwt_KPI_ghg_tsludge_co2()+

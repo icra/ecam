@@ -44,6 +44,7 @@ class Ecam{
         "ws_SL_auth_con",
       ],
 
+      //replace by array of Water_Abstraction objects TODO
       Abstraction:{
         wsa_vol_conv:0, //volume of abstracted water
         wsa_nrg_cons:0, //energy consumed from the grid
@@ -77,8 +78,11 @@ class Ecam{
           "wsa_KPI_nrg_cons_new",
           "wsa_KPI_nrg_estm_sav",
         ],
+
+        substages:[],
       },
 
+      //replace by array of Water_Treatment objects TODO
       Treatment:{
         wst_vol_trea:0,
         wst_nrg_cons:0,
@@ -116,8 +120,10 @@ class Ecam{
           "wst_KPI_nrg_estm_sav",
           "wst_KPI_ghg_estm_red",
         ],
+        substages:[],
       },
 
+      //replace by array of Water_Distribution objects TODO
       Distribution:{
         wsd_serv_pop:0,
         wsd_vol_dist:0,
@@ -180,6 +186,7 @@ class Ecam{
           "wsd_pmp_pw",
           "wst_SL_GHG_nrw",
         ],
+        substages:[],
       },
     };
 
@@ -201,6 +208,7 @@ class Ecam{
         "ww_SL_nrg_cost", //SL energy cost percentage
       ],
 
+      //replace by array of Waste_Collection objects TODO
       Collection:{
         //population and volumes of wastewater
         wwc_conn_pop:0,     //population connected to sewers
@@ -245,9 +253,10 @@ class Ecam{
           "wwc_KPI_nrg_estm_sav",
           "wwc_KPI_ghg_estm_red",
         ],
+        substages:[],
       },
 
-      //TODO: codes start with wwc
+      //replace by array of Waste_Treatment objects TODO
       Treatment:{
         //population and volumes
         wwt_serv_pop:0, //population serviced
@@ -372,9 +381,10 @@ class Ecam{
           "wwd_SL_ghg_non",
           "wwd_total_m3",
         ],
+        substages:[],
       },
 
-      //TODO ipcc 2019
+      //replace by array of Waste_Onsite objects TODO
       Onsite:{
         //population
         wwo_onsi_pop:0,     //population with onsite treatment
@@ -487,6 +497,7 @@ class Ecam{
           "wwo_KPI_nrg_cons_new",
           "wwo_KPI_nrg_estm_sav",
         ],
+        substages:[],
       },
     };
 
@@ -524,21 +535,6 @@ class Ecam{
     }).forEach(key=>{
       this.Configuration.Questions[key]=0;
     });
-
-    //Arrays of substages (for level 3)
-    //TODO v3
-    this.Substages={
-      "Water":{
-        "Abstraction": [], //wsa
-        "Treatment":   [], //wst
-        "Distribution":[], //wsd
-      },
-      "Waste":{
-        "Collection":[], //wwc
-        "Treatment": [], //wwt
-        "Onsite":    [], //wwo
-      },
-    };
   }
 
   //===========================================================================
@@ -553,20 +549,22 @@ class Ecam{
     return 1+(finalDate-startDate)/1000/60/60/24; //days
   }
   //assesment period duration (in years)
-  Years(){return this.Days()/365}
+  Years(){
+    return this.Days()/365;
+  }
 
   //All emissions
     TotalGHG(){return this.ws_KPI_GHG()+this.ww_KPI_GHG()}
-    ws_KPI_GHG(){return this.wsa_KPI_GHG()+this.wst_KPI_GHG()+this.wsd_KPI_GHG()}
-    ws_KPI_GHG_abs(){return this.wsa_KPI_GHG()}
-    ws_KPI_GHG_tre(){return this.wst_KPI_GHG()}
-    ws_KPI_GHG_dis(){return this.wsd_KPI_GHG()}
-
-    ww_KPI_GHG(){return this.wwc_KPI_GHG()+this.wwt_KPI_GHG()+this.wwo_KPI_GHG()}
-    ww_KPI_GHG_col(){return this.wwc_KPI_GHG()}
-    ww_KPI_GHG_tre(){return this.wwt_KPI_GHG()}
-    ww_KPI_GHG_ons(){return this.wwo_KPI_GHG()}
-
+    //GHG ws
+      ws_KPI_GHG(){return this.wsa_KPI_GHG()+this.wst_KPI_GHG()+this.wsd_KPI_GHG()}
+      ws_KPI_GHG_abs(){return this.wsa_KPI_GHG()}
+      ws_KPI_GHG_tre(){return this.wst_KPI_GHG()}
+      ws_KPI_GHG_dis(){return this.wsd_KPI_GHG()}
+    //GHG ww
+      ww_KPI_GHG(){return this.wwc_KPI_GHG()+this.wwt_KPI_GHG()+this.wwo_KPI_GHG()}
+      ww_KPI_GHG_col(){return this.wwc_KPI_GHG()}
+      ww_KPI_GHG_tre(){return this.wwt_KPI_GHG()}
+      ww_KPI_GHG_ons(){return this.wwo_KPI_GHG()}
     //GHG wsa
       wsa_KPI_GHG(){return this.wsa_KPI_GHG_elec()+this.wsa_KPI_GHG_fuel().total}
       wsa_KPI_GHG_elec(){return this.wsa.wsa_nrg_cons*this.General.conv_kwh_co2}
@@ -1202,13 +1200,51 @@ class Ecam{
   //</>
 };
 
-//TODO create classes for every stage to make easier for substages coding
-class Water_Abstraction{}
-class Water_Treatment{}
-class Water_Distribution{}
-class Waste_Collection{}
-class Waste_Treatment{}
-class Waste_Onsite{}
+class Water_Abstraction{
+  constructor(){
+    //TODO
+  }
+}
+class Water_Treatment{
+  constructor(){
+    //TODO
+  }
+}
+class Water_Distribution{
+  constructor(){
+    //TODO
+  }
+}
+class Waste_Collection{
+  constructor(){
+    //TODO
+  }
+}
+class Waste_Treatment{
+  constructor(){
+    //TODO
+  }
+}
+class Waste_Onsite{
+  constructor(){
+    //TODO
+  }
+}
+
+//substage class TODO
+class Substage extends Ecam {
+  constructor(level, sublevel){
+    //invoke parent class constructor
+    super();
+
+    //copy general settings
+    this.General = Global.General;
+
+    //substage name
+    this.name=`${sublevel} ${Global[level][sublevel].substages.length+1}`;
+    this.type={level,sublevel};
+  }
+}
 
 //array of systems (system == Ecam object)
 let Scenarios=[];

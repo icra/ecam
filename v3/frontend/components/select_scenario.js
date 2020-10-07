@@ -13,6 +13,7 @@ let select_scenario=new Vue({
     set_current_scenario(obj){
       ecam.set_current_scenario(obj);
     },
+
     delete_scenario(obj){
       let index = this.scenarios_compared.indexOf(obj);
       if(index+1){

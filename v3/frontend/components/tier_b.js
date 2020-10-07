@@ -1,9 +1,10 @@
 let tier_b=new Vue({
   el:"#tier_b",
   data:{
-    visible:false,
-    level:'Water',
-    sublevel:false,
+    visible  : false,
+    level    : 'Water',
+    sublevel : false,
+
     caption,  //vue object
     variable, //vue object
 
@@ -38,8 +39,8 @@ let tier_b=new Vue({
       ],
     },
 
-
-    Global,
+    //backend
+    Global, //<--current object modified by user interface
     Info,
     Structure,
     Tips,
@@ -52,14 +53,17 @@ let tier_b=new Vue({
     Questions,
     Languages,
     Benchmarks,
+    Substage,
+    Ecam,
   },
 
   methods:{
     translate,
     format,
     get_level_color,
-    get_variable_value,
     is_code_in_any_filter,
+    get_output_value,
+    get_sum_of_substages,
 
     set_question(question, new_value){
       //set new question answer
@@ -172,7 +176,8 @@ let tier_b=new Vue({
       let string = this.Benchmarks[key](this.get_current_stage(), this.Global[key]());
       let color = this.benchmark_colors[string];
       return {string, color};
-    }
+    },
+
   },
 
   template:`
@@ -193,6 +198,12 @@ let tier_b=new Vue({
             <span>
               <span>&rsaquo;</span>
               <b style="color:black">{{translate(sublevel)}}</b>
+            </span>
+          </span>
+          <span v-if="Global.constructor==Substage">
+            <span>
+              <span>&rsaquo;</span>
+              <b style="color:black">{{Global.name}}</b>
             </span>
           </span>
         </h1>
@@ -325,9 +336,9 @@ let tier_b=new Vue({
               <b>{{translate('INPUTS') }}</b>
             </div>
             <div style="margin-top:5px">
-              {{translate('Enter values for') }}
+              Enter values for this
               {{sublevel ? translate(sublevel) : translate(level) }}
-              {{translate('stages') }}
+              {{translate('stage') }}
             </div>
           </div>
 
@@ -353,10 +364,10 @@ let tier_b=new Vue({
               <tr
                 :style="{
                   color:'white',
-                  background:'var(--color-level-'+level+(Questions.is_question_hidden(question)?'-secondary':'')+')',
+                  background:'var(--color-level-'+level+(Questions.is_question_hidden(question, Global)?'-secondary':'')+')',
                 }"
               >
-                <td colspan=3 :class="Questions.is_question_hidden(question) ? 'disabled_question' : ''">
+                <td colspan=3 :class="Questions.is_question_hidden(question, Global) ? 'disabled_question' : ''">
                   <div style="display:grid;grid-template-columns:50% 50%">
                     <!--question text-->
                     <div>
@@ -384,7 +395,7 @@ let tier_b=new Vue({
                     <div :title="question">
                       <label>
                         <input type=checkbox
-                          :disabled="Questions.is_question_hidden(question)"
+                          :disabled="Questions.is_question_hidden(question, Global)"
                           @change="set_question(question, $event.target.checked)"
                           :checked="Global.Configuration.Questions[question]"
                         >
@@ -434,10 +445,10 @@ let tier_b=new Vue({
           <div>
             <div class="table-title">
               <div>
-                <b>{{translate('OUTPUTS') }}</b>
+                <b>{{translate('OUTPUTS')}}</b>
               </div>
               <div style="margin-top:5px">
-                {{translate('GHG emissions') }}
+                {{translate('GHG emissions')}}
               </div>
               <div style="text-align:left;margin-top:5px">
                 <button
@@ -467,7 +478,7 @@ let tier_b=new Vue({
                   v-if="
                     (key=='TotalGHG' || key.search('_KPI_GHG')+1)
                     &&
-                    Questions.is_hidden(key)==false
+                    Questions.is_hidden(key, Global)==false
                   "
                 >
                   <td
@@ -491,31 +502,39 @@ let tier_b=new Vue({
                   >
                     <div
                       v-if="normalization.selected=='kgCO2eq'"
-                      v-html="format(get_variable_value(key))"
+                      v-html="format(get_output_value(key,Global))"
                     ></div>
                     <div
                       v-if="normalization.selected=='kgCO2eq/year'"
-                      v-html="format(get_variable_value(key)/Global.Years())"
+                      v-html="format(get_output_value(key,Global)/Global.Years())"
                     ></div>
                     <div v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
-                      <div 
+                      <div
                         v-if="sublevel"
-                        v-html="format(Normalization[level][sublevel][normalization.selected](get_variable_value(key)))"
+                        v-html="format(Normalization[level][sublevel][normalization.selected](get_output_value(key,Global)))"
                       ></div>
-                      <div 
+                      <div
                         v-else
-                        v-html="format(Normalization[level][normalization.selected](get_variable_value(key)))"
+                        v-html="format(Normalization[level][normalization.selected](get_output_value(key,Global)))"
                       ></div>
                     </div>
                   </td>
 
                   <!--sum of substges-->
                   <td v-if="sublevel">
-                    <small>[TODO]</small>
+                    <div class=number v-if="normalization.selected=='kgCO2eq'">
+                      {{format(get_sum_of_substages(key))}}
+                    </div>
+                    <div class=number v-if="normalization.selected=='kgCO2eq/year'">
+                      {{format(get_sum_of_substages(key)/Global.Years())}}
+                    </div>
+                    <div class=number v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
+                      [TODO]
+                    </div>
                   </td>
 
                   <!--unit-->
-                  <td v-if="Info[key]" v-html="Info[key].unit.prettify()" style="font-size:smaller"></td>
+                  <td v-if="Info[key]" v-html="normalization.selected.prettify()" style="font-size:smaller"></td>
                   <td v-else style="color:#bbb"><b>no unit</b></td>
                 </tr>
               </tbody>
@@ -535,7 +554,7 @@ let tier_b=new Vue({
                   v-if="
                     (key!='TotalGHG' && key.search('_KPI_GHG')==-1)
                     &&
-                    Questions.is_hidden(key)==false
+                    Questions.is_hidden(key, Global)==false
                   "
                 >
                   <td

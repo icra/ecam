@@ -97,7 +97,6 @@ let Countries={
 "Zambia":                                { conv_kwh_co2:0.003197305, prot_con:17.520, bod_pday:37, },
 "Zimbabwe":                              { conv_kwh_co2:0.600377947, prot_con:20.075, bod_pday:37, },
 };
-
 /*
 1: BRANDER, M. SOOD A. WYLIE, C. HAUGHTON, A. LOVELL, J., 2011,Technical Paper Electricity-specific emission factors for grid electricity, Ecometrica,
 2: FAO Statistics Division, 2010, Food Balance Sheets

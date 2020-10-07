@@ -44,10 +44,10 @@ let variable = new Vue({
     get_current_stage,
     get_current_unit,
     get_base_unit,
-    get_variable_value,
     get_level_color,
     get_variable_type,
     get_filter_by_code,
+    get_output_value,
 
     /* open variable VIEW */
     view(id, no_history_entry){
@@ -217,7 +217,7 @@ let variable = new Vue({
             </div>
             <!--variable current value if output-->
             <div v-if="get_variable_type(id)=='output'" style="font-size:x-large">
-              <span v-html="format( get_variable_value(id)/Units.multiplier(id) )">
+              <span v-html="format( get_output_value(id,Global)/Units.multiplier(id) )">
               </span>
               <span class=unit>
                 <span v-html="get_current_unit(id).prettify()"></span>
@@ -265,7 +265,7 @@ let variable = new Vue({
                     </a>
                   </td>
                   <td>
-                    <div v-html="format(get_variable_value(output)/Units.multiplier(output))">
+                    <div v-html="format(get_output_value(output,Global)/Units.multiplier(output))">
                     </div>
                   </td>
                   <td>

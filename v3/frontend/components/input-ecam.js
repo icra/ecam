@@ -28,7 +28,7 @@ Vue.component('input_ecam',{
             >
               Estimation:
               <span v-html="format(Estimations[code]()/Units.multiplier(code))"></span>
-              <span v-html="get_current_unit(code).prettify()"></span>
+              <span v-html="get_current_unit(code,Global).prettify()"></span>
             </button>
           </div>
         </div>
@@ -53,7 +53,7 @@ Vue.component('input_ecam',{
               {{translate(obj.name)}}
               [{{        100*obj[Exceptions[code].table_field()] }} %]
               ({{ format(    obj[Exceptions[code].table_field()]*Exceptions[code].percent_of()/Units.multiplier(code) )}}
-              {{get_current_unit(code)}})
+              {{get_current_unit(code,Global)}})
             </option>
           </select>
 
@@ -129,7 +129,7 @@ Vue.component('input_ecam',{
             >
               <option
                 v-for="mul,unit in Units[Info[code].magnitude]"
-                :selected="get_current_unit(code) == unit"
+                :selected="get_current_unit(code,Global) == unit"
                 v-html="unit"
               ></option>
             </select>
