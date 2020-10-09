@@ -149,12 +149,15 @@ function locate_variable(code){
   if(!code) return false;
 
   //fix correct search for global functions TODO
+  if(Global[code] && typeof(Global[code])=='function'){
+    return {level:false, sublevel:false, stage:Global}; //stage is an object
+  }
+
+  let all_stages = Structure.concat({level:"General"});
 
   //search inside all stages
-  for(let i in Structure.concat(
-    [{level:'General'}]
-  )){
-    let s        = Structure[i];
+  for(let i in all_stages){
+    let s        = all_stages[i];
     let level    = s.level;
     let sublevel = s.sublevel;
 
@@ -177,6 +180,11 @@ function locate_variable(code){
 
 //get variable type ("input" or "output")
 function get_variable_type(code){
+  //fix correct search for global functions
+  if(Global[code] && typeof(Global[code])=='function'){
+    return "output";
+  }
+
   let loc = locate_variable(code);
   if(!loc) return "code not found";
   if(!loc.level) return "level not found";

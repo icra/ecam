@@ -24,16 +24,11 @@ class Ecam{
       bod_pday_fs          : 0,     //BOD5 in faecal sludge (g/person/day)
       gwp_reports_index    : 0,     //index of selected GWP report
       equations:[
-        "Days",
-        "Years",
         "TotalGHG",
         "TotalNRG",
+        "Days",
+        "Years",
       ],
-    },
-
-    this.Configuration={
-      //user selected units for inputs
-      Units:{ /*code:"unit"*/ },
     };
 
     this.Water={     //Water supply stages
@@ -152,6 +147,11 @@ class Ecam{
             this.Onsite   .map(s=>s.wwo_ghg_avoided_land() ).sum()
           );
         },
+    };
+
+    this.Configuration={
+      //user selected units for inputs
+      Units:{ /*code:"unit"*/ },
     };
   }
 

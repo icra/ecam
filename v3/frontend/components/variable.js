@@ -62,7 +62,7 @@ let variable=new Vue({
         this.question     = this.Questions.is_inside(this.id);
         this.localization = this.locate_variable(id);
       }else{
-        throw new Error(`variable "${id}" does not exist`);
+        throw new Error(`variable "${id}" does not exist at info.js`);
         return;
       }
 
@@ -70,6 +70,9 @@ let variable=new Vue({
     },
 
     get_formula_location(){
+
+      if(this.Global[this.id] && typeof(this.Global[this.id])=='function') return this.Global;
+
       let level    = this.localization.level;
       let sublevel = this.localization.sublevel;
       let obj;
@@ -110,7 +113,6 @@ let variable=new Vue({
           maxWidth   : '80%',
           margin     : 'auto',
           background : get_level_color(localization.level),
-
         }"
       >
         <!--variable stage-->
