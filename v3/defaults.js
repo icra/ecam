@@ -6,12 +6,10 @@
 ecam_logo.visible   = 1;
 linear_menu.visible = 1;
 stages_menu.visible = 0;
+//ecam.show('landing')
 //go_to('Water','Abstraction');
-ecam.show('variable');
 
 //BACKEND ELEMENTS
-//answer yes to all questions
-
 
 //general
   Global.General.conv_kwh_co2 = 0.7; //conversion factor for grid electricity (kgCO2/kWh)
@@ -23,9 +21,16 @@ ecam.show('variable');
 //ww
   Global.Waste.ww_resi_pop = 2000;
   Global.Waste.ww_vol_gene = 150000;
+//-----
+
+let substage = Global.Water.Abstraction[0];
+stages_menu.add_substage('Water','Abstraction')
+stages_menu.add_substage('Water','Abstraction')
+stages_menu.add_substage('Water','Abstraction')
+Object.keys(Questions).forEach(key=>{substage.Configuration.Questions[key]=1});
+variable.view('wsa_KPI_GHG_fuel');
+
 //wsa
-  let substage = Global.Water.Abstraction[0];
-  Object.keys(Questions).forEach(key=>{substage.Configuration.Questions[key]=1});
   substage.wsa_vol_conv = 500;
   substage.wsa_nrg_cons = 1000;
   substage.wsa_nrg_cost = 10;

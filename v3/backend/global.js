@@ -124,7 +124,7 @@ class Ecam{
       //ww SL
         ww_serv_pop(){
           let wwt = this.Treatment.map(s=>s.wwt_serv_pop).sum();
-          let wwo = this.Onsite   .map(s=>s.wwo_serv_pop).sum();
+          let wwo = this.Onsite   .map(s=>s.wwo_onsi_pop).sum();
           return wwt+wwo;
         },
         ww_nrg_cons(){
@@ -155,7 +155,11 @@ class Ecam{
     };
   }
 
-  //assesment period duration (in days)
+  //global GHG emissions and energy consumed
+  TotalGHG(){return this.Water.ws_KPI_GHG()+this.Waste.ww_KPI_GHG()}
+  TotalNRG(){return this.Water.ws_nrg_cons()+this.Waste.ww_nrg_cons()}
+
+  //assesment period duration (in days and years)
   Days(){
     let startDate=new Date(this.General.AssessmentPeriodStart);
     let finalDate=new Date(this.General.AssessmentPeriodEnd);
@@ -163,15 +167,7 @@ class Ecam{
     //for example: from january 1st to december 31th is 365 days
     return 1+(finalDate-startDate)/1000/60/60/24; //days
   }
-
-  //assesment period duration (in years)
-  Years(){
-    return this.Days()/365;
-  }
-
-  //global GHG emissions and energy consumed
-  TotalGHG(){return this.Water.ws_KPI_GHG()+this.Waste.ww_KPI_GHG()}
-  TotalNRG(){return this.Water.ws_nrg_cons()+this.Waste.ww_nrg_cons()}
+  Years(){return this.Days()/365}
 };
 
 //classes for Substages inside Ecam objects

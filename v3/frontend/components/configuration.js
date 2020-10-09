@@ -49,10 +49,12 @@ let configuration=new Vue({
           <input
             @blur="are_you_editing_name=false"
             v-model="Global.General.Name"
+            @keyup.enter="are_you_editing_name=false"
             maxlength=50
             placeholder="System name"
             style="border:1px solid #ccc"
           >
+          <button @click="are_you_editing_name=false">ok</button>
         </div>
         <div v-else
           style="
@@ -61,7 +63,7 @@ let configuration=new Vue({
             justify-content:center;
           "
         >
-          <div style="font-size:x-large;padding-right:1em">{{Global.General.Name}}</div>
+          <div style="font-size:x-large;padding-right:8px">{{Global.General.Name}}</div>
           <div>
             <button @click="are_you_editing_name=true">
               Change name
@@ -298,6 +300,12 @@ let configuration=new Vue({
             </table>
           </div>
         </fieldset>
+      </div>
+
+      <!--prev next btns-->
+      <div style="text-align:center">
+        <button onclick="ecam.show('select_scenario')">Previous</button>
+        <button onclick="ecam.show('tier_b')">Next</button>
       </div>
     </div>
   `,

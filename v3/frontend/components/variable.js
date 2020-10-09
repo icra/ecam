@@ -40,12 +40,14 @@ let variable=new Vue({
     translate,
     format,
     go_to,
+    go_to_substage,
     locate_variable,
     get_current_unit,
     get_base_unit,
     get_level_color,
     get_variable_type,
-    get_filter_by_code,
+    get_sum_of_substages,
+    get_output_value,
 
     /* open variable VIEW */
     view(id, no_history_entry){
@@ -105,9 +107,10 @@ let variable=new Vue({
       <table v-if="Info[id]"
         :style="{
           textAlign  : 'left',
-          width      : '70%',
+          maxWidth   : '80%',
           margin     : 'auto',
           background : get_level_color(localization.level),
+
         }"
       >
         <!--variable stage-->
@@ -141,12 +144,6 @@ let variable=new Vue({
           <td>
             <span v-html="translate(question)+'?'"></span>
           </td>
-        </tr>
-
-        <!--variable is inside a filter?-->
-        <tr v-if="get_filter_by_code(id)">
-          <th> Filter </th>
-          <td> {{get_filter_by_code(id)}} </td>
         </tr>
 
         <!--variable type-->
@@ -187,36 +184,89 @@ let variable=new Vue({
 
         <!--variable current value-->
         <tr>
-          <th>
-            {{ translate("Current value") }}
-          </th>
+          <th>{{ translate("Current value") }}</th>
           <td>
             <!--variable current value input element-->
             <div v-if="get_variable_type(id)=='input'">
               <!--input is an Option-->
               <div v-if="Info[id] && Info[id].magnitude=='Option'">
-                TODO v-model
-                <select>
-                  <option v-for="obj,i in Tables[id]" :value="i">
-                    {{obj.name}}
-                  </option>
-                </select>
+                <div>
+                  <div v-if="!localization.sublevel">
+                    <select v-model="Global[localization.level][id]">
+                      <option v-for="obj,i in Tables[id]" :value="i">
+                        {{obj.name}}
+                      </option>
+                    </select>
+                  </div>
+                  <div v-else>
+                    <table>
+                      <tr>
+                        <td v-for="ss in Global[localization.level][localization.sublevel]">
+                          <div>
+                            <a @click="go_to_substage(ss)">{{ss.name}}</a>
+                          </div>
+                          <div>
+                            <select v-model="ss[id]">
+                              <option v-for="obj,i in Tables[id]" :value="i">
+                                {{obj.name}}
+                              </option>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
               </div>
               <!--input is a number-->
               <div v-else>
-                TODO v-model
-                <input type=number>
-                <span class=unit v-html="get_base_unit(id).prettify()"></span>
+                <div>
+                  <div v-if="!localization.sublevel">
+                    <input type=number v-model.number="Global[localization.level][id]">
+                  </div>
+                  <div v-else>
+                    <table>
+                      <tr>
+                        <td v-for="ss in Global[localization.level][localization.sublevel]">
+                          <div>
+                            <a @click="go_to_substage(ss)">{{ss.name}}</a>
+                          </div>
+                          <div>
+                            <input type=number v-model.number="ss[id]">
+                          </div>
+                          <div class=unit v-html="get_base_unit(id).prettify()"></div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
             <!--variable current value if output-->
-            <div v-if="get_variable_type(id)=='output'" style="font-size:x-large">
+            <div v-if="get_variable_type(id)=='output'">
               <div>
-                TODO value for each substage
+                <div v-if="!localization.sublevel">
+                  {{
+                    format(
+                      get_output_value(id, Global[localization.level])
+                    )
+                  }}
+                  <span v-html="get_current_unit(id).prettify()" class=unit></span>
+                </div>
+                <div v-else>
+                  <table>
+                    <tr>
+                      <td v-for="ss in Global[localization.level][localization.sublevel]">
+                        <div>
+                          <a @click="go_to_substage(ss)">{{ss.name}}</a>
+                        </div>
+                        <div v-html="format(get_output_value(id,ss))"></div>
+                        <div v-html="get_current_unit(id).prettify()" class=unit></div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
               </div>
-              <span class=unit>
-                <span v-html="get_current_unit(id).prettify()"></span>
-              </span>
             </div>
           </td>
         </tr>
@@ -259,7 +309,22 @@ let variable=new Vue({
                     </a>
                   </td>
                   <td>
-                    output for each substage
+                    <div v-if="!locate_variable(output).sublevel">
+                      {{
+                        format(
+                          get_output_value(output, locate_variable(output).stage)
+                        )
+                      }}
+                    </div>
+                    <div v-else>
+                      {{
+                        locate_variable(output).stage.map(ss=>(
+                          format(
+                            get_output_value(output, ss)
+                          )
+                        ))
+                      }}
+                    </div>
                   </td>
                   <td>
                     <span class=unit v-html="get_current_unit(output).prettify()">
@@ -275,7 +340,9 @@ let variable=new Vue({
                     </a>
                   </td>
                   <td>
-                    <div>TODO</div>
+                    <div>
+                      benchmark for each substage
+                    </div>
                   </td>
                   <td>
                     <span class=unit v-html="get_base_unit(output).prettify()"></span>

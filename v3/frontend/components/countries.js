@@ -7,40 +7,47 @@ let countries = new Vue({
 
     Global,
     Countries,
+    Languages,
   },
 
   methods:{
     translate,
+    set_variables_from_selected_country: configuration.set_variables_from_selected_country,
   },
 
   template:`
-    <div id=countries v-if="visible">
+    <div id=countries v-if="visible && Languages.ready">
       <h1 style="text-align:center">
         <span onclick="ecam.show('configuration')">{{translate('configuration')}}</span>
         &rsaquo;
         <span style=color:black>{{translate('Countries')}}</span>
       </h1>
       <table style="margin:auto">
-        <tr>
-          <th rowspan=2>{{translate('Country')}}
-          <th>
-            {{translate('Emission_factor')}}<sup>1</sup>
-            <br><a @click="variable.view('conv_kwh_co2')">(conv_kwh_co2)</a>
-          </th>
-          <th>
-            {{translate('Annual_protein_consumption')}}<sup>2</sup>
-            <br><a @click="variable.view('prot_con')">(prot_con)</a>
-          </th>
-          <th>
-            BOD<sub>5</sub><sup>3</sup>
-            <br><a @click="variable.view('bod_pday')">(bod_pday)</a>
-          </th>
-        </tr>
-        <tr>
-          <th>kgCO<sub>2</sub>/kWh</th>
-          <th>kg/{{translate('person')}}/{{translate('year')}}</th>
-          <th>g/{{translate('person')}}/{{translate('day')}}</th>
-        </tr>
+        <thead>
+          <tr>
+            <th rowspan=2>{{translate('Country')}}
+            <th>
+              {{translate('Emission_factor')}}<sup>1</sup>
+              <br><a @click="variable.view('conv_kwh_co2')">(conv_kwh_co2)</a>
+            </th>
+            <th>
+              {{translate('Annual_protein_consumption')}}<sup>2</sup>
+              <br><a @click="variable.view('prot_con')">(prot_con)</a>
+            </th>
+            <th>
+              BOD<sub>5</sub><sup>3</sup>
+              <br><a @click="variable.view('bod_pday')">(bod_pday)</a>
+            </th>
+            <th rowspan=2>
+              Select
+            </th>
+          </tr>
+          <tr>
+            <th>kgCO<sub>2</sub>/kWh</th>
+            <th>kg/{{translate('person')}}/{{translate('year')}}</th>
+            <th>g/{{translate('person')}}/{{translate('day')}}</th>
+          </tr>
+        </thead>
         <tr
           v-for="country,name in Countries"
           :class="Global.General.Country==name?'selected':''"
@@ -49,6 +56,9 @@ let countries = new Vue({
           <td class=number>{{country.conv_kwh_co2}}</td>
           <td class=number>{{country.prot_con}}</td>
           <td class=number>{{country.bod_pday}}</td>
+          <td>
+            <button @click="Global.General.Country=name;set_variables_from_selected_country()">select</button>
+          </td>
         </tr>
       </table>
 

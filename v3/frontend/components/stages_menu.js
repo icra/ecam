@@ -44,7 +44,19 @@ let stages_menu=new Vue({
       let ss = new stage.class(name);
       this.Global[level][sublevel].push(ss);
       go_to_substage(ss);
-    }
+    },
+
+    delete_substage(level,sublevel,substage){
+      if(!confirm(`Confirm delete substage "${substage.name}"?`)) return;
+      let index = this.Global[level][sublevel].indexOf(substage);
+      if(index+1){
+        this.Global[level][sublevel].splice(index,1);
+      }
+      //if this substage was the current being edited navigate to superior level
+      if(substage == tier_b.substage){
+        go_to(level);
+      }
+    },
   },
 
   template:`
@@ -52,7 +64,7 @@ let stages_menu=new Vue({
     <div id=stages_menu v-if="visible && Languages.ready">
       <div style="padding:2px">
         <!--checkbox show substages-->
-        <div style="text-align:center">
+        <div style="text-align:center;padding:10px">
           <label style="user-select:none;font-size:larger">
             <input type=checkbox v-model="show_substages_summary">
             show substages
@@ -106,8 +118,7 @@ let stages_menu=new Vue({
                   <div
                     style="
                       display:grid;
-                      grid-template-columns:70% 29%;
-                      grid-gap:1%
+                      grid-template-columns:50% 50%;
                     "
                   >
                     <!--substage name-->
@@ -115,6 +126,11 @@ let stages_menu=new Vue({
                       <a @click="go_to_substage(ss)" :selected_substage="is_substage_selected(ss)">
                         {{ss.name}}
                       </a>
+                      <!--delete substage btn-->
+                      <button 
+                        style="font-size:x-small"
+                        @click="delete_substage(s.level,s.sublevel,ss)">X
+                      </button>
                     </div>
                     <!--ss emissions-->
                     <div class=number style="font-size:smaller">

@@ -99,26 +99,13 @@ let Formulas={
     if(!formula) return false;
 
     let result = formula;
-    Structure.forEach(s=>{
-      //replace prefix
-      let reg = new RegExp(`this\\.${s.prefix}\\.`,'g')
-      result = result.replace(reg,'');
-
-      //replace level and sublevel
-      if(s.sublevel){
-        let reg = new RegExp(`${s.sublevel}\\.`,'g')
-        result = result.replace(reg,'');
-      }else{
-        let reg = new RegExp(`${s.level}\\.`,'g')
-        result = result.replace(reg,'');
-      }
-    });
     result = result.replace(/this\./g,"");
     result = result.replace(/\+/g," + ");
     result = result.replace(/\-/g," - ");
     result = result.replace(/\*/g," * ");
-    result = result.replace(/Global./g,"");
-    result = result.replace(/General./g,"");
+    result = result.replace(/Global\./g,"");
+    result = result.replace(/General\./g,"");
+    result = result.replace(/\(\)/g,"");
 
     Object.keys(Cts).forEach(key=>{
       let reg = new RegExp(`Cts\.${key}\.value`,'g');

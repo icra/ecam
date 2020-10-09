@@ -148,20 +148,12 @@ function get_output_codes(level, sublevel){
 function locate_variable(code){
   if(!code) return false;
 
-  //search inside General
-  {
-    let level="General";
-    if(
-      get_input_codes(level).indexOf(code)+1
-      ||
-      get_output_codes(level).indexOf(code)+1
-    ){
-      return {level, sublevel:false};
-    }
-  }
+  //fix correct search for global functions TODO
 
-  //search inside Global
-  for(let i in Structure){
+  //search inside all stages
+  for(let i in Structure.concat(
+    [{level:'General'}]
+  )){
     let s        = Structure[i];
     let level    = s.level;
     let sublevel = s.sublevel;
@@ -171,7 +163,11 @@ function locate_variable(code){
       ||
       get_output_codes(level, sublevel).indexOf(code)+1
     ){
-      return {level, sublevel};
+      if(sublevel){
+        return {level, sublevel, stage:Global[level][sublevel]}; //stage is an array
+      }else{
+        return {level, sublevel, stage:Global[level]}; //stage is an object
+      }
       break;
     }
   }
@@ -202,6 +198,7 @@ function get_filter_by_code(code){
   for(let key in Filters){
     if(Filters[key].indexOf(code)+1){
       return key;
+      break;
     }
   }
   return false;

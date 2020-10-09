@@ -1,10 +1,12 @@
 let linear_menu = new Vue({
   el:"#linear_menu",
   data:{
-    visible:true,
-    current_view:'landing',
+    visible      : true,
+    current_view : 'landing',
+
     Global,
     Languages,
+    Info,
   },
   methods:{
     translate,
@@ -73,12 +75,21 @@ let linear_menu = new Vue({
       </div>
 
       <!--current system-->
-      <div id=current_system>
-        <b style="color:#aaa">You are in</b>
-        <b>{{Global.General.Name}}</b>
-        <b :style="{color:'var(--color-level-generic)'}">
-          (<span v-html="format(Global.TotalGHG())"></span> kgCO<sub>2</sub>eq)
-        </b>
+      <div onclick="ecam.show('configuration')">
+        <div>
+          <b style="color:#aaa">You are in</b>
+          <b>{{Global.General.Name}}</b>
+        </div>
+        <div>
+          <span v-html="format(Global.TotalGHG())"></span>
+          <span class=unit v-html="Info.TotalGHG.unit.prettify()"></span>
+          &emsp;
+          <span v-html="format(Global.Days())"></span>
+          <span class=unit v-html="translate('days')"></span>
+          &emsp;
+          <span v-html="format(Global.General.conv_kwh_co2)"></span>
+          <span class=unit v-html="Info.conv_kwh_co2.unit.prettify()"></span>
+        </div>
       </div>
     </div>
   `,
@@ -111,8 +122,6 @@ let linear_menu = new Vue({
       }
       #linear_menu #select_view a:hover {
         text-decoration:none;
-      }
-      #linear_menu #current_system{
       }
     </style>
   `,

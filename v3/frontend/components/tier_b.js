@@ -206,7 +206,8 @@ let tier_b=new Vue({
             <span>
               <span>&rsaquo;</span>
               <span v-if="are_you_editing_name">
-                <input v-model="substage.name" @blur="are_you_editing_name=false">
+                <input v-model="substage.name" @blur="are_you_editing_name=false" @keyup.enter="are_you_editing_name=false" maxlength=20>
+                <button @click="are_you_editing_name=false">ok</button>
               </span>
               <span v-else @click="are_you_editing_name=true">
                 <a>
@@ -219,17 +220,6 @@ let tier_b=new Vue({
 
         <!--tier b context info-->
         <div id=context_info>
-          <!--assessment period-->
-          <div>
-            <a onclick="ecam.show('configuration')">
-              <b>{{translate('assessment_period')}}:</b>
-              <span :warning="Global.Days()<=0">
-                {{format(Global.Days())}}
-              </span>
-              <span v-html="translate('days')"></span>
-            </a>
-          </div>
-
           <!--resident population-->
           <div>
             <a onclick="ecam.show('population')">
@@ -291,15 +281,6 @@ let tier_b=new Vue({
               </a>
             </div>
           </div>
-
-          <!--conversion kwh to co2-->
-          <div>
-            <a onclick="ecam.show('configuration')">
-              <b>{{translate('conv_kwh_co2_descr')}}:</b>
-              <span :warning="Global.General.conv_kwh_co2<=0">{{format(Global.General.conv_kwh_co2)}}</span>
-              <span class=number v-html="Info.conv_kwh_co2.unit"></span>
-            </a>
-          </div>
         </div>
       </div>
 
@@ -318,7 +299,6 @@ let tier_b=new Vue({
             <span :style="{fontWeight:filters_on?'bold':''}">ON</span>/<span :style="{fontWeight:filters_on?'':'bold'}">OFF</span>
           </button>
         </div>
-        <div v-if="filters_on" style="padding:0 1em">&rarr;</div>
         <div
           v-if="filters_on && (get_number_of_variables_shown_by_filter(key) || filters_active[key])"
           v-for="key in Object.keys(Filters)"
@@ -389,7 +369,7 @@ let tier_b=new Vue({
                       <a
                         class="question_container flex"
                         @click="fold_question(question)"
-                        :style="{cursor:substage.Configuration.Questions[question]?'pointer':'',color:'white'}"
+                        :style="{cursor:substage.Configuration.Questions[question]?'pointer':'auto',color:'white'}"
                       >
                         <div v-if="substage.Configuration.Questions[question]">
                           <!--question folded marker-->

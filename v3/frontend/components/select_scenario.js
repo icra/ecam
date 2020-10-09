@@ -313,6 +313,11 @@ let select_scenario=new Vue({
           v-html="'~No scenarios included to comparison'"
         ></div>
       </div>
+
+      <p>
+        TODO fix compare systems backend change
+      </p>
+
     </div>
   `,
 

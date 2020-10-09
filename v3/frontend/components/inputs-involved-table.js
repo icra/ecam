@@ -15,12 +15,8 @@ Vue.component('inputs_involved_table',{
               v-html="match"
             ></a>
           </td>
-
           <!--involved constant value-->
-          <td :title="Cts[match].value">
-            {{ format(Cts[match].value) }}
-          </td>
-
+          <td class=number :title="Cts[match].value">{{ format(Cts[match].value) }}</td>
           <!--involved constant unit-->
           <td class=unit v-html="Cts[match].unit.prettify()"></td>
         </tr>
@@ -32,12 +28,22 @@ Vue.component('inputs_involved_table',{
             <a @click="variable.view(match)" :style="{color:get_level_color(locate_variable(match).level)}">{{match}}</a>
           </td>
 
-          <!--input involved value-->
-          <td colspan=2>
-            TODO
-            -
-            Tables.get_row(match, get_current_stage(match,Global)[match]).name
+          <!--involved input Option value-->
+          <td>
+            <div v-if="!locate_variable(match).sublevel">
+              Tables.get_row(match, locate_variable(match).stage).name
+            </div>
+            <div v-else>
+              {{
+                locate_variable(match).stage.map(ss=>(
+                  Tables.get_row(match, ss[match]).name
+                ))
+              }}
+            </div>
           </td>
+
+          <!--unit-->
+          <td class=unit v-html="Info[match].unit.prettify()"></td>
         </tr>
 
         <!--input involved is a normal one (input or output)-->
@@ -46,29 +52,35 @@ Vue.component('inputs_involved_table',{
             <a @click="variable.view(match)" :style="{color:get_level_color(locate_variable(match).level)}">{{match}}</a>
           </td>
 
-          <td 
-            v-if="get_variable_type(match)=='input'" 
-          >
-            TODO
-            -
-            format(get_current_stage(match,Global)[match])
-          </td>
-          <td 
-            v-if="get_variable_type(match)=='output'" 
-          >
-            <div>
-              TODO
-              -
-              format(get_output_value(match,Global))
+          <td v-if="get_variable_type(match)=='input'">
+            <div v-if="!locate_variable(match).sublevel">
+              {{ format(locate_variable(match).stage[match]) }}
+            </div>
+            <div v-else>
+              {{
+                locate_variable(match).stage.map(ss=>(
+                  format(ss[match])
+                ))
+              }}
             </div>
           </td>
 
-          <div v-if="get_variable_type(match)=='input'">
-            <td class=unit v-html="get_base_unit(match).prettify()"></td>
-          </div>
-          <div v-else>
-            <td class=unit v-html="Info[match] ? Info[match].unit.prettify() : 'unit not defined'"></td>
-          </div>
+          <td v-if="get_variable_type(match)=='output'">
+            <div v-if="!locate_variable(match).sublevel">
+              {{ format(get_output_value(match,locate_variable(match).stage)) }}
+            </div>
+            <div v-else>
+              {{
+                locate_variable(match).stage.map(ss=>(
+                  format(get_output_value(match, ss))
+                ))
+              }}
+            </div>
+          </td>
+
+          <!--unit-->
+          <td v-if="get_variable_type(match)=='input'" class=unit v-html="get_base_unit(match).prettify()"></td>
+          <td v-else class=unit v-html="Info[match] ? Info[match].unit.prettify() : 'unit not defined'"></td>
         </tr>
       </tbody>
     </table>
