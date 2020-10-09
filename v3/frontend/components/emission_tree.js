@@ -6,7 +6,6 @@ Vue.component('emission',{
 
   data(){
     return {
-      Global,
       variable,
     };
   },
@@ -20,7 +19,6 @@ Vue.component('emission',{
     <details>
       <summary>
         <b v-html="code"></b>
-        (<span v-html="format(Global[code]())"></span>)
         &mdash;
         <small v-html="translate(code+'_descr')"></small>
         &mdash;
@@ -74,7 +72,6 @@ let emission_tree = new Vue({
         },
       },
     },
-    Global,
     Languages,
   },
 

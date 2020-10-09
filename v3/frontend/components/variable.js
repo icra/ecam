@@ -1,10 +1,10 @@
-let variable = new Vue({
+let variable=new Vue({
   el:"#variable",
 
   data:{
     visible:false,
-    id:"wsa_nrg_cons",  //default variable code
-    question:false,     //question where id belongs
+    id:"wsa_nrg_cons", //default variable code
+    question:false,    //question where id belongs
 
     //stage where id belongs to
     localization:{
@@ -41,13 +41,11 @@ let variable = new Vue({
     format,
     go_to,
     locate_variable,
-    get_current_stage,
     get_current_unit,
     get_base_unit,
     get_level_color,
     get_variable_type,
     get_filter_by_code,
-    get_output_value,
 
     /* open variable VIEW */
     view(id, no_history_entry){
@@ -57,7 +55,7 @@ let variable = new Vue({
         return false;
       }
 
-      if(Info[id] || this.Global[id]){
+      if(Info[id]){
         this.id           = id;
         this.question     = this.Questions.is_inside(this.id);
         this.localization = this.locate_variable(id);
@@ -67,6 +65,18 @@ let variable = new Vue({
       }
 
       ecam.show('variable', no_history_entry);
+    },
+
+    get_formula_location(){
+      let level    = this.localization.level;
+      let sublevel = this.localization.sublevel;
+      let obj;
+      if(sublevel){
+        obj = Structure.find(s=>(s.level==level&&s.sublevel==sublevel)).class.prototype;
+      }else{
+        obj = this.Global[level];
+      }
+      return obj;
     },
   },
 
@@ -80,31 +90,29 @@ let variable = new Vue({
           &rarr;
         </span>
         <code>{{id}}</code>
-
-        <p v-if="Info[id] || Global[id]" style="margin-bottom:0">
+        <p v-if="Info[id]" style="margin-bottom:0">
           <code
             style="font-weight:bold"
             v-html="translate(id+'_descr').prettify()">
           </code>
         </p>
-        <div v-else class=error>
+        <div v-else>
           ERROR: Variable {{id}} not defined
         </div>
       </h1>
 
       <!--variable table-->
-      <table
-        v-if="Info[id] || Global[id]"
-        :style="
-          'text-align:left; width:70%; margin:auto;'+
-          'background:'+get_level_color(localization.level)
-        "
+      <table v-if="Info[id]"
+        :style="{
+          textAlign  : 'left',
+          width      : '70%',
+          margin     : 'auto',
+          background : get_level_color(localization.level),
+        }"
       >
         <!--variable stage-->
         <tr>
-          <th>
-            {{ translate('variable_stage') }}
-          </th>
+          <th>{{ translate('variable_stage') }}</th>
           <td>
             <div v-if="localization"> &larr;
               <a @click="go_to(localization.level)">
@@ -121,48 +129,32 @@ let variable = new Vue({
 
         <!--variable explanation-->
         <tr>
-          <th>
-            {{ translate('variable_explanation') }}
-          </th>
+          <th>{{ translate('variable_explanation') }}</th>
           <td>
             <code v-html="translate(id+'_expla').prettify()"></code>
-            <span v-if="translate(id+'_expla')==''" style=color:#999>
-              {{ translate('variable_nothing') }}
-            </span>
           </td>
         </tr>
 
         <!--variable is inside a question?-->
         <tr v-if="question">
-          <th>
-            Question (yes/no)
-          </th>
+          <th>Question (yes/no)</th>
           <td>
-            <div v-if="question">
-              <span v-html="translate(question)+'?'"></span>
-              [{{ translate( (Global.Configuration.Questions[question]) ? 'yes':'no' ) }}]
-            </div>
+            <span v-html="translate(question)+'?'"></span>
           </td>
         </tr>
 
         <!--variable is inside a filter?-->
         <tr v-if="get_filter_by_code(id)">
-          <th>
-            Filter
-          </th>
-          <td>
-            {{get_filter_by_code(id)}}
-          </td>
+          <th> Filter </th>
+          <td> {{get_filter_by_code(id)}} </td>
         </tr>
 
         <!--variable type-->
         <tr>
-          <th>
-            {{ translate('variable_type') }}
-          </th>
+          <th>{{translate('variable_type')}}</th>
           <td>
             <div style="font-size:large">
-              {{ get_variable_type(id) ? get_variable_type(id).ucfirst() : 'Error' }}
+              {{get_variable_type(id).ucfirst()}}
             </div>
 
             <!--variable show formula and inputs involved-->
@@ -172,10 +164,10 @@ let variable = new Vue({
                   <span style="color:#606">{{ translate('variable_formula') }}</span>:
                 </div>
                 <code>
-                <pre
-                  v-html="Formulas.prettify(Global[id].toString())"
-                  class="prettyprint"
-                ></pre>
+                  <pre
+                    v-html="Formulas.prettify(get_formula_location()[id].toString())"
+                    class="prettyprint"
+                  ></pre>
                 </code>
               </div>
 
@@ -187,7 +179,7 @@ let variable = new Vue({
               <!--variable list inputs involved in the formula-->
               <inputs_involved_table
                 :code="id"
-                :obj="Global"
+                :obj="get_formula_location()"
               ></inputs_involved_table>
             </div>
           </td>
@@ -203,7 +195,8 @@ let variable = new Vue({
             <div v-if="get_variable_type(id)=='input'">
               <!--input is an Option-->
               <div v-if="Info[id] && Info[id].magnitude=='Option'">
-                <select v-model.number="get_current_stage(id)[id]">
+                TODO v-model
+                <select>
                   <option v-for="obj,i in Tables[id]" :value="i">
                     {{obj.name}}
                   </option>
@@ -211,14 +204,16 @@ let variable = new Vue({
               </div>
               <!--input is a number-->
               <div v-else>
-                <input type=number v-model.number="get_current_stage(id)[id]">
+                TODO v-model
+                <input type=number>
                 <span class=unit v-html="get_base_unit(id).prettify()"></span>
               </div>
             </div>
             <!--variable current value if output-->
             <div v-if="get_variable_type(id)=='output'" style="font-size:x-large">
-              <span v-html="format( get_output_value(id,Global)/Units.multiplier(id) )">
-              </span>
+              <div>
+                TODO value for each substage
+              </div>
               <span class=unit>
                 <span v-html="get_current_unit(id).prettify()"></span>
               </span>
@@ -248,8 +243,7 @@ let variable = new Vue({
                     </a>
                   </td>
                   <td>
-                    <div v-html="format(Estimations[output]())">
-                    </div>
+                    estimation for each substage
                   </td>
                   <td>
                     <span class=unit v-html="get_base_unit(output).prettify()">
@@ -265,8 +259,7 @@ let variable = new Vue({
                     </a>
                   </td>
                   <td>
-                    <div v-html="format(get_output_value(output,Global)/Units.multiplier(output))">
-                    </div>
+                    output for each substage
                   </td>
                   <td>
                     <span class=unit v-html="get_current_unit(output).prettify()">
@@ -282,7 +275,7 @@ let variable = new Vue({
                     </a>
                   </td>
                   <td>
-                    <div v-html="Benchmarks[output](get_current_stage(output),Global[output]())"></div>
+                    <div>TODO</div>
                   </td>
                   <td>
                     <span class=unit v-html="get_base_unit(output).prettify()"></span>
@@ -303,8 +296,8 @@ let variable = new Vue({
           </th>
           <td>
             <div>
-              <span v-html="format( Estimations[id]() )"></span>
-              <span v-html="Info[id].unit.prettify()" class=unit></span>
+              estimation of all substages
+              <span v-if="Info[id]" v-html="Info[id].unit.prettify()" class=unit></span>
             </div>
 
             <!--formula for estimations-->

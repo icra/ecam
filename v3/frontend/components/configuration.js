@@ -34,7 +34,7 @@ let configuration=new Vue({
 
     //set constants from selected gwp report
     set_constants_from_gwp_report(){
-      let index = this.Global.Configuration.Selected.gwp_reports_index;
+      let index = this.Global.General.gwp_reports_index;
       this.Cts.ct_ch4_eq.value = this.GWP_reports[index].ct_ch4_eq;
       this.Cts.ct_n2o_eq.value = this.GWP_reports[index].ct_n2o_eq;
     },
@@ -244,7 +244,7 @@ let configuration=new Vue({
               <!--select gwp report which defines gwp values-->
               <b>Select</b>&emsp;
               <select
-                v-model="Global.Configuration.Selected.gwp_reports_index"
+                v-model="Global.General.gwp_reports_index"
                 @change="set_constants_from_gwp_report()"
               >
                 <option v-for="report,i in GWP_reports" :value="i">

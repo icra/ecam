@@ -6,43 +6,43 @@
 ecam_logo.visible   = 1;
 linear_menu.visible = 1;
 stages_menu.visible = 0;
-go_to('Water','Abstraction');
+//go_to('Water','Abstraction');
+ecam.show('variable');
 
 //BACKEND ELEMENTS
 //answer yes to all questions
 
-let substage = Global.Water.Abstraction.substages[0];
-Object.keys(Questions).forEach(key=>{substage.Configuration.Questions[key]=1});
 
 //general
-  substage.General.conv_kwh_co2 = 0.7; //conversion factor for grid electricity (kgCO2/kWh)
-  substage.General.prot_con     = 22;  //prot consumption                       (kg/person/year)
-  substage.General.bod_pday     = 37;  //BOD5                                   (g/person/day)
-  substage.General.bod_pday_fs  = 37;  //BOD5 in faecal sludge                  (g/person/day)
+  Global.General.conv_kwh_co2 = 0.7; //conversion factor for grid electricity (kgCO2/kWh)
+  Global.General.prot_con     = 22;  //prot consumption                       (kg/person/year)
+  Global.General.bod_pday     = 37;  //BOD5                                   (g/person/day)
+  Global.General.bod_pday_fs  = 37;  //BOD5 in faecal sludge                  (g/person/day)
 //ws
-  substage.Water.ws_resi_pop = 1000;
-  substage.Water.ws_nrg_cost = 1;
-  substage.Water.ws_run_cost = 5;
+  Global.Water.ws_resi_pop = 1000;
 //ww
-  substage.Waste.ww_resi_pop = 2000;
-  substage.Waste.ww_vol_gene = 150000;
-  substage.Waste.ww_nrg_cost = 1;
-  substage.Waste.ww_run_cost = 5;
+  Global.Waste.ww_resi_pop = 2000;
+  Global.Waste.ww_vol_gene = 150000;
 //wsa
-  substage.Water.Abstraction.wsa_vol_conv = 500;
-  substage.Water.Abstraction.wsa_nrg_cons = 1000;
-  substage.Water.Abstraction.wsa_fuel_typ = 0;
-  substage.Water.Abstraction.wsa_vol_fuel = 9e-2;
-  substage.Water.Abstraction.wsa_nrg_pump = 700;
-  substage.Water.Abstraction.wsa_vol_pump = 400;
-  substage.Water.Abstraction.wsa_pmp_head = 30;
-  substage.Water.Abstraction.wsa_sta_head = 1;
-  substage.Water.Abstraction.wsa_main_len = 1e3;
-  substage.Water.Abstraction.wsa_pmp_flow = 5e-3;
-  substage.Water.Abstraction.wsa_pmp_volt = 220;
-  substage.Water.Abstraction.wsa_pmp_amps = 12;
-  substage.Water.Abstraction.wsa_pmp_pf   = 0.9;
-  substage.Water.Abstraction.wsa_pmp_exff = 99;
+  let substage = Global.Water.Abstraction[0];
+  Object.keys(Questions).forEach(key=>{substage.Configuration.Questions[key]=1});
+  substage.wsa_vol_conv = 500;
+  substage.wsa_nrg_cons = 1000;
+  substage.wsa_nrg_cost = 10;
+  substage.wsa_run_cost = 100;
+
+  substage.wsa_fuel_typ = 0;
+  substage.wsa_vol_fuel = 9e-2;
+  substage.wsa_nrg_pump = 700;
+  substage.wsa_vol_pump = 400;
+  substage.wsa_pmp_head = 30;
+  substage.wsa_sta_head = 1;
+  substage.wsa_main_len = 1e3;
+  substage.wsa_pmp_flow = 5e-3;
+  substage.wsa_pmp_volt = 220;
+  substage.wsa_pmp_amps = 12;
+  substage.wsa_pmp_pf   = 0.9;
+  substage.wsa_pmp_exff = 99;
 ////wst
 //  substage.Water.Treatment.wst_vol_trea = 450;
 //  substage.Water.Treatment.wst_nrg_cons = 1000;

@@ -18,7 +18,6 @@
     ],
   },
 */
-
 let Questions={
   //wsa
     "wsa_engines":{
@@ -637,11 +636,13 @@ let Questions={
     },
 };
 
-/*FUNCTIONS for Questions*/
+/*Questions functions*/
 
 //return the question codes according to an ubication inside "Global".
 //ubication is a pointer to a stage, for example "Global.Water.Abstraction"
 Questions.get_questions=function(ubication) {
+  if(!ubication) return [];
+
   let questions=[];
 
   for(let question in this) {
@@ -675,13 +676,14 @@ Questions.is_inside=function(field){
   return false;
 };
 
-//check if the input "field" is shown or hidden
-Questions.is_hidden=function(field, scenario){
-  scenario = scenario || Global;
+//check if variable "field" is shown or hidden according to questions
+Questions.is_hidden=function(field, substage){
+  if(!substage) return false;
+
   //go over all questions
   for(let question in this) {
     //if answer is yes, next question: all fields inside should be shown
-    if(scenario.Configuration.Questions[question]==1){continue;}
+    if(substage.Configuration.Questions[question]){continue;}
 
     //if answer is no, look for "field" inside
     for(let i in this[question].variables) {
@@ -693,11 +695,12 @@ Questions.is_hidden=function(field, scenario){
 };
 
 //check if the question "field" should be hidden
-Questions.is_question_hidden=function(field, scenario){
-  scenario = scenario || Global;
+Questions.is_question_hidden=function(field, substage){
+  if(!substage) return false;
+
   //go over all questions
   for(let question in this) {
-    if(scenario.Configuration.Questions[question]==1){continue;}
+    if(substage.Configuration.Questions[question]==1){continue;}
     //if answer is no, look for "field" inside
     for(let i in this[question].otherQuestions) {
       let code=this[question].otherQuestions[i];
@@ -708,18 +711,18 @@ Questions.is_question_hidden=function(field, scenario){
 };
 
 //reset the values and the otherQuestions
-Questions.reset_values=function(question, stage){
+Questions.reset_values=function(question, substage){
+  if(!substage) throw new Error('substage undefined');
+
   //reset inputs
   Questions[question].variables.forEach(code=>{
-    if(typeof(stage[code])=="number"){
-      stage[code]=0;
-      //also reset substages TODO v3
-      //substages.forEach(substage=>{substage[code]=0});
+    if(typeof(substage[code])=="number"){
+      substage[code]=0;
     }
   });
   //reset related questions RECURSIVELY
   Questions[question].otherQuestions.forEach(key=>{
-    Questions.reset_values(key, stage);
+    Questions.reset_values(key, substage);
   });
 };
 

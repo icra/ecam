@@ -2,14 +2,14 @@ let tier_b=new Vue({
   el:"#tier_b",
   data:{
     visible  : false,
-    level    : 'Water',
-    sublevel : false,
 
-    caption,  //vue object
-    variable, //vue object
+    level                : 'Water',
+    sublevel             : false,
+    substage             : null,
+    are_you_editing_name : false,
 
     //FILTERS (see "backend/filters.js")
-    Filters,          //filters definition (list of variables for each filter)
+    Filters,          //definition (list of variables for each filter)
     filters_on:true,  //all filters on
     filters_active:{  //each filter on/off
       "Population":true,
@@ -39,8 +39,12 @@ let tier_b=new Vue({
       ],
     },
 
+    //frontend
+    caption,  //vue object
+    variable, //vue object
+
     //backend
-    Global, //<--current object modified by user interface
+    Global,
     Info,
     Structure,
     Tips,
@@ -53,7 +57,6 @@ let tier_b=new Vue({
     Questions,
     Languages,
     Benchmarks,
-    Substage,
     Ecam,
   },
 
@@ -67,7 +70,7 @@ let tier_b=new Vue({
 
     set_question(question, new_value){
       //set new question answer
-      this.Global.Configuration.Questions[question] = new_value;
+      this.substage.Configuration.Questions[question] = new_value;
 
       //if answer is no:
       if(!new_value){
@@ -77,25 +80,25 @@ let tier_b=new Vue({
         });
 
         //reset values
-        Questions.reset_values(question, this.get_current_stage());
+        Questions.reset_values(question, this.substage);
       }
     },
 
     get_current_stage(){
       if(this.sublevel){
-        return this.Global[this.level][this.sublevel];
+        return this.substage;
       }else{
         return this.Global[this.level];
       }
     },
 
     fold_question(key){
-      if(!this.Global.Configuration.Questions[key]){return;}
-      let index = this.Global.Configuration.FoldedQuestions.indexOf(key);
-      if(index == -1){
-        this.Global.Configuration.FoldedQuestions.push(key);
+      if(!this.substage.Configuration.Questions[key]){return;}
+      let index = this.substage.Configuration.FoldedQuestions.indexOf(key);
+      if(index==-1){
+        this.substage.Configuration.FoldedQuestions.push(key);
       }else{
-        this.Global.Configuration.FoldedQuestions.splice(index,1);
+        this.substage.Configuration.FoldedQuestions.splice(index,1);
       }
     },
 
@@ -141,7 +144,7 @@ let tier_b=new Vue({
       });
 
       //count question variables that are inputs
-      Questions.get_questions(this.get_current_stage()).forEach(code=>{
+      Questions.get_questions(this.substage).forEach(code=>{
         let count = 0;
         Questions[code].variables.forEach(key=>{
           if(inputs.indexOf(key)+1){
@@ -173,11 +176,10 @@ let tier_b=new Vue({
     //Benchmark return string and color
     get_benchmark(key){
       if(!this.Benchmarks[key]) return false;
-      let string = this.Benchmarks[key](this.get_current_stage(), this.Global[key]());
+      let string = this.Benchmarks[key](this.substage, this.substage[key]());
       let color = this.benchmark_colors[string];
       return {string, color};
     },
-
   },
 
   template:`
@@ -200,10 +202,17 @@ let tier_b=new Vue({
               <b style="color:black">{{translate(sublevel)}}</b>
             </span>
           </span>
-          <span v-if="Global.constructor==Substage">
+          <span v-if="substage">
             <span>
               <span>&rsaquo;</span>
-              <b style="color:black">{{Global.name}}</b>
+              <span v-if="are_you_editing_name">
+                <input v-model="substage.name" @blur="are_you_editing_name=false">
+              </span>
+              <span v-else @click="are_you_editing_name=true">
+                <a>
+                  <b style="color:black">{{substage.name}}</b>
+                </a>
+              </span>
             </span>
           </span>
         </h1>
@@ -214,7 +223,7 @@ let tier_b=new Vue({
           <div>
             <a onclick="ecam.show('configuration')">
               <b>{{translate('assessment_period')}}:</b>
-              <span :class="Global.Days()<=0 ? 'warning' : ''">
+              <span :warning="Global.Days()<=0">
                 {{format(Global.Days())}}
               </span>
               <span v-html="translate('days')"></span>
@@ -226,13 +235,13 @@ let tier_b=new Vue({
             <a onclick="ecam.show('population')">
               <div v-if="level=='Water' || level=='General'">
                 <b>{{translate('ws_resi_pop_descr')}}:</b>
-                <span :class="Global.Water.ws_resi_pop<=0 ? 'warning' : ''">
+                <span :warning="Global.Water.ws_resi_pop<=0">
                   {{format(Global.Water.ws_resi_pop)}}
                 </span>
               </div>
               <div v-if="level=='Waste' || level=='General'">
                 <b>{{translate('ww_resi_pop_descr')}}:</b>
-                <span :class="Global.Waste.ww_resi_pop<=0 ? 'warning' : ''">
+                <span :warning="Global.Waste.ww_resi_pop<=0">
                   {{format(Global.Waste.ww_resi_pop)}}
                 </span>
               </div>
@@ -244,32 +253,40 @@ let tier_b=new Vue({
             <div v-if="level=='Water'">
               <a onclick="ecam.show('population')">
                 <b>{{translate('wsd_serv_pop_descr')}}:</b>
-                <span :class="Global.Water.Distribution.wsd_serv_pop<=0 ? 'warning' : ''">
-                  {{format(Global.Water.Distribution.wsd_serv_pop)}}
+                <span :warning="Global.Water.Distribution.map(s=>s.wsd_serv_pop).sum()<=0">
+                  {{format( Global.Water.Distribution.map(s=>s.wsd_serv_pop).sum() )}}
+                </span>
+              </a>
+            </div>
+            <div v-if="level=='Waste'">
+              <a onclick="ecam.show('population')">
+                <b>{{translate('wwc_conn_pop_descr')}}:</b>
+                <span :warning="Global.Waste.Collection.map(s=>s.wwc_conn_pop).sum()<=0">
+                  {{format(Global.Waste.Collection.map(s=>s.wwc_conn_pop).sum())}}
                 </span>
               </a>
             </div>
             <div v-if="level=='Waste'">
               <a onclick="ecam.show('population')">
                 <b>{{translate('wwt_serv_pop_descr')}}:</b>
-                <span :class="Global.Waste.Treatment.wwt_serv_pop<=0 ? 'warning' : ''">
-                  {{format(Global.Waste.Treatment.wwt_serv_pop)}}
+                <span :warning="Global.Waste.Treatment.map(s=>s.wwt_serv_pop).sum()<=0">
+                  {{format(Global.Waste.Treatment.map(s=>s.wwt_serv_pop).sum())}}
                 </span>
               </a>
             </div>
             <div v-if="level=='Waste'">
               <a onclick="ecam.show('population')">
                 <b>{{translate('wwo_onsi_pop_descr')}}:</b>
-                <span :class="Global.Waste.Onsite.wwo_onsi_pop<=0 ? 'warning' : ''">
-                  {{format(Global.Waste.Onsite.wwo_onsi_pop)}}
+                <span>
+                  {{format(Global.Waste.Onsite.map(s=>s.wwo_onsi_pop).sum())}}
                 </span>
               </a>
             </div>
             <div v-if="level=='Waste'">
               <a onclick="ecam.show('population')">
                 <b>{{translate('wwo_open_pop_descr')}}:</b>
-                <span :class="Global.Waste.Onsite.wwo_open_pop<=0 ? 'warning' : ''">
-                  {{format(Global.Waste.Onsite.wwo_open_pop)}}
+                <span>
+                  {{format(Global.Waste.Onsite.map(s=>s.wwo_open_pop).sum())}}
                 </span>
               </a>
             </div>
@@ -279,7 +296,7 @@ let tier_b=new Vue({
           <div>
             <a onclick="ecam.show('configuration')">
               <b>{{translate('conv_kwh_co2_descr')}}:</b>
-              <span :class="Global.General.conv_kwh_co2<=0 ? 'warning' : ''">{{format(Global.General.conv_kwh_co2)}}</span>
+              <span :warning="Global.General.conv_kwh_co2<=0">{{format(Global.General.conv_kwh_co2)}}</span>
               <span class=number v-html="Info.conv_kwh_co2.unit"></span>
             </a>
           </div>
@@ -320,7 +337,7 @@ let tier_b=new Vue({
       <div
         style="
           display:grid;
-          grid-template-columns:45% 55%;
+          grid-template-columns:50% 50%;
         "
       >
         <!--tier b inputs-->
@@ -336,9 +353,7 @@ let tier_b=new Vue({
               <b>{{translate('INPUTS') }}</b>
             </div>
             <div style="margin-top:5px">
-              Enter values for this
-              {{sublevel ? translate(sublevel) : translate(level) }}
-              {{translate('stage') }}
+              Enter here the inputs for this stage
             </div>
           </div>
 
@@ -358,33 +373,33 @@ let tier_b=new Vue({
 
             <!--tier b questions-->
             <tbody
-              v-for="question in Questions.get_questions(get_current_stage())"
-              v-if="is_variable_visible(question)"
+              v-for="question in Questions.get_questions(substage)"
+              v-if="substage && is_variable_visible(question)"
             >
               <tr
                 :style="{
                   color:'white',
-                  background:'var(--color-level-'+level+(Questions.is_question_hidden(question, Global)?'-secondary':'')+')',
+                  background:'var(--color-level-'+level+(Questions.is_question_hidden(question, substage)?'-secondary':'')+')',
                 }"
               >
-                <td colspan=3 :class="Questions.is_question_hidden(question, Global) ? 'disabled_question' : ''">
+                <td colspan=3 :class="Questions.is_question_hidden(question, substage) ? 'disabled_question' : ''">
                   <div style="display:grid;grid-template-columns:50% 50%">
                     <!--question text-->
                     <div>
                       <a
                         class="question_container flex"
                         @click="fold_question(question)"
-                        :style="{cursor:Global.Configuration.Questions[question]?'pointer':'',color:'white'}"
+                        :style="{cursor:substage.Configuration.Questions[question]?'pointer':'',color:'white'}"
                       >
-                        <div v-if="Global.Configuration.Questions[question]">
+                        <div v-if="substage.Configuration.Questions[question]">
                           <!--question folded marker-->
-                          <div :class="'question_fold_marker '+(Global.Configuration.FoldedQuestions.indexOf(question)+1 ? 'folded':'')">
+                          <div :class="'question_fold_marker '+(substage.Configuration.FoldedQuestions.indexOf(question)+1 ? 'folded':'')">
                             ▼
                           </div>
                         </div>
                         <div>
                           <b v-html="translate(question)+'?'"
-                            :class="Global.Configuration.Questions[question] ? 'question_text':''"
+                            :class="substage.Configuration.Questions[question] ? 'question_text':''"
                             style="margin-left:5px"
                           ></b>
                         </div>
@@ -395,11 +410,11 @@ let tier_b=new Vue({
                     <div :title="question">
                       <label>
                         <input type=checkbox
-                          :disabled="Questions.is_question_hidden(question, Global)"
+                          :disabled="Questions.is_question_hidden(question, substage)"
                           @change="set_question(question, $event.target.checked)"
-                          :checked="Global.Configuration.Questions[question]"
+                          :checked="substage.Configuration.Questions[question]"
                         >
-                        <span v-if="Global.Configuration.Questions[question]" v-html="translate('yes')"></span>
+                        <span v-if="substage.Configuration.Questions[question]" v-html="translate('yes')"></span>
                         <span v-else v-html="translate('no')"></span>
                       </label>
 
@@ -416,15 +431,15 @@ let tier_b=new Vue({
               <input_ecam
                 v-for="key in Questions[question].variables"
                 v-if="
-                  Global.Configuration.Questions[question]
+                  substage.Configuration.Questions[question]
                   &&
-                  Global.Configuration.FoldedQuestions.indexOf(question)==-1
+                  substage.Configuration.FoldedQuestions.indexOf(question)==-1
                   &&
-                  typeof(get_current_stage()[key])=='number'
+                  typeof(substage[key])=='number'
                 "
                 :key="key"
                 :code="key"
-                :current_stage="get_current_stage()"
+                :current_stage="substage"
                 :level="level"
               ></input_ecam>
             </tbody>
@@ -461,24 +476,27 @@ let tier_b=new Vue({
               </div>
             </div>
 
-            <!--level2 outputs: GHG content-->
+            <!--level2 outputs: GHG emissions-->
             <table style="width:100%">
               <thead :style="{background:'transparent'}">
                 <tr>
                   <th></th>
-                  <th>
-                    <div v-html="normalization.selected.prettify()"></div>
+                  <th style="text-align:right">Value</th>
+                  <th style="text-align:right" v-if="sublevel">
+                    &Sigma;
+                    sum
+                    ({{Global[level][sublevel].length}} substages)
                   </th>
-                  <th v-if="sublevel">&Sigma;</th>
-                  <th>Unit</th>
+                  <th style="text-align:left">Unit</th>
                 </tr>
               </thead>
+
               <tbody>
                 <tr v-for="key in get_current_stage().equations"
                   v-if="
                     (key=='TotalGHG' || key.search('_KPI_GHG')+1)
                     &&
-                    Questions.is_hidden(key, Global)==false
+                    Questions.is_hidden(key, substage)==false
                   "
                 >
                   <td
@@ -496,26 +514,26 @@ let tier_b=new Vue({
 
                   <!--ghg output value-->
                   <td
-                    @mousemove="caption.show($event, Formulas.prettify(Global[key]))"
+                    @mousemove="caption.show($event, Formulas.prettify(get_current_stage()[key]))"
                     @mouseout="caption.hide()"
                     style="text-align:right"
                   >
                     <div
                       v-if="normalization.selected=='kgCO2eq'"
-                      v-html="format(get_output_value(key,Global))"
+                      v-html="format(get_output_value(key,get_current_stage()))"
                     ></div>
                     <div
                       v-if="normalization.selected=='kgCO2eq/year'"
-                      v-html="format(get_output_value(key,Global)/Global.Years())"
+                      v-html="format(get_output_value(key,get_current_stage())/Global.Years())"
                     ></div>
                     <div v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
                       <div
-                        v-if="sublevel"
-                        v-html="format(Normalization[level][sublevel][normalization.selected](get_output_value(key,Global)))"
+                        v-if="substage"
+                        v-html="format(Normalization[level][sublevel][normalization.selected](substage,key))"
                       ></div>
                       <div
                         v-else
-                        v-html="format(Normalization[level][normalization.selected](get_output_value(key,Global)))"
+                        v-html="format(Normalization[level][normalization.selected](key))"
                       ></div>
                     </div>
                   </td>
@@ -523,10 +541,10 @@ let tier_b=new Vue({
                   <!--sum of substges-->
                   <td v-if="sublevel">
                     <div class=number v-if="normalization.selected=='kgCO2eq'">
-                      {{format(get_sum_of_substages(key))}}
+                      {{format(get_sum_of_substages(level,sublevel,key))}}
                     </div>
                     <div class=number v-if="normalization.selected=='kgCO2eq/year'">
-                      {{format(get_sum_of_substages(key)/Global.Years())}}
+                      {{format(get_sum_of_substages(level,sublevel,key)/Global.Years())}}
                     </div>
                     <div class=number v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
                       [TODO]
@@ -549,12 +567,19 @@ let tier_b=new Vue({
               </p>
             </div>
             <table style="width:100%">
+              <thead :style="{background:'transparent'}">
+                <tr>
+                  <th></th>
+                  <th style="text-align:right">Value</th>
+                  <th style="text-align:left">Unit</th>
+                </tr>
+              </thead>
               <tbody>
                 <tr v-for="key in get_current_stage().equations"
                   v-if="
                     (key!='TotalGHG' && key.search('_KPI_GHG')==-1)
                     &&
-                    Questions.is_hidden(key, Global)==false
+                    Questions.is_hidden(key, substage)==false
                   "
                 >
                   <td
@@ -571,11 +596,11 @@ let tier_b=new Vue({
 
                   <!--output value-->
                   <td
-                    @mousemove="caption.show($event, Formulas.prettify(Global[key]))"
+                    @mousemove="caption.show($event, Formulas.prettify(get_current_stage()[key]))"
                     @mouseout="caption.hide()"
                     style="text-align:right"
                   >
-                    <div v-html="format(Global[key]()/Units.multiplier(key))"></div>
+                    <div v-html="format(get_current_stage()[key]()/Units.multiplier(key))"></div>
 
                     <!--benchmark if any-->
                     <div v-if="Benchmarks[key]">
@@ -652,7 +677,7 @@ let tier_b=new Vue({
       }
 
       /*old*/
-      #tier_b .warning {
+      #tier_b [warning] {
         background:yellow;
         color:black;
         padding:2px 4px;

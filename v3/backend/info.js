@@ -8,6 +8,7 @@
 
 let Info={
   //IPCC 2019
+  ws_serv_pop:{magnitude:"People",unit:"people"},
   ww_serv_pop:{magnitude:"People",unit:"people"},
 
   wwd_KPI_GHG_disc:{magnitude:"Mass",unit:"kg CO2eq"},
@@ -392,23 +393,40 @@ let Info={
 	/* +================+ */
 	/* | Service levels | */
 	/* +================+ */
-	//Water Supply
-	ws_SL_serv_pop:{magnitude:"Percentage",unit:"%"},
-	ws_SL_auth_con:{magnitude:"Volume/inhab/time",unit:"L/serv.pop./day"},
-	ws_SL_nrg_cost:{magnitude:"Percentage",unit:"%"},
+  ws_SL_nrg_cost:{magnitude:"Percentage",unit:"%"},
+  ww_SL_nrg_cost:{magnitude:"Percentage",unit:"%"},
+  wsa_SL_nrg_cost:{magnitude:"Percentage",unit:"%"},
+  wst_SL_nrg_cost:{magnitude:"Percentage",unit:"%"},
+  wsd_SL_nrg_cost:{magnitude:"Percentage",unit:"%"},
+  wwc_SL_nrg_cost:{magnitude:"Percentage",unit:"%"},
+  wwt_SL_nrg_cost:{magnitude:"Percentage",unit:"%"},
+  wwo_SL_nrg_cost:{magnitude:"Percentage",unit:"%"},
+  wsa_nrg_cost:{magnitude:"Currency",unit:"USD"},
+  wst_nrg_cost:{magnitude:"Currency",unit:"USD"},
+  wsd_nrg_cost:{magnitude:"Currency",unit:"USD"},
+  wwc_nrg_cost:{magnitude:"Currency",unit:"USD"},
+  wwt_nrg_cost:{magnitude:"Currency",unit:"USD"},
+  wwo_nrg_cost:{magnitude:"Currency",unit:"USD"},
+  wsa_run_cost:{magnitude:"Currency",unit:"USD"},
+  wst_run_cost:{magnitude:"Currency",unit:"USD"},
+  wsd_run_cost:{magnitude:"Currency",unit:"USD"},
+  wwc_run_cost:{magnitude:"Currency",unit:"USD"},
+  wwt_run_cost:{magnitude:"Currency",unit:"USD"},
+  wwo_run_cost:{magnitude:"Currency",unit:"USD"},
 
-	//Wastewater
-	ww_SL_serv_pop:{magnitude:"Percentage",unit:"%"},
+	ws_SL_serv_pop:{magnitude:"Percentage",unit:"%"},
+  ww_SL_serv_pop:{magnitude:"Percentage",unit:"%"},
+
 	ww_SL_treat_m3:{magnitude:"Percentage",unit:"%"},
-	ww_SL_nrg_cost:{magnitude:"Percentage",unit:"%"},
+  ws_SL_auth_con:{magnitude:"Volume/inhab/time",unit:"L/serv.pop./day"},
 
 	//L1 Water Supply
 	ws_resi_pop:{magnitude:"People", unit:"people"},
 	wsd_serv_pop:{magnitude:"People", unit:"people"},
 	ws_nrg_cons:{magnitude:"Energy",unit:"kWh"},
 	ws_vol_fuel:{magnitude:"Volume",unit:"L"},
-	ws_nrg_cost:{magnitude:"Currency",unit:"USD"},
-	ws_run_cost:{magnitude:"Currency",unit:"USD"},
+
+
 	ws_KPI_GHG :{magnitude:"Mass",unit:"kg CO2eq"},
 
 	//L1 Wastewater

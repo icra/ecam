@@ -4,12 +4,15 @@ let stages_menu=new Vue({
     visible                : false,
     current_view           : null,
     show_substages_summary : true,
+
+    //frontend
     caption,
+
+    //backend
     Global,
     Info,
     Structure,
     Languages,
-    Substage,
   },
 
   methods:{
@@ -22,30 +25,42 @@ let stages_menu=new Vue({
     //frontend effect to mark selected stage
     is_tier_b_selected(level, sublevel){
       if(this.current_view!='tier_b') return false;
-      if(tier_b.Global.constructor==Substage) return false;
       if(level==tier_b.level && sublevel==tier_b.sublevel){
         return true;
       }
+      return false;
     },
 
     is_substage_selected(substage){
       if(this.current_view!='tier_b') return false;
-      return substage==tier_b.Global;
+      return substage==tier_b.substage;
     },
 
     add_substage(level,sublevel){
       if(!level) return;
       if(!sublevel) return;
-      let ss = new Substage(level, sublevel);
-      this.Global[level][sublevel].substages.push(ss);
+      let stage = Structure.find(s=>s.level==level&&s.sublevel==sublevel);
+      let name = `${stage.sublevel} ${this.Global[level][sublevel].length+1}`;
+      let ss = new stage.class(name);
+      this.Global[level][sublevel].push(ss);
+      go_to_substage(ss);
     }
   },
 
   template:`
     <!--linear menu COMPONENT-->
     <div id=stages_menu v-if="visible && Languages.ready">
-      <div class=flex style="justify-content:center;padding:10px">
-        <div style="width:90%">
+      <div style="padding:2px">
+        <!--checkbox show substages-->
+        <div style="text-align:center">
+          <label style="user-select:none;font-size:larger">
+            <input type=checkbox v-model="show_substages_summary">
+            show substages
+          </label>
+        </div>
+
+        <!--stages table-->
+        <div>
           <table style="width:100%;">
             <!--level 1 and level2-->
             <tr>
@@ -80,12 +95,12 @@ let stages_menu=new Vue({
 
             <tr v-if="show_substages_summary">
               <td v-for="s in Structure.filter(s=>s.sublevel)" style="vertical-align:top">
-                <div v-if="Global[s.level][s.sublevel].substages.length==0" style="text-align:center">
+                <div v-if="Global[s.level][s.sublevel].length==0" style="text-align:center">
                   <small style="color:#666">~no stages</small>
                 </div>
                 <div
                   v-if="s.sublevel"
-                  v-for="ss,i in Global[s.level][s.sublevel].substages"
+                  v-for="ss,i in Global[s.level][s.sublevel]"
                   style="padding:5px 0;"
                 >
                   <div
@@ -102,38 +117,42 @@ let stages_menu=new Vue({
                       </a>
                     </div>
                     <!--ss emissions-->
-                    <div class=number>
-                      <small>{{format(ss.TotalGHG())}}</small>
+                    <div class=number style="font-size:smaller">
+                      <span>{{format(ss[s.prefix+'_KPI_GHG']())}}</span>
+                      <span class=unit>kgCO<sub>2</sub>eq</span>
                     </div>
                   </div>
-                </div>
-                <!--btn add substage-->
-                <div>
-                  <button
-                    style="width:100%;font-size:smaller;"
-                    @click="add_substage(s.level,s.sublevel)"
-                    v-html="'add stage'"
-                  ></button>
                 </div>
               </td>
             </tr>
 
             <tr v-if="show_substages_summary">
               <td v-for="s in Structure.filter(s=>s.sublevel)">
-                <div style="font-size:smaller;text-align:right">
-                  <span v-html="format(get_sum_of_substages(s.prefix+'_KPI_GHG'))"></span>
+                <div class=flex style="justify-content:space-between;font-size:smaller;">
+                  <div>
+                    Total {{s.sublevel}}
+                  </div>
+                  <div>
+                    <span v-html="format(get_sum_of_substages(s.level, s.sublevel, s.prefix+'_KPI_GHG'))"></span>
+                    <span class=unit>kgCO<sub>2</sub>eq</span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!--btn add substage-->
+            <tr v-if="show_substages_summary">
+              <td v-for="s in Structure.filter(s=>s.sublevel)">
+                <div>
+                  <button
+                    style="width:100%;font-size:smaller;"
+                    @click="add_substage(s.level,s.sublevel)"
+                    v-html="'add substage'"
+                  ></button>
                 </div>
               </td>
             </tr>
           </table>
-        </div>
-
-        <!--checkbox show substages-->
-        <div>
-          <label style="user-select:none">
-            <input type=checkbox v-model="show_substages_summary">
-            substages
-          </label>
         </div>
       </div>
     </div>

@@ -105,11 +105,6 @@ let ecam={
   test(){
     //TODO test all languages also
 
-    //all questions to "yes"
-    Object.keys(Questions).forEach(key=>{
-      Global.Configuration.Questions[key] = 1;
-    });
-
     //prepare clicking everywhere
     let _this    = this;
     let timer    = 1;   //seconds
@@ -128,7 +123,7 @@ let ecam={
     //visit every variable
     Structure.forEach(s=>{
       get_input_codes(s.level, s.sublevel).concat(
-        get_equation_codes(s.level, s.sublevel)
+        get_output_codes(s.level, s.sublevel)
       ).forEach(code=>{
         setTimeout(function(){variable.view(code)}, interval*timer++);
       });

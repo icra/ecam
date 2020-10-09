@@ -16,16 +16,24 @@ let Formulas={
     let matches=[];
 
     let all_input_codes=[];
+    let all_output_codes = Object.getOwnPropertyNames(Ecam.prototype);
     Structure.concat({level:"General"}).forEach(s=>{
-      let stage = s.sublevel ? Global[s.level][s.sublevel] : Global[s.level];
+      let stage = s.sublevel ? new s.class() : Global[s.level];
       Object.keys(stage).forEach(key=>{
         if(typeof(stage[key])=='number'){
           all_input_codes.push(key);
         }
       });
+
+      stage = s.sublevel ? s.class.prototype : Global[s.level];
+
+      Object.getOwnPropertyNames(stage).forEach(key=>{
+        if(typeof(stage[key])=='function'){
+          all_output_codes.push(key);
+        }
+      });
     });
-    let all_output_codes = Object.getOwnPropertyNames(Ecam.prototype);
-    let all_codes        = all_input_codes.concat(all_output_codes);
+    let all_codes = all_input_codes.concat(all_output_codes);
 
     //concatenate constants and variables and iterate keys
     Object.keys(Cts).concat(all_codes).forEach(field=>{
@@ -49,25 +57,38 @@ let Formulas={
     let reg=new RegExp('\\W'+id+"\\W");
 
     //get arrays of strings corresponding to codes of outputs
-    let all_outputs     = Object.getOwnPropertyNames(Ecam.prototype);
-    let all_estimations = Object.keys(Estimations);
-    let all_benchmarks  = Object.keys(Benchmarks);
-
-    all_outputs.forEach(code=>{
-      if(code=='constructor') return;
-      let match = Global[code].toString().search(reg); //will return -1 if not found
+    Object.getOwnPropertyNames(Ecam.prototype).forEach(code=>{
+      let match = Ecam.prototype[code].toString().search(reg); //will return -1 if not found
       if(match+1) matches.push(code);
     });
 
+    //check all outputs
+    Structure.concat({level:"General"}).forEach(s=>{
+      let stage = s.sublevel ? s.class.prototype : Global[s.level];
+      Object.getOwnPropertyNames(stage).forEach(code=>{
+        if(code=='constructor') return;
+        if(typeof(stage[code])=='function'){
+          let match = stage[code].toString().search(reg); //will return -1 if not found
+          if(match+1) matches.push(code);
+        }
+      });
+    });
+
+    //check all estimations
+    let all_estimations = Object.keys(Estimations);
     all_estimations.forEach(code=>{
       let match = Estimations[code].toString().search(reg); //will return -1 if not found
       if(match+1) matches.push(code);
     });
 
+    //check all benchmarks
+    let all_benchmarks = Object.keys(Benchmarks);
     all_benchmarks.forEach(code=>{
       let match = Benchmarks[code].toString().search(reg); //will return -1 if not found
       if(match+1) matches.push(code);
     });
+
+    matches = matches.filter(m=>m!='constructor');
 
     return Array.from(new Set(matches));
   },

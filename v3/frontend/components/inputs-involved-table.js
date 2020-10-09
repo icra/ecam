@@ -34,9 +34,9 @@ Vue.component('inputs_involved_table',{
 
           <!--input involved value-->
           <td colspan=2>
-            {{
-              Tables.get_row(match, get_current_stage(match,Global)[match]).name
-            }}
+            TODO
+            -
+            Tables.get_row(match, get_current_stage(match,Global)[match]).name
           </td>
         </tr>
 
@@ -48,11 +48,19 @@ Vue.component('inputs_involved_table',{
 
           <td 
             v-if="get_variable_type(match)=='input'" 
-            v-html="format(get_current_stage(match,Global)[match])">
+          >
+            TODO
+            -
+            format(get_current_stage(match,Global)[match])
           </td>
           <td 
             v-if="get_variable_type(match)=='output'" 
-            v-html="format(get_output_value(match,Global))">
+          >
+            <div>
+              TODO
+              -
+              format(get_output_value(match,Global))
+            </div>
           </td>
 
           <div v-if="get_variable_type(match)=='input'">
@@ -89,7 +97,6 @@ Vue.component('inputs_involved_table',{
     format,
     get_level_color,
     locate_variable,
-    get_current_stage,
     get_variable_type,
     get_output_value,
     get_base_unit,

@@ -42,7 +42,7 @@ let summary_ghg = new Vue({
       }
     },
 
-    put_detailed_ghg_sources_on_caption(level, sublevel){
+    put_detailed_ghg_sources_on_caption(level, sublevel){ //TODO
       //get #caption element
       let cap = document.querySelector('#caption');
       cap.innerHTML ="";
@@ -59,7 +59,7 @@ let summary_ghg = new Vue({
       let stage = this.Global[level][sublevel];
 
       //if no emission, end
-      if(!this.Global[code]()){
+      if(!this.stage[code]()){
         div.innerHTML += "<div><small>~"+translate('No emissions')+"</small></div>";
         return;
       }
@@ -75,7 +75,7 @@ let summary_ghg = new Vue({
         if(field.search('_KPI_GHG_')==-1) return;
 
         //get value
-        let value = this.Global[field](); //kgCO2eq
+        let value = this.stage[field](); //kgCO2eq
         if(!value) return;
 
         //create new row
@@ -143,15 +143,7 @@ let summary_ghg = new Vue({
                 ">
                   <div>
                     <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
-                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="format(Global[l1.prefix+'_KPI_GHG']())"></div>
-                  </div>
-                  <div>
-                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq Indirect</div>
-                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="0"></div>
-                  </div>
-                  <div>
-                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq Direct</div>
-                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="0"></div>
+                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="format(Global[l1.level][l1.prefix+'_KPI_GHG']())"></div>
                   </div>
                 </div>
               </td>
@@ -160,7 +152,7 @@ let summary_ghg = new Vue({
               <td :style="{background:'inherit',textAlign:'center'}">
                 <div style="color:white">kWh</div>
                 <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color, margin:'auto'}">
-                  {{format(Global[l1.prefix+'_nrg_cons']())}}
+                  {{format(Global[l1.level][l1.prefix+'_nrg_cons']())}}
                 </div>
               </td>
             </tr>
@@ -168,7 +160,6 @@ let summary_ghg = new Vue({
             <!--level 2-->
             <tr v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))"
               v-if="unfolded_levels.indexOf(l1.level)>-1"
-              @mouseenter="put_detailed_ghg_sources_on_caption(l2.level, l2.sublevel)"
               @mousemove="caption.show($event)"
               @mouseout="caption.hide()"
             >
@@ -197,15 +188,7 @@ let summary_ghg = new Vue({
                 >
                   <div>
                     <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
-                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="format(Global[l2.prefix+'_KPI_GHG']())"></div>
-                  </div>
-                  <div>
-                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq Indirect</div>
-                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="0"></div>
-                  </div>
-                  <div>
-                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq Direct</div>
-                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="0"></div>
+                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_KPI_GHG']()))"></div>
                   </div>
                 </div>
               </td>
@@ -214,7 +197,7 @@ let summary_ghg = new Vue({
               <td :style="{background:'white', color:l1.color, textAlign:'center'}">
                 <div style="color:black">kWh</div>
                 <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color, margin:'auto'}">
-                  <div v-html="format(Global[l2.level][l2.sublevel][l2.prefix+'_nrg_cons'])"></div>
+                  <div v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_nrg_cons']))"></div>
                 </div>
               </td>
             </tr>
@@ -244,14 +227,6 @@ let summary_ghg = new Vue({
                     <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
                     <div class=number_placeholder v-html="format(Global.TotalGHG())"></div>
                   </div>
-                  <div>
-                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq Indirect</div>
-                    <div class=number_placeholder v-html="0"></div>
-                  </div>
-                  <div>
-                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq Direct</div>
-                    <div class=number_placeholder v-html="0"></div>
-                  </div>
                 </div>
               </td>
 
@@ -265,43 +240,6 @@ let summary_ghg = new Vue({
             </tr>
           </tbody>
         </table>
-
-        <!--emissions avoided-->
-        <div style="margin:10px 0">
-          <table border=1 style="width:70%;margin:auto">
-            <tr>
-              <th style=background:#bbb :rowspan="ghg_avoided.length+1">
-                <a @click="variable.view('ww_GHG_avoided')" style="color:white" title="ww_GHG_avoided">
-                  {{ translate("ww_GHG_avoided_descr") }}
-                </a>
-                <div>
-                  <span v-html="format( Global.ww_GHG_avoided() )">
-                  </span>
-                </div>
-                <small>
-                  kgCO<sub>2</sub>eq
-                </small>
-              </th>
-            </tr>
-            <tr v-for="obj in ghg_avoided">
-              <td>
-                <a @click="variable.view(obj.code)" :title="obj.code">
-                  {{ translate(obj.code+'_descr') }}
-                  <span v-if="obj.code.search('fs')==0">
-                    (FSM)
-                  </span>
-                </a>
-              </td>
-              <td>
-                <span v-html="format( Global[obj.code]() )">
-                </span>
-              </td>
-            </tr>
-          </table>
-          <div style="font-size:smaller;text-align:center">
-            {{ translate('Note: the emissions above have not been subtracted in the totals presented in the GHG emissions summary')}}
-          </div>
-        </div>
       </div>
     </div>
   `,

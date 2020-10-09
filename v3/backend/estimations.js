@@ -1,59 +1,55 @@
 /* estimations: inputs with equations */
 //they should be moved inside the Ecam global class for consistency
 let Estimations={
-  //200-300L of generated wastewater per person per day to m3
-  ww_vol_gene(){return 0.2*Global.Waste.ww_resi_pop*Global.Days();},
-
+  //ww
+    //200L of generated wastewater per person per day
+    ww_vol_gene(stage){return 0.2*stage.ww_resi_pop*Global.Days();},
   //wwc
-  wwc_vol_coll(){return 0.2*Global.Waste.Collection.wwc_conn_pop*Global.Days();},
-  wwc_vol_coll_unt(){return Global.Waste.Collection.wwc_vol_coll - Global.Waste.Collection.wwc_vol_coll_tre;},
-  wwc_vol_conv(){return Global.Waste.Collection.wwc_vol_coll;},
-
+    wwc_vol_coll    (substage){return 0.2*substage.wwc_conn_pop*Global.Days();},
+    wwc_vol_coll_unt(substage){return substage.wwc_vol_coll - substage.wwc_vol_coll_tre;},
+    wwc_vol_conv    (substage){return substage.wwc_vol_coll - substage.wwc_vol_coll_unt;},
   //wwt
-  wwt_n2o_efac(){return 3.2},
-  wwd_n2o_efac(){return 3.2},
-  wwt_slu_lf_TVS(){
-    let slu_disp=Tables.get_row('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);
-    return slu_disp.TVS;
-  },
-  wwt_slu_la_N_cont(){
-    let slu_disp=Tables.get_row('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);
-    return slu_disp.la_N_cont;
-  },
-  wwt_slu_lf_N_cont(){
-    let slu_disp=Tables.get_row('wwt_slu_disp',Global.Waste.Treatment.wwt_slu_disp);
-    return slu_disp.la_N_cont;
-  },
-  wwt_biog_pro(){return Global.Waste.Treatment.wwt_serv_pop*Global.General.bod_pday*Global.Days()*Cts.ct_bod_kg.value*Cts.ct_biog_g.value/1000;},
-  wwt_biog_fla(){
-    if(Global.Configuration.Questions.wwt_valorizing_biogas){
-      return 0;
-    }else{
-      return Global.Waste.Treatment.wwt_biog_pro;
-    }
-  },
-  wwt_biog_val(){return Global.Waste.Treatment.wwt_biog_pro - Global.Waste.Treatment.wwt_biog_fla},
-  wwt_ch4_biog(){return 59},
-  wwt_bod_infl(){
-    let P   = Global.wwt.wwt_serv_pop;
-    let BOD = Global.General.bod_pday;
-    return P * BOD * 0.001 * Global.Days();
-  },
-  wwt_mass_slu(){
-    let b=1;
-    if(Global.Configuration.Questions.wwt_producing_biogas){
-      b=0.6;
-    }
-    return b*0.55*Global.General.bod_pday*Global.wwt.wwt_serv_pop*0.9*1e-3*1.176*Global.Days();
-  },
-  wwt_dryw_slu(){ return 0.04*Global.Waste.Treatment.wwt_mass_slu},
-  wwt_temp_inc(){ return 1023},
-
+    wwt_n2o_efac(substage){return 3.2},
+    wwd_n2o_efac(substage){return 3.2},
+    wwt_slu_lf_TVS(substage){
+      let slu_disp=Tables.get_row('wwt_slu_disp',substage.wwt_slu_disp);
+      return slu_disp.TVS;
+    },
+    wwt_slu_la_N_cont(substage){
+      let slu_disp=Tables.get_row('wwt_slu_disp',substage.wwt_slu_disp);
+      return slu_disp.la_N_cont;
+    },
+    wwt_slu_lf_N_cont(substage){
+      let slu_disp=Tables.get_row('wwt_slu_disp',substage.wwt_slu_disp);
+      return slu_disp.la_N_cont;
+    },
+    wwt_biog_pro(substage){return substage.wwt_serv_pop*Global.General.bod_pday*Global.Days()*Cts.ct_bod_kg.value*Cts.ct_biog_g.value/1000;},
+    wwt_biog_fla(substage){
+      if(substage.Configuration.Questions.wwt_valorizing_biogas){
+        return 0;
+      }else{
+        return substage.wwt_biog_pro;
+      }
+    },
+    wwt_biog_val(substage){return substage.wwt_biog_pro - substage.wwt_biog_fla},
+    wwt_ch4_biog(substage){return 59},
+    wwt_bod_infl(substage){
+      let P   = substage.wwt_serv_pop;
+      let BOD = Global.General.bod_pday;
+      return P * BOD * 0.001 * Global.Days();
+    },
+    wwt_mass_slu(substage){
+      let b=1;
+      if(substage.Configuration.Questions.wwt_producing_biogas){
+        b=0.6;
+      }
+      return b*0.55*Global.General.bod_pday*substage.wwt_serv_pop*0.9*1e-3*1.176*Global.Days();
+    },
+    wwt_dryw_slu(substage){ return 0.04*substage.wwt_mass_slu},
+    wwt_temp_inc(substage){ return 1023},
   //wwo
-  wwo_vol_unco(){return 0.2*Global.Waste.Onsite.wwo_onsi_pop*Global.Days()},
-  wwo_vol_unco_unt(){return Global.Waste.Onsite.wwo_vol_unco - Global.Waste.Onsite.wwo_vol_unco_ons;},
-  wwo_open_pop(){return Global.Waste.ww_resi_pop - Global.Waste.Collection.wwc_conn_pop - Global.Waste.Onsite.wwo_onsi_pop;},
-
+    wwo_vol_unco(substage){return 0.2*substage.wwo_onsi_pop*Global.Days()},
+    wwo_vol_unco_unt(substage){return substage.wwo_vol_unco - substage.wwo_vol_unco_ons;},
   //wwo
   /*
   wwo_bod_infl(){

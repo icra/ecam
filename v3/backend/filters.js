@@ -108,10 +108,21 @@ let Filters = {
   "wsd_nrg_cons",       //variable
   "wwc_nrg_cons",       //variable
   "wwt_nrg_cons",       //variable
-  "wwd_nrg_cons",       //variable
   "wwo_nrg_cons",       //variable
-  "fst_nrg_cons",       //variable
-  "fsr_nrg_cons",       //variable
+
+  "wsa_nrg_cost",
+  "wst_nrg_cost",
+  "wsd_nrg_cost",
+  "wwc_nrg_cost",
+  "wwt_nrg_cost",
+  "wwo_nrg_cost",
+
+  "wsa_run_cost",
+  "wst_run_cost",
+  "wsd_run_cost",
+  "wwc_run_cost",
+  "wwt_run_cost",
+  "wwo_run_cost",
 
   "wsa_pumping", //question
   "wst_pumping", //question

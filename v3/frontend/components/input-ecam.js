@@ -20,14 +20,14 @@ Vue.component('input_ecam',{
           <!--recommendation button-->
           <div v-if="Estimations[code]">
             <button
-              @click="current_stage[code] = Estimations[code]()"
+              @click="current_stage[code] = Estimations[code](current_stage)"
               @mousemove="caption.show($event, \`Estimation formula:<br>\$\{Formulas.prettify(Estimations[code])\}\`)"
               @mouseout="caption.hide()"
-              :disabled="isNaN(Estimations[code]())"
+              :disabled="isNaN(Estimations[code](current_stage))"
               style="font-size:smaller"
             >
               Estimation:
-              <span v-html="format(Estimations[code]()/Units.multiplier(code))"></span>
+              <span v-html="format(Estimations[code](current_stage)/Units.multiplier(code))"></span>
               <span v-html="get_current_unit(code,Global).prettify()"></span>
             </button>
           </div>

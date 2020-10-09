@@ -18,7 +18,7 @@ let report = new Vue({
         let level = translate(s.level);
         let code  = s.prefix+'_KPI_GHG';
         let descr = translate(code+'_descr');
-        let value = Global[code]();
+        let value = Global[level][code]();
         let unit  = Info[code].unit;
         return {level,code,descr,value,unit};
       });
@@ -31,10 +31,7 @@ let report = new Vue({
         Global.wsd_KPI_GHG_elec()+
         Global.wwc_KPI_GHG_elec()+
         Global.wwt_KPI_GHG_elec()+
-        Global.wwd_KPI_GHG_elec()+
-        Global.fsc_KPI_GHG_elec()+
-        Global.fst_KPI_GHG_elec()+
-        Global.fsr_KPI_GHG_elec()+
+        Global.wwo_KPI_GHG_elec()+
       0;
 
       let co2=0+
@@ -162,7 +159,7 @@ let report = new Vue({
         Report (under development: placeholder code for graphs, replacement for tier A in v2.2)
       </h1>
 
-      <ul>
+      <ul v-if=false>
         <li>
           <details>
             <summary>

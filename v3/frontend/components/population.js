@@ -7,41 +7,42 @@ let population = new Vue({
 
     Global,
     Structure,
+    Languages,
+
+    population:[ //population structure
+      {level:'Water', sublevel:false,          code:'ws_resi_pop'},
+      {level:'Water', sublevel:"Distribution", code:'wsd_serv_pop'},
+
+      {level:'Waste', sublevel:false,          code:'ww_resi_pop'},
+      {level:'Waste', sublevel:"Collection",   code:'wwc_conn_pop'},
+      {level:'Waste', sublevel:"Treatment",    code:'wwt_serv_pop'},
+      {level:'Waste', sublevel:"Onsite",       code:'wwo_onsi_pop'},
+      {level:'Waste', sublevel:"Onsite",       code:'wwo_open_pop'},
+    ],
   },
 
   methods:{
     translate,
     format,
-    get_population(){ //get population structure
-      return [
-        {level:'Water', stage:this.Global.Water,              code:'ws_resi_pop'},
-        {level:'Water', stage:this.Global.Water.Distribution, code:'wsd_serv_pop'},
-        {level:'Waste', stage:this.Global.Waste,              code:'ww_resi_pop'},
-        {level:'Waste', stage:this.Global.Waste.Collection,   code:'wwc_conn_pop'},
-        {level:'Waste', stage:this.Global.Waste.Treatment,    code:'wwt_serv_pop'},
-        {level:'Waste', stage:this.Global.Waste.Onsite,       code:'wwo_onsi_pop'},
-        {level:'Waste', stage:this.Global.Waste.Onsite,       code:'wwo_open_pop'},
-      ];
-    },
-    focus_input(pop, event){
+    focus_input(stage, code, event){
       let input = event.target;
-      input.value = pop.stage[pop.code]
+      input.value = stage[code]
       input.select();
     },
-    blur_input(pop, event){
+    blur_input(stage, code, event){
       let input = event.target;
       let value = parseFloat(input.value) || 0;
-      pop.stage[pop.code] = value;
-      input.value=format(pop.stage[pop.code]);
+      stage[code] = value;
+      input.value=format(stage[code]);
     },
   },
 
   template:`
-    <div id=population v-if="visible">
+    <div id=population v-if="visible && Languages.ready">
       <h1 style="text-align:center">{{translate('population')}}</h1>
 
       <h4 style="text-align:center;margin:0;margin-bottom:1em">
-        {{translate("Enter the population living at each level of your system")}}
+        Population living at each stage of the urban water cycle
       </h4>
 
       <table style="font-size:16px;margin:auto;width:50%">
@@ -52,22 +53,44 @@ let population = new Vue({
               {{translate(l1.level)}}
             </th>
           </tr>
-          <tr v-for="pop in get_population().filter(p=>p.level==l1.level)">
+
+          <tr v-for="pop in population.filter(p=>p.level==l1.level)">
             <td
               @mousemove="caption.show($event, translate(pop.code+'_expla'))"
               @mouseout="caption.hide()"
-            >
-              {{translate(pop.code+'_descr')}}
+            >{{translate(pop.code+'_descr')}}
             </td>
+
             <td class=input_container>
-              <input
-                :value="format(pop.stage[pop.code])"
-                @focus="focus_input(pop, $event)"
-                @blur="blur_input(pop, $event)"
-                :tabindex="get_population().indexOf(pop)+1"
-                style="text-align:right"
-              >
+              <div v-if="!pop.sublevel">
+                <input
+                  :value="format(Global[pop.level][pop.code])"
+                  @focus="focus_input(Global[pop.level], pop.code, $event)"
+                  @blur =" blur_input(Global[pop.level], pop.code, $event)"
+                  :tabindex="population.indexOf(pop)+1"
+                  style="text-align:right"
+                >
+              </div>
+              <div v-else>
+                <div v-for="ss in Global[pop.level][pop.sublevel]">
+                  <input
+                    :value="format(ss[pop.code])"
+                    @focus="focus_input(ss, pop.code, $event)"
+                    @blur =" blur_input(ss, pop.code, $event)"
+                    :tabindex="population.indexOf(pop)+1"
+                    style="text-align:right"
+                    :title="ss.name"
+                  >
+                </div>
+                <div v-if="Global[pop.level][pop.sublevel].length>1" style="background:white;font-size:smaller">
+                  total:
+                  {{
+                    Global[pop.level][pop.sublevel].map(s=>s[pop.code]).sum()
+                  }}
+                </div>
+              </div>
             </td>
+
             <td><small>{{translate('people')}}</small></td>
           </tr>
         </tbody>

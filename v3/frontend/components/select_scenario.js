@@ -36,7 +36,7 @@ let select_scenario=new Vue({
 
     get_variables_and_values(level, sublevel){
       let input_codes  = get_input_codes(   level, sublevel);
-      let output_codes = get_equation_codes(level, sublevel);
+      let output_codes = get_output_codes(level, sublevel);
 
       let inputs=[]; //code, value
       input_codes.forEach(code=>{
@@ -66,7 +66,7 @@ let select_scenario=new Vue({
     },
 
     get_input_codes,
-    get_equation_codes,
+    get_output_codes,
     get_variable_type,
     get_level_color,
     get_base_unit,

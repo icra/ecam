@@ -23,7 +23,7 @@ let gwp_table = new Vue({
 
       <table style="margin:auto">
         <tr>
-          <th colspan=5>{{translate('gwp_title_table')}}</th>
+          <th colspan=6>{{translate('gwp_title_table')}}</th>
         </tr>
         <tr>
           <th>{{translate('Report')}}</th>
@@ -31,14 +31,16 @@ let gwp_table = new Vue({
           <th>CH<sub>4</sub> (CO<sub>2</sub> {{translate('equivalents')}})</th>
           <th>N<sub>2</sub>O (CO<sub>2</sub> {{translate('equivalents')}})</th>
           <th>{{translate('Comments')}}</th>
+          <th>Select</th>
         </tr>
         <tr v-for="rep,i in GWP_reports"
-          :class="Global.Configuration.Selected.gwp_reports_index==i ? 'selected':''">
+          :class="Global.General.gwp_reports_index==i ? 'selected':''">
           <td><b>{{rep.report}}</b></td>
           <td class=number>1</td>
           <td class=number>{{rep.ct_ch4_eq}}</td>
           <td class=number>{{rep.ct_n2o_eq}}</td>
           <td><small>{{rep.comment}}</small></td>
+          <td><button @click="Global.General.gwp_reports_index=i">select</button></td>
         </tr>
       </table>
     </div>
