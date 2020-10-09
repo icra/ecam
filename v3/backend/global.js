@@ -11,7 +11,7 @@ Array.prototype.sum=function(){return this.reduce((p,c)=>(p+c),0)};
 class Ecam{
   constructor(){
     this.General={
-      version              : "3.0.0",
+      version              : "3.0.0-development",
       Name                 : `Untitled system${Scenarios.length ? (' '+(1+Scenarios.length)):''}`,
       AssessmentPeriodStart: "2020-01-01",
       AssessmentPeriodEnd  : "2020-12-31",
