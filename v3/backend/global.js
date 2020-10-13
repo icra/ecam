@@ -23,12 +23,6 @@ class Ecam{
       bod_pday             : 0,     //BOD5 (g/person/day)
       bod_pday_fs          : 0,     //BOD5 in faecal sludge (g/person/day)
       gwp_reports_index    : 0,     //index of selected GWP report
-      equations:[
-        "TotalGHG",
-        "TotalNRG",
-        "Days",
-        "Years",
-      ],
     };
 
     this.Water={     //Water supply stages
@@ -494,8 +488,8 @@ class Waste_Collection extends Substage{
     this.name=name;
     this.wwc_conn_pop     = 0; //population connected to sewers
     this.wwc_vol_coll     = 0; //volume of collected wastewater
-    this.wwc_vol_coll_tre = 0; //volume of collected wastewater conveyed to treatment
     this.wwc_vol_coll_unt = 0; //volume of collected wastewater untreated (CSO)
+    this.wwc_vol_coll_tre = 0; //volume of collected wastewater conveyed to treatment
     this.wwc_ch4_efac_cso = 0.3; //emission factor for collected untreated wastewater
     this.wwc_ch4_efac_col = 0; //emission factor for collected wastewater
     this.wwc_fuel_typ     = 0;
@@ -539,7 +533,7 @@ class Waste_Collection extends Substage{
     wwc_KPI_GHG(){
       return this.wwc_KPI_GHG_elec()
         +this.wwc_KPI_GHG_fuel().total
-        +this.wwc_KPI_GHG_cso()
+        +this.wwc_KPI_GHG_cso().total
         +this.wwc_KPI_GHG_col();
       }
     wwc_KPI_GHG_elec(){return this.wwc_nrg_cons*Global.General.conv_kwh_co2}
@@ -553,9 +547,11 @@ class Waste_Collection extends Substage{
       return {total,co2,ch4,n2o};
     }
     wwc_KPI_GHG_cso(){
-      let pop = this.wwc_conn_pop*(this.wwc_vol_coll_unt/this.wwc_vol_coll||0);
+      let pop = this.wwc_conn_pop*(this.wwc_vol_coll_unt/this.wwc_vol_coll)||0;
       let ch4 = pop*Global.General.bod_pday/1000*Global.Days()*this.wwc_ch4_efac_cso*Cts.ct_ch4_eq.value;
-      return ch4;
+      let n2o = pop*Global.General.prot_con*Global.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let total = ch4+n2o;
+      return {total,ch4,n2o};
     }
     wwc_KPI_GHG_col(){
       let pop = this.wwc_conn_pop*(this.wwc_vol_coll_tre/this.wwc_vol_coll||0);
@@ -722,7 +718,7 @@ class Waste_Treatment extends Substage{
     }
     wwt_KPI_GHG_tre(){
       let ch4   = (this.wwt_bod_infl-this.wwt_bod_slud-this.wwt_bod_effl)*this.wwt_ch4_efac*Cts.ct_ch4_eq.value;
-      let n2o   = this.wwt_serv_pop*Cts.ct_fac_ic.value*this.wwt_n2o_efac*Global.Years()*Cts.ct_n2o_eq.value*1e-3;
+      let n2o   = this.wwt_serv_pop*this.wwt_n2o_efac/1000*Global.Years()*Cts.ct_n2o_eq.value*Cts.ct_fac_ic.value;
       let total = ch4+n2o;
       return {total,ch4,n2o};
     }
@@ -1064,15 +1060,19 @@ class Waste_Onsite extends Substage{
     }
     //open defecation
     wwo_KPI_GHG_unt_opd(){
-      let pop = this.wwo_open_pop;
-      let ch4 = pop*Global.General.bod_pday/1000*Global.Days()*this.wwo_ch4_efac_unt*Cts.ct_ch4_eq.value;
-      return ch4;
+      let pop   = this.wwo_open_pop;
+      let ch4   = pop*Global.General.bod_pday/1000*Global.Days()*this.wwo_ch4_efac_unt*Cts.ct_ch4_eq.value;
+      let n2o   = pop*Global.General.prot_con*Global.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let total = ch4+n2o;
+      return {total,ch4,n2o};
     }
     //untreated onsite
     wwo_KPI_GHG_unt_ons(){
-      let pop = this.wwo_onsi_pop*(this.wwo_vol_unco_unt/this.wwo_vol_unco||0);
-      let ch4 = pop*Global.General.bod_pday/1000*Global.Days()*this.wwo_ch4_efac_unt*Cts.ct_ch4_eq.value;
-      return ch4;
+      let pop   = this.wwo_onsi_pop*(this.wwo_vol_unco_unt/this.wwo_vol_unco||0);
+      let ch4   = pop*Global.General.bod_pday_fs/1000*Global.Days()*this.wwo_ch4_efac_unt*Cts.ct_ch4_eq.value;
+      let n2o   = pop*Global.General.prot_con*Global.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let total = ch4+n2o;
+      return {total,ch4,n2o};
     }
     //emissions containment
     wwo_KPI_GHG_cont(){
@@ -1096,7 +1096,7 @@ class Waste_Onsite extends Substage{
     //treatment
     wwo_KPI_GHG_tre(){
       let ch4   = (this.wwo_bod_infl-this.wwo_bod_slud-this.wwo_bod_effl)*this.wwo_ch4_efac_tre*Cts.ct_ch4_eq.value;
-      let n2o   = this.wwo_onsi_pop*Cts.ct_fac_ic.value*this.wwo_n2o_efac_tre*Cts.ct_n2o_eq.value*Global.Years()*1e-3;
+      let n2o   = this.wwo_onsi_pop*Cts.ct_fac_ic.value*this.wwo_n2o_efac_tre/1000*Cts.ct_n2o_eq.value*Global.Years();
       let total = ch4+n2o;
       return {total,ch4,n2o};
     }
@@ -1148,8 +1148,8 @@ class Waste_Onsite extends Substage{
     wwo_KPI_GHG(){
       return this.wwo_KPI_GHG_elec()
             +this.wwo_KPI_GHG_fuel().total
-            +this.wwo_KPI_GHG_unt_opd()
-            +this.wwo_KPI_GHG_unt_ons()
+            +this.wwo_KPI_GHG_unt_opd().total
+            +this.wwo_KPI_GHG_unt_ons().total
             +this.wwo_KPI_GHG_cont()
             +this.wwo_KPI_GHG_trck().total
             +this.wwo_KPI_GHG_biog()

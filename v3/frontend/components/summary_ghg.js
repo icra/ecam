@@ -3,7 +3,7 @@ let summary_ghg = new Vue({
   data:{
     visible:false,
 
-    //avoided ghg - list of variables
+    //avoided ghg - list of variables TODO
     ghg_avoided:[
       {level:'Waste', sublevel:'Treatment', code:'wwt_SL_GHG_avoided'},
       {level:'Waste', sublevel:'Treatment', code:'wwt_wr_C_seq_slu'},
@@ -103,11 +103,6 @@ let summary_ghg = new Vue({
             All GHG emissions and energy consumed are summarized in this page.
           </p>
         </div>
-        <div>
-          <button>AP</button>
-          <button>AP/year</button>
-          <button>AP/year/serv.pop.</button>
-        </div>
       </div>
 
       <!--summary table-->
@@ -143,7 +138,11 @@ let summary_ghg = new Vue({
                 ">
                   <div>
                     <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
-                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="format(Global[l1.level][l1.prefix+'_KPI_GHG']())"></div>
+                    <div
+                      class=number_placeholder
+                      :style="{color:l1.color,borderColor:l1.color}"
+                      v-html="format(Global[l1.level][l1.prefix+'_KPI_GHG']())"
+                    ></div>
                   </div>
                 </div>
               </td>
@@ -151,20 +150,26 @@ let summary_ghg = new Vue({
               <!--level 1 energy consumption-->
               <td :style="{background:'inherit',textAlign:'center'}">
                 <div style="color:white">kWh</div>
-                <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color, margin:'auto'}">
-                  {{format(Global[l1.level][l1.prefix+'_nrg_cons']())}}
-                </div>
+                <div
+                  class=number_placeholder
+                  :style="{color:l1.color, borderColor:l1.color, margin:'auto'}"
+                  v-html="format(Global[l1.level][l1.prefix+'_nrg_cons']())"
+                ></div>
               </td>
             </tr>
 
             <!--level 2-->
-            <tr v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))"
+            <tr
+              v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))"
               v-if="unfolded_levels.indexOf(l1.level)>-1"
-              @mousemove="caption.show($event)"
-              @mouseout="caption.hide()"
             >
               <!--level 2 name and icon-->
-              <td colspan=2 :style="{textAlign:'center',background:'var(--color-level-'+l1.level+'-secondary)'}">
+              <td
+                colspan=2
+                :style="{textAlign:'center',background:'var(--color-level-'+l1.level+'-secondary)'}"
+                @mousemove="caption.show($event, translate(l2.sublevel))"
+                @mouseout="caption.hide()"
+              >
                 <div style="font-size:large">
                   <a @click="go_to(l2.level,l2.sublevel)" :style="{color:l1.color}">
                     {{translate(l2.sublevel)}}
@@ -175,7 +180,7 @@ let summary_ghg = new Vue({
                 </div>
               </td>
 
-              <!--level 2 emissions-->
+              <!--level 2 ghg emissions-->
               <td style=background:white>
                 <div
                   style="
@@ -188,7 +193,11 @@ let summary_ghg = new Vue({
                 >
                   <div>
                     <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
-                    <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color}" v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_KPI_GHG']()))"></div>
+                    <div
+                      class=number_placeholder
+                      :style="{color:l1.color, borderColor:l1.color}"
+                      v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_KPI_GHG']()).sum())">
+                    </div>
                   </div>
                 </div>
               </td>
@@ -196,8 +205,13 @@ let summary_ghg = new Vue({
               <!--level 2 energy consumption-->
               <td :style="{background:'white', color:l1.color, textAlign:'center'}">
                 <div style="color:black">kWh</div>
-                <div class=number_placeholder :style="{color:l1.color, borderColor:l1.color, margin:'auto'}">
-                  <div v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_nrg_cons']))"></div>
+                <div
+                  class=number_placeholder
+                  :style="{color:l1.color,borderColor:l1.color,margin:'auto'}"
+                >
+                  <div
+                    v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_nrg_cons']).sum() )"
+                  ></div>
                 </div>
               </td>
             </tr>

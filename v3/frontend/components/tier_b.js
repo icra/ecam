@@ -3,14 +3,14 @@ let tier_b=new Vue({
   data:{
     visible  : false,
 
-    level                : 'Water',
+    level                : 'General',
     sublevel             : false,
     substage             : null,
     are_you_editing_name : false,
 
     //FILTERS (see "backend/filters.js")
     Filters,          //definition (list of variables for each filter)
-    filters_on:true,  //all filters on
+    filters_on:false, //all filters on
     filters_active:{  //each filter on/off
       "Population":true,
       "Water volumes":true,
@@ -448,6 +448,7 @@ let tier_b=new Vue({
               <div style="text-align:left;margin-top:5px">
                 <button
                   v-for="key in normalization.options"
+                  v-if="!sublevel || !(key=='kgCO2eq/year/serv.pop.' && !Normalization[level][sublevel])"
                   @click="normalization.selected=key"
                   v-html="key.prettify()"
                   class=norm_btn
@@ -509,16 +510,16 @@ let tier_b=new Vue({
                     <div v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
                       <div
                         v-if="substage"
-                        v-html="format(Normalization[level][sublevel][normalization.selected](substage,key))"
+                        v-html="format(get_output_value(key,get_current_stage())/Global.Years()/Normalization[level][sublevel](substage))"
                       ></div>
                       <div
                         v-else
-                        v-html="format(Normalization[level][normalization.selected](key))"
+                        v-html="format(get_output_value(key,get_current_stage())/Global.Years()/Normalization[level].Total())"
                       ></div>
                     </div>
                   </td>
 
-                  <!--sum of substges-->
+                  <!--sum of substages-->
                   <td v-if="sublevel">
                     <div class=number v-if="normalization.selected=='kgCO2eq'">
                       {{format(get_sum_of_substages(level,sublevel,key))}}
@@ -527,7 +528,7 @@ let tier_b=new Vue({
                       {{format(get_sum_of_substages(level,sublevel,key)/Global.Years())}}
                     </div>
                     <div class=number v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
-                      [TODO]
+                      {{format(get_sum_of_substages(level,sublevel,key)/Global.Years()/Normalization[level].Total())}}
                     </div>
                   </td>
 

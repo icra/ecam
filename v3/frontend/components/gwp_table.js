@@ -10,6 +10,9 @@ let gwp_table = new Vue({
 
   methods:{
     translate,
+    set_constants_from_gwp_report(){
+      configuration.set_constants_from_gwp_report();
+    },
   },
 
   template:`
@@ -40,7 +43,7 @@ let gwp_table = new Vue({
           <td class=number>{{rep.ct_ch4_eq}}</td>
           <td class=number>{{rep.ct_n2o_eq}}</td>
           <td><small>{{rep.comment}}</small></td>
-          <td><button @click="Global.General.gwp_reports_index=i">select</button></td>
+          <td><button @click="Global.General.gwp_reports_index=i;set_constants_from_gwp_report()">select</button></td>
         </tr>
       </table>
     </div>

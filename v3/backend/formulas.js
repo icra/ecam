@@ -105,12 +105,6 @@ let Formulas={
     result = result.replace(/\*/g," * ");
     result = result.replace(/Global\./g,"");
     result = result.replace(/General\./g,"");
-    result = result.replace(/\(\)/g,"");
-
-    Object.keys(Cts).forEach(key=>{
-      let reg = new RegExp(`Cts\.${key}\.value`,'g');
-      result = result.replace(reg,key);
-    });
 
     return result;
   },

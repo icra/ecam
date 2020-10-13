@@ -37,6 +37,8 @@ let Info={
 
   wwo_SL_GHG_avoided:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_ghg_avoided_land:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_ghg_avoided_landfil:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwo_ghg_avoided_landapp:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_ghg_avoided_reuse:{magnitude:"Mass",unit:"kg CO2eq"},
 
   ws_KPI_GHG_abs:{magnitude:"Mass",unit:"kg CO2eq"},
@@ -195,92 +197,9 @@ let Info={
   wwc_ch4_efac_cso: {magnitude:"Mass/Mass", unit:"kgCH4/kgBOD" },
   wwc_ch4_efac_col: {magnitude:"Mass/Mass", unit:"kgCH4/kgBOD" },
 
-  fsr_ghg_avoided_land: {magnitude:"Mass",   unit:"kg CO2eq"},
-  fsr_KPI_GHG_urine:    {magnitude:"Mass",   unit:"kg CO2eq"},
-
-  fst_SL_GHG_avoided: {magnitude:"Mass",   unit:"kg CO2eq"},
-
-  //FS Reuse
-
-
-  fsr_ghg_avoided_reuse_N:         {magnitude:"Mass",        unit:"kg CO2eq"},
-  fsr_ghg_avoided_reuse_P:         {magnitude:"Mass",        unit:"kg CO2eq"},
-  fsr_ghg_avoided_reuse:         {magnitude:"Mass",        unit:"kg CO2eq"},
-
-  fsr_KPI_GHG_elec:         {magnitude:"Mass",        unit:"kg CO2eq"},
-  fsr_KPI_GHG:              {magnitude:"Mass",        unit:"kg CO2eq"},
-  fsr_KPI_GHG_landapp:      {magnitude:"Mass",        unit:"kg CO2eq"},
-  fsr_KPI_GHG_landfil:      {magnitude:"Mass",        unit:"kg CO2eq"},
-  fsr_KPI_GHG_landfil_n2o:  {magnitude:"Mass",        unit:"kg CO2eq"},
-  fsr_KPI_GHG_landfil_ch4:  {magnitude:"Mass",        unit:"kg CO2eq"},
-  fsr_KPI_GHG_dumping:      {magnitude:"Mass",        unit:"kg CO2eq"},
-  fsr_KPI_GHG_dumping_n2o:  {magnitude:"Mass",        unit:"kg CO2eq"},
-  fsr_KPI_GHG_dumping_ch4:  {magnitude:"Mass",        unit:"kg CO2eq"},
-  fsr_KPI_GHG_tre_n2o:      {magnitude:"Mass",        unit:"kg CO2eq"},
-  fsr_KPI_GHG_tre_ch4:      {magnitude:"Mass",        unit:"kg CO2eq"},
-  fsr_KPI_GHG_tre:          {magnitude:"Mass",        unit:"kg CO2eq"},
-  fsr_ch4_efac:             {magnitude:"Mass/Mass",   unit:"kgCH4/kgBOD" },
-  fsr_ch4_efac_dumping:     {magnitude:"Mass/Mass",   unit:"kgCH4/kgBOD" },
-  fsr_bod_conc_fs:          {magnitude:"Concentration", unit:"kg/m3" },
-
+  wwo_ghg_avoided_reuse_N:         {magnitude:"Mass",        unit:"kg CO2eq"},
+  wwo_ghg_avoided_reuse_P:         {magnitude:"Mass",        unit:"kg CO2eq"},
   wwo_flooding:{magnitude:"Option",unit:"Yes/No"},
-
-  fst_vol_fuel:        {magnitude:"Volume",    unit:"L" },
-  fst_KPI_GHG_elec:    {magnitude:"Mass",      unit:"kg CO2eq" },
-  fst_KPI_GHG_biog:    {magnitude:"Mass",      unit:"kg CO2eq" },
-  fst_KPI_GHG:         {magnitude:"Mass",      unit:"kg CO2eq" },
-  fst_bod_infl:        {magnitude:"Mass",      unit:"kg" },
-  fst_bod_effl:        {magnitude:"Mass",      unit:"kg" },
-  fst_ch4_efac:        {magnitude:"Mass/Mass", unit:"kgCH4/kgBOD" },
-  fst_KPI_GHG_tre_ch4: {magnitude:"Mass",      unit:"kg CO2eq"},
-  fst_KPI_GHG_tre_n2o: {magnitude:"Mass",      unit:"kg CO2eq"},
-  fst_KPI_GHG_tre:     {magnitude:"Mass",      unit:"kg CO2eq"},
-
-  fst_nrg_pump:{magnitude:"Energy",unit:"kWh"},
-  fst_vol_pump:{magnitude:"Volume",unit:"m3"},
-  fst_pmp_head:{magnitude:"Head",unit:"m"},
-  fst_sta_head:{magnitude:"Head",unit:"m"},
-  fst_coll_len:{magnitude:"Distance",unit:"km"},
-  fst_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m"},
-  fst_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km"},
-  fst_pmp_flow:{magnitude:"Flow",unit:"L/s"},
-  fst_pmp_volt:{magnitude:"Voltage",unit:"V"},
-  fst_pmp_amps:{magnitude:"Intensity",unit:"A"},
-  fst_pmp_exff:{magnitude:"Efficiency",unit:"%"},
-  fst_pmp_pf:  {magnitude:"Power factor",unit:"ratio"},
-  fst_pmp_pw:{magnitude:"Power",unit:"kW"},
-  fst_KPI_nrg_elec_eff:{magnitude:"Efficiency",unit:"%"},
-  fst_KPI_std_nrg_newp:{magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m"},
-  fst_KPI_nrg_cons_new:{magnitude:"Energy",unit:"kWh"},
-  fst_KPI_nrg_estm_sav:{magnitude:"Energy",unit:"kWh"},
-  fst_KPI_ghg_estm_red:{magnitude:"Mass",unit:"kg CO2eq"},
-
-  fsr_nrg_pump:{magnitude:"Energy",unit:"kWh"},
-  fsr_vol_pump:{magnitude:"Volume",unit:"m3"},
-  fsr_pmp_head:{magnitude:"Head",unit:"m"},
-  fsr_sta_head:{magnitude:"Head",unit:"m"},
-  fsr_coll_len:{magnitude:"Distance",unit:"km"},
-  fsr_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m"},
-  fsr_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km"},
-  fsr_pmp_flow:{magnitude:"Flow",unit:"L/s"},
-  fsr_pmp_volt:{magnitude:"Voltage",unit:"V"},
-  fsr_pmp_amps:{magnitude:"Intensity",unit:"A"},
-  fsr_pmp_exff:{magnitude:"Efficiency",unit:"%"},
-  fsr_pmp_pf:  {magnitude:"Power factor",unit:"ratio"},
-  fsr_pmp_pw:{magnitude:"Power",unit:"kW"},
-  fsr_KPI_nrg_elec_eff:{magnitude:"Efficiency",unit:"%"},
-  fsr_KPI_std_nrg_newp:{magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m"},
-  fsr_KPI_nrg_cons_new:{magnitude:"Energy",unit:"kWh"},
-  fsr_KPI_nrg_estm_sav:{magnitude:"Energy",unit:"kWh"},
-  fsr_KPI_ghg_estm_red:{magnitude:"Mass",unit:"kg CO2eq"},
-
-  //LEVEL1 FSM
-
-  //fsm energy consumed
-  fs_nrg_cons:  {magnitude:"Energy", unit:"kWh"},
-  fsc_nrg_cons: {magnitude:"Energy", unit:"kWh"},
-  fst_nrg_cons: {magnitude:"Energy", unit:"kWh"},
-  fsr_nrg_cons: {magnitude:"Energy", unit:"kWh"},
 
   //after water reuse edits
   ww_GHG_avoided:     {magnitude:"Mass", unit:"kg CO2eq"},
@@ -367,28 +286,6 @@ let Info={
 	wwd_KPI_GHG_fuel_co2:{magnitude:"Mass",unit:"kg CO2eq"},
 	wwd_KPI_GHG_fuel_n2o:{magnitude:"Mass",unit:"kg CO2eq"},
 	wwd_KPI_GHG_fuel_ch4:{magnitude:"Mass",unit:"kg CO2eq"},
-  fsr_KPI_GHG_fuel:    {magnitude:"Mass",unit:"kg CO2eq"},
-  fsr_KPI_GHG_fuel_co2:{magnitude:"Mass",unit:"kg CO2eq"},
-  fsr_KPI_GHG_fuel_n2o:{magnitude:"Mass",unit:"kg CO2eq"},
-  fsr_KPI_GHG_fuel_ch4:{magnitude:"Mass",unit:"kg CO2eq"},
-  fst_KPI_GHG_fuel:    {magnitude:"Mass",unit:"kg CO2eq"},
-  fst_KPI_GHG_fuel_co2:{magnitude:"Mass",unit:"kg CO2eq"},
-  fst_KPI_GHG_fuel_n2o:{magnitude:"Mass",unit:"kg CO2eq"},
-  fst_KPI_GHG_fuel_ch4:{magnitude:"Mass",unit:"kg CO2eq"},
-
-  //fuel trucks
-  fsc_KPI_GHG_trck:    {magnitude:"Mass",unit:"kg CO2eq"},
-  fsc_KPI_GHG_trck_co2:{magnitude:"Mass",unit:"kg CO2eq"},
-  fsc_KPI_GHG_trck_n2o:{magnitude:"Mass",unit:"kg CO2eq"},
-  fsc_KPI_GHG_trck_ch4:{magnitude:"Mass",unit:"kg CO2eq"},
-  fst_KPI_GHG_trck:    {magnitude:"Mass",unit:"kg CO2eq"},
-  fst_KPI_GHG_trck_co2:{magnitude:"Mass",unit:"kg CO2eq"},
-  fst_KPI_GHG_trck_n2o:{magnitude:"Mass",unit:"kg CO2eq"},
-  fst_KPI_GHG_trck_ch4:{magnitude:"Mass",unit:"kg CO2eq"},
-  fsr_KPI_GHG_trck:    {magnitude:"Mass",unit:"kg CO2eq"},
-  fsr_KPI_GHG_trck_co2:{magnitude:"Mass",unit:"kg CO2eq"},
-  fsr_KPI_GHG_trck_n2o:{magnitude:"Mass",unit:"kg CO2eq"},
-  fsr_KPI_GHG_trck_ch4:{magnitude:"Mass",unit:"kg CO2eq"},
 
 	/* +================+ */
 	/* | Service levels | */

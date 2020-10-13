@@ -16,7 +16,7 @@ function format(number,digits){
   var str=new Intl.NumberFormat('en-EN',{maximumFractionDigits:digits}).format(number);
 
   //if "NaN" or "Infinity" display 'missing inputs'
-  if(str=="NaN" || !isFinite(number)) return "<span style=color:#666;font-size:10px>~"+translate('missing_inputs')+"</span>";
+  if(str=="NaN" || !isFinite(number)) return "~"+translate('missing_inputs');
 
   //return resulting string
   return str;

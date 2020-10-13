@@ -7,6 +7,7 @@ let constants = new Vue({
 
     Cts,
     Languages,
+    Formulas,
   },
 
   methods:{
@@ -27,6 +28,7 @@ let constants = new Vue({
             <th>{{translate('Value')      }}</th>
             <th>{{translate('Description')}}</th>
             <th>{{translate('Unit')       }}</th>
+            <th>equations</th>
           </tr>
           <tr v-for="obj,key in Cts">
             <td>
@@ -37,6 +39,9 @@ let constants = new Vue({
             </td>
             <td style=font-size:smaller v-html="obj.descr.prettify()"></td>
             <td                         v-html="obj.unit.prettify()"></td>
+            <td>
+              {{ Formulas.outputs_per_input(key).length }}
+            </td>
           </tr>
         </table>
       </div>

@@ -28,7 +28,7 @@ stages_menu.add_substage('Water','Abstraction')
 stages_menu.add_substage('Water','Abstraction')
 stages_menu.add_substage('Water','Abstraction')
 Object.keys(Questions).forEach(key=>{substage.Configuration.Questions[key]=1});
-variable.view('wsa_KPI_GHG_fuel');
+//variable.view('wsa_KPI_GHG_fuel');
 
 //wsa
   substage.wsa_vol_conv = 500;

@@ -1,6 +1,8 @@
 {
 "#below":"below",
 
+"#General":"General",
+
 "#wsa_nrg_cost_descr":"Energy costs",
 "#wsa_nrg_cost_expla":"Costs from electric energy consumption for the entire water supply utility, based on the electricity bill during the entire assessment period",
 "#wst_nrg_cost_descr":"Energy costs",
@@ -68,8 +70,8 @@
 "#wwo_KPI_GHG_descr":"Total GHG Wastewater Onsite sanitation",
 "#wwo_KPI_GHG_elec_descr":"Electricity",
 "#wwo_KPI_GHG_fuel_descr":"Fuel engines",
-"#wwo_KPI_GHG_unt_opd_descr":"Open defecation (CH4)",
-"#wwo_KPI_GHG_unt_ons_descr":"Untreated wastewater (CH4)",
+"#wwo_KPI_GHG_unt_opd_descr":"Open defecation",
+"#wwo_KPI_GHG_unt_ons_descr":"Untreated wastewater",
 "#wwo_KPI_GHG_cont_descr":"Containment (CH4)",
 "#wwo_KPI_GHG_trck_descr":"Transport",
 "#wwo_KPI_GHG_biog_descr":"Biogas",
@@ -1136,7 +1138,7 @@
 "#wwc_ch4_efac_cso_expla":"CH4 emission factor (untreated collected wastewater)",
 "#ww_n2o_effl_descr":"Total Nitrogen load in the effluent",
 "#ww_n2o_effl_expla":"Total Nitrogen load in the effluent during the assessment period",
-"#ww_nrg_cons_descr":"Energy consumed from the grid (Collection+Treatment+Discharge)",
+"#ww_nrg_cons_descr":"Energy consumed from the grid (Collection+Treatment+Onsite)",
 "#ww_nrg_cons_expla":"Total electric energy consumed from the grid related to wastewater management within the service area managed by the undertaking during the entire assessment period",
 "#ww_resi_pop_descr":"Resident population",
 "#ww_resi_pop_expla":"Number of permanent residents within the area of service for wastewater services managed by the undertaking (whether they are connected or not) , at the reference date ",

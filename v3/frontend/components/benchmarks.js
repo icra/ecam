@@ -38,7 +38,7 @@ let benchmarks = new Vue({
             <td>
               <details>
                 <summary>formula</summary>
-                <code><pre>{{obj}}</pre></code>
+                <code><pre class="prettyprint">{{obj}}</pre></code>
               </details>
             </td>
           </tr>
@@ -46,6 +46,15 @@ let benchmarks = new Vue({
       </div>
     </div>
   `,
+
+  updated(){
+    document.querySelectorAll(".prettyprinted").forEach(el=>{
+      el.classList.remove('prettyprinted');
+    });
+    this.$nextTick(function() {
+      PR.prettyPrint();
+    });
+  },
 
   style:`
     <style>

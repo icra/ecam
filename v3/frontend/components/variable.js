@@ -1,15 +1,14 @@
 let variable=new Vue({
   el:"#variable",
-
   data:{
-    visible:false,
-    id:"wsa_nrg_cons", //default variable code
-    question:false,    //question where id belongs
+    visible  : false,
+    id       : "wsa_nrg_cons", //default variable code
+    question : false,    //question where id belongs
 
     //stage where id belongs to
     localization:{
-      level:'Water',
-      sublevel:'Abstraction',
+      level    : 'Water',
+      sublevel : 'Abstraction',
     },
 
     //backend
@@ -17,13 +16,10 @@ let variable=new Vue({
     Languages,
     Info,
     Structure,
-    Units,
     Tables,
     Estimations,
-    Exceptions,
     Formulas,
     Questions,
-    Cts,
     Benchmarks,
   },
 
@@ -70,9 +66,9 @@ let variable=new Vue({
     },
 
     get_formula_location(){
-
-      if(this.Global[this.id] && typeof(this.Global[this.id])=='function') return this.Global;
-
+      if(this.Global[this.id] && typeof(this.Global[this.id])=='function'){
+        return this.Global;
+      }
       let level    = this.localization.level;
       let sublevel = this.localization.sublevel;
       let obj;
@@ -119,15 +115,20 @@ let variable=new Vue({
         <tr>
           <th>{{ translate('variable_stage') }}</th>
           <td>
-            <div v-if="localization"> &larr;
-              <a @click="go_to(localization.level)">
+            <div v-if="localization.level"> &larr;
+              <a @click="go_to(localization.level)" :style="{color:get_level_color(localization.level)}">
                 {{ translate(localization.level) }}
               </a>
               <span v-if="localization.sublevel"> /
-                <a @click="go_to(localization.level, localization.sublevel)">
+                <a @click="go_to(localization.level, localization.sublevel)" :style="{color:get_level_color(localization.level)}">
                   {{ translate(localization.sublevel) }}
                 </a>
               </span>
+            </div>
+            <div v-else>
+              <a onclick="ecam.show('configuration')">
+                {{ translate('General') }}
+              </a>
             </div>
           </td>
         </tr>
@@ -225,6 +226,7 @@ let variable=new Vue({
                 <div>
                   <div v-if="!localization.sublevel">
                     <input type=number v-model.number="Global[localization.level][id]">
+                    <div class=unit v-html="get_base_unit(id).prettify()"></div>
                   </div>
                   <div v-else>
                     <table>
@@ -236,7 +238,7 @@ let variable=new Vue({
                           <div>
                             <input type=number v-model.number="ss[id]">
                           </div>
-                          <div class=unit v-html="get_base_unit(id).prettify()"></div>
+                          <div class=unit style="text-align:right" v-html="get_base_unit(id).prettify()"></div>
                         </td>
                       </tr>
                     </table>
@@ -262,8 +264,8 @@ let variable=new Vue({
                         <div>
                           <a @click="go_to_substage(ss)">{{ss.name}}</a>
                         </div>
-                        <div v-html="format(get_output_value(id,ss))"></div>
-                        <div v-html="get_current_unit(id).prettify()" class=unit></div>
+                        <div v-html="format(get_output_value(id,ss))" class=number></div>
+                        <div v-html="get_current_unit(id).prettify()" class=unit style="text-align:right"></div>
                       </td>
                     </tr>
                   </table>
@@ -282,7 +284,7 @@ let variable=new Vue({
         <!--outputs that use this variable-->
         <tr>
           <th>
-            {{ translate("Outputs that use this value") }}
+            Outputs that use this variable
           </th>
           <td>
             <table class=outputs_affected>
@@ -295,7 +297,15 @@ let variable=new Vue({
                     </a>
                   </td>
                   <td>
-                    estimation for each substage
+                    <div v-if="locate_variable(output).sublevel">
+                      {{
+                        locate_variable(output).stage.map(ss=>(
+                          format(
+                            Estimations[output](ss)
+                          )
+                        ))
+                      }}
+                    </div>
                   </td>
                   <td>
                     <span class=unit v-html="get_base_unit(output).prettify()">
@@ -364,11 +374,6 @@ let variable=new Vue({
             Estimation of this input based on other inputs
           </th>
           <td>
-            <div>
-              estimation of all substages
-              <span v-if="Info[id]" v-html="Info[id].unit.prettify()" class=unit></span>
-            </div>
-
             <!--formula for estimations-->
             <div style="border:1px solid #ccc;padding:1em">
               <pre

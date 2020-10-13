@@ -19,7 +19,11 @@ let summary_nrg = new Vue({
       <summaries current_view=summary_nrg></summaries>
 
       <!--summary nrg title-->
-      <h1 style="text-align:center;color:black">Energy summary is merged to GHG emissions summary</h1>
+      <h1 style="text-align:center;color:black">
+        Energy summary is merged to GHG emissions summary
+        <br>
+        TODO remove this view
+      </h1>
     </div>
   `,
 

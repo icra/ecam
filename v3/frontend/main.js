@@ -125,7 +125,10 @@ let ecam={
       get_input_codes(s.level, s.sublevel).concat(
         get_output_codes(s.level, s.sublevel)
       ).forEach(code=>{
-        setTimeout(function(){variable.view(code)}, interval*timer++);
+        setTimeout(
+          function(){variable.view(code)},
+          interval*timer++
+        );
       });
     });
 

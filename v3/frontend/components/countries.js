@@ -7,12 +7,18 @@ let countries = new Vue({
 
     Global,
     Countries,
+    GWP_reports,
     Languages,
+    Cts,
   },
 
   methods:{
     translate,
-    set_variables_from_selected_country: configuration.set_variables_from_selected_country,
+
+    //set variables from selected country
+    set_variables_from_selected_country(){
+      configuration.set_variables_from_selected_country();
+    },
   },
 
   template:`

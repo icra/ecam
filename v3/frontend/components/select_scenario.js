@@ -232,7 +232,7 @@ let select_scenario=new Vue({
                 class=icon
                 src="frontend/img/viti/select_scenario/icon-save.svg"
               >
-              <span>Save your systems</span>
+              <span>Save all systems to a file</span>
             </div>
           </button>
         </div>

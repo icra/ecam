@@ -10,6 +10,11 @@ function go_to(level, sublevel, no_history_entry){
     throw new Error(`level '${level}' does not exist`);
   }
 
+  if(level=='General'){
+    ecam.show('configuration', no_history_entry);
+    return;
+  }
+
   let possible_sublevels = Structure.filter(s=>s.sublevel).map(s=>s.sublevel);
   if(sublevel && possible_sublevels.indexOf(sublevel)==-1){
     throw new Error(`sublevel '${level}' does not exist`);
@@ -40,6 +45,14 @@ function go_to_substage(substage, no_history_entry){
   tier_b.level    = stage.level;
   tier_b.sublevel = stage.sublevel;
   tier_b.substage = substage;
+
+  if(
+    stage.sublevel
+    && tier_b.normalization.selected=="kgCO2eq/year/serv.pop."
+    && Normalization[stage.level][stage.sublevel]==false
+  ){
+    tier_b.normalization.selected="kgCO2eq";
+  }
   ecam.show('tier_b', no_history_entry);
 }
 
@@ -86,8 +99,13 @@ function get_sum_of_substages(level,sublevel,output_code){
 }
 
 function get_output_value(code, stage){
+  let output = null;
+  if(Global[code] && typeof(Global[code])=='function'){
+    output = Global[code]();
+  }else{
+    output = stage[code](); //can be a number or an object
+  }
   //stage can be for example Global.Water or a substage
-  let output = stage[code](); //can be a number or an object
   if(output==undefined) return 0;
   return (typeof(output.total)=='number'?output.total:output);
 }
@@ -140,7 +158,7 @@ function get_output_codes(level, sublevel){
   }
 
   return Object.getOwnPropertyNames(obj).filter(name=>{
-    return typeof(obj[name])=='function';
+    return typeof(obj[name])=='function' && name!='constructor';
   });
 }
 
