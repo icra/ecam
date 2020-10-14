@@ -3,7 +3,6 @@
     what is different of normal dropdowns is that the user can also enter a
     number besides selecting an option.
 */
-
 let Exceptions={
   wwc_ch4_efac_col:{
     table:"type_of_sewer",
@@ -23,8 +22,8 @@ let Exceptions={
   },
   wwo_ch4_efac_con:{ //depends on ch4_efac_flooding
     table:"wwo_type_con",
-    table_field:function(){
-      if(Global.Waste.Onsite.wwo_flooding){
+    table_field:function(stage){
+      if(stage.wwo_flooding){
         return "ch4_efac_flooding";
       }else{
         return "ch4_efac";
@@ -42,8 +41,8 @@ let Exceptions={
   wwt_bod_slud:{
     table:"type_of_treatment",
     table_field:function(){return "bod_rmvd_as_sludge_estm"},
-    percent_of:function(){
-      return Global.Waste.Treatment.wwt_bod_infl;
+    percent_of:function(stage){
+      return stage.wwt_bod_infl;
     },
   },
   wwo_fdensity:{

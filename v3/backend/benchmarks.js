@@ -4,7 +4,8 @@
 */
 
 let Benchmarks = {
-  wsa_KPI_std_nrg_cons(stage, value) {
+  //standarized energy consumption (kWh/m3/100m)
+  wsa_KPI_std_nrg_cons(stage, value){
     if(!stage)                  return "stage error";
     if(typeof(value)!="number") return "value error";
 
@@ -51,9 +52,7 @@ let Benchmarks = {
     }else return "pump type error";
   },
 
-  wsd_KPI_std_nrg_cons(stage, value) {
-    //dE3: Good: 0.2725 ≤ dE3 ≤ 0.40 , Acceptable: 0.40 < dE3 ≤ 0.54, Unsatisfactory: dE3 > 0.54,
-
+  wsd_KPI_std_nrg_cons(stage, value){
     //pump size
     let pmp_size = Tables.get_row("Pump size",stage.wsd_pmp_size).name; //string
 
@@ -81,148 +80,128 @@ let Benchmarks = {
     else return "Out of range";
   },
 
-  /*
-  wwc_KPI_std_nrg_cons(obj) {
-    //wcE3: Good: 0.2725 ≤ wcE3 ≤ 0.45, Acceptable: 0.45 < wcE3 ≤ 0.68, Unsatisfactory: wcE3 > 0.68
-    var value=obj.wwc_KPI_std_nrg_cons();
+  wwc_KPI_std_nrg_cons(stage, value){
     if      (0.2725 <= value && value <= 0.45) { return "Good" }
     else if (0.45   <  value && value <= 0.68) { return "Acceptable" }
     else if (value  > 0.68)                    { return "Unsatisfactory" }
     else                                       { return "Out of range" }
   },
-  wwt_KPI_std_nrg_cons(obj){
-    //wdE3: Good: 0.2725 ≤ wdE3 ≤ 0.40 , Acceptable: 0.40 < wdE3 ≤ 0.54, Unsatisfactory: wdE3 > 0.54,
-    var value=obj.wwd_KPI_std_nrg_cons();
+
+  wwt_KPI_std_nrg_cons(stage, value){
     if      (0.2725 <= value && value <= 0.40) return "Good";
     else if (0.40   <  value && value <= 0.54) return "Acceptable";
     else if (value  > 0.54)                    return "Unsatisfactory";
     else                                       return "Out of range";
   },
 
-  //unit head loss (Abstraction, Distribution)
-  wsa_KPI_un_head_loss(obj) {
-    //Good: value ≤ 2, Acceptable: 2 < value ≤ 4, Unsatisfactory: value > 4
-    var value=obj.wsa_KPI_un_head_loss();
+  //unit head loss (m/km) (only in Abstraction and Distribution)
+  wsa_KPI_un_head_loss(stage, value){
     if      (value <= 2)                   return "Good";
     else if (2     <  value && value <= 4) return "Acceptable";
     else if (value >  4)                   return "Unsatisfactory";
     else                                   return "Out of range";
   },
-  wsd_KPI_un_head_loss(obj) {
-    //dE7: Good: dE7 ≤ 2, Acceptable: 2 < dE7 ≤ 4, Unsatisfactory: dE7 > 4,
-    var value=obj.wsd_KPI_un_head_loss();
-    if      (value <= 2)                  { return "Good" }
-    else if (2     < value && value <= 4) { return "Acceptable" }
-    else if (value > 4)                   { return "Unsatisfactory" }
-    else                                  { return "Out of range" }
+
+  wsd_KPI_un_head_loss(stage, value){
+    if      (value <= 2)                   return "Good";
+    else if (2     <  value && value <= 4) return "Acceptable";
+    else if (value >  4)                   return "Unsatisfactory";
+    else                                   return "Out of range";
   },
 
-  wst_KPI_capac_util(obj) {
-    //Capacity util: Good: 90 ≤ tE4 ≤ 70, Acceptable: 100 ≤ tE4 < 90 and 70 < tE4 ≤ 50, Unsatisfactory: tE4 > 100 and tE4 < 50,
-    var value=obj.wst_KPI_capac_util();
-    if      (70 <= value && value <= 90)                                   { return "Good" }
-    else if ((90 <  value && value <= 100) || (50 <= value && value < 70)) { return "Acceptable" }
-    else if ((value > 100)||(value < 50))                                  { return "Unsatisfactory" }
-    else                                                                   { return "Out of range" }
+  //capacity utilization (%) (Water Treatment)
+  wst_KPI_capac_util(stage, value){
+    if      (70 <= value && value <= 90)                                   return "Good";
+    else if ((90 <  value && value <= 100) || (50 <= value && value < 70)) return "Acceptable";
+    else if ((value > 100)||(value < 50))                                  return "Unsatisfactory";
+    else                                                                   return "Out of range";
   },
 
-  wst_KPI_nrg_per_m3(obj) {
+  //kwh of energy consumption per m3 of treated water
+  wst_KPI_nrg_per_m3(stage, value){
     // WTP with Pre-ox >  5000 m3/d - Good: tE1 ≤ 0.055; Acceptable: 0.055 < tE1 ≤ 0.07;  Unsatisfactory: tE1 > 0.07
     // WTP with Pre-ox <= 5000 m3/d - Good: tE1 ≤ 0.07;  Acceptable: 0.07  < tE1 ≤ 0.085; Unsatisfactory: tE1 > 0.085
     // WTP             >  5000 m3/d - Good: tE1 ≤ 0.025; Acceptable: 0.025 < tE1 ≤ 0.04;  Unsatisfactory: tE1 > 0.04
     // WTP             <= 5000 m3/d - Good: tE1 ≤ 0.04;  Acceptable: 0.04  < tE1 ≤ 0.055; Unsatisfactory: tE1 > 0.055
     // WTP (with raw and treated water pumping) - Good: tE1 ≤ 0.4; Acceptable: 0.4 < tE1 ≤ 0.5; Unsatisfactory: tE1 > 0.5
-    var wtp = obj.wst_vol_trea/Global.General.Days();
-    var tre = Tables.find('wst_treatmen',obj.wst_treatmen);
-    var val = obj.wst_KPI_nrg_per_m3();
-
-    if     (wtp> 5000 && (tre.search("Pre-ox")+1) && val<=0.055)               return "Good";
-    else if(wtp> 5000 && (tre.search("Pre-ox")+1) && val> 0.055 && val<=0.07 ) return "Acceptable";
-    else if(wtp> 5000 && (tre.search("Pre-ox")+1) && val> 0.07)                return "Unsatisfactory";
-    else if(wtp<=5000 && (tre.search("Pre-ox")+1) && val<=0.07)                return "Good";
-    else if(wtp<=5000 && (tre.search("Pre-ox")+1) && val> 0.07  && val<=0.085) return "Acceptable";
-    else if(wtp<=5000 && (tre.search("Pre-ox")+1) && val> 0.085)               return "Unsatisfactory";
-    else if(wtp> 5000 &&                             val<=0.025)               return "Good";
-    else if(wtp> 5000 &&                             val> 0.025 && val<=0.04 ) return "Acceptable";
-    else if(wtp> 5000 &&                             val> 0.04)                return "Unsatisfactory";
-    else if(wtp<=5000 &&                             val<=0.04)                return "Good";
-    else if(wtp<=5000 &&                             val> 0.04  && val<=0.055) return "Acceptable";
-    else if(wtp<=5000 &&                             val> 0.055)               return "Unsatisfactory";
-    else
-      return "Unknown";
+    let tre        = Tables.get_row('wst_treatmen',stage.wst_treatmen).name; //type of treatment
+    let m3_per_day = stage.wst_vol_trea/Global.General.Days(); //m3 per day
+    if     (m3_per_day> 5000 && (tre.search("Pre-ox")+1) && value<=0.055)                 return "Good";
+    else if(m3_per_day> 5000 && (tre.search("Pre-ox")+1) && value> 0.055 && value<=0.07 ) return "Acceptable";
+    else if(m3_per_day> 5000 && (tre.search("Pre-ox")+1) && value> 0.07)                  return "Unsatisfactory";
+    else if(m3_per_day<=5000 && (tre.search("Pre-ox")+1) && value<=0.07)                  return "Good";
+    else if(m3_per_day<=5000 && (tre.search("Pre-ox")+1) && value> 0.07  && value<=0.085) return "Acceptable";
+    else if(m3_per_day<=5000 && (tre.search("Pre-ox")+1) && value> 0.085)                 return "Unsatisfactory";
+    else if(m3_per_day> 5000 &&                             value<=0.025)                 return "Good";
+    else if(m3_per_day> 5000 &&                             value> 0.025 && value<=0.04 ) return "Acceptable";
+    else if(m3_per_day> 5000 &&                             value> 0.04)                  return "Unsatisfactory";
+    else if(m3_per_day<=5000 &&                             value<=0.04)                  return "Good";
+    else if(m3_per_day<=5000 &&                             value> 0.04  && value<=0.055) return "Acceptable";
+    else if(m3_per_day<=5000 &&                             value> 0.055)                 return "Unsatisfactory";
+    else return "Unknown";
   },
 
-  wst_KPI_slu_per_m3(obj) {
-    // tE3:
-    // Good: tE3 ≤ 0.06;
-    // Acceptable: 0.06 < tE3 ≤ 0.10;
-    // Unsatisfactory: tE3 > 0.10;
-    var value=obj.wst_KPI_slu_per_m3();
+  //kg of sludge production per m3 of treated water
+  wst_KPI_slu_per_m3(stage, value){
     if      (value <= 0.06)                   return "Good";
     else if (0.06  <  value && value <= 0.10) return "Acceptable";
     else if (value >  0.10)                   return "Unsatisfactory";
+    else                                      return "Out of range";
   },
 
-  wsd_KPI_water_losses(obj) {
-    //dE6: Good: dE6 ≤ 6 , Acceptable: 6 < dE6 ≤ 12, Unsatisfactory: dE6 > 12,
-    var value=obj.wsd_KPI_water_losses();
-    if      (value <= 6)                   { return "Good" }
-    else if (6     < value && value <= 12) { return "Acceptable" }
-    else if (value > 12)                   { return "Unsatisfactory" }
-    else                                   { return "Out of range" }
+  //m3 of non revenue water per km of mains length per year
+  wsd_KPI_water_losses(stage, value){
+    if     (value <= 6)                   return "Good";
+    else if(6     < value && value <= 12) return "Acceptable";
+    else if(value > 12)                   return "Unsatisfactory";
+    else                                  return "Out of range";
   },
 
-  wwt_KPI_nrg_per_kg(obj) {
-    //wtE3: Good: wtE3 ≤ 2 , Acceptable: 2 < wtE3 ≤ 10, Unsatisfactory: wtE3 > 10,
-    var value=obj.wwt_KPI_nrg_per_kg();
-    if     (value <= 2)                    return "Good";
-    else if(2     <  value && value <= 10) return "Acceptable";
-    else if(value > 10)                    return "Unsatisfactory";
-    else                                   return "Out of range";
+  //kwh of energy per kg BOD removed
+  wwt_KPI_nrg_per_kg(stage, value){
+    if     (value <= 2)                   return "Good";
+    else if(2     < value && value <= 10) return "Acceptable";
+    else if(value > 10)                   return "Unsatisfactory";
+    else                                  return "Out of range";
   },
 
-  wwt_KPI_nrg_biogas(obj) {
-    //wtE4: Good: wtE4 ≥ 0.0009 BOD5 , Acceptable: 0.0009 BOD5 > wtE4 ≥ 0.0007 BOD5, Unsatisfactory: wtE4 < 0.0007 BOD5, note: BOD5 = influent BOD (mg/L) = wtV15,
-    var value=obj.wwt_KPI_nrg_biogas();
-    if(value  >= 0.0009)                        { return "Good" }
-    else if(0.0009 >  value && value >= 0.0007) { return "Acceptable" }
-    else if(value  <  0.0007)                   { return "Unsatisfactory" }
-    else                                        { return "Out of range" }
+  //kwh of energy from biogas per m3 treated
+  wwt_KPI_nrg_biogas(stage, value){
+    if     (value  >= 0.0009)                  return "Good";
+    else if(0.0009 > value && value >= 0.0007) return "Acceptable";
+    else if(value  < 0.0007)                   return "Unsatisfactory";
+    else                                       return "Out of range";
   },
 
-  wwt_KPI_sludg_prod(obj) {
-    //wtE7: Good: wtE7 ≤ 0.8 , Acceptable: 0.8 < wtE7 ≤ 1.5, Unsatisfactory: wtE7 > 1.5,
-    var value=obj.wwt_KPI_sludg_prod();
-    if(value <= 0.8)                       return "Good";
+  //kg sludge prouced per m3 treated
+  wwt_KPI_sludg_prod(stage, value){
+    if     (value <= 0.8)                  return "Good";
     else if(0.8   < value && value <= 1.5) return "Acceptable";
     else if(value > 1.5)                   return "Unsatisfactory";
     else                                   return "Out of range";
   },
 
-  wwt_KPI_dry_sludge(obj) {
-    //wtE8: Good: wtE8 ≥ 20 , Acceptable: 20 < wtE8 ≤ 12, Unsatisfactory: wtE8 < 12,
-    var value=obj.wwt_KPI_dry_sludge();
+  //% of dry sludge
+  wwt_KPI_dry_sludge(stage, value) {
     if     (value >= 20)                   return "Good";
     else if(20    >  value && value >= 12) return "Acceptable";
     else if(value < 12)                    return "Unsatisfactory";
     else                                   return "Out of range";
   },
 
-  wwt_KPI_capac_util(obj) {
-    //wtE9: Good: 95 ≤ wtE9 ≤ 70, Acceptable: 100 ≤ wtE9 < 95 and 70 < wtE9 ≤ 50, Unsatisfactory: wtE9 > 100 and wtE9 < 50,
-    var value=obj.wwt_KPI_capac_util();
-    if      (70 <= value && value <= 95)                            return "Good";
-    else if ((95 < value && value <= 100) || (50 < value && value < 70) ) return "Acceptable";
-    else if (value > 100 || value < 50)                             return "Unsatisfactory";
-    else                                                            return "Out of range";
+  //% of treatment capacity used
+  wwt_KPI_capac_util(stage, value) {
+    if     (70 <= value && value <= 95)                                  return "Good";
+    else if((95 < value && value <= 100) || (50 < value && value < 70) ) return "Acceptable";
+    else if(value > 100 || value < 50)                                   return "Unsatisfactory";
+    else                                                                 return "Out of range";
   },
 
-  wwt_KPI_nrg_x_biog(obj) {
-    //Below 15%= red -  15 to 25% = orange -  Above 25%= green
-    var value=obj.wwt_KPI_nrg_x_biog();
-    if      (value < 15)                    return "Unsatisfactory";
-    else if (15   <=  value && value <= 25) return "Acceptable";
-    else if (value > 25)                    return "Good";
+  //% of energy produced per total available energy in biogas
+  wwt_KPI_nrg_x_biog(stage, value) {
+    if     (value < 15)                    return "Unsatisfactory";
+    else if(15   <=  value && value <= 25) return "Acceptable";
+    else if(value > 25)                    return "Good";
+    else                                   return "Out of range";
   },
-  */
 };

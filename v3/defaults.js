@@ -1,32 +1,32 @@
 /*
-  Default values for v3 development (backend and frontend)
+  Default configuration for ecam (backend and frontend)
 */
 
-//FRONTEND ELEMENTS
-ecam_logo.visible   = 1;
-linear_menu.visible = 1;
-stages_menu.visible = 0;
-ecam.show('tier_b');
+//FRONTEND
+  ecam_logo.visible   = 1;
+  linear_menu.visible = 1;
+  stages_menu.visible = 0;
+  ecam.show('landing');
 
-Scenarios.push(new Ecam());
-
-//BACKEND ELEMENTS
+//BACKEND
 //general
-  Global.General.conv_kwh_co2 = 0.7; //conversion factor for grid electricity (kgCO2/kWh)
-  Global.General.prot_con     = 22;  //prot consumption                       (kg/person/year)
-  Global.General.bod_pday     = 37;  //BOD5                                   (g/person/day)
-  Global.General.bod_pday_fs  = 37;  //BOD5 in faecal sludge                  (g/person/day)
-//ws
-  Global.Water.ws_resi_pop = 1000;
-//ww
-  Global.Waste.ww_resi_pop = 2000;
-  Global.Waste.ww_vol_gene = 150000;
+//  Global.General.conv_kwh_co2 = 0.7; //conversion factor for grid electricity (kgCO2/kWh)
+//  Global.General.prot_con     = 22;  //prot consumption                       (kg/person/year)
+//  Global.General.bod_pday     = 37;  //BOD5                                   (g/person/day)
+//  Global.General.bod_pday_fs  = 37;  //BOD5 in faecal sludge                  (g/person/day)
+////ws
+//  Global.Water.ws_resi_pop = 1000;
+////ww
+//  Global.Waste.ww_resi_pop = 2000;
+//  Global.Waste.ww_vol_gene = 150000;
 //-----
 
-let substage = Global.Water.Abstraction[0];
-Object.keys(Questions).forEach(key=>{substage.Configuration.Questions[key]=1});
+//
+//let substage = Global.Water.Abstraction[0];
+//Object.keys(Questions).forEach(key=>{substage.Configuration.Questions[key]=1});
 
 //wsa
+  /*
   substage.wsa_vol_conv = 500;
   substage.wsa_nrg_cons = 1000;
   substage.wsa_nrg_cost = 10;
@@ -43,6 +43,7 @@ Object.keys(Questions).forEach(key=>{substage.Configuration.Questions[key]=1});
   substage.wsa_pmp_amps = 12;
   substage.wsa_pmp_pf   = 0.9;
   substage.wsa_pmp_exff = 99;
+  */
 ////wst
 //  substage.Water.Treatment.wst_vol_trea = 450;
 //  substage.Water.Treatment.wst_nrg_cons = 1000;
@@ -208,4 +209,3 @@ Object.keys(Questions).forEach(key=>{substage.Configuration.Questions[key]=1});
 //  substage.Waste.Onsite.wwo_reused_N         = 10;
 //  substage.Waste.Onsite.wwo_reused_P         = 20;
 //--------------------------------------------------
-

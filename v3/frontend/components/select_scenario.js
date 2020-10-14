@@ -86,9 +86,9 @@ let select_scenario=new Vue({
     <div id=select_scenario v-if="visible && Languages.ready">
       <!--title-->
       <div>
-        <h1 style="text-align:center">
-          <b>All systems ({{Scenarios.length}})</b>
-        </h1>
+        <h2 style="text-align:center">
+          All systems ({{Scenarios.length}})
+        </h2>
         <p style="text-align:center;color:#666">
           <b>
             Here you can create, edit and compare systems

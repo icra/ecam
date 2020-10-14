@@ -1,7 +1,8 @@
 let more = new Vue({
   el:"#more",
   data:{
-    visible:false,
+    visible: false,
+
     Global,
     Structure,
     Languages,
@@ -42,9 +43,9 @@ let more = new Vue({
 
   template:`
     <div id=more v-if="visible && Languages.ready">
-      <h3 style="text-align:center">
-        Placeholder for ecam v3 development
-      </h3>
+      <h2 style="text-align:center">
+        More
+      </h2>
 
       <!--open save buttons-->
       <div class=tab_buttons>
@@ -70,11 +71,8 @@ let more = new Vue({
             <li class=item><a onclick="ecam.show('benchmarks')">  {{translate('benchmarks')       }}</a></li>
             <li class=item><a onclick="ecam.show('fuel_table')">  {{translate('Fuel types')       }}</a></li>
             <li class=item><a onclick="ecam.show('development')"> {{translate('dev')              }}</a></li>
-
             <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('unfccc_categories')}}</a></li>
-            <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('all_benchmarks')   }}</a></li>
             <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('sidebar_export')   }}</a></li>
-            <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('Sankey diagram')   }}</a></li>
           </ul>
         </li>
       </ul>

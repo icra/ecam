@@ -48,11 +48,11 @@ Vue.component('input_ecam',{
           >
             <option
               v-for="obj in Tables[Exceptions[code].table]"
-              :value="parseFloat(obj[Exceptions[code].table_field()]*Exceptions[code].percent_of())"
+              :value="parseFloat(obj[Exceptions[code].table_field(current_stage)]*Exceptions[code].percent_of(current_stage))"
             >
               {{translate(obj.name)}}
-              [{{        100*obj[Exceptions[code].table_field()] }} %]
-              ({{ format(    obj[Exceptions[code].table_field()]*Exceptions[code].percent_of()/Units.multiplier(code) )}}
+              [{{        100*obj[Exceptions[code].table_field(current_stage)] }} %]
+              ({{ format(    obj[Exceptions[code].table_field(current_stage)]*Exceptions[code].percent_of(current_stage)/Units.multiplier(code) )}}
               {{get_current_unit(code,Global)}})
             </option>
           </select>
@@ -65,10 +65,10 @@ Vue.component('input_ecam',{
           >
             <option
               v-for="obj in Tables[Exceptions[code].table]"
-              :value="parseFloat(obj[Exceptions[code].table_field()])"
+              :value="parseFloat(obj[Exceptions[code].table_field(current_stage)])"
             >
               {{translate(obj.name)}}
-              ({{ format(obj[Exceptions[code].table_field()]) }})
+              ({{ format(obj[Exceptions[code].table_field(current_stage)]) }})
             </option>
           </select>
         </div>
