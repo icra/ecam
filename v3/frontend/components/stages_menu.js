@@ -5,9 +5,6 @@ let stages_menu=new Vue({
     current_view           : null,
     show_substages_summary : true,
 
-    //frontend
-    caption,
-
     //backend
     Global,
     Info,
@@ -43,7 +40,6 @@ let stages_menu=new Vue({
       let name = `${stage.sublevel} ${this.Global[level][sublevel].length+1}`;
       let ss = new stage.class(name);
       this.Global[level][sublevel].push(ss);
-      go_to_substage(ss);
     },
 
     delete_substage(level,sublevel,substage){
@@ -73,8 +69,8 @@ let stages_menu=new Vue({
 
         <!--stages table-->
         <div>
-          <table style="width:100%;">
-            <!--level 1 and level2-->
+          <table id=main_table style="width:100%;">
+            <!--level 1-->
             <tr>
               <td v-for="l1 in Structure.filter(s=>!s.sublevel)" :colspan="Structure.filter(s=>s.level==l1.level).length-1"
                 class=l1
@@ -89,22 +85,28 @@ let stages_menu=new Vue({
               </td>
             </tr>
 
+            <!--level 2 stages-->
             <tr>
               <td v-for="s in Structure" v-if="s.sublevel" style="width:100px">
                 <div style="text-align:center">
                   <a @click="go_to(s.level,s.sublevel)">
-                    <img
-                      @mousemove="caption.show($event, translate(s.sublevel?s.sublevel:s.level))"
-                      @mouseout="caption.hide()"
-                      :src="'frontend/img/'+s.icon"
-                      :class="'s '+(is_tier_b_selected(s.level, s.sublevel)?'selected':'')"
-                      :stage="s.alias"
-                    >
+                    <div>
+                      <img
+                        :src="'frontend/img/'+s.icon"
+                        :class="'s '+(is_tier_b_selected(s.level, s.sublevel)?'selected':'')"
+                        :stage="s.alias"
+                      >
+                    </div>
+                    <div>
+                      <b>{{translate(s.sublevel)}}</b>
+                    </div>
+                    <div v-if="show_substages_summary" style="border-bottom:1px solid #ccc"></div>
                   </a>
                 </div>
               </td>
             </tr>
 
+            <!--level 3 substages-->
             <tr v-if="show_substages_summary">
               <td v-for="s in Structure.filter(s=>s.sublevel)" style="vertical-align:top">
                 <div v-if="Global[s.level][s.sublevel].length==0" style="text-align:center">
@@ -113,7 +115,7 @@ let stages_menu=new Vue({
                 <div
                   v-if="s.sublevel"
                   v-for="ss,i in Global[s.level][s.sublevel]"
-                  style="padding:5px 0;"
+                  style="padding:5px 0;border-bottom:1px solid #ccc"
                 >
                   <div
                     style="
@@ -140,6 +142,7 @@ let stages_menu=new Vue({
               </td>
             </tr>
 
+            <!--total ghg of substages-->
             <tr v-if="show_substages_summary">
               <td v-for="s in Structure.filter(s=>s.sublevel)">
                 <div class=flex style="justify-content:space-between;font-size:smaller;">
@@ -179,6 +182,13 @@ let stages_menu=new Vue({
         padding-top:1px;
         border-bottom:1px solid #ccc;
       }
+      #stages_menu #main_table {
+        border-collapse:separate;
+      }
+      #stages_menu #main_table th,
+      #stages_menu #main_table td {
+        border:none;
+      }
       #stages_menu img {
         cursor:pointer;
         padding:0;
@@ -186,7 +196,9 @@ let stages_menu=new Vue({
         border:3px solid transparent;
       }
       #stages_menu img.selected {
+        /*
         border:3px solid var(--color-level-generic);
+        */
       }
       #stages_menu td.l1{
         text-align:center;

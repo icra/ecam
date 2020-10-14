@@ -300,6 +300,20 @@ let configuration=new Vue({
             </table>
           </div>
         </fieldset>
+
+        <!--comments-->
+        <fieldset style="grid-column-start:1;grid-column-end:3">
+          <legend>
+            <span v-html="translate('Comments')"></span>
+          </legend>
+          <div>
+            <textarea
+              v-model="Global.General.Comments"
+              style="width:100%;height:100px"
+              :placeholder="translate('Comments')"
+            ></textarea>
+          </div>
+        </fieldset>
       </div>
 
       <!--prev next btns-->

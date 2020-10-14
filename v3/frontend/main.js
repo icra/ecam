@@ -160,7 +160,10 @@ let ecam={
       return;
     }
 
-    //update Global variable
+    //do nothing if we already are editing Global
+    if(ecam_object == Global) return;
+
+    //update Global
     Global = ecam_object;
 
     //update property "Global" in every view and element

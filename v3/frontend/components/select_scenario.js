@@ -3,6 +3,9 @@ let select_scenario=new Vue({
   data:{
     visible:false,
     scenarios_compared:[],
+
+    variable,
+
     Global,
     Scenarios,
     Languages,
@@ -12,6 +15,11 @@ let select_scenario=new Vue({
   methods:{
     set_current_scenario(obj){
       ecam.set_current_scenario(obj);
+    },
+
+    set_scenario_and_go_to_configuration(scenario){
+      ecam.set_current_scenario(scenario);
+      ecam.show('configuration');
     },
 
     delete_scenario(obj){
@@ -35,7 +43,7 @@ let select_scenario=new Vue({
     },
 
     get_variables_and_values(level, sublevel){
-      let input_codes  = get_input_codes(   level, sublevel);
+      let input_codes  = get_input_codes( level, sublevel);
       let output_codes = get_output_codes(level, sublevel);
 
       let inputs=[]; //code, value
@@ -43,24 +51,24 @@ let select_scenario=new Vue({
         let scenario_values = null;
         if(sublevel){
           scenario_values = this.scenarios_compared.map(sce=>{
-            return sce[level][sublevel][code];
-          })
+            return sce[level][sublevel].map(ss=>ss[code]); //array
+          });
         }else{
           scenario_values = this.scenarios_compared.map(sce=>{
-            return sce[level][code];
+            return [sce[level][code]]; //array
           })
         }
         inputs.push({code, scenario_values});
       });
 
       let outputs=[]; //code, value
-      output_codes.forEach(code=>{
-        let scenario_values = null;
-        scenario_values = this.scenarios_compared.map(sce=>{
-          return sce[code]();
-        })
-        outputs.push({code, scenario_values});
-      });
+      //output_codes.forEach(code=>{
+      //  let scenario_values = null;
+      //  scenario_values = this.scenarios_compared.map(sce=>{
+      //    return sce[code]();
+      //  })
+      //  outputs.push({code, scenario_values});
+      //});
 
       return inputs.concat(outputs);
     },
@@ -117,19 +125,17 @@ let select_scenario=new Vue({
               >
             </td>
 
-            <!--system name and comments-->
-            <td style="padding:0;background:white">
-              <div class=scenario_name
+            <!--system name-->
+            <td
+              @click="set_current_scenario(scenario)"
+              style="padding:0;background:white;cursor:pointer"
+            >
+              <div
+                class=scenario_name
                 :current_scenario="scenario==Global"
               >
                 <div>
                   <b v-html="scenario.General.Name"></b>
-                </div>
-                <div style="background:#c6c6c6">
-                  <img
-                    class=icon
-                    src="frontend/img/viti/select_scenario/icon-comment.svg"
-                  >
                 </div>
               </div>
             </td>
@@ -165,21 +171,15 @@ let select_scenario=new Vue({
 
             <!--compare-->
             <td class=compare>
-              <input type=checkbox @click="add_scenario_to_compared(scenario)">
+              <input type=checkbox :checked="scenarios_compared.indexOf(scenario)!=-1" @click="add_scenario_to_compared(scenario)">
             </td>
 
             <!--options-->
-            <td>
+            <td style="text-align:left">
               <button
-                onclick="ecam.show('configuration')"
-                v-if="scenario==Global"
+                @click="set_scenario_and_go_to_configuration(scenario)"
+                :disabled="scenario != Global"
                 v-html="'edit'"
-              ></button>
-
-              <button
-                disabled
-                onclick="alert('TODO')"
-                v-html="'duplicate'"
               ></button>
 
               <button
@@ -189,16 +189,16 @@ let select_scenario=new Vue({
               ></button>
 
               <button
+                onclick="ecam.show('report')"
+                :disabled="scenario != Global"
+                v-html="'report'"
+              ></button>
+
+              <button
                 @click="delete_scenario(scenario)"
                 v-if="scenario != Global"
                 v-html="'delete'"
                 style="color:red"
-              ></button>
-
-              <button
-                onclick="ecam.show('report')"
-                v-if="scenario == Global"
-                v-html="'report'"
               ></button>
             </td>
           </tr>
@@ -207,9 +207,7 @@ let select_scenario=new Vue({
             <td style=background:white></td>
             <td style="background:white;text-align:left" colspan=7>
               <button onclick="ecam.new_scenario()"
-                style="
-                  font-size:large;
-                "
+                style="font-size:large"
                 v-html="'+ create new system'"
               ></button>
             </td>
@@ -243,7 +241,7 @@ let select_scenario=new Vue({
         <h1 style="text-align:center">
           Compare systems
         </h1>
-        
+
         <p style="text-align:center;color:#666">
           <b>
             Select 'compare' on your system and it will appear in the following
@@ -260,15 +258,15 @@ let select_scenario=new Vue({
             </th>
           </tr>
 
-          <tbody v-for="stage in [{level:'General', sublevel:false}].concat(Structure)">
+          <tbody v-for="stage in [{level:'General'}].concat(Structure)">
             <tr>
               <th :colspan="1+scenarios_compared.length"
                 :style="'background:'+get_level_color(stage.level)"
               >
-                <div style="text-align:left">
+                <div style="text-align:left;color:white;font-size:x-large;font-weight:bold">
                   {{translate(stage.level)}}
                   <span v-if="stage.sublevel">
-                    &mdash;
+                    &rsaquo;
                     {{translate(stage.sublevel)}}
                   </span>
                 </div>
@@ -276,28 +274,44 @@ let select_scenario=new Vue({
             </tr>
             <tr v-for="v in get_variables_and_values(stage.level, stage.sublevel)">
               <!--variable code and description-->
-              <th :style="'background:'+get_level_color(stage.level)">
-                <div>
-                  {{v.code}}
-                </div>
-                <div v-if="Info[v.code]" style="font-size:smaller">
-                  <div v-html="'('+translate(v.code+'_descr').prettify()+')'" >
+              <th :style="{background:get_level_color(stage.level),paddingLeft:'20px'}">
+                <div class=flex style="justify-content:space-between">
+                  <div v-if="Info[v.code]">
+                    <div
+                      v-html="translate(v.code+'_descr').prettify()"
+                      style="color:white"
+                    ></div>
+                  </div>
+                  <div style="font-size:smaller" >
+                    <a 
+                      @click="variable.view(v.code)"
+                      style="color:white"
+                    >{{v.code}}</a>
                   </div>
                 </div>
               </th>
 
               <!--variable value-->
-              <td v-for="value,i in v.scenario_values"
+              <td v-for="arr,i in v.scenario_values"
                 :style="scenarios_compared[i]==Global ? 'background:#f6f6f6':''"
               >
                 <!--value and unit-->
                 <div>
-                  <div class=number>
-                    <span v-html="typeof(value)=='number' ? format(value) : value"></span>
+                  <div
+                    v-if="arr.length"
+                    style="text-align:right"
+                  >
+                    <div v-if="arr.length==1">
+                      {{ format(arr[0]) }}
+                    </div>
+                    <div v-else>
+                      {{ arr }}
+                    </div>
                   </div>
                   <div
                     class="unit"
-                    v-html="get_base_unit(v.code, Scenarios[i])"
+                    v-html="get_base_unit(v.code, Scenarios[i]).prettify()"
+                    style="text-align:right"
                   >
                   </div>
                 </div>
@@ -313,11 +327,6 @@ let select_scenario=new Vue({
           v-html="'~No scenarios included to comparison'"
         ></div>
       </div>
-
-      <p>
-        TODO fix compare systems backend change
-      </p>
-
     </div>
   `,
 
@@ -364,11 +373,15 @@ let select_scenario=new Vue({
         display:flex;
         justify-content:space-between;
         align-items:center;
+        height:45px;
         max-width:300px;
         min-width:200px;
         padding-left:10px;
         border-left:4px solid #c6c6c6;
         background:#f6f6f6;
+      }
+      #select_scenario #main_table div.scenario_name:hover{
+        text-decoration:underline;
       }
       #select_scenario #main_table div.scenario_name[current_scenario] {
         border-color:var(--color-level-generic);
