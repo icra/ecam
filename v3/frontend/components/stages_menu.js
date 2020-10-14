@@ -74,14 +74,16 @@ let stages_menu=new Vue({
             <tr>
               <td v-for="l1 in Structure.filter(s=>!s.sublevel)" :colspan="Structure.filter(s=>s.level==l1.level).length-1"
                 class=l1
-                :style="{background:l1.color}"
+                :style="{background:l1.color,padding:'10px',color:'white'}"
                 :selected="is_tier_b_selected(l1.level,false)"
               >
                 <a
-                  style="color:white"
-                  v-html="translate(l1.level)"
                   @click="go_to(l1.level)"
-                ></a>
+                  style="color:white"
+                >
+                  {{translate(l1.level)}}
+                  ({{format(Global[l1.level][l1.prefix+'_KPI_GHG']())}} <small>kg CO<sub>2</sub>eq</small>)
+                </a>
               </td>
             </tr>
 
@@ -149,7 +151,7 @@ let stages_menu=new Vue({
                   <div>
                     Total {{s.sublevel}}
                   </div>
-                  <div>
+                  <div style="font-weight:bold">
                     <span v-html="format(get_sum_of_substages(s.level, s.sublevel, s.prefix+'_KPI_GHG'))"></span>
                     <span class=unit>kgCO<sub>2</sub>eq</span>
                   </div>
@@ -183,7 +185,6 @@ let stages_menu=new Vue({
         border-bottom:1px solid #ccc;
       }
       #stages_menu #main_table {
-        border-collapse:separate;
       }
       #stages_menu #main_table th,
       #stages_menu #main_table td {

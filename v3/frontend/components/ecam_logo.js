@@ -14,8 +14,8 @@ let ecam_logo=new Vue({
   template:`
     <div id=ecam_logo v-if="visible && Languages.ready">
       <!--logo-->
-      <div id=logo_container onclick="ecam.show('landing')">
-        <div id=logo>ECAM</div>
+      <div id=logo_container>
+        <div id=logo onclick="ecam.show('landing')">ECAM</div>
         <div>
           <span>{{translate('navbar_title')}}</span>
           <span>&mdash;</span>

@@ -9,8 +9,8 @@ let tier_b=new Vue({
     are_you_editing_name : false,
 
     //FILTERS (see "backend/filters.js")
-    Filters,          //definition (list of variables for each filter)
-    filters_on:false, //all filters on
+    Filters,         //definition (list of variables for each filter)
+    filters_on:true, //all filters on
     filters_active:{  //each filter on/off
       "Population":true,
       "Water volumes":true,

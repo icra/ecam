@@ -20,7 +20,6 @@ let summary_ghg = new Vue({
 
     //frontend
     variable,
-    caption,
 
     //backend
     Global,
@@ -40,49 +39,6 @@ let summary_ghg = new Vue({
       }else{
         this.unfolded_levels.splice(index,1);
       }
-    },
-
-    put_detailed_ghg_sources_on_caption(level, sublevel){ //TODO
-      //get #caption element
-      let cap = document.querySelector('#caption');
-      cap.innerHTML ="";
-
-      //create new div
-      let div = document.createElement('div');
-      cap.appendChild(div);
-      div.innerHTML=`<div><b>${translate(level)} ${translate(sublevel)}</b></div>`;
-
-      //get emission code
-      let code = this.Structure.find(s=>(s.level==level && s.sublevel==sublevel)).prefix + '_KPI_GHG';
-
-      //get stage of emission
-      let stage = this.Global[level][sublevel];
-
-      //if no emission, end
-      if(!this.stage[code]()){
-        div.innerHTML += "<div><small>~"+translate('No emissions')+"</small></div>";
-        return;
-      }
-
-      div.innerHTML += "<code>"+translate('Detailed GHG sources')+"<code>";
-
-      //create new table
-      let table = document.createElement('table');
-      table.style.width = "100%";
-      div.appendChild(table);
-
-      stage.equations.forEach(field=>{
-        if(field.search('_KPI_GHG_')==-1) return;
-
-        //get value
-        let value = this.stage[field](); //kgCO2eq
-        if(!value) return;
-
-        //create new row
-        let newRow = table.insertRow(-1);
-        newRow.insertCell(-1).innerHTML = translate(field+"_descr").prettify();
-        newRow.insertCell(-1).innerHTML = format(value);
-      })
     },
   },
 
@@ -112,7 +68,9 @@ let summary_ghg = new Vue({
             <!--level 1-->
             <tr :style="{background:l1.color,color:'white'}">
               <td style="background:inherit;text-align:center">
-                <button @click="toggle_folded_level(l1.level)">&darr;</button>
+                <button @click="toggle_folded_level(l1.level)">
+                  {{ unfolded_levels.indexOf(l1.level) ? '&rarr;':'&darr;' }}
+                </button>
               </td>
 
               <!--level 1 name and icon-->
@@ -167,8 +125,6 @@ let summary_ghg = new Vue({
               <td
                 colspan=2
                 :style="{textAlign:'center',background:'var(--color-level-'+l1.level+'-secondary)'}"
-                @mousemove="caption.show($event, translate(l2.sublevel))"
-                @mouseout="caption.hide()"
               >
                 <div style="font-size:large">
                   <a @click="go_to(l2.level,l2.sublevel)" :style="{color:l1.color}">
