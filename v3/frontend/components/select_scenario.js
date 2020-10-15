@@ -96,9 +96,38 @@ let select_scenario=new Vue({
         </p>
       </div>
 
-      <!--table select scenario-->
+      <!--load save buttons-->
+      <div id=load_save_btns style="
+          display:flex;
+          justify-content:center;
+          align-items:center;
+        "
+      >
+        <!--load file-->
+        <div>
+          <button onclick="alert('TODO')" title="load a file" disabled>
+            <span>Load file...</span>
+          </button>
+        </div>
+
+        <!--save file-->
+        <div>
+          <button onclick="alert('TODO')" title="save all systems to a JSON file" disabled>
+            <div style="display:flex;align-items:center">
+              <img
+                class=icon
+                src="frontend/img/viti/select_scenario/icon-save.svg"
+              >
+              <span>Save all systems to a file</span>
+            </div>
+          </button>
+        </div>
+
+        <div>in development</div>
+      </div>
+
+      <!--select scenario table-->
       <div>
-        <!--select scenario table-->
         <table style="margin:20px auto" id=main_table>
           <thead>
             <tr>
@@ -213,30 +242,9 @@ let select_scenario=new Vue({
             </td>
           </tr>
         </table>
-
-        <!--save button-->
-        <div style="text-align:center">
-          <button
-            onclick="alert('TODO')"
-            title="save all systems to a JSON file"
-          >
-            <div
-              style="
-                display:flex;
-                align-items:center;
-              "
-            >
-              <img
-                class=icon
-                src="frontend/img/viti/select_scenario/icon-save.svg"
-              >
-              <span>Save all systems to a file</span>
-            </div>
-          </button>
-        </div>
       </div>
 
-      <!--table compare scenarios-->
+      <!--compare scenarios table-->
       <div v-if="Scenarios.length>1" style="margin-top:2em">
         <h1 style="text-align:center">
           Compare systems
@@ -385,6 +393,9 @@ let select_scenario=new Vue({
       }
       #select_scenario #main_table div.scenario_name[current_scenario] {
         border-color:var(--color-level-generic);
+      }
+      #select_scenario #load_save_btns > div {
+        padding:5px;
       }
     </style>
   `,
