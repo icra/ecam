@@ -6,7 +6,6 @@ let Estimations={
     ww_vol_gene(stage){return 0.2*stage.ww_resi_pop*Global.Days();},
   //wwc
     wwc_vol_coll    (substage){return 0.2*substage.wwc_conn_pop*Global.Days();},
-    wwc_vol_coll_unt(substage){return substage.wwc_vol_coll - substage.wwc_vol_coll_tre;},
     wwc_vol_coll_tre(substage){return substage.wwc_vol_coll - substage.wwc_vol_coll_unt;},
   //wwt
     wwt_n2o_efac(substage){return 3.2},

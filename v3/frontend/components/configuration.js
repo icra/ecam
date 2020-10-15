@@ -66,7 +66,7 @@ let configuration=new Vue({
           <div style="font-size:x-large;padding-right:8px">{{Global.General.Name}}</div>
           <div>
             <button @click="are_you_editing_name=true">
-              Change name
+              change name
             </button>
           </div>
         </div>

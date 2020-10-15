@@ -40,6 +40,7 @@ let stages_menu=new Vue({
       let name = `${stage.sublevel} ${this.Global[level][sublevel].length+1}`;
       let ss = new stage.class(name);
       this.Global[level][sublevel].push(ss);
+      return ss;
     },
 
     delete_substage(level,sublevel,substage){
@@ -69,12 +70,12 @@ let stages_menu=new Vue({
 
         <!--stages table-->
         <div>
-          <table id=main_table style="width:100%;">
+          <table id=main_table>
             <!--level 1-->
             <tr>
               <td v-for="l1 in Structure.filter(s=>!s.sublevel)" :colspan="Structure.filter(s=>s.level==l1.level).length-1"
                 class=l1
-                :style="{background:l1.color,padding:'10px',color:'white'}"
+                :style="{background:l1.color,padding:'10px'}"
                 :selected="is_tier_b_selected(l1.level,false)"
               >
                 <a
@@ -127,7 +128,11 @@ let stages_menu=new Vue({
                   >
                     <!--substage name-->
                     <div>
-                      <a @click="go_to_substage(ss)" :selected_substage="is_substage_selected(ss)">{{ss.name}}</a>
+                      <a @click="go_to_substage(ss)"
+                        :selected_substage="is_substage_selected(ss)"
+                        style="font-size:smaller"
+                        v-html="ss.name"
+                      ></a>
                       <!--delete substage btn-->
                       <button
                         style="font-size:x-small"
@@ -185,12 +190,15 @@ let stages_menu=new Vue({
         border-bottom:1px solid #ccc;
       }
       #stages_menu #main_table {
+        width:95%;
+        margin:auto;
       }
       #stages_menu #main_table th,
       #stages_menu #main_table td {
         border:none;
       }
       #stages_menu img {
+        margin: -10px;
         cursor:pointer;
         padding:0;
         width:70px;
@@ -204,8 +212,9 @@ let stages_menu=new Vue({
       #stages_menu td.l1{
         text-align:center;
       }
-      #stages_menu td.l1[selected]{
+      #stages_menu td.l1[selected] a{
         text-decoration:underline;
+        font-weight:bold;
       }
       #stages_menu a[selected_substage]{
         text-decoration:underline;

@@ -49,6 +49,7 @@ let more = new Vue({
 
       <!--open save buttons-->
       <div class=tab_buttons>
+        TODO
         <button class=left onclick="" disabled>
           {{translate('open')}}
         </button>

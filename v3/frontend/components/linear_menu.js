@@ -84,11 +84,15 @@ let linear_menu = new Vue({
           <span v-html="format(Global.TotalGHG())"></span>
           <span class=unit v-html="Info.TotalGHG.unit.prettify()"></span>
           &nbsp;
-          <span v-html="format(Global.Days())"></span>
-          <span class=unit v-html="translate('days')"></span>
+          <span :style="{color:(Global.Days()<=0?'red':'')}">
+            <span v-html="format(Global.Days())"></span>
+            <span class=unit v-html="translate('days')"></span>
+          </span>
           &nbsp;
-          <span v-html="format(Global.General.conv_kwh_co2)"></span>
-          <span class=unit v-html="Info.conv_kwh_co2.unit.prettify()"></span>
+          <span :style="{color:(Global.General.conv_kwh_co2<=0?'red':'')}">
+            <span v-html="format(Global.General.conv_kwh_co2)"></span>
+            <span class=unit v-html="Info.conv_kwh_co2.unit.prettify()"></span>
+          </span>
         </div>
       </div>
     </div>

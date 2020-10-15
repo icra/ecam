@@ -210,9 +210,8 @@ let tier_b=new Vue({
                 <button @click="are_you_editing_name=false">ok</button>
               </span>
               <span v-else @click="are_you_editing_name=true">
-                <a>
-                  <b style="color:black">{{substage.name}}</b>
-                </a>
+                <a style="color:black"><b>{{substage.name}}</b></a>
+                <button>change name</button>
               </span>
             </span>
           </span>
@@ -300,16 +299,19 @@ let tier_b=new Vue({
           </button>
         </div>
         <div
-          v-if="filters_on && (get_number_of_variables_shown_by_filter(key) || filters_active[key])"
+          v-if="filters_on && get_number_of_variables_shown_by_filter(key)"
           v-for="key in Object.keys(Filters)"
           class=filter
           @click="disable_all_filters();filters_active[key]=true;"
+          style="font-size:smaller"
         >
           <input type=checkbox
             :checked="filters_active[key]"
             @click.stop="filters_active[key]=$event.target.checked"
           >
-          <span>{{key}} ({{get_number_of_variables_shown_by_filter(key)}})</span>
+          <span>
+            {{key}} ({{get_number_of_variables_shown_by_filter(key)}})
+          </span>
         </div>
       </div>
 
@@ -446,14 +448,15 @@ let tier_b=new Vue({
                 {{translate('GHG emissions')}}
               </div>
               <div style="text-align:left;margin-top:5px">
-                <button
-                  v-for="key in normalization.options"
-                  v-if="!sublevel || !(key=='kgCO2eq/year/serv.pop.' && !Normalization[level][sublevel])"
-                  @click="normalization.selected=key"
-                  v-html="key.prettify()"
-                  class=norm_btn
-                  :selected="normalization.selected==key"
-                ></button>
+                <span v-for="key in normalization.options">
+                  <button
+                    v-if="!sublevel || !(key=='kgCO2eq/year/serv.pop.' && !Normalization[level][sublevel])"
+                    @click="normalization.selected=key"
+                    v-html="key.prettify()"
+                    class=norm_btn
+                    :selected="normalization.selected==key"
+                  ></button>
+                </span>
               </div>
             </div>
 
