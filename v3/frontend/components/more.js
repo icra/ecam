@@ -73,7 +73,6 @@ let more = new Vue({
             <li class=item><a onclick="ecam.show('fuel_table')">  {{translate('Fuel types')       }}</a></li>
             <li class=item><a onclick="ecam.show('development')"> {{translate('dev')              }}</a></li>
             <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('unfccc_categories')}}</a></li>
-            <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('sidebar_export')   }}</a></li>
           </ul>
         </li>
       </ul>

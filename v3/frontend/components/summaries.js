@@ -18,16 +18,6 @@ Vue.component('summaries',{
             GHG emmissions
           </a>
         </div>
-        <div :style=summary_item :selected="current_view=='summary_nrg'">
-          <a href=# onclick="ecam.show('summary_nrg')">
-            Energy consumption
-          </a>
-        </div>
-        <div :style=summary_item :selected="current_view=='emission_tree'">
-          <a href=# onclick="ecam.show('emission_tree')">
-            All GHG emissions
-          </a>
-        </div>
         <div :style=summary_item :selected="current_view=='report'">
           <a href=# onclick="ecam.show('report')">
             Report
