@@ -293,8 +293,10 @@ let Questions={
     "wwt_producing_biogas":{
       variables:[
         "wwt_biog_pro",
+        "wwt_biog_val",
         "wwt_biog_fla",
         "wwt_ch4_biog",
+        "wwt_nrg_biog",
         "wwt_dige_typ",
         "wwt_fuel_dig",
         "wwt_KPI_biog_x_bod",
@@ -303,24 +305,13 @@ let Questions={
         "wwt_KPI_GHG_dig_fuel_ch4",
         "wwt_KPI_GHG_dig_fuel",
         "wwt_KPI_GHG_biog",
-      ],
-      advanced:0,
-      otherQuestions:[
-        "wwt_valorizing_biogas",
-      ],
-    },
-
-    "wwt_valorizing_biogas":{
-      variables:[
-        "wwt_biog_val",
-        "wwt_nrg_biog",
-        "c_wwt_nrg_biog",
         "wwt_KPI_nrg_biogas",
         "wwt_KPI_nrg_x_biog",
         "wwt_SL_GHG_avoided",
       ],
       advanced:0,
-      otherQuestions:[],
+      otherQuestions:[
+      ],
     },
 
     "wwt_treatment_perf":{

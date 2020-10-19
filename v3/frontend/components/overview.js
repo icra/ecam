@@ -25,36 +25,34 @@ let overview = new Vue({
     go_to,
 
     draw_sankey_ghg(){
-      var colors = {
+      let colors={
         'ws':Structure.find(s=>s.prefix=='ws').color,
         'ww':Structure.find(s=>s.prefix=='ww').color,
-        'fallback':            '#9f9fa3'
+        'fallback':'#9f9fa3'
       };
 
       let json = {};
       json.nodes=[
+        //layer 1: water supply or wastewater level
         {name:'Total GHG'        , id:"total"} ,
         {name:translate("Water") , id:"ws"}    ,
         {name:translate("Waste") , id:"ww"}    ,
-
+        //layer 2: urban water cycle stages
         {name:translate("Abstraction")  , id:"wsa"} ,
         {name:translate("Treatment")    , id:"wst"} ,
         {name:translate("Distribution") , id:"wsd"} ,
         {name:translate("Collection")   , id:"wwc"} ,
         {name:translate("Treatment")    , id:"wwt"} ,
         {name:translate("Onsite")       , id:"wwo"} ,
-
-        {name:translate("Electricity")                 , id:"elec"} ,
-
-        {name:translate("Fuel")                        , id:"fuel"} , //sum of fuel combustion
-
-        {name:translate("Untreated wastewater")        , id:"untr"} ,
-
-        {name:translate("Biogas")                      , id:"biog"} ,
-        {name:translate("Treatment")                   , id:"wwtr"} ,
-        {name:translate("Sludge managment")            , id:"slud"} ,
-        {name:translate("Discharged ww")               , id:"disc"} ,
-
+        //layer 3: emission source
+        {name:translate("Electricity indirect emissions")        , id:"elec"} ,
+        {name:translate("Fuel combustion direct emissions")      , id:"fuel"} , //sum of fuel combustion
+        {name:translate("Untreated wastewater direct emissions") , id:"untr"} ,
+        {name:translate("Biogas direct emissions")               , id:"biog"} ,
+        {name:translate("Treatment process direct emissions")    , id:"wwtr"} ,
+        {name:translate("Sludge management direct emissions")    , id:"slud"} ,
+        {name:translate("Discharged water direct emissions")     , id:"disc"} ,
+        //layer 4: gas type
         {name:"CO2" , id:"co2"} ,
         {name:"N2O" , id:"n2o"} ,
         {name:"CH4" , id:"ch4"} ,
@@ -168,6 +166,14 @@ let overview = new Vue({
     },
   },
 
+  updated(){
+    try{
+      overview.draw_sankey_ghg();
+    }catch(e){
+      console.log('drawing sankey ghg...')
+    }
+  },
+
   template:`
     <div id=overview v-if="visible && Languages.ready">
       <h2 style="text-align:center">
@@ -179,9 +185,8 @@ let overview = new Vue({
       </p>
 
       <!--sankey ghg-->
-      <div style="text-align:center;margin-top:10px">
+      <div style="text-align:center;">
         <h3> GHG emissions </h3>
-        <button onclick="overview.draw_sankey_ghg();this.disabled=true">draw ghg sankey diagram</button>
         <div id=sankey_ghg></div>
       </div><hr>
 
@@ -207,6 +212,9 @@ let overview = new Vue({
 
   style:`
     <style>
+      #overview {
+        padding-bottom:5em;
+      }
       #overview #sankey_ghg {
         padding: 10px;
         min-width: 600px;

@@ -29,7 +29,7 @@ Vue.component('inputs_involved_table',{
           </td>
 
           <!--involved input Option value-->
-          <td>
+          <td style="text-align:right">
             <div v-if="!locate_variable(match).sublevel">
               Tables.get_row(match, locate_variable(match).stage).name
             </div>
@@ -52,7 +52,8 @@ Vue.component('inputs_involved_table',{
             <a @click="variable.view(match)" :style="{color:get_level_color(locate_variable(match).level)}">{{match}}</a>
           </td>
 
-          <td v-if="get_variable_type(match)=='input'">
+          <!--input involved is an input-->
+          <td v-if="get_variable_type(match)=='input'" style="text-align:right">
             <div v-if="!locate_variable(match).sublevel">
               {{ format(locate_variable(match).stage[match]) }}
             </div>
@@ -65,7 +66,8 @@ Vue.component('inputs_involved_table',{
             </div>
           </td>
 
-          <td v-if="get_variable_type(match)=='output'">
+          <!--input involved is an output-->
+          <td v-if="get_variable_type(match)=='output'" style="text-align:right">
             <div v-if="!locate_variable(match).sublevel">
               {{ format(get_output_value(match,locate_variable(match).stage)) }}
             </div>
@@ -81,6 +83,47 @@ Vue.component('inputs_involved_table',{
           <!--unit-->
           <td v-if="get_variable_type(match)=='input'" class=unit v-html="get_base_unit(match).prettify()"></td>
           <td v-else class=unit v-html="Info[match] ? Info[match].unit.prettify() : 'unit not defined'"></td>
+        </tr>
+      </tbody>
+
+      <!--formula contains "Fuel type"-->
+      <tbody
+        v-if="obj[code].toString().search('Fuel type')+1"
+        style="color:green"
+      >
+        <tr>
+          <td colspan=3>
+            <table class=fuel_info>
+              <thead>
+                <tr>
+                  <td rowspan=2>{{translate('fuelInfo_type')}}</td>
+                  <td colspan=2>EF<sub>CH<sub>4</sub></sub> (kg/TJ)</td>
+                  <td colspan=2>EF<sub>N<sub>2</sub>O</sub> (kg/TJ)</td>
+                  <td rowspan=2>EF<sub>CO<sub>2</sub></sub> (kg/TJ)</td>
+                  <td rowspan=2 style=cursor:help :title="translate('fuelInfo_fd')">FD   (kg/L)</td>
+                  <td rowspan=2 style=cursor:help :title="translate('fuelInfo_ncv')">NCV (TJ/Gg)</td>
+                </tr>
+                <tr>
+                  <td>{{translate('fuelInfo_engines')}}</td>
+                  <td>{{translate('fuelInfo_vehicles')}}</td>
+                  <td>{{translate('fuelInfo_engines')}}</td>
+                  <td>{{translate('fuelInfo_vehicles')}}</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="fuel in Tables['Fuel type']">
+                  <td>{{translate(fuel.name)}}</td>
+                  <td class=number>{{fuel.EFCH4.engines}}</td>
+                  <td class=number>{{fuel.EFCH4.vehicles}}</td>
+                  <td class=number>{{fuel.EFN2O.engines}}</td>
+                  <td class=number>{{fuel.EFN2O.vehicles}}</td>
+                  <td class=number>{{fuel.EFCO2}}</td>
+                  <td class=number>{{fuel.FD}}</td>
+                  <td class=number>{{fuel.NCV}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
         </tr>
       </tbody>
     </table>

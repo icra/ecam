@@ -585,8 +585,8 @@ class Waste_Treatment extends Substage{
     this.wwt_bod_slud       = 0; //BOD removed as sludge
     this.wwt_bod_effl       = 0; //BOD effluent
     this.wwd_n2o_effl       = 0; //TKN effluent
-    this.wwt_ch4_efac       = 0;
-    this.wwt_n2o_efac       = 0;
+    this.wwt_ch4_efac       = 0.018;
+    this.wwt_n2o_efac       = 3.2;
     this.wwd_ch4_efac       = 0;
     this.wwd_n2o_efac       = 0;
     this.wwt_fuel_typ       = 0;

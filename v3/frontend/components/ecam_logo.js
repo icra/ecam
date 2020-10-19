@@ -45,14 +45,7 @@ let ecam_logo=new Vue({
 
           <!--null (only language tags)-->
           <div lang=null @click="Languages.current='null'">
-            null (tags only)
-          </div>
-
-          <!--language problem finder-->
-          <div :lang="Languages.current">
-            <a style=color:blue onclick="alert('TODO')">
-              language debugging tool
-            </a>
+            null (for development - tags only)
           </div>
         </div>
       </div>
@@ -138,12 +131,14 @@ let ecam_logo=new Vue({
 
       #ecam_logo #lang #select div[lang][current] {
         font-weight:bold;
-        background:yellow;
+        background:var(--color-level-generic);
+        color:white;
       }
 
       /* languages mouse over */
       #ecam_logo #lang #select div[lang]:hover {
-        background:orange;
+        background:var(--color-level-generic);
+        color:white;
       }
     </style>
   `,

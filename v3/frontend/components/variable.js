@@ -44,6 +44,7 @@ let variable=new Vue({
     get_variable_type,
     get_sum_of_substages,
     get_output_value,
+    get_output_partial_values,
 
     /* open variable VIEW */
     view(id, no_history_entry){
@@ -189,7 +190,7 @@ let variable=new Vue({
         <tr>
           <th>{{ translate("Current value") }}</th>
           <td>
-            <!--variable current value input element-->
+            <!--variable is an input-->
             <div v-if="get_variable_type(id)=='input'">
               <!--input is an Option-->
               <div v-if="Info[id] && Info[id].magnitude=='Option'">
@@ -246,7 +247,8 @@ let variable=new Vue({
                 </div>
               </div>
             </div>
-            <!--variable current value if output-->
+
+            <!--variable is an output-->
             <div v-if="get_variable_type(id)=='output'">
               <div>
                 <div v-if="!localization.sublevel">
@@ -264,8 +266,25 @@ let variable=new Vue({
                         <div>
                           <a @click="go_to_substage(ss)">{{ss.name}}</a>
                         </div>
-                        <div v-html="format(get_output_value(id,ss))" class=number></div>
-                        <div v-html="get_current_unit(id).prettify()" class=unit style="text-align:right"></div>
+                        <!--partial values-->
+                        <div v-if="Object.keys(get_output_partial_values(id,ss)).length>1">
+                          <table style="font-size:smaller">
+                            <tr v-for="gas,key in get_output_partial_values(id,ss)">
+                              <td v-html="key.toUpperCase().prettify()"></td>
+                              <td v-html="format(gas)"></td>
+                              <td v-html="get_current_unit(id).prettify()" class=unit></td>
+                            </tr>
+                          </table>
+                        </div>
+                        <!--total value-->
+                        <div v-else>
+                          <div
+                            v-html="format(get_output_value(id,ss))"
+                            class=number
+                          ></div>
+                          <div v-html="get_current_unit(id).prettify()" class=unit style="text-align:right"></div>
+                        </div>
+                        <!--unit-->
                       </td>
                     </tr>
                   </table>
@@ -418,10 +437,12 @@ let variable=new Vue({
 
   style:`
     <style>
+      #variable {
+        padding-bottom:5em;
+      }
       #variable h1 {
         text-align:center;
       }
-
       #variable td {
         padding:1em;
         background:white;
@@ -455,6 +476,10 @@ let variable=new Vue({
       }
       #variable summary {
         cursor:pointer;
+      }
+
+      #variable table.inputs_involved table.fuel_info td {
+        border:1px solid #ccc;
       }
     </style>
   `,

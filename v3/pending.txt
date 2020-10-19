@@ -20,7 +20,6 @@ ECAM V3 LLUIS BOSCH TASKS
   * [frontend] onclose listener: trigger warning if ecam is accidentally closed
 
 [CANNOT BE DONE]: (missing info OR not clear how to implement OR time not invested)
-  * [backend] reimplement benchmarks with new v3 backend
   * [backend] Mail from Corinne on June 19th 2020.
     ```
       Enable to account for different ways of valorising biogas (flare, heat
@@ -77,8 +76,8 @@ ECAM V3 LLUIS BOSCH TASKS
   * [frontend] redo load files function ("open" button)
 
 [TO BE DONE AT THE END]
-  * [frontend] graphs with viti (also Sankey)
-  * [frontend] help/about and docs for v3
+  * [frontend] graphs
+  * [frontend] update help & about & docs
   * [frontend] Translations of new pieces of text added for v3
 
 [WILL NOT BE DONE]

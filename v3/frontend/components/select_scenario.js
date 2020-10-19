@@ -91,7 +91,7 @@ let select_scenario=new Vue({
         </h2>
         <p style="text-align:center;color:#666">
           <b>
-            Here you can create, edit and compare systems
+            Here you can create, edit, load, save and compare systems
           </b>
         </p>
       </div>
@@ -108,6 +108,13 @@ let select_scenario=new Vue({
           <button onclick="alert('TODO')" title="load a file" disabled>
             <span>Load file...</span>
           </button>
+          <input
+            id="loadfile"
+            type="file"
+            accept=".json"
+            onchange="loadFile(event)"
+            style="display:none"
+          >
         </div>
 
         <!--save file-->
@@ -212,22 +219,16 @@ let select_scenario=new Vue({
               ></button>
 
               <button
-                disabled
-                onclick="alert('TODO')"
-                v-html="'load from file...'"
-              ></button>
-
-              <button
                 onclick="ecam.show('report')"
-                :disabled="scenario != Global"
+                :disabled="scenario!=Global"
                 v-html="'report'"
               ></button>
 
               <button
                 @click="delete_scenario(scenario)"
-                v-if="scenario != Global"
+                :disabled="scenario==Global"
+                :style="{color:(scenario==Global?'':'red')}"
                 v-html="'delete'"
-                style="color:red"
               ></button>
             </td>
           </tr>

@@ -130,7 +130,6 @@ let stages_menu=new Vue({
                     <div>
                       <a @click="go_to_substage(ss)"
                         :selected_substage="is_substage_selected(ss)"
-                        style="font-size:smaller"
                         v-html="ss.name"
                       ></a>
                       <!--delete substage btn-->

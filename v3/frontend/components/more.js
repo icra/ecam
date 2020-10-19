@@ -47,19 +47,6 @@ let more = new Vue({
         More
       </h2>
 
-      <!--open save buttons-->
-      <div class=tab_buttons>
-        TODO
-        <button class=left onclick="" disabled>
-          {{translate('open')}}
-        </button>
-        <button class=right onclick="" disabled>
-          {{translate('save')}}
-        </button>
-        <input type="file" id="loadfile" accept=".json"
-          onchange="loadFile(event)" style="display:none">
-      </div>
-
       <!--sections-->
       <ul style="width:70%;margin:auto;margin-bottom:10px">
         <!--summaries section-->
@@ -72,6 +59,7 @@ let more = new Vue({
             <li class=item><a onclick="ecam.show('benchmarks')">  {{translate('benchmarks')       }}</a></li>
             <li class=item><a onclick="ecam.show('fuel_table')">  {{translate('Fuel types')       }}</a></li>
             <li class=item><a onclick="ecam.show('development')"> {{translate('dev')              }}</a></li>
+            <li class=item><a onclick="ecam.show('tables')">      [TODO] {{translate('All tables')       }}</a></li>
             <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('unfccc_categories')}}</a></li>
           </ul>
         </li>

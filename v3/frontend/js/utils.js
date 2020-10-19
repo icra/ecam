@@ -56,6 +56,57 @@ function go_to_substage(substage, no_history_entry){
   ecam.show('tier_b', no_history_entry);
 }
 
+//get total value of one output
+function get_output_value(code, stage){
+  let output = null;
+  if(Global[code] && typeof(Global[code])=='function'){
+    output = Global[code]();
+  }else{
+    output = stage[code](); //can be a number or an object
+  }
+  //stage can be for example Global.Water or a substage
+  if(output==undefined) return 0;
+  return (typeof(output.total)=='number'?output.total:output);
+}
+
+//get partial results of one output (for example one emission that is total=CH4+N2O+CO2)
+function get_output_partial_values(code, stage){
+  //return value
+  //can be a number or an object
+  let output = null;
+
+  if(Global[code] && typeof(Global[code])=='function'){
+    output = Global[code]();
+  }else{
+    output = stage[code]();
+  }
+
+  switch(typeof(output)){
+    case 'number':
+      return {total:output};
+      break;
+    case 'object':
+      return output;
+      break;
+    default:
+      console.warn(`"${code}" output type error`)
+      return {};
+      break;
+  }
+}
+
+//sum of substages of one output
+function get_sum_of_substages(level,sublevel,output_code){
+  if(!Global[level]){
+    console.log(level);
+    throw 'level incorrect';
+  }
+  if(!Global[level][sublevel]) throw 'sublevel incorrect';
+  return Global[level][sublevel].map(ss=>{
+    return get_output_value(output_code, ss);
+  }).sum();
+}
+
 //get unit stablished by the user
 function get_current_unit(code){
   if(!code) return "";
@@ -84,30 +135,6 @@ function get_base_unit(code, scenario){
 
   let base_unit = Object.entries(Units[info.magnitude]).find(([key,val])=>val==1)[0];
   return base_unit;
-}
-
-//sum of substages, sum emissions
-function get_sum_of_substages(level,sublevel,output_code){
-  if(!Global[level]){
-    console.log(level);
-    throw 'level incorrect';
-  }
-  if(!Global[level][sublevel]) throw 'sublevel incorrect';
-  return Global[level][sublevel].map(ss=>{
-    return get_output_value(output_code, ss);
-  }).sum();
-}
-
-function get_output_value(code, stage){
-  let output = null;
-  if(Global[code] && typeof(Global[code])=='function'){
-    output = Global[code]();
-  }else{
-    output = stage[code](); //can be a number or an object
-  }
-  //stage can be for example Global.Water or a substage
-  if(output==undefined) return 0;
-  return (typeof(output.total)=='number'?output.total:output);
 }
 
 //get level color

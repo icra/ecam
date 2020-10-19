@@ -303,7 +303,6 @@ let tier_b=new Vue({
           v-for="key in Object.keys(Filters)"
           class=filter
           @click="disable_all_filters();filters_active[key]=true;"
-          style="font-size:smaller"
         >
           <input type=checkbox
             :checked="filters_active[key]"
@@ -611,6 +610,7 @@ let tier_b=new Vue({
   style:`
     <style>
       #tier_b {
+        padding-bottom:5em;
       }
 
       #tier_b #title {

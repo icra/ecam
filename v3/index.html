@@ -25,10 +25,7 @@
     <script src="dataModel/unfccc.js"></script>
     <script src="dataModel/level3variables.js"></script>
     <script src="dataModel/level2only.js"></script>
-    <script src="dataModel/refValues.js"></script>
-    <script src="dataModel/estimations.js"></script>
     <script src="dataModel/sumable_magnitudes.js"></script>
-    <script src="utils.js"></script>
     <script src="graphs.js"></script>
     <script src="main_menu.js"></script>
   -->
@@ -87,7 +84,7 @@
   </div>
   <script>new Vue({el:"#loading",data:{Languages}});</script>
   <style>
-    /*loading ecam tool animation */
+    /*"loading ecam" animation */
     @keyframes loading_animation {
       from {color: black;}
       to {color: #eee;}
@@ -136,12 +133,8 @@
   <div id=translation_problems ></div><!--translation problems  VIEW-->
   <div id=validate_json        ></div><!--validate_json         VIEW-->
   <div id=data_structure_viewer></div><!--data_structure_viewer VIEW-->
-  <div id=benchmarks           ></div><!--benchmarks            VIEW-->
   <div id=graphs               ></div><!--graphs                VIEW-->
 </div>
-
-<div style=margin-bottom:5em></div>
-
 <!--load vue objects-->
   <!-- helper functions-->
   <script src="frontend/js/utils.js"></script>
