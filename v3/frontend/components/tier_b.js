@@ -1,8 +1,7 @@
 let tier_b=new Vue({
   el:"#tier_b",
   data:{
-    visible  : false,
-
+    visible              : false,
     level                : 'Water',
     sublevel             : false,
     substage             : null,
@@ -11,15 +10,16 @@ let tier_b=new Vue({
     //FILTERS (see "backend/filters.js")
     Filters,         //definition (list of variables for each filter)
     filters_on:true, //all filters on
-    filters_active:{  //each filter on/off
-      "Population":true,
-      "Water volumes":true,
-      "Operational parameters":true,
-      "Emission factors":true,
-      "Fuel consumption":true,
-      "Energy performance":true,
-      "Discharge":true,
-      "Sludge management":true,
+    filters_active:{ //each filter on/off
+      "Population"             : true,
+      "Water volumes"          : true,
+      "Operational parameters" : true,
+      "Emission factors"       : true,
+      "Fuel consumption"       : true,
+      "Energy performance"     : true,
+      "Discharge"              : true,
+      "Sludge management"      : true,
+      "Costs"                  : false,
     },
 
     //benchmark ui colors

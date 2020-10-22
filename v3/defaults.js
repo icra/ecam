@@ -18,8 +18,8 @@ for(let i=0;i<1;i++) stages_menu.add_substage('Waste','Onsite');
 */
 
 //initial page to display
-//ecam.show('overview');
-variable.view('wsa_KPI_GHG_fuel');
+ecam.show('select_scenario');
+//variable.view('wsa_KPI_GHG_fuel');
 
 //default values
 Global.General.conv_kwh_co2 = 0.7; //conversion factor for grid electricity (kgCO2/kWh)

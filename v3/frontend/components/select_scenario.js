@@ -61,7 +61,7 @@ let select_scenario=new Vue({
         inputs.push({code, scenario_values});
       });
 
-      let outputs=[]; //code, value
+      let outputs=[]; //code, value TODO
       //output_codes.forEach(code=>{
       //  let scenario_values = null;
       //  scenario_values = this.scenarios_compared.map(sce=>{
@@ -71,6 +71,53 @@ let select_scenario=new Vue({
       //});
 
       return inputs.concat(outputs);
+    },
+
+    save_to_file(){
+      //we want to save the variable "Scenarios"
+      let content = JSON.stringify(Scenarios,null,'  ');
+      let file = new Blob([content],{type:'text/plain'});
+
+      //generate <a> link and click it
+      let a      = document.createElement('a');
+      a.href     = URL.createObjectURL(file);
+      a.target   = '_blank';
+      a.download = Scenarios.map(s=>s.General.Name).join('+')+'.json'; //filename
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    },
+
+    load_json_file(evt, replace){
+      replace = replace || false;
+
+      //get json file contents
+      let file = evt.target.files[0];
+      let reader = new FileReader();
+      let _this = this;
+
+      reader.onload=function(){
+        let saved_file = JSON.parse(reader.result);
+
+        if(replace){
+          Scenarios=[];
+          _this.Scenarios = Scenarios;
+        }
+
+        saved_file.forEach(obj=>{
+          Scenarios.push(
+            Ecam.from(obj)
+          );
+        });
+
+        //select first scenario
+        if(Scenarios.length){
+          ecam.set_current_scenario(Scenarios[0]);
+        }
+      }
+      try{
+        reader.readAsText(file);
+      }catch(e){alert(e)}
     },
 
     get_input_codes,
@@ -103,23 +150,49 @@ let select_scenario=new Vue({
           align-items:center;
         "
       >
-        <!--load file-->
+        <!--load file replace-->
         <div>
-          <button onclick="alert('TODO')" title="load a file" disabled>
-            <span>Load file...</span>
+          <button
+            onclick="document.querySelector('#loadfile').click()"
+            title="load a file"
+            style="padding:15px"
+          >
+            <span>
+              Load file (replace current systems)...
+            </span>
           </button>
           <input
             id="loadfile"
             type="file"
             accept=".json"
-            onchange="loadFile(event)"
+            onchange="select_scenario.load_json_file(event,true)"
+            style="display:none"
+          >
+        </div>
+
+        <!--load file append-->
+        <div>
+          <button
+            onclick="document.querySelector('#loadfile_append').click()"
+            title="load a file"
+            style="padding:15px"
+          >
+            <span>
+              Load file (append to current systems)...
+            </span>
+          </button>
+          <input
+            id="loadfile_append"
+            type="file"
+            accept=".json"
+            onchange="select_scenario.load_json_file(event)"
             style="display:none"
           >
         </div>
 
         <!--save file-->
         <div>
-          <button onclick="alert('TODO')" title="save all systems to a JSON file" disabled>
+          <button @click="save_to_file()" title="save all systems to a JSON file">
             <div style="display:flex;align-items:center">
               <img
                 class=icon
@@ -129,8 +202,6 @@ let select_scenario=new Vue({
             </div>
           </button>
         </div>
-
-        <div>in development</div>
       </div>
 
       <!--select scenario table-->
@@ -292,7 +363,7 @@ let select_scenario=new Vue({
                     ></div>
                   </div>
                   <div style="font-size:smaller" >
-                    <a 
+                    <a
                       @click="variable.view(v.code)"
                       style="color:white"
                     >{{v.code}}</a>
@@ -396,7 +467,7 @@ let select_scenario=new Vue({
         border-color:var(--color-level-generic);
       }
       #select_scenario #load_save_btns > div {
-        padding:5px;
+        padding:0.5px;
       }
     </style>
   `,

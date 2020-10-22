@@ -25,123 +25,8 @@ class Ecam{
       gwp_reports_index    : 0,     //index of selected GWP report
     };
 
-    this.Water={     //Water supply stages
-      ws_resi_pop:0, //resident population
-
-      //arrays of Substages
-      Abstraction  : [ new Water_Abstraction('Abstraction 1'),   ],
-      Treatment    : [ new Water_Treatment('Treatment 1'),       ],
-      Distribution : [ new Water_Distribution('Distribution 1'), ],
-
-      equations:[
-        "ws_KPI_GHG_abs",
-        "ws_KPI_GHG_tre",
-        "ws_KPI_GHG_dis",
-        "ws_KPI_GHG",
-
-        "ws_serv_pop",
-        "ws_SL_serv_pop",
-        "ws_SL_auth_con",
-        "ws_nrg_cons",
-        "ws_vol_fuel",
-      ],
-
-      //GHG ws
-        ws_KPI_GHG_abs(){return this.Abstraction .map(s=>s.wsa_KPI_GHG()).sum()},
-        ws_KPI_GHG_tre(){return this.Treatment   .map(s=>s.wst_KPI_GHG()).sum()},
-        ws_KPI_GHG_dis(){return this.Distribution.map(s=>s.wsd_KPI_GHG()).sum()},
-        ws_KPI_GHG(){
-          let wsa=this.ws_KPI_GHG_abs();
-          let wst=this.ws_KPI_GHG_tre();
-          let wsd=this.ws_KPI_GHG_dis();
-          return wsa+wst+wsd;
-        },
-      //SL ws
-        ws_serv_pop(){
-          return this.Distribution.map(s=>s.wsd_serv_pop).sum();
-        },
-        ws_nrg_cons(){
-          let wsa = this.Abstraction .map(s=>s.wsa_nrg_cons).sum();
-          let wst = this.Treatment   .map(s=>s.wst_nrg_cons).sum();
-          let wsd = this.Distribution.map(s=>s.wsd_nrg_cons).sum();
-          return wsa+wst+wsd;
-        },
-        ws_vol_fuel(){
-          let wsa = this.Abstraction .map(s=>s.wsa_vol_fuel).sum();
-          let wst = this.Treatment   .map(s=>s.wst_vol_fuel).sum();
-          let wsd = this.Distribution.map(s=>s.wsd_vol_fuel).sum();
-          return wsa+wst+wsd;
-        },
-        ws_SL_serv_pop(){return 100*this.Distribution.map(s=>s.wsd_serv_pop).sum()/this.ws_resi_pop;},
-        ws_SL_auth_con(){
-          let wsd_auth_con = this.Distribution.map(s=>s.wsd_auth_con).sum(); //m3
-          let wsd_serv_pop = this.Distribution.map(s=>s.wsd_serv_pop).sum(); //population
-          return 1e3*wsd_auth_con/wsd_serv_pop/Global.Days()||0;
-        },
-    };
-
-    this.Waste={     //Wastewater stages
-      ww_resi_pop:0, //resident population
-      ww_vol_gene:0, //volume of generated wastewater
-
-      //arrays of Substages
-      Collection : [ new Waste_Collection('Collection 1') ],
-      Treatment  : [ new Waste_Treatment('Treatment 1')   ],
-      Onsite     : [ new Waste_Onsite('Onsite 1')         ],
-
-      equations:[
-        "ww_KPI_GHG_col", //GHG from Wastewater Collection
-        "ww_KPI_GHG_tre", //GHG from Wastewater Treatment
-        "ww_KPI_GHG_ons", //GHG from Wastewater Discharge
-        "ww_KPI_GHG",     //GHG from Wastewater
-
-        "ww_serv_pop",    //SL serviced population
-        "ww_nrg_cons",    //SL energy consumed from the grid
-        "ww_GHG_avoided", //SL GHG avoided
-      ],
-
-      //GHG ww
-        ww_KPI_GHG_col(){return this.Collection.map(s=>s.wwc_KPI_GHG()).sum()},
-        ww_KPI_GHG_tre(){return this.Treatment .map(s=>s.wwt_KPI_GHG()).sum()},
-        ww_KPI_GHG_ons(){return this.Onsite    .map(s=>s.wwo_KPI_GHG()).sum()},
-        ww_KPI_GHG(){
-          let wwc = this.ww_KPI_GHG_col();
-          let wwt = this.ww_KPI_GHG_tre();
-          let wwo = this.ww_KPI_GHG_ons();
-          return wwc+wwt+wwo;
-        },
-      //ww SL
-        ww_serv_pop(){
-          let wwt = this.Treatment.map(s=>s.wwt_serv_pop).sum();
-          let wwo = this.Onsite   .map(s=>s.wwo_onsi_pop).sum();
-          return wwt+wwo;
-        },
-        ww_nrg_cons(){
-          let wwc = this.Collection.map(s=>s.wwc_nrg_cons).sum();
-          let wwt = this.Treatment .map(s=>s.wwt_nrg_cons).sum();
-          let wwo = this.Onsite    .map(s=>s.wwo_nrg_cons).sum();
-          return wwc+wwt+wwo;
-        },
-        ww_vol_fuel(){
-          let wwc = this.Collection.map(s=>s.wwc_vol_fuel).sum();
-          let wwt = this.Treatment .map(s=>s.wwt_vol_fuel).sum();
-          let wwo = this.Onsite    .map(s=>s.wwo_vol_fuel).sum();
-          return wwc+wwt+wwo;
-          //TO BE REVISED (some variables missing) TODO
-        },
-        ww_GHG_avoided(){
-          return (
-            this.Treatment.map(s=>s.wwt_SL_GHG_avoided()   ).sum()+
-            this.Treatment.map(s=>s.wwt_wr_C_seq_slu()     ).sum()+
-            this.Treatment.map(s=>s.wwd_wr_GHG_avo_d()     ).sum()+
-            this.Treatment.map(s=>s.wwd_SL_ghg_non()       ).sum()+
-            this.Treatment.map(s=>s.wwd_wr_GHG_avo()       ).sum()+
-            this.Onsite   .map(s=>s.wwo_SL_GHG_avoided()   ).sum()+
-            this.Onsite   .map(s=>s.wwo_ghg_avoided_reuse()).sum()+
-            this.Onsite   .map(s=>s.wwo_ghg_avoided_land() ).sum()
-          );
-        },
-    };
+    this.Water=new Water_stages(), //Water supply stages
+    this.Waste=new Waste_stages(), //Wastewater stages
 
     this.Configuration={
       //user selected units for inputs
@@ -162,7 +47,183 @@ class Ecam{
     return 1+(finalDate-startDate)/1000/60/60/24; //days
   }
   Years(){return this.Days()/365}
+
+  //---
+  static from(json_obj){
+    //return value
+    let o = Object.assign(new Ecam(), json_obj);
+    o.Water = Water_stages.from(json_obj.Water);
+    o.Waste = Waste_stages.from(json_obj.Waste);
+    return o;
+  }
 };
+
+class Water_stages{
+  constructor(){
+    this.ws_resi_pop = 0; //resident population
+
+    //arrays of substages
+    this.Abstraction  = [ new Water_Abstraction('Abstraction 1')   ];
+    this.Treatment    = [ new Water_Treatment('Treatment 1')       ];
+    this.Distribution = [ new Water_Distribution('Distribution 1') ];
+
+    this.equations=[
+      "ws_KPI_GHG_abs",
+      "ws_KPI_GHG_tre",
+      "ws_KPI_GHG_dis",
+      "ws_KPI_GHG",
+
+      "ws_serv_pop",
+      "ws_SL_serv_pop",
+      "ws_SL_auth_con",
+      "ws_nrg_cons",
+      "ws_vol_fuel",
+    ];
+  }
+  //GHG ws
+    ws_KPI_GHG_abs(){
+      return this.Abstraction .map(s=>s.wsa_KPI_GHG()).sum();
+    }
+    ws_KPI_GHG_tre(){
+      return this.Treatment   .map(s=>s.wst_KPI_GHG()).sum();
+    }
+    ws_KPI_GHG_dis(){
+      return this.Distribution.map(s=>s.wsd_KPI_GHG()).sum();
+    }
+    ws_KPI_GHG(){
+      let wsa=this.ws_KPI_GHG_abs();
+      let wst=this.ws_KPI_GHG_tre();
+      let wsd=this.ws_KPI_GHG_dis();
+      return wsa+wst+wsd;
+    }
+  //SL ws
+    ws_serv_pop(){
+      return this.Distribution.map(s=>s.wsd_serv_pop).sum();
+    }
+    ws_nrg_cons(){
+      let wsa = this.Abstraction .map(s=>s.wsa_nrg_cons).sum();
+      let wst = this.Treatment   .map(s=>s.wst_nrg_cons).sum();
+      let wsd = this.Distribution.map(s=>s.wsd_nrg_cons).sum();
+      return wsa+wst+wsd;
+    }
+    ws_vol_fuel(){
+      let wsa = this.Abstraction .map(s=>s.wsa_vol_fuel).sum();
+      let wst = this.Treatment   .map(s=>s.wst_vol_fuel).sum();
+      let wsd = this.Distribution.map(s=>s.wsd_vol_fuel).sum();
+      return wsa+wst+wsd;
+    }
+    ws_SL_serv_pop(){
+      return 100*this.Distribution.map(s=>s.wsd_serv_pop).sum()/this.ws_resi_pop;
+    }
+    ws_SL_auth_con(){
+      let wsd_auth_con = this.Distribution.map(s=>s.wsd_auth_con).sum(); //m3
+      let wsd_serv_pop = this.Distribution.map(s=>s.wsd_serv_pop).sum(); //population
+      return 1e3*wsd_auth_con/wsd_serv_pop/Global.Days()||0;
+    }
+  //---
+  static from(json_obj){
+    //return value
+    let o = Object.assign(new Water_stages(), json_obj);
+
+    //populate stages with each correct class
+    Structure.filter(s=>s.level=='Water'&&s.sublevel).forEach(s=>{
+      //reset array of substages
+      o[s.sublevel]=[];
+      //invoke each class static method "from(json_obj)"
+      json_obj[s.sublevel].forEach(obj=>{
+        o[s.sublevel].push( s.class.from(obj) );
+      });
+    });
+
+    return o;
+  }
+}
+
+class Waste_stages{
+  constructor(){
+    this.ww_resi_pop=0; //resident population
+    this.ww_vol_gene=0; //volume of generated wastewater
+
+    //arrays of Substages
+    this.Collection = [ new Waste_Collection('Collection 1') ];
+    this.Treatment  = [ new Waste_Treatment('Treatment 1')   ];
+    this.Onsite     = [ new Waste_Onsite('Onsite 1')         ];
+
+    this.equations=[
+      "ww_KPI_GHG_col", //GHG from Wastewater Collection
+      "ww_KPI_GHG_tre", //GHG from Wastewater Treatment
+      "ww_KPI_GHG_ons", //GHG from Wastewater Discharge
+      "ww_KPI_GHG",     //GHG from Wastewater
+
+      "ww_serv_pop",    //SL serviced population
+      "ww_nrg_cons",    //SL energy consumed from the grid
+      "ww_GHG_avoided", //SL GHG avoided
+    ];
+  }
+  //GHG ww
+    ww_KPI_GHG_col(){
+      return this.Collection.map(s=>s.wwc_KPI_GHG()).sum();
+    }
+    ww_KPI_GHG_tre(){
+      return this.Treatment.map(s=>s.wwt_KPI_GHG()).sum();
+    }
+    ww_KPI_GHG_ons(){
+      return this.Onsite.map(s=>s.wwo_KPI_GHG()).sum();
+    }
+    ww_KPI_GHG(){
+      let wwc = this.ww_KPI_GHG_col();
+      let wwt = this.ww_KPI_GHG_tre();
+      let wwo = this.ww_KPI_GHG_ons();
+      return wwc+wwt+wwo;
+    }
+  //ww SL
+    ww_serv_pop(){
+      let wwt = this.Treatment.map(s=>s.wwt_serv_pop).sum();
+      let wwo = this.Onsite   .map(s=>s.wwo_onsi_pop).sum();
+      return wwt+wwo;
+    }
+    ww_nrg_cons(){
+      let wwc = this.Collection.map(s=>s.wwc_nrg_cons).sum();
+      let wwt = this.Treatment .map(s=>s.wwt_nrg_cons).sum();
+      let wwo = this.Onsite    .map(s=>s.wwo_nrg_cons).sum();
+      return wwc+wwt+wwo;
+    }
+    ww_vol_fuel(){
+      let wwc = this.Collection.map(s=>s.wwc_vol_fuel).sum();
+      let wwt = this.Treatment .map(s=>s.wwt_vol_fuel).sum();
+      let wwo = this.Onsite    .map(s=>s.wwo_vol_fuel).sum();
+      return wwc+wwt+wwo;
+      //TO BE REVISED (some variables missing) TODO
+    }
+    ww_GHG_avoided(){
+      return (
+        this.Treatment.map(s=>s.wwt_SL_GHG_avoided()   ).sum()+
+        this.Treatment.map(s=>s.wwt_wr_C_seq_slu()     ).sum()+
+        this.Treatment.map(s=>s.wwd_wr_GHG_avo_d()     ).sum()+
+        this.Treatment.map(s=>s.wwd_SL_ghg_non()       ).sum()+
+        this.Treatment.map(s=>s.wwd_wr_GHG_avo()       ).sum()+
+        this.Onsite   .map(s=>s.wwo_SL_GHG_avoided()   ).sum()+
+        this.Onsite   .map(s=>s.wwo_ghg_avoided_reuse()).sum()+
+        this.Onsite   .map(s=>s.wwo_ghg_avoided_land() ).sum()
+      );
+    }
+  //---
+  static from(json_obj){
+    let o = Object.assign(new Waste_stages(), json_obj);
+
+    //populate stages with each correct class
+    Structure.filter(s=>s.level=='Waste'&&s.sublevel).forEach(s=>{
+      //reset array of substages
+      o[s.sublevel]=[];
+      //invoke each class static method "from(json_obj)"
+      json_obj[s.sublevel].forEach(obj=>{
+        o[s.sublevel].push( s.class.from(obj) );
+      });
+    });
+
+    return o;
+  }
+}
 
 //classes for Substages inside Ecam objects
 class Substage{
@@ -282,6 +343,9 @@ class Water_Abstraction extends Substage{
       return Global.General.conv_kwh_co2*this.wsa_KPI_nrg_estm_sav();
     }
   //---
+  static from(json_obj){
+    return Object.assign(new Water_Abstraction(), json_obj);
+  }
 };
 
 class Water_Treatment extends Substage{
@@ -357,6 +421,9 @@ class Water_Treatment extends Substage{
     wst_KPI_nrg_estm_sav(){return this.wst_nrg_cons-this.wst_KPI_nrg_cons_new()}
     wst_KPI_ghg_estm_red(){return Global.General.conv_kwh_co2*this.wst_KPI_nrg_estm_sav()}
   //---
+  static from(json_obj){
+    return Object.assign(new Water_Treatment(), json_obj);
+  }
 };
 
 class Water_Distribution extends Substage{
@@ -480,6 +547,9 @@ class Water_Distribution extends Substage{
     wsd_KPI_nrg_estm_sav(){return this.wsd_nrg_cons-this.wsd_KPI_nrg_cons_new()}
     wsd_KPI_ghg_estm_red(){return Global.General.conv_kwh_co2*this.wsd_KPI_nrg_estm_sav()}
   //---
+  static from(json_obj){
+    return Object.assign(new Water_Distribution(), json_obj);
+  }
 };
 
 class Waste_Collection extends Substage{
@@ -571,6 +641,9 @@ class Waste_Collection extends Substage{
     wwc_KPI_nrg_estm_sav(){return this.wwc_nrg_cons-this.wwc_KPI_nrg_cons_new()}
     wwc_KPI_ghg_estm_red(){return Global.General.conv_kwh_co2*this.wwc_KPI_nrg_estm_sav()}
   //---
+  static from(json_obj){
+    return Object.assign(new Waste_Collection(), json_obj);
+  }
 };
 
 class Waste_Treatment extends Substage{
@@ -941,6 +1014,9 @@ class Waste_Treatment extends Substage{
       return sludge_mass*(TVS)*(0.56)*(0.2)*(44/12);
     }
   //---
+  static from(json_obj){
+    return Object.assign(new Waste_Treatment(), json_obj);
+  }
 };
 
 class Waste_Onsite extends Substage{
@@ -1219,6 +1295,9 @@ class Waste_Onsite extends Substage{
       return this.wwo_nrg_cons - this.wwo_KPI_nrg_cons_new();
     }
   //---
+  static from(json_obj){
+    return Object.assign(new Waste_Onsite(), json_obj);
+  }
 };
 
 //array of systems (system == Ecam object)
