@@ -1,8 +1,3 @@
-<!doctype html><html><head>
-<?php include'imports.php'?>
-</head><body><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--NAVBAR--><?php include"navbar.php"?>
 <!--title--><h1><a href=development.php>Development</a> &rsaquo; Current JSON file</h1>
 
 <!--form for json formatter-->

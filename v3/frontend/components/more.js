@@ -52,15 +52,16 @@ let more = new Vue({
         <!--summaries section-->
         <li class=section>
           <ul>
-            <li class=item><a onclick="ecam.show('about')">       {{translate('about')            }}</a></li>
-            <li class=item><a onclick="ecam.show('help')">        {{translate('help')             }}</a></li>
-            <li class=item><a onclick="ecam.show('population')">  {{translate('population')       }}</a></li>
-            <li class=item><a onclick="ecam.show('constants')">   {{translate('all_constants')    }}</a></li>
-            <li class=item><a onclick="ecam.show('benchmarks')">  {{translate('benchmarks')       }}</a></li>
-            <li class=item><a onclick="ecam.show('fuel_table')">  {{translate('Fuel types')       }}</a></li>
-            <li class=item><a onclick="ecam.show('development')"> {{translate('dev')              }}</a></li>
-            <li class=item><a onclick="ecam.show('tables')">      [TODO] {{translate('All tables')       }}</a></li>
-            <li class=item><a onclick="alert('TODO')">            [TODO] {{translate('unfccc_categories')}}</a></li>
+            <li class=item><a onclick="ecam.show('about')">             {{translate('about')                   }}</a></li>
+            <li class=item><a onclick="ecam.show('help')">              {{translate('help')                    }}</a></li>
+            <li class=item><a onclick="ecam.show('population')">        {{translate('population')              }}</a></li>
+            <li class=item><a onclick="ecam.show('constants')">         {{translate('all_constants')           }}</a></li>
+            <li class=item><a onclick="ecam.show('benchmarks')">        {{translate('benchmarks')              }}</a></li>
+            <li class=item><a onclick="ecam.show('fuel_table')">        {{translate('Fuel types')              }}</a></li>
+            <li class=item><a onclick="ecam.show('non_revenue_water')"> {{translate('non_revenue_water')       }}</a></li>
+            <li class=item><a onclick="ecam.show('development')">       {{translate('dev')                     }}</a></li>
+            <li class=item><a onclick="ecam.show('tables')">            [TODO] {{translate('All tables')       }}</a></li>
+            <li class=item><a onclick="alert('TODO')">                  [TODO] {{translate('unfccc_categories')}}</a></li>
           </ul>
         </li>
       </ul>

@@ -346,7 +346,3 @@
     }
   </style>
 </div>
-
-<div style=margin-bottom:8em></div>
-<!--CURRENT JSON--><?php include'currentJSON.php'?>
-<script>google.charts.load('current',{'packages':['corechart']});</script>

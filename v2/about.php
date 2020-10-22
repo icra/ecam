@@ -1,10 +1,3 @@
-<!doctype html><html><head>
-<?php include'imports.php'?>
-</head><body><center>
-<!--CURRENT JSON--><?php include'currentJSON.php'?>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--NAVBAR--><?php include'navbar.php'?>
-
 <!--TITLE--><h1><?php write('#about')?></h1>
 
 <div id=main>
@@ -58,9 +51,6 @@
     Chart library: <a target=_blank href="https://google-developers.appspot.com/chart/">Google Charts</a>
   </p>
 
-  <!--<img class="license_img" src="img/cc_icon_white_x2.png" alt="">
-  <img class="license_img" src="img/attribution_icon_white_x2.png" alt="">
-  <img class="license_img" src="img/sa_white_x2.png" alt=""> -->
   <img class="license_img license_img-big" src="img/CC_license_big.png" alt="">
   <br><br>
   ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under
@@ -69,12 +59,4 @@
   at <a target="_blank" href="https://creativecommons.org/choose/info@wacclim.org">info@wacclim.org</a>.
 </div>
 
-</div>
-<div class="footer_wrap">
-  <!--FOOTER--><?php include'footer.php'?>
-</div>
-
-<!--logos-->
-<div style=background:white;text-align:center;margin-top:50px;>
-  <img src=img/logos.png>
 </div>

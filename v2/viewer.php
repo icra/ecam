@@ -1,11 +1,9 @@
 <?php /*All data structures in ecam*/?>
 <!doctype html><html><head>
-<?php include'imports.php'?>
 <script>
   /*data structures viewer*/
   function init(){
     createTree();
-    updateResult();
   }
 
   function createTree(obj,name,destiny) {
@@ -63,6 +61,7 @@
     }
   }
 </script>
+
 <style>
   ul {list-style:circle}
   div.card {background:none}
@@ -88,6 +87,7 @@
     border-radius:0.3em;
   }
 </style>
+
 </head><body onload="init()" style="background:#bce3f8"><center>
 <?php
   include'sidebar.php';
@@ -125,5 +125,3 @@
   ?>
   </ul>
 </div>
-
-<!--JSON--><?php include'currentJSON.php'?>

@@ -21,11 +21,16 @@ let stages_menu=new Vue({
 
     //frontend effect to mark selected stage
     is_tier_b_selected(level, sublevel){
+      sublevel = sublevel || false;
       if(this.current_view!='tier_b') return false;
       if(level==tier_b.level && sublevel==tier_b.sublevel){
         return true;
       }
       return false;
+    },
+
+    is_level_1_selected(level){
+      return tier_b.level == level;
     },
 
     is_substage_selected(substage){
@@ -80,7 +85,7 @@ let stages_menu=new Vue({
               >
                 <a
                   @click="go_to(l1.level)"
-                  style="color:white"
+                  :style="{color:is_tier_b_selected(l1.level)?'black':'white'}"
                 >
                   {{translate(l1.level)}}
                   ({{format(Global[l1.level][l1.prefix+'_KPI_GHG']())}} <small>kg CO<sub>2</sub>eq</small>)
@@ -101,7 +106,7 @@ let stages_menu=new Vue({
                       >
                     </div>
                     <div>
-                      <b>{{translate(s.sublevel)}}</b>
+                      <b :style="{color:is_tier_b_selected(s.level,s.sublevel)?'black':''}">{{translate(s.sublevel)}}</b>
                     </div>
                     <div v-if="show_substages_summary" style="border-bottom:1px solid #ccc"></div>
                   </a>

@@ -51,7 +51,6 @@ let Benchmarks = {
       }else return "pump size error";
     }else return "pump type error";
   },
-
   wsd_KPI_std_nrg_cons(stage, value){
     //pump size
     let pmp_size = Tables.get_row("Pump size",stage.wsd_pmp_size).name; //string
@@ -79,14 +78,12 @@ let Benchmarks = {
     }
     else return "Out of range";
   },
-
   wwc_KPI_std_nrg_cons(stage, value){
     if      (0.2725 <= value && value <= 0.45) { return "Good" }
     else if (0.45   <  value && value <= 0.68) { return "Acceptable" }
     else if (value  > 0.68)                    { return "Unsatisfactory" }
     else                                       { return "Out of range" }
   },
-
   wwt_KPI_std_nrg_cons(stage, value){
     if      (0.2725 <= value && value <= 0.40) return "Good";
     else if (0.40   <  value && value <= 0.54) return "Acceptable";
@@ -101,7 +98,6 @@ let Benchmarks = {
     else if (value >  4)                   return "Unsatisfactory";
     else                                   return "Out of range";
   },
-
   wsd_KPI_un_head_loss(stage, value){
     if      (value <= 2)                   return "Good";
     else if (2     <  value && value <= 4) return "Acceptable";
@@ -115,6 +111,12 @@ let Benchmarks = {
     else if ((90 <  value && value <= 100) || (50 <= value && value < 70)) return "Acceptable";
     else if ((value > 100)||(value < 50))                                  return "Unsatisfactory";
     else                                                                   return "Out of range";
+  },
+  wwt_KPI_capac_util(stage, value) {
+    if     (70 <= value && value <= 95)                                  return "Good";
+    else if((95 < value && value <= 100) || (50 < value && value < 70) ) return "Acceptable";
+    else if(value > 100 || value < 50)                                   return "Unsatisfactory";
+    else                                                                 return "Out of range";
   },
 
   //kwh of energy consumption per m3 of treated water
@@ -187,14 +189,6 @@ let Benchmarks = {
     else if(20    >  value && value >= 12) return "Acceptable";
     else if(value < 12)                    return "Unsatisfactory";
     else                                   return "Out of range";
-  },
-
-  //% of treatment capacity used
-  wwt_KPI_capac_util(stage, value) {
-    if     (70 <= value && value <= 95)                                  return "Good";
-    else if((95 < value && value <= 100) || (50 < value && value < 70) ) return "Acceptable";
-    else if(value > 100 || value < 50)                                   return "Unsatisfactory";
-    else                                                                 return "Out of range";
   },
 
   //% of energy produced per total available energy in biogas

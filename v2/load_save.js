@@ -1,16 +1,3 @@
-//new open save clear functions-->
-
-function removeAllCookies() {
-  removeCookie("Global");
-  removeCookie("Substages");
-}
-
-/* New system */
-function newSystem() {
-  removeAllCookies();
-  window.location="getStarted.php";
-}
-
 /* Generate a json/text file of the Global object */
 function saveToFile() {
   let SavedFile={
@@ -48,11 +35,4 @@ function loadFile(evt) {
   try{
     reader.readAsText(file);
   }catch(e){alert(e)}
-}
-
-/* clear current system */
-function clearSystem() {
-  //simply remove cookie and default values will load
-  removeAllCookies();
-  window.location='index.php';
 }

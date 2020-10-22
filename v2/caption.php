@@ -1,5 +1,5 @@
-<!--file to import everywhere-->
 <div id=caption style=display:none>#caption</div>
+
 <script>
   let Caption={};//namespace
 
@@ -24,6 +24,7 @@
     }
   };
 </script>
+
 <style>
   div#caption {
     position:fixed;

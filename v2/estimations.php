@@ -1,33 +1,4 @@
-<!doctype html><html><head>
-	<?php include'imports.php'?>
-	<style>
-		#root {
-			margin:1em;
-			text-align:left;
-			font-family:monospace;
-		}
-	</style>
-</head><body><center>
-<!--sidebar--><?php include'sidebar.php'?>
-<!--navbar--><?php include'navbar.php'?>
-<!--linear--><?php include'linear.php'?>
 <!--title--><h1>Summary of estimations at Initial GHG assessment</h1>
-<div id=root>
-
-<b><u>Equations for input estimations based on other inputs:</u></b>
-<h3>1. Estimations performed when answering biogas questions (produced and valorised)</h3>
-<div id=biogas></div>
-
-<h3>2. Estimations performed when the main treatment type is chosen</h3>
-<div id=treatment></div>
-
-<h3>3. Estimations performed when the sludge disposal method is chosen</h3>
-<div id=disposal></div>
-
-FSM
-<h3>4. Estimations performed in Faecal Sludge Management</h3>
-<div id=fsm></div>
-
 <script>
   let estimations = {
     biogas:{
@@ -77,7 +48,3 @@ FSM
     });
   });
 </script>
-
-
-<!--FOOTER--><?php include'footer.php'?>
-<!--CURRENT JSON--><?php include'currentJSON.php'?>
