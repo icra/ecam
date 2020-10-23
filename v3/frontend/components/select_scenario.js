@@ -3,6 +3,7 @@ let select_scenario=new Vue({
   data:{
     visible:false,
     scenarios_compared:[],
+    loadfile_replace:false,
 
     variable,
 
@@ -88,29 +89,44 @@ let select_scenario=new Vue({
       document.body.removeChild(a);
     },
 
-    load_json_file(evt, replace){
-      replace = replace || false;
+    load_json_file(event){
+      let filename = document.querySelector('#loadfile').value;
+      if(filename=="") return;
+
+      //mode: replace or append
+      let replace = this.loadfile_replace;
+
+      if(replace){
+        if(!confirm("Current changes will be lost. Continue?")){
+          return;
+        }
+      }
 
       //get json file contents
-      let file = evt.target.files[0];
+      let file   = event.target.files[0];
       let reader = new FileReader();
-      let _this = this;
+      let _this  = this; //vue object
 
       reader.onload=function(){
         let saved_file = JSON.parse(reader.result);
+        if(!saved_file){
+          alert("error loading file");
+          return;
+        }
 
         if(replace){
           Scenarios=[];
           _this.Scenarios = Scenarios;
         }
 
+        //load objects
         saved_file.forEach(obj=>{
           Scenarios.push(
             Ecam.from(obj)
           );
         });
 
-        //select first scenario
+        //set first scenario as current scenario
         if(Scenarios.length){
           ecam.set_current_scenario(Scenarios[0]);
         }
@@ -151,43 +167,41 @@ let select_scenario=new Vue({
         "
       >
         <!--load file replace-->
-        <div>
-          <button
-            onclick="document.querySelector('#loadfile').click()"
-            title="load a file"
-            style="padding:15px"
+        <div
+          style="
+            border:1px solid #ccc;
+            padding:5px;
+            border-radius:5px;
+            margin-right:1px;
+          "
+        >
+          <div style="
+            display:flex;
+            justify-content:space-between;
+          "
           >
-            <span>
-              Load file (replace current systems)...
-            </span>
-          </button>
-          <input
-            id="loadfile"
-            type="file"
-            accept=".json"
-            onchange="select_scenario.load_json_file(event,true)"
-            style="display:none"
-          >
-        </div>
+            <div style="font-size:larger">
+              <b>Load file</b>
+            </div>
+            <div style="font-size:smaller">
+              <!--load mode radio btns-->
+              <label title="append json file to current systems">
+                <input type=radio v-model="loadfile_replace" :value='false'>Append
+              </label>
+              <label title="replace current systems with json file">
+                <input type=radio v-model="loadfile_replace" :value='true'>Replace
+              </label>
+            </div>
+          </div>
 
-        <!--load file append-->
-        <div>
-          <button
-            onclick="document.querySelector('#loadfile_append').click()"
-            title="load a file"
-            style="padding:15px"
-          >
-            <span>
-              Load file (append to current systems)...
-            </span>
-          </button>
-          <input
-            id="loadfile_append"
-            type="file"
-            accept=".json"
-            onchange="select_scenario.load_json_file(event)"
-            style="display:none"
-          >
+          <div style="margin-top:10px">
+            <input
+              id="loadfile"
+              type="file"
+              accept=".json"
+              @change="load_json_file($event)"
+            >
+          </div>
         </div>
 
         <!--save file-->
@@ -285,14 +299,7 @@ let select_scenario=new Vue({
             <td style="text-align:left">
               <button
                 @click="set_scenario_and_go_to_configuration(scenario)"
-                :disabled="scenario != Global"
                 v-html="'edit'"
-              ></button>
-
-              <button
-                onclick="ecam.show('report')"
-                :disabled="scenario!=Global"
-                v-html="'report'"
               ></button>
 
               <button

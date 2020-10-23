@@ -156,13 +156,12 @@ let ecam={
   //==update Global object in the frontend
   set_current_scenario(ecam_object){
     if(!ecam_object){return;}
+    //do nothing if we already are editing Global
+    if(ecam_object == Global) return;
     if(ecam_object.constructor!==Ecam){
       throw new Error('ecam_object is not an Ecam object');
       return;
     }
-
-    //do nothing if we already are editing Global
-    if(ecam_object == Global) return;
 
     //update Global
     Global = ecam_object;
