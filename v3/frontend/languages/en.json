@@ -1,6 +1,14 @@
 {
 "#below":"below",
 
+"#Electricity indirect emissions":"a",
+"#Fuel combustion direct emissions":"b",
+"#Untreated wastewater direct emissions":"c",
+"#Biogas direct emissions":"d",
+"#Treatment process direct emissions":"e",
+"#Sludge management direct emissions":"f",
+"#Discharged water direct":"g",
+
 "#benchmarks":"Benchmarks",
 "#General":"General",
 

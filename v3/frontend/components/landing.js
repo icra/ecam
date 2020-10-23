@@ -30,60 +30,31 @@ let landing = new Vue({
           </div>
         </div>
 
-        <!--urban water cycle picture-->
-        <div v-if="false" style=padding:2em>
-          <img src="frontend/img/viti/home/home-provisional.svg" style="width:60%">
-        </div>
-      </div>
-
-      <!--new and load-->
-      <div id=second_container >
-        <!--start-->
-        <div class=button_container>
-          <div>
-            <img src="frontend/img/viti/home/home-icon-newuser.svg" style="width:50%">
+        <div id=second_container >
+          <!--start-->
+          <div class=button_container>
+            <div>
+              <div>
+                <img src="frontend/img/viti/home/home-icon-newuser.svg" style="width:50%">
+              </div>
+              <h1 style="color:var(--color-level-generic);">
+                Are you a new user?
+              </h1>
+            </div>
+            <div>
+              <button
+                onclick="ecam.show('select_scenario')"
+                style="
+                  padding:1em 5em;
+                  font-size:x-large;
+                  background:var(--color-secondary-green);
+                  color:white;
+                "
+              >
+                Create a new system
+              </button>
+            </div>
           </div>
-          <h1 style="color:var(--color-level-generic);">
-            Are you a new user?
-          </h1>
-          <div>
-            Learn about ECAM and all you can do with it!
-          </div>
-
-          <p>
-            <button
-              onclick="event.stopPropagation();ecam.show('select_scenario')"
-              v-html="'Start a new system'"
-            ></button>
-          </p>
-        </div>
-
-        <!--load/open-->
-        <div class=button_container>
-          <div>
-            <img src="frontend/img/viti/home/home-icon-alreadyworked.svg" style="width:50%">
-          </div>
-          <h1 style="color:var(--color-level-generic);">
-            Have you already worked with ECAM?
-          </h1>
-          <div>
-            Continue editing and comparing results
-          </div>
-
-          <p>
-            <button
-              class=""
-              onclick="document.getElementById('loadfile').click()"
-              disabled
-              v-html="'Load your file'"
-            ></button>
-            <input type=file
-              id=loadfile
-              accept=".json"
-              onchange="loadFile(event)"
-              style=display:none
-            >
-          </p>
         </div>
       </div>
 
@@ -100,10 +71,8 @@ let landing = new Vue({
             <p><b>Open source</b></p>
             <div>
               The <b>ECAM tool</b> is a free and open source tool.
-              The source code lives at
-              <a target=_blank href=//github.com/icra/ecam>
-                github
-              </a>.
+              The source code lives in
+              <a target=_blank href=//github.com/icra/ecam>github</a>.
             </div>
           </div>
 
@@ -123,9 +92,7 @@ let landing = new Vue({
             <p><b>WaCCliM</b></p>
             <div>
               The tool is developed as part of the
-              <a target=_blank href=//wacclim.org/>
-                WaCCliM project
-              </a>.
+              <a target=_blank href=//wacclim.org/>WaCCliM project</a>.
             </div>
           </div>
         </div>
@@ -236,15 +203,11 @@ let landing = new Vue({
         padding-top:1em;
         padding-bottom:1em;
         text-align:center;
-
-        display:grid;
-        grid-template-columns:49% 49%;
-        grid-gap:2%;
       }
       #landing #second_container .button_container {
         background:white;
         box-shadow:0px 0px 10px #ccc;
-        padding:2em;
+        padding:1em;
         padding-top:0;
       }
 

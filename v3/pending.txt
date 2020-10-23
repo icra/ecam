@@ -1,22 +1,18 @@
 ECAM V3 LLUIS BOSCH TASKS
 
 -------------------------------------------------------------------------------
- to be done with viti help (frontend and UX)
+ to be done with viti help (UX frontend)
 -------------------------------------------------------------------------------
   * summaries
+  * highlight inputs and outputs on mouse hover
+  * graphs
 
 -------------------------------------------------------------------------------
  tasks not related with viti (backend + frontend link)
 -------------------------------------------------------------------------------
 [CAN BE DONE NOW]
-  ---------
-  * [NOW] [BACKEND] enhancement of ghg models to ipcc 2019
-          [BACKEND] substages backend connection to frontend
-  ---------
-  * [frontend] highlight inputs and outputs on mouse hover
+  * [frontend] sankey diagram
   * [frontend] Fetching language files asyncronously does not work for offline use (CORS is not compatible with file protocol, find alternative way to loading files offline.)
-  * [frontend] variable page / fuel type related constants show in involved inputs table
-  * [frontend] redo save button function
   * [frontend] onclose listener: trigger warning if ecam is accidentally closed
 
 [CANNOT BE DONE]: (missing info OR not clear how to implement OR time not invested)
@@ -73,10 +69,8 @@ ECAM V3 LLUIS BOSCH TASKS
 
       Best / Cordialement,
     ```
-  * [frontend] redo load files function ("open" button)
 
 [TO BE DONE AT THE END]
-  * [frontend] graphs
   * [frontend] update help & about & docs
   * [frontend] Translations of new pieces of text added for v3
 
