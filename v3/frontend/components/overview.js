@@ -54,13 +54,13 @@ let overview = new Vue({
 
       <!--sankey ghg-->
       <div style="text-align:center;">
-        <h3> GHG emissions </h3>
+        <h3> GHG emissions sankey diagram </h3>
         <div id=sankey_ghg></div>
       </div><hr>
 
       <!--charts-->
       <div style="text-align:center;">
-        <h3>Charts</h3>
+        <h3>GHG emissions pie chart</h3>
         <div id=pie_chart></div>
       </div><hr>
 
