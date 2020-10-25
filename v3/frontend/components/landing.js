@@ -51,7 +51,7 @@ let landing = new Vue({
                   color:white;
                 "
               >
-                Create a new system
+                <div v-html="'Start using ECAM'"></div>
               </button>
             </div>
           </div>

@@ -44,11 +44,19 @@ let Estimations={
       }
       return b*0.55*Global.General.bod_pday*substage.wwt_serv_pop*0.9*1e-3*1.176*Global.Days();
     },
-    wwt_dryw_slu(substage){ return 0.04*substage.wwt_mass_slu},
-    wwt_temp_inc(substage){ return 1023},
+    wwt_dryw_slu(substage){
+      return 0.04*substage.wwt_mass_slu;
+    },
+    wwt_temp_inc(substage){
+      return 1023;
+    },
   //wwo
-    wwo_vol_unco(substage){return 0.2*substage.wwo_onsi_pop*Global.Days()},
-    wwo_vol_unco_unt(substage){return substage.wwo_vol_unco - substage.wwo_vol_unco_ons;},
+    wwo_vol_unco(substage){
+      return 0.2*substage.wwo_onsi_pop*Global.Days();
+    },
+    wwo_vol_unco_ons(substage){
+      return substage.wwo_vol_unco - substage.wwo_vol_unco_unt;
+    },
     //0.3kg/person/day
     wwo_fslu_emp(substage){
       return 0.3 * substage.wwo_onsi_pop * Global.Days()/substage.wwo_fdensity * substage.wwo_cont_emp/100; 

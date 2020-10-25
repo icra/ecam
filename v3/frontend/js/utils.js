@@ -53,6 +53,7 @@ function go_to_substage(substage, no_history_entry){
   ){
     tier_b.normalization.selected="kgCO2eq";
   }
+
   ecam.show('tier_b', no_history_entry);
 }
 
@@ -150,12 +151,12 @@ function get_input_codes(level, sublevel){
   if(!level) return [];
   if(!Global[level]) return [];
 
+  let stage = Structure.find(s=>s.level==level&&s.sublevel==sublevel);
+  if(!stage) return [];
+
   let obj = null;
 
-  if(sublevel){
-    if(!Global[level][sublevel]) return [];
-    let stage = Structure.find(s=>s.level==level&&s.sublevel==sublevel);
-    if(!stage) return [];
+  if(stage.class){
     obj = new stage.class();
   }else{
     obj = Global[level];
@@ -173,12 +174,12 @@ function get_output_codes(level, sublevel){
   if(!level) return [];
   if(!Global[level]) return [];
 
+  let stage = Structure.find(s=>s.level==level&&s.sublevel==sublevel);
+  if(!stage) return [];
+
   let obj = null;
 
-  if(sublevel){
-    if(!Global[level][sublevel]) return [];
-    let stage = Structure.find(s=>s.level==level&&s.sublevel==sublevel);
-    if(!stage) return [];
+  if(stage.class){
     obj = stage.class.prototype;
   }else{
     obj = Global[level];

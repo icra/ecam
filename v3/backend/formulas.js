@@ -18,14 +18,14 @@ let Formulas={
     let all_input_codes=[];
     let all_output_codes = Object.getOwnPropertyNames(Ecam.prototype);
     Structure.concat({level:"General"}).forEach(s=>{
-      let stage = s.sublevel ? new s.class() : Global[s.level];
+      let stage = s.class ? new s.class() : Global[s.level];
       Object.keys(stage).forEach(key=>{
         if(typeof(stage[key])=='number'){
           all_input_codes.push(key);
         }
       });
 
-      stage = s.sublevel ? s.class.prototype : Global[s.level];
+      stage = s.class ? s.class.prototype : Global[s.level];
 
       Object.getOwnPropertyNames(stage).forEach(key=>{
         if(typeof(stage[key])=='function'){
@@ -56,15 +56,15 @@ let Formulas={
     let matches=[];
     let reg=new RegExp('\\W'+id+"\\W");
 
-    //get arrays of strings corresponding to codes of outputs
+    //search Ecam.prototype
     Object.getOwnPropertyNames(Ecam.prototype).forEach(code=>{
       let match = Ecam.prototype[code].toString().search(reg); //will return -1 if not found
       if(match+1) matches.push(code);
     });
 
-    //check all outputs
+    //search all stages
     Structure.concat({level:"General"}).forEach(s=>{
-      let stage = s.sublevel ? s.class.prototype : Global[s.level];
+      let stage = s.class ? s.class.prototype : Global[s.level];
       Object.getOwnPropertyNames(stage).forEach(code=>{
         if(code=='constructor') return;
         if(typeof(stage[code])=='function'){
@@ -100,9 +100,6 @@ let Formulas={
 
     let result = formula;
     result = result.replace(/this\./g,"");
-    result = result.replace(/\+/g," + ");
-    result = result.replace(/\-/g," - ");
-    result = result.replace(/\*/g," * ");
     result = result.replace(/Global\./g,"");
     result = result.replace(/General\./g,"");
 

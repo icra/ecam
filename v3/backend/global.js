@@ -48,6 +48,133 @@ class Ecam{
   }
   Years(){return this.Days()/365}
 
+  //grouped emissions by source
+    fuel_GHG(){
+      //fuel combuestion emissions
+      let wsa_engines  = this.Water.Abstraction.map( s=>s.wsa_KPI_GHG_fuel());
+      let wst_engines  = this.Water.Treatment.map(   s=>s.wst_KPI_GHG_fuel());
+      let wsd_engines  = this.Water.Distribution.map(s=>s.wsd_KPI_GHG_fuel());
+      let wsd_trucks   = this.Water.Distribution.map(s=>s.wsd_KPI_GHG_trck());
+      let wwc_engines  = this.Waste.Collection.map(  s=>s.wwc_KPI_GHG_fuel());
+      let wwt_engines  = this.Waste.Treatment.map(   s=>s.wwt_KPI_GHG_fuel());
+      let wwo_engines  = this.Waste.Onsite.map(      s=>s.wwo_KPI_GHG_fuel());
+      let wwt_digester = this.Waste.Treatment.map(   s=>s.wwt_KPI_GHG_dig_fuel());
+      let wwt_slu_tr   = this.Waste.Treatment.map(   s=>s.wwt_KPI_GHG_slu_transport());
+      let wwt_trucks   = this.Waste.Treatment.map(   s=>s.wwd_KPI_GHG_trck());
+      let wwo_trucks   = this.Waste.Onsite.map(      s=>s.wwo_KPI_GHG_trck());
+
+      let emissions=[]
+        .concat(wsa_engines)
+        .concat(wst_engines)
+        .concat(wsd_engines)
+        .concat(wwc_engines)
+        .concat(wwt_engines)
+        .concat(wwo_engines)
+        .concat(wsd_trucks)
+        .concat(wwt_trucks)
+        .concat(wwo_trucks)
+        .concat(wwt_digester)
+        .concat(wwt_slu_tr)
+
+      //sum gases
+      let co2   = emissions.map(e=>e.co2).sum();
+      let ch4   = emissions.map(e=>e.ch4).sum();
+      let n2o   = emissions.map(e=>e.n2o).sum();
+      let total = emissions.map(e=>e.total).sum();
+      return {total,co2,ch4,n2o};
+    }
+    untr_GHG(){
+      //untreated wastewater emissions
+      let cso = this.Waste.Collection.map(s=>s.wwc_KPI_GHG_cso()    );
+      let col = this.Waste.Collection.map(s=>s.wwc_KPI_GHG_col()    );
+      let opd = this.Waste.Onsite    .map(s=>s.wwo_KPI_GHG_unt_opd());
+      let ons = this.Waste.Onsite    .map(s=>s.wwo_KPI_GHG_unt_ons());
+
+      let emissions=[]
+        .concat(cso)
+        .concat(col)
+        .concat(opd)
+        .concat(ons)
+
+      //sum gases
+      let co2   = emissions.map(e=>e.co2).sum();
+      let ch4   = emissions.map(e=>e.ch4).sum();
+      let n2o   = emissions.map(e=>e.n2o).sum();
+      let total = emissions.map(e=>e.total).sum();
+      return {total,co2,ch4,n2o};
+    }
+    biog_GHG(){
+      //biogas emissions
+      let wwt = this.Waste.Treatment.map(s=>s.wwt_KPI_GHG_biog());
+      let wwo = this.Waste.Onsite   .map(s=>s.wwo_KPI_GHG_biog());
+
+      let emissions=[]
+        .concat(wwt)
+        .concat(wwo)
+
+      //sum gases
+      let co2   = emissions.map(e=>e.co2).sum();
+      let ch4   = emissions.map(e=>e.ch4).sum();
+      let n2o   = emissions.map(e=>e.n2o).sum();
+      let total = emissions.map(e=>e.total).sum();
+      return {total,co2,ch4,n2o};
+    }
+    wwtr_GHG(){
+      //treatment process emissions
+      let wwt = this.Waste.Treatment.map(s=>s.wwt_KPI_GHG_tre());
+      let wwo = this.Waste.Onsite   .map(s=>s.wwo_KPI_GHG_tre());
+
+      let emissions=[]
+        .concat(wwt)
+        .concat(wwo)
+
+      //sum gases
+      let co2   = emissions.map(e=>e.co2).sum();
+      let ch4   = emissions.map(e=>e.ch4).sum();
+      let n2o   = emissions.map(e=>e.n2o).sum();
+      let total = emissions.map(e=>e.total).sum();
+      return {total,co2,ch4,n2o};
+    }
+    slud_GHG(){
+      //sludge management emissions
+      let wwt_slu = this.Waste.Treatment.map(s=>s.wwt_KPI_GHG_slu()    );
+      let wwo_con = this.Waste.Onsite   .map(s=>s.wwo_KPI_GHG_cont()   );
+      let wwo_lap = this.Waste.Onsite   .map(s=>s.wwo_KPI_GHG_landapp());
+      let wwo_laf = this.Waste.Onsite   .map(s=>s.wwo_KPI_GHG_landfil());
+      let wwo_dum = this.Waste.Onsite   .map(s=>s.wwo_KPI_GHG_dumping());
+      let wwo_uri = this.Waste.Onsite   .map(s=>s.wwo_KPI_GHG_urine()  );
+      let emissions=[]
+        .concat(wwt_slu)
+        .concat(wwo_con)
+        .concat(wwo_lap)
+        .concat(wwo_laf)
+        .concat(wwo_dum)
+        .concat(wwo_uri)
+
+      //sum gases
+      let co2   = emissions.map(e=>e.co2).sum();
+      let ch4   = emissions.map(e=>e.ch4).sum();
+      let n2o   = emissions.map(e=>e.n2o).sum();
+      let total = emissions.map(e=>e.total).sum();
+      return {total,co2,ch4,n2o};
+    }
+    disc_GHG(){
+      //discharge emissions
+      let wwt = this.Waste.Treatment.map(s=>s.wwd_KPI_GHG_disc());
+      let wwo = this.Waste.Onsite   .map(s=>s.wwo_KPI_GHG_dis());
+
+      let emissions=[]
+        .concat(wwt)
+        .concat(wwo)
+
+      //sum gases
+      let co2   = emissions.map(e=>e.co2).sum();
+      let ch4   = emissions.map(e=>e.ch4).sum();
+      let n2o   = emissions.map(e=>e.n2o).sum();
+      let total = emissions.map(e=>e.total).sum();
+      return {total,co2,ch4,n2o};
+    }
+
   //---
   static from(json_obj){
     //return value
@@ -81,15 +208,9 @@ class Water_stages{
     ];
   }
   //GHG ws
-    ws_KPI_GHG_abs(){
-      return this.Abstraction .map(s=>s.wsa_KPI_GHG()).sum();
-    }
-    ws_KPI_GHG_tre(){
-      return this.Treatment   .map(s=>s.wst_KPI_GHG()).sum();
-    }
-    ws_KPI_GHG_dis(){
-      return this.Distribution.map(s=>s.wsd_KPI_GHG()).sum();
-    }
+    ws_KPI_GHG_abs(){ return this.Abstraction.map( s=>s.wsa_KPI_GHG().total).sum(); }
+    ws_KPI_GHG_tre(){ return this.Treatment.map(   s=>s.wst_KPI_GHG().total).sum(); }
+    ws_KPI_GHG_dis(){ return this.Distribution.map(s=>s.wsd_KPI_GHG().total).sum(); }
     ws_KPI_GHG(){
       let wsa=this.ws_KPI_GHG_abs();
       let wst=this.ws_KPI_GHG_tre();
@@ -161,15 +282,9 @@ class Waste_stages{
     ];
   }
   //GHG ww
-    ww_KPI_GHG_col(){
-      return this.Collection.map(s=>s.wwc_KPI_GHG()).sum();
-    }
-    ww_KPI_GHG_tre(){
-      return this.Treatment.map(s=>s.wwt_KPI_GHG()).sum();
-    }
-    ww_KPI_GHG_ons(){
-      return this.Onsite.map(s=>s.wwo_KPI_GHG()).sum();
-    }
+    ww_KPI_GHG_col(){ return this.Collection.map(s=>s.wwc_KPI_GHG().total).sum(); }
+    ww_KPI_GHG_tre(){ return this.Treatment.map( s=>s.wwt_KPI_GHG().total).sum(); }
+    ww_KPI_GHG_ons(){ return this.Onsite.map(    s=>s.wwo_KPI_GHG().total).sum(); }
     ww_KPI_GHG(){
       let wwc = this.ww_KPI_GHG_col();
       let wwt = this.ww_KPI_GHG_tre();
@@ -253,16 +368,12 @@ class Water_Abstraction extends Substage{
   constructor(name){
     super();
     this.name=name;
-
     this.wsa_vol_conv = 0; //volume of abstracted water
-
     this.wsa_fuel_typ = 0; //type of fuel (engines)
     this.wsa_vol_fuel = 0; //volume of fuel (engines)
-
     this.wsa_nrg_cons = 0; //energy consumed from the grid
     this.wsa_nrg_cost = 0; //energy costs
     this.wsa_run_cost = 0; //total running costs
-
     this.wsa_vol_pump = 0;   //energy perf
     this.wsa_nrg_pump = 0;   //energy perf
     this.wsa_sta_head = 0;   //energy perf
@@ -293,8 +404,23 @@ class Water_Abstraction extends Substage{
     ];
   }
   //GHG wsa
-    wsa_KPI_GHG(){return this.wsa_KPI_GHG_elec()+this.wsa_KPI_GHG_fuel().total}
-    wsa_KPI_GHG_elec(){return this.wsa_nrg_cons*Global.General.conv_kwh_co2}
+    wsa_KPI_GHG(){
+      //sources (objects)
+      let elec = this.wsa_KPI_GHG_elec();
+      let fuel = this.wsa_KPI_GHG_fuel();
+
+      //gases (numbers)
+      let co2 = elec + fuel.co2;
+      let ch4 =        fuel.ch4;
+      let n2o =        fuel.n2o;
+
+      //total
+      let total = co2 + ch4 + n2o;
+      return {total,co2,ch4,n2o};
+    }
+    wsa_KPI_GHG_elec(){
+      return this.wsa_nrg_cons*Global.General.conv_kwh_co2;
+    }
     wsa_KPI_GHG_fuel(){
       let vol   = this.wsa_vol_fuel;
       let fuel  = Tables.get_row('Fuel type',this.wsa_fuel_typ);
@@ -353,11 +479,9 @@ class Water_Treatment extends Substage{
     super();
     this.name=name;
     this.wst_vol_trea = 0;
-
     this.wst_nrg_cons = 0;
     this.wst_nrg_cost = 0; //energy costs
     this.wst_run_cost = 0; //total running costs
-
     this.wst_mass_slu = 0;
     this.wst_treatmen = 0;
     this.wst_fuel_typ = 0;
@@ -378,7 +502,6 @@ class Water_Treatment extends Substage{
       "wst_KPI_GHG_elec",
       "wst_KPI_GHG_fuel",
       "wst_KPI_GHG",
-
       "wst_KPI_nrg_per_m3",
       "wst_KPI_slu_per_m3",
       "wst_SL_nrg_cost",
@@ -395,7 +518,20 @@ class Water_Treatment extends Substage{
     ];
   }
   //GHG wst
-    wst_KPI_GHG(){return this.wst_KPI_GHG_elec()+this.wst_KPI_GHG_fuel().total}
+    wst_KPI_GHG(){
+      //sources (objects)
+      let elec = this.wst_KPI_GHG_elec();
+      let fuel = this.wst_KPI_GHG_fuel();
+
+      //gases (numbers)
+      let co2 = elec + fuel.co2;
+      let ch4 =        fuel.ch4;
+      let n2o =        fuel.n2o;
+
+      //total
+      let total = co2 + ch4 + n2o;
+      return {total,co2,ch4,n2o};
+    }
     wst_KPI_GHG_elec(){return this.wst_nrg_cons*Global.General.conv_kwh_co2}
     wst_KPI_GHG_fuel(){
       let vol   = this.wst_vol_fuel;
@@ -432,11 +568,9 @@ class Water_Distribution extends Substage{
     this.name=name;
     this.wsd_serv_pop = 0;
     this.wsd_vol_dist = 0;
-
     this.wsd_nrg_cons = 0;
     this.wsd_nrg_cost = 0; //energy costs
     this.wsd_run_cost = 0; //total running costs
-
     this.wsd_auth_con = 0;
     this.wsd_bill_con = 0;
     this.wsd_fuel_typ = 0;
@@ -493,8 +627,24 @@ class Water_Distribution extends Substage{
     ];
   }
   //GHG wsd
-    wsd_KPI_GHG(){return this.wsd_KPI_GHG_elec()+this.wsd_KPI_GHG_fuel().total+this.wsd_KPI_GHG_trck().total}
-    wsd_KPI_GHG_elec(){return this.wsd_nrg_cons*Global.General.conv_kwh_co2}
+    wsd_KPI_GHG(){
+      //sources (objects)
+      let elec = this.wsd_KPI_GHG_elec();
+      let fuel = this.wsd_KPI_GHG_fuel();
+      let trck = this.wsd_KPI_GHG_trck();
+
+      //gases (numbers)
+      let co2 = elec + fuel.co2 + trck.co2;
+      let ch4 =        fuel.ch4 + trck.ch4;
+      let n2o =        fuel.n2o + trck.n2o;
+
+      //total
+      let total = co2 + ch4 + n2o;
+      return {total,co2,ch4,n2o};
+    }
+    wsd_KPI_GHG_elec(){
+      return this.wsd_nrg_cons*Global.General.conv_kwh_co2;
+    }
     wsd_KPI_GHG_fuel(){
       let vol   = this.wsd_vol_fuel;
       let fuel  = Tables.get_row('Fuel type',this.wsd_fuel_typ);
@@ -564,11 +714,9 @@ class Waste_Collection extends Substage{
     this.wwc_ch4_efac_col = 0; //emission factor for collected wastewater
     this.wwc_fuel_typ     = 0;
     this.wwc_vol_fuel     = 0;
-
     this.wwc_nrg_cons     = 0; //energy consumed from the grid
     this.wwc_nrg_cost     = 0; //energy costs
     this.wwc_run_cost     = 0; //total running costs
-
     this.wwc_vol_pump     = 0;
     this.wwc_nrg_pump     = 0;
     this.wwc_pmp_head     = 0;
@@ -601,12 +749,24 @@ class Waste_Collection extends Substage{
   }
   //GHG wwc
     wwc_KPI_GHG(){
-      return this.wwc_KPI_GHG_elec()
-        +this.wwc_KPI_GHG_fuel().total
-        +this.wwc_KPI_GHG_cso().total
-        +this.wwc_KPI_GHG_col();
-      }
-    wwc_KPI_GHG_elec(){return this.wwc_nrg_cons*Global.General.conv_kwh_co2}
+      //sources (objects)
+      let elec = this.wwc_KPI_GHG_elec(); //number
+      let fuel = this.wwc_KPI_GHG_fuel(); //object
+      let cso  = this.wwc_KPI_GHG_cso();  //object
+      let col  = this.wwc_KPI_GHG_col();  //object
+
+      //gases (numbers)
+      let co2 = elec + fuel.co2 + cso.co2 + col.co2;
+      let ch4 =        fuel.ch4 + cso.ch4 + col.ch4;
+      let n2o =        fuel.n2o + cso.n2o + col.n2o;
+
+      //total
+      let total = co2 + ch4 + n2o;
+      return {total,co2,ch4,n2o};
+    }
+    wwc_KPI_GHG_elec(){
+      return this.wwc_nrg_cons*Global.General.conv_kwh_co2;
+    }
     wwc_KPI_GHG_fuel(){
       let vol   = this.wwc_vol_fuel;
       let fuel  = Tables.get_row('Fuel type',this.wwc_fuel_typ);
@@ -618,15 +778,19 @@ class Waste_Collection extends Substage{
     }
     wwc_KPI_GHG_cso(){
       let pop = this.wwc_conn_pop*(this.wwc_vol_coll_unt/this.wwc_vol_coll)||0;
+      let co2 = 0;
       let ch4 = pop*Global.General.bod_pday/1000*Global.Days()*this.wwc_ch4_efac_cso*Cts.ct_ch4_eq.value;
       let n2o = pop*Global.General.prot_con*Global.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
-      let total = ch4+n2o;
-      return {total,ch4,n2o};
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     wwc_KPI_GHG_col(){
-      let pop = this.wwc_conn_pop*(this.wwc_vol_coll_tre/this.wwc_vol_coll||0);
-      let ch4 = pop*Global.General.bod_pday/1000*Global.Days()*this.wwc_ch4_efac_col*Cts.ct_ch4_eq.value;
-      return ch4;
+      let pop   = this.wwc_conn_pop*(this.wwc_vol_coll_tre/this.wwc_vol_coll)||0;
+      let co2   = 0;
+      let ch4   = pop*Global.General.bod_pday/1000*Global.Days()*this.wwc_ch4_efac_col*Cts.ct_ch4_eq.value;
+      let n2o   = 0;
+      let total = co2 + ch4 + n2o;
+      return {total,co2,ch4,n2o};
     }
   //SL wwc
     wwc_SL_conn_pop(){return 100*this.wwc_conn_pop/Global.Waste.ww_resi_pop}
@@ -667,11 +831,9 @@ class Waste_Treatment extends Substage{
     this.wwt_trea_cap       = 0;
     this.wwt_tst_cmpl       = 0;
     this.wwt_tst_cond       = 0;
-
     this.wwt_nrg_cons       = 0;
     this.wwt_nrg_cost       = 0; //energy costs
     this.wwt_run_cost       = 0; //total running costs
-
     this.wwt_vol_pump       = 0;
     this.wwt_nrg_pump       = 0;
     this.wwt_pmp_head       = 0;
@@ -759,18 +921,30 @@ class Waste_Treatment extends Substage{
   }
   //GHG wwt
     wwt_KPI_GHG(){
-      return (
-        this.wwt_KPI_GHG_elec()
-        +this.wwt_KPI_GHG_fuel().total
-        +this.wwt_KPI_GHG_dig_fuel().total
-        +this.wwt_KPI_GHG_tre().total
-        +this.wwt_KPI_GHG_biog()
-        +this.wwt_KPI_GHG_slu().total
-        +this.wwd_KPI_GHG_trck().total
-        +this.wwd_KPI_GHG_disc().total
-      )
+      //sources (objects)
+      let elec    = this.wwt_KPI_GHG_elec(); //number
+      let sources = [
+        this.wwt_KPI_GHG_fuel(),
+        this.wwt_KPI_GHG_dig_fuel(),
+        this.wwt_KPI_GHG_tre(),
+        this.wwt_KPI_GHG_biog(),
+        this.wwt_KPI_GHG_slu(),
+        this.wwd_KPI_GHG_trck(),
+        this.wwd_KPI_GHG_disc(),
+      ];
+
+      //gases (numbers)
+      let co2 = elec + sources.map(s=>s.co2).sum();
+      let ch4 =        sources.map(s=>s.ch4).sum();
+      let n2o =        sources.map(s=>s.n2o).sum();
+
+      //total
+      let total = elec + sources.map(s=>s.total).sum();
+      return {total,co2,ch4,n2o};
     }
-    wwt_KPI_GHG_elec(){return this.wwt_nrg_cons*Global.General.conv_kwh_co2}
+    wwt_KPI_GHG_elec(){
+      return this.wwt_nrg_cons*Global.General.conv_kwh_co2;
+    }
     wwt_KPI_GHG_fuel(){
       let vol   = this.wwt_vol_fuel;
       let fuel  = Tables.get_row('Fuel type',this.wwt_fuel_typ);
@@ -790,13 +964,16 @@ class Waste_Treatment extends Substage{
       return {total,co2,ch4,n2o};
     }
     wwt_KPI_GHG_tre(){
+      let co2   = 0;
       let ch4   = (this.wwt_bod_infl-this.wwt_bod_slud-this.wwt_bod_effl)*this.wwt_ch4_efac*Cts.ct_ch4_eq.value;
       let n2o   = this.wwt_serv_pop*this.wwt_n2o_efac/1000*Global.Years()*Cts.ct_n2o_eq.value*Cts.ct_fac_ic.value;
-      let total = ch4+n2o;
-      return {total,ch4,n2o};
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     wwt_KPI_GHG_biog(){
-      return (
+      let co2 = 0;
+      let n2o = 0;
+      let ch4 = (
         this.wwt_biog_pro
         -this.wwt_biog_val
         -this.wwt_biog_fla
@@ -804,9 +981,30 @@ class Waste_Treatment extends Substage{
       )*this.wwt_ch4_biog/100
       *Cts.ct_ch4_m3.value
       *Cts.ct_ch4_eq.value;
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
 
     //wwt sludge
+    wwt_KPI_GHG_slu(){
+      //sources
+      let storage          = this.wwt_KPI_GHG_slu_storage();
+      let composting       = this.wwt_KPI_GHG_slu_composting().total;
+      let incineration     = this.wwt_KPI_GHG_slu_incineration().total;
+      let land_application = this.wwt_KPI_GHG_slu_land_application();
+      let landfilling      = this.wwt_KPI_GHG_slu_landfilling().total;
+      let stockpilling     = this.wwt_KPI_GHG_slu_stockpilling();
+      let transport        = this.wwt_KPI_GHG_slu_transport().total;
+
+      //gases
+      let co2   = 0; //TODO
+      let ch4   = 0; //TODO
+      let n2o   = 0; //TODO
+
+      //total
+      let total = storage+composting+incineration+land_application+landfilling+stockpilling+transport;
+      return {total,co2,ch4,n2o};
+    }
     wwt_KPI_GHG_slu_storage(){
       let sludge_type  = Tables.get_row('wwt_slu_disp',this.wwt_slu_disp);
       let sludge_mass  = this.wwt_mass_slu_sto; //kg of sludge
@@ -924,19 +1122,6 @@ class Waste_Treatment extends Substage{
       return {total,co2,n2o,ch4};
     }
 
-    wwt_KPI_GHG_slu(){
-      let storage          = this.wwt_KPI_GHG_slu_storage();
-      let composting       = this.wwt_KPI_GHG_slu_composting().total;
-      let incineration     = this.wwt_KPI_GHG_slu_incineration().total;
-      let land_application = this.wwt_KPI_GHG_slu_land_application();
-      let landfilling      = this.wwt_KPI_GHG_slu_landfilling().total;
-      let stockpilling     = this.wwt_KPI_GHG_slu_stockpilling();
-      let transport        = this.wwt_KPI_GHG_slu_transport().total;
-      let total = storage+composting+incineration+land_application+landfilling+stockpilling+transport;
-
-      return {total,storage,composting,incineration,land_application,landfilling,stockpilling,transport}
-    }
-
     wwd_KPI_GHG_trck(){
       let vol   = this.wwd_vol_trck;
       let fuel  = Tables.get_row('Fuel type',this.wwd_trck_typ);
@@ -948,10 +1133,11 @@ class Waste_Treatment extends Substage{
     }
 
     wwd_KPI_GHG_disc(){
+      let co2 = 0;
       let ch4 = this.wwt_bod_effl*this.wwd_ch4_efac*Cts.ct_ch4_eq.value;
       let n2o = this.wwd_n2o_effl/1000*this.wwd_vol_disc*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value;
       let total = ch4+n2o;
-      return {total,ch4,n2o};
+      return {total,co2,ch4,n2o};
     }
   //SL wwt
     wwt_bod_rmvd(){return this.wwt_bod_infl-this.wwt_bod_effl}
@@ -1026,8 +1212,8 @@ class Waste_Onsite extends Substage{
     this.wwo_onsi_pop         = 0; //population with onsite treatment
     this.wwo_open_pop         = 0; //population open defecation
     this.wwo_vol_unco         = 0; //volume of uncollected wastewater
-    this.wwo_vol_unco_ons     = 0; //volume of uncollected wastewater conveyed to onsite treatment
     this.wwo_vol_unco_unt     = 0; //volume of uncollected untreated wastewater
+    this.wwo_vol_unco_ons     = 0; //volume of uncollected wastewater conveyed to onsite treatment
     this.wwo_vol_unco_tre     = 0; //treated wastewater
     this.wwo_vol_disc         = 0; //water discharged
     this.wwo_ch4_efac_unt     = 0;
@@ -1120,6 +1306,34 @@ class Waste_Onsite extends Substage{
     ];
   }
   //GHG wwo
+    //wwo total emissions
+    wwo_KPI_GHG(){
+      //sources (objects)
+      let elec    = this.wwo_KPI_GHG_elec();
+      let sources = [
+        this.wwo_KPI_GHG_fuel(),
+        this.wwo_KPI_GHG_unt_opd(),
+        this.wwo_KPI_GHG_unt_ons(),
+        this.wwo_KPI_GHG_cont(),
+        this.wwo_KPI_GHG_trck(),
+        this.wwo_KPI_GHG_biog(),
+        this.wwo_KPI_GHG_tre(),
+        this.wwo_KPI_GHG_dis(),
+        this.wwo_KPI_GHG_landapp(),
+        this.wwo_KPI_GHG_landfil(),
+        this.wwo_KPI_GHG_dumping(),
+        this.wwo_KPI_GHG_urine(),
+      ];
+
+      //gases (numbers)
+      let co2 = elec + sources.map(s=>s.co2).sum();
+      let ch4 =        sources.map(s=>s.ch4).sum();
+      let n2o =        sources.map(s=>s.n2o).sum();
+
+      //total
+      let total = elec + sources.map(s=>s.total).sum();
+      return {total,co2,ch4,n2o};
+    }
     //electricity
     wwo_KPI_GHG_elec(){
       return this.wwo_nrg_cons*Global.General.conv_kwh_co2;
@@ -1137,23 +1351,28 @@ class Waste_Onsite extends Substage{
     //open defecation
     wwo_KPI_GHG_unt_opd(){
       let pop   = this.wwo_open_pop;
+      let co2   = 0;
       let ch4   = pop*Global.General.bod_pday/1000*Global.Days()*this.wwo_ch4_efac_unt*Cts.ct_ch4_eq.value;
       let n2o   = pop*Global.General.prot_con*Global.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
-      let total = ch4+n2o;
-      return {total,ch4,n2o};
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     //untreated onsite
     wwo_KPI_GHG_unt_ons(){
       let pop   = this.wwo_onsi_pop*(this.wwo_vol_unco_unt/this.wwo_vol_unco||0);
+      let co2   = 0;
       let ch4   = pop*Global.General.bod_pday_fs/1000*Global.Days()*this.wwo_ch4_efac_unt*Cts.ct_ch4_eq.value;
       let n2o   = pop*Global.General.prot_con*Global.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
-      let total = ch4+n2o;
-      return {total,ch4,n2o};
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     //emissions containment
     wwo_KPI_GHG_cont(){
-      let ch4 = (this.wwo_bod_infl-this.wwo_bod_rmvd)*this.wwo_ch4_efac_con*Cts.ct_ch4_eq.value;
-      return ch4;
+      let co2   = 0;
+      let ch4   = (this.wwo_bod_infl-this.wwo_bod_rmvd)*this.wwo_ch4_efac_con*Cts.ct_ch4_eq.value;
+      let n2o   = 0;
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     //transport
     wwo_KPI_GHG_trck(){
@@ -1167,28 +1386,37 @@ class Waste_Onsite extends Substage{
     }
     //biogas
     wwo_KPI_GHG_biog(){
-      return (this.wwo_biog_pro-this.wwo_biog_val-this.wwo_biog_fla+this.wwo_biog_fla*Cts.ct_ch4_lo.value/100)*this.wwo_ch4_biog/100*Cts.ct_ch4_m3.value*Cts.ct_ch4_eq.value;
+      let co2   = 0;
+      let ch4   = (this.wwo_biog_pro-this.wwo_biog_val-this.wwo_biog_fla+this.wwo_biog_fla*Cts.ct_ch4_lo.value/100)*this.wwo_ch4_biog/100*Cts.ct_ch4_m3.value*Cts.ct_ch4_eq.value;
+      let n2o   = 0;
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     //treatment
     wwo_KPI_GHG_tre(){
+      let co2   = 0;
       let ch4   = (this.wwo_bod_infl-this.wwo_bod_slud-this.wwo_bod_effl)*this.wwo_ch4_efac_tre*Cts.ct_ch4_eq.value;
       let n2o   = this.wwo_onsi_pop*Cts.ct_fac_ic.value*this.wwo_n2o_efac_tre/1000*Cts.ct_n2o_eq.value*Global.Years();
-      let total = ch4+n2o;
-      return {total,ch4,n2o};
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     //discharge
     wwo_KPI_GHG_dis(){
+      let co2   = 0;
       let ch4   = this.wwo_bod_effl*this.wwo_ch4_efac_dis*Cts.ct_ch4_eq.value;
       let n2o   = this.wwo_n2o_effl/1000*this.wwo_vol_disc*Cts.ct_n2o_eq.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value;
-      let total = ch4+n2o;
-      return {total,ch4,n2o};
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     //land application
     wwo_KPI_GHG_landapp(){
       let soil_type=Tables.get_row('wwo_soil_typ',this.wwo_soil_typ);
       let N_transformed_to_N2O = soil_type.f_la;
       let n2o = this.wwo_mass_landapp*this.wwo_la_N_cont/100*N_transformed_to_N2O*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
-      return n2o;
+      let co2 = 0;
+      let ch4 = 0;
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     //landfill
     wwo_KPI_GHG_landfil(){
@@ -1206,38 +1434,30 @@ class Waste_Onsite extends Substage{
         let dec_3year     = Cts.ct_d3y_lf.value/100;
         return sludge_mass*TVS*OC*DOC_fra*uncertainty*OC_to_CH4*CH4_in_lf_gas*dec_3year*Cts.ct_ch4_eq.value;
       })();
-      let total = n2o + ch4;
-      return {total,n2o,ch4};
+      let co2 = 0;
+      let total = co2 + n2o + ch4;
+      return {total,co2,n2o,ch4};
     }
     //dumping
     wwo_KPI_GHG_dumping(){
-      let n2o   = this.wwo_vol_dumping*this.wwo_n2o_effl*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let co2   = 0;
       let ch4   = this.wwo_vol_dumping*this.wwo_bod_conc_fs*this.wwo_ch4_efac_dumping*Cts.ct_ch4_eq.value;
-      let total = n2o+ch4;
-      return {total,n2o,ch4};
+      let n2o   = this.wwo_vol_dumping*this.wwo_n2o_effl*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let total = co2+n2o+ch4;
+      return {total,co2,n2o,ch4};
     }
     //urine
     wwo_KPI_GHG_urine(){
-      return this.wwo_N_urine*Cts.ct_n2o_co.value*0.01;
-    }
-    //wwo total emissions
-    wwo_KPI_GHG(){
-      return this.wwo_KPI_GHG_elec()
-            +this.wwo_KPI_GHG_fuel().total
-            +this.wwo_KPI_GHG_unt_opd().total
-            +this.wwo_KPI_GHG_unt_ons().total
-            +this.wwo_KPI_GHG_cont()
-            +this.wwo_KPI_GHG_trck().total
-            +this.wwo_KPI_GHG_biog()
-            +this.wwo_KPI_GHG_tre().total
-            +this.wwo_KPI_GHG_dis().total
-            +this.wwo_KPI_GHG_landapp()
-            +this.wwo_KPI_GHG_landfil().total
-            +this.wwo_KPI_GHG_dumping().total
-            +this.wwo_KPI_GHG_urine()
+      let co2   = 0;
+      let ch4   = 0;
+      let n2o   = this.wwo_N_urine*Cts.ct_n2o_co.value*0.01;
+      let total = co2+n2o+ch4;
+      return {total,co2,n2o,ch4};
     }
   //SL wwo
-    wwo_SL_nrg_cost(){return 100*this.wwo_nrg_cost/this.wwo_run_cost}
+    wwo_SL_nrg_cost(){
+      return 100*this.wwo_nrg_cost/this.wwo_run_cost;
+    }
     wwo_SL_GHG_avoided(){
       return this.wwo_nrg_biog*Global.General.conv_kwh_co2;
     }
@@ -1248,8 +1468,8 @@ class Waste_Onsite extends Substage{
       return this.wwo_mass_landapp*Cts.ct_C_seqst.value;
     }
     wwo_ghg_avoided_landfil(){
-      let fslu_type=Tables.get_row('wwo_fslu_typ_lf',this.wwo_fslu_typ_lf);
-      let TVS=fslu_type.TVS;
+      let fslu_type = Tables.get_row('wwo_fslu_typ_lf',this.wwo_fslu_typ_lf);
+      let TVS       = fslu_type.TVS;
       return this.wwo_mass_landfil*TVS*Cts.ct_oc_vs.value*Cts.ct_u_org_f.value*Cts.ct_co2_C.value;
     }
     wwo_ghg_avoided_reuse(){

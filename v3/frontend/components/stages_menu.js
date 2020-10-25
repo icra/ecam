@@ -145,7 +145,7 @@ let stages_menu=new Vue({
                     </div>
                     <!--ss emissions-->
                     <div class=number style="font-size:smaller">
-                      <span>{{format(ss[s.prefix+'_KPI_GHG']())}}</span>
+                      <span>{{format(ss[s.prefix+'_KPI_GHG']().total)}}</span>
                       <span class=unit>kgCO<sub>2</sub>eq</span>
                     </div>
                   </div>

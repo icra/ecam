@@ -55,11 +55,10 @@ let ecam={
     this.views[view].visible=true; //make "view" visible
 
     //other settings
-    stages_menu.visible = view=='tier_b';
+    stages_menu.visible      = view=='tier_b';
     stages_menu.current_view = view;
     linear_menu.current_view = view;
     caption.hide();
-
     window.scrollTo(0,0);
 
     //history manipulation
@@ -90,6 +89,9 @@ let ecam={
       history.pushState(state_obj,'title',"");
       document.title = title;
     }
+
+    //return promise for Vue._isMounted
+    return this.views[view]._isMounted;
   },
 
   //hide all views

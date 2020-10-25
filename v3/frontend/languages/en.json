@@ -1,13 +1,13 @@
 {
 "#below":"below",
 
-"#Electricity indirect emissions":"a",
-"#Fuel combustion direct emissions":"b",
-"#Untreated wastewater direct emissions":"c",
-"#Biogas direct emissions":"d",
-"#Treatment process direct emissions":"e",
-"#Sludge management direct emissions":"f",
-"#Discharged water direct":"g",
+"#Electricity indirect emissions":"Electricity (indirect) ",
+"#Fuel combustion direct emissions":"Fuel combustion (direct) ",
+"#Untreated wastewater direct emissions":"Untreated wastewater (direct) ",
+"#Biogas direct emissions":"Biogas (direct) ",
+"#Treatment process direct emissions":"Treatment process (direct) ",
+"#Sludge management direct emissions":"Sludge management (direct) ",
+"#Discharged water direct emissions":"Discharged water (direct) ",
 
 "#benchmarks":"Benchmarks",
 "#General":"General",
