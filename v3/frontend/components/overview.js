@@ -249,12 +249,12 @@ function draw_sankey_ghg() {
 }
 
 function draw_charts() {
-  var w = 400;
-  var h = 400;
+  var w = 300;
+  var h = 300;
   var r = h/2;
   var aColor = [
-    Structure.find(s=>s.level=='Waste'&&s.color).color,
-    Structure.find(s=>s.level=='Water'&&s.color).color,
+    "var(--color-level-Waste)",
+    "var(--color-level-Water)"
   ]
 
   //nothing to draw
@@ -279,7 +279,7 @@ function draw_charts() {
   //add the text
   arcs.append("svg:text")
     .attr("transform", function(d){
-      d.innerRadius = 100; /* Distance of label to the center*/
+      d.innerRadius = 50; /* Distance of label to the center*/
       d.outerRadius = r;
       return "translate(" + arc.centroid(d) + ")";}
      )

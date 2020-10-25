@@ -152,7 +152,7 @@ let summary_ghg = new Vue({
                     <div
                       class=number_placeholder
                       :style="{color:l1.color, borderColor:l1.color}"
-                      v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_KPI_GHG']()).sum())">
+                      v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_KPI_GHG']().total).sum())">
                     </div>
                   </div>
                 </div>
