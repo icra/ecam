@@ -180,7 +180,7 @@ let landing = new Vue({
       }
       #landing #first_container {
         padding:1em 6em 6em 6em;
-        padding-bottom:0;
+        padding-bottom:2em;
         display:grid;
         grid-template-columns:40% 58%;
         grid-gap:2%;

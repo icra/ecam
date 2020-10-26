@@ -151,7 +151,7 @@ let select_scenario=new Vue({
     <div id=select_scenario v-if="visible && Languages.ready">
       <!--title-->
       <div>
-        <h2 style="text-align:center">
+        <h2 style="text-align:center;margin-bottom:0">
           Systems ({{Scenarios.length}})
         </h2>
         <p style="text-align:center;color:#666">

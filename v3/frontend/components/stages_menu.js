@@ -42,8 +42,8 @@ let stages_menu=new Vue({
       if(!level) return;
       if(!sublevel) return;
       let stage = Structure.find(s=>s.level==level&&s.sublevel==sublevel);
-      let name = `${stage.sublevel} ${this.Global[level][sublevel].length+1}`;
-      let ss = new stage.class(name);
+      let name  = `${stage.sublevel} ${this.Global[level][sublevel].length+1}`;
+      let ss    = new stage.class(name);
       this.Global[level][sublevel].push(ss);
       return ss;
     },
@@ -64,14 +64,16 @@ let stages_menu=new Vue({
   template:`
     <!--linear menu COMPONENT-->
     <div id=stages_menu v-if="visible && Languages.ready">
-      <div style="padding:2px">
-        <!--checkbox show substages-->
+      <div style="padding:8px">
+
+        <!--checkbox show substages
         <div style="text-align:center;padding:10px">
           <label style="user-select:none;font-size:larger">
             <input type=checkbox v-model="show_substages_summary">
             show substages
           </label>
         </div>
+        -->
 
         <!--stages table-->
         <div>
@@ -105,7 +107,7 @@ let stages_menu=new Vue({
                     >
                   </div>
                   <div>
-                    <b :style="{color:is_tier_b_selected(s.level,s.sublevel)?'black':''}">{{translate(s.sublevel)}}</b>
+                    <span>{{translate(s.sublevel)}}</span>
                   </div>
                   <div v-if="show_substages_summary" style="border-bottom:1px solid #ccc"></div>
                 </div>

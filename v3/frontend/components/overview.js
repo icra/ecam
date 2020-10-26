@@ -61,7 +61,7 @@ let overview = new Vue({
       <!--charts-->
       <div style="text-align:center;">
         <h3>GHG emissions pie chart</h3>
-        <div id=pie_chart></div>
+        <div id=pie_chart>~pie chart not drawn since emissions are zero</div>
       </div><hr>
 
       <!--diagram stages-->
@@ -265,6 +265,7 @@ function draw_charts() {
     {"label":"Water", "value":100*Global.Water.ws_KPI_GHG()/Global.TotalGHG()},
   ];
 
+  document.querySelector("#pie_chart").innerHTML="";
   var vis = d3.select('#pie_chart').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
   var pie = d3.layout.pie().value(function(d){return d.value;});
   var arc = d3.svg.arc().outerRadius(r); // Declare an arc generator function
