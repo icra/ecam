@@ -3,7 +3,7 @@ let select_scenario=new Vue({
   data:{
     visible:false,
     scenarios_compared:[],
-    loadfile_replace:false,
+    loadfile_replace:true,
 
     variable,
 
@@ -97,9 +97,11 @@ let select_scenario=new Vue({
       let replace = this.loadfile_replace;
 
       if(replace){
+        /*
         if(!confirm("Current changes will be lost. Continue?")){
           return;
         }
+        */
       }
 
       //get json file contents
@@ -170,8 +172,8 @@ let select_scenario=new Vue({
         <div
           style="
             border:1px solid #ccc;
-            padding:5px;
-            border-radius:5px;
+            padding:0.5em 1em;
+            border-radius:1em;
             margin-right:1px;
           "
         >
@@ -305,7 +307,6 @@ let select_scenario=new Vue({
               <button
                 @click="delete_scenario(scenario)"
                 :disabled="scenario==Global"
-                :style="{color:(scenario==Global?'':'red')}"
                 v-html="'delete'"
               ></button>
             </td>
@@ -472,6 +473,7 @@ let select_scenario=new Vue({
       }
       #select_scenario #main_table div.scenario_name[current_scenario] {
         border-color:var(--color-level-generic);
+        color:var(--color-level-generic);
       }
       #select_scenario #load_save_btns > div {
         padding:0.5px;

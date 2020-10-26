@@ -114,7 +114,7 @@ let landing = new Vue({
           </div>
         </div>
         <div>
-          <h1 style="font-size:x-large">Take a look on our tutorials</h1>
+          <h1 style="font-size:x-large">Take a look on the tutorials</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
             nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam.

@@ -187,32 +187,28 @@ let tier_b=new Vue({
     <div id=tier_b v-if="visible && Languages.ready">
       <!--tier b title + tips-->
       <div id=title :style="{background:get_level_color(level)}">
-        <h1 style="font-size:x-large;color:white">
-          <a onclick="ecam.show('configuration')">{{Global.General.Name}}</a>
-          <span>&rsaquo;</span>
+        <h1 style="font-size:x-large;color:white;">
           <span v-if="sublevel">
             <a onclick="go_to(tier_b.level)">{{translate(level)}}</a>
           </span>
           <span v-else>
-            <b style="color:black">{{translate(level)}}</b>
+            <span style="color:black">{{translate(level)}}</span>
           </span>
           <span v-if="sublevel">
             <span>
               <span>&rsaquo;</span>
-              <b style="color:black">{{translate(sublevel)}}</b>
+              <span>{{translate(sublevel)}}</span>
             </span>
           </span>
           <span v-if="substage">
-            <span>
-              <span>&rsaquo;</span>
-              <span v-if="are_you_editing_name">
-                <input v-model="substage.name" @blur="are_you_editing_name=false" @keyup.enter="are_you_editing_name=false" maxlength=20>
-                <button @click="are_you_editing_name=false">ok</button>
-              </span>
-              <span v-else @click="are_you_editing_name=true">
-                <a style="color:black"><b>{{substage.name}}</b></a>
-                <button>change name</button>
-              </span>
+            <span>&rsaquo;</span>
+            <span v-if="are_you_editing_name">
+              <input v-model="substage.name" @blur="are_you_editing_name=false" @keyup.enter="are_you_editing_name=false" maxlength=20>
+              <button @click="are_you_editing_name=false">ok</button>
+            </span>
+            <span v-else @click="are_you_editing_name=true">
+              <a style="color:black">{{substage.name}}</a>
+              <button>change name</button>
             </span>
           </span>
         </h1>
@@ -389,15 +385,16 @@ let tier_b=new Vue({
 
                     <!--question set value button-->
                     <div :title="question">
-                      <label>
-                        <input type=checkbox
-                          :disabled="Questions.is_question_hidden(question, substage)"
-                          @change="set_question(question, $event.target.checked)"
-                          :checked="substage.Configuration.Questions[question]"
-                        >
-                        <span v-if="substage.Configuration.Questions[question]" v-html="translate('yes')"></span>
-                        <span v-else v-html="translate('no')"></span>
-                      </label>
+                      <div v-if="!Questions.is_question_hidden(question, substage)">
+                        <label>
+                          <input type=radio v-model="substage.Configuration.Questions[question]" :value="false" @click="set_question(question, false)">
+                          {{translate('no')}}
+                        </label>
+                        <label>
+                          <input type=radio v-model="substage.Configuration.Questions[question]" :value="true">
+                          {{translate('yes')}}
+                        </label>
+                      </div>
 
                       <!--indicator of "variable not filtered"-->
                       <span v-if="!is_code_in_any_filter(question)" style="float:right">

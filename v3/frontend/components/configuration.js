@@ -315,12 +315,6 @@ let configuration=new Vue({
           </div>
         </fieldset>
       </div>
-
-      <!--prev next btns-->
-      <div style="text-align:center;margin-top:10px">
-        <button onclick="ecam.show('select_scenario')">Previous</button>
-        <button onclick="ecam.show('tier_b')">Next</button>
-      </div>
     </div>
   `,
 

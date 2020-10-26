@@ -11,10 +11,13 @@ ECAM V3 LLUIS BOSCH TASKS
  tasks not related with viti (backend + frontend link)
 -------------------------------------------------------------------------------
 [CAN BE DONE NOW]
-  * check Structure.alias keyword
+  * [frontend] kgCO2eq/m3
+  * [frontend] filter for minimum required data
+  * [frontend] highlight inputs and outputs
   * [frontend] sankey diagram
   * [frontend] Fetching language files asyncronously does not work for offline use (CORS is not compatible with file protocol, find alternative way to loading files offline.)
   * [frontend] onclose listener: trigger warning if ecam is accidentally closed
+  * check Structure.alias keyword
 
 [CANNOT BE DONE]: (missing info OR not clear how to implement OR time not invested)
   * [backend] Mail from Corinne on June 19th 2020.

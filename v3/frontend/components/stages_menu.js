@@ -97,19 +97,17 @@ let stages_menu=new Vue({
             <tr>
               <td v-for="s in Structure" v-if="s.sublevel" style="width:100px">
                 <div style="text-align:center">
-                  <a @click="go_to(s.level,s.sublevel)">
-                    <div>
-                      <img
-                        :src="'frontend/img/'+s.icon"
-                        :class="'s '+(is_tier_b_selected(s.level, s.sublevel)?'selected':'')"
-                        :stage="s.alias"
-                      >
-                    </div>
-                    <div>
-                      <b :style="{color:is_tier_b_selected(s.level,s.sublevel)?'black':''}">{{translate(s.sublevel)}}</b>
-                    </div>
-                    <div v-if="show_substages_summary" style="border-bottom:1px solid #ccc"></div>
-                  </a>
+                  <div>
+                    <img
+                      :src="'frontend/img/'+s.icon"
+                      :class="'s '+(is_tier_b_selected(s.level, s.sublevel)?'selected':'')"
+                      :stage="s.alias"
+                    >
+                  </div>
+                  <div>
+                    <b :style="{color:is_tier_b_selected(s.level,s.sublevel)?'black':''}">{{translate(s.sublevel)}}</b>
+                  </div>
+                  <div v-if="show_substages_summary" style="border-bottom:1px solid #ccc"></div>
                 </div>
               </td>
             </tr>
@@ -175,7 +173,7 @@ let stages_menu=new Vue({
                   <button
                     style="width:100%;font-size:smaller;"
                     @click="add_substage(s.level,s.sublevel)"
-                    v-html="'add substage'"
+                    v-html="'+ add substage'"
                   ></button>
                 </div>
               </td>
@@ -203,7 +201,6 @@ let stages_menu=new Vue({
       }
       #stages_menu img {
         margin: -10px;
-        cursor:pointer;
         padding:0;
         width:70px;
         border:3px solid transparent;
