@@ -37,9 +37,6 @@ let landing = new Vue({
               <div>
                 <img src="frontend/img/viti/home/home-icon-newuser.svg" style="width:50%">
               </div>
-              <h1 style="color:var(--color-level-generic);">
-                Are you a new user?
-              </h1>
             </div>
             <div>
               <button
@@ -61,7 +58,7 @@ let landing = new Vue({
       <!--learn more-->
       <div id=third_container>
         <p style="font-size:x-large;color:var(--color-level-generic);text-align:center">
-          <b>Learn more about us</b>
+          <b>Learn more</b>
         </p>
 
         <!--grid 3-->
@@ -117,8 +114,7 @@ let landing = new Vue({
           </div>
         </div>
         <div>
-          <h1 style="font-size:x-large">Very powerful, really easy to use</h1>
-          <h1 style="font-size:large;color:#333">Take a look on our tutorials</h1>
+          <h1 style="font-size:x-large">Take a look on our tutorials</h1>
           <p>
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
             nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam.

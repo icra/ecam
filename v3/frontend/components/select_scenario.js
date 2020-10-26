@@ -150,7 +150,7 @@ let select_scenario=new Vue({
       <!--title-->
       <div>
         <h2 style="text-align:center">
-          All systems ({{Scenarios.length}})
+          Systems ({{Scenarios.length}})
         </h2>
         <p style="text-align:center;color:#666">
           <b>
@@ -299,7 +299,7 @@ let select_scenario=new Vue({
             <td style="text-align:left">
               <button
                 @click="set_scenario_and_go_to_configuration(scenario)"
-                v-html="'edit'"
+                v-html="'configuration'"
               ></button>
 
               <button

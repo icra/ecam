@@ -69,7 +69,7 @@ let summary_ghg = new Vue({
             <tr :style="{background:l1.color,color:'white'}">
               <td style="background:inherit;text-align:center">
                 <button @click="toggle_folded_level(l1.level)">
-                  {{ unfolded_levels.indexOf(l1.level) ? '&rarr;':'&darr;' }}
+                  {{ unfolded_levels.indexOf(l1.level) ? '+':'-' }}
                 </button>
               </td>
 
