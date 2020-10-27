@@ -7,6 +7,13 @@ let tier_b=new Vue({
     substage             : null,
     are_you_editing_name : false,
 
+    //highlight inputs and outputs arrays
+    highlight:true,
+    highlighted:{
+      inputs  : [],
+      outputs : [],
+    },
+
     //FILTERS (see "backend/filters.js")
     Filters,         //definition (list of variables for each filter)
     filters_on:true, //all filters on
@@ -180,6 +187,17 @@ let tier_b=new Vue({
       let color = this.benchmark_colors[string];
       return {string, color};
     },
+
+    highlight_inputs(key,off){
+      off=off||false;
+      if(off){
+        this.highlighted.inputs=[];
+        return;
+      }
+      if(tier_b.highlight){
+        this.highlighted.inputs = Formulas.ids_per_formula(this.get_current_stage()[key]);
+      }
+    }
   },
 
   template:`
@@ -329,8 +347,16 @@ let tier_b=new Vue({
             <div>
               <b>{{translate('INPUTS') }}</b>
             </div>
-            <div style="margin-top:5px">
-              Enter here the inputs for this stage
+            <div style="margin-top:5px;display:flex;justify-content:space-between">
+              <div>
+                Enter here the inputs for this stage
+              </div>
+              <div style="margin-right:10px" title="highlight related inputs/outputs">
+                <label>
+                  <input type=checkbox v-model="highlight">
+                  <small>Highlight</small>
+                </label>
+              </div>
             </div>
           </div>
 
@@ -478,6 +504,9 @@ let tier_b=new Vue({
                     &&
                     Questions.is_hidden(key, substage)==false
                   "
+                  :class="highlighted.outputs.indexOf(key)+1 ? 'highlighted':''"
+                  @mouseenter="highlight_inputs(key)"
+                  @mouseleave="highlight_inputs(key,true)"
                 >
                   <td
                     @mousemove="caption.show($event, translate(key+'_expla').prettify())"
@@ -561,6 +590,9 @@ let tier_b=new Vue({
                     &&
                     Questions.is_hidden(key, substage)==false
                   "
+                  :class="highlighted.outputs.indexOf(key)+1 ? 'highlighted':''"
+                  @mouseenter="highlighted.inputs=Formulas.ids_per_formula(get_current_stage()[key])"
+                  @mouseleave="highlighted.inputs=[]"
                 >
                   <td
                     @mousemove="caption.show($event, translate(key+'_expla').prettify())"
@@ -611,12 +643,12 @@ let tier_b=new Vue({
       }
 
       #tier_b #title {
-        color:white;
-        display:flex;
-        flex-wrap:wrap;
-        justify-content:space-between;
-        align-items:center;
-        padding-bottom:5px;
+        color           : white;
+        display         : flex;
+        flex-wrap       : wrap;
+        justify-content : space-between;
+        align-items     : center;
+        padding-bottom  : 5px;
       }
       #tier_b #title a {
         color:white;
@@ -649,12 +681,26 @@ let tier_b=new Vue({
         padding:1em 5px;
       }
 
+      #tier_b #outputs table th{
+        border:none;
+      }
+
       #tier_b #outputs table td {
         background:#FFF1BE;
+        border:1px solid transparent;
       }
-      #tier_b #outputs table th,
-      #tier_b #outputs table td{
-        border:none;
+
+      #tier_b #inputs table td {
+        border:1px solid transparent;
+      }
+
+      /*highlighted rows*/
+      #tier_b #outputs table tr.highlighted td {
+        background:gold;
+        border:1px solid black;
+      }
+      #tier_b #inputs table tr.highlighted td {
+        border:1px solid black;
       }
 
       /*old*/

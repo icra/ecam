@@ -2,10 +2,20 @@
 // input field for inputs in tier B
 //-----------------------------------------------------------------------------
 Vue.component('input_ecam',{
+  props:[
+    'code',
+    'current_stage',
+    'level',
+  ],
+
   template:`
-    <tr>
+    <tr
+      :class="is_highlighted() ? 'highlighted':'' "
+    >
       <!--description and link-->
       <td
+        @mouseenter="highlight_outputs()"
+        @mouseleave="highlight_outputs(true)"
         @mousemove="caption.show($event, translate(code+'_expla').prettify())"
         @mouseout="caption.hide()"
         :style="{
@@ -106,9 +116,10 @@ Vue.component('input_ecam',{
         >
           <input
             :value="format(current_stage[code]/Units.multiplier(code))"
-            @focus="focus_input(current_stage, code, $event)"
-            @blur="blur_input(current_stage, code, $event)"
-            :equal_to_zero="current_stage[code]==0"
+            @focus         = "focus_input(current_stage, code, $event)"
+            @blur          = "blur_input(current_stage, code, $event)"
+            @keyup.enter   = "$event.target.blur()"
+            :equal_to_zero = "current_stage[code]==0"
           >
         </div>
       </td>
@@ -142,12 +153,6 @@ Vue.component('input_ecam',{
       </td>
     </tr>
   `,
-
-  props:[
-    'code',
-    'current_stage',
-    'level',
-  ],
 
   data(){
     return{
@@ -187,7 +192,6 @@ Vue.component('input_ecam',{
       input.value=format(stage[key]/Units.multiplier(key));
     },
 
-
     /*UNITS*/
     /*select unit for a specific variable and save it to configuration*/
     select_unit(key, event){
@@ -195,6 +199,22 @@ Vue.component('input_ecam',{
       let newUnit = select.value;
       this.Global.Configuration.Units[key]=newUnit;
       this.$forceUpdate();
+    },
+
+    //highlight related outputs
+    highlight_outputs(off){
+      off=off||false;
+      if(off){
+        tier_b.highlighted.outputs=[];
+        return
+      }
+      if(tier_b.highlight){
+        tier_b.highlighted.outputs = Formulas.outputs_per_input(this.code);
+      }
+    },
+
+    is_highlighted(){
+      return tier_b.highlighted.inputs.indexOf(this.code)+1;
     },
   },
 });
