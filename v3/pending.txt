@@ -1,6 +1,7 @@
 *ECAM V3 CODING TASKLIST*
 
 [CAN BE DONE NOW]
+  * recap formulas to be understood by other scientists
   * add a filter for minimum required data
   * show benchmark results for each substage in "variable.js" view
   * add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
