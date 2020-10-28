@@ -30,6 +30,7 @@ let ecam={
     emission_tree,
     report,
     non_revenue_water,
+    equations,
 
     development,
     problems,

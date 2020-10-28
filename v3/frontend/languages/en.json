@@ -1,6 +1,10 @@
 {
 "#below":"below",
 
+"#benchmarks":"Benchmarks",
+"#non_revenue_water":"Non revenue water",
+"#equations":"Equations",
+
 "#Electricity indirect emissions":"Electricity (indirect) ",
 "#Fuel combustion direct emissions":"Fuel combustion (direct) ",
 "#Untreated wastewater direct emissions":"Untreated wastewater (direct) ",
@@ -8,9 +12,6 @@
 "#Treatment process direct emissions":"Treatment process (direct) ",
 "#Sludge management direct emissions":"Sludge management (direct) ",
 "#Discharged water direct emissions":"Discharged water (direct) ",
-
-"#benchmarks":"Benchmarks",
-"#non_revenue_water":"Non revenue water",
 
 "#General":"General",
 

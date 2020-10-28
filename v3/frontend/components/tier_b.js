@@ -195,7 +195,6 @@ let tier_b=new Vue({
         return;
       }
       if(this.highlight){
-        console.log('yes');
         this.highlighted.inputs = Formulas.ids_per_formula(this.get_current_stage()[key]);
       }
     }

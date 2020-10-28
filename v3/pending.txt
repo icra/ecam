@@ -1,15 +1,45 @@
 *ECAM V3 CODING TASKLIST*
 
+[GIZ]
+  * Priorities for GIZ
+    - IPCC equations compliance
+    - Import/Export
+    - Report
+    - User friendliness
+    - Graphs (Energy and GHGs)
+    - Graphs should be downloadable
+
+  * Nice to have:
+    - First-Time user tutorial
+    - Opportunities page is important, but can come later!
+
 [CAN BE DONE NOW]
-  * recap formulas to be understood by other scientists
-  * add a filter for minimum required data
-  * show benchmark results for each substage in "variable.js" view
-  * add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
-  * trigger error if version does not match when loading json files
-  * add list of involved inputs below benchmark equations in "variable.js" view
-  * create view for data in "backend/Tables.js"
-  * onclose listener: trigger warning if ecam is accidentally closed
-  * update "wwd" codes from old Discharge stage to "wwt"
+  - import from excel module with Adrià Riu help. Each layout is a excel file.
+  - change "system" keyword to "assessment"
+  - sankey diagram export to jpg/png/svg
+  - recap formulas to be understood by other scientists (autogenerate a document)
+  - add a filter for minimum required data
+  - show benchmark results for each substage in "variable.js" view
+  - add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
+    - abstracted volume (wsa)
+    - treated volume (wst)
+    - distributed volume (wsd)
+    - collected volume (wwc)
+    - treated volume (wwt)
+    - treated volume (wwo)
+
+  - trigger error if version does not match when loading json files
+  - add list of involved inputs below benchmark equations in "variable.js" view
+  - create view for data in "backend/Tables.js"
+  - onclose listener: trigger warning if ecam is accidentally closed
+  - update "wwd" codes from old Discharge stage to "wwt"
+
+[TO BE DONE WHEN V3 IS FEATURE FROZEN]
+  - update help & about & docs
+  - translations of new pieces of text added for v3
+  - external version converter module (v2 to v3)
+  - CORS is not compatible with file:// protocol, find alternative way to
+    load language json files offline.
 
 [BACKLOG]: (missing info OR not clear how to implement OR help needed other people)
   * Mail from Corinne on June 19th 2020.
@@ -65,10 +95,3 @@
 
       Best / Cordialement,
     ```
-
-[TO BE DONE WHEN V3 IS FEATURE FROZEN]
-  * update help & about & docs
-  * Translations of new pieces of text added for v3
-  * external version converter module (v2 to v3)
-  * CORS is not compatible with file protocol, find alternative way to
-    load language json files offline.
