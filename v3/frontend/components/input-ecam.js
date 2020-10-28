@@ -214,7 +214,7 @@ Vue.component('input_ecam',{
     },
 
     is_highlighted(){
-      return tier_b.highlighted.inputs.indexOf(this.code)+1;
+      return tier_b.highlight && tier_b.highlighted.inputs.indexOf(this.code)+1;
     },
   },
 });
