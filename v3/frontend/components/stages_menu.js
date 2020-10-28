@@ -83,7 +83,6 @@ let stages_menu=new Vue({
               <td v-for="l1 in Structure.filter(s=>!s.sublevel)" :colspan="Structure.filter(s=>s.level==l1.level).length-1"
                 class=l1
                 :style="{background:l1.color,padding:'10px'}"
-                :selected="is_tier_b_selected(l1.level,false)"
               >
                 <a
                   @click="go_to(l1.level)"
@@ -103,7 +102,6 @@ let stages_menu=new Vue({
                     <img
                       :src="'frontend/img/'+s.icon"
                       :class="'s '+(is_tier_b_selected(s.level, s.sublevel)?'selected':'')"
-                      :stage="s.alias"
                     >
                   </div>
                   <div>
@@ -207,17 +205,8 @@ let stages_menu=new Vue({
         width:70px;
         border:3px solid transparent;
       }
-      #stages_menu img.selected {
-        /*
-        border:3px solid var(--color-level-generic);
-        */
-      }
       #stages_menu td.l1{
         text-align:center;
-      }
-      #stages_menu td.l1[selected] a{
-        text-decoration:underline;
-        font-weight:bold;
       }
       #stages_menu a[selected_substage]{
         text-decoration:underline;

@@ -3,12 +3,11 @@
 [CAN BE DONE NOW]
   * add a filter for minimum required data
   * show benchmark results for each substage in "variable.js" view
-  * add <button>kgCO2eq/m3</button> to tier_b.js
-  * trigger error if versions do not match when loading json files
+  * add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
+  * trigger error if version does not match when loading json files
   * add list of involved inputs below benchmark equations in "variable.js" view
   * create view for data in "backend/Tables.js"
   * onclose listener: trigger warning if ecam is accidentally closed
-  * check Structure.alias keyword usage inside functions
   * update "wwd" codes from old Discharge stage to "wwt"
 
 [BACKLOG]: (missing info OR not clear how to implement OR help needed other people)
@@ -69,6 +68,6 @@
 [TO BE DONE WHEN V3 IS FEATURE FROZEN]
   * update help & about & docs
   * Translations of new pieces of text added for v3
-  * compabibility module (v2 to v3)
+  * external version converter module (v2 to v3)
   * CORS is not compatible with file protocol, find alternative way to
     load language json files offline.

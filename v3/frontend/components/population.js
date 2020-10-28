@@ -49,7 +49,7 @@ let population = new Vue({
         <tbody v-for="l1 in Structure.filter(s=>s.sublevel==false)">
           <tr>
             <th colspan=3 :style="{background:l1.color,textAlign:'left',color:'white'}">
-              <img :src="'frontend/img/'+l1.alias+'.png'" width=25 style="line-height:4em;vertical-align:middle">
+              <img :src="'frontend/img/'+l1.icon" width=25 style="line-height:4em;vertical-align:middle">
               {{translate(l1.level)}}
             </th>
           </tr>
