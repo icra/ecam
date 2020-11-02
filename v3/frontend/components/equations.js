@@ -61,6 +61,7 @@ let equations = new Vue({
         <tbody
           v-for="stage in Structure.filter(s=>s.sublevel)"
           :id="stage.level+'_'+stage.sublevel"
+          v-if="Global[stage.level][stage.sublevel].length"
         >
           <tr>
             <th>
@@ -117,6 +118,9 @@ let equations = new Vue({
         background:var(--color-level-generic);
         color:white;
         text-align:left;
+      }
+      #equations table td {
+        vertical-align:top;
       }
       #equations details summary {
         cursor:pointer;

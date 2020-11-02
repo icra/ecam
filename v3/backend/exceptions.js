@@ -12,11 +12,11 @@ let Exceptions={
     table:"type_of_water_body",
     table_field:function(){return "ch4_efac"},
   },
-  wwt_ch4_efac:{
+  wwt_ch4_efac_tre:{
     table:"type_of_treatment",
     table_field:function(){return "ch4_efac"},
   },
-  wwd_ch4_efac:{
+  wwt_ch4_efac_dis:{
     table:"type_of_water_body",
     table_field:function(){return "ch4_efac"},
   },

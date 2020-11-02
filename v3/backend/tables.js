@@ -128,7 +128,7 @@ let Tables = {
   ],
 
 	//type of water reuse
-  "wwd_reus_typ":[
+  "wwt_reus_typ":[
     {name:"For non-potable use"},
     {name:"For green areas"},
     {name:"For industrial use"},
@@ -209,10 +209,10 @@ Tables.wwo_fuel_typ=Tables["Fuel type"]; //engines
 
 Tables.wsd_trck_typ=Tables["Fuel type"]; //trucks
 Tables.wwt_trck_typ=Tables["Fuel type"]; //trucks
-Tables.wwd_trck_typ=Tables["Fuel type"]; //trucks
 Tables.wwo_trck_typ=Tables["Fuel type"]; //type of fuel fsm emptying and transport
 Tables.wwt_dige_typ=Tables["Fuel type"]; //type of fuel dig
 Tables.wwt_appl_typ=Tables["Fuel type"]; //type of fuel app
+Tables.wwt_reus_trck_typ=Tables["Fuel type"]; //trucks
 
 //wsa
 Tables.wsa_pmp_type=Tables["Pump type"];

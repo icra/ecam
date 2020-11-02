@@ -307,7 +307,7 @@ let variable=new Vue({
           </th>
           <td>
             <table class=outputs_affected>
-              <tbody v-for="output in Formulas.outputs_per_input(id)">
+              <tbody v-for="output in Formulas.outputs_per_input(id)" v-if="Info[output]">
                 <!--output that uses the input is an estimation-->
                 <tr v-if="Estimations[output]">
                   <td :title="translate(output+'_descr')">

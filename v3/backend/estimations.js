@@ -9,8 +9,10 @@ let Estimations={
     wwc_vol_coll_tre(substage){return substage.wwc_vol_coll - substage.wwc_vol_coll_unt;},
     wwc_vol_coll_unt(substage){return substage.wwc_vol_coll - substage.wwc_vol_coll_tre;},
   //wwt
-    wwt_n2o_efac(substage){return 3.2},
-    wwd_n2o_efac(substage){return 3.2},
+    wwt_vol_trea    (substage){return 0.2*substage.wwt_serv_pop*Global.Days();},
+    wwt_n2o_efac_tre(substage){return 3.2},
+    wwt_n2o_efac_dis(substage){return 3.2},
+
     wwt_slu_lf_TVS(substage){
       let slu_disp=Tables.get_row('wwt_slu_disp',substage.wwt_slu_disp);
       return slu_disp.TVS;
@@ -23,13 +25,16 @@ let Estimations={
       let slu_disp=Tables.get_row('wwt_slu_disp',substage.wwt_slu_disp);
       return slu_disp.la_N_cont;
     },
-    wwt_biog_pro(substage){return substage.wwt_serv_pop*Global.General.bod_pday*Global.Days()*Cts.ct_bod_kg.value*Cts.ct_biog_g.value/1000;},
+    wwt_biog_pro(substage){
+      let P  = substage.wwt_serv_pop; //people
+      let B  = Global.General.bod_pday; //gBOD/person/day
+      let D  = Global.Days(); //days
+      let VS = Cts.ct_bod_kg.value; //gVS/gBOD
+      let NL = Cts.ct_biog_g.value; //NL/gVS
+      return P*B/1000*D*VS*NL;
+    },
     wwt_biog_fla(substage){
-      if(substage.Configuration.Questions.wwt_valorizing_biogas){
-        return 0;
-      }else{
-        return substage.wwt_biog_pro;
-      }
+      return substage.wwt_biog_pro - substage.wwt_biog_val;
     },
     wwt_biog_val(substage){return substage.wwt_biog_pro - substage.wwt_biog_fla},
     wwt_ch4_biog(substage){return 59},

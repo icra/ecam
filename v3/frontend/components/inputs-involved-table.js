@@ -55,7 +55,9 @@ Vue.component('inputs_involved_table',{
           <!--input involved is an input-->
           <td v-if="get_variable_type(match)=='input'" style="text-align:right">
             <div v-if="!locate_variable(match).sublevel">
-              {{ format(locate_variable(match).stage[match]) }}
+              {{
+                format(locate_variable(match).stage[match])
+              }}
             </div>
             <div v-else>
               {{

@@ -151,7 +151,7 @@ function get_input_codes(level, sublevel){
   if(!level) return [];
   if(!Global[level]) return [];
 
-  let stage = Structure.find(s=>s.level==level&&s.sublevel==sublevel);
+  let stage = Structure.concat({level:"General",sublevel:false}).find(s=>s.level==level&&s.sublevel==sublevel);
   if(!stage) return [];
 
   let obj = null;
@@ -199,7 +199,7 @@ function locate_variable(code){
     return {level:false, sublevel:false, stage:Global}; //stage is an object
   }
 
-  let all_stages = Structure.concat({level:"General"});
+  let all_stages = Structure.concat({level:"General",sublevel:false});
 
   //search inside all stages
   for(let i in all_stages){

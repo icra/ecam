@@ -31,7 +31,7 @@ Vue.component('input_ecam',{
           <div v-if="Estimations[code]">
             <button
               @click="current_stage[code] = Estimations[code](current_stage)"
-              @mousemove="caption.show($event, \`Estimation formula:<br>\$\{Formulas.prettify(Estimations[code])\}\`)"
+              @mousemove="caption.show($event, \`Estimation formula:<br><pre>\$\{Formulas.prettify(Estimations[code])\}</pre>\`)"
               @mouseout="caption.hide()"
               :disabled="isNaN(Estimations[code](current_stage))"
               style="font-size:smaller"

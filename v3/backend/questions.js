@@ -360,31 +360,28 @@ let Questions={
       otherQuestions:[],
     },
 
-    "wwd_trucks":{
+    "wwt_reuse_trucks":{
       variables:[
-        "wwd_trck_typ",
-        "wwd_vol_trck",
-        "wwd_KPI_GHG_trck_co2",
-        "wwd_KPI_GHG_trck_n2o",
-        "wwd_KPI_GHG_trck_ch4",
-        "wwd_KPI_GHG_trck",
+        "wwt_reus_trck_typ",
+        "wwt_reus_vol_trck",
+        "wwt_KPI_GHG_reus_trck",
       ],
       advanced:0,
       otherQuestions:[],
     },
 
-    "wwd_water_reuse":{
+    "wwt_water_reuse":{
       variables:[
-        "wwd_wr_N_rec",
-        "wwd_wr_P_rec",
-        "wwd_wr_adnrg",
-        "wwd_wr_vol_d",
-        "wwd_SL_ghg_non",   //output
-        "wwd_wr_GHG_avo_N", //output
-        "wwd_wr_GHG_avo_P", //output
-        "wwd_wr_GHG_avo",   //output
-        "wwd_wr_GHG_avo_d", //output
-        "wwd_wr_nrg_sav",   //output
+        "wwt_wr_N_rec",
+        "wwt_wr_P_rec",
+        "wwt_wr_adnrg",
+        "wwt_wr_vol_d",
+        "wwt_SL_ghg_non",   //output
+        "wwt_wr_GHG_avo_N", //output
+        "wwt_wr_GHG_avo_P", //output
+        "wwt_wr_GHG_avo",   //output
+        "wwt_wr_GHG_avo_d", //output
+        "wwt_wr_nrg_sav",   //output
       ],
       advanced:1,
       otherQuestions:[],

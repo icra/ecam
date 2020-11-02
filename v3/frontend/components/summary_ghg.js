@@ -7,9 +7,9 @@ let summary_ghg = new Vue({
     ghg_avoided:[
       {level:'Waste', sublevel:'Treatment', code:'wwt_SL_GHG_avoided'},
       {level:'Waste', sublevel:'Treatment', code:'wwt_wr_C_seq_slu'},
-      {level:'Waste', sublevel:'Discharge', code:'wwd_wr_GHG_avo_d'},
-      {level:'Waste', sublevel:'Discharge', code:'wwd_SL_ghg_non'},
-      {level:'Waste', sublevel:'Discharge', code:'wwd_wr_GHG_avo'},
+      {level:'Waste', sublevel:'Discharge', code:'wwt_wr_GHG_avo_d'},
+      {level:'Waste', sublevel:'Discharge', code:'wwt_SL_ghg_non'},
+      {level:'Waste', sublevel:'Discharge', code:'wwt_wr_GHG_avo'},
       {level:'Waste', sublevel:'Onsite',    code:'wwo_SL_GHG_avoided'},
       {level:'Waste', sublevel:'Onsite',    code:'wwo_ghg_avoided_land'},
       {level:'Waste', sublevel:'Onsite',    code:'wwo_ghg_avoided_reuse'},
@@ -119,7 +119,7 @@ let summary_ghg = new Vue({
             <!--level 2-->
             <tr
               v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))"
-              v-if="unfolded_levels.indexOf(l1.level)>-1"
+              v-if="Global[l2.level][l2.sublevel].length && unfolded_levels.indexOf(l1.level)>-1"
             >
               <!--level 2 name and icon-->
               <td

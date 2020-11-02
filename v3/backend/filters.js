@@ -23,8 +23,8 @@ let Filters = {
   "wwc_vol_coll_unt",  //variable
 
   "wwt_vol_trea",      //variable
-  "wwd_vol_disc",      //variable
-  "wwd_vol_nonp",      //variable
+  "wwt_vol_disc",      //variable
+  "wwt_vol_nonp",      //variable
 
   "wwo_vol_unco",      //variable
   "wwo_vol_unco_ons",  //variable
@@ -36,10 +36,10 @@ let Filters = {
   "wwc_ch4_efac_col",
   "wwc_ch4_efac_cso",
 
-  "wwt_ch4_efac",
-  "wwd_ch4_efac",
-  "wwt_n2o_efac",
-  "wwd_n2o_efac",
+  "wwt_ch4_efac_tre",
+  "wwt_n2o_efac_tre",
+  "wwt_ch4_efac_dis",
+  "wwt_n2o_efac_dis",
 
   "wwo_ch4_efac_unt",
   "wwo_ch4_efac_con",
@@ -54,7 +54,7 @@ let Filters = {
   "ww_nrg_cost", //variable
   "ww_run_cost", //variable
 
-  "wst_treatmen", //variable
+  "wst_treatmen",          //variable
   "wst_treatment_perf",    //question
   "wsd_water_eff",         //question
   "wsd_service_perf",      //question
@@ -65,7 +65,8 @@ let Filters = {
   "wwt_bod_infl", //variable
   "wwt_bod_effl", //variable
   "wwt_bod_slud", //variable
-  "wwd_n2o_effl", //variable
+  "wwt_tn_infl", //variable
+  "wwt_tn_effl", //variable
 
   "wwo_producing_biogas", //question
 
@@ -90,14 +91,13 @@ let Filters = {
   "wsd_engines", //question
   "wwc_engines", //question
   "wwt_engines", //question
-  "wwd_engines", //question
   "wwo_engines", //question
 
   "wwt_producing_biogas", //question
 
   "wsd_trucks",    //question
   "wwt_trucks",    //question
-  "wwd_trucks",    //question
+  "wwt_reuse_trucks", //question
 
   "wwo_transport", //question
 ],
@@ -114,7 +114,6 @@ let Filters = {
   "wsd_pumping", //question
   "wwc_pumping", //question
   "wwt_pumping", //question
-  "wwd_pumping", //question
   "wwo_pumping", //question
 
   "wsa_pumping_eff", //question
@@ -122,21 +121,21 @@ let Filters = {
   "wsd_pumping_eff", //question
   "wwc_pumping_eff", //question
   "wwt_pumping_eff", //question
-  "wwd_pumping_eff", //question
   "wwo_pumping_eff", //question
 ],
 "Discharge":[
   "wwc_ch4_efac_cso", //variable
   "wwc_vol_coll_unt", //variable
-  "wwd_vol_disc",     //variable
-  "wwd_vol_nonp",     //variable
-  "wwd_ch4_efac",     //variable
-  "wwd_n2o_efac",     //variable
-  "wwt_bod_effl",     //variable
-  "wwd_n2o_effl",     //variable
+  "wwt_vol_disc",     //variable
+  "wwt_vol_nonp",     //variable
 
-  "wwd_water_reuse",  //question
-  "wwd_trucks",       //question
+  "wwt_ch4_efac_dis",     //variable
+  "wwt_n2o_efac_dis",     //variable
+
+  "wwt_bod_effl",     //variable
+  "wwt_tn_effl",     //variable
+
+  "wwt_water_reuse",  //question
 
   "wwo_vol_unco_unt", //variable
   "wwo_vol_disc",     //variable

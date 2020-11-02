@@ -14,8 +14,15 @@
     - Opportunities page is important, but can come later!
 
 [CAN BE DONE NOW]
+  - [doing now] update "wwd" codes from old Discharge stage to "wwt"
+    - wwt_ch4_efac --> wwt_ch4_efac_tre
+    - wwd_ch4_efac --> wwt_ch4_efac_dis
+    - wwt_n2o_efac --> wwt_n2o_efac_tre
+    - wwd_n2o_efac --> wwt_n2o_efac_dis
+
+  - [next] change "system" keyword to "layout".
+  - fix IPCC constants: save to each layout.
   - import from excel module with Adrià Riu help. Each layout is a excel file.
-  - change "system" keyword to "assessment"
   - sankey diagram export to jpg/png/svg
   - recap formulas to be understood by other scientists (autogenerate a document)
   - add a filter for minimum required data
@@ -27,15 +34,14 @@
     - collected volume (wwc)
     - treated volume (wwt)
     - treated volume (wwo)
-
   - trigger error if version does not match when loading json files
   - add list of involved inputs below benchmark equations in "variable.js" view
   - create view for data in "backend/Tables.js"
   - onclose listener: trigger warning if ecam is accidentally closed
-  - update "wwd" codes from old Discharge stage to "wwt"
 
 [TO BE DONE WHEN V3 IS FEATURE FROZEN]
   - update help & about & docs
+  - example v3 json file in docs
   - translations of new pieces of text added for v3
   - external version converter module (v2 to v3)
   - CORS is not compatible with file:// protocol, find alternative way to

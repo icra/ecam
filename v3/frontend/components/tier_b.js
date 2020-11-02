@@ -8,7 +8,7 @@ let tier_b=new Vue({
     are_you_editing_name : false,
 
     //highlight inputs and outputs arrays
-    highlight:true,
+    highlight:false,
     highlighted:{
       inputs  : [],
       outputs : [],
@@ -16,7 +16,7 @@ let tier_b=new Vue({
 
     //FILTERS (see "backend/filters.js")
     Filters,         //definition (list of variables for each filter)
-    filters_on:true, //all filters on
+    filters_on:false, //all filters on
     filters_active:{ //each filter on/off
       "Population"             : true,
       "Water volumes"          : true,
@@ -354,7 +354,7 @@ let tier_b=new Vue({
               <div style="margin-right:10px" title="highlight related inputs/outputs">
                 <label>
                   <input type=checkbox v-model="highlight">
-                  <small>Highlight</small>
+                  <small>Highlight mode</small>
                 </label>
               </div>
             </div>
