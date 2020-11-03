@@ -104,53 +104,48 @@ let problems=new Vue({
       </h1>
 
       <ul>
+        <!--Global: not used inputs-->
         <li>
           <details open>
             <summary>
               not used inputs
+              ({{ find_unused_inputs().length }})
             </summary>
-            <div>
-              <table>
-                <tr v-for="code in find_unused_inputs()">
-                  <td>
-                    <a @click="variable.view(code)">
-                      {{code}}
-                    </a>
-                  </td>
-                  <td>
-                    {{
-                      translate(code+'_descr')
-                    }}
-                  </td>
-                </tr>
-              </table>
-            </div>
+            <table>
+              <tr v-for="code in find_unused_inputs()">
+                <td>
+                  <a @click="variable.view(code)">
+                    {{code}}
+                  </a>
+                </td>
+                <td> {{ translate(code+'_descr') }} </td>
+              </tr>
+            </table>
           </details>
         </li>
 
+        <!--Constants: not used-->
         <li>
           <details open>
             <summary>
               not used constants
+              ({{ find_unused_constants().length }})
             </summary>
-            <div>
-              <table>
-                <tr v-for="code in find_unused_constants()">
-                  <td>
-                    {{
-                      Cts[code]
-                    }}
-                  </td>
-                </tr>
-              </table>
-            </div>
+            <table>
+              <tr v-for="code in find_unused_constants()">
+                <td> {{ code      }} </td>
+                <td> {{ Cts[code] }} </td>
+              </tr>
+            </table>
           </details>
         </li>
 
+        <!--questions: inexisting variables-->
         <li>
           <details open>
             <summary>
               questions: inexisting variables
+              ({{ Questions.find_inexisting_variables().length }})
             </summary>
             <div>
               <table>
@@ -160,21 +155,19 @@ let problems=new Vue({
                       {{code}}
                     </a>
                   </td>
-                  <td>
-                    {{
-                      translate(code+'_descr')
-                    }}
-                  </td>
+                  <td> {{ translate(code+'_descr') }} </td>
                 </tr>
               </table>
             </div>
           </details>
         </li>
 
+        <!--questions: repeated variables-->
         <li>
           <details open>
             <summary>
               repeated variables in questions
+              ({{ Questions.find_repeated_variables().length }})
             </summary>
             <div>
               <table>
@@ -195,53 +188,43 @@ let problems=new Vue({
           </details>
         </li>
 
-        <!--variables at Global not in Info-->
+        <!--Global: without info-->
         <li>
           <details open>
             <summary>
               variables at Global not in Info
+              ({{ find_inputs_without_info().length }})
             </summary>
-            <div>
-              <table>
-                <tr v-for="code in find_inputs_without_info()">
-                  <td>
-                    <a @click="variable.view(code)">
-                      {{code}}
-                    </a>
-                  </td>
-                  <td>
-                    {{
-                      locate_variable(code)
-                    }}
-                  </td>
-                </tr>
-              </table>
-            </div>
+            <table>
+              <tr v-for="code in find_inputs_without_info()">
+                <td>
+                  <a @click="variable.view(code)">
+                    {{code}}
+                  </a>
+                </td>
+                <td> {{ locate_variable(code) }} </td>
+              </tr>
+            </table>
           </details>
         </li>
 
-        <!--variables at Info not in Global-->
+        <!--Info: not in Global-->
         <li>
           <details open>
             <summary>
               variables at Info not in Global
+              ({{ find_inexisting_magnitude_definitions().length }})
             </summary>
-            <div>
-              <table>
-                <tr v-for="code in find_inexisting_magnitude_definitions()">
-                  <td>
-                    <a @click="variable.view(code)">
+            <table>
+              <tr v-for="code in find_inexisting_magnitude_definitions()">
+                <td>
+                  <a @click="variable.view(code)">
                     {{code}}
-                    </a>
-                  </td>
-                  <td>
-                    {{
-                      Info[code]
-                    }}
-                  </td>
-                </tr>
-              </table>
-            </div>
+                  </a>
+                </td>
+                <td> {{ Info[code] }} </td>
+              </tr>
+            </table>
           </details>
         </li>
 
@@ -250,27 +233,33 @@ let problems=new Vue({
           <details open>
             <summary>
               benchmarks not in Global
+              ({{ find_inexisting_benchmarks().length }})
             </summary>
-            <div>
-              <table>
-                <tr v-for="code in find_inexisting_benchmarks()">
-                  <td>
-                    <a @click="variable.view(code)">
+            <table>
+              <tr v-for="code in find_inexisting_benchmarks()">
+                <td>
+                  <a @click="variable.view(code)">
                     {{code}}
-                    </a>
-                  </td>
-                  <td>
-                    {{
-                      Benchmarks[code]
-                    }}
-                  </td>
-                </tr>
-              </table>
-            </div>
+                  </a>
+                </td>
+                <td> {{ Benchmarks[code] }} </td>
+              </tr>
+            </table>
           </details>
         </li>
       </ul>
     </div>
+  `,
+
+  style:`
+    <style>
+      #problems {
+        padding-left:1em;
+      }
+      #problems details summary {
+        cursor:pointer;
+      }
+    </style>
   `,
 });
 

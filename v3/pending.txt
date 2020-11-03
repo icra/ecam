@@ -3,42 +3,33 @@
 
 [GIZ REQUESTS]
   * Priorities
-    - [v3] IPCC equations compliance
-      - to be checked with Lluís C.
-    - [v3] Import/Export excel
+    - IPCC equations compliance
+    - Import/Export excel
       - import from excel module with Adrià Riu help. Each layout is a excel file.
-    - User friendliness
-      - TBD with viti
-    - Report graphs
-      - TBD with viti
-    - Graphs (Energy and GHGs)
-      - TBD with viti
-    - [v3] Graphs should be downloadable
-      - export to jpg/svg/png
+    - User friendliness [VITI]
+    - Graphs & report (Energy and GHGs [VITI]
+      - Graphs should be downloadable
   * Nice to have:
-    - [v4] First-Time user tutorial
-    - [v4] Opportunities page is important, but can come later!
+    - First-Time user tutorial
+    - Opportunities page is important, but can come later!
 
 [CAN BE DONE NOW]
-  - [v3] add a filter for minimum required data
-
-  - [v3] recap formulas to be understood by other scientists (autogenerate a document)
-
-  - [v3] show benchmark results for each substage in "variable.js" view
-  - [v3] trigger error if version does not match when loading json files
-  - [v3] create view for data in "backend/Tables.js"
-  - [v3] sankey diagram export to jpg/png/svg
-
-  - [v3] add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
-    - [] abstracted volume  (wsa)
-    - [] treated volume     (wst)
-    - [] distributed volume (wsd)
-    - [] collected volume   (wwc)
-    - [] treated volume     (wwt)
-    - [] treated volume     (wwo)
-
-  - [v3] add list of involved inputs below benchmark equations in "variable.js" view
-  - [v3] onclose listener: trigger warning if ecam is accidentally closed
+  - [ ] problems.js: add number of issues next each issue
+  - [ ] design minimum required data filter
+  - [ ] equations.js with Lluís C.
+  - [ ] show benchmark results for each substage in "variable.js" view
+  - [ ] trigger error if version does not match when loading json files
+  - [ ] create view for data in "backend/Tables.js"
+  - [ ] sankey diagram export to jpg/png/svg
+  - [ ] add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
+    - [ ] abstracted volume  (wsa)
+    - [ ] treated volume     (wst)
+    - [ ] distributed volume (wsd)
+    - [ ] collected volume   (wwc)
+    - [ ] treated volume     (wwt)
+    - [ ] treated volume     (wwo)
+  - [ ] add list of involved inputs below benchmark equations in "variable.js" view
+  - [ ] onclose listener: trigger warning if ecam is accidentally closed
 
 [TO BE DONE WHEN V3 IS FEATURE FROZEN]
   - update help & about & docs
