@@ -110,4 +110,10 @@ let Cts={
     descr:"Specific weight of H2O",
     unit:"kg/(s2*m2)",
   },
+
+  ct_unused:{
+    value:9810,
+    descr:"not used constant",
+    unit:"unit",
+  },
 };

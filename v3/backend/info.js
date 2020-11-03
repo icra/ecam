@@ -504,6 +504,8 @@ let Info={
 	wwt_vol_disc:{magnitude:"Volume",unit:"m3"},
 	wwt_vol_trck:{magnitude:"Volume",unit:"L"},
   wwt_total_m3:{magnitude:"Volume",unit:"m3"},
+  wwt_reus_vol_trck:{magnitude:"Volume",unit:"L"},
+  wwt_KPI_GHG_reus_trck:{magnitude:"Mass",unit:"kg CO2eq"},
 
 	wwt_vol_nonp:{magnitude:"Volume",unit:"m3"},
 	wwt_tn_effl:{magnitude:"Mass/Volume",unit:"mg/L"},

@@ -43,7 +43,7 @@ let report = new Vue({
         <li>
           <details>
             <summary>
-              figure 1: ghg emissions by system (pie chart)
+              figure 1: ghg emissions by level (pie chart)
             </summary>
             <pre v-html="JSON.stringify(get_ghg_emissions_by_level(),null,'  ')"></pre>
           </details>
@@ -61,7 +61,7 @@ let report = new Vue({
         <li>figure 3: ghg emissions by compound (detailed)</li>
         <li>figure 4: ghg emissions by UNFCCC categories</li>
 
-        <li>figure 5: energy consumption by system</li>
+        <li>figure 5: energy consumption by level</li>
 
         <li>figure 6:water total running costs</li>
         <li>figure 7:waste total running costs</li>

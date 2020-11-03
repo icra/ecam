@@ -29,6 +29,7 @@ let ecam={
     constant,
     emission_tree,
     report,
+    benchmarks,
     non_revenue_water,
     equations,
 
@@ -36,9 +37,6 @@ let ecam={
     problems,
     translation_problems,
     validate_json,
-    data_structure_viewer,
-    benchmarks,
-    graphs,
   },
 
   //show a view (==open a page)
@@ -180,6 +178,9 @@ let ecam={
         }
       });
     });
+
+    //update constants according to selected GWP
+    configuration.set_constants_from_gwp_report();
   },
 
   //add new scenario

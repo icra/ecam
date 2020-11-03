@@ -152,11 +152,11 @@ let select_scenario=new Vue({
       <!--title-->
       <div>
         <h2 style="text-align:center;margin-bottom:0">
-          Systems ({{Scenarios.length}})
+          Layouts ({{Scenarios.length}})
         </h2>
         <p style="text-align:center;color:#666">
           <b>
-            Here you can create, edit, load, save and compare systems
+            Here you can create, edit, load, save and compare layouts
           </b>
         </p>
       </div>
@@ -187,10 +187,10 @@ let select_scenario=new Vue({
             </div>
             <div style="font-size:smaller">
               <!--load mode radio btns-->
-              <label title="append json file to current systems">
+              <label title="append json file to current layouts">
                 <input type=radio v-model="loadfile_replace" :value='false'>Append
               </label>
-              <label title="replace current systems with json file">
+              <label title="replace current layouts with json file">
                 <input type=radio v-model="loadfile_replace" :value='true'>Replace
               </label>
             </div>
@@ -208,13 +208,13 @@ let select_scenario=new Vue({
 
         <!--save file-->
         <div>
-          <button @click="save_to_file()" title="save all systems to a JSON file">
+          <button @click="save_to_file()" title="save all layouts to a JSON file">
             <div style="display:flex;align-items:center">
               <img
                 class=icon
                 src="frontend/img/viti/select_scenario/icon-save.svg"
               >
-              <span>Save all systems to a file</span>
+              <span>Save all layouts to a file</span>
             </div>
           </button>
         </div>
@@ -238,7 +238,7 @@ let select_scenario=new Vue({
           </thead>
 
           <tr v-for="scenario in Scenarios">
-            <!--select current system-->
+            <!--select current layout-->
             <td style="background:white">
               <img
                 @click="set_current_scenario(scenario)"
@@ -248,7 +248,7 @@ let select_scenario=new Vue({
               >
             </td>
 
-            <!--system name-->
+            <!--layout name-->
             <td
               @click="set_current_scenario(scenario)"
               style="padding:0;background:white;cursor:pointer"
@@ -317,7 +317,7 @@ let select_scenario=new Vue({
             <td style="background:white;text-align:left" colspan=7>
               <button onclick="ecam.new_scenario()"
                 style="font-size:large"
-                v-html="'+ create new system'"
+                v-html="'+ create new layout'"
               ></button>
             </td>
           </tr>
@@ -327,13 +327,13 @@ let select_scenario=new Vue({
       <!--compare scenarios table-->
       <div v-if="Scenarios.length>1" style="margin-top:2em">
         <h1 style="text-align:center">
-          Compare systems
+          Compare layouts
         </h1>
 
         <p style="text-align:center;color:#666">
           <b>
-            Select 'compare' on your system and it will appear in the following
-            table.  The darker column is the current system you are editing.
+            Select 'compare' on your layout and it will appear in the following
+            table.  The darker column is the current layout you are editing.
           </b>
         </p>
 

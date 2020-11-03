@@ -65,7 +65,7 @@ let overview = new Vue({
       <!--charts-->
       <div style="text-align:center;">
         <h3>GHG emissions pie chart</h3>
-        <div id=pie_chart>~pie chart not drawn since emissions are zero</div>
+        <div id=pie_chart><i>~emissions are zero</i></div>
       </div><hr>
 
       <!--diagram stages-->

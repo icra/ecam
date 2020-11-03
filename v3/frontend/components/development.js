@@ -1,10 +1,8 @@
 let development=new Vue({
   el:"#development",
-
   data:{
-    visible: false,
+    visible:false,
   },
-
   template:`
     <div id=development v-if="visible">
       <!--title--><h1 style=color:black>Development/debugging utilities for development</h1>
@@ -13,9 +11,6 @@ let development=new Vue({
         <li><a onclick="ecam.show('problems')">Problem finder</a></li>
         <li><a onclick="ecam.show('translation_problems')">Translation problems finder</a></li>
         <li><a onclick="ecam.show('validate_json')">Current JSON file validator</a></li>
-        <li><a onclick="ecam.show('data_structure_viewer')">Data structure viewer</a></li>
-        <li><a onclick="ecam.show('benchmarks')">Benchmarks summary</a></li>
-        <li><a onclick="ecam.show('graphs')">Graphs summary</a></li>
       </ul>
     </div>
   `,
@@ -23,42 +18,84 @@ let development=new Vue({
 
 let problems=new Vue({
   el:"#problems",
-
   data:{
     visible:false,
     variable,
 
     Global,
     Formulas,
+    Languages,
+    Questions,
+    Cts,
+    Info,
+    Benchmarks,
   },
 
   methods:{
-    //get unused inputs
-    //TODO search benchmarks also
-    get_unused_inputs(obj){
-      obj=obj||Global;
+    find_unused_inputs(){
       let unused=[];
-
-      for(let field in obj) {
-
-        switch(typeof(obj[field])) {
-          case 'number':
-            let n=Formulas.outputs_per_input(field).length;
-            if(n==0) unused.push(field);
-            break;
-          case 'object':
-            //recursive call
-            unused = unused.concat(this.get_unused_inputs(obj[field]));
-            break;
-        }
-
-      }
+      Structure.forEach(s=>{
+        get_input_codes(s.level, s.sublevel).forEach(code=>{
+          let length = Formulas.outputs_per_input(code).length;
+          if(length==0){
+            unused.push(code);
+          }
+        });
+      });
       return unused;
     },
+
+    find_inputs_without_info(){
+      let found=[];
+      Structure.forEach(s=>{
+        get_input_codes(s.level, s.sublevel).
+        concat(get_output_codes(s.level, s.sublevel)).
+        forEach(code=>{
+          if(!Info[code]){
+            found.push(code);
+          }
+        });
+      });
+      return found;
+    },
+
+    find_unused_constants(){
+      let unused=[];
+      Object.keys(Cts).forEach(code=>{
+        let length = Formulas.outputs_per_input(code).length;
+        if(length==0){
+          unused.push(code);
+        }
+      });
+      return unused;
+    },
+
+    find_inexisting_magnitude_definitions(){
+      let found=[];
+      Object.keys(Info).forEach(code=>{
+        if(!locate_variable(code)){
+          found.push(code);
+        }
+      });
+      return found;
+    },
+
+    find_inexisting_benchmarks(){
+      let found=[];
+      Object.keys(Benchmarks).forEach(code=>{
+        if(!locate_variable(code)){
+          found.push(code);
+        }
+      });
+      return found;
+    },
+
+    translate,
+    locate_variable,
   },
 
   template:`
-    <div id=problems v-if="visible">
+    <div id=problems v-if="visible && Languages.ready">
       <!--title-->
       <h1>
         <a onclick="ecam.show('development')">Development</a>
@@ -66,93 +103,197 @@ let problems=new Vue({
         Debugging utility
       </h1>
 
-      <!--note: issues are in github-->
-      <p style=text-align:center>
-        This is an automatic problem finder.
-        Issues (requests/bugs) are here:
-        <a href='https://github.com/icra/ecam/issues'>github issues</a>
-      </p>
-
       <ul>
         <li>
-          not used inputs
-          <table>
-            <tr v-for="field in get_unused_inputs()">
-              <td>
-                <a @click="variable.view(field)">
-                  {{field}}
-                </a>
-              </td>
-            </tr>
-          </table>
+          <details open>
+            <summary>
+              not used inputs
+            </summary>
+            <div>
+              <table>
+                <tr v-for="code in find_unused_inputs()">
+                  <td>
+                    <a @click="variable.view(code)">
+                      {{code}}
+                    </a>
+                  </td>
+                  <td>
+                    {{
+                      translate(code+'_descr')
+                    }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </details>
         </li>
 
-        <li>questions: look for inexisting variables</li>
-        <li>variables in Global not at Info</li>
-        <li>variables at Info that are not in Global</li>
-        <li>variables benchmarked not in Global</li>
-        <li>repeated variables in questions</li>
-        <li>not used constants</li>
-      </ul>
+        <li>
+          <details open>
+            <summary>
+              not used constants
+            </summary>
+            <div>
+              <table>
+                <tr v-for="code in find_unused_constants()">
+                  <td>
+                    {{
+                      Cts[code]
+                    }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </details>
+        </li>
 
+        <li>
+          <details open>
+            <summary>
+              questions: inexisting variables
+            </summary>
+            <div>
+              <table>
+                <tr v-for="code in Questions.find_inexisting_variables()">
+                  <td>
+                    <a @click="variable.view(code)">
+                      {{code}}
+                    </a>
+                  </td>
+                  <td>
+                    {{
+                      translate(code+'_descr')
+                    }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </details>
+        </li>
+
+        <li>
+          <details open>
+            <summary>
+              repeated variables in questions
+            </summary>
+            <div>
+              <table>
+                <tr v-for="code in Questions.find_repeated_variables()">
+                  <td>
+                    <a @click="variable.view(code)">
+                      {{code}}
+                    </a>
+                  </td>
+                  <td>
+                    {{
+                      translate(code+'_descr')
+                    }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </details>
+        </li>
+
+        <!--variables at Global not in Info-->
+        <li>
+          <details open>
+            <summary>
+              variables at Global not in Info
+            </summary>
+            <div>
+              <table>
+                <tr v-for="code in find_inputs_without_info()">
+                  <td>
+                    <a @click="variable.view(code)">
+                      {{code}}
+                    </a>
+                  </td>
+                  <td>
+                    {{
+                      locate_variable(code)
+                    }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </details>
+        </li>
+
+        <!--variables at Info not in Global-->
+        <li>
+          <details open>
+            <summary>
+              variables at Info not in Global
+            </summary>
+            <div>
+              <table>
+                <tr v-for="code in find_inexisting_magnitude_definitions()">
+                  <td>
+                    <a @click="variable.view(code)">
+                    {{code}}
+                    </a>
+                  </td>
+                  <td>
+                    {{
+                      Info[code]
+                    }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </details>
+        </li>
+
+        <!--benchmarks not in Global-->
+        <li>
+          <details open>
+            <summary>
+              benchmarks not in Global
+            </summary>
+            <div>
+              <table>
+                <tr v-for="code in find_inexisting_benchmarks()">
+                  <td>
+                    <a @click="variable.view(code)">
+                    {{code}}
+                    </a>
+                  </td>
+                  <td>
+                    {{
+                      Benchmarks[code]
+                    }}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </details>
+        </li>
+      </ul>
     </div>
   `,
 });
 
 let translation_problems=new Vue({
   el:"#translation_problems",
-
   data:{
     visible:false,
   },
-
   template:`
     <div id=translation_problems v-if="visible">
-      translation problem finder
+      translation problem finder TODO
     </div>
   `,
-
 });
 
 let validate_json=new Vue({
   el:"#validate_json",
-
   data:{
     visible:false,
   },
-
   template:`
     <div id=validate_json v-if="visible">
-      validate json
-      <!--current json-->include'currentJSON.php'
-    </div>
-  `,
-});
-
-let data_structure_viewer=new Vue({
-  el:"#data_structure_viewer",
-
-  data:{
-    visible:false,
-  },
-
-  template:`
-    <div id=data_structure_viewer v-if="visible">
-      data_structure_viewer
-    </div>
-  `,
-});
-
-let graphs=new Vue({
-  el:"#graphs",
-
-  data:{
-    visible:false,
-  },
-
-  template:`
-    <div id=graphs v-if="visible">
-      graphs
+      validate json TODO
     </div>
   `,
 });

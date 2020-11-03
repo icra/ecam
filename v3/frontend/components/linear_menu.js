@@ -25,12 +25,12 @@ let linear_menu = new Vue({
           <div>Home</div>
         </div>
 
-        <!--systems-->
+        <!--layouts-->
         <div
           onclick="ecam.show('select_scenario')"
           :selected="current_view=='select_scenario'"
         >
-          <div>Systems</div>
+          <div>Layouts</div>
         </div>
 
         <!--general settings-->
@@ -74,7 +74,7 @@ let linear_menu = new Vue({
         </div>
       </div>
 
-      <!--current system-->
+      <!--current layout-->
       <div onclick="ecam.show('configuration')">
         <div>
           <b style="color:#aaa">You are in</b>

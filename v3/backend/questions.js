@@ -627,14 +627,14 @@ let Questions={
 /*Questions functions*/
 
 //return the question codes according to an ubication inside "Global".
-//ubication is a pointer to a stage, for example "Global.Water.Abstraction"
+//ubication is a pointer to a stage, for example "Global.Water.Abstraction[0]"
 Questions.get_questions=function(ubication) {
   if(!ubication) return [];
 
   let questions=[];
 
   for(let question in this) {
-    if(typeof(this[question])=="function")continue;
+    if(typeof(this[question])=="function") continue;
     //check all codes inside ubication
     for(let i in this[question].variables){
       let code=this[question].variables[i];
@@ -714,31 +714,43 @@ Questions.reset_values=function(question, substage){
   });
 };
 
-//v2
-//TODO Automatic find repeated variables in Questions
-Questions.findRepeated=function() {
+Questions.find_repeated_variables=function(){
   //count how many times appears field in Questions
-  function countField(field) {
+  function count(code) {
     let n=0;
-    //go over all questions
-    for(let question in Questions) {
-      //go over all questions
-      for(let i in Questions[question].variables) {
-        //check if code==field
-        if(field==Questions[question].variables[i]) n++;
-      }
-    }
+    Object.keys(Questions).forEach(question=>{
+      if(typeof(Questions[question])=='function') return;
+      Questions[question].variables.forEach(v=>{
+        if(v==code) n++;
+      });
+    })
     return n;
   }
-  let repeated=[];
-  let code;
-  //go over all questions and check that appear 1 time
-  for(let question in this) {
-    for(let i in this[question].variables) {
-      code=this[question].variables[i];
-      if(countField(code)>1) repeated.push(code);
-    }
-  }
-  //remove duplicates
-  return repeated.reduce(function(a,b){if(a.indexOf(b)<0)a.push(b);return a;},[]);
+
+  let repeated_variables=[];
+
+  Object.keys(Questions).forEach(question=>{
+    if(typeof(Questions[question])=='function') return;
+    Questions[question].variables.forEach(code=>{
+      if(count(code)>1){
+        repeated_variables.push(code);
+      }
+    });
+  });
+
+  return Array.from(new Set(repeated_variables));
 };
+
+Questions.find_inexisting_variables=function(){
+  let inexisting_variables=[];
+  Object.keys(Questions).forEach(question=>{
+    if(typeof(Questions[question])=='function') return;
+    Questions[question].variables.forEach(code=>{
+      if(!locate_variable(code)){
+        inexisting_variables.push(code);
+      }
+    });
+  });
+  return Array.from(new Set(inexisting_variables));
+};
+

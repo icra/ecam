@@ -198,4 +198,8 @@ let Benchmarks = {
     else if(value > 25)                    return "Good";
     else                                   return "Out of range";
   },
+
+  not_used_benchmark(){
+    return false;
+  }
 };

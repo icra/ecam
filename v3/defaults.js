@@ -9,8 +9,8 @@ stages_menu.visible = 0;
 
 //initial page to display
 //variable.view('wsa_KPI_GHG_fuel');
-ecam.show('tier_b');
-go_to('Waste','Treatment');
+//go_to('Waste','Treatment');
+ecam.show('problems');
 
 //default values
 Global.General.conv_kwh_co2 =    0.7; //conversion factor for grid electricity (kgCO2/kWh)

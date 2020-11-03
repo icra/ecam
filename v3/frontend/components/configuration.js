@@ -43,7 +43,7 @@ let configuration=new Vue({
   template:`
     <!--configuration VIEW-->
     <div id=configuration v-if="visible && Languages.ready">
-      <!--system name-->
+      <!--layout name-->
       <h1 style=text-align:center>
         <div v-if="are_you_editing_name">
           <input
@@ -51,7 +51,7 @@ let configuration=new Vue({
             v-model="Global.General.Name"
             @keyup.enter="are_you_editing_name=false"
             maxlength=50
-            placeholder="System name"
+            placeholder="Layout name"
             style="border:1px solid #ccc"
           >
           <button @click="are_you_editing_name=false">ok</button>
@@ -72,7 +72,7 @@ let configuration=new Vue({
         </div>
       </h1>
 
-      <!--activate the stages which form your system-->
+      <!--activate the stages which form your layout-->
       <div
         style="
           margin-top:1em;
@@ -80,7 +80,7 @@ let configuration=new Vue({
           text-align:center;
           color:#666;
         "
-      ><b>Information about your system</b>
+      ><b>Information about current layout</b>
       </div>
 
       <!--picture TODO-->
