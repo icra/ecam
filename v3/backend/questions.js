@@ -69,9 +69,6 @@ let Questions={
       variables:[
         "wst_fuel_typ",
         "wst_vol_fuel",
-        "wst_KPI_GHG_fuel_co2",
-        "wst_KPI_GHG_fuel_n2o",
-        "wst_KPI_GHG_fuel_ch4",
         "wst_KPI_GHG_fuel",
       ],
       advanced:0,
@@ -124,9 +121,6 @@ let Questions={
       variables:[
         "wsd_fuel_typ",
         "wsd_vol_fuel",
-        "wsd_KPI_GHG_fuel_co2",
-        "wsd_KPI_GHG_fuel_n2o",
-        "wsd_KPI_GHG_fuel_ch4",
         "wsd_KPI_GHG_fuel",
       ],
       advanced:0,
@@ -137,9 +131,6 @@ let Questions={
       variables:[
         "wsd_trck_typ",
         "wsd_vol_trck",
-        "wsd_KPI_GHG_trck_co2",
-        "wsd_KPI_GHG_trck_n2o",
-        "wsd_KPI_GHG_trck_ch4",
         "wsd_KPI_GHG_trck",
       ],
       advanced:0,
@@ -153,10 +144,6 @@ let Questions={
         "wsd_SL_water_loss",
         "wsd_SL_nr_water",
         "wsd_KPI_nrg_per_m3",
-        "wsa_SL_GHG_nrw",
-        "wst_SL_GHG_nrw",
-        "wsd_SL_GHG_nrw",
-        "wsd_SL_ghg_attr"
       ],
       advanced:0,
       otherQuestions:[],
@@ -233,9 +220,6 @@ let Questions={
       variables:[
         "wwc_fuel_typ",
         "wwc_vol_fuel",
-        "wwc_KPI_GHG_fuel_co2",
-        "wwc_KPI_GHG_fuel_n2o",
-        "wwc_KPI_GHG_fuel_ch4",
         "wwc_KPI_GHG_fuel",
       ],
       advanced:0,
@@ -281,9 +265,6 @@ let Questions={
       variables:[
         "wwt_fuel_typ",
         "wwt_vol_fuel",
-        "wwt_KPI_GHG_fuel_co2",
-        "wwt_KPI_GHG_fuel_n2o",
-        "wwt_KPI_GHG_fuel_ch4",
         "wwt_KPI_GHG_fuel",
       ],
       advanced:0,
@@ -300,9 +281,6 @@ let Questions={
         "wwt_dige_typ",
         "wwt_fuel_dig",
         "wwt_KPI_biog_x_bod",
-        "wwt_KPI_GHG_dig_fuel_co2",
-        "wwt_KPI_GHG_dig_fuel_n2o",
-        "wwt_KPI_GHG_dig_fuel_ch4",
         "wwt_KPI_GHG_dig_fuel",
         "wwt_KPI_GHG_biog",
         "wwt_KPI_nrg_biogas",
@@ -374,14 +352,11 @@ let Questions={
       variables:[
         "wwt_wr_N_rec",
         "wwt_wr_P_rec",
-        "wwt_wr_adnrg",
         "wwt_wr_vol_d",
         "wwt_SL_ghg_non",   //output
         "wwt_wr_GHG_avo_N", //output
         "wwt_wr_GHG_avo_P", //output
         "wwt_wr_GHG_avo",   //output
-        "wwt_wr_GHG_avo_d", //output
-        "wwt_wr_nrg_sav",   //output
       ],
       advanced:1,
       otherQuestions:[],
@@ -413,9 +388,6 @@ let Questions={
       variables:[
         "wwt_mass_slu_sto",
         "wwt_time_slu_sto",
-        "c_wwt_ch4_pot",
-        "wwt_slu_storage_ch4",
-        "wwt_KPI_ghg_sto_co2eq",
       ],
       advanced:0,
       otherQuestions:[],
@@ -424,8 +396,6 @@ let Questions={
     "wwt_composting":{
       variables:[
         "wwt_mass_slu_comp",
-        "wwt_slu_composting_ch4",
-        "wwt_slu_composting_n2o",
         "wwt_KPI_ghg_comp_co2eq",
         "wwt_slu_comp_C_seq",
       ],
@@ -437,9 +407,6 @@ let Questions={
       variables:[
         "wwt_mass_slu_inc",
         "wwt_temp_inc",
-        "wwt_slu_inciner_ch4",
-        "wwt_slu_inciner_n2o",
-        "wwt_KPI_ghg_inc_co2eq",
       ],
       advanced:0,
       otherQuestions:[ ],

@@ -1,6 +1,5 @@
 * ECAM V3 CODING TASKS *
 ------------------------
-
 [GIZ REQUESTS]
   * Priorities
     - IPCC equations compliance
@@ -13,13 +12,12 @@
     - First-Time user tutorial
     - Opportunities page is important, but can come later!
 
-[CAN BE DONE NOW]
-  - [ ] problems.js: add number of issues next each issue
-  - [ ] design minimum required data filter
-  - [ ] equations.js with Lluís C.
-  - [ ] show benchmark results for each substage in "variable.js" view
-  - [ ] trigger error if version does not match when loading json files
+[DOING NOW]
   - [ ] create view for data in "backend/Tables.js"
+    - table wst_disnfctn not used
+
+  - [ ] create view for data in "backend/exceptions.js"
+  - [ ] trigger error if version does not match when loading json files
   - [ ] sankey diagram export to jpg/png/svg
   - [ ] add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
     - [ ] abstracted volume  (wsa)
@@ -28,7 +26,8 @@
     - [ ] collected volume   (wwc)
     - [ ] treated volume     (wwt)
     - [ ] treated volume     (wwo)
-  - [ ] add list of involved inputs below benchmark equations in "variable.js" view
+  - [ ] design minimum required data filter
+  - [ ] equations.js with Lluís C.
   - [ ] onclose listener: trigger warning if ecam is accidentally closed
 
 [TO BE DONE WHEN V3 IS FEATURE FROZEN]

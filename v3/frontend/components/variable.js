@@ -80,6 +80,14 @@ let variable=new Vue({
       }
       return obj;
     },
+
+    get_benchmark(ss,id){
+      id=id||this.id;
+      if(!Benchmarks[id]) return {};
+      let string = Benchmarks[id](ss,get_output_value(id,ss))
+      let color = tier_b.benchmark_colors[string];
+      return {string,color};
+    },
   },
 
   template:`
@@ -262,7 +270,9 @@ let variable=new Vue({
                 <div v-else>
                   <table>
                     <tr>
-                      <td v-for="ss in Global[localization.level][localization.sublevel]">
+                      <td v-for="ss in Global[localization.level][localization.sublevel]"
+                        style="vertical-align:top"
+                      >
                         <div>
                           <a @click="go_to_substage(ss)">{{ss.name}}</a>
                         </div>
@@ -284,7 +294,14 @@ let variable=new Vue({
                           ></div>
                           <div v-html="get_current_unit(id).prettify()" class=unit style="text-align:right"></div>
                         </div>
-                        <!--unit-->
+                        <!--benchmark evaluation-->
+                        <div v-if="Benchmarks[id]" style="text-align:center;margin-top:10px">
+                          <div :style="{color:get_benchmark(ss).color}" title="benchmark evaluation">
+                            {{
+                              get_benchmark(ss).string
+                            }}
+                          </div>
+                        </div>
                       </td>
                     </tr>
                   </table>
@@ -372,7 +389,20 @@ let variable=new Vue({
                   </td>
                   <td>
                     <div>
-                      benchmark for each substage
+                      <div v-if="!locate_variable(output).sublevel">
+                        {{
+                          format(
+                            get_benchmark(locate_variable(output).stage,output)
+                          )
+                        }}
+                      </div>
+                      <div v-else>
+                        {{
+                          locate_variable(output).stage.map(ss=>(
+                            get_benchmark(ss,output).string
+                          ))
+                        }}
+                      </div>
                     </div>
                   </td>
                   <td>
@@ -421,11 +451,21 @@ let variable=new Vue({
             ?
           </th>
           <td v-if="Benchmarks[id]">
-            Yes
+            {{ translate('yes') }}
             <details open>
               <summary>formula</summary>
               <div>
                 <code><pre class=prettyprint v-html="Formulas.prettify(Benchmarks[id])"></pre></code>
+              </div>
+              <!--inputs involved in benchmark-->
+              <div v-if="Formulas.ids_per_formula(Benchmarks[id]).length">
+                <div>
+                  <b>{{ translate('variable_inputs_involved') }}</b>
+                </div>
+                <inputs_involved_table
+                  :code="id"
+                  :obj="Benchmarks"
+                ></inputs_involved_table>
               </div>
             </details>
           </td>

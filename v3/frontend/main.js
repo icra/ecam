@@ -32,6 +32,7 @@ let ecam={
     benchmarks,
     non_revenue_water,
     equations,
+    tables,
 
     development,
     problems,

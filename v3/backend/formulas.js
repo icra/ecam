@@ -35,8 +35,11 @@ let Formulas={
     });
     let all_codes = all_input_codes.concat(all_output_codes);
 
-    //concatenate constants and variables and iterate keys
-    Object.keys(Cts).concat(all_codes).forEach(field=>{
+    //add constants
+    all_codes = all_codes.concat(Object.keys(Cts));
+
+    //iterate keys
+    all_codes.forEach(field=>{
       let reg=new RegExp("\\W"+field+"(\\W|$)");
       // \W matches any non-word characters (short for [^a-zA-Z0-9_]).
       // \D matches any non-digit (short for [^0-9]).
@@ -53,7 +56,7 @@ let Formulas={
     example: "sV1" returns ['c_wwt1','c_aV2']
   */
   outputs_per_input(id){
-    let matches=[];
+    let matches=[]; //return value
     let reg=new RegExp('\\W'+id+"\\W");
 
     //search Ecam.prototype
@@ -74,20 +77,21 @@ let Formulas={
       });
     });
 
-    //check all estimations
+    //search estimations
     let all_estimations = Object.keys(Estimations);
     all_estimations.forEach(code=>{
       let match = Estimations[code].toString().search(reg); //will return -1 if not found
       if(match+1) matches.push(code);
     });
 
-    //check all benchmarks
+    //search benchmarks
     let all_benchmarks = Object.keys(Benchmarks);
     all_benchmarks.forEach(code=>{
       let match = Benchmarks[code].toString().search(reg); //will return -1 if not found
       if(match+1) matches.push(code);
     });
 
+    //exclude constructors
     matches = matches.filter(m=>m!='constructor');
 
     return Array.from(new Set(matches));
