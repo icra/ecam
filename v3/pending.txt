@@ -14,8 +14,10 @@
     - Opportunities page is important, but can come later!
 
 [DOING NOW]
+  - [ ] variable.js: show if the input has related info in tables
   - [ ] create view for data in "backend/Tables.js"
     - table wst_disnfctn not used
+  - [ ] remove 1 extra day from Days function and display it in frontend
   - [ ] create view for data in "backend/exceptions.js"
   - [ ] trigger error if version does not match when loading json files
   - [ ] sankey diagram export to jpg/png/svg

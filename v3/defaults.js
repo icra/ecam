@@ -8,7 +8,7 @@ linear_menu.visible = 1;
 stages_menu.visible = 0;
 
 //initial page to display
-//variable.view('wsa_KPI_std_nrg_cons');
+//variable.view('ww_vol_gene');
 //go_to('Waste','Treatment');
 ecam.show('tables');
 

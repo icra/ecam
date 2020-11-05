@@ -21,6 +21,7 @@ let variable=new Vue({
     Formulas,
     Questions,
     Benchmarks,
+    Exceptions,
   },
 
   updated(){
@@ -230,12 +231,18 @@ let variable=new Vue({
                   </div>
                 </div>
               </div>
+
               <!--input is a number-->
               <div v-else>
                 <div>
                   <div v-if="!localization.sublevel">
                     <input type=number v-model.number="Global[localization.level][id]">
-                    <div class=unit v-html="get_base_unit(id).prettify()"></div>
+                    <span class=unit v-html="get_base_unit(id).prettify()" style="text-align:right"></span>
+                    <div v-if="Exceptions[id]">
+                      TODO --
+                      drop-down menu to select value from stages that are not
+                      substages
+                    </div>
                   </div>
                   <div v-else>
                     <table>
@@ -244,10 +251,45 @@ let variable=new Vue({
                           <div>
                             <a @click="go_to_substage(ss)">{{ss.name}}</a>
                           </div>
-                          <div>
+                          <div style="text-align:right">
                             <input type=number v-model.number="ss[id]">
                           </div>
                           <div class=unit style="text-align:right" v-html="get_base_unit(id).prettify()"></div>
+
+                          <!--drop down menus for certain inputs-->
+                          <div v-if="Exceptions[id]">
+                            <!--case 1: selection is a percent of something else-->
+                            <select v-if="Exceptions[id].percent_of" v-model="ss[id]"
+                              style="
+                                max-width:200px;
+                              "
+                            >
+                              <option
+                                v-for="obj in Tables[Exceptions[id].table]"
+                                :value="parseFloat(obj[Exceptions[id].table_field(ss)]*Exceptions[id].percent_of(ss))"
+                              >
+                                {{translate(obj.name)}}
+                                [{{        100*obj[Exceptions[id].table_field(ss)] }} %]
+                                ({{ format(    obj[Exceptions[id].table_field(ss)]*Exceptions[id].percent_of(ss))}}
+                                {{get_base_unit(id).prettify()}})
+                              </option>
+                            </select>
+
+                            <!--case 2: selection is a fixed value-->
+                            <select v-else v-model="ss[id]"
+                              style="
+                                max-width:200px;
+                              "
+                            >
+                              <option
+                                v-for="obj in Tables[Exceptions[id].table]"
+                                :value="parseFloat(obj[Exceptions[id].table_field(ss)])"
+                              >
+                                {{translate(obj.name)}}
+                                ({{ format(obj[Exceptions[id].table_field(ss)]) }})
+                              </option>
+                            </select>
+                          </div>
                         </td>
                       </tr>
                     </table>
@@ -342,10 +384,38 @@ let variable=new Vue({
                         ))
                       }}
                     </div>
+                    <div v-else>
+                      {{
+                        format(
+                          Estimations[output](locate_variable(output).stage)
+                        )
+                      }}
+                    </div>
                   </td>
                   <td>
                     <span class=unit v-html="get_base_unit(output).prettify()">
                     </span>
+                  </td>
+                </tr>
+
+                <!--output that uses the input is an exception-->
+                <tr v-else-if="Exceptions[output]">
+                  <td :title="translate(output+'_descr')">
+                    <a @click="view(output)" :style="{color:get_level_color(locate_variable(output).level)}">
+                      {{ output }} (drop-down selection)
+                    </a>
+                  </td>
+                  <td>
+                    <div v-if="locate_variable(output).sublevel">
+                      {{
+                        locate_variable(output).stage.map(ss=>(
+                          Exceptions[output]
+                        ))
+                      }}
+                    </div>
+                  </td>
+                  <td>
+                    <span class=unit v-html="get_base_unit(output).prettify()"></span>
                   </td>
                 </tr>
 
@@ -423,15 +493,43 @@ let variable=new Vue({
             Estimation of this input based on other inputs
           </th>
           <td>
+            <!--estimation value-->
+            <div>
+              <div>
+                <div v-if="locate_variable(id).sublevel">
+                  {{
+                    locate_variable(id).stage.map(ss=>(
+                      format(
+                        Estimations[id](ss)
+                      )
+                    ))
+                  }}
+                  <span class=unit v-html="get_base_unit(id).prettify()"></span>
+                </div>
+                <div v-else>
+                  {{
+                    format(
+                      Estimations[id](locate_variable(id).stage)
+                    )
+                  }}
+                  <span class=unit v-html="get_base_unit(id).prettify()"></span>
+                </div>
+              </div>
+            </div>
+
             <!--formula for estimations-->
-            <div style="border:1px solid #ccc;padding:1em">
+            <div style="padding:1em 0;">
               <pre
                 class=prettyprint
                 v-html="Formulas.prettify( Estimations[id].toString() )"
+                style="margin:0"
               ></pre>
             </div>
 
             <!--inputs involved in the estimations equation-->
+            <div v-if="Formulas.ids_per_formula(Estimations[id]).length">
+              <b>{{ translate('variable_inputs_involved') }}</b>
+            </div>
             <inputs_involved_table
               :code="id"
               :obj="Estimations"

@@ -36,13 +36,13 @@ let equations = new Vue({
 
   template:`
     <div id=equations v-if="visible && Languages.ready">
-      <h3 style="padding-left:0">
+      <h1 style="padding-left:0">
         Equations
         <span>
           <button @click="fold_all(true)">See all</button>
           <button @click="fold_all()">Hide all</button>
         </span>
-      </h3>
+      </h1>
 
       <div>
         Navigate

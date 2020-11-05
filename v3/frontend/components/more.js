@@ -60,9 +60,9 @@ let more = new Vue({
             <li class=item><a onclick="ecam.show('fuel_table')">        {{translate('Fuel types')              }}</a></li>
             <li class=item><a onclick="ecam.show('non_revenue_water')"> {{translate('non_revenue_water')       }}</a></li>
             <li class=item><a onclick="ecam.show('equations')">         {{translate('equations')               }}</a></li>
-            <li class=item><a onclick="ecam.show('development')">       {{translate('dev')                     }}</a></li>
             <li class=item><a onclick="ecam.show('tables')">            Data tables                              </a></li>
-            <li class=item><a onclick="alert('TODO')">                  [TODO] {{translate('unfccc_categories')}}</a></li>
+            <li class=item><a onclick="alert('TODO')">                  {{translate('unfccc_categories')}} (TODO)</a></li>
+            <li class=item><a onclick="ecam.show('development')">       {{translate('dev')                     }}</a></li>
           </ul>
         </li>
       </ul>

@@ -396,7 +396,6 @@ let Questions={
     "wwt_composting":{
       variables:[
         "wwt_mass_slu_comp",
-        "wwt_KPI_ghg_comp_co2eq",
         "wwt_slu_comp_C_seq",
       ],
       advanced:0,
@@ -417,8 +416,6 @@ let Questions={
         "wwt_mass_slu_app",
         "wwt_slu_la_N_cont",
         "wwt_soil_typ",
-        "wwt_slu_landapp_n2o",
-        "wwt_KPI_ghg_app_co2eq",
         "wwt_slu_app_C_seq",
       ],
       advanced:0,
@@ -431,9 +428,6 @@ let Questions={
         "wwt_slu_lf_N_cont",
         "wwt_slu_lf_TVS",
         "wwt_slu_type",
-        "wwt_slu_landfill_ch4",
-        "wwt_slu_landfill_n2o",
-        "wwt_KPI_ghg_land_co2eq",
         "wwt_slu_land_C_seq",
       ],
       advanced:0,
@@ -443,7 +437,6 @@ let Questions={
     "wwt_stockpiling":{
       variables:[
         "wwt_mass_slu_stock",
-        "wwt_KPI_ghg_stock_co2eq",
       ],
       advanced:0,
       otherQuestions:[ ],
@@ -453,10 +446,6 @@ let Questions={
       variables:[
         "wwt_trck_typ",
         "wwt_vol_tslu",
-        "wwt_KPI_ghg_tsludge_co2",
-        "wwt_KPI_ghg_tsludge_n2o",
-        "wwt_KPI_ghg_tsludge_ch4",
-        "wwt_KPI_ghg_tsludge",
       ],
       advanced:0,
       otherQuestions:[],

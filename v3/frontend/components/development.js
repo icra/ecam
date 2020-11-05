@@ -5,14 +5,24 @@ let development=new Vue({
   },
   template:`
     <div id=development v-if="visible">
-      <!--title--><h1 style=color:black>Development/debugging utilities for development</h1>
-      <ul style="font-size:18px;">
-        <li><button onclick="ecam.test()">automated test</button></li>
+      <!--title--><h1>Development</h1>
+      <p style="padding-left:1em">
+        Useful functions for semi-automated debugging during development.
+      </p>
+      <ul style="font-size:x-large">
         <li><a onclick="ecam.show('problems')">Problem finder</a></li>
-        <li><a onclick="ecam.show('translation_problems')">Translation problems finder</a></li>
-        <li><a onclick="ecam.show('validate_json')">Current JSON file validator</a></li>
+        <li><a onclick="ecam.show('translation_problems')">Translation problems finder (TODO)</a></li>
+        <li><a onclick="ecam.show('validate_json')">Current JSON file validator (TODO, maybe not necessary)</a></li>
+        <li><button onclick="ecam.test()">execute automated test</button></li>
       </ul>
     </div>
+  `,
+  style:`
+    <style>
+      #development {
+        padding-left:1em;
+      }
+    </style>
   `,
 });
 
@@ -29,6 +39,7 @@ let problems=new Vue({
     Cts,
     Info,
     Benchmarks,
+    Tables,
   },
 
   methods:{
@@ -90,6 +101,17 @@ let problems=new Vue({
       return found;
     },
 
+    find_unused_data_tables(){
+      let found=[];
+      Object.keys(Tables).forEach(key=>{
+        let n = Formulas.outputs_per_input(key);
+        if(n==0){
+          found.push(key);
+        }
+      });
+      return found;
+    },
+
     translate,
     locate_variable,
   },
@@ -103,7 +125,7 @@ let problems=new Vue({
         Debugging utility
       </h1>
 
-      <ul>
+      <ul id=list_of_problems>
         <!--Global: not used inputs-->
         <li>
           <details open>
@@ -135,6 +157,22 @@ let problems=new Vue({
               <tr v-for="code in find_unused_constants()">
                 <td> {{ code      }} </td>
                 <td> {{ Cts[code] }} </td>
+              </tr>
+            </table>
+          </details>
+        </li>
+
+        <!--Tables: not used-->
+        <li>
+          <details open>
+            <summary>
+              not used data tables
+              ({{ find_unused_data_tables().length }})
+            </summary>
+            <table>
+              <tr v-for="code in find_unused_data_tables()">
+                <td> {{ code         }} </td>
+                <td> {{ Tables[code] }} </td>
               </tr>
             </table>
           </details>
@@ -258,6 +296,10 @@ let problems=new Vue({
       }
       #problems details summary {
         cursor:pointer;
+        font-size:large;
+      }
+      #problems #list_of_problems {
+        list-style:none;
       }
     </style>
   `,

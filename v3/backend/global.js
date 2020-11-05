@@ -232,7 +232,7 @@ class Water_stages{
       return wsa+wst+wsd;
     }
     ws_SL_serv_pop(){
-      return 100*this.Distribution.map(s=>s.wsd_serv_pop).sum()/this.ws_resi_pop;
+      return 100*this.ws_serv_pop()/this.ws_resi_pop;
     }
     ws_SL_auth_con(){
       let wsd_auth_con = this.Distribution.map(s=>s.wsd_auth_con).sum(); //m3

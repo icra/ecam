@@ -5,6 +5,8 @@ let tables = new Vue({
     Languages,
     Tables,
     Formulas,
+
+    variable,
   },
 
   methods:{
@@ -23,7 +25,7 @@ let tables = new Vue({
       <!--all tables-->
       <div v-for="table,name in Tables">
         <div v-if="typeof(table)=='object'">
-          <details>
+          <details open>
             <summary>{{name}}</summary>
             <div>
               <table>
@@ -35,9 +37,19 @@ let tables = new Vue({
                 </tr>
               </table>
 
-              {{
-                Formulas.outputs_per_input(name)
-              }}
+              <div style="margin-top:10px">
+                Used in:
+                <table>
+                  <tr v-for="code in Formulas.outputs_per_input(name)">
+                    <td>
+                      <a @click="variable.view(code)">{{code}}</a>
+                    </td>
+                    <td>
+                      {{translate(code+'_descr')}}
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </details>
         </div>

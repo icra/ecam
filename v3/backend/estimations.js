@@ -10,6 +10,7 @@ let Estimations={
     wwc_vol_coll_unt(substage){return substage.wwc_vol_coll - substage.wwc_vol_coll_tre;},
   //wwt
     wwt_vol_trea    (substage){return 0.2*substage.wwt_serv_pop*Global.Days();},
+    wwt_vol_disc    (substage){return substage.wwt_vol_trea - substage.wwt_vol_nonp;},
     wwt_n2o_efac_tre(substage){return 3.2},
     wwt_n2o_efac_dis(substage){return 3.2},
 

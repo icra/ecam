@@ -6,6 +6,9 @@ let Formulas={
   /*
     return array of strings corresponding to variables matched in formula string
     example: "this.sV1+this.aV2" returns ['sV1','aV2']
+
+    // \W matches any non-word characters (short for [^a-zA-Z0-9_]).
+    // \D matches any non-digit (short for [^0-9]).
   */
   ids_per_formula(formula){
     //ensure that formula is a string
@@ -41,8 +44,6 @@ let Formulas={
     //iterate keys
     all_codes.forEach(field=>{
       let reg=new RegExp("\\W"+field+"(\\W|$)");
-      // \W matches any non-word characters (short for [^a-zA-Z0-9_]).
-      // \D matches any non-digit (short for [^0-9]).
       if(formula.search(reg)+1){
         matches.push(field);
       }
@@ -89,6 +90,18 @@ let Formulas={
     all_benchmarks.forEach(code=>{
       let match = Benchmarks[code].toString().search(reg); //will return -1 if not found
       if(match+1) matches.push(code);
+    });
+
+    //search exceptions
+    let all_exceptions = Object.keys(Exceptions);
+    all_exceptions.forEach(code=>{
+      Object.values(Exceptions[code]).forEach(value=>{
+        //"value" is a string or a function
+        let match = value.toString().search(new RegExp(id)); //will return -1 if not found
+        if(match+1){
+          matches.push(code);
+        }
+      });
     });
 
     //exclude constructors
