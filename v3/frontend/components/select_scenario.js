@@ -198,8 +198,8 @@ let select_scenario=new Vue({
 
           <div style="margin-top:10px">
             <input
-              id="loadfile"
               type="file"
+              id="loadfile"
               accept=".json"
               @change="load_json_file($event)"
             >

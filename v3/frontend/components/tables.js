@@ -2,8 +2,6 @@ let tables = new Vue({
   el:"#tables",
   data:{
     visible:false,
-
-    //backend
     Languages,
     Tables,
     Formulas,
@@ -24,23 +22,25 @@ let tables = new Vue({
 
       <!--all tables-->
       <div v-for="table,name in Tables">
-
         <div v-if="typeof(table)=='object'">
-          <h4 style="margin-left:0">{{name}}</h4>
-          <table>
-            <tr v-for="row in table">
-              <td v-for="obj,key in row">
-                <b>{{key}}</b>:
-                {{obj}}
-              </td>
-            </tr>
-          </table>
+          <details>
+            <summary>{{name}}</summary>
+            <div>
+              <table>
+                <tr v-for="row in table">
+                  <td v-for="obj,key in row">
+                    <b>{{key}}</b>:
+                    {{obj}}
+                  </td>
+                </tr>
+              </table>
 
-          {{
-            Formulas.outputs_per_input(name)
-          }}
+              {{
+                Formulas.outputs_per_input(name)
+              }}
+            </div>
+          </details>
         </div>
-
       </div>
     </div>
   `,
@@ -50,6 +50,13 @@ let tables = new Vue({
       #tables {
         padding-left:2em;
         padding-bottom:6em;
+      }
+      #tables details summary {
+        cursor:pointer;
+        font-size:larger;
+      }
+      #tables details {
+        margin-bottom:10px;
       }
     </style>
   `
