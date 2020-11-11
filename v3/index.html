@@ -98,6 +98,47 @@
   </style>
 </div>
 
+<!--help floating menu-->
+<div>
+  <div id=floating_help>
+    <div v-if="Languages.ready"
+      onclick="alert('in_development')"
+    >
+      &#10068;
+      <br>Help
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el:"#floating_help",
+      data:{
+        Languages,
+      },
+    });
+  </script>
+  <style>
+    div#floating_help {
+      background:#EE6D56;
+      position:fixed;
+      bottom:10px;
+      right:10px;
+      border-radius:50%;
+      text-align:center;
+      padding:1em;
+      color:white;
+      font-weight:bold;
+      font-size:large;
+      cursor:pointer;
+      opacity:0.75;
+    }
+    div#floating_help:hover {
+      font-size:x-large;
+      transition:all 0.2s;
+      opacity:1;
+    }
+  </style>
+</div>
+
 <!--all elements and views-->
 <div>
   <div id=ecam_logo            ></div><!--ecam logo          ELEMENT-->

@@ -47,6 +47,13 @@ let variable=new Vue({
     get_output_value,
     get_output_partial_values,
 
+    add_substage(){
+      stages_menu.add_substage(
+        this.localization.level,
+        this.localization.sublevel
+      );
+    },
+
     /* open variable VIEW */
     view(id, no_history_entry){
       if(!id){
@@ -295,6 +302,10 @@ let variable=new Vue({
                     </table>
                   </div>
                 </div>
+              </div>
+
+              <div v-if="localization.sublevel" style="margin-top:5px">
+                <button @click="add_substage()">+ add substage</button>
               </div>
             </div>
 
@@ -618,6 +629,10 @@ let variable=new Vue({
 
       #variable table.inputs_involved table.fuel_info td {
         border:1px solid #ccc;
+      }
+
+      #variable table table td {
+        border-color:#ddd;
       }
     </style>
   `,

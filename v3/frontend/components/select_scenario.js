@@ -174,7 +174,7 @@ let select_scenario=new Vue({
             border:1px solid #ccc;
             padding:0.5em 1em;
             border-radius:1em;
-            margin-right:1px;
+            margin-right:20px;
           "
         >
           <div style="
@@ -220,7 +220,7 @@ let select_scenario=new Vue({
         </div>
       </div>
 
-      <!--select scenario table-->
+      <!--select layout table-->
       <div>
         <table style="margin:20px auto" id=main_table>
           <thead>
@@ -324,7 +324,7 @@ let select_scenario=new Vue({
         </table>
       </div>
 
-      <!--compare scenarios table-->
+      <!--compare layouts table-->
       <div v-if="Scenarios.length>1" style="margin-top:2em">
         <h1 style="text-align:center">
           Compare layouts
@@ -337,7 +337,7 @@ let select_scenario=new Vue({
           </b>
         </p>
 
-        <!--compare scenarios table-->
+        <!--compare layouts table-->
         <table style="margin:10px auto" v-if="scenarios_compared.length">
           <tr>
             <td></td>
@@ -412,7 +412,7 @@ let select_scenario=new Vue({
         <div
           v-if="scenarios_compared.length==0"
           style="text-align:center;font-style:italic"
-          v-html="'~No scenarios included to comparison'"
+          v-html="'~No layouts included to comparison'"
         ></div>
       </div>
     </div>

@@ -80,7 +80,7 @@ let configuration=new Vue({
           text-align:center;
           color:#666;
         "
-      ><b>Information about current layout</b>
+      ><b>Information about the current layout</b>
       </div>
 
       <!--picture TODO-->

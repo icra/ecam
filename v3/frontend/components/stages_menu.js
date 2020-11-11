@@ -130,16 +130,29 @@ let stages_menu=new Vue({
                     "
                   >
                     <!--substage name-->
-                    <div>
-                      <a @click="go_to_substage(ss)"
-                        :selected_substage="is_substage_selected(ss)"
-                        v-html="ss.name"
-                      ></a>
+                    <div
+                      style="
+                        display:flex;
+                        justify-content:space-between;
+                      "
+                    >
+                      <div>
+                        <a 
+                          @click="go_to_substage(ss)"
+                          :selected_substage="is_substage_selected(ss)"
+                          v-html="ss.name"
+                          style="font-size:smaller"
+                        ></a>
+                      </div>
                       <!--delete substage btn-->
-                      <button
-                        style="font-size:x-small"
-                        @click="delete_substage(s.level,s.sublevel,ss)">X
-                      </button>
+                      <div>
+                        <button
+                          @click="delete_substage(s.level,s.sublevel,ss)"
+                          class=delete_substage
+                          title="delete substage"
+                          v-html="'X'"
+                        ></button>
+                      </div>
                     </div>
                     <!--ss emissions-->
                     <div class=number style="font-size:smaller">
@@ -169,7 +182,7 @@ let stages_menu=new Vue({
             <!--btn add substage-->
             <tr v-if="show_substages_summary">
               <td v-for="s in Structure.filter(s=>s.sublevel)">
-                <div>
+                <div style="text-align:center">
                   <button
                     style="width:100%;font-size:smaller;"
                     @click="add_substage(s.level,s.sublevel)"
@@ -192,7 +205,7 @@ let stages_menu=new Vue({
         border-bottom:1px solid #ccc;
       }
       #stages_menu #main_table {
-        width:95%;
+        width:80%;
         margin:auto;
       }
       #stages_menu #main_table th,
@@ -210,7 +223,15 @@ let stages_menu=new Vue({
       }
       #stages_menu a[selected_substage]{
         text-decoration:underline;
-        font-weight:bold;
+      }
+      #stages_menu button.delete_substage {
+        cursor:pointer;
+        color:red;
+        padding:0 5px;
+        border-radius:0;
+      }
+      #stages_menu button.delete_substage:hover {
+        background:white;
       }
     </style>
   `,

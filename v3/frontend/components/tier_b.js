@@ -26,7 +26,7 @@ let tier_b=new Vue({
       "Energy performance"     : true,
       "Discharge"              : true,
       "Sludge management"      : true,
-      "Costs"                  : false,
+      "Costs"                  : true,
     },
 
     //benchmark ui colors
@@ -394,10 +394,11 @@ let tier_b=new Vue({
                             ▼
                           </div>
                         </div>
-                        <div>
+                        <div
+                          style="margin-left:5px"
+                        >
                           <b v-html="translate(question)+'?'"
                             :class="substage.Configuration.Questions[question] ? 'question_text':''"
-                            style="margin-left:5px"
                           ></b>
                         </div>
                       </a>

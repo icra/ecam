@@ -11,11 +11,11 @@ Vue.component('input_ecam',{
   template:`
     <tr
       :class="is_highlighted() ? 'highlighted':'' "
+      @mouseenter="highlight_outputs()"
+      @mouseleave="highlight_outputs(true)"
     >
       <!--description and link-->
       <td
-        @mouseenter="highlight_outputs()"
-        @mouseleave="highlight_outputs(true)"
         @mousemove="caption.show($event, translate(code+'_expla').prettify())"
         @mouseout="caption.hide()"
         :style="{

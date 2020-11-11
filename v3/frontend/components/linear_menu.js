@@ -77,7 +77,7 @@ let linear_menu = new Vue({
       <!--current layout-->
       <div onclick="ecam.show('configuration')">
         <div>
-          <b style="color:#aaa">You are in</b>
+          <b style="color:#aaa">You are editing</b>
           <b>{{Global.General.Name}}</b>
         </div>
         <div>
