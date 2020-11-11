@@ -53,18 +53,12 @@ let tier_b=new Vue({
     //backend
     Global,
     Info,
-    Structure,
-    Tips,
     Units,
-    Tables,
-    Estimations,
-    Exceptions,
     Normalization,
     Formulas,
     Questions,
     Languages,
     Benchmarks,
-    Ecam,
   },
 
   methods:{

@@ -18,7 +18,7 @@ let benchmarks = new Vue({
 
   template:`
     <div id=benchmarks v-if="visible && Languages.ready">
-      <h1>Benchmarks ({{Object.keys(Benchmarks).length}})</h1>
+      <h1 style="padding-left:0">Benchmarks ({{Object.keys(Benchmarks).length}})</h1>
       <div>
         <table border=1>
           <tr v-for="[key,obj] in Object.entries(Benchmarks)">

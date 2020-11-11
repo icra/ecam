@@ -14,13 +14,12 @@
     - Opportunities page is important, but can come later!
 
 [DOING NOW]
-  - [ ] variable.js: show if the input has related info in tables
+  - [ ] change table names and add the relation inside Info for inputs magnitude Option
   - [ ] create view for data in "backend/Tables.js"
-    - table wst_disnfctn not used
+  - [ ] variable.js: show if the input has related info in tables
   - [ ] remove 1 extra day from Days function and display it in frontend
-  - [ ] create view for data in "backend/exceptions.js"
   - [ ] trigger error if version does not match when loading json files
-  - [ ] sankey diagram export to jpg/png/svg
+  - [ ] onclose listener: trigger warning if ecam is accidentally closed
   - [ ] add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
     - [ ] abstracted volume  (wsa)
     - [ ] treated volume     (wst)
@@ -30,7 +29,7 @@
     - [ ] treated volume     (wwo)
   - [ ] design minimum required data filter
   - [ ] frontend equations.js view (Lluís C.)
-  - [ ] onclose listener: trigger warning if ecam is accidentally closed
+  - [ ] sankey diagram export to jpg/png/svg
 
 [TO BE DONE WHEN V3 IS FEATURE FROZEN]
   - update help & about & docs
@@ -40,7 +39,7 @@
   - CORS is not compatible with file:// protocol, find alternative way to
     load language json files offline.
 
-[BACKLOG]: (missing info OR not clear how to implement OR help needed other people)
+[BACKLOG]: (missing info OR not 100% clear how to implement OR help needed from other people)
   * Mail from Corinne on June 19th 2020.
     ```
       Enable to account for different ways of valorising biogas (flare, heat

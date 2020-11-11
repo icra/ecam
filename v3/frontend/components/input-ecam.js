@@ -92,7 +92,7 @@ Vue.component('input_ecam',{
       <!--input value: numbers and dropdowns-->
       <td style="padding:0;background:#eee">
         <!--inputs whose magnitude is "Option"-->
-        <div v-if="Info[code] && Info[code].magnitude=='Option'" style="line-height:3em">
+        <div v-if="Info[code] && Info[code].magnitude=='Option' && Info[code].table" style="line-height:3em">
           <select v-model="current_stage[code]"
             style="
               display:block;
@@ -101,7 +101,7 @@ Vue.component('input_ecam',{
             "
           >
             <option
-              v-for="obj,i in Tables[code]"
+              v-for="obj,i in Tables[Info[code].table]"
               :value="parseInt(i)"
             >
               ({{i}})

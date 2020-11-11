@@ -10,7 +10,7 @@ stages_menu.visible = 0;
 //initial page to display
 //variable.view('ww_vol_gene');
 //go_to('Waste','Treatment');
-ecam.show('tables');
+ecam.show('more');
 
 //default values
 Global.General.conv_kwh_co2 =    0.7; //conversion factor for grid electricity (kgCO2/kWh)

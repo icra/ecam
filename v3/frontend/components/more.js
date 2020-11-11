@@ -38,6 +38,10 @@ let more = new Vue({
       #more a {
         cursor:pointer;
       }
+      #more ul li.section ul li.item div.icon {
+        display:inline-block;
+        width:30px;
+      }
     </style>
   `,
 
@@ -52,17 +56,17 @@ let more = new Vue({
         <!--summaries section-->
         <li class=section>
           <ul>
-            <li class=item><a onclick="ecam.show('about')">             {{translate('about')                   }}</a></li>
-            <li class=item><a onclick="ecam.show('help')">              {{translate('help')                    }}</a></li>
-            <li class=item><a onclick="ecam.show('population')">        {{translate('population')              }}</a></li>
-            <li class=item><a onclick="ecam.show('constants')">         {{translate('all_constants')           }}</a></li>
-            <li class=item><a onclick="ecam.show('benchmarks')">        {{translate('benchmarks')              }}</a></li>
-            <li class=item><a onclick="ecam.show('fuel_table')">        {{translate('Fuel types')              }}</a></li>
-            <li class=item><a onclick="ecam.show('non_revenue_water')"> {{translate('non_revenue_water')       }}</a></li>
-            <li class=item><a onclick="ecam.show('equations')">         {{translate('equations')               }}</a></li>
-            <li class=item><a onclick="ecam.show('tables')">            Data tables                              </a></li>
-            <li class=item><a onclick="alert('TODO')">                  {{translate('unfccc_categories')}} (TODO)</a></li>
-            <li class=item><a onclick="ecam.show('development')">       {{translate('dev')                     }}</a></li>
+            <li class=item><a onclick="ecam.show('about')">             <div class=icon>&#9432;  </div> {{translate('about')                   }}</a></li>
+            <li class=item><a onclick="ecam.show('help')">              <div class=icon>&#128587;</div> {{translate('help')                    }}</a></li>
+            <li class=item><a onclick="ecam.show('population')">        <div class=icon>&#127968;</div> {{translate('population')              }}</a></li>
+            <li class=item><a onclick="ecam.show('constants')">         <div class=icon>&#8455;  </div> {{translate('all_constants')           }}</a></li>
+            <li class=item><a onclick="ecam.show('benchmarks')">        <div class=icon>&#8542;  </div> {{translate('benchmarks')              }}</a></li>
+            <li class=item><a onclick="ecam.show('fuel_table')">        <div class=icon>&#9981;  </div> {{translate('Fuel types')              }}</a></li>
+            <li class=item><a onclick="ecam.show('non_revenue_water')"> <div class=icon>&#9810;  </div> {{translate('non_revenue_water')       }}</a></li>
+            <li class=item><a onclick="ecam.show('equations')">         <div class=icon>&#8750;  </div> {{translate('equations')               }}</a></li>
+            <li class=item><a onclick="ecam.show('tables')">            <div class=icon>&#128200;</div> Data tables                              </a></li>
+            <li class=item><a onclick="alert('TODO')">                  <div class=icon>&#9729;  </div> {{translate('unfccc_categories')}} (TODO)</a></li>
+            <li class=item><a onclick="ecam.show('development')">       <div class=icon>&#128187;</div> {{translate('dev')                     }}</a></li>
           </ul>
         </li>
       </ul>

@@ -202,11 +202,11 @@ let variable=new Vue({
             <!--variable is an input-->
             <div v-if="get_variable_type(id)=='input'">
               <!--input is an Option-->
-              <div v-if="Info[id] && Info[id].magnitude=='Option'">
+              <div v-if="Info[id] && Info[id].magnitude=='Option' && Info[id].table">
                 <div>
                   <div v-if="!localization.sublevel">
                     <select v-model="Global[localization.level][id]">
-                      <option v-for="obj,i in Tables[id]" :value="i">
+                      <option v-for="obj,i in Tables[Info[id].table]" :value="i">
                         {{obj.name}}
                       </option>
                     </select>
@@ -220,7 +220,7 @@ let variable=new Vue({
                           </div>
                           <div>
                             <select v-model="ss[id]">
-                              <option v-for="obj,i in Tables[id]" :value="i">
+                              <option v-for="obj,i in Tables[Info[id].table]" :value="i">
                                 {{obj.name}}
                               </option>
                             </select>

@@ -37,7 +37,7 @@ let tables = new Vue({
                 </tr>
               </table>
 
-              <div style="margin-top:10px">
+              <div style="margin-top:10px;padding-left:8px">
                 Used in:
                 <table>
                   <tr v-for="code in Formulas.outputs_per_input(name)">

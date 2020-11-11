@@ -9,7 +9,7 @@ let development=new Vue({
       <p style="padding-left:1em">
         Useful functions for semi-automated debugging during development.
       </p>
-      <ul style="font-size:x-large">
+      <ul style="font-size:large">
         <li><a onclick="ecam.show('problems')">Problem finder</a></li>
         <li><a onclick="ecam.show('translation_problems')">Translation problems finder (TODO)</a></li>
         <li><a onclick="ecam.show('validate_json')">Current JSON file validator (TODO, maybe not necessary)</a></li>

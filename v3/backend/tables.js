@@ -25,7 +25,7 @@ let Tables = {
   ],
 
   //type of water disinfection
-  "wst_disnfctn":[
+  "Disinfection type":[
     {name:"None"},
     {name:"Chlorination"},
     {name:"UF"},
@@ -35,7 +35,7 @@ let Tables = {
   ],
 
   //type of potabilization chain
-  "wst_treatmen":[
+  "Potabilization chain":[
     {name:"None"},
     {name:"Pre-ox/C/F/S/Filt/Des"},
     {name:"Pre-ox/C/F/Filt/Des"},
@@ -55,7 +55,6 @@ let Tables = {
     {name:"Stagnant sewer or anaerobic water body",                                                 ch4_efac:0.3},
     {name:"Flowing sewer (open or closed)",                                                         ch4_efac:0},
     {name:"Soil infiltration",                                                                      ch4_efac:0},
-
   ],
 
   "type_of_sewer":[
@@ -109,20 +108,20 @@ let Tables = {
   ],
 
   //type of sludge disposed
-  "wwt_slu_disp":[
+  "Type of sludge disposed":[
     {name:"Non-digested", f_ch4:0.53, la_N_cont:3, TVS:0.70},
     {name:"Digested",     f_ch4:0.06, la_N_cont:4, TVS:0.51},
   ],
 
   //type of landfill
-  "wwt_slu_type":[
+  "Type of landfill":[
     {name:"Landfill",                     ratio:1},
     {name:"Landfill (with gas recovery)", ratio:0.02},
     {name:"Landfill (flaring)",           ratio:0},
   ],
 
   //type of soil
-  "wwt_soil_typ":[
+  "Soil type":[
     {name:"Fine-Textured (>30% clay)",   f_la:0.023},
     {name:"Coarse-Textured (<30% clay)", f_la:0.005},
   ],
@@ -139,7 +138,7 @@ let Tables = {
   ],
 
   //type of containment
-  "wwo_type_con":[
+  "Type of containment":[
     {name:"Select",                                                         ch4_efac:0,      ch4_efac_flooding:0,     BOD_conc_FS:0,    fs_density:0   },
     {name:"No containment (open defecation)",                               ch4_efac:0.027,  ch4_efac_flooding:0.027, BOD_conc_FS:67.8, fs_density:1400},
     {name:"Pit latrine without flush water (lined or unlined) – household", ch4_efac:0.06,   ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
@@ -154,13 +153,13 @@ let Tables = {
   ],
 
   //containment is flooding?
-  "wwo_flooding":[
+  "Flooding containment":[
     {name:"no"},
     {name:"yes"},
   ],
 
   //type of onsite treatment
-  "wwo_type_tre":[
+  "Type of onsite treatment":[
     {name:"No Treatment",                                     ch4_efac:0.00,   bod_rmvd_as_sludge_estm:0.0,},
     {name:"Anaerobic Digester",                               ch4_efac:0.48,   bod_rmvd_as_sludge_estm:0.10,},
     {name:"Imhoff Tanks",                                     ch4_efac:0.48,   bod_rmvd_as_sludge_estm:0.10,},
@@ -181,7 +180,7 @@ let Tables = {
   ],
 
   //type of disposal
-  "wwo_type_dis":[
+  "Type of disposal":[
     {name:"No disposal (open defecation)"},
     {name:"Landfilling"},
     {name:"Land application"},
@@ -189,7 +188,7 @@ let Tables = {
   ],
 
   //type of faecal sludge for land application and landfilling
-  "wwo_fslu_typ":[
+  "Type of faecal sludge":[
     {name:"Untreated",          N_content:0.24, TVS:0.700, total_solids:0.04},
     {name:"Treated",            N_content:3.00, TVS:0.400, total_solids:0.22},
     {name:"Pit humus",          N_content:4.00, TVS:0.650, total_solids:0.07},
@@ -197,38 +196,42 @@ let Tables = {
     {name:"Compost",            N_content:3.00, TVS:0.800, total_solids:0.08},
     {name:"Septic tank sludge", N_content:0.03, TVS:0.600, total_solids:0.02},
   ],
-}
+};
 
-//copy tables
-Tables.wsa_fuel_typ=Tables["Fuel type"]; //engines
-Tables.wst_fuel_typ=Tables["Fuel type"]; //engines
-Tables.wsd_fuel_typ=Tables["Fuel type"]; //engines
-Tables.wwc_fuel_typ=Tables["Fuel type"]; //engines
-Tables.wwt_fuel_typ=Tables["Fuel type"]; //engines
-Tables.wwo_fuel_typ=Tables["Fuel type"]; //engines
-
-Tables.wsd_trck_typ=Tables["Fuel type"]; //trucks
-Tables.wwt_trck_typ=Tables["Fuel type"]; //trucks
-Tables.wwo_trck_typ=Tables["Fuel type"]; //type of fuel fsm emptying and transport
-Tables.wwt_dige_typ=Tables["Fuel type"]; //type of fuel dig
-Tables.wwt_appl_typ=Tables["Fuel type"]; //type of fuel app
-Tables.wwt_reus_trck_typ=Tables["Fuel type"]; //trucks
-
-//wsa
-Tables.wsa_pmp_type=Tables["Pump type"];
-Tables.wsa_pmp_size=Tables["Pump size"];
-Tables.wsd_pmp_size=Tables["Pump size"];
-
-Tables.wwo_fslu_typ_lf=Tables.wwo_fslu_typ;
-Tables.wwo_fslu_typ_la=Tables.wwo_fslu_typ;
-Tables.wwo_lf_type=Tables.wwt_slu_type;
-
-Tables.wwo_soil_typ=Tables.wwt_soil_typ;
-Tables.wwo_dumping_pth=Tables.type_of_water_body;
+//copy tables to all variables with magnitude=='Option'
+//TODO: remove this section in favour of using the field 'table' in Info
+Tables.wwo_soil_typ      = Tables["Soil type"];
+Tables.wwt_soil_typ      = Tables["Soil type"];
+Tables.wwo_fslu_typ      = Tables["Type of faecal sludge"];
+Tables.wwo_fslu_typ_lf   = Tables["Type of faecal sludge"];
+Tables.wwo_fslu_typ_la   = Tables["Type of faecal sludge"];
+Tables.wwt_slu_type      = Tables["Type of landfill"];
+Tables.wwo_lf_type       = Tables["Type of landfill"];
+Tables.wwo_dumping_pth   = Tables["type_of_water_body"];
+Tables.wsa_fuel_typ      = Tables["Fuel type"];
+Tables.wst_fuel_typ      = Tables["Fuel type"];
+Tables.wsd_fuel_typ      = Tables["Fuel type"];
+Tables.wsd_trck_typ      = Tables["Fuel type"];
+Tables.wwc_fuel_typ      = Tables["Fuel type"];
+Tables.wwt_fuel_typ      = Tables["Fuel type"];
+Tables.wwt_trck_typ      = Tables["Fuel type"];
+Tables.wwt_dige_typ      = Tables["Fuel type"];
+Tables.wwt_reus_trck_typ = Tables["Fuel type"];
+Tables.wwo_fuel_typ      = Tables["Fuel type"];
+Tables.wwo_trck_typ      = Tables["Fuel type"];
+Tables.wsa_pmp_type      = Tables["Pump type"];
+Tables.wsa_pmp_size      = Tables["Pump size"];
+Tables.wsd_pmp_size      = Tables["Pump size"];
+Tables.wst_treatmen      = Tables["Potabilization chain"];
+Tables.wwo_type_tre      = Tables["Type of onsite treatment"];
+Tables.wwo_type_dis      = Tables["Type of disposal"];
+Tables.wwo_type_con      = Tables["Type of containment"];
+Tables.wwo_flooding      = Tables["Flooding containment"];
+Tables.wwt_slu_disp      = Tables["Type of sludge disposed"];
 
 //get object by "table" (string) and "index" (integer)
 Tables.get_row=function(table, index){
   let arr = Tables[table]; //array
   if(!arr) return false;
   return arr[index] || false;
-}
+};
