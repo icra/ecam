@@ -25,7 +25,6 @@ let summaries_menu = new Vue({
   style:`
     <style>
       #summaries_menu {
-        padding-top:2em;
       }
       #summaries_menu #tabs{
         display:flex;
@@ -34,6 +33,7 @@ let summaries_menu = new Vue({
       }
       #summaries_menu #tabs > div {
         padding:0 1em;
+        padding-top:2em;
         border-bottom:4px solid transparent;
         cursor:pointer;
       }
