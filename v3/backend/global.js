@@ -13,8 +13,8 @@ class Ecam{
     this.General={
       version              : "3.0.0-in-development",
       Name                 : `Untitled layout${Scenarios.length ? (' '+(1+Scenarios.length)):''}`,
-      AssessmentPeriodStart: "2020-01-01",
-      AssessmentPeriodEnd  : "2020-12-31",
+      AssessmentPeriodStart: "2021-01-01",
+      AssessmentPeriodEnd  : "2022-01-01",
       Comments             : "",
       Currency             : "USD", //default currency
       Country              : false, //selected country name (string)
@@ -42,9 +42,7 @@ class Ecam{
   Days(){
     let startDate=new Date(this.General.AssessmentPeriodStart);
     let finalDate=new Date(this.General.AssessmentPeriodEnd);
-    //add 1 day to include the whole final date
-    //for example: from january 1st to december 31th is 365 days
-    return 1+(finalDate-startDate)/1000/60/60/24; //days
+    return (finalDate-startDate)/1000/60/60/24; //days
   }
   Years(){return this.Days()/365}
 
@@ -1010,7 +1008,7 @@ class Waste_Treatment extends Substage{
     }
 
     wwt_KPI_GHG_slu_storage(){
-      let sludge_type  = Tables.get_row('wwt_slu_disp',this.wwt_slu_disp);
+      let sludge_type  = Tables.get_row('Type of sludge disposed',this.wwt_slu_disp);
       let sludge_mass  = this.wwt_mass_slu_sto; //kg of sludge
       let storage_time = this.wwt_time_slu_sto; //days
 
@@ -1040,7 +1038,7 @@ class Waste_Treatment extends Substage{
 
     wwt_KPI_GHG_slu_composting(){
       let sludge_mass = this.wwt_mass_slu_comp; //kg of sludge
-      let sludge_type = Tables.get_row('wwt_slu_disp',this.wwt_slu_disp);
+      let sludge_type = Tables.get_row('Type of sludge disposed',this.wwt_slu_disp);
 
       let co2 = 0;
       let ch4 = (function(){
@@ -1076,7 +1074,7 @@ class Waste_Treatment extends Substage{
 
     wwt_KPI_GHG_slu_land_application(){
       let sludge_mass = this.wwt_mass_slu_app; //kg sludge
-      let sludge_type = Tables.get_row('wwt_slu_disp',this.wwt_slu_disp);
+      let sludge_type = Tables.get_row('Type of sludge disposed',this.wwt_slu_disp);
       let C_content = (function(){
         let TVS = sludge_type.TVS; //gTVS/gSludge
         let OC = Cts.ct_oc_vs.value; //gOC/gTVS
@@ -1085,7 +1083,7 @@ class Waste_Treatment extends Substage{
       let N_content = sludge_mass*this.wwt_slu_la_N_cont/100;
       let ratio_CN = C_content/N_content || 0;
       if(ratio_CN>=30){return 0;}
-      let f_la = Tables.get_row('wwt_soil_typ',this.wwt_soil_typ).f_la; //??
+      let f_la = Tables.get_row('Soil type',this.wwt_soil_typ).f_la; //??
 
       let co2   = 0;
       let ch4   = 0;
@@ -1096,9 +1094,9 @@ class Waste_Treatment extends Substage{
 
     wwt_KPI_GHG_slu_landfilling(){
       let sludge_mass = this.wwt_mass_slu_land;
-      let sludge_type = Tables.get_row('wwt_slu_disp',this.wwt_slu_disp);
+      let sludge_type = Tables.get_row('Type of sludge disposed',this.wwt_slu_disp);
       let TVS         = this.wwt_slu_lf_TVS/100; //gTVS/gSludge
-      let ratio       = Tables.get_row('wwt_slu_type',this.wwt_slu_type).ratio;
+      let ratio       = Tables.get_row('Type of landfill',this.wwt_slu_type).ratio;
       let N_content   = sludge_mass*this.wwt_slu_lf_N_cont/100; //gN
       let OC          = Cts.ct_oc_vs.value; //gOC/gTVS
 
@@ -1213,7 +1211,7 @@ class Waste_Treatment extends Substage{
     }
     wwt_slu_land_C_seq(){
       let sludge_mass = this.wwt_mass_slu_land;
-      let TVS = Tables.get_row('wwt_slu_disp',this.wwt_slu_disp).TVS;
+      let TVS = Tables.get_row('Type of sludge disposed',this.wwt_slu_disp).TVS;
       return sludge_mass*(TVS)*(0.56)*(0.2)*(44/12);
     }
   //---
@@ -1428,7 +1426,7 @@ class Waste_Onsite extends Substage{
     }
     //land application
     wwo_KPI_GHG_landapp(){
-      let soil_type=Tables.get_row('wwo_soil_typ',this.wwo_soil_typ);
+      let soil_type=Tables.get_row('Soil type',this.wwo_soil_typ);
       let N_transformed_to_N2O = soil_type.f_la;
       let n2o = this.wwo_mass_landapp*this.wwo_la_N_cont/100*N_transformed_to_N2O*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       let co2 = 0;
@@ -1439,7 +1437,7 @@ class Waste_Onsite extends Substage{
     //landfill
     wwo_KPI_GHG_landfil(){
       let sludge_mass = this.wwo_mass_landfil;
-      let ratio       = Tables.get_row('wwo_lf_type',this.wwo_lf_type).ratio;
+      let ratio       = Tables.get_row('Type of landfill',this.wwo_lf_type).ratio;
       let N_content   = sludge_mass*this.wwo_lf_N_cont/100;
       let TVS         = this.wwo_lf_TVS/100; //gTVS/gSludge
       let n2o         = ratio*N_content*Cts.ct_n2o_lf.value/100*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value
@@ -1486,7 +1484,7 @@ class Waste_Onsite extends Substage{
       return this.wwo_mass_landapp*Cts.ct_C_seqst.value;
     }
     wwo_ghg_avoided_landfil(){
-      let fslu_type = Tables.get_row('wwo_fslu_typ_lf',this.wwo_fslu_typ_lf);
+      let fslu_type = Tables.get_row('Type of faecal sludge',this.wwo_fslu_typ_lf);
       let TVS       = fslu_type.TVS;
       return this.wwo_mass_landfil*TVS*Cts.ct_oc_vs.value*Cts.ct_u_org_f.value*Cts.ct_co2_C.value;
     }

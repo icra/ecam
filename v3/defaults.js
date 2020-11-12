@@ -8,9 +8,9 @@ linear_menu.visible = 1;
 stages_menu.visible = 0;
 
 //initial page to display
-//variable.view('ww_vol_gene');
-go_to('Water','Abstraction');
-//ecam.show('more');
+ecam.show('overview');
+//go_to('Water','Abstraction');
+//variable.view('wwt_KPI_GHG_slu_storage');
 
 //default values
 Global.General.conv_kwh_co2 =    0.7; //conversion factor for grid electricity (kgCO2/kWh)

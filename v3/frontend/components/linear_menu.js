@@ -11,6 +11,10 @@ let linear_menu = new Vue({
   methods:{
     translate,
     format,
+
+    is_summaries_menu_visible(){
+      return summaries_menu.visible;
+    },
   },
 
   template:`
@@ -52,17 +56,9 @@ let linear_menu = new Vue({
         <!--overview-->
         <div
           onclick="ecam.show('overview')"
-          :selected="current_view=='overview'"
+          :selected="is_summaries_menu_visible()"
         >
           <div>Overview</div>
-        </div>
-
-        <!--summaries-->
-        <div
-          onclick="ecam.show('summary_ghg')"
-          :selected="['summary_ghg','summary_nrg','emission_tree','report'].indexOf(current_view)!=-1"
-        >
-          <div>{{translate('summaries')}}</div>
         </div>
 
         <!--more (old sidebar)-->

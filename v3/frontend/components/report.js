@@ -25,19 +25,76 @@ let report = new Vue({
 
     get_ghg_emissions_by_source_detailed(){
       //v2
-    }
+    },
+
+    draw_pie_chart() {
+      //nothing to draw
+      if(Global.TotalGHG()==0) return;
+
+      let container = document.querySelector("#pie_chart");
+      if(!container) return;
+      container.innerHTML="";
+
+      //sizes
+      var w = 300;
+      var h = 300;
+      var r = h/2;
+      var aColor = [
+        "var(--color-level-Waste)",
+        "var(--color-level-Water)"
+      ];
+
+      var data = [
+        {"label":"Waste", "value":100*Global.Waste.ww_KPI_GHG()/Global.TotalGHG()},
+        {"label":"Water", "value":100*Global.Water.ws_KPI_GHG()/Global.TotalGHG()},
+      ];
+
+      var vis = d3.select('#pie_chart').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
+      var pie = d3.layout.pie().value(function(d){return d.value;});
+      var arc = d3.svg.arc().outerRadius(r); // Declare an arc generator function
+
+      //select paths, use arc generator to draw
+      var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+      arcs.append("svg:path")
+        .attr("fill", function(d, i){return aColor[i];})
+        .attr("d", function (d) {return arc(d);})
+      ;
+
+      //add the text
+      arcs.append("svg:text")
+        .attr("transform", function(d){
+          d.innerRadius = 50; /* Distance of label to the center*/
+          d.outerRadius = r;
+          return "translate(" + arc.centroid(d) + ")";}
+        )
+        .attr("text-anchor", "middle")
+        .text( function(d, i){
+          let value = data[i].value ? format(data[i].value) : 0;
+          return translate(data[i].label)+" "+value+ '%';
+        })
+      ;
+    },
+  },
+
+  updated(){
+    this.$nextTick(()=>{
+      try{
+        report.draw_pie_chart();
+      }catch(e){
+      }
+    })
   },
 
 
   template:`
     <div id=report v-if="visible && Languages.ready">
-      <summaries current_view=report></summaries>
-
-      <h1>
-        {{Global.General.Name}}
-        &mdash;
-        Report (under development: placeholder code for graphs, replacement for tier A in v2.2)
+      <h1 style="text-align:center">
+        Report
       </h1>
+
+      <p style="text-align:center">
+        (in development, report is being designed)
+      </p>
 
       <ul v-if=false>
         <li>
@@ -72,6 +129,13 @@ let report = new Vue({
         <li>figure10: serviced population in wastewater (%)</li>
         <li>figure11: total ghg wastewater (kg/year/serv.pop)</li>
       </ul>
+
+      <!--charts-->
+      <div style="text-align:center;">
+        <h3>GHG emissions pie chart</h3>
+        <div id=pie_chart></div>
+        <div v-if="Global.TotalGHG()==0"><i>~total emissions are zero</i></div>
+      </div>
     </div>
   `,
 

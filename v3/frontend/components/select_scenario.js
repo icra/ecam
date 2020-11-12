@@ -332,8 +332,9 @@ let select_scenario=new Vue({
 
         <p style="text-align:center;color:#666">
           <b>
-            Select 'compare' on your layout and it will appear in the following
-            table.  The darker column is the current layout you are editing.
+            Select 'compare' on two or more layouts and they will appear in the
+            following table.  The darker column is the current layout you are
+            editing.
           </b>
         </p>
 

@@ -3,23 +3,8 @@ let summary_ghg = new Vue({
   data:{
     visible:false,
 
-    //avoided ghg - list of variables TODO
-    ghg_avoided:[
-      {level:'Waste', sublevel:'Treatment', code:'wwt_SL_GHG_avoided'},
-      {level:'Waste', sublevel:'Treatment', code:'wwt_wr_C_seq_slu'},
-      {level:'Waste', sublevel:'Discharge', code:'wwt_wr_GHG_avo_d'},
-      {level:'Waste', sublevel:'Discharge', code:'wwt_SL_ghg_non'},
-      {level:'Waste', sublevel:'Discharge', code:'wwt_wr_GHG_avo'},
-      {level:'Waste', sublevel:'Onsite',    code:'wwo_SL_GHG_avoided'},
-      {level:'Waste', sublevel:'Onsite',    code:'wwo_ghg_avoided_land'},
-      {level:'Waste', sublevel:'Onsite',    code:'wwo_ghg_avoided_reuse'},
-    ],
-
     //folded sections
     unfolded_levels:[],
-
-    //frontend
-    variable,
 
     //backend
     Global,
@@ -44,7 +29,6 @@ let summary_ghg = new Vue({
 
   template:`
     <div id=summary_ghg v-if="visible && Languages.ready">
-      <summaries current_view=summary_ghg></summaries>
 
       <!--title-->
       <div style="
@@ -217,7 +201,6 @@ let summary_ghg = new Vue({
   style:`
     <style>
       #summary_ghg {
-        background:#f6f6f6;
       }
       #summary_ghg table {
         border-collapse:separate;
@@ -240,5 +223,5 @@ let summary_ghg = new Vue({
         margin:0 1px;
       }
     </style>
-  `
+  `,
 });

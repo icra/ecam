@@ -15,15 +15,15 @@ let Estimations={
     wwt_n2o_efac_dis(substage){return 3.2},
 
     wwt_slu_lf_TVS(substage){
-      let slu_disp=Tables.get_row('wwt_slu_disp',substage.wwt_slu_disp);
+      let slu_disp=Tables.get_row('Type of sludge disposed',substage.wwt_slu_disp);
       return slu_disp.TVS;
     },
     wwt_slu_la_N_cont(substage){
-      let slu_disp=Tables.get_row('wwt_slu_disp',substage.wwt_slu_disp);
+      let slu_disp=Tables.get_row('Type of sludge disposed',substage.wwt_slu_disp);
       return slu_disp.la_N_cont;
     },
     wwt_slu_lf_N_cont(substage){
-      let slu_disp=Tables.get_row('wwt_slu_disp',substage.wwt_slu_disp);
+      let slu_disp=Tables.get_row('Type of sludge disposed',substage.wwt_slu_disp);
       return slu_disp.la_N_cont;
     },
     wwt_biog_pro(substage){

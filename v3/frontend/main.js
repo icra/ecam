@@ -6,6 +6,7 @@ let ecam={
     caption,
     linear_menu,
     stages_menu,
+    summaries_menu,
   },
 
   //views (==pages, Vue objects)
@@ -23,16 +24,16 @@ let ecam={
     tier_b,
     overview,
     summary_ghg,
-    summary_nrg,
     variable,
     constants,
     constant,
-    emission_tree,
     report,
     benchmarks,
     non_revenue_water,
     equations,
     tables,
+    sankey_ghg,
+    diagram,
 
     development,
     problems,
@@ -54,10 +55,18 @@ let ecam={
     this.hide_all();
     this.views[view].visible=true; //make "view" visible
 
-    //other settings
+    //other settings (misc)
     stages_menu.visible      = view=='tier_b';
     stages_menu.current_view = view;
     linear_menu.current_view = view;
+    summaries_menu.visible = [
+      'overview',
+      'summary_ghg',
+      'sankey_ghg',
+      'diagram',
+      'report',
+    ].indexOf(view)>=0;
+
     caption.hide();
     window.scrollTo(0,0);
 

@@ -367,7 +367,22 @@ let variable=new Vue({
         <!--variable magnitude-->
         <tr>
           <th>{{ translate('variable_magnitude') }}</th>
-          <td>{{ Info[id] ? Info[id].magnitude : "magnitude not defined"}}</td>
+          <td>{{ Info[id] ? Info[id].magnitude : "magnitude not defined"}}
+            <div v-if="Info[id] && Info[id].magnitude=='Option' && Info[id].table" style="margin-top:5px;font-size:smaller">
+              Related data table (<a onclick="ecam.show('tables')">see all data tables</a>):
+              <table>
+                <tr>
+                  <th colspan=100 style="background:var(--color-level-generic);text-align:center">{{Info[id].table}}</th>
+                </tr>
+                <tr v-for="row in Tables[Info[id].table]">
+                  <td v-for="obj,key in row">
+                    <b>{{key}}</b>:
+                    {{obj}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
         </tr>
 
         <!--outputs that use this variable-->
@@ -631,6 +646,7 @@ let variable=new Vue({
         border:1px solid #ccc;
       }
 
+      #variable table table th,
       #variable table table td {
         border-color:#ddd;
       }

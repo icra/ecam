@@ -695,7 +695,7 @@ let tier_b=new Vue({
         border:1px solid black;
       }
       #tier_b #inputs table tr.highlighted td {
-        border:1px solid black;
+        border:1px solid var(--color-level-generic);
       }
 
       /*old*/

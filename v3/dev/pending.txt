@@ -14,20 +14,8 @@
     - Opportunities page is important, but can come later!
 
 [DOING NOW]
-  - [ ] change table names and add the relation inside Info for inputs magnitude Option
-
-  - [ ] variable.js: show if the input has related info in tables
-
   - [ ] move overview pages to summaries
-
-  - [ ] new user button overlay (to be filled by viti)
-
-  - [ ] remove 1 extra day from Days function and display it in frontend
-
-  - [ ] trigger error if version does not match when loading json files
-
-  - [ ] onclose listener: trigger warning if ecam is accidentally closed
-
+  - [ ] design minimum required data filter
   - [ ] add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
     - [ ] abstracted volume  (wsa)
     - [ ] treated volume     (wst)
@@ -35,12 +23,12 @@
     - [ ] collected volume   (wwc)
     - [ ] treated volume     (wwt)
     - [ ] treated volume     (wwo)
-
-  - [ ] design minimum required data filter
-
+  - [ ] onclose listener: trigger warning if ecam is accidentally closed
+  - [ ] trigger error if version does not match when loading json files
+  - [ ] new user button overlay (to be filled by viti)
   - [ ] frontend equations.js view (Lluís C.)
-
   - [ ] sankey diagram export to jpg/png/svg
+  - [ ] import layout from excel
 
 [TO BE DONE WHEN V3 IS FEATURE FROZEN]
   - update help & about & docs

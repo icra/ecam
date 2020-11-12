@@ -22,7 +22,7 @@ Vue.component('inputs_involved_table',{
         </tr>
 
         <!--input involved is an Option-->
-        <tr v-else-if="Info[match] && Info[match].magnitude=='Option'">
+        <tr v-else-if="Info[match] && Info[match].magnitude=='Option' && Info[match].table">
           <!--input involved code-->
           <td :title="translate(match+'_descr')">
             <a @click="variable.view(match)" :style="{color:get_level_color(locate_variable(match).level)}">{{match}}</a>
@@ -31,12 +31,12 @@ Vue.component('inputs_involved_table',{
           <!--involved input Option value-->
           <td style="text-align:right">
             <div v-if="!locate_variable(match).sublevel">
-              Tables.get_row(match, locate_variable(match).stage).name
+              Tables.get_row(Info[match].table, locate_variable(match).stage[match]).name
             </div>
             <div v-else>
               {{
                 locate_variable(match).stage.map(ss=>(
-                  Tables.get_row(match, ss[match]).name
+                  Tables.get_row(Info[match].table, ss[match]).name
                 ))
               }}
             </div>

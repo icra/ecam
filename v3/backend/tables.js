@@ -200,6 +200,7 @@ let Tables = {
 
 //copy tables to all variables with magnitude=='Option'
 //TODO: remove this section in favour of using the field 'table' in Info
+/*
 Tables.wwo_soil_typ      = Tables["Soil type"];
 Tables.wwt_soil_typ      = Tables["Soil type"];
 Tables.wwo_fslu_typ      = Tables["Type of faecal sludge"];
@@ -228,6 +229,7 @@ Tables.wwo_type_dis      = Tables["Type of disposal"];
 Tables.wwo_type_con      = Tables["Type of containment"];
 Tables.wwo_flooding      = Tables["Flooding containment"];
 Tables.wwt_slu_disp      = Tables["Type of sludge disposed"];
+*/
 
 //get object by "table" (string) and "index" (integer)
 Tables.get_row=function(table, index){

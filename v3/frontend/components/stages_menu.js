@@ -65,16 +65,7 @@ let stages_menu=new Vue({
     <!--linear menu COMPONENT-->
     <div id=stages_menu v-if="visible && Languages.ready">
       <div style="padding:8px">
-
-        <!--checkbox show substages
-        <div style="text-align:center;padding:10px">
-          <label style="user-select:none;font-size:larger">
-            <input type=checkbox v-model="show_substages_summary">
-            show substages
-          </label>
-        </div>
-        -->
-
+        <h1 style="text-align:center">Stages of the urban water cycle</h1>
         <!--stages table-->
         <div>
           <table id=main_table>
@@ -127,6 +118,7 @@ let stages_menu=new Vue({
                     style="
                       display:grid;
                       grid-template-columns:50% 50%;
+                      align-items:center;
                     "
                   >
                     <!--substage name-->
@@ -134,6 +126,7 @@ let stages_menu=new Vue({
                       style="
                         display:flex;
                         justify-content:space-between;
+                        align-items:center;
                       "
                     >
                       <div>
@@ -148,10 +141,9 @@ let stages_menu=new Vue({
                       <div>
                         <button
                           @click="delete_substage(s.level,s.sublevel,ss)"
-                          class=delete_substage
+                          class="delete_substage"
                           title="delete substage"
-                          v-html="'X'"
-                        ></button>
+                        >&#215;</button>
                       </div>
                     </div>
                     <!--ss emissions-->
@@ -229,9 +221,12 @@ let stages_menu=new Vue({
         color:red;
         padding:0 5px;
         border-radius:0;
+        border-color:#ccc;
+        font-size:large;
       }
       #stages_menu button.delete_substage:hover {
         background:white;
+        border-color:black;
       }
     </style>
   `,
