@@ -3,6 +3,8 @@ let about = new Vue({
 
   data:{
     visible:false,
+
+    Languages,
   },
 
   methods:{
@@ -10,9 +12,9 @@ let about = new Vue({
   },
 
   template:`
-    <div id=about v-if="visible">
+    <div id=about v-if="visible && Languages.ready">
       <h1 style=text-align:center>
-        <span style=color:black>{{translate('about')}}</span>
+        {{translate('about')}}
       </h1>
 
       <!--paragraph-->
@@ -46,7 +48,9 @@ let about = new Vue({
         <p>
           2015-{{(new Date()).getFullYear()}} <a href='license.txt'>{{translate('about_license')}}</a>.
         </p>
+      </div>
 
+      <div style="background:#ccc">
         <h3 style=padding-left:0>Special acknowledgements</h3>
 
         <p>
@@ -73,6 +77,17 @@ let about = new Vue({
         at <a target="_blank" href="www.wacclim.org">www.wacclim.org</a>. Permissions beyond the scope of this license may be available
         at <a target="_blank" href="mailto:wacclim@giz.de">wacclim@giz.de</a>.
       </div>
+
+      <div>
+        footer
+      </div>
     </div>
+  `,
+
+  style:`
+    <style>
+      #about{
+      }
+    </style>
   `,
 });

@@ -8,7 +8,7 @@ linear_menu.visible = 1;
 stages_menu.visible = 0;
 
 //initial page to display
-ecam.show('overview');
+ecam.show('about');
 //go_to('Water','Abstraction');
 //variable.view('wwt_KPI_GHG_slu_storage');
 

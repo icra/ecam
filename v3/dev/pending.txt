@@ -14,7 +14,6 @@
     - Opportunities page is important, but can come later!
 
 [DOING NOW]
-  - [ ] move overview pages to summaries
   - [ ] design minimum required data filter
   - [ ] add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
     - [ ] abstracted volume  (wsa)
@@ -25,7 +24,7 @@
     - [ ] treated volume     (wwo)
   - [ ] onclose listener: trigger warning if ecam is accidentally closed
   - [ ] trigger error if version does not match when loading json files
-  - [ ] new user button overlay (to be filled by viti)
+  - [ ] floating help (to be filled by viti)
   - [ ] frontend equations.js view (Lluís C.)
   - [ ] sankey diagram export to jpg/png/svg
   - [ ] import layout from excel

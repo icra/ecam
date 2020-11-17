@@ -214,7 +214,7 @@ let select_scenario=new Vue({
                 class=icon
                 src="frontend/img/viti/select_scenario/icon-save.svg"
               >
-              <span>Save all layouts to a file</span>
+              <span>Save all layouts</span>
             </div>
           </button>
         </div>
