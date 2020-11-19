@@ -99,6 +99,21 @@ let Tables = {
     {name:"Wetlands"},
   ],
 
+  "N2O EF plants (Table 6.8A)":[
+    {name:"Select treatment type",                 n2o_efac:0      },
+    {name:"Centralised, aerobic, treatment plant", n2o_efac:0.016  },
+    {name:"Anaerobic reactor",                     n2o_efac:0      },
+    {name:"Anaerobic lagoons",                     n2o_efac:0      },
+    {name:"Septic tank",                           n2o_efac:0      },
+    {name:"Septic tank + land dispersal field",    n2o_efac:0.0045 },
+    {name:"Latrine",                               n2o_efac:0      },
+  ],
+
+  "N2O EF effluent (Table 6.8A)":[
+    {name:"Freshwater, estuarine, and marine discharge (Tier 1)",                                             n2o_efac:0.005 },
+    {name:"Nutrient-impacted and/or hypoxic freshwater, estuarine, and marine discharge (Tier 3, if needed)", n2o_efac:0.019 },
+  ],
+
   //pump types 2
   "wwt_pmp_type":[
     {name:"Archimedean screw"},

@@ -8,11 +8,21 @@ let Estimations={
     wwc_vol_coll    (substage){return 0.2*substage.wwc_conn_pop*Global.Days();},
     wwc_vol_coll_tre(substage){return substage.wwc_vol_coll - substage.wwc_vol_coll_unt;},
     wwc_vol_coll_unt(substage){return substage.wwc_vol_coll - substage.wwc_vol_coll_tre;},
+
   //wwt
     wwt_vol_trea    (substage){return 0.2*substage.wwt_serv_pop*Global.Days();},
     wwt_vol_disc    (substage){return substage.wwt_vol_trea - substage.wwt_vol_nonp;},
-    wwt_n2o_efac_tre(substage){return 3.2},
-    wwt_n2o_efac_dis(substage){return 3.2},
+
+    wwt_tn_infl(substage){
+      let Protein    = Global.General.prot_con; //kg protein/person/year
+      let P          = substage.wwt_serv_pop;   //population served
+      let Years      = Global.Years();          //years
+      let F_NPR      = Cts.ct_fra_np.value;     //
+      let N_HH       = Cts.ct_N_HH.value;       //
+      let F_NON_CON  = Cts.ct_fac_nc.value;     //
+      let F_IND_COM  = Cts.ct_fac_ic.value;     //
+      return Protein * P * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM;
+    },
 
     wwt_slu_lf_TVS(substage){
       let slu_disp=Tables.get_row('Type of sludge disposed',substage.wwt_slu_disp);
@@ -45,14 +55,12 @@ let Estimations={
       return P * BOD * 0.001 * Global.Days();
     },
     wwt_mass_slu(substage){
-      let b=1;
-      if(substage.Configuration.Questions.wwt_producing_biogas){
-        b=0.6;
-      }
-      return b*0.55*Global.General.bod_pday*substage.wwt_serv_pop*0.9*1e-3*1.176*Global.Days();
+      //TODO substitute for table 2.2 Andreoli et al 2007
+      return 0;
     },
     wwt_dryw_slu(substage){
-      return 0.04*substage.wwt_mass_slu;
+      //TODO substitute for table 2.2 Andreoli et al 2007
+      return 0;
     },
     wwt_temp_inc(substage){
       return 1023;

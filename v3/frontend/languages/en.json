@@ -1,6 +1,17 @@
 {
 "#below":"below",
 
+"#wwo_tn_infl_descr":"Total Nitrogen load in the influent",
+"#wwo_tn_infl_expla":"Total Nitrogen load in the influent during the assessment period",
+
+"#Anaerobic reactor":"Anaerobic reactor",
+"#Anaerobic lagoons":"Anaerobic lagoons",
+"#Septic tank":"Septic tank",
+"#Septic tank + land dispersal field":"Septic tank + land dispersal field",
+"#Latrine":"Latrine",
+"#Freshwater, estuarine, and marine discharge (Tier 1)":"Freshwater, estuarine, and marine discharge (Tier 1)",
+"#Nutrient-impacted and/or hypoxic freshwater, estuarine, and marine discharge (Tier 3, if needed)":"Nutrient-impacted and/or hypoxic freshwater, estuarine, and marine discharge (Tier 3, if needed)",
+
 "#wwt_KPI_GHG_slu_storage_descr":"Emissions due to sludge storage",
 "#wwt_KPI_GHG_slu_storage_expla":"Amount of CO2 eq emissions related to sludge storage",
 "#wwt_KPI_GHG_slu_composting_descr":"Emissions due to sludge composted",
@@ -202,7 +213,7 @@
 "#wwo_type_tre_descr":"Main treatment type",
 "#wwo_bod_slud_descr":"BOD removed with excess sludge",
 "#wwo_bod_slud_expla":"BOD removed with excess sludge from the treatment process",
-"#wwo_n2o_effl_descr":"Total Nitrogen load in the effluent",
+"#wwo_tn_effl_descr":"Total Nitrogen load in the effluent",
 "#wwo_type_dis_descr":"Main disposal type",
 "#wwo_fslu_typ_descr":"Type of faecal sludge disposed",
 "#wwo_fslu_typ_la_descr":"Type of faecal sludge disposed",
@@ -269,9 +280,9 @@
 "#wwt_ch4_efac_dis_expla":"Methane emission factor for discharged water",
 
 "#wwt_n2o_efac_tre_descr":"N2O emission factor (treatment)",
-"#wwt_n2o_efac_tre_expla":"N2O emission factor for treatment (default value: 3.2 gN2O/person/year)",
+"#wwt_n2o_efac_tre_expla":"N2O emission factor for treatment",
 "#wwt_n2o_efac_dis_descr":"N2O emission factor (discharge)",
-"#wwt_n2o_efac_dis_expla":"N2O emission factor for discharge (default value: 3.2 gN2O/person/year)",
+"#wwt_n2o_efac_dis_expla":"N2O emission factor for discharge",
 
 "#5.6 - 15.7 kW" : "5.6 - 15.7 kW",
 "#15.7 - 38 kW"  : "15.7 - 38 kW",
@@ -1307,12 +1318,10 @@
 "#wwd_engines":"Do you have fuel engines",
 "#wwd_fuel_typ_descr":"Fuel type",
 "#wwd_fuel_typ_expla":"Fuel type",
-
-"#wwt_tn_effl_descr":"Total Nitrogen concentration in the effluent",
-"#wwt_tn_effl_expla":"Total Nitrogen concentration in the effluent during the assessment period",
-"#wwt_tn_infl_descr":"Total Nitrogen concentration in the influent",
-"#wwt_tn_infl_expla":"Total Nitrogen concentration in the influent during the assessment period",
-
+"#wwt_tn_effl_descr":"Total Nitrogen load in the effluent",
+"#wwt_tn_effl_expla":"Total Nitrogen load in the effluent during the assessment period",
+"#wwt_tn_infl_descr":"Total Nitrogen load in the influent",
+"#wwt_tn_infl_expla":"Total Nitrogen load in the influent during the assessment period",
 "#wwd_nrg_cons_descr":"Energy consumed from the grid",
 "#wwd_nrg_cons_expla":"Sum of energy consumed (from the grid or self-produced) during the assessment period by all each pumping stations for discharged wastewater managed by the undertaking",
 "#wwd_nrg_pump_descr":"Energy consumed from the grid (pumping)",

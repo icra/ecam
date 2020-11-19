@@ -6,8 +6,12 @@
 let Exceptions={
   wwc_ch4_efac_col:{ table:"type_of_sewer",      table_field:function(){return "ch4_efac"}, },
   wwc_ch4_efac_cso:{ table:"type_of_water_body", table_field:function(){return "ch4_efac"}, },
+
   wwt_ch4_efac_tre:{ table:"type_of_treatment",  table_field:function(){return "ch4_efac"}, },
   wwt_ch4_efac_dis:{ table:"type_of_water_body", table_field:function(){return "ch4_efac"}, },
+
+  wwt_n2o_efac_tre:{ table:"N2O EF plants (Table 6.8A)", table_field:function(){return "n2o_efac"}, },
+  wwt_n2o_efac_dis:{ table:"N2O EF effluent (Table 6.8A)", table_field:function(){return "n2o_efac"}, },
 
   wwo_ch4_efac_con:{ //depends on ch4_efac_flooding
     table:"Type of containment",

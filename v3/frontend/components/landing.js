@@ -68,8 +68,8 @@ let landing = new Vue({
             <p><b>Open source</b></p>
             <div>
               The <b>ECAM tool</b> is a free and open source tool.
-              The source code lives in
-              <a target=_blank href=//github.com/icra/ecam>github</a>.
+              The source code lives in <a target=_blank href=//github.com/icra/ecam>github</a>.
+              <a href=# onclick="ecam.show('open_source')">Learn more</a>.
             </div>
           </div>
 

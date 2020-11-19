@@ -221,7 +221,7 @@ let stages_menu=new Vue({
         color:red;
         padding:0 5px;
         border-radius:0;
-        border-color:#ccc;
+        border-color:#aaa;
         font-size:large;
       }
       #stages_menu button.delete_substage:hover {

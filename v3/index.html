@@ -100,8 +100,8 @@
 
 <!--help floating menu-->
 <div>
-  <div id=floating_help>
-    <div v-if="Languages.ready"
+  <div id=floating_help v-if="visible && Languages.ready">
+    <div
       onclick="alert('in_development')"
     >
       &#10068;
@@ -112,6 +112,7 @@
     new Vue({
       el:"#floating_help",
       data:{
+        visible:false,
         Languages,
       },
     });
@@ -141,41 +142,44 @@
 
 <!--all elements and views-->
 <div>
-  <div id=ecam_logo            ></div><!--ecam logo          ELEMENT-->
-  <div id=caption              ></div><!--caption            ELEMENT-->
-  <div id=linear_menu          ></div><!--linear menu        ELEMENT-->
-  <div id=stages_menu          ></div><!--select stage       ELEMENT-->
-  <div id=summaries_menu       ></div><!--select summary     ELEMENT-->
+  <div id=ecam_logo            ></div><!--ELEMENT-->
+  <div id=caption              ></div><!--ELEMENT-->
+  <div id=linear_menu          ></div><!--ELEMENT-->
+  <div id=stages_menu          ></div><!--ELEMENT-->
+  <div id=summaries_menu       ></div><!--ELEMENT-->
 
-  <div id=landing              ></div><!--landing               VIEW-->
-  <div id=more                 ></div><!--more                  VIEW-->
-  <div id=about                ></div><!--about                 VIEW-->
-  <div id=help                 ></div><!--help                  VIEW-->
-  <div id=select_scenario      ></div><!--select scenario       VIEW-->
-  <div id=configuration        ></div><!--configuration         VIEW-->
-  <div id=countries            ></div><!--countries             VIEW-->
-  <div id=gwp_table            ></div><!--gwp table             VIEW-->
-  <div id=fuel_table           ></div><!--fuel table            VIEW-->
-  <div id=population           ></div><!--population            VIEW-->
-  <div id=tier_b               ></div><!--tier b                VIEW-->
-  <div id=overview             ></div><!--overview              VIEW-->
-  <div id=summary_ghg          ></div><!--summary ghg           VIEW-->
-  <div id=variable             ></div><!--variable              VIEW-->
-  <div id=constant             ></div><!--constant              VIEW-->
-  <div id=constants            ></div><!--constants             VIEW-->
-  <div id=development          ></div><!--development           VIEW-->
-  <div id=report               ></div><!--report                VIEW-->
-  <div id=benchmarks           ></div><!--benchmarks            VIEW-->
-  <div id=non_revenue_water    ></div><!--non revenue water     VIEW-->
-  <div id=equations            ></div><!--equations             VIEW-->
-  <div id=tables               ></div><!--tables                VIEW-->
-  <div id=sankey_ghg           ></div><!--sankey_ghg            VIEW-->
-  <div id=diagram              ></div><!--diagram               VIEW-->
+  <div id=landing              ></div><!--VIEW-->
+  <div id=more                 ></div><!--VIEW-->
+
+  <div id=about                ></div><!--VIEW-->
+  <div id=help                 ></div><!--VIEW-->
+  <div id=open_source          ></div><!--VIEW-->
+
+  <div id=select_scenario      ></div><!--VIEW-->
+  <div id=configuration        ></div><!--VIEW-->
+  <div id=countries            ></div><!--VIEW-->
+  <div id=gwp_table            ></div><!--VIEW-->
+  <div id=fuel_table           ></div><!--VIEW-->
+  <div id=population           ></div><!--VIEW-->
+  <div id=tier_b               ></div><!--VIEW-->
+  <div id=overview             ></div><!--VIEW-->
+  <div id=summary_ghg          ></div><!--VIEW-->
+  <div id=variable             ></div><!--VIEW-->
+  <div id=constant             ></div><!--VIEW-->
+  <div id=constants            ></div><!--VIEW-->
+  <div id=development          ></div><!--VIEW-->
+  <div id=report               ></div><!--VIEW-->
+  <div id=benchmarks           ></div><!--VIEW-->
+  <div id=non_revenue_water    ></div><!--VIEW-->
+  <div id=equations            ></div><!--VIEW-->
+  <div id=tables               ></div><!--VIEW-->
+  <div id=sankey_ghg           ></div><!--VIEW-->
+  <div id=diagram              ></div><!--VIEW-->
 
   <!--TODO-->
-  <div id=problems             ></div><!--problems              VIEW-->
-  <div id=translation_problems ></div><!--translation problems  VIEW-->
-  <div id=validate_json        ></div><!--validate_json         VIEW-->
+  <div id=problems             ></div><!--VIEW-->
+  <div id=translation_problems ></div><!--VIEW-->
+  <div id=validate_json        ></div><!--VIEW-->
 </div>
 
 <!--load vue objects-->

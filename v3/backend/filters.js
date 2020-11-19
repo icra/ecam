@@ -81,7 +81,8 @@ let Filters = {
   "wwo_bod_conc_fs",
   "wwo_bod_slud",
   "wwo_bod_effl",
-  "wwo_n2o_effl",
+  "wwo_tn_infl",
+  "wwo_tn_effl",
   "wwo_type_dis",
   "wwo_fslu_typ",
 ],
@@ -128,21 +129,17 @@ let Filters = {
   "wwc_vol_coll_unt", //variable
   "wwt_vol_disc",     //variable
   "wwt_vol_nonp",     //variable
-
-  "wwt_ch4_efac_dis",     //variable
-  "wwt_n2o_efac_dis",     //variable
-
+  "wwt_ch4_efac_dis", //variable
+  "wwt_n2o_efac_dis", //variable
   "wwt_bod_effl",     //variable
-  "wwt_tn_effl",     //variable
-
+  "wwt_tn_effl",      //variable
   "wwt_water_reuse",  //question
-
   "wwo_vol_unco_unt", //variable
   "wwo_vol_disc",     //variable
   "wwo_ch4_efac_dis", //variable
   "wwo_n2o_efac_dis", //variable
   "wwo_bod_effl",     //variable
-  "wwo_n2o_effl",     //variable
+  "wwo_tn_effl",      //variable
 ],
 "Sludge management":[
   "wst_mass_slu",         //variable
@@ -167,7 +164,6 @@ let Filters = {
   "wwc_nrg_cost",
   "wwt_nrg_cost",
   "wwo_nrg_cost",
-
   "wsa_run_cost",
   "wst_run_cost",
   "wsd_run_cost",

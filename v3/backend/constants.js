@@ -82,24 +82,31 @@ let Cts={
   },
 
   ct_fra_np:{
-    value:0.16,
-    descr:"Fraction of nitrogen in proteins",
-    unit:"kg N/kg protein",
+    value: 0.16,
+    descr: "Nitrogen in proteins (F_NPR)",
+    unit:  "kg N/kg protein",
   },
 
   ct_fac_nc:{
-    value:1.1,
-    descr:"Factor for non consumed protein added to the wastewater",
-    unit:"adimensional",
+    value: 1.1,
+    descr: "Non consumed protein added to the wastewater (F_NON_CON)",
+    unit:  "adimensional",
   },
 
   ct_fac_ic:{
-    value:1.25,
-    descr:"Factor for industrial and commercial co-discharged protein into the sewer",
-    unit:"adimensional",
+    value: 1.25,
+    descr: "Industrial and commercial co-discharged protein into the sewer (F_IND_COM)",
+    unit:  "adimensional",
   },
 
-  ct_ef_eff:{
+  ct_N_HH:{
+    value: 1.1,
+    descr: "Additional nitrogen from household products added to the wastewater, default is 1.1 (some country data are in new Table 6.10a).",
+    unit:  "adimensional",
+  },
+
+  //TODO remove
+  ct_ef_eff:{ 
     value:0.005,
     descr:"EF effluent (tabled value)",
     unit:"kg N2O-N / kg N",

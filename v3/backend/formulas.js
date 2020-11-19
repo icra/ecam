@@ -49,6 +49,9 @@ let Formulas={
       }
     });
 
+    //sort strings A-Z
+    matches.sort();
+
     return matches;
   },
 
@@ -119,6 +122,9 @@ let Formulas={
     result = result.replace(/this\./g,"");
     result = result.replace(/Global\./g,"");
     result = result.replace(/General\./g,"");
+    result = result.replace(/Cts\./g,"");
+    result = result.replace(/\.value/g,"");
+    //result = result.replace(/\*/g,"·"); //multiplication sign
 
     return result;
   },

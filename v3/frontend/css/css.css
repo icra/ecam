@@ -3,13 +3,14 @@ body{
   font-family:'Open Sans','Helvetica',sans-serif;
   overflow-y:scroll;
   font-size:13px;
-  --color-level-generic:           #327ccb; /*viti new blue, main ecam color*/
-  --color-level-generic-secondary: #73c1d9; /*viti new blue 40% opacity*/
-  --color-secondary-green:         #8DC73F; /*secondary color from wacclim site*/
-  --color-level-Water:             #58c1db; /*water supply*/
-  --color-level-Water-secondary:   #e1eef1;
-  --color-level-Waste:             #ed6d57; /*wastewater*/
-  --color-level-Waste-secondary:   #f5ddd8;
+  --color-level-generic:            #327ccb; /*viti new blue, main ecam color*/
+  --color-level-generic-secondary:  #73c1d9; /*viti new blue 40% opacity*/
+  --color-level-generic-background: #eff5fb; /**/
+  --color-secondary-green:          #8DC73F; /*secondary color from wacclim site*/
+  --color-level-Water:              #58c1db; /*water supply*/
+  --color-level-Water-secondary:    #e1eef1;
+  --color-level-Waste:              #ed6d57; /*wastewater*/
+  --color-level-Waste-secondary:    #f5ddd8;
 }
 
 button {
@@ -196,6 +197,24 @@ span.circle {
     box-shadow: -1px 0 0 0 rgba(0,0,0,.5);
   }
 /*/button class*/
+
+/*tabs*/
+ul.tabs {
+  display:flex;
+  justify-content:center;
+  list-style:none;
+  margin:0;
+}
+ul.tabs > li {
+  padding:0 1em;
+  padding-top:1em;
+  border-bottom:4px solid transparent;
+  cursor:pointer;
+}
+ul.tabs > li[current],
+ul.tabs > li:hover {
+  border-bottom:4px solid var(--color-level-generic);
+}
 
 /*tab buttons*/
   div.tab_buttons                  { text-align:center;font-size:19px;padding:0.5em 0;display:flex;justify-content:center}

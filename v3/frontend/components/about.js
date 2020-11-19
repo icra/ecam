@@ -13,12 +13,10 @@ let about = new Vue({
 
   template:`
     <div id=about v-if="visible && Languages.ready">
-      <h1 style=text-align:center>
-        {{translate('about')}}
-      </h1>
+      <!--about-->
+      <div>
+        <h1>About</h1>
 
-      <!--paragraph-->
-      <div style=margin:auto;max-width:40%;text-align:justify;line-height:2em>
         <p>
           The web interface and new features for the ECAM tool were developed by
           <a target=_blank href='http://www.icra.cat/'>ICRA</a>,
@@ -42,16 +40,17 @@ let about = new Vue({
         </p>
 
         <p>
-          This software is free and <a href=https://github.com/icra/ecam>open source</a>.
+          This software is free and <a onclick="ecam.show('open_source')">open source</a>.
         </p>
 
         <p>
-          2015-{{(new Date()).getFullYear()}} <a href='license.txt'>{{translate('about_license')}}</a>.
+          2015-{{(new Date()).getFullYear()}} <a target=_blank href='frontend/license.txt'>{{translate('about_license')}}</a>.
         </p>
       </div>
 
-      <div style="background:#ccc">
-        <h3 style=padding-left:0>Special acknowledgements</h3>
+      <!--special acknowledgements-->
+      <div style="background:#eff5fb;">
+        <h1 style="padding-left:0">Special acknowledgements</h1>
 
         <p>
           <div>
@@ -72,21 +71,81 @@ let about = new Vue({
 
         <br><br>
 
-        ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under
-        a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work
-        at <a target="_blank" href="www.wacclim.org">www.wacclim.org</a>. Permissions beyond the scope of this license may be available
-        at <a target="_blank" href="mailto:wacclim@giz.de">wacclim@giz.de</a>.
-      </div>
-
-      <div>
-        footer
+        <small>
+          ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under
+          a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work
+          at <a target="_blank" href="www.wacclim.org">www.wacclim.org</a>. Permissions beyond the scope of this license may be available
+          at <a target="_blank" href="mailto:wacclim@giz.de">wacclim@giz.de</a>.
+        </small>
       </div>
     </div>
   `,
 
   style:`
     <style>
-      #about{
+      #about > div {
+        padding:2em 6em;
+        text-align:justify;
+        line-height:2em;
+      }
+      #about > div > h1 {
+        padding-left:0;
+        font-weight:bold;
+      }
+    </style>
+  `,
+});
+
+let open_source = new Vue({
+  el:'#open_source',
+
+  data:{
+    visible:false,
+    Languages,
+  },
+
+  methods:{
+    translate,
+  },
+
+  template:`
+    <div id=open_source v-if="visible && Languages.ready">
+      <div>
+        <h1 style="padding-left:0">Open source</h1>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+          magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
+          aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat,
+          vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+          delenit augue duis dolore te feugait nulla facilisi.
+        </p>
+
+        <p>
+          Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
+          consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
+          feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis
+          dolore te feugait nulla facilisi.
+        </p>
+
+        <button onclick="window.open('https://github.com/icra/ecam')">
+          Go to Github
+        </button>
+
+      </div>
+    </div>
+  `,
+
+  style:`
+    <style>
+      #open_source > div {
+        padding:2em 6em;
+        text-align:justify;
+        line-height:2em;
+      }
+      #open_source > div > h1 {
+        padding-left:0;
+        font-weight:bold;
       }
     </style>
   `,
