@@ -1,26 +1,42 @@
-/* estimations: inputs with equations */
-//they should be moved inside the Ecam global class for consistency
+/* ESTIMATIONS: INPUTS WITH EQUATIONS ASSOCIATED*/
+//maybe they can be moved inside the Ecam global class for consistency TODO
 let Estimations={
   //ww
-    //200L of generated wastewater per person per day
+    //ww: 200L person per day
     ww_vol_gene(stage){return 0.2*stage.ww_resi_pop*Global.Days();},
+
   //wwc
-    wwc_vol_coll    (substage){return 0.2*substage.wwc_conn_pop*Global.Days();},
+    wwc_vol_coll(substage){return 0.2*substage.wwc_conn_pop*Global.Days();},
     wwc_vol_coll_tre(substage){return substage.wwc_vol_coll - substage.wwc_vol_coll_unt;},
     wwc_vol_coll_unt(substage){return substage.wwc_vol_coll - substage.wwc_vol_coll_tre;},
 
-  //wwt
-    wwt_vol_trea    (substage){return 0.2*substage.wwt_serv_pop*Global.Days();},
-    wwt_vol_disc    (substage){return substage.wwt_vol_trea - substage.wwt_vol_nonp;},
+    wwc_tn(substage){
+      let Protein    = Global.General.prot_con; //kg protein/person/year
+      let P          = substage.wwc_conn_pop; //population
+      let Years      = Global.Years(); //years
+      let F_NPR      = Cts.ct_fra_np.value;
+      let N_HH       = Cts.ct_N_HH.value;
+      let F_NON_CON  = Cts.ct_fac_nc.value;
+      let F_IND_COM  = Cts.ct_fac_ic.value;
+      return Protein * P * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM; //kg
+    },
+    wwc_bod(substage){
+      let P   = substage.wwc_conn_pop; //population
+      let BOD = Global.General.bod_pday; //g/person/day
+      return P * BOD * 0.001 * Global.Days(); //kg
+    },
 
+  //wwt
+    wwt_vol_trea(substage){return 0.2*substage.wwt_serv_pop*Global.Days();},
+    wwt_vol_disc(substage){return substage.wwt_vol_trea - substage.wwt_vol_nonp;},
     wwt_tn_infl(substage){
       let Protein    = Global.General.prot_con; //kg protein/person/year
-      let P          = substage.wwt_serv_pop;   //population served
-      let Years      = Global.Years();          //years
-      let F_NPR      = Cts.ct_fra_np.value;     //
-      let N_HH       = Cts.ct_N_HH.value;       //
-      let F_NON_CON  = Cts.ct_fac_nc.value;     //
-      let F_IND_COM  = Cts.ct_fac_ic.value;     //
+      let P          = substage.wwt_serv_pop; //population served
+      let Years      = Global.Years(); //years
+      let F_NPR      = Cts.ct_fra_np.value;
+      let N_HH       = Cts.ct_N_HH.value;
+      let F_NON_CON  = Cts.ct_fac_nc.value;
+      let F_IND_COM  = Cts.ct_fac_ic.value;
       return Protein * P * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM;
     },
 

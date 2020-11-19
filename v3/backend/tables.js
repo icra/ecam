@@ -110,8 +110,25 @@ let Tables = {
   ],
 
   "N2O EF effluent (Table 6.8A)":[
-    {name:"Freshwater, estuarine, and marine discharge (Tier 1)",                                             n2o_efac:0.005 },
-    {name:"Nutrient-impacted and/or hypoxic freshwater, estuarine, and marine discharge (Tier 3, if needed)", n2o_efac:0.019 },
+    {name:"Select",                                                                                           n2o_efac:0    },
+    {name:"Freshwater, estuarine, and marine discharge (Tier 1)",                                             n2o_efac:0.005},
+    {name:"Nutrient-impacted and/or hypoxic freshwater, estuarine, and marine discharge (Tier 3, if needed)", n2o_efac:0.019},
+  ],
+
+  "WW treatment organics removal fractions (centralised) (Table 6.6B and 6.10C)":[
+    {name:"Untreated systems",                                                     bod_rem:0,    N_rem:0   },
+    {name:"Primary (mechanical treatment plants)",                                 bod_rem:0.40, N_rem:0.10},
+    {name:"Primary + Secondary (biological treatment plants)",                     bod_rem:0.85, N_rem:0.40},
+    {name:"Primary + Secondary + Tertiary (advanced biological treatment plants)", bod_rem:0.90, N_rem:0.80},
+  ],
+
+  "WW treatment organics removal fractions (onsite) (Table 6.6B and 6.10C)":[
+    {name:"Untreated systems",                                                                        bod_rem:0,     N_rem:0 },
+    {name:"Septic tank/septic system",                                                                bod_rem:0.625, N_rem:0.15  },
+    {name:"Septic tank/septic system + land dispersal field",                                         bod_rem:0.625, N_rem:0.68  },
+    {name:"Latrines – Dry climate, groundwater table lower than latrine, small family (3–5 persons)", bod_rem:0.1,   N_rem:0.12  },
+    {name:"Latrines – Dry climate, groundwater table lower than latrine, communal (many users)",      bod_rem:0.5,   N_rem:0.12  },
+    {name:"Latrines – Wet climate/flush water use, groundwater table higher than latrine",            bod_rem:0.7,   N_rem:0.12  },
   ],
 
   //pump types 2
@@ -248,7 +265,7 @@ Tables.wwt_slu_disp      = Tables["Type of sludge disposed"];
 
 //get object by "table" (string) and "index" (integer)
 Tables.get_row=function(table, index){
-  let arr = Tables[table]; //array
-  if(!arr) return false;
-  return arr[index] || false;
+  let t=Tables[table]; //array
+  if(!t) return false;
+  return t[index]||false;
 };

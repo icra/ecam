@@ -1,6 +1,23 @@
 {
 "#below":"below",
 
+"#Untreated systems":"Untreated systems",
+"#Primary (mechanical treatment plants)":"Primary (mechanical treatment plants)",
+"#Primary + Secondary (biological treatment plants)":"Primary + Secondary (biological treatment plants)",
+"#Primary + Secondary + Tertiary (advanced biological treatment plants)":"Primary + Secondary + Tertiary (advanced biological treatment plants)",
+"#Septic tank/septic system":"Septic tank/septic system",
+"#Septic tank/septic system + land dispersal field":"Septic tank/septic system + land dispersal field",
+"#Latrines – Dry climate, groundwater table lower than latrine, small family (3–5 persons)":"Latrines – Dry climate, groundwater table lower than latrine, small family (3–5 persons)",
+"#Latrines – Dry climate, groundwater table lower than latrine, communal (many users)":"Latrines – Dry climate, groundwater table lower than latrine, communal (many users)",
+"#Latrines – Wet climate/flush water use, groundwater table higher than latrine":"Latrines – Wet climate/flush water use, groundwater table higher than latrine",
+
+"#wwc_bod_descr":"BOD load in the collection system",
+"#wwc_tn_descr":"Total Nitrogen load in the collection system",
+"#wwc_ch4_efac_cso_descr":"CH4 emission factor (untreated collected wastewater)",
+"#wwc_ch4_efac_col_descr":"CH4 emission factor (collected wastewater)",
+"#wwc_n2o_efac_cso_descr":"N2O emission factor (untreated collected wastewater)",
+"#wwc_n2o_efac_col_descr":"N2O emission factor (collected wastewater) (default: 0)",
+
 "#wwo_tn_infl_descr":"Total Nitrogen load in the influent",
 "#wwo_tn_infl_expla":"Total Nitrogen load in the influent during the assessment period",
 
@@ -265,10 +282,9 @@
 
 "#Onsite":"Onsite sanitation",
 
-"#wwc_ch4_efac_col_descr":"CH4 emission factor (collected wastewater)",
 "#wwc_vol_coll_descr":    "Volume of collected wastewater",
 "#wwc_vol_coll_expla":    "Volume of collected wastewater that is responsibility of the undertaking, during the assessment period",
-"#wwc_vol_coll_unt_descr":"Volume of collected wastewater untreated (CSO)",
+"#wwc_vol_coll_unt_descr":"Volume of collected wastewater untreated (e.g. CSO)",
 "#wwc_vol_coll_tre_descr":"Volume of collected wastewater conveyed to treatment",
 
 "#ww_vol_gene_descr":"Volume of generated wastewater",
@@ -1186,8 +1202,6 @@
 "#ww_SL_serv_pop_expla":"Percentage of the resident population that are connected to the sewer systems and which wastewater is treated by the undertaking",
 "#ww_SL_treat_m3_descr":"Collected wastewater treated",
 "#ww_SL_treat_m3_expla":"Percentage of the collected sewage prior to dilution or overflows in the sewer system that are treated in wastewater treatment plants",
-"#wwc_ch4_efac_cso_descr":"CH4 emission factor (untreated collected wastewater)",
-"#wwc_ch4_efac_cso_expla":"CH4 emission factor (untreated collected wastewater)",
 "#ww_nrg_cons_descr":"Energy consumed from the grid (Collection+Treatment+Onsite)",
 "#ww_nrg_cons_expla":"Total electric energy consumed from the grid related to wastewater management within the service area managed by the undertaking during the entire assessment period",
 "#ww_resi_pop_descr":"Resident population",

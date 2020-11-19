@@ -18,6 +18,12 @@ let Info={
 	unfccc_5C  :{magnitude:"Mass",unit:"kg CO2eq"},
 	unfccc_5D  :{magnitude:"Mass",unit:"kg CO2eq"},
 
+  //new
+  wwc_tn:{magnitude:"Mass", unit:"kg"},
+  wwc_bod:{magnitude:"Mass", unit:"kg"},
+  wwc_n2o_efac_cso:{magnitude:"Mass/Mass", unit:"kgN2O-N/kgN"},
+  wwc_n2o_efac_col:{magnitude:"Mass/Mass", unit:"kgN2O-N/kgN"},
+
   //inputs that are options instead of numeric
   wwo_soil_typ     : {magnitude:"Option", table:"Soil type",                unit:"Soil type"},
   wwt_soil_typ     : {magnitude:"Option", table:"Soil type",                unit:"Soil type"},

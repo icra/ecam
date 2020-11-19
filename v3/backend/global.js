@@ -705,8 +705,13 @@ class Waste_Collection extends Substage{
     this.wwc_vol_coll     = 0; //volume of collected wastewater
     this.wwc_vol_coll_unt = 0; //volume of collected wastewater untreated (CSO)
     this.wwc_vol_coll_tre = 0; //volume of collected wastewater conveyed to treatment
-    this.wwc_ch4_efac_cso = 0.3; //emission factor for collected untreated wastewater
-    this.wwc_ch4_efac_col = 0; //emission factor for collected wastewater
+    this.wwc_bod = 0; //BOD in collection system
+    this.wwc_tn  = 0; //TN in collection system
+    this.wwc_ch4_efac_cso = 0; //EF CH4 cso
+    this.wwc_ch4_efac_col = 0; //EF CH4 collected ww
+    this.wwc_n2o_efac_cso = 0; //EF N2O cso
+    this.wwc_n2o_efac_col = 0; //EF N2O collected ww
+
     this.wwc_fuel_typ     = 0;
     this.wwc_vol_fuel     = 0;
     this.wwc_nrg_cons     = 0; //energy consumed from the grid
@@ -772,19 +777,25 @@ class Waste_Collection extends Substage{
       return {total,co2,ch4,n2o};
     }
     wwc_KPI_GHG_cso(){
-      let pop = this.wwc_conn_pop*(this.wwc_vol_coll_unt/this.wwc_vol_coll)||0;
-      let co2 = 0;
-      let ch4 = pop*Global.General.bod_pday/1000*Global.Days()*this.wwc_ch4_efac_cso*Cts.ct_ch4_eq.value;
-      let n2o = pop*Global.General.prot_con*Global.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      //overflowing contaminant loads
+      let BOD = this.wwc_bod*(this.wwc_vol_coll_unt/this.wwc_vol_coll)||0; //kg BOD
+      let TN  = this.wwc_tn *(this.wwc_vol_coll_unt/this.wwc_vol_coll)||0; //kg TN
+      //emissions
+      let co2   = 0;
+      let ch4   = BOD*this.wwc_ch4_efac_cso*Cts.ct_ch4_eq.value;
+      let n2o   = TN *this.wwc_n2o_efac_cso*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
     wwc_KPI_GHG_col(){
-      let pop   = this.wwc_conn_pop*(this.wwc_vol_coll_tre/this.wwc_vol_coll)||0;
+      //non-overflowing contaminant loads
+      let BOD = this.wwc_bod*(this.wwc_vol_coll_tre/this.wwc_vol_coll)||0; //kg BOD
+      let TN  = this.wwc_tn *(this.wwc_vol_coll_tre/this.wwc_vol_coll)||0; //kg TN
+      //emissions
       let co2   = 0;
-      let ch4   = pop*Global.General.bod_pday/1000*Global.Days()*this.wwc_ch4_efac_col*Cts.ct_ch4_eq.value;
-      let n2o   = 0;
-      let total = co2 + ch4 + n2o;
+      let ch4   = BOD*this.wwc_ch4_efac_col*Cts.ct_ch4_eq.value;
+      let n2o   = TN *this.wwc_n2o_efac_col*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
   //SL wwc
@@ -814,14 +825,14 @@ class Waste_Treatment extends Substage{
     this.wwt_vol_nonp = 0; //Volume of water reused
     this.wwt_vol_disc = 0; //discharged ww volume
     this.wwt_bod_infl = 0; //BOD influent
-    this.wwt_bod_slud = 0; //BOD removed as sludge
     this.wwt_bod_effl = 0; //BOD effluent
+    this.wwt_bod_slud = 0; //BOD removed as sludge
     this.wwt_tn_infl  = 0; //TN influent
     this.wwt_tn_effl  = 0; //TN effluent
 
     this.wwt_ch4_efac_tre = 0;
-    this.wwt_n2o_efac_tre = 0;
     this.wwt_ch4_efac_dis = 0;
+    this.wwt_n2o_efac_tre = 0;
     this.wwt_n2o_efac_dis = 0;
 
     this.wwt_fuel_typ       = 0;
@@ -1257,6 +1268,9 @@ class Waste_Onsite extends Substage{
     this.wwo_trck_typ         = 0; //type of fuel
     this.wwo_vol_trck         = 0; //fuel consumed
     this.wwo_bod_infl         = 0; //influent bod load
+    this.wwo_bod_effl         = 0; //effluent BOD
+    this.wwo_bod_rmvd         = 0; //bod removed as FS
+    this.wwo_bod_slud         = 0; //?
     this.wwo_type_con         = 0; //type of containment
     this.wwo_flooding         = 0; //yes/no
     this.wwo_cont_emp         = 0; //containments emptied
@@ -1264,9 +1278,6 @@ class Waste_Onsite extends Substage{
     this.wwo_bod_conc_fs      = 0; //[BOD] in FS
     this.wwo_fslu_emp         = 0; //FS emptied
     this.wwo_type_tre         = 0; //type of treatment
-    this.wwo_bod_rmvd         = 0; //bod removed as FS
-    this.wwo_bod_slud         = 0; //?
-    this.wwo_bod_effl         = 0; //effluent BOD
     this.wwo_tn_infl          = 0; //TN influent
     this.wwo_tn_effl          = 0; //TN effluent
     this.wwo_biog_pro         = 0;

@@ -35,26 +35,28 @@ let Filters = {
 "Emission factors":[
   "wwc_ch4_efac_col",
   "wwc_ch4_efac_cso",
+  "wwc_n2o_efac_col",
+  "wwc_n2o_efac_cso",
 
   "wwt_ch4_efac_tre",
-  "wwt_n2o_efac_tre",
   "wwt_ch4_efac_dis",
+  "wwt_n2o_efac_tre",
   "wwt_n2o_efac_dis",
 
   "wwo_ch4_efac_unt",
   "wwo_ch4_efac_con",
   "wwo_ch4_efac_tre",
-  "wwo_n2o_efac_tre",
   "wwo_ch4_efac_dis",
+  "wwo_n2o_efac_tre",
   "wwo_n2o_efac_dis",
 ],
 "Operational parameters":[
-  "ws_nrg_cost", //variable
-  "ws_run_cost", //variable
-  "ww_nrg_cost", //variable
-  "ww_run_cost", //variable
+  "ws_nrg_cost", //input
+  "ws_run_cost", //input
+  "ww_nrg_cost", //input
+  "ww_run_cost", //input
 
-  "wst_treatmen",          //variable
+  "wst_treatmen",          //input
   "wst_treatment_perf",    //question
   "wsd_water_eff",         //question
   "wsd_service_perf",      //question
@@ -62,16 +64,19 @@ let Filters = {
   "wwt_producing_biogas",  //question
   "wwt_treatment_perf",    //question
 
-  "wwt_bod_infl", //variable
-  "wwt_bod_effl", //variable
-  "wwt_bod_slud", //variable
-  "wwt_tn_infl", //variable
-  "wwt_tn_effl", //variable
+  "wwc_bod", //input
+  "wwc_tn",  //input
+
+  "wwt_bod_infl", //input
+  "wwt_bod_effl", //input
+  "wwt_bod_slud", //input
+  "wwt_tn_infl", //input
+  "wwt_tn_effl", //input
 
   "wwo_producing_biogas", //question
 
-  "wwo_type_con",    //variable
-  "wwo_flooding",    //variable
+  "wwo_type_con",
+  "wwo_flooding",
   "wwo_cont_emp",
   "wwo_fdensity",
   "wwo_fslu_emp",
@@ -125,8 +130,10 @@ let Filters = {
   "wwo_pumping_eff", //question
 ],
 "Discharge":[
-  "wwc_ch4_efac_cso", //variable
   "wwc_vol_coll_unt", //variable
+  "wwc_ch4_efac_cso", //variable
+  "wwc_n2o_efac_cso", //variable
+
   "wwt_vol_disc",     //variable
   "wwt_vol_nonp",     //variable
   "wwt_ch4_efac_dis", //variable

@@ -199,7 +199,7 @@ let tier_b=new Vue({
     <div id=tier_b v-if="visible && Languages.ready">
       <!--tier b title + tips-->
       <div id=title :style="{background:get_level_color(level)}">
-        <h1 style="font-size:x-large;color:white;">
+        <h1 style="font-size:x-large;color:white;align-items:center">
           <span v-if="sublevel">
             <a onclick="go_to(tier_b.level)">{{translate(level)}}</a>
           </span>

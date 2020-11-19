@@ -9,7 +9,7 @@ stages_menu.visible = 0;
 
 /*initial page to display*/
 //ecam.show('help');
-go_to('Waste','Treatment');
+go_to('Waste','Collection');
 //variable.view('wwt_KPI_GHG_slu_storage');
 
 /*default values*/

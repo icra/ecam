@@ -4,12 +4,53 @@
     number besides selecting an option.
 */
 let Exceptions={
+  //WWC
   wwc_ch4_efac_col:{ table:"type_of_sewer",      table_field:function(){return "ch4_efac"}, },
   wwc_ch4_efac_cso:{ table:"type_of_water_body", table_field:function(){return "ch4_efac"}, },
 
+  wwc_n2o_efac_cso:{ table:"N2O EF effluent (Table 6.8A)", table_field:function(){return "n2o_efac"}, },
+
+  //WWT
+  //wwt effluent BOD estimation
+  wwt_bod_effl:{
+    table:"WW treatment organics removal fractions (centralised) (Table 6.6B and 6.10C)",
+    table_field:function(){return "bod_rem"},
+    percent_of:function(stage){
+      return stage.wwt_bod_infl;
+    },
+  },
+
+  //wwt effluent TN estimation
+  wwt_tn_effl:{
+    table:"WW treatment organics removal fractions (centralised) (Table 6.6B and 6.10C)",
+    table_field:function(){return "N_rem"},
+    percent_of:function(stage){
+      return stage.wwt_tn_infl;
+    },
+  },
+
+  //wwo effluent BOD estimation
+  wwo_bod_effl:{
+    table:"WW treatment organics removal fractions (onsite) (Table 6.6B and 6.10C)",
+    table_field:function(){return "bod_rem"},
+    percent_of:function(stage){
+      return stage.wwo_bod_infl;
+    },
+  },
+
+  //wwo effluent TN estimation
+  wwo_tn_effl:{
+    table:"WW treatment organics removal fractions (onsite) (Table 6.6B and 6.10C)",
+    table_field:function(){return "N_rem"},
+    percent_of:function(stage){
+      return stage.wwo_tn_infl;
+    },
+  },
+
+
+  //wwt Emission Factors (EF)
   wwt_ch4_efac_tre:{ table:"type_of_treatment",  table_field:function(){return "ch4_efac"}, },
   wwt_ch4_efac_dis:{ table:"type_of_water_body", table_field:function(){return "ch4_efac"}, },
-
   wwt_n2o_efac_tre:{ table:"N2O EF plants (Table 6.8A)", table_field:function(){return "n2o_efac"}, },
   wwt_n2o_efac_dis:{ table:"N2O EF effluent (Table 6.8A)", table_field:function(){return "n2o_efac"}, },
 
