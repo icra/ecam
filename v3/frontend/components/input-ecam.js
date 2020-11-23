@@ -27,7 +27,7 @@ Vue.component('input_ecam',{
             <span v-html="translate(code+'_descr').prettify()"></span>
           </div>
 
-          <!--recommendation button-->
+          <!--estimation button-->
           <div v-if="Estimations[code]">
             <button
               @click="current_stage[code] = Estimations[code](current_stage)"
@@ -67,7 +67,26 @@ Vue.component('input_ecam',{
             </option>
           </select>
 
-          <!--case 2: selection is a fixed value-->
+          <!--case 2: selection has to be converted-->
+          <select v-else-if="Exceptions[code].conversion" v-model="current_stage[code]"
+            style="
+              max-width:250px;
+            "
+          >
+            <option
+              v-for="obj in Tables[Exceptions[code].table]"
+              :value="parseFloat( obj[Exceptions[code].table_field(current_stage)] * Exceptions[code].conversion(current_stage) )"
+            >
+              {{translate(obj.name)}}
+              &rarr;
+              [{{obj[Exceptions[code].table_field(current_stage)]}} {{Exceptions[code].table_field_unit(current_stage)}}]
+              &rarr;
+              ({{ format(    obj[Exceptions[code].table_field(current_stage)]*Exceptions[code].conversion(current_stage)/Units.multiplier(code) )}}
+              {{get_current_unit(code,Global)}})
+            </option>
+          </select>
+
+          <!--case 3: selection is a fixed value-->
           <select v-else v-model="current_stage[code]"
             style="
               max-width:250px;

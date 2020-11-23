@@ -66,17 +66,9 @@ let Estimations={
     wwt_biog_val(substage){return substage.wwt_biog_pro - substage.wwt_biog_fla},
     wwt_ch4_biog(substage){return 59},
     wwt_bod_infl(substage){
-      let P   = substage.wwt_serv_pop;
-      let BOD = Global.General.bod_pday;
-      return P * BOD * 0.001 * Global.Days();
-    },
-    wwt_mass_slu(substage){
-      //TODO substitute for table 2.2 Andreoli et al 2007
-      return 0;
-    },
-    wwt_dryw_slu(substage){
-      //TODO substitute for table 2.2 Andreoli et al 2007
-      return 0;
+      let P   = substage.wwt_serv_pop; //population
+      let BOD = Global.General.bod_pday; //g/person/day
+      return P * BOD * 0.001 * Global.Days(); //kg
     },
     wwt_temp_inc(substage){
       return 1023;
@@ -94,7 +86,9 @@ let Estimations={
     },
   //wwo
     wwo_bod_infl(substage){
-      return Global.General.bod_pday_fs/1000*substage.wwo_onsi_pop*Global.Days();
+      let P   = substage.wwo_onsi_pop; //population
+      let BOD = Global.General.bod_pday; //g/person/day
+      return P * BOD * 0.001 * Global.Days(); //kg
     },
   /*
   wwo_fslu_emp(){ return Cts.ct_fs_prod.value*Global.Waste.Collection.wwo_onsi_pop*Global.Days()/Global.Waste.Collection.wwo_fdensity*Global.Faecl.Containment.wwo_cont_emp/100; },

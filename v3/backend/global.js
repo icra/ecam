@@ -86,13 +86,11 @@ class Ecam{
       let cso = this.Waste.Collection.map(s=>s.wwc_KPI_GHG_cso()    );
       let col = this.Waste.Collection.map(s=>s.wwc_KPI_GHG_col()    );
       let opd = this.Waste.Onsite    .map(s=>s.wwo_KPI_GHG_unt_opd());
-      let ons = this.Waste.Onsite    .map(s=>s.wwo_KPI_GHG_unt_ons());
 
       let emissions=[]
         .concat(cso)
         .concat(col)
         .concat(opd)
-        .concat(ons)
 
       //sum gases
       let co2   = emissions.map(e=>e.co2).sum();
@@ -826,9 +824,12 @@ class Waste_Treatment extends Substage{
     this.wwt_vol_disc = 0; //discharged ww volume
     this.wwt_bod_infl = 0; //BOD influent
     this.wwt_bod_effl = 0; //BOD effluent
+
+    this.wwt_tn_infl = 0; //TN influent
+    this.wwt_tn_effl = 0; //TN effluent
+
+    this.wwt_mass_slu = 0;
     this.wwt_bod_slud = 0; //BOD removed as sludge
-    this.wwt_tn_infl  = 0; //TN influent
-    this.wwt_tn_effl  = 0; //TN effluent
 
     this.wwt_ch4_efac_tre = 0;
     this.wwt_ch4_efac_dis = 0;
@@ -867,7 +868,6 @@ class Waste_Treatment extends Substage{
     this.wwt_wr_N_rec       = 0; //N recovered
     this.wwt_wr_P_rec       = 0; //P recovered
     this.wwt_wr_vol_d       = 0; //volume of reused water displacing potable water
-    this.wwt_mass_slu       = 0;
     this.wwt_dryw_slu       = 0;
     this.wwt_slu_disp       = 0;
     this.wwt_mass_slu_sto   = 0;
@@ -1308,7 +1308,6 @@ class Waste_Onsite extends Substage{
       "wwo_KPI_GHG_elec",
       "wwo_KPI_GHG_fuel",
       "wwo_KPI_GHG_unt_opd",
-      "wwo_KPI_GHG_unt_ons",
       "wwo_KPI_GHG_cont",
       "wwo_KPI_GHG_trck",
       "wwo_KPI_GHG_biog",
@@ -1343,7 +1342,6 @@ class Waste_Onsite extends Substage{
       let sources = [
         this.wwo_KPI_GHG_fuel(),
         this.wwo_KPI_GHG_unt_opd(),
-        this.wwo_KPI_GHG_unt_ons(),
         this.wwo_KPI_GHG_cont(),
         this.wwo_KPI_GHG_trck(),
         this.wwo_KPI_GHG_biog(),
@@ -1383,15 +1381,6 @@ class Waste_Onsite extends Substage{
       let pop   = this.wwo_open_pop;
       let co2   = 0;
       let ch4   = pop*Global.General.bod_pday/1000*Global.Days()*this.wwo_ch4_efac_unt*Cts.ct_ch4_eq.value;
-      let n2o   = pop*Global.General.prot_con*Global.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
-      let total = co2+ch4+n2o;
-      return {total,co2,ch4,n2o};
-    }
-    //untreated onsite
-    wwo_KPI_GHG_unt_ons(){
-      let pop   = this.wwo_onsi_pop*(this.wwo_vol_unco_unt/this.wwo_vol_unco||0);
-      let co2   = 0;
-      let ch4   = pop*Global.General.bod_pday_fs/1000*Global.Days()*this.wwo_ch4_efac_unt*Cts.ct_ch4_eq.value;
       let n2o   = pop*Global.General.prot_con*Global.Years()*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*Cts.ct_fac_ic.value*Cts.ct_ef_eff.value*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};

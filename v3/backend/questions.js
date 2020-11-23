@@ -364,7 +364,6 @@ let Questions={
 
     "wwt_sludge_mgmt":{
       variables:[
-        "wwt_mass_slu",
         "wwt_dryw_slu",
         "wwt_slu_disp",
         "wwt_KPI_sludg_prod",

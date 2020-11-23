@@ -14,6 +14,7 @@
       - "https://www.npmjs.com/package/exceljs"
 
 [DOING NOW]
+  - remove bod_pday_fs (faecal sludge) from Global and equations
   - bug: variable.js / outputs that use this variable / drop-down selection
     (exceptions) value showed: now we see the Exceptions[key] object as a
     string instead of the input value

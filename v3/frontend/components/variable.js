@@ -282,7 +282,26 @@ let variable=new Vue({
                               </option>
                             </select>
 
-                            <!--case 2: selection is a fixed value-->
+                            <!--case 2: selection has to be converted-->
+                            <select v-else-if="Exceptions[id].conversion" v-model="ss[id]"
+                              style="
+                                max-width:200px;
+                              "
+                            >
+                              <option
+                                v-for="obj in Tables[Exceptions[id].table]"
+                                :value="parseFloat( obj[Exceptions[id].table_field(ss)] * Exceptions[id].conversion(ss) )"
+                              >
+                                {{translate(obj.name)}}
+                                &rarr;
+                                [{{obj[Exceptions[id].table_field(ss)]}} {{Exceptions[id].table_field_unit(ss)}}]
+                                &rarr;
+                                ({{ format(    obj[Exceptions[id].table_field(ss)]*Exceptions[id].conversion(ss)/Units.multiplier(id) )}}
+                                {{get_current_unit(code,Global)}})
+                              </option>
+                            </select>
+
+                            <!--case 3: selection is a fixed value-->
                             <select v-else v-model="ss[id]"
                               style="
                                 max-width:200px;

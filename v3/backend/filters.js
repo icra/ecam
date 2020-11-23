@@ -63,6 +63,7 @@ let Filters = {
   "wsd_topographic",       //question
   "wwt_producing_biogas",  //question
   "wwt_treatment_perf",    //question
+  "wwt_mass_slu", //input
 
   "wwc_bod", //input
   "wwc_tn",  //input
@@ -149,7 +150,11 @@ let Filters = {
   "wwo_tn_effl",      //variable
 ],
 "Sludge management":[
-  "wst_mass_slu",         //variable
+  "wst_mass_slu",         //input
+
+  "wwt_mass_slu",//input
+  "wwt_bod_slud",//input
+
   "wwt_sludge_mgmt",      //question
   "wwt_slu_storage",      //question
   "wwt_composting",       //question
