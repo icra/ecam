@@ -854,13 +854,16 @@ class Waste_Treatment extends Substage{
     this.wwt_pmp_amps       = 0;
     this.wwt_pmp_pf         = 0.9;
     this.wwt_pmp_exff       = 0;
-    this.wwt_biog_pro       = 0;
-    this.wwt_biog_fla       = 0;
+
+    this.wwt_biog_pro       = 0; //total biogas produced
+    this.wwt_biog_fla       = 0; //biogas produced flared
+    this.wwt_biog_val       = 0; //biogas produced valorised
+    this.wwt_biog_boi       = 0; //biogas produced valorised
+
     this.wwt_ch4_biog       = 59;
     this.wwt_dige_typ       = 0;
     this.wwt_fuel_dig       = 0;
     this.wwt_nrg_biog       = 0;
-    this.wwt_biog_val       = 0;
 
     this.wwt_reus_trck_typ = 0;
     this.wwt_reus_vol_trck = 0;
@@ -920,7 +923,6 @@ class Waste_Treatment extends Substage{
       "wwt_KPI_nrg_x_biog",
       "wwt_SL_GHG_avoided",
       "wwt_KPI_sludg_prod",
-      "wwt_KPI_dry_sludge",
       "wwt_wr_C_seq_slu",
       "wwt_wr_GHG_avo_N",
 
@@ -977,13 +979,34 @@ class Waste_Treatment extends Substage{
 
     wwt_KPI_GHG_tre(){
       let co2   = 0;
-      let ch4   = (this.wwt_bod_infl-this.wwt_bod_slud-this.wwt_bod_effl)*this.wwt_ch4_efac_tre*Cts.ct_ch4_eq.value;
+      let ch4   = (this.wwt_bod_infl-this.wwt_bod_slud)*this.wwt_ch4_efac_tre*Cts.ct_ch4_eq.value;
       let n2o   = this.wwt_tn_infl*this.wwt_n2o_efac_tre*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
 
+    //biogas emissions
     wwt_KPI_GHG_biog(){
+      let sources=[
+        this.wwt_KPI_GHG_biog_flare(),
+        this.wwt_KPI_GHG_biog_boiler(),
+        this.wwt_KPI_GHG_biog_engine(),
+        this.wwt_KPI_GHG_biog_injection(),
+        this.wwt_KPI_GHG_biog_leak(),
+      ];
+
+      //gases (numbers)
+      let co2 = sources.map(s=>s.co2).sum();
+      let ch4 = sources.map(s=>s.ch4).sum();
+      let n2o = sources.map(s=>s.n2o).sum();
+
+      //total
+      let total = sources.map(s=>s.total).sum();
+      return {total,co2,ch4,n2o};
+    }
+
+    //TODO biogas flared
+    wwt_KPI_GHG_biog_flare(){
       let co2 = 0;
       let n2o = 0;
       let ch4 = (
@@ -994,11 +1017,48 @@ class Waste_Treatment extends Substage{
       )*this.wwt_ch4_biog/100
       *Cts.ct_ch4_m3.value
       *Cts.ct_ch4_eq.value;
+
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
 
-    //wwt sludge
+    //TODO biogas boiler
+    wwt_KPI_GHG_biog_boiler(){
+      let co2   = 0;
+      let ch4   = 0;
+      let n2o   = 0;
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
+    }
+
+    //TODO biogas engine
+    wwt_KPI_GHG_biog_engine(){
+      let co2   = 0;
+      let ch4   = 0;
+      let n2o   = 0;
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
+    }
+
+    //TODO biogas injection to city grid
+    wwt_KPI_GHG_biog_injection(){
+      let co2   = 0;
+      let ch4   = 0;
+      let n2o   = 0;
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
+    }
+
+    //TODO biogas leak
+    wwt_KPI_GHG_biog_leak(){
+      let co2   = 0;
+      let ch4   = 0;
+      let n2o   = 0;
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
+    }
+
+    //ghg from sludge management
     wwt_KPI_GHG_slu(){
       let sources=[
         this.wwt_KPI_GHG_slu_storage(),
@@ -1209,7 +1269,6 @@ class Waste_Treatment extends Substage{
 
     //other sludge equations
     wwt_KPI_sludg_prod(){return this.wwt_mass_slu/this.wwt_vol_trea}
-    wwt_KPI_dry_sludge(){return 100*this.wwt_dryw_slu/this.wwt_mass_slu}
     wwt_wr_C_seq_slu(){
       return this.wwt_slu_comp_C_seq()+
       this.wwt_slu_app_C_seq()+
@@ -1415,7 +1474,7 @@ class Waste_Onsite extends Substage{
     //treatment
     wwo_KPI_GHG_tre(){
       let co2   = 0;
-      let ch4   = (this.wwo_bod_infl-this.wwo_bod_slud-this.wwo_bod_effl)*this.wwo_ch4_efac_tre*Cts.ct_ch4_eq.value;
+      let ch4   = (this.wwo_bod_infl-this.wwo_bod_slud)*this.wwo_ch4_efac_tre*Cts.ct_ch4_eq.value;
       let n2o   = this.wwo_tn_infl*this.wwo_n2o_efac_tre*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};

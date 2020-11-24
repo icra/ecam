@@ -52,14 +52,32 @@ let Estimations={
       let slu_disp=Tables.get_row('Type of sludge disposed',substage.wwt_slu_disp);
       return slu_disp.la_N_cont;
     },
+
+    //estimation for biogas produced
     wwt_biog_pro(substage){
-      let P  = substage.wwt_serv_pop; //people
-      let B  = Global.General.bod_pday; //gBOD/person/day
-      let D  = Global.Days(); //days
-      let VS = Cts.ct_bod_kg.value; //gVS/gBOD
-      let NL = Cts.ct_biog_g.value; //NL/gVS
-      return P*B/1000*D*VS*NL;
+      /*
+        let P  = substage.wwt_serv_pop; //people
+        let B  = Global.General.bod_pday; //gBOD/person/day
+        let D  = Global.Days(); //days
+        let VS = Cts.ct_bod_kg.value; //gVS/gBOD
+        let NL = Cts.ct_biog_g.value; //NL/gVS
+        return P*B/1000*D*VS*NL;
+      */
+      /*
+        Combined sludge to digestion (kg/d) 
+        Combined sludge VS (% VS/TS; aprox 80% of total solids is volatile; this percentage can be an input) 
+        VS to digestion = (1) * (2)/100; 
+        VS destroyed = (3) * VS destruction (VS destruction is an input; default = 60%); 
+        Digested sludge mass = (1) – (4) 
+        Digested sludge VS = 100* [(3) – (4)]/(5) 
+        Biogas mass = (1) – (5) 
+        Biogas methane concentration (in mass percentage, %)) = (100 * BiogMetVol *16/22.41)/[(BiogMetVol*16/22.41) + (100-BiogMetVol)*44/22.41)] ; 
+        Biogas methane mass = (7)*(8)/100; 
+        Biogas CO2 = (8) – (9) 
+      */
+      return 0;
     },
+
     wwt_biog_fla(substage){
       return substage.wwt_biog_pro - substage.wwt_biog_val;
     },

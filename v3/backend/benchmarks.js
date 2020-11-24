@@ -187,14 +187,6 @@ let Benchmarks = {
     else                                   return "Out of range";
   },
 
-  //% of dry sludge
-  wwt_KPI_dry_sludge(stage, value) {
-    if     (value >= 20)                   return "Good";
-    else if(20    >  value && value >= 12) return "Acceptable";
-    else if(value < 12)                    return "Unsatisfactory";
-    else                                   return "Out of range";
-  },
-
   //% of energy produced per total available energy in biogas
   wwt_KPI_nrg_x_biog(stage, value) {
     if     (value < 15)                    return "Unsatisfactory";

@@ -296,7 +296,7 @@ let variable=new Vue({
                                 &rarr;
                                 [{{obj[Exceptions[id].table_field(ss)]}} {{Exceptions[id].table_field_unit(ss)}}]
                                 &rarr;
-                                ({{ format(    obj[Exceptions[id].table_field(ss)]*Exceptions[id].conversion(ss)/Units.multiplier(id) )}}
+                                ({{ format(    obj[Exceptions[id].table_field(ss)]*Exceptions[id].conversion(ss) )}}
                                 {{get_current_unit(code,Global)}})
                               </option>
                             </select>

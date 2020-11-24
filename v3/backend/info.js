@@ -24,6 +24,12 @@ let Info={
   wwc_n2o_efac_cso:{magnitude:"Mass/Mass", unit:"kgN2O-N/kgN"},
   wwc_n2o_efac_col:{magnitude:"Mass/Mass", unit:"kgN2O-N/kgN"},
 
+  wwt_KPI_GHG_biog_flare:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwt_KPI_GHG_biog_boiler:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwt_KPI_GHG_biog_engine:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwt_KPI_GHG_biog_injection:{magnitude:"Mass",unit:"kg CO2eq"},
+  wwt_KPI_GHG_biog_leak:{magnitude:"Mass",unit:"kg CO2eq"},
+
   //inputs that are options instead of numeric
   wwo_soil_typ     : {magnitude:"Option", table:"Soil type",                unit:"Soil type"},
   wwt_soil_typ     : {magnitude:"Option", table:"Soil type",                unit:"Soil type"},
@@ -181,7 +187,6 @@ let Info={
 	wwt_KPI_GHG_tre:{magnitude:"Mass",unit:"kg CO2eq"},
 	wwt_KPI_biog_x_bod:{magnitude:"Volume/Mass",unit:"Nm3/kgBOD"},
 	wwt_KPI_capac_util:{magnitude:"Percent",unit:"%"},
-	wwt_KPI_dry_sludge:{magnitude:"Percent",unit:"% DW"},
 	wwt_KPI_nrg_biogas:{magnitude:"Energy/Volume",unit:"kWh/m3"},
 	wwt_KPI_nrg_per_kg:{magnitude:"Energy/Mass",unit:"kWh/kgBOD"},
 	wwt_KPI_nrg_per_m3:{magnitude:"Energy/Volume",unit:"kWh/m3"},
@@ -297,7 +302,6 @@ let Info={
   wwo_KPI_GHG_landfil:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_KPI_GHG_trck:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_KPI_GHG_tre:{magnitude:"Mass",unit:"kg CO2eq"},
-  wwo_KPI_GHG_unt_ons:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_KPI_GHG_unt_opd:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_KPI_GHG_urine:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_KPI_ghg_estm_red:{magnitude:"Mass",unit:"kg CO2eq"},

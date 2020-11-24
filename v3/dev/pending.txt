@@ -33,6 +33,7 @@
   - [ ] floating help (to be filled by viti)
   - [ ] sankey diagram export to jpg/png/svg
   - [ ] import layout from excel
+  - optgroups in selects
 
 [TO BE DONE WHEN V3 IS FEATURE FROZEN]
   - update help & about & docs
@@ -45,33 +46,36 @@
 [BACKLOG]: (missing info OR not 100% clear how to implement OR help needed from other people)
   * Mail from Corinne on June 19th 2020.
     ```
-      Enable to account for different ways of valorising biogas (flare, heat
-      and Power for auto-consumption or electricity sales, biomethane injection
-      in city grid, or a combination of all in varying %). Enable to enter a
-      specific % of leak of CH4 to atmosphere with default value being 2%.
+      Enable to account for different ways of valorising biogas in a
+      combination of all in varying %:
+        - flare (flare).
+        - heat (boiler).
+        - Power for auto-consumption or electricity sales (engine).
+        - biomethane injection in city grid (other).
+        - A specific % of leak of CH4 to atmosphere with default value being 2%.
 
       Enable to account for heat and cold recovery in water supply, sewer
       networks or WWTP. In ECAM, it can just be a value of CO2eq calculated for
       the specific project.
 
-      Enable to enter the following values that add to the total  carbon
+      Enable to enter the following values that add to the total carbon
       footprint for:
-      - Transport of waste products (screenings, grit, grease, sludge, ashes…)
-        Note: one angle of C02 footprint reduction is reducing waste volumes
-        and transport distance, but each can make their own calculation for
-        that
-      - Transport and footprint of purchases (fuel, chemicals, disposable equipment, …)
-      - Maintenance staff vehicle fleet.  Note: some utilities change their
-        fleet to biofuels to reduce their CO2 footprint
-      - Building heating, AC and ventilation as electricity, or fuel, or city
-        heat values that compute a CO2eq value. Note: Some utilities might be
-        connected to the urban heat grid to support their heating requirements.
-        This will remain exceptional, so I would recommend to just have a line
-        for people to enter the CO2eq of this heat energy (they will know it
-        from the city grid supplier).
-      - Miscelleaneous improvements to emissions (i.e.: carbon sequestration of
-        the fumes from on-site incinerator) as a negative value to correct
-        default calculations in the tool.
+        - Transport of waste products (screenings, grit, grease, sludge, ashes…)
+          Note: one angle of C02 footprint reduction is reducing waste volumes
+          and transport distance, but each can make their own calculation for
+          that
+        - Transport and footprint of purchases (fuel, chemicals, disposable equipment, …)
+        - Maintenance staff vehicle fleet.  Note: some utilities change their
+          fleet to biofuels to reduce their CO2 footprint
+        - Building heating, AC and ventilation as electricity, or fuel, or city
+          heat values that compute a CO2eq value. Note: Some utilities might be
+          connected to the urban heat grid to support their heating requirements.
+          This will remain exceptional, so I would recommend to just have a line
+          for people to enter the CO2eq of this heat energy (they will know it
+          from the city grid supplier).
+        - Miscelleaneous improvements to emissions (i.e.: carbon sequestration of
+          the fumes from on-site incinerator) as a negative value to correct
+          default calculations in the tool.
 
       For N2O:
         Enable to account for the N2O emissions using the NTK delta between
