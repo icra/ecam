@@ -55,42 +55,39 @@ let Estimations={
 
     //estimation for biogas produced
     wwt_biog_pro(substage){
-      /*
-        let P  = substage.wwt_serv_pop; //people
-        let B  = Global.General.bod_pday; //gBOD/person/day
-        let D  = Global.Days(); //days
-        let VS = Cts.ct_bod_kg.value; //gVS/gBOD
-        let NL = Cts.ct_biog_g.value; //NL/gVS
-        return P*B/1000*D*VS*NL;
-      */
-      /*
-        Combined sludge to digestion (kg/d) 
-        Combined sludge VS (% VS/TS; aprox 80% of total solids is volatile; this percentage can be an input) 
-        VS to digestion = (1) * (2)/100; 
-        VS destroyed = (3) * VS destruction (VS destruction is an input; default = 60%); 
-        Digested sludge mass = (1) – (4) 
-        Digested sludge VS = 100* [(3) – (4)]/(5) 
-        Biogas mass = (1) – (5) 
-        Biogas methane concentration (in mass percentage, %)) = (100 * BiogMetVol *16/22.41)/[(BiogMetVol*16/22.41) + (100-BiogMetVol)*44/22.41)] ; 
-        Biogas methane mass = (7)*(8)/100; 
-        Biogas CO2 = (8) – (9) 
-      */
-      return 0;
+      //  1) Combined sludge to digestion (kg/d)
+      let wwt_mass_slu = substage.wwt_mass_slu;
+      //  2) Combined sludge VS (% VS/TS; aprox 80% of total solids is volatile; this percentage can be an input)
+      let VS_ratio = 80; //new input (%) TODO
+      //  3) VS to digestion = (1) * (2)/100;
+      let VS_to_digestion = VS_ratio*wwt_mass_slu/100;
+      //  4) VS destroyed = (3) * VS destruction (VS destruction is an input; default = 60%);
+      let VS_destroyed = VS_to_digestion * 0.60; //new input TODO
+      //  5) Digested sludge mass = (1) – (4)
+      let digested_sludge_mass = wwt_mass_slu - VS_destroyed;
+      //  6) Digested sludge VS = 100* [(3) – (4)]/(5)
+      let digested_sludge_VS = 100*(VS_to_digestion-VS_destroyed)/digested_sludge_mass;
+      //  7) Biogas mass = (1) – (5)
+      let biogas_mass = wwt_mass_slu - digested_sludge_mass;
+      //  8) Biogas methane concentration (in mass percentage, %)) = (100 * BiogMetVol *16/22.41)/[(BiogMetVol*16/22.41) + (100-BiogMetVol)*44/22.41)] ;
+      //TODO
+      //  9) Biogas methane mass = (7)*(8)/100;
+      //TODO
+      // 10) Biogas CO2 = (8) – (9)
+      //TODO
+      return biogas_mass;
     },
 
-    wwt_biog_fla(substage){
-      return substage.wwt_biog_pro - substage.wwt_biog_val;
-    },
-    wwt_biog_val(substage){return substage.wwt_biog_pro - substage.wwt_biog_fla},
-    wwt_ch4_biog(substage){return 59},
     wwt_bod_infl(substage){
       let P   = substage.wwt_serv_pop; //population
       let BOD = Global.General.bod_pday; //g/person/day
       return P * BOD * 0.001 * Global.Days(); //kg
     },
+
     wwt_temp_inc(substage){
       return 1023;
     },
+
   //wwo
     wwo_vol_unco(substage){
       return 0.2*substage.wwo_onsi_pop*Global.Days();
@@ -100,7 +97,7 @@ let Estimations={
     },
     //0.3kg/person/day
     wwo_fslu_emp(substage){
-      return 0.3 * substage.wwo_onsi_pop * Global.Days()/substage.wwo_fdensity * substage.wwo_cont_emp/100; 
+      return 0.3 * substage.wwo_onsi_pop * Global.Days()/substage.wwo_fdensity * substage.wwo_cont_emp/100;
     },
   //wwo
     wwo_bod_infl(substage){

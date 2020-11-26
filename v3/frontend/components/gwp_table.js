@@ -11,7 +11,7 @@ let gwp_table = new Vue({
   methods:{
     translate,
     set_constants_from_gwp_report(){
-      configuration.set_constants_from_gwp_report();
+      select_scenario.set_constants_from_gwp_report();
     },
   },
 
@@ -19,7 +19,7 @@ let gwp_table = new Vue({
     <!--gwp table VIEW-->
     <div id=gwp_table v-if="visible">
       <h1 style="text-align:center">
-        <a onclick="ecam.show('configuration')">{{translate('configuration')}}</a>
+        <a onclick="ecam.show('select_scenario')">{{translate('configuration')}}</a>
         &rsaquo;
         <span style=color:black>{{translate('gwp_title')}}</span>
       </h1>

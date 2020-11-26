@@ -61,7 +61,6 @@ let Filters = {
   "wsd_water_eff",         //question
   "wsd_service_perf",      //question
   "wsd_topographic",       //question
-  "wwt_producing_biogas",  //question
   "wwt_treatment_perf",    //question
   "wwt_mass_slu", //input
 
@@ -129,6 +128,9 @@ let Filters = {
   "wwc_pumping_eff", //question
   "wwt_pumping_eff", //question
   "wwo_pumping_eff", //question
+],
+"Biogas":[
+  "wwt_producing_biogas", //question
 ],
 "Discharge":[
   "wwc_vol_coll_unt", //variable

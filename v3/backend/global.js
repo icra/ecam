@@ -836,34 +836,34 @@ class Waste_Treatment extends Substage{
     this.wwt_n2o_efac_tre = 0;
     this.wwt_n2o_efac_dis = 0;
 
-    this.wwt_fuel_typ       = 0;
-    this.wwt_vol_fuel       = 0;
-    this.wwt_trea_cap       = 0;
-    this.wwt_tst_cmpl       = 0;
-    this.wwt_tst_cond       = 0;
-    this.wwt_nrg_cons       = 0;
-    this.wwt_nrg_cost       = 0; //energy costs
-    this.wwt_run_cost       = 0; //total running costs
-    this.wwt_vol_pump       = 0;
-    this.wwt_nrg_pump       = 0;
-    this.wwt_pmp_head       = 0;
-    this.wwt_sta_head       = 0;
-    this.wwt_coll_len       = 0;
-    this.wwt_pmp_flow       = 0;
-    this.wwt_pmp_volt       = 0;
-    this.wwt_pmp_amps       = 0;
-    this.wwt_pmp_pf         = 0.9;
-    this.wwt_pmp_exff       = 0;
+    this.wwt_fuel_typ = 0;
+    this.wwt_vol_fuel = 0;
+    this.wwt_trea_cap = 0;
+    this.wwt_tst_cmpl = 0;
+    this.wwt_tst_cond = 0;
+    this.wwt_nrg_cons = 0;
+    this.wwt_nrg_cost = 0; //energy costs
+    this.wwt_run_cost = 0; //total running costs
+    this.wwt_vol_pump = 0;
+    this.wwt_nrg_pump = 0;
+    this.wwt_pmp_head = 0;
+    this.wwt_sta_head = 0;
+    this.wwt_coll_len = 0;
+    this.wwt_pmp_flow = 0;
+    this.wwt_pmp_volt = 0;
+    this.wwt_pmp_amps = 0;
+    this.wwt_pmp_pf   = 0.9;
+    this.wwt_pmp_exff = 0;
 
-    this.wwt_biog_pro       = 0; //total biogas produced
-    this.wwt_biog_fla       = 0; //biogas produced flared
-    this.wwt_biog_val       = 0; //biogas produced valorised
-    this.wwt_biog_boi       = 0; //biogas produced valorised
+    this.wwt_biog_pro = 0; //total biogas produced
+    this.wwt_biog_fla = 0; //% of biogas produced that is flared
+    this.wwt_biog_val = 0; //% of biogas produced that is used for heat
+    this.wwt_biog_lkd = 2; //% of biogas produced that is leaked
 
-    this.wwt_ch4_biog       = 59;
-    this.wwt_dige_typ       = 0;
-    this.wwt_fuel_dig       = 0;
-    this.wwt_nrg_biog       = 0;
+    this.wwt_ch4_biog = 59; //% of CH4 in biogas
+    this.wwt_dige_typ = 0;
+    this.wwt_fuel_dig = 0;
+    this.wwt_nrg_biog = 0;
 
     this.wwt_reus_trck_typ = 0;
     this.wwt_reus_vol_trck = 0;
@@ -871,7 +871,6 @@ class Waste_Treatment extends Substage{
     this.wwt_wr_N_rec       = 0; //N recovered
     this.wwt_wr_P_rec       = 0; //P recovered
     this.wwt_wr_vol_d       = 0; //volume of reused water displacing potable water
-    this.wwt_dryw_slu       = 0;
     this.wwt_slu_disp       = 0;
     this.wwt_mass_slu_sto   = 0;
     this.wwt_time_slu_sto   = 0;
@@ -988,11 +987,9 @@ class Waste_Treatment extends Substage{
     //biogas emissions
     wwt_KPI_GHG_biog(){
       let sources=[
-        this.wwt_KPI_GHG_biog_flare(),
-        this.wwt_KPI_GHG_biog_boiler(),
-        this.wwt_KPI_GHG_biog_engine(),
-        this.wwt_KPI_GHG_biog_injection(),
-        this.wwt_KPI_GHG_biog_leak(),
+        this.wwt_KPI_GHG_biog_flared(),
+        this.wwt_KPI_GHG_biog_valorized(),
+        this.wwt_KPI_GHG_biog_leaked(),
       ];
 
       //gases (numbers)
@@ -1005,25 +1002,24 @@ class Waste_Treatment extends Substage{
       return {total,co2,ch4,n2o};
     }
 
-    //TODO biogas flared
-    wwt_KPI_GHG_biog_flare(){
-      let co2 = 0;
+    //biogas flared
+    wwt_KPI_GHG_biog_flared(){
+      //kg of biogas flared
+      let biog_fla = this.wwt_biog_pro*this.wwt_biog_fla/100;
+      let ch4_biog = this.wwt_ch4_biog;
+
+      let co2=(function(){
+        return biog_fla*ch4_biog/100*(44/16);
+      })();
       let n2o = 0;
-      let ch4 = (
-        this.wwt_biog_pro
-        -this.wwt_biog_val
-        -this.wwt_biog_fla
-        +this.wwt_biog_fla*Cts.ct_ch4_lo.value/100
-      )*this.wwt_ch4_biog/100
-      *Cts.ct_ch4_m3.value
-      *Cts.ct_ch4_eq.value;
+      let ch4 = 0;
 
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
 
-    //TODO biogas boiler
-    wwt_KPI_GHG_biog_boiler(){
+    //TODO biogas valorized
+    wwt_KPI_GHG_biog_valorized(){
       let co2   = 0;
       let ch4   = 0;
       let n2o   = 0;
@@ -1031,31 +1027,28 @@ class Waste_Treatment extends Substage{
       return {total,co2,ch4,n2o};
     }
 
-    //TODO biogas engine
-    wwt_KPI_GHG_biog_engine(){
-      let co2   = 0;
-      let ch4   = 0;
-      let n2o   = 0;
+    //TODO biogas leaked
+    wwt_KPI_GHG_biog_leaked(){
+      //kg of biogas leaked
+      let biog_lkd = this.wwt_biog_pro*this.wwt_biog_lkd/100;
+      let ch4_biog = this.wwt_ch4_biog;
+
+      let co2 = 0;
+      let ch4 = (function(){
+        return biog_lkd*ch4_biog/100*Cts.ct_ch4_eq.value;
+      })();
+      let n2o = 0;
+
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
 
-    //TODO biogas injection to city grid
-    wwt_KPI_GHG_biog_injection(){
-      let co2   = 0;
-      let ch4   = 0;
-      let n2o   = 0;
-      let total = co2+ch4+n2o;
-      return {total,co2,ch4,n2o};
-    }
-
-    //TODO biogas leak
-    wwt_KPI_GHG_biog_leak(){
-      let co2   = 0;
-      let ch4   = 0;
-      let n2o   = 0;
-      let total = co2+ch4+n2o;
-      return {total,co2,ch4,n2o};
+    //conversion from %volume to %mass
+    wwt_biog_mass_conc(){
+      let BiogasCH4 = this.wwt_ch4_biog; //%vol
+      const MWCH4 = 16;    //gCH4/mol
+      const MWCO2 = 44;    //gCO2/mol
+      return 100*BiogasCH4*MWCH4/(BiogasCH4*MWCH4 + (100-BiogasCH4)*MWCO2);
     }
 
     //ghg from sludge management
@@ -1462,8 +1455,10 @@ class Waste_Onsite extends Substage{
       let total = co2+n2o+ch4;
       return {total,co2,n2o,ch4};
     }
+
     //biogas
     wwo_KPI_GHG_biog(){
+      //TODO update for new biogas equations
       let co2   = 0;
       let ch4   = (this.wwo_biog_pro-this.wwo_biog_val-this.wwo_biog_fla+this.wwo_biog_fla*Cts.ct_ch4_lo.value/100)*this.wwo_ch4_biog/100*Cts.ct_ch4_m3.value*Cts.ct_ch4_eq.value;
       let n2o   = 0;

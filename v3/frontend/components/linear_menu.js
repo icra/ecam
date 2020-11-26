@@ -34,14 +34,6 @@ let linear_menu = new Vue({
           onclick="ecam.show('select_scenario')"
           :selected="current_view=='select_scenario'"
         >
-          <div>Layouts</div>
-        </div>
-
-        <!--general settings-->
-        <div
-          onclick="ecam.show('configuration')"
-          :selected="current_view=='configuration'"
-        >
           <div>Configuration</div>
         </div>
 
@@ -50,7 +42,7 @@ let linear_menu = new Vue({
           onclick="ecam.show('tier_b')"
           :selected="current_view=='tier_b'"
         >
-          <div>Stages</div>
+          <div>Inventory</div>
         </div>
 
         <!--overview-->
@@ -58,7 +50,7 @@ let linear_menu = new Vue({
           onclick="ecam.show('overview')"
           :selected="is_summaries_menu_visible()"
         >
-          <div>Overview</div>
+          <div>Results</div>
         </div>
 
         <!--more (old sidebar)-->

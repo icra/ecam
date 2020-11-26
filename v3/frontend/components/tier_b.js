@@ -24,6 +24,7 @@ let tier_b=new Vue({
       "Emission factors"       : true,
       "Fuel consumption"       : true,
       "Energy performance"     : true,
+      "Biogas"                 : true,
       "Discharge"              : true,
       "Sludge management"      : true,
       "Costs"                  : true,

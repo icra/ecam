@@ -11,123 +11,142 @@ let landing = new Vue({
 
   template:`
     <div id=landing v-if="visible && Languages.ready">
-      <div id=first_container>
-        <!--title and introduction-->
+      <!--title-->
+      <div
+        class=container
+        style="
+          display:grid;
+          grid-template-columns:50% 50%;
+        "
+      >
         <div>
           <h1 class="blue_h1" style="padding-bottom:0px">
-            A tool for water and wastewater utilities
+            Assess the carbon footprint and energy performance of your urban water utility
           </h1>
-          <h1 style="color:#333;font-size:x-large">
-            {{translate("assess_your_utility")}}
+          <h1 style="color:#333;font-size:large">
+            ECAM empowers water and wastewater utility operators to assess their greenhouse gas emissions and energy consumption.
           </h1>
+          <ul 
+            style="
+              font-size:large;
+              padding-inline-start:20px;
+            "
+          >
+            <li>Perfect for climate reporting needs</li>
+            <li>Overview of system-wide greenhouse gas emissions</li>
+            <li>IPCC-2019 compliant and open-source</li>
+          </ul>
 
-          <!--ecam is designed for blablabla-->
-          <div style="color:#58595b;font-size:large">
-            The <b>ECAM tool</b> is designed for assessing the carbon emissions and
-            energy consumption of the urban water cycle that are within the
-            operational boundaries of water and wastewater utilities and prepare
-            these utilities for future reporting needs on climate mitigation.
+          <div>
+            <button class="start" onclick="ecam.show('select_scenario')">
+              Start your assessment
+            </button>
+          </div>
+          <div>
+            <button class="start" onclick="alert('in development')" style="background:var(--color-level-generic-secondary)">
+              Are you a new user?
+            </button>
           </div>
         </div>
+        <div>
+          <img
+            src="frontend/img/landing/infographic.png"
+            style="width:100%"
+          >
+        </div>
+      </div>
 
-        <div id=second_container >
-          <!--start-->
-          <div class=button_container>
-            <div>
-              <div>
-                <img src="frontend/img/viti/home/home-icon-newuser.svg" style="width:50%">
-              </div>
-            </div>
-            <div>
-              <button
-                onclick="ecam.show('select_scenario')"
-                style="
-                  padding:1em 5em;
-                  font-size:x-large;
-                  background:var(--color-secondary-green);
-                  color:white;
-                "
-              >
-                <div v-html="'Start using ECAM'"></div>
-              </button>
-            </div>
-          </div>
+      <!--laptop-->
+      <div
+        class="container white"
+        style="
+          display:grid;
+          grid-template-columns:50% 50%;
+        "
+      >
+        <div>
+          <img
+            src="frontend/img/landing/laptop.png"
+            style="width:100%"
+          >
+        </div>
+        <div>
+          <h1 class=blue_h1>
+            Overview of greenhouse gas emissions at utility level? Possible with ECAM!
+          </h1>
+
+          <button class=start 
+            style="
+              border:2px solid black;
+              background:white;
+              color:black;
+            "
+          >
+            Take a look at our video tutorials
+          </button>
+
+          <p>
+            Simply get started without previous knowledge: Take an assessment
+            of your water and wastewater utillity to receive an overview of
+            direct and indirect greenhouse gas emissions at a system-wide level
+            and identify areas of improvement.
+          </p>
         </div>
       </div>
 
       <!--learn more-->
-      <div id=third_container>
-        <p style="font-size:x-large;color:var(--color-level-generic);text-align:center">
-          <b>Learn more</b>
-        </p>
-
-        <!--grid 3-->
-        <div style="display:grid;grid-template-columns:30% 30% 30%;grid-gap:5%">
-          <div>
-            <img src="frontend/img/viti/home/home-icon-opensource.svg" style="width:50%">
-            <p><b>Open source</b></p>
-            <div>
-              The <b>ECAM tool</b> is a free and open source tool.
-              The source code lives in <a target=_blank href=//github.com/icra/ecam>github</a>.
-              <a href=# onclick="ecam.show('open_source')">Learn more</a>.
-            </div>
-          </div>
-
-          <div>
-            <img src="frontend/img/viti/home/home-icon-aboutus.svg" style="width:50%">
-            <p><b>About us</b></p>
-
-            <div>
-              The web interface and new features for the <b>ECAM tool</b>
-              were developed by ICRA, IWA, and GIZ under the WaCCliM project.
-              <a href=# onclick="ecam.show('about')">Learn more</a>.
-            </div>
-          </div>
-
-          <div>
-            <img src="frontend/img/viti/home/home-icon-wacclim.svg" style="width:50%">
-            <p><b>WaCCliM</b></p>
-            <div>
-              The tool is developed as part of the
-              <a target=_blank href=//wacclim.org/>WaCCliM project</a>.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!--very powerful-->
-      <div id=fourth_container>
-        <div>
-          <div style="
-            border:1px solid #ccc;
-            position:relative;
-            width:400px;
-            height:300px;
-            margin:auto;
-            margin-top:-3em;
-            margin-bottom:3em;
-            background:white;
-            box-shadow:0px 0px 12px #ccc;
+      <div class="container">
+        <h1 style="text-align:center">Learn more about the project</h1>
+        <div
+          style="
+            display:grid;
+            grid-template-columns:30% 30% 30%;
+            grid-gap:5%;
           "
-          >
-            <img src="frontend/img/viti/home/home-screenshot.svg">
+        >
+          <div class=learn_more_item onclick="window.open('https://github.com/icra/ecam')">
+            <div style="display:flex;justify-content:space-between;align-items:flex-end">
+              <b>Open source</b>
+              <img src="frontend/img/landing/open-source.png">
+            </div>
+            <p>
+              ECAM is a free and open source
+              tool. The source code is openly
+              published for use and
+              modification on github.
+            </p>
           </div>
-        </div>
-        <div>
-          <h1 style="font-size:x-large">Take a look on the tutorials</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-            nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam.
-          </p>
-          <p>
-            <button>Discover the tool!</button>
-          </p>
+
+          <div class=learn_more_item onclick="ecam.show('about')">
+            <div style="display:flex;justify-content:space-between;align-items:flex-end">
+              <b>About us</b>
+              <img src="frontend/img/landing/about.png">
+            </div>
+            <p>
+              ECAM's web interface and
+              content were developed jointly
+              by ICRA, GIZ and IWA.
+            </p>
+          </div>
+
+          <div class=learn_more_item onclick="window.open('https://wacclim.org')">
+            <div style="display:flex;justify-content:space-between;align-items:flex-end">
+              <b>WaCClim</b>
+              <img src="frontend/img/landing/wacclim.png">
+            </div>
+            <p>
+              ECAM was developed as part of
+              WaCCliM, a project that supports
+              water and wastewater utilities to
+              become climate-smart.
+            </p>
+          </div>
         </div>
       </div>
 
       <!--questions-->
-      <div id=fifth_container>
-        Do you have any question? &emsp;
+      <div id=questions>
+        Do you have questions? &emsp;
         <button
           style="
             color:white;
@@ -142,7 +161,7 @@ let landing = new Vue({
       <footer>
         <!--links-->
         <p>
-          <a href="https://wacclim.org" target=_blank>WaCCliM</a> |
+          <a href="https://wacclim.org" target=_blank>About WaCCliM</a> |
           <a href="#" onclick="ecam.show('about')">About us</a> |
           <a href="#" onclick="ecam.show('help')">Help</a> |
           <a href="mailto:wacclim@giz.de" target=_blank>Contact</a>
@@ -178,49 +197,55 @@ let landing = new Vue({
       #landing {
         background:#eff5fb;
       }
-      #landing #first_container {
-        padding:1em 6em 6em 6em;
-        padding-bottom:2em;
-        display:grid;
-        grid-template-columns:40% 58%;
-        grid-gap:2%;
-      }
       #landing h1 {
         padding-left:0;
         font-weight:700;
       }
-      #landing #first_container .blue_h1 {
-        font-size:xx-large;
-        color: var(--color-level-generic);
+      #landing h1.blue_h1 {
+        font-size:x-large;
+        color:var(--color-level-generic);
       }
 
-      #landing #second_container {
-        padding:6em;
-        padding-top:1em;
-        padding-bottom:1em;
-        text-align:center;
+      #landing button.start {
+        background:var(--color-level-generic);
+        border-radius:20px;
+        border:none;
+        color:white;
+        display:block;
+        padding:1em 2em;
+        width:50%;
+        margin-bottom:5px;
+        font-weight:bold;
       }
-      #landing #second_container .button_container {
+
+      #landing div.container {
+        padding:1em 6em 6em 6em;
+        padding-bottom:2em;
+      }
+      #landing div.container.white{
         background:white;
-        box-shadow:0px 0px 10px #ccc;
-        padding:1em;
-        padding-top:0;
       }
 
-      #landing #third_container {
-        text-align:center;
+      #landing div.learn_more_item {
         background:white;
-        padding:3em;
-        padding-bottom:6em;
+        box-shadow:5px 5px 10px #ccc;
+        padding:1em 2em;
+        margin-top:10px;
+        border:1px solid transparent;
+      }
+      #landing div.learn_more_item:hover {
+        border:1px solid #ccc;
+      }
+      #landing div.learn_more_item b {
+        font-size:larger;
+      }
+      #landing div.learn_more_item img {
+        width:100px;
+        width:90px;
+        display:block;
       }
 
-      #landing #fourth_container {
-        display:grid;
-        grid-template-columns:49% 49%;
-        grid-gap:2%;
-      }
-
-      #landing #fifth_container {
+      #landing #questions {
         font-size:large;
         text-align:center;
         padding:3em;

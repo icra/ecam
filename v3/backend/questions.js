@@ -274,12 +274,15 @@ let Questions={
     "wwt_producing_biogas":{
       variables:[
         "wwt_biog_pro",
-        "wwt_biog_val",
         "wwt_biog_fla",
+        "wwt_biog_val",
+        "wwt_biog_lkd",
+
         "wwt_ch4_biog",
-        "wwt_nrg_biog",
         "wwt_dige_typ",
         "wwt_fuel_dig",
+        "wwt_nrg_biog",
+
         "wwt_KPI_biog_x_bod",
         "wwt_KPI_GHG_dig_fuel",
         "wwt_KPI_GHG_biog",
@@ -364,7 +367,8 @@ let Questions={
 
     "wwt_sludge_mgmt":{
       variables:[
-        "wwt_dryw_slu",
+        "wwt_mass_slu",
+        "wwt_bod_slud",
         "wwt_slu_disp",
         "wwt_KPI_sludg_prod",
         "wwt_KPI_dry_sludge",

@@ -13,7 +13,6 @@ let ecam={
   views:{
     landing,
     select_scenario,
-    configuration,
     countries,
     population,
     gwp_table,
@@ -191,7 +190,7 @@ let ecam={
     });
 
     //update constants according to selected GWP
-    configuration.set_constants_from_gwp_report();
+    select_scenario.set_constants_from_gwp_report();
   },
 
   //add new scenario

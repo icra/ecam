@@ -17,14 +17,14 @@ let countries = new Vue({
 
     //set variables from selected country
     set_variables_from_selected_country(){
-      configuration.set_variables_from_selected_country();
+      select_scenario.set_variables_from_selected_country();
     },
   },
 
   template:`
     <div id=countries v-if="visible && Languages.ready">
       <h1 style="text-align:center">
-        <span onclick="ecam.show('configuration')">{{translate('configuration')}}</span>
+        <span onclick="ecam.show('select_scenario')">{{translate('configuration')}}</span>
         &rsaquo;
         <span style=color:black>{{translate('Countries')}}</span>
       </h1>

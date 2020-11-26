@@ -8,9 +8,9 @@ linear_menu.visible = 1;
 stages_menu.visible = 0;
 
 /*initial page to display*/
-//ecam.show('help');
-//go_to('Waste','Collection');
-variable.view('wwt_KPI_GHG_biog');
+ecam.show('select_scenario');
+//go_to('Waste','Treatment');
+//variable.view('wwt_KPI_GHG_biog');
 
 /*default values*/
 Global.General.conv_kwh_co2 =    0.7; //conversion factor for grid electricity (kgCO2/kWh)
