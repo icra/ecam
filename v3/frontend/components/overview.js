@@ -6,19 +6,11 @@ let overview = new Vue({
   },
 
   methods:{
-    translate,
-    format,
   },
 
   template:`
     <div id=overview v-if="visible && Languages.ready">
+      to be removed
     </div>
-  `,
-
-  style:`
-    <style>
-      #overview {
-      }
-    </style>
   `,
 });

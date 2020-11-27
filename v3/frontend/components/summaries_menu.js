@@ -2,7 +2,7 @@ let summaries_menu = new Vue({
   el:"#summaries_menu",
 
   data:{
-    visible:true,
+    visible:false,
     Languages,
   },
 

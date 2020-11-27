@@ -8,7 +8,7 @@ linear_menu.visible = 1;
 stages_menu.visible = 0;
 
 /*initial page to display*/
-ecam.show('select_scenario');
+//ecam.show('select_scenario');
 //go_to('Waste','Treatment');
 //variable.view('wwt_KPI_GHG_biog');
 

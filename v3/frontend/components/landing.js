@@ -1,7 +1,7 @@
 let landing = new Vue({
   el:'#landing',
   data:{
-    visible:false,
+    visible:true,
     Global,
     Languages,
   },
@@ -32,9 +32,9 @@ let landing = new Vue({
               padding-inline-start:20px;
             "
           >
-            <li>Perfect for climate reporting needs</li>
-            <li>Overview of system-wide greenhouse gas emissions</li>
-            <li>IPCC-2019 compliant and open-source</li>
+            <li>Perfect for climate reporting needs.</li>
+            <li>Overview of system-wide greenhouse gas emissions.</li>
+            <li>IPCC-2019 compliant and open-source.</li>
           </ul>
 
           <div>
