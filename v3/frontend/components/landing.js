@@ -115,6 +115,7 @@ let landing = new Vue({
               published for use and
               modification on github.
             </p>
+            <a>Click here to access github</a>
           </div>
 
           <div class=learn_more_item onclick="ecam.show('about')">
@@ -127,6 +128,7 @@ let landing = new Vue({
               content were developed jointly
               by ICRA, GIZ and IWA.
             </p>
+            <a>Click here to learn more</a>
           </div>
 
           <div class=learn_more_item onclick="window.open('https://wacclim.org')">
@@ -140,6 +142,7 @@ let landing = new Vue({
               water and wastewater utilities to
               become climate-smart.
             </p>
+            <a>Click here to access wacclim.org</a>
           </div>
         </div>
       </div>

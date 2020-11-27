@@ -270,7 +270,7 @@ let select_scenario=new Vue({
               <!--select current layout-->
               <td style="background:white;text-align:right">
                 <img
-                  @click="is_configuration_open = (scenario==Global) ? is_configuration_open^1 : is_configuration_open"
+                  @click="is_configuration_open=(scenario==Global)?is_configuration_open^1:true;set_current_scenario(scenario)"
                   class=icon
                   :src="'frontend/img/viti/select_scenario/icon-edit-system'+(scenario==Global?'':'-grey')+'.svg'"
                   style="cursor:pointer"
@@ -326,7 +326,7 @@ let select_scenario=new Vue({
               </td>
 
               <!--options-->
-              <td style="text-align:left">
+              <td style="text-align:center">
                 <button
                   @click="delete_scenario(scenario)"
                   :disabled="scenario==Global"
@@ -367,7 +367,7 @@ let select_scenario=new Vue({
                       display:grid;
                       grid-template-columns:49% 49%;
                       grid-gap:2% 20px;
-                      padding-bottom:3em;
+                      padding-bottom:2em;
                     "
                   >
                     <!--assessment period-->
