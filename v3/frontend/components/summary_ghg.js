@@ -4,7 +4,7 @@ let summary_ghg = new Vue({
     visible:false,
 
     //folded sections
-    unfolded_levels:[],
+    unfolded_levels:['Water','Waste'],
 
     //backend
     Global,
@@ -48,6 +48,37 @@ let summary_ghg = new Vue({
       <!--summary table-->
       <div>
         <table style="margin:auto;width:70rem;border-spacing:1px">
+          <!--total ghg and nrg-->
+          <tbody style="background:var(--color-level-generic);color:white">
+            <tr>
+              <td colspan=2 style="font-size:large;text-align:center;padding:2em;vertical-align:center">
+                Total
+              </td>
+              <!--total emissions-->
+              <td style="background:inherit;">
+                <div style="
+                  display:flex;
+                  justify-content:center;
+                  text-align:center;
+                  padding-left:1em;
+                  padding-right:1em;
+                ">
+                  <div>
+                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
+                    <div class=number_placeholder v-html="format(Global.TotalGHG())"></div>
+                  </div>
+                </div>
+              </td>
+
+              <!--total energy consumption-->
+              <td style="text-align:center">
+                <div style="color:white">kWh</div>
+                <div class=number_placeholder style="margin:auto">
+                  {{format(Global.TotalNRG())}}
+                </div>
+              </td>
+            </tr>
+          </tbody>
           <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)">
             <!--level 1-->
             <tr :style="{background:l1.color,color:'white'}">
@@ -65,7 +96,7 @@ let summary_ghg = new Vue({
                   </a>
                 </div>
                 <div>
-                  <img :src="'frontend/img/'+l1.icon" style="width:65px">
+                  <img :src="'frontend/img/'+l1.icon" style="width:50px;background:white;border-radius:50%">
                 </div>
               </td>
 
@@ -107,7 +138,9 @@ let summary_ghg = new Vue({
             >
               <!--level 2 name and icon-->
               <td
-                colspan=2
+                :style="{background:'var(--color-level-'+l1.level+'-secondary)'}"
+              ></td>
+              <td
                 :style="{textAlign:'center',background:'var(--color-level-'+l1.level+'-secondary)'}"
               >
                 <div style="font-size:large">
@@ -116,7 +149,7 @@ let summary_ghg = new Vue({
                   </a>
                 </div>
                 <div>
-                  <img :src="'frontend/img/'+l2.icon" style="width:75px;">
+                  <img :src="'frontend/img/'+l2.icon" style="width:45px;">
                 </div>
               </td>
 
@@ -152,43 +185,6 @@ let summary_ghg = new Vue({
                   <div
                     v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_nrg_cons']).sum() )"
                   ></div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-
-          <!--total ghg and nrg-->
-          <tbody style="background:var(--color-level-generic);color:white">
-            <tr>
-              <td></td>
-              <td style="font-size:large;text-align:center">
-                <div>Total</div>
-                <div>
-                  <img src="frontend/img/sources1.png" style="width:65px">
-                  <img src="frontend/img/energy.png" style="width:65px">
-                </div>
-              </td>
-              <!--total emissions-->
-              <td style="background:inherit;">
-                <div style="
-                  display:flex;
-                  justify-content:center;
-                  text-align:center;
-                  padding-left:1em;
-                  padding-right:1em;
-                ">
-                  <div>
-                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
-                    <div class=number_placeholder v-html="format(Global.TotalGHG())"></div>
-                  </div>
-                </div>
-              </td>
-
-              <!--total energy consumption-->
-              <td style="text-align:center">
-                <div style="color:white">kWh</div>
-                <div class=number_placeholder style="margin:auto">
-                  {{format(Global.TotalNRG())}}
                 </div>
               </td>
             </tr>

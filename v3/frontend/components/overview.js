@@ -10,7 +10,9 @@ let overview = new Vue({
 
   template:`
     <div id=overview v-if="visible && Languages.ready">
-      to be removed
+      <p style="text-align:center">
+        <i>Click a tab in the menu above.</i>
+      </p>
     </div>
   `,
 });

@@ -14,7 +14,7 @@ let about = new Vue({
   template:`
     <div id=about v-if="visible && Languages.ready">
       <!--about-->
-      <div>
+      <div style="background:#eff5fb;">
         <h1>About</h1>
 
         <p>
@@ -22,7 +22,7 @@ let about = new Vue({
           <a target=_blank href='http://www.icra.cat/'>ICRA</a>,
           <a target=_blank href='http://www.iwa-network.org'>IWA</a>, and
           <a target=_blank href='https://www.giz.de/en/html/index.html'>GIZ</a> under the
-          <a target=_blank href='http://www.iwa-network.org/WaCCliM/es/'>WaCCliM project</a>.
+          <a target=_blank href='https://wacclim.org'>WaCCliM project</a>.
         </p>
 
         <p>
@@ -49,7 +49,7 @@ let about = new Vue({
       </div>
 
       <!--special acknowledgements-->
-      <div style="background:#eff5fb;">
+      <div>
         <h1 style="padding-left:0">Special acknowledgements</h1>
 
         <p>

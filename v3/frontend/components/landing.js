@@ -72,7 +72,7 @@ let landing = new Vue({
         </div>
         <div>
           <h1 class=blue_h1>
-            Overview of greenhouse gas emissions at utility level? Possible with ECAM!
+            Overview of greenhouse gas emissions at utility level?<br>Possible with ECAM!
           </h1>
 
           <button class=start 
@@ -149,11 +149,14 @@ let landing = new Vue({
 
       <!--questions-->
       <div id=questions>
-        Do you have questions? &emsp;
+        <div>
+          Do you have questions?
+        </div>
         <button
           style="
             color:white;
             border-color:white;
+            margin-top:10px;
           "
           onclick="window.open('mailto:wacclim@giz.de')"
           v-html="'Contact us'"
@@ -199,7 +202,9 @@ let landing = new Vue({
     <style>
       #landing {
         background:#eff5fb;
+        font-size:larger;
       }
+
       #landing h1 {
         padding-left:0;
         font-weight:700;
@@ -222,10 +227,10 @@ let landing = new Vue({
       }
 
       #landing div.container {
-        padding:1em 6em 6em 6em;
+        padding:1em 10em 8em 8em;
         padding-bottom:2em;
       }
-      #landing div.container.white{
+      #landing div.container.white {
         background:white;
       }
 

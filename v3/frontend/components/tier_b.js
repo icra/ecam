@@ -344,7 +344,7 @@ let tier_b=new Vue({
             </div>
             <div style="margin-top:5px;display:flex;justify-content:space-between">
               <div>
-                Enter here the inputs for this stage
+                Enter the values for this stage
               </div>
               <div style="margin-right:10px" title="highlight related inputs/outputs">
                 <label>

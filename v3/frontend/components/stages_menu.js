@@ -136,9 +136,7 @@ let stages_menu=new Vue({
                           v-html="ss.name"
                           style="font-size:smaller"
                         ></a>
-                      </div>
-                      <!--delete substage btn-->
-                      <div>
+                        <!--delete substage btn-->
                         <button
                           @click="delete_substage(s.level,s.sublevel,ss)"
                           class="delete_substage"
@@ -205,7 +203,7 @@ let stages_menu=new Vue({
         border:none;
       }
       #stages_menu img {
-        margin: -10px;
+        margin:-5px;
         padding:0;
         width:70px;
         border:3px solid transparent;
@@ -220,7 +218,6 @@ let stages_menu=new Vue({
         cursor:pointer;
         color:red;
         padding:0 5px;
-        border-radius:0;
         border-color:#aaa;
         font-size:large;
       }

@@ -181,11 +181,11 @@ let select_scenario=new Vue({
       <!--title-->
       <div>
         <h2 style="text-align:center;margin-bottom:0">
-          Configuration ({{Scenarios.length}} layouts)
+          Configuration ({{Scenarios.length}} assessments)
         </h2>
         <p style="text-align:center;color:#666">
           <b>
-            Here you can create, edit, load, save and compare layouts
+            Create, edit, load, save and compare assessments.
           </b>
         </p>
       </div>
@@ -217,10 +217,10 @@ let select_scenario=new Vue({
             </div>
             <div style="font-size:smaller">
               <!--load mode radio btns-->
-              <label title="append json file to current layouts">
+              <label title="append json file to current list of assessments">
                 <input type=radio v-model="loadfile_replace" :value='false'>Append
               </label>
-              <label title="replace current layouts with json file">
+              <label title="replace current assessments with json file">
                 <input type=radio v-model="loadfile_replace" :value='true'>Replace
               </label>
             </div>
@@ -238,19 +238,19 @@ let select_scenario=new Vue({
 
         <!--save file-->
         <div>
-          <button @click="save_to_file()" title="save all layouts to a JSON file">
+          <button @click="save_to_file()" title="save all assessments to a JSON file">
             <div style="display:flex;align-items:center">
               <img
                 class=icon
                 src="frontend/img/viti/select_scenario/icon-save.svg"
               >
-              <span>Save all layouts</span>
+              <span>Save all assessments</span>
             </div>
           </button>
         </div>
       </div>
 
-      <!--select layout table-->
+      <!--select scenario table-->
       <div>
         <table style="margin:20px auto;width:90%;" id=main_table>
           <thead>
@@ -267,7 +267,7 @@ let select_scenario=new Vue({
 
           <tbody v-for="scenario in Scenarios">
             <tr>
-              <!--select current layout-->
+              <!--select current scenario-->
               <td style="background:white;text-align:right">
                 <img
                   @click="is_configuration_open=(scenario==Global)?is_configuration_open^1:true;set_current_scenario(scenario)"
@@ -277,7 +277,7 @@ let select_scenario=new Vue({
                 >
               </td>
 
-              <!--layout name-->
+              <!--scenario name-->
               <td
                 @click="set_current_scenario(scenario)"
                 style="padding:0;background:white;cursor:pointer"
@@ -346,7 +346,7 @@ let select_scenario=new Vue({
                         v-model="Global.General.Name"
                         @keyup.enter="are_you_editing_name=false"
                         maxlength=50
-                        placeholder="Layout name"
+                        placeholder="Assessment name"
                         style="border:1px solid #ccc"
                       >
                       <button @click="are_you_editing_name=false">ok</button>
@@ -556,28 +556,28 @@ let select_scenario=new Vue({
             <td style="background:white;text-align:left" colspan=6>
               <button onclick="ecam.new_scenario()"
                 style="font-size:large"
-                v-html="'+ create new layout'"
+                v-html="'+ create new assessment'"
               ></button>
             </td>
           </tr>
         </table>
       </div>
 
-      <!--compare layouts table-->
+      <!--compare scenarios table-->
       <div v-if="Scenarios.length>1" style="margin-top:2em">
         <h1 style="text-align:center">
-          Compare layouts
+          Compare assessments
         </h1>
 
         <p style="text-align:center;color:#666">
           <b>
-            Select 'compare' on two or more layouts and they will appear in the
-            following table.  The darker column is the current layout you are
+            Select 'compare' on two or more assessments and they will appear in the
+            following table.  The darker column is the current assessment you are
             editing.
           </b>
         </p>
 
-        <!--compare layouts table-->
+        <!--compare scenarios table-->
         <table style="margin:10px auto" v-if="scenarios_compared.length">
           <tr>
             <td></td>
@@ -652,7 +652,7 @@ let select_scenario=new Vue({
         <div
           v-if="scenarios_compared.length==0"
           style="text-align:center;font-style:italic"
-          v-html="'~No layouts included to comparison'"
+          v-html="'~No assessments included to comparison'"
         ></div>
       </div>
     </div>

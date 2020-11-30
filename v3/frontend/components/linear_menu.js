@@ -29,7 +29,7 @@ let linear_menu = new Vue({
           <div>Home</div>
         </div>
 
-        <!--layouts-->
+        <!--scenarios-->
         <div
           onclick="ecam.show('select_scenario')"
           :selected="current_view=='select_scenario'"
@@ -62,7 +62,7 @@ let linear_menu = new Vue({
         </div>
       </div>
 
-      <!--current layout-->
+      <!--current scenario-->
       <div onclick="ecam.show('configuration')">
         <div>
           <b style="color:#aaa">You are editing</b>

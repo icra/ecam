@@ -8,15 +8,10 @@ linear_menu.visible = 1;
 stages_menu.visible = 0;
 
 /*initial page to display*/
-//ecam.show('select_scenario');
+ecam.show('summary_ghg');
 //go_to('Waste','Treatment');
 //variable.view('wwt_KPI_GHG_biog');
 
 /*default values*/
-Global.General.conv_kwh_co2 =    0.7; //conversion factor for grid electricity (kgCO2/kWh)
-Global.General.prot_con     =     22; //prot consumption                       (kg/person/year)
-Global.General.bod_pday     =     37; //BOD5                                   (g/person/day)
-Global.General.bod_pday_fs  =     37; //BOD5 in faecal sludge                  (g/person/day)
-Global.Water.ws_resi_pop    =   1000;
-Global.Waste.ww_resi_pop    =   2000;
-Global.Waste.ww_vol_gene    = 150000;
+Global.General.Country="Algeria";
+select_scenario.set_variables_from_selected_country();
