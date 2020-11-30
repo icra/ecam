@@ -876,7 +876,7 @@ class Waste_Treatment extends Substage{
     this.wwt_time_slu_sto   = 0;
     this.wwt_mass_slu_comp  = 0;
     this.wwt_mass_slu_inc   = 0;
-    this.wwt_temp_inc       = 0;
+    this.wwt_temp_inc       = 1023;
     this.wwt_mass_slu_app   = 0;
     this.wwt_soil_typ       = 0; //Option ("Fine" or "Coarse")
     this.wwt_slu_la_N_cont  = 0; //Total Nitrogen (% of dry weight)
@@ -1006,10 +1006,10 @@ class Waste_Treatment extends Substage{
     wwt_KPI_GHG_biog_flared(){
       //kg of biogas flared
       let biog_fla = this.wwt_biog_pro*this.wwt_biog_fla/100;
-      let ch4_biog = this.wwt_ch4_biog;
+      let ch4_biog = this.wwt_ch4_biog_mass_content(); //% of CH4 mass in biogas
 
       let co2=(function(){
-        return biog_fla*ch4_biog/100*(44/16);
+        return biog_fla*(ch4_biog/100)*(44/16);
       })();
       let n2o = 0;
       let ch4 = 0;
@@ -1030,13 +1030,11 @@ class Waste_Treatment extends Substage{
     //TODO biogas leaked
     wwt_KPI_GHG_biog_leaked(){
       //kg of biogas leaked
-      let biog_lkd = this.wwt_biog_pro*this.wwt_biog_lkd/100;
-      let ch4_biog = this.wwt_ch4_biog;
+      let biog_lkd = this.wwt_biog_pro*this.wwt_biog_lkd/100; //kg
+      let ch4_biog = this.wwt_ch4_biog_mass_content(); //% of CH4 mass in biogas
 
       let co2 = 0;
-      let ch4 = (function(){
-        return biog_lkd*ch4_biog/100*Cts.ct_ch4_eq.value;
-      })();
+      let ch4 = biog_lkd*(ch4_biog/100)*Cts.ct_ch4_eq.value;
       let n2o = 0;
 
       let total = co2+ch4+n2o;
@@ -1044,7 +1042,7 @@ class Waste_Treatment extends Substage{
     }
 
     //conversion from %volume to %mass
-    wwt_biog_mass_conc(){
+    wwt_ch4_biog_mass_content(){
       let BiogasCH4 = this.wwt_ch4_biog; //%vol
       const MWCH4   = 16; //gCH4/mol
       const MWCO2   = 44; //gCO2/mol

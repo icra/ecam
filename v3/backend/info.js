@@ -27,7 +27,7 @@ let Info={
   wwt_KPI_GHG_biog_flared:{magnitude:"Mass",unit:"kg CO2eq"},
   wwt_KPI_GHG_biog_valorized:{magnitude:"Mass",unit:"kg CO2eq"},
   wwt_KPI_GHG_biog_leaked:{magnitude:"Mass",unit:"kg CO2eq"},
-  wwt_biog_mass_conc:{magnitude:"Percentage",unit:"%"},
+  wwt_ch4_biog_mass_content:{magnitude:"Percentage",unit:"%"},
 
   //inputs that are options instead of numeric
   wwo_soil_typ     : {magnitude:"Option", table:"Soil type",                unit:"Soil type"},

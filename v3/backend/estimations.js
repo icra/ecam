@@ -55,26 +55,11 @@ let Estimations={
 
     //estimation for biogas produced
     wwt_biog_pro(substage){
-      //  1) Combined sludge to digestion (kg/d)
-      let wwt_mass_slu = substage.wwt_mass_slu;
-      //  2) Combined sludge VS (% VS/TS; aprox 80% of total solids is volatile; this percentage can be an input)
-      let VS_ratio = 80; //new input (%) TODO
-      //  3) VS to digestion = (1) * (2)/100;
-      let VS_to_digestion = VS_ratio*wwt_mass_slu/100;
-      //  4) VS destroyed = (3) * VS destruction (VS destruction is an input; default = 60%);
-      let VS_destroyed = VS_to_digestion * 0.60; //new input TODO
-      //  5) Digested sludge mass = (1) – (4)
-      let digested_sludge_mass = wwt_mass_slu - VS_destroyed;
-      //  6) Digested sludge VS = 100* [(3) – (4)]/(5)
-      let digested_sludge_VS = 100*(VS_to_digestion-VS_destroyed)/digested_sludge_mass;
-      //  7) Biogas mass = (1) – (5)
-      let biogas_mass = wwt_mass_slu - digested_sludge_mass;
-      //  8) Biogas methane concentration (in mass percentage, %)) = (100 * BiogMetVol *16/22.41)/[(BiogMetVol*16/22.41) + (100-BiogMetVol)*44/22.41)] ;
-      //TODO
-      //  9) Biogas methane mass = (7)*(8)/100;
-      //TODO
-      // 10) Biogas CO2 = (8) – (9)
-      //TODO
+      let wwt_mass_slu         = substage.wwt_mass_slu;               //kg | mass of combined sludge to digestion
+      let VS_to_digestion      = wwt_mass_slu * 0.80;                 //kg | VS to digestion: 80% of sludge mass
+      let VS_destroyed         = VS_to_digestion * 0.60;              //kg | VS destroyed: 60% of VS
+      let digested_sludge_mass = wwt_mass_slu - VS_destroyed;         //kg | mass of digested sludge
+      let biogas_mass          = wwt_mass_slu - digested_sludge_mass; //kg | biogas produced
       return biogas_mass;
     },
 
@@ -82,10 +67,6 @@ let Estimations={
       let P   = substage.wwt_serv_pop; //population
       let BOD = Global.General.bod_pday; //g/person/day
       return P * BOD * 0.001 * Global.Days(); //kg
-    },
-
-    wwt_temp_inc(substage){
-      return 1023;
     },
 
   //wwo

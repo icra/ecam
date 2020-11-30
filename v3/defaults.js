@@ -8,9 +8,11 @@ linear_menu.visible = 1;
 stages_menu.visible = 0;
 
 /*initial page to display*/
-ecam.show('summary_ghg');
-//go_to('Waste','Treatment');
-//variable.view('wwt_KPI_GHG_biog');
+//ecam.show('tier_b');
+go_to('Waste','Treatment');
+tier_b.disable_all_filters();
+tier_b.filters_active.Biogas=true;
+variable.view('wwt_biog_pro');
 
 /*default values*/
 Global.General.Country="Algeria";
