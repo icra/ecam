@@ -8,10 +8,10 @@
     - discuss layouts/asessments/systems/scenarios wording.
   * Nice to have:
     - First-Time user tutorial
-    - Opportunities page is important, but can come later!
     - Import/Export excel
       - import from excel module with Adrià Riu help. Each layout is a excel file.
       - "https://www.npmjs.com/package/exceljs"
+    - Opportunities page is important, but can come later!
 
 [DOING NOW]
   - Join layouts and configuration page
@@ -34,7 +34,7 @@
   - [ ] floating help (to be filled by viti)
   - [ ] sankey diagram export to jpg/png/svg
   - [ ] import layout from excel
-  - [ ] optgroups in selects
+  - [ ] optgroups in <select> elements
 
 [TO BE DONE WHEN V3 IS FEATURE FROZEN]
   - update help & about & docs

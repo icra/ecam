@@ -1046,9 +1046,9 @@ class Waste_Treatment extends Substage{
     //conversion from %volume to %mass
     wwt_biog_mass_conc(){
       let BiogasCH4 = this.wwt_ch4_biog; //%vol
-      const MWCH4 = 16;    //gCH4/mol
-      const MWCO2 = 44;    //gCO2/mol
-      return 100*BiogasCH4*MWCH4/(BiogasCH4*MWCH4 + (100-BiogasCH4)*MWCO2);
+      const MWCH4   = 16; //gCH4/mol
+      const MWCO2   = 44; //gCO2/mol
+      return 100*BiogasCH4*MWCH4/(BiogasCH4*MWCH4+(100-BiogasCH4)*MWCO2);
     }
 
     //ghg from sludge management
