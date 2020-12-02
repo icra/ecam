@@ -937,9 +937,9 @@ class Waste_Treatment extends Substage{
       let elec    = this.wwt_KPI_GHG_elec(); //number
       let sources = [
         this.wwt_KPI_GHG_fuel(),
-        this.wwt_KPI_GHG_dig_fuel(),
         this.wwt_KPI_GHG_tre(),
         this.wwt_KPI_GHG_biog(),
+        this.wwt_KPI_GHG_dig_fuel(),
         this.wwt_KPI_GHG_slu(),
         this.wwt_KPI_GHG_reus_trck(),
         this.wwt_KPI_GHG_disc(),
@@ -1018,8 +1018,8 @@ class Waste_Treatment extends Substage{
       return {total,co2,ch4,n2o};
     }
 
-    //TODO biogas valorized
     wwt_KPI_GHG_biog_valorized(){
+      //TODO biogas valorized doubt: discuss if we have to account for biogas valorized emissions
       let co2   = 0;
       let ch4   = 0;
       let n2o   = 0;

@@ -5,7 +5,7 @@
     - Graphs & report (Energy and GHGs [VITI]
       - Graphs should be downloadable
     - IPCC equations compliance
-    - discuss layouts/asessments/systems/scenarios wording.
+      - Lluís C.
   * Nice to have:
     - First-Time user tutorial
     - Import/Export excel
@@ -13,15 +13,11 @@
       - "https://www.npmjs.com/package/exceljs"
     - Opportunities page is important, but can come later!
 
-[DOING NOW]
-  - Join layouts and configuration page
-  - remove bod_pday_fs (faecal sludge) from Global and equations
+[DOING NOW - concrete tasks]
   - bug: variable.js / outputs that use this variable / drop-down selection
     (exceptions) value showed: now we see the Exceptions[key] object as a
     string instead of the input value
-  - [ ] implement latest GUI version from Laia
-  - [ ] equations.js CH4 and N2O (Lluís C.)
-  - [ ] design minimum required data filter
+  - [ ] create minimum required data filter
   - [ ] add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
     - [ ] abstracted volume  (wsa)
     - [ ] treated volume     (wst)
@@ -31,7 +27,7 @@
     - [ ] treated volume     (wwo)
   - [ ] onclose listener: trigger warning if ecam is accidentally closed
   - [ ] trigger error if version does not match when loading json files
-  - [ ] floating help (to be filled by viti)
+  - [ ] floating help indications
   - [ ] sankey diagram export to jpg/png/svg
   - [ ] import layout from excel
   - [ ] optgroups in <select> elements
@@ -56,7 +52,7 @@
         - Other.
 
       Enable to account for heat and cold recovery in water supply, sewer
-      networks or WWTP. In ECAM, it can just be a value of CO2eq calculated for
+      networks or WWTP. It can just be a value of CO2eq calculated for
       the specific project.
 
       Enable to enter the following values that add to the total carbon

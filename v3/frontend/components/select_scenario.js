@@ -564,7 +564,7 @@ let select_scenario=new Vue({
       </div>
 
       <!--compare scenarios table-->
-      <div v-if="Scenarios.length>1" style="margin-top:2em">
+      <div v-if="Scenarios.length>1" style="margin-top:2em;background:#eff5fb">
         <h1 style="text-align:center">
           Compare assessments
         </h1>
@@ -736,13 +736,6 @@ let select_scenario=new Vue({
 
       #select_scenario .warning input {
         color:#aaa;
-      }
-
-      .fade-enter-active, .fade-leave-active {
-        transition: opacity .2s;
-      }
-      .fade-enter, .fade-leave-to {
-        opacity: 0;
       }
     </style>
   `,

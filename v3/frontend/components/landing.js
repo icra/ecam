@@ -50,7 +50,7 @@ let landing = new Vue({
         </div>
         <div>
           <img
-            src="frontend/img/landing/infographic.png"
+            src="frontend/img/landing/water_cycle.png"
             style="width:100%"
           >
         </div>

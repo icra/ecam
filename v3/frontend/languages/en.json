@@ -1502,7 +1502,7 @@
 "#wwt_biog_fla_descr":"Biogas flared",
 "#wwt_biog_fla_expla":"Biogas flared is calculated with the difference between biogas produced minus biogas valorised. If biogas produced is 0 (unknown), biogas flared can be estimated",
 "#wwt_biog_pro_descr":"Biogas produced",
-"#wwt_biog_pro_expla":"Biogas produced during the assessment period by each wastewater treatment plant managed by the undertaking",
+"#wwt_biog_pro_expla":"Biogas produced during the assessment period by the wastewater treatment plant managed by the undertaking. The estimation is based on the dry mass of sludge produced (equations from section 2.2 - GHG calculations of Bridle model process sludge digestion, Laura Snip PhD thesis, page 19)",
 "#wwt_biog_val_descr":"Biogas valorised as heat and/or electricity",
 "#wwt_biog_val_expla":"Biogas valorized in the treatment plant to heat the digesters or the building and/or to run a Co-generator to generate heat and electricity",
 "#wwt_bod_effl_descr":"Effluent BOD5 load",

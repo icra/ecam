@@ -1,9 +1,10 @@
 let stages_menu=new Vue({
   el:"#stages_menu",
   data:{
-    visible                : false,
-    current_view           : null,
-    show_substages_summary : true,
+    visible:      false,
+    current_view: null,
+    show_table:   true,
+    show_substages_summary: true, //not used TODO
 
     //backend
     Global,
@@ -65,9 +66,14 @@ let stages_menu=new Vue({
     <!--linear menu COMPONENT-->
     <div id=stages_menu v-if="visible && Languages.ready">
       <div style="padding:8px">
-        <h1 style="text-align:center">Stages of the urban water cycle</h1>
+        <h1 style="padding-left:0">
+          Inventory - Stages of the urban water cycle
+          <button @click="show_table^=1">show/hide table</button>
+        </h1>
+
         <!--stages table-->
-        <div>
+        <transition name="fade">
+        <div v-if="show_table">
           <table id=main_table>
             <!--level 1-->
             <tr>
@@ -129,19 +135,25 @@ let stages_menu=new Vue({
                         align-items:center;
                       "
                     >
-                      <div>
-                        <a 
+                      <div style="display:flex;align-items:center;">
+                        <a
                           @click="go_to_substage(ss)"
                           :selected_substage="is_substage_selected(ss)"
-                          v-html="ss.name"
                           style="font-size:smaller"
+                          v-html="ss.name"
                         ></a>
+                        &nbsp;
                         <!--delete substage btn-->
                         <button
                           @click="delete_substage(s.level,s.sublevel,ss)"
                           class="delete_substage"
                           title="delete substage"
-                        >&#215;</button>
+                        >
+                          <img
+                            src="frontend/img/viti/select_scenario/icon-delete.svg"
+                            style="width:15px"
+                          >
+                        </button>
                       </div>
                     </div>
                     <!--ss emissions-->
@@ -183,6 +195,7 @@ let stages_menu=new Vue({
             </tr>
           </table>
         </div>
+        </transition>
       </div>
     </div>
   `,
@@ -195,18 +208,14 @@ let stages_menu=new Vue({
         border-bottom:1px solid #ccc;
       }
       #stages_menu #main_table {
-        width:80%;
-        margin:auto;
+        width:100%;
       }
       #stages_menu #main_table th,
       #stages_menu #main_table td {
         border:none;
       }
       #stages_menu img {
-        margin:-5px;
-        padding:0;
-        width:70px;
-        border:3px solid transparent;
+        width:50px;
       }
       #stages_menu td.l1{
         text-align:center;
@@ -216,14 +225,11 @@ let stages_menu=new Vue({
       }
       #stages_menu button.delete_substage {
         cursor:pointer;
-        color:red;
-        padding:0 5px;
-        border-color:#aaa;
-        font-size:large;
+        border:none;
+        padding:0;
       }
-      #stages_menu button.delete_substage:hover {
-        background:white;
-        border-color:black;
+      #stages_menu button.delete_substage:hover img {
+        /*TODO*/
       }
     </style>
   `,

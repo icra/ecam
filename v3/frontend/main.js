@@ -59,7 +59,8 @@ let ecam={
     stages_menu.visible      = view=='tier_b';
     stages_menu.current_view = view;
     linear_menu.current_view = view;
-    summaries_menu.visible = [
+
+    summaries_menu.visible = [ //TODO refactor this part
       'overview',
       'summary_ghg',
       'sankey_ghg',

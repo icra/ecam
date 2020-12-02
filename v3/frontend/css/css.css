@@ -233,3 +233,12 @@ ul.tabs > li:hover {
     text-decoration:none;
     border-bottom:4px solid var(--color-level-generic);
   }
+
+/*vue js transitions*/
+/*<transition name=fade></transition>*/
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
