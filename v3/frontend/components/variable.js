@@ -332,11 +332,27 @@ let variable=new Vue({
             <div v-if="get_variable_type(id)=='output'">
               <div>
                 <div v-if="!localization.sublevel">
-                  {{
-                    format(
-                      get_output_value(id, Global[localization.level])
-                    )
-                  }}
+
+                  <!--result is an emission (object)?-->
+                  <div v-if="Object.keys(get_output_partial_values(id,Global[localization.level])).length>1">
+                    <table style="font-size:smaller">
+                      <tr v-for="gas,key in get_output_partial_values(id,Global[localization.level])">
+                        <td v-html="key.toUpperCase().prettify()"></td>
+                        <td v-html="format(gas)"></td>
+                        <td v-html="get_current_unit(id).prettify()" class=unit></td>
+                      </tr>
+                    </table>
+                  </div>
+
+                  <!--result is a number-->
+                  <div v-else>
+                    {{
+                      format(
+                        get_output_value(id, Global[localization.level])
+                      )
+                    }}
+                  </div>
+
                   <span v-html="get_current_unit(id).prettify()" class=unit></span>
                 </div>
                 <div v-else>
@@ -348,6 +364,7 @@ let variable=new Vue({
                         <div>
                           <a @click="go_to_substage(ss)">{{ss.name}}</a>
                         </div>
+
                         <!--partial values-->
                         <div v-if="Object.keys(get_output_partial_values(id,ss)).length>1">
                           <table style="font-size:smaller">
@@ -358,6 +375,7 @@ let variable=new Vue({
                             </tr>
                           </table>
                         </div>
+
                         <!--total value-->
                         <div v-else>
                           <div
@@ -366,6 +384,7 @@ let variable=new Vue({
                           ></div>
                           <div v-html="get_current_unit(id).prettify()" class=unit style="text-align:right"></div>
                         </div>
+
                         <!--benchmark evaluation-->
                         <div v-if="Benchmarks[id]" style="text-align:center;margin-top:10px">
                           <div :style="{color:get_benchmark(ss).color}" title="benchmark evaluation">

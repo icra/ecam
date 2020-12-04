@@ -47,7 +47,7 @@ let linear_menu = new Vue({
 
         <!--overview-->
         <div
-          onclick="ecam.show('overview')"
+          onclick="ecam.show('summary_ghg')"
           :selected="is_summaries_menu_visible()"
         >
           <div>Results</div>
@@ -63,13 +63,13 @@ let linear_menu = new Vue({
       </div>
 
       <!--current scenario-->
-      <div onclick="ecam.show('configuration')">
+      <div onclick="ecam.show('select_scenario')">
         <div>
           <b style="color:#aaa">You are editing</b>
           <b>{{Global.General.Name}}</b>
         </div>
         <div>
-          <span v-html="format(Global.TotalGHG())"></span>
+          <span v-html="format(Global.TotalGHG().total)"></span>
           <span class=unit v-html="Info.TotalGHG.unit.prettify()"></span>
           &nbsp;
           <span :style="{color:(Global.Days()<=0?'red':'')}">
@@ -101,7 +101,6 @@ let linear_menu = new Vue({
       }
       #linear_menu #select_view > div {
         color:#3c3c3b;
-        font-size:12px;
         font-weight:bold;
         padding:2em 1em 0.2em 1em;
         border-bottom:4px solid transparent;

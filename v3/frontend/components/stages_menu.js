@@ -86,7 +86,7 @@ let stages_menu=new Vue({
                   :style="{color:is_tier_b_selected(l1.level)?'black':'white'}"
                 >
                   {{translate(l1.level)}}
-                  ({{format(Global[l1.level][l1.prefix+'_KPI_GHG']())}} <small>kg CO<sub>2</sub>eq</small>)
+                  ({{format(Global[l1.level][l1.prefix+'_KPI_GHG']().total)}} <small>kg CO<sub>2</sub>eq</small>)
                 </a>
               </td>
             </tr>

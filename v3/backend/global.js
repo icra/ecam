@@ -35,8 +35,22 @@ class Ecam{
   }
 
   //global GHG emissions and energy consumed
-  TotalGHG(){return this.Water.ws_KPI_GHG()+this.Waste.ww_KPI_GHG()}
-  TotalNRG(){return this.Water.ws_nrg_cons()+this.Waste.ww_nrg_cons()}
+  TotalGHG(){
+    let sources = [
+      this.Water.ws_KPI_GHG(),
+      this.Waste.ww_KPI_GHG(),
+    ];
+    let co2 = sources.map(s=>s.co2).sum();
+    let ch4 = sources.map(s=>s.ch4).sum();
+    let n2o = sources.map(s=>s.n2o).sum();
+    let total = sources.map(s=>s.total).sum();
+    return {total,co2,ch4,n2o};
+  }
+
+  //total energy consumed
+  TotalNRG(){
+    return this.Water.ws_nrg_cons()+this.Waste.ww_nrg_cons();
+  }
 
   //assesment period duration (in days and years)
   Days(){
@@ -201,16 +215,48 @@ class Water_stages{
       "ws_vol_fuel",
     ];
   }
+
   //GHG ws
-    ws_KPI_GHG_abs(){ return this.Abstraction.map( s=>s.wsa_KPI_GHG().total).sum(); }
-    ws_KPI_GHG_tre(){ return this.Treatment.map(   s=>s.wst_KPI_GHG().total).sum(); }
-    ws_KPI_GHG_dis(){ return this.Distribution.map(s=>s.wsd_KPI_GHG().total).sum(); }
-    ws_KPI_GHG(){
-      let wsa=this.ws_KPI_GHG_abs();
-      let wst=this.ws_KPI_GHG_tre();
-      let wsd=this.ws_KPI_GHG_dis();
-      return wsa+wst+wsd;
+    ws_KPI_GHG_abs(){
+      let sources = this.Abstraction.map(ss=>ss.wsa_KPI_GHG());
+      let co2 = sources.map(s=>s.co2).sum();
+      let ch4 = sources.map(s=>s.ch4).sum();
+      let n2o = sources.map(s=>s.n2o).sum();
+      let total = sources.map(s=>s.total).sum();
+      return {total,co2,ch4,n2o};
     }
+
+    ws_KPI_GHG_tre(){
+      let sources = this.Treatment.map(ss=>ss.wst_KPI_GHG());
+      let co2 = sources.map(s=>s.co2).sum();
+      let ch4 = sources.map(s=>s.ch4).sum();
+      let n2o = sources.map(s=>s.n2o).sum();
+      let total = sources.map(s=>s.total).sum();
+      return {total,co2,ch4,n2o};
+    }
+
+    ws_KPI_GHG_dis(){
+      let sources = this.Distribution.map(s=>s.wsd_KPI_GHG());
+      let co2 = sources.map(s=>s.co2).sum();
+      let ch4 = sources.map(s=>s.ch4).sum();
+      let n2o = sources.map(s=>s.n2o).sum();
+      let total = sources.map(s=>s.total).sum();
+      return {total,co2,ch4,n2o};
+    }
+
+    ws_KPI_GHG(){
+      let sources = [
+        this.ws_KPI_GHG_abs(),
+        this.ws_KPI_GHG_tre(),
+        this.ws_KPI_GHG_dis(),
+      ];
+      let co2 = sources.map(s=>s.co2).sum();
+      let ch4 = sources.map(s=>s.ch4).sum();
+      let n2o = sources.map(s=>s.n2o).sum();
+      let total = sources.map(s=>s.total).sum();
+      return {total,co2,ch4,n2o};
+    }
+
   //SL ws
     ws_serv_pop(){
       return this.Distribution.map(s=>s.wsd_serv_pop).sum();
@@ -235,6 +281,7 @@ class Water_stages{
       let wsd_serv_pop = this.Distribution.map(s=>s.wsd_serv_pop).sum(); //population
       return 1e3*wsd_auth_con/wsd_serv_pop/Global.Days()||0;
     }
+
   //---
   static from(json_obj){
     //return value
@@ -276,20 +323,51 @@ class Waste_stages{
     ];
   }
   //GHG ww
-    ww_KPI_GHG_col(){ return this.Collection.map(s=>s.wwc_KPI_GHG().total).sum(); }
-    ww_KPI_GHG_tre(){ return this.Treatment.map( s=>s.wwt_KPI_GHG().total).sum(); }
-    ww_KPI_GHG_ons(){ return this.Onsite.map(    s=>s.wwo_KPI_GHG().total).sum(); }
-    ww_KPI_GHG(){
-      let wwc = this.ww_KPI_GHG_col();
-      let wwt = this.ww_KPI_GHG_tre();
-      let wwo = this.ww_KPI_GHG_ons();
-      return wwc+wwt+wwo;
+    ww_KPI_GHG_col(){
+      let sources = this.Collection.map(ss=>ss.wwc_KPI_GHG());
+      let co2 = sources.map(s=>s.co2).sum();
+      let ch4 = sources.map(s=>s.ch4).sum();
+      let n2o = sources.map(s=>s.n2o).sum();
+      let total = sources.map(s=>s.total).sum();
+      return {total,co2,ch4,n2o};
     }
+    ww_KPI_GHG_tre(){
+      let sources = this.Treatment.map(ss=>ss.wwt_KPI_GHG());
+      let co2 = sources.map(s=>s.co2).sum();
+      let ch4 = sources.map(s=>s.ch4).sum();
+      let n2o = sources.map(s=>s.n2o).sum();
+      let total = sources.map(s=>s.total).sum();
+      return {total,co2,ch4,n2o};
+    }
+    ww_KPI_GHG_ons(){
+      let sources = this.Onsite.map(ss=>ss.wwo_KPI_GHG());
+      let co2 = sources.map(s=>s.co2).sum();
+      let ch4 = sources.map(s=>s.ch4).sum();
+      let n2o = sources.map(s=>s.n2o).sum();
+      let total = sources.map(s=>s.total).sum();
+      return {total,co2,ch4,n2o};
+    }
+    ww_KPI_GHG(){
+      let sources=[
+        this.ww_KPI_GHG_col(),
+        this.ww_KPI_GHG_tre(),
+        this.ww_KPI_GHG_ons(),
+      ];
+      let co2 = sources.map(s=>s.co2).sum();
+      let ch4 = sources.map(s=>s.ch4).sum();
+      let n2o = sources.map(s=>s.n2o).sum();
+      let total = sources.map(s=>s.total).sum();
+      return {total,co2,ch4,n2o};
+    }
+
   //ww SL
     ww_serv_pop(){
       let wwt = this.Treatment.map(s=>s.wwt_serv_pop).sum();
       let wwo = this.Onsite   .map(s=>s.wwo_onsi_pop).sum();
       return wwt+wwo;
+    }
+    ww_SL_serv_pop(){
+      return 100*this.ww_serv_pop()/this.ww_resi_pop;
     }
     ww_nrg_cons(){
       let wwc = this.Collection.map(s=>s.wwc_nrg_cons).sum();

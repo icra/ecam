@@ -81,6 +81,7 @@ let landing = new Vue({
               background:white;
               color:black;
             "
+            @click="alert('in development')"
           >
             Take a look at our video tutorials
           </button>

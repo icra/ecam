@@ -309,7 +309,7 @@ let select_scenario=new Vue({
               <!--ghg-->
               <td class=ghg>
                 <div>
-                  <span v-html="format(scenario.TotalGHG())"></span>
+                  <span v-html="format(scenario.TotalGHG().total)"></span>
                 </div>
               </td>
 

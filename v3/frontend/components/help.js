@@ -15,6 +15,8 @@ let help = new Vue({
         {{translate('help')}}
       </h1>
 
+      <p>in development</p>
+
       <ul class=tabs>
         <li>
           Video tutorials

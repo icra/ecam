@@ -98,11 +98,8 @@ function get_output_partial_values(code, stage){
 
 //sum of substages of one output
 function get_sum_of_substages(level,sublevel,output_code){
-  if(!Global[level]){
-    console.log(level);
-    throw 'level incorrect';
-  }
-  if(!Global[level][sublevel]) throw 'sublevel incorrect';
+  if(!Global[level])           throw `level "${level}" incorrect`;
+  if(!Global[level][sublevel]) throw `sublevel "${sublevel}" incorrect`;
   return Global[level][sublevel].map(ss=>{
     return get_output_value(output_code, ss);
   }).sum();

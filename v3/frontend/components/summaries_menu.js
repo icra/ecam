@@ -15,8 +15,8 @@ let summaries_menu = new Vue({
   template:`
     <div id=summaries_menu v-if="visible && Languages.ready">
       <div id=tabs>
-        <div :current="is_current_view('summary_ghg')" onclick="ecam.show('summary_ghg')">Summary GHG</div>
-        <div :current="is_current_view('sankey_ghg')"  onclick="ecam.show('sankey_ghg')">Sankey diagram GHG</div>
+        <div :current="is_current_view('summary_ghg')" onclick="ecam.show('summary_ghg')">Summary</div>
+        <div :current="is_current_view('sankey_ghg')"  onclick="ecam.show('sankey_ghg')">Sankey diagram</div>
         <div :current="is_current_view('diagram')"     onclick="ecam.show('diagram')">Diagram stages (water and wastewater flows)</div>
         <div :current="is_current_view('report')"      onclick="ecam.show('report')">Report/charts</div>
       </div>

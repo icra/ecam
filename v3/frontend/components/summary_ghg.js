@@ -8,6 +8,12 @@ let summary_ghg = new Vue({
 
     current_view:"charts", //table or charts
 
+    gas_colors:{
+      "co2":"#dadada",
+      "n2o":"#ff8d54",
+      "ch4":"#ffaa6e",
+    },
+
     //backend
     Global,
     Structure,
@@ -41,9 +47,9 @@ let summary_ghg = new Vue({
       var h = 200;
       var r = h/2;
 
-      var vis = d3.select(`#${id_container}`).append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
-      var pie = d3.layout.pie().value(function(d){return d.value;});
-      var arc = d3.svg.arc().outerRadius(r); // Declare an arc generator function
+      var vis = d3.select(`#${id_container}`).append("svg:svg").data([data]).attr("width",w).attr("height",h).append("svg:g").attr("transform","translate("+r+","+r+")");
+      var pie = d3.layout.pie().value(function(d){return d.value});
+      var arc = d3.svg.arc().outerRadius(r);//declare an arc generator function
 
       //select paths, use arc generator to draw
       var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
@@ -55,7 +61,7 @@ let summary_ghg = new Vue({
       //add the text
       arcs.append("svg:text")
         .attr("transform", function(d){
-          d.innerRadius = 50; /* Distance of label to the center*/
+          d.innerRadius = 40; /* Distance of label to the center*/
           d.outerRadius = r;
           return "translate(" + arc.centroid(d) + ")";}
         )
@@ -69,12 +75,12 @@ let summary_ghg = new Vue({
 
     draw_all_charts(){
       //GHG Water/Wastewater percentage
-      if(this.Global.TotalGHG()==0) return;
+      if(this.Global.TotalGHG().total==0) return;
 
       this.draw_pie_chart('chart_1',
         [
-          {"label":"", "value":100*Global.Waste.ww_KPI_GHG()/Global.TotalGHG()},
-          {"label":"", "value":100*Global.Water.ws_KPI_GHG()/Global.TotalGHG()},
+          {"label":"", "value":100*Global.Waste.ww_KPI_GHG().total/Global.TotalGHG().total},
+          {"label":"", "value":100*Global.Water.ws_KPI_GHG().total/Global.TotalGHG().total},
         ],[
           "var(--color-level-Waste)",
           "var(--color-level-Water)",
@@ -84,17 +90,23 @@ let summary_ghg = new Vue({
       this.draw_pie_chart('chart_2',
         Structure.filter(s=>s.sublevel).map(s=>{
           let label = "";
-          let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum()/Global.TotalGHG();
-          console.log(value);
+          let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum()/Global.TotalGHG().total;
           return {label,value};
-        }),[
-          "#55C3DC",
-          "#84D6E8",
-          "#B2EBF7",
-          "#EE6D56",
-          "#F59382",
-          "#F5B6AB",
-        ]
+        }),
+        Structure.filter(s=>s.sublevel).map(s=>s.color),
+      );
+
+      this.draw_pie_chart('chart_3',
+        [
+          {"label":"", "value":100*Global.TotalGHG().co2/Global.TotalGHG().total},
+          {"label":"", "value":100*Global.TotalGHG().n2o/Global.TotalGHG().total},
+          {"label":"", "value":100*Global.TotalGHG().ch4/Global.TotalGHG().total},
+        ],
+        [
+          this.gas_colors.co2,
+          this.gas_colors.n2o,
+          this.gas_colors.ch4,
+        ],
       );
     },
   },
@@ -103,32 +115,25 @@ let summary_ghg = new Vue({
     <div id=summary_ghg v-if="visible && Languages.ready">
       <!--title-->
       <div>
-        <b style=font-size:large>Summary GHG</b>
+        <b style=font-size:large>Summary</b>
         <p>
-          All GHG emissions and energy consumed are summarized in this page.
+          All GHG emissions and energy consumptions.
         </p>
       </div>
 
       <!--select current view-->
-      <div style="border:1px solid">
-        Tabs (TODO)
-        <ul>
-          <li>
-            <button @click="current_view='table'">
-              Table
-            </button>
-          </li>
-          <li>
-            <button @click="current_view='charts'">
-              Charts
-            </button>
-          </li>
-        </ul>
+      <div style="padding:1em;border:1px solid">
+        <button @click="current_view='table'" :selected="current_view=='table'">
+          Table
+        </button>
+        <button @click="current_view='charts'" :selected="current_view=='charts'">
+          Charts
+        </button>
       </div>
 
       <!--current view-->
       <div>
-        <!--current_view==table-->
+        <!--ghg emission table-->
         <div v-if="current_view=='table'">
           <table style="margin:auto;width:70rem;border-spacing:1px">
             <!--total ghg and nrg-->
@@ -148,7 +153,7 @@ let summary_ghg = new Vue({
                   ">
                     <div>
                       <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
-                      <div class=number_placeholder v-html="format(Global.TotalGHG())"></div>
+                      <div class=number_placeholder v-html="format(Global.TotalGHG().total)"></div>
                     </div>
                   </div>
                 </td>
@@ -197,7 +202,7 @@ let summary_ghg = new Vue({
                       <div
                         class=number_placeholder
                         :style="{color:l1.color,borderColor:l1.color}"
-                        v-html="format(Global[l1.level][l1.prefix+'_KPI_GHG']())"
+                        v-html="format(Global[l1.level][l1.prefix+'_KPI_GHG']().total)"
                       ></div>
                     </div>
                   </div>
@@ -275,7 +280,7 @@ let summary_ghg = new Vue({
           </table>
         </div>
 
-        <!--current_view table-->
+        <!--ghg emissions charts-->
         <div v-if="current_view=='charts'">
           <!--donuts-->
           <div
@@ -285,52 +290,101 @@ let summary_ghg = new Vue({
             "
           >
             <div class=chart_container>
-              GHG emissions
-              <div id=chart_1></div>
-              <table border=1>
-                <tr>
-                  <td>{{translate('Water')}}</td>
-                  <td>{{format(Global.Water.ws_KPI_GHG())}}</td>
-                </tr>
-                <tr>
-                  <td>{{translate('Waste')}}</td>
-                  <td>{{format(Global.Waste.ww_KPI_GHG())}}</td>
-                </tr>
-              </table>
+              <div class=chart_title>
+                <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
+                GHG emissions
+              </div>
+              <div class=flex>
+                <table border=1 class=ghg_table>
+                  <tr>
+                    <td style="background:var(--color-level-Water)"></td>
+                    <td>{{translate('Water')}}</td>
+                    <td>{{format(Global.Water.ws_KPI_GHG().total)}}</td>
+                    <td class=unit v-html="'kgCO2eq'.prettify()"></td>
+                  </tr>
+                  <tr>
+                    <td style="background:var(--color-level-Waste)"></td>
+                    <td>{{translate('Waste')}}</td>
+                    <td>{{format(Global.Waste.ww_KPI_GHG().total)}}</td>
+                    <td class=unit v-html="'kgCO2eq'.prettify()"></td>
+                  </tr>
+                </table>
+                <div id=chart_1></div>
+              </div>
             </div>
 
             <div class=chart_container>
-              GHG emissions by stage
-              <div id=chart_2></div>
-              <table border=1>
-                <tr v-for="stage in Structure.filter(s=>s.sublevel)">
-                  <td>
-                    {{translate(stage.level)}}
-                    {{translate(stage.sublevel)}}
-                  </td>
-                  <td>
-                    {{ format(Global[stage.level][stage.sublevel].map(s=>s[stage.prefix+'_KPI_GHG']().total).sum()) }}
-                  </td>
-                </tr>
-              </table>
+              <div class=chart_title>
+                <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
+                GHG emissions by stage
+              </div>
+              <div class=flex>
+                <table border=1 class=ghg_table>
+                  <tr v-for="stage in Structure.filter(s=>s.sublevel)">
+                    <td :style="{background:stage.color}">
+                    </td>
+                    <td>
+                      {{translate(stage.level)}}
+                      {{translate(stage.sublevel)}}
+                    </td>
+                    <td>
+                      {{ format(Global[stage.level][stage.sublevel].map(s=>s[stage.prefix+'_KPI_GHG']().total).sum()) }}
+                    </td>
+                    <td class=unit v-html="'kgCO2eq'.prettify()"></td>
+                  </tr>
+                </table>
+                <div id=chart_2></div>
+              </div>
             </div>
 
             <div class=chart_container>
-              GHG emissions by gas emitted
-              <table border=1>
-                <tr><td>N2O</td><td>TODO</td></tr>
-                <tr><td>CH4</td><td>TODO</td></tr>
-                <tr><td>CO2</td><td>TODO</td></tr>
-              </table>
+              <div class=chart_title>
+                <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
+                GHG emissions by gas emitted
+              </div>
+              <div class=flex>
+                <table border=1 class=ghg_table>
+                  <tr v-for="value,key in Global.TotalGHG()" v-if="key!='total'">
+                    <td :style="{background:gas_colors[key]}">
+                    </td>
+                    <td>
+                      <div v-html="key.toUpperCase().prettify()"></div>
+                    </td>
+                    <td>
+                      <div v-html="format(value)"></div>
+                    </td>
+                    <td class=unit v-html="'kgCO2eq'.prettify()"></td>
+                  </tr>
+                </table>
+                <div id=chart_3></div>
+              </div>
             </div>
 
             <div class=chart_container>
-              GHG emissions by UNFCC category
-              <table border=1>
+              <div class=chart_title>
+                <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
+                GHG emissions by UNFCC category
+              </div>
+              <table border=1 class=ghg_table>
                 <tr><td>TODO</td></tr>
               </table>
             </div>
           </div>
+
+          <!--progress bars-->
+          <div>
+            <div class=chart_container>
+              <div class=chart_title>
+                Serviced population
+              </div>
+
+              <div style="">
+                <serv_pop_bar v-if="Global.Water.ws_resi_pop" :stage="Global.Water" code="ws_SL_serv_pop"></serv_pop_bar>
+                <serv_pop_bar v-if="Global.Waste.ww_resi_pop" :stage="Global.Waste" code="ww_SL_serv_pop"></serv_pop_bar>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -371,13 +425,75 @@ let summary_ghg = new Vue({
         margin:0 1px;
       }
 
+      #summary_ghg button[selected]{
+        background:var(--color-level-generic);
+        color:white;
+      }
+
       #summary_ghg div.chart_container {
         background:white;
         border:1px solid #ccc;
         padding:1em;
       }
+      #summary_ghg div.chart_container div.chart_title{
+        color:var(--color-level-generic);
+        font-size:large;
+        font-weight:bold;
+        align-content:center;
+      }
+      #summary_ghg div.chart_container div.chart_title img.icon_co2{
+        width:50px;
+      }
+      #summary_ghg div.chart_container table.ghg_table {
+        margin-right:10px;
+      }
+
+      #summary_ghg div.chart_container div.bar_background {
+        background:#dadada;
+        width:100%;
+        height:2em;
+      }
+      #summary_ghg div.chart_container div.bar_background div.progress{
+        text-align:center;
+        height:2em;
+      }
+
       #summary_ghg div.chart_container table {
       }
     </style>
+  `,
+});
+
+//view for a horitzontal bar with the % of serviced population
+Vue.component('serv_pop_bar',{
+  props:[
+    "stage",
+    "code",
+  ],
+  methods:{
+    translate,
+    format,
+  },
+  template:`
+    <div
+      style="
+        display:grid;
+        grid-template-columns:50% 30% 10%;
+        align-items:center;
+      "
+    >
+      <div style="font-weight:bold">
+        {{translate(code+'_descr')}}
+      </div>
+      <div>
+        <progress :value="stage[code]()"
+          style="height:2.5em;width:100%"
+          max=100
+        ></progress>
+      </div>
+      <div style="text-align:center">
+        {{ format(stage[code]()) }} %
+      </div>
+    </div>
   `,
 });
