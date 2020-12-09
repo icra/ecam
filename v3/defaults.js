@@ -7,24 +7,20 @@ ecam_logo.visible   = 1;
 linear_menu.visible = 1;
 stages_menu.visible = 0;
 
-//initial values
+//initial input values
+Global.General.Country="Algeria";
+select_scenario.set_variables_from_selected_country();
 Structure.filter(s=>s.sublevel).forEach(stage=>{
   Global[stage.level][stage.sublevel].forEach(ss=>ss[stage.prefix+'_nrg_cons']=1);
 });
-
 Global.Water.Distribution[0].wsd_serv_pop=100;
-Global.Water.ws_resi_pop=1000;
-
-Global.Waste.Treatment[0].wwt_serv_pop=100;
-Global.Waste.ww_resi_pop=1000;
+Global.Water.ws_resi_pop                 =1000;
+Global.Waste.Treatment[0].wwt_serv_pop   =100;
+Global.Waste.ww_resi_pop                 =1000;
 
 /*initial page to display*/
-ecam.show('summary_ghg');
+ecam.show('report');
 //go_to('Waste','Treatment');
 //tier_b.disable_all_filters();
 //tier_b.filters_active.Biogas=true;
 //variable.view('wwt_biog_pro');
-
-/*default values*/
-Global.General.Country="Algeria";
-select_scenario.set_variables_from_selected_country();

@@ -43,7 +43,7 @@ let landing = new Vue({
             </button>
           </div>
           <div>
-            <button class="start" onclick="alert('in development')" style="background:var(--color-level-generic-secondary)">
+            <button class="start" onclick="alert('tutorial in development')" style="background:var(--color-level-generic-secondary)">
               Are you a new user?
             </button>
           </div>

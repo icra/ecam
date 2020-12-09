@@ -100,3 +100,4 @@
 [v3.1]
   - chemicals
   - optgroups in <select> elements
+  - feedback button

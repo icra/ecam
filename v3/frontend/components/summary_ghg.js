@@ -108,6 +108,26 @@ let summary_ghg = new Vue({
           this.gas_colors.ch4,
         ],
       );
+
+      this.draw_pie_chart('chart_nrg_levels',
+        [
+          {"label":"", "value":100*Global.Waste.ww_nrg_cons()/Global.TotalNRG()},
+          {"label":"", "value":100*Global.Water.ws_nrg_cons()/Global.TotalNRG()},
+        ],
+        [
+          "var(--color-level-Waste)",
+          "var(--color-level-Water)",
+        ],
+      );
+
+      this.draw_pie_chart('chart_nrg_stages',
+        Structure.filter(s=>s.sublevel).map(s=>{
+          let label = "";
+          let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum()/Global.TotalNRG();
+          return {label,value};
+        }),
+        Structure.filter(s=>s.sublevel).map(s=>s.color),
+      );
     },
   },
 
@@ -121,8 +141,8 @@ let summary_ghg = new Vue({
         </p>
       </div>
 
-      <!--select current view-->
-      <div style="padding:1em;border:1px solid">
+      <!--select tables or charts-->
+      <div style="padding:1em;border:1px solid #ccc">
         <button @click="current_view='table'" :selected="current_view=='table'">
           Table
         </button>
@@ -131,9 +151,9 @@ let summary_ghg = new Vue({
         </button>
       </div>
 
-      <!--current view-->
+      <!--content-->
       <div>
-        <!--ghg emission table-->
+        <!--tables-->
         <div v-if="current_view=='table'">
           <table style="margin:auto;width:70rem;border-spacing:1px">
             <!--total ghg and nrg-->
@@ -280,9 +300,9 @@ let summary_ghg = new Vue({
           </table>
         </div>
 
-        <!--ghg emissions charts-->
+        <!--charts-->
         <div v-if="current_view=='charts'">
-          <!--donuts-->
+          <!--pie charts ghg-->
           <div
             style="
               display:grid;
@@ -385,6 +405,75 @@ let summary_ghg = new Vue({
             </div>
           </div>
 
+          <!--pie charts nrg-->
+          <div
+            style="
+              display:grid;
+              grid-template-columns:50% 50%;
+            "
+          >
+            <div class=chart_container>
+              <div class=chart_title>
+                <img src="frontend/img/viti/select_scenario/icon-energy.svg" class=icon_nrg>
+                Energy consumption
+              </div>
+
+              <div class=flex>
+                <table border=1 class=nrg_table>
+                  <tr>
+                    <td style="background:var(--color-level-Water)"></td>
+                    <td>{{translate('Water')}}</td>
+                    <td>{{format(Global.Water.ws_nrg_cons())}}</td>
+                    <td class=unit v-html="'kWh'"></td>
+                  </tr>
+                  <tr>
+                    <td style="background:var(--color-level-Waste)"></td>
+                    <td>{{translate('Waste')}}</td>
+                    <td>{{format(Global.Waste.ww_nrg_cons())}}</td>
+                    <td class=unit v-html="'kWh'"></td>
+                  </tr>
+                </table>
+                <div id=chart_nrg_levels></div>
+              </div>
+            </div>
+
+            <div class=chart_container>
+              <div class=chart_title>
+                <img src="frontend/img/viti/select_scenario/icon-energy.svg" class=icon_nrg>
+                Energy consumption by stage
+              </div>
+
+              <div class=flex>
+                <table border=1 class=nrg_table>
+                  <tr v-for="stage in Structure.filter(s=>s.sublevel)">
+                    <td :style="{background:stage.color}">
+                    </td>
+                    <td>
+                      {{translate(stage.level)}}
+                      {{translate(stage.sublevel)}}
+                    </td>
+                    <td>
+                      {{ format(Global[stage.level][stage.sublevel].map(s=>s[stage.prefix+'_nrg_cons']).sum()) }}
+                    </td>
+                    <td class=unit v-html="'kWh'"></td>
+                  </tr>
+                </table>
+                <div id=chart_nrg_stages></div>
+              </div>
+            </div>
+          </div>
+
+          <ul>
+            <li>[done]    figure: ghg emissions by level (pie chart)</li>
+            <li>[done]    figure: ghg emissions by source (CO2, N2O, CH4)</li>
+            <li>[pending] figure: ghg emissions by compound (detailed)</li>
+            <li>[pending] figure: ghg emissions by UNFCCC categories</li>
+            <li>[done]    figure: energy consumption by level</li>
+            <li>[done]    figure: serviced population in water supply (%)</li>
+            <li>[pending] figure: total ghg water supply (kgCO2eq/year/serv.pop)</li>
+            <li>[done]    figure: serviced population in wastewater (%)</li>
+            <li>[pending] figure: total ghg wastewater (kgCO2eq/year/serv.pop)</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -441,10 +530,12 @@ let summary_ghg = new Vue({
         font-weight:bold;
         align-content:center;
       }
-      #summary_ghg div.chart_container div.chart_title img.icon_co2{
+      #summary_ghg div.chart_container div.chart_title img.icon_co2,
+      #summary_ghg div.chart_container div.chart_title img.icon_nrg{
         width:50px;
       }
-      #summary_ghg div.chart_container table.ghg_table {
+      #summary_ghg div.chart_container table.ghg_table,
+      #summary_ghg div.chart_container table.nrg_table {
         margin-right:10px;
       }
 
