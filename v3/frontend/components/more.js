@@ -58,7 +58,6 @@ let more = new Vue({
           <ul>
             <li class=item><a onclick="ecam.show('about')">             <div class=icon>&#9432;  </div> {{translate('about')                   }}</a></li>
             <li class=item><a onclick="ecam.show('help')">              <div class=icon>&#128587;</div> {{translate('help')                    }}</a></li>
-            <li class=item><a onclick="ecam.show('population')">        <div class=icon>&#127968;</div> {{translate('population')              }}</a></li>
             <li class=item><a onclick="ecam.show('constants')">         <div class=icon>&#8455;  </div> {{translate('all_constants')           }}</a></li>
             <li class=item><a onclick="ecam.show('benchmarks')">        <div class=icon>&#8542;  </div> {{translate('benchmarks')              }}</a></li>
             <li class=item><a onclick="ecam.show('fuel_table')">        <div class=icon>&#9981;  </div> {{translate('Fuel types')              }}</a></li>

@@ -19,6 +19,7 @@ let Info={
 	unfccc_5D  :{magnitude:"Mass",unit:"kg CO2eq"},
 
   //new
+  ww_SL_serv_pop:{magnitude:"Percentage",unit:"%"},
   wwc_tn:{magnitude:"Mass", unit:"kg"},
   wwc_bod:{magnitude:"Mass", unit:"kg"},
   wwc_n2o_efac_cso:{magnitude:"Mass/Mass", unit:"kgN2O-N/kgN"},
@@ -203,7 +204,6 @@ let Info={
 	wwt_bod_rmvd:{magnitude:"Mass",unit:"kg"},
 	wwt_bod_slud:{magnitude:"Mass",unit:"kg"},
 	wwt_ch4_biog:{magnitude:"Percentage",unit:"%"},
-	wwt_dryw_slu:{magnitude:"Mass",unit:"kg"},
 	wwt_fuel_dig:{magnitude:"Volume",unit:"L"},
 	wwt_mass_slu:{magnitude:"Mass",unit:"kg"},
 	wwt_mass_slu_app:{magnitude:"Mass",unit:"kg"},

@@ -318,6 +318,7 @@ class Waste_stages{
       "ww_KPI_GHG",     //GHG from Wastewater
 
       "ww_serv_pop",    //SL serviced population
+      "ww_SL_serv_pop", //SL serviced population
       "ww_nrg_cons",    //SL energy consumed from the grid
       "ww_GHG_avoided", //SL GHG avoided
     ];

@@ -358,7 +358,6 @@ let Questions={
         "wwt_wr_vol_d",
         "wwt_SL_ghg_non",   //output
         "wwt_wr_GHG_avo_N", //output
-        "wwt_wr_GHG_avo_P", //output
         "wwt_wr_GHG_avo",   //output
       ],
       advanced:1,
@@ -371,7 +370,6 @@ let Questions={
         "wwt_bod_slud",
         "wwt_slu_disp",
         "wwt_KPI_sludg_prod",
-        "wwt_KPI_dry_sludge",
         "wwt_KPI_GHG_slu",
         "wwt_wr_C_seq_slu",
       ],
