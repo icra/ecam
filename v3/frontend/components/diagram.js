@@ -21,7 +21,7 @@ let diagram = new Vue({
     <div id=diagram v-if="visible && Languages.ready">
       <!--diagram stages-->
       <div>
-        <h1> Diagram stages (water and wastewater flows)</h1>
+        <h1>Flow diagram (water and wastewater flows)</h1>
         <img
           src="frontend/diagram/map.dot.svg"
           style="display:block;margin:auto;width:90%;border:1px solid black"

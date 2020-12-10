@@ -288,12 +288,9 @@ let summary_ghg = new Vue({
   template:`
     <div id=summary_ghg v-if="visible && Languages.ready">
       <!--title-->
-      <div>
-        <b style=font-size:large>Summary</b>
-        <p>
-          All GHG emissions and energy consumptions.
-        </p>
-      </div>
+      <h1 style="padding-left:0">
+        Summary: GHG emissions and energy consumption
+      </h1>
 
       <!--select tables or charts-->
       <div style="padding:1em;border:1px solid #ccc">
@@ -309,7 +306,7 @@ let summary_ghg = new Vue({
       <div>
         <!--tables-->
         <div v-if="current_view=='table'">
-          <table style="margin:auto;width:70rem;border-spacing:1px">
+          <table style="margin:auto;width:85%;border-spacing:1px">
             <!--total ghg and nrg-->
             <tbody style="background:var(--color-level-generic);color:white">
               <tr>
@@ -463,7 +460,7 @@ let summary_ghg = new Vue({
               grid-template-columns:50% 50%;
             "
           >
-            <div class=chart_container>
+            <div class=chart_container style="border-right:none">
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
                 GHG emissions
@@ -511,7 +508,7 @@ let summary_ghg = new Vue({
               </div>
             </div>
 
-            <div class=chart_container>
+            <div class=chart_container style="border-right:none">
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
                 GHG emissions by gas emitted
@@ -577,7 +574,7 @@ let summary_ghg = new Vue({
               grid-template-columns:50% 50%;
             "
           >
-            <div class=chart_container>
+            <div class=chart_container style="border-right:none">
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-energy.svg" class=icon_nrg>
                 Energy consumption
@@ -687,7 +684,7 @@ let summary_ghg = new Vue({
       #summary_ghg div.chart_container {
         background:white;
         border:1px solid #ccc;
-        padding:5px;
+        padding:1em;
         border-top:none;
       }
       #summary_ghg div.chart_container div.chart_title{
