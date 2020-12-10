@@ -619,7 +619,7 @@
 "#configuration":"Configuration",
 "#configuration_activate_all":"Activate all",
 "#configuration_active_stages_error":"There are no active stages. Click on the table to activate some.",
-"#configuration_new_currency":"Write new currency (3 letters max)",
+"#configuration_new_currency":"Enter currency (3 letters max)",
 "#configuration_subtitle":"Activate the stages which form your system",
 "#constants":"Constants",
 "#contact":"Contact",
