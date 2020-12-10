@@ -45,6 +45,9 @@ let countries = new Vue({
               <br><a @click="variable.view('bod_pday')">(bod_pday)</a>
             </th>
             <th rowspan=2>
+              Currency<sup>4</sup>
+            </th>
+            <th rowspan=2>
               Select
             </th>
           </tr>
@@ -62,6 +65,7 @@ let countries = new Vue({
           <td class=number>{{country.conv_kwh_co2}}</td>
           <td class=number>{{country.prot_con}}</td>
           <td class=number>{{country.bod_pday}}</td>
+          <td style="text-align:center">{{country.currency}}</td>
           <td>
             <button @click="Global.General.Country=name;set_variables_from_selected_country()">select</button>
           </td>
@@ -94,6 +98,14 @@ let countries = new Vue({
             <a href="frontend/docs/IPCC_V5_6_Ch6_Wastewater.pdf" target=_blank>
               IPCC, 2006, Guidelines for National Greenhouse Gas Inventories
               Volume 5 Waste, Chapter 6
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>
+            <a href="https://www.countries-ofthe-world.com/world-currencies.html" target=_blank>
+              https://www.countries-ofthe-world.com/world-currencies.html (checked on 2020-12-10)
             </a>
           </td>
         </tr>

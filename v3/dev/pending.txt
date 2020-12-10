@@ -13,7 +13,7 @@
       - "https://www.npmjs.com/package/exceljs"
     - Opportunities page is important, but can come later!
 
-reunio
+[Reunió 10 desembre 2020 -- lluís adrià]
   - simplificar desplegable configuration
 
 [DOING NOW - concrete tasks]
@@ -31,8 +31,6 @@ reunio
     - treated volume     (wwo)
   - onclose listener: trigger warning if ecam is accidentally closed
   - check if version does not match when loading json files
-  - floating help indications
-  - import layout from excel
 
 [TO BE DONE WHEN V3 IS FEATURE FROZEN]
   - update help & about & docs

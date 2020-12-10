@@ -547,7 +547,7 @@ let summary_ghg = new Vue({
 
           <!--bar chart ghg substages-->
           <div class="chart_container bar">
-            <div class=chart_title style="text-align:center">
+            <div class=chart_title style="justify-content:center">
               <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
               GHG emissions by substage
             </div>
@@ -630,7 +630,7 @@ let summary_ghg = new Vue({
 
           <!--bar chart nrg substages-->
           <div class="chart_container bar">
-            <div class=chart_title style="text-align:center">
+            <div class=chart_title style="justify-content:center">
               <img src="frontend/img/viti/select_scenario/icon-energy.svg" class=icon_nrg>
               Energy consumption by substage
             </div>
@@ -687,7 +687,8 @@ let summary_ghg = new Vue({
       #summary_ghg div.chart_container {
         background:white;
         border:1px solid #ccc;
-        padding:1em;
+        padding:5px;
+        border-top:none;
       }
       #summary_ghg div.chart_container div.chart_title{
         color:var(--color-level-generic);

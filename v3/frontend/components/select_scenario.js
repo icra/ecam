@@ -23,9 +23,9 @@ let select_scenario=new Vue({
       ecam.set_current_scenario(obj);
     },
 
-    set_scenario_and_go_to_configuration(scenario){
+    set_scenario_and_go_to_tier_b(scenario){
       ecam.set_current_scenario(scenario);
-      ecam.show('configuration');
+      ecam.show('tier_b');
     },
 
     delete_scenario(obj){
@@ -160,6 +160,9 @@ let select_scenario=new Vue({
         if(key=="bod_pday_fs"){ key2="bod_pday"; }
         this.Global.General[key]=Countries[country][key2];
       });
+
+      //set currency
+      this.Global.General.Currency=Countries[country].currency;
     },
 
     //set constants from selected gwp report
@@ -328,7 +331,11 @@ let select_scenario=new Vue({
               </td>
 
               <!--options-->
-              <td style="text-align:center">
+              <td style="text-align:left">
+                <button
+                  @click="set_scenario_and_go_to_tier_b(scenario)"
+                  v-html="'edit inventory'"
+                ></button>
                 <button
                   @click="delete_scenario(scenario)"
                   :disabled="scenario==Global"
@@ -548,11 +555,6 @@ let select_scenario=new Vue({
                       </div>
                     </fieldset>
                   </div>
-
-                  <div style="text-align:left;font-size:large;padding:20px 0">
-                    <button onclick="ecam.show('tier_b')" style="font-size:x-large">Go to inventory</button>
-                  </div>
-
                 </td>
               </tr>
             </transition>
@@ -743,6 +745,10 @@ let select_scenario=new Vue({
 
       #select_scenario .warning input {
         color:#aaa;
+      }
+
+      #select_scenario button[disabled] {
+        color:#ccc;
       }
     </style>
   `,
