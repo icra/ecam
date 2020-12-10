@@ -29,6 +29,8 @@ let select_scenario=new Vue({
     },
 
     delete_scenario(obj){
+      if(!confirm("continue?")) return;
+
       let index = this.scenarios_compared.indexOf(obj);
       if(index+1){
         this.scenarios_compared.splice(index,1);
@@ -546,6 +548,11 @@ let select_scenario=new Vue({
                       </div>
                     </fieldset>
                   </div>
+
+                  <div style="text-align:left;font-size:large;padding:20px 0">
+                    <button onclick="ecam.show('tier_b')" style="font-size:x-large">Go to inventory</button>
+                  </div>
+
                 </td>
               </tr>
             </transition>

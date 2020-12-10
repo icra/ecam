@@ -74,60 +74,214 @@ let summary_ghg = new Vue({
     },
 
     draw_all_charts(){
-      //GHG Water/Wastewater percentage
       if(this.Global.TotalGHG().total==0) return;
 
-      this.draw_pie_chart('chart_1',
-        [
-          {"label":"", "value":100*Global.Waste.ww_KPI_GHG().total/Global.TotalGHG().total},
-          {"label":"", "value":100*Global.Water.ws_KPI_GHG().total/Global.TotalGHG().total},
-        ],[
-          "var(--color-level-Waste)",
-          "var(--color-level-Water)",
-        ]
-      );
+      //pie charts
+        this.draw_pie_chart('chart_1',
+          [
+            {"label":"", "value":100*Global.Waste.ww_KPI_GHG().total/Global.TotalGHG().total},
+            {"label":"", "value":100*Global.Water.ws_KPI_GHG().total/Global.TotalGHG().total},
+          ],[
+            "var(--color-level-Waste)",
+            "var(--color-level-Water)",
+          ]
+        );
 
-      this.draw_pie_chart('chart_2',
-        Structure.filter(s=>s.sublevel).map(s=>{
-          let label = "";
-          let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum()/Global.TotalGHG().total;
-          return {label,value};
-        }),
-        Structure.filter(s=>s.sublevel).map(s=>s.color),
-      );
+        this.draw_pie_chart('chart_2',
+          Structure.filter(s=>s.sublevel).map(s=>{
+            let label = "";
+            let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum()/Global.TotalGHG().total;
+            return {label,value};
+          }),
+          Structure.filter(s=>s.sublevel).map(s=>s.color),
+        );
 
-      this.draw_pie_chart('chart_3',
-        [
-          {"label":"", "value":100*Global.TotalGHG().co2/Global.TotalGHG().total},
-          {"label":"", "value":100*Global.TotalGHG().n2o/Global.TotalGHG().total},
-          {"label":"", "value":100*Global.TotalGHG().ch4/Global.TotalGHG().total},
-        ],
-        [
-          this.gas_colors.co2,
-          this.gas_colors.n2o,
-          this.gas_colors.ch4,
-        ],
-      );
+        this.draw_pie_chart('chart_3',
+          [
+            {"label":"", "value":100*Global.TotalGHG().co2/Global.TotalGHG().total},
+            {"label":"", "value":100*Global.TotalGHG().n2o/Global.TotalGHG().total},
+            {"label":"", "value":100*Global.TotalGHG().ch4/Global.TotalGHG().total},
+          ],
+          [
+            this.gas_colors.co2,
+            this.gas_colors.n2o,
+            this.gas_colors.ch4,
+          ],
+        );
 
-      this.draw_pie_chart('chart_nrg_levels',
-        [
-          {"label":"", "value":100*Global.Waste.ww_nrg_cons()/Global.TotalNRG()},
-          {"label":"", "value":100*Global.Water.ws_nrg_cons()/Global.TotalNRG()},
-        ],
-        [
-          "var(--color-level-Waste)",
-          "var(--color-level-Water)",
-        ],
-      );
+        this.draw_pie_chart('chart_nrg_levels',
+          [
+            {"label":"", "value":100*Global.Waste.ww_nrg_cons()/Global.TotalNRG()},
+            {"label":"", "value":100*Global.Water.ws_nrg_cons()/Global.TotalNRG()},
+          ],
+          [
+            "var(--color-level-Waste)",
+            "var(--color-level-Water)",
+          ],
+        );
 
-      this.draw_pie_chart('chart_nrg_stages',
-        Structure.filter(s=>s.sublevel).map(s=>{
-          let label = "";
-          let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum()/Global.TotalNRG();
-          return {label,value};
-        }),
-        Structure.filter(s=>s.sublevel).map(s=>s.color),
-      );
+        this.draw_pie_chart('chart_nrg_stages',
+          Structure.filter(s=>s.sublevel).map(s=>{
+            let label = "";
+            let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum()/Global.TotalNRG();
+            return {label,value};
+          }),
+          Structure.filter(s=>s.sublevel).map(s=>s.color),
+        );
+
+      //bar charts
+        this.draw_bar_chart(
+          'bar_chart_ghg_substages',
+          Structure.filter(s=>s.sublevel).map(s=>{
+            return Global[s.level][s.sublevel].map(ss=>{
+              let name     = s.prefix+" "+ss.name;
+              let emission = ss[s.prefix+'_KPI_GHG'](); 
+              let co2 = emission.co2;
+              let n2o = emission.n2o;
+              let ch4 = emission.ch4;
+              return {name, co2, ch4, n2o};
+            });
+          }).reduce((p,c)=>p.concat(c),[]),
+          colors=[
+            this.gas_colors.co2,
+            this.gas_colors.ch4,
+            this.gas_colors.n2o,
+          ],
+        );
+
+        this.draw_bar_chart(
+          'bar_chart_nrg_substages',
+          Structure.filter(s=>s.sublevel).map(s=>{
+            return Global[s.level][s.sublevel].map(ss=>{
+              let name = s.prefix+" "+ss.name;
+              let kWh  = ss[s.prefix+'_nrg_cons']; 
+              return {name, kWh};
+            });
+          }).reduce((p,c)=>p.concat(c),[]),
+          colors=[
+            "#ffbe54",
+          ],
+        );
+    },
+
+    draw_bar_chart(id_container,data,colors){
+      if(data.length==0) return;
+      let keys = Object.keys(data[0]).slice(1);//llegenda
+
+      var margin = {top:20,right:160,bottom:35,left:30};
+      var width  = window.innerWidth-margin.left-margin.right;
+      var height = 500-margin.top-margin.bottom;
+      var svg = d3.select(`#${id_container}`)
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      // Transpose the data into layers
+      var dataset = d3.layout.stack()(keys.map(function(key) {
+        return data.map(d=>{
+          return {x: d.name, y: +d[key]};
+        });
+      }));
+
+      // Set x, y and colors
+      var x = d3.scale.ordinal()
+        .domain(dataset[0].map(function(d) { return d.x; }))
+        .rangeRoundBands([10, width-10], 0.02);
+
+      var y = d3.scale.linear()
+        .domain([0, d3.max(dataset, function(d){return d3.max(d, function(d){return d.y0 + d.y; }); })])
+        .range([height, 0]);
+
+      // Define and draw axes
+      var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .ticks(5)
+        .tickSize(-width, 0, 0)
+        .tickFormat( function(d) { return d } );
+
+      var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+
+      svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+      svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+      // Create groups for each series, rects for each segment 
+      var groups = svg.selectAll("g.cost")
+        .data(dataset)
+        .enter().append("g")
+        .attr("class", "cost")
+        .style("fill", function(d, i) {
+          return colors[i]; }
+        );
+
+      var rect = groups.selectAll("rect")
+        .data(function(d) { return d; })
+        .enter()
+        .append("rect")
+        .attr("x", function(d) { return x(d.x); })
+        .attr("y", function(d) { return y(d.y0 + d.y); })
+        .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); })
+        .attr("width", x.rangeBand())
+        .on("mouseover", function() { tooltip.style("display", null); })
+        .on("mouseout", function() { tooltip.style("display", "none"); })
+        .on("mousemove", function(d) {
+          var xPosition = d3.mouse(this)[0] - 15;
+          var yPosition = d3.mouse(this)[1] - 25;
+          tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+          tooltip.select("text").text(d.y);
+        });
+
+
+      // Draw legend
+      var legend = svg.selectAll(".legend")
+        .data(colors)
+        .enter().append("g")
+        .attr("class", "legend")
+        .attr("transform", function(d, i) { return "translate(30," + i * 19 + ")"; });
+      
+      legend.append("rect")
+        .attr("x", width - 18)
+        .attr("width", 18)
+        .attr("height", 18)
+        .style("fill", function(d, i) {return colors.slice()[i];});
+      
+      legend.append("text")
+        .attr("x", width + 5)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "start")
+        .text((d,i)=>{
+          return keys[i].toUpperCase();
+        });
+
+
+      // Prep the tooltip bits, initial display is hidden
+      var tooltip = svg.append("g")
+        .attr("class", "tooltip")
+        .style("display", "none");
+          
+      tooltip.append("rect")
+        .attr("width", 30)
+        .attr("height", 20)
+        .attr("fill", "white")
+        .style("opacity", 0.5);
+
+      tooltip.append("text")
+        .attr("x", 15)
+        .attr("dy", "1.2em")
+        .style("text-anchor", "middle")
+        .attr("font-size", "12px")
+        .attr("font-weight", "bold");
     },
   },
 
@@ -391,6 +545,17 @@ let summary_ghg = new Vue({
             </div>
           </div>
 
+          <!--bar chart ghg substages-->
+          <div class="chart_container bar">
+            <div class=chart_title style="text-align:center">
+              <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
+              GHG emissions by substage
+            </div>
+            <div>
+              <div id=bar_chart_ghg_substages></div>
+            </div>
+          </div>
+
           <!--progress bars-->
           <div>
             <div class=chart_container>
@@ -463,17 +628,16 @@ let summary_ghg = new Vue({
             </div>
           </div>
 
-          <ul>
-            <li>[done]    figure: ghg emissions by level (pie chart)</li>
-            <li>[done]    figure: ghg emissions by source (CO2, N2O, CH4)</li>
-            <li>[pending] figure: ghg emissions by compound (detailed)</li>
-            <li>[pending] figure: ghg emissions by UNFCCC categories</li>
-            <li>[done]    figure: energy consumption by level</li>
-            <li>[done]    figure: serviced population in water supply (%)</li>
-            <li>[pending] figure: total ghg water supply (kgCO2eq/year/serv.pop)</li>
-            <li>[done]    figure: serviced population in wastewater (%)</li>
-            <li>[pending] figure: total ghg wastewater (kgCO2eq/year/serv.pop)</li>
-          </ul>
+          <!--bar chart nrg substages-->
+          <div class="chart_container bar">
+            <div class=chart_title style="text-align:center">
+              <img src="frontend/img/viti/select_scenario/icon-energy.svg" class=icon_nrg>
+              Energy consumption by substage
+            </div>
+            <div>
+              <div id=bar_chart_nrg_substages></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -519,6 +683,7 @@ let summary_ghg = new Vue({
         color:white;
       }
 
+      /*pie chart*/
       #summary_ghg div.chart_container {
         background:white;
         border:1px solid #ccc;
@@ -528,11 +693,15 @@ let summary_ghg = new Vue({
         color:var(--color-level-generic);
         font-size:large;
         font-weight:bold;
-        align-content:center;
+        display:flex;
+        align-items:center;
       }
       #summary_ghg div.chart_container div.chart_title img.icon_co2,
       #summary_ghg div.chart_container div.chart_title img.icon_nrg{
         width:50px;
+        display:block;
+        margin-right:5px;
+        margin-bottom:5px;
       }
       #summary_ghg div.chart_container table.ghg_table,
       #summary_ghg div.chart_container table.nrg_table {
@@ -549,7 +718,24 @@ let summary_ghg = new Vue({
         height:2em;
       }
 
-      #summary_ghg div.chart_container table {
+      /*bar chart css*/
+      #summary_ghg div.chart_container.bar svg {
+        font: 10px sans-serif;
+        shape-rendering: crispEdges;
+      }
+
+      #summary_ghg div.chart_container.bar .axis path,
+      #summary_ghg div.chart_container.bar .axis line {
+        fill: none;
+        stroke: #000;
+      }
+
+      #summary_ghg div.chart_container.bar path.domain {
+        stroke: none;
+      }
+
+      #summary_ghg div.chart_container.bar .y .tick line {
+        stroke: #ddd;
       }
     </style>
   `,

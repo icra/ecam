@@ -13,6 +13,9 @@
       - "https://www.npmjs.com/package/exceljs"
     - Opportunities page is important, but can come later!
 
+reunio
+  - simplificar desplegable configuration
+
 [DOING NOW - concrete tasks]
   - create References structure.
   - bug: variable.js / outputs that use this variable / drop-down selection
