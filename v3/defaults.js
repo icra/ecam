@@ -10,9 +10,12 @@ stages_menu.visible = 0;
 //initial input values
 Global.General.Country="Algeria";
 select_scenario.set_variables_from_selected_country();
+
+let energy = 1;
 Structure.filter(s=>s.sublevel).forEach(stage=>{
-  Global[stage.level][stage.sublevel].forEach(ss=>ss[stage.prefix+'_nrg_cons']=1);
+  Global[stage.level][stage.sublevel].forEach(ss=>ss[stage.prefix+'_nrg_cons']=energy++);
 });
+
 Global.Water.Distribution[0].wsd_serv_pop=100;
 Global.Water.ws_resi_pop                 =1000;
 Global.Waste.Treatment[0].wwt_serv_pop   =100;
