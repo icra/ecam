@@ -1,16 +1,12 @@
 let about = new Vue({
   el:'#about',
-
   data:{
     visible:false,
-
     Languages,
   },
-
   methods:{
     translate,
   },
-
   template:`
     <div id=about v-if="visible && Languages.ready">
       <!--about-->

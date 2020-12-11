@@ -50,11 +50,20 @@ let stages_menu=new Vue({
     },
 
     delete_substage(level,sublevel,substage){
-      if(!confirm(`Confirm delete substage "${substage.name}"?`)) return;
+      //ask for confirmation only if emissions > 0
+      let prefix = Structure.find(s=>s.level==level&&s.sublevel==sublevel).prefix;
+      let emissions = substage[prefix+'_KPI_GHG']().total;
+      if(emissions>0){
+        if(!confirm(`Confirm delete substage "${substage.name}"?`))
+          return;
+      }
+
+      //find index and delete substage
       let index = this.Global[level][sublevel].indexOf(substage);
       if(index+1){
         this.Global[level][sublevel].splice(index,1);
       }
+
       //if this substage was the current being edited navigate to superior level
       if(substage == tier_b.substage){
         go_to(level);
@@ -67,7 +76,7 @@ let stages_menu=new Vue({
     <div id=stages_menu v-if="visible && Languages.ready">
       <div style="padding:8px">
         <h1 style="padding-left:0">
-          Inventory - Stages of the urban water cycle
+          Inventory: urban water cycle stages
           <button @click="show_table^=1">show/hide table</button>
         </h1>
 
@@ -77,48 +86,59 @@ let stages_menu=new Vue({
           <table id=main_table>
             <!--level 1-->
             <tr>
-              <td v-for="l1 in Structure.filter(s=>!s.sublevel)" :colspan="Structure.filter(s=>s.level==l1.level).length-1"
-                class=l1
-                :style="{background:l1.color,padding:'10px'}"
+              <td
+                v-for="l1 in Structure.filter(s=>!s.sublevel)"
+                :colspan="Structure.filter(s=>s.level==l1.level).length-1"
+                :style="{background:l1.color,padding:'10px',fontSize:'larger'}"
               >
-                <a
+                <div
                   @click="go_to(l1.level)"
-                  :style="{color:is_tier_b_selected(l1.level)?'black':'white'}"
+                  :style="{
+                    display:'flex',
+                    justifyContent:'space-between',
+                    cursor:'pointer',
+                    color:'white',
+                  }"
                 >
-                  {{translate(l1.level)}}
-                  ({{format(Global[l1.level][l1.prefix+'_KPI_GHG']().total)}} <small>kg CO<sub>2</sub>eq</small>)
-                </a>
+                  <div :style="{textDecoration:is_tier_b_selected(l1.level)?'underline':''}">
+                    {{translate(l1.level)}}
+                  </div>
+                  <div>
+                    {{format(Global[l1.level][l1.prefix+'_KPI_GHG']().total)}}
+                    <small>kgCO<sub>2</sub>eq</small>
+                  </div>
+                </div>
               </td>
             </tr>
 
             <!--level 2 stages-->
             <tr>
               <td v-for="s in Structure" v-if="s.sublevel" style="width:100px">
-                <div style="text-align:center">
+                <div style="display:flex;align-items:center">
                   <div>
                     <img
                       :src="'frontend/img/'+s.icon"
                       :class="'s '+(is_tier_b_selected(s.level, s.sublevel)?'selected':'')"
                     >
                   </div>
-                  <div>
+                  <div style="padding-left:5px">
                     <span>{{translate(s.sublevel)}}</span>
                   </div>
-                  <div v-if="show_substages_summary" style="border-bottom:1px solid #ccc"></div>
                 </div>
               </td>
             </tr>
 
             <!--level 3 substages-->
             <tr v-if="show_substages_summary">
-              <td v-for="s in Structure.filter(s=>s.sublevel)" style="vertical-align:top">
+              <td v-for="s in Structure.filter(s=>s.sublevel)" style="vertical-align:top;border-top:1px solid #ccc;padding-top:0">
                 <div v-if="Global[s.level][s.sublevel].length==0" style="text-align:center">
                   <small style="color:#666">~no stages</small>
                 </div>
                 <div
                   v-if="s.sublevel"
                   v-for="ss,i in Global[s.level][s.sublevel]"
-                  style="padding:5px 0;border-bottom:1px solid #ccc"
+                  style="padding:5px 2px;border-bottom:1px solid #ccc"
+                  :selected_substage="is_substage_selected(ss)"
                 >
                   <div
                     style="
@@ -138,13 +158,11 @@ let stages_menu=new Vue({
                       <div style="display:flex;align-items:center;">
                         <a
                           @click="go_to_substage(ss)"
-                          :selected_substage="is_substage_selected(ss)"
-                          style="font-size:smaller"
                           v-html="ss.name"
                         ></a>
                         &nbsp;
                         <!--delete substage btn-->
-                        <button
+                        <div
                           @click="delete_substage(s.level,s.sublevel,ss)"
                           class="delete_substage"
                           title="delete substage"
@@ -153,7 +171,7 @@ let stages_menu=new Vue({
                             src="frontend/img/viti/select_scenario/icon-delete.svg"
                             style="width:15px"
                           >
-                        </button>
+                        </div>
                       </div>
                     </div>
                     <!--ss emissions-->
@@ -186,7 +204,7 @@ let stages_menu=new Vue({
               <td v-for="s in Structure.filter(s=>s.sublevel)">
                 <div style="text-align:center">
                   <button
-                    style="width:100%;font-size:smaller;"
+                    style="padding:8px;width:100%;font-size:smaller;"
                     @click="add_substage(s.level,s.sublevel)"
                     v-html="'+ add substage'"
                   ></button>
@@ -217,19 +235,28 @@ let stages_menu=new Vue({
       #stages_menu img {
         width:50px;
       }
-      #stages_menu td.l1{
-        text-align:center;
+
+      #stages_menu div[selected_substage] {
+        background:white;
       }
-      #stages_menu a[selected_substage]{
-        text-decoration:underline;
-      }
-      #stages_menu button.delete_substage {
+
+      #stages_menu div.delete_substage {
         cursor:pointer;
         border:none;
         padding:0;
       }
-      #stages_menu button.delete_substage:hover img {
-        /*TODO*/
+      #stages_menu div.delete_substage:hover {
+        transform:scale(1.2);
+        transition:all 0.1s;
+      }
+
+      #stages_menu button {
+        outline:none;
+      }
+      #stages_menu button:hover {
+        background:var(--color-level-generic);
+        border-color:var(--color-level-generic);
+        color:white;
       }
     </style>
   `,

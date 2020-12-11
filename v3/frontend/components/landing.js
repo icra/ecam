@@ -72,7 +72,7 @@ let landing = new Vue({
         </div>
         <div>
           <h1 class=blue_h1>
-            Overview of greenhouse gas emissions at utility level?<br>Possible with ECAM!
+            Overview of greenhouse gas emissions at utility level? Possible with ECAM!
           </h1>
 
           <button class=start 
@@ -121,7 +121,7 @@ let landing = new Vue({
 
           <div class=learn_more_item onclick="ecam.show('about')">
             <div style="display:flex;justify-content:space-between;align-items:flex-end">
-              <b>About us</b>
+              <b>About ECAM</b>
               <img src="frontend/img/landing/about.png">
             </div>
             <p>
@@ -225,6 +225,10 @@ let landing = new Vue({
         width:50%;
         margin-bottom:5px;
         font-weight:bold;
+      }
+
+      #landing button.start:hover {
+        text-decoration:underline;
       }
 
       #landing div.container {

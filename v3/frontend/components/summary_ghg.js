@@ -6,8 +6,10 @@ let summary_ghg = new Vue({
     //folded sections
     unfolded_levels:['Water','Waste'],
 
-    current_view:"charts", //table or charts
+    //current view selected
+    current_view:"charts_ghg",
 
+    //colors for gas charts
     gas_colors:{
       "co2":"#dadada",
       "n2o":"#ff8d54",
@@ -25,6 +27,7 @@ let summary_ghg = new Vue({
     format,
     go_to,
 
+    //fold/unfold a level in the summary table
     toggle_folded_level(level){
       let index = this.unfolded_levels.indexOf(level);
       if(index==-1){
@@ -34,6 +37,7 @@ let summary_ghg = new Vue({
       }
     },
 
+    //create a pie chart inside "id_container"
     draw_pie_chart(id_container, data, colors) {
       //nothing to draw
       if(data.length==0) return;
@@ -73,103 +77,13 @@ let summary_ghg = new Vue({
       ;
     },
 
-    draw_all_charts(){
-      if(this.Global.TotalGHG().total==0) return;
-
-      //pie charts
-        this.draw_pie_chart('chart_1',
-          [
-            {"label":"", "value":100*Global.Waste.ww_KPI_GHG().total/Global.TotalGHG().total},
-            {"label":"", "value":100*Global.Water.ws_KPI_GHG().total/Global.TotalGHG().total},
-          ],[
-            "var(--color-level-Waste)",
-            "var(--color-level-Water)",
-          ]
-        );
-
-        this.draw_pie_chart('chart_2',
-          Structure.filter(s=>s.sublevel).map(s=>{
-            let label = "";
-            let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum()/Global.TotalGHG().total;
-            return {label,value};
-          }),
-          Structure.filter(s=>s.sublevel).map(s=>s.color),
-        );
-
-        this.draw_pie_chart('chart_3',
-          [
-            {"label":"", "value":100*Global.TotalGHG().co2/Global.TotalGHG().total},
-            {"label":"", "value":100*Global.TotalGHG().n2o/Global.TotalGHG().total},
-            {"label":"", "value":100*Global.TotalGHG().ch4/Global.TotalGHG().total},
-          ],
-          [
-            this.gas_colors.co2,
-            this.gas_colors.n2o,
-            this.gas_colors.ch4,
-          ],
-        );
-
-        this.draw_pie_chart('chart_nrg_levels',
-          [
-            {"label":"", "value":100*Global.Waste.ww_nrg_cons()/Global.TotalNRG()},
-            {"label":"", "value":100*Global.Water.ws_nrg_cons()/Global.TotalNRG()},
-          ],
-          [
-            "var(--color-level-Waste)",
-            "var(--color-level-Water)",
-          ],
-        );
-
-        this.draw_pie_chart('chart_nrg_stages',
-          Structure.filter(s=>s.sublevel).map(s=>{
-            let label = "";
-            let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum()/Global.TotalNRG();
-            return {label,value};
-          }),
-          Structure.filter(s=>s.sublevel).map(s=>s.color),
-        );
-
-      //bar charts
-        this.draw_bar_chart(
-          'bar_chart_ghg_substages',
-          Structure.filter(s=>s.sublevel).map(s=>{
-            return Global[s.level][s.sublevel].map(ss=>{
-              let name     = s.prefix+" "+ss.name;
-              let emission = ss[s.prefix+'_KPI_GHG'](); 
-              let co2 = emission.co2;
-              let n2o = emission.n2o;
-              let ch4 = emission.ch4;
-              return {name, co2, ch4, n2o};
-            });
-          }).reduce((p,c)=>p.concat(c),[]),
-          colors=[
-            this.gas_colors.co2,
-            this.gas_colors.ch4,
-            this.gas_colors.n2o,
-          ],
-        );
-
-        this.draw_bar_chart(
-          'bar_chart_nrg_substages',
-          Structure.filter(s=>s.sublevel).map(s=>{
-            return Global[s.level][s.sublevel].map(ss=>{
-              let name = s.prefix+" "+ss.name;
-              let kWh  = ss[s.prefix+'_nrg_cons']; 
-              return {name, kWh};
-            });
-          }).reduce((p,c)=>p.concat(c),[]),
-          colors=[
-            "#ffbe54",
-          ],
-        );
-    },
-
-    draw_bar_chart(id_container,data,colors){
+    //create a bar chart inside "id_container"
+    draw_bar_chart(id_container, data, colors, yUnit){
       if(data.length==0) return;
       let keys = Object.keys(data[0]).slice(1);//llegenda
 
       var margin = {top:20,right:160,bottom:35,left:30};
-      var width  = window.innerWidth-margin.left-margin.right;
+      var width  = window.innerWidth-margin.left-margin.right-50;
       var height = 500-margin.top-margin.bottom;
       var svg = d3.select(`#${id_container}`)
         .append("svg")
@@ -200,7 +114,8 @@ let summary_ghg = new Vue({
         .orient("left")
         .ticks(5)
         .tickSize(-width, 0, 0)
-        .tickFormat( function(d) { return d } );
+        .tickFormat(function(d){return d})
+      ;
 
       var xAxis = d3.svg.axis()
         .scale(x)
@@ -215,7 +130,7 @@ let summary_ghg = new Vue({
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
 
-      // Create groups for each series, rects for each segment 
+      // Create groups for each series, rects for each segment
       var groups = svg.selectAll("g.cost")
         .data(dataset)
         .enter().append("g")
@@ -241,27 +156,26 @@ let summary_ghg = new Vue({
           tooltip.select("text").text(d.y);
         });
 
-
       // Draw legend
       var legend = svg.selectAll(".legend")
         .data(colors)
         .enter().append("g")
         .attr("class", "legend")
         .attr("transform", function(d, i) { return "translate(30," + i * 19 + ")"; });
-      
+
       legend.append("rect")
         .attr("x", width - 18)
         .attr("width", 18)
         .attr("height", 18)
         .style("fill", function(d, i) {return colors.slice()[i];});
-      
+
       legend.append("text")
         .attr("x", width + 5)
         .attr("y", 9)
         .attr("dy", ".35em")
         .style("text-anchor", "start")
         .text((d,i)=>{
-          return keys[i].toUpperCase();
+          return keys[i]+" ("+yUnit+")";
         });
 
 
@@ -269,7 +183,7 @@ let summary_ghg = new Vue({
       var tooltip = svg.append("g")
         .attr("class", "tooltip")
         .style("display", "none");
-          
+
       tooltip.append("rect")
         .attr("width", 30)
         .attr("height", 20)
@@ -283,6 +197,98 @@ let summary_ghg = new Vue({
         .attr("font-size", "12px")
         .attr("font-weight", "bold");
     },
+
+    //call chart drawing functions
+    draw_all_charts(){
+      if(this.Global.TotalGHG().total==0) return;
+      //draw pie charts
+        this.draw_pie_chart('chart_1',
+          [
+            {"label":"", "value":100*Global.Water.ws_KPI_GHG().total/Global.TotalGHG().total},
+            {"label":"", "value":100*Global.Waste.ww_KPI_GHG().total/Global.TotalGHG().total},
+          ],[
+            "var(--color-level-Water)",
+            "var(--color-level-Waste)",
+          ]
+        );
+
+        this.draw_pie_chart('chart_2',
+          Structure.filter(s=>s.sublevel).map(s=>{
+            let label = "";
+            let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum()/Global.TotalGHG().total;
+            return {label,value};
+          }),
+          Structure.filter(s=>s.sublevel).map(s=>s.color),
+        );
+
+        this.draw_pie_chart('chart_3',
+          [
+            {"label":"", "value":100*Global.TotalGHG().co2/Global.TotalGHG().total},
+            {"label":"", "value":100*Global.TotalGHG().n2o/Global.TotalGHG().total},
+            {"label":"", "value":100*Global.TotalGHG().ch4/Global.TotalGHG().total},
+          ],
+          [
+            this.gas_colors.co2,
+            this.gas_colors.n2o,
+            this.gas_colors.ch4,
+          ],
+        );
+
+        this.draw_pie_chart('chart_nrg_levels',
+          [
+            {"label":"", "value":100*Global.Water.ws_nrg_cons()/Global.TotalNRG()},
+            {"label":"", "value":100*Global.Waste.ww_nrg_cons()/Global.TotalNRG()},
+          ],
+          [
+            "var(--color-level-Water)",
+            "var(--color-level-Waste)",
+          ],
+        );
+
+        this.draw_pie_chart('chart_nrg_stages',
+          Structure.filter(s=>s.sublevel).map(s=>{
+            let label = "";
+            let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum()/Global.TotalNRG();
+            return {label,value};
+          }),
+          Structure.filter(s=>s.sublevel).map(s=>s.color),
+        );
+      //draw bar charts
+        this.draw_bar_chart(
+          'bar_chart_ghg_substages',
+          Structure.filter(s=>s.sublevel).map(s=>{
+            return Global[s.level][s.sublevel].map(ss=>{
+              let name     = s.prefix+" "+ss.name;
+              let emission = ss[s.prefix+'_KPI_GHG']();
+              let CO2 = emission.co2;
+              let N2O = emission.n2o;
+              let CH4 = emission.ch4;
+              return {name, CO2, CH4, N2O};
+            });
+          }).reduce((p,c)=>p.concat(c),[]),
+          colors=[
+            this.gas_colors.co2,
+            this.gas_colors.ch4,
+            this.gas_colors.n2o,
+          ],
+          'kgCO2eq',
+        );
+
+        this.draw_bar_chart(
+          'bar_chart_nrg_substages',
+          Structure.filter(s=>s.sublevel).map(s=>{
+            return Global[s.level][s.sublevel].map(ss=>{
+              let name   = s.prefix+" "+ss.name;
+              let Energy = ss[s.prefix+'_nrg_cons'];
+              return {name, Energy};
+            });
+          }).reduce((p,c)=>p.concat(c),[]),
+          colors=[
+            "#ffbe54",
+          ],
+          'kWh',
+        );
+    },
   },
 
   template:`
@@ -294,19 +300,17 @@ let summary_ghg = new Vue({
 
       <!--select tables or charts-->
       <div style="padding:1em;border:1px solid #ccc">
-        <button @click="current_view='table'" :selected="current_view=='table'">
-          Table
-        </button>
-        <button @click="current_view='charts'" :selected="current_view=='charts'">
-          Charts
-        </button>
+        <button @click="current_view='table'"      :selected="current_view=='table'"     >Table</button>
+        <button @click="current_view='charts_ghg'" :selected="current_view=='charts_ghg'">Charts GHG</button>
+        <button @click="current_view='charts_nrg'" :selected="current_view=='charts_nrg'">Charts Energy</button>
+        <button @click="current_view='charts_pop'" :selected="current_view=='charts_pop'">Charts Serviced Population</button>
       </div>
 
       <!--content-->
       <div>
         <!--tables-->
         <div v-if="current_view=='table'">
-          <table style="margin:auto;width:85%;border-spacing:1px">
+          <table style="width:85%;border-spacing:1px">
             <!--total ghg and nrg-->
             <tbody style="background:var(--color-level-generic);color:white">
               <tr>
@@ -451,8 +455,8 @@ let summary_ghg = new Vue({
           </table>
         </div>
 
-        <!--charts-->
-        <div v-if="current_view=='charts'">
+        <!--charts ghg-->
+        <div v-if="current_view=='charts_ghg'">
           <!--pie charts ghg-->
           <div
             style="
@@ -552,21 +556,10 @@ let summary_ghg = new Vue({
               <div id=bar_chart_ghg_substages></div>
             </div>
           </div>
+        </div>
 
-          <!--progress bars-->
-          <div>
-            <div class=chart_container>
-              <div class=chart_title>
-                Serviced population
-              </div>
-
-              <div style="">
-                <serv_pop_bar v-if="Global.Water.ws_resi_pop" :stage="Global.Water" code="ws_SL_serv_pop"></serv_pop_bar>
-                <serv_pop_bar v-if="Global.Waste.ww_resi_pop" :stage="Global.Waste" code="ww_SL_serv_pop"></serv_pop_bar>
-              </div>
-            </div>
-          </div>
-
+        <!--charts nrg-->
+        <div v-if="current_view=='charts_nrg'">
           <!--pie charts nrg-->
           <div
             style="
@@ -636,6 +629,20 @@ let summary_ghg = new Vue({
             </div>
           </div>
         </div>
+
+        <!--charts pop-->
+        <div v-if="current_view=='charts_pop'">
+          <div class=chart_container>
+            <div class=chart_title>
+              Serviced population
+            </div>
+
+            <div style="">
+              <serv_pop_bar v-if="Global.Water.ws_resi_pop" :stage="Global.Water" code="ws_SL_serv_pop"></serv_pop_bar>
+              <serv_pop_bar v-if="Global.Waste.ww_resi_pop" :stage="Global.Waste" code="ww_SL_serv_pop"></serv_pop_bar>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   `,
@@ -646,6 +653,7 @@ let summary_ghg = new Vue({
       try{
         _this.draw_all_charts();
       }catch(e){
+        console.warn(e);
       }
     })
   },
@@ -678,6 +686,7 @@ let summary_ghg = new Vue({
       #summary_ghg button[selected]{
         background:var(--color-level-generic);
         color:white;
+        outline:none;
       }
 
       /*pie chart*/
@@ -739,7 +748,7 @@ let summary_ghg = new Vue({
   `,
 });
 
-//view for a horitzontal bar with the % of serviced population
+//serviced population % progress bar
 Vue.component('serv_pop_bar',{
   props:[
     "stage",
@@ -761,7 +770,8 @@ Vue.component('serv_pop_bar',{
         {{translate(code+'_descr')}}
       </div>
       <div>
-        <progress :value="stage[code]()"
+        <progress
+          :value="stage[code]()"
           style="height:2.5em;width:100%"
           max=100
         ></progress>

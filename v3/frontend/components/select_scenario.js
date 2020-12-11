@@ -4,7 +4,7 @@ let select_scenario=new Vue({
     visible:false,
     scenarios_compared:[],
     loadfile_replace:true,
-    is_configuration_open:true,
+    is_configuration_open:false,
     are_you_editing_name:false,
 
     variable,
@@ -190,7 +190,7 @@ let select_scenario=new Vue({
         </h2>
         <p style="text-align:center;color:#666">
           <b>
-            Create, edit, load, save and compare assessments.
+            Load, save, create, configure, edit and compare assessments
           </b>
         </p>
       </div>
@@ -275,10 +275,8 @@ let select_scenario=new Vue({
               <!--select current scenario-->
               <td style="background:white;text-align:right">
                 <img
-                  @click="is_configuration_open=(scenario==Global)?is_configuration_open^1:true;set_current_scenario(scenario)"
                   class=icon
                   :src="'frontend/img/viti/select_scenario/icon-edit-system'+(scenario==Global?'':'-grey')+'.svg'"
-                  style="cursor:pointer"
                 >
               </td>
 
@@ -333,8 +331,13 @@ let select_scenario=new Vue({
               <!--options-->
               <td style="text-align:left">
                 <button
+                  @click="is_configuration_open=(scenario==Global)?is_configuration_open=!is_configuration_open:true;set_current_scenario(scenario)"
+                  v-html="'settings'"
+                  :configuration_open="is_configuration_open && scenario==Global"
+                ></button>
+                <button
                   @click="set_scenario_and_go_to_tier_b(scenario)"
-                  v-html="'edit inventory'"
+                  v-html="'edit'"
                 ></button>
                 <button
                   @click="delete_scenario(scenario)"
@@ -360,8 +363,8 @@ let select_scenario=new Vue({
                       >
                       <button @click="are_you_editing_name=false">ok</button>
                     </div>
-                    <div v-else style="display:flex;">
-                      <div style="font-size:x-large;padding-right:8px">{{Global.General.Name}}</div>
+                    <div v-else style="display:flex;align-items:center">
+                      <div style="font-size:larger;padding-right:8px">{{Global.General.Name}}</div>
                       <div>
                         <button @click="are_you_editing_name=true">
                           change name
@@ -564,6 +567,7 @@ let select_scenario=new Vue({
             <td style=background:white></td>
             <td style="background:white;text-align:left" colspan=6>
               <button onclick="ecam.new_scenario()"
+                class=new_assessment
                 style="font-size:large"
                 v-html="'+ create new assessment'"
               ></button>
@@ -749,6 +753,16 @@ let select_scenario=new Vue({
 
       #select_scenario button[disabled] {
         color:#ccc;
+      }
+
+      #select_scenario button.new_assessment:hover {
+        text-decoration:underline;
+      }
+
+      #select_scenario button[configuration_open] {
+        background:var(--color-level-generic);
+        color:white;
+        outline:none;
       }
     </style>
   `,

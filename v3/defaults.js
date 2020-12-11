@@ -19,7 +19,7 @@ Global.Waste.Treatment[0].wwt_serv_pop   =100;
 Global.Waste.ww_resi_pop                 =1000;
 
 /*initial page to display*/
-ecam.show('summary_ghg');
+ecam.show('report');
 //go_to('Waste','Treatment');
 //tier_b.disable_all_filters();
 //tier_b.filters_active.Biogas=true;
