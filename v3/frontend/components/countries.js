@@ -95,7 +95,7 @@ let countries = new Vue({
         <tr>
           <td>3</td>
           <td>
-            <a href="frontend/docs/IPCC_V5_6_Ch6_Wastewater.pdf" target=_blank>
+            <a href="frontend/docs/IPCC_2006_V5_6_Ch6_Wastewater.pdf" target=_blank>
               IPCC, 2006, Guidelines for National Greenhouse Gas Inventories
               Volume 5 Waste, Chapter 6
             </a>

@@ -45,6 +45,11 @@ let stages_menu=new Vue({
       let stage = Structure.find(s=>s.level==level&&s.sublevel==sublevel);
       let name  = `${stage.sublevel} ${this.Global[level][sublevel].length+1}`;
       let ss    = new stage.class(name);
+
+      //set default emission factor for grid electricity
+      let prefix = stage.prefix;
+      ss[prefix+'_conv_kwh']=Global.General.conv_kwh_co2;
+
       this.Global[level][sublevel].push(ss);
       return ss;
     },
@@ -132,13 +137,14 @@ let stages_menu=new Vue({
             <tr v-if="show_substages_summary">
               <td v-for="s in Structure.filter(s=>s.sublevel)" style="vertical-align:top;border-top:1px solid #ccc;padding-top:0">
                 <div v-if="Global[s.level][s.sublevel].length==0" style="text-align:center">
-                  <small style="color:#666">~no stages</small>
+                  <small style="color:#666">~no substages</small>
                 </div>
                 <div
                   v-if="s.sublevel"
                   v-for="ss,i in Global[s.level][s.sublevel]"
-                  style="padding:5px 2px;border-bottom:1px solid #ccc"
+                  @click="go_to_substage(ss)"
                   :selected_substage="is_substage_selected(ss)"
+                  style="cursor:pointer;padding:5px 2px;border-bottom:1px solid #ccc"
                 >
                   <div
                     style="
@@ -157,13 +163,12 @@ let stages_menu=new Vue({
                     >
                       <div style="display:flex;align-items:center;">
                         <a
-                          @click="go_to_substage(ss)"
                           v-html="ss.name"
                         ></a>
                         &nbsp;
                         <!--delete substage btn-->
                         <div
-                          @click="delete_substage(s.level,s.sublevel,ss)"
+                          @click.stop="delete_substage(s.level,s.sublevel,ss)"
                           class="delete_substage"
                           title="delete substage"
                         >
@@ -206,7 +211,7 @@ let stages_menu=new Vue({
                   <button
                     style="padding:8px;width:100%;font-size:smaller;"
                     @click="add_substage(s.level,s.sublevel)"
-                    v-html="'+ add substage'"
+                    v-html="'+ create substage'"
                   ></button>
                 </div>
               </td>

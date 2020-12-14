@@ -1,17 +1,21 @@
 let tier_b=new Vue({
   el:"#tier_b",
   data:{
-    visible              : false,
-    level                : 'Water',
-    sublevel             : false,
-    substage             : null,
-    are_you_editing_name : false,
+    visible :false,
+
+    //current stage or substage being edited
+    level:'Water',
+    sublevel:false,
+    substage:null,
+
+    //edit substage name
+    are_you_editing_name:false,
 
     //highlight inputs and outputs arrays
     highlight:false,
     highlighted:{
-      inputs  : [],
-      outputs : [],
+      inputs : [],
+      outputs: [],
     },
 
     //FILTERS (see "backend/filters.js")
@@ -43,7 +47,9 @@ let tier_b=new Vue({
     normalization:{
       selected:"kgCO2eq",
       options:[
-        "kgCO2eq","kgCO2eq/year","kgCO2eq/year/serv.pop.",
+        "kgCO2eq",
+        "kgCO2eq/year",
+        "kgCO2eq/year/serv.pop.",
       ],
     },
 
@@ -69,6 +75,23 @@ let tier_b=new Vue({
     is_code_in_any_filter,
     get_output_value,
     get_sum_of_substages,
+
+    //check if current substage belongs to this scenario
+    check_substage(){
+      let level    = this.level;    //string
+      let sublevel = this.sublevel; //string
+      let substage = this.substage; //object
+
+      if(!sublevel || !substage) return true;
+
+      let index = this.Global[level][sublevel].indexOf(substage);
+      if(index+1){
+        return true;
+      }else{
+        go_to(level,sublevel);
+        return false;
+      }
+    },
 
     set_question(question, new_value){
       //set new question answer
@@ -192,12 +215,15 @@ let tier_b=new Vue({
       if(this.highlight){
         this.highlighted.inputs = Formulas.ids_per_formula(this.get_current_stage()[key]);
       }
-    }
+    },
   },
 
   template:`
     <!--tier b VIEW-->
     <div id=tier_b v-if="visible && Languages.ready">
+
+      <!--check substage--><div v-if="check_substage()"></div>
+
       <!--tier b title + tips-->
       <div id=title :style="{background:get_level_color(level)}">
         <h1 style="font-size:x-large;color:white;align-items:center">

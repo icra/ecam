@@ -1,6 +1,14 @@
 /* ESTIMATIONS: INPUTS WITH EQUATIONS ASSOCIATED*/
 //maybe they can be moved inside the Ecam global class for consistency TODO
 let Estimations={
+  //emission factors for grid electricity
+    wsa_conv_kwh(stage){return Global.General.conv_kwh_co2},
+    wst_conv_kwh(stage){return Global.General.conv_kwh_co2},
+    wsd_conv_kwh(stage){return Global.General.conv_kwh_co2},
+    wwc_conv_kwh(stage){return Global.General.conv_kwh_co2},
+    wwt_conv_kwh(stage){return Global.General.conv_kwh_co2},
+    wwo_conv_kwh(stage){return Global.General.conv_kwh_co2},
+
   //ww
     //ww: 200L person per day
     ww_vol_gene(stage){return 0.2*stage.ww_resi_pop*Global.Days();},

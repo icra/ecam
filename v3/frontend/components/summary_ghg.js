@@ -4,10 +4,11 @@ let summary_ghg = new Vue({
     visible:false,
 
     //folded sections
-    unfolded_levels:['Water','Waste'],
+    //unfolded_levels:['Water','Waste'],
+    unfolded_levels:[],
 
     //current view selected
-    current_view:"charts_ghg",
+    current_view:"table",
 
     //colors for gas charts
     gas_colors:{
@@ -327,8 +328,14 @@ let summary_ghg = new Vue({
                     padding-right:1em;
                   ">
                     <div>
+                      Total gross
                       <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
                       <div class=number_placeholder v-html="format(Global.TotalGHG().total)"></div>
+                    </div>
+                    <div>
+                      Total net
+                      <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
+                      <div class=number_placeholder v-html="format(Global.TotalGHG().total-Global.Waste.ww_GHG_avoided())"></div>
                     </div>
                   </div>
                 </td>
@@ -452,6 +459,28 @@ let summary_ghg = new Vue({
                 </td>
               </tr>
             </tbody>
+
+            <!--avoided ghg emissions-->
+            <tbody class=avoided_emissions>
+              <tr>
+                <td><button>+</button></td>
+                <td>
+                  Avoided GHG emissions (TBD)
+                </td>
+                <td>
+                  <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
+                  <div
+                    class=number_placeholder
+                    style="margin:auto"
+                    v-html="format( Global.Waste.ww_GHG_avoided() )"
+                  ></div>
+                </td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table id=table_avoided_ghg style="width:85%;">
           </table>
         </div>
 
@@ -743,6 +772,12 @@ let summary_ghg = new Vue({
 
       #summary_ghg div.chart_container.bar .y .tick line {
         stroke: #ddd;
+      }
+
+      #summary_ghg tbody.avoided_emissions td {
+        background:lightgreen;
+        border:1px solid #ccc;
+        text-align:center;
       }
     </style>
   `,

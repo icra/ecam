@@ -22,12 +22,12 @@ function go_to(level, sublevel, no_history_entry){
 
   if(sublevel){
     if(Global[level][sublevel].length==0){
-      stages_menu.add_substage(level, sublevel);
+      go_to(level);
+      return;
+    }else{
+      go_to_substage(Global[level][sublevel][0]);
+      return;
     }
-
-    let ss = Global[level][sublevel][0];
-    go_to_substage(ss);
-    return;
   }else{
     tier_b.level    = level;
     tier_b.sublevel = false;

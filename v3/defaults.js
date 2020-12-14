@@ -11,6 +11,11 @@ stages_menu.visible = 0;
 Global.General.Country="Algeria";
 select_scenario.set_variables_from_selected_country();
 
+//create 1 substage at each stage
+Structure.filter(s=>s.sublevel).forEach(stage=>{
+  stages_menu.add_substage(stage.level, stage.sublevel);
+});
+
 let energy = 1;
 Structure.filter(s=>s.sublevel).forEach(stage=>{
   Global[stage.level][stage.sublevel].forEach(ss=>ss[stage.prefix+'_nrg_cons']=energy++);
@@ -22,8 +27,14 @@ Global.Waste.Treatment[0].wwt_serv_pop   =100;
 Global.Waste.ww_resi_pop                 =1000;
 
 /*initial page to display*/
-ecam.show('report');
-//go_to('Waste','Treatment');
+ecam.new_scenario();
+Scenarios.forEach(scenario=>{
+  select_scenario.scenarios_compared.push(scenario);
+});
+ecam.show('select_scenario');
+
+
+//go_to('Water','Abstraction');
 //tier_b.disable_all_filters();
 //tier_b.filters_active.Biogas=true;
 //variable.view('wwt_biog_pro');

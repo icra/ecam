@@ -33,8 +33,16 @@ let Filters = {
   "wwo_vol_disc",      //variable
 ],
 "Emission factors":[
-  "wwc_ch4_efac_col",
-  "wwc_ch4_efac_cso",
+  "wsa_conv_kwh", //EF grid electricity
+  "wst_conv_kwh", //EF grid electricity
+  "wsd_conv_kwh", //EF grid electricity
+  "wwc_conv_kwh", //EF grid electricity
+  "wwt_conv_kwh", //EF grid electricity
+  "wwo_conv_kwh", //EF grid electricity
+
+  "wwc_ch4_efac_col", //EF CH4 collected wastewater
+  "wwc_ch4_efac_cso", //EF CH4 non collected wastewater
+
   "wwc_n2o_efac_col",
   "wwc_n2o_efac_cso",
 

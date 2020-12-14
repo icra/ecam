@@ -5,6 +5,7 @@ let gwp_table = new Vue({
     visible:false,
 
     Global,
+    Configuration,
     GWP_reports,
   },
 
@@ -37,13 +38,17 @@ let gwp_table = new Vue({
           <th>Select</th>
         </tr>
         <tr v-for="rep,i in GWP_reports"
-          :class="Global.General.gwp_reports_index==i ? 'selected':''">
+          :class="Configuration.gwp_reports_index==i ? 'selected':''">
           <td><b>{{rep.report}}</b></td>
           <td class=number>1</td>
           <td class=number>{{rep.ct_ch4_eq}}</td>
           <td class=number>{{rep.ct_n2o_eq}}</td>
           <td><small>{{rep.comment}}</small></td>
-          <td><button @click="Global.General.gwp_reports_index=i;set_constants_from_gwp_report()">select</button></td>
+          <td>
+            <button @click="Configuration.gwp_reports_index=i;set_constants_from_gwp_report()">
+              select
+            </button>
+          </td>
         </tr>
       </table>
     </div>

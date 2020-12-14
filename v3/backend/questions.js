@@ -284,6 +284,7 @@ let Questions={
         "wwt_nrg_biog",
 
         "wwt_KPI_biog_x_bod",
+        "wwt_nrg_biog_val",
         "wwt_KPI_GHG_dig_fuel",
         "wwt_KPI_GHG_biog",
         "wwt_KPI_nrg_biogas",
@@ -358,6 +359,7 @@ let Questions={
         "wwt_wr_vol_d",
         "wwt_SL_ghg_non",   //output
         "wwt_wr_GHG_avo_N", //output
+        "wwt_wr_GHG_avo_P", //output
         "wwt_wr_GHG_avo",   //output
       ],
       advanced:1,

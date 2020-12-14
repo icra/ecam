@@ -4,12 +4,14 @@ let select_scenario=new Vue({
     visible:false,
     scenarios_compared:[],
     loadfile_replace:true,
-    is_configuration_open:false,
+
+    are_settings_open:false,
     are_you_editing_name:false,
 
     variable,
 
     Global,
+    Configuration,
     Languages,
     Scenarios,
     Info,
@@ -18,7 +20,31 @@ let select_scenario=new Vue({
     GWP_reports,
     Cts,
   },
+
   methods:{
+    show_input(){
+      this.are_you_editing_name=true;
+      this.$nextTick(function(){
+        this.focus_input();
+      });
+    },
+
+    focus_input(){
+      let arr=this.$refs.scenario_name;
+      if(arr){
+        let el=arr.find(el=>el);
+        if(el) el.select();
+      }
+    },
+
+    set_conv_kwh(){
+      Structure.filter(s=>s.sublevel).forEach(s=>{
+        this.Global[s.level][s.sublevel].forEach(ss=>{
+          ss[s.prefix+'_conv_kwh']=this.Global.General.conv_kwh_co2;
+        });
+      });
+    },
+
     set_current_scenario(obj){
       ecam.set_current_scenario(obj);
     },
@@ -29,7 +55,10 @@ let select_scenario=new Vue({
     },
 
     delete_scenario(obj){
-      if(!confirm("continue?")) return;
+      if(obj.TotalGHG().total){
+        if(!confirm(`Confirm delete assessment "${obj.General.Name}"?`))
+          return;
+      }
 
       let index = this.scenarios_compared.indexOf(obj);
       if(index+1){
@@ -148,9 +177,11 @@ let select_scenario=new Vue({
     //set variables from selected country
     set_variables_from_selected_country(){
       let country = this.Global.General.Country;
+      this.Global.General.Currency=Countries[country].currency;
 
-      //variables in Global.to be changed:
-      [ 'conv_kwh_co2',
+      //variables in Global.General to be changed:
+      [ 
+        'conv_kwh_co2',
         'prot_con',
         'bod_pday',
         'bod_pday_fs'
@@ -161,13 +192,13 @@ let select_scenario=new Vue({
         this.Global.General[key]=Countries[country][key2];
       });
 
-      //set currency
-      this.Global.General.Currency=Countries[country].currency;
+      //trigger conv_kwh_co2 change for all substages
+      this.set_conv_kwh();
     },
 
     //set constants from selected gwp report
     set_constants_from_gwp_report(){
-      let index = this.Global.General.gwp_reports_index;
+      let index = Configuration.gwp_reports_index;
       this.Cts.ct_ch4_eq.value = this.GWP_reports[index].ct_ch4_eq;
       this.Cts.ct_n2o_eq.value = this.GWP_reports[index].ct_n2o_eq;
     },
@@ -181,414 +212,464 @@ let select_scenario=new Vue({
     translate,
   },
 
+  mounted(){
+    this.focus_input();
+  },
+
   template:`
     <div id=select_scenario v-if="visible && Languages.ready">
-      <!--title-->
-      <div>
-        <h2 style="text-align:center;margin-bottom:0">
-          Configuration ({{Scenarios.length}} assessments)
-        </h2>
-        <p style="text-align:center;color:#666">
-          <b>
-            Load, save, create, configure, edit and compare assessments
-          </b>
-        </p>
-      </div>
-
-      <!--load save buttons-->
-      <div id=load_save_btns
+      <!--container-->
+      <div
         style="
-          display:flex;
-          justify-content:center;
-          align-items:center;
+          display:grid;
+          grid-template-columns:70% 30%;
         "
       >
-        <!--load file replace-->
         <div
           style="
-            border:1px solid #ccc;
-            padding:0.5em 1em;
-            border-radius:1em;
-            margin-right:20px;
+            padding-left:2em;
+            padding-bottom:1em;
+            padding-right:1em;
           "
         >
-          <div style="
-            display:flex;
-            justify-content:space-between;
-          "
-          >
-            <div style="font-size:larger">
-              <b>Load file</b>
-            </div>
-            <div style="font-size:smaller">
-              <!--load mode radio btns-->
-              <label title="append json file to current list of assessments">
-                <input type=radio v-model="loadfile_replace" :value='false'>Append
-              </label>
-              <label title="replace current assessments with json file">
-                <input type=radio v-model="loadfile_replace" :value='true'>Replace
-              </label>
+          <!--title-->
+          <div>
+            <h2 style="padding-left:0;margin-bottom:0">
+              Configuration
+            </h2>
+            <div style="color:#666">
+              Load, save, create, configure, edit and compare assessments
             </div>
           </div>
 
+          <!--load save buttons-->
           <div style="margin-top:10px">
-            <input
-              type="file"
-              id="loadfile"
-              accept=".json"
-              @change="load_json_file($event)"
+            <div id=load_save_btns
+              style="
+                display:grid;
+                grid-template-columns:60% 40%;
+                align-items:center;
+              "
             >
-          </div>
-        </div>
-
-        <!--save file-->
-        <div>
-          <button @click="save_to_file()" title="save all assessments to a JSON file">
-            <div style="display:flex;align-items:center">
-              <img
-                class=icon
-                src="frontend/img/viti/select_scenario/icon-save.svg"
+              <!--load file-->
+              <div
+                style="
+                  border:1px solid #ccc;
+                  padding:0.5em 1em;
+                  margin-right:20px;
+                "
               >
-              <span>Save all assessments</span>
-            </div>
-          </button>
-        </div>
-      </div>
+                <div>
+                  <div style="font-size:larger">
+                    <b>Load file</b>
+                    <small>(note: an ecam file consists of a list of assessments)</small>
+                  </div>
+                </div>
 
-      <!--select scenario table-->
-      <div>
-        <table style="margin:20px auto;width:90%;" id=main_table>
-          <thead>
-            <tr>
-              <td></td>
-              <td></td>
-              <td>Assessment period</td>
-              <td>GHG (kgCO<sub>2</sub>eq)</td>
-              <td>Energy (kWh)</td>
-              <td>Compare</td>
-              <td>Options</td>
-            </tr>
-          </thead>
+                <div style="margin-top:10px">
+                  <input
+                    type="file"
+                    id="loadfile"
+                    accept=".json"
+                    @change="load_json_file($event)"
+                  >
+                </div>
 
-          <tbody v-for="scenario in Scenarios">
-            <tr>
-              <!--select current scenario-->
-              <td style="background:white;text-align:right">
-                <img
-                  class=icon
-                  :src="'frontend/img/viti/select_scenario/icon-edit-system'+(scenario==Global?'':'-grey')+'.svg'"
-                >
-              </td>
-
-              <!--scenario name-->
-              <td
-                @click="set_current_scenario(scenario)"
-                style="padding:0;background:white;cursor:pointer"
-              >
-                <div
-                  class=scenario_name
-                  :current_scenario="scenario==Global"
+                <!--load mode radio btns-->
+                <div 
+                  style="
+                    margin-top:10px;
+                    font-size:smaller;
+                    display:grid;
+                    grid-template-columns:50% 50%;
+                  "
                 >
                   <div>
-                    <b v-html="scenario.General.Name"></b>
-                  </div>
-                </div>
-              </td>
-
-              <!--assessment period-->
-              <td>
-                <div>
-                  <span v-html="scenario.General.AssessmentPeriodStart"></span>
-                </div>
-                <div>
-                  <span v-html="scenario.General.AssessmentPeriodEnd"></span>
-                </div>
-                <div style="font-size:smaller">
-                  (<span v-html="format(scenario.Days())"></span>
-                  <span>{{translate('days')}}</span>)
-                </div>
-              </td>
-
-              <!--ghg-->
-              <td class=ghg>
-                <div>
-                  <span v-html="format(scenario.TotalGHG().total)"></span>
-                </div>
-              </td>
-
-              <!--energy-->
-              <td class=nrg>
-                <div>
-                  <span v-html="format(scenario.TotalNRG())"></span>
-                </div>
-              </td>
-
-              <!--compare-->
-              <td class=compare>
-                <input type=checkbox :checked="scenarios_compared.indexOf(scenario)!=-1" @click="add_scenario_to_compared(scenario)">
-              </td>
-
-              <!--options-->
-              <td style="text-align:left">
-                <button
-                  @click="is_configuration_open=(scenario==Global)?is_configuration_open=!is_configuration_open:true;set_current_scenario(scenario)"
-                  v-html="'settings'"
-                  :configuration_open="is_configuration_open && scenario==Global"
-                ></button>
-                <button
-                  @click="set_scenario_and_go_to_tier_b(scenario)"
-                  v-html="'edit'"
-                ></button>
-                <button
-                  @click="delete_scenario(scenario)"
-                  :disabled="scenario==Global"
-                  v-html="'delete'"
-                ></button>
-              </td>
-            </tr>
-            <transition name="fade">
-              <tr v-if="is_configuration_open && scenario==Global" class=configuration>
-                <td style="background:white"></td>
-                <td colspan=7>
-                  <!--edit name-->
-                  <div style="padding:20px 10px">
-                    <div v-if="are_you_editing_name" style="text-align:left">
-                      <input
-                        @blur="are_you_editing_name=false"
-                        v-model="Global.General.Name"
-                        @keyup.enter="are_you_editing_name=false"
-                        maxlength=50
-                        placeholder="Assessment name"
-                        style="border:1px solid #ccc"
-                      >
-                      <button @click="are_you_editing_name=false">ok</button>
-                    </div>
-                    <div v-else style="display:flex;align-items:center">
-                      <div style="font-size:larger;padding-right:8px">{{Global.General.Name}}</div>
-                      <div>
-                        <button @click="are_you_editing_name=true">
-                          change name
-                        </button>
+                    <label class=load_mode :selected="loadfile_replace==true" title="replace the current list of assessments with the loaded file">
+                      <input type=radio v-model="loadfile_replace" :value='true'>
+                      <img class=icon src="frontend/img/viti/select_scenario/icon-replace.svg">
+                      <div style=margin-left:5px>
+                        <b>Replace</b><br>current list
                       </div>
-                    </div>
+                    </label>
                   </div>
-                  <!--edit parameters (configuration)-->
-                  <div 
-                    style="
-                      text-align:left;
-                      display:grid;
-                      grid-template-columns:49% 49%;
-                      grid-gap:2% 20px;
-                      padding-bottom:2em;
-                    "
+                  <div>
+                    <label class=load_mode :selected="loadfile_replace==false" title="append the loaded file to the current list of assessments">
+                      <input type=radio v-model="loadfile_replace" :value='false'>
+                      <img class=icon src="frontend/img/viti/select_scenario/icon-append.svg">
+                      <div style=margin-left:5px>
+                        <b>Append</b><br>to current list
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!--save file-->
+              <div
+                style="text-align:center"
+              >
+                <button class=save_btn @click="save_to_file()" title="save the current list of assessments to a file">
+                  <div style="display:flex;align-items:center">
+                    <img
+                      class=icon
+                      src="frontend/img/viti/select_scenario/icon-save.svg"
+                      style="margin-right:5px"
+                    >
+                    <div>Save all assessments</div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!--scenarios table-->
+          <div style="margin-top:20px">
+            <div
+              style="
+                margin-bottom:10px;
+                font-size:large;
+              "
+            >
+              Assessments list ({{format(Scenarios.length)}})
+            </div>
+            <table style="width:100%;" id=main_table>
+              <thead>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>Assessment period</td>
+                  <td>GHG (kgCO<sub>2</sub>eq)</td>
+                  <td>Energy (kWh)</td>
+                  <td>Compare</td>
+                  <td>Options</td>
+                </tr>
+              </thead>
+
+              <tbody v-for="scenario in Scenarios">
+                <tr>
+                  <!--select current scenario-->
+                  <td style="background:white;padding:0">
+                    <img
+                      class=icon
+                      :src="'frontend/img/viti/select_scenario/icon-edit-system'+(scenario==Global?'':'-grey')+'.svg'"
+                    >
+                  </td>
+
+                  <!--scenario name-->
+                  <td
+                    @click="are_settings_open = (scenario==Global) ? are_settings_open=!are_settings_open: are_settings_open; set_current_scenario(scenario)"
+                    style="padding:0;background:white;cursor:pointer"
                   >
-                    <!--assessment period-->
-                    <fieldset>
-                      <legend>Assessment period</legend>
+                    <div
+                      class=scenario_name
+                      :current_scenario="scenario==Global"
+                    >
                       <div>
-                        <b>
-                          From:
-                          <input type=date v-model="Global.General.AssessmentPeriodStart">
-                        </b>
-                        <b>
-                          To:
-                          <input type=date v-model="Global.General.AssessmentPeriodEnd">
-                        </b>
-                        <span>
-                          <span :class="Global.Days()<=0 ? 'warning':''" v-html="format(Global.Days())"></span>
-                          <span>{{translate('days')}}</span>
-                        </span>
+                        <b v-html="scenario.General.Name"></b>
                       </div>
-                    </fieldset>
+                    </div>
+                  </td>
 
-                    <!--select currency-->
-                    <fieldset>
-                      <legend>
-                        <span v-html="translate('currency')"></span>
-                      </legend>
-                      <div>
-                        <b>
-                          {{translate('configuration_new_currency')}}
-                        </b>
-                        <input
-                          v-model="Global.General.Currency"
-                          size=3 maxlength=3 placeholder="ccc"
-                        >
-                      </div>
-                    </fieldset>
+                  <!--assessment period-->
+                  <td>
+                    <div>
+                      <span v-html="scenario.General.AssessmentPeriodStart"></span>
+                    </div>
+                    <div>
+                      <span v-html="scenario.General.AssessmentPeriodEnd"></span>
+                    </div>
+                    <div style="font-size:smaller">
+                      (<span v-html="format(scenario.Days())"></span>
+                      <span>{{translate('days')}}</span>)
+                    </div>
+                  </td>
 
-                    <!--select country-->
-                    <fieldset>
-                      <legend> Country </legend>
-                      <div>
-                        <div>
-                          <b>Select</b>&emsp;
-                          <select
-                            v-model="Global.General.Country"
-                            @change="set_variables_from_selected_country()"
+                  <!--ghg-->
+                  <td class=ghg>
+                    <div>
+                      <span v-html="format(scenario.TotalGHG().total)"></span>
+                    </div>
+                  </td>
+
+                  <!--energy-->
+                  <td class=nrg>
+                    <div>
+                      <span v-html="format(scenario.TotalNRG())"></span>
+                    </div>
+                  </td>
+
+                  <!--compare-->
+                  <td class=compare>
+                    <input type=checkbox :checked="scenarios_compared.indexOf(scenario)!=-1" @click="add_scenario_to_compared(scenario)">
+                  </td>
+
+                  <!--options-->
+                  <td style="text-align:left">
+                    <div class=options_container>
+                      <button
+                        @click="are_settings_open=(scenario==Global)?are_settings_open=!are_settings_open:true;set_current_scenario(scenario)"
+                        v-html="'settings'"
+                        :configuration_open="are_settings_open && scenario==Global"
+                      ></button>
+                      <button
+                        @click="set_scenario_and_go_to_tier_b(scenario)"
+                        v-html="'edit'"
+                      ></button>
+                      <button
+                        @click="delete_scenario(scenario)"
+                        v-if="scenario!=Global"
+                        v-html="'delete'"
+                      ></button>
+                    </div>
+                  </td>
+                </tr>
+
+                <!--settings-->
+                <transition name="fade">
+                  <tr v-if="are_settings_open && scenario==Global">
+                    <td style="background:white"></td>
+                    <td colspan=7>
+                      <!--edit name-->
+                      <div style="padding:20px 10px">
+                        <div v-if="are_you_editing_name" style="text-align:left">
+                          <input
+                            ref="scenario_name"
+                            v-model="Global.General.Name"
+                            @keyup.enter="are_you_editing_name=false"
+                            @blur="are_you_editing_name=false"
+                            placeholder="Assessment name"
+                            maxlength=50
+                            style="border:1px solid #ccc"
                           >
-                            <option value="false">--select--</option>
-                            <option v-for="country in Object.keys(Countries)">
-                              {{country}}
-                            </option>
-                          </select>
-                          &emsp;
-                          <button onclick="ecam.show('countries')">
-                            More info
-                          </button>
-                        </div><hr>
-
-                        <table style="width:100%;text-align:left">
-                          <tr :class="Global.General.conv_kwh_co2<=0?'warning':''">
-                            <td v-html="translate('conv_kwh_co2_descr')">
-                            <td>
-                              <input type=number class=number v-model.number="Global.General.conv_kwh_co2" style="width:95%" min=0>
-                            </td>
-                            <td>
-                              kg<sub>CO<sub>2</sub></sub>/kWh
-                            </td>
-                          </tr>
-                          <tr :class="Global.General.prot_con<=0?'warning':''">
-                            <td v-html="translate('prot_con_descr')">
-                            <td>
-                              <input type=number class=number v-model.number="Global.General.prot_con" style="width:95%" min=0>
-                            </td>
-                            <td>
-                              kg/{{translate('person')}}/{{translate('year')}}
-                            </td>
-                          </tr>
-                          <tr :class="Global.General.bod_pday<=0?'warning':''">
-                            <td v-html="translate('bod_pday_descr')">
-                            <td>
-                              <input type=number class=number v-model.number="Global.General.bod_pday" style="width:95%" min=0>
-                            </td>
-                            <td>
-                              g/{{translate('person')}}/{{translate('day')}}
-                            </td>
-                          </tr>
-                          <tr :class="Global.General.bod_pday_fs<=0?'warning':''">
-                            <td v-html="translate('bod_pday_fs_descr')">
-                            <td>
-                              <input type=number class=number v-model.number="Global.General.bod_pday_fs" style="width:95%" min=0>
-                            </td>
-                            <td>
-                              g/{{translate('person')}}/{{translate('day')}}
-                            </td>
-                          </tr>
-                        </table>
+                          <button @click="are_you_editing_name=false">ok</button>
+                        </div>
+                        <div v-else style="display:flex;align-items:center">
+                          <div>
+                            <button @click="show_input()">
+                              change assessment name
+                            </button>
+                          </div>
+                        </div>
                       </div>
-                    </fieldset>
 
-                    <!--select assessment report-->
-                    <fieldset>
-                      <legend>
-                        Global Warming Potential Source
-                      </legend>
-                      <div>
-                        <div>
-                          <!--select gwp report which defines gwp values-->
-                          <b>Select</b>&emsp;
-                          <select
-                            v-model="Global.General.gwp_reports_index"
-                            @change="set_constants_from_gwp_report()"
-                          >
-                            <option v-for="report,i in GWP_reports" :value="i">
-                              {{report.report}}
-                            </option>
-                          </select>
-                          &emsp;
-                          <button onclick="ecam.show('gwp_table')">
-                            More info
-                          </button>
-                        </div><hr>
+                      <!--edit parameters (configuration)-->
+                      <div style="text-align:left;padding-bottom:10px">
+                        <!--assessment period-->
+                        <fieldset>
+                          <legend>Assessment period</legend>
+                          <div>
+                            <b>From: <input type=date v-model="scenario.General.AssessmentPeriodStart"></b>
+                            <b>To:   <input type=date v-model="scenario.General.AssessmentPeriodEnd"></b>
+                            <span>
+                              <span :class="scenario.Days()<=0 ? 'warning':''" v-html="format(scenario.Days())"></span>
+                              <span>{{translate('days')}}</span>
+                            </span>
+                          </div>
+                        </fieldset>
 
-                        <!--description of gwp values-->
-                        <p>
-                          <b style="padding:0.5em 0"
-                            v-html="translate('gwp_values_relative_to').prettify()"
-                          ></b>
-                        </p>
+                        <!--select country-->
+                        <fieldset>
+                          <legend> Country </legend>
+                          <div>
+                            <div>
+                              <b>Select</b>
+                              &nbsp;
+                              <select
+                                v-model="scenario.General.Country"
+                                @change="set_variables_from_selected_country()"
+                              >
+                                <option value="false">--select--</option>
+                                <option v-for="country in Object.keys(Countries)">
+                                  {{country}}
+                                </option>
+                              </select>
+                              <button onclick="ecam.show('countries')">
+                                More info
+                              </button>
+                            </div>
 
-                        <!--actual gwp values-->
-                        <table>
-                          <tr>
-                            <td>
-                              {{translate('carbon_dioxide')}} (CO<sub>2</sub>)
-                            </td>
-                            <td align=right>1</td>
-                            <td>
-                              CO<sub>2</sub> {{translate('equivalents')}}
-                            </td>
-                          <tr>
-                            <td>
-                              {{translate('methane')}} (CH<sub>4</sub>)
-                            </td>
-                            <td align=right>
-                              {{Cts.ct_ch4_eq.value}}
-                            </td>
-                            <td>
-                              CO<sub>2</sub> {{translate('equivalents')}}
-                            </td>
-                          <tr>
-                            <td>
-                              {{translate('nitrouns_oxide')}} (N<sub>2</sub>O)
-                            </td>
-                            <td align=right>
-                              {{Cts.ct_n2o_eq.value}}
-                            </td>
-                            <td>
-                              CO<sub>2</sub> {{translate('equivalents')}}
-                            </td>
-                          </tr>
-                        </table>
+                            <table style="width:100%;text-align:left;margin-top:10px">
+                              <!--emission factor for grid electricity-->
+                              <tr :class="scenario.General.conv_kwh_co2<=0?'warning':''">
+                                <td v-html="translate('conv_kwh_co2_descr')">
+                                <td>
+                                  <input id=conv_kwh_co2 type=number class=number @change="set_conv_kwh()" v-model.number="scenario.General.conv_kwh_co2" style="width:95%" min=0>
+                                </td>
+                                <td>
+                                  kg<sub>CO<sub>2</sub></sub>/kWh
+                                </td>
+                              </tr>
+
+                              <!--protein consumption-->
+                              <tr :class="scenario.General.prot_con<=0?'warning':''">
+                                <td v-html="translate('prot_con_descr')">
+                                <td>
+                                  <input type=number class=number v-model.number="scenario.General.prot_con" style="width:95%" min=0>
+                                </td>
+                                <td>
+                                  kg/{{translate('person')}}/{{translate('year')}}
+                                </td>
+                              </tr>
+
+                              <!--BOD per day-->
+                              <tr :class="scenario.General.bod_pday<=0?'warning':''">
+                                <td v-html="translate('bod_pday_descr')">
+                                <td>
+                                  <input type=number class=number v-model.number="scenario.General.bod_pday" style="width:95%" min=0>
+                                </td>
+                                <td>
+                                  g/{{translate('person')}}/{{translate('day')}}
+                                </td>
+                              </tr>
+                              <tr :class="scenario.General.bod_pday_fs<=0?'warning':''">
+                                <td v-html="translate('bod_pday_fs_descr')">
+                                <td>
+                                  <input type=number class=number v-model.number="scenario.General.bod_pday_fs" style="width:95%" min=0>
+                                </td>
+                                <td>
+                                  g/{{translate('person')}}/{{translate('day')}}
+                                </td>
+                              </tr>
+
+                              <!--currency-->
+                              <tr>
+                                <td>
+                                  {{translate('configuration_new_currency')}}
+                                </td>
+                                <td>
+                                  <input
+                                    v-model="scenario.General.Currency"
+                                    size=3 maxlength=3 placeholder="ccc"
+                                    style="width:95%"
+                                  >
+                                </td>
+                                <td>
+                                  {{translate('currency')}}
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                        </fieldset>
+
+                        <!--comments-->
+                        <fieldset>
+                          <legend>
+                            <span v-html="translate('Comments')"></span>
+                          </legend>
+                          <div>
+                            <textarea
+                              v-model="scenario.General.Comments"
+                              style="width:100%;height:100px"
+                              :placeholder="translate('Comments')"
+                            ></textarea>
+                          </div>
+                        </fieldset>
                       </div>
-                    </fieldset>
+                    </td>
+                  </tr>
+                </transition>
+              </tbody>
 
-                    <!--comments-->
-                    <fieldset style="grid-column-start:1;grid-column-end:3">
-                      <legend>
-                        <span v-html="translate('Comments')"></span>
-                      </legend>
-                      <div>
-                        <textarea
-                          v-model="Global.General.Comments"
-                          style="width:100%;height:100px"
-                          :placeholder="translate('Comments')"
-                        ></textarea>
-                      </div>
-                    </fieldset>
-                  </div>
+              <tr>
+                <td style=background:white></td>
+                <td style="background:white;text-align:left" colspan=6>
+                  <button onclick="ecam.new_scenario()"
+                    class=new_assessment
+                    style="font-size:large"
+                    v-html="'+ create new assessment'"
+                  ></button>
                 </td>
               </tr>
-            </transition>
-          </tbody>
+            </table>
+          </div>
+        </div>
 
-          <tr>
-            <td style=background:white></td>
-            <td style="background:white;text-align:left" colspan=6>
-              <button onclick="ecam.new_scenario()"
-                class=new_assessment
-                style="font-size:large"
-                v-html="'+ create new assessment'"
-              ></button>
-            </td>
-          </tr>
-        </table>
+        <!--select GWP assessment report-->
+        <div
+          style="
+            padding-top:1em;
+            padding-left:5px;
+            background:#eff5fb;
+            border-bottom:1px solid white;
+            padding-right:1em;
+          "
+        >
+          <div>
+            <h1>
+              Global settings (TBD)
+            </h1>
+          </div>
+          <fieldset style="background:white">
+            <legend>
+              Global Warming Potential Source Report
+            </legend>
+            <div>
+              <div>
+                <!--select gwp report which defines gwp values-->
+                <b>Select</b>
+                &nbsp;
+                <select
+                  v-model="Configuration.gwp_reports_index"
+                  @change="set_constants_from_gwp_report()"
+                >
+                  <option v-for="report,i in GWP_reports" :value="i">
+                    {{report.report}}
+                  </option>
+                </select>
+                <button onclick="ecam.show('gwp_table')">
+                  More info
+                </button>
+              </div><hr>
+
+              <!--description of gwp values-->
+              <p>
+                <span style="padding:0.5em 0"
+                  v-html="translate('gwp_values_relative_to').prettify()"
+                ></span>
+              </p>
+
+              <!--actual gwp values-->
+              <table>
+                <tr>
+                  <td> {{translate('carbon_dioxide')}} (CO<sub>2</sub>) </td>
+                  <td align=right>1</td>
+                  <td> CO<sub>2</sub> {{translate('equivalents')}} </td>
+                <tr>
+                  <td> {{translate('methane')}} (CH<sub>4</sub>) </td>
+                  <td align=right> {{Cts.ct_ch4_eq.value}} </td>
+                  <td> CO<sub>2</sub> {{translate('equivalents')}} </td>
+                <tr>
+                  <td> {{translate('nitrouns_oxide')}} (N<sub>2</sub>O) </td>
+                  <td align=right> {{Cts.ct_n2o_eq.value}} </td>
+                  <td> CO<sub>2</sub> {{translate('equivalents')}} </td>
+                </tr>
+              </table>
+            </div>
+          </fieldset>
+        </div>
       </div>
 
       <!--compare scenarios table-->
-      <div v-if="Scenarios.length>1" style="margin-top:2em;background:#eff5fb">
+      <div v-if="Scenarios.length>1" style="padding-top:2em;background:#eff5fb">
         <h1 style="text-align:center">
           Compare assessments
         </h1>
 
         <p style="text-align:center;color:#666">
           <b>
-            Select 'compare' on two or more assessments and they will appear in the
-            following table.  The darker column is the current assessment you are
-            editing.
+            Select 'compare' on two or more assessments and they will appear
+            below. The darker column is the current assessment you are editing.
           </b>
         </p>
+
+        <div style="text-align:center" v-if="scenarios_compared.length">
+          TODO
+          <button style="color:white;background:var(--color-level-generic)">Table</button>
+          <button>Bar chart: GHG by assessment</button>
+          <button>Bar chart: GHG by stage</button>
+          <button>Bar chart: GHG by substage</button>
+        </div>
 
         <!--compare scenarios table-->
         <table style="margin:10px auto" v-if="scenarios_compared.length">
@@ -674,10 +755,12 @@ let select_scenario=new Vue({
   style:`
     <style>
       #select_scenario {
-        padding:0 1em;
       }
       #select_scenario details summary {
         cursor:pointer;
+      }
+      #select_scenario #main_table {
+        box-shadow:0px 0px 2px #ccc;
       }
       #select_scenario #main_table thead td {
         background:white;
@@ -740,6 +823,7 @@ let select_scenario=new Vue({
 
       #select_scenario fieldset {
         border:1px solid #ccc;
+        margin-bottom:10px;
       }
       #select_scenario fieldset > legend {
         color:var(--color-level-generic);
@@ -763,6 +847,31 @@ let select_scenario=new Vue({
         background:var(--color-level-generic);
         color:white;
         outline:none;
+      }
+
+      #select_scenario button.save_btn:hover {
+        text-decoration:underline;
+        cursor:pointer;
+      }
+
+      #select_scenario label.load_mode {
+        align-items:center;
+        display:flex;
+        border:1px solid #eee;
+        padding:5px;
+      }
+      #select_scenario label.load_mode[selected] {
+        border-color:var(--color-level-generic);
+      }
+      #select_scenario label.load_mode:hover {
+        color:var(--color-level-generic);
+      }
+      #select_scenario div.options_container button {
+        font-size:smaller;
+      }
+      #select_scenario div.options_container button:hover {
+        color:white;
+        background:var(--color-level-generic-secondary);
       }
     </style>
   `,

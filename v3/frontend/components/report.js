@@ -3,7 +3,9 @@ let report = new Vue({
 
   data:{
     visible:false,
+
     Global,
+    Configuration,
     Structure,
     GWP_reports,
   },
@@ -64,7 +66,7 @@ let report = new Vue({
               <li><b>Assessment period:</b> {{Global.General.AssessmentPeriodStart}} to {{Global.General.AssessmentPeriodEnd}} ({{format(Global.Days())}} days)</li>
               <li><b>Country:</b> {{Global.General.Country}}</li>
               <li><b>Currency:</b> {{Global.General.Currency}}</li>
-              <li><b>Global Warming Potential Source:</b> {{ GWP_reports[Global.General.gwp_reports_index].report }}</li>
+              <li><b>Global Warming Potential Source:</b> {{ GWP_reports[Configuration.gwp_reports_index].report }}</li>
             </ul>
           </div>
 
@@ -86,23 +88,40 @@ let report = new Vue({
                     </th>
                   </tr>
                 </thead>
-                <tr v-for="s in Structure.filter(s=>s.sublevel)"
-                  :style="{color:s.color}"
+                <tbody v-for="level in Structure.filter(s=>!s.sublevel)"
+                  :style="{color:'var(--color-level-'+level.level+')'}"
                 >
-                  <td>{{s.sublevel}}</td>
-                  <td class=number>
-                    <span>
-                      {{format( Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum() )}}
-                    </span>
-                    <span>
-                      kgCO<sub>2</sub>eq
-                    </span>
-                  </td>
-                  <td class=number>
-                    {{format( Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum() )}}
-                    kWh
-                  </td>
-                </tr>
+                  <tr v-for="s in Structure.filter(s=>s.level==level.level &&s.sublevel)">
+                    <td>{{s.sublevel}}</td>
+                    <td class=number>
+                      <span>
+                        {{format( Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum() )}}
+                      </span>
+                      <span>
+                        kgCO<sub>2</sub>eq
+                      </span>
+                    </td>
+                    <td class=number>
+                      {{format( Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum() )}}
+                      kWh
+                    </td>
+                  </tr>
+                  <tr style="font-weight:bold">
+                    <td>Total {{level.level}}</td>
+                    <td class=number>
+                      <span>
+                        {{format( Global[level.level][level.prefix+'_KPI_GHG']().total )}}
+                      </span>
+                      <span>
+                        kgCO<sub>2</sub>eq
+                      </span>
+                    </td>
+                    <td class=number>
+                      {{format( Global[level.level][level.prefix+'_nrg_cons']() )}}
+                      kWh
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>

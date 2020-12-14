@@ -7,6 +7,11 @@
 //utils
 Array.prototype.sum=function(){return this.reduce((p,c)=>(p+c),0)};
 
+//configuration global settings
+let Configuration={
+  gwp_reports_index:0, //index of selected GWP report
+};
+
 //A "layout" or "scenario" or is an Ecam object
 class Ecam{
   constructor(){
@@ -22,7 +27,6 @@ class Ecam{
       prot_con             : 0,     //prot consumption (kg/person/year)
       bod_pday             : 0,     //BOD5 (g/person/day)
       bod_pday_fs          : 0,     //BOD5 in faecal sludge (g/person/day)
-      gwp_reports_index    : 0,     //index of selected GWP report
     };
 
     this.Water=new Water_stages(), //Water supply stages
@@ -59,6 +63,13 @@ class Ecam{
     return (finalDate-startDate)/1000/60/60/24; //days
   }
   Years(){return this.Days()/365}
+
+  //Service Level (SL) indicators
+  ws_SL_auth_con(){
+    let wsd_auth_con = this.Water.Distribution.map(s=>s.wsd_auth_con).sum(); //m3
+    let wsd_serv_pop = this.Water.Distribution.map(s=>s.wsd_serv_pop).sum(); //population
+    return 1e3*wsd_auth_con/wsd_serv_pop/this.Days()||0;
+  }
 
   //grouped emissions by source
     fuel_GHG(){
@@ -186,7 +197,7 @@ class Ecam{
   //---
   static from(json_obj){
     //return value
-    let o = Object.assign(new Ecam(), json_obj);
+    let o   = Object.assign(new Ecam(), json_obj);
     o.Water = Water_stages.from(json_obj.Water);
     o.Waste = Waste_stages.from(json_obj.Waste);
     return o;
@@ -198,9 +209,9 @@ class Water_stages{
     this.ws_resi_pop = 0; //resident population
 
     //arrays of substages
-    this.Abstraction  = [ new Water_Abstraction('Abstraction 1')   ];
-    this.Treatment    = [ new Water_Treatment('Treatment 1')       ];
-    this.Distribution = [ new Water_Distribution('Distribution 1') ];
+    this.Abstraction  = [ ];
+    this.Treatment    = [ ];
+    this.Distribution = [ ];
 
     this.equations=[
       "ws_KPI_GHG_abs",
@@ -210,7 +221,6 @@ class Water_stages{
 
       "ws_serv_pop",
       "ws_SL_serv_pop",
-      "ws_SL_auth_con",
       "ws_nrg_cons",
       "ws_vol_fuel",
     ];
@@ -276,11 +286,6 @@ class Water_stages{
     ws_SL_serv_pop(){
       return 100*this.ws_serv_pop()/this.ws_resi_pop;
     }
-    ws_SL_auth_con(){
-      let wsd_auth_con = this.Distribution.map(s=>s.wsd_auth_con).sum(); //m3
-      let wsd_serv_pop = this.Distribution.map(s=>s.wsd_serv_pop).sum(); //population
-      return 1e3*wsd_auth_con/wsd_serv_pop/Global.Days()||0;
-    }
 
   //---
   static from(json_obj){
@@ -307,9 +312,9 @@ class Waste_stages{
     this.ww_vol_gene=0; //volume of generated wastewater
 
     //arrays of Substages
-    this.Collection = [ new Waste_Collection('Collection 1') ];
-    this.Treatment  = [ new Waste_Treatment('Treatment 1')   ];
-    this.Onsite     = [ new Waste_Onsite('Onsite 1')         ];
+    this.Collection = [ ];
+    this.Treatment  = [ ];
+    this.Onsite     = [ ];
 
     this.equations=[
       "ww_KPI_GHG_col", //GHG from Wastewater Collection
@@ -440,12 +445,17 @@ class Water_Abstraction extends Substage{
   constructor(name){
     super();
     this.name=name;
+
     this.wsa_vol_conv = 0; //volume of abstracted water
     this.wsa_fuel_typ = 0; //type of fuel (engines)
     this.wsa_vol_fuel = 0; //volume of fuel (engines)
-    this.wsa_nrg_cons = 0; //energy consumed from the grid
+
+    this.wsa_nrg_cons = 0; //energy consumed from the grid (kWh)
+    this.wsa_conv_kwh = 0; //kWh to kgCO2eq conversion factor
+
     this.wsa_nrg_cost = 0; //energy costs
     this.wsa_run_cost = 0; //total running costs
+
     this.wsa_vol_pump = 0;   //energy perf
     this.wsa_nrg_pump = 0;   //energy perf
     this.wsa_sta_head = 0;   //energy perf
@@ -491,7 +501,7 @@ class Water_Abstraction extends Substage{
       return {total,co2,ch4,n2o};
     }
     wsa_KPI_GHG_elec(){
-      return this.wsa_nrg_cons*Global.General.conv_kwh_co2;
+      return this.wsa_nrg_cons*this.wsa_conv_kwh;
     }
     wsa_KPI_GHG_fuel(){
       let vol   = this.wsa_vol_fuel;
@@ -538,7 +548,7 @@ class Water_Abstraction extends Substage{
       return this.wsa_nrg_cons - this.wsa_KPI_nrg_cons_new();
     }
     wsa_KPI_ghg_estm_red(){
-      return Global.General.conv_kwh_co2*this.wsa_KPI_nrg_estm_sav();
+      return this.wsa_KPI_nrg_estm_sav()*this.wsa_conv_kwh;;
     }
   //---
   static from(json_obj){
@@ -551,9 +561,13 @@ class Water_Treatment extends Substage{
     super();
     this.name=name;
     this.wst_vol_trea = 0;
-    this.wst_nrg_cons = 0;
+
+    this.wst_nrg_cons = 0; //energy consumed from the grid (kWh)
+    this.wst_conv_kwh = 0; //kWh to kgCO2eq conversion factor
+
     this.wst_nrg_cost = 0; //energy costs
     this.wst_run_cost = 0; //total running costs
+
     this.wst_mass_slu = 0;
     this.wst_treatmen = 0;
     this.wst_fuel_typ = 0;
@@ -604,7 +618,9 @@ class Water_Treatment extends Substage{
       let total = co2 + ch4 + n2o;
       return {total,co2,ch4,n2o};
     }
-    wst_KPI_GHG_elec(){return this.wst_nrg_cons*Global.General.conv_kwh_co2}
+    wst_KPI_GHG_elec(){
+      return this.wst_nrg_cons*this.wst_conv_kwh;
+    }
     wst_KPI_GHG_fuel(){
       let vol   = this.wst_vol_fuel;
       let fuel  = Tables.get_row('Fuel type',this.wst_fuel_typ);
@@ -627,7 +643,7 @@ class Water_Treatment extends Substage{
     wst_KPI_std_nrg_newp(){return this.wst_KPI_nrg_elec_eff()/this.wst_pmp_exff*this.wst_KPI_std_nrg_cons()}
     wst_KPI_nrg_cons_new(){return this.wst_vol_pump*this.wst_KPI_std_nrg_newp()/100*this.wst_pmp_head}
     wst_KPI_nrg_estm_sav(){return this.wst_nrg_cons-this.wst_KPI_nrg_cons_new()}
-    wst_KPI_ghg_estm_red(){return Global.General.conv_kwh_co2*this.wst_KPI_nrg_estm_sav()}
+    wst_KPI_ghg_estm_red(){return this.wst_KPI_nrg_estm_sav()*this.wst_conv_kwh}
   //---
   static from(json_obj){
     return Object.assign(new Water_Treatment(), json_obj);
@@ -640,9 +656,13 @@ class Water_Distribution extends Substage{
     this.name=name;
     this.wsd_serv_pop = 0;
     this.wsd_vol_dist = 0;
-    this.wsd_nrg_cons = 0;
+
+    this.wsd_nrg_cons = 0; //energy consumed from the grid (kWh)
+    this.wsd_conv_kwh = 0; //kWh to kgCO2eq conversion factor
+
     this.wsd_nrg_cost = 0; //energy costs
     this.wsd_run_cost = 0; //total running costs
+
     this.wsd_auth_con = 0;
     this.wsd_bill_con = 0;
     this.wsd_fuel_typ = 0;
@@ -715,7 +735,7 @@ class Water_Distribution extends Substage{
       return {total,co2,ch4,n2o};
     }
     wsd_KPI_GHG_elec(){
-      return this.wsd_nrg_cons*Global.General.conv_kwh_co2;
+      return this.wsd_nrg_cons*this.wsd_conv_kwh;
     }
     wsd_KPI_GHG_fuel(){
       let vol   = this.wsd_vol_fuel;
@@ -762,12 +782,12 @@ class Water_Distribution extends Substage{
       return this.wsd_nrg_pump/(this.wsd_vol_pump*this.wsd_pmp_head/100)
     }
     wsd_KPI_un_head_loss(){return 1000*(this.wsd_pmp_head-this.wsd_sta_head)/this.wsd_main_len}
-    wsd_KPI_water_losses(){return Math.max(0,1000*(this.wsd_vol_dist-this.wsd_auth_con)/(this.wsd_main_len))/Global.Years()}
+    wsd_KPI_water_losses(){return Math.max(0,1000*(this.wsd_vol_dist-this.wsd_auth_con)/(this.wsd_main_len))}
     wsd_KPI_nrg_elec_eff(){return 100*this.wsd_pmp_pw()/(this.wsd_pmp_volt*this.wsd_pmp_amps*Math.sqrt(3)*this.wsd_pmp_pf/1000)}
     wsd_KPI_std_nrg_newp(){return this.wsd_KPI_nrg_elec_eff()/this.wsd_pmp_exff*this.wsd_KPI_std_nrg_cons()}
     wsd_KPI_nrg_cons_new(){return this.wsd_KPI_nrg_elec_eff()/this.wsd_pmp_exff*this.wsd_nrg_pump}
     wsd_KPI_nrg_estm_sav(){return this.wsd_nrg_cons-this.wsd_KPI_nrg_cons_new()}
-    wsd_KPI_ghg_estm_red(){return Global.General.conv_kwh_co2*this.wsd_KPI_nrg_estm_sav()}
+    wsd_KPI_ghg_estm_red(){return this.wsd_KPI_nrg_estm_sav()*this.wsd_conv_kwh}
   //---
   static from(json_obj){
     return Object.assign(new Water_Distribution(), json_obj);
@@ -789,11 +809,15 @@ class Waste_Collection extends Substage{
     this.wwc_n2o_efac_cso = 0; //EF N2O cso
     this.wwc_n2o_efac_col = 0; //EF N2O collected ww
 
-    this.wwc_fuel_typ     = 0;
-    this.wwc_vol_fuel     = 0;
-    this.wwc_nrg_cons     = 0; //energy consumed from the grid
+    this.wwc_fuel_typ = 0;
+    this.wwc_vol_fuel = 0;
+
+    this.wwc_nrg_cons = 0; //energy consumed from the grid (kWh)
+    this.wwc_conv_kwh = 0; //kWh to kgCO2eq conversion factor
+
     this.wwc_nrg_cost     = 0; //energy costs
     this.wwc_run_cost     = 0; //total running costs
+
     this.wwc_vol_pump     = 0;
     this.wwc_nrg_pump     = 0;
     this.wwc_pmp_head     = 0;
@@ -811,7 +835,6 @@ class Waste_Collection extends Substage{
       "wwc_KPI_GHG_col",
       "wwc_KPI_GHG",
 
-      "wwc_SL_conn_pop",
       "wwc_KPI_nrg_per_m3",
       "wwc_SL_nrg_cost",
 
@@ -842,7 +865,7 @@ class Waste_Collection extends Substage{
       return {total,co2,ch4,n2o};
     }
     wwc_KPI_GHG_elec(){
-      return this.wwc_nrg_cons*Global.General.conv_kwh_co2;
+      return this.wwc_nrg_cons*this.wwc_conv_kwh;
     }
     wwc_KPI_GHG_fuel(){
       let vol   = this.wwc_vol_fuel;
@@ -876,7 +899,6 @@ class Waste_Collection extends Substage{
       return {total,co2,ch4,n2o};
     }
   //SL wwc
-    wwc_SL_conn_pop(){return 100*this.wwc_conn_pop/Global.Waste.ww_resi_pop}
     wwc_SL_nrg_cost(){return 100*this.wwc_nrg_cost/this.wwc_run_cost}
     wwc_KPI_nrg_per_m3(){return this.wwc_nrg_cons/this.wwc_vol_coll_tre}
     wwc_pmp_pw(){return this.wwc_pmp_flow*this.wwc_pmp_head*Cts.ct_gravit.value/1000;}
@@ -886,7 +908,7 @@ class Waste_Collection extends Substage{
     wwc_KPI_std_nrg_newp(){return this.wwc_KPI_nrg_elec_eff()/this.wwc_pmp_exff*this.wwc_KPI_std_nrg_cons()}
     wwc_KPI_nrg_cons_new(){return this.wwc_vol_pump*this.wwc_KPI_std_nrg_newp()/100*this.wwc_pmp_head}
     wwc_KPI_nrg_estm_sav(){return this.wwc_nrg_cons-this.wwc_KPI_nrg_cons_new()}
-    wwc_KPI_ghg_estm_red(){return Global.General.conv_kwh_co2*this.wwc_KPI_nrg_estm_sav()}
+    wwc_KPI_ghg_estm_red(){return this.wwc_KPI_nrg_estm_sav()*this.wwc_conv_kwh}
   //---
   static from(json_obj){
     return Object.assign(new Waste_Collection(), json_obj);
@@ -920,9 +942,13 @@ class Waste_Treatment extends Substage{
     this.wwt_trea_cap = 0;
     this.wwt_tst_cmpl = 0;
     this.wwt_tst_cond = 0;
-    this.wwt_nrg_cons = 0;
+
+    this.wwt_nrg_cons = 0; //energy consumed from the grid (kWh)
+    this.wwt_conv_kwh = 0; //kWh to kgCO2eq conversion factor
+
     this.wwt_nrg_cost = 0; //energy costs
     this.wwt_run_cost = 0; //total running costs
+
     this.wwt_vol_pump = 0;
     this.wwt_nrg_pump = 0;
     this.wwt_pmp_head = 0;
@@ -982,7 +1008,6 @@ class Waste_Treatment extends Substage{
       "wwt_bod_rmvd",
       "wwt_KPI_nrg_per_m3",
       "wwt_KPI_nrg_per_kg",
-      "wwt_SL_vol_pday",
       "wwt_KPI_capac_util",
       "wwt_SL_nrg_cost",
 
@@ -1002,8 +1027,8 @@ class Waste_Treatment extends Substage{
       "wwt_SL_GHG_avoided",
       "wwt_KPI_sludg_prod",
       "wwt_wr_C_seq_slu",
-      "wwt_wr_GHG_avo_N",
 
+      "wwt_wr_GHG_avo_N",
       "wwt_wr_GHG_avo_P",
       "wwt_wr_GHG_avo",
       "wwt_SL_ghg_non",
@@ -1034,7 +1059,7 @@ class Waste_Treatment extends Substage{
       return {total,co2,ch4,n2o};
     }
     wwt_KPI_GHG_elec(){
-      return this.wwt_nrg_cons*Global.General.conv_kwh_co2;
+      return this.wwt_nrg_cons*this.wwt_conv_kwh;
     }
     wwt_KPI_GHG_fuel(){
       let vol   = this.wwt_vol_fuel;
@@ -1309,7 +1334,6 @@ class Waste_Treatment extends Substage{
     wwt_KPI_nrg_per_m3(){return this.wwt_nrg_cons/this.wwt_vol_trea}
     wwt_KPI_nrg_per_kg(){return this.wwt_nrg_cons/this.wwt_bod_rmvd()}
     wwt_SL_nrg_cost(){return 100*this.wwt_nrg_cost/this.wwt_run_cost}
-    wwt_SL_vol_pday(){return 1000*this.wwt_vol_trea/this.wwt_serv_pop/Global.Days()}
     wwt_KPI_capac_util(){return 100*this.wwt_vol_trea/this.wwt_trea_cap}
     wwt_SL_qual_com(){return 100*this.wwt_tst_cmpl/this.wwt_tst_cond}
     wwt_KPI_nrg_per_pump(){return this.wwt_nrg_pump/this.wwt_vol_pump}
@@ -1320,12 +1344,13 @@ class Waste_Treatment extends Substage{
     wwt_KPI_std_nrg_newp(){return this.wwt_KPI_nrg_elec_eff()/this.wwt_pmp_exff*this.wwt_KPI_std_nrg_cons()}
     wwt_KPI_nrg_cons_new(){return this.wwt_vol_pump*this.wwt_KPI_std_nrg_newp()/100*this.wwt_pmp_head}
     wwt_KPI_nrg_estm_sav(){return this.wwt_nrg_cons-this.wwt_KPI_nrg_cons_new()}
-    wwt_KPI_ghg_estm_red(){return Global.General.conv_kwh_co2*this.wwt_KPI_nrg_estm_sav()}
+    wwt_KPI_ghg_estm_red(){return this.wwt_KPI_nrg_estm_sav()*this.wwt_conv_kwh}
+
     wwt_KPI_biog_x_bod(){return this.wwt_biog_pro/this.wwt_bod_rmvd()}
     wwt_nrg_biog_val(){return this.wwt_biog_val*this.wwt_ch4_biog/100*Cts.ct_ch4_nrg.value}
     wwt_KPI_nrg_biogas(){return this.wwt_nrg_biog/this.wwt_vol_trea}
     wwt_KPI_nrg_x_biog(){return 100*this.wwt_nrg_biog/this.wwt_nrg_biog_val()}
-    wwt_SL_GHG_avoided(){return this.wwt_nrg_biog*Global.General.conv_kwh_co2}
+    wwt_SL_GHG_avoided(){return this.wwt_nrg_biog*this.wwt_conv_kwh}
     wwt_wr_GHG_avo_N(){ return this.wwt_wr_N_rec*Cts.ct_cr_forN.value; }
     wwt_wr_GHG_avo_P(){ return this.wwt_wr_P_rec*Cts.ct_cr_forP.value; }
     wwt_wr_GHG_avo(){ return this.wwt_wr_GHG_avo_N() + this.wwt_wr_GHG_avo_P(); }
@@ -1379,9 +1404,13 @@ class Waste_Onsite extends Substage{
     this.wwo_n2o_efac_tre     = 0;
     this.wwo_ch4_efac_dis     = 0;
     this.wwo_n2o_efac_dis     = 0;
-    this.wwo_nrg_cons         = 0; //energy consumed
+
+    this.wwo_nrg_cons = 0; //energy consumed from the grid (kWh)
+    this.wwo_conv_kwh = 0; //kWh to kgCO2eq conversion factor
+
     this.wwo_nrg_cost         = 0; //energy costs
     this.wwo_run_cost         = 0; //total running costs
+
     this.wwo_nrg_pump         = 0;
     this.wwo_vol_pump         = 0;
     this.wwo_pmp_head         = 0;
@@ -1493,7 +1522,7 @@ class Waste_Onsite extends Substage{
     }
     //electricity
     wwo_KPI_GHG_elec(){
-      return this.wwo_nrg_cons*Global.General.conv_kwh_co2;
+      return this.wwo_nrg_cons*this.wwo_conv_kwh;
     }
     //fuel engines
     wwo_KPI_GHG_fuel(){
@@ -1612,7 +1641,7 @@ class Waste_Onsite extends Substage{
       return 100*this.wwo_nrg_cost/this.wwo_run_cost;
     }
     wwo_SL_GHG_avoided(){
-      return this.wwo_nrg_biog*Global.General.conv_kwh_co2;
+      return this.wwo_nrg_biog*this.wwo_conv_kwh;
     }
     wwo_ghg_avoided_land(){
       return this.wwo_ghg_avoided_landapp()+this.wwo_ghg_avoided_landfil();
@@ -1652,7 +1681,7 @@ class Waste_Onsite extends Substage{
       );
     }
     wwo_KPI_ghg_estm_red(){
-      return Global.General.conv_kwh_co2*this.wwo_KPI_nrg_estm_sav();
+      return this.wwo_KPI_nrg_estm_sav()*this.wwo_conv_kwh;
     }
     wwo_KPI_std_nrg_newp(){
       return this.wwo_KPI_nrg_elec_eff()/

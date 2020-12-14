@@ -57,18 +57,6 @@ let Cts={
 
   ct_ch4_up:{value:0.025,descr:"Percentage of CH4 emission for uncoverd pile",unit:"ratio"},
 
-  ct_bod_kg:{
-    value:0.8,
-    descr:"Ratio BOD entering the plant / dry weight of organic matter in the sludge collected",
-    unit:"g VS / g BOD load",
-  },
-
-  ct_biog_g:{
-    value:0.4,
-    descr:"Biogas produced (NL) per g of organic matter contained in the sludge",
-    unit:"NL / gVS",
-  },
-
   ct_ch4_lo:{
     value:2,
     descr:"Percentage of methane losses",

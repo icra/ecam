@@ -19,6 +19,13 @@ let Info={
 	unfccc_5D  :{magnitude:"Mass",unit:"kg CO2eq"},
 
   //new
+  wsa_conv_kwh:{magnitude:"Conversion",unit:"kgCO2eq/kWh"},
+  wst_conv_kwh:{magnitude:"Conversion",unit:"kgCO2eq/kWh"},
+  wsd_conv_kwh:{magnitude:"Conversion",unit:"kgCO2eq/kWh"},
+  wwc_conv_kwh:{magnitude:"Conversion",unit:"kgCO2eq/kWh"},
+  wwt_conv_kwh:{magnitude:"Conversion",unit:"kgCO2eq/kWh"},
+  wwo_conv_kwh:{magnitude:"Conversion",unit:"kgCO2eq/kWh"},
+
   ww_SL_serv_pop:{magnitude:"Percentage",unit:"%"},
   wwc_tn:{magnitude:"Mass", unit:"kg"},
   wwc_bod:{magnitude:"Mass", unit:"kg"},
@@ -108,7 +115,7 @@ let Info={
 	wsd_KPI_nrg_topgraph:{magnitude:"Percent",unit:"%"},
 	wsd_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m"},
 	wsd_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km"},
-	wsd_KPI_water_losses:{magnitude:"Volume/Distance/Time",unit:"m3/km/year"},
+	wsd_KPI_water_losses:{magnitude:"Volume/Distance",unit:"m3/km"},
 	wsd_SL_cont_sup:{magnitude:"Percentage",unit:"%"},
 	wsd_SL_nr_water:{magnitude:"Percentage",unit:"%"},
 	wsd_SL_pres_ade:{magnitude:"Percentage",unit:"%"},
