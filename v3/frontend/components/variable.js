@@ -143,7 +143,7 @@ let variable=new Vue({
               </span>
             </div>
             <div v-else>
-              <a onclick="ecam.show('configuration')">
+              <a onclick="ecam.show('select_scenario')">
                 {{ translate('General') }}
               </a>
             </div>

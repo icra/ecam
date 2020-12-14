@@ -11,7 +11,7 @@ function go_to(level, sublevel, no_history_entry){
   }
 
   if(level=='General'){
-    ecam.show('configuration', no_history_entry);
+    ecam.show('select_scenario', no_history_entry);
     return;
   }
 

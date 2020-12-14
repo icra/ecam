@@ -591,7 +591,7 @@ let select_scenario=new Vue({
             padding-top:1em;
             padding-left:5px;
             background:#eff5fb;
-            border-bottom:1px solid white;
+            border-bottom:2px solid white;
             padding-right:1em;
           "
         >
