@@ -79,6 +79,7 @@ let Filters = {
   "wwt_bod_slud", //input
   "wwt_tn_infl", //input
   "wwt_tn_effl", //input
+  "wwt_mass_slu", //input
 
   "wwo_producing_biogas", //question
 

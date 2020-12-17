@@ -5,7 +5,7 @@ digraph MyGraph {
   wst [label="Treatment",   style="filled",color="#58c1db",fontcolor="white",shape="box"]
   wsd [label="Distribution",style="filled",color="#58c1db",fontcolor="white",shape="box"]
   pop [label="Population"]
-  ww  [label="Wastewater"]
+  ww  [label="Wastewater treatment"]
 
   col [label="Collected", style="filled",color="#ed6d57",fontcolor="white",shape="box"]
   unc [label="Uncollected"]

@@ -140,6 +140,7 @@ let Tables = {
 
   //Andreoli et al table 2.2
   "Sludge characteristics in each stage of the treatment process":[
+    {name:"Select",                                                          gSS_inh_day:0},
     {name:"Primary treatment (conventional)",                                gSS_inh_day:(35+45)/2},
     {name:"Primary treatment (septic tanks)",                                gSS_inh_day:(20+30)/2},
     {name:"Facultative pond",                                                gSS_inh_day:(20+25)/2},

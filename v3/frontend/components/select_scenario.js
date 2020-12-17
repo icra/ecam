@@ -597,7 +597,7 @@ let select_scenario=new Vue({
         >
           <div>
             <h1>
-              Global settings (TBD)
+              Global/General settings (hide more, TBD)
             </h1>
           </div>
           <fieldset style="background:white">
@@ -653,7 +653,7 @@ let select_scenario=new Vue({
       <!--compare scenarios table-->
       <div v-if="Scenarios.length>1" style="padding-top:2em;background:#eff5fb">
         <h1 style="text-align:center">
-          Compare assessments
+          Compare assessments (to be moved)
         </h1>
 
         <p style="text-align:center;color:#666">

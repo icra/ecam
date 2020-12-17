@@ -14,6 +14,9 @@
     - Opportunities page is important, but can come later!
 
 [DOING NOW - concrete tasks]
+  - landing: hide "are you a new user" button
+  - landing: hide laptop icon section
+  - move compare asessments to new tab
   - BUG: solve all Global calls
     - conv_kwh_co2
     - bod_pday

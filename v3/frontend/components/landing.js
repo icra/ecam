@@ -42,7 +42,7 @@ let landing = new Vue({
               Start your assessment
             </button>
           </div>
-          <div>
+          <div v-if="false">
             <button class="start" onclick="alert('tutorial in development')" style="background:var(--color-level-generic-secondary)">
               Are you a new user?
             </button>
@@ -58,6 +58,7 @@ let landing = new Vue({
 
       <!--laptop-->
       <div
+        v-if="false"
         class="container white"
         style="
           display:grid;
