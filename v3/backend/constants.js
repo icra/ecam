@@ -108,7 +108,7 @@ let Cts={
 
   ct_unused:{
     value:9810,
-    descr:"not used constant",
+    descr:"not used constant on purpose to test the code that detects unused constants",
     unit:"unit",
   },
 };

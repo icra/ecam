@@ -28,7 +28,6 @@ let Filters = {
 
   "wwo_vol_unco",      //variable
   "wwo_vol_unco_ons",  //variable
-  "wwo_vol_unco_unt",  //variable
   "wwo_vol_unco_tre",  //variable
   "wwo_vol_disc",      //variable
 ],
@@ -52,11 +51,11 @@ let Filters = {
   "wwt_n2o_efac_dis",
 
   "wwo_ch4_efac_unt",
-  "wwo_ch4_efac_con",
   "wwo_ch4_efac_tre",
   "wwo_ch4_efac_dis",
   "wwo_n2o_efac_tre",
   "wwo_n2o_efac_dis",
+  "wwo_n2o_efac_opd",
 ],
 "Operational parameters":[
   "ws_nrg_cost", //input
@@ -152,7 +151,6 @@ let Filters = {
   "wwt_bod_effl",     //variable
   "wwt_tn_effl",      //variable
   "wwt_water_reuse",  //question
-  "wwo_vol_unco_unt", //variable
   "wwo_vol_disc",     //variable
   "wwo_ch4_efac_dis", //variable
   "wwo_n2o_efac_dis", //variable

@@ -81,9 +81,6 @@ let Estimations={
     wwo_vol_unco(substage){
       return 0.2*substage.wwo_onsi_pop*Global.Days();
     },
-    wwo_vol_unco_ons(substage){
-      return substage.wwo_vol_unco - substage.wwo_vol_unco_unt;
-    },
     //0.3kg/person/day
     wwo_fslu_emp(substage){
       return 0.3 * substage.wwo_onsi_pop * Global.Days()/substage.wwo_fdensity * substage.wwo_cont_emp/100;
@@ -93,6 +90,10 @@ let Estimations={
       let P   = substage.wwo_onsi_pop; //population
       let BOD = Global.General.bod_pday; //g/person/day
       return P * BOD * 0.001 * Global.Days(); //kg
+    },
+
+    wwo_n2o_efac_opd(substage){
+      return Cts.ct_ef_eff.value;
     },
   /*
   wwo_fslu_emp(){ return Cts.ct_fs_prod.value*Global.Waste.Collection.wwo_onsi_pop*Global.Days()/Global.Waste.Collection.wwo_fdensity*Global.Faecl.Containment.wwo_cont_emp/100; },

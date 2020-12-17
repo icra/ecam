@@ -13,6 +13,13 @@ let constants = new Vue({
   methods:{
     translate,
     format,
+
+    get_constants_keys(){
+      return Object.keys(Cts).sort((a,b)=>{
+        if(a>b) return 1;
+        else return -1;
+      });
+    },
   },
 
   template:`
@@ -26,19 +33,19 @@ let constants = new Vue({
           <tr>
             <th>{{translate('Code')       }}</th>
             <th>{{translate('Value')      }}</th>
-            <th>{{translate('Description')}}</th>
             <th>{{translate('Unit')       }}</th>
+            <th>{{translate('Description')}}</th>
             <th>equations</th>
           </tr>
-          <tr v-for="obj,key in Cts">
+          <tr v-for="key in get_constants_keys()">
             <td>
               <a @click="constant.view(key)" style="font-weight:bold">{{ key }}</a>
             </td>
-            <td align=right :title="obj.value">
-              {{ format(obj.value) }}
+            <td align=right :title="Cts[key].value">
+              {{ format(Cts[key].value) }}
             </td>
-            <td style=font-size:smaller v-html="obj.descr.prettify()"></td>
-            <td                         v-html="obj.unit.prettify()"></td>
+            <td                         v-html="Cts[key].unit.prettify()"></td>
+            <td style=font-size:smaller v-html="Cts[key].descr.prettify()"></td>
             <td>
               {{ Formulas.outputs_per_input(key).length }}
             </td>

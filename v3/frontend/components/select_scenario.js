@@ -235,7 +235,7 @@ let select_scenario=new Vue({
           <!--title-->
           <div>
             <h2 style="padding-left:0;margin-bottom:0">
-              Configuration
+              Configuration / Dashboard / Manager / Layouts / Assessments / Settings (TBD)
             </h2>
             <div style="color:#666">
               Load, save, create, configure, edit and compare assessments

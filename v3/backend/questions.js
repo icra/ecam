@@ -358,9 +358,7 @@ let Questions={
         "wwt_wr_P_rec",
         "wwt_wr_vol_d",
         "wwt_SL_ghg_non",   //output
-        "wwt_wr_GHG_avo_N", //output
-        "wwt_wr_GHG_avo_P", //output
-        "wwt_wr_GHG_avo",   //output
+        "wwt_ghg_avoided_reuse_water",   //output
       ],
       advanced:1,
       otherQuestions:[],
@@ -373,7 +371,7 @@ let Questions={
         "wwt_slu_disp",
         "wwt_KPI_sludg_prod",
         "wwt_KPI_GHG_slu",
-        "wwt_wr_C_seq_slu",
+        "wwt_ghg_avoided_sequestration",
       ],
       advanced:0,
       otherQuestions:[
@@ -399,7 +397,7 @@ let Questions={
     "wwt_composting":{
       variables:[
         "wwt_mass_slu_comp",
-        "wwt_slu_comp_C_seq",
+        "wwt_ghg_avoided_sequestration_composting",
       ],
       advanced:0,
       otherQuestions:[ ],
@@ -419,7 +417,7 @@ let Questions={
         "wwt_mass_slu_app",
         "wwt_slu_la_N_cont",
         "wwt_soil_typ",
-        "wwt_slu_app_C_seq",
+        "wwt_ghg_avoided_sequestration_landapp",
       ],
       advanced:0,
       otherQuestions:[ ],
@@ -431,7 +429,7 @@ let Questions={
         "wwt_slu_lf_N_cont",
         "wwt_slu_lf_TVS",
         "wwt_slu_type",
-        "wwt_slu_land_C_seq",
+        "wwt_ghg_avoided_sequestration_landfil",
       ],
       advanced:0,
       otherQuestions:[ ],
@@ -517,7 +515,7 @@ let Questions={
         "wwo_ch4_biog",
         "wwo_KPI_GHG_biog",
         "wwo_nrg_biog",
-        "wwo_SL_GHG_avoided",
+        "wwo_ghg_avoided_biogas",
       ],
       advanced:0,
       otherQuestions:[ ],
