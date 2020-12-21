@@ -29,10 +29,11 @@ Global.Waste.ww_resi_pop                 =1000;
 /*initial page to display*/
 ecam.new_scenario();
 Scenarios.forEach(scenario=>{
-  select_scenario.scenarios_compared.push(scenario);
+  compare_scenarios.scenarios_compared.push(scenario);
 });
-//ecam.show('select_scenario');
-go_to('Waste','Onsite');
+
+ecam.show('select_scenario');
+//go_to('Waste','Onsite');
 //tier_b.disable_all_filters();
 //tier_b.filters_active.Biogas=true;
 //variable.view('wwt_biog_pro');

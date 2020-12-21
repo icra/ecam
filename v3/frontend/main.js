@@ -34,6 +34,7 @@ let ecam={
     tables,
     sankey_ghg,
     diagram,
+    compare_scenarios,
 
     development,
     problems,

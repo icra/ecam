@@ -60,6 +60,14 @@ let linear_menu = new Vue({
         >
           <div>More</div>
         </div>
+
+        <!--compare-->
+        <div
+          onclick="ecam.show('compare_scenarios')"
+          :selected="current_view=='compare_scenarios'"
+        >
+          <div>Compare assessments</div>
+        </div>
       </div>
 
       <!--current scenario-->

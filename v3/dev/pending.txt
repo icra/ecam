@@ -1,17 +1,8 @@
 * ECAM V3 CODING TASKS *
 ------------------------
-[GIZ REQUESTS]
-  * Priorities
-    - Graphs & report (Energy and GHGs [VITI])
-      - Graphs should be downloadable
-    - IPCC equations compliance
-      - Lluís C.
-  * Nice to have:
-    - First-Time user tutorial
-    - Import/Export excel
-      - import from excel module with Adrià Riu help. Each layout is a excel file.
-      - "https://www.npmjs.com/package/exceljs"
-    - Opportunities page is important, but can come later!
+* Priorities
+  - Graphs & report (Energy and GHGs [VITI])
+  - IPCC equations compliance
 
 [DOING NOW - concrete tasks]
   - landing: hide "are you a new user" button
@@ -102,7 +93,12 @@
       Best / Cordialement,
     ```
 
-[v3.1]
+[v4]
   - chemicals
   - optgroups in <select> elements
   - feedback button
+  - First-Time user tutorial
+  - Import/Export excel
+    - import from excel module with Adrià Riu help. Each layout is a excel file.
+    - "https://www.npmjs.com/package/exceljs"
+  - Opportunities page
