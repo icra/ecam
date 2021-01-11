@@ -3,7 +3,6 @@ let report = new Vue({
 
   data:{
     visible:false,
-
     Global,
     Configuration,
     Structure,
@@ -20,20 +19,17 @@ let report = new Vue({
 
   template:`
     <div id=report v-if="visible">
-      <div>
-        {{show_summaries_menu()}}
-      </div>
+      <div>{{show_summaries_menu()}}</div>
+      <!--title--><h1 style="text-align:center">Report</h1>
 
-      <h1 style="text-align:center">Report (in development)</h1>
-
+      <!--grid 50 50-->
       <div
         style="
           display:grid;
           grid-template-columns:50% 50%;
         "
-      > 
-
-        <!--report-->
+      >
+        <!--report in html-->
         <div
           style="
             padding:2em;
@@ -59,7 +55,7 @@ let report = new Vue({
               background:#EEF4FA;
               padding:1em 1.5em;
               margin-top:1em;
-              margin-bottom:2em;
+              margin-bottom:1em;
             "
           >
             <b style="color:var(--color-level-generic)">{{Global.General.Name}}</b>
@@ -81,17 +77,37 @@ let report = new Vue({
           <div>
             <div class=heading>SUMMARY</div>
             <div>
-              <table border=1>
+              <table style="width:100%">
                 <thead>
                   <tr style="color:var(--color-level-generic)">
                     <th>Stage</th>
                     <th>
-                      <img src="frontend/img/viti/select_scenario/icon-co2.svg">
-                      Total GHG emissions
+                      <div
+                        style="
+                          display:flex;
+                          align-items:center;
+                          justify-content:center;
+                        "
+                      >
+                        <img src="frontend/img/viti/select_scenario/icon-co2.svg" style="height:30px;margin-right:1em">
+                        <span>
+                          GHG emissions
+                        </span>
+                      </div>
                     </th>
                     <th>
-                      <img src="frontend/img/viti/select_scenario/icon-energy.svg">
-                      Total Energy consumption
+                      <div
+                        style="
+                          display:flex;
+                          align-items:center;
+                          justify-content:center;
+                        "
+                      >
+                        <img src="frontend/img/viti/select_scenario/icon-energy.svg" style="height:30px;margin-right:1em">
+                        <span>
+                          Energy consumption
+                        </span>
+                      </div>
                     </th>
                   </tr>
                 </thead>
@@ -99,14 +115,12 @@ let report = new Vue({
                   :style="{color:'var(--color-level-'+level.level+')'}"
                 >
                   <tr v-for="s in Structure.filter(s=>s.level==level.level &&s.sublevel)">
-                    <td>{{s.sublevel}}</td>
+                    <td>{{translate(s.sublevel)}}</td>
                     <td class=number>
                       <span>
                         {{format( Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum() )}}
                       </span>
-                      <span>
-                        kgCO<sub>2</sub>eq
-                      </span>
+                      <span>kgCO<sub>2</sub>eq</span>
                     </td>
                     <td class=number>
                       {{format( Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum() )}}
@@ -114,7 +128,7 @@ let report = new Vue({
                     </td>
                   </tr>
                   <tr style="font-weight:bold">
-                    <td>Total {{level.level}}</td>
+                    <td>Total {{translate(level.level)}}</td>
                     <td class=number>
                       <span>
                         {{format( Global[level.level][level.prefix+'_KPI_GHG']().total )}}
@@ -129,19 +143,54 @@ let report = new Vue({
                     </td>
                   </tr>
                 </tbody>
+                <tbody>
+                  <tr style="color:var(--color-level-generic);font-weight:bold;font-size:larger">
+                    <td>Total</td>
+                    <td class=number>
+                      {{format(Global.TotalGHG().total)}}
+                      <span>kgCO<sub>2</sub>eq</span>
+                    </td>
+                    <td class=number>
+                      {{format(Global.TotalNRG())}}
+                      <span>kWh</span>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>
 
-          in development
+          <div>
+            <div class=heading>SUMMARY - Charts - GHG emissions</div>
+            TODO
+          </div>
+
+          <div>
+            <div class=heading>SUMMARY - Charts - Energy performance</div>
+            TODO
+          </div>
+
+          <div>
+            <div class=heading>SUMMARY - Sankey diagram</div>
+            TODO
+          </div>
+
+          <div>
+            <div class=heading>INPUTS</div>
+            TODO
+          </div>
+
+          <div>
+            <div class=heading>OUTPUTS</div>
+            TODO
+          </div>
         </div>
 
-        <!--VITI PDF-->
+        <!--report from VITI in PDF-->
         <div style="text-align:center">
           <embed src="dev/report_disseny.pdf" width="100%" height="2100px">
         </div>
       </div>
-
     </div>
   `,
 
@@ -152,6 +201,13 @@ let report = new Vue({
         font-weight:bold;
         border-bottom:2px solid var(--color-level-generic);
         padding-bottom:5px;
+        padding-top:20px;
+      }
+
+      #report table th,
+      #report table td {
+        border:none;
+        border-bottom:1px solid #ccc;
       }
     </style>
   `,

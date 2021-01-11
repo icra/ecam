@@ -80,7 +80,7 @@ let compare_scenarios=new Vue({
           </b>
         </p>
 
-        <div>
+        <div style="text-align:center">
           list of assessments
         </div>
 

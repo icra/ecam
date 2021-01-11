@@ -1358,8 +1358,8 @@ class Waste_Treatment extends Substage{
       return N+P;
     }
     wwt_ghg_avoided_reuse_water(){
-      let ch4 = 0; //TBD TODO
-      let n2o = this.wwt_vol_nonp*(this.wwt_tn_effl/this.wwt_vol_disc)*this.wwt_n2o_efac_dis*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let ch4 = 0; //TBD TODO: methane emissions avoided due to water reused
+      let n2o = this.wwt_vol_nonp*((this.wwt_tn_effl/this.wwt_vol_disc)||0)*this.wwt_n2o_efac_dis*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       return ch4+n2o;
     }
     wwt_ghg_avoided_sequestration(){

@@ -4,20 +4,20 @@
   - Graphs & report (Energy and GHGs [VITI])
   - IPCC equations compliance
 
-[DOING NOW - concrete tasks]
-  - landing: hide "are you a new user" button
-  - landing: hide laptop icon section
-  - move compare asessments to new tab
+[DOING NOW - concrete tasks - bugs have highest priority always]
   - BUG: solve all Global calls
     - conv_kwh_co2
     - bod_pday
     - etc
-  - NEW: create References structure for documentation.
   - BUG: in variable.js: outputs that use this variable / drop-down selection
     (exceptions) value showed: now we see the Exceptions[key] object as a
     string instead of the input value
-  - REQUEST: create minimum required data filter
-  - REQUEST: add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
+
+  - NEW: finish report.js
+  - NEW: finish compare_scenarios.js
+
+  - REQ: create minimum required data filter
+  - REQ: add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
     - abstracted volume  (wsa)
     - treated volume     (wst)
     - distributed volume (wsd)
@@ -26,6 +26,7 @@
     - treated volume     (wwo)
   - ENH: onclose listener: trigger warning if ecam is accidentally closed
   - ENH: check if version does not match when loading json files
+  - NEW: create References structure for documentation.
 
 [TO BE DONE WHEN V3 IS FEATURE FROZEN]
   - update help & about & docs
