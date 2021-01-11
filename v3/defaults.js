@@ -39,6 +39,7 @@ if(debug){
   });
 }
 
-ecam.show('compare_scenarios');
+ecam.show('landing');
+//ecam.show('compare_scenarios');
 //go_to('Waste','Onsite');
 //variable.view('wwt_biog_pro');
