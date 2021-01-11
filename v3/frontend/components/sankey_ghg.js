@@ -6,6 +6,10 @@ let sankey_ghg = new Vue({
   },
 
   methods:{
+    show_summaries_menu(){
+      summaries_menu.visible=true;
+    },
+
     draw_sankey_ghg(){
       let colors={
         'ws':Structure.find(s=>s.prefix=='ws').color,
@@ -153,6 +157,11 @@ let sankey_ghg = new Vue({
   template:`
     <!--sankey diagram-->
     <div id=sankey_ghg v-if="visible && Languages.ready">
+
+      <div>
+        {{show_summaries_menu()}}
+      </div>
+
       <h1 style=text-align:center> Sankey diagram GHG</h1>
       <div id=sankey></div>
     </div>

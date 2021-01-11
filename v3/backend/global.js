@@ -282,7 +282,7 @@ class Water_stages{
       return wsa+wst+wsd;
     }
     ws_SL_serv_pop(){
-      return 100*this.ws_serv_pop()/this.ws_resi_pop;
+      return (100*this.ws_serv_pop()/this.ws_resi_pop)||0;
     }
 
   //---
@@ -371,7 +371,7 @@ class Waste_stages{
       return wwt+wwo;
     }
     ww_SL_serv_pop(){
-      return 100*this.ww_serv_pop()/this.ww_resi_pop;
+      return (100*this.ww_serv_pop()/this.ww_resi_pop)||0;
     }
     ww_nrg_cons(){
       let wwc = this.Collection.map(s=>s.wwc_nrg_cons).sum();

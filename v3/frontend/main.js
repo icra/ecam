@@ -6,7 +6,6 @@ let ecam={
     caption,
     linear_menu,
     stages_menu,
-    summaries_menu,
   },
 
   //views (==pages, Vue objects)
@@ -35,6 +34,7 @@ let ecam={
     sankey_ghg,
     diagram,
     compare_scenarios,
+    summaries_menu,
 
     development,
     problems,
@@ -60,14 +60,6 @@ let ecam={
     stages_menu.visible      = view=='tier_b';
     stages_menu.current_view = view;
     linear_menu.current_view = view;
-
-    summaries_menu.visible = [ //TODO refactor this part
-      'overview',
-      'summary_ghg',
-      'sankey_ghg',
-      'diagram',
-      'report',
-    ].indexOf(view)>=0;
 
     caption.hide();
     window.scrollTo(0,0);

@@ -66,6 +66,7 @@ let more = new Vue({
             <li class=item><a onclick="ecam.show('tables')">            <div class=icon>&#128200;</div> Data tables                              </a></li>
             <li class=item><a onclick="alert('TODO')">                  <div class=icon>&#9729;  </div> {{translate('unfccc_categories')}} (TODO)</a></li>
             <li class=item><a onclick="ecam.show('development')">       <div class=icon>&#128187;</div> {{translate('dev')                     }}</a></li>
+            <li class=item><a onclick="ecam.show('diagram')">           <div class=icon>&#8605;  </div> Flow diagram                             </a></li>
           </ul>
         </li>
       </ul>

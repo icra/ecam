@@ -15,24 +15,12 @@ let help = new Vue({
         {{translate('help')}}
       </h1>
 
-      <p>in development</p>
+      <p>
+        (in development)
+      </p>
 
-      <ul class=tabs>
-        <li>
-          Video tutorials
-        </li>
-        <li>
-          Manuals and materials (pdf)
-        </li>
-        <li>
-          FAQs
-        </li>
-      </ul>
-
-      <div style="background:var(--color-level-generic-background)">
-        TODO - in development
-
-        <table style=margin:auto>
+      <div>
+        <table style="margin:auto;text-align:left">
           <tr>
             <td><a target=_blank href="frontend/docs/help_pdf/ECAM V2 FAQ_Aug2017.pdf">Frequently Asked Questions (pdf)</a></td>
           </tr>

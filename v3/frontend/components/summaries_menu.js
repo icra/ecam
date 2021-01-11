@@ -3,22 +3,28 @@ let summaries_menu = new Vue({
 
   data:{
     visible:false,
+    current_view:'summary_ghg',
     Languages,
+    
   },
 
   methods:{
     is_current_view(view_name){
-      return linear_menu.current_view == view_name;
-    }
+      return this.current_view == view_name;
+    },
+
+    show(view_name){
+      this.current_view=view_name;
+      ecam.show(view_name);
+    },
   },
 
   template:`
     <div id=summaries_menu v-if="visible && Languages.ready">
       <div id=tabs>
-        <div :current="is_current_view('summary_ghg')" onclick="ecam.show('summary_ghg')">Summary</div>
-        <div :current="is_current_view('sankey_ghg')"  onclick="ecam.show('sankey_ghg')">Sankey diagram</div>
-        <div :current="is_current_view('diagram')"     onclick="ecam.show('diagram')">Flow diagram</div>
-        <div :current="is_current_view('report')"      onclick="ecam.show('report')">Report</div>
+        <div :current="current_view=='summary_ghg'" @click="show('summary_ghg')">Summary       </div>
+        <div :current="current_view=='sankey_ghg'"  @click="show('sankey_ghg' )">Sankey diagram</div>
+        <div :current="current_view=='report'"      @click="show('report'     )">Report        </div>
       </div>
     </div>
   `,

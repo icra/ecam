@@ -36,7 +36,7 @@ let about = new Vue({
         </p>
 
         <p>
-          This software is free and <a onclick="ecam.show('open_source')">open source</a>.
+          This software is free and <a target=_blank href="https://github.com/icra/ecam">open source</a>.
         </p>
 
         <p>
@@ -70,7 +70,7 @@ let about = new Vue({
         <small>
           ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under
           a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work
-          at <a target="_blank" href="www.wacclim.org">www.wacclim.org</a>. Permissions beyond the scope of this license may be available
+          at <a target="_blank" href="https://www.wacclim.org/">www.wacclim.org</a>. Permissions beyond the scope of this license may be available
           at <a target="_blank" href="mailto:wacclim@giz.de">wacclim@giz.de</a>.
         </small>
       </div>

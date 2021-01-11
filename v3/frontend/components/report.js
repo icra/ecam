@@ -13,10 +13,17 @@ let report = new Vue({
   methods:{
     format,
     translate,
+    show_summaries_menu(){
+      summaries_menu.visible=true;
+    },
   },
 
   template:`
     <div id=report v-if="visible">
+      <div>
+        {{show_summaries_menu()}}
+      </div>
+
       <h1 style="text-align:center">Report (in development)</h1>
 
       <div

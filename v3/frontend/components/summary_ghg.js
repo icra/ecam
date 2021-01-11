@@ -4,8 +4,7 @@ let summary_ghg = new Vue({
     visible:false,
 
     //folded sections
-    //unfolded_levels:['Water','Waste'],
-    unfolded_levels:[],
+    unfolded_levels:['Water','Waste'],
 
     //current view selected
     current_view:"table",
@@ -17,6 +16,9 @@ let summary_ghg = new Vue({
       "ch4":"#ffaa6e",
     },
 
+    //frontend
+    variable,
+
     //backend
     Global,
     Structure,
@@ -27,6 +29,10 @@ let summary_ghg = new Vue({
     translate,
     format,
     go_to,
+
+    show_summaries_menu(){
+      summaries_menu.visible=true;
+    },
 
     //fold/unfold a level in the summary table
     toggle_folded_level(level){
@@ -294,6 +300,10 @@ let summary_ghg = new Vue({
 
   template:`
     <div id=summary_ghg v-if="visible && Languages.ready">
+      <div>
+        {{show_summaries_menu()}}
+      </div>
+
       <!--title-->
       <h1 style="padding-left:0">
         Summary: GHG emissions and energy consumption
@@ -311,40 +321,42 @@ let summary_ghg = new Vue({
       <div>
         <!--tables-->
         <div v-if="current_view=='table'">
-          <table style="width:85%;border-spacing:1px">
+          <table id=table_summary style="width:85%;border-spacing:1px">
             <!--total ghg and nrg-->
             <tbody style="background:var(--color-level-generic);color:white">
               <tr>
-                <td colspan=2 style="font-size:large;text-align:center;padding:2em;vertical-align:center">
+                <td colspan=2 style="font-size:large;text-align:center;padding:1em;vertical-align:center">
                   Total
                 </td>
+
                 <!--total emissions-->
                 <td style="background:inherit;">
                   <div style="
                     display:flex;
                     justify-content:center;
                     text-align:center;
-                    padding-left:1em;
-                    padding-right:1em;
+                    align-items:center;
                   ">
                     <div>
-                      Total gross
-                      <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
                       <div class=number_placeholder v-html="format(Global.TotalGHG().total)"></div>
                     </div>
-                    <div>
-                      Total net
-                      <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
-                      <div class=number_placeholder v-html="format(Global.TotalGHG().total-Global.Waste.ww_GHG_avoided())"></div>
-                    </div>
+                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
                   </div>
                 </td>
 
                 <!--total energy consumption-->
                 <td style="text-align:center">
-                  <div style="color:white">kWh</div>
-                  <div class=number_placeholder style="margin:auto">
-                    {{format(Global.TotalNRG())}}
+                  <div
+                    style="
+                      display:flex;
+                      justify-content:center;
+                      align-items:center;
+                    "
+                  >
+                    <div class=number_placeholder>
+                      {{format(Global.TotalNRG())}}
+                    </div>
+                    <div style="color:white;font-size:x-small">kWh</div>
                   </div>
                 </td>
               </tr>
@@ -360,13 +372,17 @@ let summary_ghg = new Vue({
 
                 <!--level 1 name and icon-->
                 <td style="background:inherit;text-align:center">
-                  <div style="font-size:large">
+                  <div 
+                    style="
+                      display:flex;
+                      align-items:center;
+                    "
+                  >
+                    <img :src="'frontend/img/'+l1.icon" style="width:50px;background:white;border-radius:50%">
+                    &nbsp;
                     <a @click="go_to(l1.level)" style="color:white;">
                       {{ translate(l1.level) }}
                     </a>
-                  </div>
-                  <div>
-                    <img :src="'frontend/img/'+l1.icon" style="width:50px;background:white;border-radius:50%">
                   </div>
                 </td>
 
@@ -378,26 +394,33 @@ let summary_ghg = new Vue({
                     text-align:center;
                     padding-left:1em;
                     padding-right:1em;
+                    align-items:center;
                   ">
-                    <div>
-                      <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
-                      <div
-                        class=number_placeholder
-                        :style="{color:l1.color,borderColor:l1.color}"
-                        v-html="format(Global[l1.level][l1.prefix+'_KPI_GHG']().total)"
-                      ></div>
-                    </div>
+                    <div
+                      class=number_placeholder
+                      :style="{color:l1.color, borderColor:l1.color}"
+                      v-html="format(Global[l1.level][l1.prefix+'_KPI_GHG']().total)"
+                    ></div>
+                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
                   </div>
                 </td>
 
                 <!--level 1 energy consumption-->
                 <td :style="{background:'inherit',textAlign:'center'}">
-                  <div style="color:white">kWh</div>
                   <div
-                    class=number_placeholder
-                    :style="{color:l1.color, borderColor:l1.color, margin:'auto'}"
-                    v-html="format(Global[l1.level][l1.prefix+'_nrg_cons']())"
-                  ></div>
+                    style="
+                      display:flex;
+                      justify-content:center;
+                      align-items:center;
+                    "
+                  >
+                    <div
+                      class=number_placeholder
+                      :style="{color:l1.color, borderColor:l1.color}"
+                      v-html="format(Global[l1.level][l1.prefix+'_nrg_cons']())"
+                    ></div>
+                    <div style="color:white;font-size:x-small">kWh</div>
+                  </div>
                 </td>
               </tr>
 
@@ -413,13 +436,17 @@ let summary_ghg = new Vue({
                 <td
                   :style="{textAlign:'center',background:'var(--color-level-'+l1.level+'-secondary)'}"
                 >
-                  <div style="font-size:large">
+                  <div 
+                    style="
+                      display:flex;
+                      align-items:center;
+                    "
+                  >
+                    <img :src="'frontend/img/'+l2.icon" style="width:45px;">
+                    &nbsp;
                     <a @click="go_to(l2.level,l2.sublevel)" :style="{color:l1.color}">
                       {{translate(l2.sublevel)}}
                     </a>
-                  </div>
-                  <div>
-                    <img :src="'frontend/img/'+l2.icon" style="width:45px;">
                   </div>
                 </td>
 
@@ -432,50 +459,63 @@ let summary_ghg = new Vue({
                       text-align:center;
                       padding-left:1em;
                       padding-right:1em;
+                      align-items:center;
                     "
                   >
-                    <div>
-                      <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
-                      <div
-                        class=number_placeholder
-                        :style="{color:l1.color, borderColor:l1.color}"
-                        v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_KPI_GHG']().total).sum())">
-                      </div>
+                    <div
+                      class=number_placeholder
+                      :style="{color:l1.color, borderColor:l1.color}"
+                      v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_KPI_GHG']().total).sum())">
                     </div>
+                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
                   </div>
                 </td>
 
                 <!--level 2 energy consumption-->
                 <td :style="{background:'white', color:l1.color, textAlign:'center'}">
-                  <div style="color:black">kWh</div>
                   <div
-                    class=number_placeholder
-                    :style="{color:l1.color,borderColor:l1.color,margin:'auto'}"
+                    style="
+                      display:flex;
+                      justify-content:center;
+                      align-items:center;
+                    "
                   >
                     <div
+                      class=number_placeholder
+                      :style="{color:l1.color,borderColor:l1.color,}"
                       v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_nrg_cons']).sum() )"
                     ></div>
+                    <div style="color:black;font-size:x-small">kWh</div>
                   </div>
                 </td>
               </tr>
             </tbody>
 
             <!--avoided ghg emissions-->
-            <tbody class=avoided_emissions>
+            <tbody class=avoided_emissions v-if="true || Global.Waste.ww_GHG_avoided()">
               <tr>
-                <td><button>+</button></td>
+                <td></td>
                 <td>
                   Avoided GHG emissions (TBD)
                 </td>
                 <td>
-                  <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
                   <div
-                    class=number_placeholder
-                    style="margin:auto"
-                    v-html="format( Global.Waste.ww_GHG_avoided() )"
-                  ></div>
+                    style="
+                      display:flex;
+                      justify-content:center;
+                      align-items:center;
+                    "
+                  >
+                    <div
+                      class=number_placeholder
+                      v-html="Global.Waste.ww_GHG_avoided() ? format( Global.Waste.ww_GHG_avoided() ) : 0"
+                    ></div>
+                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
+                  </div>
                 </td>
-                <td></td>
+                <td>
+                  <button @click="variable.view('ww_GHG_avoided')">more info</button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -700,6 +740,7 @@ let summary_ghg = new Vue({
       #summary_ghg table td {
         border:none;
         background:inherit;
+        padding:10px;
       }
       #summary_ghg div.number_placeholder {
         width:150px;
@@ -709,7 +750,7 @@ let summary_ghg = new Vue({
         background:white;
         border:1px solid var(--color-level-generic);
         color:var(--color-level-generic);
-        margin:0 1px;
+        margin:0 5px;
       }
 
       #summary_ghg button[selected]{

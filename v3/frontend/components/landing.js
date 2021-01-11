@@ -135,7 +135,7 @@ let landing = new Vue({
 
           <div class=learn_more_item onclick="window.open('https://wacclim.org')">
             <div style="display:flex;justify-content:space-between;align-items:flex-end">
-              <b>WaCClim</b>
+              <b>WaCCliM</b>
               <img src="frontend/img/landing/wacclim.png">
             </div>
             <p>
@@ -170,7 +170,7 @@ let landing = new Vue({
         <!--links-->
         <p>
           <a href="https://wacclim.org" target=_blank>About WaCCliM</a> |
-          <a href="#" onclick="ecam.show('about')">About us</a> |
+          <a href="#" onclick="ecam.show('about')">About ECAM</a> |
           <a href="#" onclick="ecam.show('help')">Help</a> |
           <a href="mailto:wacclim@giz.de" target=_blank>Contact</a>
         </p>

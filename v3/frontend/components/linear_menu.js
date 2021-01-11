@@ -15,6 +15,10 @@ let linear_menu = new Vue({
     is_summaries_menu_visible(){
       return summaries_menu.visible;
     },
+
+    show_summaries_menu(){
+      summaries_menu.visible=true;
+    },
   },
 
   template:`
@@ -34,7 +38,7 @@ let linear_menu = new Vue({
           onclick="ecam.show('select_scenario')"
           :selected="current_view=='select_scenario'"
         >
-          <div>Configuration</div>
+          <div>Get started</div>
         </div>
 
         <!--stages-->
@@ -47,18 +51,10 @@ let linear_menu = new Vue({
 
         <!--overview-->
         <div
-          onclick="ecam.show('summary_ghg')"
+          onclick="ecam.show(summaries_menu.current_view)"
           :selected="is_summaries_menu_visible()"
         >
           <div>Results</div>
-        </div>
-
-        <!--more (old sidebar)-->
-        <div
-          onclick="ecam.show('more')"
-          :selected="current_view=='more'"
-        >
-          <div>More</div>
         </div>
 
         <!--compare-->
@@ -67,6 +63,14 @@ let linear_menu = new Vue({
           :selected="current_view=='compare_scenarios'"
         >
           <div>Compare assessments</div>
+        </div>
+
+        <!--more (old sidebar)-->
+        <div
+          onclick="ecam.show('more')"
+          :selected="current_view=='more'"
+        >
+          <div>More</div>
         </div>
       </div>
 

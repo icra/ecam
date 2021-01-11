@@ -75,10 +75,14 @@ let compare_scenarios=new Vue({
 
         <p style="text-align:center;color:#666">
           <b>
-            Select 'compare' on two or more assessments and they will appear
-            below. The darker column is the current assessment you are editing.
+            Select assessments to be compared. The darker column is the
+            current assessment you are editing.
           </b>
         </p>
+
+        <div>
+          list of assessments
+        </div>
 
         <div style="text-align:center" v-if="scenarios_compared.length">
           TODO
