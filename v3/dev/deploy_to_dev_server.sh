@@ -12,5 +12,5 @@ git push
 #ssh root@h2793818.stratoserver.net "$command"
 
 #loading server
-command='cd /var/www/vhosts/icradev.cat/ecam.icradev.cat; git pull'
+command='cd /var/www/vhosts/icradev.cat/ecam.icradev.cat/ecam; git pull'
 ssh root@217.61.208.188 "$command"
