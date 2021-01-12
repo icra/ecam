@@ -3,6 +3,7 @@ let report = new Vue({
 
   data:{
     visible:false,
+    pdf_visible:true,
 
     Charts,
     Global,
@@ -135,7 +136,11 @@ let report = new Vue({
   template:`
     <div id=report v-if="visible">
       <div>{{show_summaries_menu()}}</div>
-      <!--title--><h1 style="text-align:center">Report</h1>
+      <!--title-->
+      <h1 style="text-align:center">
+        Report
+        <button @click="pdf_visible^=1">show/hide pdf</button>
+      </h1>
 
       <!--grid 50 50-->
       <div
@@ -414,7 +419,7 @@ let report = new Vue({
         </div>
 
         <!--report from VITI in PDF-->
-        <div style="text-align:center">
+        <div v-if="pdf_visible" style="text-align:center">
           <embed src="dev/report_disseny.pdf" width="100%" height="2100px">
         </div>
       </div>

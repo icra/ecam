@@ -7,5 +7,5 @@ let Structure=[
   {prefix:'ww',  icon:"waste.svg",    level:'Waste', sublevel:false,          class:Waste_stages,       color:'#EE6D56'},
   {prefix:'wwc', icon:"wasteCol.svg", level:'Waste', sublevel:'Collection',   class:Waste_Collection,   color:'#EE6D56'},
   {prefix:'wwt', icon:"wasteTre.svg", level:'Waste', sublevel:'Treatment',    class:Waste_Treatment,    color:'#F59382'},
-  {prefix:'wwo', icon:"wasteOns.png", level:'Waste', sublevel:'Onsite',       class:Waste_Onsite,       color:'#F5B6AB'},
+  {prefix:'wwo', icon:"wasteOns.svg", level:'Waste', sublevel:'Onsite',       class:Waste_Onsite,       color:'#F5B6AB'},
 ];
