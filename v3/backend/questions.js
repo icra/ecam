@@ -710,4 +710,3 @@ Questions.find_inexisting_variables=function(){
   });
   return Array.from(new Set(inexisting_variables));
 };
-

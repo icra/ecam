@@ -1,45 +1,46 @@
 /*
- * Default configuration for ecam (backend and frontend)
+  Default configuration and debug mode
+  (backend and frontend)
+  this file is intended to help development
 */
 
-/*frontend elements visible or not*/
+let debug=true; //DEBUG MODE
+
+/*frontend elements: set visibility*/
 ecam_logo.visible   = 1;
 linear_menu.visible = 1;
 stages_menu.visible = 0;
-
-let debug=true;
-//debug=false;
 
 if(debug){
   //initial input values
   Global.General.Country="Algeria";
   select_scenario.set_variables_from_selected_country();
 
-  //create 1 substage at each stage
+  //create 1 substage for each stage
   Structure.filter(s=>s.sublevel).forEach(stage=>{
     stages_menu.add_substage(stage.level, stage.sublevel);
   });
 
-  //add energy consumption at each substage
-  let energy = 1;
-  Structure.filter(s=>s.sublevel).forEach(stage=>{
-    Global[stage.level][stage.sublevel].forEach(ss=>ss[stage.prefix+'_nrg_cons']=energy++);
-  });
-
-  //other inputs
+  //add some input values
   Global.Water.Distribution[0].wsd_serv_pop=100;
   Global.Water.ws_resi_pop                 =1000;
   Global.Waste.Treatment[0].wwt_serv_pop   =100;
   Global.Waste.ww_resi_pop                 =1000;
 
-  //add another assessment
+  //add energy consumption at each substage
+  let energy=1;
+  Structure.filter(s=>s.sublevel).forEach(stage=>{
+    Global[stage.level][stage.sublevel].forEach(ss=>ss[stage.prefix+'_nrg_cons']=energy++);
+  });
+
+  //add another scenario layout scenario
   ecam.new_scenario();
   Scenarios.forEach(scenario=>{
     compare_scenarios.scenarios_compared.push(scenario);
   });
-}
 
-//ecam.show('landing');
-ecam.show('report');
-//go_to('Waste','Onsite');
-//variable.view('wwt_biog_pro');
+  //initial page to display
+  ecam.show('report'); //view page
+  //go_to('Waste','Onsite'); //view inventory stage
+  //variable.view('wwt_biog_pro'); //view variable detailed info
+}

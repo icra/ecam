@@ -1,18 +1,19 @@
+<!--standalone floating caption element-->
 <div id=caption style=display:none>#caption</div>
 
 <script>
+  let caption=document.querySelector("#caption"); //DOM element
   let Caption={};//namespace
 
-  Caption.show=function(e,element){
-    let caption=document.querySelector("#caption");
+  Caption.show=function(ev,element){
     caption.style.display='';
-    caption.style.left=(e.clientX-10)+"px";
-    caption.style.top=(e.clientY+15)+"px";
+    caption.style.left=(ev.clientX-10)+"px";
+    caption.style.top=(ev.clientY+15)+"px";
     caption.innerHTML=element.getAttribute('caption');
   };
 
   Caption.hide=function(){
-    document.querySelector("#caption").style.display='none';
+    caption.style.display='none';
   };
 
   //add mouse listeners, to be called when html loads (<body onload>)

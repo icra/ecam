@@ -1,8 +1,8 @@
-/**
-  * BENCHMARKING
-  * classifies output values as "good","acceptable","bad",etc
+/*
+  BENCHMARKS:
+  each function return "good","acceptable","bad" according to rules
 */
-let Benchmarks = {
+let Benchmarks={
   //standarized energy consumption (kWh/m3/100m)
   wsa_KPI_std_nrg_cons(stage, value){
     if(!stage)                  return "stage error";
@@ -195,6 +195,6 @@ let Benchmarks = {
     else                                   return "Out of range";
   },
 
-  //testing fake benchmark to test dev utils
+  //fake benchmark to test dev utils
   not_used_benchmark(){return false},
 };

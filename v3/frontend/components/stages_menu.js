@@ -79,7 +79,7 @@ let stages_menu=new Vue({
   template:`
     <!--linear menu COMPONENT-->
     <div id=stages_menu v-if="visible && Languages.ready">
-      <div style="padding:8px">
+      <div style="padding:8px 40px">
         <h1 style="padding-left:0">
           Inventory: urban water cycle stages
           <button @click="show_table^=1">show/hide table</button>
@@ -123,7 +123,6 @@ let stages_menu=new Vue({
                   <div>
                     <img
                       :src="'frontend/img/'+s.icon"
-                      :class="'s '+(is_tier_b_selected(s.level, s.sublevel)?'selected':'')"
                     >
                   </div>
                   <div style="padding-left:5px">
@@ -228,8 +227,8 @@ let stages_menu=new Vue({
       #stages_menu {
         background:#f0f5fc;
         padding-top:1px;
-        border-bottom:1px solid #ccc;
-        padding-bottom:2em;
+        padding-bottom:1em;
+        margin-bottom:3em;
       }
       #stages_menu #main_table {
         width:100%;
