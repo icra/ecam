@@ -1,4 +1,4 @@
-let summary_ghg = new Vue({
+let summary_ghg=new Vue({
   el:"#summary_ghg",
   data:{
     visible:false,
@@ -9,15 +9,9 @@ let summary_ghg = new Vue({
     //current view selected
     current_view:"table",
 
-    //colors for gas charts
-    gas_colors:{
-      "co2":"#dadada",
-      "n2o":"#ff8d54",
-      "ch4":"#ffaa6e",
-    },
-
     //frontend
     variable,
+    Charts,
 
     //backend
     Global,
@@ -44,172 +38,11 @@ let summary_ghg = new Vue({
       }
     },
 
-    //create a pie chart inside "id_container"
-    draw_pie_chart(id_container, data, colors) {
-      //nothing to draw
-      if(data.length==0) return;
-
-      let container = document.getElementById(id_container);
-      if(!container) return;
-      container.innerHTML="";
-
-      //sizes
-      var w = 200;
-      var h = 200;
-      var r = h/2;
-
-      var vis = d3.select(`#${id_container}`).append("svg:svg").data([data]).attr("width",w).attr("height",h).append("svg:g").attr("transform","translate("+r+","+r+")");
-      var pie = d3.layout.pie().value(function(d){return d.value});
-      var arc = d3.svg.arc().outerRadius(r);//declare an arc generator function
-
-      //select paths, use arc generator to draw
-      var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
-      arcs.append("svg:path")
-        .attr("fill", function(d, i){return colors[i];})
-        .attr("d", function (d) {return arc(d);})
-      ;
-
-      //add the text
-      arcs.append("svg:text")
-        .attr("transform", function(d){
-          d.innerRadius = 40; /* Distance of label to the center*/
-          d.outerRadius = r;
-          return "translate(" + arc.centroid(d) + ")";}
-        )
-        .attr("text-anchor", "middle")
-        .text( function(d, i){
-          let value = data[i].value ? format(data[i].value) : 0;
-          return value+'%';
-        })
-      ;
-    },
-
-    //create a bar chart inside "id_container"
-    draw_bar_chart(id_container, data, colors, yUnit){
-      if(data.length==0) return;
-      let keys = Object.keys(data[0]).slice(1);//llegenda
-
-      var margin = {top:20,right:160,bottom:35,left:30};
-      var width  = window.innerWidth-margin.left-margin.right-50;
-      var height = 500-margin.top-margin.bottom;
-      var svg = d3.select(`#${id_container}`)
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-      // Transpose the data into layers
-      var dataset = d3.layout.stack()(keys.map(function(key) {
-        return data.map(d=>{
-          return {x: d.name, y: +d[key]};
-        });
-      }));
-
-      // Set x, y and colors
-      var x = d3.scale.ordinal()
-        .domain(dataset[0].map(function(d) { return d.x; }))
-        .rangeRoundBands([10, width-10], 0.02);
-
-      var y = d3.scale.linear()
-        .domain([0, d3.max(dataset, function(d){return d3.max(d, function(d){return d.y0 + d.y; }); })])
-        .range([height, 0]);
-
-      // Define and draw axes
-      var yAxis = d3.svg.axis()
-        .scale(y)
-        .orient("left")
-        .ticks(5)
-        .tickSize(-width, 0, 0)
-        .tickFormat(function(d){return d})
-      ;
-
-      var xAxis = d3.svg.axis()
-        .scale(x)
-        .orient("bottom")
-
-      svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis);
-
-      svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
-
-      // Create groups for each series, rects for each segment
-      var groups = svg.selectAll("g.cost")
-        .data(dataset)
-        .enter().append("g")
-        .attr("class", "cost")
-        .style("fill", function(d, i) {
-          return colors[i]; }
-        );
-
-      var rect = groups.selectAll("rect")
-        .data(function(d) { return d; })
-        .enter()
-        .append("rect")
-        .attr("x", function(d) { return x(d.x); })
-        .attr("y", function(d) { return y(d.y0 + d.y); })
-        .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); })
-        .attr("width", x.rangeBand())
-        .on("mouseover", function() { tooltip.style("display", null); })
-        .on("mouseout", function() { tooltip.style("display", "none"); })
-        .on("mousemove", function(d) {
-          var xPosition = d3.mouse(this)[0] - 15;
-          var yPosition = d3.mouse(this)[1] - 25;
-          tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-          tooltip.select("text").text(d.y);
-        });
-
-      // Draw legend
-      var legend = svg.selectAll(".legend")
-        .data(colors)
-        .enter().append("g")
-        .attr("class", "legend")
-        .attr("transform", function(d, i) { return "translate(30," + i * 19 + ")"; });
-
-      legend.append("rect")
-        .attr("x", width - 18)
-        .attr("width", 18)
-        .attr("height", 18)
-        .style("fill", function(d, i) {return colors.slice()[i];});
-
-      legend.append("text")
-        .attr("x", width + 5)
-        .attr("y", 9)
-        .attr("dy", ".35em")
-        .style("text-anchor", "start")
-        .text((d,i)=>{
-          return keys[i]+" ("+yUnit+")";
-        });
-
-
-      // Prep the tooltip bits, initial display is hidden
-      var tooltip = svg.append("g")
-        .attr("class", "tooltip")
-        .style("display", "none");
-
-      tooltip.append("rect")
-        .attr("width", 30)
-        .attr("height", 20)
-        .attr("fill", "white")
-        .style("opacity", 0.5);
-
-      tooltip.append("text")
-        .attr("x", 15)
-        .attr("dy", "1.2em")
-        .style("text-anchor", "middle")
-        .attr("font-size", "12px")
-        .attr("font-weight", "bold");
-    },
-
     //call chart drawing functions
     draw_all_charts(){
       if(this.Global.TotalGHG().total==0) return;
       //draw pie charts
-        this.draw_pie_chart('chart_1',
+        Charts.draw_pie_chart('chart_1',
           [
             {"label":"", "value":100*Global.Water.ws_KPI_GHG().total/Global.TotalGHG().total},
             {"label":"", "value":100*Global.Waste.ww_KPI_GHG().total/Global.TotalGHG().total},
@@ -219,7 +52,7 @@ let summary_ghg = new Vue({
           ]
         );
 
-        this.draw_pie_chart('chart_2',
+        Charts.draw_pie_chart('chart_2',
           Structure.filter(s=>s.sublevel).map(s=>{
             let label = "";
             let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum()/Global.TotalGHG().total;
@@ -228,20 +61,20 @@ let summary_ghg = new Vue({
           Structure.filter(s=>s.sublevel).map(s=>s.color),
         );
 
-        this.draw_pie_chart('chart_3',
+        Charts.draw_pie_chart('chart_3',
           [
             {"label":"", "value":100*Global.TotalGHG().co2/Global.TotalGHG().total},
             {"label":"", "value":100*Global.TotalGHG().n2o/Global.TotalGHG().total},
             {"label":"", "value":100*Global.TotalGHG().ch4/Global.TotalGHG().total},
           ],
           [
-            this.gas_colors.co2,
-            this.gas_colors.n2o,
-            this.gas_colors.ch4,
+            Charts.gas_colors.co2,
+            Charts.gas_colors.n2o,
+            Charts.gas_colors.ch4,
           ],
         );
 
-        this.draw_pie_chart('chart_nrg_levels',
+        Charts.draw_pie_chart('chart_nrg_levels',
           [
             {"label":"", "value":100*Global.Water.ws_nrg_cons()/Global.TotalNRG()},
             {"label":"", "value":100*Global.Waste.ww_nrg_cons()/Global.TotalNRG()},
@@ -252,7 +85,7 @@ let summary_ghg = new Vue({
           ],
         );
 
-        this.draw_pie_chart('chart_nrg_stages',
+        Charts.draw_pie_chart('chart_nrg_stages',
           Structure.filter(s=>s.sublevel).map(s=>{
             let label = "";
             let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum()/Global.TotalNRG();
@@ -260,8 +93,10 @@ let summary_ghg = new Vue({
           }),
           Structure.filter(s=>s.sublevel).map(s=>s.color),
         );
+      //--
+
       //draw bar charts
-        this.draw_bar_chart(
+        Charts.draw_bar_chart(
           'bar_chart_ghg_substages',
           Structure.filter(s=>s.sublevel).map(s=>{
             return Global[s.level][s.sublevel].map(ss=>{
@@ -274,14 +109,14 @@ let summary_ghg = new Vue({
             });
           }).reduce((p,c)=>p.concat(c),[]),
           colors=[
-            this.gas_colors.co2,
-            this.gas_colors.ch4,
-            this.gas_colors.n2o,
+            Charts.gas_colors.co2,
+            Charts.gas_colors.ch4,
+            Charts.gas_colors.n2o,
           ],
           'kgCO2eq',
         );
 
-        this.draw_bar_chart(
+        Charts.draw_bar_chart(
           'bar_chart_nrg_substages',
           Structure.filter(s=>s.sublevel).map(s=>{
             return Global[s.level][s.sublevel].map(ss=>{
@@ -295,6 +130,7 @@ let summary_ghg = new Vue({
           ],
           'kWh',
         );
+      //--
     },
   },
 
@@ -589,7 +425,7 @@ let summary_ghg = new Vue({
               <div class=flex>
                 <table border=1 class=ghg_table>
                   <tr v-for="value,key in Global.TotalGHG()" v-if="key!='total'">
-                    <td :style="{background:gas_colors[key]}">
+                    <td :style="{background:Charts.gas_colors[key]}">
                     </td>
                     <td>
                       <div v-html="key.toUpperCase().prettify()"></div>
