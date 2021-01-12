@@ -5,7 +5,6 @@ let summaries_menu = new Vue({
     visible:false,
     current_view:'summary_ghg',
     Languages,
-    
   },
 
   methods:{
@@ -22,9 +21,9 @@ let summaries_menu = new Vue({
   template:`
     <div id=summaries_menu v-if="visible && Languages.ready">
       <div id=tabs>
-        <div :current="current_view=='summary_ghg'" @click="show('summary_ghg')">Summary       </div>
-        <div :current="current_view=='sankey_ghg'"  @click="show('sankey_ghg' )">Sankey diagram</div>
-        <div :current="current_view=='report'"      @click="show('report'     )">Report        </div>
+        <div :current="current_view=='summary_ghg'" onclick="summaries_menu.show('summary_ghg')">Summary       </div>
+        <div :current="current_view=='sankey_ghg'"  onclick="summaries_menu.show('sankey_ghg' )">Sankey diagram</div>
+        <div :current="current_view=='report'"      onclick="summaries_menu.show('report'     )">Report        </div>
       </div>
     </div>
   `,
@@ -42,6 +41,7 @@ let summaries_menu = new Vue({
         padding-top:2em;
         border-bottom:4px solid transparent;
         cursor:pointer;
+        margin-right:1px;
       }
       #summaries_menu #tabs > div[current],
       #summaries_menu #tabs > div:hover {

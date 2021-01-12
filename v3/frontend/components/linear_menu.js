@@ -51,7 +51,7 @@ let linear_menu = new Vue({
 
         <!--overview-->
         <div
-          onclick="ecam.show(summaries_menu.current_view)"
+          onclick="summaries_menu.show(summaries_menu.current_view)"
           :selected="is_summaries_menu_visible()"
         >
           <div>Results</div>
@@ -117,6 +117,7 @@ let linear_menu = new Vue({
         padding:2em 1em 0.2em 1em;
         border-bottom:4px solid transparent;
         box-sizing:border-box;
+        margin-right:1px;
       }
       #linear_menu #select_view > div[selected],
       #linear_menu #select_view > div:hover {

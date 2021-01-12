@@ -16,8 +16,9 @@ if(debug){
   Global.General.Country="Algeria";
   select_scenario.set_variables_from_selected_country();
 
-  //create 1 substage for each stage
+  //create substages
   Structure.filter(s=>s.sublevel).forEach(stage=>{
+    stages_menu.add_substage(stage.level, stage.sublevel);
     stages_menu.add_substage(stage.level, stage.sublevel);
   });
 

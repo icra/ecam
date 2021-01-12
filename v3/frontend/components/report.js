@@ -4,19 +4,27 @@ let report = new Vue({
   data:{
     visible:false,
     pdf_visible:true,
+    summaries_menu_visible:true,
+    printable_version:false,
 
     Charts,
     Global,
     Configuration,
     Structure,
     GWP_reports,
+    Languages,
   },
 
   methods:{
     format,
     translate,
+    get_input_codes,
+    get_base_unit,
+
     show_summaries_menu(){
-      summaries_menu.visible=true;
+      if(this.printable_version==false){
+        summaries_menu.visible=true;
+      }
     },
 
     draw_all_charts(){
@@ -130,30 +138,43 @@ let report = new Vue({
       }catch(e){
         console.warn(e);
       }
-    })
+
+      if(_this.visible){
+        ecam_logo.visible            = !_this.printable_version;
+        summaries_menu.visible       = !_this.printable_version;
+        linear_menu.visible          = !_this.printable_version;
+        _this.summaries_menu_visible = !_this.printable_version;
+        _this.pdf_visible            = !_this.printable_version;
+      }
+    });
+
   },
 
   template:`
-    <div id=report v-if="visible">
+    <div id=report v-if="visible && Languages.ready">
       <div>{{show_summaries_menu()}}</div>
+
       <!--title-->
-      <h1 style="text-align:center">
-        Report
-        <button @click="pdf_visible^=1">show/hide pdf</button>
+      <h1 v-if="!printable_version" style="text-align:center">
+        <div>
+          Report
+        </div>
+        <div style="text-align:center;font-size:smaller">
+          click the report to turn on/off printable mode
+        </div>
       </h1>
+
 
       <!--grid 50 50-->
       <div
-        style="
-          display:grid;
-          grid-template-columns:50% 50%;
-        "
+        :class="printable_version?'':'grid_50_50'"
       >
         <!--report in html-->
         <div
+          @click="printable_version^=1"
           style="
             padding:2em;
-            border:1px solid #ccc;
+            cursor:pointer;
           "
         >
           <!--title-->
@@ -200,7 +221,7 @@ let report = new Vue({
               <table class=summary style="width:100%">
                 <thead>
                   <tr style="color:var(--color-level-generic)">
-                    <th>Stage</th>
+                    <th style="text-align:left">Stage</th>
                     <th>
                       <div
                         style="
@@ -293,18 +314,20 @@ let report = new Vue({
                 <div class=chart_title>
                   GHG emissions
                 </div>
-                <div>
-                  <div id=chart_1></div>
+                <div class=flex>
                   <table class=legend>
                     <tr>
-                      <td style="background:var(--color-level-Water)"></td>
-                      <td>{{translate('Water')}}</td>
+                      <td style="color:var(--color-level-Water)">
+                        {{translate('Water')}}
+                      </td>
                     </tr>
                     <tr>
-                      <td style="background:var(--color-level-Waste)"></td>
-                      <td>{{translate('Waste')}}</td>
+                      <td style="color:var(--color-level-Waste)">
+                        {{translate('Waste')}}
+                      </td>
                     </tr>
                   </table>
+                  <div id=chart_1></div>
                 </div>
               </div>
 
@@ -312,17 +335,16 @@ let report = new Vue({
                 <div class=chart_title>
                   GHG emissions by stage
                 </div>
-                <div>
-                  <div id=chart_2></div>
+                <div class=flex>
                   <table class=legend>
                     <tr v-for="stage in Structure.filter(s=>s.sublevel)">
-                      <td :style="{background:stage.color}"></td>
-                      <td>
+                      <td :style="{color:stage.color}">
                         {{translate(stage.level)}}
                         {{translate(stage.sublevel)}}
                       </td>
                     </tr>
                   </table>
+                  <div id=chart_2></div>
                 </div>
               </div>
 
@@ -330,16 +352,15 @@ let report = new Vue({
                 <div class=chart_title>
                   GHG emissions by gas emitted
                 </div>
-                <div>
-                  <div id=chart_3></div>
+                <div class=flex>
                   <table class=legend>
                     <tr v-for="value,key in Global.TotalGHG()" v-if="key!='total'">
-                      <td :style="{background:Charts.gas_colors[key]}"></td>
-                      <td>
+                      <td :style="{color:Charts.gas_colors[key]}">
                         <div v-html="key.toUpperCase().prettify()"></div>
                       </td>
                     </tr>
                   </table>
+                  <div id=chart_3></div>
                 </div>
               </div>
 
@@ -367,36 +388,40 @@ let report = new Vue({
                 <div class=chart_title>
                   Energy consumption
                 </div>
-                <div>
-                  <div id=chart_nrg_levels></div>
+                <div class=flex>
                   <table class=legend>
                     <tr>
-                      <td style="background:var(--color-level-Water)"></td>
-                      <td>{{translate('Water')}}</td>
+                      <td style="color:var(--color-level-Water)">
+                        <div>{{translate('Water')}}</div>
+                      </td>
                     </tr>
                     <tr>
-                      <td style="background:var(--color-level-Waste)"></td>
-                      <td>{{translate('Waste')}}</td>
+                      <td style="color:var(--color-level-Waste)">
+                        <div>{{translate('Waste')}}</div>
+                      </td>
                     </tr>
                   </table>
+                  <div id=chart_nrg_levels></div>
                 </div>
               </div>
+
               <div class=chart_container>
                 <div class=chart_title>
                   Energy consumption by stage
                 </div>
 
-                <div>
-                  <div id=chart_nrg_stages></div>
+                <div class=flex>
                   <table class=legend>
                     <tr v-for="stage in Structure.filter(s=>s.sublevel)">
-                      <td :style="{background:stage.color}"></td>
-                      <td>
-                        {{translate(stage.level)}}
-                        {{translate(stage.sublevel)}}
+                      <td :style="{color:stage.color}">
+                        <div>
+                          {{translate(stage.level)}}
+                          {{translate(stage.sublevel)}}
+                        </div>
                       </td>
                     </tr>
                   </table>
+                  <div id=chart_nrg_stages></div>
                 </div>
               </div>
             </div>
@@ -409,7 +434,42 @@ let report = new Vue({
 
           <div>
             <div class=heading>INPUTS</div>
-            TODO
+            <div>
+              <div v-for="stage in Structure.filter(s=>s.sublevel)">
+                <div :style="{color:stage.color, fontWeight:'bold', marginTop:'20px'}">
+                  {{translate(stage.level)}}
+                  &rsaquo;
+                  {{translate(stage.sublevel)}}
+                </div>
+
+                <table style="border-collapse:separate">
+                  <tr>
+                    <th></th>
+                    <th v-for="ss in Global[stage.level][stage.sublevel]">
+                      <b>{{ss.name}}</b>
+                    </th>
+                    <th>Unit</th>
+                  </tr>
+                  <tr v-for="code in get_input_codes(stage.level,stage.sublevel)">
+                    <td
+                      :style="{background:stage.color}"
+                    >
+                      <small>{{translate(code+'_descr')}}</small>
+                    </td>
+                    <td
+                      v-for="ss in Global[stage.level][stage.sublevel]"
+                      class=number
+                    >
+                      {{format(ss[code])}}
+                    </td>
+                    <td class=unit>
+                      <span v-html="get_base_unit(code).prettify()"></span>
+                    </td>
+                  </tr>
+                </table>
+
+              </div>
+            </div>
           </div>
 
           <div>
@@ -428,6 +488,10 @@ let report = new Vue({
 
   style:`
     <style>
+      div.grid_50_50 {
+        display:grid;
+        grid-template-columns:50% 50%;
+      }
       #report div.heading {
         color:var(--color-level-generic);
         font-weight:bold;
@@ -436,15 +500,18 @@ let report = new Vue({
         padding-top:30px;
       }
 
+      #report table th,
+      #report table td {
+        border:none;
+      }
+
       #report table.summary th,
       #report table.summary td {
-        border:none;
         border-bottom:1px solid #ccc;
       }
 
       #report table.legend th,
       #report table.legend td {
-        border:none;
         font-size:smaller;
       }
 

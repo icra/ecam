@@ -649,8 +649,8 @@ let select_scenario=new Vue({
       }
 
       #select_scenario button.save_btn:hover {
-        text-decoration:underline;
         cursor:pointer;
+        color:var(--color-level-generic);
       }
 
       #select_scenario label.load_mode {
