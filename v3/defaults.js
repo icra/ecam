@@ -41,7 +41,7 @@ if(debug){
   });
 
   //initial page to display
-  ecam.show('report'); //view page
+  ecam.show('compare_scenarios'); //view page
   //go_to('Waste','Onsite'); //view inventory stage
   //variable.view('wwt_biog_pro'); //view variable detailed info
 }

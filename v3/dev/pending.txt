@@ -1,10 +1,11 @@
-* ECAM V3 CODING TASKS *
-------------------------
-* Priorities
+ECAM V3 CODING TASKS
+--------------------
+
+* PRIORITIES
   - Graphs & report (Energy and GHGs [VITI])
   - IPCC equations compliance
 
-[DOING NOW - concrete tasks - BUGS HAVE HIGHEST PRIORITY ALWAYS]
+* DOING NOW - concrete and well defined tasks only - BUGS HAVE HIGHEST PRIORITY ALWAYS
   - BUG: solve all Global calls
     - conv_kwh_co2
     - bod_pday
@@ -15,14 +16,10 @@
     string instead of the input value
 
   - TASK: finish report.js
-
   - TASK: finish compare_scenarios.js
 
   - TASK: UNFCC categories convert to new v3 equation structure
     - link for v2 version --> http://wacclim.org/ecam/edit.php?level=UNFCCC
-
-  - REQ: create minimum required data filter
-    - input required
 
   - REQ: add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
     - abstracted volume  (wsa)
@@ -33,12 +30,10 @@
     - treated volume     (wwo)
 
   - ENH: onclose listener: trigger warning if ecam is accidentally closed
-
   - ENH: check if version does not match when loading json files
-
   - NEW: create References structure for documentation.
 
-[TO BE DONE WHEN V3 IS FEATURE FROZEN]
+* TO BE DONE WHEN V3 IS FEATURE FROZEN
   - update help & about & docs
   - example v3 json file in docs
   - translations of new pieces of text added for v3
@@ -48,8 +43,7 @@
   - CORS is not compatible with file:// protocol, find alternative way to
     load language json files offline.
 
-[BACKLOG]: (missing info OR not 100% clear how to implement OR help needed from
-other people)
+* BACKLOG: (missing info OR not 100% clear how to implement OR help needed from other people)
   * Mail from Corinne on June 19th 2020.
     ```
       Enable to account for different ways of valorising biogas in a
@@ -108,7 +102,8 @@ other people)
       Best / Cordialement,
     ```
 
-[FUTURE - v3.1]
+* FUTURE (next version)
+  - Create minimum required data filter
   - Chemicals
   - Optgroups in <select> elements
   - Feedback button

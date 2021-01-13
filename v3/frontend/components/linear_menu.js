@@ -75,7 +75,7 @@ let linear_menu = new Vue({
       </div>
 
       <!--current scenario-->
-      <div onclick="ecam.show('select_scenario')">
+      <div>
         <div>
           <b style="color:#aaa">You are editing</b>
           <b>{{Global.General.Name}}</b>

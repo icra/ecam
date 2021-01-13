@@ -1698,9 +1698,9 @@ class Waste_Onsite extends Substage{
   }
 };
 
-//array of layouts (layout == Ecam object)
+//array of scenarios (layout == Ecam object == scenario == assessment)
 let Scenarios=[];
 
-//default layout (called Global since ecam v1.0)
+//default layout "Global"
 let Global=new Ecam();
 Scenarios.push(Global);

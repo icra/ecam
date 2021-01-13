@@ -2,8 +2,9 @@ let select_scenario=new Vue({
   el:"#select_scenario",
   data:{
     visible:false,
+
     loadfile_replace:true,
-    are_settings_open:false,
+    are_settings_open:true,
     are_you_editing_name:false,
 
     //backend
@@ -232,7 +233,7 @@ let select_scenario=new Vue({
         >
           <div style="margin-bottom:10px">
             <div style="font-size:larger">
-              Save all to a JSON file
+              Save current session to a JSON file
             </div>
           </div>
           <div>
@@ -255,7 +256,7 @@ let select_scenario=new Vue({
         style="
           background:#eee;
           margin-bottom:1em;
-          margin-top:3em;
+          margin-top:2em;
           padding:1em;
         "
       >

@@ -434,6 +434,7 @@ let report = new Vue({
             <div id=sankey></div>
           </div>
 
+          <!--inputs-->
           <div>
             <div class=heading>INPUTS</div>
             <div>
@@ -443,8 +444,7 @@ let report = new Vue({
                   &rsaquo;
                   {{translate(stage.sublevel)}}
                 </div>
-
-                <table style="border-collapse:separate">
+                <table class=substages style="border-collapse:separate">
                   <tr>
                     <th></th>
                     <th v-for="ss in Global[stage.level][stage.sublevel]">
@@ -456,7 +456,7 @@ let report = new Vue({
                     <td
                       :style="{background:stage.color}"
                     >
-                      <small>{{translate(code+'_descr')}}</small>
+                      <small>{{translate(code+'_descr').prettify()}}</small>
                     </td>
                     <td
                       v-for="ss in Global[stage.level][stage.sublevel]"
@@ -469,11 +469,11 @@ let report = new Vue({
                     </td>
                   </tr>
                 </table>
-
               </div>
             </div>
           </div>
 
+          <!--outputs-->
           <div>
             <div class=heading>OUTPUTS</div>
             <div>
@@ -483,8 +483,7 @@ let report = new Vue({
                   &rsaquo;
                   {{translate(stage.sublevel)}}
                 </div>
-
-                <table style="border-collapse:separate">
+                <table class=substages style="border-collapse:separate">
                   <tr>
                     <th></th>
                     <th v-for="ss in Global[stage.level][stage.sublevel]">
@@ -496,7 +495,7 @@ let report = new Vue({
                     <td
                       :style="{background:stage.color}"
                     >
-                      <small>{{translate(code+'_descr')}}</small>
+                      <small>{{translate(code+'_descr').prettify()}}</small>
                     </td>
                     <td
                       v-for="ss in Global[stage.level][stage.sublevel]"
@@ -578,6 +577,10 @@ let report = new Vue({
         fill: none;
         stroke: #000;
         stroke-opacity: .2;
+      }
+
+      #report table.substages td.number {
+        background:#eee;
       }
     </style>
   `,

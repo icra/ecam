@@ -44,21 +44,28 @@ let compare_scenarios=new Vue({
         inputs.push({code, scenario_values});
       });
 
-      let outputs=[]; //code, value TODO
-      //output_codes.forEach(code=>{
-      //  let scenario_values = null;
-      //  scenario_values = this.scenarios_compared.map(sce=>{
-      //    return sce[code]();
-      //  })
-      //  outputs.push({code, scenario_values});
-      //});
+      let outputs=[];
+      output_codes.forEach(code=>{
+        let scenario_values = null;
+        if(sublevel){
+          scenario_values = this.scenarios_compared.map(sce=>{
+            return sce[level][sublevel].map(ss=> get_output_value(code,ss) ); //array
+          });
+        }else{
+          scenario_values = this.scenarios_compared.map(sce=>{
+            return [ get_output_value(code,sce[level]) ]; //array
+          })
+        }
+
+        outputs.push({code, scenario_values});
+      });
 
       return inputs.concat(outputs);
     },
 
     get_input_codes,
     get_output_codes,
-    get_variable_type,
+    get_output_value,
     get_level_color,
     get_base_unit,
     format,
@@ -67,8 +74,14 @@ let compare_scenarios=new Vue({
 
   template:`
     <div id=compare_scenarios v-if="visible && Languages.ready">
-      <!--compare scenarios table-->
       <div style="padding-top:2em;background:#eff5fb">
+        <div style="text-align:center" v-if="scenarios_compared.length">
+          <button style="color:white;background:var(--color-level-generic)">Table</button>
+          <button>Bar chart: GHG by assessment</button>
+          <button>Bar chart: GHG by stage</button>
+          <button>Bar chart: GHG by substage</button>
+        </div>
+
         <h1 style="text-align:center">
           Compare assessments
         </h1>
@@ -80,16 +93,24 @@ let compare_scenarios=new Vue({
           </b>
         </p>
 
-        <div style="text-align:center">
-          list of assessments
-        </div>
+        <!--list of assessments-->
+        <div style="text-align:center;">
+          <div class=flex style="justify-content:center">
 
-        <div style="text-align:center" v-if="scenarios_compared.length">
-          TODO
-          <button style="color:white;background:var(--color-level-generic)">Table</button>
-          <button>Bar chart: GHG by assessment</button>
-          <button>Bar chart: GHG by stage</button>
-          <button>Bar chart: GHG by substage</button>
+            <div class=selectable_scenario v-for="scenario in Scenarios">
+              <label>
+                <input
+                  type=checkbox 
+                  @click="add_scenario_to_compared(scenario)"
+                  :checked="scenarios_compared.indexOf(scenario)+1"
+                >
+                <span>
+                  {{scenario.General.Name}}
+                </span>
+              </label>
+            </div>
+
+          </div>
         </div>
 
         <!--compare scenarios table-->
@@ -97,7 +118,7 @@ let compare_scenarios=new Vue({
           <tr>
             <td></td>
             <th v-for="scenario in scenarios_compared.filter(s=>Scenarios.indexOf(s)+1)">
-              {{scenario.General.Name}}
+              <b>{{scenario.General.Name}}</b>
             </th>
           </tr>
 
@@ -148,7 +169,7 @@ let compare_scenarios=new Vue({
                       {{ format(arr[0]) }}
                     </div>
                     <div v-else>
-                      {{ arr }}
+                      {{ arr.map(val=>format(val)) }}
                     </div>
                   </div>
                   <div
@@ -166,7 +187,7 @@ let compare_scenarios=new Vue({
         <!--notification: table is empty-->
         <div
           v-if="scenarios_compared.length==0"
-          style="text-align:center;font-style:italic"
+          style="padding:1em;text-align:center;font-style:italic"
           v-html="'~No assessments included to comparison'"
         ></div>
       </div>
@@ -175,6 +196,14 @@ let compare_scenarios=new Vue({
 
   style:`
     <style>
+      #compare_scenarios div.selectable_scenario{
+        border:1px solid #ccc;
+        padding:0.5em;
+        background:white;
+      }
+      #compare_scenarios div.selectable_scenario:hover{
+        color:var(--color-level-generic);
+      }
     </style>
   `,
 });
