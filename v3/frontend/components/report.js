@@ -456,7 +456,7 @@ let report = new Vue({
                     <td
                       :style="{background:stage.color}"
                     >
-                      <small>{{translate(code+'_descr').prettify()}}</small>
+                      <small v-html="translate(code+'_descr').prettify()"></small>
                     </td>
                     <td
                       v-for="ss in Global[stage.level][stage.sublevel]"
@@ -495,7 +495,7 @@ let report = new Vue({
                     <td
                       :style="{background:stage.color}"
                     >
-                      <small>{{translate(code+'_descr').prettify()}}</small>
+                      <small v-html="translate(code+'_descr').prettify()"></small>
                     </td>
                     <td
                       v-for="ss in Global[stage.level][stage.sublevel]"
