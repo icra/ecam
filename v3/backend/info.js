@@ -173,7 +173,6 @@ let Info={
 	wwc_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m"},
 	wwc_KPI_std_nrg_newp:{magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m"},
 	wwc_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km"},
-	wwc_SL_conn_pop:{magnitude:"People",unit:"%"},
 	wwc_coll_len:{magnitude:"Distance",unit:"km"},
 	wwc_nrg_cons:{magnitude:"Energy",unit:"kWh"},
 	wwc_nrg_pump:{magnitude:"Energy",unit:"kWh"},
@@ -200,7 +199,6 @@ let Info={
 	wwt_KPI_nrg_per_pump:{magnitude:"Energy/Volume",unit:"kWh/m3"},
 	wwt_KPI_nrg_x_biog:{magnitude:"Percent",unit:"%"},
 	wwt_KPI_sludg_prod:{magnitude:"Mass/Volume",unit:"kg/m3"},
-	wwt_SL_ghg_non:{magnitude:"Mass",unit:"kg CO2eq"},
 	wwt_SL_qual_com :{magnitude:"Percentage",unit:"%"},
 
 	wwt_biog_pro:{magnitude:"Mass",unit:"kg"},
@@ -300,7 +298,6 @@ let Info={
   wwc_vol_coll_unt:{magnitude:"Volume",unit:"m3"},
   wwo_KPI_GHG:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_KPI_GHG_biog:{magnitude:"Mass",unit:"kg CO2eq"},
-  wwo_KPI_GHG_cont:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_KPI_GHG_dis:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_KPI_GHG_dumping:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_KPI_GHG_elec:{magnitude:"Mass",unit:"kg CO2eq"},
@@ -351,7 +348,6 @@ let Info={
 
   wwo_ghg_avoided:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_ghg_avoided_biogas:{magnitude:"Mass",unit:"kg CO2eq"},
-  wwo_ghg_avoided_land:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_ghg_avoided_landapp:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_ghg_avoided_landfil:{magnitude:"Mass",unit:"kg CO2eq"},
   wwo_ghg_avoided_reuse:{magnitude:"Mass",unit:"kg CO2eq"},
@@ -411,7 +407,6 @@ let Info={
 
 
   wwt_SL_nrg_cost:{magnitude:"Percentage",unit:"%"},
-  wwt_SL_vol_pday:{magnitude:"Volume/inhab/time",unit:"L/serv.pop./day"},
   wwt_ch4_efac_dis:{magnitude:"Mass/Mass", unit:"kgCH4/kgBOD" },
   wwt_ch4_efac_tre:{magnitude:"Mass/Mass", unit:"kgCH4/kgBOD" },
   wwt_coll_len:{magnitude:"Distance",unit:"km"},

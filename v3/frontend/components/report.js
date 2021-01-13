@@ -19,6 +19,8 @@ let report = new Vue({
     format,
     translate,
     get_input_codes,
+    get_output_codes,
+    get_output_value,
     get_base_unit,
 
     show_summaries_menu(){
@@ -474,7 +476,41 @@ let report = new Vue({
 
           <div>
             <div class=heading>OUTPUTS</div>
-            TODO
+            <div>
+              <div v-for="stage in Structure.filter(s=>s.sublevel)">
+                <div :style="{color:stage.color, fontWeight:'bold', marginTop:'20px'}">
+                  {{translate(stage.level)}}
+                  &rsaquo;
+                  {{translate(stage.sublevel)}}
+                </div>
+
+                <table style="border-collapse:separate">
+                  <tr>
+                    <th></th>
+                    <th v-for="ss in Global[stage.level][stage.sublevel]">
+                      <b>{{ss.name}}</b>
+                    </th>
+                    <th>Unit</th>
+                  </tr>
+                  <tr v-for="code in get_output_codes(stage.level,stage.sublevel)">
+                    <td
+                      :style="{background:stage.color}"
+                    >
+                      <small>{{translate(code+'_descr')}}</small>
+                    </td>
+                    <td
+                      v-for="ss in Global[stage.level][stage.sublevel]"
+                      class=number
+                    >
+                      <div v-html="format(get_output_value(code,ss))"></div>
+                    </td>
+                    <td class=unit>
+                      <span v-html="get_base_unit(code).prettify()"></span>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
 

@@ -289,7 +289,6 @@ let Questions={
         "wwt_KPI_GHG_biog",
         "wwt_KPI_nrg_biogas",
         "wwt_KPI_nrg_x_biog",
-        "wwt_SL_GHG_avoided",
       ],
       advanced:0,
       otherQuestions:[
@@ -357,7 +356,6 @@ let Questions={
         "wwt_wr_N_rec",
         "wwt_wr_P_rec",
         "wwt_wr_vol_d",
-        "wwt_SL_ghg_non",   //output
         "wwt_ghg_avoided_reuse_water",   //output
       ],
       advanced:1,
@@ -572,8 +570,6 @@ let Questions={
       variables:[
         "wwo_reused_N",
         "wwo_reused_P",
-        "wwo_ghg_avoided_reuse_N",
-        "wwo_ghg_avoided_reuse_P",
         "wwo_ghg_avoided_reuse",
       ],
       advanced:0,
