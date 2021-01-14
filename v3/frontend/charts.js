@@ -40,9 +40,10 @@ let Charts={
         return "translate(" + arc.centroid(d) + ")";}
       )
       .attr("text-anchor", "middle")
+      .attr("class", "small")
       .text( function(d, i){
-        let value = data[i].value ? format(data[i].value) : 0;
-        return value+'%';
+        let value = data[i].value ? format(data[i].value,1) : 0;
+        return value >=5 ? value+'%' : '';
       })
     ;
   },

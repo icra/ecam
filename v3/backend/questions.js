@@ -355,7 +355,6 @@ let Questions={
       variables:[
         "wwt_wr_N_rec",
         "wwt_wr_P_rec",
-        "wwt_wr_vol_d",
         "wwt_ghg_avoided_reuse_water",   //output
       ],
       advanced:1,

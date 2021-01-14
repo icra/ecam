@@ -22,6 +22,7 @@ let variable=new Vue({
     Questions,
     Benchmarks,
     Exceptions,
+    References,
   },
 
   updated(){
@@ -155,6 +156,19 @@ let variable=new Vue({
           <th>{{ translate('variable_explanation') }}</th>
           <td>
             <code v-html="translate(id+'_expla').prettify()"></code>
+            <!--reference / documentation-->
+            <div v-if="References[id]">
+              <hr>
+              <small v-if="References[id].ref">
+                {{References[id].ref}}
+              </small>
+              <br>
+              <small v-if="References[id].link">
+                <a :href="References[id].link" target=_blank>
+                  {{References[id].link}}
+                </a>
+              </small>
+            </div>
           </td>
         </tr>
 
@@ -170,13 +184,15 @@ let variable=new Vue({
         <tr>
           <th>{{translate('variable_type')}}</th>
           <td>
-            <div style="font-size:large">
-              {{get_variable_type(id).ucfirst()}}
+            <div v-if="get_variable_type(id)=='input'">
+              <div style="font-size:large">
+                Input
+              </div>
             </div>
 
             <!--variable show formula and inputs involved-->
             <div v-if="get_variable_type(id)=='output'">
-              <div style="border:1px solid #ccc;padding:1em">
+              <div style="">
                 <div style="font-weight:bold">
                   <span style="color:#606">{{ translate('variable_formula') }}</span>:
                 </div>

@@ -50,7 +50,7 @@ let Estimations={
 
     wwt_slu_lf_TVS(substage){
       let slu_disp=Tables.get_row('Type of sludge disposed',substage.wwt_slu_disp);
-      return slu_disp.TVS;
+      return slu_disp.TVS*100;
     },
     wwt_slu_la_N_cont(substage){
       let slu_disp=Tables.get_row('Type of sludge disposed',substage.wwt_slu_disp);

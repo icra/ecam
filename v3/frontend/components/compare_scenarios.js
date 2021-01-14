@@ -13,11 +13,12 @@ let compare_scenarios=new Vue({
   },
 
   methods:{
+    //add scenario to comparison table
     add_scenario_to_compared(scenario){
       if(!scenario) return;
       if(scenario.constructor!==Ecam) return;
 
-      let index = this.scenarios_compared.indexOf(scenario);
+      let index=this.scenarios_compared.indexOf(scenario);
       if(index==-1){
         this.scenarios_compared.push(scenario);
       }else{
@@ -63,9 +64,6 @@ let compare_scenarios=new Vue({
       return inputs.concat(outputs);
     },
 
-    get_input_codes,
-    get_output_codes,
-    get_output_value,
     get_level_color,
     get_base_unit,
     format,
@@ -76,6 +74,7 @@ let compare_scenarios=new Vue({
     <div id=compare_scenarios v-if="visible && Languages.ready">
       <div style="padding-top:2em;background:#eff5fb">
         <div style="text-align:center" v-if="scenarios_compared.length">
+          TODO
           <button style="color:white;background:var(--color-level-generic)">Table</button>
           <button>Bar chart: GHG by assessment</button>
           <button>Bar chart: GHG by stage</button>

@@ -2,7 +2,9 @@ let development=new Vue({
   el:"#development",
   data:{
     visible:false,
+    details_default_open:false,
   },
+
   template:`
     <div id=development v-if="visible">
       <!--title--><h1>Development</h1>
@@ -12,11 +14,11 @@ let development=new Vue({
       <ul style="font-size:large">
         <li><a onclick="ecam.show('problems')">Problem finder</a></li>
         <li><a onclick="ecam.show('translation_problems')">Translation problems finder (TODO)</a></li>
-        <li><a onclick="ecam.show('validate_json')">Current JSON file validator (TODO, maybe not necessary)</a></li>
         <li><button onclick="ecam.test()">execute automated test</button></li>
       </ul>
     </div>
   `,
+
   style:`
     <style>
       #development {
@@ -128,7 +130,7 @@ let problems=new Vue({
       <ul id=list_of_problems>
         <!--Global: not used inputs-->
         <li>
-          <details open>
+          <details>
             <summary>
               not used inputs
               ({{ find_unused_inputs().length }})
@@ -148,7 +150,7 @@ let problems=new Vue({
 
         <!--Constants: not used-->
         <li>
-          <details open>
+          <details>
             <summary>
               not used constants
               ({{ find_unused_constants().length }})
@@ -164,7 +166,7 @@ let problems=new Vue({
 
         <!--Tables: not used-->
         <li>
-          <details open>
+          <details>
             <summary>
               not used data tables
               ({{ find_unused_data_tables().length }})
@@ -180,7 +182,7 @@ let problems=new Vue({
 
         <!--questions: inexisting variables-->
         <li>
-          <details open>
+          <details>
             <summary>
               questions: inexisting variables
               ({{ Questions.find_inexisting_variables().length }})
@@ -202,7 +204,7 @@ let problems=new Vue({
 
         <!--questions: repeated variables-->
         <li>
-          <details open>
+          <details>
             <summary>
               repeated variables in questions
               ({{ Questions.find_repeated_variables().length }})
@@ -228,7 +230,7 @@ let problems=new Vue({
 
         <!--Global: without info-->
         <li>
-          <details open>
+          <details>
             <summary>
               variables at Global not in Info
               ({{ find_inputs_without_info().length }})
@@ -248,7 +250,7 @@ let problems=new Vue({
 
         <!--Info: not in Global-->
         <li>
-          <details open>
+          <details>
             <summary>
               variables at Info not in Global
               ({{ find_inexisting_magnitude_definitions().length }})
@@ -268,7 +270,7 @@ let problems=new Vue({
 
         <!--benchmarks not in Global-->
         <li>
-          <details open>
+          <details>
             <summary>
               benchmarks not in Global
               ({{ find_inexisting_benchmarks().length }})
@@ -313,18 +315,6 @@ let translation_problems=new Vue({
   template:`
     <div id=translation_problems v-if="visible">
       translation problem finder TODO
-    </div>
-  `,
-});
-
-let validate_json=new Vue({
-  el:"#validate_json",
-  data:{
-    visible:false,
-  },
-  template:`
-    <div id=validate_json v-if="visible">
-      validate json TODO
     </div>
   `,
 });

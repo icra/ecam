@@ -39,7 +39,6 @@ let ecam={
     development,
     problems,
     translation_problems,
-    validate_json,
   },
 
   //show a view (==open a page)

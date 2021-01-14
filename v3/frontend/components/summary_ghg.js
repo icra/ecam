@@ -330,11 +330,11 @@ let summary_ghg=new Vue({
             <!--avoided ghg emissions-->
             <tbody class=avoided_emissions v-if="true || Global.Waste.ww_GHG_avoided()">
               <tr>
-                <td></td>
-                <td>
-                  Avoided GHG emissions (TBD)
+                <td style="border:none"></td>
+                <td style="border:none">
+                  Avoided GHG emissions in Sanitation (TBD)
                 </td>
-                <td>
+                <td style="border:none">
                   <div
                     style="
                       display:flex;
@@ -344,19 +344,17 @@ let summary_ghg=new Vue({
                   >
                     <div
                       class=number_placeholder
+                      style="border-color:#666;color:#666"
                       v-html="Global.Waste.ww_GHG_avoided() ? format( Global.Waste.ww_GHG_avoided() ) : 0"
                     ></div>
                     <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
                   </div>
                 </td>
-                <td>
+                <td style="border:none">
                   <button @click="variable.view('ww_GHG_avoided')">more info</button>
                 </td>
               </tr>
             </tbody>
-          </table>
-
-          <table id=table_avoided_ghg style="width:85%;">
           </table>
         </div>
 
@@ -652,7 +650,6 @@ let summary_ghg=new Vue({
       }
 
       #summary_ghg tbody.avoided_emissions td {
-        background:lightgreen;
         border:1px solid #ccc;
         text-align:center;
       }

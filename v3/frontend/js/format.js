@@ -1,13 +1,15 @@
 /*convert number to formated string: i.e. "3.999,4" instead of 3999.4*/
 function format(number,digits){
-  //default digits if not specified
-  digits=digits||0;
 
   //default digits for values
-  if(number<1000) digits=1;
-  if(number< 100) digits=2;
-  if(number<0.10) digits=3;
-  if(number<0.01) digits=4;
+  if(digits==undefined){
+    if(number<1000) digits=1;
+    if(number< 100) digits=2;
+    if(number<0.10) digits=3;
+    if(number<0.01) digits=4;
+  }else{
+    digits=digits||0;
+  }
 
   //for non applicable
   if(number=="NA"){ return "<span style=color:#ccc>NA</span>"; }

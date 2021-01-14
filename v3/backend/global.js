@@ -967,7 +967,6 @@ class Waste_Treatment extends Substage{
 
     this.wwt_wr_N_rec       = 0; //N recovered
     this.wwt_wr_P_rec       = 0; //P recovered
-    this.wwt_wr_vol_d       = 0; //volume of reused water displacing potable water
     this.wwt_slu_disp       = 0;
     this.wwt_mass_slu_sto   = 0;
     this.wwt_time_slu_sto   = 0;
@@ -1265,10 +1264,7 @@ class Waste_Treatment extends Substage{
         return uncertainty*sludge_mass*TVS*OC*OC_to_CH4*CH4_in_lf_gas*DOC_fra*dec_3year*Cts.ct_ch4_eq.value;
       })();
       let n2o = ratio*(function(){
-        let C_content = (function(){
-          let TVS = sludge_type.TVS;    //gTVS/gSludge
-          return sludge_mass*TVS*OC;    //gOC
-        })(); //gOC
+        let C_content = sludge_mass*TVS*OC; //gOC
         let ratio_CN = C_content/N_content || 0;
         if(ratio_CN>=30){return 0;}
         let factor_for_low_CN_ratio = Cts.ct_n2o_lf.value/100;
@@ -1443,20 +1439,20 @@ class Waste_Onsite extends Substage{
     this.wwo_biog_fla         = 0;
     this.wwo_ch4_biog         = 59;
     this.wwo_nrg_biog         = 0;
-    this.wwo_type_dis         = 0;         //main type of disposal
-    this.wwo_fslu_typ         = 0;         //main type of faecal sludge
-    this.wwo_mass_landapp     = 0;     //dry weight sent to land application
-    this.wwo_soil_typ         = 0;         //soil type for land application
-    this.wwo_fslu_typ_la      = 0;      //type of faecal sludge disposed landapp
-    this.wwo_la_N_cont        = 0;        //N content of faecal sludge
-    this.wwo_mass_landfil     = 0;     //dry weight sent to landfilling
-    this.wwo_lf_type          = 0;         //disposal type for landfilling
-    this.wwo_fslu_typ_lf      = 0;      //type of faecal sludge disposed landfil
-    this.wwo_lf_N_cont        = 0;        //N content of faecal sludge
-    this.wwo_lf_TVS           = 0;           //TVS content of faecal sludge
-    this.wwo_vol_dumping      = 0;      //volume dumped
+    this.wwo_type_dis         = 0; //main type of disposal
+    this.wwo_fslu_typ         = 0; //main type of faecal sludge
+    this.wwo_mass_landapp     = 0; //dry weight sent to land application
+    this.wwo_soil_typ         = 0; //soil type for land application
+    this.wwo_fslu_typ_la      = 0; //type of faecal sludge disposed landapp
+    this.wwo_la_N_cont        = 0; //N content of faecal sludge
+    this.wwo_mass_landfil     = 0; //dry weight sent to landfilling
+    this.wwo_lf_type          = 0; //disposal type for landfilling
+    this.wwo_fslu_typ_lf      = 0; //type of faecal sludge disposed landfil
+    this.wwo_lf_N_cont        = 0; //N content of faecal sludge
+    this.wwo_lf_TVS           = 0; //TVS content of faecal sludge
+    this.wwo_vol_dumping      = 0; //volume dumped
     this.wwo_ch4_efac_dumping = 0; //emission factor depending on dumping pathway
-    this.wwo_dumping_pth      = 0;      //dumping pathway
+    this.wwo_dumping_pth      = 0; //dumping pathway
     this.wwo_N_urine          = 0;
     this.wwo_reused_N         = 0;
     this.wwo_reused_P         = 0;

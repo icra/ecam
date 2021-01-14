@@ -227,7 +227,6 @@ let stages_menu=new Vue({
       #stages_menu {
         background:#f0f5fc;
         padding-top:1px;
-        padding-bottom:1em;
         margin-bottom:3em;
       }
       #stages_menu #main_table {

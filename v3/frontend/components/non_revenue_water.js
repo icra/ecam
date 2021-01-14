@@ -7,12 +7,14 @@ let non_revenue_water = new Vue({
 
   methods:{
     translate,
+
+    //check if url exists
     image_exists(url){
       let xhr = new XMLHttpRequest();
       xhr.open('HEAD', url, false);
       xhr.send();
       if(xhr.status=="404"){
-        console.warn(`Image doesn't exist for "${Languages.current}" language, loading "en" associated image...`);
+        console.warn(`Image doesn't exist for "${Languages.current}" language, loading "en" language associated image...`);
         return false;
       }else{
         return true;
@@ -23,13 +25,8 @@ let non_revenue_water = new Vue({
   template:`
     <div id=non_revenue_water v-if="visible && Languages.ready">
       <!--title-->
-      <h1>
-        {{ translate('About non revenue water') }}
-      </h1>
-
-      <h3>
-        {{ translate('Water injected to distribution') }}
-      </h3>
+      <h1>{{translate('About non revenue water')        }}</h1>
+      <h3>{{translate('Water injected to distribution') }}</h3>
 
       <!--non revenue water image-->
       <div v-if="image_exists('frontend/img/nrw/nrw-'+Languages.current+'.png')">

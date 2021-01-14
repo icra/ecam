@@ -434,5 +434,4 @@ let Info={
   wwt_vol_tslu:{magnitude:"Volume",unit:"L"},
   wwt_wr_N_rec:     {magnitude:"Mass",   unit:"kg"},
   wwt_wr_P_rec:     {magnitude:"Mass",   unit:"kg"},
-  wwt_wr_vol_d:     {magnitude:"Volume", unit:"m3"},
 };

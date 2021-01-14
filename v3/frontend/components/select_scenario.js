@@ -282,15 +282,6 @@ let select_scenario=new Vue({
             </select>
           </div>
 
-          <!--actual gwp values-->
-          <div style="padding-right:2em">
-            <span><b>{{format(Cts.ct_ch4_eq.value)}}</b></span>
-            <span><small>kgCO<sub>2</sub>eq/kgCH<sub>4</sub></small></span>
-            &mdash;
-            <span><b>{{format(Cts.ct_n2o_eq.value)}}</b></span>
-            <span><small>kgCO<sub>2</sub>eq/kgCH<sub>4</sub></small></span>
-          </div>
-
           <div style="padding-right:2em">
             <button onclick="ecam.show('gwp_table')">
               More info

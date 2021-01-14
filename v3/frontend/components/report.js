@@ -33,6 +33,10 @@ let report = new Vue({
       if(this.Global.TotalGHG().total==0) return;
 
       //draw pie charts
+        //size of circles of pie charts
+        let width  = 200; //px
+        let height = 200; //px
+
         Charts.draw_pie_chart('chart_1',
           [
             {"label":"", "value":100*Global.Water.ws_KPI_GHG().total/Global.TotalGHG().total},
@@ -41,7 +45,7 @@ let report = new Vue({
             "var(--color-level-Water)",
             "var(--color-level-Waste)",
           ],
-          width=150, height=150,
+          width, height,
         );
 
         Charts.draw_pie_chart('chart_2',
@@ -51,7 +55,7 @@ let report = new Vue({
             return {label,value};
           }),
           Structure.filter(s=>s.sublevel).map(s=>s.color),
-          width=150, height=150,
+          width, height,
         );
 
         Charts.draw_pie_chart('chart_3',
@@ -65,7 +69,7 @@ let report = new Vue({
             Charts.gas_colors.n2o,
             Charts.gas_colors.ch4,
           ],
-          width=150, height=150,
+          width, height,
         );
 
         Charts.draw_pie_chart('chart_nrg_levels',
@@ -77,7 +81,7 @@ let report = new Vue({
             "var(--color-level-Water)",
             "var(--color-level-Waste)",
           ],
-          width=150, height=150,
+          width, height,
         );
 
         Charts.draw_pie_chart('chart_nrg_stages',
@@ -87,7 +91,7 @@ let report = new Vue({
             return {label,value};
           }),
           Structure.filter(s=>s.sublevel).map(s=>s.color),
-          width=150, height=150,
+          width, height,
         );
       //--
 
@@ -162,7 +166,7 @@ let report = new Vue({
           Report
         </div>
         <div style="text-align:center;font-size:smaller">
-          click the report to turn on/off printable mode
+          Click on the report to your left to activate / deactivate printable mode and press CTRL+P
         </div>
       </h1>
 

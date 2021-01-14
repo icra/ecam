@@ -242,3 +242,8 @@ ul.tabs > li:hover {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
+/*svg*/
+text.small {
+  font-size:smaller;
+}
