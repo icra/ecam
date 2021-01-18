@@ -113,7 +113,7 @@ let ecam={
     //prepare clicking everywhere
     let _this    = this;
     let timer    = 1;   //seconds
-    let interval = 100; //millisecons
+    let interval = 200; //millisecons
 
     //visit every page (=view)
     Object.keys(this.views).forEach(key=>{
@@ -128,7 +128,7 @@ let ecam={
     //visit every variable
     Structure.forEach(s=>{
       get_input_codes(s.level, s.sublevel).concat(
-        get_output_codes(s.level, s.sublevel)
+      get_output_codes(s.level, s.sublevel)
       ).forEach(code=>{
         setTimeout(
           function(){variable.view(code)},

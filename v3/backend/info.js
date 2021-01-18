@@ -19,7 +19,9 @@ let Info={
 	unfccc_5D  :{magnitude:"Mass",unit:"kg CO2eq"},
 
   //new
-  wwo_n2o_efac_opd: {magnitude:"Mass/Mass", unit:"kgN2O-N/kgN"},
+  wwo_prot_con:{magnitude:"Mass",unit:"kg"},
+
+  wwo_n2o_efac_opd:{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},
 
   wsa_conv_kwh:{magnitude:"Conversion",unit:"kgCO2eq/kWh"},
   wst_conv_kwh:{magnitude:"Conversion",unit:"kgCO2eq/kWh"},

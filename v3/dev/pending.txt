@@ -6,17 +6,11 @@ ECAM V3 CODING TASKS
   - IPCC equations compliance
 
 * DOING NOW - concrete and well defined tasks only - BUGS HAVE HIGHEST PRIORITY ALWAYS
-  - BUG: solve all Global calls
-    - conv_kwh_co2
-    - bod_pday
-    - etc
 
-  - BUG: in variable.js: outputs that use this variable / drop-down selection
-    (exceptions) value showed: now we see the Exceptions[key] object as a
-    string instead of the input value
+  - [NOW] TASK: finish compare_scenarios charts
+  - TASK: report.js (remove template pdf)
 
-  - TASK: finish report.js
-  - TASK: finish compare_scenarios.js
+  - remove bod_pday_fs
 
   - TASK: UNFCC categories convert to new v3 equation structure
     - link for v2 version --> http://wacclim.org/ecam/edit.php?level=UNFCCC

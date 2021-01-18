@@ -53,6 +53,9 @@ let Charts={
     if(data.length==0) return;
     let keys = Object.keys(data[0]).slice(1);//llegenda
 
+    let el = document.getElementById(id_container);
+    if(el) el.innerHTML="";
+
     var margin = {top:20,right:160,bottom:35,left:30};
     var width  = window.innerWidth-margin.left-margin.right-50;
     var height = 500-margin.top-margin.bottom;

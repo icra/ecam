@@ -45,6 +45,7 @@ let Countries={
 "India":                                 { conv_kwh_co2:1.333174843, prot_con:20.440, bod_pday:34, currency:"INR"},
 "Indonesia":                             { conv_kwh_co2:0.684693977, prot_con:20.440, bod_pday:40, currency:"IDR"},
 "Iran (Islamic Republic of)":            { conv_kwh_co2:0.631113877, prot_con:30.660, bod_pday:40, currency:"IRR"},
+"Iraq":                                  { conv_kwh_co2:0.820614626, prot_con:22.100, bod_pday:40, currency:"IQD"},
 "Ireland":                               { conv_kwh_co2:0.521193132, prot_con:40.150, bod_pday:60, currency:"EUR"},
 "Italy":                                 { conv_kwh_co2:0.410898038, prot_con:40.880, bod_pday:60, currency:"EUR"},
 "Japan":                                 { conv_kwh_co2:0.443356848, prot_con:33.580, bod_pday:42, currency:"JPY"},

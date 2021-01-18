@@ -83,6 +83,7 @@ let Filters = {
 
   "wwo_producing_biogas", //question
 
+  "wwo_prot_con",
   "wwo_type_con",
   "wwo_flooding",
   "wwo_cont_emp",

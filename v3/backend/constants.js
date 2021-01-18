@@ -94,7 +94,7 @@ let Cts={
   },
 
   //TODO remove
-  ct_ef_eff:{ 
+  ct_ef_eff:{
     value:0.005,
     descr:"EF effluent (tabled value)",
     unit:"kg N2O-N / kg N",
@@ -107,7 +107,7 @@ let Cts={
   },
 
   ct_unused:{
-    value:9810,
+    value:0,
     descr:"not used constant on purpose to test the code that detects unused constants",
     unit:"unit",
   },

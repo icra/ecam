@@ -78,6 +78,13 @@ let Estimations={
     },
 
   //wwo
+    wwo_prot_con(substage){
+      let population = substage.wwo_open_pop; //people
+      let years      = Global.Years(); //years
+      let protein    = Global.General.prot_con; //kg/person/year
+      return population*protein*years; //kg
+    },
+
     wwo_vol_unco(substage){
       return 0.2*substage.wwo_onsi_pop*Global.Days();
     },

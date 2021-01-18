@@ -1,5 +1,9 @@
 {
 "#below":"below",
+
+"#wwo_prot_con_descr":"Protein consumed by population with open defecation",
+"#wwo_prot_con_expla":"Protein consumed by population with open defecation during the assessment period",
+
 "#wwt_KPI_GHG_biog_flared_descr":"Biogas flared",
 "#wwt_KPI_GHG_biog_leaked_descr":"Biogas leaked",
 "#wwt_KPI_GHG_biog_valorized_descr":"Biogas valorized",

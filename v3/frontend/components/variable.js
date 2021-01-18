@@ -441,9 +441,7 @@ let variable=new Vue({
 
         <!--outputs that use this variable-->
         <tr>
-          <th>
-            Outputs that use this variable
-          </th>
+          <th> Outputs that use this variable </th>
           <td>
             <table class=outputs_affected>
               <tbody v-for="output in Formulas.outputs_per_input(id)" v-if="Info[output]">
@@ -487,11 +485,8 @@ let variable=new Vue({
                   </td>
                   <td>
                     <div v-if="locate_variable(output).sublevel">
-                      {{
-                        locate_variable(output).stage.map(ss=>(
-                          Exceptions[output]
-                        ))
-                      }}
+                      TODO
+                      {{Exceptions[output].table}}
                     </div>
                   </td>
                   <td>

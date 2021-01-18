@@ -4,13 +4,17 @@
  * moved here also) TODO "backend/estimations.js"
 */
 
-//utils
+/*UTILS*/
+//sum elements of Array
 Array.prototype.sum=function(){return this.reduce((p,c)=>(p+c),0)};
 
 //configuration global settings
 let Configuration={
   gwp_reports_index:0, //index of selected GWP report
 };
+
+//array of scenarios (layout == Ecam object == scenario == assessment)
+let Scenarios=[];
 
 //A "layout" or "scenario" or is an Ecam object
 class Ecam{
@@ -477,6 +481,7 @@ class Water_Abstraction extends Substage{
       "wsa_KPI_nrg_estm_sav",
     ];
   }
+
   //GHG wsa
     wsa_KPI_GHG(){
       //sources (objects)
@@ -595,6 +600,7 @@ class Water_Treatment extends Substage{
       "wst_KPI_ghg_estm_red",
     ];
   }
+
   //GHG wst
     wst_KPI_GHG(){
       //sources (objects)
@@ -710,6 +716,7 @@ class Water_Distribution extends Substage{
       "wsd_pmp_pw",
     ];
   }
+
   //GHG wsd
     wsd_KPI_GHG(){
       //sources (objects)
@@ -839,6 +846,7 @@ class Waste_Collection extends Substage{
       "wwc_KPI_ghg_estm_red",
     ];
   }
+
   //GHG wwc
     wwc_KPI_GHG(){
       //sources (objects)
@@ -1021,6 +1029,7 @@ class Waste_Treatment extends Substage{
       "wwt_ghg_avoided",
     ];
   }
+
   //GHG wwt
     wwt_KPI_GHG(){
       //sources (objects)
@@ -1348,7 +1357,7 @@ class Waste_Treatment extends Substage{
     wwt_ghg_avoided_biogas(){
       return this.wwt_nrg_biog*this.wwt_conv_kwh;
     }
-    wwt_ghg_avoided_reuse_nutrient(){ 
+    wwt_ghg_avoided_reuse_nutrient(){
       let N = this.wwt_wr_N_rec*Cts.ct_cr_forN.value;
       let P = this.wwt_wr_P_rec*Cts.ct_cr_forP.value;
       return N+P;
@@ -1403,6 +1412,8 @@ class Waste_Onsite extends Substage{
     this.wwo_ch4_efac_dis     = 0;
     this.wwo_n2o_efac_dis     = 0;
     this.wwo_n2o_efac_opd     = 0;
+
+    this.wwo_prot_con         = 0;
 
     this.wwo_nrg_cost         = 0; //energy costs
     this.wwo_run_cost         = 0; //total running costs
@@ -1485,6 +1496,7 @@ class Waste_Onsite extends Substage{
       "wwo_KPI_nrg_estm_sav",
     ];
   }
+
   //GHG wwo
     //wwo total emissions
     wwo_KPI_GHG(){
@@ -1526,20 +1538,23 @@ class Waste_Onsite extends Substage{
       let total = co2+n2o+ch4;
       return {total,co2,n2o,ch4};
     }
+
     //open defecation
     wwo_KPI_GHG_unt_opd(){
-      let pop   = this.wwo_open_pop;
+      let protein = this.wwo_prot_con; //kg
+      let fra_np  = Cts.ct_fra_np.value;
+      let fac_nc  = Cts.ct_fac_nc.value;
+      let n2o_ef  = this.wwo_n2o_efac_opd;
+      let n2o_co  = Cts.ct_n2o_co.value;
+      let n2o_eq  = Cts.ct_n2o_eq.value;
+
       let co2   = 0;
       let ch4   = 0; //IPCC considers that CH4 is not produced since anaerobic conditions are unlikely
-      let n2o_ef = this.wwo_n2o_efac_opd;  
-      let n2o   = (function(){
-        let Y       = Global.Years();
-        let protein = Global.General.prot_con;
-        return pop*protein*Y*Cts.ct_fra_np.value*Cts.ct_fac_nc.value*n2o_ef*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
-      })();
+      let n2o   = protein*fra_np*fac_nc*n2o_ef*n2o_co*n2o_eq;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
+
     //transport
     wwo_KPI_GHG_trck(){
       let vol   = this.wwo_vol_trck;
@@ -1694,9 +1709,6 @@ class Waste_Onsite extends Substage{
   }
 };
 
-//array of scenarios (layout == Ecam object == scenario == assessment)
-let Scenarios=[];
-
-//default layout "Global"
+//default initial layout
 let Global=new Ecam();
 Scenarios.push(Global);
