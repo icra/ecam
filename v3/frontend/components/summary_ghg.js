@@ -202,13 +202,13 @@ let summary_ghg=new Vue({
               <tr :style="{background:l1.color,color:'white'}">
                 <td style="background:inherit;text-align:center">
                   <button @click="toggle_folded_level(l1.level)">
-                    {{ unfolded_levels.indexOf(l1.level) ? '+':'-' }}
+                    {{ unfolded_levels.indexOf(l1.level)+1 ? '-':'+' }}
                   </button>
                 </td>
 
                 <!--level 1 name and icon-->
                 <td style="background:inherit;text-align:center">
-                  <div 
+                  <div
                     style="
                       display:flex;
                       align-items:center;
@@ -272,7 +272,7 @@ let summary_ghg=new Vue({
                 <td
                   :style="{textAlign:'center',background:'var(--color-level-'+l1.level+'-secondary)'}"
                 >
-                  <div 
+                  <div
                     style="
                       display:flex;
                       align-items:center;

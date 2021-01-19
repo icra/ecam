@@ -461,7 +461,8 @@ let report = new Vue({
                     &rsaquo;
                     {{translate(stage.sublevel)}}
                   </div>
-                  <table class=substages style="border-collapse:separate">
+
+                  <table class=substages style="border-collapse:separate" v-if="Global[stage.level][stage.sublevel].length">
                     <tr>
                       <th></th>
                       <th v-for="ss in Global[stage.level][stage.sublevel]">
@@ -500,7 +501,8 @@ let report = new Vue({
                     &rsaquo;
                     {{translate(stage.sublevel)}}
                   </div>
-                  <table class=substages style="border-collapse:separate">
+
+                  <table class=substages style="border-collapse:separate" v-if="Global[stage.level][stage.sublevel].length">
                     <tr>
                       <th></th>
                       <th v-for="ss in Global[stage.level][stage.sublevel]">
