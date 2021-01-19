@@ -4,6 +4,10 @@ let compare_scenarios=new Vue({
     visible:false,
     scenarios_compared:[],
     current_view:'table',
+    include:{
+      inputs:true,
+      outputs:true,
+    },
 
     variable,
     Global,
@@ -27,8 +31,8 @@ let compare_scenarios=new Vue({
     },
 
     get_variables_and_values(level, sublevel){
-      let input_codes  = get_input_codes( level, sublevel);
-      let output_codes = get_output_codes(level, sublevel);
+      let input_codes  = this.include.inputs  ? get_input_codes( level, sublevel) : [];
+      let output_codes = this.include.outputs ? get_output_codes(level, sublevel) : [];
 
       let inputs=[]; //code, value
       input_codes.forEach(code=>{
@@ -165,7 +169,7 @@ let compare_scenarios=new Vue({
       <!--table comparison-->
       <div v-if="current_view=='table'">
         <p style="text-align:center;color:#666">
-          <b>Select below the assessments to be compared.</b>
+          <b>Select the assessments to be compared</b>
         </p>
 
         <!--list of assessments-->
@@ -186,9 +190,9 @@ let compare_scenarios=new Vue({
 
         <!--choose inputs and/or outputs-->
         <div>
-          <div style="text-align:center">
-            <label> <input type=checkbox> Include inputs </label>
-            <label> <input type=checkbox> Include outputs </label>
+          <div style="text-align:center;margin-top:10px">
+            <label> <input type=checkbox v-model="include.inputs">  Include inputs </label>
+            <label> <input type=checkbox v-model="include.outputs"> Include outputs </label>
           </div>
         </div>
 
@@ -264,13 +268,6 @@ let compare_scenarios=new Vue({
             </tr>
           </tbody>
         </table>
-
-        <!--notification: table is empty-->
-        <div
-          v-if="scenarios_compared.length==0"
-          style="padding:1em;text-align:center;font-style:italic"
-          v-html="'~No assessments included to comparison'"
-        ></div>
       </div>
 
       <!--charts-->
@@ -287,6 +284,13 @@ let compare_scenarios=new Vue({
           <div id="bar_chart_ghg_by_substage"></div>
         </div>
       </div>
+
+      <!--notification: scenarios_compared is empty-->
+      <div
+        v-if="scenarios_compared.length==0"
+        style="padding:1em;text-align:center;font-style:italic"
+        v-html="'~No assessments included to comparison'"
+      ></div>
     </div>
   `,
 
