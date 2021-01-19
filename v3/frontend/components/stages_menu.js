@@ -100,7 +100,7 @@ let stages_menu=new Vue({
                   @click="go_to(l1.level)"
                   :style="{
                     display:'flex',
-                    justifyContent:'space-between',
+                    justifyContent:'center',
                     cursor:'pointer',
                     color:'white',
                   }"
@@ -108,17 +108,24 @@ let stages_menu=new Vue({
                   <div :style="{textDecoration:is_tier_b_selected(l1.level)?'underline':''}">
                     {{translate(l1.level)}}
                   </div>
+                  <!--
                   <div>
                     {{format(Global[l1.level][l1.prefix+'_KPI_GHG']().total)}}
                     <small>kgCO<sub>2</sub>eq</small>
                   </div>
+                  -->
                 </div>
               </td>
             </tr>
 
             <!--level 2 stages-->
             <tr>
-              <td v-for="s in Structure" v-if="s.sublevel" style="width:100px">
+              <td
+                v-for="s in Structure"
+                v-if="s.sublevel"
+                :style="{background:'var(--color-level-'+s.level+'-secondary)',cursor:'pointer'}"
+                @click="go_to(s.level,s.sublevel)"
+              >
                 <div style="display:flex;align-items:center">
                   <div>
                     <img
@@ -126,7 +133,9 @@ let stages_menu=new Vue({
                     >
                   </div>
                   <div style="padding-left:5px">
-                    <span>{{translate(s.sublevel)}}</span>
+                    <a :style="{color:'var(--color-level-'+s.level+')'}">
+                      <b>{{translate(s.sublevel)}}</b>
+                    </a>
                   </div>
                 </div>
               </td>
