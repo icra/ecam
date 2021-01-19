@@ -53,6 +53,51 @@ let fuel_table = new Vue({
           </tr>
         </tbody>
       </table>
+
+      <!--reference-->
+      <div style="font-size:smaller;width:80%;margin:auto">
+        <b>References</b><br>
+        <ul>
+          <li>
+            Introduction
+            <a href="https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/2_Volume2/V2_1_Ch1_Introduction.pdf" target=_blank>
+              https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/2_Volume2/V2_1_Ch1_Introduction.pdf
+            </a>
+            <ul>
+              <li>Chapt. 1  p.1.23, Table 1.4</li>
+            </ul>
+          </li>
+          <li>
+            Chapter 2
+            <a href="https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/2_Volume2/V2_2_Ch2_Stationary_Combustion.pdf" target=_blank>
+              https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/2_Volume2/V2_2_Ch2_Stationary_Combustion.pdf
+            </a>
+            <ul>
+              <li>Chapt. 2, p.52, table 2</li>
+              <li>Chapt. 2, p.52, table 3</li>
+            </ul>
+          </li>
+          <li>
+            Chapter 3:
+            <a href="https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/2_Volume2/V2_3_Ch3_Mobile_Combustion.pdf" target=_blank>
+              https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/2_Volume2/V2_3_Ch3_Mobile_Combustion.pdf
+            </a>
+            <ul>
+              <li>Chapt. 3, p. 3.21, table. 3.3.2</li>
+              <li>Chapt. 3, p. 3.21, table 3.3.2</li>
+            </ul>
+          </li>
+          <li>
+            GHG Protocol:
+            <a href="https://ghgprotocol.org/sites/default/files/Emission_Factors_from_Cross_Sector_Tools_March_2017.xlsx" target=_blank>
+              https://ghgprotocol.org/sites/default/files/Emission_Factors_from_Cross_Sector_Tools_March_2017.xlsx
+            </a>
+            <ul>
+              <li>GHG Protocol (p.1.18, table 1.2)</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   `,
 
