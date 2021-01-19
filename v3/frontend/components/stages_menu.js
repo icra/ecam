@@ -230,7 +230,7 @@ let stages_menu=new Vue({
         margin-bottom:2em;
       }
       #stages_menu #main_table {
-        min-width:100%;
+        width:100%;
       }
       #stages_menu #main_table th,
       #stages_menu #main_table td {

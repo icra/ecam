@@ -166,360 +166,369 @@ let report = new Vue({
           Report
         </div>
         <div style="text-align:center;font-size:smaller">
-          Click on the report to your left to activate / deactivate printable mode and press CTRL+P
+          Click the report to enable/disable a printable view. Then press CTRL+P to generate a PDF file.
         </div>
       </h1>
 
-
       <!--grid 50 50-->
-      <div
-        :class="printable_version?'':'grid_50_50'"
-      >
+      <div>
+        <!--report in PDF-->
+        <!--
+        <div v-if="false" style="text-align:center">
+          <embed src="dev/report_disseny.pdf" width="100%" height="500px">
+        </div>
+        -->
+
         <!--report in html-->
         <div
-          @click="printable_version^=1"
           style="
-            padding:2em;
-            cursor:pointer;
+            padding-top:1em;
+            padding-bottom:1em;
           "
+          :dark_background="printable_version==false"
         >
-          <!--title-->
           <div
+            @click="printable_version^=1"
             style="
-              font-weight:bold;
-              color:var(--color-level-generic);
-              border-bottom:3px solid var(--color-level-generic);
-              padding-bottom:5px;
+              padding:3em 2em 2em 3em;
+              cursor:pointer;
+              background:white;
             "
+            :with_border="printable_version==false"
           >
-            <span style="font-size:larger">ECAM</span>
-            <span style="font-size:smaller">Energy Performance and Carbon Emissions Assessment and Monitoring Tool</span>
-          </div>
-
-          <!--scenario name and details-->
-          <div
-            style="
-              background:#EEF4FA;
-              padding:1em 1.5em;
-              margin-top:1em;
-              margin-bottom:1em;
-            "
-          >
-            <b style="color:var(--color-level-generic)">{{Global.General.Name}}</b>
-            <ul
-              style="
-                list-style:none;
-                padding-left:0;
-                margin-bottom:0;
-              "
-            >
-              <li><b>Assessment period:</b> {{Global.General.AssessmentPeriodStart}} to {{Global.General.AssessmentPeriodEnd}} ({{format(Global.Days())}} days)</li>
-              <li><b>Country:</b> {{Global.General.Country}}</li>
-              <li><b>Currency:</b> {{Global.General.Currency}}</li>
-              <li><b>Global Warming Potential Source:</b> {{ GWP_reports[Configuration.gwp_reports_index].report }}</li>
-            </ul>
-          </div>
-
-          <!--summary-->
-          <div>
-            <div class=heading>SUMMARY</div>
-            <div>
-              <table class=summary style="width:100%">
-                <thead>
-                  <tr style="color:var(--color-level-generic)">
-                    <th style="text-align:left">Stage</th>
-                    <th>
-                      <div
-                        style="
-                          display:flex;
-                          align-items:center;
-                          justify-content:center;
-                        "
-                      >
-                        <img src="frontend/img/viti/select_scenario/icon-co2.svg" style="height:30px;margin-right:1em">
-                        <span>
-                          GHG emissions
-                        </span>
-                      </div>
-                    </th>
-                    <th>
-                      <div
-                        style="
-                          display:flex;
-                          align-items:center;
-                          justify-content:center;
-                        "
-                      >
-                        <img src="frontend/img/viti/select_scenario/icon-energy.svg" style="height:30px;margin-right:1em">
-                        <span>
-                          Energy consumption
-                        </span>
-                      </div>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody v-for="level in Structure.filter(s=>!s.sublevel)"
-                  :style="{color:'var(--color-level-'+level.level+')'}"
-                >
-                  <tr v-for="s in Structure.filter(s=>s.level==level.level &&s.sublevel)">
-                    <td>{{translate(s.sublevel)}}</td>
-                    <td class=number>
-                      <span>
-                        {{format( Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum() )}}
-                      </span>
-                      <span>kgCO<sub>2</sub>eq</span>
-                    </td>
-                    <td class=number>
-                      {{format( Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum() )}}
-                      kWh
-                    </td>
-                  </tr>
-                  <tr style="font-weight:bold">
-                    <td>Total {{translate(level.level)}}</td>
-                    <td class=number>
-                      <span>
-                        {{format( Global[level.level][level.prefix+'_KPI_GHG']().total )}}
-                      </span>
-                      <span>
-                        kgCO<sub>2</sub>eq
-                      </span>
-                    </td>
-                    <td class=number>
-                      {{format( Global[level.level][level.prefix+'_nrg_cons']() )}}
-                      kWh
-                    </td>
-                  </tr>
-                </tbody>
-                <tbody>
-                  <tr style="color:var(--color-level-generic);font-weight:bold;font-size:larger">
-                    <td>Total</td>
-                    <td class=number>
-                      {{format(Global.TotalGHG().total)}}
-                      <span>kgCO<sub>2</sub>eq</span>
-                    </td>
-                    <td class=number>
-                      {{format(Global.TotalNRG())}}
-                      <span>kWh</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div>
-            <div class=heading>SUMMARY - Charts - GHG emissions</div>
-            <!--pie charts ghg-->
+            <!--title-->
             <div
               style="
-                display:grid;
-                grid-template-columns:50% 50%;
+                font-weight:bold;
+                color:var(--color-level-generic);
+                border-bottom:3px solid var(--color-level-generic);
+                padding-bottom:5px;
               "
             >
-              <div class=chart_container>
-                <div class=chart_title>
-                  GHG emissions
-                </div>
-                <div class=flex>
-                  <table class=legend>
-                    <tr>
-                      <td style="color:var(--color-level-Water)">
-                        {{translate('Water')}}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="color:var(--color-level-Waste)">
-                        {{translate('Waste')}}
-                      </td>
-                    </tr>
-                  </table>
-                  <div id=chart_1></div>
-                </div>
-              </div>
+              <span style="font-size:larger">ECAM</span>
+              <span style="font-size:smaller">Energy Performance and Carbon Emissions Assessment and Monitoring Tool</span>
+            </div>
 
-              <div class=chart_container>
-                <div class=chart_title>
-                  GHG emissions by stage
-                </div>
-                <div class=flex>
-                  <table class=legend>
-                    <tr v-for="stage in Structure.filter(s=>s.sublevel)">
-                      <td :style="{color:stage.color}">
-                        {{translate(stage.level)}}
-                        {{translate(stage.sublevel)}}
+            <!--scenario name and details-->
+            <div
+              style="
+                background:#EEF4FA;
+                padding:1em 1.5em;
+                margin-top:1em;
+                margin-bottom:1em;
+              "
+            >
+              <b style="color:var(--color-level-generic)">{{Global.General.Name}}</b>
+              <ul
+                style="
+                  list-style:none;
+                  padding-left:0;
+                  margin-bottom:0;
+                "
+              >
+                <li><b>Assessment period:</b> {{Global.General.AssessmentPeriodStart}} to {{Global.General.AssessmentPeriodEnd}} ({{format(Global.Days())}} days)</li>
+                <li><b>Country:</b> {{Global.General.Country}}</li>
+                <li><b>Currency:</b> {{Global.General.Currency}}</li>
+                <li><b>Global Warming Potential Source:</b> {{ GWP_reports[Configuration.gwp_reports_index].report }}</li>
+              </ul>
+            </div>
+
+            <!--summary-->
+            <div>
+              <div class=heading>SUMMARY</div>
+              <div>
+                <table class=summary style="width:100%">
+                  <thead>
+                    <tr style="color:var(--color-level-generic)">
+                      <th style="text-align:left">Stage</th>
+                      <th>
+                        <div
+                          style="
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                          "
+                        >
+                          <img src="frontend/img/viti/select_scenario/icon-co2.svg" style="height:30px;margin-right:1em">
+                          <span>
+                            GHG emissions
+                          </span>
+                        </div>
+                      </th>
+                      <th>
+                        <div
+                          style="
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                          "
+                        >
+                          <img src="frontend/img/viti/select_scenario/icon-energy.svg" style="height:30px;margin-right:1em">
+                          <span>
+                            Energy consumption
+                          </span>
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody v-for="level in Structure.filter(s=>!s.sublevel)"
+                    :style="{color:'var(--color-level-'+level.level+')'}"
+                  >
+                    <tr v-for="s in Structure.filter(s=>s.level==level.level &&s.sublevel)">
+                      <td>{{translate(s.sublevel)}}</td>
+                      <td class=number>
+                        <span>
+                          {{format( Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum() )}}
+                        </span>
+                        <span>kgCO<sub>2</sub>eq</span>
+                      </td>
+                      <td class=number>
+                        {{format( Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum() )}}
+                        kWh
                       </td>
                     </tr>
-                  </table>
-                  <div id=chart_2></div>
-                </div>
-              </div>
-
-              <div class=chart_container>
-                <div class=chart_title>
-                  GHG emissions by gas emitted
-                </div>
-                <div class=flex>
-                  <table class=legend>
-                    <tr v-for="value,key in Global.TotalGHG()" v-if="key!='total'">
-                      <td :style="{color:Charts.gas_colors[key]}">
-                        <div v-html="key.toUpperCase().prettify()"></div>
+                    <tr style="font-weight:bold">
+                      <td>Total {{translate(level.level)}}</td>
+                      <td class=number>
+                        <span>
+                          {{format( Global[level.level][level.prefix+'_KPI_GHG']().total )}}
+                        </span>
+                        <span>
+                          kgCO<sub>2</sub>eq
+                        </span>
+                      </td>
+                      <td class=number>
+                        {{format( Global[level.level][level.prefix+'_nrg_cons']() )}}
+                        kWh
                       </td>
                     </tr>
-                  </table>
-                  <div id=chart_3></div>
-                </div>
-              </div>
-
-              <div class=chart_container>
-                <div class=chart_title>
-                  GHG emissions by UNFCC category
-                </div>
-                <table class=legend>
-                  <tr><td>TODO</td></tr>
+                  </tbody>
+                  <tbody>
+                    <tr style="color:var(--color-level-generic);font-weight:bold;font-size:larger">
+                      <td>Total</td>
+                      <td class=number>
+                        {{format(Global.TotalGHG().total)}}
+                        <span>kgCO<sub>2</sub>eq</span>
+                      </td>
+                      <td class=number>
+                        {{format(Global.TotalNRG())}}
+                        <span>kWh</span>
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
-          </div>
 
-          <div>
-            <div class=heading>SUMMARY - Charts - Energy performance</div>
-            <!--pie charts nrg-->
-            <div
-              style="
-                display:grid;
-                grid-template-columns:50% 50%;
-              "
-            >
-              <div class=chart_container>
-                <div class=chart_title>
-                  Energy consumption
-                </div>
-                <div class=flex>
-                  <table class=legend>
-                    <tr>
-                      <td style="color:var(--color-level-Water)">
-                        <div>{{translate('Water')}}</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="color:var(--color-level-Waste)">
-                        <div>{{translate('Waste')}}</div>
-                      </td>
-                    </tr>
-                  </table>
-                  <div id=chart_nrg_levels></div>
-                </div>
-              </div>
-
-              <div class=chart_container>
-                <div class=chart_title>
-                  Energy consumption by stage
+            <div>
+              <div class=heading>SUMMARY - Charts - GHG emissions</div>
+              <!--pie charts ghg-->
+              <div
+                style="
+                  display:grid;
+                  grid-template-columns:50% 50%;
+                "
+              >
+                <div class=chart_container>
+                  <div class=chart_title>
+                    GHG emissions
+                  </div>
+                  <div class=flex>
+                    <table class=legend>
+                      <tr>
+                        <td style="color:var(--color-level-Water)">
+                          {{translate('Water')}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="color:var(--color-level-Waste)">
+                          {{translate('Waste')}}
+                        </td>
+                      </tr>
+                    </table>
+                    <div id=chart_1></div>
+                  </div>
                 </div>
 
-                <div class=flex>
-                  <table class=legend>
-                    <tr v-for="stage in Structure.filter(s=>s.sublevel)">
-                      <td :style="{color:stage.color}">
-                        <div>
+                <div class=chart_container>
+                  <div class=chart_title>
+                    GHG emissions by stage
+                  </div>
+                  <div class=flex>
+                    <table class=legend>
+                      <tr v-for="stage in Structure.filter(s=>s.sublevel)">
+                        <td :style="{color:stage.color}">
                           {{translate(stage.level)}}
                           {{translate(stage.sublevel)}}
-                        </div>
+                        </td>
+                      </tr>
+                    </table>
+                    <div id=chart_2></div>
+                  </div>
+                </div>
+
+                <div class=chart_container>
+                  <div class=chart_title>
+                    GHG emissions by gas emitted
+                  </div>
+                  <div class=flex>
+                    <table class=legend>
+                      <tr v-for="value,key in Global.TotalGHG()" v-if="key!='total'">
+                        <td :style="{color:Charts.gas_colors[key]}">
+                          <div v-html="key.toUpperCase().prettify()"></div>
+                        </td>
+                      </tr>
+                    </table>
+                    <div id=chart_3></div>
+                  </div>
+                </div>
+
+                <div class=chart_container>
+                  <div class=chart_title>
+                    GHG emissions by UNFCC category
+                  </div>
+                  <table class=legend>
+                    <tr><td>TODO</td></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class=heading>SUMMARY - Charts - Energy performance</div>
+              <!--pie charts nrg-->
+              <div
+                style="
+                  display:grid;
+                  grid-template-columns:50% 50%;
+                "
+              >
+                <div class=chart_container>
+                  <div class=chart_title>
+                    Energy consumption
+                  </div>
+                  <div class=flex>
+                    <table class=legend>
+                      <tr>
+                        <td style="color:var(--color-level-Water)">
+                          <div>{{translate('Water')}}</div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="color:var(--color-level-Waste)">
+                          <div>{{translate('Waste')}}</div>
+                        </td>
+                      </tr>
+                    </table>
+                    <div id=chart_nrg_levels></div>
+                  </div>
+                </div>
+
+                <div class=chart_container>
+                  <div class=chart_title>
+                    Energy consumption by stage
+                  </div>
+
+                  <div class=flex>
+                    <table class=legend>
+                      <tr v-for="stage in Structure.filter(s=>s.sublevel)">
+                        <td :style="{color:stage.color}">
+                          <div>
+                            {{translate(stage.level)}}
+                            {{translate(stage.sublevel)}}
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                    <div id=chart_nrg_stages></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class=heading>SUMMARY - Sankey diagram</div>
+              <div id=sankey></div>
+            </div>
+
+            <!--inputs-->
+            <div>
+              <div class=heading>INPUTS</div>
+              <div>
+                <div v-for="stage in Structure.filter(s=>s.sublevel)">
+                  <div :style="{color:stage.color, fontWeight:'bold', marginTop:'20px'}">
+                    {{translate(stage.level)}}
+                    &rsaquo;
+                    {{translate(stage.sublevel)}}
+                  </div>
+                  <table class=substages style="border-collapse:separate">
+                    <tr>
+                      <th></th>
+                      <th v-for="ss in Global[stage.level][stage.sublevel]">
+                        <b>{{ss.name}}</b>
+                      </th>
+                      <th>Unit</th>
+                    </tr>
+                    <tr v-for="code in get_input_codes(stage.level,stage.sublevel)">
+                      <td
+                        :style="{background:stage.color}"
+                      >
+                        <small v-html="translate(code+'_descr').prettify()"></small>
+                      </td>
+                      <td
+                        v-for="ss in Global[stage.level][stage.sublevel]"
+                        class=number
+                      >
+                        {{format(ss[code])}}
+                      </td>
+                      <td class=unit>
+                        <span v-html="get_base_unit(code).prettify()"></span>
                       </td>
                     </tr>
                   </table>
-                  <div id=chart_nrg_stages></div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div>
-            <div class=heading>SUMMARY - Sankey diagram</div>
-            <div id=sankey></div>
-          </div>
-
-          <!--inputs-->
-          <div>
-            <div class=heading>INPUTS</div>
+            <!--outputs-->
             <div>
-              <div v-for="stage in Structure.filter(s=>s.sublevel)">
-                <div :style="{color:stage.color, fontWeight:'bold', marginTop:'20px'}">
-                  {{translate(stage.level)}}
-                  &rsaquo;
-                  {{translate(stage.sublevel)}}
+              <div class=heading>OUTPUTS</div>
+              <div>
+                <div v-for="stage in Structure.filter(s=>s.sublevel)">
+                  <div :style="{color:stage.color, fontWeight:'bold', marginTop:'20px'}">
+                    {{translate(stage.level)}}
+                    &rsaquo;
+                    {{translate(stage.sublevel)}}
+                  </div>
+                  <table class=substages style="border-collapse:separate">
+                    <tr>
+                      <th></th>
+                      <th v-for="ss in Global[stage.level][stage.sublevel]">
+                        <b>{{ss.name}}</b>
+                      </th>
+                      <th>Unit</th>
+                    </tr>
+                    <tr v-for="code in get_output_codes(stage.level,stage.sublevel)">
+                      <td
+                        :style="{background:stage.color}"
+                      >
+                        <small v-html="translate(code+'_descr').prettify()"></small>
+                      </td>
+                      <td
+                        v-for="ss in Global[stage.level][stage.sublevel]"
+                        class=number
+                      >
+                        <div v-html="format(get_output_value(code,ss))"></div>
+                      </td>
+                      <td class=unit>
+                        <span v-html="get_base_unit(code).prettify()"></span>
+                      </td>
+                    </tr>
+                  </table>
                 </div>
-                <table class=substages style="border-collapse:separate">
-                  <tr>
-                    <th></th>
-                    <th v-for="ss in Global[stage.level][stage.sublevel]">
-                      <b>{{ss.name}}</b>
-                    </th>
-                    <th>Unit</th>
-                  </tr>
-                  <tr v-for="code in get_input_codes(stage.level,stage.sublevel)">
-                    <td
-                      :style="{background:stage.color}"
-                    >
-                      <small v-html="translate(code+'_descr').prettify()"></small>
-                    </td>
-                    <td
-                      v-for="ss in Global[stage.level][stage.sublevel]"
-                      class=number
-                    >
-                      {{format(ss[code])}}
-                    </td>
-                    <td class=unit>
-                      <span v-html="get_base_unit(code).prettify()"></span>
-                    </td>
-                  </tr>
-                </table>
               </div>
             </div>
           </div>
-
-          <!--outputs-->
-          <div>
-            <div class=heading>OUTPUTS</div>
-            <div>
-              <div v-for="stage in Structure.filter(s=>s.sublevel)">
-                <div :style="{color:stage.color, fontWeight:'bold', marginTop:'20px'}">
-                  {{translate(stage.level)}}
-                  &rsaquo;
-                  {{translate(stage.sublevel)}}
-                </div>
-                <table class=substages style="border-collapse:separate">
-                  <tr>
-                    <th></th>
-                    <th v-for="ss in Global[stage.level][stage.sublevel]">
-                      <b>{{ss.name}}</b>
-                    </th>
-                    <th>Unit</th>
-                  </tr>
-                  <tr v-for="code in get_output_codes(stage.level,stage.sublevel)">
-                    <td
-                      :style="{background:stage.color}"
-                    >
-                      <small v-html="translate(code+'_descr').prettify()"></small>
-                    </td>
-                    <td
-                      v-for="ss in Global[stage.level][stage.sublevel]"
-                      class=number
-                    >
-                      <div v-html="format(get_output_value(code,ss))"></div>
-                    </td>
-                    <td class=unit>
-                      <span v-html="get_base_unit(code).prettify()"></span>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!--report from VITI in PDF-->
-        <div v-if="pdf_visible" style="text-align:center">
-          <embed src="dev/report_disseny.pdf" width="100%" height="2100px">
         </div>
       </div>
     </div>
@@ -547,6 +556,10 @@ let report = new Vue({
       #report table.summary th,
       #report table.summary td {
         border-bottom:1px solid #ccc;
+      }
+
+      #report table.legend {
+        width:38%;
       }
 
       #report table.legend th,
@@ -585,6 +598,15 @@ let report = new Vue({
 
       #report table.substages td.number {
         background:#eee;
+      }
+
+      #report div[dark_background]{
+        background:#999;
+      }
+      #report div[with_border]{
+        box-shadow:2px 2px 1px black;
+        width:740px;
+        margin:auto;
       }
     </style>
   `,

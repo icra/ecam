@@ -152,7 +152,6 @@ let Charts={
         return keys[i]+" ("+yUnit+")";
       });
 
-
     // Prep the tooltip bits, initial display is hidden
     var tooltip = svg.append("g")
       .attr("class", "tooltip")

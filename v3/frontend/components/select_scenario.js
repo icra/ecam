@@ -117,10 +117,13 @@ let select_scenario=new Vue({
         if(Scenarios.length){
           ecam.set_current_scenario(Scenarios[0]);
         }
-      }
+      };
+
       try{
         reader.readAsText(file);
       }catch(e){alert(e)}
+
+      compare_scenarios.scenarios_compared=[];
     },
 
     //set variables from selected country
@@ -129,7 +132,7 @@ let select_scenario=new Vue({
       this.Global.General.Currency=Countries[country].currency;
 
       //variables in Global.General to be changed:
-      [ 
+      [
         'conv_kwh_co2',
         'prot_con',
         'bod_pday',

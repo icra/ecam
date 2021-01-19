@@ -4,7 +4,7 @@
   this file is intended to help development
 */
 
-let debug=true; //DEBUG MODE
+let debug=true; //DEVELOPMENT MODE
 
 /*frontend elements: set visibility*/
 ecam_logo.visible   = 1;
@@ -41,7 +41,7 @@ if(debug){
   });
 
   //initial page to display
-  ecam.show('compare_scenarios'); //view page
+  ecam.show('report'); //view page
   //go_to('Waste','Onsite'); //view inventory stage
   //variable.view('wwt_KPI_GHG_slu_stockpilling'); //view variable detailed info
 }

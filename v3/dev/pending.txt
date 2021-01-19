@@ -1,20 +1,29 @@
 ECAM V3 CODING TASKS
 --------------------
-
-* PRIORITIES
-  - Graphs & report (Energy and GHGs [VITI])
-  - IPCC equations compliance
+* PRIORITIES v3
+  - Graphs & report
+  - IPCC compliance
 
 * DOING NOW - concrete and well defined tasks only - BUGS HAVE HIGHEST PRIORITY ALWAYS
 
+  [meeting with Elaine C. on 19/01/2021]
+    - request: compare scenarios add energy bar chart by assessment.
+    - request: stages_menu: add background color for substages.
+    - enh: bar charts can only display 5 digits, fix it.
+
+    - summary pie charts align legends and pie charts with fixed width in percentage.
+    - report: dont display a stage if it does not have any substage
+    - stages menu: make level links look like buttons and add hover effect (css scale)
+      - center text in water supply and sanitation
+      - remove emissions from the main stage
+    - configuration:
+      - add "duplicate" button inside options
+
   - [NOW] TASK: finish compare_scenarios charts
   - TASK: report.js (remove template pdf)
-
   - remove bod_pday_fs
-
   - TASK: UNFCC categories convert to new v3 equation structure
     - link for v2 version --> http://wacclim.org/ecam/edit.php?level=UNFCCC
-
   - REQ: add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
     - abstracted volume  (wsa)
     - treated volume     (wst)
@@ -22,7 +31,6 @@ ECAM V3 CODING TASKS
     - collected volume   (wwc)
     - treated volume     (wwt)
     - treated volume     (wwo)
-
   - ENH: onclose listener: trigger warning if ecam is accidentally closed
   - ENH: check if version does not match when loading json files
   - NEW: create References structure for documentation.

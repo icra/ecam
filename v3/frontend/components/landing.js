@@ -19,14 +19,16 @@ let landing = new Vue({
           grid-template-columns:50% 50%;
         "
       >
-        <div>
-          <h1 class="blue_h1" style="padding-bottom:0px">
+        <div
+          style="padding-top:40px"
+        >
+          <h1 class="blue_h1" style="padding-bottom:0px;text-align:left">
             Assess the carbon footprint and energy performance of your urban water utility
           </h1>
-          <h1 style="color:#333;font-size:large">
+          <h1 style="color:#333;font-size:large;text-align:left">
             ECAM empowers water and wastewater utility operators to assess their greenhouse gas emissions and energy consumption.
           </h1>
-          <ul 
+          <ul
             style="
               font-size:large;
               padding-inline-start:20px;
@@ -51,7 +53,7 @@ let landing = new Vue({
         <div>
           <img
             src="frontend/img/landing/water_cycle.png"
-            style="width:100%"
+            style="width:600px"
           >
         </div>
       </div>
@@ -76,7 +78,7 @@ let landing = new Vue({
             Overview of greenhouse gas emissions at utility level? Possible with ECAM!
           </h1>
 
-          <button class=start 
+          <button class=start
             style="
               border:2px solid black;
               background:white;
@@ -223,9 +225,9 @@ let landing = new Vue({
         color:white;
         display:block;
         padding:1em 2em;
-        width:50%;
         margin-bottom:5px;
         font-weight:bold;
+        font-size:larger;
       }
 
       #landing button.start:hover {

@@ -8,7 +8,6 @@ let compare_scenarios=new Vue({
     variable,
     Global,
     Languages,
-    Scenarios,
     Info,
     Structure,
   },
@@ -63,6 +62,10 @@ let compare_scenarios=new Vue({
       });
 
       return inputs.concat(outputs);
+    },
+
+    get_scenarios(){
+      return Scenarios;
     },
 
     draw_all_charts(){
@@ -149,131 +152,139 @@ let compare_scenarios=new Vue({
 
   template:`
     <div id=compare_scenarios v-if="visible && Languages.ready">
-      <div style="padding-top:2em;background:#eff5fb">
-        <div style="text-align:center" v-if="scenarios_compared.length">
-          <button :selected="current_view=='table'"                       @click="current_view='table'"                      >Table</button>
-          <button :selected="current_view=='bar_chart_ghg_by_assessment'" @click="current_view='bar_chart_ghg_by_assessment'">Bar chart: GHG by assessment</button>
-          <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Bar chart: GHG by stage</button>
-          <button :selected="current_view=='bar_chart_ghg_by_substage'"   @click="current_view='bar_chart_ghg_by_substage'"  >Bar chart: GHG by substage</button>
+
+      <div style="text-align:center">
+        <button :selected="current_view=='table'"                       @click="current_view='table'"                      >Table</button>
+        <button :selected="current_view=='bar_chart_ghg_by_assessment'" @click="current_view='bar_chart_ghg_by_assessment'">Bar chart: GHG by assessment</button>
+        <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Bar chart: GHG by stage</button>
+        <button :selected="current_view=='bar_chart_ghg_by_substage'"   @click="current_view='bar_chart_ghg_by_substage'"  >Bar chart: GHG by substage</button>
+      </div>
+
+      <h1 style="text-align:center">Compare assessments</h1>
+
+      <!--table comparison-->
+      <div v-if="current_view=='table'">
+        <p style="text-align:center;color:#666">
+          <b>Select below the assessments to be compared.</b>
+        </p>
+
+        <!--list of assessments-->
+        <div class=flex style="justify-content:center;text-align:center">
+          <div class=selectable_scenario v-for="scenario in get_scenarios()">
+            <label>
+              <input
+                type=checkbox
+                @click="add_scenario_to_compared(scenario)"
+                :checked="scenarios_compared.indexOf(scenario)+1"
+              >
+              <span>
+                {{scenario.General.Name}}
+              </span>
+            </label>
+          </div>
         </div>
 
-        <h1 style="text-align:center">Compare assessments</h1>
-
-        <!--content-->
+        <!--choose inputs and/or outputs-->
         <div>
-          <div v-if="current_view=='table'">
-            <p style="text-align:center;color:#666">
-              <b>Select below the assessments to be compared.</b>
-            </p>
+          <div style="text-align:center">
+            <label> <input type=checkbox> Include inputs </label>
+            <label> <input type=checkbox> Include outputs </label>
+          </div>
+        </div>
 
-            <!--list of assessments-->
-            <div style="text-align:center;">
-              <div class=flex style="justify-content:center">
-                <div class=selectable_scenario v-for="scenario in Scenarios">
-                  <label>
-                    <input
-                      type=checkbox
-                      @click="add_scenario_to_compared(scenario)"
-                      :checked="scenarios_compared.indexOf(scenario)+1"
-                    >
-                    <span>
-                      {{scenario.General.Name}}
-                    </span>
-                  </label>
+        <!--compare scenarios table-->
+        <table style="margin:10px auto" v-if="scenarios_compared.length">
+          <tbody>
+            <tr>
+              <td></td>
+              <th v-for="scenario in scenarios_compared">
+                <b>{{scenario.General.Name}}</b>
+              </th>
+            </tr>
+          </tbody>
+          <tbody v-for="stage in [{level:'General'}].concat(Structure)">
+            <tr>
+              <th
+                :colspan="1+scenarios_compared.length"
+                :style="'background:'+get_level_color(stage.level)"
+              >
+                <div style="text-align:left;color:white;font-size:x-large;font-weight:bold">
+                  {{translate(stage.level)}}
+                  <span v-if="stage.sublevel">
+                    &rsaquo;
+                    {{translate(stage.sublevel)}}
+                  </span>
                 </div>
-              </div>
-            </div>
+              </th>
+            </tr>
 
-            <!--compare scenarios table-->
-            <table style="margin:10px auto" v-if="scenarios_compared.length">
-              <tr>
-                <td></td>
-                <th v-for="scenario in scenarios_compared.filter(s=>Scenarios.indexOf(s)+1)">
-                  <b>{{scenario.General.Name}}</b>
-                </th>
-              </tr>
+            <tr v-for="v in get_variables_and_values(stage.level, stage.sublevel)">
+              <!--variable code and description-->
+              <th :style="{background:get_level_color(stage.level),paddingLeft:'20px'}">
+                <div class=flex style="justify-content:space-between">
+                  <div v-if="Info[v.code]">
+                    <div
+                      v-html="translate(v.code+'_descr').prettify()"
+                      style="color:white"
+                    ></div>
+                  </div>
 
-              <tbody v-for="stage in [{level:'General'}].concat(Structure)">
-                <tr>
-                  <th :colspan="1+scenarios_compared.length"
-                    :style="'background:'+get_level_color(stage.level)"
+                  <div style="font-size:smaller">
+                    <a
+                      @click="variable.view(v.code)"
+                      style="color:white"
+                    >
+                      {{v.code}}
+                    </a>
+                  </div>
+                </div>
+              </th>
+
+              <!--variable value-->
+              <td
+                v-for="arr,i in v.scenario_values"
+                :style="scenarios_compared[i]==Global ? 'background:#f6f6f6':''"
+              >
+                <!--value and unit-->
+                <div>
+                  <div
+                    v-if="arr.length"
+                    style="text-align:right"
                   >
-                    <div style="text-align:left;color:white;font-size:x-large;font-weight:bold">
-                      {{translate(stage.level)}}
-                      <span v-if="stage.sublevel">
-                        &rsaquo;
-                        {{translate(stage.sublevel)}}
-                      </span>
-                    </div>
-                  </th>
-                </tr>
-                <tr v-for="v in get_variables_and_values(stage.level, stage.sublevel)">
-                  <!--variable code and description-->
-                  <th :style="{background:get_level_color(stage.level),paddingLeft:'20px'}">
-                    <div class=flex style="justify-content:space-between">
-                      <div v-if="Info[v.code]">
-                        <div
-                          v-html="translate(v.code+'_descr').prettify()"
-                          style="color:white"
-                        ></div>
-                      </div>
-                      <div style="font-size:smaller" >
-                        <a
-                          @click="variable.view(v.code)"
-                          style="color:white"
-                        >{{v.code}}</a>
-                      </div>
-                    </div>
-                  </th>
+                    <div v-if="arr.length==1">{{ format(arr[0]) }}           </div>
+                    <div v-else>              {{ arr.map(val=>format(val)) }}</div>
+                  </div>
+                  <div
+                    class="unit"
+                    style="text-align:right"
+                    v-html="get_base_unit(v.code, get_scenarios[i]).prettify()"
+                  ></div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-                  <!--variable value-->
-                  <td v-for="arr,i in v.scenario_values"
-                    :style="scenarios_compared[i]==Global ? 'background:#f6f6f6':''"
-                  >
-                    <!--value and unit-->
-                    <div>
-                      <div
-                        v-if="arr.length"
-                        style="text-align:right"
-                      >
-                        <div v-if="arr.length==1">
-                          {{ format(arr[0]) }}
-                        </div>
-                        <div v-else>
-                          {{ arr.map(val=>format(val)) }}
-                        </div>
-                      </div>
-                      <div
-                        class="unit"
-                        v-html="get_base_unit(v.code, Scenarios[i]).prettify()"
-                        style="text-align:right"
-                      >
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        <!--notification: table is empty-->
+        <div
+          v-if="scenarios_compared.length==0"
+          style="padding:1em;text-align:center;font-style:italic"
+          v-html="'~No assessments included to comparison'"
+        ></div>
+      </div>
 
-            <!--notification: table is empty-->
-            <div
-              v-if="scenarios_compared.length==0"
-              style="padding:1em;text-align:center;font-style:italic"
-              v-html="'~No assessments included to comparison'"
-            ></div>
-          </div>
+      <!--charts-->
+      <div>
+        <div v-if="current_view=='bar_chart_ghg_by_assessment'">
+          <div id="bar_chart_ghg_by_assessment"></div>
+        </div>
 
-          <div v-if="current_view=='bar_chart_ghg_by_assessment'">
-            <div id="bar_chart_ghg_by_assessment"></div>
-          </div>
+        <div v-if="current_view=='bar_chart_ghg_by_stage'">
+          <div id="bar_chart_ghg_by_stage"></div>
+        </div>
 
-          <div v-if="current_view=='bar_chart_ghg_by_stage'">
-            <div id="bar_chart_ghg_by_stage"></div>
-          </div>
-
-          <div v-if="current_view=='bar_chart_ghg_by_substage'">
-            <div id="bar_chart_ghg_by_substage"></div>
-          </div>
+        <div v-if="current_view=='bar_chart_ghg_by_substage'">
+          <div id="bar_chart_ghg_by_substage"></div>
         </div>
       </div>
     </div>
@@ -281,6 +292,10 @@ let compare_scenarios=new Vue({
 
   style:`
     <style>
+      #compare_scenarios {
+        padding-top:2em;
+        background:#eff5fb;
+      }
       #compare_scenarios div.selectable_scenario{
         border:1px solid #ccc;
         padding:0.5em;
