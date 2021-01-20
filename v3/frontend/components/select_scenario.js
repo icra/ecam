@@ -81,13 +81,13 @@ let select_scenario=new Vue({
       //mode: replace or append
       let replace = this.loadfile_replace;
 
-      if(replace){
-        /*
-        if(!confirm("Current changes will be lost. Continue?")){
-          return;
+      /*
+        if(replace){
+          if(!confirm("Current changes will be lost. Continue?")){
+            return;
+          }
         }
-        */
-      }
+      */
 
       //get json file contents
       let file   = event.target.files[0];
@@ -121,9 +121,21 @@ let select_scenario=new Vue({
 
       try{
         reader.readAsText(file);
-      }catch(e){alert(e)}
+        //reset scenario comparison
+        compare_scenarios.scenarios_compared=[];
+      }catch(e){
+        alert(e);
+        throw(e);
+      }
+    },
 
-      compare_scenarios.scenarios_compared=[];
+    //duplicate scenario
+    duplicate_scenario(obj){
+      let str = JSON.stringify(obj);
+      let par = JSON.parse(str);
+      Scenarios.push(
+        Ecam.from(par)
+      );
     },
 
     //set variables from selected country
@@ -136,12 +148,8 @@ let select_scenario=new Vue({
         'conv_kwh_co2',
         'prot_con',
         'bod_pday',
-        'bod_pday_fs'
       ].forEach(key=>{
-        //put bod_pday value in faecal sludge as well
-        let key2 = key;
-        if(key=="bod_pday_fs"){ key2="bod_pday"; }
-        this.Global.General[key]=Countries[country][key2];
+        this.Global.General[key]=Countries[country][key];
       });
 
       //trigger conv_kwh_co2 change for all substages
@@ -223,6 +231,7 @@ let select_scenario=new Vue({
               type="file"
               id="loadfile"
               accept=".json"
+              onclick="this.value=''"
               @change="load_json_file($event)"
             >
           </div>
@@ -374,6 +383,10 @@ let select_scenario=new Vue({
                     v-html="'inventory'"
                   ></button>
                   <button
+                    @click="duplicate_scenario(scenario)"
+                    v-html="'duplicate'"
+                  ></button>
+                  <button
                     @click="delete_scenario(scenario)"
                     v-if="scenario!=Global"
                     v-html="'delete'"
@@ -491,15 +504,6 @@ let select_scenario=new Vue({
                             <td v-html="translate('bod_pday_descr')">
                             <td>
                               <input type=number class=number v-model.number="scenario.General.bod_pday" style="width:95%" min=0>
-                            </td>
-                            <td>
-                              g/{{translate('person')}}/{{translate('day')}}
-                            </td>
-                          </tr>
-                          <tr :class="scenario.General.bod_pday_fs<=0?'warning':''">
-                            <td v-html="translate('bod_pday_fs_descr')">
-                            <td>
-                              <input type=number class=number v-model.number="scenario.General.bod_pday_fs" style="width:95%" min=0>
                             </td>
                             <td>
                               g/{{translate('person')}}/{{translate('day')}}

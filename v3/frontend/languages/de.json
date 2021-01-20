@@ -250,8 +250,6 @@
 "#assessment_period":"Bewertungszeitraum",
 "#bod_pday_descr"   :"BSB5 Fracht (Abwasser)",
 "#bod_pday_expla":"Dies stellt den durchschnittlichen biochemischen Sauerstoffbedarf (BSB5), den jeder an die Kanalisation angeschlossene Bewohner im täglich anfallenden Abwasser entfernt. Der Standardwert wird nach der Auswahl des Landes angezeigt. Dieser Standardwert sollte angepasst werden, wenn lokale Studien genauere Schätzungswerte liefern.  Die vom Tool bereitgestellten Standardwerte basieren auf den IPCC-Daten, die Durchschnittwerte für jedes Land präsentieren. Aufgrund der Unterschiede zwischen den verschiedenen Orten innerhalb eines Landes wird daher empfohlen, nach Möglichkeit tatsächliche Messwerte für das System zu verwenden, um die genauesten Ergebnisse zu erhalten ",
-"#bod_pday_fs_descr":"BSB5 Fracht (Klärschlamm)",
-"#bod_pday_fs_expla":"BSB5 pro Person und Tag (Klärschlamm)",
 "#wsa_pmp_pw_descr":"Berechnete Wasserkraft",
 "#wsa_pmp_pw_expla":"Berechnete Wasserkraft",
 "#c_wsd_nrg_mini_descr":"Minimaler Energiebedarf für den Betrieb des Systems durch den Benutzer (theoretisch)",

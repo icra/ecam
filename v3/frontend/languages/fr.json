@@ -260,8 +260,6 @@
 "#birds_ww_run_cost":"Coûts de fonctionnement",
 "#bod_pday_descr"   :"DBO5 généré (eaux usées)",
 "#bod_pday_expla"   :"Représente la moyenne de demande biochimique en oxigène (BOD5) que chaque résident raccordé au réseau d'égouts élimine dans les eaux usées produites chaque jour. La valeur par défaut est fournie après la sélection du pays. Cette valeur doit être ajustée si les études locales fournissent des estimations plus précises. Les valeurs par défaut fournies par l'outil sont basées sur les données du GIEC, qui représentent généralement la moyenne du pays. Par conséquent, en raison de la variabilité entre les différentes zones d'un pays, il est recommandé d'utiliser les valeurs mesurées réelles pour le système si possible afin d'obtenir les résultats les plus précis.",
-"#bod_pday_fs_descr":"DBO5 généré (boues de vidange)",
-"#bod_pday_fs_expla":"DBO5 généré (boues de vidange)",
 "#fsc_pmp_pw_descr":"Puissance calculée de l'eau",
 "#fsc_pmp_pw_expla":"Puissance calculée de l'eau",
 "#fsr_pmp_pw_descr":"Puissance calculée de l'eau",

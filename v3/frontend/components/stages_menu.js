@@ -94,15 +94,14 @@ let stages_menu=new Vue({
               <td
                 v-for="l1 in Structure.filter(s=>!s.sublevel)"
                 :colspan="Structure.filter(s=>s.level==l1.level).length-1"
-                :style="{background:l1.color,padding:'10px',fontSize:'larger'}"
+                :style="{background:l1.color}"
+                class=level_name
               >
                 <div
                   @click="go_to(l1.level)"
                   :style="{
                     display:'flex',
                     justifyContent:'center',
-                    cursor:'pointer',
-                    color:'white',
                   }"
                 >
                   <div :style="{textDecoration:is_tier_b_selected(l1.level)?'underline':''}">
@@ -123,8 +122,8 @@ let stages_menu=new Vue({
               <td
                 v-for="s in Structure"
                 v-if="s.sublevel"
-                :style="{background:'var(--color-level-'+s.level+'-secondary)',cursor:'pointer'}"
                 @click="go_to(s.level,s.sublevel)"
+                :style="{background:'var(--color-level-'+s.level+'-secondary)',cursor:'pointer'}"
               >
                 <div style="display:flex;align-items:center">
                   <div>
@@ -143,7 +142,13 @@ let stages_menu=new Vue({
 
             <!--level 3 substages-->
             <tr v-if="show_substages_summary">
-              <td v-for="s in Structure.filter(s=>s.sublevel)" style="vertical-align:top;border-top:1px solid #ccc;padding-top:0">
+              <td v-for="s in Structure.filter(s=>s.sublevel)"
+                style="
+                  vertical-align:top;
+                  border-top:1px solid #ccc;
+                  padding-top:0;
+                "
+              >
                 <div v-if="Global[s.level][s.sublevel].length==0" style="text-align:center">
                   <small style="color:#666">~no substages</small>
                 </div>
@@ -244,6 +249,18 @@ let stages_menu=new Vue({
       #stages_menu #main_table th,
       #stages_menu #main_table td {
         border:none;
+      }
+      #stages_menu #main_table td.level_name{
+        padding:10px;
+        font-size:15px;
+        cursor:pointer;
+        color:white;
+      }
+      #stages_menu #main_table td.level_name:hover {
+        font-size:18px;
+        padding:7px;
+        text-decoration:underline;
+        transition:all 0.2s;
       }
       #stages_menu img {
         width:50px;

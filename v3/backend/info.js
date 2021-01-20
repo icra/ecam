@@ -74,7 +74,6 @@ let Info={
   //numeric variables
   conv_kwh_co2:{magnitude:"Conversion",unit:"kg CO2/kWh"},
   bod_pday:{magnitude:"Mass/inhab/time",unit:"g/person/day"},
-  bod_pday_fs:{magnitude:"Mass/inhab/time",unit:"g/person/day"},
   prot_con:{magnitude:"Annual per capita consumption",unit:"kg/person/year"},
 	Days:{magnitude:"Time",unit:"days"},
   Years:{magnitude:"Time",unit:"years"},

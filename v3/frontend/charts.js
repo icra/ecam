@@ -88,7 +88,13 @@ let Charts={
       .orient("left")
       .ticks(5)
       .tickSize(-width, 0, 0)
-      .tickFormat(function(d){return d})
+      .tickFormat(function(d){
+        if(d>9999){
+          return d.toExponential(0);
+        }else{
+          return d;
+        }
+      })
     ;
 
     var xAxis = d3.svg.axis()

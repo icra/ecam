@@ -634,17 +634,14 @@ let summary_ghg=new Vue({
         font: 10px sans-serif;
         shape-rendering: crispEdges;
       }
-
       #summary_ghg div.chart_container.bar .axis path,
       #summary_ghg div.chart_container.bar .axis line {
         fill: none;
         stroke: #000;
       }
-
       #summary_ghg div.chart_container.bar path.domain {
         stroke: none;
       }
-
       #summary_ghg div.chart_container.bar .y .tick line {
         stroke: #ddd;
       }

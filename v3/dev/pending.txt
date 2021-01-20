@@ -1,5 +1,5 @@
 ECAM V3 CODING TASKS
---------------------
+====================
 
 * PRIORITIES v3
   - Graphs & report
@@ -7,40 +7,51 @@ ECAM V3 CODING TASKS
 
 * DOING NOW - concrete and well defined tasks only - BUGS HAVE HIGHEST PRIORITY ALWAYS
 
-  [meeting with Elaine C. on 19/01/2021]
-    - REQUEST: in compare scenarios: add energy consumption bar chart by assessment.
-    - ENH:     bar charts can only display 5 digits, fix it.
-    - ENH:     in stages menu: water and waste links add hover effect (css scale)
-    - configuration:
-      - add "duplicate" button inside options
+  - [meeting with Elaine C. on 19/01/2021]
+    - in compare scenarios:
+      - add energy consumption bar chart by assessment.
 
-  - [NOW] TASK: finish compare_scenarios charts
-  - TASK: report.js (remove template pdf)
-  - remove bod_pday_fs
-  - TASK: UNFCC categories convert to new v3 equation structure
+  - convert UNFCC categories to new v3 equation structure
     - link for v2 version --> http://wacclim.org/ecam/edit.php?level=UNFCCC
-  - REQ: add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
+
+  - add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
     - abstracted volume  (wsa)
     - treated volume     (wst)
     - distributed volume (wsd)
     - collected volume   (wwc)
     - treated volume     (wwt)
     - treated volume     (wwo)
-  - ENH: onclose listener: trigger warning if ecam is accidentally closed
-  - ENH: check if version does not match when loading json files
-  - NEW: create References structure for documentation.
+
+  - trigger warning if ecam is accidentally closed (via onclose listener)
+  - check version when loading json files
+  - fill References structure for documentation ("backend/references.js")
 
 * TO BE DONE WHEN V3 IS FEATURE FROZEN
-  - update help & about & docs
-  - example v3 json file in docs
-  - translations of new pieces of text added for v3
+  - update help & about & docs & example json file
+  - translation of new pieces of text added for v3
     - create automated tag finder
     - main task for Roser (February 1st 2021)
   - external version converter module (v2 to v3)
   - CORS is not compatible with file:// protocol, find alternative way to
-    load language json files offline.
+    load language json files when using ecam offline.
 
-* BACKLOG: (missing info OR not 100% clear how to implement OR help needed from other people)
+* BACKLOG: NEW FUNCTIONALITIES FOR NEXT VERSION
+  - Create minimum required data filter
+  - Chemicals
+  - Optgroups in <select> elements
+  - Feedback button (not possible bc ecam is serverless)
+  - First-Time user tutorial
+  - Import/Export excel
+    - export can be the same as v2
+    - import module with Adrià Riu help. Each assessment is an excel file.
+      - task for Roser: generator of the template for importing.
+    - "https://www.npmjs.com/package/exceljs"
+  - Execute backend from CLI without web frontend.
+  - Opportunities page (TBD)
+    - execute multiple simulations variating parameters and do sensitivity analysis
+  - Load JSON file from URL
+    - open a link to retreieve a json string that is converted to a ecam json
+      file, via XMLHttpRequest.
   * Mail from Corinne on June 19th 2020.
     ```
       Enable to account for different ways of valorising biogas in a
@@ -98,21 +109,3 @@ ECAM V3 CODING TASKS
 
       Best / Cordialement,
     ```
-
-* FUTURE (next version)
-  - Create minimum required data filter
-  - Chemicals
-  - Optgroups in <select> elements
-  - Feedback button
-  - First-Time user tutorial
-  - Import/Export excel
-    - export can be the same as v2
-    - import module with Adrià Riu help. Each assessment is an excel file.
-      - task for Roser: generator of the template for importing.
-    - "https://www.npmjs.com/package/exceljs"
-  - Execute backend from CLI without web frontend.
-  - Opportunities page (TBD)
-    - execute multiple simulations variating parameters and do sensitivity analysis
-  - Load JSON file from URL
-    - ecam opens a link to a server and retreieves a json string that is
-      converted to a ecam json file.

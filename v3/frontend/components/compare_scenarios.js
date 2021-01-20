@@ -272,15 +272,24 @@ let compare_scenarios=new Vue({
 
       <!--charts-->
       <div>
-        <div v-if="current_view=='bar_chart_ghg_by_assessment'">
+        <div
+          v-if="current_view=='bar_chart_ghg_by_assessment'"
+          class="chart_container bar"
+        >
           <div id="bar_chart_ghg_by_assessment"></div>
         </div>
 
-        <div v-if="current_view=='bar_chart_ghg_by_stage'">
+        <div
+          v-if="current_view=='bar_chart_ghg_by_stage'"
+          class="chart_container bar"
+        >
           <div id="bar_chart_ghg_by_stage"></div>
         </div>
 
-        <div v-if="current_view=='bar_chart_ghg_by_substage'">
+        <div
+          v-if="current_view=='bar_chart_ghg_by_substage'"
+          class="chart_container bar"
+        >
           <div id="bar_chart_ghg_by_substage"></div>
         </div>
       </div>
@@ -297,6 +306,7 @@ let compare_scenarios=new Vue({
   style:`
     <style>
       #compare_scenarios {
+        padding-left:1em;
         padding-top:2em;
         background:#eff5fb;
       }
@@ -311,6 +321,23 @@ let compare_scenarios=new Vue({
       #compare_scenarios button[selected]{
         background:var(--color-level-generic);
         color:white;
+      }
+
+      /*bar chart css*/
+      #compare_scenarios div.chart_container.bar svg {
+        font: 10px sans-serif;
+        shape-rendering: crispEdges;
+      }
+      #compare_scenarios div.chart_container.bar .axis path,
+      #compare_scenarios div.chart_container.bar .axis line {
+        fill: none;
+        stroke: #000;
+      }
+      #compare_scenarios div.chart_container.bar path.domain {
+        stroke: none;
+      }
+      #compare_scenarios div.chart_container.bar .y .tick line {
+        stroke: #ddd;
       }
     </style>
   `,

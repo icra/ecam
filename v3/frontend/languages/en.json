@@ -612,8 +612,6 @@
 "#assessment_period":"Assessment period",
 "#bod_pday_descr"   :"BOD5 generation (wastewater)",
 "#bod_pday_expla":"This represents the average Biochemical oxygen demand (BOD5) that each resident connected to the sewer system eliminates in the wastewater produced every day. The default value is provided after selection of country. This default value shall be adjusted if local studies provide more accurate estimates. The default values provided by the tool are based on the IPCC data, which typically represent the country average. Hence, due to the variability between different areas within a country, it is recommended to use actual measured values for the system whenever possible to obtain the most accurate results.",
-"#bod_pday_fs_descr":"BOD5 generation (faecal sludge)",
-"#bod_pday_fs_expla":"BOD5 per person per day (faecal sludge)",
 "#wsa_pmp_pw_descr":"Calculated water power",
 "#wsa_pmp_pw_expla":"Calculated water power",
 "#wsd_nrg_mini_descr":"Minimum required energy for the system to operate by users (theoretical)",

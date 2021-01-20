@@ -30,7 +30,6 @@ class Ecam{
       conv_kwh_co2         : 0,     //electricity conversion (kgCO2/kWh)
       prot_con             : 0,     //prot consumption (kg/person/year)
       bod_pday             : 0,     //BOD5 (g/person/day)
-      bod_pday_fs          : 0,     //BOD5 in faecal sludge (g/person/day)
     };
 
     this.Water=new Water_stages(), //Water supply stages

@@ -260,8 +260,6 @@
 "#birds_ww_run_cost":"Costos operativos",
 "#bod_pday_descr"   :"DBO5 generado (aguas residuales)",
 "#bod_pday_expla"   :"Esto representa la demanda bioquímica de oxígeno media (DBO5) que cada residente conectada al sistema de alcantarillado elimina en el agua residual producida cada día. Se proporciona el valor predeterminado después de la selección del país. Este valor por defecto será ajustado en caso de estudios locales proporcionan estimaciones más precisas. Los valores por defecto proporcionados por la herramienta se basan en los datos del IPCC, que normalmente representan el promedio del país. Por lo tanto, debido a la variabilidad entre las diferentes áreas dentro de un país, se recomienda utilizar los valores reales medidos por el sistema siempre que sea posible obtener los resultados más precisos.",
-"#bod_pday_fs_descr":"DBO5 generado (lodos fecales)",
-"#bod_pday_fs_expla":"DBO5 generado (lodos fecales)",
 "#fsc_pmp_pw_descr":"Poder hídrico calculado",
 "#fsc_pmp_pw_expla":"Poder hídrico calculado",
 "#fsr_pmp_pw_descr":"Poder hídrico calculado",
