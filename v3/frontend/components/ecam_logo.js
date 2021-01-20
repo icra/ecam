@@ -24,6 +24,12 @@ let ecam_logo=new Vue({
             <a href="dev/pending.txt" target=_blank>
               v{{Global.General.version}}
             </a>
+            -
+            <!--
+            -->
+            <a href="https://github.com/icra/ecam/issues" target=_blank>
+              issues
+            </a>
           </span>
         </div>
       </div>

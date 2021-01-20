@@ -93,6 +93,19 @@ let compare_scenarios=new Vue({
         );
 
         Charts.draw_bar_chart(
+          'bar_chart_nrg_by_assessment',
+          this.scenarios_compared.map((scenario,i)=>{
+            let name   = `[${i+1}] `+scenario.General.Name;
+            let Energy = scenario.TotalNRG();
+            return {name, Energy};
+          }),
+          colors=[
+            "#ffbe54",
+          ],
+          'kWh',
+        );
+
+        Charts.draw_bar_chart(
           'bar_chart_ghg_by_stage',
           this.scenarios_compared.map((scenario,i)=>{
 
@@ -157,13 +170,30 @@ let compare_scenarios=new Vue({
   template:`
     <div id=compare_scenarios v-if="visible && Languages.ready">
 
-      <div style="text-align:center">
-        <button :selected="current_view=='table'"                       @click="current_view='table'"                      >Table</button>
-        <button :selected="current_view=='bar_chart_ghg_by_assessment'" @click="current_view='bar_chart_ghg_by_assessment'">Bar chart: GHG by assessment</button>
+      <!--buttons select view-->
+      <div
+        style="
+          display:grid;
+          grid-template-columns:25% 25% 25% 25%;
+          width:80%;
+          margin:auto;
+        "
+      >
+        <button :selected="current_view=='table'" @click="current_view='table'">Table</button>
+        <div
+          style="
+            display:grid;
+            grid-template-columns:100%;
+          "
+        >
+          <button :selected="current_view=='bar_chart_ghg_by_assessment'" @click="current_view='bar_chart_ghg_by_assessment'">Bar chart: GHG by assessment</button>
+          <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">Bar chart: energy by assessment</button>
+        </div>
         <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Bar chart: GHG by stage</button>
         <button :selected="current_view=='bar_chart_ghg_by_substage'"   @click="current_view='bar_chart_ghg_by_substage'"  >Bar chart: GHG by substage</button>
       </div>
 
+      <!--title-->
       <h1 style="text-align:center">Compare assessments</h1>
 
       <!--table comparison-->
@@ -277,6 +307,13 @@ let compare_scenarios=new Vue({
           class="chart_container bar"
         >
           <div id="bar_chart_ghg_by_assessment"></div>
+        </div>
+
+        <div
+          v-if="current_view=='bar_chart_nrg_by_assessment'"
+          class="chart_container bar"
+        >
+          <div id="bar_chart_nrg_by_assessment">hola</div>
         </div>
 
         <div

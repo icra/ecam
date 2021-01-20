@@ -195,9 +195,18 @@ let ecam={
   //delete scenario
   delete_scenario(scenario){
     if(scenario==Global) return;
-    let index = Scenarios.indexOf(scenario);
-    if(index==-1) return;
-    Scenarios.splice(index,1);
+
+    //remove from Scenarios
+    {
+      let index = Scenarios.indexOf(scenario);
+      if(index+1) Scenarios.splice(index,1);
+    }
+
+    //remove from scenarios compared
+    {
+      let index = compare_scenarios.scenarios_compared.indexOf(scenario);
+      if(index+1) compare_scenarios.scenarios_compared.splice(index,1);
+    }
   },
 };
 

@@ -7,10 +7,6 @@ ECAM V3 CODING TASKS
 
 * DOING NOW - concrete and well defined tasks only - BUGS HAVE HIGHEST PRIORITY ALWAYS
 
-  - [meeting with Elaine C. on 19/01/2021]
-    - in compare scenarios:
-      - add energy consumption bar chart by assessment.
-
   - convert UNFCC categories to new v3 equation structure
     - link for v2 version --> http://wacclim.org/ecam/edit.php?level=UNFCCC
 
