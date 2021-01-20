@@ -313,7 +313,7 @@ let compare_scenarios=new Vue({
           v-if="current_view=='bar_chart_nrg_by_assessment'"
           class="chart_container bar"
         >
-          <div id="bar_chart_nrg_by_assessment">hola</div>
+          <div id="bar_chart_nrg_by_assessment"></div>
         </div>
 
         <div
