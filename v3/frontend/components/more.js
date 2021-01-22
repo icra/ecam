@@ -22,17 +22,17 @@ let more=new Vue({
         <!--summaries section-->
         <li class=section>
           <ul>
-            <li class=item><a onclick="ecam.show('about')">              <div class=icon>&#9432;  </div> {{translate('about')               }}</a></li>
-            <li class=item><a onclick="ecam.show('help')">               <div class=icon>&#128587;</div> {{translate('help')                }}</a></li>
-            <li class=item><a onclick="ecam.show('diagram')">            <div class=icon>&#8605;  </div> Flow diagram                         </a></li>
-            <li class=item><a onclick="ecam.show('constants')">          <div class=icon>&#8455;  </div> {{translate('all_constants')       }}</a></li>
-            <li class=item><a onclick="ecam.show('benchmarks')">         <div class=icon>&#8542;  </div> {{translate('benchmarks')          }}</a></li>
-            <li class=item><a onclick="ecam.show('fuel_table')">         <div class=icon>&#9981;  </div> {{translate('Fuel types')          }}</a></li>
-            <li class=item><a onclick="ecam.show('non_revenue_water')">  <div class=icon>&#9810;  </div> {{translate('non_revenue_water')   }}</a></li>
-            <li class=item><a onclick="ecam.show('equations')">          <div class=icon>&#8750;  </div> {{translate('equations')           }}</a></li>
-            <li class=item><a onclick="ecam.show('tables')">             <div class=icon>&#128200;</div> Data tables                          </a></li>
-            <li class=item><a onclick="window.open('backend/unfcc.js')"> <div class=icon>&#9729;  </div> {{translate('unfccc_categories')}}   </a></li>
-            <li class=item><a onclick="ecam.show('development')">        <div class=icon>&#128187;</div> {{translate('dev')                 }}</a></li>
+            <li class=item><a onclick="ecam.show('about')">               <div class=icon>&#9432;  </div> {{translate('about')               }}</a></li>
+            <li class=item><a onclick="ecam.show('help')">                <div class=icon>&#128587;</div> {{translate('help')                }}</a></li>
+            <li class=item><a onclick="ecam.show('diagram')">             <div class=icon>&#8605;  </div> Flow diagram                         </a></li>
+            <li class=item><a onclick="ecam.show('constants')">           <div class=icon>&#8455;  </div> {{translate('all_constants')       }}</a></li>
+            <li class=item><a onclick="ecam.show('benchmarks')">          <div class=icon>&#8542;  </div> {{translate('benchmarks')          }}</a></li>
+            <li class=item><a onclick="ecam.show('fuel_table')">          <div class=icon>&#9981;  </div> {{translate('Fuel types')          }}</a></li>
+            <li class=item><a onclick="ecam.show('non_revenue_water')">   <div class=icon>&#9810;  </div> {{translate('non_revenue_water')   }}</a></li>
+            <li class=item><a onclick="ecam.show('equations')">           <div class=icon>&#8750;  </div> {{translate('equations')           }}</a></li>
+            <li class=item><a onclick="ecam.show('tables')">              <div class=icon>&#128200;</div> Data tables                          </a></li>
+            <li class=item><a onclick="window.open('backend/unfccc.js')"> <div class=icon>&#9729;  </div> {{translate('unfccc_categories')}}   </a></li>
+            <li class=item><a onclick="ecam.show('development')">         <div class=icon>&#128187;</div> {{translate('dev')                 }}</a></li>
           </ul>
         </li>
       </ul>
