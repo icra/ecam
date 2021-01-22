@@ -21,9 +21,9 @@
   <script src="backend/filters.js"></script>
   <script src="backend/benchmarks.js"></script>
   <script src="backend/references.js"></script>
+  <script src="backend/unfccc.js"></script>
 
   <!--v2
-    <script src="dataModel/unfccc.js"></script>
     <script src="dataModel/level3variables.js"></script>
     <script src="dataModel/level2only.js"></script>
     <script src="dataModel/sumable_magnitudes.js"></script>
@@ -232,3 +232,11 @@
   <!--default settings on reload (for development)-->
   <script src="defaults.js"></script>
 <!--/load vue objects-->
+
+<!--onclose onunload listener-->
+<script>
+  window.addEventListener('beforeunload',(event)=>{
+    event.preventDefault(); //stated by the standard
+    event.returnValue=''; //chrome requires 'returnValue'
+  });
+</script>

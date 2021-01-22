@@ -4,7 +4,7 @@
   this file is intended to help development
 */
 
-let debug=false; //DEVELOPMENT MODE
+let debug=true; //DEVELOPMENT MODE
 
 /*frontend elements: set visibility*/
 ecam_logo.visible   = 1;

@@ -19,7 +19,7 @@ ECAM V3 CODING TASKS
     - treated volume     (wwo)
 
   - trigger warning if ecam is accidentally closed (via onclose listener)
-  - check version when loading json files
+  - trigger warning when checking version when loading json files
   - fill References structure for documentation ("backend/references.js")
 
 * TO BE DONE WHEN V3 IS FEATURE FROZEN
