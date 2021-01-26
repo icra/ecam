@@ -235,8 +235,10 @@
 
 <!--onclose onunload listener-->
 <script>
-  window.addEventListener('beforeunload',(event)=>{
-    event.preventDefault(); //stated by the standard
-    event.returnValue=''; //chrome requires 'returnValue'
-  });
+  if(debug==false){
+    window.addEventListener('beforeunload',(event)=>{
+      event.preventDefault(); //stated by the standard
+      event.returnValue=''; //chrome requires 'returnValue'
+    });
+  }
 </script>

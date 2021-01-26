@@ -6,8 +6,7 @@ ECAM V3 CODING TASKS
   - IPCC compliance
 
 * DOING NOW - concrete and well defined tasks only - BUGS HAVE HIGHEST PRIORITY ALWAYS
-
-  - convert UNFCC categories to new v3 equation structure
+  - UNFCC categories (from v2)
     - link for v2 version --> http://wacclim.org/ecam/edit.php?level=UNFCCC
 
   - add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
@@ -18,7 +17,6 @@ ECAM V3 CODING TASKS
     - treated volume     (wwt)
     - treated volume     (wwo)
 
-  - trigger warning if ecam is accidentally closed (via onclose listener)
   - trigger warning when checking version when loading json files
   - fill References structure for documentation ("backend/references.js")
 
@@ -28,7 +26,7 @@ ECAM V3 CODING TASKS
     - create automated tag finder
     - main task for Roser (February 1st 2021)
   - external version converter module (v2 to v3)
-  - CORS is not compatible with file:// protocol, find alternative way to
+  - [offline] CORS is not compatible with the "file://" protocol, find alternative way to
     load language json files when using ecam offline.
 
 * BACKLOG: NEW FUNCTIONALITIES FOR NEXT VERSION
@@ -104,4 +102,5 @@ ECAM V3 CODING TASKS
       on how to calculate.
 
       Best / Cordialement,
+      Corinne
     ```

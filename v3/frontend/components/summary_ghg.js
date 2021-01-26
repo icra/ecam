@@ -174,7 +174,7 @@ let summary_ghg=new Vue({
                     align-items:center;
                   ">
                     <div>
-                      <div class=number_placeholder v-html="format(Global.TotalGHG().total)"></div>
+                      <div class=number_placeholder v-html="format(Global.TotalGHG().total,0)"></div>
                     </div>
                     <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
                   </div>

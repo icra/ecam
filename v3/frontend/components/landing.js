@@ -282,6 +282,7 @@ let landing = new Vue({
       #landing #logos {
         display:flex;
         justify-content:center;
+        width:90%;
       }
     </style>
   `,

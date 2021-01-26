@@ -11,14 +11,13 @@ function format(number,digits){
     digits=digits||0;
   }
 
-  //for non applicable
-  if(number=="NA"){ return "<span style=color:#ccc>NA</span>"; }
-
   //get the result string
-  var str=new Intl.NumberFormat('en-EN',{maximumFractionDigits:digits}).format(number);
+  let str=new Intl.NumberFormat('en-EN',{maximumFractionDigits:digits}).format(number);
 
   //if "NaN" or "Infinity" display 'missing inputs'
-  if(str=="NaN" || !isFinite(number)) return "~"+translate('missing_inputs');
+  if(str=="NaN" || !isFinite(number)){
+    return `~${translate('missing_inputs')}`;
+  }
 
   //return resulting string
   return str;
