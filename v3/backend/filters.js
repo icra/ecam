@@ -123,6 +123,12 @@ let Filters = {
   "wwc_nrg_cons", //variable
   "wwt_nrg_cons", //variable
   "wwo_nrg_cons", //variable
+  "wsa_conv_kwh", //EF grid electricity
+  "wst_conv_kwh", //EF grid electricity
+  "wsd_conv_kwh", //EF grid electricity
+  "wwc_conv_kwh", //EF grid electricity
+  "wwt_conv_kwh", //EF grid electricity
+  "wwo_conv_kwh", //EF grid electricity
 
   "wsa_pumping", //question
   "wst_pumping", //question

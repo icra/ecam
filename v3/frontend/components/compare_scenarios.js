@@ -5,7 +5,7 @@ let compare_scenarios=new Vue({
     scenarios_compared:[],
     current_view:'table',
     include:{
-      inputs:true,
+      inputs:false,
       outputs:true,
     },
 

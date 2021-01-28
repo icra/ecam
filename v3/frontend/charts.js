@@ -133,7 +133,7 @@ let Charts={
         var xPosition = d3.mouse(this)[0] - 15;
         var yPosition = d3.mouse(this)[1] - 25;
         tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-        tooltip.select("text").text(d.y);
+        tooltip.select("text").text(format(d.y));
       });
 
     // Draw legend

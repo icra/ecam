@@ -147,7 +147,7 @@ let stages_menu=new Vue({
                 style="
                   vertical-align:top;
                   border-top:1px solid #ccc;
-                  padding-top:0;
+                  padding:0;
                 "
               >
                 <div v-if="Global[s.level][s.sublevel].length==0" style="text-align:center">

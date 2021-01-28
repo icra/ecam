@@ -16,7 +16,7 @@ let Configuration={
 //array of scenarios (layout == Ecam object == scenario == assessment)
 let Scenarios=[];
 
-//A "layout" or "scenario" or is an Ecam object
+//A "scenario" is an Ecam object
 class Ecam{
   constructor(){
     this.General={
@@ -431,7 +431,7 @@ class Substage{
     Object.keys(Questions).filter(key=>{
       return typeof(Questions[key])=='object';
     }).forEach(key=>{
-      this.Configuration.Questions[key]=0;
+      this.Configuration.Questions[key]=false;
     });
   }
 };
