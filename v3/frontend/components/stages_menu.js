@@ -51,6 +51,7 @@ let stages_menu=new Vue({
       ss[prefix+'_conv_kwh']=Global.General.conv_kwh_co2;
 
       this.Global[level][sublevel].push(ss);
+      this.go_to_substage(ss);
       return ss;
     },
 
@@ -122,7 +123,7 @@ let stages_menu=new Vue({
               <td
                 v-for="s in Structure"
                 v-if="s.sublevel"
-                @click="go_to(s.level,s.sublevel)"
+                @click="add_substage(s.level,s.sublevel)"
                 :style="{background:'var(--color-level-'+s.level+'-secondary)',cursor:'pointer'}"
               >
                 <div style="display:flex;align-items:center">
@@ -133,7 +134,7 @@ let stages_menu=new Vue({
                   </div>
                   <div style="padding-left:5px">
                     <a :style="{color:'var(--color-level-'+s.level+')'}">
-                      <b>{{translate(s.sublevel)}}</b>
+                      <b>+ {{translate(s.sublevel)}}</b>
                     </a>
                   </div>
                 </div>
@@ -218,6 +219,7 @@ let stages_menu=new Vue({
             </tr>
 
             <!--btn add substage-->
+            <!--
             <tr v-if="show_substages_summary">
               <td v-for="s in Structure.filter(s=>s.sublevel)">
                 <div style="text-align:center">
@@ -229,6 +231,7 @@ let stages_menu=new Vue({
                 </div>
               </td>
             </tr>
+            -->
           </table>
         </div>
         </transition>
