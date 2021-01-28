@@ -108,22 +108,15 @@ let compare_scenarios=new Vue({
         Charts.draw_bar_chart(
           'bar_chart_ghg_by_stage',
           this.scenarios_compared.map((scenario,i)=>{
-
-            return Structure.filter(s=>s.sublevel).map(s=>{
-              let name = `[${i+1}] ${s.prefix}`;
-              let CO2 = scenario[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().co2).sum();
-              let N2O = scenario[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().n2o).sum();
-              let CH4 = scenario[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().ch4).sum();
-              return {name, CO2, CH4, N2O};
+            let column={};
+            column.name = scenario.General.Name;
+            Structure.filter(s=>s.sublevel).map(s=>{
+              column[s.prefix] = scenario[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum();
             });
-
-          }).reduce((p,c)=>p.concat(c),[]),
-          colors=[
-            Charts.gas_colors.co2,
-            Charts.gas_colors.ch4,
-            Charts.gas_colors.n2o,
-          ],
-          'kgCO2eq',
+            return column;
+          }),
+          Structure.filter(s=>s.sublevel).map(s=>s.color), //colors
+          'kgCO2eq', //unit
         );
 
         Charts.draw_bar_chart(
@@ -180,12 +173,7 @@ let compare_scenarios=new Vue({
         "
       >
         <button :selected="current_view=='table'" @click="current_view='table'">Table</button>
-        <div
-          style="
-            display:grid;
-            grid-template-columns:100%;
-          "
-        >
+        <div style="display:grid;grid-template-columns:100%;">
           <button :selected="current_view=='bar_chart_ghg_by_assessment'" @click="current_view='bar_chart_ghg_by_assessment'">Bar chart: GHG by assessment</button>
           <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">Bar chart: energy by assessment</button>
         </div>
@@ -196,8 +184,7 @@ let compare_scenarios=new Vue({
       <!--title-->
       <h1 style="text-align:center">Compare assessments</h1>
 
-      <!--table comparison-->
-      <div v-if="current_view=='table'">
+      <div>
         <p style="text-align:center;color:#666">
           <b>Select the assessments to be compared</b>
         </p>
@@ -217,7 +204,10 @@ let compare_scenarios=new Vue({
             </label>
           </div>
         </div>
+      </div>
 
+      <!--table comparison-->
+      <div v-if="current_view=='table'">
         <!--choose inputs and/or outputs-->
         <div>
           <div style="text-align:center;margin-top:10px">
@@ -232,10 +222,79 @@ let compare_scenarios=new Vue({
             <tr>
               <td></td>
               <th v-for="scenario in scenarios_compared">
-                <b>{{scenario.General.Name}}</b>
+                <b>
+                  {{scenario.General.Name}}
+                </b>
               </th>
             </tr>
           </tbody>
+
+          <!--TotalGHG-->
+          <tr>
+            <td :colspan="1+scenarios_compared.length">
+              Summary (work in progress TODO)
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{translate('TotalGHG_descr')}}
+            </td>
+            <td v-for="scenario,i in scenarios_compared">
+              <div class=number>
+                {{format(
+                  scenario.TotalGHG().total
+                )}}
+              </div>
+              <div
+                class="unit"
+                style="text-align:right"
+                v-html="get_base_unit('TotalGHG', get_scenarios[i]).prettify()"
+              ></div>
+            </td>
+          </tr>
+
+          <!--wxx_KPI_GHG-->
+          <tbody v-for="level in Structure.filter(s=>!s.sublevel)">
+            <tr v-for="stage in Structure.filter(s=>s.sublevel && s.level==level.level)">
+              <td>
+                {{translate(stage.prefix+'_KPI_GHG_descr')}}
+              </td>
+              <!--variable value-->
+              <td v-for="scenario,i in scenarios_compared">
+                <div class=number>
+                  {{format(
+                    scenario[stage.level][stage.sublevel].map(ss=>ss[stage.prefix+'_KPI_GHG']().total).sum()
+                  )}}
+                </div>
+                <div
+                  class="unit"
+                  style="text-align:right"
+                  v-html="get_base_unit(stage.prefix+'_KPI_GHG', get_scenarios[i]).prettify()"
+                ></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {{
+                  translate(level.prefix+'_KPI_GHG_descr')
+                }}
+              </td>
+              <td v-for="scenario,i in scenarios_compared">
+                <div class=number>
+                  {{format(
+                    scenario[level.level][level.prefix+'_KPI_GHG']().total
+                  )}}
+                </div>
+                <div
+                  class="unit"
+                  style="text-align:right"
+                  v-html="get_base_unit(level.prefix+'_KPI_GHG', get_scenarios[i]).prettify()"
+                ></div>
+              </td>
+            </tr>
+          </tbody>
+
+          <!--iterate stages-->
           <tbody v-for="stage in [{level:'General'}].concat(Structure)">
             <tr>
               <th

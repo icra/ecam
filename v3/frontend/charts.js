@@ -9,12 +9,12 @@ let Charts={
 
   //create a pie chart inside "id_container"
   draw_pie_chart(id_container, data, colors, width, height) {
-    //nothing to draw
-    if(data.length==0) return;
-
     let container = document.getElementById(id_container);
     if(!container) return;
     container.innerHTML="";
+
+    //nothing to draw
+    if(data.length==0) return;
 
     //sizes
     var w = width  || 200;
@@ -50,11 +50,12 @@ let Charts={
 
   //create a bar chart inside "id_container"
   draw_bar_chart(id_container, data, colors, yUnit){
+    let el = document.getElementById(id_container);
+    if(!el) return;
+    el.innerHTML="";
+
     if(data.length==0) return;
     let keys = Object.keys(data[0]).slice(1);//llegenda
-
-    let el = document.getElementById(id_container);
-    if(el) el.innerHTML="";
 
     var margin = {top:20,right:160,bottom:35,left:30};
     var width  = window.innerWidth-margin.left-margin.right-50;

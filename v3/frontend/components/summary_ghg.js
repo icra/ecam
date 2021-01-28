@@ -158,6 +158,13 @@ let summary_ghg=new Vue({
         <!--tables-->
         <div v-if="current_view=='table'">
           <table id=table_summary style="width:85%;border-spacing:1px">
+
+            <tr>
+              <td colspan=2></td>
+              <th>Total GHG emissions</th>
+              <th>Total energy consumed</th>
+            </tr>
+
             <!--total ghg and nrg-->
             <tbody style="background:var(--color-level-generic);color:white">
               <tr>
@@ -328,6 +335,7 @@ let summary_ghg=new Vue({
             </tbody>
 
             <!--avoided ghg emissions-->
+            <!--
             <tbody class=avoided_emissions v-if="true || Global.Waste.ww_GHG_avoided()">
               <tr>
                 <td style="border:none"></td>
@@ -355,6 +363,7 @@ let summary_ghg=new Vue({
                 </td>
               </tr>
             </tbody>
+            -->
           </table>
         </div>
 
