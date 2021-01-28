@@ -2,7 +2,7 @@
 
 #git: commit and push
 git add *
-git commit -m 'update'
+git commit
 git push
 
 #deploy github repo to dev server

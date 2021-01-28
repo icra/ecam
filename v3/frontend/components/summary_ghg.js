@@ -616,6 +616,7 @@ let summary_ghg=new Vue({
       }
       #summary_ghg div.chart_container table.ghg_table,
       #summary_ghg div.chart_container table.nrg_table {
+        width:38%;
         margin-right:10px;
       }
 
