@@ -515,7 +515,6 @@ let summary_ghg=new Vue({
                     <td :style="{background:stage.color}">
                     </td>
                     <td>
-                      {{translate(stage.level)}}
                       {{translate(stage.sublevel)}}
                     </td>
                     <td>
