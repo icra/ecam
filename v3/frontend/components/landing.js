@@ -284,6 +284,9 @@ let landing = new Vue({
         justify-content:center;
         width:90%;
       }
+      #landing #logos img {
+        width:20%;
+      }
     </style>
   `,
 });
