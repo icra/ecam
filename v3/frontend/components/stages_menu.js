@@ -20,6 +20,11 @@ let stages_menu=new Vue({
     go_to_substage,
     get_sum_of_substages,
 
+    //copy save file function from select_scenario
+    save_to_file(){
+      select_scenario.save_to_file();
+    },
+
     //frontend effect to mark selected stage
     is_tier_b_selected(level, sublevel){
       sublevel = sublevel || false;
@@ -84,6 +89,22 @@ let stages_menu=new Vue({
         <h1 style="padding-left:0">
           Inventory: urban water cycle stages
           <button @click="show_table^=1">show/hide table</button>
+
+          <button class=save_btn @click="save_to_file()" title="save the current list of assessments to a file"
+            style="
+              cursor:pointer;
+              float:right;
+            "
+          >
+            <div style="display:flex;align-items:center">
+              <img
+                class=icon
+                src="frontend/img/viti/select_scenario/icon-save.svg"
+                style="margin-right:5px;width:15px"
+              >
+              <div>Save file</div>
+            </div>
+          </button>
         </h1>
 
         <!--stages table-->

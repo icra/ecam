@@ -24,9 +24,10 @@ let diagram = new Vue({
       <div>
         <h1>Flow diagram (water and wastewater flows)</h1>
         <img
-          src="frontend/diagram/map.dot.svg"
+          src="frontend/img/flowchart/flowchart.svg"
           style="display:block;margin:auto;width:90%;border:1px solid #eee"
         >
+        <!--
         <table border=1 style="margin:auto">
           <tr><th :colspan="diagram_legend.length">Legend</th></tr>
           <tr>
@@ -36,6 +37,7 @@ let diagram = new Vue({
             </td>
           </tr>
         </table>
+        -->
       </div>
     </div>
   `,

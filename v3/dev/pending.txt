@@ -6,8 +6,13 @@ ECAM V3 CODING TASKS
   - IPCC compliance
 
 * DOING NOW - concrete and well defined tasks only - BUGS HAVE HIGHEST PRIORITY ALWAYS
+
+  - horizontal bar chart
+    - https://bl.ocks.org/Andrew-Reid/0aedd5f3fb8b099e3e10690bd38bd458
+
   - UNFCC categories (from v2)
     - link for v2 version --> http://wacclim.org/ecam/edit.php?level=UNFCCC
+
   - add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
     - abstracted volume  (wsa)
     - treated volume     (wst)
@@ -15,7 +20,9 @@ ECAM V3 CODING TASKS
     - collected volume   (wwc)
     - treated volume     (wwt)
     - treated volume     (wwo)
+
   - trigger warning when checking version when loading json files
+
   - fill References structure for documentation ("backend/references.js")
 
 * TO BE DONE WHEN V3 IS FEATURE FROZEN

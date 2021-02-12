@@ -161,8 +161,8 @@ let summary_ghg=new Vue({
 
             <tr>
               <td colspan=2></td>
-              <th>Total GHG emissions</th>
-              <th>Total energy consumed</th>
+              <th><b>Total GHG emissions</b></th>
+              <th><b>Total energy consumed</b></th>
             </tr>
 
             <!--total ghg and nrg-->

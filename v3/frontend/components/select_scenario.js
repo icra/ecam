@@ -176,7 +176,7 @@ let select_scenario=new Vue({
       <!--title-->
       <div>
         <h2 style="padding-left:0;margin-bottom:0">
-          Get started
+          Configuration
         </h2>
       </div>
 

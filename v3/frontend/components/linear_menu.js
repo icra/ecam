@@ -38,7 +38,7 @@ let linear_menu = new Vue({
           onclick="ecam.show('select_scenario')"
           :selected="current_view=='select_scenario'"
         >
-          <div>Get started</div>
+          <div>Configuration</div>
         </div>
 
         <!--stages-->

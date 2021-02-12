@@ -194,9 +194,9 @@ let landing = new Vue({
         <p id=logos>
           <img src="frontend/img/viti/footer-logos/footer-logo-wacclim.svg">
           <img src="frontend/img/viti/footer-logos/footer-logo-federal.svg">
-          <img src="frontend/img/viti/footer-logos/footer-logo-implemented-giz.svg">
-          <img src="frontend/img/viti/footer-logos/footer-logo-iwa.svg">
-          <img src="frontend/img/viti/footer-logos/footer-logo-icra.svg">
+          <img src="frontend/img/viti/footer-logos/footer-logo-implemented-giz.svg" style="margin-left:7%">
+          <img src="frontend/img/viti/footer-logos/footer-logo-iwa.svg" style="width:11%">
+          <img src="frontend/img/viti/footer-logos/footer-logo-icra.svg" style="width:14%">
         </p>
       </footer>
     </div>

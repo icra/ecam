@@ -22,16 +22,10 @@ let tier_b=new Vue({
     Filters,         //definition (list of variables for each filter)
     filters_on:true, //all filters on
     filters_active:{ //each filter on/off
-      "Population"             : true,
-      "Water volumes"          : true,
-      "Operational parameters" : true,
-      "Emission factors"       : true,
-      "Fuel consumption"       : true,
-      "Energy performance"     : true,
-      "Biogas"                 : true,
-      "Discharge"              : true,
-      "Sludge management"      : true,
-      "Costs"                  : true,
+      "GHG Emissions"      : true,
+      "Energy Performance" : true,
+      "Pump Efficiency"    : true,
+      "Sludge Management"  : true,
     },
 
     //benchmark ui colors
