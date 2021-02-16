@@ -111,7 +111,7 @@ let landing = new Vue({
           <div class=learn_more_item onclick="window.open('https://github.com/icra/ecam')">
             <div style="display:flex;justify-content:space-between;align-items:flex-end">
               <b>Open source</b>
-              <img src="frontend/img/landing/open-source.png">
+              <img class=icon src="frontend/img/landing/open-source.png">
             </div>
             <p>
               ECAM is a free and open source
@@ -125,7 +125,7 @@ let landing = new Vue({
           <div class=learn_more_item onclick="ecam.show('about')">
             <div style="display:flex;justify-content:space-between;align-items:flex-end">
               <b>About ECAM</b>
-              <img src="frontend/img/landing/about.png">
+              <img class=icon src="frontend/img/landing/about.png">
             </div>
             <p>
               ECAM's web interface and
@@ -138,7 +138,7 @@ let landing = new Vue({
           <div class=learn_more_item onclick="window.open('https://wacclim.org')">
             <div style="display:flex;justify-content:space-between;align-items:flex-end">
               <b>WaCCliM</b>
-              <img src="frontend/img/landing/wacclim.png">
+              <img class=icon src="frontend/img/landing/wacclim.png">
             </div>
             <p>
               ECAM was developed as part of
@@ -255,9 +255,9 @@ let landing = new Vue({
       #landing div.learn_more_item b {
         font-size:larger;
       }
-      #landing div.learn_more_item img {
-        width:100px;
+      #landing div.learn_more_item img.icon {
         width:90px;
+        height:71px;
         display:block;
       }
 

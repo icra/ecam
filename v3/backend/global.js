@@ -207,7 +207,9 @@ class Ecam{
 
 class Water_stages{
   constructor(){
-    this.ws_resi_pop = 0; //resident population
+    this.ws_resi_pop=0; //resident population
+    this.ws_nrg_cost=0; //energy costs
+    this.ws_run_cost=0; //total running costs
 
     //arrays of substages
     this.Abstraction  = [ ];
@@ -311,8 +313,10 @@ class Waste_stages{
   constructor(){
     this.ww_resi_pop=0; //resident population
     this.ww_vol_gene=0; //volume of generated wastewater
+    this.ww_nrg_cost=0; //energy costs
+    this.ww_run_cost=0; //total running costs
 
-    //arrays of Substages
+    //arrays of substages
     this.Collection = [ ];
     this.Treatment  = [ ];
     this.Onsite     = [ ];
@@ -1466,7 +1470,7 @@ class Waste_Onsite extends Substage{
     this.wwo_N_urine          = 0;
     this.wwo_reused_N         = 0;
     this.wwo_reused_P         = 0;
-    this.not_used_variable    = 0;
+    //this.not_used_variable    = 0; //use it to test if the function that locates not used variables works
     this.equations=[
       //GHG from Wastewater Onsite Treatment
       "wwo_KPI_GHG_elec",

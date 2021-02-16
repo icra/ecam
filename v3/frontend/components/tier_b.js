@@ -19,13 +19,14 @@ let tier_b=new Vue({
     },
 
     //FILTERS (see "backend/filters.js")
-    Filters,         //definition (list of variables for each filter)
-    filters_on:true, //all filters on
-    filters_active:{ //each filter on/off
-      "GHG Emissions"      : true,
-      "Energy Performance" : true,
-      "Pump Efficiency"    : true,
-      "Sludge Management"  : true,
+    Filters,          //definition (list of variables for each filter)
+    filters_on:false, //all filters on
+    filters_active:{  //each filter on/off
+      "GHG Emissions"      :true,
+      "Energy Performance" :false,
+      "Pump Efficiency"    :false,
+      "Sludge Management"  :false,
+      "Other"              :false,
     },
 
     //benchmark ui colors

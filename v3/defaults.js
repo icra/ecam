@@ -4,7 +4,8 @@
   this file is intended to help development
 */
 
-let debug=true; //DEVELOPMENT MODE
+//DEVELOPMENT MODE
+let debug=0;
 
 /*frontend elements: set visibility*/
 ecam_logo.visible   = 1;
@@ -39,9 +40,11 @@ if(debug){
   Scenarios.forEach(scenario=>{
     compare_scenarios.scenarios_compared.push(scenario);
   });
+}
 
+if(debug){
   //initial page to display
-  //ecam.show('tier_b'); //view page
-  go_to('Water','Abstraction'); //view inventory stage
+  ecam.show('about'); //view page
+  //go_to('Water','Abstraction'); //view inventory stage
   //variable.view('wwt_KPI_GHG_slu_stockpilling'); //view variable detailed info
 }

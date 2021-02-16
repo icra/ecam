@@ -9,6 +9,9 @@ let summary_ghg=new Vue({
     //current view selected
     current_view:"table",
 
+    //current emissions unit
+    current_unit:"kgCO2eq",
+
     //frontend
     variable,
     Charts,
@@ -23,6 +26,17 @@ let summary_ghg=new Vue({
     translate,
     format,
     go_to,
+
+    //deal with unit changes
+    set_emissions_unit(){
+      if(Global.TotalGHG().total>1000){ this.current_unit="T CO2eq"; }
+      else{                             this.current_unit="kgCO2eq"; }
+    },
+    //get divisor for emissions with unit changed
+    get_divisor(){
+      if(this.current_unit=="T CO2eq"){ return 1000; }
+      return false;
+    },
 
     show_summaries_menu(){
       summaries_menu.visible=true;
@@ -157,8 +171,9 @@ let summary_ghg=new Vue({
       <div>
         <!--tables-->
         <div v-if="current_view=='table'">
-          <table id=table_summary style="width:85%;border-spacing:1px">
+          <div>{{set_emissions_unit()}}</div>
 
+          <table id=table_summary style="width:85%;border-spacing:1px">
             <tr>
               <td colspan=2></td>
               <th><b>Total GHG emissions</b></th>
@@ -181,9 +196,11 @@ let summary_ghg=new Vue({
                     align-items:center;
                   ">
                     <div>
-                      <div class=number_placeholder v-html="format(Global.TotalGHG().total,0)"></div>
+                      <div class=number_placeholder v-html="format(Global.TotalGHG().total,0,get_divisor())"></div>
                     </div>
-                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
+                    <div style="font-size:x-small;">
+                      <span v-html="current_unit.prettify()"></span>
+                    </div>
                   </div>
                 </td>
 
@@ -204,6 +221,7 @@ let summary_ghg=new Vue({
                 </td>
               </tr>
             </tbody>
+
             <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)">
               <!--level 1-->
               <tr :style="{background:l1.color,color:'white'}">
@@ -242,9 +260,11 @@ let summary_ghg=new Vue({
                     <div
                       class=number_placeholder
                       :style="{color:l1.color, borderColor:l1.color}"
-                      v-html="format(Global[l1.level][l1.prefix+'_KPI_GHG']().total)"
+                      v-html="format(Global[l1.level][l1.prefix+'_KPI_GHG']().total,0,get_divisor())"
                     ></div>
-                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
+                    <div style="font-size:x-small;">
+                      <span v-html="current_unit.prettify()"></span>
+                    </div>
                   </div>
                 </td>
 
@@ -308,9 +328,11 @@ let summary_ghg=new Vue({
                     <div
                       class=number_placeholder
                       :style="{color:l1.color, borderColor:l1.color}"
-                      v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_KPI_GHG']().total).sum())">
+                      v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_KPI_GHG']().total).sum(),0,get_divisor())">
                     </div>
-                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
+                    <div style="font-size:x-small;">
+                      <span v-html="current_unit.prettify()"></span>
+                    </div>
                   </div>
                 </td>
 
@@ -336,33 +358,35 @@ let summary_ghg=new Vue({
 
             <!--avoided ghg emissions-->
             <!--
-            <tbody class=avoided_emissions v-if="true || Global.Waste.ww_GHG_avoided()">
-              <tr>
-                <td style="border:none"></td>
-                <td style="border:none">
-                  Avoided GHG emissions in Sanitation (TBD)
-                </td>
-                <td style="border:none">
-                  <div
-                    style="
-                      display:flex;
-                      justify-content:center;
-                      align-items:center;
-                    "
-                  >
+              <tbody class=avoided_emissions v-if="true || Global.Waste.ww_GHG_avoided()">
+                <tr>
+                  <td style="border:none"></td>
+                  <td style="border:none">
+                    Avoided GHG emissions in Sanitation (TBD)
+                  </td>
+                  <td style="border:none">
                     <div
-                      class=number_placeholder
-                      style="border-color:#666;color:#666"
-                      v-html="Global.Waste.ww_GHG_avoided() ? format( Global.Waste.ww_GHG_avoided() ) : 0"
-                    ></div>
-                    <div style="font-size:x-small;">kgCO<sub>2</sub>eq</div>
-                  </div>
-                </td>
-                <td style="border:none">
-                  <button @click="variable.view('ww_GHG_avoided')">more info</button>
-                </td>
-              </tr>
-            </tbody>
+                      style="
+                        display:flex;
+                        justify-content:center;
+                        align-items:center;
+                      "
+                    >
+                      <div
+                        class=number_placeholder
+                        style="border-color:#666;color:#666"
+                        v-html="Global.Waste.ww_GHG_avoided() ? format( Global.Waste.ww_GHG_avoided() ) : 0"
+                      ></div>
+                      <div style="font-size:x-small;">
+                        <span v-html="current_unit.prettify()"></span>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="border:none">
+                    <button @click="variable.view('ww_GHG_avoided')">more info</button>
+                  </td>
+                </tr>
+              </tbody>
             -->
           </table>
         </div>
@@ -407,7 +431,10 @@ let summary_ghg=new Vue({
               </div>
               <div class=flex>
                 <table border=1 class=ghg_table>
-                  <tr v-for="stage in Structure.filter(s=>s.sublevel)">
+                  <tr
+                    v-for="stage in Structure.filter(s=>s.sublevel)"
+                    v-if="Global[stage.level][stage.sublevel].length"
+                  >
                     <td :style="{background:stage.color}">
                     </td>
                     <td>
@@ -449,7 +476,7 @@ let summary_ghg=new Vue({
             <div class=chart_container>
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
-                GHG emissions by UNFCC category
+                GHG emissions by UNFCCC category
               </div>
               <table border=1 class=ghg_table>
                 <tr><td>TODO</td></tr>

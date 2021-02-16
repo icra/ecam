@@ -169,4 +169,13 @@ let Filters = {
     "wwo_reuse",   //question
 ],
 
+"Other":[
+  "wsa_costs",
+  "wst_costs",
+  "wsd_costs",
+  "wwc_costs",
+  "wwt_costs",
+  "wwo_costs",
+],
+
 };

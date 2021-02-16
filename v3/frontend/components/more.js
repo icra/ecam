@@ -21,23 +21,20 @@ let more=new Vue({
         More
       </h2>
 
-      <!--sections-->
-      <ul style="width:70%;margin:auto;">
-        <!--summaries section-->
-        <li class=section>
-          <ul>
-            <li class=item><a onclick="ecam.show('about')">               <div class=icon>&#9432;  </div> {{translate('about')               }}</a></li>
-            <li class=item><a onclick="ecam.show('diagram')">             <div class=icon>&#8605;  </div> Flow diagram                         </a></li>
-            <li class=item><a onclick="ecam.show('constants')">           <div class=icon>&#8455;  </div> {{translate('all_constants')       }}</a></li>
-            <li class=item><a onclick="ecam.show('benchmarks')">          <div class=icon>&#8542;  </div> {{translate('benchmarks')          }}</a></li>
-            <li class=item><a onclick="ecam.show('fuel_table')">          <div class=icon>&#9981;  </div> {{translate('Fuel types')          }}</a></li>
-            <li class=item><a onclick="ecam.show('non_revenue_water')">   <div class=icon>&#9810;  </div> {{translate('non_revenue_water')   }}</a></li>
-            <li class=item><a onclick="ecam.show('equations')">           <div class=icon>&#8750;  </div> {{translate('equations')           }}</a></li>
-            <li class=item><a onclick="ecam.show('tables')">              <div class=icon>&#128200;</div> Data tables                          </a></li>
-            <li class=item v-if="is_debug_mode_enabled()"><a onclick="ecam.show('development')">         <div class=icon>&#128187;</div> {{translate('dev')                 }}</a></li>
-          </ul>
-        </li>
-      </ul>
+      <div id=buttons>
+        <div class=button onclick="ecam.show('about')">            {{translate('about')            }}</div>
+        <div class=button onclick="ecam.show('diagram')">          Flow diagram                      </div>
+        <div class=button onclick="ecam.show('equations')">        {{translate('equations')        }}</div>
+        <div class=button onclick="ecam.show('constants')">        {{translate('all_constants')    }}</div>
+        <div class=button onclick="ecam.show('benchmarks')">       {{translate('benchmarks')       }}</div>
+        <div class=button onclick="ecam.show('fuel_table')">       {{translate('Fuel types')       }}</div>
+        <div class=button onclick="ecam.show('tables')">           Data tables                       </div>
+        <div class=button onclick="ecam.show('non_revenue_water')">{{translate('non_revenue_water')}}</div>
+      </div>
+
+      <div v-if="is_debug_mode_enabled()" style="text-align:center;margin-top:1em">
+        <a onclick="ecam.show('development')">{{translate('dev')}}</a>
+      </div>
     </div>
   `,
 
@@ -45,32 +42,24 @@ let more=new Vue({
     <style>
       #more{
       }
-      #more ul{
-        list-style:none;
+      #more #buttons{
+        width:50%;
+        margin:auto;
+        display:grid;
+        grid-template-columns:49% 49%;
+        grid-gap:1% 2%;
       }
-      #more li.section{
-        padding:0;
-      }
-      #more .header{
+      #more #buttons div.button {
         color:white;
-        background:var(--color-level-generic);
-        padding:0.35em;
+        background-image:url("frontend/img/more/btn-bg.png");
+        background-size:cover;
+        text-align:center;
+        padding:2em;
+        border:none;
+        border:3px solid white;
       }
-      #more li.item{
-        padding:0.35em;
-        padding-left:0.5em;
-        border-bottom:1px solid #aaa;
-        font-size:larger;
-      }
-      #more li.item-l2{
-        padding-left:1em;
-      }
-      #more a {
-        cursor:pointer;
-      }
-      #more ul li.section ul li.item div.icon {
-        display:inline-block;
-        width:30px;
+      #more #buttons div.button:hover {
+        border:3px solid var(--color-level-generic-secondary);
       }
     </style>
   `,

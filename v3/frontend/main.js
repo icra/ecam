@@ -19,7 +19,6 @@ let ecam={
     more,
     help,
     about,
-    open_source,
     tier_b,
     overview,
     summary_ghg,

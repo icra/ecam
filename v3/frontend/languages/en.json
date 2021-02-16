@@ -1,6 +1,23 @@
 {
 "#below":"below",
 
+"#wsa_costs":"Do you know the utility costs",
+"#wst_costs":"Do you know the utility costs",
+"#wsd_costs":"Do you know the utility costs",
+"#wwc_costs":"Do you know the utility costs",
+"#wwt_costs":"Do you know the utility costs",
+"#wwo_costs":"Do you know the utility costs",
+
+"#ws_nrg_cost_descr":"Energy costs",
+"#ws_nrg_cost_expla":"Costs from electric energy consumption for all water supply utilities, based on the electricity bill during the entire assessment period",
+"#ws_run_cost_descr":"Total running costs",
+"#ws_run_cost_expla":"Total operations and maintenance net costs and internal manpower net costs (i.e. not including the capitalised cost of self constructed assets) related to water supply within the service area managed by the undertaking during the entire assessment period",
+
+"#ww_nrg_cost_descr":"Energy costs",
+"#ww_nrg_cost_expla":"Costs from electric energy consumption for all wastewater utilities, based on the electricity bill during the entire assessment period",
+"#ww_run_cost_descr":"Total running costs",
+"#ww_run_cost_expla":"Total operations and maintenance net costs and internal manpower net costs (i.e. not including the capitalised cost of self constructed assets) related to wastewater management within the service area managed by the undertaking during the entire assessment period",
+
 "#wwo_prot_con_descr":"Protein consumed by population with open defecation",
 "#wwo_prot_con_expla":"Protein consumed by population with open defecation during the assessment period",
 

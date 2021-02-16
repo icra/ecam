@@ -42,7 +42,7 @@ let Charts={
       .attr("text-anchor", "middle")
       .attr("class", "small")
       .text( function(d, i){
-        let value = data[i].value ? format(data[i].value,1) : 0;
+        let value = data[i].value ? format(data[i].value,0) : 0;
         return value >=5 ? value+'%' : '';
       })
     ;
@@ -55,7 +55,35 @@ let Charts={
     el.innerHTML="";
 
     if(data.length==0) return;
-    let keys = Object.keys(data[0]).slice(1);//llegenda
+
+    //legend: remove first key (name)
+    let keys = Object.keys(data[0]).slice(1);
+
+    //debugging info
+    //console.log({data});
+
+    //UNIT CHANGE from kg to Tons
+    if(yUnit=='kgCO2eq'){
+      //check if max value is > 1e6
+      let total_values = data.map(obj=>{
+        let sum=0;
+        keys.forEach(key=>{
+          sum += obj[key];
+        });
+        return sum;
+      });
+      let max_value=Math.max(...total_values);
+
+      //convert kg to tons
+      if(max_value >= 1e6){
+        data.forEach(obj=>{
+          keys.forEach(key=>{
+            obj[key] /= 1000;
+          });
+        });
+        yUnit="T CO2eq";
+      }
+    }
 
     var margin = {top:20,right:160,bottom:35,left:30};
     var width  = window.innerWidth-margin.left-margin.right-50;
@@ -134,7 +162,7 @@ let Charts={
         var xPosition = d3.mouse(this)[0] - 15;
         var yPosition = d3.mouse(this)[1] - 25;
         tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-        tooltip.select("text").text(format(d.y));
+        tooltip.select("text").text(format(d.y.toFixed(0)));
       });
 
     // Draw legend

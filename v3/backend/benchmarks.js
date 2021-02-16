@@ -195,6 +195,6 @@ let Benchmarks={
     else                                   return "Out of range";
   },
 
-  //fake benchmark to test dev utils
-  not_used_benchmark(){return false},
+  //use it to test if the function that locates not used benchmarks works
+  //not_used_benchmark(){return false},
 };

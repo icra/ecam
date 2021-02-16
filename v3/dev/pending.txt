@@ -10,7 +10,7 @@ ECAM V3 CODING TASKS
   - horizontal bar chart
     - https://bl.ocks.org/Andrew-Reid/0aedd5f3fb8b099e3e10690bd38bd458
 
-  - UNFCC categories (from v2)
+  - UNFCCC categories (from v2)
     - link for v2 version --> http://wacclim.org/ecam/edit.php?level=UNFCCC
 
   - add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js

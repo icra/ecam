@@ -10,6 +10,9 @@ let ecam_logo=new Vue({
     is_linear_menu_visible(){
       return linear_menu.visible;
     },
+    is_debug_mode_enabled(){
+      return debug;
+    },
   },
   template:`
     <div id=ecam_logo v-if="visible && Languages.ready">
@@ -35,7 +38,7 @@ let ecam_logo=new Vue({
       </div>
 
       <!--language-->
-      <div id=lang>
+      <div id=lang v-if="is_debug_mode_enabled()">
         <!--current language-->
         <div>{{Languages.current}}</div>
 

@@ -64,6 +64,14 @@ let Questions={
       advanced:1,
       otherQuestions:[ ],
     },
+    "wsa_costs":{
+      variables:[
+        "wsa_nrg_cost",
+        "wsa_run_cost",
+      ],
+      advanced:0,
+      otherQuestions:[ ],
+    },
   //wst
     "wst_engines":{
       variables:[
@@ -116,6 +124,15 @@ let Questions={
       advanced:1,
       otherQuestions:[],
     },
+    "wst_costs":{
+      variables:[
+        "wst_nrg_cost",
+        "wst_run_cost",
+      ],
+      advanced:0,
+      otherQuestions:[ ],
+    },
+
   //wsd
     "wsd_engines":{
       variables:[
@@ -214,6 +231,14 @@ let Questions={
       advanced:1,
       otherQuestions:[],
     },
+    "wsd_costs":{
+      variables:[
+        "wsd_nrg_cost",
+        "wsd_run_cost",
+      ],
+      advanced:0,
+      otherQuestions:[ ],
+    },
 
   //wwc
     "wwc_engines":{
@@ -258,6 +283,14 @@ let Questions={
       ],
       advanced:1,
       otherQuestions:[],
+    },
+    "wwc_costs":{
+      variables:[
+        "wwc_nrg_cost",
+        "wwc_run_cost",
+      ],
+      advanced:0,
+      otherQuestions:[ ],
     },
 
   //wwt
@@ -449,6 +482,15 @@ let Questions={
       otherQuestions:[],
     },
 
+    "wwt_costs":{
+      variables:[
+        "wwt_nrg_cost",
+        "wwt_run_cost",
+      ],
+      advanced:0,
+      otherQuestions:[ ],
+    },
+
   //Onsite
     "wwo_engines":{
       variables:[
@@ -570,6 +612,15 @@ let Questions={
         "wwo_reused_N",
         "wwo_reused_P",
         "wwo_ghg_avoided_reuse",
+      ],
+      advanced:0,
+      otherQuestions:[ ],
+    },
+
+    "wwo_costs":{
+      variables:[
+        "wwo_nrg_cost",
+        "wwo_run_cost",
       ],
       advanced:0,
       otherQuestions:[ ],

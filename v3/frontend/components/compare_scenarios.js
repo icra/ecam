@@ -75,7 +75,20 @@ let compare_scenarios=new Vue({
     draw_all_charts(){
       //draw bar charts
         Charts.draw_bar_chart(
-          'bar_chart_ghg_by_assessment',
+          'bar_chart_ghg_total',
+          this.scenarios_compared.map((scenario,i)=>{
+            let name  = `[${i+1}] `+scenario.General.Name;
+            let total = scenario.TotalGHG().total;
+            return {name, total};
+          }),
+          colors=[
+            "var(--color-level-generic)",
+          ],
+          'kgCO2eq',
+        );
+
+        Charts.draw_bar_chart(
+          'bar_chart_ghg_by_gas',
           this.scenarios_compared.map((scenario,i)=>{
             let name     = `[${i+1}] `+scenario.General.Name;
             let emission = scenario.TotalGHG();
@@ -167,18 +180,20 @@ let compare_scenarios=new Vue({
       <div
         style="
           display:grid;
-          grid-template-columns:25% 25% 25% 25%;
+          grid-template-columns:20% 20% 20% 20% 20%;
           width:80%;
           margin:auto;
         "
+        id=select_chart_container
       >
         <button :selected="current_view=='table'" @click="current_view='table'">Table</button>
-        <div style="display:grid;grid-template-columns:100%;">
-          <button :selected="current_view=='bar_chart_ghg_by_assessment'" @click="current_view='bar_chart_ghg_by_assessment'">Bar chart: GHG by assessment</button>
-          <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">Bar chart: energy by assessment</button>
-        </div>
+        <button :selected="current_view=='bar_chart_ghg_total'"         @click="current_view='bar_chart_ghg_total'"        >Bar chart: total GHG   </button>
+        <button :selected="current_view=='bar_chart_ghg_by_gas'"        @click="current_view='bar_chart_ghg_by_gas'"       >Bar chart: GHG by gas  </button>
         <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Bar chart: GHG by stage</button>
-        <button :selected="current_view=='bar_chart_ghg_by_substage'"   @click="current_view='bar_chart_ghg_by_substage'"  >Bar chart: GHG by substage</button>
+        <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">Bar chart: total energy</button>
+        <!-- hidden for now TBD TODO
+          <button :selected="current_view=='bar_chart_ghg_by_substage'"   @click="current_view='bar_chart_ghg_by_substage'"  >Bar chart: GHG by substage</button>
+        -->
       </div>
 
       <!--title-->
@@ -218,6 +233,7 @@ let compare_scenarios=new Vue({
 
         <!--compare scenarios table-->
         <table style="margin:10px auto" v-if="scenarios_compared.length">
+          <!--scenarios names-->
           <tbody>
             <tr>
               <td></td>
@@ -229,47 +245,51 @@ let compare_scenarios=new Vue({
             </tr>
           </tbody>
 
-          <!--TotalGHG-->
-          <tr>
-            <td :colspan="1+scenarios_compared.length">
-              Summary (work in progress TODO)
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {{translate('TotalGHG_descr')}}
-            </td>
-            <td v-for="scenario,i in scenarios_compared">
-              <div class=number>
-                {{format(
-                  scenario.TotalGHG().total
-                )}}
-              </div>
-              <div
-                class="unit"
-                style="text-align:right"
-                v-html="get_base_unit('TotalGHG', get_scenarios[i]).prettify()"
-              ></div>
-            </td>
-          </tr>
+          <!--summary: TotalGHG-->
+          <tbody>
+            <tr>
+              <td :colspan="1+scenarios_compared.length">
+                Summary (work in progress TODO)
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {{translate('TotalGHG_descr')}}
+              </td>
+              <td v-for="scenario in scenarios_compared">
+                <div class=number>
+                  {{
+                    format(scenario.TotalGHG().total)
+                  }}
+                </div>
+                <div
+                  class="unit"
+                  style="text-align:right"
+                  v-html="get_base_unit('TotalGHG', scenario).prettify()"
+                ></div>
+              </td>
+            </tr>
+          </tbody>
 
-          <!--wxx_KPI_GHG-->
+          <!--summary: wxx_KPI_GHG-->
           <tbody v-for="level in Structure.filter(s=>!s.sublevel)">
             <tr v-for="stage in Structure.filter(s=>s.sublevel && s.level==level.level)">
               <td>
                 {{translate(stage.prefix+'_KPI_GHG_descr')}}
               </td>
               <!--variable value-->
-              <td v-for="scenario,i in scenarios_compared">
+              <td v-for="scenario in scenarios_compared">
                 <div class=number>
-                  {{format(
-                    scenario[stage.level][stage.sublevel].map(ss=>ss[stage.prefix+'_KPI_GHG']().total).sum()
-                  )}}
+                  {{
+                    format(
+                     scenario[stage.level][stage.sublevel].map(ss=>ss[stage.prefix+'_KPI_GHG']().total).sum()
+                    )
+                  }}
                 </div>
                 <div
                   class="unit"
                   style="text-align:right"
-                  v-html="get_base_unit(stage.prefix+'_KPI_GHG', get_scenarios[i]).prettify()"
+                  v-html="get_base_unit(stage.prefix+'_KPI_GHG', scenario).prettify()"
                 ></div>
               </td>
             </tr>
@@ -279,7 +299,7 @@ let compare_scenarios=new Vue({
                   translate(level.prefix+'_KPI_GHG_descr')
                 }}
               </td>
-              <td v-for="scenario,i in scenarios_compared">
+              <td v-for="scenario in scenarios_compared">
                 <div class=number>
                   {{format(
                     scenario[level.level][level.prefix+'_KPI_GHG']().total
@@ -288,14 +308,21 @@ let compare_scenarios=new Vue({
                 <div
                   class="unit"
                   style="text-align:right"
-                  v-html="get_base_unit(level.prefix+'_KPI_GHG', get_scenarios[i]).prettify()"
+                  v-html="get_base_unit(level.prefix+'_KPI_GHG', scenario).prettify()"
                 ></div>
               </td>
             </tr>
           </tbody>
 
           <!--iterate stages-->
-          <tbody v-for="stage in [{level:'General'}].concat(Structure)">
+          <tbody 
+            v-for="stage in [{level:'General'}].concat(Structure)"
+            v-if="
+              !stage.sublevel
+              ||
+              get_scenarios().map(sce=>sce[stage.level][stage.sublevel].length).sum()
+            "
+          >
             <tr>
               <th
                 :colspan="1+scenarios_compared.length"
@@ -350,7 +377,7 @@ let compare_scenarios=new Vue({
                   <div
                     class="unit"
                     style="text-align:right"
-                    v-html="get_base_unit(v.code, get_scenarios[i]).prettify()"
+                    v-html="get_base_unit(v.code, scenarios_compared[i]).prettify()"
                   ></div>
                 </div>
               </td>
@@ -362,31 +389,33 @@ let compare_scenarios=new Vue({
       <!--charts-->
       <div>
         <div
-          v-if="current_view=='bar_chart_ghg_by_assessment'"
+          v-if="current_view=='bar_chart_ghg_total'"
           class="chart_container bar"
-        >
-          <div id="bar_chart_ghg_by_assessment"></div>
+        ><div id="bar_chart_ghg_total"></div>
+        </div>
+
+        <div
+          v-if="current_view=='bar_chart_ghg_by_gas'"
+          class="chart_container bar"
+        ><div id="bar_chart_ghg_by_gas"></div>
         </div>
 
         <div
           v-if="current_view=='bar_chart_nrg_by_assessment'"
           class="chart_container bar"
-        >
-          <div id="bar_chart_nrg_by_assessment"></div>
+        ><div id="bar_chart_nrg_by_assessment"></div>
         </div>
 
         <div
           v-if="current_view=='bar_chart_ghg_by_stage'"
           class="chart_container bar"
-        >
-          <div id="bar_chart_ghg_by_stage"></div>
+        ><div id="bar_chart_ghg_by_stage"></div>
         </div>
 
         <div
           v-if="current_view=='bar_chart_ghg_by_substage'"
           class="chart_container bar"
-        >
-          <div id="bar_chart_ghg_by_substage"></div>
+        ><div id="bar_chart_ghg_by_substage"></div>
         </div>
       </div>
 
@@ -434,6 +463,11 @@ let compare_scenarios=new Vue({
       }
       #compare_scenarios div.chart_container.bar .y .tick line {
         stroke: #ddd;
+      }
+      #compare_scenarios div#select_chart_container button {
+        height:50px;
+      }
+      #compare_scenarios div#select_chart_container button {
       }
     </style>
   `,

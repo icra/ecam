@@ -1,5 +1,10 @@
 /*convert number to formated string: i.e. "3.999,4" instead of 3999.4*/
-function format(number,digits){
+function format(number,digits,divisor){
+
+  //deal with unit changes from here
+  if(divisor){
+    number /= divisor;
+  }
 
   //default digits for values
   if(digits==undefined){

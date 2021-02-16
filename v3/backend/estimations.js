@@ -1,6 +1,33 @@
 /* ESTIMATIONS: INPUTS WITH EQUATIONS ASSOCIATED*/
 //maybe they can be moved inside the Ecam global class for consistency TODO
 let Estimations={
+  //ws
+    ws_nrg_cost(stage){ //energy cost
+      let wsa = Global.Water.Abstraction .map(s=>s.wsa_nrg_cost).sum();
+      let wst = Global.Water.Treatment   .map(s=>s.wst_nrg_cost).sum();
+      let wsd = Global.Water.Distribution.map(s=>s.wsd_nrg_cost).sum();
+      return wsa+wst+wsd;
+    },
+    ws_run_cost(stage){ //total cost
+      let wsa = Global.Water.Abstraction .map(s=>s.wsa_run_cost).sum();
+      let wst = Global.Water.Treatment   .map(s=>s.wst_run_cost).sum();
+      let wsd = Global.Water.Distribution.map(s=>s.wsd_run_cost).sum();
+      return wsa+wst+wsd;
+    },
+  //ww
+    ww_nrg_cost(stage){
+      let wwc = Global.Waste.Collection.map(s=>s.wwc_nrg_cost).sum();
+      let wwt = Global.Waste.Treatment .map(s=>s.wwt_nrg_cost).sum();
+      let wwo = Global.Waste.Onsite    .map(s=>s.wwo_nrg_cost).sum();
+      return wwc+wwt+wwo;
+    },
+    ww_run_cost(stage){
+      let wwc = Global.Waste.Collection.map(s=>s.wwc_run_cost).sum();
+      let wwt = Global.Waste.Treatment .map(s=>s.wwt_run_cost).sum();
+      let wwo = Global.Waste.Onsite    .map(s=>s.wwo_run_cost).sum();
+      return wwc+wwt+wwo;
+    },
+
   //emission factors for grid electricity
     wsa_conv_kwh(stage){return Global.General.conv_kwh_co2},
     wst_conv_kwh(stage){return Global.General.conv_kwh_co2},

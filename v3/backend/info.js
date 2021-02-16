@@ -11,12 +11,18 @@
 
 let Info={
 	//UNFCCC categories TODO
-	unfccc_1A1 :{magnitude:"Mass",unit:"kg CO2eq"},
-	unfccc_1A3 :{magnitude:"Mass",unit:"kg CO2eq"},
-	unfccc_5A  :{magnitude:"Mass",unit:"kg CO2eq"},
-	unfccc_5B  :{magnitude:"Mass",unit:"kg CO2eq"},
-	unfccc_5C  :{magnitude:"Mass",unit:"kg CO2eq"},
-	unfccc_5D  :{magnitude:"Mass",unit:"kg CO2eq"},
+	unfccc_1A1:{magnitude:"Mass",unit:"kgCO2eq"},
+	unfccc_1A3:{magnitude:"Mass",unit:"kgCO2eq"},
+	unfccc_5A :{magnitude:"Mass",unit:"kgCO2eq"},
+	unfccc_5B :{magnitude:"Mass",unit:"kgCO2eq"},
+	unfccc_5C :{magnitude:"Mass",unit:"kgCO2eq"},
+	unfccc_5D :{magnitude:"Mass",unit:"kgCO2eq"},
+
+  //costs
+  ws_nrg_cost:{magnitude:"Currency",unit:"USD"},
+  ws_run_cost:{magnitude:"Currency",unit:"USD"},
+  ww_nrg_cost:{magnitude:"Currency",unit:"USD"},
+  ww_run_cost:{magnitude:"Currency",unit:"USD"},
 
   //new
   wwo_prot_con:{magnitude:"Mass",unit:"kg"},
