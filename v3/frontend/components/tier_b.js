@@ -22,7 +22,7 @@ let tier_b=new Vue({
     Filters,          //definition (list of variables for each filter)
     filters_on:false, //all filters on
     filters_active:{  //each filter on/off
-      "GHG Emissions"      :true,
+      "GHG Emissions"      :false,
       "Energy Performance" :false,
       "Pump Efficiency"    :false,
       "Sludge Management"  :false,
@@ -315,26 +315,22 @@ let tier_b=new Vue({
 
       <!--filters-->
       <div id=filters>
-        <div
-          class=filter
-          @click="enable_all_filters()"
-          title="Enable all filters"
-        >
-          <b><code>Filters</code></b>
-        </div>
         <div>
-          <button @click="filters_on^=1"
-            :style="{background:filters_on?'var(--color-secondary-green)':''}">
-            <span :style="{fontWeight:filters_on?'bold':''}">ON</span>/<span :style="{fontWeight:filters_on?'':'bold'}">OFF</span>
-          </button>
+          <button
+            @click="disable_all_filters();filters_on=false"
+            :disabled="filters_on==false"
+            :title="filters_on ? 'Disable all filters':'You are viewing all inputs'"
+            v-html="'Show all inputs'"
+          ></button>
         </div>
         <div
-          v-if="filters_on && get_number_of_variables_shown_by_filter(key)"
+          v-if="get_number_of_variables_shown_by_filter(key)"
           v-for="key in Object.keys(Filters)"
           class=filter
-          @click="disable_all_filters();filters_active[key]=true;"
+          @click="filters_on=true;disable_all_filters();filters_active[key]=true;"
         >
-          <input type=checkbox
+          <input
+            type=checkbox
             :checked="filters_active[key]"
             @click.stop="filters_active[key]=$event.target.checked"
           >

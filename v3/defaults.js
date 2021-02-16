@@ -5,7 +5,7 @@
 */
 
 //DEVELOPMENT MODE
-let debug=0;
+let debug=1;
 
 /*frontend elements: set visibility*/
 ecam_logo.visible   = 1;
@@ -44,7 +44,7 @@ if(debug){
 
 if(debug){
   //initial page to display
-  ecam.show('about'); //view page
-  //go_to('Water','Abstraction'); //view inventory stage
+  //ecam.show('about'); //view page
+  go_to('Water','Abstraction'); //view inventory stage
   //variable.view('wwt_KPI_GHG_slu_stockpilling'); //view variable detailed info
 }
