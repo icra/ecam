@@ -1,11 +1,9 @@
+let debug=0; //debug and/or development mode
 /*
   Default configuration and debug mode
   (backend and frontend)
   this file is intended to help development
 */
-
-//DEVELOPMENT MODE
-let debug=1;
 
 /*frontend elements: set visibility*/
 ecam_logo.visible   = 1;
