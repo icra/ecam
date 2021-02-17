@@ -86,15 +86,14 @@ let stages_menu=new Vue({
     <!--linear menu COMPONENT-->
     <div id=stages_menu v-if="visible && Languages.ready">
       <div style="padding:8px 2rem">
+        <!--title-->
         <h1 style="padding-left:0">
           Inventory: urban water cycle stages
           <button @click="show_table^=1">show/hide table</button>
-
-          <button class=save_btn @click="save_to_file()" title="save the current list of assessments to a file"
-            style="
-              cursor:pointer;
-              float:right;
-            "
+          <button
+            @click="save_to_file()"
+            title="save the current list of assessments to a file"
+            style="cursor:pointer;float:right;"
           >
             <div style="display:flex;align-items:center">
               <img
@@ -146,6 +145,7 @@ let stages_menu=new Vue({
                 v-if="s.sublevel"
                 @click="add_substage(s.level,s.sublevel)"
                 :style="{background:'var(--color-level-'+s.level+'-secondary)',cursor:'pointer'}"
+                title="Create a new substage"
               >
                 <div style="display:flex;align-items:center">
                   <div>
@@ -171,7 +171,10 @@ let stages_menu=new Vue({
                   padding:0;
                 "
               >
-                <div v-if="Global[s.level][s.sublevel].length==0" style="text-align:center">
+                <div
+                  v-if="Global[s.level][s.sublevel].length==0"
+                  style="text-align:center;padding:0.5em"
+                >
                   <small style="color:#666">~no substages</small>
                 </div>
                 <div
@@ -179,7 +182,7 @@ let stages_menu=new Vue({
                   v-for="ss,i in Global[s.level][s.sublevel]"
                   @click="go_to_substage(ss)"
                   :selected_substage="is_substage_selected(ss)"
-                  style="cursor:pointer;padding:5px 2px;border-bottom:1px solid #ccc"
+                  class=substage
                 >
                   <div
                     style="
@@ -214,10 +217,13 @@ let stages_menu=new Vue({
                         </div>
                       </div>
                     </div>
+
                     <!--ss emissions-->
                     <div class=number style="font-size:smaller">
                       <span>{{format(ss[s.prefix+'_KPI_GHG']().total)}}</span>
-                      <span class=unit>kgCO<sub>2</sub>eq</span>
+                      <span class=unit>
+                        kg<sub>CO<sub>2</sub>eq</sub>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -227,14 +233,10 @@ let stages_menu=new Vue({
             <!--total ghg of substages-->
             <tr v-if="show_substages_summary">
               <td v-for="s in Structure.filter(s=>s.sublevel)">
-                <div class=flex style="justify-content:space-between;font-size:smaller;">
-                  <div>
-                    Total {{s.sublevel}}
-                  </div>
-                  <div style="font-weight:bold">
-                    <span v-html="format(get_sum_of_substages(s.level, s.sublevel, s.prefix+'_KPI_GHG'))"></span>
-                    <span class=unit>kgCO<sub>2</sub>eq</span>
-                  </div>
+                <div style="font-size:smaller;margin-top:10px;text-align:center">
+                  <span>Total {{s.sublevel}}:</span>
+                  <b v-html="format(get_sum_of_substages(s.level, s.sublevel, s.prefix+'_KPI_GHG'))"></b>
+                  <span class=unit>kgCO<sub>2</sub>eq</span>
                 </div>
               </td>
             </tr>
@@ -311,6 +313,11 @@ let stages_menu=new Vue({
         background:var(--color-level-generic);
         border-color:var(--color-level-generic);
         color:white;
+      }
+      #stages_menu div.substage {
+        cursor:pointer;
+        padding:7px;
+        border-bottom:1px solid #ccc;
       }
     </style>
   `,

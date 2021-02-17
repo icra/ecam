@@ -1,4 +1,4 @@
-let debug=0; //debug and/or development mode
+let debug=1; //debug and/or development mode
 /*
   Default configuration and debug mode
   (backend and frontend)
