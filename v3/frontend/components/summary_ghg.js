@@ -29,12 +29,12 @@ let summary_ghg=new Vue({
 
     //deal with unit changes
     set_emissions_unit(){
-      if(Global.TotalGHG().total>1000){ this.current_unit="T CO2eq"; }
+      if(Global.TotalGHG().total>1000){ this.current_unit="t CO2eq"; }
       else{                             this.current_unit="kgCO2eq"; }
     },
     //get divisor for emissions with unit changed
     get_divisor(){
-      if(this.current_unit=="T CO2eq"){ return 1000; }
+      if(this.current_unit=="t CO2eq"){ return 1000; }
       return false;
     },
 

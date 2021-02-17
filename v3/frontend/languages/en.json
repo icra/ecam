@@ -1,12 +1,12 @@
 {
 "#below":"below",
 
-"#wsa_costs":"Do you know the utility costs",
-"#wst_costs":"Do you know the utility costs",
-"#wsd_costs":"Do you know the utility costs",
-"#wwc_costs":"Do you know the utility costs",
-"#wwt_costs":"Do you know the utility costs",
-"#wwo_costs":"Do you know the utility costs",
+"#wsa_costs":"Do you know the utility costs by stage",
+"#wst_costs":"Do you know the utility costs by stage",
+"#wsd_costs":"Do you know the utility costs by stage",
+"#wwc_costs":"Do you know the utility costs by stage",
+"#wwt_costs":"Do you know the utility costs by stage",
+"#wwo_costs":"Do you know the utility costs by stage",
 
 "#ws_nrg_cost_descr":"Energy costs",
 "#ws_nrg_cost_expla":"Costs from electric energy consumption for all water supply utilities, based on the electricity bill during the entire assessment period",

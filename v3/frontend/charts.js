@@ -81,7 +81,7 @@ let Charts={
             obj[key] /= 1000;
           });
         });
-        yUnit="T CO2eq";
+        yUnit="t CO2eq";
       }
     }
 
