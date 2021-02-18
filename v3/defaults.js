@@ -1,4 +1,4 @@
-let debug=0; //debug and/or development mode
+let debug=false; //development mode ON
 /*
   Default configuration and debug mode
   (backend and frontend)
@@ -42,7 +42,7 @@ if(debug){
 
 if(debug){
   //initial page to display
-  //ecam.show('about'); //view page
-  go_to('Water','Abstraction'); //view inventory stage
+  ecam.show('about'); //view page
+  //go_to('Water','Abstraction'); //view inventory stage
   //variable.view('wwt_KPI_GHG_slu_stockpilling'); //view variable detailed info
 }

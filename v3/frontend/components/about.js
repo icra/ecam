@@ -11,7 +11,7 @@ let about = new Vue({
     <div id=about v-if="visible && Languages.ready">
       <!--first div-->
       <div style="background:#eff5fb;">
-        <h1>About (page in construction) TODO</h1>
+        <h1>About</h1>
 
         <!--image with text-->
         <div style="
@@ -23,9 +23,7 @@ let about = new Vue({
           padding:3em 3em;
           height:200px;
         ">
-          <div style="
-            width:50%;
-          ">
+          <div style="width:50%;">
             <div style="font-size:30px">
               <b>ECAM 3.0</b>
             </div>
@@ -41,7 +39,7 @@ let about = new Vue({
           </div>
         </div>
 
-        <!--paragraph-->
+        <!--paragraphs under image-->
         <div>
           <p>
             The “Energy Performance and Carbon Emissions Assessment and
@@ -75,6 +73,25 @@ let about = new Vue({
           <p>
             ECAM 3.0 is free and open source (2015-{{(new Date()).getFullYear()}}
             <a target=_blank href='frontend/license.txt'>{{translate('about_license')}}</a>).
+          </p>
+
+          <p>
+            Links:
+            <a target=_blank href='http://www.icra.cat/'>ICRA</a>
+            |
+            <a target=_blank href='http://www.iwa-network.org'>IWA</a>
+            |
+            <a target=_blank href='https://www.giz.de/en/html/index.html'>GIZ</a>
+            |
+            <a target=_blank href='https://wacclim.org'>WaCCliM project</a>
+            |
+            <a target=_blank href='http://www.lnec.pt/pt/'>LNEC</a>
+            |
+            <a target=_blank href='http://www.ita.upv.es/index-es.php'>ITA, Universitat Politècnica de València</a>
+            |
+            <a target=_blank href='http://www.cobaltwater-global.com/'>Cobalt Water Global</a>
+            |
+            <a target=_blank href="https://www.international-climate-initiative.com/">International Climate Initiative (IKI)</a>
           </p>
         </div>
 
@@ -113,23 +130,11 @@ let about = new Vue({
             </p>
           </div>
         </div>
-
-        <p>
-          <a target=_blank href='http://www.icra.cat/'>ICRA</a>,<br>
-          <a target=_blank href='http://www.iwa-network.org'>IWA</a>,<br>
-          <a target=_blank href='https://www.giz.de/en/html/index.html'>GIZ</a>,<br>
-          <a target=_blank href='https://wacclim.org'>WaCCliM project</a>,<br>
-          <a target=_blank href='http://www.lnec.pt/pt/'>LNEC</a>,<br>
-          <a target=_blank href='http://www.ita.upv.es/index-es.php'>ITA, Universitat Politècnica de València)</a>,<br>
-          <a target=_blank href='http://www.cobaltwater-global.com/'>Cobalt Water Global</a>,<br>
-          <a target=_blank href="https://www.international-climate-initiative.com/">International Climate Initiative (IKI)</a>,<br>
-        </p>
       </div>
 
       <!--special acknowledgements-->
       <div>
         <h1 style="padding-left:0">Special acknowledgements</h1>
-
         <p>
           <div>
             ECAM tool is the result of a collaborative effort. WaCCliM project team thanks:
@@ -149,11 +154,7 @@ let about = new Vue({
             </li>
           </ul>
         </p>
-
-        <div style="
-          display:flex;
-          align-items:center;
-        ">
+        <div style="display:flex;align-items:center;">
           <div>
             <img src="frontend/img/CC_license_big.png" alt="">
           </div>
@@ -182,8 +183,7 @@ let about = new Vue({
       #about img.icon {
         display:block;
         margin:auto;
-        width:75px;
-        height:75px;
+        height:46px;
       }
     </style>
   `,
