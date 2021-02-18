@@ -1376,7 +1376,7 @@
 "#wwt_mass_slu_comp_descr":"Sludge composted (dry weight)",
 "#wwt_mass_slu_comp_expla":"Amount of sludge that is sent to composting (dry weight)",
 "#wwt_mass_slu_descr":"Amount of raw sludge removed from wastewater treatment as dry mass",
-"#wwt_mass_slu_expla":"Amount of raw sludge removed from wastewater treatment as dry mass during the assessment period (S_mass in eq.6.3B IPCC 2019)",
+"#wwt_mass_slu_expla":"Amount of raw sludge removed from wastewater treatment as dry mass during the assessment period",
 "#wwt_mass_slu_inc_descr":"Sludge incinerated (dry weight)",
 "#wwt_mass_slu_inc_expla":"Amount of sludge that is sent to incineration (dry weight)",
 "#wwt_mass_slu_land_descr":"Sludge sent to landfilling (dry weight)",

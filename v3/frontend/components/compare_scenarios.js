@@ -122,10 +122,16 @@ let compare_scenarios=new Vue({
           'bar_chart_ghg_by_stage',
           this.scenarios_compared.map((scenario,i)=>{
             let column={};
+
+            //column name
             column.name = scenario.General.Name;
+
+            //column subdivisions
             Structure.filter(s=>s.sublevel).map(s=>{
-              column[s.prefix] = scenario[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum();
+              let key     = `${s.prefix.substring(0,2)}-${s.sublevel}`;
+              column[key] = scenario[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum();
             });
+
             return column;
           }),
           Structure.filter(s=>s.sublevel).map(s=>s.color), //colors
@@ -315,7 +321,7 @@ let compare_scenarios=new Vue({
           </tbody>
 
           <!--iterate stages-->
-          <tbody 
+          <tbody
             v-for="stage in [{level:'General'}].concat(Structure)"
             v-if="
               !stage.sublevel
