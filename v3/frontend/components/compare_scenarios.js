@@ -181,7 +181,6 @@ let compare_scenarios=new Vue({
 
   template:`
     <div id=compare_scenarios v-if="visible && Languages.ready">
-
       <!--buttons select view-->
       <div
         style="
@@ -192,11 +191,11 @@ let compare_scenarios=new Vue({
         "
         id=select_chart_container
       >
-        <button :selected="current_view=='table'" @click="current_view='table'">Table</button>
-        <button :selected="current_view=='bar_chart_ghg_total'"         @click="current_view='bar_chart_ghg_total'"        >Bar chart: total GHG   </button>
-        <button :selected="current_view=='bar_chart_ghg_by_gas'"        @click="current_view='bar_chart_ghg_by_gas'"       >Bar chart: GHG by gas  </button>
-        <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Bar chart: GHG by stage</button>
-        <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">Bar chart: total energy</button>
+        <button :selected="current_view=='table'"                       @click="current_view='table'"                      >Table: inputs &amp; outputs        </button>
+        <button :selected="current_view=='bar_chart_ghg_total'"         @click="current_view='bar_chart_ghg_total'"        >Bar chart: total GHG emissions     </button>
+        <button :selected="current_view=='bar_chart_ghg_by_gas'"        @click="current_view='bar_chart_ghg_by_gas'"       >Bar chart: emissions by GHG        </button>
+        <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Bar chart: emissions by stage      </button>
+        <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">Bar chart: total energy consumption</button>
         <!-- hidden for now TBD TODO
           <button :selected="current_view=='bar_chart_ghg_by_substage'"   @click="current_view='bar_chart_ghg_by_substage'"  >Bar chart: GHG by substage</button>
         -->
@@ -205,6 +204,7 @@ let compare_scenarios=new Vue({
       <!--title-->
       <h1 style="text-align:center">Compare assessments</h1>
 
+      <!--select scenarios-->
       <div>
         <p style="text-align:center;color:#666">
           <b>Select the assessments to be compared</b>
@@ -227,7 +227,7 @@ let compare_scenarios=new Vue({
         </div>
       </div>
 
-      <!--table comparison-->
+      <!--table-->
       <div v-if="current_view=='table'">
         <!--choose inputs and/or outputs-->
         <div>
@@ -251,38 +251,25 @@ let compare_scenarios=new Vue({
             </tr>
           </tbody>
 
-          <!--summary: TotalGHG-->
-          <tbody>
-            <tr>
-              <td :colspan="1+scenarios_compared.length">
-                Summary (work in progress TODO)
-              </td>
-            </tr>
-            <tr>
-              <td>
-                {{translate('TotalGHG_descr')}}
-              </td>
-              <td v-for="scenario in scenarios_compared">
-                <div class=number>
-                  {{
-                    format(scenario.TotalGHG().total)
-                  }}
-                </div>
-                <div
-                  class="unit"
-                  style="text-align:right"
-                  v-html="get_base_unit('TotalGHG', scenario).prettify()"
-                ></div>
-              </td>
-            </tr>
-          </tbody>
+          <!--summary header-->
+          <tr class=summary_row>
+            <th :colspan="1+scenarios_compared.length">
+              <div style="font-size:x-large;font-weight:bold">
+                Summary
+              </div>
+            </th>
+          </tr>
 
-          <!--summary: wxx_KPI_GHG-->
+
+          <!--summary 1/2: wxx_KPI_GHG-->
           <tbody v-for="level in Structure.filter(s=>!s.sublevel)">
-            <tr v-for="stage in Structure.filter(s=>s.sublevel && s.level==level.level)">
-              <td>
+            <tr 
+              class=summary_row
+              v-for="stage in Structure.filter(s=>s.sublevel && s.level==level.level)"
+            >
+              <th>
                 {{translate(stage.prefix+'_KPI_GHG_descr')}}
-              </td>
+              </th>
               <!--variable value-->
               <td v-for="scenario in scenarios_compared">
                 <div class=number>
@@ -299,12 +286,12 @@ let compare_scenarios=new Vue({
                 ></div>
               </td>
             </tr>
-            <tr>
-              <td>
+            <tr class=summary_row>
+              <th style="font-weight:bold">
                 {{
                   translate(level.prefix+'_KPI_GHG_descr')
                 }}
-              </td>
+              </th>
               <td v-for="scenario in scenarios_compared">
                 <div class=number>
                   {{format(
@@ -320,12 +307,32 @@ let compare_scenarios=new Vue({
             </tr>
           </tbody>
 
+          <!--summary 2/2: total-->
+          <tbody>
+            <tr class=summary_row>
+              <th style="font-weight:bolder;">
+                {{translate('TotalGHG_descr')}}
+              </th>
+              <td v-for="scenario in scenarios_compared">
+                <div class=number>
+                  {{
+                    format(scenario.TotalGHG().total)
+                  }}
+                </div>
+                <div
+                  class="unit"
+                  style="text-align:right"
+                  v-html="get_base_unit('TotalGHG', scenario).prettify()"
+                ></div>
+              </td>
+            </tr>
+          </tbody>
+
           <!--iterate stages-->
           <tbody
             v-for="stage in [{level:'General'}].concat(Structure)"
             v-if="
-              !stage.sublevel
-              ||
+              !stage.sublevel ||
               get_scenarios().map(sce=>sce[stage.level][stage.sublevel].length).sum()
             "
           >
@@ -474,6 +481,12 @@ let compare_scenarios=new Vue({
         height:50px;
       }
       #compare_scenarios div#select_chart_container button {
+      }
+
+      #compare_scenarios tr.summary_row th {
+        background:var(--color-level-generic);
+        color:white;
+        text-align:left;
       }
     </style>
   `,

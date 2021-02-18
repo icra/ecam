@@ -154,7 +154,7 @@ let landing = new Vue({
       <!--questions-->
       <div id=questions>
         <div>
-          Do you have questions?
+          Do you have questions or feedback?
         </div>
         <button
           style="

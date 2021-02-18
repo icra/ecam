@@ -220,7 +220,7 @@ let stages_menu=new Vue({
 
                     <!--ss emissions-->
                     <div class=number style="font-size:smaller">
-                      <span>{{format(ss[s.prefix+'_KPI_GHG']().total)}}</span>
+                      <span>{{ format(ss[s.prefix+'_KPI_GHG']().total, 0) }}</span>
                       <span class=unit>
                         kg<sub>CO<sub>2</sub>eq</sub>
                       </span>
@@ -235,7 +235,7 @@ let stages_menu=new Vue({
               <td v-for="s in Structure.filter(s=>s.sublevel)">
                 <div style="font-size:smaller;margin-top:10px;text-align:center">
                   <span>Total {{s.sublevel}}:</span>
-                  <b v-html="format(get_sum_of_substages(s.level, s.sublevel, s.prefix+'_KPI_GHG'))"></b>
+                  <b v-html="format(get_sum_of_substages(s.level, s.sublevel, s.prefix+'_KPI_GHG'), 0)"></b>
                   <span class=unit>kgCO<sub>2</sub>eq</span>
                 </div>
               </td>

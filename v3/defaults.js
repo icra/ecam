@@ -42,7 +42,7 @@ if(debug){
 
 if(debug){
   //initial page to display
-  ecam.show('about'); //view page
+  ecam.show('compare_scenarios'); //view page
   //go_to('Water','Abstraction'); //view inventory stage
   //variable.view('wwt_KPI_GHG_slu_stockpilling'); //view variable detailed info
 }
