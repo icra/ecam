@@ -7,6 +7,15 @@ let Charts={
     "ch4":"#ffaa6e",
   },
 
+  unfccc_colors:{
+    "unfccc_1A1":"#0e73c8",
+    "unfccc_1A3":"#1dfdba",
+    "unfccc_5A" :"#89d13c",
+    "unfccc_5B" :"#c31bf6",
+    "unfccc_5C" :"#5dd144",
+    "unfccc_5D" :"#c45b33",
+  },
+
   //create a pie chart inside "id_container"
   draw_pie_chart(id_container, data, colors, width, height) {
     let container = document.getElementById(id_container);

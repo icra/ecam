@@ -20,6 +20,7 @@ let summary_ghg=new Vue({
     Global,
     Structure,
     Languages,
+    UNFCCC,
   },
 
   methods:{
@@ -106,6 +107,13 @@ let summary_ghg=new Vue({
             return {label,value};
           }),
           Structure.filter(s=>s.sublevel).map(s=>s.color),
+        );
+
+        Charts.draw_pie_chart('chart_unfccc',
+          Object.keys(UNFCCC).map(key=>{
+            return {label:key, value:UNFCCC[key](Global)}
+          }),
+          Object.values(Charts.unfccc_colors),
         );
       //--
 
@@ -473,14 +481,27 @@ let summary_ghg=new Vue({
               </div>
             </div>
 
-            <div class=chart_container>
+            <div class=chart_container style="border-right:none">
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
                 GHG emissions by UNFCCC category
               </div>
-              <table border=1 class=ghg_table>
-                <tr><td>TODO</td></tr>
-              </table>
+              <div class=flex>
+                <table border=1 class=ghg_table>
+                  <tr v-for="key in Object.keys(UNFCCC)">
+                    <td :style="{background:Charts.unfccc_colors[key]}">
+                    </td>
+                    <td>
+                      <div v-html="key.prettify()"></div>
+                    </td>
+                    <td>
+                      <div v-html="format(UNFCCC[key](Global))"></div>
+                    </td>
+                    <td class=unit v-html="'kgCO2eq'.prettify()"></td>
+                  </tr>
+                </table>
+                <div id=chart_unfccc></div>
+              </div>
             </div>
           </div>
 

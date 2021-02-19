@@ -13,6 +13,7 @@ let report = new Vue({
     Structure,
     GWP_reports,
     Languages,
+    UNFCCC,
   },
 
   methods:{
@@ -92,6 +93,13 @@ let report = new Vue({
           }),
           Structure.filter(s=>s.sublevel).map(s=>s.color),
           width, height,
+        );
+
+        Charts.draw_pie_chart('chart_unfccc',
+          Object.keys(UNFCCC).map(key=>{
+            return {label:key, value:UNFCCC[key](Global)}
+          }),
+          Object.values(Charts.unfccc_colors),
         );
       //--
 
@@ -387,9 +395,16 @@ let report = new Vue({
                   <div class=chart_title>
                     GHG emissions by UNFCCC category
                   </div>
-                  <table class=legend>
-                    <tr><td>TODO</td></tr>
-                  </table>
+                  <div class=flex>
+                    <table class=legend>
+                      <tr v-for="key in Object.keys(UNFCCC)">
+                        <td :style="{color:Charts.unfccc_colors[key]}">
+                          <div v-html="key.prettify()"></div>
+                        </td>
+                      </tr>
+                    </table>
+                    <div id=chart_unfccc></div>
+                  </div>
                 </div>
               </div>
             </div>
