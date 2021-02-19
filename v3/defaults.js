@@ -1,4 +1,4 @@
-let debug=true; //development mode ON
+let debug=false; //development mode ON
 /*
   Default configuration and debug mode
   (backend and frontend)
