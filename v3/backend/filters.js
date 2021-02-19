@@ -170,11 +170,22 @@ let Filters = {
 ],
 
 "Other":[
+  "ws_nrg_cost",
+  "ws_resi_pop",
+  "ws_run_cost",
   "wsa_costs",
   "wst_costs",
+  "wst_mass_slu",
+  "wst_treatmen",
+  "wst_treatment_perf",
+  "wst_vol_trea",
   "wsd_costs",
+  "wsd_service_perf",
+  "wsd_topographic",
+  "wsd_water_eff",
   "wwc_costs",
   "wwt_costs",
+  "wwt_treatment_perf",
   "wwo_costs",
 ],
 
