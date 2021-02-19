@@ -40,100 +40,102 @@ let about = new Vue({
         </div>
 
         <!--paragraphs under image-->
-        <div>
-          <p>
-            The “Energy Performance and Carbon Emissions Assessment and
-            Monitoring Tool” (ECAM) offers unique capabilities for assessing
-            greenhouse gas emissions and energy consumption at a system-wide
-            level. Gain greater insights by identifying areas to reduce
-            greenhouse gas emissions, increase energy savings and improve
-            overall efficiencies to reduce costs.
-          </p>
+        <div style="max-width:1013px">
+          <div>
+            <p>
+              The “Energy Performance and Carbon Emissions Assessment and
+              Monitoring Tool” (ECAM) offers unique capabilities for assessing
+              greenhouse gas emissions and energy consumption at a system-wide
+              level. Gain greater insights by identifying areas to reduce
+              greenhouse gas emissions, increase energy savings and improve
+              overall efficiencies to reduce costs.
+            </p>
 
-          <p>
-            ECAM was developed by the Catalan Institute for Water Research
-            (ICRA) within the scope of the project “Water and Wastewater
-            Companies for Climate Mitigation” (WaCCliM), a joint initiative
-            between the Deutsche Gesellschaft für Internationale Zusammenarbeit
-            (GIZ) GmbH and the International Water Association (IWA).  WaCCliM
-            is part of the International Climate Initiative (IKI). The German
-            Federal Ministry for the Environment, Nature Conservation and
-            Nuclear Safety (BMU) supports this initiative on the basis of a
-            decision adopted by the German Bundestag.
-          </p>
+            <p>
+              ECAM was developed by the Catalan Institute for Water Research
+              (ICRA) within the scope of the project “Water and Wastewater
+              Companies for Climate Mitigation” (WaCCliM), a joint initiative
+              between the Deutsche Gesellschaft für Internationale Zusammenarbeit
+              (GIZ) GmbH and the International Water Association (IWA).  WaCCliM
+              is part of the International Climate Initiative (IKI). The German
+              Federal Ministry for the Environment, Nature Conservation and
+              Nuclear Safety (BMU) supports this initiative on the basis of a
+              decision adopted by the German Bundestag.
+            </p>
 
-          <p>
-            The first version of this tool was developed in 2015 as an Excel
-            tool by the consortium Urban Water Commons (LNEC and ITA,
-            Universitat Politècnica de València) in collaboration with Cobalt
-            Water Global. The Excel version laid the foundation and basic
-            equations for the web-tool.
-          </p>
+            <p>
+              The first version of this tool was developed in 2015 as an Excel
+              tool by the consortium Urban Water Commons (LNEC and ITA,
+              Universitat Politècnica de València) in collaboration with Cobalt
+              Water Global. The Excel version laid the foundation and basic
+              equations for the web-tool.
+            </p>
 
-          <p>
-            ECAM 3.0 is free and open source (2015-{{(new Date()).getFullYear()}}
-            <a target=_blank href='frontend/license.txt'>{{translate('about_license')}}</a>).
-          </p>
+            <p>
+              ECAM 3.0 is free and open source (2015-{{(new Date()).getFullYear()}}
+              <a target=_blank href='frontend/license.txt'>{{translate('about_license')}}</a>).
+            </p>
 
-          <p>
-            Links:
-            <a target=_blank href='http://www.icra.cat/'>ICRA</a>
-            |
-            <a target=_blank href='http://www.iwa-network.org'>IWA</a>
-            |
-            <a target=_blank href='https://www.giz.de/en/html/index.html'>GIZ</a>
-            |
-            <a target=_blank href='https://wacclim.org'>WaCCliM project</a>
-            |
-            <a target=_blank href='http://www.lnec.pt/pt/'>LNEC</a>
-            |
-            <a target=_blank href='http://www.ita.upv.es/index-es.php'>ITA, Universitat Politècnica de València</a>
-            |
-            <a target=_blank href='http://www.cobaltwater-global.com/'>Cobalt Water Global</a>
-            |
-            <a target=_blank href="https://www.international-climate-initiative.com/">International Climate Initiative (IKI)</a>
-          </p>
-        </div>
-
-        <!--icons-->
-        <div style="
-          display:grid;
-          grid-template-columns:30% 30% 30%;
-          grid-gap:5%;
-          margin-top:30px;
-        ">
-          <div style="text-align:center">
-            <img class=icon src="frontend/img/about/chart.svg"><br>
-            <b>Based on IPCC</b>
-            <p style="text-align:left">
-              ECAM was developed to be consistent with the IPCC Guidelines
-              for National Greenhouse Gas Inventories and peer-reviewed
-              literature.
+            <p>
+              Links:
+              <a target=_blank href='http://www.icra.cat/'>ICRA</a>
+              |
+              <a target=_blank href='http://www.iwa-network.org'>IWA</a>
+              |
+              <a target=_blank href='https://www.giz.de/en/html/index.html'>GIZ</a>
+              |
+              <a target=_blank href='https://wacclim.org'>WaCCliM project</a>
+              |
+              <a target=_blank href='http://www.lnec.pt/pt/'>LNEC</a>
+              |
+              <a target=_blank href='http://www.ita.upv.es/index-es.php'>ITA, Universitat Politècnica de València</a>
+              |
+              <a target=_blank href='http://www.cobaltwater-global.com/'>Cobalt Water Global</a>
+              |
+              <a target=_blank href="https://www.international-climate-initiative.com/">International Climate Initiative (IKI)</a>
             </p>
           </div>
-          <div style="text-align:center">
-            <img class=icon src="frontend/img/about/wrench.svg"><br>
-            <b>Free and Open Source</b>
-            <p style="text-align:left">
-              ECAM can be freely used, copied or changed. Its source code is
-              openly available on GitHub. We encourage people to improve or
-              make suggestions on how to improve the tool.
-            </p>
-          </div>
-          <div style="text-align:center">
-            <img class=icon src="frontend/img/about/lock.svg"><br>
-            <b>Secure</b>
-            <p style="text-align:left">
-              ECAM is secure and trustworthy. No information is stored on
-              servers. All data inserted and processed during the ECAM
-              assessment are merely on your personal computer.
-            </p>
+
+          <!--icons-->
+          <div style="
+            display:grid;
+            grid-template-columns:30% 30% 30%;
+            grid-gap:5%;
+            margin-top:30px;
+          ">
+            <div style="text-align:center">
+              <img class=icon src="frontend/img/about/chart.svg"><br>
+              <b>Based on IPCC</b>
+              <p style="text-align:left">
+                ECAM was developed to be consistent with the IPCC Guidelines
+                for National Greenhouse Gas Inventories and peer-reviewed
+                literature.
+              </p>
+            </div>
+            <div style="text-align:center">
+              <img class=icon src="frontend/img/about/wrench.svg"><br>
+              <b>Free and Open Source</b>
+              <p style="text-align:left">
+                ECAM can be freely used, copied or changed. Its source code is
+                openly available on GitHub. We encourage people to improve or
+                make suggestions on how to improve the tool.
+              </p>
+            </div>
+            <div style="text-align:center">
+              <img class=icon src="frontend/img/about/lock.svg"><br>
+              <b>Secure</b>
+              <p style="text-align:left">
+                ECAM is secure and trustworthy. No information is stored on
+                servers. All data inserted and processed during the ECAM
+                assessment are merely on your personal computer.
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
       <!--special acknowledgements-->
-      <div>
+      <div style="max-width:1013px">
         <h1 style="padding-left:0">Special acknowledgements</h1>
         <p>
           <div>
