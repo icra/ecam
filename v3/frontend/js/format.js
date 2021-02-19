@@ -8,10 +8,11 @@ function format(number,digits,divisor){
 
   //default digits for values
   if(digits==undefined){
-    if(number<1000) digits=1;
-    if(number< 100) digits=2;
-    if(number<0.10) digits=3;
-    if(number<0.01) digits=4;
+    if(number>=1000) digits=0;
+    if(number<1000)  digits=1;
+    if(number< 100)  digits=2;
+    if(number<0.10)  digits=3;
+    if(number<0.01)  digits=4;
   }else{
     digits=digits||0;
   }
