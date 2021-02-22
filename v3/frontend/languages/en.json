@@ -203,8 +203,8 @@
 "#ww_SL_nrg_cost_descr":"Energy costs (%)",
 "#ww_SL_nrg_cost_expla":"Proportion of the utility energy costs referred to the total running costs",
 
-"#ws_serv_pop_descr":"Serviced population",
-"#ww_serv_pop_descr":"Serviced population (treatment + onsite)",
+"#ws_serv_pop_descr":"Serviced population (distribution)",
+"#ww_serv_pop_descr":"Serviced population (treatment or onsite sanitation)",
 
 "#ws_KPI_GHG_abs_descr":"Abstraction",
 "#ws_KPI_GHG_tre_descr":"Treatment",

@@ -119,6 +119,28 @@ let summary_ghg=new Vue({
           }),
           Object.values(UNFCCC).map(obj=>obj.color),
         );
+
+        Charts.draw_pie_chart('pie_chart_ws_serv_pop',
+          [
+            {label:translate('ws_serv_pop_descr'), value:    100*Global.Water.ws_serv_pop()/Global.Water.ws_resi_pop||0},
+            {label:translate('ws_serv_pop_descr'), value:100-100*Global.Water.ws_serv_pop()/Global.Water.ws_resi_pop||0},
+          ],
+          colors=[
+            "var(--color-level-Water)",
+            "#eee",
+          ],
+        );
+
+        Charts.draw_pie_chart('pie_chart_ww_serv_pop',
+          [
+            {label:translate('ww_serv_pop_descr'), value:    100*Global.Waste.ww_serv_pop()/Global.Waste.ww_resi_pop||0},
+            {label:translate('ww_serv_pop_descr'), value:100-100*Global.Waste.ww_serv_pop()/Global.Waste.ww_resi_pop||0},
+          ],
+          colors=[
+            "var(--color-level-Waste)",
+            "#eee",
+          ],
+        );
       //--
 
       //draw bar charts
@@ -418,7 +440,7 @@ let summary_ghg=new Vue({
                 GHG emissions
               </div>
               <div class=flex>
-                <table border=1 class=ghg_table>
+                <table border=1 class=legend>
                   <tr>
                     <td style="background:var(--color-level-Water)"></td>
                     <td>{{translate('Water')}}</td>
@@ -442,7 +464,7 @@ let summary_ghg=new Vue({
                 GHG emissions by stage
               </div>
               <div class=flex>
-                <table border=1 class=ghg_table>
+                <table border=1 class=legend>
                   <tr
                     v-for="stage in Structure.filter(s=>s.sublevel)"
                     v-if="Global[stage.level][stage.sublevel].length"
@@ -467,7 +489,7 @@ let summary_ghg=new Vue({
                 GHG emissions by gas emitted
               </div>
               <div class=flex>
-                <table border=1 class=ghg_table>
+                <table border=1 class=legend>
                   <tr v-for="value,key in Global.TotalGHG()" v-if="key!='total'">
                     <td :style="{background:Charts.gas_colors[key]}"></td>
                     <td>
@@ -489,7 +511,7 @@ let summary_ghg=new Vue({
                 GHG emissions by UNFCCC category
               </div>
               <div class=flex>
-                <table border=1 class=ghg_table>
+                <table border=1 class=legend>
                   <tr v-for="[key,obj] in Object.entries(UNFCCC)" :title="key">
                     <td :style="{background:obj.color}"></td>
                     <td>
@@ -534,7 +556,7 @@ let summary_ghg=new Vue({
               </div>
 
               <div class=flex>
-                <table border=1 class=nrg_table>
+                <table border=1 class=legend>
                   <tr>
                     <td style="background:var(--color-level-Water)"></td>
                     <td>{{translate('Water')}}</td>
@@ -559,7 +581,7 @@ let summary_ghg=new Vue({
               </div>
 
               <div class=flex>
-                <table border=1 class=nrg_table>
+                <table border=1 class=legend>
                   <tr v-for="stage in Structure.filter(s=>s.sublevel)">
                     <td :style="{background:stage.color}">
                     </td>
@@ -589,16 +611,69 @@ let summary_ghg=new Vue({
           </div>
         </div>
 
-        <!--charts pop-->
+        <!--charts serviced population-->
         <div v-if="current_view=='charts_pop'">
-          <div class=chart_container>
+          <div class="chart_container">
             <div class=chart_title>
-              Serviced population
+              Serviced population in water supply and wastewater sanitation stages
             </div>
-
-            <div style="">
-              <serv_pop_bar v-if="Global.Water.ws_resi_pop" :stage="Global.Water" code="ws_SL_serv_pop"></serv_pop_bar>
-              <serv_pop_bar v-if="Global.Waste.ww_resi_pop" :stage="Global.Waste" code="ww_SL_serv_pop"></serv_pop_bar>
+            <br><br>
+            <div style="
+              display:grid;
+              grid-template-columns:50% 50%;
+            ">
+              <div class=flex>
+                <table border=1 class=legend>
+                  <tr>
+                    <td :style="{background:'var(--color-level-Water)'}">
+                    </td>
+                    <td>
+                      {{translate('ws_serv_pop_descr')}}
+                    </td>
+                    <td>
+                      {{ format(Global.Water.ws_serv_pop()) }}
+                    </td>
+                    <td class=unit v-html="'people'"></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>
+                      {{translate('ws_resi_pop_descr')}}
+                    </td>
+                    <td>
+                      {{ format(Global.Water.ws_resi_pop) }}
+                    </td>
+                    <td class=unit v-html="'people'"></td>
+                  </tr>
+                </table>
+                <div id=pie_chart_ws_serv_pop></div>
+              </div>
+              <div class=flex>
+                <table border=1 class=legend>
+                  <tr>
+                    <td :style="{background:'var(--color-level-Waste)'}">
+                    </td>
+                    <td>
+                      {{translate('ww_serv_pop_descr')}}
+                    </td>
+                    <td>
+                      {{ format(Global.Waste.ww_serv_pop()) }}
+                    </td>
+                    <td class=unit v-html="'people'"></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>
+                      {{translate('ww_resi_pop_descr')}}
+                    </td>
+                    <td>
+                      {{ format(Global.Waste.ww_resi_pop) }}
+                    </td>
+                    <td class=unit v-html="'people'"></td>
+                  </tr>
+                </table>
+                <div id=pie_chart_ww_serv_pop></div>
+              </div>
             </div>
           </div>
         </div>
@@ -670,8 +745,7 @@ let summary_ghg=new Vue({
         margin-right:5px;
         margin-bottom:5px;
       }
-      #summary_ghg div.chart_container table.ghg_table,
-      #summary_ghg div.chart_container table.nrg_table {
+      #summary_ghg div.chart_container table.legend {
         width:38%;
         margin-right:10px;
       }
@@ -708,40 +782,5 @@ let summary_ghg=new Vue({
         text-align:center;
       }
     </style>
-  `,
-});
-
-//serviced population % progress bar
-Vue.component('serv_pop_bar',{
-  props:[
-    "stage",
-    "code",
-  ],
-  methods:{
-    translate,
-    format,
-  },
-  template:`
-    <div
-      style="
-        display:grid;
-        grid-template-columns:50% 30% 10%;
-        align-items:center;
-      "
-    >
-      <div style="font-weight:bold">
-        {{translate(code+'_descr')}}
-      </div>
-      <div>
-        <progress
-          :value="stage[code]()"
-          style="height:2.5em;width:100%"
-          max=100
-        ></progress>
-      </div>
-      <div style="text-align:center">
-        {{ format(stage[code]()) }} %
-      </div>
-    </div>
   `,
 });
