@@ -87,7 +87,7 @@ let Charts={
 
     //calculate legend width based on names of "data"
     var legend_width = (function(){
-      let max = 50; //default length
+      let max = 100; //default length
       keys.forEach(key=>{
         let len = get_text_width(key);
         if(len > max) max = len;

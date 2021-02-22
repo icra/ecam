@@ -117,12 +117,16 @@ let select_scenario=new Vue({
         if(Scenarios.length){
           ecam.set_current_scenario(Scenarios[0]);
         }
+
+        //reset scenario comparison
+        compare_scenarios.scenarios_compared=[];
+        Scenarios.forEach(obj=>{
+          compare_scenarios.add_scenario_to_compared(obj);
+        });
       };
 
       try{
         reader.readAsText(file);
-        //reset scenario comparison
-        compare_scenarios.scenarios_compared=[];
       }catch(e){
         alert(e);
         throw(e);
