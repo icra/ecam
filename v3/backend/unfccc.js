@@ -92,7 +92,7 @@ let UNFCCC={
   //unfccc_5D: Waste - Wastewater treatment and Discharge
   unfccc_5D:{
     description:"Waste - Wastewater treatment and Discharge",
-    color:"#d00b34",
+    color:"#85077c",
     emissions(scenario){
       return [
         //untreated ww

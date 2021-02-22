@@ -206,7 +206,6 @@ let compare_scenarios=new Vue({
         style="
           display:grid;
           grid-template-columns:16.66% 16.66% 16.66% 16.66% 16.66% 16.66%;
-          width:80%;
           margin:auto;
         "
         id=select_chart_container

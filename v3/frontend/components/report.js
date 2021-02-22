@@ -402,9 +402,7 @@ let report = new Vue({
                     <table class=legend>
                       <tr v-for="[key,obj] in Object.entries(UNFCCC)">
                         <td :style="{color:obj.color}">
-                          <div>
-                            {{ obj.description }} ({{ key }})
-                          </div>
+                          <div>{{ obj.description }}</div>
                         </td>
                       </tr>
                     </table>

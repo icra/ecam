@@ -447,8 +447,7 @@ let summary_ghg=new Vue({
                     v-for="stage in Structure.filter(s=>s.sublevel)"
                     v-if="Global[stage.level][stage.sublevel].length"
                   >
-                    <td :style="{background:stage.color}">
-                    </td>
+                    <td :style="{background:stage.color}"></td>
                     <td>
                       {{translate(stage.sublevel)}}
                     </td>
@@ -470,8 +469,7 @@ let summary_ghg=new Vue({
               <div class=flex>
                 <table border=1 class=ghg_table>
                   <tr v-for="value,key in Global.TotalGHG()" v-if="key!='total'">
-                    <td :style="{background:Charts.gas_colors[key]}">
-                    </td>
+                    <td :style="{background:Charts.gas_colors[key]}"></td>
                     <td>
                       <div v-html="key.toUpperCase().prettify()"></div>
                     </td>
@@ -492,14 +490,10 @@ let summary_ghg=new Vue({
               </div>
               <div class=flex>
                 <table border=1 class=ghg_table>
-                  <tr v-for="[key,obj] in Object.entries(UNFCCC)">
-                    <td :style="{background:obj.color}">
-                    </td>
+                  <tr v-for="[key,obj] in Object.entries(UNFCCC)" :title="key">
+                    <td :style="{background:obj.color}"></td>
                     <td>
-                      <div>
-                        {{obj.description}}
-                        ({{key}})
-                      </div>
+                      {{obj.description}}
                     </td>
                     <td>
                       <div v-html="format(obj.emissions(Global))"></div>
