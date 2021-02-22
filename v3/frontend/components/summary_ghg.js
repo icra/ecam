@@ -102,8 +102,9 @@ let summary_ghg=new Vue({
 
         Charts.draw_pie_chart('chart_nrg_stages',
           Structure.filter(s=>s.sublevel).map(s=>{
+            let total_nrg = Global.TotalNRG();
             let label = "";
-            let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum()/Global.TotalNRG();
+            let value = 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum()/total_nrg;
             return {label,value};
           }),
           Structure.filter(s=>s.sublevel).map(s=>s.color),
@@ -111,9 +112,12 @@ let summary_ghg=new Vue({
 
         Charts.draw_pie_chart('chart_unfccc',
           Object.keys(UNFCCC).map(key=>{
-            return {label:key, value:UNFCCC[key](Global)}
+            let total_ghg = Global.TotalGHG().total;
+            let label = "";
+            let value = 100*UNFCCC[key].emissions(Global)/total_ghg;
+            return {label,value};
           }),
-          Object.values(Charts.unfccc_colors),
+          Object.values(UNFCCC).map(obj=>obj.color),
         );
       //--
 
@@ -488,14 +492,17 @@ let summary_ghg=new Vue({
               </div>
               <div class=flex>
                 <table border=1 class=ghg_table>
-                  <tr v-for="key in Object.keys(UNFCCC)">
-                    <td :style="{background:Charts.unfccc_colors[key]}">
+                  <tr v-for="[key,obj] in Object.entries(UNFCCC)">
+                    <td :style="{background:obj.color}">
                     </td>
                     <td>
-                      <div v-html="key.prettify()"></div>
+                      <div>
+                        {{obj.description}}
+                        ({{key}})
+                      </div>
                     </td>
                     <td>
-                      <div v-html="format(UNFCCC[key](Global))"></div>
+                      <div v-html="format(obj.emissions(Global))"></div>
                     </td>
                     <td class=unit v-html="'kgCO2eq'.prettify()"></td>
                   </tr>

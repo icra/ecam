@@ -7,15 +7,6 @@ let Charts={
     "ch4":"#ffaa6e",
   },
 
-  unfccc_colors:{
-    "unfccc_1A1":"#0e73c8",
-    "unfccc_1A3":"#1dfdba",
-    "unfccc_5A" :"#89d13c",
-    "unfccc_5B" :"#c31bf6",
-    "unfccc_5C" :"#5dd144",
-    "unfccc_5D" :"#c45b33",
-  },
-
   //create a pie chart inside "id_container"
   draw_pie_chart(id_container, data, colors, width, height) {
     let container = document.getElementById(id_container);
@@ -94,12 +85,22 @@ let Charts={
       }
     }
 
-    var margin = {top:20,right:160,bottom:35,left:30};
-    var width  = window.innerWidth-margin.left-margin.right-50;
+    //calculate legend width based on names of "data"
+    var legend_width = (function(){
+      let max = 50; //default length
+      keys.forEach(key=>{
+        let len = get_text_width(key);
+        if(len > max) max = len;
+      });
+      return max;
+    })();
+
+    var margin = {top:20, right:160, bottom:35, left:30};
+    var width  = window.innerWidth - margin.left - margin.right - legend_width;
     var height = 500-margin.top-margin.bottom;
     var svg = d3.select(`#${id_container}`)
       .append("svg")
-      .attr("width", width + margin.left + margin.right)
+      .attr("width", width + margin.left + margin.right + legend_width)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -179,7 +180,7 @@ let Charts={
       .data(colors)
       .enter().append("g")
       .attr("class", "legend")
-      .attr("transform", function(d, i) { return "translate(30," + i * 19 + ")"; });
+      .attr("transform", function(d, i) { return `translate(30,${i*19})` });
 
     legend.append("rect")
       .attr("x", width - 18)
@@ -190,7 +191,7 @@ let Charts={
     legend.append("text")
       .attr("x", width + 5)
       .attr("y", 9)
-      .attr("dy", ".35em")
+      .attr("dy", "0.35em")
       .style("text-anchor", "start")
       .text((d,i)=>{
         return keys[i]+" ("+yUnit+")";
@@ -354,3 +355,14 @@ let Charts={
     }
   },
 };
+
+//utils: calculate width of text in svg
+function get_text_width(text){
+  var canvas = get_text_width.canvas || (get_text_width.canvas = document.createElement("canvas"));
+  var context  = canvas.getContext("2d");
+  context.font = "10px sans-serif";
+  var metrics  = context.measureText(text);
+  return metrics.width;
+  //test
+  //console.log(get_text_width("hello there!"));  // close to 86
+}

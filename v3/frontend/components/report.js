@@ -97,9 +97,12 @@ let report = new Vue({
 
         Charts.draw_pie_chart('chart_unfccc',
           Object.keys(UNFCCC).map(key=>{
-            return {label:key, value:UNFCCC[key](Global)}
+            let total_ghg = Global.TotalGHG().total;
+            let label = "";
+            let value = 100*UNFCCC[key].emissions(Global)/total_ghg;
+            return {label,value};
           }),
-          Object.values(Charts.unfccc_colors),
+          Object.values(UNFCCC).map(obj=>obj.color),
         );
       //--
 
@@ -397,9 +400,11 @@ let report = new Vue({
                   </div>
                   <div class=flex>
                     <table class=legend>
-                      <tr v-for="key in Object.keys(UNFCCC)">
-                        <td :style="{color:Charts.unfccc_colors[key]}">
-                          <div v-html="key.prettify()"></div>
+                      <tr v-for="[key,obj] in Object.entries(UNFCCC)">
+                        <td :style="{color:obj.color}">
+                          <div>
+                            {{ obj.description }} ({{ key }})
+                          </div>
                         </td>
                       </tr>
                     </table>

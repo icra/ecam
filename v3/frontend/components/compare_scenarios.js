@@ -3,7 +3,7 @@ let compare_scenarios=new Vue({
   data:{
     visible:false,
     scenarios_compared:[],
-    current_view:'table',
+    current_view:'bar_chart_ghg_by_unfccc',
     include:{
       inputs:false,
       outputs:true,
@@ -141,19 +141,20 @@ let compare_scenarios=new Vue({
         Charts.draw_bar_chart(
           'bar_chart_ghg_by_unfccc',
           this.scenarios_compared.map((scenario,i)=>{
-            let column={};
+            //new stacked column
+            let column={
+              name: scenario.General.Name,
+            };
 
-            //column name
-            column.name = scenario.General.Name;
-
-            //column subdivisions
-            Object.keys(UNFCCC).forEach(key=>{
-              column[key] = UNFCCC[key](scenario);
+            //add stacks to column
+            Object.entries(UNFCCC).forEach(([key,obj])=>{
+              let label     = `${obj.description}`;
+              column[label] = obj.emissions(scenario);
             });
 
             return column;
           }),
-          Object.values(Charts.unfccc_colors),
+          Object.values(UNFCCC).map(obj=>obj.color),
           'kgCO2eq', //unit
         );
 
@@ -507,9 +508,8 @@ let compare_scenarios=new Vue({
       #compare_scenarios div#select_chart_container button {
         height:50px;
       }
-      #compare_scenarios div#select_chart_container button {
-      }
 
+      /*table: summary*/
       #compare_scenarios tr.summary_row th {
         background:var(--color-level-generic);
         color:white;

@@ -1,12 +1,10 @@
 ECAM V3 CODING TASKS
 ====================
-
 * PRIORITIES v3
   - Graphs & report
   - IPCC compliance
 
 * DOING NOW - concrete and well defined tasks only - BUGS HAVE HIGHEST PRIORITY ALWAYS
-
   - horizontal bar chart
     - https://bl.ocks.org/Andrew-Reid/0aedd5f3fb8b099e3e10690bd38bd458
 
