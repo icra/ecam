@@ -3,7 +3,7 @@ let compare_scenarios=new Vue({
   data:{
     visible:false,
     scenarios_compared:[],
-    current_view:'bar_chart_ghg_by_unfccc',
+    current_view:'table',
     include:{
       inputs:false,
       outputs:true,
