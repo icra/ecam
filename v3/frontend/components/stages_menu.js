@@ -3,8 +3,6 @@ let stages_menu=new Vue({
   data:{
     visible:      false,
     current_view: null,
-    show_table:   true,
-    show_substages_summary: true, //not used TODO
 
     //backend
     Global,
@@ -89,7 +87,6 @@ let stages_menu=new Vue({
         <!--title-->
         <h1 style="padding-left:0">
           Inventory: urban water cycle stages
-          <button @click="show_table^=1">show/hide table</button>
           <button
             @click="save_to_file()"
             title="save the current list of assessments to a file"
@@ -107,8 +104,7 @@ let stages_menu=new Vue({
         </h1>
 
         <!--stages table-->
-        <transition name="fade">
-        <div v-if="show_table">
+        <div>
           <table id=main_table>
             <!--level 1-->
             <tr>
@@ -163,7 +159,7 @@ let stages_menu=new Vue({
             </tr>
 
             <!--level 3 substages-->
-            <tr v-if="show_substages_summary">
+            <tr>
               <td v-for="s in Structure.filter(s=>s.sublevel)"
                 style="
                   vertical-align:top;
@@ -231,7 +227,7 @@ let stages_menu=new Vue({
             </tr>
 
             <!--total ghg of substages-->
-            <tr v-if="show_substages_summary">
+            <tr>
               <td v-for="s in Structure.filter(s=>s.sublevel)">
                 <div style="font-size:smaller;margin-top:10px;text-align:center">
                   <span>Total {{s.sublevel}}:</span>
@@ -243,7 +239,7 @@ let stages_menu=new Vue({
 
             <!--btn add substage-->
             <!--
-            <tr v-if="show_substages_summary">
+            <tr>
               <td v-for="s in Structure.filter(s=>s.sublevel)">
                 <div style="text-align:center">
                   <button
@@ -257,7 +253,6 @@ let stages_menu=new Vue({
             -->
           </table>
         </div>
-        </transition>
       </div>
     </div>
   `,
