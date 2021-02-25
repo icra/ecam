@@ -1,8 +1,9 @@
 let debug=false; //development mode ON
 /*
-  Default configuration and debug mode
-  (backend and frontend)
+  Default configuration and debug mode (backend and frontend)
   this file is intended to help development
+
+  note: remember to change Vue.js to production in file "index.html"
 */
 
 /*frontend elements: set visibility*/
