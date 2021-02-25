@@ -11,7 +11,60 @@
 let References={
   //template
   code:{
-    ref:"",
+    ref:``,
+    link:``,
+  },
+
+  wwt_KPI_GHG_slu_storage:{
+    ref:`
+      0.03 = emission factor due to storage between 5 and 20 days.
+      0.05 = emission factor due to storage more than 20 days.
+    `,
+    link:``,
+  },
+
+  wwt_KPI_GHG_slu_composting:{
+    ref:`
+      For N2O:
+        0.03  = % N.
+        0.015 = N2O emissions for low C: N [% of initial N in solids (1.5%)].
+    `,
+    link:``,
+  },
+
+  wwt_KPI_GHG_slu_landfilling:{
+    ref:`
+      For CO2 ratio:
+        0.02 = % of CO2 emission to the atmosphere form the sludge sent to the land application (page 158, beam methodology document).
+      For CH4:
+        0.9  = model uncertainty factor (from UNFCCC/CCNUC, 2008).
+        0.5  = % of CH4 in landfill (50%).
+        0.8  = % of the decomposable organic fraction of raw wastewater solids (80%).
+        0.69 = % decomposed in first 3 years (69.9).
+      For N2O:
+        0.03  = % N (sludge not digested).
+        0.015 = N2O emissions for low C: N (% of initial N in solids).
+        0.04  = % N (sludge digested).
+    `,
+    link:`
+    `,
+  },
+
+  wwt_KPI_GHG_slu_land_application:{
+    ref:`
+      0.023 = % of N that goes to N2O, for fine-textured soils (2.3%).
+      0.005 = % of N that goes to N2O, for coarse textured soils (0.05%).
+    `,
+    link:"",
+  },
+
+  wwt_KPI_GHG_slu_incineration:{
+    ref:`
+      η = 161.3-0.140Tf,
+      Where η is the % of total N that is volatilized as N2O and Tf is the average highest freeboard
+      temperatures from the fluidized bed facilities. This equation can be used to estimate the N2O
+      emission factor of a given incinerator from its long-term average freeboard temperature.
+    `,
     link:"",
   },
 

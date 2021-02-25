@@ -1221,8 +1221,8 @@ class Waste_Treatment extends Substage{
     }
 
     wwt_KPI_GHG_slu_incineration(){
-      let sludge_mass = this.wwt_mass_slu_inc;
-      let temperature = this.wwt_temp_inc;
+      let sludge_mass = this.wwt_mass_slu_inc; //kg
+      let temperature = this.wwt_temp_inc;     //ºC
 
       let co2 = 0;
       let ch4 = (4.85/1e5)*sludge_mass*Cts.ct_ch4_eq.value;

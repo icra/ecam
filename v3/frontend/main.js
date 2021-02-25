@@ -106,13 +106,13 @@ let ecam={
   },
 
   //automated test
+  //TODO test all languages also
   test(){
-    //TODO test all languages also
-
     //prepare clicking everywhere
+    //TODO improve this part with async promises
     let _this    = this;
-    let timer    = 1;   //seconds
-    let interval = 200; //millisecons
+    let timer    = 1;   //counter
+    let interval = 100; //millisecons
 
     //visit every page (=view)
     Object.keys(this.views).forEach(key=>{
@@ -126,12 +126,15 @@ let ecam={
 
     //visit every variable
     Structure.forEach(s=>{
-      get_input_codes(s.level, s.sublevel).concat(
-      get_output_codes(s.level, s.sublevel)
-      ).forEach(code=>{
+      [ //concat inputs and outputs
+        ...get_input_codes( s.level, s.sublevel),
+        ...get_output_codes(s.level, s.sublevel),
+      ].forEach(code=>{
         setTimeout(
-          function(){variable.view(code)},
-          interval*timer++
+          function(){
+            variable.view(code)
+          },
+          interval*timer++,
         );
       });
     });

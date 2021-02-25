@@ -48,7 +48,7 @@ let Cts={
 
   ct_ch4_nrg:{
     value:10,
-    descr:"Energy content of 1 m3 of CH4",
+    descr:"Energy content in 1 m3 of CH4",
     unit:"kWh/m3",
   },
 
