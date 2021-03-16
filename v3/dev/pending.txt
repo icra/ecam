@@ -1,5 +1,8 @@
 ECAM CODING TASKS - tasks also in https://github.com/icra/ecam/issues
 =====================================================================
+* task:
+  transfer all items in this file to github.com/icra/ecam/issues
+
 * PRIORITIES v3
   - Graphs & report
   - IPCC compliance

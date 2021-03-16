@@ -28,12 +28,22 @@ let ecam_logo=new Vue({
               v{{Global.General.version}}
             </a>
             -
-            <!--
-            -->
+            <!---->
             <a href="https://github.com/icra/ecam/issues" target=_blank>
               issues
             </a>
-          </span>
+
+            <!---->
+            <span v-if="is_debug_mode_enabled()">
+              <button
+                onclick="ecam.show('development')"
+                style="
+                  background:white;
+                "
+              >
+                dev utils
+              </button>
+            </span>
         </div>
       </div>
 
