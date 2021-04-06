@@ -121,7 +121,11 @@ let stages_menu=new Vue({
                     justifyContent:'center',
                   }"
                 >
-                  <div :style="{textDecoration:is_tier_b_selected(l1.level)?'underline':''}">
+                  <div :style="{textDecoration:is_tier_b_selected(l1.level)?'underline':'',display:'flex',alignItems:'center'}"
+                  >
+                    <img :src="'frontend/img/stages_menu-'+l1.prefix+'.svg'"
+                      style="width:50px;margin-right:10px"
+                    >
                     {{translate(l1.level)}}
                   </div>
                   <!--
@@ -139,7 +143,7 @@ let stages_menu=new Vue({
               <td
                 v-for="s in Structure"
                 v-if="s.sublevel"
-                @click="add_substage(s.level,s.sublevel)"
+                @click="go_to(s.level,s.sublevel)"
                 :style="{background:'var(--color-level-'+s.level+'-secondary)',cursor:'pointer'}"
                 title="Create a new substage"
               >
@@ -151,7 +155,7 @@ let stages_menu=new Vue({
                   </div>
                   <div style="padding-left:5px">
                     <a :style="{color:'var(--color-level-'+s.level+')'}">
-                      <b>+ {{translate(s.sublevel)}}</b>
+                      <b>{{translate(s.sublevel)}}</b>
                     </a>
                   </div>
                 </div>
