@@ -51,7 +51,6 @@ let Exceptions={
   wwt_n2o_efac_dis:{ table:"N2O EF effluent (Table 6.8A)", table_field:function(){return "n2o_efac"}, },
   wwo_n2o_efac_tre:{ table:"N2O EF plants (Table 6.8A)",   table_field:function(){return "n2o_efac"}, },
   wwo_n2o_efac_dis:{ table:"N2O EF effluent (Table 6.8A)", table_field:function(){return "n2o_efac"}, },
-  wwo_ch4_efac_unt:{ table:"type_of_water_body",           table_field:function(){return "ch4_efac"}, },
   wwo_ch4_efac_dis:{ table:"type_of_water_body",           table_field:function(){return "ch4_efac"}, },
 
   wwo_ch4_efac_tre:{

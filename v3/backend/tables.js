@@ -275,7 +275,6 @@ let Tables = {
 /*
 Tables.wwo_soil_typ      = Tables["Soil type"];
 Tables.wwt_soil_typ      = Tables["Soil type"];
-Tables.wwo_fslu_typ      = Tables["Type of faecal sludge"];
 Tables.wwo_fslu_typ_lf   = Tables["Type of faecal sludge"];
 Tables.wwo_fslu_typ_la   = Tables["Type of faecal sludge"];
 Tables.wwt_slu_type      = Tables["Type of landfill"];
@@ -296,9 +295,6 @@ Tables.wsa_pmp_type      = Tables["Pump type"];
 Tables.wsa_pmp_size      = Tables["Pump size"];
 Tables.wsd_pmp_size      = Tables["Pump size"];
 Tables.wst_treatmen      = Tables["Potabilization chain"];
-Tables.wwo_type_tre      = Tables["Type of onsite treatment"];
-Tables.wwo_type_dis      = Tables["Type of disposal"];
-Tables.wwo_type_con      = Tables["Type of containment"];
 Tables.wwo_flooding      = Tables["Flooding containment"];
 Tables.wwt_slu_disp      = Tables["Type of sludge disposed"];
 */

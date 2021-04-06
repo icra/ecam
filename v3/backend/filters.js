@@ -53,13 +53,8 @@ let Filters = {
   //wwo Onsite
     "wwo_onsi_pop", //input
     "wwo_open_pop", //input
-    "wwo_vol_unco", //input
-    "wwo_vol_unco_ons", //input
-    "wwo_vol_unco_tre", //input
-    "wwo_vol_disc", //input
     "wwo_nrg_cons", //input
     "wwo_conv_kwh", //input
-    "wwo_ch4_efac_unt", //input
     "wwo_ch4_efac_tre", //input
     "wwo_ch4_efac_dis", //input
     "wwo_n2o_efac_tre", //input
@@ -70,17 +65,13 @@ let Filters = {
     "wwo_bod_effl", //input
     "wwo_bod_rmvd", //input
     "wwo_bod_slud", //input
-    "wwo_type_con", //input
     "wwo_flooding", //input
     "wwo_cont_emp", //input
     "wwo_fdensity", //input
     "wwo_bod_conc_fs", //input
     "wwo_fslu_emp", //input
-    "wwo_type_tre", //input
     "wwo_tn_infl", //input
     "wwo_tn_effl", //input
-    "wwo_type_dis", //input
-    "wwo_fslu_typ", //input
     "wwo_engines", //question
     "wwo_transport", //question
     "wwo_producing_biogas", //question

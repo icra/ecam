@@ -1402,13 +1402,7 @@ class Waste_Onsite extends Substage{
     this.name=name;
     this.wwo_onsi_pop         = 0; //population with onsite treatment
     this.wwo_open_pop         = 0; //population open defecation
-    this.wwo_vol_unco         = 0; //volume of uncollected wastewater
-    this.wwo_vol_unco_ons     = 0; //volume of uncollected wastewater conveyed to onsite treatment
-    this.wwo_vol_unco_tre     = 0; //treated wastewater
-    this.wwo_vol_disc         = 0; //water discharged
 
-
-    this.wwo_ch4_efac_unt     = 0;
     this.wwo_ch4_efac_tre     = 0;
     this.wwo_n2o_efac_tre     = 0;
     this.wwo_ch4_efac_dis     = 0;
@@ -1438,13 +1432,11 @@ class Waste_Onsite extends Substage{
     this.wwo_bod_effl         = 0; //effluent BOD
     this.wwo_bod_rmvd         = 0; //bod removed as FS
     this.wwo_bod_slud         = 0; //?
-    this.wwo_type_con         = 0; //type of containment
     this.wwo_flooding         = 0; //yes/no
     this.wwo_cont_emp         = 0; //containments emptied
     this.wwo_fdensity         = 0; //density of faecal sludge
     this.wwo_bod_conc_fs      = 0; //[BOD] in FS
     this.wwo_fslu_emp         = 0; //FS emptied
-    this.wwo_type_tre         = 0; //type of treatment
     this.wwo_tn_infl          = 0; //TN influent
     this.wwo_tn_effl          = 0; //TN effluent
     this.wwo_biog_pro         = 0;
@@ -1452,8 +1444,6 @@ class Waste_Onsite extends Substage{
     this.wwo_biog_fla         = 0;
     this.wwo_ch4_biog         = 59;
     this.wwo_nrg_biog         = 0;
-    this.wwo_type_dis         = 0; //main type of disposal
-    this.wwo_fslu_typ         = 0; //main type of faecal sludge
     this.wwo_mass_landapp     = 0; //dry weight sent to land application
     this.wwo_soil_typ         = 0; //soil type for land application
     this.wwo_fslu_typ_la      = 0; //type of faecal sludge disposed landapp

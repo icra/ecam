@@ -112,9 +112,6 @@ let Estimations={
       return population*protein*years; //kg
     },
 
-    wwo_vol_unco(substage){
-      return 0.2*substage.wwo_onsi_pop*Global.Days();
-    },
     //0.3kg/person/day
     wwo_fslu_emp(substage){
       return 0.3 * substage.wwo_onsi_pop * Global.Days()/substage.wwo_fdensity * substage.wwo_cont_emp/100;
