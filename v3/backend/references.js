@@ -15,8 +15,12 @@
 let References={
   //template
   code:{
-    ref:``,
-    link:``,
+    ref:``,    //description in plain text
+    link:``,   //link to doi for example
+    pdf:{      //link to pdf "www.example.com/file.pdf#page" | https://helpx.adobe.com/acrobat/kb/link-html-pdf-page-acrobat.html
+      text:``,
+      link:``,
+    },
   },
 
   wwt_KPI_GHG_slu_storage:{

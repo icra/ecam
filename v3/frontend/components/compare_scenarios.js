@@ -8,7 +8,6 @@ let compare_scenarios=new Vue({
       inputs:false,
       outputs:true,
     },
-
     variable,
     Global,
     Languages,
@@ -281,12 +280,12 @@ let compare_scenarios=new Vue({
             </th>
           </tr>
 
-
           <!--summary 1/2: wxx_KPI_GHG-->
           <tbody v-for="level in Structure.filter(s=>!s.sublevel)">
             <tr 
               class=summary_row
               v-for="stage in Structure.filter(s=>s.sublevel && s.level==level.level)"
+              v-if="include.outputs"
             >
               <th>
                 {{translate(stage.prefix+'_KPI_GHG_descr')}}
@@ -307,7 +306,7 @@ let compare_scenarios=new Vue({
                 ></div>
               </td>
             </tr>
-            <tr class=summary_row>
+            <tr class=summary_row v-if="include.outputs">
               <th style="font-weight:bold">
                 {{
                   translate(level.prefix+'_KPI_GHG_descr')
@@ -329,7 +328,7 @@ let compare_scenarios=new Vue({
           </tbody>
 
           <!--summary 2/2: total-->
-          <tbody>
+          <tbody v-if="include.outputs">
             <tr class=summary_row>
               <th style="font-weight:bolder;">
                 {{translate('TotalGHG_descr')}}
