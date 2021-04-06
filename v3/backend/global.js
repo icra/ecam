@@ -562,14 +562,15 @@ class Water_Treatment extends Substage{
     this.name=name;
     this.wst_vol_trea = 0;
 
-    this.wst_nrg_cons = 0; //energy consumed from the grid (kWh)
-    this.wst_conv_kwh = 0; //kWh to kgCO2eq conversion factor
-
     this.wst_nrg_cost = 0; //energy costs
     this.wst_run_cost = 0; //total running costs
 
     this.wst_mass_slu = 0;
     this.wst_treatmen = 0;
+
+    this.wst_nrg_cons = 0; //energy consumed from the grid (kWh)
+    this.wst_conv_kwh = 0; //kWh to kgCO2eq conversion factor
+
     this.wst_fuel_typ = 0;
     this.wst_vol_fuel = 0;
     this.wst_tst_carr = 0;
@@ -1406,8 +1407,6 @@ class Waste_Onsite extends Substage{
     this.wwo_vol_unco_tre     = 0; //treated wastewater
     this.wwo_vol_disc         = 0; //water discharged
 
-    this.wwo_nrg_cons = 0; //energy consumed from the grid (kWh)
-    this.wwo_conv_kwh = 0; //kWh to kgCO2eq conversion factor
 
     this.wwo_ch4_efac_unt     = 0;
     this.wwo_ch4_efac_tre     = 0;
@@ -1470,6 +1469,10 @@ class Waste_Onsite extends Substage{
     this.wwo_N_urine          = 0;
     this.wwo_reused_N         = 0;
     this.wwo_reused_P         = 0;
+
+    this.wwo_nrg_cons = 0; //energy consumed from the grid (kWh)
+    this.wwo_conv_kwh = 0; //kWh to kgCO2eq conversion factor
+
     //this.not_used_variable    = 0; //use it to test if the function that locates not used variables works
     this.equations=[
       //GHG from Wastewater Onsite Treatment
