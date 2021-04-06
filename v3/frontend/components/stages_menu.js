@@ -238,7 +238,7 @@ let stages_menu=new Vue({
             </tr>
 
             <!--btn add substage-->
-            <!--
+            <!-- -->
             <tr>
               <td v-for="s in Structure.filter(s=>s.sublevel)">
                 <div style="text-align:center">
@@ -250,7 +250,7 @@ let stages_menu=new Vue({
                 </div>
               </td>
             </tr>
-            -->
+
           </table>
         </div>
       </div>

@@ -1,7 +1,10 @@
 let tier_b=new Vue({
   el:"#tier_b",
   data:{
-    visible :false,
+    visible:false,
+
+    //show or hide outputs
+    outputs_are_visible:false,
 
     //current stage or substage being edited
     level:'Water',
@@ -14,8 +17,8 @@ let tier_b=new Vue({
     //highlight inputs and outputs arrays
     highlight:false,
     highlighted:{
-      inputs : [],
-      outputs: [],
+      inputs: [],
+      outputs:[],
     },
 
     //FILTERS (see "backend/filters.js")
@@ -216,7 +219,6 @@ let tier_b=new Vue({
   template:`
     <!--tier b VIEW-->
     <div id=tier_b v-if="visible && Languages.ready">
-
       <!--check substage--><div v-if="check_substage()"></div>
 
       <!--tier b title + tips-->
@@ -473,176 +475,186 @@ let tier_b=new Vue({
 
         <!--tier b outputs-->
         <div id=outputs>
-          <!--level2 outputs: GHG emissions-->
-          <div>
-            <div class="table-title">
-              <div>
-                <b>{{translate('OUTPUTS')}}</b>
-              </div>
-              <div style="margin-top:5px">
-                {{translate('GHG emissions')}}
-              </div>
-              <div style="text-align:left;margin-top:5px">
-                <span v-for="key in normalization.options">
-                  <button
-                    v-if="!sublevel || !(key=='kgCO2eq/year/serv.pop.' && !Normalization[level][sublevel])"
-                    @click="normalization.selected=key"
-                    v-html="key.prettify()"
-                    class=norm_btn
-                    :selected="normalization.selected==key"
-                  ></button>
-                </span>
-              </div>
-            </div>
-
-            <!--level2 outputs: GHG emissions-->
-            <table style="width:100%">
-              <thead :style="{background:'transparent'}">
-                <tr>
-                  <th></th>
-                  <th style="text-align:right">Value</th>
-                  <th style="text-align:right" v-if="sublevel">
-                    &Sigma;
-                    sum
-                    ({{Global[level][sublevel].length}} substages)
-                  </th>
-                  <th style="text-align:left">Unit</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <tr v-for="key in get_current_stage().equations"
-                  v-if="
-                    (key=='TotalGHG' || key.search('_KPI_GHG')+1)
-                    &&
-                    Questions.is_hidden(key, substage)==false
-                  "
-                  :class="highlighted.outputs.indexOf(key)+1 ? 'highlighted':''"
-                  @mouseenter="highlight_inputs(key)"
-                  @mouseleave="highlight_inputs(key,true)"
-                >
-                  <td
-                    @mousemove="caption.show($event, translate(key+'_expla').prettify())"
-                    @mouseout="caption.hide()"
-                  >
-                    <div>
-                      <b v-html="translate(key+'_descr').prettify()"></b>
-                    </div>
-
-                    <div>
-                      <small><a @click="variable.view(key)">{{key}}</a></small>
-                    </div>
-                  </td>
-
-                  <!--ghg output value-->
-                  <td
-                    @mousemove="caption.show($event, Formulas.prettify(get_current_stage()[key]))"
-                    @mouseout="caption.hide()"
-                    style="text-align:right"
-                  >
-                    <div
-                      v-if="normalization.selected=='kgCO2eq'"
-                      v-html="format(get_output_value(key,get_current_stage()))"
-                    ></div>
-                    <div
-                      v-if="normalization.selected=='kgCO2eq/year'"
-                      v-html="format(get_output_value(key,get_current_stage())/Global.Years())"
-                    ></div>
-                    <div v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
-                      <div
-                        v-if="substage"
-                        v-html="format(get_output_value(key,get_current_stage())/Global.Years()/Normalization[level][sublevel](substage))"
-                      ></div>
-                      <div
-                        v-else
-                        v-html="format(get_output_value(key,get_current_stage())/Global.Years()/Normalization[level].Total())"
-                      ></div>
-                    </div>
-                  </td>
-
-                  <!--sum of substages-->
-                  <td v-if="sublevel">
-                    <div class=number v-if="normalization.selected=='kgCO2eq'">
-                      {{format(get_sum_of_substages(level,sublevel,key))}}
-                    </div>
-                    <div class=number v-if="normalization.selected=='kgCO2eq/year'">
-                      {{format(get_sum_of_substages(level,sublevel,key)/Global.Years())}}
-                    </div>
-                    <div class=number v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
-                      {{format(get_sum_of_substages(level,sublevel,key)/Global.Years()/Normalization[level].Total())}}
-                    </div>
-                  </td>
-
-                  <!--unit-->
-                  <td v-if="Info[key]" v-html="normalization.selected.prettify()" style="font-size:smaller"></td>
-                  <td v-else style="color:#bbb"><b>no unit</b></td>
-                </tr>
-              </tbody>
-            </table>
+          <div v-if="outputs_are_visible==false">
+            <button
+              @click="outputs_are_visible=true"
+              v-html="'show outputs'"
+            ></button>
           </div>
+          <div v-else>
+            <!--level2 outputs: GHG emissions-->
+            <div>
+              <div class="table-title">
+                <div>
+                  <b>{{translate('OUTPUTS')}}</b>
+                  &mdash;
+                  <button @click="outputs_are_visible=false">hide outputs</button>
+                </div>
+                <div style="margin-top:5px">
+                  {{translate('GHG emissions')}}
+                </div>
+                <div style="text-align:left;margin-top:5px">
+                  <span v-for="key in normalization.options">
+                    <button
+                      v-if="!sublevel || !(key=='kgCO2eq/year/serv.pop.' && !Normalization[level][sublevel])"
+                      @click="normalization.selected=key"
+                      v-html="key.prettify()"
+                      class=norm_btn
+                      :selected="normalization.selected==key"
+                    ></button>
+                  </span>
+                </div>
+              </div>
 
-          <!--level2 outputs: NRG and SL-->
-          <div>
-            <div class="table-title">
-              <p>
-                {{translate('Energy performance and Service Level indicators')}}
-              </p>
-            </div>
-            <table style="width:100%">
-              <thead :style="{background:'transparent'}">
-                <tr>
-                  <th></th>
-                  <th style="text-align:right">Value</th>
-                  <th style="text-align:left">Unit</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="key in get_current_stage().equations"
-                  v-if="
-                    (key!='TotalGHG' && key.search('_KPI_GHG')==-1)
-                    &&
-                    Questions.is_hidden(key, substage)==false
-                  "
-                  :class="highlighted.outputs.indexOf(key)+1 ? 'highlighted':''"
-                  @mouseenter="highlighted.inputs=Formulas.ids_per_formula(get_current_stage()[key])"
-                  @mouseleave="highlighted.inputs=[]"
-                >
-                  <td
-                    @mousemove="caption.show($event, translate(key+'_expla').prettify())"
-                    @mouseout="caption.hide()"
+              <!--level2 outputs: GHG emissions-->
+              <table style="width:100%">
+                <thead :style="{background:'transparent'}">
+                  <tr>
+                    <th></th>
+                    <th style="text-align:right">Value</th>
+                    <th style="text-align:right" v-if="sublevel">
+                      &Sigma;
+                      sum
+                      ({{Global[level][sublevel].length}} substages)
+                    </th>
+                    <th style="text-align:left">Unit</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr v-for="key in get_current_stage().equations"
+                    v-if="
+                      (key=='TotalGHG' || key.search('_KPI_GHG')+1)
+                      &&
+                      Questions.is_hidden(key, substage)==false
+                    "
+                    :class="highlighted.outputs.indexOf(key)+1 ? 'highlighted':''"
+                    @mouseenter="highlight_inputs(key)"
+                    @mouseleave="highlight_inputs(key,true)"
                   >
-                    <div>
-                      <b v-html="translate(key+'_descr').prettify()"></b>
-                    </div>
-                    <div>
-                      <small><a @click="variable.view(key)">{{key}}</a></small>
-                    </div>
-                  </td>
-
-                  <!--output value-->
-                  <td
-                    @mousemove="caption.show($event, Formulas.prettify(get_current_stage()[key]))"
-                    @mouseout="caption.hide()"
-                    style="text-align:right"
-                  >
-                    <div v-html="format(get_current_stage()[key]()/Units.multiplier(key))"></div>
-
-                    <!--benchmark if any-->
-                    <div v-if="Benchmarks[key]">
-                      <div :style="{color:get_benchmark(key).color}">
-                        {{
-                          get_benchmark(key).string
-                        }}
+                    <td
+                      @mousemove="caption.show($event, translate(key+'_expla').prettify())"
+                      @mouseout="caption.hide()"
+                    >
+                      <div>
+                        <b v-html="translate(key+'_descr').prettify()"></b>
                       </div>
-                    </div>
-                  </td>
 
-                  <!--unit-->
-                  <td v-if="Info[key]" v-html="Info[key].unit.prettify()" style="font-size:smaller"></td>
-                  <td v-else style="color:#bbb"><b>no unit</b></td>
-                </tr>
-              </tbody>
-            </table>
+                      <div>
+                        <small><a @click="variable.view(key)">{{key}}</a></small>
+                      </div>
+                    </td>
+
+                    <!--ghg output value-->
+                    <td
+                      @mousemove="caption.show($event, Formulas.prettify(get_current_stage()[key]))"
+                      @mouseout="caption.hide()"
+                      style="text-align:right"
+                    >
+                      <div
+                        v-if="normalization.selected=='kgCO2eq'"
+                        v-html="format(get_output_value(key,get_current_stage()))"
+                      ></div>
+                      <div
+                        v-if="normalization.selected=='kgCO2eq/year'"
+                        v-html="format(get_output_value(key,get_current_stage())/Global.Years())"
+                      ></div>
+                      <div v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
+                        <div
+                          v-if="substage"
+                          v-html="format(get_output_value(key,get_current_stage())/Global.Years()/Normalization[level][sublevel](substage))"
+                        ></div>
+                        <div
+                          v-else
+                          v-html="format(get_output_value(key,get_current_stage())/Global.Years()/Normalization[level].Total())"
+                        ></div>
+                      </div>
+                    </td>
+
+                    <!--sum of substages-->
+                    <td v-if="sublevel">
+                      <div class=number v-if="normalization.selected=='kgCO2eq'">
+                        {{format(get_sum_of_substages(level,sublevel,key))}}
+                      </div>
+                      <div class=number v-if="normalization.selected=='kgCO2eq/year'">
+                        {{format(get_sum_of_substages(level,sublevel,key)/Global.Years())}}
+                      </div>
+                      <div class=number v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
+                        {{format(get_sum_of_substages(level,sublevel,key)/Global.Years()/Normalization[level].Total())}}
+                      </div>
+                    </td>
+
+                    <!--unit-->
+                    <td v-if="Info[key]" v-html="normalization.selected.prettify()" style="font-size:smaller"></td>
+                    <td v-else style="color:#bbb"><b>no unit</b></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!--level2 outputs: NRG and SL-->
+            <div>
+              <div class="table-title">
+                <p>
+                  {{translate('Energy performance and Service Level indicators')}}
+                </p>
+              </div>
+              <table style="width:100%">
+                <thead :style="{background:'transparent'}">
+                  <tr>
+                    <th></th>
+                    <th style="text-align:right">Value</th>
+                    <th style="text-align:left">Unit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="key in get_current_stage().equations"
+                    v-if="
+                      (key!='TotalGHG' && key.search('_KPI_GHG')==-1)
+                      &&
+                      Questions.is_hidden(key, substage)==false
+                    "
+                    :class="highlighted.outputs.indexOf(key)+1 ? 'highlighted':''"
+                    @mouseenter="highlighted.inputs=Formulas.ids_per_formula(get_current_stage()[key])"
+                    @mouseleave="highlighted.inputs=[]"
+                  >
+                    <td
+                      @mousemove="caption.show($event, translate(key+'_expla').prettify())"
+                      @mouseout="caption.hide()"
+                    >
+                      <div>
+                        <b v-html="translate(key+'_descr').prettify()"></b>
+                      </div>
+                      <div>
+                        <small><a @click="variable.view(key)">{{key}}</a></small>
+                      </div>
+                    </td>
+
+                    <!--output value-->
+                    <td
+                      @mousemove="caption.show($event, Formulas.prettify(get_current_stage()[key]))"
+                      @mouseout="caption.hide()"
+                      style="text-align:right"
+                    >
+                      <div v-html="format(get_current_stage()[key]()/Units.multiplier(key))"></div>
+
+                      <!--benchmark if any-->
+                      <div v-if="Benchmarks[key]">
+                        <div :style="{color:get_benchmark(key).color}">
+                          {{
+                            get_benchmark(key).string
+                          }}
+                        </div>
+                      </div>
+                    </td>
+
+                    <!--unit-->
+                    <td v-if="Info[key]" v-html="Info[key].unit.prettify()" style="font-size:smaller"></td>
+                    <td v-else style="color:#bbb"><b>no unit</b></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

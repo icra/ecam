@@ -7,6 +7,10 @@
     tables
 
   from documents, include title and page
+
+  This part is not translated by frontend
+
+  TODO add all references we have to this file
 */
 let References={
   //template
