@@ -26,7 +26,7 @@ let more=new Vue({
         <div class=button onclick="ecam.show('fuel_table')">       {{translate('Fuel types')       }}</div>
         <div class=button onclick="ecam.show('tables')">           Data tables                       </div>
         <div class=button onclick="ecam.show('non_revenue_water')">{{translate('non_revenue_water')}}</div>
-        <div class=button onclick="window.open('frontend/docs')">  Documents                         </div>
+        <div class=button onclick="window.open('frontend/docs')">  Documentation                     </div>
       </div>
     </div>
   `,
