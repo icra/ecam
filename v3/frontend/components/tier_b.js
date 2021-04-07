@@ -479,6 +479,7 @@ let tier_b=new Vue({
             <button
               @click="outputs_are_visible=true"
               v-html="'show outputs'"
+              class="btn_show_outputs"
             ></button>
           </div>
           <div v-else>
@@ -488,7 +489,9 @@ let tier_b=new Vue({
                 <div>
                   <b>{{translate('OUTPUTS')}}</b>
                   &mdash;
-                  <button @click="outputs_are_visible=false">hide outputs</button>
+                  <button @click="outputs_are_visible=false" class="btn_show_outputs">
+                    hide outputs
+                  </button>
                 </div>
                 <div style="margin-top:5px">
                   {{translate('GHG emissions')}}
@@ -805,6 +808,11 @@ let tier_b=new Vue({
         border-color:#666;
       }
       #tier_b #outputs button.norm_btn[selected] {
+        background:#666;
+        color:white;
+      }
+
+      #tier_b #outputs button.btn_show_outputs:hover {
         background:#666;
         color:white;
       }

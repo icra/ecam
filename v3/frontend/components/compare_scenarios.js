@@ -454,6 +454,8 @@ let compare_scenarios=new Vue({
           class="chart_container bar"
         >
           <div id="bar_chart_ghg_total"></div>
+
+          <b>Variation respect previous assessment (%)</b>
           <div id="bar_chart_ghg_difference"></div>
         </div>
 
