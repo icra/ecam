@@ -72,7 +72,7 @@ let compare_scenarios=new Vue({
     },
 
     draw_all_charts(){
-      //draw bar charts
+      //bar charts
         Charts.draw_bar_chart(
           'bar_chart_ghg_total',
           this.scenarios_compared.map((scenario,i)=>{
@@ -84,6 +84,33 @@ let compare_scenarios=new Vue({
             "var(--color-level-generic)",
           ],
           'kgCO2eq',
+        );
+
+        Charts.draw_bar_chart(
+          'bar_chart_ghg_difference',
+          this.scenarios_compared.map((scenario,i)=>{
+            let name  = `[${i+1}] `+scenario.General.Name;
+
+            let variation     = 0; //number
+            let ghg_increase  = 0; //number (return value)
+            let ghg_reduction = 0; //number (return value)
+
+            if(i==0){
+              variation = 0;
+            }else{
+              let curr = scenario.TotalGHG().total; //current emissions
+              let prev = this.scenarios_compared[i-1].TotalGHG().total; //previous scenario
+              variation = 100*(curr-prev)/prev;
+            }
+            if(variation>=0){
+              ghg_increase = variation;
+            }else{
+              ghg_reduction = Math.abs(variation);
+            }
+            return {name, ghg_increase, ghg_reduction};
+          }),
+          colors=[ "red", "green"],
+          unit='%',
         );
 
         Charts.draw_bar_chart(
@@ -178,6 +205,7 @@ let compare_scenarios=new Vue({
           ],
           'kgCO2eq',
         );
+
       //--
     },
 
@@ -424,7 +452,9 @@ let compare_scenarios=new Vue({
         <div
           v-if="current_view=='bar_chart_ghg_total'"
           class="chart_container bar"
-        ><div id="bar_chart_ghg_total"></div>
+        >
+          <div id="bar_chart_ghg_total"></div>
+          <div id="bar_chart_ghg_difference"></div>
         </div>
 
         <div

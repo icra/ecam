@@ -9,10 +9,6 @@ let more=new Vue({
   methods:{
     translate,
     go_to,
-
-    is_debug_mode_enabled(){
-      return debug;
-    },
   },
 
   template:`
@@ -30,10 +26,7 @@ let more=new Vue({
         <div class=button onclick="ecam.show('fuel_table')">       {{translate('Fuel types')       }}</div>
         <div class=button onclick="ecam.show('tables')">           Data tables                       </div>
         <div class=button onclick="ecam.show('non_revenue_water')">{{translate('non_revenue_water')}}</div>
-      </div>
-
-      <div v-if="is_debug_mode_enabled()" style="text-align:center;margin-top:1em">
-        <a onclick="ecam.show('development')">{{translate('dev')}}</a>
+        <div class=button onclick="window.open('frontend/docs')">  Documents                         </div>
       </div>
     </div>
   `,
