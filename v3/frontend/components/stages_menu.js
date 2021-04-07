@@ -54,7 +54,12 @@ let stages_menu=new Vue({
       ss[prefix+'_conv_kwh']=Global.General.conv_kwh_co2;
 
       this.Global[level][sublevel].push(ss);
-      this.go_to_substage(ss);
+
+      //if you are viewing tier b, go directly to the newly created substage
+      if(ecam.views.tier_b.visible){
+        this.go_to_substage(ss);
+      }
+
       return ss;
     },
 
@@ -144,8 +149,8 @@ let stages_menu=new Vue({
                 v-for="s in Structure"
                 v-if="s.sublevel"
                 @click="go_to(s.level,s.sublevel)"
-                :style="{background:'var(--color-level-'+s.level+'-secondary)',cursor:'pointer'}"
-                title="Create a new substage"
+                :style="{background:'var(--color-level-'+s.level+'-secondary)'}"
+                class=stage_name
               >
                 <div style="display:flex;align-items:center">
                   <div>
@@ -287,6 +292,19 @@ let stages_menu=new Vue({
         text-decoration:underline;
         transition:all 0.2s;
       }
+
+      #stages_menu #main_table td.stage_name{
+        font-size:12px;
+        padding:2px 6px;
+        cursor:pointer;
+      }
+      #stages_menu #main_table td.stage_name:hover {
+        font-size:13px;
+        padding:2px;
+        text-decoration:underline;
+        transition:all 0.2s;
+      }
+
       #stages_menu img {
         width:50px;
       }
