@@ -86,35 +86,50 @@ let compare_scenarios=new Vue({
           'kgCO2eq',
         );
 
-        Charts.draw_bar_chart(
-          'bar_chart_ghg_difference',
-          this.scenarios_compared.map((scenario,i)=>{
-            let name  = `[${i+1}] `+scenario.General.Name;
+        //line chart using Chart.js library
+        if(document.getElementById('line_chart_ghg_difference')){
+          if(this.line_chart_ghg_difference){
+            this.line_chart_ghg_difference.destroy();
+          }
+          this.line_chart_ghg_difference = new Chart('line_chart_ghg_difference',{
+            type: 'line',
+            data:{
+              labels: this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              datasets:[
+                {
+                  label: '% variation of total ghg emissions',
+                  data: this.scenarios_compared.map((scenario,i)=>{
+                    if(i==0) return 0;
 
-            let variation     = 0; //number
-            let ghg_increase  = 0; //number (return value)
-            let ghg_reduction = 0; //number (return value)
-
-            if(i==0){
-              variation = 0;
-            }else{
-              let curr = scenario.TotalGHG().total; //current emissions
-              let prev = this.scenarios_compared[i-1].TotalGHG().total; //previous scenario
-              variation = 100*(curr-prev)/prev;
+                    let curr = scenario.TotalGHG().total; //current emissions
+                    let prev = this.scenarios_compared[i-1].TotalGHG().total; //previous scenario
+                    variation = 100*(curr-prev)/prev;
+                    return variation;
+                  }),//[12, 19, 3, 5, 2, 3],
+                  backgroundColor: [
+                    '#327ccb',
+                  ],
+                  borderColor: [
+                    '#327ccb',
+                  ],
+                  borderWidth: 1
+                },
+              ]
+            },
+            options: {
+              aspectRatio:4,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  borderWidth:2,
+                }
+              }
             }
-            if(variation>=0){
-              ghg_increase = variation;
-            }else{
-              ghg_reduction = Math.abs(variation);
-            }
-            return {name, ghg_increase, ghg_reduction};
-          }),
-          colors=[ "red", "green"],
-          unit='%',
-        );
+          });
+        }
 
         Charts.draw_bar_chart(
-          'bar_chart_ghg_by_gas',
+          '#bar_chart_ghg_by_gas',
           this.scenarios_compared.map((scenario,i)=>{
             let name     = `[${i+1}] `+scenario.General.Name;
             let emission = scenario.TotalGHG();
@@ -454,9 +469,8 @@ let compare_scenarios=new Vue({
           class="chart_container bar"
         >
           <div id="bar_chart_ghg_total"></div>
-
           <b>Variation respect previous assessment (%)</b>
-          <div id="bar_chart_ghg_difference"></div>
+          <canvas id="line_chart_ghg_difference" width="400" height="400"></canvas>
         </div>
 
         <div

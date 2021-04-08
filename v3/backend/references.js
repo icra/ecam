@@ -88,6 +88,6 @@ let References={
 
   wwo_KPI_GHG_urine:{
     ref:"IPCC-2006, Chapter 11, page 11, table 11.1: 'Default emission factors to estimate direct N2O emissions from managed soils'.",
-    link:"",
+    link:"https://ecam.icradev.cat/ecam/v3/frontend/docs/2006-ipcc/4_Volume4/V4_11_Ch11_N2O&CO2.pdf#page=11",
   },
 };
