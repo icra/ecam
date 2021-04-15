@@ -44,6 +44,7 @@ let ecam_logo=new Vue({
                 dev utils
               </button>
             </span>
+          </span>
         </div>
       </div>
 

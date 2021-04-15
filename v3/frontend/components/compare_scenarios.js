@@ -4,10 +4,13 @@ let compare_scenarios=new Vue({
     visible:false,
     scenarios_compared:[],
     current_view:'table',
-    include:{
+    include:{ //for summary table
       inputs:false,
       outputs:true,
     },
+
+    charts:{}, //chart objects from chartjs library stored here
+
     variable,
     Global,
     Languages,
@@ -16,6 +19,13 @@ let compare_scenarios=new Vue({
   },
 
   methods:{
+    //clear charts
+    destroy_all_charts(){
+      Object.values(this.charts).forEach(chart=>{
+        chart.destroy();
+      });
+    },
+
     //add scenario to comparison table
     add_scenario_to_compared(scenario){
       if(!scenario) return;
@@ -72,26 +82,47 @@ let compare_scenarios=new Vue({
     },
 
     draw_all_charts(){
-      //bar charts
-        Charts.draw_bar_chart(
-          'bar_chart_ghg_total',
-          this.scenarios_compared.map((scenario,i)=>{
-            let name  = `[${i+1}] `+scenario.General.Name;
-            let total = scenario.TotalGHG().total;
-            return {name, total};
-          }),
-          colors=[
-            "var(--color-level-generic)",
-          ],
-          'kgCO2eq',
-        );
+      this.destroy_all_charts();
 
-        //line chart using Chart.js library
+      //bar charts
+        //Chart.js - bar chart: total ghg by scenario
+        if(document.getElementById('bar_chart_ghg_total_2')){
+          this.charts.bar_chart_ghg_total_2 = new Chart('bar_chart_ghg_total_2',{
+            type:'bar',
+            data:{
+              labels:this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              datasets:[
+                {
+                  label: 'total ghg emissions (kgCO2eq)',
+                  data: this.scenarios_compared.map(scenario=>{
+                    let total = scenario.TotalGHG().total; //current emissions
+                    return total;
+                  }),//[12, 19, 3, 5, 2, 3],
+                  backgroundColor: [
+                    '#327ccb',
+                  ],
+                  borderColor: [
+                    '#327ccb',
+                  ],
+                  borderWidth: 1
+                },
+              ]
+            },
+            options: {
+              aspectRatio:4,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  borderWidth:2,
+                }
+              }
+            }
+          });
+        }
+
+        //Chart.js - line chart: ghg difference between scenarios
         if(document.getElementById('line_chart_ghg_difference')){
-          if(this.line_chart_ghg_difference){
-            this.line_chart_ghg_difference.destroy();
-          }
-          this.line_chart_ghg_difference = new Chart('line_chart_ghg_difference',{
+          this.charts.line_chart_ghg_difference = new Chart('line_chart_ghg_difference',{
             type: 'line',
             data:{
               labels: this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -128,77 +159,165 @@ let compare_scenarios=new Vue({
           });
         }
 
-        Charts.draw_bar_chart(
-          '#bar_chart_ghg_by_gas',
-          this.scenarios_compared.map((scenario,i)=>{
-            let name     = `[${i+1}] `+scenario.General.Name;
-            let emission = scenario.TotalGHG();
-            let CO2 = emission.co2;
-            let N2O = emission.n2o;
-            let CH4 = emission.ch4;
-            return {name, CO2, CH4, N2O};
-          }),
-          colors=[
-            Charts.gas_colors.co2,
-            Charts.gas_colors.ch4,
-            Charts.gas_colors.n2o,
-          ],
-          'kgCO2eq',
-        );
+        //Chart.js - bar chart: total ghg by gas
+        if(document.getElementById('bar_chart_ghg_by_gas_2')){
+          this.charts.bar_chart_ghg_by_gas_2 = new Chart('bar_chart_ghg_by_gas_2',{
+            type:'bar',
+            data:{
+              labels: this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              datasets:[
+                {
+                  label: 'CO2 (kgCO2eq)',
+                  data: this.scenarios_compared.map(scenario=>{
+                    return scenario.TotalGHG().co2;
+                  }),//[12, 19, 3, 5, 2, 3],
+                  backgroundColor:[Charts.gas_colors.co2],
+                  borderColor:[Charts.gas_colors.co2],
+                  borderWidth:1,
+                },
+                {
+                  label: 'CH4 (kgCO2eq)',
+                  data: this.scenarios_compared.map(scenario=>{
+                    return scenario.TotalGHG().ch4;
+                  }),//[12, 19, 3, 5, 2, 3],
+                  backgroundColor:[Charts.gas_colors.ch4],
+                  borderColor:[Charts.gas_colors.ch4],
+                  borderWidth:1,
+                },
+                {
+                  label: 'N2O (kgCO2eq)',
+                  data: this.scenarios_compared.map(scenario=>{
+                    return scenario.TotalGHG().n2o;
+                  }),//[12, 19, 3, 5, 2, 3],
+                  backgroundColor:[Charts.gas_colors.n2o],
+                  borderColor:[Charts.gas_colors.n2o],
+                  borderWidth:1,
+                },
+              ],
+            },
+            options:{
+              aspectRatio:4,
+              scales:{
+                x:{
+                  stacked:true,
+                },
+                y:{
+                  beginAtZero:true,
+                  borderWidth:2,
+                  stacked:true,
+                },
+              }
+            },
+          });
+        }
 
-        Charts.draw_bar_chart(
-          'bar_chart_nrg_by_assessment',
-          this.scenarios_compared.map((scenario,i)=>{
-            let name   = `[${i+1}] `+scenario.General.Name;
-            let Energy = scenario.TotalNRG();
-            return {name, Energy};
-          }),
-          colors=[
-            "#ffbe54",
-          ],
-          'kWh',
-        );
+        //Chart.js - bar chart: total ghg by stage
+        if(document.getElementById('bar_chart_ghg_by_stage')){
+          this.charts.bar_chart_ghg_by_stage = new Chart('bar_chart_ghg_by_stage',{
+            type:'bar',
+            data:{
+              labels: this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              datasets:[
+                //column subdivisions
+                ...Structure.filter(s=>s.sublevel).map(stage=>{
+                  return {
+                    label:`${stage.prefix.substring(0,2)}-${stage.sublevel} (kgCO2eq)`,
+                    data:this.scenarios_compared.map(scenario=>{
+                      return scenario[stage.level][stage.sublevel].map(ss=>ss[stage.prefix+'_KPI_GHG']().total).sum();
+                    }),
+                    backgroundColor:[stage.color],
+                    borderColor:[stage.color],
+                    borderWidth:1,
+                  };
+                }),
+              ],
+            },
+            options:{
+              aspectRatio:4,
+              scales:{
+                x:{
+                  stacked:true,
+                },
+                y:{
+                  beginAtZero:true,
+                  borderWidth:2,
+                  stacked:true,
+                },
+              }
+            },
+          });
+        }
 
-        Charts.draw_bar_chart(
-          'bar_chart_ghg_by_stage',
-          this.scenarios_compared.map((scenario,i)=>{
-            let column={};
+        //Chart.js - bar chart: total ghg by stage
+        if(document.getElementById('bar_chart_ghg_by_unfccc')){
+          this.charts.bar_chart_ghg_by_unfccc = new Chart('bar_chart_ghg_by_unfccc',{
+            type:'bar',
+            data:{
+              labels:this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              datasets:[
+                //column subdivisions
+                ...Object.entries(UNFCCC).map(([key,obj])=>{
+                  return{
+                    label:`${obj.description} (kgCO2eq)`,
+                    data:this.scenarios_compared.map(scenario=>{
+                      return obj.emissions(scenario);
+                    }),
+                    backgroundColor:[obj.color],
+                    borderColor:[obj.color],
+                    borderWidth:1,
+                  };
+                }),
+              ],
+            },
+            options:{
+              aspectRatio:4,
+              scales:{
+                x:{
+                  stacked:true,
+                },
+                y:{
+                  beginAtZero:true,
+                  borderWidth:2,
+                  stacked:true,
+                },
+              }
+            },
+          });
+        }
 
-            //column name
-            column.name = scenario.General.Name;
+        //Chart.js - bar chart: total nrg by scenario
+        if(document.getElementById('bar_chart_nrg_by_assessment')){
+          this.charts.bar_chart_nrg_by_assessment = new Chart('bar_chart_nrg_by_assessment',{
+            type:'bar',
+            data:{
+              labels:this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              datasets:[
+                {
+                  label:'total energy consumption (kWh)',
+                  data:this.scenarios_compared.map(scenario=>{
+                    let total=scenario.TotalNRG(); //current emissions
+                    return total;
+                  }),//[12, 19, 3, 5, 2, 3],
+                  backgroundColor:["#ffbe54"],
+                  borderColor:["#ffbe54"],
+                  borderWidth:1,
+                },
+              ],
+            },
+            options: {
+              aspectRatio:4,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  borderWidth:2,
+                }
+              }
+            }
+          });
+        }
 
-            //column subdivisions
-            Structure.filter(s=>s.sublevel).forEach(s=>{
-              let key     = `${s.prefix.substring(0,2)}-${s.sublevel}`;
-              column[key] = scenario[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum();
-            });
-
-            return column;
-          }),
-          Structure.filter(s=>s.sublevel).map(s=>s.color), //colors
-          'kgCO2eq', //unit
-        );
-
-        Charts.draw_bar_chart(
-          'bar_chart_ghg_by_unfccc',
-          this.scenarios_compared.map((scenario,i)=>{
-            //new stacked column
-            let column={
-              name: scenario.General.Name,
-            };
-
-            //add stacks to column
-            Object.entries(UNFCCC).forEach(([key,obj])=>{
-              let label     = `${obj.description}`;
-              column[label] = obj.emissions(scenario);
-            });
-
-            return column;
-          }),
-          Object.values(UNFCCC).map(obj=>obj.color),
-          'kgCO2eq', //unit
-        );
-
+        //TODO redo with chartjs library
+        /*
         Charts.draw_bar_chart(
           'bar_chart_ghg_by_substage',
           this.scenarios_compared.map((scenario,i)=>{
@@ -220,7 +339,7 @@ let compare_scenarios=new Vue({
           ],
           'kgCO2eq',
         );
-
+        */
       //--
     },
 
@@ -252,12 +371,11 @@ let compare_scenarios=new Vue({
         "
         id=select_chart_container
       >
-        <button :selected="current_view=='table'"                       @click="current_view='table'"                      >Table:<br>inputs &amp; outputs            </button>
-        <button :selected="current_view=='bar_chart_ghg_total'"         @click="current_view='bar_chart_ghg_total'"        >Bar chart:<br>total GHG emissions         </button>
-        <button :selected="current_view=='bar_chart_ghg_by_gas'"        @click="current_view='bar_chart_ghg_by_gas'"       >Bar chart:<br>emissions by GHG            </button>
-        <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Bar chart:<br>emissions by stage          </button>
-        <button :selected="current_view=='bar_chart_ghg_by_unfccc'"     @click="current_view='bar_chart_ghg_by_unfccc'"    >Bar chart:<br>emissions by UNFCCC category</button>
-
+        <button :selected="current_view=='table'"                       @click="current_view='table'"                      >Table:<br>inputs &amp; outputs              </button>
+        <button :selected="current_view=='bar_chart_ghg_total'"         @click="current_view='bar_chart_ghg_total'"        >Bar chart:<br>total GHG emissions           </button>
+        <button :selected="current_view=='bar_chart_ghg_by_gas'"        @click="current_view='bar_chart_ghg_by_gas'"       >Bar chart:<br>emissions by gas (CO2,N2O,CH4)</button>
+        <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Bar chart:<br>emissions by stage            </button>
+        <button :selected="current_view=='bar_chart_ghg_by_unfccc'"     @click="current_view='bar_chart_ghg_by_unfccc'"    >Bar chart:<br>emissions by UNFCCC category  </button>
         <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">Bar chart:<br>total energy consumption</button>
         <!-- hidden for now TBD TODO
           <button :selected="current_view=='bar_chart_ghg_by_substage'"   @click="current_view='bar_chart_ghg_by_substage'"  >Bar chart: GHG by substage</button>
@@ -468,7 +586,7 @@ let compare_scenarios=new Vue({
           v-if="current_view=='bar_chart_ghg_total'"
           class="chart_container bar"
         >
-          <div id="bar_chart_ghg_total"></div>
+          <canvas id="bar_chart_ghg_total_2" width="400" height="400"></canvas>
           <b>Variation respect previous assessment (%)</b>
           <canvas id="line_chart_ghg_difference" width="400" height="400"></canvas>
         </div>
@@ -476,31 +594,36 @@ let compare_scenarios=new Vue({
         <div
           v-if="current_view=='bar_chart_ghg_by_gas'"
           class="chart_container bar"
-        ><div id="bar_chart_ghg_by_gas"></div>
-        </div>
-
-        <div
-          v-if="current_view=='bar_chart_nrg_by_assessment'"
-          class="chart_container bar"
-        ><div id="bar_chart_nrg_by_assessment"></div>
+        >
+          <canvas id="bar_chart_ghg_by_gas_2" width="400" height="400"></canvas>
         </div>
 
         <div
           v-if="current_view=='bar_chart_ghg_by_stage'"
           class="chart_container bar"
-        ><div id="bar_chart_ghg_by_stage"></div>
+        >
+          <canvas id="bar_chart_ghg_by_stage" width="400" height="400"></canvas>
         </div>
 
         <div
           v-if="current_view=='bar_chart_ghg_by_unfccc'"
           class="chart_container bar"
-        ><div id="bar_chart_ghg_by_unfccc"></div>
+        >
+          <canvas id="bar_chart_ghg_by_unfccc" width="400" height="400"></canvas>
+        </div>
+
+        <div
+          v-if="current_view=='bar_chart_nrg_by_assessment'"
+          class="chart_container bar"
+        >
+          <canvas id="bar_chart_nrg_by_assessment" width="400" height="400"></canvas>
         </div>
 
         <div
           v-if="current_view=='bar_chart_ghg_by_substage'"
           class="chart_container bar"
-        ><div id="bar_chart_ghg_by_substage"></div>
+        >
+          <div id="bar_chart_ghg_by_substage"></div>
         </div>
       </div>
 
