@@ -22,26 +22,43 @@ let ecam_logo=new Vue({
         <div>
           <span>{{translate('navbar_title')}}</span>
           <span>&mdash;</span>
+
           <!--version-->
-          <span style="font-family:monospace" title="version">
-            <a href="dev/pending.txt" target=_blank>
+          <span style="font-family:monospace">
+            <a href="dev/pending.txt" target=_blank title="version">
               v{{Global.General.version}}
             </a>
-            -
-            <!---->
-            <a href="https://github.com/icra/ecam/issues" target=_blank>
-              issues
-            </a>
 
-            <!---->
-            <span v-if="is_debug_mode_enabled()">
+            <!--debug mode menu-->
+            <span v-if="is_debug_mode_enabled()"
+              style="
+                background:rgba(127,0,255,0.5);
+                padding:10px;
+                border-radius:0.5em;
+              "
+            >
+              <b>
+                [DEV MODE ENABLED]
+                <button
+                  onclick="debug=false;ecam.show('landing');ecam.elements.ecam_logo.$forceUpdate()"
+                  style="background:white;"
+                >disable dev mode
+                </button>
+              </b>
+
+              <!--open github issues-->
+              <button
+                onclick="window.open('https://github.com/icra/ecam/issues')" target=_blank
+                style="background:white;"
+              >
+                go to github issues
+              </button>
+              <!--dev utils-->
               <button
                 onclick="ecam.show('development')"
-                style="
-                  background:white;
-                "
+                style="background:white;"
               >
-                dev utils
+                open dev utils
               </button>
             </span>
           </span>
