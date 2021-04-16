@@ -17,65 +17,59 @@ let ecam_logo=new Vue({
   template:`
     <div id=ecam_logo v-if="visible && Languages.ready">
       <!--logo-->
-      <div id=logo_container>
-        <div id=logo onclick="ecam.show('landing')">ECAM</div>
-        <div>
-          <span>{{translate('navbar_title')}}</span>
-          <span>&mdash;</span>
+      <div id=logo onclick="ecam.show('landing')">
+        <div style="margin-right:10px">ECAM</div>
+        <div style="font-size:12px">{{translate('navbar_title')}}</div>
+      </div>
 
-          <!--version-->
-          <span style="font-family:monospace">
-            <a href="dev/pending.txt" target=_blank title="version">
-              v{{Global.General.version}}
-            </a>
+      <!--version-->
+      <div style="font-family:monospace;padding:1px">
+        <a href="dev/pending.txt" target=_blank title="version">
+          [v{{Global.General.version}}]
+        </a>
+      </div>
 
-            <!--debug mode menu-->
-            <span v-if="is_debug_mode_enabled()"
-              style="
-                background:rgba(127,0,255,0.5);
-                padding:10px;
-                border-radius:0.5em;
-              "
-            >
-              <b>
-                [DEV MODE ENABLED]
-                <button
-                  onclick="debug=false;ecam.show('landing');ecam.elements.ecam_logo.$forceUpdate()"
-                  style="background:white;"
-                >disable dev mode
-                </button>
-              </b>
+      <!--debug mode menu-->
+      <div v-if="is_debug_mode_enabled()"
+        style="
+          background:rgba(127,127,127,0.6);
+          padding:2px;
+          border-radius:5px;
+        "
+      >
+        <b>[DEV MODE ENABLED]</b>
 
-              <!--open github issues-->
-              <button
-                onclick="window.open('https://github.com/icra/ecam/issues')" target=_blank
-                style="background:white;"
-              >
-                go to github issues
-              </button>
-              <!--dev utils-->
-              <button
-                onclick="ecam.show('development')"
-                style="background:white;"
-              >
-                open dev utils
-              </button>
-            </span>
-          </span>
-        </div>
+        <!--disable dev mode-->
+        <button
+          onclick="debug=false;ecam.show('landing');ecam.elements.ecam_logo.$forceUpdate()"
+          style="background:white;padding:2px"
+        >disable dev mode
+        </button>
+        <!--open github issues-->
+        <button
+          onclick="window.open('https://github.com/icra/ecam/issues')" target=_blank
+          style="background:white;padding:2px"
+        >issues
+        </button>
+        <!--dev utils-->
+        <button
+          onclick="ecam.show('development')"
+          style="background:white;padding:2px"
+        >dev utils
+        </button>
       </div>
 
       <!--language-->
       <div id=lang v-if="is_debug_mode_enabled()">
         <!--current language-->
-        <div>{{Languages.current}}</div>
+        <div style="width:20px">{{Languages.current.toUpperCase()}}</div>
 
         <!--all languages-->
         <div id=select>
           <div
             v-for="lang in Languages.list"
             :lang="lang"
-            @click="Languages.current=lang"
+            @click="Languages.current=lang;"
             v-html="lang"
             :current="Languages.current==lang"
           ></div>
@@ -95,23 +89,16 @@ let ecam_logo=new Vue({
         background:var(--color-level-generic);
         box-shadow:0 1px 2px rgba(0,0,0,.5);
         color:white;
-        min-height:50px;
         padding:5px;
-        padding-left:3em;
-        align-items:center;
+        padding-left:2em;
+        padding-right:3em;
+        padding-top:1em;
+        padding-bottom:0.5em;
 
-        /*css grid*/
-        display:grid;
-        grid-template-columns:80% 10%;
-        /*                    l   l
-                              o   a
-                              g   n
-                              o   g
-                                  u
-                                  a
-                                  g
-                                  e
-        */
+        align-items:center;
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:space-between;
       }
       #ecam_logo a{color:white;}
       #ecam_logo a:hover{text-decoration:none}
@@ -121,26 +108,21 @@ let ecam_logo=new Vue({
         line-height:0px;
       }
       #ecam_logo #burger:hover{color:#666}
-      #ecam_logo #logo_container {
-        display: flex;
-        flex-wrap:wrap;
-        align-items:center;
-      }
       #ecam_logo #logo {
         font-weight:bold;
         font-size:30px;
-        padding-right:20px;
+        padding-right:10px;
+        display:flex;
+        align-items:center;
       }
       #ecam_logo #lang{
         cursor:pointer;
-        text-align:right;
       }
 
       /* select element */
       #ecam_logo #lang #select{
+        transform:translate(-180px,0);
         position:absolute;
-        top:3%;
-        right:1%;
         visibility:hidden;
         border:1px solid #ccc;
         width:200px;
@@ -148,12 +130,12 @@ let ecam_logo=new Vue({
         box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 5px 10px 15px 5px rgba(0,0,0,.1);
         text-align:left;
         z-index:999;
-        transition:all 0.4s;
+        transition:all 0.2s;
         font-size:12px;
       }
 
       /* show select element */
-      #ecam_logo #lang:hover #select {
+      #ecam_logo #lang:hover #select{
         visibility:visible;
         height:auto;
         transition:all 0s;
