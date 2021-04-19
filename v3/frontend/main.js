@@ -210,6 +210,78 @@ let ecam={
       if(index+1) compare_scenarios.scenarios_compared.splice(index,1);
     }
   },
+
+  generate_excel_template(){
+    let scenario=new Ecam();
+    //array of excel sheets
+    let sheets=[
+      //sheet 1: General
+      {
+        sheet_name:"General",
+        rows:[
+          ...Object.entries(scenario.General).map(([key,value])=>{
+            return[
+              key, //column 1: variable name
+              Info[key]?Info[key].unit:"", //column 2: unit
+              value, //column 3: value
+            ];
+          }),
+        ],
+      },
+      //sheets 2 and 3: Water and Waste
+      ...Structure.filter(s=>!s.sublevel).map(s=>{
+        return {
+          sheet_name:s.level,
+          rows:[
+            ...get_input_codes(s.level).map(key=>{
+              return[
+                key, //column: variable name
+                translate(key+'_descr'), //column: description
+                Info[key]?Info[key].unit:"", //column: unit
+                scenario[s.level][key], //column: value
+              ];
+            }),
+          ],
+        };
+      }),
+      //sheets 4 to 9: substages
+      ...Structure.filter(s=>s.sublevel).map(s=>{
+        let name  = `${s.sublevel} 1`; //string
+        let ss    = new s.class(name); //Substage
+        return {
+          //new sheet
+          sheet_name:`${s.level} ${s.sublevel}`,
+          rows:[
+            //...
+            ...get_input_codes(s.level,s.sublevel).map(key=>{
+              return[
+                key, //column: variable name
+                translate(key+'_descr'), //column: description
+                Info[key]?Info[key].unit:"", //column: unit
+                ss[key], //column: value
+              ];
+            }),
+          ],
+        };
+      }),
+    ];
+
+    //generate <a> link and click it
+    {
+      let file   = new Blob([JSON.stringify(sheets,null,'  ')],{type:'application/json'});
+      let a      = document.createElement('a');
+      a.href     = URL.createObjectURL(file);
+      a.target   = '_blank';
+      a.download = 'pre-excel.json'; //filename
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    //code joan roser here TODO
+
+    return sheets;
+  },
 };
 
 ecam.add_styles();
