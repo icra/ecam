@@ -76,17 +76,12 @@ let Tables = {
     {name:"Wetlands - Surface flow",                                        ch4_efac:0.24,  bod_rmvd_as_sludge_estm:0.30},
     {name:"Wetlands - Horizontal subsurface flow",                          ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
     {name:"Wetlands - Vertical subsurface flow",                            ch4_efac:0.006, bod_rmvd_as_sludge_estm:0.65},
-    {name:"Septic tank (with or without dispersal field)",                  ch4_efac:0.3,   bod_rmvd_as_sludge_estm:0.65},
-    {name:"Pit latrine without flush water (lined or unlined) – household", ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65, ch4_efac_flooding:0.42, BOD_conc_FS:67.8, fs_density:1400},
-    {name:"Pit latrine without flush water (lined or unlined) – communal",  ch4_efac:0.3,   bod_rmvd_as_sludge_estm:0.65, ch4_efac_flooding:0.42, BOD_conc_FS:67.8, fs_density:1400},
-    {name:"Pit latrine with flush water use (lined or unlined)",            ch4_efac:0.42,  bod_rmvd_as_sludge_estm:0.65, ch4_efac_flooding:0.42, BOD_conc_FS:67.8, fs_density:1400},
     {name:"Activated Sludge - Well managed",                                ch4_efac:0,     bod_rmvd_as_sludge_estm:0.65},
     {name:"Activated Sludge - Minor poorly aerated zones",                  ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
     {name:"Activated Sludge - Some aerated zones",                          ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.65},
     {name:"Activated Sludge - Not well managed",                            ch4_efac:0.18,  bod_rmvd_as_sludge_estm:0.65},
     {name:"Aerated Lagoon",                                                 ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
     {name:"Trickling Filter",                                               ch4_efac:0.036, bod_rmvd_as_sludge_estm:0.65},
-    {name:"Imhoff tank",                                                    ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
   ],
 
   //types of main treatments
@@ -216,12 +211,13 @@ let Tables = {
     {name:"Pit latrine without flush water (lined or unlined) – household", ch4_efac:0.06,   ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
     {name:"Pit latrine without flush water (lined or unlined) – communal",  ch4_efac:0.3,    ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
     {name:"Pit latrine with flush water use (lined or unlined)",            ch4_efac:0.42,   ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
-    {name:"Septic System",                                                  ch4_efac:0.3,    ch4_efac_flooding:0.42,  BOD_conc_FS:1.35, fs_density:1100},
+    {name:"Septic tank (with or without dispersal field)",                  ch4_efac:0.3,    ch4_efac_flooding:0.42,  BOD_conc_FS:1.35, fs_density:1100},
     {name:"Fully lined tank without flush water use – not water tight",     ch4_efac:0.3,    ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
     {name:"Fully lined tank without flush water use – water tight",         ch4_efac:0.42,   ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
     {name:"Fully lined tank with flush water use - water tight or untight", ch4_efac:0.42,   ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
     {name:"Urine Diverting Dry Toilet (UDDT)",                              ch4_efac:0.0,    ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
     {name:"Composting Toilet",                                              ch4_efac:0.0013, ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
+    {name:"Imhoff tank",                                                    ch4_efac:0.48,   ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
   ],
 
   //containment is flooding?
@@ -269,35 +265,6 @@ let Tables = {
     {name:"Septic tank sludge", N_content:0.03, TVS:0.600, total_solids:0.02},
   ],
 };
-
-//copy tables to all variables with magnitude=='Option'
-//TODO: remove this section in favour of using the field 'table' in Info
-/*
-Tables.wwo_soil_typ      = Tables["Soil type"];
-Tables.wwt_soil_typ      = Tables["Soil type"];
-Tables.wwo_fslu_typ_lf   = Tables["Type of faecal sludge"];
-Tables.wwo_fslu_typ_la   = Tables["Type of faecal sludge"];
-Tables.wwt_slu_type      = Tables["Type of landfill"];
-Tables.wwo_lf_type       = Tables["Type of landfill"];
-Tables.wwo_dumping_pth   = Tables["type_of_water_body"];
-Tables.wsa_fuel_typ      = Tables["Fuel type"];
-Tables.wst_fuel_typ      = Tables["Fuel type"];
-Tables.wsd_fuel_typ      = Tables["Fuel type"];
-Tables.wsd_trck_typ      = Tables["Fuel type"];
-Tables.wwc_fuel_typ      = Tables["Fuel type"];
-Tables.wwt_fuel_typ      = Tables["Fuel type"];
-Tables.wwt_trck_typ      = Tables["Fuel type"];
-Tables.wwt_dige_typ      = Tables["Fuel type"];
-Tables.wwt_reus_trck_typ = Tables["Fuel type"];
-Tables.wwo_fuel_typ      = Tables["Fuel type"];
-Tables.wwo_trck_typ      = Tables["Fuel type"];
-Tables.wsa_pmp_type      = Tables["Pump type"];
-Tables.wsa_pmp_size      = Tables["Pump size"];
-Tables.wsd_pmp_size      = Tables["Pump size"];
-Tables.wst_treatmen      = Tables["Potabilization chain"];
-Tables.wwo_flooding      = Tables["Flooding containment"];
-Tables.wwt_slu_disp      = Tables["Type of sludge disposed"];
-*/
 
 //get object by "table" (string) and "index" (integer)
 Tables.get_row=function(table, index){
