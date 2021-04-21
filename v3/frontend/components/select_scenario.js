@@ -4,7 +4,7 @@ let select_scenario=new Vue({
     visible:false,
 
     loadfile_replace:true,
-    are_settings_open:false,
+    are_settings_open:true,
     are_you_editing_name:false,
 
     //backend
@@ -185,87 +185,90 @@ let select_scenario=new Vue({
       </div>
 
       <!--load save buttons-->
-      <div
-        id=load_save_btns
-        style="
-          display:grid;
-          grid-template-columns:49% 49%;
-          grid-gap:2%;
-        "
-      >
-        <!--load file-->
-        <div>
-          <div style="margin-bottom:10px">
-            <div style="font-size:larger">
-              Load file
-            </div>
-          </div>
-
-          <!--load mode radio btns-->
-          <div
-            style="
-              font-size:smaller;
-              display:grid;
-              grid-template-columns:50% 50%;
-            "
-          >
-            <div>
-              <label class=load_mode :selected="loadfile_replace==true" title="replace the current list of assessments with the loaded file">
-                <input type=radio v-model="loadfile_replace" :value='true'>
-                <img class=icon src="frontend/img/viti/select_scenario/icon-replace.svg">
-                <div style=margin-left:5px>
-                  <b>Replace</b><br>current list
-                </div>
-              </label>
-            </div>
-            <div>
-              <label class=load_mode :selected="loadfile_replace==false" title="append the loaded file to the current list of assessments">
-                <input type=radio v-model="loadfile_replace" :value='false'>
-                <img class=icon src="frontend/img/viti/select_scenario/icon-append.svg">
-                <div style=margin-left:5px>
-                  <b>Append</b><br>to current list
-                </div>
-              </label>
-            </div>
-          </div>
-
-          <!--input type file-->
-          <div style="margin-top:10px">
-            <input
-              type="file"
-              id="loadfile"
-              accept=".json"
-              onclick="this.value=''"
-              @change="load_json_file($event)"
-            >
-          </div>
-        </div>
-
-        <!--save file-->
+      <details>
+        <summary style="font-size:large">File</summary>
         <div
+          id=load_save_btns
           style="
-            text-align:center;
+            display:grid;
+            grid-template-columns:49% 49%;
+            grid-gap:2%;
           "
         >
-          <div style="margin-bottom:10px">
-            <div style="font-size:larger">
-              Save current session to a JSON file
+          <!--load file-->
+          <div>
+            <div style="margin-bottom:10px">
+              <div style="font-size:larger">
+                Load file
+              </div>
+            </div>
+
+            <!--load mode radio btns-->
+            <div
+              style="
+                font-size:smaller;
+                display:grid;
+                grid-template-columns:50% 50%;
+              "
+            >
+              <div>
+                <label class=load_mode :selected="loadfile_replace==true" title="replace the current list of assessments with the loaded file">
+                  <input type=radio v-model="loadfile_replace" :value='true'>
+                  <img class=icon src="frontend/img/viti/select_scenario/icon-replace.svg">
+                  <div style=margin-left:5px>
+                    <b>Replace</b><br>current list
+                  </div>
+                </label>
+              </div>
+              <div>
+                <label class=load_mode :selected="loadfile_replace==false" title="append the loaded file to the current list of assessments">
+                  <input type=radio v-model="loadfile_replace" :value='false'>
+                  <img class=icon src="frontend/img/viti/select_scenario/icon-append.svg">
+                  <div style=margin-left:5px>
+                    <b>Append</b><br>to current list
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!--input type file-->
+            <div style="margin-top:10px">
+              <input
+                type="file"
+                id="loadfile"
+                accept=".json"
+                onclick="this.value=''"
+                @change="load_json_file($event)"
+              >
             </div>
           </div>
-          <div>
-            <button class=save_btn @click="save_to_file()" title="save the current list of assessments to a file">
-              <div style="display:flex;align-items:center">
-                <img
-                  class=icon
-                  src="frontend/img/viti/select_scenario/icon-save.svg"
-                  style="margin-right:5px"
-                >
-                <div>Save file</div>
+
+          <!--save file-->
+          <div
+            style="
+              text-align:center;
+            "
+          >
+            <div style="margin-bottom:10px">
+              <div style="font-size:larger">
+                Save current session to a JSON file
               </div>
-            </button>
+            </div>
+            <div>
+              <button class=save_btn @click="save_to_file()" title="save the current list of assessments to a file">
+                <div style="display:flex;align-items:center">
+                  <img
+                    class=icon
+                    src="frontend/img/viti/select_scenario/icon-save.svg"
+                    style="margin-right:5px"
+                  >
+                  <div>Save file</div>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </details>
 
       <!--select gwp-->
       <div
@@ -539,7 +542,7 @@ let select_scenario=new Vue({
           <tr>
             <td style=background:white></td>
             <td style="background:white;text-align:left" colspan=6>
-              <button onclick="ecam.new_scenario()"
+              <button onclick="ecam.new_scenario();select_scenario.are_settings_open=false"
                 class=new_assessment
                 style="font-size:large"
                 v-html="'+ create new assessment'"

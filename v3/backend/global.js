@@ -1249,7 +1249,7 @@ class Waste_Treatment extends Substage{
       })(); //gOC
       let N_content = sludge_mass*this.wwt_slu_la_N_cont/100;
       let ratio_CN = C_content/N_content || 0;
-      if(ratio_CN>=30){return 0;}
+      if(ratio_CN>=30){return {total:0,co2:0,ch4:0,n2o:0};}
       let f_la = Tables.get_row('Soil type',this.wwt_soil_typ).f_la; //??
 
       let co2   = 0;
