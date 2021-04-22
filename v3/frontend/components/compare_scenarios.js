@@ -4,8 +4,9 @@ let compare_scenarios=new Vue({
     visible:false,
     scenarios_compared:[],
     current_view:'table',
-    include:{ //for summary table
-      inputs:false,
+
+    include:{
+      inputs:true,
       outputs:true,
     },
 
@@ -162,7 +163,6 @@ let compare_scenarios=new Vue({
                 },
               },
             },
-            plugins:[ChartDataLabels],
           });
         }
 
@@ -420,17 +420,18 @@ let compare_scenarios=new Vue({
         <!--choose inputs and/or outputs-->
         <div>
           <div style="text-align:center;margin-top:10px">
-            <label> <input type=checkbox v-model="include.inputs">  Include inputs </label>
-            <label> <input type=checkbox v-model="include.outputs"> Include outputs </label>
+            <big>Compare:</big>
+            <label> <input type=checkbox v-model="include.inputs">  inputs </label>
+            <label> <input type=checkbox v-model="include.outputs"> outputs </label>
           </div>
         </div>
 
         <!--compare scenarios table-->
         <table style="margin:10px auto" v-if="scenarios_compared.length">
           <!--scenarios names-->
-          <tbody>
+          <tbody v-if="include.inputs || include.outputs">
             <tr>
-              <td></td>
+              <td style="border-top:none;border-left:none"></td>
               <th v-for="scenario in scenarios_compared">
                 <b>
                   {{scenario.General.Name}}
@@ -440,24 +441,65 @@ let compare_scenarios=new Vue({
           </tbody>
 
           <!--summary header-->
-          <tr class=summary_row>
-            <th :colspan="1+scenarios_compared.length">
-              <div style="font-size:x-large;font-weight:bold">
-                Summary
-              </div>
-            </th>
+          <tr v-if="include.outputs">
+            <td :colspan="1+scenarios_compared.length">
+              <div style="font-size:larger;font-weight:bold">Summary</div>
+            </td>
           </tr>
 
-          <!--summary 1/2: wxx_KPI_GHG-->
-          <tbody v-for="level in Structure.filter(s=>!s.sublevel)">
-            <tr 
-              class=summary_row
-              v-for="stage in Structure.filter(s=>s.sublevel && s.level==level.level)"
-              v-if="include.outputs"
-            >
-              <th>
+          <!--summary: total ghg emissions of assessment-->
+          <tbody v-if="include.outputs">
+            <tr>
+              <td style="font-weight:bolder;">
+                {{translate('TotalGHG_descr')}}
+              </td>
+              <td v-for="scenario in scenarios_compared">
+                <div class=number>
+                  {{
+                    format(scenario.TotalGHG().total)
+                  }}
+                </div>
+                <div
+                  class="unit"
+                  style="text-align:right"
+                  v-html="get_base_unit('TotalGHG', scenario).prettify()"
+                ></div>
+              </td>
+            </tr>
+          </tbody>
+
+          <!--summary: {ws wsa wst wsd ww wwc wwt wwo}_KPI_GHG-->
+          <tbody
+            v-if="include.outputs"
+            v-for="level in Structure.filter(s=>!s.sublevel)"
+          >
+            <tr>
+              <td :style="{background:level.color,fontWeight:'bold'}">
+                &emsp;
+                {{
+                  translate(level.prefix+'_KPI_GHG_descr')
+                }}
+              </td>
+              <td v-for="scenario in scenarios_compared">
+                <div class=number>
+                  {{format(
+                    scenario[level.level][level.prefix+'_KPI_GHG']().total
+                  )}}
+                </div>
+                <div
+                  class="unit"
+                  style="text-align:right"
+                  v-html="get_base_unit(level.prefix+'_KPI_GHG', scenario).prettify()"
+                ></div>
+              </td>
+            </tr>
+
+            <tr v-for="stage in Structure.filter(s=>s.sublevel && s.level==level.level)">
+              <td :style="{background:stage.color}">
+                &emsp;
+                &emsp;
                 {{translate(stage.prefix+'_KPI_GHG_descr')}}
-              </th>
+              </td>
               <!--variable value-->
               <td v-for="scenario in scenarios_compared">
                 <div class=number>
@@ -474,47 +516,10 @@ let compare_scenarios=new Vue({
                 ></div>
               </td>
             </tr>
-            <tr class=summary_row v-if="include.outputs">
-              <th style="font-weight:bold">
-                {{
-                  translate(level.prefix+'_KPI_GHG_descr')
-                }}
-              </th>
-              <td v-for="scenario in scenarios_compared">
-                <div class=number>
-                  {{format(
-                    scenario[level.level][level.prefix+'_KPI_GHG']().total
-                  )}}
-                </div>
-                <div
-                  class="unit"
-                  style="text-align:right"
-                  v-html="get_base_unit(level.prefix+'_KPI_GHG', scenario).prettify()"
-                ></div>
-              </td>
-            </tr>
           </tbody>
 
-          <!--summary 2/2: total-->
-          <tbody v-if="include.outputs">
-            <tr class=summary_row>
-              <th style="font-weight:bolder;">
-                {{translate('TotalGHG_descr')}}
-              </th>
-              <td v-for="scenario in scenarios_compared">
-                <div class=number>
-                  {{
-                    format(scenario.TotalGHG().total)
-                  }}
-                </div>
-                <div
-                  class="unit"
-                  style="text-align:right"
-                  v-html="get_base_unit('TotalGHG', scenario).prettify()"
-                ></div>
-              </td>
-            </tr>
-          </tbody>
+          <!--separation row-->
+          <tr v-if="include.outputs"><td style="height:15px;border:none"></td></tr>
 
           <!--iterate stages-->
           <tbody
@@ -524,12 +529,12 @@ let compare_scenarios=new Vue({
               get_scenarios().map(sce=>sce[stage.level][stage.sublevel].length).sum()
             "
           >
-            <tr>
+            <tr v-if="!(stage.level=='General' && include.inputs==false)">
               <th
                 :colspan="1+scenarios_compared.length"
                 :style="'background:'+get_level_color(stage.level)"
               >
-                <div style="text-align:left;color:white;font-size:x-large;font-weight:bold">
+                <div style="text-align:left;color:white;font-size:larger;font-weight:bold">
                   {{translate(stage.level)}}
                   <span v-if="stage.sublevel">
                     &rsaquo;
@@ -583,6 +588,8 @@ let compare_scenarios=new Vue({
                 </div>
               </td>
             </tr>
+
+            <!--separation row--><tr><td style="height:1px;border:none"></td></tr>
           </tbody>
         </table>
       </div>
