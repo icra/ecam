@@ -1434,7 +1434,7 @@ class Waste_Onsite extends Substage{
     this.wwo_bod_slud         = 0; //?
     this.wwo_flooding         = 0; //yes/no
     this.wwo_cont_emp         = 0; //containments emptied
-    this.wwo_fdensity         = 0; //density of faecal sludge
+    this.wwo_fdensity         = 1400; //density of faecal sludge
     this.wwo_bod_conc_fs      = 0; //[BOD] in FS
     this.wwo_fslu_emp         = 0; //FS emptied
     this.wwo_tn_infl          = 0; //TN influent
