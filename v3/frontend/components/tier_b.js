@@ -21,15 +21,22 @@ let tier_b=new Vue({
       outputs:[],
     },
 
-    //FILTERS (see "backend/filters.js")
-    Filters,          //definition (list of variables for each filter)
+    //FILTERS (defined in "backend/filters.js")
+    Filters,          //each filter is an array of variables
     filters_on:false, //all filters on
     filters_active:{  //each filter on/off
       "GHG Emissions"      :false,
       "Energy Performance" :false,
       "Pump Efficiency"    :false,
       "Sludge Management"  :false,
-      "Other"              :false,
+      "Costs"              :false,
+
+      //Onsite sanitation
+      "General":false,
+      "Containment":false,
+      "Treatment":false,
+      "Disposal / Enduse":false,
+      "Open Defecation":false,
     },
 
     //benchmark ui colors

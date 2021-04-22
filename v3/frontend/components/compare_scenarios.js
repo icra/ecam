@@ -154,8 +154,15 @@ let compare_scenarios=new Vue({
                   beginAtZero: true,
                   borderWidth:2,
                 }
-              }
-            }
+              },
+              plugins:{
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                  color: '#36A2EB'
+                },
+              },
+            },
+            plugins:[ChartDataLabels],
           });
         }
 

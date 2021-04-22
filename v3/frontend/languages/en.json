@@ -1,6 +1,8 @@
 {
 "#below":"below",
 
+"#Costs":"Costs",
+
 "#wsa_costs":"Do you know the utility costs by stage",
 "#wst_costs":"Do you know the utility costs by stage",
 "#wsd_costs":"Do you know the utility costs by stage",
@@ -584,7 +586,7 @@
 "#Update the stage value using this average value":"Update the stage value using this average value",
 "#Update the stage value using this total value":"Update the stage value using this total value",
 "#Urine Diverting Dry Toilet (UDDT)":"Urine Diverting Dry Toilet (UDDT)",
-"#Use fullscreen mode in your browser to work more comfortably":"Use fullscreen mode in your browser to work more comfortably",
+"#Use fullscreen mode in your browser (F11) to work more comfortably":"Use fullscreen mode in your browser (F11) to work more comfortably",
 "#Use the TAB key to input values faster":"Use the TAB key to input values faster",
 "#VIEW GRAPH":"VIEW GRAPH",
 "#VIEW TABLE":"VIEW TABLE",

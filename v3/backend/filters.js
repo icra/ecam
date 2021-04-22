@@ -1,5 +1,5 @@
 //filters for inputs and questions
-let Filters = {
+let Filters={
 "GHG Emissions":[
   //wsa Abstraction
     "wsa_vol_conv", //input
@@ -50,31 +50,105 @@ let Filters = {
     "wwt_producing_biogas", //question
     "wwt_reuse_trucks", //question
     "wwt_water_reuse", //question
-  //wwo Onsite
-    "wwo_onsi_pop", //input
-    "wwo_open_pop", //input
-    "wwo_nrg_cons", //input
-    "wwo_conv_kwh", //input
-    "wwo_ch4_efac_tre", //input
-    "wwo_ch4_efac_dis", //input
-    "wwo_n2o_efac_tre", //input
-    "wwo_n2o_efac_dis", //input
-    "wwo_n2o_efac_opd", //input
-    "wwo_prot_con", //input
-    "wwo_bod_infl", //input
-    "wwo_bod_effl", //input
-    "wwo_bod_rmvd", //input
-    "wwo_bod_slud", //input
-    "wwo_flooding", //input
-    "wwo_cont_emp", //input
-    "wwo_fdensity", //input
-    "wwo_bod_conc_fs", //input
-    "wwo_fslu_emp", //input
-    "wwo_tn_infl", //input
-    "wwo_tn_effl", //input
-    "wwo_engines", //question
-    "wwo_transport", //question
-    "wwo_producing_biogas", //question
+],
+
+"Pump Efficiency":[
+  //wsa
+  "wsa_pumping",     //question
+  "wsa_pumping_eff", //question
+  //wst
+  "wst_pumping",     //question
+  "wst_pumping_eff", //question
+  //wsd
+  "wsd_pumping",     //question
+  "wsd_pumping_eff", //question
+  //wwc
+  "wwc_pumping",     //question
+  "wwc_pumping_eff", //question
+  //wwt
+  "wwt_pumping",     //question
+  "wwt_pumping_eff", //question
+],
+
+"Sludge Management":[
+  "wwt_serv_pop",         //input
+  "wwt_vol_trea",         //input
+  "wwt_vol_nonp",         //input
+  "wwt_vol_disc",         //input
+  "wwt_bod_infl",         //input
+  "wwt_bod_effl",         //input
+  "wwt_sludge_mgmt",      //question
+  "wwt_slu_storage",      //question
+  "wwt_composting",       //question
+  "wwt_incineration",     //question
+  "wwt_land_application", //question
+  "wwt_landfilling",      //question
+  "wwt_stockpiling",      //question
+  "wwt_trucks",           //question
+],
+
+"Costs":[
+  "ws_nrg_cost",
+  "ws_resi_pop",
+  "ws_run_cost",
+  "ww_resi_pop",
+  "ww_vol_gene",
+  "ww_nrg_cost",
+  "ww_run_cost",
+  "wsa_costs",
+  "wst_costs",
+  "wst_mass_slu",
+  "wst_treatmen",
+  "wst_treatment_perf",
+  "wst_vol_trea",
+  "wsd_costs",
+  "wsd_service_perf",
+  "wsd_topographic",
+  "wsd_water_eff",
+  "wwc_costs",
+  "wwt_costs",
+  "wwt_treatment_perf",
+],
+
+//Onsite sanitation
+"General":[
+  "wwo_onsi_pop", //variable
+  "wwo_open_pop", //variable
+  "wwo_vol_unco", //variable
+  "wwo_costs", //question
+],
+"Containment":[
+  "wwo_cont_emp",
+  "wwo_fslu_emp",
+  "wwo_fdensity",
+  "wwo_bod_conc_fs",
+  "wwo_tn_infl",
+  "wwo_flooding",
+],
+"Treatment":[
+  "wwo_bod_infl", //variable
+  "wwo_bod_rmvd", //variable
+  "wwo_bod_slud", //variable
+  "wwo_bod_effl", //variable
+  "wwo_ch4_efac_tre", //variable
+  "wwo_n2o_efac_tre", //variable
+  "wwo_ch4_efac_dis", //variable
+  "wwo_n2o_efac_dis", //variable
+  "wwo_producing_biogas", //question
+  "wwo_tn_effl", //variable
+],
+"Disposal / Enduse":[
+  "wwo_transport", //question
+  "wwo_landfil", //question
+  "wwo_landapp", //question
+  "wwo_dumping", //question
+  "wwo_urine", //question
+  "wwo_reuse", //question
+],
+"Open Defecation":[
+  "wwo_open_pop", //variable
+  "wwo_n2o_efac_opd", //variable
+  "wwo_prot_con", //variable
 ],
 
 "Energy Performance":[
@@ -111,77 +185,10 @@ let Filters = {
     "wwo_nrg_cons", //input
     "wwo_conv_kwh", //input
     "wwo_engines", //question
-    "wwo_transport", //question
     "wwo_producing_biogas", //question
+    "wwo_pumping",     //question
+    "wwo_pumping_eff", //question
 ],
 
-"Pump Efficiency":[
-  //wsa
-  "wsa_pumping",     //question
-  "wsa_pumping_eff", //question
-  //wst
-  "wst_pumping",     //question
-  "wst_pumping_eff", //question
-  //wsd
-  "wsd_pumping",     //question
-  "wsd_pumping_eff", //question
-  //wwc
-  "wwc_pumping",     //question
-  "wwc_pumping_eff", //question
-  //wwt
-  "wwt_pumping",     //question
-  "wwt_pumping_eff", //question
-  //wwo
-  "wwo_pumping",     //question
-  "wwo_pumping_eff", //question
-],
-
-"Sludge Management":[
-  //wwt
-    "wwt_serv_pop",         //input
-    "wwt_vol_trea",         //input
-    "wwt_vol_nonp",         //input
-    "wwt_vol_disc",         //input
-    "wwt_bod_infl",         //input
-    "wwt_bod_effl",         //input
-    "wwt_sludge_mgmt",      //question
-    "wwt_slu_storage",      //question
-    "wwt_composting",       //question
-    "wwt_incineration",     //question
-    "wwt_land_application", //question
-    "wwt_landfilling",      //question
-    "wwt_stockpiling",      //question
-    "wwt_trucks",           //question
-  //wwo
-    "wwo_landfil", //question
-    "wwo_landapp", //question
-    "wwo_dumping", //question
-    "wwo_urine",   //question
-    "wwo_reuse",   //question
-],
-
-"Other":[
-  "ws_nrg_cost",
-  "ws_resi_pop",
-  "ws_run_cost",
-  "ww_resi_pop",
-  "ww_vol_gene",
-  "ww_nrg_cost",
-  "ww_run_cost",
-  "wsa_costs",
-  "wst_costs",
-  "wst_mass_slu",
-  "wst_treatmen",
-  "wst_treatment_perf",
-  "wst_vol_trea",
-  "wsd_costs",
-  "wsd_service_perf",
-  "wsd_topographic",
-  "wsd_water_eff",
-  "wwc_costs",
-  "wwt_costs",
-  "wwt_treatment_perf",
-  "wwo_costs",
-],
 
 };

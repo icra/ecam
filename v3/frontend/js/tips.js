@@ -2,19 +2,17 @@
 let Tips={
   list:[
     "Use the TAB key to input values faster",
-    "Double click a graph to download it",
-    "Export results to Excel at Main Menu/Other/Export",
     "Press &uarr; and &darr; when editing inputs to quickly increase/decrease the number",
-    "Click on the 'untitled' substage header to change its name",
-    "Move the mouse over inputs to highlight related outputs",
-    "Move the mouse over outputs to highlight related inputs",
-    "Use fullscreen mode in your browser to work more comfortably",
-    "Move the mouse over an output to see its formula",
+    "Export results to Excel at Configuration/Export",
+    "Enable 'highlight mode' to highlight related inputs and outputs when moving the mouse over inputs or outputs",
+    "Use fullscreen mode in your browser (F11) to work more comfortably",
+    "Click the code of an input to see more info about that input",
+    "Click the code of on output to see more info about that output",
   ],
 
   current:"",
 
-  random() {
+  random(){
     let n = Tips.list.length;
     let r = Math.floor(Math.random()*n);
     let tip = Tips.list[r];

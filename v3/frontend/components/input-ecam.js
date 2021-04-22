@@ -35,6 +35,7 @@ Vue.component('input_ecam',{
               @mouseout="caption.hide()"
               :disabled="isNaN(Estimations[code](current_stage))"
               style="font-size:smaller"
+              tabindex="-1"
             >
               Estimation:
               <span v-html="format(Estimations[code](current_stage)/Units.multiplier(code))"></span>
@@ -55,6 +56,7 @@ Vue.component('input_ecam',{
             style="
               max-width:250px;
             "
+            tabindex="-1"
           >
             <option
               v-for="obj in Tables[Exceptions[code].table]"
@@ -72,6 +74,7 @@ Vue.component('input_ecam',{
             style="
               max-width:250px;
             "
+            tabindex="-1"
           >
             <option
               v-for="obj in Tables[Exceptions[code].table]"
@@ -91,6 +94,7 @@ Vue.component('input_ecam',{
             style="
               max-width:250px;
             "
+            tabindex="-1"
           >
             <option
               v-for="obj in Tables[Exceptions[code].table]"
@@ -156,6 +160,7 @@ Vue.component('input_ecam',{
             <select
               v-if="Units[Info[code].magnitude]"
               @change="select_unit(code, $event)"
+              tabindex="-1"
             >
               <option
                 v-for="mul,unit in Units[Info[code].magnitude]"
