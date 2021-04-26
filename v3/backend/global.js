@@ -420,7 +420,7 @@ class Waste_stages{
 class Substage{
   constructor(){
     //substage name
-    this.name="new stage";
+    this.name="new substage";
 
     /*user preferences*/
     this.Configuration={
@@ -964,12 +964,13 @@ class Waste_Treatment extends Substage{
     this.wwt_pmp_pf   = 0.9;
     this.wwt_pmp_exff = 0;
 
-    this.wwt_biog_pro = 0; //total biogas produced
-    this.wwt_biog_fla = 0; //% of biogas produced that is flared
-    this.wwt_biog_val = 0; //% of biogas produced that is used for heat
-    this.wwt_biog_lkd = 2; //% of biogas produced that is leaked
+    this.wwt_biog_pro  = 0; //total biogas produced
+    this.wwt_biog_fla  = 0; //% of biogas produced that is flared
+    this.wwt_biog_val  = 0; //% of biogas produced that is used for heat
+    this.wwt_biog_lkd  = 2; //% of biogas produced that is leaked
+    this.wwt_biog_sold = 0; //% of biogas produced that is sold
 
-    this.wwt_ch4_biog = 59; //% of CH4 in biogas
+    this.wwt_ch4_biog = 59; //% of CH4 in biogas (volume)
     this.wwt_dige_typ = 0;
     this.wwt_fuel_dig = 0;
     this.wwt_nrg_biog = 0;
@@ -1023,6 +1024,9 @@ class Waste_Treatment extends Substage{
       "wwt_KPI_nrg_cons_new",
       "wwt_KPI_nrg_estm_sav",
       "wwt_KPI_ghg_estm_red",
+
+      "wwt_moles_biogas_produced",
+      "wwt_biogas_usage",
       "wwt_KPI_biog_x_bod",
       "wwt_nrg_biog_val",
       "wwt_KPI_nrg_biogas",
@@ -1105,51 +1109,70 @@ class Waste_Treatment extends Substage{
       return {total,co2,ch4,n2o};
     }
 
-    //biogas flared
-    wwt_KPI_GHG_biog_flared(){
-      //kg of biogas flared
-      let biog_fla = this.wwt_biog_pro*this.wwt_biog_fla/100;
-      let ch4_biog = this.wwt_ch4_biog_mass_content(); //% of CH4 mass in biogas
+    //convert volume of biogas produced to moles of biogas produced
+    wwt_moles_biogas_produced(){
+      //use PV=nRT formula
+      //n = PV/RT
+      //use normal conditions of pressure and temperature
+      let P = 1.013e5; //Pa == N/m2 == J/m3
+      let V = this.wwt_biog_pro; //m3
+      let R = 8.31446261815324; //J/K·mol
+      let T = 273.15; //K == 0ºC
+      return P*V/(R*T); //"moles" of biogas produced
+    }
 
-      let co2=(function(){
-        return biog_fla*(ch4_biog/100)*(44/16);
-      })();
+    //biogas flared emissions
+    wwt_KPI_GHG_biog_flared(){
+      let moles_biogas = this.wwt_moles_biogas_produced(); //moles of biogas produced
+      let moles_biogas_flared = moles_biogas*this.wwt_biog_fla/100; //moles of biogas flared
+
+      //combustion of 1 mol of CH4 produces 1 mol of CO2 
+      //CH4 + 2·O2 -> CO2 + 2·H2O
+      //we also account moles of CO2 already present into the biogas
+      let moles_co2_to_atmosphere = moles_biogas_flared; //moles of CO2 
+      let mass_co2_to_atmosphere = moles_co2_to_atmosphere*(44/1000); //kg of CO2
+
+      let co2 = mass_co2_to_atmosphere; //kgCO2
       let n2o = 0;
       let ch4 = 0;
-
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
 
+    //biogas valorized emissions
     wwt_KPI_GHG_biog_valorized(){
-      //TODO biogas valorized doubt: discuss if we have to account for biogas valorized emissions
-      let co2   = 0;
-      let ch4   = 0;
-      let n2o   = 0;
-      let total = co2+ch4+n2o;
-      return {total,co2,ch4,n2o};
-    }
+      let moles_biogas = this.wwt_moles_biogas_produced(); //moles of biogas produced
+      let moles_biogas_valorized = moles_biogas*this.wwt_biog_val/100; //moles of biogas valorized
 
-    //TODO biogas leaked
-    wwt_KPI_GHG_biog_leaked(){
-      //kg of biogas leaked
-      let biog_lkd = this.wwt_biog_pro*this.wwt_biog_lkd/100; //kg
-      let ch4_biog = this.wwt_ch4_biog_mass_content(); //% of CH4 mass in biogas
+      //combustion of 1 mol of CH4 produces 1 mol of CO2 
+      //CH4 + 2·O2 -> CO2 + 2·H2O
+      //we also account moles of CO2 already present into the biogas
+      let moles_co2_to_atmosphere = moles_biogas_valorized; //moles of CO2 
+      let mass_co2_to_atmosphere = moles_co2_to_atmosphere*(44/1000); //kg of CO2
 
-      let co2 = 0;
-      let ch4 = biog_lkd*(ch4_biog/100)*Cts.ct_ch4_eq.value;
+      let co2 = mass_co2_to_atmosphere; //kgCO2
       let n2o = 0;
-
+      let ch4 = 0;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
 
-    //conversion from %volume to %mass
-    wwt_ch4_biog_mass_content(){
-      let BiogasCH4 = this.wwt_ch4_biog; //%vol
-      const MWCH4   = 16; //gCH4/mol
-      const MWCO2   = 44; //gCO2/mol
-      return 100*BiogasCH4*MWCH4/(BiogasCH4*MWCH4+(100-BiogasCH4)*MWCO2);
+    //biogas leaked emissions
+    wwt_KPI_GHG_biog_leaked(){
+      let moles_biogas = this.wwt_moles_biogas_produced(); //moles of biogas produced
+      let moles_biogas_leaked = moles_biogas*this.wwt_biog_lkd/100; //moles of biogas leaked
+
+      let moles_ch4_leaked = moles_biogas_leaked*this.wwt_ch4_biog/100; //moles of CH4 leaked
+      let moles_co2_leaked = moles_biogas_leaked - moles_ch4_leaked; //moles of CO2 leaked
+
+      let mass_co2_to_atmosphere = moles_co2_leaked*(44/1000); //kg of CO2 leaked
+      let mass_ch4_to_atmosphere = moles_ch4_leaked*(16/1000); //kg of CH4 leaked
+
+      let co2 = mass_co2_to_atmosphere; //kgCO2
+      let n2o = 0;
+      let ch4 = mass_ch4_to_atmosphere*Cts.ct_ch4_eq.value; //kgCO2eq
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
 
     //ghg from sludge management
@@ -1326,6 +1349,14 @@ class Waste_Treatment extends Substage{
     }
 
   //SL wwt
+    //all biogas produced is used for different things. Has to add up to 100%
+    wwt_biogas_usage(){
+      let flared = this.wwt_biog_fla;  //% of biogas produced that is flared
+      let used   = this.wwt_biog_val;  //% of biogas produced that is used for heat
+      let leaked = this.wwt_biog_lkd;  //% of biogas produced that is leaked
+      let sold   = this.wwt_biog_sold; //% of biogas produced that is sold
+      return flared + used + leaked + sold;
+    }
     wwt_bod_rmvd(){return this.wwt_bod_infl-this.wwt_bod_effl}
     wwt_KPI_nrg_per_m3(){return this.wwt_nrg_cons/this.wwt_vol_trea}
     wwt_KPI_nrg_per_kg(){return this.wwt_nrg_cons/this.wwt_bod_rmvd()}
@@ -1341,9 +1372,13 @@ class Waste_Treatment extends Substage{
     wwt_KPI_nrg_cons_new(){return this.wwt_vol_pump*this.wwt_KPI_std_nrg_newp()/100*this.wwt_pmp_head}
     wwt_KPI_nrg_estm_sav(){return this.wwt_nrg_cons-this.wwt_KPI_nrg_cons_new()}
     wwt_KPI_ghg_estm_red(){return this.wwt_KPI_nrg_estm_sav()*this.wwt_conv_kwh}
-
     wwt_KPI_biog_x_bod(){return this.wwt_biog_pro/this.wwt_bod_rmvd()}
-    wwt_nrg_biog_val(){return this.wwt_biog_val*this.wwt_ch4_biog/100*Cts.ct_ch4_nrg.value}
+    wwt_nrg_biog_val(){
+      let biogas_produced = this.wwt_biog_pro; //m3 of biogas
+      let biogas_valorized = biogas_produced*this.wwt_biog_val/100; //m3 of biogas
+      let methane_valorized = biogas_valorized*this.wwt_ch4_biog/100; //m3 of methane
+      return methane_valorized*Cts.ct_ch4_nrg.value; //kWh
+    }
     wwt_KPI_nrg_biogas(){return this.wwt_nrg_biog/this.wwt_vol_trea}
     wwt_KPI_nrg_x_biog(){return 100*this.wwt_nrg_biog/this.wwt_nrg_biog_val()}
     wwt_total_m3(){return this.wwt_vol_disc+this.wwt_vol_nonp;}

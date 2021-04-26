@@ -21,7 +21,7 @@ let caption = new Vue({
         border:1px solid #ccc;
         color:#666;
         text-align:left;
-        max-width:400px;
+        max-width:800px;
       }
     </style>
   `,

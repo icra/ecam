@@ -8,15 +8,8 @@ ECAM CODING TASKS - tasks also in https://github.com/icra/ecam/issues
   - IPCC compliance
 
 * DOING NOW - concrete and well defined tasks only - BUGS HAVE HIGHEST PRIORITY ALWAYS
-  - add a button for -> <button> kgCO2eq/m3 </button> to tier_b.js
-    - abstracted volume  (wsa)
-    - treated volume     (wst)
-    - distributed volume (wsd)
-    - collected volume   (wwc)
-    - treated volume     (wwt)
-    - treated volume     (wwo)
+  - adapt biogas equations for onsite treatment too
   - trigger warning when checking version when loading json files
-
   - fill References structure for documentation ("backend/references.js")
 
 * TO BE DONE WHEN V3 IS FEATURE FROZEN

@@ -3,6 +3,11 @@
   each function return "good","acceptable","bad" according to rules
 */
 let Benchmarks={
+  //biogas usage
+  wwt_biogas_usage(stage, value){
+    return value==100 ? "Good" : "Unsatisfactory";
+  },
+
   //standarized energy consumption (kWh/m3/100m)
   wsa_KPI_std_nrg_cons(stage, value){
     if(!stage)                  return "stage error";

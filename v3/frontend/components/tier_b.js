@@ -30,6 +30,7 @@ let tier_b=new Vue({
       "Pump Efficiency"    :false,
       "Sludge Management"  :false,
       "Costs"              :false,
+      "Biogas"             :false,
 
       //Onsite sanitation
       "General":false,

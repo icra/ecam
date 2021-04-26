@@ -10,6 +10,14 @@
 */
 
 let Info={
+  //biogas
+  wwt_moles_biogas_produced:{magnitude:"Moles",unit:"moles"},
+  wwt_biogas_usage:{magnitude:"Percentage",unit:"%"},
+  wwt_biog_sold:{magnitude:"Percentage",unit:"%"},
+  wwt_KPI_GHG_biog_flared:{magnitude:"Mass",unit:"kgCO2eq"},
+  wwt_KPI_GHG_biog_valorized:{magnitude:"Mass",unit:"kgCO2eq"},
+  wwt_KPI_GHG_biog_leaked:{magnitude:"Mass",unit:"kgCO2eq"},
+
 	//UNFCCC categories TODO
 	unfccc_1A1:{magnitude:"Mass",unit:"kgCO2eq"},
 	unfccc_1A3:{magnitude:"Mass",unit:"kgCO2eq"},
@@ -41,11 +49,6 @@ let Info={
   wwc_bod:{magnitude:"Mass", unit:"kg"},
   wwc_n2o_efac_cso:{magnitude:"Mass/Mass", unit:"kgN2O-N/kgN"},
   wwc_n2o_efac_col:{magnitude:"Mass/Mass", unit:"kgN2O-N/kgN"},
-
-  wwt_KPI_GHG_biog_flared:{magnitude:"Mass",unit:"kgCO2eq"},
-  wwt_KPI_GHG_biog_valorized:{magnitude:"Mass",unit:"kgCO2eq"},
-  wwt_KPI_GHG_biog_leaked:{magnitude:"Mass",unit:"kgCO2eq"},
-  wwt_ch4_biog_mass_content:{magnitude:"Percentage",unit:"%"},
 
   //inputs that are options instead of numeric
   wwo_soil_typ     : {magnitude:"Option", table:"Soil type",                unit:"Soil type"},
@@ -204,7 +207,7 @@ let Info={
 	wwt_KPI_sludg_prod:{magnitude:"Mass/Volume",unit:"kg/m3"},
 	wwt_SL_qual_com :{magnitude:"Percentage",unit:"%"},
 
-	wwt_biog_pro:{magnitude:"Mass",unit:"kg"},
+	wwt_biog_pro:{magnitude:"Volume of biogas",unit:"Nm3"},
   wwt_biog_fla:{magnitude:"Percentage",unit:"%"},
 	wwt_biog_val:{magnitude:"Percentage",unit:"%"},
   wwt_biog_lkd:{magnitude:"Percentage",unit:"%"},

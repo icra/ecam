@@ -49,4 +49,10 @@ let Units={
     "GWh"  :1e6,
     "TJ"   :1e7/36,
   },
+
+  //special case for biogas where unit has to have the word "normal" "N" in front
+  "Volume of biogas":{
+    "NL" :0.001,
+    "Nm3":1, //base unit
+  },
 };

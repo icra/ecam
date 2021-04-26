@@ -123,6 +123,9 @@ let select_scenario=new Vue({
         Scenarios.forEach(obj=>{
           compare_scenarios.add_scenario_to_compared(obj);
         });
+
+        //close settings
+        _this.are_settings_open=false;
       };
 
       try{

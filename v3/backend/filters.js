@@ -151,6 +151,11 @@ let Filters={
   "wwo_prot_con", //variable
 ],
 
+"Biogas":[
+  "wwt_producing_biogas", //question
+  "wwo_producing_biogas", //question
+],
+
 "Energy Performance":[
   //wsa Abstraction
     "wsa_vol_conv", //input
@@ -180,7 +185,6 @@ let Filters={
     "wwt_nrg_cons", //input
     "wwt_conv_kwh", //input
     "wwt_engines", //question
-    "wwt_producing_biogas", //question
   //wwo
     "wwo_nrg_cons", //input
     "wwo_conv_kwh", //input

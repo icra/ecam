@@ -23,6 +23,15 @@ let References={
     },
   },
 
+  wwt_biog_pro:{
+    ref:"The estimation is based on the dry mass of sludge produced (equations from section 2.2 - GHG calculations of Bridle model process sludge digestion, Laura Snip PhD thesis, page 19)",
+    link:``,   //link to doi for example
+    pdf:{      //link to pdf "www.example.com/file.pdf#page" | https://helpx.adobe.com/acrobat/kb/link-html-pdf-page-acrobat.html
+      text:``,
+      link:``,
+    },
+  },
+
   wwt_KPI_GHG_slu_storage:{
     ref:`
       0.03 = emission factor due to storage between 5 and 20 days.

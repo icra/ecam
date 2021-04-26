@@ -62,6 +62,19 @@ let Estimations={
     },
 
   //wwt
+    wwt_biog_fla(substage){
+      return 100-substage.wwt_biog_val-substage.wwt_biog_lkd-substage.wwt_biog_sold;
+    },
+    wwt_biog_val(substage){
+      return 100-substage.wwt_biog_fla-substage.wwt_biog_lkd-substage.wwt_biog_sold;
+    },
+    wwt_biog_lkd(substage){
+      return 100-substage.wwt_biog_val-substage.wwt_biog_fla-substage.wwt_biog_sold;
+    },
+    wwt_biog_sold(substage){
+      return 100-substage.wwt_biog_val-substage.wwt_biog_fla-substage.wwt_biog_lkd;
+    },
+
     wwt_vol_trea(substage){return 0.2*substage.wwt_serv_pop*Global.Days();},
     wwt_vol_disc(substage){return substage.wwt_vol_trea - substage.wwt_vol_nonp;},
     wwt_tn_infl(substage){
@@ -90,12 +103,11 @@ let Estimations={
 
     //estimation for biogas produced
     wwt_biog_pro(substage){
-      let wwt_mass_slu         = substage.wwt_mass_slu;               //kg | mass of combined sludge to digestion
-      let VS_to_digestion      = wwt_mass_slu * 0.80;                 //kg | VS to digestion: 80% of sludge mass
-      let VS_destroyed         = VS_to_digestion * 0.60;              //kg | VS destroyed: 60% of VS
-      let digested_sludge_mass = wwt_mass_slu - VS_destroyed;         //kg | mass of digested sludge
-      let biogas_mass          = wwt_mass_slu - digested_sludge_mass; //kg | biogas produced
-      return biogas_mass;
+      let wwt_mass_slu    = substage.wwt_mass_slu;  //kg  | mass of combined sludge to digestion
+      let VS_to_digestion = wwt_mass_slu    * 0.80; //kg  | VS to digestion: 80% of sludge mass
+      let VS_destroyed    = VS_to_digestion * 0.60; //kg  | VS destroyed: 60% of VS
+      let biogas_volume   = VS_destroyed    * 0.80; //Nm3 | biogas produced (volume)
+      return biogas_volume;
     },
 
     wwt_bod_infl(substage){

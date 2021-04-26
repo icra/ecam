@@ -253,6 +253,12 @@ let ecam={
           sheet_name:`${s.level} ${s.sublevel}`,
           rows:[
             //...
+            [
+              "name",
+              "substage name",
+              "text",
+              ss.name,
+            ],
             ...get_input_codes(s.level,s.sublevel).map(key=>{
               return[
                 key, //column: variable name

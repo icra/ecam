@@ -310,12 +310,15 @@ let Questions={
         "wwt_biog_fla",
         "wwt_biog_val",
         "wwt_biog_lkd",
+        "wwt_biog_sold",
 
         "wwt_ch4_biog",
         "wwt_dige_typ",
         "wwt_fuel_dig",
         "wwt_nrg_biog",
 
+        "wwt_moles_biogas_produced",
+        "wwt_biogas_usage",
         "wwt_KPI_biog_x_bod",
         "wwt_nrg_biog_val",
         "wwt_KPI_GHG_dig_fuel",
@@ -347,6 +350,7 @@ let Questions={
         "wwt_pmp_head",
         "wwt_sta_head",
         "wwt_coll_len",
+        "wwt_KPI_nrg_per_pump",
         "wwt_KPI_std_nrg_cons",
         "wwt_KPI_un_head_loss",
       ],
