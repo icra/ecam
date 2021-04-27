@@ -12,6 +12,9 @@ let summary_ghg=new Vue({
     //current emissions unit
     current_unit:"kgCO2eq",
 
+    //chart objects from chartjs library stored here
+    charts:{},
+
     //frontend
     variable,
     Charts,
@@ -55,8 +58,10 @@ let summary_ghg=new Vue({
 
     //call chart drawing functions
     draw_all_charts(){
-      if(this.Global.TotalGHG().total==0) return;
-      //draw pie charts
+      //destroy all charts
+      Object.values(this.charts).forEach(chart=>chart.destroy());
+
+      //pie charts (d3js)
         Charts.draw_pie_chart('chart_1',
           [
             {"label":"", "value":100*Global.Water.ws_KPI_GHG().total/Global.TotalGHG().total},
@@ -143,42 +148,83 @@ let summary_ghg=new Vue({
         );
       //--
 
-      //draw bar charts
-        Charts.draw_bar_chart(
-          'bar_chart_ghg_substages',
-          Structure.filter(s=>s.sublevel).map(s=>{
-            return Global[s.level][s.sublevel].map(ss=>{
-              let name     = s.prefix+" "+ss.name;
-              let emission = ss[s.prefix+'_KPI_GHG']();
-              let CO2 = emission.co2;
-              let N2O = emission.n2o;
-              let CH4 = emission.ch4;
-              return {name, CO2, CH4, N2O};
-            });
-          }).reduce((p,c)=>p.concat(c),[]),
-          colors=[
-            Charts.gas_colors.co2,
-            Charts.gas_colors.ch4,
-            Charts.gas_colors.n2o,
-          ],
-          'kgCO2eq',
-        );
+      //Chart.js bar chart -- ghg by substage
+      if(document.getElementById('bar_chart_ghg_substages')){
+        this.charts.bar_chart_ghg_substages = new Chart('bar_chart_ghg_substages',{
+          type:'bar',
+          data:{
+            labels: Structure.filter(s=>s.sublevel).map(s=>{
+              return Global[s.level][s.sublevel].map(ss=>{
+                return (s.prefix+" "+ss.name);
+              });
+            }).reduce((p,c)=>p.concat(c),[]),
+            datasets:[
+              ...['co2','ch4','n2o'].map(gas=>{
+                return {
+                  label:`${gas.toUpperCase()} (kgCO2eq)`,
+                  data: Structure.filter(s=>s.sublevel).map(s=>{
+                    return Global[s.level][s.sublevel].map(ss=>{
+                      return ss[s.prefix+'_KPI_GHG']()[gas];
+                    });
+                  }).reduce((p,c)=>p.concat(c),[]),
+                  backgroundColor:[Charts.gas_colors[gas]],
+                  borderColor:[Charts.gas_colors[gas]],
+                  borderWidth:1,
+                };
+              }),
+            ],
+          },
+          options:{
+            aspectRatio:4,
+            scales:{
+              x:{
+                stacked:true,
+              },
+              y:{
+                beginAtZero:true,
+                borderWidth:2,
+                stacked:true,
+              },
+            },
+          },
+        });
+      }
 
-        Charts.draw_bar_chart(
-          'bar_chart_nrg_substages',
-          Structure.filter(s=>s.sublevel).map(s=>{
-            return Global[s.level][s.sublevel].map(ss=>{
-              let name   = s.prefix+" "+ss.name;
-              let Energy = ss[s.prefix+'_nrg_cons'];
-              return {name, Energy};
-            });
-          }).reduce((p,c)=>p.concat(c),[]),
-          colors=[
-            "#ffbe54",
-          ],
-          'kWh',
-        );
-      //--
+      //Chart.js bar chart -- nrg by substage
+      if(document.getElementById('bar_chart_nrg_substages')){
+        this.charts.bar_chart_nrg_substages = new Chart('bar_chart_nrg_substages',{
+          type:'bar',
+          data:{
+            labels: Structure.filter(s=>s.sublevel).map(s=>{
+              return Global[s.level][s.sublevel].map(ss=>{
+                return (s.prefix+" "+ss.name);
+              });
+            }).reduce((p,c)=>p.concat(c),[]),
+            datasets:[
+              {
+                label:'Energy (kWh)',
+                data:Structure.filter(s=>s.sublevel).map(s=>{
+                  return Global[s.level][s.sublevel].map(ss=>{
+                    return ss[s.prefix+'_nrg_cons'];
+                  });
+                }).reduce((p,c)=>p.concat(c),[]),
+                backgroundColor:["#ffbe54"],
+                borderColor:["#ffbe54"],
+                borderWidth:1,
+              },
+            ]
+          },
+          options:{
+            aspectRatio:4,
+            scales:{
+              y:{
+                beginAtZero:true,
+                borderWidth:2,
+              },
+            },
+          },
+        });
+      }
     },
   },
 
@@ -535,7 +581,7 @@ let summary_ghg=new Vue({
               GHG emissions by substage
             </div>
             <div>
-              <div id=bar_chart_ghg_substages></div>
+              <canvas id="bar_chart_ghg_substages" width="400" height="400"></canvas>
             </div>
           </div>
         </div>
@@ -606,7 +652,7 @@ let summary_ghg=new Vue({
               Energy consumption by substage
             </div>
             <div>
-              <div id=bar_chart_nrg_substages></div>
+              <canvas id="bar_chart_nrg_substages" width="400" height="400"></canvas>
             </div>
           </div>
         </div>

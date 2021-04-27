@@ -20,13 +20,6 @@ let compare_scenarios=new Vue({
   },
 
   methods:{
-    //clear charts
-    destroy_all_charts(){
-      Object.values(this.charts).forEach(chart=>{
-        chart.destroy();
-      });
-    },
-
     //add scenario to comparison table
     add_scenario_to_compared(scenario){
       if(!scenario) return;
@@ -83,48 +76,44 @@ let compare_scenarios=new Vue({
     },
 
     draw_all_charts(){
-      this.destroy_all_charts();
+      //destroy all charts
+      Object.values(this.charts).forEach(chart=>chart.destroy());
 
       //bar charts
         //Chart.js - bar chart: total ghg by scenario
-        if(document.getElementById('bar_chart_ghg_total_2')){
-          this.charts.bar_chart_ghg_total_2 = new Chart('bar_chart_ghg_total_2',{
+        if(document.getElementById('bar_chart_ghg_total')){
+          this.charts.bar_chart_ghg_total=new Chart('bar_chart_ghg_total',{
             type:'bar',
             data:{
               labels:this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
               datasets:[
                 {
-                  label: 'total ghg emissions (kgCO2eq)',
-                  data: this.scenarios_compared.map(scenario=>{
-                    let total = scenario.TotalGHG().total; //current emissions
-                    return total;
+                  label:'total ghg emissions (kgCO2eq)',
+                  data:this.scenarios_compared.map(scenario=>{
+                    return scenario.TotalGHG().total; //current emissions
                   }),//[12, 19, 3, 5, 2, 3],
-                  backgroundColor: [
-                    '#327ccb',
-                  ],
-                  borderColor: [
-                    '#327ccb',
-                  ],
-                  borderWidth: 1
+                  backgroundColor:['#327ccb'],
+                  borderColor:['#327ccb'],
+                  borderWidth:1,
                 },
-              ]
+              ],
             },
-            options: {
+            options:{
               aspectRatio:4,
-              scales: {
-                y: {
-                  beginAtZero: true,
+              scales:{
+                y:{
+                  beginAtZero:true,
                   borderWidth:2,
-                }
-              }
+                },
+              },
             }
           });
         }
 
         //Chart.js - line chart: ghg difference between scenarios
         if(document.getElementById('line_chart_ghg_difference')){
-          this.charts.line_chart_ghg_difference = new Chart('line_chart_ghg_difference',{
-            type: 'line',
+          this.charts.line_chart_ghg_difference=new Chart('line_chart_ghg_difference',{
+            type:'line',
             data:{
               labels: this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
               datasets:[
@@ -167,47 +156,29 @@ let compare_scenarios=new Vue({
         }
 
         //Chart.js - bar chart: total ghg by gas
-        if(document.getElementById('bar_chart_ghg_by_gas_2')){
-          this.charts.bar_chart_ghg_by_gas_2 = new Chart('bar_chart_ghg_by_gas_2',{
+        if(document.getElementById('bar_chart_ghg_by_gas')){
+          this.charts.bar_chart_ghg_by_gas= new Chart('bar_chart_ghg_by_gas',{
             type:'bar',
             data:{
-              labels: this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              labels:this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
               datasets:[
-                {
-                  label: 'CO2 (kgCO2eq)',
-                  data: this.scenarios_compared.map(scenario=>{
-                    return scenario.TotalGHG().co2;
-                  }),//[12, 19, 3, 5, 2, 3],
-                  backgroundColor:[Charts.gas_colors.co2],
-                  borderColor:[Charts.gas_colors.co2],
-                  borderWidth:1,
-                },
-                {
-                  label: 'CH4 (kgCO2eq)',
-                  data: this.scenarios_compared.map(scenario=>{
-                    return scenario.TotalGHG().ch4;
-                  }),//[12, 19, 3, 5, 2, 3],
-                  backgroundColor:[Charts.gas_colors.ch4],
-                  borderColor:[Charts.gas_colors.ch4],
-                  borderWidth:1,
-                },
-                {
-                  label: 'N2O (kgCO2eq)',
-                  data: this.scenarios_compared.map(scenario=>{
-                    return scenario.TotalGHG().n2o;
-                  }),//[12, 19, 3, 5, 2, 3],
-                  backgroundColor:[Charts.gas_colors.n2o],
-                  borderColor:[Charts.gas_colors.n2o],
-                  borderWidth:1,
-                },
+                ...['co2','ch4','n2o'].map(gas=>{
+                  return{
+                    label:`${gas.toUpperCase()} (kgCO2eq)`,
+                    data:this.scenarios_compared.map(scenario=>{
+                      return scenario.TotalGHG()[gas];
+                    }),//[12,19,3,5,2,3]
+                    backgroundColor:[Charts.gas_colors[gas]],
+                    borderColor:[Charts.gas_colors[gas]],
+                    borderWidth:1,
+                  };
+                }),
               ],
             },
             options:{
               aspectRatio:4,
               scales:{
-                x:{
-                  stacked:true,
-                },
+                x:{stacked:true},
                 y:{
                   beginAtZero:true,
                   borderWidth:2,
@@ -242,9 +213,7 @@ let compare_scenarios=new Vue({
             options:{
               aspectRatio:4,
               scales:{
-                x:{
-                  stacked:true,
-                },
+                x:{stacked:true},
                 y:{
                   beginAtZero:true,
                   borderWidth:2,
@@ -279,9 +248,7 @@ let compare_scenarios=new Vue({
             options:{
               aspectRatio:4,
               scales:{
-                x:{
-                  stacked:true,
-                },
+                x:{stacked:true},
                 y:{
                   beginAtZero:true,
                   borderWidth:2,
@@ -300,30 +267,30 @@ let compare_scenarios=new Vue({
               labels:this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
               datasets:[
                 {
-                  label:'total energy consumption (kWh)',
+                  label:'Energy consumed (kWh)',
                   data:this.scenarios_compared.map(scenario=>{
                     let total=scenario.TotalNRG(); //current emissions
                     return total;
-                  }),//[12, 19, 3, 5, 2, 3],
+                  }),//[12,19,3,5,2,3]
                   backgroundColor:["#ffbe54"],
                   borderColor:["#ffbe54"],
                   borderWidth:1,
                 },
               ],
             },
-            options: {
+            options:{
               aspectRatio:4,
-              scales: {
-                y: {
-                  beginAtZero: true,
+              scales:{
+                y:{
+                  beginAtZero:true,
                   borderWidth:2,
-                }
-              }
-            }
+                },
+              },
+            },
           });
         }
 
-        //TODO redo with chartjs library
+        //TODO redo with chartjs library: all substages across all scenarios
         /*
         Charts.draw_bar_chart(
           'bar_chart_ghg_by_substage',
@@ -600,7 +567,7 @@ let compare_scenarios=new Vue({
           v-if="current_view=='bar_chart_ghg_total'"
           class="chart_container bar"
         >
-          <canvas id="bar_chart_ghg_total_2" width="400" height="400"></canvas>
+          <canvas id="bar_chart_ghg_total" width="400" height="400"></canvas>
           <b>Variation respect previous assessment (%)</b>
           <canvas id="line_chart_ghg_difference" width="400" height="400"></canvas>
         </div>
@@ -609,7 +576,7 @@ let compare_scenarios=new Vue({
           v-if="current_view=='bar_chart_ghg_by_gas'"
           class="chart_container bar"
         >
-          <canvas id="bar_chart_ghg_by_gas_2" width="400" height="400"></canvas>
+          <canvas id="bar_chart_ghg_by_gas" width="400" height="400"></canvas>
         </div>
 
         <div
@@ -641,7 +608,7 @@ let compare_scenarios=new Vue({
         </div>
       </div>
 
-      <!--notification: scenarios_compared is empty-->
+      <!--notification "scenarios_compared is empty"-->
       <div
         v-if="scenarios_compared.length==0"
         style="padding:1em;text-align:center;font-style:italic"
