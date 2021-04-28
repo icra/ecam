@@ -10,7 +10,8 @@ let summary_ghg=new Vue({
     current_view:"table",
 
     //current emissions unit
-    current_unit:"kgCO2eq",
+    current_unit_ghg:"kgCO2eq",
+    current_unit_nrg:"kWh",
 
     //chart objects from chartjs library stored here
     charts:{},
@@ -33,16 +34,17 @@ let summary_ghg=new Vue({
     go_to,
     get_sum_of_substages,
 
-    //deal with unit changes
-    //TODO
-    set_emissions_unit(){
-      if(Global.TotalGHG().total>1000){ this.current_unit="t CO2eq"; }
-      else{                             this.current_unit="kgCO2eq"; }
+    //emissions are in kg by default
+    format_emission(number){
+      let divisor = this.current_unit_ghg=='tCO2eq' ? 1000:1;
+      let digits  = undefined;
+      return format(number,digits,divisor);
     },
-    //get divisor for emissions with unit changed
-    get_divisor(){
-      if(this.current_unit=="t CO2eq"){ return 1000; }
-      return false;
+
+    format_energy(number){
+      let divisor = this.current_unit_nrg=='MWh' ? 1000:1;
+      let digits  = undefined;
+      return format(number,digits,divisor);
     },
 
     show_summaries_menu(){
@@ -164,10 +166,11 @@ let summary_ghg=new Vue({
             datasets:[
               ...['co2','ch4','n2o'].map(gas=>{
                 return {
-                  label:`${gas.toUpperCase()} (kgCO2eq)`,
+                  label:`${gas.toUpperCase()} (${this.current_unit_ghg})`,
                   data: Structure.filter(s=>s.sublevel).map(s=>{
                     return Global[s.level][s.sublevel].map(ss=>{
-                      return ss[s.prefix+'_KPI_GHG']()[gas];
+                      let divisor = this.current_unit_ghg=='tCO2eq'?1000:1;
+                      return ss[s.prefix+'_KPI_GHG']()[gas]/divisor;
                     });
                   }).reduce((p,c)=>p.concat(c),[]),
                   backgroundColor:[Charts.gas_colors[gas]],
@@ -205,10 +208,11 @@ let summary_ghg=new Vue({
             }).reduce((p,c)=>p.concat(c),[]),
             datasets:[
               {
-                label:'Energy (kWh)',
+                label:`Energy (${this.current_unit_nrg})`,
                 data:Structure.filter(s=>s.sublevel).map(s=>{
                   return Global[s.level][s.sublevel].map(ss=>{
-                    return ss[s.prefix+'_nrg_cons'];
+                    let divisor = this.current_unit_nrg=='MWh'?1000:1;
+                    return ss[s.prefix+'_nrg_cons']/divisor;
                   });
                 }).reduce((p,c)=>p.concat(c),[]),
                 backgroundColor:["#ffbe54"],
@@ -233,9 +237,7 @@ let summary_ghg=new Vue({
 
   template:`
     <div id=summary_ghg v-if="visible && Languages.ready">
-      <div>
-        {{show_summaries_menu()}}
-      </div>
+      <div> {{show_summaries_menu()}} </div>
 
       <!--title-->
       <h1 style="padding-left:0">
@@ -248,18 +250,28 @@ let summary_ghg=new Vue({
         <button @click="current_view='charts_ghg'" :selected="current_view=='charts_ghg'">Charts GHG</button>
         <button @click="current_view='charts_nrg'" :selected="current_view=='charts_nrg'">Charts Energy</button>
         <button @click="current_view='charts_pop'" :selected="current_view=='charts_pop'">Charts Serviced Population</button>
+
+        <hr style="border-color:#eee">
+        <div style="padding:1em 0">
+          <b>Select units</b>
+          <select v-model="current_unit_ghg">
+            <option>kgCO2eq</option>
+            <option>tCO2eq</option>
+          </select>
+          <select v-model="current_unit_nrg">
+            <option>kWh</option>
+            <option>MWh</option>
+          </select>
+        </div>
       </div>
+
 
       <!--content-->
       <div>
         <!--tables-->
         <div v-if="current_view=='table'">
-          <div>{{set_emissions_unit()}}</div>
-
           <!--summary table 2.0-->
           <div style="margin-top:20px"></div>
-
-          <b>Work in progress issue #341</b>
           <div>
             <div
               style="
@@ -268,23 +280,23 @@ let summary_ghg=new Vue({
                 text-align:center;
               "
             >
-              <div>Total  ${'kgCO2eq'.prettify()}</div>
-              <div>Level  ${'kgCO2eq'.prettify()}</div>
-              <div>Stage  ${'kgCO2eq'.prettify()}</div>
-              <div>Source ${'kgCO2eq'.prettify()}</div>
-              <div>Total  ${'kgCO2eq'.prettify()}</div>
-              <div>${'CO2 (kgCO2eq)'.prettify()}</div>
-              <div>${'CH4 (kgCO2eq)'.prettify()}</div>
-              <div>${'N2O (kgCO2eq)'.prettify()}</div>
+              <div>Total (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
+              <div>Level (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
+              <div>Stage (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
+              <div>Emission source</div>
+              <div>Total (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
+              <div>${'CO2'.prettify()}    (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
+              <div>${'CH4'.prettify()}    (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
+              <div>${'N2O'.prettify()}    (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
             </div>
             <div
               class=subdivision
               style="background:var(--color-level-generic)"
             >
               <div style="color:white;text-align:center;font-size:large">
-                Total
+                Total GHG emissions
                 <div>
-                  {{format(Global.TotalGHG().total)}}
+                  {{format_emission(Global.TotalGHG().total)}}
                 </div>
               </div>
               <div>
@@ -297,7 +309,7 @@ let summary_ghg=new Vue({
                     <div style="padding:1em;text-align:center">
                       {{translate(s.level)}}
                       <div>
-                        {{format(Global[s.level][s.prefix+'_KPI_GHG']().total)}}
+                        {{format_emission(Global[s.level][s.prefix+'_KPI_GHG']().total)}}
                       </div>
                     </div>
                   </div>
@@ -311,7 +323,7 @@ let summary_ghg=new Vue({
                       <div style="padding:1em;text-align:center">
                         {{ss.sublevel}}
                         <div>
-                          {{format(Global[ss.level][ss.sublevel].map(subs=>subs[ss.prefix+'_KPI_GHG']().total).sum())}}
+                          {{format_emission(Global[ss.level][ss.sublevel].map(subs=>subs[ss.prefix+'_KPI_GHG']().total).sum())}}
                         </div>
                       </div>
                       <div>
@@ -333,7 +345,7 @@ let summary_ghg=new Vue({
                             style="text-align:center"
                           >
                             {{
-                              format(
+                              format_emission(
                                 Global[ss.level][ss.sublevel].map(ss=>ss[key]()[gas]).sum()
                               )
                             }}
@@ -367,14 +379,14 @@ let summary_ghg=new Vue({
                   <tr>
                     <td style="background:var(--color-level-Water)"></td>
                     <td>{{translate('Water')}}</td>
-                    <td>{{format(Global.Water.ws_KPI_GHG().total)}}</td>
-                    <td class=unit v-html="'kgCO2eq'.prettify()"></td>
+                    <td>{{format_emission(Global.Water.ws_KPI_GHG().total)}}</td>
+                    <td class=unit v-html="current_unit_ghg.prettify()"></td>
                   </tr>
                   <tr>
                     <td style="background:var(--color-level-Waste)"></td>
                     <td>{{translate('Waste')}}</td>
-                    <td>{{format(Global.Waste.ww_KPI_GHG().total)}}</td>
-                    <td class=unit v-html="'kgCO2eq'.prettify()"></td>
+                    <td>{{format_emission(Global.Waste.ww_KPI_GHG().total)}}</td>
+                    <td class=unit v-html="current_unit_ghg.prettify()"></td>
                   </tr>
                 </table>
                 <div id=chart_1></div>
@@ -397,9 +409,9 @@ let summary_ghg=new Vue({
                       {{translate(stage.sublevel)}}
                     </td>
                     <td>
-                      {{ format(Global[stage.level][stage.sublevel].map(s=>s[stage.prefix+'_KPI_GHG']().total).sum()) }}
+                      {{ format_emission(Global[stage.level][stage.sublevel].map(s=>s[stage.prefix+'_KPI_GHG']().total).sum()) }}
                     </td>
-                    <td class=unit v-html="'kgCO2eq'.prettify()"></td>
+                    <td class=unit v-html="current_unit_ghg.prettify()"></td>
                   </tr>
                 </table>
                 <div id=chart_2></div>
@@ -419,9 +431,9 @@ let summary_ghg=new Vue({
                       <div v-html="key.toUpperCase().prettify()"></div>
                     </td>
                     <td>
-                      <div v-html="format(value)"></div>
+                      <div v-html="format_emission(value)"></div>
                     </td>
-                    <td class=unit v-html="'kgCO2eq'.prettify()"></td>
+                    <td class=unit v-html="current_unit_ghg.prettify()"></td>
                   </tr>
                 </table>
                 <div id=chart_3></div>
@@ -441,9 +453,9 @@ let summary_ghg=new Vue({
                       {{obj.description}}
                     </td>
                     <td>
-                      <div v-html="format(obj.emissions(Global))"></div>
+                      <div v-html="format_emission(obj.emissions(Global))"></div>
                     </td>
-                    <td class=unit v-html="'kgCO2eq'.prettify()"></td>
+                    <td class=unit v-html="current_unit_ghg.prettify()"></td>
                   </tr>
                 </table>
                 <div id=chart_unfccc></div>
@@ -483,14 +495,14 @@ let summary_ghg=new Vue({
                   <tr>
                     <td style="background:var(--color-level-Water)"></td>
                     <td>{{translate('Water')}}</td>
-                    <td>{{format(Global.Water.ws_nrg_cons())}}</td>
-                    <td class=unit v-html="'kWh'"></td>
+                    <td>{{format_energy(Global.Water.ws_nrg_cons())}}</td>
+                    <td class=unit v-html="current_unit_nrg"></td>
                   </tr>
                   <tr>
                     <td style="background:var(--color-level-Waste)"></td>
                     <td>{{translate('Waste')}}</td>
-                    <td>{{format(Global.Waste.ww_nrg_cons())}}</td>
-                    <td class=unit v-html="'kWh'"></td>
+                    <td>{{format_energy(Global.Waste.ww_nrg_cons())}}</td>
+                    <td class=unit v-html="current_unit_nrg"></td>
                   </tr>
                 </table>
                 <div id=chart_nrg_levels></div>
@@ -512,9 +524,9 @@ let summary_ghg=new Vue({
                       {{translate(stage.sublevel)}}
                     </td>
                     <td>
-                      {{ format(Global[stage.level][stage.sublevel].map(s=>s[stage.prefix+'_nrg_cons']).sum()) }}
+                      {{ format_energy(Global[stage.level][stage.sublevel].map(s=>s[stage.prefix+'_nrg_cons']).sum()) }}
                     </td>
-                    <td class=unit v-html="'kWh'"></td>
+                    <td class=unit v-html="current_unit_nrg"></td>
                   </tr>
                 </table>
                 <div id=chart_nrg_stages></div>
@@ -550,7 +562,7 @@ let summary_ghg=new Vue({
                   <tr>
                     <td :style="{background:'var(--color-level-Water)'}"></td>
                     <td>{{translate('ws_serv_pop_descr')}}</td>
-                    <td>{{ format(Global.Water.ws_serv_pop()) }}</td>
+                    <td>{{format(Global.Water.ws_serv_pop()) }}</td>
                     <td class=unit v-html="'people'"></td>
                   </tr>
                   <tr>
@@ -567,7 +579,7 @@ let summary_ghg=new Vue({
                   <tr>
                     <td :style="{background:'var(--color-level-Waste)'}"></td>
                     <td>{{translate('ww_serv_pop_descr')}}</td>
-                    <td>{{ format(Global.Waste.ww_serv_pop()) }}</td>
+                    <td>{{format(Global.Waste.ww_serv_pop()) }}</td>
                     <td class=unit v-html="'people'"></td>
                   </tr>
                   <tr>

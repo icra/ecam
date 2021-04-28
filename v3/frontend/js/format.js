@@ -1,7 +1,7 @@
 /*convert a number to formated string. Example: 3999.4 --> "3.999,4" */
 function format(number,digits,divisor){
   //deal with unit changes using "divisor"
-  if(divisor){
+  if(divisor && typeof(divisor)=='number'){
     number /= divisor;
   }
 
