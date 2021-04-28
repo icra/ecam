@@ -548,24 +548,15 @@ let summary_ghg=new Vue({
               <div class=flex>
                 <table border=1 class=legend>
                   <tr>
-                    <td :style="{background:'var(--color-level-Water)'}">
-                    </td>
-                    <td>
-                      {{translate('ws_serv_pop_descr')}}
-                    </td>
-                    <td>
-                      {{ format(Global.Water.ws_serv_pop()) }}
-                    </td>
+                    <td :style="{background:'var(--color-level-Water)'}"></td>
+                    <td>{{translate('ws_serv_pop_descr')}}</td>
+                    <td>{{ format(Global.Water.ws_serv_pop()) }}</td>
                     <td class=unit v-html="'people'"></td>
                   </tr>
                   <tr>
-                    <td></td>
-                    <td>
-                      {{translate('ws_resi_pop_descr')}}
-                    </td>
-                    <td>
-                      {{ format(Global.Water.ws_resi_pop) }}
-                    </td>
+                    <td :style="{background:'#eee'}"></td>
+                    <td>Non-{{translate('ws_serv_pop_descr')}}</td>
+                    <td>{{format(Global.Water.ws_resi_pop - Global.Water.ws_serv_pop())}}</td>
                     <td class=unit v-html="'people'"></td>
                   </tr>
                 </table>
@@ -574,24 +565,15 @@ let summary_ghg=new Vue({
               <div class=flex>
                 <table border=1 class=legend>
                   <tr>
-                    <td :style="{background:'var(--color-level-Waste)'}">
-                    </td>
-                    <td>
-                      {{translate('ww_serv_pop_descr')}}
-                    </td>
-                    <td>
-                      {{ format(Global.Waste.ww_serv_pop()) }}
-                    </td>
+                    <td :style="{background:'var(--color-level-Waste)'}"></td>
+                    <td>{{translate('ww_serv_pop_descr')}}</td>
+                    <td>{{ format(Global.Waste.ww_serv_pop()) }}</td>
                     <td class=unit v-html="'people'"></td>
                   </tr>
                   <tr>
-                    <td></td>
-                    <td>
-                      {{translate('ww_resi_pop_descr')}}
-                    </td>
-                    <td>
-                      {{ format(Global.Waste.ww_resi_pop) }}
-                    </td>
+                    <td :style="{background:'#eee'}"></td>
+                    <td>Non-{{translate('ww_serv_pop_descr')}}</td>
+                    <td>{{format(Global.Waste.ww_resi_pop - Global.Waste.ww_serv_pop()) }}</td>
                     <td class=unit v-html="'people'"></td>
                   </tr>
                 </table>

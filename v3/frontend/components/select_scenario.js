@@ -140,6 +140,7 @@ let select_scenario=new Vue({
     duplicate_scenario(obj){
       let str = JSON.stringify(obj);
       let par = JSON.parse(str);
+      par.General.Name+=" (copy)";
       Scenarios.push(
         Ecam.from(par)
       );
@@ -392,10 +393,6 @@ let select_scenario=new Vue({
                     @click="are_settings_open=(scenario==Global)?are_settings_open=!are_settings_open:true;set_current_scenario(scenario)"
                     v-html="'settings'"
                     :configuration_open="are_settings_open && scenario==Global"
-                  ></button>
-                  <button
-                    @click="set_scenario_and_go_to_tier_b(scenario)"
-                    v-html="'inventory'"
                   ></button>
                   <button
                     @click="duplicate_scenario(scenario)"
