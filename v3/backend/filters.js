@@ -72,9 +72,6 @@ let Filters={
 
 "Sludge Management":[
   "wwt_serv_pop",         //input
-  "wwt_vol_trea",         //input
-  "wwt_vol_nonp",         //input
-  "wwt_vol_disc",         //input
   "wwt_bod_infl",         //input
   "wwt_bod_effl",         //input
   "wwt_sludge_mgmt",      //question

@@ -180,7 +180,11 @@ let stages_menu=new Vue({
                   v-if="Global[s.level][s.sublevel].length==0"
                   style="text-align:center;padding:0.5em"
                 >
-                  <small style="color:#666">~no substages</small>
+                  <small
+                    style="color:#666"
+                    title="Create substages to insert further information"
+                    v-html="'~no substages'"
+                  ></small>
                 </div>
                 <div
                   v-if="s.sublevel"

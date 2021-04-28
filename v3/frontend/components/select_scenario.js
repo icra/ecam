@@ -189,7 +189,11 @@ let select_scenario=new Vue({
 
       <!--load save buttons-->
       <details>
-        <summary style="font-size:large">File</summary>
+        <summary
+          style="font-size:large"
+          title="Click here to load or save a file"
+        >File
+        </summary>
         <div
           id=load_save_btns
           style="
@@ -204,6 +208,17 @@ let select_scenario=new Vue({
               <div style="font-size:larger">
                 Load file
               </div>
+            </div>
+
+            <!--input type file-->
+            <div style="margin-bottom:10px">
+              <input
+                type="file"
+                id="loadfile"
+                accept=".json"
+                onclick="this.value=''"
+                @change="load_json_file($event)"
+              >
             </div>
 
             <!--load mode radio btns-->
@@ -232,17 +247,6 @@ let select_scenario=new Vue({
                   </div>
                 </label>
               </div>
-            </div>
-
-            <!--input type file-->
-            <div style="margin-top:10px">
-              <input
-                type="file"
-                id="loadfile"
-                accept=".json"
-                onclick="this.value=''"
-                @change="load_json_file($event)"
-              >
             </div>
           </div>
 
@@ -277,8 +281,8 @@ let select_scenario=new Vue({
       <div
         style="
           background:#eee;
-          margin-bottom:1em;
           margin-top:2em;
+          margin-bottom:2em;
           padding:1em;
         "
       >
@@ -313,9 +317,10 @@ let select_scenario=new Vue({
       </div>
 
       <!--scenarios table-->
-      <div style="">
+      <div>
+        <div style="font-size:large">List of assessments</div>
         <!--assessments table-->
-        <table style="width:100%;" id=main_table>
+        <table style="width:100%" id=main_table>
           <thead>
             <tr>
               <td></td>
@@ -523,6 +528,22 @@ let select_scenario=new Vue({
                       </div>
                     </fieldset>
 
+                    <button
+                      @click="set_scenario_and_go_to_tier_b(scenario)"
+                      title="Access inventory to insert input data"
+                      style="
+                        font-size:large;
+                        display:block;
+                        margin:auto;
+                        background:var(--color-level-generic);
+                        color:white;
+                        padding-left:3em;
+                        padding-right:3em;
+                      "
+                    >
+                      Access inventory
+                    </button>
+
                     <!--comments-->
                     <fieldset>
                       <legend>
@@ -568,8 +589,6 @@ let select_scenario=new Vue({
       }
       #select_scenario details summary {
         cursor:pointer;
-      }
-      #select_scenario #main_table {
       }
       #select_scenario #main_table thead td {
         background:white;

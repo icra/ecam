@@ -24,14 +24,17 @@ let summary_ghg=new Vue({
     Structure,
     Languages,
     UNFCCC,
+    Formulas,
   },
 
   methods:{
     translate,
     format,
     go_to,
+    get_sum_of_substages,
 
     //deal with unit changes
+    //TODO
     set_emissions_unit(){
       if(Global.TotalGHG().total>1000){ this.current_unit="t CO2eq"; }
       else{                             this.current_unit="kgCO2eq"; }
@@ -253,222 +256,96 @@ let summary_ghg=new Vue({
         <div v-if="current_view=='table'">
           <div>{{set_emissions_unit()}}</div>
 
-          <table id=table_summary style="width:85%;border-spacing:1px">
-            <tr>
-              <td colspan=2></td>
-              <th><b>Total GHG emissions</b></th>
-              <th><b>Total energy consumed</b></th>
-            </tr>
+          <!--summary table 2.0-->
+          <div style="margin-top:20px"></div>
 
-            <!--total ghg and nrg-->
-            <tbody style="background:var(--color-level-generic);color:white">
-              <tr>
-                <td colspan=2 style="font-size:large;text-align:center;padding:1em;vertical-align:center">
-                  Total
-                </td>
-
-                <!--total emissions-->
-                <td style="background:inherit;">
-                  <div style="
-                    display:flex;
-                    justify-content:center;
-                    text-align:center;
-                    align-items:center;
-                  ">
-                    <div>
-                      <div class=number_placeholder v-html="format(Global.TotalGHG().total,0,get_divisor())"></div>
-                    </div>
-                    <div style="font-size:x-small;">
-                      <span v-html="current_unit.prettify()"></span>
-                    </div>
-                  </div>
-                </td>
-
-                <!--total energy consumption-->
-                <td style="text-align:center">
-                  <div
-                    style="
-                      display:flex;
-                      justify-content:center;
-                      align-items:center;
-                    "
-                  >
-                    <div class=number_placeholder>
-                      {{format(Global.TotalNRG())}}
-                    </div>
-                    <div style="color:white;font-size:x-small">kWh</div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-
-            <tbody v-for="l1 in Structure.filter(s=>!s.sublevel)">
-              <!--level 1-->
-              <tr :style="{background:l1.color,color:'white'}">
-                <td style="background:inherit;text-align:center">
-                  <button @click="toggle_folded_level(l1.level)">
-                    {{ unfolded_levels.indexOf(l1.level)+1 ? '-':'+' }}
-                  </button>
-                </td>
-
-                <!--level 1 name and icon-->
-                <td style="background:inherit;text-align:center">
-                  <div
-                    style="
-                      display:flex;
-                      align-items:center;
-                    "
-                  >
-                    <img :src="'frontend/img/'+l1.icon" style="width:50px;background:white;border-radius:50%">
-                    &nbsp;
-                    <a @click="go_to(l1.level)" style="color:white;">
-                      {{ translate(l1.level) }}
-                    </a>
-                  </div>
-                </td>
-
-                <!--level 1 emissions-->
-                <td style="background:inherit;">
-                  <div style="
-                    display:flex;
-                    justify-content:center;
-                    text-align:center;
-                    padding-left:1em;
-                    padding-right:1em;
-                    align-items:center;
-                  ">
-                    <div
-                      class=number_placeholder
-                      :style="{color:l1.color, borderColor:l1.color}"
-                      v-html="format(Global[l1.level][l1.prefix+'_KPI_GHG']().total,0,get_divisor())"
-                    ></div>
-                    <div style="font-size:x-small;">
-                      <span v-html="current_unit.prettify()"></span>
-                    </div>
-                  </div>
-                </td>
-
-                <!--level 1 energy consumption-->
-                <td :style="{background:'inherit',textAlign:'center'}">
-                  <div
-                    style="
-                      display:flex;
-                      justify-content:center;
-                      align-items:center;
-                    "
-                  >
-                    <div
-                      class=number_placeholder
-                      :style="{color:l1.color, borderColor:l1.color}"
-                      v-html="format(Global[l1.level][l1.prefix+'_nrg_cons']())"
-                    ></div>
-                    <div style="color:white;font-size:x-small">kWh</div>
-                  </div>
-                </td>
-              </tr>
-
-              <!--level 2-->
-              <tr
-                v-for="l2 in Structure.filter(s=>(s.level==l1.level && s.sublevel))"
-                v-if="Global[l2.level][l2.sublevel].length && unfolded_levels.indexOf(l1.level)>-1"
-              >
-                <!--level 2 name and icon-->
-                <td
-                  :style="{background:'var(--color-level-'+l1.level+'-secondary)'}"
-                ></td>
-                <td
-                  :style="{textAlign:'center',background:'var(--color-level-'+l1.level+'-secondary)'}"
+          <b>Work in progress issue #341</b>
+          <div>
+            <div
+              style="
+                display:grid;
+                grid-template-columns: 15% ${85*0.15}% ${85*0.85*0.15}% ${85*0.85*0.85*0.28}% ${85*0.85*0.85*0.18}% ${85*0.85*0.85*0.18}% ${85*0.85*0.85*0.18}% ${85*0.85*0.85*0.18}%;
+                text-align:center;
+              "
+            >
+              <div>Total  ${'kgCO2eq'.prettify()}</div>
+              <div>Level  ${'kgCO2eq'.prettify()}</div>
+              <div>Stage  ${'kgCO2eq'.prettify()}</div>
+              <div>Source ${'kgCO2eq'.prettify()}</div>
+              <div>Total  ${'kgCO2eq'.prettify()}</div>
+              <div>${'CO2 (kgCO2eq)'.prettify()}</div>
+              <div>${'CH4 (kgCO2eq)'.prettify()}</div>
+              <div>${'N2O (kgCO2eq)'.prettify()}</div>
+            </div>
+            <div
+              class=subdivision
+              style="background:var(--color-level-generic)"
+            >
+              <div style="color:white;text-align:center;font-size:large">
+                Total
+                <div>
+                  {{format(Global.TotalGHG().total)}}
+                </div>
+              </div>
+              <div>
+                <div
+                  v-for="s in Structure.filter(s=>!s.sublevel)"
+                  class=subdivision
+                  :style="{background:s.color}"
                 >
-                  <div
-                    style="
-                      display:flex;
-                      align-items:center;
-                    "
-                  >
-                    <img :src="'frontend/img/'+l2.icon" style="width:45px;">
-                    &nbsp;
-                    <a @click="go_to(l2.level,l2.sublevel)" :style="{color:l1.color}">
-                      {{translate(l2.sublevel)}}
-                    </a>
-                  </div>
-                </td>
-
-                <!--level 2 ghg emissions-->
-                <td style=background:white>
-                  <div
-                    style="
-                      display:flex;
-                      justify-content:center;
-                      text-align:center;
-                      padding-left:1em;
-                      padding-right:1em;
-                      align-items:center;
-                    "
-                  >
-                    <div
-                      class=number_placeholder
-                      :style="{color:l1.color, borderColor:l1.color}"
-                      v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_KPI_GHG']().total).sum(),0,get_divisor())">
-                    </div>
-                    <div style="font-size:x-small;">
-                      <span v-html="current_unit.prettify()"></span>
-                    </div>
-                  </div>
-                </td>
-
-                <!--level 2 energy consumption-->
-                <td :style="{background:'white', color:l1.color, textAlign:'center'}">
-                  <div
-                    style="
-                      display:flex;
-                      justify-content:center;
-                      align-items:center;
-                    "
-                  >
-                    <div
-                      class=number_placeholder
-                      :style="{color:l1.color,borderColor:l1.color,}"
-                      v-html="format(Global[l2.level][l2.sublevel].map(s=>s[l2.prefix+'_nrg_cons']).sum() )"
-                    ></div>
-                    <div style="color:black;font-size:x-small">kWh</div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-
-            <!--avoided ghg emissions-->
-            <!--
-              <tbody class=avoided_emissions v-if="true || Global.Waste.ww_GHG_avoided()">
-                <tr>
-                  <td style="border:none"></td>
-                  <td style="border:none">
-                    Avoided GHG emissions in Sanitation (TBD)
-                  </td>
-                  <td style="border:none">
-                    <div
-                      style="
-                        display:flex;
-                        justify-content:center;
-                        align-items:center;
-                      "
-                    >
-                      <div
-                        class=number_placeholder
-                        style="border-color:#666;color:#666"
-                        v-html="Global.Waste.ww_GHG_avoided() ? format( Global.Waste.ww_GHG_avoided() ) : 0"
-                      ></div>
-                      <div style="font-size:x-small;">
-                        <span v-html="current_unit.prettify()"></span>
+                  <div>
+                    <div style="padding:1em;text-align:center">
+                      {{translate(s.level)}}
+                      <div>
+                        {{format(Global[s.level][s.prefix+'_KPI_GHG']().total)}}
                       </div>
                     </div>
-                  </td>
-                  <td style="border:none">
-                    <button @click="variable.view('ww_GHG_avoided')">more info</button>
-                  </td>
-                </tr>
-              </tbody>
-            -->
-          </table>
+                  </div>
+                  <div>
+                    <div
+                      v-for="ss in Structure.filter(ss=>ss.sublevel && ss.level==s.level)"
+                      v-if="Global[ss.level][ss.sublevel].length"
+                      class="subdivision"
+                      :style="{background:ss.color}"
+                    >
+                      <div style="padding:1em;text-align:center">
+                        {{ss.sublevel}}
+                        <div>
+                          {{format(Global[ss.level][ss.sublevel].map(subs=>subs[ss.prefix+'_KPI_GHG']().total).sum())}}
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          v-for="key in Formulas.ids_per_formula(Global[ss.level][ss.sublevel][0][ss.prefix+'_KPI_GHG'])"
+                          style="
+                            display:grid;
+                            grid-template-columns:28% 18% 18% 18% 18%;
+                            font-size:smaller;
+                            align-items:center;
+                            padding:5px 0;
+                          "
+                        >
+                          <div>
+                            <span v-html="translate(key+'_descr').prettify()"></span>
+                          </div>
+                          <div
+                            v-for="gas in ['total','co2','ch4','n2o']"
+                            style="text-align:center"
+                          >
+                            {{
+                              format(
+                                Global[ss.level][ss.sublevel].map(ss=>ss[key]()[gas]).sum()
+                              )
+                            }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!--charts ghg-->
@@ -826,6 +703,12 @@ let summary_ghg=new Vue({
       #summary_ghg tbody.avoided_emissions td {
         border:1px solid #ccc;
         text-align:center;
+      }
+
+      #summary_ghg div.subdivision{
+        display:grid;
+        align-items:center;
+        grid-template-columns:15% 85%;
       }
     </style>
   `,

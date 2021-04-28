@@ -1,5 +1,6 @@
 /*
   HELPER FUNCTIONS
+  they are global
 */
 
 //navigate to a tier b stage
@@ -70,7 +71,8 @@ function get_output_value(code, stage){
   return (typeof(output.total)=='number'?output.total:output);
 }
 
-//get partial results of one output (for example one emission that is total=CH4+N2O+CO2)
+//get partial results of one output (for example one emission that is
+//total=CH4+N2O+CO2)
 function get_output_partial_values(code, stage){
   //return value
   //can be a number or an object

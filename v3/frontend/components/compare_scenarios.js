@@ -146,7 +146,6 @@ let compare_scenarios=new Vue({
                 }
               },
               plugins:{
-                // Change options for ALL labels of THIS CHART
                 datalabels: {
                   color: '#36A2EB'
                 },
@@ -568,8 +567,10 @@ let compare_scenarios=new Vue({
           class="chart_container bar"
         >
           <canvas id="bar_chart_ghg_total" width="400" height="400"></canvas>
-          <b>Variation respect previous assessment (%)</b>
-          <canvas id="line_chart_ghg_difference" width="400" height="400"></canvas>
+          <div v-if="scenarios_compared.length>1">
+            <b>Variation respect previous assessment (%)</b>
+            <canvas id="line_chart_ghg_difference" width="400" height="400"></canvas>
+          </div>
         </div>
 
         <div

@@ -43,7 +43,7 @@ class Ecam{
 
   //global GHG emissions and energy consumed
   TotalGHG(){
-    let sources = [
+    let sources=[
       this.Water.ws_KPI_GHG(),
       this.Waste.ww_KPI_GHG(),
     ];
@@ -492,16 +492,20 @@ class Water_Abstraction extends Substage{
       let fuel = this.wsa_KPI_GHG_fuel();
 
       //gases (numbers)
-      let co2 = elec + fuel.co2;
-      let ch4 =        fuel.ch4;
-      let n2o =        fuel.n2o;
+      let co2 = elec.co2 + fuel.co2;
+      let ch4 = elec.ch4 + fuel.ch4;
+      let n2o = elec.n2o + fuel.n2o;
 
       //total
       let total = co2 + ch4 + n2o;
       return {total,co2,ch4,n2o};
     }
     wsa_KPI_GHG_elec(){
-      return this.wsa_nrg_cons*this.wsa_conv_kwh;
+      let co2 = this.wsa_nrg_cons*this.wsa_conv_kwh;
+      let ch4 = 0;
+      let n2o = 0;
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     wsa_KPI_GHG_fuel(){
       let vol   = this.wsa_vol_fuel;
@@ -612,16 +616,20 @@ class Water_Treatment extends Substage{
       let fuel = this.wst_KPI_GHG_fuel();
 
       //gases (numbers)
-      let co2 = elec + fuel.co2;
-      let ch4 =        fuel.ch4;
-      let n2o =        fuel.n2o;
+      let co2 = elec.co2 + fuel.co2;
+      let ch4 = elec.ch4 + fuel.ch4;
+      let n2o = elec.n2o + fuel.n2o;
 
       //total
       let total = co2 + ch4 + n2o;
       return {total,co2,ch4,n2o};
     }
     wst_KPI_GHG_elec(){
-      return this.wst_nrg_cons*this.wst_conv_kwh;
+      let co2 = this.wst_nrg_cons*this.wst_conv_kwh;
+      let ch4 = 0;
+      let n2o = 0;
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     wst_KPI_GHG_fuel(){
       let vol   = this.wst_vol_fuel;
@@ -729,16 +737,20 @@ class Water_Distribution extends Substage{
       let trck = this.wsd_KPI_GHG_trck();
 
       //gases (numbers)
-      let co2 = elec + fuel.co2 + trck.co2;
-      let ch4 =        fuel.ch4 + trck.ch4;
-      let n2o =        fuel.n2o + trck.n2o;
+      let co2 = elec.co2 + fuel.co2 + trck.co2;
+      let ch4 = elec.ch4 + fuel.ch4 + trck.ch4;
+      let n2o = elec.n2o + fuel.n2o + trck.n2o;
 
       //total
       let total = co2 + ch4 + n2o;
       return {total,co2,ch4,n2o};
     }
     wsd_KPI_GHG_elec(){
-      return this.wsd_nrg_cons*this.wsd_conv_kwh;
+      let co2 = this.wsd_nrg_cons*this.wsd_conv_kwh;
+      let ch4 = 0;
+      let n2o = 0;
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     wsd_KPI_GHG_fuel(){
       let vol   = this.wsd_vol_fuel;
@@ -860,16 +872,20 @@ class Waste_Collection extends Substage{
       let col  = this.wwc_KPI_GHG_col();  //object
 
       //gases (numbers)
-      let co2 = elec + fuel.co2 + cso.co2 + col.co2;
-      let ch4 =        fuel.ch4 + cso.ch4 + col.ch4;
-      let n2o =        fuel.n2o + cso.n2o + col.n2o;
+      let co2 = elec.co2 + fuel.co2 + cso.co2 + col.co2;
+      let ch4 = elec.ch4 + fuel.ch4 + cso.ch4 + col.ch4;
+      let n2o = elec.n2o + fuel.n2o + cso.n2o + col.n2o;
 
       //total
       let total = co2 + ch4 + n2o;
       return {total,co2,ch4,n2o};
     }
     wwc_KPI_GHG_elec(){
-      return this.wwc_nrg_cons*this.wwc_conv_kwh;
+      let co2 = this.wwc_nrg_cons*this.wwc_conv_kwh;
+      let ch4 = 0;
+      let n2o = 0;
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     wwc_KPI_GHG_fuel(){
       let vol   = this.wwc_vol_fuel;
@@ -1041,8 +1057,8 @@ class Waste_Treatment extends Substage{
   //GHG wwt
     wwt_KPI_GHG(){
       //sources (objects)
-      let elec    = this.wwt_KPI_GHG_elec(); //number
-      let sources = [
+      let sources=[
+        this.wwt_KPI_GHG_elec(),
         this.wwt_KPI_GHG_fuel(),
         this.wwt_KPI_GHG_tre(),
         this.wwt_KPI_GHG_biog(),
@@ -1053,16 +1069,20 @@ class Waste_Treatment extends Substage{
       ];
 
       //gases (numbers)
-      let co2 = elec + sources.map(s=>s.co2).sum();
-      let ch4 =        sources.map(s=>s.ch4).sum();
-      let n2o =        sources.map(s=>s.n2o).sum();
+      let co2 = sources.map(s=>s.co2).sum();
+      let ch4 = sources.map(s=>s.ch4).sum();
+      let n2o = sources.map(s=>s.n2o).sum();
 
       //total
-      let total = elec + sources.map(s=>s.total).sum();
+      let total = sources.map(s=>s.total).sum();
       return {total,co2,ch4,n2o};
     }
     wwt_KPI_GHG_elec(){
-      return this.wwt_nrg_cons*this.wwt_conv_kwh;
+      let co2 = this.wwt_nrg_cons*this.wwt_conv_kwh;
+      let ch4 = 0;
+      let n2o = 0;
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     wwt_KPI_GHG_fuel(){
       let vol   = this.wwt_vol_fuel;
@@ -1532,8 +1552,8 @@ class Waste_Onsite extends Substage{
     //wwo total emissions
     wwo_KPI_GHG(){
       //sources (objects)
-      let elec    = this.wwo_KPI_GHG_elec();
       let sources = [
+        this.wwo_KPI_GHG_elec(),
         this.wwo_KPI_GHG_fuel(),
         this.wwo_KPI_GHG_unt_opd(),
         this.wwo_KPI_GHG_trck(),
@@ -1547,17 +1567,21 @@ class Waste_Onsite extends Substage{
       ];
 
       //gases (numbers)
-      let co2 = elec + sources.map(s=>s.co2).sum();
-      let ch4 =        sources.map(s=>s.ch4).sum();
-      let n2o =        sources.map(s=>s.n2o).sum();
+      let co2 = sources.map(s=>s.co2).sum();
+      let ch4 = sources.map(s=>s.ch4).sum();
+      let n2o = sources.map(s=>s.n2o).sum();
 
       //total
-      let total = elec + sources.map(s=>s.total).sum();
+      let total = sources.map(s=>s.total).sum();
       return {total,co2,ch4,n2o};
     }
     //electricity
     wwo_KPI_GHG_elec(){
-      return this.wwo_nrg_cons*this.wwo_conv_kwh;
+      let co2 = this.wwo_nrg_cons*this.wwo_conv_kwh;
+      let ch4 = 0;
+      let n2o = 0;
+      let total = co2+ch4+n2o;
+      return {total,co2,ch4,n2o};
     }
     //fuel engines
     wwo_KPI_GHG_fuel(){

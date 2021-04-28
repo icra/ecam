@@ -15,12 +15,12 @@ let UNFCCC={
     color: "#efa922",
     emissions(scenario){
       return [
-        scenario.Water.Abstraction  .map(ss=>ss.wsa_KPI_GHG_elec()).sum(), //wsa electricity
-        scenario.Water.Treatment    .map(ss=>ss.wst_KPI_GHG_elec()).sum(), //wst electricity
-        scenario.Water.Distribution .map(ss=>ss.wsd_KPI_GHG_elec()).sum(), //wsd electricity
-        scenario.Waste.Collection   .map(ss=>ss.wwc_KPI_GHG_elec()).sum(), //wsd electricity
-        scenario.Waste.Treatment    .map(ss=>ss.wwt_KPI_GHG_elec()).sum(), //wsd electricity
-        scenario.Waste.Onsite       .map(ss=>ss.wwo_KPI_GHG_elec()).sum(), //wsd electricity
+        scenario.Water.Abstraction  .map(ss=>ss.wsa_KPI_GHG_elec().total).sum(), //wsa electricity
+        scenario.Water.Treatment    .map(ss=>ss.wst_KPI_GHG_elec().total).sum(), //wst electricity
+        scenario.Water.Distribution .map(ss=>ss.wsd_KPI_GHG_elec().total).sum(), //wsd electricity
+        scenario.Waste.Collection   .map(ss=>ss.wwc_KPI_GHG_elec().total).sum(), //wsd electricity
+        scenario.Waste.Treatment    .map(ss=>ss.wwt_KPI_GHG_elec().total).sum(), //wsd electricity
+        scenario.Waste.Onsite       .map(ss=>ss.wwo_KPI_GHG_elec().total).sum(), //wsd electricity
 
         scenario.Water.Abstraction  .map(ss=>ss.wsa_KPI_GHG_fuel().total).sum(), //wsa fuel engines
         scenario.Water.Treatment    .map(ss=>ss.wst_KPI_GHG_fuel().total).sum(), //wst fuel engines

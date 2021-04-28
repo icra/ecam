@@ -32,7 +32,7 @@ let diagram = new Vue({
         >
 
         <div v-if="is_debug_mode_enabled()" style="margin-top:2em">
-          <b>This section is only visible in development mode</b>
+          <b>The diagram below is only visible in dev mode</b>
           <img
             src="frontend/img/flowchart/map.dot.svg"
             style="display:block;margin:auto;width:90%;border:1px solid #eee"

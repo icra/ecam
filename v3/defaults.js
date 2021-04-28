@@ -35,10 +35,12 @@ if(debug){
   });
 
   //add another scenario layout scenario
+  /*
   ecam.new_scenario();
   Scenarios.forEach(scenario=>{
     compare_scenarios.scenarios_compared.push(scenario);
   });
+  */
 }
 
 if(debug){
