@@ -426,12 +426,19 @@ let variable=new Vue({
               Related data table (<a onclick="ecam.show('tables')">see all data tables</a>):
               <table>
                 <tr>
-                  <th colspan=100 style="background:var(--color-level-generic);text-align:center">{{Info[id].table}}</th>
+                  <th colspan=100 style="background:var(--color-level-generic);text-align:left">
+                    {{Info[id].table}}
+                  </th>
                 </tr>
                 <tr v-for="row in Tables[Info[id].table]">
                   <td v-for="obj,key in row">
                     <b>{{key}}</b>:
-                    {{obj}}
+                    <span v-if="typeof(obj)=='string'">
+                      {{translate(obj)}}
+                    </span>
+                    <span v-else>
+                      {{obj}}
+                    </span>
                   </td>
                 </tr>
               </table>
