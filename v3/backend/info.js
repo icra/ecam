@@ -94,7 +94,7 @@ let Info={
   wsa_pmp_type     : {magnitude:"Option", table:"Pump type",                unit:"Pump type"},
   wsa_pmp_size     : {magnitude:"Option", table:"Pump size",                unit:"Pump size"},
   wsd_pmp_size     : {magnitude:"Option", table:"Pump size",                unit:"Pump size"},
-  wst_treatmen     : {magnitude:"Option", table:"Potabilization chain",     unit:"Technology"},
+  wst_treatment    : {magnitude:"Option", table:"Potabilization chain",     unit:"Technology"},
   wwo_flooding     : {magnitude:"Option", table:"Flooding containment",     unit:"Yes/No"},
   wwt_slu_disp     : {magnitude:"Option", table:"Type of sludge disposed",  unit:"Sludge type disposed of"},
 

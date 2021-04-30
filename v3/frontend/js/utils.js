@@ -193,9 +193,10 @@ function get_output_codes(level, sublevel){
 function locate_variable(code){
   if(!code) return false;
 
-  //fix correct search for global functions TODO
+  //fix correct search for global functions
   if(Global[code] && typeof(Global[code])=='function'){
-    return {level:false, sublevel:false, stage:Global}; //stage is an object
+    return {level:false, sublevel:false, stage:Global};
+    //stage is an object
   }
 
   let all_stages = Structure.concat({level:"General",sublevel:false});
@@ -231,13 +232,13 @@ function get_variable_type(code){
   }
 
   let loc = locate_variable(code);
-  if(!loc) return "code not found";
-  if(!loc.level) return "level not found";
+  if(!loc)       return "code '"+code+"' could not be located";
+  if(!loc.level) return "code '"+code+"': level '"+loc.level+"' not found";
   let level    = loc.level;
   let sublevel = loc.sublevel;
   if(get_input_codes (level,sublevel).indexOf(code)+1){return "input"}
   if(get_output_codes(level,sublevel).indexOf(code)+1){return "output"}
-  return "not found";
+  return "code '"+code+"'not found";
 }
 
 //detect if the string "code" is inside any filter

@@ -37,7 +37,6 @@ let ecam={
 
     development,
     problems,
-    translation_problems,
   },
 
   //show a view (==open a page)
@@ -260,9 +259,22 @@ let ecam={
               ss.name,
             ],
             ...get_input_codes(s.level,s.sublevel).map(key=>{
+
+              //variable description
+              let description=translate(key+'_descr');
+
+              //include options with a number at the end of the description
+              if(Info[key].magnitude=='Option'){
+                let options=Tables[Info[key].table].map(row=>translate(row.name));
+                let options_with_numbers=options.map((op,i)=>{
+                  return `${i}: '${op}'`;
+                });
+                description += ` --> [${options_with_numbers.join(", ")}]`;
+              }
+
               return[
                 key, //column: variable name
-                translate(key+'_descr'), //column: description
+                description, //column: description
                 Info[key]?Info[key].unit:"", //column: unit
                 ss[key], //column: value
               ];

@@ -321,8 +321,6 @@ let Questions={
         "wwt_biogas_usage",
         "wwt_nrg_biog_val",
 
-        "wwt_KPI_nrg_biogas",
-        "wwt_KPI_nrg_x_biog",
         "wwt_ghg_avoided_biogas",
 
         "wwt_KPI_GHG_dig_fuel",
@@ -600,7 +598,6 @@ let Questions={
         "wwo_mass_landapp",
         "wwo_la_N_to_N2O",
         "wwo_la_N_cont",
-        "wwo_soil_typ",
         "wwo_KPI_GHG_landapp",
         "wwo_ghg_avoided_landapp",
       ],

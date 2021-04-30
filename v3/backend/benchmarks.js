@@ -10,9 +10,6 @@ let Benchmarks={
 
   //standarized energy consumption (kWh/m3/100m)
   wsa_KPI_std_nrg_cons(stage, value){
-    if(!stage)                  return "stage error";
-    if(typeof(value)!="number") return "value error";
-
     //type and size of pump
     let pmp_type = Tables.get_row("Pump type",stage.wsa_pmp_type).name;
     let pmp_size = Tables.get_row("Pump size",stage.wsa_pmp_size).name;
@@ -85,10 +82,10 @@ let Benchmarks={
   },
 
   wwc_KPI_std_nrg_cons(stage, value){
-    if      (0.2725 <= value && value <= 0.45) { return "Good" }
-    else if (0.45   <  value && value <= 0.68) { return "Acceptable" }
-    else if (value  > 0.68)                    { return "Unsatisfactory" }
-    else                                       { return "Out of range" }
+    if      (0.2725 <= value && value <= 0.45) return "Good";
+    else if (0.45   <  value && value <= 0.68) return "Acceptable";
+    else if (value  > 0.68)                    return "Unsatisfactory";
+    else                                       return "Out of range";
   },
 
   wwt_KPI_std_nrg_cons(stage, value){
@@ -135,7 +132,7 @@ let Benchmarks={
     // WTP             >  5000 m3/d - Good: tE1 ≤ 0.025; Acceptable: 0.025 < tE1 ≤ 0.04;  Unsatisfactory: tE1 > 0.04
     // WTP             <= 5000 m3/d - Good: tE1 ≤ 0.04;  Acceptable: 0.04  < tE1 ≤ 0.055; Unsatisfactory: tE1 > 0.055
     // WTP (with raw and treated water pumping) - Good: tE1 ≤ 0.4; Acceptable: 0.4 < tE1 ≤ 0.5; Unsatisfactory: tE1 > 0.5
-    let tre        = Tables.get_row('Potabilization chain',stage.wst_treatmen).name; //type of treatment
+    let tre        = Tables.get_row('Potabilization chain',stage.wst_treatment).name; //type of treatment
     let m3_per_day = stage.wst_vol_trea/Global.Days(); //m3 per day
     if     (m3_per_day> 5000 && (tre.search("Pre-ox")+1) && value<=0.055)                 return "Good";
     else if(m3_per_day> 5000 && (tre.search("Pre-ox")+1) && value> 0.055 && value<=0.07 ) return "Acceptable";
@@ -200,6 +197,6 @@ let Benchmarks={
     else                                   return "Out of range";
   },
 
-  //use it to test if the function that locates not used benchmarks works
+  //test if the function that locates not used benchmarks works
   //not_used_benchmark(){return false},
 };

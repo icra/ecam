@@ -177,7 +177,7 @@ let report = new Vue({
           Report
         </div>
         <div style="text-align:center;font-size:smaller">
-          Click the report to enable/disable a printable view. Then press CTRL+P to generate a PDF file.
+          Double-click the report to enable/disable a printable view. Then press CTRL+P to generate a PDF file.
         </div>
       </h1>
 
@@ -199,10 +199,9 @@ let report = new Vue({
           :dark_background="printable_version==false"
         >
           <div
-            @click="printable_version^=1"
+            @dblclick="printable_version^=1"
             style="
               padding:3em 2em 2em 3em;
-              cursor:pointer;
               background:white;
             "
             :with_border="printable_version==false"

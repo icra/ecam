@@ -6,9 +6,9 @@ let Filters={
   "ww_vol_gene",
 
   "wst_mass_slu",
-  "wst_treatmen",
-  "wst_treatment_perf",
+  "wst_treatment",
   "wst_vol_trea",
+  "wst_treatment_perf",
 
   "wsd_service_perf",
   "wsd_topographic",

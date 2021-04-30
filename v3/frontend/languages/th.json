@@ -1,6 +1,9 @@
 {
 "#below": "ด้านล่าง",
 
+"#wsa_pmp_type_descr":"ชนิดเครื่องสูบน้ำ",
+"#wsa_pmp_type_expla":"ชนิดเครื่องสูบน้ำ",
+
 "#wwc_vol_coll_descr":"Volume of collected wastewater",
 "#wwc_vol_coll_expla":"Volume of collected wastewater that is responsibility of the undertaking, during the assessment period",
 
@@ -887,8 +890,6 @@
 "#wsa_pmp_pf_expla":"ค่าเพาเวอร์แฟกเตอร์",
 "#wsa_pmp_size_descr":"ขนาดเครื่องสูบน้ำ (kW)",
 "#wsa_pmp_size_expla":"ขนาดเครื่องสูบน้ำ (kW)",
-"#wsa_pmp_type_descr":"ชนิดเครื่องสูบน้ำ",
-"#wsa_pmp_type_expla":"ชนิดเครื่องสูบน้ำ",
 "#wsa_pmp_volt_descr":"แรงดันไฟฟ้าที่วัดได้",
 "#wsa_pmp_volt_expla":"แรงดันไฟฟ้าที่วัดได้",
 "#wsa_pumping":"ต้องการประเมินประสิทธิภาพการทำงานของเครื่องสูบน้ำ",
@@ -1085,8 +1086,8 @@
 "#wst_sta_head_expla":"เฮดสถิตย์",
 "#wst_trea_cap_descr":"ความสามารถในการผลิตน้ำประปา",
 "#wst_trea_cap_expla":"ผลรวมความสามารถในการผลิตน้ำประปา ตลอดระยะเวลาเก็บข้อมูล",
-"#wst_treatmen_descr":"จำนวนขั้นตอนกระบวนการผลิตน้ำ",
-"#wst_treatmen_expla":"จำนวนขั้นตอนกระบวนการผลิตน้ำ",
+"#wst_treatment_descr":"จำนวนขั้นตอนกระบวนการผลิตน้ำ",
+"#wst_treatment_expla":"จำนวนขั้นตอนกระบวนการผลิตน้ำ",
 "#wst_treatment_perf":"ต้องการประเมินประสิทธิภาพระบบบำบัด",
 "#wst_tst_carr_descr":"สัดส่วนจำนวนครั้งของการวิเคราะห์น้ำประปา ที่ผ่านตามเกณฑ์มาตรฐาน",
 "#wst_tst_carr_expla":"สัดส่วนจำนวนครั้งของการวิเคราะห์น้ำประปา ที่ผ่านตามเกณฑ์มาตรฐาน ตลอดระยะเวลาเก็บข้อมูล",
@@ -1490,8 +1491,6 @@
 "#wwt_pmp_head_expla":"เฮดของเครื่องสูบน้ำ",
 "#wwt_pmp_pf_descr":"ค่าเพาเวอร์แฟกเตอร์",
 "#wwt_pmp_pf_expla":"ค่าเพาเวอร์แฟกเตอร์",
-"#wwt_pmp_type_descr":"ชนิดของเครื่องสูบน้ำ",
-"#wwt_pmp_type_expla":"ชนิดของเครื่องสูบน้ำ",
 "#wwt_pmp_volt_descr":"แรงดันไฟฟ้าที่วัดได้",
 "#wwt_pmp_volt_expla":"แรงดันไฟฟ้าที่วัดได้",
 "#wwt_producing_biogas":"มีการผลิตก๊าซชีวภาพจากระบบหมักแบบไร้อากาศ",

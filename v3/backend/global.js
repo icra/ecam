@@ -556,8 +556,8 @@ class Water_Treatment extends Substage{
     this.wst_nrg_cost = 0; //energy costs
     this.wst_run_cost = 0; //total running costs
 
-    this.wst_mass_slu = 0;
-    this.wst_treatmen = 0;
+    this.wst_mass_slu  = 0;
+    this.wst_treatment = 0;
 
     this.wst_nrg_cons = 0; //energy consumed from the grid (kWh)
     this.wst_conv_kwh = 0; //kWh to kgCO2eq conversion factor

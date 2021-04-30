@@ -9,12 +9,24 @@ let development=new Vue({
     <div id=development v-if="visible">
       <!--title--><h1>Development</h1>
       <p style="padding-left:1em">
-        Useful functions for semi-automated debugging during development.
+        Utilities for debugging during development.
       </p>
       <ul style="font-size:large">
-        <li><a onclick="ecam.show('problems')">Problem finder</a></li>
-        <li><a onclick="ecam.show('translation_problems')">Translation problems finder (TODO)</a></li>
-        <li><button onclick="ecam.test()">execute automated test</button></li>
+        <li>
+          <a onclick="ecam.show('problems')">
+            Problem finder
+          </a>
+        </li>
+        <li>
+          <a href="https://ecamtranslator.icradev.cat" target=_blank>
+            Ecam translator tool (external)
+          </a>
+        </li>
+        <li>
+          <a href=# onclick="ecam.test()">
+            Execute automated test
+          </a>
+        </li>
       </ul>
     </div>
   `,
@@ -304,17 +316,5 @@ let problems=new Vue({
         list-style:none;
       }
     </style>
-  `,
-});
-
-let translation_problems=new Vue({
-  el:"#translation_problems",
-  data:{
-    visible:false,
-  },
-  template:`
-    <div id=translation_problems v-if="visible">
-      translation problem finder TODO
-    </div>
   `,
 });

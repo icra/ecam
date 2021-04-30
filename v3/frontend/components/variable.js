@@ -457,7 +457,7 @@ let variable=new Vue({
                     {{Exceptions[id].table}}
                   </th>
                 </tr>
-                <tr v-for="row in Tables[Exceptions[id].table]" v-if="row.name.search('Select')!=0">
+                <tr v-for="row in Tables[Exceptions[id].table]">
                   <td v-for="obj,key in row">
                     <b>{{key}}</b>:
                     <span v-if="typeof(obj)=='string'">

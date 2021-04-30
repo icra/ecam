@@ -2,21 +2,18 @@
 //used for two kinds of variables:
 // 1. nominal variables (strings) with magnitude==Option
 // 2. numeric variables inside Exceptions
-let Tables = {
-	//fuel types
-  "Fuel type":[             //EFxxx: [kg/TJ], NCV: [TJ/Gg], FD: [kg/L].
-    {name:"Diesel",          EFCH4:{engines:3,vehicles:3.9}, EFN2O:{engines:0.6,vehicles:3.9}, EFCO2:74100, FD:0.84, NCV:43.0},
-    {name:"Gasoline/Petrol", EFCH4:{engines:3,vehicles:3.8}, EFN2O:{engines:0.6,vehicles:1.9}, EFCO2:69300, FD:0.74, NCV:44.3},
-    {name:"Natural Gas",     EFCH4:{engines:10,vehicles:92}, EFN2O:{engines:0.1,vehicles:0.2}, EFCO2:56100, FD:0.75, NCV:48.0},
+let Tables={
+  "Fuel type":[//            EF (kg/TJ)                                                                     FD (kg/L) NCV (TJ/Gg)
+    {name:"Diesel",          EFCH4:{engines:3,vehicles:3.9}, EFN2O:{engines:0.6,vehicles:3.9}, EFCO2:74100, FD:0.84,  NCV:43.0},
+    {name:"Gasoline/Petrol", EFCH4:{engines:3,vehicles:3.8}, EFN2O:{engines:0.6,vehicles:1.9}, EFCO2:69300, FD:0.74,  NCV:44.3},
+    {name:"Natural Gas",     EFCH4:{engines:10,vehicles:92}, EFN2O:{engines:0.1,vehicles:0.2}, EFCO2:56100, FD:0.75,  NCV:48.0},
   ],
 
-  //pump types
   "Pump type":[
     {name:"External"   },
     {name:"Submersible"},
   ],
 
-  //pump sizes
   "Pump size":[
     {name:"5.6 - 15.7 kW"},
     {name:"15.7 - 38 kW" },
@@ -24,17 +21,6 @@ let Tables = {
     {name:"> 96 kW"      },
   ],
 
-  //type of water disinfection
-  "Disinfection type":[
-    {name:"None"},
-    {name:"Chlorination"},
-    {name:"UF"},
-    {name:"MF"},
-    {name:"Ozon"},
-    {name:"UV"},
-  ],
-
-  //type of potabilization chain
   "Potabilization chain":[
     {name:"None"},
     {name:"Pre-ox/C/F/S/Filt/Des"},
@@ -45,10 +31,9 @@ let Tables = {
     {name:"Other"},
   ],
 
-  //types of water bodies
   //ipcc 2019, table 6.3 (updated) EF (kgCH4/kgBOD)
   "type_of_water_body":[
-    {name:"Select",                                                                                 ch4_efac:0},
+    {name:"Water body undefined",                                                                   ch4_efac:0},
     {name:"Discharge to aquatic environments (Tier 1)",                                             ch4_efac:0.068},
     {name:"Discharge to aquatic environments other than reservoirs, lakes, and estuaries (Tier 2)", ch4_efac:0.021},
     {name:"Discharge to reservoirs, lakes, and estuaries (Tier 2)",                                 ch4_efac:0.114},
@@ -58,34 +43,33 @@ let Tables = {
   ],
 
   "type_of_sewer":[
-    {name:"Select",                                 ch4_efac:0},
+    {name:"Type of sewer undefined",                ch4_efac:0},
     {name:"Stagnant sewer or anaerobic water body", ch4_efac:0.3},
     {name:"Flowing sewer (open or closed)",         ch4_efac:0},
   ],
 
-	//types of treatment
   //ipcc 2019, table 6.3 (updated) EF (kgCH4/kgBOD)
   "type_of_treatment":[
-    {name:"Select treatment type",                                          ch4_efac:0,     bod_rmvd_as_sludge_estm:0   },
-    {name:"Centralised, aerobic, treatment plant",                          ch4_efac:0.018, bod_rmvd_as_sludge_estm:0.65},
-    {name:"Anaerobic Reactor - CH4 recovery not considered",                ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
-    {name:"Anaerobic Reactor - CH4 recovery considered",                    ch4_efac:0.14,  bod_rmvd_as_sludge_estm:0.10},
-    {name:"Anaerobic Lagoon <2m depth",                                     ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.30},
-    {name:"Anaerobic Lagoon >2m depth",                                     ch4_efac:0.48,  bod_rmvd_as_sludge_estm:0.10},
-    {name:"Anaerobic Lagoon covered",                                       ch4_efac:0,     bod_rmvd_as_sludge_estm:0.10},
-    {name:"Wetlands - Surface flow",                                        ch4_efac:0.24,  bod_rmvd_as_sludge_estm:0.30},
-    {name:"Wetlands - Horizontal subsurface flow",                          ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
-    {name:"Wetlands - Vertical subsurface flow",                            ch4_efac:0.006, bod_rmvd_as_sludge_estm:0.65},
-    {name:"Activated Sludge - Well managed",                                ch4_efac:0,     bod_rmvd_as_sludge_estm:0.65},
-    {name:"Activated Sludge - Minor poorly aerated zones",                  ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
-    {name:"Activated Sludge - Some aerated zones",                          ch4_efac:0.12,  bod_rmvd_as_sludge_estm:0.65},
-    {name:"Activated Sludge - Not well managed",                            ch4_efac:0.18,  bod_rmvd_as_sludge_estm:0.65},
-    {name:"Aerated Lagoon",                                                 ch4_efac:0.06,  bod_rmvd_as_sludge_estm:0.65},
-    {name:"Trickling Filter",                                               ch4_efac:0.036, bod_rmvd_as_sludge_estm:0.65},
+    {name:"Type of treatment undefined",                     ch4_efac:0,     },
+    {name:"Centralised, aerobic, treatment plant",           ch4_efac:0.018, },
+    {name:"Anaerobic Reactor - CH4 recovery not considered", ch4_efac:0.48,  },
+    {name:"Anaerobic Reactor - CH4 recovery considered",     ch4_efac:0.14,  },
+    {name:"Anaerobic Lagoon <2m depth",                      ch4_efac:0.12,  },
+    {name:"Anaerobic Lagoon >2m depth",                      ch4_efac:0.48,  },
+    {name:"Anaerobic Lagoon covered",                        ch4_efac:0,     },
+    {name:"Wetlands - Surface flow",                         ch4_efac:0.24,  },
+    {name:"Wetlands - Horizontal subsurface flow",           ch4_efac:0.06,  },
+    {name:"Wetlands - Vertical subsurface flow",             ch4_efac:0.006, },
+    {name:"Activated Sludge - Well managed",                 ch4_efac:0,     },
+    {name:"Activated Sludge - Minor poorly aerated zones",   ch4_efac:0.06,  },
+    {name:"Activated Sludge - Some aerated zones",           ch4_efac:0.12,  },
+    {name:"Activated Sludge - Not well managed",             ch4_efac:0.18,  },
+    {name:"Aerated Lagoon",                                  ch4_efac:0.06,  },
+    {name:"Trickling Filter",                                ch4_efac:0.036, },
   ],
 
   "N2O EF plants (Table 6.8A)":[
-    {name:"Select treatment type",                 n2o_efac:0      },
+    {name:"Type of treatment undefined",           n2o_efac:0      },
     {name:"Centralised, aerobic, treatment plant", n2o_efac:0.016  },
     {name:"Anaerobic reactor",                     n2o_efac:0      },
     {name:"Anaerobic lagoons",                     n2o_efac:0      },
@@ -95,7 +79,7 @@ let Tables = {
   ],
 
   "N2O EF effluent (Table 6.8A)":[
-    {name:"Select",                                                                                           n2o_efac:0    },
+    {name:"Discharge undefined",                                                                              n2o_efac:0.000},
     {name:"Freshwater, estuarine, and marine discharge (Tier 1)",                                             n2o_efac:0.005},
     {name:"Nutrient-impacted and/or hypoxic freshwater, estuarine, and marine discharge (Tier 3, if needed)", n2o_efac:0.019},
   ],
@@ -125,7 +109,7 @@ let Tables = {
 
   //Andreoli et al table 2.2
   "Sludge characteristics in each stage of the treatment process":[
-    {name:"Select",                                                          gSS_inh_day:0},
+    {name:"Type of treatment undefined",                                     gSS_inh_day:0},
     {name:"Primary treatment (conventional)",                                gSS_inh_day:(35+45)/2},
     {name:"Primary treatment (septic tanks)",                                gSS_inh_day:(20+30)/2},
     {name:"Facultative pond",                                                gSS_inh_day:(20+25)/2},
@@ -156,48 +140,26 @@ let Tables = {
     {name:"UASB+aerobic biofilm reactor (mixed sludge)",                     gSS_inh_day:(18+30)/2},
   ],
 
-  //pump types 2
-  "wwt_pmp_type":[
-    {name:"Archimedean screw"},
-    {name:"Centrifugal pump"},
-    {name:"Propeller pump"},
-    {name:"Vane pump"},
-  ],
-
-  //type of sludge disposed
   "Type of sludge disposed":[
     {name:"Non-digested", f_ch4:0.53, la_N_cont:3, TVS:0.70},
     {name:"Digested",     f_ch4:0.06, la_N_cont:4, TVS:0.51},
   ],
 
-  //type of landfill
   "Type of landfill":[
     {name:"Landfill",                     ratio:1},
     {name:"Landfill (with gas recovery)", ratio:0.02},
     {name:"Landfill (flaring)",           ratio:0},
   ],
 
-  //type of soil: N transformed to N2O-N
+  //f_la: N transformed to N2O-N
   "Soil type":[
-    {name:"Select soil type",            f_la:0.000},
+    {name:"Soil type undefined",         f_la:0.000},
     {name:"Fine-Textured (>30% clay)",   f_la:0.023},
     {name:"Coarse-Textured (<30% clay)", f_la:0.005},
   ],
 
-	//type of water reuse
-  "wwt_reus_typ":[
-    {name:"For non-potable use"},
-    {name:"For green areas"},
-    {name:"For industrial use"},
-    {name:"For irrigation with resticted access"},
-    {name:"For irrigation without restricted access"},
-    {name:"For food crop irrigation"},
-    {name:"For fishfarming"},
-  ],
-
-  //type of containment
   "Type of containment":[
-    {name:"Select",                                                         ch4_efac:0,      ch4_efac_flooding:0,     BOD_conc_FS:0,    fs_density:0   },
+    {name:"Containment undefined",                                          ch4_efac:0,      ch4_efac_flooding:0,     BOD_conc_FS:0,    fs_density:0   },
     {name:"No containment (open defecation)",                               ch4_efac:0.027,  ch4_efac_flooding:0.027, BOD_conc_FS:67.8, fs_density:1400},
     {name:"Pit latrine without flush water (lined or unlined) – household", ch4_efac:0.06,   ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
     {name:"Pit latrine without flush water (lined or unlined) – communal",  ch4_efac:0.3,    ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
@@ -211,15 +173,13 @@ let Tables = {
     {name:"Imhoff tank",                                                    ch4_efac:0.48,   ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
   ],
 
-  //containment is flooding?
   "Flooding containment":[
     {name:"no"},
     {name:"yes"},
   ],
 
-  //type of onsite treatment
   "Type of onsite treatment":[
-    {name:"No Treatment",                                     ch4_efac:0.00,   bod_rmvd_as_sludge_estm:0.0,},
+    {name:"Type of treatment undefined",                      ch4_efac:0.00,   bod_rmvd_as_sludge_estm:0.0,},
     {name:"Anaerobic Digester",                               ch4_efac:0.48,   bod_rmvd_as_sludge_estm:0.10,},
     {name:"Imhoff Tanks",                                     ch4_efac:0.48,   bod_rmvd_as_sludge_estm:0.10,},
     {name:"Anaerobic Reactors - CH4 recovery not considered", ch4_efac:0.48,   bod_rmvd_as_sludge_estm:0.10,},
@@ -238,27 +198,19 @@ let Tables = {
     {name:"Trickling Filter",                                 ch4_efac:0.036,  bod_rmvd_as_sludge_estm:0.65,},
   ],
 
-  //type of disposal
-  "Type of disposal":[
-    {name:"No disposal (open defecation)"},
-    {name:"Landfilling"},
-    {name:"Land application"},
-    {name:"Dumping"},
-  ],
-
-  //type of faecal sludge for land application and landfilling
+  //for land application and landfilling
   "Type of faecal sludge":[
-    {name:"Select",                  N_content:0.00, TVS:0.000, total_solids:0.00},
-    {name:"Untreated faecal sludge", N_content:0.24, TVS:0.700, total_solids:0.04},
-    {name:"Treated faecal sludge",   N_content:3.00, TVS:0.400, total_solids:0.22},
-    {name:"Pit humus",               N_content:4.00, TVS:0.650, total_solids:0.07},
-    {name:"Dehydrated faeces",       N_content:3.00, TVS:0.700, total_solids:0.27},
-    {name:"Compost",                 N_content:3.00, TVS:0.800, total_solids:0.08},
-    {name:"Septic tank sludge",      N_content:0.03, TVS:0.600, total_solids:0.02},
+    {name:"Type of faecal sludge undefined", N_content:0.00, TVS:0.000, total_solids:0.00},
+    {name:"Untreated faecal sludge",         N_content:0.24, TVS:0.700, total_solids:0.04},
+    {name:"Treated faecal sludge",           N_content:3.00, TVS:0.400, total_solids:0.22},
+    {name:"Pit humus",                       N_content:4.00, TVS:0.650, total_solids:0.07},
+    {name:"Dehydrated faeces",               N_content:3.00, TVS:0.700, total_solids:0.27},
+    {name:"Compost",                         N_content:3.00, TVS:0.800, total_solids:0.08},
+    {name:"Septic tank sludge",              N_content:0.03, TVS:0.600, total_solids:0.02},
   ],
 };
 
-//get object by "table" (string) and "index" (integer)
+//get row object by "table" (string) and "index" (integer)
 Tables.get_row=function(table, index){
   let t=Tables[table]; //array
   if(!t) return false;
