@@ -342,7 +342,7 @@ let tier_b=new Vue({
           <input
             type=checkbox
             :checked="filters_active[key]"
-            @click.stop="filters_active[key]=$event.target.checked"
+            @click.stop="filters_active[key]=$event.target.checked;if($event.target.checked){filters_on=true;}"
           >
           <span>
             {{key}} ({{get_number_of_variables_shown_by_filter(key)}})
@@ -533,7 +533,7 @@ let tier_b=new Vue({
                 </thead>
 
                 <tbody>
-                  <tr v-for="key in get_current_stage().equations"
+                  <tr v-for="key in get_current_stage().constructor.equations"
                     v-if="
                       (key=='TotalGHG' || key.search('_KPI_GHG')+1)
                       &&
@@ -619,7 +619,7 @@ let tier_b=new Vue({
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="key in get_current_stage().equations"
+                  <tr v-for="key in get_current_stage().constructor.equations"
                     v-if="
                       (key!='TotalGHG' && key.search('_KPI_GHG')==-1)
                       &&
@@ -823,6 +823,18 @@ let tier_b=new Vue({
       #tier_b #outputs button.btn_show_outputs:hover {
         background:#666;
         color:white;
+      }
+
+      #tier_b button.btn_estimation{
+        border-radius:0;
+        max-width:180px;
+        font-size:smaller;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+      }
+      #tier_b button.btn_estimation:active {
+        box-shadow:inset 0 0 2px;
       }
     </style>
   `,

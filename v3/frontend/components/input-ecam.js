@@ -30,16 +30,19 @@ Vue.component('input_ecam',{
           <!--estimation button-->
           <div v-if="Estimations[code]">
             <button
-              @click="current_stage[code] = Estimations[code](current_stage)"
-              @mousemove="caption.show($event, \`Estimation formula:<br><pre>\$\{Formulas.prettify(Estimations[code])\}</pre>\`)"
+              @click="current_stage[code]=Estimations[code](current_stage)"
+              @mousemove="caption.show($event,\`Estimation formula:<br><pre>\$\{Formulas.prettify(Estimations[code])\}</pre>\`)"
               @mouseout="caption.hide()"
               :disabled="isNaN(Estimations[code](current_stage))"
-              style="font-size:smaller"
+              class="btn_estimation"
               tabindex="-1"
+              :style="{borderColor:(current_stage[code]==Estimations[code](current_stage)?'green':'')}"
             >
-              Estimation:
-              <span v-html="format(Estimations[code](current_stage)/Units.multiplier(code))"></span>
-              <span v-html="get_current_unit(code,Global).prettify()"></span>
+              <div>Estimation:&nbsp;</div>
+              <div style="display:flex;align-items:center">
+                <div v-html="format(Estimations[code](current_stage)/Units.multiplier(code))"></div>
+                <div v-html="get_current_unit(code,Global).prettify()" style="margin-left:2px"></div>
+              </div>
             </button>
           </div>
         </div>
@@ -63,8 +66,8 @@ Vue.component('input_ecam',{
               :value="parseFloat(obj[Exceptions[code].table_field(current_stage)]*Exceptions[code].percent_of(current_stage))"
             >
               {{translate(obj.name)}}
-              [{{        100*obj[Exceptions[code].table_field(current_stage)] }} %]
-              ({{ format(    obj[Exceptions[code].table_field(current_stage)]*Exceptions[code].percent_of(current_stage)/Units.multiplier(code) )}}
+              [{{ format(100*obj[Exceptions[code].table_field(current_stage)]) }} %]
+              ({{ format(obj[Exceptions[code].table_field(current_stage)]*Exceptions[code].percent_of(current_stage)/Units.multiplier(code) )}}
               {{get_current_unit(code,Global)}})
             </option>
           </select>

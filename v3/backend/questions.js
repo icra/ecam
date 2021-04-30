@@ -319,12 +319,14 @@ let Questions={
 
         "wwt_moles_biogas_produced",
         "wwt_biogas_usage",
-        "wwt_KPI_biog_x_bod",
         "wwt_nrg_biog_val",
-        "wwt_KPI_GHG_dig_fuel",
-        "wwt_KPI_GHG_biog",
+
         "wwt_KPI_nrg_biogas",
         "wwt_KPI_nrg_x_biog",
+        "wwt_ghg_avoided_biogas",
+
+        "wwt_KPI_GHG_dig_fuel",
+        "wwt_KPI_GHG_biog",
       ],
       advanced:0,
       otherQuestions:[
@@ -552,13 +554,28 @@ let Questions={
 
     "wwo_producing_biogas":{
       variables:[
-        "wwo_biog_pro",
-        "wwo_biog_val",
-        "wwo_biog_fla",
-        "wwo_ch4_biog",
-        "wwo_KPI_GHG_biog",
-        "wwo_nrg_biog",
         "wwo_ghg_avoided_biogas",
+
+        "wwo_biog_pro",
+        "wwo_biog_fla",
+        "wwo_biog_val",
+        "wwo_biog_lkd",
+        "wwo_biog_sold",
+
+        "wwo_ch4_biog",
+        "wwo_dige_typ",
+        "wwo_fuel_dig",
+        "wwo_nrg_biog",
+
+        "wwo_moles_biogas_produced",
+        "wwo_biogas_usage",
+
+        "wwo_nrg_biog_val",
+        "wwo_KPI_nrg_biogas",
+        "wwo_KPI_nrg_x_biog",
+
+        "wwo_KPI_GHG_dig_fuel",
+        "wwo_KPI_GHG_biog",
       ],
       advanced:0,
       otherQuestions:[ ],
@@ -580,8 +597,8 @@ let Questions={
 
     "wwo_landapp":{
       variables:[
-        "wwo_fslu_typ_la",
         "wwo_mass_landapp",
+        "wwo_la_N_to_N2O",
         "wwo_la_N_cont",
         "wwo_soil_typ",
         "wwo_KPI_GHG_landapp",
@@ -594,7 +611,6 @@ let Questions={
     "wwo_dumping":{
       variables:[
         "wwo_vol_dumping",
-        "wwo_dumping_pth",
         "wwo_ch4_efac_dumping",
         "wwo_KPI_GHG_dumping",
       ],

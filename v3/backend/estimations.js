@@ -128,6 +128,7 @@ let Estimations={
     wwo_fslu_emp(substage){
       return 0.3 * substage.wwo_onsi_pop * Global.Days()/substage.wwo_fdensity * substage.wwo_cont_emp/100;
     },
+
   //wwo
     wwo_bod_infl(substage){
       let P   = substage.wwo_onsi_pop; //population
@@ -138,47 +139,8 @@ let Estimations={
     wwo_n2o_efac_opd(substage){
       return Cts.ct_ef_eff.value;
     },
-  /*
-  wwo_fslu_emp(){ return Cts.ct_fs_prod.value*Global.Waste.Collection.wwo_onsi_pop*Global.Days()/Global.Waste.Collection.wwo_fdensity*Global.Faecl.Containment.wwo_cont_emp/100; },
-  wwo_bod_rmvd(){ return Global.Faecl.Containment.wwo_fslu_emp*Global.Faecl.Containment.wwo_bod_conc_fs; },
 
-  //fst
-  //influent and effluent BOD
-  fst_bod_infl(){ return Global.Faecl.Containment.wwo_bod_rmvd; },
-  fst_bod_effl(){ return 0.10*Global.Faecl.Treatment.fst_bod_infl; },
-  //biogas
-  fst_biog_pro(){return Global.Faecl.Treatment.fst_bod_infl*Cts.ct_bod_kg.value*Cts.ct_biog_g.value;},
-  fst_ch4_biog(){return 59; },
-
-  //fsr
-  //volume dumped
-  fsr_vol_dumping(){return Global.Faecl.Containment.wwo_fslu_emp},
-  //mass sent to landapp
-  fsr_mass_landapp(){
-    let fslu_typ_la=Tables.find('fsr_fslu_typ_la',Global.Faecl.Reuse.fsr_fslu_typ_la);
-    let total_solids=Tables.fsr_fslu_typ_la[fslu_typ_la].total_solids;
-    return Global.Faecl.Containment.wwo_fslu_emp*Global.Faecl.Containment.wwo_fdensity*total_solids;
-  },
-  //mass sent to landfilling
-  fsr_mass_landfil(){
-    let fslu_typ_lf=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);
-    let total_solids=Tables.fsr_fslu_typ_lf[fslu_typ_lf].total_solids;
-    return Global.Faecl.Containment.wwo_fslu_emp*Global.Faecl.Containment.wwo_fdensity*total_solids;
-  },
-  //N content of FS
-  fsr_la_N_cont(){
-    let fslu_typ=Tables.find('fsr_fslu_typ_la',Global.Faecl.Reuse.fsr_fslu_typ_la);
-    return Tables.fsr_fslu_typ_la[fslu_typ].N_content;
-  },
-  //N content of FS
-  fsr_lf_N_cont(){
-    let fslu_typ=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);
-    return Tables.fsr_fslu_typ_lf[fslu_typ].N_content;
-  },
-  //TVS content of FS
-  fsr_lf_TVS(){
-    let fslu_typ=Tables.find('fsr_fslu_typ_lf',Global.Faecl.Reuse.fsr_fslu_typ_lf);
-    return 100*Tables.fsr_fslu_typ_lf[fslu_typ].TVS;
-  },
-  */
+    wwo_bod_rmvd(substage){
+      return substage.wwo_fslu_emp*substage.wwo_bod_conc_fs;
+    },
 };

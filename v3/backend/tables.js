@@ -84,16 +84,6 @@ let Tables = {
     {name:"Trickling Filter",                                               ch4_efac:0.036, bod_rmvd_as_sludge_estm:0.65},
   ],
 
-  //types of main treatments
-  "wwt_main_tre":[
-    {name:"Activated sludge"},
-    {name:"Aerated Lagoon"},
-    {name:"Anaerobic Lagoon"},
-    {name:"Trickling Filter"},
-    {name:"Anaerobic Reactor"},
-    {name:"Wetlands"},
-  ],
-
   "N2O EF plants (Table 6.8A)":[
     {name:"Select treatment type",                 n2o_efac:0      },
     {name:"Centralised, aerobic, treatment plant", n2o_efac:0.016  },
@@ -187,8 +177,9 @@ let Tables = {
     {name:"Landfill (flaring)",           ratio:0},
   ],
 
-  //type of soil
+  //type of soil: N transformed to N2O-N
   "Soil type":[
+    {name:"Select soil type",            f_la:0.000},
     {name:"Fine-Textured (>30% clay)",   f_la:0.023},
     {name:"Coarse-Textured (<30% clay)", f_la:0.005},
   ],
@@ -257,12 +248,13 @@ let Tables = {
 
   //type of faecal sludge for land application and landfilling
   "Type of faecal sludge":[
-    {name:"Untreated",          N_content:0.24, TVS:0.700, total_solids:0.04},
-    {name:"Treated",            N_content:3.00, TVS:0.400, total_solids:0.22},
-    {name:"Pit humus",          N_content:4.00, TVS:0.650, total_solids:0.07},
-    {name:"Dehydrated faeces",  N_content:3.00, TVS:0.700, total_solids:0.27},
-    {name:"Compost",            N_content:3.00, TVS:0.800, total_solids:0.08},
-    {name:"Septic tank sludge", N_content:0.03, TVS:0.600, total_solids:0.02},
+    {name:"Select",                  N_content:0.00, TVS:0.000, total_solids:0.00},
+    {name:"Untreated faecal sludge", N_content:0.24, TVS:0.700, total_solids:0.04},
+    {name:"Treated faecal sludge",   N_content:3.00, TVS:0.400, total_solids:0.22},
+    {name:"Pit humus",               N_content:4.00, TVS:0.650, total_solids:0.07},
+    {name:"Dehydrated faeces",       N_content:3.00, TVS:0.700, total_solids:0.27},
+    {name:"Compost",                 N_content:3.00, TVS:0.800, total_solids:0.08},
+    {name:"Septic tank sludge",      N_content:0.03, TVS:0.600, total_solids:0.02},
   ],
 };
 

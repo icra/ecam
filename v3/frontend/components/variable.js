@@ -292,7 +292,7 @@ let variable=new Vue({
                                 :value="parseFloat(obj[Exceptions[id].table_field(ss)]*Exceptions[id].percent_of(ss))"
                               >
                                 {{translate(obj.name)}}
-                                [{{        100*obj[Exceptions[id].table_field(ss)] }} %]
+                                [{{ format(100*obj[Exceptions[id].table_field(ss)]) }} %]
                                 ({{ format(    obj[Exceptions[id].table_field(ss)]*Exceptions[id].percent_of(ss))}}
                                 {{get_base_unit(id).prettify()}})
                               </option>

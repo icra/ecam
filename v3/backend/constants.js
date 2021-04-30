@@ -57,18 +57,6 @@ let Cts={
 
   ct_ch4_up:{value:0.025,descr:"Percentage of CH4 emission for uncoverd pile",unit:"ratio"},
 
-  ct_ch4_lo:{
-    value:2,
-    descr:"Percentage of methane losses",
-    unit:"%",
-  },
-
-  ct_ch4_m3:{
-    value:0.66,
-    descr:"Kg CH4/m3",
-    unit:"kg CH4/m3",
-  },
-
   ct_fra_np:{
     value: 0.16,
     descr: "Nitrogen in proteins (F_NPR)",

@@ -274,15 +274,19 @@ let Charts={
       //capa 3
       {source:get_index('wsa'), target:get_index('elec'), value:Global.Water.Abstraction.map(s=>s.wsa_KPI_GHG_elec()   .total).sum()||1e-3},
       {source:get_index('wsa'), target:get_index('fuel'), value:Global.Water.Abstraction.map(s=>s.wsa_KPI_GHG_fuel()   .total).sum()||1e-3},
+
       {source:get_index('wst'), target:get_index('elec'), value:Global.Water.Treatment.map(s=>s.wst_KPI_GHG_elec()     .total).sum()||1e-3},
       {source:get_index('wst'), target:get_index('fuel'), value:Global.Water.Treatment.map(s=>s.wst_KPI_GHG_fuel()     .total).sum()||1e-3},
+
       {source:get_index('wsd'), target:get_index('elec'), value:Global.Water.Distribution.map(s=>s.wsd_KPI_GHG_elec()  .total).sum()||1e-3},
       {source:get_index('wsd'), target:get_index('fuel'), value:Global.Water.Distribution.map(s=>s.wsd_KPI_GHG_fuel()  .total).sum()||1e-3},
       {source:get_index('wsd'), target:get_index('fuel'), value:Global.Water.Distribution.map(s=>s.wsd_KPI_GHG_trck()  .total).sum()||1e-3},
+
       {source:get_index('wwc'), target:get_index('elec'), value:Global.Waste.Collection.map(s=>s.wwc_KPI_GHG_elec()    .total).sum()||1e-3},
       {source:get_index('wwc'), target:get_index('fuel'), value:Global.Waste.Collection.map(s=>s.wwc_KPI_GHG_fuel()    .total).sum()||1e-3},
       {source:get_index('wwc'), target:get_index('untr'), value:Global.Waste.Collection.map(s=>s.wwc_KPI_GHG_cso()     .total).sum()||1e-3},
       {source:get_index('wwc'), target:get_index('untr'), value:Global.Waste.Collection.map(s=>s.wwc_KPI_GHG_col()     .total).sum()||1e-3},
+
       {source:get_index('wwt'), target:get_index('elec'), value:Global.Waste.Treatment.map(s=>s.wwt_KPI_GHG_elec()     .total).sum()||1e-3},
       {source:get_index('wwt'), target:get_index('fuel'), value:Global.Waste.Treatment.map(s=>s.wwt_KPI_GHG_fuel()     .total).sum()||1e-3},
       {source:get_index('wwt'), target:get_index('fuel'), value:Global.Waste.Treatment.map(s=>s.wwt_KPI_GHG_dig_fuel() .total).sum()||1e-3},
@@ -291,9 +295,11 @@ let Charts={
       {source:get_index('wwt'), target:get_index('slud'), value:Global.Waste.Treatment.map(s=>s.wwt_KPI_GHG_slu()      .total).sum()||1e-3},
       {source:get_index('wwt'), target:get_index('fuel'), value:Global.Waste.Treatment.map(s=>s.wwt_KPI_GHG_reus_trck().total).sum()||1e-3},
       {source:get_index('wwt'), target:get_index('disc'), value:Global.Waste.Treatment.map(s=>s.wwt_KPI_GHG_disc()     .total).sum()||1e-3},
+
       {source:get_index('wwo'), target:get_index('elec'), value:Global.Waste.Onsite.map(s=>s.wwo_KPI_GHG_elec()        .total).sum()||1e-3},
       {source:get_index('wwo'), target:get_index('fuel'), value:Global.Waste.Onsite.map(s=>s.wwo_KPI_GHG_fuel()        .total).sum()||1e-3},
       {source:get_index('wwo'), target:get_index('untr'), value:Global.Waste.Onsite.map(s=>s.wwo_KPI_GHG_unt_opd()     .total).sum()||1e-3},
+      {source:get_index('wwo'), target:get_index('wwtr'), value:Global.Waste.Onsite.map(s=>s.wwo_KPI_GHG_containment() .total).sum()||1e-3},
       {source:get_index('wwo'), target:get_index('fuel'), value:Global.Waste.Onsite.map(s=>s.wwo_KPI_GHG_trck()        .total).sum()||1e-3},
       {source:get_index('wwo'), target:get_index('biog'), value:Global.Waste.Onsite.map(s=>s.wwo_KPI_GHG_biog()        .total).sum()||1e-3},
       {source:get_index('wwo'), target:get_index('wwtr'), value:Global.Waste.Onsite.map(s=>s.wwo_KPI_GHG_tre()         .total).sum()||1e-3},
@@ -304,21 +310,27 @@ let Charts={
       {source:get_index('wwo'), target:get_index('slud'), value:Global.Waste.Onsite.map(s=>s.wwo_KPI_GHG_urine()       .total).sum()||1e-3},
       //capa 4
       {source:get_index('elec'), target:get_index('co2'), value:Global.TotalNRG()*Global.General.conv_kwh_co2||1e-3},
+
       {source:get_index('fuel'), target:get_index('co2'), value:Global.fuel_GHG().co2||1e-3},
       {source:get_index('fuel'), target:get_index('ch4'), value:Global.fuel_GHG().ch4||1e-3},
       {source:get_index('fuel'), target:get_index('n2o'), value:Global.fuel_GHG().n2o||1e-3},
+
       {source:get_index('untr'), target:get_index('co2'), value:Global.untr_GHG().co2||1e-3},
       {source:get_index('untr'), target:get_index('ch4'), value:Global.untr_GHG().ch4||1e-3},
       {source:get_index('untr'), target:get_index('n2o'), value:Global.untr_GHG().n2o||1e-3},
+
       {source:get_index('biog'), target:get_index('co2'), value:Global.biog_GHG().co2||1e-3},
       {source:get_index('biog'), target:get_index('ch4'), value:Global.biog_GHG().ch4||1e-3},
       {source:get_index('biog'), target:get_index('n2o'), value:Global.biog_GHG().n2o||1e-3},
+
       {source:get_index('wwtr'), target:get_index('co2'), value:Global.wwtr_GHG().co2||1e-3},
       {source:get_index('wwtr'), target:get_index('ch4'), value:Global.wwtr_GHG().ch4||1e-3},
       {source:get_index('wwtr'), target:get_index('n2o'), value:Global.wwtr_GHG().n2o||1e-3},
+
       {source:get_index('slud'), target:get_index('co2'), value:Global.slud_GHG().co2||1e-3},
       {source:get_index('slud'), target:get_index('ch4'), value:Global.slud_GHG().ch4||1e-3},
       {source:get_index('slud'), target:get_index('n2o'), value:Global.slud_GHG().n2o||1e-3},
+
       {source:get_index('disc'), target:get_index('co2'), value:Global.disc_GHG().co2||1e-3},
       {source:get_index('disc'), target:get_index('ch4'), value:Global.disc_GHG().ch4||1e-3},
       {source:get_index('disc'), target:get_index('n2o'), value:Global.disc_GHG().n2o||1e-3},

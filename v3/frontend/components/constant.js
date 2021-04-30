@@ -73,7 +73,7 @@ let constant = new Vue({
       <table style=margin:auto>
         <tr v-for="output in Formulas.outputs_per_input(code)">
           <td>
-            <a @click="variable.view(output)">
+            <a @click="variable.view(output)" style="font-family:monospace;">
               {{output}}
             </a>
           </td>
