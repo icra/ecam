@@ -439,6 +439,33 @@ let variable=new Vue({
           </td>
         </tr>
 
+        <!--variable data table (if exception)-->
+        <tr v-if="Exceptions[id] && Info[id]">
+          <th>Data table</th>
+          <td>
+            <div style="margin-top:5px;font-size:smaller">
+              <table>
+                <tr>
+                  <th colspan=100 style="background:var(--color-level-generic);text-align:left">
+                    {{Exceptions[id].table}}
+                  </th>
+                </tr>
+                <tr v-for="row in Tables[Exceptions[id].table]" v-if="row.name.search('Select')!=0">
+                  <td v-for="obj,key in row">
+                    <b>{{key}}</b>:
+                    <span v-if="typeof(obj)=='string'">
+                      {{translate(obj)}}
+                    </span>
+                    <span v-else>
+                      {{obj}}
+                    </span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+
         <!--outputs that use this variable-->
         <tr>
           <th> Outputs that use this variable </th>

@@ -832,6 +832,7 @@ let tier_b=new Vue({
         display:flex;
         align-items:center;
         justify-content:center;
+        padding:1px 6px;
       }
       #tier_b button.btn_estimation:active {
         box-shadow:inset 0 0 2px;
