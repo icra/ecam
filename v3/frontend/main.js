@@ -549,6 +549,8 @@ let ecam={
 
   //load user filled template
   async import_excel_template_filled_by_user(event){
+    if(event.target.value=="") return;
+
     let file        = event.target.files[0]; //xlsx file
     let excelAsJson = await read_excel(file); //convert xlsx file to json
 
@@ -558,6 +560,8 @@ let ecam={
     //add ecam object to scenarios and set to current scenario
     Scenarios.push(scenario);
     ecam.set_current_scenario(scenario);
+
+    event.target.value="";
 
     function create_new_ecam_object_with_with_xlsx_json_object(excelAsJson){
       //excelAsJson is an array of sheets

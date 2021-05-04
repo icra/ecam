@@ -576,11 +576,12 @@ let select_scenario=new Vue({
       <!--download empty template and load template-->
       <details style="margin-top:40px" open>
         <summary style="font-size:large">Load an assessment from Excel</summary>
+        <p>Steps:</p>
         <ol>
           <li>
-            Download empty excel template:<br>
+            Download the empty template:<br>
             <button onclick="ecam.generate_empty_excel_template()">
-              Download template
+              Download 'ecam-template.xlsx'
             </button>
           </li>
           <li style="margin-top:15px">
