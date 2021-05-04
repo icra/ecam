@@ -25,8 +25,8 @@ class Ecam{
       AssessmentPeriodStart: "2021-01-01",
       AssessmentPeriodEnd  : "2022-01-01",
       Comments             : "",
-      Currency             : "USD", //default currency
-      Country              : false, //selected country name (string)
+      Currency             : "EUR", //default currency
+      Country              : "",    //selected country name (string)
       conv_kwh_co2         : 0,     //electricity conversion (kgCO2/kWh)
       prot_con             : 0,     //prot consumption (kg/person/year)
       bod_pday             : 0,     //BOD5 (g/person/day)
@@ -39,6 +39,13 @@ class Ecam{
       //user selected units for inputs
       Units:{ /*code:"unit"*/ },
     };
+  }
+
+  //count substages
+  get substages(){
+    return Structure.filter(s=>s.sublevel).map(s=>{
+      return this[s.level][s.sublevel].length;
+    }).sum();
   }
 
   //global GHG emissions and energy consumed

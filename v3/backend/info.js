@@ -10,6 +10,16 @@
 */
 
 let Info={
+  //General
+  version              :{magnitude:"text",unit:"text"},
+  Name                 :{magnitude:"text",unit:"text"}, //name of assessment
+  name                 :{magnitude:"text",unit:"text"}, //name of substages
+  AssessmentPeriodStart:{magnitude:"text",unit:"YYYY-MM-DD"},
+  AssessmentPeriodEnd  :{magnitude:"text",unit:"YYYY-MM-DD"},
+  Comments             :{magnitude:"text",unit:"text"},
+  Currency             :{magnitude:"text",unit:"text"},
+  Country              :{magnitude:"text",unit:"text"},
+
   //wwo
   wwo_la_N_to_N2O:{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},
   wwo_ch4_efac_con:{magnitude:"Mass/Mass",unit:"kgCH4/kgBOD" },
@@ -77,9 +87,9 @@ let Info={
 
   //inputs that are options instead of numeric
   wwt_soil_typ     : {magnitude:"Option", table:"Soil type",                unit:"Soil type"},
-  wwo_fslu_typ_lf  : {magnitude:"Option", table:"Type of faecal sludge",    unit:"Type of FS"},
-  wwt_slu_type     : {magnitude:"Option", table:"Type of landfill",         unit:"Disposal type"},
-  wwo_lf_type      : {magnitude:"Option", table:"Type of landfill",         unit:"Disposal type"},
+  wwo_fslu_typ_lf  : {magnitude:"Option", table:"Type of faecal sludge",    unit:"Type of faecal sludge"},
+  wwt_slu_type     : {magnitude:"Option", table:"Type of landfill",         unit:"Type of landfill"},
+  wwo_lf_type      : {magnitude:"Option", table:"Type of landfill",         unit:"Type of landfill"},
   wsa_fuel_typ     : {magnitude:"Option", table:"Fuel type",                unit:"Fuel type"},
   wst_fuel_typ     : {magnitude:"Option", table:"Fuel type",                unit:"Fuel type"},
   wsd_fuel_typ     : {magnitude:"Option", table:"Fuel type",                unit:"Fuel type"},
@@ -94,9 +104,9 @@ let Info={
   wsa_pmp_type     : {magnitude:"Option", table:"Pump type",                unit:"Pump type"},
   wsa_pmp_size     : {magnitude:"Option", table:"Pump size",                unit:"Pump size"},
   wsd_pmp_size     : {magnitude:"Option", table:"Pump size",                unit:"Pump size"},
-  wst_treatment    : {magnitude:"Option", table:"Potabilization chain",     unit:"Technology"},
+  wst_treatment    : {magnitude:"Option", table:"Potabilization chain",     unit:"Potabilization chain"},
   wwo_flooding     : {magnitude:"Option", table:"Flooding containment",     unit:"Yes/No"},
-  wwt_slu_disp     : {magnitude:"Option", table:"Type of sludge disposed",  unit:"Sludge type disposed of"},
+  wwt_slu_disp     : {magnitude:"Option", table:"Type of sludge disposed",  unit:"Type of sludge disposed"},
 
   //numeric variables
   conv_kwh_co2:{magnitude:"Conversion",unit:"kgCO2/kWh"},

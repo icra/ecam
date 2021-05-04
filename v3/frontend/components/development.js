@@ -115,17 +115,6 @@ let problems=new Vue({
       return found;
     },
 
-    find_unused_data_tables(){
-      let found=[];
-      Object.keys(Tables).forEach(key=>{
-        let n = Formulas.outputs_per_input(key);
-        if(n==0){
-          found.push(key);
-        }
-      });
-      return found;
-    },
-
     translate,
     locate_variable,
   },
@@ -171,22 +160,6 @@ let problems=new Vue({
               <tr v-for="code in find_unused_constants()">
                 <td> {{ code      }} </td>
                 <td> {{ Cts[code] }} </td>
-              </tr>
-            </table>
-          </details>
-        </li>
-
-        <!--Tables: not used-->
-        <li>
-          <details>
-            <summary>
-              not used data tables
-              ({{ find_unused_data_tables().length }})
-            </summary>
-            <table>
-              <tr v-for="code in find_unused_data_tables()">
-                <td> {{ code         }} </td>
-                <td> {{ Tables[code] }} </td>
               </tr>
             </table>
           </details>

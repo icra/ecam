@@ -4,7 +4,7 @@ let select_scenario=new Vue({
     visible:false,
 
     loadfile_replace:true,
-    are_settings_open:true,
+    are_settings_open:false,
     are_you_editing_name:false,
 
     //backend
@@ -80,14 +80,6 @@ let select_scenario=new Vue({
 
       //mode: replace or append
       let replace = this.loadfile_replace;
-
-      /*
-        if(replace){
-          if(!confirm("Current changes will be lost. Continue?")){
-            return;
-          }
-        }
-      */
 
       //get json file contents
       let file   = event.target.files[0];
@@ -329,6 +321,7 @@ let select_scenario=new Vue({
               <td>Assessment period</td>
               <td>GHG (kgCO<sub>2</sub>eq)</td>
               <td>Energy (kWh)</td>
+              <td>Substages</td>
               <td>Options</td>
             </tr>
           </thead>
@@ -383,6 +376,13 @@ let select_scenario=new Vue({
               <td class=nrg>
                 <div>
                   <span v-html="format(scenario.TotalNRG())"></span>
+                </div>
+              </td>
+
+              <!--count substages-->
+              <td>
+                <div>
+                  <span v-html="format(scenario.substages)"></span>
                 </div>
               </td>
 
@@ -572,6 +572,27 @@ let select_scenario=new Vue({
           </tr>
         </table>
       </div>
+
+      <!--download empty template and load template-->
+      <details style="margin-top:40px" open>
+        <summary style="font-size:large">Load an assessment from Excel</summary>
+        <ol>
+          <li>
+            Download empty excel template:<br>
+            <button onclick="ecam.generate_empty_excel_template()">
+              Download template
+            </button>
+          </li>
+          <li style="margin-top:15px">
+            Fill the template and load it here:<br>
+            <input
+              type="file"
+              accept=".xlsx"
+              onchange="ecam.import_excel_template_filled_by_user(event)"
+            >
+          </li>
+        </ol>
+      </details>
     </div>
   `,
 

@@ -128,7 +128,10 @@ function get_base_unit(code, scenario){
   scenario = scenario || Global;
 
   let info = Info[code];
-  if(!info) return "[base unit not found]";
+  if(!info){
+    console.warn(`base unit not found for "${code}"`);
+    return "";
+  }
 
   if(Info[code].magnitude=="Currency"){return scenario.General.Currency}
   if(Units[info.magnitude]==undefined) return info.unit;

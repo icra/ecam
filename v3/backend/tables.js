@@ -213,6 +213,11 @@ let Tables={
 //get row object by "table" (string) and "index" (integer)
 Tables.get_row=function(table, index){
   let t=Tables[table]; //array
-  if(!t) return false;
-  return t[index]||false;
+
+  //check if table exists
+  if(!t       ) throw `Table "${table}" does not exist`;
+  if(!t[index]) index=0;
+
+  //checks passed: return row
+  return t[index];
 };

@@ -73,7 +73,7 @@ let about = new Vue({
 
             <p>
               ECAM 3.0 is free and open source (2015-{{(new Date()).getFullYear()}}
-              <a target=_blank href='frontend/license.txt'>{{translate('about_license')}}</a>).
+              <a target=_blank href='LICENSE'>{{translate('about_license')}}</a>).
             </p>
 
             <p>

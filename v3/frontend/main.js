@@ -210,8 +210,11 @@ let ecam={
     }
   },
 
-  generate_excel_template(){
+  //download empty template
+  generate_empty_excel_template(){
     let scenario=new Ecam();
+    scenario.General.Name="New assessment";
+
     //array of excel sheets
     let sheets=[
       //sheet 1: General
@@ -221,12 +224,13 @@ let ecam={
           ...Object.entries(scenario.General).map(([key,value])=>{
             return[
               key, //column 1: variable name
-              Info[key]?Info[key].unit:"", //column 2: unit
+              get_base_unit(key,scenario), //column 2: unit
               value, //column 3: value
             ];
           }),
         ],
       },
+
       //sheets 2 and 3: Water and Waste
       ...Structure.filter(s=>!s.sublevel).map(s=>{
         return {
@@ -236,13 +240,14 @@ let ecam={
               return[
                 key, //column: variable name
                 translate(key+'_descr'), //column: description
-                Info[key]?Info[key].unit:"", //column: unit
+                get_base_unit(key,scenario), //column 2: unit
                 scenario[s.level][key], //column: value
               ];
             }),
           ],
         };
       }),
+
       //sheets 4 to 9: substages
       ...Structure.filter(s=>s.sublevel).map(s=>{
         let name  = `${s.sublevel} 1`; //string
@@ -275,7 +280,7 @@ let ecam={
               return[
                 key, //column: variable name
                 description, //column: description
-                Info[key]?Info[key].unit:"", //column: unit
+                get_base_unit(key,scenario), //column 2: unit
                 ss[key], //column: value
               ];
             }),
@@ -284,7 +289,250 @@ let ecam={
       }),
     ];
 
+    /*CREATE AND DOWNLOAD EMPTY EXCEL TEMPLATE*/
+    (function write_excel(pre_excel){
+      let sheet_colors=[
+        'FF327CBB', 'FF55C3DC', 'FFEE6D56',
+        'FF55C3DC', 'FF84D6E8', 'FFB2EBF7',
+        'FFEE6D56', 'FFF59382', 'FFF5B6AB',
+      ];
+
+      /**
+       * Format header (first row) font and background color from worksheet
+       * @param {*} worksheet
+       * @param {*} ws_num
+       */
+      function format_header(worksheet, ws_num){
+        let n_cols = worksheet.columnCount;
+
+        for(let i=0; i<n_cols; i++){
+          let col = String.fromCharCode('A'.charCodeAt() + i);
+
+          worksheet.getCell(col+'1').fill={
+            type:'pattern',
+            pattern:'solid',
+            fgColor:{argb:sheet_colors[ws_num-1]},
+          };
+
+          font_color = ws_num != 1 ? '00000000': 'FFFFFFFF';
+
+          worksheet.getCell(col+'1').font = {
+              name: 'Calibri', bold: true, size: 11, color: { argb: font_color }
+          };
+        }
+      }
+
+      /**
+       * Format font and background color of static cells (protected cells) from worksheet
+       * @param {*} worksheet
+       * @param {*} ws_num
+       */
+      function format_static_cells(worksheet, ws_num){
+        let n_cols = worksheet.columnCount;
+        let n_rows = worksheet.rowCount;
+
+        for(let i=0; i<n_cols-1; i++){      //all columns except last one (values column)
+          for(let j=2; j<=n_rows; j++){   //from second row to last row (avoid header)
+            let col = String.fromCharCode('A'.charCodeAt() + i);
+            worksheet.getCell(col+j).fill = {
+              type: 'pattern', pattern: 'solid', fgColor: {argb: sheet_colors[ws_num-1]}
+            };
+            font_color =  ws_num != 1 ? '00000000': 'FFFFFFFF';
+            worksheet.getCell(col+j).font = {
+              name: 'Calibri', size: 11, color: {argb: font_color}
+            };
+            worksheet.getCell(col+j).border = {
+              bottom: {style: 'thin', color: {argb: 'FFB0B2B5'}},
+              left: {style: 'thin', color: {argb: 'FFB0B2B5'}}
+            }
+          }
+        }
+      }
+
+      /**
+       * Unprotect cells that user needs to fill in with data of a substage.
+       * @param {*} worksheet
+       * @param {*} ws_num
+       */
+      function unprotect_value_cells(worksheet, ws_num){
+        let value = worksheet.getColumn('value');
+
+        //unlock value cells
+        value.eachCell({includeEmpty: true}, function(cell, rowNumber){
+          cell.protection={locked:false};
+          cell_color = rowNumber != 1 ? 'FFEEEEEE' : sheet_colors[ws_num-1];
+          font_color = (rowNumber == 1 && ws_num == 1) ? 'FFFFFFFF' : '00000000';
+          font_bold  = rowNumber != 1 ? false : true;
+          cell.fill  = {
+            type:'pattern',
+            pattern:'solid',
+            fgColor:{argb: cell_color}
+          };
+          cell.font = {
+            name: 'Calibri', bold: font_bold, size: 11, color: {argb: font_color}
+          };
+          cell.border = {
+            bottom: {style: 'thin', color: {argb: 'FFB0B2B5'}},
+            left: {style: 'thin', color: {argb: 'FFB0B2B5'}}
+          };
+        });
+      }
+
+      /**
+       * Unprotect 20 following columns, for adding new substages and their data if user wants to.
+       * @param {*} worksheet
+       * @param {*} ws_num
+       */
+      function unprotect_next_20(worksheet, ws_num){
+        let n_cols = worksheet.columnCount;
+        let n_rows = worksheet.rowCount;
+
+        for(let i=n_cols+1; i<21+n_cols; i++){
+          let col = String.fromCharCode('A'.charCodeAt() + i-1);
+          for(let j=1; j<=n_rows; j++){
+            worksheet.getCell(col+j).protection = {locked: false};
+
+            color = j!=1 ? 'FFEEEEEE' : sheet_colors[ws_num-1];
+
+            worksheet.getCell(col+j).fill = {
+              type:'pattern',
+              pattern:'solid',
+              fgColor:{argb: color},
+            };
+
+            worksheet.getCell(col+j).border = {
+              bottom: {style: 'thin', color: {argb: 'FFB0B2B5'}},
+              left: {style: 'thin', color: {argb: 'FFB0B2B5'}}
+            };
+          }
+
+          worksheet.getCell(col+'1').font={
+            name:'Calibri',
+            bold:true,
+            size:11,
+          };
+          worksheet.getColumn(i).width=15;
+        }
+      }
+
+      /**
+       * Set cell's aligment.
+       * @param {*} worksheet
+       */
+      function fit_columns(worksheet){
+        worksheet.columns.forEach(function (column, i) {
+          column["eachCell"]({includeEmpty:true},
+            function(cell){
+              cell.alignment={
+                vertical:'middle',
+                wrapText:true,
+              };
+            }
+          );
+        });
+      }
+
+      /**
+       * Set row's height according to the lenght of second column, wich can be split in multiple lines.
+       * @param {*} worksheet
+       */
+      function fit_rows(worksheet){
+        worksheet.eachRow( {includeEmpty: true}, function(row, row_number) {
+          var min_height = 15;
+          var col_length = 0;
+          row["eachCell"]({includeEmpty: true}, function(cell, col_number) {
+            if(col_number==2){
+              col_length = cell.value ? cell.value.toString().length : 55;
+            }
+          });
+
+          if(col_length>55){
+            row.height=(Math.ceil(col_length/60)*min_height);
+          }
+          else row.height=18;
+        })
+      }
+
+      /**
+       * Create a workbook with sheets and data from pre_excel.js object, and download it in xlsx format.
+       */
+      function download_excel(){
+        //create empty workbook
+        let wb = new ExcelJS.Workbook();
+
+        //number of sheets (objects in the array 'pre_excel')
+        let n_sheets = pre_excel.length;
+
+        //create worksheets and fill them with data
+        for(let i=0; i<n_sheets; i++){
+          let sheet_name = pre_excel[i].sheet_name;
+          let sheet_data = pre_excel[i].rows;
+          let ws = wb.addWorksheet(sheet_name, {properties: {tabColor: {argb: sheet_colors[i]}}});
+
+          //set worksheet properties
+          ws.properties.defaultRowHeight = 18;
+          ws.properties.defaultColumnWidth = 15;
+          ws.protect('',{insertColumns: true, formatColumns: true, formatCells: true, formatRows: true}); //protect sheet
+
+          //add header
+          let columns = [
+            { header: 'Id',    key: 'id',    width: 20 },
+            { header: 'Field', key: 'field', width: 60 },
+            { header: 'Unit',  key: 'unit',  width: 20 },
+            { header: 'Value', key: 'value', width: 15 }
+          ];
+
+          if(sheet_data[0].length==3){ //first sheet has only 3 columns
+            columns.splice(0,1); //delete first column
+            columns.splice(2,1, { header: 'Value', key: 'value', width: 20 })
+          }
+
+          ws.columns = columns;
+          format_header(ws, i+1);
+
+          //set freezed columns and header.
+          let active_col = String.fromCharCode('A'.charCodeAt() + ws.columnCount-1);
+          ws.views = [
+            {
+              state:'frozen',
+              ySplit:1,
+              xSplit: (ws.columnCount - 1),
+              activeCell: active_col+2,
+            }
+          ]
+
+          // add data to worksheet (by rows)
+          sheet_data.forEach(row => {
+            const new_row=[];
+            let n_cols = row.length
+            for(let j=0; j<n_cols; j++){
+              new_row[j] = row[j];
+            }
+            ws.addRow(new_row);
+          });
+          format_static_cells(ws, i+1);
+          fit_columns(ws);
+          fit_rows(ws);
+
+          //unprotect last column cells (value cells), so user can enter values
+          unprotect_value_cells(ws, i+1);
+
+          //unprotect next 20 columns to enable adding new substages, except for first 3 sheets.
+          if(i>2) unprotect_next_20(ws, i+1);
+        }
+
+        // Export workbook to xlsx file
+        const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+        wb.xlsx.writeBuffer().
+          then(buffer => saveAs(new Blob([buffer], {type: fileType}), 'ecam-template.xlsx'))
+          .catch(err => console.log('Error writing excel export', err))
+      }
+
+      download_excel();
+    })(sheets);
+
     //generate <a> link and click it
+    /*
     {
       let file   = new Blob([JSON.stringify(sheets,null,'  ')],{type:'application/json'});
       let a      = document.createElement('a');
@@ -295,10 +543,236 @@ let ecam={
       a.click();
       document.body.removeChild(a);
     }
-
-    //code joan roser here TODO
-
     return sheets;
+    */
+  },
+
+  //load user filled template
+  async import_excel_template_filled_by_user(event){
+    let file        = event.target.files[0]; //xlsx file
+    let excelAsJson = await read_excel(file); //convert xlsx file to json
+
+    //convert json to ecam object
+    let scenario = create_new_ecam_object_with_with_xlsx_json_object(excelAsJson);
+
+    //add ecam object to scenarios and set to current scenario
+    Scenarios.push(scenario);
+    ecam.set_current_scenario(scenario);
+
+    function create_new_ecam_object_with_with_xlsx_json_object(excelAsJson){
+      //excelAsJson is an array of sheets
+      //  a sheet is an array of rows
+      //    a row is an array of cells
+
+      //new scenario (return value)
+      let scenario=new Ecam();
+
+      //sheet 1 (General)
+      let sheet_General = excelAsJson.find(sheet=>sheet.sheet_name=='General');
+      if(!sheet_General) throw 'sheet "General" not found';
+      sheet_General.rows.forEach(row=>{
+        let key   = row[0];
+        let unit  = row[1];
+        let value = row[2];
+
+        //console.log({key,unit,value});
+        if(!Info[key]) throw `Variable "${key}" does not exist`;
+
+        scenario.General[key]=value;
+      });
+
+      //sheet 2 and 3 (Level)
+      Structure.filter(s=>!s.sublevel).map(s=>s.level).forEach(level=>{
+        let sheet = excelAsJson.find(sheet=>sheet.sheet_name==level);
+        if(!sheet) throw `sheet "${level}" not found`;
+
+        sheet.rows.forEach(row=>{
+          let key   = row[0];
+          let unit  = row[1];
+          let value = row[2];
+
+          //console.log({key,unit,value});
+          if(!Info[key]) throw `Variable "${key}" does not exist`;
+
+          scenario[level][key]=value;
+        });
+      });
+
+      //sheet 4 to 9 (Stages)
+      Structure.filter(s=>s.sublevel).forEach(stage=>{
+        let level    = stage.level;
+        let sublevel = stage.sublevel;
+
+        let sheet = excelAsJson.find(sheet=>sheet.sheet_name==`${level} ${sublevel}`);
+        if(!sheet) throw `sheet "${level} ${sublevel}" not found`;
+
+        //detect number of substages created by the user == number of columns
+        let n_substages = Math.max(...sheet.rows.map(row=>row.length))-3;
+        if(n_substages<1) throw `number of substages cannot be "${n_substages}"`;
+        //console.log({n_substages});
+
+        //create as many substages
+        for(let i=0;i<n_substages;i++){
+          let ss = new stage.class();
+          scenario[level][sublevel].push(ss);
+        }
+
+        //fill substages with values in the excel
+        sheet.rows.forEach(row=>{
+          let key   = row[0];
+          let descr = row[1];
+          let unit  = row[2];
+
+          //console.log({key,unit});
+          if(!Info[key]) throw `Variable "${key}" does not exist`;
+
+          for(let i=0;i<n_substages;i++){
+            let value = row[3+i];
+
+            //console.log({key,unit,value});
+            scenario[level][sublevel][i][key]=value;
+          }
+        });
+      });
+
+      return scenario;
+    }
+
+    function read_excel(excel_buffer){
+      let workbook = new ExcelJS.Workbook();
+      let excelAsJson = [];
+
+      //get workbook intance
+      return workbook.xlsx.load(excel_buffer).then(workbook => {
+        workbook.eachSheet(function(worksheet, sheetId) {
+          read_sheet(excelAsJson, worksheet, sheetId)
+        });
+        return excelAsJson;
+      })
+    }
+
+    function column_count(workSheet){
+      let n_columns = 0;
+      workSheet.eachRow({ includeEmpty: true }, function(row, rowNumber) {
+        if(rowNumber != 1){
+          const cells = row._cells;
+          let i = cells.length;
+          let empty_cells = 0;
+          reversed_cells = [].concat(cells).reverse();
+          for(const cell of reversed_cells){
+            if(cell._value.model.value === undefined){
+              i--
+              empty_cells += 1
+            }
+            else break
+          }
+
+          if(i > n_columns) n_columns = i
+        }
+      })
+      return n_columns
+    }
+
+    function read_sheet(excelAsJson, workSheet, sheetId) {
+      const obj={
+        "sheet_name": workSheet.name,
+        "rows":[],
+      };
+
+      let numberOfColumns;
+      if(sheetId < 4) numberOfColumns = workSheet.actualColumnCount; //not a sheet with substages
+      else numberOfColumns = column_count(workSheet);                //sheet with substages
+
+      workSheet.eachRow({includeEmpty:true},function(row, rowNumber){
+        //Ignore first row
+        if (rowNumber !== 1){
+          const currentRow = [];
+          // Iterate over all cells in a row (including empty cells)
+          row.eachCell({ includeEmpty: true }, function(cell, colNumber) {
+            if(colNumber > numberOfColumns) return
+            if(cell.value === null) {           //Empty cells
+              if(sheetId == 1){             //General
+                if(colNumber == 3){
+                  if(rowNumber < 8) currentRow.push('')
+                  else if(rowNumber == 8) currentRow.push(false)
+                  else currentRow.push(0)
+                }else{
+                  currentRow.push('')
+                }
+              }else if(sheetId == 2 || sheetId == 3){   //Water and Waste
+                currentRow.push(0)
+              }else{    //Substage
+                if(rowNumber == 2){           //Substage name
+                  let name = ""
+                  switch (sheetId) {
+                    case 4:
+                      name = "Abstraction"
+                      break;
+                    case 5:
+                      name = "Treatment"
+                      break;
+                    case 6:
+                      name = "Distribution"
+                      break;
+                    case 7:
+                      name = "Collection"
+                      break;
+                    case 8:
+                      name = "Treatment"
+                      break;
+                    case 9:
+                      name = "Onsite"
+                      break;
+                  }
+                  name += " "+String(currentRow.length - 2)
+                  currentRow.push(name)
+                }else{
+                  currentRow.push(0)
+                }
+              }
+            }
+            else if(typeof cell.value === 'object'){  //Boolean cells
+              if (cell.value['formula'] == 'FALSE()') {
+                currentRow.push(false)
+              }else if (cell.value['formula'] == 'TRUE()') {
+                currentRow.push(true)
+              }else{
+                currentRow.push('')
+              }
+            }
+            else{ //Full cell
+              let toInsert = cell.value
+              if (workSheet.name === 'General') {
+                if(colNumber === 3 && rowNumber > 8) toInsert = floatOrZero(cell.value)
+              }
+              else if (workSheet.name === 'Water'){
+                if(colNumber === 4) toInsert = floatOrZero(cell.value)
+              }
+              else if (workSheet.name === 'Waste'){
+                if(colNumber === 4) toInsert = floatOrZero(cell.value)
+              }
+              else if (!currentRow.includes('text')){ //Is a substage
+                if(colNumber > 3) toInsert = floatOrZero(cell.value)
+              }
+              currentRow.push(toInsert)
+            }
+          });
+
+          //console.log(currentRow)
+          //if(numberOfColumns > currentRow.length) currentRow = currentRow.concat(Array(numberOfColumns-currentRow.length).fill(null))
+          obj.rows.push(currentRow)
+        }
+      });
+      excelAsJson.push(obj)
+    }
+
+    //Full val is a number, return that number. Otherwise, return 0
+    function floatOrZero(val){
+      let ret = val;
+      //If not a number, return default value
+      if(Number.isNaN(parseFloat(val))) ret = 0;
+      return ret
+    }
   },
 };
 
@@ -306,9 +780,9 @@ ecam.add_styles();
 
 /*history*/
 window.onpopstate=function(event){
-  if(!event){ return }
-  if(!event.state){ return }
-  if(!event.state.view){ return }
+  if(!event){return}
+  if(!event.state){return}
+  if(!event.state.view){return}
 
   /*
   console.log(`
@@ -316,19 +790,28 @@ window.onpopstate=function(event){
     state:    ${JSON.stringify(event.state)}`
   );
   */
-
   let view = event.state.view;
 
   //pressing "back" does not push a new historystate object, otherwise an
   //infinite loop is generated with "ecam.show"
-  let no_history_entry = true;
+  let no_history_entry=true;
 
   if(view=='tier_b'){
-    go_to(event.state.level, event.state.sublevel, no_history_entry);
+    go_to(
+      event.state.level,
+      event.state.sublevel,
+      no_history_entry,
+    );
   }else if(view=='variable'){
-    variable.view(event.state.id, no_history_entry);
+    variable.view(
+      event.state.id,
+      no_history_entry,
+    );
   }else if(view=='constant'){
-    constant.view(event.state.code, no_history_entry);
+    constant.view(
+      event.state.code,
+      no_history_entry,
+    );
   }else{
     ecam.show(view, no_history_entry);
   }
