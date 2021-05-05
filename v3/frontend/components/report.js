@@ -24,6 +24,12 @@ let report = new Vue({
     get_output_value,
     get_base_unit,
 
+    get_current_unit_ghg(){return summary_ghg.current_unit_ghg},
+    get_current_unit_nrg(){return summary_ghg.current_unit_nrg},
+    format_emission: summary_ghg.format_emission,
+    format_energy:   summary_ghg.format_energy,
+
+
     show_summaries_menu(){
       if(this.printable_version==false){
         summaries_menu.visible=true;
@@ -106,44 +112,8 @@ let report = new Vue({
         );
       //--
 
-      //draw bar charts
-        Charts.draw_bar_chart(
-          'bar_chart_ghg_substages',
-          Structure.filter(s=>s.sublevel).map(s=>{
-            return Global[s.level][s.sublevel].map(ss=>{
-              let name     = s.prefix+" "+ss.name;
-              let emission = ss[s.prefix+'_KPI_GHG']();
-              let CO2 = emission.co2;
-              let N2O = emission.n2o;
-              let CH4 = emission.ch4;
-              return {name, CO2, CH4, N2O};
-            });
-          }).reduce((p,c)=>p.concat(c),[]),
-          colors=[
-            Charts.gas_colors.co2,
-            Charts.gas_colors.ch4,
-            Charts.gas_colors.n2o,
-          ],
-          'kgCO2eq',
-        );
-
-        Charts.draw_bar_chart(
-          'bar_chart_nrg_substages',
-          Structure.filter(s=>s.sublevel).map(s=>{
-            return Global[s.level][s.sublevel].map(ss=>{
-              let name   = s.prefix+" "+ss.name;
-              let Energy = ss[s.prefix+'_nrg_cons'];
-              return {name, Energy};
-            });
-          }).reduce((p,c)=>p.concat(c),[]),
-          colors=[
-            "#ffbe54",
-          ],
-          'kWh',
-        );
-      //--
-
-      Charts.draw_sankey_ghg();
+      //Sankey diagram
+      Charts.draw_sankey_ghg("#sankey");
     },
   },
 
@@ -173,11 +143,10 @@ let report = new Vue({
 
       <!--title-->
       <h1 v-if="!printable_version" style="text-align:center">
-        <div>
-          Report
-        </div>
+        <div> Report </div>
         <div style="text-align:center;font-size:smaller">
-          Double-click the report to enable/disable a printable view. Then press CTRL+P to generate a PDF file.
+          Double-click the report to enable/disable a printable view. Then
+          press CTRL+P to generate a PDF file.
         </div>
       </h1>
 
@@ -236,10 +205,18 @@ let report = new Vue({
                   margin-bottom:0;
                 "
               >
-                <li><b>Assessment period:</b> {{Global.General.AssessmentPeriodStart}} to {{Global.General.AssessmentPeriodEnd}} ({{format(Global.Days())}} days)</li>
+                <li>
+                  <b>Assessment period:</b>
+                  {{Global.General.AssessmentPeriodStart}} to
+                  {{Global.General.AssessmentPeriodEnd}}
+                  ({{format(Global.Days())}} days)
+                </li>
                 <li><b>Country:</b> {{Global.General.Country}}</li>
                 <li><b>Currency:</b> {{Global.General.Currency}}</li>
-                <li><b>Global Warming Potential Source:</b> {{ GWP_reports[Configuration.gwp_reports_index].report }}</li>
+                <li>
+                  <b>Global Warming Potential Source:</b> {{
+                  GWP_reports[Configuration.gwp_reports_index].report }}
+                </li>
               </ul>
             </div>
 
@@ -288,28 +265,26 @@ let report = new Vue({
                       <td>{{translate(s.sublevel)}}</td>
                       <td class=number>
                         <span>
-                          {{format( Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum() )}}
+                          {{format_emission( Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum() )}}
                         </span>
-                        <span>kgCO<sub>2</sub>eq</span>
+                        <span v-html="get_current_unit_ghg().prettify()"></span>
                       </td>
                       <td class=number>
-                        {{format( Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum() )}}
-                        kWh
+                        {{format_energy( Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_nrg_cons']).sum() )}}
+                        <span v-html="get_current_unit_nrg().prettify()"></span>
                       </td>
                     </tr>
                     <tr style="font-weight:bold">
                       <td>Total {{translate(level.level)}}</td>
                       <td class=number>
                         <span>
-                          {{format( Global[level.level][level.prefix+'_KPI_GHG']().total )}}
+                          {{format_emission( Global[level.level][level.prefix+'_KPI_GHG']().total )}}
                         </span>
-                        <span>
-                          kgCO<sub>2</sub>eq
-                        </span>
+                        <span v-html="get_current_unit_ghg().prettify()"></span>
                       </td>
                       <td class=number>
-                        {{format( Global[level.level][level.prefix+'_nrg_cons']() )}}
-                        kWh
+                        {{format_energy( Global[level.level][level.prefix+'_nrg_cons']() )}}
+                        <span v-html="get_current_unit_nrg().prettify()"></span>
                       </td>
                     </tr>
                   </tbody>
@@ -317,12 +292,12 @@ let report = new Vue({
                     <tr style="color:var(--color-level-generic);font-weight:bold;font-size:larger">
                       <td>Total</td>
                       <td class=number>
-                        {{format(Global.TotalGHG().total)}}
-                        <span>kgCO<sub>2</sub>eq</span>
+                        {{format_emission(Global.TotalGHG().total)}}
+                        <span v-html="get_current_unit_ghg().prettify()"></span>
                       </td>
                       <td class=number>
-                        {{format(Global.TotalNRG())}}
-                        <span>kWh</span>
+                        {{format_energy(Global.TotalNRG())}}
+                        <span v-html="get_current_unit_nrg().prettify()"></span>
                       </td>
                     </tr>
                   </tbody>

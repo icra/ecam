@@ -90,7 +90,7 @@ let ecam={
       document.title = title;
     }
 
-    //return promise for Vue._isMounted
+    //return promise for Vue._isMounted TODO
     return this.views[view]._isMounted;
   },
 
@@ -144,8 +144,7 @@ let ecam={
     });
   },
 
-  //append <style> elements to body foreach vue object that has styles in it
-  //this function overwrites css_components.css file
+  //append <style> elements to <body> for each vue object that has styles in it
   add_styles(){
     Object.values(this.elements).concat(
     Object.values(this.views)).forEach(vue_obj=>{
@@ -210,10 +209,10 @@ let ecam={
     }
   },
 
-  //download empty template
+  //download empty template (step 1)
   generate_empty_excel_template(){
     let scenario=new Ecam();
-    scenario.General.Name="New assessment";
+    scenario.General.Name="Ecam assessment template";
 
     //array of excel sheets
     let sheets=[
@@ -420,7 +419,7 @@ let ecam={
        * @param {*} worksheet
        */
       function fit_columns(worksheet){
-        worksheet.columns.forEach(function (column, i) {
+        worksheet.columns.forEach(function (column, i){
           column["eachCell"]({includeEmpty:true},
             function(cell){
               cell.alignment={
@@ -437,10 +436,10 @@ let ecam={
        * @param {*} worksheet
        */
       function fit_rows(worksheet){
-        worksheet.eachRow( {includeEmpty: true}, function(row, row_number) {
+        worksheet.eachRow( {includeEmpty: true}, function(row, row_number){
           var min_height = 15;
           var col_length = 0;
-          row["eachCell"]({includeEmpty: true}, function(cell, col_number) {
+          row["eachCell"]({includeEmpty: true}, function(cell, col_number){
             if(col_number==2){
               col_length = cell.value ? cell.value.toString().length : 55;
             }
@@ -547,20 +546,27 @@ let ecam={
     */
   },
 
-  //load user filled template
+  //load user filled template (step 2)
   async import_excel_template_filled_by_user(event){
     if(event.target.value=="") return;
+    //when event.target.value changes, this function is triggered. Enable
+    //reuploading a file with the same name resetting event.target.value at the
+    //end of this function
 
-    let file        = event.target.files[0]; //xlsx file
-    let excelAsJson = await read_excel(file); //convert xlsx file to json
+    //1. File object: loaded xlsx by user
+    let file = event.target.files[0];
 
-    //convert json to ecam object
+    //2. convert File object to json
+    let excelAsJson = await read_excel(file);
+
+    //3. convert json to ecam object
     let scenario = create_new_ecam_object_with_with_xlsx_json_object(excelAsJson);
 
     //add ecam object to scenarios and set to current scenario
     Scenarios.push(scenario);
     ecam.set_current_scenario(scenario);
 
+    //enable reuploading the same filename by resetting event.target.value
     event.target.value="";
 
     function create_new_ecam_object_with_with_xlsx_json_object(excelAsJson){
@@ -579,8 +585,12 @@ let ecam={
         let unit  = row[1];
         let value = row[2];
 
-        //console.log({key,unit,value});
-        if(!Info[key]) throw `Variable "${key}" does not exist`;
+        try{
+          check_numbers_and_strings_from_excel(key,value);
+        }catch(e){
+          alert(e);
+          throw(e);
+        }
 
         scenario.General[key]=value;
       });
@@ -592,11 +602,16 @@ let ecam={
 
         sheet.rows.forEach(row=>{
           let key   = row[0];
-          let unit  = row[1];
-          let value = row[2];
+          let descr = row[1];
+          let unit  = row[2];
+          let value = row[3];
 
-          //console.log({key,unit,value});
-          if(!Info[key]) throw `Variable "${key}" does not exist`;
+          try{
+            check_numbers_and_strings_from_excel(key,value);
+          }catch(e){
+            alert(e);
+            throw(e);
+          }
 
           scenario[level][key]=value;
         });
@@ -627,11 +642,15 @@ let ecam={
           let descr = row[1];
           let unit  = row[2];
 
-          //console.log({key,unit});
-          if(!Info[key]) throw `Variable "${key}" does not exist`;
-
           for(let i=0;i<n_substages;i++){
             let value = row[3+i];
+
+            try{
+              check_numbers_and_strings_from_excel(key,value);
+            }catch(e){
+              alert(e);
+              throw(e);
+            }
 
             //console.log({key,unit,value});
             scenario[level][sublevel][i][key]=value;
@@ -642,13 +661,58 @@ let ecam={
       return scenario;
     }
 
+    //throw exceptions for errors in the excel file
+    function check_numbers_and_strings_from_excel(key, value){
+      if(!key){
+        throw `A variable ID from the Excel template is not defined`;
+        return false;
+      }
+
+      if(!Info[key]){
+        throw `The variable code "${key}" does not exist in this version of Ecam`;
+        return false;
+      }
+
+      if(Info[key].magnitude=='text'){
+        if(typeof value=='string'){
+          return true; //everything OK
+        }else{
+          throw `The value of '${key}'='${value}' is not text`;
+          return false;
+        }
+      }
+
+      //rest of cases: numbers
+      if(typeof value != 'number'){
+        throw `The value of '${key}'='${value}' is not a number`;
+        return false;
+      }
+
+      //deal with Options
+      if(Info[key].magnitude=='Option'){
+        //make sure that the number entered by the user is not higher than the
+        //number of rows
+        let max_value = Tables[Info[key].table].length-1;
+        if(value < 0){
+          throw `The value of '${key}'='${value}' is negative`;
+          return false;
+        }
+        if(value > max_value){
+          throw `The value of '${key}'='${value}' is not a valid Option [0..${max_value}]`;
+          return false;
+        }
+      }
+
+      return true;
+    }
+
     function read_excel(excel_buffer){
       let workbook = new ExcelJS.Workbook();
       let excelAsJson = [];
 
       //get workbook intance
       return workbook.xlsx.load(excel_buffer).then(workbook => {
-        workbook.eachSheet(function(worksheet, sheetId) {
+        workbook.eachSheet(function(worksheet, sheetId){
           read_sheet(excelAsJson, worksheet, sheetId)
         });
         return excelAsJson;
@@ -657,7 +721,7 @@ let ecam={
 
     function column_count(workSheet){
       let n_columns = 0;
-      workSheet.eachRow({ includeEmpty: true }, function(row, rowNumber) {
+      workSheet.eachRow({ includeEmpty: true }, function(row, rowNumber){
         if(rowNumber != 1){
           const cells = row._cells;
           let i = cells.length;
@@ -677,7 +741,7 @@ let ecam={
       return n_columns
     }
 
-    function read_sheet(excelAsJson, workSheet, sheetId) {
+    function read_sheet(excelAsJson, workSheet, sheetId){
       const obj={
         "sheet_name": workSheet.name,
         "rows":[],
@@ -688,13 +752,13 @@ let ecam={
       else numberOfColumns = column_count(workSheet);                //sheet with substages
 
       workSheet.eachRow({includeEmpty:true},function(row, rowNumber){
-        //Ignore first row
-        if (rowNumber !== 1){
+        //ignore first row
+        if(rowNumber !== 1){
           const currentRow = [];
-          // Iterate over all cells in a row (including empty cells)
-          row.eachCell({ includeEmpty: true }, function(cell, colNumber) {
+          //iterate over all cells in a row (including empty cells)
+          row.eachCell({ includeEmpty: true }, function(cell, colNumber){
             if(colNumber > numberOfColumns) return
-            if(cell.value === null) {           //Empty cells
+            if(cell.value === null){           //Empty cells
               if(sheetId == 1){             //General
                 if(colNumber == 3){
                   if(rowNumber < 8) currentRow.push('')
@@ -705,10 +769,10 @@ let ecam={
                 }
               }else if(sheetId == 2 || sheetId == 3){   //Water and Waste
                 currentRow.push(0)
-              }else{    //Substage
-                if(rowNumber == 2){           //Substage name
-                  let name = ""
-                  switch (sheetId) {
+              }else{                                    //Substage
+                if(rowNumber == 2){                     //Substage name
+                  let name="";
+                  switch (sheetId){
                     case 4:
                       name = "Abstraction"
                       break;
@@ -736,9 +800,9 @@ let ecam={
               }
             }
             else if(typeof cell.value === 'object'){  //Boolean cells
-              if (cell.value['formula'] == 'FALSE()') {
+              if(cell.value['formula'] == 'FALSE()'){
                 currentRow.push(false)
-              }else if (cell.value['formula'] == 'TRUE()') {
+              }else if(cell.value['formula'] == 'TRUE()'){
                 currentRow.push(true)
               }else{
                 currentRow.push('')
@@ -746,36 +810,13 @@ let ecam={
             }
             else{ //Full cell
               let toInsert = cell.value
-              if (workSheet.name === 'General') {
-                if(colNumber === 3 && rowNumber > 8) toInsert = floatOrZero(cell.value)
-              }
-              else if (workSheet.name === 'Water'){
-                if(colNumber === 4) toInsert = floatOrZero(cell.value)
-              }
-              else if (workSheet.name === 'Waste'){
-                if(colNumber === 4) toInsert = floatOrZero(cell.value)
-              }
-              else if (!currentRow.includes('text')){ //Is a substage
-                if(colNumber > 3) toInsert = floatOrZero(cell.value)
-              }
               currentRow.push(toInsert)
             }
           });
-
-          //console.log(currentRow)
-          //if(numberOfColumns > currentRow.length) currentRow = currentRow.concat(Array(numberOfColumns-currentRow.length).fill(null))
           obj.rows.push(currentRow)
         }
       });
       excelAsJson.push(obj)
-    }
-
-    //Full val is a number, return that number. Otherwise, return 0
-    function floatOrZero(val){
-      let ret = val;
-      //If not a number, return default value
-      if(Number.isNaN(parseFloat(val))) ret = 0;
-      return ret
     }
   },
 };

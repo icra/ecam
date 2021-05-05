@@ -567,10 +567,7 @@ let Questions={
 
         "wwo_moles_biogas_produced",
         "wwo_biogas_usage",
-
         "wwo_nrg_biog_val",
-        "wwo_KPI_nrg_biogas",
-        "wwo_KPI_nrg_x_biog",
 
         "wwo_KPI_GHG_dig_fuel",
         "wwo_KPI_GHG_biog",

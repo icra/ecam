@@ -88,7 +88,7 @@ let stages_menu=new Vue({
   template:`
     <!--linear menu COMPONENT-->
     <div id=stages_menu v-if="visible && Languages.ready">
-      <div style="padding:8px 2rem">
+      <div style="padding:8px 20px">
         <!--title-->
         <h1 style="padding-left:0">
           Inventory: urban water cycle stages
@@ -210,7 +210,8 @@ let stages_menu=new Vue({
                     >
                       <div style="display:flex;align-items:center;">
                         <a
-                          v-html="ss.name"
+                          style="white-space:nowrap;"
+                          v-html="ss.name.prettify()"
                         ></a>
                         &nbsp;
                         <!--delete substage btn-->

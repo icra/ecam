@@ -26,7 +26,11 @@ function go_to(level, sublevel, no_history_entry){
       go_to(level);
       return;
     }else{
-      go_to_substage(Global[level][sublevel][0]);
+      if(tier_b.substage){
+        go_to_substage(tier_b.substage);
+      }else{
+        go_to_substage(Global[level][sublevel][0]);
+      }
       return;
     }
   }else{

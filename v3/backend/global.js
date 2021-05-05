@@ -41,13 +41,6 @@ class Ecam{
     };
   }
 
-  //count substages
-  get substages(){
-    return Structure.filter(s=>s.sublevel).map(s=>{
-      return this[s.level][s.sublevel].length;
-    }).sum();
-  }
-
   //global GHG emissions and energy consumed
   TotalGHG(){
     let sources=[

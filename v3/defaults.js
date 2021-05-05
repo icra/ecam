@@ -45,7 +45,7 @@ if(debug){
 
 if(debug){
   //initial page to display
-  ecam.show('select_scenario'); //view page
   //go_to('Waste','Onsite'); //view inventory stage
   //variable.view('wwt_KPI_GHG_slu_stockpilling'); //view variable detailed info
+  ecam.show('equations'); //view page
 }

@@ -251,7 +251,10 @@ let tier_b=new Vue({
               <button @click="are_you_editing_name=false">ok</button>
             </span>
             <span v-else @click="are_you_editing_name=true">
-              <a style="color:black">{{substage.name}}</a>
+              <a
+                style="color:black"
+                v-html="substage.name.prettify()"
+              ></a>
               <button>change name</button>
             </span>
           </span>

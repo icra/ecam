@@ -19,6 +19,12 @@ let select_scenario=new Vue({
   },
 
   methods:{
+    count_substages(scenario){
+      return Structure.filter(s=>s.sublevel).map(s=>{
+        return scenario[s.level][s.sublevel].length;
+      }).sum();
+    },
+
     show_input(){
       this.are_you_editing_name=true;
       this.$nextTick(function(){
@@ -310,8 +316,8 @@ let select_scenario=new Vue({
       </div>
 
       <!--scenarios table-->
-      <div>
-        <div style="font-size:large">List of assessments</div>
+      <details open>
+        <summary style="font-size:large">List of assessments</summary>
         <!--assessments table-->
         <table style="width:100%" id=main_table>
           <thead>
@@ -382,7 +388,7 @@ let select_scenario=new Vue({
               <!--count substages-->
               <td>
                 <div>
-                  <span v-html="format(scenario.substages)"></span>
+                  <span v-html="format(count_substages(scenario))"></span>
                 </div>
               </td>
 
@@ -571,10 +577,10 @@ let select_scenario=new Vue({
             </td>
           </tr>
         </table>
-      </div>
+      </details>
 
       <!--download empty template and load template-->
-      <details style="margin-top:40px" open>
+      <details open style="margin-top:40px">
         <summary style="font-size:large">Load an assessment from Excel</summary>
         <p>Steps:</p>
         <ol>

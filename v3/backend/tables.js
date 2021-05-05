@@ -216,7 +216,7 @@ Tables.get_row=function(table, index){
 
   //check if table exists
   if(!t       ) throw `Table "${table}" does not exist`;
-  if(!t[index]) index=0;
+  if(!t[index]) throw `Table.${table}[${index}] does not exist`;
 
   //checks passed: return row
   return t[index];

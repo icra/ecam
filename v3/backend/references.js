@@ -17,14 +17,20 @@ let References={
   code:{
     ref:``,    //description in plain text
     link:``,   //link to doi for example
-    pdf:{      //link to pdf "www.example.com/file.pdf#page" | https://helpx.adobe.com/acrobat/kb/link-html-pdf-page-acrobat.html
+    pdf:{      //link to pdf "www.example.com/file.pdf#page=14" | https://helpx.adobe.com/acrobat/kb/link-html-pdf-page-acrobat.html
       text:``,
       link:``,
     },
   },
 
   wwt_biog_pro:{
-    ref:"The estimation is based on the dry mass of sludge produced (equations from section 2.2 - GHG calculations of Bridle model process sludge digestion, Laura Snip PhD thesis, page 19)",
+    ref:`
+      The estimation is based on the dry mass of sludge produced (equations
+      from section 2.2 - GHG calculations of Bridle model process sludge
+      digestion, Laura Snip PhD thesis, page 19).
+      Volume of biogas produced per kg of VSS destroyed
+      estimated according to Andreoli et al.
+    `,
     link:``,   //link to doi for example
     pdf:{      //link to pdf "www.example.com/file.pdf#page" | https://helpx.adobe.com/acrobat/kb/link-html-pdf-page-acrobat.html
       text:``,
