@@ -10,6 +10,10 @@ let compare_scenarios=new Vue({
       outputs:true,
     },
 
+    //current emissions unit
+    current_unit_ghg:"kgCO2eq",
+    current_unit_nrg:"kWh",
+
     charts:{}, //chart objects from chartjs library stored here
 
     variable,
@@ -20,6 +24,19 @@ let compare_scenarios=new Vue({
   },
 
   methods:{
+    //emissions are in kg by default
+    format_emission(number){
+      let divisor = this.current_unit_ghg=='tCO2eq' ? 1000:1;
+      let digits  = undefined;
+      return format(number,digits,divisor);
+    },
+
+    format_energy(number){
+      let divisor = this.current_unit_nrg=='MWh' ? 1000:1;
+      let digits  = undefined;
+      return format(number,digits,divisor);
+    },
+
     //add scenario to comparison table
     add_scenario_to_compared(scenario){
       if(!scenario) return;
@@ -88,9 +105,10 @@ let compare_scenarios=new Vue({
               labels:this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
               datasets:[
                 {
-                  label:'total ghg emissions (kgCO2eq)',
+                  label:`total ghg emissions (${this.current_unit_ghg})`,
                   data:this.scenarios_compared.map(scenario=>{
-                    return scenario.TotalGHG().total; //current emissions
+                    let divisor = this.current_unit_ghg=='tCO2eq'?1000:1;
+                    return scenario.TotalGHG().total/divisor; //current emissions
                   }),//[12, 19, 3, 5, 2, 3],
                   backgroundColor:['#327ccb'],
                   borderColor:['#327ccb'],
@@ -163,9 +181,10 @@ let compare_scenarios=new Vue({
               datasets:[
                 ...['co2','ch4','n2o'].map(gas=>{
                   return{
-                    label:`${gas.toUpperCase()} (kgCO2eq)`,
+                    label:`${gas.toUpperCase()} (${this.current_unit_ghg})`,
                     data:this.scenarios_compared.map(scenario=>{
-                      return scenario.TotalGHG()[gas];
+                      let divisor = this.current_unit_ghg=='tCO2eq'?1000:1;
+                      return scenario.TotalGHG()[gas]/divisor;
                     }),//[12,19,3,5,2,3]
                     backgroundColor:[Charts.gas_colors[gas]],
                     borderColor:[Charts.gas_colors[gas]],
@@ -198,9 +217,10 @@ let compare_scenarios=new Vue({
                 //column subdivisions
                 ...Structure.filter(s=>s.sublevel).map(stage=>{
                   return {
-                    label:`${stage.prefix.substring(0,2)}-${stage.sublevel} (kgCO2eq)`,
+                    label:`${stage.prefix.substring(0,2)}-${stage.sublevel} (${this.current_unit_ghg})`,
                     data:this.scenarios_compared.map(scenario=>{
-                      return scenario[stage.level][stage.sublevel].map(ss=>ss[stage.prefix+'_KPI_GHG']().total).sum();
+                      let divisor = this.current_unit_ghg=='tCO2eq'?1000:1;
+                      return scenario[stage.level][stage.sublevel].map(ss=>ss[stage.prefix+'_KPI_GHG']().total).sum()/divisor;
                     }),
                     backgroundColor:[stage.color],
                     borderColor:[stage.color],
@@ -233,9 +253,10 @@ let compare_scenarios=new Vue({
                 //column subdivisions
                 ...Object.entries(UNFCCC).map(([key,obj])=>{
                   return{
-                    label:`${obj.description} (kgCO2eq)`,
+                    label:`${obj.description} (${this.current_unit_ghg})`,
                     data:this.scenarios_compared.map(scenario=>{
-                      return obj.emissions(scenario);
+                      let divisor = this.current_unit_ghg=='tCO2eq'?1000:1;
+                      return obj.emissions(scenario)/divisor;
                     }),
                     backgroundColor:[obj.color],
                     borderColor:[obj.color],
@@ -266,9 +287,10 @@ let compare_scenarios=new Vue({
               labels:this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
               datasets:[
                 {
-                  label:'Energy consumed (kWh)',
+                  label:`Energy consumed (${this.current_unit_nrg})`,
                   data:this.scenarios_compared.map(scenario=>{
-                    let total=scenario.TotalNRG(); //current emissions
+                    let divisor = this.current_unit_nrg=='MWh'?1000:1;
+                    let total=scenario.TotalNRG()/divisor; //current emissions
                     return total;
                   }),//[12,19,3,5,2,3]
                   backgroundColor:["#ffbe54"],
@@ -325,42 +347,68 @@ let compare_scenarios=new Vue({
         <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Bar chart:<br>emissions by stage                                 </button>
         <button :selected="current_view=='bar_chart_ghg_by_unfccc'"     @click="current_view='bar_chart_ghg_by_unfccc'"    >Bar chart:<br>emissions by UNFCCC category                       </button>
         <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">Bar chart:<br>total energy consumption                           </button>
-        <!-- hidden for now TBD TODO
-          <button :selected="current_view=='bar_chart_ghg_by_substage'"   @click="current_view='bar_chart_ghg_by_substage'"  >Bar chart: GHG by substage</button>
-        -->
       </div>
 
       <!--title-->
       <h1 style="text-align:center">Compare assessments</h1>
 
-      <!--select scenarios-->
-      <div>
-        <p style="text-align:center;color:#666">
-          <b>Select the assessments to be compared</b>
-        </p>
+      <div
+        style="
+          display:flex;
+          justify-content:space-around;
+          align-content:center;
+          margin-bottom:20px;
+        "
+      >
+        <!--select scenarios-->
+        <div>
+          <p style="text-align:center;color:#666">
+            <b>Select the assessments to be compared</b>
+          </p>
 
-        <!--list of assessments-->
-        <div class=flex style="justify-content:center;text-align:center">
-          <div class=selectable_scenario v-for="scenario in get_scenarios()">
-            <label>
-              <input
-                type=checkbox
-                @click="add_scenario_to_compared(scenario)"
-                :checked="scenarios_compared.indexOf(scenario)+1"
-              >
-              <span>
-                {{scenario.General.Name}}
-              </span>
-            </label>
+          <!--list of assessments-->
+          <div class=flex style="justify-content:center;text-align:center">
+            <div class=selectable_scenario v-for="scenario in get_scenarios()">
+              <label>
+                <input
+                  type=checkbox
+                  @click="add_scenario_to_compared(scenario)"
+                  :checked="scenarios_compared.indexOf(scenario)+1"
+                >
+                <span>
+                  {{scenario.General.Name}}
+                </span>
+              </label>
+            </div>
           </div>
+        </div>
+
+        <!--select units-->
+        <div>
+          <p style="text-align:center;color:#666">
+            <b>Select units</b>
+          </p>
+          <select v-model="current_unit_ghg">
+            <option>kgCO2eq</option>
+            <option>tCO2eq</option>
+          </select>
+          <select v-model="current_unit_nrg">
+            <option>kWh</option>
+            <option>MWh</option>
+          </select>
         </div>
       </div>
 
       <!--table-->
       <div v-if="current_view=='table'">
         <!--choose inputs and/or outputs-->
-        <div>
-          <div style="text-align:center;margin-top:10px">
+        <div
+          style="
+            display:flex;
+            justify-content:space-around;
+          "
+        >
+          <div>
             <big>Compare:</big>
             <label> <input type=checkbox v-model="include.inputs">  inputs </label>
             <label> <input type=checkbox v-model="include.outputs"> outputs </label>
@@ -397,13 +445,13 @@ let compare_scenarios=new Vue({
               <td v-for="scenario in scenarios_compared">
                 <div class=number>
                   {{
-                    format(scenario.TotalGHG().total)
+                    format_emission(scenario.TotalGHG().total)
                   }}
                 </div>
                 <div
                   class="unit"
                   style="text-align:right"
-                  v-html="get_base_unit('TotalGHG', scenario).prettify()"
+                  v-html="current_unit_ghg.prettify()"
                 ></div>
               </td>
             </tr>
@@ -423,14 +471,14 @@ let compare_scenarios=new Vue({
               </td>
               <td v-for="scenario in scenarios_compared">
                 <div class=number>
-                  {{format(
+                  {{format_emission(
                     scenario[level.level][level.prefix+'_KPI_GHG']().total
                   )}}
                 </div>
                 <div
                   class="unit"
                   style="text-align:right"
-                  v-html="get_base_unit(level.prefix+'_KPI_GHG', scenario).prettify()"
+                  v-html="current_unit_ghg.prettify()"
                 ></div>
               </td>
             </tr>
@@ -445,7 +493,7 @@ let compare_scenarios=new Vue({
               <td v-for="scenario in scenarios_compared">
                 <div class=number>
                   {{
-                    format(
+                    format_emission(
                      scenario[stage.level][stage.sublevel].map(ss=>ss[stage.prefix+'_KPI_GHG']().total).sum()
                     )
                   }}
@@ -453,7 +501,7 @@ let compare_scenarios=new Vue({
                 <div
                   class="unit"
                   style="text-align:right"
-                  v-html="get_base_unit(stage.prefix+'_KPI_GHG', scenario).prettify()"
+                  v-html="current_unit_ghg.prettify()"
                 ></div>
               </td>
             </tr>
