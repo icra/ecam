@@ -580,7 +580,7 @@ let select_scenario=new Vue({
       </details>
 
       <!--download empty template and load template-->
-      <details open style="margin-top:40px">
+      <details style="margin-top:40px">
         <summary style="font-size:large">Load an assessment from Excel</summary>
         <p>Steps:</p>
         <ol>
@@ -595,7 +595,7 @@ let select_scenario=new Vue({
             Finally, upload the filled file here:
             <input
               type="file"
-              accept=".xlsx"
+              accept=".xlsx,.ods"
               onchange="ecam.import_excel_template_filled_by_user(event)"
             >
           </li>
