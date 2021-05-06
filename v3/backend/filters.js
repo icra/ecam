@@ -145,11 +145,6 @@ let Filters={
   "wwo_prot_con", //variable
 ],
 
-"Biogas":[
-  "wwt_producing_biogas", //question
-  "wwo_producing_biogas", //question
-],
-
 "Energy Performance":[
   //wsa Abstraction
   "wsa_vol_conv", //input
@@ -186,6 +181,11 @@ let Filters={
   "wwo_producing_biogas", //question
   "wwo_pumping",     //question
   "wwo_pumping_eff", //question
+],
+
+"Biogas":[
+  "wwt_producing_biogas", //question
+  "wwo_producing_biogas", //question
 ],
 
 "Costs":[

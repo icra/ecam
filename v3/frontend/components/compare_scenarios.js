@@ -288,31 +288,6 @@ let compare_scenarios=new Vue({
             },
           });
         }
-
-        //TODO redo with chartjs library: all substages across all scenarios
-        /*
-        Charts.draw_bar_chart(
-          'bar_chart_ghg_by_substage',
-          this.scenarios_compared.map((scenario,i)=>{
-            return Structure.filter(s=>s.sublevel).map(s=>{
-              return scenario[s.level][s.sublevel].map(ss=>{
-                let name     = `[${i+1}]-${s.prefix}-${ss.name}`;
-                let emission = ss[s.prefix+'_KPI_GHG']();
-                let CO2 = emission.co2;
-                let N2O = emission.n2o;
-                let CH4 = emission.ch4;
-                return {name, CO2, CH4, N2O};
-              });
-            }).reduce((p,c)=>p.concat(c),[]);
-          }).reduce((p,c)=>p.concat(c),[]),
-          colors=[
-            Charts.gas_colors.co2,
-            Charts.gas_colors.ch4,
-            Charts.gas_colors.n2o,
-          ],
-          'kgCO2eq',
-        );
-        */
       //--
     },
 

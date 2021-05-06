@@ -45,7 +45,7 @@ let ecam={
     //view is a STRING
 
     if(!this.views[view]){
-      let e = new Error(`view '${view}' not found`);
+      let e=new Error(`view '${view}' not found`);
       alert(e);
       throw e;
     }
@@ -564,8 +564,11 @@ let ecam={
 
       //sheet 1 (General)
       let sheet_General = excelAsJson.find(sheet=>sheet.sheet_name=='General');
-      console.log(excelAsJson);
-      if(!sheet_General) throw 'sheet "General" not found';
+      if(!sheet_General){
+        let e='sheet "General" not found'
+        alert(e);
+        throw(e) ;
+      }
       sheet_General.rows.forEach(row=>{
         let key   = row[0];
         let unit  = row[1];
@@ -584,7 +587,11 @@ let ecam={
       //sheet 2 and 3 (Level)
       Structure.filter(s=>!s.sublevel).map(s=>s.level).forEach(level=>{
         let sheet = excelAsJson.find(sheet=>sheet.sheet_name==level);
-        if(!sheet) throw `sheet "${level}" not found`;
+        if(!sheet){
+          let e=`sheet "${level}" not found`;
+          alert(e);
+          throw(e);
+        }
 
         sheet.rows.forEach(row=>{
           let key   = row[0];
@@ -609,12 +616,19 @@ let ecam={
         let sublevel = stage.sublevel;
 
         let sheet = excelAsJson.find(sheet=>sheet.sheet_name==`${level} ${sublevel}`);
-        if(!sheet) throw `sheet "${level} ${sublevel}" not found`;
+        if(!sheet){
+          let e=`sheet "${level} ${sublevel}" not found`;
+          alert(e);
+          throw(e);
+        }
 
         //detect number of substages created by the user == number of columns
         let n_substages = Math.max(...sheet.rows.map(row=>row.length))-3;
-        if(n_substages<1) throw `number of substages cannot be "${n_substages}"`;
-        //console.log({n_substages});
+        if(n_substages<0){
+          let e=`number of substages cannot be "${n_substages}"`;
+          alert(e);
+          throw(e);
+        }
 
         //create as many substages
         for(let i=0;i<n_substages;i++){
@@ -699,9 +713,13 @@ let ecam={
 
       //get workbook intance
       return workbook.xlsx.load(excel_buffer).then(workbook => {
-        console.log(workbook);
         workbook.eachSheet(function(worksheet, sheetId){
-          read_sheet(excelAsJson, worksheet, sheetId)
+          try{
+            read_sheet(excelAsJson, worksheet, sheetId)
+          }catch(e){
+            alert(e);
+            throw(e);
+          }
         });
         return excelAsJson;
       })
@@ -730,7 +748,6 @@ let ecam={
     }
 
     function read_sheet(excelAsJson, workSheet, sheetId){
-      console.log({excelAsJson,workSheet,sheetId});
       const obj={
         "sheet_name": workSheet.name,
         "rows":[],

@@ -46,7 +46,7 @@ let equations = new Vue({
         </span>
       </h1>
 
-      <details>
+      <details open>
         <summary>Equations</summary>
         <div>
           <table style="margin:8px">

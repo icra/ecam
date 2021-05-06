@@ -3,6 +3,8 @@ let summary_ghg=new Vue({
   data:{
     visible:false,
 
+    see_emissions_disgregated:true,
+
     //folded sections
     unfolded_levels:['Water','Waste'],
 
@@ -252,16 +254,32 @@ let summary_ghg=new Vue({
         <button @click="current_view='charts_pop'" :selected="current_view=='charts_pop'">Charts Serviced Population</button>
 
         <hr style="border-color:#eee">
-        <div style="padding:1em 0">
-          <b>Select units</b>
-          <select v-model="current_unit_ghg">
-            <option>kgCO2eq</option>
-            <option>tCO2eq</option>
-          </select>
-          <select v-model="current_unit_nrg">
-            <option>kWh</option>
-            <option>MWh</option>
-          </select>
+        <div
+          style="
+            padding:1em 0;
+            display:flex;
+            justify-content:space-around;
+          "
+        >
+          <!--select units-->
+          <div>
+            <b>Select units</b>
+            <select v-model="current_unit_ghg">
+              <option>kgCO2eq</option>
+              <option>tCO2eq</option>
+            </select>
+            <select v-model="current_unit_nrg">
+              <option>kWh</option>
+              <option>MWh</option>
+            </select>
+          </div>
+          <!--select see other ghgs-->
+          <div>
+            <label>
+              <input type=checkbox v-model="see_emissions_disgregated">
+              <b v-html="'Disgregate emissions in CO2, CH4 and N2O'.prettify()"></b>
+            </label>
+          </div>
         </div>
       </div>
 
@@ -285,9 +303,9 @@ let summary_ghg=new Vue({
               <div>Stage (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
               <div>Emission source</div>
               <div>Total (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
-              <div>${'CO2'.prettify()}    (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
-              <div>${'CH4'.prettify()}    (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
-              <div>${'N2O'.prettify()}    (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
+              <div v-if="see_emissions_disgregated">${'CO2'.prettify()}    (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
+              <div v-if="see_emissions_disgregated">${'CH4'.prettify()}    (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
+              <div v-if="see_emissions_disgregated">${'N2O'.prettify()}    (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
             </div>
             <div
               class=subdivision
@@ -307,7 +325,9 @@ let summary_ghg=new Vue({
                 >
                   <div>
                     <div style="padding:1em;text-align:center">
-                      {{translate(s.level)}}
+                      <div style="font-size:larger">
+                        {{translate(s.level)}}
+                      </div>
                       <div>
                         {{format_emission(Global[s.level][s.prefix+'_KPI_GHG']().total)}}
                       </div>
@@ -342,6 +362,7 @@ let summary_ghg=new Vue({
                           </div>
                           <div
                             v-for="gas in ['total','co2','ch4','n2o']"
+                            v-if="gas=='total' || see_emissions_disgregated"
                             style="text-align:center"
                           >
                             {{
