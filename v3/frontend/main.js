@@ -500,7 +500,7 @@ let ecam={
             }
           ]
 
-          // add data to worksheet (by rows)
+          //add data to worksheet (by rows)
           sheet_data.forEach(row => {
             const new_row=[];
             let n_cols = row.length
@@ -520,7 +520,7 @@ let ecam={
           if(i>2) unprotect_next_20(ws, i+1);
         }
 
-        // Export workbook to xlsx file
+        //Export workbook to xlsx file
         const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
         wb.xlsx.writeBuffer().
           then(buffer => saveAs(new Blob([buffer], {type: fileType}), 'ecam-template.xlsx'))
@@ -529,21 +529,6 @@ let ecam={
 
       download_excel();
     })(sheets);
-
-    //generate <a> link and click it
-    /*
-    {
-      let file   = new Blob([JSON.stringify(sheets,null,'  ')],{type:'application/json'});
-      let a      = document.createElement('a');
-      a.href     = URL.createObjectURL(file);
-      a.target   = '_blank';
-      a.download = 'pre-excel.json'; //filename
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-    return sheets;
-    */
   },
 
   //load user filled template (step 2)
@@ -556,20 +541,20 @@ let ecam={
     //1. File object: loaded xlsx by user
     let file = event.target.files[0];
 
+    //enable reuploading the same filename by resetting event.target.value
+    event.target.value="";
+
     //2. convert File object to json
     let excelAsJson = await read_excel(file);
 
     //3. convert json to ecam object
-    let scenario = create_new_ecam_object_with_with_xlsx_json_object(excelAsJson);
+    let scenario = create_new_ecam_object_with_xlsx_json_object(excelAsJson);
 
     //add ecam object to scenarios and set to current scenario
     Scenarios.push(scenario);
     ecam.set_current_scenario(scenario);
 
-    //enable reuploading the same filename by resetting event.target.value
-    event.target.value="";
-
-    function create_new_ecam_object_with_with_xlsx_json_object(excelAsJson){
+    function create_new_ecam_object_with_xlsx_json_object(excelAsJson){
       //excelAsJson is an array of sheets
       //  a sheet is an array of rows
       //    a row is an array of cells
@@ -586,7 +571,7 @@ let ecam={
         let value = row[2];
 
         try{
-          check_numbers_and_strings_from_excel(key,value);
+          value = check_numbers_and_strings_from_excel(key,value);
         }catch(e){
           alert(e);
           throw(e);
@@ -607,7 +592,7 @@ let ecam={
           let value = row[3];
 
           try{
-            check_numbers_and_strings_from_excel(key,value);
+            value = check_numbers_and_strings_from_excel(key,value);
           }catch(e){
             alert(e);
             throw(e);
@@ -646,7 +631,7 @@ let ecam={
             let value = row[3+i];
 
             try{
-              check_numbers_and_strings_from_excel(key,value);
+              value = check_numbers_and_strings_from_excel(key,value);
             }catch(e){
               alert(e);
               throw(e);
@@ -662,30 +647,36 @@ let ecam={
     }
 
     //throw exceptions for errors in the excel file
+    //and return the value passed
     function check_numbers_and_strings_from_excel(key, value){
       if(!key){
-        throw `A variable ID from the Excel template is not defined`;
-        return false;
+        throw `The variable ID "${key}" from the Excel template is not defined`;
       }
 
       if(!Info[key]){
         throw `The variable code "${key}" does not exist in this version of Ecam`;
-        return false;
       }
 
       if(Info[key].magnitude=='text'){
         if(typeof value=='string'){
-          return true; //everything OK
+          return value; //everything OK
         }else{
-          throw `The value of '${key}'='${value}' is not text`;
-          return false;
+          try{
+            value = value.toString();
+          }catch(e){
+            throw `The value for '${key}' ('${value}') could not be converted to text`;
+          }
+          return value;
         }
       }
 
       //rest of cases: numbers
       if(typeof value != 'number'){
-        throw `The value of '${key}'='${value}' is not a number`;
-        return false;
+        let parsed = parseFloat(value);
+        if(isNaN(value)){
+          throw `The value for '${key}' ('${value}') is not a number`;
+        }
+        return parsed;
       }
 
       //deal with Options
@@ -693,17 +684,12 @@ let ecam={
         //make sure that the number entered by the user is not higher than the
         //number of rows
         let max_value = Tables[Info[key].table].length-1;
-        if(value < 0){
-          throw `The value of '${key}'='${value}' is negative`;
-          return false;
-        }
-        if(value > max_value){
-          throw `The value of '${key}'='${value}' is not a valid Option [0..${max_value}]`;
-          return false;
+        if(value < 0 || value > max_value){
+          throw `The value for '${key}' ('${value}') is not a valid option. Valid options: [0..${max_value}]`;
         }
       }
 
-      return true;
+      return value;
     }
 
     function read_excel(excel_buffer){
