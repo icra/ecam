@@ -595,7 +595,7 @@ let select_scenario=new Vue({
             Finally, upload the filled file here:
             <input
               type="file"
-              accept=".xlsx,.ods"
+              accept=".xlsx"
               onchange="ecam.import_excel_template_filled_by_user(event)"
             >
           </li>

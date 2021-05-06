@@ -564,6 +564,7 @@ let ecam={
 
       //sheet 1 (General)
       let sheet_General = excelAsJson.find(sheet=>sheet.sheet_name=='General');
+      console.log(excelAsJson);
       if(!sheet_General) throw 'sheet "General" not found';
       sheet_General.rows.forEach(row=>{
         let key   = row[0];
@@ -693,11 +694,12 @@ let ecam={
     }
 
     function read_excel(excel_buffer){
-      let workbook = new ExcelJS.Workbook();
-      let excelAsJson = [];
+      let workbook=new ExcelJS.Workbook();
+      let excelAsJson=[];
 
       //get workbook intance
       return workbook.xlsx.load(excel_buffer).then(workbook => {
+        console.log(workbook);
         workbook.eachSheet(function(worksheet, sheetId){
           read_sheet(excelAsJson, worksheet, sheetId)
         });
@@ -728,6 +730,7 @@ let ecam={
     }
 
     function read_sheet(excelAsJson, workSheet, sheetId){
+      console.log({excelAsJson,workSheet,sheetId});
       const obj={
         "sheet_name": workSheet.name,
         "rows":[],
