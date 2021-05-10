@@ -132,7 +132,7 @@ let Benchmarks={
     // WTP             >  5000 m3/d - Good: tE1 ≤ 0.025; Acceptable: 0.025 < tE1 ≤ 0.04;  Unsatisfactory: tE1 > 0.04
     // WTP             <= 5000 m3/d - Good: tE1 ≤ 0.04;  Acceptable: 0.04  < tE1 ≤ 0.055; Unsatisfactory: tE1 > 0.055
     // WTP (with raw and treated water pumping) - Good: tE1 ≤ 0.4; Acceptable: 0.4 < tE1 ≤ 0.5; Unsatisfactory: tE1 > 0.5
-    let tre        = Tables.get_row('Potabilization chain',stage.wst_treatment).name; //type of treatment
+    let tre = Tables.get_row('Potabilization chain',stage.wst_treatment).name; //type of treatment
     let m3_per_day = stage.wst_vol_trea/Global.Days(); //m3 per day
     if     (m3_per_day> 5000 && (tre.search("Pre-ox")+1) && value<=0.055)                 return "Good";
     else if(m3_per_day> 5000 && (tre.search("Pre-ox")+1) && value> 0.055 && value<=0.07 ) return "Acceptable";

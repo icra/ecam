@@ -422,8 +422,13 @@ let variable=new Vue({
         <tr>
           <th>{{ translate('variable_magnitude') }}</th>
           <td>{{ Info[id] ? Info[id].magnitude : "magnitude not defined"}}
-            <div v-if="Info[id] && Info[id].magnitude=='Option' && Info[id].table" style="margin-top:5px;font-size:smaller">
-              Related data table (<a onclick="ecam.show('tables')">see all data tables</a>):
+            <div
+              v-if="Info[id] && Info[id].magnitude=='Option' && Info[id].table"
+              style="margin-top:15px;font-size:smaller"
+            >
+              This input represents one row from the following table, with all
+              the associated info
+              (<a onclick="ecam.show('tables')">see all data tables</a>):
               <table>
                 <tr>
                   <th colspan=100 style="background:var(--color-level-generic);text-align:left">
@@ -448,8 +453,13 @@ let variable=new Vue({
 
         <!--variable data table (if exception)-->
         <tr v-if="Exceptions[id] && Info[id]">
-          <th>Data table</th>
+          <th>
+            Data table used for suggestions
+          </th>
           <td>
+            <a href=# onclick="ecam.show('tables')">
+              See all data tables
+            </a>
             <div style="margin-top:5px;font-size:smaller">
               <table>
                 <tr>
@@ -458,7 +468,10 @@ let variable=new Vue({
                   </th>
                 </tr>
                 <tr v-for="row in Tables[Exceptions[id].table]">
-                  <td v-for="obj,key in row">
+                  <td
+                    v-for="obj,key in row"
+                    :style="{background:(key==Exceptions[id].table_field())?'yellow':''}"
+                  >
                     <b>{{key}}</b>:
                     <span v-if="typeof(obj)=='string'">
                       {{translate(obj)}}
@@ -725,7 +738,7 @@ let variable=new Vue({
         cursor:pointer;
       }
 
-      #variable table.inputs_involved table.fuel_info td {
+      #variable table.inputs_involved table.related_data_table td {
         border:1px solid #ccc;
       }
 

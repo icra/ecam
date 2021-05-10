@@ -10,7 +10,7 @@ let Formulas={
     // \W matches any non-word characters (short for [^a-zA-Z0-9_]).
     // \D matches any non-digit (short for [^0-9]).
   */
-  ids_per_formula(formula){
+  ids_per_formula(formula){ //->array of strings
     //ensure that formula is a string
     formula = formula.toString() || false;
     if(!formula) return false;
@@ -18,7 +18,7 @@ let Formulas={
     //return value
     let matches=[];
 
-    let all_input_codes=[];
+    let all_input_codes  = [];
     let all_output_codes = Object.getOwnPropertyNames(Ecam.prototype);
     Structure.concat({level:"General"}).forEach(s=>{
       let stage = s.class ? new s.class() : Global[s.level];
@@ -51,6 +51,27 @@ let Formulas={
 
     //sort strings A-Z
     matches.sort();
+
+    return matches;
+  },
+
+  //detect the tables that the formula is using
+  //tables are defined in the "Tables" global object
+  tables_per_formula(formula){ //->array of strings
+    formula=formula.toString()||false;
+    if(!formula) return false;
+
+    //return value
+    let matches=[];
+
+    //iterate tablenames
+    Object.keys(Tables).forEach(key=>{
+      if(formula.search(key)+1){
+        if(typeof Tables[key] == "object"){
+          matches.push(key);
+        }
+      }
+    });
 
     return matches;
   },

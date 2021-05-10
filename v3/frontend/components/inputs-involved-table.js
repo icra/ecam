@@ -88,14 +88,21 @@ Vue.component('inputs_involved_table',{
         </tr>
       </tbody>
 
-      <!--formula contains "Fuel type"-->
       <tbody
-        v-if="obj[code].toString().search('Fuel type')+1"
-        style="color:green"
+        v-for="tablename,i in Formulas.tables_per_formula(obj[code].toString())"
       >
-        <tr>
+        <tr v-if="i==0">
+          <td
+            style="padding-top:20px"
+          ><b>Tables involved (<a href=# onclick="ecam.show('tables')">see all data tables</a>)</b></td>
+        </tr>
+
+        <tr
+          v-if="tablename=='Fuel type'"
+          style="color:green"
+        >
           <td colspan=3>
-            <table class=fuel_info>
+            <table class=related_data_table>
               <thead>
                 <tr>
                   <td rowspan=2>{{translate('fuelInfo_type')}}</td>
@@ -127,6 +134,29 @@ Vue.component('inputs_involved_table',{
             </table>
           </td>
         </tr>
+        <tr v-else>
+          <td colspan=3>
+            <!--render data table-->
+            <table class=related_data_table>
+              <tr>
+                <th colspan=100 style="background:var(--color-level-generic);text-align:left">
+                  {{tablename}}
+                </th>
+              </tr>
+              <tr v-for="row in Tables[tablename]">
+                <td v-for="obj,key in row">
+                  <b>{{key}}</b>:
+                  <span v-if="typeof(obj)=='string'">
+                    "{{translate(obj)}}"
+                  </span>
+                  <span v-else>
+                    {{obj}}
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>`,
@@ -141,7 +171,6 @@ Vue.component('inputs_involved_table',{
       variable,
       constant,
 
-      Global,
       Info,
       Tables,
       Formulas,
