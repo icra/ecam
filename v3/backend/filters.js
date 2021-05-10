@@ -181,9 +181,8 @@ let Filters={
   "wwo_producing_biogas", //question
   "wwo_pumping",     //question
   "wwo_pumping_eff", //question
-],
 
-"Biogas":[
+  //biogas production
   "wwt_producing_biogas", //question
   "wwo_producing_biogas", //question
 ],

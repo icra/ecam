@@ -191,7 +191,7 @@ let select_scenario=new Vue({
         <summary
           style="font-size:large"
           title="Click here to load or save a file"
-        >File
+        >Load &amp; save file
         </summary>
         <div
           id=load_save_btns
