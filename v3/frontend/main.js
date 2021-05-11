@@ -40,14 +40,15 @@ let ecam={
   },
 
   //show a view (==open a page)
+  //view:             string
+  //no_history_entry: boolean
   show(view, no_history_entry){
     no_history_entry = no_history_entry || false;
-    //view is a STRING
 
     if(!this.views[view]){
-      let e=new Error(`view '${view}' not found`);
+      let e = new Error(`view '${view}' not found`);
       alert(e);
-      throw e;
+      throw(e);
     }
 
     this.hide_all();
@@ -57,37 +58,32 @@ let ecam={
     stages_menu.visible      = view=='tier_b';
     stages_menu.current_view = view;
     linear_menu.current_view = view;
-
     caption.hide();
+
     window.scrollTo(0,0);
 
     //history manipulation
     if(!no_history_entry){
       let state_obj={view};
-      let url   = window.location.pathname+"?view="+view;
-      let title = view;
+      let title=view;
       if(view=='tier_b'){
         let level       = tier_b.level;
         let sublevel    = tier_b.sublevel;
         state_obj.level = level;
-        url            += `&level=${level}`
         title           = translate(level);
         if(sublevel){
-          state_obj.sublevel  = sublevel;
-          url                += `&sublevel=${sublevel}`
-          title              += ' '+translate(sublevel);
+          state_obj.sublevel = sublevel;
+          title             += ' '+translate(sublevel);
         }
       }else if(view=='variable'){
-        state_obj.id  = variable.id;
-        url          += `&id=${variable.id}`
-        title        += ' '+variable.id;
+        state_obj.id = variable.id;
+        title        = variable.id;
       }else if(view=='constant'){
         state_obj.code = constant.code;
-        url           += `&code=${constant.code}`
-        title         += ' '+constant.code;
+        title          = constant.code;
       }
-      history.pushState(state_obj,'title',"");
-      document.title = title;
+      history.pushState(state_obj,''); // https://developer.mozilla.org/en-US/docs/Web/API/History/pushState
+      document.title=title;
     }
 
     //return promise for Vue._isMounted TODO
@@ -553,6 +549,12 @@ let ecam={
     //add ecam object to scenarios and set to current scenario
     Scenarios.push(scenario);
     ecam.set_current_scenario(scenario);
+
+    //open list of assessments
+    (function(){
+      let el = document.querySelector('#list_of_assessments');
+      if(el) el.setAttribute('open',true);
+    })();
 
     function create_new_ecam_object_with_xlsx_json_object(excelAsJson){
       //excelAsJson is an array of sheets

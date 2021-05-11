@@ -124,6 +124,12 @@ let select_scenario=new Vue({
 
         //close settings
         _this.are_settings_open=false;
+
+        //open list of assessments
+        (function(){
+          let el = document.querySelector('#list_of_assessments');
+          if(el) el.setAttribute('open',true);
+        })();
       };
 
       try{
@@ -276,47 +282,8 @@ let select_scenario=new Vue({
         </div>
       </details>
 
-      <!--select gwp-->
-      <div
-        style="
-          background:#eee;
-          margin-top:2em;
-          margin-bottom:2em;
-          padding:1em;
-        "
-      >
-        <div
-          style="
-            display:flex;
-            align-items:center;
-          "
-        >
-          <div style="padding-right:2em">
-            <b>Select Global Warming Potential Report</b>
-          </div>
-
-          <!--select gwp report which defines gwp values-->
-          <div style="padding-right:2em">
-            <select
-              v-model="Configuration.gwp_reports_index"
-              @change="set_constants_from_gwp_report()"
-            >
-              <option v-for="report,i in GWP_reports" :value="i">
-                {{report.report}}
-              </option>
-            </select>
-          </div>
-
-          <div style="padding-right:2em">
-            <button onclick="ecam.show('gwp_table')">
-              More info
-            </button>
-          </div>
-        </div>
-      </div>
-
       <!--scenarios table-->
-      <details open>
+      <details open id=list_of_assessments>
         <summary style="font-size:large">List of assessments</summary>
         <!--assessments table-->
         <table style="width:100%" id=main_table>
@@ -567,7 +534,6 @@ let select_scenario=new Vue({
           </tbody>
 
           <tr>
-            <td style=background:white></td>
             <td style="background:white;text-align:left" colspan=6>
               <button onclick="ecam.new_scenario();select_scenario.are_settings_open=false"
                 class=new_assessment
@@ -580,19 +546,19 @@ let select_scenario=new Vue({
       </details>
 
       <!--download empty template and load template-->
-      <details style="margin-top:40px">
-        <summary style="font-size:large">Load an assessment from Excel</summary>
+      <details>
+        <summary style="font-size:large">Load assessment from Excel file</summary>
         <p>Steps:</p>
         <ol>
           <li>
-            Download an empty template clicking the following button:
+            Download an ECAM input template:
             <button onclick="ecam.generate_empty_excel_template()">
               Download "ecam-template.xlsx"
             </button>
           </li>
-          <li style="margin-top:10px">Fill out the file in Excel.</li>
+          <li style="margin-top:10px">Fill out the template file.</li>
           <li style="margin-top:10px">
-            Finally, upload the filled file here:
+            Upload the filled file:
             <input
               type="file"
               accept=".xlsx"
@@ -600,6 +566,47 @@ let select_scenario=new Vue({
             >
           </li>
         </ol>
+      </details>
+
+      <!--advanced settings-->
+      <details>
+        <summary style="font-size:large">Advanced settings</summary>
+        <!--select gwp-->
+        <div
+          style="
+            background:#eee;
+            padding:1em;
+          "
+        >
+          <div
+            style="
+              display:flex;
+              align-items:center;
+            "
+          >
+            <div style="padding-right:2em">
+              <b>Select Global Warming Potential Report</b>
+            </div>
+
+            <!--select gwp report which defines gwp values-->
+            <div style="padding-right:2em">
+              <select
+                v-model="Configuration.gwp_reports_index"
+                @change="set_constants_from_gwp_report()"
+              >
+                <option v-for="report,i in GWP_reports" :value="i">
+                  {{report.report}}
+                </option>
+              </select>
+            </div>
+
+            <div style="padding-right:2em">
+              <button onclick="ecam.show('gwp_table')">
+                More info
+              </button>
+            </div>
+          </div>
+        </div>
       </details>
     </div>
   `,
@@ -613,8 +620,12 @@ let select_scenario=new Vue({
         max-width:80%;
         margin:auto;
       }
+      #select_scenario details {
+        padding-bottom:2em;
+      }
       #select_scenario details summary {
         cursor:pointer;
+        font-size:larger;
       }
       #select_scenario #main_table thead td {
         background:white;

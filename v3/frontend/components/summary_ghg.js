@@ -3,7 +3,7 @@ let summary_ghg=new Vue({
   data:{
     visible:false,
 
-    see_emissions_disgregated:true,
+    see_emissions_disgregated:false,
 
     //folded sections
     unfolded_levels:['Water','Waste'],
@@ -277,7 +277,7 @@ let summary_ghg=new Vue({
           <div>
             <label>
               <input type=checkbox v-model="see_emissions_disgregated">
-              <b v-html="'Disgregate emissions in CO2, CH4 and N2O'.prettify()"></b>
+              <b v-html="'Show emissions in CO2, CH4 and N2O'.prettify()"></b>
             </label>
           </div>
         </div>

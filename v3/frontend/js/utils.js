@@ -18,7 +18,7 @@ function go_to(level, sublevel, no_history_entry){
 
   let possible_sublevels = Structure.filter(s=>s.sublevel).map(s=>s.sublevel);
   if(sublevel && possible_sublevels.indexOf(sublevel)==-1){
-    throw new Error(`sublevel '${level}' does not exist`);
+    throw new Error(`sublevel '${sublevel}' does not exist`);
   }
 
   if(sublevel){
@@ -26,12 +26,16 @@ function go_to(level, sublevel, no_history_entry){
       go_to(level);
       return;
     }else{
-      if(tier_b.substage){
+      if(
+        tier_b.substage &&
+        Global[level][sublevel].indexOf(tier_b.substage)+1
+      ){
         go_to_substage(tier_b.substage);
+        return;
       }else{
         go_to_substage(Global[level][sublevel][0]);
+        return;
       }
-      return;
     }
   }else{
     tier_b.level    = level;
