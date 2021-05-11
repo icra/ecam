@@ -299,7 +299,9 @@ let select_scenario=new Vue({
             </tr>
           </thead>
 
-          <tbody v-for="scenario in Scenarios">
+          <tbody v-for="scenario in Scenarios"
+            :current_scenario="scenario==Global"
+          >
             <tr>
               <!--select current scenario-->
               <td style="background:white;padding:0">
@@ -312,14 +314,13 @@ let select_scenario=new Vue({
               <!--scenario name-->
               <td
                 @click="are_settings_open = (scenario==Global) ? are_settings_open=!are_settings_open: are_settings_open; set_current_scenario(scenario)"
-                style="padding:0;background:white;cursor:pointer"
+                style="padding:0;cursor:pointer"
               >
-                <div
-                  class=scenario_name
-                  :current_scenario="scenario==Global"
-                >
-                  <div>
-                    <b v-html="scenario.General.Name"></b>
+                <div>
+                  <div class=scenario_name>
+                    <div>
+                      <b v-html="scenario.General.Name"></b>
+                    </div>
                   </div>
                 </div>
               </td>
@@ -434,7 +435,7 @@ let select_scenario=new Vue({
                             v-model="scenario.General.Country"
                             @change="set_variables_from_selected_country()"
                           >
-                            <option value="false">--select--</option>
+                            <option value="">--select--</option>
                             <option v-for="country in Object.keys(Countries)">
                               {{country}}
                             </option>
@@ -534,6 +535,7 @@ let select_scenario=new Vue({
           </tbody>
 
           <tr>
+            <td style="background:white"></td>
             <td style="background:white;text-align:left" colspan=6>
               <button onclick="ecam.new_scenario();select_scenario.are_settings_open=false"
                 class=new_assessment
@@ -571,10 +573,11 @@ let select_scenario=new Vue({
       <!--advanced settings-->
       <details>
         <summary style="font-size:large">Advanced settings</summary>
+
         <!--select gwp-->
         <div
           style="
-            background:#eee;
+            background:#f6f6f6;
             padding:1em;
           "
         >
@@ -632,7 +635,7 @@ let select_scenario=new Vue({
         font-size:smaller;
       }
       #select_scenario #main_table td {
-        border-width:5px;
+        border-width:4px;
         border-color:white;
         background:#f6f6f6;
         padding:0 0.35em;
@@ -659,20 +662,19 @@ let select_scenario=new Vue({
         font-weight:bold;
       }
       #select_scenario #main_table div.scenario_name{
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        height:45px;
-        width:100%;
-        min-width:200px;
         padding-left:10px;
         border-left:4px solid #c6c6c6;
-        background:#f6f6f6;
+        text-align:left;
+        line-height:43px;
+        min-width:200px;
       }
       #select_scenario #main_table div.scenario_name:hover{
         text-decoration:underline;
       }
-      #select_scenario #main_table div.scenario_name[current_scenario] {
+      #select_scenario #main_table tbody[current_scenario] > tr:first-child > td {
+        box-shadow:0px 0px 1px var(--color-level-generic) inset;
+      }
+      #select_scenario #main_table tbody[current_scenario] div.scenario_name {
         border-color:var(--color-level-generic);
         color:var(--color-level-generic);
       }
@@ -729,6 +731,9 @@ let select_scenario=new Vue({
       }
       #select_scenario label.load_mode:hover {
         color:var(--color-level-generic);
+      }
+      #select_scenario div.options_container {
+        padding-left:10px;
       }
       #select_scenario div.options_container button {
         font-size:smaller;

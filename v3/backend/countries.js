@@ -40,6 +40,7 @@ let Countries={
 "Germany":                               { conv_kwh_co2:0.672220452, prot_con:36.135, bod_pday:62, currency:"EUR"},
 "Ghana":                                 { conv_kwh_co2:0.214767509, prot_con:21.535, bod_pday:37, currency:"GHS"},
 "Greece":                                { conv_kwh_co2:1.921092777, prot_con:43.070, bod_pday:57, currency:"EUR"},
+"Grenada":                               { conv_kwh_co2:0.634000000, prot_con:26.032, bod_pday:40, currency:"XCD"},
 "Guatemala":                             { conv_kwh_co2:0.341534936, prot_con:20.805, bod_pday:40, currency:"GTQ"},
 "Honduras":                              { conv_kwh_co2:0.415487352, prot_con:24.455, bod_pday:40, currency:"HNL"},
 "India":                                 { conv_kwh_co2:1.333174843, prot_con:20.440, bod_pday:34, currency:"INR"},

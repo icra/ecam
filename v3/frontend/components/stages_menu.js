@@ -154,13 +154,14 @@ let stages_menu=new Vue({
               >
                 <div style="display:flex;align-items:center">
                   <div>
-                    <img
-                      :src="'frontend/img/'+s.icon"
-                    >
+                    <img :src="'frontend/img/'+s.icon" >
                   </div>
                   <div style="padding-left:5px">
                     <a :style="{color:'var(--color-level-'+s.level+')'}">
-                      <b>{{translate(s.sublevel)}}</b>
+                      <b>
+                        {{translate(s.sublevel)}}
+                        ({{Global[s.level][s.sublevel].length}})
+                      </b>
                     </a>
                   </div>
                 </div>
@@ -286,28 +287,25 @@ let stages_menu=new Vue({
         border:none;
       }
       #stages_menu #main_table td.level_name{
-        padding:10px;
+        padding:8px;
         font-size:15px;
         cursor:pointer;
         color:white;
       }
-      #stages_menu #main_table td.level_name:hover {
-        font-size:18px;
-        padding:7px;
-        text-decoration:underline;
-        transition:all 0.2s;
-      }
-
       #stages_menu #main_table td.stage_name{
+        padding:2px 10px;
         font-size:12px;
-        padding:2px 6px;
         cursor:pointer;
       }
-      #stages_menu #main_table td.stage_name:hover {
-        font-size:13px;
-        padding:2px;
+      #stages_menu #main_table td.level_name:hover > div,
+      #stages_menu #main_table td.stage_name:hover > div{
+        transform: matrix(1.03,0,0,1.03,5,0);
+        transition:all 0.15s;
         text-decoration:underline;
-        transition:all 0.2s;
+        /*
+        padding:0px 0px;
+        font-size:13px;
+        */
       }
 
       #stages_menu img {
@@ -340,6 +338,9 @@ let stages_menu=new Vue({
         cursor:pointer;
         padding:7px;
         border-bottom:1px solid #ccc;
+      }
+      #stages_menu div.substage:hover a {
+        text-decoration:underline;
       }
     </style>
   `,
