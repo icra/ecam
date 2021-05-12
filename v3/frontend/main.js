@@ -111,7 +111,10 @@ let ecam={
 
     //visit every page (=view)
     Object.keys(this.views).forEach(key=>{
-      setTimeout( ()=>{_this.show(key)}, interval*timer++);
+      setTimeout( ()=>{
+        console.log(`Visiting ${key}`);
+        _this.show(key);
+      }, interval*timer++);
     });
 
     //visit every tier b stage
