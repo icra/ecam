@@ -3,28 +3,28 @@ let Cts={
   ct_ch4_eq:{
     value:34,
     descr:"Conversion for CH4 emissions to CO2 equivalent emissions",
-    unit:"kg CO2eq / kg CH4",
+    unit:"kgCO2eq/kgCH4",
   },
   ct_n2o_eq:{
     value:298,
     descr:"Conversion for N2O emissions to CO2 equivalent emissions",
-    unit:"kg CO2eq / kg N2O",
+    unit:"kgCO2eq/kgN2O",
   },
 
   ct_ch4_oc:{
     value:16/12,
-    descr:"C to CH4 conversion factor (=16/12)",
-    unit:"g CH4 / g OC"
+    descr:"Organic C to CH4 conversion factor (=16/12)",
+    unit:"gCH4/gOC"
   },
   ct_n2o_co:{
     value:44/28,
     descr:"N2O-N to N2O conversion factor (=44/28)",
-    unit:"g N2O / g N2O-N",
+    unit:"gN2O/gN2O-N",
   },
   ct_co2_C:{
     value:44/12,
     descr:"C to CO2 conversion (=44/12)",
-    unit:"g CO2/ g C",
+    unit:"gCO2/gC",
   },
 
   ct_ch4_lf:{  value:50,    descr:"CH4 in landfill gas",                                    unit:"%", },
@@ -53,39 +53,47 @@ let Cts={
   },
 
   //constants for sludge management proposed by Girum
-  ct_oc_vs:{value:0.56,descr:"Organic Carbon content in Volatile Solids",unit:"g OC / g TVS"},
+  ct_oc_vs:{
+    value:0.56,
+    descr:"Organic Carbon content in Volatile Solids",
+    unit:"gOC/gTVS",
+  },
 
-  ct_ch4_up:{value:0.025,descr:"Percentage of CH4 emission for uncoverd pile",unit:"ratio"},
+  ct_ch4_up:{
+    value:0.025,
+    descr:"Percentage of CH4 emission for uncoverd pile",
+    unit:"ratio",
+  },
 
   ct_fra_np:{
-    value: 0.16,
-    descr: "Nitrogen in proteins (F_NPR)",
-    unit:  "kg N/kg protein",
+    value:0.16,
+    descr:"Nitrogen in proteins (F_NPR)",
+    unit:"kgN/kgPotein",
   },
 
   ct_fac_nc:{
-    value: 1.1,
-    descr: "Non consumed protein added to the wastewater (F_NON_CON)",
-    unit:  "adimensional",
+    value:1.1,
+    descr:"Non consumed protein added to the wastewater (F_NON_CON)",
+    unit:"adimensional",
   },
 
   ct_fac_ic:{
-    value: 1.25,
-    descr: "Industrial and commercial co-discharged protein into the sewer (F_IND_COM)",
-    unit:  "adimensional",
+    value:1.25,
+    descr:"Industrial and commercial co-discharged protein into the sewer (F_IND_COM)",
+    unit:"adimensional",
   },
 
   ct_N_HH:{
-    value: 1.1,
-    descr: "Additional nitrogen from household products added to the wastewater, default is 1.1 (some country data are in new Table 6.10a).",
-    unit:  "adimensional",
+    value:1.1,
+    descr:"Additional nitrogen from household products added to the wastewater, default is 1.1 (some country data are in new Table 6.10a).",
+    unit:"adimensional",
   },
 
   //TODO remove
   ct_ef_eff:{
     value:0.005,
     descr:"EF effluent (tabled value)",
-    unit:"kg N2O-N / kg N",
+    unit:"kgN2O-N/kg N",
   },
 
   ct_gravit:{
@@ -94,6 +102,7 @@ let Cts={
     unit:"kg/(s2*m2)",
   },
 
+  //TODO remove at release
   ct_unused:{
     value:0,
     descr:"not used constant on purpose to test the code that detects unused constants",

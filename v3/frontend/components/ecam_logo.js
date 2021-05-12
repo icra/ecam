@@ -37,7 +37,7 @@ let ecam_logo=new Vue({
           border-radius:5px;
         "
       >
-        <b>[DEV MODE ENABLED]</b>
+        <b>DEV MODE ON</b>
 
         <!--disable dev mode-->
         <button

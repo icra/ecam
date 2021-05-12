@@ -263,43 +263,64 @@ let summary_ghg=new Vue({
         <button @click="current_view='charts_pop'" :selected="current_view=='charts_pop'">Charts Serviced Population</button>
 
         <hr style="border-color:#eee">
-        <div
-          style="
-            padding:1em 0;
-            display:flex;
-            justify-content:space-around;
-          "
-        >
-          <!--select table-->
-          <div>
-            <b>Select summary table</b>
-            <label><input type=radio v-model="type_of_summary_table" value="ghg"> GHG </label>
-            <label><input type=radio v-model="type_of_summary_table" value="nrg"> Energy </label>
-          </div>
 
-          <!--select units-->
-          <div>
-            <b>Select units</b>
-            <select v-model="current_unit_ghg">
-              <option>kgCO2eq</option>
-              <option>tCO2eq</option>
-            </select>
-            <select v-model="current_unit_nrg">
-              <option>kWh</option>
-              <option>MWh</option>
-            </select>
-          </div>
-
-          <!--select see other ghgs-->
-          <div>
-            <label>
-              <input type=checkbox v-model="see_emissions_disgregated">
-              <b v-html="'Show emissions in CO2, CH4 and N2O'.prettify()"></b>
-            </label>
-          </div>
+        <div>
+          <table
+            style="
+              border:1px solid #eee;
+            "
+          >
+            <tr v-if="current_view=='table'">
+              <!--select summary table type-->
+              <td><b>Select summary table</b></td>
+              <td>
+                <label>
+                  <input type=radio v-model="type_of_summary_table" value="ghg">
+                  GHG
+                </label>
+              </td>
+              <td>
+                <label>
+                  <input type=radio v-model="type_of_summary_table" value="nrg">
+                  Energy
+                </label>
+              </td>
+            </tr>
+            <tr v-if="['table','charts_ghg','charts_nrg'].indexOf(current_view)+1">
+              <!--select units-->
+              <td><b>Select units</b></td>
+              <td v-if="current_view=='table'||current_view=='charts_ghg'">
+                <select v-model="current_unit_ghg">
+                  <option>kgCO2eq</option>
+                  <option>tCO2eq</option>
+                </select>
+              </td>
+              <td v-if="current_view=='table'||current_view=='charts_nrg'">
+                <select v-model="current_unit_nrg">
+                  <option>kWh</option>
+                  <option>MWh</option>
+                </select>
+              </td>
+            </tr>
+            <tr v-if="current_view=='table'">
+              <!--select see other ghgs-->
+              <td><b v-html="'Show emissions in CO2, CH4 and N2O'.prettify()"></b></td>
+              <td>
+                <label>
+                  <input type=radio v-model="see_emissions_disgregated" :value="false">
+                  No
+                </label>
+              </td>
+              <td>
+                <label>
+                  <input type=radio v-model="see_emissions_disgregated" :value="true">
+                  Yes
+                </label>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
-
 
       <!--content-->
       <div>
