@@ -46,6 +46,6 @@ if(debug){
 //initial page displayed
 if(debug){
   //go_to('Waste','Onsite'); //view inventory stage
-  //variable.view('wwt_KPI_GHG_slu_composting'); //view variable detailed info
-  ecam.show('summary_ghg'); //view page
+  //variable.view('wwt_mass_slu'); //view variable detailed info
+  ecam.show('tables'); //view page
 }

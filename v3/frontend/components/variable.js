@@ -532,8 +532,14 @@ let variable=new Vue({
                   </td>
                   <td>
                     <div v-if="locate_variable(output).sublevel">
-                      TODO
-                      {{Exceptions[output].table}}
+                      <ul>
+                        <li v-for="obj,key in Exceptions[output]">
+                          <b>{{key}}</b>:
+                          <span>
+                            {{obj}}
+                          </span>
+                        </li>
+                      </ul>
                     </div>
                   </td>
                   <td>

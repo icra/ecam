@@ -2,7 +2,7 @@ let tables = new Vue({
   el:"#tables",
   data:{
     visible:false,
-    tables_folded:[],
+    tables_displayed:[],
 
     variable,
 
@@ -20,11 +20,11 @@ let tables = new Vue({
     get_variable_type,
 
     toggle_folding(table_name){
-      let index = this.tables_folded.indexOf(table_name);
+      let index = this.tables_displayed.indexOf(table_name);
       if(index==-1){
-        this.tables_folded.push(table_name);
+        this.tables_displayed.push(table_name);
       }else{
-        this.tables_folded.splice(index,1);
+        this.tables_displayed.splice(index,1);
       }
     },
   },
@@ -45,28 +45,48 @@ let tables = new Vue({
         style="margin-bottom:10px"
       >
         <div>
-          <div @click="toggle_folding(name)" class=summary>
-            <div :style="{transform:tables_folded.indexOf(name)+1?'rotate(-90deg)':''}">▼</div>
+          <div onclick @click="toggle_folding(name)" class=summary>
+            <div :style="{transform:tables_displayed.indexOf(name)<0?'rotate(-90deg)':''}">▼</div>
             <div style="margin-left:5px" class=table_name>{{name}}</div>
           </div>
-          <div v-if="tables_folded.indexOf(name)==-1">
+          <div v-if="tables_displayed.indexOf(name)+1">
+            <!--reference-->
+            <div v-if="References[name]">
+              <ul v-for="reference in References[name]">
+                <li v-if="reference.ref">
+                  <b>ref</b>: {{reference.ref}}
+                </li>
+                <li v-if="reference.link">
+                  <b>link</b>: <a target=_blank :href="reference.link">{{reference.link}}</a>
+                </li>
+              </ul>
+            </div>
+            <div v-else class=blank style="padding:1em">~reference missing</div>
+
             <!--render data table-->
-            <table>
-              <tr v-for="row in table">
-                <td v-for="obj,key in row">
-                  <b>{{key}}</b>:
-                  <span v-if="typeof(obj)=='string'">
-                    "{{translate(obj)}}"
-                  </span>
-                  <span v-else>
-                    {{obj}}
-                  </span>
-                </td>
-              </tr>
-            </table>
+            <div style="padding-left:20px">
+              <table>
+                <tr>
+                  <td colspan=100 style="color:white;background:var(--color-level-generic)">
+                    {{name}}
+                  </td>
+                </tr>
+                <tr v-for="row in table">
+                  <td v-for="obj,key in row">
+                    <b>{{key}}</b>:
+                    <span v-if="typeof(obj)=='string'">
+                      "{{translate(obj)}}"
+                    </span>
+                    <span v-else>
+                      {{obj}}
+                    </span>
+                  </td>
+                </tr>
+              </table>
+            </div>
 
             <!--this data table is used in-->
-            <div style="margin-top:10px;padding-left:20px">
+            <div style="margin-top:10px;padding-left:20px;font-size:smaller">
               The rows of this table are the options for the following inputs:
               <table style="margin-bottom:10px">
                 <tr v-for="code in Object.keys(Info).filter(key=>Info[key].table==name).sort()">

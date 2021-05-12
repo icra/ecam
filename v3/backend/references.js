@@ -23,6 +23,54 @@ let References={
     },
   },
 
+  //Tables
+  "Fuel type":[
+    {
+      ref:`IPCC 2006, Volume 2, Chapter 2: Stationary Combustion, Table 2.2 (page 16)`,
+      link:`frontend/docs/2006-ipcc/2_Volume2/V2_2_Ch2_Stationary_Combustion.pdf#page=16`,
+    },
+    {
+      ref:`IPCC 2006, Volume 2, Chapter 3: Mobile Combustion, Table 3.2.2 (page 21)`,
+      link:`frontend/docs/2006-ipcc/2_Volume2/V2_3_Ch3_Mobile_Combustion.pdf#page=21`,
+    },
+  ],
+
+  //total emissions
+  wsa_KPI_GHG:{ref:`Sum of emissions from this substage`,},
+  wst_KPI_GHG:{ref:`Sum of emissions from this substage`,},
+  wsd_KPI_GHG:{ref:`Sum of emissions from this substage`,},
+  wwc_KPI_GHG:{ref:`Sum of emissions from this substage`,},
+  wwt_KPI_GHG:{ref:`Sum of emissions from this substage`,},
+  wwo_KPI_GHG:{ref:`Sum of emissions from this substage`,},
+
+  //indirect electricity
+  wsa_KPI_GHG_elec:{ref:`Conversion from kWh to kgCO2eq`,},
+  wst_KPI_GHG_elec:{ref:`Conversion from kWh to kgCO2eq`,},
+  wsd_KPI_GHG_elec:{ref:`Conversion from kWh to kgCO2eq`,},
+  wwc_KPI_GHG_elec:{ref:`Conversion from kWh to kgCO2eq`,},
+  wwt_KPI_GHG_elec:{ref:`Conversion from kWh to kgCO2eq`,},
+  wwo_KPI_GHG_elec:{ref:`Conversion from kWh to kgCO2eq`,},
+
+  //fuel engines
+  wsa_KPI_GHG_fuel:{ref:`IPCC 2006, Volume 2, Chapter 2: Stationary Combustion, Table 2.2 (page 16)`,link:`frontend/docs/2006-ipcc/2_Volume2/V2_2_Ch2_Stationary_Combustion.pdf#page=16`},
+  wst_KPI_GHG_fuel:{ref:`IPCC 2006, Volume 2, Chapter 2: Stationary Combustion, Table 2.2 (page 16)`,link:`frontend/docs/2006-ipcc/2_Volume2/V2_2_Ch2_Stationary_Combustion.pdf#page=16`},
+  wsd_KPI_GHG_fuel:{ref:`IPCC 2006, Volume 2, Chapter 2: Stationary Combustion, Table 2.2 (page 16)`,link:`frontend/docs/2006-ipcc/2_Volume2/V2_2_Ch2_Stationary_Combustion.pdf#page=16`},
+  wwc_KPI_GHG_fuel:{ref:`IPCC 2006, Volume 2, Chapter 2: Stationary Combustion, Table 2.2 (page 16)`,link:`frontend/docs/2006-ipcc/2_Volume2/V2_2_Ch2_Stationary_Combustion.pdf#page=16`},
+  wwt_KPI_GHG_fuel:{ref:`IPCC 2006, Volume 2, Chapter 2: Stationary Combustion, Table 2.2 (page 16)`,link:`frontend/docs/2006-ipcc/2_Volume2/V2_2_Ch2_Stationary_Combustion.pdf#page=16`},
+  wwo_KPI_GHG_fuel:{ref:`IPCC 2006, Volume 2, Chapter 2: Stationary Combustion, Table 2.2 (page 16)`,link:`frontend/docs/2006-ipcc/2_Volume2/V2_2_Ch2_Stationary_Combustion.pdf#page=16`},
+
+  //truck engines
+  wsd_KPI_GHG_trck         :{ref:`IPCC 2006, Volume 2, Chapter 3: Mobile Combustion, Table 3.2.2 (page 21)`,link:`frontend/docs/2006-ipcc/2_Volume2/V2_3_Ch3_Mobile_Combustion.pdf#page=21`},
+  wwt_KPI_GHG_reus_trck    :{ref:`IPCC 2006, Volume 2, Chapter 3: Mobile Combustion, Table 3.2.2 (page 21)`,link:`frontend/docs/2006-ipcc/2_Volume2/V2_3_Ch3_Mobile_Combustion.pdf#page=21`},
+  wwt_KPI_GHG_slu_transport:{ref:`IPCC 2006, Volume 2, Chapter 3: Mobile Combustion, Table 3.2.2 (page 21)`,link:`frontend/docs/2006-ipcc/2_Volume2/V2_3_Ch3_Mobile_Combustion.pdf#page=21`},
+  wwo_KPI_GHG_trck         :{ref:`IPCC 2006, Volume 2, Chapter 3: Mobile Combustion, Table 3.2.2 (page 21)`,link:`frontend/docs/2006-ipcc/2_Volume2/V2_3_Ch3_Mobile_Combustion.pdf#page=21`},
+
+  //misc: service levels indicators
+  wsa_nrg_per_abs_watr:{ref:`Ratio: [total kWh consumed]/[m3 abstracted water]`},
+  wsa_nrg_per_pmp_watr:{ref:`Ratio: [kWh consumed by pumps]/[m3 pumped water]`},
+  wst_nrg_per_m3:{ref:`Ratio: [total kWh consumed]/[m3 treated water]`},
+  wst_KPI_slu_per_m3:{ref:`Ratio: [kg sludge produced]/[m3 treated water]`},
+
   wwt_tn_effl:{
     ref:`Table 6.10C from 2019 IPCC revision`,
     link:"frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=43",
@@ -37,7 +85,7 @@ let References={
     ref:`
       The estimation is based on the dry mass of sludge produced (equations
       from section 2.2 - GHG calculations of Bridle model process sludge
-      digestion, Laura Snip PhD thesis, page 19).
+      digestion, Laura Snip thesis, page 19).
       Volume of biogas produced per kg of VSS destroyed
       estimated according to Andreoli et al.
     `,
