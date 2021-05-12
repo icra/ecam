@@ -4,7 +4,7 @@ let select_scenario=new Vue({
     visible:false,
 
     loadfile_replace:true,
-    are_settings_open:false,
+    are_settings_open:true,
     are_you_editing_name:false,
 
     //backend

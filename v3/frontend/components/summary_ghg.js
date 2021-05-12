@@ -268,8 +268,6 @@ let summary_ghg=new Vue({
             padding:1em 0;
             display:flex;
             justify-content:space-around;
-            display:grid;
-            grid-gap:10px;
           "
         >
           <!--select table-->
