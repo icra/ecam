@@ -433,8 +433,9 @@ let ecam={
       /**
        * Set row's height according to the lenght of second column, wich can be split in multiple lines.
        * @param {*} worksheet
+       * @param {*} ws_num
        */
-      function fit_rows(worksheet){
+      function fit_rows(worksheet, ws_num){
         worksheet.eachRow( {includeEmpty: true}, function(row, row_number){
           var min_height = 15;
           var col_length = 0;
@@ -511,7 +512,7 @@ let ecam={
           });
           format_static_cells(ws, i+1);
           fit_columns(ws);
-          fit_rows(ws);
+          fit_rows(ws, i+1);
 
           //unprotect last column cells (value cells), so user can enter values
           unprotect_value_cells(ws, i+1);
