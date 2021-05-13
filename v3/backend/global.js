@@ -1211,7 +1211,10 @@ class Waste_Treatment extends Substage{
         let ratio_up      = Cts.ct_ch4_up.value; //ratio for uncovered pile
         return sludge_mass * sludge_to_TVS * TVS_to_OC * ratio_up * Cts.ct_ch4_eq.value;
       })();
-      let n2o = sludge_mass*0.03*0.015*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let n2o = (function(){
+        let sludge_to_N = sludge_type.la_N_cont/100; //gN/gSludge
+        return sludge_mass * sludge_to_N * 0.015 * Cts.ct_n2o_co.value * Cts.ct_n2o_eq.value;
+      })();
 
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};

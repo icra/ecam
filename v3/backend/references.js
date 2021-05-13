@@ -103,8 +103,7 @@ let References={
   wwt_KPI_GHG_slu_composting:{
     ref:`
       For N2O:
-        0.03  = % N.
-        0.015 = N2O emissions for low C: N [% of initial N in solids (1.5%)].
+        0.015 = N2O emissions for low C/N ratio (1.5%).
     `,
     link:``,
   },
