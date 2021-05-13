@@ -438,14 +438,15 @@ let ecam={
         worksheet.eachRow( {includeEmpty: true}, function(row, row_number){
           var min_height = 15;
           var col_length = 0;
+          var min_col_length = ws_num == 1 ? 15 : 55
           row["eachCell"]({includeEmpty: true}, function(cell, col_number){
-            if(col_number==2){
-              col_length = cell.value ? cell.value.toString().length : 55;
+            if ((col_number == 2 && ws_num != 1) || (col_number == 3 && ws_num == 1)){
+              col_length = cell.value ? cell.value.toString().length : min_col_length;
             }
           });
 
-          if(col_length>55){
-            row.height=(Math.ceil(col_length/60)*min_height);
+          if (col_length > min_col_length){
+            row.height = (Math.ceil(col_length / (min_col_length+5) ) * min_height);
           }
           else row.height=18;
         })
