@@ -102,10 +102,9 @@ let References={
 
   wwt_KPI_GHG_slu_composting:{
     ref:`
-      For N2O:
-        0.015 = N2O emissions for low C/N ratio (1.5%).
+      Beam page 138, 171
     `,
-    link:``,
+    link:`frontend/docs/beam_final_report_1432.pdf#page=138`,
   },
 
   wwt_KPI_GHG_slu_landfilling:{
@@ -136,12 +135,9 @@ let References={
 
   wwt_KPI_GHG_slu_incineration:{
     ref:`
-      η = 161.3-0.140Tf,
-      Where η is the % of total N that is volatilized as N2O and Tf is the average highest freeboard
-      temperatures from the fluidized bed facilities. This equation can be used to estimate the N2O
-      emission factor of a given incinerator from its long-term average freeboard temperature.
+      Beam, page 182.
     `,
-    link:"",
+    link:`frontend/docs/beam_final_report_1432.pdf#page=182`,
   },
 
   wwt_mass_slu:{

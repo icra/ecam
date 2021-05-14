@@ -23,6 +23,7 @@ ECAM CODING TASKS - tasks also in https://github.com/icra/ecam/issues
     load language json files when using ecam offline.
 
 * BACKLOG: NEW FUNCTIONALITIES FOR NEXT VERSION
+  - Possibility to choose IPCC approach or BEAM
   - Chemicals
   - Optgroups in <select> elements
   - First-Time user tutorial
@@ -77,63 +78,41 @@ ECAM CODING TASKS - tasks also in https://github.com/icra/ecam/issues
 
   * Mail from Corinne on March 3th 2021
     ```
-      Hi Elaine,
-
       I was taking some notes as I was going through the exercise and the entry of
       data of the Grenoble WWTP I have. I include some of the below in the survey
       monkey, but not all. So just forwarding to you
 
+      COLLECTION STAGE N2O EMISSION FACTOR (UNTREATED COLLECTED WASTEWATER)
+        The options are not the same as for CH4 even though it is the same WW being
+        discharged…-> confusing for user -> I know it is like this in IPCC but it needs
+        to be explained.
+
+      CH4 EMISSION FACTOR (TREATMENT)
+        The treatment options are overlapping: when would someone choose “Activated
+        sludge”  which is one type of aerobic treatment? The IPCC table p6.20 is
+        shorter than your list -> I recommend using the IPCC list to avoid confusion OR
+        explain when to choose the activated sludge treatment categories.
+
+      TOTAL NITROGEN LOAD IN THE EFFLUENT
+        The default value proposed for the situation I tested (a primary+ secondary
+        treatment only) seems off. It assumes a 40% removal of N whereas secondary
+        plants can have a 60 to 70% removal depending on the load and temperatures… In
+        France most plant have a low loading rate with no tertiary treatment and remove
+        60 to 80% of N that way. It would be good to make the correction or clarify
+        “high-rate secondary biological treatment” rather than “primary + secondary”
 
 
-      Collection stage N2O emission factor (untreated collected wastewater)
+      BIOGAS PRODUCED
+        The unit is in kg whereas biogas is measured in Nm3
+        It seems there is no benefit to the GHG assessment to valorise biogas, when you
+        don’t reduce the grid electricity purchase.
+        It doesn’t provide an option for “emissions avoided for selling biogas” which
+        could be similar to the section “emissions avoided for ruse of nutrients”
 
-      The options are not the same as for CH4 even though it is the same WW being
-      discharged…-> confusing for user -> I know it is like this in IPCC but it needs
-      to be explained.
-
-
-
-      CH4 emission factor (treatment)
-
-      The treatment options are overlapping: when would someone choose “Activated
-      sludge”  which is one type of aerobic treatment? The IPCC table p6.20 is
-      shorter than your list -> I recommend using the IPCC list to avoid confusion OR
-      explain when to choose the activated sludge treatment categories.
-
-
-
-      Total Nitrogen load in the effluent
-
-      The default value proposed for the situation I tested (a primary+ secondary
-      treatment only) seems off. It assumes a 40% removal of N whereas secondary
-      plants can have a 60 to 70% removal depending on the load and temperatures… In
-      France most plant have a low loading rate with no tertiary treatment and remove
-      60 to 80% of N that way. It would be good to make the correction or clarify
-      “high-rate secondary biological treatment” rather than “primary + secondary”
-
-
-
-      Biogas produced
-
-      The unit is in kg whereas biogas is measured in Nm3
-
-      It seems there is no benefit to the GHG assessment to valorise biogas, when you
-      don’t reduce the grid electricity purchase.
-
-      It doesn’t provide an option for “emissions avoided for selling biogas” which
-      could be similar to the section “emissions avoided for ruse of nutrients”
-
-
-
-
-
-      report
-
-      The report is only available in total kg during the assessment period. It would
-      be useful to be able to choose the unit, like under the inventory (kg/year or
-      kg/year/serviced pop)
-
-
+      REPORT
+        The report is only available in total kg during the assessment period. It would
+        be useful to be able to choose the unit, like under the inventory (kg/year or
+        kg/year/serviced pop)
 
       In the exercise file, the WW collected and discharged untreated is not accounted for. Was this intentional?
     ```
