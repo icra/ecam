@@ -24,6 +24,52 @@ let References={
   },
 
   //Tables
+  "type_of_sewer":[
+    {
+      ref:`IPCC 2006 (2019 revision), Volume 5, Chapter 6: Wastewater, Table 6.3 updated (page 20)`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=20`,
+    },
+  ],
+  "type_of_treatment":[
+    {
+      ref:`IPCC 2006 (2019 revision), Volume 5, Chapter 6: Wastewater, Table 6.3 updated (page 20)`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=20`,
+    },
+  ],
+  "type_of_water_body":[
+    {
+      ref:`IPCC 2006 (2019 revision), Volume 5, Chapter 6: Wastewater, Table 6.3 updated (page 20)`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=20`,
+    },
+  ],
+
+  "N2O EF plants (Table 6.8A)":[
+    {
+      ref:`IPCC 2006 (2019 revision), Volume 5, Chapter 6: Wastewater, Table 6.8A (page 39)`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=39`,
+    },
+  ],
+  "N2O EF effluent (Table 6.8A)":[
+    {
+      ref:`IPCC 2006 (2019 revision), Volume 5, Chapter 6: Wastewater, Table 6.8A (page 39)`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=39`,
+    },
+  ],
+
+  "REMOVAL OF ORGANIC COMPONENT FROM WASTEWATER AS SLUDGE (KREM) ACCORDING TO TREATMENT TYPE (Table 6.6A)":[
+    {
+      ref:`IPCC 2006 (2019 revision), Volume 5, Chapter 6: Wastewater, Table 6.6A (page 27)`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=39`,
+    },
+  ],
+
+  "Sludge characteristics in each stage of the treatment process":[
+    {
+      ref:`Andreoli et al (2007), Table 2.2 (page 21)`,
+      link:`frontend/docs/ANDREOLI%20et%20al%202007%20Sludge%20Treatment%20and%20Disposal.pdf#page=21`,
+    },
+  ],
+
   "Fuel type":[
     {
       ref:`IPCC 2006, Volume 2, Chapter 2: Stationary Combustion, Table 2.2 (page 16)`,
@@ -32,6 +78,28 @@ let References={
     {
       ref:`IPCC 2006, Volume 2, Chapter 3: Mobile Combustion, Table 3.2.2 (page 21)`,
       link:`frontend/docs/2006-ipcc/2_Volume2/V2_3_Ch3_Mobile_Combustion.pdf#page=21`,
+    },
+  ],
+
+  "WW treatment organics removal fractions (centralised) (Table 6.6B and 6.10C)":[
+    {
+      ref:`Table 6.6B from 2019 IPCC revision`,
+      link:"frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=28",
+    },
+    {
+      ref:`Table 6.10C from 2019 IPCC revision`,
+      link:"frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=43",
+    },
+  ],
+
+  "WW treatment organics removal fractions (onsite) (Table 6.6B and 6.10C)":[
+    {
+      ref:`Table 6.6B from 2019 IPCC revision`,
+      link:"frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=28",
+    },
+    {
+      ref:`Table 6.10C from 2019 IPCC revision`,
+      link:"frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=43",
     },
   ],
 
@@ -77,6 +145,11 @@ let References={
   },
 
   wwt_bod_effl:{
+    ref:`Table 6.6B from 2019 IPCC revision`,
+    link:"frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=28",
+  },
+
+  wwo_bod_effl:{
     ref:`Table 6.6B from 2019 IPCC revision`,
     link:"frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=28",
   },

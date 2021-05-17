@@ -45,7 +45,7 @@ if(debug){
 
 //initial page displayed
 if(debug){
-  //go_to('Waste','Onsite'); //view inventory stage
+  go_to('Waste','Onsite'); //view inventory stage
   //variable.view('wwt_mass_slu'); //view variable detailed info
-  ecam.show('tables'); //view page
+  //ecam.show('tables'); //view page
 }

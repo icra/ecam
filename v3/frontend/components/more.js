@@ -1,7 +1,7 @@
 let more=new Vue({
   el:"#more",
   data:{
-    visible: false,
+    visible:false,
     Global,
     Structure,
     Languages,

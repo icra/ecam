@@ -1,6 +1,9 @@
 {
 "#below":"below",
 
+"#wwo_bod_cont_descr":"BOD5 entering the containments",
+"#wwo_bod_cont_expla":"BOD5 entering the containments",
+
 "#wwo_nrg_biog_val_descr":"Total energy content of biogas valorized",
 "#wwo_moles_biogas_produced_descr":"Moles of biogas produced",
 "#wwo_biogas_usage_descr":"Usage of the biogas produced",
@@ -24,7 +27,7 @@
 "#wwo_la_N_to_N2O_descr":"Amount of Nitrogen converted to N2O-N",
 "#wwo_la_N_to_N2O_expla":"Amount of Nitrogen converted to N2O-N",
 
-"#wwo_biog_lkd_descr":"Biogas leaked to the atmosphere (% volume)", 
+"#wwo_biog_lkd_descr":"Biogas leaked to the atmosphere (% volume)",
 "#wwo_biog_lkd_expla":"Biogas leaked to the atmosphere (% volume)",
 "#wwo_biog_sold_descr":"Biogas sold (% volume)",
 "#wwo_biog_sold_expla":"Biogas sold (% volume)",
@@ -44,7 +47,7 @@
 "#wwt_biog_pro_expla":"Biogas produced during the assessment period by the wastewater treatment plant managed by the undertaking",
 "#wwt_biog_sold_descr":"Biogas sold (% volume)",
 "#wwt_biog_sold_expla":"Biogas sold (% volume)",
-"#wwt_biog_lkd_descr":"Biogas leaked to the atmosphere (% volume)", 
+"#wwt_biog_lkd_descr":"Biogas leaked to the atmosphere (% volume)",
 "#wwt_biog_lkd_expla":"Biogas leaked to the atmosphere (% volume)",
 "#wwt_biog_fla_descr":"Biogas flared (% volume)",
 "#wwt_biog_fla_expla":"Biogas flared (% volume)",

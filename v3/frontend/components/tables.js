@@ -48,6 +48,17 @@ let tables = new Vue({
           <div onclick @click="toggle_folding(name)" class=summary>
             <div :style="{transform:tables_displayed.indexOf(name)<0?'rotate(-90deg)':''}">▼</div>
             <div style="margin-left:5px" class=table_name>{{name}}</div>
+            <div
+              v-if="!References[name]"
+              style="
+                font-size:10px;
+                background:yellow;
+                margin-left:5px;
+                color:#666;
+              "
+            >
+              <div>(~reference missing)</div>
+            </div>
           </div>
           <div v-if="tables_displayed.indexOf(name)+1">
             <!--reference-->
@@ -146,6 +157,7 @@ let tables = new Vue({
         font-size:larger;
         font-weight:bolder;
         margin-bottom:5px;
+        align-items:center;
       }
       #tables div.summary:hover div.table_name{
         text-decoration:underline;

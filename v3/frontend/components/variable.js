@@ -527,7 +527,7 @@ let variable=new Vue({
                 <tr v-else-if="Exceptions[output]">
                   <td :title="translate(output+'_descr')">
                     <a @click="view(output)" :style="{color:get_level_color(locate_variable(output).level)}">
-                      {{ output }} (drop-down selection)
+                      {{ output }}<br>(drop-down selection)
                     </a>
                   </td>
                   <td>

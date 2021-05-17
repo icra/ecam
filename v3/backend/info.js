@@ -21,6 +21,7 @@ let Info={
   Country              :{magnitude:"text",unit:"text"},
 
   //wwo
+  wwo_bod_cont:{magnitude:"Mass",unit:"kg"},
   wwo_la_N_to_N2O:{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},
   wwo_ch4_efac_con:{magnitude:"Mass/Mass",unit:"kgCH4/kgBOD" },
   wwo_KPI_GHG_containment:{magnitude:"Mass",unit:"kgCO2eq"},

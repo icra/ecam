@@ -1479,6 +1479,8 @@ class Waste_Onsite extends Substage{
     this.wwo_fuel_typ         = 0; //type of fuel
     this.wwo_trck_typ         = 0; //type of fuel
     this.wwo_vol_trck         = 0; //fuel consumed
+
+    this.wwo_bod_cont         = 0; //influent entering containment
     this.wwo_bod_infl         = 0; //influent bod load
     this.wwo_bod_effl         = 0; //effluent BOD
 
@@ -1607,7 +1609,7 @@ class Waste_Onsite extends Substage{
     wwo_KPI_GHG_containment(){
       let co2   = 0;
       let n2o   = 0;
-      let ch4   = (this.wwo_bod_infl-this.wwo_bod_rmvd)*this.wwo_ch4_efac_con*Cts.ct_ch4_eq.value;
+      let ch4   = (this.wwo_bod_cont-this.wwo_bod_rmvd)*this.wwo_ch4_efac_con*Cts.ct_ch4_eq.value;
       let total = co2+n2o+ch4;
       return {total,co2,n2o,ch4};
     }

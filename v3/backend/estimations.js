@@ -130,7 +130,7 @@ let Estimations={
     },
 
   //wwo
-    wwo_bod_infl(substage){
+    wwo_bod_cont(substage){
       let P   = substage.wwo_onsi_pop; //population
       let BOD = Global.General.bod_pday; //g/person/day
       return P * BOD * 0.001 * Global.Days(); //kg
@@ -138,6 +138,10 @@ let Estimations={
 
     wwo_n2o_efac_opd(substage){
       return Cts.ct_ef_eff.value;
+    },
+
+    wwo_bod_infl(substage){
+      return substage.wwo_bod_rmvd;
     },
 
     wwo_bod_rmvd(substage){

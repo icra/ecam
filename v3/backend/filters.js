@@ -108,6 +108,8 @@ let Filters={
 
 //Onsite sanitation
 "Containment":[
+  "wwo_bod_cont",
+  "wwo_bod_rmvd",
   "wwo_cont_emp",
   "wwo_fslu_emp",
   "wwo_fdensity",
@@ -119,7 +121,6 @@ let Filters={
 
 "Treatment":[
   "wwo_bod_infl", //variable
-  "wwo_bod_rmvd", //variable
   "wwo_bod_slud", //variable
   "wwo_bod_effl", //variable
   "wwo_ch4_efac_tre", //variable
