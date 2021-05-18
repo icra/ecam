@@ -329,7 +329,7 @@
 "#wwo_ch4_biog_descr":"Percentage of methane in the biogas (volume)",
 "#wwo_nrg_biog_descr":"Electrical energy produced from biogas valorization",
 "#wwo_bod_infl_descr":"Influent BOD5 load",
-"#wwo_bod_infl_expla":"BOD5 load entering the containment before any treatment. It can be estimated from the population",
+"#wwo_bod_infl_expla":"BOD5 load entering the treatment. It can be estimated from the BOD5 removed as faecal sludge",
 "#wwo_bod_conc_fs_descr":"BOD5 concentration of faecal sludge",
 "#wwo_bod_rmvd_descr":"BOD5 removed as faecal sludge",
 "#wwo_bod_rmvd_expla":"Total BOD5 that is removed from the containment technology. It can be estimated from the volume or the mass of FS emptied and standard BOD5 content.",
