@@ -19,7 +19,7 @@ if(debug){
   //add substages
   Structure.filter(s=>s.sublevel).forEach(stage=>{
     stages_menu.add_substage(stage.level, stage.sublevel);
-    stages_menu.add_substage(stage.level, stage.sublevel);
+    //stages_menu.add_substage(stage.level, stage.sublevel);
   });
 
   //more input values
@@ -45,7 +45,7 @@ if(debug){
 
 //initial page displayed
 if(debug){
-  go_to('Waste','Onsite'); //view inventory stage
-  //variable.view('wwt_mass_slu'); //view variable detailed info
-  //ecam.show('tables'); //view page
+  //go_to('Waste','Onsite'); //view inventory stage
+  //variable.view('wwo_bod_rmvd'); //view variable detailed info
+  ecam.show('summary_ghg'); //view page
 }

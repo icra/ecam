@@ -150,6 +150,12 @@ let report = new Vue({
         </div>
       </h1>
 
+      <div style="text-align:center">
+        <label>
+          <input type=checkbox> Hide fields with value equal to zero (working title)
+        </label>
+      </div>
+
       <!--grid 50 50-->
       <div>
         <!--report in PDF-->

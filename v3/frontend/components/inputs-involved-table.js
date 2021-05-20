@@ -162,8 +162,8 @@ Vue.component('inputs_involved_table',{
   </div>`,
 
   props:[
+    'obj',
     'code',
-    'obj'
   ],
 
   data:function(){

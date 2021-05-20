@@ -88,10 +88,10 @@ let stages_menu=new Vue({
   template:`
     <!--linear menu COMPONENT-->
     <div id=stages_menu v-if="visible && Languages.ready">
-      <div style="padding:8px 20px">
+      <div style="padding:0 16px">
         <!--title-->
         <h1 style="padding-left:0">
-          Inventory: urban water cycle stages
+          Inventory: stages of the urban water cycle
           <button
             @click="save_to_file()"
             title="save the current list of assessments to a file"
@@ -277,7 +277,7 @@ let stages_menu=new Vue({
       #stages_menu {
         background:#f0f5fc;
         padding-top:1px;
-        margin-bottom:2em;
+        padding-bottom:1.5em;
       }
       #stages_menu #main_table {
         width:100%;

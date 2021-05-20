@@ -114,21 +114,21 @@ let Filters={
   "wwo_fslu_emp",
   "wwo_fdensity",
   "wwo_bod_conc_fs",
-  "wwo_tn_infl",
   "wwo_flooding",
   "wwo_ch4_efac_con",
 ],
 
 "Treatment":[
-  "wwo_bod_infl", //variable
-  "wwo_bod_slud", //variable
-  "wwo_bod_effl", //variable
-  "wwo_ch4_efac_tre", //variable
-  "wwo_n2o_efac_tre", //variable
-  "wwo_ch4_efac_dis", //variable
-  "wwo_n2o_efac_dis", //variable
+  "wwo_bod_infl", //input
+  "wwo_bod_slud", //input
+  "wwo_bod_effl", //input
+  "wwo_tn_infl", //input
+  "wwo_tn_effl", //input
+  "wwo_ch4_efac_tre", //input
+  "wwo_n2o_efac_tre", //input
+  "wwo_ch4_efac_dis", //input
+  "wwo_n2o_efac_dis", //input
   "wwo_producing_biogas", //question
-  "wwo_tn_effl", //variable
 ],
 
 "Disposal / Enduse":[

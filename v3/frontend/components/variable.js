@@ -211,8 +211,8 @@ let variable=new Vue({
 
               <!--variable list inputs involved in the formula-->
               <inputs_involved_table
-                :code="id"
                 :obj="get_formula_location()"
+                :code="id"
               ></inputs_involved_table>
             </div>
           </td>
@@ -261,11 +261,6 @@ let variable=new Vue({
                   <div v-if="!localization.sublevel">
                     <input type=number v-model.number="Global[localization.level][id]">
                     <span class=unit v-html="get_base_unit(id).prettify()" style="text-align:right"></span>
-                    <div v-if="Exceptions[id]">
-                      TODO --
-                      drop-down menu to select value from stages that are not
-                      substages
-                    </div>
                   </div>
                   <div v-else>
                     <table>
@@ -283,9 +278,7 @@ let variable=new Vue({
                           <div v-if="Exceptions[id]">
                             <!--case 1: selection is a percent of something else-->
                             <select v-if="Exceptions[id].percent_of" v-model="ss[id]"
-                              style="
-                                max-width:200px;
-                              "
+                              style="max-width:200px;"
                             >
                               <option
                                 v-for="obj in Tables[Exceptions[id].table]"
@@ -300,9 +293,7 @@ let variable=new Vue({
 
                             <!--case 2: selection has to be converted-->
                             <select v-else-if="Exceptions[id].conversion" v-model="ss[id]"
-                              style="
-                                max-width:200px;
-                              "
+                              style="max-width:200px;"
                             >
                               <option
                                 v-for="obj in Tables[Exceptions[id].table]"
@@ -402,7 +393,7 @@ let variable=new Vue({
                         </div>
 
                         <!--benchmark evaluation-->
-                        <div v-if="Benchmarks[id]" style="text-align:center;margin-top:10px">
+                        <div v-if="Benchmarks[id]" style="text-align:right;margin-top:10px">
                           <div :style="{color:get_benchmark(ss).color}" title="benchmark evaluation">
                             {{
                               get_benchmark(ss).string
@@ -455,40 +446,84 @@ let variable=new Vue({
         <tr v-if="Exceptions[id] && Info[id]">
           <th>
             Data table used for suggestions
-          </th>
-          <td>
-            <a href=# onclick="ecam.show('tables')">
-              See all data tables
+            <br><br>
+            <a
+              href=#
+              onclick="ecam.show('tables')"
+              style="
+                color:white;
+                font-size:smaller;
+              "
+            >
+              All data tables
             </a>
-            <div style="margin-top:5px;font-size:smaller">
-              <table>
-                <tr>
-                  <th colspan=100 style="background:var(--color-level-generic);text-align:left">
-                    {{Exceptions[id].table}}
-                  </th>
-                </tr>
-                <tr v-for="row in Tables[Exceptions[id].table]">
-                  <td
-                    v-for="obj,key in row"
-                    :style="{background:(key==Exceptions[id].table_field())?'yellow':''}"
+          </th>
+          <td style="font-size:smaller">
+            <!--exception table-->
+            <table>
+              <tr>
+                <th colspan=100 style="background:var(--color-level-generic);text-align:left">
+                  <div
+                    style="
+                      display:flex;
+                      justify-content:space-between;
+                    "
                   >
-                    <b>{{key}}</b>:
-                    <span v-if="typeof(obj)=='string'">
-                      {{translate(obj)}}
-                    </span>
-                    <span v-else>
-                      {{obj}}
-                    </span>
-                  </td>
-                </tr>
-              </table>
-            </div>
+                    <div>
+                      {{Exceptions[id].table}}
+                    </div>
+                    <div
+                      v-if="References[Exceptions[id].table]"
+                      style="margin-left:5px;"
+                    >
+                      <div
+                        v-for="obj,i in References[Exceptions[id].table]"
+                        style="text-align:right"
+                      >
+                        <a target=_blank :href="obj.link" style="color:yellow">{{obj.ref}}</a>
+                      </div>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+              <tr v-for="row in Tables[Exceptions[id].table]">
+                <td
+                  v-for="obj,key in row"
+                  :style="{background:(key==Exceptions[id].table_field())?'yellow':''}"
+                >
+                  <b>{{key}}</b>:
+                  <span v-if="typeof(obj)=='string'">
+                    {{translate(obj)}}
+                  </span>
+                  <span v-else>
+                    {{obj}}
+                  </span>
+                </td>
+              </tr>
+            </table>
+
+            <!--exception fields-->
+            <ul style="padding-left:15px">
+              <li
+                v-for="obj,key in Exceptions[id]"
+                v-if="key!='table'"
+              >
+                <b>{{key}}</b>:
+                <span>{{obj}}</span>
+                <div v-if="key=='percent_of'">
+                  <inputs_involved_table
+                    :obj="Exceptions[id]"
+                    :code="key"
+                  ></inputs_involved_table>
+                </div>
+              </li>
+            </ul>
           </td>
         </tr>
 
         <!--outputs that use this variable-->
         <tr>
-          <th> Outputs that use this variable </th>
+          <th>Outputs that use this variable</th>
           <td>
             <table class=outputs_affected>
               <tbody v-for="output in Formulas.outputs_per_input(id)" v-if="Info[output]">
@@ -666,22 +701,20 @@ let variable=new Vue({
         </tr>
 
         <!--the input is used in benchmarks?-->
-        <tr>
+        <tr v-if="Benchmarks[id]">
           <th>
-            Is this variable in
+            Benchmark formula
+            <br><br>
             <a
-              v-html="'benchmarks'"
-              style="text-decoration:underline;color:white"
+              v-html="'see all benchmarks'"
+              style="text-decoration:underline;color:white;font-size:smaller"
               onclick="ecam.show('benchmarks')">
             </a>
-            ?
           </th>
-          <td v-if="Benchmarks[id]">
-            {{ translate('yes') }}
-            <details open>
-              <summary>formula</summary>
+          <td>
+            <div>
               <div>
-                <code><pre class=prettyprint v-html="Formulas.prettify(Benchmarks[id])"></pre></code>
+                <code><pre style="margin:0" class=prettyprint v-html="Formulas.prettify(Benchmarks[id])"></pre></code>
               </div>
               <!--inputs involved in benchmark-->
               <div v-if="Formulas.ids_per_formula(Benchmarks[id]).length">
@@ -693,9 +726,8 @@ let variable=new Vue({
                   :obj="Benchmarks"
                 ></inputs_involved_table>
               </div>
-            </details>
+            </div>
           </td>
-          <td v-else style=color:#999>{{translate('no')}}</td>
         </tr>
       </table>
     </div>
@@ -727,6 +759,7 @@ let variable=new Vue({
         height: 40px;
         padding: 0 0.2em;
         text-align:right;
+        width:100%;
       }
       #variable input[type=number]:focus {
         background:white;

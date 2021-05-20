@@ -264,7 +264,13 @@ let summary_ghg=new Vue({
 
         <hr style="border-color:#eee">
 
-        <div>
+        <div
+          style="
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+          "
+        >
           <table
             style="
               border:1px solid #eee;
@@ -302,23 +308,25 @@ let summary_ghg=new Vue({
                 </select>
               </td>
             </tr>
-            <tr v-if="current_view=='table'">
-              <!--select see other ghgs-->
-              <td><b v-html="'Show emissions in CO2, CH4 and N2O'.prettify()"></b></td>
-              <td>
-                <label>
-                  <input type=radio v-model="see_emissions_disgregated" :value="false">
-                  No
-                </label>
-              </td>
-              <td>
-                <label>
-                  <input type=radio v-model="see_emissions_disgregated" :value="true">
-                  Yes
-                </label>
-              </td>
-            </tr>
           </table>
+
+          <div v-if="current_view=='table' && type_of_summary_table=='ghg'">
+            <!--select see other ghgs-->
+            <b v-html="'Show emissions in CO2, CH4 and N2O'.prettify()"></b></td>
+            <span>
+              <label>
+                <input type=radio v-model="see_emissions_disgregated" :value="false">
+                No
+              </label>
+            </span>
+            <span>
+              <label>
+                <input type=radio v-model="see_emissions_disgregated" :value="true">
+                Yes
+              </label>
+            </span>
+          </div>
+
         </div>
       </div>
 
@@ -337,13 +345,17 @@ let summary_ghg=new Vue({
               "
             >
               <div>Total (<span class=unit v-html="get_summary_unit().prettify()"></span>)</div>
-              <div>Level (<span class=unit v-html="get_summary_unit().prettify()"></span>)</div>
+              <div>System (<span class=unit v-html="get_summary_unit().prettify()"></span>)</div>
               <div>Stage (<span class=unit v-html="get_summary_unit().prettify()"></span>)</div>
 
               <div v-if="type_of_summary_table=='ghg'">Emission source</div>
               <div v-if="type_of_summary_table=='nrg'">Substages (<span class=unit v-html="current_unit_nrg.prettify()"></span>)</div>
 
-              <div>Total (<span class=unit v-html="get_summary_unit().prettify()"></span>)</div>
+              <div>
+                <span v-if="type_of_summary_table=='ghg'">Emission</span>
+                <span v-if="type_of_summary_table=='nrg'">Energy consumption</span>
+                (<span class=unit v-html="get_summary_unit().prettify()"></span>)
+              </div>
 
               <div v-if="type_of_summary_table=='ghg' && see_emissions_disgregated">${'CO2'.prettify()}    (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
               <div v-if="type_of_summary_table=='ghg' && see_emissions_disgregated">${'CH4'.prettify()}    (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
@@ -353,13 +365,27 @@ let summary_ghg=new Vue({
               class=subdivision
               style="background:var(--color-level-generic)"
             >
-              <div style="color:white;text-align:center;font-size:large">
-                <div v-if="type_of_summary_table=='ghg'">
-                  Total GHG emissions
+              <div
+                style="
+                  color:white;
+                  text-align:center;
+                  font-size:large;
+                "
+              >
+                <div
+                  style="
+                    font-weight:bold;
+                  "
+                >
+                  <div v-if="type_of_summary_table=='ghg'">
+                    Total<br>GHG emissions
+                  </div>
+                  <div v-if="type_of_summary_table=='nrg'">
+                    Total<br>energy consumption
+                  </div>
                 </div>
-                <div v-if="type_of_summary_table=='nrg'">
-                  Total energy consumption
-                </div>
+
+                <br>
 
                 <div v-if="type_of_summary_table=='ghg'">
                   {{format_emission(Global.TotalGHG().total)}}
@@ -375,10 +401,17 @@ let summary_ghg=new Vue({
                   :style="{background:s.color}"
                 >
                   <div>
-                    <div style="padding:1em;text-align:center">
-                      <div style="font-size:larger">
+                    <div
+                      style="
+                        padding:1em;
+                        text-align:center;
+                        font-size:large;
+                      "
+                    >
+                      <div>
                         {{translate(s.level)}}
                       </div>
+                      <br>
                       <div v-if="type_of_summary_table=='ghg'">
                         {{format_emission(Global[s.level][s.prefix+'_KPI_GHG']().total)}}
                       </div>

@@ -12,7 +12,7 @@ let UNFCCC={
   //unfccc_1A1: Energy - Electricity and Heat
   unfccc_1A1:{
     description:"Energy - Electricity and Heat",
-    color:"#efa922",
+    color:"rgba(247,165,7,0.47)",
     emissions(scenario){
       return[
         scenario.Water.Abstraction  .map(ss=>ss.wsa_KPI_GHG_elec().total).sum(), //wsa electricity
@@ -42,10 +42,8 @@ let UNFCCC={
     emissions(scenario){
       return [
         scenario.Water.Distribution .map(ss=>ss.wsd_KPI_GHG_trck()         .total).sum(), //wsd trucks
-
         scenario.Waste.Treatment    .map(ss=>ss.wwt_KPI_GHG_reus_trck()    .total).sum(), //wwt reused water trucks
         scenario.Waste.Treatment    .map(ss=>ss.wwt_KPI_GHG_slu_transport().total).sum(), //wwt sludge transport
-
         scenario.Waste.Onsite       .map(ss=>ss.wwo_KPI_GHG_trck()         .total).sum(), //wwo transport of faecal sludge
       ].sum();
     },
@@ -61,7 +59,6 @@ let UNFCCC={
         scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_slu_landfilling()     .total).sum(), //wwt landfilling
         scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_slu_stockpilling()    .total).sum(), //wwt stockpilling
         scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_slu_storage()         .total).sum(), //wwt storage
-
         scenario.Waste.Onsite   .map(ss=>ss.wwo_KPI_GHG_landapp()             .total).sum(), //wwo land application
         scenario.Waste.Onsite   .map(ss=>ss.wwo_KPI_GHG_landfil()             .total).sum(), //wwo landfilling
         scenario.Waste.Onsite   .map(ss=>ss.wwo_KPI_GHG_dumping()             .total).sum(), //wwo dumping of faecal sludge

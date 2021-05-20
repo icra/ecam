@@ -285,6 +285,39 @@ let select_scenario=new Vue({
       <!--scenarios table-->
       <details open id=list_of_assessments>
         <summary style="font-size:large">List of assessments</summary>
+
+        <!--select gwp-->
+        <div style=" background:#f6f6f6; padding:1em; " >
+          <div
+            style="
+              display:flex;
+              align-items:center;
+            "
+          >
+            <div style="padding-right:2em">
+              <b>Select Global Warming Potential Report</b>
+            </div>
+
+            <!--select gwp report which defines gwp values-->
+            <div style="padding-right:2em">
+              <select
+                v-model="Configuration.gwp_reports_index"
+                @change="set_constants_from_gwp_report()"
+              >
+                <option v-for="report,i in GWP_reports" :value="i">
+                  {{report.report}}
+                </option>
+              </select>
+            </div>
+
+            <div style="padding-right:2em">
+              <button onclick="ecam.show('gwp_table')">
+                More info
+              </button>
+            </div>
+          </div>
+        </div>
+
         <!--assessments table-->
         <table style="width:100%" id=main_table>
           <thead>
@@ -487,7 +520,7 @@ let select_scenario=new Vue({
 
                           <!--BOD per day-->
                           <tr :class="scenario.General.bod_pday<=0?'warning':''">
-                            <td v-html="translate('bod_pday_descr')">
+                            <td v-html="translate('bod_pday_descr').prettify()">
                             <td>
                               <input type=number class=number v-model.number="scenario.General.bod_pday" style="width:95%" min=0>
                             </td>
@@ -570,47 +603,11 @@ let select_scenario=new Vue({
         </ol>
       </details>
 
-      <!--advanced settings-->
+      <!--advanced settings
       <details>
         <summary style="font-size:large">Advanced settings</summary>
-
-        <!--select gwp-->
-        <div
-          style="
-            background:#f6f6f6;
-            padding:1em;
-          "
-        >
-          <div
-            style="
-              display:flex;
-              align-items:center;
-            "
-          >
-            <div style="padding-right:2em">
-              <b>Select Global Warming Potential Report</b>
-            </div>
-
-            <!--select gwp report which defines gwp values-->
-            <div style="padding-right:2em">
-              <select
-                v-model="Configuration.gwp_reports_index"
-                @change="set_constants_from_gwp_report()"
-              >
-                <option v-for="report,i in GWP_reports" :value="i">
-                  {{report.report}}
-                </option>
-              </select>
-            </div>
-
-            <div style="padding-right:2em">
-              <button onclick="ecam.show('gwp_table')">
-                More info
-              </button>
-            </div>
-          </div>
-        </div>
       </details>
+      -->
     </div>
   `,
 

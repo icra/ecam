@@ -31,10 +31,8 @@ let Exceptions={
   },
   wwo_mass_landapp:{
     table:"Type of faecal sludge",
-    table_field:function(){return "total_solids";},
-    percent_of:function(stage){
-      return stage.wwo_fslu_emp*stage.wwo_fdensity;
-    },
+    table_field:function(){return "total_solids"},
+    percent_of:function(stage){return stage.wwo_fslu_emp*stage.wwo_fdensity},
   },
 
   wwo_bod_slud:{
@@ -47,36 +45,34 @@ let Exceptions={
   wwt_bod_effl:{
     table:"WW treatment organics removal fractions (centralised) (Table 6.6B and 6.10C)",
     table_field:function(){return "bod_effl"},
-    percent_of:function(stage){
-      return stage.wwt_bod_infl;
-    },
+    percent_of:function(stage){return stage.wwt_bod_infl},
   },
 
   //wwo effluent BOD estimation
   wwo_bod_effl:{
-    table:"WW treatment organics removal fractions (onsite) (Table 6.6B and 6.10C)",
+    table:"WW treatment organics removal fractions (centralised) (Table 6.6B and 6.10C)",
     table_field:function(){return "bod_effl"},
-    percent_of:function(stage){
-      return stage.wwo_bod_infl;
-    },
+    percent_of:function(stage){return stage.wwo_bod_infl},
+  },
+
+  wwo_bod_rmvd:{
+    table:"WW treatment organics removal fractions (onsite) (Table 6.6B and 6.10C)",
+    table_field:function(){return "bod_rmvd"},
+    percent_of:function(stage){return stage.wwo_bod_cont},
   },
 
   //wwt effluent TN estimation
   wwt_tn_effl:{
     table:"WW treatment organics removal fractions (centralised) (Table 6.6B and 6.10C)",
     table_field:function(){return "N_effl"},
-    percent_of:function(stage){
-      return stage.wwt_tn_infl;
-    },
+    percent_of:function(stage){return stage.wwt_tn_infl},
   },
 
   //wwo effluent TN estimation
   wwo_tn_effl:{
     table:"WW treatment organics removal fractions (onsite) (Table 6.6B and 6.10C)",
     table_field:function(){return "N_effl"},
-    percent_of:function(stage){
-      return stage.wwo_tn_infl;
-    },
+    percent_of:function(stage){return stage.wwo_tn_infl},
   },
 
   //Emission Factors (EF)
@@ -92,27 +88,23 @@ let Exceptions={
     table:"Type of containment",
     table_field:function(stage){
       if(stage && stage.wwo_flooding){
-        return "ch4_efac_flooding";
+        return "ch4_efac_flooding"
       }else{
-        return "ch4_efac";
+        return "ch4_efac"
       }
     },
   },
 
   wwo_ch4_efac_tre:{
     table:"Type of onsite treatment",
-    table_field:function(stage){
-      return "ch4_efac";
-    },
+    table_field:function(stage){return "ch4_efac"},
   },
 
   wwt_bod_slud:{
     table:"REMOVAL OF ORGANIC COMPONENT FROM WASTEWATER AS SLUDGE (KREM) ACCORDING TO TREATMENT TYPE (Table 6.6A)",
     table_field:function(){return "K_rem"},
     table_field_unit:function(){return "kgBOD/kg dry mass sludge"},
-    conversion:function(stage){
-      return stage.wwt_mass_slu;
-    },
+    conversion:function(stage){return stage.wwt_mass_slu},
   },
 
   wwt_mass_slu:{
@@ -127,7 +119,6 @@ let Exceptions={
     },
   },
 
-  wwo_fdensity:{    table:"Type of containment", table_field:function(){return "fs_density"}, },
-  wwo_bod_conc_fs:{ table:"Type of containment", table_field:function(){return "BOD_conc_FS"}, },
-
+  wwo_fdensity:{    table:"Type of containment", table_field:function(){return "fs_density" },},
+  wwo_bod_conc_fs:{ table:"Type of containment", table_field:function(){return "BOD_conc_FS"},},
 };

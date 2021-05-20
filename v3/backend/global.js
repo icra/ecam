@@ -175,7 +175,7 @@ class Ecam{
       return {total,co2,ch4,n2o};
     }
 
-  //---
+  //load a json object
   static from(json_obj){
     //return value
     let o   = Object.assign(new Ecam(), json_obj);
@@ -273,6 +273,7 @@ class Water_stages{
     ];
   }
 
+  //load a json object
   static from(json_obj){
     //return value
     let o = Object.assign(new Water_stages(), json_obj);
@@ -384,6 +385,7 @@ class Waste_stages{
     ];
   }
 
+  //load a json object
   static from(json_obj){
     let o = Object.assign(new Waste_stages(), json_obj);
 
@@ -542,6 +544,7 @@ class Water_Abstraction extends Substage{
     ];
   }
 
+  //load a json object
   static from(json_obj){
     return Object.assign(new Water_Abstraction(), json_obj);
   }
@@ -643,6 +646,7 @@ class Water_Treatment extends Substage{
     ];
   }
 
+  //load a json object
   static from(json_obj){
     return Object.assign(new Water_Treatment(), json_obj);
   }
@@ -795,6 +799,7 @@ class Water_Distribution extends Substage{
     ];
   }
 
+  //load a json object
   static from(json_obj){
     return Object.assign(new Water_Distribution(), json_obj);
   }
@@ -924,6 +929,7 @@ class Waste_Collection extends Substage{
     ];
   }
 
+  //load a json object
   static from(json_obj){
     return Object.assign(new Waste_Collection(), json_obj);
   }
@@ -1441,6 +1447,7 @@ class Waste_Treatment extends Substage{
     ];
   }
 
+  //load a json object
   static from(json_obj){
     return Object.assign(new Waste_Treatment(), json_obj);
   }
@@ -1450,51 +1457,58 @@ class Waste_Onsite extends Substage{
   constructor(name){
     super();
     this.name=name;
-    this.wwo_onsi_pop         = 0; //population with onsite treatment
-    this.wwo_open_pop         = 0; //population open defecation
 
-    this.wwo_ch4_efac_con = 0;
-    this.wwo_n2o_efac_opd = 0;
-    this.wwo_ch4_efac_tre = 0;
-    this.wwo_n2o_efac_tre = 0;
-    this.wwo_ch4_efac_dis = 0;
-    this.wwo_n2o_efac_dis = 0;
+    //general
+    this.wwo_onsi_pop = 0; //population with onsite treatment
+    this.wwo_open_pop = 0; //population open defecation
+    this.wwo_nrg_cost = 0; //energy costs
+    this.wwo_run_cost = 0; //total running costs
+    this.wwo_prot_con = 0; //protein consumption open defecation
 
-    this.wwo_prot_con         = 0;
+    //BOD5: TODO figure out this part
+    this.wwo_bod_cont = 0; //bod entering containment
+    this.wwo_bod_rmvd = 0; //bod removed as FS (going to treatment)
 
-    this.wwo_nrg_cost         = 0; //energy costs
-    this.wwo_run_cost         = 0; //total running costs
+    this.wwo_bod_infl = 0; //bod entering treatment == wwo_bod_rmvd
+    this.wwo_bod_effl = 0; //bod exiting treatment
+    this.wwo_bod_slud = 0; //?
 
-    this.wwo_nrg_pump         = 0;
-    this.wwo_vol_pump         = 0;
-    this.wwo_pmp_head         = 0;
-    this.wwo_sta_head         = 0;
-    this.wwo_coll_len         = 0;
-    this.wwo_pmp_flow         = 0;
-    this.wwo_pmp_volt         = 0;
-    this.wwo_pmp_amps         = 0;
-    this.wwo_pmp_pf           = 0.9;
-    this.wwo_pmp_exff         = 0;
-    this.wwo_vol_fuel         = 0; //fuel consumed
-    this.wwo_fuel_typ         = 0; //type of fuel
-    this.wwo_trck_typ         = 0; //type of fuel
-    this.wwo_vol_trck         = 0; //fuel consumed
+    //TN
+    this.wwo_tn_infl = 0; //TN influent
+    this.wwo_tn_effl = 0; //TN effluent
 
-    this.wwo_bod_cont         = 0; //influent entering containment
-    this.wwo_bod_infl         = 0; //influent bod load
-    this.wwo_bod_effl         = 0; //effluent BOD
+    //EFs
+    this.wwo_ch4_efac_con = 0; //EF
+    this.wwo_n2o_efac_opd = 0; //EF
+    this.wwo_ch4_efac_tre = 0; //EF
+    this.wwo_n2o_efac_tre = 0; //EF
+    this.wwo_ch4_efac_dis = 0; //EF
+    this.wwo_n2o_efac_dis = 0; //EF
 
-    this.wwo_bod_rmvd         = 0; //bod removed as FS
+    //containment
+    this.wwo_flooding    = 0; //yes/no
+    this.wwo_cont_emp    = 0; //containments emptied
+    this.wwo_fdensity    = 1400; //density of faecal sludge
+    this.wwo_bod_conc_fs = 67.8; //[BOD] in FS
+    this.wwo_fslu_emp    = 0; //FS emptied
 
-    this.wwo_bod_slud         = 0; //?
-    this.wwo_flooding         = 0; //yes/no
-    this.wwo_cont_emp         = 0; //containments emptied
-    this.wwo_fdensity         = 1400; //density of faecal sludge
-    this.wwo_bod_conc_fs      = 67.8; //[BOD] in FS
-    this.wwo_fslu_emp         = 0; //FS emptied
-    this.wwo_tn_infl          = 0; //TN influent
-    this.wwo_tn_effl          = 0; //TN effluent
+    //pump efficiency
+    this.wwo_nrg_pump = 0;
+    this.wwo_vol_pump = 0;
+    this.wwo_pmp_head = 0;
+    this.wwo_sta_head = 0;
+    this.wwo_coll_len = 0;
+    this.wwo_pmp_flow = 0;
+    this.wwo_pmp_volt = 0;
+    this.wwo_pmp_amps = 0;
+    this.wwo_pmp_pf   = 0.9;
+    this.wwo_pmp_exff = 0;
+    this.wwo_vol_fuel = 0; //fuel consumed
+    this.wwo_fuel_typ = 0; //type of fuel
+    this.wwo_trck_typ = 0; //type of fuel
+    this.wwo_vol_trck = 0; //fuel consumed
 
+    //biogas
     this.wwo_biog_pro  = 0; //total biogas produced
     this.wwo_biog_fla  = 98; //% of biogas produced that is flared
     this.wwo_biog_val  = 0; //% of biogas produced that is used for heat
@@ -1505,27 +1519,32 @@ class Waste_Onsite extends Substage{
     this.wwo_fuel_dig  = 0;
     this.wwo_nrg_biog  = 0;
 
+    //land application
     this.wwo_mass_landapp = 0; //dry weight sent to land application
     this.wwo_la_N_to_N2O  = 0; //land application N transformed to N2O
     this.wwo_la_N_cont    = 0; //N content of faecal sludge
 
+    //landfill
     this.wwo_mass_landfil = 0; //dry weight sent to landfilling
     this.wwo_lf_type      = 0; //disposal type for landfilling
     this.wwo_fslu_typ_lf  = 0; //type of faecal sludge disposed landfil
     this.wwo_lf_N_cont    = 0; //N content of faecal sludge
     this.wwo_lf_TVS       = 0; //TVS content of faecal sludge
 
+    //dumping
     this.wwo_vol_dumping      = 0; //volume dumped
     this.wwo_ch4_efac_dumping = 0; //emission factor depending on dumping pathway
 
-    this.wwo_N_urine          = 0;
-    this.wwo_reused_N         = 0;
-    this.wwo_reused_P         = 0;
+    //land application of urine
+    this.wwo_N_urine  = 0;
+    this.wwo_reused_N = 0;
+    this.wwo_reused_P = 0;
 
+    //energy consumption
     this.wwo_nrg_cons = 0; //energy consumed from the grid (kWh)
     this.wwo_conv_kwh = 0; //kWh to kgCO2eq conversion factor
 
-    //this.not_used_variable    = 0; //use it to test if the function that locates not used variables works
+    //this.not_used_variable = 0; //use it to test if the function that locates not used variables works
   }
 
   //GHG wwo
@@ -1775,6 +1794,7 @@ class Waste_Onsite extends Substage{
       let total = co2+n2o+ch4;
       return {total,co2,n2o,ch4};
     }
+
   //SL wwo
     wwo_nrg_biog_val(){
       let biogas_produced = this.wwo_biog_pro; //m3 of biogas
@@ -1879,6 +1899,7 @@ class Waste_Onsite extends Substage{
     ];
   }
 
+  //load a json object
   static from(json_obj){
     return Object.assign(new Waste_Onsite(), json_obj);
   }

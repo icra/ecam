@@ -299,7 +299,9 @@
 "#wwo_ch4_efac_dis_descr"  :"CH4 emission factor (discharge)",
 "#wwo_n2o_efac_dis_descr"  :"N2O emission factor (discharge)",
 
-"#wwo_bod_effl_descr":"Effluent BOD5 load",
+"#wwo_bod_effl_descr":"Effluent BOD5 load (treatment)",
+"#wwo_bod_effl_expla":"BOD5 load at the effluent of the onsite treatment",
+
 "#wwo_nrg_cons_descr":"Energy consumed from the grid",
 "#wwo_nrg_pump_descr":"Energy consumed from the grid (pumping)",
 "#wwo_pmp_amps_descr":"Measured pump current",
@@ -328,7 +330,7 @@
 "#wwo_biog_val_expla":"Biogas valorized in the treatment plant, for example to heat the digesters or the building and/or to run a Co-generator to generate heat and electricity",
 "#wwo_ch4_biog_descr":"Percentage of methane in the biogas (volume)",
 "#wwo_nrg_biog_descr":"Electrical energy produced from biogas valorization",
-"#wwo_bod_infl_descr":"Influent BOD5 load",
+"#wwo_bod_infl_descr":"Influent BOD5 load (treatment)",
 "#wwo_bod_infl_expla":"BOD5 load entering the treatment. It can be estimated from the BOD5 removed as faecal sludge",
 "#wwo_bod_conc_fs_descr":"BOD5 concentration of faecal sludge",
 "#wwo_bod_rmvd_descr":"BOD5 removed as faecal sludge",
@@ -642,7 +644,7 @@
 "#about_nrw":"About non revenue water",
 "#all_benchmarks":"All benchmarks",
 "#all_ccvv":"All calculated variables",
-"#all_constants":"All constants",
+"#all_constants":"Constants",
 "#all_inputs":"All inputs",
 "#all_outputs":"All outputs",
 "#all_substages":"All substages",

@@ -105,7 +105,7 @@ let compare_scenarios=new Vue({
               labels:this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
               datasets:[
                 {
-                  label:`total ghg emissions (${this.current_unit_ghg})`,
+                  label:`Total GHG emissions (${this.current_unit_ghg})`,
                   data:this.scenarios_compared.map(scenario=>{
                     let divisor = this.current_unit_ghg=='tCO2eq'?1000:1;
                     return scenario.TotalGHG().total/divisor; //current emissions
@@ -136,7 +136,7 @@ let compare_scenarios=new Vue({
               labels: this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
               datasets:[
                 {
-                  label: '% variation of total ghg emissions',
+                  label: 'Variation of total GHG emissions (%)',
                   data: this.scenarios_compared.map((scenario,i)=>{
                     if(i==0) return 0;
 
@@ -333,20 +333,13 @@ let compare_scenarios=new Vue({
   template:`
     <div id=compare_scenarios v-if="visible && Languages.ready">
       <!--buttons select view-->
-      <div
-        style="
-          display:grid;
-          grid-template-columns:16.66% 16.66% 16.66% 16.66% 16.66% 16.66%;
-          margin:auto;
-        "
-        id=select_chart_container
-      >
-        <button :selected="current_view=='table'"                       @click="current_view='table'"                      >Table:<br>inputs &amp; outputs                                   </button>
-        <button :selected="current_view=='bar_chart_ghg_total'"         @click="current_view='bar_chart_ghg_total'"        >Bar chart:<br>total GHG emissions                                </button>
-        <button :selected="current_view=='bar_chart_ghg_by_gas'"        @click="current_view='bar_chart_ghg_by_gas'"       >Bar chart:<br>emissions by gas<br>(${'CO2, N2O, CH4'.prettify()})</button>
-        <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Bar chart:<br>emissions by stage                                 </button>
-        <button :selected="current_view=='bar_chart_ghg_by_unfccc'"     @click="current_view='bar_chart_ghg_by_unfccc'"    >Bar chart:<br>emissions by UNFCCC category                       </button>
-        <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">Bar chart:<br>total energy consumption                           </button>
+      <div id=select_chart_container>
+        <button :selected="current_view=='table'"                       @click="current_view='table'"                      >Overview:<br>Inputs &amp; outputs                                   </button>
+        <button :selected="current_view=='bar_chart_ghg_total'"         @click="current_view='bar_chart_ghg_total'"        >Total GHG emissions                                </button>
+        <button :selected="current_view=='bar_chart_ghg_by_gas'"        @click="current_view='bar_chart_ghg_by_gas'"       >Emissions by gas<br>(${'CO2, N2O, CH4'.prettify()})</button>
+        <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Emissions by stage                                 </button>
+        <button :selected="current_view=='bar_chart_ghg_by_unfccc'"     @click="current_view='bar_chart_ghg_by_unfccc'"    >Emissions by UNFCCC category                       </button>
+        <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">Total energy consumption                           </button>
       </div>
 
       <!--title-->
@@ -388,11 +381,17 @@ let compare_scenarios=new Vue({
           <p style="text-align:center;color:#666">
             <b>Select units</b>
           </p>
-          <select v-model="current_unit_ghg">
+          <select
+            v-model="current_unit_ghg"
+            v-if="current_view=='table'||current_view!='bar_chart_nrg_by_assessment'"
+          >
             <option>kgCO2eq</option>
             <option>tCO2eq</option>
           </select>
-          <select v-model="current_unit_nrg">
+          <select
+            v-model="current_unit_nrg"
+            v-if="current_view=='table'||current_view=='bar_chart_nrg_by_assessment'"
+          >
             <option>kWh</option>
             <option>MWh</option>
           </select>
@@ -677,8 +676,19 @@ let compare_scenarios=new Vue({
       #compare_scenarios div.chart_container.bar .y .tick line {
         stroke: #ddd;
       }
+      #compare_scenarios div#select_chart_container {
+        display:grid;
+        grid-template-columns:repeat(6, 16.66%);
+      }
       #compare_scenarios div#select_chart_container button {
         height:60px;
+        margin-right:1px;
+        text-overflow:ellipsis;
+        overflow:hidden;
+      }
+      #compare_scenarios div#select_chart_container button:hover {
+        background:var(--color-level-generic);
+        color:white;
       }
 
       /*table: summary*/

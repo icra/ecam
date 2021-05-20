@@ -55,10 +55,10 @@ Vue.component('input_ecam',{
           style="text-align:left;margin-top:5px;"
         >
           <!--case 1: selection is a percent of something else-->
-          <select v-if="Exceptions[code].percent_of" v-model="current_stage[code]"
-            style="
-              max-width:250px;
-            "
+          <select
+            v-if="Exceptions[code].percent_of"
+            v-model="current_stage[code]"
+            style="width:100%"
             tabindex="-1"
           >
             <option
@@ -73,15 +73,15 @@ Vue.component('input_ecam',{
           </select>
 
           <!--case 2: selection has to be converted-->
-          <select v-else-if="Exceptions[code].conversion" v-model="current_stage[code]"
-            style="
-              max-width:250px;
-            "
+          <select
+            v-else-if="Exceptions[code].conversion"
+            v-model.number="current_stage[code]"
+            style="width:100%"
             tabindex="-1"
           >
             <option
-              v-for="obj in Tables[Exceptions[code].table]"
-              :value="parseFloat( obj[Exceptions[code].table_field(current_stage)] * Exceptions[code].conversion(current_stage) )"
+              v-for="obj,i in Tables[Exceptions[code].table]"
+              :value="calculate_conversion_from_table(current_stage,code,i)"
             >
               {{translate(obj.name)}}
               &rarr;
@@ -94,9 +94,7 @@ Vue.component('input_ecam',{
 
           <!--case 3: selection is a fixed value-->
           <select v-else v-model="current_stage[code]"
-            style="
-              max-width:250px;
-            "
+            style="width:100%"
             tabindex="-1"
           >
             <option
@@ -203,6 +201,14 @@ Vue.component('input_ecam',{
     format,
     get_current_unit,
     is_code_in_any_filter,
+
+    //calculate a value from an exception input that uses a conversion in a table
+    calculate_conversion_from_table(stage,code,index){
+      let row       = Tables[Exceptions[code].table][index];
+      let field     = Exceptions[code].table_field(stage);
+      let new_value = row[field]*Exceptions[code].conversion(stage);
+      return parseFloat(new_value);
+    },
 
     focus_input(stage, key, event){
       let input = event.target;

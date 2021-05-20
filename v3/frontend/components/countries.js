@@ -67,7 +67,10 @@ let countries = new Vue({
           <td class=number>{{country.bod_pday}}</td>
           <td style="text-align:center">{{country.currency}}</td>
           <td>
-            <button @click="Global.General.Country=name;set_variables_from_selected_country()">select</button>
+            <button
+              @click="Global.General.Country=name;set_variables_from_selected_country()"
+            >select
+            </button>
           </td>
         </tr>
       </table>
@@ -79,16 +82,19 @@ let countries = new Vue({
         <tr>
           <td>1</td>
           <td>
-            BRANDER, M. SOOD A. WYLIE, C. HAUGHTON, A. LOVELL, J.,
-            2011,Technical Paper Electricity-specific emission factors for grid
-            electricity, Ecometrica,
+            <a
+              href="https://www.eib.org/attachments/strategies/eib_project_carbon_footprint_methodologies_en.pdf#page=36"
+              target=_blank
+            >
+              https://www.eib.org/attachments/strategies/eib_project_carbon_footprint_methodologies_en.pdf#page=36
+            </a>
           </td>
         </tr>
         <tr>
           <td>2</td>
           <td>
-            <a href="frontend/docs/FAO.xls" target=_blank>
-              FAO Statistics Division, 2010, Food Balance Sheets
+            <a href="http://www.fao.org/faostat/en/#data/FBS/visualize" target=_blank>
+              FAO Statistics Division
             </a>
           </td>
         </tr>
@@ -100,7 +106,7 @@ let countries = new Vue({
               target=_blank
             >
               IPCC 2006, Guidelines for National Greenhouse Gas Inventories
-              Volume 5 Waste, Chapter 6
+              Volume 5 Waste, Chapter 6, page 22
               (2019 revision)
             </a>
           </td>

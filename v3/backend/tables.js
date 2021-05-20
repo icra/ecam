@@ -3,10 +3,10 @@
 // 1. nominal variables (strings) with magnitude==Option
 // 2. numeric variables inside Exceptions
 let Tables={
-  "Fuel type":[//            EF (kg/TJ)                                                                     FD (kg/L) NCV (TJ/Gg)
-    {name:"Diesel",          EFCH4:{engines:3,vehicles:3.9}, EFN2O:{engines:0.6,vehicles:3.9}, EFCO2:74100, FD:0.84,  NCV:43.0},
-    {name:"Gasoline/Petrol", EFCH4:{engines:3,vehicles:3.8}, EFN2O:{engines:0.6,vehicles:1.9}, EFCO2:69300, FD:0.74,  NCV:44.3},
-    {name:"Natural Gas",     EFCH4:{engines:10,vehicles:92}, EFN2O:{engines:0.1,vehicles:0.2}, EFCO2:56100, FD:0.75,  NCV:48.0},
+  "Fuel type":[//            EF (kg/TJ)                                                                      FD (kg/L) NCV (TJ/Gg)
+    {name:"Diesel",          EFCH4:{engines: 3,vehicles:3.9}, EFN2O:{engines:0.6,vehicles:3.9}, EFCO2:74100, FD:0.84,  NCV:43.0},
+    {name:"Gasoline/Petrol", EFCH4:{engines: 3,vehicles:3.8}, EFN2O:{engines:0.6,vehicles:1.9}, EFCO2:69300, FD:0.74,  NCV:44.3},
+    {name:"Natural Gas",     EFCH4:{engines:10,vehicles:92 }, EFN2O:{engines:0.1,vehicles:0.2}, EFCO2:56100, FD:0.75,  NCV:48.0},
   ],
 
   "Pump type":[
@@ -33,13 +33,13 @@ let Tables={
 
   //ipcc 2019, table 6.3 (updated) EF (kgCH4/kgBOD)
   "type_of_water_body":[
-    {name:"Water body undefined",                                                                   ch4_efac:0},
-    {name:"Discharge to aquatic environments (Tier 1)",                                             ch4_efac:0.068},
-    {name:"Discharge to aquatic environments other than reservoirs, lakes, and estuaries (Tier 2)", ch4_efac:0.021},
-    {name:"Discharge to reservoirs, lakes, and estuaries (Tier 2)",                                 ch4_efac:0.114},
-    {name:"Stagnant sewer or anaerobic water body",                                                 ch4_efac:0.3},
-    {name:"Flowing sewer (open or closed)",                                                         ch4_efac:0},
-    {name:"Soil infiltration",                                                                      ch4_efac:0},
+    {name:"Water body undefined",                                                                   ch4_efac:0     },
+    {name:"Discharge to aquatic environments (Tier 1)",                                             ch4_efac:0.068 },
+    {name:"Discharge to aquatic environments other than reservoirs, lakes, and estuaries (Tier 2)", ch4_efac:0.021 },
+    {name:"Discharge to reservoirs, lakes, and estuaries (Tier 2)",                                 ch4_efac:0.114 },
+    {name:"Stagnant sewer or anaerobic water body",                                                 ch4_efac:0.3   },
+    {name:"Flowing sewer (open or closed)",                                                         ch4_efac:0     },
+    {name:"Soil infiltration",                                                                      ch4_efac:0     },
   ],
 
   "type_of_sewer":[
@@ -120,12 +120,12 @@ let Tables={
   ],
 
   "WW treatment organics removal fractions (onsite) (Table 6.6B and 6.10C)":[
-    {name:"Untreated systems",                                                                        bod_effl:1,     N_effl:1.00 },
-    {name:"Septic tank/septic system",                                                                bod_effl:0.375, N_effl:0.85 },
-    {name:"Septic tank/septic system + land dispersal field",                                         bod_effl:0.375, N_effl:0.32 },
-    {name:"Latrines – Dry climate, groundwater table lower than latrine, small family (3–5 persons)", bod_effl:0.9,   N_effl:0.88 },
-    {name:"Latrines – Dry climate, groundwater table lower than latrine, communal (many users)",      bod_effl:0.5,   N_effl:0.88 },
-    {name:"Latrines – Wet climate/flush water use, groundwater table higher than latrine",            bod_effl:0.3,   N_effl:0.88 },
+    {name:"Untreated systems",                                                                        bod_rmvd:0,     N_effl:1.00 },
+    {name:"Septic tank/septic system",                                                                bod_rmvd:0.625, N_effl:0.85 },
+    {name:"Septic tank/septic system + land dispersal field",                                         bod_rmvd:0.625, N_effl:0.32 },
+    {name:"Latrines – Dry climate, groundwater table lower than latrine, small family (3–5 persons)", bod_rmvd:0.1,   N_effl:0.88 },
+    {name:"Latrines – Dry climate, groundwater table lower than latrine, communal (many users)",      bod_rmvd:0.5,   N_effl:0.88 },
+    {name:"Latrines – Wet climate/flush water use, groundwater table higher than latrine",            bod_rmvd:0.7,   N_effl:0.88 },
   ],
 
   //Andreoli et al table 2.2

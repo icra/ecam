@@ -36,8 +36,7 @@ let sankey_ghg = new Vue({
   style:`
     <style>
       #sankey_ghg {
-        padding-left:1em
-        padding-right:1em
+        padding-left:1em;
       }
       #sankey_ghg #sankey {
         padding: 10px;

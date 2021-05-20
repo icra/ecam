@@ -261,67 +261,84 @@ let tier_b=new Vue({
 
         <!--tier b context info-->
         <div id=context_info>
-          <!--resident population-->
-          <div>
-            <a onclick="ecam.show('population')">
-              <div v-if="level=='Water' || level=='General'">
-                <b>{{translate('ws_resi_pop_descr')}}:</b>
+          <!--resident and serviced population-->
+          <table>
+            <tr v-if="level=='Water'||level=='General'">
+              <td>
+                <b>{{translate('ws_resi_pop_descr')}}</b>
+              </td>
+              <td class=number>
                 <span :warning="Global.Water.ws_resi_pop<=0">
                   {{format(Global.Water.ws_resi_pop)}}
                 </span>
-              </div>
-              <div v-if="level=='Waste' || level=='General'">
-                <b>{{translate('ww_resi_pop_descr')}}:</b>
+              </td>
+            </tr>
+            <tr v-if="level=='Waste'||level=='General'">
+              <td>
+                <b>{{translate('ww_resi_pop_descr')}}</b>
+              </td>
+              <td class=number>
                 <span :warning="Global.Waste.ww_resi_pop<=0">
                   {{format(Global.Waste.ww_resi_pop)}}
                 </span>
-              </div>
-            </a>
-          </div>
+              </td>
+            </tr>
 
-          <!--serviced population-->
-          <div>
-            <div v-if="level=='Water'">
-              <a onclick="ecam.show('population')">
-                <b>{{translate('wsd_serv_pop_descr')}}:</b>
+            <tr v-if="level=='Water'">
+              <td>
+                <b>{{translate('wsd_serv_pop_descr')}}</b>
+              </td>
+              <td class=number>
                 <span :warning="Global.Water.Distribution.map(s=>s.wsd_serv_pop).sum()<=0">
                   {{format( Global.Water.Distribution.map(s=>s.wsd_serv_pop).sum() )}}
                 </span>
-              </a>
-            </div>
-            <div v-if="level=='Waste'">
-              <a onclick="ecam.show('population')">
-                <b>{{translate('wwc_conn_pop_descr')}}:</b>
+              </td>
+            </tr>
+
+            <tr v-if="level=='Waste'">
+              <td>
+                <b>{{translate('wwc_conn_pop_descr')}}</b>
+              </td>
+              <td class=number>
                 <span :warning="Global.Waste.Collection.map(s=>s.wwc_conn_pop).sum()<=0">
                   {{format(Global.Waste.Collection.map(s=>s.wwc_conn_pop).sum())}}
                 </span>
-              </a>
-            </div>
-            <div v-if="level=='Waste'">
-              <a onclick="ecam.show('population')">
-                <b>{{translate('wwt_serv_pop_descr')}}:</b>
+              </td>
+            </tr>
+
+            <tr v-if="level=='Waste'">
+              <td>
+                <b>{{translate('wwt_serv_pop_descr')}}</b>
+              </td>
+              <td class=number>
                 <span :warning="Global.Waste.Treatment.map(s=>s.wwt_serv_pop).sum()<=0">
                   {{format(Global.Waste.Treatment.map(s=>s.wwt_serv_pop).sum())}}
                 </span>
-              </a>
-            </div>
-            <div v-if="level=='Waste'">
-              <a onclick="ecam.show('population')">
-                <b>{{translate('wwo_onsi_pop_descr')}}:</b>
+              </td>
+            </tr>
+
+            <tr v-if="level=='Waste'">
+              <td>
+                <b>{{translate('wwo_onsi_pop_descr')}}</b>
+              </td>
+              <td class=number>
                 <span>
                   {{format(Global.Waste.Onsite.map(s=>s.wwo_onsi_pop).sum())}}
                 </span>
-              </a>
-            </div>
-            <div v-if="level=='Waste'">
-              <a onclick="ecam.show('population')">
-                <b>{{translate('wwo_open_pop_descr')}}:</b>
+              </td>
+            </tr>
+
+            <tr v-if="level=='Waste'">
+              <td>
+                <b>{{translate('wwo_open_pop_descr')}}</b>
+              </td>
+              <td class=number>
                 <span>
                   {{format(Global.Waste.Onsite.map(s=>s.wwo_open_pop).sum())}}
                 </span>
-              </a>
-            </div>
-          </div>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
 
@@ -700,10 +717,10 @@ let tier_b=new Vue({
       #tier_b #context_info > div {
         padding:0 1em;
       }
-
-      #tier_b #context_info > div:not(:first-child) {
-        border-left:1px solid white;
+      #tier_b #context_info > table td{
+        border:none;
       }
+
       #tier_b table {
         border-collapse:separate;
         border-spacing:1px 1px;
