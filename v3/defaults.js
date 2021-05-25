@@ -1,4 +1,4 @@
-let debug=false; //development mode ON/OFF
+let debug=true; //development mode ON/OFF
 /*
   Default configuration and debug mode (backend and frontend)
   this file is intended to help development
