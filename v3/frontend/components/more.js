@@ -30,7 +30,7 @@ let more=new Vue({
         <div class=button onclick="ecam.show('tables')">           Data tables                       </div>
         <div class=button onclick="ecam.show('non_revenue_water')">{{translate('non_revenue_water')}}</div>
         <div class=button onclick="ecam.show('docs')">             Documentation                     </div>
-        <div class=button onclick="alert('TODO')">                 FAQ                               </div>
+        <div class=button onclick="ecam.show('faqs')">             FAQs                              </div>
       </div>
     </div>
   `,

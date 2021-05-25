@@ -35,6 +35,7 @@ let ecam={
     compare_scenarios,
     summaries_menu,
     docs,
+    faqs,
 
     development,
     problems,
