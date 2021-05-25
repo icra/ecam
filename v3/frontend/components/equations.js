@@ -137,9 +137,9 @@ let equations = new Vue({
                 color:white;
               "
             >
-              <th>Id
-              <th>Formula (code)
-              <th>Reference
+              <th>Id</th>
+              <th>Formula (code)</th>
+              <th>Reference</th>
             </tr>
             <tr v-for="obj,key in Estimations">
               <!--estimation key-->
