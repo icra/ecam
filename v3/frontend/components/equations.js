@@ -101,13 +101,16 @@ let equations = new Vue({
                 <!--equation reference-->
                 <td>
                   <div v-if="References[key]">
-                    <code>
+                    <code v-for="obj in References[key]">
                       <ul>
-                        <li v-if="References[key].ref">
-                          <b>ref</b>: {{References[key].ref}}
+                        <li v-if="obj.ref">
+                          <b>ref</b>: {{obj.ref}}
                         </li>
-                        <li v-if="References[key].link">
-                          <b>link</b>: <a target=_blank :href="References[key].link">{{References[key].link}}</a>
+                        <li v-if="obj.link">
+                          <b>link</b>:
+                          <a target=_blank :href="obj.link">
+                            {{obj.link}}
+                          </a>
                         </li>
                       </ul>
                     </code>
@@ -172,13 +175,16 @@ let equations = new Vue({
               <!--estimation reference-->
               <td>
                 <div v-if="References[key]">
-                  <code>
+                  <code v-for="obj in References[key]">
                     <ul>
-                      <li v-if="References[key].ref">
-                        <b>ref</b>: {{References[key].ref}}
+                      <li v-if="obj.ref">
+                        <b>ref</b>: {{obj.ref}}
                       </li>
-                      <li v-if="References[key].link">
-                        <b>link</b>: <a target=_blank :href="References[key].link">{{References[key].link}}</a>
+                      <li v-if="obj.link">
+                        <b>link</b>:
+                        <a target=_blank :href="obj.link">
+                          {{obj.link}}
+                        </a>
                       </li>
                     </ul>
                   </code>

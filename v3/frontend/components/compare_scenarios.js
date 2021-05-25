@@ -66,7 +66,7 @@ let compare_scenarios=new Vue({
             return [sce[level][code]]; //array
           })
         }
-        inputs.push({code, scenario_values});
+        inputs.push({code, scenario_values, type:"input"});
       });
 
       let outputs=[];
@@ -82,10 +82,10 @@ let compare_scenarios=new Vue({
           })
         }
 
-        outputs.push({code, scenario_values});
+        outputs.push({code, scenario_values, type:"output"});
       });
 
-      return inputs.concat(outputs);
+      return [...inputs, ...outputs];
     },
 
     get_scenarios(){
@@ -532,7 +532,10 @@ let compare_scenarios=new Vue({
               </th>
             </tr>
 
-            <tr v-for="v in get_variables_and_values(stage.level, stage.sublevel)">
+            <tr
+              v-for="v in get_variables_and_values(stage.level, stage.sublevel)"
+              v-if="(v.type=='input' && include.inputs) || (v.type=='output' && include.outputs)"
+            >
               <!--variable code and description-->
               <th :style="{background:get_level_color(stage.level),paddingLeft:'20px'}">
                 <div class=flex style="justify-content:space-between">

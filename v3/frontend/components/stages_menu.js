@@ -53,6 +53,7 @@ let stages_menu=new Vue({
       let prefix = stage.prefix;
       ss[prefix+'_conv_kwh']=Global.General.conv_kwh_co2;
 
+      //add substage to the correct stage array
       this.Global[level][sublevel].push(ss);
 
       //if you are viewing tier b, go directly to the newly created substage

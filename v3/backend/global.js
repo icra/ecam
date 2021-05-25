@@ -488,8 +488,8 @@ class Water_Abstraction extends Substage{
       return {total,co2,ch4,n2o};
     }
   //SL wsa
-    wsa_nrg_per_abs_watr(){return this.wsa_nrg_cons/this.wsa_vol_conv;}
-    wsa_nrg_per_pmp_watr(){return this.wsa_nrg_pump/this.wsa_vol_pump;}
+    wsa_nrg_per_abs_watr(){return this.wsa_nrg_cons/this.wsa_vol_conv}
+    wsa_nrg_per_pmp_watr(){return this.wsa_nrg_pump/this.wsa_vol_pump}
 
     wsa_pmp_pw(){return this.wsa_pmp_flow*this.wsa_pmp_head*Cts.ct_gravit.value/1000;}
     wsa_KPI_std_nrg_cons(){

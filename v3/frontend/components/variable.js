@@ -156,18 +156,20 @@ let variable=new Vue({
           <th>{{ translate('variable_explanation') }}</th>
           <td>
             <code v-html="translate(id+'_expla').prettify()"></code>
-            <!--reference / documentation-->
-            <div v-if="References[id]">
-              <hr>
-              <small v-if="References[id].ref">
-                {{References[id].ref}}
-              </small>
-              <br>
-              <small v-if="References[id].link">
-                <a :href="References[id].link" target=_blank>
-                  {{References[id].link}}
-                </a>
-              </small>
+            <!--references-->
+            <div v-if="References[id]"><hr>
+              <div v-for="obj in References[id]">
+                <small
+                  v-if="obj.ref"
+                  v-html="obj.ref.prettify()"
+                ></small>
+                <br>
+                <small v-if="obj.link">
+                  <a :href="obj.link" target=_blank>
+                    {{obj.link}}
+                  </a>
+                </small>
+              </div>
             </div>
           </td>
         </tr>
@@ -480,7 +482,12 @@ let variable=new Vue({
                         v-for="obj,i in References[Exceptions[id].table]"
                         style="text-align:right"
                       >
-                        <a target=_blank :href="obj.link" style="color:yellow">{{obj.ref}}</a>
+                        <a
+                          target=_blank
+                          :href="obj.link"
+                          style="color:yellow"
+                          v-html="obj.ref.prettify()"
+                        ></a>
                       </div>
                     </div>
                   </div>

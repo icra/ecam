@@ -6,6 +6,7 @@ let report = new Vue({
     pdf_visible:true,
     summaries_menu_visible:true,
     printable_version:false,
+    hide_zero_valued_variables:false,
 
     Charts,
     Global,
@@ -23,6 +24,7 @@ let report = new Vue({
     get_output_codes,
     get_output_value,
     get_base_unit,
+    get_sum_of_substages,
 
     get_current_unit_ghg(){return summary_ghg.current_unit_ghg},
     get_current_unit_nrg(){return summary_ghg.current_unit_nrg},
@@ -150,9 +152,10 @@ let report = new Vue({
         </div>
       </h1>
 
-      <div style="text-align:center">
+      <div v-if="!printable_version" style="text-align:center;padding-bottom:1em">
         <label>
-          <input type=checkbox> Hide fields with value equal to zero (working title)
+          <input type=checkbox v-model="hide_zero_valued_variables">
+          Hide fields with value equal to zero (working title)
         </label>
       </div>
 
@@ -468,7 +471,10 @@ let report = new Vue({
                       </th>
                       <th>Unit</th>
                     </tr>
-                    <tr v-for="code in get_input_codes(stage.level,stage.sublevel)">
+                    <tr
+                      v-for="code in get_input_codes(stage.level,stage.sublevel)"
+                      v-if="!hide_zero_valued_variables || Global[stage.level][stage.sublevel].map(ss=>ss[code]).sum()"
+                    >
                       <td
                         :style="{background:stage.color}"
                       >
@@ -508,7 +514,10 @@ let report = new Vue({
                       </th>
                       <th>Unit</th>
                     </tr>
-                    <tr v-for="code in get_output_codes(stage.level,stage.sublevel)">
+                    <tr
+                      v-for="code in get_output_codes(stage.level,stage.sublevel)"
+                      v-if="!hide_zero_valued_variables || get_sum_of_substages(stage.level, stage.sublevel, code)"
+                    >
                       <td
                         :style="{background:stage.color}"
                       >
