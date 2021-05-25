@@ -47,5 +47,5 @@ if(debug){
 if(debug){
   //go_to('Waste','Onsite'); //view inventory stage
   //variable.view('wwo_bod_rmvd'); //view variable detailed info
-  ecam.show('faqs'); //view page
+  ecam.show('summary_ghg'); //view page
 }

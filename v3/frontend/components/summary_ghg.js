@@ -37,6 +37,44 @@ let summary_ghg=new Vue({
     go_to,
     get_sum_of_substages,
 
+    //sorting function for emission sources order requested by elaine
+    //https://github.com/icra/ecam/issues/362
+    emission_sources_order(a,b){
+      let codes=[
+        //wwc
+        "wwc_KPI_GHG_elec",
+        "wwc_KPI_GHG_fuel",
+        "wwc_KPI_GHG_col",
+        "wwc_KPI_GHG_cso",
+
+        //wwt
+        "wwt_KPI_GHG_elec",
+        "wwt_KPI_GHG_fuel",
+        "wwt_KPI_GHG_dig_fuel",
+        "wwt_KPI_GHG_tre",
+        "wwt_KPI_GHG_slu",
+        "wwt_KPI_GHG_biog",
+        "wwt_KPI_GHG_disc",
+        "wwt_KPI_GHG_reus_trck",
+
+        //wwo
+        "wwo_KPI_GHG_elec",
+        "wwo_KPI_GHG_fuel",
+        "wwo_KPI_GHG_dig_fuel",
+        "wwo_KPI_GHG_containment",
+        "wwo_KPI_GHG_tre",
+        "wwo_KPI_GHG_biog",
+        "wwo_KPI_GHG_dis",
+        "wwo_KPI_GHG_trck",
+        "wwo_KPI_GHG_dumping",
+        "wwo_KPI_GHG_landapp",
+        "wwo_KPI_GHG_landfil",
+        "wwo_KPI_GHG_unt_opd",
+        "wwo_KPI_GHG_urine",
+      ];
+      return codes.indexOf(a) - codes.indexOf(b);
+    },
+
     get_summary_unit(){
       if(this.type_of_summary_table=='ghg'){
         return this.current_unit_ghg;
@@ -439,7 +477,11 @@ let summary_ghg=new Vue({
 
                       <div v-if="type_of_summary_table=='ghg'">
                         <div
-                          v-for="key in Formulas.ids_per_formula(Global[ss.level][ss.sublevel][0][ss.prefix+'_KPI_GHG'])"
+                          v-for="key in
+                            Formulas.ids_per_formula(
+                              Global[ss.level][ss.sublevel][0][ss.prefix+'_KPI_GHG']
+                            ).sort(emission_sources_order)
+                          "
                           style="
                             display:grid;
                             grid-template-columns:28% 18% 18% 18% 18%;
