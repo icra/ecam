@@ -19,6 +19,10 @@ let select_scenario=new Vue({
   },
 
   methods:{
+    include_tutorial_tips(){
+      return landing.include_tutorial_tips;
+    },
+
     count_substages(scenario){
       return Structure.filter(s=>s.sublevel).map(s=>{
         return scenario[s.level][s.sublevel].length;
@@ -197,88 +201,95 @@ let select_scenario=new Vue({
         <summary
           style="font-size:large"
           title="Click here to load or save a file"
-        >Load &amp; save file
-        </summary>
-        <div
-          id=load_save_btns
-          style="
-            display:grid;
-            grid-template-columns:49% 49%;
-            grid-gap:2%;
-          "
-        >
-          <!--load file-->
-          <div>
-            <div style="margin-bottom:10px">
-              <div style="font-size:larger">
-                Load file
-              </div>
-            </div>
-
-            <!--input type file-->
-            <div style="margin-bottom:10px">
-              <input
-                type="file"
-                id="loadfile"
-                accept=".json"
-                onclick="this.value=''"
-                @change="load_json_file($event)"
-              >
-            </div>
-
-            <!--load mode radio btns-->
-            <div
-              style="
-                font-size:smaller;
-                display:grid;
-                grid-template-columns:50% 50%;
-              "
-            >
-              <div>
-                <label class=load_mode :selected="loadfile_replace==true" title="replace the current list of assessments with the loaded file">
-                  <input type=radio v-model="loadfile_replace" :value='true'>
-                  <img class=icon src="frontend/img/viti/select_scenario/icon-replace.svg">
-                  <div style=margin-left:5px>
-                    <b>Replace</b><br>current list
-                  </div>
-                </label>
-              </div>
-              <div>
-                <label class=load_mode :selected="loadfile_replace==false" title="append the loaded file to the current list of assessments">
-                  <input type=radio v-model="loadfile_replace" :value='false'>
-                  <img class=icon src="frontend/img/viti/select_scenario/icon-append.svg">
-                  <div style=margin-left:5px>
-                    <b>Append</b><br>to current list
-                  </div>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <!--save file-->
-          <div
+          v-html="'Load and save file'"
+        ></summary>
+        <div>
+          <div id=load_save_btns
             style="
-              text-align:center;
+              display:grid;
+              grid-template-columns:49% 49%;
+              grid-gap:2%;
             "
           >
-            <div style="margin-bottom:10px">
-              <div style="font-size:larger">
-                Save current session to a JSON file
+            <!--load file-->
+            <div>
+              <div style="margin-bottom:10px">
+                <div style="font-size:larger">
+                  Load file
+                </div>
+              </div>
+
+              <!--input type file-->
+              <div style="margin-bottom:10px">
+                <input
+                  type="file"
+                  id="loadfile"
+                  accept=".json"
+                  onclick="this.value=''"
+                  @change="load_json_file($event)"
+                >
+              </div>
+
+              <!--load mode radio btns-->
+              <div
+                style="
+                  font-size:smaller;
+                  display:grid;
+                  grid-template-columns:50% 50%;
+                "
+              >
+                <div>
+                  <label class=load_mode :selected="loadfile_replace==true" title="replace the current list of assessments with the loaded file">
+                    <input type=radio v-model="loadfile_replace" :value='true'>
+                    <img class=icon src="frontend/img/viti/select_scenario/icon-replace.svg">
+                    <div style=margin-left:5px>
+                      <b>Replace</b><br>current list
+                    </div>
+                  </label>
+                </div>
+                <div>
+                  <label class=load_mode :selected="loadfile_replace==false" title="append the loaded file to the current list of assessments">
+                    <input type=radio v-model="loadfile_replace" :value='false'>
+                    <img class=icon src="frontend/img/viti/select_scenario/icon-append.svg">
+                    <div style=margin-left:5px>
+                      <b>Append</b><br>to current list
+                    </div>
+                  </label>
+                </div>
               </div>
             </div>
-            <div>
-              <button class=save_btn @click="save_to_file()" title="save the current list of assessments to a file">
-                <div style="display:flex;align-items:center">
-                  <img
-                    class=icon
-                    src="frontend/img/viti/select_scenario/icon-save.svg"
-                    style="margin-right:5px"
-                  >
-                  <div>Save file</div>
+
+            <!--save file-->
+            <div
+              style="
+                text-align:center;
+              "
+            >
+              <div style="margin-bottom:10px">
+                <div style="font-size:larger">
+                  Save current session to a JSON file
                 </div>
-              </button>
+              </div>
+              <div>
+                <button class=save_btn @click="save_to_file()" title="save the current list of assessments to a file">
+                  <div style="display:flex;align-items:center">
+                    <img
+                      class=icon
+                      src="frontend/img/viti/select_scenario/icon-save.svg"
+                      style="margin-right:5px"
+                    >
+                    <div>Save file</div>
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
+
+          <tutorial_tip
+            v-if="include_tutorial_tips()"
+            title="Load and save"
+            text="You can save your current list of assessments in a .JSON file. If you already have a file, you can load it here."
+          ></tutorial_tip>
         </div>
       </details>
 
@@ -317,6 +328,12 @@ let select_scenario=new Vue({
             </div>
           </div>
         </div>
+
+        <tutorial_tip
+          v-if="include_tutorial_tips()"
+          title="List of assessments"
+          text="Below you can see the list of assessments. You can only edit one assessment at a time. To make an assessment the current one being edited just click its name"
+        ></tutorial_tip>
 
         <!--assessments table-->
         <table style="width:100%" id=main_table>
@@ -575,6 +592,18 @@ let select_scenario=new Vue({
                 style="font-size:large"
                 v-html="'+ create new assessment'"
               ></button>
+
+              <tutorial_tip
+                v-if="include_tutorial_tips()"
+                title="Create new assessment"
+                text="
+                  You can create as many assessments as you want. You can do
+                  this by clicking the button above, or duplicating already
+                  existing assessments, or loading assessments from an Excel
+                  template (see below). To edit general settings from
+                  assessment click its name to open the settings.
+                "
+              ></tutorial_tip>
             </td>
           </tr>
         </table>

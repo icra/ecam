@@ -247,3 +247,28 @@ ul.tabs > li:hover {
 text.small {
   font-size:smaller;
 }
+
+/*first time user tutorial tips floating divs*/
+div.tutorial_tip{
+  /*position:fixed;*/
+  background:white;
+  border:1px solid #ccc;
+  box-shadow:1px 1px 1px 1px rgba(0,0,0,.1);
+  cursor:default;
+  margin:10px 0;
+  max-width:300px;
+}
+div.tutorial_tip button.dismiss_tip{
+  display:block;
+  width:100%;
+  border-radius:0;
+  border:none;
+  background:#ED6D57;
+  color:white;
+  padding:10px;
+  font-size:larger;
+  cursor:pointer;
+}
+div.tutorial_tip button.dismiss_tip:hover{
+  text-decoration:underline;
+}

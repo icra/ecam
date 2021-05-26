@@ -2,8 +2,10 @@ let compare_scenarios=new Vue({
   el:"#compare_scenarios",
   data:{
     visible:false,
+
     scenarios_compared:[],
     current_view:'table',
+    hide_zero_valued_variables:false,
 
     include:{
       inputs:true,
@@ -347,10 +349,11 @@ let compare_scenarios=new Vue({
 
       <div
         style="
-          display:flex;
-          justify-content:space-around;
+          display:grid;
+          grid-template-columns:50% 50%;
           align-content:center;
           margin-bottom:20px;
+          text-align:center;
         "
       >
         <!--select scenarios-->
@@ -396,24 +399,24 @@ let compare_scenarios=new Vue({
             <option>MWh</option>
           </select>
         </div>
+
+        <!--include inputs outputs-->
+        <div style="margin:2em 0" v-if="current_view=='table'">
+          <big>Compare:</big>
+          <label> <input type=checkbox v-model="include.inputs">  inputs </label>
+          <label> <input type=checkbox v-model="include.outputs"> outputs </label>
+        </div>
+
+        <div style="margin:2em 0" v-if="current_view=='table'">
+          <label>
+            <input type=checkbox v-model="hide_zero_valued_variables"> 
+            Hide fields with value equal to zero
+          </label>
+        </div>
       </div>
 
       <!--table-->
       <div v-if="current_view=='table'">
-        <!--choose inputs and/or outputs-->
-        <div
-          style="
-            display:flex;
-            justify-content:space-around;
-          "
-        >
-          <div>
-            <big>Compare:</big>
-            <label> <input type=checkbox v-model="include.inputs">  inputs </label>
-            <label> <input type=checkbox v-model="include.outputs"> outputs </label>
-          </div>
-        </div>
-
         <!--compare scenarios table-->
         <table style="margin:10px auto" v-if="scenarios_compared.length">
           <!--scenarios names-->
@@ -534,7 +537,15 @@ let compare_scenarios=new Vue({
 
             <tr
               v-for="v in get_variables_and_values(stage.level, stage.sublevel)"
-              v-if="(v.type=='input' && include.inputs) || (v.type=='output' && include.outputs)"
+              v-if="
+                (
+                  (v.type=='input' && include.inputs) || (v.type=='output' && include.outputs)
+                )
+                &&
+                (
+                  !hide_zero_valued_variables || v.scenario_values.map(sce=>sce.sum()).sum()
+                )
+              "
             >
               <!--variable code and description-->
               <th :style="{background:get_level_color(stage.level),paddingLeft:'20px'}">

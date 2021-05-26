@@ -4,6 +4,8 @@ let landing = new Vue({
     visible:true,
     Global,
     Languages,
+
+    include_tutorial_tips:true,
   },
   methods:{
     translate,
@@ -39,15 +41,16 @@ let landing = new Vue({
             <li>IPCC-2019 compliant and open-source.</li>
           </ul>
 
-          <div>
+          <div style="width:400px">
             <button class="start" onclick="ecam.show('select_scenario')">
               Start your assessment
             </button>
-          </div>
-          <div v-if="false">
-            <button class="start" onclick="alert('tutorial in development')" style="background:var(--color-level-generic-secondary)">
-              Are you a new user?
-            </button>
+            <div style="text-align:center;margin-top:1em;">
+              <label>
+                <input type=checkbox v-model="include_tutorial_tips">
+                Include first-time-user tutorial tips
+              </label>
+            </div>
           </div>
         </div>
         <div>
@@ -55,46 +58,6 @@ let landing = new Vue({
             src="frontend/img/landing/water_cycle.png"
             style="width:600px"
           >
-        </div>
-      </div>
-
-      <!--laptop-->
-      <div
-        v-if="false"
-        class="container white"
-        style="
-          display:grid;
-          grid-template-columns:50% 50%;
-        "
-      >
-        <div>
-          <img
-            src="frontend/img/landing/laptop.png"
-            style="width:100%"
-          >
-        </div>
-        <div>
-          <h1 class=blue_h1>
-            Overview of greenhouse gas emissions at utility level? Possible with ECAM!
-          </h1>
-
-          <button class=start
-            style="
-              border:2px solid black;
-              background:white;
-              color:black;
-            "
-            onclick="alert('in development')"
-          >
-            Take a look at our video tutorials
-          </button>
-
-          <p>
-            Simply get started without previous knowledge: Take an assessment
-            of your water and wastewater utillity to receive an overview of
-            direct and indirect greenhouse gas emissions at a system-wide level
-            and identify areas of improvement.
-          </p>
         </div>
       </div>
 
@@ -219,12 +182,13 @@ let landing = new Vue({
       }
 
       #landing button.start {
+        width:100%;
         background:var(--color-level-generic);
         border-radius:20px;
         border:none;
         color:white;
         display:block;
-        padding:1em 2em;
+        padding:1em;
         margin-bottom:5px;
         font-weight:bold;
         font-size:larger;
