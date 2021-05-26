@@ -4,8 +4,7 @@ let landing = new Vue({
     visible:true,
     Global,
     Languages,
-
-    include_tutorial_tips:true,
+    include_tutorial_tips:false,
   },
   methods:{
     translate,
