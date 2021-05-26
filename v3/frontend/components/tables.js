@@ -12,6 +12,7 @@ let tables = new Vue({
     Info,
     Exceptions,
     Benchmarks,
+    References,
   },
 
   methods:{
