@@ -980,6 +980,7 @@ class Waste_Treatment extends Substage{
     this.wwt_pmp_pf   = 0.9;
     this.wwt_pmp_exff = 0;
 
+    //biogas
     this.wwt_biog_pro  = 0; //total biogas produced
     this.wwt_biog_fla  = 98; //% of biogas produced that is flared
     this.wwt_biog_val  = 0; //% of biogas produced that is used for heat
@@ -990,15 +991,20 @@ class Waste_Treatment extends Substage{
     this.wwt_fuel_dig  = 0;
     this.wwt_nrg_biog  = 0;
 
+    //reuse
     this.wwt_reus_trck_typ = 0;
     this.wwt_reus_vol_trck = 0;
+
+    //composting of sludge
+    this.wwt_mass_slu_comp = 0;
+    this.wwt_slu_comp_emis_treated_or_piles_covered = 0; //yes/no
+    this.wwt_slu_comp_solids_content = 0; //percentage
 
     this.wwt_wr_N_rec       = 0; //N recovered
     this.wwt_wr_P_rec       = 0; //P recovered
     this.wwt_slu_disp       = 0;
     this.wwt_mass_slu_sto   = 0;
     this.wwt_time_slu_sto   = 0;
-    this.wwt_mass_slu_comp  = 0;
     this.wwt_mass_slu_inc   = 0;
     this.wwt_temp_inc       = 1023;
     this.wwt_mass_slu_app   = 0;
@@ -1206,20 +1212,35 @@ class Waste_Treatment extends Substage{
     }
 
     wwt_KPI_GHG_slu_composting(){
+      let emissions_are_treated_or_piles_are_covered = this.wwt_slu_comp_emis_treated_or_piles_covered; //boolean
       let sludge_mass = this.wwt_mass_slu_comp; //kg of sludge
-      let sludge_type = Tables.get_row('Type of sludge disposed',this.wwt_slu_disp);
+      let solids_content_of_compost = this.wwt_slu_comp_solids_content; //percentage gSolids/gSludge
+      let sludge_type = Tables.get_row('Type of sludge disposed',this.wwt_slu_disp); //digested or non-digested
 
+      let sludge_to_TVS = sludge_type.TVS; //gTVS/gSludge
+      let sludge_to_ON  = sludge_type.la_N_cont/100; //gN/gSludge
+      let TVS_to_OC     = Cts.ct_oc_vs.value;  //0.56 gOC/gTVS
+      let OC_to_CH4     = Cts.ct_ch4_oc.value; //1.33 gCH4/gOC
+      let ratio_up      = Cts.ct_ch4_up.value; //0.025 ratio for uncovered pile
+
+      //gases
       let co2 = 0;
       let ch4 = (function(){
-        let sludge_to_TVS = sludge_type.TVS; //gTVS/gSludge
-        let TVS_to_OC     = Cts.ct_oc_vs.value;  //gOC/gTVS
-        let OC_to_CH4     = Cts.ct_ch4_oc.value; //gCH4/gOC
-        let ratio_up      = Cts.ct_ch4_up.value; //ratio for uncovered pile
-        return sludge_mass * sludge_to_TVS * TVS_to_OC * ratio_up * Cts.ct_ch4_eq.value;
+        if(emissions_are_treated_or_piles_are_covered){return 0}
+        if(solids_content_of_compost>55){return 0}
+        return sludge_mass*sludge_to_TVS*TVS_to_OC*ratio_up*OC_to_CH4*Cts.ct_ch4_eq.value;
       })();
+
       let n2o = (function(){
-        let sludge_to_N = sludge_type.la_N_cont/100; //gN/gSludge
-        return sludge_mass * sludge_to_N * 0.015 * Cts.ct_n2o_co.value * Cts.ct_n2o_eq.value;
+        let C_content = sludge_mass*sludge_to_TVS*TVS_to_OC; //kgC
+        let N_content = sludge_mass*sludge_to_ON; //kgN
+        let ratio_CN  = C_content/N_content||0;
+
+        if(ratio_CN>=30){return 0}
+        if(solids_content_of_compost>55){return 0}
+
+        let factor_for_low_CN_ratio = Cts.ct_n2o_lf.value/100;
+        return sludge_mass*sludge_to_ON*factor_for_low_CN_ratio*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       })();
 
       let total = co2+ch4+n2o;

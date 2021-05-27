@@ -336,7 +336,7 @@ let select_scenario=new Vue({
         ></tutorial_tip>
 
         <!--assessments table-->
-        <table style="width:100%" id=main_table>
+        <table style="width:100%;margin-top:1em" id=main_table>
           <thead>
             <tr>
               <td></td>
@@ -650,7 +650,7 @@ let select_scenario=new Vue({
         margin:auto;
       }
       #select_scenario details {
-        padding-bottom:2em;
+        padding-bottom:1em;
       }
       #select_scenario details summary {
         cursor:pointer;

@@ -430,8 +430,10 @@ let Questions={
 
     "wwt_composting":{
       variables:[
-        "wwt_mass_slu_comp",
-        "wwt_ghg_avoided_sequestration_composting",
+        "wwt_mass_slu_comp", //input
+        "wwt_slu_comp_emis_treated_or_piles_covered", //input
+        "wwt_slu_comp_solids_content", //input
+        "wwt_ghg_avoided_sequestration_composting", //output
       ],
       advanced:0,
       otherQuestions:[ ],

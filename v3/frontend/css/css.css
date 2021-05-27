@@ -255,7 +255,7 @@ div.tutorial_tip{
   border:1px solid #ccc;
   box-shadow:1px 1px 1px 1px rgba(0,0,0,.1);
   cursor:default;
-  margin:10px 0;
+  margin:5px 0;
   max-width:300px;
 }
 div.tutorial_tip button.dismiss_tip{
@@ -267,8 +267,16 @@ div.tutorial_tip button.dismiss_tip{
   color:white;
   padding:10px;
   font-size:larger;
-  cursor:pointer;
 }
-div.tutorial_tip button.dismiss_tip:hover{
+div.tutorial_tip button.dismiss_all_tips{
+  display:block;
+  width:100%;
+  border-radius:0;
+  border:none;
+  text-align:center;
+  font-size:smaller;
+  background:#eff5fb;
+}
+div.tutorial_tip button:hover{
   text-decoration:underline;
 }

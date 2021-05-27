@@ -47,7 +47,7 @@ let References={
 
     "REMOVAL OF ORGANIC COMPONENT FROM WASTEWATER AS SLUDGE (KREM) ACCORDING TO TREATMENT TYPE (Table 6.6A)":[{
       ref:`IPCC 2006 (2019 revision), Volume 5, Chapter 6: Wastewater, Table 6.6A (page 27)`,
-      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=39`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=27`,
     }],
 
     "Sludge characteristics in each stage of the treatment process":[{
@@ -90,6 +90,16 @@ let References={
   //Tables (end)
 
   //Equations and Estimations
+  wwt_KPI_GHG_biog:[
+    {
+      ref:`Sum of emissions from biogas production (biogas flared, valorized and leaked)`
+    },
+    {
+      ref:"IPCC 2006, Volume 5, Chapter 4 Biological treatment of solid waste, equation 4.1, page 5",
+      link:"http://localhost/ecam/v3/frontend/docs/2006-ipcc/5_Volume5/V5_4_Ch4_Bio_Treat.pdf#page=5",
+    },
+  ],
+
   wwt_KPI_GHG_tre:[
     {
       ref:`IPCC 2019 revision, Volume 5, Chapter 6 Wastewater: equation 6.1`,
@@ -109,7 +119,6 @@ let References={
   wwt_KPI_GHG:[{ref:`Sum of emissions from this substage`}],
   wwo_KPI_GHG:[{ref:`Sum of emissions from this substage`}],
 
-  wwt_KPI_GHG_biog:[{ref:`Sum of emissions from biogas production (biogas flared, valorized and leaked)`}],
 
   //indirect electricity
   wsa_KPI_GHG_elec:[{ref:`Conversion from kWh to kgCO2eq using the emission factor for grid electricity`}],
@@ -178,33 +187,17 @@ let References={
       link:`frontend/docs/beam_final_report_1432.pdf#page=138`,
     },
     {
-      ref:`Beam page 171`,
-      link:`frontend/docs/beam_final_report_1432.pdf#page=171`,
+      ref:`Beam page 169`,
+      link:`frontend/docs/beam_final_report_1432.pdf#page=169`,
     },
   ],
 
-  wwt_KPI_GHG_slu_landfilling:[{
-    ref:`
-      For CO2 ratio:
-        0.02 = % of CO2 emission to the atmosphere form the sludge sent to the land application (page 158, beam methodology document).
-      For CH4:
-        0.9  = model uncertainty factor (from UNFCCC/CCNUC, 2008).
-        0.5  = % of CH4 in landfill (50%).
-        0.8  = % of the decomposable organic fraction of raw wastewater solids (80%).
-        0.69 = % decomposed in first 3 years (69.9).
-      For N2O:
-        0.03  = % N (sludge not digested).
-        0.015 = N2O emissions for low C: N (% of initial N in solids).
-        0.04  = % N (sludge digested).
-    `,
-  }],
-
-  wwt_KPI_GHG_slu_land_application:[{
-    ref:`
-      0.023 = % of N that goes to N2O, for fine-textured soils (2.3%).
-      0.005 = % of N that goes to N2O, for coarse textured soils (0.05%).
-    `,
-  }],
+  wwt_KPI_GHG_slu_landfilling:[
+    {
+      ref:`Section 12.9 "Landfill disposal", page 153, beam methodology document`,
+      link:`frontend/docs/beam_final_report_1432.pdf#page=175`,
+    },
+  ],
 
   wwt_KPI_GHG_slu_incineration:[{
     ref:`Beam, page 182`,

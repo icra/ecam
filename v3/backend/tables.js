@@ -194,7 +194,13 @@ let Tables={
     {name:"Imhoff tank",                                                    ch4_efac:0.48,   ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
   ],
 
+  //remove TODO change to Yes/No
   "Flooding containment":[
+    {name:"no"},
+    {name:"yes"},
+  ],
+
+  "Yes/No":[
     {name:"no"},
     {name:"yes"},
   ],

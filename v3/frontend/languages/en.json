@@ -1,6 +1,10 @@
 {
 "#below":"below",
 
+"#wwt_slu_comp_emis_treated_or_piles_covered_descr":"Are composting emissions treated and/or piles are covered?",
+"#wwt_slu_comp_air_released_descr"                 :"Is composting air released to the atmosphere?",
+"#wwt_slu_comp_solids_content_descr"               :"Solids content of compost",
+
 "#wwo_bod_cont_descr":"BOD5 entering the containments",
 "#wwo_bod_cont_expla":"BOD5 entering the containments",
 
@@ -265,7 +269,7 @@
 "#wwo_KPI_GHG_unt_ons_descr":"Untreated wastewater",
 "#wwo_KPI_GHG_cont_descr":"Onsite containment",
 "#wwo_KPI_GHG_trck_descr":"Truck transport of faecal sludge",
-"#wwo_KPI_GHG_biog_descr":"Biogas",
+"#wwo_KPI_GHG_biog_descr":"Biogas (anaerobic digestion of sludge)",
 "#wwo_KPI_GHG_tre_descr":"Treatment process",
 "#wwo_KPI_GHG_dis_descr":"Effluent discharge",
 "#wwo_KPI_GHG_landapp_descr":"Land Application",
@@ -1251,7 +1255,7 @@
 "#wwt_wr_nrg_sav_descr" :"Net electricity savings due to reuse displacing potable water",
 "#wwt_wr_nrg_sav_expla" :"Net electricity savings due to reuse displacing potable water",
 
-"#wwt_KPI_GHG_biog_descr":"Biogas",
+"#wwt_KPI_GHG_biog_descr":"Biogas (anaerobic digestion of sludge)",
 "#wwt_KPI_GHG_biog_expla":"GHG emissions from biogas",
 "#wwt_KPI_GHG_descr":"Total GHG wastewater treatment",
 "#wwt_KPI_GHG_dig_fuel_descr":"Fuel (digester)",

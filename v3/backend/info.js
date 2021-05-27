@@ -20,6 +20,10 @@ let Info={
   Currency             :{magnitude:"text",unit:"text"},
   Country              :{magnitude:"text",unit:"text"},
 
+  //composting
+  wwt_slu_comp_emis_treated_or_piles_covered:{magnitude:"Option", table:"Yes/No", unit:"Yes/No"},
+  wwt_slu_comp_solids_content               :{magnitude:"Percentage", unit:"%"},
+
   //wwo
   wwo_bod_cont:{magnitude:"Mass",unit:"kg"},
   wwo_la_N_to_N2O:{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},
@@ -106,7 +110,7 @@ let Info={
   wsa_pmp_size     : {magnitude:"Option", table:"Pump size",                unit:"Pump size"},
   wsd_pmp_size     : {magnitude:"Option", table:"Pump size",                unit:"Pump size"},
   wst_treatment    : {magnitude:"Option", table:"Potabilization chain",     unit:"Potabilization chain"},
-  wwo_flooding     : {magnitude:"Option", table:"Flooding containment",     unit:"Yes/No"},
+  wwo_flooding     : {magnitude:"Option", table:"Yes/No",                   unit:"Yes/No"},
   wwt_slu_disp     : {magnitude:"Option", table:"Type of sludge disposed",  unit:"Type of sludge disposed"},
 
   //numeric variables

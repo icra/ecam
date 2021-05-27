@@ -22,6 +22,9 @@ Vue.component('tutorial_tip',{
         <button @click="visible=false" class=dismiss_tip>
           Ok
         </button>
+        <button @click="dismiss_all_tips()" class=dismiss_all_tips>
+          dismiss all tips
+        </button>
       </div>
     </div>
   `,
@@ -33,5 +36,10 @@ Vue.component('tutorial_tip',{
     };
   },
 
-  methods:{/*TODO*/},
+  methods:{
+    //close/disable/dismiss all tips
+    dismiss_all_tips(){
+      landing.include_tutorial_tips=false;
+    },
+  },
 });
