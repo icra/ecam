@@ -485,7 +485,13 @@ let compare_scenarios=new Vue({
               </td>
             </tr>
 
-            <tr v-for="stage in Structure.filter(s=>s.sublevel && s.level==level.level)">
+            <tr
+              v-for="stage in Structure.filter(s=>s.sublevel && s.level==level.level)"
+              v-if="
+                !hide_zero_valued_variables ||
+                scenarios_compared.map(sce=>sce[stage.level][stage.sublevel].map(ss=>ss[stage.prefix+'_KPI_GHG']().total).sum()).sum()
+              "
+            >
               <td :style="{background:stage.color}">
                 &emsp;
                 &emsp;
