@@ -108,14 +108,15 @@ let Filters={
 
 //Onsite sanitation
 "Containment":[
-  "wwo_bod_cont",
-  "wwo_bod_rmvd",
-  "wwo_cont_emp",
-  "wwo_fslu_emp",
-  "wwo_fdensity",
-  "wwo_bod_conc_fs",
-  "wwo_flooding",
-  "wwo_ch4_efac_con",
+  "wwo_bod_cont",//input
+  "wwo_flooding",//input
+  "wwo_ch4_efac_con",//input
+  "wwo_cont_emp",//input
+  "wwo_fdensity",//input
+  "wwo_fslu_emp",//input
+  "wwo_bod_conc_fs",//input
+  "wwo_bod_rmvd",//input
+  "wwo_transport", //question
 ],
 
 "Treatment":[
@@ -126,12 +127,12 @@ let Filters={
   "wwo_tn_effl", //input
   "wwo_ch4_efac_tre", //input
   "wwo_n2o_efac_tre", //input
-  "wwo_ch4_efac_dis", //input
-  "wwo_n2o_efac_dis", //input
   "wwo_producing_biogas", //question
 ],
 
 "Disposal / Enduse":[
+  "wwo_ch4_efac_dis", //input
+  "wwo_n2o_efac_dis", //input
   "wwo_transport", //question
   "wwo_landfil", //question
   "wwo_landapp", //question

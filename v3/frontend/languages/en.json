@@ -84,7 +84,7 @@
 "#wwt_KPI_GHG_biog_leaked_descr":"Biogas leaked",
 "#wwt_KPI_GHG_biog_valorized_descr":"Biogas valorized",
 
-"#wwo_ghg_avoided_descr":"GHG emissions avoided in onsite treatment",
+"#wwo_ghg_avoided_descr":"GHG emissions avoided in onsite sanitation",
 "#wwt_ghg_avoided_descr":"GHG emissions avoided in wastewater treatment",
 
 "#wwt_ghg_avoided_biogas_descr":"GHG emissions avoided due to biogas valorization",
@@ -295,7 +295,7 @@
 "#wwo_ghg_avoided_biogas_descr":"GHG emissions avoided due to biogas valorization",
 "#wwo_ghg_avoided_biogas_expla":"GHG emissions avoided due to biogas valorization",
 
-"#wwo_onsi_pop_descr"      :"Population with onsite treatment",
+"#wwo_onsi_pop_descr"      :"Population with onsite sanitation",
 "#wwo_open_pop_descr"      :"Population with open defecation",
 
 "#wwo_ch4_efac_tre_descr"  :"CH4 emission factor (treatment)",

@@ -1479,39 +1479,36 @@ class Waste_Onsite extends Substage{
     super();
     this.name=name;
 
-    //general
+    //1. population
     this.wwo_onsi_pop = 0; //population with onsite treatment
-    this.wwo_open_pop = 0; //population open defecation
-    this.wwo_nrg_cost = 0; //energy costs
-    this.wwo_run_cost = 0; //total running costs
-    this.wwo_prot_con = 0; //protein consumption open defecation
 
-    //BOD5: TODO figure out this part
-    this.wwo_bod_cont = 0; //bod entering containment
-    this.wwo_bod_rmvd = 0; //bod removed as FS (going to treatment)
-
-    this.wwo_bod_infl = 0; //bod entering treatment == wwo_bod_rmvd
-    this.wwo_bod_effl = 0; //bod exiting treatment
-    this.wwo_bod_slud = 0; //?
-
-    //TN
-    this.wwo_tn_infl = 0; //TN influent
-    this.wwo_tn_effl = 0; //TN effluent
-
-    //EFs
+    //2. containment + transport
+    this.wwo_bod_cont     = 0; //bod entering containment
+    this.wwo_flooding     = 0; //yes/no
     this.wwo_ch4_efac_con = 0; //EF
-    this.wwo_n2o_efac_opd = 0; //EF
+    this.wwo_cont_emp     = 0; //containments emptied
+    this.wwo_fdensity     = 1400; //density of faecal sludge
+    this.wwo_fslu_emp     = 0; //FS emptied
+    this.wwo_bod_conc_fs  = 67.8; //[BOD] in FS
+    this.wwo_bod_rmvd     = 0; //bod removed as FS (going to treatment)
+
+    //3. treatment
+    this.wwo_bod_infl     = 0; //bod entering treatment == wwo_bod_rmvd
+    this.wwo_tn_infl      = 0; //TN influent
     this.wwo_ch4_efac_tre = 0; //EF
     this.wwo_n2o_efac_tre = 0; //EF
+    this.wwo_bod_effl     = 0; //bod exiting treatment
+    this.wwo_tn_effl      = 0; //TN effluent
+    this.wwo_bod_slud     = 0; //bod removed with excess sludge
+
+    //4. disposal end use
     this.wwo_ch4_efac_dis = 0; //EF
     this.wwo_n2o_efac_dis = 0; //EF
 
-    //containment
-    this.wwo_flooding    = 0; //yes/no
-    this.wwo_cont_emp    = 0; //containments emptied
-    this.wwo_fdensity    = 1400; //density of faecal sludge
-    this.wwo_bod_conc_fs = 67.8; //[BOD] in FS
-    this.wwo_fslu_emp    = 0; //FS emptied
+    //5. open defecation
+    this.wwo_open_pop = 0; //population open defecation
+    this.wwo_prot_con = 0; //protein consumption open defecation
+    this.wwo_n2o_efac_opd = 0; //EF
 
     //pump efficiency
     this.wwo_nrg_pump = 0;
@@ -1561,9 +1558,11 @@ class Waste_Onsite extends Substage{
     this.wwo_reused_N = 0;
     this.wwo_reused_P = 0;
 
-    //energy consumption
+    //6. energy performance
     this.wwo_nrg_cons = 0; //energy consumed from the grid (kWh)
     this.wwo_conv_kwh = 0; //kWh to kgCO2eq conversion factor
+    this.wwo_nrg_cost = 0; //energy costs
+    this.wwo_run_cost = 0; //total running costs
 
     //this.not_used_variable = 0; //use it to test if the function that locates not used variables works
   }
