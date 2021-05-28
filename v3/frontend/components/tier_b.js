@@ -307,8 +307,11 @@ let tier_b=new Vue({
             </tr>
 
             <tr v-if="level=='Waste'">
-              <td>
-                <b>{{translate('wwt_serv_pop_descr')}}</b>
+              <td style="padding-left:10px">
+                <b>
+                  <span style="font-size:larger">&rdca;</span>
+                  <span>{{translate('wwt_serv_pop_descr')}}</span>
+                </b>
               </td>
               <td class=number>
                 <span :warning="Global.Waste.Treatment.map(s=>s.wwt_serv_pop).sum()<=0">
