@@ -7,6 +7,7 @@ String.prototype.prettify=function(){
   str=str.replace(/BOD5/g,"BOD<sub>5</sub>");
   str=str.replace(/DBO5/g,"DBO<sub>5</sub>");
   str=str.replace(/H2O/g, "H<sub>2</sub>O");
+  str=str.replace(/C6H12O6/g, "C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>");
 
   str=str.replace(/m3/g,  "m<sup>3</sup>");
   str=str.replace(/m2/g,  "m<sup>2</sup>");
