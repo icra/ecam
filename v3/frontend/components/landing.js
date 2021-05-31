@@ -47,7 +47,7 @@ let landing = new Vue({
             <div style="text-align:center;margin-top:1em;">
               <label>
                 <input type=checkbox v-model="include_tutorial_tips">
-                Include first-time-user tutorial tips
+                Include tips for new users
               </label>
             </div>
           </div>
