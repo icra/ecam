@@ -68,7 +68,7 @@ let Cts={
   ct_fra_np:{
     value:0.16,
     descr:"Nitrogen in proteins (F_NPR)",
-    unit:"kgN/kgPotein",
+    unit:"kgN/kgProtein",
   },
 
   ct_fac_nc:{
