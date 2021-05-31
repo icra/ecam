@@ -33,8 +33,8 @@ let faqs = new Vue({
           <summary>{{obj.q}}</summary>
           <div v-if="obj.a.constructor===Array">
             <ol>
-              <li v-for="item in obj.a">
-                <span v-html="item"></span>
+              <li v-for="item in obj.a" class=step>
+                <span v-html="item.prettify()"></span>
               </li>
             </ol>
           </div>
@@ -54,6 +54,9 @@ let faqs = new Vue({
         font-size:larger;
         cursor:pointer;
         margin-top:1em;
+      }
+      #faqs ol li.step {
+        margin-bottom:10px;
       }
     </style>
   `,

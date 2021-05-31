@@ -86,7 +86,8 @@ let countries = new Vue({
               href="https://www.eib.org/attachments/strategies/eib_project_carbon_footprint_methodologies_en.pdf#page=36"
               target=_blank
             >
-              https://www.eib.org/attachments/strategies/eib_project_carbon_footprint_methodologies_en.pdf#page=36
+              European Investment Bank (2020): Methodologies for the assessment
+              of project GHG emissions and emission variations
             </a>
           </td>
         </tr>
@@ -94,7 +95,8 @@ let countries = new Vue({
           <td>2</td>
           <td>
             <a href="http://www.fao.org/faostat/en/#data/FBS/visualize" target=_blank>
-              FAO Statistics Division
+              Food and Agriculture Organization of the United Nations (2021):
+              FAOSTAT Database
             </a>
           </td>
         </tr>
@@ -105,9 +107,8 @@ let countries = new Vue({
               href="frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=22"
               target=_blank
             >
-              IPCC 2006, Guidelines for National Greenhouse Gas Inventories
-              Volume 5 Waste, Chapter 6, page 22
-              (2019 revision)
+              IPCC (2006): Guidelines for National Greenhouse Gas Inventories,
+              Vol. 5 Waste, Chapter 6, p. 22 (2019 revision)
             </a>
           </td>
         </tr>
@@ -115,7 +116,7 @@ let countries = new Vue({
           <td>4</td>
           <td>
             <a href="https://www.countries-ofthe-world.com/world-currencies.html" target=_blank>
-              https://www.countries-ofthe-world.com/world-currencies.html (checked on 2020-12-10)
+              Countries of the World (2021): List of currencies of the world
             </a>
           </td>
         </tr>
