@@ -216,7 +216,7 @@ let References={
 
   wwt_KPI_GHG_slu_stockpilling:[{
     ref:"Majumder, R., Livesley, S., Gregory, D., & Arndt, S. (2014, 05 15). Biosolids stockpiles are a significant point source for greenhouse gas emissions. Journal of Environmental Management, 143, pp. 34-43.",
-    link:"http://dx.doi.org/10.1016/j.jjenvman.2014.04.2016",
+    link:"https://doi.org/10.1016/j.jenvman.2014.04.016",
   }],
 
   wwo_KPI_GHG_urine:[{
