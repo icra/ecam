@@ -147,4 +147,17 @@ let Estimations={
     wwo_bod_rmvd(substage){
       return substage.wwo_fslu_emp*substage.wwo_bod_conc_fs;
     },
+
+    wwo_biog_fla(substage){
+      return 100-substage.wwo_biog_val-substage.wwo_biog_lkd-substage.wwo_biog_sold;
+    },
+    wwo_biog_val(substage){
+      return 100-substage.wwo_biog_fla-substage.wwo_biog_lkd-substage.wwo_biog_sold;
+    },
+    wwo_biog_lkd(substage){
+      return 100-substage.wwo_biog_val-substage.wwo_biog_fla-substage.wwo_biog_sold;
+    },
+    wwo_biog_sold(substage){
+      return 100-substage.wwo_biog_val-substage.wwo_biog_fla-substage.wwo_biog_lkd;
+    },
 };

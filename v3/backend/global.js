@@ -1108,13 +1108,14 @@ class Waste_Treatment extends Substage{
 
     //biogas flared emissions
     wwt_KPI_GHG_biog_flared(){
-      let moles_biogas = this.wwt_moles_biogas_produced(); //moles of biogas produced
+      let moles_biogas        = this.wwt_moles_biogas_produced(); //moles of biogas produced
       let moles_biogas_flared = moles_biogas*this.wwt_biog_fla/100; //moles of biogas flared
+      let moles_ch4_flared    = moles_biogas_flared*this.wwt_ch4_biog/100; //moles of CH4 flared
 
       //combustion of 1 mol of CH4 produces 1 mol of CO2
       //CH4 + 2·O2 -> CO2 + 2·H2O
-      //we also account moles of CO2 already present into the biogas
-      let moles_co2_to_atmosphere = moles_biogas_flared; //moles of CO2
+      //we do not account moles of CO2 already present into the biogas, because it is biogenic CO2
+      let moles_co2_to_atmosphere = moles_ch4_flared; //moles of CO2
       let mass_co2_to_atmosphere = moles_co2_to_atmosphere*(44/1000); //kg of CO2
 
       let co2 = mass_co2_to_atmosphere; //kgCO2
@@ -1126,13 +1127,14 @@ class Waste_Treatment extends Substage{
 
     //biogas valorized emissions
     wwt_KPI_GHG_biog_valorized(){
-      let moles_biogas = this.wwt_moles_biogas_produced(); //moles of biogas produced
+      let moles_biogas           = this.wwt_moles_biogas_produced(); //moles of biogas produced
       let moles_biogas_valorized = moles_biogas*this.wwt_biog_val/100; //moles of biogas valorized
+      let moles_ch4_valorized    = moles_biogas_valorized*this.wwt_ch4_biog/100; //moles of CH4 valorized
 
       //combustion of 1 mol of CH4 produces 1 mol of CO2
       //CH4 + 2·O2 -> CO2 + 2·H2O
-      //we also account moles of CO2 already present into the biogas
-      let moles_co2_to_atmosphere = moles_biogas_valorized; //moles of CO2
+      //we do not account moles of CO2 already present into the biogas, because it is biogenic CO2
+      let moles_co2_to_atmosphere = moles_ch4_valorized; //moles of CO2
       let mass_co2_to_atmosphere = moles_co2_to_atmosphere*(44/1000); //kg of CO2
 
       let co2 = mass_co2_to_atmosphere; //kgCO2
@@ -1147,13 +1149,11 @@ class Waste_Treatment extends Substage{
       let moles_biogas = this.wwt_moles_biogas_produced(); //moles of biogas produced
       let moles_biogas_leaked = moles_biogas*this.wwt_biog_lkd/100; //moles of biogas leaked
 
+      //we do not account moles of CO2 already present into the biogas, because it is biogenic CO2
       let moles_ch4_leaked = moles_biogas_leaked*this.wwt_ch4_biog/100; //moles of CH4 leaked
-      let moles_co2_leaked = moles_biogas_leaked - moles_ch4_leaked; //moles of CO2 leaked
-
-      let mass_co2_to_atmosphere = moles_co2_leaked*(44/1000); //kg of CO2 leaked
       let mass_ch4_to_atmosphere = moles_ch4_leaked*(16/1000); //kg of CH4 leaked
 
-      let co2 = mass_co2_to_atmosphere; //kgCO2
+      let co2 = 0;
       let n2o = 0;
       let ch4 = mass_ch4_to_atmosphere*Cts.ct_ch4_eq.value; //kgCO2eq
       let total = co2+ch4+n2o;
@@ -1685,13 +1685,14 @@ class Waste_Onsite extends Substage{
 
     //biogas flared emissions
     wwo_KPI_GHG_biog_flared(){
-      let moles_biogas = this.wwo_moles_biogas_produced(); //moles of biogas produced
+      let moles_biogas        = this.wwo_moles_biogas_produced(); //moles of biogas produced
       let moles_biogas_flared = moles_biogas*this.wwo_biog_fla/100; //moles of biogas flared
+      let moles_ch4_flared    = moles_biogas_flared*this.wwo_ch4_biog/100; //moles of CH4 flared
 
       //combustion of 1 mol of CH4 produces 1 mol of CO2
       //CH4 + 2·O2 -> CO2 + 2·H2O
-      //we also account moles of CO2 already present into the biogas
-      let moles_co2_to_atmosphere = moles_biogas_flared; //moles of CO2
+      //we do not account moles of CO2 already present into the biogas, because it is biogenic CO2
+      let moles_co2_to_atmosphere = moles_ch4_flared; //moles of CO2
       let mass_co2_to_atmosphere = moles_co2_to_atmosphere*(44/1000); //kg of CO2
 
       let co2 = mass_co2_to_atmosphere; //kgCO2
@@ -1703,13 +1704,14 @@ class Waste_Onsite extends Substage{
 
     //biogas valorized emissions
     wwo_KPI_GHG_biog_valorized(){
-      let moles_biogas = this.wwo_moles_biogas_produced(); //moles of biogas produced
+      let moles_biogas           = this.wwo_moles_biogas_produced(); //moles of biogas produced
       let moles_biogas_valorized = moles_biogas*this.wwo_biog_val/100; //moles of biogas valorized
+      let moles_ch4_valorized    = moles_biogas_valorized*this.wwo_ch4_biog/100; //moles of CH4 valorized
 
       //combustion of 1 mol of CH4 produces 1 mol of CO2
       //CH4 + 2·O2 -> CO2 + 2·H2O
-      //we also account moles of CO2 already present into the biogas
-      let moles_co2_to_atmosphere = moles_biogas_valorized; //moles of CO2
+      //we do not account moles of CO2 already present into the biogas, because it is biogenic CO2
+      let moles_co2_to_atmosphere = moles_ch4_valorized; //moles of CO2
       let mass_co2_to_atmosphere = moles_co2_to_atmosphere*(44/1000); //kg of CO2
 
       let co2 = mass_co2_to_atmosphere; //kgCO2
@@ -1724,13 +1726,11 @@ class Waste_Onsite extends Substage{
       let moles_biogas = this.wwo_moles_biogas_produced(); //moles of biogas produced
       let moles_biogas_leaked = moles_biogas*this.wwo_biog_lkd/100; //moles of biogas leaked
 
+      //we do not account moles of CO2 already present into the biogas, because it is biogenic CO2
       let moles_ch4_leaked = moles_biogas_leaked*this.wwo_ch4_biog/100; //moles of CH4 leaked
-      let moles_co2_leaked = moles_biogas_leaked - moles_ch4_leaked; //moles of CO2 leaked
-
-      let mass_co2_to_atmosphere = moles_co2_leaked*(44/1000); //kg of CO2 leaked
       let mass_ch4_to_atmosphere = moles_ch4_leaked*(16/1000); //kg of CH4 leaked
 
-      let co2 = mass_co2_to_atmosphere; //kgCO2
+      let co2 = 0;
       let n2o = 0;
       let ch4 = mass_ch4_to_atmosphere*Cts.ct_ch4_eq.value; //kgCO2eq
       let total = co2+ch4+n2o;
@@ -1916,6 +1916,9 @@ class Waste_Onsite extends Substage{
       "wwo_KPI_std_nrg_newp",
       "wwo_KPI_nrg_cons_new",
       "wwo_KPI_nrg_estm_sav",
+
+      "wwo_moles_biogas_produced",
+      "wwo_biogas_usage",
     ];
   }
 

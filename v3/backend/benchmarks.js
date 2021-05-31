@@ -7,6 +7,9 @@ let Benchmarks={
   wwt_biogas_usage(stage, value){
     return value==100 ? "Good" : "Unsatisfactory";
   },
+  wwo_biogas_usage(stage, value){
+    return value==100 ? "Good" : "Unsatisfactory";
+  },
 
   //standarized energy consumption (kWh/m3/100m)
   wsa_KPI_std_nrg_cons(stage, value){
