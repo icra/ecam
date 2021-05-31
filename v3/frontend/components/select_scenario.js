@@ -19,10 +19,6 @@ let select_scenario=new Vue({
   },
 
   methods:{
-    include_tutorial_tips(){
-      return landing.include_tutorial_tips;
-    },
-
     count_substages(scenario){
       return Structure.filter(s=>s.sublevel).map(s=>{
         return scenario[s.level][s.sublevel].length;
@@ -286,7 +282,7 @@ let select_scenario=new Vue({
           </div>
 
           <tutorial_tip
-            v-if="include_tutorial_tips()"
+            id   ="Load and save"
             title="Load and save"
             text="You can save your current list of assessments in a .JSON file. If you already have a file, you can load it here."
           ></tutorial_tip>
@@ -330,7 +326,7 @@ let select_scenario=new Vue({
         </div>
 
         <tutorial_tip
-          v-if="include_tutorial_tips()"
+          id   ="List of assessments"
           title="List of assessments"
           text="Below you can see the list of assessments. You can only edit one assessment at a time. To make an assessment the current one being edited just click its name"
         ></tutorial_tip>
@@ -594,7 +590,7 @@ let select_scenario=new Vue({
               ></button>
 
               <tutorial_tip
-                v-if="include_tutorial_tips()"
+                id   ="Create new assessment"
                 title="Create new assessment"
                 text="
                   You can create as many assessments as you want. You can do

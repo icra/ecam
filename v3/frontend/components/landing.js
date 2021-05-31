@@ -4,7 +4,10 @@ let landing = new Vue({
     visible:true,
     Global,
     Languages,
+
+    //tutorial tips
     include_tutorial_tips:false,
+    tutorial_tips_dismissed:[],
   },
   methods:{
     translate,
