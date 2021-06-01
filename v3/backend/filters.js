@@ -5,7 +5,6 @@ let Filters={
   "ww_resi_pop",
   "ww_vol_gene",
 
-  "wst_mass_slu",
   "wst_treatment",
   "wst_vol_trea",
   "wst_treatment_perf",

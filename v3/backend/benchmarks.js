@@ -152,14 +152,6 @@ let Benchmarks={
     else return "Unknown";
   },
 
-  //kg of sludge production per m3 of treated water
-  wst_KPI_slu_per_m3(stage, value){
-    if      (value <= 0.06)                   return "Good";
-    else if (0.06  <  value && value <= 0.10) return "Acceptable";
-    else if (value >  0.10)                   return "Unsatisfactory";
-    else                                      return "Out of range";
-  },
-
   //m3 of non revenue water per km of mains length per year
   wsd_KPI_water_losses(stage, value){
     if     (value <= 6)                   return "Good";

@@ -559,7 +559,6 @@ class Water_Treatment extends Substage{
     this.wst_nrg_cost = 0; //energy costs
     this.wst_run_cost = 0; //total running costs
 
-    this.wst_mass_slu  = 0;
     this.wst_treatment = 0;
 
     this.wst_nrg_cons = 0; //energy consumed from the grid (kWh)
@@ -614,7 +613,6 @@ class Water_Treatment extends Substage{
     }
   //SL wst
     wst_KPI_nrg_per_m3(){return this.wst_nrg_cons/this.wst_vol_trea}
-    wst_KPI_slu_per_m3(){return this.wst_mass_slu/this.wst_vol_trea}
     wst_KPI_capac_util(){return 100*this.wst_vol_trea/this.wst_trea_cap}
     wst_KPI_tst_carr(){return this.wst_tst_carr;}
     wst_KPI_std_nrg_cons(){return this.wst_nrg_pump/(this.wst_vol_pump*this.wst_pmp_head/100)}
@@ -632,7 +630,6 @@ class Water_Treatment extends Substage{
       "wst_KPI_GHG_fuel",
       "wst_KPI_GHG",
       "wst_KPI_nrg_per_m3",
-      "wst_KPI_slu_per_m3",
       "wst_KPI_capac_util",
       "wst_KPI_tst_carr",
       "wst_KPI_std_nrg_cons",
