@@ -136,7 +136,7 @@ let faqs = new Vue({
         Frequently Asked Questions
       </h2>
 
-      <div style="width:50%;margin:auto">
+      <div style="width:70%;margin:auto">
         <details v-for="obj in questions">
           <summary style="font-size:larger">{{obj.q}}</summary>
           <div v-if="obj.a.constructor===Array">
@@ -157,7 +157,7 @@ let faqs = new Vue({
           </div>
 
           <div v-if="obj.img">
-            <img :src="obj.img">
+            <img :src="obj.img" style="width:100%;border:1px solid #ccc;box-shadow:0 0 5px #ccc">
           </div>
 
           <div v-if="obj.link">
