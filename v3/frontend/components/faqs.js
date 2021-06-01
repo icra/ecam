@@ -3,6 +3,7 @@ let faqs = new Vue({
   data:{
     visible:false,
     Languages,
+    current_faq_index:-1,
 
     questions:[
       {
@@ -137,58 +138,82 @@ let faqs = new Vue({
       </h2>
 
       <div style="width:70%;margin:auto">
-        <details v-for="obj in questions">
-          <summary style="font-size:larger">{{obj.q}}</summary>
-          <div v-if="obj.a.constructor===Array">
-            <ol v-if="obj.steps">
-              <li v-for="item in obj.a" class=step>
-                <span v-html="item.prettify()"></span>
-              </li>
-            </ol>
-            <div v-if="!obj.steps">
-              <p
-                v-for="item in obj.a"
-                v-html="item.prettify()"
-              ></p>
+        <div v-for="obj,i in questions">
+          <!--question-->
+          <div
+            @click="current_faq_index = current_faq_index==i?-1:i"
+            class=question
+          >
+            <div :style="{transform:current_faq_index!=i?'rotate(-90deg)':''}">▼</div>
+            <div class=text v-html="obj.q.prettify()"></div>
+          </div>
+          <!--answer-->
+          <transition name="fade">
+          <div v-if="current_faq_index==i" class=answer>
+            <div v-if="obj.a.constructor===Array">
+              <ol v-if="obj.steps">
+                <li v-for="item in obj.a" class=step>
+                  <span v-html="item.prettify()"></span>
+                </li>
+              </ol>
+              <div v-if="!obj.steps">
+                <p
+                  v-for="item in obj.a"
+                  v-html="item.prettify()"
+                ></p>
+              </div>
+            </div>
+            <div v-else>
+              <p v-html="obj.a.prettify()"></p>
+            </div>
+
+            <div v-if="obj.img">
+              <img :src="obj.img" style="width:100%;border:1px solid #ccc;box-shadow:0 0 5px #ccc">
+            </div>
+
+            <div v-if="obj.link">
+              <a
+                v-if="obj.link.href"
+                :href="obj.link.href"
+                target=_blank
+                v-html="obj.link.text.prettify()"
+              ></a>
+
+              <a
+                v-if="obj.link.onclick"
+                href="#"
+                @click="obj.link.onclick()"
+                v-html="obj.link.text.prettify()"
+              ></a>
             </div>
           </div>
-          <div v-else>
-            <p v-html="obj.a.prettify()"></p>
-          </div>
-
-          <div v-if="obj.img">
-            <img :src="obj.img" style="width:100%;border:1px solid #ccc;box-shadow:0 0 5px #ccc">
-          </div>
-
-          <div v-if="obj.link">
-            <a
-              v-if="obj.link.href"
-              :href="obj.link.href"
-              target=_blank
-              v-html="obj.link.text.prettify()"
-            ></a>
-
-            <a
-              v-if="obj.link.onclick"
-              href="#"
-              @click="obj.link.onclick()"
-              v-html="obj.link.text.prettify()"
-            ></a>
-
-          </div>
-        </details>
+          </transition>
+        </div>
       </div>
     </div>
   `,
 
   style:`
     <style>
-      #faqs details summary {
+      #faqs div.question {
+        display:flex;
+        align-items:center;
         font-size:larger;
         cursor:pointer;
         margin-top:1em;
       }
-      #faqs ol li.step {
+      #faqs div.question div.text {
+        margin-left:5px;
+      }
+      #faqs div.question:hover div.text {
+        text-decoration:underline;
+      }
+      #faqs div.answer {
+        background:var(--color-level-generic-background);
+        padding:1em;
+        text-align:justify;
+      }
+      #faqs div.answer ol li.step {
         margin-bottom:10px;
       }
     </style>
