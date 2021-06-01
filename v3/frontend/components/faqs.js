@@ -71,11 +71,11 @@ let faqs = new Vue({
           of the excess CO2 stays in the atmosphere, it warms the climate. In turn, this
           warming climate slows down the uptake of the atmospheric CO2 by the sinks. This
           slowing-down constitutes a positive feedback – i.e. a warming climate is warmed
-          further through the feedback (Ciais et al., 2013).
+          further through the feedback.
         `,
         link:{
           href:"https://www.researchgate.net/publication/340503493_Carbon_and_Other_Biogeochemical_Cycles",
-          text:"(Ciais et al., 2013)",
+          text:"Ciais et al., 2013",
         },
       },
       {
@@ -138,7 +138,7 @@ let faqs = new Vue({
 
       <div style="width:50%;margin:auto">
         <details v-for="obj in questions">
-          <summary>{{obj.q}}</summary>
+          <summary style="font-size:larger">{{obj.q}}</summary>
           <div v-if="obj.a.constructor===Array">
             <ol v-if="obj.steps">
               <li v-for="item in obj.a" class=step>

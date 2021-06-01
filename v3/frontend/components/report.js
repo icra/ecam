@@ -377,6 +377,7 @@ let report = new Vue({
                   </div>
                 </div>
 
+                <!--
                 <div class=chart_container>
                   <div class=chart_title>
                     GHG emissions by UNFCCC category
@@ -392,6 +393,7 @@ let report = new Vue({
                     <div id=chart_unfccc></div>
                   </div>
                 </div>
+                -->
               </div>
             </div>
 

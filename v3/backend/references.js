@@ -90,7 +90,7 @@ let References={
     wst_treatment:[
       {ref:"Pre-oxidation (Pre-ox)"},
       {ref:"Coagulation (C)"},
-      {ref:"Filtration (F)"},
+      {ref:"Flocculation (F)"},
       {ref:"Sedimentation (S)"},
       {ref:"Filtration (Filt)"},
       {ref:"Desinfection (Des)"},

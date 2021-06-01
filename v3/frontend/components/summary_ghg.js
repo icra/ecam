@@ -5,6 +5,7 @@ let summary_ghg=new Vue({
 
     see_emissions_disgregated:false,
     type_of_summary_table:"ghg",
+    hide_zero_valued_variables:true,
 
     //folded sections
     unfolded_levels:['Water','Waste'],
@@ -365,6 +366,12 @@ let summary_ghg=new Vue({
             </span>
           </div>
 
+          <div v-if="current_view=='table' && type_of_summary_table=='ghg'">
+            <label>
+              <input type=checkbox v-model="hide_zero_valued_variables">
+              Hide fields with value equal to zero
+            </label>
+          </div>
         </div>
       </div>
 
@@ -410,11 +417,14 @@ let summary_ghg=new Vue({
                   font-size:large;
                 "
               >
-                <div
-                  style="
-                    font-weight:bold;
-                  "
-                >
+                <div v-if="type_of_summary_table=='ghg'">
+                  <img src="frontend/img/viti/select_scenario/icon-co2-white.svg" style="width:80px">
+                </div>
+                <div v-if="type_of_summary_table=='nrg'">
+                  <img src="frontend/img/viti/select_scenario/icon-energy-white.svg" style="width:80px">
+                </div>
+
+                <div>
                   <div v-if="type_of_summary_table=='ghg'">
                     Total<br>GHG emissions
                   </div>
@@ -423,13 +433,11 @@ let summary_ghg=new Vue({
                   </div>
                 </div>
 
-                <br>
-
                 <div v-if="type_of_summary_table=='ghg'">
-                  {{format_emission(Global.TotalGHG().total)}}
+                  <b>{{format_emission(Global.TotalGHG().total)}}</b>
                 </div>
                 <div v-if="type_of_summary_table=='nrg'">
-                  {{format_energy(Global.TotalNRG())}}
+                  <b>{{format_energy(Global.TotalNRG())}}</b>
                 </div>
               </div>
               <div>
@@ -444,17 +452,20 @@ let summary_ghg=new Vue({
                         padding:1em;
                         text-align:center;
                         font-size:large;
+                        color:white;
                       "
                     >
                       <div>
+                        <img :src="'frontend/img/stages_menu-'+s.prefix+'.svg'" style="width:80px">
+                      </div>
+                      <div>
                         {{translate(s.level)}}
                       </div>
-                      <br>
                       <div v-if="type_of_summary_table=='ghg'">
-                        {{format_emission(Global[s.level][s.prefix+'_KPI_GHG']().total)}}
+                        <b>{{format_emission(Global[s.level][s.prefix+'_KPI_GHG']().total)}}</b>
                       </div>
                       <div v-if="type_of_summary_table=='nrg'">
-                        {{format_energy(Global[s.level][s.prefix+'_nrg_cons']())}}
+                        <b>{{format_energy(Global[s.level][s.prefix+'_nrg_cons']())}}</b>
                       </div>
                     </div>
                   </div>
@@ -463,15 +474,25 @@ let summary_ghg=new Vue({
                       v-for="ss in Structure.filter(ss=>ss.sublevel && ss.level==s.level)"
                       v-if="Global[ss.level][ss.sublevel].length"
                       class="subdivision"
-                      :style="{background:ss.color}"
+                      :style="{
+                        background:'var(--color-level-'+ss.level+'-secondary)',
+                        color:'var(--color-level-'+ss.level+')',
+                        fontSize:'larger',
+                        borderBottom:'1px solid '+ss.color,
+                      }"
                     >
                       <div style="padding:1em;text-align:center">
-                        {{ss.sublevel}}
+                        <div>
+                          <img :src="'frontend/img/'+ss.icon" style="width:50px">
+                        </div>
+                        <div>
+                          {{ss.sublevel}}
+                        </div>
                         <div v-if="type_of_summary_table=='ghg'">
-                          {{format_emission(Global[ss.level][ss.sublevel].map(subs=>subs[ss.prefix+'_KPI_GHG']().total).sum())}}
+                          <b>{{format_emission(Global[ss.level][ss.sublevel].map(subs=>subs[ss.prefix+'_KPI_GHG']().total).sum())}}</b>
                         </div>
                         <div v-if="type_of_summary_table=='nrg'">
-                          {{format_energy(Global[ss.level][ss.sublevel].map(subs=>subs[ss.prefix+'_nrg_cons']).sum())}}
+                          <b>{{format_energy(Global[ss.level][ss.sublevel].map(subs=>subs[ss.prefix+'_nrg_cons']).sum())}}</b>
                         </div>
                       </div>
 
@@ -485,10 +506,10 @@ let summary_ghg=new Vue({
                           style="
                             display:grid;
                             grid-template-columns:28% 18% 18% 18% 18%;
-                            font-size:smaller;
                             align-items:center;
                             padding:5px 0;
                           "
+                          v-if="!hide_zero_valued_variables || Global[ss.level][ss.sublevel].map(ss=>ss[key]().total).sum()"
                         >
                           <div>
                             <span v-html="translate(key+'_descr').prettify()"></span>
@@ -511,7 +532,6 @@ let summary_ghg=new Vue({
                         <div
                           v-for="substage in Global[ss.level][ss.sublevel]"
                           style="
-                            font-size:smaller;
                             align-items:center;
                             padding:5px 0;
                             display:grid;
@@ -554,7 +574,7 @@ let summary_ghg=new Vue({
                 GHG emissions
               </div>
               <div class=flex>
-                <table border=1 class=legend>
+                <table class=legend>
                   <tr>
                     <td style="background:var(--color-level-Water)"></td>
                     <td>{{translate('Water')}}</td>
@@ -578,7 +598,7 @@ let summary_ghg=new Vue({
                 GHG emissions by stage
               </div>
               <div class=flex>
-                <table border=1 class=legend>
+                <table class=legend>
                   <tr
                     v-for="stage in Structure.filter(s=>s.sublevel)"
                     v-if="Global[stage.level][stage.sublevel].length"
@@ -603,7 +623,7 @@ let summary_ghg=new Vue({
                 GHG emissions by gas emitted
               </div>
               <div class=flex>
-                <table border=1 class=legend>
+                <table class=legend>
                   <tr v-for="value,key in Global.TotalGHG()" v-if="key!='total'">
                     <td :style="{background:Charts.gas_colors[key]}"></td>
                     <td>
@@ -619,13 +639,14 @@ let summary_ghg=new Vue({
               </div>
             </div>
 
+            <!--
             <div class=chart_container style="border-right:none">
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
                 GHG emissions by UNFCCC category
               </div>
               <div class=flex>
-                <table border=1 class=legend>
+                <table class=legend>
                   <tr v-for="[key,obj] in Object.entries(UNFCCC)" :title="key">
                     <td :style="{background:obj.color}"></td>
                     <td>
@@ -639,6 +660,9 @@ let summary_ghg=new Vue({
                 </table>
                 <div id=chart_unfccc></div>
               </div>
+            </div>
+            -->
+            <div class=chart_container style="border-right:none">
             </div>
           </div>
 
@@ -670,7 +694,7 @@ let summary_ghg=new Vue({
               </div>
 
               <div class=flex>
-                <table border=1 class=legend>
+                <table class=legend>
                   <tr>
                     <td style="background:var(--color-level-Water)"></td>
                     <td>{{translate('Water')}}</td>
@@ -695,7 +719,7 @@ let summary_ghg=new Vue({
               </div>
 
               <div class=flex>
-                <table border=1 class=legend>
+                <table class=legend>
                   <tr v-for="stage in Structure.filter(s=>s.sublevel)">
                     <td :style="{background:stage.color}">
                     </td>
@@ -737,7 +761,7 @@ let summary_ghg=new Vue({
               grid-template-columns:50% 50%;
             ">
               <div class=flex>
-                <table border=1 class=legend>
+                <table class=legend>
                   <tr>
                     <td :style="{background:'var(--color-level-Water)'}"></td>
                     <td>{{translate('ws_serv_pop_descr')}}</td>
@@ -754,7 +778,7 @@ let summary_ghg=new Vue({
                 <div id=pie_chart_ws_serv_pop></div>
               </div>
               <div class=flex>
-                <table border=1 class=legend>
+                <table class=legend>
                   <tr>
                     <td :style="{background:'var(--color-level-Waste)'}"></td>
                     <td>{{translate('ww_serv_pop_descr')}}</td>

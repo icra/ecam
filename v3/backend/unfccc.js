@@ -1,5 +1,5 @@
 /*
-  Formulas for UNFCCC categories
+  UNFCCC categories: grouping emissions based on origin
   ------------------------------
   unfccc_1A1: Energy - Electricity and Heat
   unfccc_1A3: Energy - Transport

@@ -340,7 +340,9 @@ let compare_scenarios=new Vue({
         <button :selected="current_view=='bar_chart_ghg_total'"         @click="current_view='bar_chart_ghg_total'"        >Total GHG emissions                                </button>
         <button :selected="current_view=='bar_chart_ghg_by_gas'"        @click="current_view='bar_chart_ghg_by_gas'"       >Emissions by gas<br>(${'CO2, N2O, CH4'.prettify()})</button>
         <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Emissions by stage                                 </button>
+        <!--
         <button :selected="current_view=='bar_chart_ghg_by_unfccc'"     @click="current_view='bar_chart_ghg_by_unfccc'"    >Emissions by UNFCCC category                       </button>
+        -->
         <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">Total energy consumption                           </button>
       </div>
 
@@ -409,7 +411,7 @@ let compare_scenarios=new Vue({
 
         <div style="margin:2em 0" v-if="current_view=='table'">
           <label>
-            <input type=checkbox v-model="hide_zero_valued_variables"> 
+            <input type=checkbox v-model="hide_zero_valued_variables">
             Hide fields with value equal to zero
           </label>
         </div>
@@ -418,7 +420,7 @@ let compare_scenarios=new Vue({
       <!--table-->
       <div v-if="current_view=='table'">
         <!--compare scenarios table-->
-        <table style="margin:10px auto" v-if="scenarios_compared.length">
+        <table style="margin:10px auto;width:100%" v-if="scenarios_compared.length">
           <!--scenarios names-->
           <tbody v-if="include.inputs || include.outputs">
             <tr>
@@ -698,7 +700,7 @@ let compare_scenarios=new Vue({
       }
       #compare_scenarios div#select_chart_container {
         display:grid;
-        grid-template-columns:repeat(6, 16.66%);
+        grid-template-columns:repeat(5, 20%);
       }
       #compare_scenarios div#select_chart_container button {
         height:60px;
