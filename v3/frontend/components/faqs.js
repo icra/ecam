@@ -37,7 +37,7 @@ let faqs = new Vue({
         only stored on your computer during the assessment.`,
       },
       {
-        q:"What is the Global Warming Potential (GWP)?",
+        q:"What is the 'Global Warming Potential' (GWP)?",
         a:`The Global Warming Potential (GWP) allows comparisons of the global warming
         impacts of different gases. It is a measure of how much energy the emissions of
         1 ton of a gas will be absorbed over a given period of time. The foundation of
