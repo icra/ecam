@@ -377,11 +377,14 @@ let summary_ghg=new Vue({
 
       <!--content-->
       <div>
-        <!--tables-->
+        <!--table container-->
         <div v-if="current_view=='table'">
           <!--summary table 2.0-->
           <div style="margin-top:20px"></div>
+
+          <!--actual table-->
           <div>
+            <!--header-->
             <div
               style="
                 display:grid;
@@ -393,19 +396,21 @@ let summary_ghg=new Vue({
               <div>System (<span class=unit v-html="get_summary_unit().prettify()"></span>)</div>
               <div>Stage (<span class=unit v-html="get_summary_unit().prettify()"></span>)</div>
 
-              <div v-if="type_of_summary_table=='ghg'">Emission source</div>
+              <div v-if="type_of_summary_table=='ghg'" style="text-align:left">Emission source</div>
               <div v-if="type_of_summary_table=='nrg'">Substages (<span class=unit v-html="current_unit_nrg.prettify()"></span>)</div>
 
               <div>
                 <span v-if="type_of_summary_table=='ghg'">Emission</span>
-                <span v-if="type_of_summary_table=='nrg'">Energy consumption</span>
+                <span v-if="type_of_summary_table=='nrg'">Energy consumed</span>
                 (<span class=unit v-html="get_summary_unit().prettify()"></span>)
               </div>
 
-              <div v-if="type_of_summary_table=='ghg' && see_emissions_disgregated">${'CO2'.prettify()}    (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
-              <div v-if="type_of_summary_table=='ghg' && see_emissions_disgregated">${'CH4'.prettify()}    (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
-              <div v-if="type_of_summary_table=='ghg' && see_emissions_disgregated">${'N2O'.prettify()}    (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
+              <div v-if="type_of_summary_table=='ghg' && see_emissions_disgregated">${'CO2'.prettify()} (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
+              <div v-if="type_of_summary_table=='ghg' && see_emissions_disgregated">${'CH4'.prettify()} (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
+              <div v-if="type_of_summary_table=='ghg' && see_emissions_disgregated">${'N2O'.prettify()} (<span class=unit v-html="current_unit_ghg.prettify()"></span>)</div>
             </div>
+
+            <!--body-->
             <div
               class=subdivision
               style="background:var(--color-level-generic)"
@@ -426,10 +431,10 @@ let summary_ghg=new Vue({
 
                 <div>
                   <div v-if="type_of_summary_table=='ghg'">
-                    Total<br>GHG emissions
+                    Total GHG<br>emissions
                   </div>
                   <div v-if="type_of_summary_table=='nrg'">
-                    Total<br>energy consumption
+                    Total energy<br>consumption
                   </div>
                 </div>
 
@@ -449,14 +454,14 @@ let summary_ghg=new Vue({
                   <div>
                     <div
                       style="
-                        padding:1em;
+                        padding:0 0.5em;
                         text-align:center;
                         font-size:large;
                         color:white;
                       "
                     >
                       <div>
-                        <img :src="'frontend/img/stages_menu-'+s.prefix+'.svg'" style="width:80px">
+                        <img :src="'frontend/img/stages_menu-'+s.prefix+'.svg'" style="width:40px">
                       </div>
                       <div>
                         {{translate(s.level)}}
@@ -483,7 +488,7 @@ let summary_ghg=new Vue({
                     >
                       <div style="padding:1em;text-align:center">
                         <div>
-                          <img :src="'frontend/img/'+ss.icon" style="width:50px">
+                          <img :src="'frontend/img/'+ss.icon" style="width:40px">
                         </div>
                         <div>
                           {{ss.sublevel}}
@@ -517,7 +522,10 @@ let summary_ghg=new Vue({
                           <div
                             v-for="gas in ['total','co2','ch4','n2o']"
                             v-if="gas=='total' || see_emissions_disgregated"
-                            style="text-align:center"
+                            :style="{
+                              textAlign:'center',
+                              fontWeight:gas=='total'?'bold':'',
+                            }"
                           >
                             {{
                               format_emission(
@@ -542,7 +550,7 @@ let summary_ghg=new Vue({
                           <div>
                             <span v-html="substage.name.prettify()"></span>
                           </div>
-                          <div>
+                          <div style="font-weight:bold">
                             {{
                               format_energy(
                                 substage[ss.prefix+'_nrg_cons']
