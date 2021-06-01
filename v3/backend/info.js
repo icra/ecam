@@ -20,6 +20,8 @@ let Info={
   Currency             :{magnitude:"text",unit:"text"},
   Country              :{magnitude:"text",unit:"text"},
 
+  wwo_KPI_GHG_sludge:{magnitude:"Mass",unit:"kgCO2eq"},
+
   //composting
   wwt_slu_comp_emis_treated_or_piles_covered:{magnitude:"Option", table:"Yes/No", unit:"Yes/No"},
   wwt_slu_comp_solids_content               :{magnitude:"Percentage", unit:"%"},
@@ -356,6 +358,7 @@ let Info={
   wwo_ch4_biog:{magnitude:"Percent",unit:"%" },
   wwo_ch4_efac_dis: {magnitude:"Mass/Mass",        unit:"kgCH4/kgBOD" },
   wwo_ch4_efac_dumping:{magnitude:"Mass/Mass",unit:"kgCH4/kgBOD"},
+  wwo_n2o_efac_dumping:{magnitude:"Mass/Mass", unit:"kgN2O-N/kgN"},
   wwo_ch4_efac_tre: {magnitude:"Mass/Mass",        unit:"kgCH4/kgBOD" },
   wwo_coll_len:{magnitude:"Distance",unit:"km"},
   wwo_cont_emp:     {magnitude:"Percentage", unit:"%"},

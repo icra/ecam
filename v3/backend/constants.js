@@ -89,13 +89,6 @@ let Cts={
     unit:"adimensional",
   },
 
-  //TODO remove
-  ct_ef_eff:{
-    value:0.005,
-    descr:"EF effluent (tabled value)",
-    unit:"kgN2O-N/kg N",
-  },
-
   ct_gravit:{
     value:9810,
     descr:"Specific weight of H2O",

@@ -64,14 +64,10 @@ let summary_ghg=new Vue({
         "wwo_KPI_GHG_dig_fuel",
         "wwo_KPI_GHG_containment",
         "wwo_KPI_GHG_tre",
+        "wwo_KPI_GHG_sludge",
         "wwo_KPI_GHG_biog",
         "wwo_KPI_GHG_dis",
-        "wwo_KPI_GHG_trck",
-        "wwo_KPI_GHG_dumping",
-        "wwo_KPI_GHG_landapp",
-        "wwo_KPI_GHG_landfil",
         "wwo_KPI_GHG_unt_opd",
-        "wwo_KPI_GHG_urine",
       ];
       return codes.indexOf(a) - codes.indexOf(b);
     },

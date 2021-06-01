@@ -162,8 +162,8 @@ let Tables={
   ],
 
   "Type of sludge disposed":[
-    {name:"Non-digested", f_ch4:0.53, la_N_cont:3, TVS:0.70},
-    {name:"Digested",     f_ch4:0.06, la_N_cont:4, TVS:0.51},
+    {name:"Non-digested", f_ch4:0.53, N_cont:3, TVS:0.70},
+    {name:"Digested",     f_ch4:0.06, N_cont:4, TVS:0.51},
   ],
 
   "Type of landfill":[

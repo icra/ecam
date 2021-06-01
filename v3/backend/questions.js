@@ -608,6 +608,7 @@ let Questions={
       variables:[
         "wwo_vol_dumping",
         "wwo_ch4_efac_dumping",
+        "wwo_n2o_efac_dumping",
         "wwo_KPI_GHG_dumping",
       ],
       advanced:0,

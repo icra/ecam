@@ -1,6 +1,9 @@
 {
 "#below":"below",
 
+"#wwo_KPI_GHG_sludge_descr":"Sludge management",
+"#wwo_KPI_GHG_sludge_expla":"GHG emissions from faecal sludge management operations",
+
 "#wwt_slu_comp_emis_treated_or_piles_covered_descr":"Are composting emissions treated and/or piles are covered?",
 "#wwt_slu_comp_air_released_descr"                 :"Is composting air released to the atmosphere?",
 "#wwt_slu_comp_solids_content_descr"               :"Solids content of compost",
@@ -271,13 +274,15 @@
 "#wwo_KPI_GHG_trck_descr":"Truck transport of faecal sludge",
 "#wwo_KPI_GHG_biog_descr":"Biogas (anaerobic digestion of sludge)",
 "#wwo_KPI_GHG_tre_descr":"Treatment process",
-"#wwo_KPI_GHG_dis_descr":"Effluent discharge",
+"#wwo_KPI_GHG_dis_descr":"Discharged water",
 "#wwo_KPI_GHG_landapp_descr":"Land Application",
 "#wwo_KPI_GHG_landapp_expla":"Amount of CO2eq emissions due to N2O  emission from faecal sludge sent to land application",
 "#wwo_KPI_GHG_landfil_descr":"Landfilling",
 "#wwo_KPI_GHG_landfil_expla":"Total GHG from (faecal) sludge sent to landfilling",
+
 "#wwo_KPI_GHG_dumping_descr":"Dumping",
 "#wwo_KPI_GHG_dumping_expla":"Total GHG emissions due to (faecal) sludge dumping",
+
 "#wwo_KPI_GHG_urine_descr":"Urine application",
 "#wwo_KPI_GHG_urine_expla":"Amount of CO2eq emissions due to N2O emission from land application of urine",
 "#wwo_ghg_avoided_land_descr":"GHG emissions avoided due to carbon sequestration",
@@ -391,8 +396,12 @@
 "#wwo_dumping":"Do you want to assess dumping of faecal sludge",
 "#wwo_vol_dumping_descr":"Volume dumped",
 "#wwo_vol_dumping_expla":"Volume of faecal sludge dumped during the assessment period",
+
 "#wwo_ch4_efac_dumping_descr":"CH4 emission factor (dumping)",
 "#wwo_ch4_efac_dumping_expla":"Methane emission factor for faecal sludge dumping",
+"#wwo_n2o_efac_dumping_descr":"N2O emission factor (dumping)",
+"#wwo_n2o_efac_dumping_expla":"N2O emission factor for faecal sludge dumping",
+
 "#wwo_producing_biogas":"Are you producing biogas from anaerobic digestion",
 "#wwo_urine":"Do you want to assess land application of urine",
 "#wwo_N_urine_descr":"Total Nitrogen in urine applied to land",

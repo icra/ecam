@@ -94,11 +94,11 @@ let Estimations={
     },
     wwt_slu_la_N_cont(substage){
       let slu_disp=Tables.get_row('Type of sludge disposed',substage.wwt_slu_disp);
-      return slu_disp.la_N_cont;
+      return slu_disp.N_cont;
     },
     wwt_slu_lf_N_cont(substage){
       let slu_disp=Tables.get_row('Type of sludge disposed',substage.wwt_slu_disp);
-      return slu_disp.la_N_cont;
+      return slu_disp.N_cont;
     },
 
     //estimation for biogas produced
@@ -134,10 +134,6 @@ let Estimations={
       let P   = substage.wwo_onsi_pop; //population
       let BOD = Global.General.bod_pday; //g/person/day
       return P * BOD * 0.001 * Global.Days(); //kg
-    },
-
-    wwo_n2o_efac_opd(substage){
-      return Cts.ct_ef_eff.value;
     },
 
     wwo_bod_infl(substage){

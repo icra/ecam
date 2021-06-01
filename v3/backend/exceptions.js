@@ -8,10 +8,9 @@ let Exceptions={
   wwc_ch4_efac_cso:{ table:"type_of_water_body",           table_field:function(){return "ch4_efac"}, },
   wwc_n2o_efac_cso:{ table:"N2O EF effluent (Table 6.8A)", table_field:function(){return "n2o_efac"}, },
 
-  wwo_ch4_efac_dumping:{
-    table:"type_of_water_body",
-    table_field:function(){return "ch4_efac"},
-  },
+  wwo_ch4_efac_dumping:{table:"type_of_water_body",           table_field:function(){return "ch4_efac"}, },
+  wwo_n2o_efac_dumping:{table:"N2O EF effluent (Table 6.8A)", table_field:function(){return "n2o_efac"}, },
+  wwo_n2o_efac_opd:{table:"N2O EF effluent (Table 6.8A)", table_field:function(){return "n2o_efac"}, },
 
   wwo_la_N_to_N2O:{
     table:"Soil type",
