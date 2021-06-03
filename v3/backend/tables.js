@@ -162,17 +162,18 @@ let Tables={
   ],
 
   "Type of sludge disposed":[
-    {name:"Non-digested", f_ch4:0.53, N_cont:3, TVS:0.70},
-    {name:"Digested",     f_ch4:0.06, N_cont:4, TVS:0.51},
+    {name:"Type of sludge disposed", f_ch4:0,  N_cont:0, TVS:0 },
+    {name:"Non-digested",            f_ch4:53, N_cont:3, TVS:70},
+    {name:"Digested",                f_ch4:6,  N_cont:4, TVS:51},
   ],
 
   "Type of landfill":[
-    {name:"Landfill",                     ratio:1},
-    {name:"Landfill (with gas recovery)", ratio:0.02},
-    {name:"Landfill (flaring)",           ratio:0},
+    {name:"Landfill",                     MCF:1},
+    {name:"Landfill (with gas recovery)", MCF:0.02},
+    {name:"Landfill (flaring)",           MCF:0},
   ],
 
-  //f_la: N transformed to N2O-N
+  //f_la: gN transformed to gN2O
   "Soil type":[
     {name:"Soil type undefined",         f_la:0.000},
     {name:"Fine-Textured (>30% clay)",   f_la:0.023},
@@ -192,12 +193,6 @@ let Tables={
     {name:"Urine Diverting Dry Toilet (UDDT)",                              ch4_efac:0.0,    ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
     {name:"Composting Toilet",                                              ch4_efac:0.0013, ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
     {name:"Imhoff tank",                                                    ch4_efac:0.48,   ch4_efac_flooding:0.42,  BOD_conc_FS:67.8, fs_density:1400},
-  ],
-
-  //remove TODO change to Yes/No
-  "Flooding containment":[
-    {name:"no"},
-    {name:"yes"},
   ],
 
   "Yes/No":[

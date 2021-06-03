@@ -1,6 +1,40 @@
 {
 "#below":"below",
 
+"#Type of sludge disposed":"Type of sludge disposed",
+
+"#wwt_slu_sto_f_CH4_descr":"CH4 potential factor",
+
+"#wwt_slu_sto_TVS_descr":"Total Volatile Solids (TVS) content of sludge stored (% of dry weight)",
+"#wwt_slu_sto_EF_descr":"Emission factor due to storage",
+"#wwt_slu_sto_EF_expla":"Emission factor due to storage. Can be estimated with the storage time",
+
+"#wwt_slu_comp_TVS_descr":"Total Volatile Solids (TVS) content of sludge composted (% of dry weight)",
+"#wwt_slu_comp_N_cont_descr":"N content of sludge stored (% of dry weight)",
+
+"#wwt_slu_inc_N_cont_descr":"N content of sludge incinerated (% of dry weight)",
+"#wwt_slu_inc_SNCR_descr":"Is 'SNCR air emissions technology with urea' used?",
+
+"#wwt_slu_la_solids_content_descr":"Solids content of sludge sent to land application",
+"#wwt_slu_la_TVS_descr":"Total Volatile Solids (TVS) content of sludge sent to land application",
+"#wwt_slu_la_N_cont_descr":"N content of sludge sent to land application (% of dry weight)",
+"#wwt_slu_la_EF_descr":"Amount of Nitrogen converted to N2O",
+
+"#wwt_slu_lf_TVS_descr":"Total Volatile Solids (TVS) content of sludge sent to land application",
+"#wwt_slu_lf_N_cont_descr":"N content of sludge sent to land application (% of dry weight)",
+"#wwt_slu_lf_MCF_descr":"Methane correction for anaerobic managed landfills (default=1)",
+"#wwt_slu_lf_MCF_expla":"Methane correction for anaerobic managed landfills (default=1, UNFCCC/CCNUCC, 2008)",
+
+
+
+
+
+
+"#wwo_la_N_cont_descr":"N content of sludge sent to land application (% of dry weight)",
+
+"#wwo_lf_TVS_descr":"Total Volatile Solids (TVS) content of sludge sent to landfilling (% of dry weight)",
+"#wwo_lf_N_cont_descr":"N content of sludge sent to landfilling (% of dry weight)",
+
 "#wwo_KPI_GHG_sludge_descr":"Sludge management",
 "#wwo_KPI_GHG_sludge_expla":"GHG emissions from faecal sludge management operations",
 
@@ -185,8 +219,8 @@
 "#wwt_KPI_GHG_slu_land_application_descr":"Land application of sludge",
 "#wwt_KPI_GHG_slu_land_application_expla":"Amount of CO2,eq emissions due to land application of sludge",
 "#wwt_KPI_GHG_slu_landfilling_descr":"Landfilling of sludge",
-"#wwt_KPI_GHG_slu_landfilling_expla":"Amount of CO2,eq emissions due to landfilling of sludge",
-"#wwt_KPI_GHG_slu_stockpilling_descr":"Sludge stockpiling",
+"#wwt_KPI_GHG_slu_landfilling_expla":"Fugitive methane emissions from biosolids decomposition in the landfill during the first 3 years after placement, and N2O emissions from landfilled biosolids",
+"#wwt_KPI_GHG_slu_stockpilling_descr":"Sludge stockpiling (first year)",
 "#wwt_KPI_GHG_slu_stockpilling_expla":"Amount of CO2,eq emissions due to sludge stockpiling. Emissions due to stockpiling only refer to the first year",
 "#wwt_KPI_GHG_slu_transport_descr":"Truck transport of sludge",
 "#wwt_KPI_GHG_slu_transport_expla":"Indirect CO2 emitted from sludge transport off-site",
@@ -384,11 +418,6 @@
 "#wwo_mass_landfil_descr":"Dry weight sent to landfill",
 "#wwo_mass_landfil_expla":"Dry weight sent to landfill during the assessment period",
 
-"#wwo_la_N_cont_descr":"Total Nitrogen (% of dry weight)",
-"#wwo_lf_N_cont_descr":"Total Nitrogen (% of dry weight)",
-"#wwo_lf_N_cont_expla":"Total Nitrogen (% of dry weight)",
-"#wwo_lf_TVS_descr":"Total Volatile Solids (% of dry weight)",
-"#wwo_lf_TVS_expla":"Total Volatile Solids (% of dry weight)",
 "#wwo_soil_typ_descr":"Soil type",
 "#wwo_soil_typ_expla":"Soil typology the sludge is applied on. Note: if you don't know the soil typology, leave it as 'Fine-textured'",
 "#wwo_lf_type_descr":"Landfill type",
@@ -1368,7 +1397,7 @@
 "#wwt_mass_slu_app_expla":"Amount of sludge that is sent to land application (dry weight)",
 "#wwt_mass_slu_comp_descr":"Sludge composted (dry weight)",
 "#wwt_mass_slu_comp_expla":"Amount of sludge that is sent to composting (dry weight)",
-"#wwt_mass_slu_descr":"Amount of raw sludge removed from wastewater treatment as dry mass",
+"#wwt_mass_slu_descr":"Sludge removed from wastewater treatment (dry weight)",
 "#wwt_mass_slu_expla":"Amount of raw sludge removed from wastewater treatment as dry mass during the assessment period",
 "#wwt_mass_slu_inc_descr":"Sludge incinerated (dry weight)",
 "#wwt_mass_slu_inc_expla":"Amount of sludge that is sent to incineration (dry weight)",
@@ -1403,12 +1432,6 @@
 "#wwt_serv_pop_expla":"Serviced population is referred to the number of inhabitants (or inhabitant equivalents), within the area of service managed by the utility, which are connected to a sewer system and which wastewater are receiving treatment in a WWTP.",
 "#wwt_slu_disp_descr":"Sludge type disposed of",
 "#wwt_slu_disp_expla":"Sludge type disposed of",
-"#wwt_slu_la_N_cont_descr": "Total Nitrogen (% of dry weight)",
-"#wwt_slu_la_N_cont_expla": "Total Nitrogen (% of dry weight)",
-"#wwt_slu_lf_N_cont_descr":"Total Nitrogen (% of dry weight)",
-"#wwt_slu_lf_N_cont_expla":"Total Nitrogen (% of dry weight)",
-"#wwt_slu_lf_TVS_descr":"Total Volatile Solids (% of dry weight)",
-"#wwt_slu_lf_TVS_expla":"Total Volatile Solids (% of dry weight)",
 "#wwt_slu_stor_descr":"Sludge storage time",
 "#wwt_slu_stor_expla":"Sludge storage time",
 "#wwt_slu_storage":"[SM] Evaluate sludge storage in WWTP",
@@ -1420,7 +1443,7 @@
 "#wwt_sta_head_descr":"Static head",
 "#wwt_sta_head_expla":"Static head",
 "#wwt_stockpiling":"[SM] Is sludge sent to stockpiling",
-"#wwt_temp_inc_descr":"Fluidized Bed Reactor Temperature",
+"#wwt_temp_inc_descr":"Average highest temperature of combustion achieved in a Fluidized Bed incinerator",
 "#wwt_temp_inc_expla":"Incineration temperature",
 "#wwt_time_slu_sto_descr":"Storage time",
 "#wwt_time_slu_sto_expla":"Time interval the sludge is stored for before being sent to disposal",

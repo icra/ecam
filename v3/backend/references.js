@@ -186,43 +186,44 @@ let References={
       link:``,   //link to doi for example
     }],
 
-    wwt_KPI_GHG_slu_storage:[{
-      ref:`
-        0.03 = emission factor due to storage between 5 and 20 days.
-        0.05 = emission factor due to storage more than 20 days.
-      `,
-    }],
+    wwt_KPI_GHG_slu_storage:[
+      {ref:`3% = emission factor due to storage between 5 and 20 days.`},
+      {ref:`5% = emission factor due to storage more than 20 days.`},
+    ],
 
     wwt_KPI_GHG_slu_composting:[
       {
-        ref:`Beam page 138`,
-        link:`frontend/docs/beam_final_report_1432.pdf#page=138`,
-      },
-      {
-        ref:`Beam page 169`,
+        ref:`Section 12.8 "Composting", Beam page 147 (page 169 in PDF)`,
         link:`frontend/docs/beam_final_report_1432.pdf#page=169`,
+      },
+    ],
+
+    wwt_KPI_GHG_slu_land_application:[
+      {
+        ref:`Section 12.11 "Land application", Beam page 166 (page 188 in PDF)`,
+        link:`frontend/docs/beam_final_report_1432.pdf#page=188`,
       },
     ],
 
     wwt_KPI_GHG_slu_landfilling:[
       {
-        ref:`Section 12.9 "Landfill disposal", page 153, beam methodology document`,
+        ref:`Section 12.9 "Landfill disposal", page 153, Beam methodology document (page 175 in PDF)`,
         link:`frontend/docs/beam_final_report_1432.pdf#page=175`,
       },
     ],
 
     wwt_KPI_GHG_slu_incineration:[{
-      ref:`Beam, page 182`,
-      link:`frontend/docs/beam_final_report_1432.pdf#page=182`,
+      ref:`Section 12.10 "Combustion (Incineration)", Beam, page 161 (page 183 in PDF)`,
+      link:`frontend/docs/beam_final_report_1432.pdf#page=183`,
     }],
 
     wwt_mass_slu:[{
-      ref:"'S_mass' in eq.6.3B from IPCC 2019",
+      ref:"'S_mass' in eq.6.3B from IPCC 2006 (2019 revision)",
       link:"frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=27",
     }],
 
     wwt_bod_slud:[{
-      ref:"'S_aerobic' in eq.6.3B from IPCC 2019",
+      ref:"'S_aerobic' in eq.6.3B from IPCC 2006 (2019 revision)",
       link:"frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=27",
     }],
 

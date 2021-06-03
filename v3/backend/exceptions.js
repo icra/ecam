@@ -4,13 +4,29 @@
     number besides selecting an option.
 */
 let Exceptions={
-  wwc_ch4_efac_col:{ table:"type_of_sewer",                table_field:function(){return "ch4_efac"}, },
-  wwc_ch4_efac_cso:{ table:"type_of_water_body",           table_field:function(){return "ch4_efac"}, },
-  wwc_n2o_efac_cso:{ table:"N2O EF effluent (Table 6.8A)", table_field:function(){return "n2o_efac"}, },
+  wwc_ch4_efac_col:{table:"type_of_sewer",                table_field(){return "ch4_efac"}},
+  wwc_ch4_efac_cso:{table:"type_of_water_body",           table_field(){return "ch4_efac"}},
+  wwc_n2o_efac_cso:{table:"N2O EF effluent (Table 6.8A)", table_field(){return "n2o_efac"}},
 
-  wwo_ch4_efac_dumping:{table:"type_of_water_body",           table_field:function(){return "ch4_efac"}, },
-  wwo_n2o_efac_dumping:{table:"N2O EF effluent (Table 6.8A)", table_field:function(){return "n2o_efac"}, },
-  wwo_n2o_efac_opd:{table:"N2O EF effluent (Table 6.8A)", table_field:function(){return "n2o_efac"}, },
+  wwo_ch4_efac_dumping:{table:"type_of_water_body",           table_field(){return "ch4_efac"}},
+  wwo_n2o_efac_dumping:{table:"N2O EF effluent (Table 6.8A)", table_field(){return "n2o_efac"}},
+  wwo_n2o_efac_opd:{    table:"N2O EF effluent (Table 6.8A)", table_field(){return "n2o_efac"}},
+
+  wwt_slu_sto_TVS:{  table:"Type of sludge disposed", table_field(){return "TVS"}},
+  wwt_slu_sto_f_CH4:{table:"Type of sludge disposed", table_field(){return "f_ch4"}},
+
+  wwt_slu_comp_TVS:{   table:"Type of sludge disposed", table_field(){return "TVS"}},
+  wwt_slu_comp_N_cont:{table:"Type of sludge disposed", table_field(){return "N_cont"}},
+
+  wwt_slu_inc_N_cont:{table:"Type of sludge disposed", table_field(){return "N_cont"}},
+
+  wwt_slu_la_TVS:{   table:"Type of sludge disposed", table_field(){return "TVS"}},
+  wwt_slu_la_N_cont:{table:"Type of sludge disposed", table_field(){return "N_cont"}},
+  wwt_slu_la_EF:{    table:"Soil type",               table_field(){return "f_la"}},
+
+  wwt_slu_lf_TVS:{   table:"Type of sludge disposed", table_field(){return "TVS"}},
+  wwt_slu_lf_N_cont:{table:"Type of sludge disposed", table_field(){return "N_cont"}},
+  wwt_slu_lf_MCF:{table:"Type of landfill", table_field(){return "MCF"}},
 
   wwo_la_N_to_N2O:{
     table:"Soil type",

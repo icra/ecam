@@ -20,13 +20,34 @@ let Info={
   Currency             :{magnitude:"text",unit:"text"},
   Country              :{magnitude:"text",unit:"text"},
 
-  wwo_KPI_GHG_sludge:{magnitude:"Mass",unit:"kgCO2eq"},
+  //sludge storing
+  wwt_slu_sto_TVS:{magnitude:"Percent", unit:"%"},
+  wwt_slu_sto_f_CH4:{magnitude:"Percent", unit:"%"},
+  wwt_slu_sto_EF:{magnitude:"Percent", unit:"%"},
 
-  //composting
+  //sludge composting
   wwt_slu_comp_emis_treated_or_piles_covered:{magnitude:"Option", table:"Yes/No", unit:"Yes/No"},
-  wwt_slu_comp_solids_content               :{magnitude:"Percentage", unit:"%"},
+  wwt_slu_comp_solids_content:{magnitude:"Percentage", unit:"%"},
+  wwt_slu_comp_TVS:{magnitude:"Percent", unit:"%"},
+  wwt_slu_comp_N_cont:{magnitude:"Percent", unit:"%"},
+
+  //sludge incineration
+  wwt_slu_inc_N_cont:{magnitude:"Percent", unit:"%"},
+  wwt_slu_inc_SNCR:{magnitude:"Option", table:"Yes/No", unit:"Yes/No"},
+
+  //sludge land application
+  wwt_slu_la_solids_content:{magnitude:"Percent",unit:"%"},
+  wwt_slu_la_TVS           :{magnitude:"Percent",unit:"%"},
+  wwt_slu_la_N_cont        :{magnitude:"Percent",unit:"%"},
+  wwt_slu_la_EF            :{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},
+
+  //sludge landfilling
+  wwt_slu_lf_N_cont:{magnitude:"Percent", unit:"%"},
+  wwt_slu_lf_TVS:{magnitude:"Percent", unit:"%"},
+  wwt_slu_lf_MCF:{magnitude:"Ratio", unit:"ratio"},
 
   //wwo
+  wwo_KPI_GHG_sludge:{magnitude:"Mass",unit:"kgCO2eq"},
   wwo_bod_cont:{magnitude:"Mass",unit:"kg"},
   wwo_la_N_to_N2O:{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},
   wwo_ch4_efac_con:{magnitude:"Mass/Mass",unit:"kgCH4/kgBOD" },
@@ -93,9 +114,7 @@ let Info={
   wwc_n2o_efac_col:{magnitude:"Mass/Mass", unit:"kgN2O-N/kgN"},
 
   //inputs that are options instead of numeric
-  wwt_soil_typ     : {magnitude:"Option", table:"Soil type",                unit:"Soil type"},
   wwo_fslu_typ_lf  : {magnitude:"Option", table:"Type of faecal sludge",    unit:"Type of faecal sludge"},
-  wwt_slu_type     : {magnitude:"Option", table:"Type of landfill",         unit:"Type of landfill"},
   wwo_lf_type      : {magnitude:"Option", table:"Type of landfill",         unit:"Type of landfill"},
   wsa_fuel_typ     : {magnitude:"Option", table:"Fuel type",                unit:"Fuel type"},
   wst_fuel_typ     : {magnitude:"Option", table:"Fuel type",                unit:"Fuel type"},
@@ -382,7 +401,7 @@ let Info={
   wwo_ghg_avoided_landfil:{magnitude:"Mass",unit:"kgCO2eq"},
   wwo_ghg_avoided_reuse:{magnitude:"Mass",unit:"kgCO2eq"},
 
-  wwo_la_N_cont:   {magnitude:"Percent", unit:"%"},
+  wwo_la_N_cont:{magnitude:"Percent", unit:"%"},
   wwo_lf_N_cont:{magnitude:"Percent",unit:"%"},
   wwo_lf_TVS:{magnitude:"Percent",unit:"%"},
   wwo_mass_landapp:{magnitude:"Mass",    unit:"kg"},
@@ -448,9 +467,7 @@ let Info={
   wwt_reus_vol_trck:{magnitude:"Volume",unit:"L"},
   wwt_run_cost:{magnitude:"Currency",unit:"USD"},
   wwt_serv_pop:{magnitude:"People",unit:"people"},
-  wwt_slu_la_N_cont: {magnitude:"Percent", unit:"%"},
-  wwt_slu_lf_N_cont: {magnitude:"Percent", unit:"%"},
-  wwt_slu_lf_TVS:    {magnitude:"Percent", unit:"%"},
+  wwt_slu_la_N_cont:{magnitude:"Percent", unit:"%"},
   wwt_sta_head:{magnitude:"Head",unit:"m"},
   wwt_tn_infl:{magnitude:"Mass",unit:"kg"},
   wwt_total_m3:{magnitude:"Volume",unit:"m3"},

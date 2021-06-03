@@ -1,6 +1,14 @@
 /* ESTIMATIONS: INPUTS WITH EQUATIONS ASSOCIATED*/
 //maybe they can be moved inside the Ecam global class for consistency TODO
 let Estimations={
+  //wwt sludge revision june 2021
+  wwt_slu_sto_EF(substage){
+    let storage_time = substage.wwt_time_slu_sto; //days
+    if     (storage_time<5)  return 0;
+    else if(storage_time<20) return 3;
+    else                     return 5;
+  },
+
   //ws
     ws_nrg_cost(stage){ //energy cost
       let wsa = Global.Water.Abstraction .map(s=>s.wsa_nrg_cost).sum();
@@ -86,19 +94,6 @@ let Estimations={
       let F_NON_CON  = Cts.ct_fac_nc.value;
       let F_IND_COM  = Cts.ct_fac_ic.value;
       return Protein * P * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM;
-    },
-
-    wwt_slu_lf_TVS(substage){
-      let slu_disp=Tables.get_row('Type of sludge disposed',substage.wwt_slu_disp);
-      return slu_disp.TVS*100;
-    },
-    wwt_slu_la_N_cont(substage){
-      let slu_disp=Tables.get_row('Type of sludge disposed',substage.wwt_slu_disp);
-      return slu_disp.N_cont;
-    },
-    wwt_slu_lf_N_cont(substage){
-      let slu_disp=Tables.get_row('Type of sludge disposed',substage.wwt_slu_disp);
-      return slu_disp.N_cont;
     },
 
     //estimation for biogas produced

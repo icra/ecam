@@ -27,13 +27,14 @@ let Cts={
     unit:"gCO2/gC",
   },
 
-  ct_ch4_lf:{  value:50,    descr:"CH4 in landfill gas",                                    unit:"%", },
-  ct_DOCfra:{  value:80,    descr:"Decomposable organic fraction of raw wastewater solids", unit:"%",},
-  ct_d3y_lf:{  value:69.9,  descr:"Decomposed % in first 3 years",                          unit:"%"},
-  ct_lf_unc:{  value:0.9,   descr:"Landfill uncertainty factor",                            unit:"adimensional"},
-  ct_n2o_lf:{  value:1.5,   descr:"N2O landfill emissions for low C:N ratio",               unit:"%", },
-  ct_u_org_f:{ value:0.2,   descr:"Undecomposable organic fraction",                        unit:"no unit", },
-  ct_C_seqst:{ value:0.25,  descr:"Carbon sequestration rate",                              unit:"kgCO2eq/kg", },
+  ct_ch4_lf:{  value:50,    unit:"%",            descr:"CH4 in landfill gas, from Clean Development Mechanism, 2008",},
+  ct_DOCfra:{  value:80,    unit:"%",            descr:"Decomposable organic fraction of raw wastewater solids (80% from Brown et al., 2008 and Metcalf & Eddy, 2003)",},
+  ct_d3y_lf:{  value:69.9,  unit:"%",            descr:"Decomposed % in first 3 years = 69.9%, calculated from CDM equation (UNFCCC/CCNUCC, 2008) for warm, wet conditions",},
+  ct_lf_unc:{  value:0.9,   unit:"adimensional", descr:"Landfill uncertainty factor, UNFCCC/CCNUCC, 2008",},
+  ct_n2o_lf:{  value:1.5,   unit:"%",            descr:"N2O landfill emissions for low C:N ratio",},
+
+  ct_u_org_f:{ value:0.2,   unit:"no unit",      descr:"Undecomposable organic fraction",},
+  ct_C_seqst:{ value:0.25,  unit:"kgCO2eq/kg",   descr:"Carbon sequestration rate",},
 
   ct_cr_forN:{
     value:4,

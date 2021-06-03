@@ -423,6 +423,9 @@ let Questions={
       variables:[
         "wwt_mass_slu_sto",
         "wwt_time_slu_sto",
+        "wwt_slu_sto_TVS",
+        "wwt_slu_sto_f_CH4",
+        "wwt_slu_sto_EF",
       ],
       advanced:0,
       otherQuestions:[],
@@ -433,6 +436,9 @@ let Questions={
         "wwt_mass_slu_comp", //input
         "wwt_slu_comp_emis_treated_or_piles_covered", //input
         "wwt_slu_comp_solids_content", //input
+        "wwt_slu_comp_TVS", //input
+        "wwt_slu_comp_N_cont", //input
+
         "wwt_ghg_avoided_sequestration_composting", //output
       ],
       advanced:0,
@@ -443,6 +449,8 @@ let Questions={
       variables:[
         "wwt_mass_slu_inc",
         "wwt_temp_inc",
+        "wwt_slu_inc_N_cont",
+        "wwt_slu_inc_SNCR",
       ],
       advanced:0,
       otherQuestions:[ ],
@@ -450,10 +458,12 @@ let Questions={
 
     "wwt_land_application":{
       variables:[
-        "wwt_mass_slu_app",
-        "wwt_slu_la_N_cont",
-        "wwt_soil_typ",
-        "wwt_ghg_avoided_sequestration_landapp",
+        "wwt_mass_slu_app",//input
+        "wwt_slu_la_solids_content",//input
+        "wwt_slu_la_TVS",//input
+        "wwt_slu_la_N_cont",//input
+        "wwt_slu_la_EF",//input
+        "wwt_ghg_avoided_sequestration_landapp",//output
       ],
       advanced:0,
       otherQuestions:[ ],
@@ -461,11 +471,11 @@ let Questions={
 
     "wwt_landfilling":{
       variables:[
-        "wwt_mass_slu_land",
-        "wwt_slu_lf_N_cont",
-        "wwt_slu_lf_TVS",
-        "wwt_slu_type",
-        "wwt_ghg_avoided_sequestration_landfil",
+        "wwt_mass_slu_land",//input
+        "wwt_slu_lf_TVS",//input
+        "wwt_slu_lf_N_cont",//input
+        "wwt_slu_lf_MCF",//input
+        "wwt_ghg_avoided_sequestration_landfil",//output
       ],
       advanced:0,
       otherQuestions:[ ],

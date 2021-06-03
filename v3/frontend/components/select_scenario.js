@@ -19,6 +19,13 @@ let select_scenario=new Vue({
   },
 
   methods:{
+    toggle_settings_visibility_and_select(scenario){
+      if(scenario==Global){
+        this.are_settings_open ^= true;
+      }
+      this.set_current_scenario(scenario);
+    },
+
     count_substages(scenario){
       return Structure.filter(s=>s.sublevel).map(s=>{
         return scenario[s.level][s.sublevel].length;
@@ -350,7 +357,10 @@ let select_scenario=new Vue({
           >
             <tr>
               <!--select current scenario-->
-              <td style="background:white;padding:0">
+              <td
+                @click="toggle_settings_visibility_and_select(scenario)"
+                style="background:white;padding:0;cursor:pointer"
+              >
                 <img
                   class=icon
                   :src="'frontend/img/viti/select_scenario/icon-edit-system'+(scenario==Global?'':'-grey')+'.svg'"
@@ -359,7 +369,7 @@ let select_scenario=new Vue({
 
               <!--scenario name-->
               <td
-                @click="are_settings_open = (scenario==Global) ? are_settings_open=!are_settings_open: are_settings_open; set_current_scenario(scenario)"
+                @click="toggle_settings_visibility_and_select(scenario)"
                 style="padding:0;cursor:pointer"
               >
                 <div>

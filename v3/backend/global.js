@@ -955,9 +955,6 @@ class Waste_Treatment extends Substage{
     this.wwt_tn_infl = 0; //TN influent
     this.wwt_tn_effl = 0; //TN effluent
 
-    this.wwt_mass_slu = 0;
-    this.wwt_bod_slud = 0; //BOD removed as sludge
-
     this.wwt_ch4_efac_tre = 0;
     this.wwt_n2o_efac_tre = 0;
     this.wwt_ch4_efac_dis = 0;
@@ -1000,27 +997,51 @@ class Waste_Treatment extends Substage{
     //reuse
     this.wwt_reus_trck_typ = 0;
     this.wwt_reus_vol_trck = 0;
+    this.wwt_wr_N_rec      = 0; //N recovered
+    this.wwt_wr_P_rec      = 0; //P recovered
 
-    //composting of sludge
-    this.wwt_mass_slu_comp = 0;
+    //SLUDGE MANAGEMENT
+    this.wwt_mass_slu = 0; //raw sludge removed from wwtp as dry mass
+    this.wwt_bod_slud = 0; //BOD removed as sludge
+    this.wwt_slu_disp = 0; //type of sludge disposed
+
+    //sludge storage
+    this.wwt_mass_slu_sto  = 0; //kg of sludge stored
+    this.wwt_time_slu_sto  = 0; //days
+    this.wwt_slu_sto_TVS   = 0; //%
+    this.wwt_slu_sto_f_CH4 = 0; //% for CH4 potential
+    this.wwt_slu_sto_EF    = 0; //%
+
+    //sludge composting
+    this.wwt_mass_slu_comp                          = 0; //kg of sludge composted
     this.wwt_slu_comp_emis_treated_or_piles_covered = 0; //yes/no
-    this.wwt_slu_comp_solids_content = 0; //percentage
+    this.wwt_slu_comp_solids_content                = 0; //percentage
+    this.wwt_slu_comp_TVS                           = 0; //%
+    this.wwt_slu_comp_N_cont                        = 0; //%
 
-    this.wwt_wr_N_rec       = 0; //N recovered
-    this.wwt_wr_P_rec       = 0; //P recovered
-    this.wwt_slu_disp       = 0;
-    this.wwt_mass_slu_sto   = 0;
-    this.wwt_time_slu_sto   = 0;
+    //sludge incineration
     this.wwt_mass_slu_inc   = 0;
     this.wwt_temp_inc       = 1023;
+    this.wwt_slu_inc_N_cont = 0;
+    this.wwt_slu_inc_SNCR   = 0;
+
+    //sludge LA
     this.wwt_mass_slu_app   = 0;
-    this.wwt_soil_typ       = 0; //Option ("Fine" or "Coarse")
-    this.wwt_slu_la_N_cont  = 0; //Total Nitrogen (% of dry weight)
+    this.wwt_slu_la_solids_content = 0; //%
+    this.wwt_slu_la_TVS            = 0; //%
+    this.wwt_slu_la_N_cont         = 0; //%
+    this.wwt_slu_la_EF             = 0; //gN2O-N/gN
+
+    //sludge LF
     this.wwt_mass_slu_land  = 0;
-    this.wwt_slu_lf_N_cont  = 0;
     this.wwt_slu_lf_TVS     = 0;
-    this.wwt_slu_type       = 0;
+    this.wwt_slu_lf_N_cont  = 0;
+    this.wwt_slu_lf_MCF     = 1;
+
+    //sludge SP
     this.wwt_mass_slu_stock = 0;
+
+    //sludge truck transport
     this.wwt_trck_typ       = 0;
     this.wwt_vol_tslu       = 0;
   }
@@ -1189,64 +1210,56 @@ class Waste_Treatment extends Substage{
     }
 
     wwt_KPI_GHG_slu_storage(){
-      let sludge_type  = Tables.get_row('Type of sludge disposed',this.wwt_slu_disp);
-      let sludge_mass  = this.wwt_mass_slu_sto; //kg of sludge
-      let storage_time = this.wwt_time_slu_sto; //days
+      let sludge_mass = this.wwt_mass_slu_sto; //kg of sludge
+      let TVS         = this.wwt_slu_sto_TVS/100; //gTVS/gSludge
+      let TVS_to_OC   = Cts.ct_oc_vs.value; //gOC/gTVS
+      let OC_to_CH4   = Cts.ct_ch4_oc.value; //gCH4/gOC
+      let f_CH4       = this.wwt_slu_sto_f_CH4/100; //ratio for CH4 potential
 
-      let ch4_potential = (function(){
-        let TVS   = sludge_type.TVS; //gTVS/gSludge
-        let OC    = Cts.ct_oc_vs.value; //gOC/gTVS
-        let f_ch4 = sludge_type.f_ch4; //??
-        return sludge_mass*f_ch4*TVS*OC*(4/3);
-      })();
+      //max CH4 that could be released
+      let ch4_potential = sludge_mass*TVS*TVS_to_OC*OC_to_CH4*f_CH4; //kgCH4 potential
 
-      let f=(function(){
-        if(storage_time > 5 && storage_time < 20){
-          return 0.03;
-        }else if(storage_time >= 20){
-          return 0.05;
-        }else{
-          return 0;
-        }
-      })();
+      //emission factor
+      let CH4_EF = this.wwt_slu_sto_EF/100; //gCH4 released / gCH4 potential
 
+      //gases
       let co2   = 0;
       let n2o   = 0;
-      let ch4   = f*ch4_potential*Cts.ct_ch4_eq.value;
+      let ch4   = ch4_potential*CH4_EF*Cts.ct_ch4_eq.value;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
 
     wwt_KPI_GHG_slu_composting(){
-      let emissions_are_treated_or_piles_are_covered = this.wwt_slu_comp_emis_treated_or_piles_covered; //boolean
       let sludge_mass = this.wwt_mass_slu_comp; //kg of sludge
-      let solids_content_of_compost = this.wwt_slu_comp_solids_content; //percentage gSolids/gSludge
-      let sludge_type = Tables.get_row('Type of sludge disposed',this.wwt_slu_disp); //digested or non-digested
+      let emissions_are_treated_or_piles_are_covered = this.wwt_slu_comp_emis_treated_or_piles_covered; //yes/no
+      let solids_content_of_compost = this.wwt_slu_comp_solids_content; //% 
 
-      let sludge_to_TVS = sludge_type.TVS; //gTVS/gSludge
-      let sludge_to_ON  = sludge_type.N_cont/100; //gN/gSludge
-      let TVS_to_OC     = Cts.ct_oc_vs.value;  //0.56 gOC/gTVS
-      let OC_to_CH4     = Cts.ct_ch4_oc.value; //1.33 gCH4/gOC
-      let ratio_up      = Cts.ct_ch4_up.value; //0.025 ratio for uncovered pile
+      let TVS       = this.wwt_slu_comp_TVS/100; //gTVS/gSludge
+      let N_cont    = this.wwt_slu_comp_N_cont/100; //gN/gSludge
+      let TVS_to_OC = Cts.ct_oc_vs.value;  //0.56 gOC/gTVS
 
       //gases
       let co2 = 0;
       let ch4 = (function(){
         if(emissions_are_treated_or_piles_are_covered){return 0}
         if(solids_content_of_compost>55){return 0}
-        return sludge_mass*sludge_to_TVS*TVS_to_OC*ratio_up*OC_to_CH4*Cts.ct_ch4_eq.value;
+
+        let OC_to_CH4 = Cts.ct_ch4_oc.value; //1.33 gCH4/gOC
+        let ratio_up  = Cts.ct_ch4_up.value; //0.025 ratio for uncovered pile
+        return sludge_mass*TVS*TVS_to_OC*ratio_up*OC_to_CH4*Cts.ct_ch4_eq.value;
       })();
 
       let n2o = (function(){
-        let C_content = sludge_mass*sludge_to_TVS*TVS_to_OC; //kgC
-        let N_content = sludge_mass*sludge_to_ON; //kgN
+        let C_content = sludge_mass*TVS*TVS_to_OC; //kgC
+        let N_content = sludge_mass*N_cont; //kgN
         let ratio_CN  = C_content/N_content||0;
 
-        if(ratio_CN>=30){return 0}
+        if(ratio_CN>30){return 0}
         if(solids_content_of_compost>55){return 0}
 
         let factor_for_low_CN_ratio = Cts.ct_n2o_lf.value/100;
-        return sludge_mass*sludge_to_ON*factor_for_low_CN_ratio*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+        return sludge_mass*N_cont*factor_for_low_CN_ratio*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       })();
 
       let total = co2+ch4+n2o;
@@ -1254,17 +1267,28 @@ class Waste_Treatment extends Substage{
     }
 
     wwt_KPI_GHG_slu_incineration(){
-      let sludge_mass = this.wwt_mass_slu_inc; //kg
-      let temperature = this.wwt_temp_inc;     //ºC
+      let sludge_mass = this.wwt_mass_slu_inc;       //kg of sludge incinerated
+      let Tf          = this.wwt_temp_inc;           //K
+      let N_cont      = this.wwt_slu_inc_N_cont/100; //gN/gSludge
+      let SNCR        = this.wwt_slu_inc_SNCR;       //yes/no
 
+      //if Tf < 750ºC, use 750 ºC (1023 K)
+      if(Tf < 1023){ Tf = 1023 }
+
+      //gases
       let co2 = 0;
-      let ch4 = (4.85/1e5)*sludge_mass*Cts.ct_ch4_eq.value;
+      let ch4 = (4.85e-5)*sludge_mass*Cts.ct_ch4_eq.value;
       let n2o = (function(){
-        if(temperature > 1152){
-          return 0;
-        }else{
-          return 0.03*sludge_mass*(161.3-0.14*Math.max(1023,temperature))*0.01*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
-        }
+        //n = % of total N that is emitted as N2O (suzuki et al 2003)
+        let n = (161.3-0.14*Tf)/100; //gN2O/gN
+        if(n<0) return 0;
+
+        let emission = sludge_mass*N_cont*n*Cts.ct_n2o_eq.value; //kgCO2eq
+
+        //increase N2O emissions by 20% if SNCR is used
+        if(SNCR) emission *= 1.2;
+
+        return emission;
       })();
 
       let total = co2+ch4+n2o;
@@ -1272,48 +1296,58 @@ class Waste_Treatment extends Substage{
     }
 
     wwt_KPI_GHG_slu_land_application(){
-      let sludge_mass = this.wwt_mass_slu_app; //kg sludge
-      let sludge_type = Tables.get_row('Type of sludge disposed',this.wwt_slu_disp);
-      let C_content = (function(){
-        let TVS = sludge_type.TVS; //gTVS/gSludge
-        let OC = Cts.ct_oc_vs.value; //gOC/gTVS
-        return sludge_mass*TVS*OC; //gOC
-      })(); //gOC
-      let N_content = sludge_mass*this.wwt_slu_la_N_cont/100;
-      let ratio_CN = C_content/N_content || 0;
-      if(ratio_CN>=30){return {total:0,co2:0,ch4:0,n2o:0};}
-      let f_la = Tables.get_row('Soil type',this.wwt_soil_typ).f_la; //??
+      let sludge_mass    = this.wwt_mass_slu_app; //kg sludge
+      let solids_content = this.wwt_slu_la_solids_content; //%
+      let TVS            = this.wwt_slu_la_TVS/100; //gTVS/gSludge
+      let N_cont         = this.wwt_slu_la_N_cont/100; //gN/gSludge
+      let TVS_to_OC      = Cts.ct_oc_vs.value; //gOC/gTVS
+      let EF             = this.wwt_slu_la_EF; //gN2O-N/gN
 
-      let co2   = 0;
-      let ch4   = 0;
-      let n2o   = N_content*f_la*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      //gases
+      let co2 = 0;
+      let ch4 = 0;
+      let n2o = (function(){
+        //calculate ratio C:N
+        let C_content = sludge_mass*TVS*TVS_to_OC; //kgC
+        let N_content = sludge_mass*N_cont;        //kgN
+        let ratio_CN  = C_content/N_content||0;
+
+        if(ratio_CN>30){return 0}
+
+        let emission = sludge_mass*N_cont*EF*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+
+        //if biosolids are >80%, N2O emissions are reduced by 50%
+        if(solids_content>80) emission *= 0.5;
+
+        return emission;
+      })(); 
+
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
 
     wwt_KPI_GHG_slu_landfilling(){
       let sludge_mass = this.wwt_mass_slu_land;
-      let sludge_type = Tables.get_row('Type of sludge disposed',this.wwt_slu_disp);
       let TVS         = this.wwt_slu_lf_TVS/100; //gTVS/gSludge
-      let ratio       = Tables.get_row('Type of landfill',this.wwt_slu_type).ratio;
-      let N_content   = sludge_mass*this.wwt_slu_lf_N_cont/100; //gN
-      let OC          = Cts.ct_oc_vs.value; //gOC/gTVS
+      let N_cont      = this.wwt_slu_lf_N_cont/100; //gN/gSludge
+      let MCF         = this.wwt_slu_lf_MCF; //methane correction for anaerobic managed landfills
+      let TVS_to_OC   = Cts.ct_oc_vs.value; //gOC/gTVS
 
       let co2 = 0;
-      let ch4 = ratio*(function(){
-        let uncertainty   = Cts.ct_lf_unc.value;
-        let OC_to_CH4     = Cts.ct_ch4_oc.value; //gCH4/gOC
+      let ch4 = (function(){
+        let uncertainty   = Cts.ct_lf_unc.value; //UNFCCC/CCNUC 2008
+        let OC_to_CH4     = Cts.ct_ch4_oc.value;
         let CH4_in_lf_gas = Cts.ct_ch4_lf.value/100;
         let DOC_fra       = Cts.ct_DOCfra.value/100;
         let dec_3year     = Cts.ct_d3y_lf.value/100;
-        return uncertainty*sludge_mass*TVS*OC*OC_to_CH4*CH4_in_lf_gas*DOC_fra*dec_3year*Cts.ct_ch4_eq.value;
+        return sludge_mass*TVS*TVS_to_OC*uncertainty*OC_to_CH4*CH4_in_lf_gas*DOC_fra*dec_3year*MCF*Cts.ct_ch4_eq.value;
       })();
-      let n2o = ratio*(function(){
-        let C_content = sludge_mass*TVS*OC; //gOC
-        let ratio_CN = C_content/N_content || 0;
-        if(ratio_CN>=30){return 0;}
+      let n2o = (function(){
+        let C_cont = TVS*TVS_to_OC; //gOC/gSludge
+        let ratio_CN = C_cont/N_cont||0; //gOC/gN
+        if(ratio_CN>30){return 0;}
         let factor_for_low_CN_ratio = Cts.ct_n2o_lf.value/100;
-        return N_content*factor_for_low_CN_ratio*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+        return sludge_mass*N_cont*factor_for_low_CN_ratio*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       })();
 
       let total = co2+ch4+n2o;
@@ -1321,10 +1355,17 @@ class Waste_Treatment extends Substage{
     }
 
     wwt_KPI_GHG_slu_stockpilling(){
-      let sludge_mass =  this.wwt_mass_slu_stock;
-      let co2   = sludge_mass*90.3/1000;
-      let ch4   = 0;
-      let n2o   = 0;
+      let sludge_mass = this.wwt_mass_slu_stock; //kg biosolids
+
+      //ghg emission rates from Majumder et al., 2014 (table 3)
+      let CO2_rate = 30.1/1000; //kgCO2eq/kgSludge/year for <1yo stockpiles
+      let CH4_rate = 0.2 /1000; //kgCO2eq/kgSludge/year for <1yo stockpiles
+      let N2O_rate = 60  /1000; //kgCO2eq/kgSludge/year for <1yo stockpiles
+
+      //CO2eq emissions
+      let co2   = sludge_mass*CO2_rate;
+      let ch4   = sludge_mass*CH4_rate;
+      let n2o   = sludge_mass*N2O_rate;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
@@ -1428,8 +1469,8 @@ class Waste_Treatment extends Substage{
     }
     wwt_ghg_avoided_sequestration_landfil(){
       let sludge_mass = this.wwt_mass_slu_land;
-      let TVS = Tables.get_row('Type of sludge disposed',this.wwt_slu_disp).TVS;
-      return sludge_mass*(TVS)*(0.56)*(0.2)*(44/12);
+      let TVS = Tables.get_row('Type of sludge disposed',this.wwt_slu_disp).TVS/100;
+      return sludge_mass*TVS*(0.56)*(0.2)*(44/12);
     }
 
   //---
@@ -1801,21 +1842,22 @@ class Waste_Onsite extends Substage{
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
+
     //landfill
     wwo_KPI_GHG_landfil(){
       let sludge_mass = this.wwo_mass_landfil;
-      let ratio       = Tables.get_row('Type of landfill',this.wwo_lf_type).ratio;
+      let MCF         = Tables.get_row('Type of landfill',this.wwo_lf_type).MCF;
       let N_content   = sludge_mass*this.wwo_lf_N_cont/100;
       let TVS         = this.wwo_lf_TVS/100; //gTVS/gSludge
-      let n2o         = ratio*N_content*Cts.ct_n2o_lf.value/100*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value
-      let ch4 = ratio*(function(){
+      let n2o         = N_content*Cts.ct_n2o_lf.value/100*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value
+      let ch4 = (function(){
         let OC            = Cts.ct_oc_vs.value; //gOC/gTVS
         let DOC_fra       = Cts.ct_DOCfra.value/100;
         let uncertainty   = Cts.ct_lf_unc.value;
         let OC_to_CH4     = Cts.ct_ch4_oc.value; //gCH4/gOC
         let CH4_in_lf_gas = Cts.ct_ch4_lf.value/100;
         let dec_3year     = Cts.ct_d3y_lf.value/100;
-        return sludge_mass*TVS*OC*DOC_fra*uncertainty*OC_to_CH4*CH4_in_lf_gas*dec_3year*Cts.ct_ch4_eq.value;
+        return sludge_mass*TVS*OC*DOC_fra*uncertainty*OC_to_CH4*CH4_in_lf_gas*dec_3year*MCF*Cts.ct_ch4_eq.value;
       })();
       let co2 = 0;
       let total = co2 + n2o + ch4;

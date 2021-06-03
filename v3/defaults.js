@@ -45,7 +45,12 @@ if(debug){
 
 //initial page displayed
 if(debug){
-  //go_to('Waste','Onsite'); //view inventory stage
-  //variable.view('wwo_bod_rmvd'); //view variable detailed info
-  ecam.show('summary_ghg'); //view page
+  go_to('Waste','Treatment'); //"inventory"
+  //variable.view('wwo_bod_rmvd'); //variable detailed info
+  //ecam.show('summary_ghg'); //page
+
+  //TEMPORAL TODO
+  tier_b.filters_on=true;
+  tier_b.filters_active["Sludge Management"]=true;
 }
+
