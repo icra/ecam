@@ -57,7 +57,7 @@ let landing = new Vue({
         </div>
         <div>
           <img
-            src="frontend/img/landing/water_cycle.png"
+            src="frontend/img/landing/water_cycle.svg"
             style="width:600px"
           >
         </div>

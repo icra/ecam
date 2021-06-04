@@ -1,16 +1,26 @@
 /*
-  UNFCCC categories: grouping emissions based on origin
+  IPCC categories: grouping emissions based on origin
   ------------------------------
-  unfccc_1A1: Energy - Electricity and Heat
-  unfccc_1A3: Energy - Transport
-  unfccc_5A:  Waste - Solid Waste Disposal
-  unfccc_5B:  Waste - Biological Treatment of Solid Waste
-  unfccc_5C:  Waste - Incineration
-  unfccc_5D:  Waste - Wastewater treatment and Discharge
+  ipcc_1A1: Energy - Electricity and Heat
+  ipcc_1A3: Energy - Transport
+  ipcc_5A:  Waste - Solid Waste Disposal
+  ipcc_5B:  Waste - Biological Treatment of Solid Waste
+  ipcc_5C:  Waste - Incineration
+  ipcc_5D:  Waste - Wastewater treatment and Discharge
+
+  NEW TBD TODO WORK IN PROGRESS
+  volume 5, chapter 6  -- freshwater
+  volume 4, chapter 11 -- agricultural soils
+  volume 5, chapter 3  -- land disposal of wastewater
+  volume 5, chapter 2  -- sludge treatment offsite
+  volume 5, chapter 5  -- incineration
+  volume 5, chapter 4  -- composting
+  volume 5, chapter 3  -- landfilling
+  volume 4, chapter 11 -- land application
 */
-let UNFCCC={
-  //unfccc_1A1: Energy - Electricity and Heat
-  unfccc_1A1:{
+let IPCC_categories={
+  //1A1: Energy - Electricity and Heat
+  ipcc_1A1:{
     description:"Energy - Electricity and Heat",
     color:"rgba(247,165,7,0.47)",
     emissions(scenario){
@@ -35,8 +45,8 @@ let UNFCCC={
     },
   },
 
-  //unfccc_1A3: Energy - Transport
-  unfccc_1A3:{
+  //ipcc_1A3: Energy - Transport
+  ipcc_1A3:{
     description:"Energy - Transport",
     color:"orange",
     emissions(scenario){
@@ -49,8 +59,8 @@ let UNFCCC={
     },
   },
 
-  //unfccc_5A: Waste - Solid Waste Disposal
-  unfccc_5A:{
+  //ipcc_5A: Waste - Solid Waste Disposal
+  ipcc_5A:{
     description:"Waste - Solid Waste Disposal",
     color:"#30a5d8",
     emissions(scenario){
@@ -67,8 +77,8 @@ let UNFCCC={
     },
   },
 
-  //unfccc_5B: Waste - Biological Treatment of Solid Waste
-  unfccc_5B:{
+  //ipcc_5B: Waste - Biological Treatment of Solid Waste
+  ipcc_5B:{
     description:"Waste - Biological Treatment of Solid Waste",
     color:"#46ba55",
     emissions(scenario){
@@ -80,8 +90,8 @@ let UNFCCC={
     },
   },
 
-  //unfccc_5C: Waste - Incineration
-  unfccc_5C:{
+  //ipcc_5C: Waste - Incineration
+  ipcc_5C:{
     description:"Waste - Incineration",
     color:"red",
     emissions(scenario){
@@ -91,8 +101,8 @@ let UNFCCC={
     },
   },
 
-  //unfccc_5D: Waste - Wastewater treatment and Discharge
-  unfccc_5D:{
+  //ipcc_5D: Waste - Wastewater treatment and Discharge
+  ipcc_5D:{
     description:"Waste - Wastewater treatment and Discharge",
     color:"#85077c",
     emissions(scenario){

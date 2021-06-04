@@ -28,7 +28,7 @@ let summary_ghg=new Vue({
     Global,
     Structure,
     Languages,
-    UNFCCC,
+    IPCC_categories,
     Formulas,
   },
 
@@ -166,14 +166,14 @@ let summary_ghg=new Vue({
           Structure.filter(s=>s.sublevel).map(s=>s.color),
         );
 
-        Charts.draw_pie_chart('chart_unfccc',
-          Object.keys(UNFCCC).map(key=>{
+        Charts.draw_pie_chart('chart_ipcc_categories',
+          Object.keys(IPCC_categories).map(key=>{
             let total_ghg = Global.TotalGHG().total;
             let label = "";
-            let value = 100*UNFCCC[key].emissions(Global)/total_ghg;
+            let value = 100*IPCC_categories[key].emissions(Global)/total_ghg;
             return {label,value};
           }),
-          Object.values(UNFCCC).map(obj=>obj.color),
+          Object.values(IPCC_categories).map(obj=>obj.color),
         );
 
         Charts.draw_pie_chart('pie_chart_ws_serv_pop',
@@ -647,11 +647,11 @@ let summary_ghg=new Vue({
             <div class=chart_container style="border-right:none">
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
-                GHG emissions by UNFCCC category
+                GHG emissions by IPCC category
               </div>
               <div class=flex>
                 <table class=legend>
-                  <tr v-for="[key,obj] in Object.entries(UNFCCC)" :title="key">
+                  <tr v-for="[key,obj] in Object.entries(IPCC_categories)" :title="key">
                     <td :style="{background:obj.color}"></td>
                     <td>
                       {{obj.description}}
@@ -662,7 +662,7 @@ let summary_ghg=new Vue({
                     <td class=unit v-html="current_unit_ghg.prettify()"></td>
                   </tr>
                 </table>
-                <div id=chart_unfccc></div>
+                <div id=chart_ipcc_categories></div>
               </div>
             </div>
             -->

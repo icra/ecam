@@ -167,6 +167,17 @@ let Tables={
     {name:"Digested",                f_ch4:6,  N_cont:4, TVS:51},
   ],
 
+  //for land application and landfilling
+  "Type of faecal sludge":[
+    {name:"Type of faecal sludge undefined", N_content:0.00, TVS:0,  total_solids:0.00},
+    {name:"Untreated faecal sludge",         N_content:0.24, TVS:70, total_solids:0.04},
+    {name:"Treated faecal sludge",           N_content:3.00, TVS:40, total_solids:0.22},
+    {name:"Pit humus",                       N_content:4.00, TVS:65, total_solids:0.07},
+    {name:"Dehydrated faeces",               N_content:3.00, TVS:70, total_solids:0.27},
+    {name:"Compost",                         N_content:3.00, TVS:80, total_solids:0.08},
+    {name:"Septic tank sludge",              N_content:0.03, TVS:60, total_solids:0.02},
+  ],
+
   "Type of landfill":[
     {name:"Landfill",                     MCF:1},
     {name:"Landfill (with gas recovery)", MCF:0.02},
@@ -200,16 +211,6 @@ let Tables={
     {name:"yes"},
   ],
 
-  //for land application and landfilling
-  "Type of faecal sludge":[
-    {name:"Type of faecal sludge undefined", N_content:0.00, TVS:0.000, total_solids:0.00},
-    {name:"Untreated faecal sludge",         N_content:0.24, TVS:0.700, total_solids:0.04},
-    {name:"Treated faecal sludge",           N_content:3.00, TVS:0.400, total_solids:0.22},
-    {name:"Pit humus",                       N_content:4.00, TVS:0.650, total_solids:0.07},
-    {name:"Dehydrated faeces",               N_content:3.00, TVS:0.700, total_solids:0.27},
-    {name:"Compost",                         N_content:3.00, TVS:0.800, total_solids:0.08},
-    {name:"Septic tank sludge",              N_content:0.03, TVS:0.600, total_solids:0.02},
-  ],
 };
 
 //get row object by "table" (string) and "index" (integer)

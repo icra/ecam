@@ -301,34 +301,36 @@ let select_scenario=new Vue({
         <summary style="font-size:large">List of assessments</summary>
 
         <!--select gwp-->
-        <div style=" background:#f6f6f6; padding:1em; " >
-          <div
-            style="
-              display:flex;
-              align-items:center;
-            "
-          >
-            <div style="padding-right:2em">
-              <b>Select Global Warming Potential Report</b>
-            </div>
+        <div
+          style="
+            display:flex;
+            align-items:center;
+            background:#f6f6f6;
+            padding:1em;
+            justify-content:flex-end;
+            font-size:smaller;
+          "
+        >
+          <div style="padding-right:1em">
+            <b>Select Global Warming Potential Report</b>
+          </div>
 
-            <!--select gwp report which defines gwp values-->
-            <div style="padding-right:2em">
-              <select
-                v-model="Configuration.gwp_reports_index"
-                @change="set_constants_from_gwp_report()"
-              >
-                <option v-for="report,i in GWP_reports" :value="i">
-                  {{report.report}}
-                </option>
-              </select>
-            </div>
+          <!--select gwp report which defines gwp values-->
+          <div style="padding-right:1em">
+            <select
+              v-model="Configuration.gwp_reports_index"
+              @change="set_constants_from_gwp_report()"
+            >
+              <option v-for="report,i in GWP_reports" :value="i">
+                {{report.report}}
+              </option>
+            </select>
+          </div>
 
-            <div style="padding-right:2em">
-              <button onclick="ecam.show('gwp_table')">
-                More info
-              </button>
-            </div>
+          <div style="padding-right:2em">
+            <button onclick="ecam.show('gwp_table')">
+              More info
+            </button>
           </div>
         </div>
 

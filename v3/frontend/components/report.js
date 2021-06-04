@@ -14,7 +14,7 @@ let report = new Vue({
     Structure,
     GWP_reports,
     Languages,
-    UNFCCC,
+    IPCC_categories,
   },
 
   methods:{
@@ -103,14 +103,14 @@ let report = new Vue({
           width, height,
         );
 
-        Charts.draw_pie_chart('chart_unfccc',
-          Object.keys(UNFCCC).map(key=>{
+        Charts.draw_pie_chart('chart_ipcc_categories',
+          Object.keys(IPCC_categories).map(key=>{
             let total_ghg = Global.TotalGHG().total;
             let label = "";
-            let value = 100*UNFCCC[key].emissions(Global)/total_ghg;
+            let value = 100*IPCC_categories[key].emissions(Global)/total_ghg;
             return {label,value};
           }),
-          Object.values(UNFCCC).map(obj=>obj.color),
+          Object.values(IPCC_categories).map(obj=>obj.color),
         );
       //--
 
@@ -380,17 +380,17 @@ let report = new Vue({
                 <!--
                 <div class=chart_container>
                   <div class=chart_title>
-                    GHG emissions by UNFCCC category
+                    GHG emissions by IPCC category
                   </div>
                   <div class=flex>
                     <table class=legend>
-                      <tr v-for="[key,obj] in Object.entries(UNFCCC)">
+                      <tr v-for="[key,obj] in Object.entries(IPCC_categories)">
                         <td :style="{color:obj.color}">
                           <div>{{ obj.description }}</div>
                         </td>
                       </tr>
                     </table>
-                    <div id=chart_unfccc></div>
+                    <div id=chart_ipcc_categories></div>
                   </div>
                 </div>
                 -->

@@ -41,10 +41,14 @@ let Info={
   wwt_slu_la_N_cont        :{magnitude:"Percent",unit:"%"},
   wwt_slu_la_EF            :{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},
 
-  //sludge landfilling
+  //sludge landfilling wwt
   wwt_slu_lf_N_cont:{magnitude:"Percent", unit:"%"},
   wwt_slu_lf_TVS:{magnitude:"Percent", unit:"%"},
   wwt_slu_lf_MCF:{magnitude:"Ratio", unit:"ratio"},
+
+  //sludge landfilling wwo
+  wwo_lf_MCF:{magnitude:"Ratio", unit:"ratio"},
+
 
   //wwo
   wwo_KPI_GHG_sludge:{magnitude:"Mass",unit:"kgCO2eq"},
@@ -81,13 +85,13 @@ let Info={
   wwo_KPI_GHG_biog_leaked:{magnitude:"Mass",unit:"kgCO2eq"},
   wwo_nrg_biog_val:{magnitude:"Energy",unit:"kWh"},
 
-	//UNFCCC categories
-	unfccc_1A1:{magnitude:"Mass",unit:"kgCO2eq"},
-	unfccc_1A3:{magnitude:"Mass",unit:"kgCO2eq"},
-	unfccc_5A :{magnitude:"Mass",unit:"kgCO2eq"},
-	unfccc_5B :{magnitude:"Mass",unit:"kgCO2eq"},
-	unfccc_5C :{magnitude:"Mass",unit:"kgCO2eq"},
-	unfccc_5D :{magnitude:"Mass",unit:"kgCO2eq"},
+	//IPCC categories
+	ipcc_1A1:{magnitude:"Mass",unit:"kgCO2eq"},
+	ipcc_1A3:{magnitude:"Mass",unit:"kgCO2eq"},
+	ipcc_5A :{magnitude:"Mass",unit:"kgCO2eq"},
+	ipcc_5B :{magnitude:"Mass",unit:"kgCO2eq"},
+	ipcc_5C :{magnitude:"Mass",unit:"kgCO2eq"},
+	ipcc_5D :{magnitude:"Mass",unit:"kgCO2eq"},
 
   //costs
   ws_nrg_cost:{magnitude:"Currency",unit:"USD"},
@@ -114,8 +118,6 @@ let Info={
   wwc_n2o_efac_col:{magnitude:"Mass/Mass", unit:"kgN2O-N/kgN"},
 
   //inputs that are options instead of numeric
-  wwo_fslu_typ_lf  : {magnitude:"Option", table:"Type of faecal sludge",    unit:"Type of faecal sludge"},
-  wwo_lf_type      : {magnitude:"Option", table:"Type of landfill",         unit:"Type of landfill"},
   wsa_fuel_typ     : {magnitude:"Option", table:"Fuel type",                unit:"Fuel type"},
   wst_fuel_typ     : {magnitude:"Option", table:"Fuel type",                unit:"Fuel type"},
   wsd_fuel_typ     : {magnitude:"Option", table:"Fuel type",                unit:"Fuel type"},
@@ -132,7 +134,6 @@ let Info={
   wsd_pmp_size     : {magnitude:"Option", table:"Pump size",                unit:"Pump size"},
   wst_treatment    : {magnitude:"Option", table:"Potabilization chain",     unit:"Potabilization chain"},
   wwo_flooding     : {magnitude:"Option", table:"Yes/No",                   unit:"Yes/No"},
-  wwt_slu_disp     : {magnitude:"Option", table:"Type of sludge disposed",  unit:"Type of sludge disposed"},
 
   //numeric variables
   conv_kwh_co2:{magnitude:"Conversion",unit:"kgCO2/kWh"},
@@ -367,7 +368,10 @@ let Info={
   wwo_KPI_std_nrg_cons:{magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m"},
   wwo_KPI_std_nrg_newp:{magnitude:"Energy/Volume/Head",unit:"kWh/m3/100m"},
   wwo_KPI_un_head_loss:{magnitude:"Headloss/Distance",unit:"m/km"},
-  wwo_N_urine: {magnitude:"Mass",unit:"kg"},
+
+  wwo_N_urine:{magnitude:"Mass",unit:"kg"},
+  wwo_N_dumping:{magnitude:"Mass",unit:"kg"},
+  wwo_N_urine_EF:{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},
 
   wwo_bod_conc_fs:{magnitude:"Concentration", unit:"kg/m3" },
   wwo_bod_effl:{magnitude:"Mass",  unit:"kg" },

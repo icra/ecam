@@ -1,12 +1,37 @@
 {
 "#below":"below",
 
+"#Documentation":"Documentation",
+"#Flow diagram":"Flow diagram",
+"#Data tables":"Data tables",
+"#FAQs":"FAQs",
+
+"#System input volume":"System input volume",
+"#Authorised consumption":"Authorised consumption",
+"#Billed authorised consumption":"Billed authorised consumption",
+"#Billed water exported":"Billed water exported",
+"#Revenue water":"Revenue water",
+"#Billed metered consumption":"Billed metered consumption",
+"#Billed unmetered consumption":"Billed unmetered consumption",
+"#Unbilled authorised consumption":"Unbilled authorised consumption",
+"#Unbilled metered consumption":"Unbilled metered consumption",
+"#Non-revenue water":"Non-revenue water",
+"#Unbilled unmetered consumption":"Unbilled unmetered consumption",
+"#Water losses":"Water losses",
+"#Apparent losses":"Apparent losses",
+"#Unauthorized consumption":"Unauthorized consumption",
+"#Customer meter inaccuracies and data handling errors":"Customer meter inaccuracies and data handling errors",
+"#Real losses":"Real losses",
+"#Leakage on transmissions and distribution mains":"Leakage on transmissions and distribution mains",
+"#Leakage and overflows at storage tanks":"Leakage and overflows at storage tanks",
+"#Leakage on service connections up to point of customer meter":"Leakage on service connections up to point of customer meter",
+
 "#Type of sludge disposed":"Type of sludge disposed",
 
 "#wwt_slu_sto_f_CH4_descr":"CH4 potential factor",
 
 "#wwt_slu_sto_TVS_descr":"Total Volatile Solids (TVS) content of sludge stored (% of dry weight)",
-"#wwt_slu_sto_EF_descr":"Emission factor due to storage",
+"#wwt_slu_sto_EF_descr":"Emission factor due to storage (estimate with storage time)",
 "#wwt_slu_sto_EF_expla":"Emission factor due to storage. Can be estimated with the storage time",
 
 "#wwt_slu_comp_TVS_descr":"Total Volatile Solids (TVS) content of sludge composted (% of dry weight)",
@@ -25,10 +50,8 @@
 "#wwt_slu_lf_MCF_descr":"Methane correction for anaerobic managed landfills (default=1)",
 "#wwt_slu_lf_MCF_expla":"Methane correction for anaerobic managed landfills (default=1, UNFCCC/CCNUCC, 2008)",
 
-
-
-
-
+"#wwo_lf_MCF_descr":"Methane correction for anaerobic managed landfills (default=1)",
+"#wwo_lf_MCF_expla":"Methane correction for anaerobic managed landfills (default=1, UNFCCC/CCNUCC, 2008)",
 
 "#wwo_la_N_cont_descr":"N content of sludge sent to land application (% of dry weight)",
 
@@ -402,8 +425,6 @@
 "#wwo_tn_effl_descr":"Total Nitrogen load in the effluent",
 "#wwo_tn_effl_descr":"Total Nitrogen load in the effluent during the assessment period",
 
-"#wwo_fslu_typ_lf_descr":"Type of faecal sludge disposed",
-"#wwo_fslu_typ_lf_expla":"Type of (faecal) sludge sent to landfilling",
 "#wwo_coll_len_descr":"Collector length",
 
 "#wwo_vol_fuel_descr":"Volume of fuel consumed",
@@ -434,6 +455,12 @@
 "#wwo_producing_biogas":"Are you producing biogas from anaerobic digestion",
 "#wwo_urine":"Do you want to assess land application of urine",
 "#wwo_N_urine_descr":"Total Nitrogen in urine applied to land",
+
+"#wwo_N_dumping_descr":"Total Nitrogen load in dumped faecal sludge",
+
+"#wwo_N_urine_EF_descr":"N2O emission factor (urine applied to land)",
+"#wwo_N_urine_EF_expla":"EF for N additions from mineral fertilisers, organic amendments and crop residues, and N mineralised from mineral soil as a result of loss of soil carbon [kgN2O–N/kgN] ",
+
 "#wwo_reuse":"Do you want to assess GHG avoided from reusing nutrients",
 
 "#wwo_reused_N_descr":"Total Nitrogen reused that displaces synthetic fertilizer",
@@ -1430,8 +1457,6 @@
 "#wwt_pumping_eff":"<span title='Onsite data gathering required'>Do you want to evaluate electromechanical efficiency of pump</span>",
 "#wwt_serv_pop_descr":"Serviced population",
 "#wwt_serv_pop_expla":"Serviced population is referred to the number of inhabitants (or inhabitant equivalents), within the area of service managed by the utility, which are connected to a sewer system and which wastewater are receiving treatment in a WWTP.",
-"#wwt_slu_disp_descr":"Sludge type disposed of",
-"#wwt_slu_disp_expla":"Sludge type disposed of",
 "#wwt_slu_stor_descr":"Sludge storage time",
 "#wwt_slu_stor_expla":"Sludge storage time",
 "#wwt_slu_storage":"[SM] Evaluate sludge storage in WWTP",

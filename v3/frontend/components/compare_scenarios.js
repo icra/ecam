@@ -246,14 +246,14 @@ let compare_scenarios=new Vue({
         }
 
         //Chart.js - bar chart: total ghg by stage
-        if(document.getElementById('bar_chart_ghg_by_unfccc')){
-          this.charts.bar_chart_ghg_by_unfccc = new Chart('bar_chart_ghg_by_unfccc',{
+        if(document.getElementById('bar_chart_ghg_by_ipcc_categories')){
+          this.charts.bar_chart_ghg_by_ipcc_categories = new Chart('bar_chart_ghg_by_ipcc_categories',{
             type:'bar',
             data:{
               labels:this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
               datasets:[
                 //column subdivisions
-                ...Object.entries(UNFCCC).map(([key,obj])=>{
+                ...Object.entries(IPCC_categories).map(([key,obj])=>{
                   return{
                     label:`${obj.description} (${this.current_unit_ghg})`,
                     data:this.scenarios_compared.map(scenario=>{
@@ -341,7 +341,7 @@ let compare_scenarios=new Vue({
         <button :selected="current_view=='bar_chart_ghg_by_gas'"        @click="current_view='bar_chart_ghg_by_gas'"       >Emissions by gas<br>(${'CO2, N2O, CH4'.prettify()})</button>
         <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Emissions by stage                                 </button>
         <!--
-        <button :selected="current_view=='bar_chart_ghg_by_unfccc'"     @click="current_view='bar_chart_ghg_by_unfccc'"    >Emissions by UNFCCC category                       </button>
+        <button :selected="current_view=='bar_chart_ghg_by_ipcc_categories'" @click="current_view='bar_chart_ghg_by_ipcc_categories'">Emissions by IPCC category</button>
         -->
         <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">Total energy consumption                           </button>
       </div>
@@ -632,10 +632,10 @@ let compare_scenarios=new Vue({
         </div>
 
         <div
-          v-if="current_view=='bar_chart_ghg_by_unfccc'"
+          v-if="current_view=='bar_chart_ghg_by_ipcc_categories'"
           class="chart_container bar"
         >
-          <canvas id="bar_chart_ghg_by_unfccc" width="400" height="400"></canvas>
+          <canvas id="bar_chart_ghg_by_ipcc_categories" width="400" height="400"></canvas>
         </div>
 
         <div

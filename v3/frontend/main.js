@@ -15,7 +15,6 @@ let ecam={
     countries,
     population,
     gwp_table,
-    fuel_table,
     more,
     help,
     about,
@@ -297,7 +296,7 @@ let ecam={
         'FFEE6D56', 'FFF59382', 'FFF5B6AB',
       ];
 
-      /**
+      /*
        * Format header (first row) font and background color from worksheet
        * @param {*} worksheet
        * @param {*} ws_num
@@ -322,7 +321,7 @@ let ecam={
         }
       }
 
-      /**
+      /*
        * Format font and background color of static cells (protected cells) from worksheet
        * @param {*} worksheet
        * @param {*} ws_num
@@ -349,7 +348,7 @@ let ecam={
         }
       }
 
-      /**
+      /*
        * Unprotect cells that user needs to fill in with data of a substage.
        * @param {*} worksheet
        * @param {*} ws_num
@@ -378,7 +377,7 @@ let ecam={
         });
       }
 
-      /**
+      /*
        * Unprotect 20 following columns, for adding new substages and their data if user wants to.
        * @param {*} worksheet
        * @param {*} ws_num
@@ -415,7 +414,7 @@ let ecam={
         }
       }
 
-      /**
+      /*
        * Set cell's aligment.
        * @param {*} worksheet
        */
@@ -432,7 +431,7 @@ let ecam={
         });
       }
 
-      /**
+      /*
        * Set row's height according to the lenght of second column, wich can be split in multiple lines.
        * @param {*} worksheet
        * @param {*} ws_num
@@ -455,7 +454,7 @@ let ecam={
         })
       }
 
-      /**
+      /*
        * Create a workbook with sheets and data from pre_excel.js object, and download it in xlsx format.
        */
       function download_excel(){

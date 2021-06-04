@@ -22,15 +22,14 @@ let more=new Vue({
 
       <div id=buttons>
         <div class=button onclick="ecam.show('about')">            {{translate('about')            }}</div>
-        <div class=button onclick="ecam.show('diagram')">          Flow diagram                      </div>
+        <div class=button onclick="ecam.show('faqs')">             {{translate('FAQs')             }}</div>
+        <div class=button onclick="ecam.show('docs')">             {{translate('Documentation')    }}</div>
+        <div class=button onclick="ecam.show('diagram')">          {{translate('Flow diagram')     }}</div>
+        <div class=button onclick="ecam.show('tables')">           {{translate('Data tables')      }}</div>
         <div class=button onclick="ecam.show('equations')">        {{translate('equations')        }}</div>
         <div class=button onclick="ecam.show('constants')">        {{translate('all_constants')    }}</div>
         <div class=button onclick="ecam.show('benchmarks')">       {{translate('benchmarks')       }}</div>
-        <div class=button onclick="ecam.show('fuel_table')">       {{translate('Fuel types')       }}</div>
-        <div class=button onclick="ecam.show('tables')">           Data tables                       </div>
         <div class=button onclick="ecam.show('non_revenue_water')">{{translate('non_revenue_water')}}</div>
-        <div class=button onclick="ecam.show('docs')">             Documentation                     </div>
-        <div class=button onclick="ecam.show('faqs')">             FAQs                              </div>
       </div>
     </div>
   `,

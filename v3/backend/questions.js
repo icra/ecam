@@ -402,7 +402,6 @@ let Questions={
       variables:[
         "wwt_mass_slu",
         "wwt_bod_slud",
-        "wwt_slu_disp",
         "wwt_KPI_sludg_prod",
         "wwt_KPI_GHG_slu",
         "wwt_ghg_avoided_sequestration",
@@ -590,13 +589,12 @@ let Questions={
 
     "wwo_landfil":{
       variables:[
-        "wwo_fslu_typ_lf",
-        "wwo_mass_landfil",
-        "wwo_lf_N_cont",
-        "wwo_lf_TVS",
-        "wwo_lf_type",
-        "wwo_KPI_GHG_landfil",
-        "wwo_ghg_avoided_landfil",
+        "wwo_mass_landfil",//input
+        "wwo_lf_TVS",//input
+        "wwo_lf_N_cont",//input
+        "wwo_lf_MCF",//input
+        "wwo_KPI_GHG_landfil",//output
+        "wwo_ghg_avoided_landfil",//output
       ],
       advanced:0,
       otherQuestions:[ ],
@@ -617,6 +615,7 @@ let Questions={
     "wwo_dumping":{
       variables:[
         "wwo_vol_dumping",
+        "wwo_N_dumping",
         "wwo_ch4_efac_dumping",
         "wwo_n2o_efac_dumping",
         "wwo_KPI_GHG_dumping",
@@ -627,8 +626,9 @@ let Questions={
 
     "wwo_urine":{
       variables:[
-        "wwo_N_urine",
-        "wwo_KPI_GHG_urine",
+        "wwo_N_urine",//input
+        "wwo_N_urine_EF",//input
+        "wwo_KPI_GHG_urine",//output
       ],
       advanced:0,
       otherQuestions:[ ],

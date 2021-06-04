@@ -1066,8 +1066,6 @@
 "#wwt_slu_composting_ch4_expla":"Amount of CH4 emissions due to sludge composting",
 "#wwt_slu_composting_n2o_descr":"N2O emissions due to sludge composted",
 "#wwt_slu_composting_n2o_expla":"Amount of N2O emissions due to sludge composted",
-"#wwt_slu_disp_descr":"يتم التخلص من الحمأة عن طريق",
-"#wwt_slu_disp_expla":" يتم التخلص من الحمأة عن طريق ",
 "#wwt_slu_inciner_ch4_descr":"CH4 emissions due to sludge incinerated",
 "#wwt_slu_inciner_ch4_expla":"Amount of CH4 emissions due to sludge incinerated",
 "#wwt_slu_inciner_n2o_descr":"N2O emissions due to sludge incinerated",

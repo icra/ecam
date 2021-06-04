@@ -27,6 +27,7 @@ let Exceptions={
   wwt_slu_lf_TVS:{   table:"Type of sludge disposed", table_field(){return "TVS"}},
   wwt_slu_lf_N_cont:{table:"Type of sludge disposed", table_field(){return "N_cont"}},
   wwt_slu_lf_MCF:{table:"Type of landfill", table_field(){return "MCF"}},
+  wwo_lf_MCF:{table:"Type of landfill", table_field(){return "MCF"}},
 
   wwo_la_N_to_N2O:{
     table:"Soil type",

@@ -54,12 +54,20 @@ let References={
 
     "Fuel type":[
       {
+        ref:`Introduction`,
+        link:`https://www.ipcc-nggip.iges.or.jp/public/2006gl/pdf/2_Volume2/V2_1_Ch1_Introduction.pdf`,
+      },
+      {
         ref:`IPCC 2006, Volume 2, Chapter 2: Stationary Combustion, Table 2.2 (page 16)`,
         link:`frontend/docs/2006-ipcc/2_Volume2/V2_2_Ch2_Stationary_Combustion.pdf#page=16`,
       },
       {
         ref:`IPCC 2006, Volume 2, Chapter 3: Mobile Combustion, Table 3.2.2 (page 21)`,
         link:`frontend/docs/2006-ipcc/2_Volume2/V2_3_Ch3_Mobile_Combustion.pdf#page=21`,
+      },
+      {
+        ref:`GHG Protocol`,
+        link:`https://ghgprotocol.org/sites/default/files/Emission_Factors_from_Cross_Sector_Tools_March_2017.xlsx`,
       },
     ],
 
@@ -102,13 +110,18 @@ let References={
     wwt_KPI_std_nrg_cons:[{ref:"wOp19 (IWA)"}],
     wwo_KPI_std_nrg_cons:[{ref:"wOp19 (IWA)"}],
 
+    wwt_ghg_avoided_sequestration_landfil:[{
+      ref:"Beam page 156 (page 178 in PDF)",
+      link:`frontend/docs/beam_final_report_1432.pdf#page=178`,
+    }],
+
     wwt_KPI_GHG_biog:[
       {
         ref:`Sum of emissions from biogas production (biogas flared, valorized and leaked)`
       },
       {
         ref:"IPCC 2006, Volume 5, Chapter 4 Biological treatment of solid waste, equation 4.1, page 5",
-        link:"http://localhost/ecam/v3/frontend/docs/2006-ipcc/5_Volume5/V5_4_Ch4_Bio_Treat.pdf#page=5",
+        link:"frontend/docs/2006-ipcc/5_Volume5/V5_4_Ch4_Bio_Treat.pdf#page=5",
       },
     ],
 
@@ -233,6 +246,10 @@ let References={
     }],
 
     wwo_KPI_GHG_urine:[{
+      ref:"IPCC-2006, Chapter 11, page 11, table 11.1: 'Default emission factors to estimate direct N2O emissions from managed soils'.",
+      link:"frontend/docs/2006-ipcc/4_Volume4/V4_11_Ch11_N2O&CO2.pdf#page=11",
+    }],
+    wwo_N_urine_EF:[{
       ref:"IPCC-2006, Chapter 11, page 11, table 11.1: 'Default emission factors to estimate direct N2O emissions from managed soils'.",
       link:"frontend/docs/2006-ipcc/4_Volume4/V4_11_Ch11_N2O&CO2.pdf#page=11",
     }],
