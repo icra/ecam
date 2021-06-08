@@ -483,6 +483,7 @@ let Questions={
     "wwt_stockpiling":{
       variables:[
         "wwt_mass_slu_stock",
+        "wwt_slu_sp_lifespan",
       ],
       advanced:0,
       otherQuestions:[ ],
@@ -603,8 +604,10 @@ let Questions={
     "wwo_landapp":{
       variables:[
         "wwo_mass_landapp",
-        "wwo_la_N_to_N2O",
+        "wwo_la_solids_content",
+        "wwo_la_TVS",
         "wwo_la_N_cont",
+        "wwo_la_N_to_N2O",
         "wwo_KPI_GHG_landapp",
         "wwo_ghg_avoided_landapp",
       ],

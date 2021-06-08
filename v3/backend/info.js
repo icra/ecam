@@ -20,6 +20,10 @@ let Info={
   Currency             :{magnitude:"text",unit:"text"},
   Country              :{magnitude:"text",unit:"text"},
 
+  wwo_la_solids_content:{magnitude:"Percent", unit:"%"},
+  wwo_la_TVS:{magnitude:"Percent", unit:"%"},
+  wwt_slu_sp_lifespan:{magnitude:"Stockpile lifespan time",unit:"years"},
+
   //sludge storing
   wwt_slu_sto_TVS:{magnitude:"Percent", unit:"%"},
   wwt_slu_sto_f_CH4:{magnitude:"Percent", unit:"%"},

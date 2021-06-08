@@ -45,8 +45,12 @@ if(debug){
 
 //initial page displayed
 if(debug){
-  //go_to('Waste','Onsite'); //"inventory"
+  go_to('Waste','Treatment'); //"inventory"
   //variable.view('wwo_bod_rmvd'); //variable detailed info
-  ecam.show('select_scenario'); //page
+  //ecam.show('select_scenario'); //page
+
+  //default filters on for tier B:
+  //tier_b.filters_on=true;
+  //tier_b.filters_active["Sludge Management"]=true;
 }
 

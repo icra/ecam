@@ -1039,6 +1039,7 @@ class Waste_Treatment extends Substage{
 
     //sludge SP
     this.wwt_mass_slu_stock = 0;
+    this.wwt_slu_sp_lifespan = 0;
 
     //sludge truck transport
     this.wwt_trck_typ       = 0;
@@ -1355,16 +1356,61 @@ class Waste_Treatment extends Substage{
 
     wwt_KPI_GHG_slu_stockpilling(){
       let sludge_mass = this.wwt_mass_slu_stock; //kg biosolids
+      let sp_lifespan = this.wwt_slu_sp_lifespan; //years
 
-      //ghg emission rates from Majumder et al., 2014 (table 3)
-      let CO2_rate = 30.1/1000; //kgCO2eq/kgSludge/year for <1yo stockpiles
-      let CH4_rate = 0.2 /1000; //kgCO2eq/kgSludge/year for <1yo stockpiles
-      let N2O_rate = 60  /1000; //kgCO2eq/kgSludge/year for <1yo stockpiles
+      if(sp_lifespan<0) sp_lifespan=0;
 
-      //CO2eq emissions
-      let co2   = sludge_mass*CO2_rate;
-      let ch4   = sludge_mass*CH4_rate;
-      let n2o   = sludge_mass*N2O_rate;
+      //integer part and decimal part (for example: 4.5 = 4 + 0.5)
+      let sp_lifespan_int = Math.floor(sp_lifespan);
+      let sp_lifespan_dec = sp_lifespan - sp_lifespan_int;
+
+      //table of emission rates from Majumder et al., 2014 (table 3)
+      let rates={
+        //     <1 yo,  1-3 yo,   >3 yo, [kgCO2eq/kgSludge/year]
+        ch4:[ 0.2e-3,  2.0e-3,  9.8e-3],
+        n2o:[60.0e-3, 26.8e-3, 17.4e-3],
+        co2:[30.1e-3, 30.5e-3, 10.1e-3],
+      };
+
+      //calculate emissions for 20 years then adapt to the real lifespan
+      let emissions={ch4:[], n2o:[], co2:[]};
+
+      //first year
+      emissions.ch4[0] = sludge_mass*rates.ch4[0];
+      emissions.n2o[0] = sludge_mass*rates.n2o[0];
+      emissions.co2[0] = sludge_mass*rates.co2[0];
+
+      //year 1 to 3
+      for(let i=1;i<3;i++){
+        emissions.ch4[i] = sludge_mass*rates.ch4[1];
+        emissions.n2o[i] = sludge_mass*rates.n2o[1];
+        emissions.co2[i] = sludge_mass*rates.co2[1];
+      }
+
+      //year 3 to 20
+      for(let i=3;i<20;i++){
+        emissions.ch4[i] = sludge_mass*rates.ch4[2];
+        emissions.n2o[i] = sludge_mass*rates.n2o[2];
+        emissions.co2[i] = sludge_mass*rates.co2[2];
+      }
+
+      //adapt emissions to real lifespan of stockpile (initialize to 0)
+      let ch4 = 0;
+      let n2o = 0;
+      let co2 = 0;
+
+      //sum whole years (integer part)
+      for(let i=0; i < sp_lifespan_int; i++){
+        ch4 += (emissions.ch4[i]||0);
+        n2o += (emissions.n2o[i]||0);
+        co2 += (emissions.co2[i]||0);
+      }
+
+      //sum decimal part
+      ch4 += sp_lifespan_dec*(emissions.ch4[sp_lifespan_int]||0);
+      n2o += sp_lifespan_dec*(emissions.n2o[sp_lifespan_int]||0);
+      co2 += sp_lifespan_dec*(emissions.co2[sp_lifespan_int]||0);
+
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
