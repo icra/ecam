@@ -476,6 +476,7 @@ let Questions={
         "wwt_slu_lf_N_cont",//input
         "wwt_slu_lf_MCF",//input
         "wwt_slu_lf_low_CN_EF",//input
+        "wwt_slu_lf_uncertainty",//input
 
         "wwt_ghg_avoided_sequestration_landfil",//output
       ],
@@ -598,6 +599,7 @@ let Questions={
         "wwo_lf_N_cont",//input
         "wwo_lf_MCF",//input
         "wwo_lf_low_CN_EF",//input
+        "wwo_lf_uncertainty",//input
 
         "wwo_KPI_GHG_landfil",//output
         "wwo_ghg_avoided_landfil",//output

@@ -1,6 +1,11 @@
 {
 "#below":"below",
 
+"#wwt_slu_lf_uncertainty_descr":"Uncertainty factor (UNFCCC/CCNUC, 2008)",
+"#wwt_slu_lf_uncertainty_expla":"Model uncertainty factor (default value:0.9, UNFCCC/CCNUC, 2008)",
+"#wwo_lf_uncertainty_descr":"Uncertainty factor (UNFCCC/CCNUC, 2008)",
+"#wwo_lf_uncertainty_expla":"Model uncertainty factor (default value:0.9, UNFCCC/CCNUC, 2008)",
+
 "#wwt_slu_sp_lifespan_descr":"Stockpile lifespan",
 "#wwt_slu_sp_lifespan_expla":"Expected timespan that the biosolid stockpile (BSP) will be emitting GHGs",
 

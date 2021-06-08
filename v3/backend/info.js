@@ -20,6 +20,9 @@ let Info={
   Currency             :{magnitude:"text",unit:"text"},
   Country              :{magnitude:"text",unit:"text"},
 
+  wwt_slu_lf_uncertainty:{magnitude:"uncertainty",unit:"adimensional"},
+  wwo_lf_uncertainty:{magnitude:"uncertainty",unit:"adimensional"},
+
   wwt_slu_comp_low_CN_EF:{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},
   wwt_slu_lf_low_CN_EF:{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},
   wwo_lf_low_CN_EF:{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},

@@ -1038,6 +1038,7 @@ class Waste_Treatment extends Substage{
     this.wwt_slu_lf_N_cont    = 0;
     this.wwt_slu_lf_MCF       = 1;
     this.wwt_slu_lf_low_CN_EF = 0.015; //kgN2O-N/kgN
+    this.wwt_slu_lf_uncertainty = 0.9; //adimensional
 
     //sludge SP
     this.wwt_mass_slu_stock = 0;
@@ -1335,10 +1336,10 @@ class Waste_Treatment extends Substage{
       let MCF         = this.wwt_slu_lf_MCF; //methane correction for anaerobic managed landfills
       let TVS_to_OC   = Cts.ct_oc_vs.value; //gOC/gTVS
       let low_CN_EF   = this.wwt_slu_lf_low_CN_EF; //0.015 kgN2O-N/kgN
+      let uncertainty = this.wwt_slu_lf_uncertainty; //adimensional
 
       let co2 = 0;
       let ch4 = (function(){
-        let uncertainty   = Cts.ct_lf_unc.value;
         let OC_to_CH4     = Cts.ct_ch4_oc.value;
         let CH4_in_lf_gas = Cts.ct_ch4_lf.value/100;
         let DOC_fra       = Cts.ct_DOCfra.value/100;
@@ -1642,11 +1643,12 @@ class Waste_Onsite extends Substage{
     this.wwo_la_N_to_N2O       = 0; //land application N transformed to N2O
 
     //landfill
-    this.wwo_mass_landfil = 0; //dry weight sent to landfilling
-    this.wwo_lf_TVS       = 0; //TVS content of faecal sludge
-    this.wwo_lf_N_cont    = 0; //N content of faecal sludge
-    this.wwo_lf_MCF       = 1; //methane correction factor (default=1)
-    this.wwo_lf_low_CN_EF = 0.015; //kgN2O-N/kgN
+    this.wwo_mass_landfil   = 0; //dry weight sent to landfilling
+    this.wwo_lf_TVS         = 0; //TVS content of faecal sludge
+    this.wwo_lf_N_cont      = 0; //N content of faecal sludge
+    this.wwo_lf_MCF         = 1; //methane correction factor (default=1)
+    this.wwo_lf_low_CN_EF   = 0.015; //kgN2O-N/kgN
+    this.wwo_lf_uncertainty = 0.9; //kgN2O-N/kgN
 
     //dumping
     this.wwo_vol_dumping      = 0; //volume dumped
@@ -1924,10 +1926,10 @@ class Waste_Onsite extends Substage{
       let MCF         = this.wwo_lf_MCF; //methane correction for anaerobic managed landfills
       let TVS_to_OC   = Cts.ct_oc_vs.value; //gOC/gTVS
       let low_CN_EF   = this.wwo_lf_low_CN_EF; //0.015 kgN2O-N/kgN
+      let uncertainty = this.wwo_lf_uncertainty; //0.9 adimensional
 
       let co2 = 0;
       let ch4 = (function(){
-        let uncertainty   = Cts.ct_lf_unc.value;
         let OC_to_CH4     = Cts.ct_ch4_oc.value;
         let CH4_in_lf_gas = Cts.ct_ch4_lf.value/100;
         let DOC_fra       = Cts.ct_DOCfra.value/100;

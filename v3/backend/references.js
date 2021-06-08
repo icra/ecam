@@ -257,5 +257,8 @@ let References={
     wwt_slu_lf_low_CN_EF:[{ref:"1.5% from Brown et al, 2008"}],
     wwt_slu_comp_low_CN_EF:[{ref:"1.5% from Brown et al, 2008"}],
     wwo_lf_low_CN_EF:[{ref:"1.5% from Brown et al, 2008"}],
+
+    wwt_slu_lf_uncertainty:[{ref:"0.9 from UNFCCC/CCNUC, 2008"}],
+    wwo_lf_uncertainty:[{ref:"0.9 from UNFCCC/CCNUC, 2008"}],
   //Equations and Estimations (end)
 };
