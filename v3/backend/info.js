@@ -20,6 +20,10 @@ let Info={
   Currency             :{magnitude:"text",unit:"text"},
   Country              :{magnitude:"text",unit:"text"},
 
+  wwt_slu_comp_low_CN_EF:{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},
+  wwt_slu_lf_low_CN_EF:{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},
+  wwo_lf_low_CN_EF:{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},
+
   wwo_la_solids_content:{magnitude:"Percent", unit:"%"},
   wwo_la_TVS:{magnitude:"Percent", unit:"%"},
   wwt_slu_sp_lifespan:{magnitude:"Stockpile lifespan time",unit:"years"},

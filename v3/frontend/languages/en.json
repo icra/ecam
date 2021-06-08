@@ -4,6 +4,13 @@
 "#wwt_slu_sp_lifespan_descr":"Stockpile lifespan",
 "#wwt_slu_sp_lifespan_expla":"Expected timespan that the biosolid stockpile (BSP) will be emitting GHGs",
 
+"#wwt_slu_comp_low_CN_EF_descr":"N2O emission factor for low C:N ratio",
+"#wwt_slu_comp_low_CN_EF_expla":"N2O emission factor for low C:N ratio (1.5% from Brown et al, 2008)",
+"#wwt_slu_lf_low_CN_EF_descr":"N2O emission factor for low C:N ratio",
+"#wwt_slu_lf_low_CN_EF_expla":"N2O emission factor for low C:N ratio (1.5% from Brown et al, 2008)",
+"#wwo_lf_low_CN_EF_descr":"N2O emission factor for low C:N ratio",
+"#wwo_lf_low_CN_EF_expla":"N2O emission factor for low C:N ratio (1.5% from Brown et al, 2008)",
+
 "#Documentation":"Documentation",
 "#Flow diagram":"Flow diagram",
 "#Data tables":"Data tables",

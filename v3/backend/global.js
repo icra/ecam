@@ -1017,6 +1017,7 @@ class Waste_Treatment extends Substage{
     this.wwt_slu_comp_solids_content                = 0; //percentage
     this.wwt_slu_comp_TVS                           = 0; //%
     this.wwt_slu_comp_N_cont                        = 0; //%
+    this.wwt_slu_comp_low_CN_EF                     = 0.015; //kgN2O-N/kgN
 
     //sludge incineration
     this.wwt_mass_slu_inc   = 0;
@@ -1032,10 +1033,11 @@ class Waste_Treatment extends Substage{
     this.wwt_slu_la_EF             = 0; //gN2O-N/gN
 
     //sludge LF
-    this.wwt_mass_slu_land  = 0;
-    this.wwt_slu_lf_TVS     = 0;
-    this.wwt_slu_lf_N_cont  = 0;
-    this.wwt_slu_lf_MCF     = 1;
+    this.wwt_mass_slu_land    = 0;
+    this.wwt_slu_lf_TVS       = 0;
+    this.wwt_slu_lf_N_cont    = 0;
+    this.wwt_slu_lf_MCF       = 1;
+    this.wwt_slu_lf_low_CN_EF = 0.015; //kgN2O-N/kgN
 
     //sludge SP
     this.wwt_mass_slu_stock = 0;
@@ -1233,11 +1235,12 @@ class Waste_Treatment extends Substage{
     wwt_KPI_GHG_slu_composting(){
       let sludge_mass = this.wwt_mass_slu_comp; //kg of sludge
       let emissions_are_treated_or_piles_are_covered = this.wwt_slu_comp_emis_treated_or_piles_covered; //yes/no
-      let solids_content_of_compost = this.wwt_slu_comp_solids_content; //% 
+      let solids_content_of_compost = this.wwt_slu_comp_solids_content; //%
 
       let TVS       = this.wwt_slu_comp_TVS/100; //gTVS/gSludge
       let N_cont    = this.wwt_slu_comp_N_cont/100; //gN/gSludge
       let TVS_to_OC = Cts.ct_oc_vs.value;  //0.56 gOC/gTVS
+      let low_CN_EF = this.wwt_slu_comp_low_CN_EF; //0.015 kgN2O-N/kgN
 
       //gases
       let co2 = 0;
@@ -1258,8 +1261,7 @@ class Waste_Treatment extends Substage{
         if(ratio_CN>30){return 0}
         if(solids_content_of_compost>55){return 0}
 
-        let factor_for_low_CN_ratio = Cts.ct_n2o_lf.value/100;
-        return sludge_mass*N_cont*factor_for_low_CN_ratio*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+        return sludge_mass*N_cont*low_CN_EF*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       })();
 
       let total = co2+ch4+n2o;
@@ -1320,7 +1322,7 @@ class Waste_Treatment extends Substage{
         if(solids_content>80) emission *= 0.5;
 
         return emission;
-      })(); 
+      })();
 
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
@@ -1332,6 +1334,7 @@ class Waste_Treatment extends Substage{
       let N_cont      = this.wwt_slu_lf_N_cont/100; //gN/gSludge
       let MCF         = this.wwt_slu_lf_MCF; //methane correction for anaerobic managed landfills
       let TVS_to_OC   = Cts.ct_oc_vs.value; //gOC/gTVS
+      let low_CN_EF   = this.wwt_slu_lf_low_CN_EF; //0.015 kgN2O-N/kgN
 
       let co2 = 0;
       let ch4 = (function(){
@@ -1346,8 +1349,7 @@ class Waste_Treatment extends Substage{
         let C_cont = TVS*TVS_to_OC; //gOC/gSludge
         let ratio_CN = C_cont/N_cont||0; //gOC/gN
         if(ratio_CN>30){return 0;}
-        let factor_for_low_CN_ratio = Cts.ct_n2o_lf.value/100;
-        return sludge_mass*N_cont*factor_for_low_CN_ratio*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+        return sludge_mass*N_cont*low_CN_EF*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       })();
 
       let total = co2+ch4+n2o;
@@ -1644,6 +1646,7 @@ class Waste_Onsite extends Substage{
     this.wwo_lf_TVS       = 0; //TVS content of faecal sludge
     this.wwo_lf_N_cont    = 0; //N content of faecal sludge
     this.wwo_lf_MCF       = 1; //methane correction factor (default=1)
+    this.wwo_lf_low_CN_EF = 0.015; //kgN2O-N/kgN
 
     //dumping
     this.wwo_vol_dumping      = 0; //volume dumped
@@ -1907,7 +1910,7 @@ class Waste_Onsite extends Substage{
         if(solids_content>80) emission *= 0.5;
 
         return emission;
-      })(); 
+      })();
 
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
@@ -1920,6 +1923,7 @@ class Waste_Onsite extends Substage{
       let N_cont      = this.wwo_lf_N_cont/100; //gN/gSludge
       let MCF         = this.wwo_lf_MCF; //methane correction for anaerobic managed landfills
       let TVS_to_OC   = Cts.ct_oc_vs.value; //gOC/gTVS
+      let low_CN_EF   = this.wwo_lf_low_CN_EF; //0.015 kgN2O-N/kgN
 
       let co2 = 0;
       let ch4 = (function(){
@@ -1934,8 +1938,7 @@ class Waste_Onsite extends Substage{
         let C_cont = TVS*TVS_to_OC; //gOC/gSludge
         let ratio_CN = C_cont/N_cont||0; //gOC/gN
         if(ratio_CN>30){return 0;}
-        let factor_for_low_CN_ratio = Cts.ct_n2o_lf.value/100;
-        return sludge_mass*N_cont*factor_for_low_CN_ratio*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+        return sludge_mass*N_cont*low_CN_EF*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
       })();
 
       let total = co2+ch4+n2o;

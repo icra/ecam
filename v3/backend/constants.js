@@ -31,8 +31,7 @@ let Cts={
   ct_DOCfra:{  value:80,    unit:"%",            descr:"Decomposable organic fraction of raw wastewater solids (80% from Brown et al., 2008 and Metcalf & Eddy, 2003)",},
   ct_d3y_lf:{  value:69.9,  unit:"%",            descr:"Decomposed % in first 3 years = 69.9%, calculated from CDM equation (UNFCCC/CCNUCC, 2008) for warm, wet conditions",},
   ct_lf_unc:{  value:0.9,   unit:"adimensional", descr:"Landfill uncertainty factor, UNFCCC/CCNUCC, 2008",},
-  ct_n2o_lf:{  value:1.5,   unit:"%",            descr:"N2O landfill emissions for low C:N ratio",},
-  ct_C_seqst:{ value:0.25,  unit:"kgCO2eq/kg",   descr:"Carbon sequestration rate",},
+  ct_C_seqst:{ value:0.25,  unit:"kgCO2eq/kg",   descr:"Carbon sequestration rate"},
 
   ct_cr_forN:{
     value:4,

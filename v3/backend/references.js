@@ -199,7 +199,7 @@ let References={
       link:``,   //link to doi for example
     }],
 
-    wwt_KPI_GHG_slu_storage:[
+    wwt_slu_sto_EF:[
       {ref:`3% = emission factor due to storage between 5 and 20 days.`},
       {ref:`5% = emission factor due to storage more than 20 days.`},
     ],
@@ -253,5 +253,9 @@ let References={
       ref:"IPCC-2006, Chapter 11, page 11, table 11.1: 'Default emission factors to estimate direct N2O emissions from managed soils'.",
       link:"frontend/docs/2006-ipcc/4_Volume4/V4_11_Ch11_N2O&CO2.pdf#page=11",
     }],
+
+    wwt_slu_lf_low_CN_EF:[{ref:"1.5% from Brown et al, 2008"}],
+    wwt_slu_comp_low_CN_EF:[{ref:"1.5% from Brown et al, 2008"}],
+    wwo_lf_low_CN_EF:[{ref:"1.5% from Brown et al, 2008"}],
   //Equations and Estimations (end)
 };

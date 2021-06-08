@@ -50,7 +50,7 @@ if(debug){
   //ecam.show('select_scenario'); //page
 
   //default filters on for tier B:
-  //tier_b.filters_on=true;
-  //tier_b.filters_active["Sludge Management"]=true;
+  tier_b.filters_on=true;
+  tier_b.filters_active["Sludge Management"]=true;
 }
 
