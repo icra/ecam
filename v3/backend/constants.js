@@ -56,12 +56,6 @@ let Cts={
     unit:"gOC/gTVS",
   },
 
-  ct_ch4_up:{
-    value:0.025,
-    descr:"Percentage of CH4 emission for uncoverd pile",
-    unit:"ratio",
-  },
-
   ct_fra_np:{
     value:0.16,
     descr:"Nitrogen in proteins (F_NPR)",

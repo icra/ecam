@@ -438,6 +438,7 @@ let Questions={
         "wwt_slu_comp_TVS", //input
         "wwt_slu_comp_N_cont", //input
         "wwt_slu_comp_low_CN_EF", //input
+        "wwt_slu_comp_uncovered_pile_EF",//input
 
         "wwt_ghg_avoided_sequestration_composting", //output
       ],

@@ -260,5 +260,7 @@ let References={
 
     wwt_slu_lf_uncertainty:[{ref:"0.9 from UNFCCC/CCNUC, 2008"}],
     wwo_lf_uncertainty:[{ref:"0.9 from UNFCCC/CCNUC, 2008"}],
+
+    wwt_slu_comp_uncovered_pile_EF:[{ref:"2.5% from Brown et al, 2008"}],
   //Equations and Estimations (end)
 };

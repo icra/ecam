@@ -1018,6 +1018,7 @@ class Waste_Treatment extends Substage{
     this.wwt_slu_comp_TVS                           = 0; //%
     this.wwt_slu_comp_N_cont                        = 0; //%
     this.wwt_slu_comp_low_CN_EF                     = 0.015; //kgN2O-N/kgN
+    this.wwt_slu_comp_uncovered_pile_EF             = 0.025; //kgCH4/kgC
 
     //sludge incineration
     this.wwt_mass_slu_inc   = 0;
@@ -1242,6 +1243,7 @@ class Waste_Treatment extends Substage{
       let N_cont    = this.wwt_slu_comp_N_cont/100; //gN/gSludge
       let TVS_to_OC = Cts.ct_oc_vs.value;  //0.56 gOC/gTVS
       let low_CN_EF = this.wwt_slu_comp_low_CN_EF; //0.015 kgN2O-N/kgN
+      let up_EF     = this.wwt_slu_comp_uncovered_pile_EF; //0.025 kgCH4-C/kgC
 
       //gases
       let co2 = 0;
@@ -1250,8 +1252,7 @@ class Waste_Treatment extends Substage{
         if(solids_content_of_compost>55){return 0}
 
         let OC_to_CH4 = Cts.ct_ch4_oc.value; //1.33 gCH4/gOC
-        let ratio_up  = Cts.ct_ch4_up.value; //0.025 ratio for uncovered pile
-        return sludge_mass*TVS*TVS_to_OC*ratio_up*OC_to_CH4*Cts.ct_ch4_eq.value;
+        return sludge_mass*TVS*TVS_to_OC*up_EF*OC_to_CH4*Cts.ct_ch4_eq.value;
       })();
 
       let n2o = (function(){
