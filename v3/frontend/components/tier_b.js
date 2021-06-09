@@ -254,7 +254,9 @@ let tier_b=new Vue({
                 style="color:black"
                 v-html="substage.name.prettify()"
               ></a>
-              <button>change substage name</button>
+              <button>
+                change substage name
+              </button>
             </span>
           </span>
         </h1>

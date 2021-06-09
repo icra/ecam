@@ -32,9 +32,9 @@ let ecam_logo=new Vue({
       <!--debug mode menu-->
       <div v-if="is_debug_mode_enabled()"
         style="
-          background:rgba(127,127,127,0.6);
           padding:2px;
           border-radius:5px;
+          border:1px solid white;
         "
       >
         <b>DEV MODE ON</b>
@@ -43,19 +43,24 @@ let ecam_logo=new Vue({
         <button
           onclick="debug=false;ecam.show('landing');ecam.elements.ecam_logo.$forceUpdate()"
           style="background:white;padding:2px"
-        >disable dev mode
+        >
+          disable
         </button>
+
         <!--open github issues-->
         <button
           onclick="window.open('https://github.com/icra/ecam/issues')" target=_blank
           style="background:white;padding:2px"
-        >issues
+        >
+          issues
         </button>
-        <!--dev utils-->
+
+        <!--dev utils page-->
         <button
           onclick="ecam.show('development')"
           style="background:white;padding:2px"
-        >dev utils
+        >
+          utils
         </button>
       </div>
 

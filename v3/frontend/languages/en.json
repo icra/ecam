@@ -301,8 +301,10 @@
 "#wwt_KPI_GHG_disc_expla":"Discharged water",
 "#wwt_KPI_GHG_reus_trck_descr":"Truck transport of reused water",
 "#wwt_KPI_GHG_reus_trck_expla":"GHG emissions from truck transport of reused water",
+
 "#wwt_vol_fuel_descr":"Volume of fuel consumed",
 "#wwt_vol_fuel_expla":"Volume of fuel consumed",
+
 "#wwt_reus_vol_trck_descr":"Volume of fuel consumed (trucks)",
 "#wwt_reus_vol_trck_expla":"Volume of fuel consumed (trucks)",
 "#wwt_reus_trck_typ_descr":"Fuel type (trucks)",
@@ -469,7 +471,7 @@
 "#wwo_bod_slud_expla":"BOD5 removed with excess sludge from the treatment process",
 
 "#wwo_tn_effl_descr":"Total Nitrogen load in the effluent",
-"#wwo_tn_effl_descr":"Total Nitrogen load in the effluent during the assessment period",
+"#wwo_tn_effl_expla":"Total Nitrogen load in the effluent during the assessment period",
 
 "#wwo_coll_len_descr":"Collector length",
 
@@ -889,8 +891,6 @@
 "#ghg_emissions_by_source_detailed":"GHG emissions by source (detailed)",
 "#ghg_emissions_by_stage":"GHG emissions by stage",
 "#ghg_emissions_by_system":"GHG emissions by system",
-"#ghg_emissions_by_unfccc":"GHG emissions by UNFCCC category",
-"#ghg_fsm_with_transport_separate":"GHG emissions in FSM (transport separated)",
 "#ghg_summary":"GHG Summary",
 "#ghg_ww_with_uncollected":"GHG emissions in wastewater (with uncollected wastewater)",
 "#go":"Go",
@@ -978,13 +978,6 @@
 "#tier_A_lock_symbol":"Since you have entered more detailed data in Tier B stage, you cannot modify this input. If you still want to modify it, please set its related inputs to 0 in Tier B.",
 "#tier_B":"Tier B &mdash; Detailed GHG assessment",
 "#tool_developed_as_part_of_the":" tool developed as part of the ",
-"#unfccc_1A1":"Energy - Electricity and Heat",
-"#unfccc_1A3":"Energy - Transport",
-"#unfccc_5A":"Waste - Solid Waste Disposal",
-"#unfccc_5B":"Waste - Biological Treatment of Solid Waste",
-"#unfccc_5C":"Waste - Incineration",
-"#unfccc_5D":"Waste - Wastewater treatment and Discharge",
-"#unfccc_categories":"UNFCCC categories",
 "#unit":"unit",
 "#variable_advanced":"Advanced",
 "#variable_detailed_info":"Detailed info",
@@ -1531,8 +1524,7 @@
 "#wwt_type_tre_descr":"Type of treatment",
 "#wwt_type_tre_expla":"Type of treatment",
 "#wwt_valorizing_biogas":"Are you valorizing biogas",
-"#wwt_vol_fuel_descr":"Volume of fuel consumed",
-"#wwt_vol_fuel_expla":"Volume of fuel consumed",
+
 "#wwt_vol_pump_descr":"Volume of pumped wastewater",
 "#wwt_vol_pump_expla":"Volume of pumped wastewater",
 "#wwt_vol_trea_descr":"Volume of treated wastewater",

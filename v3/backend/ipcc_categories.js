@@ -17,6 +17,18 @@
   volume 5, chapter 4  -- composting
   volume 5, chapter 3  -- landfilling
   volume 4, chapter 11 -- land application
+
+  1A
+    1A4 Fuel combustion activities
+    1A3 Truck
+  2B
+  3C
+    3C4
+  4D
+    4D1
+    4A
+    4B
+    4C1
 */
 let IPCC_categories={
   //1A1: Energy - Electricity and Heat

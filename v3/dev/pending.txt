@@ -10,7 +10,7 @@ ECAM CODING TASKS - tasks also in https://github.com/icra/ecam/issues
 * DOING NOW - concrete and well defined tasks only - BUGS HAVE HIGHEST PRIORITY ALWAYS
   - check that every emission is in:
     - sankey
-    - unfccc
+    - ipcc categories
   - adapt biogas equations for onsite treatment too
   - trigger warning when checking version when loading json files
   - fill References structure for documentation ("backend/references.js")
