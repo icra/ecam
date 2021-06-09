@@ -439,6 +439,7 @@ let Questions={
         "wwt_slu_comp_N_cont", //input
         "wwt_slu_comp_low_CN_EF", //input
         "wwt_slu_comp_uncovered_pile_EF",//input
+        "wwt_slu_comp_seqst_rate",//input
 
         "wwt_ghg_avoided_sequestration_composting", //output
       ],
@@ -464,6 +465,8 @@ let Questions={
         "wwt_slu_la_TVS",//input
         "wwt_slu_la_N_cont",//input
         "wwt_slu_la_EF",//input
+        "wwt_slu_la_seqst_rate",//input
+
         "wwt_ghg_avoided_sequestration_landapp",//output
       ],
       advanced:0,
@@ -474,12 +477,13 @@ let Questions={
       variables:[
         "wwt_mass_slu_land",//input
         "wwt_slu_lf_TVS",//input
-        "wwt_slu_lf_N_cont",//input
-        "wwt_slu_lf_MCF",//input
-        "wwt_slu_lf_low_CN_EF",//input
         "wwt_slu_lf_uncertainty",//input
         "wwt_slu_lf_CH4_in_gas",//input
+        "wwt_slu_lf_DOCf",//input
         "wwt_slu_lf_decomp_3yr",//input
+        "wwt_slu_lf_MCF",//input
+        "wwt_slu_lf_N_cont",//input
+        "wwt_slu_lf_low_CN_EF",//input
 
         "wwt_ghg_avoided_sequestration_landfil",//output
       ],
@@ -599,14 +603,14 @@ let Questions={
       variables:[
         "wwo_mass_landfil",//input
         "wwo_lf_TVS",//input
-        "wwo_lf_N_cont",//input
-        "wwo_lf_MCF",//input
-        "wwo_lf_low_CN_EF",//input
         "wwo_lf_uncertainty",//input
         "wwo_lf_CH4_in_gas",//input
+        "wwo_lf_DOCf",//input
         "wwo_lf_decomp_3yr",//input
+        "wwo_lf_MCF",//input
+        "wwo_lf_N_cont",//input
+        "wwo_lf_low_CN_EF",//input
 
-        "wwo_KPI_GHG_landfil",//output
         "wwo_ghg_avoided_landfil",//output
       ],
       advanced:0,
@@ -615,13 +619,14 @@ let Questions={
 
     "wwo_landapp":{
       variables:[
-        "wwo_mass_landapp",
-        "wwo_la_solids_content",
-        "wwo_la_TVS",
-        "wwo_la_N_cont",
-        "wwo_la_N_to_N2O",
-        "wwo_KPI_GHG_landapp",
-        "wwo_ghg_avoided_landapp",
+        "wwo_mass_landapp",//input
+        "wwo_la_solids_content",//input
+        "wwo_la_TVS",//input
+        "wwo_la_N_cont",//input
+        "wwo_la_N_to_N2O",//input
+        "wwo_la_seqst_rate",//input
+
+        "wwo_ghg_avoided_landapp",//output
       ],
       advanced:0,
       otherQuestions:[ ],

@@ -114,6 +114,15 @@ let References={
       ref:"Beam page 156 (page 178 in PDF)",
       link:`frontend/docs/beam_final_report_1432.pdf#page=178`,
     }],
+    wwo_ghg_avoided_landfil:[{
+      ref:"Beam page 156 (page 178 in PDF)",
+      link:`frontend/docs/beam_final_report_1432.pdf#page=178`,
+    }],
+
+    wwt_ghg_avoided_sequestration_composting:[{
+      ref:"Beam page 149 (page 171 in PDF)",
+      link:`frontend/docs/beam_final_report_1432.pdf#page=171`,
+    }],
 
     wwt_KPI_GHG_biog:[
       {
@@ -267,5 +276,12 @@ let References={
 
     wwt_slu_lf_decomp_3yr:[{ref:"69.9% from CDM equation (UNFCCC/CCNUC, 2008) for warm, wet conditions (landiflls creates warm, wet conditions)"}],
     wwo_lf_decomp_3yr:[{ref:"69.9% from CDM equation (UNFCCC/CCNUC, 2008) for warm, wet conditions (landiflls creates warm, wet conditions)"}],
+
+    wwt_slu_lf_DOCf:[{ref:"80% from Brown et al., 2008 and Metcalf & Eddy, 2003"}],
+    wwo_lf_DOCf:[{ref:"80% from Brown et al., 2008 and Metcalf & Eddy, 2003"}],
+
+    wwt_slu_la_seqst_rate:[{ref:"0.25 from BEAM authors estimate based on data from BC reclamation site"}],
+    wwt_slu_comp_seqst_rate:[{ref:"0.25 from BEAM authors estimate based on data from BC reclamation site"}],
+    wwo_la_seqst_rate:[{ref:"0.25 from BEAM authors estimate based on data from BC reclamation site"}],
   //Equations and Estimations (end)
 };

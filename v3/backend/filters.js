@@ -141,9 +141,9 @@ let Filters={
 ],
 
 "Open Defecation":[
-  "wwo_open_pop", //variable
-  "wwo_n2o_efac_opd", //variable
-  "wwo_prot_con", //variable
+  "wwo_open_pop", //input
+  "wwo_n2o_efac_opd", //input
+  "wwo_opd_tn",//input
 ],
 
 "Energy Performance":[

@@ -57,11 +57,11 @@ let Estimations={
       let Protein    = Global.General.prot_con; //kg protein/person/year
       let P          = substage.wwc_conn_pop; //population
       let Years      = Global.Years(); //years
-      let F_NPR      = Cts.ct_fra_np.value;
-      let N_HH       = Cts.ct_N_HH.value;
-      let F_NON_CON  = Cts.ct_fac_nc.value;
-      let F_IND_COM  = Cts.ct_fac_ic.value;
-      return Protein * P * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM; //kg
+      let F_NPR      = Cts.ct_F_NPR.value;
+      let N_HH       = Global.General.N_HH;
+      let F_NON_CON  = Global.General.F_NON_CON;
+      let F_IND_COM  = Global.General.F_IND_COM;
+      return Protein * P * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM; //kgN
     },
     wwc_bod(substage){
       let P   = substage.wwc_conn_pop; //population
@@ -89,10 +89,10 @@ let Estimations={
       let Protein    = Global.General.prot_con; //kg protein/person/year
       let P          = substage.wwt_serv_pop; //population served
       let Years      = Global.Years(); //years
-      let F_NPR      = Cts.ct_fra_np.value;
-      let N_HH       = Cts.ct_N_HH.value;
-      let F_NON_CON  = Cts.ct_fac_nc.value;
-      let F_IND_COM  = Cts.ct_fac_ic.value;
+      let F_NPR      = Cts.ct_F_NPR.value;
+      let N_HH       = Global.General.N_HH;
+      let F_NON_CON  = Global.General.F_NON_CON;
+      let F_IND_COM  = Global.General.F_IND_COM;
       return Protein * P * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM;
     },
 
@@ -112,12 +112,6 @@ let Estimations={
     },
 
   //wwo
-    wwo_prot_con(substage){
-      let population = substage.wwo_open_pop; //people
-      let years      = Global.Years(); //years
-      let protein    = Global.General.prot_con; //kg/person/year
-      return population*protein*years; //kg
-    },
 
     //0.3kg/person/day
     wwo_fslu_emp(substage){
@@ -150,5 +144,16 @@ let Estimations={
     },
     wwo_biog_sold(substage){
       return 100-substage.wwo_biog_val-substage.wwo_biog_fla-substage.wwo_biog_lkd;
+    },
+
+    wwo_opd_tn(substage){
+      let Protein   = Global.General.prot_con; //kg/person/year
+      let P         = substage.wwo_open_pop; //people
+      let Years     = Global.Years(); //years
+      let F_NPR     = Cts.ct_F_NPR.value; //kgN/kgProtein
+      let N_HH      = Global.General.N_HH; //adimensional
+      let F_NON_CON = Global.General.F_NON_CON; //adimensional
+      let F_IND_COM = Global.General.F_IND_COM; //adimensional
+      return Protein * P * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM;
     },
 };

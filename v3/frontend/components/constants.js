@@ -46,8 +46,12 @@ let constants = new Vue({
             </td>
             <td                         v-html="Cts[key].unit.prettify()"></td>
             <td style=font-size:smaller v-html="Cts[key].descr.prettify()"></td>
-            <td>
-              {{ Formulas.outputs_per_input(key).length }}
+            <td style="text-align:center">
+              <div
+                v-for="n in [Formulas.outputs_per_input(key).length]"
+                :style="{background:n<2?'red':''}"
+                v-html="n"
+              ></div>
             </td>
           </tr>
         </table>

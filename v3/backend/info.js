@@ -20,6 +20,19 @@ let Info={
   Currency             :{magnitude:"text",unit:"text"},
   Country              :{magnitude:"text",unit:"text"},
 
+  wwt_slu_comp_seqst_rate:{magnitude:"Mass/Mass",unit:"kgCO2eq/kgSludge"},
+  wwt_slu_la_seqst_rate:{magnitude:"Mass/Mass",unit:"kgCO2eq/kgSludge"},
+  wwo_la_seqst_rate:{magnitude:"Mass/Mass",unit:"kgCO2eq/kgSludge"},
+
+  wwo_opd_tn:{magnitude:"Mass",unit:"kg"},
+
+  wwt_slu_lf_DOCf:{magnitude:"Percent", unit:"%"},
+  wwo_lf_DOCf:{magnitude:"Percent", unit:"%"},
+
+  F_IND_COM:{magnitude:"adimensional",unit:"adimensional"},
+  F_NON_CON:{magnitude:"adimensional",unit:"adimensional"},
+  N_HH:{magnitude:"adimensional",unit:"adimensional"},
+
   wwt_slu_lf_decomp_3yr:{magnitude:"Percent", unit:"%"},
   wwo_lf_decomp_3yr:{magnitude:"Percent", unit:"%"},
 
@@ -117,9 +130,6 @@ let Info={
   ws_run_cost:{magnitude:"Currency",unit:"USD"},
   ww_nrg_cost:{magnitude:"Currency",unit:"USD"},
   ww_run_cost:{magnitude:"Currency",unit:"USD"},
-
-  //new
-  wwo_prot_con:{magnitude:"Mass",unit:"kg"},
 
   wwo_n2o_efac_opd:{magnitude:"Mass/Mass",unit:"kgN2O-N/kgN"},
 

@@ -39,6 +39,11 @@ class Ecam{
       conv_kwh_co2         : 0,     //electricity conversion (kgCO2/kWh)
       prot_con             : 0,     //prot consumption (kg/person/year)
       bod_pday             : 0,     //BOD5 (g/person/day)
+
+      //new TODO
+      F_IND_COM: 1.25,
+      F_NON_CON: 1.1,
+      N_HH:      1.1,
     };
 
     this.Water=new Water_stages(), //Water supply stages
@@ -889,7 +894,7 @@ class Waste_Collection extends Substage{
       //emissions
       let co2   = 0;
       let ch4   = BOD*this.wwc_ch4_efac_cso*Cts.ct_ch4_eq.value;
-      let n2o   = TN *this.wwc_n2o_efac_cso*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let n2o   = TN *this.wwc_n2o_efac_cso*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
@@ -900,7 +905,7 @@ class Waste_Collection extends Substage{
       //emissions
       let co2   = 0;
       let ch4   = BOD*this.wwc_ch4_efac_col*Cts.ct_ch4_eq.value;
-      let n2o   = TN *this.wwc_n2o_efac_col*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let n2o   = TN *this.wwc_n2o_efac_col*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
@@ -1019,6 +1024,7 @@ class Waste_Treatment extends Substage{
     this.wwt_slu_comp_N_cont                        = 0; //%
     this.wwt_slu_comp_low_CN_EF                     = 0.015; //kgN2O-N/kgN
     this.wwt_slu_comp_uncovered_pile_EF             = 0.025; //kgCH4/kgC
+    this.wwt_slu_comp_seqst_rate                    = 0.25; //kgCO2eq/kgSludge
 
     //sludge incineration
     this.wwt_mass_slu_inc   = 0;
@@ -1032,16 +1038,18 @@ class Waste_Treatment extends Substage{
     this.wwt_slu_la_TVS            = 0; //%
     this.wwt_slu_la_N_cont         = 0; //%
     this.wwt_slu_la_EF             = 0; //gN2O-N/gN
+    this.wwt_slu_la_seqst_rate     = 0.25; //kgCO2eq/kgSludge
 
     //sludge LF
     this.wwt_mass_slu_land      = 0;
     this.wwt_slu_lf_TVS         = 0;
-    this.wwt_slu_lf_N_cont      = 0;
-    this.wwt_slu_lf_MCF         = 1;
-    this.wwt_slu_lf_low_CN_EF   = 0.015; //kgN2O-N/kgN
     this.wwt_slu_lf_uncertainty = 0.9; //adimensional
     this.wwt_slu_lf_CH4_in_gas  = 50; //%
+    this.wwt_slu_lf_DOCf        = 80; //%
     this.wwt_slu_lf_decomp_3yr  = 69.9; //%
+    this.wwt_slu_lf_MCF         = 1;
+    this.wwt_slu_lf_N_cont      = 0;
+    this.wwt_slu_lf_low_CN_EF   = 0.015; //kgN2O-N/kgN
 
     //sludge SP
     this.wwt_mass_slu_stock = 0;
@@ -1104,7 +1112,7 @@ class Waste_Treatment extends Substage{
     wwt_KPI_GHG_tre(){
       let co2   = 0;
       let ch4   = (this.wwt_bod_infl-this.wwt_bod_slud)*this.wwt_ch4_efac_tre*Cts.ct_ch4_eq.value;
-      let n2o   = this.wwt_tn_infl*this.wwt_n2o_efac_tre*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let n2o   = this.wwt_tn_infl*this.wwt_n2o_efac_tre*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
@@ -1218,8 +1226,8 @@ class Waste_Treatment extends Substage{
     wwt_KPI_GHG_slu_storage(){
       let sludge_mass = this.wwt_mass_slu_sto; //kg of sludge
       let TVS         = this.wwt_slu_sto_TVS/100; //gTVS/gSludge
-      let TVS_to_OC   = Cts.ct_oc_vs.value; //gOC/gTVS
-      let OC_to_CH4   = Cts.ct_ch4_oc.value; //gCH4/gOC
+      let TVS_to_OC   = Cts.ct_VS_to_OC.value; //gOC/gTVS
+      let OC_to_CH4   = Cts.ct_C_to_CH4_16_12.value; //gCH4/gOC
       let f_CH4       = this.wwt_slu_sto_f_CH4/100; //ratio for CH4 potential
 
       //max CH4 that could be released
@@ -1243,7 +1251,7 @@ class Waste_Treatment extends Substage{
 
       let TVS       = this.wwt_slu_comp_TVS/100; //gTVS/gSludge
       let N_cont    = this.wwt_slu_comp_N_cont/100; //gN/gSludge
-      let TVS_to_OC = Cts.ct_oc_vs.value;  //0.56 gOC/gTVS
+      let TVS_to_OC = Cts.ct_VS_to_OC.value;  //gOC/gTVS
       let low_CN_EF = this.wwt_slu_comp_low_CN_EF; //0.015 kgN2O-N/kgN
       let up_EF     = this.wwt_slu_comp_uncovered_pile_EF; //0.025 kgCH4-C/kgC
 
@@ -1253,7 +1261,7 @@ class Waste_Treatment extends Substage{
         if(emissions_are_treated_or_piles_are_covered){return 0}
         if(solids_content_of_compost>55){return 0}
 
-        let OC_to_CH4 = Cts.ct_ch4_oc.value; //1.33 gCH4/gOC
+        let OC_to_CH4 = Cts.ct_C_to_CH4_16_12.value; //1.33 gCH4/gOC
         return sludge_mass*TVS*TVS_to_OC*up_EF*OC_to_CH4*Cts.ct_ch4_eq.value;
       })();
 
@@ -1265,7 +1273,7 @@ class Waste_Treatment extends Substage{
         if(ratio_CN>30){return 0}
         if(solids_content_of_compost>55){return 0}
 
-        return sludge_mass*N_cont*low_CN_EF*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+        return sludge_mass*N_cont*low_CN_EF*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
       })();
 
       let total = co2+ch4+n2o;
@@ -1306,7 +1314,7 @@ class Waste_Treatment extends Substage{
       let solids_content = this.wwt_slu_la_solids_content; //%
       let TVS            = this.wwt_slu_la_TVS/100; //gTVS/gSludge
       let N_cont         = this.wwt_slu_la_N_cont/100; //gN/gSludge
-      let TVS_to_OC      = Cts.ct_oc_vs.value; //gOC/gTVS
+      let TVS_to_OC      = Cts.ct_VS_to_OC.value; //gOC/gTVS
       let EF             = this.wwt_slu_la_EF; //gN2O-N/gN
 
       //gases
@@ -1320,7 +1328,7 @@ class Waste_Treatment extends Substage{
 
         if(ratio_CN>30){return 0}
 
-        let emission = sludge_mass*N_cont*EF*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+        let emission = sludge_mass*N_cont*EF*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
 
         //if biosolids are >80%, N2O emissions are reduced by 50%
         if(solids_content>80) emission *= 0.5;
@@ -1334,26 +1342,29 @@ class Waste_Treatment extends Substage{
 
     wwt_KPI_GHG_slu_landfilling(){
       let sludge_mass = this.wwt_mass_slu_land;
+
       let TVS         = this.wwt_slu_lf_TVS/100; //gTVS/gSludge
-      let N_cont      = this.wwt_slu_lf_N_cont/100; //gN/gSludge
-      let MCF         = this.wwt_slu_lf_MCF; //methane correction for anaerobic managed landfills
-      let TVS_to_OC   = Cts.ct_oc_vs.value; //gOC/gTVS
-      let CH4_in_gas  = this.wwt_slu_lf_CH4_in_gas/100; //%
-      let low_CN_EF   = this.wwt_slu_lf_low_CN_EF; //0.015 kgN2O-N/kgN
+      let TVS_to_OC   = Cts.ct_VS_to_OC.value; //gOC/gTVS
       let uncertainty = this.wwt_slu_lf_uncertainty; //adimensional
+      let OC_to_CH4   = Cts.ct_C_to_CH4_16_12.value; //kgCH4/kgC
+      let CH4_in_gas  = this.wwt_slu_lf_CH4_in_gas/100; //%
+      let DOCf        = this.wwt_slu_lf_DOCf/100; //%
       let decomp_3yr  = this.wwt_slu_lf_decomp_3yr/100; //%
+      let MCF         = this.wwt_slu_lf_MCF; //methane correction for anaerobic managed landfills
+
+      let N_cont      = this.wwt_slu_lf_N_cont/100; //gN/gSludge
+      let low_CN_EF   = this.wwt_slu_lf_low_CN_EF; //0.015 kgN2O-N/kgN
+      let N_to_N2O    = Cts.ct_N_to_N2O_44_28.value; //kgN2O/kgN2O-N
 
       let co2 = 0;
       let ch4 = (function(){
-        let OC_to_CH4 = Cts.ct_ch4_oc.value;
-        let DOC_fra   = Cts.ct_DOCfra.value/100;
-        return sludge_mass*TVS*TVS_to_OC*uncertainty*OC_to_CH4*CH4_in_gas*DOC_fra*decomp_3yr*MCF*Cts.ct_ch4_eq.value;
+        return sludge_mass*TVS*TVS_to_OC*uncertainty*OC_to_CH4*CH4_in_gas*DOCf*decomp_3yr*MCF*Cts.ct_ch4_eq.value;
       })();
       let n2o = (function(){
         let C_cont = TVS*TVS_to_OC; //gOC/gSludge
         let ratio_CN = C_cont/N_cont||0; //gOC/gN
         if(ratio_CN>30){return 0;}
-        return sludge_mass*N_cont*low_CN_EF*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+        return sludge_mass*N_cont*low_CN_EF*N_to_N2O*Cts.ct_n2o_eq.value;
       })();
 
       let total = co2+ch4+n2o;
@@ -1444,7 +1455,7 @@ class Waste_Treatment extends Substage{
     wwt_KPI_GHG_disc(){
       let co2   = 0;
       let ch4   = this.wwt_bod_effl*this.wwt_ch4_efac_dis*Cts.ct_ch4_eq.value;
-      let n2o   = this.wwt_tn_effl *this.wwt_n2o_efac_dis*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let n2o   = this.wwt_tn_effl *this.wwt_n2o_efac_dis*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
@@ -1496,13 +1507,13 @@ class Waste_Treatment extends Substage{
       return this.wwt_nrg_biog*this.wwt_conv_kwh;
     }
     wwt_ghg_avoided_reuse_nutrient(){
-      let N = this.wwt_wr_N_rec*Cts.ct_cr_forN.value;
-      let P = this.wwt_wr_P_rec*Cts.ct_cr_forP.value;
+      let N = this.wwt_wr_N_rec*Cts.ct_N_reused_credit.value;
+      let P = this.wwt_wr_P_rec*Cts.ct_P_reused_credit.value;
       return N+P;
     }
     wwt_ghg_avoided_reuse_water(){
       let ch4 = 0; //TBD TODO: methane emissions avoided due to water reused
-      let n2o = this.wwt_vol_nonp*((this.wwt_tn_effl/this.wwt_vol_disc)||0)*this.wwt_n2o_efac_dis*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let n2o = this.wwt_vol_nonp*((this.wwt_tn_effl/this.wwt_vol_disc)||0)*this.wwt_n2o_efac_dis*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
       return ch4+n2o;
     }
     wwt_ghg_avoided_sequestration(){
@@ -1513,17 +1524,17 @@ class Waste_Treatment extends Substage{
       ].sum();
     }
     wwt_ghg_avoided_sequestration_composting(){
-      return this.wwt_mass_slu_comp*Cts.ct_C_seqst.value;
+      return this.wwt_mass_slu_comp*this.wwt_slu_comp_seqst_rate;
     }
     wwt_ghg_avoided_sequestration_landapp(){
-      return this.wwt_mass_slu_app*Cts.ct_C_seqst.value;
+      return this.wwt_mass_slu_app*this.wwt_slu_la_seqst_rate;
     }
     wwt_ghg_avoided_sequestration_landfil(){
-      let sludge_mass = this.wwt_mass_slu_land;  //kg
+      let sludge_mass = this.wwt_mass_slu_land; //kg
       let TVS         = this.wwt_slu_lf_TVS/100; //gTVS/gSludge
-      let TVS_to_OC   = Cts.ct_oc_vs.value;      //gOC/gTVS
-      let DOCf        = Cts.ct_DOCfra.value/100; //%
-      let C_to_CO2    = Cts.ct_co2_C.value;      //gCO2/gC
+      let TVS_to_OC   = Cts.ct_VS_to_OC.value; //gOC/gTVS
+      let DOCf        = this.wwt_slu_lf_DOCf/100; //%
+      let C_to_CO2    = Cts.ct_C_to_CO2_44_12.value; //gCO2/gC
       return sludge_mass*TVS*TVS_to_OC*(1-DOCf)*C_to_CO2;
     }
 
@@ -1607,8 +1618,8 @@ class Waste_Onsite extends Substage{
     this.wwo_n2o_efac_dis = 0; //EF
 
     //5. open defecation
-    this.wwo_open_pop = 0; //population open defecation
-    this.wwo_prot_con = 0; //protein consumption open defecation
+    this.wwo_open_pop     = 0; //population open defecation
+    this.wwo_opd_tn       = 0; //kgN
     this.wwo_n2o_efac_opd = 0.005; //EF
 
     //pump efficiency
@@ -1644,6 +1655,7 @@ class Waste_Onsite extends Substage{
     this.wwo_la_TVS            = 0; //N content of faecal sludge
     this.wwo_la_N_cont         = 0; //N content of faecal sludge
     this.wwo_la_N_to_N2O       = 0; //land application N transformed to N2O
+    this.wwo_la_seqst_rate     = 0.25; //kgCO2eq/kgSludge
 
     //landfill
     this.wwo_mass_landfil   = 0; //dry weight sent to landfilling
@@ -1651,9 +1663,10 @@ class Waste_Onsite extends Substage{
     this.wwo_lf_N_cont      = 0; //N content of faecal sludge
     this.wwo_lf_MCF         = 1; //methane correction factor (default=1)
     this.wwo_lf_low_CN_EF   = 0.015; //kgN2O-N/kgN
-    this.wwo_lf_uncertainty = 0.9; //kgN2O-N/kgN
-    this.wwo_lf_CH4_in_gas  = 50; //kgN2O-N/kgN
+    this.wwo_lf_uncertainty = 0.9; //adimensional
+    this.wwo_lf_CH4_in_gas  = 50; //%
     this.wwo_lf_decomp_3yr  = 69.9; //%
+    this.wwo_lf_DOCf        = 80; //%
 
     //dumping
     this.wwo_vol_dumping      = 0; //volume dumped
@@ -1746,16 +1759,14 @@ class Waste_Onsite extends Substage{
 
     //open defecation
     wwo_KPI_GHG_unt_opd(){
-      let protein = this.wwo_prot_con; //kg
-      let fra_np  = Cts.ct_fra_np.value;
-      let fac_nc  = Cts.ct_fac_nc.value;
-      let n2o_ef  = this.wwo_n2o_efac_opd;
-      let n2o_co  = Cts.ct_n2o_co.value;
-      let n2o_eq  = Cts.ct_n2o_eq.value;
+      let TN     = this.wwo_opd_tn; //kgN
+      let n2o_ef = this.wwo_n2o_efac_opd; //kgN2O-N/kgN
+      let n2o_co = Cts.ct_N_to_N2O_44_28.value; //kgN2O/kgN2O-N
+      let n2o_eq = Cts.ct_n2o_eq.value; //kgCO2eq/kgN2O
 
       let co2   = 0;
       let ch4   = 0; //IPCC considers that CH4 is not produced since anaerobic conditions are unlikely
-      let n2o   = protein*fra_np*fac_nc*n2o_ef*n2o_co*n2o_eq;
+      let n2o   = TN*n2o_ef*n2o_co*n2o_eq;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
@@ -1879,7 +1890,7 @@ class Waste_Onsite extends Substage{
     wwo_KPI_GHG_tre(){
       let co2   = 0;
       let ch4   = (this.wwo_bod_infl-this.wwo_bod_slud)*this.wwo_ch4_efac_tre*Cts.ct_ch4_eq.value;
-      let n2o   = this.wwo_tn_infl*this.wwo_n2o_efac_tre*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let n2o   = this.wwo_tn_infl*this.wwo_n2o_efac_tre*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
@@ -1888,7 +1899,7 @@ class Waste_Onsite extends Substage{
     wwo_KPI_GHG_dis(){
       let co2   = 0;
       let ch4   = this.wwo_bod_effl*this.wwo_ch4_efac_dis*Cts.ct_ch4_eq.value;
-      let n2o   = this.wwo_tn_effl *this.wwo_n2o_efac_dis*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let n2o   = this.wwo_tn_effl *this.wwo_n2o_efac_dis*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
@@ -1899,7 +1910,7 @@ class Waste_Onsite extends Substage{
       let solids_content = this.wwo_la_solids_content; //%
       let TVS            = this.wwo_la_TVS/100; //gTVS/gSludge
       let N_cont         = this.wwo_la_N_cont/100; //gN/gSludge
-      let TVS_to_OC      = Cts.ct_oc_vs.value; //gOC/gTVS
+      let TVS_to_OC      = Cts.ct_VS_to_OC.value; //gOC/gTVS
       let EF             = this.wwo_la_N_to_N2O; //gN2O-N/gN
 
       //gases
@@ -1911,7 +1922,7 @@ class Waste_Onsite extends Substage{
         let ratio_CN = C_cont/N_cont||0;
         if(ratio_CN>30){return 0}
 
-        let emission = sludge_mass*N_cont*EF*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+        let emission = sludge_mass*N_cont*EF*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
 
         //if biosolids are >80%, N2O emissions are reduced by 50%
         if(solids_content>80) emission *= 0.5;
@@ -1929,23 +1940,23 @@ class Waste_Onsite extends Substage{
       let TVS         = this.wwo_lf_TVS/100; //gTVS/gSludge
       let N_cont      = this.wwo_lf_N_cont/100; //gN/gSludge
       let MCF         = this.wwo_lf_MCF; //methane correction for anaerobic managed landfills
-      let TVS_to_OC   = Cts.ct_oc_vs.value; //gOC/gTVS
+      let TVS_to_OC   = Cts.ct_VS_to_OC.value; //gOC/gTVS
       let CH4_in_gas  = this.wwo_lf_CH4_in_gas/100; //%
       let low_CN_EF   = this.wwo_lf_low_CN_EF; //0.015 kgN2O-N/kgN
       let uncertainty = this.wwo_lf_uncertainty; //0.9 adimensional
       let decomp_3yr  = this.wwo_lf_decomp_3yr/100; //%
+      let DOCf        = this.wwo_lf_DOCf/100; //%
 
       let co2 = 0;
       let ch4 = (function(){
-        let OC_to_CH4 = Cts.ct_ch4_oc.value;
-        let DOC_fra   = Cts.ct_DOCfra.value/100;
-        return sludge_mass*TVS*TVS_to_OC*uncertainty*OC_to_CH4*CH4_in_gas*DOC_fra*decomp_3yr*MCF*Cts.ct_ch4_eq.value;
+        let OC_to_CH4 = Cts.ct_C_to_CH4_16_12.value;
+        return sludge_mass*TVS*TVS_to_OC*uncertainty*OC_to_CH4*CH4_in_gas*DOCf*decomp_3yr*MCF*Cts.ct_ch4_eq.value;
       })();
       let n2o = (function(){
         let C_cont = TVS*TVS_to_OC; //gOC/gSludge
         let ratio_CN = C_cont/N_cont||0; //gOC/gN
         if(ratio_CN>30){return 0;}
-        return sludge_mass*N_cont*low_CN_EF*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+        return sludge_mass*N_cont*low_CN_EF*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
       })();
 
       let total = co2+ch4+n2o;
@@ -1956,7 +1967,7 @@ class Waste_Onsite extends Substage{
     wwo_KPI_GHG_dumping(){
       let co2   = 0;
       let ch4   = this.wwo_vol_dumping*this.wwo_bod_conc_fs*this.wwo_ch4_efac_dumping*Cts.ct_ch4_eq.value;
-      let n2o   = this.wwo_N_dumping*this.wwo_n2o_efac_dumping*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let n2o   = this.wwo_N_dumping*this.wwo_n2o_efac_dumping*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
       let total = co2+n2o+ch4;
       return {total,co2,n2o,ch4};
     }
@@ -1965,7 +1976,7 @@ class Waste_Onsite extends Substage{
     wwo_KPI_GHG_urine(){
       let co2   = 0;
       let ch4   = 0;
-      let n2o   = this.wwo_N_urine*this.wwo_N_urine_EF*Cts.ct_n2o_co.value*Cts.ct_n2o_eq.value;
+      let n2o   = this.wwo_N_urine*this.wwo_N_urine_EF*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
       let total = co2+n2o+ch4;
       return {total,co2,n2o,ch4};
     }
@@ -1999,19 +2010,19 @@ class Waste_Onsite extends Substage{
       return this.wwo_nrg_biog*this.wwo_conv_kwh;
     }
     wwo_ghg_avoided_landapp(){
-      return this.wwo_mass_landapp*Cts.ct_C_seqst.value;
+      return this.wwo_mass_landapp*this.wwo_la_seqst_rate;
     }
     wwo_ghg_avoided_landfil(){
-      let sludge_mass = this.wwo_mass_landfil;   //kg
-      let TVS         = this.wwo_lf_TVS/100;     //gTVS/gSludge
-      let TVS_to_OC   = Cts.ct_oc_vs.value;      //gOC/gTVS
-      let DOCf        = Cts.ct_DOCfra.value/100; //%
-      let C_to_CO2    = Cts.ct_co2_C.value;      //gCO2/gC
+      let sludge_mass = this.wwo_mass_landfil; //kg
+      let TVS         = this.wwo_lf_TVS/100; //gTVS/gSludge
+      let TVS_to_OC   = Cts.ct_VS_to_OC.value; //gOC/gTVS
+      let DOCf        = this.wwo_lf_DOCf/100; //%
+      let C_to_CO2    = Cts.ct_C_to_CO2_44_12.value; //gCO2/gC
       return sludge_mass*TVS*TVS_to_OC*(1-DOCf)*C_to_CO2;
     }
     wwo_ghg_avoided_reuse(){
-      let N = this.wwo_reused_N*Cts.ct_cr_forN.value;
-      let P = this.wwo_reused_P*Cts.ct_cr_forP.value;
+      let N = this.wwo_reused_N*Cts.ct_N_reused_credit.value;
+      let P = this.wwo_reused_P*Cts.ct_P_reused_credit.value;
       return N+P;
     }
 

@@ -553,6 +553,30 @@ let select_scenario=new Vue({
                               g/{{translate('person')}}/{{translate('day')}}
                             </td>
                           </tr>
+
+                          <!--factors-->
+                          <tr>
+                            <td v-html="translate('F_IND_COM_descr').prettify()">
+                            <td>
+                              <input type=number class=number v-model.number="scenario.General.F_IND_COM" style="width:95%" min=0>
+                            </td>
+                            <td>adimensional</td>
+                          </tr>
+                          <tr>
+                            <td v-html="translate('F_NON_CON_descr').prettify()">
+                            <td>
+                              <input type=number class=number v-model.number="scenario.General.F_NON_CON" style="width:95%" min=0>
+                            </td>
+                            <td>adimensional</td>
+                          </tr>
+                          <tr>
+                            <td v-html="translate('N_HH_descr').prettify()">
+                            <td>
+                              <input type=number class=number v-model.number="scenario.General.N_HH" style="width:95%" min=0>
+                            </td>
+                            <td>adimensional</td>
+                          </tr>
+
                         </table>
                       </div>
                     </fieldset>

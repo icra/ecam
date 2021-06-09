@@ -1,6 +1,25 @@
 {
 "#below":"below",
 
+"#wwt_slu_comp_seqst_rate_descr":"CO2eq sequestration rate",
+"#wwt_slu_comp_seqst_rate_expla":"Estimated CO2 equivalents sequestered per kg of sludge",
+"#wwt_slu_la_seqst_rate_descr":"CO2eq sequestration rate",
+"#wwt_slu_la_seqst_rate_expla":"Estimated CO2 equivalents sequestered per kg of sludge",
+"#wwo_la_seqst_rate_descr":"CO2eq sequestration rate",
+"#wwo_la_seqst_rate_expla":"Estimated CO2 equivalents sequestered per kg of sludge",
+
+"#wwo_opd_tn_descr":"Total Nitrogen load from open defecation",
+"#wwo_opd_tn_expla":"Total Nitrogen load from open defecation. It can be estimated from the population",
+
+"#wwt_slu_lf_DOCf_descr":"Decomposable organic fraction of raw wastewater solids",
+"#wwt_slu_lf_DOCf_expla":"Decomposable organic fraction of raw wastewater solids (80% from Brown et al., 2008 and Metcalf & Eddy, 2003)",
+"#wwo_lf_DOCf_descr":"Decomposable organic fraction of raw wastewater solids",
+"#wwo_lf_DOCf_expla":"Decomposable organic fraction of raw wastewater solids (80% from Brown et al., 2008 and Metcalf & Eddy, 2003)",
+
+"#F_IND_COM_descr":"Industrial and commercial co-discharged protein into the sewer (F_IND_COM)",
+"#F_NON_CON_descr":"Non consumed protein added to the wastewater (F_NON_CON)",
+"#N_HH_descr":"Additional nitrogen from household products added to the wastewater, default is 1.1 (some country data are in new Table 6.10a).",
+
 "#wwt_slu_lf_decomp_3yr_descr":"Percentage decomposed in first 3 years",
 "#wwt_slu_lf_decomp_3yr_expla":"Percentage decomposed in first 3 years of the decomposable organic fraction of raw wastewater solids",
 "#wwo_lf_decomp_3yr_descr":"Percentage decomposed in first 3 years",
@@ -166,9 +185,6 @@
 "#ww_nrg_cost_expla":"Costs from electric energy consumption for all wastewater utilities, based on the electricity bill during the entire assessment period",
 "#ww_run_cost_descr":"Total running costs",
 "#ww_run_cost_expla":"Total operations and maintenance net costs and internal manpower net costs (i.e. not including the capitalised cost of self constructed assets) related to wastewater management within the service area managed by the undertaking during the entire assessment period",
-
-"#wwo_prot_con_descr":"Protein consumed by population with open defecation",
-"#wwo_prot_con_expla":"Protein consumed by population with open defecation during the assessment period",
 
 "#wwt_KPI_GHG_biog_flared_descr":"Biogas flared",
 "#wwt_KPI_GHG_biog_leaked_descr":"Biogas leaked",
