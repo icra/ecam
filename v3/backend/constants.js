@@ -27,9 +27,7 @@ let Cts={
     unit:"gCO2/gC",
   },
 
-  ct_ch4_lf:{  value:50,    unit:"%",            descr:"CH4 in landfill gas, from Clean Development Mechanism, 2008",},
   ct_DOCfra:{  value:80,    unit:"%",            descr:"Decomposable organic fraction of raw wastewater solids (80% from Brown et al., 2008 and Metcalf & Eddy, 2003)",},
-  ct_d3y_lf:{  value:69.9,  unit:"%",            descr:"Decomposed % in first 3 years = 69.9%, calculated from CDM equation (UNFCCC/CCNUCC, 2008) for warm, wet conditions",},
   ct_C_seqst:{ value:0.25,  unit:"kgCO2eq/kg",   descr:"Carbon sequestration rate"},
 
   ct_cr_forN:{
@@ -49,7 +47,6 @@ let Cts={
     unit:"kWh/m3",
   },
 
-  //constants for sludge management proposed by Girum
   ct_oc_vs:{
     value:0.56,
     descr:"Organic Carbon content in Volatile Solids",

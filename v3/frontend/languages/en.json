@@ -1,6 +1,16 @@
 {
 "#below":"below",
 
+"#wwt_slu_lf_decomp_3yr_descr":"Percentage decomposed in first 3 years",
+"#wwt_slu_lf_decomp_3yr_expla":"Percentage decomposed in first 3 years of the decomposable organic fraction of raw wastewater solids",
+"#wwo_lf_decomp_3yr_descr":"Percentage decomposed in first 3 years",
+"#wwo_lf_decomp_3yr_expla":"Percentage decomposed in first 3 years of the decomposable organic fraction of raw wastewater solids",
+
+"#wwt_slu_lf_CH4_in_gas_descr":"CH4 in landfill gas",
+"#wwt_slu_lf_CH4_in_gas_expla":"CH4 in landfill gas (50% from Clean Development Mechanism, 2008)",
+"#wwo_lf_CH4_in_gas_descr":"CH4 in landfill gas",
+"#wwo_lf_CH4_in_gas_expla":"CH4 in landfill gas (50% from Clean Development Mechanism, 2008)",
+
 "#wwt_slu_comp_uncovered_pile_EF_descr":"CH4 emission factor for uncovered pile (fraction of initial C in solids)",
 
 "#wwt_slu_lf_uncertainty_descr":"Uncertainty factor (UNFCCC/CCNUC, 2008)",

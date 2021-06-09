@@ -1034,12 +1034,14 @@ class Waste_Treatment extends Substage{
     this.wwt_slu_la_EF             = 0; //gN2O-N/gN
 
     //sludge LF
-    this.wwt_mass_slu_land    = 0;
-    this.wwt_slu_lf_TVS       = 0;
-    this.wwt_slu_lf_N_cont    = 0;
-    this.wwt_slu_lf_MCF       = 1;
-    this.wwt_slu_lf_low_CN_EF = 0.015; //kgN2O-N/kgN
+    this.wwt_mass_slu_land      = 0;
+    this.wwt_slu_lf_TVS         = 0;
+    this.wwt_slu_lf_N_cont      = 0;
+    this.wwt_slu_lf_MCF         = 1;
+    this.wwt_slu_lf_low_CN_EF   = 0.015; //kgN2O-N/kgN
     this.wwt_slu_lf_uncertainty = 0.9; //adimensional
+    this.wwt_slu_lf_CH4_in_gas  = 50; //%
+    this.wwt_slu_lf_decomp_3yr  = 69.9; //%
 
     //sludge SP
     this.wwt_mass_slu_stock = 0;
@@ -1336,16 +1338,16 @@ class Waste_Treatment extends Substage{
       let N_cont      = this.wwt_slu_lf_N_cont/100; //gN/gSludge
       let MCF         = this.wwt_slu_lf_MCF; //methane correction for anaerobic managed landfills
       let TVS_to_OC   = Cts.ct_oc_vs.value; //gOC/gTVS
+      let CH4_in_gas  = this.wwt_slu_lf_CH4_in_gas/100; //%
       let low_CN_EF   = this.wwt_slu_lf_low_CN_EF; //0.015 kgN2O-N/kgN
       let uncertainty = this.wwt_slu_lf_uncertainty; //adimensional
+      let decomp_3yr  = this.wwt_slu_lf_decomp_3yr/100; //%
 
       let co2 = 0;
       let ch4 = (function(){
-        let OC_to_CH4     = Cts.ct_ch4_oc.value;
-        let CH4_in_lf_gas = Cts.ct_ch4_lf.value/100;
-        let DOC_fra       = Cts.ct_DOCfra.value/100;
-        let dec_3year     = Cts.ct_d3y_lf.value/100;
-        return sludge_mass*TVS*TVS_to_OC*uncertainty*OC_to_CH4*CH4_in_lf_gas*DOC_fra*dec_3year*MCF*Cts.ct_ch4_eq.value;
+        let OC_to_CH4 = Cts.ct_ch4_oc.value;
+        let DOC_fra   = Cts.ct_DOCfra.value/100;
+        return sludge_mass*TVS*TVS_to_OC*uncertainty*OC_to_CH4*CH4_in_gas*DOC_fra*decomp_3yr*MCF*Cts.ct_ch4_eq.value;
       })();
       let n2o = (function(){
         let C_cont = TVS*TVS_to_OC; //gOC/gSludge
@@ -1650,6 +1652,8 @@ class Waste_Onsite extends Substage{
     this.wwo_lf_MCF         = 1; //methane correction factor (default=1)
     this.wwo_lf_low_CN_EF   = 0.015; //kgN2O-N/kgN
     this.wwo_lf_uncertainty = 0.9; //kgN2O-N/kgN
+    this.wwo_lf_CH4_in_gas  = 50; //kgN2O-N/kgN
+    this.wwo_lf_decomp_3yr  = 69.9; //%
 
     //dumping
     this.wwo_vol_dumping      = 0; //volume dumped
@@ -1926,16 +1930,16 @@ class Waste_Onsite extends Substage{
       let N_cont      = this.wwo_lf_N_cont/100; //gN/gSludge
       let MCF         = this.wwo_lf_MCF; //methane correction for anaerobic managed landfills
       let TVS_to_OC   = Cts.ct_oc_vs.value; //gOC/gTVS
+      let CH4_in_gas  = this.wwo_lf_CH4_in_gas/100; //%
       let low_CN_EF   = this.wwo_lf_low_CN_EF; //0.015 kgN2O-N/kgN
       let uncertainty = this.wwo_lf_uncertainty; //0.9 adimensional
+      let decomp_3yr  = this.wwo_lf_decomp_3yr/100; //%
 
       let co2 = 0;
       let ch4 = (function(){
-        let OC_to_CH4     = Cts.ct_ch4_oc.value;
-        let CH4_in_lf_gas = Cts.ct_ch4_lf.value/100;
-        let DOC_fra       = Cts.ct_DOCfra.value/100;
-        let dec_3year     = Cts.ct_d3y_lf.value/100;
-        return sludge_mass*TVS*TVS_to_OC*uncertainty*OC_to_CH4*CH4_in_lf_gas*DOC_fra*dec_3year*MCF*Cts.ct_ch4_eq.value;
+        let OC_to_CH4 = Cts.ct_ch4_oc.value;
+        let DOC_fra   = Cts.ct_DOCfra.value/100;
+        return sludge_mass*TVS*TVS_to_OC*uncertainty*OC_to_CH4*CH4_in_gas*DOC_fra*decomp_3yr*MCF*Cts.ct_ch4_eq.value;
       })();
       let n2o = (function(){
         let C_cont = TVS*TVS_to_OC; //gOC/gSludge

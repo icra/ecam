@@ -20,6 +20,12 @@ let Info={
   Currency             :{magnitude:"text",unit:"text"},
   Country              :{magnitude:"text",unit:"text"},
 
+  wwt_slu_lf_decomp_3yr:{magnitude:"Percent", unit:"%"},
+  wwo_lf_decomp_3yr:{magnitude:"Percent", unit:"%"},
+
+  wwt_slu_lf_CH4_in_gas:{magnitude:"Percent", unit:"%"},
+  wwo_lf_CH4_in_gas:{magnitude:"Percent", unit:"%"},
+
   wwt_slu_comp_uncovered_pile_EF:{magnitude:"Mass/Mass",unit:"kgCH4-C/kgC"},
 
   wwt_slu_lf_uncertainty:{magnitude:"uncertainty",unit:"adimensional"},

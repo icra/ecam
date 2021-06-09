@@ -3,7 +3,7 @@ let constant = new Vue({
 
   data:{
     visible: false,
-    code:"ct_ch4_lf",
+    code:Object.keys(Cts)[0], //"ct_ch4_eq"
 
     Cts,
     Formulas,

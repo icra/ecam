@@ -478,6 +478,8 @@ let Questions={
         "wwt_slu_lf_MCF",//input
         "wwt_slu_lf_low_CN_EF",//input
         "wwt_slu_lf_uncertainty",//input
+        "wwt_slu_lf_CH4_in_gas",//input
+        "wwt_slu_lf_decomp_3yr",//input
 
         "wwt_ghg_avoided_sequestration_landfil",//output
       ],
@@ -601,6 +603,8 @@ let Questions={
         "wwo_lf_MCF",//input
         "wwo_lf_low_CN_EF",//input
         "wwo_lf_uncertainty",//input
+        "wwo_lf_CH4_in_gas",//input
+        "wwo_lf_decomp_3yr",//input
 
         "wwo_KPI_GHG_landfil",//output
         "wwo_ghg_avoided_landfil",//output

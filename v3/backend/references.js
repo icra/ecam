@@ -262,5 +262,10 @@ let References={
     wwo_lf_uncertainty:[{ref:"0.9 from UNFCCC/CCNUC, 2008"}],
 
     wwt_slu_comp_uncovered_pile_EF:[{ref:"2.5% from Brown et al, 2008"}],
+    wwt_slu_lf_CH4_in_gas:[{ref:"50% from Clean Development Mechanism, 2008"}],
+    wwo_lf_CH4_in_gas:[{ref:"50% from Clean Development Mechanism, 2008"}],
+
+    wwt_slu_lf_decomp_3yr:[{ref:"69.9% from CDM equation (UNFCCC/CCNUC, 2008) for warm, wet conditions (landiflls creates warm, wet conditions)"}],
+    wwo_lf_decomp_3yr:[{ref:"69.9% from CDM equation (UNFCCC/CCNUC, 2008) for warm, wet conditions (landiflls creates warm, wet conditions)"}],
   //Equations and Estimations (end)
 };
