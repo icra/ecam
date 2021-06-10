@@ -31,8 +31,8 @@ let Cts={
   ct_P_reused_credit:{value:2, descr:"Credit for P recovered replacing commercial P fertilizer (Recycled Organics Unit, 2006)", unit:"kgCO2eq/kgP"},
 
   ct_ch4_nrg:{
-    value:10,
-    descr:"Energy content in 1 Nm3 of CH4",
+    value:11,
+    descr:"Energy content in 1 Nm3 of CH4. Calculated from 55.5 MJ/kgCH4 (physics.info/energy-chemical)",
     unit:"kWh/Nm3",
   },
 

@@ -156,4 +156,8 @@ let Estimations={
       let F_IND_COM = Global.General.F_IND_COM; //adimensional
       return Protein * P * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM;
     },
+
+    wwt_nrg_biog(substage){
+      return substage.wwt_nrg_biog_val();
+    },
 };
