@@ -1,12 +1,12 @@
 /*
   IPCC categories: grouping emissions based on origin
   ------------------------------
-  ipcc_1A1: Energy - Electricity and Heat
-  ipcc_1A3: Energy - Transport
-  ipcc_5A:  Waste - Solid Waste Disposal
-  ipcc_5B:  Waste - Biological Treatment of Solid Waste
-  ipcc_5C:  Waste - Incineration
-  ipcc_5D:  Waste - Wastewater treatment and Discharge
+  unfccc_1A1: Energy - Electricity and Heat
+  unfccc_1A3: Energy - Transport
+  unfccc_5A:  Waste - Solid Waste Disposal
+  unfccc_5B:  Waste - Biological Treatment of Solid Waste
+  unfccc_5C:  Waste - Incineration
+  unfccc_5D:  Waste - Wastewater treatment and Discharge
 
   NEW TBD TODO WORK IN PROGRESS
   volume 5, chapter 6  -- freshwater
@@ -57,7 +57,7 @@ let IPCC_categories={
     },
   },
 
-  //ipcc_1A3: Energy - Transport
+  //1A3: Energy - Transport
   ipcc_1A3:{
     description:"Energy - Transport",
     color:"orange",
@@ -71,7 +71,7 @@ let IPCC_categories={
     },
   },
 
-  //ipcc_5A: Waste - Solid Waste Disposal
+  //5A: Waste - Solid Waste Disposal
   ipcc_5A:{
     description:"Waste - Solid Waste Disposal",
     color:"#30a5d8",
@@ -89,7 +89,7 @@ let IPCC_categories={
     },
   },
 
-  //ipcc_5B: Waste - Biological Treatment of Solid Waste
+  //5B: Waste - Biological Treatment of Solid Waste
   ipcc_5B:{
     description:"Waste - Biological Treatment of Solid Waste",
     color:"#46ba55",
@@ -102,7 +102,7 @@ let IPCC_categories={
     },
   },
 
-  //ipcc_5C: Waste - Incineration
+  //5C: Waste - Incineration
   ipcc_5C:{
     description:"Waste - Incineration",
     color:"red",
@@ -113,7 +113,7 @@ let IPCC_categories={
     },
   },
 
-  //ipcc_5D: Waste - Wastewater treatment and Discharge
+  //5D: Waste - Wastewater treatment and Discharge
   ipcc_5D:{
     description:"Waste - Wastewater treatment and Discharge",
     color:"#85077c",
