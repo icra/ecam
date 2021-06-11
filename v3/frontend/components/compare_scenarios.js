@@ -174,6 +174,46 @@ let compare_scenarios=new Vue({
           });
         }
 
+        //Chart.js - line chart: nrg difference between scenarios
+        if(document.getElementById('line_chart_nrg_difference')){
+          this.charts.line_chart_ghg_difference=new Chart('line_chart_nrg_difference',{
+            type:'line',
+            data:{
+              labels: this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              datasets:[
+                {
+                  label: 'Variation of total energy consumption (%)',
+                  data: this.scenarios_compared.map((scenario,i)=>{
+                    if(i==0) return 0;
+
+                    let curr = scenario.TotalNRG(); //current energy consumption
+                    let prev = this.scenarios_compared[i-1].TotalNRG(); //previous scenario
+                    variation = 100*(curr-prev)/prev;
+                    return variation;
+                  }),//[12, 19, 3, 5, 2, 3],
+                  backgroundColor:["#ffbe54"],
+                  borderColor:["#ffbe54"],
+                  borderWidth: 1
+                },
+              ]
+            },
+            options: {
+              aspectRatio:4,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  borderWidth:2,
+                }
+              },
+              plugins:{
+                datalabels: {
+                  color: '#36A2EB'
+                },
+              },
+            },
+          });
+        }
+
         //Chart.js - bar chart: total ghg by gas
         if(document.getElementById('bar_chart_ghg_by_gas')){
           this.charts.bar_chart_ghg_by_gas= new Chart('bar_chart_ghg_by_gas',{
@@ -643,6 +683,10 @@ let compare_scenarios=new Vue({
           class="chart_container bar"
         >
           <canvas id="bar_chart_nrg_by_assessment" width="400" height="400"></canvas>
+          <div v-if="scenarios_compared.length>1">
+            <b>Variation respect previous assessment (%)</b>
+            <canvas id="line_chart_nrg_difference" width="400" height="400"></canvas>
+          </div>
         </div>
 
         <div
