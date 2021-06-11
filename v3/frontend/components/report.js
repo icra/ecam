@@ -153,7 +153,7 @@ let report = new Vue({
       <div>{{show_summaries_menu()}}</div>
 
       <!--title-->
-      <h1 v-if="!printable_version" style="text-align:center">
+      <h1 v-if="!printable_version" style="text-align:center;padding-bottom:0">
         <div> Report </div>
         <div style="text-align:center;font-size:smaller">
           Double-click the report to enable/disable a printable view.
