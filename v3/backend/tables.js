@@ -210,7 +210,6 @@ let Tables={
     {name:"no"},
     {name:"yes"},
   ],
-
 };
 
 //get row object by "table" (string) and "index" (integer)
@@ -223,4 +222,13 @@ Tables.get_row=function(table, index){
 
   //checks passed: return row
   return t[index];
+};
+
+//table titles and/or descriptions
+Tables.get_table_description=function(table_name){
+  return {
+    "type_of_water_body": "EFCH4 for Type of Water Body (Table 6.3)",
+    "type_of_sewer":      "EFCH4 for Type of Sewer (Table 6.3)",
+    "type_of_treatment":  "EFCH4 for Type of Treatment (Table 6.3)",
+  }[table_name]||table_name;
 };

@@ -53,7 +53,6 @@ let problems=new Vue({
     Cts,
     Info,
     Benchmarks,
-    Tables,
   },
 
   methods:{

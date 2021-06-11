@@ -48,7 +48,7 @@ let tables = new Vue({
         <div>
           <div onclick @click="toggle_folding(name)" class=summary>
             <div :style="{transform:tables_displayed.indexOf(name)<0?'rotate(-90deg)':''}">▼</div>
-            <div style="margin-left:5px" class=table_name>{{name}}</div>
+            <div style="margin-left:5px" class=table_name>{{Tables.get_table_description(name)}}</div>
             <div
               v-if="!References[name]"
               style="
@@ -80,7 +80,7 @@ let tables = new Vue({
               <table>
                 <tr>
                   <td colspan=100 style="color:white;background:var(--color-level-generic)">
-                    {{name}}
+                    {{Tables.get_table_description(name)}}
                   </td>
                 </tr>
                 <tr v-for="row in table">
@@ -159,6 +159,7 @@ let tables = new Vue({
         font-weight:bolder;
         margin-bottom:5px;
         align-items:center;
+        font-family:monospace;
       }
       #tables div.summary:hover div.table_name{
         text-decoration:underline;

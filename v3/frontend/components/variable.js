@@ -311,11 +311,7 @@ let variable=new Vue({
                             </select>
 
                             <!--case 3: selection is a fixed value-->
-                            <select v-else v-model="ss[id]"
-                              style="
-                                max-width:200px;
-                              "
-                            >
+                            <select v-else v-model="ss[id]" style="max-width:200px">
                               <option
                                 v-for="obj in Tables[Exceptions[id].table]"
                                 :value="parseFloat(obj[Exceptions[id].table_field(ss)])"
@@ -425,7 +421,7 @@ let variable=new Vue({
               <table>
                 <tr>
                   <th colspan=100 style="background:var(--color-level-generic);text-align:left">
-                    {{Info[id].table}}
+                    {{Tables.get_table_description(Info[id].table)}}
                   </th>
                 </tr>
                 <tr v-for="row in Tables[Info[id].table]">
@@ -472,7 +468,7 @@ let variable=new Vue({
                     "
                   >
                     <div>
-                      {{Exceptions[id].table}}
+                      {{Tables.get_table_description(Exceptions[id].table)}}
                     </div>
                     <div
                       v-if="References[Exceptions[id].table]"

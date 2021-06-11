@@ -272,8 +272,8 @@ let ecam={
                 let options=Tables[Info[key].table].map(row=>translate(row.name));
                 let options_with_numbers=options.map((op,i)=>{
                   return `${i}: '${op}'`;
-                });
-                description += ` --> [${options_with_numbers.join(", ")}]`;
+                }).join(", ");
+                description += ` --> [${options_with_numbers}]`;
               }
 
               return[

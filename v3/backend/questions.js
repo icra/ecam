@@ -400,10 +400,7 @@ let Questions={
 
     "wwt_sludge_mgmt":{
       variables:[
-        "wwt_mass_slu",
-        "wwt_bod_slud",
         "wwt_KPI_sludg_prod",
-        "wwt_KPI_GHG_slu",
         "wwt_ghg_avoided_sequestration",
       ],
       advanced:0,

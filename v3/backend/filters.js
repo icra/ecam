@@ -92,9 +92,11 @@ let Filters={
 ],
 
 "Sludge Management":[
-  "wwt_serv_pop",         //input
-  "wwt_bod_infl",         //input
-  "wwt_bod_effl",         //input
+  "wwt_serv_pop",//input
+  "wwt_bod_infl",//input
+  "wwt_bod_effl",//input
+  "wwt_mass_slu",//input
+  "wwt_bod_slud",//input
   "wwt_sludge_mgmt",      //question
   "wwt_slu_storage",      //question
   "wwt_composting",       //question
