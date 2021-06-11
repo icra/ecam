@@ -21,7 +21,7 @@ let more=new Vue({
       </h2>
 
       <div id=buttons>
-        <div class=button onclick="ecam.show('about')">            {{translate('about')            }}</div>
+        <div class=button onclick="ecam.show('about')">            {{translate('about ecam')       }}</div>
         <div class=button onclick="ecam.show('faqs')">             {{translate('FAQs')             }}</div>
         <div class=button onclick="ecam.show('docs')">             {{translate('Documentation')    }}</div>
         <div class=button onclick="ecam.show('diagram')">          {{translate('Flow diagram')     }}</div>
