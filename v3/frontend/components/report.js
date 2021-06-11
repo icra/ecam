@@ -31,6 +31,15 @@ let report = new Vue({
     format_emission: summary_ghg.format_emission,
     format_energy:   summary_ghg.format_energy,
 
+    open_print_dialog(){
+      let _this=this;
+      this.printable_version=true;
+      setTimeout(function(){
+        window.print();
+        _this.printable_version=false;
+      },1000);
+
+    },
 
     show_summaries_menu(){
       if(this.printable_version==false){
@@ -147,15 +156,17 @@ let report = new Vue({
       <h1 v-if="!printable_version" style="text-align:center">
         <div> Report </div>
         <div style="text-align:center;font-size:smaller">
-          Double-click the report to enable/disable a printable view. Then
-          press CTRL+P to generate a PDF file.
+          Double-click the report to enable/disable a printable view.
+          <p>
+            <button @click="open_print_dialog()">Print report</button>
+          </p>
         </div>
       </h1>
 
       <div v-if="!printable_version" style="text-align:center;padding-bottom:1em">
         <label>
           <input type=checkbox v-model="hide_zero_valued_variables">
-          Hide fields with value equal to zero (working title)
+          Hide fields with value equal to zero
         </label>
       </div>
 

@@ -45,9 +45,9 @@ if(debug){
 
 //initial page displayed
 if(debug){
-  go_to('Waste','Treatment'); //"inventory"
+  //go_to('Waste','Treatment'); //"inventory"
   //variable.view('wwo_bod_rmvd'); //variable detailed info
-  //ecam.show('select_scenario'); //page
+  ecam.show('report'); //page
 
   //default filters on for tier B:
   tier_b.filters_on=true;
