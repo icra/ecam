@@ -35,6 +35,7 @@ let ecam={
     summaries_menu,
     docs,
     faqs,
+    ipcc_categories,
 
     development,
     problems,

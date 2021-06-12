@@ -178,9 +178,17 @@ let faqs = new Vue({
         "
       >
         <div
-          v-for="category in Object.keys(categories)"
+          v-for="category,i in Object.keys(categories)"
+          style="
+            padding:5px;
+            margin-right:5px;
+            border:1px solid #ddd;
+          "
         >
-          <div style="text-align:center">
+          <div
+            style="
+            "
+          >
             <b>{{categories[category]}}</b>
           </div>
 

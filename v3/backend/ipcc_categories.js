@@ -1,20 +1,25 @@
 /*
   IPCC categories: grouping emissions based on origin
-  ---------------------------------------------------
-  based on table 8.2 from 2019-ipcc/1_Volume1/19R_V1_Ch08_Reporting_Guidance.pdf
+  ===================================================
+  Based on table 8.2 from IPCC 2019, Volume 1, Chapter 8 "Reporting Guidance"
 
-  Volumes 
-    volume 5, chapter 6  -- freshwater
-    volume 4, chapter 11 -- agricultural soils
-    volume 5, chapter 3  -- land disposal of wastewater
-    volume 5, chapter 2  -- sludge treatment offsite
-    volume 5, chapter 5  -- incineration
-    volume 5, chapter 4  -- composting
-    volume 5, chapter 3  -- landfilling
-    volume 4, chapter 11 -- land application
+  ---------
+  REPORTING
+  ---------
+    Discharge to Freshwater, estuarine or marine environments -- Volume 5, Chapter 6
+    Discharge to Agricultural soils                           -- Volume 4, Chapter 11
+    Land disposal of wastewater                               -- Volume 5, Chapter 3
 
+    Sludge treatment offsite  -- Volume 5, Chapter 2
+      Incineration            -- Volume 5, Chapter 5
+      Composting              -- Volume 5, Chapter 4
+      Landfilling             -- Volume 5, Chapter 3
+      Land application        -- Volume 4, Chapter 11
+    Sludge treatment at WWTPs -- volume 5, Chapter 6
+
+  -----------------------------------------------------
   ALL ECAM EMISSIONS (not including grouping emissions)
-  =====================================================
+  -----------------------------------------------------
     wsa_KPI_GHG_elec
     wsa_KPI_GHG_fuel
     wst_KPI_GHG_elec
@@ -58,58 +63,59 @@
     wwo_KPI_GHG_urine
     wwo_KPI_GHG_trck
 
+  -------------------------------
   ALL IPCC CATEGORIES (table 8.2)
-  ===============================
+  -------------------------------
     1 - ENERGY
-      1 A - Fuel Combustion Activities 
-        1 A 1 - Energy Industries 
+      1 A - Fuel Combustion Activities
+        1 A 1 - Energy Industries
           1 A 1 a - Main Activity Electricity and Heat Production
-            1 A 1 a i - Electricity Generation 
+            1 A 1 a i - Electricity Generation
             1 A 1 a ii - Combined Heat and Power (CHP)
-            1 A 1 a iii - Heat Plants 
+            1 A 1 a iii - Heat Plants
           1 A 1 b - Petroleum Refining
           1 A 1 c - Manufacture of Solid Fuels and Other Energy Industries
-            1 A 1 c i - Manufacture of Solid Fuels 
-            1 A 1 c ii - Other Energy Industries 
+            1 A 1 c i - Manufacture of Solid Fuels
+            1 A 1 c ii - Other Energy Industries
         1 A 2 - Manufacturing Industries and Construction
-          1 A 2 a - Iron and Steel 
-          1 A 2 b - Non-Ferrous Metals 
-          1 A 2 c - Chemicals 
-          1 A 2 d - Pulp, Paper and Print 
+          1 A 2 a - Iron and Steel
+          1 A 2 b - Non-Ferrous Metals
+          1 A 2 c - Chemicals
+          1 A 2 d - Pulp, Paper and Print
           1 A 2 e - Food Processing, Beverages and Tobacco
           1 A 2 f - Non-Metallic Minerals
           1 A 2 g - Transport Equipment
           1 A 2 h - Machinery
           1 A 2 i - Mining (excluding fuels) and Quarrying
-          1 A 2 j - Wood and Wood Products 
-          1 A 2 k - Construction 
-          1 A 2 l - Textile and Leather 
+          1 A 2 j - Wood and Wood Products
+          1 A 2 k - Construction
+          1 A 2 l - Textile and Leather
           1 A 2 m - Non-specified Industry
         1 A 3 - Transport
           1 A 3 a - Civil Aviation
             1 A 3 a i - International Aviation (International Bunkers)
-            1 A 3 a ii - Domestic Aviation 
-          1 A 3 b - Road Transportation 
-            1 A 3 b i - Cars 
+            1 A 3 a ii - Domestic Aviation
+          1 A 3 b - Road Transportation
+            1 A 3 b i - Cars
               1 A 3 b i 1 - Passenger Cars With 3-way Catalysts
               1 A 3 b i 2 - Passenger Cars Without 3-way Catalysts
-            1 A 3 b ii - Light-duty Trucks 
+            1 A 3 b ii - Light-duty Trucks
               1 A 3 b ii 1 - Light-duty Trucks With 3-way Catalysts
               1 A 3 b ii 2 - Light-duty Trucks Without 3-way Catalysts
             1 A 3 b iii - Heavy-duty Trucks and Buses
-            1 A 3 b iv - Motorcycles 
+            1 A 3 b iv - Motorcycles
             1 A 3 b v - Evaporative Emissions from Vehicles
             1 A 3 b vi - Urea-based Catalysts
-          1 A 3 c - Railways 
-          1 A 3 d - Water-borne Navigation 
+          1 A 3 c - Railways
+          1 A 3 d - Water-borne Navigation
             1 A 3 d i - International Water-borne Navigation (International Bunkers)
             1 A 3 d ii - Domestic Water-borne Navigation
           1 A 3 e - Other Transportation
             1 A 3 e i - Pipeline Transport
             1 A 3 e ii - Off-road
         1 A 4 - Other Sectors
-          1 A 4 a - Commercial/Institutional 
-          1 A 4 b - Residential 
+          1 A 4 a - Commercial/Institutional
+          1 A 4 b - Residential
           1 A 4 c - Agriculture/Forestry/Fishing/Fish Farms
             1 A 4 c i - Stationary
             1 A 4 c ii - Off-road Vehicles and Other Machinery
@@ -117,7 +123,7 @@
         1 A 5 - Non-Specified
           1 A 5 a - Stationary
           1 A 5 b - Mobile
-            1 A 5 b i - Mobile (Aviation Component) 
+            1 A 5 b i - Mobile (Aviation Component)
             1 A 5 b ii - Mobile (Water-borne Component)
             1 A 5 b iii - Mobile (Other)
           1 A 5 c - Multilateral Operations
@@ -137,7 +143,7 @@
           1 B 1 b - Uncontrolled Combustion, and Burning Coal Dumps
           1 B 1 c - Fuel Transformation
             1 B 1 c i - Charcoal and Biochar
-            1 B 1 c ii - Coke Production 
+            1 B 1 c ii - Coke Production
             1 B 1 c iii - Solid to Solid Fuel Production
             1 B 1 c iv - Gasification Transformation
         1 B 2 - Oil and Natural Gas
