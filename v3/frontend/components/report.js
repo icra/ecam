@@ -38,7 +38,6 @@ let report = new Vue({
         window.print();
         _this.printable_version=false;
       },1000);
-
     },
 
     show_summaries_menu(){
@@ -388,7 +387,7 @@ let report = new Vue({
                   </div>
                 </div>
 
-                <!--
+                <!--ipcc categories-->
                 <div class=chart_container>
                   <div class=chart_title>
                     GHG emissions by IPCC category
@@ -404,7 +403,6 @@ let report = new Vue({
                     <div id=chart_ipcc_categories></div>
                   </div>
                 </div>
-                -->
               </div>
             </div>
 

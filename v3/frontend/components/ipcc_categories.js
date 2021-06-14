@@ -3,27 +3,70 @@ let ipcc_categories = new Vue({
   data:{
     visible:false,
     Languages,
+
+    Global,
+    IPCC_categories,
   },
   methods:{
     translate,
+    format,
   },
   template:`
     <div id=ipcc_categories v-if="visible && Languages.ready">
-      <h2 style="text-align:center">
-        IPCC categories work in progress
+      <h2 style="text-align:center;padding-bottom:0">
+        IPCC categories: all ECAM emissions sorted
       </h2>
 
-      <div style="text-align:center">
-        <a href="backend/ipcc_categories.js" target=_blank>
-          backend file in development
-        </a>
+      <!--list-->
+      <div>
+        <div
+          v-for="cat,code in IPCC_categories"
+          :style="{background:cat.color}"
+          class=category
+        >
+          <details>
+            <summary>
+              <b><code>{{code}}</code></b>
+              -
+              {{cat.description}}
+            </summary>
+            <div>
+              <inputs_involved_table
+                :obj="IPCC_categories[code]"
+                :code="'emissions'"
+              ></inputs_involved_table>
+              <p>
+                Total: {{format(cat.emissions(Global))}} kgCO<sub>2</sub>eq
+              </p>
+            </div>
+          </details>
+        </div>
       </div>
+
+      <p style="text-align:center">
+        <a href="http://localhost/ecam/v3/frontend/docs/2019-ipcc/1_Volume1/19R_V1_Ch08_Reporting_Guidance.pdf#page=9" target=_blank>
+          Reference: Table 8.2 "Classification and definition of categories of emissions and removals"
+        </a>
+      </p>
     </div>
   `,
 
   style:`
     <style>
       #ipcc_categories {
+        padding-left:1em;
+        padding-right:1em;
+        margin:auto;
+      }
+      #ipcc_categories .category{
+        padding:1em;
+        margin-bottom:1px;
+      }
+      #ipcc_categories summary {
+        cursor:pointer;
+      }
+      #ipcc_categories .category table {
+        background:white;
       }
     </style>
   `,

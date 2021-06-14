@@ -117,14 +117,6 @@ let Info={
   wwo_KPI_GHG_biog_leaked:{magnitude:"Mass",unit:"kgCO2eq"},
   wwo_nrg_biog_val:{magnitude:"Energy",unit:"kWh"},
 
-	//IPCC categories
-	ipcc_1A1:{magnitude:"Mass",unit:"kgCO2eq"},
-	ipcc_1A3:{magnitude:"Mass",unit:"kgCO2eq"},
-	ipcc_5A :{magnitude:"Mass",unit:"kgCO2eq"},
-	ipcc_5B :{magnitude:"Mass",unit:"kgCO2eq"},
-	ipcc_5C :{magnitude:"Mass",unit:"kgCO2eq"},
-	ipcc_5D :{magnitude:"Mass",unit:"kgCO2eq"},
-
   //costs
   ws_nrg_cost:{magnitude:"Currency",unit:"USD"},
   ws_run_cost:{magnitude:"Currency",unit:"USD"},

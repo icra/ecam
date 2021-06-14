@@ -20,48 +20,48 @@
   -----------------------------------------------------
   ALL ECAM EMISSIONS (not including grouping emissions)
   -----------------------------------------------------
-    wsa_KPI_GHG_elec
-    wsa_KPI_GHG_fuel
-    wst_KPI_GHG_elec
-    wst_KPI_GHG_fuel
-    wsd_KPI_GHG_elec
-    wsd_KPI_GHG_fuel
-    wsd_KPI_GHG_trck
-    wwc_KPI_GHG_elec
-    wwc_KPI_GHG_fuel
-    wwc_KPI_GHG_cso
-    wwc_KPI_GHG_col
-    wwt_KPI_GHG_elec
-    wwt_KPI_GHG_fuel
-    wwt_KPI_GHG_tre
-    wwt_KPI_GHG_biog_flared TODO
-    wwt_KPI_GHG_biog_valorized TODO
-    wwt_KPI_GHG_biog_leaked TODO
-    wwt_KPI_GHG_dig_fuel
-    wwt_KPI_GHG_slu_storage
-    wwt_KPI_GHG_slu_composting
-    wwt_KPI_GHG_slu_incineration
-    wwt_KPI_GHG_slu_land_application
-    wwt_KPI_GHG_slu_landfilling
-    wwt_KPI_GHG_slu_stockpilling
-    wwt_KPI_GHG_slu_transport
-    wwt_KPI_GHG_reus_trck
-    wwt_KPI_GHG_disc
-    wwo_KPI_GHG_elec
-    wwo_KPI_GHG_fuel
-    wwo_KPI_GHG_unt_opd
-    wwo_KPI_GHG_containment
-    wwo_KPI_GHG_tre
-    wwo_KPI_GHG_dis
-    wwo_KPI_GHG_biog_flared TODO
-    wwo_KPI_GHG_biog_valorized TODO
-    wwo_KPI_GHG_biog_leaked TODO
-    wwo_KPI_GHG_dig_fuel
-    wwo_KPI_GHG_landfil
-    wwo_KPI_GHG_landapp
-    wwo_KPI_GHG_dumping
-    wwo_KPI_GHG_urine
-    wwo_KPI_GHG_trck
+    wsa_KPI_GHG_elec                  1A1    "Energy_Industries"
+    wst_KPI_GHG_elec                  1A1    "Energy_Industries"
+    wsd_KPI_GHG_elec                  1A1    "Energy_Industries"
+    wwc_KPI_GHG_elec                  1A1    "Energy_Industries"
+    wwt_KPI_GHG_elec                  1A1    "Energy_Industries"
+    wwo_KPI_GHG_elec                  1A1    "Energy_Industries"
+    wsa_KPI_GHG_fuel                  1A3ei  "Pipeline_Transport"
+    wst_KPI_GHG_fuel                  1A3ei  "Pipeline_Transport"
+    wsd_KPI_GHG_fuel                  1A3ei  "Pipeline_Transport"
+    wwc_KPI_GHG_fuel                  1A3ei  "Pipeline_Transport"
+    wwt_KPI_GHG_fuel                  1A3ei  "Pipeline_Transport"
+    wwo_KPI_GHG_fuel                  1A3ei  "Pipeline_Transport"
+    wwt_KPI_GHG_dig_fuel              1A4    "Other_sectors"
+    wwo_KPI_GHG_dig_fuel              1A4    "Other_sectors"
+    wwt_KPI_GHG_biog_flared           1A4    "Other_sectors"
+    wwt_KPI_GHG_biog_valorized        1A4    "Other_sectors"
+    wwo_KPI_GHG_biog_flared           1A4    "Other_sectors"
+    wwo_KPI_GHG_biog_valorized        1A4    "Other_sectors"
+    wsd_KPI_GHG_trck                  1A3b   "Road_transportation"
+    wwt_KPI_GHG_reus_trck             1A3b   "Road_transportation"
+    wwt_KPI_GHG_slu_transport         1A3b   "Road_transportation"
+    wwo_KPI_GHG_trck                  1A3b   "Road_transportation"
+    wwc_KPI_GHG_cso                   4D     "Wastewater_Treatment_and_Discharge"
+    wwc_KPI_GHG_col                   4D     "Wastewater_Treatment_and_Discharge"
+    wwt_KPI_GHG_tre                   4D     "Wastewater_Treatment_and_Discharge"
+    wwo_KPI_GHG_unt_opd               4D     "Wastewater_Treatment_and_Discharge"
+    wwo_KPI_GHG_tre                   4D     "Wastewater_Treatment_and_Discharge"
+    wwo_KPI_GHG_containment           4D     "Wastewater_Treatment_and_Discharge"
+    wwt_KPI_GHG_disc                  4D     "Wastewater_Treatment_and_Discharge"
+    wwo_KPI_GHG_dis                   4D     "Wastewater_Treatment_and_Discharge"
+    wwo_KPI_GHG_urine                 4D     "Wastewater_Treatment_and_Discharge"
+    wwt_KPI_GHG_slu_storage           4B     "Biological_Treatment_of_Solid_Waste"
+    wwt_KPI_GHG_slu_composting        4B     "Biological_Treatment_of_Solid_Waste"
+    wwt_KPI_GHG_biog_leaked           4B     "Biological_Treatment_of_Solid_Waste"
+    wwo_KPI_GHG_biog_leaked           4B     "Biological_Treatment_of_Solid_Waste"
+    wwt_KPI_GHG_slu_incineration      4C     "Incineration_and_Open_Burning_of_Waste"
+    wwt_KPI_GHG_slu_land_application  4A     "Solid_Waste_Disposal"
+    wwt_KPI_GHG_slu_landfilling       4A     "Solid_Waste_Disposal"
+    wwt_KPI_GHG_slu_stockpilling      4A     "Solid_Waste_Disposal"
+    wwo_KPI_GHG_landfil               4A     "Solid_Waste_Disposal"
+    wwo_KPI_GHG_landapp               4A     "Solid_Waste_Disposal"
+    wwo_KPI_GHG_dumping               4A     "Solid_Waste_Disposal"
 
   -------------------------------
   ALL IPCC CATEGORIES (table 8.2)
@@ -370,84 +370,98 @@
     5 - OTHER
       5 A - Indirect N2O Emissions from the Atmospheric Deposition of Nitrogen in NOx and NH3
       5 B - Other (please specify)
-
 */
 
 let IPCC_categories={
-  //1A1: Energy - Electricity and Heat TODO
   ipcc_1A1:{
-    description:"Energy - Electricity and Heat",
+    description:"Energy / Fuel Combustion Activities / Energy Industries",
     color:"rgba(247,165,7,0.47)",
     emissions(scenario){
       return[
-        scenario.Water.Abstraction  .map(ss=>ss.wsa_KPI_GHG_elec().total).sum(), //wsa electricity
-        scenario.Water.Treatment    .map(ss=>ss.wst_KPI_GHG_elec().total).sum(), //wst electricity
-        scenario.Water.Distribution .map(ss=>ss.wsd_KPI_GHG_elec().total).sum(), //wsd electricity
-        scenario.Waste.Collection   .map(ss=>ss.wwc_KPI_GHG_elec().total).sum(), //wsd electricity
-        scenario.Waste.Treatment    .map(ss=>ss.wwt_KPI_GHG_elec().total).sum(), //wsd electricity
-        scenario.Waste.Onsite       .map(ss=>ss.wwo_KPI_GHG_elec().total).sum(), //wsd electricity
-
-        scenario.Water.Abstraction  .map(ss=>ss.wsa_KPI_GHG_fuel().total).sum(), //wsa fuel engines
-        scenario.Water.Treatment    .map(ss=>ss.wst_KPI_GHG_fuel().total).sum(), //wst fuel engines
-        scenario.Water.Distribution .map(ss=>ss.wsd_KPI_GHG_fuel().total).sum(), //wsd fuel engines
-        scenario.Waste.Collection   .map(ss=>ss.wwc_KPI_GHG_fuel().total).sum(), //wwc fuel engines
-        scenario.Waste.Treatment    .map(ss=>ss.wwt_KPI_GHG_fuel().total).sum(), //wwt fuel engines
-        scenario.Waste.Onsite       .map(ss=>ss.wwo_KPI_GHG_fuel().total).sum(), //wwo fuel engines
-
-        scenario.Waste.Treatment    .map(ss=>ss.wwt_KPI_GHG_dig_fuel().total).sum(), //wwt digestor fuel
-        scenario.Waste.Onsite       .map(ss=>ss.wwo_KPI_GHG_dig_fuel().total).sum(), //wwo digestor fuel
+        scenario.Water.Abstraction .map(ss=>ss.wsa_KPI_GHG_elec().total).sum(), //wsa electricity
+        scenario.Water.Treatment   .map(ss=>ss.wst_KPI_GHG_elec().total).sum(), //wst electricity
+        scenario.Water.Distribution.map(ss=>ss.wsd_KPI_GHG_elec().total).sum(), //wsd electricity
+        scenario.Waste.Collection  .map(ss=>ss.wwc_KPI_GHG_elec().total).sum(), //wsd electricity
+        scenario.Waste.Treatment   .map(ss=>ss.wwt_KPI_GHG_elec().total).sum(), //wsd electricity
+        scenario.Waste.Onsite      .map(ss=>ss.wwo_KPI_GHG_elec().total).sum(), //wsd electricity
       ].sum();
     },
   },
 
-  //1A3: Energy - Transport
-  ipcc_1A3:{
-    description:"Energy - Transport",
+  ipcc_1A3b:{
+    description:"Energy / Fuel Combustion Activities / Transport / Road Transportation",
     color:"orange",
     emissions(scenario){
-      return [
-        scenario.Water.Distribution .map(ss=>ss.wsd_KPI_GHG_trck()         .total).sum(), //wsd trucks
-        scenario.Waste.Treatment    .map(ss=>ss.wwt_KPI_GHG_reus_trck()    .total).sum(), //wwt reused water trucks
-        scenario.Waste.Treatment    .map(ss=>ss.wwt_KPI_GHG_slu_transport().total).sum(), //wwt sludge transport
-        scenario.Waste.Onsite       .map(ss=>ss.wwo_KPI_GHG_trck()         .total).sum(), //wwo transport of faecal sludge
+      return[
+        scenario.Water.Distribution.map(ss=>ss.wsd_KPI_GHG_trck()         .total).sum(), //wsd trucks
+        scenario.Waste.Treatment   .map(ss=>ss.wwt_KPI_GHG_reus_trck()    .total).sum(), //wwt reused water trucks
+        scenario.Waste.Treatment   .map(ss=>ss.wwt_KPI_GHG_slu_transport().total).sum(), //wwt sludge transport
+        scenario.Waste.Onsite      .map(ss=>ss.wwo_KPI_GHG_trck()         .total).sum(), //wwo transport of faecal sludge
       ].sum();
     },
   },
 
-  //4A: Waste - Solid Waste Disposal
+  ipcc_1A3ei:{
+    description:"Energy / Fuel Combustion Activities / Transport / Other Transportation / Pipeline Transport",
+    color:"#e7c357",
+    emissions(scenario){
+      return[
+        scenario.Water.Abstraction .map(ss=>ss.wsa_KPI_GHG_fuel().total).sum(), //wsa fuel engines
+        scenario.Water.Treatment   .map(ss=>ss.wst_KPI_GHG_fuel().total).sum(), //wst fuel engines
+        scenario.Water.Distribution.map(ss=>ss.wsd_KPI_GHG_fuel().total).sum(), //wsd fuel engines
+        scenario.Waste.Collection  .map(ss=>ss.wwc_KPI_GHG_fuel().total).sum(), //wwc fuel engines
+        scenario.Waste.Treatment   .map(ss=>ss.wwt_KPI_GHG_fuel().total).sum(), //wwt fuel engines
+        scenario.Waste.Onsite      .map(ss=>ss.wwo_KPI_GHG_fuel().total).sum(), //wwo fuel engines
+      ].sum();
+    },
+  },
+
+  ipcc_1A4:{
+    description:"Energy / Fuel Combustion Activities / Other Sectors",
+    color:"#ff8405",
+    emissions(scenario){
+      return[
+        scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_dig_fuel()      .total).sum(), //digestor fuel
+        scenario.Waste.Onsite   .map(ss=>ss.wwo_KPI_GHG_dig_fuel()      .total).sum(), //digestor fuel
+        scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_biog_flared()   .total).sum(), //biogas flared
+        scenario.Waste.Onsite   .map(ss=>ss.wwo_KPI_GHG_biog_flared()   .total).sum(), //biogas flared
+        scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_biog_valorized().total).sum(), //biogas valorized
+        scenario.Waste.Onsite   .map(ss=>ss.wwo_KPI_GHG_biog_valorized().total).sum(), //biogas valorized
+      ].sum();
+    },
+  },
+
   ipcc_4A:{
-    description:"Waste - Solid Waste Disposal",
+    description:"Waste / Solid Waste Disposal",
     color:"#30a5d8",
     emissions(scenario){
       return [
         scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_slu_land_application().total).sum(), //wwt land application
         scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_slu_landfilling()     .total).sum(), //wwt landfilling
         scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_slu_stockpilling()    .total).sum(), //wwt stockpilling
-        scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_slu_storage()         .total).sum(), //wwt storage
+
         scenario.Waste.Onsite   .map(ss=>ss.wwo_KPI_GHG_landapp()             .total).sum(), //wwo land application
         scenario.Waste.Onsite   .map(ss=>ss.wwo_KPI_GHG_landfil()             .total).sum(), //wwo landfilling
         scenario.Waste.Onsite   .map(ss=>ss.wwo_KPI_GHG_dumping()             .total).sum(), //wwo dumping of faecal sludge
-        scenario.Waste.Onsite   .map(ss=>ss.wwo_KPI_GHG_urine()               .total).sum(), //wwo land application of urine
       ].sum();
     },
   },
 
-  //4B: Waste - Biological Treatment of Solid Waste
   ipcc_4B:{
-    description:"Waste - Biological Treatment of Solid Waste",
+    description:"Waste / Biological Treatment of Solid Waste",
     color:"#46ba55",
     emissions(scenario){
       return [
+        scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_slu_storage()   .total).sum(),
         scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_slu_composting().total).sum(),
-        scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_biog()          .total).sum(),
-        scenario.Waste.Onsite   .map(ss=>ss.wwo_KPI_GHG_biog()          .total).sum(),
+        scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_biog_leaked()   .total).sum(),
+        scenario.Waste.Onsite   .map(ss=>ss.wwo_KPI_GHG_biog_leaked()   .total).sum(),
       ].sum();
     },
   },
 
-  //4C: Waste - Incineration
   ipcc_4C:{
-    description:"Waste - Incineration",
+    description:"Waste / Incineration and Open Burning of Waste",
     color:"red",
     emissions(scenario){
       return [
@@ -456,15 +470,14 @@ let IPCC_categories={
     },
   },
 
-  //4D: Waste - Wastewater treatment and Discharge
   ipcc_4D:{
-    description:"Waste - Wastewater treatment and Discharge",
+    description:"Waste / Wastewater Treatment and Discharge",
     color:"#85077c",
     emissions(scenario){
       return [
         //untreated ww
-        scenario.Waste.Collection.map(ss=>ss.wwc_KPI_GHG_col()    .total).sum(), //wwc collected water
         scenario.Waste.Collection.map(ss=>ss.wwc_KPI_GHG_cso()    .total).sum(), //wwc sewer overflow
+        scenario.Waste.Collection.map(ss=>ss.wwc_KPI_GHG_col()    .total).sum(), //wwc collected water
         scenario.Waste.Onsite    .map(ss=>ss.wwo_KPI_GHG_unt_opd().total).sum(), //wwo open defecation
 
         //treatment
@@ -475,6 +488,9 @@ let IPCC_categories={
         //discharge
         scenario.Waste.Treatment.map(ss=>ss.wwt_KPI_GHG_disc() .total).sum(), //wwt discharge
         scenario.Waste.Onsite   .map(ss=>ss.wwo_KPI_GHG_dis()  .total).sum(), //wwo discharge
+
+        //land application of urine
+        scenario.Waste.Onsite   .map(ss=>ss.wwo_KPI_GHG_urine().total).sum(), //wwo land application of urine
       ].sum();
     },
   },
