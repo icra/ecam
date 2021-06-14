@@ -40,7 +40,6 @@ class Ecam{
       prot_con             : 0,     //prot consumption (kg/person/year)
       bod_pday             : 0,     //BOD5 (g/person/day)
 
-      //new TODO
       F_IND_COM: 1.25,
       F_NON_CON: 1.1,
       N_HH:      1.1,
@@ -192,10 +191,12 @@ class Ecam{
   //load a json object
   static from(json_obj){
     //return value
-    let o   = Object.assign(new Ecam(), json_obj);
-    o.Water = Water_stages.from(json_obj.Water);
-    o.Waste = Waste_stages.from(json_obj.Waste);
-    return o;
+    let obj = new Ecam();
+    Object.assign(obj.General,       json_obj.General);
+    Object.assign(obj.Configuration, json_obj.Configuration);
+    obj.Water = Water_stages.from(json_obj.Water);
+    obj.Waste = Waste_stages.from(json_obj.Waste);
+    return obj;
   }
 };
 

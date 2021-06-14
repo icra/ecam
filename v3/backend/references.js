@@ -283,5 +283,85 @@ let References={
     wwt_slu_la_seqst_rate:[{ref:"0.25 from BEAM authors estimate based on data from BC reclamation site"}],
     wwt_slu_comp_seqst_rate:[{ref:"0.25 from BEAM authors estimate based on data from BC reclamation site"}],
     wwo_la_seqst_rate:[{ref:"0.25 from BEAM authors estimate based on data from BC reclamation site"}],
+
+    wwc_tn:[{
+      ref:`Equation 6.10, Total Nitrogen in domestic wastewater by treatment pathway`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=40`,
+    }],
+    wwt_tn_infl:[{
+      ref:`Equation 6.10, Total Nitrogen in domestic wastewater by treatment pathway`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=40`,
+    }],
+    wwo_opd_tn:[{
+      ref:`Equation 6.10, Total Nitrogen in domestic wastewater by treatment pathway`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=40`,
+    }],
+
+    wwc_bod:[{
+      ref:`Equation 6.3, Total Organically degradable material in domestic wastewater`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=21`,
+    }],
+    wwt_bod_infl:[{
+      ref:`Equation 6.3, Total Organically degradable material in domestic wastewater`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=21`,
+    }],
+    wwo_bod_cont:[{
+      ref:`Equation 6.3, Total Organically degradable material in domestic wastewater`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=21`,
+    }],
+
+    conv_kwh_co2:[{
+      ref:`EIB Methodologies for the Assessment of Project GHG Emissions and Emission Variations, 2020`,
+      link:`https://www.eib.org/attachments/strategies/eib_project_carbon_footprint_methodologies_en.pdf#page=36`,
+    }],
+    prot_con:[{
+      ref:`Equation 6.10, Total Nitrogen in domestic wastewater by treatment pathway`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=40`,
+    }],
+    bod_pday:[
+      {
+        ref:`Equation 6.3, Total Organically degradable material in domestic wastewater`,
+        link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=21`,
+      },
+      {
+        ref:`Table 6.4 'ESTIMATED BOD5 VALUES IN DOMESTIC WASTEWATER FOR SELECTED REGIONS AND COUNTRIES'`,
+        link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=22`,
+      }
+    ],
+
+    F_NON_CON:[
+      {
+        ref:`Equation 6.10, Total Nitrogen in domestic wastewater by treatment pathway`,
+        link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=40`,
+      },
+      {
+        ref:"Table 6.10A 'DEFAULT FACTORS FOR DOMESTIC WASTEWATER', IPCC 2006, 2019 revision, Volume 5, Chapter 6 Wastewater",
+        link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=41`,
+      },
+      {
+        ref:"Table 6.11 'N2O METHODOLOGY DEFAULT DATA', IPCC 2006, 2019 revision, Volume 5, Chapter 6 Wastewater",
+        link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=43`,
+      },
+    ],
+    F_IND_COM:[
+      {
+        ref:`Equation 6.10, Total Nitrogen in domestic wastewater by treatment pathway`,
+        link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=40`,
+      },
+      {
+        ref:"Table 6.11 'N2O METHODOLOGY DEFAULT DATA', IPCC 2006, 2019 revision, Volume 5, Chapter 6 Wastewater",
+        link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=43`,
+      },
+    ],
+    N_HH:[
+      {
+        ref:`Equation 6.10, Total Nitrogen in domestic wastewater by treatment pathway`,
+        link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=40`,
+      },
+      {
+        ref:"Table 6.10A 'DEFAULT FACTORS FOR DOMESTIC WASTEWATER', IPCC 2006, 2019 revision, Volume 5, Chapter 6 Wastewater",
+        link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=41`,
+      },
+    ],
   //Equations and Estimations (end)
 };

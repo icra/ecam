@@ -9,6 +9,7 @@ let select_scenario=new Vue({
 
     //backend
     Global,
+    Info,
     Configuration,
     Languages,
     Scenarios,
@@ -523,7 +524,14 @@ let select_scenario=new Vue({
 
                           <!--emission factor for grid electricity-->
                           <tr :class="scenario.General.conv_kwh_co2<=0?'warning':''">
-                            <td v-html="translate('conv_kwh_co2_descr')">
+                            <td>
+                              <div style="display:flex;justify-content:space-between">
+                                <div v-html="translate('conv_kwh_co2_descr')"></div>
+                                <div style="font-size:smaller">
+                                  <a href=# onclick="variable.view('conv_kwh_co2')">more info</a>
+                                </div>
+                              </div>
+                            </td>
                             <td>
                               <input id=conv_kwh_co2 type=number class=number @change="set_conv_kwh()" v-model.number="scenario.General.conv_kwh_co2" style="width:95%" min=0>
                             </td>
@@ -534,7 +542,14 @@ let select_scenario=new Vue({
 
                           <!--protein consumption-->
                           <tr :class="scenario.General.prot_con<=0?'warning':''">
-                            <td v-html="translate('prot_con_descr')">
+                            <td>
+                              <div style="display:flex;justify-content:space-between">
+                                <div v-html="translate('prot_con_descr')"></div>
+                                <div style="font-size:smaller">
+                                  <a href=# onclick="variable.view('prot_con')">more info</a>
+                                </div>
+                              </div>
+                            </td>
                             <td>
                               <input type=number class=number v-model.number="scenario.General.prot_con" style="width:95%" min=0>
                             </td>
@@ -545,7 +560,14 @@ let select_scenario=new Vue({
 
                           <!--BOD per day-->
                           <tr :class="scenario.General.bod_pday<=0?'warning':''">
-                            <td v-html="translate('bod_pday_descr').prettify()">
+                            <td>
+                              <div style="display:flex;justify-content:space-between">
+                                <div v-html="translate('bod_pday_descr').prettify()"></div>
+                                <div style="font-size:smaller">
+                                  <a href=# onclick="variable.view('bod_pday')">more info</a>
+                                </div>
+                              </div>
+                            </td>
                             <td>
                               <input type=number class=number v-model.number="scenario.General.bod_pday" style="width:95%" min=0>
                             </td>
@@ -556,27 +578,47 @@ let select_scenario=new Vue({
 
                           <!--factors-->
                           <tr>
-                            <td v-html="translate('F_IND_COM_descr').prettify()">
+                            <td>
+                              <div style="display:flex;justify-content:space-between">
+                                <div v-html="translate('F_IND_COM_descr').prettify()"></div>
+                                <div style="font-size:smaller">
+                                  <a href=# onclick="variable.view('F_IND_COM')">more info</a>
+                                </div>
+                              </div>
+                            </td>
                             <td>
                               <input type=number class=number v-model.number="scenario.General.F_IND_COM" style="width:95%" min=0>
                             </td>
-                            <td>adimensional</td>
+                            <td v-html="Info.F_IND_COM.unit.prettify()"></td>
                           </tr>
                           <tr>
-                            <td v-html="translate('F_NON_CON_descr').prettify()">
+                            <td>
+                              <div style="display:flex;justify-content:space-between">
+                                <div v-html="translate('F_NON_CON_descr').prettify()"></div>
+                                <div style="font-size:smaller">
+                                  <a href=# onclick="variable.view('F_NON_CON')">more info</a>
+                                </div>
+                              </div>
+                            </td>
                             <td>
                               <input type=number class=number v-model.number="scenario.General.F_NON_CON" style="width:95%" min=0>
                             </td>
-                            <td>adimensional</td>
+                            <td v-html="Info.F_NON_CON.unit.prettify()"></td>
                           </tr>
                           <tr>
-                            <td v-html="translate('N_HH_descr').prettify()">
+                            <td>
+                              <div style="display:flex;justify-content:space-between">
+                                <div v-html="translate('N_HH_descr').prettify()"></div>
+                                <div style="font-size:smaller">
+                                  <a href=# onclick="variable.view('N_HH')">more info</a>
+                                </div>
+                              </div>
+                            </td>
                             <td>
                               <input type=number class=number v-model.number="scenario.General.N_HH" style="width:95%" min=0>
                             </td>
-                            <td>adimensional</td>
+                            <td v-html="Info.N_HH.unit.prettify()"></td>
                           </tr>
-
                         </table>
                       </div>
                     </fieldset>

@@ -158,13 +158,14 @@ let variable=new Vue({
             <code v-html="translate(id+'_expla').prettify()"></code>
             <!--references-->
             <div v-if="References[id]"><hr>
-              <div v-for="obj in References[id]">
+              <div v-for="obj in References[id]" style="margin-bottom:5px">
                 <small
                   v-if="obj.ref"
                   v-html="obj.ref.prettify()"
                 ></small>
                 <br>
                 <small v-if="obj.link">
+                  &emsp;
                   <a :href="obj.link" target=_blank>
                     {{obj.link}}
                   </a>

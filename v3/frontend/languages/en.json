@@ -16,9 +16,14 @@
 "#wwo_lf_DOCf_descr":"Decomposable organic fraction of raw wastewater solids",
 "#wwo_lf_DOCf_expla":"Decomposable organic fraction of raw wastewater solids (80% from Brown et al., 2008 and Metcalf & Eddy, 2003)",
 
-"#F_IND_COM_descr":"Industrial and commercial co-discharged protein into the sewer (F_IND_COM)",
 "#F_NON_CON_descr":"Non consumed protein added to the wastewater (F_NON_CON)",
-"#N_HH_descr":"Additional nitrogen from household products added to the wastewater, default is 1.1 (some country data are in new Table 6.10a).",
+"#F_NON_CON_expla":"Factor for Nitrogen in non consumed protein disposed in sewer system (default is 1.1)",
+
+"#F_IND_COM_descr":"Industrial and commercial co-discharged protein into the sewer (F_IND_COM)",
+"#F_IND_COM_expla":"Factor to allow for co-discharge of industrial nitrogen into sewers. Default is 1.25. For countries with significant fish processing plants, this factor may be higher.  Expert judgment is recommended",
+
+"#N_HH_descr":"Additional Nitrogen from household products added to the wastewater (N_HH)",
+"#N_HH_expla":"Additional Nitrogen from household products added to the wastewater (N_HH) (default is 1.1)",
 
 "#wwt_slu_lf_decomp_3yr_descr":"Percentage decomposed in first 3 years",
 "#wwt_slu_lf_decomp_3yr_expla":"Percentage decomposed in first 3 years of the decomposable organic fraction of raw wastewater solids",

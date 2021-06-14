@@ -47,7 +47,7 @@ if(debug){
 if(debug){
   //go_to('Waste','Treatment'); //"inventory"
   //variable.view('wwo_bod_rmvd'); //variable detailed info
-  ecam.show('ipcc_categories'); //page
+  ecam.show('select_scenario'); //page
 
   //default filters on for tier B:
   tier_b.filters_on=true;

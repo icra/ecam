@@ -54,14 +54,14 @@ let Estimations={
     wwc_vol_coll_unt(substage){return substage.wwc_vol_coll - substage.wwc_vol_coll_tre;},
 
     wwc_tn(substage){
-      let Protein    = Global.General.prot_con; //kg protein/person/year
       let P          = substage.wwc_conn_pop; //population
+      let Protein    = Global.General.prot_con; //kg protein/person/year
       let Years      = Global.Years(); //years
       let F_NPR      = Cts.ct_F_NPR.value;
       let N_HH       = Global.General.N_HH;
       let F_NON_CON  = Global.General.F_NON_CON;
       let F_IND_COM  = Global.General.F_IND_COM;
-      return Protein * P * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM; //kgN
+      return P * Protein * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM; //kgN
     },
     wwc_bod(substage){
       let P   = substage.wwc_conn_pop; //population
@@ -86,14 +86,14 @@ let Estimations={
     wwt_vol_trea(substage){return 0.2*substage.wwt_serv_pop*Global.Days();},
     wwt_vol_disc(substage){return substage.wwt_vol_trea - substage.wwt_vol_nonp;},
     wwt_tn_infl(substage){
-      let Protein    = Global.General.prot_con; //kg protein/person/year
       let P          = substage.wwt_serv_pop; //population served
+      let Protein    = Global.General.prot_con; //kg protein/person/year
       let Years      = Global.Years(); //years
       let F_NPR      = Cts.ct_F_NPR.value;
       let N_HH       = Global.General.N_HH;
       let F_NON_CON  = Global.General.F_NON_CON;
       let F_IND_COM  = Global.General.F_IND_COM;
-      return Protein * P * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM;
+      return P * Protein * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM;
     },
 
     //estimation for biogas produced
@@ -112,10 +112,14 @@ let Estimations={
     },
 
   //wwo
-
     //0.3kg/person/day
     wwo_fslu_emp(substage){
-      return 0.3 * substage.wwo_onsi_pop * Global.Days()/substage.wwo_fdensity * substage.wwo_cont_emp/100;
+      let population    = substage.wwo_onsi_pop; //population with onsite treatment
+      let kg_person_day = 0.3; //kg/person/day
+      let days          = Global.Days(); //days
+      let density       = substage.wwo_fdensity; //kg/m3
+      let cont_emp      = substage.wwo_cont_emp/100; //fraction
+      return kg_person_day * population * days / density * cont_emp;
     },
 
   //wwo
@@ -147,14 +151,14 @@ let Estimations={
     },
 
     wwo_opd_tn(substage){
-      let Protein   = Global.General.prot_con; //kg/person/year
       let P         = substage.wwo_open_pop; //people
+      let Protein   = Global.General.prot_con; //kg/person/year
       let Years     = Global.Years(); //years
       let F_NPR     = Cts.ct_F_NPR.value; //kgN/kgProtein
       let N_HH      = Global.General.N_HH; //adimensional
       let F_NON_CON = Global.General.F_NON_CON; //adimensional
       let F_IND_COM = Global.General.F_IND_COM; //adimensional
-      return Protein * P * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM;
+      return P * Protein * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM;
     },
 
     wwt_nrg_biog(substage){

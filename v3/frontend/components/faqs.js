@@ -144,6 +144,26 @@ let faqs = new Vue({
         img:"frontend/img/faqs/how-do-i-start-an-assessment.gif",
         category:"ecam",
       },
+      {
+        q:"How do I save an assessment? (way 1)",
+        steps:true,
+        a:[
+          'Go to "Configuration"',
+          'Unfold "Load and save file"',
+          'Click on "Save file" to save the current session',
+        ],
+        category:"ecam",
+      },
+      {
+        q:"How do I save an assessment? (way 2)",
+        steps:true,
+        a:[
+          'Go to "Inventory"',
+          'Insert your input data',
+          'Click on the top right button "Save file" to save the current session',
+        ],
+        category:"ecam",
+      },
     ],
   },
 
