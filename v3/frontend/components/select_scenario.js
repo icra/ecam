@@ -270,7 +270,7 @@ let select_scenario=new Vue({
             >
               <div style="margin-bottom:10px">
                 <div style="font-size:larger">
-                  Save current session to a JSON file
+                  Save current session as a JSON file
                 </div>
               </div>
               <div>
