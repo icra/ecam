@@ -306,7 +306,7 @@ let select_scenario=new Vue({
           style="
             display:flex;
             align-items:center;
-            background:#f6f6f6;
+            background:linear-gradient(to right, white, #f6f6f6);
             padding:1em;
             justify-content:flex-end;
             font-size:smaller;
