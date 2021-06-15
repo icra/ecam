@@ -36,6 +36,7 @@ let ecam={
     docs,
     faqs,
     ipcc_categories,
+    new_in_this_version,
 
     development,
     problems,

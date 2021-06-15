@@ -51,6 +51,6 @@ if(debug){
 
   //go_to('Waste','Treatment'); //"inventory"
   //variable.view('wwo_bod_rmvd'); //variable detailed info
-  ecam.show('faqs'); //page
+  ecam.show('new_in_this_version'); //page
 }
 

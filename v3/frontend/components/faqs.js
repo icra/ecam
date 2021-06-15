@@ -213,6 +213,15 @@ let faqs = new Vue({
         },
         category:"ecam",
       },
+      {
+        q:"What is new in ECAM v3 compared to v2.2 ?",
+        a:`Please click here to see a summary of the new features:`,
+        link:{
+          onclick:function(){ecam.show('new_in_this_version')},
+          text:"New in this version",
+        },
+        category:"ecam",
+      },
     ],
   },
 
