@@ -63,6 +63,8 @@ let ipcc_categories = new Vue({
       #ipcc_categories {
         padding-left:1em;
         padding-right:1em;
+        max-width:80%;
+        margin:auto;
       }
       #ipcc_categories .category{
         padding:1em;
