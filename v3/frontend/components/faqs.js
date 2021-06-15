@@ -192,7 +192,7 @@ let faqs = new Vue({
       <div
         style="
           display:grid;
-          width:70%;
+          width:90%;
           grid-template-columns:50% 50%;
           margin:auto;
         "
