@@ -175,6 +175,15 @@ let faqs = new Vue({
         category:"ecam",
         img:"frontend/img/faqs/fsm.png",
       },
+      {
+        q:"Are the JSON files of former ECAM versions compatible with ECAM 3.0?",
+        a:`
+        No. Due to major changes in the architecture of ECAM, JSON files
+        produced in ECAM 1.0 or ECAM 2.2 cannot be loaded or modified in the
+        latest version.
+        `,
+        category:"ecam",
+      },
     ],
   },
 
