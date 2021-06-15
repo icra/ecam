@@ -11,7 +11,7 @@ let about = new Vue({
     <div id=about v-if="visible && Languages.ready">
       <!--first div-->
       <div style="background:#eff5fb;">
-        <h1>About</h1>
+        <h1>About ECAM</h1>
 
         <!--image with text-->
         <div style="
@@ -132,6 +132,22 @@ let about = new Vue({
             </div>
           </div>
         </div>
+      </div>
+
+      <!--FAQs link-->
+      <div>
+        <button onclick="ecam.show('faqs')"
+          style="
+            width:400px;
+            color: white;
+            background-image: url(frontend/img/more/btn-bg.png);
+            background-size: cover;
+            text-align: center;
+            padding: 2em;
+            border: none;
+            border: 3px solid white;
+          "
+        >FAQs</button>
       </div>
 
       <!--special acknowledgements-->
