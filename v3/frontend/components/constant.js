@@ -5,10 +5,11 @@ let constant = new Vue({
     visible: false,
     code:Object.keys(Cts)[0], //"ct_ch4_eq"
 
+    variable,
+
     Cts,
     Formulas,
-
-    variable,
+    References,
   },
 
   methods:{
@@ -51,11 +52,30 @@ let constant = new Vue({
         <b v-html="Cts[code].descr.prettify()"></b>
       </div>
 
+      <!--references-->
+      <div v-if="References[code]" style="text-align:center;margin:5px 0">
+        <div v-for="obj in References[code]" style="margin-bottom:5px">
+          <small
+            v-if="obj.ref"
+            v-html="obj.ref.prettify()"
+          ></small>
+          <br>
+          <small v-if="obj.link">
+            <a :href="obj.link" target=_blank>
+              {{obj.link}}
+            </a>
+          </small>
+        </div>
+      </div>
+
       <!--constant value and unit-->
       <div
         style="
           padding:2em 0;
           text-align:center;
+          border:1px solid var(--color-level-generic);
+          max-width:62%;
+          margin:auto;
         "
       >
         <span v-html="code"></span>
@@ -67,7 +87,7 @@ let constant = new Vue({
       </div>
 
       <!--constant used in-->
-      <div style="margin-bottom:1em;text-align:center">
+      <div style="margin:1em 0;text-align:center">
         This constant is used in the following equations:
       </div>
       <table style=margin:auto>

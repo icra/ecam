@@ -363,5 +363,16 @@ let References={
         link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=41`,
       },
     ],
+    ct_F_NPR:[{
+      ref:`Equation 6.10, Total Nitrogen in domestic wastewater by treatment pathway`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=40`,
+    }],
+
+    ct_N_reused_credit:[{ref:"Recycled Organics Unit, 2006"}],
+    ct_P_reused_credit:[{ref:"Recycled Organics Unit, 2006"}],
+    ct_ch4_nrg:[{
+      ref:"The Physics Hypertextbook, Chemical Potential Energy",
+      link:"https://physics.info/energy-chemical",
+    }],
   //Equations and Estimations (end)
 };

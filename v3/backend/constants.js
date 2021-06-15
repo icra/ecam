@@ -27,12 +27,12 @@ let Cts={
     unit:"gCO2/gC",
   },
 
-  ct_N_reused_credit:{value:4, descr:"Credit for N recovered replacing commercial N fertilizer (Recycled Organics Unit, 2006)", unit:"kgCO2eq/kgN"},
-  ct_P_reused_credit:{value:2, descr:"Credit for P recovered replacing commercial P fertilizer (Recycled Organics Unit, 2006)", unit:"kgCO2eq/kgP"},
+  ct_N_reused_credit:{value:4, descr:"Credit for N recovered replacing commercial N fertilizer", unit:"kgCO2eq/kgN"},
+  ct_P_reused_credit:{value:2, descr:"Credit for P recovered replacing commercial P fertilizer", unit:"kgCO2eq/kgP"},
 
   ct_ch4_nrg:{
     value:11,
-    descr:"Energy content in 1 Nm3 of CH4. Calculated from 55.5 MJ/kgCH4 (physics.info/energy-chemical)",
+    descr:"Energy content in 1 Nm3 of CH4. Calculated from 55.5 MJ/kgCH4",
     unit:"kWh/Nm3",
   },
 
