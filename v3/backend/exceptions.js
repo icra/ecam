@@ -117,7 +117,7 @@ let Exceptions={
   },
 
   wwt_bod_slud:{
-    table:"REMOVAL OF ORGANIC COMPONENT FROM WASTEWATER AS SLUDGE (KREM) ACCORDING TO TREATMENT TYPE (Table 6.6A)",
+    table:"type_of_treatment_KREM",
     table_field:function(){return "K_rem"},
     table_field_unit:function(){return "kgBOD/kg dry mass sludge"},
     conversion:function(stage){return stage.wwt_mass_slu},

@@ -105,7 +105,7 @@ let Tables={
     {name:"Nutrient-impacted and/or hypoxic freshwater, estuarine, and marine discharge (Tier 3, if needed)", n2o_efac:0.019},
   ],
 
-  "REMOVAL OF ORGANIC COMPONENT FROM WASTEWATER AS SLUDGE (KREM) ACCORDING TO TREATMENT TYPE (Table 6.6A)":[
+  "type_of_treatment_KREM":[
     {name:"Mechanical treatment plants (primary sedimentation sludge)",                                                                                 K_rem:0.50},
     {name:"Aerobic treatment plants with primary treatment (mixed primary and secondary sludge, untreated or treated aerobically)",                     K_rem:0.80},
     {name:"Aerobic treatment plants with primary treatment and anaerobic sludge digestion (mixed primary and secondary sludge, treated anaerobically)", K_rem:1.00},
@@ -227,8 +227,9 @@ Tables.get_row=function(table, index){
 //table titles and/or descriptions
 Tables.get_table_description=function(table_name){
   return {
-    "type_of_water_body": "EFCH4 for Type of Water Body (Table 6.3)",
-    "type_of_sewer":      "EFCH4 for Type of Sewer (Table 6.3)",
-    "type_of_treatment":  "EFCH4 for Type of Treatment (Table 6.3)",
+    "type_of_water_body":    "EFCH4 for Type of Water Body (Table 6.3)",
+    "type_of_sewer":         "EFCH4 for Type of Sewer (Table 6.3)",
+    "type_of_treatment":     "EFCH4 for Type of Treatment (Table 6.3)",
+    "type_of_treatment_KREM":"Removal of organic component from wastewater as sludge (KREM) according to treatment type (Table 6.6A)",
   }[table_name]||table_name;
 };

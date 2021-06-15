@@ -42,7 +42,7 @@ let References={
       link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=39`,
     }],
 
-    "REMOVAL OF ORGANIC COMPONENT FROM WASTEWATER AS SLUDGE (KREM) ACCORDING TO TREATMENT TYPE (Table 6.6A)":[{
+    "type_of_treatment_KREM":[{
       ref:`IPCC 2006 (2019 revision), Volume 5, Chapter 6: Wastewater, Table 6.6A (page 27)`,
       link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=27`,
     }],
