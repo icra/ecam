@@ -29,7 +29,7 @@ let more=new Vue({
         <div class=button onclick="ecam.show('constants')">        {{translate('all_constants')    }}</div>
         <div class=button onclick="ecam.show('tables')">           {{translate('Data tables')      }}</div>
         <div class=button onclick="ecam.show('benchmarks')">       {{translate('benchmarks')       }}</div>
-        <div class=button onclick="ecam.show('docs')">             {{translate('Documentation')    }}</div>
+        <div class=button onclick="ecam.show('docs')">             Scientific literature             </div>
 
         <div v-if="is_debug_mode_enabled()" class=button onclick="ecam.show('ipcc_categories')">  IPCC categories</div>
       </div>

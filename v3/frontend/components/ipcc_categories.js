@@ -25,7 +25,10 @@ let ipcc_categories = new Vue({
       </p>
 
       <!--categories summary-->
-      <div>
+      <div style="
+        display:grid;
+        grid-template-columns:repeat(auto-fill, minmax(20rem,1fr))
+      ">
         <div
           v-for="cat,code in IPCC_categories"
           :style="{background:cat.color}"
@@ -41,9 +44,12 @@ let ipcc_categories = new Vue({
               <inputs_involved_table
                 :obj="IPCC_categories[code]"
                 :code="'emissions'"
+                style="font-size:smaller"
               ></inputs_involved_table>
               <div style="padding-top:10px">
-                Total: {{format(cat.emissions(Global))}} kgCO<sub>2</sub>eq
+                Total:
+                {{format(cat.emissions(Global))}}
+                kgCO<sub>2</sub>eq
               </div>
             </div>
           </details>
@@ -57,11 +63,10 @@ let ipcc_categories = new Vue({
       #ipcc_categories {
         padding-left:1em;
         padding-right:1em;
-        margin:auto;
       }
       #ipcc_categories .category{
         padding:1em;
-        margin-bottom:1px;
+        margin:1px;
       }
       #ipcc_categories summary {
         cursor:pointer;

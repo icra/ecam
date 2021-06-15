@@ -390,7 +390,7 @@ let IPCC_categories={
 
   ipcc_1A3b:{
     description:"Energy / Fuel Combustion Activities / Transport / Road Transportation",
-    color:"orange",
+    color:"#e7c357",
     emissions(scenario){
       return[
         scenario.Water.Distribution.map(ss=>ss.wsd_KPI_GHG_trck()         .total).sum(), //wsd trucks
@@ -403,7 +403,7 @@ let IPCC_categories={
 
   ipcc_1A3ei:{
     description:"Energy / Fuel Combustion Activities / Transport / Other Transportation / Pipeline Transport",
-    color:"#e7c357",
+    color:"orange",
     emissions(scenario){
       return[
         scenario.Water.Abstraction .map(ss=>ss.wsa_KPI_GHG_fuel().total).sum(), //wsa fuel engines
