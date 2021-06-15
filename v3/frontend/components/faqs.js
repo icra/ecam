@@ -184,6 +184,35 @@ let faqs = new Vue({
         `,
         category:"ecam",
       },
+      {
+        q:"How can I get involved?",
+        a:[
+          `
+            ECAM is a free and open source tool. The source code is openly
+            published for use and modification on GitHub. If you want to get
+            involved to improve the handling of ECAM or to adapt the tool to your
+            needs, please do so on GitHub.
+          `,
+          `There are different ways to navigate through GitHub:`,
+          `
+            "Issues": Create and use issues to track ideas, enhancements,
+            tasks, or bugs. Issues are a way to collect user feedback or to
+            start discussion on certain subjects
+          `,
+          `
+            "Pull requests": Pull requests let you tell others about changes
+            you have pushed to a banch in a repository on GitHub. Once a pull
+            request is opened, you can discuss and review the potential changes
+            with collaborators and add follow-up commits before your changes
+            are merged into the base branch.
+          `,
+        ],
+        link:{
+          onclick:function(){window.open("https://github.com/icra/ecam")},
+          text:"Click here to access ECAM on GitHub",
+        },
+        category:"ecam",
+      },
     ],
   },
 
