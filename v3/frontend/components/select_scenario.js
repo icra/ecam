@@ -211,8 +211,8 @@ let select_scenario=new Vue({
           <div id=load_save_btns
             style="
               display:grid;
-              grid-template-columns:49% 49%;
-              grid-gap:2%;
+              grid-template-columns:repeat(2,1fr);
+              grid-gap:2px;
             "
           >
             <!--load file-->

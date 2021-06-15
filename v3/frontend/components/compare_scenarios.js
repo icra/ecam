@@ -708,6 +708,7 @@ let compare_scenarios=new Vue({
     <style>
       #compare_scenarios {
         padding-left:1em;
+        padding-right:5px;
         padding-top:2em;
         background:#eff5fb;
       }
@@ -742,11 +743,11 @@ let compare_scenarios=new Vue({
       }
       #compare_scenarios div#select_chart_container {
         display:grid;
-        grid-template-columns:repeat(6, 16.66%);
+        grid-template-columns:repeat(6,1fr);
+        grid-gap:1px;
       }
       #compare_scenarios div#select_chart_container button {
         height:60px;
-        margin-right:1px;
         text-overflow:ellipsis;
         overflow:hidden;
       }
