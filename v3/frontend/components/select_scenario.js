@@ -689,14 +689,14 @@ let select_scenario=new Vue({
         <p>Steps:</p>
         <ol>
           <li>
-            Download an ECAM input template:
+            Download ECAM input template:
             <button onclick="ecam.generate_empty_excel_template()">
               Download "ecam-template.xlsx"
             </button>
           </li>
-          <li style="margin-top:10px">Fill out the template file.</li>
+          <li style="margin-top:10px">Fill out template file.</li>
           <li style="margin-top:10px">
-            Upload the filled file:
+            Upload filled file:
             <input
               type="file"
               accept=".xlsx"
