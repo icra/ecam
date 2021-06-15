@@ -23,14 +23,15 @@ let more=new Vue({
       <div id=buttons>
         <div class=button onclick="ecam.show('about')">            {{translate('about ecam')       }}</div>
         <div class=button onclick="ecam.show('faqs')">             {{translate('FAQs')             }}</div>
-        <div class=button onclick="ecam.show('docs')">             {{translate('Documentation')    }}</div>
         <div class=button onclick="ecam.show('diagram')">          {{translate('Flow diagram')     }}</div>
-        <div class=button onclick="ecam.show('tables')">           {{translate('Data tables')      }}</div>
+        <div class=button onclick="ecam.show('non_revenue_water')">{{translate('non_revenue_water')}}</div>
         <div class=button onclick="ecam.show('equations')">        {{translate('equations')        }}</div>
         <div class=button onclick="ecam.show('constants')">        {{translate('all_constants')    }}</div>
+        <div class=button onclick="ecam.show('tables')">           {{translate('Data tables')      }}</div>
         <div class=button onclick="ecam.show('benchmarks')">       {{translate('benchmarks')       }}</div>
-        <div class=button onclick="ecam.show('non_revenue_water')">{{translate('non_revenue_water')}}</div>
-        <div class=button onclick="ecam.show('ipcc_categories')">  IPCC categories</div>
+        <div class=button onclick="ecam.show('docs')">             {{translate('Documentation')    }}</div>
+
+        <div v-if="is_debug_mode_enabled()" class=button onclick="ecam.show('ipcc_categories')">  IPCC categories</div>
       </div>
     </div>
   `,
@@ -43,7 +44,7 @@ let more=new Vue({
         width:50%;
         margin:auto;
         display:grid;
-        grid-template-columns:49% 49%;
+        grid-template-columns:repeat(2,1fr);
         grid-gap:1% 2%;
       }
       #more #buttons div.button {
