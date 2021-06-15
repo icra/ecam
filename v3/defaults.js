@@ -1,4 +1,4 @@
-let debug=true; //development mode ON/OFF
+let debug=false; //development mode ON/OFF
 /*
   Default configuration and debug mode (backend and frontend)
   this file is intended to help development
@@ -41,10 +41,7 @@ if(debug){
     compare_scenarios.scenarios_compared.push(scenario);
   });
   */
-}
 
-//initial page displayed
-if(debug){
   //default filters on for tier B:
   tier_b.filters_on=true;
   tier_b.filters_active["Sludge Management"]=true;
@@ -53,4 +50,3 @@ if(debug){
   //variable.view('wwo_bod_rmvd'); //variable detailed info
   ecam.show('new_in_this_version'); //page
 }
-
