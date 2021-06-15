@@ -164,6 +164,17 @@ let faqs = new Vue({
         ],
         category:"ecam",
       },
+      {
+        q:'What happened to the "Feacal Sludge Management" component?',
+        a:`
+          Users who worked with the feacal sludge management (FSM) component in
+          ECAM 2.2 might have realized that we have applied major changes here.
+          Now, FSM falls under "Onsite sanitation". The inputs almost
+          completely remained the same.
+        `,
+        category:"ecam",
+        img:"frontend/img/faqs/fsm.png",
+      },
     ],
   },
 
