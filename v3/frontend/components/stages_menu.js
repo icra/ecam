@@ -92,21 +92,30 @@ let stages_menu=new Vue({
       <div style="padding:0 16px">
         <!--title-->
         <h1 style="padding-left:0">
-          Inventory: stages of the urban water cycle
-          <button
-            @click="save_to_file()"
-            title="save the current list of assessments to a file"
-            style="cursor:pointer;float:right;"
-          >
-            <div style="display:flex;align-items:center">
-              <img
-                class=icon
-                src="frontend/img/viti/select_scenario/icon-save.svg"
-                style="margin-right:5px;width:15px"
-              >
-              <div>Save file</div>
+          <div style="
+            display:flex;
+            justify-content:space-between;
+          ">
+            <div>
+              Inventory: stages of the urban water cycle
             </div>
-          </button>
+            <div>
+              <button
+                @click="save_to_file()"
+                title="Save the current list of assessments as a JSON file"
+                style="cursor:pointer;float:right;"
+              >
+                <div style="display:flex;align-items:center">
+                  <img
+                    class=icon
+                    src="frontend/img/viti/select_scenario/icon-save.svg"
+                    style="margin-right:5px;width:15px"
+                  >
+                  <div>Save file</div>
+                </div>
+              </button>
+            </div>
+          </div>
         </h1>
 
         <!--stages table-->

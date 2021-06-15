@@ -34,7 +34,7 @@ let ipcc_categories = new Vue({
           :style="{background:cat.color}"
           class=category
         >
-          <details>
+          <details open>
             <summary>
               <b><code>{{code}}</code></b>
               -
@@ -47,7 +47,7 @@ let ipcc_categories = new Vue({
                 style="font-size:smaller"
               ></inputs_involved_table>
               <div style="padding-top:10px">
-                Total:
+                Current value:
                 {{format(cat.emissions(Global))}}
                 kgCO<sub>2</sub>eq
               </div>

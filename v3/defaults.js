@@ -51,6 +51,6 @@ if(debug){
 
   //go_to('Waste','Treatment'); //"inventory"
   //variable.view('wwo_bod_rmvd'); //variable detailed info
-  ecam.show('ipcc_categories'); //page
+  ecam.show('faqs'); //page
 }
 

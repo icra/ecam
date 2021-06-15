@@ -29,9 +29,9 @@ let Info={
   wwt_slu_lf_DOCf:{magnitude:"Percent", unit:"%"},
   wwo_lf_DOCf:{magnitude:"Percent", unit:"%"},
 
-  F_NON_CON:{magnitude:"adimensional",unit:"kgN/kgN"},
-  F_IND_COM:{magnitude:"adimensional",unit:"kgN/kgN"},
-  N_HH:{magnitude:"adimensional",unit:"adimensional"},
+  F_NON_CON:{magnitude:"Mass/Mass",unit:"kgN/kgN"},
+  F_IND_COM:{magnitude:"Mass/Mass",unit:"kgN/kgN"},
+  N_HH:{magnitude:"Mass/Mass",unit:"kgN/kgN"},
 
   wwt_slu_lf_decomp_3yr:{magnitude:"Percent", unit:"%"},
   wwo_lf_decomp_3yr:{magnitude:"Percent", unit:"%"},

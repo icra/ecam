@@ -195,12 +195,12 @@ let faqs = new Vue({
           `,
           `There are different ways to navigate through GitHub:`,
           `
-            "Issues": Create and use issues to track ideas, enhancements,
+            &bull; "Issues": Create and use issues to track ideas, enhancements,
             tasks, or bugs. Issues are a way to collect user feedback or to
             start discussion on certain subjects
           `,
           `
-            "Pull requests": Pull requests let you tell others about changes
+            &bull; "Pull requests": Pull requests let you tell others about changes
             you have pushed to a banch in a repository on GitHub. Once a pull
             request is opened, you can discuss and review the potential changes
             with collaborators and add follow-up commits before your changes
