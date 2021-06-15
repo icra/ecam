@@ -82,9 +82,9 @@ let landing = new Vue({
               ECAM is a free and open source
               tool. The source code is openly
               published for use and
-              modification on github.
+              modification on GitHub.
             </p>
-            <a>Click here to access github</a>
+            <a>Click here to access GitHub</a>
           </div>
 
           <div class=learn_more_item onclick="ecam.show('about')">

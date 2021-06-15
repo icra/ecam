@@ -145,7 +145,7 @@ let faqs = new Vue({
         category:"ecam",
       },
       {
-        q:"How do I save an assessment? (way 1)",
+        q:"How do I save an assessment? (alternative 1)",
         steps:true,
         a:[
           'Go to "Configuration"',
@@ -155,7 +155,7 @@ let faqs = new Vue({
         category:"ecam",
       },
       {
-        q:"How do I save an assessment? (way 2)",
+        q:"How do I save an assessment? (alternative 2)",
         steps:true,
         a:[
           'Go to "Inventory"',

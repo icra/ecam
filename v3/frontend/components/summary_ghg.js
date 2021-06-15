@@ -39,7 +39,6 @@ let summary_ghg=new Vue({
     get_sum_of_substages,
 
     //sorting function for emission sources order requested by elaine
-    //https://github.com/icra/ecam/issues/362
     emission_sources_order(a,b){
       let codes=[
         //wwc
