@@ -480,14 +480,14 @@ let report = new Vue({
                       <th v-for="ss in Global[stage.level][stage.sublevel]">
                         <b>{{ss.name}}</b>
                       </th>
-                      <th>Unit</th>
+                      <th style="text-align:left">Unit</th>
                     </tr>
                     <tr
                       v-for="code in get_input_codes(stage.level,stage.sublevel)"
                       v-if="!hide_zero_valued_variables || Global[stage.level][stage.sublevel].map(ss=>ss[code]).sum()"
                     >
                       <td
-                        :style="{background:stage.color}"
+                        :style="{width:'50%',background:stage.color}"
                       >
                         <small v-html="translate(code+'_descr').prettify()"></small>
                       </td>
@@ -523,14 +523,14 @@ let report = new Vue({
                       <th v-for="ss in Global[stage.level][stage.sublevel]">
                         <b>{{ss.name}}</b>
                       </th>
-                      <th>Unit</th>
+                      <th style="text-align:left">Unit</th>
                     </tr>
                     <tr
                       v-for="code in get_output_codes(stage.level,stage.sublevel)"
                       v-if="!hide_zero_valued_variables || get_sum_of_substages(stage.level, stage.sublevel, code)"
                     >
                       <td
-                        :style="{background:stage.color}"
+                        :style="{width:'50%',background:stage.color}"
                       >
                         <small v-html="translate(code+'_descr').prettify()"></small>
                       </td>
@@ -614,6 +614,9 @@ let report = new Vue({
         fill: none;
         stroke: #000;
         stroke-opacity: .2;
+      }
+      #report table.substages {
+        width:100%;
       }
 
       #report table.substages td.number {
