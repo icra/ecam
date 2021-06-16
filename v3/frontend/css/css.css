@@ -2,7 +2,7 @@ body{
   margin:0;
   font-family:'Open Sans','Helvetica',sans-serif;
   overflow-y:scroll;
-  font-size:13px;
+  font-size:14px;
   --color-level-generic:            #327ccb; /*viti new blue, main ecam color*/
   --color-level-generic-secondary:  #73c1d9; /*viti new blue 40% opacity*/
   --color-level-generic-background: #eff5fb; /**/

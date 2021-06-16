@@ -22,13 +22,13 @@ if(debug){
     //stages_menu.add_substage(stage.level, stage.sublevel);
   });
 
-  //more input values
+  //write input values
   Global.Water.Distribution[0].wsd_serv_pop=100;
   Global.Water.ws_resi_pop                 =1000;
   Global.Waste.Treatment[0].wwt_serv_pop   =100;
   Global.Waste.ww_resi_pop                 =1000;
 
-  //energy consumption in substages
+  //write energy consumption values in substages
   let energy=1;//kWh
   Structure.filter(s=>s.sublevel).forEach(stage=>{
     Global[stage.level][stage.sublevel].forEach(ss=>ss[stage.prefix+'_nrg_cons']=energy++);
@@ -51,5 +51,5 @@ if(debug){
 
   //go_to('Waste','Treatment'); //"inventory"
   //variable.view('wwo_bod_rmvd'); //variable detailed info
-  ecam.show('select_scenario'); //page
+  ecam.show('new_in_this_version'); //page
 }

@@ -3,7 +3,7 @@ let compare_scenarios=new Vue({
   data:{
     visible:false,
 
-    scenarios_compared:[],
+    scenarios_compared:[Global],
     current_view:'table',
     hide_zero_valued_variables:false,
 

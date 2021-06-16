@@ -390,6 +390,7 @@ let Questions={
 
     "wwt_water_reuse":{
       variables:[
+        "wwt_vol_nonp",
         "wwt_wr_N_rec",
         "wwt_wr_P_rec",
         "wwt_ghg_avoided_reuse_water",   //output
