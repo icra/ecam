@@ -1443,7 +1443,7 @@
 "#wwt_bod_infl_descr":"Influent BOD5 load",
 "#wwt_bod_infl_expla":"BOD5 load entering the WWTP during the assessment period. It can be estimated by multiplying the average BOD5 concentration in the influent by the volume entering the plant. If this is done daily and summed over the duration of the assessment period the value will be most accurate",
 "#wwt_bod_slud_descr":"BOD5 removed as sludge",
-"#wwt_bod_slud_expla":"BOD5 (organic component) removed from wastewater (in the form of sludge) in aerobic treatment plants (S_aerobic in eq.6.3B IPCC 2019)",
+"#wwt_bod_slud_expla":"BOD5 (organic component) removed from wastewater (in the form of sludge) (Sj in eq.6.1 IPCC 2019)",
 "#wwt_ch4_biog_descr":"Percentage of methane in the biogas (% volume)",
 "#wwt_ch4_biog_expla":"Percent of the methane content in the produced biogas",
 "#wwt_coll_len_descr":"Collector length",

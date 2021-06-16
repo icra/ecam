@@ -245,8 +245,8 @@ let References={
     }],
 
     wwt_bod_slud:[{
-      ref:"'S_aerobic' in eq.6.3B from IPCC 2006 (2019 revision)",
-      link:"frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=27",
+      ref:"'Sj' in eq.6.1 from IPCC 2006 (2019 revision)",
+      link:"frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=17",
     }],
 
     wwt_KPI_GHG_slu_stockpilling:[{

@@ -165,7 +165,7 @@ let variable=new Vue({
                 ></small>
                 <br>
                 <small v-if="obj.link">
-                  &emsp;
+                  &bull;
                   <a :href="obj.link" target=_blank>
                     {{obj.link}}
                   </a>

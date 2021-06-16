@@ -650,7 +650,7 @@ let compare_scenarios=new Vue({
         >
           <canvas id="bar_chart_ghg_total" width="400" height="400"></canvas>
           <div v-if="scenarios_compared.length>1">
-            <b>Variation respect previous assessment (%)</b>
+            <b>Variation in respect of previous assessment (%)</b>
             <canvas id="line_chart_ghg_difference" width="400" height="400"></canvas>
           </div>
         </div>
@@ -682,7 +682,7 @@ let compare_scenarios=new Vue({
         >
           <canvas id="bar_chart_nrg_by_assessment" width="400" height="400"></canvas>
           <div v-if="scenarios_compared.length>1">
-            <b>Variation respect previous assessment (%)</b>
+            <b>Variation in respect of previous assessment (%)</b>
             <canvas id="line_chart_nrg_difference" width="400" height="400"></canvas>
           </div>
         </div>

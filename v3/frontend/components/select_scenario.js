@@ -341,7 +341,7 @@ let select_scenario=new Vue({
         <tutorial_tip
           id   ="List of assessments"
           title="List of assessments"
-          text="Below you can see the list of assessments. You can only edit one assessment at a time. To make an assessment the current one being edited just click its name"
+          text="Below you can see the list of assessments. You can only edit one assessment at a time. To set an assessment as the current one being edited, just click its name"
         ></tutorial_tip>
 
         <!--assessments table-->
