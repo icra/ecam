@@ -1,4 +1,4 @@
-let debug=false; //development mode ON/OFF
+let debug=true; //development mode ON/OFF
 /*
   Default configuration and debug mode (backend and frontend)
   this file is intended to help development
@@ -46,7 +46,10 @@ if(debug){
   tier_b.filters_on=true;
   tier_b.filters_active["Sludge Management"]=true;
 
+  //tutorial tips
+  landing.include_tutorial_tips=true;
+
   //go_to('Waste','Treatment'); //"inventory"
   //variable.view('wwo_bod_rmvd'); //variable detailed info
-  ecam.show('new_in_this_version'); //page
+  ecam.show('select_scenario'); //page
 }

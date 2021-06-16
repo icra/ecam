@@ -19,7 +19,7 @@ Vue.component('tutorial_tip',{
         </div>
         <div v-html="text"></div>
       </div>
-      <div>
+      <div style="text-align:center">
         <button @click="dismiss()" class=dismiss_tip>
           Ok
         </button>

@@ -285,11 +285,18 @@ let select_scenario=new Vue({
             </div>
           </div>
 
-          <tutorial_tip
-            id   ="Load and save"
-            title="Load and save"
-            text="You can save your current list of assessments in a .JSON file. If you already have a file, you can load it here."
-          ></tutorial_tip>
+          <div style="display:flex">
+            <tutorial_tip
+              id   ="Load file"
+              title="Load file"
+              text ="If you already have a JSON file, you can load it using the menu above."
+            ></tutorial_tip>
+            <tutorial_tip
+              id   ="Merge files"
+              title="Merge files"
+              text ="You can merge multiple JSON files into one file by using the button above 'Append'."
+            ></tutorial_tip>
+          </div>
         </div>
       </details>
 

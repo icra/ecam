@@ -251,15 +251,27 @@ text.small {
 /*first time user tutorial tips floating divs*/
 div.tutorial_tip{
   /*position:fixed;*/
-  background:white;
+  background:#f5ee97;
+  background:rgba(245, 238, 151, 0.5);
   border:1px solid #ccc;
-  box-shadow:1px 1px 1px 1px rgba(0,0,0,.1);
+  box-shadow: 5px 5px 7px rgba(33,33,33,.3);
+
   cursor:default;
-  margin:5px 0;
+  margin:5px 5px 5px 0;
   max-width:300px;
+  padding-bottom:1em;
+}
+div.tutorial_tip:hover{
+  /*
+  transform:scale(1.05);
+  transition:all 0.2s;
+  */
 }
 div.tutorial_tip button.dismiss_tip{
+  cursor:pointer;
+  /*
   display:block;
+  margin:auto;
   width:100%;
   border-radius:0;
   border:none;
@@ -267,15 +279,20 @@ div.tutorial_tip button.dismiss_tip{
   color:white;
   padding:10px;
   font-size:larger;
+  */
 }
 div.tutorial_tip button.dismiss_all_tips{
+  cursor:pointer;
+  /*
   display:block;
+  margin:auto;
   width:100%;
   border-radius:0;
   border:none;
   text-align:center;
   font-size:smaller;
   background:#eff5fb;
+  */
 }
 div.tutorial_tip button:hover{
   text-decoration:underline;
