@@ -376,7 +376,7 @@ let tier_b=new Vue({
           <tutorial_tip
             id   ="Filter function"
             title="Filter function"
-            text="activate the filters by ticking the boxes to select the fields that you would like to assess"
+            text="Activate the filters by ticking the boxes to select the fields that you would like to assess"
           ></tutorial_tip>
         </div>
       </div>
@@ -407,6 +407,13 @@ let tier_b=new Vue({
                 <label>
                   <input type=checkbox v-model="highlight">
                   <small>Highlight mode</small>
+                  <div>
+                    <tutorial_tip
+                      id   ="Highlight mode"
+                      title="Highlight mode"
+                      text="Activate the 'Highlight mode' and hover the outputs to see which inputs are required for the calculation and vice versa."
+                    ></tutorial_tip>
+                  </div>
                 </label>
               </div>
             </div>

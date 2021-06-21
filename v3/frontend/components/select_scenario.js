@@ -156,6 +156,7 @@ let select_scenario=new Vue({
       Scenarios.push(
         Ecam.from(par)
       );
+      this.are_settings_open=false;
     },
 
     //set variables from selected country
@@ -341,7 +342,13 @@ let select_scenario=new Vue({
         <tutorial_tip
           id   ="List of assessments"
           title="List of assessments"
-          text="Below you can see the list of assessments. You can only edit one assessment at a time. To set an assessment as the current one being edited, just click its name"
+          text="
+            Below you can see the list of assessments. You can only edit one
+            assessment at a time. Click on the assessment that you would like
+            to edit. It will turn blue once you have selected it. If you want
+            to unfold country specific information, click on the assessment
+            again or on the button 'settings'.
+          "
         ></tutorial_tip>
 
         <!--assessments table-->
@@ -434,6 +441,12 @@ let select_scenario=new Vue({
                     @click="duplicate_scenario(scenario)"
                     v-html="'duplicate'"
                   ></button>
+                  <tutorial_tip
+                    id   ="Duplicate assessment"
+                    title="Duplicate assessment"
+                    text="You can duplicate an assesment by clicking on the button above. You can use this feature if you want to create multiple assessments where the majority of inputs remain the same, but only a few of the inputs need to the adapted."
+                    v-if="scenario==Scenarios[0]"
+                  ></tutorial_tip>
                   <button
                     @click="delete_scenario(scenario)"
                     v-if="scenario!=Global"
@@ -675,10 +688,7 @@ let select_scenario=new Vue({
                 title="Create new assessment"
                 text="
                   You can create as many assessments as you want. You can do
-                  this by clicking the button above, or duplicating already
-                  existing assessments, or loading assessments from an Excel
-                  template (see below). To edit general settings from
-                  assessment click its name to open the settings.
+                  this by clicking the button above.
                 "
               ></tutorial_tip>
             </td>
@@ -836,7 +846,7 @@ let select_scenario=new Vue({
         color:var(--color-level-generic);
       }
       #select_scenario div.options_container {
-        padding-left:10px;
+        padding:10px;
       }
       #select_scenario div.options_container button {
         font-size:smaller;
