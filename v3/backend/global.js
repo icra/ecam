@@ -18,6 +18,7 @@ function generate_default_datestrings(){
 }
 
 //configuration global settings
+//note: not saved into the json file
 let Configuration={
   gwp_reports_index:0, //index of selected GWP report
 };
@@ -25,7 +26,7 @@ let Configuration={
 //array of scenarios (layout == Ecam object == scenario == assessment)
 let Scenarios=[];
 
-//A "scenario" is an Ecam object
+//A "scenario" or "assessment" is an Ecam object
 class Ecam{
   constructor(){
     this.General={

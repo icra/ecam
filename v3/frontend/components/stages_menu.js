@@ -275,8 +275,16 @@ let stages_menu=new Vue({
                 </div>
               </td>
             </tr>
-
           </table>
+
+          <div>
+            <tutorial_tip
+              id   ="Create substages"
+              title="Create substages"
+              text="Create substages to insert the data for your assessment"
+              style="margin:auto"
+            ></tutorial_tip>
+          </div>
         </div>
       </div>
     </div>
