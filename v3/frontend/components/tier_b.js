@@ -372,6 +372,13 @@ let tier_b=new Vue({
             {{key}} ({{get_number_of_variables_shown_by_filter(key)}})
           </span>
         </div>
+        <div>
+          <tutorial_tip
+            id   ="Filter function"
+            title="Filter function"
+            text="activate the filters by ticking the boxes to select the fields that you would like to assess"
+          ></tutorial_tip>
+        </div>
       </div>
 
       <!--tier b inputs and outputs-->
@@ -384,7 +391,6 @@ let tier_b=new Vue({
         <!--tier b inputs-->
         <div id=inputs
           style="
-            min-width:50%;
             padding-top:1em;
             padding-left:8px;
           "
