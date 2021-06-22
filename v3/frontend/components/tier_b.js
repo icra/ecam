@@ -376,7 +376,10 @@ let tier_b=new Vue({
           <tutorial_tip
             id   ="Filter function"
             title="Filter function"
-            text="Activate the filters by ticking the boxes to select the fields that you would like to assess"
+            text="
+              Activate the filters by ticking the boxes to select the fields
+              that you would like to assess.
+            "
           ></tutorial_tip>
         </div>
       </div>
@@ -411,7 +414,12 @@ let tier_b=new Vue({
                     <tutorial_tip
                       id   ="Highlight mode"
                       title="Highlight mode"
-                      text="Activate the 'Highlight mode' and hover the outputs to see which inputs are required for the calculation and vice versa."
+                      text="
+                        Activate the 'Highlight mode' and hover the outputs to
+                        see which inputs are required for the calculation and
+                        vice versa.
+                      "
+                      style="color:black"
                     ></tutorial_tip>
                   </div>
                 </label>

@@ -103,7 +103,7 @@ let linear_menu = new Vue({
       #linear_menu {
         background:white;
         border-bottom:1px solid #ccc;
-        padding:0 2em 0 5em;
+        padding:0 2em;
         display:flex;
         justify-content:space-between;
         align-items:flex-end; /*align to bottom*/
