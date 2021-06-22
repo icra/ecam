@@ -464,7 +464,7 @@ let compare_scenarios=new Vue({
         <div style="margin:2em 0" v-if="current_view=='table'">
           <label>
             <input type=checkbox v-model="hide_zero_valued_variables">
-            Hide fields with value equal to zero
+            Hide zero (0) values in results
           </label>
         </div>
       </div>

@@ -165,7 +165,7 @@ let report = new Vue({
       <div v-if="!printable_version" style="text-align:center;padding-bottom:1em">
         <label>
           <input type=checkbox v-model="hide_zero_valued_variables">
-          Hide fields with value equal to zero
+          Hide zero (0) values in results
         </label>
         <div>
           <tutorial_tip
