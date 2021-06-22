@@ -167,6 +167,14 @@ let report = new Vue({
           <input type=checkbox v-model="hide_zero_valued_variables">
           Hide fields with value equal to zero
         </label>
+        <div>
+          <tutorial_tip
+            id   ="Hide zero (0) values"
+            title="Hide zero (0) values"
+            text="Enable the box above to hide zero (0) values in the report."
+            style="margin:5px auto"
+          ></tutorial_tip>
+        </div>
       </div>
 
       <!--grid 50 50-->
