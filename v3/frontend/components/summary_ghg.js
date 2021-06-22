@@ -297,6 +297,16 @@ let summary_ghg=new Vue({
         <button @click="current_view='charts_pop'" :selected="current_view=='charts_pop'">Charts Serviced Population</button>
 
         <hr style="border-color:#eee">
+        <div>
+          <tutorial_tip
+            id   ="Visualization of results"
+            title="Visualization of results"
+            text="
+              Select different ways to visualize your assessment results. You
+              can choose between tables, bar charts and pie charts.
+            "
+          ></tutorial_tip>
+        </div>
 
         <div
           style="
