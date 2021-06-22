@@ -417,6 +417,20 @@ let compare_scenarios=new Vue({
               </label>
             </div>
           </div>
+
+          <tutorial_tip
+            id   ="Assessment comparison"
+            title="Assessment comparison"
+            text="
+              Select the assessments that you would like to compare with each
+              other. Please note that the order of the selection determines the
+              order of the compared assessments. E.g. If you have 3 assessment
+              for the years 2018, 2019 and 2020, you will need to select the
+              assessments in this particular order. If you select 2019, 2020
+              and 2018, the order would be different.
+            "
+            style="margin:5px auto"
+          ></tutorial_tip>
         </div>
 
         <!--select units-->
