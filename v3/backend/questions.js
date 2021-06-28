@@ -675,7 +675,7 @@ let Questions={
 /*Questions functions*/
 
 //return the question codes according to an ubication inside "Global".
-//ubication is a pointer to a stage, for example "Global.Water.Abstraction[0]"
+//"ubication" example "Global.Water.Abstraction[0]"
 Questions.get_questions=function(ubication) {
   if(!ubication) return [];
 
@@ -697,7 +697,7 @@ Questions.get_questions=function(ubication) {
   return questions;
 };
 
-//is the variable "field" inside a question?
+//is the variable "field" inside any question?
 Questions.is_inside=function(field){
   //go over all questions
   for(let question in this){

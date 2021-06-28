@@ -114,7 +114,13 @@ Vue.component('input_ecam',{
       </td>
 
       <!--input value: numbers and dropdowns-->
-      <td style="padding:0;background:#eee">
+      <td
+        style="
+          padding:0;
+          background:#eee;
+          width:30%;
+        "
+      >
         <!--inputs whose magnitude is "Option"-->
         <div v-if="Info[code] && Info[code].magnitude=='Option' && Info[code].table" style="line-height:3em">
           <select v-model="current_stage[code]"

@@ -7,6 +7,7 @@ let report = new Vue({
     summaries_menu_visible:true,
     printable_version:false,
     hide_zero_valued_variables:false,
+    hide_question_related_variables:false,
 
     Charts,
     Global,
@@ -15,6 +16,7 @@ let report = new Vue({
     GWP_reports,
     Languages,
     IPCC_categories,
+    Questions,
   },
 
   methods:{
@@ -30,6 +32,22 @@ let report = new Vue({
     get_current_unit_nrg(){return summary_ghg.current_unit_nrg},
     format_emission: summary_ghg.format_emission,
     format_energy:   summary_ghg.format_energy,
+
+    show_input(stage,code){
+      if(
+        this.hide_zero_valued_variables &&
+        Global[stage.level][stage.sublevel].map(ss=>ss[code])==0
+      ){
+        return false;
+      }
+      if(
+        this.hide_question_related_variables &&
+        Global[stage.level][stage.sublevel].every(ss=>Questions.is_hidden(code,ss))
+      ){
+        return false;
+      }
+      return true;
+    },
 
     open_print_dialog(){
       let _this=this;
@@ -155,25 +173,39 @@ let report = new Vue({
       <h1 v-if="!printable_version" style="text-align:center;padding-bottom:0">
         <div> Report </div>
         <div style="text-align:center;font-size:smaller">
-          Double-click the report to enable/disable a printable view.
+          Double-click the report to enable/disable the printable view.
           <p>
             <button @click="open_print_dialog()">Print report</button>
           </p>
         </div>
       </h1>
 
-      <div v-if="!printable_version" style="text-align:center;padding-bottom:1em">
-        <label>
-          <input type=checkbox v-model="hide_zero_valued_variables">
-          Hide zero (0) values in results
-        </label>
-        <div>
-          <tutorial_tip
-            id   ="Hide zero (0) values"
-            title="Hide zero (0) values"
-            text="Enable the box above to hide zero (0) values in the report."
-            style="margin:5px auto"
-          ></tutorial_tip>
+      <div
+        v-if="!printable_version"
+        style="
+          display:flex;
+          justify-content:space-around;
+        "
+      >
+        <div style="text-align:center;padding-bottom:1em">
+          <label>
+            <input type=checkbox v-model="hide_zero_valued_variables">
+            Hide zero (0) values in results
+          </label>
+          <div>
+            <tutorial_tip
+              id   ="Hide zero (0) values"
+              title="Hide zero (0) values"
+              text="Enable the box above to hide zero (0) values in the report."
+              style="margin:5px auto"
+            ></tutorial_tip>
+          </div>
+        </div>
+        <div style="text-align:center;padding-bottom:1em">
+          <label>
+            <input type=checkbox v-model="hide_question_related_variables">
+            Hide optional inputs if all substages have it disabled
+          </label>
         </div>
       </div>
 
@@ -212,7 +244,10 @@ let report = new Vue({
               "
             >
               <span style="font-size:larger">ECAM</span>
-              <span style="font-size:smaller">Energy Performance and Carbon Emissions Assessment and Monitoring Tool</span>
+              <span style="font-size:smaller">
+                Energy Performance and Carbon Emissions Assessment and
+                Monitoring Tool
+              </span>
             </div>
 
             <!--scenario name and details-->
@@ -492,7 +527,7 @@ let report = new Vue({
                     </tr>
                     <tr
                       v-for="code in get_input_codes(stage.level,stage.sublevel)"
-                      v-if="!hide_zero_valued_variables || Global[stage.level][stage.sublevel].map(ss=>ss[code]).sum()"
+                      v-if="show_input(stage,code)"
                     >
                       <td
                         :style="{width:'50%',background:stage.color}"
@@ -503,7 +538,12 @@ let report = new Vue({
                         v-for="ss in Global[stage.level][stage.sublevel]"
                         class=number
                       >
-                        {{format(ss[code])}}
+                        <div v-if="Questions.is_hidden(code,ss)==false">
+                          {{format(ss[code])}}
+                        </div>
+                        <div v-else style="font-size:smaller;color:#ccc">
+                          not enabled
+                        </div>
                       </td>
                       <td class=unit>
                         <span v-html="get_base_unit(code).prettify()"></span>

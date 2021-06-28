@@ -388,7 +388,7 @@ let tier_b=new Vue({
       <div
         style="
           display:grid;
-          grid-template-columns:50% 50%;
+          grid-template-columns:repeat(2,1fr);
         "
       >
         <!--tier b inputs-->

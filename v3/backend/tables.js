@@ -33,13 +33,14 @@ let Tables={
 
   //ipcc 2019, table 6.3 (updated) EF (kgCH4/kgBOD)
   "type_of_water_body":[
-    {name:"Water body undefined",                                                                   ch4_efac:0     },
+    {name:"Discharge undefined",                                                                    ch4_efac:0     },
     {name:"Discharge to aquatic environments (Tier 1)",                                             ch4_efac:0.068 },
     {name:"Discharge to aquatic environments other than reservoirs, lakes, and estuaries (Tier 2)", ch4_efac:0.021 },
     {name:"Discharge to reservoirs, lakes, and estuaries (Tier 2)",                                 ch4_efac:0.114 },
     {name:"Stagnant sewer or anaerobic water body",                                                 ch4_efac:0.3   },
     {name:"Flowing sewer (open or closed)",                                                         ch4_efac:0     },
     {name:"Soil infiltration",                                                                      ch4_efac:0     },
+    {name:"No discharge, inflow to further treatment process (substage)",                           ch4_efac:0     },
   ],
 
   "type_of_sewer":[
@@ -103,6 +104,7 @@ let Tables={
     {name:"Discharge undefined",                                                                              n2o_efac:0.000},
     {name:"Freshwater, estuarine, and marine discharge (Tier 1)",                                             n2o_efac:0.005},
     {name:"Nutrient-impacted and/or hypoxic freshwater, estuarine, and marine discharge (Tier 3, if needed)", n2o_efac:0.019},
+    {name:"No discharge, inflow to further treatment process (substage)",                                     n2o_efac:0    },
   ],
 
   "type_of_treatment_KREM":[

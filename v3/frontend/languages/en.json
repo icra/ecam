@@ -1,6 +1,8 @@
 {
 "#below":"below",
 
+"#No discharge, inflow to further treatment process (substage)":"No discharge, inflow to further treatment process (substage)",
+
 "#wwt_slu_comp_seqst_rate_descr":"CO2eq sequestration rate",
 "#wwt_slu_comp_seqst_rate_expla":"Estimated CO2 equivalents sequestered per kg of sludge",
 "#wwt_slu_la_seqst_rate_descr":"CO2eq sequestration rate",
@@ -1479,7 +1481,7 @@
 "#wwt_mass_slu_stock_descr":"Sludge stockpiled (dry weight)",
 "#wwt_mass_slu_stock_expla":"Amount of sludge that is stockpiled (dry weight)",
 "#wwt_nrg_biog_descr":"Electrical energy produced from biogas valorization",
-"#wwt_nrg_biog_expla":"Energy produced from biogas valorization during the assessment period by each wastewater treatment plant managed by the undertaking",
+"#wwt_nrg_biog_expla":"Energy produced from biogas valorization during the assessment period by each wastewater treatment plant managed by the undertaking. The estimation assumes a 30% of efficiency with respect to the theoretical maximum energy.",
 "#wwt_nrg_cons_descr":"Energy consumed from the grid",
 "#wwt_nrg_cons_expla":"Total energy consumed during the assessment period by all wastewater treatment plants managed by the undertaking",
 "#wwt_nrg_pump_descr":"Energy consumed from the grid (pumping)",
