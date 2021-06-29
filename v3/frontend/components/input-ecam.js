@@ -50,26 +50,28 @@ Vue.component('input_ecam',{
         <!--link to variable description-->
         <div><a @click="variable.view(code)"><small>{{code}}</small></a></div>
 
-        <!--<select> element for exceptions-->
-        <div v-if="Exceptions[code]"
+        <!--<select> element for exceptions ('suggestions')-->
+        <div
+          v-if="Exceptions[code]"
           style="text-align:left;margin-top:5px;"
         >
           <!--case 1: selection is a percent of something else-->
           <select
             v-if="Exceptions[code].percent_of"
-            v-model="current_stage[code]"
+            v-model.number="current_stage[code]"
             style="width:100%"
             tabindex="-1"
           >
             <option
-              v-for="obj in Tables[Exceptions[code].table]"
-              :value="parseFloat(obj[Exceptions[code].table_field(current_stage)]*Exceptions[code].percent_of(current_stage))"
+              v-for="obj,i in Tables[Exceptions[code].table]"
+              :value="calculate_percent_from_table(current_stage,code,i)"
             >
               {{translate(obj.name)}}
               [{{ format(100*obj[Exceptions[code].table_field(current_stage)]) }} %]
               ({{ format(obj[Exceptions[code].table_field(current_stage)]*Exceptions[code].percent_of(current_stage)/Units.multiplier(code) )}}
               {{get_current_unit(code,Global)}})
             </option>
+            <option :value="current_stage[code]">custom value</option>
           </select>
 
           <!--case 2: selection has to be converted-->
@@ -90,10 +92,12 @@ Vue.component('input_ecam',{
               ({{ format(    obj[Exceptions[code].table_field(current_stage)]*Exceptions[code].conversion(current_stage)/Units.multiplier(code) )}}
               {{get_current_unit(code,Global)}})
             </option>
+            <option :value="current_stage[code]">custom value</option>
           </select>
 
           <!--case 3: selection is a fixed value-->
-          <select v-else v-model="current_stage[code]"
+          <select v-else
+            v-model.number="current_stage[code]"
             style="width:100%"
             tabindex="-1"
           >
@@ -104,6 +108,7 @@ Vue.component('input_ecam',{
               {{translate(obj.name)}}
               ({{ format(obj[Exceptions[code].table_field(current_stage)]) }})
             </option>
+            <option :value="current_stage[code]">custom value</option>
           </select>
         </div>
 
@@ -139,6 +144,7 @@ Vue.component('input_ecam',{
             </option>
           </select>
         </div>
+        <!--inputs with numeric value-->
         <div v-else
           class=input
           :title="translate('edit_click_to_modify')"
@@ -208,12 +214,20 @@ Vue.component('input_ecam',{
     get_current_unit,
     is_code_in_any_filter,
 
+    //calculate a value from an exception input that uses a percent
+    calculate_percent_from_table(stage, code, index){
+      let row       = Tables[Exceptions[code].table][index];
+      let field     = Exceptions[code].table_field(stage);
+      let new_value = row[field]*Exceptions[code].percent_of(stage);
+      return parseFloat(new_value)||0;
+    },
+
     //calculate a value from an exception input that uses a conversion in a table
-    calculate_conversion_from_table(stage,code,index){
+    calculate_conversion_from_table(stage, code, index){
       let row       = Tables[Exceptions[code].table][index];
       let field     = Exceptions[code].table_field(stage);
       let new_value = row[field]*Exceptions[code].conversion(stage);
-      return parseFloat(new_value);
+      return parseFloat(new_value)||0;
     },
 
     focus_input(stage, key, event){
@@ -229,9 +243,6 @@ Vue.component('input_ecam',{
       let value   = parseFloat(input.value)||0;
       stage[key]  = value*Units.multiplier(key);
       input.value = format(stage[key]/Units.multiplier(key));
-
-      //TODO
-      console.log({stage,key,value:stage[key]});
     },
 
     /*UNITS*/

@@ -280,7 +280,9 @@ let variable=new Vue({
                           <!--drop down menus for certain inputs-->
                           <div v-if="Exceptions[id]">
                             <!--case 1: selection is a percent of something else-->
-                            <select v-if="Exceptions[id].percent_of" v-model="ss[id]"
+                            <select
+                              v-if="Exceptions[id].percent_of"
+                              v-model="ss[id]"
                               style="max-width:200px;"
                             >
                               <option
@@ -292,10 +294,13 @@ let variable=new Vue({
                                 ({{ format(    obj[Exceptions[id].table_field(ss)]*Exceptions[id].percent_of(ss))}}
                                 {{get_base_unit(id).prettify()}})
                               </option>
+                              <option :value="ss[id]">custom value</option>
                             </select>
 
                             <!--case 2: selection has to be converted-->
-                            <select v-else-if="Exceptions[id].conversion" v-model="ss[id]"
+                            <select
+                              v-else-if="Exceptions[id].conversion"
+                              v-model="ss[id]"
                               style="max-width:200px;"
                             >
                               <option
@@ -309,10 +314,15 @@ let variable=new Vue({
                                 ({{ format(    obj[Exceptions[id].table_field(ss)]*Exceptions[id].conversion(ss) )}}
                                 {{get_current_unit(id,Global)}})
                               </option>
+                              <option :value="ss[id]">custom value</option>
                             </select>
 
                             <!--case 3: selection is a fixed value-->
-                            <select v-else v-model="ss[id]" style="max-width:200px">
+                            <select
+                              v-else
+                              v-model="ss[id]"
+                              style="max-width:200px"
+                            >
                               <option
                                 v-for="obj in Tables[Exceptions[id].table]"
                                 :value="parseFloat(obj[Exceptions[id].table_field(ss)])"
@@ -320,6 +330,7 @@ let variable=new Vue({
                                 {{translate(obj.name)}}
                                 ({{ format(obj[Exceptions[id].table_field(ss)]) }})
                               </option>
+                              <option :value="ss[id]">custom value</option>
                             </select>
                           </div>
                         </td>
