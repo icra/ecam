@@ -89,6 +89,24 @@ class Ecam{
   }
 
   //grouped emissions by source
+    elec_GHG(){
+      //electricity emissions
+      let emissions=[
+        ...this.Water.Abstraction .map(s=>s.wsa_KPI_GHG_elec()),
+        ...this.Water.Treatment   .map(s=>s.wst_KPI_GHG_elec()),
+        ...this.Water.Distribution.map(s=>s.wsd_KPI_GHG_elec()),
+        ...this.Waste.Collection  .map(s=>s.wwc_KPI_GHG_elec()),
+        ...this.Waste.Treatment   .map(s=>s.wwt_KPI_GHG_elec()),
+        ...this.Waste.Onsite      .map(s=>s.wwo_KPI_GHG_elec()),
+      ];
+
+      //sum gases
+      let co2   = emissions.map(e=>e.co2).sum();
+      let ch4   = emissions.map(e=>e.ch4).sum();
+      let n2o   = emissions.map(e=>e.n2o).sum();
+      let total = emissions.map(e=>e.total).sum();
+      return {total,co2,ch4,n2o};
+    }
     fuel_GHG(){
       //fuel combustion emissions
       let emissions=[

@@ -71,11 +71,13 @@ let Exceptions={
     percent_of:function(stage){return stage.wwo_bod_infl},
   },
 
+  /*
   wwo_bod_rmvd:{
     table:"WW treatment organics removal fractions (onsite) (Table 6.6B and 6.10C)",
     table_field:function(){return "bod_rmvd"},
     percent_of:function(stage){return stage.wwo_bod_cont},
   },
+  */
 
   //wwt effluent TN estimation
   wwt_tn_effl:{

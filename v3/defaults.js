@@ -42,12 +42,12 @@ if(debug){
   });
   */
 
-  //default filters on for tier B:
-  tier_b.filters_on=true;
-  tier_b.filters_active["Sludge Management"]=true;
+  /*default filters on for tier B*/
+  //tier_b.filters_on=true;
+  //tier_b.filters_active["Sludge Management"]=true;
 
-  //tutorial tips
-  landing.include_tutorial_tips=true;
+  /*tutorial tips*/
+  //landing.include_tutorial_tips=true;
 
   //go_to('Waste','Treatment'); //"inventory"
   //variable.view('wwo_bod_rmvd'); //variable detailed info

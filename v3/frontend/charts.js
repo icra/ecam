@@ -141,7 +141,7 @@ let Charts={
       {source:get_index('wwo'), target:get_index('slud'), value:Global.Waste.Onsite.map(s=>s.wwo_KPI_GHG_dumping()     .total).sum()||1e-3},
       {source:get_index('wwo'), target:get_index('slud'), value:Global.Waste.Onsite.map(s=>s.wwo_KPI_GHG_urine()       .total).sum()||1e-3},
       //capa 4
-      {source:get_index('elec'), target:get_index('co2'), value:Global.TotalNRG()*Global.General.conv_kwh_co2||1e-3},
+      {source:get_index('elec'), target:get_index('co2'), value:Global.elec_GHG()||1e-3},
 
       {source:get_index('fuel'), target:get_index('co2'), value:Global.fuel_GHG().co2||1e-3},
       {source:get_index('fuel'), target:get_index('ch4'), value:Global.fuel_GHG().ch4||1e-3},
@@ -199,14 +199,3 @@ let Charts={
     }
   },
 };
-
-//utils: calculate width of text in svg
-function get_text_width(text){
-  var canvas = get_text_width.canvas || (get_text_width.canvas = document.createElement("canvas"));
-  var context  = canvas.getContext("2d");
-  context.font = "10px sans-serif";
-  var metrics  = context.measureText(text);
-  return metrics.width;
-  //test
-  //console.log(get_text_width("hello there!"));  // close to 86
-}

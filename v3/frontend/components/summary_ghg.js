@@ -198,6 +198,61 @@ let summary_ghg=new Vue({
         );
       //--
 
+      //Chart.js pie chart -- ghg by system
+      if(document.getElementById('chart_1_v2')){
+        this.charts.chart_1_v2 = new Chart('chart_1_v2',{
+          type:'pie',
+          data:{
+            labels: Structure.filter(s=>!s.sublevel).map(s=>{
+              return translate(s.level)+" (%)";
+            }),
+            datasets:[{
+              label:"",
+              data: Structure.filter(s=>!s.sublevel).map(s=>{
+                return 100*Global[s.level][s.prefix+'_KPI_GHG']().total/Global.TotalGHG().total;
+              }),
+              backgroundColor:Structure.filter(s=>!s.sublevel).map(s=>s.color),
+              hoverOffset:4,
+            }],
+          },
+          options:{
+            aspectRatio:1.5,
+            plugins:{
+              legend:{
+                display:false,
+              },
+            },
+          },
+        });
+      }
+
+      if(document.getElementById('chart_2_v2')){
+        this.charts.chart_2_v2 = new Chart('chart_2_v2',{
+          type:'pie',
+          data:{
+            labels: Structure.filter(s=>s.sublevel).map(s=>{
+              return translate(s.level)+" "+translate(s.sublevel)+" (%)";
+            }),
+            datasets:[{
+              label:"",
+              data: Structure.filter(s=>s.sublevel).map(s=>{
+                return 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum()/Global.TotalGHG().total;
+              }),
+              backgroundColor:Structure.filter(s=>s.sublevel).map(s=>s.color),
+              hoverOffset:4,
+            }],
+          },
+          options:{
+            aspectRatio:1.5,
+            plugins:{
+              legend:{
+                display:false,
+              },
+            },
+          },
+        });
+      }
+
       //Chart.js bar chart -- ghg by substage
       if(document.getElementById('bar_chart_ghg_substages')){
         this.charts.bar_chart_ghg_substages = new Chart('bar_chart_ghg_substages',{
@@ -584,24 +639,31 @@ let summary_ghg=new Vue({
             <div class=chart_container style="border-right:none">
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
-                GHG emissions
+                <span>GHG emissions</span>
               </div>
               <div class=flex>
-                <table class=legend>
-                  <tr>
-                    <td style="background:var(--color-level-Water)"></td>
-                    <td>{{translate('Water')}}</td>
-                    <td>{{format_emission(Global.Water.ws_KPI_GHG().total)}}</td>
-                    <td class=unit v-html="current_unit_ghg.prettify()"></td>
-                  </tr>
-                  <tr>
-                    <td style="background:var(--color-level-Waste)"></td>
-                    <td>{{translate('Waste')}}</td>
-                    <td>{{format_emission(Global.Waste.ww_KPI_GHG().total)}}</td>
-                    <td class=unit v-html="current_unit_ghg.prettify()"></td>
-                  </tr>
-                </table>
-                <div id=chart_1></div>
+                <div>
+                  <table class=legend>
+                    <tr>
+                      <td style="background:var(--color-level-Water)"></td>
+                      <td>{{translate('Water')}}</td>
+                      <td>{{format_emission(Global.Water.ws_KPI_GHG().total)}}</td>
+                      <td class=unit v-html="current_unit_ghg.prettify()"></td>
+                    </tr>
+                    <tr>
+                      <td style="background:var(--color-level-Waste)"></td>
+                      <td>{{translate('Waste')}}</td>
+                      <td>{{format_emission(Global.Waste.ww_KPI_GHG().total)}}</td>
+                      <td class=unit v-html="current_unit_ghg.prettify()"></td>
+                    </tr>
+                  </table>
+                </div>
+                <div>
+                  <canvas id="chart_1_v2"></canvas>
+                  <!--
+                  <div id=chart_1></div>
+                  -->
+                </div>
               </div>
             </div>
 
@@ -611,22 +673,29 @@ let summary_ghg=new Vue({
                 GHG emissions by stage
               </div>
               <div class=flex>
-                <table class=legend>
-                  <tr
-                    v-for="stage in Structure.filter(s=>s.sublevel)"
-                    v-if="Global[stage.level][stage.sublevel].length"
-                  >
-                    <td :style="{background:stage.color}"></td>
-                    <td>
-                      {{translate(stage.sublevel)}}
-                    </td>
-                    <td>
-                      {{ format_emission(Global[stage.level][stage.sublevel].map(s=>s[stage.prefix+'_KPI_GHG']().total).sum()) }}
-                    </td>
-                    <td class=unit v-html="current_unit_ghg.prettify()"></td>
-                  </tr>
-                </table>
-                <div id=chart_2></div>
+                <div>
+                  <table class=legend>
+                    <tr
+                      v-for="stage in Structure.filter(s=>s.sublevel)"
+                      v-if="Global[stage.level][stage.sublevel].length"
+                    >
+                      <td :style="{background:stage.color}"></td>
+                      <td>
+                        {{translate(stage.sublevel)}}
+                      </td>
+                      <td>
+                        {{ format_emission(Global[stage.level][stage.sublevel].map(s=>s[stage.prefix+'_KPI_GHG']().total).sum()) }}
+                      </td>
+                      <td class=unit v-html="current_unit_ghg.prettify()"></td>
+                    </tr>
+                  </table>
+                </div>
+                <div>
+                  <canvas id="chart_2_v2"></canvas>
+                  <!--
+                  <div id=chart_2></div>
+                  -->
+                </div>
               </div>
             </div>
 
