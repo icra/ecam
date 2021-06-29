@@ -101,10 +101,13 @@ let select_scenario=new Vue({
       let _this  = this; //vue object
 
       reader.onload=function(){
-        let saved_file = JSON.parse(reader.result);
-        if(!saved_file){
-          alert("error loading file");
-          return;
+        //saved file should be an array of assessments
+        let saved_file = null;
+        try{
+          saved_file = JSON.parse(reader.result);
+        }catch(e){
+          alert(e);
+          throw(e);
         }
 
         if(replace){
@@ -112,7 +115,7 @@ let select_scenario=new Vue({
           _this.Scenarios = Scenarios;
         }
 
-        //load objects
+        //load objects (assessments)
         saved_file.forEach(obj=>{
           Scenarios.push(
             Ecam.from(obj)

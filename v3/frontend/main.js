@@ -88,9 +88,6 @@ let ecam={
       history.pushState(state_obj,''); // https://developer.mozilla.org/en-US/docs/Web/API/History/pushState
       document.title=title;
     }
-
-    //return promise for Vue._isMounted TODO
-    return this.views[view]._isMounted;
   },
 
   //hide all views

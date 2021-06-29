@@ -118,7 +118,7 @@ Vue.component('input_ecam',{
         style="
           padding:0;
           background:#eee;
-          width:30%;
+          width:10em;
         "
       >
         <!--inputs whose magnitude is "Option"-->
@@ -224,11 +224,14 @@ Vue.component('input_ecam',{
     },
 
     blur_input(stage, key, event){
-      let input = event.target;
+      let input   = event.target;
       input.setAttribute('type','');
-      let value = parseFloat(input.value) || 0;
-      stage[key] = value*Units.multiplier(key);
-      input.value=format(stage[key]/Units.multiplier(key));
+      let value   = parseFloat(input.value)||0;
+      stage[key]  = value*Units.multiplier(key);
+      input.value = format(stage[key]/Units.multiplier(key));
+
+      //TODO
+      console.log({stage,key,value:stage[key]});
     },
 
     /*UNITS*/
