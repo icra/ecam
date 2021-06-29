@@ -9,9 +9,6 @@ let more=new Vue({
   methods:{
     translate,
     go_to,
-    is_debug_mode_enabled(){
-      return debug;
-    },
   },
 
   template:`
@@ -31,7 +28,9 @@ let more=new Vue({
         <div class=button onclick="ecam.show('benchmarks')">       {{translate('benchmarks')       }}</div>
         <div class=button onclick="ecam.show('docs')">             Scientific literature             </div>
 
-        <div v-if="is_debug_mode_enabled()" class=button onclick="ecam.show('ipcc_categories')">  IPCC categories</div>
+        <!--
+          <div class=button onclick="ecam.show('ipcc_categories')">  IPCC categories</div>
+        -->
       </div>
     </div>
   `,

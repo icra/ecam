@@ -380,7 +380,9 @@ let compare_scenarios=new Vue({
         <button :selected="current_view=='bar_chart_ghg_total'"         @click="current_view='bar_chart_ghg_total'"        >Total GHG emissions                                </button>
         <button :selected="current_view=='bar_chart_ghg_by_gas'"        @click="current_view='bar_chart_ghg_by_gas'"       >Emissions by gas<br>(${'CO2, N2O, CH4'.prettify()})</button>
         <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Emissions by stage                                 </button>
+        <!--
         <button :selected="current_view=='bar_chart_ghg_by_ipcc_categories'" @click="current_view='bar_chart_ghg_by_ipcc_categories'">Emissions by IPCC category</button>
+        -->
         <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">Total energy consumption                           </button>
       </div>
 
@@ -757,7 +759,7 @@ let compare_scenarios=new Vue({
       }
       #compare_scenarios div#select_chart_container {
         display:grid;
-        grid-template-columns:repeat(6,1fr);
+        grid-template-columns:repeat(5,1fr);
         grid-gap:1px;
       }
       #compare_scenarios div#select_chart_container button {
