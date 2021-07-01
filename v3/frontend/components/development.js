@@ -11,7 +11,7 @@ let development=new Vue({
     <div id=development v-if="visible && Languages.ready">
       <!--title--><h1>Development</h1>
       <p style="padding-left:1em">
-        Utilities for debugging during development.
+        Functions for debugging during development and/or work in progress new pages.
       </p>
 
       <ul
