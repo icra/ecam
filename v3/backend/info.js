@@ -20,6 +20,8 @@ let Info={
   Currency             :{magnitude:"text",unit:"text"},
   Country              :{magnitude:"text",unit:"text"},
 
+  wwt_nrg_biog_eff:{magnitude:"Percent", unit:"%"},
+
   wwt_slu_comp_seqst_rate:{magnitude:"Mass/Mass",unit:"kgCO2eq/kgSludge"},
   wwt_slu_la_seqst_rate:{magnitude:"Mass/Mass",unit:"kgCO2eq/kgSludge"},
   wwo_la_seqst_rate:{magnitude:"Mass/Mass",unit:"kgCO2eq/kgSludge"},

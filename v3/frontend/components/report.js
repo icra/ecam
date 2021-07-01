@@ -204,7 +204,7 @@ let report = new Vue({
         <div style="text-align:center;padding-bottom:1em">
           <label>
             <input type=checkbox v-model="hide_question_related_variables">
-            Hide optional inputs if all substages have it disabled
+            Hide optional input fields if they are disabled in all substages
           </label>
         </div>
       </div>

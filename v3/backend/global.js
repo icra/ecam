@@ -1009,15 +1009,16 @@ class Waste_Treatment extends Substage{
     this.wwt_pmp_exff = 0;
 
     //biogas
-    this.wwt_biog_pro  = 0; //total biogas produced
-    this.wwt_biog_fla  = 98; //% of biogas produced that is flared
-    this.wwt_biog_val  = 0; //% of biogas produced that is used for heat
-    this.wwt_biog_lkd  = 2; //% of biogas produced that is leaked
-    this.wwt_biog_sold = 0; //% of biogas produced that is sold
-    this.wwt_ch4_biog  = 59; //% of CH4 in biogas (volume)
-    this.wwt_dige_typ  = 0;
-    this.wwt_fuel_dig  = 0;
-    this.wwt_nrg_biog  = 0;
+    this.wwt_biog_pro     = 0; //total biogas produced
+    this.wwt_biog_fla     = 98; //% of biogas produced that is flared
+    this.wwt_biog_val     = 0; //% of biogas produced that is used for heat
+    this.wwt_biog_lkd     = 2; //% of biogas produced that is leaked
+    this.wwt_biog_sold    = 0; //% of biogas produced that is sold
+    this.wwt_ch4_biog     = 59; //% of CH4 in biogas (volume)
+    this.wwt_dige_typ     = 0;
+    this.wwt_fuel_dig     = 0;
+    this.wwt_nrg_biog_eff = 43;
+    this.wwt_nrg_biog     = 0;
 
     //reuse
     this.wwt_reus_trck_typ = 0;

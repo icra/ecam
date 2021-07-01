@@ -162,6 +162,6 @@ let Estimations={
     },
 
     wwt_nrg_biog(substage){
-      return 0.43*substage.wwt_nrg_biog_val();
+      return substage.wwt_nrg_biog_eff/100*substage.wwt_nrg_biog_val();
     },
 };

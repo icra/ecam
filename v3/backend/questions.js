@@ -315,6 +315,7 @@ let Questions={
         "wwt_ch4_biog",
         "wwt_dige_typ",
         "wwt_fuel_dig",
+        "wwt_nrg_biog_eff",
         "wwt_nrg_biog",
 
         "wwt_moles_biogas_produced",

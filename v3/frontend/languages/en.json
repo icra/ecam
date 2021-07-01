@@ -3,6 +3,8 @@
 
 "#create substage":"create substage",
 "#Assessment period":"Assessment period",
+"#wwt_nrg_biog_eff_descr":"Energy efficiency for biogas valorization with respect to the theoretical maximum",
+"#wwt_nrg_biog_eff_expla":"Energy efficiency for biogas valorization with respect to the theoretical maximum",
 
 "#15.7 - 38 kW"  : "15.7 - 38 kW",
 "#39 - 96 kW"    : "39 - 96 kW",
@@ -1113,7 +1115,7 @@
 "#wwt_n2o_efac_tre_expla":"N2O emission factor for treatment",
 "#wwt_nrg_biog_descr":"Electrical energy produced from biogas valorization",
 "#wwt_nrg_biog_expla":"Energy produced from biogas valorization during the assessment period by each wastewater treatment plant managed by the undertaking.",
-"#wwt_nrg_biog_val_descr":"Total energy content of biogas valorized",
+"#wwt_nrg_biog_val_descr":"Total energy content of biogas valorized (theoretical maximum)",
 "#wwt_nrg_biog_val_expla":"Sum of energy content of biogas used in a cogenerator or a boiler during the assessment period by all wastewater treatment plants managed by the undertaking",
 "#wwt_nrg_cons_descr":"Energy consumed from the grid",
 "#wwt_nrg_cons_expla":"Total energy consumed during the assessment period by all wastewater treatment plants managed by the undertaking",

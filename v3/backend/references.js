@@ -375,9 +375,9 @@ let References={
       link:"https://physics.info/energy-chemical",
     }],
 
-    wwt_nrg_biog:[{
+    wwt_nrg_biog_eff:[{
       ref:`
-        The estimation assumes a 43% of efficiency with respect to the
+        Default value (43%) for efficiency with respect to the
         theoretical maximum energy. Page 2857 from Corominas, L., Flores-Alsina, X., Snip,
         L., Vanrolleghem, P.A., 2012.  Comparison of Different Modeling
         Approaches to Better Evaluate Greenhouse Gas Emissions From Whole
