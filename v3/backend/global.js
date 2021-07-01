@@ -2085,7 +2085,6 @@ class Waste_Onsite extends Substage{
       "wwo_KPI_GHG_elec",
       "wwo_KPI_GHG_fuel",
       "wwo_KPI_GHG_containment",
-      "wwo_KPI_GHG_trck",
       "wwo_KPI_GHG_biog",
       "wwo_KPI_GHG_dig_fuel",
       "wwo_KPI_GHG_tre",
