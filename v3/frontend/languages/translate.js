@@ -12,16 +12,16 @@ let Languages={
   //language tags for all languages are loaded here
   tags:{},
 
-  //load all languages
+  //load all language json files
   load(){
     let loaded_languages=[];
     this.list.forEach(lang=>{
       fetch(`frontend/languages/${lang}.json`).then(response=>
         response.json()
-      ).then(jsonResponse => {
-        this.tags[lang] = jsonResponse;
+      ).then(jsonResponse=>{
+        this.tags[lang]=jsonResponse;
         loaded_languages.push(lang);
-        if(loaded_languages.length == this.list.length){
+        if(loaded_languages.length==this.list.length){
           this.ready = true;
         }
       });
@@ -52,8 +52,36 @@ let Languages={
       return `["#${id}"]`;
     }
 
-    //translation found
+    /*translation found*/
+
+    //store "id" as "used"
+    this.used_tags[`#${id}`]=1;
+
     return this.tags[lang][`#${id}`];
+  },
+
+  //container to store used tags
+  //by default is empty when ecam loads
+  //goal: identify not used tags (fx find_not_used_tags)
+  used_tags:{},
+
+  //find unused tags for current language
+  //note: a tag has to been displayed in order to set it as used
+  find_not_used_tags(){ //->Array
+    let lang=this.current; //current language
+
+    //lang checks
+    if(lang=='null') return [];
+    if(!this.tags[lang]) throw `language '${lang}' not found`;
+
+    let found=[];//return value
+    Object.keys(this.tags[lang]).forEach(tag=>{
+      if(!this.used_tags[tag]){
+        found.push(tag);
+      }
+    });
+
+    return found;
   },
 };
 

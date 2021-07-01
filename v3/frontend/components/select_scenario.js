@@ -360,7 +360,7 @@ let select_scenario=new Vue({
             <tr>
               <td></td>
               <td></td>
-              <td>Assessment period</td>
+              <td>{{translate('Assessment period')}}</td>
               <td>GHG (kgCO<sub>2</sub>eq)</td>
               <td>Energy (kWh)</td>
               <td>Substages</td>
@@ -491,7 +491,7 @@ let select_scenario=new Vue({
                   <div style="text-align:left;padding-bottom:10px">
                     <!--assessment period-->
                     <fieldset>
-                      <legend>Assessment period</legend>
+                      <legend>{{translate('Assessment period')}}</legend>
                       <div>
                         <b>From: <input type=date v-model="scenario.General.AssessmentPeriodStart"></b>
                         <b>To:   <input type=date v-model="scenario.General.AssessmentPeriodEnd"></b>

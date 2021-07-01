@@ -456,7 +456,7 @@ class Substage{
     Object.keys(Questions).filter(key=>{
       return typeof(Questions[key])=='object';
     }).forEach(key=>{
-      this.Configuration.Questions[key]=false;
+      this.Configuration.Questions[key]= debug ? true:false;
     });
   }
 };

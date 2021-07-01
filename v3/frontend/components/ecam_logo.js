@@ -43,24 +43,21 @@ let ecam_logo=new Vue({
         <button
           onclick="debug=false;ecam.show('landing');ecam.elements.ecam_logo.$forceUpdate()"
           style="background:white;padding:2px"
-        >
-          disable
+        >disable dev mode
         </button>
 
         <!--open github issues-->
         <button
           onclick="window.open('https://github.com/icra/ecam/issues')" target=_blank
           style="background:white;padding:2px"
-        >
-          issues
+        >github issues
         </button>
 
         <!--dev utils page-->
         <button
           onclick="ecam.show('development')"
           style="background:white;padding:2px"
-        >
-          utils
+        >development
         </button>
       </div>
 

@@ -374,5 +374,16 @@ let References={
       ref:"The Physics Hypertextbook, Chemical Potential Energy",
       link:"https://physics.info/energy-chemical",
     }],
+
+    wwt_nrg_biog:[{
+      ref:`
+        The estimation assumes a 43% of efficiency with respect to the
+        theoretical maximum energy. Page 2857 from Corominas, L., Flores-Alsina, X., Snip,
+        L., Vanrolleghem, P.A., 2012.  Comparison of Different Modeling
+        Approaches to Better Evaluate Greenhouse Gas Emissions From Whole
+        Wastewater Treatment Plants. Biotechnol. Bioeng.  109, 1–10.
+      `,
+      link:"https://doi.org/10.1002/bit.24544",
+    }],
   //Equations and Estimations (end)
 };

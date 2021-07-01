@@ -49,7 +49,7 @@ if(debug){
   /*tutorial tips*/
   //landing.include_tutorial_tips=true;
 
-  go_to('Water','Abstraction'); //"inventory"
+  //go_to('Water','Abstraction'); //"inventory"
   //variable.view('wwo_bod_rmvd'); //variable detailed info
-  //ecam.show('tier_b'); //page
+  ecam.show('development'); //view
 }

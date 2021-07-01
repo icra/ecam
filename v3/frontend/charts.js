@@ -141,7 +141,7 @@ let Charts={
       {source:get_index('wwo'), target:get_index('slud'), value:Global.Waste.Onsite.map(s=>s.wwo_KPI_GHG_dumping()     .total).sum()||1e-3},
       {source:get_index('wwo'), target:get_index('slud'), value:Global.Waste.Onsite.map(s=>s.wwo_KPI_GHG_urine()       .total).sum()||1e-3},
       //capa 4
-      {source:get_index('elec'), target:get_index('co2'), value:Global.elec_GHG()||1e-3},
+      {source:get_index('elec'), target:get_index('co2'), value:Global.elec_GHG().co2||1e-3},
 
       {source:get_index('fuel'), target:get_index('co2'), value:Global.fuel_GHG().co2||1e-3},
       {source:get_index('fuel'), target:get_index('ch4'), value:Global.fuel_GHG().ch4||1e-3},

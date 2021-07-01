@@ -38,6 +38,7 @@ let ecam={
     ipcc_categories,
     new_in_this_version,
 
+    //development views
     development,
     problems,
   },
@@ -101,10 +102,10 @@ let ecam={
   },
 
   //automated test
+  //this function attempts to visit every page in order to find bugs
+  //TODO improve this part with async promises
   //TODO test all languages also
   test(){
-    //prepare clicking everywhere
-    //TODO improve this part with async promises
     let _this    = this;
     let timer    = 1;   //counter
     let interval = 100; //millisecons
@@ -112,7 +113,7 @@ let ecam={
     //visit every page (=view)
     Object.keys(this.views).forEach(key=>{
       setTimeout( ()=>{
-        console.log(`Visiting ${key}`);
+        //console.log(`Visiting ${key}`);
         _this.show(key);
       }, interval*timer++);
     });

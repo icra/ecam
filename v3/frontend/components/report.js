@@ -268,7 +268,7 @@ let report = new Vue({
                 "
               >
                 <li>
-                  <b>Assessment period:</b>
+                  <b>{{translate('Assessment period')}}:</b>
                   {{Global.General.AssessmentPeriodStart}} to
                   {{Global.General.AssessmentPeriodEnd}}
                   ({{format(Global.Days())}} days)

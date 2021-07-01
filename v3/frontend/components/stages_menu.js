@@ -270,8 +270,8 @@ let stages_menu=new Vue({
                   <button
                     style="padding:8px;width:100%;font-size:smaller;"
                     @click="add_substage(s.level,s.sublevel)"
-                    v-html="'+ create substage'"
-                  ></button>
+                  >+ {{translate('create substage')}}
+                  </button>
                 </div>
               </td>
             </tr>
