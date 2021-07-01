@@ -8,7 +8,7 @@ let development=new Vue({
   },
 
   template:`
-    <div id=development v-if="visible">
+    <div id=development v-if="visible && Languages.ready">
       <!--title--><h1>Development</h1>
       <p style="padding-left:1em">
         Utilities for debugging during development.
