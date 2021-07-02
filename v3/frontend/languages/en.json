@@ -660,7 +660,7 @@
 "#wst_vol_trea_descr":"Volume of treated water",
 "#wst_vol_trea_expla":"Sum of the volume of water treated by WTPs that are the responsibility of the water undertaking, during the assessment period",
 "#ww_GHG_avoided_descr":"Total GHG emissions avoided",
-"#ww_GHG_avoided_expla":"Total GHG emissions avoided",
+"#ww_GHG_avoided_expla":"Total GHG emissions avoided in Sanitation stages. Note: these emissions are not subtracted from the total emissions.",
 "#ww_KPI_GHG_col_descr":"Collection",
 "#ww_KPI_GHG_descr":"Total GHG sanitation",
 "#ww_KPI_GHG_elec_descr" :"Electricity (indirect)",

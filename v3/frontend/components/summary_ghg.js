@@ -292,11 +292,11 @@ let summary_ghg=new Vue({
 
       <!--select tables or charts-->
       <div style="padding:1em;border:1px solid #ccc">
-        <button @click="current_view='table'"      :selected="current_view=='table'"     >Table</button>
-        <button @click="current_view='charts_ghg'" :selected="current_view=='charts_ghg'">Charts GHG</button>
-        <button @click="current_view='charts_nrg'" :selected="current_view=='charts_nrg'">Charts Energy</button>
-        <button @click="current_view='charts_pop'" :selected="current_view=='charts_pop'">Charts Serviced Population</button>
-
+        <button @click="current_view='table'"       :selected="current_view=='table'"      >Table</button>
+        <button @click="current_view='charts_ghg'"  :selected="current_view=='charts_ghg'" >Charts GHG</button>
+        <button @click="current_view='charts_nrg'"  :selected="current_view=='charts_nrg'" >Charts Energy</button>
+        <button @click="current_view='charts_pop'"  :selected="current_view=='charts_pop'" >Charts Serviced Population</button>
+        <button @click="variable.view('ww_GHG_avoided')"                                   >Avoided emissions</button>
         <hr style="border-color:#eee">
         <div>
           <tutorial_tip
@@ -832,6 +832,21 @@ let summary_ghg=new Vue({
             </div>
           </div>
         </div>
+
+        <div v-if="current_view=='avoided_ghg'">
+          <div style="margin-top:20px"></div>
+
+          <!--actual table-->
+          <table>
+            <tr>
+              <td>
+                <a href=# onclick="variable.view('ww_GHG_avoided')">
+                  <span v-html="translate('ww_GHG_avoided_descr')"></span>
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   `,
@@ -929,11 +944,6 @@ let summary_ghg=new Vue({
       }
       #summary_ghg div.chart_container.bar .y .tick line {
         stroke: #ddd;
-      }
-
-      #summary_ghg tbody.avoided_emissions td {
-        border:1px solid #ccc;
-        text-align:center;
       }
 
       #summary_ghg div.subdivision{
