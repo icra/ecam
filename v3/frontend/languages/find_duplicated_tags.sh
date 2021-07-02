@@ -9,4 +9,4 @@ file_json=$1
 echo "Repeated language tags for [$file_json]"
 echo "===================================="
 
-cat $file_json | cut -d\" -f2| sort | uniq -d
+cat $file_json| cut -d\: -f1| sort| uniq -d

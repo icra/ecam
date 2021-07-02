@@ -377,8 +377,8 @@ let References={
 
     wwt_nrg_biog_eff:[{
       ref:`
-        Default value (43%) for efficiency with respect to the
-        theoretical maximum energy. Page 2857 from Corominas, L., Flores-Alsina, X., Snip,
+        Default value (43%) for efficiency with respect to the theoretical
+        maximum energy. Page 2857 from Corominas, L., Flores-Alsina, X., Snip,
         L., Vanrolleghem, P.A., 2012.  Comparison of Different Modeling
         Approaches to Better Evaluate Greenhouse Gas Emissions From Whole
         Wastewater Treatment Plants. Biotechnol. Bioeng.  109, 1–10.
