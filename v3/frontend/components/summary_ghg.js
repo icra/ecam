@@ -668,7 +668,6 @@ let summary_ghg=new Vue({
             </div>
 
             <!--ipcc categories
-            -->
             <div class=chart_container style="border-right:none">
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
@@ -690,6 +689,7 @@ let summary_ghg=new Vue({
                 <div id=chart_ipcc_categories></div>
               </div>
             </div>
+            -->
             <div class=chart_container></div>
           </div>
 
