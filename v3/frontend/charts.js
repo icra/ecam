@@ -22,7 +22,7 @@ let Charts={
     var r = h/2;
 
     var vis = d3.select(`#${id_container}`).append("svg:svg").data([data]).attr("width",w).attr("height",h).append("svg:g").attr("transform","translate("+r+","+r+")");
-    var pie = d3.layout.pie().value(function(d){return d.value});
+    var pie = d3.layout.pie().value(function(d){return d.value}).sort(null);
     var arc = d3.svg.arc().outerRadius(r);//declare an arc generator function
 
     //select paths, use arc generator to draw

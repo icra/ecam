@@ -183,11 +183,18 @@ let report = new Vue({
       <div
         v-if="!printable_version"
         style="
-          display:flex;
-          justify-content:space-around;
+          width:740px;
+          margin:auto;
         "
       >
-        <div style="text-align:center;padding-bottom:1em">
+        <div style="padding-bottom:1em">
+          <label>
+            <input type=checkbox v-model="hide_question_related_variables">
+            Hide optional input fields if they are disabled in all substages
+          </label>
+        </div>
+
+        <div style="padding-bottom:1em">
           <label>
             <input type=checkbox v-model="hide_zero_valued_variables">
             Hide zero (0) values in results
@@ -197,15 +204,9 @@ let report = new Vue({
               id   ="Hide zero (0) values"
               title="Hide zero (0) values"
               text="Enable the box above to hide zero (0) values in the report."
-              style="margin:5px auto"
+              style="margin:5px 0"
             ></tutorial_tip>
           </div>
-        </div>
-        <div style="text-align:center;padding-bottom:1em">
-          <label>
-            <input type=checkbox v-model="hide_question_related_variables">
-            Hide optional input fields if they are disabled in all substages
-          </label>
         </div>
       </div>
 

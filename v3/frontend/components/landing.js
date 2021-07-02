@@ -38,9 +38,9 @@ let landing = new Vue({
               padding-inline-start:20px;
             "
           >
-            <li>Perfect for climate reporting needs.</li>
-            <li>Overview of system-wide greenhouse gas emissions.</li>
-            <li>IPCC-2019 compliant and open-source.</li>
+            <li>Perfect for climate reporting needs             </li>
+            <li>Overview of system-wide greenhouse gas emissions</li>
+            <li>IPCC-2019 compliant and open-source             </li>
           </ul>
 
           <div style="width:400px">
@@ -134,14 +134,6 @@ let landing = new Vue({
 
       <!--logos-->
       <footer>
-        <!--links-->
-        <p>
-          <a href="https://wacclim.org" target=_blank>About WaCCliM</a> |
-          <a href="#" onclick="ecam.show('about')">About ECAM</a> |
-          <a href="#" onclick="ecam.show('help')">Help</a> |
-          <a href="mailto:wacclim@giz.de" target=_blank>Contact</a>
-        </p>
-
         <!--creative commons image and text-->
         <div>
           <div>

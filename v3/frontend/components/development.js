@@ -25,6 +25,11 @@ let development=new Vue({
             IPCC categories vs ECAM equations
           </button>
         </li>
+        <li>
+          <button onclick="ecam.show('help')">
+            help section
+          </button>
+        </li>
 
         <li>
           <a onclick="ecam.show('problems')">

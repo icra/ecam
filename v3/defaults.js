@@ -51,5 +51,5 @@ if(debug){
 
   //go_to('Water','Abstraction'); //"inventory"
   //variable.view('wwo_bod_rmvd'); //variable detailed info
-  ecam.show('development'); //view
+  ecam.show('summary_ghg'); //view
 }

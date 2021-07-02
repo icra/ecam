@@ -1,11 +1,9 @@
 {
 "#below":"below",
-
 "#create substage":"create substage",
 "#Assessment period":"Assessment period",
 "#wwt_nrg_biog_eff_descr":"Energy efficiency for biogas valorization with respect to the theoretical maximum",
 "#wwt_nrg_biog_eff_expla":"Energy efficiency for biogas valorization with respect to the theoretical maximum",
-
 "#15.7 - 38 kW"  : "15.7 - 38 kW",
 "#39 - 96 kW"    : "39 - 96 kW",
 "#5.6 - 15.7 kW" : "5.6 - 15.7 kW",
@@ -1256,5 +1254,4 @@
 "#year":"year",
 "#years":"years",
 "#yes":"Yes",
-
 "END":"END"}

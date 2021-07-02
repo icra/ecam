@@ -111,7 +111,7 @@ let summary_ghg=new Vue({
       //destroy all charts
       Object.values(this.charts).forEach(chart=>chart.destroy());
 
-      //pie charts (d3js)
+      //pie charts
         Charts.draw_pie_chart('chart_1',
           [
             {"label":"", "value":100*Global.Water.ws_KPI_GHG().total/Global.TotalGHG().total},
@@ -131,6 +131,7 @@ let summary_ghg=new Vue({
           Structure.filter(s=>s.sublevel).map(s=>s.color),
         );
 
+        //d3js pie chart -- ghg by gas
         Charts.draw_pie_chart('chart_3',
           [
             {"label":"", "value":100*Global.TotalGHG().co2/Global.TotalGHG().total},
@@ -197,61 +198,6 @@ let summary_ghg=new Vue({
           ],
         );
       //--
-
-      //Chart.js pie chart -- ghg by system
-      if(document.getElementById('chart_1_v2')){
-        this.charts.chart_1_v2 = new Chart('chart_1_v2',{
-          type:'pie',
-          data:{
-            labels: Structure.filter(s=>!s.sublevel).map(s=>{
-              return translate(s.level)+" (%)";
-            }),
-            datasets:[{
-              label:"",
-              data: Structure.filter(s=>!s.sublevel).map(s=>{
-                return 100*Global[s.level][s.prefix+'_KPI_GHG']().total/Global.TotalGHG().total;
-              }),
-              backgroundColor:Structure.filter(s=>!s.sublevel).map(s=>s.color),
-              hoverOffset:4,
-            }],
-          },
-          options:{
-            aspectRatio:1.5,
-            plugins:{
-              legend:{
-                display:false,
-              },
-            },
-          },
-        });
-      }
-
-      if(document.getElementById('chart_2_v2')){
-        this.charts.chart_2_v2 = new Chart('chart_2_v2',{
-          type:'pie',
-          data:{
-            labels: Structure.filter(s=>s.sublevel).map(s=>{
-              return translate(s.level)+" "+translate(s.sublevel)+" (%)";
-            }),
-            datasets:[{
-              label:"",
-              data: Structure.filter(s=>s.sublevel).map(s=>{
-                return 100*Global[s.level][s.sublevel].map(ss=>ss[s.prefix+'_KPI_GHG']().total).sum()/Global.TotalGHG().total;
-              }),
-              backgroundColor:Structure.filter(s=>s.sublevel).map(s=>s.color),
-              hoverOffset:4,
-            }],
-          },
-          options:{
-            aspectRatio:1.5,
-            plugins:{
-              legend:{
-                display:false,
-              },
-            },
-          },
-        });
-      }
 
       //Chart.js bar chart -- ghg by substage
       if(document.getElementById('bar_chart_ghg_substages')){
@@ -659,10 +605,7 @@ let summary_ghg=new Vue({
                   </table>
                 </div>
                 <div>
-                  <canvas id="chart_1_v2"></canvas>
-                  <!--
                   <div id=chart_1></div>
-                  -->
                 </div>
               </div>
             </div>
@@ -691,10 +634,7 @@ let summary_ghg=new Vue({
                   </table>
                 </div>
                 <div>
-                  <canvas id="chart_2_v2"></canvas>
-                  <!--
                   <div id=chart_2></div>
-                  -->
                 </div>
               </div>
             </div>
@@ -704,24 +644,31 @@ let summary_ghg=new Vue({
                 <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
                 GHG emissions by gas emitted
               </div>
-              <div class=flex>
-                <table class=legend>
-                  <tr v-for="value,key in Global.TotalGHG()" v-if="key!='total'">
-                    <td :style="{background:Charts.gas_colors[key]}"></td>
-                    <td>
-                      <div v-html="key.toUpperCase().prettify()"></div>
-                    </td>
-                    <td>
-                      <div v-html="format_emission(value)"></div>
-                    </td>
-                    <td class=unit v-html="current_unit_ghg.prettify()"></td>
-                  </tr>
-                </table>
-                <div id=chart_3></div>
+              <div
+                class=flex
+              >
+                <div>
+                  <table class=legend>
+                    <tr v-for="value,key in Global.TotalGHG()" v-if="key!='total'">
+                      <td :style="{background:Charts.gas_colors[key]}"></td>
+                      <td>
+                        <div v-html="key.toUpperCase().prettify()"></div>
+                      </td>
+                      <td>
+                        <div v-html="format_emission(value)"></div>
+                      </td>
+                      <td class=unit v-html="current_unit_ghg.prettify()"></td>
+                    </tr>
+                  </table>
+                </div>
+                <div>
+                  <div id=chart_3></div>
+                </div>
               </div>
             </div>
 
             <!--ipcc categories
+            -->
             <div class=chart_container style="border-right:none">
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
@@ -743,7 +690,6 @@ let summary_ghg=new Vue({
                 <div id=chart_ipcc_categories></div>
               </div>
             </div>
-            -->
             <div class=chart_container></div>
           </div>
 
@@ -775,21 +721,25 @@ let summary_ghg=new Vue({
               </div>
 
               <div class=flex>
-                <table class=legend>
-                  <tr>
-                    <td style="background:var(--color-level-Water)"></td>
-                    <td>{{translate('Water')}}</td>
-                    <td>{{format_energy(Global.Water.ws_nrg_cons())}}</td>
-                    <td class=unit v-html="current_unit_nrg"></td>
-                  </tr>
-                  <tr>
-                    <td style="background:var(--color-level-Waste)"></td>
-                    <td>{{translate('Waste')}}</td>
-                    <td>{{format_energy(Global.Waste.ww_nrg_cons())}}</td>
-                    <td class=unit v-html="current_unit_nrg"></td>
-                  </tr>
-                </table>
-                <div id=chart_nrg_levels></div>
+                <div>
+                  <table class=legend>
+                    <tr>
+                      <td style="background:var(--color-level-Water)"></td>
+                      <td>{{translate('Water')}}</td>
+                      <td>{{format_energy(Global.Water.ws_nrg_cons())}}</td>
+                      <td class=unit v-html="current_unit_nrg"></td>
+                    </tr>
+                    <tr>
+                      <td style="background:var(--color-level-Waste)"></td>
+                      <td>{{translate('Waste')}}</td>
+                      <td>{{format_energy(Global.Waste.ww_nrg_cons())}}</td>
+                      <td class=unit v-html="current_unit_nrg"></td>
+                    </tr>
+                  </table>
+                </div>
+                <div>
+                  <div id=chart_nrg_levels></div>
+                </div>
               </div>
             </div>
 
@@ -800,20 +750,24 @@ let summary_ghg=new Vue({
               </div>
 
               <div class=flex>
-                <table class=legend>
-                  <tr v-for="stage in Structure.filter(s=>s.sublevel)">
-                    <td :style="{background:stage.color}">
-                    </td>
-                    <td>
-                      {{translate(stage.sublevel)}}
-                    </td>
-                    <td>
-                      {{ format_energy(Global[stage.level][stage.sublevel].map(s=>s[stage.prefix+'_nrg_cons']).sum()) }}
-                    </td>
-                    <td class=unit v-html="current_unit_nrg"></td>
-                  </tr>
-                </table>
-                <div id=chart_nrg_stages></div>
+                <div>
+                  <table class=legend>
+                    <tr v-for="stage in Structure.filter(s=>s.sublevel)">
+                      <td :style="{background:stage.color}">
+                      </td>
+                      <td>
+                        {{translate(stage.sublevel)}}
+                      </td>
+                      <td>
+                        {{ format_energy(Global[stage.level][stage.sublevel].map(s=>s[stage.prefix+'_nrg_cons']).sum()) }}
+                      </td>
+                      <td class=unit v-html="current_unit_nrg"></td>
+                    </tr>
+                  </table>
+                </div>
+                <div>
+                  <div id=chart_nrg_stages></div>
+                </div>
               </div>
             </div>
           </div>
@@ -948,7 +902,6 @@ let summary_ghg=new Vue({
       }
       #summary_ghg div.chart_container table.legend {
         width:38%;
-        margin-right:10px;
       }
 
       #summary_ghg div.chart_container div.bar_background {
