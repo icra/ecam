@@ -11,15 +11,10 @@ let development=new Vue({
     <div id=development v-if="visible && Languages.ready">
       <!--title--><h1>Development</h1>
       <p style="padding-left:1em">
-        Functions for debugging during development and/or work in progress new pages.
+        Work in progress elements that are in development.
       </p>
 
-      <ul
-        style="
-          font-size:large;
-          list-style:none;
-        "
-      >
+      <ul>
         <li>
           <button onclick="ecam.show('ipcc_categories')">
             IPCC categories vs ECAM equations
@@ -77,7 +72,7 @@ let development=new Vue({
         padding-left:1em;
       }
       #development ul li {
-        padding-bottom:20px;
+        padding-bottom:15px;
       }
     </style>
   `,

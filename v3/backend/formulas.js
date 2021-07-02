@@ -36,10 +36,12 @@ let Formulas={
         }
       });
     });
-    let all_codes = all_input_codes.concat(all_output_codes);
 
-    //add constants
-    all_codes = all_codes.concat(Object.keys(Cts));
+    let all_codes = [
+      ...all_input_codes,
+      ...all_output_codes,
+      ...Object.keys(Cts), //constants
+    ];
 
     //iterate keys
     all_codes.forEach(field=>{
@@ -52,6 +54,7 @@ let Formulas={
     //sort strings A-Z
     matches.sort();
 
+    //end
     return matches;
   },
 

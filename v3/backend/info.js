@@ -20,6 +20,14 @@ let Info={
   Currency             :{magnitude:"text",unit:"text"},
   Country              :{magnitude:"text",unit:"text"},
 
+  elec_GHG:{magnitude:"Mass",unit:"kgCO2eq"},
+  fuel_GHG:{magnitude:"Mass",unit:"kgCO2eq"},
+  untr_GHG:{magnitude:"Mass",unit:"kgCO2eq"},
+  biog_GHG:{magnitude:"Mass",unit:"kgCO2eq"},
+  wwtr_GHG:{magnitude:"Mass",unit:"kgCO2eq"},
+  slud_GHG:{magnitude:"Mass",unit:"kgCO2eq"},
+  disc_GHG:{magnitude:"Mass",unit:"kgCO2eq"},
+
   wwt_nrg_biog_eff:{magnitude:"Percent", unit:"%"},
 
   wwt_slu_comp_seqst_rate:{magnitude:"Mass/Mass",unit:"kgCO2eq/kgSludge"},

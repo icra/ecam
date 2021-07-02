@@ -120,27 +120,30 @@ let ecam={
 
     //visit every tier b stage
     Structure.forEach(s=>{
-      setTimeout(()=>{go_to(s.level, s.sublevel)}, interval*timer++);
+      setTimeout(()=>{
+        go_to(s.level, s.sublevel);
+      },interval*timer++);
     });
 
-    //visit every variable
-    Structure.forEach(s=>{
-      [ //concat inputs and outputs
+    /*visit every variable*/
+    [
+      ...Object.keys(Global.General),
+      ...Object.getOwnPropertyNames(Ecam.prototype).filter(name=>name!='constructor'),
+      ...Structure.map(s=>[
         ...get_input_codes( s.level, s.sublevel),
         ...get_output_codes(s.level, s.sublevel),
-      ].forEach(code=>{
-        setTimeout(
-          function(){
-            variable.view(code)
-          },
-          interval*timer++,
-        );
-      });
+      ]).reduce((p,c)=>(p.concat(c))),
+    ].forEach(code=>{
+      setTimeout(()=>{
+        variable.view(code);
+      },interval*timer++);
     });
 
     //visit every constant
     Object.keys(Cts).forEach(code=>{
-      setTimeout(()=>{constant.view(code)}, interval*timer++);
+      setTimeout(()=>{
+        constant.view(code);
+      },interval*timer++);
     });
   },
 

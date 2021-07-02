@@ -88,7 +88,7 @@ class Ecam{
     return 1e3*wsd_auth_con/wsd_serv_pop/this.Days()||0;
   }
 
-  //grouped emissions by source
+  //grouped emissions by source/origin at a global level
     elec_GHG(){
       //electricity emissions
       let emissions=[

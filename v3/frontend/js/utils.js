@@ -169,7 +169,7 @@ function get_input_codes(level, sublevel){
   if(stage.class){
     obj = new stage.class();
   }else{
-    obj = Global[level];
+    obj = (new Ecam())[level];
   }
 
   return Object.keys(obj).filter(key=>{
@@ -192,7 +192,7 @@ function get_output_codes(level, sublevel){
   if(stage.class){
     obj = stage.class.prototype;
   }else{
-    obj = Global[level];
+    obj = (new Ecam())[level];
   }
 
   return Object.getOwnPropertyNames(obj).filter(name=>{
