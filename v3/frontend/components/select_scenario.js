@@ -463,7 +463,7 @@ let select_scenario=new Vue({
             <transition name="fade">
               <tr v-if="are_settings_open && scenario==Global">
                 <td style="background:white"></td>
-                <td colspan=7>
+                <td colspan=6>
                   <!--edit name-->
                   <div style="padding:20px 10px">
                     <div v-if="are_you_editing_name" style="text-align:left">

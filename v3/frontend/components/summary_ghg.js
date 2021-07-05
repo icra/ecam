@@ -296,7 +296,9 @@ let summary_ghg=new Vue({
         <button @click="current_view='charts_ghg'"  :selected="current_view=='charts_ghg'" >Charts GHG</button>
         <button @click="current_view='charts_nrg'"  :selected="current_view=='charts_nrg'" >Charts Energy</button>
         <button @click="current_view='charts_pop'"  :selected="current_view=='charts_pop'" >Charts Serviced Population</button>
+        <!--
         <button @click="variable.view('ww_GHG_avoided')"                                   >Avoided emissions</button>
+        -->
         <hr style="border-color:#eee">
         <div>
           <tutorial_tip

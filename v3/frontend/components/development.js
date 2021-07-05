@@ -51,7 +51,7 @@ let development=new Vue({
               LANGUAGE tags not used for "<b>{{Languages.current}}</b>"
               ({{ Languages.find_not_used_tags().length }})
               <br>
-              <b>important</b>: execute automated to detect unused tags
+              <b>important</b>: execute automated test first to detect unused tags
             </summary>
             <table>
               <tr v-for="tag in Languages.find_not_used_tags()">
@@ -73,6 +73,9 @@ let development=new Vue({
       }
       #development ul li {
         padding-bottom:15px;
+      }
+      #development summary{
+        cursor:pointer;
       }
     </style>
   `,
