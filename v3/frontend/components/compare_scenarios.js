@@ -26,6 +26,19 @@ let compare_scenarios=new Vue({
   },
 
   methods:{
+    show_variable(variable){ //->bool
+      let sum = variable.scenario_values.map(sce=>sce.sum()).sum();
+      let at_least_one_scenario_has_a_substage_with_a_finite_value = variable.scenario_values.some(sce=>sce.some(value=>(value && isFinite(value))));
+
+      return (
+        ((variable.type=='input' && this.include.inputs) || (variable.type=='output' && this.include.outputs))
+        &&
+        (
+          !this.hide_zero_valued_variables || (sum>0 && at_least_one_scenario_has_a_substage_with_a_finite_value)
+        )
+      );
+    },
+
     //emissions are in kg by default
     format_emission(number){
       let divisor = this.current_unit_ghg=='tCO2eq' ? 1000:1;
@@ -599,15 +612,7 @@ let compare_scenarios=new Vue({
 
             <tr
               v-for="v in get_variables_and_values(stage.level, stage.sublevel)"
-              v-if="
-                (
-                  (v.type=='input' && include.inputs) || (v.type=='output' && include.outputs)
-                )
-                &&
-                (
-                  !hide_zero_valued_variables || v.scenario_values.map(sce=>sce.sum()).sum()
-                )
-              "
+              v-if="show_variable(v)"
             >
               <!--variable code and description-->
               <th :style="{background:get_level_color(stage.level),paddingLeft:'20px'}">
