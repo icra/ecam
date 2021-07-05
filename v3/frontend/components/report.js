@@ -49,6 +49,25 @@ let report = new Vue({
       return true;
     },
 
+    show_output(stage, code){
+      let sum_of_ss = get_sum_of_substages(stage.level, stage.sublevel, code);
+      if(
+        this.hide_zero_valued_variables &&
+        (
+          sum_of_ss==0 || isFinite(sum_of_ss)==false
+        )
+      ){
+        return false;
+      }
+      if(
+        this.hide_question_related_variables &&
+        Global[stage.level][stage.sublevel].every(ss=>Questions.is_hidden(code,ss))
+      ){
+        return false;
+      }
+      return true;
+    },
+
     open_print_dialog(){
       let _this=this;
       this.printable_version=true;
@@ -578,7 +597,7 @@ let report = new Vue({
                     </tr>
                     <tr
                       v-for="code in get_output_codes(stage.level,stage.sublevel)"
-                      v-if="!hide_zero_valued_variables || get_sum_of_substages(stage.level, stage.sublevel, code)"
+                      v-if="show_output(stage,code)"
                     >
                       <td
                         :style="{width:'50%',background:stage.color}"
