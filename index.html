@@ -1,0 +1,248 @@
+<!doctype html><html><head>
+  <meta charset="utf8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="frontend/img/favicon.ico" type="image/x-icon">
+  <title>ECAM v3</title>
+
+  <!--load backend-->
+  <script src="backend/questions.js"></script>
+  <script src="backend/global.js"></script>
+  <script src="backend/info.js"></script>
+  <script src="backend/structure.js"></script>
+  <script src="backend/countries.js"></script>
+  <script src="backend/gwp_reports.js"></script>
+  <script src="backend/constants.js"></script>
+  <script src="backend/tables.js"></script>
+  <script src="backend/units.js"></script>
+  <script src="backend/estimations.js"></script>
+  <script src="backend/exceptions.js"></script>
+  <script src="backend/normalization.js"></script>
+  <script src="backend/formulas.js"></script>
+  <script src="backend/filters.js"></script>
+  <script src="backend/benchmarks.js"></script>
+  <script src="backend/references.js"></script>
+  <script src="backend/ipcc_categories.js"></script>
+
+  <!--v2
+    <script src="dataModel/level3variables.js"></script>
+    <script src="dataModel/level2only.js"></script>
+    <script src="dataModel/sumable_magnitudes.js"></script>
+    <script src="main_menu.js"></script>
+  -->
+
+  <!--load frontend-->
+    <!--load css-->
+    <link rel="stylesheet" href="frontend/css/css.css">
+
+    <!--functions to draw charts to DOM-->
+    <script src="frontend/charts.js"></script><!--TODO-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--string prettify for descriptions (subindexes and superindexes)-->
+    <script src="frontend/js/prettify.js"></script>
+
+    <!--capitalize first letter of a string-->
+    <script src="frontend/js/ucfirst.js"></script>
+
+    <!--libs-->
+      <!--vue
+        development version, includes helpful console warnings
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        production version, optimized for size and speed
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+        <script src="frontend/vue/vue-dev.js"></script>
+        <script src="frontend/vue/vue-pro.js"></script>
+      -->
+      <script src="frontend/vue/vue-pro.js"></script>
+    <!--/libs-->
+
+    <!--load languages-->
+    <script src="frontend/languages/translate.js"></script>
+
+    <!--load frontend utils-->
+    <script src="frontend/js/tips.js"></script>
+    <script src="frontend/js/format.js"></script>
+  <!--/load frontend-->
+
+  <!--googlearchive/code-prettify-->
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+  <!--d3js library for sankey diagram-->
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="//cdn.rawgit.com/newrelic-forks/d3-plugins-sankey/master/sankey.js"></script>
+  <script src="//cdn.rawgit.com/misoproject/d3.chart/master/d3.chart.min.js"></script>
+  <script src="//cdn.rawgit.com/q-m/d3.chart.sankey/master/d3.chart.sankey.min.js"></script>
+
+  <!--library to export and import excel files-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.2.1/exceljs.js" integrity="sha512-Y139xHfsByvkHgAogLbFJsPh7Fd55HrWlD3n2tgd7Mhyx7sE/ePtLPNQVeWCSViDPQe6LlgeXWHMFEUBUCmrfA==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js" integrity="sha512-DvLlX4EDfBZuesenAya2TOiF+cR7GbRsV+IElolKTYIj8JJHr9BFTcznTuRFabG26vcVsmDCcv2dL7m8Ov1XfA==" crossorigin="anonymous"></script>
+</head><body>
+
+<!--loading indicator-->
+<div>
+  <div id=loading>
+    <div v-if="Languages.ready==false">
+      <div style="font-size:x-large;padding:2em;text-align:center">
+        loading ecam tool...
+      </div>
+    </div>
+  </div>
+  <script>new Vue({el:"#loading",data:{Languages}});</script>
+  <style>
+    /*"loading ecam" animation */
+    @keyframes loading_animation {
+      from {color: black;}
+      to {color: #eee;}
+    }
+    div#loading {
+      animation-name:loading_animation;
+      animation-duration:1s;
+      animation-iteration-count:infinite;
+      animation-direction:alternate;
+      animation-timing-function:ease-in;
+    }
+  </style>
+</div>
+
+<!--help floating menu-->
+<div>
+  <div id=floating_help v-if="visible && Languages.ready">
+    <div
+      onclick="alert('in_development')"
+    >
+      &#10068;
+      <br>Help
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el:"#floating_help",
+      data:{
+        visible:false,
+        Languages,
+      },
+    });
+  </script>
+  <style>
+    div#floating_help {
+      background:#EE6D56;
+      position:fixed;
+      bottom:10px;
+      right:10px;
+      border-radius:50%;
+      text-align:center;
+      padding:1em;
+      color:white;
+      font-weight:bold;
+      font-size:large;
+      cursor:pointer;
+      opacity:0.75;
+    }
+    div#floating_help:hover {
+      font-size:x-large;
+      transition:all 0.2s;
+      opacity:1;
+    }
+  </style>
+</div>
+
+<!--all elements and views-->
+<div>
+  <div id=ecam_logo        ></div><!--ELEMENT-->
+  <div id=caption          ></div><!--ELEMENT-->
+  <div id=linear_menu      ></div><!--ELEMENT-->
+  <div id=stages_menu      ></div><!--ELEMENT-->
+  <div id=summaries_menu   ></div><!--ELEMENT-->
+  <div id=landing          ></div><!--VIEW-->
+  <div id=more             ></div><!--VIEW-->
+  <div id=about            ></div><!--VIEW-->
+  <div id=help             ></div><!--VIEW-->
+  <div id=select_scenario  ></div><!--VIEW-->
+  <div id=countries        ></div><!--VIEW-->
+  <div id=gwp_table        ></div><!--VIEW-->
+  <div id=population       ></div><!--VIEW-->
+  <div id=tier_b           ></div><!--VIEW-->
+  <div id=overview         ></div><!--VIEW-->
+  <div id=summary_ghg      ></div><!--VIEW-->
+  <div id=variable         ></div><!--VIEW-->
+  <div id=constant         ></div><!--VIEW-->
+  <div id=constants        ></div><!--VIEW-->
+  <div id=development      ></div><!--VIEW-->
+  <div id=report           ></div><!--VIEW-->
+  <div id=benchmarks       ></div><!--VIEW-->
+  <div id=non_revenue_water></div><!--VIEW-->
+  <div id=equations        ></div><!--VIEW-->
+  <div id=tables           ></div><!--VIEW-->
+  <div id=sankey_ghg       ></div><!--VIEW-->
+  <div id=diagram          ></div><!--VIEW-->
+  <div id=compare_scenarios></div><!--VIEW-->
+  <div id=problems         ></div><!--VIEW-->
+  <div id=docs             ></div><!--VIEW-->
+  <div id=faqs             ></div><!--VIEW-->
+  <div id=ipcc_categories  ></div><!--VIEW-->
+  <div id=new_in_this_version></div><!--VIEW-->
+</div>
+
+<!--load vue objects-->
+  <!--helper functions-->
+  <script src="frontend/js/utils.js"></script>
+
+  <!--components (Vue objects)-->
+  <script src="frontend/components/ecam_logo.js"></script>
+  <script src="frontend/components/more.js"></script>
+  <script src="frontend/components/caption.js"></script>
+  <script src="frontend/components/linear_menu.js"></script>
+  <script src="frontend/components/stages_menu.js"></script>
+  <script src="frontend/components/input-ecam.js"></script>
+  <script src="frontend/components/inputs-involved-table.js"></script>
+  <script src="frontend/components/tutorial_tip.js"></script>
+
+  <!--views (Vue objects) order is important-->
+  <script src="frontend/components/variable.js"></script>
+  <script src="frontend/components/landing.js"></script>
+  <script src="frontend/components/about.js"></script>
+  <script src="frontend/components/help.js"></script>
+  <script src="frontend/components/select_scenario.js"></script>
+  <script src="frontend/components/countries.js"></script>
+  <script src="frontend/components/gwp_table.js"></script>
+  <script src="frontend/components/population.js"></script>
+  <script src="frontend/components/tier_b.js"></script>
+  <script src="frontend/components/overview.js"></script>
+  <script src="frontend/components/summary_ghg.js"></script>
+  <script src="frontend/components/constant.js"></script>
+  <script src="frontend/components/constants.js"></script>
+  <script src="frontend/components/report.js"></script>
+  <script src="frontend/components/benchmarks.js"></script>
+  <script src="frontend/components/non_revenue_water.js"></script>
+  <script src="frontend/components/equations.js"></script>
+  <script src="frontend/components/tables.js"></script>
+  <script src="frontend/components/sankey_ghg.js"></script>
+  <script src="frontend/components/diagram.js"></script>
+  <script src="frontend/components/compare_scenarios.js"></script>
+  <script src="frontend/components/summaries_menu.js"></script>
+  <script src="frontend/components/docs.js"></script>
+  <script src="frontend/components/faqs.js"></script>
+  <script src="frontend/components/ipcc_categories.js"></script>
+  <script src="frontend/components/new_in_this_version.js"></script>
+
+  <!--development utilities-->
+  <script src="frontend/components/development.js"></script>
+  <script src="frontend/components/problems.js"></script>
+
+  <!--main ecam view controller-->
+  <script src="frontend/main.js"></script>
+
+  <!--default settings on reload (for development)-->
+  <script src="defaults.js"></script>
+<!--/load vue objects-->
+
+<!--onclose onunload listener-->
+<script>
+  if(debug==false){
+    window.addEventListener('beforeunload',(event)=>{
+      event.preventDefault(); //stated by the standard
+      event.returnValue=''; //chrome requires 'returnValue'
+    });
+  }
+</script>

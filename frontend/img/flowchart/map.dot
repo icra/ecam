@@ -1,0 +1,56 @@
+digraph MyGraph {
+  rankdir="LR";
+
+  wsa [label="Abstraction", style="filled",color="#58c1db",fontcolor="white",shape="box"]
+  wst [label="Treatment",   style="filled",color="#58c1db",fontcolor="white",shape="box"]
+  wsd [label="Distribution",style="filled",color="#58c1db",fontcolor="white",shape="box"]
+  pop [label="Population"]
+  ww  [label="Wastewater treatment"]
+
+  col [label="Collected", style="filled",color="#ed6d57",fontcolor="white",shape="box"]
+  unc [label="Uncollected"]
+
+  wwt [label="Treatment",         style="filled",color="#ed6d57",fontcolor="white",shape="box"]
+  ons [label="Onsite Sanitation", style="filled",color="#ed6d57",fontcolor="white",shape="box"]
+
+
+  unt [label="Untreated wastewater"]
+  dis [label="Treated wastewater"]
+
+  riv [label="Freshwater, estuarine,\nmarine environments"]
+  soi [label="Soils (agriculture, reuse, etc)"]
+  slu [label="Dry Sludge"]
+  inc [label="Incineration"]
+  laf [label="Landfilling"]
+  lap [label="Land Application"]
+  com [label="Composting"]
+
+  subgraph cluster_ws {
+    label="Water Supply"
+    wsa -> wst -> wsd [color="blue"]
+  }
+
+  wsd -> pop [color="blue"]
+  pop -> ww  [color="blue:brown"]
+
+  subgraph cluster_ww{
+    label="Wastewater"
+    ww  -> {col unc} [color="blue:brown"]
+    unc -> ons              [color="blue:brown"]
+    col -> wwt              [color="blue:brown"]
+  }
+
+  subgraph cluster_dis {
+    label="Discharge"
+    {unc col} -> unt [color="blue:brown"]
+    unt -> {riv soi} [color="blue:brown"]
+    {ons wwt} -> dis -> {riv soi} [color="blue"]
+  }
+
+  subgraph cluster_sm{
+    label="Sludge Management"
+    {ons wwt} -> slu -> {inc laf lap com} [color="brown"]
+  }
+
+  {riv soi inc laf lap com} -> Atmosphere [color="grey"]
+}

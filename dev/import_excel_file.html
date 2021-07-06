@@ -1,0 +1,32 @@
+
+<!--importa exceljs-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.2.0/exceljs.min.js"></script>
+
+<!--html-->
+import xlsx file
+<input type="file"
+  accept=".xlsx"
+  onchange="handleImport(event)"
+>
+
+<!--javascript-->
+<script>
+  function handleImport(e){
+    let file   = e.target.files[0];
+    let reader = new FileReader();
+
+    reader.onload=function(){
+      let buffer = reader.result;
+      let wb     = new ExcelJS.Workbook();
+      wb.xlsx.load(buffer).then(workbook=>{
+        console.log(workbook, 'workbook instance');
+        workbook.eachSheet((sheet, id) => {
+          sheet.eachRow((row, rowIndex) => {
+            console.log(row.values, rowIndex);
+          });
+        });
+      });
+    }
+    reader.readAsArrayBuffer(file);
+  }
+</script>
