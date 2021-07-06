@@ -46,21 +46,45 @@ let development=new Vue({
 
         <!--language tags not used-->
         <li>
-          <details open>
-            <summary>
-              LANGUAGE tags not used for "<b>{{Languages.current}}</b>"
-              ({{ Languages.find_not_used_tags().length }})
-              <br>
-              <b>important</b>: execute automated test first to detect unused tags
-            </summary>
-            <table>
-              <tr v-for="tag in Languages.find_not_used_tags()">
-                <td>
-                  {{tag}}
-                </td>
-              </tr>
-            </table>
-          </details>
+          <div
+            style="
+              display:grid;
+              grid-template-columns:repeat(2,1fr);
+            "
+          >
+            <details open>
+              <summary>
+                LANGUAGE tags not used for "<b>{{Languages.current}}.json</b>" file
+                ({{ Languages.find_not_used_tags().length }})
+                <br>
+                <b>important</b>: execute automated test first to visit all pages
+                and detect unused tags
+              </summary>
+              <table>
+                <tr v-for="tag in Languages.find_not_used_tags()">
+                  <td>
+                    {{tag}}
+                  </td>
+                </tr>
+              </table>
+            </details>
+            <details open>
+              <summary>
+                LANGUAGE tags not found for "<b>{{Languages.current}}.json</b>" file
+                ({{ Object.keys(Languages.not_found_tags).length }})
+                <br>
+                "tags attempted to translate"
+                <button @click="Languages.not_found_tags={}">reset</button>
+              </summary>
+              <table>
+                <tr v-for="tag in Object.keys(Languages.not_found_tags)">
+                  <td>
+                    {{tag}}
+                  </td>
+                </tr>
+              </table>
+            </details>
+          </div>
         </li>
       </ul>
     </div>

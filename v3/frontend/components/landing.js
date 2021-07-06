@@ -137,10 +137,10 @@ let landing = new Vue({
         <!--creative commons image and text-->
         <div>
           <div>
-            ECAM is a tool developed by ICRA for the WaCCliM Project* and holds a Creative Commons Attribution-ShareAlike 4.0 International License.
+            ECAM is a tool developed by ICRA for the WaCCliM Project<sup>1</sup> and holds a Creative Commons Attribution-ShareAlike 4.0 International License.
           </div>
           <div style="font-size:smaller;margin-top:10px">
-            *WaCCliM is a joint initiative between GIZ and IWA. This project
+            <sup>1</sup>WaCCliM is a joint initiative between GIZ and IWA. This project
             is part of the International Climate Initiative (IKI). The German
             Federal Ministry for the Environment, Nature Conservation and
             Nuclear Safety (BMU) supports this initiative on the basis of a

@@ -24,8 +24,8 @@ let ecam_logo=new Vue({
 
       <!--version-->
       <div style="font-family:monospace;padding:1px">
-        <a href="dev/pending.txt" target=_blank title="version">
-          [v{{Global.General.version}}]
+        <a href="https://github.com/icra/ecam" target=_blank title="version">
+          v{{Global.General.version}}
         </a>
       </div>
 

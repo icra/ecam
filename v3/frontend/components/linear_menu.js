@@ -30,7 +30,7 @@ let linear_menu = new Vue({
           onclick="ecam.show('landing')"
           :selected="current_view=='landing'"
         >
-          <div>Home</div>
+          <div>{{translate('Home')}}</div>
         </div>
 
         <!--scenarios-->
@@ -38,7 +38,7 @@ let linear_menu = new Vue({
           onclick="ecam.show('select_scenario')"
           :selected="current_view=='select_scenario'"
         >
-          <div>Configuration</div>
+          <div>{{translate('Configuration')}}</div>
         </div>
 
         <!--stages-->
@@ -46,7 +46,7 @@ let linear_menu = new Vue({
           onclick="ecam.show('tier_b')"
           :selected="current_view=='tier_b'"
         >
-          <div>Inventory</div>
+          <div>{{translate('Inventory')}}</div>
         </div>
 
         <!--overview-->
@@ -54,7 +54,7 @@ let linear_menu = new Vue({
           onclick="summaries_menu.show(summaries_menu.current_view)"
           :selected="is_summaries_menu_visible()"
         >
-          <div>Results</div>
+          <div>{{translate('Results')}}</div>
         </div>
 
         <!--compare-->
@@ -62,7 +62,7 @@ let linear_menu = new Vue({
           onclick="ecam.show('compare_scenarios')"
           :selected="current_view=='compare_scenarios'"
         >
-          <div>Compare assessments</div>
+          <div>{{translate('Compare assessments')}}</div>
         </div>
 
         <!--more (old sidebar)-->
@@ -70,14 +70,14 @@ let linear_menu = new Vue({
           onclick="ecam.show('more')"
           :selected="current_view=='more'"
         >
-          <div>More</div>
+          <div>{{translate('More')}}</div>
         </div>
       </div>
 
       <!--current scenario-->
       <div>
         <div>
-          <b style="color:#aaa">You are editing</b>
+          <b style="color:#aaa">{{translate('You are editing')}}</b>
           <b>{{Global.General.Name}}</b>
         </div>
         <div>

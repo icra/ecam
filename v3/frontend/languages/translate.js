@@ -40,15 +40,13 @@ let Languages={
 
     //language not found
     if(!this.tags[lang]){
-      let warn=`"#${id}" - language not found]`;
-      //console.warn(warn);
-      return `["#${id}"]`;
+      let error =`"#${id}" - language "${lang}" not found]`;
+      throw(error);
     }
 
-    //translation not found
+    //tag not found
     if(!this.tags[lang][`#${id}`]){
-      let warn=`"#${id}" - translation not found]`;
-      //console.warn(warn);
+      this.not_found_tags[`#${id}`]=1;
       return `["#${id}"]`;
     }
 
@@ -83,6 +81,9 @@ let Languages={
 
     return found;
   },
+
+  //container to store not found tags
+  not_found_tags:{},
 };
 
 //start loading language tags
