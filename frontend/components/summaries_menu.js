@@ -1,6 +1,5 @@
 let summaries_menu = new Vue({
   el:"#summaries_menu",
-
   data:{
     visible:false,
     current_view:'summary_ghg',
@@ -16,14 +15,16 @@ let summaries_menu = new Vue({
       this.current_view=view_name;
       ecam.show(view_name);
     },
+
+    translate,
   },
 
   template:`
     <div id=summaries_menu v-if="visible && Languages.ready">
       <div id=tabs>
-        <div :current="current_view=='summary_ghg'" onclick="summaries_menu.show('summary_ghg')">Summary       </div>
-        <div :current="current_view=='sankey_ghg'"  onclick="summaries_menu.show('sankey_ghg' )">Sankey diagram</div>
-        <div :current="current_view=='report'"      onclick="summaries_menu.show('report'     )">Report        </div>
+        <div :current="current_view=='summary_ghg'" onclick="summaries_menu.show('summary_ghg')" v-html="translate('Summary')"       ></div>
+        <div :current="current_view=='sankey_ghg'"  onclick="summaries_menu.show('sankey_ghg' )" v-html="translate('Sankey_diagram')"></div>
+        <div :current="current_view=='report'"      onclick="summaries_menu.show('report'     )" v-html="translate('Report')"        ></div>
       </div>
     </div>
   `,

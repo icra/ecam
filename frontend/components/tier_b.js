@@ -255,7 +255,7 @@ let tier_b=new Vue({
                 v-html="substage.name.prettify()"
               ></a>
               <button>
-                change substage name
+                {{translate("change substage name")}}
               </button>
             </span>
           </span>
@@ -353,8 +353,8 @@ let tier_b=new Vue({
           <button
             @click="disable_all_filters();filters_on=false"
             :disabled="filters_on==false"
-            :title="filters_on ? 'Disable all filters':'You are viewing all inputs'"
-            v-html="'Show all inputs'"
+            :title="translate(filters_on ? 'Disable_all_filters':'You_are_viewing_all_inputs')"
+            v-html="translate('Show_all_inputs')"
           ></button>
         </div>
         <div
@@ -369,17 +369,14 @@ let tier_b=new Vue({
             @click.stop="filters_active[key]=$event.target.checked;if($event.target.checked){filters_on=true;}"
           >
           <span>
-            {{key}} ({{get_number_of_variables_shown_by_filter(key)}})
+            {{translate(key)}} ({{get_number_of_variables_shown_by_filter(key)}})
           </span>
         </div>
         <div>
           <tutorial_tip
-            id   ="Filter function"
-            title="Filter function"
-            text="
-              Activate the filters by ticking the boxes to select the fields
-              that you would like to assess.
-            "
+            id   ="Filter_function"
+            title="Filter_function"
+            text ="Activate_the_filters_by_ticking_the_boxes_to_select_the_fields_that_you_would_like_to_assess."
           ></tutorial_tip>
         </div>
       </div>
@@ -404,21 +401,17 @@ let tier_b=new Vue({
             </div>
             <div style="margin-top:5px;display:flex;justify-content:space-between">
               <div>
-                Enter the values for this stage
+                {{translate("Enter_the_values_for_this_stage")}}
               </div>
-              <div style="margin-right:10px" title="highlight related inputs/outputs">
+              <div style="margin-right:10px">
                 <label>
                   <input type=checkbox v-model="highlight">
-                  <small>Highlight mode</small>
+                  <small>{{translate("Highlight_mode")}}</small>
                   <div>
                     <tutorial_tip
-                      id   ="Highlight mode"
-                      title="Highlight mode"
-                      text="
-                        Activate the 'Highlight mode' and hover the outputs to
-                        see which inputs are required for the calculation and
-                        vice versa.
-                      "
+                      id   ="Highlight_mode"
+                      title="Highlight_mode"
+                      text ="Activate_the_Highlight_mode_and_hover_the_outputs_to_see_which_inputs_are_required_for_the_calculation_and_vice_versa."
                       style="color:black"
                     ></tutorial_tip>
                   </div>
@@ -529,7 +522,7 @@ let tier_b=new Vue({
           <div v-if="outputs_are_visible==false">
             <button
               @click="outputs_are_visible=true"
-              v-html="'show outputs'"
+              v-html="translate('show_outputs')"
               class="btn_show_outputs"
             ></button>
           </div>
@@ -541,7 +534,7 @@ let tier_b=new Vue({
                   <b>{{translate('OUTPUTS')}}</b>
                   &mdash;
                   <button @click="outputs_are_visible=false" class="btn_show_outputs">
-                    hide outputs
+                    {{translate("hide_outputs")}}
                   </button>
                 </div>
                 <div style="margin-top:5px">
@@ -552,7 +545,7 @@ let tier_b=new Vue({
                     <button
                       v-if="!sublevel || !(key=='kgCO2eq/year/serv.pop.' && !Normalization[level][sublevel])"
                       @click="normalization.selected=key"
-                      v-html="key.prettify()"
+                      v-html="translate(key).prettify()"
                       class=norm_btn
                       :selected="normalization.selected==key"
                     ></button>
@@ -565,13 +558,13 @@ let tier_b=new Vue({
                 <thead :style="{background:'transparent'}">
                   <tr>
                     <th></th>
-                    <th style="text-align:right">Value</th>
+                    <th style="text-align:right">{{translate("Value")}}</th>
                     <th style="text-align:right" v-if="sublevel">
                       &Sigma;
-                      sum
-                      ({{Global[level][sublevel].length}} substages)
+                      {{translate("sum")}}
+                      ({{Global[level][sublevel].length}} {{translate("substages")}})
                     </th>
-                    <th style="text-align:left">Unit</th>
+                    <th style="text-align:left">{{translate("Unit")}}</th>
                   </tr>
                 </thead>
 
@@ -580,7 +573,7 @@ let tier_b=new Vue({
                     v-if="
                       (key=='TotalGHG' || key.search('_KPI_GHG')+1)
                       &&
-                      Questions.is_hidden(key, substage)==false
+                      Questions.is_hidden(key,substage)==false
                     "
                     :class="highlighted.outputs.indexOf(key)+1 ? 'highlighted':''"
                     @mouseenter="highlight_inputs(key)"
@@ -606,35 +599,40 @@ let tier_b=new Vue({
                       style="text-align:right"
                     >
                       <div
-                        v-if="normalization.selected=='kgCO2eq'"
-                        v-html="format(get_output_value(key,get_current_stage()))"
-                      ></div>
-                      <div
-                        v-if="normalization.selected=='kgCO2eq/year'"
-                        v-html="format(get_output_value(key,get_current_stage())/Global.Years())"
-                      ></div>
-                      <div v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
-                        <div
-                          v-if="substage"
-                          v-html="format(get_output_value(key,get_current_stage())/Global.Years()/Normalization[level][sublevel](substage))"
-                        ></div>
-                        <div
-                          v-else
-                          v-html="format(get_output_value(key,get_current_stage())/Global.Years()/Normalization[level].Total())"
-                        ></div>
+                        v-for="value in [get_output_value(key,get_current_stage())]"
+                        :style="{color:value<0?'red':''}"
+                      >
+                        <span v-if="normalization.selected=='kgCO2eq'"      v-html="format(value)"></span>
+                        <span v-if="normalization.selected=='kgCO2eq/year'" v-html="format(value/Global.Years())"></span>
+                        <div v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
+                          <div
+                            v-if="substage"
+                            v-html="format(value/Global.Years()/Normalization[level][sublevel](substage))"
+                          ></div>
+                          <div
+                            v-else
+                            v-html="format(value/Global.Years()/Normalization[level].Total())"
+                          ></div>
+                        </div>
                       </div>
+
                     </td>
 
                     <!--sum of substages-->
                     <td v-if="sublevel">
-                      <div class=number v-if="normalization.selected=='kgCO2eq'">
-                        {{format(get_sum_of_substages(level,sublevel,key))}}
-                      </div>
-                      <div class=number v-if="normalization.selected=='kgCO2eq/year'">
-                        {{format(get_sum_of_substages(level,sublevel,key)/Global.Years())}}
-                      </div>
-                      <div class=number v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
-                        {{format(get_sum_of_substages(level,sublevel,key)/Global.Years()/Normalization[level].Total())}}
+                      <div
+                        v-for="value in [get_sum_of_substages(level,sublevel,key)]"
+                        :style="{color:value<0?'red':''}"
+                      >
+                        <div class=number v-if="normalization.selected=='kgCO2eq'">
+                          {{format(value)}}
+                        </div>
+                        <div class=number v-if="normalization.selected=='kgCO2eq/year'">
+                          {{format(value/Global.Years())}}
+                        </div>
+                        <div class=number v-if="normalization.selected=='kgCO2eq/year/serv.pop.'">
+                          {{format(value/Global.Years()/Normalization[level].Total())}}
+                        </div>
                       </div>
                     </td>
 
@@ -657,8 +655,8 @@ let tier_b=new Vue({
                 <thead :style="{background:'transparent'}">
                   <tr>
                     <th></th>
-                    <th style="text-align:right">Value</th>
-                    <th style="text-align:left">Unit</th>
+                    <th style="text-align:right">{{translate("Value")}}</th>
+                    <th style="text-align:left">{{translate("Unit")}}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -694,11 +692,11 @@ let tier_b=new Vue({
 
                       <!--benchmark if any-->
                       <div v-if="Benchmarks[key]">
-                        <div :style="{color:get_benchmark(key).color}">
-                          {{
-                            get_benchmark(key).string
-                          }}
-                        </div>
+                        <div
+                          v-for="obj in [get_benchmark(key)]"
+                          :style="{color:obj.color}"
+                          v-html="translate(obj.string)"
+                        ></div>
                       </div>
                     </td>
 

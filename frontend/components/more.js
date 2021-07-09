@@ -14,20 +14,19 @@ let more=new Vue({
   template:`
     <div id=more v-if="visible && Languages.ready">
       <h2 style="text-align:center">
-        More
+        {{translate("More")}}
       </h2>
 
       <div id=buttons>
-        <div class=button onclick="ecam.show('about')">            {{translate('about ecam')       }}</div>
-        <div class=button onclick="ecam.show('faqs')">             {{translate('FAQs')             }}</div>
-        <div class=button onclick="ecam.show('diagram')">          {{translate('Flow diagram')     }}</div>
-        <div class=button onclick="ecam.show('non_revenue_water')">{{translate('non_revenue_water')}}</div>
-        <div class=button onclick="ecam.show('equations')">        {{translate('equations')        }}</div>
-        <div class=button onclick="ecam.show('constants')">        {{translate('all_constants')    }}</div>
-        <div class=button onclick="ecam.show('tables')">           {{translate('Data tables')      }}</div>
-        <div class=button onclick="ecam.show('benchmarks')">       {{translate('benchmarks')       }}</div>
-        <div class=button onclick="ecam.show('docs')">             Scientific literature             </div>
-
+        <div class=button onclick="ecam.show('about')"            >{{translate('about ecam')           }}</div>
+        <div class=button onclick="ecam.show('faqs')"             >{{translate('FAQs')                 }}</div>
+        <div class=button onclick="ecam.show('diagram')"          >{{translate('Flow diagram')         }}</div>
+        <div class=button onclick="ecam.show('non_revenue_water')">{{translate('non_revenue_water')    }}</div>
+        <div class=button onclick="ecam.show('equations')"        >{{translate('equations')            }}</div>
+        <div class=button onclick="ecam.show('constants')"        >{{translate('all_constants')        }}</div>
+        <div class=button onclick="ecam.show('tables')"           >{{translate('Data tables')          }}</div>
+        <div class=button onclick="ecam.show('benchmarks')"       >{{translate('benchmarks')           }}</div>
+        <div class=button onclick="ecam.show('docs')"             >{{translate('Scientific literature')}}</div>
         <!--
           <div class=button onclick="ecam.show('ipcc_categories')">  IPCC categories</div>
         -->

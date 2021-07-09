@@ -23,14 +23,16 @@ let landing = new Vue({
           grid-template-columns:50% 50%;
         "
       >
-        <div
-          style="padding-top:40px"
-        >
+        <div style="padding-top:40px">
           <h1 class="blue_h1" style="padding-bottom:0px;text-align:left">
-            Assess the carbon footprint and energy performance of your urban water utility
+            {{
+              translate("Assess_the_carbon_footprint_and_energy_performance_of_your_urban_water_utility")
+            }}
           </h1>
           <h1 style="color:#333;font-size:large;text-align:left">
-            ECAM empowers water and wastewater utility operators to assess their greenhouse gas emissions and energy consumption.
+            {{
+              translate("ECAM_empowers_water_and_wastewater_utility_operators_to_assess_their_greenhouse_gas_emissions_and_energy_consumption.")
+            }}
           </h1>
           <ul
             style="
@@ -38,19 +40,19 @@ let landing = new Vue({
               padding-inline-start:20px;
             "
           >
-            <li>Perfect for climate reporting needs             </li>
-            <li>Overview of system-wide greenhouse gas emissions</li>
-            <li>IPCC-2019 compliant and open-source             </li>
+            <li>{{translate("Perfect_for_climate_reporting_needs")}}</li>
+            <li>{{translate("Overview_of_system-wide_greenhouse_gas_emissions")}}</li>
+            <li>{{translate("IPCC-2019_compliant_and_open-source")}}</li>
           </ul>
 
           <div style="width:400px">
             <button class="start" onclick="ecam.show('select_scenario')">
-              Start your assessment
+              {{translate("Start_your_assessment")}}
             </button>
             <div style="text-align:center;margin-top:1em;">
               <label>
                 <input type=checkbox v-model="include_tutorial_tips">
-                Include tips for new users
+                {{translate("Include_tips_for_new_users")}}
               </label>
             </div>
           </div>
@@ -65,7 +67,9 @@ let landing = new Vue({
 
       <!--learn more-->
       <div class="container">
-        <h1 style="text-align:center">Learn more about the project</h1>
+        <h1 style="text-align:center">
+          {{translate("Learn_more_about_the_project")}}
+        </h1>
         <div
           style="
             display:grid;
@@ -75,29 +79,26 @@ let landing = new Vue({
         >
           <div class=learn_more_item onclick="window.open('https://github.com/icra/ecam')">
             <div style="display:flex;justify-content:space-between;align-items:flex-end">
-              <b>Open source</b>
+              <b>{{translate("Open_source")}}</b>
               <img class=icon src="frontend/img/landing/open-source.png">
             </div>
             <p>
-              ECAM is a free and open source
-              tool. The source code is openly
-              published for use and
-              modification on GitHub.
+              {{
+                translate("ECAM_is_a_free_and_open_source_tool._The_source_code_is_openly_published_for_use_and_modification_on_GitHub.")
+              }}
             </p>
-            <a>Click here to access GitHub</a>
+            <a>{{translate("Click_here_to_access_GitHub")}}</a>
           </div>
 
           <div class=learn_more_item onclick="ecam.show('about')">
             <div style="display:flex;justify-content:space-between;align-items:flex-end">
-              <b>About ECAM</b>
+              <b>{{translate("About_ECAM")}}</b>
               <img class=icon src="frontend/img/landing/about.png">
             </div>
             <p>
-              ECAM's web interface and
-              content were developed jointly
-              by ICRA, GIZ and IWA.
+              {{translate("ECAM's_web_interface_and_content_were_developed_jointly_by_ICRA,_GIZ_and_IWA.")}}
             </p>
-            <a>Click here to learn more</a>
+            <a>{{translate("Click_here_to_learn_more")}}</a>
           </div>
 
           <div class=learn_more_item onclick="window.open('https://wacclim.org')">
@@ -106,12 +107,11 @@ let landing = new Vue({
               <img class=icon src="frontend/img/landing/wacclim.png">
             </div>
             <p>
-              ECAM was developed as part of
-              WaCCliM, a project that supports
-              water and wastewater utilities to
-              become climate-smart.
+            {{
+            translate("ECAM_was_developed_as_part_of_WaCCliM,_a_project_that_supports_water_and_wastewater_utilities_to_become_climate-smart.")
+            }}
             </p>
-            <a>Click here to access wacclim.org</a>
+            <a>{{translate("Click_here_to_access_wacclim.org")}}</a>
           </div>
         </div>
       </div>
@@ -119,7 +119,7 @@ let landing = new Vue({
       <!--questions-->
       <div id=questions>
         <div>
-          Do you have questions or feedback?
+          {{translate("Do_you_have_questions_or_feedback?")}}
         </div>
         <button
           style="
@@ -128,7 +128,7 @@ let landing = new Vue({
             margin-top:10px;
           "
           onclick="window.open('mailto:wacclim@giz.de')"
-          v-html="'Contact us'"
+          v-html="translate('Contact_us')"
         ></button>
       </div>
 
@@ -137,14 +137,10 @@ let landing = new Vue({
         <!--creative commons image and text-->
         <div>
           <div>
-            ECAM is a tool developed by ICRA for the WaCCliM Project<sup>1</sup> and holds a Creative Commons Attribution-ShareAlike 4.0 International License.
+            {{translate("ECAM_is_a_tool_developed_by_ICRA_for_the_WaCCliM_Project_and_holds_a_Creative_Commons_Attribution-ShareAlike_4.0_International_License.")}}
           </div>
           <div style="font-size:smaller;margin-top:10px">
-            <sup>1</sup>WaCCliM is a joint initiative between GIZ and IWA. This project
-            is part of the International Climate Initiative (IKI). The German
-            Federal Ministry for the Environment, Nature Conservation and
-            Nuclear Safety (BMU) supports this initiative on the basis of a
-            decision adopted by the German Bundestag.
+            {{translate("WaCCliM_is_a_joint_initiative_between_GIZ_and_IWA._This_project_is_part_of_the_International_Climate_Initiative_(IKI)._The_German_Federal_Ministry_for_the_Environment,_Nature_Conservation_and_Nuclear_Safety_(BMU)_supports_this_initiative_on_the_basis_of_a_decision_adopted_by_the_German_Bundestag.")}}
           </div>
         </div>
 

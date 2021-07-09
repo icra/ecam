@@ -54,22 +54,6 @@ let development=new Vue({
           >
             <details open>
               <summary>
-                LANGUAGE tags not used for "<b>{{Languages.current}}.json</b>" file
-                ({{ Languages.find_not_used_tags().length }})
-                <br>
-                <b>important</b>: execute automated test first to visit all pages
-                and detect unused tags
-              </summary>
-              <table>
-                <tr v-for="tag in Languages.find_not_used_tags()">
-                  <td>
-                    {{tag}}
-                  </td>
-                </tr>
-              </table>
-            </details>
-            <details open>
-              <summary>
                 LANGUAGE tags not found for "<b>{{Languages.current}}.json</b>" file
                 ({{ Object.keys(Languages.not_found_tags).length }})
                 <br>
@@ -78,6 +62,22 @@ let development=new Vue({
               </summary>
               <table>
                 <tr v-for="tag in Object.keys(Languages.not_found_tags)">
+                  <td>
+                    {{tag}}
+                  </td>
+                </tr>
+              </table>
+            </details>
+            <details open>
+              <summary>
+                LANGUAGE tags not used for "<b>{{Languages.current}}.json</b>" file
+                ({{ Languages.find_not_used_tags().length }})
+                <br>
+                <b>important</b>: execute automated test first to visit all pages
+                and detect unused tags
+              </summary>
+              <table>
+                <tr v-for="tag in Languages.find_not_used_tags()">
                   <td>
                     {{tag}}
                   </td>

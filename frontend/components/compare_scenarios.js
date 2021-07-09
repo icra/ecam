@@ -6,16 +6,12 @@ let compare_scenarios=new Vue({
     scenarios_compared:[Global],
     current_view:'table',
     hide_zero_valued_variables:false,
-
     include:{
       inputs:true,
       outputs:true,
     },
-
-    //current emissions unit
     current_unit_ghg:"kgCO2eq",
     current_unit_nrg:"kWh",
-
     charts:{}, //chart objects from chartjs library stored here
 
     variable,
@@ -118,18 +114,16 @@ let compare_scenarios=new Vue({
             type:'bar',
             data:{
               labels:this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-              datasets:[
-                {
-                  label:`Total GHG emissions (${this.current_unit_ghg})`,
-                  data:this.scenarios_compared.map(scenario=>{
-                    let divisor = this.current_unit_ghg=='tCO2eq'?1000:1;
-                    return scenario.TotalGHG().total/divisor; //current emissions
-                  }),//[12, 19, 3, 5, 2, 3],
-                  backgroundColor:['#327ccb'],
-                  borderColor:['#327ccb'],
-                  borderWidth:1,
-                },
-              ],
+              datasets:[{
+                label:`${translate('TotalGHG_descr')} (${this.current_unit_ghg})`,
+                data:this.scenarios_compared.map(scenario=>{
+                  let divisor = this.current_unit_ghg=='tCO2eq'?1000:1;
+                  return scenario.TotalGHG().total/divisor; //current emissions
+                }),//[12, 19, 3, 5, 2, 3],
+                backgroundColor:['#327ccb'],
+                borderColor:['#327ccb'],
+                borderWidth:1,
+              }],
             },
             options:{
               aspectRatio:4,
@@ -149,26 +143,19 @@ let compare_scenarios=new Vue({
             type:'line',
             data:{
               labels: this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-              datasets:[
-                {
-                  label: 'Variation of total GHG emissions (%)',
-                  data: this.scenarios_compared.map((scenario,i)=>{
-                    if(i==0) return 0;
-
-                    let curr = scenario.TotalGHG().total; //current emissions
-                    let prev = this.scenarios_compared[i-1].TotalGHG().total; //previous scenario
-                    variation = 100*(curr-prev)/prev;
-                    return variation;
-                  }),//[12, 19, 3, 5, 2, 3],
-                  backgroundColor: [
-                    '#327ccb',
-                  ],
-                  borderColor: [
-                    '#327ccb',
-                  ],
-                  borderWidth: 1
-                },
-              ]
+              datasets:[{
+                label:`${translate('Variation of total GHG emissions')} (%)`,
+                data: this.scenarios_compared.map((scenario,i)=>{
+                  if(i==0) return 0;
+                  let curr = scenario.TotalGHG().total; //current emissions
+                  let prev = this.scenarios_compared[i-1].TotalGHG().total; //previous scenario
+                  variation = 100*(curr-prev)/prev;
+                  return variation;
+                }),//[12, 19, 3, 5, 2, 3],
+                backgroundColor:['#327ccb'],
+                borderColor:['#327ccb'],
+                borderWidth:1,
+              }],
             },
             options: {
               aspectRatio:4,
@@ -272,7 +259,7 @@ let compare_scenarios=new Vue({
                 //column subdivisions
                 ...Structure.filter(s=>s.sublevel).map(stage=>{
                   return {
-                    label:`${stage.prefix.substring(0,2)}-${stage.sublevel} (${this.current_unit_ghg})`,
+                    label:`${translate(stage.level)}/${translate(stage.sublevel)} (${this.current_unit_ghg})`,
                     data:this.scenarios_compared.map(scenario=>{
                       let divisor = this.current_unit_ghg=='tCO2eq'?1000:1;
                       return scenario[stage.level][stage.sublevel].map(ss=>ss[stage.prefix+'_KPI_GHG']().total).sum()/divisor;
@@ -340,19 +327,17 @@ let compare_scenarios=new Vue({
             type:'bar',
             data:{
               labels:this.scenarios_compared.map(s=>s.General.Name), //['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-              datasets:[
-                {
-                  label:`Energy consumed (${this.current_unit_nrg})`,
-                  data:this.scenarios_compared.map(scenario=>{
-                    let divisor = this.current_unit_nrg=='MWh'?1000:1;
-                    let total=scenario.TotalNRG()/divisor; //current emissions
-                    return total;
-                  }),//[12,19,3,5,2,3]
-                  backgroundColor:["#ffbe54"],
-                  borderColor:["#ffbe54"],
-                  borderWidth:1,
-                },
-              ],
+              datasets:[{
+                label:`${translate("Energy consumption")} (${this.current_unit_nrg})`,
+                data:this.scenarios_compared.map(scenario=>{
+                  let divisor = this.current_unit_nrg=='MWh'?1000:1;
+                  let total=scenario.TotalNRG()/divisor; //current emissions
+                  return total;
+                }),//[12,19,3,5,2,3]
+                backgroundColor:["#ffbe54"],
+                borderColor:["#ffbe54"],
+                borderWidth:1,
+              }],
             },
             options:{
               aspectRatio:4,
@@ -389,18 +374,36 @@ let compare_scenarios=new Vue({
     <div id=compare_scenarios v-if="visible && Languages.ready">
       <!--buttons select view-->
       <div id=select_chart_container>
-        <button :selected="current_view=='table'"                       @click="current_view='table'"                      >Overview:<br>Inputs &amp; outputs                                   </button>
-        <button :selected="current_view=='bar_chart_ghg_total'"         @click="current_view='bar_chart_ghg_total'"        >Total GHG emissions                                </button>
-        <button :selected="current_view=='bar_chart_ghg_by_gas'"        @click="current_view='bar_chart_ghg_by_gas'"       >Emissions by gas<br>(${'CO2, N2O, CH4'.prettify()})</button>
-        <button :selected="current_view=='bar_chart_ghg_by_stage'"      @click="current_view='bar_chart_ghg_by_stage'"     >Emissions by stage                                 </button>
+        <button :selected="current_view=='table'" @click="current_view='table'" >
+          {{translate("Overview")}}:<br>
+          {{translate("Inputs & outputs")}}
+        </button>
+        <button :selected="current_view=='bar_chart_ghg_total'" @click="current_view='bar_chart_ghg_total'">
+          {{translate("Total GHG emissions")}}
+        </button>
+        <button :selected="current_view=='bar_chart_ghg_by_gas'" @click="current_view='bar_chart_ghg_by_gas'">
+          {{translate("Emissions by gas")}}<br>
+          (${'CO2, N2O, CH4'.prettify()})
+        </button>
+        <button :selected="current_view=='bar_chart_ghg_by_stage'" @click="current_view='bar_chart_ghg_by_stage'">
+          {{translate("Emissions by stage")}}
+        </button>
+        <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">
+          {{translate("Total energy consumption")}}
+        </button>
         <!--
-        <button :selected="current_view=='bar_chart_ghg_by_ipcc_categories'" @click="current_view='bar_chart_ghg_by_ipcc_categories'">Emissions by IPCC category</button>
+          <button
+            :selected="current_view=='bar_chart_ghg_by_ipcc_categories'"
+            @click="current_view='bar_chart_ghg_by_ipcc_categories'">
+            Emissions by IPCC category
+          </button>
         -->
-        <button :selected="current_view=='bar_chart_nrg_by_assessment'" @click="current_view='bar_chart_nrg_by_assessment'">Total energy consumption                           </button>
       </div>
 
       <!--title-->
-      <h1 style="text-align:center">Compare assessments</h1>
+      <h1 style="text-align:center">
+        {{translate("Compare assessments")}}
+      </h1>
 
       <div
         style="
@@ -414,7 +417,7 @@ let compare_scenarios=new Vue({
         <!--select scenarios-->
         <div>
           <p style="text-align:center;color:#666">
-            <b>Select the assessments to be compared</b>
+            <b>{{translate("Select the assessments to be compared")}}</b>
           </p>
 
           <!--list of assessments-->
@@ -434,16 +437,9 @@ let compare_scenarios=new Vue({
           </div>
 
           <tutorial_tip
-            id   ="Assessment comparison"
-            title="Assessment comparison"
-            text="
-              Select the assessments that you would like to compare with each
-              other. Please note that the order of the selection determines the
-              order of the compared assessments. E.g. If you have 3 assessment
-              for the years 2018, 2019 and 2020, you will need to select the
-              assessments in this particular order. If you select 2019, 2020
-              and 2018, the order would be different.
-            "
+            id   ="Assessment_comparison"
+            title="Assessment_comparison"
+            text ="Select_the_assessments_that_you_would_like_to_compare_with_each_other._Please_note_that_the_order_of_the_selection_determines_the_order_of_the_compared_assessments._E.g._If_you_have_3_assessment_for_the_years_2018,_2019_and_2020,_you_will_need_to_select_the_assessments_in_this_particular_order._If_you_select_2019,_2020_and_2018,_the_order_would_be_different."
             style="margin:5px auto"
           ></tutorial_tip>
         </div>
@@ -451,7 +447,7 @@ let compare_scenarios=new Vue({
         <!--select units-->
         <div>
           <p style="text-align:center;color:#666">
-            <b>Select units</b>
+            <b>{{translate("Select units")}}</b>
           </p>
           <select
             v-model="current_unit_ghg"
@@ -471,15 +467,16 @@ let compare_scenarios=new Vue({
 
         <!--include inputs outputs-->
         <div style="margin:2em 0" v-if="current_view=='table'">
-          <big>Compare:</big>
-          <label> <input type=checkbox v-model="include.inputs">  inputs </label>
-          <label> <input type=checkbox v-model="include.outputs"> outputs </label>
+          <big>{{translate("Compare")}}:</big>
+          <label> <input type=checkbox v-model="include.inputs"  > {{translate('INPUTS').toLowerCase() }}</label>
+          <label> <input type=checkbox v-model="include.outputs" > {{translate('OUTPUTS').toLowerCase()}}</label>
         </div>
 
+        <!--include zero valued variables or not-->
         <div style="margin:2em 0" v-if="current_view=='table'">
           <label>
             <input type=checkbox v-model="hide_zero_valued_variables">
-            Hide zero (0) values in results
+            {{translate("Hide zero (0) values in results")}}
           </label>
         </div>
       </div>
@@ -493,9 +490,7 @@ let compare_scenarios=new Vue({
             <tr>
               <td style="border-top:none;border-left:none"></td>
               <th v-for="scenario in scenarios_compared">
-                <b>
-                  {{scenario.General.Name}}
-                </b>
+                <b>{{scenario.General.Name}}</b>
               </th>
             </tr>
           </tbody>
@@ -503,7 +498,9 @@ let compare_scenarios=new Vue({
           <!--summary header-->
           <tr v-if="include.outputs">
             <td :colspan="1+scenarios_compared.length">
-              <div style="font-size:larger;font-weight:bold">Summary</div>
+              <div style="font-size:larger;font-weight:bold">
+                {{translate("Summary")}}
+              </div>
             </td>
           </tr>
 
@@ -515,9 +512,7 @@ let compare_scenarios=new Vue({
               </td>
               <td v-for="scenario in scenarios_compared">
                 <div class=number>
-                  {{
-                    format_emission(scenario.TotalGHG().total)
-                  }}
+                  {{ format_emission(scenario.TotalGHG().total) }}
                 </div>
                 <div
                   class="unit"
@@ -535,10 +530,7 @@ let compare_scenarios=new Vue({
           >
             <tr>
               <td :style="{background:level.color,fontWeight:'bold'}">
-                &emsp;
-                {{
-                  translate(level.prefix+'_KPI_GHG_descr')
-                }}
+                &emsp; {{ translate(level.prefix+'_KPI_GHG_descr') }}
               </td>
               <td v-for="scenario in scenarios_compared">
                 <div class=number>
@@ -670,8 +662,8 @@ let compare_scenarios=new Vue({
           class="chart_container bar"
         >
           <canvas id="bar_chart_ghg_total" width="400" height="400"></canvas>
-          <div v-if="scenarios_compared.length>1">
-            <b>Variation in respect of previous assessment (%)</b>
+          <div v-if="scenarios_compared.length>1" style="text-align:center;margin-top:4em">
+            <b>{{translate("Variation in respect of previous assessment (%)")}}</b>
             <canvas id="line_chart_ghg_difference" width="400" height="400"></canvas>
           </div>
         </div>
@@ -702,8 +694,8 @@ let compare_scenarios=new Vue({
           class="chart_container bar"
         >
           <canvas id="bar_chart_nrg_by_assessment" width="400" height="400"></canvas>
-          <div v-if="scenarios_compared.length>1">
-            <b>Variation in respect of previous assessment (%)</b>
+          <div v-if="scenarios_compared.length>1" style="text-align:center;margin-top:4em">
+            <b>{{translate("Variation in respect of previous assessment (%)")}}</b>
             <canvas id="line_chart_nrg_difference" width="400" height="400"></canvas>
           </div>
         </div>
@@ -720,7 +712,7 @@ let compare_scenarios=new Vue({
       <div
         v-if="scenarios_compared.length==0"
         style="padding:1em;text-align:center;font-style:italic"
-        v-html="'~No assessments included to comparison'"
+        v-html="'~'+translate('No assessments included to comparison')"
       ></div>
     </div>
   `,

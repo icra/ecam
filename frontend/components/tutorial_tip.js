@@ -15,17 +15,22 @@ Vue.component('tutorial_tip',{
     >
       <div style="padding:1em">
         <div style="text-align:left">
-          <b>Tip: {{title}}</b>
+          <b>
+            {{translate("Tip")}}:
+            {{translate(title)}}
+          </b>
         </div>
-        <div v-html="text"></div>
+        <div v-html="translate(text)"></div>
       </div>
       <div style="text-align:center">
         <button @click="dismiss()" class=dismiss_tip>
           Ok
         </button>
-        <button @click="dismiss_all_tips()" class=dismiss_all_tips>
-          dismiss all tips
-        </button>
+        <button
+          @click="dismiss_all_tips()"
+          class="dismiss_all_tips"
+          v-html="translate('dismiss_all_tips')"
+        ></button>
       </div>
     </div>
   `,
@@ -38,6 +43,8 @@ Vue.component('tutorial_tip',{
   },
 
   methods:{
+    translate,
+
     is_visible(){
       return (
         landing.include_tutorial_tips &&

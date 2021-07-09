@@ -200,7 +200,7 @@ let select_scenario=new Vue({
       <!--title-->
       <div>
         <h2 style="padding-left:0;margin-bottom:0">
-          Configuration
+          {{translate("Configuration")}}
         </h2>
       </div>
 
@@ -208,8 +208,8 @@ let select_scenario=new Vue({
       <details>
         <summary
           style="font-size:large"
-          title="Click here to load or save a file"
-          v-html="'Load and save file'"
+          :title="translate('Click_here_to_load_or_save_a_file')"
+          v-html="translate('Load_and_save_file')"
         ></summary>
         <div>
           <div id=load_save_btns
@@ -223,7 +223,7 @@ let select_scenario=new Vue({
             <div>
               <div style="margin-bottom:10px">
                 <div style="font-size:larger">
-                  Load file
+                  {{translate("Load_file")}}
                 </div>
               </div>
 
@@ -247,20 +247,20 @@ let select_scenario=new Vue({
                 "
               >
                 <div>
-                  <label class=load_mode :selected="loadfile_replace==true" title="replace the current list of assessments with the loaded file">
+                  <label class=load_mode :selected="loadfile_replace==true" :title="translate('replace_the_current_list_of_assessments_with_the_loaded_file')">
                     <input type=radio v-model="loadfile_replace" :value='true'>
                     <img class=icon src="frontend/img/viti/select_scenario/icon-replace.svg">
                     <div style=margin-left:5px>
-                      <b>Replace</b><br>current list
+                      <b>{{translate("Replace")}}</b><br>{{translate("current_list")}}
                     </div>
                   </label>
                 </div>
                 <div>
-                  <label class=load_mode :selected="loadfile_replace==false" title="append the loaded file to the current list of assessments">
+                  <label class=load_mode :selected="loadfile_replace==false" :title="translate('append_the_loaded_file_to_the_current_list_of_assessments')">
                     <input type=radio v-model="loadfile_replace" :value='false'>
                     <img class=icon src="frontend/img/viti/select_scenario/icon-append.svg">
                     <div style=margin-left:5px>
-                      <b>Append</b><br>to current list
+                      <b>{{translate("Append")}}</b><br>{{translate("to_current_list")}}
                     </div>
                   </label>
                 </div>
@@ -271,18 +271,18 @@ let select_scenario=new Vue({
             <div>
               <div style="margin-bottom:10px">
                 <div style="font-size:larger">
-                  Save current session as a JSON file
+                  {{translate("Save_current_session_as_a_JSON_file")}}
                 </div>
               </div>
               <div>
-                <button class=save_btn @click="save_to_file()" title="save the current list of assessments to a file">
+                <button class=save_btn @click="save_to_file()" :title="translate('save_the_current_list_of_assessments_to_a_file')">
                   <div style="display:flex;align-items:center">
                     <img
                       class=icon
                       src="frontend/img/viti/select_scenario/icon-save.svg"
                       style="margin-right:5px"
                     >
-                    <div>Save file</div>
+                    <div>{{translate("Save_file")}}</div>
                   </div>
                 </button>
               </div>
@@ -291,14 +291,14 @@ let select_scenario=new Vue({
 
           <div style="display:flex">
             <tutorial_tip
-              id   ="Load file"
-              title="Load file"
-              text ="If you already have a JSON file, you can load it using the menu above."
+              id   ="Load_file"
+              title="Load_file"
+              text ="If_you_already_have_a_JSON_file,_you_can_load_it_using_the_menu_above."
             ></tutorial_tip>
             <tutorial_tip
-              id   ="Merge files"
-              title="Merge files"
-              text ="You can merge multiple JSON files into one file by using the button above 'Append'."
+              id   ="Merge_files"
+              title="Merge_files"
+              text ="You_can_merge_multiple_JSON_files_into_one_file_by_using_the_button_above_'Append'."
             ></tutorial_tip>
           </div>
         </div>
@@ -306,7 +306,9 @@ let select_scenario=new Vue({
 
       <!--scenarios table-->
       <details open id=list_of_assessments>
-        <summary style="font-size:large">List of assessments</summary>
+        <summary style="font-size:large">
+          {{translate("List_of_assessments")}}
+        </summary>
 
         <!--select gwp-->
         <div
@@ -320,7 +322,9 @@ let select_scenario=new Vue({
           "
         >
           <div style="padding-right:1em">
-            <b>Select Global Warming Potential Report</b>
+            <b>
+              {{translate("Select_Global_Warming_Potential_Report")}}
+            </b>
           </div>
 
           <!--select gwp report which defines gwp values-->
@@ -337,21 +341,15 @@ let select_scenario=new Vue({
 
           <div style="padding-right:2em">
             <button onclick="ecam.show('gwp_table')">
-              More info
+              {{translate("More_info")}}
             </button>
           </div>
         </div>
 
         <tutorial_tip
-          id   ="List of assessments"
-          title="List of assessments"
-          text="
-            Below you can see the list of assessments. You can only edit one
-            assessment at a time. Click on the assessment that you would like
-            to edit. It will turn blue once you have selected it. If you want
-            to unfold country specific information, click on the assessment
-            again or on the button 'settings'.
-          "
+          id   ="List_of_assessments"
+          title="List_of_assessments"
+          text ="Below_you_can_see_the_list_of_assessments._You_can_only_edit_one_assessment_at_a_time._Click_on_the_assessment_that_you_would_like_to_edit._It_will_turn_blue_once_you_have_selected_it._If_you_want_to_unfold_country_specific_information,_click_on_the_assessment_again_or_on_the_button_'settings'."
         ></tutorial_tip>
 
         <!--assessments table-->
@@ -360,15 +358,16 @@ let select_scenario=new Vue({
             <tr>
               <td></td>
               <td></td>
-              <td>{{translate('Assessment period')}}</td>
-              <td>GHG (kgCO<sub>2</sub>eq)</td>
-              <td>Energy (kWh)</td>
-              <td>Substages</td>
-              <td>Options</td>
+              <td>{{translate("Assessment period")}}</td>
+              <td>{{translate("GHG")}} (kgCO<sub>2</sub>eq)</td>
+              <td>{{translate("Energy")}} (kWh)</td>
+              <td>{{translate("Substages")}}</td>
+              <td>{{translate("Options")}}</td>
             </tr>
           </thead>
 
-          <tbody v-for="scenario in Scenarios"
+          <tbody
+            v-for="scenario in Scenarios"
             :current_scenario="scenario==Global"
           >
             <tr>
@@ -437,19 +436,21 @@ let select_scenario=new Vue({
                 <div class=options_container>
                   <button
                     @click="are_settings_open=(scenario==Global)?are_settings_open=!are_settings_open:true;set_current_scenario(scenario)"
-                    v-html="'settings'"
+                    v-html="translate('settings')"
                     :configuration_open="are_settings_open && scenario==Global"
                   ></button>
+
                   <button
                     @click="duplicate_scenario(scenario)"
-                    v-html="'duplicate'"
+                    v-html="translate('duplicate')"
                   ></button>
                   <tutorial_tip
-                    id   ="Duplicate assessment"
-                    title="Duplicate assessment"
-                    text="You can duplicate an assesment by clicking on the button above. You can use this feature if you want to create multiple assessments where the majority of inputs remain the same, but only a few of the inputs need to the adapted."
+                    id   ="Duplicate_assessment"
+                    title="Duplicate_assessment"
+                    text="You_can_duplicate_an_assesment_by_clicking_on_the_button_above._You_can_use_this_feature_if_you_want_to_create_multiple_assessments_where_the_majority_of_inputs_remain_the_same,_but_only_a_few_of_the_inputs_need_to_the_adapted."
                     v-if="scenario==Scenarios[0]"
                   ></tutorial_tip>
+
                   <button
                     @click="delete_scenario(scenario)"
                     v-if="scenario!=Global"
@@ -481,7 +482,7 @@ let select_scenario=new Vue({
                     <div v-else style="display:flex;align-items:center">
                       <div>
                         <button @click="show_input()">
-                          change assessment name
+                          {{translate("change_assessment_name")}}
                         </button>
                       </div>
                     </div>
@@ -493,8 +494,8 @@ let select_scenario=new Vue({
                     <fieldset>
                       <legend>{{translate('Assessment period')}}</legend>
                       <div>
-                        <b>From: <input type=date v-model="scenario.General.AssessmentPeriodStart"></b>
-                        <b>To:   <input type=date v-model="scenario.General.AssessmentPeriodEnd"></b>
+                        <b>{{translate("From")}}: <input type=date v-model="scenario.General.AssessmentPeriodStart"></b>
+                        <b>{{translate("To")}}:   <input type=date v-model="scenario.General.AssessmentPeriodEnd"></b>
                         <span>
                           <span :class="scenario.Days()<=0 ? 'warning':''" v-html="format(scenario.Days())"></span>
                           <span>{{translate('days')}}</span>
@@ -504,22 +505,22 @@ let select_scenario=new Vue({
 
                     <!--select country-->
                     <fieldset>
-                      <legend> Country </legend>
+                      <legend>{{translate("Country")}}</legend>
                       <div>
                         <div>
-                          <b>Select</b>
+                          <b>{{translate("Select")}}</b>
                           &nbsp;
                           <select
                             v-model="scenario.General.Country"
                             @change="set_variables_from_selected_country()"
                           >
-                            <option value="">--select--</option>
+                            <option value="">--{{translate("select")}}--</option>
                             <option v-for="country in Object.keys(Countries)">
                               {{country}}
                             </option>
                           </select>
                           <button onclick="ecam.show('countries')">
-                            More info
+                            {{translate("More_info")}}
                           </button>
                         </div>
 
@@ -547,7 +548,7 @@ let select_scenario=new Vue({
                               <div style="display:flex;justify-content:space-between">
                                 <div v-html="translate('conv_kwh_co2_descr')"></div>
                                 <div style="font-size:smaller">
-                                  <a href=# onclick="variable.view('conv_kwh_co2')">more info</a>
+                                  <a href=# onclick="variable.view('conv_kwh_co2')">{{translate("more_info")}}</a>
                                 </div>
                               </div>
                             </td>
@@ -565,7 +566,7 @@ let select_scenario=new Vue({
                               <div style="display:flex;justify-content:space-between">
                                 <div v-html="translate('prot_con_descr')"></div>
                                 <div style="font-size:smaller">
-                                  <a href=# onclick="variable.view('prot_con')">more info</a>
+                                  <a href=# onclick="variable.view('prot_con')">{{translate("more_info")}}</a>
                                 </div>
                               </div>
                             </td>
@@ -583,7 +584,7 @@ let select_scenario=new Vue({
                               <div style="display:flex;justify-content:space-between">
                                 <div v-html="translate('bod_pday_descr').prettify()"></div>
                                 <div style="font-size:smaller">
-                                  <a href=# onclick="variable.view('bod_pday')">more info</a>
+                                  <a href=# onclick="variable.view('bod_pday')">{{translate("more_info")}}</a>
                                 </div>
                               </div>
                             </td>
@@ -601,7 +602,7 @@ let select_scenario=new Vue({
                               <div style="display:flex;justify-content:space-between">
                                 <div v-html="translate('F_IND_COM_descr').prettify()"></div>
                                 <div style="font-size:smaller">
-                                  <a href=# onclick="variable.view('F_IND_COM')">more info</a>
+                                  <a href=# onclick="variable.view('F_IND_COM')">{{translate("more_info")}}</a>
                                 </div>
                               </div>
                             </td>
@@ -615,7 +616,7 @@ let select_scenario=new Vue({
                               <div style="display:flex;justify-content:space-between">
                                 <div v-html="translate('F_NON_CON_descr').prettify()"></div>
                                 <div style="font-size:smaller">
-                                  <a href=# onclick="variable.view('F_NON_CON')">more info</a>
+                                  <a href=# onclick="variable.view('F_NON_CON')">{{translate("more_info")}}</a>
                                 </div>
                               </div>
                             </td>
@@ -629,7 +630,7 @@ let select_scenario=new Vue({
                               <div style="display:flex;justify-content:space-between">
                                 <div v-html="translate('N_HH_descr').prettify()"></div>
                                 <div style="font-size:smaller">
-                                  <a href=# onclick="variable.view('N_HH')">more info</a>
+                                  <a href=# onclick="variable.view('N_HH')">{{translate("more_info")}}</a>
                                 </div>
                               </div>
                             </td>
@@ -644,7 +645,7 @@ let select_scenario=new Vue({
 
                     <button
                       @click="set_scenario_and_go_to_tier_b(scenario)"
-                      title="Access inventory to insert input data"
+                      :title="translate('Access_inventory_to_insert_input_data')"
                       style="
                         font-size:large;
                         display:block;
@@ -655,7 +656,7 @@ let select_scenario=new Vue({
                         padding-right:3em;
                       "
                     >
-                      Access inventory
+                      {{translate("Access_inventory")}}
                     </button>
 
                     <!--comments-->
@@ -680,19 +681,17 @@ let select_scenario=new Vue({
           <tr>
             <td style="background:white"></td>
             <td style="background:white;text-align:left" colspan=6>
-              <button onclick="ecam.new_scenario();select_scenario.are_settings_open=false"
+              <button
+                onclick="ecam.new_scenario();select_scenario.are_settings_open=false"
                 class=new_assessment
                 style="font-size:large"
-                v-html="'+ create new assessment'"
+                v-html="'+ '+translate('create_new_assessment')"
               ></button>
 
               <tutorial_tip
-                id   ="Create new assessment"
-                title="Create new assessment"
-                text="
-                  You can create as many assessments as you want. You can do
-                  this by clicking the button above.
-                "
+                id   ="Create_new_assessment"
+                title="Create_new_assessment"
+                text="You_can_create_as_many_assessments_as_you_want._You_can_do_this_by_clicking_the_button_above."
               ></tutorial_tip>
             </td>
           </tr>
@@ -701,18 +700,22 @@ let select_scenario=new Vue({
 
       <!--download empty template and load template-->
       <details>
-        <summary style="font-size:large">Load assessment from Excel file</summary>
-        <p>Steps:</p>
+        <summary style="font-size:large">
+          {{translate("Load_assessment_from_Excel_file")}}
+        </summary>
+        <p>{{translate("Steps")}}:</p>
         <ol>
           <li>
-            Download ECAM input template:
+            {{translate("Download_ECAM_input_template")}}:
             <button onclick="ecam.generate_empty_excel_template()">
-              Download "ecam-template.xlsx"
+              {{translate("Download_'ecam-template.xlsx'")}}
             </button>
           </li>
-          <li style="margin-top:10px">Fill out template file.</li>
           <li style="margin-top:10px">
-            Upload filled file:
+            {{translate("Fill_out_template_file.")}}
+          </li>
+          <li style="margin-top:10px">
+            {{translate("Upload_filled_file")}}:
             <input
               type="file"
               accept=".xlsx"
@@ -721,12 +724,6 @@ let select_scenario=new Vue({
           </li>
         </ol>
       </details>
-
-      <!--advanced settings
-      <details>
-        <summary style="font-size:large">Advanced settings</summary>
-      </details>
-      -->
     </div>
   `,
 

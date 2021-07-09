@@ -1,17 +1,15 @@
-let sankey_ghg = new Vue({
+let sankey_ghg=new Vue({
   el:"#sankey_ghg",
   data:{
     visible:false,
     Languages,
   },
-
   methods:{
     show_summaries_menu(){
       summaries_menu.visible=true;
     },
-
+    translate,
   },
-
   updated(){
     this.$nextTick(()=>{
       try{
@@ -21,18 +19,18 @@ let sankey_ghg = new Vue({
       }
     })
   },
-
   template:`
     <!--sankey diagram-->
     <div id=sankey_ghg v-if="visible && Languages.ready">
       <div>
         {{show_summaries_menu()}}
       </div>
-      <h1 style=text-align:center> Sankey diagram GHG</h1>
+      <h1 style=text-align:center>
+        {{translate("Sankey diagram GHG")}}
+      </h1>
       <div id=sankey></div>
     </div>
   `,
-
   style:`
     <style>
       #sankey_ghg {
@@ -62,4 +60,3 @@ let sankey_ghg = new Vue({
     </style>
   `,
 });
-

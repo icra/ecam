@@ -31,7 +31,7 @@ class Ecam{
   constructor(){
     this.General={
       version              : "3.0.0",
-      Name                 : `Untitled assessment${Scenarios.length ? (' '+(1+Scenarios.length)):''}`,
+      Name                 : "Untitled assessment",
       AssessmentPeriodStart: generate_default_datestrings().start, //"2021-01-01",
       AssessmentPeriodEnd  : generate_default_datestrings().end,   //"2022-01-01",
       Comments             : "",

@@ -4,7 +4,7 @@ let Languages={
   current:"en",
 
   //all langs
-  list:['en','es','fr','th','de','ar',],
+  list:['en','es','fr','th','de','ar','pl'],
 
   //are all languages loaded?
   ready:false,

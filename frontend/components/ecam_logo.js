@@ -70,15 +70,18 @@ let ecam_logo=new Vue({
         <div id=select>
           <div
             v-for="lang in Languages.list"
-            :lang="lang"
             @click="Languages.current=lang;"
-            v-html="lang"
+            :lang="lang"
             :current="Languages.current==lang"
+            v-html="lang"
           ></div>
 
           <!--null (only language tags)-->
-          <div lang=null @click="Languages.current='null'">
-            null (for development - tags only)
+          <div lang=null
+            @click="Languages.current='null'"
+            :current="Languages.current=='null'"
+          >
+            null (tags only for development)
           </div>
         </div>
       </div>

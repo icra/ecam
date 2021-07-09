@@ -287,27 +287,21 @@ let summary_ghg=new Vue({
 
       <!--title-->
       <h1 style="padding-left:0">
-        Summary: GHG emissions and energy consumption
+        {{translate("Summary: GHG emissions and energy consumption")}}
       </h1>
 
       <!--select tables or charts-->
       <div style="padding:1em;border:1px solid #ccc">
-        <button @click="current_view='table'"       :selected="current_view=='table'"      >Table</button>
-        <button @click="current_view='charts_ghg'"  :selected="current_view=='charts_ghg'" >Charts GHG</button>
-        <button @click="current_view='charts_nrg'"  :selected="current_view=='charts_nrg'" >Charts Energy</button>
-        <button @click="current_view='charts_pop'"  :selected="current_view=='charts_pop'" >Charts Serviced Population</button>
-        <!--
-        <button @click="variable.view('ww_GHG_avoided')"                                   >Avoided emissions</button>
-        -->
+        <button @click="current_view='table'"      :selected="current_view=='table'"      >{{translate("Table")                     }}</button>
+        <button @click="current_view='charts_ghg'" :selected="current_view=='charts_ghg'" >{{translate("Charts GHG")                }}</button>
+        <button @click="current_view='charts_nrg'" :selected="current_view=='charts_nrg'" >{{translate("Charts Energy")             }}</button>
+        <button @click="current_view='charts_pop'" :selected="current_view=='charts_pop'" >{{translate("Charts Serviced population")}}</button>
         <hr style="border-color:#eee">
         <div>
           <tutorial_tip
-            id   ="Visualization of results"
-            title="Visualization of results"
-            text="
-              Select different ways to visualize your assessment results. You
-              can choose between tables, bar charts and pie charts.
-            "
+            id   ="Visualization_of_results"
+            title="Visualization_of_results"
+            text ="Select_different_ways_to_visualize_your_assessment_results._You_can_choose_between_tables,_bar_charts_and_pie_charts."
           ></tutorial_tip>
         </div>
 
@@ -325,23 +319,23 @@ let summary_ghg=new Vue({
           >
             <tr v-if="current_view=='table'">
               <!--select summary table type-->
-              <td><b>Select summary table</b></td>
+              <td><b>{{translate("Select summary table")}}</b></td>
               <td>
                 <label>
                   <input type=radio v-model="type_of_summary_table" value="ghg">
-                  GHG
+                  {{translate("GHG")}}
                 </label>
               </td>
               <td>
                 <label>
                   <input type=radio v-model="type_of_summary_table" value="nrg">
-                  Energy
+                  {{translate("Energy")}}
                 </label>
               </td>
             </tr>
             <tr v-if="['table','charts_ghg','charts_nrg'].indexOf(current_view)+1">
               <!--select units-->
-              <td><b>Select units</b></td>
+              <td><b>{{translate("Select units")}}</b></td>
               <td v-if="current_view=='table'||current_view=='charts_ghg'">
                 <select v-model="current_unit_ghg">
                   <option>kgCO2eq</option>
@@ -359,17 +353,17 @@ let summary_ghg=new Vue({
 
           <div v-if="current_view=='table' && type_of_summary_table=='ghg'">
             <!--select see other ghgs-->
-            <b v-html="'Show emissions in CO2, CH4 and N2O'.prettify()"></b></td>
+            <b v-html="translate('Show emissions in CO2, CH4 and N2O').prettify()"></b></td>
             <span>
               <label>
                 <input type=radio v-model="see_emissions_disgregated" :value="false">
-                No
+                {{translate("no")}}
               </label>
             </span>
             <span>
               <label>
                 <input type=radio v-model="see_emissions_disgregated" :value="true">
-                Yes
+                {{translate("yes")}}
               </label>
             </span>
           </div>
@@ -377,7 +371,7 @@ let summary_ghg=new Vue({
           <div v-if="current_view=='table' && type_of_summary_table=='ghg'">
             <label>
               <input type=checkbox v-model="hide_zero_valued_variables">
-              Hide zero (0) values in results
+              {{translate("Hide_zero_(0)_values_in_results")}}
             </label>
           </div>
         </div>
@@ -400,16 +394,19 @@ let summary_ghg=new Vue({
                 text-align:center;
               "
             >
-              <div>Total (<span class=unit v-html="get_summary_unit().prettify()"></span>)</div>
-              <div>System (<span class=unit v-html="get_summary_unit().prettify()"></span>)</div>
-              <div>Stage (<span class=unit v-html="get_summary_unit().prettify()"></span>)</div>
-
-              <div v-if="type_of_summary_table=='ghg'" style="text-align:left">Emission source</div>
-              <div v-if="type_of_summary_table=='nrg'">Substages (<span class=unit v-html="current_unit_nrg.prettify()"></span>)</div>
-
+              <div>{{translate("Total")}}  (<span class=unit v-html="get_summary_unit().prettify()"></span>)</div>
+              <div>{{translate("System")}} (<span class=unit v-html="get_summary_unit().prettify()"></span>)</div>
+              <div>{{translate("Stage")}}  (<span class=unit v-html="get_summary_unit().prettify()"></span>)</div>
+              <div v-if="type_of_summary_table=='ghg'" style="text-align:left">
+                {{translate("Emission source")}}
+              </div>
+              <div v-if="type_of_summary_table=='nrg'">
+                {{translate("Substages")}}
+                (<span class=unit v-html="current_unit_nrg.prettify()"></span>)
+              </div>
               <div>
-                <span v-if="type_of_summary_table=='ghg'">Emission</span>
-                <span v-if="type_of_summary_table=='nrg'">Energy consumed</span>
+                <span v-if="type_of_summary_table=='ghg'">{{translate("Emission")}}</span>
+                <span v-if="type_of_summary_table=='nrg'">{{translate("Energy consumption")}}</span>
                 (<span class=unit v-html="get_summary_unit().prettify()"></span>)
               </div>
 
@@ -439,10 +436,10 @@ let summary_ghg=new Vue({
 
                 <div>
                   <div v-if="type_of_summary_table=='ghg'">
-                    Total GHG<br>emissions
+                    {{translate('TotalGHG_descr')}}
                   </div>
                   <div v-if="type_of_summary_table=='nrg'">
-                    Total energy<br>consumption
+                    {{translate("Total energy consumption")}}
                   </div>
                 </div>
 
@@ -499,7 +496,7 @@ let summary_ghg=new Vue({
                           <img :src="'frontend/img/'+ss.icon" style="width:40px">
                         </div>
                         <div>
-                          {{ss.sublevel}}
+                          {{translate(ss.sublevel)}}
                         </div>
                         <div v-if="type_of_summary_table=='ghg'">
                           <b>{{format_emission(Global[ss.level][ss.sublevel].map(subs=>subs[ss.prefix+'_KPI_GHG']().total).sum())}}</b>
@@ -587,7 +584,7 @@ let summary_ghg=new Vue({
             <div class=chart_container style="border-right:none">
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
-                <span>GHG emissions</span>
+                <span>{{translate("GHG emissions")}}</span>
               </div>
               <div class=flex>
                 <div>
@@ -615,7 +612,7 @@ let summary_ghg=new Vue({
             <div class=chart_container>
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
-                GHG emissions by stage
+                {{translate("GHG emissions by stage")}}
               </div>
               <div class=flex>
                 <div>
@@ -644,7 +641,7 @@ let summary_ghg=new Vue({
             <div class=chart_container style="border-right:none">
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
-                GHG emissions by gas emitted
+                {{translate("GHG emissions by gas emitted")}}
               </div>
               <div
                 class=flex
@@ -699,7 +696,7 @@ let summary_ghg=new Vue({
           <div class="chart_container bar">
             <div class=chart_title style="justify-content:center">
               <img src="frontend/img/viti/select_scenario/icon-co2.svg" class=icon_co2>
-              GHG emissions by substage
+              {{translate("GHG emissions by substage")}}
             </div>
             <div>
               <canvas id="bar_chart_ghg_substages" width="400" height="400"></canvas>
@@ -719,7 +716,7 @@ let summary_ghg=new Vue({
             <div class=chart_container style="border-right:none">
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-energy.svg" class=icon_nrg>
-                Energy consumption
+                {{translate("Energy consumption")}}
               </div>
 
               <div class=flex>
@@ -748,7 +745,7 @@ let summary_ghg=new Vue({
             <div class=chart_container>
               <div class=chart_title>
                 <img src="frontend/img/viti/select_scenario/icon-energy.svg" class=icon_nrg>
-                Energy consumption by stage
+                {{translate("Energy consumption by stage")}}
               </div>
 
               <div class=flex>
@@ -778,7 +775,7 @@ let summary_ghg=new Vue({
           <div class="chart_container bar">
             <div class=chart_title style="justify-content:center">
               <img src="frontend/img/viti/select_scenario/icon-energy.svg" class=icon_nrg>
-              Energy consumption by substage
+              {{translate("Energy consumption by substage")}}
             </div>
             <div>
               <canvas id="bar_chart_nrg_substages" width="400" height="400"></canvas>
@@ -790,7 +787,7 @@ let summary_ghg=new Vue({
         <div v-if="current_view=='charts_pop'">
           <div class="chart_container">
             <div class=chart_title>
-              Serviced population in water supply and wastewater sanitation stages
+              {{translate("Serviced population in water supply and wastewater sanitation stages")}}
             </div>
             <br><br>
             <div style="
@@ -807,7 +804,7 @@ let summary_ghg=new Vue({
                   </tr>
                   <tr>
                     <td :style="{background:'#eee'}"></td>
-                    <td>Non-{{translate('ws_serv_pop_descr')}}</td>
+                    <td>{{translate('Non-serviced population')}}</td>
                     <td>{{format(Global.Water.ws_resi_pop - Global.Water.ws_serv_pop())}}</td>
                     <td class=unit v-html="'people'"></td>
                   </tr>
@@ -824,7 +821,7 @@ let summary_ghg=new Vue({
                   </tr>
                   <tr>
                     <td :style="{background:'#eee'}"></td>
-                    <td>Non-{{translate('ww_serv_pop_descr')}}</td>
+                    <td>{{translate('Non-serviced population')}}</td>
                     <td>{{format(Global.Waste.ww_resi_pop - Global.Waste.ww_serv_pop()) }}</td>
                     <td class=unit v-html="'people'"></td>
                   </tr>
@@ -833,21 +830,6 @@ let summary_ghg=new Vue({
               </div>
             </div>
           </div>
-        </div>
-
-        <div v-if="current_view=='avoided_ghg'">
-          <div style="margin-top:20px"></div>
-
-          <!--actual table-->
-          <table>
-            <tr>
-              <td>
-                <a href=# onclick="variable.view('ww_GHG_avoided')">
-                  <span v-html="translate('ww_GHG_avoided_descr')"></span>
-                </a>
-              </td>
-            </tr>
-          </table>
         </div>
       </div>
     </div>

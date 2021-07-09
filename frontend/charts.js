@@ -65,9 +65,9 @@ let Charts={
     let json={};
     json.nodes=[
       //layer 1: water supply or wastewater level
-      {name:'Total GHG'        , id:"total"} ,
-      {name:translate("Water") , id:"ws"}    ,
-      {name:translate("Waste") , id:"ww"}    ,
+      {name:translate("TotalGHG_descr"), id:"total"},
+      {name:translate("Water"),          id:"ws"}   ,
+      {name:translate("Waste"),          id:"ww"}   ,
       //layer 2: urban water cycle stages
       {name:translate("Abstraction")  , id:"wsa"} ,
       {name:translate("Treatment")    , id:"wst"} ,

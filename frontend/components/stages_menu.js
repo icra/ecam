@@ -1,8 +1,8 @@
 let stages_menu=new Vue({
   el:"#stages_menu",
   data:{
-    visible:      false,
-    current_view: null,
+    visible:false,
+    current_view:null,
 
     //backend
     Global,
@@ -43,11 +43,19 @@ let stages_menu=new Vue({
     },
 
     add_substage(level,sublevel){
-      if(!level) return;
+      if(!level   ) return;
       if(!sublevel) return;
-      let stage = Structure.find(s=>s.level==level&&s.sublevel==sublevel);
-      let name  = `${stage.sublevel} ${this.Global[level][sublevel].length+1}`;
-      let ss    = new stage.class(name);
+
+      let stage = Structure.find(s=>s.level==level&&s.sublevel==sublevel);//object
+
+      let name=null;
+      if(Languages.ready){
+        name=`${translate(stage.sublevel)} ${this.Global[level][sublevel].length+1}`;
+      }else{
+        name=`${stage.sublevel} ${this.Global[level][sublevel].length+1}`;
+      }
+
+      let ss = new stage.class(name); //new substage object
 
       //set default emission factor for grid electricity
       let prefix = stage.prefix;
@@ -97,7 +105,7 @@ let stages_menu=new Vue({
             justify-content:space-between;
           ">
             <div>
-              Inventory: stages of the urban water cycle
+              {{translate("Inventory:_stages_of_the_urban_water_cycle")}}
             </div>
             <div>
               <button
@@ -111,7 +119,7 @@ let stages_menu=new Vue({
                     src="frontend/img/viti/select_scenario/icon-save.svg"
                     style="margin-right:5px;width:15px"
                   >
-                  <div>Save file</div>
+                  <div>{{translate("Save_file")}}</div>
                 </div>
               </button>
             </div>
@@ -255,7 +263,7 @@ let stages_menu=new Vue({
             <tr>
               <td v-for="s in Structure.filter(s=>s.sublevel)">
                 <div style="font-size:smaller;margin-top:10px;text-align:center">
-                  <span>Total {{s.sublevel}}:</span>
+                  <span>{{translate("Total")}} {{translate(s.sublevel)}}:</span>
                   <b v-html="format(get_sum_of_substages(s.level, s.sublevel, s.prefix+'_KPI_GHG'), 0)"></b>
                   <span class=unit>kgCO<sub>2</sub>eq</span>
                 </div>
@@ -279,9 +287,9 @@ let stages_menu=new Vue({
 
           <div>
             <tutorial_tip
-              id   ="Create substages"
-              title="Create substages"
-              text="Create substages to insert the data for your assessment."
+              id   ="Create_substages"
+              title="Create_substages"
+              text ="Create_substages_to_insert_the_data_for_your_assessment."
               style="margin:auto"
             ></tutorial_tip>
           </div>

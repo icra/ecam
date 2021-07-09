@@ -1,6 +1,5 @@
 let report = new Vue({
   el:"#report",
-
   data:{
     visible:false,
     pdf_visible:true,
@@ -27,7 +26,6 @@ let report = new Vue({
     get_output_value,
     get_base_unit,
     get_sum_of_substages,
-
     get_current_unit_ghg(){return summary_ghg.current_unit_ghg},
     get_current_unit_nrg(){return summary_ghg.current_unit_nrg},
     format_emission: summary_ghg.format_emission,
@@ -190,11 +188,16 @@ let report = new Vue({
 
       <!--title-->
       <h1 v-if="!printable_version" style="text-align:center;padding-bottom:0">
-        <div> Report </div>
+        <div>{{translate("Report")}}</div>
+
         <div style="text-align:center;font-size:smaller">
-          Double-click the report to enable/disable the printable view.
+          <div>
+            {{translate("Double-click the report to enable/disable the printable view.")}}
+          </div>
           <p>
-            <button @click="open_print_dialog()">Print report</button>
+            <button @click="open_print_dialog()">
+              {{translate("Print report")}}
+            </button>
           </p>
         </div>
       </h1>
@@ -209,20 +212,20 @@ let report = new Vue({
         <div style="padding-bottom:1em">
           <label>
             <input type=checkbox v-model="hide_question_related_variables">
-            Hide optional input fields if they are disabled in all substages
+            {{translate("Hide optional input fields if they are disabled in all substages")}}
           </label>
         </div>
 
         <div style="padding-bottom:1em">
           <label>
             <input type=checkbox v-model="hide_zero_valued_variables">
-            Hide zero (0) values in results
+            {{translate("Hide zero (0) values in results")}}
           </label>
           <div>
             <tutorial_tip
-              id   ="Hide zero (0) values"
-              title="Hide zero (0) values"
-              text="Enable the box above to hide zero (0) values in the report."
+              id   ="Hide_zero_(0)_values"
+              title="Hide_zero_(0)_values"
+              text ="Enable_the_box_above_to_hide_zero_(0)_values_in_the_report."
               style="margin:5px 0"
             ></tutorial_tip>
           </div>
@@ -238,7 +241,7 @@ let report = new Vue({
         </div>
         -->
 
-        <!--report in html-->
+        <!--report in html simulating a pdf preview-->
         <div
           style="
             padding-top:1em;
@@ -265,8 +268,7 @@ let report = new Vue({
             >
               <span style="font-size:larger">ECAM</span>
               <span style="font-size:smaller">
-                Energy Performance and Carbon Emissions Assessment and
-                Monitoring Tool
+                {{translate("navbar_title")}}
               </span>
             </div>
 
@@ -289,27 +291,32 @@ let report = new Vue({
               >
                 <li>
                   <b>{{translate('Assessment period')}}:</b>
-                  {{Global.General.AssessmentPeriodStart}} to
+                  {{Global.General.AssessmentPeriodStart}}
+                  &mdash;
                   {{Global.General.AssessmentPeriodEnd}}
-                  ({{format(Global.Days())}} days)
+                  ({{format(Global.Days())}} {{translate('days')}})
                 </li>
-                <li><b>Country:</b> {{Global.General.Country}}</li>
-                <li><b>Currency:</b> {{Global.General.Currency}}</li>
+                <li><b>{{translate("Country")}}:</b> {{Global.General.Country}}</li>
+                <li><b>{{translate("Currency_descr")}}:</b> {{Global.General.Currency}}</li>
                 <li>
-                  <b>Global Warming Potential Source:</b> {{
-                  GWP_reports[Configuration.gwp_reports_index].report }}
+                  <b>{{translate("Global Warming Potential Source")}}:</b>
+                  {{GWP_reports[Configuration.gwp_reports_index].report}}
                 </li>
               </ul>
             </div>
 
             <!--summary-->
             <div>
-              <div class=heading>SUMMARY</div>
+              <div class=heading>
+                {{translate("SUMMARY")}}
+              </div>
               <div>
                 <table class=summary style="width:100%">
                   <thead>
                     <tr style="color:var(--color-level-generic)">
-                      <th style="text-align:left">Stage</th>
+                      <th style="text-align:left">
+                        {{translate("Stage")}}
+                      </th>
                       <th>
                         <div
                           style="
@@ -320,7 +327,7 @@ let report = new Vue({
                         >
                           <img src="frontend/img/viti/select_scenario/icon-co2.svg" style="height:30px;margin-right:1em">
                           <span>
-                            GHG emissions
+                            {{translate("GHG emissions")}}
                           </span>
                         </div>
                       </th>
@@ -334,7 +341,7 @@ let report = new Vue({
                         >
                           <img src="frontend/img/viti/select_scenario/icon-energy.svg" style="height:30px;margin-right:1em">
                           <span>
-                            Energy consumption
+                            {{translate("Energy consumption")}}
                           </span>
                         </div>
                       </th>
@@ -357,7 +364,7 @@ let report = new Vue({
                       </td>
                     </tr>
                     <tr style="font-weight:bold">
-                      <td>Total {{translate(level.level)}}</td>
+                      <td>{{translate("Total")}} {{translate(level.level)}}</td>
                       <td class=number>
                         <span>
                           {{format_emission( Global[level.level][level.prefix+'_KPI_GHG']().total )}}
@@ -372,7 +379,7 @@ let report = new Vue({
                   </tbody>
                   <tbody>
                     <tr style="color:var(--color-level-generic);font-weight:bold;font-size:larger">
-                      <td>Total</td>
+                      <td>{{translate("Total")}}</td>
                       <td class=number>
                         {{format_emission(Global.TotalGHG().total)}}
                         <span v-html="get_current_unit_ghg().prettify()"></span>
@@ -388,7 +395,7 @@ let report = new Vue({
             </div>
 
             <div>
-              <div class=heading>SUMMARY - Charts - GHG emissions</div>
+              <div class=heading>{{translate("SUMMARY - Charts - GHG emissions")}}</div>
               <!--pie charts ghg-->
               <div
                 style="
@@ -398,7 +405,7 @@ let report = new Vue({
               >
                 <div class=chart_container>
                   <div class=chart_title>
-                    GHG emissions
+                    {{translate("GHG emissions")}}
                   </div>
                   <div class=flex>
                     <table class=legend>
@@ -419,7 +426,7 @@ let report = new Vue({
 
                 <div class=chart_container>
                   <div class=chart_title>
-                    GHG emissions by stage
+                    {{translate("GHG emissions by stage")}}
                   </div>
                   <div class=flex>
                     <table class=legend>
@@ -436,7 +443,7 @@ let report = new Vue({
 
                 <div class=chart_container>
                   <div class=chart_title>
-                    GHG emissions by gas emitted
+                    {{translate("GHG emissions by gas emitted")}}
                   </div>
                   <div class=flex>
                     <table class=legend>
@@ -472,7 +479,7 @@ let report = new Vue({
             </div>
 
             <div>
-              <div class=heading>SUMMARY - Charts - Energy performance</div>
+              <div class=heading>{{translate("SUMMARY - Charts - Energy performance")}}</div>
               <!--pie charts nrg-->
               <div
                 style="
@@ -482,7 +489,7 @@ let report = new Vue({
               >
                 <div class=chart_container>
                   <div class=chart_title>
-                    Energy consumption
+                    {{translate("Energy consumption")}}
                   </div>
                   <div class=flex>
                     <table class=legend>
@@ -500,12 +507,10 @@ let report = new Vue({
                     <div id=chart_nrg_levels></div>
                   </div>
                 </div>
-
                 <div class=chart_container>
                   <div class=chart_title>
-                    Energy consumption by stage
+                    {{translate("Energy consumption by stage")}}
                   </div>
-
                   <div class=flex>
                     <table class=legend>
                       <tr v-for="stage in Structure.filter(s=>s.sublevel)">
@@ -524,13 +529,13 @@ let report = new Vue({
             </div>
 
             <div>
-              <div class=heading>SUMMARY - Sankey diagram</div>
+              <div class=heading>{{translate("SUMMARY - Sankey diagram")}}</div>
               <div id=sankey></div>
             </div>
 
             <!--inputs-->
             <div>
-              <div class=heading>INPUTS</div>
+              <div class=heading>{{translate("INPUTS")}}</div>
               <div>
                 <div v-for="stage in Structure.filter(s=>s.sublevel)">
                   <div :style="{color:stage.color, fontWeight:'bold', marginTop:'20px'}">
@@ -545,7 +550,7 @@ let report = new Vue({
                       <th v-for="ss in Global[stage.level][stage.sublevel]">
                         <b>{{ss.name}}</b>
                       </th>
-                      <th style="text-align:left">Unit</th>
+                      <th style="text-align:left">{{translate("Unit")}}</th>
                     </tr>
                     <tr
                       v-for="code in get_input_codes(stage.level,stage.sublevel)"
@@ -564,7 +569,7 @@ let report = new Vue({
                           {{format(ss[code])}}
                         </div>
                         <div v-else style="font-size:smaller;color:#ccc">
-                          not enabled
+                          {{translate("not enabled")}}
                         </div>
                       </td>
                       <td class=unit>
@@ -578,7 +583,7 @@ let report = new Vue({
 
             <!--outputs-->
             <div>
-              <div class=heading>OUTPUTS</div>
+              <div class=heading>{{translate("OUTPUTS")}}</div>
               <div>
                 <div v-for="stage in Structure.filter(s=>s.sublevel)">
                   <div :style="{color:stage.color, fontWeight:'bold', marginTop:'20px'}">
@@ -593,7 +598,7 @@ let report = new Vue({
                       <th v-for="ss in Global[stage.level][stage.sublevel]">
                         <b>{{ss.name}}</b>
                       </th>
-                      <th style="text-align:left">Unit</th>
+                      <th style="text-align:left">{{translate("Unit")}}</th>
                     </tr>
                     <tr
                       v-for="code in get_output_codes(stage.level,stage.sublevel)"

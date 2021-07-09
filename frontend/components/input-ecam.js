@@ -38,7 +38,7 @@ Vue.component('input_ecam',{
               tabindex="-1"
               :style="{borderColor:(current_stage[code]==Estimations[code](current_stage)?'green':'')}"
             >
-              <div>Estimation:&nbsp;</div>
+              <div>{{translate("Estimation")}}:&nbsp;</div>
               <div style="display:flex;align-items:center">
                 <div v-html="format(Estimations[code](current_stage)/Units.multiplier(code))"></div>
                 <div v-html="get_current_unit(code,Global).prettify()" style="margin-left:2px"></div>
