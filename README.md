@@ -27,11 +27,12 @@ To use ecam, just go to [wacclim.org/ecam](https://wacclim.org/ecam)
 
 ## Using ecam offline
 Ecam can be also used offline. You need download this package and place it
-inside a folder from a web server software, for example: apache, nginx, xampp, etc.
+inside a folder from a web server software, for example: apache, nginx, xampp,
+etc.
 
-## Example of offline configuration using Apache
+## Example of offline configuration using [Apache HTTP Server](http://httpd.apache.org/)
 1. download this repository
 2. move the repository to "/var/www/html/ecam"
 3. open your browser and go to "http://localhost/ecam"
 
-note: the equivalent folder fow "/var/www/html" in XAMPP is called "htdocs"
+note: the equivalent "/var/www/html" folder for XAMPP is "C:\XAMPP\htdocs" (in MS Windows)

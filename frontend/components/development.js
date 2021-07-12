@@ -49,10 +49,10 @@ let development=new Vue({
           <div
             style="
               display:grid;
-              grid-template-columns:repeat(2,1fr);
+              grid-template-columns:50% 50%;
             "
           >
-            <details open>
+            <div><details open>
               <summary>
                 LANGUAGE tags not found for "<b>{{Languages.current}}.json</b>" file
                 ({{ Object.keys(Languages.not_found_tags).length }})
@@ -67,8 +67,8 @@ let development=new Vue({
                   </td>
                 </tr>
               </table>
-            </details>
-            <details open>
+            </details></div>
+            <div><details open>
               <summary>
                 LANGUAGE tags not used for "<b>{{Languages.current}}.json</b>" file
                 ({{ Languages.find_not_used_tags().length }})
@@ -83,7 +83,7 @@ let development=new Vue({
                   </td>
                 </tr>
               </table>
-            </details>
+            </details></div>
           </div>
         </li>
       </ul>
