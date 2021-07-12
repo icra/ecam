@@ -30,9 +30,9 @@ Ecam can be also used offline. You need download this package and place it
 inside a folder from a web server software, for example: apache, nginx, xampp,
 etc.
 
-## Example of offline configuration using [Apache HTTP Server](http://httpd.apache.org/)
-1. download this repository
-2. move the repository to "/var/www/html/ecam"
-3. open your browser and go to "http://localhost/ecam"
-
-note: the equivalent "/var/www/html" folder for XAMPP is "C:\XAMPP\htdocs" (in MS Windows)
+## Guide for deployment in a server (or offline usage) using [Apache HTTP Server](http://httpd.apache.org/)
+1. Install Apache HTTP Server.
+2. Download this repository
+3. Move the repository to "/var/www/html/ecam".
+   note: the equivalent "/var/www/html" folder for XAMPP is usually in "C:\XAMPP\htdocs" (in Windows)
+4. Open your browser and go to "http://localhost/ecam"
