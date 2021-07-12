@@ -1,4 +1,4 @@
-let equations = new Vue({
+let equations=new Vue({
   el:"#equations",
   data:{
     visible:false,
@@ -39,15 +39,15 @@ let equations = new Vue({
   template:`
     <div id=equations v-if="visible && Languages.ready">
       <h1 style="padding-left:0" id=title>
-        Equations and Estimations
+        {{translate("Equations and Estimations")}}
         <span>
-          <button @click="fold_all(true)">See all formulas</button>
-          <button @click="fold_all()">Hide all formulas</button>
+          <button @click="fold_all(true)">{{translate("See all formulas")}}</button>
+          <button @click="fold_all()">    {{translate("Hide all formulas")}}</button>
         </span>
       </h1>
 
       <details open>
-        <summary>Equations</summary>
+        <summary>{{translate("Equations")}}</summary>
         <div>
           <table style="margin:8px">
             <tbody
@@ -60,10 +60,10 @@ let equations = new Vue({
                   {{translate(stage.level)}} /
                   {{translate(stage.sublevel)}}
                   &mdash;
-                  <a href=#title style="color:black">[&uarr; go top]</a>
+                  <a href=#title style="color:black">[&uarr; {{translate("go top")}}]</a>
                 </th>
-                <th :style="{background:stage.color}">Formula (code)</th>
-                <th :style="{background:stage.color}">Reference</th>
+                <th :style="{background:stage.color}">{{translate("Formula")}}</th>
+                <th :style="{background:stage.color}">{{translate("Reference")}}</th>
               </tr>
 
               <tr
@@ -80,14 +80,14 @@ let equations = new Vue({
                 <!--code-->
                 <td>
                   <details>
-                    <summary>see/hide</summary>
+                    <summary style="font-size:smaller">{{translate("see/hide")}}</summary>
                     <div style="padding-top:1em">
-                      <b>Formula:</b>
+                      <b>{{translate("Formula")}}:</b>
                       <pre
                         class=prettyprint
                         v-html="Formulas.prettify(Global[stage.level][stage.sublevel][0][key].toString())"
                       ></pre>
-                      <b>Involved inputs:</b>
+                      <b>{{translate("Involved inputs")}}:</b>
                       <div>
                         <inputs_involved_table
                           :code="key"
@@ -117,7 +117,7 @@ let equations = new Vue({
                   </div>
                   <div v-else>
                     <span style="color:#aaa">
-                      ~reference missing
+                      ~{{translate("reference missing")}}
                     </span>
                   </div>
                 </td>
@@ -128,7 +128,7 @@ let equations = new Vue({
       </details>
 
       <details open>
-        <summary>Estimations</summary>
+        <summary>{{translate("Estimations")}}</summary>
         <div>
           <table style="margin:8px">
             <tr
@@ -138,15 +138,13 @@ let equations = new Vue({
               "
             >
               <th>Id</th>
-              <th>Formula (code)</th>
-              <th>Reference</th>
+              <th>{{translate("Formula")}}</th>
+              <th>{{translate("Reference")}}</th>
             </tr>
             <tr v-for="obj,key in Estimations">
               <!--estimation key-->
               <th>
-                <div>
-                  {{translate(key+'_descr')}}
-                </div>
+                <div>{{translate(key+'_descr')}}</div>
                 <a href=# @click="variable.view(key)">
                   {{key}}
                 </a>
@@ -154,14 +152,14 @@ let equations = new Vue({
               <!--estimation formula-->
               <td>
                 <details>
-                  <summary>see/hide</summary>
+                  <summary style="font-size:smaller">{{translate("see/hide")}}</summary>
                   <div style="padding-top:1em">
-                    <b>Formula:</b>
+                    <b>{{translate("Formula")}}:</b>
                     <pre
                       class=prettyprint
                       v-html="Formulas.prettify(obj.toString())"
                     ></pre>
-                    <b>Involved inputs:</b>
+                    <b>{{translate("Involved inputs")}}:</b>
                     <div>
                       <inputs_involved_table
                         :code="key"
@@ -191,7 +189,7 @@ let equations = new Vue({
                 </div>
                 <div v-else>
                   <span style="color:#aaa">
-                    ~reference missing
+                    ~{{translate("reference missing")}}
                   </span>
                 </div>
               </td>

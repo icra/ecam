@@ -35,7 +35,7 @@ let constants = new Vue({
             <th>{{translate('Value')      }}</th>
             <th>{{translate('Unit')       }}</th>
             <th>{{translate('Description')}}</th>
-            <th>equations</th>
+            <th>{{translate("equations involved")}}</th>
           </tr>
           <tr v-for="key in get_constants_keys()">
             <td>

@@ -1,4 +1,4 @@
-let tables = new Vue({
+let tables=new Vue({
   el:"#tables",
   data:{
     visible:false,
@@ -14,7 +14,6 @@ let tables = new Vue({
     Benchmarks,
     References,
   },
-
   methods:{
     translate,
     format,
@@ -29,14 +28,14 @@ let tables = new Vue({
       }
     },
   },
-
   template:`
     <div id=tables v-if="visible && Languages.ready">
       <!--title-->
-      <h1 style="padding-left:0">Data tables</h1>
+      <h1 style="padding-left:0">
+        {{translate("Data tables")}}
+      </h1>
       <b>
-        The following tables are used as options, suggestions, estimations or
-        equations
+        {{translate("The following tables are used as options, suggestions, estimations or equations")}}
       </b><hr>
 
       <!--all tables-->
@@ -58,7 +57,7 @@ let tables = new Vue({
                 color:#666;
               "
             >
-              <div>(~reference missing)</div>
+              <div>~{{translate("reference missing")}}</div>
             </div>
           </div>
           <div v-if="tables_displayed.indexOf(name)+1">
@@ -73,7 +72,7 @@ let tables = new Vue({
                 </li>
               </ul>
             </div>
-            <div v-else class=blank style="padding:1em">~reference missing</div>
+            <div v-else class=blank style="padding:1em">~{{translate("reference missing")}}</div>
 
             <!--render data table-->
             <div style="padding-left:20px">
@@ -99,7 +98,7 @@ let tables = new Vue({
 
             <!--this data table is used in-->
             <div style="margin-top:10px;padding-left:20px;font-size:smaller">
-              The rows of this table are the options for the following inputs:
+              {{translate("The rows of this table are the options for the following inputs")}}:
               <table style="margin-bottom:10px">
                 <tr v-for="code in Object.keys(Info).filter(key=>Info[key].table==name).sort()">
                   <td><a @click="variable.view(code)" style="font-family:monospace">{{code}}</a></td>
@@ -109,7 +108,7 @@ let tables = new Vue({
                 </tr>
               </table>
 
-              This table is used to suggest values for the following inputs:
+              {{translate("This table is used to suggest values for the following inputs")}}:
               <table style="margin-bottom:10px">
                 <tr v-for="code in Object.keys(Exceptions).filter(key=>Exceptions[key].table==name).sort()">
                   <td><a @click="variable.view(code)" style="font-family:monospace">{{code}}</a></td>
@@ -120,7 +119,7 @@ let tables = new Vue({
                 </tr>
               </table>
 
-              This table is used in the code of the following outputs:
+              {{translate("This table is used in the code of the following outputs")}}:
               <table>
                 <tr
                   v-for="code in Formulas.outputs_per_input(name).sort()"
@@ -145,7 +144,6 @@ let tables = new Vue({
       </div>
     </div>
   `,
-
   style:`
     <style>
       #tables {

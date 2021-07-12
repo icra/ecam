@@ -173,7 +173,9 @@ function get_input_codes(level, sublevel){
   }
 
   return Object.keys(obj).filter(key=>{
-    return typeof(obj[key])=='number';
+    return (
+      typeof(obj[key])=='number'
+    )
   });
 }
 

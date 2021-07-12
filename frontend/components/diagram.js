@@ -1,4 +1,4 @@
-let diagram = new Vue({
+let diagram=new Vue({
   el:"#diagram",
   data:{
     visible:false,
@@ -8,10 +8,8 @@ let diagram = new Vue({
       {name:"Sludge",       colors:['brown']},
       {name:"GHG emission", colors:['grey']},
     ],
-
     Languages,
   },
-
   methods:{
     translate,
     format,
@@ -19,13 +17,13 @@ let diagram = new Vue({
       return debug;
     },
   },
-
   template:`
     <div id=diagram v-if="visible && Languages.ready">
-
       <!--diagram stages-->
       <div>
-        <h1>Flow diagram (water and wastewater flows)</h1>
+        <h1>
+          {{translate("Flow diagram (water and wastewater flows)")}}
+        </h1>
         <img
           src="frontend/img/flowchart/flowchart.svg"
           style="display:block;margin:auto;width:90%;border:1px solid #eee"

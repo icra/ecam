@@ -31,11 +31,11 @@ let gwp_table = new Vue({
         </tr>
         <tr>
           <th>{{translate('Report')}}</th>
-          <th>CO<sub>2</sub> (CO<sub>2</sub> {{translate('equivalents')}})</th>
-          <th>CH<sub>4</sub> (CO<sub>2</sub> {{translate('equivalents')}})</th>
-          <th>N<sub>2</sub>O (CO<sub>2</sub> {{translate('equivalents')}})</th>
+          <th>CO<sub>2</sub><br><small>(CO<sub>2</sub> {{translate('equivalents')}})</small></th>
+          <th>CH<sub>4</sub><br><small>(CO<sub>2</sub> {{translate('equivalents')}})</small></th>
+          <th>N<sub>2</sub>O<br><small>(CO<sub>2</sub> {{translate('equivalents')}})</small></th>
           <th>{{translate('Comments')}}</th>
-          <th>Select</th>
+          <th>{{translate("Select")}}</th>
         </tr>
         <tr v-for="rep,i in GWP_reports"
           :class="Configuration.gwp_reports_index==i ? 'selected':''">
@@ -43,10 +43,10 @@ let gwp_table = new Vue({
           <td class=number>1</td>
           <td class=number>{{rep.ct_ch4_eq}}</td>
           <td class=number>{{rep.ct_n2o_eq}}</td>
-          <td><small>{{rep.comment}}</small></td>
+          <td><small v-if="rep.comment">{{translate(rep.comment)}}</small></td>
           <td>
             <button @click="Configuration.gwp_reports_index=i;set_constants_from_gwp_report()">
-              select
+              {{translate("select")}}
             </button>
           </td>
         </tr>

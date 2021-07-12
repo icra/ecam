@@ -1,6 +1,5 @@
-let countries = new Vue({
+let countries=new Vue({
   el:"#countries",
-
   data:{
     visible:false,
     variable,
@@ -45,10 +44,10 @@ let countries = new Vue({
               <br><a @click="variable.view('bod_pday')">(bod_pday)</a>
             </th>
             <th rowspan=2>
-              Currency<sup>4</sup>
+              {{translate("Currency_descr")}}<sup>4</sup>
             </th>
             <th rowspan=2>
-              Select
+              {{translate("Select")}}
             </th>
           </tr>
           <tr>
@@ -69,7 +68,7 @@ let countries = new Vue({
           <td>
             <button
               @click="Global.General.Country=name;set_variables_from_selected_country()"
-            >select
+            >{{translate("select")}}
             </button>
           </td>
         </tr>

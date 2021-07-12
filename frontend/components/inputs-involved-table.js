@@ -92,9 +92,14 @@ Vue.component('inputs_involved_table',{
         v-for="tablename,i in Formulas.tables_per_formula(obj[code].toString())"
       >
         <tr v-if="i==0">
-          <td
-            style="padding-top:20px"
-          ><b>Tables involved (<a href=# onclick="ecam.show('tables')">see all data tables</a>)</b></td>
+          <td style="padding-top:20px">
+            <b>
+              {{translate("Tables involved")}}
+              (<a href=# onclick="ecam.show('tables')">
+                {{translate("see all data tables")}}
+              </a>)
+            </b>
+          </td>
         </tr>
 
         <tr

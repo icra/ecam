@@ -46,14 +46,14 @@ if(debug){
     //tier_b.filters_on=true;
 
   /*default language*/
-    Languages.current="en";
+    Languages.current="null";
 
   /*tutorial tips*/
     landing.include_tutorial_tips=true;
 
   /*default page*/
     //go_to('Water','Abstraction'); //"inventory"
-    //variable.view('wwo_bod_rmvd'); //variable detailed info
-    ecam.show('about'); //view
+    //variable.view('wsa_fuel_typ'); //variable detailed info
+    ecam.show('tables'); //view
   /**/
 }

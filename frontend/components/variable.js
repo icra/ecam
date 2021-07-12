@@ -2,7 +2,7 @@ let variable=new Vue({
   el:"#variable",
   data:{
     visible  : false,
-    id       : "wsa_nrg_cons", //default variable code
+    id       : Object.keys(Info)[0], //default variable code
     question : false,    //question where id belongs
 
     //stage where id belongs to
@@ -177,7 +177,7 @@ let variable=new Vue({
 
         <!--variable is inside a question?-->
         <tr v-if="question">
-          <th>Question (yes/no)</th>
+          <th>{{translate("Question (yes/no)")}}</th>
           <td>
             <span v-html="translate(question)+'?'"></span>
           </td>
@@ -341,7 +341,7 @@ let variable=new Vue({
               </div>
 
               <div v-if="localization.sublevel" style="margin-top:5px">
-                <button @click="add_substage()">+ add substage</button>
+                <button @click="add_substage()">+ {{translate("create substage")}}</button>
               </div>
             </div>
 
@@ -422,14 +422,18 @@ let variable=new Vue({
         <!--variable magnitude-->
         <tr>
           <th>{{ translate('variable_magnitude') }}</th>
-          <td>{{ Info[id] ? Info[id].magnitude : "magnitude not defined"}}
+          <td>
+            {{
+              Info[id] ? Info[id].magnitude : "magnitude not defined"
+            }}
             <div
               v-if="Info[id] && Info[id].magnitude=='Option' && Info[id].table"
               style="margin-top:15px;font-size:smaller"
             >
-              This input represents one row from the following table, with all
-              the associated info
-              (<a onclick="ecam.show('tables')">see all data tables</a>):
+              {{translate("This input represents one row from the following table, with all the associated info")}}
+              (<a onclick="ecam.show('tables')">
+                {{translate("see all data tables")}}
+                </a>):
               <table>
                 <tr>
                   <th colspan=100 style="background:var(--color-level-generic);text-align:left">
@@ -538,7 +542,9 @@ let variable=new Vue({
 
         <!--outputs that use this variable-->
         <tr>
-          <th>Outputs that use this variable</th>
+          <th>
+            {{translate("Outputs that use this variable")}}
+          </th>
           <td>
             <table class=outputs_affected>
               <tbody v-for="output in Formulas.outputs_per_input(id)" v-if="Info[output]">
