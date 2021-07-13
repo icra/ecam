@@ -1,12 +1,10 @@
-let constant = new Vue({
+let constant=new Vue({
   el:"#constant",
-
   data:{
-    visible: false,
+    visible:false,
     code:Object.keys(Cts)[0], //"ct_ch4_eq"
 
     variable,
-
     Cts,
     Formulas,
     References,
@@ -16,19 +14,18 @@ let constant = new Vue({
     format,
     translate,
 
-    /* open constant VIEW */
+    /*open constant VIEW*/
     view(code, no_history_entry){
       if(!code){
-        let err = "constant code not specified"
+        let err="constant code not specified";
         throw new Error(err);
         return false;
       }
 
       if(this.Cts[code]){
-        this.code = code;
+        this.code=code;
       }else{
         throw new Error(`constant "${code}" does not exist`);
-        return;
       }
 
       ecam.show('constant', no_history_entry);
@@ -40,10 +37,10 @@ let constant = new Vue({
     <div id=constant v-if="visible">
       <h1 style="text-align:center">
         <a onclick="ecam.show('constants')">
-          All constants
+          {{translate("all_constants")}}
         </a> &rsaquo;
         <span style=color:black>
-          Constant <b>{{code}}</b>
+          {{translate("Constant")}} <b>{{code}}</b>
         </span>
       </h1>
 
@@ -79,7 +76,7 @@ let constant = new Vue({
         "
       >
         <span v-html="code"></span>
-        =
+        <span>=</span>
         <span v-html="format(Cts[code].value)"
           style="font-size:42px"
         ></span>
@@ -88,20 +85,21 @@ let constant = new Vue({
 
       <!--constant used in-->
       <div style="margin:1em 0;text-align:center">
-        This constant is used in the following equations:
+        {{translate("This constant is used in the following equations")}}:
       </div>
       <table style=margin:auto>
         <tr v-for="output in Formulas.outputs_per_input(code)">
           <td>
-            <a @click="variable.view(output)" style="font-family:monospace;">
+            <a @click="variable.view(output)" style="font-family:monospace">
               {{output}}
             </a>
           </td>
-          <td v-html="translate(output+'_descr').prettify()">
-          </td>
+          <td v-html="translate(output+'_descr').prettify()"></td>
         </tr>
         <tr v-if="Formulas.outputs_per_input(code).length==0">
-          <td style=color:#666>~Constant not used. Consider removing it</td>
+          <td style=color:#666>
+            ~{{translate("Constant not used. Consider removing it")}}
+          </td>
         </tr>
       </table>
     </div>

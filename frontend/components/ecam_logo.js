@@ -10,7 +10,7 @@ let ecam_logo=new Vue({
     is_linear_menu_visible(){
       return linear_menu.visible;
     },
-    is_debug_mode_enabled(){
+    is_dev_mode_on(){
       return debug;
     },
   },
@@ -30,7 +30,7 @@ let ecam_logo=new Vue({
       </div>
 
       <!--debug mode menu-->
-      <div v-if="is_debug_mode_enabled()"
+      <div v-if="is_dev_mode_on()"
         style="
           padding:2px;
           border-radius:5px;
@@ -41,7 +41,7 @@ let ecam_logo=new Vue({
 
         <!--disable dev mode-->
         <button
-          onclick="debug=false;ecam.show('landing');ecam.elements.ecam_logo.$forceUpdate()"
+          onclick="debug=false;Languages.current='en';ecam.show('landing');ecam.elements.ecam_logo.$forceUpdate()"
           style="background:white;padding:2px"
         >disable dev mode
         </button>
@@ -62,7 +62,7 @@ let ecam_logo=new Vue({
       </div>
 
       <!--language-->
-      <div id=lang v-if="is_debug_mode_enabled()">
+      <div id=lang>
         <!--current language-->
         <div style="width:20px">{{Languages.current.toUpperCase()}}</div>
 
@@ -80,9 +80,9 @@ let ecam_logo=new Vue({
           <div lang=null
             @click="Languages.current='null'"
             :current="Languages.current=='null'"
-          >
-            null (tags only for development)
-          </div>
+            v-if="is_dev_mode_on()"
+            v-html="'null (tags only, for development)'"
+          ></div>
         </div>
       </div>
     </div>

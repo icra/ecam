@@ -12,6 +12,9 @@ let debug=true; //development mode ON/OFF
 
 /*add input values*/
 if(debug){
+  /*add a not used constant*/
+    Cts.ct_unused={value:0,descr:"not used constant",unit:"uses"};
+
   /*input values*/
     Global.General.Country="Afghanistan";
     select_scenario.set_variables_from_selected_country();
@@ -35,18 +38,15 @@ if(debug){
     });
 
   /*add another scenario*/
-    /*
-    ecam.new_scenario();
-    Scenarios.forEach(scenario=>{
-      compare_scenarios.scenarios_compared.push(scenario);
-    });
-    */
+    let s = ecam.new_scenario();
+    compare_scenarios.scenarios_compared.push(s);
 
   /*default filters on for tier B*/
     //tier_b.filters_on=true;
 
   /*default language*/
-    Languages.current="null";
+    Languages.current="en";
+    //Languages.current="null";
 
   /*tutorial tips*/
     landing.include_tutorial_tips=true;
@@ -54,6 +54,6 @@ if(debug){
   /*default page*/
     //go_to('Water','Abstraction'); //"inventory"
     //variable.view('wsa_fuel_typ'); //variable detailed info
-    ecam.show('tables'); //view
+    ecam.show('faqs'); //view
   /**/
 }

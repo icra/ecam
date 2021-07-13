@@ -54,7 +54,7 @@ let development=new Vue({
           >
             <div><details open>
               <summary>
-                LANGUAGE tags not found for "<b>{{Languages.current}}.json</b>" file
+                LANGUAGE tags not found
                 ({{ Object.keys(Languages.not_found_tags).length }})
                 <br>
                 "tags attempted to translate"

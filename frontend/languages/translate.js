@@ -46,7 +46,14 @@ let Languages={
 
     //tag not found
     if(!this.tags[lang][`#${id}`]){
+      //add tag to the list of not found tags
       this.not_found_tags[`#${id}`]=1;
+
+      //fall back to english translation
+      if(!debug){
+        return this.tags.en[`#${id}`] ? this.tags.en[`#${id}`]:`["#${id}"]`;
+      }
+
       return `["#${id}"]`;
     }
 

@@ -18,7 +18,10 @@ let benchmarks = new Vue({
 
   template:`
     <div id=benchmarks v-if="visible && Languages.ready">
-      <h1 style="padding-left:0">Benchmarks ({{Object.keys(Benchmarks).length}})</h1>
+      <h1 style="padding-left:0">
+        {{translate("Benchmarks")}}
+        ({{Object.keys(Benchmarks).length}})
+      </h1>
       <div>
         <table border=1>
           <tr v-for="[key,obj] in Object.entries(Benchmarks)">
@@ -37,7 +40,7 @@ let benchmarks = new Vue({
             </td>
             <td>
               <details>
-                <summary>formula</summary>
+                <summary style="cursor:pointer">{{translate("Formula")}}</summary>
                 <code><pre class="prettyprint">{{obj}}</pre></code>
               </details>
             </td>
