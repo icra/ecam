@@ -41,7 +41,7 @@ let ecam_logo=new Vue({
 
         <!--disable dev mode-->
         <button
-          onclick="debug=false;Languages.current='en';ecam.show('landing');ecam.elements.ecam_logo.$forceUpdate()"
+          onclick="debug=false;ecam.show('landing');ecam.elements.ecam_logo.$forceUpdate()"
           style="background:white;padding:2px"
         >disable dev mode
         </button>

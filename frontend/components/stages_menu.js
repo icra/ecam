@@ -202,7 +202,7 @@ let stages_menu=new Vue({
                   <small
                     style="color:#666"
                     title="Create substages to insert further information"
-                    v-html="'~no substages'"
+                    v-html="'~'+translate('no substages')"
                   ></small>
                 </div>
                 <div

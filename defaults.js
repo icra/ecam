@@ -1,4 +1,4 @@
-let debug=true; //development mode ON/OFF
+let debug=false; //development mode ON/OFF
 /*
   Default configuration and debug mode (backend and frontend)
   this file is intended to help development
@@ -45,7 +45,6 @@ if(debug){
     //tier_b.filters_on=true;
 
   /*default language*/
-    Languages.current="en";
     //Languages.current="null";
 
   /*tutorial tips*/
