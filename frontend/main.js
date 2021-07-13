@@ -191,8 +191,10 @@ let ecam={
 
   //add new scenario
   new_scenario(){
-    let scenario = new Ecam();
-    scenario.General.Name=`${translate('Untitled assessment')}${Scenarios.length ? (' '+(1+Scenarios.length)):''}`;
+    let scenario=new Ecam();
+    if(Languages.ready){
+      scenario.General.Name=`${translate('Untitled assessment')}${Scenarios.length ? (' '+(1+Scenarios.length)):''}`;
+    }
     Scenarios.push(scenario);
     return scenario;
   },
