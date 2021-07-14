@@ -1,6 +1,4 @@
-{
-"#below":"below",
-
+{"#below":"below",
 "#15.7 - 38 kW"  : "15.7 - 38 kW",
 "#39 - 96 kW"    : "39 - 96 kW",
 "#5.6 - 15.7 kW" : "5.6 - 15.7 kW",
@@ -604,5 +602,4 @@
 "#wwt_vol_tslu_expla":"Verbrauchte Kraftstoffmenge  (LWK)",
 "#year":"Jahr",
 "#yes":"Ja",
-
 "END":"ENDE"}

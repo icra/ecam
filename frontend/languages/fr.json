@@ -1,6 +1,5 @@
 {
 "#below":"ci-dessous",
-
 "#15.7 - 38 kW"  : "15.7 - 38 kW",
 "#39 - 96 kW"    : "39 - 96 kW",
 "#5.6 - 15.7 kW" : "5.6 - 15.7 kW",
@@ -622,5 +621,4 @@
 "#wwt_vol_tslu_expla":"Volume de carburant consommé (Camions)",
 "#year":"année",
 "#yes":"Oui",
-
 "END":"FIN"}
