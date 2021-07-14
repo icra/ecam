@@ -24,10 +24,32 @@ let References={
       ref:`IPCC 2006 (2019 revision), Volume 5, Chapter 6: Wastewater, Table 6.3 updated (page 20)`,
       link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=20`,
     }],
-    "type_of_treatment":[{
-      ref:`IPCC 2006 (2019 revision), Volume 5, Chapter 6: Wastewater, Table 6.3 updated (page 20)`,
-      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=20`,
-    }],
+    "type_of_treatment":[
+      {
+        ref:`IPCC 2006 (2019 revision), Volume 5, Chapter 6: Wastewater, Table 6.3 updated (page 20)`,
+        link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=20`,
+      },
+      {
+        ref:`
+          2013 Supplement to the 2006 IPCC Guidelines for National Greenhouse Gas Inventories: Wetlands -
+          TABLE 6.4 METHANE CORRECTION FACTORS (MCF) BY TYPE OF CONSTRUCTED WETLAND (CW)
+        `,
+        link:`https://www.ipcc-nggip.iges.or.jp/public/wetlands/pdf/Wetlands_Supplement_Entire_Report.pdf#page=255`,
+      },
+    ],
+    "Type of onsite treatment":[
+      {
+        ref:`IPCC 2006 (2019 revision), Volume 5, Chapter 6: Wastewater, Table 6.3 updated (page 20)`,
+        link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=20`,
+      },
+      {
+        ref:`
+          2013 Supplement to the 2006 IPCC Guidelines for National Greenhouse Gas Inventories: Wetlands -
+          TABLE 6.4 METHANE CORRECTION FACTORS (MCF) BY TYPE OF CONSTRUCTED WETLAND (CW)
+        `,
+        link:`https://www.ipcc-nggip.iges.or.jp/public/wetlands/pdf/Wetlands_Supplement_Entire_Report.pdf#page=255`,
+      },
+    ],
     "type_of_water_body":[{
       ref:`IPCC 2006 (2019 revision), Volume 5, Chapter 6: Wastewater, Table 6.3 updated (page 20)`,
       link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=20`,
