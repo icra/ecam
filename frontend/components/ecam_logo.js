@@ -67,6 +67,7 @@ let ecam_logo=new Vue({
         <div style="width:20px">{{Languages.current.toUpperCase()}}</div>
 
         <!--all languages-->
+        <!--TODO only EN and ES-->
         <div id=select>
           <div
             v-for="lang in Languages.list"
@@ -74,6 +75,7 @@ let ecam_logo=new Vue({
             :lang="lang"
             :current="Languages.current==lang"
             v-html="lang"
+            v-if="is_dev_mode_on()||['en','es'].indexOf(lang)+1"
           ></div>
 
           <!--null (only language tags)-->

@@ -1,5 +1,8 @@
 {
 "#below": "abajo",
+
+"#change substage name":"cambiar nombre de la sub-etapa",
+"#Out of range":"Fuera de rango",
 "#Load_and_save_file":"Cargar y guardar archivo",
 "#Summary":"Resumen",
 "#Scientific literature":"Literatura científica",

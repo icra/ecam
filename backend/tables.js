@@ -31,7 +31,6 @@ let Tables={
     {name:"Other"},
   ],
 
-  //ipcc 2019, table 6.3 (updated) EF (kgCH4/kgBOD)
   "type_of_water_body":[
     {name:"Discharge undefined",                                                                    ch4_efac:0     },
     {name:"Discharge to aquatic environments (Tier 1)",                                             ch4_efac:0.068 },
@@ -61,10 +60,6 @@ let Tables={
     {name:"Wetlands - Surface flow",                                      ch4_efac:0.24,  },
     {name:"Wetlands - Horizontal subsurface flow",                        ch4_efac:0.06,  },
     {name:"Wetlands - Vertical subsurface flow",                          ch4_efac:0.006, },
-    {name:"Activated Sludge - Well managed",                              ch4_efac:0,     },
-    {name:"Activated Sludge - Minor poorly aerated zones",                ch4_efac:0.06,  },
-    {name:"Activated Sludge - Some aerated zones",                        ch4_efac:0.12,  },
-    {name:"Activated Sludge - Not well managed",                          ch4_efac:0.18,  },
     {name:"Aerated Lagoon",                                               ch4_efac:0.06,  },
     {name:"Trickling Filter",                                             ch4_efac:0.036, },
   ],
@@ -78,14 +73,10 @@ let Tables={
     {name:"Stabilization Ponds (<2m depth)",                  ch4_efac:0.12,   bod_rmvd_as_sludge_estm:0.30,},
     {name:"Stabilization Ponds (>2m depth)",                  ch4_efac:0.48,   bod_rmvd_as_sludge_estm:0.10,},
     {name:"Sludge Drying Beds",                               ch4_efac:0.00,   bod_rmvd_as_sludge_estm:0.0,},
-    {name:"Wetlands - surface flow",                          ch4_efac:0.24,   bod_rmvd_as_sludge_estm:0.30,},
+    {name:"Wetlands - Surface flow",                          ch4_efac:0.24,   bod_rmvd_as_sludge_estm:0.30,},
     {name:"Wetlands - Horizontal subsurface flow",            ch4_efac:0.06,   bod_rmvd_as_sludge_estm:0.65,},
     {name:"Wetlands - Vertical subsurface flow",              ch4_efac:0.006,  bod_rmvd_as_sludge_estm:0.65,},
     {name:"Composting",                                       ch4_efac:0.0013, bod_rmvd_as_sludge_estm:0.0,},
-    {name:"Activated Sludge (well managed)",                  ch4_efac:0.0000, bod_rmvd_as_sludge_estm:0.65,},
-    {name:"Activated Sludge - minor poorly aerated zones",    ch4_efac:0.06,   bod_rmvd_as_sludge_estm:0.65,},
-    {name:"Activated Sludge - Some aerated zones",            ch4_efac:0.12,   bod_rmvd_as_sludge_estm:0.65,},
-    {name:"Activated Sludge - Not well managed",              ch4_efac:0.18,   bod_rmvd_as_sludge_estm:0.65,},
     {name:"Trickling Filter",                                 ch4_efac:0.036,  bod_rmvd_as_sludge_estm:0.65,},
   ],
 
