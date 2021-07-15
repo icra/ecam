@@ -203,6 +203,7 @@ let variable=new Vue({
                   <pre
                     v-html="Formulas.prettify(get_formula_location()[id].toString())"
                     class="prettyprint"
+                    style="margin-top:2px"
                   ></pre>
                 </code>
               </div>
@@ -674,7 +675,7 @@ let variable=new Vue({
         <!--the input has an estimation formula-->
         <tr v-if="Estimations[id]">
           <th>
-            Estimation of this input based on other inputs
+            {{translate("Estimation of this input based on other inputs")}}
           </th>
           <td>
             <!--estimation value-->
@@ -724,7 +725,7 @@ let variable=new Vue({
         <!--the input is used in benchmarks?-->
         <tr v-if="Benchmarks[id]">
           <th>
-            Benchmark formula
+            {{translate("Benchmark formula")}}
             <br><br>
             <a
               v-html="'see all benchmarks'"
