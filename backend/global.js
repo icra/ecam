@@ -1132,8 +1132,8 @@ class Waste_Treatment extends Substage{
 
     wwt_KPI_GHG_tre(){
       let co2   = 0;
-      let ch4   = (this.wwt_bod_infl-this.wwt_bod_slud-this.wwt_bod_effl)*this.wwt_ch4_efac_tre*Cts.ct_ch4_eq.value;
-      let n2o   = (this.wwt_tn_infl-this.wwt_tn_effl)*this.wwt_n2o_efac_tre*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
+      let ch4   = (this.wwt_bod_infl-this.wwt_bod_slud)*this.wwt_ch4_efac_tre*Cts.ct_ch4_eq.value;
+      let n2o   = (this.wwt_tn_infl)*this.wwt_n2o_efac_tre*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
@@ -1910,8 +1910,8 @@ class Waste_Onsite extends Substage{
     //treatment
     wwo_KPI_GHG_tre(){
       let co2   = 0;
-      let ch4   = (this.wwo_bod_infl-this.wwo_bod_slud-this.wwo_bod_effl)*this.wwo_ch4_efac_tre*Cts.ct_ch4_eq.value;
-      let n2o   = (this.wwo_tn_infl-this.wwo_tn_effl)*this.wwo_n2o_efac_tre*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
+      let ch4   = (this.wwo_bod_infl-this.wwo_bod_slud)*this.wwo_ch4_efac_tre*Cts.ct_ch4_eq.value;
+      let n2o   = (this.wwo_tn_infl)*this.wwo_n2o_efac_tre*Cts.ct_N_to_N2O_44_28.value*Cts.ct_n2o_eq.value;
       let total = co2+ch4+n2o;
       return {total,co2,ch4,n2o};
     }
