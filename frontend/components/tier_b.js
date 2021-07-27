@@ -461,7 +461,7 @@ let tier_b=new Vue({
                           </div>
                         </div>
                         <div style="margin-left:5px">
-                          <b v-html="translate(question)+'?'"
+                          <b v-html="translate(question)"
                             :class="substage.Configuration.Questions[question] ? 'question_text':''"
                           ></b>
                         </div>

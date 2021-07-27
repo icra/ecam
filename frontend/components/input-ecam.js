@@ -71,7 +71,9 @@ Vue.component('input_ecam',{
               ({{ format(obj[Exceptions[code].table_field(current_stage)]*Exceptions[code].percent_of(current_stage)/Units.multiplier(code) )}}
               {{get_current_unit(code,Global)}})
             </option>
-            <option :value="current_stage[code]">custom value</option>
+            <option :value="current_stage[code]">
+              {{translate('Custom value')}}
+            </option>
           </select>
 
           <!--case 2: selection has to be converted-->

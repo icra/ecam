@@ -132,7 +132,6 @@ let Questions={
       advanced:0,
       otherQuestions:[ ],
     },
-
   //wsd
     "wsd_engines":{
       variables:[
@@ -239,7 +238,6 @@ let Questions={
       advanced:0,
       otherQuestions:[ ],
     },
-
   //wwc
     "wwc_engines":{
       variables:[
@@ -284,6 +282,7 @@ let Questions={
       advanced:1,
       otherQuestions:[],
     },
+
     "wwc_costs":{
       variables:[
         "wwc_nrg_cost",
@@ -292,7 +291,6 @@ let Questions={
       advanced:0,
       otherQuestions:[ ],
     },
-
   //wwt
     "wwt_engines":{
       variables:[
@@ -516,7 +514,6 @@ let Questions={
       advanced:0,
       otherQuestions:[ ],
     },
-
   //Onsite
     "wwo_engines":{
       variables:[

@@ -1,4 +1,4 @@
-let debug=false; //development mode ON/OFF
+let debug=true; //development mode ON/OFF
 /*
   Default configuration and debug mode (backend and frontend)
   this file is intended to help development
@@ -48,11 +48,11 @@ if(debug){
     //Languages.current="null";
 
   /*tutorial tips*/
-    landing.include_tutorial_tips=true;
+    landing.include_tutorial_tips=false;
 
   /*default page*/
     //go_to('Water','Abstraction'); //"inventory"
     //variable.view('wsa_fuel_typ'); //variable detailed info
-    ecam.show('faqs'); //view
+    ecam.show('tier_b'); //view
   /**/
 }

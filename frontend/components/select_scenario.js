@@ -454,7 +454,7 @@ let select_scenario=new Vue({
                   <button
                     @click="delete_scenario(scenario)"
                     v-if="scenario!=Global"
-                    v-html="'delete'"
+                    v-html="translate('delete')"
                   ></button>
                 </div>
               </td>
