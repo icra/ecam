@@ -1226,7 +1226,7 @@
 "#wwt_KPI_nrg_estm_sav_descr":"Estimated electricity savings",
 "#wwt_KPI_nrg_estm_sav_expla":"Estimated electricity savings",
 "#wwt_KPI_nrg_per_kg_descr":"Energy consumption per BOD5 mass removed",
-"#wwt_KPI_nrg_per_kg_expla":"Percentage of energy consumed in wastewater treatment with regards to the Total energy consumed from the grid and self produced in the water and wastewater systems",
+"#wwt_KPI_nrg_per_kg_expla":"Energy consumed in wastewater treatment per mass of BOD5 removed",
 "#wwt_KPI_nrg_per_m3_descr":"Energy consumption per treated wastewater",
 "#wwt_KPI_nrg_per_m3_expla":"Energy consumption per treated wastewater",
 "#wwt_KPI_nrg_per_pump_descr":"Energy consumption for wastewater pumping to treatment",
