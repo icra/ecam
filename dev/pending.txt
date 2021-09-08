@@ -96,5 +96,6 @@ ECAM pending items
       be useful to be able to choose the unit, like under the inventory (kg/year or
       kg/year/serviced pop)
 
-    In the exercise file, the WW collected and discharged untreated is not accounted for. Was this intentional?
+    In the exercise file, the WW collected and discharged untreated is not
+    accounted for. Was this intentional?
   ```

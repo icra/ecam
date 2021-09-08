@@ -80,7 +80,7 @@ let constant=new Vue({
         <span v-html="format(Cts[code].value)"
           style="font-size:42px"
         ></span>
-        <span v-html="Cts[code].unit.prettify()"></span>
+        <span v-html="translate(Cts[code].unit,true).prettify()"></span>
       </div>
 
       <!--constant used in-->

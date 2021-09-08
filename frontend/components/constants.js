@@ -44,7 +44,7 @@ let constants = new Vue({
             <td align=right :title="Cts[key].value">
               {{ format(Cts[key].value) }}
             </td>
-            <td                         v-html="Cts[key].unit.prettify()"></td>
+            <td v-html="translate(Cts[key].unit,true).prettify()"></td>
             <td style=font-size:smaller v-html="Cts[key].descr.prettify()"></td>
             <td style="text-align:center">
               <div

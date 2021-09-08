@@ -39,8 +39,9 @@ let Units={
   },
   "Flow":{
     "m3/day":1/86400,
-    "L/s":0.001,
     "m3/s":1, //base unit
+    "L/s":0.001,
+    "L/day":0.001/86400,
   },
   "Energy":{
     "Joule":1/3600000,

@@ -644,7 +644,7 @@ let compare_scenarios=new Vue({
                   <div
                     class="unit"
                     style="text-align:right"
-                    v-html="get_base_unit(v.code, scenarios_compared[i]).prettify()"
+                    v-html="translate(get_base_unit(v.code, scenarios_compared[i]),true).prettify()"
                   ></div>
                 </div>
               </td>

@@ -800,13 +800,13 @@ let summary_ghg=new Vue({
                     <td :style="{background:'var(--color-level-Water)'}"></td>
                     <td>{{translate('ws_serv_pop_descr')}}</td>
                     <td>{{format(Global.Water.ws_serv_pop()) }}</td>
-                    <td class=unit v-html="'people'"></td>
+                    <td class=unit v-html="translate('people')"></td>
                   </tr>
                   <tr>
                     <td :style="{background:'#eee'}"></td>
                     <td>{{translate('Non-serviced population')}}</td>
                     <td>{{format(Global.Water.ws_resi_pop - Global.Water.ws_serv_pop())}}</td>
-                    <td class=unit v-html="'people'"></td>
+                    <td class=unit v-html="translate('people')"></td>
                   </tr>
                 </table>
                 <div id=pie_chart_ws_serv_pop></div>
@@ -817,13 +817,13 @@ let summary_ghg=new Vue({
                     <td :style="{background:'var(--color-level-Waste)'}"></td>
                     <td>{{translate('ww_serv_pop_descr')}}</td>
                     <td>{{format(Global.Waste.ww_serv_pop()) }}</td>
-                    <td class=unit v-html="'people'"></td>
+                    <td class=unit v-html="translate('people')"></td>
                   </tr>
                   <tr>
                     <td :style="{background:'#eee'}"></td>
                     <td>{{translate('Non-serviced population')}}</td>
                     <td>{{format(Global.Waste.ww_resi_pop - Global.Waste.ww_serv_pop()) }}</td>
-                    <td class=unit v-html="'people'"></td>
+                    <td class=unit v-html="translate('people')"></td>
                   </tr>
                 </table>
                 <div id=pie_chart_ww_serv_pop></div>

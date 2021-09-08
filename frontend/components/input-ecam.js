@@ -41,7 +41,7 @@ Vue.component('input_ecam',{
               <div>{{translate("Estimation")}}:&nbsp;</div>
               <div style="display:flex;align-items:center">
                 <div v-html="format(Estimations[code](current_stage)/Units.multiplier(code))"></div>
-                <div v-html="get_current_unit(code,Global).prettify()" style="margin-left:2px"></div>
+                <div v-html="translate(get_current_unit(code,Global),true).prettify()" style="margin-left:2px"></div>
               </div>
             </button>
           </div>
@@ -66,10 +66,10 @@ Vue.component('input_ecam',{
               v-for="obj,i in Tables[Exceptions[code].table]"
               :value="calculate_percent_from_table(current_stage,code,i)"
             >
-              {{translate(obj.name)}}
+              {{ translate(obj.name) }}
               [{{ format(100*obj[Exceptions[code].table_field(current_stage)]) }} %]
               ({{ format(obj[Exceptions[code].table_field(current_stage)]*Exceptions[code].percent_of(current_stage)/Units.multiplier(code) )}}
-              {{get_current_unit(code,Global)}})
+              {{ translate(get_current_unit(code,Global),true) }})
             </option>
             <option :value="current_stage[code]">
               {{translate('Custom value')}}
@@ -89,12 +89,17 @@ Vue.component('input_ecam',{
             >
               {{translate(obj.name)}}
               &rarr;
-              [{{obj[Exceptions[code].table_field(current_stage)]}} {{Exceptions[code].table_field_unit(current_stage)}}]
+              [{{obj[Exceptions[code].table_field(current_stage)]}}
+              {{
+                translate(Exceptions[code].table_field_unit(current_stage), true)
+              }}]
               &rarr;
-              ({{ format(    obj[Exceptions[code].table_field(current_stage)]*Exceptions[code].conversion(current_stage)/Units.multiplier(code) )}}
-              {{get_current_unit(code,Global)}})
+              ({{ format( obj[Exceptions[code].table_field(current_stage)]*Exceptions[code].conversion(current_stage)/Units.multiplier(code) )}}
+              {{ translate(get_current_unit(code,Global),true) }})
             </option>
-            <option :value="current_stage[code]">custom value</option>
+            <option :value="current_stage[code]">
+              {{translate('Custom value')}}
+            </option>
           </select>
 
           <!--case 3: selection is a fixed value-->
@@ -110,7 +115,9 @@ Vue.component('input_ecam',{
               {{translate(obj.name)}}
               ({{ format(obj[Exceptions[code].table_field(current_stage)]) }})
             </option>
-            <option :value="current_stage[code]">custom value</option>
+            <option :value="current_stage[code]">
+              {{translate('Custom value')}}
+            </option>
           </select>
         </div>
 
@@ -180,11 +187,12 @@ Vue.component('input_ecam',{
               <option
                 v-for="mul,unit in Units[Info[code].magnitude]"
                 :selected="get_current_unit(code,Global) == unit"
-                v-html="unit"
+                :value="unit"
+                v-html="translate(unit,true)"
               ></option>
             </select>
             <div v-else>
-              <span v-html="Info[code].unit.prettify()"></span>
+              <span v-html="translate(Info[code].unit, true).prettify()"></span>
             </div>
           </div>
         </div>

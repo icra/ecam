@@ -573,7 +573,7 @@ let report = new Vue({
                         </div>
                       </td>
                       <td class=unit>
-                        <span v-html="get_base_unit(code).prettify()"></span>
+                        <span v-html="translate(get_base_unit(code),true).prettify()"></span>
                       </td>
                     </tr>
                   </table>
@@ -616,7 +616,7 @@ let report = new Vue({
                         <div v-html="format(get_output_value(code,ss))"></div>
                       </td>
                       <td class=unit>
-                        <span v-html="get_base_unit(code).prettify()"></span>
+                        <span v-html="translate(get_base_unit(code),true).prettify()"></span>
                       </td>
                     </tr>
                   </table>

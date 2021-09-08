@@ -179,7 +179,7 @@ let variable=new Vue({
         <tr v-if="question">
           <th>{{translate("Question (yes/no)")}}</th>
           <td>
-            <span v-html="translate(question)+'?'"></span>
+            <span v-html="translate(question)"></span>
           </td>
         </tr>
 
@@ -264,7 +264,7 @@ let variable=new Vue({
                 <div>
                   <div v-if="!localization.sublevel">
                     <input type=number v-model.number="Global[localization.level][id]">
-                    <span class=unit v-html="get_base_unit(id).prettify()" style="text-align:right"></span>
+                    <span class=unit v-html="translate(get_base_unit(id),true).prettify()" style="text-align:right"></span>
                   </div>
                   <div v-else>
                     <table>
@@ -276,7 +276,7 @@ let variable=new Vue({
                           <div style="text-align:right">
                             <input type=number v-model.number="ss[id]">
                           </div>
-                          <div class=unit style="text-align:right" v-html="get_base_unit(id).prettify()"></div>
+                          <div class=unit style="text-align:right" v-html="translate(get_base_unit(id),true).prettify()"></div>
 
                           <!--drop down menus for certain inputs-->
                           <div v-if="Exceptions[id]">
@@ -293,9 +293,13 @@ let variable=new Vue({
                                 {{translate(obj.name)}}
                                 [{{ format(100*obj[Exceptions[id].table_field(ss)]) }} %]
                                 ({{ format(    obj[Exceptions[id].table_field(ss)]*Exceptions[id].percent_of(ss))}}
-                                {{get_base_unit(id).prettify()}})
+                                {{
+                                  translate(get_base_unit(id),true).prettify()
+                                }})
                               </option>
-                              <option :value="ss[id]">custom value</option>
+                              <option :value="ss[id]">
+                                {{translate('Custom value')}}
+                              </option>
                             </select>
 
                             <!--case 2: selection has to be converted-->
@@ -310,12 +314,19 @@ let variable=new Vue({
                               >
                                 {{translate(obj.name)}}
                                 &rarr;
-                                [{{obj[Exceptions[id].table_field(ss)]}} {{Exceptions[id].table_field_unit(ss)}}]
+                                [{{obj[Exceptions[id].table_field(ss)]}}
+                                {{
+                                  translate(Exceptions[id].table_field_unit(ss),true)
+                                }}]
                                 &rarr;
-                                ({{ format(    obj[Exceptions[id].table_field(ss)]*Exceptions[id].conversion(ss) )}}
-                                {{get_current_unit(id,Global)}})
+                                ({{ format( obj[Exceptions[id].table_field(ss)]*Exceptions[id].conversion(ss) )}}
+                                {{
+                                  translate(get_current_unit(id,Global), true)
+                                }})
                               </option>
-                              <option :value="ss[id]">custom value</option>
+                              <option :value="ss[id]">
+                                {{translate('Custom value')}}
+                              </option>
                             </select>
 
                             <!--case 3: selection is a fixed value-->
@@ -331,7 +342,9 @@ let variable=new Vue({
                                 {{translate(obj.name)}}
                                 ({{ format(obj[Exceptions[id].table_field(ss)]) }})
                               </option>
-                              <option :value="ss[id]">custom value</option>
+                              <option :value="ss[id]">
+                                {{translate('Custom value')}}
+                              </option>
                             </select>
                           </div>
                         </td>
@@ -357,7 +370,7 @@ let variable=new Vue({
                       <tr v-for="gas,key in get_output_partial_values(id,Global[localization.level])">
                         <td v-html="key.toUpperCase().prettify()"></td>
                         <td v-html="format(gas)"></td>
-                        <td v-html="get_current_unit(id).prettify()" class=unit></td>
+                        <td v-html="translate(get_current_unit(id),true).prettify()" class=unit></td>
                       </tr>
                     </table>
                   </div>
@@ -371,7 +384,7 @@ let variable=new Vue({
                     }}
                   </div>
 
-                  <span v-html="get_current_unit(id).prettify()" class=unit></span>
+                  <span v-html="translate(get_current_unit(id),true).prettify()" class=unit></span>
                 </div>
                 <div v-else>
                   <table>
@@ -389,7 +402,7 @@ let variable=new Vue({
                             <tr v-for="gas,key in get_output_partial_values(id,ss)">
                               <td v-html="key.toUpperCase().prettify()"></td>
                               <td v-html="format(gas)"></td>
-                              <td v-html="get_current_unit(id).prettify()" class=unit></td>
+                              <td v-html="translate(get_current_unit(id),true).prettify()" class=unit></td>
                             </tr>
                           </table>
                         </div>
@@ -400,14 +413,14 @@ let variable=new Vue({
                             v-html="format(get_output_value(id,ss))"
                             class=number
                           ></div>
-                          <div v-html="get_current_unit(id).prettify()" class=unit style="text-align:right"></div>
+                          <div v-html="translate(get_current_unit(id),true).prettify()" class=unit style="text-align:right"></div>
                         </div>
 
                         <!--benchmark evaluation-->
                         <div v-if="Benchmarks[id]" style="text-align:right;margin-top:10px">
                           <div :style="{color:get_benchmark(ss).color}" title="benchmark evaluation">
                             {{
-                              get_benchmark(ss).string
+                              translate(get_benchmark(ss).string)
                             }}
                           </div>
                         </div>
@@ -575,7 +588,7 @@ let variable=new Vue({
                     </div>
                   </td>
                   <td>
-                    <span class=unit v-html="get_base_unit(output).prettify()">
+                    <span class=unit v-html="translate(get_base_unit(output),true).prettify()">
                     </span>
                   </td>
                 </tr>
@@ -600,7 +613,7 @@ let variable=new Vue({
                     </div>
                   </td>
                   <td>
-                    <span class=unit v-html="get_base_unit(output).prettify()"></span>
+                    <span class=unit v-html="translate(get_base_unit(output),true).prettify()"></span>
                   </td>
                 </tr>
 
@@ -630,8 +643,10 @@ let variable=new Vue({
                     </div>
                   </td>
                   <td>
-                    <span class=unit v-html="get_current_unit(output).prettify()">
-                    </span>
+                    <span
+                      class=unit
+                      v-html="translate(get_current_unit(output),true).prettify()"
+                    ></span>
                   </td>
                 </tr>
 
@@ -661,7 +676,7 @@ let variable=new Vue({
                     </div>
                   </td>
                   <td>
-                    <span class=unit v-html="get_base_unit(output).prettify()"></span>
+                    <span class=unit v-html="translate(get_base_unit(output),true).prettify()"></span>
                   </td>
                 </tr>
               </tbody>
@@ -689,7 +704,7 @@ let variable=new Vue({
                       )
                     ))
                   }}
-                  <span class=unit v-html="get_base_unit(id).prettify()"></span>
+                  <span class=unit v-html="translate(get_base_unit(id),true).prettify()"></span>
                 </div>
                 <div v-else>
                   {{
@@ -697,7 +712,7 @@ let variable=new Vue({
                       Estimations[id](locate_variable(id).stage)
                     )
                   }}
-                  <span class=unit v-html="get_base_unit(id).prettify()"></span>
+                  <span class=unit v-html="translate(get_base_unit(id),true).prettify()"></span>
                 </div>
               </div>
             </div>
@@ -728,7 +743,7 @@ let variable=new Vue({
             {{translate("Benchmark formula")}}
             <br><br>
             <a
-              v-html="'see all benchmarks'"
+              v-html="translate('see all benchmarks')"
               style="text-decoration:underline;color:white;font-size:smaller"
               onclick="ecam.show('benchmarks')">
             </a>

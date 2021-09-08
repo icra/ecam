@@ -637,8 +637,8 @@ let tier_b=new Vue({
                     </td>
 
                     <!--unit-->
-                    <td v-if="Info[key]" v-html="normalization.selected.prettify()" style="font-size:smaller"></td>
-                    <td v-else style="color:#bbb"><b>no unit</b></td>
+                    <td v-if="Info[key]" v-html="translate(normalization.selected,true).prettify()" style="font-size:smaller"></td>
+                    <td v-else style="color:#bbb"><b>{{translate("no unit")}}</b></td>
                   </tr>
                 </tbody>
               </table>
@@ -701,8 +701,8 @@ let tier_b=new Vue({
                     </td>
 
                     <!--unit-->
-                    <td v-if="Info[key]" v-html="Info[key].unit.prettify()" style="font-size:smaller"></td>
-                    <td v-else style="color:#bbb"><b>no unit</b></td>
+                    <td v-if="Info[key]" v-html="translate(Info[key].unit,true).prettify()" style="font-size:smaller"></td>
+                    <td v-else style="color:#bbb"><b>{{translate("no unit")}}</b></td>
                   </tr>
                 </tbody>
               </table>

@@ -18,7 +18,7 @@ Vue.component('inputs_involved_table',{
           <!--involved constant value-->
           <td class=number :title="Cts[match].value">{{ format(Cts[match].value) }}</td>
           <!--involved constant unit-->
-          <td class=unit v-html="Cts[match].unit.prettify()"></td>
+          <td class=unit v-html="translate(Cts[match].unit,true).prettify()"></td>
         </tr>
 
         <!--input involved is an Option-->
@@ -43,7 +43,7 @@ Vue.component('inputs_involved_table',{
           </td>
 
           <!--unit-->
-          <td class=unit v-html="Info[match].unit.prettify()"></td>
+          <td class=unit v-html="translate(Info[match].unit,true).prettify()"></td>
         </tr>
 
         <!--input involved is a normal one (input or output)-->
@@ -83,8 +83,8 @@ Vue.component('inputs_involved_table',{
           </td>
 
           <!--unit-->
-          <td v-if="get_variable_type(match)=='input'" class=unit v-html="get_base_unit(match).prettify()"></td>
-          <td v-else class=unit v-html="Info[match] ? Info[match].unit.prettify() : 'unit not defined'"></td>
+          <td v-if="get_variable_type(match)=='input'" class=unit v-html="translate(get_base_unit(match),true).prettify()"></td>
+          <td v-else class=unit v-html="Info[match] ? translate(Info[match].unit,true).prettify() : translate('no unit')"></td>
         </tr>
       </tbody>
 

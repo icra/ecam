@@ -28,8 +28,10 @@ let Languages={
     });
   },
 
-  //translate a tag
-  translate(id){
+  //translate a piece of text
+  //      id: string
+  // is_unit: boolean
+  translate(id, is_unit){
     //current language
     let lang = this.current;
 
@@ -48,6 +50,9 @@ let Languages={
     if(!this.tags[lang][`#${id}`]){
       //add tag to the list of not found tags
       this.not_found_tags[`#${id}`]=1;
+
+      //if is a unit return the id
+      if(is_unit) return id;
 
       //fall back to english translation
       if(!debug){
@@ -70,6 +75,9 @@ let Languages={
   //goal: identify not used tags (fx find_not_used_tags)
   used_tags:{},
 
+  //container to store not found tags
+  not_found_tags:{},
+
   //find unused tags for current language
   //note: a tag has to been displayed in order to set it as used
   find_not_used_tags(){ //->Array
@@ -88,15 +96,12 @@ let Languages={
 
     return found;
   },
-
-  //container to store not found tags
-  not_found_tags:{},
 };
 
 //start loading language tags
 Languages.load();
 
 //make "translate" a global function
-function translate(id){
-  return Languages.translate(id);
+function translate(id, is_unit){
+  return Languages.translate(id, is_unit);
 }
