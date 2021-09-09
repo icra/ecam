@@ -51,8 +51,8 @@ if(debug){
     landing.include_tutorial_tips=false;
 
   /*default page*/
-    //go_to('Water','Abstraction'); //"inventory"
-    //variable.view('wsa_fuel_typ'); //variable detailed info
-    ecam.show('tier_b'); //view
+    go_to('Water','Abstraction'); //"inventory"
+    //variable.view('wwt_slu_sto_EF'); //variable detailed info
+    //ecam.show('select_scenario'); //view
   /**/
 }

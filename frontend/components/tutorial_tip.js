@@ -14,20 +14,33 @@ Vue.component('tutorial_tip',{
       class=tutorial_tip
     >
       <div style="padding:1em">
-        <div style="text-align:left">
-          <b>
-            {{translate("Tip")}}:
-            {{translate(title)}}
-          </b>
+        <div
+          @click.prevent="unfolded^=true"
+          class="see_more"
+        >
+          <div
+            style="
+              display:flex;
+              justify-content:space-between;
+            "
+          >
+            <div style="font-weight:bold">
+              {{translate("Tip")}}: {{translate(title)}}
+            </div>
+            <div style="color:#666">
+              <span v-if="!unfolded">{{translate("see more")}}</span>
+              <span v-else          >{{translate("see less")}}</span>
+            </div>
+          </div>
         </div>
-        <div v-html="translate(text)"></div>
+        <div v-if="unfolded" v-html="translate(text)" style="margin-top:5px"></div>
       </div>
-      <div style="text-align:center">
-        <button @click="dismiss()" class=dismiss_tip>
-          Ok
+      <div v-if="unfolded" style="text-align:center;padding-bottom:1em">
+        <button @click.prevent="dismiss()" class=dismiss_tip>
+          ok
         </button>
         <button
-          @click="dismiss_all_tips()"
+          @click.prevent="dismiss_all_tips()"
           class="dismiss_all_tips"
           v-html="translate('dismiss_all_tips')"
         ></button>
@@ -38,6 +51,7 @@ Vue.component('tutorial_tip',{
   data(){
     return{
       visible:true,
+      unfolded:false,
       Languages,
     };
   },

@@ -48,12 +48,14 @@ let variable=new Vue({
     get_output_value,
     get_output_partial_values,
 
-    add_substage(){
-      stages_menu.add_substage(
-        this.localization.level,
-        this.localization.sublevel
-      );
-    },
+    /*
+      add_substage(){
+        stages_menu.add_substage(
+          this.localization.level,
+          this.localization.sublevel
+        );
+      },
+    */
 
     /* open variable VIEW */
     view(id, no_history_entry){
@@ -156,8 +158,14 @@ let variable=new Vue({
           <th>{{ translate('variable_explanation') }}</th>
           <td>
             <code v-html="translate(id+'_expla').prettify()"></code>
+          </td>
+        </tr>
+
+        <tr v-if="References[id]">
+          <th>{{translate("Reference")}}</th>
+          <td>
             <!--references-->
-            <div v-if="References[id]"><hr>
+            <div v-if="References[id]">
               <div v-for="obj in References[id]" style="margin-bottom:5px">
                 <small
                   v-if="obj.ref"
@@ -188,9 +196,7 @@ let variable=new Vue({
           <th>{{translate('variable_type')}}</th>
           <td>
             <div v-if="get_variable_type(id)=='input'">
-              <div style="font-size:large">
-                Input
-              </div>
+              Input
             </div>
 
             <!--variable show formula and inputs involved-->
@@ -354,9 +360,11 @@ let variable=new Vue({
                 </div>
               </div>
 
+              <!--
               <div v-if="localization.sublevel" style="margin-top:5px">
                 <button @click="add_substage()">+ {{translate("create substage")}}</button>
               </div>
+              -->
             </div>
 
             <!--variable is an output-->
