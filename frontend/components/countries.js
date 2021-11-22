@@ -62,7 +62,7 @@ let countries=new Vue({
         >
           <td><b>{{name}}</b></td>
           <td class=number>{{country.conv_kwh_co2}}</td>
-          <td class=number>{{country.prot_con}}</td>
+          <td class=number>{{country.prot_con.toFixed(5)}}</td>
           <td class=number>{{country.bod_pday}}</td>
           <td style="text-align:center">{{country.currency}}</td>
           <td>

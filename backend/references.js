@@ -336,10 +336,16 @@ let References={
       ref:`EIB Methodologies for the Assessment of Project GHG Emissions and Emission Variations, 2020`,
       link:`https://www.eib.org/attachments/strategies/eib_project_carbon_footprint_methodologies_en.pdf#page=36`,
     }],
-    prot_con:[{
-      ref:`Equation 6.10, Total Nitrogen in domestic wastewater by treatment pathway`,
-      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=40`,
-    }],
+    prot_con:[
+      {
+        ref:`Equation 6.10, Total Nitrogen in domestic wastewater by treatment pathway`,
+        link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=40`,
+      },
+      {
+        ref:"Protein supply extracted from fao.org, and then multiplied by the FPC (fraction of protein consumed) from IPCC (table 6.10A)",
+        link:"https://www.fao.org/faostat/en/#data/FBS/visualize",
+      },
+    ],
     bod_pday:[
       {
         ref:`Equation 6.3, Total Organically degradable material in domestic wastewater`,
