@@ -25,7 +25,7 @@ and CSS. It uses VueJS to render the user interface.
 ## Dependencies
 - Vue.js v2.6.11 (https://vuejs.org/)
 - Chart.js v3.7.1 (https://www.chartjs.org/)
-- google/code-prettify@2015-12-04 (https://cdn.jsdelivr.net/gh/google/code-prettify@master/)
+- Code-prettify v2015-12-04 (https://cdn.jsdelivr.net/gh/google/code-prettify@master/)
 - D3.js v3 (https://d3js.org/)
 - ExcelJS v4.2.1 (https://github.com/exceljs/exceljs)
 - FileSaver v1.2.2 (https://github.com/eligrey/FileSaver.js)
