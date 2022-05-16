@@ -23,6 +23,8 @@ ECAM is a serverless single-page-application (SPA) written in entirely in Javasc
 and CSS. It uses VueJS to render the user interface.
 
 ## Dependencies
+All these libraries are automatically loaded when the tool is opened in the
+browser:
 - Vue.js v2.6.11 (https://vuejs.org/)
 - Chart.js v3.7.1 (https://www.chartjs.org/)
 - Code-prettify v2015-12-04 (https://cdn.jsdelivr.net/gh/google/code-prettify@master/)
