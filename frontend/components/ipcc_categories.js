@@ -19,7 +19,7 @@ let ipcc_categories = new Vue({
 
       <!--reference-->
       <p style="text-align:center">
-        <a href="http://localhost/ecam/v3/frontend/docs/2019-ipcc/1_Volume1/19R_V1_Ch08_Reporting_Guidance.pdf#page=9" target=_blank>
+        <a href="frontend/docs/2019-ipcc/1_Volume1/19R_V1_Ch08_Reporting_Guidance.pdf#page=9" target=_blank>
           Reference: Table 8.2 "Classification and definition of categories of emissions and removals"
         </a>
       </p>
