@@ -1,0 +1,181 @@
+digraph ECAM {
+  label="ECAM v3 Architecture";
+  labelloc="t"
+  labeljust="l"
+  //rankdir="LR"
+  //splines="curved"
+  splines="ortho"
+
+  //context
+  //containers
+  //components
+  //code (uml classes)
+
+  subgraph cluster_legend{
+    label="Legend"
+    labeljust="c"
+    Section [label="Section of a View\n(frontend)"]
+    Pages [label="Page or View\n(user navigation)\n(frontend)", style="filled", color="blue", fontcolor="white"]
+    Functions [label="Function\n(small module affecting a view)\n(frontend or backend)", style="filled", color="yellow"]
+    Data [label="Lists, Tables\n(implementation)\n(backend)", style="filled", color="green"]
+    Classes [label="Class/Object\n(formulas inside)\n(backend)", style="filled", color="purple"]
+  }
+
+  //views (user interaction)
+  navbar [label="Navbar (top)"]
+  landing [label="LANDING", style="filled", color="blue", fontcolor="white"]
+  configuration [label="CONFIGURATION\n(list of assessments)", style="filled", color="blue", fontcolor="white"]
+  inventory [label="INVENTORY", style="filled", color="blue", fontcolor="white"]
+  results [label="RESULTS\n(current assessment only)", style="filled", color="blue", fontcolor="white"]
+  compare_scenarios [label="COMPARE ASSESSMENTS", style="filled", color="blue", fontcolor="white"]
+  more [label="More", style="filled", color="blue", fontcolor="white"]
+
+  navbar -> {landing configuration inventory results compare_scenarios more} [color="blue"]
+
+  about [label="About", style="filled", color="blue", fontcolor="white"]
+  faqs [label="FAQs", style="filled", color="blue", fontcolor="white"]
+  new_in_this_version [label="New in version 3.0", style="filled", color="blue", fontcolor="white"]
+  landing -> {configuration about} [color="blue"]
+  about -> faqs -> new_in_this_version [color="blue"]
+
+  countries [label="Countries table", style="filled", color="blue", fontcolor="white"]
+  gwp_table [label="Select IPCC report", style="filled", color="blue", fontcolor="white"]
+  configuration -> inventory [color="blue"]
+  configuration -> {countries gwp_table} [color="blue"]
+
+  summary [label="Summary\ncurrent assessment", style="filled", color="blue", fontcolor="white"]
+  sankey_ghg [label="Sankey diagram GHG", style="filled", color="blue", fontcolor="white"]
+  report [label="Report", style="filled", color="blue", fontcolor="white"]
+  results -> {summary sankey_ghg report} [color="blue"]
+
+  print_report [label="Print report", style="filled", color="yellow"]
+  print_report -> report
+
+  overview [label="Overview table"]
+  compare_scenarios_charts [label="Bar Charts"]
+  total_ghg [label="Total GHG"]
+  emissions_by_gas [label="Emissions by gas\n(CO2,CH4,N2O)"]
+  emissions_by_stage [label="Emissions by stage type"]
+  total_energy_consumption [label="Total energy consumption"]
+  compare_scenarios -> {overview compare_scenarios_charts} [color="blue"]
+  compare_scenarios_charts -> {total_ghg emissions_by_gas emissions_by_stage total_energy_consumption}
+
+  flow_diagram      [label="Flow diagram", style="filled", color="blue", fontcolor="white"]
+  non_revenue_water [label="Non Revenue Water", style="filled", color="blue", fontcolor="white"]
+  equations         [label="Equations", style="filled", color="blue", fontcolor="white"]
+  constants         [label="Constants", style="filled", color="blue", fontcolor="white"]
+  tables            [label="Data Tables\ncompilation", style="filled", color="blue", fontcolor="white"]
+  benchmarks        [label="Benchmarks", style="filled", color="blue", fontcolor="white"]
+  docs              [label="Scientific literature", style="filled", color="blue", fontcolor="white"]
+  ipcc              [label="IPCC report 2006 and 2019 revision (PDFs)"]
+  more -> {about faqs flow_diagram non_revenue_water equations constants tables benchmarks docs} [color="blue"]
+  docs -> ipcc
+
+  variable [label="See variable\n(inputs and outputs)", style="filled", color="blue", fontcolor="white"]
+  equations -> variable [color="blue"]
+
+  constant [label="See constant", style="filled", color="blue", fontcolor="white"]
+  constants -> constant -> variable [color="blue"]
+
+  //edges
+  summary_table  [label="Overview of GHG sources\n(table)"]
+  summary_charts [label="Charts"]
+
+  summary -> {summary_table summary_charts}
+
+  summary_charts_GHG                 [label="GHG\n(by stage, by substage, by gas)"]
+  summary_charts_Energy              [label="Energy consumption\n(by stage, by substage)"]
+  summary_charts_Serviced_population [label="Serviced population"]
+  summary_charts -> {summary_charts_GHG summary_charts_Energy summary_charts_Serviced_population}
+
+  //functions
+  choose_language [label="Choose language", style="filled", color="yellow"]
+  choose_language -> navbar
+
+  tips [label="Tips for new users", style="filled", color="yellow"]
+  tips -> {landing configuration inventory}
+
+  load_save [label="Load & Save assessment\n(JSON file)", style="filled", color="yellow"]
+  load_save -> configuration
+
+  create_assesments [label="Create and delete assessments,\nselect current assessment", style="filled", color="yellow"]
+  create_assesments -> configuration
+
+  create_xl_template [label="Create (and download) empty Excel template,\nload assessment from Excel template", style="filled", color="yellow"]
+  create_xl_template -> configuration
+
+  select_ipcc_report [label="Select CO2 equivalents\nfor CH4 and N2O", style="filled", color="yellow"]
+  select_ipcc_report -> gwp_table
+
+  select_country [label="Select country\n(sets EF, protein, BOD and currency)", style="filled", color="yellow"]
+  select_country -> {countries configuration}
+
+  edit_substages [label="Create, Edit and Delete Substages", style="filled", color="yellow"]
+  edit_substages -> inventory
+
+  //classes
+  inventory -> {water waste} [color="blue"]
+  subgraph cluster_substages{
+    label="Stages and Substages"
+    labeljust="c"
+    color="purple"
+
+    water [label="Water supply", style="filled", color="purple"]
+    waste [label="Sanitation", style="filled", color="purple"]
+    wsa [label="Abstraction", style="filled", color="purple"]
+    wst [label="Treatment", style="filled", color="purple"]
+    wsd [label="Distribution", style="filled", color="purple"]
+    wwc [label="Collection", style="filled", color="purple"]
+    wwt [label="Treatment", style="filled", color="purple"]
+    wwo [label="Onsite Treatment", style="filled", color="purple"]
+    water -> {wsa wst wsd} [color="blue"]
+    waste -> {wwc wwt wwo} [color="blue"]
+  }
+  {wsa wst wsd wwc wwt wwo} -> variable [color="blue"]
+
+  magnitude_conversion [label="Unit conversion", style="filled", color="yellow"]
+  units [label="Units and Magnitudes\ndefinition", style="filled", color="green"]
+  units -> magnitude_conversion -> {variable inventory}
+
+  formula_parser [label="Extract variable codes from formulas", style="filled", color="yellow"]
+  see_related_inputs_and_outpus [label="Find related inputs and outputs", style="filled", color="yellow"]
+  formula_parser -> see_related_inputs_and_outpus -> variable
+
+  tables -> variable [color="blue"]
+  benchmarks -> variable [color="blue"]
+
+  constants_definition       [label="Constants definition", style="filled", color="green"]
+  constants_definition -> constants
+
+  countries_definition       [label="Countries list", style="filled", color="green"]
+  countries_definition -> countries
+
+  estimations_definition     [label="Estimations", style="filled", color="green"]
+  estimations_definition -> inventory
+
+  inputs_with_dropdown_menus [label="Dropdown menus for inputs", style="filled", color="green"]
+  tables_definition          [label="Tables for input values", style="filled", color="green"]
+  tables_definition -> inputs_with_dropdown_menus -> inventory
+
+  questions [label="Yes/No questions\n(groups of inputs)", style="filled", color="green"]
+  questions -> inventory
+
+  filters [label="Filters\n(groups of inputs)", style="filled", color="green"]
+  filters -> inventory
+
+  hl_mode [label="Highlight related inputs/ouputs on mouseover", style="filled", color="yellow"]
+  hl_mode -> inventory
+
+  references [label="Bibliography\nReferences\nLinks", style="filled", color="green"]
+  references -> variable
+  references -> tables
+
+  language_tags [label="All translations", style="filled", color="green"]
+  all_pages [label="*(Affects all pages)", style="filled", color="blue", fontcolor="white"]
+  language_tags -> choose_language
+
+  estimations_definition -> equations
+
+  translate_function [label="Translate function", style="filled", color="yellow"]
+  language_tags -> translate_function -> all_pages
+}
