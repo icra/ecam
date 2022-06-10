@@ -334,7 +334,7 @@ let References={
 
     conv_kwh_co2:[{
       ref:`EIB Methodologies for the Assessment of Project GHG Emissions and Emission Variations, 2020`,
-      link:`https://www.eib.org/attachments/strategies/eib_project_carbon_footprint_methodologies_en.pdf#page=36`,
+      link:`frontend/docs/eib_project_carbon_footprint_methodologies_en_v11.1.pdf#page=34`,
     }],
     prot_con:[
       {
