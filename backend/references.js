@@ -332,10 +332,16 @@ let References={
       link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=21`,
     }],
 
-    conv_kwh_co2:[{
-      ref:`EIB Methodologies for the Assessment of Project GHG Emissions and Emission Variations, 2020`,
-      link:`frontend/docs/eib_project_carbon_footprint_methodologies_en_v11.1.pdf#page=34`,
-    }],
+    conv_kwh_co2:[
+      {
+        ref:`EIB Methodologies for the Assessment of Project GHG Emissions and Emission Variations, 2020`,
+        link:`frontend/docs/eib_project_carbon_footprint_methodologies_en_v11.1.pdf#page=34`,
+      },
+      {
+        ref:`UNFCCC IFI TWG - List of harmonized GHG accounting standards/approaches and guidelines developed`,
+        link:`https://unfccc.int/climate-action/sectoral-engagement/ifis-harmonization-of-standards-for-ghg-accounting/ifi-twg-list-of-methodologies`,
+      },
+    ],
     prot_con:[
       {
         ref:`Equation 6.10, Total Nitrogen in domestic wastewater by treatment pathway`,
