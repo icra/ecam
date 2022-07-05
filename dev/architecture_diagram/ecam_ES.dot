@@ -39,7 +39,7 @@ digraph ECAM {
   about -> faqs -> new_in_this_version [color="blue"]
 
   countries [label="Tabla de países", style="filled", color="blue", fontcolor="white"]
-  gwp_table [label="Seleccionst reporte IPCC", style="filled", color="blue", fontcolor="white"]
+  gwp_table [label="Seleccionar reporte IPCC", style="filled", color="blue", fontcolor="white"]
   configuration -> inventory [color="blue"]
   configuration -> {countries gwp_table} [color="blue"]
 
@@ -61,7 +61,7 @@ digraph ECAM {
   compare_scenarios_charts -> {total_ghg emissions_by_gas emissions_by_stage total_energy_consumption}
 
   flow_diagram      [label="Diagrama de flujos", style="filled", color="blue", fontcolor="white"]
-  non_revenue_water [label="Agua no contabilizada", style="filled", color="blue", fontcolor="white"]
+  non_revenue_water [label="Agua no facturada", style="filled", color="blue", fontcolor="white"]
   equations         [label="Ecuaciones", style="filled", color="blue", fontcolor="white"]
   constants         [label="Constantes", style="filled", color="blue", fontcolor="white"]
   tables            [label="Tablas de datos\ncompilación", style="filled", color="blue", fontcolor="white"]
@@ -83,8 +83,8 @@ digraph ECAM {
 
   summary -> {summary_table summary_charts}
 
-  summary_charts_GHG                 [label="GEI\n(por etapa, por sub-etapa, por gas)"]
-  summary_charts_Energy              [label="Consumo de energía\n(por etapa, por sub-etapa)"]
+  summary_charts_GHG                 [label="GEI\n(por etapa, por gas)"]
+  summary_charts_Energy              [label="Consumo de energía\n(por sistema, por etapa )"]
   summary_charts_Serviced_population [label="Población servida"]
   summary_charts -> {summary_charts_GHG summary_charts_Energy summary_charts_Serviced_population}
 
@@ -116,7 +116,7 @@ digraph ECAM {
   //classes
   inventory -> {water waste} [color="blue"]
   subgraph cluster_substages{
-    label="Etapas y sub-etapas"
+    label="Sistemas, etapas y sub-etapas"
     labeljust="c"
     color="purple"
 
