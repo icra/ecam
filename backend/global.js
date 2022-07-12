@@ -30,7 +30,7 @@ let Scenarios=[];
 class Ecam{
   constructor(){
     this.General={
-      version              : "3.0.0",
+      version              : "3.0.1",
       Name                 : "Untitled assessment",
       AssessmentPeriodStart: generate_default_datestrings().start, //"2021-01-01",
       AssessmentPeriodEnd  : generate_default_datestrings().end,   //"2022-01-01",
@@ -1141,8 +1141,8 @@ class Waste_Treatment extends Substage{
     //biogas emissions
     wwt_KPI_GHG_biog(){
       let sources=[
-        this.wwt_KPI_GHG_biog_flared(),
-        this.wwt_KPI_GHG_biog_valorized(),
+        //this.wwt_KPI_GHG_biog_flared(),    //removed in v3.0.1
+        //this.wwt_KPI_GHG_biog_valorized(), //removed in v3.0.1
         this.wwt_KPI_GHG_biog_leaked(),
       ];
 
@@ -1815,8 +1815,8 @@ class Waste_Onsite extends Substage{
     //biogas
     wwo_KPI_GHG_biog(){
       let sources=[
-        this.wwo_KPI_GHG_biog_flared(),
-        this.wwo_KPI_GHG_biog_valorized(),
+        //this.wwo_KPI_GHG_biog_flared(),    //removed in v3.0.1
+        //this.wwo_KPI_GHG_biog_valorized(), //removed in v3.0.1
         this.wwo_KPI_GHG_biog_leaked(),
       ];
 

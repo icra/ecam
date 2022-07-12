@@ -37,7 +37,7 @@ let new_in_this_version = new Vue({
               <b>Inventory</b>,
               <b>Results</b>,
               <b>Compare assessments</b>
-              and 
+              and
               <b>More</b>.
             <img src="frontend/img/new_in_this_version/122024708-f7d4be00-cdc8-11eb-9ffd-c1d638bdc397.png">
           </li>

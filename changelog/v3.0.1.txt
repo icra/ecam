@@ -1,0 +1,18 @@
+CHANGES FROM v3.0.0 TO v3.0.1
+-----------------------------
+
+The following emissions are calculated but not accounted in the total GHG
+emissions.
+
+CO2 emissions generated during flaring or combustion (CH4 to CO2) are of
+biogenic origin and hence are not accounted in the total GHG emissions.
+
+1. biogas flared emissions
+
+wwt_KPI_GHG_biog_flared (Sanitation Treatment)
+wwo_KPI_GHG_biog_flared (Onsite Treatment)
+
+2. biogas valorized emissions
+
+wwt_KPI_GHG_biog_valorized (Sanitation Treatment)
+wwo_KPI_GHG_biog_valorized (Onsite Treatment)
