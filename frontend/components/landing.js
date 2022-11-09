@@ -101,7 +101,7 @@ let landing = new Vue({
             <a>{{translate("Click_here_to_learn_more")}}</a>
           </div>
 
-          <div class=learn_more_item onclick="window.open('https://wacclim.org')">
+          <div class=learn_more_item onclick="window.open('https://climatesmartwater.org')">
             <div style="display:flex;justify-content:space-between;align-items:flex-end">
               <b>WaCCliM</b>
               <img class=icon src="frontend/img/landing/wacclim.png">
@@ -127,9 +127,8 @@ let landing = new Vue({
             border-color:white;
             margin-top:10px;
           "
-          onclick="window.open('mailto:wacclim@giz.de')"
-          v-html="translate('Contact_us')"
-        ></button>
+          onclick="window.open('https://github.com/icra/ecam/issues')"
+        >ECAM's GitHub page</button>
       </div>
 
       <!--logos-->

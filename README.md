@@ -1,4 +1,4 @@
-# [ECAM](https://wacclim.org/ecam)
+# [ECAM](https://climatesmartwater.org/ecam)
 Current version: v3.
 
 ECAM is a free and open source web application. Water and wastewater utility
@@ -12,7 +12,7 @@ ECAM is developed by
 [ICRA](https://icra.cat),
 [IWA](https://www.iwa-network.org) and
 [GIZ](https://www.giz.de/) under the
-[WaCCliM project](https://wacclim.org/), and Cobalt Water.
+[WaCCliM project](https://climatesmartwater.org/), and Cobalt Water.
 
 ## License
 ECAM is licensed under a Creative Commons Attribution-ShareAlike 4.0
@@ -33,7 +33,7 @@ browser:
 - FileSaver v1.2.2 (https://github.com/eligrey/FileSaver.js)
 
 ## Using ecam online
-To use ecam, just go to [wacclim.org/ecam](https://wacclim.org/ecam)
+To use ecam, just go to [climatesmartwater.org/ecam](https://climatesmartwater.org/ecam)
 
 ## Using ecam offline
 Ecam can be also used offline. You need download this package and place it

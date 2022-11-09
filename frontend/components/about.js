@@ -58,7 +58,7 @@ let about=new Vue({
               <a target=_blank href='http://www.icra.cat/'>ICRA</a> |
               <a target=_blank href='http://www.iwa-network.org'>IWA</a> |
               <a target=_blank href='https://www.giz.de/en/html/index.html'>GIZ</a> |
-              <a target=_blank href='https://wacclim.org'>WaCCliM project</a> |
+              <a target=_blank href='https://climatesmartwater.org'>Climate smart water website</a> |
               <a target=_blank href='http://www.lnec.pt/pt/'>LNEC</a> |
               <a target=_blank href='http://www.ita.upv.es/index-es.php'>ITA, Universitat Politècnica de València</a> |
               <a target=_blank href='http://www.cobaltwater-global.com/'>Cobalt Water Global</a> |
@@ -140,8 +140,7 @@ let about=new Vue({
           <div style="margin-left:20px">
             ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under
             a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work
-            at <a target="_blank" href="https://www.wacclim.org/">www.wacclim.org</a>. Permissions beyond the scope of this license may be available
-            at <a target="_blank" href="mailto:wacclim@giz.de">wacclim@giz.de</a>.
+            at WaCCliM project.
           </div>
         </div>
       </div>
