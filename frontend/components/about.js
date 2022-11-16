@@ -12,7 +12,10 @@ let about=new Vue({
     <div id=about v-if="visible && Languages.ready">
       <div style="background:#eff5fb;">
         <!--title-->
-        <h1>{{translate("About_ECAM")}}</h1>
+        <h1 style="padding-left:0;font-weight:bold">
+          {{translate("About_ECAM")}}
+        </h1>
+
         <!--image with text-->
         <div style="
           background-image:url('frontend/img/about/laptop.png');
@@ -152,10 +155,6 @@ let about=new Vue({
         padding:2em 6em;
         text-align:justify;
         line-height:2em;
-      }
-      #about > div > h1 {
-        padding-left:0;
-        font-weight:bold;
       }
       #about img.icon {
         display:block;

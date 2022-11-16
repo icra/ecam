@@ -51,8 +51,9 @@ if(debug){
     landing.include_tutorial_tips=false;
 
   /*default page*/
-    go_to('Water','Abstraction'); //"inventory"
+    //go_to('Water','Abstraction'); //"inventory"
     //variable.view('wwt_slu_sto_EF'); //variable detailed info
-    //ecam.show('select_scenario'); //view
+    //ecam.show('select_scenario');
+    ecam.show("more");
   /**/
 }

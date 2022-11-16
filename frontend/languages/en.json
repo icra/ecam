@@ -1,4 +1,7 @@
 {"#below":"below",
+
+"#Methodology Guide and User manual":"Methodology Guide and User manual",
+
 "#&bull; <b>Issues</b>: Create and use issues to track ideas, enhancements, tasks, or bugs. Issues are a way to collect user feedback or to start discussion on certain subjects":"&bull; <b>Issues</b>: Create and use issues to track ideas, enhancements, tasks, or bugs. Issues are a way to collect user feedback or to start discussion on certain subjects",
 "#&bull; <b>Pull requests</b>: Pull requests let you tell others about changes you have pushed to a branch in a repository on GitHub. Once a pull request is opened, you can discuss and review the potential changes with collaborators and add follow-up commits before your changes are merged into the base branch.":"&bull; <b>Pull requests</b>: Pull requests let you tell others about changes you have pushed to a branch in a repository on GitHub. Once a pull request is opened, you can discuss and review the potential changes with collaborators and add follow-up commits before your changes are merged into the base branch.",
 "#15.7 - 38 kW": "15.7 - 38 kW",

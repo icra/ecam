@@ -19,6 +19,7 @@ let more=new Vue({
 
       <div id=buttons>
         <div class=button onclick="ecam.show('about')"            >{{translate('about ecam')           }}</div>
+        <div class=button onclick="ecam.show('help')"             >{{translate('Methodology Guide and User manual')}}</div>
         <div class=button onclick="ecam.show('faqs')"             >{{translate('FAQs')                 }}</div>
         <div class=button onclick="ecam.show('diagram')"          >{{translate('Flow diagram')         }}</div>
         <div class=button onclick="ecam.show('non_revenue_water')">{{translate('non_revenue_water')    }}</div>
@@ -39,20 +40,21 @@ let more=new Vue({
       #more{
       }
       #more #buttons{
-        width:50%;
+        max-width:66%;
         margin:auto;
         display:grid;
         grid-template-columns:repeat(2,1fr);
-        grid-gap:1% 2%;
+        align-items:center;
       }
       #more #buttons div.button {
         color:white;
         background-image:url("frontend/img/more/btn-bg.png");
         background-size:cover;
         text-align:center;
-        padding:2em;
+        padding:2em 0;
         border:none;
         border:3px solid white;
+        white-space:break-spaces;
       }
       #more #buttons div.button:hover {
         border:3px solid var(--color-level-generic-secondary);

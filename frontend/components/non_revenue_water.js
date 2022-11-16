@@ -16,7 +16,7 @@ let non_revenue_water = new Vue({
       <h3 style="text-align:center;margin-top:0">{{translate('Water injected to distribution') }}</h3>
 
       <!--table-->
-      <table border=1 style="margin:auto">
+      <table border=1 style="margin:auto;max-width:75%">
         <tr class=nrw><td rowspan=17>{{translate("System input volume")}}</td></tr>
           <tr><td rowspan=8>{{translate("Authorised consumption")}}</td></tr>
             <tr class=nrw><td rowspan=4>{{translate("Billed authorised consumption")}}</td></tr>

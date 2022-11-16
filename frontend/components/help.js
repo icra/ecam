@@ -1,51 +1,72 @@
-let help = new Vue({
+let help=new Vue({
   el:"#help",
-
   data:{
-    visible:false,
+    visible:true,
   },
-
   methods:{
     translate,
   },
 
   template:`
-    <div id=help v-if="visible">
-      <h1 style=text-align:center>
-        {{translate('help')}}
-      </h1>
+    <div id=help v-if="visible && Languages.ready">
+      <h2 style=text-align:center>
+        {{translate('Methodology Guide and User manual')}}
+      </h2>
 
-      <p>
-        (in development)
-      </p>
-
-      <div>
-        <table style="margin:auto;text-align:left">
-          <tr>
-            <td><a target=_blank href="frontend/docs/help_pdf/ECAM V2 FAQ_Aug2017.pdf">Frequently Asked Questions (pdf)</a></td>
-          </tr>
-          <tr>
-            <td><a target=_blank href="frontend/docs/help_pdf/ECAM-Methodology-Guide-Jan-2019.pdf">Methodology (pdf)</a></td>
-          </tr>
-          <tr>
-            <td><a target=_blank href="frontend/docs/help_pdf/ECAM_2.0_Manual_170822.pdf">Manual (pdf)</a></td>
-          </tr>
-          <tr>
-            <td><a target=_blank href="frontend/docs/help_pdf/ECAMV2 Example.json" download>Example json file (json)</a></td>
-          </tr>
-        </table>
-
-        <h4><b>Screencasts (v2)</b></h4>
-        <a href="https://vimeopro.com/iwahq/tutorials-ecam-tool" target=_blank>https://vimeopro.com/iwahq/tutorials-ecam-tool</a>
+      <div
+        style="
+          width:66%;
+          margin:auto;
+          text-align:left;
+          display:grid;
+          grid-template-columns:50% 50%;
+          grid-gap:20px;
+        "
+      >
+        <div>
+          The
+          <a target=_blank href="frontend/docs/giz/MethodologyGuide_FinalVersion.pdf">
+            Methodology Guide [PDF]
+          </a> was developed as an additional instrument to the ECAM tool.
+          The guide presents the tool's methodological background which
+          includes the principles, equations, sources, and assumptions. It
+          can serve as a reference source and allow comparisons with other
+          methodologies, making it suitable for users with all levels of
+          experience.
+        </div>
+        <div>
+          The
+          <a target=_blank href="frontend/docs/giz/UserManual_FinalVersion.pdf">
+            User manual [PDF]
+          </a> was developed as an instrument to support the use of the ECAM
+          tool (Energy Performance and Carbon Emissions Assessment and
+          Monitoring). It can help users to estimate greenhouse gases (GHG)
+          emissions from the Urban Water Sector activities. This document is
+          intended to be practical, accessible and "straight to the point".
+          To understand the conceptual framework of the ECAM tool, the user
+          can consult the additional document "Methodology Guide".
+        </div>
+        <img src="frontend/img/help/ECAM_Methodology_Guide.PNG"
+          onclick="window.open('frontend/docs/giz/MethodologyGuide_FinalVersion.pdf')"
+        >
+        <img src="frontend/img/help/ECAM_User_Manual.PNG"
+          onclick="window.open('frontend/docs/giz/UserManual_FinalVersion.pdf')"
+        >
       </div>
-
     </div>
   `,
 
   style:`
     <style>
-      #help {
-        text-align:center;
+      #help img {
+        display:block;
+        width:200px;
+        margin:auto;
+        border:3px solid transparent;
+        cursor:pointer;
+      }
+      #help img:hover {
+        border:3px solid var(--color-level-generic-secondary);
       }
     </style>
   `,
