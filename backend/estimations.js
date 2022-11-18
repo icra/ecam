@@ -96,6 +96,17 @@ let Estimations={
       return P * Protein * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM;
     },
 
+    wwo_tn_infl(substage){
+      let P          = substage.wwo_onsi_pop; //population served
+      let Protein    = Global.General.prot_con; //kg protein/person/year
+      let Years      = Global.Years(); //years
+      let F_NPR      = Cts.ct_F_NPR.value;
+      let N_HH       = Global.General.N_HH;
+      let F_NON_CON  = Global.General.F_NON_CON;
+      let F_IND_COM  = Global.General.F_IND_COM;
+      return P * Protein * Years * F_NPR * N_HH * F_NON_CON * F_IND_COM;
+    },
+
     //estimation for biogas produced
     wwt_biog_pro(substage){
       let wwt_mass_slu    = substage.wwt_mass_slu;  //kg  | mass of combined sludge to digestion

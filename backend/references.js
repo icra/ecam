@@ -314,6 +314,10 @@ let References={
       ref:`Equation 6.10, Total Nitrogen in domestic wastewater by treatment pathway`,
       link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=40`,
     }],
+    wwo_tn_infl:[{
+      ref:`Equation 6.10, Total Nitrogen in domestic wastewater by treatment pathway`,
+      link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=40`,
+    }],
     wwo_opd_tn:[{
       ref:`Equation 6.10, Total Nitrogen in domestic wastewater by treatment pathway`,
       link:`frontend/docs/2019-ipcc/5_Volume5/19R_V5_6_Ch06_Wastewater.pdf#page=40`,
