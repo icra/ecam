@@ -1269,7 +1269,7 @@
 "#wwt_bod_slud_descr":"BOD5 removed as sludge",
 "#wwt_bod_slud_expla":"BOD5 (organic component) removed from wastewater (in the form of sludge) (Sj in eq.6.1 IPCC 2019)",
 "#wwt_ch4_biog_descr":"Percentage of methane in the biogas (% volume)",
-"#wwt_ch4_biog_expla":"Percent of the methane content in the produced biogas",
+"#wwt_ch4_biog_expla":"Percent of the methane content in the produced biogas. Default: 59%",
 "#wwt_ch4_efac_dis_descr":"CH4 emission factor (discharge)",
 "#wwt_ch4_efac_dis_expla":"Methane emission factor for discharged water",
 "#wwt_ch4_efac_tre_descr":"CH4 emission factor (treatment)",

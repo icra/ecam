@@ -80,7 +80,7 @@ let landing = new Vue({
           <div class=learn_more_item onclick="window.open('https://github.com/icra/ecam')">
             <div style="display:flex;justify-content:space-between;align-items:flex-end">
               <b>{{translate("Open_source")}}</b>
-              <img class=icon src="frontend/img/landing/open-source.png">
+              <img class=icon src="frontend/img/landing/open-source.webp">
             </div>
             <p>
               {{
@@ -104,7 +104,7 @@ let landing = new Vue({
           <div class=learn_more_item onclick="window.open('https://climatesmartwater.org')">
             <div style="display:flex;justify-content:space-between;align-items:flex-end">
               <b>WaCCliM</b>
-              <img class=icon src="frontend/img/landing/wacclim.png">
+              <img class=icon src="frontend/img/landing/wacclim.webp">
             </div>
             <p>
             {{

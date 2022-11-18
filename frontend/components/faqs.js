@@ -119,7 +119,7 @@ let faqs=new Vue({
           "Users who worked with the faecal sludge management (FSM) component in ECAM 2.2 might have realized that we have applied major changes here. Now, FSM falls under 'Onsite sanitation'. The inputs almost completely remained the same.",
         ],
         category:"ecam",
-        img:"frontend/img/faqs/fsm.png",
+        img:"frontend/img/faqs/fsm.webp",
       },
       {
         q:"Are the JSON files of former ECAM versions compatible with ECAM 3.0?",

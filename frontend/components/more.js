@@ -48,7 +48,7 @@ let more=new Vue({
       }
       #more #buttons div.button {
         color:white;
-        background-image:url("frontend/img/more/btn-bg.png");
+        background-image:url("frontend/img/more/btn-bg.webp");
         background-size:cover;
         text-align:center;
         padding:2em 0;

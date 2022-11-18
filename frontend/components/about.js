@@ -18,7 +18,7 @@ let about=new Vue({
 
         <!--image with text-->
         <div style="
-          background-image:url('frontend/img/about/laptop.png');
+          background-image:url('frontend/img/about/laptop.webp');
           background-size:contain;
           background-repeat:no-repeat;
           color:white;
@@ -107,7 +107,7 @@ let about=new Vue({
           style="
             width:400px;
             color: white;
-            background-image: url(frontend/img/more/btn-bg.png);
+            background-image: url(frontend/img/more/btn-bg.webp);
             background-size: cover;
             text-align: center;
             padding: 2em;
@@ -139,7 +139,7 @@ let about=new Vue({
           </ul>
         </p>
         <div style="display:flex;align-items:center;">
-          <div><img src="frontend/img/CC_license_big.png" alt=""></div>
+          <div><img src="frontend/img/CC_license_big.webp" alt=""></div>
           <div style="margin-left:20px">
             ECAM by IWA and GIZ, implemented by ICRA for WaCCliM Project* is licensed under
             a <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Based on a work

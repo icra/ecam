@@ -39,7 +39,7 @@ let new_in_this_version = new Vue({
               <b>Compare assessments</b>
               and
               <b>More</b>.
-            <img src="frontend/img/new_in_this_version/122024708-f7d4be00-cdc8-11eb-9ffd-c1d638bdc397.png">
+            <img src="frontend/img/new_in_this_version/122024708-f7d4be00-cdc8-11eb-9ffd-c1d638bdc397.webp">
           </li>
           <li>
             <b>Configuration</b>: One of the biggest changes that we applied to
@@ -53,14 +53,14 @@ let new_in_this_version = new Vue({
               Now, to make things easier and more compact, the updated ECAM
               version allows the users to edit and save more than one
               assessment in a single JSON file.
-              <img src="frontend/img/new_in_this_version/122030818-623c2d00-cdce-11eb-9150-ffc206e3ae92.png">
+              <img src="frontend/img/new_in_this_version/122030818-623c2d00-cdce-11eb-9150-ffc206e3ae92.webp">
             </p>
 
             <p>
               In addition, you can load a saved JSON file to continue your assessment
               or you can merge different JSON files into one file by using the button
               "Append to current list".
-              <img src="frontend/img/new_in_this_version/122031047-9b749d00-cdce-11eb-9295-e74945ae6cfa.png">
+              <img src="frontend/img/new_in_this_version/122031047-9b749d00-cdce-11eb-9295-e74945ae6cfa.webp">
             </p>
 
             <p>
@@ -93,7 +93,7 @@ let new_in_this_version = new Vue({
             <b>Treatment</b> and
             <b>Onsite sanitation</b>)
             that you would like to assess.
-            <img src="frontend/img/new_in_this_version/122032443-eba02f00-cdcf-11eb-82ff-29566dee84cf.png">
+            <img src="frontend/img/new_in_this_version/122032443-eba02f00-cdcf-11eb-82ff-29566dee84cf.webp">
           </li>
           <li>
             <b>Faecal sludge management</b>: Users who worked with the feacal
@@ -117,23 +117,23 @@ let new_in_this_version = new Vue({
         <ul>
           <li>
             Total GHG emissions
-            <img src="frontend/img/new_in_this_version/122194162-79921d80-ce95-11eb-82ac-0c06f8428784.png">
+            <img src="frontend/img/new_in_this_version/122194162-79921d80-ce95-11eb-82ac-0c06f8428784.webp">
           </li>
           <li>
             Emissions by gas (CO<sub>2</sub>, N<sub>2</sub>O, CH<sub>4</sub>)
-            <img src="frontend/img/new_in_this_version/122194970-397f6a80-ce96-11eb-8562-a1572e40efcb.png">
+            <img src="frontend/img/new_in_this_version/122194970-397f6a80-ce96-11eb-8562-a1572e40efcb.webp">
           </li>
           <li>
             Emissions by stage in bar charts
-            <img src="frontend/img/new_in_this_version/122195201-6e8bbd00-ce96-11eb-94ca-29412b11f8b3.png">
+            <img src="frontend/img/new_in_this_version/122195201-6e8bbd00-ce96-11eb-94ca-29412b11f8b3.webp">
           </li>
           <li>
             Emissions by IPCC category
-            <img src="frontend/img/new_in_this_version/122194768-05a44500-ce96-11eb-8472-83a8445327c7.png">
+            <img src="frontend/img/new_in_this_version/122194768-05a44500-ce96-11eb-8472-83a8445327c7.webp">
           </li>
           <li>
             Total energy consumption
-            <img src="frontend/img/new_in_this_version/122194825-15238e00-ce96-11eb-9a2e-c2839ab6f8ad.png">
+            <img src="frontend/img/new_in_this_version/122194825-15238e00-ce96-11eb-9a2e-c2839ab6f8ad.webp">
           </li>
         </ul>
       </div><hr>
@@ -148,12 +148,12 @@ let new_in_this_version = new Vue({
           as a PDF file.  You just have to click on "<b>Results</b>" in the
           navigation bar and select "<b>Report</b>". This report includes all
           the inputs and outputs as well as diagrams of your assessment.
-          <img src="frontend/img/new_in_this_version/122065358-2adf7780-cdf2-11eb-9e1c-1a350e579e2b.png">
+          <img src="frontend/img/new_in_this_version/122065358-2adf7780-cdf2-11eb-9e1c-1a350e579e2b.webp">
         </p>
 
         <p>
           Use the <b>sankey diagram</b> to visualize the emission flow path:
-          <img src="frontend/img/new_in_this_version/122197667-b7447580-ce98-11eb-85b3-d45c6448232a.png">
+          <img src="frontend/img/new_in_this_version/122197667-b7447580-ce98-11eb-85b3-d45c6448232a.webp">
         </p>
       </div><hr>
 
