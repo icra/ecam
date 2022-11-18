@@ -93,7 +93,7 @@ let landing = new Vue({
           <div class=learn_more_item onclick="ecam.show('about')">
             <div style="display:flex;justify-content:space-between;align-items:flex-end">
               <b>{{translate("About_ECAM")}}</b>
-              <img class=icon src="frontend/img/landing/about.png">
+              <img class=icon src="frontend/img/landing/about.webp">
             </div>
             <p>
               {{translate("ECAM's_web_interface_and_content_were_developed_jointly_by_ICRA,_GIZ_and_IWA.")}}

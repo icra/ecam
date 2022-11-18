@@ -1,7 +1,7 @@
 let help=new Vue({
   el:"#help",
   data:{
-    visible:true,
+    visible:false,
   },
   methods:{
     translate,
@@ -46,10 +46,10 @@ let help=new Vue({
           To understand the conceptual framework of the ECAM tool, the user
           can consult the additional document "Methodology Guide".
         </div>
-        <img src="frontend/img/help/ECAM_Methodology_Guide.PNG"
+        <img src="frontend/img/help/ECAM_Methodology_Guide.webp"
           onclick="window.open('frontend/docs/giz/MethodologyGuide_FinalVersion.pdf')"
         >
-        <img src="frontend/img/help/ECAM_User_Manual.PNG"
+        <img src="frontend/img/help/ECAM_User_Manual.webp"
           onclick="window.open('frontend/docs/giz/UserManual_FinalVersion.pdf')"
         >
       </div>
