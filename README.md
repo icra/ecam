@@ -22,6 +22,9 @@ International License. [LICENSE](LICENSE)
 ECAM is a serverless single-page-application (SPA) written in entirely in Javascript, HTML
 and CSS. It uses VueJS to render the user interface.
 
+## Tutorial videos
+https://www.youtube.com/playlist?list=PL6u1Pjpf8O0Ymz7bLlOCkLTJWHyPReOxP
+
 ## Dependencies
 All these libraries are automatically loaded when the tool is opened in the
 browser:
